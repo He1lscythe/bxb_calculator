@@ -13,12 +13,12 @@
   --light: #ffcc00; --dark: #aa55ff; --none: #888899;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Gothic',sans-serif; font-size: 14px; display: flex; justify-content: center; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Gothic',sans-serif; font-size: 14px; height: 100vh; display: flex; justify-content: center; overflow: hidden; }
 
-#page-wrap { max-width: 72rem; width: 100%; display: flex; flex-direction: column; }
-#content { max-width: 56rem; width: 100%; margin: 0 auto; padding: 0 16px 16px; }
+#page-wrap { max-width: 72rem; width: 100%; display: flex; flex-direction: column; overflow: hidden; }
+#content { max-width: 56rem; width: 100%; margin: 0 auto; padding: 0 16px; display: flex; flex-direction: column; flex: 1; min-height: 0; }
 
-#filters { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
+#filters { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 10px 0 8px; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; }
 #filters input[type=text] { width: 100%; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; outline: none; }
 #filters input[type=text]:focus { border-color: var(--accent); }
 .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -34,10 +34,12 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
 .ms-option input[type=checkbox] { cursor: pointer; accent-color: var(--accent); flex-shrink: 0; }
 #crystal-count { font-size: 12px; color: var(--text2); text-align: right; }
 
-#crystal-list { display: flex; flex-direction: column; gap: 5px; }
+#crystal-list { display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto; min-height: 0; padding-bottom: 16px; }
+#crystal-list::-webkit-scrollbar { width: 4px; }
+#crystal-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 .no-results { text-align: center; color: var(--text2); padding: 40px 20px; font-size: 13px; }
 
-.crystal-row { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color .15s; }
+.crystal-row { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color .15s; flex-shrink: 0; }
 .crystal-row.expanded { border-color: rgba(91,127,255,.5); }
 
 .crystal-row-hd { display: flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; user-select: none; transition: background .1s; }
@@ -100,8 +102,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
 .bunrui-check { display: flex; align-items: center; gap: 5px; font-size: 11px; cursor: pointer; padding: 2px 0; }
 .bunrui-check input { cursor: pointer; accent-color: var(--accent); }
 
-@media (max-width: 500px) {
-  #file-status { display: none; }
+@media (max-width: 600px) {
+  body { height: auto; overflow-y: auto; }
+  #content { flex: none; overflow: visible; }
+  #crystal-list { flex: none; overflow-y: visible; }
   .row-bunrui { display: none; }
 }
 </style>
