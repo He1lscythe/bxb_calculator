@@ -35,7 +35,7 @@
   // inject CSS into <head>
   var css =
     'html{scrollbar-gutter:stable;}' +
-    '#topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:100;}' +
+    '#topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:100;min-height:52px;}' +
     '#topbar h1{font-size:16px;font-weight:700;color:var(--accent);white-space:nowrap;margin:0;}' +
     '#page-nav{display:flex;gap:0;}' +
     '.nav-link{padding:5px 18px;font-size:13px;font-weight:600;color:var(--text2);text-decoration:none;border-bottom:2px solid transparent;transition:color .15s;white-space:nowrap;}' +
@@ -50,7 +50,8 @@
     '#revise-status{font-size:12px;color:#55bb55;}' +
     '.btn-revise-save{background:#1e5c1e;color:#aaffaa;border:1px solid #2d8c2d;border-radius:6px;padding:4px 12px;font-size:12px;cursor:pointer;font-weight:600;}' +
     '.btn-revise-save:hover{background:#266626;}' +
-    '.btn-revise-save:disabled{opacity:.5;cursor:default;}';
+    '.btn-revise-save:disabled{opacity:.5;cursor:default;}' +
+    '@media(max-width:600px){#file-label,#file-status{display:none;}#topbar{min-height:52px;}}';
 
   var style = document.createElement('style');
   style.textContent = css;

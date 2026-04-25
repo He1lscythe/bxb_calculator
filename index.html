@@ -144,7 +144,9 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .skill-name-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
 .skill-name { font-weight: 600; font-size: 13px; color: var(--accent); flex: 1; min-width: 0; }
 .skill-tags-right { display: flex; gap: 3px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
-.skill-effect { font-size: 13px; line-height: 1.6; color: var(--text); }
+.skill-effect-row { display: flex; align-items: flex-start; gap: 8px; }
+.skill-effect { font-size: 13px; line-height: 1.6; color: var(--text); flex: 1; }
+.skill-bairitu { flex-shrink: 0; font-size: 12px; color: var(--text2); white-space: nowrap; padding-top: 2px; }
 .bunrui-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; background: rgba(91,127,255,.18); color: #7b9fff; border: 1px solid rgba(91,127,255,.35); white-space: nowrap; }
 .scope-tag  { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; white-space: nowrap; }
 .scope-self { background: rgba(120,120,120,.18); color: #999; border: 1px solid rgba(120,120,120,.3); }
@@ -291,6 +293,14 @@ function renderRightTags(s) {
   else if (s.condition === 2) tags += '<span class="cond-tag cond-2">背水</span>';
   else if (s.condition === 3) tags += '<span class="cond-tag cond-3">破損</span>';
   return '<div class="skill-tags-right">' + tags + '</div>';
+}
+
+function fmtBairitu(s) {
+  if (s.bairitu == null) return '';
+  var b = s.bairitu;
+  var sc = s.bairitu_scaling || 0;
+  var bs = Number.isInteger(b) ? b.toLocaleString('en-US') : String(b);
+  return sc ? bs + ' + ' + sc + ' * 熟度' : bs;
 }
 
 // ===== STATE =====
@@ -612,7 +622,7 @@ function renderStateContent(state, stateLabel) {
   // --- Skills ---
   if (state.skills?.length) {
     const cards = state.skills.map(s =>
-      '<div class="skill-card"><div class="skill-name-row"><span class="skill-name">' + escHtml(s.name) + '</span>' + renderRightTags(s) + '</div><div class="skill-effect">' + escHtml(s.effect) + '</div></div>'
+      '<div class="skill-card"><div class="skill-name-row"><span class="skill-name">' + escHtml(s.name) + '</span>' + renderRightTags(s) + '</div><div class="skill-effect-row"><span class="skill-effect">' + escHtml(s.effect) + '</span><span class="skill-bairitu">' + fmtBairitu(s) + '</span></div></div>'
     ).join('');
     parts.push(`<div class="section"><div class="section-title">スキル構成 (${state.skills.length})</div><div class="skills-list">${cards}</div></div>`);
   }
