@@ -45,6 +45,17 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 #filters input[type=text]:focus { border-color: var(--accent); }
 .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
 .filter-row select { flex: 1; min-width: 0; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
+.ms-wrap { position: relative; flex: 1; min-width: 0; }
+.ms-btn { width: 100%; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 4px; }
+.ms-btn:hover { border-color: var(--accent); }
+.ms-btn.open { border-color: var(--accent); }
+.ms-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ms-arrow { flex-shrink: 0; font-size: 10px; color: var(--text2); }
+.ms-dropdown { display: none; position: absolute; top: calc(100% + 2px); left: 0; right: 0; min-width: 120px; background: var(--bg3); border: 1px solid var(--accent); border-radius: 6px; z-index: 200; max-height: 180px; overflow-y: auto; padding: 4px 0; box-shadow: 0 4px 12px rgba(0,0,0,.5); }
+.ms-dropdown.open { display: block; }
+.ms-option { display: flex; align-items: center; gap: 7px; padding: 5px 10px; cursor: pointer; font-size: 12px; white-space: nowrap; user-select: none; }
+.ms-option:hover { background: var(--bg2); }
+.ms-option input[type=checkbox] { cursor: pointer; accent-color: var(--accent); flex-shrink: 0; }
 #sort-dir { flex-shrink: 0; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; cursor: pointer; }
 #sort-dir:hover { border-color: var(--accent); color: var(--accent); }
 #char-count { font-size: 11px; color: var(--text2); text-align: right; padding: 2px 2px 0; }
@@ -205,16 +216,24 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
     <div id="filters">
       <input type="text" id="search" placeholder="🔍 魔剣名で検索...">
       <div class="filter-row">
-        <select id="f-rarity"><option value="">すべてのレアリティ</option></select>
-        <select id="f-element"><option value="">すべての属性</option></select>
+        <div class="ms-wrap" id="ms-wrap-rarity">
+          <button class="ms-btn" onclick="toggleMs('rarity')"><span class="ms-label">すべてのレアリティ</span><span class="ms-arrow">▾</span></button>
+          <div class="ms-dropdown" id="ms-dropdown-rarity"></div>
+        </div>
+        <div class="ms-wrap" id="ms-wrap-element">
+          <button class="ms-btn" onclick="toggleMs('element')"><span class="ms-label">すべての属性</span><span class="ms-arrow">▾</span></button>
+          <div class="ms-dropdown" id="ms-dropdown-element"></div>
+        </div>
       </div>
       <div class="filter-row">
-        <select id="f-type"><option value="">すべての武器種</option></select>
-        <select id="f-state"><option value="">すべての状態</option>
-          <option value="極弐">極弐あり</option>
-          <option value="改造">改造あり</option>
-          <option value="通常">通常あり</option>
-        </select>
+        <div class="ms-wrap" id="ms-wrap-type">
+          <button class="ms-btn" onclick="toggleMs('type')"><span class="ms-label">すべての武器種</span><span class="ms-arrow">▾</span></button>
+          <div class="ms-dropdown" id="ms-dropdown-type"></div>
+        </div>
+        <div class="ms-wrap" id="ms-wrap-state">
+          <button class="ms-btn" onclick="toggleMs('state')"><span class="ms-label">すべての状態</span><span class="ms-arrow">▾</span></button>
+          <div class="ms-dropdown" id="ms-dropdown-state"></div>
+        </div>
       </div>
       <div class="filter-row">
         <select id="f-sort">
@@ -311,30 +330,73 @@ document.getElementById('file-input').addEventListener('change', e => {
   reader.readAsText(file, 'utf-8');
 });
 
+// ===== MULTI-SELECT STATE =====
+const msSelected = { rarity: new Set(), element: new Set(), type: new Set(), state: new Set() };
+const MS_PLACEHOLDERS = {
+  rarity: 'すべてのレアリティ', element: 'すべての属性',
+  type:   'すべての武器種',     state:   'すべての状態',
+};
+const MS_LABEL_FNS = {
+  rarity:  v => RARITY[v]  ? `${RARITY[v]}ランク` : v,
+  element: v => ELEMENT[v] || v,
+  type:    v => WEAPON[v]  || v,
+  state:   v => v + 'あり',
+};
+
+function buildMs(key, vals) {
+  const dropdown = document.getElementById('ms-dropdown-' + key);
+  dropdown.innerHTML = vals.map(v => `
+    <label class="ms-option">
+      <input type="checkbox" value="${v}" onchange="msChange('${key}',this)">
+      ${MS_LABEL_FNS[key](v)}
+    </label>`).join('');
+}
+
+function msChange(key, el) {
+  if (el.checked) msSelected[key].add(el.value);
+  else            msSelected[key].delete(el.value);
+  updateMsLabel(key);
+  applyFilters();
+}
+
+function updateMsLabel(key) {
+  const sel = msSelected[key];
+  const label = document.querySelector(`#ms-wrap-${key} .ms-label`);
+  if (sel.size === 0)       label.textContent = MS_PLACEHOLDERS[key];
+  else if (sel.size <= 2)   label.textContent = [...sel].map(v => MS_LABEL_FNS[key](v)).join(', ');
+  else                      label.textContent = `${sel.size} 選択中`;
+}
+
+function toggleMs(key) {
+  const dropdown = document.getElementById('ms-dropdown-' + key);
+  const btn = document.querySelector(`#ms-wrap-${key} .ms-btn`);
+  const isOpen = dropdown.classList.contains('open');
+  document.querySelectorAll('.ms-dropdown').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.ms-btn').forEach(b => b.classList.remove('open'));
+  if (!isOpen) { dropdown.classList.add('open'); btn.classList.add('open'); }
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.ms-wrap')) {
+    document.querySelectorAll('.ms-dropdown').forEach(d => d.classList.remove('open'));
+    document.querySelectorAll('.ms-btn').forEach(b => b.classList.remove('open'));
+  }
+});
+
 // ===== FILTER OPTIONS =====
 function buildFilterOptions() {
   const rarities = [...new Set(allChars.map(c => c.rarity).filter(Boolean))].sort((a,b) => b-a);
   const elements = [...new Set(allChars.map(c => c.element).filter(Boolean))].sort((a,b) => a-b);
   const types    = [...new Set(allChars.map(c => c.type).filter(Boolean))].sort((a,b) => a-b);
 
-  populateSelect('f-rarity', rarities, v => RARITY[v] ? `${RARITY[v]}ランク` : v, 'すべてのレアリティ');
-  populateSelect('f-element', elements, v => ELEMENT[v] || v, 'すべての属性');
-  populateSelect('f-type',    types,    v => WEAPON[v] || v,  'すべての武器種');
-}
-
-function populateSelect(id, vals, labelFn, placeholder) {
-  const sel = document.getElementById(id);
-  sel.innerHTML = `<option value="">${placeholder}</option>`;
-  vals.forEach(v => {
-    const opt = document.createElement('option');
-    opt.value = v;
-    opt.textContent = labelFn(v);
-    sel.appendChild(opt);
-  });
+  buildMs('rarity', rarities);
+  buildMs('element', elements);
+  buildMs('type', types);
+  buildMs('state', ['極弐', '改造', '通常']);
 }
 
 // ===== FILTER LOGIC =====
-['search','f-rarity','f-element','f-type','f-state','f-sort'].forEach(id => {
+['search', 'f-sort'].forEach(id => {
   document.getElementById(id).addEventListener('input', applyFilters);
   document.getElementById(id).addEventListener('change', applyFilters);
 });
@@ -377,19 +439,15 @@ function getSortValue(c, key) {
 }
 
 function applyFilters() {
-  const q       = document.getElementById('search').value.trim().toLowerCase();
-  const rarity  = document.getElementById('f-rarity').value;
-  const element = document.getElementById('f-element').value;
-  const type    = document.getElementById('f-type').value;
-  const state   = document.getElementById('f-state').value;
-  sortKey       = document.getElementById('f-sort').value;
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  sortKey = document.getElementById('f-sort').value;
 
   filteredChars = allChars.filter(c => {
     if (q && !c.name.toLowerCase().includes(q)) return false;
-    if (rarity  && String(c.rarity)  !== rarity)  return false;
-    if (element && String(c.element) !== element)  return false;
-    if (type    && String(c.type)    !== type)     return false;
-    if (state   && !c.states?.[state])             return false;
+    if (msSelected.rarity.size  && !msSelected.rarity.has(String(c.rarity)))   return false;
+    if (msSelected.element.size && !msSelected.element.has(String(c.element))) return false;
+    if (msSelected.type.size    && !msSelected.type.has(String(c.type)))       return false;
+    if (msSelected.state.size   && ![...msSelected.state].some(s => c.states?.[s])) return false;
     return true;
   });
 
