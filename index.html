@@ -45,6 +45,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 #filters input[type=text]:focus { border-color: var(--accent); }
 .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
 .filter-row select { flex: 1; min-width: 0; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
+#sort-dir { flex-shrink: 0; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; cursor: pointer; }
+#sort-dir:hover { border-color: var(--accent); color: var(--accent); }
 #char-count { font-size: 11px; color: var(--text2); text-align: right; padding: 2px 2px 0; }
 #char-list { flex: 1; overflow-y: auto; }
 #char-list::-webkit-scrollbar { width: 4px; }
@@ -214,6 +216,23 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
           <option value="通常">通常あり</option>
         </select>
       </div>
+      <div class="filter-row">
+        <select id="f-sort">
+          <option value="">並び替えなし</option>
+          <option value="攻撃力">攻撃力</option>
+          <option value="防御力">防御力</option>
+          <option value="ブレイク力">ブレイク力</option>
+          <option value="HP">HP</option>
+          <option value="LP">LP</option>
+          <option value="保有魔力">保有魔力</option>
+          <option value="結晶スロット">結晶スロット</option>
+          <option value="B">B</option>
+          <option value="W">W</option>
+          <option value="H">H</option>
+          <option value="BDコスト">BDコスト</option>
+        </select>
+        <button id="sort-dir" onclick="toggleSortDir()">↓</button>
+      </div>
       <div id="char-count"></div>
     </div>
     <div id="char-list"></div>
@@ -243,6 +262,8 @@ let allChars = [];
 let filteredChars = [];
 let selectedId = null;
 let activeState = {};  // charId -> state label
+let sortKey = '';
+let sortDesc = true;
 
 // ===== DATA LOAD =====
 function loadFromArray(arr, label) {
@@ -313,10 +334,42 @@ function populateSelect(id, vals, labelFn, placeholder) {
 }
 
 // ===== FILTER LOGIC =====
-['search','f-rarity','f-element','f-type','f-state'].forEach(id => {
+['search','f-rarity','f-element','f-type','f-state','f-sort'].forEach(id => {
   document.getElementById(id).addEventListener('input', applyFilters);
   document.getElementById(id).addEventListener('change', applyFilters);
 });
+
+function toggleSortDir() {
+  sortDesc = !sortDesc;
+  document.getElementById('sort-dir').textContent = sortDesc ? '↓' : '↑';
+  applyFilters();
+}
+
+function getBestState(c) {
+  for (const s of ['極弐', '改造', '通常']) {
+    if (c.states?.[s]) return c.states[s];
+  }
+  return null;
+}
+
+function getSortValue(c, key) {
+  const state = getBestState(c);
+  if (!state) return null;
+  switch (key) {
+    case '攻撃力': case '防御力': case 'ブレイク力': case 'HP':
+      return state.stats?.max?.[key] ?? null;
+    case 'LP': case '保有魔力':
+      return state.basic_info?.[key] ?? null;
+    case '結晶スロット':
+      return Number(state.basic_info?.['結晶スロット']) || null;
+    case 'B': case 'W': case 'H':
+      return state.profile?.[key] ?? null;
+    case 'BDコスト':
+      return state.bd_skill?.cost ?? null;
+    default:
+      return null;
+  }
+}
 
 function applyFilters() {
   const q       = document.getElementById('search').value.trim().toLowerCase();
@@ -324,6 +377,7 @@ function applyFilters() {
   const element = document.getElementById('f-element').value;
   const type    = document.getElementById('f-type').value;
   const state   = document.getElementById('f-state').value;
+  sortKey       = document.getElementById('f-sort').value;
 
   filteredChars = allChars.filter(c => {
     if (q && !c.name.toLowerCase().includes(q)) return false;
@@ -333,6 +387,17 @@ function applyFilters() {
     if (state   && !c.states?.[state])             return false;
     return true;
   });
+
+  if (sortKey) {
+    filteredChars.sort((a, b) => {
+      const va = getSortValue(a, sortKey);
+      const vb = getSortValue(b, sortKey);
+      if (va === null && vb === null) return 0;
+      if (va === null) return 1;
+      if (vb === null) return -1;
+      return sortDesc ? vb - va : va - vb;
+    });
+  }
 
   document.getElementById('char-count').textContent = `${filteredChars.length} 件`;
   renderList();
