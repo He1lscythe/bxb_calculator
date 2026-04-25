@@ -1,4 +1,5 @@
 (function () {
+  if (document.getElementById('topbar')) return;
   var PAGES = [
     { id: 'index',    href: 'index.html',    label: '魔剣' },
     { id: 'crystals', href: 'crystals.html', label: '結晶' },
