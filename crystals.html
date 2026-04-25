@@ -453,12 +453,6 @@ function renderEditDetail(c) {
     return `<label class="bunrui-check"><input type="checkbox" value="${k}" ${checked} onchange="editBunrui(this)"> ${v}</label>`;
   }).join('');
 
-  const TEXT_FIELDS = ['効果','効果量','特殊条件','対象','上限値','入手方法'];
-  const textInputs = TEXT_FIELDS.map(k => `
-    <div class="field-label">${k}</div>
-    <${k==='効果'||k==='効果量'?'textarea class="edit-textarea"':'input class="edit-input"'} ${k==='効果'||k==='効果量'?'':'value="'+escHtml(c[k]||')+'"'} oninput="editData['${k}']=this.value">${k==='効果'||k==='効果量'?escHtml(c[k]||'')+'</textarea>':''}`
-  ).join('');
-
   return `
     <div class="chara-header edit-mode-active">
       <div class="chara-header-info" style="flex:1;min-width:0">
