@@ -170,7 +170,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
         <div class="ms-dropdown" id="ms-dropdown-jyoken"></div>
       </div>
     </div>
-    <div id="crystal-count"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <div id="crystal-count"></div>
+      <button onclick="resetFilters()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
+    </div>
   </div>
   <div id="crystal-list"></div>
 </div>
@@ -300,6 +303,18 @@ function buildFilterOptions() {
 
 // ===== FILTER =====
 document.getElementById('search').addEventListener('input', applyFilters);
+
+var MS_DEFAULT_LABEL = { rarity: 'すべてのレアリティ', bunrui: 'すべてのタイプ', element: 'すべての対象属性', buki_type: 'すべての対象武器種', jyoken: 'すべての条件' };
+function resetFilters() {
+  document.getElementById('search').value = '';
+  Object.keys(msSelected).forEach(function(k) {
+    msSelected[k].clear();
+    document.querySelectorAll('#ms-dropdown-' + k + ' input').forEach(function(cb) { cb.checked = false; });
+    var label = document.querySelector('#ms-wrap-' + k + ' .ms-label');
+    if (label) label.textContent = MS_DEFAULT_LABEL[k] || '';
+  });
+  applyFilters();
+}
 
 function applyFilters() {
   var q = document.getElementById('search').value.trim().toLowerCase();
