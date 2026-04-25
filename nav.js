@@ -1,8 +1,8 @@
 (function () {
   if (document.getElementById('topbar')) return;
   var PAGES = [
-    { id: 'character', href: 'character.html', label: '魔剣' },
-    { id: 'crystals',  href: 'crystals.html',  label: '結晶' },
+    { id: 'index',    href: 'index.html',    label: '魔剣' },
+    { id: 'crystals', href: 'crystals.html', label: '結晶' },
   ];
 
   // detect active page from filename
