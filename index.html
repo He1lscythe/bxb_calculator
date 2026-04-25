@@ -27,6 +27,12 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu Gothic', sans-serif; font-size: 14px; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
+/* ===== NAV ===== */
+#page-nav { display: flex; gap: 0; }
+.nav-link { padding: 5px 18px; font-size: 13px; font-weight: 600; color: var(--text2); text-decoration: none; border-bottom: 2px solid transparent; transition: color .15s; white-space: nowrap; }
+.nav-link:hover { color: var(--text); }
+.nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+
 /* ===== TOPBAR ===== */
 #topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 #topbar h1 { font-size: 16px; font-weight: 700; color: var(--accent); white-space: nowrap; }
@@ -202,7 +208,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 <body>
 
 <div id="topbar">
-  <h1>⚔ BxB 魔剣データベース</h1>
+  <h1>⚔ BxB</h1>
+  <nav id="page-nav">
+    <a href="index.html" class="nav-link active">魔剣</a>
+    <a href="crystals.html" class="nav-link">結晶</a>
+  </nav>
   <label id="file-label" for="file-input">JSON を読み込む</label>
   <input type="file" id="file-input" accept=".json,.js">
   <span id="file-status">ファイルを選択してください</span>
