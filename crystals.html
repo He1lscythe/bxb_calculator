@@ -13,47 +13,54 @@
   --light: #ffcc00; --dark: #aa55ff; --none: #888899;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Gothic',sans-serif; font-size: 14px; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Gothic',sans-serif; font-size: 14px; }
 
+#topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 100; }
+#topbar h1 { font-size: 16px; font-weight: 700; color: var(--accent); white-space: nowrap; }
 #page-nav { display: flex; gap: 0; }
 .nav-link { padding: 5px 18px; font-size: 13px; font-weight: 600; color: var(--text2); text-decoration: none; border-bottom: 2px solid transparent; transition: color .15s; white-space: nowrap; }
 .nav-link:hover { color: var(--text); }
 .nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-#topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-#topbar h1 { font-size: 16px; font-weight: 700; color: var(--accent); white-space: nowrap; }
-#file-label { cursor: pointer; background: var(--accent); color: #fff; border: none; border-radius: 6px; padding: 6px 14px; font-size: 13px; }
+#topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+#file-label { cursor: pointer; background: var(--accent); color: #fff; border: none; border-radius: 6px; padding: 5px 12px; font-size: 12px; white-space: nowrap; }
 #file-label:hover { opacity: .85; }
 #file-input { display: none; }
-#file-status { color: var(--text2); font-size: 13px; }
+#file-status { color: var(--text2); font-size: 12px; white-space: nowrap; }
+#revise-bar { display: none; align-items: center; gap: 8px; background: #142814; border: 1px solid #2d6b2d; border-radius: 8px; padding: 5px 12px; }
+#revise-status { font-size: 12px; color: #55bb55; }
+.btn-revise-save { background: #1e5c1e; color: #aaffaa; border: 1px solid #2d8c2d; border-radius: 6px; padding: 4px 12px; font-size: 12px; font-weight: 600; cursor: pointer; }
+.btn-revise-save:hover { background: #266626; }
+.btn-revise-save:disabled { opacity: .5; cursor: default; }
 
-#layout { display: flex; flex: 1; overflow: hidden; }
-#sidebar { width: 420px; min-width: 260px; background: var(--bg2); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
-#filters { padding: 10px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; flex-shrink: 0; }
-#filters input[type=text] { width: 100%; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; outline: none; }
+#page-wrap { max-width: 640px; margin: 0 auto; padding: 16px; }
+
+#filters { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px; }
+#filters input[type=text] { width: 100%; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; outline: none; }
 #filters input[type=text]:focus { border-color: var(--accent); }
 .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
-.filter-row select { flex: 1; min-width: 0; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
-.ms-wrap { position: relative; flex: 1; min-width: 0; }
+.ms-wrap { position: relative; flex: 1; min-width: 100px; }
 .ms-btn { width: 100%; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 4px; }
 .ms-btn:hover, .ms-btn.open { border-color: var(--accent); }
 .ms-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ms-arrow { flex-shrink: 0; font-size: 10px; color: var(--text2); }
-.ms-dropdown { display: none; position: absolute; top: calc(100% + 2px); left: 0; right: 0; min-width: 120px; background: var(--bg3); border: 1px solid var(--accent); border-radius: 6px; z-index: 200; max-height: 180px; overflow-y: auto; padding: 4px 0; box-shadow: 0 4px 12px rgba(0,0,0,.5); }
+.ms-dropdown { display: none; position: absolute; top: calc(100% + 2px); left: 0; right: 0; min-width: 120px; background: var(--bg3); border: 1px solid var(--accent); border-radius: 6px; z-index: 200; max-height: 200px; overflow-y: auto; padding: 4px 0; box-shadow: 0 4px 16px rgba(0,0,0,.6); }
 .ms-dropdown.open { display: block; }
 .ms-option { display: flex; align-items: center; gap: 7px; padding: 5px 10px; cursor: pointer; font-size: 12px; white-space: nowrap; user-select: none; }
 .ms-option:hover { background: var(--bg2); }
 .ms-option input[type=checkbox] { cursor: pointer; accent-color: var(--accent); flex-shrink: 0; }
-#crystal-count { font-size: 11px; color: var(--text2); text-align: right; padding: 2px 2px 0; }
-#crystal-list { flex: 1; overflow-y: auto; }
-#crystal-list::-webkit-scrollbar { width: 4px; }
-#crystal-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+#crystal-count { font-size: 12px; color: var(--text2); text-align: right; }
 
-.char-item { padding: 8px 12px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background .1s; user-select: none; }
-.char-item:hover { background: var(--bg3); }
-.char-item.active { background: #1e2d5a; border-left: 3px solid var(--accent); }
-.char-item .badges { display: flex; gap: 3px; flex-shrink: 0; flex-wrap: wrap; max-width: 110px; }
-.badge { font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; }
+#crystal-list { display: flex; flex-direction: column; gap: 5px; }
+.no-results { text-align: center; color: var(--text2); padding: 40px 20px; font-size: 13px; }
+
+.crystal-row { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color .15s; }
+.crystal-row.expanded { border-color: rgba(91,127,255,.5); }
+
+.crystal-row-hd { display: flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; user-select: none; transition: background .1s; }
+.crystal-row-hd:hover { background: var(--bg3); }
+
+.row-badges { display: flex; gap: 3px; align-items: center; flex-shrink: 0; }
+.badge { font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; white-space: nowrap; }
 .badge.r6 { background: var(--ss); color: #fff; }
 .badge.r5 { background: var(--s);  color: #fff; }
 .badge.r4 { background: var(--aa); color: #fff; }
@@ -64,68 +71,54 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
 .badge.elem-3 { background: var(--wind);  color: #fff; }
 .badge.elem-4 { background: var(--light); color: #000; }
 .badge.elem-5 { background: var(--dark);  color: #fff; }
-.badge.elem-6 { background: var(--none);  color: #fff; }
-.badge.bunrui { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); font-size: 9px; }
-.char-item .char-name { flex: 1; font-size: 12px; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-.no-results { text-align: center; color: var(--text2); padding: 40px 20px; font-size: 13px; }
+.badge.weapon { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+.badge.bunrui-sm { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); font-size: 9px; }
 
-#detail { flex: 1; overflow-y: auto; padding: 20px 24px; }
-#detail::-webkit-scrollbar { width: 5px; }
-#detail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-#placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text2); gap: 8px; }
-#placeholder svg { opacity: .3; }
-#crystal-detail { display: none; }
+.row-name { flex: 1; font-size: 13px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row-bunrui { display: flex; gap: 3px; flex-shrink: 0; }
+.expand-btn { background: none; border: none; color: var(--text2); font-size: 13px; cursor: pointer; padding: 2px 4px; flex-shrink: 0; line-height: 1; transition: transform .2s; }
+.crystal-row.expanded .expand-btn { transform: rotate(180deg); }
 
-.chara-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
-.chara-header-info { flex: 1; }
-.chara-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-.chara-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.meta-chip { display: flex; align-items: center; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 12px; }
+.crystal-body { border-top: 1px solid var(--border); padding: 12px 14px; display: none; gap: 14px; }
+.crystal-row.expanded .crystal-body { display: flex; }
 
-.section { margin-bottom: 18px; }
-.section-title { font-size: 12px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-.field-row { display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+.body-left { flex: 1; min-width: 0; }
+.body-right { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
+.crystal-icon { width: 84px; height: 84px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); background: var(--bg3); }
+.btn-edit { background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 4px 0; font-size: 11px; cursor: pointer; width: 84px; }
+.btn-edit:hover { background: rgba(91,127,255,.1); }
+
+.field-row { display: flex; gap: 10px; padding: 5px 0; border-bottom: 1px solid var(--border); }
 .field-row:last-child { border-bottom: none; }
-.field-key { color: var(--text2); font-size: 12px; min-width: 80px; flex-shrink: 0; }
-.field-val { font-size: 13px; flex: 1; line-height: 1.5; }
-.effect-range { display: flex; gap: 6px; align-items: baseline; font-size: 14px; font-weight: 700; }
+.field-key { color: var(--text2); font-size: 11px; min-width: 60px; flex-shrink: 0; padding-top: 2px; }
+.field-val { font-size: 13px; flex: 1; line-height: 1.5; word-break: break-all; }
+.effect-range { display: flex; gap: 5px; align-items: baseline; font-size: 14px; font-weight: 700; }
 .effect-range .sep { color: var(--text2); font-size: 12px; }
 .effect-range .unit { color: var(--text2); font-size: 11px; }
 
-.btn-edit { background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 5px 14px; font-size: 12px; cursor: pointer; flex-shrink: 0; }
-.btn-edit:hover { background: rgba(91,127,255,.1); }
-.edit-mode-active { background: rgba(91,127,255,.04); border: 1px solid rgba(91,127,255,.3); border-radius: 10px; padding: 14px; }
-.edit-actions { display: flex; gap: 8px; flex-shrink: 0; }
-.btn-save   { background: var(--accent); color: #fff; border: none; border-radius: 6px; padding: 7px 16px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.crystal-edit-body { border-top: 1px solid var(--accent); padding: 14px; background: rgba(91,127,255,.04); }
+.edit-actions { display: flex; gap: 8px; margin-bottom: 12px; }
+.btn-save   { background: var(--accent); color: #fff; border: none; border-radius: 6px; padding: 6px 16px; font-size: 13px; font-weight: 600; cursor: pointer; }
 .btn-save:hover { opacity: .85; }
-.btn-cancel { background: transparent; color: var(--text2); border: 1px solid var(--border); border-radius: 6px; padding: 7px 16px; font-size: 13px; cursor: pointer; }
+.btn-cancel { background: transparent; color: var(--text2); border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; font-size: 13px; cursor: pointer; }
 .btn-cancel:hover { color: var(--text); }
-.edit-input  { background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 4px 8px; font-size: 13px; width: 100%; font-family: inherit; }
+.edit-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.edit-input { background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 4px 8px; font-size: 13px; font-family: inherit; }
 .edit-input:focus { outline: none; border-color: #8aabff; }
-.edit-input.title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-.edit-textarea { background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 6px 8px; font-size: 13px; width: 100%; min-height: 52px; resize: vertical; font-family: inherit; line-height: 1.6; }
+.edit-input.stretch { flex: 1; min-width: 0; width: auto; }
+.edit-textarea { background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 6px 8px; font-size: 13px; width: 100%; min-height: 48px; resize: vertical; font-family: inherit; line-height: 1.5; }
 .edit-textarea:focus { outline: none; border-color: #8aabff; }
 .edit-select { background: var(--bg3); border: 1px solid var(--accent); border-radius: 6px; color: var(--text); padding: 4px 8px; font-size: 12px; cursor: pointer; }
-.field-label { font-size: 11px; color: var(--text2); margin: 6px 0 3px; }
+.field-label { font-size: 11px; color: var(--text2); margin: 8px 0 3px; }
 .field-label:first-child { margin-top: 0; }
-.bunrui-checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 4px; }
+.bunrui-checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 4px; margin-bottom: 12px; }
 .bunrui-check { display: flex; align-items: center; gap: 5px; font-size: 11px; cursor: pointer; padding: 2px 0; }
 .bunrui-check input { cursor: pointer; accent-color: var(--accent); }
 
-#revise-bar { display: none; align-items: center; gap: 10px; background: #142814; border: 1px solid #2d6b2d; border-radius: 8px; padding: 6px 14px; margin-left: auto; }
-#revise-status { font-size: 12px; color: #55bb55; }
-.btn-revise-save { background: #1e5c1e; color: #aaffaa; border: 1px solid #2d8c2d; border-radius: 6px; padding: 5px 14px; font-size: 12px; font-weight: 600; cursor: pointer; }
-.btn-revise-save:hover { background: #266626; }
-.btn-revise-save:disabled { opacity: .5; cursor: default; }
-
-@media (max-width: 600px) {
-  body { height: auto; overflow-y: auto; }
-  #layout { flex-direction: column; overflow: visible; flex: none; }
-  #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); }
-  #crystal-list { height: 175px; flex: none; }
-  #detail { overflow: visible; padding: 14px 16px; flex: none; }
-  #file-label, #file-status { display: none; }
+@media (max-width: 500px) {
+  #file-status { display: none; }
+  .row-bunrui { display: none; }
+  #topbar { flex-wrap: wrap; gap: 8px; }
 }
 </style>
 </head>
@@ -137,109 +130,101 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
     <a href="index.html" class="nav-link">魔剣</a>
     <a href="crystals.html" class="nav-link active">結晶</a>
   </nav>
-  <label id="file-label" for="file-input">JSON を読み込む</label>
-  <input type="file" id="file-input" accept=".json">
-  <span id="file-status">ファイルを選択してください</span>
-  <div id="revise-bar">
-    <button class="btn-revise-save" onclick="saveRevise()">Save</button>
-    <span id="revise-status"></span>
+  <div id="topbar-right">
+    <label id="file-label" for="file-input">JSON を読み込む</label>
+    <input type="file" id="file-input" accept=".json">
+    <span id="file-status">読み込み中...</span>
+    <div id="revise-bar">
+      <button class="btn-revise-save" onclick="saveRevise()">Save</button>
+      <span id="revise-status"></span>
+    </div>
   </div>
 </div>
 
-<div id="layout">
-  <div id="sidebar">
-    <div id="filters">
-      <input type="text" id="search" placeholder="🔍 結晶名で検索...">
-      <div class="filter-row">
-        <div class="ms-wrap" id="ms-wrap-rarity">
-          <button class="ms-btn" onclick="toggleMs('rarity')"><span class="ms-label">すべてのレアリティ</span><span class="ms-arrow">▾</span></button>
-          <div class="ms-dropdown" id="ms-dropdown-rarity"></div>
-        </div>
-        <div class="ms-wrap" id="ms-wrap-bunrui">
-          <button class="ms-btn" onclick="toggleMs('bunrui')"><span class="ms-label">すべてのタイプ</span><span class="ms-arrow">▾</span></button>
-          <div class="ms-dropdown" id="ms-dropdown-bunrui"></div>
-        </div>
+<div id="page-wrap">
+  <div id="filters">
+    <input type="text" id="search" placeholder="🔍 結晶名で検索...">
+    <div class="filter-row">
+      <div class="ms-wrap" id="ms-wrap-rarity">
+        <button class="ms-btn" onclick="toggleMs('rarity')"><span class="ms-label">すべてのレアリティ</span><span class="ms-arrow">▾</span></button>
+        <div class="ms-dropdown" id="ms-dropdown-rarity"></div>
       </div>
-      <div class="filter-row">
-        <div class="ms-wrap" id="ms-wrap-element">
-          <button class="ms-btn" onclick="toggleMs('element')"><span class="ms-label">すべての対象属性</span><span class="ms-arrow">▾</span></button>
-          <div class="ms-dropdown" id="ms-dropdown-element"></div>
-        </div>
-        <div class="ms-wrap" id="ms-wrap-buki_type">
-          <button class="ms-btn" onclick="toggleMs('buki_type')"><span class="ms-label">すべての対象武器種</span><span class="ms-arrow">▾</span></button>
-          <div class="ms-dropdown" id="ms-dropdown-buki_type"></div>
-        </div>
+      <div class="ms-wrap" id="ms-wrap-bunrui">
+        <button class="ms-btn" onclick="toggleMs('bunrui')"><span class="ms-label">すべてのタイプ</span><span class="ms-arrow">▾</span></button>
+        <div class="ms-dropdown" id="ms-dropdown-bunrui"></div>
       </div>
-      <div class="filter-row">
-        <div class="ms-wrap" id="ms-wrap-jyoken">
-          <button class="ms-btn" onclick="toggleMs('jyoken')"><span class="ms-label">すべての条件</span><span class="ms-arrow">▾</span></button>
-          <div class="ms-dropdown" id="ms-dropdown-jyoken"></div>
-        </div>
-      </div>
-      <div id="crystal-count"></div>
     </div>
-    <div id="crystal-list"></div>
-  </div>
-
-  <div id="detail">
-    <div id="placeholder">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-      </svg>
-      <p>左の一覧から結晶を選択してください</p>
+    <div class="filter-row">
+      <div class="ms-wrap" id="ms-wrap-element">
+        <button class="ms-btn" onclick="toggleMs('element')"><span class="ms-label">すべての対象属性</span><span class="ms-arrow">▾</span></button>
+        <div class="ms-dropdown" id="ms-dropdown-element"></div>
+      </div>
+      <div class="ms-wrap" id="ms-wrap-buki_type">
+        <button class="ms-btn" onclick="toggleMs('buki_type')"><span class="ms-label">すべての対象武器種</span><span class="ms-arrow">▾</span></button>
+        <div class="ms-dropdown" id="ms-dropdown-buki_type"></div>
+      </div>
     </div>
-    <div id="crystal-detail"></div>
+    <div class="filter-row">
+      <div class="ms-wrap" id="ms-wrap-jyoken">
+        <button class="ms-btn" onclick="toggleMs('jyoken')"><span class="ms-label">すべての条件</span><span class="ms-arrow">▾</span></button>
+        <div class="ms-dropdown" id="ms-dropdown-jyoken"></div>
+      </div>
+    </div>
+    <div id="crystal-count"></div>
   </div>
+  <div id="crystal-list"></div>
 </div>
 
 <script>
 // ===== MAPPINGS =====
 const ELEMENT  = {0:'全属性',1:'火',2:'水',3:'風',4:'光',5:'闇',6:'無'};
-const ELEM_COLOR = {1:'#ff5533',2:'#3388ff',3:'#44cc66',4:'#ffcc00',5:'#aa55ff',6:'#888899'};
 const WEAPON   = {1:'長剣',2:'大剣',3:'太刀',4:'杖棒',5:'弓矢',6:'連弩',7:'戦斧',8:'騎槍',9:'投擲',10:'拳闘',11:'魔典',12:'大鎌'};
 const BUNRUI   = {
-  1:'攻撃力UP',2:'ブレイク力UP',3:'BD攻撃力UP',4:'スピードUP',
-  5:'攻撃モーションUP',6:'BDゲージUP',7:'ヒット数UP',8:'攻撃全体化',
-  9:'状態異常回避',10:'HPUP',11:'HP回復',12:'防御力UP',
-  13:'被ダメ軽減',14:'サファイアUP',15:'ルビーUP',16:'その他',
-  17:'ダメージ上限UP',18:'ゲージ最大値UP',19:'結晶枠UP',20:'獲得EXPUP'
+  1:'攻撃力UP', 2:'ブレイク力UP', 3:'BD攻撃力UP', 4:'スピードUP',
+  5:'攻撃モーションUP', 6:'BDゲージUP', 7:'ヒット数UP', 8:'攻撃全体化',
+  9:'状態異常回避', 10:'HPUP', 11:'HP回復', 12:'防御力UP',
+  13:'被ダメ軽減', 14:'サファイアUP', 15:'ルビーUP', 16:'その他',
+  17:'ダメージ上限UP', 18:'ゲージ最大値UP', 19:'結晶枠UP', 20:'獲得EXPUP'
 };
-const JYOKEN = {0:'制限なし',1:'キャラ限定',2:'対象限定'};
+const JYOKEN = {0:'制限なし', 1:'キャラ限定', 2:'対象限定'};
 
 // ===== STATE =====
-let allCrystals = [], filteredCrystals = [], selectedId = null;
-let editData = null, reviseData = {};
+let allCrystals = [], filteredCrystals = [];
+let reviseData = {};
+let expandedIds = new Set();
+let editingId = null;
+let editData = null;
 
 // ===== DATA LOAD =====
 function loadFromArray(arr, label) {
   allCrystals = arr;
-  document.getElementById('file-status').textContent = `${label} — ${arr.length} 件読み込み完了`;
+  document.getElementById('file-status').textContent = label + ' — ' + arr.length + ' 件読み込み完了';
   buildFilterOptions();
   applyFilters();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('./crystals.json')
-    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(arr => {
+    .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(arr) {
       loadFromArray(arr, 'crystals.json');
       return fetch('./crystals_revise.json');
     })
-    .then(r => r.ok ? r.json() : [])
-    .then(arr => {
-      arr.forEach(c => { reviseData[c.id] = c; });
+    .then(function(r) { return r.ok ? r.json() : []; })
+    .then(function(arr) {
+      arr.forEach(function(c) { reviseData[c.id] = c; });
       if (arr.length) updateReviseBar();
     })
-    .catch(() => {
+    .catch(function() {
       document.getElementById('file-status').textContent = 'start.py を起動してください（または右のボタンでファイルを選択）';
     });
 });
 
-document.getElementById('file-input').addEventListener('change', e => {
-  const file = e.target.files[0];
+document.getElementById('file-input').addEventListener('change', function(e) {
+  var file = e.target.files[0];
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
+  var reader = new FileReader();
+  reader.onload = function(ev) {
     try { loadFromArray(JSON.parse(ev.target.result), file.name); }
     catch(err) { document.getElementById('file-status').textContent = '読み込みエラー: ' + err.message; }
   };
@@ -249,23 +234,23 @@ document.getElementById('file-input').addEventListener('change', e => {
 // ===== MULTI-SELECT =====
 const msSelected = { rarity: new Set(), bunrui: new Set(), element: new Set(), buki_type: new Set(), jyoken: new Set() };
 const MS_PLACEHOLDERS = {
-  rarity:'すべてのレアリティ', bunrui:'すべてのタイプ',
-  element:'すべての対象属性', buki_type:'すべての対象武器種', jyoken:'すべての条件'
-};
-const MS_LABEL_FNS = {
-  rarity:    v => `★${v}`,
-  bunrui:    v => BUNRUI[v] || v,
-  element:   v => ELEMENT[v] || v,
-  buki_type: v => v == 0 ? '全武器種' : (WEAPON[v] || v),
-  jyoken:    v => JYOKEN[v] || v,
+  rarity: 'すべてのレアリティ', bunrui: 'すべてのタイプ',
+  element: 'すべての対象属性', buki_type: 'すべての対象武器種', jyoken: 'すべての条件'
 };
 
+function msLabelFor(key, v) {
+  if (key === 'rarity')    return '★' + v;
+  if (key === 'bunrui')    return BUNRUI[v] || v;
+  if (key === 'element')   return ELEMENT[v] || v;
+  if (key === 'buki_type') return v == 0 ? '全武器種' : (WEAPON[v] || v);
+  if (key === 'jyoken')    return JYOKEN[v] || v;
+  return v;
+}
+
 function buildMs(key, vals) {
-  document.getElementById('ms-dropdown-' + key).innerHTML = vals.map(v => `
-    <label class="ms-option">
-      <input type="checkbox" value="${v}" onchange="msChange('${key}',this)">
-      ${MS_LABEL_FNS[key](v)}
-    </label>`).join('');
+  document.getElementById('ms-dropdown-' + key).innerHTML = vals.map(function(v) {
+    return '<label class="ms-option"><input type="checkbox" value="' + v + '" onchange="msChange(\'' + key + '\',this)"> ' + msLabelFor(key, v) + '</label>';
+  }).join('');
 }
 
 function msChange(key, el) {
@@ -276,36 +261,36 @@ function msChange(key, el) {
 }
 
 function updateMsLabel(key) {
-  const sel = msSelected[key];
-  const label = document.querySelector(`#ms-wrap-${key} .ms-label`);
+  var sel = msSelected[key];
+  var label = document.querySelector('#ms-wrap-' + key + ' .ms-label');
   if (sel.size === 0)     label.textContent = MS_PLACEHOLDERS[key];
-  else if (sel.size <= 2) label.textContent = [...sel].map(v => MS_LABEL_FNS[key](v)).join(', ');
-  else                    label.textContent = `${sel.size} 選択中`;
+  else if (sel.size <= 2) label.textContent = Array.from(sel).map(function(v) { return msLabelFor(key, v); }).join(', ');
+  else                    label.textContent = sel.size + ' 選択中';
 }
 
 function toggleMs(key) {
-  const dd  = document.getElementById('ms-dropdown-' + key);
-  const btn = document.querySelector(`#ms-wrap-${key} .ms-btn`);
-  const open = dd.classList.contains('open');
-  document.querySelectorAll('.ms-dropdown').forEach(d => d.classList.remove('open'));
-  document.querySelectorAll('.ms-btn').forEach(b => b.classList.remove('open'));
+  var dd  = document.getElementById('ms-dropdown-' + key);
+  var btn = document.querySelector('#ms-wrap-' + key + ' .ms-btn');
+  var open = dd.classList.contains('open');
+  document.querySelectorAll('.ms-dropdown').forEach(function(d) { d.classList.remove('open'); });
+  document.querySelectorAll('.ms-btn').forEach(function(b) { b.classList.remove('open'); });
   if (!open) { dd.classList.add('open'); btn.classList.add('open'); }
 }
 
-document.addEventListener('click', e => {
+document.addEventListener('click', function(e) {
   if (!e.target.closest('.ms-wrap')) {
-    document.querySelectorAll('.ms-dropdown').forEach(d => d.classList.remove('open'));
-    document.querySelectorAll('.ms-btn').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.ms-dropdown').forEach(function(d) { d.classList.remove('open'); });
+    document.querySelectorAll('.ms-btn').forEach(function(b) { b.classList.remove('open'); });
   }
 });
 
 // ===== FILTER OPTIONS =====
 function buildFilterOptions() {
-  const rarities   = [...new Set(allCrystals.map(c => c.rarity).filter(v => v != null))].sort((a,b) => b-a);
-  const elements   = [...new Set(allCrystals.map(c => c.element).filter(v => v != null))].sort((a,b) => a-b);
-  const buki_types = [...new Set(allCrystals.map(c => c.buki_type).filter(v => v != null))].sort((a,b) => a-b);
-  const bunruis    = [...new Set(allCrystals.flatMap(c => c.bunrui || []))].sort((a,b) => a-b);
-  const jyokens    = [...new Set(allCrystals.map(c => c.jyoken).filter(v => v != null))].sort((a,b) => a-b);
+  var rarities   = Array.from(new Set(allCrystals.map(function(c) { return c.rarity; }).filter(function(v) { return v != null; }))).sort(function(a,b) { return b-a; });
+  var elements   = Array.from(new Set(allCrystals.map(function(c) { return c.element; }).filter(function(v) { return v != null; }))).sort(function(a,b) { return a-b; });
+  var buki_types = Array.from(new Set(allCrystals.map(function(c) { return c.buki_type; }).filter(function(v) { return v != null; }))).sort(function(a,b) { return a-b; });
+  var bunruis    = Array.from(new Set(allCrystals.reduce(function(acc, c) { return acc.concat(c.bunrui || []); }, []))).sort(function(a,b) { return a-b; });
+  var jyokens    = Array.from(new Set(allCrystals.map(function(c) { return c.jyoken; }).filter(function(v) { return v != null; }))).sort(function(a,b) { return a-b; });
   buildMs('rarity', rarities);
   buildMs('element', elements);
   buildMs('buki_type', buki_types);
@@ -313,214 +298,244 @@ function buildFilterOptions() {
   buildMs('jyoken', jyokens);
 }
 
-// ===== FILTER LOGIC =====
+// ===== FILTER =====
 document.getElementById('search').addEventListener('input', applyFilters);
 
 function applyFilters() {
-  const q = document.getElementById('search').value.trim().toLowerCase();
-  filteredCrystals = allCrystals.filter(c => {
-    if (q && !c.name.toLowerCase().includes(q)) return false;
-    if (msSelected.rarity.size    && !msSelected.rarity.has(String(c.rarity)))    return false;
-    if (msSelected.element.size   && !msSelected.element.has(String(c.element)))  return false;
-    if (msSelected.buki_type.size && !msSelected.buki_type.has(String(c.buki_type))) return false;
-    if (msSelected.bunrui.size    && ![...msSelected.bunrui].some(v => c.bunrui?.includes(Number(v)))) return false;
-    if (msSelected.jyoken.size    && !msSelected.jyoken.has(String(c.jyoken)))    return false;
+  var q = document.getElementById('search').value.trim().toLowerCase();
+  filteredCrystals = allCrystals.filter(function(c) {
+    if (q && c.name.toLowerCase().indexOf(q) === -1) return false;
+    if (msSelected.rarity.size    && !msSelected.rarity.has(String(c.rarity)))       return false;
+    if (msSelected.element.size   && !msSelected.element.has(String(c.element)))      return false;
+    if (msSelected.buki_type.size && !msSelected.buki_type.has(String(c.buki_type)))  return false;
+    if (msSelected.bunrui.size    && !Array.from(msSelected.bunrui).some(function(v) { return (c.bunrui || []).indexOf(Number(v)) !== -1; })) return false;
+    if (msSelected.jyoken.size    && !msSelected.jyoken.has(String(c.jyoken)))        return false;
     return true;
   });
-  document.getElementById('crystal-count').textContent = `${filteredCrystals.length} 件`;
+  document.getElementById('crystal-count').textContent = filteredCrystals.length + ' 件';
+  expandedIds.clear();
+  editingId = null;
+  editData = null;
   renderList();
 }
 
 // ===== RENDER LIST =====
 function renderList() {
-  const list = document.getElementById('crystal-list');
+  var list = document.getElementById('crystal-list');
   if (!filteredCrystals.length) { list.innerHTML = '<div class="no-results">該当なし</div>'; return; }
-  list.innerHTML = filteredCrystals.map(c => {
-    const bunruiTags = (c.bunrui || []).slice(0, 2).map(b =>
-      `<span class="badge bunrui">${BUNRUI[b] || b}</span>`
-    ).join('');
-    const elemBadge = c.element ? `<span class="badge elem-${c.element}">${ELEMENT[c.element]}</span>` : '';
-    return `<div class="char-item ${c.id === selectedId ? 'active' : ''}" data-id="${c.id}">
-      <div class="badges"><span class="badge r${c.rarity}">★${c.rarity}</span>${elemBadge}</div>
-      <div class="char-name">${escHtml(c.name)}</div>
-      <div style="display:flex;gap:3px;flex-shrink:0;flex-direction:column;align-items:flex-end">${bunruiTags}</div>
-    </div>`;
+  list.innerHTML = filteredCrystals.map(renderRow).join('');
+}
+
+function renderRow(c) {
+  var rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
+  var eb = c.element ? '<span class="badge elem-' + c.element + '">' + (ELEMENT[c.element] || c.element) + '</span>' : '';
+  var wb = c.buki_type ? '<span class="badge weapon">' + (WEAPON[c.buki_type] || c.buki_type) + '</span>' : '';
+  var bt = (c.bunrui || []).slice(0, 2).map(function(b) {
+    return '<span class="badge bunrui-sm">' + (BUNRUI[b] || b) + '</span>';
   }).join('');
-  list.querySelectorAll('.char-item').forEach(el => {
-    el.addEventListener('click', () => selectCrystal(parseInt(el.dataset.id)));
-  });
-  if (selectedId !== null) {
-    const active = list.querySelector('.char-item.active');
-    if (active) active.scrollIntoView({block:'nearest'});
+  return '<div class="crystal-row" id="row-' + c.id + '">' +
+    '<div class="crystal-row-hd" onclick="toggleExpand(' + c.id + ')">' +
+      '<div class="row-badges">' + rb + eb + wb + '</div>' +
+      '<div class="row-name">' + escHtml(c.name) + '</div>' +
+      '<div class="row-bunrui">' + bt + '</div>' +
+      '<button class="expand-btn" onclick="event.stopPropagation();toggleExpand(' + c.id + ')">▾</button>' +
+    '</div>' +
+    '<div class="crystal-body" id="body-' + c.id + '"></div>' +
+  '</div>';
+}
+
+// ===== EXPAND / COLLAPSE =====
+function toggleExpand(id) {
+  if (editingId === id) return;
+  var row  = document.getElementById('row-' + id);
+  var body = document.getElementById('body-' + id);
+  if (!row || !body) return;
+
+  if (expandedIds.has(id)) {
+    expandedIds.delete(id);
+    row.classList.remove('expanded');
+    body.innerHTML = '';
+  } else {
+    expandedIds.add(id);
+    row.classList.add('expanded');
+    var c = allCrystals.find(function(x) { return x.id === id; });
+    if (c) body.innerHTML = renderDetailBody(c);
   }
 }
 
-// ===== SELECT =====
-function selectCrystal(id) {
-  selectedId = id;
-  renderList();
-  const c = allCrystals.find(x => x.id === id);
-  if (!c) return;
-  document.getElementById('placeholder').style.display = 'none';
-  const detail = document.getElementById('crystal-detail');
-  detail.style.display = 'block';
-  detail.innerHTML = renderDetail(c);
-}
-
-// ===== RENDER DETAIL =====
-function renderDetail(c) {
-  const rLabel = `★${c.rarity}`;
-  const bunruiChips = (c.bunrui || []).map(b =>
-    `<span class="meta-chip">${BUNRUI[b] || b}</span>`).join('');
-  const elemChip = c.element
-    ? `<span class="meta-chip"><span style="width:8px;height:8px;border-radius:50%;background:${ELEM_COLOR[c.element]};display:inline-block;margin-right:4px"></span>${ELEMENT[c.element]}</span>`
-    : '';
-  const wChip = c.buki_type
-    ? `<span class="meta-chip">${WEAPON[c.buki_type]}</span>` : '';
-  const altemaUrl = `https://altema.jp/bxb/kiokukessyou`;
-
-  let fields = [];
-  if (c['効果'])     fields.push(['効果', escHtml(c['効果'])]);
+// ===== DETAIL BODY =====
+function renderDetailBody(c) {
+  var fields = [];
+  if (c['効果'])    fields.push(['効果',    escHtml(c['効果'])]);
   if (c['効果量']) {
-    const hasUnit = c['効果量'].includes('倍');
-    const unit = hasUnit ? '倍' : '';
-    const minStr = fmt(c.effect_min);
-    const maxStr = fmt(c.effect_max);
-    const range = (c.effect_min != null && c.effect_max != null && c.effect_min !== c.effect_max)
-      ? `<span class="effect-range">${minStr}<span class="sep">～</span>${maxStr}<span class="unit">${unit}</span></span>`
-      : `<span class="effect-range">${minStr}<span class="unit">${unit}</span></span>`;
-    fields.push(['効果量', range + ` <span style="color:var(--text2);font-size:11px">(${escHtml(c['効果量'])})</span>`]);
+    var hasUnit = c['効果量'].indexOf('倍') !== -1;
+    var unit    = hasUnit ? '倍' : '';
+    var mn      = fmt(c.effect_min);
+    var mx      = fmt(c.effect_max);
+    var range;
+    if (c.effect_min != null && c.effect_max != null && c.effect_min !== c.effect_max) {
+      range = '<span class="effect-range">' + mn + '<span class="sep">～</span>' + mx + '<span class="unit">' + unit + '</span></span>';
+    } else {
+      range = '<span class="effect-range">' + (mn || mx) + '<span class="unit">' + unit + '</span></span>';
+    }
+    fields.push(['効果量', range + ' <span style="color:var(--text2);font-size:11px">(' + escHtml(c['効果量']) + ')</span>']);
   }
   if (c['特殊条件']) fields.push(['特殊条件', escHtml(c['特殊条件']) + ' <span style="color:var(--text2)">のみ</span>']);
-  if (c['対象'])     fields.push(['対象', escHtml(c['対象'])]);
-  if (c['上限値'])   fields.push(['上限値', escHtml(c['上限値'])]);
+  if (c['対象'])    fields.push(['対象',    escHtml(c['対象'])]);
+  if (c['上限値'])  fields.push(['上限値',  escHtml(c['上限値'])]);
   if (c['入手方法']) fields.push(['入手方法', escHtml(c['入手方法'])]);
 
-  const rows = fields.map(([k,v]) =>
-    `<div class="field-row"><div class="field-key">${k}</div><div class="field-val">${v}</div></div>`
-  ).join('');
+  var rows = fields.map(function(pair) {
+    return '<div class="field-row"><div class="field-key">' + pair[0] + '</div><div class="field-val">' + pair[1] + '</div></div>';
+  }).join('');
 
-  return `
-    <div class="chara-header">
-      <div class="chara-header-info">
-        <div class="chara-title">${escHtml(c.name)}</div>
-        <div class="chara-meta">
-          <span class="meta-chip">${rLabel}</span>
-          ${elemChip}${wChip}${bunruiChips}
-          <a class="meta-chip" href="${altemaUrl}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>
-        </div>
-      </div>
-      <button class="btn-edit" onclick="enterEditMode(${c.id})">修改</button>
-    </div>
-    <div class="section">${rows}</div>`;
+  return '<div class="body-left">' + rows + '</div>' +
+    '<div class="body-right">' +
+      '<img class="crystal-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/' + c.id + '.jpg" onerror="this.style.display=\'none\'" alt="">' +
+      '<button class="btn-edit" onclick="enterEditMode(' + c.id + ')">修改</button>' +
+    '</div>';
 }
 
 // ===== EDIT MODE =====
 function enterEditMode(id) {
-  const c = allCrystals.find(x => x.id === id);
+  var c = allCrystals.find(function(x) { return x.id === id; });
   if (!c) return;
   editData = JSON.parse(JSON.stringify(c));
-  document.getElementById('crystal-detail').innerHTML = renderEditDetail(editData);
+  editingId = id;
+  var row  = document.getElementById('row-' + id);
+  var body = document.getElementById('body-' + id);
+  if (!row || !body) return;
+  row.classList.add('expanded');
+  body.className = 'crystal-edit-body';
+  body.innerHTML = renderEditBody(editData);
 }
 
 function cancelEdit() {
+  if (editingId === null) return;
+  var id = editingId;
+  editingId = null;
   editData = null;
-  selectCrystal(selectedId);
+  var row  = document.getElementById('row-' + id);
+  var body = document.getElementById('body-' + id);
+  var c    = allCrystals.find(function(x) { return x.id === id; });
+  if (body) {
+    body.className = 'crystal-body';
+    if (c) body.innerHTML = renderDetailBody(c);
+  }
+  if (row) row.classList.add('expanded');
 }
 
 function saveEdit() {
   if (!editData) return;
-  const original = allCrystals.find(x => x.id === editData.id);
-  if (JSON.stringify(editData) !== JSON.stringify(original)) {
-    const idx = allCrystals.findIndex(x => x.id === editData.id);
-    if (idx >= 0) allCrystals[idx] = editData;
-    reviseData[editData.id] = editData;
+  var id  = editData.id;
+  var idx = allCrystals.findIndex(function(x) { return x.id === id; });
+  if (idx >= 0) {
+    allCrystals[idx] = editData;
+    reviseData[id] = JSON.parse(JSON.stringify(editData));
     updateReviseBar();
   }
-  editData = null;
-  selectCrystal(selectedId);
+  var saved = editData;
+  editingId = null;
+  editData  = null;
+
+  var row  = document.getElementById('row-' + id);
+  var body = document.getElementById('body-' + id);
+  if (row && idx >= 0) {
+    var c  = allCrystals[idx];
+    var rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
+    var eb = c.element   ? '<span class="badge elem-' + c.element + '">' + (ELEMENT[c.element] || c.element) + '</span>' : '';
+    var wb = c.buki_type ? '<span class="badge weapon">' + (WEAPON[c.buki_type] || c.buki_type) + '</span>' : '';
+    var bt = (c.bunrui || []).slice(0, 2).map(function(b) { return '<span class="badge bunrui-sm">' + (BUNRUI[b] || b) + '</span>'; }).join('');
+    row.querySelector('.row-badges').innerHTML = rb + eb + wb;
+    row.querySelector('.row-name').textContent = c.name;
+    row.querySelector('.row-bunrui').innerHTML = bt;
+  }
+  if (body) {
+    body.className = 'crystal-body';
+    var c2 = idx >= 0 ? allCrystals[idx] : null;
+    if (c2) body.innerHTML = renderDetailBody(c2);
+  }
+  if (row) row.classList.add('expanded');
 }
 
 function editBunrui(el) {
-  const val = Number(el.value);
-  if (el.checked) { if (!editData.bunrui) editData.bunrui = []; if (!editData.bunrui.includes(val)) editData.bunrui.push(val); }
-  else { editData.bunrui = (editData.bunrui || []).filter(v => v !== val); }
+  var val = Number(el.value);
+  if (!editData) return;
+  if (el.checked) {
+    if (!editData.bunrui) editData.bunrui = [];
+    if (editData.bunrui.indexOf(val) === -1) editData.bunrui.push(val);
+  } else {
+    editData.bunrui = (editData.bunrui || []).filter(function(v) { return v !== val; });
+  }
 }
 
-function renderEditDetail(c) {
-  const bunruiChecks = Object.entries(BUNRUI).map(([k,v]) => {
-    const checked = c.bunrui?.includes(Number(k)) ? 'checked' : '';
-    return `<label class="bunrui-check"><input type="checkbox" value="${k}" ${checked} onchange="editBunrui(this)"> ${v}</label>`;
+function renderEditBody(c) {
+  var bunruiChecks = Object.keys(BUNRUI).map(function(k) {
+    var checked = (c.bunrui && c.bunrui.indexOf(Number(k)) !== -1) ? 'checked' : '';
+    return '<label class="bunrui-check"><input type="checkbox" value="' + k + '" ' + checked + ' onchange="editBunrui(this)"> ' + BUNRUI[k] + '</label>';
   }).join('');
 
-  return `
-    <div class="chara-header edit-mode-active">
-      <div class="chara-header-info" style="flex:1;min-width:0">
-        <input class="edit-input title" value="${escHtml(c.name)}" oninput="editData.name=this.value">
-        <div class="chara-meta" style="margin-top:8px">
-          <label style="font-size:11px;color:var(--text2)">★
-            <input type="number" class="edit-input" style="width:44px" value="${c.rarity||''}" min="1" max="6"
-                   oninput="editData.rarity=this.value===''?null:Number(this.value)">
-          </label>
-          <select class="edit-select" onchange="editData.element=Number(this.value)">
-            ${Object.entries(ELEMENT).map(([k,v])=>`<option value="${k}"${c.element==k?' selected':''}>${v}</option>`).join('')}
-          </select>
-          <select class="edit-select" onchange="editData.buki_type=Number(this.value)">
-            <option value="0"${c.buki_type==0?' selected':''}>全武器種</option>
-            ${Object.entries(WEAPON).map(([k,v])=>`<option value="${k}"${c.buki_type==k?' selected':''}>${v}</option>`).join('')}
-          </select>
-        </div>
-      </div>
-      <div class="edit-actions">
-        <button class="btn-save" onclick="saveEdit()">保存</button>
-        <button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>
-      </div>
-    </div>
-    <div class="section">
-      <div class="section-title">タイプ</div>
-      <div class="bunrui-checks">${bunruiChecks}</div>
-    </div>
-    <div class="section">
-      <div class="section-title">テキスト</div>
-      ${renderEditTextFields(c)}
-    </div>`;
-}
-
-function renderEditTextFields(c) {
-  const TEXT_FIELDS = ['効果','効果量','特殊条件','対象','上限値','入手方法'];
-  return TEXT_FIELDS.map(k => {
-    const v = escHtml(c[k] || '');
-    const isLong = k === '効果' || k === '入手方法';
-    return `<div class="field-label">${k}</div>` + (isLong
-      ? `<textarea class="edit-textarea" oninput="editData['${k}']=this.value">${v}</textarea>`
-      : `<input class="edit-input" value="${v}" oninput="editData['${k}']=this.value">`);
+  var elemOpts = Object.keys(ELEMENT).map(function(k) {
+    return '<option value="' + k + '"' + (c.element == k ? ' selected' : '') + '>' + ELEMENT[k] + '</option>';
   }).join('');
+  var weapOpts = '<option value="0"' + (c.buki_type == 0 ? ' selected' : '') + '>全武器種</option>' +
+    Object.keys(WEAPON).map(function(k) {
+      return '<option value="' + k + '"' + (c.buki_type == k ? ' selected' : '') + '>' + WEAPON[k] + '</option>';
+    }).join('');
+
+  var textFields = ['効果', '効果量', '特殊条件', '対象', '上限値', '入手方法'];
+  var textInputs = textFields.map(function(k) {
+    var val = escHtml(c[k] || '');
+    var isLong = k === '効果' || k === '入手方法';
+    var input = isLong
+      ? '<textarea class="edit-textarea" oninput="editData[\'' + k + '\']=this.value">' + val + '</textarea>'
+      : '<input class="edit-input" style="width:100%" value="' + val + '" oninput="editData[\'' + k + '\']=this.value">';
+    return '<div class="field-label">' + k + '</div>' + input;
+  }).join('');
+
+  return '<div class="edit-actions">' +
+      '<button class="btn-save" onclick="saveEdit()">保存</button>' +
+      '<button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>' +
+    '</div>' +
+    '<div class="edit-meta">' +
+      '<input class="edit-input stretch" value="' + escHtml(c.name) + '" oninput="editData.name=this.value">' +
+      '<label style="font-size:11px;color:var(--text2);display:flex;align-items:center;gap:4px">★' +
+        '<input type="number" class="edit-input" style="width:40px" value="' + (c.rarity || '') + '" min="1" max="6" oninput="editData.rarity=this.value===\'\'?null:Number(this.value)">' +
+      '</label>' +
+      '<select class="edit-select" onchange="editData.element=Number(this.value)">' + elemOpts + '</select>' +
+      '<select class="edit-select" onchange="editData.buki_type=Number(this.value)">' + weapOpts + '</select>' +
+    '</div>' +
+    '<div class="bunrui-checks">' + bunruiChecks + '</div>' +
+    textInputs;
 }
 
+// ===== REVISE BAR =====
 function updateReviseBar() {
-  const bar = document.getElementById('revise-bar');
+  var bar = document.getElementById('revise-bar');
   bar.style.display = Object.keys(reviseData).length > 0 ? 'flex' : 'none';
   document.getElementById('revise-status').textContent = '';
 }
 
-async function saveRevise() {
-  const btn = document.querySelector('.btn-revise-save');
-  const status = document.getElementById('revise-status');
-  btn.textContent = '保存中...'; btn.disabled = true;
-  try {
-    const res = await fetch('/save', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ crystals: allCrystals, crystal_revise: Object.values(reviseData) }),
-    });
-    const json = await res.json();
-    if (!res.ok) throw new Error(json.error || res.status);
+function saveRevise() {
+  var btn    = document.querySelector('.btn-revise-save');
+  var status = document.getElementById('revise-status');
+  btn.textContent = '保存中...';
+  btn.disabled = true;
+  fetch('/save', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ crystals: allCrystals, crystal_revise: Object.values(reviseData) })
+  }).then(function(res) {
+    return res.json().then(function(j) { return { ok: res.ok, j: j }; });
+  }).then(function(r) {
+    if (!r.ok) throw new Error(r.j.error || 'error');
     status.textContent = '✓ 保存完了';
-  } catch(err) {
+  }).catch(function(err) {
     status.textContent = '保存失敗 — start.py が起動していますか？';
-  } finally {
-    btn.textContent = 'Save'; btn.disabled = false;
-  }
+  }).finally(function() {
+    btn.textContent = 'Save';
+    btn.disabled = false;
+  });
 }
 
 // ===== HELPERS =====
