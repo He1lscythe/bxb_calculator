@@ -28,19 +28,6 @@
 body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu Gothic', sans-serif; font-size: 14px; height: 100vh; display: flex; justify-content: center; overflow: hidden; }
 #page-wrap { max-width: 72rem; width: 100%; display: flex; flex-direction: column; overflow: hidden; }
 
-/* ===== NAV ===== */
-#page-nav { display: flex; gap: 0; }
-.nav-link { padding: 5px 18px; font-size: 13px; font-weight: 600; color: var(--text2); text-decoration: none; border-bottom: 2px solid transparent; transition: color .15s; white-space: nowrap; }
-.nav-link:hover { color: var(--text); }
-.nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-/* ===== TOPBAR ===== */
-#topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-#topbar h1 { font-size: 16px; font-weight: 700; color: var(--accent); white-space: nowrap; }
-#file-label { cursor: pointer; background: var(--accent); color: #fff; border: none; border-radius: 6px; padding: 6px 14px; font-size: 13px; transition: opacity .15s; }
-#file-label:hover { opacity: .85; }
-#file-input { display: none; }
-#file-status { color: var(--text2); font-size: 13px; }
 
 /* ===== LAYOUT ===== */
 #layout { display: flex; flex: 1; overflow: hidden; }
@@ -208,32 +195,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .hit-num:focus { outline: none; border-color: #8aabff; }
 .skill-edit-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
 
-/* revise notification bar */
-#revise-bar { display: none; align-items: center; gap: 10px; background: #142814; border: 1px solid #2d6b2d; border-radius: 8px; padding: 6px 14px; margin-left: auto; }
-#revise-bar span { font-size: 12px; color: #88dd88; }
-#revise-status { font-size: 12px; color: #55bb55; }
-.btn-revise-save { background: #1e5c1e; color: #aaffaa; border: 1px solid #2d8c2d; border-radius: 6px; padding: 5px 14px; font-size: 12px; font-weight: 600; cursor: pointer; }
-.btn-revise-save:hover { background: #266626; }
-.btn-revise-save:disabled { opacity: .5; cursor: default; }
 </style>
 </head>
 <body>
 <div id="page-wrap">
-
-<div id="topbar">
-  <h1>⚔ BxB</h1>
-  <nav id="page-nav">
-    <a href="index.html" class="nav-link active">魔剣</a>
-    <a href="crystals.html" class="nav-link">結晶</a>
-  </nav>
-  <label id="file-label" for="file-input">JSON を読み込む</label>
-  <input type="file" id="file-input" accept=".json,.js">
-  <span id="file-status">ファイルを選択してください</span>
-  <div id="revise-bar">
-    <button class="btn-revise-save" onclick="saveRevise()">Save</button>
-    <span id="revise-status"></span>
-  </div>
-</div>
+<script src="nav.js"></script>
 
 <div id="layout">
   <div id="sidebar">
