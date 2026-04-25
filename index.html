@@ -153,10 +153,20 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 /* skills */
 .skills-list { display: flex; flex-direction: column; gap: 6px; }
 .skill-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
-.skill-name-row { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-bottom: 4px; }
-.skill-name { font-weight: 600; font-size: 13px; color: var(--accent); }
+.skill-name-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.skill-tags-left { display: flex; gap: 3px; flex-wrap: wrap; flex-shrink: 0; width: 96px; }
+.skill-name { font-weight: 600; font-size: 13px; color: var(--accent); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.skill-tags-right { display: flex; gap: 3px; flex-shrink: 0; }
 .skill-effect { font-size: 13px; line-height: 1.6; color: var(--text); }
 .bunrui-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; background: rgba(91,127,255,.18); color: #7b9fff; border: 1px solid rgba(91,127,255,.35); white-space: nowrap; }
+.scope-tag  { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; white-space: nowrap; }
+.scope-self { background: rgba(120,120,120,.18); color: #999; border: 1px solid rgba(120,120,120,.3); }
+.scope-all  { background: rgba(60,180,100,.18); color: #4cbb6e; border: 1px solid rgba(60,180,100,.35); }
+.scope-lim  { background: rgba(255,180,40,.18); color: #ffb828; border: 1px solid rgba(255,180,40,.35); }
+.cond-tag   { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; white-space: nowrap; }
+.cond-1 { background: rgba(255,200,40,.18); color: #ffd040; border: 1px solid rgba(255,200,40,.35); }
+.cond-2 { background: rgba(255,80,80,.18);  color: #ff6060; border: 1px solid rgba(255,80,80,.35); }
+.cond-3 { background: rgba(160,80,255,.18); color: #b060ff; border: 1px solid rgba(160,80,255,.35); }
 
 .bd-card { background: #1a1040; border: 1px solid #4433aa; border-radius: 8px; padding: 12px 14px; }
 .bd-label { font-size: 10px; font-weight: 700; color: #aa88ff; letter-spacing: .1em; margin-bottom: 4px; }
@@ -294,10 +304,28 @@ const WEAPON = {1:'長剣',2:'大剣',3:'太刀',4:'杖棒',5:'弓矢',6:'連弩
 const BUNRUI_SHORT = {1:'攻',2:'BK',3:'BD攻',4:'转',5:'速',6:'BD值',7:'hit',8:'aoe',9:'異常',10:'HP',11:'回復',12:'防',13:'軽',14:'蓝',15:'紅',16:'他',17:'限',18:'BD值',19:'枠',20:'EXP',21:'BDhit'};
 
 function renderBunruiTags(bunrui) {
-  if (!bunrui || !bunrui.length) return '';
-  return bunrui.map(function(b) {
+  var inner = (bunrui || []).map(function(b) {
     return '<span class="bunrui-tag">' + (BUNRUI_SHORT[b] || b) + '</span>';
   }).join('');
+  return '<div class="skill-tags-left">' + inner + '</div>';
+}
+
+function renderRightTags(s) {
+  var tags = '';
+  // scope tag
+  if (s.scope === 0) {
+    tags += '<span class="scope-tag scope-self">自</span>';
+  } else if (s.scope === 1) {
+    tags += '<span class="scope-tag scope-all">全</span>';
+  } else if (s.scope === 2) {
+    var lim = s.element != null ? (ELEMENT[s.element] || s.element) : (s.type != null ? (WEAPON[s.type] || s.type) : '限');
+    tags += '<span class="scope-tag scope-lim">' + lim + '</span>';
+  }
+  // condition tag
+  if (s.condition === 1) tags += '<span class="cond-tag cond-1">浑身</span>';
+  else if (s.condition === 2) tags += '<span class="cond-tag cond-2">背水</span>';
+  else if (s.condition === 3) tags += '<span class="cond-tag cond-3">破損</span>';
+  return '<div class="skill-tags-right">' + tags + '</div>';
 }
 
 // ===== STATE =====
@@ -619,7 +647,7 @@ function renderStateContent(state, stateLabel) {
   // --- Skills ---
   if (state.skills?.length) {
     const cards = state.skills.map(s =>
-      '<div class="skill-card"><div class="skill-name-row">' + renderBunruiTags(s.bunrui) + '<span class="skill-name">' + escHtml(s.name) + '</span></div><div class="skill-effect">' + escHtml(s.effect) + '</div></div>'
+      '<div class="skill-card"><div class="skill-name-row">' + renderBunruiTags(s.bunrui) + '<span class="skill-name">' + escHtml(s.name) + '</span>' + renderRightTags(s) + '</div><div class="skill-effect">' + escHtml(s.effect) + '</div></div>'
     ).join('');
     parts.push(`<div class="section"><div class="section-title">スキル構成 (${state.skills.length})</div><div class="skills-list">${cards}</div></div>`);
   }
