@@ -153,8 +153,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 /* skills */
 .skills-list { display: flex; flex-direction: column; gap: 6px; }
 .skill-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
-.skill-name { font-weight: 600; font-size: 13px; margin-bottom: 4px; color: var(--accent); }
+.skill-name-row { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-bottom: 4px; }
+.skill-name { font-weight: 600; font-size: 13px; color: var(--accent); }
 .skill-effect { font-size: 13px; line-height: 1.6; color: var(--text); }
+.bunrui-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; background: rgba(91,127,255,.18); color: #7b9fff; border: 1px solid rgba(91,127,255,.35); white-space: nowrap; }
 
 .bd-card { background: #1a1040; border: 1px solid #4433aa; border-radius: 8px; padding: 12px 14px; }
 .bd-label { font-size: 10px; font-weight: 700; color: #aa88ff; letter-spacing: .1em; margin-bottom: 4px; }
@@ -263,7 +265,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
         </select>
         <button id="sort-dir" onclick="toggleSortDir()">↓</button>
       </div>
-      <div id="char-count"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div id="char-count"></div>
+        <button onclick="resetFilters()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
+      </div>
     </div>
     <div id="char-list"></div>
   </div>
@@ -286,6 +291,14 @@ const RARITY = {1:'A',2:'AA',3:'S',4:'SS'};
 const ELEMENT = {1:'火',2:'水',3:'風',4:'光',5:'闇',6:'無'};
 const ELEM_COLOR = {1:'#ff5533',2:'#3388ff',3:'#44cc66',4:'#ffcc00',5:'#aa55ff',6:'#888899'};
 const WEAPON = {1:'長剣',2:'大剣',3:'太刀',4:'杖棒',5:'弓矢',6:'連弩',7:'戦斧',8:'騎槍',9:'投擲',10:'拳闘',11:'魔典',12:'大鎌'};
+const BUNRUI_SHORT = {1:'攻',2:'BK',3:'BD攻',4:'转',5:'速',6:'BD值',7:'hit',8:'aoe',9:'異常',10:'HP',11:'回復',12:'防',13:'軽',14:'蓝',15:'紅',16:'他',17:'限',18:'BD值',19:'枠',20:'EXP'};
+
+function renderBunruiTags(bunrui) {
+  if (!bunrui || !bunrui.length) return '';
+  return bunrui.map(function(b) {
+    return '<span class="bunrui-tag">' + (BUNRUI_SHORT[b] || b) + '</span>';
+  }).join('');
+}
 
 // ===== STATE =====
 let allChars = [];
@@ -314,7 +327,7 @@ function loadFromJson(text, label) {
 // Auto-load: fetch via HTTP server, fallback to file input
 document.addEventListener('DOMContentLoaded', () => {
   // Load characters.json then pre-populate reviseData from characters_revise.json
-  fetch('./characters.json')
+  fetch('./characters_classified.json')
     .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
     .then(text => {
       loadFromJson(text, 'characters.json');
@@ -447,6 +460,19 @@ function getSortValue(c, key) {
     if (v !== null) return v;
   }
   return null;
+}
+
+const MS_DEFAULT_LABEL = { rarity: 'すべてのレアリティ', element: 'すべての属性', type: 'すべての武器種', state: 'すべての状態' };
+function resetFilters() {
+  document.getElementById('search').value = '';
+  document.getElementById('f-sort').value = '';
+  Object.keys(msSelected).forEach(k => {
+    msSelected[k].clear();
+    document.querySelectorAll('#ms-dropdown-' + k + ' input').forEach(cb => { cb.checked = false; });
+    const label = document.querySelector('#ms-wrap-' + k + ' .ms-label');
+    if (label) label.textContent = MS_DEFAULT_LABEL[k] || '';
+  });
+  applyFilters();
 }
 
 function applyFilters() {
@@ -593,7 +619,7 @@ function renderStateContent(state, stateLabel) {
   // --- Skills ---
   if (state.skills?.length) {
     const cards = state.skills.map(s =>
-      `<div class="skill-card"><div class="skill-name">${escHtml(s.name)}</div><div class="skill-effect">${escHtml(s.effect)}</div></div>`
+      '<div class="skill-card"><div class="skill-name-row">' + renderBunruiTags(s.bunrui) + '<span class="skill-name">' + escHtml(s.name) + '</span></div><div class="skill-effect">' + escHtml(s.effect) + '</div></div>'
     ).join('');
     parts.push(`<div class="section"><div class="section-title">スキル構成 (${state.skills.length})</div><div class="skills-list">${cards}</div></div>`);
   }
