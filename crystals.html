@@ -15,22 +15,6 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Gothic',sans-serif; font-size: 14px; }
 
-#topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 100; }
-#topbar h1 { font-size: 16px; font-weight: 700; color: var(--accent); white-space: nowrap; }
-#page-nav { display: flex; gap: 0; }
-.nav-link { padding: 5px 18px; font-size: 13px; font-weight: 600; color: var(--text2); text-decoration: none; border-bottom: 2px solid transparent; transition: color .15s; white-space: nowrap; }
-.nav-link:hover { color: var(--text); }
-.nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
-#topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-#file-label { cursor: pointer; background: var(--accent); color: #fff; border: none; border-radius: 6px; padding: 5px 12px; font-size: 12px; white-space: nowrap; }
-#file-label:hover { opacity: .85; }
-#file-input { display: none; }
-#file-status { color: var(--text2); font-size: 12px; white-space: nowrap; }
-#revise-bar { display: none; align-items: center; gap: 8px; background: #142814; border: 1px solid #2d6b2d; border-radius: 8px; padding: 5px 12px; }
-#revise-status { font-size: 12px; color: #55bb55; }
-.btn-revise-save { background: #1e5c1e; color: #aaffaa; border: 1px solid #2d8c2d; border-radius: 6px; padding: 4px 12px; font-size: 12px; font-weight: 600; cursor: pointer; }
-.btn-revise-save:hover { background: #266626; }
-.btn-revise-save:disabled { opacity: .5; cursor: default; }
 
 #page-wrap { max-width: 640px; margin: 0 auto; padding: 16px; }
 
@@ -125,22 +109,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
 </head>
 <body>
 
-<div id="topbar">
-  <h1>⚔ BxB</h1>
-  <nav id="page-nav">
-    <a href="index.html" class="nav-link">魔剣</a>
-    <a href="crystals.html" class="nav-link active">結晶</a>
-  </nav>
-  <div id="topbar-right">
-    <label id="file-label" for="file-input">JSON を読み込む</label>
-    <input type="file" id="file-input" accept=".json">
-    <span id="file-status">読み込み中...</span>
-    <div id="revise-bar">
-      <button class="btn-revise-save" onclick="saveRevise()">Save</button>
-      <span id="revise-status"></span>
-    </div>
-  </div>
-</div>
+<script src="nav.js"></script>
 
 <div id="page-wrap">
   <div id="filters">
