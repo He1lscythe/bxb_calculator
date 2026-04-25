@@ -103,7 +103,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 /* character header */
 .chara-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
 .chara-header-info { flex: 1; }
-.chara-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.chara-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+.chara-icon { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; flex-shrink: 0; }
 .chara-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .meta-chip { display: flex; align-items: center; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 12px; }
 .meta-chip .elem-dot { width: 8px; height: 8px; }
@@ -537,7 +538,7 @@ function renderDetail(c) {
   return `
     <div class="chara-header">
       <div class="chara-header-info">
-        <div class="chara-title">${escHtml(c.name)}</div>
+        <div class="chara-title">${escHtml(c.name)}<img class="chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt=""></div>
         <div class="chara-meta">
           <span class="meta-chip"><span class="badge ${rLabel}">${rLabel}</span></span>
           <span class="meta-chip"><span class="elem-dot" style="background:${eColor}"></span>${eName}属性</span>
