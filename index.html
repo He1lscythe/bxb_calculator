@@ -353,22 +353,27 @@ function getBestState(c) {
 }
 
 function getSortValue(c, key) {
-  const state = getBestState(c);
-  if (!state) return null;
-  switch (key) {
-    case '攻撃力': case '防御力': case 'ブレイク力': case 'HP':
-      return state.stats?.max?.[key] ?? null;
-    case 'LP': case '保有魔力':
-      return state.basic_info?.[key] ?? null;
-    case '結晶スロット':
-      return Number(state.basic_info?.['結晶スロット']) || null;
-    case 'B': case 'W': case 'H':
-      return state.profile?.[key] ?? null;
-    case 'BDコスト':
-      return state.bd_skill?.cost ?? null;
-    default:
-      return null;
+  for (const s of ['極弐', '改造', '通常']) {
+    const state = c.states?.[s];
+    if (!state) continue;
+    let v = null;
+    switch (key) {
+      case '攻撃力': case '防御力': case 'ブレイク力': case 'HP':
+        v = state.stats?.max?.[key] ?? null; break;
+      case 'LP': case '保有魔力':
+        v = state.basic_info?.[key] ?? null; break;
+      case '結晶スロット': {
+        const raw = state.basic_info?.['結晶スロット'];
+        v = raw != null ? (Number(raw) || null) : null; break;
+      }
+      case 'B': case 'W': case 'H':
+        v = state.profile?.[key] ?? null; break;
+      case 'BDコスト':
+        v = state.bd_skill?.cost ?? null; break;
+    }
+    if (v !== null) return v;
   }
+  return null;
 }
 
 function applyFilters() {
