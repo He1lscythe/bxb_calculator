@@ -1,8 +1,8 @@
 (function () {
   if (document.getElementById('topbar')) return;
   var PAGES = [
-    { id: 'index',    href: 'index.html',    label: '魔剣' },
-    { id: 'crystals', href: 'crystals.html', label: '結晶' },
+    { id: 'character', href: 'character.html', label: '魔剣' },
+    { id: 'crystals',  href: 'crystals.html',  label: '結晶' },
   ];
 
   // detect active page from filename
@@ -34,6 +34,7 @@
 
   // inject CSS into <head>
   var css =
+    'html{scrollbar-gutter:stable;}' +
     '#topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:100;}' +
     '#topbar h1{font-size:16px;font-weight:700;color:var(--accent);white-space:nowrap;margin:0;}' +
     '#page-nav{display:flex;gap:0;}' +
