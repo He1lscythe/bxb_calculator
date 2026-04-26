@@ -3,6 +3,7 @@
   var PAGES = [
     { id: 'index',    href: 'index.html',    label: '魔剣' },
     { id: 'crystals', href: 'crystals.html', label: '結晶' },
+    { id: 'soul',     href: 'soul.html',     label: 'ソウル' },
   ];
 
   // detect active page from filename
