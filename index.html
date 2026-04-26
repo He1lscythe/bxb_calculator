@@ -39,17 +39,12 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 #filters input[type=text]:focus { border-color: var(--accent); }
 .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
 .filter-row select { flex: 1; min-width: 0; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
-.ms-wrap { position: relative; flex: 1; min-width: 0; }
-.ms-btn { width: 100%; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 4px; }
-.ms-btn:hover { border-color: var(--accent); }
-.ms-btn.open { border-color: var(--accent); }
-.ms-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.ms-arrow { flex-shrink: 0; font-size: 10px; color: var(--text2); }
-.ms-dropdown { display: none; position: absolute; top: calc(100% + 2px); left: 0; right: 0; min-width: 120px; background: var(--bg3); border: 1px solid var(--accent); border-radius: 6px; z-index: 200; max-height: 180px; overflow-y: auto; padding: 4px 0; box-shadow: 0 4px 12px rgba(0,0,0,.5); }
-.ms-dropdown.open { display: block; }
-.ms-option { display: flex; align-items: center; gap: 7px; padding: 5px 10px; cursor: pointer; font-size: 12px; white-space: nowrap; user-select: none; }
-.ms-option:hover { background: var(--bg2); }
-.ms-option input[type=checkbox] { cursor: pointer; accent-color: var(--accent); flex-shrink: 0; }
+.filter-section { display: flex; flex-direction: column; gap: 3px; }
+.filter-label { font-size: 10px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .06em; }
+.filter-toggles { display: flex; flex-wrap: wrap; gap: 3px; }
+.ftog { font-size: 11px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; transition: all .1s; white-space: nowrap; }
+.ftog:hover { border-color: var(--accent); color: var(--text); }
+.ftog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; font-weight: 700; }
 #sort-dir { flex-shrink: 0; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; cursor: pointer; }
 #sort-dir:hover { border-color: var(--accent); color: var(--accent); }
 #char-count { font-size: 11px; color: var(--text2); text-align: right; padding: 2px 2px 0; }
@@ -57,7 +52,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 #char-list::-webkit-scrollbar { width: 4px; }
 #char-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-.char-item { padding: 9px 12px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background .1s; user-select: none; }
+.char-item { padding: 9px 12px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background .1s; }
 .char-item:hover { background: var(--bg3); }
 .char-item.active { background: #1e2d5a; border-left: 3px solid var(--accent); }
 .char-item .badges { display: flex; gap: 4px; flex-shrink: 0; }
@@ -188,6 +183,9 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .edit-textarea { background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 6px 8px; font-size: 13px; width: 100%; min-height: 56px; resize: vertical; font-family: inherit; line-height: 1.6; }
 .edit-textarea:focus { outline: none; border-color: #8aabff; }
 .edit-stat-num { width: 100%; background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 2px 6px; font-size: 14px; font-weight: 700; text-align: right; }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
 .edit-stat-num:focus { outline: none; border-color: #8aabff; }
 .edit-stat-num.init { color: var(--text2); font-size: 13px; font-weight: 600; }
 .field-label { font-size: 11px; color: var(--text2); margin: 6px 0 3px; }
@@ -196,6 +194,12 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .hit-num { width: 52px; background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 2px 6px; font-size: 13px; text-align: center; }
 .hit-num:focus { outline: none; border-color: #8aabff; }
 .skill-edit-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+.bunrui-toggles { display: flex; flex-wrap: wrap; gap: 3px; }
+.btog { font-size: 10px; font-weight: 700; padding: 2px 5px; border-radius: 4px; background: var(--bg); border: 1px solid var(--border); color: var(--text2); cursor: pointer; white-space: nowrap; }
+.btog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; }
+.skill-edit-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+.skill-edit-meta > div { display: flex; flex-direction: column; gap: 2px; min-width: 60px; }
+.edit-num-sm { width: 130px; background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 3px 6px; font-size: 13px; text-align: right; }
 
 </style>
 </head>
@@ -206,27 +210,57 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 <div id="layout">
   <div id="sidebar">
     <div id="filters">
-      <input type="text" id="search" placeholder="🔍 魔剣名で検索...">
-      <div class="filter-row">
-        <div class="ms-wrap" id="ms-wrap-rarity">
-          <button class="ms-btn" onclick="toggleMs('rarity')"><span class="ms-label">すべてのレアリティ</span><span class="ms-arrow">▾</span></button>
-          <div class="ms-dropdown" id="ms-dropdown-rarity"></div>
-        </div>
-        <div class="ms-wrap" id="ms-wrap-element">
-          <button class="ms-btn" onclick="toggleMs('element')"><span class="ms-label">すべての属性</span><span class="ms-arrow">▾</span></button>
-          <div class="ms-dropdown" id="ms-dropdown-element"></div>
-        </div>
-      </div>
-      <div class="filter-row">
-        <div class="ms-wrap" id="ms-wrap-type">
-          <button class="ms-btn" onclick="toggleMs('type')"><span class="ms-label">すべての武器種</span><span class="ms-arrow">▾</span></button>
-          <div class="ms-dropdown" id="ms-dropdown-type"></div>
-        </div>
-        <div class="ms-wrap" id="ms-wrap-state">
-          <button class="ms-btn" onclick="toggleMs('state')"><span class="ms-label">すべての状態</span><span class="ms-arrow">▾</span></button>
-          <div class="ms-dropdown" id="ms-dropdown-state"></div>
+      <input type="text" id="search" placeholder="🔍 魔剣名で検索..." oninput="applyFilters()">
+
+      <div class="filter-section">
+        <div class="filter-label">レアリティ</div>
+        <div class="filter-toggles" id="f-rarity">
+          <button class="ftog" data-val="4" onclick="toggleFilter('rarity',4,this)">SS</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('rarity',3,this)">S</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('rarity',2,this)">AA</button>
+          <button class="ftog" data-val="1" onclick="toggleFilter('rarity',1,this)">A</button>
         </div>
       </div>
+
+      <div class="filter-section">
+        <div class="filter-label">属性</div>
+        <div class="filter-toggles" id="f-element">
+          <button class="ftog" data-val="1" onclick="toggleFilter('element',1,this)" style="color:var(--fire)">火</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('element',2,this)" style="color:var(--water)">水</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('element',3,this)" style="color:var(--wind)">風</button>
+          <button class="ftog" data-val="4" onclick="toggleFilter('element',4,this)" style="color:var(--light)">光</button>
+          <button class="ftog" data-val="5" onclick="toggleFilter('element',5,this)" style="color:var(--dark)">闇</button>
+          <button class="ftog" data-val="6" onclick="toggleFilter('element',6,this)" style="color:var(--none)">無</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">武器種</div>
+        <div class="filter-toggles" id="f-type">
+          <button class="ftog" data-val="1"  onclick="toggleFilter('type',1,this)">長剣</button>
+          <button class="ftog" data-val="2"  onclick="toggleFilter('type',2,this)">大剣</button>
+          <button class="ftog" data-val="3"  onclick="toggleFilter('type',3,this)">太刀</button>
+          <button class="ftog" data-val="4"  onclick="toggleFilter('type',4,this)">杖棒</button>
+          <button class="ftog" data-val="5"  onclick="toggleFilter('type',5,this)">弓矢</button>
+          <button class="ftog" data-val="6"  onclick="toggleFilter('type',6,this)">連弩</button>
+          <button class="ftog" data-val="7"  onclick="toggleFilter('type',7,this)">戦斧</button>
+          <button class="ftog" data-val="8"  onclick="toggleFilter('type',8,this)">騎槍</button>
+          <button class="ftog" data-val="9"  onclick="toggleFilter('type',9,this)">投擲</button>
+          <button class="ftog" data-val="10" onclick="toggleFilter('type',10,this)">拳闘</button>
+          <button class="ftog" data-val="11" onclick="toggleFilter('type',11,this)">魔典</button>
+          <button class="ftog" data-val="12" onclick="toggleFilter('type',12,this)">大鎌</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">状態</div>
+        <div class="filter-toggles" id="f-state">
+          <button class="ftog" data-val="極弐" onclick="toggleFilter('state','極弐',this)">極弐</button>
+          <button class="ftog" data-val="改造" onclick="toggleFilter('state','改造',this)">改造</button>
+          <button class="ftog" data-val="通常" onclick="toggleFilter('state','通常',this)">通常</button>
+        </div>
+      </div>
+
       <div class="filter-row">
         <select id="f-sort">
           <option value="">並び替えなし</option>
@@ -243,11 +277,9 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
           <option value="BDコスト">BDコスト</option>
         </select>
         <button id="sort-dir" onclick="toggleSortDir()">↓</button>
+        <button onclick="resetFilters()" style="font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
       </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;">
-        <div id="char-count"></div>
-        <button onclick="resetFilters()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
-      </div>
+      <div id="char-count" style="font-size:11px;color:var(--text2);text-align:right;padding:2px 0 0;"></div>
     </div>
     <div id="char-list"></div>
   </div>
@@ -275,32 +307,33 @@ const BUNRUI_SHORT = {1:'攻',2:'BK',3:'BD攻',4:'转',5:'速',6:'BD值',7:'hit'
 
 function renderRightTags(s) {
   var tags = '';
-  // bunrui tags
-  (s.bunrui || []).forEach(function(b) {
-    tags += '<span class="bunrui-tag">' + (BUNRUI_SHORT[b] || b) + '</span>';
+  (s.effects || []).forEach(function(e) {
+    (e.bunrui || []).forEach(function(b) {
+      tags += '<span class="bunrui-tag">' + (BUNRUI_SHORT[b] || b) + '</span>';
+    });
+    if (e.scope === 0) {
+      tags += '<span class="scope-tag scope-self">自</span>';
+    } else if (e.scope === 1) {
+      tags += '<span class="scope-tag scope-all">全</span>';
+    } else if (e.scope === 2) {
+      var lim = e.element != null ? (ELEMENT[e.element] || e.element) : (e.type != null ? (WEAPON[e.type] || e.type) : '限');
+      tags += '<span class="scope-tag scope-lim">' + lim + '</span>';
+    }
+    if (e.condition === 1) tags += '<span class="cond-tag cond-1">浑身</span>';
+    else if (e.condition === 2) tags += '<span class="cond-tag cond-2">背水</span>';
+    else if (e.condition === 3) tags += '<span class="cond-tag cond-3">破損</span>';
   });
-  // scope tag
-  if (s.scope === 0) {
-    tags += '<span class="scope-tag scope-self">自</span>';
-  } else if (s.scope === 1) {
-    tags += '<span class="scope-tag scope-all">全</span>';
-  } else if (s.scope === 2) {
-    var lim = s.element != null ? (ELEMENT[s.element] || s.element) : (s.type != null ? (WEAPON[s.type] || s.type) : '限');
-    tags += '<span class="scope-tag scope-lim">' + lim + '</span>';
-  }
-  // condition tag
-  if (s.condition === 1) tags += '<span class="cond-tag cond-1">浑身</span>';
-  else if (s.condition === 2) tags += '<span class="cond-tag cond-2">背水</span>';
-  else if (s.condition === 3) tags += '<span class="cond-tag cond-3">破損</span>';
   return '<div class="skill-tags-right">' + tags + '</div>';
 }
 
 function fmtBairitu(s) {
-  if (s.bairitu == null) return '';
-  var b = s.bairitu;
-  var sc = s.bairitu_scaling || 0;
-  var bs = Number.isInteger(b) ? b.toLocaleString('en-US') : String(b);
-  return sc ? bs + ' + ' + sc + ' * 熟度' : bs;
+  return (s.effects || []).map(function(e) {
+    if (e.bairitu == null) return '';
+    var b = e.bairitu;
+    var sc = e.bairitu_scaling || 0;
+    var bs = Number.isInteger(b) ? b.toLocaleString('en-US') : String(parseFloat(b.toFixed(6)));
+    return sc ? bs + ' + ' + sc + ' * 熟度' : bs;
+  }).filter(Boolean).join(' / ');
 }
 
 // ===== STATE =====
@@ -315,7 +348,6 @@ let sortDesc = true;
 function loadFromArray(arr, label) {
   allChars = arr;
   document.getElementById('file-status').textContent = `${label} — ${allChars.length} 件読み込み完了`;
-  buildFilterOptions();
   applyFilters();
 }
 
@@ -357,74 +389,17 @@ document.getElementById('file-input').addEventListener('change', e => {
   reader.readAsText(file, 'utf-8');
 });
 
-// ===== MULTI-SELECT STATE =====
-const msSelected = { rarity: new Set(), element: new Set(), type: new Set(), state: new Set() };
-const MS_PLACEHOLDERS = {
-  rarity: 'すべてのレアリティ', element: 'すべての属性',
-  type:   'すべての武器種',     state:   'すべての状態',
-};
-const MS_LABEL_FNS = {
-  rarity:  v => RARITY[v]  ? `${RARITY[v]}ランク` : v,
-  element: v => ELEMENT[v] || v,
-  type:    v => WEAPON[v]  || v,
-  state:   v => v + 'あり',
-};
+// ===== FILTER STATE =====
+const filterSets = { rarity: new Set(), element: new Set(), type: new Set(), state: new Set() };
 
-function buildMs(key, vals) {
-  const dropdown = document.getElementById('ms-dropdown-' + key);
-  dropdown.innerHTML = vals.map(v => `
-    <label class="ms-option">
-      <input type="checkbox" value="${v}" onchange="msChange('${key}',this)">
-      ${MS_LABEL_FNS[key](v)}
-    </label>`).join('');
-}
-
-function msChange(key, el) {
-  if (el.checked) msSelected[key].add(el.value);
-  else            msSelected[key].delete(el.value);
-  updateMsLabel(key);
+function toggleFilter(key, val, btn) {
+  if (filterSets[key].has(val)) { filterSets[key].delete(val); btn.classList.remove('on'); }
+  else                           { filterSets[key].add(val);    btn.classList.add('on'); }
   applyFilters();
 }
 
-function updateMsLabel(key) {
-  const sel = msSelected[key];
-  const label = document.querySelector(`#ms-wrap-${key} .ms-label`);
-  if (sel.size === 0)       label.textContent = MS_PLACEHOLDERS[key];
-  else if (sel.size <= 2)   label.textContent = [...sel].map(v => MS_LABEL_FNS[key](v)).join(', ');
-  else                      label.textContent = `${sel.size} 選択中`;
-}
-
-function toggleMs(key) {
-  const dropdown = document.getElementById('ms-dropdown-' + key);
-  const btn = document.querySelector(`#ms-wrap-${key} .ms-btn`);
-  const isOpen = dropdown.classList.contains('open');
-  document.querySelectorAll('.ms-dropdown').forEach(d => d.classList.remove('open'));
-  document.querySelectorAll('.ms-btn').forEach(b => b.classList.remove('open'));
-  if (!isOpen) { dropdown.classList.add('open'); btn.classList.add('open'); }
-}
-
-document.addEventListener('click', e => {
-  if (!e.target.closest('.ms-wrap')) {
-    document.querySelectorAll('.ms-dropdown').forEach(d => d.classList.remove('open'));
-    document.querySelectorAll('.ms-btn').forEach(b => b.classList.remove('open'));
-  }
-});
-
-// ===== FILTER OPTIONS =====
-function buildFilterOptions() {
-  const rarities = [...new Set(allChars.map(c => c.rarity).filter(Boolean))].sort((a,b) => b-a);
-  const elements = [...new Set(allChars.map(c => c.element).filter(Boolean))].sort((a,b) => a-b);
-  const types    = [...new Set(allChars.map(c => c.type).filter(Boolean))].sort((a,b) => a-b);
-
-  buildMs('rarity', rarities);
-  buildMs('element', elements);
-  buildMs('type', types);
-  buildMs('state', ['極弐', '改造', '通常']);
-}
-
 // ===== FILTER LOGIC =====
-['search', 'f-sort'].forEach(id => {
-  document.getElementById(id).addEventListener('input', applyFilters);
+['f-sort'].forEach(id => {
   document.getElementById(id).addEventListener('change', applyFilters);
 });
 
@@ -465,15 +440,12 @@ function getSortValue(c, key) {
   return null;
 }
 
-const MS_DEFAULT_LABEL = { rarity: 'すべてのレアリティ', element: 'すべての属性', type: 'すべての武器種', state: 'すべての状態' };
 function resetFilters() {
   document.getElementById('search').value = '';
   document.getElementById('f-sort').value = '';
-  Object.keys(msSelected).forEach(k => {
-    msSelected[k].clear();
-    document.querySelectorAll('#ms-dropdown-' + k + ' input').forEach(cb => { cb.checked = false; });
-    const label = document.querySelector('#ms-wrap-' + k + ' .ms-label');
-    if (label) label.textContent = MS_DEFAULT_LABEL[k] || '';
+  Object.keys(filterSets).forEach(k => {
+    filterSets[k].clear();
+    document.querySelectorAll(`#f-${k} .ftog`).forEach(b => b.classList.remove('on'));
   });
   applyFilters();
 }
@@ -484,10 +456,10 @@ function applyFilters() {
 
   filteredChars = allChars.filter(c => {
     if (q && !c.name.toLowerCase().includes(q)) return false;
-    if (msSelected.rarity.size  && !msSelected.rarity.has(String(c.rarity)))   return false;
-    if (msSelected.element.size && !msSelected.element.has(String(c.element))) return false;
-    if (msSelected.type.size    && !msSelected.type.has(String(c.type)))       return false;
-    if (msSelected.state.size   && ![...msSelected.state].some(s => c.states?.[s])) return false;
+    if (filterSets.rarity.size  && !filterSets.rarity.has(c.rarity))   return false;
+    if (filterSets.element.size && !filterSets.element.has(c.element)) return false;
+    if (filterSets.type.size    && !filterSets.type.has(c.type))       return false;
+    if (filterSets.state.size   && ![...filterSets.state].some(s => c.states?.[s])) return false;
     return true;
   });
 
@@ -639,9 +611,11 @@ function renderStateContent(state, stateLabel) {
 
   // --- Profile ---
   if (state.profile && Object.keys(state.profile).length > 0) {
-    const rows = Object.entries(state.profile).map(([k,v]) =>
-      `<div class="profile-key">${escHtml(k)}</div><div class="profile-val">${escHtml(v)}</div>`
-    ).join('');
+    const rows = Object.entries(state.profile)
+      .filter(([k]) => k !== 'B' && k !== 'W' && k !== 'H')
+      .map(([k,v]) =>
+        `<div class="profile-key">${escHtml(k)}</div><div class="profile-val">${escHtml(v)}</div>`
+      ).join('');
     parts.push(`
       <div class="section">
         <div class="section-title">プロフィール</div>
@@ -718,6 +692,18 @@ let editData   = null;
 let reviseData = {};
 
 // ===== PATH UTILITIES =====
+function getPath(obj, pathStr) {
+  return pathStr.split('.').reduce((cur, k) => (cur == null ? undefined : cur[k]), obj);
+}
+
+function toggleBunrui(path, b, btn) {
+  var arr = (getPath(editData, path + '.bunrui') || []).slice();
+  var idx = arr.indexOf(b);
+  if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
+  else { arr.push(b); arr.sort(function(a,b){return a-b;}); btn.classList.add('on'); }
+  setPath(editData, path + '.bunrui', arr);
+}
+
 function setPath(obj, pathStr, value) {
   const parts = pathStr.split('.');
   let cur = obj;
@@ -857,15 +843,71 @@ function renderEditStateContent(c, lbl) {
 
   // Skills
   if (state.skills?.length) {
-    const cards = state.skills.map((s, i) => `
+    const BUNRUI_ALL = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+    const cards = state.skills.map((s, i) => {
+      const sp = `${p}.skills.${i}`;
+      const effectBlocks = (s.effects || [{}]).map((e, ei) => {
+        const ep = `${sp}.effects.${ei}`;
+        const bunrui = e.bunrui || [];
+        const btogs = BUNRUI_ALL.map(b =>
+          `<button class="btog${bunrui.includes(b)?' on':''}" onclick="toggleBunrui('${ep}',${b},this)">${BUNRUI_SHORT[b]||b}</button>`
+        ).join('');
+        const elemOpts = `<option value=""${e.element==null?' selected':''}>—</option>` +
+          Object.entries(ELEMENT).map(([k,v])=>`<option value="${k}"${e.element==+k?' selected':''}>${v}</option>`).join('');
+        const typeOpts = `<option value=""${e.type==null?' selected':''}>—</option>` +
+          Object.entries(WEAPON).map(([k,v])=>`<option value="${k}"${e.type==+k?' selected':''}>${v}</option>`).join('');
+        return `
+        <div class="field-label">分類</div>
+        <div class="bunrui-toggles">${btogs}</div>
+        <div class="skill-edit-meta">
+          <div>
+            <div class="field-label">scope</div>
+            <select class="edit-select" onchange="setPath(editData,'${ep}.scope',+this.value)">
+              <option value="0"${e.scope===0?' selected':''}>自身</option>
+              <option value="1"${e.scope===1?' selected':''}>全体</option>
+              <option value="2"${e.scope===2?' selected':''}>限定</option>
+            </select>
+          </div>
+          <div>
+            <div class="field-label">condition</div>
+            <select class="edit-select" onchange="setPath(editData,'${ep}.condition',+this.value)">
+              <option value="0"${e.condition===0?' selected':''}>なし</option>
+              <option value="1"${e.condition===1?' selected':''}>浑身</option>
+              <option value="2"${e.condition===2?' selected':''}>背水</option>
+              <option value="3"${e.condition===3?' selected':''}>破損</option>
+            </select>
+          </div>
+          <div>
+            <div class="field-label">element</div>
+            <select class="edit-select" onchange="setPath(editData,'${ep}.element',this.value===''?null:+this.value)">${elemOpts}</select>
+          </div>
+          <div>
+            <div class="field-label">type</div>
+            <select class="edit-select" onchange="setPath(editData,'${ep}.type',this.value===''?null:+this.value)">${typeOpts}</select>
+          </div>
+          <div>
+            <div class="field-label">倍率</div>
+            <input type="number" step="any" class="edit-num-sm" value="${e.bairitu??''}"
+                   oninput="setPath(editData,'${ep}.bairitu',this.value===''?null:Number(this.value))">
+          </div>
+          <div>
+            <div class="field-label">熟度補正</div>
+            <input type="number" step="any" class="edit-num-sm" value="${e.bairitu_scaling??''}"
+                   oninput="setPath(editData,'${ep}.bairitu_scaling',this.value===''?null:Number(this.value))">
+          </div>
+        </div>`;
+      }).join('');
+      return `
       <div class="skill-edit-card">
         <div class="field-label">スキル名</div>
         <input class="edit-input" value="${escHtml(s.name||'')}"
-               oninput="setPath(editData,'${p}.skills.${i}.name',this.value)">
+               oninput="setPath(editData,'${sp}.name',this.value)">
         <div class="field-label">効果</div>
         <textarea class="edit-textarea"
-                  oninput="setPath(editData,'${p}.skills.${i}.effect',this.value)">${escHtml(s.effect||'')}</textarea>
-      </div>`).join('');
+                  oninput="setPath(editData,'${sp}.effect',this.value)">${escHtml(s.effect||'')}</textarea>
+        ${effectBlocks}
+      </div>`;
+    }).join('');
     parts.push(`<div class="section"><div class="section-title">スキル構成 (${state.skills.length})</div><div class="skills-list">${cards}</div></div>`);
   }
 

@@ -21,18 +21,14 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
 #filters { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 10px 0 8px; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; }
 #filters input[type=text] { width: 100%; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; outline: none; }
 #filters input[type=text]:focus { border-color: var(--accent); }
-.filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
-.ms-wrap { position: relative; flex: 1; min-width: 100px; }
-.ms-btn { width: 100%; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 4px; }
-.ms-btn:hover, .ms-btn.open { border-color: var(--accent); }
-.ms-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.ms-arrow { flex-shrink: 0; font-size: 10px; color: var(--text2); }
-.ms-dropdown { display: none; position: absolute; top: calc(100% + 2px); left: 0; right: 0; min-width: 120px; background: var(--bg3); border: 1px solid var(--accent); border-radius: 6px; z-index: 200; max-height: 200px; overflow-y: auto; padding: 4px 0; box-shadow: 0 4px 16px rgba(0,0,0,.6); }
-.ms-dropdown.open { display: block; }
-.ms-option { display: flex; align-items: center; gap: 7px; padding: 5px 10px; cursor: pointer; font-size: 12px; white-space: nowrap; user-select: none; }
-.ms-option:hover { background: var(--bg2); }
-.ms-option input[type=checkbox] { cursor: pointer; accent-color: var(--accent); flex-shrink: 0; }
-#crystal-count { font-size: 12px; color: var(--text2); text-align: right; }
+.filter-section { display: flex; flex-direction: column; gap: 3px; }
+.filter-row2 { display: flex; gap: 10px; align-items: flex-start; }
+.filter-label { font-size: 10px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .06em; }
+.filter-toggles { display: flex; flex-wrap: wrap; gap: 3px; }
+.ftog { font-size: 11px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; transition: all .1s; white-space: nowrap; }
+.ftog:hover { border-color: var(--accent); color: var(--text); }
+.ftog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; font-weight: 700; }
+#crystal-count { font-size: 12px; color: var(--text2); }
 
 #crystal-list { display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto; min-height: 0; padding-bottom: 16px; }
 #crystal-list::-webkit-scrollbar { width: 4px; }
@@ -42,7 +38,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
 .crystal-row { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color .15s; flex-shrink: 0; }
 .crystal-row.expanded { border-color: rgba(91,127,255,.5); }
 
-.crystal-row-hd { display: flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; user-select: none; transition: background .1s; }
+.crystal-row-hd { display: flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; transition: background .1s; }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
 .crystal-row-hd:hover { background: var(--bg3); }
 
 .row-badges { display: flex; gap: 3px; align-items: center; flex-shrink: 0; width: 104px; }
@@ -116,34 +115,90 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
 <script src="nav.js"></script>
 <div id="content">
   <div id="filters">
-    <input type="text" id="search" placeholder="🔍 結晶名で検索...">
-    <div class="filter-row">
-      <div class="ms-wrap" id="ms-wrap-rarity">
-        <button class="ms-btn" onclick="toggleMs('rarity')"><span class="ms-label">すべてのレアリティ</span><span class="ms-arrow">▾</span></button>
-        <div class="ms-dropdown" id="ms-dropdown-rarity"></div>
+    <input type="text" id="search" placeholder="🔍 結晶名で検索..." oninput="applyFilters()">
+
+    <div class="filter-row2">
+      <div class="filter-section">
+        <div class="filter-label">レアリティ</div>
+        <div class="filter-toggles" id="f-rarity">
+          <button class="ftog" data-val="6" onclick="toggleFilter('rarity',6,this)">★6</button>
+          <button class="ftog" data-val="5" onclick="toggleFilter('rarity',5,this)">★5</button>
+          <button class="ftog" data-val="4" onclick="toggleFilter('rarity',4,this)">★4</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('rarity',3,this)">★3</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('rarity',2,this)">★2</button>
+          <button class="ftog" data-val="1" onclick="toggleFilter('rarity',1,this)">★1</button>
+        </div>
       </div>
-      <div class="ms-wrap" id="ms-wrap-bunrui">
-        <button class="ms-btn" onclick="toggleMs('bunrui')"><span class="ms-label">すべてのタイプ</span><span class="ms-arrow">▾</span></button>
-        <div class="ms-dropdown" id="ms-dropdown-bunrui"></div>
+
+      <div class="filter-section">
+        <div class="filter-label">属性</div>
+        <div class="filter-toggles" id="f-element">
+          <button class="ftog" data-val="0" onclick="toggleFilter('element',0,this)">全</button>
+          <button class="ftog" data-val="1" onclick="toggleFilter('element',1,this)" style="color:var(--fire)">火</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('element',2,this)" style="color:var(--water)">水</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('element',3,this)" style="color:var(--wind)">風</button>
+          <button class="ftog" data-val="4" onclick="toggleFilter('element',4,this)" style="color:var(--light)">光</button>
+          <button class="ftog" data-val="5" onclick="toggleFilter('element',5,this)" style="color:var(--dark)">闇</button>
+          <button class="ftog" data-val="6" onclick="toggleFilter('element',6,this)" style="color:var(--none)">無</button>
+        </div>
       </div>
     </div>
-    <div class="filter-row">
-      <div class="ms-wrap" id="ms-wrap-element">
-        <button class="ms-btn" onclick="toggleMs('element')"><span class="ms-label">すべての対象属性</span><span class="ms-arrow">▾</span></button>
-        <div class="ms-dropdown" id="ms-dropdown-element"></div>
-      </div>
-      <div class="ms-wrap" id="ms-wrap-buki_type">
-        <button class="ms-btn" onclick="toggleMs('buki_type')"><span class="ms-label">すべての対象武器種</span><span class="ms-arrow">▾</span></button>
-        <div class="ms-dropdown" id="ms-dropdown-buki_type"></div>
+
+    <div class="filter-section">
+      <div class="filter-label">武器種</div>
+      <div class="filter-toggles" id="f-buki_type">
+        <button class="ftog" data-val="0"  onclick="toggleFilter('buki_type',0,this)">全</button>
+        <button class="ftog" data-val="1"  onclick="toggleFilter('buki_type',1,this)">長剣</button>
+        <button class="ftog" data-val="2"  onclick="toggleFilter('buki_type',2,this)">大剣</button>
+        <button class="ftog" data-val="3"  onclick="toggleFilter('buki_type',3,this)">太刀</button>
+        <button class="ftog" data-val="4"  onclick="toggleFilter('buki_type',4,this)">杖棒</button>
+        <button class="ftog" data-val="5"  onclick="toggleFilter('buki_type',5,this)">弓矢</button>
+        <button class="ftog" data-val="6"  onclick="toggleFilter('buki_type',6,this)">連弩</button>
+        <button class="ftog" data-val="7"  onclick="toggleFilter('buki_type',7,this)">戦斧</button>
+        <button class="ftog" data-val="8"  onclick="toggleFilter('buki_type',8,this)">騎槍</button>
+        <button class="ftog" data-val="9"  onclick="toggleFilter('buki_type',9,this)">投擲</button>
+        <button class="ftog" data-val="10" onclick="toggleFilter('buki_type',10,this)">拳闘</button>
+        <button class="ftog" data-val="11" onclick="toggleFilter('buki_type',11,this)">魔典</button>
+        <button class="ftog" data-val="12" onclick="toggleFilter('buki_type',12,this)">大鎌</button>
       </div>
     </div>
-    <div class="filter-row">
-      <div class="ms-wrap" id="ms-wrap-jyoken">
-        <button class="ms-btn" onclick="toggleMs('jyoken')"><span class="ms-label">すべての条件</span><span class="ms-arrow">▾</span></button>
-        <div class="ms-dropdown" id="ms-dropdown-jyoken"></div>
+
+    <div class="filter-section">
+      <div class="filter-label">タイプ</div>
+      <div class="filter-toggles" id="f-bunrui">
+        <button class="ftog" data-val="1"  onclick="toggleFilter('bunrui',1,this)">攻</button>
+        <button class="ftog" data-val="2"  onclick="toggleFilter('bunrui',2,this)">BK</button>
+        <button class="ftog" data-val="3"  onclick="toggleFilter('bunrui',3,this)">BD攻</button>
+        <button class="ftog" data-val="4"  onclick="toggleFilter('bunrui',4,this)">転</button>
+        <button class="ftog" data-val="5"  onclick="toggleFilter('bunrui',5,this)">速</button>
+        <button class="ftog" data-val="6"  onclick="toggleFilter('bunrui',6,this)">BDゲ</button>
+        <button class="ftog" data-val="7"  onclick="toggleFilter('bunrui',7,this)">hit</button>
+        <button class="ftog" data-val="8"  onclick="toggleFilter('bunrui',8,this)">aoe</button>
+        <button class="ftog" data-val="9"  onclick="toggleFilter('bunrui',9,this)">異常</button>
+        <button class="ftog" data-val="10" onclick="toggleFilter('bunrui',10,this)">HP</button>
+        <button class="ftog" data-val="11" onclick="toggleFilter('bunrui',11,this)">回復</button>
+        <button class="ftog" data-val="12" onclick="toggleFilter('bunrui',12,this)">防</button>
+        <button class="ftog" data-val="13" onclick="toggleFilter('bunrui',13,this)">軽</button>
+        <button class="ftog" data-val="14" onclick="toggleFilter('bunrui',14,this)">蓝</button>
+        <button class="ftog" data-val="15" onclick="toggleFilter('bunrui',15,this)">紅</button>
+        <button class="ftog" data-val="16" onclick="toggleFilter('bunrui',16,this)">他</button>
+        <button class="ftog" data-val="17" onclick="toggleFilter('bunrui',17,this)">限</button>
+        <button class="ftog" data-val="18" onclick="toggleFilter('bunrui',18,this)">BDlv</button>
+        <button class="ftog" data-val="19" onclick="toggleFilter('bunrui',19,this)">枠</button>
+        <button class="ftog" data-val="20" onclick="toggleFilter('bunrui',20,this)">EXP</button>
       </div>
     </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;">
+
+    <div class="filter-section">
+      <div class="filter-label">条件</div>
+      <div class="filter-toggles" id="f-jyoken">
+        <button class="ftog" data-val="0" onclick="toggleFilter('jyoken',0,this)">制限なし</button>
+        <button class="ftog" data-val="1" onclick="toggleFilter('jyoken',1,this)">キャラ限</button>
+        <button class="ftog" data-val="2" onclick="toggleFilter('jyoken',2,this)">対象限</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:2px;">
       <div id="crystal-count"></div>
       <button onclick="resetFilters()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
     </div>
@@ -176,7 +231,6 @@ let editData = null;
 function loadFromArray(arr, label) {
   allCrystals = arr;
   document.getElementById('file-status').textContent = label + ' — ' + arr.length + ' 件読み込み完了';
-  buildFilterOptions();
   applyFilters();
 }
 
@@ -208,84 +262,20 @@ document.getElementById('file-input').addEventListener('change', function(e) {
   reader.readAsText(file, 'utf-8');
 });
 
-// ===== MULTI-SELECT =====
-const msSelected = { rarity: new Set(), bunrui: new Set(), element: new Set(), buki_type: new Set(), jyoken: new Set() };
-const MS_PLACEHOLDERS = {
-  rarity: 'すべてのレアリティ', bunrui: 'すべてのタイプ',
-  element: 'すべての対象属性', buki_type: 'すべての対象武器種', jyoken: 'すべての条件'
-};
+// ===== FILTER STATE =====
+var filterSets = { rarity: new Set(), bunrui: new Set(), element: new Set(), buki_type: new Set(), jyoken: new Set() };
 
-function msLabelFor(key, v) {
-  if (key === 'rarity')    return '★' + v;
-  if (key === 'bunrui')    return BUNRUI[v] || v;
-  if (key === 'element')   return ELEMENT[v] || v;
-  if (key === 'buki_type') return v == 0 ? '全武器種' : (WEAPON[v] || v);
-  if (key === 'jyoken')    return JYOKEN[v] || v;
-  return v;
-}
-
-function buildMs(key, vals) {
-  document.getElementById('ms-dropdown-' + key).innerHTML = vals.map(function(v) {
-    return '<label class="ms-option"><input type="checkbox" value="' + v + '" onchange="msChange(\'' + key + '\',this)"> ' + msLabelFor(key, v) + '</label>';
-  }).join('');
-}
-
-function msChange(key, el) {
-  if (el.checked) msSelected[key].add(el.value);
-  else            msSelected[key].delete(el.value);
-  updateMsLabel(key);
+function toggleFilter(key, val, btn) {
+  if (filterSets[key].has(val)) { filterSets[key].delete(val); btn.classList.remove('on'); }
+  else                           { filterSets[key].add(val);    btn.classList.add('on'); }
   applyFilters();
 }
 
-function updateMsLabel(key) {
-  var sel = msSelected[key];
-  var label = document.querySelector('#ms-wrap-' + key + ' .ms-label');
-  if (sel.size === 0)     label.textContent = MS_PLACEHOLDERS[key];
-  else if (sel.size <= 2) label.textContent = Array.from(sel).map(function(v) { return msLabelFor(key, v); }).join(', ');
-  else                    label.textContent = sel.size + ' 選択中';
-}
-
-function toggleMs(key) {
-  var dd  = document.getElementById('ms-dropdown-' + key);
-  var btn = document.querySelector('#ms-wrap-' + key + ' .ms-btn');
-  var open = dd.classList.contains('open');
-  document.querySelectorAll('.ms-dropdown').forEach(function(d) { d.classList.remove('open'); });
-  document.querySelectorAll('.ms-btn').forEach(function(b) { b.classList.remove('open'); });
-  if (!open) { dd.classList.add('open'); btn.classList.add('open'); }
-}
-
-document.addEventListener('click', function(e) {
-  if (!e.target.closest('.ms-wrap')) {
-    document.querySelectorAll('.ms-dropdown').forEach(function(d) { d.classList.remove('open'); });
-    document.querySelectorAll('.ms-btn').forEach(function(b) { b.classList.remove('open'); });
-  }
-});
-
-// ===== FILTER OPTIONS =====
-function buildFilterOptions() {
-  var rarities   = Array.from(new Set(allCrystals.map(function(c) { return c.rarity; }).filter(function(v) { return v != null; }))).sort(function(a,b) { return b-a; });
-  var elements   = Array.from(new Set(allCrystals.map(function(c) { return c.element; }).filter(function(v) { return v != null; }))).sort(function(a,b) { return a-b; });
-  var buki_types = Array.from(new Set(allCrystals.map(function(c) { return c.buki_type; }).filter(function(v) { return v != null; }))).sort(function(a,b) { return a-b; });
-  var bunruis    = Array.from(new Set(allCrystals.reduce(function(acc, c) { return acc.concat(c.bunrui || []); }, []))).sort(function(a,b) { return a-b; });
-  var jyokens    = Array.from(new Set(allCrystals.map(function(c) { return c.jyoken; }).filter(function(v) { return v != null; }))).sort(function(a,b) { return a-b; });
-  buildMs('rarity', rarities);
-  buildMs('element', elements);
-  buildMs('buki_type', buki_types);
-  buildMs('bunrui', bunruis);
-  buildMs('jyoken', jyokens);
-}
-
-// ===== FILTER =====
-document.getElementById('search').addEventListener('input', applyFilters);
-
-var MS_DEFAULT_LABEL = { rarity: 'すべてのレアリティ', bunrui: 'すべてのタイプ', element: 'すべての対象属性', buki_type: 'すべての対象武器種', jyoken: 'すべての条件' };
 function resetFilters() {
   document.getElementById('search').value = '';
-  Object.keys(msSelected).forEach(function(k) {
-    msSelected[k].clear();
-    document.querySelectorAll('#ms-dropdown-' + k + ' input').forEach(function(cb) { cb.checked = false; });
-    var label = document.querySelector('#ms-wrap-' + k + ' .ms-label');
-    if (label) label.textContent = MS_DEFAULT_LABEL[k] || '';
+  Object.keys(filterSets).forEach(function(k) {
+    filterSets[k].clear();
+    document.querySelectorAll('#f-' + k + ' .ftog').forEach(function(b) { b.classList.remove('on'); });
   });
   applyFilters();
 }
@@ -294,11 +284,11 @@ function applyFilters() {
   var q = document.getElementById('search').value.trim().toLowerCase();
   filteredCrystals = allCrystals.filter(function(c) {
     if (q && c.name.toLowerCase().indexOf(q) === -1) return false;
-    if (msSelected.rarity.size    && !msSelected.rarity.has(String(c.rarity)))       return false;
-    if (msSelected.element.size   && !msSelected.element.has(String(c.element)))      return false;
-    if (msSelected.buki_type.size && !msSelected.buki_type.has(String(c.buki_type)))  return false;
-    if (msSelected.bunrui.size    && !Array.from(msSelected.bunrui).some(function(v) { return (c.bunrui || []).indexOf(Number(v)) !== -1; })) return false;
-    if (msSelected.jyoken.size    && !msSelected.jyoken.has(String(c.jyoken)))        return false;
+    if (filterSets.rarity.size    && !filterSets.rarity.has(c.rarity))     return false;
+    if (filterSets.element.size   && !filterSets.element.has(c.element))   return false;
+    if (filterSets.buki_type.size && !filterSets.buki_type.has(c.buki_type)) return false;
+    if (filterSets.bunrui.size    && !Array.from(filterSets.bunrui).some(function(v) { return (c.effects || []).some(function(e) { return (e.bunrui || []).indexOf(v) !== -1; }); })) return false;
+    if (filterSets.jyoken.size    && !(c.effects || []).some(function(e) { return filterSets.jyoken.has(e.jyoken); })) return false;
     return true;
   });
   document.getElementById('crystal-count').textContent = filteredCrystals.length + ' 件';
@@ -319,7 +309,7 @@ function renderRow(c) {
   var rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
   var eb = c.element ? '<span class="badge elem-' + c.element + '">' + (ELEMENT[c.element] || c.element) + '</span>' : '';
   var wb = c.buki_type ? '<span class="badge weapon">' + (WEAPON[c.buki_type] || c.buki_type) + '</span>' : '';
-  var bt = (c.bunrui || []).slice(0, 2).map(function(b) {
+  var bt = (c.effects || []).reduce(function(acc, e) { return acc.concat(e.bunrui || []); }, []).slice(0, 2).map(function(b) {
     return '<span class="badge bunrui-sm">' + (BUNRUI[b] || b) + '</span>';
   }).join('');
   return '<div class="crystal-row" id="row-' + c.id + '">' +
@@ -355,23 +345,23 @@ function toggleExpand(id) {
 // ===== DETAIL BODY =====
 function renderDetailBody(c) {
   var fields = [];
-  if (c['効果'])    fields.push(['効果',    escHtml(c['効果'])]);
-  if (c['効果量']) {
-    var hasUnit = c['効果量'].indexOf('倍') !== -1;
-    var unit    = hasUnit ? '倍' : '';
-    var mn      = fmt(c.effect_min);
-    var mx      = fmt(c.effect_max);
-    var range;
-    if (c.effect_min != null && c.effect_max != null && c.effect_min !== c.effect_max) {
-      range = '<span class="effect-range">' + mn + '<span class="sep">～</span>' + mx + '<span class="unit">' + unit + '</span></span>';
-    } else {
-      range = '<span class="effect-range">' + (mn || mx) + '<span class="unit">' + unit + '</span></span>';
+  if (c['効果'])     fields.push(['効果',    escHtml(c['効果'])]);
+  (c.effects || []).forEach(function(e) {
+    if (e.effect_min != null || e.effect_max != null) {
+      var unit = (c['効果量'] || '').indexOf('倍') !== -1 ? '倍' : '';
+      var mn = e.effect_min, mx = e.effect_max;
+      var range;
+      if (mn != null && mx != null && mn !== mx) {
+        range = '<span class="effect-range">' + fmt(mn) + '<span class="sep">～</span>' + fmt(mx) + '<span class="unit">' + unit + '</span></span>';
+      } else {
+        range = '<span class="effect-range">' + fmt(mn != null ? mn : mx) + '<span class="unit">' + unit + '</span></span>';
+      }
+      fields.push(['効果量', range]);
     }
-    fields.push(['効果量', range + ' <span style="color:var(--text2);font-size:11px">(' + escHtml(c['効果量']) + ')</span>']);
-  }
+  });
   if (c['特殊条件']) fields.push(['特殊条件', escHtml(c['特殊条件']) + ' <span style="color:var(--text2)">のみ</span>']);
-  if (c['対象'])    fields.push(['対象',    escHtml(c['対象'])]);
-  if (c['上限値'])  fields.push(['上限値',  escHtml(c['上限値'])]);
+  if (c['対象'])     fields.push(['対象',    escHtml(c['対象'])]);
+  if (c['上限値'])   fields.push(['上限値',  escHtml(c['上限値'])]);
   if (c['入手方法']) fields.push(['入手方法', escHtml(c['入手方法'])]);
 
   var rows = fields.map(function(pair) {
@@ -434,7 +424,7 @@ function saveEdit() {
     var rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
     var eb = c.element   ? '<span class="badge elem-' + c.element + '">' + (ELEMENT[c.element] || c.element) + '</span>' : '';
     var wb = c.buki_type ? '<span class="badge weapon">' + (WEAPON[c.buki_type] || c.buki_type) + '</span>' : '';
-    var bt = (c.bunrui || []).slice(0, 2).map(function(b) { return '<span class="badge bunrui-sm">' + (BUNRUI[b] || b) + '</span>'; }).join('');
+    var bt = (c.effects || []).reduce(function(acc, e) { return acc.concat(e.bunrui || []); }, []).slice(0, 2).map(function(b) { return '<span class="badge bunrui-sm">' + (BUNRUI[b] || b) + '</span>'; }).join('');
     row.querySelector('.row-badges').innerHTML = rb + eb + wb;
     row.querySelector('.row-name').textContent = c.name;
     row.querySelector('.row-bunrui').innerHTML = bt;
@@ -450,17 +440,19 @@ function saveEdit() {
 function editBunrui(el) {
   var val = Number(el.value);
   if (!editData) return;
+  if (!editData.effects) editData.effects = [{}];
+  if (!editData.effects[0].bunrui) editData.effects[0].bunrui = [];
   if (el.checked) {
-    if (!editData.bunrui) editData.bunrui = [];
-    if (editData.bunrui.indexOf(val) === -1) editData.bunrui.push(val);
+    if (editData.effects[0].bunrui.indexOf(val) === -1) editData.effects[0].bunrui.push(val);
   } else {
-    editData.bunrui = (editData.bunrui || []).filter(function(v) { return v !== val; });
+    editData.effects[0].bunrui = editData.effects[0].bunrui.filter(function(v) { return v !== val; });
   }
 }
 
 function renderEditBody(c) {
+  var e0 = (c.effects && c.effects[0]) || {};
   var bunruiChecks = Object.keys(BUNRUI).map(function(k) {
-    var checked = (c.bunrui && c.bunrui.indexOf(Number(k)) !== -1) ? 'checked' : '';
+    var checked = (e0.bunrui && e0.bunrui.indexOf(Number(k)) !== -1) ? 'checked' : '';
     return '<label class="bunrui-check"><input type="checkbox" value="' + k + '" ' + checked + ' onchange="editBunrui(this)"> ' + BUNRUI[k] + '</label>';
   }).join('');
 
@@ -472,15 +464,15 @@ function renderEditBody(c) {
       return '<option value="' + k + '"' + (c.buki_type == k ? ' selected' : '') + '>' + WEAPON[k] + '</option>';
     }).join('');
 
-  var textFields = ['効果', '効果量', '特殊条件', '対象', '上限値', '入手方法'];
-  var textInputs = textFields.map(function(k) {
-    var val = escHtml(c[k] || '');
-    var isLong = k === '効果' || k === '入手方法';
-    var input = isLong
-      ? '<textarea class="edit-textarea" oninput="editData[\'' + k + '\']=this.value">' + val + '</textarea>'
-      : '<input class="edit-input" style="width:100%" value="' + val + '" oninput="editData[\'' + k + '\']=this.value">';
-    return '<div class="field-label">' + k + '</div>' + input;
-  }).join('');
+  var unit = (c['効果量'] || '').indexOf('倍') !== -1 ? '倍' : '';
+  var minMax =
+    '<div class="field-label">効果量</div>' +
+    '<div style="display:flex;align-items:center;gap:8px">' +
+      '<input type="number" step="any" class="edit-input" style="width:110px;text-align:right" value="' + (e0.effect_min != null ? e0.effect_min : '') + '" oninput="if(!editData.effects)editData.effects=[{}];editData.effects[0].effect_min=this.value===\'\'?null:Number(this.value)">' +
+      '<span style="color:var(--text2)">～</span>' +
+      '<input type="number" step="any" class="edit-input" style="width:110px;text-align:right" value="' + (e0.effect_max != null ? e0.effect_max : '') + '" oninput="if(!editData.effects)editData.effects=[{}];editData.effects[0].effect_max=this.value===\'\'?null:Number(this.value)">' +
+      (unit ? '<span style="color:var(--text2);font-size:12px">' + unit + '</span>' : '') +
+    '</div>';
 
   return '<div class="edit-actions">' +
       '<button class="btn-save" onclick="saveEdit()">保存</button>' +
@@ -489,13 +481,13 @@ function renderEditBody(c) {
     '<div class="edit-meta">' +
       '<input class="edit-input stretch" value="' + escHtml(c.name) + '" oninput="editData.name=this.value">' +
       '<label style="font-size:11px;color:var(--text2);display:flex;align-items:center;gap:4px">★' +
-        '<input type="number" class="edit-input" style="width:40px" value="' + (c.rarity || '') + '" min="1" max="6" oninput="editData.rarity=this.value===\'\'?null:Number(this.value)">' +
+        '<input type="number" class="edit-input" style="width:56px;text-align:right" value="' + (c.rarity || '') + '" min="1" max="6" oninput="editData.rarity=this.value===\'\'?null:Number(this.value)">' +
       '</label>' +
       '<select class="edit-select" onchange="editData.element=Number(this.value)">' + elemOpts + '</select>' +
       '<select class="edit-select" onchange="editData.buki_type=Number(this.value)">' + weapOpts + '</select>' +
     '</div>' +
     '<div class="bunrui-checks">' + bunruiChecks + '</div>' +
-    textInputs;
+    minMax;
 }
 
 // ===== REVISE BAR =====
