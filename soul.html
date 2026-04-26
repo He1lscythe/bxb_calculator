@@ -101,9 +101,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .skill-bairitu { flex-shrink: 0; font-size: 12px; color: var(--text2); white-space: nowrap; padding-top: 2px; }
 .bunrui-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; background: rgba(91,127,255,.18); color: #7b9fff; border: 1px solid rgba(91,127,255,.35); white-space: nowrap; }
 .scope-tag  { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; white-space: nowrap; }
-.scope-self { background: rgba(120,120,120,.18); color: #999; border: 1px solid rgba(120,120,120,.3); }
-.scope-all  { background: rgba(60,180,100,.18); color: #4cbb6e; border: 1px solid rgba(60,180,100,.35); }
-.scope-lim  { background: rgba(255,180,40,.18); color: #ffb828; border: 1px solid rgba(255,180,40,.35); }
+.scope-self     { background: rgba(120,120,120,.18); color: #999;    border: 1px solid rgba(120,120,120,.3); }
+.scope-all      { background: rgba(60,180,100,.18);  color: #4cbb6e; border: 1px solid rgba(60,180,100,.35); }
+.scope-lim      { background: rgba(255,180,40,.18);  color: #ffb828; border: 1px solid rgba(255,180,40,.35); }
+.scope-equip-s  { background: rgba(255,120,60,.18);  color: #ff8844; border: 1px solid rgba(255,120,60,.35); }
+.scope-equip-a  { background: rgba(255,200,80,.18);  color: #ffc830; border: 1px solid rgba(255,200,80,.35); }
 .cond-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; white-space: nowrap; }
 .cond-1 { background: rgba(255,200,40,.18); color: #ffd040; border: 1px solid rgba(255,200,40,.35); }
 .cond-2 { background: rgba(255,80,80,.18);  color: #ff6060; border: 1px solid rgba(255,80,80,.35); }
@@ -469,6 +471,16 @@ function renderSkillsView(skills) {
 }
 
 // ===== SKILL TAG HELPERS =====
+function fmtElem(v) {
+  if (v == null) return null;
+  var ids = Array.isArray(v) ? v : [v];
+  return ids.map(function(id){ return ELEMENT[id] || id; }).join('/');
+}
+function fmtType(v) {
+  if (v == null) return null;
+  var ids = Array.isArray(v) ? v : [v];
+  return ids.map(function(id){ return WEAPON[id] || id; }).join('/');
+}
 function renderRightTags(sk) {
   var tags = '';
   (sk.effects || []).forEach(function(e) {
@@ -478,8 +490,20 @@ function renderRightTags(sk) {
     if      (e.scope === 0) tags += '<span class="scope-tag scope-self">自</span>';
     else if (e.scope === 1) tags += '<span class="scope-tag scope-all">全</span>';
     else if (e.scope === 2) {
-      var lim = e.element != null ? (ELEMENT[e.element]||e.element) : (e.type != null ? (WEAPON[e.type]||e.type) : '限');
-      tags += '<span class="scope-tag scope-lim">' + lim + '</span>';
+      var parts = [];
+      var el = fmtElem(e.element); if (el) parts.push(el);
+      var ty = fmtType(e.type);   if (ty) parts.push(ty);
+      tags += '<span class="scope-tag scope-lim">' + (parts.join('·') || '限') + '</span>';
+    } else if (e.scope === 3) {
+      var parts = [];
+      var el = fmtElem(e.element); if (el) parts.push(el);
+      var ty = fmtType(e.type);   if (ty) parts.push(ty);
+      tags += '<span class="scope-tag scope-equip-s">' + (parts.join('·') || '装') + '·自</span>';
+    } else if (e.scope === 4) {
+      var parts = [];
+      var el = fmtElem(e.element); if (el) parts.push(el);
+      var ty = fmtType(e.type);   if (ty) parts.push(ty);
+      tags += '<span class="scope-tag scope-equip-a">' + (parts.join('·') || '装') + '·全</span>';
     }
     if      (e.condition === 1) tags += '<span class="cond-tag cond-1">浑身</span>';
     else if (e.condition === 2) tags += '<span class="cond-tag cond-2">背水</span>';
@@ -514,9 +538,29 @@ function setPath(obj, pathStr, value) {
 function toggleBunrui(path, b, btn) {
   var arr = (getPath(editData, path + '.bunrui') || []).slice();
   var idx = arr.indexOf(b);
-  if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
-  else          { arr.push(b); arr.sort((a,b)=>a-b); btn.classList.add('on'); }
+  if (idx >= 0) {
+    if (arr.length <= 1) return; // must keep at least one
+    arr.splice(idx, 1); btn.classList.remove('on');
+  } else {
+    arr.push(b); arr.sort((a,b)=>a-b); btn.classList.add('on');
+  }
   setPath(editData, path + '.bunrui', arr);
+}
+function toggleElem(path, id, btn) {
+  var v   = getPath(editData, path + '.element');
+  var arr = v == null ? [] : (Array.isArray(v) ? v.slice() : [v]);
+  var idx = arr.indexOf(id);
+  if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
+  else          { arr.push(id); arr.sort((a,b)=>a-b); btn.classList.add('on'); }
+  setPath(editData, path + '.element', arr.length === 0 ? null : (arr.length === 1 ? arr[0] : arr));
+}
+function toggleType(path, id, btn) {
+  var v   = getPath(editData, path + '.type');
+  var arr = v == null ? [] : (Array.isArray(v) ? v.slice() : [v]);
+  var idx = arr.indexOf(id);
+  if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
+  else          { arr.push(id); arr.sort((a,b)=>a-b); btn.classList.add('on'); }
+  setPath(editData, path + '.type', arr.length === 0 ? null : (arr.length === 1 ? arr[0] : arr));
 }
 
 // ===== EDIT MODE =====
@@ -640,20 +684,29 @@ function renderEditSkillsSection(s) {
       const btogs  = BUNRUI_ALL.map(b =>
         `<button class="btog${bunrui.includes(b)?' on':''}" onclick="toggleBunrui('${ep}',${b},this)">${BUNRUI_SHORT[b]||b}</button>`
       ).join('');
-      const elemOpts = `<option value=""${e.element==null?' selected':''}>—</option>` +
-        Object.entries(ELEMENT).map(([k,v])=>`<option value="${k}"${e.element==+k?' selected':''}>${v}</option>`).join('');
-      const typeOpts = `<option value=""${e.type==null?' selected':''}>—</option>` +
-        Object.entries(WEAPON).map(([k,v])=>`<option value="${k}"${e.type==+k?' selected':''}>${v}</option>`).join('');
+      const selElems = e.element == null ? [] : (Array.isArray(e.element) ? e.element : [e.element]);
+      const elemTogs = Object.entries(ELEMENT).map(([k,v]) =>
+        `<button class="btog${selElems.includes(+k)?' on':''}" onclick="toggleElem('${ep}',${k},this)">${v}</button>`
+      ).join('');
+      const selTypes = e.type == null ? [] : (Array.isArray(e.type) ? e.type : [e.type]);
+      const typeTogs = Object.entries(WEAPON).map(([k,v]) =>
+        `<button class="btog${selTypes.includes(+k)?' on':''}" onclick="toggleType('${ep}',${k},this)">${v}</button>`
+      ).join('');
       return `
         <div class="field-label">分類</div>
         <div class="bunrui-toggles">${btogs}</div>
+        <div class="field-label">属性条件 <span style="color:var(--text2);font-weight:400">(複数可、不選択=なし)</span></div>
+        <div class="bunrui-toggles">${elemTogs}</div>
+        <div class="field-label">武器条件 <span style="color:var(--text2);font-weight:400">(複数可、不選択=なし)</span></div>
+        <div class="bunrui-toggles">${typeTogs}</div>
         <div class="skill-edit-meta">
           <div>
             <div class="field-label">scope</div>
             <select class="edit-select" onchange="setPath(editData,'${ep}.scope',+this.value)">
               <option value="0"${e.scope===0?' selected':''}>自身</option>
               <option value="1"${e.scope===1?' selected':''}>全体</option>
-              <option value="2"${e.scope===2?' selected':''}>限定</option>
+              <option value="3"${e.scope===3?' selected':''}>装備→自</option>
+              <option value="4"${e.scope===4?' selected':''}>装備→全</option>
             </select>
           </div>
           <div>
@@ -666,14 +719,6 @@ function renderEditSkillsSection(s) {
             </select>
           </div>
           <div>
-            <div class="field-label">element</div>
-            <select class="edit-select" onchange="setPath(editData,'${ep}.element',this.value===''?null:+this.value)">${elemOpts}</select>
-          </div>
-          <div>
-            <div class="field-label">type</div>
-            <select class="edit-select" onchange="setPath(editData,'${ep}.type',this.value===''?null:+this.value)">${typeOpts}</select>
-          </div>
-          <div>
             <div class="field-label">倍率</div>
             <input type="number" step="any" class="edit-num-sm" value="${e.bairitu!=null?e.bairitu:''}"
                    oninput="setPath(editData,'${ep}.bairitu',this.value===''?null:+this.value)">
@@ -683,11 +728,9 @@ function renderEditSkillsSection(s) {
     return `
       <div class="skill-edit-card">
         <div class="field-label">スキル名</div>
-        <input class="edit-input" value="${escHtml(sk.name||'')}"
-               oninput="setPath(editData,'${sp}.name',this.value)">
+        <div style="font-size:13px;color:var(--accent);font-weight:600;padding:4px 0 6px">${escHtml(sk.name||'')}</div>
         <div class="field-label">効果</div>
-        <textarea class="edit-textarea"
-                  oninput="setPath(editData,'${sp}.effect',this.value)">${escHtml(sk.effect||'')}</textarea>
+        <div style="font-size:13px;line-height:1.6;padding:4px 0 6px;color:var(--text)">${escHtml(sk.effect||'')}</div>
         ${effectBlocks}
       </div>`;
   }).join('');
