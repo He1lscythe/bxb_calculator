@@ -84,6 +84,16 @@ def parse_right_col(td):
     return result
 
 
+def compute_scope(elem, buki, effect_text, tokushu):
+    if tokushu:
+        return 5
+    if '同装備セット' in (effect_text or ''):
+        return 2
+    if elem or buki:
+        return 3
+    return 0
+
+
 def parse_row(row):
     raw = htmlmod.unescape(row.get('data-contents', '{}'))
     try:
@@ -98,23 +108,29 @@ def parse_row(row):
     emin, emax = parse_effect_amount(fields.get('効果量', ''))
 
     bunrui_list = d.get('bunrui', [])
-    jyoken      = d.get('jyoken')
-    effect_ent  = {'bunrui': bunrui_list, 'jyoken': jyoken,
-                   'calc_type': crystal_calc_type(bunrui_list)}
-    if emin is not None:
-        effect_ent['effect_min'] = emin
-    if emax is not None:
-        effect_ent['effect_max'] = emax
-    if d.get('or'):
-        effect_ent['or'] = True
+    elem        = d.get('element') or 0
+    buki        = d.get('buki_type') or 0
+    tokushu     = fields.get('特殊条件', '')
+    effect_text = fields.get('効果', '')
+    scope       = compute_scope(elem, buki, effect_text, tokushu)
+
+    effect_ent = {'bunrui': bunrui_list}
+    effect_ent['scope'] = scope
+    if scope == 3:
+        if elem: effect_ent['element'] = elem
+        if buki: effect_ent['type']    = buki
+    elif scope == 5:
+        if tokushu: effect_ent['name'] = tokushu
+    if emin is not None: effect_ent['effect_min'] = emin
+    if emax is not None: effect_ent['effect_max'] = emax
+    if d.get('or'):      effect_ent['or'] = True
+    effect_ent['calc_type'] = crystal_calc_type(bunrui_list)
 
     crystal = {
-        'id':        d.get('id'),
-        'name':      d.get('name', ''),
-        'kana':      d.get('kana', ''),
-        'rarity':    d.get('rea'),
-        'element':   d.get('element'),
-        'buki_type': d.get('buki_type'),
+        'id':     d.get('id'),
+        'name':   d.get('name', ''),
+        'kana':   d.get('kana', ''),
+        'rarity': d.get('rea'),
     }
     for k in ['効果', '効果量', '特殊条件', '対象', '上限値', '入手方法']:
         v = fields.get(k)

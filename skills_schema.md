@@ -2,6 +2,78 @@
 
 ---
 
+## crystals.json — 記憶結晶データ
+
+```json
+[
+  {
+    "id":       int,      // 結晶唯一ID（同时用于图片URL）
+    "name":     string,   // 結晶名称
+    "rarity":   int,      // 稀有度: 1–6
+    "効果":     string,   // 効果原文
+    "効果量":   string?,  // 効果量テキスト（例 "1.13～5倍"）
+    "特殊条件": string?,  // キャラ限定条件文（如有，同 effects[0].name）
+    "対象":     string?,  // 効果対象テキスト（例 "火のみ"、"光の騎槍のみ"）
+    "上限値":   string?,  // 効果上限ランク
+    "入手方法": string?,  // 入手途径
+    "effects": [
+      {
+        "bunrui":      int[],   // 效果分类（见 bunrui 表；可多个，OR条件时亦同列表）
+        "scope":       int,     // 见 scope 统一对照表（0/2/3/5）
+        "element":     int?,    // scope=3 且属性限定时存在（int，见 element 表）
+        "type":        int?,    // scope=3 且武器限定时存在（int，见 type 表）
+        "name":        string?, // scope=5 时存在，值与顶层 特殊条件 相同
+        "effect_min":  float?,  // 最小效果量
+        "effect_max":  float?,  // 最大效果量
+        "or":          true?,   // 存在时表示 bunrui 为 OR 关系（如攻撃力UPor速度UP）
+        "calc_type":   0|1      // 倍率计算方式
+      }
+    ]
+  }
+]
+```
+
+> 图片URL：`https://img.altema.jp/bxb/kioku_kessyou/icon/{id}.jpg`
+>
+> **scope 推断规则**：① `特殊条件` 非空 → scope=5 ② 効果文に `同装備セット` → scope=2 ③ `element` 或 `buki_type` 非0 → scope=3 ④ 其余 → scope=0
+
+---
+
+## bladegraph.json — 心象結晶データ
+
+```json
+[
+  {
+    "id":          int,      // 心象結晶唯一ID
+    "name":        string,   // 名称
+    "rarity":      int,      // 稀有度: 1–5
+    "time_start":  string?,  // 时间限定开始（如 "20:00"；无时间条件则不存在）
+    "time_end":    string?,  // 时间限定结束（如 "23:00"）
+    "acquisition": string,   // 入手途径
+    "illustrator": string?,  // イラスト担当（如有）
+    "effect":      string,   // 効果原文（含限定标记，如【辰王ヒメミズチのみ】）
+    "effects": [
+      {
+        "bunrui":    int[],   // 效果分类（单元素列表，每条 effects 对应一个 bunrui）
+        "scope":     int,     // 见 scope 对照表（0/3/5）
+        "condition": int,     // 发动条件: 0=无条件 1=浑身 2=背水
+        "bairitu":   float,   // 倍率（如 25%UP → 1.25）
+        "calc_type": 0|1,     // 倍率计算方式（心象結晶均为 0 乘算）
+        "element":   int?,    // scope=3 且属性限定时存在（int，见 element 对照表）
+        "type":      int?,    // scope=3 且武器限定时存在（int，见 type 对照表；0=全武器）
+        "name":      string?  // scope=5 时存在，值为限定魔剣名
+      }
+    ]
+  }
+]
+```
+
+> 图片URL：`https://img.altema.jp/bxb/blade_graph/icon/{id}.jpg`
+>
+> **effects 拆分规则**：效果文以 ` & ` 分段；每段匹配到的每个 bunrui 各生成一条 effects 条目。双效果（如「サファイア量とモーション速度が30%UP」）拆为两条，各持相同 bairitu。
+
+---
+
 ## souls.json — 魂データ（含技能分类）
 
 ```json
@@ -10,7 +82,7 @@
     "id":        int,      // 魂唯一ID（同时用于图片URL）
     "name":      string,   // 魂名称
     "kana":      string,   // 读音，用于搜索
-    "stars":     int,      // 星级 1–5
+    "rarity":    int,      // 星级 1–5
     "max_level": int,      // 最大等级
     "url":       string,   // altema wiki页面URL
     "image":     string,   // banner图片URL (https://img.altema.jp/bxb/soul/banner/{id}.jpg)
@@ -130,26 +202,24 @@
 
 ---
 
-## scope 范围对照表
+## scope 范围对照表（统一）
 
-魔剣技能（`characters_classified.json`）：
+所有数据（魔剣技能 / 魂技能 / 記憶結晶 / 心象結晶）共用同一套 scope 编码，含义相同：
 
-| scope | 含义 | element | type |
-|-------|------|---------|------|
-| 0 | 自身のみ（无条件） | 无 | 无 |
-| 1 | 味方全体（无条件） | 无 | 无 |
-| 2 | 限定全体（属性/武器种限定） | 属性限定时存在，多属性为数组 | 武器种限定时存在，多武器为数组 |
+| scope | 含义 | element | type | name | 适用数据 |
+|-------|------|---------|------|------|---------|
+| 0 | 全体 / 制限なし | 无 | 无 | 无 | 全て |
+| 1 | 自分のみ（装備キャラ自身） | 无 | 无 | 无 | characters, souls |
+| 2 | 同装備セット全体 | 无 | 无 | 无 | 全て |
+| 3 | 特定属性/武器種限定 | 属性限定時存在，多属性为数组（characters/souls）或单值 int（crystals/bladegraph） | 武器限定時存在，同上 | 无 | 全て |
+| 4 | 特定キャラ群（装備条件を満たす全セット） | 同 scope=3 | 同上 | 无 | characters, souls |
+| 5 | 特定キャラ限定 | 无 | 无 | 魔剣名 / キャラ名（str） | 全て |
 
-魂技能（`souls.json`）：
-
-| scope | 含义 | element | type |
-|-------|------|---------|------|
-| 0 | 自身のみ（无装備条件） | 无 | 无 |
-| 1 | 味方全体（无装備条件） | 无 | 无 |
-| 3 | 装備条件を満たす魔剣自身のみ | 属性条件時存在，多属性为数组 | 武器条件時存在，多武器为数组 |
-| 4 | 装備条件を満たす魔剣の全セット | 同上 | 同上 |
-
-> **scope=3/4 の検出ロジック**：效果文中出现 `XX装備で` 或 `XXか...属性装備` 等关键词，说明是对装备特定属性/武器时生效。有 `装備セット全体` 等全队关键词 → scope=4，否则 → scope=3。
+**各データの検出ロジック**：
+- **characters.json 魔剣技能**：scope=0/1 は classify ロジックが判断；scope=2 は `同装備セット` キーワード
+- **souls.json 魂技能**：scope=3/4 は `装備で` 等のキーワードと全队关键词で判定
+- **crystals.json 記憶結晶**：① `特殊条件` 非空 → scope=5 ② `同装備セット` in 効果 → scope=2 ③ element/buki_type 非0 → scope=3 ④ 其余 → scope=0
+- **bladegraph.json 心象結晶**：① `data-contents.type` 非空（単一武器）→ scope=3 ② `data-contents.zokusei` 非0 → scope=3 ③ `【〇〇のみ】` かつ属性/武器名でない → scope=5 ④ 其余 → scope=0
 
 ---
 
