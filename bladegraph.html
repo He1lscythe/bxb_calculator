@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BxB 心象結晶データベース</title>
+<style>
+:root {
+  --bg: #0f1117; --bg2: #1a1d27; --bg3: #22263a; --border: #2e3250;
+  --text: #e0e4f0; --text2: #8890b0; --accent: #5b7fff;
+  --ss: #ff5555; --s: #ff9933; --aa: #55aaff; --a: #55cc77;
+  --fire: #ff5533; --water: #3388ff; --wind: #44cc66;
+  --light: #ffcc00; --dark: #aa55ff; --none: #888899;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Gothic',sans-serif; font-size: 14px; height: 100vh; display: flex; justify-content: center; overflow: hidden; }
+
+#page-wrap { max-width: 72rem; width: 100%; display: flex; flex-direction: column; overflow: hidden; }
+#content { max-width: 56rem; width: 100%; margin: 0 auto; padding: 0 16px; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
+#filters { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 10px 0 8px; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; }
+#filters input[type=text] { width: 100%; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; outline: none; }
+#filters input[type=text]:focus { border-color: var(--accent); }
+.filter-section { display: flex; flex-direction: column; gap: 3px; }
+.filter-row2 { display: flex; gap: 10px; align-items: flex-start; }
+.filter-label { font-size: 10px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .06em; }
+.filter-toggles { display: flex; flex-wrap: wrap; gap: 3px; }
+.ftog { font-size: 11px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; transition: all .1s; white-space: nowrap; }
+.ftog:hover { border-color: var(--accent); color: var(--text); }
+.ftog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; font-weight: 700; }
+#bg-count { font-size: 12px; color: var(--text2); }
+
+#bg-list { display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto; min-height: 0; padding-bottom: 16px; }
+#bg-list::-webkit-scrollbar { width: 4px; }
+#bg-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.no-results { text-align: center; color: var(--text2); padding: 40px 20px; font-size: 13px; }
+
+.bg-row { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color .15s; flex-shrink: 0; }
+.bg-row.expanded { border-color: rgba(91,127,255,.5); }
+
+.bg-row-hd { display: flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; transition: background .1s; }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
+.bg-row-hd:hover { background: var(--bg3); }
+
+.row-badges { display: flex; gap: 3px; align-items: center; flex-shrink: 0; width: 104px; }
+.badge { font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; white-space: nowrap; }
+.badge.r5 { background: var(--s);  color: #fff; }
+.badge.r4 { background: var(--aa); color: #fff; }
+.badge.r3 { background: var(--a);  color: #fff; }
+.badge.r2, .badge.r1 { background: #666; color: #fff; }
+.badge.elem-1 { background: var(--fire);  color: #fff; border: 1px solid rgba(0,0,0,.25); }
+.badge.elem-2 { background: var(--water); color: #fff; border: 1px solid rgba(0,0,0,.25); }
+.badge.elem-3 { background: var(--wind);  color: #fff; border: 1px solid rgba(0,0,0,.25); }
+.badge.elem-4 { background: var(--light); color: #000; border: 1px solid rgba(0,0,0,.25); }
+.badge.elem-5 { background: var(--dark);  color: #fff; border: 1px solid rgba(0,0,0,.25); }
+.badge.elem-6 { background: var(--bg3);   color: var(--text2); border: 2px solid var(--border); }
+.badge.weapon { background: var(--bg3); color: var(--text2); border: 2px solid var(--border); }
+.badge.bunrui-sm { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); font-size: 9px; }
+.badge.scope5 { background: rgba(170,85,255,.2); color: #cc88ff; border: 1px solid #aa55ff; font-size: 9px; }
+.badge.time { background: rgba(255,153,51,.15); color: #ffaa44; border: 1px solid #ff9933; font-size: 9px; }
+
+.row-name { flex: 1; font-size: 13px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
+.row-bunrui { display: flex; gap: 3px; flex-shrink: 0; }
+.expand-btn { background: none; border: none; color: var(--text2); font-size: 13px; cursor: pointer; padding: 2px 4px; flex-shrink: 0; line-height: 1; transition: transform .2s; }
+.bg-row.expanded .expand-btn { transform: rotate(180deg); }
+
+.bg-body { border-top: 1px solid var(--border); padding: 12px 14px; display: none; gap: 14px; }
+.bg-row.expanded .bg-body { display: flex; }
+
+.body-left { flex: 1; min-width: 0; }
+.body-right { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
+.bg-icon { width: 84px; height: 84px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); background: var(--bg3); }
+.btn-edit { background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 4px 0; font-size: 11px; cursor: pointer; width: 84px; }
+.btn-edit:hover { background: rgba(91,127,255,.1); }
+
+.field-row { display: flex; gap: 10px; padding: 5px 0; border-bottom: 1px solid var(--border); }
+.field-row:last-child { border-bottom: none; }
+.field-key { color: var(--text2); font-size: 11px; min-width: 60px; flex-shrink: 0; padding-top: 2px; }
+.field-val { font-size: 13px; flex: 1; line-height: 1.5; word-break: break-all; }
+.eff-line { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
+.eff-line:last-child { margin-bottom: 0; }
+.eff-bairitu { font-size: 14px; font-weight: 700; }
+.eff-pfx { color: var(--text2); font-size: 11px; }
+.eff-cond { font-size: 10px; padding: 1px 4px; border-radius: 3px; background: rgba(255,153,51,.15); color: #ffaa44; border: 1px solid #ff9933; }
+.eff-scope { font-size: 10px; padding: 1px 4px; border-radius: 3px; background: rgba(91,127,255,.15); color: #7b9fff; border: 1px solid #5b7fff; }
+
+.bg-edit-body { border-top: 1px solid var(--accent); padding: 14px; background: rgba(91,127,255,.04); }
+.edit-actions { display: flex; gap: 8px; margin-bottom: 12px; }
+.btn-save   { background: var(--accent); color: #fff; border: none; border-radius: 6px; padding: 6px 16px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.btn-save:hover { opacity: .85; }
+.btn-cancel { background: transparent; color: var(--text2); border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; font-size: 13px; cursor: pointer; }
+.btn-cancel:hover { color: var(--text); }
+.edit-select { background: var(--bg3); border: 1px solid var(--accent); border-radius: 6px; color: var(--text); padding: 4px 8px; font-size: 12px; cursor: pointer; }
+.edit-input { background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 4px 8px; font-size: 13px; font-family: inherit; }
+.edit-input:focus { outline: none; border-color: #8aabff; }
+.field-label { font-size: 11px; color: var(--text2); margin: 10px 0 3px; }
+.field-label:first-child { margin-top: 0; }
+.bunrui-checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 4px; margin-bottom: 8px; }
+.bunrui-check { display: flex; align-items: center; gap: 5px; font-size: 11px; cursor: pointer; padding: 2px 0; }
+.bunrui-check input { cursor: pointer; accent-color: var(--accent); }
+.edit-ro { font-size: 12px; color: var(--text2); padding: 4px 0; line-height: 1.5; }
+.edit-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+
+@media (max-width: 600px) {
+  body { height: auto; overflow-y: auto; }
+  #content { flex: none; overflow: visible; }
+  #bg-list { flex: none; overflow-y: visible; }
+  .row-bunrui { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="page-wrap">
+<script src="nav.js"></script>
+<div id="content">
+  <div id="filters">
+    <input type="text" id="search" placeholder="🔍 心象結晶名で検索..." oninput="applyFilters()">
+
+    <div class="filter-row2">
+      <div class="filter-section">
+        <div class="filter-label">レアリティ</div>
+        <div class="filter-toggles" id="f-rarity">
+          <button class="ftog" data-val="5" onclick="toggleFilter('rarity',5,this)">★5</button>
+          <button class="ftog" data-val="4" onclick="toggleFilter('rarity',4,this)">★4</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('rarity',3,this)">★3</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('rarity',2,this)">★2</button>
+          <button class="ftog" data-val="1" onclick="toggleFilter('rarity',1,this)">★1</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">属性制限</div>
+        <div class="filter-toggles" id="f-element">
+          <button class="ftog" data-val="0" onclick="toggleFilter('element',0,this)">全</button>
+          <button class="ftog" data-val="1" onclick="toggleFilter('element',1,this)" style="color:var(--fire)">火</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('element',2,this)" style="color:var(--water)">水</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('element',3,this)" style="color:var(--wind)">風</button>
+          <button class="ftog" data-val="4" onclick="toggleFilter('element',4,this)" style="color:var(--light)">光</button>
+          <button class="ftog" data-val="5" onclick="toggleFilter('element',5,this)" style="color:var(--dark)">闇</button>
+          <button class="ftog" data-val="6" onclick="toggleFilter('element',6,this)" style="color:var(--none)">無</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">武器種制限</div>
+      <div class="filter-toggles" id="f-weapon">
+        <button class="ftog" data-val="0"  onclick="toggleFilter('weapon',0,this)">全</button>
+        <button class="ftog" data-val="1"  onclick="toggleFilter('weapon',1,this)">長剣</button>
+        <button class="ftog" data-val="2"  onclick="toggleFilter('weapon',2,this)">大剣</button>
+        <button class="ftog" data-val="3"  onclick="toggleFilter('weapon',3,this)">太刀</button>
+        <button class="ftog" data-val="4"  onclick="toggleFilter('weapon',4,this)">杖棒</button>
+        <button class="ftog" data-val="5"  onclick="toggleFilter('weapon',5,this)">弓矢</button>
+        <button class="ftog" data-val="6"  onclick="toggleFilter('weapon',6,this)">連弩</button>
+        <button class="ftog" data-val="7"  onclick="toggleFilter('weapon',7,this)">戦斧</button>
+        <button class="ftog" data-val="8"  onclick="toggleFilter('weapon',8,this)">騎槍</button>
+        <button class="ftog" data-val="9"  onclick="toggleFilter('weapon',9,this)">投擲</button>
+        <button class="ftog" data-val="10" onclick="toggleFilter('weapon',10,this)">拳闘</button>
+        <button class="ftog" data-val="11" onclick="toggleFilter('weapon',11,this)">魔典</button>
+        <button class="ftog" data-val="12" onclick="toggleFilter('weapon',12,this)">大鎌</button>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">タイプ</div>
+      <div class="filter-toggles" id="f-bunrui">
+        <button class="ftog" data-val="1"  onclick="toggleFilter('bunrui',1,this)">攻</button>
+        <button class="ftog" data-val="2"  onclick="toggleFilter('bunrui',2,this)">BK</button>
+        <button class="ftog" data-val="3"  onclick="toggleFilter('bunrui',3,this)">BD攻</button>
+        <button class="ftog" data-val="4"  onclick="toggleFilter('bunrui',4,this)">転</button>
+        <button class="ftog" data-val="5"  onclick="toggleFilter('bunrui',5,this)">速</button>
+        <button class="ftog" data-val="10" onclick="toggleFilter('bunrui',10,this)">HP</button>
+        <button class="ftog" data-val="12" onclick="toggleFilter('bunrui',12,this)">防</button>
+        <button class="ftog" data-val="14" onclick="toggleFilter('bunrui',14,this)">蓝</button>
+        <button class="ftog" data-val="15" onclick="toggleFilter('bunrui',15,this)">紅</button>
+        <button class="ftog" data-val="16" onclick="toggleFilter('bunrui',16,this)">他</button>
+        <button class="ftog" data-val="19" onclick="toggleFilter('bunrui',19,this)">枠</button>
+        <button class="ftog" data-val="20" onclick="toggleFilter('bunrui',20,this)">EXP</button>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">条件タイプ</div>
+      <div class="filter-toggles" id="f-cond">
+        <button class="ftog" data-val="0" onclick="toggleFilter('cond',0,this)">無条件</button>
+        <button class="ftog" data-val="1" onclick="toggleFilter('cond',1,this)">浑身</button>
+        <button class="ftog" data-val="2" onclick="toggleFilter('cond',2,this)">背水</button>
+        <button class="ftog" data-val="3" onclick="toggleFilter('cond',3,this)">時間</button>
+        <button class="ftog" data-val="4" onclick="toggleFilter('cond',4,this)">属性/武器</button>
+        <button class="ftog" data-val="5" onclick="toggleFilter('cond',5,this)">キャラ限</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:2px;">
+      <div id="bg-count"></div>
+      <button onclick="resetFilters()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
+    </div>
+  </div>
+  <div id="bg-list"></div>
+</div>
+</div>
+
+<script>
+// ===== MAPPINGS =====
+const ELEMENT = {0:'全属性',1:'火',2:'水',3:'風',4:'光',5:'闇',6:'無'};
+const WEAPON  = {1:'長剣',2:'大剣',3:'太刀',4:'杖棒',5:'弓矢',6:'連弩',7:'戦斧',8:'騎槍',9:'投擲',10:'拳闘',11:'魔典',12:'大鎌'};
+const BUNRUI  = {
+  1:'攻撃力UP', 2:'ブレイク力UP', 3:'BD攻撃力UP', 4:'スピードUP',
+  5:'攻撃モーションUP', 6:'BDゲージUP', 7:'ヒット数UP', 8:'攻撃全体化',
+  9:'状態異常回避', 10:'HPUP', 11:'HP回復', 12:'防御力UP',
+  13:'被ダメ軽減', 14:'サファイアUP', 15:'ルビーUP', 16:'その他',
+  17:'ダメージ上限UP', 18:'ゲージ最大値UP', 19:'結晶枠UP', 20:'獲得EXPUP'
+};
+const CONDITION = {0:'', 1:'浑身', 2:'背水'};
+
+// ===== HELPERS: derive card-level element/weapon from effects =====
+function cardElement(c) {
+  var e = (c.effects||[]).find(function(e){return e.scope===3 && e.element!=null;});
+  return e ? e.element : 0;
+}
+function cardWeapon(c) {
+  var e = (c.effects||[]).find(function(e){return e.scope===3 && e.type!=null;});
+  return e ? e.type : 0;
+}
+
+// ===== STATE =====
+var allBG = [], filteredBG = [];
+var reviseData = {};
+var expandedIds = new Set();
+var editingId = null;
+var editData = null;
+
+// ===== DATA LOAD =====
+function loadFromArray(arr, label) {
+  allBG = arr;
+  document.getElementById('file-status').textContent = label + ' — ' + arr.length + ' 件読み込み完了';
+  applyFilters();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('./bladegraph.json')
+    .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(arr) {
+      loadFromArray(arr, 'bladegraph.json');
+      return fetch('./bladegraph_revise.json');
+    })
+    .then(function(r) { return r.ok ? r.json() : []; })
+    .then(function(arr) {
+      arr.forEach(function(c) { reviseData[c.id] = c; });
+      if (arr.length) updateReviseBar();
+    })
+    .catch(function() {
+      document.getElementById('file-status').textContent = 'start.py を起動してください';
+    });
+});
+
+document.getElementById('file-input').addEventListener('change', function(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    try { loadFromArray(JSON.parse(ev.target.result), file.name); }
+    catch(err) { document.getElementById('file-status').textContent = '読み込みエラー: ' + err.message; }
+  };
+  reader.readAsText(file, 'utf-8');
+});
+
+// ===== FILTER STATE =====
+var filterSets = { rarity: new Set(), element: new Set(), weapon: new Set(), bunrui: new Set(), cond: new Set() };
+
+function toggleFilter(key, val, btn) {
+  if (filterSets[key].has(val)) { filterSets[key].delete(val); btn.classList.remove('on'); }
+  else                           { filterSets[key].add(val);    btn.classList.add('on'); }
+  applyFilters();
+}
+
+function resetFilters() {
+  document.getElementById('search').value = '';
+  Object.keys(filterSets).forEach(function(k) {
+    filterSets[k].clear();
+    document.querySelectorAll('#f-' + k + ' .ftog').forEach(function(b) { b.classList.remove('on'); });
+  });
+  applyFilters();
+}
+
+function matchesCond(c, condVal) {
+  switch(condVal) {
+    case 0: return !c.time_start && (c.effects||[]).every(function(e){return e.scope===0 && e.condition===0;});
+    case 1: return (c.effects||[]).some(function(e){return e.condition===1;});
+    case 2: return (c.effects||[]).some(function(e){return e.condition===2;});
+    case 3: return !!c.time_start;
+    case 4: return (c.effects||[]).some(function(e){return e.scope===3;});
+    case 5: return (c.effects||[]).some(function(e){return e.scope===5;});
+  }
+  return true;
+}
+
+function applyFilters() {
+  var q = document.getElementById('search').value.trim().toLowerCase();
+  filteredBG = allBG.filter(function(c) {
+    if (q && c.name.toLowerCase().indexOf(q) === -1) return false;
+    if (filterSets.rarity.size  && !filterSets.rarity.has(c.rarity)) return false;
+    if (filterSets.element.size && !filterSets.element.has(cardElement(c))) return false;
+    if (filterSets.weapon.size) {
+      var cw = cardWeapon(c);
+      var pass = Array.from(filterSets.weapon).some(function(v){ return v === 0 ? cw === 0 : cw === v; });
+      if (!pass) return false;
+    }
+    if (filterSets.bunrui.size && !Array.from(filterSets.bunrui).some(function(v) {
+      return (c.effects||[]).some(function(e) { return (e.bunrui||[]).indexOf(v) !== -1; });
+    })) return false;
+    if (filterSets.cond.size && !Array.from(filterSets.cond).some(function(v) { return matchesCond(c, v); })) return false;
+    return true;
+  });
+  document.getElementById('bg-count').textContent = filteredBG.length + ' 件';
+  expandedIds.clear();
+  editingId = null;
+  editData = null;
+  renderList();
+}
+
+// ===== RENDER LIST =====
+function renderList() {
+  var list = document.getElementById('bg-list');
+  if (!filteredBG.length) { list.innerHTML = '<div class="no-results">該当なし</div>'; return; }
+  list.innerHTML = filteredBG.map(renderRow).join('');
+}
+
+function renderRow(c) {
+  var rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
+  var ce = cardElement(c), cw = cardWeapon(c);
+  var eb = ce ? '<span class="badge elem-' + ce + '">' + (ELEMENT[ce]||ce) + '</span>' : '';
+  var wb = cw ? '<span class="badge weapon">' + (WEAPON[cw]||cw) + '</span>' : '';
+  var hasScope5 = (c.effects||[]).some(function(e){return e.scope===5;});
+  var s5b = hasScope5 ? '<span class="badge scope5">キャラ限</span>' : '';
+  var timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
+  var bt = (c.effects||[]).reduce(function(acc,e){return acc.concat(e.bunrui||[]);}, [])
+    .filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,2)
+    .map(function(b){return '<span class="badge bunrui-sm">'+(BUNRUI[b]||b)+'</span>';}).join('');
+  return '<div class="bg-row" id="row-' + c.id + '">' +
+    '<div class="bg-row-hd" onclick="toggleExpand(' + c.id + ')">' +
+      '<div class="row-badges">' + rb + eb + wb + s5b + timeb + '</div>' +
+      '<div class="row-name">' + escHtml(c.name) + '</div>' +
+      '<div class="row-bunrui">' + bt + '</div>' +
+      '<button class="expand-btn" onclick="event.stopPropagation();toggleExpand(' + c.id + ')">▾</button>' +
+    '</div>' +
+    '<div class="bg-body" id="body-' + c.id + '"></div>' +
+  '</div>';
+}
+
+// ===== EXPAND =====
+function toggleExpand(id) {
+  if (editingId === id) return;
+  var row  = document.getElementById('row-' + id);
+  var body = document.getElementById('body-' + id);
+  if (!row || !body) return;
+  if (expandedIds.has(id)) {
+    expandedIds.delete(id);
+    row.classList.remove('expanded');
+    body.innerHTML = '';
+  } else {
+    expandedIds.add(id);
+    row.classList.add('expanded');
+    var c = allBG.find(function(x){return x.id===id;});
+    if (c) body.innerHTML = renderDetailBody(c);
+  }
+}
+
+// ===== DETAIL BODY =====
+function ctPfx(ct) { return ct === 1 ? '+' : '&times;'; }
+
+function fmtNum(n) {
+  if (n == null) return '-';
+  if (typeof n !== 'number') return String(n);
+  return n % 1 === 0 ? String(n) : n.toLocaleString('ja-JP', {maximumFractionDigits:6});
+}
+
+function scopeLabel(e) {
+  if (e.scope === 3) {
+    if (e.element) return ELEMENT[e.element] + '属性のみ';
+    if (e.type != null) {
+      var t = Array.isArray(e.type) ? e.type : [e.type];
+      return t.map(function(v){return WEAPON[v]||v;}).join('/') + 'のみ';
+    }
+  }
+  if (e.scope === 5) return escHtml(e.name||'') + 'のみ';
+  return '';
+}
+
+function renderDetailBody(c) {
+  var effRows = (c.effects||[]).map(function(e, i) {
+    var bTags = (e.bunrui||[]).map(function(b){return '<span class="badge bunrui-sm">'+(BUNRUI[b]||b)+'</span>';}).join(' ');
+    var condStr = e.condition ? '<span class="eff-cond">'+(CONDITION[e.condition]||'')+'</span>' : '';
+    var scopeStr = scopeLabel(e) ? '<span class="eff-scope">'+scopeLabel(e)+'</span>' : '';
+    var bStr = e.bairitu != null
+      ? '<span class="eff-pfx">' + ctPfx(e.calc_type) + '</span><span class="eff-bairitu">' + fmtNum(e.bairitu) + '</span>'
+      : '';
+    return '<div class="eff-line">' + bTags + condStr + scopeStr + bStr + '</div>';
+  }).join('');
+
+  var fields = [];
+  fields.push(['効果', escHtml(c.effect||'')]);
+  fields.push(['効果量', '<div>' + effRows + '</div>']);
+  if (c.time_start) {
+    fields.push(['時間', escHtml(c.time_start + '～' + c.time_end)]);
+  }
+  fields.push(['入手方法', escHtml(c.acquisition||'')]);
+  if (c.illustrator) fields.push(['イラスト', escHtml(c.illustrator)]);
+
+  var rows = fields.map(function(p) {
+    return '<div class="field-row"><div class="field-key">'+p[0]+'</div><div class="field-val">'+p[1]+'</div></div>';
+  }).join('');
+
+  return '<div class="body-left">' + rows + '</div>' +
+    '<div class="body-right">' +
+      '<img class="bg-icon" src="https://img.altema.jp/bxb/blade_graph/icon/' + c.id + '.jpg" onerror="this.style.display=\'none\'" alt="">' +
+      '<button class="btn-edit" onclick="enterEditMode(' + c.id + ')">修改</button>' +
+    '</div>';
+}
+
+// ===== EDIT MODE =====
+function enterEditMode(id) {
+  var c = allBG.find(function(x){return x.id===id;});
+  if (!c) return;
+  editData = JSON.parse(JSON.stringify(c));
+  editingId = id;
+  var row  = document.getElementById('row-' + id);
+  var body = document.getElementById('body-' + id);
+  if (!row || !body) return;
+  row.classList.add('expanded');
+  body.className = 'bg-edit-body';
+  body.innerHTML = renderEditBody(editData);
+}
+
+function cancelEdit() {
+  if (editingId === null) return;
+  var id = editingId;
+  editingId = null; editData = null;
+  var row  = document.getElementById('row-' + id);
+  var body = document.getElementById('body-' + id);
+  var c = allBG.find(function(x){return x.id===id;});
+  if (body) { body.className = 'bg-body'; if(c) body.innerHTML = renderDetailBody(c); }
+  if (row)  row.classList.add('expanded');
+}
+
+function saveEdit() {
+  if (!editData) return;
+  var id  = editData.id;
+  var idx = allBG.findIndex(function(x){return x.id===id;});
+  if (idx >= 0) {
+    allBG[idx] = editData;
+    reviseData[id] = JSON.parse(JSON.stringify(editData));
+    updateReviseBar();
+  }
+  var id2 = id;
+  editingId = null; editData = null;
+
+  var row  = document.getElementById('row-' + id2);
+  var body = document.getElementById('body-' + id2);
+  var c = idx >= 0 ? allBG[idx] : null;
+  if (row && c) {
+    var rb = '<span class="badge r'+c.rarity+'">★'+c.rarity+'</span>';
+    var ce2 = cardElement(c), cw2 = cardWeapon(c);
+    var eb = ce2 ? '<span class="badge elem-'+ce2+'">'+(ELEMENT[ce2]||ce2)+'</span>' : '';
+    var wb = cw2 ? '<span class="badge weapon">'+(WEAPON[cw2]||cw2)+'</span>' : '';
+    var hasScope5 = (c.effects||[]).some(function(e){return e.scope===5;});
+    var s5b = hasScope5 ? '<span class="badge scope5">キャラ限</span>' : '';
+    var timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
+    var bt = (c.effects||[]).reduce(function(acc,e){return acc.concat(e.bunrui||[]);}, [])
+      .filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,2)
+      .map(function(b){return '<span class="badge bunrui-sm">'+(BUNRUI[b]||b)+'</span>';}).join('');
+    row.querySelector('.row-badges').innerHTML = rb + eb + wb + s5b + timeb;
+    row.querySelector('.row-name').textContent = c.name;
+    row.querySelector('.row-bunrui').innerHTML = bt;
+  }
+  if (body) { body.className = 'bg-body'; if(c) body.innerHTML = renderDetailBody(c); }
+  if (row)  row.classList.add('expanded');
+}
+
+function renderEditBody(c) {
+  var roEffect = '<div class="field-row"><div class="field-key">効果</div><div class="field-val edit-ro">'
+    + escHtml(c.effect||'') + '</div></div>';
+  var roTime = c.time_start
+    ? '<div class="field-row"><div class="field-key">時間</div><div class="field-val edit-ro">'
+      + escHtml(c.time_start + '～' + c.time_end) + '</div></div>'
+    : '';
+
+  var curElem = cardElement(c);
+  var elemOpts = Object.keys(ELEMENT).map(function(k) {
+    return '<option value="'+k+'"'+(curElem==k?' selected':'')+'>'+ELEMENT[k]+'</option>';
+  }).join('');
+  var curWeap = cardWeapon(c);
+  var weapOpts = '<option value="0"'+(curWeap===0?' selected':'')+'>全武器種</option>' +
+    Object.keys(WEAPON).map(function(k) {
+      return '<option value="'+k+'"'+(curWeap==k?' selected':'')+'>'+WEAPON[k]+'</option>';
+    }).join('');
+  var metaRow =
+    '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--border);margin-bottom:4px;">' +
+      '<label style="font-size:11px;color:var(--text2);display:flex;align-items:center;gap:4px;flex-shrink:0;">★' +
+        '<input type="number" class="edit-input" style="width:48px;text-align:right" value="'+(c.rarity||'')+'" min="1" max="5" oninput="editData.rarity=this.value===\'\'?null:Number(this.value)">' +
+      '</label>' +
+      '<select class="edit-select" onchange="setEditElement(this.value)">'+elemOpts+'</select>' +
+      '<select class="edit-select" onchange="setEditWeapon(this.value)">'+weapOpts+'</select>' +
+    '</div>';
+
+  var effEdits = (c.effects||[]).map(function(e, i) {
+    var label = (c.effects.length > 1) ? '効果量 ' + (i+1) : '効果量';
+    var scopeRO = scopeLabel(e) ? '<span class="eff-scope" style="font-size:11px;padding:2px 5px;border-radius:3px;margin-left:4px;">' + scopeLabel(e) + '</span>' : '';
+    var condRO  = e.condition ? '<span class="eff-cond" style="font-size:11px;padding:2px 5px;border-radius:3px;margin-left:4px;">' + (CONDITION[e.condition]||'') + '</span>' : '';
+
+    var curBunrui = (e.bunrui||[])[0] || 16;
+    var bunruiSel = '<select class="edit-select" onchange="editData.effects['+i+'].bunrui=[+this.value]">' +
+      Object.keys(BUNRUI).map(function(k) {
+        return '<option value="'+k+'"'+(curBunrui==k?' selected':'')+'>'+BUNRUI[k]+'</option>';
+      }).join('') + '</select>';
+
+    var ctSel = '<select class="edit-select" onchange="editData.effects['+i+'].calc_type=+this.value">' +
+      '<option value="0"'+(e.calc_type===0?' selected':'')+'>&times;</option>' +
+      '<option value="1"'+(e.calc_type===1?' selected':'')+'>+</option>' +
+      '</select>';
+    var bInput = '<input type="number" step="any" class="edit-input" style="width:90px" value="'+(e.bairitu!=null?e.bairitu:'')+'" ' +
+      'oninput="editData.effects['+i+'].bairitu=this.value===\'\'?null:Number(this.value)">';
+
+    return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;">' +
+      '<span style="font-size:11px;color:var(--text2);flex-shrink:0;">'+label+scopeRO+condRO+'</span>' +
+      bunruiSel + ctSel + bInput +
+      '</div>';
+  }).join('');
+
+  return '<div class="edit-actions">' +
+      '<button class="btn-save" onclick="saveEdit()">保存</button>' +
+      '<button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>' +
+    '</div>' +
+    roEffect + roTime + metaRow +
+    '<div style="margin-bottom:8px;">' + effEdits + '</div>';
+}
+
+function setEditElement(val) {
+  if (!editData) return;
+  val = Number(val);
+  (editData.effects||[]).forEach(function(e) {
+    if (e.scope === 5) return;
+    if (val === 0) {
+      delete e.element;
+      if (e.type == null) e.scope = 0;
+    } else {
+      e.scope = 3; e.element = val;
+      delete e.type;
+    }
+  });
+}
+
+function setEditWeapon(val) {
+  if (!editData) return;
+  val = Number(val);
+  (editData.effects||[]).forEach(function(e) {
+    if (e.scope === 5) return;
+    if (val === 0) {
+      delete e.type;
+      if (e.element == null) e.scope = 0;
+    } else {
+      e.scope = 3; e.type = val;
+      delete e.element;
+    }
+  });
+}
+
+
+// ===== REVISE BAR =====
+function updateReviseBar() {
+  var bar = document.getElementById('revise-bar');
+  bar.style.display = Object.keys(reviseData).length > 0 ? 'flex' : 'none';
+  document.getElementById('revise-status').textContent = '';
+}
+
+function saveRevise() {
+  var btn    = document.querySelector('.btn-revise-save');
+  var status = document.getElementById('revise-status');
+  btn.textContent = '保存中...';
+  btn.disabled = true;
+  fetch('/save', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ bladegraph: allBG, bladegraph_revise: Object.values(reviseData) })
+  }).then(function(res) {
+    return res.json().then(function(j) { return { ok: res.ok, j: j }; });
+  }).then(function(r) {
+    if (!r.ok) throw new Error(r.j.error || 'error');
+    status.textContent = '✓ 保存完了';
+  }).catch(function() {
+    status.textContent = '保存失敗 — start.py が起動していますか？';
+  }).finally(function() {
+    btn.textContent = 'Save';
+    btn.disabled = false;
+  });
+}
+
+// ===== HELPERS =====
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>

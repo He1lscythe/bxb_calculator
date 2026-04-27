@@ -176,12 +176,12 @@ input[type=number] { -moz-appearance: textfield; }
 
       <div class="filter-section">
         <div class="filter-label">星級</div>
-        <div class="filter-toggles" id="f-stars">
-          <button class="ftog" data-val="5" onclick="toggleFilter('stars',5,this)">★5</button>
-          <button class="ftog" data-val="4" onclick="toggleFilter('stars',4,this)">★4</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('stars',3,this)">★3</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('stars',2,this)">★2</button>
-          <button class="ftog" data-val="1" onclick="toggleFilter('stars',1,this)">★1</button>
+        <div class="filter-toggles" id="f-rarity">
+          <button class="ftog" data-val="5" onclick="toggleFilter('rarity',5,this)">★5</button>
+          <button class="ftog" data-val="4" onclick="toggleFilter('rarity',4,this)">★4</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('rarity',3,this)">★3</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('rarity',2,this)">★2</button>
+          <button class="ftog" data-val="1" onclick="toggleFilter('rarity',1,this)">★1</button>
         </div>
       </div>
 
@@ -218,7 +218,7 @@ input[type=number] { -moz-appearance: textfield; }
       <div class="sort-row">
         <select id="f-sort" onchange="applyFilters()">
           <option value="id">ID順</option>
-          <option value="stars">星級順</option>
+          <option value="rarity">星級順</option>
         </select>
         <button id="sort-dir" onclick="toggleSortDir()">↓</button>
         <button class="btn-reset" onclick="resetFilters()">リセット</button>
@@ -260,7 +260,7 @@ let selectedId    = null;
 let sortDesc      = true;
 let reviseData    = {};
 let editData      = null;
-const filterSets  = { stars: new Set(), elem: new Set(), type: new Set() };
+const filterSets  = { rarity: new Set(), elem: new Set(), type: new Set() };
 
 // ===== LOAD =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -331,7 +331,7 @@ function applyFilters() {
 
   filteredSouls = allSouls.filter(s => {
     if (q && !s.name.toLowerCase().includes(q) && !(s.kana||'').toLowerCase().includes(q)) return false;
-    if (filterSets.stars.size && !filterSets.stars.has(s.stars || 0)) return false;
+    if (filterSets.rarity.size && !filterSets.rarity.has(s.rarity || 0)) return false;
     if (filterSets.elem.size) {
       const all = s.element || [];
       if (![...filterSets.elem].some(e => all.includes(e))) return false;
@@ -344,8 +344,8 @@ function applyFilters() {
   });
 
   filteredSouls.sort((a, b) => {
-    const va = sKey === 'stars' ? (a.stars || 0) : (a.id || 0);
-    const vb = sKey === 'stars' ? (b.stars || 0) : (b.id || 0);
+    const va = sKey === 'rarity' ? (a.rarity || 0) : (a.id || 0);
+    const vb = sKey === 'rarity' ? (b.rarity || 0) : (b.id || 0);
     return sortDesc ? vb - va : va - vb;
   });
 
@@ -362,7 +362,7 @@ function renderList() {
   }
   list.innerHTML = filteredSouls.map(s =>
     `<div class="soul-item ${s.id === selectedId ? 'active' : ''}" data-id="${s.id}">
-      <span class="star-badge star-${s.stars||0}">★${s.stars||'?'}</span>
+      <span class="star-badge star-${s.rarity||0}">★${s.rarity||'?'}</span>
       <span class="soul-name">${escHtml(s.name)}</span>
       <img class="soul-icon-thumb" src="https://img.altema.jp/bxb/soul/icon/${s.id}.jpg"
            onerror="this.style.display='none'" alt="">
@@ -393,7 +393,7 @@ function selectSoul(id) {
 
 // ===== VIEW DETAIL =====
 function renderDetail(s) {
-  const stars = s.stars || 0;
+  const stars = s.rarity || 0;
   const acqEntries = Object.entries(s.acquisition || {});
   return `
     <div class="soul-header">
@@ -636,8 +636,8 @@ function renderEditDetail(s) {
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;align-items:center">
         <div style="display:flex;align-items:center;gap:6px">
           <span class="field-label" style="margin:0">星級</span>
-          <select class="edit-select" onchange="setPath(editData,'stars',+this.value)">
-            ${[5,4,3,2,1].map(n=>`<option value="${n}"${s.stars===n?' selected':''}>${'★'.repeat(n)}</option>`).join('')}
+          <select class="edit-select" onchange="setPath(editData,'rarity',+this.value)">
+            ${[5,4,3,2,1].map(n=>`<option value="${n}"${s.rarity===n?' selected':''}>${'★'.repeat(n)}</option>`).join('')}
           </select>
         </div>
         <div style="display:flex;align-items:center;gap:6px">

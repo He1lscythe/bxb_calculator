@@ -72,6 +72,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             if 'soul_revise' in data:
                 _write('souls_revise.json', json.dumps(data['soul_revise'], ensure_ascii=False, indent=2))
 
+            if 'bladegraph' in data:
+                _write('bladegraph.json', json.dumps(data['bladegraph'], ensure_ascii=False, indent=2))
+
+            if 'bladegraph_revise' in data:
+                _write('bladegraph_revise.json', json.dumps(data['bladegraph_revise'], ensure_ascii=False, indent=2))
+
             self._json(200, {'ok': True})
         except Exception as e:
             self._json(500, {'error': str(e)})

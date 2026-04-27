@@ -199,7 +199,7 @@ def get_soul_detail(session, soul_id, url):
                     k = cells[i].get_text(strip=True)
                     v = cells[i + 1].get_text(strip=True)
                     if k == "クラス":
-                        detail["stars"] = v.count("★")
+                        detail["rarity"] = v.count("★")
                     elif k == "最大レベル":
                         try:
                             detail["max_level"] = int(v)
@@ -413,7 +413,7 @@ def main():
                     "id":          sid,
                     "name":        detail.get("name") or name,
                     "kana":        item.get("kana", ""),
-                    "stars":       detail.get("stars"),
+                    "rarity":      detail.get("rarity"),
                     "max_level":   detail.get("max_level"),
                     "url":         url,
                     "image":       f"https://img.altema.jp/bxb/soul/banner/{sid}.jpg",
