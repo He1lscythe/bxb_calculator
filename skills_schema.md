@@ -39,7 +39,8 @@
             "element":   int|int[]?,  // scope=3/4 且属性限定时存在，多属性时为数组
             "type":      int|int[]?,  // scope=3/4 且武器限定时存在，多武器时为数组
             "condition": int,    // 发动条件: 0=无条件 1=浑身 2=背水 3=破損
-            "bairitu":   float   // 倍率（乘率型: UP值+1，例 77%UP→1.77）
+            "bairitu":   float,  // 倍率（乘率型: UP值+1，例 77%UP→1.77）
+            "calc_type": 0|1    // 倍率计算方式: 0=乘算（乘以 bairitu）1=加算（加上 bairitu）
           }
           // 一个技能可有多个 effects 条目，每条对应一种效果
         ]
@@ -79,7 +80,8 @@
                 "type":             int|int[]?,  // 仅当 scope=2 且限定武器种时存在，多武器时为数组
                 "condition":        int,     // 发动条件: 0=无条件 1=浑身 2=背水 3=破損
                 "bairitu":          float,   // 倍率
-                "bairitu_scaling":  float    // 熟度每级增量（0 表示固定值）
+                "bairitu_scaling":  float,   // 熟度每级增量（0 表示固定值）
+                "calc_type":        0|1      // 倍率计算方式: 0=乘算（乘以 bairitu）1=加算（加上 bairitu）
               }
             ]
           }
@@ -176,6 +178,24 @@
 | 19 | 結晶枠UP | |
 | 20 | 獲得EXPUP | |
 | 21 | BDヒット数UP | 效果文含 B.D.ヒット 时单独分类，不归入 bunrui 7 |
+
+---
+
+## calc_type 倍率计算方式对照表
+
+| calc_type | 含义 | 典型例 |
+|-----------|------|--------|
+| 0 | 乘算（multiplicative）：基础值 × bairitu | 攻撃力 50%UP → bairitu=1.5 |
+| 1 | 加算（additive）：基础值 + bairitu | ヒット数+3 → bairitu=3 |
+
+`calc_type` 在以下四类数据中均有使用，编码含义相同：
+
+| 数据源 | 推断规则 |
+|--------|---------|
+| `characters_classified.json` 魔剣技能 | 由效果文字正则模式决定；无法识别时按 bunrui 判断（ADD_BUNRUI → 1） |
+| `souls.json` 魂技能 | 同上，按各 effects 条目独立判断 |
+| `senzai_table.json` 潜在能力 | bairitu 为小数且 0 < bairitu < 10（如 1.05）→ 0；否则 → 1 |
+| `crystals.json` 記憶結晶 | bunrui ∈ {6,7,9,11,16,17,19} → 1；其余 → 0 |
 
 ---
 

@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 """Extract E3 (B.D.攻撃力 skills) and E6 (S-other_self_0→1 mixed) lists."""
 import json, os, sys, re, unicodedata
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, BASE_DIR)
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR   = os.path.dirname(SCRIPT_DIR)
+sys.path.insert(0, SCRIPT_DIR)
 from classify_common import classify_skill_chara, CAT_TO_BUNRUI_SKILLLIST
 
 chars = json.load(open(os.path.join(BASE_DIR, 'characters_classified.json'), encoding='utf-8'))

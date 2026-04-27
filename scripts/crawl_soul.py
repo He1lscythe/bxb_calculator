@@ -335,7 +335,7 @@ def assign_bairitu(skill):
 def apply_pipeline(souls, soul_ids=None):
     """Classify skills and assign bairitu.
     soul_ids: set of soul IDs to process; None means process all souls."""
-    table_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'soulskill_table.json')
+    table_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'soulskill_table.json')
     soulskill_table = {}
     if os.path.exists(table_path):
         with open(table_path, encoding='utf-8') as f:
@@ -373,7 +373,7 @@ def main():
     print("Mode:", mode)
     print("=" * 60)
 
-    out_dir       = os.path.dirname(os.path.abspath(__file__))
+    out_dir       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     output_path   = os.path.join(out_dir, OUTPUT_FILE)
     progress_path = os.path.join(out_dir, PROGRESS_FILE)
 
@@ -479,6 +479,14 @@ def main():
                             patched += 1
             if patched:
                 print(f"Revise: {patched} skill(s) patched from souls_revise.json")
+
+        # Fill in any effects entries still missing calc_type (e.g. from revise patches)
+        for soul in output:
+            for sk in soul.get('skills', []):
+                for ent in sk.get('effects', []):
+                    if 'calc_type' not in ent:
+                        b_list = ent.get('bunrui', [])
+                        ent['calc_type'] = 1 if any(b in ADD_BUNRUI for b in b_list) else 0
 
         save_json(output_path, output)
         print(f"Done! {len(output)} souls saved to {OUTPUT_FILE} ({count} recalculated)")

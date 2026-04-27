@@ -7,11 +7,31 @@ BxB viewer local server
 import http.server
 import json
 import os
+import socket
 import threading
 import webbrowser
 
 PORT = 8787
-DIR  = os.path.dirname(os.path.abspath(__file__))
+DIR  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _sync_senzai_table():
+    src = os.path.join(DIR, 'scripts', 'senzai_table_sample.json')
+    if not os.path.exists(src):
+        return
+    import json
+    with open(src, encoding='utf-8') as f:
+        data = json.load(f)
+    with open(os.path.join(DIR, 'senzai_table.json'), 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    with open(os.path.join(DIR, 'senzai_table.js'), 'w', encoding='utf-8') as f:
+        f.write('var SENZAI_TABLE = ')
+        json.dump(data, f, ensure_ascii=False)
+        f.write(';\n')
+    print(f'Synced senzai_table: {len(data)} entries')
+
+
+_sync_senzai_table()
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -74,8 +94,22 @@ def _write(name, text):
         f.write(text)
 
 
+def _lan_ips():
+    ips = []
+    try:
+        for info in socket.getaddrinfo(socket.gethostname(), None):
+            ip = info[4][0]
+            if ip.startswith('192.') or ip.startswith('10.') or ip.startswith('172.'):
+                if ip not in ips:
+                    ips.append(ip)
+    except Exception:
+        pass
+    return ips
+
 url = f'http://127.0.0.1:{PORT}/index.html'
 print(f'Server running at {url}')
+for ip in _lan_ips():
+    print(f'  LAN access : http://{ip}:{PORT}/index.html')
 print('Press Ctrl+C to stop')
 
 # Open browser in background, then run server on main thread so Ctrl+C works

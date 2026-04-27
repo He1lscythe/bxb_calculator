@@ -10,7 +10,7 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
 
-OUT_DIR = os.path.dirname(os.path.abspath(__file__))
+OUT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def fetch(url: str) -> BeautifulSoup:

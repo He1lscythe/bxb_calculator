@@ -512,12 +512,13 @@ function renderRightTags(sk) {
   return '<div class="skill-tags-right">' + tags + '</div>';
 }
 
+function ctPfx(ct) { return ct === 1 ? '+' : '×'; }
 function fmtBairitu(sk) {
   return (sk.effects || []).map(function(e) {
     if (e.bairitu == null) return '';
     var b  = e.bairitu;
     var sc = e.bairitu_scaling || 0;
-    var bs = Number.isInteger(b) ? b.toLocaleString('en-US') : String(parseFloat(b.toFixed(6)));
+    var bs = ctPfx(e.calc_type) + (Number.isInteger(b) ? b.toLocaleString('en-US') : String(parseFloat(b.toFixed(6))));
     return sc ? bs + ' + ' + sc + ' * 熟度' : bs;
   }).filter(Boolean).join(' / ');
 }
@@ -720,8 +721,14 @@ function renderEditSkillsSection(s) {
           </div>
           <div>
             <div class="field-label">倍率</div>
-            <input type="number" step="any" class="edit-num-sm" value="${e.bairitu!=null?e.bairitu:''}"
-                   oninput="setPath(editData,'${ep}.bairitu',this.value===''?null:+this.value)">
+            <div style="display:flex;align-items:center;gap:4px">
+              <select class="edit-select" onchange="setPath(editData,'${ep}.calc_type',+this.value)">
+                <option value="0"${e.calc_type===0?' selected':''}>×</option>
+                <option value="1"${e.calc_type===1?' selected':''}>+</option>
+              </select>
+              <input type="number" step="any" class="edit-num-sm" value="${e.bairitu!=null?e.bairitu:''}"
+                     oninput="setPath(editData,'${ep}.bairitu',this.value===''?null:+this.value)">
+            </div>
           </div>
         </div>`;
     }).join('');

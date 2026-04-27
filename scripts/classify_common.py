@@ -162,39 +162,42 @@ def _find_kw_pos(text, kw, bunrui):
 
 
 def _extract_val_from_pos(text, pos, bunrui):
-    """Collect all numeric patterns from text[pos:], return the one at the earliest position."""
+    """Collect all numeric patterns from text[pos:], return (value, calc_type) at the earliest position."""
     seg = text[pos:]
     candidates = []
 
     m = _V_OKU_UP.search(seg)
-    if m: candidates.append((m.start(), float(m.group(1)) * 1e8))
+    if m: candidates.append((m.start(), float(m.group(1)) * 1e8,                        1))
     m = _V_MAN_UP.search(seg)
-    if m: candidates.append((m.start(), float(m.group(1)) * 1e4))
+    if m: candidates.append((m.start(), float(m.group(1)) * 1e4,                        1))
     m = _V_PCT_DOWN.search(seg)
-    if m: candidates.append((m.start(), round(1 - float(m.group(1)) / 100, 6)))
+    if m: candidates.append((m.start(), round(1 - float(m.group(1)) / 100, 6),          0))
     m = _V_PCT_UP.search(seg)
-    if m: candidates.append((m.start(), round(1 + float(m.group(1)) / 100, 6)))
+    if m: candidates.append((m.start(), round(1 + float(m.group(1)) / 100, 6),          0))
     m = _V_MAX_BAI.search(seg)
-    if m: candidates.append((m.start(), float(m.group(1))))
+    if m: candidates.append((m.start(), float(m.group(1)),                               0))
     m = _V_BAI.search(seg)
-    if m: candidates.append((m.start(), float(m.group(1))))
+    if m: candidates.append((m.start(), float(m.group(1)),                               0))
     if bunrui in ADD_BUNRUI:
         m = _V_PLUS_N.search(seg)
-        if m: candidates.append((m.start(), float(m.group(1))))
+        if m: candidates.append((m.start(), float(m.group(1)),                           1))
         m = _V_GA_UP.search(seg)
-        if m: candidates.append((m.start(), float(m.group(1))))
+        if m: candidates.append((m.start(), float(m.group(1)),                           1))
 
-    return min(candidates, key=lambda x: x[0])[1] if candidates else None
+    if not candidates:
+        return None, None
+    _, val, ct = min(candidates, key=lambda x: x[0])
+    return round(val, 6), ct
 
 
 def _val_for_bunrui(norm_eff, bunrui):
     for kw in BUNRUI_KEYWORDS.get(bunrui, []):
         idx = _find_kw_pos(norm_eff, kw, bunrui)
         if idx >= 0:
-            v = _extract_val_from_pos(norm_eff, idx, bunrui)
+            v, ct = _extract_val_from_pos(norm_eff, idx, bunrui)
             if v is not None:
-                return v
-    return None
+                return v, ct
+    return None, None
 
 
 def _bairitu_default(bunrui_list):
@@ -408,8 +411,9 @@ def classify_skill_v2(skill, lookup_table, cat_to_bunrui):
         ty = _fmt_list(scope_info['types'])
         if el is not None: ent['element'] = el
         if ty is not None: ent['type']    = ty
-        v = _val_for_bunrui(normed, b)
+        v, ct = _val_for_bunrui(normed, b)
         ent['bairitu'] = round(v, 6) if v is not None else _bairitu_default([b])
+        ent['calc_type'] = ct if ct is not None else (1 if b in ADD_BUNRUI else 0)
         return ent
 
     covered = set()
@@ -433,14 +437,14 @@ def classify_skill_v2(skill, lookup_table, cat_to_bunrui):
     # Fallback only when both steps found nothing
     if not effects:
         effects.append({'bunrui': [16], 'scope': scope_info['scope'],
-                        'condition': condition, 'bairitu': 1})
+                        'condition': condition, 'bairitu': 1, 'calc_type': 0})
 
     # Veto: HP used as cost (消費/犠牲) should not appear as bunrui=10
     if _HP_COST.search(effect):
         effects = [ent for ent in effects if ent['bunrui'] != [10]]
         if not effects:
             effects.append({'bunrui': [16], 'scope': scope_info['scope'],
-                            'condition': condition, 'bairitu': 1})
+                            'condition': condition, 'bairitu': 1, 'calc_type': 0})
 
     skill['effects'] = effects
     return skill

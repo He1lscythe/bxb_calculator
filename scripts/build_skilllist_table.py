@@ -17,7 +17,7 @@ from bs4 import BeautifulSoup
 
 SKILLLIST_URL = "https://altema.jp/bxb/skilllist"
 OUTPUT_FILE   = "skilllist_table.json"
-DIR           = os.path.dirname(os.path.abspath(__file__))
+DIR           = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 HEADERS = {
     "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
