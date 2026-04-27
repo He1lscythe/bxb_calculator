@@ -12,13 +12,14 @@ Altema BxB 魔剣 全量爬虫 + 技能分类 + 倍率标注 一体化脚本
 
 import argparse
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 import json
 import re
 import time
 import os
 import copy
 import html as htmlmod
+from fractions import Fraction
 
 from classify_common import (
     ELEMENT_MAP, WEAPON_TYPE_MAP,
@@ -31,9 +32,10 @@ from classify_common import (
 # ============================================================
 BASE_URL       = "https://altema.jp"
 CHARALIST_URL  = "https://altema.jp/bxb/charalist"
-RAW_FILE       = "characters.json"           # intermediate raw crawl output
-OUTPUT_FILE    = "characters_classified.json" # final output used by index.html
-PROGRESS_FILE  = "progress.json"
+RAW_FILE          = "characters.json"           # intermediate raw crawl output
+OUTPUT_FILE       = "characters_classified.json" # final output used by index.html
+PROGRESS_FILE     = "progress.json"
+SENZAI_TABLE_FILE = "senzai_table.json"
 REQUEST_DELAY  = 2.0
 
 HEADERS = {
@@ -65,6 +67,16 @@ def save_json(path, data):
     js_path = path.replace(".json", ".js")
     with open(js_path, "w", encoding="utf-8") as f:
         f.write("var CHARA_DATA = ")
+        json.dump(data, f, ensure_ascii=False)
+        f.write(";\n")
+
+
+def save_senzai_table(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    js_path = path.replace(".json", ".js")
+    with open(js_path, "w", encoding="utf-8") as f:
+        f.write("var SENZAI_TABLE = ")
         json.dump(data, f, ensure_ascii=False)
         f.write(";\n")
 
@@ -238,6 +250,130 @@ def parse_prof_div(div):
 
 
 # ============================================================
+#  LATENT ABILITIES — 潜在解放
+# ============================================================
+OMOIDE_THRESHOLDS = (
+    [10, 200, 400, 700, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 9000, 11000, 13000, 15000]
+    + list(range(18000, 90001, 3000))
+)
+
+_LAT_NUM_UP  = re.compile(r'が(\d+(?:,\d+)*)上昇')
+_LAT_PCT_UP  = re.compile(r'が(\d+(?:\.\d+)?)%上昇')
+_LAT_NUM_INC = re.compile(r'が(\d+)増加')
+
+
+def _extract_bairitu_latent(syosai):
+    m = _LAT_PCT_UP.search(syosai)
+    if m:
+        return round(1 + float(m.group(1)) / 100, 6), 0
+    m = _LAT_NUM_INC.search(syosai)
+    if m:
+        return int(m.group(1)), 0
+    m = _LAT_NUM_UP.search(syosai)
+    if m:
+        return int(m.group(1).replace(',', '')), 0
+    return 0, 0
+
+
+def _classify_latent_slot(syosai):
+    condition = 0
+    if '属性の魔剣' in syosai:
+        bairitu, bairitu_scaling = _extract_bairitu_latent(syosai)
+        return [1], 2, condition, bairitu, bairitu_scaling
+    scope = 0
+    if 'B.D.攻撃力' in syosai:
+        bunrui = [3]
+    elif '攻撃モーション速度' in syosai:
+        bunrui = [5]
+    elif '攻撃力' in syosai:
+        bunrui = [1]
+    elif '防御力' in syosai:
+        bunrui = [12]
+    elif 'スピード' in syosai:
+        bunrui = [4]
+    elif 'HP' in syosai:
+        bunrui = [10]
+    elif 'ブレイク力' in syosai:
+        bunrui = [2]
+    elif 'ダメージ上限' in syosai:
+        bunrui = [17]
+    elif '記憶結晶装備数' in syosai:
+        bunrui = [19]
+    else:
+        bunrui = [16]
+    bairitu, bairitu_scaling = _extract_bairitu_latent(syosai)
+    return bunrui, scope, condition, bairitu, bairitu_scaling
+
+
+def parse_latent(soup, senzai_table):
+    """Parse 潜在解放 section. Populates senzai_table with new icons.
+    Returns list of {"threshold": N, "slots": [icon_id, ...]} for all 40 fixed thresholds."""
+    threshold_map = {}
+    h2 = soup.find(lambda t: t.name == 'h2' and '潜在解放' in t.get_text())
+    if h2:
+        table = None
+        for sib in h2.next_siblings:
+            if not isinstance(sib, Tag):
+                continue
+            if sib.name == 'table':
+                table = sib
+                break
+            if sib.name == 'h2':
+                break
+        if table:
+            current_threshold = None
+            for row in table.find_all('tr')[1:]:
+                cells = row.find_all('td')
+                if not cells:
+                    continue
+                first_text = cells[0].get_text(strip=True).replace(',', '')
+                if re.match(r'^\d+$', first_text):
+                    current_threshold = int(first_text)
+                    threshold_map.setdefault(current_threshold, [])
+                    slot_cells = cells[1:]
+                else:
+                    slot_cells = cells
+                if current_threshold is None:
+                    continue
+                for cell in slot_cells:
+                    raw = cell.get('data-syosai', '')
+                    if not raw:
+                        continue
+                    try:
+                        data = json.loads(htmlmod.unescape(raw))
+                    except (json.JSONDecodeError, ValueError):
+                        continue
+                    img = cell.find('img')
+                    if not img:
+                        continue
+                    src = img.get('data-lazy-src', img.get('src', ''))
+                    m = re.search(r'/icon/(\d+)\.jpg', src)
+                    if not m:
+                        continue
+                    icon_id = int(m.group(1))
+                    key = str(icon_id)
+                    if key not in senzai_table:
+                        koka   = data.get('koka', '')
+                        syosai = data.get('syosai', '')
+                        bunrui, scope, condition, bairitu, bairitu_scaling = _classify_latent_slot(syosai)
+                        senzai_table[key] = {
+                            'koka':            koka,
+                            'syosai':          syosai,
+                            'bunrui':          bunrui,
+                            'scope':           scope,
+                            'condition':       condition,
+                            'bairitu':         bairitu,
+                            'bairitu_scaling': bairitu_scaling,
+                        }
+                    threshold_map[current_threshold].append(icon_id)
+
+    return [
+        {'threshold': t, 'slots': threshold_map.get(t, [])}
+        for t in OMOIDE_THRESHOLDS
+    ]
+
+
+# ============================================================
 #  CRAWL — network
 # ============================================================
 def fetch_page(session, url, max_retries=3):
@@ -285,10 +421,10 @@ def get_char_list(session):
     return chars
 
 
-def get_char_detail(session, url):
+def get_char_detail(session, url, senzai_table):
     resp = fetch_page(session, url)
     if not resp:
-        return None, url
+        return None, [], url
     final_url = resp.url
     soup      = BeautifulSoup(resp.text, "html.parser")
     states    = {}
@@ -315,7 +451,8 @@ def get_char_detail(session, url):
                 merged["profile"] = profile
         if merged:
             states[label] = merged
-    return states, final_url
+    latent = parse_latent(soup, senzai_table)
+    return states, latent, final_url
 
 
 # ============================================================
@@ -415,7 +552,8 @@ def _juku_max_val(effect):
 
 # シリーズ共通スキル: name-prefix → {bairitu, bairitu_scaling}
 SERIES_TABLE = {
-    '対魔剣殲滅魔導兵器': {'bairitu': 2.0, 'bairitu_scaling': 0.015},
+    '対魔剣殲滅魔導兵器': {'bairitu': 2.0,  'bairitu_scaling': 0.015},
+    'ロストメモリー':     {'bairitu': 2.66, 'bairitu_scaling': 0.013},
 }
 _SERIES_KEYS = sorted(SERIES_TABLE.keys(), key=len, reverse=True)
 
@@ -442,41 +580,41 @@ def _series_lookup(name):
 
 
 def _effect_extract(effect, bunrui):
-    # Strip 熟度 clause so its 最大N倍 doesn't shadow the base value
+    """Returns (value, calc_type) or (None, None)."""
     base = effect[:effect.index('【熟度')] if '【熟度' in effect else effect
 
     m = _MAX_BAI.search(base)
     if m:
-        return float(m.group(1))
+        return float(m.group(1)), 0
 
     is_add = any(b in ADD_BUNRUI or b == 21 for b in bunrui)
     if is_add:
         m = _OKU_UP.search(base)
         if m:
-            return float(m.group(1)) * 100_000_000
+            return float(m.group(1)) * 100_000_000, 1
         m = _MAN_UP.search(base)
         if m:
-            return float(m.group(1)) * 10_000
+            return float(m.group(1)) * 10_000, 1
         m = _PCT_UP.search(base)
         if m:
-            return round(1 + float(m.group(1)) / 100, 6)
+            return round(1 + float(m.group(1)) / 100, 6), 0
         m = _PLAIN_UP.search(base)
         if m:
-            return float(m.group(1))
+            return float(m.group(1)), 1
         m = _PLUS_N.search(base)
         if m:
-            return float(m.group(1))
+            return float(m.group(1)), 1
         m = _MAX_GAUGE.search(effect)   # gauge pattern uses full effect
         if m:
-            return float(m.group(1)) / 3
+            return float(m.group(1)) / 3, 1
         if _BD_LV_ZET.search(effect):
-            return 60.0
+            return 60.0, 1
 
     m = _PLAIN_BAI.search(base)
     if m:
-        return float(m.group(1))
+        return float(m.group(1)), 0
 
-    return None
+    return None, None
 
 
 def _bunrui_default(bunrui, effect):
@@ -496,8 +634,20 @@ def _bunrui_default(bunrui, effect):
     return 1
 
 
+def _scaling_to_json(max_val, base_val):
+    """Compute (max - base) / 99 and return as float if terminating, else fraction string."""
+    try:
+        f = (Fraction(str(max_val)) - Fraction(str(base_val))) / 99
+        d = f.denominator
+        while d % 2 == 0: d //= 2
+        while d % 5 == 0: d //= 5
+        return float(f) if d == 1 else f'{f.numerator}/{f.denominator}'
+    except Exception:
+        return round((max_val - base_val) / 99, 6)
+
+
 def assign_bairitu_and_scaling(skill):
-    """Return (bairitu, bairitu_scaling) for a skill."""
+    """Return (bairitu, bairitu_scaling, calc_type) for a skill."""
     name   = skill.get('name',   '')
     effect = _norm(skill.get('effect', ''))
     effects = skill.get('effects', [])
@@ -509,30 +659,32 @@ def assign_bairitu_and_scaling(skill):
         base_name = name.replace('【深化】', '')
         bairitu = _table_lookup(base_name)
         if bairitu is None:
-            bairitu = _effect_extract(effect, bunrui)
+            bairitu, _ = _effect_extract(effect, bunrui)
         if bairitu is None:
             bairitu = _bunrui_default(bunrui, effect)
-        return bairitu, (scaling if scaling is not None else 0)
+        return bairitu, (scaling if scaling is not None else 0), 0
 
     # ── regular bairitu ──
     v = _table_lookup(name)
     if v is not None:
-        bairitu = v
+        bairitu, calc_type = v, 0
     else:
-        v = _effect_extract(effect, bunrui)
-        bairitu = v if v is not None else _bunrui_default(bunrui, effect)
+        bairitu, calc_type = _effect_extract(effect, bunrui)
+        if bairitu is None:
+            bairitu = _bunrui_default(bunrui, effect)
+            calc_type = 1 if any(b in ADD_BUNRUI for b in bunrui) else 0
 
-    # ── scaling: 熟度 clause with explicit max → (max - base) / 99 ──
+    # ── scaling: 熟度 clause with explicit max → exact fraction when non-terminating ──
     max_val = _juku_max_val(effect)
     if max_val is not None:
-        return bairitu, round((max_val - bairitu) / 99, 6)
+        return bairitu, _scaling_to_json(max_val, bairitu), calc_type
 
     # ── scaling: series table (no explicit max in effect) ──
     series = _series_lookup(name)
     if series:
-        return series['bairitu'], series['bairitu_scaling']
+        return series['bairitu'], series['bairitu_scaling'], 0
 
-    return bairitu, 0
+    return bairitu, 0, calc_type
 
 
 # ============================================================
@@ -581,10 +733,11 @@ def _compute_element_buff(chara):
 # ============================================================
 #  PIPELINE — classify + bairitu in-place
 # ============================================================
-def apply_pipeline(characters, chara_ids=None):
+def apply_pipeline(characters, chara_ids=None, recal=False):
     """Apply classify + bairitu to skills in-place.
-    chara_ids: set of character IDs to process; None means process all."""
-    table_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'skilllist_table.json')
+    chara_ids: set of character IDs to process; None means process all.
+    recal: if True, always overwrite existing bairitu/bairitu_scaling values."""
+    table_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'skilllist_table.json')
     skilllist_table = {}
     if os.path.exists(table_path):
         with open(table_path, encoding='utf-8') as f:
@@ -603,15 +756,13 @@ def apply_pipeline(characters, chara_ids=None):
                 if not effects:
                     continue
                 e = effects[0]
-                # Sync top-level classification fields from effects[0]
-                skill['bunrui']    = e.get('bunrui', [])
-                skill['scope']     = e.get('scope', 0)
-                skill['condition'] = e.get('condition', 0)
-                b, s = assign_bairitu_and_scaling(skill)
-                if 'bairitu' not in e:
+                b, s, ct = assign_bairitu_and_scaling(skill)
+                if recal or 'bairitu' not in e:
                     e['bairitu'] = b
-                if 'bairitu_scaling' not in e:
+                if recal or 'bairitu_scaling' not in e:
                     e['bairitu_scaling'] = s
+                if recal or 'calc_type' not in e:
+                    e['calc_type'] = ct
         _compute_element_buff(chara)
         count += 1
     return characters, count
@@ -639,10 +790,12 @@ def main():
     print("Mode:", mode)
     print("=" * 60)
 
-    out_dir       = os.path.dirname(os.path.abspath(__file__))
-    raw_path      = os.path.join(out_dir, RAW_FILE)
-    output_path   = os.path.join(out_dir, OUTPUT_FILE)
-    progress_path = os.path.join(out_dir, PROGRESS_FILE)
+    out_dir            = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    raw_path           = os.path.join(out_dir, RAW_FILE)
+    output_path        = os.path.join(out_dir, OUTPUT_FILE)
+    progress_path      = os.path.join(out_dir, PROGRESS_FILE)
+    senzai_table_path  = os.path.join(out_dir, SENZAI_TABLE_FILE)
+    senzai_table       = load_json(senzai_table_path, {})
 
     if args.rerun:
         completed  = set()
@@ -709,7 +862,7 @@ def main():
                         save_json(raw_path, characters)
                         continue
 
-                    states, final_url = get_char_detail(session, c["url"])
+                    states, latent, final_url = get_char_detail(session, c["url"], senzai_table)
                     m        = re.search(r"/bxb/chara/(\d+)", final_url)
                     final_id = int(m.group(1)) if m else int(c["chara_id"] or c["id"] or 0)
 
@@ -742,6 +895,8 @@ def main():
                                 updated_ids.add(final_id)
                             else:
                                 print(f"  skip: id={final_id} already saved")
+                            if latent:
+                                characters[existing_idx]["omoide"] = latent
                         else:
                             print(f"  skip: id={final_id} already saved")
                     else:
@@ -754,6 +909,7 @@ def main():
                             "type":    c["type"],
                             "url":     final_url,
                             "states":  states or {},
+                            "omoide":  latent,
                         }
                         if final_id in char_index:
                             characters[char_index[final_id]] = record
@@ -793,9 +949,11 @@ def main():
             if "sort_id" not in c:
                 c["sort_id"] = c.get("id", 0)
         characters.sort(key=lambda x: x.get("sort_id", x.get("id", 0)), reverse=True)
-        output, count = apply_pipeline(copy.deepcopy(characters), pipeline_ids)
+        output, count = apply_pipeline(copy.deepcopy(characters), pipeline_ids, recal=(args.recal or args.rerun))
         save_json(output_path, output)
+        save_senzai_table(senzai_table_path, senzai_table)
         print(f"Done! {len(output)} characters saved to {OUTPUT_FILE} ({count} recalculated)")
+        print(f"Senzai table: {len(senzai_table)} icons in {SENZAI_TABLE_FILE}")
 
     except KeyboardInterrupt:
         print("\nInterrupted. Saving progress...")

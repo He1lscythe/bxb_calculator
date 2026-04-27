@@ -14,8 +14,9 @@ import re
 import copy
 import unicodedata
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, BASE_DIR)
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR   = os.path.dirname(SCRIPT_DIR)
+sys.path.insert(0, SCRIPT_DIR)
 
 from classify_common import (
     classify_skill_chara, CAT_TO_BUNRUI_SKILLLIST,

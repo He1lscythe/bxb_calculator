@@ -11,6 +11,13 @@
 import argparse, requests, json, re, os, html as htmlmod
 from bs4 import BeautifulSoup
 
+CRYSTAL_ADD_BUNRUI = {6, 7, 9, 11, 16, 17, 19}
+
+
+def crystal_calc_type(bunrui_list):
+    """0=乘算  1=加算"""
+    return 1 if any(b in CRYSTAL_ADD_BUNRUI for b in bunrui_list) else 0
+
 LIST_URL    = "https://altema.jp/bxb/kiokukessyou"
 OUTPUT_FILE = "crystals.json"
 HEADERS = {
@@ -18,7 +25,7 @@ HEADERS = {
     "Accept-Language": "ja,en-US;q=0.7,en;q=0.3",
     "Referer": "https://altema.jp/bxb/",
 }
-DIR = os.path.dirname(os.path.abspath(__file__))
+DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def parse_jp_number(s):
@@ -90,6 +97,17 @@ def parse_row(row):
     fields = parse_right_col(tds[1])
     emin, emax = parse_effect_amount(fields.get('効果量', ''))
 
+    bunrui_list = d.get('bunrui', [])
+    jyoken      = d.get('jyoken')
+    effect_ent  = {'bunrui': bunrui_list, 'jyoken': jyoken,
+                   'calc_type': crystal_calc_type(bunrui_list)}
+    if emin is not None:
+        effect_ent['effect_min'] = emin
+    if emax is not None:
+        effect_ent['effect_max'] = emax
+    if d.get('or'):
+        effect_ent['or'] = True
+
     crystal = {
         'id':        d.get('id'),
         'name':      d.get('name', ''),
@@ -97,17 +115,12 @@ def parse_row(row):
         'rarity':    d.get('rea'),
         'element':   d.get('element'),
         'buki_type': d.get('buki_type'),
-        'bunrui':    d.get('bunrui', []),
-        'jyoken':    d.get('jyoken'),
     }
     for k in ['効果', '効果量', '特殊条件', '対象', '上限値', '入手方法']:
         v = fields.get(k)
         if v is not None:
             crystal[k] = v
-    if emin is not None:
-        crystal['effect_min'] = emin
-    if emax is not None:
-        crystal['effect_max'] = emax
+    crystal['effects'] = [effect_ent]
     return crystal
 
 

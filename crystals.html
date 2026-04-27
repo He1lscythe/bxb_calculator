@@ -81,6 +81,7 @@ input[type=number] { -moz-appearance: textfield; }
 .effect-range { display: flex; gap: 5px; align-items: baseline; font-size: 14px; font-weight: 700; }
 .effect-range .sep { color: var(--text2); font-size: 12px; }
 .effect-range .unit { color: var(--text2); font-size: 11px; }
+.effect-range .ct-pfx { color: var(--text2); font-size: 11px; }
 
 .crystal-edit-body { border-top: 1px solid var(--accent); padding: 14px; background: rgba(91,127,255,.04); }
 .edit-actions { display: flex; gap: 8px; margin-bottom: 12px; }
@@ -348,13 +349,14 @@ function renderDetailBody(c) {
   if (c['効果'])     fields.push(['効果',    escHtml(c['効果'])]);
   (c.effects || []).forEach(function(e) {
     if (e.effect_min != null || e.effect_max != null) {
-      var unit = (c['効果量'] || '').indexOf('倍') !== -1 ? '倍' : '';
+      var unit = e.calc_type === 1 ? '' : '倍';
+      var pfx  = e.calc_type === 1 ? '+' : '×';
       var mn = e.effect_min, mx = e.effect_max;
       var range;
       if (mn != null && mx != null && mn !== mx) {
-        range = '<span class="effect-range">' + fmt(mn) + '<span class="sep">～</span>' + fmt(mx) + '<span class="unit">' + unit + '</span></span>';
+        range = '<span class="effect-range"><span class="ct-pfx">' + pfx + '</span>' + fmt(mn) + '<span class="sep">～</span>' + fmt(mx) + '<span class="unit">' + unit + '</span></span>';
       } else {
-        range = '<span class="effect-range">' + fmt(mn != null ? mn : mx) + '<span class="unit">' + unit + '</span></span>';
+        range = '<span class="effect-range"><span class="ct-pfx">' + pfx + '</span>' + fmt(mn != null ? mn : mx) + '<span class="unit">' + unit + '</span></span>';
       }
       fields.push(['効果量', range]);
     }
@@ -464,14 +466,18 @@ function renderEditBody(c) {
       return '<option value="' + k + '"' + (c.buki_type == k ? ' selected' : '') + '>' + WEAPON[k] + '</option>';
     }).join('');
 
-  var unit = (c['効果量'] || '').indexOf('倍') !== -1 ? '倍' : '';
+  var ctSel =
+    '<select class="edit-select" onchange="if(!editData.effects)editData.effects=[{}];editData.effects[0].calc_type=+this.value">' +
+      '<option value="0"' + (e0.calc_type === 0 ? ' selected' : '') + '>×</option>' +
+      '<option value="1"' + (e0.calc_type === 1 ? ' selected' : '') + '>+</option>' +
+    '</select>';
   var minMax =
     '<div class="field-label">効果量</div>' +
     '<div style="display:flex;align-items:center;gap:8px">' +
+      ctSel +
       '<input type="number" step="any" class="edit-input" style="width:110px;text-align:right" value="' + (e0.effect_min != null ? e0.effect_min : '') + '" oninput="if(!editData.effects)editData.effects=[{}];editData.effects[0].effect_min=this.value===\'\'?null:Number(this.value)">' +
       '<span style="color:var(--text2)">～</span>' +
       '<input type="number" step="any" class="edit-input" style="width:110px;text-align:right" value="' + (e0.effect_max != null ? e0.effect_max : '') + '" oninput="if(!editData.effects)editData.effects=[{}];editData.effects[0].effect_max=this.value===\'\'?null:Number(this.value)">' +
-      (unit ? '<span style="color:var(--text2);font-size:12px">' + unit + '</span>' : '') +
     '</div>';
 
   return '<div class="edit-actions">' +
