@@ -27,7 +27,7 @@
       '<div id="topbar-right">' +
         '<button id="nav-hamburger" onclick="(function(){var n=document.getElementById(\'page-nav\');n.classList.toggle(\'open\');})()" aria-label="メニュー">☰</button>' +
         '<div id="revise-bar">' +
-          '<button class="btn-revise-save" onclick="saveRevise()">Save</button>' +
+          '<button class="btn-revise-save" onclick="typeof saveRevise===\'function\'&&saveRevise()">Save</button>' +
           '<span id="revise-status"></span>' +
         '</div>' +
       '</div>' +
@@ -72,7 +72,7 @@
   // insert topbar where this script tag sits
   document.currentScript.insertAdjacentHTML('afterend', html);
 
-  // close menu when clicking a nav link
+  // close menu when clicking outside nav
   document.addEventListener('click', function(e) {
     var nav = document.getElementById('page-nav');
     var hamburger = document.getElementById('nav-hamburger');
@@ -82,3 +82,16 @@
     }
   });
 })();
+
+// shared across all pages — reads each page's own reviseData variable
+function updateReviseBar() {
+  var rd = (typeof reviseData !== 'undefined') ? reviseData : {};
+  var count = Object.keys(rd).length;
+  var bar = document.getElementById('revise-bar');
+  var btn = document.querySelector('.btn-revise-save');
+  var status = document.getElementById('revise-status');
+  if (!bar || !btn) return;
+  bar.style.display = count > 0 ? 'flex' : 'none';
+  btn.textContent = count > 0 ? 'Save (' + count + ')' : 'Save';
+  if (status) status.textContent = '';
+}
