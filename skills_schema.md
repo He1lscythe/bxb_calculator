@@ -18,14 +18,14 @@
     "入手方法": string?,  // 入手途径
     "effects": [
       {
-        "bunrui":      int[],   // 效果分类（见 bunrui 表；可多个，OR条件时亦同列表）
-        "scope":       int,     // 见 scope 统一对照表（0/2/3/5）
-        "element":     int?,    // scope=3 且属性限定时存在（int，见 element 表）
-        "type":        int?,    // scope=3 且武器限定时存在（int，见 type 表）
+        "bunrui":      int[],   // 效果分类（见 bunrui 表）
+        "scope":       int,     // 见 scope 统一对照表（0/1/2/3/5）
+        "element":     int?,    // scope=2/3 且属性限定时存在（int，见 element 表）
+        "type":        int?,    // scope=2/3 且武器限定时存在（int，见 type 表）
         "name":        string?, // scope=5 时存在，值与顶层 特殊条件 相同
-        "effect_min":  float?,  // 最小效果量
-        "effect_max":  float?,  // 最大效果量
-        "or":          true?,   // 存在时表示 bunrui 为 OR 关系（如攻撃力UPor速度UP）
+        "condition":   int,     // 发动条件: 0=无条件 1=浑身 2=背水 3=破損
+        "bairitu_init": float?, // 初始效果量（最小值）
+        "bairitu":     float?,  // 最大效果量（满级时）
         "calc_type":   0|1      // 倍率计算方式
       }
     ]
@@ -35,7 +35,7 @@
 
 > 图片URL：`https://img.altema.jp/bxb/kioku_kessyou/icon/{id}.jpg`
 >
-> **scope 推断规则**：① `特殊条件` 非空 → scope=5 ② 効果文に `同装備セット` → scope=2 ③ `element` 或 `buki_type` 非0 → scope=3 ④ 其余 → scope=0
+> **scope 推断规则**：① `特殊条件` 非空 → scope=5 ② 効果文に `同装備セット` → 有属性/武器词 → scope=2（加 element/type）；无 → scope=1 ③ `element` 或 `buki_type` 非0 → scope=3 ④ 其余 → scope=0
 
 ---
 
@@ -202,24 +202,52 @@
 
 ---
 
+## effects[] 字段对照表
+
+各数据源 effects 数组的字段分布。`✓` 表示所有条目均有此字段，`条件` 表示特定 scope 值时才出现，`—` 表示该数据源不存在。
+
+| 字段 | characters_classified | souls | bladegraph | crystals | 说明 |
+|------|-----------------------|-------|------------|---------|------|
+| `bunrui` | ✓ | ✓ | ✓ | ✓ | `int[]`，效果分类（见 bunrui 表） |
+| `scope` | ✓ | ✓ | ✓ | ✓ | `int`，见 scope 表 |
+| `condition` | ✓ | ✓ | ✓ | ✓ | `int`，见 condition 表 |
+| `bairitu` | ✓ | ✓ | ✓ | ✓ | `float`，效果值 / 倍率（满级） |
+| `calc_type` | ✓ | ✓ | ✓ | ✓ | `0\|1`，见 calc_type 表 |
+| `element` | scope=2时 | scope=3/4时 | scope=3时 | scope=2/3时 | `int`，属性限定（见 element 表） |
+| `type` | scope=2时 | scope=3/4时 | scope=3时 | scope=2/3时 | `int`，武器种限定（见 type 表） |
+| `name` | — | — | scope=5时 | scope=5时 | `string`，限定魔剣名 / キャラ名 |
+| `bairitu_init` | — | — | — | 有区间时 | `float`，效果初始值（最小值，对应 1 ★）；缺失时与 `bairitu` 相同 |
+| `bairitu_scaling` | ✓ | — | — | — | `float`，熟度每级增量；0 = 固定值 |
+
+> **souls / characters 的 `element` / `type` 多值情况**：当一个技能同时限定多个属性或武器种时，值为 `int[]`（如 `[1, 3]`）。其余数据源均为单 `int`。
+
+---
+
 ## scope 范围对照表（统一）
 
-所有数据（魔剣技能 / 魂技能 / 記憶結晶 / 心象結晶）共用同一套 scope 编码，含义相同：
+所有数据共用同一套 scope 编码。各数据源实际出现的值：
 
-| scope | 含义 | element | type | name | 适用数据 |
-|-------|------|---------|------|------|---------|
-| 0 | 全体 / 制限なし | 无 | 无 | 无 | 全て |
-| 1 | 自分のみ（装備キャラ自身） | 无 | 无 | 无 | characters, souls |
-| 2 | 同装備セット全体 | 无 | 无 | 无 | 全て |
-| 3 | 特定属性/武器種限定 | 属性限定時存在，多属性为数组（characters/souls）或单值 int（crystals/bladegraph） | 武器限定時存在，同上 | 无 | 全て |
-| 4 | 特定キャラ群（装備条件を満たす全セット） | 同 scope=3 | 同上 | 无 | characters, souls |
-| 5 | 特定キャラ限定 | 无 | 无 | 魔剣名 / キャラ名（str） | 全て |
+| 数据源 | scope 实际值 |
+|--------|-------------|
+| characters_classified | 0, 1, 2 |
+| souls | 0, 1, 3, 4 |
+| bladegraph | 0, 3, 5 |
+| crystals | 0, 1, 2, 3, 5 |
 
-**各データの検出ロジック**：
-- **characters.json 魔剣技能**：scope=0/1 は classify ロジックが判断；scope=2 は `同装備セット` キーワード
-- **souls.json 魂技能**：scope=3/4 は `装備で` 等のキーワードと全队关键词で判定
-- **crystals.json 記憶結晶**：① `特殊条件` 非空 → scope=5 ② `同装備セット` in 効果 → scope=2 ③ element/buki_type 非0 → scope=3 ④ 其余 → scope=0
-- **bladegraph.json 心象結晶**：① `data-contents.type` 非空（単一武器）→ scope=3 ② `data-contents.zokusei` 非0 → scope=3 ③ `【〇〇のみ】` かつ属性/武器名でない → scope=5 ④ 其余 → scope=0
+| scope | 含义 | 作用范围 | element/type | name |
+|-------|------|---------|-------------|------|
+| 0 | 无条件，对自身作用 | 装備キャラ自身 | 无 | 无 |
+| 1 | 无条件，对全队作用 | 同装備セット全体 | 无 | 无 |
+| 2 | 队内符合属性/武器条件的角色受益 | 同装備セット内の条件一致キャラ | 存在 | 无 |
+| 3 | 自身符合属性/武器条件才受益 | 装備キャラ自身（条件一致時のみ） | 存在 | 无 |
+| 4 | 自身符合条件时，全队受益 | 同装備セット全体（装備キャラが条件一致時） | 存在 | 无 |
+| 5 | 特定魔剣名限定 | 指定魔剣装備キャラ自身 | 无 | 存在 |
+
+**各数据的 scope 检测逻辑**：
+- **characters_classified**：scope=0/1 由 classify 逻辑判断；scope=2 检测效果文中的 `同装備セット` 关键词（附 element/type）
+- **souls**：scope=3/4 由 `装備で` 等关键词与全队关键词组合判定
+- **crystals**：① `特殊条件` 非空 → scope=5 ② 効果文含 `同装備セット` → 有属性/武器词 → scope=2；无 → scope=1 ③ element/buki_type 非0 → scope=3 ④ 其余 → scope=0
+- **bladegraph**：① `data-contents.type` 非空（武器限定）→ scope=3 ② `data-contents.zokusei` 非0（属性限定）→ scope=3 ③ 効果文含 `【〇〇のみ】` 且非属性/武器名 → scope=5 ④ 其余 → scope=0
 
 ---
 

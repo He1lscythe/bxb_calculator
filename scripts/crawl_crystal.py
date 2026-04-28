@@ -13,6 +13,36 @@ from bs4 import BeautifulSoup
 
 CRYSTAL_ADD_BUNRUI = {6, 7, 9, 11, 16, 17, 19}
 
+ELEMENT_MAP = {'火': 1, '水': 2, '風': 3, '光': 4, '闇': 5, '無': 6}
+WEAPON_MAP  = {
+    '長剣': 1, '大剣': 2, '太刀': 3, '杖棒': 4, '弓矢': 5, '連弩': 6,
+    '戦斧': 7, '騎槍': 8, '投擲': 9, '拳闘': 10, '魔典': 11, '大鎌': 12,
+}
+
+_HUSHIN = re.compile(r'残HPが多いほど|HP残量が多いほど|残りHP(?:が)?多いほど|損傷率が低いほど')
+_HAISUI = re.compile(r'残HPが少ないほど|HP残量が少ないほど|残りHP(?:が)?少ないほど|HPが少ないほど|損傷率が高いほど|HPを消耗するほど|HPが消耗するほど')
+_BROKEN = re.compile(r'破損状態')
+
+
+def detect_condition(text):
+    if _BROKEN.search(text): return 3
+    if _HUSHIN.search(text): return 1
+    if _HAISUI.search(text): return 2
+    return 0
+
+
+def extract_elem_buki(text):
+    elem, buki = 0, 0
+    for name, eid in ELEMENT_MAP.items():
+        if name in text:
+            elem = eid
+            break
+    for name, tid in WEAPON_MAP.items():
+        if name in text:
+            buki = tid
+            break
+    return elem, buki
+
 
 def crystal_calc_type(bunrui_list):
     """0=乘算  1=加算"""
@@ -88,7 +118,10 @@ def compute_scope(elem, buki, effect_text, tokushu):
     if tokushu:
         return 5
     if '同装備セット' in (effect_text or ''):
-        return 2
+        txt_elem, txt_buki = extract_elem_buki(effect_text)
+        if txt_elem or txt_buki:
+            return 2  # all party, element/weapon condition
+        return 1      # all party, no condition
     if elem or buki:
         return 3
     return 0
@@ -114,16 +147,21 @@ def parse_row(row):
     effect_text = fields.get('効果', '')
     scope       = compute_scope(elem, buki, effect_text, tokushu)
 
-    effect_ent = {'bunrui': bunrui_list}
-    effect_ent['scope'] = scope
-    if scope == 3:
+    txt_elem, txt_buki = extract_elem_buki(effect_text)
+    condition = detect_condition(effect_text)
+
+    effect_ent = {'bunrui': bunrui_list, 'scope': scope}
+    if scope == 2:
+        if txt_elem: effect_ent['element'] = txt_elem
+        if txt_buki: effect_ent['type']    = txt_buki
+    elif scope == 3:
         if elem: effect_ent['element'] = elem
         if buki: effect_ent['type']    = buki
     elif scope == 5:
         if tokushu: effect_ent['name'] = tokushu
-    if emin is not None: effect_ent['effect_min'] = emin
-    if emax is not None: effect_ent['effect_max'] = emax
-    if d.get('or'):      effect_ent['or'] = True
+    effect_ent['condition'] = condition
+    if emin is not None: effect_ent['bairitu_init'] = emin
+    if emax is not None: effect_ent['bairitu']      = emax
     effect_ent['calc_type'] = crystal_calc_type(bunrui_list)
 
     crystal = {

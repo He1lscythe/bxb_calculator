@@ -22,7 +22,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
 #filters input[type=text] { width: 100%; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; outline: none; }
 #filters input[type=text]:focus { border-color: var(--accent); }
 .filter-section { display: flex; flex-direction: column; gap: 3px; }
-.filter-row2 { display: flex; gap: 10px; align-items: flex-start; }
+.filter-row2 { display: flex; gap: 28px; align-items: flex-start; }
 .filter-label { font-size: 10px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .06em; }
 .filter-toggles { display: flex; flex-wrap: wrap; gap: 3px; }
 .ftog { font-size: 11px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; transition: all .1s; white-space: nowrap; }
@@ -182,21 +182,34 @@ input[type=number] { -moz-appearance: textfield; }
       </div>
     </div>
 
-    <div class="filter-section">
-      <div class="filter-label">条件タイプ</div>
-      <div class="filter-toggles" id="f-cond">
-        <button class="ftog" data-val="0" onclick="toggleFilter('cond',0,this)">無条件</button>
-        <button class="ftog" data-val="1" onclick="toggleFilter('cond',1,this)">浑身</button>
-        <button class="ftog" data-val="2" onclick="toggleFilter('cond',2,this)">背水</button>
-        <button class="ftog" data-val="3" onclick="toggleFilter('cond',3,this)">時間</button>
-        <button class="ftog" data-val="4" onclick="toggleFilter('cond',4,this)">属性/武器</button>
-        <button class="ftog" data-val="5" onclick="toggleFilter('cond',5,this)">キャラ限</button>
+    <div class="filter-row2">
+      <div class="filter-section">
+        <div class="filter-label">条件（対象）</div>
+        <div class="filter-toggles" id="f-scope">
+          <button class="ftog" data-val="0" onclick="toggleFilter('scope',0,this)">自身</button>
+          <button class="ftog" data-val="1" onclick="toggleFilter('scope',1,this)">セット全</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('scope',2,this)">セット限</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('scope',3,this)">対象限</button>
+          <button class="ftog" data-val="5" onclick="toggleFilter('scope',5,this)">キャラ限</button>
+        </div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-label">条件（発動）</div>
+        <div class="filter-toggles" id="f-condition">
+          <button class="ftog" data-val="1" onclick="toggleFilter('condition',1,this)">浑身</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('condition',2,this)">背水</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('condition',3,this)">破損</button>
+        </div>
       </div>
     </div>
 
     <div style="display:flex;align-items:center;justify-content:space-between;margin-top:2px;">
       <div id="bg-count"></div>
-      <button onclick="resetFilters()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
+      <div style="display:flex;gap:6px;">
+        <button onclick="expandAll()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">全展開</button>
+        <button onclick="collapseAll()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">全収起</button>
+        <button onclick="resetFilters()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
+      </div>
     </div>
   </div>
   <div id="bg-list"></div>
@@ -269,12 +282,35 @@ document.getElementById('file-input').addEventListener('change', function(e) {
 });
 
 // ===== FILTER STATE =====
-var filterSets = { rarity: new Set(), element: new Set(), weapon: new Set(), bunrui: new Set(), cond: new Set() };
+var filterSets = { rarity: new Set(), element: new Set(), weapon: new Set(), bunrui: new Set(), scope: new Set(), condition: new Set() };
 
 function toggleFilter(key, val, btn) {
   if (filterSets[key].has(val)) { filterSets[key].delete(val); btn.classList.remove('on'); }
   else                           { filterSets[key].add(val);    btn.classList.add('on'); }
   applyFilters();
+}
+
+function expandAll() {
+  filteredBG.forEach(function(c) {
+    if (editingId === c.id || expandedIds.has(c.id)) return;
+    var row = document.getElementById('row-' + c.id);
+    var body = document.getElementById('body-' + c.id);
+    if (row && body) {
+      expandedIds.add(c.id);
+      row.classList.add('expanded');
+      body.innerHTML = renderDetailBody(c);
+    }
+  });
+}
+
+function collapseAll() {
+  expandedIds.forEach(function(id) {
+    if (editingId === id) return;
+    var row = document.getElementById('row-' + id);
+    var body = document.getElementById('body-' + id);
+    if (row && body) { row.classList.remove('expanded'); body.innerHTML = ''; }
+  });
+  filteredBG.forEach(function(c) { if (editingId !== c.id) expandedIds.delete(c.id); });
 }
 
 function resetFilters() {
@@ -286,17 +322,6 @@ function resetFilters() {
   applyFilters();
 }
 
-function matchesCond(c, condVal) {
-  switch(condVal) {
-    case 0: return !c.time_start && (c.effects||[]).every(function(e){return e.scope===0 && e.condition===0;});
-    case 1: return (c.effects||[]).some(function(e){return e.condition===1;});
-    case 2: return (c.effects||[]).some(function(e){return e.condition===2;});
-    case 3: return !!c.time_start;
-    case 4: return (c.effects||[]).some(function(e){return e.scope===3;});
-    case 5: return (c.effects||[]).some(function(e){return e.scope===5;});
-  }
-  return true;
-}
 
 function applyFilters() {
   var q = document.getElementById('search').value.trim().toLowerCase();
@@ -312,7 +337,8 @@ function applyFilters() {
     if (filterSets.bunrui.size && !Array.from(filterSets.bunrui).some(function(v) {
       return (c.effects||[]).some(function(e) { return (e.bunrui||[]).indexOf(v) !== -1; });
     })) return false;
-    if (filterSets.cond.size && !Array.from(filterSets.cond).some(function(v) { return matchesCond(c, v); })) return false;
+    if (filterSets.scope.size && !Array.from(filterSets.scope).some(function(v) { return (c.effects||[]).some(function(e) { return e.scope === v; }); })) return false;
+    if (filterSets.condition.size && !Array.from(filterSets.condition).some(function(v) { return (c.effects||[]).some(function(e) { return e.condition === v; }); })) return false;
     return true;
   });
   document.getElementById('bg-count').textContent = filteredBG.length + ' 件';
