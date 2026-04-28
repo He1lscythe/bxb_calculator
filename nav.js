@@ -5,6 +5,7 @@
     { id: 'crystals',  href: 'crystals.html',  label: '結晶' },
     { id: 'bladegraph', href: 'bladegraph.html', label: '心象結晶' },
     { id: 'soul',      href: 'soul.html',      label: 'ソウル' },
+    { id: 'hensei',    href: 'hensei.html',    label: '編成' },
   ];
 
   // detect active page from filename
@@ -24,9 +25,7 @@
       '<h1>⚔ BxB</h1>' +
       '<nav id="page-nav">' + links + '</nav>' +
       '<div id="topbar-right">' +
-        '<label id="file-label" for="file-input">JSON を読み込む</label>' +
-        '<input type="file" id="file-input" accept=".json,.js">' +
-        '<span id="file-status"></span>' +
+        '<button id="nav-hamburger" onclick="(function(){var n=document.getElementById(\'page-nav\');n.classList.toggle(\'open\');})()" aria-label="メニュー">☰</button>' +
         '<div id="revise-bar">' +
           '<button class="btn-revise-save" onclick="saveRevise()">Save</button>' +
           '<span id="revise-status"></span>' +
@@ -44,16 +43,27 @@
     '.nav-link:hover{color:var(--text);}' +
     '.nav-link.active{color:var(--accent);border-bottom-color:var(--accent);}' +
     '#topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;flex-shrink:0;}' +
-    '#file-label{cursor:pointer;background:var(--accent);color:#fff;border:none;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:600;white-space:nowrap;}' +
-    '#file-label:hover{opacity:.85;}' +
-    '#file-input{display:none;}' +
-    '#file-status{font-size:12px;color:var(--text2);white-space:nowrap;}' +
+    '#nav-hamburger{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;padding:2px 6px;line-height:1;border-radius:4px;}' +
+    '#nav-hamburger:hover{background:var(--bg3);}' +
     '#revise-bar{display:none;align-items:center;gap:8px;background:#142814;border:1px solid #2d6b2d;border-radius:6px;padding:4px 10px;}' +
     '#revise-status{font-size:12px;color:#55bb55;}' +
     '.btn-revise-save{background:#1e5c1e;color:#aaffaa;border:1px solid #2d8c2d;border-radius:6px;padding:4px 12px;font-size:12px;cursor:pointer;font-weight:600;}' +
     '.btn-revise-save:hover{background:#266626;}' +
     '.btn-revise-save:disabled{opacity:.5;cursor:default;}' +
-    '@media(max-width:600px){#file-label,#file-status{display:none;}#topbar{min-height:52px;}}';
+    '@media(max-width:600px){' +
+      '#nav-hamburger{display:block;}' +
+      '#revise-bar{display:none!important;}' +
+      '#page-nav{' +
+        'display:none;position:absolute;top:52px;left:0;right:0;' +
+        'flex-direction:column;background:var(--bg2);' +
+        'border-bottom:2px solid var(--border);' +
+        'box-shadow:0 6px 16px rgba(0,0,0,.5);z-index:99;' +
+      '}' +
+      '#page-nav.open{display:flex;}' +
+      '.nav-link{padding:12px 20px;border-bottom:1px solid var(--border);border-right:none;white-space:normal;}' +
+      '.nav-link.active{border-bottom-color:var(--border);border-left:3px solid var(--accent);padding-left:17px;}' +
+      '#topbar{position:relative;}' +
+    '}';
 
   var style = document.createElement('style');
   style.textContent = css;
@@ -61,4 +71,14 @@
 
   // insert topbar where this script tag sits
   document.currentScript.insertAdjacentHTML('afterend', html);
+
+  // close menu when clicking a nav link
+  document.addEventListener('click', function(e) {
+    var nav = document.getElementById('page-nav');
+    var hamburger = document.getElementById('nav-hamburger');
+    if (!nav || !hamburger) return;
+    if (!nav.contains(e.target) && e.target !== hamburger && !hamburger.contains(e.target)) {
+      nav.classList.remove('open');
+    }
+  });
 })();

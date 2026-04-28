@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BxB 編成</title>
+<style>
+:root{--bg:#0f1117;--bg2:#1a1d27;--bg3:#22263a;--border:#2e3250;--text:#e0e4f0;--text2:#8890b0;--accent:#5b7fff;
+  --fire:#ff5533;--water:#3388ff;--wind:#44cc66;--light:#ffcc00;--dark:#aa55ff;--none:#888899;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',sans-serif;font-size:14px;min-height:100vh;display:flex;justify-content:center;}
+#page-wrap{max-width:72rem;width:100%;display:flex;flex-direction:column;}
+
+/* team size bar */
+#team-size-bar{display:flex;gap:8px;padding:10px 16px;background:var(--bg2);border-bottom:1px solid var(--border);align-items:center;flex-shrink:0;}
+.ts-label{font-size:11px;font-weight:700;color:var(--text2);margin-right:4px;letter-spacing:.05em;}
+.size-btn{padding:4px 18px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
+.size-btn:hover{border-color:var(--accent);color:var(--text);}
+.size-btn.active{background:rgba(91,127,255,.22);border-color:var(--accent);color:var(--accent);}
+
+/* slots */
+#slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:16px;align-items:start;}
+.slot-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:opacity .2s;}
+.slot-card.disabled{opacity:.35;pointer-events:none;}
+.slot-header{padding:10px 14px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;min-height:42px;}
+.slot-num{font-size:15px;font-weight:700;color:var(--accent);flex-shrink:0;}
+.slot-chara-name{font-size:12px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;}
+.slot-clear-btn{margin-left:auto;flex-shrink:0;padding:3px 10px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:11px;cursor:pointer;transition:all .1s;}
+.slot-clear-btn:hover{border-color:#ff5555;color:#ff7777;}
+.slot-chara-meta{font-size:10px;color:var(--text2);flex-shrink:0;}
+.slot-body{padding:12px 14px;display:flex;flex-direction:column;gap:14px;}
+
+/* equip row */
+.equip-section{display:flex;flex-direction:column;gap:7px;}
+.equip-label{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;gap:4px;}
+.equip-row{display:flex;gap:10px;align-items:center;}
+.equip-icon{width:40px;height:40px;border-radius:6px;object-fit:cover;background:var(--bg3);border:1px solid var(--border);flex-shrink:0;}
+.equip-icon.soul-img{width:60px;height:60px;border-radius:6px;}
+.equip-icon.bg-img{width:60px;height:60px;border-radius:6px;}
+.equip-icon-empty{width:40px;height:40px;border-radius:6px;background:var(--bg3);border:1px dashed var(--border);flex-shrink:0;}
+.equip-icon-empty.soul-img{width:60px;height:60px;border-radius:6px;}
+.equip-icon-empty.bg-img{width:60px;height:60px;border-radius:6px;}
+.picker-wrap{flex:1;min-width:0;}
+.picker-btn{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:14px;padding:7px 10px;text-align:left;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:border-color .1s;display:block;}
+.picker-row{display:flex;gap:6px;align-items:center;}
+.picker-row .picker-btn{flex:1;width:auto;}
+.picker-btn:hover{border-color:var(--accent);}
+.picker-btn.empty{color:var(--text2);font-style:italic;}
+.picker-btn.has-val{border-color:rgba(91,127,255,.45);}
+.picker-sub{font-size:11px;color:var(--text2);margin-top:3px;padding-left:2px;}
+.elem-dot{display:inline-block;width:7px;height:7px;border-radius:50%;vertical-align:middle;margin-right:3px;}
+
+/* skills panel in slot */
+.skills-panel{display:flex;flex-direction:column;gap:4px;margin-top:4px;}
+.skill-item{background:rgba(0,0,0,.28);border-radius:7px;padding:5px 8px;border-left:2px solid rgba(91,127,255,.4);display:flex;flex-direction:column;gap:5px;}
+.skill-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.skill-eftxt{font-size:11px;color:var(--text2);margin-bottom:4px;line-height:1.5;}
+.eftags{display:flex;flex-wrap:wrap;gap:5px;align-items:center;}
+.tag-b{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600;background:rgba(91,127,255,.18);color:#9bb0ff;border:1px solid rgba(91,127,255,.3);}
+.tag-scope{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;color:var(--text2);background:var(--bg);border:1px solid var(--border);}
+.tag-lim{color:#cc99ff;background:rgba(170,85,255,.15);border-color:rgba(170,85,255,.3);}
+.tag-cond{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;color:#ffaa44;background:rgba(255,170,68,.12);border:1px solid rgba(255,170,68,.3);}
+.tag-val{font-size:13px;font-weight:700;color:#ffe066;padding:0 4px;}
+
+/* collapsible detail panels */
+.detail-wrap{display:none;}
+.detail-wrap.open{display:block;}
+.detail-toggle{background:none;border:none;color:var(--text2);font-size:10px;cursor:pointer;padding:0 2px;line-height:1;vertical-align:middle;margin-left:4px;transition:color .1s;}
+.detail-toggle:hover{color:var(--accent);}
+
+/* crystals */
+.crystals-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.crystal-slot-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.crystal-thumb{width:38px;height:38px;border-radius:5px;object-fit:cover;border:1px solid rgba(91,127,255,.4);cursor:pointer;transition:border-color .1s;background:var(--bg3);}
+.crystal-thumb:hover{border-color:var(--accent);}
+.crystal-empty{width:38px;height:38px;border-radius:5px;border:1px dashed var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:18px;line-height:1;transition:border-color .1s,color .1s;}
+.crystal-empty:hover{border-color:var(--accent);color:var(--accent);}
+.crystal-rm{background:none;border:none;font-size:9px;color:var(--text2);cursor:pointer;line-height:1;padding:0;}
+.crystal-rm:hover{color:#ff5555;}
+.cr-eff-list{display:flex;flex-direction:column;gap:3px;margin-top:6px;}
+.cr-eff-row{display:flex;align-items:flex-start;gap:6px;padding:4px 0;border-bottom:1px solid rgba(46,50,80,.6);}
+.cr-eff-row:last-child{border-bottom:none;}
+.cr-eff-name{font-size:10px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px;flex-shrink:0;}
+.cr-eff-tags{display:flex;flex-wrap:wrap;gap:3px;flex:1;}
+
+/* ===== ENTITY MODAL (z-index 2000) ===== */
+#entity-modal{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;}
+#entity-modal.open{display:flex;}
+/* ===== DETAIL MODAL (z-index 3000) ===== */
+#detail-modal{display:none;position:fixed;inset:0;z-index:3000;align-items:center;justify-content:center;}
+#detail-modal.open{display:flex;}
+
+.modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.65);}
+.modal-panel{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;z-index:1;overflow:hidden;}
+#entity-modal .modal-panel{width:min(720px,96vw);height:min(860px,94vh);}
+#detail-modal .modal-panel{width:min(740px,96vw);height:min(720px,92vh);}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px;}
+.modal-header-title{font-size:14px;font-weight:700;flex:1;}
+.modal-close{background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;line-height:1;padding:2px 6px;border-radius:4px;flex-shrink:0;}
+.modal-close:hover{color:var(--text);background:var(--bg3);}
+.modal-body{display:flex;flex:1;overflow:hidden;}
+
+/* sidebar */
+.modal-sidebar{width:230px;min-width:180px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;padding:10px;gap:8px;flex-shrink:0;}
+.modal-sidebar::-webkit-scrollbar{width:4px;}
+.modal-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.modal-search{width:100%;padding:7px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;outline:none;}
+.modal-search:focus{border-color:var(--accent);}
+.f-section{display:flex;flex-direction:column;gap:4px;}
+.f-label{font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;}
+.f-toggles{display:flex;flex-wrap:wrap;gap:3px;}
+.ftog{font-size:11px;padding:2px 7px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all .1s;white-space:nowrap;}
+.ftog:hover{border-color:var(--accent);color:var(--text);}
+.ftog.on{background:rgba(91,127,255,.25);border-color:var(--accent);color:#7b9fff;font-weight:700;}
+.ftog.elem-1.on{background:rgba(255,85,51,.22);border-color:var(--fire);color:var(--fire);}
+.ftog.elem-2.on{background:rgba(51,136,255,.22);border-color:var(--water);color:var(--water);}
+.ftog.elem-3.on{background:rgba(68,204,102,.22);border-color:var(--wind);color:var(--wind);}
+.ftog.elem-4.on{background:rgba(255,204,0,.22);border-color:var(--light);color:var(--light);}
+.ftog.elem-5.on{background:rgba(170,85,255,.22);border-color:var(--dark);color:var(--dark);}
+.f-sort-row{display:flex;gap:5px;align-items:center;}
+.f-sort-row select{flex:1;min-width:0;padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:11px;outline:none;cursor:pointer;}
+.f-sort-dir{padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;cursor:pointer;flex-shrink:0;}
+.f-sort-dir:hover{border-color:var(--accent);color:var(--accent);}
+.f-reset-btn{padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:11px;cursor:pointer;}
+.f-reset-btn:hover{border-color:var(--accent);color:var(--text);}
+.modal-count{font-size:11px;color:var(--text2);text-align:right;}
+
+/* entity list */
+.em-list{flex:1;overflow-y:auto;overflow-x:hidden;background:var(--bg);}
+.em-list::-webkit-scrollbar{width:4px;}
+.em-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.em-item{padding:8px 12px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .1s;min-width:0;}
+.em-item:hover{background:var(--bg3);}
+.em-item.active{background:#1e2d5a;border-left:3px solid var(--accent);padding-left:9px;}
+.em-icon{width:36px;height:36px;border-radius:5px;object-fit:cover;flex-shrink:0;background:var(--bg3);}
+.em-icon.soul{width:36px;height:36px;border-radius:5px;}
+.em-name{flex:1;font-size:12px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.em-effect{font-size:10px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;flex-shrink:0;}
+/* BG list item — rarity+name row + wrapping effect */
+.em-item-bg{align-items:flex-start;}
+.em-bg-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;padding-top:2px;}
+.em-bg-header{display:flex;align-items:center;gap:6px;min-width:0;}
+.em-bg-name{font-size:12px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;}
+.em-bg-eff{font-size:11px;color:var(--text2);line-height:1.5;word-break:break-all;white-space:normal;}
+.em-detail-btn{flex-shrink:0;padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:10px;cursor:pointer;transition:all .1s;white-space:nowrap;}
+.em-detail-btn:hover{border-color:var(--accent);color:var(--accent);}
+.em-clear{padding:8px 12px;border-bottom:1px solid var(--border);cursor:pointer;font-size:12px;color:var(--text2);}
+.em-clear:hover{background:var(--bg3);color:#ff7777;}
+.em-no-results{text-align:center;color:var(--text2);padding:40px;font-size:12px;}
+
+/* badges */
+.badge{font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;flex-shrink:0;}
+.badge.elem-1{background:var(--fire);color:#fff;}.badge.elem-2{background:var(--water);color:#fff;}
+.badge.elem-3{background:var(--wind);color:#fff;}.badge.elem-4{background:var(--light);color:#000;}
+.badge.elem-5{background:var(--dark);color:#fff;}.badge.elem-6{background:var(--none);color:#fff;}
+.badge.weapon{background:var(--bg3);color:var(--text2);border:1px solid var(--border);}
+.state-dots{display:flex;gap:2px;flex-shrink:0;}
+.state-dot{width:6px;height:6px;border-radius:50%;background:var(--border);}
+.state-dot.has{background:var(--accent);}
+
+/* ===== SOUL AFFINITY (detail modal) ===== */
+.sdm-aff-grid{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;}
+.sdm-aff-cell{display:flex;flex-direction:column;align-items:center;flex:1;min-width:46px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 4px;gap:2px;}
+.sdm-aff-name{font-size:11px;font-weight:700;}
+.sdm-aff-level{font-size:10px;font-weight:700;}
+.sdm-aff-effect{font-size:10px;color:var(--text2);}
+.sdm-acq-table{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;}
+.sdm-acq-key{font-size:11px;font-weight:700;color:var(--text2);}
+.sdm-acq-val{font-size:12px;}
+/* ===== BG FIELDS (detail modal) ===== */
+.bgdm-layout{display:flex;gap:20px;align-items:flex-start;}
+.bgdm-fields{flex:1;min-width:0;overflow:hidden;}
+.bgdm-field-row{display:grid;grid-template-columns:72px 1fr;gap:4px 12px;margin-bottom:14px;align-items:start;}
+.bgdm-field-key{font-size:11px;font-weight:700;color:var(--text2);padding-top:2px;}
+.bgdm-field-val{font-size:13px;line-height:1.7;}
+.bgdm-eff-line{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-bottom:5px;}
+.bgdm-img-wrap{flex-shrink:0;text-align:center;}
+.bgdm-img-wrap img{max-width:240px;width:100%;height:auto;border-radius:8px;display:block;}
+.bgdm-img-rarity{margin-top:8px;font-size:12px;font-weight:700;text-align:center;color:var(--text2);}
+@media(max-width:600px){
+  .bgdm-layout{flex-direction:column-reverse;}
+  .bgdm-img-wrap{width:100%;text-align:center;}
+  .bgdm-img-wrap img{max-width:160px;margin:0 auto;}
+}
+/* ===== DETAIL MODAL BODY ===== */
+.dm-body{flex:1;overflow-y:auto;padding:20px 24px;}
+.dm-body::-webkit-scrollbar{width:5px;}
+.dm-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.dm-select-btn{padding:5px 14px;border-radius:6px;border:1px solid var(--accent);background:rgba(91,127,255,.15);color:#7b9fff;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.dm-select-btn:hover{background:rgba(91,127,255,.3);}
+/* chara header */
+.dm-chara-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.dm-chara-icon{width:52px;height:52px;border-radius:7px;object-fit:cover;flex-shrink:0;}
+.dm-chara-info{flex:1;}
+.dm-chara-title{font-size:20px;font-weight:700;margin-bottom:8px;}
+.dm-chara-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.dm-meta-chip{display:flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:12px;}
+.dm-meta-chip .elem-dot{width:8px;height:8px;}
+/* state tabs */
+.dm-state-tabs{display:flex;gap:0;margin-bottom:16px;border-bottom:2px solid var(--border);}
+.dm-state-tab{padding:8px 20px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text2);transition:color .15s;}
+.dm-state-tab:hover{color:var(--text);}
+.dm-state-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.dm-state-content{display:none;}
+.dm-state-content.active{display:block;}
+/* sections */
+.dm-section{margin-bottom:20px;}
+.dm-section-title{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.dm-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+/* skills */
+.dm-skills-list{display:flex;flex-direction:column;gap:6px;}
+.dm-skill-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;}
+.dm-skill-name-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+.dm-skill-name{font-weight:600;font-size:13px;color:var(--accent);flex:1;min-width:0;}
+.dm-skill-tags{display:flex;gap:3px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end;}
+.dm-skill-eff-row{display:flex;align-items:flex-start;gap:8px;}
+.dm-skill-eff{font-size:13px;line-height:1.6;flex:1;}
+.dm-skill-bairitu{flex-shrink:0;font-size:12px;color:var(--text2);white-space:nowrap;padding-top:2px;}
+/* bunrui / scope / cond tags (same naming as index.html) */
+.bunrui-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;background:rgba(91,127,255,.18);color:#7b9fff;border:1px solid rgba(91,127,255,.35);white-space:nowrap;}
+.scope-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;white-space:nowrap;}
+.scope-self{background:rgba(120,120,120,.18);color:#999;border:1px solid rgba(120,120,120,.3);}
+.scope-all{background:rgba(60,180,100,.18);color:#4cbb6e;border:1px solid rgba(60,180,100,.35);}
+.scope-lim{background:rgba(255,180,40,.18);color:#ffb828;border:1px solid rgba(255,180,40,.35);}
+.cond-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;white-space:nowrap;}
+.cond-1{background:rgba(255,200,40,.18);color:#ffd040;border:1px solid rgba(255,200,40,.35);}
+.cond-2{background:rgba(255,80,80,.18);color:#ff6060;border:1px solid rgba(255,80,80,.35);}
+.cond-3{background:rgba(160,80,255,.18);color:#b060ff;border:1px solid rgba(160,80,255,.35);}
+/* BD */
+.dm-bd-card{background:#1a1040;border:1px solid #4433aa;border-radius:8px;padding:12px 14px;}
+.dm-bd-label{font-size:10px;font-weight:700;color:#aa88ff;letter-spacing:.1em;margin-bottom:4px;}
+.dm-bd-name{font-weight:700;font-size:14px;margin-bottom:6px;color:#cc99ff;}
+.dm-bd-eff{font-size:13px;line-height:1.6;}
+/* stats */
+.dm-stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;}
+.dm-stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+.dm-stat-label{font-size:11px;color:var(--text2);margin-bottom:4px;}
+.dm-stat-row{display:flex;justify-content:space-between;align-items:baseline;margin-top:4px;}
+.dm-stat-row-lbl{font-size:11px;color:var(--text2);}
+.dm-stat-row-val{font-size:14px;font-weight:700;}
+.dm-stat-row-val.init{color:var(--text2);font-size:13px;font-weight:600;}
+/* info table */
+.dm-info-table{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:8px;overflow:hidden;}
+.dm-info-cell{background:var(--bg3);padding:7px 12px;}
+.dm-info-cell.lbl{color:var(--text2);font-size:12px;}
+.dm-info-cell.val{font-weight:600;font-size:13px;}
+.dm-hit-phases{display:flex;gap:4px;align-items:center;}
+.dm-hit-phase{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:12px;}
+.dm-hit-arrow{color:var(--text2);font-size:10px;}
+
+#loading{text-align:center;color:var(--text2);padding:60px;font-size:13px;}
+@media(max-width:760px){#slots-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){
+  #entity-modal .modal-panel,#detail-modal .modal-panel{height:min(860px,88svh);}
+  .modal-sidebar{width:120px;min-width:100px;padding:8px 6px;}
+  .ftog{font-size:10px;padding:2px 4px;}
+  .em-soul-elem{display:none;}
+}
+</style>
+</head>
+<body>
+<div id="page-wrap">
+<script src="nav.js"></script>
+
+<div id="team-size-bar">
+  <span class="ts-label">編成</span>
+  <button class="size-btn"        data-n="1" onclick="setTeamSize(1)">1体</button>
+  <button class="size-btn"        data-n="2" onclick="setTeamSize(2)">2体</button>
+  <button class="size-btn active" data-n="3" onclick="setTeamSize(3)">3体</button>
+</div>
+
+<div id="loading">データを読み込んでいます...</div>
+
+<div id="slots-grid" style="display:none">
+  <div class="slot-card" id="slot-0"></div>
+  <div class="slot-card" id="slot-1"></div>
+  <div class="slot-card" id="slot-2"></div>
+</div>
+
+</div><!-- page-wrap -->
+
+<!-- ===== ENTITY PICKER MODAL ===== -->
+<div id="entity-modal">
+  <div class="modal-overlay" onclick="closeEM()"></div>
+  <div class="modal-panel">
+    <div class="modal-header">
+      <span class="modal-header-title" id="em-title">選択</span>
+      <button class="modal-close" onclick="closeEM()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-sidebar" id="em-sidebar"></div>
+      <div class="em-list" id="em-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DETAIL MODAL (stacked) ===== -->
+<div id="detail-modal">
+  <div class="modal-overlay" onclick="closeDetailModal()"></div>
+  <div class="modal-panel">
+    <div class="modal-header">
+      <span class="modal-header-title" id="dm-title"></span>
+      <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
+        <button class="dm-select-btn" onclick="selectFromDetail()">この魔剣を選択</button>
+        <button class="modal-close" onclick="closeDetailModal()">✕</button>
+      </div>
+    </div>
+    <div class="dm-body" id="dm-body"></div>
+  </div>
+</div>
+
+<script>
+const ELEM     = {1:'火',2:'水',3:'風',4:'光',5:'闇',6:'無'};
+const ELEM_CLR = {1:'#ff5533',2:'#3388ff',3:'#44cc66',4:'#ffcc00',5:'#aa55ff',6:'#888899'};
+const WEAPON   = {1:'長剣',2:'大剣',3:'太刀',4:'杖棒',5:'弓矢',6:'連弩',7:'戦斧',8:'騎槍',9:'投擲',10:'拳闘',11:'魔典',12:'大鎌'};
+const RARITY   = {1:'A',2:'AA',3:'S',4:'SS'};
+const BUNRUI   = {
+  1:'攻撃力',2:'ブレイク力',3:'BD攻撃力',4:'スピード',5:'攻撃モーション',
+  6:'BDゲージ',7:'ヒット数',8:'攻撃全体化',9:'状態異常回避',10:'HP',
+  11:'HP回復',12:'防御力',13:'被ダメ軽減',14:'サファイア',15:'ルビー',
+  16:'その他',17:'ダメ上限',18:'ゲージ上限',19:'結晶枠',20:'EXP',21:'BDヒット数'
+};
+const BUNRUI_S = {1:'攻',2:'BK',3:'BD攻',4:'転',5:'速',6:'BD値',7:'hit',8:'全体',9:'異常',10:'HP',11:'回復',12:'防',13:'軽',14:'蓝',15:'紅',16:'他',17:'限',18:'BD上',19:'枠',20:'EXP',21:'BDhit'};
+const COND_LBL = {1:'浑身',2:'背水',3:'破損'};
+
+let allCharas=[], allSouls=[], allBGs=[], allCrystals=[];
+let teamSize=3;
+let team=[0,1,2].map(()=>({chara:null,soul:null,bg:null,crystals:[]}));
+
+function saveRevise(){}
+
+Promise.all([
+  fetch('./characters_classified.json').then(r=>r.json()),
+  fetch('./souls.json').then(r=>r.json()),
+  fetch('./bladegraph.json').then(r=>r.json()),
+  fetch('./crystals.json').then(r=>r.json()),
+]).then(([ch,so,bg,cr])=>{
+  allCharas=ch.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
+  allSouls=so.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  allBGs=bg.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  allCrystals=cr.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  document.getElementById('loading').style.display='none';
+  document.getElementById('slots-grid').style.display='grid';
+  renderAll();
+}).catch(()=>{
+  document.getElementById('loading').textContent='データ読み込み失敗。start.py を起動してください。';
+});
+
+// ===== HELPERS =====
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function getBestState(c){for(const s of['極弐','改造','通常'])if(c?.states?.[s])return c.states[s];return null;}
+function crystalSlotCount(c){if(!c)return 0;const st=getBestState(c);return parseInt(st?.basic_info?.['結晶スロット']??0)||0;}
+
+function fmtLarge(n){
+  if(typeof n!=='number')return String(n);
+  const a=Math.abs(n);
+  if(a>=100000000)return(Math.round(n/100000000*10)/10)+'億';
+  if(a>=10000)return(Math.round(n/10000*10)/10)+'万';
+  return n.toLocaleString('en-US');
+}
+function fmtVal(ef){
+  let v;
+  if(ef.calc_type===1){
+    v='+'+fmtLarge(ef.bairitu);
+    if(ef.bairitu_scaling)v+=' + '+ef.bairitu_scaling+'×熟度';
+  } else {
+    const xfmt=n=>'x'+n;
+    const lo=ef.bairitu_init,hi=ef.bairitu;
+    v=(lo!=null&&lo!==hi)?xfmt(lo)+'〜'+xfmt(hi):xfmt(hi);
+    if(ef.bairitu_scaling)v+=' + x'+ef.bairitu_scaling+'×熟度';
+  }
+  return v;
+}
+function fmtScopeTag(ef){
+  if(ef.scope===5){const nm=ef.name?esc(ef.name).slice(0,12):'限定';return`<span class="tag-scope tag-lim">${nm}限定</span>`;}
+  const elStr=(ef.element!=null?[].concat(ef.element):[]).map(e=>ELEM[e]||e).join('/');
+  const tyStr=(ef.type!=null?[].concat(ef.type):[]).map(t=>WEAPON[t]||t).join('/');
+  const cond=[elStr,tyStr].filter(Boolean).join(' ');
+  const lbl={0:'自身',1:'全体',2:'全体',3:'自身',4:'全体'};
+  const txt=cond?cond+' '+(lbl[ef.scope]||''):(lbl[ef.scope]||'');
+  return txt?`<span class="tag-scope">${esc(txt)}</span>`:'';
+}
+function renderEfRow(ef){
+  const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${esc(BUNRUI[b]||b)}</span>`).join('');
+  const cond=COND_LBL[ef.condition]?`<span class="tag-cond">${COND_LBL[ef.condition]}</span>`:'';
+  return`<div class="eftags">${btags}<span class="tag-val">${fmtVal(ef)}</span>${fmtScopeTag(ef)}${cond}</div>`;
+}
+function renderSkillsPanel(skills){
+  if(!skills?.length)return'';
+  const rows=skills.map(sk=>{
+    const efrows=(sk.effects||[])
+      .filter(ef=>!(ef.bunrui||[]).includes(16))
+      .map(renderEfRow).join('');
+    if(!efrows)return'';
+    return`<div class="skill-item">${efrows}</div>`;
+  }).filter(Boolean).join('');
+  return rows?'<div class="skills-panel">'+rows+'</div>':'';
+}
+function renderBgPanel(bg){
+  if(!bg)return'';
+  return`<div class="skills-panel"><div class="skill-item"><div class="skill-eftxt">${esc(bg.effect||'')}</div>${(bg.effects||[]).map(renderEfRow).join('')}</div></div>`;
+}
+function renderCrystalEffList(ids){
+  const sel=ids.filter(Boolean).map(id=>allCrystals.find(x=>x.id===id)).filter(Boolean);
+  if(!sel.length)return'';
+  return'<div class="cr-eff-list">'+sel.map(cr=>{
+    const tags=(cr.effects||[]).map(ef=>{
+      const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${esc(BUNRUI[b]||b)}</span>`).join('');
+      const val=ef.calc_type===1?'+'+fmtLarge(ef.bairitu):'x'+ef.bairitu;
+      return btags+`<span class="tag-val">${val}</span>`;
+    }).join(' ');
+    return`<div class="cr-eff-row"><span class="cr-eff-name" title="${esc(cr.name)}">${esc(cr.name)}</span><div class="cr-eff-tags">${tags}</div></div>`;
+  }).join('')+'</div>';
+}
+
+// ===== TEAM =====
+function autoAssignSoul(si){
+  const used=new Set(team.filter((_,i)=>i!==si).map(s=>s.soul).filter(Boolean));
+  const byId=[...allSouls].sort((a,b)=>a.id-b.id);
+  const found=byId.find(s=>!used.has(s.id));
+  team[si].soul=found?found.id:null;
+}
+function syncCrystals(si){
+  const c=allCharas.find(x=>x.id===team[si].chara);
+  const n=crystalSlotCount(c),cur=team[si].crystals;
+  if(cur.length<n)team[si].crystals=[...cur,...Array(n-cur.length).fill(null)];
+  else if(cur.length>n)team[si].crystals=cur.slice(0,n);
+}
+function setTeamSize(n){
+  teamSize=n;
+  document.querySelectorAll('.size-btn').forEach(b=>b.classList.toggle('active',+b.dataset.n===n));
+  for(let i=0;i<3;i++)document.getElementById('slot-'+i).classList.toggle('disabled',i>=n);
+}
+function setChara(si,id){
+  if(id===null){team[si].chara=null;team[si].soul=null;team[si].crystals=[];renderSlot(si);return;}
+  const other=team.findIndex((s,i)=>i!==si&&s.chara===id);
+  if(other>=0){
+    // swap entire slot — chara/soul/bg/crystals all move together
+    [team[si],team[other]]=[team[other],team[si]];
+    renderSlot(other);
+  } else{team[si].chara=id;if(!team[si].soul)autoAssignSoul(si);syncCrystals(si);}
+  renderSlot(si);
+}
+function setSoul(si,id){
+  if(id===null){team[si].soul=null;renderSlot(si);return;}
+  const other=team.findIndex((s,i)=>i!==si&&s.soul===id);
+  if(other>=0){[team[si].soul,team[other].soul]=[team[other].soul,team[si].soul];renderSlot(other);}
+  else team[si].soul=id;
+  renderSlot(si);
+}
+function setBG(si,id){
+  if(id===null){team[si].bg=null;renderSlot(si);return;}
+  const other=team.findIndex((s,i)=>i!==si&&s.bg===id);
+  if(other>=0){[team[si].bg,team[other].bg]=[team[other].bg,team[si].bg];renderSlot(other);}
+  else team[si].bg=id;
+  renderSlot(si);
+}
+function setCrystal(si,ci,id){team[si].crystals[ci]=id;renderSlot(si);}
+function clearSlot(si){team[si]={chara:null,soul:null,bg:null,crystals:[]};renderSlot(si);}
+
+// ===== ENTITY MODAL =====
+let emSlot=-1, emType=null, emCi=-1;
+const mf={
+  chara:{q:'',rarity:new Set(),element:new Set(),type:new Set(),state:new Set(),sort:'',desc:true},
+  soul: {q:'',rarity:new Set(),element:new Set(),weapon:new Set()},
+  bg:   {q:'',rarity:new Set(),element:new Set(),weapon:new Set(),bunrui:new Set()},
+  crystal:{q:'',rarity:new Set(),element:new Set(),weapon:new Set(),bunrui:new Set(),condition:new Set(),scope:new Set()},
+};
+
+function openEM(si,type,ci=-1){
+  emSlot=si; emType=type; emCi=ci;
+  const titles={chara:'魔剣を選択',soul:'ソウルを選択',bg:'心象結晶を選択',crystal:'記憶結晶を選択'};
+  document.getElementById('em-title').textContent=titles[type]||'選択';
+  document.getElementById('entity-modal').classList.add('open');
+  buildEMSidebar(type);
+  applyEM();
+}
+function closeEM(){document.getElementById('entity-modal').classList.remove('open');emSlot=-1;emType=null;emCi=-1;}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDetailModal();closeEM();}});
+
+// single filter-toggle listener — set up once to avoid duplicate-listener bug
+document.getElementById('em-sidebar').addEventListener('click',e=>{
+  const btn=e.target.closest('[data-fkey]');
+  if(!btn||!emType)return;
+  const key=btn.dataset.fkey;
+  const val=JSON.parse(btn.dataset.fval);
+  const f2=mf[emType];
+  if(!(f2[key] instanceof Set))return;
+  if(f2[key].has(val))f2[key].delete(val);else f2[key].add(val);
+  btn.classList.toggle('on',f2[key].has(val));
+  applyEM();
+});
+
+function buildEMSidebar(type){
+  const f=mf[type];
+  let h=`<input type="text" class="modal-search" id="em-search" placeholder="名前で検索..." value="${esc(f.q)}" oninput="mf['${type}'].q=this.value;applyEM()">`;
+
+  if(type==='chara'){
+    h+=fsec('レアリティ','rarity',[[4,'SS'],[3,'S'],[2,'AA'],[1,'A']],f.rarity);
+    h+=fsec('属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
+    h+=fsec('武器種','type',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.type);
+    h+=fsec('状態','state',[['極弐','極弐'],['改造','改造'],['通常','通常']],f.state);
+    h+=`<div class="f-sort-row"><select id="em-sort" onchange="mf['chara'].sort=this.value;applyEM()">
+      <option value="">並び替えなし</option>
+      <option value="攻撃力"${f.sort==='攻撃力'?' selected':''}>攻撃力</option>
+      <option value="防御力"${f.sort==='防御力'?' selected':''}>防御力</option>
+      <option value="ブレイク力"${f.sort==='ブレイク力'?' selected':''}>ブレイク力</option>
+      <option value="HP"${f.sort==='HP'?' selected':''}>HP</option>
+      <option value="結晶スロット"${f.sort==='結晶スロット'?' selected':''}>結晶枠</option>
+      <option value="BDコスト"${f.sort==='BDコスト'?' selected':''}>BDコスト</option>
+    </select><button class="f-sort-dir" id="em-sort-dir" onclick="mf['chara'].desc=!mf['chara'].desc;this.textContent=mf['chara'].desc?'↓':'↑';applyEM()">${f.desc?'↓':'↑'}</button></div>`;
+  } else if(type==='soul'){
+    h+=fsec('レアリティ','rarity',[[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
+    h+=fsec('得意属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
+    h+=fsec('得意武器','weapon',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.weapon);
+  } else if(type==='bg'){
+    h+=fsec('レアリティ','rarity',[[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
+    h+=fsec('属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
+    h+=fsec('武器','weapon',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.weapon);
+    h+=bunruiSec(f.bunrui);
+  } else if(type==='crystal'){
+    h+=fsec('レアリティ','rarity',[[6,'★6'],[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
+    h+=fsec('武器','weapon',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.weapon);
+    h+=fsec('属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
+    h+=bunruiSec(f.bunrui);
+    h+=fsec('条件（発動）','condition',[[1,'浑身'],[2,'背水'],[3,'破損']],f.condition);
+    h+=fsec('条件（対象）','scope',[[0,'自身'],[1,'全体'],[2,'限定']],f.scope);
+  }
+
+  h+=`<div class="f-sort-row"><button class="f-reset-btn" onclick="resetEM()" style="flex:1">リセット</button></div>`;
+  h+=`<div class="modal-count" id="em-count"></div>`;
+  document.getElementById('em-sidebar').innerHTML=h;
+}
+
+function fsec(label,key,opts,activeSet){
+  const btns=opts.map(([val,text,cls=''])=>{
+    const on=activeSet.has(val)?' on':'';
+    return`<button class="ftog${cls?' '+cls:''}${on}" data-fkey="${key}" data-fval='${JSON.stringify(val)}'>${text}</button>`;
+  }).join('');
+  return`<div class="f-section"><div class="f-label">${label}</div><div class="f-toggles">${btns}</div></div>`;
+}
+function bunruiSec(activeSet){
+  const btns=Object.entries(BUNRUI).map(([id,name])=>`<button class="ftog${activeSet.has(+id)?' on':''}" data-fkey="bunrui" data-fval="${id}">${name}</button>`).join('');
+  return`<div class="f-section"><div class="f-label">効果</div><div class="f-toggles">${btns}</div></div>`;
+}
+
+function resetEM(){
+  const f=mf[emType];
+  Object.keys(f).forEach(k=>{if(f[k] instanceof Set)f[k].clear();else if(k==='q')f[k]='';else if(k==='desc')f[k]=true;else f[k]='';});
+  buildEMSidebar(emType);
+  applyEM();
+}
+
+function getEMSortVal(c,key){
+  for(const s of['極弐','改造','通常']){
+    const st=c.states?.[s];if(!st)continue;
+    if(key==='攻撃力'||key==='防御力'||key==='ブレイク力'||key==='HP')return st.stats?.max?.[key]??null;
+    if(key==='結晶スロット'){const r=st.basic_info?.['結晶スロット'];return r!=null?(Number(r)||null):null;}
+    if(key==='BDコスト')return st.bd_skill?.cost??null;
+  }
+  return null;
+}
+
+function applyEM(){
+  const type=emType,f=mf[type];
+  const q=f.q.toLowerCase().trim();
+  let items=[];
+  if(type==='chara'){
+    items=allCharas.filter(c=>{
+      if(q&&!c.name.toLowerCase().includes(q))return false;
+      if(f.rarity.size&&!f.rarity.has(c.rarity))return false;
+      if(f.element.size&&!f.element.has(c.element))return false;
+      if(f.type.size&&!f.type.has(c.type))return false;
+      if(f.state.size&&![...f.state].some(s=>c.states?.[s]))return false;
+      return true;
+    });
+    if(f.sort)items.sort((a,b)=>{const va=getEMSortVal(a,f.sort),vb=getEMSortVal(b,f.sort);if(va===null&&vb===null)return 0;if(va===null)return 1;if(vb===null)return-1;return f.desc?vb-va:va-vb;});
+    else items.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
+  } else if(type==='soul'){
+    items=allSouls.filter(s=>{
+      if(q&&!s.name.toLowerCase().includes(q))return false;
+      if(f.rarity.size&&!f.rarity.has(s.rarity))return false;
+      if(f.element.size&&!(s.element||[]).some(e=>f.element.has(e)))return false;
+      if(f.weapon.size&&!(s.type||[]).some(t=>f.weapon.has(t)))return false;
+      return true;
+    });
+    items.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  } else if(type==='bg'){
+    items=allBGs.filter(b=>{
+      if(q&&!b.name.toLowerCase().includes(q))return false;
+      if(f.rarity.size&&!f.rarity.has(b.rarity))return false;
+      if(f.element.size&&!(b.effects||[]).some(ef=>[].concat(ef.element||[]).some(e=>f.element.has(e))))return false;
+      if(f.weapon.size&&!(b.effects||[]).some(ef=>[].concat(ef.type||[]).some(t=>f.weapon.has(t))))return false;
+      if(f.bunrui.size&&!(b.effects||[]).some(ef=>(ef.bunrui||[]).some(bn=>f.bunrui.has(bn))))return false;
+      return true;
+    });
+    items.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  } else if(type==='crystal'){
+    items=allCrystals.filter(c=>{
+      if(q&&!c.name.toLowerCase().includes(q))return false;
+      if(f.rarity.size&&!f.rarity.has(c.rarity))return false;
+      if(f.weapon.size&&!(c.effects||[]).some(ef=>[].concat(ef.type||[]).some(t=>f.weapon.has(t))))return false;
+      if(f.element.size&&!(c.effects||[]).some(ef=>[].concat(ef.element||[]).some(e=>f.element.has(e))))return false;
+      if(f.bunrui.size&&!(c.effects||[]).some(ef=>(ef.bunrui||[]).some(bn=>f.bunrui.has(bn))))return false;
+      if(f.condition.size&&!(c.effects||[]).some(ef=>f.condition.has(ef.condition)))return false;
+      if(f.scope.size&&!(c.effects||[]).some(ef=>{
+        if(f.scope.has(0)&&ef.scope===0)return true;
+        if(f.scope.has(1)&&ef.scope===1)return true;
+        if(f.scope.has(2)&&[2,3,4,5].includes(ef.scope))return true;
+        return false;
+      }))return false;
+      return true;
+    });
+    items.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  }
+  const cnt=document.getElementById('em-count');
+  if(cnt)cnt.textContent=items.length+' 件';
+  renderEMList(items);
+}
+
+function renderEMList(items){
+  const list=document.getElementById('em-list');
+  const type=emType;
+  let h='';
+  const clearTxt={chara:'魔剣を外す',soul:'ソウルを外す',bg:'心象結晶を外す',crystal:'結晶を外す'};
+  h+=`<div class="em-clear" onclick="selectEM(null)">— ${clearTxt[type]||'外す'}</div>`;
+  if(!items.length){list.innerHTML=h+'<div class="em-no-results">該当なし</div>';return;}
+
+  if(type==='chara'){
+    h+=items.map(c=>{
+      const cur=team[emSlot]?.chara===c.id;
+      const dots=['極弐','改造','通常'].map(s=>`<span class="state-dot ${c.states?.[s]?'has':''}"></span>`).join('');
+      return`<div class="em-item${cur?' active':''}" onclick="selectEM(${c.id})">
+        <img class="em-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
+        <span class="em-name">${esc(c.name)}</span>
+        <span class="badge elem-${c.element}">${ELEM[c.element]||''}</span>
+        <span class="badge weapon">${WEAPON[c.type]||''}</span>
+        <div class="state-dots">${dots}</div>
+        <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${c.id})">詳細</button>
+      </div>`;
+    }).join('');
+  } else if(type==='soul'){
+    h+=items.map(s=>{
+      const cur=team[emSlot]?.soul===s.id;
+      const eb=(s.element||[]).map(e=>`<span class="badge elem-${e}">${ELEM[e]||''}</span>`).join('');
+      return`<div class="em-item${cur?' active':''}" onclick="selectEM(${s.id})">
+        <img class="em-icon soul" src="https://img.altema.jp/bxb/soul/icon/${s.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
+        <span class="em-name">${esc(s.name)}</span>
+        <span class="em-soul-elem">${eb}</span><span class="badge weapon">★${s.rarity}</span>
+        <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${s.id},'soul',false)">詳細</button>
+      </div>`;
+    }).join('');
+  } else if(type==='bg'){
+    h+=items.map(b=>{
+      const cur=team[emSlot]?.bg===b.id;
+      return`<div class="em-item em-item-bg${cur?' active':''}" onclick="selectEM(${b.id})">
+        <img class="em-icon" src="https://img.altema.jp/bxb/blade_graph/icon/${b.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
+        <div class="em-bg-body">
+          <div class="em-bg-header">
+            <span class="badge weapon" style="flex-shrink:0">★${b.rarity}</span>
+            <span class="em-bg-name">${esc(b.name)}</span>
+          </div>
+          <span class="em-bg-eff">${esc(b.effect||'')}</span>
+        </div>
+        <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${b.id},'bg',false)">詳細</button>
+      </div>`;
+    }).join('');
+  } else if(type==='crystal'){
+    h+=items.map(c=>{
+      const cur=team[emSlot]?.crystals[emCi]===c.id;
+      const eff=(c['効果']||'').slice(0,28);
+      return`<div class="em-item${cur?' active':''}" onclick="selectEM(${c.id})">
+        <img class="em-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
+        <span class="em-name">${esc(c.name)}</span>
+        <span class="badge weapon">★${c.rarity}</span>
+        <span class="em-effect">${esc(eff)}${(c['効果']||'').length>28?'…':''}</span>
+        <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${c.id},'crystal',false)">詳細</button>
+      </div>`;
+    }).join('');
+  }
+  list.innerHTML=h;
+}
+
+function selectEM(id){
+  const si=emSlot,type=emType,ci=emCi;
+  closeEM();
+  if(type==='chara')   setChara(si,id);
+  else if(type==='soul')    setSoul(si,id);
+  else if(type==='bg')      setBG(si,id);
+  else if(type==='crystal') setCrystal(si,ci,id);
+}
+
+// ===== DETAIL MODAL =====
+let dmCharaId=null, dmEntityType='chara';
+
+function openDetailModal(id, type='chara', showSelect=true){
+  dmCharaId=id; dmEntityType=type;
+  document.querySelector('.dm-select-btn').style.display=showSelect?'':'none';
+  if(type==='chara'){
+    const c=allCharas.find(x=>x.id===id);
+    if(!c)return;
+    document.getElementById('dm-title').textContent=c.name;
+    document.getElementById('dm-body').innerHTML=renderDMChara(c);
+    document.getElementById('detail-modal').classList.add('open');
+    const first=['極弐','改造','通常'].find(s=>c.states?.[s]);
+    if(first)switchDMState(first);
+  } else if(type==='soul'){
+    const s=allSouls.find(x=>x.id===id);
+    if(!s)return;
+    document.getElementById('dm-title').textContent=s.name;
+    document.getElementById('dm-body').innerHTML=renderDMSoul(s);
+    document.getElementById('detail-modal').classList.add('open');
+  } else if(type==='bg'){
+    const b=allBGs.find(x=>x.id===id);
+    if(!b)return;
+    document.getElementById('dm-title').textContent=b.name;
+    document.getElementById('dm-body').innerHTML=renderDMBg(b);
+    document.getElementById('detail-modal').classList.add('open');
+  } else if(type==='crystal'){
+    const c=allCrystals.find(x=>x.id===id);
+    if(!c)return;
+    document.getElementById('dm-title').textContent=c.name;
+    document.getElementById('dm-body').innerHTML=renderDMCrystal(c);
+    document.getElementById('detail-modal').classList.add('open');
+  }
+}
+function closeDetailModal(){document.getElementById('detail-modal').classList.remove('open');dmCharaId=null;}
+function selectFromDetail(){
+  const id=dmCharaId;
+  const si=emSlot;
+  closeDetailModal();
+  closeEM();
+  setChara(si,id);
+}
+
+// ===== SOUL DETAIL =====
+const _AFF_LABEL={'-2':'超苦手','-1':'苦手','0':'普通','1':'得意','2':'超得意'};
+const _AFF_CLR={'-2':'#ff5555','-1':'#ffaa44','0':null,'1':'#88ee99','2':'#44ee77'};
+const _AFF_BDR={'-2':'rgba(255,85,85,.35)','-1':'rgba(255,170,68,.2)','0':null,'1':'rgba(136,238,153,.2)','2':'rgba(68,238,119,.35)'};
+const _ELEMS_ORDER=['火','水','風','光','闇','無'];
+const _WEAPS_ORDER=['長剣','大剣','太刀','杖棒','弓矢','連弩','戦斧','騎槍','投擲','拳闘','魔典','大鎌'];
+
+function renderDMSoul(s){
+  const stars='★'.repeat(s.rarity||0)||'?';
+  function affCell(name,aff){
+    const lv=String(aff?.level??0);
+    const label=_AFF_LABEL[lv]||'普通';
+    const clr=_AFF_CLR[lv];
+    const bdr=_AFF_BDR[lv];
+    const eff=aff?.effect??1;
+    return`<div class="sdm-aff-cell"${bdr?` style="border-color:${bdr}"`:''}>
+      <span class="sdm-aff-name">${esc(name)}</span>
+      <span class="sdm-aff-level"${clr?` style="color:${clr}"`:''}>${label}</span>
+      <span class="sdm-aff-effect">×${eff}</span>
+    </div>`;
+  }
+  const elemCells=_ELEMS_ORDER.map(n=>affCell(n,(s.element_affinity||{})[n])).join('');
+  const weapCells=_WEAPS_ORDER.map(n=>affCell(n,(s.weapon_affinity||{})[n])).join('');
+  const skills=s.skills||[];
+  const skillCards=skills.map(sk=>{
+    const tags=dmRightTags(sk);
+    const bairitu=dmFmtBairitu(sk);
+    return`<div class="dm-skill-card">
+      <div class="dm-skill-name-row"><span class="dm-skill-name">${esc(sk.name||'')}</span>${tags}</div>
+      <div class="dm-skill-eff-row"><span class="dm-skill-eff">${esc(sk.effect||'')}</span><span class="dm-skill-bairitu">${bairitu}</span></div>
+    </div>`;
+  }).join('');
+  const acqEntries=Object.entries(s.acquisition||{});
+  const acqHtml=acqEntries.length?`<div class="dm-section"><div class="dm-section-title">入手場所</div>
+    <div class="sdm-acq-table">${acqEntries.map(([k,v])=>`<div class="sdm-acq-key">${esc(k)}</div><div class="sdm-acq-val">${esc(v)}</div>`).join('')}</div></div>`:''
+  return`<div class="dm-chara-header">
+    <img src="https://img.altema.jp/bxb/soul/icon/${s.id}.jpg" onerror="this.style.display='none'"
+      style="width:80px;height:auto;border-radius:6px;flex-shrink:0" alt="">
+    <div class="dm-chara-info">
+      <div class="dm-chara-title">${esc(s.name)}</div>
+      <div class="dm-chara-meta">
+        <span class="dm-meta-chip" style="font-weight:700;letter-spacing:1px">${stars}</span>
+        <span class="dm-meta-chip">Lv.${s.max_level||'?'}</span>
+        ${s.url?`<a class="dm-meta-chip" href="${s.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>`:''}
+      </div>
+    </div>
+  </div>
+  <div class="dm-section"><div class="dm-section-title">属性相性</div><div class="sdm-aff-grid">${elemCells}</div></div>
+  <div class="dm-section"><div class="dm-section-title">得意武器</div><div class="sdm-aff-grid">${weapCells}</div></div>
+  ${skills.length?`<div class="dm-section"><div class="dm-section-title">スキル構成 (${skills.length})</div><div class="dm-skills-list">${skillCards}</div></div>`:''}
+  ${acqHtml}`;
+}
+
+// ===== BG DETAIL =====
+function _bgScopeLabel(e){
+  if(e.scope===3){
+    if(e.element!=null)return (ELEM[e.element]||e.element)+'属性のみ';
+    if(e.type!=null){const t=[].concat(e.type);return t.map(v=>WEAPON[v]||v).join('/')+'のみ';}
+  }
+  if(e.scope===5)return (e.name||'')+'のみ';
+  return'';
+}
+function renderDMBg(b){
+  const effRows=(b.effects||[]).map(ef=>{
+    const btags=(ef.bunrui||[]).map(bn=>`<span class="bunrui-tag">${BUNRUI[bn]||bn}</span>`).join('');
+    const cond=ef.condition?`<span class="cond-tag cond-${ef.condition}">${COND_LBL[ef.condition]||''}</span>`:'';
+    const sl=_bgScopeLabel(ef);
+    const scope=sl?`<span class="tag-scope tag-lim">${esc(sl)}</span>`:'';
+    const val=ef.bairitu!=null?`<span class="tag-val">${ef.calc_type===1?'+':'×'}${fmtLarge(ef.bairitu)}</span>`:'';
+    return`<div class="bgdm-eff-line">${btags}${cond}${scope}${val}</div>`;
+  }).join('');
+  const fields=[];
+  if(b.effect)fields.push(['効果',`<span>${esc(b.effect)}</span>`]);
+  if(effRows)fields.push(['効果量',effRows]);
+  if(b.time_start)fields.push(['期間',esc(b.time_start+'〜'+b.time_end)]);
+  if(b.acquisition)fields.push(['入手方法',esc(b.acquisition)]);
+  if(b.illustrator)fields.push(['イラスト',esc(b.illustrator)]);
+  const fieldHtml=fields.map(([k,v])=>`<div class="bgdm-field-row"><div class="bgdm-field-key">${k}</div><div class="bgdm-field-val">${v}</div></div>`).join('');
+  return`<div class="bgdm-layout">
+    <div class="bgdm-fields">${fieldHtml||'<div style="color:var(--text2)">データなし</div>'}</div>
+    <div class="bgdm-img-wrap">
+      <img src="https://img.altema.jp/bxb/blade_graph/icon/${b.id}.jpg" onerror="this.style.display='none'" alt="">
+      <div class="bgdm-img-rarity">★${b.rarity}</div>
+    </div>
+  </div>`;
+}
+
+// ===== CRYSTAL DETAIL =====
+function renderDMCrystal(c){
+  const fields=[];
+  if(c['効果'])fields.push(['効果',esc(c['効果'])]);
+  (c.effects||[]).forEach(ef=>{
+    if(ef.bairitu!=null||ef.bairitu_init!=null){
+      const pfx=ef.calc_type===1?'+':'×';
+      const mn=ef.bairitu_init,mx=ef.bairitu;
+      let range;
+      if(mn!=null&&mx!=null&&mn!==mx){
+        range=pfx+fmtLarge(mn)+'～'+pfx+fmtLarge(mx);
+      } else {
+        range=pfx+fmtLarge(mn??mx);
+      }
+      const btags=(ef.bunrui||[]).map(b=>`<span class="bunrui-tag">${BUNRUI[b]||b}</span>`).join('');
+      const scopeTag=fmtScopeTag(ef);
+      fields.push(['効果量',`<div class="bgdm-eff-line">${btags}${scopeTag}<span class="tag-val">${range}</span></div>`]);
+    }
+    if(ef.condition)fields.push(['発動条件',esc(COND_LBL[ef.condition]||String(ef.condition))]);
+  });
+  if(c['特殊条件'])fields.push(['特殊条件',esc(c['特殊条件'])]);
+  if(c['対象'])fields.push(['対象',esc(c['対象'])]);
+  if(c['上限値'])fields.push(['上限値',esc(c['上限値'])]);
+  if(c['入手方法'])fields.push(['入手方法',esc(c['入手方法'])]);
+  const fieldHtml=fields.map(([k,v])=>`<div class="bgdm-field-row"><div class="bgdm-field-key">${k}</div><div class="bgdm-field-val">${v}</div></div>`).join('');
+  return`<div class="bgdm-layout">
+    <div class="bgdm-fields">${fieldHtml||'<div style="color:var(--text2)">データなし</div>'}</div>
+    <div style="flex-shrink:0">
+      <img src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id}.jpg" onerror="this.style.display='none'"
+        style="width:84px;height:84px;border-radius:8px;object-fit:cover;display:block;border:1px solid var(--border)" alt="">
+      <div style="margin-top:8px;font-size:12px;font-weight:700;text-align:center;color:var(--text2)">★${c.rarity}</div>
+    </div>
+  </div>`;
+}
+
+function renderDMChara(c){
+  const rLbl=RARITY[c.rarity]||String(c.rarity);
+  const eClr=ELEM_CLR[c.element]||'#888';
+  const eName=ELEM[c.element]||'-';
+  const wName=WEAPON[c.type]||'-';
+  const stateKeys=Object.keys(c.states||{});
+  const tabs=['極弐','改造','通常'].filter(s=>stateKeys.includes(s)).map(s=>
+    `<div class="dm-state-tab" data-state="${s}" onclick="switchDMState('${s}')">${s}</div>`
+  ).join('');
+  const contents=['極弐','改造','通常'].filter(s=>stateKeys.includes(s)).map(s=>
+    `<div class="dm-state-content" data-state="${s}">${renderDMState(c.states[s],s)}</div>`
+  ).join('');
+  return`<div class="dm-chara-header">
+    <img class="dm-chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">
+    <div class="dm-chara-info">
+      <div class="dm-chara-title">${esc(c.name)}</div>
+      <div class="dm-chara-meta">
+        <span class="dm-meta-chip"><span class="badge ${rLbl}">${rLbl}</span></span>
+        <span class="dm-meta-chip"><span class="elem-dot" style="background:${eClr}"></span>${eName}属性</span>
+        <span class="dm-meta-chip">${wName}</span>
+        ${c.url?`<a class="dm-meta-chip" href="${c.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>`:''}
+      </div>
+    </div>
+  </div>
+  <div class="dm-state-tabs">${tabs}</div>
+  ${contents}`;
+}
+
+function switchDMState(label){
+  document.querySelectorAll('.dm-state-tab').forEach(t=>t.classList.toggle('active',t.dataset.state===label));
+  document.querySelectorAll('.dm-state-content').forEach(d=>d.classList.toggle('active',d.dataset.state===label));
+}
+
+function renderDMState(state,stateLabel){
+  const parts=[];
+  if(state.bd_skill?.name){
+    parts.push(`<div class="dm-section"><div class="dm-section-title">ブレイズドライブ</div>
+      <div class="dm-bd-card"><div class="dm-bd-label">BD SKILL</div>
+      <div class="dm-bd-name">${esc(state.bd_skill.name)}</div>
+      <div class="dm-bd-eff">${esc(state.bd_skill.effect||'')}</div></div></div>`);
+  }
+  if(state.skills?.length){
+    const cards=state.skills.map(s=>{
+      const tags=dmRightTags(s);
+      const bairitu=dmFmtBairitu(s);
+      return`<div class="dm-skill-card">
+        <div class="dm-skill-name-row"><span class="dm-skill-name">${esc(s.name||'')}</span>${tags}</div>
+        <div class="dm-skill-eff-row"><span class="dm-skill-eff">${esc(s.effect||'')}</span><span class="dm-skill-bairitu">${bairitu}</span></div>
+      </div>`;
+    }).join('');
+    parts.push(`<div class="dm-section"><div class="dm-section-title">スキル構成 (${state.skills.length})</div><div class="dm-skills-list">${cards}</div></div>`);
+  }
+  if(state.stats)parts.push(`<div class="dm-section"><div class="dm-section-title">ステータス</div>${renderDMStats(state.stats)}</div>`);
+  if(state.basic_info)parts.push(`<div class="dm-section"><div class="dm-section-title">基本情報</div>${renderDMBasicInfo(state.basic_info)}</div>`);
+  return parts.join('')||'<div style="color:var(--text2);padding:20px">データなし</div>';
+}
+
+function dmRightTags(s){
+  let tags='';
+  (s.effects||[]).forEach(e=>{
+    (e.bunrui||[]).forEach(b=>tags+=`<span class="bunrui-tag">${BUNRUI_S[b]||b}</span>`);
+    if(e.scope===0)tags+=`<span class="scope-tag scope-self">自</span>`;
+    else if(e.scope===1)tags+=`<span class="scope-tag scope-all">全</span>`;
+    else if(e.scope===2||e.scope===3||e.scope===4){
+      const lim=e.element!=null?(ELEM[[].concat(e.element)[0]]||'限'):e.type!=null?(WEAPON[[].concat(e.type)[0]]||'限'):'限';
+      tags+=`<span class="scope-tag scope-lim">${lim}</span>`;
+    } else if(e.scope===5)tags+=`<span class="scope-tag scope-lim">限</span>`;
+    if(e.condition===1)tags+=`<span class="cond-tag cond-1">浑身</span>`;
+    else if(e.condition===2)tags+=`<span class="cond-tag cond-2">背水</span>`;
+    else if(e.condition===3)tags+=`<span class="cond-tag cond-3">破損</span>`;
+  });
+  return`<div class="dm-skill-tags">${tags}</div>`;
+}
+
+function dmFmtBairitu(s){
+  return(s.effects||[]).map(e=>{
+    if(e.bairitu==null)return'';
+    const bs=e.calc_type===1?('+'+fmtLarge(e.bairitu)):('x'+e.bairitu);
+    return e.bairitu_scaling?bs+' + '+e.bairitu_scaling+'*熟度':bs;
+  }).filter(Boolean).join(' / ');
+}
+
+function renderDMStats(stats){
+  const max=stats.max||{},init=stats.initial||null;
+  const cards=Object.keys(max).map(k=>{
+    const lbl={HP:'HP','攻撃力':'攻撃力','防御力':'防御力','ブレイク力':'ブレイク力','フルヒット攻撃力':'フルヒット'}[k]||k;
+    const mv=max[k]!=null?Number(max[k]).toLocaleString('ja-JP'):'-';
+    const iv=init&&init[k]!=null?Number(init[k]).toLocaleString('ja-JP'):null;
+    return`<div class="dm-stat-card"><div class="dm-stat-label">${esc(lbl)}</div>
+      <div class="dm-stat-row"><span class="dm-stat-row-lbl">最大</span><span class="dm-stat-row-val">${mv}</span></div>
+      ${iv!==null?`<div class="dm-stat-row"><span class="dm-stat-row-lbl">初期</span><span class="dm-stat-row-val init">${iv}</span></div>`:''}
+    </div>`;
+  }).join('');
+  return`<div class="dm-stat-grid">${cards}</div>`;
+}
+
+function renderDMBasicInfo(info){
+  const rows=Object.entries(info).map(([k,v])=>{
+    let dv;
+    if(k==='Hit数'&&Array.isArray(v)){
+      const phases=v.map((n,i)=>`<span class="dm-hit-phase">${n}</span>${i<v.length-1?'<span class="dm-hit-arrow">-</span>':''}`).join('');
+      const total=v.reduce((a,b)=>a+b,0);
+      dv=`<div class="dm-hit-phases">${phases}<span style="color:var(--text2);font-size:11px;margin-left:4px">合計${total}hit</span></div>`;
+    } else dv=esc(String(v??'-'));
+    return`<div class="dm-info-cell lbl">${esc(k)}</div><div class="dm-info-cell val">${dv}</div>`;
+  }).join('');
+  return`<div class="dm-info-table">${rows}</div>`;
+}
+
+// ===== RENDER SLOTS =====
+function toggleDetail(id,btn){
+  const el=document.getElementById(id);
+  const open=el.classList.toggle('open');
+  btn.textContent=open?'▼':'▶';
+}
+function renderAll(){for(let i=0;i<3;i++)renderSlot(i);}
+
+function renderSlot(i){
+  const t=team[i];
+  const chara=allCharas.find(x=>x.id===t.chara)||null;
+  const soul=allSouls.find(x=>x.id===t.soul)||null;
+  const bg=allBGs.find(x=>x.id===t.bg)||null;
+  const st=chara?getBestState(chara):null;
+  const nCr=crystalSlotCount(chara);
+  const usedCr=t.crystals.filter(Boolean).length;
+  const eclr=chara?(ELEM_CLR[chara.element]||'#888'):null;
+  const enam=chara?(ELEM[chara.element]||''):'';
+  const wnam=chara?(WEAPON[chara.type]||''):'';
+
+  const hdrName=chara
+    ?`<span class="slot-chara-name">${esc(chara.name)}</span><span class="slot-chara-meta">${enam} ${wnam}</span>`
+    :`<span class="slot-chara-name" style="color:var(--text2);font-style:italic">未選択</span>`;
+
+  const charaIcon=chara
+    ?`<img class="equip-icon" src="https://img.altema.jp/bxb/chara/icon/${chara.id}.jpg" onerror="this.style.visibility='hidden'" alt="">`
+    :`<div class="equip-icon-empty"></div>`;
+  const soulIcon=soul
+    ?`<img class="equip-icon soul-img" src="https://img.altema.jp/bxb/soul/icon/${soul.id}.jpg" onerror="this.style.visibility='hidden'" alt="">`
+    :`<div class="equip-icon-empty soul-img"></div>`;
+  const bgIcon=bg
+    ?`<img class="equip-icon bg-img" src="https://img.altema.jp/bxb/blade_graph/icon/${bg.id}.jpg" onerror="this.style.visibility='hidden'" alt="">`
+    :`<div class="equip-icon-empty bg-img"></div>`;
+
+  let crystalHtml='';
+  if(chara){
+    const slots=Array.from({length:nCr},(_,ci)=>{
+      const cid=t.crystals[ci]??null;
+      const cr=cid?allCrystals.find(x=>x.id===cid):null;
+      return cr
+        ?`<div class="crystal-slot-wrap">
+            <img class="crystal-thumb" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${cr.id}.jpg"
+              onerror="this.style.visibility='hidden'" title="${esc(cr.name)}"
+              onclick="openEM(${i},'crystal',${ci})">
+            <button class="crystal-rm" onclick="setCrystal(${i},${ci},null)">✕</button>
+          </div>`
+        :`<div class="crystal-slot-wrap">
+            <div class="crystal-empty" title="結晶を選択" onclick="openEM(${i},'crystal',${ci})">+</div>
+            <span style="font-size:8px;opacity:0">.</span>
+          </div>`;
+    }).join('');
+    const crEffHtml=renderCrystalEffList(t.crystals);
+    crystalHtml=`<div class="equip-section">
+      <div class="equip-label">記憶結晶 ${usedCr}/${nCr}${crEffHtml?`<button class="detail-toggle" onclick="toggleDetail('col${i}r',this)">▶</button>`:''}</div>
+      <div class="crystals-grid">${slots}</div>
+      ${crEffHtml?`<div class="detail-wrap" id="col${i}r">${crEffHtml}</div>`:''}
+    </div>`;
+  }
+
+  const charaSkills=st?renderSkillsPanel(st.skills||[]):'';
+  const soulSkills=soul?renderSkillsPanel(soul.skills||[]):'';
+  const bgPanel=renderBgPanel(bg);
+  document.getElementById('slot-'+i).innerHTML=`
+    <div class="slot-header"><span class="slot-num">${i+1}号位</span>${hdrName}<button class="slot-clear-btn" onclick="clearSlot(${i})">外す</button></div>
+    <div class="slot-body">
+      <div class="equip-section">
+        <div class="equip-label">魔剣${charaSkills?`<button class="detail-toggle" onclick="toggleDetail('col${i}c',this)">▶</button>`:''}</div>
+        <div class="equip-row">${charaIcon}<div class="picker-wrap">
+          <div class="picker-row">
+            <button class="picker-btn ${chara?'has-val':'empty'}" onclick="openEM(${i},'chara')">${chara?esc(chara.name):'魔剣を選択...'}</button>
+            ${chara?`<button class="em-detail-btn" onclick="openDetailModal(${chara.id},'chara',false)">詳細</button>`:''}
+          </div>
+          ${chara?`<div class="picker-sub"><span class="elem-dot" style="background:${eclr}"></span>${enam} ${wnam}</div>`:''}
+        </div></div>
+        ${charaSkills?`<div class="detail-wrap" id="col${i}c">${charaSkills}</div>`:''}
+      </div>
+      <div class="equip-section">
+        <div class="equip-label">ソウル${soulSkills?`<button class="detail-toggle" onclick="toggleDetail('col${i}s',this)">▶</button>`:''}</div>
+        <div class="equip-row">${soulIcon}<div class="picker-wrap">
+          <div class="picker-row">
+            <button class="picker-btn ${soul?'has-val':'empty'}" onclick="openEM(${i},'soul')">${soul?esc(soul.name):'ソウルを選択...'}</button>
+            ${soul?`<button class="em-detail-btn" onclick="openDetailModal(${soul.id},'soul',false)">詳細</button>`:''}
+          </div>
+        </div></div>
+        ${soulSkills?`<div class="detail-wrap" id="col${i}s">${soulSkills}</div>`:''}
+      </div>
+      <div class="equip-section">
+        <div class="equip-label">心象結晶${bgPanel?`<button class="detail-toggle" onclick="toggleDetail('col${i}b',this)">▶</button>`:''}</div>
+        <div class="equip-row">${bgIcon}<div class="picker-wrap">
+          <div class="picker-row">
+            <button class="picker-btn ${bg?'has-val':'empty'}" onclick="openEM(${i},'bg')">${bg?esc(bg.name):'なし'}</button>
+            ${bg?`<button class="em-detail-btn" onclick="openDetailModal(${bg.id},'bg',false)">詳細</button>`:''}
+          </div>
+        </div></div>
+        ${bgPanel?`<div class="detail-wrap" id="col${i}b">${bgPanel}</div>`:''}
+      </div>
+      ${crystalHtml}
+    </div>`;
+}
+</script>
+</body>
+</html>
