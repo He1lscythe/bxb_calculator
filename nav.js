@@ -3,7 +3,7 @@
   var PAGES = [
     { id: 'index',      href: 'index.html',      label: '魔剣' },
     { id: 'crystals',  href: 'crystals.html',  label: '結晶' },
-    { id: 'bladegraph', href: 'bladegraph.html', label: '心象' },
+    { id: 'bladegraph', href: 'bladegraph.html', label: '心象結晶' },
     { id: 'soul',      href: 'soul.html',      label: 'ソウル' },
   ];
 

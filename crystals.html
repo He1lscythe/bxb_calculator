@@ -22,7 +22,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
 #filters input[type=text] { width: 100%; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; outline: none; }
 #filters input[type=text]:focus { border-color: var(--accent); }
 .filter-section { display: flex; flex-direction: column; gap: 3px; }
-.filter-row2 { display: flex; gap: 10px; align-items: flex-start; }
+.filter-row2 { display: flex; gap: 28px; align-items: flex-start; }
 .filter-label { font-size: 10px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .06em; }
 .filter-toggles { display: flex; flex-wrap: wrap; gap: 3px; }
 .ftog { font-size: 11px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; transition: all .1s; white-space: nowrap; }
@@ -190,19 +190,34 @@ input[type=number] { -moz-appearance: textfield; }
       </div>
     </div>
 
-    <div class="filter-section">
-      <div class="filter-label">条件</div>
-      <div class="filter-toggles" id="f-scope">
-        <button class="ftog" data-val="0" onclick="toggleFilter('scope',0,this)">制限なし</button>
-        <button class="ftog" data-val="2" onclick="toggleFilter('scope',2,this)">セット限</button>
-        <button class="ftog" data-val="3" onclick="toggleFilter('scope',3,this)">対象限</button>
-        <button class="ftog" data-val="5" onclick="toggleFilter('scope',5,this)">キャラ限</button>
+    <div class="filter-row2">
+      <div class="filter-section">
+        <div class="filter-label">条件（対象）</div>
+        <div class="filter-toggles" id="f-scope">
+          <button class="ftog" data-val="0" onclick="toggleFilter('scope',0,this)">自身</button>
+          <button class="ftog" data-val="1" onclick="toggleFilter('scope',1,this)">セット全</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('scope',2,this)">セット限</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('scope',3,this)">対象限</button>
+          <button class="ftog" data-val="5" onclick="toggleFilter('scope',5,this)">キャラ限</button>
+        </div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-label">条件（発動）</div>
+        <div class="filter-toggles" id="f-condition">
+          <button class="ftog" data-val="1" onclick="toggleFilter('condition',1,this)">浑身</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('condition',2,this)">背水</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('condition',3,this)">破損</button>
+        </div>
       </div>
     </div>
 
     <div style="display:flex;align-items:center;justify-content:space-between;margin-top:2px;">
       <div id="crystal-count"></div>
-      <button onclick="resetFilters()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
+      <div style="display:flex;gap:6px;">
+        <button onclick="expandAll()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">全展開</button>
+        <button onclick="collapseAll()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">全収起</button>
+        <button onclick="resetFilters()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
+      </div>
     </div>
   </div>
   <div id="crystal-list"></div>
@@ -220,7 +235,8 @@ const BUNRUI   = {
   13:'被ダメ軽減', 14:'サファイアUP', 15:'ルビーUP', 16:'その他',
   17:'ダメージ上限UP', 18:'ゲージ最大値UP', 19:'結晶枠UP', 20:'獲得EXPUP'
 };
-const SCOPE = {0:'制限なし', 2:'同装備セット', 3:'対象限定', 5:'キャラ限定'};
+const SCOPE = {0:'自身/制限なし', 1:'セット全体', 2:'セット属性/武器限', 3:'自身属性/武器限', 5:'キャラ限定'};
+const CONDITION = {0:'なし', 1:'浑身(HP高)', 2:'背水(HP低)', 3:'破損状態'};
 
 // ===== STATE =====
 let allCrystals = [], filteredCrystals = [];
@@ -265,12 +281,35 @@ document.getElementById('file-input').addEventListener('change', function(e) {
 });
 
 // ===== FILTER STATE =====
-var filterSets = { rarity: new Set(), bunrui: new Set(), element: new Set(), buki_type: new Set(), scope: new Set() };
+var filterSets = { rarity: new Set(), bunrui: new Set(), element: new Set(), buki_type: new Set(), scope: new Set(), condition: new Set() };
 
 function toggleFilter(key, val, btn) {
   if (filterSets[key].has(val)) { filterSets[key].delete(val); btn.classList.remove('on'); }
   else                           { filterSets[key].add(val);    btn.classList.add('on'); }
   applyFilters();
+}
+
+function expandAll() {
+  filteredCrystals.forEach(function(c) {
+    if (editingId === c.id || expandedIds.has(c.id)) return;
+    var row = document.getElementById('row-' + c.id);
+    var body = document.getElementById('body-' + c.id);
+    if (row && body) {
+      expandedIds.add(c.id);
+      row.classList.add('expanded');
+      body.innerHTML = renderDetailBody(c);
+    }
+  });
+}
+
+function collapseAll() {
+  expandedIds.forEach(function(id) {
+    if (editingId === id) return;
+    var row = document.getElementById('row-' + id);
+    var body = document.getElementById('body-' + id);
+    if (row && body) { row.classList.remove('expanded'); body.innerHTML = ''; }
+  });
+  filteredCrystals.forEach(function(c) { if (editingId !== c.id) expandedIds.delete(c.id); });
 }
 
 function resetFilters() {
@@ -283,11 +322,11 @@ function resetFilters() {
 }
 
 function crystalElement(c) {
-  var e = (c.effects||[]).find(function(e){return e.scope===3 && e.element!=null;});
+  var e = (c.effects||[]).find(function(e){return (e.scope===2||e.scope===3) && e.element!=null;});
   return e ? e.element : 0;
 }
 function crystalWeapon(c) {
-  var e = (c.effects||[]).find(function(e){return e.scope===3 && e.type!=null;});
+  var e = (c.effects||[]).find(function(e){return (e.scope===2||e.scope===3) && e.type!=null;});
   return e ? e.type : 0;
 }
 function crystalScope(c) {
@@ -303,6 +342,7 @@ function applyFilters() {
     if (filterSets.buki_type.size && !filterSets.buki_type.has(crystalWeapon(c))) return false;
     if (filterSets.bunrui.size    && !Array.from(filterSets.bunrui).some(function(v) { return (c.effects || []).some(function(e) { return (e.bunrui || []).indexOf(v) !== -1; }); })) return false;
     if (filterSets.scope.size     && !filterSets.scope.has(crystalScope(c))) return false;
+    if (filterSets.condition.size && !Array.from(filterSets.condition).some(function(v) { return (c.effects||[]).some(function(e) { return e.condition === v; }); })) return false;
     return true;
   });
   document.getElementById('crystal-count').textContent = filteredCrystals.length + ' 件';
@@ -362,10 +402,10 @@ function renderDetailBody(c) {
   var fields = [];
   if (c['効果'])     fields.push(['効果',    escHtml(c['効果'])]);
   (c.effects || []).forEach(function(e) {
-    if (e.effect_min != null || e.effect_max != null) {
+    if (e.bairitu_init != null || e.bairitu != null) {
       var unit = e.calc_type === 1 ? '' : '倍';
       var pfx  = e.calc_type === 1 ? '+' : '×';
-      var mn = e.effect_min, mx = e.effect_max;
+      var mn = e.bairitu_init, mx = e.bairitu;
       var range;
       if (mn != null && mx != null && mn !== mx) {
         range = '<span class="effect-range"><span class="ct-pfx">' + pfx + '</span>' + fmt(mn) + '<span class="sep">～</span>' + fmt(mx) + '<span class="unit">' + unit + '</span></span>';
@@ -374,6 +414,7 @@ function renderDetailBody(c) {
       }
       fields.push(['効果量', range]);
     }
+    if (e.condition) fields.push(['発動条件', CONDITION[e.condition] || e.condition]);
   });
   if (c['特殊条件']) fields.push(['特殊条件', escHtml(c['特殊条件']) + ' <span style="color:var(--text2)">のみ</span>']);
   if (c['対象'])     fields.push(['対象',    escHtml(c['対象'])]);
@@ -471,9 +512,9 @@ function setCrystalScope(val) {
   val = Number(val);
   (editData.effects||[]).forEach(function(e) {
     e.scope = val;
-    if (val === 0 || val === 2) {
+    if (val === 0 || val === 1) {
       delete e.element; delete e.type; delete e.name;
-    } else if (val === 3) {
+    } else if (val === 2 || val === 3) {
       delete e.name;
     } else if (val === 5) {
       delete e.element; delete e.type;
@@ -489,9 +530,10 @@ function setCrystalElement(val) {
     if (e.scope === 5) return;
     if (val === 0) {
       delete e.element;
-      if (e.scope !== 2 && e.type == null) e.scope = 0;
+      if (e.scope !== 1 && e.scope !== 2 && e.type == null) e.scope = 0;
     } else {
-      e.scope = 3; e.element = val; delete e.type;
+      if (e.scope !== 1) e.scope = (e.scope === 2) ? 2 : 3;
+      e.element = val;
     }
   });
 }
@@ -502,9 +544,10 @@ function setCrystalWeapon(val) {
     if (e.scope === 5) return;
     if (val === 0) {
       delete e.type;
-      if (e.scope !== 2 && e.element == null) e.scope = 0;
+      if (e.scope !== 1 && e.scope !== 2 && e.element == null) e.scope = 0;
     } else {
-      e.scope = 3; e.type = val; delete e.element;
+      if (e.scope !== 1) e.scope = (e.scope === 2) ? 2 : 3;
+      e.type = val;
     }
   });
 }
@@ -539,6 +582,9 @@ function renderEditBody(c) {
       '<option value="0"' + (e0.calc_type === 0 ? ' selected' : '') + '>×</option>' +
       '<option value="1"' + (e0.calc_type === 1 ? ' selected' : '') + '>+</option>' +
     '</select>';
+  var condOpts = Object.keys(CONDITION).map(function(k) {
+    return '<option value="' + k + '"' + ((e0.condition||0) == k ? ' selected' : '') + '>' + CONDITION[k] + '</option>';
+  }).join('');
   return '<div class="edit-actions">' +
       '<button class="btn-save" onclick="saveEdit()">保存</button>' +
       '<button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>' +
@@ -549,10 +595,11 @@ function renderEditBody(c) {
       '<select class="edit-select" onchange="setCrystalScope(this.value)">' + scopeOpts + '</select>' +
       '<select class="edit-select" onchange="setCrystalElement(this.value)">' + elemOpts + '</select>' +
       '<select class="edit-select" onchange="setCrystalWeapon(this.value)">' + weapOpts + '</select>' +
+      '<select class="edit-select" onchange="if(!editData.effects)editData.effects=[{}];editData.effects[0].condition=+this.value">' + condOpts + '</select>' +
       ctSel +
-      '<input type="number" step="any" class="edit-input" style="width:90px;text-align:right" value="' + (e0.effect_min != null ? e0.effect_min : '') + '" oninput="if(!editData.effects)editData.effects=[{}];editData.effects[0].effect_min=this.value===\'\'?null:Number(this.value)">' +
+      '<input type="number" step="any" class="edit-input" style="width:90px;text-align:right" value="' + (e0.bairitu_init != null ? e0.bairitu_init : '') + '" oninput="if(!editData.effects)editData.effects=[{}];editData.effects[0].bairitu_init=this.value===\'\'?null:Number(this.value)">' +
       '<span style="color:var(--text2);flex-shrink:0;">～</span>' +
-      '<input type="number" step="any" class="edit-input" style="width:90px;text-align:right" value="' + (e0.effect_max != null ? e0.effect_max : '') + '" oninput="if(!editData.effects)editData.effects=[{}];editData.effects[0].effect_max=this.value===\'\'?null:Number(this.value)">' +
+      '<input type="number" step="any" class="edit-input" style="width:90px;text-align:right" value="' + (e0.bairitu != null ? e0.bairitu : '') + '" oninput="if(!editData.effects)editData.effects=[{}];editData.effects[0].bairitu=this.value===\'\'?null:Number(this.value)">' +
     '</div>' +
     '<div class="field-label" style="margin-top:0;margin-bottom:4px;">タイプ</div>' +
     '<div class="bunrui-checks">' + bunruiChecks + '</div>';
