@@ -797,13 +797,6 @@ function saveEdit() {
   selectChar(selectedId);
 }
 
-function updateReviseBar() {
-  const count = Object.keys(reviseData).length;
-  document.getElementById('revise-bar').style.display = count > 0 ? 'flex' : 'none';
-  document.querySelector('.btn-revise-save').textContent = `Save (${count})`;
-  document.getElementById('revise-status').textContent = '';
-}
-
 async function saveRevise() {
   const btn    = document.querySelector('.btn-revise-save');
   const status = document.getElementById('revise-status');
