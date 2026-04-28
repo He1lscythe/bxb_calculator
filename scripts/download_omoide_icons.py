@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Download senzai_kaiho icons 1-114 into crawl/omoide_icon/"""
+"""Download senzai_kaiho icons 1-114 into crawl/icon/omoide/"""
 import os
 import time
 import requests
 
-OUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "omoide_icon")
+OUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "icon", "omoide")
 BASE_URL = "https://img.altema.jp/bxb/senzai_kaiho/icon/{}.jpg"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 

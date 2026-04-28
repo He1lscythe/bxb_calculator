@@ -268,7 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(arr => {
       allSouls = arr;
-      document.getElementById('file-status').textContent = `souls.json — ${allSouls.length} 件`;
       return fetch('./souls_revise.json');
     })
     .then(r => r.ok ? r.json() : [])
@@ -277,26 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (arr.length) updateReviseBar();
       applyFilters();
     })
-    .catch(() => {
-      document.getElementById('file-status').textContent = 'start.py を起動してください';
-      applyFilters();
-    });
-});
-
-document.getElementById('file-input').addEventListener('change', e => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try {
-      allSouls = JSON.parse(ev.target.result);
-      document.getElementById('file-status').textContent = `${file.name} — ${allSouls.length} 件`;
-      applyFilters();
-    } catch(err) {
-      document.getElementById('file-status').textContent = '読み込みエラー: ' + err.message;
-    }
-  };
-  reader.readAsText(file, 'utf-8');
+    .catch(() => { applyFilters(); });
 });
 
 // ===== FILTER =====
@@ -591,8 +571,9 @@ function saveEdit() {
 }
 
 function updateReviseBar() {
-  const bar = document.getElementById('revise-bar');
-  bar.style.display = Object.keys(reviseData).length > 0 ? 'flex' : 'none';
+  const count = Object.keys(reviseData).length;
+  document.getElementById('revise-bar').style.display = count > 0 ? 'flex' : 'none';
+  document.querySelector('.btn-revise-save').textContent = `Save (${count})`;
   document.getElementById('revise-status').textContent = '';
 }
 
@@ -602,20 +583,20 @@ async function saveRevise() {
   btn.textContent = '保存中...';
   btn.disabled    = true;
   try {
-    const res = await fetch('/save', {
+    const res  = await fetch('/save', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ souls: allSouls, soul_revise: Object.values(reviseData) }),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || res.status);
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || res.status);
     status.textContent = '✓ 保存完了';
-  } catch(err) {
+  } catch (err) {
     status.textContent = '保存失敗';
     console.error(err);
   } finally {
-    btn.textContent = 'Save';
-    btn.disabled    = false;
+    btn.disabled = false;
+    updateReviseBar();
   }
 }
 

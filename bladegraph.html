@@ -247,17 +247,12 @@ var editingId = null;
 var editData = null;
 
 // ===== DATA LOAD =====
-function loadFromArray(arr, label) {
-  allBG = arr;
-  document.getElementById('file-status').textContent = label + ' — ' + arr.length + ' 件読み込み完了';
-  applyFilters();
-}
-
 document.addEventListener('DOMContentLoaded', function() {
   fetch('./bladegraph.json')
     .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function(arr) {
-      loadFromArray(arr, 'bladegraph.json');
+      allBG = arr;
+      applyFilters();
       return fetch('./bladegraph_revise.json');
     })
     .then(function(r) { return r.ok ? r.json() : []; })
@@ -265,20 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
       arr.forEach(function(c) { reviseData[c.id] = c; });
       if (arr.length) updateReviseBar();
     })
-    .catch(function() {
-      document.getElementById('file-status').textContent = 'start.py を起動してください';
-    });
-});
-
-document.getElementById('file-input').addEventListener('change', function(e) {
-  var file = e.target.files[0];
-  if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    try { loadFromArray(JSON.parse(ev.target.result), file.name); }
-    catch(err) { document.getElementById('file-status').textContent = '読み込みエラー: ' + err.message; }
-  };
-  reader.readAsText(file, 'utf-8');
+    .catch(function() {});
 });
 
 // ===== FILTER STATE =====
@@ -597,31 +579,33 @@ function setEditWeapon(val) {
 
 // ===== REVISE BAR =====
 function updateReviseBar() {
-  var bar = document.getElementById('revise-bar');
-  bar.style.display = Object.keys(reviseData).length > 0 ? 'flex' : 'none';
+  const count = Object.keys(reviseData).length;
+  document.getElementById('revise-bar').style.display = count > 0 ? 'flex' : 'none';
+  document.querySelector('.btn-revise-save').textContent = `Save (${count})`;
   document.getElementById('revise-status').textContent = '';
 }
 
-function saveRevise() {
-  var btn    = document.querySelector('.btn-revise-save');
-  var status = document.getElementById('revise-status');
+async function saveRevise() {
+  const btn    = document.querySelector('.btn-revise-save');
+  const status = document.getElementById('revise-status');
   btn.textContent = '保存中...';
-  btn.disabled = true;
-  fetch('/save', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ bladegraph: allBG, bladegraph_revise: Object.values(reviseData) })
-  }).then(function(res) {
-    return res.json().then(function(j) { return { ok: res.ok, j: j }; });
-  }).then(function(r) {
-    if (!r.ok) throw new Error(r.j.error || 'error');
+  btn.disabled    = true;
+  try {
+    const res  = await fetch('/save', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ bladegraph: allBG, bladegraph_revise: Object.values(reviseData) }),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || res.status);
     status.textContent = '✓ 保存完了';
-  }).catch(function() {
-    status.textContent = '保存失敗 — start.py が起動していますか？';
-  }).finally(function() {
-    btn.textContent = 'Save';
+  } catch (err) {
+    status.textContent = '保存失敗';
+    console.error(err);
+  } finally {
     btn.disabled = false;
-  });
+    updateReviseBar();
+  }
 }
 
 // ===== HELPERS =====
