@@ -87,6 +87,11 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 /* ===== ENTITY MODAL (z-index 2000) ===== */
 #entity-modal{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;}
 #entity-modal.open{display:flex;}
+#omoide-modal{display:none;position:fixed;inset:0;z-index:2500;align-items:center;justify-content:center;}
+#omoide-modal.open{display:flex;}
+#omoide-modal .modal-panel{width:min(640px,96vw);max-height:min(720px,90vh);}
+#omoide-modal .modal-body{flex-direction:column;padding:0 14px 12px;overflow-y:auto;gap:6px;}
+#omoide-modal .om-toolbar{display:flex;gap:8px;padding:12px 0 8px;border-bottom:1px solid var(--border);margin-bottom:6px;flex-shrink:0;position:sticky;top:0;background:var(--bg2);z-index:1;}
 /* ===== DETAIL MODAL (z-index 3000) ===== */
 #detail-modal{display:none;position:fixed;inset:0;z-index:3000;align-items:center;justify-content:center;}
 #detail-modal.open{display:flex;}
@@ -133,6 +138,22 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 .em-item{padding:8px 12px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .1s;min-width:0;}
 .em-item:hover{background:var(--bg3);}
 .em-item.active{background:#1e2d5a;border-left:3px solid var(--accent);padding-left:9px;}
+.sort-val{font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0;padding:1px 6px;border-radius:4px;background:rgba(91,127,255,.12);border:1px solid rgba(91,127,255,.3);}
+.stats-panel{margin-top:6px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 8px;}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:4px;}
+.stats-cell{display:flex;justify-content:space-between;font-size:11px;padding:2px 4px;background:var(--bg2);border-radius:4px;}
+.stats-cell.wide{grid-column:span 2;}
+.stats-key{color:var(--text2);}
+.stats-val{font-weight:700;color:var(--accent);}
+.omoide-equip{margin-top:6px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px;}
+.om-toolbar{display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap;}
+.om-btn{font-size:12px;padding:3px 8px;border-radius:4px;border:1px solid var(--accent);background:var(--bg);color:var(--accent);cursor:pointer;}
+.om-btn:hover{background:rgba(91,127,255,.15);}
+.om-row{display:flex;align-items:center;gap:3px;padding:2px 0;flex-wrap:wrap;}
+.om-thresh{font-size:12px;color:var(--text2);min-width:42px;text-align:right;}
+.om-opt{font-size:12px;padding:3px 8px;border-radius:3px;border:1px solid var(--border);background:var(--bg);color:var(--text2);cursor:pointer;white-space:nowrap;}
+.om-opt:hover{border-color:var(--accent);color:var(--text);}
+.om-opt.on{background:rgba(91,127,255,.25);border-color:var(--accent);color:#7b9fff;font-weight:700;}
 .em-icon{width:36px;height:36px;border-radius:5px;object-fit:cover;flex-shrink:0;background:var(--bg3);}
 .em-icon.soul{width:36px;height:36px;border-radius:5px;}
 .em-name{flex:1;font-size:12px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
@@ -260,19 +281,19 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 /* ===== TRAINING PANEL ===== */
 .training-wrap{background:rgba(0,0,0,.18);border:1px solid var(--border);border-radius:7px;padding:8px 10px;display:flex;flex-direction:column;gap:7px;margin-top:2px;}
 .training-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
-.tr-label{font-size:10px;font-weight:700;color:var(--text2);white-space:nowrap;}
+.tr-label{font-size:12px;font-weight:700;color:var(--text2);white-space:nowrap;}
 .tr-num{display:flex;align-items:center;gap:3px;}
-.tr-input{width:36px;padding:3px 4px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;text-align:center;outline:none;}
+.tr-input{width:42px;padding:3px 4px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:14px;text-align:center;outline:none;}
 .tr-input:focus{border-color:var(--accent);}
 .tr-input::-webkit-inner-spin-button,.tr-input::-webkit-outer-spin-button{display:none;}
 .tr-input{-moz-appearance:textfield;}
-.tr-max{font-size:10px;color:var(--text2);}.tr-slider{flex:1;min-width:60px;accent-color:var(--accent);cursor:pointer;height:18px;}
+.tr-max{font-size:12px;color:var(--text2);}.tr-slider{flex:1;min-width:60px;accent-color:var(--accent);cursor:pointer;height:18px;}
 .tr-slider:disabled{opacity:.35;cursor:default;}
-.tr-lvval{width:36px;padding:3px 4px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--accent);font-size:13px;font-weight:700;text-align:center;outline:none;-moz-appearance:textfield;}
+.tr-lvval{width:42px;padding:3px 4px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--accent);font-size:15px;font-weight:700;text-align:center;outline:none;-moz-appearance:textfield;}
 .tr-lvval:focus{border-color:var(--accent);}
 .tr-lvval::-webkit-inner-spin-button,.tr-lvval::-webkit-outer-spin-button{display:none;}
 .tr-btns{display:flex;gap:2px;}
-.tr-btn{font-size:10px;padding:2px 3px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all .1s;white-space:nowrap;}
+.tr-btn{font-size:12px;padding:3px 5px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all .1s;white-space:nowrap;}
 .tr-btn:hover{border-color:var(--accent);color:var(--text);}
 .tr-btn.on{background:rgba(91,127,255,.25);border-color:var(--accent);color:#7b9fff;font-weight:700;}
 .tr-btn.on-fire{background:rgba(255,85,34,.2);border-color:var(--fire);color:var(--fire);}
@@ -345,6 +366,18 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
   </div>
 </div>
 
+<!-- ===== OMOIDE MODAL ===== -->
+<div id="omoide-modal">
+  <div class="modal-overlay" onclick="closeOmoideModal()"></div>
+  <div class="modal-panel">
+    <div class="modal-header">
+      <span class="modal-header-title" id="omoide-modal-title">好感装備</span>
+      <button class="modal-close" onclick="closeOmoideModal()">✕</button>
+    </div>
+    <div class="modal-body" id="omoide-modal-body"></div>
+  </div>
+</div>
+
 <!-- ===== DETAIL MODAL (stacked) ===== -->
 <div id="detail-modal">
   <div class="modal-overlay" onclick="closeDetailModal()"></div>
@@ -376,13 +409,16 @@ const COND_LBL = {1:'浑身',2:'背水',3:'破損'};
 
 let allCharas=[], allSouls=[], allBGs=[], allCrystals=[];
 let teamSize=3;
-function mkTr(){return {state:'通常',jukudo:1,awakening:0,marriage:0,moeshin:false,lp:0,level:1};}
+function mkTr(){return {state:'通常',jukudo:1,awakening:0,marriage:0,moeshin:false,lp:0,level:1,hpPercent:100,affinity:0,omoide_picks:{}};}
 let team=[0,1,2].map(()=>({chara:null,soul:null,bg:null,crystals:[],tr:mkTr()}));
 
 const JUKUDO_MAX_TBL={4:{通常:60,改造:99},3:{通常:50,改造:75,極弐:90},2:{通常:30,改造:45,極弐:70},1:{通常:10,改造:25,極弐:50}};
 const LEVEL_MAX_TBL ={4:{通常:250,改造:255},3:{通常:200,改造:215,極弐:230},2:{通常:150,改造:155,極弐:180},1:{通常:60,改造:99,極弐:120}};
 const LEVEL_1JUK_TBL={4:{通常:60,改造:70},3:{通常:40,改造:50,極弐:65},2:{通常:30,改造:35,極弐:60},1:{通常:15,改造:20,極弐:35}};
 const AWAKENING_MAX_TBL={4:9,3:14,2:36,1:24};
+const AWAKENING_MULT_TBL={4:1.43,3:2.42,2:4.45,1:5.37};
+let SENZAI_TABLE={};
+fetch('./senzai_table.json').then(r=>r.ok?r.json():{}).then(d=>{SENZAI_TABLE=d;}).catch(()=>{});
 
 
 function deepApply(target, patch) {
@@ -449,7 +485,14 @@ Promise.all([
 // ===== HELPERS =====
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function getBestState(c){for(const s of['極弐','改造','通常'])if(c?.states?.[s])return c.states[s];return null;}
-function crystalSlotCount(c){if(!c)return 0;const st=getBestState(c);return parseInt(st?.basic_info?.['結晶スロット']??0)||0;}
+function crystalSlotCount(c, slotIdx){
+  if(!c) return 0;
+  const st = getBestState(c);
+  let n = parseInt(st?.basic_info?.['結晶スロット']??0)||0;
+  // 結婚（marriage != 0）→ 結晶スロット +1
+  if(slotIdx != null && team[slotIdx]?.tr?.marriage){ n += 1; }
+  return n;
+}
 
 function fmtLarge(n){
   if(typeof n!=='number')return String(n);
@@ -567,7 +610,7 @@ function autoAssignSoul(si){
 }
 function syncCrystals(si){
   const c=allCharas.find(x=>x.id===team[si].chara);
-  const n=crystalSlotCount(c),cur=team[si].crystals;
+  const n=crystalSlotCount(c, si),cur=team[si].crystals;
   if(cur.length<n)team[si].crystals=[...cur,...Array(n-cur.length).fill(null)];
   else if(cur.length>n)team[si].crystals=cur.slice(0,n);
 }
@@ -578,34 +621,49 @@ function setTeamSize(n){
   if(isMob()&&mobileActiveSlot>=n){mobileActiveSlot=n-1;updateMobVisible();}
   else if(isMob())updateMobIndicator();
 }
+function _maxOmoideThreshold(c){
+  if(!c||!Array.isArray(c.omoide))return 0;
+  return c.omoide.reduce((m,r)=>Math.max(m,+r.threshold||0),0);
+}
 function setChara(si,id){
-  if(id===null){team[si].chara=null;team[si].soul=null;team[si].crystals=[];renderSlot(si);return;}
+  if(id===null){team[si].chara=null;team[si].soul=null;team[si].crystals=[];renderSlot(si);refreshAllStats();return;}
   const other=team.findIndex((s,i)=>i!==si&&s.chara===id);
   if(other>=0){
     // swap entire slot — chara/soul/bg/crystals all move together
     [team[si],team[other]]=[team[other],team[si]];
     renderSlot(other);
-  } else{team[si].chara=id;if(!team[si].soul)autoAssignSoul(si);syncCrystals(si);}
-  renderSlot(si);
+  } else{
+    team[si].chara=id;
+    const c=allCharas.find(x=>x.id===id);
+    team[si].tr.affinity=_maxOmoideThreshold(c);
+    if(!team[si].soul)autoAssignSoul(si);
+    syncCrystals(si);
+  }
+  renderSlot(si);refreshAllStats();
 }
 function setSoul(si,id){
-  if(id===null){team[si].soul=null;renderSlot(si);return;}
+  if(id===null){team[si].soul=null;renderSlot(si);refreshAllStats();return;}
   const other=team.findIndex((s,i)=>i!==si&&s.soul===id);
   if(other>=0){[team[si].soul,team[other].soul]=[team[other].soul,team[si].soul];renderSlot(other);}
   else team[si].soul=id;
-  renderSlot(si);
+  renderSlot(si);refreshAllStats();
 }
 function setBG(si,id){
-  if(id===null){team[si].bg=null;renderSlot(si);return;}
+  if(id===null){team[si].bg=null;renderSlot(si);refreshAllStats();return;}
   const other=team.findIndex((s,i)=>i!==si&&s.bg===id);
   if(other>=0){[team[si].bg,team[other].bg]=[team[other].bg,team[si].bg];renderSlot(other);}
   else team[si].bg=id;
-  renderSlot(si);
+  renderSlot(si);refreshAllStats();
 }
-function setCrystal(si,ci,id){team[si].crystals[ci]=id;renderSlot(si);}
-function clearSlot(si){team[si]={chara:null,soul:null,bg:null,crystals:[],tr:mkTr()};renderSlot(si);}
+function setCrystal(si,ci,id){team[si].crystals[ci]=id;renderSlot(si);refreshAllStats();}
+function clearSlot(si){team[si]={chara:null,soul:null,bg:null,crystals:[],tr:mkTr()};renderSlot(si);refreshAllStats();}
 
-function setTrField(si,key,val){team[si].tr[key]=val;renderSlot(si);}
+function setTrField(si,key,val){
+  team[si].tr[key]=val;
+  // 結婚状態变化时重新同步結晶槽数（结婚 → +1 槽）
+  if(key==='marriage') syncCrystals(si);
+  renderSlot(si);refreshAllStats();
+}
 function setJukudoSlider(si,val){
   const sl=document.getElementById('tr-jkslider-'+si);
   const max=sl?+sl.max:99;
@@ -617,10 +675,10 @@ function setTrNum(si,key,val,max){
   const minVal=key==='jukudo'?1:0;
   team[si].tr[key]=Math.min(max,Math.max(minVal,+val||minVal));
   if(key==='jukudo'){const jksl=document.getElementById('tr-jkslider-'+si);if(jksl)jksl.value=team[si].tr[key];}
-  const c=allCharas.find(x=>x.id===team[si].chara); if(!c)return;
+  const c=allCharas.find(x=>x.id===team[si].chara); if(!c){refreshAllStats();return;}
   const r=c.rarity,tr=team[si].tr;
   const lev1=LEVEL_1JUK_TBL[r]?.[tr.state],levMax=LEVEL_MAX_TBL[r]?.[tr.state];
-  if(lev1==null||levMax==null)return;
+  if(lev1==null||levMax==null){refreshAllStats();return;}
   const jk=Math.min(tr.jukudo,JUKUDO_MAX_TBL[r]?.[tr.state]??0);
   const base=jk===0?lev1-5:Math.min(levMax,lev1+(jk-1)*5);
   const newCap=base+tr.awakening*5;
@@ -628,9 +686,48 @@ function setTrNum(si,key,val,max){
   if(slider){slider.max=newCap;if(tr.level>newCap){tr.level=newCap;slider.value=newCap;}
     const lvval=document.getElementById('tr-lvval-'+si);if(lvval){lvval.max=newCap;lvval.value=slider.value;}
     const lvcapslider=document.getElementById('tr-lvcapslider-'+si);if(lvcapslider)lvcapslider.textContent=' / '+newCap;}
+  refreshAllStats();
 }
-function setLevel(si,val){team[si].tr.level=+val;const el=document.getElementById('tr-lvval-'+si);if(el)el.value=val;}
-function setLevelInput(si,val){const sl=document.getElementById('tr-lvslider-'+si);const max=sl?+sl.max:999;const v=Math.min(max,Math.max(1,+val||1));team[si].tr.level=v;const inp=document.getElementById('tr-lvval-'+si);if(inp)inp.value=v;if(sl)sl.value=v;}
+function setLevel(si,val){
+  team[si].tr.level=+val;
+  const el=document.getElementById('tr-lvval-'+si);if(el)el.value=val;
+  refreshAllStats();
+}
+function setLevelInput(si,val){
+  const sl=document.getElementById('tr-lvslider-'+si);
+  const max=sl?+sl.max:999;
+  const v=Math.min(max,Math.max(1,+val||1));
+  team[si].tr.level=v;
+  const inp=document.getElementById('tr-lvval-'+si);if(inp)inp.value=v;
+  if(sl)sl.value=v;
+  refreshAllStats();
+}
+function setHpSlider(si,val){
+  const v=Math.min(100,Math.max(0,+val||0));
+  team[si].tr.hpPercent=v;
+  const inp=document.getElementById('tr-hpinput-'+si);
+  if(inp)inp.value=v;
+  refreshAllStats();
+}
+function setHpInput(si,val){
+  let v=+val;
+  if(isNaN(v))v=100;
+  v=Math.min(100,Math.max(0,v));
+  team[si].tr.hpPercent=v;
+  const inp=document.getElementById('tr-hpinput-'+si);
+  if(inp)inp.value=v;
+  const sl=document.getElementById('tr-hpslider-'+si);
+  if(sl)sl.value=Math.round(v);
+  refreshAllStats();
+}
+function setAffinity(si,val){
+  let v=+val;
+  if(isNaN(v))v=0;
+  v=Math.max(0,v);
+  team[si].tr.affinity=v;
+  if(omoideModalSlot===si)_renderOmoideModalBody();
+  refreshAllStats();
+}
 function renderTraining(i,chara){
   if(!chara)return'';
   const r=chara.rarity,tr=team[i].tr;
@@ -665,11 +762,384 @@ function renderTraining(i,chara){
       <input id="tr-lvval-${i}" class="tr-lvval" type="number" min="1" max="${lvCap!=null?lvCap:1}" value="${lvCur}" ${lvCap==null?'disabled':''} onchange="setLevelInput(${i},+this.value)"><span id="tr-lvcapslider-${i}" class="tr-max"> / ${lvCapDisp}</span>
     </div>
     <div class="training-row">
+      <span class="tr-label">HP</span>
+      <input id="tr-hpslider-${i}" class="tr-slider" type="range" min="0" max="100" step="1" value="${tr.hpPercent??100}" oninput="setHpSlider(${i},+this.value)">
+      <input id="tr-hpinput-${i}" class="tr-input" type="number" min="0" max="100" step="0.1" value="${tr.hpPercent??100}" onchange="setHpInput(${i},+this.value)" style="width:54px"><span class="tr-max">%</span>
+    </div>
+    <div class="training-row">
       <span class="tr-label">燃心</span>
       <button class="tr-btn${tr.moeshin?' on on-fire':''}" style="min-width:30px;text-align:center" onclick="setTrField(${i},'moeshin',${!tr.moeshin})">${tr.moeshin?'ON':'OFF'}</button>
       <span class="tr-label">LP</span><div class="tr-btns">${lpHtml}</div>
     </div>
   </div>`;
+}
+
+// ===== STATS CALCULATOR =====
+const _STAT_KEYS = ['攻撃力','防御力','HP','ブレイク力'];
+const _BUNRUI_TO_STAT = { 1:'攻撃力', 2:'ブレイク力', 10:'HP', 12:'防御力' };
+
+function _capLevel(chara, tr) {
+  const r = chara.rarity;
+  const lev1 = LEVEL_1JUK_TBL[r]?.[tr.state];
+  const levMax = LEVEL_MAX_TBL[r]?.[tr.state];
+  if (lev1 == null || levMax == null) return null;
+  const jMax = JUKUDO_MAX_TBL[r]?.[tr.state] ?? 1;
+  const jk = Math.min(Math.max(1, tr.jukudo||1), jMax);
+  return Math.min(levMax, lev1 + (jk-1) * 5);
+}
+
+function _baseStat(chara, tr, attr) {
+  const state = chara.states?.[tr.state];
+  const stMax = state?.stats?.max?.[attr];
+  if (stMax == null) return null;
+  // initial / max ratio: always from 通常 state for non-通常 calculation
+  const sourceState = (tr.state === '通常') ? state : chara.states?.['通常'];
+  const initial = sourceState?.stats?.initial?.[attr];
+  const normalMax = sourceState?.stats?.max?.[attr];
+  const r = chara.rarity;
+  const levMax = LEVEL_MAX_TBL[r]?.[tr.state];
+  const cap = _capLevel(chara, tr);
+  if (cap == null || levMax == null || levMax <= 1 || initial == null || normalMax == null) return stMax;
+  const lvBase = Math.min(tr.level || 1, cap);
+  let v = stMax * (1 - (levMax - lvBase) / (levMax - 1) * initial / normalMax);
+  // Awakening boost when level exceeds base cap
+  if ((tr.level || 1) > cap) {
+    const aMax = AWAKENING_MAX_TBL[chara.rarity] || 1;
+    const mult = AWAKENING_MULT_TBL[chara.rarity] || 1;
+    const overLv = (tr.level || 1) - cap;
+    v = v * (1 + overLv / (aMax * 5) * (mult - 1));
+  }
+  return v;
+}
+
+function _omoidePicksFor(chara, tr) {
+  // Returns array of senzai info objects for currently picked icons.
+  // Gates by tr.affinity: only thresholds <= affinity contribute.
+  const picks = tr.omoide_picks || {};
+  const aff = +tr.affinity || 0;
+  const result = [];
+  (chara.omoide || []).forEach(row => {
+    if ((+row.threshold || 0) > aff) return;
+    const pickedIcon = picks[row.threshold];
+    if (pickedIcon == null) return;
+    const info = SENZAI_TABLE[pickedIcon] || SENZAI_TABLE[String(pickedIcon)];
+    if (info) result.push(info);
+  });
+  return result;
+}
+
+function _selfAppliesChara(c, e) {
+  const sc = e.scope;
+  if (sc === 0 || sc === 1) return true;
+  if (sc === 2 || sc === 3) {
+    const elem = e.element;
+    const elemOK = elem == null || (Array.isArray(elem) ? elem.indexOf(c.element) >= 0 : elem === c.element);
+    const tp = e.type;
+    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(c.type) >= 0 : tp === c.type);
+    return elemOK && typeOK;
+  }
+  return false;
+}
+
+// Cross-slot: source (srcChara) buffs target (tgtChara). Returns true if effect e applies.
+function _buffApplies(srcChara, tgtChara, e) {
+  if (!tgtChara) return false;
+  const sc = e.scope;
+  if (sc == null || sc === 1) return true; // 全体
+  if (sc === 0) {
+    return !!srcChara && srcChara.id === tgtChara.id;
+  }
+  if (sc === 3) {
+    if (!srcChara || srcChara.id !== tgtChara.id) return false;
+    const elem = e.element;
+    const elemOK = elem == null || (Array.isArray(elem) ? elem.indexOf(tgtChara.element) >= 0 : elem === tgtChara.element);
+    const tp = e.type;
+    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.type) >= 0 : tp === tgtChara.type);
+    return elemOK && typeOK;
+  }
+  if (sc === 2 || sc === 4) {
+    const elem = e.element;
+    const elemOK = elem == null || (Array.isArray(elem) ? elem.indexOf(tgtChara.element) >= 0 : elem === tgtChara.element);
+    const tp = e.type;
+    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.type) >= 0 : tp === tgtChara.type);
+    return elemOK && typeOK;
+  }
+  if (sc === 5) {
+    const nm = e.name;
+    if (!nm || !tgtChara.name) return false;
+    return tgtChara.name === nm || tgtChara.name.indexOf(nm) >= 0;
+  }
+  return false;
+}
+
+// HP-percent based condition gate (1=浑身 2=背水 3=破損)
+function _conditionMet(condition, hpPct) {
+  if (!condition) return true;
+  let h = +hpPct; if (isNaN(h)) h = 100;
+  if (condition === 1) return h >= 80;
+  if (condition === 2) return h <= 50;
+  if (condition === 3) return h <= 25;
+  return true;
+}
+
+function _parseScaling(v) {
+  if (v == null || v === 0 || v === '') return 0;
+  if (typeof v === 'number') return v;
+  if (typeof v === 'string' && v.indexOf('/') >= 0) {
+    const parts = v.split('/').map(Number);
+    return parts[1] ? parts[0] / parts[1] : 0;
+  }
+  return parseFloat(v) || 0;
+}
+// Apply 熟度 scaling: bairitu at jukudo = bairitu + jukudo * scaling
+function _scaledBairitu(b, sc, jukudo) {
+  const s = _parseScaling(sc);
+  if (!s) return b;
+  return (b || 0) + Math.max(1, jukudo) * s;
+}
+
+function computeStats(chara, tr, slotIdx) {
+  if (!chara || !tr) return null;
+  const stats = {};
+  for (const attr of _STAT_KEYS) {
+    const b = _baseStat(chara, tr, attr);
+    stats[attr] = b != null ? b : 0;
+  }
+  let damageLimit = 2147483647;
+  const acc = { stats, damageLimit };
+  const tgt = chara;
+
+  // Apply one effect to acc (additive when mode='add', multiplicative when mode='mul')
+  function _applyEf(e, srcJk, mode) {
+    const ct = e.calc_type ?? 1;
+    if (mode === 'add' && ct !== 1) return;
+    if (mode === 'mul' && ct !== 0) return;
+    const v = _scaledBairitu(e.bairitu || 0, e.bairitu_scaling, srcJk);
+    const bunrui = e.bunrui || [];
+    for (const b of bunrui) {
+      if (b === 17) {
+        if (mode === 'add') acc.damageLimit += v;
+        else acc.damageLimit *= v;
+      } else {
+        const stat = _BUNRUI_TO_STAT[b];
+        if (!stat || acc.stats[stat] == null) continue;
+        if (mode === 'add') acc.stats[stat] += v;
+        else acc.stats[stat] *= v;
+      }
+    }
+  }
+  // Apply a list of effects with srcChara/srcHp/srcJk context: filter by buff scope + condition,
+  // then run additive pass, then multiplicative pass.
+  function _applyList(effects, srcChara, srcHp, srcJk) {
+    if (!effects || !effects.length) return;
+    const filtered = effects.filter(e =>
+      _buffApplies(srcChara, tgt, e) && _conditionMet(e.condition, srcHp));
+    if (!filtered.length) return;
+    for (const e of filtered) _applyEf(e, srcJk, 'add');
+    for (const e of filtered) _applyEf(e, srcJk, 'mul');
+  }
+
+  // ===== Stage 1: Self omoide (gated by affinity) =====
+  const selfJk = Math.max(1, tr.jukudo || 1);
+  const picks = _omoidePicksFor(chara, tr);
+  for (const info of picks) _applyEf(info, selfJk, 'add');
+  for (const info of picks) _applyEf(info, selfJk, 'mul');
+
+  // ===== Stage 2: External buffs in fixed slot order =====
+  // slot s: crystals → chara skills, then souls (1..3), then bgs (1..3)
+  for (let si = 0; si < teamSize; si++) {
+    const slot = team[si]; if (!slot) continue;
+    const srcChara = allCharas.find(x => x.id === slot.chara) || null;
+    const srcHp = slot.tr?.hpPercent ?? 100;
+    const srcJk = Math.max(1, slot.tr?.jukudo || 1);
+
+    // Crystals
+    const crEffs = [];
+    (slot.crystals || []).forEach(cid => {
+      if (!cid) return;
+      const cr = allCrystals.find(x => x.id === cid);
+      if (cr) (cr.effects || []).forEach(e => crEffs.push(e));
+    });
+    _applyList(crEffs, srcChara, srcHp, srcJk);
+
+    // Chara skills (current state, with revise)
+    if (srcChara) {
+      const skills = _resolveCharaSkills(srcChara);
+      const charaEffs = [];
+      skills.forEach(sk => (sk.effects || []).forEach(e => charaEffs.push(e)));
+      _applyList(charaEffs, srcChara, srcHp, srcJk);
+    }
+  }
+  for (let si = 0; si < teamSize; si++) {
+    const slot = team[si]; if (!slot) continue;
+    const srcChara = allCharas.find(x => x.id === slot.chara) || null;
+    const srcHp = slot.tr?.hpPercent ?? 100;
+    const srcJk = Math.max(1, slot.tr?.jukudo || 1);
+    const soul = allSouls.find(x => x.id === slot.soul);
+    if (!soul) continue;
+    const skills = _resolveSoulSkills(soul);
+    const soulEffs = [];
+    skills.forEach(sk => (sk.effects || []).forEach(e => soulEffs.push(e)));
+    _applyList(soulEffs, srcChara, srcHp, srcJk);
+  }
+  for (let si = 0; si < teamSize; si++) {
+    const slot = team[si]; if (!slot) continue;
+    const srcChara = allCharas.find(x => x.id === slot.chara) || null;
+    const srcHp = slot.tr?.hpPercent ?? 100;
+    const srcJk = Math.max(1, slot.tr?.jukudo || 1);
+    const bg = allBGs.find(x => x.id === slot.bg);
+    if (!bg) continue;
+    _applyList(bg.effects || [], srcChara, srcHp, srcJk);
+  }
+
+  // ===== Stage 3: Self-only finishers (結婚 / 燃心 / LP) =====
+  const mr = [1.00, 1.03, 1.05][tr.marriage] || 1;
+  for (const k of _STAT_KEYS) acc.stats[k] *= mr;
+  if (tr.moeshin) acc.stats['攻撃力'] *= 1.3;
+  const lpMult = [1.0, 1.1, 1.5][tr.lp] || 1;
+  acc.stats['攻撃力'] *= lpMult;
+
+  return { stats: acc.stats, damageLimit: acc.damageLimit };
+}
+
+// Pick / equip / clear ─────────────────────────────────────
+function pickOmoide(si, threshold, iconId) {
+  const tr = team[si].tr;
+  if ((+threshold || 0) > (+tr.affinity || 0)) return; // locked
+  if (!tr.omoide_picks) tr.omoide_picks = {};
+  if (tr.omoide_picks[threshold] === iconId) {
+    delete tr.omoide_picks[threshold];
+  } else {
+    tr.omoide_picks[threshold] = iconId;
+  }
+  if (omoideModalSlot === si) _renderOmoideModalBody();
+  _refreshOmoideCountLabel(si);
+  refreshAllStats();
+}
+
+function equipAllOmoide(si) {
+  const c = allCharas.find(x => x.id === team[si].chara);
+  if (!c) return;
+  const tr = team[si].tr;
+  const aff = +tr.affinity || 0;
+  if (!tr.omoide_picks) tr.omoide_picks = {};
+  (c.omoide || []).forEach(row => {
+    if ((+row.threshold || 0) > aff) return; // locked
+    const opts = row.slots || [];
+    let pick = opts.find(id => {
+      const info = SENZAI_TABLE[id] || SENZAI_TABLE[String(id)];
+      return info && (info.bunrui || []).includes(1);
+    });
+    if (pick == null && opts.length === 1) pick = opts[0];
+    if (pick != null) tr.omoide_picks[row.threshold] = pick;
+  });
+  if (omoideModalSlot === si) _renderOmoideModalBody();
+  _refreshOmoideCountLabel(si);
+  refreshAllStats();
+}
+
+function clearAllOmoide(si) {
+  team[si].tr.omoide_picks = {};
+  if (omoideModalSlot === si) _renderOmoideModalBody();
+  _refreshOmoideCountLabel(si);
+  refreshAllStats();
+}
+
+function renderOmoideEquip(i, chara) {
+  if (!chara || !(chara.omoide || []).length) return '';
+  const tr = team[i].tr;
+  const picks = tr.omoide_picks || {};
+  const equipped = Object.keys(picks).filter(k => picks[k] != null).length;
+  const total = (chara.omoide || []).length;
+  return `<div class="equip-section" id="omoide-section-${i}">
+    <div class="equip-label">好感装備 <span style="color:var(--text2);font-size:11px" id="om-count-${i}">(${equipped}/${total})</span>
+      <button class="picker-btn has-val" style="margin-left:auto;font-size:11px;padding:4px 10px" onclick="openOmoideModal(${i})">編集</button>
+    </div>
+  </div>`;
+}
+
+let omoideModalSlot = -1;
+function openOmoideModal(si) {
+  omoideModalSlot = si;
+  const c = allCharas.find(x => x.id === team[si].chara);
+  if (!c) return;
+  document.getElementById('omoide-modal-title').textContent = `好感装備 — ${c.name}`;
+  _renderOmoideModalBody();
+  document.getElementById('omoide-modal').classList.add('open');
+}
+function closeOmoideModal() {
+  document.getElementById('omoide-modal').classList.remove('open');
+  omoideModalSlot = -1;
+}
+function _renderOmoideModalBody() {
+  const si = omoideModalSlot;
+  if (si < 0) return;
+  const c = allCharas.find(x => x.id === team[si].chara);
+  if (!c) return;
+  const tr = team[si].tr;
+  const picks = tr.omoide_picks || {};
+  const aff = +tr.affinity || 0;
+  const rows = (c.omoide || []).map(row => {
+    const locked = (+row.threshold || 0) > aff;
+    const opts = (row.slots || []).map(iconId => {
+      const info = SENZAI_TABLE[iconId] || SENZAI_TABLE[String(iconId)] || {};
+      const sel = picks[row.threshold] === iconId;
+      const lbl = (info.koka || ('icon' + iconId)).replace(/UP|\[★+\]/g, x => x.includes('★') ? x : '');
+      const dis = locked ? ' disabled style="cursor:not-allowed"' : '';
+      return `<button class="om-opt${sel?' on':''}"${dis} onclick="pickOmoide(${si},${row.threshold},${iconId})" title="${esc(info.koka||'')}${info.bairitu?' ('+(info.calc_type===1?'+':'×')+info.bairitu+')':''}">${esc(lbl)}</button>`;
+    }).join('');
+    const lockTag = locked ? '<span style="font-size:10px;color:#ff7777;margin-left:4px">🔒</span>' : '';
+    return `<div class="om-row"${locked?' style="opacity:.4"':''}><span class="om-thresh">${row.threshold}${lockTag}</span>${opts}</div>`;
+  }).join('');
+  document.getElementById('omoide-modal-body').innerHTML = `
+    <div class="om-toolbar">
+      <span style="font-size:13px;color:var(--text2);font-weight:600">好感:</span>
+      <input type="number" min="0" step="1" value="${aff}" onchange="setAffinity(${si},+this.value)"
+        style="width:80px;padding:4px 6px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;text-align:right">
+      <button class="om-btn" onclick="equipAllOmoide(${si})">全装備（攻撃優先）</button>
+      <button class="om-btn" onclick="clearAllOmoide(${si})">全解除</button>
+    </div>
+    ${rows}
+  `;
+}
+function _refreshOmoideCountLabel(si) {
+  const c = allCharas.find(x => x.id === team[si].chara);
+  if (!c) return;
+  const picks = team[si].tr.omoide_picks || {};
+  const equipped = Object.keys(picks).filter(k => picks[k] != null).length;
+  const lbl = document.getElementById('om-count-' + si);
+  if (lbl) lbl.textContent = `(${equipped}/${(c.omoide||[]).length})`;
+}
+
+function _fmtStat(v) {
+  if (v == null || isNaN(v)) return '-';
+  const n = Math.round(v);
+  return n.toLocaleString('en-US');
+}
+
+function renderStatsPanel(i, chara) {
+  if (!chara) return `<div class="stats-panel" id="stats-panel-${i}"></div>`;
+  return `<div class="stats-panel" id="stats-panel-${i}">${_statsInner(i, chara)}</div>`;
+}
+function _statsInner(i, chara) {
+  if (!chara) return '';
+  const tr = team[i].tr;
+  const r = computeStats(chara, tr);
+  if (!r) return '';
+  const cells = _STAT_KEYS.map(k =>
+    `<div class="stats-cell"><span class="stats-key">${k}</span><span class="stats-val">${_fmtStat(r.stats[k])}</span></div>`
+  ).join('');
+  const dlim = `<div class="stats-cell wide"><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(r.damageLimit)}</span></div>`;
+  return `<div class="stats-grid">${cells}${dlim}</div>`;
+}
+function refreshStatsPanel(i) {
+  const el = document.getElementById('stats-panel-' + i);
+  if (!el) return;
+  const c = allCharas.find(x => x.id === team[i].chara);
+  el.innerHTML = _statsInner(i, c);
+}
+function refreshAllStats() {
+  for (let i = 0; i < 3; i++) refreshStatsPanel(i);
 }
 
 // ===== ENTITY MODAL =====
@@ -862,6 +1332,16 @@ function applyEM(){
   renderEMList(items);
 }
 
+function _fmtSortVal(v){
+  if(v==null) return '—';
+  if(typeof v !== 'number') return String(v);
+  return Number.isInteger(v) ? v.toLocaleString('en-US') : String(v);
+}
+function renderSortBadge(c, key){
+  const fn = (CHARA_SPEC && CHARA_SPEC.sortFns && CHARA_SPEC.sortFns[key]);
+  return `<span class="sort-val">${_fmtSortVal(fn ? fn(c) : null)}</span>`;
+}
+
 function renderEMList(items){
   const list=document.getElementById('em-list');
   const type=emType;
@@ -871,14 +1351,17 @@ function renderEMList(items){
   if(!items.length){list.innerHTML=h+'<div class="em-no-results">該当なし</div>';return;}
 
   if(type==='chara'){
+    const sortKey = mf.chara.sort;
     h+=items.map(c=>{
       const cur=team[emSlot]?.chara===c.id;
       const dots=['極弐','改造','通常'].map(s=>`<span class="state-dot ${c.states?.[s]?'has':''}"></span>`).join('');
+      const sortBadge = sortKey ? renderSortBadge(c, sortKey) : '';
       return`<div class="em-item${cur?' active':''}" onclick="selectEM(${c.id})">
         <img class="em-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
         <span class="em-name">${esc(c.name)}</span>
         <span class="badge elem-${c.element}">${ELEM[c.element]||''}</span>
         <span class="badge weapon">${WEAPON[c.type]||''}</span>
+        ${sortBadge}
         <div class="state-dots">${dots}</div>
         <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${c.id})">詳細</button>
       </div>`;
@@ -1241,7 +1724,7 @@ function renderSlot(i){
   const soul=allSouls.find(x=>x.id===t.soul)||null;
   const bg=allBGs.find(x=>x.id===t.bg)||null;
   const st=chara?getBestState(chara):null;
-  const nCr=crystalSlotCount(chara);
+  const nCr=crystalSlotCount(chara, i);
   const usedCr=t.crystals.filter(Boolean).length;
   const eclr=chara?(ELEM_CLR[chara.element]||'#888'):null;
   const enam=chara?(ELEM[chara.element]||''):'';
@@ -1304,6 +1787,8 @@ function renderSlot(i){
         ${charaSkills?`<div class="detail-wrap" id="col${i}c">${charaSkills}</div>`:''}
       </div>
       ${renderTraining(i,chara)}
+      ${chara?renderOmoideEquip(i,chara):''}
+      ${chara?renderStatsPanel(i,chara):''}
       <div class="equip-section">
         <div class="equip-label">ソウル${soulSkills?`<button class="detail-toggle" onclick="toggleDetail('col${i}s',this)">▶</button>`:''}</div>
         <div class="equip-row">${soulIcon}<div class="picker-wrap">
