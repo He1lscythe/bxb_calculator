@@ -6,12 +6,13 @@ Classify audit issues into named patterns, count each.
 import json, os, sys, re, unicodedata, copy
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR   = os.path.dirname(SCRIPT_DIR)
+DATA_DIR   = os.path.join(BASE_DIR, 'data')
 sys.path.insert(0, SCRIPT_DIR)
 from classify_common import (
     classify_skill_chara, CAT_TO_BUNRUI_SKILLLIST,
 )
 
-chars = json.load(open(os.path.join(BASE_DIR, 'characters.json'), encoding='utf-8'))
+chars = json.load(open(os.path.join(DATA_DIR, 'characters.json'), encoding='utf-8'))
 table = json.load(open(os.path.join(BASE_DIR, 'skilllist_table.json'), encoding='utf-8'))
 
 def normalize_field(v):

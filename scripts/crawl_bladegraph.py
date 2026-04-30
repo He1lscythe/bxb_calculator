@@ -27,6 +27,7 @@ REQUEST_DELAY = 2.0
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT       = os.path.dirname(SCRIPT_DIR)
+DATA_DIR   = os.path.join(ROOT, 'data')
 
 HEADERS = {
     "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -349,8 +350,9 @@ def main():
 
     full_mode = args.recal or args.rerun
 
-    out_path    = os.path.join(ROOT, OUTPUT_FILE)
-    revise_path = os.path.join(ROOT, 'bladegraph_revise.json')
+    os.makedirs(DATA_DIR, exist_ok=True)
+    out_path    = os.path.join(DATA_DIR, OUTPUT_FILE)
+    revise_path = os.path.join(DATA_DIR, 'bladegraph_revise.json')
 
     # Load existing data
     existing = {}

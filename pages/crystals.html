@@ -115,9 +115,9 @@ input[type=number] { -moz-appearance: textfield; }
 <body>
 
 <div id="page-wrap">
-<script src="nav.js"></script>
-<script src="shared/filter-core.js"></script>
-<script src="shared/crystal-spec.js"></script>
+<script src="../nav.js"></script>
+<script src="../shared/filter-core.js"></script>
+<script src="../shared/crystal-spec.js"></script>
 <div id="content">
   <div id="filters">
     <input type="text" id="search" placeholder="🔍 結晶名で検索..." oninput="applyFilters()">
@@ -253,13 +253,13 @@ let editData = null;
 
 // ===== DATA LOAD =====
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('./crystals.json')
+  fetch('../data/crystals.json')
     .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function(arr) {
       allCrystals = arr;
       arr.forEach(function(c) { originalData[c.id] = JSON.parse(JSON.stringify(c)); });
       applyFilters();
-      return fetch('./crystals_revise.json');
+      return fetch('../data/crystals_revise.json');
     })
     .then(function(r) { return r.ok ? r.json() : []; })
     .then(function(arr) {

@@ -1,5 +1,5 @@
 // 测试 hensei.html 计算器逻辑
-// 用法: node scripts/test_calculator.js
+// 用法: node tests/test_calculator.js
 // 镜像 hensei.html 的核心计算函数 (computeStats / _baseStat / _buffApplies / _conditionMet / ...)
 // 然后跑一组场景验证：单魔剑/双魔剑/三魔剑、各种 scope/condition/状态
 
@@ -7,8 +7,10 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
+const DATA_DIR = path.join(ROOT, 'data');
+const TESTS_DIR = __dirname;
 function load(name) {
-  return JSON.parse(fs.readFileSync(path.join(ROOT, name), 'utf8'));
+  return JSON.parse(fs.readFileSync(path.join(DATA_DIR, name), 'utf8'));
 }
 
 // ===== 加载真实数据 (用于真实场景测试) =====
@@ -163,7 +165,7 @@ function _conditionMet(condition, hpPct) {
   let h = +hpPct; if (isNaN(h)) h = 100;
   if (condition === 1) return h >= 80;
   if (condition === 2) return h <= 50;
-  if (condition === 3) return h <= 25;
+  if (condition === 3) return h < 50;
   return true;
 }
 function _parseScaling(v) {
@@ -363,6 +365,50 @@ const MOCK_D = {
     }
   },
 };
+// MOCK_E: 破損 攻+3000 (condition=3)
+const MOCK_E = {
+  id: 999005, name: 'MOCK_E', rarity: 4, element: 5, type: 5,
+  states: {
+    '通常': {
+      stats: {
+        max: {攻撃力: 6000, 防御力: 3000, HP: 20000, ブレイク力: 2500},
+        initial: {攻撃力: 60, 防御力: 30, HP: 200, ブレイク力: 25},
+      },
+      skills: [{name: 'Hason_攻+3000', effects: [{bunrui:[1], scope:1, condition:3, calc_type:1, bairitu:3000}]}],
+    }
+  },
+};
+// MOCK_NAMED_TARGET: 名前 = "魔剣レヴァンテイン=TRUE" (用作 scope=5 的 target)
+const MOCK_NAMED_TARGET = {
+  id: 999006, name: '魔剣レヴァンテイン=TRUE', rarity: 4, element: 1, type: 1,
+  states: {
+    '通常': {
+      stats: {
+        max: {攻撃力: 8000, 防御力: 4000, HP: 24000, ブレイク力: 3000},
+        initial: {攻撃力: 80, 防御力: 40, HP: 240, ブレイク力: 30},
+      },
+      skills: [],
+    }
+  },
+};
+// MOCK_OTHER: 名前 = "別の魔剣" (不应被 scope=5 buff 命中)
+const MOCK_OTHER = {
+  id: 999007, name: '別の魔剣', rarity: 4, element: 1, type: 1,
+  states: {
+    '通常': {
+      stats: {
+        max: {攻撃力: 8000, 防御力: 4000, HP: 24000, ブレイク力: 3000},
+        initial: {攻撃力: 80, 防御力: 40, HP: 240, ブレイク力: 30},
+      },
+      skills: [],
+    }
+  },
+};
+// MOCK_NAMED_BG: scope=5 名前限定 攻+1500, name="レヴァンテイン" (子串匹配)
+const MOCK_NAMED_BG = {
+  id: 999202, name: 'MOCK_NAMED_BG', rarity: 4,
+  effects: [{bunrui:[1], scope:5, name:'レヴァンテイン', calc_type:1, bairitu:1500}],
+};
 // 受控 mock soul
 const MOCK_SOUL_X = {
   id: 999101, name: 'MOCK_SOUL', rarity: 4,
@@ -384,9 +430,9 @@ const MOCK_CR_FIRE = {
 };
 
 // 注入 mock 到全局表
-allCharas.push(MOCK_A, MOCK_B, MOCK_C, MOCK_D);
+allCharas.push(MOCK_A, MOCK_B, MOCK_C, MOCK_D, MOCK_E, MOCK_NAMED_TARGET, MOCK_OTHER);
 allSouls.push(MOCK_SOUL_X);
-allBGs.push(MOCK_BG_X);
+allBGs.push(MOCK_BG_X, MOCK_NAMED_BG);
 allCrystals.push(MOCK_CR_X, MOCK_CR_FIRE);
 
 // 受控 omoide info
@@ -543,6 +589,82 @@ console.log('\n===== 计算器场景测试 =====\n');
   t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:80});
   const r = computeStats(MOCK_D, t[0].tr, t, 1);
   expectClose('C15 hp=80 浑身边界', r.stats['攻撃力'], 6930 + 2000);
+}
+
+// ----- 破損 condition=3 (HP < 50) -----
+{
+  // C28: hp=49 破損触发
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999005});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:49});
+  const r = computeStats(MOCK_E, t[0].tr, t, 1);
+  // base 攻 = 6000 * (1 - 249/249 * 60/6000) = 6000 * 0.99 = 5940
+  // condition=3 破損 hp=49<50 触发 → +3000 → 8940
+  expectClose('C28 hp=49 破損触发', r.stats['攻撃力'], 5940 + 3000);
+}
+{
+  // C29: hp=50 破損 边界 不触发 (严格 <50)
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999005});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:50});
+  const r = computeStats(MOCK_E, t[0].tr, t, 1);
+  expectClose('C29 hp=50 破損 边界 不触发 (严格 <50)', r.stats['攻撃力'], 5940);
+}
+{
+  // C30: hp=10 破損触发
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999005});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:10});
+  const r = computeStats(MOCK_E, t[0].tr, t, 1);
+  expectClose('C30 hp=10 破損触发', r.stats['攻撃力'], 5940 + 3000);
+}
+{
+  // C31: 跨格 source HP=10 (slot 0) 破損, target slot 1 HP=100
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999005});  // E 破損 全体+3000
+  t[1] = mkSlot({chara: 999001});  // A
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:10});
+  t[1].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:100});
+  const rA = computeStats(MOCK_A, t[1].tr, t, 2);
+  // E 破損生效 (source slot HP=10) → A 攻 = 9900 + 3000(E) + 1000(A self) = 13900
+  expectClose('C31 source HP=10 破損 → 全体生效', rA.stats['攻撃力'], 9900 + 3000 + 1000);
+}
+
+// ----- scope=5 名前限定 (验证 buff 实际应用) -----
+{
+  // C32: target 名字含子串 "レヴァンテイン" → bg 攻+1500 应用
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999006, bg: 999202});  // MOCK_NAMED_TARGET ("魔剣レヴァンテイン=TRUE") + bg scope=5 name="レヴァンテイン"
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1});
+  const r = computeStats(MOCK_NAMED_TARGET, t[0].tr, t, 1);
+  // base 攻 = 8000 * (1 - 249/249 * 80/8000) = 8000 * 0.99 = 7920
+  // bg scope=5 name="レヴァンテイン" 包含于 target.name "魔剣レヴァンテイン=TRUE" → +1500
+  expectClose('C32 scope=5 名前匹配 → buff 应用', r.stats['攻撃力'], 7920 + 1500);
+}
+{
+  // C33: target 名字 "別の魔剣" 不含 → buff 不应用
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999007, bg: 999202});  // MOCK_OTHER + bg scope=5 name="レヴァンテイン"
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1});
+  const r = computeStats(MOCK_OTHER, t[0].tr, t, 1);
+  // base 7920, name 不匹配 → buff 不应用
+  expectClose('C33 scope=5 名前不匹配 → buff 不应用', r.stats['攻撃力'], 7920);
+}
+{
+  // C34: 跨格场景 — bg 装在 slot 0 (任意 chara), target slot 1 名字匹配
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999001, bg: 999202});  // MOCK_A + scope=5 name="レヴァンテイン" bg
+  t[1] = mkSlot({chara: 999006});  // MOCK_NAMED_TARGET ("魔剣レヴァンテイン=TRUE")
+  t[2] = mkSlot({chara: 999007});  // MOCK_OTHER
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1});
+  t[1].tr = mkTr({state:'通常', jukudo:1, level:1});
+  t[2].tr = mkTr({state:'通常', jukudo:1, level:1});
+  const rNamed = computeStats(MOCK_NAMED_TARGET, t[1].tr, t, 3);
+  const rOther = computeStats(MOCK_OTHER, t[2].tr, t, 3);
+  // NAMED: 7920 + bg+1500 + B(slot1?) 不存在; A 自身 scope=0 不影响别格 → 7920 + 1500 = 9420
+  expectClose('C34 跨格 scope=5 名前匹配 target', rNamed.stats['攻撃力'], 7920 + 1500);
+  // OTHER: 7920, name 不匹配 → 7920
+  expectClose('C34 跨格 scope=5 名前不匹配 target', rOther.stats['攻撃力'], 7920);
 }
 
 // ----- 双魔剣 cross-slot -----
@@ -774,32 +896,361 @@ console.log('\n===== 计算器场景测试 =====\n');
 
 // ===== 真实数据 sanity 测试 =====
 console.log('\n--- 真实数据 sanity ---\n');
-{
-  // R1: 选第一个 SS chara, 通常 lv 1
-  const ss = allCharas.find(c => c.rarity === 4 && c.states && c.states['通常']);
-  if (ss) {
-    const t = emptyTeam();
-    t[0] = mkSlot({chara: ss.id});
-    const r = computeStats(ss, t[0].tr, t, 1);
-    expect('R1 SS 攻撃力 > 0', r.stats['攻撃力'] > 0, true);
-    expect('R1 SS HP > 0', r.stats['HP'] > 0, true);
-    expect('R1 SS ダメ上限 ≥ 2^31-1', r.damageLimit >= 2147483647, true);
+
+// R1-R4: 跨稀有度 单魔剣 默认 tr 计算 — 确保不崩溃且数值合理
+const realCharas = allCharas.filter(c => c.id < 999000); // 排除 mock
+const byRarity = {1:[],2:[],3:[],4:[]};
+realCharas.forEach(c => { if(byRarity[c.rarity]) byRarity[c.rarity].push(c); });
+[4,3,2,1].forEach(r => {
+  const c = byRarity[r]?.[0];
+  if (!c) return;
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: c.id});
+  t[0].tr = mkTr({});
+  let res, crashed = false;
+  try { res = computeStats(c, t[0].tr, t, 1); } catch(e) { crashed = true; }
+  const lbl = `R[${{1:'A',2:'AA',3:'S',4:'SS'}[r]}] ${c.name||c.id} 默认 tr`;
+  expect(lbl + ' 不崩溃', !crashed, true);
+  if (!crashed && res) {
+    expect(lbl + ' 攻撃力 > 0', res.stats['攻撃力'] > 0, true);
+    expect(lbl + ' HP > 0', res.stats['HP'] > 0, true);
   }
-}
+});
+
+// R5: 全数据库扫描 — 每个 chara 默认 tr 不崩溃
 {
-  // R2: SS 改造 lv max
-  const ss = allCharas.find(c => c.rarity === 4 && c.states && c.states['改造']);
+  let crashed = 0, statsOk = 0;
+  const failures = [];
+  for (const c of realCharas) {
+    if (!c.states) continue;
+    const t = emptyTeam();
+    t[0] = mkSlot({chara: c.id});
+    t[0].tr = mkTr({});
+    try {
+      const r = computeStats(c, t[0].tr, t, 1);
+      if (r && r.stats['攻撃力'] >= 0 && r.stats['HP'] >= 0) statsOk++;
+    } catch(e) {
+      crashed++;
+      if (failures.length < 3) failures.push(`${c.id}/${c.name}: ${e.message}`);
+    }
+  }
+  expect(`R5 全 ${realCharas.length} 魔剣 默认计算 无崩溃`, crashed, 0);
+  if (failures.length) console.log('  样本失败:', failures);
+  expect(`R5 全 ${realCharas.length} 魔剣 默认计算 数值正常`, statsOk, realCharas.filter(c=>c.states).length);
+}
+
+// R6: SS 改造 lv 最大 stats → 攻 ≥ 改造 stats.max（含自加成可能略高）
+{
+  const ss = realCharas.find(c => c.rarity === 4 && c.states?.['改造']?.stats?.max?.['攻撃力']);
   if (ss) {
     const t = emptyTeam();
     t[0] = mkSlot({chara: ss.id});
     t[0].tr = mkTr({state:'改造', jukudo:99, level:255});
     const r = computeStats(ss, t[0].tr, t, 1);
-    const expATK = ss.states['改造'].stats?.max?.['攻撃力'];
-    if (expATK) {
-      // 各种 bunrui=1 自加成会让 r.stats.攻撃力 ≥ expATK
-      expect('R2 改造 lv255 攻撃力 ≥ stats.max', r.stats['攻撃力'] >= expATK * 0.99, true);
+    const expATK = ss.states['改造'].stats.max['攻撃力'];
+    expect(`R6 ${ss.name} 改造 lv255 攻 ≥ stats.max`, r.stats['攻撃力'] >= expATK * 0.99, true);
+  }
+}
+
+// R7: 等级单调性 — lv 1 → cap 攻撃力非递减
+{
+  const ss = realCharas.find(c => c.rarity === 4 && c.states?.['通常']?.stats?.initial && c.states?.['通常']?.stats?.max);
+  if (ss) {
+    const t = emptyTeam();
+    t[0] = mkSlot({chara: ss.id});
+    t[0].tr = mkTr({state:'通常', jukudo:1});
+    const cap = _capLevel(ss, t[0].tr) || 60;
+    let prev = -Infinity, monotonic = true;
+    for (let lv = 1; lv <= cap; lv += 5) {
+      t[0].tr.level = lv;
+      const r = computeStats(ss, t[0].tr, t, 1);
+      if (r.stats['攻撃力'] + 1e-6 < prev) { monotonic = false; break; }
+      prev = r.stats['攻撃力'];
+    }
+    expect(`R7 ${ss.name} 攻撃力随等级非递减`, monotonic, true);
+  }
+}
+
+// R8: 熟度单调性 — jk 1 → max 时 ダメ上限/攻撃力 非递减（scaling 仅会增加）
+{
+  const ss = realCharas.find(c => c.rarity === 4 && c.states?.['改造']);
+  if (ss) {
+    const t = emptyTeam();
+    t[0] = mkSlot({chara: ss.id});
+    t[0].tr = mkTr({state:'改造', level:1});
+    let prev = -Infinity, monotonic = true;
+    const jMax = JUKUDO_MAX_TBL[ss.rarity]?.['改造'] || 99;
+    for (let jk = 1; jk <= jMax; jk += 10) {
+      t[0].tr.jukudo = jk;
+      const r = computeStats(ss, t[0].tr, t, 1);
+      if (r.stats['攻撃力'] + 1e-6 < prev) { monotonic = false; break; }
+      prev = r.stats['攻撃力'];
+    }
+    expect(`R8 ${ss.name} 攻撃力随熟度非递减 (改造)`, monotonic, true);
+  }
+}
+
+// R9-R10: 找一个有 bunrui=17 (ダメ上限) 的 chara, 验证 damageLimit > 2^31-1
+{
+  let found = null;
+  for (const c of realCharas) {
+    if (!c.states) continue;
+    for (const stKey of Object.keys(c.states)) {
+      const skills = c.states[stKey].skills || [];
+      for (const sk of skills) {
+        for (const e of sk.effects || []) {
+          if ((e.bunrui||[]).includes(17)) { found = {c, stKey, sk:sk.name}; break; }
+        }
+        if (found) break;
+      }
+      if (found) break;
+    }
+    if (found) break;
+  }
+  if (found) {
+    const t = emptyTeam();
+    t[0] = mkSlot({chara: found.c.id});
+    t[0].tr = mkTr({state: found.stKey, jukudo:1, level:1});
+    const r = computeStats(found.c, t[0].tr, t, 1);
+    expect(`R9 ${found.c.name} bunrui=17 → ダメ上限 > 2^31-1`, r.damageLimit > 2147483647, true);
+  }
+}
+
+// R11-R12: 找一个有 bairitu_scaling 的 chara skill, 验证 jk 增大时 buff 增大
+{
+  let found = null;
+  for (const c of realCharas) {
+    if (!c.states) continue;
+    for (const stKey of Object.keys(c.states)) {
+      const skills = c.states[stKey].skills || [];
+      for (const sk of skills) {
+        for (const e of sk.effects || []) {
+          if (e.bairitu_scaling && (e.bunrui||[]).some(b=>_BUNRUI_TO_STAT[b])) {
+            found = {c, stKey, ef:e}; break;
+          }
+        }
+        if (found) break;
+      }
+      if (found) break;
+    }
+    if (found) break;
+  }
+  if (found) {
+    const t = emptyTeam();
+    t[0] = mkSlot({chara: found.c.id});
+    t[0].tr = mkTr({state: found.stKey, jukudo:1, level:1});
+    const r1 = computeStats(found.c, t[0].tr, t, 1);
+    t[0].tr.jukudo = JUKUDO_MAX_TBL[found.c.rarity]?.[found.stKey] || 50;
+    const rN = computeStats(found.c, t[0].tr, t, 1);
+    expect(`R11 ${found.c.name} bairitu_scaling: jk大时 buff 更强`, rN.stats['攻撃力'] >= r1.stats['攻撃力'], true);
+  }
+}
+
+// R13: 找有 condition=2 (背水) 的 chara, hp=10 触发, hp=100 不触发
+{
+  let found = null;
+  for (const c of realCharas) {
+    if (!c.states) continue;
+    for (const stKey of Object.keys(c.states)) {
+      const skills = c.states[stKey].skills || [];
+      for (const sk of skills) {
+        for (const e of sk.effects || []) {
+          if (e.condition === 2 && (e.bunrui||[]).some(b=>_BUNRUI_TO_STAT[b])
+              && (e.scope===0 || e.scope===1) && (e.bairitu||0) > 0) {
+            found = {c, stKey, ef:e}; break;
+          }
+        }
+        if (found) break;
+      }
+      if (found) break;
+    }
+    if (found) break;
+  }
+  if (found) {
+    const t = emptyTeam();
+    t[0] = mkSlot({chara: found.c.id});
+    t[0].tr = mkTr({state: found.stKey, jukudo:1, level:1, hpPercent:100});
+    const rHi = computeStats(found.c, t[0].tr, t, 1);
+    t[0].tr.hpPercent = 10;
+    const rLo = computeStats(found.c, t[0].tr, t, 1);
+    expect(`R13 ${found.c.name} 背水 hp=10 ≥ hp=100 (背水触发)`,
+      rLo.stats['攻撃力'] + 1e-6 >= rHi.stats['攻撃力'], true);
+  }
+}
+
+// R14: 全 souls 装备扫描 — 任一 chara 装备任一 soul 不崩溃
+{
+  const baseCh = realCharas.find(c => c.states?.['通常']);
+  if (baseCh) {
+    let crashed = 0;
+    const failures = [];
+    for (const s of allSouls.filter(s => s.id < 999000)) {
+      const t = emptyTeam();
+      t[0] = mkSlot({chara: baseCh.id, soul: s.id});
+      try { computeStats(baseCh, t[0].tr, t, 1); }
+      catch(e) {
+        crashed++;
+        if (failures.length < 3) failures.push(`${s.id}/${s.name}: ${e.message}`);
+      }
+    }
+    expect(`R14 全 ${allSouls.filter(s=>s.id<999000).length} ソウル 装备 不崩溃`, crashed, 0);
+    if (failures.length) console.log('  样本失败:', failures);
+  }
+}
+
+// R15: 全 crystals 装备扫描
+{
+  const baseCh = realCharas.find(c => c.states?.['通常']);
+  if (baseCh) {
+    let crashed = 0;
+    const failures = [];
+    for (const cr of allCrystals.filter(c => c.id < 999000)) {
+      const t = emptyTeam();
+      t[0] = mkSlot({chara: baseCh.id, crystals:[cr.id]});
+      try { computeStats(baseCh, t[0].tr, t, 1); }
+      catch(e) {
+        crashed++;
+        if (failures.length < 3) failures.push(`${cr.id}/${cr.name}: ${e.message}`);
+      }
+    }
+    expect(`R15 全 ${allCrystals.filter(c=>c.id<999000).length} 結晶 装备 不崩溃`, crashed, 0);
+    if (failures.length) console.log('  样本失败:', failures);
+  }
+}
+
+// R16: 全 bg 装备扫描
+{
+  const baseCh = realCharas.find(c => c.states?.['通常']);
+  if (baseCh) {
+    let crashed = 0;
+    const failures = [];
+    for (const bg of allBGs.filter(b => b.id < 999000)) {
+      const t = emptyTeam();
+      t[0] = mkSlot({chara: baseCh.id, bg: bg.id});
+      try { computeStats(baseCh, t[0].tr, t, 1); }
+      catch(e) {
+        crashed++;
+        if (failures.length < 3) failures.push(`${bg.id}/${bg.name}: ${e.message}`);
+      }
+    }
+    expect(`R16 全 ${allBGs.filter(b=>b.id<999000).length} bladegraph 装备 不崩溃`, crashed, 0);
+    if (failures.length) console.log('  样本失败:', failures);
+  }
+}
+
+// R17: 全 omoide picks 装备扫描 — 每个 chara 各自 omoide 任意 pick 都能算
+{
+  let crashed = 0, totalPicks = 0;
+  const failures = [];
+  for (const c of realCharas) {
+    if (!c.omoide || !c.omoide.length) continue;
+    for (const row of c.omoide) {
+      for (const iconId of (row.slots||[])) {
+        const t = emptyTeam();
+        t[0] = mkSlot({chara: c.id});
+        t[0].tr = mkTr({affinity: row.threshold, omoide_picks:{[row.threshold]: iconId}});
+        totalPicks++;
+        try { computeStats(c, t[0].tr, t, 1); }
+        catch(e) {
+          crashed++;
+          if (failures.length < 3) failures.push(`${c.id}/${c.name} thresh=${row.threshold} icon=${iconId}: ${e.message}`);
+        }
+      }
     }
   }
+  expect(`R17 ${totalPicks} 个 omoide pick 装备 不崩溃`, crashed, 0);
+  if (failures.length) console.log('  样本失败:', failures);
+}
+
+// R18: 随机三人队 fuzz — 50 组随机 chara/soul/bg/crystal 不崩溃
+{
+  function pickRandom(arr) {
+    const real = arr.filter(x => x.id < 999000);
+    return real[Math.floor(Math.random()*real.length)];
+  }
+  let crashed = 0;
+  const failures = [];
+  for (let i = 0; i < 50; i++) {
+    const t = emptyTeam();
+    const charas = [pickRandom(allCharas), pickRandom(allCharas), pickRandom(allCharas)];
+    for (let s = 0; s < 3; s++) {
+      const c = charas[s];
+      if (!c.states) continue;
+      const stOpts = c.rarity === 4 ? ['通常','改造'] : ['通常','改造','極弐'];
+      const stKey = stOpts.find(k => c.states[k]) || '通常';
+      t[s] = mkSlot({
+        chara: c.id,
+        soul: pickRandom(allSouls).id,
+        bg: pickRandom(allBGs).id,
+        crystals: [pickRandom(allCrystals).id, pickRandom(allCrystals).id, pickRandom(allCrystals).id],
+      });
+      t[s].tr = mkTr({
+        state: stKey,
+        jukudo: Math.floor(Math.random() * 30) + 1,
+        level: Math.floor(Math.random() * 100) + 1,
+        awakening: Math.floor(Math.random() * 5),
+        marriage: Math.floor(Math.random() * 3),
+        moeshin: Math.random() < 0.3,
+        lp: Math.floor(Math.random() * 3),
+        hpPercent: Math.floor(Math.random() * 101),
+        affinity: 50000,
+        omoide_picks: {},
+      });
+    }
+    for (let s = 0; s < 3; s++) {
+      try {
+        const c = allCharas.find(x => x.id === t[s].chara);
+        if (c) computeStats(c, t[s].tr, t, 3);
+      } catch(e) {
+        crashed++;
+        if (failures.length < 3) failures.push(`team[${i}] slot${s}: ${e.message}`);
+      }
+    }
+  }
+  expect('R18 50 组随机三人队 fuzz 不崩溃', crashed, 0);
+  if (failures.length) console.log('  样本失败:', failures);
+}
+
+// R19: scope=2/3/4/5 实数据采样 — 跨所有 entity 类型找代表样本验证不崩溃
+{
+  // chara skills 只有 scope 0/1/2; souls 有 0/1/3/4; crystals 有 0/1/2/3/5; bg 有 0/3/5
+  const tgtChara = realCharas.find(c => c.states?.['通常']);
+
+  function tryWithCrystal(crId) {
+    const t = emptyTeam();
+    t[0] = mkSlot({chara: tgtChara.id, crystals:[crId]});
+    return computeStats(tgtChara, t[0].tr, t, 1);
+  }
+  function tryWithSoul(soulId) {
+    const t = emptyTeam();
+    t[0] = mkSlot({chara: tgtChara.id, soul: soulId});
+    return computeStats(tgtChara, t[0].tr, t, 1);
+  }
+  function tryWithBg(bgId) {
+    const t = emptyTeam();
+    t[0] = mkSlot({chara: tgtChara.id, bg: bgId});
+    return computeStats(tgtChara, t[0].tr, t, 1);
+  }
+
+  // scope=2 — chara skills 大量 / crystals 也有 → 用 crystal 采样
+  const cr2 = allCrystals.find(c => c.id<999000 && (c.effects||[]).some(e => e.scope === 2));
+  expect(`R19a scope=2 (crystal ${cr2?.name}) 不崩溃`, !!(cr2 && (()=>{try{tryWithCrystal(cr2.id);return true;}catch(e){return false;}})()), true);
+
+  // scope=3 — souls 主要 (1257) / crystals (597) / bg (58)
+  const so3 = allSouls.find(s => s.id<999000 && (s.skills||[]).some(sk => (sk.effects||[]).some(e => e.scope === 3)));
+  expect(`R19b scope=3 (soul ${so3?.name}) 不崩溃`, !!(so3 && (()=>{try{tryWithSoul(so3.id);return true;}catch(e){return false;}})()), true);
+  const cr3 = allCrystals.find(c => c.id<999000 && (c.effects||[]).some(e => e.scope === 3));
+  expect(`R19c scope=3 (crystal ${cr3?.name}) 不崩溃`, !!(cr3 && (()=>{try{tryWithCrystal(cr3.id);return true;}catch(e){return false;}})()), true);
+
+  // scope=4 — souls 仅有 (198)
+  const so4 = allSouls.find(s => s.id<999000 && (s.skills||[]).some(sk => (sk.effects||[]).some(e => e.scope === 4)));
+  expect(`R19d scope=4 (soul ${so4?.name}) 不崩溃`, !!(so4 && (()=>{try{tryWithSoul(so4.id);return true;}catch(e){return false;}})()), true);
+
+  // scope=5 — crystals (139) / bg (129)
+  const cr5 = allCrystals.find(c => c.id<999000 && (c.effects||[]).some(e => e.scope === 5));
+  expect(`R19e scope=5 (crystal ${cr5?.name}) 不崩溃`, !!(cr5 && (()=>{try{tryWithCrystal(cr5.id);return true;}catch(e){return false;}})()), true);
+  const bg5 = allBGs.find(b => b.id<999000 && (b.effects||[]).some(e => e.scope === 5));
+  expect(`R19f scope=5 (bg ${bg5?.name}) 不崩溃`, !!(bg5 && (()=>{try{tryWithBg(bg5.id);return true;}catch(e){return false;}})()), true);
 }
 
 // ===== 输出 =====
@@ -813,8 +1264,81 @@ results.forEach((r, i) => {
 console.log(`\nPassed: ${pass} / ${pass+fail}`);
 
 const out = mdRows.join('\n');
-fs.writeFileSync(path.join(ROOT, 'calculator_test_results.md'), '# 计算器测试结果 (auto-generated)\n\n' +
-  `通过: ${pass} / ${pass+fail}\n\n` + out + '\n', 'utf8');
+
+// 真实数据库统计 (运行时计算)
+function countScopes(items, getEffectsList) {
+  const r = {};
+  for (const x of items) {
+    if (x.id >= 999000) continue;
+    for (const list of getEffectsList(x)) {
+      for (const e of list || []) {
+        if (e.scope != null) r[e.scope] = (r[e.scope]||0) + 1;
+      }
+    }
+  }
+  return r;
+}
+const charaScopes = countScopes(allCharas, c => {
+  if (!c.states) return [];
+  return Object.values(c.states).flatMap(st => (st.skills||[]).map(sk => sk.effects));
+});
+const soulScopes = countScopes(allSouls, s => (s.skills||[]).map(sk => sk.effects));
+const crystalScopes = countScopes(allCrystals, c => [c.effects]);
+const bgScopes = countScopes(allBGs, b => [b.effects]);
+
+const realCharaCount = allCharas.filter(c => c.id < 999000).length;
+const realSoulCount = allSouls.filter(s => s.id < 999000).length;
+const realCrystalCount = allCrystals.filter(c => c.id < 999000).length;
+const realBgCount = allBGs.filter(b => b.id < 999000).length;
+
+function fmtScope(name, counts) {
+  return `| ${name} | ${counts[0]||0} | ${counts[1]||0} | ${counts[2]||0} | ${counts[3]||0} | ${counts[4]||0} | ${counts[5]||0} |`;
+}
+
+const coverageMd = `
+
+## 真实数据覆盖统计
+
+| 数据 | 数量 | 覆盖测试 |
+|---|---|---|
+| 魔剣 | ${realCharaCount} | R5 全部默认计算无崩溃；R[A/AA/S/SS] 各稀有度首个采样 |
+| ソウル | ${realSoulCount} | R14 全部装备不崩溃；scope=3/4 真实样本 (R19b/d) |
+| 結晶 | ${realCrystalCount} | R15 全部装备不崩溃；scope=2/3/5 真实样本 (R19a/c/e) |
+| bladegraph | ${realBgCount} | R16 全部装备不崩溃；scope=5 真实样本 (R19f) |
+
+**scope 数据库分布** (真实数据扫描，scope: 0=自身/1=全体/2=全体限定/3=自身限定/4=魂全体限/5=名前限定)：
+
+| 类型 | 0 | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|---|
+${fmtScope('chara skills', charaScopes)}
+${fmtScope('魂 skills', soulScopes)}
+${fmtScope('結晶 effects', crystalScopes)}
+${fmtScope('bg effects', bgScopes)}
+
+**condition 阈值** (基于 source slot 的 \`tr.hpPercent\`)：
+
+| condition | 含义 | 阈值 | 测试 |
+|---|---|---|---|
+| 0 | 无条件 | — | 全部默认 case |
+| 1 | 浑身 | HP% ≥ 80 | C13/C15/C25 + 受控 mock |
+| 2 | 背水 | HP% ≤ 50 | C14 + R13 (バハムート=イフ 实数据) |
+| 3 | 破損 | HP% < 50 | C28-C31 受控 mock + 实数据 fuzz |
+
+**特性回归覆盖**：
+- bunrui=17 ダメ上限 → R9 凰竜剣レヴァンテイン=TRUE
+- bairitu_scaling jk 增大效果 → R11 凰竜剣レヴァンテイン=TRUE
+- 等级单调性 → R7
+- 熟度单调性 → R8
+- scope=5 名前匹配 buff 应用 → C32-C34 受控 mock 验证
+- 50 组随机三人队 fuzz → R18
+`;
+
+fs.writeFileSync(path.join(TESTS_DIR, 'calculator_test_results.md'),
+  '# 计算器测试结果\n\n' +
+  '测试脚本: `node tests/test_calculator.js`\n\n' +
+  `**通过: ${pass} / ${pass+fail}** ${fail===0?'✓':'✗'}\n\n` +
+  '前 ' + (results.findIndex(r => r.label.startsWith('R')) ) + ' 项为受控 mock 验证（精确数值），其余为真实数据 sanity（含全数据库扫描和随机 fuzz）。\n\n' +
+  '## 详细结果\n\n' + out + '\n' + coverageMd, 'utf8');
 console.log('\n结果已写入 calculator_test_results.md');
 
 process.exit(fail > 0 ? 1 : 0);

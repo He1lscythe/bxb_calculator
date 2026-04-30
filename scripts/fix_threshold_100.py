@@ -3,6 +3,7 @@
 import json, os, copy
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, 'data')
 
 FILES = [
     ('characters.json',            True),
@@ -27,7 +28,7 @@ def fix(chars):
 
 
 for fname, write_js in FILES:
-    path = os.path.join(ROOT, fname)
+    path = os.path.join(DATA_DIR, fname)
     if not os.path.exists(path):
         print(f'Skip (not found): {fname}')
         continue

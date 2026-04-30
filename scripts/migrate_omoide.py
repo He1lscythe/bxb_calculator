@@ -10,6 +10,7 @@ THRESHOLDS = (
 assert len(THRESHOLDS) == 40
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, 'data')
 
 
 def normalize(chars):
@@ -22,7 +23,7 @@ for fname, write_js in [
     ('characters.json',            True),
     ('characters_revise.json',     False),
 ]:
-    path = os.path.join(ROOT, fname)
+    path = os.path.join(DATA_DIR, fname)
     if not os.path.exists(path):
         print(f'Skip (not found): {fname}')
         continue

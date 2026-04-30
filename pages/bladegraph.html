@@ -116,9 +116,9 @@ input[type=number] { -moz-appearance: textfield; }
 <body>
 
 <div id="page-wrap">
-<script src="nav.js"></script>
-<script src="shared/filter-core.js"></script>
-<script src="shared/bg-spec.js"></script>
+<script src="../nav.js"></script>
+<script src="../shared/filter-core.js"></script>
+<script src="../shared/bg-spec.js"></script>
 <div id="content">
   <div id="filters">
     <input type="text" id="search" placeholder="🔍 心象結晶名で検索..." oninput="applyFilters()">
@@ -254,13 +254,13 @@ var editData = null;
 
 // ===== DATA LOAD =====
 document.addEventListener('DOMContentLoaded', function() {
-  fetch('./bladegraph.json')
+  fetch('../data/bladegraph.json')
     .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function(arr) {
       allBG = arr;
       arr.forEach(function(c) { originalData[c.id] = JSON.parse(JSON.stringify(c)); });
       applyFilters();
-      return fetch('./bladegraph_revise.json');
+      return fetch('../data/bladegraph_revise.json');
     })
     .then(function(r) { return r.ok ? r.json() : []; })
     .then(function(arr) {

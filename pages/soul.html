@@ -174,9 +174,9 @@ input[type=number] { -moz-appearance: textfield; }
 </head>
 <body>
 <div id="page-wrap">
-<script src="nav.js"></script>
-<script src="shared/filter-core.js"></script>
-<script src="shared/soul-spec.js"></script>
+<script src="../nav.js"></script>
+<script src="../shared/filter-core.js"></script>
+<script src="../shared/soul-spec.js"></script>
 
 <div id="layout">
   <!-- SIDEBAR -->
@@ -278,12 +278,12 @@ const filterSets  = { rarity: new Set(), element: new Set(), type: new Set() };
 
 // ===== LOAD =====
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('./souls.json')
+  fetch('../data/souls.json')
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(arr => {
       allSouls = arr;
       arr.forEach(s => { originalData[s.id] = JSON.parse(JSON.stringify(s)); });
-      return fetch('./souls_revise.json');
+      return fetch('../data/souls_revise.json');
     })
     .then(r => r.ok ? r.json() : [])
     .then(arr => {

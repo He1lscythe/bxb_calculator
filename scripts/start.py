@@ -13,6 +13,7 @@ import webbrowser
 
 PORT = 8787
 DIR  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(DIR, 'data')
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -32,22 +33,22 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             data   = json.loads(self.rfile.read(length))
 
             if 'revise' in data:
-                _write('characters_revise.json', json.dumps(data['revise'], ensure_ascii=False, indent=2))
+                _write_data('characters_revise.json', json.dumps(data['revise'], ensure_ascii=False, indent=2))
 
             if 'omoide_revise' in data:
-                _write('omoide_revise.json', json.dumps(data['omoide_revise'], ensure_ascii=False, indent=2))
+                _write_data('omoide_revise.json', json.dumps(data['omoide_revise'], ensure_ascii=False, indent=2))
 
             if 'crystal_revise' in data:
-                _write('crystals_revise.json', json.dumps(data['crystal_revise'], ensure_ascii=False, indent=2))
+                _write_data('crystals_revise.json', json.dumps(data['crystal_revise'], ensure_ascii=False, indent=2))
 
             if 'soul_revise' in data:
-                _write('souls_revise.json', json.dumps(data['soul_revise'], ensure_ascii=False, indent=2))
+                _write_data('souls_revise.json', json.dumps(data['soul_revise'], ensure_ascii=False, indent=2))
 
             if 'omoide_templates' in data:
-                _write('omoide_templates.json', json.dumps(data['omoide_templates'], ensure_ascii=False, indent=2))
+                _write_data('omoide_templates.json', json.dumps(data['omoide_templates'], ensure_ascii=False, indent=2))
 
             if 'bladegraph_revise' in data:
-                _write('bladegraph_revise.json', json.dumps(data['bladegraph_revise'], ensure_ascii=False, indent=2))
+                _write_data('bladegraph_revise.json', json.dumps(data['bladegraph_revise'], ensure_ascii=False, indent=2))
 
             self._json(200, {'ok': True})
         except Exception as e:
@@ -66,8 +67,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             super().log_message(fmt, *args)
 
 
-def _write(name, text):
-    with open(os.path.join(DIR, name), 'w', encoding='utf-8') as f:
+def _write_data(name, text):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(os.path.join(DATA_DIR, name), 'w', encoding='utf-8') as f:
         f.write(text)
 
 
@@ -83,10 +85,10 @@ def _lan_ips():
         pass
     return ips
 
-url = f'http://127.0.0.1:{PORT}/index.html'
+url = f'http://127.0.0.1:{PORT}/pages/index.html'
 print(f'Server running at {url}')
 for ip in _lan_ips():
-    print(f'  LAN access : http://{ip}:{PORT}/index.html')
+    print(f'  LAN access : http://{ip}:{PORT}/pages/index.html')
 print('Press Ctrl+C to stop')
 
 # Open browser in background, then run server on main thread so Ctrl+C works

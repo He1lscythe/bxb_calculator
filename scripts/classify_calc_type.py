@@ -19,6 +19,7 @@ Discrepancies reported:
 import json, re, os, collections
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, 'data')
 ADD_BUNRUI_SET = {6, 7, 17, 18, 19}
 
 _MULT_PAT = [
@@ -146,8 +147,8 @@ def write_disc(out, title, rows, limit=40):
 
 
 # ── main ──────────────────────────────────────────────────────────────────────
-chars_path = os.path.join(ROOT, 'characters.json')
-souls_path = os.path.join(ROOT, 'souls.json')
+chars_path = os.path.join(DATA_DIR, 'characters.json')
+souls_path = os.path.join(DATA_DIR, 'souls.json')
 
 chars = load(chars_path)
 souls = load(souls_path) if os.path.exists(souls_path) else []
