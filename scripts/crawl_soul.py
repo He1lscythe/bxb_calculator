@@ -379,7 +379,9 @@ def main():
     print("Mode:", mode)
     print("=" * 60)
 
-    out_dir       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    project_root  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_dir       = os.path.join(project_root, 'data')
+    os.makedirs(out_dir, exist_ok=True)
     output_path   = os.path.join(out_dir, OUTPUT_FILE)
     progress_path = os.path.join(out_dir, PROGRESS_FILE)
 

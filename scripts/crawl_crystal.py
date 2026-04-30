@@ -57,6 +57,7 @@ HEADERS = {
     "Referer": "https://altema.jp/bxb/",
 }
 DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(DIR, 'data')
 
 
 def parse_jp_number(s):
@@ -186,8 +187,9 @@ def main():
     parser.add_argument("--recal", action="store_true", help="No-op for crystal (no pipeline)")
     parser.parse_args()
 
-    out_path    = os.path.join(DIR, OUTPUT_FILE)
-    revise_path = os.path.join(DIR, 'crystals_revise.json')
+    os.makedirs(DATA_DIR, exist_ok=True)
+    out_path    = os.path.join(DATA_DIR, OUTPUT_FILE)
+    revise_path = os.path.join(DATA_DIR, 'crystals_revise.json')
 
     print(f"Fetching {LIST_URL} ...")
     resp = requests.get(LIST_URL, headers=HEADERS, timeout=30)

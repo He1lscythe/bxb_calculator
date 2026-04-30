@@ -16,6 +16,7 @@ import unicodedata
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR   = os.path.dirname(SCRIPT_DIR)
+DATA_DIR   = os.path.join(BASE_DIR, 'data')
 sys.path.insert(0, SCRIPT_DIR)
 
 from classify_common import (
@@ -26,7 +27,7 @@ from classify_common import (
 )
 
 # ── Load data ───────────────────────────────────────────────────────────────
-chars = json.load(open(os.path.join(BASE_DIR, 'characters.json'), encoding='utf-8'))
+chars = json.load(open(os.path.join(DATA_DIR, 'characters.json'), encoding='utf-8'))
 table = json.load(open(os.path.join(BASE_DIR, 'skilllist_table.json'), encoding='utf-8'))
 
 ELEMENT_NAMES = {v: k for k, v in ELEMENT_MAP.items()}

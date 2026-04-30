@@ -1112,7 +1112,7 @@ def apply_pipeline(characters, chara_ids=None, recal=False, bd_special=None, bd_
             chara['omoide_rarity'] = _OR_MAP.get(chara.get('rarity'), 1)
 
     # Fill derived omoide slots for all characters
-    templates_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'omoide_templates.json')
+    templates_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'omoide_templates.json')
     omoide_templates = load_json(templates_path, {})
     for chara in characters:
         fill_omoide_slots(chara, omoide_templates)
@@ -1142,7 +1142,9 @@ def main():
     print("Mode:", mode)
     print("=" * 60)
 
-    out_dir            = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    project_root       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_dir            = os.path.join(project_root, 'data')
+    os.makedirs(out_dir, exist_ok=True)
     output_path        = os.path.join(out_dir, OUTPUT_FILE)
     progress_path      = os.path.join(out_dir, PROGRESS_FILE)
     senzai_table_path  = os.path.join(out_dir, SENZAI_TABLE_FILE)
