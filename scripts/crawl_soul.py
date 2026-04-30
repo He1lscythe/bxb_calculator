@@ -25,6 +25,7 @@ from classify_common import (
     CAT_TO_BUNRUI_SOULSKILL,
     ADD_BUNRUI,
     classify_effect, classify_skill_v2,
+    classify_hit_fields,
     norm as _norm_common,
 )
 
@@ -332,6 +333,8 @@ def assign_bairitu(skill):
 # ============================================================
 #  PIPELINE
 # ============================================================
+
+
 def apply_pipeline(souls, soul_ids=None):
     """Classify skills and assign bairitu.
     soul_ids: set of soul IDs to process; None means process all souls."""
@@ -349,6 +352,9 @@ def apply_pipeline(souls, soul_ids=None):
             continue
         for skill in soul.get('skills', []):
             classify_skill_v2(skill, soulskill_table, CAT_TO_BUNRUI_SOULSKILL)
+            eff_text = skill.get('effect', '')
+            for ent in skill.get('effects', []):
+                classify_hit_fields(eff_text, ent)
         count += 1
     return souls, count
 
@@ -460,8 +466,28 @@ def main():
         print(f"Applying skill classification and bairitu ({scope_label})...")
         output, count = apply_pipeline(copy.deepcopy(souls), pipeline_ids)
 
-        # ── Phase 3: apply manual revise patches ──
+        # ── Phase 3: apply revise diffs ──
         revise_path = os.path.join(out_dir, "souls_revise.json")
+        def deep_update(target, patch):
+            for k, v in patch.items():
+                if k == 'id':
+                    continue
+                tv = target.get(k)
+                # Sparse array diff: target is list, patch is dict with all-numeric keys
+                if isinstance(tv, list) and isinstance(v, dict) and v and \
+                        all(isinstance(kk, str) and kk.isdigit() for kk in v.keys()):
+                    for ki, pi in v.items():
+                        idx = int(ki)
+                        if idx >= len(tv):
+                            continue
+                        if isinstance(pi, dict) and isinstance(tv[idx], dict):
+                            deep_update(tv[idx], pi)
+                        else:
+                            tv[idx] = pi
+                elif isinstance(v, dict) and isinstance(tv, dict):
+                    deep_update(tv, v)
+                else:
+                    target[k] = v
         if os.path.exists(revise_path):
             revise_list = load_json(revise_path, [])
             soul_idx    = {s["id"]: i for i, s in enumerate(output)}
@@ -470,15 +496,10 @@ def main():
                 sid = entry.get("id")
                 if sid not in soul_idx:
                     continue
-                soul = output[soul_idx[sid]]
-                for sp in entry.get("skills_patch", []):
-                    sk_name = sp.get("name")
-                    for sk in soul.get("skills", []):
-                        if sk.get("name") == sk_name:
-                            sk["effects"] = sp["effects"]
-                            patched += 1
+                deep_update(output[soul_idx[sid]], entry)
+                patched += 1
             if patched:
-                print(f"Revise: {patched} skill(s) patched from souls_revise.json")
+                print(f"Revise: {patched} soul(s) patched from souls_revise.json")
 
         # Fill in any effects entries still missing calc_type (e.g. from revise patches)
         for soul in output:

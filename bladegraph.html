@@ -13,6 +13,7 @@
   --light: #ffcc00; --dark: #aa55ff; --none: #888899;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
+button { -webkit-user-select: text; user-select: text; }
 body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Gothic',sans-serif; font-size: 14px; height: 100vh; display: flex; justify-content: center; overflow: hidden; }
 
 #page-wrap { max-width: 72rem; width: 100%; display: flex; flex-direction: column; overflow: hidden; }
@@ -242,6 +243,8 @@ function cardWeapon(c) {
 // ===== STATE =====
 var allBG = [], filteredBG = [];
 var reviseData = {};
+var sessionReviseIds = new Set();
+var originalData = {};
 var expandedIds = new Set();
 var editingId = null;
 var editData = null;
@@ -252,13 +255,18 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function(arr) {
       allBG = arr;
+      arr.forEach(function(c) { originalData[c.id] = JSON.parse(JSON.stringify(c)); });
       applyFilters();
       return fetch('./bladegraph_revise.json');
     })
     .then(function(r) { return r.ok ? r.json() : []; })
     .then(function(arr) {
-      arr.forEach(function(c) { reviseData[c.id] = c; });
-      if (arr.length) updateReviseBar();
+      arr.forEach(function(c) {
+        reviseData[c.id] = c;
+        var idx = allBG.findIndex(function(x) { return x.id === c.id; });
+        if (idx >= 0) deepApply(allBG[idx], c);
+      });
+      if (arr.length) applyFilters();
     })
     .catch(function() {});
 });
@@ -454,13 +462,76 @@ function cancelEdit() {
   if (row)  row.classList.add('expanded');
 }
 
+function _deepDiff(oval, mval) {
+  if (mval && typeof mval === 'object' && !Array.isArray(mval) &&
+      oval && typeof oval === 'object' && !Array.isArray(oval)) {
+    var sub = {};
+    for (var k in mval)
+      if (JSON.stringify(mval[k]) !== JSON.stringify(oval[k]))
+        sub[k] = _deepDiff(oval[k], mval[k]);
+    return sub;
+  }
+  if (Array.isArray(oval) && Array.isArray(mval) && oval.length === mval.length &&
+      mval.length > 0 &&
+      mval.every(function(x){return x && typeof x === 'object' && !Array.isArray(x);})) {
+    var sparse = {};
+    mval.forEach(function(m, i) {
+      if (JSON.stringify(m) !== JSON.stringify(oval[i]))
+        sparse[i] = _deepDiff(oval[i], m);
+    });
+    return sparse;
+  }
+  return JSON.parse(JSON.stringify(mval));
+}
+function computeDiff(original, modified) {
+  var diff = { id: modified.id, name: modified.name };
+  for (var key in modified) {
+    if (key === 'id') continue;
+    if (JSON.stringify(modified[key]) !== JSON.stringify(original[key]))
+      diff[key] = _deepDiff(original[key], modified[key]);
+  }
+  return diff;
+}
+function deepApply(target, patch) {
+  for (var k in patch) {
+    if (k === 'id') continue;
+    var pv = patch[k], tv = target[k];
+    if (Array.isArray(tv) && pv && typeof pv === 'object' && !Array.isArray(pv) &&
+        Object.keys(pv).every(function(kk){return /^\d+$/.test(kk);})) {
+      for (var idx in pv) {
+        var i = +idx;
+        if (i >= tv.length) continue;
+        var pvi = pv[idx];
+        if (pvi && typeof pvi === 'object' && !Array.isArray(pvi) &&
+            tv[i] && typeof tv[i] === 'object' && !Array.isArray(tv[i])) {
+          deepApply(tv[i], pvi);
+        } else {
+          tv[i] = JSON.parse(JSON.stringify(pvi));
+        }
+      }
+    } else if (pv !== null && typeof pv === 'object' && !Array.isArray(pv) &&
+        tv !== null && typeof tv === 'object' && !Array.isArray(tv)) {
+      deepApply(tv, pv);
+    } else {
+      target[k] = JSON.parse(JSON.stringify(pv));
+    }
+  }
+}
+
 function saveEdit() {
   if (!editData) return;
   var id  = editData.id;
   var idx = allBG.findIndex(function(x){return x.id===id;});
   if (idx >= 0) {
+    var changed = JSON.stringify(editData) !== JSON.stringify(originalData[id]);
     allBG[idx] = editData;
-    reviseData[id] = JSON.parse(JSON.stringify(editData));
+    if (changed) {
+      reviseData[id] = computeDiff(originalData[id], editData);
+      sessionReviseIds.add(id);
+    } else {
+      delete reviseData[id];
+      sessionReviseIds.delete(id);
+    }
     updateReviseBar();
   }
   var id2 = id;
@@ -532,10 +603,32 @@ function renderEditBody(c) {
     var bInput = '<input type="number" step="any" class="edit-input" style="width:90px" value="'+(e.bairitu!=null?e.bairitu:'')+'" ' +
       'oninput="editData.effects['+i+'].bairitu=this.value===\'\'?null:Number(this.value)">';
 
+    var hitBlock = '';
+    if ((e.bunrui||[]).includes(7)) {
+      var ht = e.hit_type != null ? e.hit_type : 0;
+      var hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null, null, null];
+      function htOpt(v, lbl) {
+        return '<option value="'+v+'"'+(ht===v?' selected':'')+'>'+lbl+'</option>';
+      }
+      hitBlock = '<div class="field-label" style="margin-top:4px;margin-bottom:2px">ヒット計算</div>'
+        + '<div class="skill-edit-meta" style="margin-bottom:6px">'
+        + '<div><div class="field-label">hit_type</div>'
+        + '<select class="edit-select" onchange="editData.effects['+i+'].hit_type=+this.value">'
+        + htOpt(0,'0 減衰なし加算')+htOpt(1,'1 ダメージ維持加算')+htOpt(2,'2 乗算')+htOpt(3,'3 設定値')
+        + '</select></div>'
+        + [0,1,2].map(function(idx) {
+            var v = hps[idx] != null ? hps[idx] : '';
+            return '<div><div class="field-label">'+(idx+1)+'撃目</div>'
+              + '<input type="number" step="any" class="edit-num-sm" style="width:55px" value="'+v+'"'
+              + ' oninput="setBladeHitStage('+i+','+idx+',this.value)"></div>';
+          }).join('')
+        + '</div>';
+    }
+
     return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;">' +
       '<span style="font-size:11px;color:var(--text2);flex-shrink:0;">'+label+scopeRO+condRO+'</span>' +
       bunruiSel + ctSel + bInput +
-      '</div>';
+      '</div>' + hitBlock;
   }).join('');
 
   return '<div class="edit-actions">' +
@@ -544,6 +637,13 @@ function renderEditBody(c) {
     '</div>' +
     roEffect + roTime + metaRow +
     '<div style="margin-bottom:8px;">' + effEdits + '</div>';
+}
+
+function setBladeHitStage(ei, idx, val) {
+  var arr = ((editData.effects[ei]||{}).hit_per_stage || [null, null, null]).slice();
+  while (arr.length < 3) arr.push(null);
+  arr[idx] = val === '' ? null : +val;
+  editData.effects[ei].hit_per_stage = arr;
 }
 
 function setEditElement(val) {
@@ -587,10 +687,11 @@ async function saveRevise() {
     const res  = await fetch('/save', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ bladegraph: allBG, bladegraph_revise: Object.values(reviseData) }),
+      body:    JSON.stringify({ bladegraph_revise: Object.values(reviseData) }),
     });
     const json = await res.json();
     if (!res.ok) throw new Error(json.error || res.status);
+    sessionReviseIds.clear();
     status.textContent = '✓ 保存完了';
   } catch (err) {
     status.textContent = '保存失敗';

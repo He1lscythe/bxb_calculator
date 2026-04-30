@@ -392,6 +392,26 @@ def main():
     entries = list(merged.values())
 
     # Apply revise overrides
+    def deep_update(target, patch):
+        for k, v in patch.items():
+            if k == 'id':
+                continue
+            tv = target.get(k)
+            # Sparse array diff: target is list, patch is dict with all-numeric keys
+            if isinstance(tv, list) and isinstance(v, dict) and v and \
+                    all(isinstance(kk, str) and kk.isdigit() for kk in v.keys()):
+                for ki, pi in v.items():
+                    idx = int(ki)
+                    if idx >= len(tv):
+                        continue
+                    if isinstance(pi, dict) and isinstance(tv[idx], dict):
+                        deep_update(tv[idx], pi)
+                    else:
+                        tv[idx] = pi
+            elif isinstance(v, dict) and isinstance(tv, dict):
+                deep_update(tv, v)
+            else:
+                target[k] = v
     if os.path.exists(revise_path):
         with open(revise_path, encoding='utf-8') as f:
             revise_list = json.load(f)
@@ -400,11 +420,11 @@ def main():
         patched    = 0
         for rid, record in revise_map.items():
             if rid in idx_map:
-                entries[idx_map[rid]] = record
+                deep_update(entries[idx_map[rid]], record)
+                patched += 1
             else:
-                entries.append(record)
-            patched += 1
-        print(f"Applied {patched} revise overrides")
+                print(f"  [revise] id={rid} not found in bladegraph, skipping")
+        print(f"Applied {patched} revise patches")
 
     # Safety fill: ensure all effects entries have calc_type
     for entry in entries:

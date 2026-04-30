@@ -25,6 +25,7 @@
   --none:  #888899;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
+button { -webkit-user-select: text; user-select: text; }
 body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu Gothic', sans-serif; font-size: 14px; height: 100vh; display: flex; justify-content: center; overflow: hidden; }
 #page-wrap { max-width: 72rem; width: 100%; display: flex; flex-direction: column; overflow: hidden; }
 
@@ -42,6 +43,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .filter-section { display: flex; flex-direction: column; gap: 3px; }
 .filter-label { font-size: 10px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .06em; }
 .filter-toggles { display: flex; flex-wrap: wrap; gap: 3px; }
+.filter-toggles.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); }
+.filter-toggles.grid-6 { display: grid; grid-template-columns: repeat(6, max-content); gap: 3px; }
 .ftog { font-size: 11px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; transition: all .1s; white-space: nowrap; }
 .ftog:hover { border-color: var(--accent); color: var(--text); }
 .ftog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; font-weight: 700; }
@@ -98,6 +101,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 
 /* latent modal */
 #latent-modal { display: none; position: fixed; inset: 0; z-index: 1000; align-items: center; justify-content: center; }
+#prompt-modal { display: none; position: fixed; inset: 0; z-index: 2000; align-items: center; justify-content: center; }
+.prompt-panel { position: relative; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; width: min(360px, 92vw); z-index: 1; padding: 20px 20px 16px; display: flex; flex-direction: column; gap: 12px; }
+.prompt-title { font-size: 14px; font-weight: 700; }
+.prompt-actions { display: flex; gap: 8px; justify-content: flex-end; }
 .latent-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); touch-action: none; }
 .latent-panel { position: relative; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; width: min(520px, 92vw); max-height: 80vh; display: flex; flex-direction: column; z-index: 1; }
 .latent-panel-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px 10px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
@@ -110,10 +117,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .omoide-row { margin-bottom: 16px; }
 .omoide-label { font-size: 11px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
 .omoide-slots { display: flex; flex-direction: column; gap: 4px; }
-.latent-slot { display: grid; grid-template-columns: 1fr 1fr auto; align-items: baseline; gap: 6px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; font-size: 12px; }
+.latent-slot { display: grid; grid-template-columns: 1fr 1fr minmax(4.5em, auto); align-items: baseline; gap: 6px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; font-size: 12px; }
 .latent-slot-koka { font-weight: 600; color: var(--text); }
 .latent-slot-syosai { color: var(--text2); }
 .latent-slot-bairitu { font-size: 11px; color: var(--accent); white-space: nowrap; text-align: right; }
+.latent-slot-bairitu.empty { color: var(--border); }
 .chara-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .meta-chip { display: flex; align-items: center; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 12px; }
 .meta-chip .elem-dot { width: 8px; height: 8px; }
@@ -173,9 +181,20 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .cond-3 { background: rgba(160,80,255,.18); color: #b060ff; border: 1px solid rgba(160,80,255,.35); }
 
 .bd-card { background: #1a1040; border: 1px solid #4433aa; border-radius: 8px; padding: 12px 14px; }
-.bd-label { font-size: 10px; font-weight: 700; color: #aa88ff; letter-spacing: .1em; margin-bottom: 4px; }
-.bd-name { font-weight: 700; font-size: 14px; margin-bottom: 6px; color: #cc99ff; }
+.bd-label { font-size: 10px; font-weight: 700; color: #aa88ff; letter-spacing: .1em; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.bd-cost-tag { font-size: 10px; color: #aa88ff; font-weight: 600; }
+.bd-top-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+.bd-name { font-weight: 700; font-size: 14px; color: #cc99ff; }
 .bd-effect { font-size: 13px; line-height: 1.6; }
+.bd-tags { display: flex; flex-wrap: wrap; gap: 3px; justify-content: flex-end; flex-shrink: 0; }
+.bd-sp-tag { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; white-space: nowrap; }
+.bd-sp-1 { background: rgba(80,180,255,.2); color: #60c0ff; border: 1px solid rgba(80,180,255,.35); }
+.bd-sp-2 { background: rgba(180,80,255,.2); color: #c060ff; border: 1px solid rgba(180,80,255,.35); }
+.bd-sp-3 { background: rgba(255,150,50,.2); color: #ff9a40; border: 1px solid rgba(255,150,50,.35); }
+.bd-sp-5 { background: rgba(80,220,100,.2); color: #50d070; border: 1px solid rgba(80,220,100,.35); }
+.bd-sp-6 { background: rgba(255,200,50,.2); color: #ffc840; border: 1px solid rgba(255,200,50,.35); }
+.bd-dur-tag { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 10px; background: rgba(100,120,160,.2); color: #a0b0d0; border: 1px solid rgba(100,120,160,.3); white-space: nowrap; }
+.bd-hit-tag { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 10px; background: rgba(140,140,160,.15); color: #9090b0; border: 1px solid rgba(140,140,160,.25); white-space: nowrap; }
 
 /* profile */
 .profile-toggle { cursor: pointer; color: var(--text2); font-size: 12px; display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
@@ -190,7 +209,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 /* edit mode */
 .btn-edit { background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 5px 14px; font-size: 12px; cursor: pointer; flex-shrink: 0; }
 .btn-edit:hover { background: rgba(91,127,255,.1); }
-.edit-mode-active { background: rgba(91,127,255,.04); border: 1px solid rgba(91,127,255,.3); border-radius: 10px; padding: 14px; }
+.edit-mode-active { background: var(--bg2); border: 1px solid rgba(91,127,255,.3); border-bottom: 2px solid rgba(91,127,255,.4); border-radius: 10px 10px 0 0; padding: 14px; position: sticky; top: 0; z-index: 5; }
 .edit-actions { display: flex; gap: 8px; align-items: flex-start; flex-shrink: 0; }
 .btn-save   { background: var(--accent); color: #fff; border: none; border-radius: 6px; padding: 7px 16px; font-size: 13px; font-weight: 600; cursor: pointer; }
 .btn-save:hover { opacity: .85; }
@@ -203,6 +222,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .edit-textarea { background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 6px 8px; font-size: 13px; width: 100%; min-height: 56px; resize: vertical; font-family: inherit; line-height: 1.6; }
 .edit-textarea:focus { outline: none; border-color: #8aabff; }
 .edit-stat-num { width: 100%; background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 2px 6px; font-size: 14px; font-weight: 700; text-align: right; }
+.edit-readonly { font-size: 13px; color: var(--text2); padding: 4px 2px; line-height: 1.6; }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 input[type=number] { -moz-appearance: textfield; }
@@ -222,9 +242,7 @@ input[type=number] { -moz-appearance: textfield; }
 .edit-num-sm { width: 130px; background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 3px 6px; font-size: 13px; text-align: right; }
 
 /* latent edit */
-.latent-edit-container { max-height: 420px; overflow-y: auto; padding: 4px 2px; }
-.latent-edit-container::-webkit-scrollbar { width: 4px; }
-.latent-edit-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.latent-edit-container { padding: 4px 2px; }
 .latent-edit-row { margin-bottom: 8px; }
 .latent-edit-label { font-size: 11px; font-weight: 700; color: var(--text2); margin-bottom: 3px; }
 .latent-edit-slots { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
@@ -250,7 +268,18 @@ input[type=number] { -moz-appearance: textfield; }
 <body>
 <div id="page-wrap">
 <script src="nav.js"></script>
-<script src="senzai_table.js"></script>
+
+<div id="prompt-modal">
+  <div class="latent-overlay" onclick="_promptCancel()"></div>
+  <div class="prompt-panel">
+    <div class="prompt-title" id="prompt-title"></div>
+    <input class="edit-input" id="prompt-input" type="text">
+    <div class="prompt-actions">
+      <button class="btn-cancel" onclick="_promptCancel()">キャンセル</button>
+      <button class="btn-save"   onclick="_promptConfirm()">保存</button>
+    </div>
+  </div>
+</div>
 
 <div id="latent-modal">
   <div class="latent-overlay" onclick="closeLatentModal()"></div>
@@ -292,7 +321,7 @@ input[type=number] { -moz-appearance: textfield; }
 
       <div class="filter-section">
         <div class="filter-label">武器種</div>
-        <div class="filter-toggles" id="f-type">
+        <div class="filter-toggles grid-6" id="f-type">
           <button class="ftog" data-val="1"  onclick="toggleFilter('type',1,this)">長剣</button>
           <button class="ftog" data-val="2"  onclick="toggleFilter('type',2,this)">大剣</button>
           <button class="ftog" data-val="3"  onclick="toggleFilter('type',3,this)">太刀</button>
@@ -314,6 +343,28 @@ input[type=number] { -moz-appearance: textfield; }
           <button class="ftog" data-val="極弐" onclick="toggleFilter('state','極弐',this)">極弐</button>
           <button class="ftog" data-val="改造" onclick="toggleFilter('state','改造',this)">改造</button>
           <button class="ftog" data-val="通常" onclick="toggleFilter('state','通常',this)">通常</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">BD特殊効果</div>
+        <div class="filter-toggles" id="f-bdSpecial">
+          <button class="ftog" data-val="1" onclick="toggleFilter('bdSpecial',1,this)" style="color:#60c0ff">時止め</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('bdSpecial',2,this)" style="color:#c060ff">麻痺</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('bdSpecial',3,this)" style="color:#ff9a40">強制BK</button>
+          <button class="ftog" data-val="5" onclick="toggleFilter('bdSpecial',5,this)" style="color:#50d070">弱体解除</button>
+          <button class="ftog" data-val="6" onclick="toggleFilter('bdSpecial',6,this)" style="color:#ffc840">高倍率バフ</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">好感稀有度</div>
+        <div class="filter-toggles" id="f-omoideRarity">
+          <button class="ftog" data-val="5" onclick="toggleFilter('omoideRarity',5,this)" style="color:#ff55ff">限定SS</button>
+          <button class="ftog" data-val="4" onclick="toggleFilter('omoideRarity',4,this)" style="color:var(--ss)">SS</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('omoideRarity',3,this)" style="color:var(--s)">S</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('omoideRarity',2,this)" style="color:var(--aa)">AA</button>
+          <button class="ftog" data-val="1" onclick="toggleFilter('omoideRarity',1,this)" style="color:var(--a)">A</button>
         </div>
       </div>
 
@@ -359,7 +410,8 @@ const RARITY = {1:'A',2:'AA',3:'S',4:'SS'};
 const ELEMENT = {1:'火',2:'水',3:'風',4:'光',5:'闇',6:'無'};
 const ELEM_COLOR = {1:'#ff5533',2:'#3388ff',3:'#44cc66',4:'#ffcc00',5:'#aa55ff',6:'#888899'};
 const WEAPON = {1:'長剣',2:'大剣',3:'太刀',4:'杖棒',5:'弓矢',6:'連弩',7:'戦斧',8:'騎槍',9:'投擲',10:'拳闘',11:'魔典',12:'大鎌'};
-const BUNRUI_SHORT = {1:'攻',2:'BK',3:'BD攻',4:'转',5:'速',6:'BD値',7:'hit',8:'aoe',9:'異常',10:'HP',11:'回復',12:'防',13:'軽',14:'蓝',15:'紅',16:'他',17:'限',18:'BD値',19:'枠',20:'EXP',21:'BDhit'};
+const BUNRUI_SHORT = {1:'攻',2:'BK',3:'BD攻',4:'转',5:'速',6:'BD値',7:'hit',8:'aoe',9:'異常',10:'HP',11:'回復',12:'防',13:'軽',14:'蓝',15:'紅',16:'他',17:'限',18:'BD最大',19:'枠',20:'EXP',21:'BDhit'};
+const BD_SPECIAL = {1:'時止め',2:'麻痺',3:'強制ブレイク',5:'弱体解除',6:'高倍率バフ'};
 const OMOIDE_THRESHOLDS = [10,200,400,700,1000,2000,3000,4000,5000,6000,7000,9000,11000,13000,15000,18000,21000,24000,27000,30000,33000,36000,39000,42000,45000,48000,51000,54000,57000,60000,63000,66000,69000,72000,75000,78000,81000,84000,87000,90000];
 
 function hasOmoide(c) {
@@ -421,24 +473,54 @@ let sortKey = '';
 let sortDesc = true;
 
 // ===== DATA LOAD =====
+var SENZAI_TABLE = {};
+fetch('./senzai_table.json').then(r => r.ok ? r.json() : {}).then(d => { SENZAI_TABLE = d; }).catch(() => {});
+
+let omoideTemplates = [];
+fetch('./omoide_templates.json').then(r => r.ok ? r.json() : []).then(d => {
+  omoideTemplates = Array.isArray(d) ? d : [];
+  const sel = document.getElementById('omoide-tpl-sel');
+  if (sel) {
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">テンプレートを選択...</option>'
+      + omoideTemplates.map(t => `<option value="${t.id}">${escHtml(t.name)}</option>`).join('');
+    if (cur) sel.value = cur;
+  }
+}).catch(() => {});
+
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('./characters_classified.json')
+  fetch('./characters.json')
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(arr => {
       allChars = arr;
+      arr.forEach(c => { originalData[c.id] = JSON.parse(JSON.stringify(c)); });
       applyFilters();
       return fetch('./characters_revise.json');
     })
     .then(r => r.ok ? r.json() : [])
     .then(arr => {
-      arr.forEach(c => { reviseData[c.id] = c; });
-      if (arr.length) updateReviseBar();
+      arr.forEach(c => {
+        reviseData[c.id] = c;
+        const idx = allChars.findIndex(x => x.id === c.id);
+        if (idx >= 0) deepApply(allChars[idx], c);
+      });
+      if (arr.length) applyFilters();
+      return fetch('./omoide_revise.json');
+    })
+    .then(r => r.ok ? r.json() : [])
+    .then(arr => {
+      arr.forEach(c => {
+        omoideReviseData[c.id] = c;
+        const idx = allChars.findIndex(x => x.id === c.id);
+        if (idx >= 0) deepApply(allChars[idx], c);
+      });
+      if (arr.length) applyFilters();
     })
     .catch(() => {});
 });
 
 // ===== FILTER STATE =====
-const filterSets = { rarity: new Set(), element: new Set(), type: new Set(), state: new Set() };
+const filterSets = { rarity: new Set(), element: new Set(), type: new Set(), state: new Set(), bdSpecial: new Set(), omoideRarity: new Set() };
 
 function toggleFilter(key, val, btn) {
   if (filterSets[key].has(val)) { filterSets[key].delete(val); btn.classList.remove('on'); }
@@ -465,6 +547,7 @@ function getBestState(c) {
 }
 
 function getSortValue(c, key) {
+  if (key === 'BDコスト') return c.bd_skill?.cost ?? null;
   for (const s of ['極弐', '改造', '通常']) {
     const state = c.states?.[s];
     if (!state) continue;
@@ -480,8 +563,6 @@ function getSortValue(c, key) {
       }
       case 'B': case 'W': case 'H':
         v = state.profile?.[key] ?? null; break;
-      case 'BDコスト':
-        v = state.bd_skill?.cost ?? null; break;
     }
     if (v !== null) return v;
   }
@@ -504,10 +585,15 @@ function applyFilters() {
 
   filteredChars = allChars.filter(c => {
     if (q && !c.name.toLowerCase().includes(q)) return false;
-    if (filterSets.rarity.size  && !filterSets.rarity.has(c.rarity))   return false;
-    if (filterSets.element.size && !filterSets.element.has(c.element)) return false;
-    if (filterSets.type.size    && !filterSets.type.has(c.type))       return false;
-    if (filterSets.state.size   && ![...filterSets.state].some(s => c.states?.[s])) return false;
+    if (filterSets.rarity.size    && !filterSets.rarity.has(c.rarity))   return false;
+    if (filterSets.element.size   && !filterSets.element.has(c.element)) return false;
+    if (filterSets.type.size      && !filterSets.type.has(c.type))       return false;
+    if (filterSets.state.size     && ![...filterSets.state].some(s => c.states?.[s])) return false;
+    if (filterSets.bdSpecial.size) {
+      const sp = c.bd_skill?.special || [];
+      if (![...filterSets.bdSpecial].some(s => sp.includes(s))) return false;
+    }
+    if (filterSets.omoideRarity.size && !filterSets.omoideRarity.has(c.omoide_rarity)) return false;
     return true;
   });
 
@@ -578,6 +664,27 @@ function selectChar(id) {
   switchState(id, active, detail);
 }
 
+// ===== RENDER BD CARD =====
+function renderBDCard(bd) {
+  const spTags = (bd.special || []).map(s =>
+    `<span class="bd-sp-tag bd-sp-${s}">${BD_SPECIAL[s] || s}</span>`).join('');
+  const durTag = bd.duration ? `<span class="bd-dur-tag">${escHtml(bd.duration)}</span>` : '';
+  const hitTag = (bd.bdhit && bd.bdhit > 1) ? `<span class="bd-hit-tag">${bd.bdhit}連</span>` : '';
+  const rightTags = spTags + durTag + hitTag;
+  return `
+    <div class="section">
+      <div class="section-title">ブレイズドライブ</div>
+      <div class="bd-card">
+        <div class="bd-label">BD SKILL${bd.cost != null ? `&nbsp;<span class="bd-cost-tag">コスト ${bd.cost}</span>` : ''}</div>
+        <div class="bd-top-row">
+          <div class="bd-name">${escHtml(bd.name || '')}</div>
+          ${rightTags ? `<div class="bd-tags">${rightTags}</div>` : ''}
+        </div>
+        <div class="bd-effect">${escHtml(bd.effect || '')}</div>
+      </div>
+    </div>`;
+}
+
 // ===== RENDER DETAIL =====
 function renderDetail(c) {
   const rLabel = RARITY[c.rarity] || c.rarity || '?';
@@ -594,10 +701,11 @@ function renderDetail(c) {
     `<div class="state-content" data-state="${s}">${renderStateContent(c.states[s], s)}</div>`
   ).join('');
 
+  const bdSection = c.bd_skill?.name ? renderBDCard(c.bd_skill) : '';
   return `
     <div class="chara-header">
       <div class="chara-header-info">
-        <div class="chara-title">${escHtml(c.name)}<img class="chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">${hasOmoide(c) ? `<button class="btn-latent" onclick="openLatentModal(${c.id})">潜在開放</button>` : ''}</div>
+        <div class="chara-title">${escHtml(c.name)}<img class="chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">${hasOmoide(c) ? `<button class="btn-latent" style="margin-left:8px" onclick="openLatentModal(${c.id})">潜在開放</button>` : ''}</div>
         <div class="chara-meta">
           <span class="meta-chip"><span class="badge ${rLabel}">${rLabel}</span></span>
           <span class="meta-chip"><span class="elem-dot" style="background:${eColor}"></span>${eName}属性</span>
@@ -605,8 +713,11 @@ function renderDetail(c) {
           ${c.url ? `<a class="meta-chip" href="${c.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>` : ''}
         </div>
       </div>
-      <button class="btn-edit" onclick="enterEditMode(${c.id})">修改</button>
+      <div style="display:flex;gap:6px;flex-shrink:0;align-items:flex-start">
+        <button class="btn-edit" onclick="enterEditMode(${c.id})">修正</button>
+      </div>
     </div>
+    ${bdSection}
     <div class="state-tabs">${tabs}</div>
     ${contents}
   `;
@@ -625,19 +736,6 @@ function switchState(id, stateLabel, container) {
 // ===== RENDER STATE CONTENT =====
 function renderStateContent(state, stateLabel) {
   const parts = [];
-
-  // --- BD Skill ---
-  if (state.bd_skill?.name) {
-    parts.push(`
-      <div class="section">
-        <div class="section-title">ブレイズドライブ</div>
-        <div class="bd-card">
-          <div class="bd-label">BD SKILL</div>
-          <div class="bd-name">${escHtml(state.bd_skill.name)}</div>
-          <div class="bd-effect">${escHtml(state.bd_skill.effect)}</div>
-        </div>
-      </div>`);
-  }
 
   // --- Skills ---
   if (state.skills?.length) {
@@ -738,6 +836,11 @@ function escHtml(s) {
 // ===== EDIT MODE STATE =====
 let editData   = null;
 let reviseData = {};
+let omoideReviseData = {};
+let sessionReviseIds = new Set();
+let originalData = {};
+
+const OMOIDE_KEYS = new Set(['omoide', 'omoide_template', 'omoide_rarity']);
 
 // ===== PATH UTILITIES =====
 function getPath(obj, pathStr) {
@@ -784,13 +887,97 @@ function cancelEdit() {
   selectChar(selectedId);
 }
 
+function _deepDiff(oval, mval) {
+  // Plain object: recurse into changed keys
+  if (mval && typeof mval === 'object' && !Array.isArray(mval) &&
+      oval && typeof oval === 'object' && !Array.isArray(oval)) {
+    const sub = {};
+    for (const k in mval)
+      if (JSON.stringify(mval[k]) !== JSON.stringify(oval[k]))
+        sub[k] = _deepDiff(oval[k], mval[k]);
+    return sub;
+  }
+  // Same-length array of objects: sparse index-keyed diff (only changed indices)
+  if (Array.isArray(oval) && Array.isArray(mval) && oval.length === mval.length &&
+      mval.length > 0 &&
+      mval.every(x => x && typeof x === 'object' && !Array.isArray(x))) {
+    const sparse = {};
+    mval.forEach((m, i) => {
+      if (JSON.stringify(m) !== JSON.stringify(oval[i]))
+        sparse[i] = _deepDiff(oval[i], m);
+    });
+    return sparse;
+  }
+  return JSON.parse(JSON.stringify(mval));
+}
+function computeDiff(original, modified) {
+  const diff = { id: modified.id, name: modified.name };
+  for (const key in modified) {
+    if (key === 'id') continue;
+    if (JSON.stringify(modified[key]) !== JSON.stringify(original[key]))
+      diff[key] = _deepDiff(original[key], modified[key]);
+  }
+  return diff;
+}
+function deepApply(target, patch) {
+  for (var k in patch) {
+    if (k === 'id') continue;
+    var pv = patch[k], tv = target[k];
+    // Sparse array diff: target field is array, patch is plain object with numeric-string keys
+    if (Array.isArray(tv) && pv && typeof pv === 'object' && !Array.isArray(pv) &&
+        Object.keys(pv).every(kk => /^\d+$/.test(kk))) {
+      for (var idx in pv) {
+        var i = +idx;
+        if (i >= tv.length) continue;
+        var pvi = pv[idx];
+        if (pvi && typeof pvi === 'object' && !Array.isArray(pvi) &&
+            tv[i] && typeof tv[i] === 'object' && !Array.isArray(tv[i])) {
+          deepApply(tv[i], pvi);
+        } else {
+          tv[i] = JSON.parse(JSON.stringify(pvi));
+        }
+      }
+    } else if (pv !== null && typeof pv === 'object' && !Array.isArray(pv) &&
+        tv !== null && typeof tv === 'object' && !Array.isArray(tv)) {
+      deepApply(tv, pv);
+    } else {
+      target[k] = JSON.parse(JSON.stringify(pv));
+    }
+  }
+}
+
 function saveEdit() {
   if (!editData) return;
-  const original = allChars.find(x => x.id === editData.id);
-  if (JSON.stringify(editData) !== JSON.stringify(original)) {
-    const idx = allChars.findIndex(x => x.id === editData.id);
-    if (idx >= 0) allChars[idx] = editData;
-    reviseData[editData.id] = editData;
+  // Strip null slots (unselected after 追加)
+  if (editData.omoide) {
+    editData.omoide.forEach(function(row) {
+      row.slots = (row.slots || []).filter(function(s) { return s != null; });
+    });
+    editData.omoide = editData.omoide.filter(function(row) { return row.slots.length > 0; });
+  }
+  const id  = editData.id;
+  const idx = allChars.findIndex(x => x.id === id);
+  if (idx >= 0) {
+    const changed = JSON.stringify(editData) !== JSON.stringify(originalData[id]);
+    allChars[idx] = editData;
+    if (changed) {
+      const diff = computeDiff(originalData[id], editData);
+      const charDiff = { id: diff.id, name: diff.name };
+      const omoideDiff = { id: diff.id, name: diff.name };
+      let hasChar = false, hasOmoide = false;
+      for (const key in diff) {
+        if (key === 'id' || key === 'name') continue;
+        if (OMOIDE_KEYS.has(key)) { omoideDiff[key] = diff[key]; hasOmoide = true; }
+        else                       { charDiff[key]   = diff[key]; hasChar   = true; }
+      }
+      if (hasChar)   { reviseData[id]       = charDiff;   } else { delete reviseData[id]; }
+      if (hasOmoide) { omoideReviseData[id] = omoideDiff; } else { delete omoideReviseData[id]; }
+      sessionReviseIds.add(id);
+    } else {
+      delete reviseData[id];
+      delete omoideReviseData[id];
+      sessionReviseIds.delete(id);
+    }
     updateReviseBar();
   }
   editData = null;
@@ -806,10 +993,11 @@ async function saveRevise() {
     const res  = await fetch('/save', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ characters: allChars, revise: Object.values(reviseData) }),
+      body:    JSON.stringify({ revise: Object.values(reviseData), omoide_revise: Object.values(omoideReviseData) }),
     });
     const json = await res.json();
     if (!res.ok) throw new Error(json.error || res.status);
+    sessionReviseIds.clear(); omoideReviseData = {};
     status.textContent = '✓ 保存完了';
   } catch (err) {
     status.textContent = '保存失敗';
@@ -830,11 +1018,22 @@ function renderEditDetail(c) {
     `<div class="state-content" data-state="${s}">${renderEditStateContent(c, s)}</div>`
   ).join('');
 
+  const bdEditSection = c.bd_skill?.name ? `
+    <div class="section">
+      <div class="section-title">ブレイズドライブ</div>
+      <div class="bd-card">
+        <div class="bd-label">BD SKILL${c.bd_skill.cost != null ? `&nbsp;<span class="bd-cost-tag">コスト ${c.bd_skill.cost}</span>` : ''}</div>
+        <div class="bd-name">${escHtml(c.bd_skill.name || '')}</div>
+        <div class="edit-readonly">${escHtml(c.bd_skill.effect || '')}</div>
+        <div class="field-label" style="margin-top:8px">BD特殊効果</div>
+        <div class="bunrui-toggles">${renderBDSpecialToggles(c.bd_skill)}</div>
+        <div id="bd-effects-edit-container">${renderBDEffectsEdit(c.bd_skill)}</div>
+      </div>
+    </div>` : '';
   return `
     <div class="chara-header edit-mode-active">
       <div class="chara-header-info" style="flex:1;min-width:0">
-        <input class="edit-input title" value="${escHtml(c.name)}"
-               oninput="setPath(editData,'name',this.value)">
+        <div class="chara-title">${escHtml(c.name)}<img class="chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt=""></div>
         <div class="chara-meta" style="margin-top:8px">
           <select class="edit-select" onchange="setPath(editData,'rarity',Number(this.value))">
             ${[4,3,2,1].map(r=>`<option value="${r}"${c.rarity==r?' selected':''}>${RARITY[r]}ランク</option>`).join('')}
@@ -852,10 +1051,12 @@ function renderEditDetail(c) {
         <button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>
       </div>
     </div>
+    ${bdEditSection}
     <div class="state-tabs">${tabs}</div>
     ${contents}
     <div class="section" style="margin-top:16px">
       <div class="section-title">潜在開放</div>
+      ${renderOmoideTemplateBar(c)}
       <div id="latent-edit-section" class="latent-edit-container">${renderLatentEditBody(c)}</div>
     </div>`;
 }
@@ -864,23 +1065,6 @@ function renderEditStateContent(c, lbl) {
   const state = c.states[lbl];
   const p     = `states.${lbl}`;
   const parts = [];
-
-  // BD Skill
-  if ('bd_skill' in state) {
-    const bd = state.bd_skill || {};
-    parts.push(`
-      <div class="section">
-        <div class="section-title">ブレイズドライブ</div>
-        <div class="bd-card">
-          <div class="field-label">スキル名</div>
-          <input class="edit-input" value="${escHtml(bd.name||'')}"
-                 oninput="setPath(editData,'${p}.bd_skill.name',this.value)">
-          <div class="field-label">効果</div>
-          <textarea class="edit-textarea"
-                    oninput="setPath(editData,'${p}.bd_skill.effect',this.value)">${escHtml(bd.effect||'')}</textarea>
-        </div>
-      </div>`);
-  }
 
   // Skills
   if (state.skills?.length) {
@@ -942,7 +1126,8 @@ function renderEditStateContent(c, lbl) {
             <input type="text" class="edit-num-sm" value="${e.bairitu_scaling??''}"
                    oninput="setPath(editData,'${ep}.bairitu_scaling',parseBairituVal(this.value))">
           </div>
-        </div>`;
+        </div>
+        ${_renderHitEdit(ep, e)}`;
       }).join('');
       return `
       <div class="skill-edit-card">
@@ -1002,6 +1187,111 @@ function renderEditStateContent(c, lbl) {
   return parts.join('') || '<div class="no-results">データなし</div>';
 }
 
+// ===== HIT EDIT HELPERS =====
+function setHitStage(path, idx, val) {
+  var arr = (getPath(editData, path + '.hit_per_stage') || [null, null, null]).slice();
+  while (arr.length < 3) arr.push(null);
+  arr[idx] = val === '' ? null : +val;
+  setPath(editData, path + '.hit_per_stage', arr);
+}
+
+function _renderHitEdit(ep, e) {
+  if (!(e.bunrui || []).includes(7)) return '';
+  var ht = e.hit_type != null ? e.hit_type : 0;
+  var hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null, null, null];
+  function opt(v, lbl) {
+    return '<option value="' + v + '"' + (ht === v ? ' selected' : '') + '>' + lbl + '</option>';
+  }
+  function stageIn(idx) {
+    var v = hps[idx] != null ? hps[idx] : '';
+    return '<div><div class="field-label">' + (idx + 1) + '撃目</div>'
+      + '<input type="number" step="any" class="edit-num-sm" style="width:60px" value="' + v + '"'
+      + ' oninput="setHitStage(\'' + ep + '\',' + idx + ',this.value)"></div>';
+  }
+  return '<div class="field-label" style="margin-top:6px">ヒット計算 <span style="font-weight:400;color:var(--text2)">(bunrui=7)</span></div>'
+    + '<div class="skill-edit-meta">'
+    + '<div><div class="field-label">hit_type</div>'
+    + '<select class="edit-select" onchange="setPath(editData,\'' + ep + '.hit_type\',+this.value)">'
+    + opt(0, '0 減衰なし加算') + opt(1, '1 ダメージ維持加算') + opt(2, '2 乗算') + opt(3, '3 設定値')
+    + '</select></div>'
+    + stageIn(0) + stageIn(1) + stageIn(2)
+    + '</div>';
+}
+
+// ===== BD EDIT HELPERS =====
+function renderBDSpecialToggles(bd) {
+  return [1,2,3,5,6].map(function(sid) {
+    var on = (bd.special || []).includes(sid);
+    return '<button class="btog' + (on ? ' on' : '') + '" onclick="toggleBDSpecial(' + sid + ',this)">' + (BD_SPECIAL[sid] || sid) + '</button>';
+  }).join('');
+}
+
+function renderBDEffectsEdit(bd) {
+  const BUNRUI_A = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+  const effects = bd.effects || [];
+  const blocks = effects.map(function(e, ei) {
+    const ep = 'bd_skill.effects.' + ei;
+    const bunrui = e.bunrui || [];
+    const btogs = BUNRUI_A.map(function(b) {
+      return '<button class="btog' + (bunrui.includes(b) ? ' on' : '') + '" onclick="toggleBunrui(\'' + ep + '\',' + b + ',this)">' + (BUNRUI_SHORT[b] || b) + '</button>';
+    }).join('');
+    const delBtn = effects.length > 1
+      ? '<button class="latent-rm-btn" onclick="removeBDEffect(' + ei + ')" title="削除">×</button>' : '';
+    return '<div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:4px">'
+      + '<div class="field-label" style="margin:0">効果 #' + (ei + 1) + '</div>' + delBtn + '</div>'
+      + '<div class="bunrui-toggles">' + btogs + '</div>'
+      + '<div class="skill-edit-meta">'
+      + '<div><div class="field-label">scope</div>'
+      + '<select class="edit-select" onchange="setPath(editData,\'' + ep + '.scope\',+this.value)">'
+      + '<option value="0"' + (e.scope === 0 ? ' selected' : '') + '>自身</option>'
+      + '<option value="1"' + (e.scope === 1 ? ' selected' : '') + '>全体</option>'
+      + '<option value="2"' + (e.scope === 2 ? ' selected' : '') + '>限定</option>'
+      + '</select></div>'
+      + '<div><div class="field-label">condition</div>'
+      + '<select class="edit-select" onchange="setPath(editData,\'' + ep + '.condition\',+this.value)">'
+      + '<option value="0"' + (e.condition === 0 ? ' selected' : '') + '>なし</option>'
+      + '<option value="1"' + (e.condition === 1 ? ' selected' : '') + '>浑身</option>'
+      + '<option value="2"' + (e.condition === 2 ? ' selected' : '') + '>背水</option>'
+      + '<option value="3"' + (e.condition === 3 ? ' selected' : '') + '>破損</option>'
+      + '</select></div>'
+      + '<div><div class="field-label">倍率</div>'
+      + '<div style="display:flex;align-items:center;gap:4px">'
+      + '<select class="edit-select" onchange="setPath(editData,\'' + ep + '.calc_type\',+this.value)">'
+      + '<option value="0"' + (e.calc_type === 0 ? ' selected' : '') + '>×</option>'
+      + '<option value="1"' + (e.calc_type === 1 ? ' selected' : '') + '>+</option>'
+      + '</select>'
+      + '<input type="number" step="any" class="edit-num-sm" value="' + (e.bairitu != null ? e.bairitu : '') + '"'
+      + ' oninput="setPath(editData,\'' + ep + '.bairitu\',this.value===\'\'?null:Number(this.value))">'
+      + '</div></div></div>'
+      + _renderHitEdit(ep, e);
+  }).join('');
+  return blocks + '<button class="btn-add-slot" style="margin-top:6px" onclick="addBDEffect()">+ 効果追加</button>';
+}
+
+function toggleBDSpecial(sid, btn) {
+  if (!editData.bd_skill) return;
+  var arr = (editData.bd_skill.special || []).slice();
+  var idx = arr.indexOf(sid);
+  if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
+  else { arr.push(sid); arr.sort(function(a,b){return a-b;}); btn.classList.add('on'); }
+  editData.bd_skill.special = arr;
+}
+
+function addBDEffect() {
+  if (!editData.bd_skill) return;
+  if (!editData.bd_skill.effects) editData.bd_skill.effects = [];
+  editData.bd_skill.effects.push({bunrui:[1], scope:0, condition:0, calc_type:0});
+  var el = document.getElementById('bd-effects-edit-container');
+  if (el) el.innerHTML = renderBDEffectsEdit(editData.bd_skill);
+}
+
+function removeBDEffect(ei) {
+  if (!editData.bd_skill?.effects) return;
+  editData.bd_skill.effects.splice(ei, 1);
+  var el = document.getElementById('bd-effects-edit-container');
+  if (el) el.innerHTML = renderBDEffectsEdit(editData.bd_skill);
+}
+
 // ===== LATENT EDIT =====
 function _senzaiLabel(iconId) {
   var tbl = (typeof SENZAI_TABLE !== 'undefined') ? SENZAI_TABLE : {};
@@ -1010,20 +1300,45 @@ function _senzaiLabel(iconId) {
   return (info.koka || ('icon ' + iconId)) + bVal;
 }
 
-function makeLCSHtml(iconId, t, slotIdx) {
+var _OMOIDE_RARITY_TH = new Set([45000, 60000, 75000, 90000]);
+var _ICON_TO_RARITY   = {88:1, 89:2, 90:3, 91:4, 92:5};
+
+function getLinkedThresholds(threshold, omoideRarity) {
+  var star1 = [10, 200, 700, 2000, 3000, 5000, 7000, 9000, 13000];
+  var s2h = [], s3h = [], icon = [];
+  for (var n = 0; n < 5; n++) {
+    [18000, 21000, 27000].forEach(function(b) { s2h.push(b + 15000 * n); });
+    s3h.push(24000 + 15000 * n);
+    icon.push(30000 + 15000 * n);
+  }
+  // SS/限定SS (rarity=4/5): 6000 も同じ rarity icon → icon group に追加
+  if (omoideRarity === 4 || omoideRarity === 5) icon.push(6000);
+  // A (rarity=1) の 30000 は icon group に入らない（star3_high 扱い）
+  if (omoideRarity === 1) icon = icon.filter(function(t) { return t !== 30000; });
+  if (star1.indexOf(threshold) >= 0) return star1;
+  if (s2h.indexOf(threshold) >= 0) return s2h;
+  if (s3h.indexOf(threshold) >= 0) return s3h;
+  if (icon.indexOf(threshold) >= 0) return icon;
+  return null;
+}
+
+function makeLCSHtml(iconId, t, slotIdx, restricted) {
   var tbl = (typeof SENZAI_TABLE !== 'undefined') ? SENZAI_TABLE : {};
   var keys = Object.keys(tbl).sort(function(a, b) { return parseInt(a) - parseInt(b); });
+  if (restricted) keys = keys.filter(function(k) { return +k >= 88 && +k <= 92; });
   var opts = keys.map(function(k) {
     var info = tbl[k];
     var bVal = (info.bairitu != null && info.bairitu !== 0) ? ' (' + ctPfx(info.calc_type) + fmtNum(info.bairitu) + ')' : '';
     var label = (info.koka || ('icon ' + k)) + bVal;
-    var sel = (parseInt(k) === iconId) ? ' class="lcs-opt lcs-selected"' : ' class="lcs-opt"';
+    var sel = (iconId != null && parseInt(k) === iconId) ? ' class="lcs-opt lcs-selected"' : ' class="lcs-opt"';
     return '<div' + sel + ' data-val="' + k + '" onclick="selectLCS(this,' + t + ',' + slotIdx + ')">' + escHtml(label) + '</div>';
   }).join('');
+  var triggerLabel = iconId != null ? _senzaiLabel(iconId) : '選択...';
+  var searchHtml = restricted ? '' : '<input class="lcs-search" type="text" placeholder="絞込..." oninput="filterLCS(this)">';
   return '<div class="latent-edit-chip">'
-    + '<button class="lcs-trigger" onclick="toggleLCS(event,this)">' + escHtml(_senzaiLabel(iconId)) + '</button>'
+    + '<button class="lcs-trigger" onclick="toggleLCS(event,this)">' + escHtml(triggerLabel) + '</button>'
     + '<div class="lcs-dropdown">'
-    + '<input class="lcs-search" type="text" placeholder="絞込..." oninput="filterLCS(this)">'
+    + searchHtml
     + '<div class="lcs-list">' + opts + '</div>'
     + '</div>'
     + '<button class="latent-rm-btn" onclick="removeLatentSlot(' + t + ',' + slotIdx + ')">×</button>'
@@ -1034,14 +1349,16 @@ function renderLatentEditBody(c) {
   var omoideMap = {};
   (c.omoide || []).forEach(function(row) { omoideMap[row.threshold] = row.slots || []; });
   return OMOIDE_THRESHOLDS.map(function(t) {
+    var restricted = _OMOIDE_RARITY_TH.has(t);
     var slots = omoideMap[t] || [];
     var slotsHtml = slots.map(function(iconId, slotIdx) {
-      return makeLCSHtml(iconId, t, slotIdx);
+      return makeLCSHtml(iconId, t, slotIdx, restricted);
     }).join('');
+    var showAdd = !restricted || slots.length === 0;
+    var addBtn = showAdd ? '<button class="btn-add-slot" onclick="addLatentSlot(' + t + ')">+ 追加</button>' : '';
     return '<div class="latent-edit-row">'
       + '<div class="latent-edit-label">思い出 ' + t.toLocaleString('ja-JP') + '</div>'
-      + '<div class="latent-edit-slots">' + slotsHtml
-      + '<button class="btn-add-slot" onclick="addLatentSlot(' + t + ')">+ 追加</button>'
+      + '<div class="latent-edit-slots">' + slotsHtml + addBtn
       + '</div></div>';
   }).join('');
 }
@@ -1064,7 +1381,7 @@ function toggleLCS(e, triggerBtn) {
   dropdown.style.display = 'block';
   _lcsOpen = dropdown;
   var s = dropdown.querySelector('.lcs-search');
-  s.value = ''; filterLCS(s); s.focus();
+  s.value = ''; filterLCS(s);
 }
 
 function closeLCS() {
@@ -1079,7 +1396,21 @@ function filterLCS(input) {
 }
 
 function selectLCS(optEl, threshold, slotIdx) {
-  changeLatentSlot(threshold, slotIdx, parseInt(optEl.dataset.val));
+  var icon = parseInt(optEl.dataset.val);
+  changeLatentSlot(threshold, slotIdx, icon);
+  if (threshold === 90000 && _ICON_TO_RARITY[icon] != null) {
+    editData.omoide_rarity = _ICON_TO_RARITY[icon];
+  }
+  var linked = getLinkedThresholds(threshold, editData.omoide_rarity);
+  if (linked && linked.length > 1) {
+    linked.forEach(function(t) {
+      if (t === threshold) return;
+      var row = (editData.omoide || []).find(function(r) { return r.threshold === t; });
+      if (row && slotIdx < row.slots.length) row.slots[slotIdx] = icon;
+    });
+    reRenderLatentEdit();
+    return;
+  }
   var chip = optEl.closest('.latent-edit-chip');
   chip.querySelector('.lcs-trigger').textContent = optEl.textContent;
   optEl.closest('.lcs-list').querySelectorAll('.lcs-opt').forEach(function(o) {
@@ -1091,6 +1422,135 @@ function selectLCS(optEl, threshold, slotIdx) {
 document.addEventListener('click', function(e) {
   if (_lcsOpen && !e.target.closest('.latent-edit-chip')) closeLCS();
 });
+
+// ===== OMOIDE TEMPLATE =====
+function getCrystalSlotsJS(c) {
+  for (const lbl of ['改造', '極弐', '通常']) {
+    const v = c.states?.[lbl]?.basic_info?.['結晶スロット'];
+    if (v != null) { const n = parseInt(v); if (!isNaN(n)) return n; }
+  }
+  return 0;
+}
+
+function fillOmoideSlots(omoideArr, omoideRarity, k, star2High, star3High) {
+  const omap = {};
+  (omoideArr || []).forEach(r => { if (r.slots?.length) omap[r.threshold] = r.slots; });
+  const star1 = omap[10] || [], star2 = omap[400] || [];
+  const star3_raw = omap[1000] || [];
+  if (!star1.length && !star2.length && !star3_raw.length) return omoideArr;
+  const _s3icon = x => x>=54&&x<=64 ? x+4 : x>=83&&x<=87 ? x+1 : x<=82 ? x+6 : x;
+  // If 1000好感 count != 400好感 count → special slot, derive per type
+  let star3;
+  if (star2.length && star3_raw.length && star3_raw.length !== star2.length)
+    star3 = star2.map(_s3icon);
+  else if (star2.length && !star3_raw.length)
+    star3 = star2.map(_s3icon);
+  else
+    star3 = star3_raw;
+  const r = omoideRarity || 1;
+  const s2h = star2High?.length ? star2High : star2;
+  const s3h = star3High?.length ? star3High : (star2High?.length ? s2h.map(_s3icon) : star3);
+  const rules = {};
+  [2000,3000,5000,7000,9000,13000].forEach(t => { rules[t] = star1; });
+  rules[4000] = star2;
+  rules[6000]  = r===5?[92]:r===4?[91]:(k>=3?star3:[93]);
+  rules[11000] = star3;
+  rules[15000] = r>=4?[94,95,96]:(k>=4?star3:[93]);
+  for (let n = 0; n < 5; n++) {
+    rules[18000+15000*n] = s2h;
+    rules[21000+15000*n] = s2h;
+    rules[24000+15000*n] = s3h;
+    rules[27000+15000*n] = s2h;
+    const t30 = 30000+15000*n;
+    rules[t30] = r===5?[92]:r===4?[91]:r===3?[90]:r===2?[89]:(n===0?s3h:[88]);
+  }
+  const BASE = new Set([10,200,400,700,1000]);
+  for (const [t, slots] of Object.entries(rules))
+    if (!BASE.has(+t) && slots.length) omap[+t] = slots;
+  return Object.keys(omap).sort((a,b)=>+a-+b)
+    .map(t => ({threshold:+t, slots:omap[t]})).filter(r => r.slots.length);
+}
+
+function renderOmoideTemplateBar(c) {
+  const opts = omoideTemplates.map(t =>
+    `<option value="${t.id}"${c.omoide_template===t.id?' selected':''}>${escHtml(t.name)}</option>`
+  ).join('');
+  return `<div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap">
+    <select id="omoide-tpl-sel" class="edit-select" style="flex:1;min-width:120px">
+      <option value="">テンプレートを選択...</option>
+      ${opts}
+    </select>
+    <button class="btn-add-slot" onclick="applyOmoideTemplate()" style="white-space:nowrap;padding:3px 10px">適用</button>
+    <button class="btn-add-slot" onclick="saveOmoideTemplate()" style="white-space:nowrap;padding:3px 10px">テンプレ保存</button>
+  </div>`;
+}
+
+var _promptCb = null;
+function showPrompt(title, defaultVal, cb) {
+  _promptCb = cb;
+  document.getElementById('prompt-title').textContent = title;
+  const inp = document.getElementById('prompt-input');
+  inp.value = defaultVal || '';
+  const modal = document.getElementById('prompt-modal');
+  modal.style.display = 'flex';
+  setTimeout(() => { inp.focus(); inp.select(); }, 50);
+}
+function _promptConfirm() {
+  const val = document.getElementById('prompt-input').value.trim();
+  document.getElementById('prompt-modal').style.display = 'none';
+  if (_promptCb) { _promptCb(val); _promptCb = null; }
+}
+function _promptCancel() {
+  document.getElementById('prompt-modal').style.display = 'none';
+  _promptCb = null;
+}
+
+function saveOmoideTemplate() {
+  if (!editData) { alert('編集モードではありません'); return; }
+  if (!editData.omoide || !editData.omoide.length) { alert('潜在データがありません'); return; }
+
+  const sel = document.getElementById('omoide-tpl-sel');
+  const existingId = sel?.value ? +sel.value : null;
+  const existing = existingId ? omoideTemplates.find(t => t.id === existingId) : null;
+  showPrompt('テンプレートを保存', existing?.name || 'テンプレート名', function(trimmed) {
+    if (!trimmed) { alert('名前を入力してください'); return; }
+    const omoide = JSON.parse(JSON.stringify(editData.omoide));
+    if (existing) {
+      existing.name = trimmed;
+      existing.omoide = omoide;
+    } else {
+      const newId = omoideTemplates.length ? Math.max(...omoideTemplates.map(t => t.id)) + 1 : 1;
+      omoideTemplates.push({ id: newId, name: trimmed, omoide });
+    }
+    fetch('/save', { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ omoide_templates: omoideTemplates }) })
+      .then(r => r.json())
+      .then(j => {
+        if (!j.ok) throw new Error(j.error);
+        const savedId = existing ? existing.id : omoideTemplates[omoideTemplates.length - 1].id;
+        const bar = document.getElementById('omoide-tpl-sel');
+        if (bar) {
+          bar.innerHTML = '<option value="">テンプレートを選択...</option>'
+            + omoideTemplates.map(t =>
+                `<option value="${t.id}"${t.id===savedId?' selected':''}>${escHtml(t.name)}</option>`
+              ).join('');
+          bar.value = savedId;
+        }
+        if (editData) editData.omoide_template = savedId;
+      })
+      .catch(e => { alert('保存失敗: ' + e.message); });
+  });
+}
+
+function applyOmoideTemplate() {
+  const sel = document.getElementById('omoide-tpl-sel');
+  if (!sel || !sel.value) return;
+  const tpl = omoideTemplates.find(t => t.id === +sel.value);
+  if (!tpl?.omoide) return;
+  editData.omoide = JSON.parse(JSON.stringify(tpl.omoide));
+  editData.omoide_template = tpl.id;
+  reRenderLatentEdit();
+}
 
 function reRenderLatentEdit() {
   closeLCS();
@@ -1110,16 +1570,31 @@ function ensureOmoideRow(threshold) {
 }
 
 function addLatentSlot(threshold) {
-  var tbl = (typeof SENZAI_TABLE !== 'undefined') ? SENZAI_TABLE : {};
-  var keys = Object.keys(tbl).sort(function(a, b) { return parseInt(a) - parseInt(b); });
   var row = ensureOmoideRow(threshold);
-  row.slots.push(keys.length ? parseInt(keys[0]) : 1);
+  row.slots.push(null);
+  var linked = getLinkedThresholds(threshold, editData.omoide_rarity);
+  if (linked) {
+    linked.forEach(function(t) {
+      if (t === threshold) return;
+      ensureOmoideRow(t).slots.push(null);
+    });
+  }
   reRenderLatentEdit();
 }
 
 function removeLatentSlot(threshold, slotIdx) {
   var row = (editData.omoide || []).find(function(r) { return r.threshold === threshold; });
-  if (row) { row.slots.splice(slotIdx, 1); reRenderLatentEdit(); }
+  if (!row) return;
+  row.slots.splice(slotIdx, 1);
+  var linked = getLinkedThresholds(threshold, editData.omoide_rarity);
+  if (linked) {
+    linked.forEach(function(t) {
+      if (t === threshold) return;
+      var r2 = (editData.omoide || []).find(function(r) { return r.threshold === t; });
+      if (r2 && slotIdx < r2.slots.length) r2.slots.splice(slotIdx, 1);
+    });
+  }
+  reRenderLatentEdit();
 }
 
 function changeLatentSlot(threshold, slotIdx, iconId) {
@@ -1132,16 +1607,31 @@ function openLatentModal(charaId) {
   var c = allChars.find(function(x) { return x.id === charaId; });
   if (!c || !hasOmoide(c)) return;
   var tbl = (typeof SENZAI_TABLE !== 'undefined') ? SENZAI_TABLE : {};
+  function fmtBairituJP(v, calcType) {
+    if (v == null || v === 0) return '';
+    var pfx = ctPfx(calcType);
+    if (v >= 100000000) {
+      var b = v / 100000000;
+      return pfx + (b % 1 === 0 ? b : parseFloat(b.toFixed(2))) + '億';
+    } else if (v >= 10000) {
+      var m = v / 10000;
+      return pfx + (m % 1 === 0 ? m : parseFloat(m.toFixed(1))) + '万';
+    }
+    return pfx + fmtNum(v);
+  }
   var html = c.omoide.filter(function(row) { return row.slots && row.slots.length > 0; }).map(function(row) {
     var slotsHtml = row.slots.map(function(iconId) {
       var info = tbl[iconId] || {};
-      var b = (info.bairitu != null && info.bairitu !== 0) ? ctPfx(info.calc_type) + fmtNum(info.bairitu) : '';
+      var bairitu = info.bairitu;
+      var b = (bairitu != null && bairitu !== 0) ? fmtBairituJP(bairitu, info.calc_type) : '';
       var sc = (info.bairitu_scaling != null && info.bairitu_scaling !== 0) ? fmtNum(info.bairitu_scaling) : '';
       var bStr = b ? (sc ? b + ' + ' + sc + '×熟度' : b) : (sc ? sc + '×熟度' : '');
+      var bClass = bStr ? 'latent-slot-bairitu' : 'latent-slot-bairitu empty';
+      var bDisplay = bStr || '—';
       return '<div class="latent-slot">'
         + '<span class="latent-slot-koka">' + escHtml(info.koka || '?') + '</span>'
         + '<span class="latent-slot-syosai">' + escHtml(info.syosai || '') + '</span>'
-        + '<span class="latent-slot-bairitu">' + escHtml(bStr) + '</span>'
+        + '<span class="' + bClass + '">' + escHtml(bDisplay) + '</span>'
         + '</div>';
     }).join('');
     return '<div class="omoide-row">'
@@ -1161,6 +1651,11 @@ function closeLatentModal() {
 }
 
 document.addEventListener('keydown', function(e) {
+  if (document.getElementById('prompt-modal').style.display === 'flex') {
+    if (e.key === 'Enter')  { e.preventDefault(); _promptConfirm(); }
+    if (e.key === 'Escape') { _promptCancel(); }
+    return;
+  }
   if (e.key === 'Escape') { closeLCS(); closeLatentModal(); }
 });
 </script>
