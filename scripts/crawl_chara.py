@@ -7,7 +7,7 @@ Altema BxB 魔剣 全量爬虫 + 技能分类 + 倍率标注 一体化脚本
   python crawl_chara.py              # 增量爬取，跳过已处理角色
   python crawl_chara.py --rerun      # 全量重新爬取
 
-流程: 爬取 → 技能分类(bunrui/scope/condition) → 倍率标注(bairitu) → characters_classified.json
+流程: 爬取 → 技能分类(bunrui/scope/condition) → 倍率标注(bairitu) → characters.json
 """
 
 import argparse
@@ -21,10 +21,14 @@ import copy
 import html as htmlmod
 from fractions import Fraction
 
+import unicodedata
+
 from classify_common import (
     ELEMENT_MAP, WEAPON_TYPE_MAP,
     CAT_TO_BUNRUI_SKILLLIST,
     classify_skill_chara,
+    classify_effect,
+    classify_hit_fields,
 )
 
 # ============================================================
@@ -32,11 +36,29 @@ from classify_common import (
 # ============================================================
 BASE_URL       = "https://altema.jp"
 CHARALIST_URL  = "https://altema.jp/bxb/charalist"
-RAW_FILE          = "characters.json"           # intermediate raw crawl output
-OUTPUT_FILE       = "characters_classified.json" # final output used by index.html
+OUTPUT_FILE       = "characters.json"  # crawl progress + final output
 PROGRESS_FILE     = "progress.json"
 SENZAI_TABLE_FILE = "senzai_table.json"
+BD_SPECIAL_FILE      = "bd_special.json"
+BD_SPECIAL_DUR_FILE  = "bd_special_durations.json"
 REQUEST_DELAY  = 2.0
+
+# BD special effects: id → label
+BD_SPECIAL_LABELS = {
+    1: '時止め', 2: '麻痺', 3: '強制ブレイク',
+    5: '弱体解除', 6: '高倍率バフ',
+}
+# Sub-pages for page-sourced special effects
+BD_SPECIAL_PAGES = {
+    1: 'https://altema.jp/bxb/tokitomebd',
+    2: 'https://altema.jp/bxb/mahibd',
+    6: 'https://altema.jp/bxb/buffbd',
+}
+# Text-based detection patterns for remaining specials
+_BD_SP_TEXT = {
+    3: re.compile(r'強制ブレイク'),
+    5: re.compile(r'弱体化解除|弱体化を解除'),
+}
 
 HEADERS = {
     "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -116,6 +138,216 @@ def parse_bd_skill(table):
     if m:
         result["cost"] = int(m.group(1))
     return result
+
+
+def parse_bd_effects(effect_text):
+    """Parse BD skill effect text into structured effects list.
+    Format: 【消費レベル:N】<damage part>＆<buff part>
+    Returns list of {bunrui, scope, condition, bairitu, calc_type} dicts."""
+    text = unicodedata.normalize('NFKC', effect_text)  # ＆→& 、stays
+    text = re.sub(r'^【消費レベル:\d+】', '', text)
+    if '&' not in text:
+        return []
+    buff = text.split('&', 1)[1].strip()
+    if not buff:
+        return []
+
+    def extract_bairitu(seg):
+        m = re.search(r'([\d.]+)倍', seg)
+        if m:
+            return float(m.group(1)), 0
+        m = re.search(r'\+(\d+)', seg)
+        if m:
+            return int(m.group(1)), 1
+        m = re.search(r'(\d+)%', seg)
+        if m:
+            return round(1 + int(m.group(1)) / 100, 4), 0
+        return None, 0
+
+    segments = [s.strip() for s in re.split(r'[、&]', buff) if s.strip()]
+    from collections import defaultdict
+    groups = defaultdict(list)
+    ungrouped = []
+    for seg in segments:
+        bairitu, calc_type = extract_bairitu(seg)
+        if bairitu is not None:
+            groups[(bairitu, calc_type)].append(seg)
+        else:
+            ungrouped.append(seg)
+
+    entries = []
+    for (bairitu, calc_type), segs in groups.items():
+        cls = classify_effect('、'.join(segs))
+        if not cls['bunrui']:
+            continue
+        scope = cls['scope']
+        if scope == 0 and '味方' in '、'.join(segs):
+            scope = 1
+        entry = {'bunrui': cls['bunrui'], 'scope': scope,
+                 'condition': cls['condition'],
+                 'bairitu': bairitu, 'calc_type': calc_type}
+        if cls.get('element') is not None:
+            entry['element'] = cls['element']
+        entries.append(entry)
+
+    if ungrouped:
+        cls = classify_effect('、'.join(ungrouped))
+        if cls['bunrui']:
+            scope = cls['scope']
+            if scope == 0 and '味方' in '、'.join(ungrouped):
+                scope = 1
+            entry = {'bunrui': cls['bunrui'], 'scope': scope,
+                     'condition': cls['condition']}
+            if cls.get('element') is not None:
+                entry['element'] = cls['element']
+            entries.append(entry)
+
+    return entries
+
+
+def parse_bdhit(effect_text):
+    """Extract hit count from BD effect, e.g. 'な99連ダメージ' → 99."""
+    text = unicodedata.normalize('NFKC', effect_text)
+    m = re.search(r'(\d+)連', text)
+    return int(m.group(1)) if m else 1
+
+
+def parse_bd_duration(effect_text):
+    """Extract buff duration string from BD effect text.
+    Returns e.g. '30s', '3wave', '数秒', or '' if no timed buff."""
+    text = unicodedata.normalize('NFKC', effect_text)
+    text = re.sub(r'^【消費レベル:\d+】', '', text)
+    if '&' not in text:
+        return ''
+    buff = text.split('&', 1)[1].strip()
+    if not buff:
+        return ''
+    m = re.search(r'(\d+)秒', buff)
+    if m:
+        return f"{m.group(1)}s"
+    if re.search(r'数秒', buff):
+        return '数秒'
+    m = re.search(r'(\d+)wave', buff, re.IGNORECASE)
+    if m:
+        return f"{m.group(1)}wave"
+    if re.search(r'wave', buff, re.IGNORECASE):
+        return '1wave'
+    return ''
+
+
+def crawl_bd_special(session, out_dir, char_name_map=None):
+    """Crawl BD special effect sub-pages and save to bd_special.json / bd_special_durations.json.
+    char_name_map: {base_name: sort_id} — all entries are keyed by base character sort_id via name match.
+    Returns ({char_id: [special_ids]}, {sort_id: {sid: 'Xs'}})."""
+    special_map  = {}
+    duration_map = {}  # {base_sort_id: {sid: 'Xs'}}
+    _BRACKET = re.compile(r'[【〔（(].*?[】〕）)]')
+
+    for sid, url in BD_SPECIAL_PAGES.items():
+        resp = fetch_page(session, url)
+        if not resp:
+            print(f"  [bd_special] Failed to fetch {BD_SPECIAL_LABELS[sid]}")
+            continue
+        soup = BeautifulSoup(resp.text, 'html.parser')
+        ids_found = set()
+        unresolved = 0
+        for tr in soup.find_all('tr'):
+            a = tr.find('a', href=re.compile(r'/bxb/chara/\d+'))
+            if not a:
+                continue
+            m = re.search(r'/chara/(\d+)', a['href'])
+            if not m:
+                continue
+            cid = int(m.group(1))
+            ids_found.add(cid)
+            cells = tr.find_all(['td', 'th'])
+            # Extract duration first (format: 'NN秒')
+            dur_str = None
+            for cell in cells:
+                dm = re.search(r'(\d+)秒', cell.get_text(strip=True))
+                if dm:
+                    dur_str = dm.group(1) + 's'
+                    break
+            if dur_str is None:
+                continue  # no duration on this page type, skip
+            # Resolve to base sort_id via name matching
+            store_id = cid  # fallback: use page ID if no name map
+            if char_name_map and cells:
+                raw_name = cells[0].get_text(strip=True)
+                base_name = _BRACKET.sub('', raw_name).strip()
+                resolved = char_name_map.get(base_name)
+                if resolved is not None:
+                    store_id = resolved
+                else:
+                    unresolved += 1
+            duration_map.setdefault(store_id, {})[sid] = dur_str
+        for cid in ids_found:
+            special_map.setdefault(cid, [])
+            if sid not in special_map[cid]:
+                special_map[cid].append(sid)
+        msg = f"  [bd_special] {BD_SPECIAL_LABELS[sid]}: {len(ids_found)} entries"
+        if unresolved:
+            msg += f" ({unresolved} name-unresolved, stored by page_id)"
+        print(msg)
+        time.sleep(REQUEST_DELAY)
+    out_path = os.path.join(out_dir, BD_SPECIAL_FILE)
+    with open(out_path, 'w', encoding='utf-8') as f:
+        json.dump({str(k): sorted(v) for k, v in special_map.items()}, f, ensure_ascii=False, indent=2)
+    dur_path = os.path.join(out_dir, BD_SPECIAL_DUR_FILE)
+    with open(dur_path, 'w', encoding='utf-8') as f:
+        json.dump({str(k): {str(sk): sv for sk, sv in v.items()} for k, v in duration_map.items()},
+                  f, ensure_ascii=False, indent=2)
+    return special_map, duration_map
+
+
+def _elevate_bd(chara, recal, bd_special, bd_special_durations=None):
+    """Move bd_skill from per-state to character top level; compute bdhit/duration/effects/special."""
+    best_bd = None
+    for lbl in ['極弐', '改造', '通常']:
+        bd = chara.get('states', {}).get(lbl, {}).get('bd_skill')
+        if bd:
+            best_bd = copy.deepcopy(bd)
+            break
+    if best_bd is None:
+        best_bd = chara.get('bd_skill')
+
+    if best_bd:
+        effect = best_bd.get('effect', '')
+        if recal or 'bdhit' not in best_bd:
+            best_bd['bdhit'] = parse_bdhit(effect)
+        if recal or 'duration' not in best_bd:
+            duration = parse_bd_duration(effect)
+            # Override vague "数秒" with the exact duration from the special-effect page
+            if duration == '数秒' and bd_special_durations:
+                cids = {chara['id'], chara.get('sort_id', chara['id'])}
+                for cid in cids:
+                    char_durs = bd_special_durations.get(cid, {})
+                    if char_durs:
+                        duration = next(iter(char_durs.values()))
+                        break
+            best_bd['duration'] = duration
+        if recal or 'effects' not in best_bd:
+            best_bd['effects'] = parse_bd_effects(effect)
+        for _ent in best_bd.get('effects', []):
+            if recal or 'hit_type' not in _ent:
+                classify_hit_fields(effect, _ent, is_bd=True)
+        if recal or 'special' not in best_bd:
+            norm_eff = unicodedata.normalize('NFKC', effect)
+            specials = set()
+            for sid, pat in _BD_SP_TEXT.items():
+                if pat.search(norm_eff):
+                    specials.add(sid)
+            if bd_special:
+                # Sub-pages may use either url-id or sort_id; check both
+                specials.update(bd_special.get(chara['id'], []))
+                specials.update(bd_special.get(chara.get('sort_id', chara['id']), []))
+            best_bd['special'] = sorted(specials)
+        chara['bd_skill'] = best_bd
+    elif 'bd_skill' in chara:
+        del chara['bd_skill']
+
+    for sd in chara.get('states', {}).values():
+        sd.pop('bd_skill', None)
 
 
 def parse_skills_table(table):
@@ -731,12 +963,108 @@ def _compute_element_buff(chara):
 
 
 # ============================================================
+#  OMOIDE SLOT AUTO-FILL
+# ============================================================
+_OMOIDE_BASE = {10, 200, 400, 700, 1000}
+
+def get_crystal_slots(char):
+    for lbl in ['改造', '極弐', '通常']:
+        val = char.get('states', {}).get(lbl, {}).get('basic_info', {}).get('結晶スロット')
+        if val is not None:
+            try:
+                return int(val)
+            except (ValueError, TypeError):
+                pass
+    return 0
+
+def fill_omoide_slots(char, templates=None):
+    """Derive rule-based omoide slots for all non-base thresholds.
+    templates: dict loaded from omoide_templates.json; used for star2_high/star3_high."""
+    r = char.get('omoide_rarity', 1)
+    k = get_crystal_slots(char)
+
+    omap = {}
+    for row in char.get('omoide') or []:
+        t = row.get('threshold')
+        if t is not None:
+            omap[t] = row.get('slots', [])
+
+    star1     = omap.get(10, [])
+    star2     = omap.get(400, [])
+    star3_raw = omap.get(1000, [])
+    if not (star1 or star2 or star3_raw):
+        return
+
+    def _s3_icon(x):
+        if 54 <= x <= 64: return x + 4   # BK力 +4
+        if 83 <= x <= 87: return x + 1   # 速度UP +1
+        if x <= 82:       return x + 6   # 攻/防/HP/BD攻 +6
+        return x                          # 88+ 特殊、不推算
+
+    # If 1000好感 slot count differs from 400好感, it's a special slot — derive per type
+    if star2 and star3_raw and len(star3_raw) != len(star2):
+        star3 = [_s3_icon(x) for x in star2]
+    elif star2 and not star3_raw:
+        star3 = [_s3_icon(x) for x in star2]
+    else:
+        star3 = star3_raw
+
+    # High variants: template override, then auto-derive star3_high per type
+    star2_high = star2
+    star3_high = star3
+    tpl_key = char.get('omoide_template')
+    if templates and tpl_key and tpl_key in templates:
+        tpl = templates[tpl_key]
+        if tpl.get('star3'):
+            star3 = tpl['star3']
+        if tpl.get('star2_high'):
+            star2_high = tpl['star2_high']
+        if tpl.get('star3_high'):
+            star3_high = tpl['star3_high']
+        elif tpl.get('star2_high'):
+            star3_high = [_s3_icon(x) for x in star2_high]
+        else:
+            star3_high = star3
+
+    rules = {}
+    for t in [2000, 3000, 5000, 7000, 9000, 13000]:
+        rules[t] = star1
+    rules[4000] = star2
+    rules[6000] = [92] if r == 5 else [91] if r == 4 else (star3 if k >= 3 else [93])
+    rules[11000] = star3
+    rules[15000] = [94, 95, 96] if r >= 4 else (star3 if k >= 4 else [93])
+    for n in range(5):
+        rules[18000 + 15000 * n] = star2_high
+        rules[21000 + 15000 * n] = star2_high
+        rules[24000 + 15000 * n] = star3_high
+        rules[27000 + 15000 * n] = star2_high
+        t30 = 30000 + 15000 * n
+        if r == 5:   rules[t30] = [92]
+        elif r == 4: rules[t30] = [91]
+        elif r == 3: rules[t30] = [90]
+        elif r == 2: rules[t30] = [89]
+        else:        rules[t30] = star3_high if n == 0 else [88]
+
+    for t, slots in rules.items():
+        if t not in _OMOIDE_BASE and slots:
+            omap[t] = slots
+
+    char['omoide'] = [
+        {'threshold': t, 'slots': omap[t]}
+        for t in sorted(omap)
+        if omap.get(t)
+    ]
+
+
+# ============================================================
 #  PIPELINE — classify + bairitu in-place
 # ============================================================
-def apply_pipeline(characters, chara_ids=None, recal=False):
-    """Apply classify + bairitu to skills in-place.
-    chara_ids: set of character IDs to process; None means process all.
-    recal: if True, always overwrite existing bairitu/bairitu_scaling values."""
+def apply_pipeline(characters, chara_ids=None, recal=False, bd_special=None, bd_special_durations=None):
+    """Apply classify + bairitu to skills in-place; elevate bd_skill to character top level.
+    chara_ids: set of character IDs for skill processing; None means all.
+    recal: if True, always overwrite existing values.
+    bd_special: {char_id: [special_ids]} from page crawl.
+    bd_special_durations: {char_id: {sid: 'Xs'}} from page crawl."""
     table_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'skilllist_table.json')
     skilllist_table = {}
     if os.path.exists(table_path):
@@ -763,8 +1091,27 @@ def apply_pipeline(characters, chara_ids=None, recal=False):
                     e['bairitu_scaling'] = s
                 if recal or 'calc_type' not in e:
                     e['calc_type'] = ct
+                if recal or 'hit_type' not in e:
+                    classify_hit_fields(skill.get('effect', ''), e)
         _compute_element_buff(chara)
         count += 1
+
+    # Elevate bd_skill to character top level for ALL characters
+    for chara in characters:
+        _elevate_bd(chara, recal, bd_special, bd_special_durations)
+
+    # Set omoide_rarity (never overwrite manually-set values like 限定SS=5)
+    _OR_MAP = {4: 4, 3: 3, 2: 2, 1: 1}
+    for chara in characters:
+        if 'omoide_rarity' not in chara:
+            chara['omoide_rarity'] = _OR_MAP.get(chara.get('rarity'), 1)
+
+    # Fill derived omoide slots for all characters
+    templates_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'omoide_templates.json')
+    omoide_templates = load_json(templates_path, {})
+    for chara in characters:
+        fill_omoide_slots(chara, omoide_templates)
+
     return characters, count
 
 
@@ -791,10 +1138,11 @@ def main():
     print("=" * 60)
 
     out_dir            = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    raw_path           = os.path.join(out_dir, RAW_FILE)
     output_path        = os.path.join(out_dir, OUTPUT_FILE)
     progress_path      = os.path.join(out_dir, PROGRESS_FILE)
     senzai_table_path  = os.path.join(out_dir, SENZAI_TABLE_FILE)
+    bd_special_path    = os.path.join(out_dir, BD_SPECIAL_FILE)
+    bd_special_dur_path = os.path.join(out_dir, BD_SPECIAL_DUR_FILE)
     senzai_table       = load_json(senzai_table_path, {})
 
     if args.rerun:
@@ -806,7 +1154,7 @@ def main():
     else:
         progress   = load_json(progress_path, {"completed_data_ids": [], "saved_chara_ids": []})
         completed  = set(progress["completed_data_ids"])
-        characters = load_json(raw_path, [])
+        characters = load_json(output_path, [])
         saved_ids  = set(c["id"] for c in characters)
 
     print(f"Already saved: {len(characters)} characters")
@@ -815,22 +1163,63 @@ def main():
     revise_path = os.path.join(out_dir, "characters_revise.json")
     revise_map  = {c["id"]: c for c in load_json(revise_path, [])}
     if revise_map:
-        print(f"Revise overrides: {len(revise_map)} entries")
-        changed = 0
-        for rid, record in revise_map.items():
-            if rid in char_index:
-                characters[char_index[rid]] = dict(record)
-                changed += 1
-            else:
-                char_index[rid] = len(characters)
-                characters.append(dict(record))
-                saved_ids.add(rid)
-                changed += 1
-        if changed:
-            save_json(raw_path, characters)
-            print(f"Revise applied: {changed} characters updated")
+        print(f"Revise diffs loaded: {len(revise_map)} entries (will apply after classification)")
+        # Migrate old revise entries: move states.xxx.bd_skill → top-level bd_skill
+        migrated = False
+        for r in revise_map.values():
+            states = r.get('states', {})
+            best_bd = None
+            for lbl in ['極弐', '改造', '通常']:
+                bd = states.get(lbl, {}).pop('bd_skill', None)
+                if bd and best_bd is None:
+                    best_bd = bd
+            if best_bd and 'bd_skill' not in r:
+                r['bd_skill'] = best_bd
+                migrated = True
+        if migrated:
+            with open(revise_path, 'w', encoding='utf-8') as f:
+                json.dump(list(revise_map.values()), f, ensure_ascii=False, indent=2)
+            print("  Migrated characters_revise.json: moved bd_skill to character level")
 
     session = requests.Session()
+
+    # Load BD special from cache; re-crawl on --recal/--rerun
+    bd_special = {}
+    bd_special_durations = {}
+    if args.rerun or args.recal:
+        # Build name→sort_id map: exact match + suffix fallback for abbreviated page names
+        _bracket_re = re.compile(r'[【〔（(].*?[】〕）)]')
+        char_name_map = {}
+        for c in characters:
+            base = _bracket_re.sub('', c['name']).strip()
+            sid  = c.get('sort_id', c['id'])
+            char_name_map[base] = sid  # exact
+        # Suffix map: key = any suffix of a base name (>= 4 chars) that isn't already a key
+        _suffix_map = {}
+        for full_name, sid in char_name_map.items():
+            for i in range(1, len(full_name)):
+                suf = full_name[i:]
+                if len(suf) >= 4 and suf not in char_name_map:
+                    if suf in _suffix_map and _suffix_map[suf] != sid:
+                        _suffix_map[suf] = None  # ambiguous
+                    elif suf not in _suffix_map:
+                        _suffix_map[suf] = sid
+        # Merge unambiguous suffix entries
+        for suf, sid in _suffix_map.items():
+            if sid is not None and suf not in char_name_map:
+                char_name_map[suf] = sid
+        print("\nCrawling BD special effect pages...")
+        bd_special, bd_special_durations = crawl_bd_special(session, out_dir,
+                                                             char_name_map=char_name_map)
+        print(f"BD special: {len(bd_special)} characters with special effects")
+    elif os.path.exists(bd_special_path):
+        raw_sp = load_json(bd_special_path, {})
+        bd_special = {int(k): v for k, v in raw_sp.items()}
+        if os.path.exists(bd_special_dur_path):
+            raw_dur = load_json(bd_special_dur_path, {})
+            bd_special_durations = {int(k): {int(sk): sv for sk, sv in v.items()}
+                                    for k, v in raw_dur.items()}
+        print(f"BD special loaded from cache: {len(bd_special)} entries")
 
     try:
         char_list = get_char_list(session)
@@ -846,42 +1235,9 @@ def main():
                 try:
                     list_id = int(c["chara_id"] or c["id"] or 0)
 
-                    if list_id in revise_map:
-                        record = dict(revise_map[list_id])
-                        record.setdefault("sort_id", list_id)
-                        if list_id in char_index:
-                            characters[char_index[list_id]] = record
-                        else:
-                            char_index[list_id] = len(characters)
-                            characters.append(record)
-                        saved_ids.add(list_id)
-                        updated_ids.add(list_id)
-                        completed.add(c["data_id"])
-                        print(f"  [revise] id={list_id}")
-                        save_json(progress_path, {"completed_data_ids": list(completed), "saved_chara_ids": list(saved_ids)})
-                        save_json(raw_path, characters)
-                        continue
-
                     states, latent, final_url = get_char_detail(session, c["url"], senzai_table)
                     m        = re.search(r"/bxb/chara/(\d+)", final_url)
                     final_id = int(m.group(1)) if m else int(c["chara_id"] or c["id"] or 0)
-
-                    if final_id in revise_map:
-                        record = dict(revise_map[final_id])
-                        record.setdefault("sort_id", list_id)
-                        if final_id in char_index:
-                            characters[char_index[final_id]] = record
-                        else:
-                            char_index[final_id] = len(characters)
-                            characters.append(record)
-                        saved_ids.add(final_id)
-                        updated_ids.add(final_id)
-                        completed.add(c["data_id"])
-                        print(f"  [revise] id={final_id} (after redirect)")
-                        save_json(progress_path, {"completed_data_ids": list(completed), "saved_chara_ids": list(saved_ids)})
-                        save_json(raw_path, characters)
-                        time.sleep(REQUEST_DELAY)
-                        continue
 
                     if final_id in saved_ids and not args.rerun:
                         existing_idx = char_index.get(final_id)
@@ -922,7 +1278,7 @@ def main():
 
                     completed.add(c["data_id"])
                     save_json(progress_path, {"completed_data_ids": list(completed), "saved_chara_ids": list(saved_ids)})
-                    save_json(raw_path, characters)
+                    save_json(output_path, characters)
                     time.sleep(REQUEST_DELAY)
 
                 except requests.exceptions.HTTPError as e:
@@ -930,14 +1286,14 @@ def main():
                     if code in (429, 403):
                         print(f"\nRate limited (HTTP {code}). Saving and stopping.")
                         save_json(progress_path, {"completed_data_ids": list(completed), "saved_chara_ids": list(saved_ids)})
-                        save_json(raw_path, characters)
+                        save_json(output_path, characters)
                         print(f"Progress saved. Completed: {len(completed)}")
                         return
                     raise
                 except Exception as e:
                     print(f"  error: {e}")
                     save_json(progress_path, {"completed_data_ids": list(completed), "saved_chara_ids": list(saved_ids)})
-                    save_json(raw_path, characters)
+                    save_json(output_path, characters)
                     raise
 
         # ── Phase 2: classify + bairitu ──
@@ -949,7 +1305,43 @@ def main():
             if "sort_id" not in c:
                 c["sort_id"] = c.get("id", 0)
         characters.sort(key=lambda x: x.get("sort_id", x.get("id", 0)), reverse=True)
-        output, count = apply_pipeline(copy.deepcopy(characters), pipeline_ids, recal=(args.recal or args.rerun))
+        output, count = apply_pipeline(copy.deepcopy(characters), pipeline_ids,
+                                       recal=(args.recal or args.rerun), bd_special=bd_special,
+                                       bd_special_durations=bd_special_durations)
+
+        # ── Phase 3: apply revise diffs on top of classified output ──
+        if revise_map:
+            def deep_update(target, patch):
+                for k, v in patch.items():
+                    if k == "id":
+                        continue
+                    tv = target.get(k)
+                    # Sparse array diff: target is list, patch is dict with all-numeric keys
+                    if isinstance(tv, list) and isinstance(v, dict) and v and \
+                            all(isinstance(kk, str) and kk.isdigit() for kk in v.keys()):
+                        for ki, pi in v.items():
+                            idx = int(ki)
+                            if idx >= len(tv):
+                                continue
+                            if isinstance(pi, dict) and isinstance(tv[idx], dict):
+                                deep_update(tv[idx], pi)
+                            else:
+                                tv[idx] = pi
+                    elif isinstance(v, dict) and isinstance(tv, dict):
+                        deep_update(tv, v)
+                    else:
+                        target[k] = v
+            out_idx = {c["id"]: i for i, c in enumerate(output)}
+            patched = 0
+            for rid, record in revise_map.items():
+                if rid in out_idx:
+                    deep_update(output[out_idx[rid]], record)
+                    patched += 1
+                else:
+                    print(f"  [revise] id={rid} not found in output, skipping")
+            if patched:
+                print(f"Revise diffs applied: {patched} characters patched")
+
         save_json(output_path, output)
         save_senzai_table(senzai_table_path, senzai_table)
         print(f"Done! {len(output)} characters saved to {OUTPUT_FILE} ({count} recalculated)")
@@ -959,7 +1351,7 @@ def main():
         print("\nInterrupted. Saving progress...")
         save_json(progress_path, {"completed_data_ids": list(completed), "saved_chara_ids": list(saved_ids)})
         characters.sort(key=lambda x: x.get("sort_id", x.get("id", 0)), reverse=True)
-        save_json(raw_path, characters)
+        save_json(output_path, characters)
         print(f"Saved {len(completed)} completed, {len(characters)} characters.")
 
     except Exception as e:

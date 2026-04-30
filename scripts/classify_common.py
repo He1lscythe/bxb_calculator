@@ -23,7 +23,7 @@ _WEAPON_NAMES_PAT = '|'.join(re.escape(w) for w in _WEAPONS_LIST)
 STATUS_WORDS = ['勇気分解', '即死', '麻痺', 'スタン', 'BlazeLock', '行動不能', '割合ダメージ']
 
 _HUSHIN   = re.compile(r'残HPが多いほど|HP残量が多いほど|残りHP(?:が)?多いほど|損傷率が低いほど')
-_HAISUI   = re.compile(r'残HPが少ないほど|HP残量が少ないほど|残りHP(?:が)?少ないほど|HPが少ないほど|損傷率が高いほど|HPを消耗するほど|HPが消耗するほど')
+_HAISUI   = re.compile(r'残HPが少ないほど|HP残量が少ないほど|残りHP(?:が)?少ないほど|HPが少ないほど|損傷率が高いほど|HPを消耗するほど|HPが消耗するほど|残HPが低いほど|HPが低いほど')
 _BROKEN   = re.compile(r'破損状態')
 _HP_COST  = re.compile(r'HPを.{0,6}消費|HPを.{0,6}犠牲')  # HP used as cost, not buff
 
@@ -101,7 +101,7 @@ BUNRUI_KEYWORDS = {
     4:  ['スピード', '行動速度', '速度'],
     5:  ['モーション速度', '攻撃モーション'],
     6:  ['ブレイズゲージ', 'Bゲージ', 'BDゲージ'],
-    7:  ['ヒット数', 'Hit数'],
+    7:  ['ヒット数', 'Hit数', 'HIT数'],
     10: ['HP'],
     11: ['HP回復'],
     12: ['防御力'],
@@ -334,7 +334,7 @@ def classify_effect(effect):
         bunrui.add(7)
     if 'B.D.攻撃力' in e or 'BD攻撃力' in e: bunrui.add(3)
     e_no_bd = e.replace('B.D.攻撃力', '__BD__').replace('BD攻撃力', '__BD__')
-    if re.search(r'攻撃(?!モーション|範囲|時|ヒット)', e_no_bd): bunrui.add(1)
+    if re.search(r'攻撃力|攻撃と|攻撃・', e_no_bd): bunrui.add(1)
     if 'ブレイク力' in e:           bunrui.add(2)
     if re.search(r'(B\.D\.|BD)ゲージの(上昇|溜)', e): bunrui.add(6)
     if re.search(r'ブレイズゲージ(が|を|の回復)', e):  bunrui.add(6)
@@ -389,17 +389,27 @@ def classify_skill_v2(skill, lookup_table, cat_to_bunrui):
 
     scope_info = _detect_scope(effect, mode='soul')
 
-    # For 代償 (sacrifice) skills: cost part (before 代償) always condition=0;
-    # benefit condition detected from text after 代償 only.
-    if '代償' in effect:
-        daish_idx    = effect.index('代償')
-        cost_text    = effect[:daish_idx]
-        benefit_text = effect[daish_idx + len('代償'):]
+    # For 代償/犠牲 skills: find the earlier split word;
+    # cost bunruis (from text before split) use cond=0 and extract bairitu from cost text only.
+    _cost_split = None
+    for _cw in ('代償', '犠牲'):
+        _idx = effect.find(_cw)
+        if _idx >= 0 and (_cost_split is None or _idx < _cost_split[0]):
+            _cost_split = (_idx, _cw)
+
+    if _cost_split:
+        _sidx, _cw  = _cost_split
+        cost_text    = effect[:_sidx]
+        benefit_text = effect[_sidx + len(_cw):]
         cost_bunruis = set(classify_effect(cost_text)['bunrui'])
         condition    = _detect_condition(benefit_text)
+        normed_cost  = norm(unicodedata.normalize('NFKC', cost_text))
     else:
+        cost_text    = ''
+        benefit_text = effect
         cost_bunruis = set()
         condition    = _detect_condition(effect)
+        normed_cost  = normed
 
     def _make_entry(b):
         sc = scope_info['scope']
@@ -411,7 +421,9 @@ def classify_skill_v2(skill, lookup_table, cat_to_bunrui):
         ty = _fmt_list(scope_info['types'])
         if el is not None: ent['element'] = el
         if ty is not None: ent['type']    = ty
-        v, ct = _val_for_bunrui(normed, b)
+        # For cost bunruis, extract bairitu from cost text only (avoids picking up benefit values)
+        src_text = normed_cost if b in cost_bunruis else normed
+        v, ct = _val_for_bunrui(src_text, b)
         ent['bairitu'] = round(v, 6) if v is not None else _bairitu_default([b])
         ent['calc_type'] = ct if ct is not None else (1 if b in ADD_BUNRUI else 0)
         return ent
@@ -468,8 +480,9 @@ def classify_skill_chara(skill, lookup_table, cat_to_bunrui):
         if b is not None:
             covered.add(b)
 
-    # Step 2: keyword scan supplement
-    for b in classify_effect(effect)['bunrui']:
+    # Step 2: keyword scan supplement — save result for veto use
+    kw_result = set(classify_effect(effect)['bunrui'])
+    for b in kw_result:
         covered.add(b)
 
     # Fallback only when both steps found nothing
@@ -485,6 +498,48 @@ def classify_skill_chara(skill, lookup_table, cat_to_bunrui):
     # Veto: BD攻撃力 (3) subsumes 攻撃力 (1) — drop 1 when 3 is present
     if 3 in covered:
         covered.discard(1)
+
+    # Veto: lookup-table may mis-tag ヒット数UP skills as 攻撃力UP (1).
+    # If 7 is present and the effect text contains no 攻撃力 keyword, drop 1.
+    if 7 in covered and 1 in covered and not re.search(r'攻撃力', effect):
+        covered.discard(1)
+
+    # Veto: drop lookup-only 16 (その他) when keyword found specific bunruis.
+    # Lookup tags vague/DOWN skills as 16; prefer the more specific keyword result.
+    if 16 in covered and covered - {16} and 16 not in kw_result:
+        covered.discard(16)
+
+    # Veto: drop lookup-only 10 (HP) when keyword found 12 (防御力) but not 10.
+    # Lookup sometimes mis-tags defense skills as HP.
+    if 10 in covered and 12 in covered and 10 not in kw_result:
+        covered.discard(10)
+
+    # Veto: drop lookup-only 12 (防御力) when effect has no 防御力 keyword.
+    # altema sometimes mis-tags attack-only skills as 防御力UP.
+    if 12 in covered and 12 not in kw_result and covered - {12} and '防御力' not in effect:
+        covered.discard(12)
+
+    # Veto: drop lookup-only 18 (BD最大値) when effect has no ゲージの最大値 keyword.
+    # altema sometimes mis-tags BDゲージ-up skills (最大Nゲージ = max increase) as 最大値UP.
+    if 18 in covered and 18 not in kw_result and covered - {18} and 'ゲージの最大値' not in effect:
+        covered.discard(18)
+
+    # Generic veto: drop lookup-only specific bunrui when effect text lacks supporting keywords.
+    # Only fires when keyword scan also didn't pick it up AND there are other bunruis in covered.
+    _keyword_guards = [
+        (1,  r'攻撃力|攻撃と|攻撃・'),  # 攻撃モーションが加速 → kw=5, lookup=1
+        (7,  r'ヒット数|Hit数|HIT数'),   # 攻撃モーションが加速 → kw=5, lookup=7
+        (17, r'ダメージ上限'),            # 記憶結晶経験値UP → kw=20, lookup=17
+        (19, r'記憶結晶枠'),              # 記憶結晶経験値UP → kw=20, lookup=19
+    ]
+    for vb, kw_pat in _keyword_guards:
+        if vb in covered and vb not in kw_result and covered - {vb} and not re.search(kw_pat, effect):
+            covered.discard(vb)
+
+    # Veto: B.D.コスト skills are bunrui=16 (その他), not BDゲージ回復(6).
+    # altema mis-tags some BDコスト skills as ブレイズゲージ回復.
+    if 6 in covered and 16 in covered and re.search(r'B\.D\.コスト|BDコスト', effect):
+        covered.discard(6)
 
     final_scope = scope_info['scope']
     if final_scope == 0 and (6 in covered or 18 in covered):
@@ -506,3 +561,68 @@ def classify_skill_chara(skill, lookup_table, cat_to_bunrui):
     else:
         effects[0].update(entry)
     return skill
+
+
+def classify_hit_fields(effect_text, ent, is_bd=False):
+    """Add hit_type and hit_per_stage to bunrui=7 effect entries.
+    hit_type: 0=減衰なし加算  1=ダメージ維持加算  2=乗算  3=設定値
+    hit_per_stage: [stage1, stage2, stage3]
+      - type 0/1: int delta per stage (0=no change)
+      - type 2: float multiplier per stage (same value, e.g. [2.5, 2.5, 2.5])
+      - type 3: int absolute value per stage
+    is_bd: BD skill — when no それぞれ, distribute total hits evenly (n//3 per stage)
+    """
+    if 7 not in (ent.get('bunrui') or []):
+        return
+    text = unicodedata.normalize('NFKC', effect_text)
+    bairitu_val = ent.get('bairitu') or 0
+    n = int(round(bairitu_val))
+
+    # "ヒット数を代償に" = hit count itself is the sacrifice (exchange type)
+    is_hit_exchange = 'ヒット数を代償' in text
+
+    # hit_type
+    if 'ダメージ減衰なし' in text:
+        hit_type = 0
+    elif '合計ダメージ維持' in text or 'ダメージ維持' in text:
+        hit_type = 1
+    elif 'それぞれ1にする' in text or '1にする代わり' in text or 'ヒット数を1' in text:
+        hit_type = 3
+    elif is_hit_exchange:
+        hit_type = 3
+    elif ent.get('calc_type') == 0:
+        hit_type = 2  # multiplicative (e.g. 2.5倍にする, 66%UP)
+    else:
+        hit_type = 0
+
+    # hit_per_stage
+    if hit_type == 3 and is_hit_exchange:
+        hit_per_stage = [1, 1, 0]
+    elif hit_type == 3:
+        hit_per_stage = [1, 1, 1]
+    elif hit_type == 2:
+        hit_per_stage = [bairitu_val, bairitu_val, bairitu_val]
+    elif '第三撃のみ' in text or '3撃目のみ' in text:
+        hit_per_stage = [0, 0, n]
+    elif re.search(r'1撃目.*2撃目.*3撃目', text):
+        # All three stages explicitly listed → each gets +n
+        hit_per_stage = [n, n, n]
+    elif re.search(r'1撃目.*ヒット|全体.*1撃目.*ヒット', text):
+        m = re.search(r'[+＋](\d+)', text[text.index('1撃目'):])
+        v = int(m.group(1)) if m else n
+        hit_per_stage = [v, 0, 0]
+    elif re.search(r'2撃目.*ヒット|全体.*2撃目.*ヒット', text):
+        m = re.search(r'[+＋](\d+)', text[text.index('2撃目'):])
+        v = int(m.group(1)) if m else n
+        hit_per_stage = [0, v, 0]
+    else:
+        # BD skills without それぞれ: total hits split evenly across 3 stages
+        if is_bd and 'それぞれ' not in text:
+            s = n // 3
+            hit_per_stage = [s, s, s]
+        else:
+            hit_per_stage = [n, n, n]
+
+    ent['hit_type'] = hit_type
+    ent['hit_per_stage'] = hit_per_stage
+

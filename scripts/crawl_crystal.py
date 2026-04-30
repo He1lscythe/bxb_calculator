@@ -10,6 +10,7 @@
 
 import argparse, requests, json, re, os, html as htmlmod
 from bs4 import BeautifulSoup
+from classify_common import classify_hit_fields
 
 CRYSTAL_ADD_BUNRUI = {6, 7, 9, 11, 16, 17, 19}
 
@@ -174,6 +175,7 @@ def parse_row(row):
         v = fields.get(k)
         if v is not None:
             crystal[k] = v
+    classify_hit_fields(effect_text, effect_ent)
     crystal['effects'] = [effect_ent]
     return crystal
 
@@ -197,17 +199,39 @@ def main():
     crystals = [c for row in rows if (c := parse_row(row))]
     print(f"Parsed {len(crystals)} crystals")
 
+    def deep_update(target, patch):
+        for k, v in patch.items():
+            if k == 'id':
+                continue
+            tv = target.get(k)
+            # Sparse array diff: target is list, patch is dict with all-numeric keys
+            if isinstance(tv, list) and isinstance(v, dict) and v and \
+                    all(isinstance(kk, str) and kk.isdigit() for kk in v.keys()):
+                for ki, pi in v.items():
+                    idx = int(ki)
+                    if idx >= len(tv):
+                        continue
+                    if isinstance(pi, dict) and isinstance(tv[idx], dict):
+                        deep_update(tv[idx], pi)
+                    else:
+                        tv[idx] = pi
+            elif isinstance(v, dict) and isinstance(tv, dict):
+                deep_update(tv, v)
+            else:
+                target[k] = v
     if os.path.exists(revise_path):
         with open(revise_path, encoding='utf-8') as f:
             revise_map = {c['id']: c for c in json.load(f)}
         if revise_map:
             idx_map = {c['id']: i for i, c in enumerate(crystals)}
+            patched = 0
             for rid, record in revise_map.items():
                 if rid in idx_map:
-                    crystals[idx_map[rid]] = record
+                    deep_update(crystals[idx_map[rid]], record)
+                    patched += 1
                 else:
-                    crystals.append(record)
-            print(f"Applied {len(revise_map)} revise overrides")
+                    print(f"  [revise] id={rid} not found in crystals, skipping")
+            print(f"Applied {patched} revise patches")
 
     with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(crystals, f, ensure_ascii=False, indent=2)
