@@ -26,7 +26,7 @@ from classify_common import (
 )
 
 # ── Load data ───────────────────────────────────────────────────────────────
-chars = json.load(open(os.path.join(BASE_DIR, 'characters_classified.json'), encoding='utf-8'))
+chars = json.load(open(os.path.join(BASE_DIR, 'characters.json'), encoding='utf-8'))
 table = json.load(open(os.path.join(BASE_DIR, 'skilllist_table.json'), encoding='utf-8'))
 
 ELEMENT_NAMES = {v: k for k, v in ELEMENT_MAP.items()}

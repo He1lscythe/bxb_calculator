@@ -64,6 +64,7 @@ input[type=number] { -moz-appearance: textfield; }
 
 .row-name { flex: 1; font-size: 13px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
 .row-bunrui { display: flex; gap: 3px; flex-shrink: 0; }
+.row-bairitu { font-size: 11px; font-weight: 700; color: var(--accent); white-space: nowrap; flex-shrink: 0; padding: 1px 6px; border-radius: 4px; background: rgba(91,127,255,.12); border: 1px solid rgba(91,127,255,.3); }
 .expand-btn { background: none; border: none; color: var(--text2); font-size: 13px; cursor: pointer; padding: 2px 4px; flex-shrink: 0; line-height: 1; transition: transform .2s; }
 .bg-row.expanded .expand-btn { transform: rotate(180deg); }
 
@@ -116,6 +117,8 @@ input[type=number] { -moz-appearance: textfield; }
 
 <div id="page-wrap">
 <script src="nav.js"></script>
+<script src="shared/filter-core.js"></script>
+<script src="shared/bg-spec.js"></script>
 <div id="content">
   <div id="filters">
     <input type="text" id="search" placeholder="🔍 心象結晶名で検索..." oninput="applyFilters()">
@@ -314,23 +317,11 @@ function resetFilters() {
 
 
 function applyFilters() {
-  var q = document.getElementById('search').value.trim().toLowerCase();
-  filteredBG = allBG.filter(function(c) {
-    if (q && c.name.toLowerCase().indexOf(q) === -1) return false;
-    if (filterSets.rarity.size  && !filterSets.rarity.has(c.rarity)) return false;
-    if (filterSets.element.size && !filterSets.element.has(cardElement(c))) return false;
-    if (filterSets.weapon.size) {
-      var cw = cardWeapon(c);
-      var pass = Array.from(filterSets.weapon).some(function(v){ return v === 0 ? cw === 0 : cw === v; });
-      if (!pass) return false;
-    }
-    if (filterSets.bunrui.size && !Array.from(filterSets.bunrui).some(function(v) {
-      return (c.effects||[]).some(function(e) { return (e.bunrui||[]).indexOf(v) !== -1; });
-    })) return false;
-    if (filterSets.scope.size && !Array.from(filterSets.scope).some(function(v) { return (c.effects||[]).some(function(e) { return e.scope === v; }); })) return false;
-    if (filterSets.condition.size && !Array.from(filterSets.condition).some(function(v) { return (c.effects||[]).some(function(e) { return e.condition === v; }); })) return false;
-    return true;
-  });
+  var q = document.getElementById('search').value.trim();
+  filteredBG = FilterCore.applyFilters(allBG, {
+    q: q,
+    filters: filterSets,
+  }, BG_SPEC);
   document.getElementById('bg-count').textContent = filteredBG.length + ' 件';
   expandedIds.clear();
   editingId = null;
@@ -343,6 +334,15 @@ function renderList() {
   var list = document.getElementById('bg-list');
   if (!filteredBG.length) { list.innerHTML = '<div class="no-results">該当なし</div>'; return; }
   list.innerHTML = filteredBG.map(renderRow).join('');
+}
+
+function fmtRowBairitu(c) {
+  var parts = [];
+  (c.effects||[]).forEach(function(e) {
+    if (e.bairitu == null) return;
+    parts.push((e.calc_type === 1 ? '+' : '×') + fmtNum(e.bairitu));
+  });
+  return parts.length ? '<span class="row-bairitu">' + parts.join(' / ') + '</span>' : '';
 }
 
 function renderRow(c) {
@@ -361,6 +361,7 @@ function renderRow(c) {
       '<div class="row-badges">' + rb + eb + wb + s5b + timeb + '</div>' +
       '<div class="row-name">' + escHtml(c.name) + '</div>' +
       '<div class="row-bunrui">' + bt + '</div>' +
+      fmtRowBairitu(c) +
       '<button class="expand-btn" onclick="event.stopPropagation();toggleExpand(' + c.id + ')">▾</button>' +
     '</div>' +
     '<div class="bg-body" id="body-' + c.id + '"></div>' +
@@ -554,6 +555,13 @@ function saveEdit() {
     row.querySelector('.row-badges').innerHTML = rb + eb + wb + s5b + timeb;
     row.querySelector('.row-name').textContent = c.name;
     row.querySelector('.row-bunrui').innerHTML = bt;
+    var oldBairitu = row.querySelector('.row-bairitu');
+    if (oldBairitu) oldBairitu.remove();
+    var newBairituHtml = fmtRowBairitu(c);
+    if (newBairituHtml) {
+      var btn = row.querySelector('.expand-btn');
+      btn.insertAdjacentHTML('beforebegin', newBairituHtml);
+    }
   }
   if (body) { body.className = 'bg-body'; if(c) body.innerHTML = renderDetailBody(c); }
   if (row)  row.classList.add('expanded');

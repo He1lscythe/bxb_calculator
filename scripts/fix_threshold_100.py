@@ -6,7 +6,6 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 FILES = [
     ('characters.json',            True),
-    ('characters_classified.json', True),
     ('characters_revise.json',     False),
 ]
 

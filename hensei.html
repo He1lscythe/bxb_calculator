@@ -8,8 +8,9 @@
 :root{--bg:#0f1117;--bg2:#1a1d27;--bg3:#22263a;--border:#2e3250;--text:#e0e4f0;--text2:#8890b0;--accent:#5b7fff;
   --fire:#ff5533;--water:#3388ff;--wind:#44cc66;--light:#ffcc00;--dark:#aa55ff;--none:#888899;}
 *{box-sizing:border-box;margin:0;padding:0;}
+button{-webkit-user-select:text;user-select:text;}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',sans-serif;font-size:14px;min-height:100vh;display:flex;justify-content:center;}
-#page-wrap{max-width:72rem;width:100%;display:flex;flex-direction:column;}
+#page-wrap{max-width:72rem;width:100%;display:flex;flex-direction:column;min-height:100svh;}
 
 /* team size bar */
 #team-size-bar{display:flex;gap:8px;padding:10px 16px;background:var(--bg2);border-bottom:1px solid var(--border);align-items:center;flex-shrink:0;}
@@ -256,17 +257,67 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
   .ftog{font-size:10px;padding:2px 4px;}
   .em-soul-elem{display:none;}
 }
+/* ===== TRAINING PANEL ===== */
+.training-wrap{background:rgba(0,0,0,.18);border:1px solid var(--border);border-radius:7px;padding:8px 10px;display:flex;flex-direction:column;gap:7px;margin-top:2px;}
+.training-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.tr-label{font-size:10px;font-weight:700;color:var(--text2);white-space:nowrap;}
+.tr-num{display:flex;align-items:center;gap:3px;}
+.tr-input{width:36px;padding:3px 4px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;text-align:center;outline:none;}
+.tr-input:focus{border-color:var(--accent);}
+.tr-input::-webkit-inner-spin-button,.tr-input::-webkit-outer-spin-button{display:none;}
+.tr-input{-moz-appearance:textfield;}
+.tr-max{font-size:10px;color:var(--text2);}.tr-slider{flex:1;min-width:60px;accent-color:var(--accent);cursor:pointer;height:18px;}
+.tr-slider:disabled{opacity:.35;cursor:default;}
+.tr-lvval{width:36px;padding:3px 4px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--accent);font-size:13px;font-weight:700;text-align:center;outline:none;-moz-appearance:textfield;}
+.tr-lvval:focus{border-color:var(--accent);}
+.tr-lvval::-webkit-inner-spin-button,.tr-lvval::-webkit-outer-spin-button{display:none;}
+.tr-btns{display:flex;gap:2px;}
+.tr-btn{font-size:10px;padding:2px 3px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all .1s;white-space:nowrap;}
+.tr-btn:hover{border-color:var(--accent);color:var(--text);}
+.tr-btn.on{background:rgba(91,127,255,.25);border-color:var(--accent);color:#7b9fff;font-weight:700;}
+.tr-btn.on-fire{background:rgba(255,85,34,.2);border-color:var(--fire);color:var(--fire);}
+
+/* ===== MOBILE SLOT FLIP ===== */
+@keyframes mobFlipOutL{from{transform:rotateY(0);opacity:1}to{transform:rotateY(-90deg);opacity:0}}
+@keyframes mobFlipOutR{from{transform:rotateY(0);opacity:1}to{transform:rotateY(90deg);opacity:0}}
+@keyframes mobFlipInR{from{transform:rotateY(90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
+@keyframes mobFlipInL{from{transform:rotateY(-90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
+@media(max-width:760px){
+  #slots-grid{perspective:700px;display:flex;flex-direction:column;flex:1;padding:8px;gap:0;}
+  .slot-card:not(.mob-hidden){flex:1;}
+  .slot-card.mob-hidden{display:none;}
+  .slot-card.mob-anim-outL{animation:mobFlipOutL .2s ease-in forwards;}
+  .slot-card.mob-anim-outR{animation:mobFlipOutR .2s ease-in forwards;}
+  .slot-card.mob-anim-inR{animation:mobFlipInR .2s ease-out forwards;}
+  .slot-card.mob-anim-inL{animation:mobFlipInL .2s ease-out forwards;}
+}
+#mobile-slot-indicator{display:none;justify-content:center;align-items:center;gap:12px;padding:8px 0 4px;}
+@media(max-width:760px){#mobile-slot-indicator{display:flex;}}
+.msi-dot{width:9px;height:9px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s,transform .2s;flex-shrink:0;}
+.msi-dot.active{background:var(--accent);transform:scale(1.4);}
+.msi-dot.mob-disabled{opacity:.25;cursor:default;}
 </style>
 </head>
 <body>
 <div id="page-wrap">
 <script src="nav.js"></script>
+<script src="shared/filter-core.js"></script>
+<script src="shared/chara-spec.js"></script>
+<script src="shared/soul-spec.js"></script>
+<script src="shared/crystal-spec.js"></script>
+<script src="shared/bg-spec.js"></script>
 
 <div id="team-size-bar">
   <span class="ts-label">編成</span>
   <button class="size-btn"        data-n="1" onclick="setTeamSize(1)">1体</button>
   <button class="size-btn"        data-n="2" onclick="setTeamSize(2)">2体</button>
   <button class="size-btn active" data-n="3" onclick="setTeamSize(3)">3体</button>
+</div>
+
+<div id="mobile-slot-indicator">
+  <div class="msi-dot" onclick="msiClick(0)"></div>
+  <div class="msi-dot" onclick="msiClick(1)"></div>
+  <div class="msi-dot" onclick="msiClick(2)"></div>
 </div>
 
 <div id="loading">データを読み込んでいます...</div>
@@ -325,15 +376,64 @@ const COND_LBL = {1:'浑身',2:'背水',3:'破損'};
 
 let allCharas=[], allSouls=[], allBGs=[], allCrystals=[];
 let teamSize=3;
-let team=[0,1,2].map(()=>({chara:null,soul:null,bg:null,crystals:[]}));
+function mkTr(){return {state:'通常',jukudo:1,awakening:0,marriage:0,moeshin:false,lp:0,level:1};}
+let team=[0,1,2].map(()=>({chara:null,soul:null,bg:null,crystals:[],tr:mkTr()}));
 
+const JUKUDO_MAX_TBL={4:{通常:60,改造:99},3:{通常:50,改造:75,極弐:90},2:{通常:30,改造:45,極弐:70},1:{通常:10,改造:25,極弐:50}};
+const LEVEL_MAX_TBL ={4:{通常:250,改造:255},3:{通常:200,改造:215,極弐:230},2:{通常:150,改造:155,極弐:180},1:{通常:60,改造:99,極弐:120}};
+const LEVEL_1JUK_TBL={4:{通常:60,改造:70},3:{通常:40,改造:50,極弐:65},2:{通常:30,改造:35,極弐:60},1:{通常:15,改造:20,極弐:35}};
+const AWAKENING_MAX_TBL={4:9,3:14,2:36,1:24};
+
+
+function deepApply(target, patch) {
+  for (var k in patch) {
+    if (k === 'id') continue;
+    var pv = patch[k], tv = target[k];
+    if (Array.isArray(tv) && pv && typeof pv === 'object' && !Array.isArray(pv) &&
+        Object.keys(pv).every(kk => /^\d+$/.test(kk))) {
+      for (var idx in pv) {
+        var i = +idx;
+        if (i >= tv.length) continue;
+        var pvi = pv[idx];
+        if (pvi && typeof pvi === 'object' && !Array.isArray(pvi) &&
+            tv[i] && typeof tv[i] === 'object' && !Array.isArray(tv[i])) {
+          deepApply(tv[i], pvi);
+        } else {
+          tv[i] = JSON.parse(JSON.stringify(pvi));
+        }
+      }
+    } else if (pv !== null && typeof pv === 'object' && !Array.isArray(pv) &&
+        tv !== null && typeof tv === 'object' && !Array.isArray(tv)) {
+      deepApply(tv, pv);
+    } else {
+      target[k] = JSON.parse(JSON.stringify(pv));
+    }
+  }
+}
+
+function _applyRevise(arr, revise) {
+  if (!Array.isArray(revise)) return;
+  const idx = new Map(arr.map((c, i) => [c.id, i]));
+  revise.forEach(r => {
+    const i = idx.get(r.id);
+    if (i != null) deepApply(arr[i], r);
+  });
+}
 
 Promise.all([
-  fetch('./characters_classified.json').then(r=>r.json()),
+  fetch('./characters.json').then(r=>r.json()),
   fetch('./souls.json').then(r=>r.json()),
   fetch('./bladegraph.json').then(r=>r.json()),
   fetch('./crystals.json').then(r=>r.json()),
-]).then(([ch,so,bg,cr])=>{
+  fetch('./characters_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('./omoide_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('./souls_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('./crystals_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+]).then(([ch,so,bg,cr, chRev, omRev, soRev, crRev])=>{
+  _applyRevise(ch, chRev);
+  _applyRevise(ch, omRev);
+  _applyRevise(so, soRev);
+  _applyRevise(cr, crRev);
   allCharas=ch.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
   allSouls=so.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
   allBGs=bg.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
@@ -341,6 +441,7 @@ Promise.all([
   document.getElementById('loading').style.display='none';
   document.getElementById('slots-grid').style.display='grid';
   renderAll();
+  updateMobVisible();
 }).catch(()=>{
   document.getElementById('loading').textContent='データ読み込み失敗。start.py を起動してください。';
 });
@@ -357,7 +458,28 @@ function fmtLarge(n){
   if(a>=10000)return(Math.round(n/10000*10)/10)+'万';
   return n.toLocaleString('en-US');
 }
+function fmtHitStages(ef){
+  const hps = Array.isArray(ef.hit_per_stage)?ef.hit_per_stage:[];
+  const sca = Array.isArray(ef.hit_per_stage_scaling)?ef.hit_per_stage_scaling:[0,0,0];
+  if(!hps.length) return '';
+  const ht = ef.hit_type!=null?ef.hit_type:0;
+  const op = ht===2?'×':(ht===3?'=':'+');
+  function stageStr(v,s){return op+v+(s?'(+'+s+'/熟度)':'');}
+  const s0=sca[0]||0,s1=sca[1]||0,s2=sca[2]||0;
+  if(hps.length===3 && hps[0]!==0 && hps[0]===hps[1] && hps[1]===hps[2] && s0===s1 && s1===s2){
+    return stageStr(hps[0], s0);
+  }
+  const parts = hps.map((v,i)=>{
+    if(v==null||v===0) return null;
+    return (i+1)+'撃'+stageStr(v, sca[i]||0);
+  }).filter(Boolean);
+  return parts.join(' / ');
+}
+
 function fmtVal(ef){
+  const bunrui = ef.bunrui || [];
+  const isHitOnly = bunrui.length===1 && bunrui[0]===7;
+  if(isHitOnly) return fmtHitStages(ef);
   let v;
   if(ef.calc_type===1){
     v='+'+fmtLarge(ef.bairitu);
@@ -367,6 +489,10 @@ function fmtVal(ef){
     const lo=ef.bairitu_init,hi=ef.bairitu;
     v=(lo!=null&&lo!==hi)?xfmt(lo)+'〜'+xfmt(hi):xfmt(hi);
     if(ef.bairitu_scaling)v+=' + x'+ef.bairitu_scaling+'×熟度';
+  }
+  if(bunrui.includes(7)){
+    const hitStr = fmtHitStages(ef);
+    if(hitStr) v += ' / ' + hitStr;
   }
   return v;
 }
@@ -384,6 +510,26 @@ function renderEfRow(ef){
   const cond=COND_LBL[ef.condition]?`<span class="tag-cond">${COND_LBL[ef.condition]}</span>`:'';
   return`<div class="eftags">${btags}<span class="tag-val">${fmtVal(ef)}</span>${fmtScopeTag(ef)}${cond}</div>`;
 }
+function _resolveCharaSkills(c){
+  if(!c||!c.states) return [];
+  let stateLabel=null, state=null;
+  for(const s of ['極弐','改造','通常']){
+    if(c.states[s]){ stateLabel=s; state=c.states[s]; break; }
+  }
+  if(!state) return [];
+  const dead = new Set(Array.isArray(c._deleted_skills)?c._deleted_skills:[]);
+  const base = (state.skills||[]).filter(sk=>!dead.has(sk.name||''));
+  const added = (c._added_skills && c._added_skills[stateLabel]) || [];
+  return base.concat(added);
+}
+function _resolveSoulSkills(s){
+  if(!s) return [];
+  const dead = new Set(Array.isArray(s._deleted_skills)?s._deleted_skills:[]);
+  const base = (s.skills||[]).filter(sk=>!dead.has(sk.name||''));
+  const added = Array.isArray(s._added_skills)?s._added_skills:[];
+  return base.concat(added);
+}
+
 function renderSkillsPanel(skills){
   if(!skills?.length)return'';
   const rows=skills.map(sk=>{
@@ -429,6 +575,8 @@ function setTeamSize(n){
   teamSize=n;
   document.querySelectorAll('.size-btn').forEach(b=>b.classList.toggle('active',+b.dataset.n===n));
   for(let i=0;i<3;i++)document.getElementById('slot-'+i).classList.toggle('disabled',i>=n);
+  if(isMob()&&mobileActiveSlot>=n){mobileActiveSlot=n-1;updateMobVisible();}
+  else if(isMob())updateMobIndicator();
 }
 function setChara(si,id){
   if(id===null){team[si].chara=null;team[si].soul=null;team[si].crystals=[];renderSlot(si);return;}
@@ -455,13 +603,80 @@ function setBG(si,id){
   renderSlot(si);
 }
 function setCrystal(si,ci,id){team[si].crystals[ci]=id;renderSlot(si);}
-function clearSlot(si){team[si]={chara:null,soul:null,bg:null,crystals:[]};renderSlot(si);}
+function clearSlot(si){team[si]={chara:null,soul:null,bg:null,crystals:[],tr:mkTr()};renderSlot(si);}
+
+function setTrField(si,key,val){team[si].tr[key]=val;renderSlot(si);}
+function setJukudoSlider(si,val){
+  const sl=document.getElementById('tr-jkslider-'+si);
+  const max=sl?+sl.max:99;
+  const inp=document.getElementById('tr-jkinput-'+si);
+  if(inp)inp.value=val;
+  setTrNum(si,'jukudo',val,max);
+}
+function setTrNum(si,key,val,max){
+  const minVal=key==='jukudo'?1:0;
+  team[si].tr[key]=Math.min(max,Math.max(minVal,+val||minVal));
+  if(key==='jukudo'){const jksl=document.getElementById('tr-jkslider-'+si);if(jksl)jksl.value=team[si].tr[key];}
+  const c=allCharas.find(x=>x.id===team[si].chara); if(!c)return;
+  const r=c.rarity,tr=team[si].tr;
+  const lev1=LEVEL_1JUK_TBL[r]?.[tr.state],levMax=LEVEL_MAX_TBL[r]?.[tr.state];
+  if(lev1==null||levMax==null)return;
+  const jk=Math.min(tr.jukudo,JUKUDO_MAX_TBL[r]?.[tr.state]??0);
+  const base=jk===0?lev1-5:Math.min(levMax,lev1+(jk-1)*5);
+  const newCap=base+tr.awakening*5;
+  const slider=document.getElementById('tr-lvslider-'+si);
+  if(slider){slider.max=newCap;if(tr.level>newCap){tr.level=newCap;slider.value=newCap;}
+    const lvval=document.getElementById('tr-lvval-'+si);if(lvval){lvval.max=newCap;lvval.value=slider.value;}
+    const lvcapslider=document.getElementById('tr-lvcapslider-'+si);if(lvcapslider)lvcapslider.textContent=' / '+newCap;}
+}
+function setLevel(si,val){team[si].tr.level=+val;const el=document.getElementById('tr-lvval-'+si);if(el)el.value=val;}
+function setLevelInput(si,val){const sl=document.getElementById('tr-lvslider-'+si);const max=sl?+sl.max:999;const v=Math.min(max,Math.max(1,+val||1));team[si].tr.level=v;const inp=document.getElementById('tr-lvval-'+si);if(inp)inp.value=v;if(sl)sl.value=v;}
+function renderTraining(i,chara){
+  if(!chara)return'';
+  const r=chara.rarity,tr=team[i].tr;
+  const stOpts=r===4?['通常','改造']:['通常','改造','極弐'];
+  if(!stOpts.includes(tr.state))team[i].tr.state=tr.state='通常';
+  const jMax=JUKUDO_MAX_TBL[r]?.[tr.state]??0;
+  const aMax=AWAKENING_MAX_TBL[r]??0;
+  const jk=Math.min(Math.max(1,tr.jukudo||1),jMax),aw=Math.min(tr.awakening,aMax);
+  const lev1=LEVEL_1JUK_TBL[r]?.[tr.state],levMax=LEVEL_MAX_TBL[r]?.[tr.state];
+  let lvCap=null;
+  if(lev1!=null&&levMax!=null){const base=jk===0?lev1-5:Math.min(levMax,lev1+(jk-1)*5);lvCap=base+aw*5;}
+  const lvCapDisp=lvCap!=null?lvCap:'-';
+  const lvCur=lvCap!=null?Math.min(tr.level||1,lvCap):1;
+  const stHtml=stOpts.map(s=>`<button class="tr-btn${s===tr.state?' on':''}" onclick="setTrField(${i},'state','${s}')">${s}</button>`).join('');
+  const mrHtml=[['未',0],['花なし',1],['花あり',2]].map(([l,v])=>`<button class="tr-btn${tr.marriage===v?' on':''}" onclick="setTrField(${i},'marriage',${v})">${l}</button>`).join('');
+  const lpHtml=[['通常',0],['½↓',1],['¼↓',2]].map(([l,v])=>`<button class="tr-btn${tr.lp===v?' on':''}" onclick="setTrField(${i},'lp',${v})">${l}</button>`).join('');
+  return`<div class="training-wrap">
+    <div class="training-row">
+      <span class="tr-label">改造</span><div class="tr-btns">${stHtml}</div>
+      <span class="tr-label" style="margin-left:auto">結婚</span><div class="tr-btns">${mrHtml}</div>
+    </div>
+    <div class="training-row">
+      <span class="tr-label">熟度</span>
+      <input id="tr-jkslider-${i}" class="tr-slider" type="range" min="1" max="${jMax}" value="${jk}" oninput="setJukudoSlider(${i},+this.value)">
+      <input id="tr-jkinput-${i}" class="tr-input" type="number" min="1" max="${jMax}" value="${jk}" onchange="setTrNum(${i},'jukudo',+this.value,${jMax})"><span class="tr-max"> / ${jMax}</span>
+      <span class="tr-label" style="margin-left:4px">覚醒</span>
+      <input class="tr-input" type="number" min="0" max="${aMax}" value="${aw}" onchange="setTrNum(${i},'awakening',+this.value,${aMax})"><span class="tr-max"> / ${aMax}</span>
+    </div>
+    <div class="training-row">
+      <span class="tr-label">Lv</span>
+      <input id="tr-lvslider-${i}" class="tr-slider" type="range" min="1" max="${lvCap!=null?lvCap:1}" value="${lvCur}" ${lvCap==null?'disabled':''} oninput="setLevel(${i},+this.value)">
+      <input id="tr-lvval-${i}" class="tr-lvval" type="number" min="1" max="${lvCap!=null?lvCap:1}" value="${lvCur}" ${lvCap==null?'disabled':''} onchange="setLevelInput(${i},+this.value)"><span id="tr-lvcapslider-${i}" class="tr-max"> / ${lvCapDisp}</span>
+    </div>
+    <div class="training-row">
+      <span class="tr-label">燃心</span>
+      <button class="tr-btn${tr.moeshin?' on on-fire':''}" style="min-width:30px;text-align:center" onclick="setTrField(${i},'moeshin',${!tr.moeshin})">${tr.moeshin?'ON':'OFF'}</button>
+      <span class="tr-label">LP</span><div class="tr-btns">${lpHtml}</div>
+    </div>
+  </div>`;
+}
 
 // ===== ENTITY MODAL =====
 let emSlot=-1, emType=null, emCi=-1;
 const mf={
-  chara:{q:'',rarity:new Set(),element:new Set(),type:new Set(),state:new Set(),sort:'',desc:true},
-  soul: {q:'',rarity:new Set(),element:new Set(),weapon:new Set()},
+  chara:{q:'',rarity:new Set(),element:new Set(),type:new Set(),state:new Set(),bdSpecial:new Set(),omoideRarity:new Set(),sort:'',desc:true},
+  soul: {q:'',rarity:new Set(),element:new Set(),type:new Set()},
   bg:   {q:'',rarity:new Set(),element:new Set(),weapon:new Set(),bunrui:new Set()},
   crystal:{q:'',rarity:new Set(),element:new Set(),weapon:new Set(),bunrui:new Set(),condition:new Set(),scope:new Set()},
 };
@@ -499,6 +714,14 @@ function buildEMSidebar(type){
     h+=fsec('属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
     h+=fsec('武器種','type',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.type);
     h+=fsec('状態','state',[['極弐','極弐'],['改造','改造'],['通常','通常']],f.state);
+    h+=`<div class="f-section"><div class="f-label">BD特殊効果</div><div class="f-toggles">`
+      +`<button class="ftog${f.bdSpecial.has(1)?' on':''}" style="color:#60c0ff" data-fkey="bdSpecial" data-fval="1">時止め</button>`
+      +`<button class="ftog${f.bdSpecial.has(2)?' on':''}" style="color:#c060ff" data-fkey="bdSpecial" data-fval="2">麻痺</button>`
+      +`<button class="ftog${f.bdSpecial.has(3)?' on':''}" style="color:#ff9a40" data-fkey="bdSpecial" data-fval="3">強制BK</button>`
+      +`<button class="ftog${f.bdSpecial.has(5)?' on':''}" style="color:#50d070" data-fkey="bdSpecial" data-fval="5">弱体解除</button>`
+      +`<button class="ftog${f.bdSpecial.has(6)?' on':''}" style="color:#ffc840" data-fkey="bdSpecial" data-fval="6">高倍率バフ</button>`
+      +`</div></div>`;
+    h+=fsec('好感稀有度','omoideRarity',[[5,'限定SS'],[4,'SS'],[3,'S'],[2,'AA'],[1,'A']],f.omoideRarity);
     h+=`<div class="f-sort-row"><select id="em-sort" onchange="mf['chara'].sort=this.value;applyEM()">
       <option value="">並び替えなし</option>
       <option value="攻撃力"${f.sort==='攻撃力'?' selected':''}>攻撃力</option>
@@ -507,11 +730,13 @@ function buildEMSidebar(type){
       <option value="HP"${f.sort==='HP'?' selected':''}>HP</option>
       <option value="結晶スロット"${f.sort==='結晶スロット'?' selected':''}>結晶枠</option>
       <option value="BDコスト"${f.sort==='BDコスト'?' selected':''}>BDコスト</option>
+      <option value="__hit_max"${f.sort==='__hit_max'?' selected':''}>合計hit</option>
+      <option value="__bdhit_max"${f.sort==='__bdhit_max'?' selected':''}>BDヒット</option>
     </select><button class="f-sort-dir" id="em-sort-dir" onclick="mf['chara'].desc=!mf['chara'].desc;this.textContent=mf['chara'].desc?'↓':'↑';applyEM()">${f.desc?'↓':'↑'}</button></div>`;
   } else if(type==='soul'){
     h+=fsec('レアリティ','rarity',[[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
     h+=fsec('得意属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
-    h+=fsec('得意武器','weapon',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.weapon);
+    h+=fsec('得意武器','type',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.type);
   } else if(type==='bg'){
     h+=fsec('レアリティ','rarity',[[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
     h+=fsec('属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
@@ -550,67 +775,87 @@ function resetEM(){
   applyEM();
 }
 
-function getEMSortVal(c,key){
-  for(const s of['極弐','改造','通常']){
-    const st=c.states?.[s];if(!st)continue;
-    if(key==='攻撃力'||key==='防御力'||key==='ブレイク力'||key==='HP')return st.stats?.max?.[key]??null;
-    if(key==='結晶スロット'){const r=st.basic_info?.['結晶スロット'];return r!=null?(Number(r)||null):null;}
-    if(key==='BDコスト')return st.bd_skill?.cost??null;
-  }
-  return null;
-}
+// Hensei picker uses scope=2/3/4/5 → bucket value 2 in UI; CRYSTAL_SPEC scope is exact match.
+// Wrap CRYSTAL_SPEC with picker-specific scope match.
+const HENSEI_CRYSTAL_SPEC = Object.assign({}, CRYSTAL_SPEC, {
+  filters: Object.assign({}, CRYSTAL_SPEC.filters, {
+    scope: {
+      match: function(c, set){
+        return (c.effects||[]).some(function(ef){
+          if(set.has(0)&&ef.scope===0)return true;
+          if(set.has(1)&&ef.scope===1)return true;
+          if(set.has(2)&&[2,3,4,5].indexOf(ef.scope)>=0)return true;
+          return false;
+        });
+      },
+    },
+    // bg-style: any-effect element/type matching (more permissive than primary-derived)
+    element: {
+      match: function(c, set){
+        return (c.effects||[]).some(function(ef){
+          var arr = [].concat(ef.element||[]);
+          for (var v of set) if (arr.indexOf(v)>=0) return true;
+          return false;
+        });
+      },
+    },
+    weapon: {
+      match: function(c, set){
+        return (c.effects||[]).some(function(ef){
+          var arr = [].concat(ef.type||[]);
+          for (var v of set) if (arr.indexOf(v)>=0) return true;
+          return false;
+        });
+      },
+    },
+  }),
+});
+const HENSEI_BG_SPEC = Object.assign({}, BG_SPEC, {
+  filters: Object.assign({}, BG_SPEC.filters, {
+    element: {
+      match: function(c, set){
+        return (c.effects||[]).some(function(ef){
+          var arr = [].concat(ef.element||[]);
+          for (var v of set) if (arr.indexOf(v)>=0) return true;
+          return false;
+        });
+      },
+    },
+    weapon: {
+      match: function(c, set){
+        return (c.effects||[]).some(function(ef){
+          var arr = [].concat(ef.type||[]);
+          for (var v of set) if (arr.indexOf(v)>=0) return true;
+          return false;
+        });
+      },
+    },
+  }),
+});
 
 function applyEM(){
-  const type=emType,f=mf[type];
-  const q=f.q.toLowerCase().trim();
-  let items=[];
-  if(type==='chara'){
-    items=allCharas.filter(c=>{
-      if(q&&!c.name.toLowerCase().includes(q))return false;
-      if(f.rarity.size&&!f.rarity.has(c.rarity))return false;
-      if(f.element.size&&!f.element.has(c.element))return false;
-      if(f.type.size&&!f.type.has(c.type))return false;
-      if(f.state.size&&![...f.state].some(s=>c.states?.[s]))return false;
-      return true;
-    });
-    if(f.sort)items.sort((a,b)=>{const va=getEMSortVal(a,f.sort),vb=getEMSortVal(b,f.sort);if(va===null&&vb===null)return 0;if(va===null)return 1;if(vb===null)return-1;return f.desc?vb-va:va-vb;});
-    else items.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
-  } else if(type==='soul'){
-    items=allSouls.filter(s=>{
-      if(q&&!s.name.toLowerCase().includes(q))return false;
-      if(f.rarity.size&&!f.rarity.has(s.rarity))return false;
-      if(f.element.size&&!(s.element||[]).some(e=>f.element.has(e)))return false;
-      if(f.weapon.size&&!(s.type||[]).some(t=>f.weapon.has(t)))return false;
-      return true;
-    });
-    items.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
-  } else if(type==='bg'){
-    items=allBGs.filter(b=>{
-      if(q&&!b.name.toLowerCase().includes(q))return false;
-      if(f.rarity.size&&!f.rarity.has(b.rarity))return false;
-      if(f.element.size&&!(b.effects||[]).some(ef=>[].concat(ef.element||[]).some(e=>f.element.has(e))))return false;
-      if(f.weapon.size&&!(b.effects||[]).some(ef=>[].concat(ef.type||[]).some(t=>f.weapon.has(t))))return false;
-      if(f.bunrui.size&&!(b.effects||[]).some(ef=>(ef.bunrui||[]).some(bn=>f.bunrui.has(bn))))return false;
-      return true;
-    });
-    items.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
-  } else if(type==='crystal'){
-    items=allCrystals.filter(c=>{
-      if(q&&!c.name.toLowerCase().includes(q))return false;
-      if(f.rarity.size&&!f.rarity.has(c.rarity))return false;
-      if(f.weapon.size&&!(c.effects||[]).some(ef=>[].concat(ef.type||[]).some(t=>f.weapon.has(t))))return false;
-      if(f.element.size&&!(c.effects||[]).some(ef=>[].concat(ef.element||[]).some(e=>f.element.has(e))))return false;
-      if(f.bunrui.size&&!(c.effects||[]).some(ef=>(ef.bunrui||[]).some(bn=>f.bunrui.has(bn))))return false;
-      if(f.condition.size&&!(c.effects||[]).some(ef=>f.condition.has(ef.condition)))return false;
-      if(f.scope.size&&!(c.effects||[]).some(ef=>{
-        if(f.scope.has(0)&&ef.scope===0)return true;
-        if(f.scope.has(1)&&ef.scope===1)return true;
-        if(f.scope.has(2)&&[2,3,4,5].includes(ef.scope))return true;
-        return false;
-      }))return false;
-      return true;
-    });
-    items.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  const type=emType, f=mf[type];
+  let items=[], spec=null;
+  if(type==='chara')      spec = CHARA_SPEC;
+  else if(type==='soul')  spec = SOUL_SPEC;
+  else if(type==='bg')    spec = HENSEI_BG_SPEC;
+  else if(type==='crystal') spec = HENSEI_CRYSTAL_SPEC;
+  if(!spec){ renderEMList([]); return; }
+
+  items = FilterCore.applyFilters(allCharas && type==='chara' ? allCharas
+    : type==='soul' ? allSouls
+    : type==='bg' ? allBGs
+    : allCrystals, {
+      q: f.q, filters: f, sortKey: f.sort, sortDesc: f.desc !== false,
+    }, spec);
+
+  // Default ordering when no spec sortKey
+  if(!f.sort || !spec.sortFns[f.sort]){
+    if(type==='chara'){
+      items.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
+    } else {
+      items.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+    }
   }
   const cnt=document.getElementById('em-count');
   if(cnt)cnt.textContent=items.length+' 件';
@@ -755,7 +1000,7 @@ function renderDMSoul(s){
   }
   const elemCells=_ELEMS_ORDER.map(n=>affCell(n,(s.element_affinity||{})[n])).join('');
   const weapCells=_WEAPS_ORDER.map(n=>affCell(n,(s.weapon_affinity||{})[n])).join('');
-  const skills=s.skills||[];
+  const skills=_resolveSoulSkills(s);
   const skillCards=skills.map(sk=>{
     const tags=dmRightTags(sk);
     const bairitu=dmFmtBairitu(sk);
@@ -864,8 +1109,18 @@ function renderDMChara(c){
     `<div class="dm-state-tab" data-state="${s}" onclick="switchDMState('${s}')">${s}</div>`
   ).join('');
   const contents=['極弐','改造','通常'].filter(s=>stateKeys.includes(s)).map(s=>
-    `<div class="dm-state-content" data-state="${s}">${renderDMState(c.states[s],s)}</div>`
+    `<div class="dm-state-content" data-state="${s}">${renderDMState(c.states[s],s,c)}</div>`
   ).join('');
+  const BD_SPECIAL={1:'時止め',2:'麻痺',3:'強制ブレイク',5:'弱体解除',6:'高倍率バフ'};
+  const bdSection=c.bd_skill?.name?`<div class="dm-section"><div class="dm-section-title">ブレイズドライブ</div>
+    <div class="dm-bd-card"><div class="dm-bd-label">BD SKILL${c.bd_skill.cost!=null?` &nbsp; コスト ${c.bd_skill.cost}`:''}</div>
+    <div class="dm-bd-name">${esc(c.bd_skill.name)}</div>
+    <div class="dm-bd-eff">${esc(c.bd_skill.effect||'')}</div>
+    ${(c.bd_skill.special||[]).length||(c.bd_skill.duration)?`<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">
+      ${(c.bd_skill.special||[]).map(s=>`<span class="bd-sp-tag bd-sp-${s}">${BD_SPECIAL[s]||s}</span>`).join('')}
+      ${c.bd_skill.duration?`<span class="bd-dur-tag">${esc(c.bd_skill.duration)}</span>`:''}
+      ${c.bd_skill.bdhit>1?`<span class="bd-hit-tag">${c.bd_skill.bdhit}連</span>`:''}
+    </div>`:''}</div></div>`:'';
   return`<div class="dm-chara-header">
     <img class="dm-chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">
     <div class="dm-chara-info">
@@ -878,6 +1133,7 @@ function renderDMChara(c){
       </div>
     </div>
   </div>
+  ${bdSection}
   <div class="dm-state-tabs">${tabs}</div>
   ${contents}`;
 }
@@ -887,16 +1143,14 @@ function switchDMState(label){
   document.querySelectorAll('.dm-state-content').forEach(d=>d.classList.toggle('active',d.dataset.state===label));
 }
 
-function renderDMState(state,stateLabel){
+function renderDMState(state,stateLabel,chara){
   const parts=[];
-  if(state.bd_skill?.name){
-    parts.push(`<div class="dm-section"><div class="dm-section-title">ブレイズドライブ</div>
-      <div class="dm-bd-card"><div class="dm-bd-label">BD SKILL</div>
-      <div class="dm-bd-name">${esc(state.bd_skill.name)}</div>
-      <div class="dm-bd-eff">${esc(state.bd_skill.effect||'')}</div></div></div>`);
-  }
-  if(state.skills?.length){
-    const cards=state.skills.map(s=>{
+  const dead = new Set(chara && Array.isArray(chara._deleted_skills) ? chara._deleted_skills : []);
+  const baseSkills = (state.skills||[]).filter(sk=>!dead.has(sk.name||''));
+  const addedSkills = (chara && chara._added_skills && chara._added_skills[stateLabel]) || [];
+  const allSkills = baseSkills.concat(addedSkills);
+  if(allSkills.length){
+    const cards=allSkills.map(s=>{
       const tags=dmRightTags(s);
       const bairitu=dmFmtBairitu(s);
       return`<div class="dm-skill-card">
@@ -904,7 +1158,7 @@ function renderDMState(state,stateLabel){
         <div class="dm-skill-eff-row"><span class="dm-skill-eff">${esc(s.effect||'')}</span><span class="dm-skill-bairitu">${bairitu}</span></div>
       </div>`;
     }).join('');
-    parts.push(`<div class="dm-section"><div class="dm-section-title">スキル構成 (${state.skills.length})</div><div class="dm-skills-list">${cards}</div></div>`);
+    parts.push(`<div class="dm-section"><div class="dm-section-title">スキル構成 (${allSkills.length})</div><div class="dm-skills-list">${cards}</div></div>`);
   }
   if(state.stats)parts.push(`<div class="dm-section"><div class="dm-section-title">ステータス</div>${renderDMStats(state.stats)}</div>`);
   if(state.basic_info)parts.push(`<div class="dm-section"><div class="dm-section-title">基本情報</div>${renderDMBasicInfo(state.basic_info)}</div>`);
@@ -930,9 +1184,19 @@ function dmRightTags(s){
 
 function dmFmtBairitu(s){
   return(s.effects||[]).map(e=>{
-    if(e.bairitu==null)return'';
-    const bs=e.calc_type===1?('+'+fmtLarge(e.bairitu)):('x'+e.bairitu);
-    return e.bairitu_scaling?bs+' + '+e.bairitu_scaling+'*熟度':bs;
+    const bunrui = e.bunrui || [];
+    const isHitOnly = bunrui.length===1 && bunrui[0]===7;
+    if(isHitOnly) return fmtHitStages(e);
+    let bs='';
+    if(e.bairitu!=null && e.bairitu!==0){
+      bs = e.calc_type===1?('+'+fmtLarge(e.bairitu)):('x'+e.bairitu);
+      if(e.bairitu_scaling) bs += ' + '+e.bairitu_scaling+'*熟度';
+    }
+    if(bunrui.includes(7)){
+      const h = fmtHitStages(e);
+      if(h) bs = bs ? (bs+' / '+h) : h;
+    }
+    return bs;
   }).filter(Boolean).join(' / ');
 }
 
@@ -1022,8 +1286,8 @@ function renderSlot(i){
     </div>`;
   }
 
-  const charaSkills=st?renderSkillsPanel(st.skills||[]):'';
-  const soulSkills=soul?renderSkillsPanel(soul.skills||[]):'';
+  const charaSkills=chara?renderSkillsPanel(_resolveCharaSkills(chara)):'';
+  const soulSkills=soul?renderSkillsPanel(_resolveSoulSkills(soul)):'';
   const bgPanel=renderBgPanel(bg);
   document.getElementById('slot-'+i).innerHTML=`
     <div class="slot-header"><span class="slot-num">${i+1}号位</span>${hdrName}<button class="slot-clear-btn" onclick="clearSlot(${i})">外す</button></div>
@@ -1039,6 +1303,7 @@ function renderSlot(i){
         </div></div>
         ${charaSkills?`<div class="detail-wrap" id="col${i}c">${charaSkills}</div>`:''}
       </div>
+      ${renderTraining(i,chara)}
       <div class="equip-section">
         <div class="equip-label">ソウル${soulSkills?`<button class="detail-toggle" onclick="toggleDetail('col${i}s',this)">▶</button>`:''}</div>
         <div class="equip-row">${soulIcon}<div class="picker-wrap">
@@ -1062,6 +1327,83 @@ function renderSlot(i){
       ${crystalHtml}
     </div>`;
 }
+
+// ===== MOBILE SLOT FLIP =====
+let mobileActiveSlot = 0;
+let _txStart = 0, _tyStart = 0;
+const MOB_DUR = 200;
+
+function isMob(){ return window.innerWidth <= 760; }
+
+function msiClick(idx){
+  if(idx >= teamSize) return;
+  flipMobSlot(idx, idx > mobileActiveSlot ? 1 : -1);
+}
+
+function updateMobIndicator(){
+  document.querySelectorAll('.msi-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === mobileActiveSlot);
+    d.classList.toggle('mob-disabled', i >= teamSize);
+  });
+}
+
+function updateMobVisible(){
+  if(!isMob()){
+    for(let i=0;i<3;i++) document.getElementById('slot-'+i)?.classList.remove('mob-hidden');
+    return;
+  }
+  for(let i=0;i<3;i++) document.getElementById('slot-'+i)?.classList.toggle('mob-hidden', i !== mobileActiveSlot);
+  updateMobIndicator();
+}
+
+const _MOB_ANIM = ['mob-anim-outL','mob-anim-outR','mob-anim-inR','mob-anim-inL'];
+function _clearMobAnim(el){ _MOB_ANIM.forEach(c => el.classList.remove(c)); }
+
+function flipMobSlot(nextIdx, dir){
+  // wrap around within enabled slots
+  nextIdx = ((nextIdx % teamSize) + teamSize) % teamSize;
+  if(nextIdx === mobileActiveSlot) return;
+  const cur = document.getElementById('slot-' + mobileActiveSlot);
+  const nxt = document.getElementById('slot-' + nextIdx);
+  if(!cur || !nxt) return;
+  const outCls = dir > 0 ? 'mob-anim-outL' : 'mob-anim-outR';
+  const inCls  = dir > 0 ? 'mob-anim-inR'  : 'mob-anim-inL';
+  _clearMobAnim(cur);
+  cur.classList.add(outCls);
+  cur.addEventListener('animationend', function h(){
+    cur.removeEventListener('animationend', h);
+    _clearMobAnim(cur);
+    cur.classList.add('mob-hidden');
+    _clearMobAnim(nxt);
+    nxt.classList.remove('mob-hidden');
+    nxt.classList.add(inCls);
+    mobileActiveSlot = nextIdx;
+    updateMobIndicator();
+    nxt.addEventListener('animationend', function h2(){
+      nxt.removeEventListener('animationend', h2);
+      _clearMobAnim(nxt);
+    });
+  });
+}
+
+const _sGrid = document.getElementById('slots-grid');
+let _swipeBlocked = false;
+_sGrid.addEventListener('touchstart', e => {
+  _txStart = e.touches[0].clientX;
+  _tyStart = e.touches[0].clientY;
+  _swipeBlocked = !!e.target.closest('input[type=range]');
+}, {passive: true});
+_sGrid.addEventListener('touchend', e => {
+  if(!isMob() || _swipeBlocked) return;
+  const dx = _txStart - e.changedTouches[0].clientX;
+  const dy = Math.abs(_tyStart - e.changedTouches[0].clientY);
+  if(Math.abs(dx) > 50 && Math.abs(dx) > dy * 1.5){
+    if(dx > 0) flipMobSlot(mobileActiveSlot + 1, 1);
+    else        flipMobSlot(mobileActiveSlot - 1, -1);
+  }
+}, {passive: true});
+
+window.addEventListener('resize', updateMobVisible);
 </script>
 </body>
 </html>

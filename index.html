@@ -66,6 +66,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .badge.A  { background: var(--a);  color: #fff; }
 .elem-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .char-item .char-name { flex: 1; font-size: 12px; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.char-item .sort-val { font-size: 11px; font-weight: 700; color: var(--accent); white-space: nowrap; flex-shrink: 0; padding: 1px 6px; border-radius: 4px; background: rgba(91,127,255,.12); border: 1px solid rgba(91,127,255,.3); }
 .state-dots { display: flex; gap: 2px; flex-shrink: 0; }
 .state-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
 .state-dot.has { background: var(--accent); }
@@ -221,7 +222,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .edit-select { background: var(--bg3); border: 1px solid var(--accent); border-radius: 6px; color: var(--text); padding: 4px 8px; font-size: 12px; cursor: pointer; }
 .edit-textarea { background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 6px 8px; font-size: 13px; width: 100%; min-height: 56px; resize: vertical; font-family: inherit; line-height: 1.6; }
 .edit-textarea:focus { outline: none; border-color: #8aabff; }
-.edit-stat-num { width: 100%; background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 2px 6px; font-size: 14px; font-weight: 700; text-align: right; }
+.edit-stat-num { width: 80px; background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 2px 6px; font-size: 14px; font-weight: 700; text-align: right; flex-shrink: 0; }
 .edit-readonly { font-size: 13px; color: var(--text2); padding: 4px 2px; line-height: 1.6; }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
@@ -233,7 +234,12 @@ input[type=number] { -moz-appearance: textfield; }
 .hit-inputs { display: flex; gap: 4px; align-items: center; }
 .hit-num { width: 52px; background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 2px 6px; font-size: 13px; text-align: center; }
 .hit-num:focus { outline: none; border-color: #8aabff; }
-.skill-edit-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+.skill-edit-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; position: relative; }
+.skill-edit-card.deleted { opacity: 0.45; }
+.skill-edit-card.deleted .skill-name { text-decoration: line-through; color: var(--text2); }
+.btn-skill-tomb { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); color: var(--text2); font-size: 14px; line-height: 18px; cursor: pointer; padding: 0; }
+.btn-skill-tomb:hover { background: rgba(255,80,80,0.15); border-color: #ff5050; color: #ff8080; }
+.skill-edit-card.deleted .btn-skill-tomb { background: rgba(91,127,255,0.15); border-color: #5b7fff; color: #7b9fff; }
 .bunrui-toggles { display: flex; flex-wrap: wrap; gap: 3px; }
 .btog { font-size: 10px; font-weight: 700; padding: 2px 5px; border-radius: 4px; background: var(--bg); border: 1px solid var(--border); color: var(--text2); cursor: pointer; white-space: nowrap; }
 .btog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; }
@@ -268,6 +274,8 @@ input[type=number] { -moz-appearance: textfield; }
 <body>
 <div id="page-wrap">
 <script src="nav.js"></script>
+<script src="shared/filter-core.js"></script>
+<script src="shared/chara-spec.js"></script>
 
 <div id="prompt-modal">
   <div class="latent-overlay" onclick="_promptCancel()"></div>
@@ -382,6 +390,8 @@ input[type=number] { -moz-appearance: textfield; }
           <option value="W">W</option>
           <option value="H">H</option>
           <option value="BDコスト">BDコスト</option>
+          <option value="__hit_max">合計hit</option>
+          <option value="__bdhit_max">BDヒット</option>
         </select>
         <button id="sort-dir" onclick="toggleSortDir()">↓</button>
         <button onclick="resetFilters()" style="font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
@@ -454,13 +464,42 @@ function parseBairituVal(s) {
   return isNaN(n) ? null : n;
 }
 function ctPfx(ct) { return ct === 1 ? '+' : '×'; }
+function fmtHitStages(e) {
+  // Render hit_per_stage with optional milestone scaling
+  var hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [];
+  var sc  = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [0,0,0];
+  if (!hps.length) return '';
+  var ht  = e.hit_type != null ? e.hit_type : 0;
+  var op  = (ht === 2) ? '×' : (ht === 3) ? '=' : '+';  // 2=乗算→×, 3=設定値→=, else→+
+  function stageStr(v, s) {
+    return op + fmtNum(v) + (s ? '(+' + fmtNum(s) + '/熟度)' : '');
+  }
+  // Condensed form: all 3 stages identical → show once with "全段"
+  var s0 = sc[0] || 0, s1 = sc[1] || 0, s2 = sc[2] || 0;
+  if (hps.length === 3 && hps[0] !== 0 && hps[0] === hps[1] && hps[1] === hps[2] && s0 === s1 && s1 === s2) {
+    return stageStr(hps[0], s0);
+  }
+  var parts = hps.map(function(v, i) {
+    if (v == null || v === 0) return null;
+    return (i + 1) + '撃' + stageStr(v, sc[i] || 0);
+  }).filter(Boolean);
+  return parts.length ? parts.join(' / ') : '';
+}
+
 function fmtBairitu(s) {
   return (s.effects || []).map(function(e) {
-    if (e.bairitu == null) return '';
-    var sc = e.bairitu_scaling;
-    var pfx = ctPfx(e.calc_type);
-    var bs = pfx + fmtNum(e.bairitu);
-    return sc ? bs + ' + ' + fmtNum(sc) + ' * 熟度' : bs;
+    var bunrui = e.bunrui || [];
+    var isHitOnly = bunrui.length === 1 && bunrui[0] === 7;
+    if (isHitOnly) return fmtHitStages(e);
+    var bairituStr = '';
+    if (e.bairitu != null && e.bairitu !== 0) {
+      var sc = e.bairitu_scaling;
+      var pfx = ctPfx(e.calc_type);
+      bairituStr = pfx + fmtNum(e.bairitu);
+      if (sc) bairituStr += ' + ' + fmtNum(sc) + ' * 熟度';
+    }
+    var hitStr = bunrui.includes(7) ? fmtHitStages(e) : '';
+    return [bairituStr, hitStr].filter(Boolean).join(' / ');
   }).filter(Boolean).join(' / ');
 }
 
@@ -547,26 +586,8 @@ function getBestState(c) {
 }
 
 function getSortValue(c, key) {
-  if (key === 'BDコスト') return c.bd_skill?.cost ?? null;
-  for (const s of ['極弐', '改造', '通常']) {
-    const state = c.states?.[s];
-    if (!state) continue;
-    let v = null;
-    switch (key) {
-      case '攻撃力': case '防御力': case 'ブレイク力': case 'HP':
-        v = state.stats?.max?.[key] ?? null; break;
-      case 'LP': case '保有魔力':
-        v = state.basic_info?.[key] ?? null; break;
-      case '結晶スロット': {
-        const raw = state.basic_info?.['結晶スロット'];
-        v = raw != null ? (Number(raw) || null) : null; break;
-      }
-      case 'B': case 'W': case 'H':
-        v = state.profile?.[key] ?? null; break;
-    }
-    if (v !== null) return v;
-  }
-  return null;
+  const fn = CHARA_SPEC.sortFns[key];
+  return fn ? fn(c) : null;
 }
 
 function resetFilters() {
@@ -580,37 +601,39 @@ function resetFilters() {
 }
 
 function applyFilters() {
-  const q = document.getElementById('search').value.trim().toLowerCase();
+  const q = document.getElementById('search').value.trim();
   sortKey = document.getElementById('f-sort').value;
 
-  filteredChars = allChars.filter(c => {
-    if (q && !c.name.toLowerCase().includes(q)) return false;
-    if (filterSets.rarity.size    && !filterSets.rarity.has(c.rarity))   return false;
-    if (filterSets.element.size   && !filterSets.element.has(c.element)) return false;
-    if (filterSets.type.size      && !filterSets.type.has(c.type))       return false;
-    if (filterSets.state.size     && ![...filterSets.state].some(s => c.states?.[s])) return false;
-    if (filterSets.bdSpecial.size) {
-      const sp = c.bd_skill?.special || [];
-      if (![...filterSets.bdSpecial].some(s => sp.includes(s))) return false;
-    }
-    if (filterSets.omoideRarity.size && !filterSets.omoideRarity.has(c.omoide_rarity)) return false;
-    return true;
-  });
+  filteredChars = FilterCore.applyFilters(allChars, {
+    q: q,
+    filters: filterSets,
+    sortKey: sortKey,
+    sortDesc: sortDesc,
+  }, CHARA_SPEC);
 
-  filteredChars.sort((a, b) => {
-    const va = sortKey ? getSortValue(a, sortKey) : (a.sort_id ?? a.id ?? 0);
-    const vb = sortKey ? getSortValue(b, sortKey) : (b.sort_id ?? b.id ?? 0);
-    if (va === null && vb === null) return 0;
-    if (va === null) return 1;
-    if (vb === null) return -1;
-    return sortDesc ? vb - va : va - vb;
-  });
+  // Default order when no sort key: by sort_id/id (preserve existing behavior)
+  if (!sortKey) {
+    filteredChars.sort((a, b) => {
+      const va = a.sort_id ?? a.id ?? 0;
+      const vb = b.sort_id ?? b.id ?? 0;
+      return sortDesc ? vb - va : va - vb;
+    });
+  }
 
   document.getElementById('char-count').textContent = `${filteredChars.length} 件`;
   renderList();
 }
 
 // ===== RENDER LIST =====
+function _fmtSortVal(v) {
+  if (v == null) return '—';
+  if (typeof v !== 'number') return String(v);
+  return Number.isInteger(v) ? v.toLocaleString('en-US') : String(v);
+}
+function renderSortBadge(c, key) {
+  return `<span class="sort-val">${_fmtSortVal(getSortValue(c, key))}</span>`;
+}
+
 function renderList() {
   const list = document.getElementById('char-list');
   if (filteredChars.length === 0) {
@@ -625,6 +648,7 @@ function renderList() {
     const dots = ['極弐','改造','通常'].map(s =>
       `<div class="state-dot ${stateKeys.includes(s) ? 'has' : ''}" title="${s}"></div>`
     ).join('');
+    const sortBadge = sortKey ? renderSortBadge(c, sortKey) : '';
     return `<div class="char-item ${c.id === selectedId ? 'active' : ''}" data-id="${c.id}">
       <div class="badges">
         <span class="badge ${rLabel}">${rLabel}</span>
@@ -632,6 +656,7 @@ function renderList() {
         <span class="badge weapon">${escHtml(wName)}</span>
       </div>
       <div class="char-name">${escHtml(c.name)}</div>
+      ${sortBadge}
       <div class="state-dots">${dots}</div>
     </div>`;
   }).join('');
@@ -698,7 +723,7 @@ function renderDetail(c) {
   ).join('');
 
   const contents = ['極弐','改造','通常'].filter(s => stateKeys.includes(s)).map(s =>
-    `<div class="state-content" data-state="${s}">${renderStateContent(c.states[s], s)}</div>`
+    `<div class="state-content" data-state="${s}">${renderStateContent(c.states[s], s, c)}</div>`
   ).join('');
 
   const bdSection = c.bd_skill?.name ? renderBDCard(c.bd_skill) : '';
@@ -734,15 +759,24 @@ function switchState(id, stateLabel, container) {
 }
 
 // ===== RENDER STATE CONTENT =====
-function renderStateContent(state, stateLabel) {
-  const parts = [];
+function _deletedSkillSet(c) {
+  return new Set(Array.isArray(c && c._deleted_skills) ? c._deleted_skills : []);
+}
 
-  // --- Skills ---
-  if (state.skills?.length) {
-    const cards = state.skills.map(s =>
+function renderStateContent(state, stateLabel, chara) {
+  const parts = [];
+  const dead  = _deletedSkillSet(chara);
+
+  // --- Skills (base filtered by tombstone + user-added per state) ---
+  const baseSkills  = state.skills || [];
+  const addedSkills = (chara && chara._added_skills && chara._added_skills[stateLabel]) || [];
+  const baseV  = baseSkills.filter(s => !dead.has(s.name||''));
+  const allSkills = baseV.concat(addedSkills);
+  if (allSkills.length) {
+    const cards = allSkills.map(s =>
       '<div class="skill-card"><div class="skill-name-row"><span class="skill-name">' + escHtml(s.name) + '</span>' + renderRightTags(s) + '</div><div class="skill-effect-row"><span class="skill-effect">' + escHtml(s.effect) + '</span><span class="skill-bairitu">' + fmtBairitu(s) + '</span></div></div>'
     ).join('');
-    parts.push(`<div class="section"><div class="section-title">スキル構成 (${state.skills.length})</div><div class="skills-list">${cards}</div></div>`);
+    parts.push(`<div class="section"><div class="section-title">スキル構成 (${allSkills.length})</div><div class="skills-list">${cards}</div></div>`);
   }
 
   // --- Stats ---
@@ -848,11 +882,27 @@ function getPath(obj, pathStr) {
 }
 
 function toggleBunrui(path, b, btn) {
-  var arr = (getPath(editData, path + '.bunrui') || []).slice();
-  var idx = arr.indexOf(b);
+  var prev = (getPath(editData, path + '.bunrui') || []).slice();
+  var arr  = prev.slice();
+  var idx  = arr.indexOf(b);
   if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
   else { arr.push(b); arr.sort(function(a,b){return a-b;}); btn.classList.add('on'); }
   setPath(editData, path + '.bunrui', arr);
+  // When bunrui becomes [7]-only, bairitu/bairitu_scaling are no longer meaningful — zero them
+  var nowHitOnly = arr.length === 1 && arr[0] === 7;
+  if (nowHitOnly) {
+    setPath(editData, path + '.bairitu', 0);
+    if (getPath(editData, path + '.bairitu_scaling') != null) {
+      setPath(editData, path + '.bairitu_scaling', 0);
+    }
+  }
+  // Re-render so bairitu/bairitu_scaling and hit fields toggle visibility
+  var prevHitOnly = prev.length === 1 && prev[0] === 7;
+  var prevHasHit  = prev.includes(7);
+  var nowHasHit   = arr.includes(7);
+  if (prevHasHit !== nowHasHit || prevHitOnly !== nowHitOnly) {
+    if (typeof reRenderActiveState === 'function') reRenderActiveState();
+  }
 }
 
 function setPath(obj, pathStr, value) {
@@ -954,6 +1004,17 @@ function saveEdit() {
       row.slots = (row.slots || []).filter(function(s) { return s != null; });
     });
     editData.omoide = editData.omoide.filter(function(row) { return row.slots.length > 0; });
+  }
+  // Clean up empty tombstone / added skill arrays
+  if (Array.isArray(editData._deleted_skills) && editData._deleted_skills.length === 0) {
+    delete editData._deleted_skills;
+  }
+  if (editData._added_skills && typeof editData._added_skills === 'object') {
+    Object.keys(editData._added_skills).forEach(k => {
+      if (!Array.isArray(editData._added_skills[k]) || editData._added_skills[k].length === 0)
+        delete editData._added_skills[k];
+    });
+    if (!Object.keys(editData._added_skills).length) delete editData._added_skills;
   }
   const id  = editData.id;
   const idx = allChars.findIndex(x => x.id === id);
@@ -1066,13 +1127,27 @@ function renderEditStateContent(c, lbl) {
   const p     = `states.${lbl}`;
   const parts = [];
 
-  // Skills
-  if (state.skills?.length) {
+  // Skills (base + user-added)
+  const baseSkills  = state.skills || [];
+  const addedSkills = (c._added_skills && c._added_skills[lbl]) ? c._added_skills[lbl] : [];
+  const dead        = _deletedSkillSet(c);
+
+  if (baseSkills.length || addedSkills.length) {
     const BUNRUI_ALL = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
-    const cards = state.skills.map((s, i) => {
-      const sp = `${p}.skills.${i}`;
+    const items = baseSkills.map((sk, i) => ({sk, src:'base', i}))
+      .concat(addedSkills.map((sk, i) => ({sk, src:'added', i})));
+    const cards = items.map(it => {
+      const s = it.sk, i = it.i, src = it.src;
+      const isAdded = src === 'added';
+      const isDeleted = !isAdded && dead.has(s.name||'');
+      const sp = isAdded ? `_added_skills.${lbl}.${i}` : `${p}.skills.${i}`;
+      const tombBtn = isAdded
+        ? `<button class="btn-skill-tomb" onclick="removeAddedCharaSkill('${lbl}',${i})" title="削除">×</button>`
+        : `<button class="btn-skill-tomb" onclick="toggleSkillTombstone(${JSON.stringify(s.name||'').replace(/"/g,'&quot;')})" title="${isDeleted?'復活':'削除'}">${isDeleted?'↻':'×'}</button>`;
+      const tagBadge = isAdded ? '<span style="font-size:10px;background:rgba(91,127,255,0.25);border:1px solid #5b7fff;color:#7b9fff;padding:1px 5px;border-radius:3px;margin-left:6px">追加</span>' : '';
       const effectBlocks = (s.effects || [{}]).map((e, ei) => {
         const ep = `${sp}.effects.${ei}`;
+        const isHitOnly = (e.bunrui || []).length === 1 && (e.bunrui || [])[0] === 7;
         const bunrui = e.bunrui || [];
         const btogs = BUNRUI_ALL.map(b =>
           `<button class="btog${bunrui.includes(b)?' on':''}" onclick="toggleBunrui('${ep}',${b},this)">${BUNRUI_SHORT[b]||b}</button>`
@@ -1110,7 +1185,7 @@ function renderEditStateContent(c, lbl) {
             <div class="field-label">type</div>
             <select class="edit-select" onchange="setPath(editData,'${ep}.type',this.value===''?null:+this.value)">${typeOpts}</select>
           </div>
-          <div>
+          ${isHitOnly ? '' : `<div>
             <div class="field-label">倍率</div>
             <div style="display:flex;align-items:center;gap:4px">
               <select class="edit-select" onchange="setPath(editData,'${ep}.calc_type',+this.value)">
@@ -1125,18 +1200,25 @@ function renderEditStateContent(c, lbl) {
             <div class="field-label">熟度補正</div>
             <input type="text" class="edit-num-sm" value="${e.bairitu_scaling??''}"
                    oninput="setPath(editData,'${ep}.bairitu_scaling',parseBairituVal(this.value))">
-          </div>
+          </div>`}
         </div>
         ${_renderHitEdit(ep, e)}`;
       }).join('');
+      const nameField = isAdded
+        ? `<input type="text" class="edit-input" style="font-weight:600;font-size:13px;color:var(--accent);margin-bottom:4px;width:100%" value="${escHtml(s.name||'')}" oninput="setPath(editData,'${sp}.name',this.value)">`
+        : `<div class="skill-name" style="font-weight:600;font-size:13px;color:var(--accent);margin-bottom:4px">${escHtml(s.name||'')}${tagBadge}</div>`;
+      const effectField = isAdded
+        ? `<input type="text" class="edit-input" style="font-size:13px;width:100%;margin-bottom:8px" value="${escHtml(s.effect||'')}" oninput="setPath(editData,'${sp}.effect',this.value)">`
+        : `<div style="font-size:13px;line-height:1.6;color:var(--text);margin-bottom:8px">${escHtml(s.effect||'')}</div>`;
       return `
-      <div class="skill-edit-card">
-        <div class="skill-name" style="font-weight:600;font-size:13px;color:var(--accent);margin-bottom:4px">${escHtml(s.name||'')}</div>
-        <div style="font-size:13px;line-height:1.6;color:var(--text);margin-bottom:8px">${escHtml(s.effect||'')}</div>
-        ${effectBlocks}
+      <div class="skill-edit-card${isDeleted?' deleted':''}">
+        ${tombBtn}
+        ${nameField}
+        ${effectField}
+        ${isDeleted ? '<div style="color:#ff8080;font-size:12px;padding:4px 0">⚠ このスキルは削除マーク中（保存後ビューで非表示）</div>' : effectBlocks}
       </div>`;
     }).join('');
-    parts.push(`<div class="section"><div class="section-title">スキル構成 (${state.skills.length})</div><div class="skills-list">${cards}</div></div>`);
+    parts.push(`<div class="section"><div class="section-title">スキル構成 (${baseSkills.length + addedSkills.length})</div><div class="skills-list">${cards}</div><button class="btn-add-slot" style="margin-top:8px" onclick="addNewCharaSkill('${lbl}')">+ スキル追加</button></div>`);
   }
 
   // Stats
@@ -1188,6 +1270,46 @@ function renderEditStateContent(c, lbl) {
 }
 
 // ===== HIT EDIT HELPERS =====
+// ===== SKILL TOMBSTONE / ADD (chara) =====
+function toggleSkillTombstone(name) {
+  if (!editData) return;
+  if (!Array.isArray(editData._deleted_skills)) editData._deleted_skills = [];
+  const idx = editData._deleted_skills.indexOf(name);
+  if (idx >= 0) editData._deleted_skills.splice(idx, 1);
+  else          editData._deleted_skills.push(name);
+  reRenderActiveState();
+}
+
+function addNewCharaSkill(stateLabel) {
+  if (!editData) return;
+  if (!editData._added_skills || typeof editData._added_skills !== 'object' || Array.isArray(editData._added_skills)) {
+    editData._added_skills = {};
+  }
+  if (!Array.isArray(editData._added_skills[stateLabel])) editData._added_skills[stateLabel] = [];
+  editData._added_skills[stateLabel].push({
+    name: '新しいスキル',
+    effect: '',
+    effects: [{bunrui:[1], scope:0, condition:0, calc_type:0, bairitu:0, bairitu_scaling:0}]
+  });
+  reRenderActiveState();
+}
+
+function removeAddedCharaSkill(stateLabel, i) {
+  if (!editData || !editData._added_skills || !editData._added_skills[stateLabel]) return;
+  editData._added_skills[stateLabel].splice(i, 1);
+  if (!editData._added_skills[stateLabel].length) delete editData._added_skills[stateLabel];
+  reRenderActiveState();
+}
+
+function reRenderActiveState() {
+  // Re-render the entire chara detail (preserves active state via switchState below)
+  const detail = document.getElementById('chara-detail');
+  if (!detail || !editData) return;
+  const active = activeState[editData.id] || Object.keys(editData.states || {})[0];
+  detail.innerHTML = renderEditDetail(editData);
+  if (active) switchState(editData.id, active, detail);
+}
+
 function setHitStage(path, idx, val) {
   var arr = (getPath(editData, path + '.hit_per_stage') || [null, null, null]).slice();
   while (arr.length < 3) arr.push(null);
@@ -1195,18 +1317,32 @@ function setHitStage(path, idx, val) {
   setPath(editData, path + '.hit_per_stage', arr);
 }
 
+function setHitStageScaling(path, idx, val) {
+  var arr = (getPath(editData, path + '.hit_per_stage_scaling') || [null, null, null]).slice();
+  while (arr.length < 3) arr.push(null);
+  arr[idx] = val === '' ? null : +val;
+  setPath(editData, path + '.hit_per_stage_scaling', arr);
+}
+
 function _renderHitEdit(ep, e) {
   if (!(e.bunrui || []).includes(7)) return '';
-  var ht = e.hit_type != null ? e.hit_type : 0;
+  var ht  = e.hit_type != null ? e.hit_type : 0;
   var hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null, null, null];
+  var hpss = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [null, null, null];
   function opt(v, lbl) {
     return '<option value="' + v + '"' + (ht === v ? ' selected' : '') + '>' + lbl + '</option>';
   }
   function stageIn(idx) {
     var v = hps[idx] != null ? hps[idx] : '';
-    return '<div><div class="field-label">' + (idx + 1) + '撃目</div>'
-      + '<input type="number" step="any" class="edit-num-sm" style="width:60px" value="' + v + '"'
+    return '<div><div class="field-label">' + (idx + 1) + '撃</div>'
+      + '<input type="number" step="any" class="edit-num-sm" style="width:42px" value="' + v + '"'
       + ' oninput="setHitStage(\'' + ep + '\',' + idx + ',this.value)"></div>';
+  }
+  function scaleIn(idx) {
+    var v = hpss[idx] != null ? hpss[idx] : '';
+    return '<div><div class="field-label">' + (idx + 1) + '撃+</div>'
+      + '<input type="number" step="any" class="edit-num-sm" style="width:42px" value="' + v + '"'
+      + ' oninput="setHitStageScaling(\'' + ep + '\',' + idx + ',this.value)"></div>';
   }
   return '<div class="field-label" style="margin-top:6px">ヒット計算 <span style="font-weight:400;color:var(--text2)">(bunrui=7)</span></div>'
     + '<div class="skill-edit-meta">'
@@ -1215,6 +1351,7 @@ function _renderHitEdit(ep, e) {
     + opt(0, '0 減衰なし加算') + opt(1, '1 ダメージ維持加算') + opt(2, '2 乗算') + opt(3, '3 設定値')
     + '</select></div>'
     + stageIn(0) + stageIn(1) + stageIn(2)
+    + scaleIn(0) + scaleIn(1) + scaleIn(2)
     + '</div>';
 }
 
