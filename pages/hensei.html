@@ -872,14 +872,22 @@ function _buffApplies(srcChara, tgtChara, e) {
   return false;
 }
 
-// HP-percent based condition gate (1=浑身 2=背水 3=破損)
-function _conditionMet(condition, hpPct) {
-  if (!condition) return true;
+// HP-based condition factor (multiplier on bairitu)
+//   1=浑身 → linear hp%/100  (0 at 0% HP → 1 at 100% HP)
+//   2=背水 → linear (100-hp%)/100  (1 at 0% HP → 0 at 100% HP)
+//   3=破損 → binary  (1 if hp%<50 else 0)
+//   0/null → 1
+// Applied via:
+//   additive: effective = bairitu * factor
+//   multiplicative: effective = (bairitu - 1) * factor + 1
+function _conditionFactor(condition, hpPct) {
+  if (!condition) return 1;
   let h = +hpPct; if (isNaN(h)) h = 100;
-  if (condition === 1) return h >= 80;
-  if (condition === 2) return h <= 50;
-  if (condition === 3) return h < 50;
-  return true;
+  h = Math.max(0, Math.min(100, h));
+  if (condition === 1) return h / 100;
+  if (condition === 2) return (100 - h) / 100;
+  if (condition === 3) return h < 50 ? 1 : 0;
+  return 1;
 }
 
 function _parseScaling(v) {
@@ -909,12 +917,15 @@ function computeStats(chara, tr, slotIdx) {
   const acc = { stats, damageLimit };
   const tgt = chara;
 
-  // Apply one effect to acc (additive when mode='add', multiplicative when mode='mul')
-  function _applyEf(e, srcJk, mode) {
+  // Apply one effect to acc, scaled by source HP via _conditionFactor.
+  function _applyEf(e, srcJk, srcHp, mode) {
     const ct = e.calc_type ?? 1;
     if (mode === 'add' && ct !== 1) return;
     if (mode === 'mul' && ct !== 0) return;
-    const v = _scaledBairitu(e.bairitu || 0, e.bairitu_scaling, srcJk);
+    let v = _scaledBairitu(e.bairitu || 0, e.bairitu_scaling, srcJk);
+    const factor = _conditionFactor(e.condition, srcHp);
+    if (mode === 'add') v = v * factor;
+    else v = (v - 1) * factor + 1;
     const bunrui = e.bunrui || [];
     for (const b of bunrui) {
       if (b === 17) {
@@ -928,22 +939,23 @@ function computeStats(chara, tr, slotIdx) {
       }
     }
   }
-  // Apply a list of effects with srcChara/srcHp/srcJk context: filter by buff scope + condition,
+  // Apply a list of effects with srcChara/srcHp/srcJk context: filter by buff scope,
   // then run additive pass, then multiplicative pass.
+  // Condition (浑身/背水/破損) scales bairitu inside _applyEf, no longer a gate.
   function _applyList(effects, srcChara, srcHp, srcJk) {
     if (!effects || !effects.length) return;
-    const filtered = effects.filter(e =>
-      _buffApplies(srcChara, tgt, e) && _conditionMet(e.condition, srcHp));
+    const filtered = effects.filter(e => _buffApplies(srcChara, tgt, e));
     if (!filtered.length) return;
-    for (const e of filtered) _applyEf(e, srcJk, 'add');
-    for (const e of filtered) _applyEf(e, srcJk, 'mul');
+    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'add');
+    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'mul');
   }
 
   // ===== Stage 1: Self omoide (gated by affinity) =====
   const selfJk = Math.max(1, tr.jukudo || 1);
+  const selfHp = tr.hpPercent ?? 100;
   const picks = _omoidePicksFor(chara, tr);
-  for (const info of picks) _applyEf(info, selfJk, 'add');
-  for (const info of picks) _applyEf(info, selfJk, 'mul');
+  for (const info of picks) _applyEf(info, selfJk, selfHp, 'add');
+  for (const info of picks) _applyEf(info, selfJk, selfHp, 'mul');
 
   // ===== Stage 2: External buffs in fixed slot order =====
   // slot s: crystals → chara skills, then souls (1..3), then bgs (1..3)
