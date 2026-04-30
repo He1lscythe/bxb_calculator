@@ -160,13 +160,14 @@ function _buffApplies(srcChara, tgtChara, e) {
   }
   return false;
 }
-function _conditionMet(condition, hpPct) {
-  if (!condition) return true;
+function _conditionFactor(condition, hpPct) {
+  if (!condition) return 1;
   let h = +hpPct; if (isNaN(h)) h = 100;
-  if (condition === 1) return h >= 80;
-  if (condition === 2) return h <= 50;
-  if (condition === 3) return h < 50;
-  return true;
+  h = Math.max(0, Math.min(100, h));
+  if (condition === 1) return h / 100;
+  if (condition === 2) return (100 - h) / 100;
+  if (condition === 3) return h < 50 ? 1 : 0;
+  return 1;
 }
 function _parseScaling(v) {
   if (v == null || v === 0 || v === '') return 0;
@@ -193,11 +194,14 @@ function computeStats(chara, tr, team, teamSize) {
   const acc = { stats, damageLimit };
   const tgt = chara;
 
-  function _applyEf(e, srcJk, mode) {
+  function _applyEf(e, srcJk, srcHp, mode) {
     const ct = e.calc_type ?? 1;
     if (mode === 'add' && ct !== 1) return;
     if (mode === 'mul' && ct !== 0) return;
-    const v = _scaledBairitu(e.bairitu || 0, e.bairitu_scaling, srcJk);
+    let v = _scaledBairitu(e.bairitu || 0, e.bairitu_scaling, srcJk);
+    const factor = _conditionFactor(e.condition, srcHp);
+    if (mode === 'add') v = v * factor;
+    else v = (v - 1) * factor + 1;
     const bunrui = e.bunrui || [];
     for (const b of bunrui) {
       if (b === 17) {
@@ -213,17 +217,17 @@ function computeStats(chara, tr, team, teamSize) {
   }
   function _applyList(effects, srcChara, srcHp, srcJk) {
     if (!effects || !effects.length) return;
-    const filtered = effects.filter(e =>
-      _buffApplies(srcChara, tgt, e) && _conditionMet(e.condition, srcHp));
+    const filtered = effects.filter(e => _buffApplies(srcChara, tgt, e));
     if (!filtered.length) return;
-    for (const e of filtered) _applyEf(e, srcJk, 'add');
-    for (const e of filtered) _applyEf(e, srcJk, 'mul');
+    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'add');
+    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'mul');
   }
 
   const selfJk = Math.max(1, tr.jukudo || 1);
+  const selfHp = tr.hpPercent ?? 100;
   const picks = _omoidePicksFor(chara, tr);
-  for (const info of picks) _applyEf(info, selfJk, 'add');
-  for (const info of picks) _applyEf(info, selfJk, 'mul');
+  for (const info of picks) _applyEf(info, selfJk, selfHp, 'add');
+  for (const info of picks) _applyEf(info, selfJk, selfHp, 'mul');
 
   for (let si = 0; si < teamSize; si++) {
     const slot = team[si]; if (!slot) continue;
@@ -409,6 +413,35 @@ const MOCK_NAMED_BG = {
   id: 999202, name: 'MOCK_NAMED_BG', rarity: 4,
   effects: [{bunrui:[1], scope:5, name:'レヴァンテイン', calc_type:1, bairitu:1500}],
 };
+
+// MOCK_TRUE_END: 浑身 multiplicative ×5 攻撃力 (模拟「真解放-TRUE END-」jk=99 状态)
+//   skill: bairitu=3 + scaling=2/99，jk=99 → effective bairitu = 5
+// 测试时直接给 bairitu=5（绕过 scaling，更明确）
+const MOCK_TRUE_END = {
+  id: 999008, name: 'MOCK_TRUE_END', rarity: 4, element: 1, type: 1,
+  states: {
+    '通常': {
+      stats: {
+        max: {攻撃力: 10000, 防御力: 5000, HP: 30000, ブレイク力: 4000},
+        initial: {攻撃力: 100, 防御力: 50, HP: 300, ブレイク力: 40},
+      },
+      skills: [{name: 'Konshin_攻×5', effects: [{bunrui:[1], scope:0, condition:1, calc_type:0, bairitu:5}]}],
+    }
+  },
+};
+// MOCK_FAFNIR: 背水 multiplicative ×7 攻撃力 (模拟「暴蝕魔竜 -Blaze mod. Ullr&Fafnir-」)
+const MOCK_FAFNIR = {
+  id: 999009, name: 'MOCK_FAFNIR', rarity: 4, element: 1, type: 1,
+  states: {
+    '通常': {
+      stats: {
+        max: {攻撃力: 10000, 防御力: 5000, HP: 30000, ブレイク力: 4000},
+        initial: {攻撃力: 100, 防御力: 50, HP: 300, ブレイク力: 40},
+      },
+      skills: [{name: 'Haisui_攻×7', effects: [{bunrui:[1], scope:0, condition:2, calc_type:0, bairitu:7}]}],
+    }
+  },
+};
 // 受控 mock soul
 const MOCK_SOUL_X = {
   id: 999101, name: 'MOCK_SOUL', rarity: 4,
@@ -430,7 +463,7 @@ const MOCK_CR_FIRE = {
 };
 
 // 注入 mock 到全局表
-allCharas.push(MOCK_A, MOCK_B, MOCK_C, MOCK_D, MOCK_E, MOCK_NAMED_TARGET, MOCK_OTHER);
+allCharas.push(MOCK_A, MOCK_B, MOCK_C, MOCK_D, MOCK_E, MOCK_NAMED_TARGET, MOCK_OTHER, MOCK_TRUE_END, MOCK_FAFNIR);
 allSouls.push(MOCK_SOUL_X);
 allBGs.push(MOCK_BG_X, MOCK_NAMED_BG);
 allCrystals.push(MOCK_CR_X, MOCK_CR_FIRE);
@@ -563,71 +596,139 @@ console.log('\n===== 计算器场景测试 =====\n');
   expectClose('C12 affinity=100 部分解锁', r.stats['攻撃力'], 9900 + 100 + 1000);
 }
 
-// ----- HP condition -----
+// ----- 浑身 condition=1 (linear with HP%) -----
+// MOCK_D: 加算 condition=1 +2000，effective = 2000 × (hp/100)
+// base 攻 = 7000 * (1 - 249/249 * 70/7000) = 7000 * 0.99 = 6930
 {
-  // C13: 浑身 hp=100 → 触发
+  // C13 hp=100 → factor=1 → +2000 满
   const t = emptyTeam();
   t[0] = mkSlot({chara: 999004});
   t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:100});
   const r = computeStats(MOCK_D, t[0].tr, t, 1);
-  // base 攻 = 7000 * (1 - 249/249 * 70/7000) = 7000 * 0.99 = 6930
-  // condition=1 浑身 满足 → +2000
-  expectClose('C13 hp=100 浑身触发', r.stats['攻撃力'], 6930 + 2000);
+  expectClose('C13 浑身加算 hp=100 (factor=1)', r.stats['攻撃力'], 6930 + 2000);
 }
 {
-  // C14: hp=50 → 浑身不触发
+  // C14 hp=50 → factor=0.5 → +1000
   const t = emptyTeam();
   t[0] = mkSlot({chara: 999004});
   t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:50});
   const r = computeStats(MOCK_D, t[0].tr, t, 1);
-  expectClose('C14 hp=50 浑身不触发', r.stats['攻撃力'], 6930);
+  expectClose('C14 浑身加算 hp=50 (factor=0.5)', r.stats['攻撃力'], 6930 + 1000);
 }
 {
-  // C15: hp=80 → 浑身阈值满足
+  // C15 hp=0 → factor=0 → +0
   const t = emptyTeam();
   t[0] = mkSlot({chara: 999004});
-  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:80});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:0});
   const r = computeStats(MOCK_D, t[0].tr, t, 1);
-  expectClose('C15 hp=80 浑身边界', r.stats['攻撃力'], 6930 + 2000);
+  expectClose('C15 浑身加算 hp=0 (factor=0)', r.stats['攻撃力'], 6930);
+}
+// MOCK_TRUE_END: 乘算 condition=1 ×5，effective = (5-1)×(hp/100) + 1
+// base 攻 = 10000 * (1 - 249/249 * 100/10000) = 9900
+{
+  // C15a hp=100 → factor=1 → effective ×5
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999008});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:100});
+  const r = computeStats(MOCK_TRUE_END, t[0].tr, t, 1);
+  expectClose('C15a 浑身乘算 hp=100 → ×5', r.stats['攻撃力'], 9900 * 5);
+}
+{
+  // C15b hp=50 → factor=0.5 → effective (5-1)*0.5+1 = 3
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999008});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:50});
+  const r = computeStats(MOCK_TRUE_END, t[0].tr, t, 1);
+  expectClose('C15b 浑身乘算 hp=50 → ×3 (用户例)', r.stats['攻撃力'], 9900 * 3);
+}
+{
+  // C15c hp=75 → factor=0.75 → effective (5-1)*0.75+1 = 4
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999008});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:75});
+  const r = computeStats(MOCK_TRUE_END, t[0].tr, t, 1);
+  expectClose('C15c 浑身乘算 hp=75 → ×4 (用户例)', r.stats['攻撃力'], 9900 * 4);
+}
+{
+  // C15d hp=0 → factor=0 → effective ×1 (无 buff)
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999008});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:0});
+  const r = computeStats(MOCK_TRUE_END, t[0].tr, t, 1);
+  expectClose('C15d 浑身乘算 hp=0 → ×1', r.stats['攻撃力'], 9900);
 }
 
-// ----- 破損 condition=3 (HP < 50) -----
+// ----- 背水 condition=2 (linear with damage%) -----
+// MOCK_FAFNIR: 乘算 condition=2 ×7，effective = (7-1)×((100-hp)/100) + 1
 {
-  // C28: hp=49 破損触发
+  // C15e hp=0 → factor=1 → effective ×7
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999009});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:0});
+  const r = computeStats(MOCK_FAFNIR, t[0].tr, t, 1);
+  expectClose('C15e 背水乘算 hp=0 → ×7', r.stats['攻撃力'], 9900 * 7);
+}
+{
+  // C15f hp=25 → factor=0.75 → effective (7-1)*0.75+1 = 5.5 (用户例)
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999009});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:25});
+  const r = computeStats(MOCK_FAFNIR, t[0].tr, t, 1);
+  expectClose('C15f 背水乘算 hp=25 → ×5.5 (用户例)', r.stats['攻撃力'], 9900 * 5.5);
+}
+{
+  // C15g hp=50 → factor=0.5 → effective (7-1)*0.5+1 = 4
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999009});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:50});
+  const r = computeStats(MOCK_FAFNIR, t[0].tr, t, 1);
+  expectClose('C15g 背水乘算 hp=50 → ×4', r.stats['攻撃力'], 9900 * 4);
+}
+{
+  // C15h hp=100 → factor=0 → effective ×1 (无 buff)
+  const t = emptyTeam();
+  t[0] = mkSlot({chara: 999009});
+  t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:100});
+  const r = computeStats(MOCK_FAFNIR, t[0].tr, t, 1);
+  expectClose('C15h 背水乘算 hp=100 → ×1', r.stats['攻撃力'], 9900);
+}
+
+// ----- 破損 condition=3 (binary: HP < 50) -----
+// MOCK_E: 加算 condition=3 +3000，factor=1 if hp<50 else 0
+// base 攻 = 6000 * (1 - 249/249 * 60/6000) = 5940
+{
+  // C28 hp=49 → factor=1 → +3000
   const t = emptyTeam();
   t[0] = mkSlot({chara: 999005});
   t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:49});
   const r = computeStats(MOCK_E, t[0].tr, t, 1);
-  // base 攻 = 6000 * (1 - 249/249 * 60/6000) = 6000 * 0.99 = 5940
-  // condition=3 破損 hp=49<50 触发 → +3000 → 8940
-  expectClose('C28 hp=49 破損触发', r.stats['攻撃力'], 5940 + 3000);
+  expectClose('C28 破損 hp=49 (factor=1)', r.stats['攻撃力'], 5940 + 3000);
 }
 {
-  // C29: hp=50 破損 边界 不触发 (严格 <50)
+  // C29 hp=50 → factor=0 → 不触发 (严格 <50)
   const t = emptyTeam();
   t[0] = mkSlot({chara: 999005});
   t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:50});
   const r = computeStats(MOCK_E, t[0].tr, t, 1);
-  expectClose('C29 hp=50 破損 边界 不触发 (严格 <50)', r.stats['攻撃力'], 5940);
+  expectClose('C29 破損 hp=50 边界 (factor=0)', r.stats['攻撃力'], 5940);
 }
 {
-  // C30: hp=10 破損触发
+  // C30 hp=10 → factor=1 → +3000
   const t = emptyTeam();
   t[0] = mkSlot({chara: 999005});
   t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:10});
   const r = computeStats(MOCK_E, t[0].tr, t, 1);
-  expectClose('C30 hp=10 破損触发', r.stats['攻撃力'], 5940 + 3000);
+  expectClose('C30 破損 hp=10 (factor=1)', r.stats['攻撃力'], 5940 + 3000);
 }
 {
-  // C31: 跨格 source HP=10 (slot 0) 破損, target slot 1 HP=100
+  // C31: 跨格 source HP=10 (slot 0) 破損生效, target slot 1
   const t = emptyTeam();
   t[0] = mkSlot({chara: 999005});  // E 破損 全体+3000
   t[1] = mkSlot({chara: 999001});  // A
   t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:10});
   t[1].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:100});
   const rA = computeStats(MOCK_A, t[1].tr, t, 2);
-  // E 破損生效 (source slot HP=10) → A 攻 = 9900 + 3000(E) + 1000(A self) = 13900
-  expectClose('C31 source HP=10 破損 → 全体生效', rA.stats['攻撃力'], 9900 + 3000 + 1000);
+  expectClose('C31 source HP=10 破損 → 全体+3000', rA.stats['攻撃力'], 9900 + 3000 + 1000);
 }
 
 // ----- scope=5 名前限定 (验证 buff 实际应用) -----
@@ -838,28 +939,26 @@ console.log('\n===== 计算器场景测试 =====\n');
   // 不同 ✓
 }
 
-// ----- HP condition cross-slot (source HP) -----
+// ----- 浑身 condition=1 cross-slot (factor 看 source) -----
 {
-  // C25: D(slot 0, hp=100) 浑身 +2000 全体, A(slot 1)
+  // C25: D(slot 0, hp=100) 浑身 +2000 全体, factor=1 → +2000
   const t = emptyTeam();
   t[0] = mkSlot({chara: 999004});
   t[1] = mkSlot({chara: 999001});
   t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:100});
   t[1].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:50});
   const rA = computeStats(MOCK_A, t[1].tr, t, 2);
-  // D 浑身触发 (D hp=100 ≥80) → +2000 全体生效
-  // A: 9900 + 2000 (D) + 1000 (A self) = 12900
-  expectClose('C25 source HP=100 触发浑身 → 全体生效', rA.stats['攻撃力'], 9900 + 2000 + 1000);
+  expectClose('C25 source HP=100 浑身全体 → +2000', rA.stats['攻撃力'], 9900 + 2000 + 1000);
 }
 {
-  // C26: D(slot 0, hp=50) 浑身不触发, 即使 A hp=100
+  // C26: D(slot 0, hp=50) 浑身 factor=0.5 → +1000 全体
   const t = emptyTeam();
   t[0] = mkSlot({chara: 999004});
   t[1] = mkSlot({chara: 999001});
   t[0].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:50});
   t[1].tr = mkTr({state:'通常', jukudo:1, level:1, hpPercent:100});
   const rA = computeStats(MOCK_A, t[1].tr, t, 2);
-  expectClose('C26 source HP=50 浑身不触发', rA.stats['攻撃力'], 9900 + 1000);
+  expectClose('C26 source HP=50 浑身 factor=0.5 → +1000', rA.stats['攻撃力'], 9900 + 1000 + 1000);
 }
 
 // ----- 复合: 結婚 + LP + 燃心 + 全 buff -----
@@ -1315,14 +1414,16 @@ ${fmtScope('魂 skills', soulScopes)}
 ${fmtScope('結晶 effects', crystalScopes)}
 ${fmtScope('bg effects', bgScopes)}
 
-**condition 阈值** (基于 source slot 的 \`tr.hpPercent\`)：
+**condition factor 公式** (基于 source slot 的 \`tr.hpPercent\`)：
 
-| condition | 含义 | 阈值 | 测试 |
+| condition | 含义 | factor | 测试 |
 |---|---|---|---|
-| 0 | 无条件 | — | 全部默认 case |
-| 1 | 浑身 | HP% ≥ 80 | C13/C15/C25 + 受控 mock |
-| 2 | 背水 | HP% ≤ 50 | C14 + R13 (バハムート=イフ 实数据) |
-| 3 | 破損 | HP% < 50 | C28-C31 受控 mock + 实数据 fuzz |
+| 0 | 无条件 | 1 | 全部默认 case |
+| 1 | 浑身 | \`HP%/100\` (线性) | C13-C15 加算 + C15a-d 乘算（用户例 ×5）+ C25/C26 跨格 |
+| 2 | 背水 | \`(100-HP%)/100\` (线性) | C15e-h 乘算（用户例 ×7）+ R13 (バハムート=イフ 实数据) |
+| 3 | 破損 | \`HP%<50 ? 1 : 0\` (二元) | C28-C31 受控 mock + 实数据 fuzz |
+
+**应用方式**：加算 \`effective = bairitu × factor\`；乗算 \`effective = (bairitu − 1) × factor + 1\`。
 
 **特性回归覆盖**：
 - bunrui=17 ダメ上限 → R9 凰竜剣レヴァンテイン=TRUE
