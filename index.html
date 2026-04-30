@@ -1058,7 +1058,7 @@ async function saveRevise() {
     });
     const json = await res.json();
     if (!res.ok) throw new Error(json.error || res.status);
-    sessionReviseIds.clear(); omoideReviseData = {};
+    sessionReviseIds.clear();
     status.textContent = '✓ 保存完了';
   } catch (err) {
     status.textContent = '保存失敗';
