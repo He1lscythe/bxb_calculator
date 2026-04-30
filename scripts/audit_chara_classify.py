@@ -11,7 +11,7 @@ from classify_common import (
     classify_skill_chara, CAT_TO_BUNRUI_SKILLLIST,
 )
 
-chars = json.load(open(os.path.join(BASE_DIR, 'characters_classified.json'), encoding='utf-8'))
+chars = json.load(open(os.path.join(BASE_DIR, 'characters.json'), encoding='utf-8'))
 table = json.load(open(os.path.join(BASE_DIR, 'skilllist_table.json'), encoding='utf-8'))
 
 def normalize_field(v):

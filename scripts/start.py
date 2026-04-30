@@ -2,7 +2,7 @@
 """
 BxB viewer local server
 - GET  /*           : serve static files from crawl directory
-- POST /save        : write characters.json + characters_revise.json
+- POST /save        : write *_revise.json files
 """
 import http.server
 import json
@@ -13,25 +13,6 @@ import webbrowser
 
 PORT = 8787
 DIR  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-def _sync_senzai_table():
-    src = os.path.join(DIR, 'scripts', 'senzai_table_sample.json')
-    if not os.path.exists(src):
-        return
-    import json
-    with open(src, encoding='utf-8') as f:
-        data = json.load(f)
-    with open(os.path.join(DIR, 'senzai_table.json'), 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    with open(os.path.join(DIR, 'senzai_table.js'), 'w', encoding='utf-8') as f:
-        f.write('var SENZAI_TABLE = ')
-        json.dump(data, f, ensure_ascii=False)
-        f.write(';\n')
-    print(f'Synced senzai_table: {len(data)} entries')
-
-
-_sync_senzai_table()
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -50,30 +31,20 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             length = int(self.headers.get('Content-Length', 0))
             data   = json.loads(self.rfile.read(length))
 
-            if 'characters' in data:
-                _write('characters.json', json.dumps(data['characters'], ensure_ascii=False, indent=2))
-                # keep .js in sync so file:// mode still works
-                _write('characters.js',
-                       'var CHARA_DATA = ' + json.dumps(data['characters'], ensure_ascii=False) + ';\n')
-
             if 'revise' in data:
                 _write('characters_revise.json', json.dumps(data['revise'], ensure_ascii=False, indent=2))
 
-            if 'crystals' in data:
-                _write('crystals.json', json.dumps(data['crystals'], ensure_ascii=False, indent=2))
+            if 'omoide_revise' in data:
+                _write('omoide_revise.json', json.dumps(data['omoide_revise'], ensure_ascii=False, indent=2))
 
             if 'crystal_revise' in data:
                 _write('crystals_revise.json', json.dumps(data['crystal_revise'], ensure_ascii=False, indent=2))
 
-            if 'souls' in data:
-                _write('souls.json', json.dumps(data['souls'], ensure_ascii=False, indent=2))
-                _write('souls.js', 'var SOULS_DATA = ' + json.dumps(data['souls'], ensure_ascii=False) + ';\n')
-
             if 'soul_revise' in data:
                 _write('souls_revise.json', json.dumps(data['soul_revise'], ensure_ascii=False, indent=2))
 
-            if 'bladegraph' in data:
-                _write('bladegraph.json', json.dumps(data['bladegraph'], ensure_ascii=False, indent=2))
+            if 'omoide_templates' in data:
+                _write('omoide_templates.json', json.dumps(data['omoide_templates'], ensure_ascii=False, indent=2))
 
             if 'bladegraph_revise' in data:
                 _write('bladegraph_revise.json', json.dumps(data['bladegraph_revise'], ensure_ascii=False, indent=2))

@@ -146,7 +146,7 @@ def write_disc(out, title, rows, limit=40):
 
 
 # ── main ──────────────────────────────────────────────────────────────────────
-chars_path = os.path.join(ROOT, 'characters_classified.json')
+chars_path = os.path.join(ROOT, 'characters.json')
 souls_path = os.path.join(ROOT, 'souls.json')
 
 chars = load(chars_path)

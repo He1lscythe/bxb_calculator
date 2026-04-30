@@ -63,6 +63,7 @@ input[type=number] { -moz-appearance: textfield; }
 
 .row-name { flex: 1; font-size: 13px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
 .row-bunrui { display: flex; gap: 3px; flex-shrink: 0; }
+.row-bairitu { font-size: 11px; font-weight: 700; color: var(--accent); white-space: nowrap; flex-shrink: 0; padding: 1px 6px; border-radius: 4px; background: rgba(91,127,255,.12); border: 1px solid rgba(91,127,255,.3); }
 .expand-btn { background: none; border: none; color: var(--text2); font-size: 13px; cursor: pointer; padding: 2px 4px; flex-shrink: 0; line-height: 1; transition: transform .2s; }
 .crystal-row.expanded .expand-btn { transform: rotate(180deg); }
 
@@ -115,6 +116,8 @@ input[type=number] { -moz-appearance: textfield; }
 
 <div id="page-wrap">
 <script src="nav.js"></script>
+<script src="shared/filter-core.js"></script>
+<script src="shared/crystal-spec.js"></script>
 <div id="content">
   <div id="filters">
     <input type="text" id="search" placeholder="🔍 結晶名で検索..." oninput="applyFilters()">
@@ -148,20 +151,20 @@ input[type=number] { -moz-appearance: textfield; }
 
     <div class="filter-section">
       <div class="filter-label">武器種</div>
-      <div class="filter-toggles" id="f-buki_type">
-        <button class="ftog" data-val="0"  onclick="toggleFilter('buki_type',0,this)">全</button>
-        <button class="ftog" data-val="1"  onclick="toggleFilter('buki_type',1,this)">長剣</button>
-        <button class="ftog" data-val="2"  onclick="toggleFilter('buki_type',2,this)">大剣</button>
-        <button class="ftog" data-val="3"  onclick="toggleFilter('buki_type',3,this)">太刀</button>
-        <button class="ftog" data-val="4"  onclick="toggleFilter('buki_type',4,this)">杖棒</button>
-        <button class="ftog" data-val="5"  onclick="toggleFilter('buki_type',5,this)">弓矢</button>
-        <button class="ftog" data-val="6"  onclick="toggleFilter('buki_type',6,this)">連弩</button>
-        <button class="ftog" data-val="7"  onclick="toggleFilter('buki_type',7,this)">戦斧</button>
-        <button class="ftog" data-val="8"  onclick="toggleFilter('buki_type',8,this)">騎槍</button>
-        <button class="ftog" data-val="9"  onclick="toggleFilter('buki_type',9,this)">投擲</button>
-        <button class="ftog" data-val="10" onclick="toggleFilter('buki_type',10,this)">拳闘</button>
-        <button class="ftog" data-val="11" onclick="toggleFilter('buki_type',11,this)">魔典</button>
-        <button class="ftog" data-val="12" onclick="toggleFilter('buki_type',12,this)">大鎌</button>
+      <div class="filter-toggles" id="f-weapon">
+        <button class="ftog" data-val="0"  onclick="toggleFilter('weapon',0,this)">全</button>
+        <button class="ftog" data-val="1"  onclick="toggleFilter('weapon',1,this)">長剣</button>
+        <button class="ftog" data-val="2"  onclick="toggleFilter('weapon',2,this)">大剣</button>
+        <button class="ftog" data-val="3"  onclick="toggleFilter('weapon',3,this)">太刀</button>
+        <button class="ftog" data-val="4"  onclick="toggleFilter('weapon',4,this)">杖棒</button>
+        <button class="ftog" data-val="5"  onclick="toggleFilter('weapon',5,this)">弓矢</button>
+        <button class="ftog" data-val="6"  onclick="toggleFilter('weapon',6,this)">連弩</button>
+        <button class="ftog" data-val="7"  onclick="toggleFilter('weapon',7,this)">戦斧</button>
+        <button class="ftog" data-val="8"  onclick="toggleFilter('weapon',8,this)">騎槍</button>
+        <button class="ftog" data-val="9"  onclick="toggleFilter('weapon',9,this)">投擲</button>
+        <button class="ftog" data-val="10" onclick="toggleFilter('weapon',10,this)">拳闘</button>
+        <button class="ftog" data-val="11" onclick="toggleFilter('weapon',11,this)">魔典</button>
+        <button class="ftog" data-val="12" onclick="toggleFilter('weapon',12,this)">大鎌</button>
       </div>
     </div>
 
@@ -271,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== FILTER STATE =====
-var filterSets = { rarity: new Set(), bunrui: new Set(), element: new Set(), buki_type: new Set(), scope: new Set(), condition: new Set() };
+var filterSets = { rarity: new Set(), bunrui: new Set(), element: new Set(), weapon: new Set(), scope: new Set(), condition: new Set() };
 
 function toggleFilter(key, val, btn) {
   if (filterSets[key].has(val)) { filterSets[key].delete(val); btn.classList.remove('on'); }
@@ -324,17 +327,11 @@ function crystalScope(c) {
 }
 
 function applyFilters() {
-  var q = document.getElementById('search').value.trim().toLowerCase();
-  filteredCrystals = allCrystals.filter(function(c) {
-    if (q && c.name.toLowerCase().indexOf(q) === -1) return false;
-    if (filterSets.rarity.size    && !filterSets.rarity.has(c.rarity))     return false;
-    if (filterSets.element.size   && !filterSets.element.has(crystalElement(c)))   return false;
-    if (filterSets.buki_type.size && !filterSets.buki_type.has(crystalWeapon(c))) return false;
-    if (filterSets.bunrui.size    && !Array.from(filterSets.bunrui).some(function(v) { return (c.effects || []).some(function(e) { return (e.bunrui || []).indexOf(v) !== -1; }); })) return false;
-    if (filterSets.scope.size     && !filterSets.scope.has(crystalScope(c))) return false;
-    if (filterSets.condition.size && !Array.from(filterSets.condition).some(function(v) { return (c.effects||[]).some(function(e) { return e.condition === v; }); })) return false;
-    return true;
-  });
+  var q = document.getElementById('search').value.trim();
+  filteredCrystals = FilterCore.applyFilters(allCrystals, {
+    q: q,
+    filters: filterSets,
+  }, CRYSTAL_SPEC);
   document.getElementById('crystal-count').textContent = filteredCrystals.length + ' 件';
   expandedIds.clear();
   editingId = null;
@@ -347,6 +344,18 @@ function renderList() {
   var list = document.getElementById('crystal-list');
   if (!filteredCrystals.length) { list.innerHTML = '<div class="no-results">該当なし</div>'; return; }
   list.innerHTML = filteredCrystals.map(renderRow).join('');
+}
+
+function fmtRowBairitu(c) {
+  var parts = [];
+  (c.effects || []).forEach(function(e) {
+    if (e.bairitu_init == null && e.bairitu == null) return;
+    var pfx = e.calc_type === 1 ? '+' : '×';
+    var mn = e.bairitu_init, mx = e.bairitu;
+    if (mn != null && mx != null && mn !== mx) parts.push(pfx + fmt(mn) + '~' + fmt(mx));
+    else parts.push(pfx + fmt(mn != null ? mn : mx));
+  });
+  return parts.length ? '<span class="row-bairitu">' + parts.join(' / ') + '</span>' : '';
 }
 
 function renderRow(c) {
@@ -362,6 +371,7 @@ function renderRow(c) {
       '<div class="row-badges">' + rb + eb + wb + '</div>' +
       '<div class="row-name">' + escHtml(c.name) + '</div>' +
       '<div class="row-bunrui">' + bt + '</div>' +
+      fmtRowBairitu(c) +
       '<button class="expand-btn" onclick="event.stopPropagation();toggleExpand(' + c.id + ')">▾</button>' +
     '</div>' +
     '<div class="crystal-body" id="body-' + c.id + '"></div>' +
@@ -539,6 +549,13 @@ function saveEdit() {
     row.querySelector('.row-badges').innerHTML = rb + eb + wb;
     row.querySelector('.row-name').textContent = c.name;
     row.querySelector('.row-bunrui').innerHTML = bt;
+    var oldBairitu = row.querySelector('.row-bairitu');
+    if (oldBairitu) oldBairitu.remove();
+    var newBairituHtml = fmtRowBairitu(c);
+    if (newBairituHtml) {
+      var btn = row.querySelector('.expand-btn');
+      btn.insertAdjacentHTML('beforebegin', newBairituHtml);
+    }
   }
   if (body) {
     body.className = 'crystal-body';

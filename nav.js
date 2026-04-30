@@ -25,11 +25,11 @@
       '<h1>⚔ BxB</h1>' +
       '<nav id="page-nav">' + links + '</nav>' +
       '<div id="topbar-right">' +
-        '<button id="nav-hamburger" onclick="(function(){var n=document.getElementById(\'page-nav\');n.classList.toggle(\'open\');})()" aria-label="メニュー">☰</button>' +
         '<div id="revise-bar">' +
           '<button class="btn-revise-save" onclick="typeof saveRevise===\'function\'&&saveRevise()">Save</button>' +
           '<span id="revise-status"></span>' +
         '</div>' +
+        '<button id="nav-hamburger" onclick="(function(){var n=document.getElementById(\'page-nav\');n.classList.toggle(\'open\');})()" aria-label="メニュー">☰</button>' +
       '</div>' +
     '</div>';
 
@@ -45,14 +45,13 @@
     '#topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;flex-shrink:0;}' +
     '#nav-hamburger{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;padding:2px 6px;line-height:1;border-radius:4px;}' +
     '#nav-hamburger:hover{background:var(--bg3);}' +
-    '#revise-bar{display:none;align-items:center;gap:8px;background:#142814;border:1px solid #2d6b2d;border-radius:6px;padding:4px 10px;}' +
+    '#revise-bar{display:none;align-items:center;gap:8px;}' +
     '#revise-status{font-size:12px;color:#55bb55;}' +
     '.btn-revise-save{background:#1e5c1e;color:#aaffaa;border:1px solid #2d8c2d;border-radius:6px;padding:4px 12px;font-size:12px;cursor:pointer;font-weight:600;}' +
     '.btn-revise-save:hover{background:#266626;}' +
     '.btn-revise-save:disabled{opacity:.5;cursor:default;}' +
     '@media(max-width:600px){' +
       '#nav-hamburger{display:block;}' +
-      '#revise-bar{display:none!important;}' +
       '#page-nav{' +
         'display:none;position:absolute;top:52px;left:0;right:0;' +
         'flex-direction:column;background:var(--bg2);' +
@@ -83,10 +82,10 @@
   });
 })();
 
-// shared across all pages — reads each page's own reviseData variable
+// shared across all pages — reads each page's own sessionReviseIds (Set of this-session edits)
 function updateReviseBar() {
-  var rd = (typeof reviseData !== 'undefined') ? reviseData : {};
-  var count = Object.keys(rd).length;
+  var sr = (typeof sessionReviseIds !== 'undefined') ? sessionReviseIds : new Set();
+  var count = sr.size;
   var bar = document.getElementById('revise-bar');
   var btn = document.querySelector('.btn-revise-save');
   var status = document.getElementById('revise-status');

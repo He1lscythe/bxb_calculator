@@ -578,9 +578,6 @@ def classify_hit_fields(effect_text, ent, is_bd=False):
     bairitu_val = ent.get('bairitu') or 0
     n = int(round(bairitu_val))
 
-    # "ヒット数を代償に" = hit count itself is the sacrifice (exchange type)
-    is_hit_exchange = 'ヒット数を代償' in text
-
     # hit_type
     if 'ダメージ減衰なし' in text:
         hit_type = 0
@@ -588,17 +585,16 @@ def classify_hit_fields(effect_text, ent, is_bd=False):
         hit_type = 1
     elif 'それぞれ1にする' in text or '1にする代わり' in text or 'ヒット数を1' in text:
         hit_type = 3
-    elif is_hit_exchange:
-        hit_type = 3
     elif ent.get('calc_type') == 0:
         hit_type = 2  # multiplicative (e.g. 2.5倍にする, 66%UP)
     else:
         hit_type = 0
+        # Note: 'ヒット数を代償' (hit-as-sacrifice) skills also fall here.
+        # bairitu=0 from cost-text extraction → n=0 → hit_per_stage=[0,0,0].
+        # User can manually revise the actual delta values.
 
     # hit_per_stage
-    if hit_type == 3 and is_hit_exchange:
-        hit_per_stage = [1, 1, 0]
-    elif hit_type == 3:
+    if hit_type == 3:
         hit_per_stage = [1, 1, 1]
     elif hit_type == 2:
         hit_per_stage = [bairitu_val, bairitu_val, bairitu_val]
@@ -623,6 +619,28 @@ def classify_hit_fields(effect_text, ent, is_bd=False):
         else:
             hit_per_stage = [n, n, n]
 
+    # hit_per_stage_scaling: extract from 【熟度...でさらに+N】 pattern
+    # 5 universal milestones (21,41,60,80,99); per-milestone delta = N
+    sm = re.search(r'熟度[^】]*?さらに[+＋](\d+)', text)
+    scaling_n = int(sm.group(1)) if sm else 0
+    if scaling_n > 0:
+        # Apply only to stages that actually scale (non-zero base, or all stages
+        # for the common N-attack-stages pattern)
+        hit_per_stage_scaling = [scaling_n if v != 0 else 0 for v in hit_per_stage]
+        # Edge: if all base zeros (rare), still mark all 3 stages as scaling
+        if all(s == 0 for s in hit_per_stage_scaling):
+            hit_per_stage_scaling = [scaling_n, scaling_n, scaling_n]
+    else:
+        hit_per_stage_scaling = [0, 0, 0]
+
     ent['hit_type'] = hit_type
     ent['hit_per_stage'] = hit_per_stage
+    ent['hit_per_stage_scaling'] = hit_per_stage_scaling
+
+    # When bunrui is exclusively [7], bairitu/bairitu_scaling are no longer
+    # meaningful — zero them so the calculator/UI uses only hit_per_stage*.
+    if ent.get('bunrui') == [7]:
+        ent['bairitu'] = 0
+        if 'bairitu_scaling' in ent:
+            ent['bairitu_scaling'] = 0
 

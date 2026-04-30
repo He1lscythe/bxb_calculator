@@ -142,7 +142,12 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .edit-aff-cell { display: flex; flex-direction: column; align-items: center; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 7px 4px; gap: 3px; }
 .edit-aff-name { font-size: 12px; font-weight: 700; }
 .edit-aff-level { font-size: 10px; font-weight: 700; }
-.skill-edit-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+.skill-edit-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; position: relative; }
+.skill-edit-card.deleted { opacity: 0.45; }
+.skill-edit-card.deleted .skill-name-edit { text-decoration: line-through; color: var(--text2); }
+.btn-skill-tomb { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); color: var(--text2); font-size: 14px; line-height: 18px; cursor: pointer; padding: 0; }
+.btn-skill-tomb:hover { background: rgba(255,80,80,0.15); border-color: #ff5050; color: #ff8080; }
+.skill-edit-card.deleted .btn-skill-tomb { background: rgba(91,127,255,0.15); border-color: #5b7fff; color: #7b9fff; }
 .bunrui-toggles { display: flex; flex-wrap: wrap; gap: 3px; }
 .btog { font-size: 10px; font-weight: 700; padding: 2px 5px; border-radius: 4px; background: var(--bg); border: 1px solid var(--border); color: var(--text2); cursor: pointer; white-space: nowrap; }
 .btog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; }
@@ -170,6 +175,8 @@ input[type=number] { -moz-appearance: textfield; }
 <body>
 <div id="page-wrap">
 <script src="nav.js"></script>
+<script src="shared/filter-core.js"></script>
+<script src="shared/soul-spec.js"></script>
 
 <div id="layout">
   <!-- SIDEBAR -->
@@ -192,13 +199,13 @@ input[type=number] { -moz-appearance: textfield; }
 
       <div class="filter-section">
         <div class="filter-label">得意属性</div>
-        <div class="filter-toggles" id="f-elem">
-          <button class="ftog" data-val="1" onclick="toggleFilter('elem',1,this)" style="color:var(--fire)">火</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('elem',2,this)" style="color:var(--water)">水</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('elem',3,this)" style="color:var(--wind)">風</button>
-          <button class="ftog" data-val="4" onclick="toggleFilter('elem',4,this)" style="color:var(--light)">光</button>
-          <button class="ftog" data-val="5" onclick="toggleFilter('elem',5,this)" style="color:var(--dark)">闇</button>
-          <button class="ftog" data-val="6" onclick="toggleFilter('elem',6,this)" style="color:var(--none)">無</button>
+        <div class="filter-toggles" id="f-element">
+          <button class="ftog" data-val="1" onclick="toggleFilter('element',1,this)" style="color:var(--fire)">火</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('element',2,this)" style="color:var(--water)">水</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('element',3,this)" style="color:var(--wind)">風</button>
+          <button class="ftog" data-val="4" onclick="toggleFilter('element',4,this)" style="color:var(--light)">光</button>
+          <button class="ftog" data-val="5" onclick="toggleFilter('element',5,this)" style="color:var(--dark)">闇</button>
+          <button class="ftog" data-val="6" onclick="toggleFilter('element',6,this)" style="color:var(--none)">無</button>
         </div>
       </div>
 
@@ -267,7 +274,7 @@ let reviseData    = {};
 let sessionReviseIds = new Set();
 let originalData  = {};
 let editData      = null;
-const filterSets  = { rarity: new Set(), elem: new Set(), type: new Set() };
+const filterSets  = { rarity: new Set(), element: new Set(), type: new Set() };
 
 // ===== LOAD =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -317,28 +324,23 @@ function resetFilters() {
 }
 
 function applyFilters() {
-  const q    = document.getElementById('search').value.trim().toLowerCase();
+  const q    = document.getElementById('search').value.trim();
   const sKey = document.getElementById('f-sort').value;
 
-  filteredSouls = allSouls.filter(s => {
-    if (q && !s.name.toLowerCase().includes(q) && !(s.kana||'').toLowerCase().includes(q)) return false;
-    if (filterSets.rarity.size && !filterSets.rarity.has(s.rarity || 0)) return false;
-    if (filterSets.elem.size) {
-      const all = s.element || [];
-      if (![...filterSets.elem].some(e => all.includes(e))) return false;
-    }
-    if (filterSets.type.size) {
-      const all = s.type || [];
-      if (![...filterSets.type].some(t => all.includes(t))) return false;
-    }
-    return true;
-  });
+  filteredSouls = FilterCore.applyFilters(allSouls, {
+    q: q,
+    filters: filterSets,
+    sortKey: sKey,
+    sortDesc: sortDesc,
+  }, SOUL_SPEC);
 
-  filteredSouls.sort((a, b) => {
-    const va = sKey === 'rarity' ? (a.rarity || 0) : (a.id || 0);
-    const vb = sKey === 'rarity' ? (b.rarity || 0) : (b.id || 0);
-    return sortDesc ? vb - va : va - vb;
-  });
+  // Default sort fallback (by id) when sortKey not in spec
+  if (!sKey || !SOUL_SPEC.sortFns[sKey]) {
+    filteredSouls.sort((a, b) => {
+      const va = a.id || 0, vb = b.id || 0;
+      return sortDesc ? vb - va : va - vb;
+    });
+  }
 
   document.getElementById('soul-count').textContent = `${filteredSouls.length} 件`;
   renderList();
@@ -402,7 +404,7 @@ function renderDetail(s) {
       </div>
     </div>
     ${renderAffinityView(s)}
-    ${renderSkillsView(s.skills || [])}
+    ${renderSkillsView(s.skills || [], s)}
     ${acqEntries.length ? `
     <div class="section">
       <div class="section-title">入手場所</div>
@@ -440,9 +442,18 @@ function renderAffinityView(s) {
     </div>`;
 }
 
-function renderSkillsView(skills) {
-  if (!skills.length) return '';
-  const cards = skills.map(sk =>
+// Tombstone helper: returns Set of skill names marked deleted on this soul
+function _deletedSet(s) {
+  return new Set(Array.isArray(s && s._deleted_skills) ? s._deleted_skills : []);
+}
+
+function renderSkillsView(skills, soul) {
+  const dead   = _deletedSet(soul);
+  const baseV  = (skills || []).filter(sk => !dead.has(sk.name||''));
+  const addedV = Array.isArray(soul && soul._added_skills) ? soul._added_skills : [];
+  const all    = baseV.concat(addedV);
+  if (!all.length) return '';
+  const cards = all.map(sk =>
     `<div class="skill-card">
       <div class="skill-name-row">
         <span class="skill-name">${escHtml(sk.name||'')}</span>
@@ -456,7 +467,7 @@ function renderSkillsView(skills) {
   ).join('');
   return `
     <div class="section">
-      <div class="section-title">スキル構成 (${skills.length})</div>
+      <div class="section-title">スキル構成 (${all.length})</div>
       <div class="skills-list">${cards}</div>
     </div>`;
 }
@@ -504,13 +515,43 @@ function renderRightTags(sk) {
 }
 
 function ctPfx(ct) { return ct === 1 ? '+' : '×'; }
+function _fmtNumSimple(b) {
+  return Number.isInteger(b) ? b.toLocaleString('en-US') : String(parseFloat(b.toFixed(6)));
+}
+
+function fmtHitStages(e) {
+  var hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [];
+  var sc  = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [0,0,0];
+  if (!hps.length) return '';
+  var ht = e.hit_type != null ? e.hit_type : 0;
+  var op = (ht === 2) ? '×' : (ht === 3) ? '=' : '+';
+  function stageStr(v, s) {
+    return op + _fmtNumSimple(v) + (s ? '(+' + _fmtNumSimple(s) + '/熟度)' : '');
+  }
+  var s0 = sc[0] || 0, s1 = sc[1] || 0, s2 = sc[2] || 0;
+  if (hps.length === 3 && hps[0] !== 0 && hps[0] === hps[1] && hps[1] === hps[2] && s0 === s1 && s1 === s2) {
+    return stageStr(hps[0], s0);
+  }
+  var parts = hps.map(function(v, i) {
+    if (v == null || v === 0) return null;
+    return (i + 1) + '撃' + stageStr(v, sc[i] || 0);
+  }).filter(Boolean);
+  return parts.length ? parts.join(' / ') : '';
+}
+
 function fmtBairitu(sk) {
   return (sk.effects || []).map(function(e) {
-    if (e.bairitu == null) return '';
-    var b  = e.bairitu;
-    var sc = e.bairitu_scaling || 0;
-    var bs = ctPfx(e.calc_type) + (Number.isInteger(b) ? b.toLocaleString('en-US') : String(parseFloat(b.toFixed(6))));
-    return sc ? bs + ' + ' + sc + ' * 熟度' : bs;
+    var bunrui = e.bunrui || [];
+    var isHitOnly = bunrui.length === 1 && bunrui[0] === 7;
+    if (isHitOnly) return fmtHitStages(e);
+    var bairituStr = '';
+    if (e.bairitu != null && e.bairitu !== 0) {
+      var sc = e.bairitu_scaling || 0;
+      bairituStr = ctPfx(e.calc_type) + _fmtNumSimple(e.bairitu);
+      if (sc) bairituStr += ' + ' + sc + ' * 熟度';
+    }
+    var hitStr = bunrui.includes(7) ? fmtHitStages(e) : '';
+    return [bairituStr, hitStr].filter(Boolean).join(' / ');
   }).filter(Boolean).join(' / ');
 }
 
@@ -626,6 +667,13 @@ function deepApply(target, patch) {
 
 function saveEdit() {
   if (!editData) return;
+  // Clean up empty tombstone / added arrays
+  if (Array.isArray(editData._deleted_skills) && editData._deleted_skills.length === 0) {
+    delete editData._deleted_skills;
+  }
+  if (Array.isArray(editData._added_skills) && editData._added_skills.length === 0) {
+    delete editData._added_skills;
+  }
   const id  = editData.id;
   const idx = allSouls.findIndex(x => x.id === id);
   if (idx >= 0) {
@@ -673,8 +721,7 @@ function renderEditDetail(s) {
   return `
     <div class="soul-header edit-mode-active">
       <div class="soul-header-top" style="margin-bottom:10px">
-        <input class="edit-input title" value="${escHtml(s.name)}"
-               oninput="setPath(editData,'name',this.value)" style="flex:1;margin-right:10px">
+        <div class="title" style="flex:1;margin-right:10px;font-size:18px;font-weight:700">${escHtml(s.name)}</div>
         <div class="edit-actions">
           <button class="btn-save"   onclick="saveEdit()">保存</button>
           <button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>
@@ -724,10 +771,25 @@ function renderEditAffinitySection(s, field, keys, title) {
 }
 
 function renderEditSkillsSection(s) {
-  const skills = s.skills || [];
-  if (!skills.length) return '';
-  const cards = skills.map((sk, i) => {
-    const sp = `skills.${i}`;
+  const baseSkills  = s.skills || [];
+  const addedSkills = Array.isArray(s._added_skills) ? s._added_skills : [];
+  if (!baseSkills.length && !addedSkills.length) {
+    return `<div class="section"><div class="section-title">スキル構成</div><button class="btn-add-slot" onclick="addNewSkill()">+ スキル追加</button></div>`;
+  }
+  const dead = _deletedSet(s);
+  // Combine: base skills with source='base', added skills with source='added'
+  const items = baseSkills.map((sk, i) => ({sk, src:'base', i}))
+    .concat(addedSkills.map((sk, i) => ({sk, src:'added', i})));
+  const cards = items.map(it => {
+    const sk = it.sk, i = it.i, src = it.src;
+    const isAdded = src === 'added';
+    const isDeleted = !isAdded && dead.has(sk.name||'');
+    const path = isAdded ? `_added_skills.${i}` : `skills.${i}`;
+    const tombBtn = isAdded
+      ? `<button class="btn-skill-tomb" onclick="removeAddedSkill(${i})" title="削除">×</button>`
+      : `<button class="btn-skill-tomb" onclick="toggleSkillTombstone(${JSON.stringify(sk.name||'').replace(/"/g,'&quot;')})" title="${isDeleted?'復活':'削除'}">${isDeleted?'↻':'×'}</button>`;
+    const tagBadge = isAdded ? '<span style="font-size:10px;background:rgba(91,127,255,0.25);border:1px solid #5b7fff;color:#7b9fff;padding:1px 5px;border-radius:3px;margin-left:6px">追加</span>' : '';
+    const sp = path;
     const allEffects = sk.effects && sk.effects.length ? sk.effects : [{}];
     const effectBlocks = allEffects.map((e, ei) => {
       const ep     = `${sp}.effects.${ei}`;
@@ -744,7 +806,7 @@ function renderEditSkillsSection(s) {
         `<button class="btog${selTypes.includes(+k)?' on':''}" onclick="toggleType('${ep}',${k},this)">${v}</button>`
       ).join('');
       const delBtn = allEffects.length > 1
-        ? `<button class="latent-rm-btn" onclick="removeSkillEffect(${i},${ei})" title="削除">×</button>` : '';
+        ? `<button class="latent-rm-btn" onclick="removeSkillEffect('${src}',${i},${ei})" title="削除">×</button>` : '';
       return `
         <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:4px">
           <div class="field-label" style="margin:0">効果 #${ei+1}</div>${delBtn}
@@ -786,7 +848,12 @@ function renderEditSkillsSection(s) {
             </div>
           </div>
         </div>
-        ${(bunrui.includes(7)) ? `
+        ${(bunrui.includes(7)) ? (() => {
+          const hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null,null,null];
+          const hpss = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [null,null,null];
+          const stageIn = (i) => `<div><div class="field-label">${i+1}撃</div><input type="number" step="any" class="edit-num-sm" style="width:42px" value="${hps[i]!=null?hps[i]:''}" oninput="setHitStage('${ep}',${i},this.value)"></div>`;
+          const scaleIn = (i) => `<div><div class="field-label">${i+1}撃+</div><input type="number" step="any" class="edit-num-sm" style="width:42px" value="${hpss[i]!=null?hpss[i]:''}" oninput="setHitStageScaling('${ep}',${i},this.value)"></div>`;
+          return `
         <div class="field-label" style="margin-top:6px">ヒット計算 <span style="color:var(--text2);font-weight:400">(bunrui=7のみ)</span></div>
         <div class="skill-edit-meta">
           <div>
@@ -798,41 +865,33 @@ function renderEditSkillsSection(s) {
               <option value="3"${e.hit_type===3?' selected':''}>3 設定値</option>
             </select>
           </div>
-          <div>
-            <div class="field-label">1撃目</div>
-            <input type="number" step="any" class="edit-num-sm" style="width:60px"
-              value="${Array.isArray(e.hit_per_stage)&&e.hit_per_stage[0]!=null?e.hit_per_stage[0]:''}"
-              oninput="setHitStage('${ep}',0,this.value)">
-          </div>
-          <div>
-            <div class="field-label">2撃目</div>
-            <input type="number" step="any" class="edit-num-sm" style="width:60px"
-              value="${Array.isArray(e.hit_per_stage)&&e.hit_per_stage[1]!=null?e.hit_per_stage[1]:''}"
-              oninput="setHitStage('${ep}',1,this.value)">
-          </div>
-          <div>
-            <div class="field-label">3撃目</div>
-            <input type="number" step="any" class="edit-num-sm" style="width:60px"
-              value="${Array.isArray(e.hit_per_stage)&&e.hit_per_stage[2]!=null?e.hit_per_stage[2]:''}"
-              oninput="setHitStage('${ep}',2,this.value)">
-          </div>
-        </div>` : ''}
+          ${stageIn(0)}${stageIn(1)}${stageIn(2)}
+          ${scaleIn(0)}${scaleIn(1)}${scaleIn(2)}
+        </div>`;
+        })() : ''}
         `;
     }).join('');
+    const nameField = isAdded
+      ? `<input type="text" class="edit-input" style="font-size:13px;color:var(--accent);font-weight:600;width:100%" value="${escHtml(sk.name||'')}" oninput="setPath(editData,'${path}.name',this.value)">`
+      : `<div class="skill-name-edit" style="font-size:13px;color:var(--accent);font-weight:600;padding:4px 0 6px">${escHtml(sk.name||'')}${tagBadge}</div>`;
+    const effectField = isAdded
+      ? `<input type="text" class="edit-input" style="font-size:13px;width:100%" value="${escHtml(sk.effect||'')}" oninput="setPath(editData,'${path}.effect',this.value)">`
+      : `<div style="font-size:13px;line-height:1.6;padding:4px 0 6px;color:var(--text)">${escHtml(sk.effect||'')}</div>`;
     return `
-      <div class="skill-edit-card">
+      <div class="skill-edit-card${isDeleted?' deleted':''}">
+        ${tombBtn}
         <div class="field-label">スキル名</div>
-        <div style="font-size:13px;color:var(--accent);font-weight:600;padding:4px 0 6px">${escHtml(sk.name||'')}</div>
+        ${nameField}
         <div class="field-label">効果</div>
-        <div style="font-size:13px;line-height:1.6;padding:4px 0 6px;color:var(--text)">${escHtml(sk.effect||'')}</div>
-        ${effectBlocks}
-        <button class="btn-add-slot" style="margin-top:6px" onclick="addSkillEffect(${i})">+ 効果追加</button>
+        ${effectField}
+        ${isDeleted ? '<div style="color:#ff8080;font-size:12px;padding:4px 0">⚠ このスキルは削除マーク中（保存後ビューで非表示）</div>' : effectBlocks + `<button class="btn-add-slot" style="margin-top:6px" onclick="addSkillEffect('${src}',${i})">+ 効果追加</button>`}
       </div>`;
   }).join('');
   return `
     <div class="section">
-      <div class="section-title">スキル構成 (${skills.length})</div>
+      <div class="section-title">スキル構成 (${baseSkills.length + addedSkills.length})</div>
       <div class="skills-list">${cards}</div>
+      <button class="btn-add-slot" style="margin-top:8px" onclick="addNewSkill()">+ スキル追加</button>
     </div>`;
 }
 
@@ -843,18 +902,59 @@ function setHitStage(path, idx, val) {
   setPath(editData, path + '.hit_per_stage', arr);
 }
 
-// ===== SKILL EFFECT ADD/DELETE =====
-function addSkillEffect(i) {
-  if (!editData.skills || !editData.skills[i]) return;
-  if (!editData.skills[i].effects) editData.skills[i].effects = [];
-  editData.skills[i].effects.push({bunrui:[1], scope:0, condition:0, calc_type:0});
+function setHitStageScaling(path, idx, val) {
+  var arr = (getPath(editData, path + '.hit_per_stage_scaling') || [null, null, null]).slice();
+  while (arr.length < 3) arr.push(null);
+  arr[idx] = val === '' ? null : +val;
+  setPath(editData, path + '.hit_per_stage_scaling', arr);
+}
+
+// ===== SKILL TOMBSTONE / ADD =====
+function toggleSkillTombstone(name) {
+  if (!editData) return;
+  if (!Array.isArray(editData._deleted_skills)) editData._deleted_skills = [];
+  const idx = editData._deleted_skills.indexOf(name);
+  if (idx >= 0) editData._deleted_skills.splice(idx, 1);
+  else          editData._deleted_skills.push(name);
   reRenderEditSkills();
 }
 
-function removeSkillEffect(i, ei) {
-  var effs = editData.skills && editData.skills[i] && editData.skills[i].effects;
-  if (!effs || effs.length <= 1) return;
-  effs.splice(ei, 1);
+function addNewSkill() {
+  if (!editData) return;
+  if (!Array.isArray(editData._added_skills)) editData._added_skills = [];
+  editData._added_skills.push({
+    name: '新しいスキル',
+    effect: '',
+    effects: [{bunrui:[1], scope:0, condition:0, calc_type:0, bairitu:0}]
+  });
+  reRenderEditSkills();
+}
+
+function removeAddedSkill(i) {
+  if (!editData || !Array.isArray(editData._added_skills)) return;
+  editData._added_skills.splice(i, 1);
+  if (!editData._added_skills.length) delete editData._added_skills;
+  reRenderEditSkills();
+}
+
+function _getSkillRef(src, i) {
+  if (src === 'added') return (editData._added_skills || [])[i];
+  return (editData.skills || [])[i];
+}
+
+// ===== SKILL EFFECT ADD/DELETE =====
+function addSkillEffect(src, i) {
+  const sk = _getSkillRef(src, i);
+  if (!sk) return;
+  if (!sk.effects) sk.effects = [];
+  sk.effects.push({bunrui:[1], scope:0, condition:0, calc_type:0});
+  reRenderEditSkills();
+}
+
+function removeSkillEffect(src, i, ei) {
+  const sk = _getSkillRef(src, i);
+  if (!sk || !sk.effects || sk.effects.length <= 1) return;
+  sk.effects.splice(ei, 1);
   reRenderEditSkills();
 }
 

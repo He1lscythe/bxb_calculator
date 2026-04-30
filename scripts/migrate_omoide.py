@@ -20,7 +20,6 @@ def normalize(chars):
 
 for fname, write_js in [
     ('characters.json',            True),
-    ('characters_classified.json', True),
     ('characters_revise.json',     False),
 ]:
     path = os.path.join(ROOT, fname)

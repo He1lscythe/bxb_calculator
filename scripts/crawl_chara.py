@@ -126,7 +126,12 @@ def parse_hit_count(raw):
         m = re.match(r"(\d+)", p.strip())
         if m:
             result.append(int(m.group(1)))
-    return result if result else raw
+    if not result:
+        return raw
+    # Pad to exactly 3 stages with 0s (e.g. [3] → [3,0,0])
+    while len(result) < 3:
+        result.append(0)
+    return result[:3]
 
 
 def parse_bd_skill(table):
