@@ -43,7 +43,12 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 #sort-dir:hover { border-color: var(--accent); color: var(--accent); }
 .btn-reset { font-size: 11px; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; flex-shrink: 0; }
 .btn-reset:hover { color: var(--text); }
-#soul-count { font-size: 11px; color: var(--text2); text-align: right; }
+#soul-count { font-size: 11px; color: var(--text2); white-space: nowrap; }
+.filters-toprow { display: flex; align-items: center; gap: 6px; }
+.filters-toprow input { flex: 1; min-width: 0; }
+.filter-toggle-btn { width: 100%; margin: 4px 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; display: block; }
+.filter-toggle-btn:hover { border-color: var(--accent); }
+#filters-body { display: flex; flex-direction: column; gap: 8px; }
 
 #soul-list { flex: 1; overflow-y: auto; }
 #soul-list::-webkit-scrollbar { width: 4px; }
@@ -169,6 +174,7 @@ input[type=number] { -moz-appearance: textfield; }
   #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); }
   #soul-list { height: 175px; flex: none; }
   #detail { overflow: visible; padding: 14px 16px; flex: none; }
+  #f-type { display: grid; grid-template-columns: repeat(6, 1fr); }
 }
 </style>
 </head>
@@ -182,12 +188,16 @@ input[type=number] { -moz-appearance: textfield; }
   <!-- SIDEBAR -->
   <div id="sidebar">
     <div id="filters">
-      <input type="text" id="search" placeholder="🔍 ソウル名で検索..."
-             style="width:100%;padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;"
-             oninput="applyFilters()">
-
+      <div class="filters-toprow">
+        <input type="text" id="search" placeholder="🔍 ソウル名で検索..."
+               style="padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;"
+               oninput="applyFilters()">
+        <div id="soul-count"></div>
+      </div>
+      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ フィルター</button>
+      <div id="filters-body" style="display:none">
       <div class="filter-section">
-        <div class="filter-label">星級</div>
+        <div class="filter-label">レア度</div>
         <div class="filter-toggles" id="f-rarity">
           <button class="ftog" data-val="5" onclick="toggleFilter('rarity',5,this)">★5</button>
           <button class="ftog" data-val="4" onclick="toggleFilter('rarity',4,this)">★4</button>
@@ -230,12 +240,12 @@ input[type=number] { -moz-appearance: textfield; }
       <div class="sort-row">
         <select id="f-sort" onchange="applyFilters()">
           <option value="id">ID順</option>
-          <option value="rarity">星級順</option>
+          <option value="rarity">レア度順</option>
         </select>
         <button id="sort-dir" onclick="toggleSortDir()">↓</button>
         <button class="btn-reset" onclick="resetFilters()">リセット</button>
       </div>
-      <div id="soul-count"></div>
+      </div><!-- #filters-body -->
     </div>
     <div id="soul-list"></div>
   </div>
@@ -275,6 +285,14 @@ let sessionReviseIds = new Set();
 let originalData  = {};
 let editData      = null;
 const filterSets  = { rarity: new Set(), element: new Set(), type: new Set() };
+
+function toggleFilters() {
+  var body = document.getElementById('filters-body');
+  var btn = document.getElementById('filter-toggle-btn');
+  var open = body.style.display === 'none';
+  body.style.display = open ? '' : 'none';
+  btn.textContent = open ? '▲ フィルター' : '▼ フィルター';
+}
 
 // ===== LOAD =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -731,7 +749,7 @@ function renderEditDetail(s) {
            onerror="this.style.display='none'" alt="">
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;align-items:center">
         <div style="display:flex;align-items:center;gap:6px">
-          <span class="field-label" style="margin:0">星級</span>
+          <span class="field-label" style="margin:0">レア度</span>
           <select class="edit-select" onchange="setPath(editData,'rarity',+this.value)">
             ${[5,4,3,2,1].map(n=>`<option value="${n}"${s.rarity===n?' selected':''}>${'★'.repeat(n)}</option>`).join('')}
           </select>

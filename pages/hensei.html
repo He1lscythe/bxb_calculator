@@ -1192,7 +1192,7 @@ function buildEMSidebar(type){
   let h=`<input type="text" class="modal-search" id="em-search" placeholder="名前で検索..." value="${esc(f.q)}" oninput="mf['${type}'].q=this.value;applyEM()">`;
 
   if(type==='chara'){
-    h+=fsec('レアリティ','rarity',[[4,'SS'],[3,'S'],[2,'AA'],[1,'A']],f.rarity);
+    h+=fsec('レア度','rarity',[[4,'SS'],[3,'S'],[2,'AA'],[1,'A']],f.rarity);
     h+=fsec('属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
     h+=fsec('武器種','type',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.type);
     h+=fsec('状態','state',[['極弐','極弐'],['改造','改造'],['通常','通常']],f.state);
@@ -1216,16 +1216,16 @@ function buildEMSidebar(type){
       <option value="__bdhit_max"${f.sort==='__bdhit_max'?' selected':''}>BDヒット</option>
     </select><button class="f-sort-dir" id="em-sort-dir" onclick="mf['chara'].desc=!mf['chara'].desc;this.textContent=mf['chara'].desc?'↓':'↑';applyEM()">${f.desc?'↓':'↑'}</button></div>`;
   } else if(type==='soul'){
-    h+=fsec('レアリティ','rarity',[[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
+    h+=fsec('レア度','rarity',[[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
     h+=fsec('得意属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
     h+=fsec('得意武器','type',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.type);
   } else if(type==='bg'){
-    h+=fsec('レアリティ','rarity',[[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
+    h+=fsec('レア度','rarity',[[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
     h+=fsec('属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
     h+=fsec('武器','weapon',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.weapon);
     h+=bunruiSec(f.bunrui);
   } else if(type==='crystal'){
-    h+=fsec('レアリティ','rarity',[[6,'★6'],[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
+    h+=fsec('レア度','rarity',[[6,'★6'],[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
     h+=fsec('武器','weapon',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.weapon);
     h+=fsec('属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
     h+=bunruiSec(f.bunrui);
