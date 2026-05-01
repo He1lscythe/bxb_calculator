@@ -769,7 +769,7 @@ function renderDetail(c) {
   return `
     <div class="chara-header">
       <div class="chara-header-info">
-        <div class="chara-title">${escHtml(c.name)}<img class="chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">${hasOmoide(c) ? `<button class="btn-latent" style="margin-left:8px" onclick="openLatentModal(${c.id})">潜在開放</button>` : ''}</div>
+        <div class="chara-title">${escHtml(c.name)}<img class="chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt=""></div>
         <div class="chara-meta">
           <span class="meta-chip"><span class="badge ${rLabel}">${rLabel}</span></span>
           <span class="meta-chip"><span class="elem-dot" style="background:${eColor}"></span>${eName}属性</span>
@@ -777,7 +777,8 @@ function renderDetail(c) {
           ${c.url ? `<a class="meta-chip" href="${c.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>` : ''}
         </div>
       </div>
-      <div style="display:flex;gap:6px;flex-shrink:0;align-items:flex-start">
+      <div style="display:flex;gap:6px;flex-shrink:0;align-items:flex-start;flex-wrap:wrap;justify-content:flex-end">
+        ${hasOmoide(c) ? `<button class="btn-latent" onclick="openLatentModal(${c.id})">潜在開放</button>` : ''}
         <button class="btn-edit" onclick="enterEditMode(${c.id})">修正</button>
       </div>
     </div>

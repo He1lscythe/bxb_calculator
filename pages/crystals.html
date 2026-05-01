@@ -772,7 +772,12 @@ async function saveRevise() {
 // ===== HELPERS =====
 function fmt(n) {
   if (n == null) return '-';
-  if (typeof n === 'number') return n.toLocaleString('ja-JP');
+  if (typeof n === 'number') {
+    var a = Math.abs(n);
+    if (a >= 100000000) return (Math.round(n / 100000000 * 10) / 10) + '億';
+    if (a >= 10000)     return (Math.round(n / 10000 * 10) / 10)     + '万';
+    return n.toLocaleString('ja-JP');
+  }
   return String(n);
 }
 function escHtml(s) {
