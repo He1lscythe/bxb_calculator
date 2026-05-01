@@ -84,7 +84,6 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .badge.weapon { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
 @media (max-width: 768px) {
   body { height: auto; overflow-y: auto; }
-  /* Allow sticky to propagate through page-wrap and sidebar */
   #page-wrap { overflow: visible; }
   #layout { flex-direction: column; overflow: visible; flex: none; }
   #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); overflow: visible; }
@@ -92,11 +91,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
   #detail { overflow: visible; padding: 14px 16px; flex: none; }
   .filter-toggle-btn { display: block; }
   #filters-body { display: none; }
-  /* Sticky filter bar on mobile */
+  #topbar { position: static !important; }
   #filters {
     position: sticky;
-    top: 52px;
-    z-index: 50;
+    top: 0;
+    z-index: 100;
     background: var(--bg2);
   }
 }
@@ -576,20 +575,25 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(() => {});
 });
 
+var _filtersOpenScrollY = null;
 function toggleFilters() {
   var body = document.getElementById('filters-body');
   var btn = document.getElementById('filter-toggle-btn');
   var open = body.style.display === 'flex' || body.style.display === 'block';
   body.style.display = open ? '' : 'flex';
   btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
+  _filtersOpenScrollY = open ? null : window.scrollY;
 }
 function collapseFiltersOnScroll() {
   if (window.innerWidth > 768) return;
   var body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
+  if (_filtersOpenScrollY === null) return;
+  if (Math.abs(window.scrollY - _filtersOpenScrollY) < 30) return;
   body.style.display = '';
   var btn = document.getElementById('filter-toggle-btn');
   if (btn) btn.textContent = '▼ 絞り込み';
+  _filtersOpenScrollY = null;
 }
 window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
 

@@ -127,13 +127,14 @@ input[type=number] { -moz-appearance: textfield; }
   .desktop-bottom { display: none; }
   #filters-body { display: none; }
   .filter-row2 { flex-direction: column; }
+  #topbar { position: static !important; }
   #filters {
     position: sticky;
-    top: 52px;
-    z-index: 50;
+    top: 0;
+    z-index: 100;
     background: var(--bg2);
     margin-top: 0;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0;
   }
 }
 </style>
@@ -309,20 +310,25 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(function() {});
 });
 
+var _filtersOpenScrollY = null;
 function toggleFilters() {
   var body = document.getElementById('filters-body');
   var btn = document.getElementById('filter-toggle-btn');
   var open = body.style.display === 'flex' || body.style.display === 'block';
   body.style.display = open ? '' : 'flex';
   btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
+  _filtersOpenScrollY = open ? null : window.scrollY;
 }
 function collapseFiltersOnScroll() {
   if (window.innerWidth > 768) return;
   var body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
+  if (_filtersOpenScrollY === null) return;
+  if (Math.abs(window.scrollY - _filtersOpenScrollY) < 30) return;
   body.style.display = '';
   var btn = document.getElementById('filter-toggle-btn');
   if (btn) btn.textContent = '▼ 絞り込み';
+  _filtersOpenScrollY = null;
 }
 window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
 
