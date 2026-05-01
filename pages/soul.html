@@ -168,8 +168,9 @@ input[type=number] { -moz-appearance: textfield; }
 
 @media (max-width: 768px) {
   body { height: auto; overflow-y: auto; }
+  #page-wrap { overflow: visible; }
   #layout { flex-direction: column; overflow: visible; flex: none; }
-  #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); }
+  #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); overflow: visible; }
   #soul-list { height: 175px; flex: none; }
   #detail { overflow: visible; padding: 14px 16px; flex: none; }
   #f-type { display: grid; grid-template-columns: repeat(6, 1fr); }
@@ -179,8 +180,7 @@ input[type=number] { -moz-appearance: textfield; }
     position: sticky;
     top: 52px;
     z-index: 50;
-    background: var(--bg);
-    padding-bottom: 6px;
+    background: var(--bg2);
   }
 }
 </style>

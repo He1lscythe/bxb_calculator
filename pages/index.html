@@ -84,8 +84,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .badge.weapon { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
 @media (max-width: 768px) {
   body { height: auto; overflow-y: auto; }
+  /* Allow sticky to propagate through page-wrap and sidebar */
+  #page-wrap { overflow: visible; }
   #layout { flex-direction: column; overflow: visible; flex: none; }
-  #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); }
+  #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); overflow: visible; }
   #char-list { height: 175px; flex: none; }
   #detail { overflow: visible; padding: 14px 16px; flex: none; }
   .filter-toggle-btn { display: block; }
@@ -95,8 +97,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
     position: sticky;
     top: 52px;
     z-index: 50;
-    background: var(--bg);
-    padding-bottom: 6px;
+    background: var(--bg2);
   }
 }
 
