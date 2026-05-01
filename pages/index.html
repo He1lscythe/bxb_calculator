@@ -51,8 +51,15 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 #sort-dir { flex-shrink: 0; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; cursor: pointer; }
 #sort-dir:hover { border-color: var(--accent); color: var(--accent); }
 #char-count { font-size: 11px; color: var(--text2); text-align: right; padding: 2px 2px 0; }
+.search-row { display: flex; align-items: center; gap: 8px; }
+.search-row input { flex: 1; min-width: 0; }
+#char-count-mob { display: none; font-size: 11px; color: var(--text2); white-space: nowrap; }
+.actions-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.actions-row select { flex: 1; min-width: 80px; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
+.btn-reset-filters { font-size: 11px; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; flex-shrink: 0; }
+.btn-reset-filters:hover { color: var(--text); }
 /* Mobile filter toggle — hidden on desktop */
-.filter-toggle-btn { display: none; width: 100%; margin: 4px 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; }
+.filter-toggle-btn { display: none; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; flex-shrink: 0; }
 .filter-toggle-btn:hover { border-color: var(--accent); }
 /* Desktop: filter body always visible */
 #filters-body { display: flex; flex-direction: column; gap: 8px; }
@@ -123,10 +130,12 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
   .state-tabs { margin-top: 0; }
   .filter-toggle-btn { display: block; }
   #filters-body { display: none; }
-  #topbar { position: static !important; }
+  #char-count-mob { display: block; }
+  #char-count { display: none; }
+  /* nav stays sticky on mobile too — filter sits below it */
   #filters {
     position: sticky;
-    top: 0;
+    top: 52px;
     z-index: 50;
     background: var(--bg2);
   }
@@ -420,8 +429,31 @@ input[type=number] { -moz-appearance: textfield; }
 <div id="layout">
   <div id="sidebar">
     <div id="filters">
-      <input type="text" id="search" placeholder="🔍 魔剣名で検索..." oninput="applyFilters()">
-      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
+      <div class="search-row">
+        <input type="text" id="search" placeholder="🔍 魔剣名で検索..." oninput="applyFilters()">
+        <span id="char-count-mob"></span>
+      </div>
+      <div class="actions-row">
+        <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
+        <select id="f-sort">
+          <option value="">並び替えなし</option>
+          <option value="攻撃力">攻撃力</option>
+          <option value="防御力">防御力</option>
+          <option value="ブレイク力">ブレイク力</option>
+          <option value="HP">HP</option>
+          <option value="LP">LP</option>
+          <option value="保有魔力">保有魔力</option>
+          <option value="結晶スロット">結晶スロット</option>
+          <option value="B">B</option>
+          <option value="W">W</option>
+          <option value="H">H</option>
+          <option value="BDコスト">BDコスト</option>
+          <option value="__hit_max">合計hit</option>
+          <option value="__bdhit_max">BDヒット</option>
+        </select>
+        <button id="sort-dir" onclick="toggleSortDir()">↓</button>
+        <button class="btn-reset-filters" onclick="resetFilters()">リセット</button>
+      </div>
       <div id="filters-body">
       <div class="filter-section">
         <div class="filter-label">レア度</div>
@@ -494,26 +526,6 @@ input[type=number] { -moz-appearance: textfield; }
         </div>
       </div>
 
-      <div class="filter-row">
-        <select id="f-sort">
-          <option value="">並び替えなし</option>
-          <option value="攻撃力">攻撃力</option>
-          <option value="防御力">防御力</option>
-          <option value="ブレイク力">ブレイク力</option>
-          <option value="HP">HP</option>
-          <option value="LP">LP</option>
-          <option value="保有魔力">保有魔力</option>
-          <option value="結晶スロット">結晶スロット</option>
-          <option value="B">B</option>
-          <option value="W">W</option>
-          <option value="H">H</option>
-          <option value="BDコスト">BDコスト</option>
-          <option value="__hit_max">合計hit</option>
-          <option value="__bdhit_max">BDヒット</option>
-        </select>
-        <button id="sort-dir" onclick="toggleSortDir()">↓</button>
-        <button onclick="resetFilters()" style="font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
-      </div>
       </div><!-- #filters-body -->
       <div id="char-count"></div>
     </div>
@@ -767,7 +779,10 @@ function applyFilters() {
     });
   }
 
-  document.getElementById('char-count').textContent = `${filteredChars.length} 件`;
+  const ct = `${filteredChars.length} 件`;
+  document.getElementById('char-count').textContent = ct;
+  const mob = document.getElementById('char-count-mob');
+  if (mob) mob.textContent = ct;
   renderList();
 }
 
@@ -865,9 +880,6 @@ function updateMobNavBar(c) {
 let _stickyResizeObserver = null;
 let _stickyMeasureRAF = null;
 function _measureStickyHeights() {
-  // Sticky support for both desktop and mobile.
-  // On desktop --sticky-bar-h = 0 (no mob-bar visible);
-  // on mobile --sticky-bar-h = mob-bar height.
   const isMob = window.innerWidth <= 768;
   const bar = document.getElementById('detail-mob-bar');
   const header = document.querySelector('#chara-detail .chara-header');
@@ -875,6 +887,9 @@ function _measureStickyHeights() {
   const headerH = header ? header.getBoundingClientRect().height : 100;
   document.documentElement.style.setProperty('--sticky-bar-h', barH + 'px');
   document.documentElement.style.setProperty('--sticky-header-h', headerH + 'px');
+  // Also set state-tabs.style.top directly as a backup to ensure correct positioning
+  const stateTabs = document.querySelector('#chara-detail .state-tabs');
+  if (stateTabs) stateTabs.style.top = (barH + headerH) + 'px';
 }
 function _scheduleMeasure() {
   // Throttle via rAF: collapse multiple ResizeObserver callbacks into one frame

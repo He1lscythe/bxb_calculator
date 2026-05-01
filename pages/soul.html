@@ -37,8 +37,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .ftog:hover { border-color: var(--accent); color: var(--text); }
 .ftog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; font-weight: 700; }
 
-.sort-row { display: flex; gap: 5px; align-items: center; }
-.sort-row select { flex: 1; padding: 5px 6px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
+.actions-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.actions-row select { flex: 1; min-width: 80px; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
 #sort-dir { flex-shrink: 0; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; cursor: pointer; }
 #sort-dir:hover { border-color: var(--accent); color: var(--accent); }
 .btn-reset { font-size: 11px; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; flex-shrink: 0; }
@@ -47,7 +47,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .mob-search-row { display: flex; align-items: center; gap: 8px; }
 .mob-search-row input { flex: 1; min-width: 0; }
 #soul-count-mob { display: none; font-size: 11px; color: var(--text2); white-space: nowrap; }
-.filter-toggle-btn { display: none; width: 100%; margin: 4px 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; }
+.filter-toggle-btn { display: none; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; flex-shrink: 0; }
 .filter-toggle-btn:hover { border-color: var(--accent); }
 #filters-body { display: flex; flex-direction: column; gap: 8px; }
 #detail-mob-bar { display: none; align-items: center; justify-content: space-between; gap: 8px; position: sticky; top: 0; z-index: 10; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 8px 12px; box-shadow: 0 -100vh 0 0 var(--bg2), 0 2px 8px rgba(0,0,0,.4); }
@@ -209,10 +209,10 @@ input[type=number] { -moz-appearance: textfield; }
   #filters-body { display: none; }
   #soul-count-mob { display: block; }
   #soul-count { display: none; }
-  #topbar { position: static !important; }
+  /* nav stays sticky on mobile too — filter sits below it */
   #filters {
     position: sticky;
-    top: 0;
+    top: 52px;
     z-index: 50;
     background: var(--bg2);
   }
@@ -235,7 +235,15 @@ input[type=number] { -moz-appearance: textfield; }
                oninput="applyFilters()">
         <span id="soul-count-mob"></span>
       </div>
-      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
+      <div class="actions-row">
+        <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
+        <select id="f-sort" onchange="applyFilters()">
+          <option value="id">ID順</option>
+          <option value="rarity">レア度順</option>
+        </select>
+        <button id="sort-dir" onclick="toggleSortDir()">↓</button>
+        <button class="btn-reset" onclick="resetFilters()">リセット</button>
+      </div>
       <div id="filters-body">
       <div class="filter-section">
         <div class="filter-label">レア度</div>
@@ -278,14 +286,6 @@ input[type=number] { -moz-appearance: textfield; }
         </div>
       </div>
 
-      <div class="sort-row">
-        <select id="f-sort" onchange="applyFilters()">
-          <option value="id">ID順</option>
-          <option value="rarity">レア度順</option>
-        </select>
-        <button id="sort-dir" onclick="toggleSortDir()">↓</button>
-        <button class="btn-reset" onclick="resetFilters()">リセット</button>
-      </div>
       </div><!-- #filters-body -->
       <div id="soul-count"></div>
     </div>

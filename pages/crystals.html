@@ -130,10 +130,10 @@ input[type=number] { -moz-appearance: textfield; }
   #filters-body { display: none; }
   .filter-row2 { flex-direction: column; }
   /* Nav scrolls away on mobile, filter sticks to viewport top */
-  #topbar { position: static !important; }
+  /* nav stays sticky on mobile too — filter sits below it */
   #filters {
     position: sticky;
-    top: 0;
+    top: 52px;
     z-index: 50;
     background: var(--bg2);
     margin-top: 0;
