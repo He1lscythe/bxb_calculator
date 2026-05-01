@@ -106,11 +106,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
     overscroll-behavior: contain;
     padding: 0;
   }
-  #chara-detail { background: var(--bg); min-height: 100%; }
+  #chara-detail { background: var(--bg); min-height: 100%; padding: 0 8px 14px; }
   #detail.show-mob { display: block; }
   #placeholder { display: none; }
   #detail-mob-bar { display: flex; }
-  #chara-detail { padding: 0 16px 14px; }
   /* Stacked sticky: bar (z:10) > chara-header (z:6) > state-tabs (z:4) */
   .chara-header {
     position: sticky;
@@ -168,8 +167,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
     "title title"
     "meta edit";
 }
-.chara-title { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; min-width: 0; flex-wrap: wrap; }
-.chara-title > span.name-text { word-break: break-all; }
+.chara-title { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; min-width: 0; }
+.chara-title > span.name-text { flex: 1; min-width: 0; word-break: break-all; }
 .chara-icon { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; flex-shrink: 0; }
 /* Edit-mode header layout (desktop): title row 1; selects + actions same row 2 */
 .chara-header.edit-mode-active {
@@ -190,7 +189,25 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
   .btn-text-desk { display: none; }
   .btn-text-mob { display: inline; }
   .btn-latent, .btn-edit { min-width: 60px; padding: 5px 10px; }
-  /* Edit mode mobile: 3 stacked rows — title, selects, actions */
+  /* View mode mobile: 3 rows — title, meta, [latent ... edit] */
+  .chara-header:not(.edit-mode-active) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "title title"
+      "meta meta"
+      "latent edit";
+  }
+  .chara-header:not(.edit-mode-active) > .btn-latent { justify-self: start; }
+  .chara-header:not(.edit-mode-active) > .btn-edit { justify-self: end; }
+  /* No-omoide mobile: 3 rows — title, meta, edit (right-aligned) */
+  .chara-header:not(.edit-mode-active):not(:has(.btn-latent)) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "meta"
+      "edit";
+  }
+  /* Edit mode mobile: 3 stacked rows — title, selects, actions (left-aligned) */
   .chara-header.edit-mode-active {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -198,7 +215,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
       "selects"
       "actions";
   }
-  .chara-header.edit-mode-active .edit-actions { justify-content: flex-end; }
+  .chara-header.edit-mode-active .edit-actions { justify-content: flex-start; }
 }
 
 /* latent modal */
