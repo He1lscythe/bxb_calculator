@@ -160,6 +160,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
   top: var(--sticky-bar-h, 0px);
   z-index: 6;
   background: var(--bg);
+  /* 0 -100vh 阴影把上方区域用 bg 盖住，避免 sticky 切换瞬间或 padding-top 露出后方滚动内容 */
+  box-shadow: 0 -100vh 0 0 var(--bg);
 }
 .chara-header .chara-title { grid-area: title; }
 .chara-header > .btn-latent { grid-area: latent; }
