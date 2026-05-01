@@ -61,7 +61,7 @@
       '#page-nav.open{display:flex;}' +
       '.nav-link{padding:12px 20px;border-bottom:1px solid var(--border);border-right:none;white-space:normal;}' +
       '.nav-link.active{border-bottom-color:var(--border);border-left:3px solid var(--accent);padding-left:17px;}' +
-      '#topbar{position:relative;}' +
+      /* topbar 保持 sticky（默认值）——sticky 本身就是定位元素，#page-nav 的 absolute 定位仍以 topbar 为锚 */
     '}';
 
   var style = document.createElement('style');
