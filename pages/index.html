@@ -97,6 +97,14 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .badge.elem-5 { background: var(--dark);  color: #fff; }
 .badge.elem-6 { background: var(--none);  color: #fff; }
 .badge.weapon { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+
+/* ===== DETAIL PANEL (desktop default — must come BEFORE mobile @media so mobile rules win on cascade) ===== */
+#detail { flex: 1; overflow-y: auto; padding: 20px 24px; }
+#detail::-webkit-scrollbar { width: 5px; }
+#detail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+#placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text2); gap: 8px; }
+#placeholder svg { opacity: .3; }
+
 @media (max-width: 768px) {
   body { height: auto; overflow-y: auto; }
   #page-wrap { overflow: visible; }
@@ -135,13 +143,6 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
     background: var(--bg2);
   }
 }
-
-/* ===== DETAIL PANEL ===== */
-#detail { flex: 1; overflow-y: auto; padding: 20px 24px; }
-#detail::-webkit-scrollbar { width: 5px; }
-#detail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-#placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text2); gap: 8px; }
-#placeholder svg { opacity: .3; }
 
 /* character header — grid layout (same on desktop and mobile view mode), sticky on both */
 .chara-header {
