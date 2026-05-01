@@ -175,6 +175,13 @@ input[type=number] { -moz-appearance: textfield; }
   #f-type { display: grid; grid-template-columns: repeat(6, 1fr); }
   .filter-toggle-btn { display: block; }
   #filters-body { display: none; }
+  #filters {
+    position: sticky;
+    top: 52px;
+    z-index: 50;
+    background: var(--bg);
+    padding-bottom: 6px;
+  }
 }
 </style>
 </head>
@@ -291,6 +298,15 @@ function toggleFilters() {
   body.style.display = open ? '' : 'flex';
   btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
 }
+function collapseFiltersOnScroll() {
+  if (window.innerWidth > 768) return;
+  var body = document.getElementById('filters-body');
+  if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
+  body.style.display = '';
+  var btn = document.getElementById('filter-toggle-btn');
+  if (btn) btn.textContent = '▼ 絞り込み';
+}
+window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
 
 // ===== LOAD =====
 document.addEventListener('DOMContentLoaded', () => {

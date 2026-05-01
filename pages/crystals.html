@@ -123,14 +123,20 @@ input[type=number] { -moz-appearance: textfield; }
   #content { flex: none; overflow: visible; }
   #crystal-list { flex: none; overflow-y: visible; }
   .row-bunrui { display: none; }
-  /* Mobile: show toolbar and mob count, hide desktop-only elements */
   .mob-toolbar { display: flex; }
   #crystal-count-mob { display: block; }
   .desktop-bottom { display: none; }
-  /* Mobile: filter body hidden by default */
   #filters-body { display: none; }
-  /* Mobile: filter-row2 stacks vertically */
   .filter-row2 { flex-direction: column; }
+  /* Sticky filter bar on mobile */
+  #filters {
+    position: sticky;
+    top: 52px;
+    z-index: 50;
+    background: var(--bg2);
+    margin-top: 0;
+    border-radius: 0 0 10px 10px;
+  }
 }
 </style>
 </head>
@@ -316,6 +322,15 @@ function toggleFilters() {
   body.style.display = open ? '' : 'flex';
   btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
 }
+function collapseFiltersOnScroll() {
+  if (window.innerWidth > 768) return;
+  var body = document.getElementById('filters-body');
+  if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
+  body.style.display = '';
+  var btn = document.getElementById('filter-toggle-btn');
+  if (btn) btn.textContent = '▼ 絞り込み';
+}
+window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
 
 // ===== FILTER STATE =====
 var filterSets = { rarity: new Set(), bunrui: new Set(), element: new Set(), weapon: new Set(), scope: new Set(), condition: new Set() };
