@@ -57,6 +57,12 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 /* Desktop: filter body always visible */
 #filters-body { display: flex; flex-direction: column; gap: 8px; }
 #char-list { flex: 1; overflow-y: auto; }
+/* Mobile-only modal navbar (hidden on desktop) */
+#detail-mob-bar { display: none; align-items: center; justify-content: space-between; gap: 8px; position: sticky; top: 0; z-index: 10; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 8px 12px; }
+#detail-mob-bar button { background: var(--bg3); border: 1px solid var(--border); color: var(--text); font-size: 14px; padding: 6px 14px; border-radius: 6px; cursor: pointer; min-width: 56px; }
+#detail-mob-bar button:hover { border-color: var(--accent); }
+#detail-mob-bar button:disabled { opacity: 0.3; cursor: default; }
+#detail-mob-bar .nav-label { font-size: 12px; color: var(--text2); flex: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #char-list::-webkit-scrollbar { width: 4px; }
 #char-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
@@ -87,8 +93,20 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
   #page-wrap { overflow: visible; }
   #layout { flex-direction: column; overflow: visible; flex: none; }
   #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); overflow: visible; }
-  #char-list { height: 175px; flex: none; }
-  #detail { overflow: visible; padding: 14px 16px; flex: none; }
+  #char-list { height: auto; flex: none; overflow: visible; }
+  /* Detail as fullscreen modal on mobile */
+  #detail {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: var(--bg);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0;
+  }
+  #detail.show-mob { display: block; }
+  #placeholder { display: none; }
+  #detail-mob-bar { display: flex; }
+  #chara-detail { padding: 14px 16px; }
   .filter-toggle-btn { display: block; }
   #filters-body { display: none; }
   #topbar { position: static !important; }
@@ -419,6 +437,12 @@ input[type=number] { -moz-appearance: textfield; }
   </div>
 
   <div id="detail">
+    <div id="detail-mob-bar">
+      <button id="detail-mob-prev" onclick="navChara(-1)" aria-label="前へ">‹</button>
+      <span class="nav-label" id="detail-mob-label"></span>
+      <button onclick="closeDetailMob()" aria-label="閉じる">✕</button>
+      <button id="detail-mob-next" onclick="navChara(1)" aria-label="次へ">›</button>
+    </div>
     <div id="placeholder">
       <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
         <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/>
@@ -726,6 +750,35 @@ function selectChar(id) {
   const preferred = ['極弐','改造','通常'].find(s => stateKeys.includes(s));
   const active = activeState[id] || preferred;
   switchState(id, active, detail);
+  // Mobile: show as fullscreen modal
+  if (window.innerWidth <= 768) {
+    const dt = document.getElementById('detail');
+    dt.classList.add('show-mob');
+    dt.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+  updateMobNavBar(c);
+}
+function closeDetailMob() {
+  document.getElementById('detail').classList.remove('show-mob');
+  document.body.style.overflow = '';
+}
+function navChara(dir) {
+  if (selectedId === null) return;
+  const idx = filteredChars.findIndex(c => c.id === selectedId);
+  if (idx < 0) return;
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= filteredChars.length) return;
+  selectChar(filteredChars[newIdx].id);
+}
+function updateMobNavBar(c) {
+  const idx = filteredChars.findIndex(x => x.id === selectedId);
+  const prev = document.getElementById('detail-mob-prev');
+  const next = document.getElementById('detail-mob-next');
+  const label = document.getElementById('detail-mob-label');
+  if (prev) prev.disabled = (idx <= 0);
+  if (next) next.disabled = (idx < 0 || idx >= filteredChars.length - 1);
+  if (label) label.textContent = c ? `${idx + 1} / ${filteredChars.length}` : '';
 }
 
 // ===== RENDER BD CARD =====

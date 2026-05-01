@@ -50,6 +50,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .filter-toggle-btn { display: none; width: 100%; margin: 4px 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; }
 .filter-toggle-btn:hover { border-color: var(--accent); }
 #filters-body { display: flex; flex-direction: column; gap: 8px; }
+#detail-mob-bar { display: none; align-items: center; justify-content: space-between; gap: 8px; position: sticky; top: 0; z-index: 10; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 8px 12px; }
+#detail-mob-bar button { background: var(--bg3); border: 1px solid var(--border); color: var(--text); font-size: 14px; padding: 6px 14px; border-radius: 6px; cursor: pointer; min-width: 56px; }
+#detail-mob-bar button:hover { border-color: var(--accent); }
+#detail-mob-bar button:disabled { opacity: 0.3; cursor: default; }
+#detail-mob-bar .nav-label { font-size: 12px; color: var(--text2); flex: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 #soul-list { flex: 1; overflow-y: auto; }
 #soul-list::-webkit-scrollbar { width: 4px; }
@@ -174,8 +179,20 @@ input[type=number] { -moz-appearance: textfield; }
   #page-wrap { overflow: visible; }
   #layout { flex-direction: column; overflow: visible; flex: none; }
   #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); overflow: visible; }
-  #soul-list { height: 175px; flex: none; }
-  #detail { overflow: visible; padding: 14px 16px; flex: none; }
+  #soul-list { height: auto; flex: none; overflow: visible; }
+  /* Detail as fullscreen modal on mobile */
+  #detail {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: var(--bg);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0;
+  }
+  #detail.show-mob { display: block; }
+  #placeholder { display: none; }
+  #detail-mob-bar { display: flex; }
+  #soul-detail { padding: 14px 16px; }
   #f-type { display: grid; grid-template-columns: repeat(6, 1fr); }
   .filter-toggle-btn { display: block; }
   #filters-body { display: none; }
@@ -266,6 +283,12 @@ input[type=number] { -moz-appearance: textfield; }
 
   <!-- DETAIL -->
   <div id="detail">
+    <div id="detail-mob-bar">
+      <button id="detail-mob-prev" onclick="navSoul(-1)" aria-label="前へ">‹</button>
+      <span class="nav-label" id="detail-mob-label"></span>
+      <button onclick="closeDetailMob()" aria-label="閉じる">✕</button>
+      <button id="detail-mob-next" onclick="navSoul(1)" aria-label="次へ">›</button>
+    </div>
     <div id="placeholder">
       <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
         <circle cx="12" cy="8" r="5"/><path d="M3 21c0-4.4 4-8 9-8s9 3.6 9 8"/>
@@ -431,6 +454,35 @@ function selectSoul(id) {
   const det = document.getElementById('soul-detail');
   det.style.display = 'block';
   det.innerHTML = renderDetail(s);
+  // Mobile: show as fullscreen modal
+  if (window.innerWidth <= 768) {
+    const dt = document.getElementById('detail');
+    dt.classList.add('show-mob');
+    dt.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+  updateMobNavBar(s);
+}
+function closeDetailMob() {
+  document.getElementById('detail').classList.remove('show-mob');
+  document.body.style.overflow = '';
+}
+function navSoul(dir) {
+  if (selectedId === null) return;
+  const idx = filteredSouls.findIndex(s => s.id === selectedId);
+  if (idx < 0) return;
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= filteredSouls.length) return;
+  selectSoul(filteredSouls[newIdx].id);
+}
+function updateMobNavBar(s) {
+  const idx = filteredSouls.findIndex(x => x.id === selectedId);
+  const prev = document.getElementById('detail-mob-prev');
+  const next = document.getElementById('detail-mob-next');
+  const label = document.getElementById('detail-mob-label');
+  if (prev) prev.disabled = (idx <= 0);
+  if (next) next.disabled = (idx < 0 || idx >= filteredSouls.length - 1);
+  if (label) label.textContent = s ? `${idx + 1} / ${filteredSouls.length}` : '';
 }
 
 // ===== VIEW DETAIL =====
