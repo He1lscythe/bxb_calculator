@@ -413,6 +413,7 @@ input[type=number] { -moz-appearance: textfield; }
 <body>
 <div id="page-wrap">
 <script src="../nav.js"></script>
+<script src="../shared/save-client.js"></script>
 <script src="../shared/filter-core.js"></script>
 <script src="../shared/chara-spec.js"></script>
 
@@ -1287,15 +1288,18 @@ async function saveRevise() {
   btn.textContent = '保存中...';
   btn.disabled    = true;
   try {
-    const res  = await fetch('/save', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ revise: Object.values(reviseData), omoide_revise: Object.values(omoideReviseData) }),
+    const ids = Array.from(sessionReviseIds);
+    const json = await submitRevise({
+      session_ids:   ids,
+      revise:        pickPatches(reviseData,        ids),
+      omoide_revise: pickPatches(omoideReviseData,  ids),
     });
-    const json = await res.json();
-    if (!res.ok) throw new Error(json.error || res.status);
     sessionReviseIds.clear();
-    status.textContent = '✓ 保存完了';
+    if (json.mode === 'remote') {
+      status.innerHTML = `✓ <a href="${json.prUrl}" target="_blank" style="color:var(--accent)">PR #${json.prNumber}</a> 已提交`;
+    } else {
+      status.textContent = '✓ 保存完了';
+    }
   } catch (err) {
     status.textContent = '保存失敗';
     console.error(err);
@@ -1893,9 +1897,7 @@ function saveOmoideTemplate() {
       const newId = omoideTemplates.length ? Math.max(...omoideTemplates.map(t => t.id)) + 1 : 1;
       omoideTemplates.push({ id: newId, name: trimmed, omoide });
     }
-    fetch('/save', { method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ omoide_templates: omoideTemplates }) })
-      .then(r => r.json())
+    submitRevise({ omoide_templates: omoideTemplates })
       .then(j => {
         if (!j.ok) throw new Error(j.error);
         const savedId = existing ? existing.id : omoideTemplates[omoideTemplates.length - 1].id;
