@@ -29,7 +29,16 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
 .ftog { font-size: 11px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; transition: all .1s; white-space: nowrap; }
 .ftog:hover { border-color: var(--accent); color: var(--text); }
 .ftog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; font-weight: 700; }
-#crystal-count { font-size: 12px; color: var(--text2); }
+#crystal-count { font-size: 12px; color: var(--text2); white-space: nowrap; }
+.filters-toprow { display: flex; align-items: center; gap: 8px; }
+.filters-toprow input { flex: 1; min-width: 0; }
+.filters-toolbar { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.filter-toggle-btn { flex: 1; min-width: 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; }
+.filter-toggle-btn:hover { border-color: var(--accent); }
+.toolbar-btn { font-size: 11px; padding: 3px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; white-space: nowrap; }
+.toolbar-btn:hover { border-color: var(--accent); color: var(--text); }
+#f-bunrui .ftog { min-width: 3.4em; text-align: center; }
+#filters-body { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
 
 #crystal-list { display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto; min-height: 0; padding-bottom: 16px; }
 #crystal-list::-webkit-scrollbar { width: 4px; }
@@ -109,6 +118,7 @@ input[type=number] { -moz-appearance: textfield; }
   #content { flex: none; overflow: visible; }
   #crystal-list { flex: none; overflow-y: visible; }
   .row-bunrui { display: none; }
+  .filter-row2 { display: flex; flex-direction: column; gap: 8px; }
 }
 </style>
 </head>
@@ -120,11 +130,20 @@ input[type=number] { -moz-appearance: textfield; }
 <script src="../shared/crystal-spec.js"></script>
 <div id="content">
   <div id="filters">
-    <input type="text" id="search" placeholder="🔍 結晶名で検索..." oninput="applyFilters()">
-
+    <div class="filters-toprow">
+      <input type="text" id="search" placeholder="🔍 結晶名で検索..." oninput="applyFilters()">
+      <div id="crystal-count"></div>
+    </div>
+    <div class="filters-toolbar">
+      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ フィルター</button>
+      <button class="toolbar-btn" onclick="expandAll()">全展開</button>
+      <button class="toolbar-btn" onclick="collapseAll()">全収起</button>
+      <button class="toolbar-btn" onclick="resetFilters()">リセット</button>
+    </div>
+    <div id="filters-body" style="display:none">
     <div class="filter-row2">
       <div class="filter-section">
-        <div class="filter-label">レアリティ</div>
+        <div class="filter-label">レア度</div>
         <div class="filter-toggles" id="f-rarity">
           <button class="ftog" data-val="6" onclick="toggleFilter('rarity',6,this)">★6</button>
           <button class="ftog" data-val="5" onclick="toggleFilter('rarity',5,this)">★5</button>
@@ -215,14 +234,7 @@ input[type=number] { -moz-appearance: textfield; }
       </div>
     </div>
 
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:2px;">
-      <div id="crystal-count"></div>
-      <div style="display:flex;gap:6px;">
-        <button onclick="expandAll()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">全展開</button>
-        <button onclick="collapseAll()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">全収起</button>
-        <button onclick="resetFilters()" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
-      </div>
-    </div>
+    </div><!-- #filters-body -->
   </div>
   <div id="crystal-list"></div>
 </div><!-- #content -->
@@ -272,6 +284,14 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(function() {});
 });
+
+function toggleFilters() {
+  var body = document.getElementById('filters-body');
+  var btn = document.getElementById('filter-toggle-btn');
+  var open = body.style.display === 'none';
+  body.style.display = open ? '' : 'none';
+  btn.textContent = open ? '▲ フィルター' : '▼ フィルター';
+}
 
 // ===== FILTER STATE =====
 var filterSets = { rarity: new Set(), bunrui: new Set(), element: new Set(), weapon: new Set(), scope: new Set(), condition: new Set() };
