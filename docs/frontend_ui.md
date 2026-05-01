@@ -319,19 +319,43 @@ mob-bar 的导航按钮额外加 `user-select: none; -webkit-touch-callout: none
 
 ## 9. z-index 栈速查
 
-| 层 | z-index | 备注 |
-|---|---------|------|
-| `#prompt-modal` | 2000 | 二次确认弹窗 |
-| `#latent-modal` | 1000 | 潜在能力弹窗 |
-| `#topbar`（nav.js） | 100 | 桌面顶栏 |
-| `#nav-hamburger` 展开后的 `#page-nav` | 99 | 移动端菜单 |
-| `#filters`（mobile sticky）| 50 | 必须低于 hamburger 否则盖住菜单 |
-| **modal `#detail`** | **200** | 全屏 |
-| `#detail-mob-bar` | 10 | modal 内顶栏 |
-| `.chara-header`（sticky）| 6 | modal 内 |
-| `.state-tabs`（sticky）| 4 | modal 内 |
+按"功能层"分组，从高到低；每层内部再细分。**改 z-index 之前一定查这张表**——历史踩过的坑：filter z-index 100 盖住汉堡菜单（fix: 4d456d9）。
 
-**改 z-index 之前一定查这张表**，特别是 hamburger 和 filter 的相对关系（之前出过 filter 盖住菜单的 bug）。
+### 全局浮层（覆盖一切，包括 #topbar）
+
+| z-index | 元素 | 页面 | 用途 |
+|---------|------|------|------|
+| **3000** | `.lcs-dropdown` | index | 编辑模式下 scope/condition 下拉浮层（fixed 定位，必须盖住一切弹窗） |
+| **3000** | `#detail-modal` | hensei | 编排页详细 modal |
+| **2500** | `#omoide-modal` | hensei | 编排页潜在 modal |
+| **2000** | `#prompt-modal` | index | 二次确认弹窗（保存/删除等） |
+| **2000** | `#entity-modal` | hensei | 编排页选魔剑/魂 modal |
+| **1000** | `#latent-modal` | index | 潜在能力编辑弹窗 |
+| 1 | `.prompt-panel` / `.latent-panel` / `.modal-panel` | 各页 | 弹窗内的内容面板（对应 modal 内的局部 stacking context） |
+
+### 移动端全屏 modal（仅 ≤768px 启用，覆盖 #topbar）
+
+| z-index | 元素 | 页面 | 用途 |
+|---------|------|------|------|
+| **200** | `#detail`（mobile fullscreen modal） | index / soul | 移动端 chara/soul 详细页 modal |
+| **10** | `#detail-mob-bar` | index / soul | modal 内顶栏（前/次/✕/计数） |
+| **6** | `.chara-header` / `.soul-header`（sticky） | index / soul | modal 内 sticky 头部（也在桌面端 sticky） |
+| **4** | `.state-tabs`（sticky） | index | modal 内 sticky 标签（極弐/改造/通常） |
+
+### 全局导航栏 + 筛选
+
+| z-index | 元素 | 页面 | 用途 |
+|---------|------|------|------|
+| **100** | `#topbar` (nav.js) | 全局 | 顶部导航栏（桌面 + 移动都 sticky） |
+| **99** | `#page-nav.open` (nav.js) | 全局 | 移动端展开的汉堡菜单（必须 < `#topbar`，让 topbar 在菜单上） |
+| **50** | `#filters`（mobile sticky） | index / soul / crystals / bladegraph | 筛选面板（必须 **< 99** 否则展开汉堡菜单时被盖住） |
+
+### 关键不变量
+
+1. **modal `#detail` (200) > topbar (100)**：移动端打开 modal 时盖住整个 topbar+filter，正常。
+2. **lcs-dropdown / 各种 modal (1000+) > #detail (200)**：modal 内还能弹其他浮层（如潜在编辑、删除确认）。
+3. **topbar (100) > page-nav (99) > filters (50)**：汉堡菜单展开时，topbar 在最上、菜单挂在 topbar 下方、filter 不能盖住菜单。
+4. **mob-bar (10) > chara-header (6) > state-tabs (4)**：modal 内三层 sticky 头部链，从上到下层叠不重叠。
 
 ---
 

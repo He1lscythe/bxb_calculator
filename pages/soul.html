@@ -73,12 +73,23 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .soul-icon-thumb { width: 44px; height: 28px; object-fit: cover; border-radius: 4px; flex-shrink: 0; opacity: .85; }
 
 /* DETAIL */
-#detail { flex: 1; overflow-y: auto; padding: 20px 24px; }
+/* padding-top:0 — 让 soul-header 直接贴 #detail 顶部，sticky pin 时无 gap 可露内容；
+   soul-header 自带 padding-top:20px 保留视觉空间 */
+#detail { flex: 1; overflow-y: auto; padding: 0 24px 20px; }
 #detail::-webkit-scrollbar { width: 5px; }
 #detail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 #placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text2); gap: 8px; }
 
-.soul-header { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+/* soul-header 桌面+移动都 sticky。padding-top 是从 #detail 挪过来的 */
+.soul-header {
+  margin-bottom: 16px;
+  padding: 20px 0 16px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: var(--sticky-bar-h, 0px);
+  z-index: 6;
+  background: var(--bg);
+}
 .soul-header-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
 .soul-title { font-size: 22px; font-weight: 700; flex: 1; line-height: 1.3; }
 .soul-banner { width: 100%; height: auto; border-radius: 8px; display: block; margin-bottom: 12px; }
@@ -131,7 +142,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 /* edit */
 .btn-edit { background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 5px 14px; font-size: 12px; cursor: pointer; flex-shrink: 0; }
 .btn-edit:hover { background: rgba(91,127,255,.1); }
-.edit-mode-active { background: rgba(91,127,255,.04); border: 1px solid rgba(91,127,255,.3); border-radius: 10px; padding: 14px; }
+/* edit-mode-active 用 var(--bg2) 不透明，避免 sticky 时背后滚动内容透出。border/radius 区分编辑模式 */
+.edit-mode-active { background: var(--bg2); border: 1px solid rgba(91,127,255,.3); border-radius: 10px; padding: 14px; }
 .edit-actions { display: flex; gap: 8px; align-items: flex-start; flex-shrink: 0; }
 .btn-save   { background: var(--accent); color: #fff; border: none; border-radius: 6px; padding: 7px 16px; font-size: 13px; font-weight: 600; cursor: pointer; }
 .btn-save:hover { opacity: .85; }
@@ -195,14 +207,12 @@ input[type=number] { -moz-appearance: textfield; }
   #soul-detail { padding: 0 16px 14px; }
   /* Hide banner in mobile modal to keep sticky header compact */
   .soul-banner { display: none; }
-  /* Sticky soul-header below mob-bar */
+  /* soul-header 移动端覆盖：padding-top 减小、margin-bottom 清零。
+     position/top/z-index/background 从默认规则继承（top 用 --sticky-bar-h，移动端 JS 设为 mob-bar 高度） */
   .soul-header {
-    position: sticky;
-    top: var(--mob-bar-h, 46px);
-    z-index: 6;
-    background: var(--bg);
     margin-bottom: 0;
     padding-top: 12px;
+    box-shadow: 0 -100vh 0 0 var(--bg);
   }
   #f-type { display: grid; grid-template-columns: repeat(6, 1fr); }
   .filter-toggle-btn { display: block; }
@@ -471,8 +481,9 @@ function selectSoul(id) {
     dt.classList.add('show-mob');
     dt.scrollTop = 0;
     document.body.style.overflow = 'hidden';
-    requestAnimationFrame(setupStickyHeights);
   }
+  // 桌面+移动都需要测量 sticky vars（移动端 mob-bar 高度，桌面端 0）
+  requestAnimationFrame(setupStickyHeights);
   updateMobNavBar(s);
 }
 function closeDetailMob() {
@@ -492,11 +503,11 @@ function updateMobNavBar(s) {
   if (label) label.textContent = s && idx >= 0 ? `${idx + 1} / ${filteredSouls.length}` : '';
 }
 function setupStickyHeights() {
-  if (window.innerWidth > 768) return;
+  // 桌面端 --sticky-bar-h=0（无 mob-bar），移动端=mob-bar 高度
+  const isMob = window.innerWidth <= 768;
   const bar = document.getElementById('detail-mob-bar');
-  const header = document.querySelector('#soul-detail .soul-header');
-  if (bar) document.documentElement.style.setProperty('--mob-bar-h', bar.offsetHeight + 'px');
-  if (header) document.documentElement.style.setProperty('--mob-header-h', header.offsetHeight + 'px');
+  const barH = (isMob && bar) ? bar.offsetHeight : 0;
+  document.documentElement.style.setProperty('--sticky-bar-h', barH + 'px');
 }
 window.addEventListener('resize', setupStickyHeights, { passive: true });
 
@@ -599,33 +610,48 @@ function fmtType(v) {
   var ids = Array.isArray(v) ? v : [v];
   return ids.map(function(id){ return WEAPON[id] || id; }).join('/');
 }
+// 把同 (scope, element, type, condition) 的 effects 归到一组，
+// 共享 scope/cond tag 只显示一次，bunrui tag 全部依次列出
+function _ctxKey(e) {
+  var elem = Array.isArray(e.element) ? e.element.slice().sort().join(',')
+           : (e.element != null ? String(e.element) : '');
+  var type = Array.isArray(e.type) ? e.type.slice().sort().join(',')
+           : (e.type != null ? String(e.type) : '');
+  return [e.scope, elem, type, e.condition || 0].join('|');
+}
+function _renderScopeTag(e) {
+  if (e.scope === 0) return '<span class="scope-tag scope-self">自</span>';
+  if (e.scope === 1) return '<span class="scope-tag scope-all">全</span>';
+  var parts = [];
+  var el = fmtElem(e.element); if (el) parts.push(el);
+  var ty = fmtType(e.type);   if (ty) parts.push(ty);
+  if (e.scope === 2) return '<span class="scope-tag scope-lim">'      + (parts.join('·') || '限') + '</span>';
+  if (e.scope === 3) return '<span class="scope-tag scope-equip-s">' + (parts.join('·') || '装') + '·自</span>';
+  if (e.scope === 4) return '<span class="scope-tag scope-equip-a">' + (parts.join('·') || '装') + '·全</span>';
+  return '';
+}
+function _renderCondTag(e) {
+  if (e.condition === 1) return '<span class="cond-tag cond-1">浑身</span>';
+  if (e.condition === 2) return '<span class="cond-tag cond-2">背水</span>';
+  if (e.condition === 3) return '<span class="cond-tag cond-3">破損</span>';
+  return '';
+}
 function renderRightTags(sk) {
-  var tags = '';
+  var groups = []; // [{key, ctx, bunruis: []}]
   (sk.effects || []).forEach(function(e) {
-    (e.bunrui || []).forEach(function(b) {
+    var key = _ctxKey(e);
+    var g = null;
+    for (var i = 0; i < groups.length; i++) if (groups[i].key === key) { g = groups[i]; break; }
+    if (!g) { g = { key: key, ctx: e, bunruis: [] }; groups.push(g); }
+    (e.bunrui || []).forEach(function(b) { g.bunruis.push(b); });
+  });
+  var tags = '';
+  groups.forEach(function(g) {
+    g.bunruis.forEach(function(b) {
       tags += '<span class="bunrui-tag">' + (BUNRUI_SHORT[b] || b) + '</span>';
     });
-    if      (e.scope === 0) tags += '<span class="scope-tag scope-self">自</span>';
-    else if (e.scope === 1) tags += '<span class="scope-tag scope-all">全</span>';
-    else if (e.scope === 2) {
-      var parts = [];
-      var el = fmtElem(e.element); if (el) parts.push(el);
-      var ty = fmtType(e.type);   if (ty) parts.push(ty);
-      tags += '<span class="scope-tag scope-lim">' + (parts.join('·') || '限') + '</span>';
-    } else if (e.scope === 3) {
-      var parts = [];
-      var el = fmtElem(e.element); if (el) parts.push(el);
-      var ty = fmtType(e.type);   if (ty) parts.push(ty);
-      tags += '<span class="scope-tag scope-equip-s">' + (parts.join('·') || '装') + '·自</span>';
-    } else if (e.scope === 4) {
-      var parts = [];
-      var el = fmtElem(e.element); if (el) parts.push(el);
-      var ty = fmtType(e.type);   if (ty) parts.push(ty);
-      tags += '<span class="scope-tag scope-equip-a">' + (parts.join('·') || '装') + '·全</span>';
-    }
-    if      (e.condition === 1) tags += '<span class="cond-tag cond-1">浑身</span>';
-    else if (e.condition === 2) tags += '<span class="cond-tag cond-2">背水</span>';
-    else if (e.condition === 3) tags += '<span class="cond-tag cond-3">破損</span>';
+    tags += _renderScopeTag(g.ctx);
+    tags += _renderCondTag(g.ctx);
   });
   return '<div class="skill-tags-right">' + tags + '</div>';
 }
