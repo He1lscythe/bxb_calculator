@@ -76,43 +76,59 @@ soul.html 是正确顺序，index.html 之前误把默认放在 @media 之后导
 
 **没有这条阴影**时，用户会看到 modal 顶部出现一闪的 `var(--bg)` 缝隙，体感像"modal 没占满屏"。soul/index 必须保持一致。
 
-### 同样的 trick 用在 chara-header 上（防 sticky 切换穿模）
+### 同样的 trick 用在移动端 chara-header 上（防 sticky 切换穿模）
 
-桌面端 chara-header sticky 在 #detail 内（#detail 有 `padding-top: 20px`）。scroll 切换瞬间或非 pin 状态下，chara-header 上方的 padding 区可能"穿模"露出后方 state-content 滚动的内容（例如 スキル構成 标题）。同 trick 解决：
+⚠ **chara-header 和 state-tabs 的 sticky 只在移动端 modal 内启用**，桌面端是普通流式（左右分栏布局没必要 sticky）。曾经在桌面端也开 sticky 导致穿模——chara-header 上方的 #detail padding-top 区会在 sticky 切换瞬间露出后方滚动的 state-content（例如 スキル構成 标题）。回滚为只在 mobile 启用是更稳的方案。
+
+移动端 sticky 内仍然用 `0 -100vh` 阴影兜底：
 
 ```css
-.chara-header {
-  position: sticky; top: var(--sticky-bar-h, 0px);
-  z-index: 6; background: var(--bg);
-  box-shadow: 0 -100vh 0 0 var(--bg);   /* ← 上方 100vh 用 bg 盖住 */
+@media (max-width: 768px) {
+  .chara-header {
+    margin-bottom: 0; padding-top: 12px;
+    position: sticky; top: var(--sticky-bar-h, 0px);
+    z-index: 6; background: var(--bg);
+    box-shadow: 0 -100vh 0 0 var(--bg);   /* ← 上方 100vh 用 bg 盖住 */
+  }
+  .state-tabs {
+    margin-top: 0;
+    position: sticky;
+    top: calc(var(--sticky-bar-h, 0px) + var(--sticky-header-h, 100px));
+    z-index: 4; background: var(--bg);
+  }
 }
 ```
 
-阴影会被 #detail 的 `overflow-y: auto` 自动 clip，不会越界到 topbar 区域；topbar 的 z-index:100 也能盖住任何溢出。**任何 sticky 元素如果它的上方有可能露出后方滚动内容（例如所在 scroll container 有 padding-top，或 sticky 链上方有间隙），都可以用这个 trick 兜底。**
+阴影被 modal `#detail` 的 `overflow-y: auto` 自动 clip，不会越界。**任何 sticky 元素如果它的上方有可能露出后方滚动内容（例如 scroll container 有 padding-top，或 sticky 链上方有间隙），都可以用这个 trick 兜底。**
 
 ---
 
-## 3. 多层 sticky 头部系统
+## 3. 多层 sticky 头部系统（移动端 modal 内）
 
-modal 内部需要多个元素同时 sticky，从上到下依次：
+移动端 modal 内部需要多个元素同时 sticky，从上到下依次：
 1. `#detail-mob-bar` — `top: 0`（固定值）
 2. `.chara-header` / `.soul-header` — `top: var(--sticky-bar-h)`
 3. `.state-tabs`（仅 chara）— `top: calc(var(--sticky-bar-h) + var(--sticky-header-h))`
 
-### CSS 变量驱动
+⚠ **桌面端不开 sticky**——左右分栏布局正常滚动即可。chara-header / state-tabs 的 sticky 规则放在 `@media (max-width: 768px)` 内，默认规则只保留 grid 布局。
+
+### CSS 变量驱动（mobile 内）
 
 ```css
-.chara-header {
-  position: sticky;
-  top: var(--sticky-bar-h, 0px);
-  z-index: 6;
-  background: var(--bg);
-}
-.state-tabs {
-  position: sticky;
-  top: calc(var(--sticky-bar-h, 0px) + var(--sticky-header-h, 100px));
-  z-index: 4;
-  background: var(--bg);
+@media (max-width: 768px) {
+  .chara-header {
+    position: sticky;
+    top: var(--sticky-bar-h, 0px);
+    z-index: 6;
+    background: var(--bg);
+    box-shadow: 0 -100vh 0 0 var(--bg);
+  }
+  .state-tabs {
+    position: sticky;
+    top: calc(var(--sticky-bar-h, 0px) + var(--sticky-header-h, 100px));
+    z-index: 4;
+    background: var(--bg);
+  }
 }
 ```
 
