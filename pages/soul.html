@@ -50,11 +50,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .filter-toggle-btn { display: none; width: 100%; margin: 4px 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; }
 .filter-toggle-btn:hover { border-color: var(--accent); }
 #filters-body { display: flex; flex-direction: column; gap: 8px; }
-#detail-mob-bar { display: none; align-items: center; justify-content: space-between; gap: 8px; position: sticky; top: 0; z-index: 10; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 8px 12px; }
-#detail-mob-bar button { background: var(--bg3); border: 1px solid var(--border); color: var(--text); font-size: 14px; padding: 6px 14px; border-radius: 6px; cursor: pointer; min-width: 56px; }
+#detail-mob-bar { display: none; align-items: center; justify-content: space-between; gap: 8px; position: sticky; top: 0; z-index: 10; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 8px 12px; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
+#detail-mob-bar button { background: var(--bg3); border: 1px solid var(--border); color: var(--text); font-size: 14px; padding: 6px 14px; border-radius: 6px; cursor: pointer; min-width: 56px; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
 #detail-mob-bar button:hover { border-color: var(--accent); }
 #detail-mob-bar button:disabled { opacity: 0.3; cursor: default; }
-#detail-mob-bar .nav-label { font-size: 12px; color: var(--text2); flex: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#detail-mob-bar .nav-label { font-size: 12px; color: var(--text2); flex: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
 
 #soul-list { flex: 1; overflow-y: auto; }
 #soul-list::-webkit-scrollbar { width: 4px; }
@@ -192,7 +192,18 @@ input[type=number] { -moz-appearance: textfield; }
   #detail.show-mob { display: block; }
   #placeholder { display: none; }
   #detail-mob-bar { display: flex; }
-  #soul-detail { padding: 14px 16px; }
+  #soul-detail { padding: 0 16px 14px; }
+  /* Hide banner in mobile modal to keep sticky header compact */
+  .soul-banner { display: none; }
+  /* Sticky soul-header below mob-bar */
+  .soul-header {
+    position: sticky;
+    top: var(--mob-bar-h, 46px);
+    z-index: 6;
+    background: var(--bg);
+    margin-bottom: 0;
+    padding-top: 12px;
+  }
   #f-type { display: grid; grid-template-columns: repeat(6, 1fr); }
   .filter-toggle-btn { display: block; }
   #filters-body { display: none; }
@@ -460,6 +471,7 @@ function selectSoul(id) {
     dt.classList.add('show-mob');
     dt.scrollTop = 0;
     document.body.style.overflow = 'hidden';
+    requestAnimationFrame(setupStickyHeights);
   }
   updateMobNavBar(s);
 }
@@ -468,22 +480,25 @@ function closeDetailMob() {
   document.body.style.overflow = '';
 }
 function navSoul(dir) {
-  if (selectedId === null) return;
+  if (filteredSouls.length === 0) return;
   const idx = filteredSouls.findIndex(s => s.id === selectedId);
-  if (idx < 0) return;
-  const newIdx = idx + dir;
-  if (newIdx < 0 || newIdx >= filteredSouls.length) return;
+  const base = idx < 0 ? 0 : idx;
+  const newIdx = ((base + dir) % filteredSouls.length + filteredSouls.length) % filteredSouls.length;
   selectSoul(filteredSouls[newIdx].id);
 }
 function updateMobNavBar(s) {
   const idx = filteredSouls.findIndex(x => x.id === selectedId);
-  const prev = document.getElementById('detail-mob-prev');
-  const next = document.getElementById('detail-mob-next');
   const label = document.getElementById('detail-mob-label');
-  if (prev) prev.disabled = (idx <= 0);
-  if (next) next.disabled = (idx < 0 || idx >= filteredSouls.length - 1);
-  if (label) label.textContent = s ? `${idx + 1} / ${filteredSouls.length}` : '';
+  if (label) label.textContent = s && idx >= 0 ? `${idx + 1} / ${filteredSouls.length}` : '';
 }
+function setupStickyHeights() {
+  if (window.innerWidth > 768) return;
+  const bar = document.getElementById('detail-mob-bar');
+  const header = document.querySelector('#soul-detail .soul-header');
+  if (bar) document.documentElement.style.setProperty('--mob-bar-h', bar.offsetHeight + 'px');
+  if (header) document.documentElement.style.setProperty('--mob-header-h', header.offsetHeight + 'px');
+}
+window.addEventListener('resize', setupStickyHeights, { passive: true });
 
 // ===== VIEW DETAIL =====
 function renderDetail(s) {
