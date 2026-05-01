@@ -88,9 +88,16 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
   #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); }
   #char-list { height: 175px; flex: none; }
   #detail { overflow: visible; padding: 14px 16px; flex: none; }
-  /* Mobile: show filter toggle button, hide filter body by default */
   .filter-toggle-btn { display: block; }
   #filters-body { display: none; }
+  /* Sticky filter bar on mobile */
+  #filters {
+    position: sticky;
+    top: 52px;
+    z-index: 50;
+    background: var(--bg);
+    padding-bottom: 6px;
+  }
 }
 
 /* ===== DETAIL PANEL ===== */
@@ -575,6 +582,15 @@ function toggleFilters() {
   body.style.display = open ? '' : 'flex';
   btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
 }
+function collapseFiltersOnScroll() {
+  if (window.innerWidth > 768) return;
+  var body = document.getElementById('filters-body');
+  if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
+  body.style.display = '';
+  var btn = document.getElementById('filter-toggle-btn');
+  if (btn) btn.textContent = '▼ 絞り込み';
+}
+window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
 
 // ===== FILTER STATE =====
 const filterSets = { rarity: new Set(), element: new Set(), type: new Set(), state: new Set(), bdSpecial: new Set(), omoideRarity: new Set() };
