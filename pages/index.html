@@ -58,8 +58,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 #filters-body { display: flex; flex-direction: column; gap: 8px; }
 #char-list { flex: 1; overflow-y: auto; }
 /* Mobile-only modal navbar (hidden on desktop) */
-/* box-shadow with -100vh creates a solid backdrop above the bar to mask any content peeking through */
-#detail-mob-bar { display: none; align-items: center; justify-content: space-between; gap: 8px; position: sticky; top: 0; z-index: 10; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 8px 12px; box-shadow: 0 -100vh 0 0 var(--bg2), 0 2px 8px rgba(0,0,0,.4); }
+/* will-change/translateZ creates a GPU compositing layer to prevent content peeking through during scroll */
+#detail-mob-bar { display: none; align-items: center; justify-content: space-between; gap: 8px; position: sticky; top: 0; z-index: 10; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 8px 12px; box-shadow: 0 2px 8px rgba(0,0,0,.4); transform: translateZ(0); will-change: transform; isolation: isolate; }
+/* Backdrop mask above the bar — sibling element extends upward into any potential gap area (overscroll bounce, browser chrome resize) */
+.mob-bar-mask { display: none; }
 #detail-mob-bar button { background: var(--bg3); border: 1px solid var(--border); color: var(--text); font-size: 14px; padding: 6px 14px; border-radius: 6px; cursor: pointer; min-width: 56px; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
 #detail-mob-bar button:hover { border-color: var(--accent); }
 #detail-mob-bar button:disabled { opacity: 0.3; cursor: default; }
@@ -99,41 +101,16 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
   #detail {
     display: none;
     position: fixed; inset: 0; z-index: 200;
-    background: var(--bg);
+    background: var(--bg2);
     overflow-y: auto;
     overscroll-behavior: contain;
     padding: 0;
   }
+  #chara-detail { background: var(--bg); min-height: 100%; }
   #detail.show-mob { display: block; }
   #placeholder { display: none; }
   #detail-mob-bar { display: flex; }
   #chara-detail { padding: 0 16px 14px; }
-  /* Mobile chara-header (view mode): rearrange grid → name+潜在 row1, meta+修正 row2 */
-  .chara-header:not(.edit-mode-active) {
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      "title latent"
-      "meta edit";
-  }
-  /* Mobile no-latent: title full row 1, meta+edit row 2 */
-  .chara-header:not(.edit-mode-active):not(:has(.btn-latent)) {
-    grid-template-areas:
-      "title title"
-      "meta edit";
-  }
-  /* Mobile edit mode: actions on top, then title, then selects */
-  .chara-header.edit-mode-active {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "actions"
-      "title"
-      "selects";
-  }
-  /* Mobile button text: 潜在開放 → 潜在 */
-  .btn-text-desk { display: none; }
-  .btn-text-mob { display: inline; }
-  /* Smaller buttons on mobile */
-  .btn-latent, .btn-edit { min-width: 60px; padding: 5px 10px; }
   /* Stacked sticky: bar (z:10) > chara-header (z:6) > state-tabs (z:4) */
   .chara-header {
     position: sticky;
@@ -169,13 +146,13 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 #placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text2); gap: 8px; }
 #placeholder svg { opacity: .3; }
 
-/* character header — grid layout, areas reordered per viewport */
+/* character header — grid layout (same on desktop and mobile view mode) */
 .chara-header {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   grid-template-areas:
-    "title latent edit"
-    "meta meta meta";
+    "title latent"
+    "meta edit";
   gap: 10px 8px;
   align-items: center;
   margin-bottom: 20px; padding-bottom: 16px;
@@ -185,17 +162,16 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .chara-header > .btn-latent { grid-area: latent; }
 .chara-header > .btn-edit { grid-area: edit; }
 .chara-header > .chara-meta { grid-area: meta; }
-/* No-omoide case: no latent button → title spans full row 1 */
+/* No-omoide case: no latent button — title spans both columns row 1 */
 .chara-header:not(:has(.btn-latent)):not(.edit-mode-active) {
-  grid-template-columns: 1fr auto;
   grid-template-areas:
-    "title edit"
-    "meta meta";
+    "title title"
+    "meta edit";
 }
-.chara-title { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; min-width: 0; }
-.chara-title > span.name-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chara-title { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; min-width: 0; flex-wrap: wrap; }
+.chara-title > span.name-text { word-break: break-all; }
 .chara-icon { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; flex-shrink: 0; }
-/* Edit-mode header layout */
+/* Edit-mode header layout (desktop): title row 1; selects + actions same row 2 */
 .chara-header.edit-mode-active {
   grid-template-columns: 1fr auto;
   grid-template-areas:
@@ -204,10 +180,26 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 }
 .chara-header.edit-mode-active .chara-edit-meta { grid-area: selects; display: flex; gap: 8px; flex-wrap: wrap; }
 .chara-header.edit-mode-active .edit-actions { grid-area: actions; display: flex; gap: 6px; }
-/* Button text variants (mobile shortens 潜在開放→潜在) */
+/* Button text — desktop shows full 潜在開放, mobile shows shortened 潜在 */
+.btn-text-desk { display: inline; }
 .btn-text-mob { display: none; }
 .btn-latent { padding: 5px 12px; border-radius: 6px; border: 1px solid #5b7fff; background: rgba(91,127,255,.15); color: #7b9fff; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; min-width: 80px; text-align: center; }
 .btn-latent:hover { background: rgba(91,127,255,.3); }
+/* Mobile overrides for chara-header (placed AFTER defaults so they override) */
+@media (max-width: 768px) {
+  .btn-text-desk { display: none; }
+  .btn-text-mob { display: inline; }
+  .btn-latent, .btn-edit { min-width: 60px; padding: 5px 10px; }
+  /* Edit mode mobile: 3 stacked rows — title, selects, actions */
+  .chara-header.edit-mode-active {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "selects"
+      "actions";
+  }
+  .chara-header.edit-mode-active .edit-actions { justify-content: flex-end; }
+}
 
 /* latent modal */
 #latent-modal { display: none; position: fixed; inset: 0; z-index: 1000; align-items: center; justify-content: center; }
@@ -832,7 +824,7 @@ function selectChar(id) {
     dt.classList.add('show-mob');
     dt.scrollTop = 0;
     document.body.style.overflow = 'hidden';
-    requestAnimationFrame(setupStickyHeights);
+    setupStickyHeights();
   }
   updateMobNavBar(c);
 }
@@ -853,14 +845,26 @@ function updateMobNavBar(c) {
   const label = document.getElementById('detail-mob-label');
   if (label) label.textContent = c && idx >= 0 ? `${idx + 1} / ${filteredChars.length}` : '';
 }
-function setupStickyHeights() {
+let _stickyResizeObserver = null;
+function _measureStickyHeights() {
   if (window.innerWidth > 768) return;
   const bar = document.getElementById('detail-mob-bar');
   const header = document.querySelector('#chara-detail .chara-header');
-  if (bar) document.documentElement.style.setProperty('--mob-bar-h', bar.offsetHeight + 'px');
-  if (header) document.documentElement.style.setProperty('--mob-header-h', header.offsetHeight + 'px');
+  if (bar) document.documentElement.style.setProperty('--mob-bar-h', bar.getBoundingClientRect().height + 'px');
+  if (header) document.documentElement.style.setProperty('--mob-header-h', header.getBoundingClientRect().height + 'px');
 }
-window.addEventListener('resize', setupStickyHeights, { passive: true });
+function setupStickyHeights() {
+  // Double-rAF ensures we measure after the browser has fully laid out the new content
+  requestAnimationFrame(() => requestAnimationFrame(_measureStickyHeights));
+  // Set up ResizeObserver to auto-update when chara-header content height changes
+  if ('ResizeObserver' in window) {
+    if (_stickyResizeObserver) _stickyResizeObserver.disconnect();
+    _stickyResizeObserver = new ResizeObserver(_measureStickyHeights);
+    const header = document.querySelector('#chara-detail .chara-header');
+    if (header) _stickyResizeObserver.observe(header);
+  }
+}
+window.addEventListener('resize', _measureStickyHeights, { passive: true });
 
 // ===== RENDER BD CARD =====
 function renderBDCard(bd) {
