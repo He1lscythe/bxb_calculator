@@ -107,7 +107,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
   #detail {
     display: none;
     position: fixed; inset: 0; z-index: 200;
-    background: var(--bg2);
+    background: var(--bg);
     overflow-y: auto;
     overscroll-behavior: contain;
     padding: 0;
@@ -116,7 +116,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
   button, [onclick], .ftog, .picker-btn, .char-item, .crystal-row-hd, .bg-row-hd, .soul-item {
     touch-action: manipulation;
   }
-  #chara-detail { background: var(--bg); min-height: 100%; padding: 0 16px 14px; }
+  #chara-detail { padding: 0 16px 14px; }
   #detail.show-mob { display: block; }
   #placeholder { display: none; }
   #detail-mob-bar { display: flex; }
@@ -959,8 +959,8 @@ function renderDetail(c) {
         ${c.url ? `<a class="meta-chip" href="${c.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>` : ''}
       </div>
     </div>
-    ${bdSection}
     <div class="state-tabs">${tabs}</div>
+    ${bdSection}
     ${contents}
   `;
 }
@@ -1328,8 +1328,8 @@ function renderEditDetail(c) {
         <button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>
       </div>
     </div>
-    ${bdEditSection}
     <div class="state-tabs">${tabs}</div>
+    ${bdEditSection}
     ${contents}
     <div class="section" style="margin-top:16px">
       <div class="section-title">潜在開放</div>
