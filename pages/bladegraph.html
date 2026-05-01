@@ -143,6 +143,7 @@ input[type=number] { -moz-appearance: textfield; }
 
 <div id="page-wrap">
 <script src="../nav.js"></script>
+<script src="../shared/save-client.js"></script>
 <script src="../shared/filter-core.js"></script>
 <script src="../shared/bg-spec.js"></script>
 <div id="content">
@@ -756,15 +757,17 @@ async function saveRevise() {
   btn.textContent = '保存中...';
   btn.disabled    = true;
   try {
-    const res  = await fetch('/save', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ bladegraph_revise: Object.values(reviseData) }),
+    const ids = Array.from(sessionReviseIds);
+    const json = await submitRevise({
+      session_ids:       ids,
+      bladegraph_revise: pickPatches(reviseData, ids),
     });
-    const json = await res.json();
-    if (!res.ok) throw new Error(json.error || res.status);
     sessionReviseIds.clear();
-    status.textContent = '✓ 保存完了';
+    if (json.mode === 'remote') {
+      status.innerHTML = `✓ <a href="${json.prUrl}" target="_blank" style="color:var(--accent)">PR #${json.prNumber}</a> 已提交`;
+    } else {
+      status.textContent = '✓ 保存完了';
+    }
   } catch (err) {
     status.textContent = '保存失敗';
     console.error(err);
