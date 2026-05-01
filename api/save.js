@@ -140,19 +140,55 @@ export default async function handler(req, res) {
       });
     }
 
-    // Open PR
-    const fileNames = updates.map((u) => u.path.split('/').pop()).join(', ');
-    const idsList = sessionIds.length ? sessionIds.join(', ') : '(no id-level changes)';
+    // 构造 PR 标题/正文：页面名 + id+name 列表，方便 review 时一眼看出改了什么
+    const pageInfo = (() => {
+      if ('revise' in body || 'omoide_revise' in body) return { name: '魔剣', file: 'pages/index.html' };
+      if ('soul_revise' in body)       return { name: '魂',     file: 'pages/soul.html' };
+      if ('crystal_revise' in body)    return { name: '結晶',   file: 'pages/crystals.html' };
+      if ('bladegraph_revise' in body) return { name: '心象結晶', file: 'pages/bladegraph.html' };
+      if ('omoide_templates' in body)  return { name: '魔剣（潜在テンプレート）', file: 'pages/index.html' };
+      return { name: '?', file: '?' };
+    })();
+
+    // 从所有 bucket 收集 id → name（同一 id 在多个 bucket 出现也只记一次，例如 index 的 revise + omoide_revise）
+    const items = [];
+    const seenIds = new Set();
+    for (const key of Object.keys(ID_BUCKETS)) {
+      if (!(key in body)) continue;
+      for (const p of body[key] || []) {
+        if (p.id != null && !seenIds.has(p.id)) {
+          seenIds.add(p.id);
+          items.push({ id: p.id, name: p.name || '(未命名)' });
+        }
+      }
+    }
+    items.sort((a, b) => (a.id ?? 0) - (b.id ?? 0));
+
+    // 标题：[页面] 名字1, 名字2, 名字3 (+N more)
+    const titleNames = items.slice(0, 3).map((it) => it.name).join(', ');
+    const more = items.length > 3 ? ` +${items.length - 3}` : '';
+    const titleSuffix = items.length > 0
+      ? ` ${titleNames}${more}`
+      : ` (${updates.map((u) => u.path.split('/').pop()).join(', ')})`;
+    const title = `[${pageInfo.name}]${titleSuffix}`;
+
+    // 正文：完整 id + name 列表 + 文件清单
+    const itemsList = items.length
+      ? items.map((it) => `- \`id=${it.id}\` ${it.name}`).join('\n')
+      : '_(无 id-level 改动)_';
+    const filesList = updates.map((u) => `- \`${u.path}\``).join('\n');
+    const prBody =
+      `**页面**: ${pageInfo.name} (\`${pageInfo.file}\`)\n\n` +
+      `**改动 (${items.length} 件)**:\n${itemsList}\n\n` +
+      `**更新文件**:\n${filesList}\n\n` +
+      `_自动生成 by Vercel \`/api/save\`._`;
+
     const { data: pr } = await octokit.rest.pulls.create({
       ...REPO,
       head: branchName,
       base: BASE,
-      title: `Proposal: ${fileNames}${sessionIds.length ? ` (${sessionIds.length} ids)` : ''}`,
-      body:
-        `通过 GitHub Pages 提交的修改。\n\n` +
-        `**影响的 id**: ${idsList}\n\n` +
-        `**更新文件**:\n${updates.map((u) => `- \`${u.path}\``).join('\n')}\n\n` +
-        `_自动生成 by Vercel \`/api/save\`._`,
+      title,
+      body: prBody,
     });
 
     return res.status(200).json({
