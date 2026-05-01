@@ -29,16 +29,21 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','Yu Go
 .ftog { font-size: 11px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; transition: all .1s; white-space: nowrap; }
 .ftog:hover { border-color: var(--accent); color: var(--text); }
 .ftog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; font-weight: 700; }
-#crystal-count { font-size: 12px; color: var(--text2); white-space: nowrap; }
-.filters-toprow { display: flex; align-items: center; gap: 8px; }
-.filters-toprow input { flex: 1; min-width: 0; }
-.filters-toolbar { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+#crystal-count { font-size: 12px; color: var(--text2); }
+/* Mobile-specific UI — hidden on desktop */
+.mob-search-row { display: flex; align-items: center; gap: 8px; }
+.mob-search-row input { flex: 1; min-width: 0; }
+#crystal-count-mob { display: none; font-size: 12px; color: var(--text2); white-space: nowrap; }
+.mob-toolbar { display: none; gap: 6px; align-items: center; flex-wrap: wrap; }
 .filter-toggle-btn { flex: 1; min-width: 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; }
 .filter-toggle-btn:hover { border-color: var(--accent); }
 .toolbar-btn { font-size: 11px; padding: 3px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; white-space: nowrap; }
 .toolbar-btn:hover { border-color: var(--accent); color: var(--text); }
+/* タイプ tag uniform width (applies always) */
 #f-bunrui .ftog { min-width: 3.4em; text-align: center; }
-#filters-body { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+/* Desktop: filter body always visible */
+#filters-body { display: flex; flex-direction: column; gap: 8px; }
+.desktop-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 2px; }
 
 #crystal-list { display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto; min-height: 0; padding-bottom: 16px; }
 #crystal-list::-webkit-scrollbar { width: 4px; }
@@ -113,12 +118,19 @@ input[type=number] { -moz-appearance: textfield; }
 .bunrui-check { display: flex; align-items: center; gap: 5px; font-size: 11px; cursor: pointer; padding: 2px 0; }
 .bunrui-check input { cursor: pointer; accent-color: var(--accent); }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   body { height: auto; overflow-y: auto; }
   #content { flex: none; overflow: visible; }
   #crystal-list { flex: none; overflow-y: visible; }
   .row-bunrui { display: none; }
-  .filter-row2 { display: flex; flex-direction: column; gap: 8px; }
+  /* Mobile: show toolbar and mob count, hide desktop-only elements */
+  .mob-toolbar { display: flex; }
+  #crystal-count-mob { display: block; }
+  .desktop-bottom { display: none; }
+  /* Mobile: filter body hidden by default */
+  #filters-body { display: none; }
+  /* Mobile: filter-row2 stacks vertically */
+  .filter-row2 { flex-direction: column; }
 }
 </style>
 </head>
@@ -130,17 +142,20 @@ input[type=number] { -moz-appearance: textfield; }
 <script src="../shared/crystal-spec.js"></script>
 <div id="content">
   <div id="filters">
-    <div class="filters-toprow">
+    <!-- Search row: input always, mob count visible only on mobile -->
+    <div class="mob-search-row">
       <input type="text" id="search" placeholder="🔍 結晶名で検索..." oninput="applyFilters()">
-      <div id="crystal-count"></div>
+      <span id="crystal-count-mob"></span>
     </div>
-    <div class="filters-toolbar">
-      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ フィルター</button>
+    <!-- Mobile-only toolbar: toggle + action buttons -->
+    <div class="mob-toolbar">
+      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
       <button class="toolbar-btn" onclick="expandAll()">全展開</button>
       <button class="toolbar-btn" onclick="collapseAll()">全収起</button>
       <button class="toolbar-btn" onclick="resetFilters()">リセット</button>
     </div>
-    <div id="filters-body" style="display:none">
+    <!-- Filter body: always visible on desktop, collapsible on mobile -->
+    <div id="filters-body">
     <div class="filter-row2">
       <div class="filter-section">
         <div class="filter-label">レア度</div>
@@ -235,6 +250,15 @@ input[type=number] { -moz-appearance: textfield; }
     </div>
 
     </div><!-- #filters-body -->
+    <!-- Desktop-only bottom bar: count + action buttons -->
+    <div class="desktop-bottom">
+      <div id="crystal-count"></div>
+      <div style="display:flex;gap:6px;">
+        <button onclick="expandAll()" class="toolbar-btn">全展開</button>
+        <button onclick="collapseAll()" class="toolbar-btn">全収起</button>
+        <button onclick="resetFilters()" class="toolbar-btn">リセット</button>
+      </div>
+    </div>
   </div>
   <div id="crystal-list"></div>
 </div><!-- #content -->
@@ -288,9 +312,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function toggleFilters() {
   var body = document.getElementById('filters-body');
   var btn = document.getElementById('filter-toggle-btn');
-  var open = body.style.display === 'none';
-  body.style.display = open ? '' : 'none';
-  btn.textContent = open ? '▲ フィルター' : '▼ フィルター';
+  var open = body.style.display === 'flex' || body.style.display === 'block';
+  body.style.display = open ? '' : 'flex';
+  btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
 }
 
 // ===== FILTER STATE =====
@@ -352,7 +376,10 @@ function applyFilters() {
     q: q,
     filters: filterSets,
   }, CRYSTAL_SPEC);
-  document.getElementById('crystal-count').textContent = filteredCrystals.length + ' 件';
+  var ct = filteredCrystals.length + ' 件';
+  document.getElementById('crystal-count').textContent = ct;
+  var mob = document.getElementById('crystal-count-mob');
+  if (mob) mob.textContent = ct;
   expandedIds.clear();
   editingId = null;
   editData = null;

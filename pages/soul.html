@@ -43,10 +43,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 #sort-dir:hover { border-color: var(--accent); color: var(--accent); }
 .btn-reset { font-size: 11px; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; flex-shrink: 0; }
 .btn-reset:hover { color: var(--text); }
-#soul-count { font-size: 11px; color: var(--text2); white-space: nowrap; }
-.filters-toprow { display: flex; align-items: center; gap: 6px; }
-.filters-toprow input { flex: 1; min-width: 0; }
-.filter-toggle-btn { width: 100%; margin: 4px 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; display: block; }
+#soul-count { font-size: 11px; color: var(--text2); text-align: right; }
+.filter-toggle-btn { display: none; width: 100%; margin: 4px 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; }
 .filter-toggle-btn:hover { border-color: var(--accent); }
 #filters-body { display: flex; flex-direction: column; gap: 8px; }
 
@@ -168,13 +166,15 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 input[type=number] { -moz-appearance: textfield; }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   body { height: auto; overflow-y: auto; }
   #layout { flex-direction: column; overflow: visible; flex: none; }
   #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); }
   #soul-list { height: 175px; flex: none; }
   #detail { overflow: visible; padding: 14px 16px; flex: none; }
   #f-type { display: grid; grid-template-columns: repeat(6, 1fr); }
+  .filter-toggle-btn { display: block; }
+  #filters-body { display: none; }
 }
 </style>
 </head>
@@ -188,14 +188,11 @@ input[type=number] { -moz-appearance: textfield; }
   <!-- SIDEBAR -->
   <div id="sidebar">
     <div id="filters">
-      <div class="filters-toprow">
-        <input type="text" id="search" placeholder="🔍 ソウル名で検索..."
-               style="padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;"
-               oninput="applyFilters()">
-        <div id="soul-count"></div>
-      </div>
-      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ フィルター</button>
-      <div id="filters-body" style="display:none">
+      <input type="text" id="search" placeholder="🔍 ソウル名で検索..."
+             style="width:100%;padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;"
+             oninput="applyFilters()">
+      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
+      <div id="filters-body">
       <div class="filter-section">
         <div class="filter-label">レア度</div>
         <div class="filter-toggles" id="f-rarity">
@@ -246,6 +243,7 @@ input[type=number] { -moz-appearance: textfield; }
         <button class="btn-reset" onclick="resetFilters()">リセット</button>
       </div>
       </div><!-- #filters-body -->
+      <div id="soul-count"></div>
     </div>
     <div id="soul-list"></div>
   </div>
@@ -289,9 +287,9 @@ const filterSets  = { rarity: new Set(), element: new Set(), type: new Set() };
 function toggleFilters() {
   var body = document.getElementById('filters-body');
   var btn = document.getElementById('filter-toggle-btn');
-  var open = body.style.display === 'none';
-  body.style.display = open ? '' : 'none';
-  btn.textContent = open ? '▲ フィルター' : '▼ フィルター';
+  var open = body.style.display === 'flex' || body.style.display === 'block';
+  body.style.display = open ? '' : 'flex';
+  btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
 }
 
 // ===== LOAD =====

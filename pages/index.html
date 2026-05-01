@@ -50,11 +50,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .ftog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; font-weight: 700; }
 #sort-dir { flex-shrink: 0; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; cursor: pointer; }
 #sort-dir:hover { border-color: var(--accent); color: var(--accent); }
-#char-count { font-size: 11px; color: var(--text2); white-space: nowrap; }
-.filters-toprow { display: flex; align-items: center; gap: 6px; }
-.filters-toprow input { flex: 1; min-width: 0; }
-.filter-toggle-btn { width: 100%; margin: 4px 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; display: block; }
+#char-count { font-size: 11px; color: var(--text2); text-align: right; padding: 2px 2px 0; }
+/* Mobile filter toggle — hidden on desktop */
+.filter-toggle-btn { display: none; width: 100%; margin: 4px 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; }
 .filter-toggle-btn:hover { border-color: var(--accent); }
+/* Desktop: filter body always visible */
 #filters-body { display: flex; flex-direction: column; gap: 8px; }
 #char-list { flex: 1; overflow-y: auto; }
 #char-list::-webkit-scrollbar { width: 4px; }
@@ -82,12 +82,15 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .badge.elem-5 { background: var(--dark);  color: #fff; }
 .badge.elem-6 { background: var(--none);  color: #fff; }
 .badge.weapon { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   body { height: auto; overflow-y: auto; }
   #layout { flex-direction: column; overflow: visible; flex: none; }
   #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); }
   #char-list { height: 175px; flex: none; }
   #detail { overflow: visible; padding: 14px 16px; flex: none; }
+  /* Mobile: show filter toggle button, hide filter body by default */
+  .filter-toggle-btn { display: block; }
+  #filters-body { display: none; }
 }
 
 /* ===== DETAIL PANEL ===== */
@@ -308,12 +311,9 @@ input[type=number] { -moz-appearance: textfield; }
 <div id="layout">
   <div id="sidebar">
     <div id="filters">
-      <div class="filters-toprow">
-        <input type="text" id="search" placeholder="🔍 魔剣名で検索..." oninput="applyFilters()">
-        <div id="char-count"></div>
-      </div>
-      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ フィルター</button>
-      <div id="filters-body" style="display:none">
+      <input type="text" id="search" placeholder="🔍 魔剣名で検索..." oninput="applyFilters()">
+      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
+      <div id="filters-body">
       <div class="filter-section">
         <div class="filter-label">レア度</div>
         <div class="filter-toggles" id="f-rarity">
@@ -406,6 +406,7 @@ input[type=number] { -moz-appearance: textfield; }
         <button onclick="resetFilters()" style="font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">リセット</button>
       </div>
       </div><!-- #filters-body -->
+      <div id="char-count"></div>
     </div>
     <div id="char-list"></div>
   </div>
@@ -570,9 +571,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function toggleFilters() {
   var body = document.getElementById('filters-body');
   var btn = document.getElementById('filter-toggle-btn');
-  var open = body.style.display === 'none';
-  body.style.display = open ? '' : 'none';
-  btn.textContent = open ? '▲ フィルター' : '▼ フィルター';
+  var open = body.style.display === 'flex' || body.style.display === 'block';
+  body.style.display = open ? '' : 'flex';
+  btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
 }
 
 // ===== FILTER STATE =====
