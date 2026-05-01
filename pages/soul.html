@@ -44,6 +44,9 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .btn-reset { font-size: 11px; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; flex-shrink: 0; }
 .btn-reset:hover { color: var(--text); }
 #soul-count { font-size: 11px; color: var(--text2); text-align: right; }
+.mob-search-row { display: flex; align-items: center; gap: 8px; }
+.mob-search-row input { flex: 1; min-width: 0; }
+#soul-count-mob { display: none; font-size: 11px; color: var(--text2); white-space: nowrap; }
 .filter-toggle-btn { display: none; width: 100%; margin: 4px 0; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; }
 .filter-toggle-btn:hover { border-color: var(--accent); }
 #filters-body { display: flex; flex-direction: column; gap: 8px; }
@@ -176,10 +179,13 @@ input[type=number] { -moz-appearance: textfield; }
   #f-type { display: grid; grid-template-columns: repeat(6, 1fr); }
   .filter-toggle-btn { display: block; }
   #filters-body { display: none; }
+  #soul-count-mob { display: block; }
+  #soul-count { display: none; }
+  #topbar { position: static !important; }
   #filters {
     position: sticky;
-    top: 52px;
-    z-index: 50;
+    top: 0;
+    z-index: 100;
     background: var(--bg2);
   }
 }
@@ -195,9 +201,12 @@ input[type=number] { -moz-appearance: textfield; }
   <!-- SIDEBAR -->
   <div id="sidebar">
     <div id="filters">
-      <input type="text" id="search" placeholder="🔍 ソウル名で検索..."
-             style="width:100%;padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;"
-             oninput="applyFilters()">
+      <div class="mob-search-row">
+        <input type="text" id="search" placeholder="🔍 ソウル名で検索..."
+               style="padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;"
+               oninput="applyFilters()">
+        <span id="soul-count-mob"></span>
+      </div>
       <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
       <div id="filters-body">
       <div class="filter-section">
@@ -291,20 +300,25 @@ let originalData  = {};
 let editData      = null;
 const filterSets  = { rarity: new Set(), element: new Set(), type: new Set() };
 
+var _filtersOpenScrollY = null;
 function toggleFilters() {
   var body = document.getElementById('filters-body');
   var btn = document.getElementById('filter-toggle-btn');
   var open = body.style.display === 'flex' || body.style.display === 'block';
   body.style.display = open ? '' : 'flex';
   btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
+  _filtersOpenScrollY = open ? null : window.scrollY;
 }
 function collapseFiltersOnScroll() {
   if (window.innerWidth > 768) return;
   var body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
+  if (_filtersOpenScrollY === null) return;
+  if (Math.abs(window.scrollY - _filtersOpenScrollY) < 30) return;
   body.style.display = '';
   var btn = document.getElementById('filter-toggle-btn');
   if (btn) btn.textContent = '▼ 絞り込み';
+  _filtersOpenScrollY = null;
 }
 window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
 
@@ -374,7 +388,10 @@ function applyFilters() {
     });
   }
 
-  document.getElementById('soul-count').textContent = `${filteredSouls.length} 件`;
+  var ct = `${filteredSouls.length} 件`;
+  document.getElementById('soul-count').textContent = ct;
+  var mob = document.getElementById('soul-count-mob');
+  if (mob) mob.textContent = ct;
   renderList();
 }
 
