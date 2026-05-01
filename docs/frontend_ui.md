@@ -76,6 +76,20 @@ soul.html 是正确顺序，index.html 之前误把默认放在 @media 之后导
 
 **没有这条阴影**时，用户会看到 modal 顶部出现一闪的 `var(--bg)` 缝隙，体感像"modal 没占满屏"。soul/index 必须保持一致。
 
+### 同样的 trick 用在 chara-header 上（防 sticky 切换穿模）
+
+桌面端 chara-header sticky 在 #detail 内（#detail 有 `padding-top: 20px`）。scroll 切换瞬间或非 pin 状态下，chara-header 上方的 padding 区可能"穿模"露出后方 state-content 滚动的内容（例如 スキル構成 标题）。同 trick 解决：
+
+```css
+.chara-header {
+  position: sticky; top: var(--sticky-bar-h, 0px);
+  z-index: 6; background: var(--bg);
+  box-shadow: 0 -100vh 0 0 var(--bg);   /* ← 上方 100vh 用 bg 盖住 */
+}
+```
+
+阴影会被 #detail 的 `overflow-y: auto` 自动 clip，不会越界到 topbar 区域；topbar 的 z-index:100 也能盖住任何溢出。**任何 sticky 元素如果它的上方有可能露出后方滚动内容（例如所在 scroll container 有 padding-top，或 sticky 链上方有间隙），都可以用这个 trick 兜底。**
+
 ---
 
 ## 3. 多层 sticky 头部系统
