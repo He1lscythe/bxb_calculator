@@ -20,15 +20,18 @@ WEAPON_MAP  = {
     '戦斧': 7, '騎槍': 8, '投擲': 9, '拳闘': 10, '魔典': 11, '大鎌': 12,
 }
 
-_HUSHIN = re.compile(r'残HPが多いほど|HP残量が多いほど|残りHP(?:が)?多いほど|損傷率が低いほど')
-_HAISUI = re.compile(r'残HPが少ないほど|HP残量が少ないほど|残りHP(?:が)?少ないほど|HPが少ないほど|損傷率が高いほど|HPを消耗するほど|HPが消耗するほど')
+# 与 classify_common.py 保持一致（が / り 可选；condition=4 表示敌方破甲時触发）
+_HUSHIN = re.compile(r'残(?:り)?HP(?:が)?多いほど|HP残量が多いほど|損傷率が低いほど')
+_HAISUI = re.compile(r'残(?:り)?HP(?:が)?(?:少な|低)いほど|HP残量が少ないほど|HPが(?:少な|低)いほど|損傷率が高いほど|HPを?消耗するほど')
 _BROKEN = re.compile(r'破損状態')
+_BK_TRIG = re.compile(r'敵ブレイク状態|敵がブレイク(?:時|状態|中)|(?<!ガード)ブレイク時')
 
 
 def detect_condition(text):
-    if _BROKEN.search(text): return 3
-    if _HUSHIN.search(text): return 1
-    if _HAISUI.search(text): return 2
+    if _BROKEN.search(text):  return 3
+    if _HUSHIN.search(text):  return 1
+    if _HAISUI.search(text):  return 2
+    if _BK_TRIG.search(text): return 4
     return 0
 
 
