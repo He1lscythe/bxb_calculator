@@ -31,8 +31,9 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 
 /* 有利武器 — 桌面行内 flex，移动 6 列 × 2 行 grid 对齐 */
 .adv-weapon-grid{display:flex;flex-wrap:wrap;gap:3px;}
-@media(max-width:760px){
-  #enemy-bar .eb-adv-weapon{flex-basis:100%;flex-direction:column;align-items:stretch;gap:4px;}
+@media(max-width:768px){
+  /* #enemy-bar .eb-adv-weapon{flex-basis:100%;flex-direction:column;align-items:stretch;gap:4px;} */
+  #enemy-bar .eb-adv-weapon{display:flex;justify-content:space-between;align-items:center;}
   .adv-weapon-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;}
   .adv-weapon-grid .eb-btn{padding:3px 4px;text-align:center;}
 }
@@ -319,7 +320,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 .dm-hit-arrow{color:var(--text2);font-size:10px;}
 
 #loading{text-align:center;color:var(--text2);padding:60px;font-size:13px;}
-@media(max-width:760px){#slots-grid{grid-template-columns:1fr;}}
+@media(max-width:768px){#slots-grid{grid-template-columns:1fr;}}
 @media(max-width:768px){
   #entity-modal .modal-panel,#detail-modal .modal-panel{height:min(860px,88svh);}
   .modal-sidebar{width:120px;min-width:100px;padding:8px 6px;}
@@ -351,7 +352,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 @keyframes mobFlipOutR{from{transform:rotateY(0);opacity:1}to{transform:rotateY(90deg);opacity:0}}
 @keyframes mobFlipInR{from{transform:rotateY(90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
 @keyframes mobFlipInL{from{transform:rotateY(-90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
-@media(max-width:760px){
+@media(max-width:768px){
   #slots-grid{perspective:700px;display:flex;flex-direction:column;flex:1;padding:8px;gap:0;}
   .slot-card:not(.mob-hidden){flex:1;}
   .slot-card.mob-hidden{display:none;}
@@ -361,7 +362,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
   .slot-card.mob-anim-inL{animation:mobFlipInL .2s ease-out forwards;}
 }
 #mobile-slot-indicator{display:none;justify-content:center;align-items:center;gap:12px;padding:8px 0 4px;}
-@media(max-width:760px){#mobile-slot-indicator{display:flex;}}
+@media(max-width:768px){#mobile-slot-indicator{display:flex;}}
 .msi-dot{width:9px;height:9px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s,transform .2s;flex-shrink:0;}
 .msi-dot.active{background:var(--accent);transform:scale(1.4);}
 .msi-dot.mob-disabled{opacity:.25;cursor:default;}
@@ -770,6 +771,7 @@ function setTeamSize(n){
   for(let i=0;i<3;i++)document.getElementById('slot-'+i).classList.toggle('disabled',i>=n);
   if(isMob()&&mobileActiveSlot>=n){mobileActiveSlot=n-1;updateMobVisible();}
   else if(isMob())updateMobIndicator();
+  refreshAllStats();
 }
 function _maxOmoideThreshold(c){
   if(!c||!Array.isArray(c.omoide))return 0;
@@ -791,6 +793,7 @@ function setChara(si,id){
     if(!team[si].soul)autoAssignSoul(si);
     team[si].crystals=[];
     syncCrystals(si);
+    equipAllOmoide(si);
   }
   renderSlot(si);refreshAllStats();
 }
@@ -942,7 +945,7 @@ function renderTraining(i,chara){
   const lvCapDisp=lvCap!=null?lvCap:'-';
   const lvCur=lvCap!=null?Math.min(tr.level||1,lvCap):1;
   const stHtml=stOpts.map(s=>`<button class="tr-btn${s===tr.state?' on':''}" onclick="setTrField(${i},'state','${s}')">${s}</button>`).join('');
-  const mrHtml=[['未',0],['花なし',1],['花あり',2]].map(([l,v])=>`<button class="tr-btn${tr.marriage===v?' on':''}" onclick="setTrField(${i},'marriage',${v})">${l}</button>`).join('');
+  const mrHtml=[['未婚',0],['花なし',1],['花あり',2]].map(([l,v])=>`<button class="tr-btn${tr.marriage===v?' on':''}" onclick="setTrField(${i},'marriage',${v})">${l}</button>`).join('');
   const lpHtml=[['通常',0],['½↓',1],['¼↓',2]].map(([l,v])=>`<button class="tr-btn${tr.lp===v?' on':''}" onclick="setTrField(${i},'lp',${v})">${l}</button>`).join('');
   return`<div class="training-wrap">
     <div class="training-row">
@@ -1394,7 +1397,7 @@ function renderEnemyBar() {
     </div>`;
   }
   // 10. エンブレム — 4 槽 icon picker（参考 crystals 槽位风格）
-  let emblemHtml = `<div class="eb-group" style="align-items:flex-start">
+  let emblemHtml = `<div class="eb-group">
     <span class="eb-label">エンブレム</span>
     <div class="emblem-slots">`;
   for (let s=0; s<4; s++) {
@@ -1420,7 +1423,7 @@ function renderEnemyBar() {
 
   eb.innerHTML = `
     <div class="eb-group"><span class="eb-label">敵属性</span>${elemBtns}</div>
-    <div class="eb-group"><span class="eb-label">BK状態</span>${bkBtns}</div>
+    <div class="eb-group"><span class="eb-label">敵BK状態</span>${bkBtns}</div>
     <div class="eb-group"><span class="eb-label">副本</span><select onchange="setEnemyMode(this.value)">${modeOpts}</select></div>
     ${bkResHtml}
     ${diffHtml}
@@ -1662,6 +1665,7 @@ function _statsInner(i, chara) {
   const hp   = +r.stats['HP']         || 0;
   const bk   = +r.stats['ブレイク力'] || 0;
   const hits = (r.hits || [0,0,0]).map(h => Math.floor(+h || 0));
+  const total_hits = hits.reduce((sum, h) => sum + h, 0);
 
   const yMax = aMax >= dl ? ' style="color:#ffd040"' : '';
   const yMin = aMin >= dl ? ' style="color:#ffd040"' : '';
@@ -1674,7 +1678,7 @@ function _statsInner(i, chara) {
     `<div class="stats-cell"><span class="stats-key">防御力</span><span class="stats-val">${_fmtStat(def)}</span></div>`,
     `<div class="stats-cell"><span class="stats-key">HP</span><span class="stats-val">${_fmtStat(hp)}</span></div>`,
     `<div class="stats-cell"><span class="stats-key">BK</span><span class="stats-val">${_fmtStat(bk)}</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}]</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}] 合計 ${total_hits} hit</span></div>`,
     `<div class="stats-cell"><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(dl)}</span></div>`,
   ].join('');
   return `<div class="stats-grid">${cells}</div>`;
