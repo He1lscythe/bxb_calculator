@@ -117,12 +117,6 @@ def load(path):
 def save(path, data):
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    js = path.replace('.json', '.js')
-    varname = 'CHARA_DATA' if 'chara' in os.path.basename(path) else 'SOULS_DATA'
-    with open(js, 'w', encoding='utf-8') as f:
-        f.write(f'var {varname} = ')
-        json.dump(data, f, ensure_ascii=False)
-        f.write(';\n')
 
 
 REPORT_PATH = os.path.join(ROOT, 'scripts', 'calc_type_report.txt')

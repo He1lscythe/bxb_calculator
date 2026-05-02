@@ -19,10 +19,7 @@ def normalize(chars):
         c['omoide'] = [{'threshold': t, 'slots': existing.get(t, [])} for t in THRESHOLDS]
 
 
-for fname, write_js in [
-    ('characters.json',            True),
-    ('characters_revise.json',     False),
-]:
+for fname in ['characters.json', 'characters_revise.json']:
     path = os.path.join(DATA_DIR, fname)
     if not os.path.exists(path):
         print(f'Skip (not found): {fname}')
@@ -35,12 +32,6 @@ for fname, write_js in [
     normalize(data)
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    if write_js:
-        js_path = path.replace('.json', '.js')
-        with open(js_path, 'w', encoding='utf-8') as f:
-            f.write('var CHARA_DATA = ')
-            json.dump(data, f, ensure_ascii=False)
-            f.write(';\n')
     print(f'Updated {fname}: {len(data)} characters')
 
 print('Done.')

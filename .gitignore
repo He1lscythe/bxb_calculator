@@ -4,9 +4,10 @@ __pycache__/
 
 # ── Crawl progress (local state) ──────────────────────────
 progress.json
-progress.js
 soul_progress.json
-soul_progress.js
+# 历史上爬虫会同时输出 *.js 副本（var XXX_DATA = ...）。前端不再依赖，
+# 爬虫已不生成；此规则作为保险，防止误生成文件被入库。
+data/*.js
 
 # ── Raw downloaded HTML pages (large) ─────────────────────
 chara_*.html

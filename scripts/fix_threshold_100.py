@@ -5,10 +5,7 @@ import json, os, copy
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT, 'data')
 
-FILES = [
-    ('characters.json',            True),
-    ('characters_revise.json',     False),
-]
+FILES = ['characters.json', 'characters_revise.json']
 
 
 def fix(chars):
@@ -27,7 +24,7 @@ def fix(chars):
     return changed
 
 
-for fname, write_js in FILES:
+for fname in FILES:
     path = os.path.join(DATA_DIR, fname)
     if not os.path.exists(path):
         print(f'Skip (not found): {fname}')
@@ -40,12 +37,6 @@ for fname, write_js in FILES:
     n = fix(data)
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    if write_js:
-        js_path = path.replace('.json', '.js')
-        with open(js_path, 'w', encoding='utf-8') as f:
-            f.write('var CHARA_DATA = ')
-            json.dump(data, f, ensure_ascii=False)
-            f.write(';\n')
     print(f'{fname}: {n} characters fixed')
 
 print('Done.')
