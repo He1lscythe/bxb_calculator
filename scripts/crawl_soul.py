@@ -73,12 +73,6 @@ def load_json(path, default):
 def save_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    js_path = path.replace(".json", ".js")
-    var_name = os.path.splitext(os.path.basename(path))[0].upper().replace("-", "_")
-    with open(js_path, "w", encoding="utf-8") as f:
-        f.write(f"var {var_name}_DATA = ")
-        json.dump(data, f, ensure_ascii=False)
-        f.write(";\n")
 
 
 # ============================================================

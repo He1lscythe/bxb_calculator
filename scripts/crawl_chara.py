@@ -86,21 +86,11 @@ def load_json(path, default):
 def save_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    js_path = path.replace(".json", ".js")
-    with open(js_path, "w", encoding="utf-8") as f:
-        f.write("var CHARA_DATA = ")
-        json.dump(data, f, ensure_ascii=False)
-        f.write(";\n")
 
 
 def save_senzai_table(path, data):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    js_path = path.replace(".json", ".js")
-    with open(js_path, "w", encoding="utf-8") as f:
-        f.write("var SENZAI_TABLE = ")
-        json.dump(data, f, ensure_ascii=False)
-        f.write(";\n")
 
 
 # ============================================================
