@@ -28,7 +28,35 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 #enemy-bar .eb-btn.elem-4.on{background:rgba(255,204,0,.22);border-color:var(--light);color:var(--light);}
 #enemy-bar .eb-btn.elem-5.on{background:rgba(170,85,255,.22);border-color:var(--dark);color:var(--dark);}
 #enemy-bar select{padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;outline:none;cursor:pointer;}
-#enemy-bar .eb-emblem-row{display:flex;flex-direction:column;gap:2px;align-items:flex-start;}
+
+/* 有利武器 — 桌面行内 flex，移动 6 列 × 2 行 grid 对齐 */
+.adv-weapon-grid{display:flex;flex-wrap:wrap;gap:3px;}
+@media(max-width:760px){
+  #enemy-bar .eb-adv-weapon{flex-basis:100%;flex-direction:column;align-items:stretch;gap:4px;}
+  .adv-weapon-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;}
+  .adv-weapon-grid .eb-btn{padding:3px 4px;text-align:center;}
+}
+
+/* エンブレム 4 槽 icon picker（仿 crystals）*/
+#enemy-bar .emblem-slots{display:flex;gap:8px;flex-wrap:wrap;}
+.emblem-slot-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;}
+.emblem-thumb{width:40px;height:40px;border-radius:5px;object-fit:cover;border:1px solid rgba(91,127,255,.4);cursor:pointer;background:var(--bg3);transition:border-color .1s;}
+.emblem-thumb:hover{border-color:var(--accent);}
+.emblem-empty{width:40px;height:40px;border-radius:5px;border:1px dashed var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:20px;line-height:1;transition:border-color .1s,color .1s;}
+.emblem-empty:hover{border-color:var(--accent);color:var(--accent);}
+.emblem-slot-meta{display:flex;align-items:center;gap:2px;}
+.emblem-lv-input{width:34px;padding:1px 3px;border-radius:3px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:10px;outline:none;text-align:center;}
+.emblem-lv-input::-webkit-outer-spin-button,
+.emblem-lv-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.emblem-lv-input{-moz-appearance:textfield;}
+.emblem-lv-max{font-size:10px;color:var(--text2);}
+.emblem-rm{position:absolute;top:-6px;right:-6px;width:16px;height:16px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text2);font-size:11px;line-height:1;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;}
+.emblem-rm:hover{border-color:#ff5555;color:#ff5555;}
+
+/* エンブレム modal */
+#emblem-modal{display:none;position:fixed;inset:0;z-index:2200;align-items:center;justify-content:center;}
+#emblem-modal.open{display:flex;}
+#emblem-modal .modal-panel{width:min(640px,96vw);height:min(640px,90vh);}
 .ts-label{font-size:11px;font-weight:700;color:var(--text2);margin-right:4px;letter-spacing:.05em;}
 .size-btn{padding:4px 18px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
 .size-btn:hover{border-color:var(--accent);color:var(--text);}
@@ -154,11 +182,10 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 .em-item:hover{background:var(--bg3);}
 .em-item.active{background:#1e2d5a;border-left:3px solid var(--accent);padding-left:9px;}
 .sort-val{font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0;padding:1px 6px;border-radius:4px;background:rgba(91,127,255,.12);border:1px solid rgba(91,127,255,.3);}
-.stats-panel{margin-top:6px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 8px;}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;}
+.stats-panel{margin-top:6px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:3px 2px;}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;}
 .stats-cell{display:flex;justify-content:space-between;font-size:11px;padding:2px 4px;background:var(--bg2);border-radius:4px;min-width:0;}
 .stats-cell .stats-val{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.stats-cell.wide{grid-column:span 2;}
 .stats-key{color:var(--text2);}
 .stats-val{font-weight:700;color:var(--accent);}
 .omoide-equip{margin-top:6px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px;}
@@ -386,6 +413,21 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
     <div class="modal-body">
       <div class="modal-sidebar" id="em-sidebar"></div>
       <div class="em-list" id="em-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EMBLEM MODAL（敵 enemy.emblems 4 槽位选择）===== -->
+<div id="emblem-modal">
+  <div class="modal-overlay" onclick="closeEmblemModal()"></div>
+  <div class="modal-panel">
+    <div class="modal-header">
+      <span class="modal-header-title">エンブレム選択</span>
+      <button class="modal-close" onclick="closeEmblemModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-sidebar" id="emblem-sidebar"></div>
+      <div class="em-list" id="emblem-list"></div>
     </div>
   </div>
 </div>
@@ -1300,11 +1342,9 @@ function renderEnemyBar() {
   const elemBtns = [1,2,3,4,5,6].map(e =>
     `<button class="eb-btn elem-${e}${enemy.element===e?' on':''}" onclick="setEnemyElem(${e})">${ELEM[e]}</button>`
   ).join('');
-  // 2. BK状態
-  const bkBtns = [
-    `<button class="eb-btn${enemy.bk?'':' on'}" onclick="setEnemyBk(false)">なし</button>`,
-    `<button class="eb-btn${enemy.bk?' on':''}" onclick="setEnemyBk(true)">あり</button>`,
-  ].join('');
+  // 2. BK状態（单按钮 toggle：あり/なし）
+  const bkLabel = enemy.bk ? 'あり' : 'なし';
+  const bkBtns = `<button class="eb-btn${enemy.bk?' on':''}" onclick="setEnemyBk(${!enemy.bk})">${bkLabel}</button>`;
   // 3. mode
   const modeOpts = [
     ['normal','普通'],
@@ -1312,16 +1352,16 @@ function renderEnemyBar() {
     ['guildbattle_special','ギルバト特別版'],
     ['other','他'],
   ].map(([v,l])=>`<option value="${v}"${enemy.mode===v?' selected':''}>${l}</option>`).join('');
-  // 4. BK耐性 (guild only)
+  // 4. BK耐性 (guild only) — 单按钮 toggle：普通/高
   let bkResHtml = '';
   if (isGuild) {
+    const isHigh = enemy.bkResistance === 'high';
     bkResHtml = `<div class="eb-group">
       <span class="eb-label">BK耐性</span>
-      <button class="eb-btn${enemy.bkResistance==='normal'?' on':''}" onclick="setEnemyBkRes('normal')">普通</button>
-      <button class="eb-btn${enemy.bkResistance==='high'?' on':''}" onclick="setEnemyBkRes('high')">高</button>
+      <button class="eb-btn${isHigh?' on':''}" onclick="setEnemyBkRes('${isHigh?'normal':'high'}')">${isHigh?'高':'普通'}</button>
     </div>`;
   }
-  // 7. 有利武器 (guild only)
+  // 7. 有利武器 (guild only) — 桌面行内 / 移动 6x2 grid
   let advWeapHtml = '';
   if (isGuild) {
     const wbtns = [];
@@ -1329,8 +1369,9 @@ function renderEnemyBar() {
       const on = enemy.advantageWeapons.has(w) ? ' on' : '';
       wbtns.push(`<button class="eb-btn${on}" onclick="toggleAdvWeapon(${w})">${WEAPON[w]}</button>`);
     }
-    advWeapHtml = `<div class="eb-group">
-      <span class="eb-label">有利武器</span>${wbtns.join('')}
+    advWeapHtml = `<div class="eb-group eb-adv-weapon">
+      <span class="eb-label">有利武器</span>
+      <div class="adv-weapon-grid">${wbtns.join('')}</div>
     </div>`;
   }
   // 8. difficulty (guild only)
@@ -1352,38 +1393,38 @@ function renderEnemyBar() {
       <select onchange="setEnemyGuildTitle(this.value)">${opts}</select>
     </div>`;
   }
-  // 10. emblems (4 slots, level slider)
+  // 10. エンブレム — 4 槽 icon picker（参考 crystals 槽位风格）
   let emblemHtml = `<div class="eb-group" style="align-items:flex-start">
-    <span class="eb-label">紋章</span>`;
+    <span class="eb-label">エンブレム</span>
+    <div class="emblem-slots">`;
   for (let s=0; s<4; s++) {
     const slot = enemy.emblems[s] || {id:null, level:1};
-    const opts = [`<option value="">--</option>`].concat(
-      allGuildEmblems.filter(e => isGuild || !e.guild_only).map(e =>
-        `<option value="${e.id}"${slot.id===e.id?' selected':''}>${esc(e.name)}${e.guild_only?' (GB)':''}</option>`
-      )
-    ).join('');
-    const maxLv = (() => {
-      if (slot.id == null) return 1;
-      const em = allGuildEmblems.find(g=>g.id===slot.id);
-      return em ? emblemLvMax(em.rarity) : 1;
-    })();
-    emblemHtml += `<div class="eb-emblem-row">
-      <select onchange="setEmblem(${s}, this.value)">${opts}</select>
-      <div style="display:flex;gap:3px;align-items:center;font-size:11px;color:var(--text2)">Lv
-        <input type="number" min="1" max="${maxLv}" value="${slot.level||1}" onchange="setEmblemLv(${s},+this.value)" style="width:48px;padding:2px 4px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:11px;outline:none">
-        <span>/ ${maxLv}</span>
-      </div>
-    </div>`;
+    if (slot.id != null) {
+      const em = allGuildEmblems.find(g => g.id === slot.id);
+      const lvMax = em ? emblemLvMax(em.rarity) : 1;
+      emblemHtml += `<div class="emblem-slot-wrap">
+        <img class="emblem-thumb" src="../icon/emblem/${slot.id}.png" onerror="this.style.visibility='hidden'" title="${esc(em ? em.name : '')}" alt="" onclick="openEmblemModal(${s})">
+        <div class="emblem-slot-meta">
+          <input type="number" min="1" max="${lvMax}" value="${slot.level||1}" class="emblem-lv-input" onchange="setEmblemLv(${s},+this.value)">
+          <span class="emblem-lv-max">/${lvMax}</span>
+        </div>
+        <button class="emblem-rm" onclick="setEmblem(${s},'')" title="外す">×</button>
+      </div>`;
+    } else {
+      emblemHtml += `<div class="emblem-slot-wrap">
+        <div class="emblem-empty" title="エンブレムを選択" onclick="openEmblemModal(${s})">+</div>
+      </div>`;
+    }
   }
-  emblemHtml += `</div>`;
+  emblemHtml += `</div></div>`;
 
   eb.innerHTML = `
     <div class="eb-group"><span class="eb-label">敵属性</span>${elemBtns}</div>
     <div class="eb-group"><span class="eb-label">BK状態</span>${bkBtns}</div>
     <div class="eb-group"><span class="eb-label">副本</span><select onchange="setEnemyMode(this.value)">${modeOpts}</select></div>
     ${bkResHtml}
-    ${advWeapHtml}
     ${diffHtml}
+    ${advWeapHtml}
     ${titleHtml}
     ${emblemHtml}
   `;
@@ -1412,6 +1453,74 @@ function setEmblemLv(slotIdx, lv) {
   const max = em ? emblemLvMax(em.rarity) : 1;
   enemy.emblems[slotIdx].level = Math.max(1, Math.min(max, Math.floor(+lv)||1));
   renderEnemyBar(); refreshAllStats();
+}
+
+// ===== EMBLEM MODAL（rarity 筛选 + icon 列表）=====
+let emblemModalSlot = -1;
+const emblemModalFilter = { rarity: new Set() };
+
+function openEmblemModal(slotIdx) {
+  emblemModalSlot = slotIdx;
+  document.getElementById('emblem-modal').classList.add('open');
+  _renderEmblemModalSidebar();
+  _renderEmblemModalList();
+}
+function closeEmblemModal() {
+  document.getElementById('emblem-modal').classList.remove('open');
+  emblemModalSlot = -1;
+}
+function _renderEmblemModalSidebar() {
+  const html = `
+    <div class="f-section"><div class="f-label">レア度</div><div class="f-toggles">
+      ${[1,2,3].map(r =>
+        `<button class="ftog${emblemModalFilter.rarity.has(r)?' on':''}" onclick="toggleEmblemRarity(${r})">★${r}</button>`
+      ).join('')}
+    </div></div>
+    <div class="f-sort-row"><button class="f-reset-btn" onclick="resetEmblemFilter()" style="flex:1">リセット</button></div>
+    <div class="modal-count" id="emblem-count"></div>`;
+  document.getElementById('emblem-sidebar').innerHTML = html;
+}
+function _renderEmblemModalList() {
+  const list = document.getElementById('emblem-list');
+  const isGuildMode = (enemy.mode === 'guildbattle' || enemy.mode === 'guildbattle_special');
+  const items = (allGuildEmblems || []).filter(em => {
+    if (emblemModalFilter.rarity.size > 0 && !emblemModalFilter.rarity.has(+em.rarity || 1)) return false;
+    return true;
+  }).sort((a,b) => (b.rarity||1) - (a.rarity||1) || a.id - b.id);
+  const cnt = document.getElementById('emblem-count');
+  if (cnt) cnt.textContent = items.length + ' 件';
+
+  let html = `<div class="em-clear sticky" onclick="selectEmblem(null)">— エンブレムを外す</div>`;
+  if (!items.length) { list.innerHTML = html + '<div class="em-no-results">該当なし</div>'; return; }
+  for (const em of items) {
+    const cur = (enemy.emblems[emblemModalSlot] || {}).id === em.id ? ' active' : '';
+    const dim = (em.guild_only && !isGuildMode) ? ' style="opacity:.55"' : '';
+    const gbTag = em.guild_only ? '<span class="badge weapon" style="background:rgba(91,127,255,.18);color:#7b9fff;border-color:rgba(91,127,255,.35)">GB限定</span>' : '';
+    html += `<div class="em-item${cur}"${dim} onclick="selectEmblem(${em.id})">
+      <img class="em-icon" src="../icon/emblem/${em.id}.png" onerror="this.style.visibility='hidden'" alt="">
+      <span class="em-name">${esc(em.name||'')}</span>
+      ${gbTag}
+      <span class="badge weapon">★${em.rarity||1}</span>
+      <span class="em-effect">${esc((em.effect||'').slice(0,28))}${(em.effect||'').length>28?'…':''}</span>
+    </div>`;
+  }
+  list.innerHTML = html;
+}
+function toggleEmblemRarity(r) {
+  if (emblemModalFilter.rarity.has(r)) emblemModalFilter.rarity.delete(r);
+  else emblemModalFilter.rarity.add(r);
+  _renderEmblemModalSidebar();
+  _renderEmblemModalList();
+}
+function resetEmblemFilter() {
+  emblemModalFilter.rarity.clear();
+  _renderEmblemModalSidebar();
+  _renderEmblemModalList();
+}
+function selectEmblem(id) {
+  if (emblemModalSlot < 0) return;
+  setEmblem(emblemModalSlot, id == null ? '' : id);
+  closeEmblemModal();
 }
 
 // Pick / equip / clear ─────────────────────────────────────
@@ -1532,6 +1641,8 @@ function _refreshOmoideCountLabel(si) {
 function _fmtStat(v) {
   if (v == null || isNaN(v)) return '-';
   const n = Math.round(v);
+  // 超过 13 位数（≥ 1e13）改用科学计数法（小数点后 6 位）
+  if (Math.abs(n) >= 1e13) return n.toExponential(6);
   return n.toLocaleString('en-US');
 }
 
@@ -1556,8 +1667,7 @@ function _statsInner(i, chara) {
   const yMin = aMin >= dl ? ' style="color:#ffd040"' : '';
 
   // 显示顺序：攻撃力max / 攻撃力min / 防御力 / HP / BK / Hit数 / ダメ上限
-  // 默认每 cell 1/3 行宽（.stats-grid 的 grid-template-columns 设为 repeat(3,1fr)）。
-  // ダメ上限 用 .wide（grid-column:span 2）= 2/3 行宽。Hit数 默认 1/3。
+  // 默认每 cell 1/2 行宽（.stats-grid 的 grid-template-columns 设为 repeat(2,1fr)）。
   const cells = [
     `<div class="stats-cell"><span class="stats-key">攻撃力max</span><span class="stats-val"${yMax}>${_fmtStat(aMax)}</span></div>`,
     `<div class="stats-cell"><span class="stats-key">攻撃力min</span><span class="stats-val"${yMin}>${_fmtStat(aMin)}</span></div>`,
@@ -1565,7 +1675,7 @@ function _statsInner(i, chara) {
     `<div class="stats-cell"><span class="stats-key">HP</span><span class="stats-val">${_fmtStat(hp)}</span></div>`,
     `<div class="stats-cell"><span class="stats-key">BK</span><span class="stats-val">${_fmtStat(bk)}</span></div>`,
     `<div class="stats-cell"><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}]</span></div>`,
-    `<div class="stats-cell wide"><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(dl)}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(dl)}</span></div>`,
   ].join('');
   return `<div class="stats-grid">${cells}</div>`;
 }
