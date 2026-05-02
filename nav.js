@@ -25,6 +25,7 @@
       '<h1>⚔ BxB</h1>' +
       '<nav id="page-nav">' + links + '</nav>' +
       '<div id="topbar-right">' +
+        '<div id="save-toast"></div>' +
         '<div id="revise-bar">' +
           '<button class="btn-revise-save" onclick="typeof saveRevise===\'function\'&&saveRevise()">Save</button>' +
           '<span id="revise-status"></span>' +
@@ -50,6 +51,12 @@
     '.btn-revise-save{background:#1e5c1e;color:#aaffaa;border:1px solid #2d8c2d;border-radius:6px;padding:4px 12px;font-size:12px;cursor:pointer;font-weight:600;}' +
     '.btn-revise-save:hover{background:#266626;}' +
     '.btn-revise-save:disabled{opacity:.5;cursor:default;}' +
+    /* Save success toast — 出现在 Save/汉堡菜单 左侧，6 秒后自动消失 */
+    '#save-toast{display:none;align-items:center;gap:6px;padding:5px 12px;border-radius:6px;background:rgba(80,200,120,.12);border:1px solid rgba(80,200,120,.4);color:#7dd99f;font-size:12px;font-weight:600;white-space:nowrap;animation:save-toast-in .25s ease-out;}' +
+    '#save-toast.show{display:flex;}' +
+    '#save-toast a{color:var(--accent);text-decoration:none;}' +
+    '#save-toast a:hover{text-decoration:underline;}' +
+    '@keyframes save-toast-in{from{opacity:0;transform:translateX(8px);}to{opacity:1;transform:translateX(0);}}' +
     '@media(max-width:600px){' +
       '#nav-hamburger{display:block;}' +
       '#page-nav{' +

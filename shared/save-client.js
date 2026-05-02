@@ -43,7 +43,22 @@
     return out;
   }
 
+  // 显示在 nav.js 的 #save-toast 上的成功提示，自动 6 秒消失。
+  // 主要用于 remote 模式 save 成功后给用户一个明显的视觉反馈（位置：导航栏 Save/汉堡菜单 左侧）。
+  function showSaveToast(html, durationMs) {
+    var t = document.getElementById('save-toast');
+    if (!t) return;
+    t.innerHTML = html;
+    t.classList.add('show');
+    if (t._hideTimer) clearTimeout(t._hideTimer);
+    t._hideTimer = setTimeout(function () {
+      t.classList.remove('show');
+      t._hideTimer = null;
+    }, typeof durationMs === 'number' ? durationMs : 6000);
+  }
+
   window.submitRevise = submitRevise;
   window.isLocalEnv = isLocalEnv;
   window.pickPatches = pickPatches;
+  window.showSaveToast = showSaveToast;
 })();

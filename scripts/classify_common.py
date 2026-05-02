@@ -22,8 +22,9 @@ _WEAPON_NAMES_PAT = '|'.join(re.escape(w) for w in _WEAPONS_LIST)
 
 STATUS_WORDS = ['勇気分解', '即死', '麻痺', 'スタン', 'BlazeLock', '行動不能', '割合ダメージ']
 
-_HUSHIN   = re.compile(r'残HPが多いほど|HP残量が多いほど|残りHP(?:が)?多いほど|損傷率が低いほど')
-_HAISUI   = re.compile(r'残HPが少ないほど|HP残量が少ないほど|残りHP(?:が)?少ないほど|HPが少ないほど|損傷率が高いほど|HPを消耗するほど|HPが消耗するほど|残HPが低いほど|HPが低いほど')
+# が / り 都设为可选，覆盖"残HP多いほど" / "残HPが多いほど" / "残りHP多いほど" / "残りHPが多いほど"
+_HUSHIN   = re.compile(r'残(?:り)?HP(?:が)?多いほど|HP残量が多いほど|損傷率が低いほど')
+_HAISUI   = re.compile(r'残(?:り)?HP(?:が)?(?:少な|低)いほど|HP残量が少ないほど|HPが(?:少な|低)いほど|損傷率が高いほど|HPを?消耗するほど')
 _BROKEN   = re.compile(r'破損状態')
 _HP_COST  = re.compile(r'HPを.{0,6}消費|HPを.{0,6}犠牲')  # HP used as cost, not buff
 
