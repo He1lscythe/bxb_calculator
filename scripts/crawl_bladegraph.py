@@ -206,12 +206,19 @@ def detect_scope(dc, effect_text):
     return 0, None, None, None
 
 
+# 与 classify_common.py / crawl_crystal.py 保持一致
+_HUSHIN_BG = re.compile(r'残(?:り)?HP(?:が)?多いほど|HP残量が多いほど|損傷率が低いほど')
+_HAISUI_BG = re.compile(r'残(?:り)?HP(?:が)?(?:少な|低)いほど|HP残量が少ないほど|HPが(?:少な|低)いほど|損傷率が高いほど|HPを?消耗するほど')
+_BROKEN_BG = re.compile(r'破損状態')
+_BK_TRIG_BG = re.compile(r'敵ブレイク状態|敵がブレイク(?:時|状態|中)|(?<!ガード)ブレイク時')
+
+
 def detect_condition(segment):
-    """0=none, 1=HP多いほど, 2=HP少ないほど"""
-    if '残HPが多いほど' in segment:
-        return 1
-    if '残HPが少ないほど' in segment or '残HP少ないほど' in segment:
-        return 2
+    """0=none, 1=浑身, 2=背水, 3=破損, 4=敵BK時"""
+    if _BROKEN_BG.search(segment):  return 3
+    if _HUSHIN_BG.search(segment):  return 1
+    if _HAISUI_BG.search(segment):  return 2
+    if _BK_TRIG_BG.search(segment): return 4
     return 0
 
 

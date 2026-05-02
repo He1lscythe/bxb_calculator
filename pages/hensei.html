@@ -155,8 +155,9 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 .em-item.active{background:#1e2d5a;border-left:3px solid var(--accent);padding-left:9px;}
 .sort-val{font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0;padding:1px 6px;border-radius:4px;background:rgba(91,127,255,.12);border:1px solid rgba(91,127,255,.3);}
 .stats-panel{margin-top:6px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 8px;}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:4px;}
-.stats-cell{display:flex;justify-content:space-between;font-size:11px;padding:2px 4px;background:var(--bg2);border-radius:4px;}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;}
+.stats-cell{display:flex;justify-content:space-between;font-size:11px;padding:2px 4px;background:var(--bg2);border-radius:4px;min-width:0;}
+.stats-cell .stats-val{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .stats-cell.wide{grid-column:span 2;}
 .stats-key{color:var(--text2);}
 .stats-val{font-weight:700;color:var(--accent);}
@@ -472,6 +473,12 @@ const ELEMENT_K_GUILD_SPECIAL = {
   5:{1:-3,2:-3,3:-3,4:3, 5:-3,6:-3},
   6:{1:-3,2:-3,3:-3,4:-3,5:-3,6:3},
 };
+// 紋章 rarity → 等级上限：rarity 1=25, 2=40, 3=55
+const EMBLEM_RARITY_LV_MAX = {1: 25, 2: 40, 3: 55};
+function emblemLvMax(rarity) {
+  return EMBLEM_RARITY_LV_MAX[+rarity || 1] || EMBLEM_RARITY_LV_MAX[1];
+}
+
 function elementMatchupMult(srcElem, tgtElem, mode) {
   if (mode === 'guildbattle') {
     const k = (ELEMENT_K_GUILD[srcElem]||{})[tgtElem] || 0;
@@ -921,7 +928,7 @@ function renderTraining(i,chara){
       <span class="tr-label">燃心</span>
       <button class="tr-btn${tr.moeshin?' on on-fire':''}" style="min-width:30px;text-align:center" onclick="setTrField(${i},'moeshin',${!tr.moeshin})">${tr.moeshin?'ON':'OFF'}</button>
       <span class="tr-label">LP</span><div class="tr-btns">${lpHtml}</div>
-      <span class="tr-label" style="margin-left:8px">主武器</span>
+      <span class="tr-label" style="margin-left:8px">MP</span>
       <button class="tr-btn${tr.main_weapon!==false?' on':''}" style="min-width:38px;text-align:center" onclick="setTrField(${i},'main_weapon',${!(tr.main_weapon!==false)})">${tr.main_weapon!==false?'あり':'なし'}</button>
     </div>
   </div>`;
@@ -1232,10 +1239,17 @@ function computeStats(chara, tr, slotIdx) {
     const em = allGuildEmblems.find(g => g.id === slot.id);
     if (!em) continue;
     if (em.guild_only && !isGuildMode) continue;
+    // bairitu 在配置里填的是"满级倍率"。按 level 线性插值到 1.0：
+    //   bairitu(lv) = (bairitu_max - 1) * (lv - 1) / (lvMax - 1) + 1
+    // 即 lv=1 → 1.0（无效果）、lv=lvMax → 配置值。乘算语义。
+    const lvMax = emblemLvMax(em.rarity);
+    const lv = Math.max(1, Math.min(lvMax, +slot.level || 1));
     for (const e of (em.effects || [])) {
-      const lvScale = +e.level_scaling || 0;
       const ec = Object.assign({}, e);
-      if (lvScale) ec.bairitu = (+e.bairitu || 0) + Math.max(0, (+slot.level || 1) - 1) * lvScale;
+      const baseB = +e.bairitu;
+      if (lvMax > 1 && Number.isFinite(baseB)) {
+        ec.bairitu = (baseB - 1) * (lv - 1) / (lvMax - 1) + 1;
+      }
       guildEffects.push(ec);
     }
   }
@@ -1351,7 +1365,7 @@ function renderEnemyBar() {
     const maxLv = (() => {
       if (slot.id == null) return 1;
       const em = allGuildEmblems.find(g=>g.id===slot.id);
-      return (em && em.max_level) || 1;
+      return em ? emblemLvMax(em.rarity) : 1;
     })();
     emblemHtml += `<div class="eb-emblem-row">
       <select onchange="setEmblem(${s}, this.value)">${opts}</select>
@@ -1395,7 +1409,7 @@ function setEmblem(slotIdx, v) {
 function setEmblemLv(slotIdx, lv) {
   if (!enemy.emblems[slotIdx]) enemy.emblems[slotIdx] = {id:null, level:1};
   const em = allGuildEmblems.find(g => g.id === enemy.emblems[slotIdx].id);
-  const max = (em && em.max_level) || 1;
+  const max = em ? emblemLvMax(em.rarity) : 1;
   enemy.emblems[slotIdx].level = Math.max(1, Math.min(max, Math.floor(+lv)||1));
   renderEnemyBar(); refreshAllStats();
 }
@@ -1525,28 +1539,11 @@ function renderStatsPanel(i, chara) {
   if (!chara) return `<div class="stats-panel" id="stats-panel-${i}"></div>`;
   return `<div class="stats-panel" id="stats-panel-${i}">${_statsInner(i, chara)}</div>`;
 }
-// 视觉宽度估算（CJK 算 2 单位，其他 1 单位）。用于决定 stats cell 占 1/4、1/2 还是整行
-function _visualWidth(s) {
-  let w = 0;
-  for (const ch of String(s || '')) {
-    if (/[　-鿿＀-￯]/.test(ch)) w += 2;
-    else w += 1;
-  }
-  return w;
-}
-function _cellSize(text) {
-  const w = _visualWidth(text);
-  if (w <= 11) return 1;     // 1/4
-  if (w <= 22) return 2;     // 1/2
-  return 4;                  // 整行
-}
-
 function _statsInner(i, chara) {
   if (!chara) return '';
   const tr = team[i].tr;
   const r = computeStats(chara, tr);
   if (!r) return '';
-
   const dl = +r.damageLimit;
   const aMax = +r.stats['攻撃力']    || 0;
   const aMin = aMax * 0.95;
@@ -1554,44 +1551,23 @@ function _statsInner(i, chara) {
   const hp   = +r.stats['HP']         || 0;
   const bk   = +r.stats['ブレイク力'] || 0;
   const hits = (r.hits || [0,0,0]).map(h => Math.floor(+h || 0));
-  const hitTot = hits.reduce((a, b) => a + b, 0);
 
-  // 顺序固定：攻撃力max / 攻撃力min / 防御力 / HP / BK / Hit数 / ダメ上限
+  const yMax = aMax >= dl ? ' style="color:#ffd040"' : '';
+  const yMin = aMin >= dl ? ' style="color:#ffd040"' : '';
+
+  // 显示顺序：攻撃力max / 攻撃力min / 防御力 / HP / BK / Hit数 / ダメ上限
+  // 默认每 cell 1/3 行宽（.stats-grid 的 grid-template-columns 设为 repeat(3,1fr)）。
+  // ダメ上限 用 .wide（grid-column:span 2）= 2/3 行宽。Hit数 默认 1/3。
   const cells = [
-    {label:'攻撃力max', text:_fmtStat(aMax), highlight: aMax >= dl},
-    {label:'攻撃力min', text:_fmtStat(aMin), highlight: aMin >= dl},
-    {label:'防御力',    text:_fmtStat(def)},
-    {label:'HP',        text:_fmtStat(hp)},
-    {label:'BK',        text:_fmtStat(bk)},
-    {label:'Hit数',     text:`[${hits.join(', ')}] 合計 ${hitTot} hit`},
-    {label:'ダメ上限',  text:_fmtStat(dl)},
-  ];
-  for (const c of cells) c.size = _cellSize(c.label + ' ' + c.text);
-
-  // 行分组：同一行内所有 cell 同 size（保证等宽）；同 size 累计到行容量后换行
-  const rows = [];
-  let cur = null;
-  for (const c of cells) {
-    const cap = 4 / c.size;     // 该 size 一行容量（cells 数）
-    if (!cur || cur.size !== c.size || cur.cells.length >= cap) {
-      cur = {size: c.size, cells: []};
-      rows.push(cur);
-    }
-    cur.cells.push(c);
-  }
-
-  let html = '';
-  for (const row of rows) {
-    // 列数 = 4/size，固定满 4 槽；不够的 cell 留空（保证每个 cell 真的是 1/4 / 1/2 / 全宽）
-    const ncols = 4 / row.size;
-    html += `<div class="stats-row" style="display:grid;grid-template-columns:repeat(${ncols},1fr);gap:4px;margin-bottom:4px">`;
-    for (const c of row.cells) {
-      const yc = c.highlight ? ' style="color:#ffd040"' : '';
-      html += `<div class="stats-cell"><span class="stats-key">${c.label}</span><span class="stats-val"${yc}>${c.text}</span></div>`;
-    }
-    html += '</div>';
-  }
-  return html;
+    `<div class="stats-cell"><span class="stats-key">攻撃力max</span><span class="stats-val"${yMax}>${_fmtStat(aMax)}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">攻撃力min</span><span class="stats-val"${yMin}>${_fmtStat(aMin)}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">防御力</span><span class="stats-val">${_fmtStat(def)}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">HP</span><span class="stats-val">${_fmtStat(hp)}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">BK</span><span class="stats-val">${_fmtStat(bk)}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}]</span></div>`,
+    `<div class="stats-cell wide"><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(dl)}</span></div>`,
+  ].join('');
+  return `<div class="stats-grid">${cells}</div>`;
 }
 function refreshStatsPanel(i) {
   const el = document.getElementById('stats-panel-' + i);
