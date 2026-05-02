@@ -166,8 +166,13 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 .em-bg-eff{font-size:11px;color:var(--text2);line-height:1.5;word-break:break-all;white-space:normal;}
 .em-detail-btn{flex-shrink:0;padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:10px;cursor:pointer;transition:all .1s;white-space:nowrap;}
 .em-detail-btn:hover{border-color:var(--accent);color:var(--accent);}
-.em-clear{padding:8px 12px;border-bottom:1px solid var(--border);cursor:pointer;font-size:12px;color:var(--text2);}
+.em-clear{padding:8px 12px;border-bottom:1px solid var(--border);cursor:pointer;font-size:12px;color:var(--text2);background:var(--bg);}
 .em-clear:hover{background:var(--bg3);color:#ff7777;}
+.em-clear.sticky{position:sticky;top:0;z-index:2;}
+/* 好感数字输入：去掉浏览器默认上下箭头（Chrome/Firefox 兼容） */
+.aff-input::-webkit-outer-spin-button,
+.aff-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.aff-input{-moz-appearance:textfield;}
 .em-no-results{text-align:center;color:var(--text2);padding:40px;font-size:12px;}
 
 /* badges */
@@ -409,7 +414,7 @@ const COND_LBL = {1:'浑身',2:'背水',3:'破損'};
 
 let allCharas=[], allSouls=[], allBGs=[], allCrystals=[];
 let teamSize=3;
-function mkTr(){return {state:'通常',jukudo:1,awakening:0,marriage:0,moeshin:false,lp:0,level:1,hpPercent:100,affinity:0,omoide_picks:{}};}
+function mkTr(){return {state:'通常',jukudo:1,awakening:0,marriage:0,moeshin:false,lp:0,level:1,hpPercent:100,affinity:0,omoide_picks:{},soul_lv:1,soul_awakening:0};}
 let team=[0,1,2].map(()=>({chara:null,soul:null,bg:null,crystals:[],tr:mkTr()}));
 
 const JUKUDO_MAX_TBL={4:{通常:60,改造:99},3:{通常:50,改造:75,極弐:90},2:{通常:30,改造:45,極弐:70},1:{通常:10,改造:25,極弐:50}};
@@ -465,11 +470,13 @@ Promise.all([
   fetch('../data/omoide_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/souls_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/crystals_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
-]).then(([ch,so,bg,cr, chRev, omRev, soRev, crRev])=>{
+  fetch('../data/bladegraph_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+]).then(([ch,so,bg,cr, chRev, omRev, soRev, crRev, bgRev])=>{
   _applyRevise(ch, chRev);
   _applyRevise(ch, omRev);
   _applyRevise(so, soRev);
   _applyRevise(cr, crRev);
+  _applyRevise(bg, bgRev);
   allCharas=ch.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
   allSouls=so.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
   allBGs=bg.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
@@ -607,6 +614,17 @@ function autoAssignSoul(si){
   const byId=[...allSouls].sort((a,b)=>a.id-b.id);
   const found=byId.find(s=>!used.has(s.id));
   team[si].soul=found?found.id:null;
+  _clampSoulTr(si);
+}
+// 把 tr.soul_lv / tr.soul_awakening 夹紧到当前 soul 的 cap（rarity 决定）
+function _clampSoulTr(si){
+  const soul=allSouls.find(x=>x.id===team[si].soul);
+  if(!soul) return;
+  const r=soul.rarity||1;
+  const awMax=SOUL_AWK_MAX[r]||0;
+  if(team[si].tr.soul_awakening>awMax) team[si].tr.soul_awakening=awMax;
+  const cap=soulLvCap(r,team[si].tr.soul_awakening);
+  if(team[si].tr.soul_lv>cap) team[si].tr.soul_lv=cap;
 }
 function syncCrystals(si){
   const c=allCharas.find(x=>x.id===team[si].chara);
@@ -644,8 +662,9 @@ function setChara(si,id){
 function setSoul(si,id){
   if(id===null){team[si].soul=null;renderSlot(si);refreshAllStats();return;}
   const other=team.findIndex((s,i)=>i!==si&&s.soul===id);
-  if(other>=0){[team[si].soul,team[other].soul]=[team[other].soul,team[si].soul];renderSlot(other);}
+  if(other>=0){[team[si].soul,team[other].soul]=[team[other].soul,team[si].soul];_clampSoulTr(other);renderSlot(other);}
   else team[si].soul=id;
+  _clampSoulTr(si);
   renderSlot(si);refreshAllStats();
 }
 function setBG(si,id){
@@ -723,10 +742,56 @@ function setHpInput(si,val){
 function setAffinity(si,val){
   let v=+val;
   if(isNaN(v))v=0;
-  v=Math.max(0,v);
+  v=Math.max(0,Math.floor(v));
   team[si].tr.affinity=v;
+  // 同步槽位级 input + omoide modal 的 input（双向同步）
+  const slotInp=document.getElementById('aff-input-slot-'+si);
+  if(slotInp && +slotInp.value!==v) slotInp.value=v;
   if(omoideModalSlot===si)_renderOmoideModalBody();
   refreshAllStats();
+}
+
+// ====== 魂等级 / 觉醒 setter（与槽位 UI 联动） ======
+function setSoulLv(si,val){
+  const soul=allSouls.find(x=>x.id===team[si].soul);
+  if(!soul) return;
+  const cap=soulLvCap(soul.rarity, team[si].tr.soul_awakening);
+  const v=Math.max(1,Math.min(cap,Math.floor(+val)||1));
+  team[si].tr.soul_lv=v;
+  const sl=document.getElementById('soul-lv-slider-'+si); if(sl)sl.value=v;
+  const inp=document.getElementById('soul-lv-input-'+si); if(inp)inp.value=v;
+  refreshAllStats();
+}
+function setSoulAwk(si,val){
+  const soul=allSouls.find(x=>x.id===team[si].soul);
+  if(!soul) return;
+  const r=soul.rarity||1;
+  const max=SOUL_AWK_MAX[r]||0;
+  const v=Math.max(0,Math.min(max,Math.floor(+val)||0));
+  team[si].tr.soul_awakening=v;
+  // lv cap 变化 → 重渲魂的 training 行（slider/input 的 max 都要更新）
+  const cap=soulLvCap(r,v);
+  if(team[si].tr.soul_lv>cap) team[si].tr.soul_lv=cap;
+  const wrap=document.getElementById('soul-tr-'+si);
+  if(wrap) wrap.outerHTML=renderSoulTraining(si,soul);
+  refreshAllStats();
+}
+function renderSoulTraining(i, soul){
+  if(!soul) return '';
+  const r=soul.rarity||1;
+  const aw=team[i].tr.soul_awakening||0;
+  const awMax=SOUL_AWK_MAX[r]||0;
+  const lvCap=soulLvCap(r,aw);
+  const lv=Math.min(team[i].tr.soul_lv||1,lvCap);
+  return `<div class="training-row" id="soul-tr-${i}" style="margin-top:6px;flex-wrap:nowrap">
+    <span class="tr-label">Lv</span>
+    <input id="soul-lv-slider-${i}" class="tr-slider" type="range" min="1" max="${lvCap}" value="${lv}" oninput="setSoulLv(${i},+this.value)">
+    <input id="soul-lv-input-${i}" class="tr-lvval" type="number" min="1" max="${lvCap}" value="${lv}" onchange="setSoulLv(${i},+this.value)">
+    <span class="tr-max">/ ${lvCap}</span>
+    <span class="tr-label" style="margin-left:6px">覚醒</span>
+    <input class="tr-input" type="number" min="0" max="${awMax}" value="${aw}" onchange="setSoulAwk(${i},+this.value)" style="width:54px">
+    <span class="tr-max">/ ${awMax}</span>
+  </div>`;
 }
 function renderTraining(i,chara){
   if(!chara)return'';
@@ -872,6 +937,29 @@ function _buffApplies(srcChara, tgtChara, e) {
   return false;
 }
 
+// 魂等级 → 倍率加成。rarity 对应的"无觉醒最高等级" = rarity*10，超过后线性增长到 lv=75。
+//   lv ≤ rarity*10:  1 + 0.01*lv
+//   lv > rarity*10:  base = 1 + 0.1*rarity
+//                    inc  = rarity===5 ? 0.3 : 0.1
+//                    return base + inc * (lv - rarity*10) / (75 - rarity*10)
+const SOUL_AWK_MAX = {1: 13, 2: 11, 3: 9, 4: 7, 5: 5};
+function soulMultiplier(rarity, lv) {
+  const r = +rarity || 1;
+  const L = Math.max(1, +lv || 1);
+  const maxNoAwk = r * 10;
+  if (L <= maxNoAwk) return 1 + 0.01 * L;
+  const base = 1 + 0.1 * r;
+  const range = 75 - maxNoAwk;
+  if (range <= 0) return base;
+  const inc = r === 5 ? 0.3 : 0.1;
+  return base + inc * (L - maxNoAwk) / range;
+}
+function soulLvCap(rarity, awakening) {
+  const r = +rarity || 1;
+  const aw = Math.min(+awakening || 0, SOUL_AWK_MAX[r] || 0);
+  return Math.min(75, r * 10 + aw * 5);
+}
+
 // HP-based condition factor (multiplier on bairitu)
 //   1=浑身 → linear hp%/100  (0 at 0% HP → 1 at 100% HP)
 //   2=背水 → linear (100-hp%)/100  (1 at 0% HP → 0 at 100% HP)
@@ -913,21 +1001,56 @@ function computeStats(chara, tr, slotIdx) {
     const b = _baseStat(chara, tr, attr);
     stats[attr] = b != null ? b : 0;
   }
+  // Init hits from chara state's basic_info
+  const baseHitsRaw = chara.states?.[tr.state]?.basic_info?.['Hit数'];
+  const hits = Array.isArray(baseHitsRaw) ? baseHitsRaw.slice(0, 3).map(h => +h || 0) : [0, 0, 0];
+  while (hits.length < 3) hits.push(0);
   let damageLimit = 2147483647;
-  const acc = { stats, damageLimit };
+  const acc = { stats, damageLimit, hits };
   const tgt = chara;
 
   // Apply one effect to acc, scaled by source HP via _conditionFactor.
-  function _applyEf(e, srcJk, srcHp, mode) {
+  // sourceMult: 来源倍率（魂等级用），默认 1 不影响。
+  function _applyEf(e, srcJk, srcHp, mode, sourceMult = 1) {
+    const factor = _conditionFactor(e.condition, srcHp);
+    const bunrui = e.bunrui || [];
+
+    // ===== Hit 处理（bunrui 含 7）— 每步取整 =====
+    // hit_type: 1/0=add (default), 2=mul, 3=set
+    // mode='add' 处理 hit_type 1/0/3；mode='mul' 处理 hit_type 2
+    if (bunrui.includes(7)) {
+      const ht = e.hit_type != null ? e.hit_type : 1;
+      const isHitAdd = (ht === 1 || ht === 0 || ht === 3);
+      const isHitMul = (ht === 2);
+      const hps = e.hit_per_stage || [];
+      const hpss = e.hit_per_stage_scaling || [];
+      if ((mode === 'add' && isHitAdd) || (mode === 'mul' && isHitMul)) {
+        for (let s = 0; s < 3; s++) {
+          const baseV = (+hps[s] || 0) + Math.max(1, srcJk) * (+hpss[s] || 0);
+          if (baseV === 0) continue;
+          let v = baseV * sourceMult;
+          if (mode === 'add') {
+            v = v * factor;
+            if (ht === 3) acc.hits[s] = Math.floor(v);              // set
+            else acc.hits[s] = acc.hits[s] + Math.floor(v);          // add (ht 0/1)
+          } else {
+            // mul: (v-1)*factor + 1，再乘到当前 hit 后取整
+            v = (v - 1) * factor + 1;
+            acc.hits[s] = Math.floor(acc.hits[s] * v);
+          }
+        }
+      }
+    }
+
+    // ===== Stat / Damage Limit 处理（bunrui 含 1/2/10/12/17 等）=====
     const ct = e.calc_type ?? 1;
     if (mode === 'add' && ct !== 1) return;
     if (mode === 'mul' && ct !== 0) return;
-    let v = _scaledBairitu(e.bairitu || 0, e.bairitu_scaling, srcJk);
-    const factor = _conditionFactor(e.condition, srcHp);
+    let v = _scaledBairitu(e.bairitu || 0, e.bairitu_scaling, srcJk) * sourceMult;
     if (mode === 'add') v = v * factor;
     else v = (v - 1) * factor + 1;
-    const bunrui = e.bunrui || [];
     for (const b of bunrui) {
+      if (b === 7) continue;  // 已在上面处理
       if (b === 17) {
         if (mode === 'add') acc.damageLimit += v;
         else acc.damageLimit *= v;
@@ -942,12 +1065,13 @@ function computeStats(chara, tr, slotIdx) {
   // Apply a list of effects with srcChara/srcHp/srcJk context: filter by buff scope,
   // then run additive pass, then multiplicative pass.
   // Condition (浑身/背水/破損) scales bairitu inside _applyEf, no longer a gate.
-  function _applyList(effects, srcChara, srcHp, srcJk) {
+  // sourceMult: 来源倍率（如魂的 lv 倍率），同时作用于 stat / hit。
+  function _applyList(effects, srcChara, srcHp, srcJk, sourceMult = 1) {
     if (!effects || !effects.length) return;
     const filtered = effects.filter(e => _buffApplies(srcChara, tgt, e));
     if (!filtered.length) return;
-    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'add');
-    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'mul');
+    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'add', sourceMult);
+    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'mul', sourceMult);
   }
 
   // ===== Stage 1: Self omoide (gated by affinity) =====
@@ -989,10 +1113,12 @@ function computeStats(chara, tr, slotIdx) {
     const srcJk = Math.max(1, slot.tr?.jukudo || 1);
     const soul = allSouls.find(x => x.id === slot.soul);
     if (!soul) continue;
+    // 魂的倍率：根据 rarity + lv 计算（task 7+8）。乘到所有 effect 的 bairitu / hit_per_stage 上。
+    const soulMult = soulMultiplier(soul.rarity || 1, slot.tr?.soul_lv || 1);
     const skills = _resolveSoulSkills(soul);
     const soulEffs = [];
     skills.forEach(sk => (sk.effects || []).forEach(e => soulEffs.push(e)));
-    _applyList(soulEffs, srcChara, srcHp, srcJk);
+    _applyList(soulEffs, srcChara, srcHp, srcJk, soulMult);
   }
   for (let si = 0; si < teamSize; si++) {
     const slot = team[si]; if (!slot) continue;
@@ -1011,7 +1137,7 @@ function computeStats(chara, tr, slotIdx) {
   const lpMult = [1.0, 1.1, 1.5][tr.lp] || 1;
   acc.stats['攻撃力'] *= lpMult;
 
-  return { stats: acc.stats, damageLimit: acc.damageLimit };
+  return { stats: acc.stats, damageLimit: acc.damageLimit, hits: acc.hits };
 }
 
 // Pick / equip / clear ─────────────────────────────────────
@@ -1063,9 +1189,15 @@ function renderOmoideEquip(i, chara) {
   const picks = tr.omoide_picks || {};
   const equipped = Object.keys(picks).filter(k => picks[k] != null).length;
   const total = (chara.omoide || []).length;
+  const aff = Math.floor(+tr.affinity || 0);
   return `<div class="equip-section" id="omoide-section-${i}">
-    <div class="equip-label">好感装備 <span style="color:var(--text2);font-size:11px" id="om-count-${i}">(${equipped}/${total})</span>
-      <button class="picker-btn has-val" style="margin-left:auto;font-size:11px;padding:4px 10px" onclick="openOmoideModal(${i})">編集</button>
+    <div class="equip-label" style="display:flex;align-items:center;gap:8px;flex-wrap:nowrap">
+      <span style="flex-shrink:0;min-width:64px">好感装備</span>
+      <input type="number" min="0" step="1" value="${aff}" onchange="setAffinity(${i},+this.value)"
+             id="aff-input-slot-${i}" class="aff-input"
+             style="width:64px;padding:3px 6px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;outline:none;text-align:right;flex-shrink:0">
+      <span style="color:var(--text2);font-size:11px;flex-shrink:0" id="om-count-${i}">(${equipped}/${total})</span>
+      <button class="picker-btn has-val" style="margin-left:auto;font-size:11px;padding:3px 10px;flex-shrink:0;width:auto;text-align:center" onclick="openOmoideModal(${i})">編集</button>
     </div>
   </div>`;
 }
@@ -1142,7 +1274,10 @@ function _statsInner(i, chara) {
     `<div class="stats-cell"><span class="stats-key">${k}</span><span class="stats-val">${_fmtStat(r.stats[k])}</span></div>`
   ).join('');
   const dlim = `<div class="stats-cell wide"><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(r.damageLimit)}</span></div>`;
-  return `<div class="stats-grid">${cells}${dlim}</div>`;
+  const hits = (r.hits || [0,0,0]).map(h => Math.floor(+h || 0));
+  const hitTotal = hits.reduce((a, b) => a + b, 0);
+  const hitRow = `<div class="stats-cell" style="grid-column:1/-1"><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}] <span style="color:var(--text2);font-weight:600;margin-left:6px">合計 ${hitTotal} hit</span></span></div>`;
+  return `<div class="stats-grid">${hitRow}${cells}${dlim}</div>`;
 }
 function refreshStatsPanel(i) {
   const el = document.getElementById('stats-panel-' + i);
@@ -1359,7 +1494,8 @@ function renderEMList(items){
   const type=emType;
   let h='';
   const clearTxt={chara:'魔剣を外す',soul:'ソウルを外す',bg:'心象結晶を外す',crystal:'結晶を外す'};
-  h+=`<div class="em-clear" onclick="selectEM(null)">— ${clearTxt[type]||'外す'}</div>`;
+  // 4 种选择列表的 "外す" 行都 sticky 在顶部
+  h+=`<div class="em-clear sticky" onclick="selectEM(null)">— ${clearTxt[type]||'外す'}</div>`;
   if(!items.length){list.innerHTML=h+'<div class="em-no-results">該当なし</div>';return;}
 
   if(type==='chara'){
@@ -1809,6 +1945,7 @@ function renderSlot(i){
             ${soul?`<button class="em-detail-btn" onclick="openDetailModal(${soul.id},'soul',false)">詳細</button>`:''}
           </div>
         </div></div>
+        ${soul?renderSoulTraining(i,soul):''}
         ${soulSkills?`<div class="detail-wrap" id="col${i}s">${soulSkills}</div>`:''}
       </div>
       <div class="equip-section">
