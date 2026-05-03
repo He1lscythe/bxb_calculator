@@ -1,16 +1,16 @@
 (function () {
   if (document.getElementById('topbar')) return;
   var PAGES = [
-    { id: 'index',      href: 'index.html',      label: '魔剣' },
-    { id: 'crystals',  href: 'crystals.html',  label: '結晶' },
+    { id: 'characters', href: 'characters.html', label: '魔剣' },
+    { id: 'crystals',   href: 'crystals.html',   label: '結晶' },
     { id: 'bladegraph', href: 'bladegraph.html', label: '心象結晶' },
-    { id: 'soul',      href: 'soul.html',      label: 'ソウル' },
-    { id: 'hensei',    href: 'hensei.html',    label: '編成' },
+    { id: 'soul',       href: 'soul.html',       label: 'ソウル' },
+    { id: 'hensei',     href: 'hensei.html',     label: '編成' },
   ];
 
   // detect active page from filename
   var path = window.location.pathname.replace(/\/$/, '');
-  var file = path.split('/').pop() || 'index.html';
+  var file = path.split('/').pop() || 'characters.html';
   var activePage = file.replace(/\.html$/, '');
 
   // build nav links

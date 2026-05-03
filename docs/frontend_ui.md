@@ -6,7 +6,7 @@
 
 ## 1. 移动端全屏 modal 模式（`#detail`）
 
-`index.html` / `soul.html` 两边在桌面是 sidebar + 右侧 detail 双栏；移动端把 `#detail` 翻成全屏 modal 覆盖整个 viewport。
+`characters.html` / `soul.html` 两边在桌面是 sidebar + 右侧 detail 双栏；移动端把 `#detail` 翻成全屏 modal 覆盖整个 viewport。
 
 ### CSS 模板（必须严格匹配）
 
@@ -55,7 +55,7 @@ function closeDetailMob() {
 | @media 在前，默认在后 | 默认在前，@media 在后 |
 | 默认 `padding: 20px 24px` 后写 → 同特异性胜出 → 手机上仍有 20/24px 内边距 → modal 看起来"周边有留白" | 默认先写，@media 后写覆盖 → 手机上 padding:0 真正生效 |
 
-soul.html 是正确顺序，index.html 之前误把默认放在 @media 之后导致 bug。**新增任何 viewer 时务必检查这点**。
+soul.html 是正确顺序，characters.html 之前误把默认放在 @media 之后导致 bug。**新增任何 viewer 时务必检查这点**。
 
 ---
 
@@ -459,11 +459,11 @@ enterEditMode(id)
 
 ## 14. 与 soul.html / crystals.html / bladegraph.html 的一致性
 
-`soul.html` 的 modal 模式是 index.html 的参考实现，两边样式必须保持一致。如果 index 出现 soul 没有的视觉问题，**diff 两边的相关 CSS 是最快的定位手段**：
+`soul.html` 的 modal 模式是 characters.html 的参考实现，两边样式必须保持一致。如果 index 出现 soul 没有的视觉问题，**diff 两边的相关 CSS 是最快的定位手段**：
 
 ```bash
 diff <(grep "#detail-mob-bar" pages/soul.html) \
-     <(grep "#detail-mob-bar" pages/index.html)
+     <(grep "#detail-mob-bar" pages/characters.html)
 ```
 
 `crystals.html` / `bladegraph.html` 没有移动端全屏 modal（数据展现是 row-list 形式），但 `#topbar` sticky 和 `#filters` sticky 的逻辑相同，调位置时同样按 §9 z-index 表来。
