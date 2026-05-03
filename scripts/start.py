@@ -123,10 +123,10 @@ def _lan_ips():
         pass
     return ips
 
-url = f'http://127.0.0.1:{PORT}/pages/index.html'
+url = f'http://127.0.0.1:{PORT}/pages/characters.html'
 print(f'Server running at {url}')
 for ip in _lan_ips():
-    print(f'  LAN access : http://{ip}:{PORT}/pages/index.html')
+    print(f'  LAN access : http://{ip}:{PORT}/pages/characters.html')
 print('Press Ctrl+C to stop')
 
 # Open browser in background, then run server on main thread so Ctrl+C works

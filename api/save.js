@@ -142,11 +142,11 @@ export default async function handler(req, res) {
 
     // 构造 PR 标题/正文：页面名 + id+name 列表，方便 review 时一眼看出改了什么
     const pageInfo = (() => {
-      if ('revise' in body || 'omoide_revise' in body) return { name: '魔剣', file: 'pages/index.html' };
+      if ('revise' in body || 'omoide_revise' in body) return { name: '魔剣', file: 'pages/characters.html' };
       if ('soul_revise' in body)       return { name: '魂',     file: 'pages/soul.html' };
       if ('crystal_revise' in body)    return { name: '結晶',   file: 'pages/crystals.html' };
       if ('bladegraph_revise' in body) return { name: '心象結晶', file: 'pages/bladegraph.html' };
-      if ('omoide_templates' in body)  return { name: '魔剣（潜在テンプレート）', file: 'pages/index.html' };
+      if ('omoide_templates' in body)  return { name: '魔剣（潜在テンプレート）', file: 'pages/characters.html' };
       return { name: '?', file: '?' };
     })();
 

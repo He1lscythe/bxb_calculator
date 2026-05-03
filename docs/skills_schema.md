@@ -651,14 +651,14 @@ target 是 array + patch 是 object + patch 所有 key 都是数字字符串 →
 
 | 端 | 文件 |
 |----|------|
-| JS 客户端 | `index.html`, `soul.html`, `crystals.html`, `bladegraph.html`（`_deepDiff` + `deepApply`） |
+| JS 客户端 | `characters.html`, `soul.html`, `crystals.html`, `bladegraph.html`（`_deepDiff` + `deepApply`） |
 | Python 服务端 | `scripts/crawl_chara.py`, `crawl_soul.py`, `crawl_crystal.py`, `crawl_bladegraph.py`（`deep_update`） |
 
 ---
 
 ## Filter / Sort 共享 spec 系统
 
-4 个 viewer（`index.html` / `soul.html` / `crystals.html` / `bladegraph.html`）+ `hensei.html` 的 picker 共用一套声明式 filter+sort 逻辑，定义在 `shared/` 目录。
+4 个 viewer（`characters.html` / `soul.html` / `crystals.html` / `bladegraph.html`）+ `hensei.html` 的 picker 共用一套声明式 filter+sort 逻辑，定义在 `shared/` 目录。
 
 ### 文件结构
 
