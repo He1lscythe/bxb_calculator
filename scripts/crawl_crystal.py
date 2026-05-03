@@ -181,6 +181,8 @@ def parse_row(row):
             crystal[k] = v
     classify_hit_fields(effect_text, effect_ent)
     crystal['effects'] = [effect_ent]
+    if 7 in effect_ent.get('bunrui'):
+        effect_ent['bairitu'] = max(effect_ent['hit_per_stage'])
     return crystal
 
 

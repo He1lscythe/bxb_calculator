@@ -488,11 +488,11 @@ function renderDetailBody(c) {
       }
       fields.push(['効果量', range]);
     }
-    // bunrui=7（hit）— 显示 hit_per_stage / hit_type / scaling，参考 characters.html / soul.html
-    if ((e.bunrui || []).indexOf(7) !== -1) {
-      var hitStr = fmtHitStages(e);
-      if (hitStr) fields.push(['ヒット', '<span class="effect-range">' + escHtml(hitStr) + '</span>']);
-    }
+    // bunrui=7（hit）— 不显示 hit_per_stage / hit_type / scaling，参考 characters.html / soul.html
+    // if ((e.bunrui || []).indexOf(7) !== -1) {
+    //   var hitStr = fmtHitStages(e);
+    //   if (hitStr) fields.push(['ヒット', '<span class="effect-range">' + escHtml(hitStr) + '</span>']);
+    // }
   });
   if (c['特殊条件']) fields.push(['特殊条件', escHtml(c['特殊条件']) + ' <span style="color:var(--text2)">のみ</span>']);
   if (c['対象'])     fields.push(['対象',    escHtml(c['対象'])]);
