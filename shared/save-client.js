@@ -5,10 +5,10 @@
 // body shape 在两种模式下完全一致（详见 api/save.js 头部注释或 docs/frontend_ui.md）。
 
 (function () {
-  var VERCEL_API = 'https://bxb-calculator.vercel.app/api/save';
+  const VERCEL_API = 'https://bxb-calculator.vercel.app/api/save';
 
   function isLocalEnv() {
-    var h = location.hostname;
+    const h = location.hostname;
     return (
       h === 'localhost' ||
       h === '127.0.0.1' ||
@@ -20,14 +20,14 @@
   }
 
   async function submitRevise(body) {
-    var local = isLocalEnv();
-    var endpoint = local ? '/save' : VERCEL_API;
-    var res = await fetch(endpoint, {
+    const local = isLocalEnv();
+    const endpoint = local ? '/save' : VERCEL_API;
+    const res = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    var json;
+    let json;
     try { json = await res.json(); } catch (_) { json = {}; }
     if (!res.ok) throw new Error(json.error || ('HTTP ' + res.status));
     return Object.assign({}, json, { mode: local ? 'local' : 'remote' });
@@ -35,9 +35,9 @@
 
   // helper —— 给一组 ids、一个 reviseData 对象，组成 patch 数组（仅当前 id 还有 diff 的）
   function pickPatches(reviseData, ids) {
-    var out = [];
-    for (var i = 0; i < ids.length; i++) {
-      var id = ids[i];
+    let out = [];
+    for (let i = 0; i < ids.length; i++) {
+      const id = ids[i];
       if (reviseData && reviseData[id]) out.push(reviseData[id]);
     }
     return out;
@@ -46,7 +46,7 @@
   // 显示在 nav.js 的 #save-toast 上的成功提示，自动 6 秒消失。
   // 主要用于 remote 模式 save 成功后给用户一个明显的视觉反馈（位置：导航栏 Save/汉堡菜单 左侧）。
   function showSaveToast(html, durationMs) {
-    var t = document.getElementById('save-toast');
+    const t = document.getElementById('save-toast');
     if (!t) return;
     t.innerHTML = html;
     t.classList.add('show');

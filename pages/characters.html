@@ -251,7 +251,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Yu G
 .latent-slot { display: grid; grid-template-columns: 1fr 1fr minmax(4.5em, auto); align-items: baseline; gap: 6px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; font-size: 12px; }
 .latent-slot-koka { font-weight: 600; color: var(--text); }
 .latent-slot-syosai { color: var(--text2); }
-.latent-slot-bairitu { font-size: 11px; color: var(--accent); white-space: nowrap; text-align: right; }
+.latent-slot-bairitu { font-size: 11px; color: var(--accent); white-space: pre-line; text-align: right; }
 .latent-slot-bairitu.empty { color: var(--border); }
 .chara-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .meta-chip { display: flex; align-items: center; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 12px; }
@@ -413,6 +413,7 @@ input[type=number] { -moz-appearance: textfield; }
 <body>
 <div id="page-wrap">
 <script src="../nav.js"></script>
+<script src="../shared/constants.js"></script>
 <script src="../shared/save-client.js"></script>
 <script src="../shared/filter-core.js"></script>
 <script src="../shared/chara-spec.js"></script>
@@ -471,42 +472,17 @@ input[type=number] { -moz-appearance: textfield; }
       <div id="filters-body">
       <div class="filter-section">
         <div class="filter-label">レア度</div>
-        <div class="filter-toggles" id="f-rarity">
-          <button class="ftog" data-val="4" onclick="toggleFilter('rarity',4,this)">SS</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('rarity',3,this)">S</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('rarity',2,this)">AA</button>
-          <button class="ftog" data-val="1" onclick="toggleFilter('rarity',1,this)">A</button>
-        </div>
+        <div class="filter-toggles" id="f-rarity"></div>
       </div>
 
       <div class="filter-section">
         <div class="filter-label">属性</div>
-        <div class="filter-toggles" id="f-element">
-          <button class="ftog" data-val="1" onclick="toggleFilter('element',1,this)" style="color:var(--fire)">火</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('element',2,this)" style="color:var(--water)">水</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('element',3,this)" style="color:var(--wind)">風</button>
-          <button class="ftog" data-val="4" onclick="toggleFilter('element',4,this)" style="color:var(--light)">光</button>
-          <button class="ftog" data-val="5" onclick="toggleFilter('element',5,this)" style="color:var(--dark)">闇</button>
-          <button class="ftog" data-val="6" onclick="toggleFilter('element',6,this)" style="color:var(--none)">無</button>
-        </div>
+        <div class="filter-toggles" id="f-element"></div>
       </div>
 
       <div class="filter-section">
         <div class="filter-label">武器種</div>
-        <div class="filter-toggles grid-6" id="f-type">
-          <button class="ftog" data-val="1"  onclick="toggleFilter('type',1,this)">長剣</button>
-          <button class="ftog" data-val="2"  onclick="toggleFilter('type',2,this)">大剣</button>
-          <button class="ftog" data-val="3"  onclick="toggleFilter('type',3,this)">太刀</button>
-          <button class="ftog" data-val="4"  onclick="toggleFilter('type',4,this)">杖棒</button>
-          <button class="ftog" data-val="5"  onclick="toggleFilter('type',5,this)">弓矢</button>
-          <button class="ftog" data-val="6"  onclick="toggleFilter('type',6,this)">連弩</button>
-          <button class="ftog" data-val="7"  onclick="toggleFilter('type',7,this)">戦斧</button>
-          <button class="ftog" data-val="8"  onclick="toggleFilter('type',8,this)">騎槍</button>
-          <button class="ftog" data-val="9"  onclick="toggleFilter('type',9,this)">投擲</button>
-          <button class="ftog" data-val="10" onclick="toggleFilter('type',10,this)">拳闘</button>
-          <button class="ftog" data-val="11" onclick="toggleFilter('type',11,this)">魔典</button>
-          <button class="ftog" data-val="12" onclick="toggleFilter('type',12,this)">大鎌</button>
-        </div>
+        <div class="filter-toggles grid-6" id="f-type"></div>
       </div>
 
       <div class="filter-section">
@@ -520,13 +496,7 @@ input[type=number] { -moz-appearance: textfield; }
 
       <div class="filter-section">
         <div class="filter-label">BD特殊効果</div>
-        <div class="filter-toggles" id="f-bdSpecial">
-          <button class="ftog" data-val="1" onclick="toggleFilter('bdSpecial',1,this)" style="color:#60c0ff">時止め</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('bdSpecial',2,this)" style="color:#c060ff">麻痺</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('bdSpecial',3,this)" style="color:#ff9a40">強制BK</button>
-          <button class="ftog" data-val="5" onclick="toggleFilter('bdSpecial',5,this)" style="color:#50d070">弱体解除</button>
-          <button class="ftog" data-val="6" onclick="toggleFilter('bdSpecial',6,this)" style="color:#ffc840">高倍率バフ</button>
-        </div>
+        <div class="filter-toggles" id="f-bdSpecial"></div>
       </div>
 
       <div class="filter-section">
@@ -566,21 +536,15 @@ input[type=number] { -moz-appearance: textfield; }
 </div>
 
 <script>
-// ===== MAPPINGS =====
-const RARITY = {1:'A',2:'AA',3:'S',4:'SS'};
-const ELEMENT = {1:'火',2:'水',3:'風',4:'光',5:'闇',6:'無'};
-const ELEM_COLOR = {1:'#ff5533',2:'#3388ff',3:'#44cc66',4:'#ffcc00',5:'#aa55ff',6:'#888899'};
-const WEAPON = {1:'長剣',2:'大剣',3:'太刀',4:'杖棒',5:'弓矢',6:'連弩',7:'戦斧',8:'騎槍',9:'投擲',10:'拳闘',11:'魔典',12:'大鎌'};
-const BUNRUI_SHORT = {1:'攻',2:'BK',3:'BD攻',4:'转',5:'速',6:'BD値',7:'hit',8:'aoe',9:'異常',10:'HP',11:'回復',12:'防',13:'軽',14:'蓝',15:'紅',16:'他',17:'限',18:'BD最大',19:'枠',20:'EXP',21:'BDhit'};
-const BD_SPECIAL = {1:'時止め',2:'麻痺',3:'強制ブレイク',5:'弱体解除',6:'高倍率バフ'};
-const OMOIDE_THRESHOLDS = [10,200,400,700,1000,2000,3000,4000,5000,6000,7000,9000,11000,13000,15000,18000,21000,24000,27000,30000,33000,36000,39000,42000,45000,48000,51000,54000,57000,60000,63000,66000,69000,72000,75000,78000,81000,84000,87000,90000];
+// RARITY / ELEMENT / ELEM_COLOR / WEAPON / BUNRUI / BUNRUI_SHORT / BD_SPECIAL /
+// OMOIDE_THRESHOLDS / SCOPE / CONDITION 来自 shared/constants.js
 
 function hasOmoide(c) {
   return c.omoide && c.omoide.some(function(r) { return r.slots && r.slots.length > 0; });
 }
 
 function renderRightTags(s) {
-  var tags = '';
+  let tags = '';
   (s.effects || []).forEach(function(e) {
     (e.bunrui || []).forEach(function(b) {
       tags += '<span class="bunrui-tag">' + (BUNRUI_SHORT[b] || b) + '</span>';
@@ -590,12 +554,10 @@ function renderRightTags(s) {
     } else if (e.scope === 1) {
       tags += '<span class="scope-tag scope-all">全</span>';
     } else if (e.scope === 2) {
-      var lim = e.element != null ? (ELEMENT[e.element] || e.element) : (e.type != null ? (WEAPON[e.type] || e.type) : '限');
+      const lim = e.element != null ? (ELEMENT[e.element] || e.element) : (e.type != null ? (WEAPON[e.type] || e.type) : '限');
       tags += '<span class="scope-tag scope-lim">' + lim + '</span>';
     }
-    if (e.condition === 1) tags += '<span class="cond-tag cond-1">浑身</span>';
-    else if (e.condition === 2) tags += '<span class="cond-tag cond-2">背水</span>';
-    else if (e.condition === 3) tags += '<span class="cond-tag cond-3">破損</span>';
+    if (e.condition) tags += '<span class="cond-tag cond-' + e.condition + '">' + (CONDITION[e.condition] || '') + '</span>';
   });
   return '<div class="skill-tags-right">' + tags + '</div>';
 }
@@ -608,29 +570,29 @@ function fmtNum(v) {
 function parseBairituVal(s) {
   if (s === '') return null;
   if (s.includes('/')) {
-    var p = s.trim().split('/');
+    const p = s.trim().split('/');
     return (p.length === 2 && p[0] !== '' && p[1] !== '') ? s.trim() : null;
   }
-  var n = Number(s);
+  const n = Number(s);
   return isNaN(n) ? null : n;
 }
 function ctPfx(ct) { return ct === 1 ? '+' : '×'; }
 function fmtHitStages(e) {
   // Render hit_per_stage with optional milestone scaling
-  var hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [];
-  var sc  = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [0,0,0];
+  const hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [];
+  const sc  = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [0,0,0];
   if (!hps.length) return '';
-  var ht  = e.hit_type != null ? e.hit_type : 0;
-  var op  = (ht === 2) ? '×' : (ht === 3) ? '=' : '+';  // 2=乗算→×, 3=設定値→=, else→+
+  const ht  = e.hit_type != null ? e.hit_type : 0;
+  const op  = (ht === 2) ? '×' : (ht === 3) ? '=' : '+';  // 2=乗算→×, 3=設定値→=, else→+
   function stageStr(v, s) {
     return op + fmtNum(v) + (s ? '(+' + fmtNum(s) + '/熟度)' : '');
   }
   // Condensed form: all 3 stages identical → show once with "全段"
-  var s0 = sc[0] || 0, s1 = sc[1] || 0, s2 = sc[2] || 0;
+  const s0 = sc[0] || 0, s1 = sc[1] || 0, s2 = sc[2] || 0;
   if (hps.length === 3 && hps[0] !== 0 && hps[0] === hps[1] && hps[1] === hps[2] && s0 === s1 && s1 === s2) {
     return stageStr(hps[0], s0);
   }
-  var parts = hps.map(function(v, i) {
+  const parts = hps.map(function(v, i) {
     if (v == null || v === 0) return null;
     return (i + 1) + '撃' + stageStr(v, sc[i] || 0);
   }).filter(Boolean);
@@ -639,17 +601,17 @@ function fmtHitStages(e) {
 
 function fmtBairitu(s) {
   return (s.effects || []).map(function(e) {
-    var bunrui = e.bunrui || [];
-    var isHitOnly = bunrui.length === 1 && bunrui[0] === 7;
+    const bunrui = e.bunrui || [];
+    const isHitOnly = bunrui.length === 1 && bunrui[0] === 7;
     if (isHitOnly) return fmtHitStages(e);
-    var bairituStr = '';
+    let bairituStr = '';
     if (e.bairitu != null && e.bairitu !== 0) {
-      var sc = e.bairitu_scaling;
-      var pfx = ctPfx(e.calc_type);
-      bairituStr = pfx + fmtNum(e.bairitu);
-      if (sc) bairituStr += ' + ' + fmtNum(sc) + ' * 熟度';
+      const sc = e.bairitu_scaling;
+      const pfx = ctPfx(e.calc_type);
+      bairituStr = pfx + (sc ? '(' : '') + fmtNum(e.bairitu);
+      if (sc) bairituStr += ' + ' + fmtNum(sc) + ' * 熟度)';
     }
-    var hitStr = bunrui.includes(7) ? fmtHitStages(e) : '';
+    const hitStr = bunrui.includes(7) ? fmtHitStages(e) : '';
     return [bairituStr, hitStr].filter(Boolean).join(' / ');
   }).filter(Boolean).join(' / ');
 }
@@ -678,7 +640,19 @@ fetch('../data/omoide_templates.json').then(r => r.ok ? r.json() : []).then(d =>
   }
 }).catch(() => {});
 
+// ===== FILTER TOGGLES (派生自 shared/constants.js) =====
+function initFilterToggles() {
+  // document.getElementById('f-rarity').innerHTML    = renderFilterToggles('rarity', RARITY, { sort: 'desc' });
+  document.getElementById('f-rarity').innerHTML    = renderFilterToggles('rarity', RARITY, { sort: 'desc' });
+  document.getElementById('f-element').innerHTML    = renderFilterToggles('element', ELEMENT, {only: [1,2,3,4,5,6]});
+  document.getElementById('f-type').innerHTML      = renderFilterToggles('type', WEAPON);
+  document.getElementById('f-bdSpecial').innerHTML = renderFilterToggles('bdSpecial', BD_SPECIAL, {
+    attr: function(k){ return BD_SPECIAL_COLOR[k] ? ' style="color:' + BD_SPECIAL_COLOR[k] + '"' : ''; }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initFilterToggles();
   fetch('../data/characters.json')
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(arr => {
@@ -709,23 +683,23 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(() => {});
 });
 
-var _filtersOpenScrollY = null;
+let _filtersOpenScrollY = null;
 function toggleFilters() {
-  var body = document.getElementById('filters-body');
-  var btn = document.getElementById('filter-toggle-btn');
-  var open = body.style.display === 'flex' || body.style.display === 'block';
+  const body = document.getElementById('filters-body');
+  const btn = document.getElementById('filter-toggle-btn');
+  const open = body.style.display === 'flex' || body.style.display === 'block';
   body.style.display = open ? '' : 'flex';
   btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
   _filtersOpenScrollY = open ? null : window.scrollY;
 }
 function collapseFiltersOnScroll() {
   if (window.innerWidth > 768) return;
-  var body = document.getElementById('filters-body');
+  const body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
   if (_filtersOpenScrollY === null) return;
   if (Math.abs(window.scrollY - _filtersOpenScrollY) < 30) return;
   body.style.display = '';
-  var btn = document.getElementById('filter-toggle-btn');
+  const btn = document.getElementById('filter-toggle-btn');
   if (btn) btn.textContent = '▼ 絞り込み';
   _filtersOpenScrollY = null;
 }
@@ -1118,14 +1092,14 @@ function getPath(obj, pathStr) {
 }
 
 function toggleBunrui(path, b, btn) {
-  var prev = (getPath(editData, path + '.bunrui') || []).slice();
-  var arr  = prev.slice();
-  var idx  = arr.indexOf(b);
+  const prev = (getPath(editData, path + '.bunrui') || []).slice();
+  const arr  = prev.slice();
+  const idx  = arr.indexOf(b);
   if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
   else { arr.push(b); arr.sort(function(a,b){return a-b;}); btn.classList.add('on'); }
   setPath(editData, path + '.bunrui', arr);
   // When bunrui becomes [7]-only, bairitu/bairitu_scaling are no longer meaningful — zero them
-  var nowHitOnly = arr.length === 1 && arr[0] === 7;
+  const nowHitOnly = arr.length === 1 && arr[0] === 7;
   if (nowHitOnly) {
     setPath(editData, path + '.bairitu', 0);
     if (getPath(editData, path + '.bairitu_scaling') != null) {
@@ -1133,9 +1107,9 @@ function toggleBunrui(path, b, btn) {
     }
   }
   // Re-render so bairitu/bairitu_scaling and hit fields toggle visibility
-  var prevHitOnly = prev.length === 1 && prev[0] === 7;
-  var prevHasHit  = prev.includes(7);
-  var nowHasHit   = arr.includes(7);
+  const prevHitOnly = prev.length === 1 && prev[0] === 7;
+  const prevHasHit  = prev.includes(7);
+  const nowHasHit   = arr.includes(7);
   if (prevHasHit !== nowHasHit || prevHitOnly !== nowHitOnly) {
     if (typeof reRenderActiveState === 'function') reRenderActiveState();
   }
@@ -1209,14 +1183,14 @@ function computeDiff(original, modified) {
 function deepApply(target, patch) {
   for (var k in patch) {
     if (k === 'id') continue;
-    var pv = patch[k], tv = target[k];
+    let pv = patch[k], tv = target[k];
     // Sparse array diff: target field is array, patch is plain object with numeric-string keys
     if (Array.isArray(tv) && pv && typeof pv === 'object' && !Array.isArray(pv) &&
         Object.keys(pv).every(kk => /^\d+$/.test(kk))) {
-      for (var idx in pv) {
-        var i = +idx;
+      for (const idx in pv) {
+        const i = +idx;
         if (i >= tv.length) continue;
-        var pvi = pv[idx];
+        const pvi = pv[idx];
         if (pvi && typeof pvi === 'object' && !Array.isArray(pvi) &&
             tv[i] && typeof tv[i] === 'object' && !Array.isArray(tv[i])) {
           deepApply(tv[i], pvi);
@@ -1242,6 +1216,16 @@ function saveEdit() {
     });
     editData.omoide = editData.omoide.filter(function(row) { return row.slots.length > 0; });
   }
+  // 如果设置了 omoide_template 但 omoide 已经和模板不一致 → 清掉 omoide_template
+  // 用 null 而不是 delete：computeDiff 只遍历 modified 的 keys，delete 后字段不会进 diff，
+  // server 上 revise 落不下来；显式置 null 才能在 deepApply 时把旧值覆盖掉
+  if (editData.omoide_template != null) {
+    const tpl = (typeof omoideTemplates !== 'undefined' ? omoideTemplates : [])
+      .find(t => t.id === editData.omoide_template);
+    if (!tpl || JSON.stringify(editData.omoide || []) !== JSON.stringify(tpl.omoide || [])) {
+      editData.omoide_template = null;
+    }
+  }
   // Clean up empty tombstone / added skill arrays
   if (Array.isArray(editData._deleted_skills) && editData._deleted_skills.length === 0) {
     delete editData._deleted_skills;
@@ -1256,26 +1240,32 @@ function saveEdit() {
   const id  = editData.id;
   const idx = allChars.findIndex(x => x.id === id);
   if (idx >= 0) {
-    const changed = JSON.stringify(editData) !== JSON.stringify(originalData[id]);
-    allChars[idx] = editData;
-    if (changed) {
-      const diff = computeDiff(originalData[id], editData);
-      const charDiff = { id: diff.id, name: diff.name };
-      const omoideDiff = { id: diff.id, name: diff.name };
-      let hasChar = false, hasOmoide = false;
-      for (const key in diff) {
-        if (key === 'id' || key === 'name') continue;
-        if (OMOIDE_KEYS.has(key)) { omoideDiff[key] = diff[key]; hasOmoide = true; }
-        else                       { charDiff[key]   = diff[key]; hasChar   = true; }
+    // 本次会话有没有真的改东西：拿当前 editData 跟「编辑前的 allChars[idx]」对比，
+    // 而不是跟 originalData 对比（后者不含已加载的 revise 补丁，会误判）
+    const sessionChanged = JSON.stringify(editData) !== JSON.stringify(allChars[idx]);
+    if (sessionChanged) {
+      allChars[idx] = editData;
+      const totalChanged = JSON.stringify(editData) !== JSON.stringify(originalData[id]);
+      if (totalChanged) {
+        const diff = computeDiff(originalData[id], editData);
+        const charDiff = { id: diff.id, name: diff.name };
+        const omoideDiff = { id: diff.id, name: diff.name };
+        let hasChar = false, hasOmoide = false;
+        for (const key in diff) {
+          if (key === 'id' || key === 'name') continue;
+          if (OMOIDE_KEYS.has(key)) { omoideDiff[key] = diff[key]; hasOmoide = true; }
+          else                       { charDiff[key]   = diff[key]; hasChar   = true; }
+        }
+        if (hasChar)   { reviseData[id]       = charDiff;   } else { delete reviseData[id]; }
+        if (hasOmoide) { omoideReviseData[id] = omoideDiff; } else { delete omoideReviseData[id]; }
+      } else {
+        // 这次改回了原始状态：清掉 reviseData 但保留 sessionReviseIds 让服务端把条目删掉
+        delete reviseData[id];
+        delete omoideReviseData[id];
       }
-      if (hasChar)   { reviseData[id]       = charDiff;   } else { delete reviseData[id]; }
-      if (hasOmoide) { omoideReviseData[id] = omoideDiff; } else { delete omoideReviseData[id]; }
       sessionReviseIds.add(id);
-    } else {
-      delete reviseData[id];
-      delete omoideReviseData[id];
-      sessionReviseIds.delete(id);
     }
+    // sessionChanged === false：用户没改任何东西，原样保留 reviseData/sessionReviseIds
     updateReviseBar();
   }
   editData = null;
@@ -1283,8 +1273,8 @@ function saveEdit() {
 }
 
 async function saveRevise() {
-  const btn    = document.querySelector('.btn-revise-save');
-  const status = document.getElementById('revise-status');
+  let btn    = document.querySelector('.btn-revise-save');
+  let status = document.getElementById('revise-status');
   btn.textContent = '保存中...';
   btn.disabled    = true;
   try {
@@ -1402,20 +1392,11 @@ function renderEditStateContent(c, lbl) {
         <div class="skill-edit-meta">
           <div>
             <div class="field-label">scope</div>
-            <select class="edit-select" onchange="setPath(editData,'${ep}.scope',+this.value)">
-              <option value="0"${e.scope===0?' selected':''}>自身</option>
-              <option value="1"${e.scope===1?' selected':''}>全体</option>
-              <option value="2"${e.scope===2?' selected':''}>限定</option>
-            </select>
+            ${renderEditSelect({0:'自身',1:'全体',2:'限定'}, e.scope, `setPath(editData,'${ep}.scope',+this.value)`)}
           </div>
           <div>
             <div class="field-label">condition</div>
-            <select class="edit-select" onchange="setPath(editData,'${ep}.condition',+this.value)">
-              <option value="0"${e.condition===0?' selected':''}>なし</option>
-              <option value="1"${e.condition===1?' selected':''}>浑身</option>
-              <option value="2"${e.condition===2?' selected':''}>背水</option>
-              <option value="3"${e.condition===3?' selected':''}>破損</option>
-            </select>
+            ${renderEditSelect(CONDITION, e.condition, `setPath(editData,'${ep}.condition',+this.value)`)}
           </div>
           <div>
             <div class="field-label">element</div>
@@ -1428,10 +1409,7 @@ function renderEditStateContent(c, lbl) {
           ${isHitOnly ? '' : `<div>
             <div class="field-label">倍率</div>
             <div style="display:flex;align-items:center;gap:4px">
-              <select class="edit-select" onchange="setPath(editData,'${ep}.calc_type',+this.value)">
-                <option value="0"${e.calc_type===0?' selected':''}>×</option>
-                <option value="1"${e.calc_type===1?' selected':''}>+</option>
-              </select>
+              ${renderEditSelect({0:'×',1:'+'}, e.calc_type, `setPath(editData,'${ep}.calc_type',+this.value)`)}
               <input type="number" step="any" class="edit-num-sm" value="${e.bairitu??''}"
                      oninput="setPath(editData,'${ep}.bairitu',this.value===''?null:Number(this.value))">
             </div>
@@ -1551,14 +1529,14 @@ function reRenderActiveState() {
 }
 
 function setHitStage(path, idx, val) {
-  var arr = (getPath(editData, path + '.hit_per_stage') || [null, null, null]).slice();
+  const arr = (getPath(editData, path + '.hit_per_stage') || [null, null, null]).slice();
   while (arr.length < 3) arr.push(null);
   arr[idx] = val === '' ? null : +val;
   setPath(editData, path + '.hit_per_stage', arr);
 }
 
 function setHitStageScaling(path, idx, val) {
-  var arr = (getPath(editData, path + '.hit_per_stage_scaling') || [null, null, null]).slice();
+  const arr = (getPath(editData, path + '.hit_per_stage_scaling') || [null, null, null]).slice();
   while (arr.length < 3) arr.push(null);
   arr[idx] = val === '' ? null : +val;
   setPath(editData, path + '.hit_per_stage_scaling', arr);
@@ -1566,20 +1544,20 @@ function setHitStageScaling(path, idx, val) {
 
 function _renderHitEdit(ep, e) {
   if (!(e.bunrui || []).includes(7)) return '';
-  var ht  = e.hit_type != null ? e.hit_type : 0;
-  var hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null, null, null];
-  var hpss = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [null, null, null];
+  const ht  = e.hit_type != null ? e.hit_type : 0;
+  const hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null, null, null];
+  const hpss = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [null, null, null];
   function opt(v, lbl) {
     return '<option value="' + v + '"' + (ht === v ? ' selected' : '') + '>' + lbl + '</option>';
   }
   function stageIn(idx) {
-    var v = hps[idx] != null ? hps[idx] : '';
+    const v = hps[idx] != null ? hps[idx] : '';
     return '<div><div class="field-label">' + (idx + 1) + '撃</div>'
       + '<input type="number" step="any" class="edit-num-sm" style="width:42px" value="' + v + '"'
       + ' oninput="setHitStage(\'' + ep + '\',' + idx + ',this.value)"></div>';
   }
   function scaleIn(idx) {
-    var v = hpss[idx] != null ? hpss[idx] : '';
+    const v = hpss[idx] != null ? hpss[idx] : '';
     return '<div><div class="field-label">' + (idx + 1) + '撃+</div>'
       + '<input type="number" step="any" class="edit-num-sm" style="width:42px" value="' + v + '"'
       + ' oninput="setHitStageScaling(\'' + ep + '\',' + idx + ',this.value)"></div>';
@@ -1598,7 +1576,7 @@ function _renderHitEdit(ep, e) {
 // ===== BD EDIT HELPERS =====
 function renderBDSpecialToggles(bd) {
   return [1,2,3,5,6].map(function(sid) {
-    var on = (bd.special || []).includes(sid);
+    const on = (bd.special || []).includes(sid);
     return '<button class="btog' + (on ? ' on' : '') + '" onclick="toggleBDSpecial(' + sid + ',this)">' + (BD_SPECIAL[sid] || sid) + '</button>';
   }).join('');
 }
@@ -1608,35 +1586,25 @@ function renderBDEffectsEdit(bd) {
   const effects = bd.effects || [];
   const blocks = effects.map(function(e, ei) {
     const ep = 'bd_skill.effects.' + ei;
-    const bunrui = e.bunrui || [];
+    const bunrui = e.bunrui || [], bdcond = e.condition || 0;
     const btogs = BUNRUI_A.map(function(b) {
       return '<button class="btog' + (bunrui.includes(b) ? ' on' : '') + '" onclick="toggleBunrui(\'' + ep + '\',' + b + ',this)">' + (BUNRUI_SHORT[b] || b) + '</button>';
     }).join('');
-    const delBtn = effects.length > 1
+    const delBtn = effects.length > 0
       ? '<button class="latent-rm-btn" onclick="removeBDEffect(' + ei + ')" title="削除">×</button>' : '';
     return '<div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:4px">'
       + '<div class="field-label" style="margin:0">効果 #' + (ei + 1) + '</div>' + delBtn + '</div>'
       + '<div class="bunrui-toggles">' + btogs + '</div>'
       + '<div class="skill-edit-meta">'
       + '<div><div class="field-label">scope</div>'
-      + '<select class="edit-select" onchange="setPath(editData,\'' + ep + '.scope\',+this.value)">'
-      + '<option value="0"' + (e.scope === 0 ? ' selected' : '') + '>自身</option>'
-      + '<option value="1"' + (e.scope === 1 ? ' selected' : '') + '>全体</option>'
-      + '<option value="2"' + (e.scope === 2 ? ' selected' : '') + '>限定</option>'
-      + '</select></div>'
+      + renderEditSelect({0:'自身',1:'全体',2:'限定'}, e.scope, 'setPath(editData,\'' + ep + '.scope\',+this.value)')
+      + '</div>'
       + '<div><div class="field-label">condition</div>'
-      + '<select class="edit-select" onchange="setPath(editData,\'' + ep + '.condition\',+this.value)">'
-      + '<option value="0"' + (e.condition === 0 ? ' selected' : '') + '>なし</option>'
-      + '<option value="1"' + (e.condition === 1 ? ' selected' : '') + '>浑身</option>'
-      + '<option value="2"' + (e.condition === 2 ? ' selected' : '') + '>背水</option>'
-      + '<option value="3"' + (e.condition === 3 ? ' selected' : '') + '>破損</option>'
-      + '</select></div>'
+      + renderEditSelect(CONDITION, e.condition, 'setPath(editData,\'' + ep + '.condition\',+this.value)')
+      + '</div>'
       + '<div><div class="field-label">倍率</div>'
       + '<div style="display:flex;align-items:center;gap:4px">'
-      + '<select class="edit-select" onchange="setPath(editData,\'' + ep + '.calc_type\',+this.value)">'
-      + '<option value="0"' + (e.calc_type === 0 ? ' selected' : '') + '>×</option>'
-      + '<option value="1"' + (e.calc_type === 1 ? ' selected' : '') + '>+</option>'
-      + '</select>'
+      + renderEditSelect({0:'×',1:'+'}, e.calc_type, 'setPath(editData,\'' + ep + '.calc_type\',+this.value)')
       + '<input type="number" step="any" class="edit-num-sm" value="' + (e.bairitu != null ? e.bairitu : '') + '"'
       + ' oninput="setPath(editData,\'' + ep + '.bairitu\',this.value===\'\'?null:Number(this.value))">'
       + '</div></div></div>'
@@ -1647,8 +1615,8 @@ function renderBDEffectsEdit(bd) {
 
 function toggleBDSpecial(sid, btn) {
   if (!editData.bd_skill) return;
-  var arr = (editData.bd_skill.special || []).slice();
-  var idx = arr.indexOf(sid);
+  let arr = (editData.bd_skill.special || []).slice();
+  let idx = arr.indexOf(sid);
   if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
   else { arr.push(sid); arr.sort(function(a,b){return a-b;}); btn.classList.add('on'); }
   editData.bd_skill.special = arr;
@@ -1658,32 +1626,35 @@ function addBDEffect() {
   if (!editData.bd_skill) return;
   if (!editData.bd_skill.effects) editData.bd_skill.effects = [];
   editData.bd_skill.effects.push({bunrui:[1], scope:0, condition:0, calc_type:0});
-  var el = document.getElementById('bd-effects-edit-container');
+  const el = document.getElementById('bd-effects-edit-container');
   if (el) el.innerHTML = renderBDEffectsEdit(editData.bd_skill);
 }
 
 function removeBDEffect(ei) {
   if (!editData.bd_skill?.effects) return;
   editData.bd_skill.effects.splice(ei, 1);
-  var el = document.getElementById('bd-effects-edit-container');
+  const el = document.getElementById('bd-effects-edit-container');
   if (el) el.innerHTML = renderBDEffectsEdit(editData.bd_skill);
 }
 
 // ===== LATENT EDIT =====
 function _senzaiLabel(iconId) {
-  var tbl = (typeof SENZAI_TABLE !== 'undefined') ? SENZAI_TABLE : {};
-  var info = tbl[iconId] || tbl[String(iconId)] || {};
-  var bVal = (info.bairitu != null && info.bairitu !== 0) ? ' (' + ctPfx(info.calc_type) + fmtNum(info.bairitu) + ')' : '';
+  const tbl = (typeof SENZAI_TABLE !== 'undefined') ? SENZAI_TABLE : {};
+  const info = tbl[iconId] || tbl[String(iconId)] || {};
+  const bVal = (info.bairitu != null && info.bairitu !== 0) ? ' (' + ctPfx(info.calc_type) + fmtNum(info.bairitu) + ')' : '';
   return (info.koka || ('icon ' + iconId)) + bVal;
 }
 
-var _OMOIDE_RARITY_TH = new Set([45000, 60000, 75000, 90000]);
-var _ICON_TO_RARITY   = {88:1, 89:2, 90:3, 91:4, 92:5};
+// 可能是 "破限" rarity 槽位的阈值（含 6000/30000，A/AA/S 在这两格可能不是 88-92）
+const _OMOIDE_RARITY_TH = new Set([6000, 30000, 45000, 60000, 75000, 90000]);
+// UI 上强制 dropdown 只能选 88-92 的阈值（SS/限定SS 4 段固定 rarity 槽）
+const _OMOIDE_RARITY_STRICT_TH = new Set([45000, 60000, 75000, 90000]);
+const _ICON_TO_RARITY   = {88:1, 89:2, 90:3, 91:4, 92:5};
 
 function getLinkedThresholds(threshold, omoideRarity) {
-  var star1 = [10, 200, 700, 2000, 3000, 5000, 7000, 9000, 13000];
-  var s2h = [], s3h = [], icon = [];
-  for (var n = 0; n < 5; n++) {
+  const star1 = [10, 200, 700, 2000, 3000, 5000, 7000, 9000, 13000];
+  const s2h = [], s3h = [], icon = [];
+  for (let n = 0; n < 5; n++) {
     [18000, 21000, 27000].forEach(function(b) { s2h.push(b + 15000 * n); });
     s3h.push(24000 + 15000 * n);
     icon.push(30000 + 15000 * n);
@@ -1700,18 +1671,18 @@ function getLinkedThresholds(threshold, omoideRarity) {
 }
 
 function makeLCSHtml(iconId, t, slotIdx, restricted) {
-  var tbl = (typeof SENZAI_TABLE !== 'undefined') ? SENZAI_TABLE : {};
-  var keys = Object.keys(tbl).sort(function(a, b) { return parseInt(a) - parseInt(b); });
+  let tbl = (typeof SENZAI_TABLE !== 'undefined') ? SENZAI_TABLE : {};
+  let keys = Object.keys(tbl).sort(function(a, b) { return parseInt(a) - parseInt(b); });
   if (restricted) keys = keys.filter(function(k) { return +k >= 88 && +k <= 92; });
-  var opts = keys.map(function(k) {
-    var info = tbl[k];
-    var bVal = (info.bairitu != null && info.bairitu !== 0) ? ' (' + ctPfx(info.calc_type) + fmtNum(info.bairitu) + ')' : '';
-    var label = (info.koka || ('icon ' + k)) + bVal;
-    var sel = (iconId != null && parseInt(k) === iconId) ? ' class="lcs-opt lcs-selected"' : ' class="lcs-opt"';
+  let opts = keys.map(function(k) {
+    const info = tbl[k];
+    const bVal = (info.bairitu != null && info.bairitu !== 0) ? ' (' + ctPfx(info.calc_type) + fmtNum(info.bairitu) + ')' : '';
+    const label = (info.koka || ('icon ' + k)) + bVal;
+    const sel = (iconId != null && parseInt(k) === iconId) ? ' class="lcs-opt lcs-selected"' : ' class="lcs-opt"';
     return '<div' + sel + ' data-val="' + k + '" onclick="selectLCS(this,' + t + ',' + slotIdx + ')">' + escHtml(label) + '</div>';
   }).join('');
-  var triggerLabel = iconId != null ? _senzaiLabel(iconId) : '選択...';
-  var searchHtml = restricted ? '' : '<input class="lcs-search" type="text" placeholder="絞込..." oninput="filterLCS(this)">';
+  const triggerLabel = iconId != null ? _senzaiLabel(iconId) : '選択...';
+  const searchHtml = restricted ? '' : '<input class="lcs-search" type="text" placeholder="絞込..." oninput="filterLCS(this)">';
   return '<div class="latent-edit-chip">'
     + '<button class="lcs-trigger" onclick="toggleLCS(event,this)">' + escHtml(triggerLabel) + '</button>'
     + '<div class="lcs-dropdown">'
@@ -1723,16 +1694,16 @@ function makeLCSHtml(iconId, t, slotIdx, restricted) {
 }
 
 function renderLatentEditBody(c) {
-  var omoideMap = {};
+  const omoideMap = {};
   (c.omoide || []).forEach(function(row) { omoideMap[row.threshold] = row.slots || []; });
   return OMOIDE_THRESHOLDS.map(function(t) {
-    var restricted = _OMOIDE_RARITY_TH.has(t);
-    var slots = omoideMap[t] || [];
-    var slotsHtml = slots.map(function(iconId, slotIdx) {
+    const restricted = _OMOIDE_RARITY_STRICT_TH.has(t);
+    const slots = omoideMap[t] || [];
+    const slotsHtml = slots.map(function(iconId, slotIdx) {
       return makeLCSHtml(iconId, t, slotIdx, restricted);
     }).join('');
-    var showAdd = !restricted || slots.length === 0;
-    var addBtn = showAdd ? '<button class="btn-add-slot" onclick="addLatentSlot(' + t + ')">+ 追加</button>' : '';
+    const showAdd = !restricted || slots.length === 0;
+    const addBtn = showAdd ? '<button class="btn-add-slot" onclick="addLatentSlot(' + t + ')">+ 追加</button>' : '';
     return '<div class="latent-edit-row">'
       + '<div class="latent-edit-label">思い出 ' + t.toLocaleString('ja-JP') + '</div>'
       + '<div class="latent-edit-slots">' + slotsHtml + addBtn
@@ -1740,24 +1711,24 @@ function renderLatentEditBody(c) {
   }).join('');
 }
 
-var _lcsOpen = null;
+let _lcsOpen = null;
 
 function toggleLCS(e, triggerBtn) {
   e.stopPropagation();
-  var chip = triggerBtn.parentElement;
-  var dropdown = chip.querySelector('.lcs-dropdown');
+  const chip = triggerBtn.parentElement;
+  const dropdown = chip.querySelector('.lcs-dropdown');
   if (_lcsOpen === dropdown) { closeLCS(); return; }
   closeLCS();
-  var rect = triggerBtn.getBoundingClientRect();
-  var top = rect.bottom + 2;
-  var left = rect.left;
+  const rect = triggerBtn.getBoundingClientRect();
+  const top = rect.bottom + 2;
+  const left = rect.left;
   if (top + 220 > window.innerHeight) top = rect.top - 220;
   if (left + 244 > window.innerWidth) left = window.innerWidth - 248;
   dropdown.style.top = top + 'px';
   dropdown.style.left = left + 'px';
   dropdown.style.display = 'block';
   _lcsOpen = dropdown;
-  var s = dropdown.querySelector('.lcs-search');
+  const s = dropdown.querySelector('.lcs-search');
   s.value = ''; filterLCS(s);
 }
 
@@ -1766,29 +1737,31 @@ function closeLCS() {
 }
 
 function filterLCS(input) {
-  var q = input.value.toLowerCase();
+  const q = input.value.toLowerCase();
   input.closest('.lcs-dropdown').querySelectorAll('.lcs-opt').forEach(function(opt) {
     opt.style.display = opt.textContent.toLowerCase().includes(q) ? '' : 'none';
   });
 }
 
 function selectLCS(optEl, threshold, slotIdx) {
-  var icon = parseInt(optEl.dataset.val);
+  const icon = parseInt(optEl.dataset.val);
   changeLatentSlot(threshold, slotIdx, icon);
-  if (threshold === 90000 && _ICON_TO_RARITY[icon] != null) {
+  // 任何一个好感の破限阈值（45000/60000/75000/90000）变更时，
+  // 都根据 icon (88-92) → omoide_rarity (1-5) 同步
+  if (_OMOIDE_RARITY_TH.has(threshold) && _ICON_TO_RARITY[icon] != null) {
     editData.omoide_rarity = _ICON_TO_RARITY[icon];
   }
-  var linked = getLinkedThresholds(threshold, editData.omoide_rarity);
+  const linked = getLinkedThresholds(threshold, editData.omoide_rarity);
   if (linked && linked.length > 1) {
     linked.forEach(function(t) {
       if (t === threshold) return;
-      var row = (editData.omoide || []).find(function(r) { return r.threshold === t; });
+      const row = (editData.omoide || []).find(function(r) { return r.threshold === t; });
       if (row && slotIdx < row.slots.length) row.slots[slotIdx] = icon;
     });
     reRenderLatentEdit();
     return;
   }
-  var chip = optEl.closest('.latent-edit-chip');
+  const chip = optEl.closest('.latent-edit-chip');
   chip.querySelector('.lcs-trigger').textContent = optEl.textContent;
   optEl.closest('.lcs-list').querySelectorAll('.lcs-opt').forEach(function(o) {
     o.classList.toggle('lcs-selected', o === optEl);
@@ -1929,13 +1902,13 @@ function applyOmoideTemplate() {
 
 function reRenderLatentEdit() {
   closeLCS();
-  var el = document.getElementById('latent-edit-section');
+  const el = document.getElementById('latent-edit-section');
   if (el) el.innerHTML = renderLatentEditBody(editData);
 }
 
 function ensureOmoideRow(threshold) {
   if (!editData.omoide) editData.omoide = [];
-  var row = editData.omoide.find(function(r) { return r.threshold === threshold; });
+  let row = editData.omoide.find(function(r) { return r.threshold === threshold; });
   if (!row) {
     row = { threshold: threshold, slots: [] };
     editData.omoide.push(row);
@@ -1945,9 +1918,9 @@ function ensureOmoideRow(threshold) {
 }
 
 function addLatentSlot(threshold) {
-  var row = ensureOmoideRow(threshold);
+  let row = ensureOmoideRow(threshold);
   row.slots.push(null);
-  var linked = getLinkedThresholds(threshold, editData.omoide_rarity);
+  let linked = getLinkedThresholds(threshold, editData.omoide_rarity);
   if (linked) {
     linked.forEach(function(t) {
       if (t === threshold) return;
@@ -1958,14 +1931,14 @@ function addLatentSlot(threshold) {
 }
 
 function removeLatentSlot(threshold, slotIdx) {
-  var row = (editData.omoide || []).find(function(r) { return r.threshold === threshold; });
+  let row = (editData.omoide || []).find(function(r) { return r.threshold === threshold; });
   if (!row) return;
   row.slots.splice(slotIdx, 1);
-  var linked = getLinkedThresholds(threshold, editData.omoide_rarity);
+  const linked = getLinkedThresholds(threshold, editData.omoide_rarity);
   if (linked) {
     linked.forEach(function(t) {
       if (t === threshold) return;
-      var r2 = (editData.omoide || []).find(function(r) { return r.threshold === t; });
+      const r2 = (editData.omoide || []).find(function(r) { return r.threshold === t; });
       if (r2 && slotIdx < r2.slots.length) r2.slots.splice(slotIdx, 1);
     });
   }
@@ -1973,36 +1946,35 @@ function removeLatentSlot(threshold, slotIdx) {
 }
 
 function changeLatentSlot(threshold, slotIdx, iconId) {
-  var row = (editData.omoide || []).find(function(r) { return r.threshold === threshold; });
+  const row = (editData.omoide || []).find(function(r) { return r.threshold === threshold; });
   if (row) row.slots[slotIdx] = parseInt(iconId);
 }
 
 // ===== LATENT MODAL =====
 function openLatentModal(charaId) {
-  var c = allChars.find(function(x) { return x.id === charaId; });
+  const c = allChars.find(function(x) { return x.id === charaId; });
   if (!c || !hasOmoide(c)) return;
-  var tbl = (typeof SENZAI_TABLE !== 'undefined') ? SENZAI_TABLE : {};
-  function fmtBairituJP(v, calcType) {
+  const tbl = (typeof SENZAI_TABLE !== 'undefined') ? SENZAI_TABLE : {};
+  function fmtBairituJP(info) {
+    const v = info.bairitu;
     if (v == null || v === 0) return '';
-    var pfx = ctPfx(calcType);
+    const sc = (info.bairitu_scaling != null && info.bairitu_scaling !== 0) ? fmtNum(info.bairitu_scaling) : '';
+    const pfx = ctPfx(info.calc_type);
     if (v >= 100000000) {
-      var b = v / 100000000;
+      const b = v / 100000000;
       return pfx + (b % 1 === 0 ? b : parseFloat(b.toFixed(2))) + '億';
     } else if (v >= 10000) {
-      var m = v / 10000;
-      return pfx + (m % 1 === 0 ? m : parseFloat(m.toFixed(1))) + '万';
+      const m = v / 10000;
+      return pfx + (m % 1 === 0 ? m : parseFloat(m.toFixed(2))) + '万';
     }
-    return pfx + fmtNum(v);
+    return pfx + (sc ? '(' + fmtNum(v) + '+' + sc + '\n×熟度)': fmtNum(v));
   }
-  var html = c.omoide.filter(function(row) { return row.slots && row.slots.length > 0; }).map(function(row) {
-    var slotsHtml = row.slots.map(function(iconId) {
-      var info = tbl[iconId] || {};
-      var bairitu = info.bairitu;
-      var b = (bairitu != null && bairitu !== 0) ? fmtBairituJP(bairitu, info.calc_type) : '';
-      var sc = (info.bairitu_scaling != null && info.bairitu_scaling !== 0) ? fmtNum(info.bairitu_scaling) : '';
-      var bStr = b ? (sc ? b + ' + ' + sc + '×熟度' : b) : (sc ? sc + '×熟度' : '');
-      var bClass = bStr ? 'latent-slot-bairitu' : 'latent-slot-bairitu empty';
-      var bDisplay = bStr || '—';
+  const html = c.omoide.filter(function(row) { return row.slots && row.slots.length > 0; }).map(function(row) {
+    const slotsHtml = row.slots.map(function(iconId) {
+      const info = tbl[iconId] || {};
+      const bStr = fmtBairituJP(info);
+      const bClass = bStr ? 'latent-slot-bairitu' : 'latent-slot-bairitu empty';
+      const bDisplay = bStr || '—';
       return '<div class="latent-slot">'
         + '<span class="latent-slot-koka">' + escHtml(info.koka || '?') + '</span>'
         + '<span class="latent-slot-syosai">' + escHtml(info.syosai || '') + '</span>'
@@ -2015,7 +1987,7 @@ function openLatentModal(charaId) {
       + '</div>';
   }).join('');
   document.getElementById('latent-body').innerHTML = html;
-  var modal = document.getElementById('latent-modal');
+  const modal = document.getElementById('latent-modal');
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }

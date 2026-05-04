@@ -115,6 +115,18 @@ input[type=number] { -moz-appearance: textfield; }
 .bunrui-check input { cursor: pointer; accent-color: var(--accent); }
 .edit-ro { font-size: 12px; color: var(--text2); padding: 4px 0; line-height: 1.5; }
 .edit-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.edit-num-sm { width: 130px; background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 3px 6px; font-size: 13px; text-align: right; }
+.edit-num-sm:focus { outline: none; border-color: #8aabff; }
+.bg-effect-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; position: relative; margin-top: 8px; }
+.bunrui-toggles { display: flex; flex-wrap: wrap; gap: 3px; }
+.btog { font-size: 10px; font-weight: 700; padding: 2px 5px; border-radius: 4px; background: var(--bg); border: 1px solid var(--border); color: var(--text2); cursor: pointer; white-space: nowrap; }
+.btog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; }
+.skill-edit-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.skill-edit-meta > div { display: flex; flex-direction: column; gap: 2px; min-width: 60px; }
+.latent-rm-btn { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 13px; padding: 0 4px; line-height: 1; }
+.latent-rm-btn:hover { color: #ff5555; }
+.btn-add-slot { font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px dashed var(--border); background: transparent; color: var(--text2); cursor: pointer; }
+.btn-add-slot:hover { border-color: var(--accent); color: var(--accent); }
 
 @media (max-width: 768px) {
   body { height: auto; overflow-y: auto; }
@@ -143,6 +155,7 @@ input[type=number] { -moz-appearance: textfield; }
 
 <div id="page-wrap">
 <script src="../nav.js"></script>
+<script src="../shared/constants.js"></script>
 <script src="../shared/save-client.js"></script>
 <script src="../shared/filter-core.js"></script>
 <script src="../shared/bg-spec.js"></script>
@@ -162,84 +175,33 @@ input[type=number] { -moz-appearance: textfield; }
     <div class="filter-row2">
       <div class="filter-section">
         <div class="filter-label">レア度</div>
-        <div class="filter-toggles" id="f-rarity">
-          <button class="ftog" data-val="5" onclick="toggleFilter('rarity',5,this)">★5</button>
-          <button class="ftog" data-val="4" onclick="toggleFilter('rarity',4,this)">★4</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('rarity',3,this)">★3</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('rarity',2,this)">★2</button>
-          <button class="ftog" data-val="1" onclick="toggleFilter('rarity',1,this)">★1</button>
-        </div>
+        <div class="filter-toggles" id="f-rarity"></div>
       </div>
 
       <div class="filter-section">
         <div class="filter-label">属性</div>
-        <div class="filter-toggles" id="f-element">
-          <button class="ftog" data-val="0" onclick="toggleFilter('element',0,this)">全</button>
-          <button class="ftog" data-val="1" onclick="toggleFilter('element',1,this)" style="color:var(--fire)">火</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('element',2,this)" style="color:var(--water)">水</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('element',3,this)" style="color:var(--wind)">風</button>
-          <button class="ftog" data-val="4" onclick="toggleFilter('element',4,this)" style="color:var(--light)">光</button>
-          <button class="ftog" data-val="5" onclick="toggleFilter('element',5,this)" style="color:var(--dark)">闇</button>
-          <button class="ftog" data-val="6" onclick="toggleFilter('element',6,this)" style="color:var(--none)">無</button>
-        </div>
+        <div class="filter-toggles" id="f-element"></div>
       </div>
     </div>
 
     <div class="filter-section">
       <div class="filter-label">武器</div>
-      <div class="filter-toggles" id="f-weapon">
-        <button class="ftog" data-val="0"  onclick="toggleFilter('weapon',0,this)">全</button>
-        <button class="ftog" data-val="1"  onclick="toggleFilter('weapon',1,this)">長剣</button>
-        <button class="ftog" data-val="2"  onclick="toggleFilter('weapon',2,this)">大剣</button>
-        <button class="ftog" data-val="3"  onclick="toggleFilter('weapon',3,this)">太刀</button>
-        <button class="ftog" data-val="4"  onclick="toggleFilter('weapon',4,this)">杖棒</button>
-        <button class="ftog" data-val="5"  onclick="toggleFilter('weapon',5,this)">弓矢</button>
-        <button class="ftog" data-val="6"  onclick="toggleFilter('weapon',6,this)">連弩</button>
-        <button class="ftog" data-val="7"  onclick="toggleFilter('weapon',7,this)">戦斧</button>
-        <button class="ftog" data-val="8"  onclick="toggleFilter('weapon',8,this)">騎槍</button>
-        <button class="ftog" data-val="9"  onclick="toggleFilter('weapon',9,this)">投擲</button>
-        <button class="ftog" data-val="10" onclick="toggleFilter('weapon',10,this)">拳闘</button>
-        <button class="ftog" data-val="11" onclick="toggleFilter('weapon',11,this)">魔典</button>
-        <button class="ftog" data-val="12" onclick="toggleFilter('weapon',12,this)">大鎌</button>
-      </div>
+      <div class="filter-toggles" id="f-weapon"></div>
     </div>
 
     <div class="filter-section">
       <div class="filter-label">タイプ</div>
-      <div class="filter-toggles" id="f-bunrui">
-        <button class="ftog" data-val="1"  onclick="toggleFilter('bunrui',1,this)">攻</button>
-        <button class="ftog" data-val="2"  onclick="toggleFilter('bunrui',2,this)">BK</button>
-        <button class="ftog" data-val="3"  onclick="toggleFilter('bunrui',3,this)">BD攻</button>
-        <button class="ftog" data-val="4"  onclick="toggleFilter('bunrui',4,this)">転</button>
-        <button class="ftog" data-val="5"  onclick="toggleFilter('bunrui',5,this)">速</button>
-        <button class="ftog" data-val="10" onclick="toggleFilter('bunrui',10,this)">HP</button>
-        <button class="ftog" data-val="12" onclick="toggleFilter('bunrui',12,this)">防</button>
-        <button class="ftog" data-val="14" onclick="toggleFilter('bunrui',14,this)">蓝</button>
-        <button class="ftog" data-val="15" onclick="toggleFilter('bunrui',15,this)">紅</button>
-        <button class="ftog" data-val="16" onclick="toggleFilter('bunrui',16,this)">他</button>
-        <button class="ftog" data-val="19" onclick="toggleFilter('bunrui',19,this)">枠</button>
-        <button class="ftog" data-val="20" onclick="toggleFilter('bunrui',20,this)">EXP</button>
-      </div>
+      <div class="filter-toggles" id="f-bunrui"></div>
     </div>
 
     <div class="filter-row2">
       <div class="filter-section">
         <div class="filter-label">条件（対象）</div>
-        <div class="filter-toggles" id="f-scope">
-          <button class="ftog" data-val="0" onclick="toggleFilter('scope',0,this)">自身</button>
-          <button class="ftog" data-val="1" onclick="toggleFilter('scope',1,this)">セット全</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('scope',2,this)">セット限</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('scope',3,this)">対象限</button>
-          <button class="ftog" data-val="5" onclick="toggleFilter('scope',5,this)">キャラ限</button>
-        </div>
+        <div class="filter-toggles" id="f-scope"></div>
       </div>
       <div class="filter-section">
         <div class="filter-label">条件（発動）</div>
-        <div class="filter-toggles" id="f-condition">
-          <button class="ftog" data-val="1" onclick="toggleFilter('condition',1,this)">浑身</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('condition',2,this)">背水</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('condition',3,this)">破損</button>
-        </div>
+        <div class="filter-toggles" id="f-condition"></div>
       </div>
     </div>
 
@@ -258,25 +220,15 @@ input[type=number] { -moz-appearance: textfield; }
 </div>
 
 <script>
-// ===== MAPPINGS =====
-const ELEMENT = {0:'全属性',1:'火',2:'水',3:'風',4:'光',5:'闇',6:'無'};
-const WEAPON  = {1:'長剣',2:'大剣',3:'太刀',4:'杖棒',5:'弓矢',6:'連弩',7:'戦斧',8:'騎槍',9:'投擲',10:'拳闘',11:'魔典',12:'大鎌'};
-const BUNRUI  = {
-  1:'攻撃力UP', 2:'ブレイク力UP', 3:'BD攻撃力UP', 4:'スピードUP',
-  5:'攻撃モーションUP', 6:'BDゲージUP', 7:'ヒット数UP', 8:'攻撃全体化',
-  9:'状態異常回避', 10:'HPUP', 11:'HP回復', 12:'防御力UP',
-  13:'被ダメ軽減', 14:'サファイアUP', 15:'ルビーUP', 16:'その他',
-  17:'ダメージ上限UP', 18:'ゲージ最大値UP', 19:'結晶枠UP', 20:'獲得EXPUP'
-};
-const CONDITION = {0:'', 1:'浑身', 2:'背水'};
+// ELEMENT / WEAPON / BUNRUI / BUNRUI_SHORT / CONDITION 来自 shared/constants.js
 
 // ===== HELPERS: derive card-level element/weapon from effects =====
 function cardElement(c) {
-  var e = (c.effects||[]).find(function(e){return e.scope===3 && e.element!=null;});
+  const e = (c.effects||[]).find(function(e){return e.scope===3 && e.element!=null;});
   return e ? e.element : 0;
 }
 function cardWeapon(c) {
-  var e = (c.effects||[]).find(function(e){return e.scope===3 && e.type!=null;});
+  const e = (c.effects||[]).find(function(e){return e.scope===3 && e.type!=null;});
   return e ? e.type : 0;
 }
 
@@ -289,8 +241,19 @@ var expandedIds = new Set();
 var editingId = null;
 var editData = null;
 
+// ===== FILTER TOGGLES (派生自 shared/constants.js) =====
+function initFilterToggles() {
+  document.getElementById('f-rarity').innerHTML    = renderFilterToggles('rarity', {5:'★5',4:'★4',3:'★3',2:'★2',1:'★1'}, {only:[5,4,3,2,1]});
+  document.getElementById('f-element').innerHTML   = renderElementFilterToggles('element');
+  document.getElementById('f-weapon').innerHTML    = renderFilterToggles('weapon', {0:'全', ...WEAPON});
+  document.getElementById('f-bunrui').innerHTML    = renderFilterToggles('bunrui', BUNRUI_SHORT, {only:[1,2,3,4,5,10,12,14,15,16,19,20]});
+  document.getElementById('f-scope').innerHTML     = renderFilterToggles('scope', SCOPE_SHORT);
+  document.getElementById('f-condition').innerHTML = renderFilterToggles('condition', CONDITION, {skip:[0]});
+}
+
 // ===== DATA LOAD =====
 document.addEventListener('DOMContentLoaded', function() {
+  initFilterToggles();
   fetch('../data/bladegraph.json')
     .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function(arr) {
@@ -303,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(function(arr) {
       arr.forEach(function(c) {
         reviseData[c.id] = c;
-        var idx = allBG.findIndex(function(x) { return x.id === c.id; });
+        const idx = allBG.findIndex(function(x) { return x.id === c.id; });
         if (idx >= 0) deepApply(allBG[idx], c);
       });
       if (arr.length) applyFilters();
@@ -313,21 +276,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 var _filtersOpenScrollY = null;
 function toggleFilters() {
-  var body = document.getElementById('filters-body');
-  var btn = document.getElementById('filter-toggle-btn');
-  var open = body.style.display === 'flex' || body.style.display === 'block';
+  const body = document.getElementById('filters-body');
+  const btn = document.getElementById('filter-toggle-btn');
+  const open = body.style.display === 'flex' || body.style.display === 'block';
   body.style.display = open ? '' : 'flex';
   btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
   _filtersOpenScrollY = open ? null : window.scrollY;
 }
 function collapseFiltersOnScroll() {
   if (window.innerWidth > 768) return;
-  var body = document.getElementById('filters-body');
+  const body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
   if (_filtersOpenScrollY === null) return;
   if (Math.abs(window.scrollY - _filtersOpenScrollY) < 30) return;
   body.style.display = '';
-  var btn = document.getElementById('filter-toggle-btn');
+  const btn = document.getElementById('filter-toggle-btn');
   if (btn) btn.textContent = '▼ 絞り込み';
   _filtersOpenScrollY = null;
 }
@@ -345,8 +308,8 @@ function toggleFilter(key, val, btn) {
 function expandAll() {
   filteredBG.forEach(function(c) {
     if (editingId === c.id || expandedIds.has(c.id)) return;
-    var row = document.getElementById('row-' + c.id);
-    var body = document.getElementById('body-' + c.id);
+    const row = document.getElementById('row-' + c.id);
+    const body = document.getElementById('body-' + c.id);
     if (row && body) {
       expandedIds.add(c.id);
       row.classList.add('expanded');
@@ -358,8 +321,8 @@ function expandAll() {
 function collapseAll() {
   expandedIds.forEach(function(id) {
     if (editingId === id) return;
-    var row = document.getElementById('row-' + id);
-    var body = document.getElementById('body-' + id);
+    const row = document.getElementById('row-' + id);
+    const body = document.getElementById('body-' + id);
     if (row && body) { row.classList.remove('expanded'); body.innerHTML = ''; }
   });
   filteredBG.forEach(function(c) { if (editingId !== c.id) expandedIds.delete(c.id); });
@@ -376,14 +339,14 @@ function resetFilters() {
 
 
 function applyFilters() {
-  var q = document.getElementById('search').value.trim();
+  const q = document.getElementById('search').value.trim();
   filteredBG = FilterCore.applyFilters(allBG, {
     q: q,
     filters: filterSets,
   }, BG_SPEC);
-  var ct = filteredBG.length + ' 件';
+  const ct = filteredBG.length + ' 件';
   document.getElementById('bg-count').textContent = ct;
-  var mob = document.getElementById('bg-count-mob');
+  const mob = document.getElementById('bg-count-mob');
   if (mob) mob.textContent = ct;
   expandedIds.clear();
   editingId = null;
@@ -393,13 +356,13 @@ function applyFilters() {
 
 // ===== RENDER LIST =====
 function renderList() {
-  var list = document.getElementById('bg-list');
+  const list = document.getElementById('bg-list');
   if (!filteredBG.length) { list.innerHTML = '<div class="no-results">該当なし</div>'; return; }
   list.innerHTML = filteredBG.map(renderRow).join('');
 }
 
 function fmtRowBairitu(c) {
-  var parts = [];
+  const parts = [];
   (c.effects||[]).forEach(function(e) {
     if (e.bairitu == null) return;
     parts.push((e.calc_type === 1 ? '+' : '×') + fmtNum(e.bairitu));
@@ -408,16 +371,16 @@ function fmtRowBairitu(c) {
 }
 
 function renderRow(c) {
-  var rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
-  var ce = cardElement(c), cw = cardWeapon(c);
-  var eb = ce ? '<span class="badge elem-' + ce + '">' + (ELEMENT[ce]||ce) + '</span>' : '';
-  var wb = cw ? '<span class="badge weapon">' + (WEAPON[cw]||cw) + '</span>' : '';
-  var hasScope5 = (c.effects||[]).some(function(e){return e.scope===5;});
-  var s5b = hasScope5 ? '<span class="badge scope5">キャラ限</span>' : '';
-  var timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
-  var bt = (c.effects||[]).reduce(function(acc,e){return acc.concat(e.bunrui||[]);}, [])
+  const rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
+  const ce = cardElement(c), cw = cardWeapon(c);
+  const eb = ce ? '<span class="badge elem-' + ce + '">' + (ELEMENT[ce]||ce) + '</span>' : '';
+  const wb = cw ? '<span class="badge weapon">' + (WEAPON[cw]||cw) + '</span>' : '';
+  const hasScope5 = (c.effects||[]).some(function(e){return e.scope===5;});
+  const s5b = hasScope5 ? '<span class="badge scope5">キャラ限</span>' : '';
+  const timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
+  const bt = (c.effects||[]).reduce(function(acc,e){return acc.concat(e.bunrui||[]);}, [])
     .filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,2)
-    .map(function(b){return '<span class="badge bunrui-sm">'+(BUNRUI[b]||b)+'</span>';}).join('');
+    .map(function(b){return '<span class="badge bunrui-sm">'+(BUNRUI_SHORT[b]||b)+'</span>';}).join('');
   return '<div class="bg-row" id="row-' + c.id + '">' +
     '<div class="bg-row-hd" onclick="toggleExpand(' + c.id + ')">' +
       '<div class="row-badges">' + rb + eb + wb + s5b + timeb + '</div>' +
@@ -433,8 +396,8 @@ function renderRow(c) {
 // ===== EXPAND =====
 function toggleExpand(id) {
   if (editingId === id) return;
-  var row  = document.getElementById('row-' + id);
-  var body = document.getElementById('body-' + id);
+  const row  = document.getElementById('row-' + id);
+  const body = document.getElementById('body-' + id);
   if (!row || !body) return;
   if (expandedIds.has(id)) {
     expandedIds.delete(id);
@@ -443,7 +406,7 @@ function toggleExpand(id) {
   } else {
     expandedIds.add(id);
     row.classList.add('expanded');
-    var c = allBG.find(function(x){return x.id===id;});
+    const c = allBG.find(function(x){return x.id===id;});
     if (c) body.innerHTML = renderDetailBody(c);
   }
 }
@@ -454,7 +417,7 @@ function ctPfx(ct) { return ct === 1 ? '+' : '&times;'; }
 function fmtNum(n) {
   if (n == null) return '-';
   if (typeof n !== 'number') return String(n);
-  var a = Math.abs(n);
+  const a = Math.abs(n);
   if (a >= 100000000) return (Math.round(n / 100000000 * 10) / 10) + '億';
   if (a >= 10000)     return (Math.round(n / 10000 * 10) / 10)     + '万';
   return n % 1 === 0 ? String(n) : n.toLocaleString('ja-JP', {maximumFractionDigits:6});
@@ -464,7 +427,7 @@ function scopeLabel(e) {
   if (e.scope === 3) {
     if (e.element) return ELEMENT[e.element] + '属性のみ';
     if (e.type != null) {
-      var t = Array.isArray(e.type) ? e.type : [e.type];
+      const t = Array.isArray(e.type) ? e.type : [e.type];
       return t.map(function(v){return WEAPON[v]||v;}).join('/') + 'のみ';
     }
   }
@@ -473,17 +436,17 @@ function scopeLabel(e) {
 }
 
 function renderDetailBody(c) {
-  var effRows = (c.effects||[]).map(function(e, i) {
-    var bTags = (e.bunrui||[]).map(function(b){return '<span class="badge bunrui-sm">'+(BUNRUI[b]||b)+'</span>';}).join(' ');
-    var condStr = e.condition ? '<span class="eff-cond">'+(CONDITION[e.condition]||'')+'</span>' : '';
-    var scopeStr = scopeLabel(e) ? '<span class="eff-scope">'+scopeLabel(e)+'</span>' : '';
-    var bStr = e.bairitu != null
+  const effRows = (c.effects||[]).map(function(e, i) {
+    const bTags = (e.bunrui||[]).map(function(b){return '<span class="badge bunrui-sm">'+(BUNRUI_SHORT[b]||b)+'</span>';}).join(' ');
+    const condStr = e.condition ? '<span class="eff-cond">'+(CONDITION[e.condition]||'')+'</span>' : '';
+    const scopeStr = scopeLabel(e) ? '<span class="eff-scope">'+scopeLabel(e)+'</span>' : '';
+    const bStr = e.bairitu != null
       ? '<span class="eff-pfx">' + ctPfx(e.calc_type) + '</span><span class="eff-bairitu">' + fmtNum(e.bairitu) + '</span>'
       : '';
     return '<div class="eff-line">' + bTags + condStr + scopeStr + bStr + '</div>';
   }).join('');
 
-  var fields = [];
+  const fields = [];
   fields.push(['効果', escHtml(c.effect||'')]);
   fields.push(['効果量', '<div>' + effRows + '</div>']);
   if (c.time_start) {
@@ -492,25 +455,27 @@ function renderDetailBody(c) {
   fields.push(['入手方法', escHtml(c.acquisition||'')]);
   if (c.illustrator) fields.push(['イラスト', escHtml(c.illustrator)]);
 
-  var rows = fields.map(function(p) {
+  const rows = fields.map(function(p) {
     return '<div class="field-row"><div class="field-key">'+p[0]+'</div><div class="field-val">'+p[1]+'</div></div>';
   }).join('');
 
   return '<div class="body-left">' + rows + '</div>' +
     '<div class="body-right">' +
       '<img class="bg-icon" src="https://img.altema.jp/bxb/blade_graph/icon/' + c.id + '.jpg" onerror="this.style.display=\'none\'" alt="">' +
-      '<button class="btn-edit" onclick="enterEditMode(' + c.id + ')">修改</button>' +
+      '<button class="btn-edit" onclick="enterEditMode(' + c.id + ')">修正</button>' +
     '</div>';
 }
 
 // ===== EDIT MODE =====
 function enterEditMode(id) {
-  var c = allBG.find(function(x){return x.id===id;});
+  // 当前已有别的行在编辑 → 先 cancel，避免之前那行的保存/キャンセル按钮卡死
+  if (editingId !== null && editingId !== id) cancelEdit();
+  const c = allBG.find(function(x){return x.id===id;});
   if (!c) return;
   editData = JSON.parse(JSON.stringify(c));
   editingId = id;
-  var row  = document.getElementById('row-' + id);
-  var body = document.getElementById('body-' + id);
+  const row  = document.getElementById('row-' + id);
+  const body = document.getElementById('body-' + id);
   if (!row || !body) return;
   row.classList.add('expanded');
   body.className = 'bg-edit-body';
@@ -519,11 +484,11 @@ function enterEditMode(id) {
 
 function cancelEdit() {
   if (editingId === null) return;
-  var id = editingId;
+  const id = editingId;
   editingId = null; editData = null;
-  var row  = document.getElementById('row-' + id);
-  var body = document.getElementById('body-' + id);
-  var c = allBG.find(function(x){return x.id===id;});
+  const row  = document.getElementById('row-' + id);
+  const body = document.getElementById('body-' + id);
+  const c = allBG.find(function(x){return x.id===id;});
   if (body) { body.className = 'bg-body'; if(c) body.innerHTML = renderDetailBody(c); }
   if (row)  row.classList.add('expanded');
 }
@@ -531,7 +496,7 @@ function cancelEdit() {
 function _deepDiff(oval, mval) {
   if (mval && typeof mval === 'object' && !Array.isArray(mval) &&
       oval && typeof oval === 'object' && !Array.isArray(oval)) {
-    var sub = {};
+    const sub = {};
     for (var k in mval)
       if (JSON.stringify(mval[k]) !== JSON.stringify(oval[k]))
         sub[k] = _deepDiff(oval[k], mval[k]);
@@ -540,7 +505,7 @@ function _deepDiff(oval, mval) {
   if (Array.isArray(oval) && Array.isArray(mval) && oval.length === mval.length &&
       mval.length > 0 &&
       mval.every(function(x){return x && typeof x === 'object' && !Array.isArray(x);})) {
-    var sparse = {};
+    const sparse = {};
     mval.forEach(function(m, i) {
       if (JSON.stringify(m) !== JSON.stringify(oval[i]))
         sparse[i] = _deepDiff(oval[i], m);
@@ -550,7 +515,7 @@ function _deepDiff(oval, mval) {
   return JSON.parse(JSON.stringify(mval));
 }
 function computeDiff(original, modified) {
-  var diff = { id: modified.id, name: modified.name };
+  const diff = { id: modified.id, name: modified.name };
   for (var key in modified) {
     if (key === 'id') continue;
     if (JSON.stringify(modified[key]) !== JSON.stringify(original[key]))
@@ -561,13 +526,13 @@ function computeDiff(original, modified) {
 function deepApply(target, patch) {
   for (var k in patch) {
     if (k === 'id') continue;
-    var pv = patch[k], tv = target[k];
+    const pv = patch[k], tv = target[k];
     if (Array.isArray(tv) && pv && typeof pv === 'object' && !Array.isArray(pv) &&
         Object.keys(pv).every(function(kk){return /^\d+$/.test(kk);})) {
       for (var idx in pv) {
-        var i = +idx;
+        const i = +idx;
         if (i >= tv.length) continue;
-        var pvi = pv[idx];
+        const pvi = pv[idx];
         if (pvi && typeof pvi === 'object' && !Array.isArray(pvi) &&
             tv[i] && typeof tv[i] === 'object' && !Array.isArray(tv[i])) {
           deepApply(tv[i], pvi);
@@ -586,10 +551,10 @@ function deepApply(target, patch) {
 
 function saveEdit() {
   if (!editData) return;
-  var id  = editData.id;
-  var idx = allBG.findIndex(function(x){return x.id===id;});
+  const id  = editData.id;
+  const idx = allBG.findIndex(function(x){return x.id===id;});
   if (idx >= 0) {
-    var changed = JSON.stringify(editData) !== JSON.stringify(originalData[id]);
+    const changed = JSON.stringify(editData) !== JSON.stringify(originalData[id]);
     allBG[idx] = editData;
     if (changed) {
       reviseData[id] = computeDiff(originalData[id], editData);
@@ -600,31 +565,31 @@ function saveEdit() {
     }
     updateReviseBar();
   }
-  var id2 = id;
+  const id2 = id;
   editingId = null; editData = null;
 
-  var row  = document.getElementById('row-' + id2);
-  var body = document.getElementById('body-' + id2);
-  var c = idx >= 0 ? allBG[idx] : null;
+  const row  = document.getElementById('row-' + id2);
+  const body = document.getElementById('body-' + id2);
+  const c = idx >= 0 ? allBG[idx] : null;
   if (row && c) {
-    var rb = '<span class="badge r'+c.rarity+'">★'+c.rarity+'</span>';
-    var ce2 = cardElement(c), cw2 = cardWeapon(c);
-    var eb = ce2 ? '<span class="badge elem-'+ce2+'">'+(ELEMENT[ce2]||ce2)+'</span>' : '';
-    var wb = cw2 ? '<span class="badge weapon">'+(WEAPON[cw2]||cw2)+'</span>' : '';
-    var hasScope5 = (c.effects||[]).some(function(e){return e.scope===5;});
-    var s5b = hasScope5 ? '<span class="badge scope5">キャラ限</span>' : '';
-    var timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
-    var bt = (c.effects||[]).reduce(function(acc,e){return acc.concat(e.bunrui||[]);}, [])
+    const rb = '<span class="badge r'+c.rarity+'">★'+c.rarity+'</span>';
+    const ce2 = cardElement(c), cw2 = cardWeapon(c);
+    const eb = ce2 ? '<span class="badge elem-'+ce2+'">'+(ELEMENT[ce2]||ce2)+'</span>' : '';
+    const wb = cw2 ? '<span class="badge weapon">'+(WEAPON[cw2]||cw2)+'</span>' : '';
+    const hasScope5 = (c.effects||[]).some(function(e){return e.scope===5;});
+    const s5b = hasScope5 ? '<span class="badge scope5">キャラ限</span>' : '';
+    const timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
+    const bt = (c.effects||[]).reduce(function(acc,e){return acc.concat(e.bunrui||[]);}, [])
       .filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,2)
-      .map(function(b){return '<span class="badge bunrui-sm">'+(BUNRUI[b]||b)+'</span>';}).join('');
+      .map(function(b){return '<span class="badge bunrui-sm">'+(BUNRUI_SHORT[b]||b)+'</span>';}).join('');
     row.querySelector('.row-badges').innerHTML = rb + eb + wb + s5b + timeb;
     row.querySelector('.row-name').textContent = c.name;
     row.querySelector('.row-bunrui').innerHTML = bt;
-    var oldBairitu = row.querySelector('.row-bairitu');
+    const oldBairitu = row.querySelector('.row-bairitu');
     if (oldBairitu) oldBairitu.remove();
-    var newBairituHtml = fmtRowBairitu(c);
+    const newBairituHtml = fmtRowBairitu(c);
     if (newBairituHtml) {
-      var btn = row.querySelector('.expand-btn');
+      const btn = row.querySelector('.expand-btn');
       btn.insertAdjacentHTML('beforebegin', newBairituHtml);
     }
   }
@@ -632,76 +597,169 @@ function saveEdit() {
   if (row)  row.classList.add('expanded');
 }
 
+// ===== EDIT HELPERS =====
+const _BG_BUNRUI_ALL = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+
+function reRenderBgEdit() {
+  if (editingId == null) return;
+  const body = document.getElementById('body-' + editingId);
+  if (body) body.innerHTML = renderEditBody(editData);
+}
+
+function toggleBladeBunrui(ei, b, btn) {
+  const e = editData?.effects?.[ei];
+  if (!e) return;
+  const arr = (e.bunrui || []).slice();
+  const idx = arr.indexOf(b);
+  if (idx >= 0) {
+    if (arr.length <= 1) return; // 至少留 1 个
+    arr.splice(idx, 1); btn.classList.remove('on');
+  } else {
+    arr.push(b); arr.sort((x,y)=>x-y); btn.classList.add('on');
+  }
+  e.bunrui = arr;
+  // 含 7 / 不含 7 状态变化时重渲（让 ヒット計算 块出现/消失）
+  const hadHit = (e.bunrui || []).includes(7);
+  const willHit = arr.includes(7);
+  if (hadHit !== willHit) reRenderBgEdit();
+}
+
+function _toggleBgArrayField(ei, field, id, btn) {
+  const e = editData?.effects?.[ei];
+  if (!e) return;
+  const v = e[field];
+  const arr = v == null ? [] : (Array.isArray(v) ? v.slice() : [v]);
+  const idx = arr.indexOf(id);
+  if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
+  else          { arr.push(id); arr.sort((a,b)=>a-b); btn.classList.add('on'); }
+  e[field] = arr.length === 0 ? null : (arr.length === 1 ? arr[0] : arr);
+}
+function toggleBladeElement(ei, id, btn) { _toggleBgArrayField(ei, 'element', id, btn); }
+function toggleBladeType(ei, id, btn)    { _toggleBgArrayField(ei, 'type',    id, btn); }
+
+function setBladeHitStage(ei, idx, val) {
+  const arr = ((editData.effects[ei]||{}).hit_per_stage || [null, null, null]).slice();
+  while (arr.length < 3) arr.push(null);
+  arr[idx] = val === '' ? null : +val;
+  editData.effects[ei].hit_per_stage = arr;
+}
+function setBladeHitStageScaling(ei, idx, val) {
+  const arr = ((editData.effects[ei]||{}).hit_per_stage_scaling || [null, null, null]).slice();
+  while (arr.length < 3) arr.push(null);
+  arr[idx] = val === '' ? null : +val;
+  editData.effects[ei].hit_per_stage_scaling = arr;
+}
+
+function setBladeScope(ei, val) {
+  const e = editData?.effects?.[ei];
+  if (!e) return;
+  e.scope = +val;
+  // scope=5 显示 name 输入框 → 重渲
+  reRenderBgEdit();
+}
+
+function addBladeEffect() {
+  if (!editData) return;
+  if (!Array.isArray(editData.effects)) editData.effects = [];
+  editData.effects.push({ bunrui:[1], scope:0, condition:0, calc_type:0, bairitu:1.0 });
+  reRenderBgEdit();
+}
+function removeBladeEffect(ei) {
+  if (!editData?.effects) return;
+  if (editData.effects.length <= 1) return;
+  editData.effects.splice(ei, 1);
+  reRenderBgEdit();
+}
+
+// ===== EDIT BODY =====
 function renderEditBody(c) {
-  var roEffect = '<div class="field-row"><div class="field-key">効果</div><div class="field-val edit-ro">'
+  const roEffect = '<div class="field-row"><div class="field-key">効果</div><div class="field-val edit-ro">'
     + escHtml(c.effect||'') + '</div></div>';
-  var roTime = c.time_start
+  const roTime = c.time_start
     ? '<div class="field-row"><div class="field-key">時間</div><div class="field-val edit-ro">'
       + escHtml(c.time_start + '～' + c.time_end) + '</div></div>'
     : '';
 
-  var curElem = cardElement(c);
-  var elemOpts = Object.keys(ELEMENT).map(function(k) {
-    return '<option value="'+k+'"'+(curElem==k?' selected':'')+'>'+ELEMENT[k]+'</option>';
-  }).join('');
-  var curWeap = cardWeapon(c);
-  var weapOpts = '<option value="0"'+(curWeap===0?' selected':'')+'>全武器種</option>' +
-    Object.keys(WEAPON).map(function(k) {
-      return '<option value="'+k+'"'+(curWeap==k?' selected':'')+'>'+WEAPON[k]+'</option>';
-    }).join('');
-  var metaRow =
+  const metaRow =
     '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--border);margin-bottom:4px;">' +
       '<label style="font-size:11px;color:var(--text2);display:flex;align-items:center;gap:4px;flex-shrink:0;">★' +
         '<input type="number" class="edit-input" style="width:48px;text-align:right" value="'+(c.rarity||'')+'" min="1" max="5" oninput="editData.rarity=this.value===\'\'?null:Number(this.value)">' +
       '</label>' +
-      '<select class="edit-select" onchange="setEditElement(this.value)">'+elemOpts+'</select>' +
-      '<select class="edit-select" onchange="setEditWeapon(this.value)">'+weapOpts+'</select>' +
     '</div>';
 
-  var effEdits = (c.effects||[]).map(function(e, i) {
-    var label = (c.effects.length > 1) ? '効果量 ' + (i+1) : '効果量';
-    var scopeRO = scopeLabel(e) ? '<span class="eff-scope" style="font-size:11px;padding:2px 5px;border-radius:3px;margin-left:4px;">' + scopeLabel(e) + '</span>' : '';
-    var condRO  = e.condition ? '<span class="eff-cond" style="font-size:11px;padding:2px 5px;border-radius:3px;margin-left:4px;">' + (CONDITION[e.condition]||'') + '</span>' : '';
+  const allEffects = (Array.isArray(c.effects) && c.effects.length) ? c.effects
+    : [{bunrui:[1], scope:0, condition:0, calc_type:0, bairitu:1.0}];
 
-    var curBunrui = (e.bunrui||[])[0] || 16;
-    var bunruiSel = '<select class="edit-select" onchange="editData.effects['+i+'].bunrui=[+this.value]">' +
-      Object.keys(BUNRUI).map(function(k) {
-        return '<option value="'+k+'"'+(curBunrui==k?' selected':'')+'>'+BUNRUI[k]+'</option>';
-      }).join('') + '</select>';
+  const effEdits = allEffects.map(function(e, i) {
+    const bunrui = e.bunrui || [];
+    const btogs = _BG_BUNRUI_ALL.map(function(b) {
+      return '<button class="btog' + (bunrui.includes(b)?' on':'') + '" onclick="toggleBladeBunrui('+i+','+b+',this)">' + (BUNRUI_SHORT[b]||b) + '</button>';
+    }).join('');
 
-    var ctSel = '<select class="edit-select" onchange="editData.effects['+i+'].calc_type=+this.value">' +
-      '<option value="0"'+(e.calc_type===0?' selected':'')+'>&times;</option>' +
-      '<option value="1"'+(e.calc_type===1?' selected':'')+'>+</option>' +
-      '</select>';
-    var bInput = '<input type="number" step="any" class="edit-input" style="width:90px" value="'+(e.bairitu!=null?e.bairitu:'')+'" ' +
+    const selElems = e.element == null ? [] : (Array.isArray(e.element) ? e.element : [e.element]);
+    const elemTogs = [1,2,3,4,5,6].map(function(k) {
+      return '<button class="btog' + (selElems.indexOf(k)>=0?' on':'') + '" onclick="toggleBladeElement('+i+','+k+',this)">' + ELEMENT[k] + '</button>';
+    }).join('');
+
+    const selTypes = e.type == null ? [] : (Array.isArray(e.type) ? e.type : [e.type]);
+    const typeTogs = [1,2,3,4,5,6,7,8,9,10,11,12].map(function(k) {
+      return '<button class="btog' + (selTypes.indexOf(k)>=0?' on':'') + '" onclick="toggleBladeType('+i+','+k+',this)">' + WEAPON[k] + '</button>';
+    }).join('');
+
+    const scopeSel = renderEditSelect(SCOPE, e.scope, 'setBladeScope('+i+',this.value)');
+    const condSel  = renderEditSelect(CONDITION, e.condition, 'editData.effects['+i+'].condition=+this.value');
+    const ctSel    = renderEditSelect({0:'×', 1:'+'}, e.calc_type, 'editData.effects['+i+'].calc_type=+this.value');
+    const bairituInput = '<input type="number" step="any" class="edit-num-sm" value="'+(e.bairitu!=null?e.bairitu:'')+'" ' +
       'oninput="editData.effects['+i+'].bairitu=this.value===\'\'?null:Number(this.value)">';
 
-    var hitBlock = '';
-    if ((e.bunrui||[]).includes(7)) {
-      var ht = e.hit_type != null ? e.hit_type : 0;
-      var hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null, null, null];
-      function htOpt(v, lbl) {
-        return '<option value="'+v+'"'+(ht===v?' selected':'')+'>'+lbl+'</option>';
-      }
-      hitBlock = '<div class="field-label" style="margin-top:4px;margin-bottom:2px">ヒット計算</div>'
-        + '<div class="skill-edit-meta" style="margin-bottom:6px">'
-        + '<div><div class="field-label">hit_type</div>'
-        + '<select class="edit-select" onchange="editData.effects['+i+'].hit_type=+this.value">'
-        + htOpt(0,'0 減衰なし加算')+htOpt(1,'1 ダメージ維持加算')+htOpt(2,'2 乗算')+htOpt(3,'3 設定値')
-        + '</select></div>'
-        + [0,1,2].map(function(idx) {
-            var v = hps[idx] != null ? hps[idx] : '';
-            return '<div><div class="field-label">'+(idx+1)+'撃目</div>'
-              + '<input type="number" step="any" class="edit-num-sm" style="width:55px" value="'+v+'"'
-              + ' oninput="setBladeHitStage('+i+','+idx+',this.value)"></div>';
-          }).join('')
-        + '</div>';
+    const nameInput = (e.scope === 5)
+      ? '<div class="field-label">キャラ名</div><input type="text" class="edit-input" style="width:100%" value="'+escHtml(e.name||'')+'" oninput="editData.effects['+i+'].name=this.value">'
+      : '';
+
+    const delBtn = allEffects.length > 1
+      ? '<button class="latent-rm-btn" onclick="removeBladeEffect('+i+')" title="削除">×</button>' : '';
+
+    let hitBlock = '';
+    if (bunrui.includes(7)) {
+      const ht = e.hit_type != null ? e.hit_type : 0;
+      const hps  = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null,null,null];
+      const hpss = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [null,null,null];
+      const stageIn = function(idx){
+        const v = hps[idx] != null ? hps[idx] : '';
+        return '<div><div class="field-label">' + (idx+1) + '撃</div>' +
+          '<input type="number" step="any" class="edit-num-sm" style="width:60px" value="'+v+'" oninput="setBladeHitStage('+i+','+idx+',this.value)"></div>';
+      };
+      const scaleIn = function(idx){
+        const v = hpss[idx] != null ? hpss[idx] : '';
+        return '<div><div class="field-label">' + (idx+1) + '撃+</div>' +
+          '<input type="number" step="any" class="edit-num-sm" style="width:60px" value="'+v+'" oninput="setBladeHitStageScaling('+i+','+idx+',this.value)"></div>';
+      };
+      hitBlock = '<div class="field-label" style="margin-top:6px">ヒット計算 <span style="color:var(--text2);font-weight:400">(bunrui=7のみ)</span></div>' +
+        '<div class="skill-edit-meta">' +
+          '<div><div class="field-label">hit_type</div>' + renderEditSelect({0:'0 減衰なし加算',1:'1 ダメージ維持加算',2:'2 乗算',3:'3 設定値'}, ht, 'editData.effects['+i+'].hit_type=+this.value') + '</div>' +
+          stageIn(0) + stageIn(1) + stageIn(2) +
+          scaleIn(0) + scaleIn(1) + scaleIn(2) +
+        '</div>';
     }
 
-    return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;">' +
-      '<span style="font-size:11px;color:var(--text2);flex-shrink:0;">'+label+scopeRO+condRO+'</span>' +
-      bunruiSel + ctSel + bInput +
-      '</div>' + hitBlock;
+    return '<div class="bg-effect-card">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;gap:4px">' +
+          '<div class="field-label" style="margin:0">効果 #' + (i+1) + '</div>' + delBtn +
+        '</div>' +
+        '<div class="field-label">分類</div>' +
+        '<div class="bunrui-toggles">' + btogs + '</div>' +
+        '<div class="field-label">属性条件 <span style="color:var(--text2);font-weight:400">(複数可、不選択=なし)</span></div>' +
+        '<div class="bunrui-toggles">' + elemTogs + '</div>' +
+        '<div class="field-label">武器条件 <span style="color:var(--text2);font-weight:400">(複数可、不選択=なし)</span></div>' +
+        '<div class="bunrui-toggles">' + typeTogs + '</div>' +
+        '<div class="skill-edit-meta">' +
+          '<div><div class="field-label">scope</div>' + scopeSel + '</div>' +
+          '<div><div class="field-label">condition</div>' + condSel + '</div>' +
+          '<div><div class="field-label">倍率</div><div style="display:flex;align-items:center;gap:4px">' + ctSel + bairituInput + '</div></div>' +
+        '</div>' +
+        nameInput +
+        hitBlock +
+      '</div>';
   }).join('');
 
   return '<div class="edit-actions">' +
@@ -709,44 +767,8 @@ function renderEditBody(c) {
       '<button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>' +
     '</div>' +
     roEffect + roTime + metaRow +
-    '<div style="margin-bottom:8px;">' + effEdits + '</div>';
-}
-
-function setBladeHitStage(ei, idx, val) {
-  var arr = ((editData.effects[ei]||{}).hit_per_stage || [null, null, null]).slice();
-  while (arr.length < 3) arr.push(null);
-  arr[idx] = val === '' ? null : +val;
-  editData.effects[ei].hit_per_stage = arr;
-}
-
-function setEditElement(val) {
-  if (!editData) return;
-  val = Number(val);
-  (editData.effects||[]).forEach(function(e) {
-    if (e.scope === 5) return;
-    if (val === 0) {
-      delete e.element;
-      if (e.type == null) e.scope = 0;
-    } else {
-      e.scope = 3; e.element = val;
-      delete e.type;
-    }
-  });
-}
-
-function setEditWeapon(val) {
-  if (!editData) return;
-  val = Number(val);
-  (editData.effects||[]).forEach(function(e) {
-    if (e.scope === 5) return;
-    if (val === 0) {
-      delete e.type;
-      if (e.element == null) e.scope = 0;
-    } else {
-      e.scope = 3; e.type = val;
-      delete e.element;
-    }
-  });
+    '<div>' + effEdits + '</div>' +
+    '<button class="btn-add-slot" style="margin-top:8px" onclick="addBladeEffect()">+ 効果追加</button>';
 }
 
 

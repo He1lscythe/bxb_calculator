@@ -1,13 +1,13 @@
 // ===== BLADEGRAPH SPEC (shared) =====
 (function (root) {
   function _cardElement(c) {
-    var e = (c.effects || []).find(function (e) {
+    const e = (c.effects || []).find(function (e) {
       return e.scope === 3 && e.element != null;
     });
     return e ? e.element : 0;
   }
   function _cardWeapon(c) {
-    var e = (c.effects || []).find(function (e) {
+    const e = (c.effects || []).find(function (e) {
       return e.scope === 3 && e.type != null;
     });
     return e ? e.type : 0;
@@ -21,7 +21,7 @@
       weapon:  { extract: _cardWeapon },
       bunrui: {
         match: function (c, set) {
-          var arr = Array.from(set);
+          const arr = Array.from(set);
           return arr.some(function (v) {
             return (c.effects || []).some(function (e) {
               return (e.bunrui || []).indexOf(v) >= 0;
@@ -31,7 +31,7 @@
       },
       scope: {
         match: function (c, set) {
-          var arr = Array.from(set);
+          const arr = Array.from(set);
           return arr.some(function (v) {
             return (c.effects || []).some(function (e) { return e.scope === v; });
           });
@@ -39,7 +39,7 @@
       },
       condition: {
         match: function (c, set) {
-          var arr = Array.from(set);
+          const arr = Array.from(set);
           return arr.some(function (v) {
             return (c.effects || []).some(function (e) { return e.condition === v; });
           });

@@ -232,6 +232,7 @@ input[type=number] { -moz-appearance: textfield; }
 <body>
 <div id="page-wrap">
 <script src="../nav.js"></script>
+<script src="../shared/constants.js"></script>
 <script src="../shared/save-client.js"></script>
 <script src="../shared/filter-core.js"></script>
 <script src="../shared/soul-spec.js"></script>
@@ -258,43 +259,17 @@ input[type=number] { -moz-appearance: textfield; }
       <div id="filters-body">
       <div class="filter-section">
         <div class="filter-label">レア度</div>
-        <div class="filter-toggles" id="f-rarity">
-          <button class="ftog" data-val="5" onclick="toggleFilter('rarity',5,this)">★5</button>
-          <button class="ftog" data-val="4" onclick="toggleFilter('rarity',4,this)">★4</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('rarity',3,this)">★3</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('rarity',2,this)">★2</button>
-          <button class="ftog" data-val="1" onclick="toggleFilter('rarity',1,this)">★1</button>
-        </div>
+        <div class="filter-toggles" id="f-rarity"></div>
       </div>
 
       <div class="filter-section">
         <div class="filter-label">得意属性</div>
-        <div class="filter-toggles" id="f-element">
-          <button class="ftog" data-val="1" onclick="toggleFilter('element',1,this)" style="color:var(--fire)">火</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('element',2,this)" style="color:var(--water)">水</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('element',3,this)" style="color:var(--wind)">風</button>
-          <button class="ftog" data-val="4" onclick="toggleFilter('element',4,this)" style="color:var(--light)">光</button>
-          <button class="ftog" data-val="5" onclick="toggleFilter('element',5,this)" style="color:var(--dark)">闇</button>
-          <button class="ftog" data-val="6" onclick="toggleFilter('element',6,this)" style="color:var(--none)">無</button>
-        </div>
+        <div class="filter-toggles" id="f-element"></div>
       </div>
 
       <div class="filter-section">
         <div class="filter-label">得意武器</div>
-        <div class="filter-toggles" id="f-type">
-          <button class="ftog" data-val="1"  onclick="toggleFilter('type',1,this)">長剣</button>
-          <button class="ftog" data-val="2"  onclick="toggleFilter('type',2,this)">大剣</button>
-          <button class="ftog" data-val="3"  onclick="toggleFilter('type',3,this)">太刀</button>
-          <button class="ftog" data-val="4"  onclick="toggleFilter('type',4,this)">杖棒</button>
-          <button class="ftog" data-val="5"  onclick="toggleFilter('type',5,this)">弓矢</button>
-          <button class="ftog" data-val="6"  onclick="toggleFilter('type',6,this)">連弩</button>
-          <button class="ftog" data-val="7"  onclick="toggleFilter('type',7,this)">戦斧</button>
-          <button class="ftog" data-val="8"  onclick="toggleFilter('type',8,this)">騎槍</button>
-          <button class="ftog" data-val="9"  onclick="toggleFilter('type',9,this)">投擲</button>
-          <button class="ftog" data-val="10" onclick="toggleFilter('type',10,this)">拳闘</button>
-          <button class="ftog" data-val="11" onclick="toggleFilter('type',11,this)">魔典</button>
-          <button class="ftog" data-val="12" onclick="toggleFilter('type',12,this)">大鎌</button>
-        </div>
+        <div class="filter-toggles" id="f-type"></div>
       </div>
 
       </div><!-- #filters-body -->
@@ -323,16 +298,11 @@ input[type=number] { -moz-appearance: textfield; }
 </div>
 
 <script>
-// ===== CONSTANTS =====
-const ELEMENT = {1:'火',2:'水',3:'風',4:'光',5:'闇',6:'無'};
-const WEAPON  = {1:'長剣',2:'大剣',3:'太刀',4:'杖棒',5:'弓矢',6:'連弩',7:'戦斧',8:'騎槍',9:'投擲',10:'拳闘',11:'魔典',12:'大鎌'};
-const BUNRUI_SHORT = {1:'攻',2:'BK',3:'BD攻',4:'転',5:'速',6:'BD値',7:'hit',8:'aoe',9:'異常',10:'HP',11:'回復',12:'防',13:'軽',14:'蓝',15:'紅',16:'他',17:'限',18:'BD最大',19:'枠',20:'EXP',21:'BDhit'};
-const BUNRUI_ALL   = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
-const AFF_LABEL = {'-2':'超苦手','-1':'苦手','0':'普通','1':'得意','2':'超得意'};
-const AFF_CLS   = {'-2':'aff-m2','-1':'aff-m1','0':'aff-0','1':'aff-1','2':'aff-2'};
-const AFF_CELL  = {'-2':'aff-cell-m2','-1':'aff-cell-m1','0':'','1':'aff-cell-1','2':'aff-cell-2'};
-const ELEMS_ORDER   = ['火','水','風','光','闇','無'];
-const WEAPONS_ORDER = ['長剣','大剣','太刀','杖棒','弓矢','連弩','戦斧','騎槍','投擲','拳闘','魔典','大鎌'];
+// ELEMENT / WEAPON / BUNRUI_SHORT / ELEMS_ORDER / WEAPONS_ORDER 来自 shared/constants.js
+const BUNRUI_ALL = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+const AFF_LABEL  = {'-2':'超苦手','-1':'苦手','0':'普通','1':'得意','2':'超得意'};
+const AFF_CLS    = {'-2':'aff-m2','-1':'aff-m1','0':'aff-0','1':'aff-1','2':'aff-2'};
+const AFF_CELL   = {'-2':'aff-cell-m2','-1':'aff-cell-m1','0':'','1':'aff-cell-1','2':'aff-cell-2'};
 
 // ===== STATE =====
 let allSouls      = [];
@@ -345,30 +315,38 @@ let originalData  = {};
 let editData      = null;
 const filterSets  = { rarity: new Set(), element: new Set(), type: new Set() };
 
-var _filtersOpenScrollY = null;
+let _filtersOpenScrollY = null;
 function toggleFilters() {
-  var body = document.getElementById('filters-body');
-  var btn = document.getElementById('filter-toggle-btn');
-  var open = body.style.display === 'flex' || body.style.display === 'block';
+  const body = document.getElementById('filters-body');
+  const btn = document.getElementById('filter-toggle-btn');
+  const open = body.style.display === 'flex' || body.style.display === 'block';
   body.style.display = open ? '' : 'flex';
   btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
   _filtersOpenScrollY = open ? null : window.scrollY;
 }
 function collapseFiltersOnScroll() {
   if (window.innerWidth > 768) return;
-  var body = document.getElementById('filters-body');
+  const body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
   if (_filtersOpenScrollY === null) return;
   if (Math.abs(window.scrollY - _filtersOpenScrollY) < 30) return;
   body.style.display = '';
-  var btn = document.getElementById('filter-toggle-btn');
+  const btn = document.getElementById('filter-toggle-btn');
   if (btn) btn.textContent = '▼ 絞り込み';
   _filtersOpenScrollY = null;
 }
 window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
 
+// ===== FILTER TOGGLES (派生自 shared/constants.js) =====
+function initFilterToggles() {
+  document.getElementById('f-rarity').innerHTML  = renderFilterToggles('rarity', {5:'★5',4:'★4',3:'★3',2:'★2',1:'★1'}, {only:[5,4,3,2,1]});
+  document.getElementById('f-element').innerHTML = renderElementFilterToggles('element', {skip:[0]});
+  document.getElementById('f-type').innerHTML    = renderFilterToggles('type', WEAPON);
+}
+
 // ===== LOAD =====
 document.addEventListener('DOMContentLoaded', () => {
+  initFilterToggles();
   fetch('../data/souls.json')
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(arr => {
@@ -433,9 +411,9 @@ function applyFilters() {
     });
   }
 
-  var ct = `${filteredSouls.length} 件`;
+  const ct = `${filteredSouls.length} 件`;
   document.getElementById('soul-count').textContent = ct;
-  var mob = document.getElementById('soul-count-mob');
+  const mob = document.getElementById('soul-count-mob');
   if (mob) mob.textContent = ct;
   renderList();
 }
@@ -520,7 +498,7 @@ function renderDetail(s) {
     <div class="soul-header">
       <div class="soul-header-top">
         <div class="soul-title">${escHtml(s.name)}</div>
-        <button class="btn-edit" onclick="enterEditMode(${s.id})">修改</button>
+        <button class="btn-edit" onclick="enterEditMode(${s.id})">修正</button>
       </div>
       <img class="soul-banner" src="${escHtml(s.image||`https://img.altema.jp/bxb/soul/banner/${s.id}.jpg`)}"
            onerror="this.style.display='none'" alt="${escHtml(s.name)}">
@@ -603,50 +581,48 @@ function renderSkillsView(skills, soul) {
 // ===== SKILL TAG HELPERS =====
 function fmtElem(v) {
   if (v == null) return null;
-  var ids = Array.isArray(v) ? v : [v];
+  const ids = Array.isArray(v) ? v : [v];
   return ids.map(function(id){ return ELEMENT[id] || id; }).join('/');
 }
 function fmtType(v) {
   if (v == null) return null;
-  var ids = Array.isArray(v) ? v : [v];
+  const ids = Array.isArray(v) ? v : [v];
   return ids.map(function(id){ return WEAPON[id] || id; }).join('/');
 }
 // 把同 (scope, element, type, condition) 的 effects 归到一组，
 // 共享 scope/cond tag 只显示一次，bunrui tag 全部依次列出
 function _ctxKey(e) {
-  var elem = Array.isArray(e.element) ? e.element.slice().sort().join(',')
+  const elem = Array.isArray(e.element) ? e.element.slice().sort().join(',')
            : (e.element != null ? String(e.element) : '');
-  var type = Array.isArray(e.type) ? e.type.slice().sort().join(',')
+  const type = Array.isArray(e.type) ? e.type.slice().sort().join(',')
            : (e.type != null ? String(e.type) : '');
   return [e.scope, elem, type, e.condition || 0].join('|');
 }
 function _renderScopeTag(e) {
   if (e.scope === 0) return '<span class="scope-tag scope-self">自</span>';
   if (e.scope === 1) return '<span class="scope-tag scope-all">全</span>';
-  var parts = [];
-  var el = fmtElem(e.element); if (el) parts.push(el);
-  var ty = fmtType(e.type);   if (ty) parts.push(ty);
+  const parts = [];
+  const el = fmtElem(e.element); if (el) parts.push(el);
+  const ty = fmtType(e.type);   if (ty) parts.push(ty);
   if (e.scope === 2) return '<span class="scope-tag scope-lim">'      + (parts.join('·') || '限') + '</span>';
   if (e.scope === 3) return '<span class="scope-tag scope-equip-s">' + (parts.join('·') || '装') + '·自</span>';
   if (e.scope === 4) return '<span class="scope-tag scope-equip-a">' + (parts.join('·') || '装') + '·全</span>';
   return '';
 }
 function _renderCondTag(e) {
-  if (e.condition === 1) return '<span class="cond-tag cond-1">浑身</span>';
-  if (e.condition === 2) return '<span class="cond-tag cond-2">背水</span>';
-  if (e.condition === 3) return '<span class="cond-tag cond-3">破損</span>';
-  return '';
+  if (!e.condition) return '';
+  return '<span class="cond-tag cond-' + e.condition + '">' + (CONDITION[e.condition] || '') + '</span>';
 }
 function renderRightTags(sk) {
-  var groups = []; // [{key, ctx, bunruis: []}]
+  const groups = []; // [{key, ctx, bunruis: []}]
   (sk.effects || []).forEach(function(e) {
-    var key = _ctxKey(e);
-    var g = null;
+    const key = _ctxKey(e);
+    let g = null;
     for (var i = 0; i < groups.length; i++) if (groups[i].key === key) { g = groups[i]; break; }
     if (!g) { g = { key: key, ctx: e, bunruis: [] }; groups.push(g); }
     (e.bunrui || []).forEach(function(b) { g.bunruis.push(b); });
   });
-  var tags = '';
+  let tags = '';
   groups.forEach(function(g) {
     g.bunruis.forEach(function(b) {
       tags += '<span class="bunrui-tag">' + (BUNRUI_SHORT[b] || b) + '</span>';
@@ -663,19 +639,19 @@ function _fmtNumSimple(b) {
 }
 
 function fmtHitStages(e) {
-  var hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [];
-  var sc  = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [0,0,0];
+  const hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [];
+  const sc  = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [0,0,0];
   if (!hps.length) return '';
-  var ht = e.hit_type != null ? e.hit_type : 0;
-  var op = (ht === 2) ? '×' : (ht === 3) ? '=' : '+';
+  const ht = e.hit_type != null ? e.hit_type : 0;
+  const op = (ht === 2) ? '×' : (ht === 3) ? '=' : '+';
   function stageStr(v, s) {
     return op + _fmtNumSimple(v) + (s ? '(+' + _fmtNumSimple(s) + '/熟度)' : '');
   }
-  var s0 = sc[0] || 0, s1 = sc[1] || 0, s2 = sc[2] || 0;
+  const s0 = sc[0] || 0, s1 = sc[1] || 0, s2 = sc[2] || 0;
   if (hps.length === 3 && hps[0] !== 0 && hps[0] === hps[1] && hps[1] === hps[2] && s0 === s1 && s1 === s2) {
     return stageStr(hps[0], s0);
   }
-  var parts = hps.map(function(v, i) {
+  const parts = hps.map(function(v, i) {
     if (v == null || v === 0) return null;
     return (i + 1) + '撃' + stageStr(v, sc[i] || 0);
   }).filter(Boolean);
@@ -684,16 +660,16 @@ function fmtHitStages(e) {
 
 function fmtBairitu(sk) {
   return (sk.effects || []).map(function(e) {
-    var bunrui = e.bunrui || [];
-    var isHitOnly = bunrui.length === 1 && bunrui[0] === 7;
+    const bunrui = e.bunrui || [];
+    const isHitOnly = bunrui.length === 1 && bunrui[0] === 7;
     if (isHitOnly) return fmtHitStages(e);
-    var bairituStr = '';
+    let bairituStr = '';
     if (e.bairitu != null && e.bairitu !== 0) {
-      var sc = e.bairitu_scaling || 0;
+      const sc = e.bairitu_scaling || 0;
       bairituStr = ctPfx(e.calc_type) + _fmtNumSimple(e.bairitu);
       if (sc) bairituStr += ' + ' + sc + ' * 熟度';
     }
-    var hitStr = bunrui.includes(7) ? fmtHitStages(e) : '';
+    const hitStr = bunrui.includes(7) ? fmtHitStages(e) : '';
     return [bairituStr, hitStr].filter(Boolean).join(' / ');
   }).filter(Boolean).join(' / ');
 }
@@ -712,8 +688,8 @@ function setPath(obj, pathStr, value) {
   cur[parts[parts.length - 1]] = value;
 }
 function toggleBunrui(path, b, btn) {
-  var arr = (getPath(editData, path + '.bunrui') || []).slice();
-  var idx = arr.indexOf(b);
+  const arr = (getPath(editData, path + '.bunrui') || []).slice();
+  const idx = arr.indexOf(b);
   if (idx >= 0) {
     if (arr.length <= 1) return; // must keep at least one
     arr.splice(idx, 1); btn.classList.remove('on');
@@ -723,17 +699,17 @@ function toggleBunrui(path, b, btn) {
   setPath(editData, path + '.bunrui', arr);
 }
 function toggleElem(path, id, btn) {
-  var v   = getPath(editData, path + '.element');
-  var arr = v == null ? [] : (Array.isArray(v) ? v.slice() : [v]);
-  var idx = arr.indexOf(id);
+  const v   = getPath(editData, path + '.element');
+  const arr = v == null ? [] : (Array.isArray(v) ? v.slice() : [v]);
+  const idx = arr.indexOf(id);
   if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
   else          { arr.push(id); arr.sort((a,b)=>a-b); btn.classList.add('on'); }
   setPath(editData, path + '.element', arr.length === 0 ? null : (arr.length === 1 ? arr[0] : arr));
 }
 function toggleType(path, id, btn) {
-  var v   = getPath(editData, path + '.type');
-  var arr = v == null ? [] : (Array.isArray(v) ? v.slice() : [v]);
-  var idx = arr.indexOf(id);
+  const v   = getPath(editData, path + '.type');
+  const arr = v == null ? [] : (Array.isArray(v) ? v.slice() : [v]);
+  const idx = arr.indexOf(id);
   if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
   else          { arr.push(id); arr.sort((a,b)=>a-b); btn.classList.add('on'); }
   setPath(editData, path + '.type', arr.length === 0 ? null : (arr.length === 1 ? arr[0] : arr));
@@ -785,13 +761,13 @@ function computeDiff(original, modified) {
 function deepApply(target, patch) {
   for (var k in patch) {
     if (k === 'id') continue;
-    var pv = patch[k], tv = target[k];
+    const pv = patch[k], tv = target[k];
     if (Array.isArray(tv) && pv && typeof pv === 'object' && !Array.isArray(pv) &&
         Object.keys(pv).every(kk => /^\d+$/.test(kk))) {
       for (var idx in pv) {
-        var i = +idx;
+        const i = +idx;
         if (i >= tv.length) continue;
-        var pvi = pv[idx];
+        const pvi = pv[idx];
         if (pvi && typeof pvi === 'object' && !Array.isArray(pvi) &&
             tv[i] && typeof tv[i] === 'object' && !Array.isArray(tv[i])) {
           deepApply(tv[i], pvi);
@@ -879,9 +855,7 @@ function renderEditDetail(s) {
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;align-items:center">
         <div style="display:flex;align-items:center;gap:6px">
           <span class="field-label" style="margin:0">レア度</span>
-          <select class="edit-select" onchange="setPath(editData,'rarity',+this.value)">
-            ${[5,4,3,2,1].map(n=>`<option value="${n}"${s.rarity===n?' selected':''}>${'★'.repeat(n)}</option>`).join('')}
-          </select>
+          ${renderEditSelect({5:'★★★★★',4:'★★★★',3:'★★★',2:'★★',1:'★'}, s.rarity, `setPath(editData,'rarity',+this.value)`, {only:[5,4,3,2,1]})}
         </div>
         <div style="display:flex;align-items:center;gap:6px">
           <span class="field-label" style="margin:0">最大Lv</span>
@@ -967,29 +941,16 @@ function renderEditSkillsSection(s) {
         <div class="skill-edit-meta">
           <div>
             <div class="field-label">scope</div>
-            <select class="edit-select" onchange="setPath(editData,'${ep}.scope',+this.value)">
-              <option value="0"${e.scope===0?' selected':''}>自身</option>
-              <option value="1"${e.scope===1?' selected':''}>全体</option>
-              <option value="3"${e.scope===3?' selected':''}>装備→自</option>
-              <option value="4"${e.scope===4?' selected':''}>装備→全</option>
-            </select>
+            ${renderEditSelect({0:'自身',1:'全体',3:'装備→自',4:'装備→全'}, e.scope, `setPath(editData,'${ep}.scope',+this.value)`)}
           </div>
           <div>
             <div class="field-label">condition</div>
-            <select class="edit-select" onchange="setPath(editData,'${ep}.condition',+this.value)">
-              <option value="0"${e.condition===0?' selected':''}>なし</option>
-              <option value="1"${e.condition===1?' selected':''}>浑身</option>
-              <option value="2"${e.condition===2?' selected':''}>背水</option>
-              <option value="3"${e.condition===3?' selected':''}>破損</option>
-            </select>
+            ${renderEditSelect(CONDITION, e.condition, `setPath(editData,'${ep}.condition',+this.value)`)}
           </div>
           <div>
             <div class="field-label">倍率</div>
             <div style="display:flex;align-items:center;gap:4px">
-              <select class="edit-select" onchange="setPath(editData,'${ep}.calc_type',+this.value)">
-                <option value="0"${e.calc_type===0?' selected':''}>×</option>
-                <option value="1"${e.calc_type===1?' selected':''}>+</option>
-              </select>
+              ${renderEditSelect({0:'×',1:'+'}, e.calc_type, `setPath(editData,'${ep}.calc_type',+this.value)`)}
               <input type="number" step="any" class="edit-num-sm" value="${e.bairitu!=null?e.bairitu:''}"
                      oninput="setPath(editData,'${ep}.bairitu',this.value===''?null:+this.value)">
             </div>
@@ -1005,12 +966,7 @@ function renderEditSkillsSection(s) {
         <div class="skill-edit-meta">
           <div>
             <div class="field-label">hit_type</div>
-            <select class="edit-select" onchange="setPath(editData,'${ep}.hit_type',+this.value)">
-              <option value="0"${(e.hit_type??0)===0?' selected':''}>0 減衰なし加算</option>
-              <option value="1"${e.hit_type===1?' selected':''}>1 ダメージ維持加算</option>
-              <option value="2"${e.hit_type===2?' selected':''}>2 乗算</option>
-              <option value="3"${e.hit_type===3?' selected':''}>3 設定値</option>
-            </select>
+            ${renderEditSelect({0:'0 減衰なし加算',1:'1 ダメージ維持加算',2:'2 乗算',3:'3 設定値'}, e.hit_type??0, `setPath(editData,'${ep}.hit_type',+this.value)`)}
           </div>
           ${stageIn(0)}${stageIn(1)}${stageIn(2)}
           ${scaleIn(0)}${scaleIn(1)}${scaleIn(2)}
@@ -1043,14 +999,14 @@ function renderEditSkillsSection(s) {
 }
 
 function setHitStage(path, idx, val) {
-  var arr = (getPath(editData, path + '.hit_per_stage') || [null, null, null]).slice();
+  const arr = (getPath(editData, path + '.hit_per_stage') || [null, null, null]).slice();
   while (arr.length < 3) arr.push(null);
   arr[idx] = val === '' ? null : +val;
   setPath(editData, path + '.hit_per_stage', arr);
 }
 
 function setHitStageScaling(path, idx, val) {
-  var arr = (getPath(editData, path + '.hit_per_stage_scaling') || [null, null, null]).slice();
+  const arr = (getPath(editData, path + '.hit_per_stage_scaling') || [null, null, null]).slice();
   while (arr.length < 3) arr.push(null);
   arr[idx] = val === '' ? null : +val;
   setPath(editData, path + '.hit_per_stage_scaling', arr);
@@ -1106,7 +1062,7 @@ function removeSkillEffect(src, i, ei) {
 }
 
 function reRenderEditSkills() {
-  var el = document.getElementById('skills-edit-section');
+  const el = document.getElementById('skills-edit-section');
   if (el) el.innerHTML = renderEditSkillsSection(editData);
 }
 
