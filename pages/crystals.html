@@ -146,6 +146,7 @@ input[type=number] { -moz-appearance: textfield; }
 
 <div id="page-wrap">
 <script src="../nav.js"></script>
+<script src="../shared/constants.js"></script>
 <script src="../shared/save-client.js"></script>
 <script src="../shared/filter-core.js"></script>
 <script src="../shared/crystal-spec.js"></script>
@@ -168,92 +169,34 @@ input[type=number] { -moz-appearance: textfield; }
     <div class="filter-row2">
       <div class="filter-section">
         <div class="filter-label">レア度</div>
-        <div class="filter-toggles" id="f-rarity">
-          <button class="ftog" data-val="6" onclick="toggleFilter('rarity',6,this)">★6</button>
-          <button class="ftog" data-val="5" onclick="toggleFilter('rarity',5,this)">★5</button>
-          <button class="ftog" data-val="4" onclick="toggleFilter('rarity',4,this)">★4</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('rarity',3,this)">★3</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('rarity',2,this)">★2</button>
-          <button class="ftog" data-val="1" onclick="toggleFilter('rarity',1,this)">★1</button>
-        </div>
+        <div class="filter-toggles" id="f-rarity"></div>
       </div>
 
       <div class="filter-section">
         <div class="filter-label">属性</div>
-        <div class="filter-toggles" id="f-element">
-          <button class="ftog" data-val="0" onclick="toggleFilter('element',0,this)">全</button>
-          <button class="ftog" data-val="1" onclick="toggleFilter('element',1,this)" style="color:var(--fire)">火</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('element',2,this)" style="color:var(--water)">水</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('element',3,this)" style="color:var(--wind)">風</button>
-          <button class="ftog" data-val="4" onclick="toggleFilter('element',4,this)" style="color:var(--light)">光</button>
-          <button class="ftog" data-val="5" onclick="toggleFilter('element',5,this)" style="color:var(--dark)">闇</button>
-          <button class="ftog" data-val="6" onclick="toggleFilter('element',6,this)" style="color:var(--none)">無</button>
-        </div>
+        <div class="filter-toggles" id="f-element"></div>
       </div>
     </div>
 
     <div class="filter-section">
       <div class="filter-label">武器種</div>
-      <div class="filter-toggles" id="f-weapon">
-        <button class="ftog" data-val="0"  onclick="toggleFilter('weapon',0,this)">全</button>
-        <button class="ftog" data-val="1"  onclick="toggleFilter('weapon',1,this)">長剣</button>
-        <button class="ftog" data-val="2"  onclick="toggleFilter('weapon',2,this)">大剣</button>
-        <button class="ftog" data-val="3"  onclick="toggleFilter('weapon',3,this)">太刀</button>
-        <button class="ftog" data-val="4"  onclick="toggleFilter('weapon',4,this)">杖棒</button>
-        <button class="ftog" data-val="5"  onclick="toggleFilter('weapon',5,this)">弓矢</button>
-        <button class="ftog" data-val="6"  onclick="toggleFilter('weapon',6,this)">連弩</button>
-        <button class="ftog" data-val="7"  onclick="toggleFilter('weapon',7,this)">戦斧</button>
-        <button class="ftog" data-val="8"  onclick="toggleFilter('weapon',8,this)">騎槍</button>
-        <button class="ftog" data-val="9"  onclick="toggleFilter('weapon',9,this)">投擲</button>
-        <button class="ftog" data-val="10" onclick="toggleFilter('weapon',10,this)">拳闘</button>
-        <button class="ftog" data-val="11" onclick="toggleFilter('weapon',11,this)">魔典</button>
-        <button class="ftog" data-val="12" onclick="toggleFilter('weapon',12,this)">大鎌</button>
-      </div>
+      <div class="filter-toggles" id="f-weapon"></div>
     </div>
 
     <div class="filter-section">
       <div class="filter-label">タイプ</div>
-      <div class="filter-toggles" id="f-bunrui">
-        <button class="ftog" data-val="1"  onclick="toggleFilter('bunrui',1,this)">攻</button>
-        <button class="ftog" data-val="2"  onclick="toggleFilter('bunrui',2,this)">BK</button>
-        <button class="ftog" data-val="3"  onclick="toggleFilter('bunrui',3,this)">BD攻</button>
-        <button class="ftog" data-val="4"  onclick="toggleFilter('bunrui',4,this)">転</button>
-        <button class="ftog" data-val="5"  onclick="toggleFilter('bunrui',5,this)">速</button>
-        <button class="ftog" data-val="6"  onclick="toggleFilter('bunrui',6,this)">BDゲ</button>
-        <button class="ftog" data-val="7"  onclick="toggleFilter('bunrui',7,this)">hit</button>
-        <button class="ftog" data-val="8"  onclick="toggleFilter('bunrui',8,this)">aoe</button>
-        <button class="ftog" data-val="9"  onclick="toggleFilter('bunrui',9,this)">異常</button>
-        <button class="ftog" data-val="10" onclick="toggleFilter('bunrui',10,this)">HP</button>
-        <button class="ftog" data-val="11" onclick="toggleFilter('bunrui',11,this)">回復</button>
-        <button class="ftog" data-val="12" onclick="toggleFilter('bunrui',12,this)">防</button>
-        <button class="ftog" data-val="13" onclick="toggleFilter('bunrui',13,this)">軽</button>
-        <button class="ftog" data-val="14" onclick="toggleFilter('bunrui',14,this)">蓝</button>
-        <button class="ftog" data-val="15" onclick="toggleFilter('bunrui',15,this)">紅</button>
-        <button class="ftog" data-val="16" onclick="toggleFilter('bunrui',16,this)">他</button>
-        <button class="ftog" data-val="17" onclick="toggleFilter('bunrui',17,this)">限</button>
-        <button class="ftog" data-val="18" onclick="toggleFilter('bunrui',18,this)">BDlv</button>
-        <button class="ftog" data-val="19" onclick="toggleFilter('bunrui',19,this)">枠</button>
-        <button class="ftog" data-val="20" onclick="toggleFilter('bunrui',20,this)">EXP</button>
-      </div>
+      <div class="filter-toggles" id="f-bunrui"></div>
     </div>
 
     <div class="filter-row2">
       <div class="filter-section">
         <div class="filter-label">条件（対象）</div>
-        <div class="filter-toggles" id="f-scope">
-          <button class="ftog" data-val="0" onclick="toggleFilter('scope',0,this)">自身</button>
-          <button class="ftog" data-val="1" onclick="toggleFilter('scope',1,this)">セット全</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('scope',2,this)">セット限</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('scope',3,this)">対象限</button>
-          <button class="ftog" data-val="5" onclick="toggleFilter('scope',5,this)">キャラ限</button>
-        </div>
+        <div class="filter-toggles" id="f-scope"></div>
       </div>
       <div class="filter-section">
         <div class="filter-label">条件（発動）</div>
         <div class="filter-toggles" id="f-condition">
-          <button class="ftog" data-val="1" onclick="toggleFilter('condition',1,this)">浑身</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('condition',2,this)">背水</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('condition',3,this)">破損</button>
+          <!-- populated by JS: renderFilterToggles('condition', CONDITION, {skip:[0]}) -->
         </div>
       </div>
     </div>
@@ -274,18 +217,7 @@ input[type=number] { -moz-appearance: textfield; }
 </div><!-- #page-wrap -->
 
 <script>
-// ===== MAPPINGS =====
-const ELEMENT  = {0:'全属性',1:'火',2:'水',3:'風',4:'光',5:'闇',6:'無'};
-const WEAPON   = {1:'長剣',2:'大剣',3:'太刀',4:'杖棒',5:'弓矢',6:'連弩',7:'戦斧',8:'騎槍',9:'投擲',10:'拳闘',11:'魔典',12:'大鎌'};
-const BUNRUI   = {
-  1:'攻撃力UP', 2:'ブレイク力UP', 3:'BD攻撃力UP', 4:'スピードUP',
-  5:'攻撃モーションUP', 6:'BDゲージUP', 7:'ヒット数UP', 8:'攻撃全体化',
-  9:'状態異常回避', 10:'HPUP', 11:'HP回復', 12:'防御力UP',
-  13:'被ダメ軽減', 14:'サファイアUP', 15:'ルビーUP', 16:'その他',
-  17:'ダメージ上限UP', 18:'ゲージ最大値UP', 19:'結晶枠UP', 20:'獲得EXPUP'
-};
-const SCOPE = {0:'自身/制限なし', 1:'セット全体', 2:'セット属性/武器限', 3:'自身属性/武器限', 5:'キャラ限定'};
-const CONDITION = {0:'なし', 1:'浑身(HP高)', 2:'背水(HP低)', 3:'破損状態', 4:'敵ブレイク状態'};
+// ELEMENT / WEAPON / BUNRUI / BUNRUI_SHORT / SCOPE / CONDITION 来自 shared/constants.js
 
 // ===== STATE =====
 let allCrystals = [], filteredCrystals = [];
@@ -296,8 +228,19 @@ let expandedIds = new Set();
 let editingId = null;
 let editData = null;
 
+// ===== FILTER TOGGLES (派生自 shared/constants.js) =====
+function initFilterToggles() {
+  document.getElementById('f-rarity').innerHTML    = renderFilterToggles('rarity', {6:'★6',5:'★5',4:'★4',3:'★3',2:'★2',1:'★1'}, {only:[6,5,4,3,2,1]});
+  document.getElementById('f-element').innerHTML   = renderElementFilterToggles('element');
+  document.getElementById('f-weapon').innerHTML    = renderFilterToggles('weapon', {0:'全', ...WEAPON});
+  document.getElementById('f-bunrui').innerHTML    = renderFilterToggles('bunrui', BUNRUI_SHORT);
+  document.getElementById('f-scope').innerHTML     = renderFilterToggles('scope', SCOPE_SHORT);
+  document.getElementById('f-condition').innerHTML = renderFilterToggles('condition', CONDITION, {skip:[0]});
+}
+
 // ===== DATA LOAD =====
 document.addEventListener('DOMContentLoaded', () => {
+  initFilterToggles();
   fetch('../data/crystals.json')
     .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function(arr) {
@@ -310,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(function(arr) {
       arr.forEach(function(c) {
         reviseData[c.id] = c;
-        var idx = allCrystals.findIndex(function(x) { return x.id === c.id; });
+        const idx = allCrystals.findIndex(function(x) { return x.id === c.id; });
         if (idx >= 0) deepApply(allCrystals[idx], c);
       });
       if (arr.length) applyFilters();
@@ -318,30 +261,30 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(function() {});
 });
 
-var _filtersOpenScrollY = null;
+let _filtersOpenScrollY = null;
 function toggleFilters() {
-  var body = document.getElementById('filters-body');
-  var btn = document.getElementById('filter-toggle-btn');
-  var open = body.style.display === 'flex' || body.style.display === 'block';
+  const body = document.getElementById('filters-body');
+  const btn = document.getElementById('filter-toggle-btn');
+  const open = body.style.display === 'flex' || body.style.display === 'block';
   body.style.display = open ? '' : 'flex';
   btn.textContent = open ? '▼ 絞り込み' : '▲ 絞り込み';
   _filtersOpenScrollY = open ? null : window.scrollY;
 }
 function collapseFiltersOnScroll() {
   if (window.innerWidth > 768) return;
-  var body = document.getElementById('filters-body');
+  const body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
   if (_filtersOpenScrollY === null) return;
   if (Math.abs(window.scrollY - _filtersOpenScrollY) < 30) return;
   body.style.display = '';
-  var btn = document.getElementById('filter-toggle-btn');
+  const btn = document.getElementById('filter-toggle-btn');
   if (btn) btn.textContent = '▼ 絞り込み';
   _filtersOpenScrollY = null;
 }
 window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
 
 // ===== FILTER STATE =====
-var filterSets = { rarity: new Set(), bunrui: new Set(), element: new Set(), weapon: new Set(), scope: new Set(), condition: new Set() };
+const filterSets = { rarity: new Set(), bunrui: new Set(), element: new Set(), weapon: new Set(), scope: new Set(), condition: new Set() };
 
 function toggleFilter(key, val, btn) {
   if (filterSets[key].has(val)) { filterSets[key].delete(val); btn.classList.remove('on'); }
@@ -352,8 +295,8 @@ function toggleFilter(key, val, btn) {
 function expandAll() {
   filteredCrystals.forEach(function(c) {
     if (editingId === c.id || expandedIds.has(c.id)) return;
-    var row = document.getElementById('row-' + c.id);
-    var body = document.getElementById('body-' + c.id);
+    const row = document.getElementById('row-' + c.id);
+    const body = document.getElementById('body-' + c.id);
     if (row && body) {
       expandedIds.add(c.id);
       row.classList.add('expanded');
@@ -365,8 +308,8 @@ function expandAll() {
 function collapseAll() {
   expandedIds.forEach(function(id) {
     if (editingId === id) return;
-    var row = document.getElementById('row-' + id);
-    var body = document.getElementById('body-' + id);
+    const row = document.getElementById('row-' + id);
+    const body = document.getElementById('body-' + id);
     if (row && body) { row.classList.remove('expanded'); body.innerHTML = ''; }
   });
   filteredCrystals.forEach(function(c) { if (editingId !== c.id) expandedIds.delete(c.id); });
@@ -382,11 +325,11 @@ function resetFilters() {
 }
 
 function crystalElement(c) {
-  var e = (c.effects||[]).find(function(e){return (e.scope===2||e.scope===3) && e.element!=null;});
+  const e = (c.effects||[]).find(function(e){return (e.scope===2||e.scope===3) && e.element!=null;});
   return e ? e.element : 0;
 }
 function crystalWeapon(c) {
-  var e = (c.effects||[]).find(function(e){return (e.scope===2||e.scope===3) && e.type!=null;});
+  const e = (c.effects||[]).find(function(e){return (e.scope===2||e.scope===3) && e.type!=null;});
   return e ? e.type : 0;
 }
 function crystalScope(c) {
@@ -397,14 +340,14 @@ function crystalCondition(c){
 }
 
 function applyFilters() {
-  var q = document.getElementById('search').value.trim();
+  const q = document.getElementById('search').value.trim();
   filteredCrystals = FilterCore.applyFilters(allCrystals, {
     q: q,
     filters: filterSets,
   }, CRYSTAL_SPEC);
-  var ct = filteredCrystals.length + ' 件';
+  const ct = filteredCrystals.length + ' 件';
   document.getElementById('crystal-count').textContent = ct;
-  var mob = document.getElementById('crystal-count-mob');
+  const mob = document.getElementById('crystal-count-mob');
   if (mob) mob.textContent = ct;
   expandedIds.clear();
   editingId = null;
@@ -414,17 +357,17 @@ function applyFilters() {
 
 // ===== RENDER LIST =====
 function renderList() {
-  var list = document.getElementById('crystal-list');
+  const list = document.getElementById('crystal-list');
   if (!filteredCrystals.length) { list.innerHTML = '<div class="no-results">該当なし</div>'; return; }
   list.innerHTML = filteredCrystals.map(renderRow).join('');
 }
 
 function fmtRowBairitu(c) {
-  var parts = [];
+  const parts = [];
   (c.effects || []).forEach(function(e) {
     if (e.bairitu_init == null && e.bairitu == null) return;
-    var pfx = e.calc_type === 1 ? '+' : '×';
-    var mn = e.bairitu_init, mx = e.bairitu;
+    const pfx = e.calc_type === 1 ? '+' : '×';
+    const mn = e.bairitu_init, mx = e.bairitu;
     if (mn != null && mx != null && mn !== mx) parts.push(pfx + fmt(mn) + '~' + fmt(mx));
     else parts.push(pfx + fmt(mn != null ? mn : mx));
   });
@@ -432,14 +375,14 @@ function fmtRowBairitu(c) {
 }
 
 function renderRow(c) {
-  var elem = crystalElement(c), weap = crystalWeapon(c), cond = crystalCondition(c);
-  var rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
-  var eb = elem ? '<span class="badge elem-' + elem + '">' + (ELEMENT[elem] || elem) + '</span>' : '';
-  var wb = weap ? '<span class="badge weapon">' + (WEAPON[weap] || weap) + '</span>' : '';
-  var bt = (c.effects || []).reduce(function(acc, e) { return acc.concat(e.bunrui || []); }, []).slice(0, 2).map(function(b) {
-    return '<span class="badge bunrui-sm">' + (BUNRUI[b] || b) + '</span>';
+  const elem = crystalElement(c), weap = crystalWeapon(c), cond = crystalCondition(c);
+  const rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
+  const eb = elem ? '<span class="badge elem-' + elem + '">' + (ELEMENT[elem] || elem) + '</span>' : '';
+  const wb = weap ? '<span class="badge weapon">' + (WEAPON[weap] || weap) + '</span>' : '';
+  const bt = (c.effects || []).reduce(function(acc, e) { return acc.concat(e.bunrui || []); }, []).slice(0, 2).map(function(b) {
+    return '<span class="badge bunrui-sm">' + (BUNRUI_SHORT[b] || b) + '</span>';
   }).join('');
-  var bc = cond ? '<span class="badge bunrui-sm">' + (CONDITION[cond] || cond) + '</span>' : '';
+  const bc = cond ? '<span class="badge bunrui-sm">' + (CONDITION[cond] || cond) + '</span>' : '';
   return '<div class="crystal-row" id="row-' + c.id + '">' +
     '<div class="crystal-row-hd" onclick="toggleExpand(' + c.id + ')">' +
       '<div class="row-badges">' + rb + eb + wb + '</div>' +
@@ -455,8 +398,8 @@ function renderRow(c) {
 // ===== EXPAND / COLLAPSE =====
 function toggleExpand(id) {
   if (editingId === id) return;
-  var row  = document.getElementById('row-' + id);
-  var body = document.getElementById('body-' + id);
+  const row  = document.getElementById('row-' + id);
+  const body = document.getElementById('body-' + id);
   if (!row || !body) return;
 
   if (expandedIds.has(id)) {
@@ -466,21 +409,21 @@ function toggleExpand(id) {
   } else {
     expandedIds.add(id);
     row.classList.add('expanded');
-    var c = allCrystals.find(function(x) { return x.id === id; });
+    const c = allCrystals.find(function(x) { return x.id === id; });
     if (c) body.innerHTML = renderDetailBody(c);
   }
 }
 
 // ===== DETAIL BODY =====
 function renderDetailBody(c) {
-  var fields = [];
+  const fields = [];
   if (c['効果'])     fields.push(['効果',    escHtml(c['効果'])]);
   (c.effects || []).forEach(function(e) {
     if (e.bairitu_init != null || e.bairitu != null) {
-      var unit = e.calc_type === 1 ? '' : '倍';
-      var pfx  = e.calc_type === 1 ? '+' : '×';
-      var mn = e.bairitu_init, mx = e.bairitu;
-      var range;
+      const unit = e.calc_type === 1 ? '' : '倍';
+      const pfx  = e.calc_type === 1 ? '+' : '×';
+      const mn = e.bairitu_init, mx = e.bairitu;
+      let range;
       if (mn != null && mx != null && mn !== mx) {
         range = '<span class="effect-range"><span class="ct-pfx">' + pfx + '</span>' + fmt(mn) + '<span class="sep">～</span>' + fmt(mx) + '<span class="unit">' + unit + '</span></span>';
       } else {
@@ -494,30 +437,32 @@ function renderDetailBody(c) {
     //   if (hitStr) fields.push(['ヒット', '<span class="effect-range">' + escHtml(hitStr) + '</span>']);
     // }
   });
-  if (c['特殊条件']) fields.push(['特殊条件', escHtml(c['特殊条件']) + ' <span style="color:var(--text2)">のみ</span>']);
+  if (c['特殊条件']) fields.push(['特殊条件', escHtml(c['特殊条件']) + ' <span style="color:const(--text2)">のみ</span>']);
   if (c['対象'])     fields.push(['対象',    escHtml(c['対象'])]);
   if (c['上限値'])   fields.push(['上限値',  escHtml(c['上限値'])]);
   if (c['入手方法']) fields.push(['入手方法', escHtml(c['入手方法'])]);
 
-  var rows = fields.map(function(pair) {
+  const rows = fields.map(function(pair) {
     return '<div class="field-row"><div class="field-key">' + pair[0] + '</div><div class="field-val">' + pair[1] + '</div></div>';
   }).join('');
 
   return '<div class="body-left">' + rows + '</div>' +
     '<div class="body-right">' +
       '<img class="crystal-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/' + c.id + '.jpg" onerror="this.style.display=\'none\'" alt="">' +
-      '<button class="btn-edit" onclick="enterEditMode(' + c.id + ')">修改</button>' +
+      '<button class="btn-edit" onclick="enterEditMode(' + c.id + ')">修正</button>' +
     '</div>';
 }
 
 // ===== EDIT MODE =====
 function enterEditMode(id) {
-  var c = allCrystals.find(function(x) { return x.id === id; });
+  // 当前已有别的行在编辑 → 先 cancel，避免之前那行的保存/キャンセル按钮卡死
+  if (editingId !== null && editingId !== id) cancelEdit();
+  const c = allCrystals.find(function(x) { return x.id === id; });
   if (!c) return;
   editData = JSON.parse(JSON.stringify(c));
   editingId = id;
-  var row  = document.getElementById('row-' + id);
-  var body = document.getElementById('body-' + id);
+  const row  = document.getElementById('row-' + id);
+  const body = document.getElementById('body-' + id);
   if (!row || !body) return;
   row.classList.add('expanded');
   body.className = 'crystal-edit-body';
@@ -526,12 +471,12 @@ function enterEditMode(id) {
 
 function cancelEdit() {
   if (editingId === null) return;
-  var id = editingId;
+  const id = editingId;
   editingId = null;
   editData = null;
-  var row  = document.getElementById('row-' + id);
-  var body = document.getElementById('body-' + id);
-  var c    = allCrystals.find(function(x) { return x.id === id; });
+  const row  = document.getElementById('row-' + id);
+  const body = document.getElementById('body-' + id);
+  const c    = allCrystals.find(function(x) { return x.id === id; });
   if (body) {
     body.className = 'crystal-body';
     if (c) body.innerHTML = renderDetailBody(c);
@@ -542,8 +487,8 @@ function cancelEdit() {
 function _deepDiff(oval, mval) {
   if (mval && typeof mval === 'object' && !Array.isArray(mval) &&
       oval && typeof oval === 'object' && !Array.isArray(oval)) {
-    var sub = {};
-    for (var k in mval)
+    const sub = {};
+    for (const k in mval)
       if (JSON.stringify(mval[k]) !== JSON.stringify(oval[k]))
         sub[k] = _deepDiff(oval[k], mval[k]);
     return sub;
@@ -551,7 +496,7 @@ function _deepDiff(oval, mval) {
   if (Array.isArray(oval) && Array.isArray(mval) && oval.length === mval.length &&
       mval.length > 0 &&
       mval.every(function(x){return x && typeof x === 'object' && !Array.isArray(x);})) {
-    var sparse = {};
+    const sparse = {};
     mval.forEach(function(m, i) {
       if (JSON.stringify(m) !== JSON.stringify(oval[i]))
         sparse[i] = _deepDiff(oval[i], m);
@@ -561,8 +506,8 @@ function _deepDiff(oval, mval) {
   return JSON.parse(JSON.stringify(mval));
 }
 function computeDiff(original, modified) {
-  var diff = { id: modified.id, name: modified.name };
-  for (var key in modified) {
+  const diff = { id: modified.id, name: modified.name };
+  for (const key in modified) {
     if (key === 'id') continue;
     if (JSON.stringify(modified[key]) !== JSON.stringify(original[key]))
       diff[key] = _deepDiff(original[key], modified[key]);
@@ -570,15 +515,15 @@ function computeDiff(original, modified) {
   return diff;
 }
 function deepApply(target, patch) {
-  for (var k in patch) {
+  for (const k in patch) {
     if (k === 'id') continue;
-    var pv = patch[k], tv = target[k];
+    const pv = patch[k], tv = target[k];
     if (Array.isArray(tv) && pv && typeof pv === 'object' && !Array.isArray(pv) &&
         Object.keys(pv).every(function(kk){return /^\d+$/.test(kk);})) {
-      for (var idx in pv) {
-        var i = +idx;
+      for (const idx in pv) {
+        const i = +idx;
         if (i >= tv.length) continue;
-        var pvi = pv[idx];
+        const pvi = pv[idx];
         if (pvi && typeof pvi === 'object' && !Array.isArray(pvi) &&
             tv[i] && typeof tv[i] === 'object' && !Array.isArray(tv[i])) {
           deepApply(tv[i], pvi);
@@ -597,10 +542,10 @@ function deepApply(target, patch) {
 
 function saveEdit() {
   if (!editData) return;
-  var id  = editData.id;
-  var idx = allCrystals.findIndex(function(x) { return x.id === id; });
+  const id  = editData.id;
+  const idx = allCrystals.findIndex(function(x) { return x.id === id; });
   if (idx >= 0) {
-    var changed = JSON.stringify(editData) !== JSON.stringify(originalData[id]);
+    const changed = JSON.stringify(editData) !== JSON.stringify(originalData[id]);
     allCrystals[idx] = editData;
     if (changed) {
       reviseData[id] = computeDiff(originalData[id], editData);
@@ -611,40 +556,40 @@ function saveEdit() {
     }
     updateReviseBar();
   }
-  var saved = editData;
+  const saved = editData;
   editingId = null;
   editData  = null;
 
-  var row  = document.getElementById('row-' + id);
-  var body = document.getElementById('body-' + id);
+  const row  = document.getElementById('row-' + id);
+  const body = document.getElementById('body-' + id);
   if (row && idx >= 0) {
-    var c    = allCrystals[idx];
-    var elem = crystalElement(c), weap = crystalWeapon(c);
-    var rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
-    var eb = elem ? '<span class="badge elem-' + elem + '">' + (ELEMENT[elem] || elem) + '</span>' : '';
-    var wb = weap ? '<span class="badge weapon">' + (WEAPON[weap] || weap) + '</span>' : '';
-    var bt = (c.effects || []).reduce(function(acc, e) { return acc.concat(e.bunrui || []); }, []).slice(0, 2).map(function(b) { return '<span class="badge bunrui-sm">' + (BUNRUI[b] || b) + '</span>'; }).join('');
+    const c    = allCrystals[idx];
+    const elem = crystalElement(c), weap = crystalWeapon(c);
+    const rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
+    const eb = elem ? '<span class="badge elem-' + elem + '">' + (ELEMENT[elem] || elem) + '</span>' : '';
+    const wb = weap ? '<span class="badge weapon">' + (WEAPON[weap] || weap) + '</span>' : '';
+    const bt = (c.effects || []).reduce(function(acc, e) { return acc.concat(e.bunrui || []); }, []).slice(0, 2).map(function(b) { return '<span class="badge bunrui-sm">' + (BUNRUI_SHORT[b] || b) + '</span>'; }).join('');
     row.querySelector('.row-badges').innerHTML = rb + eb + wb;
     row.querySelector('.row-name').textContent = c.name;
     row.querySelector('.row-bunrui').innerHTML = bt;
-    var oldBairitu = row.querySelector('.row-bairitu');
+    const oldBairitu = row.querySelector('.row-bairitu');
     if (oldBairitu) oldBairitu.remove();
-    var newBairituHtml = fmtRowBairitu(c);
+    const newBairituHtml = fmtRowBairitu(c);
     if (newBairituHtml) {
-      var btn = row.querySelector('.expand-btn');
+      const btn = row.querySelector('.expand-btn');
       btn.insertAdjacentHTML('beforebegin', newBairituHtml);
     }
   }
   if (body) {
     body.className = 'crystal-body';
-    var c2 = idx >= 0 ? allCrystals[idx] : null;
+    const c2 = idx >= 0 ? allCrystals[idx] : null;
     if (c2) body.innerHTML = renderDetailBody(c2);
   }
   if (row) row.classList.add('expanded');
 }
 
 function editBunrui(el) {
-  var val = Number(el.value);
+  const val = Number(el.value);
   if (!editData) return;
   if (!editData.effects) editData.effects = [{}];
   if (!editData.effects[0].bunrui) editData.effects[0].bunrui = [];
@@ -655,7 +600,7 @@ function editBunrui(el) {
   }
   // bunrui=7 切换时重渲，让 ヒット計算 输入框出现/消失
   if (val === 7) {
-    var body = document.getElementById('body-' + editingId);
+    const body = document.getElementById('body-' + editingId);
     if (body) body.innerHTML = renderEditBody(editData);
   }
 }
@@ -664,24 +609,24 @@ function editBunrui(el) {
 function setCrystalHitStage(idx, val) {
   if (!editData) return;
   if (!editData.effects) editData.effects = [{}];
-  var e = editData.effects[0];
-  var arr = (Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null,null,null]).slice();
+  const e = editData.effects[0];
+  const arr = (Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null,null,null]).slice();
   while (arr.length < 3) arr.push(null);
   arr[idx] = val === '' ? null : +val;
   e.hit_per_stage = arr;
   // bairitu = max(hit_per_stage 非空值)
-  var nums = arr.filter(function(v){ return v != null && !isNaN(v); });
+  const nums = arr.filter(function(v){ return v != null && !isNaN(v); });
   if (nums.length) {
     e.bairitu = Math.max.apply(null, nums);
-    var bairituInp = document.getElementById('edit-bairitu');
+    const bairituInp = document.getElementById('edit-bairitu');
     if (bairituInp) bairituInp.value = e.bairitu;
   }
 }
 function setCrystalHitStageScaling(idx, val) {
   if (!editData) return;
   if (!editData.effects) editData.effects = [{}];
-  var e = editData.effects[0];
-  var arr = (Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [null,null,null]).slice();
+  const e = editData.effects[0];
+  const arr = (Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [null,null,null]).slice();
   while (arr.length < 3) arr.push(null);
   arr[idx] = val === '' ? null : +val;
   e.hit_per_stage_scaling = arr;
@@ -690,16 +635,16 @@ function setCrystalHitStageScaling(idx, val) {
 function setCrystalBairitu(val) {
   if (!editData) return;
   if (!editData.effects) editData.effects = [{}];
-  var e = editData.effects[0];
+  const e = editData.effects[0];
   e.bairitu = val === '' ? null : Number(val);
   if (e.bunrui && e.bunrui.indexOf(7) !== -1) {
-    var arr = (Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null,null,null]).slice();
+    const arr = (Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null,null,null]).slice();
     while (arr.length < 3) arr.push(null);
-    var v = e.bairitu;
+    const v = e.bairitu;
     arr[0] = v; arr[1] = v; arr[2] = v;
     e.hit_per_stage = arr;
-    for (var i = 0; i < 3; i++) {
-      var inp = document.getElementById('edit-hps-' + i);
+    for (const i = 0; i < 3; i++) {
+      const inp = document.getElementById('edit-hps-' + i);
       if (inp) inp.value = (v != null ? v : '');
     }
   }
@@ -716,7 +661,7 @@ function setCrystalScope(val) {
       delete e.name;
     } else if (val === 5) {
       delete e.element; delete e.type;
-      var tok = editData['特殊条件'];
+      const tok = editData['特殊条件'];
       if (tok) e.name = tok; else delete e.name;
     }
   });
@@ -751,46 +696,25 @@ function setCrystalWeapon(val) {
 }
 
 function renderEditBody(c) {
-  var e0 = (c.effects && c.effects[0]) || {};
-  var bunruiChecks = Object.keys(BUNRUI).map(function(k) {
-    var checked = (e0.bunrui && e0.bunrui.indexOf(Number(k)) !== -1) ? 'checked' : '';
-    return '<label class="bunrui-check"><input type="checkbox" value="' + k + '" ' + checked + ' onchange="editBunrui(this)"> ' + BUNRUI[k] + '</label>';
-  }).join('');
+  const e0 = (c.effects && c.effects[0]) || {};
+  const curElem = crystalElement(c), curWeap = crystalWeapon(c), curScope = crystalScope(c);
 
-  var curElem = crystalElement(c), curWeap = crystalWeapon(c);
-  var elemOpts = Object.keys(ELEMENT).map(function(k) {
-    return '<option value="' + k + '"' + (curElem == k ? ' selected' : '') + '>' + ELEMENT[k] + '</option>';
-  }).join('');
-  var weapOpts = '<option value="0"' + (curWeap == 0 ? ' selected' : '') + '>全武器種</option>' +
-    Object.keys(WEAPON).map(function(k) {
-      return '<option value="' + k + '"' + (curWeap == k ? ' selected' : '') + '>' + WEAPON[k] + '</option>';
-    }).join('');
+  const bunruiChecks = renderEditCheckboxes(BUNRUI, e0.bunrui, 'editBunrui(this)');
+  const elemSel  = renderEditSelect(ELEMENT,                       curElem, 'setCrystalElement(this.value)');
+  const weapSel  = renderEditSelect({0:'全武器種', ...WEAPON},     curWeap, 'setCrystalWeapon(this.value)');
+  const rarSel   = renderEditSelect({6:'★6',5:'★5',4:'★4',3:'★3',2:'★2',1:'★1'}, c.rarity, 'editData.rarity=Number(this.value)');
+  const scopeSel = renderEditSelect(SCOPE,                          curScope, 'setCrystalScope(this.value)');
+  const condSel  = renderEditSelect(CONDITION,                      e0.condition||0, 'if(!editData.effects)editData.effects=[{}];editData.effects[0].condition=+this.value');
+  const ctSel    = renderEditSelect({0:'×', 1:'+'},                 e0.calc_type, 'if(!editData.effects)editData.effects=[{}];editData.effects[0].calc_type=+this.value');
 
-  var rarOpts = [1,2,3,4,5,6].map(function(v) {
-    return '<option value="' + v + '"' + (c.rarity == v ? ' selected' : '') + '>★' + v + '</option>';
-  }).join('');
-
-  var curScope = crystalScope(c);
-  var scopeOpts = Object.keys(SCOPE).map(function(k) {
-    return '<option value="' + k + '"' + (curScope == k ? ' selected' : '') + '>' + SCOPE[k] + '</option>';
-  }).join('');
-
-  var ctSel =
-    '<select class="edit-select" onchange="if(!editData.effects)editData.effects=[{}];editData.effects[0].calc_type=+this.value">' +
-      '<option value="0"' + (e0.calc_type === 0 ? ' selected' : '') + '>×</option>' +
-      '<option value="1"' + (e0.calc_type === 1 ? ' selected' : '') + '>+</option>' +
-    '</select>';
-  var condOpts = Object.keys(CONDITION).map(function(k) {
-    return '<option value="' + k + '"' + ((e0.condition||0) == k ? ' selected' : '') + '>' + CONDITION[k] + '</option>';
-  }).join('');
   // bunrui=7（ヒット数）时显示 hit_type / hit_per_stage[3] / hit_per_stage_scaling[3] 编辑控件
-  var hitEditHtml = '';
+  let hitEditHtml = '';
   if (e0.bunrui && e0.bunrui.indexOf(7) !== -1) {
-    var hps  = Array.isArray(e0.hit_per_stage) ? e0.hit_per_stage : [null,null,null];
-    var hpss = Array.isArray(e0.hit_per_stage_scaling) ? e0.hit_per_stage_scaling : [null,null,null];
+    const hps  = Array.isArray(e0.hit_per_stage) ? e0.hit_per_stage : [null,null,null];
+    const hpss = Array.isArray(e0.hit_per_stage_scaling) ? e0.hit_per_stage_scaling : [null,null,null];
     while (hps.length < 3)  hps.push(null);
     while (hpss.length < 3) hpss.push(null);
-    var ht = e0.hit_type != null ? e0.hit_type : 0;
+    const ht = e0.hit_type != null ? e0.hit_type : 0;
     function _stageIn(i) {
       return '<div><div class="field-label">' + (i+1) + '撃</div>' +
         '<input id="edit-hps-' + i + '" type="number" step="any" class="edit-input" style="width:60px;text-align:right" value="' + (hps[i]!=null?hps[i]:'') + '" oninput="setCrystalHitStage(' + i + ',this.value)"></div>';
@@ -799,12 +723,11 @@ function renderEditBody(c) {
       return '<div><div class="field-label">' + (i+1) + '撃+</div>' +
         '<input type="number" step="any" class="edit-input" style="width:60px;text-align:right" value="' + (hpss[i]!=null?hpss[i]:'') + '" oninput="setCrystalHitStageScaling(' + i + ',this.value)"></div>';
     }
-    var htSel = '<select class="edit-select" onchange="if(!editData.effects)editData.effects=[{}];editData.effects[0].hit_type=+this.value">' +
-      '<option value="0"' + (ht===0?' selected':'') + '>0 減衰なし加算</option>' +
-      '<option value="1"' + (ht===1?' selected':'') + '>1 ダメージ維持加算</option>' +
-      '<option value="2"' + (ht===2?' selected':'') + '>2 乗算</option>' +
-      '<option value="3"' + (ht===3?' selected':'') + '>3 設定値</option>' +
-    '</select>';
+    const htSel = renderEditSelect(
+      {0:'0 減衰なし加算', 1:'1 ダメージ維持加算', 2:'2 乗算', 3:'3 設定値'},
+      ht,
+      'if(!editData.effects)editData.effects=[{}];editData.effects[0].hit_type=+this.value'
+    );
     hitEditHtml = '<div class="field-label" style="margin-top:8px;margin-bottom:4px;">ヒット計算 <span style="color:var(--text2);font-weight:400">(bunrui=7)</span></div>' +
       '<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end;">' +
         '<div><div class="field-label">hit_type</div>' + htSel + '</div>' +
@@ -819,12 +742,7 @@ function renderEditBody(c) {
     '</div>' +
     '<div class="edit-ro" style="font-size:13px;color:var(--text);padding:3px 0 8px;">' + escHtml(c.name) + '</div>' +
     '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;">' +
-      '<select class="edit-select" onchange="editData.rarity=Number(this.value)">' + rarOpts + '</select>' +
-      '<select class="edit-select" onchange="setCrystalScope(this.value)">' + scopeOpts + '</select>' +
-      '<select class="edit-select" onchange="setCrystalElement(this.value)">' + elemOpts + '</select>' +
-      '<select class="edit-select" onchange="setCrystalWeapon(this.value)">' + weapOpts + '</select>' +
-      '<select class="edit-select" onchange="if(!editData.effects)editData.effects=[{}];editData.effects[0].condition=+this.value">' + condOpts + '</select>' +
-      ctSel +
+      rarSel + scopeSel + elemSel + weapSel + condSel + ctSel +
       '<input type="number" step="any" class="edit-input" style="width:90px;text-align:right" value="' + (e0.bairitu_init != null ? e0.bairitu_init : '') + '" oninput="if(!editData.effects)editData.effects=[{}];editData.effects[0].bairitu_init=this.value===\'\'?null:Number(this.value)">' +
       '<span style="color:var(--text2);flex-shrink:0;">～</span>' +
       '<input id="edit-bairitu" type="number" step="any" class="edit-input" style="width:90px;text-align:right" value="' + (e0.bairitu != null ? e0.bairitu : '') + '" oninput="setCrystalBairitu(this.value)">' +
@@ -867,7 +785,7 @@ async function saveRevise() {
 function fmt(n) {
   if (n == null) return '-';
   if (typeof n === 'number') {
-    var a = Math.abs(n);
+    const a = Math.abs(n);
     if (a >= 100000000) return (Math.round(n / 100000000 * 10) / 10) + '億';
     if (a >= 10000)     return (Math.round(n / 10000 * 10) / 10)     + '万';
     return n.toLocaleString('ja-JP');
@@ -879,13 +797,13 @@ function _fmtNumSimple(b) {
 }
 // 与 characters.html / soul.html 的 fmtHitStages 等价：渲染 bunrui=7 的 hit_per_stage(+_scaling)
 function fmtHitStages(e) {
-  var hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [];
-  var sc  = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [0,0,0];
+  const hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [];
+  const sc  = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [0,0,0];
   if (!hps.length) return '';
-  var ht = e.hit_type != null ? e.hit_type : 0;
-  var op = (ht === 2) ? '×' : (ht === 3) ? '=' : '+';
+  const ht = e.hit_type != null ? e.hit_type : 0;
+  const op = (ht === 2) ? '×' : (ht === 3) ? '=' : '+';
   function stageStr(v, s) { return op + _fmtNumSimple(v) + (s ? '(+' + _fmtNumSimple(s) + '/熟度)' : ''); }
-  var s0 = sc[0]||0, s1 = sc[1]||0, s2 = sc[2]||0;
+  const s0 = sc[0]||0, s1 = sc[1]||0, s2 = sc[2]||0;
   if (hps.length === 3 && hps[0] !== 0 && hps[0] === hps[1] && hps[1] === hps[2] && s0 === s1 && s1 === s2) {
     return stageStr(hps[0], s0);
   }

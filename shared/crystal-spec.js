@@ -1,13 +1,13 @@
 // ===== CRYSTAL SPEC (shared) =====
 (function (root) {
   function _crystalElement(c) {
-    var e = (c.effects || []).find(function (e) {
+    const e = (c.effects || []).find(function (e) {
       return (e.scope === 2 || e.scope === 3) && e.element != null;
     });
     return e ? e.element : 0;
   }
   function _crystalWeapon(c) {
-    var e = (c.effects || []).find(function (e) {
+    const e = (c.effects || []).find(function (e) {
       return (e.scope === 2 || e.scope === 3) && e.type != null;
     });
     return e ? e.type : 0;
@@ -25,7 +25,7 @@
       scope:     { extract: _crystalScope },
       bunrui: {
         match: function (c, set) {
-          var arr = Array.from(set);
+          const arr = Array.from(set);
           return arr.some(function (v) {
             return (c.effects || []).some(function (e) {
               return (e.bunrui || []).indexOf(v) >= 0;
@@ -35,7 +35,7 @@
       },
       condition: {
         match: function (c, set) {
-          var arr = Array.from(set);
+          const arr = Array.from(set);
           return arr.some(function (v) {
             return (c.effects || []).some(function (e) { return e.condition === v; });
           });

@@ -172,11 +172,16 @@ _SCOPE_BRACKET_RE = re.compile(
     r'[（(](.+?)のみ[）)]'   # （〇〇のみ） or (〇〇のみ)
 )
 
+# 「装備セット全体」/「セット全体」等关键词 → 单段 effect 强制 scope=1（覆盖 element/weapon 限制）
+_SET_WHOLE_RE = re.compile(r'(?:装備)?セット全[体員]')
+
+
 def detect_scope(dc, effect_text):
     """Determine scope and restriction metadata.
 
     Returns (scope, element_val, type_val, char_name):
       scope=0: no restriction
+      scope=1: 装備セット全体（即在 parse_effects 里按段判定后覆盖）
       scope=3: element or weapon restriction → element_val (int) or type_val (int or [int,...])
       scope=5: character name restriction → char_name (str)
     """
@@ -266,7 +271,7 @@ def parse_effects(dc, effect_text):
     if not effect_text:
         return []
 
-    scope, elem, type_val, char_name = detect_scope(dc, effect_text)
+    base_scope, base_elem, base_type, base_name = detect_scope(dc, effect_text)
 
     segments = [s.strip() for s in effect_text.split(' & ') if s.strip()]
     if not segments:
@@ -274,6 +279,18 @@ def parse_effects(dc, effect_text):
 
     effects = []
     for seg in segments:
+        # 「装備セット全体」keyword → 该段强制 scope=1，覆盖 base 的 element/weapon 限制
+        if _SET_WHOLE_RE.search(seg):
+            scope     = 1
+            elem      = None
+            type_val  = None
+            char_name = None
+        else:
+            scope     = base_scope
+            elem      = base_elem
+            type_val  = base_type
+            char_name = base_name
+
         condition          = detect_condition(seg)
         bairitu, calc_type = extract_bairitu(seg)
         bunrui_list        = match_bunrui_in_seg(seg)

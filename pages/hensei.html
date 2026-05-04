@@ -371,6 +371,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 <body>
 <div id="page-wrap">
 <script src="../nav.js"></script>
+<script src="../shared/constants.js"></script>
 <script src="../shared/filter-core.js"></script>
 <script src="../shared/chara-spec.js"></script>
 <script src="../shared/soul-spec.js"></script>
@@ -461,18 +462,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
 </div>
 
 <script>
-const ELEM     = {1:'火',2:'水',3:'風',4:'光',5:'闇',6:'無'};
-const ELEM_CLR = {1:'#ff5533',2:'#3388ff',3:'#44cc66',4:'#ffcc00',5:'#aa55ff',6:'#888899'};
-const WEAPON   = {1:'長剣',2:'大剣',3:'太刀',4:'杖棒',5:'弓矢',6:'連弩',7:'戦斧',8:'騎槍',9:'投擲',10:'拳闘',11:'魔典',12:'大鎌'};
-const RARITY   = {1:'A',2:'AA',3:'S',4:'SS'};
-const BUNRUI   = {
-  1:'攻撃力',2:'ブレイク力',3:'BD攻撃力',4:'スピード',5:'攻撃モーション',
-  6:'BDゲージ',7:'ヒット数',8:'攻撃全体化',9:'状態異常回避',10:'HP',
-  11:'HP回復',12:'防御力',13:'被ダメ軽減',14:'サファイア',15:'ルビー',
-  16:'その他',17:'ダメ上限',18:'ゲージ上限',19:'結晶枠',20:'EXP',21:'BDヒット数'
-};
-const BUNRUI_S = {1:'攻',2:'BK',3:'BD攻',4:'転',5:'速',6:'BD値',7:'hit',8:'全体',9:'異常',10:'HP',11:'回復',12:'防',13:'軽',14:'蓝',15:'紅',16:'他',17:'限',18:'BD上',19:'枠',20:'EXP',21:'BDhit'};
-const COND_LBL = {1:'浑身',2:'背水',3:'破損',4:'BK時'};
+// ELEMENT / ELEM_COLOR / WEAPON / RARITY / BUNRUI / BUNRUI_SHORT / CONDITION /
+// BD_SPECIAL 来自 shared/constants.js
 
 let allCharas=[], allSouls=[], allBGs=[], allCrystals=[];
 let allGuildTitles=[], allGuildEmblems=[];
@@ -681,7 +672,7 @@ function fmtVal(ef){
 }
 function fmtScopeTag(ef){
   if(ef.scope===5){const nm=ef.name?esc(ef.name).slice(0,12):'限定';return`<span class="tag-scope tag-lim">${nm}限定</span>`;}
-  const elStr=(ef.element!=null?[].concat(ef.element):[]).map(e=>ELEM[e]||e).join('/');
+  const elStr=(ef.element!=null?[].concat(ef.element):[]).map(e=>ELEMENT[e]||e).join('/');
   const tyStr=(ef.type!=null?[].concat(ef.type):[]).map(t=>WEAPON[t]||t).join('/');
   const cond=[elStr,tyStr].filter(Boolean).join(' ');
   const lbl={0:'自身',1:'全体',2:'全体',3:'自身',4:'全体'};
@@ -689,8 +680,8 @@ function fmtScopeTag(ef){
   return txt?`<span class="tag-scope">${esc(txt)}</span>`:'';
 }
 function renderEfRow(ef){
-  const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${esc(BUNRUI[b]||b)}</span>`).join('');
-  const cond=COND_LBL[ef.condition]?`<span class="tag-cond">${COND_LBL[ef.condition]}</span>`:'';
+  const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${esc(BUNRUI_SHORT[b]||b)}</span>`).join('');
+  const cond=ef.condition?`<span class="tag-cond">${CONDITION[ef.condition]}</span>`:'';
   return`<div class="eftags">${btags}<span class="tag-val">${fmtVal(ef)}</span>${fmtScopeTag(ef)}${cond}</div>`;
 }
 function _resolveCharaSkills(c){
@@ -733,7 +724,7 @@ function renderCrystalEffList(ids){
   if(!sel.length)return'';
   return'<div class="cr-eff-list">'+sel.map(cr=>{
     const tags=(cr.effects||[]).map(ef=>{
-      const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${esc(BUNRUI[b]||b)}</span>`).join('');
+      const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${esc(BUNRUI_SHORT[b]||b)}</span>`).join('');
       const val=ef.calc_type===1?'+'+fmtLarge(ef.bairitu):'x'+ef.bairitu;
       return btags+`<span class="tag-val">${val}</span>`;
     }).join(' ');
@@ -1046,8 +1037,28 @@ function _selfAppliesChara(c, e) {
   return false;
 }
 
+// 元素 / 武器种匹配。useElementBuff=true 时（仅魔剣技能）拿 tgtChara.element_buff[]
+// 做集合包含判定；其它来源（crystal / bladegraph / soul / guild）依然用单值 element。
+function _matchElemType(e, tgtChara, useElementBuff) {
+  const elem = e.element;
+  let elemOK;
+  if (elem == null) {
+    elemOK = true;
+  } else {
+    const reqElems = Array.isArray(elem) ? elem : [elem];
+    const tgtElems = (useElementBuff && Array.isArray(tgtChara.element_buff) && tgtChara.element_buff.length)
+      ? tgtChara.element_buff
+      : [tgtChara.element];
+    elemOK = reqElems.some(r => tgtElems.indexOf(r) >= 0);
+  }
+  const tp = e.type;
+  const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.type) >= 0 : tp === tgtChara.type);
+  return elemOK && typeOK;
+}
+
 // Cross-slot: source (srcChara) buffs target (tgtChara). Returns true if effect e applies.
-function _buffApplies(srcChara, tgtChara, e) {
+// useElementBuff=true → 魔剣技能特例，element 走 tgtChara.element_buff[]
+function _buffApplies(srcChara, tgtChara, e, useElementBuff = false) {
   if (!tgtChara) return false;
   const sc = e.scope;
   if (sc == null || sc === 1) return true; // 全体
@@ -1056,18 +1067,10 @@ function _buffApplies(srcChara, tgtChara, e) {
   }
   if (sc === 3) {
     if (!srcChara || srcChara.id !== tgtChara.id) return false;
-    const elem = e.element;
-    const elemOK = elem == null || (Array.isArray(elem) ? elem.indexOf(tgtChara.element) >= 0 : elem === tgtChara.element);
-    const tp = e.type;
-    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.type) >= 0 : tp === tgtChara.type);
-    return elemOK && typeOK;
+    return _matchElemType(e, tgtChara, useElementBuff);
   }
   if (sc === 2 || sc === 4) {
-    const elem = e.element;
-    const elemOK = elem == null || (Array.isArray(elem) ? elem.indexOf(tgtChara.element) >= 0 : elem === tgtChara.element);
-    const tp = e.type;
-    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.type) >= 0 : tp === tgtChara.type);
-    return elemOK && typeOK;
+    return _matchElemType(e, tgtChara, useElementBuff);
   }
   if (sc === 5) {
     const nm = e.name;
@@ -1101,8 +1104,8 @@ function soulLvCap(rarity, awakening) {
 }
 
 // HP-based condition factor (multiplier on bairitu)
-//   1=浑身 → linear hp%/100  (0 at 0% HP → 1 at 100% HP)
-//   2=背水 → linear (100-hp%)/100  (1 at 0% HP → 0 at 100% HP)
+//   1=逆窮鼠 → linear hp%/100  (0 at 0% HP → 1 at 100% HP)
+//   2=窮鼠   → linear (100-hp%)/100  (1 at 0% HP → 0 at 100% HP)
 //   3=破損 → binary  (1 if hp%<50 else 0)
 //   0/null → 1
 // Applied via:
@@ -1206,11 +1209,12 @@ function computeStats(chara, tr, slotIdx) {
   }
   // Apply a list of effects with srcChara/srcHp/srcJk context: filter by buff scope,
   // then run additive pass, then multiplicative pass.
-  // Condition (浑身/背水/破損) scales bairitu inside _applyEf, no longer a gate.
+  // Condition (逆窮鼠/窮鼠/破損) scales bairitu inside _applyEf, no longer a gate.
   // sourceMult: 来源倍率（如魂的 lv 倍率），同时作用于 stat / hit。
-  function _applyList(effects, srcChara, srcHp, srcJk, sourceMult = 1) {
+  // useElementBuff: 仅魔剣技能 → element 走 tgt.element_buff[]；其他来源传 false。
+  function _applyList(effects, srcChara, srcHp, srcJk, sourceMult = 1, useElementBuff = false) {
     if (!effects || !effects.length) return;
-    const filtered = effects.filter(e => _buffApplies(srcChara, tgt, e));
+    const filtered = effects.filter(e => _buffApplies(srcChara, tgt, e, useElementBuff));
     if (!filtered.length) return;
     for (const e of filtered) _applyEf(e, srcJk, srcHp, 'add', sourceMult);
     for (const e of filtered) _applyEf(e, srcJk, srcHp, 'mul', sourceMult);
@@ -1240,12 +1244,12 @@ function computeStats(chara, tr, slotIdx) {
     });
     _applyList(crEffs, srcChara, srcHp, srcJk);
 
-    // Chara skills (current state, with revise)
+    // Chara skills (current state, with revise) — element 匹配走 tgt.element_buff[]
     if (srcChara) {
       const skills = _resolveCharaSkills(srcChara);
       const charaEffs = [];
       skills.forEach(sk => (sk.effects || []).forEach(e => charaEffs.push(e)));
-      _applyList(charaEffs, srcChara, srcHp, srcJk);
+      _applyList(charaEffs, srcChara, srcHp, srcJk, 1, true);
     }
   }
   for (let si = 0; si < teamSize; si++) {
@@ -1343,7 +1347,7 @@ function renderEnemyBar() {
   const isGuild = (enemy.mode === 'guildbattle' || enemy.mode === 'guildbattle_special');
   // 1. 元素
   const elemBtns = [1,2,3,4,5,6].map(e =>
-    `<button class="eb-btn elem-${e}${enemy.element===e?' on':''}" onclick="setEnemyElem(${e})">${ELEM[e]}</button>`
+    `<button class="eb-btn elem-${e}${enemy.element===e?' on':''}" onclick="setEnemyElem(${e})">${ELEMENT[e]}</button>`
   ).join('');
   // 2. BK状態（单按钮 toggle：あり/なし）
   const bkLabel = enemy.bk ? 'あり' : 'なし';
@@ -1731,16 +1735,12 @@ function buildEMSidebar(type){
   let h=`<input type="text" class="modal-search" id="em-search" placeholder="名前で検索..." value="${esc(f.q)}" oninput="mf['${type}'].q=this.value;applyEM()">`;
 
   if(type==='chara'){
-    h+=fsec('レア度','rarity',[[4,'SS'],[3,'S'],[2,'AA'],[1,'A']],f.rarity);
-    h+=fsec('属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
-    h+=fsec('武器種','type',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.type);
+    h+=fsec('レア度','rarity',[4,3,2,1].map(k=>[k,RARITY[k]]),f.rarity);
+    h+=fsec('属性','element',[1,2,3,4,5,6].map(k=>[k,ELEMENT[k],k===6?'':'elem-'+k]),f.element);
+    h+=fsec('武器種','type',Object.keys(WEAPON).map(k=>[+k,WEAPON[k]]),f.type);
     h+=fsec('状態','state',[['極弐','極弐'],['改造','改造'],['通常','通常']],f.state);
     h+=`<div class="f-section"><div class="f-label">BD特殊効果</div><div class="f-toggles">`
-      +`<button class="ftog${f.bdSpecial.has(1)?' on':''}" style="color:#60c0ff" data-fkey="bdSpecial" data-fval="1">時止め</button>`
-      +`<button class="ftog${f.bdSpecial.has(2)?' on':''}" style="color:#c060ff" data-fkey="bdSpecial" data-fval="2">麻痺</button>`
-      +`<button class="ftog${f.bdSpecial.has(3)?' on':''}" style="color:#ff9a40" data-fkey="bdSpecial" data-fval="3">強制BK</button>`
-      +`<button class="ftog${f.bdSpecial.has(5)?' on':''}" style="color:#50d070" data-fkey="bdSpecial" data-fval="5">弱体解除</button>`
-      +`<button class="ftog${f.bdSpecial.has(6)?' on':''}" style="color:#ffc840" data-fkey="bdSpecial" data-fval="6">高倍率バフ</button>`
+      +Object.keys(BD_SPECIAL).map(k=>`<button class="ftog${f.bdSpecial.has(+k)?' on':''}" style="color:${BD_SPECIAL_COLOR[k]}" data-fkey="bdSpecial" data-fval="${k}">${BD_SPECIAL[k]}</button>`).join('')
       +`</div></div>`;
     h+=fsec('好感稀有度','omoideRarity',[[5,'限定SS'],[4,'SS'],[3,'S'],[2,'AA'],[1,'A']],f.omoideRarity);
     h+=`<div class="f-sort-row"><select id="em-sort" onchange="mf['chara'].sort=this.value;applyEM()">
@@ -1755,20 +1755,20 @@ function buildEMSidebar(type){
       <option value="__bdhit_max"${f.sort==='__bdhit_max'?' selected':''}>BDヒット</option>
     </select><button class="f-sort-dir" id="em-sort-dir" onclick="mf['chara'].desc=!mf['chara'].desc;this.textContent=mf['chara'].desc?'↓':'↑';applyEM()">${f.desc?'↓':'↑'}</button></div>`;
   } else if(type==='soul'){
-    h+=fsec('レア度','rarity',[[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
-    h+=fsec('得意属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
-    h+=fsec('得意武器','type',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.type);
+    h+=fsec('レア度','rarity',[5,4,3,2,1].map(k=>[k,'★'+k]),f.rarity);
+    h+=fsec('得意属性','element',[1,2,3,4,5,6].map(k=>[k,ELEMENT[k],k===6?'':'elem-'+k]),f.element);
+    h+=fsec('得意武器','type',Object.keys(WEAPON).map(k=>[+k,WEAPON[k]]),f.type);
   } else if(type==='bg'){
-    h+=fsec('レア度','rarity',[[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
-    h+=fsec('属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
-    h+=fsec('武器','weapon',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.weapon);
+    h+=fsec('レア度','rarity',[5,4,3,2,1].map(k=>[k,'★'+k]),f.rarity);
+    h+=fsec('属性','element',[1,2,3,4,5,6].map(k=>[k,ELEMENT[k],k===6?'':'elem-'+k]),f.element);
+    h+=fsec('武器','weapon',Object.keys(WEAPON).map(k=>[+k,WEAPON[k]]),f.weapon);
     h+=bunruiSec(f.bunrui);
   } else if(type==='crystal'){
-    h+=fsec('レア度','rarity',[[6,'★6'],[5,'★5'],[4,'★4'],[3,'★3'],[2,'★2'],[1,'★1']],f.rarity);
-    h+=fsec('武器','weapon',[[1,'長剣'],[2,'大剣'],[3,'太刀'],[4,'杖棒'],[5,'弓矢'],[6,'連弩'],[7,'戦斧'],[8,'騎槍'],[9,'投擲'],[10,'拳闘'],[11,'魔典'],[12,'大鎌']],f.weapon);
-    h+=fsec('属性','element',[[1,'火','elem-1'],[2,'水','elem-2'],[3,'風','elem-3'],[4,'光','elem-4'],[5,'闇','elem-5'],[6,'無','']],f.element);
+    h+=fsec('レア度','rarity',[6,5,4,3,2,1].map(k=>[k,'★'+k]),f.rarity);
+    h+=fsec('武器','weapon',Object.keys(WEAPON).map(k=>[+k,WEAPON[k]]),f.weapon);
+    h+=fsec('属性','element',[1,2,3,4,5,6].map(k=>[k,ELEMENT[k],k===6?'':'elem-'+k]),f.element);
     h+=bunruiSec(f.bunrui);
-    h+=fsec('条件（発動）','condition',[[1,'浑身'],[2,'背水'],[3,'破損']],f.condition);
+    h+=fsec('条件（発動）','condition',[1,2,3,4].map(k=>[k,CONDITION[k]]),f.condition);
     h+=fsec('条件（対象）','scope',[[0,'自身'],[1,'全体'],[2,'限定']],f.scope);
   }
 
@@ -1785,7 +1785,7 @@ function fsec(label,key,opts,activeSet){
   return`<div class="f-section"><div class="f-label">${label}</div><div class="f-toggles">${btns}</div></div>`;
 }
 function bunruiSec(activeSet){
-  const btns=Object.entries(BUNRUI).map(([id,name])=>`<button class="ftog${activeSet.has(+id)?' on':''}" data-fkey="bunrui" data-fval="${id}">${name}</button>`).join('');
+  const btns=Object.entries(BUNRUI_SHORT).map(([id,name])=>`<button class="ftog${activeSet.has(+id)?' on':''}" data-fkey="bunrui" data-fval="${id}">${name}</button>`).join('');
   return`<div class="f-section"><div class="f-label">効果</div><div class="f-toggles">${btns}</div></div>`;
 }
 
@@ -1911,7 +1911,7 @@ function renderEMList(items){
       return`<div class="em-item${cur?' active':''}" onclick="selectEM(${c.id})">
         <img class="em-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
         <span class="em-name">${esc(c.name)}</span>
-        <span class="badge elem-${c.element}">${ELEM[c.element]||''}</span>
+        <span class="badge elem-${c.element}">${ELEMENT[c.element]||''}</span>
         <span class="badge weapon">${WEAPON[c.type]||''}</span>
         ${sortBadge}
         <div class="state-dots">${dots}</div>
@@ -1921,7 +1921,7 @@ function renderEMList(items){
   } else if(type==='soul'){
     h+=items.map(s=>{
       const cur=team[emSlot]?.soul===s.id;
-      const eb=(s.element||[]).map(e=>`<span class="badge elem-${e}">${ELEM[e]||''}</span>`).join('');
+      const eb=(s.element||[]).map(e=>`<span class="badge elem-${e}">${ELEMENT[e]||''}</span>`).join('');
       return`<div class="em-item${cur?' active':''}" onclick="selectEM(${s.id})">
         <img class="em-icon soul" src="https://img.altema.jp/bxb/soul/icon/${s.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
         <span class="em-name">${esc(s.name)}</span>
@@ -2068,7 +2068,7 @@ function renderDMSoul(s){
 // ===== BG DETAIL =====
 function _bgScopeLabel(e){
   if(e.scope===3){
-    if(e.element!=null)return (ELEM[e.element]||e.element)+'属性のみ';
+    if(e.element!=null)return (ELEMENT[e.element]||e.element)+'属性のみ';
     if(e.type!=null){const t=[].concat(e.type);return t.map(v=>WEAPON[v]||v).join('/')+'のみ';}
   }
   if(e.scope===5)return (e.name||'')+'のみ';
@@ -2076,8 +2076,8 @@ function _bgScopeLabel(e){
 }
 function renderDMBg(b){
   const effRows=(b.effects||[]).map(ef=>{
-    const btags=(ef.bunrui||[]).map(bn=>`<span class="bunrui-tag">${BUNRUI[bn]||bn}</span>`).join('');
-    const cond=ef.condition?`<span class="cond-tag cond-${ef.condition}">${COND_LBL[ef.condition]||''}</span>`:'';
+    const btags=(ef.bunrui||[]).map(bn=>`<span class="bunrui-tag">${BUNRUI_SHORT[bn]||bn}</span>`).join('');
+    const cond=ef.condition?`<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition]||''}</span>`:'';
     const sl=_bgScopeLabel(ef);
     const scope=sl?`<span class="tag-scope tag-lim">${esc(sl)}</span>`:'';
     const val=ef.bairitu!=null?`<span class="tag-val">${ef.calc_type===1?'+':'×'}${fmtLarge(ef.bairitu)}</span>`:'';
@@ -2113,11 +2113,11 @@ function renderDMCrystal(c){
       } else {
         range=pfx+fmtLarge(mn??mx);
       }
-      const btags=(ef.bunrui||[]).map(b=>`<span class="bunrui-tag">${BUNRUI[b]||b}</span>`).join('');
+      const btags=(ef.bunrui||[]).map(b=>`<span class="bunrui-tag">${BUNRUI_SHORT[b]||b}</span>`).join('');
       const scopeTag=fmtScopeTag(ef);
       fields.push(['効果量',`<div class="bgdm-eff-line">${btags}${scopeTag}<span class="tag-val">${range}</span></div>`]);
     }
-    if(ef.condition)fields.push(['発動条件',esc(COND_LBL[ef.condition]||String(ef.condition))]);
+    if(ef.condition)fields.push(['発動条件',esc(CONDITION[ef.condition]||String(ef.condition))]);
   });
   if(c['特殊条件'])fields.push(['特殊条件',esc(c['特殊条件'])]);
   if(c['対象'])fields.push(['対象',esc(c['対象'])]);
@@ -2136,8 +2136,8 @@ function renderDMCrystal(c){
 
 function renderDMChara(c){
   const rLbl=RARITY[c.rarity]||String(c.rarity);
-  const eClr=ELEM_CLR[c.element]||'#888';
-  const eName=ELEM[c.element]||'-';
+  const eClr=ELEM_COLOR[c.element]||'#888';
+  const eName=ELEMENT[c.element]||'-';
   const wName=WEAPON[c.type]||'-';
   const stateKeys=Object.keys(c.states||{});
   const tabs=['極弐','改造','通常'].filter(s=>stateKeys.includes(s)).map(s=>
@@ -2146,7 +2146,6 @@ function renderDMChara(c){
   const contents=['極弐','改造','通常'].filter(s=>stateKeys.includes(s)).map(s=>
     `<div class="dm-state-content" data-state="${s}">${renderDMState(c.states[s],s,c)}</div>`
   ).join('');
-  const BD_SPECIAL={1:'時止め',2:'麻痺',3:'強制ブレイク',5:'弱体解除',6:'高倍率バフ'};
   const bdSection=c.bd_skill?.name?`<div class="dm-section"><div class="dm-section-title">ブレイズドライブ</div>
     <div class="dm-bd-card"><div class="dm-bd-label">BD SKILL${c.bd_skill.cost!=null?` &nbsp; コスト ${c.bd_skill.cost}`:''}</div>
     <div class="dm-bd-name">${esc(c.bd_skill.name)}</div>
@@ -2203,16 +2202,14 @@ function renderDMState(state,stateLabel,chara){
 function dmRightTags(s){
   let tags='';
   (s.effects||[]).forEach(e=>{
-    (e.bunrui||[]).forEach(b=>tags+=`<span class="bunrui-tag">${BUNRUI_S[b]||b}</span>`);
+    (e.bunrui||[]).forEach(b=>tags+=`<span class="bunrui-tag">${BUNRUI_SHORT[b]||b}</span>`);
     if(e.scope===0)tags+=`<span class="scope-tag scope-self">自</span>`;
     else if(e.scope===1)tags+=`<span class="scope-tag scope-all">全</span>`;
     else if(e.scope===2||e.scope===3||e.scope===4){
-      const lim=e.element!=null?(ELEM[[].concat(e.element)[0]]||'限'):e.type!=null?(WEAPON[[].concat(e.type)[0]]||'限'):'限';
+      const lim=e.element!=null?(ELEMENT[[].concat(e.element)[0]]||'限'):e.type!=null?(WEAPON[[].concat(e.type)[0]]||'限'):'限';
       tags+=`<span class="scope-tag scope-lim">${lim}</span>`;
     } else if(e.scope===5)tags+=`<span class="scope-tag scope-lim">限</span>`;
-    if(e.condition===1)tags+=`<span class="cond-tag cond-1">浑身</span>`;
-    else if(e.condition===2)tags+=`<span class="cond-tag cond-2">背水</span>`;
-    else if(e.condition===3)tags+=`<span class="cond-tag cond-3">破損</span>`;
+    if(e.condition)tags+=`<span class="cond-tag cond-${e.condition}">${CONDITION[e.condition]||''}</span>`;
   });
   return`<div class="dm-skill-tags">${tags}</div>`;
 }
@@ -2278,8 +2275,8 @@ function renderSlot(i){
   const st=chara?getBestState(chara):null;
   const nCr=crystalSlotCount(chara, i);
   const usedCr=t.crystals.filter(Boolean).length;
-  const eclr=chara?(ELEM_CLR[chara.element]||'#888'):null;
-  const enam=chara?(ELEM[chara.element]||''):'';
+  const eclr=chara?(ELEM_COLOR[chara.element]||'#888'):null;
+  const enam=chara?(ELEMENT[chara.element]||''):'';
   const wnam=chara?(WEAPON[chara.type]||''):'';
 
   const hdrName=chara

@@ -24,29 +24,29 @@
   function _matchesItem(item, state, spec) {
     // search query
     if (state.q) {
-      var q = String(state.q).toLowerCase();
-      var fields = spec.searchFields || ['name'];
-      var hit = false;
-      for (var i = 0; i < fields.length; i++) {
-        var v = item[fields[i]];
+      const q = String(state.q).toLowerCase();
+      const fields = spec.searchFields || ['name'];
+      const hit = false;
+      for (let i = 0; i < fields.length; i++) {
+        const v = item[fields[i]];
         if (v != null && String(v).toLowerCase().indexOf(q) >= 0) { hit = true; break; }
       }
       if (!hit) return false;
     }
     // filter selections
-    var filters = state.filters || {};
-    var defs = spec.filters || {};
-    for (var key in defs) {
-      var sel = filters[key];
+    const filters = state.filters || {};
+    const defs = spec.filters || {};
+    for (const key in defs) {
+      const sel = filters[key];
       if (!sel || !sel.size) continue;
-      var def = defs[key];
+      const def = defs[key];
       if (typeof def.match === 'function') {
         if (!def.match(item, sel)) return false;
       } else if (def.op === 'any') {
-        var arr = def.extract(item);
+        const arr = def.extract(item);
         if (!Array.isArray(arr)) return false;
-        var any = false;
-        for (var v of sel) { if (arr.indexOf(v) >= 0) { any = true; break; } }
+        const any = false;
+        for (const v of sel) { if (arr.indexOf(v) >= 0) { any = true; break; } }
         if (!any) return false;
       } else {
         if (!sel.has(def.extract(item))) return false;
@@ -56,13 +56,13 @@
   }
 
   function applyFilters(items, state, spec) {
-    var result = items.filter(function (it) { return _matchesItem(it, state, spec); });
-    var sortKey = state.sortKey;
+    const result = items.filter(function (it) { return _matchesItem(it, state, spec); });
+    const sortKey = state.sortKey;
     if (sortKey && spec.sortFns && spec.sortFns[sortKey]) {
-      var get = spec.sortFns[sortKey];
-      var desc = state.sortDesc !== false;
+      const get = spec.sortFns[sortKey];
+      const desc = state.sortDesc !== false;
       result.sort(function (a, b) {
-        var va = get(a), vb = get(b);
+        let va = get(a), vb = get(b);
         if (va == null) va = -Infinity;
         if (vb == null) vb = -Infinity;
         return desc ? (vb - va) : (va - vb);
@@ -79,7 +79,7 @@
 
   // Clear all filter Sets in a state.filters object
   function resetFilters(filters) {
-    for (var k in filters) filters[k].clear();
+    for (const k in filters) filters[k].clear();
   }
 
   root.FilterCore = {
