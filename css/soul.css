@@ -1,0 +1,119 @@
+/* === soul.html specific === */
+
+/* ----- layout ----- */
+#layout  { display: flex; flex: 1; overflow: hidden; }
+#sidebar { width: 300px; min-width: 200px; background: var(--bg2); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+#filters { padding: 8px 10px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+#filters-body { display: flex; flex-direction: column; gap: 8px; }
+
+/* ----- sidebar controls ----- */
+.actions-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.actions-row select { flex: 1; min-width: 80px; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
+#sort-dir { flex-shrink: 0; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; cursor: pointer; }
+#sort-dir:hover { border-color: var(--accent); color: var(--accent); }
+.btn-reset { font-size: 11px; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; flex-shrink: 0; }
+.btn-reset:hover { color: var(--text); }
+#soul-count { font-size: 11px; color: var(--text2); text-align: right; }
+.mob-search-row { display: flex; align-items: center; gap: 8px; }
+.mob-search-row input { flex: 1; min-width: 0; }
+#soul-count-mob { display: none; font-size: 11px; color: var(--text2); white-space: nowrap; }
+.filter-toggle-btn { display: none; flex-shrink: 0; }  /* base style in shared.css */
+
+/* ----- mobile detail nav bar (hidden on desktop) ----- */
+#detail-mob-bar { display: none; align-items: center; justify-content: space-between; gap: 8px; position: sticky; top: 0; z-index: 10; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 8px 12px; box-shadow: 0 -100vh 0 0 var(--bg2), 0 2px 8px rgba(0,0,0,.4); }
+#detail-mob-bar button { background: var(--bg3); border: 1px solid var(--border); color: var(--text); font-size: 14px; padding: 6px 14px; border-radius: 6px; cursor: pointer; min-width: 56px; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+#detail-mob-bar button:hover { border-color: var(--accent); }
+#detail-mob-bar button:disabled { opacity: 0.3; cursor: default; }
+#detail-mob-bar .nav-label { font-size: 12px; color: var(--text2); flex: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
+
+/* ----- soul list ----- */
+#soul-list { flex: 1; overflow-y: auto; }
+#soul-list::-webkit-scrollbar { width: 4px; }
+#soul-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.soul-item { padding: 8px 10px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; gap: 7px; transition: background .1s; }
+.soul-item:hover { background: var(--bg3); }
+.soul-item.active { background: #1e2d5a; border-left: 3px solid var(--accent); }
+.star-badge { font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }
+.star-5 { background: var(--dark); color: #fff; }
+.star-4 { background: #cc6600; color: #fff; }
+.star-3 { background: var(--water); color: #fff; }
+.star-2 { background: var(--wind); color: #fff; }
+.star-1 { background: var(--none); color: #fff; }
+.soul-item .soul-name { flex: 1; font-size: 12px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.soul-icon-thumb { width: 44px; height: 28px; object-fit: cover; border-radius: 4px; flex-shrink: 0; opacity: .85; }
+
+/* ----- detail panel ----- */
+#detail { flex: 1; overflow-y: auto; padding: 0 24px 20px; }
+#detail::-webkit-scrollbar { width: 5px; }
+#detail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+#placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text2); gap: 8px; }
+
+/* ----- soul header ----- */
+.soul-header { margin-bottom: 16px; padding: 20px 0 16px; border-bottom: 1px solid var(--border); position: sticky; top: var(--sticky-bar-h, 0px); z-index: 6; background: var(--bg); }
+.soul-header-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+.soul-title { font-size: 22px; font-weight: 700; flex: 1; line-height: 1.3; }
+.soul-banner { width: 100%; height: auto; border-radius: 8px; display: block; margin-bottom: 12px; }
+.soul-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.meta-chip { display: flex; align-items: center; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 12px; }
+
+/* ----- affinity grids ----- */
+.affinity-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+.affinity-cell { display: flex; flex-direction: column; align-items: center; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 7px 4px; gap: 2px; }
+.affinity-name   { font-size: 12px; font-weight: 700; }
+.affinity-level  { font-size: 10px; font-weight: 700; }
+.affinity-effect { font-size: 11px; color: var(--text2); }
+.aff-2  { color: #44ee77; }  .aff-cell-2  { border-color: rgba(68,238,119,.35); }
+.aff-1  { color: #88ee99; }  .aff-cell-1  { border-color: rgba(136,238,153,.2); }
+.aff-0  { color: var(--text2); }
+.aff-m1 { color: #ffaa44; }  .aff-cell-m1 { border-color: rgba(255,170,68,.2); }
+.aff-m2 { color: #ff5555; }  .aff-cell-m2 { border-color: rgba(255,85,85,.35); }
+
+/* ----- skills / acquisition ----- */
+.skills-list { display: flex; flex-direction: column; gap: 6px; }
+.acq-table { display: grid; grid-template-columns: max-content 1fr; gap: 1px; background: var(--border); border-radius: 8px; overflow: hidden; }
+.acq-key { background: var(--bg3); padding: 7px 12px; color: var(--text2); font-size: 12px; }
+.acq-val { background: var(--bg3); padding: 7px 12px; font-size: 13px; font-weight: 600; }
+
+/* ----- edit mode ----- */
+.btn-edit { background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 5px 14px; font-size: 12px; cursor: pointer; flex-shrink: 0; }
+.btn-edit:hover { background: rgba(91,127,255,.1); }
+.edit-mode-active { background: var(--bg2); border: 1px solid rgba(91,127,255,.3); border-radius: 10px; padding: 14px; }
+.edit-input.title { font-size: 18px; font-weight: 700; }
+.edit-num-xs { background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; color: var(--text); padding: 2px 4px; font-size: 11px; text-align: center; width: 100%; }
+.edit-num-xs:focus { outline: none; border-color: #8aabff; }
+.edit-aff-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+.edit-aff-cell { display: flex; flex-direction: column; align-items: center; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 7px 4px; gap: 3px; }
+.edit-aff-name  { font-size: 12px; font-weight: 700; }
+.edit-aff-level { font-size: 10px; font-weight: 700; }
+/* .btn-skill-tomb base style in shared.css */
+.skill-edit-card.deleted .skill-name-edit { text-decoration: line-through; color: var(--text2); }
+
+/* ----- mobile ----- */
+@media (max-width: 768px) {
+  body { height: auto; overflow-y: auto; }
+  #page-wrap { overflow: visible; }
+  #layout { flex-direction: column; overflow: visible; flex: none; }
+  #sidebar { width: 100%; height: auto; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); overflow: visible; }
+  #soul-list { height: auto; flex: none; overflow: visible; }
+  #detail {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: var(--bg);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0;
+  }
+  button, [onclick], .ftog, .soul-item { touch-action: manipulation; }
+  #soul-detail { padding: 0 16px 14px; }
+  #detail.show-mob { display: block; }
+  #placeholder { display: none; }
+  #detail-mob-bar { display: flex; }
+  .soul-banner { display: none; }
+  .soul-header { margin-bottom: 0; padding-top: 12px; box-shadow: 0 -100vh 0 0 var(--bg); }
+  #f-type { display: grid; grid-template-columns: repeat(6, 1fr); }
+  .filter-toggle-btn { display: block; }
+  #filters-body { display: none; }
+  #soul-count-mob { display: block; }
+  #soul-count { display: none; }
+  #filters { position: sticky; top: 52px; z-index: 50; background: var(--bg2); }
+}

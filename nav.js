@@ -1,6 +1,6 @@
 (function () {
   if (document.getElementById('topbar')) return;
-  var PAGES = [
+  const PAGES = [
     { id: 'characters', href: 'characters.html', label: '魔剣' },
     { id: 'crystals',   href: 'crystals.html',   label: '結晶' },
     { id: 'bladegraph', href: 'bladegraph.html', label: '心象結晶' },
@@ -9,18 +9,18 @@
   ];
 
   // detect active page from filename
-  var path = window.location.pathname.replace(/\/$/, '');
-  var file = path.split('/').pop() || 'characters.html';
-  var activePage = file.replace(/\.html$/, '');
+  const  path = window.location.pathname.replace(/\/$/, '');
+  const  file = path.split('/').pop() || 'characters.html';
+  const  activePage = file.replace(/\.html$/, '');
 
   // build nav links
-  var links = PAGES.map(function (p) {
-    var cls = p.id === activePage ? 'nav-link active' : 'nav-link';
+  const  links = PAGES.map(function (p) {
+    const cls = p.id === activePage ? 'nav-link active' : 'nav-link';
     return '<a href="' + p.href + '" class="' + cls + '">' + p.label + '</a>';
   }).join('');
 
   // topbar HTML
-  var html =
+  const html =
     '<div id="topbar">' +
       '<h1>⚔ BxB</h1>' +
       '<nav id="page-nav">' + links + '</nav>' +
@@ -35,7 +35,7 @@
     '</div>';
 
   // inject CSS into <head>
-  var css =
+  const css =
     'html{scrollbar-gutter:stable;}' +
     '#topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:100;min-height:52px;}' +
     '#topbar h1{font-size:16px;font-weight:700;color:var(--accent);white-space:nowrap;margin:0;}' +
@@ -71,7 +71,7 @@
       /* topbar 保持 sticky（默认值）——sticky 本身就是定位元素，#page-nav 的 absolute 定位仍以 topbar 为锚 */
     '}';
 
-  var style = document.createElement('style');
+  let style = document.createElement('style');
   style.textContent = css;
   document.head.appendChild(style);
 
@@ -80,8 +80,8 @@
 
   // close menu when clicking outside nav
   document.addEventListener('click', function(e) {
-    var nav = document.getElementById('page-nav');
-    var hamburger = document.getElementById('nav-hamburger');
+    const nav = document.getElementById('page-nav');
+    const hamburger = document.getElementById('nav-hamburger');
     if (!nav || !hamburger) return;
     if (!nav.contains(e.target) && e.target !== hamburger && !hamburger.contains(e.target)) {
       nav.classList.remove('open');
@@ -91,11 +91,11 @@
 
 // shared across all pages — reads each page's own sessionReviseIds (Set of this-session edits)
 function updateReviseBar() {
-  var sr = (typeof sessionReviseIds !== 'undefined') ? sessionReviseIds : new Set();
-  var count = sr.size;
-  var bar = document.getElementById('revise-bar');
-  var btn = document.querySelector('.btn-revise-save');
-  var status = document.getElementById('revise-status');
+  const sr = (typeof sessionReviseIds !== 'undefined') ? sessionReviseIds : new Set();
+  const count = sr.size;
+  const bar = document.getElementById('revise-bar');
+  const btn = document.querySelector('.btn-revise-save');
+  const status = document.getElementById('revise-status');
   if (!bar || !btn) return;
   bar.style.display = count > 0 ? 'flex' : 'none';
   btn.textContent = count > 0 ? 'Save (' + count + ')' : 'Save';

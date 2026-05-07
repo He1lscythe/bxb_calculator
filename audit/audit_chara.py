@@ -56,7 +56,7 @@ for chara in chars:
     for state_name, state_data in chara.get('states', {}).items():
         for skill in state_data.get('skills', []):
             sk_name = skill.get('name', '')
-            effect  = skill.get('effect', '')
+            effect  = skill.get('effect_text', '')
 
             # Stored values
             stored_bunrui = normalize_field(skill.get('bunrui', []))
@@ -67,7 +67,7 @@ for chara in chars:
             stored_type   = normalize_field(stored_eff0.get('type'))
 
             # Fresh classification
-            fresh = {'name': sk_name, 'effect': effect}
+            fresh = {'name': sk_name, 'effect_text': effect}
             classify_skill_chara(fresh, table, CAT_TO_BUNRUI_SKILLLIST)
             fe    = (fresh.get('effects') or [{}])[0]
             fresh_bunrui = normalize_field(fe.get('bunrui', []))

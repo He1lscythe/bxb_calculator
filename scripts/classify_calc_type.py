@@ -66,7 +66,7 @@ def process_skills(items, get_skills_fn):
                 continue
             e0 = effects[0]
             bunrui  = e0.get('bunrui', skill.get('bunrui', []))
-            effect  = skill.get('effect', '')
+            effect  = skill.get('effect_text', '')
             bairitu = e0.get('bairitu', skill.get('bairitu', 0))
             name    = skill.get('name', '')
 

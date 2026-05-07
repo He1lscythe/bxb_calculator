@@ -23,8 +23,9 @@ _WEAPON_NAMES_PAT = '|'.join(re.escape(w) for w in _WEAPONS_LIST)
 STATUS_WORDS = ['勇気分解', '即死', '麻痺', 'スタン', 'BlazeLock', '行動不能', '割合ダメージ']
 
 # が / り 都设为可选，覆盖"残HP多いほど" / "残HPが多いほど" / "残りHP多いほど" / "残りHPが多いほど"
-_HUSHIN   = re.compile(r'残(?:り)?HP(?:が)?多いほど|HP残量が多いほど|損傷率が低いほど')
-_HAISUI   = re.compile(r'残(?:り)?HP(?:が)?(?:少な|低)いほど|HP残量が少ないほど|HPが(?:少な|低)いほど|損傷率が高いほど|HPを?消耗するほど')
+# 残/プレフィクス可選、ほど/程 両方受ける（crystal/soul で「残」「程」 variant が多い）
+_HUSHIN   = re.compile(r'(?:残(?:り)?)?HP(?:が)?多い(?:ほど|程)|HP残量が多い(?:ほど|程)|損傷率が低い(?:ほど|程)')
+_HAISUI   = re.compile(r'(?:残(?:り)?)?HP(?:が)?(?:少な|低)い(?:ほど|程)|HP残量が(?:少な|低)い(?:ほど|程)|損傷率が高い(?:ほど|程)|HPを?消耗する(?:ほど|程)')
 _BROKEN   = re.compile(r'破損状態')
 # condition=4: 敌方破甲（ブレイク）状態時触发。例:
 #   "ブレイク時に長剣の魔剣の攻撃力が3.5倍" / "敵ブレイク状態で攻撃力UP"
@@ -102,7 +103,7 @@ MULT_BUNRUI = {1, 2, 3, 4, 5, 8, 9, 10, 12, 13, 14, 15, 16, 20}
 BUNRUI_KEYWORDS = {
     1:  ['攻撃力', '攻撃と', '攻撃・'],
     2:  ['ブレイク力'],
-    3:  ['BD攻撃力', 'B.D.攻撃力'],
+    3:  ['BD攻撃力', 'B.D.攻撃力', 'BD威力', 'B.D.威力', 'ブレイズドライブ攻撃力'],
     4:  ['スピード', '行動速度', '速度'],
     5:  ['モーション速度', '攻撃モーション'],
     6:  ['ブレイズゲージ', 'Bゲージ', 'BDゲージ'],
@@ -115,16 +116,18 @@ BUNRUI_KEYWORDS = {
     15: ['ルビー'],
     17: ['ダメージ上限'],
     18: ['ゲージの最大値'],
-    19: ['記憶結晶枠'],
+    19: ['結晶枠'],
     20: ['経験値'],
     21: ['B.D.ヒット', 'BDヒット'],
     # 8, 9, 16: no numeric value
 }
 
-_V_OKU_UP   = re.compile(r'(\d+(?:\.\d+)?)億アップ')
-_V_MAN_UP   = re.compile(r'(\d+(?:\.\d+)?)万アップ')
-_V_PCT_DOWN = re.compile(r'(\d+(?:\.\d+)?)%DOWN')
-_V_PCT_UP   = re.compile(r'(\d+(?:\.\d+)?)%(?:アップ|UP|増加|増える)')
+_V_OKU_UP   = re.compile(r'(\d+(?:\.\d+)?)億(?:UP|アップ|上昇|上げる)')
+_V_OKU_PLUS = re.compile(r'[+＋](\d+(?:\.\d+)?)億')             # 「+50億」 形式 (chara/1613)
+_V_MAN_UP   = re.compile(r'(\d+(?:\.\d+)?)万(?:UP|アップ|上昇|上げる)')
+_V_MAN_BAI  = re.compile(r'(\d+(?:\.\d+)?)万倍')                # 「100万倍」 形式 (chara/1561), multiplicative
+_V_PCT_DOWN = re.compile(r'(\d+(?:\.\d+)?)[%％](?:DOWN|ダウン|軽減|減少)')
+_V_PCT_UP   = re.compile(r'(\d+(?:\.\d+)?)[%％](?:アップ|UP|増加|増える|上昇|高速化)')
 _V_MAX_BAI  = re.compile(r'最大(\d+(?:\.\d+)?)倍')
 _V_BAI      = re.compile(r'(\d+(?:\.\d+)?)倍')
 _V_PLUS_N   = re.compile(r'[+＋](\d+(?:\.\d+)?)')
@@ -166,15 +169,20 @@ def _find_kw_pos(text, kw, bunrui):
         return idx
 
 
-def _extract_val_from_pos(text, pos, bunrui):
-    """Collect all numeric patterns from text[pos:], return (value, calc_type) at the earliest position."""
+def _extract_val_from_pos(text, pos, bunrui, force_plus_n=False):
+    """Collect all numeric patterns from text[pos:], return (value, calc_type) at the earliest position.
+    force_plus_n: BD context — always recognize +N regardless of bunrui (BD 文案大量「攻撃力+1300」式加算)."""
     seg = text[pos:]
     candidates = []
 
     m = _V_OKU_UP.search(seg)
     if m: candidates.append((m.start(), float(m.group(1)) * 1e8,                        1))
+    m = _V_OKU_PLUS.search(seg)
+    if m: candidates.append((m.start(), float(m.group(1)) * 1e8,                        1))
     m = _V_MAN_UP.search(seg)
     if m: candidates.append((m.start(), float(m.group(1)) * 1e4,                        1))
+    m = _V_MAN_BAI.search(seg)
+    if m: candidates.append((m.start(), float(m.group(1)) * 1e4,                        0))
     m = _V_PCT_DOWN.search(seg)
     if m: candidates.append((m.start(), round(1 - float(m.group(1)) / 100, 6),          0))
     m = _V_PCT_UP.search(seg)
@@ -183,9 +191,11 @@ def _extract_val_from_pos(text, pos, bunrui):
     if m: candidates.append((m.start(), float(m.group(1)),                               0))
     m = _V_BAI.search(seg)
     if m: candidates.append((m.start(), float(m.group(1)),                               0))
-    if bunrui in ADD_BUNRUI:
-        m = _V_PLUS_N.search(seg)
-        if m: candidates.append((m.start(), float(m.group(1)),                           1))
+    # _V_PLUS_N (「+N」 形式) は どの bunrui でも有効: 「HPが+7764」「防御力が+7764」 等の
+    # mult bunrui [10]/[12] でも +N additive を解釈する。chara/1453 の parse fail を修す。
+    m = _V_PLUS_N.search(seg)
+    if m: candidates.append((m.start(), float(m.group(1)),                           1))
+    if bunrui in ADD_BUNRUI or force_plus_n:
         m = _V_GA_UP.search(seg)
         if m: candidates.append((m.start(), float(m.group(1)),                           1))
 
@@ -193,6 +203,17 @@ def _extract_val_from_pos(text, pos, bunrui):
         return None, None
     _, val, ct = min(candidates, key=lambda x: x[0])
     return round(val, 6), ct
+
+
+def _val_for_bunrui_bd(norm_eff, bunrui):
+    """BD context: same as _val_for_bunrui but with force_plus_n=True."""
+    for kw in BUNRUI_KEYWORDS.get(bunrui, []):
+        idx = _find_kw_pos(norm_eff, kw, bunrui)
+        if idx >= 0:
+            v, ct = _extract_val_from_pos(norm_eff, idx, bunrui, force_plus_n=True)
+            if v is not None:
+                return v, ct
+    return None, None
 
 
 def _val_for_bunrui(norm_eff, bunrui):
@@ -244,12 +265,19 @@ def _detect_scope(e, mode='soul'):
     mode='chara':
         '自身'/'自分' (and no set keyword) → scope=0.
         Element/weapon found → scope=2.
-        Otherwise → scope=1.
+        Set/global keyword (全員/味方全体/装備セット 等) → scope=1.
+        Otherwise → scope=0 (self default; bunrui=6/18 auto-promote 0→1 in classify_skill_chara).
+    mode='bd':
+        Same as 'chara' except the default (no 自身/自分, no element/weapon, no set keyword)
+        is scope=1 (party-wide). BD skills are intrinsically party-affecting, so unmarked
+        text is treated as 全体 rather than self.
 
     Returns {'scope': int, 'elements': list[int], 'types': list[int]}
     """
     has_global = ('全員' in e or '味方全体' in e or '全魔剣' in e or
-                  '編成魔剣全体' in e or '編成魔剣全て' in e)
+                  '編成魔剣全体' in e or '編成魔剣全て' in e or
+                  '全属性' in e or '全装備' in e or '全ての魔剣' in e or
+                  'パーティ' in e)
     has_set = has_global or any(kw in e for kw in _SET_KW)
 
     # 風魔典 special compound: element=風 + type=魔典
@@ -286,16 +314,20 @@ def _detect_scope(e, mode='soul'):
 
     has_condition = bool(elements or types)
 
-    if mode == 'chara':
+    if mode in ('chara', 'bd'):
         # Self-targeting check takes priority over set keywords.
         # 同セット appears as a trigger ("when set-mate is defeated"), not a party scope.
         if '自身' in e or '自分' in e or '自攻撃力' in e:
             if not has_global:
                 return {'scope': 0, 'elements': [], 'types': []}
-        if has_set:
-            scope = 2 if has_condition else 1
+        # element/weapon condition → 2; explicit party (全員/味方全体/装備セット) → 1;
+        # default → 0 for chara (self), 1 for bd (party-wide).
+        if has_condition:
+            scope = 2
+        elif has_set:
+            scope = 1
         else:
-            scope = 2 if has_condition else 1
+            scope = 1 if mode == 'bd' else 0
     else:  # soul
         # scope=0: no condition, no set (self unconditional)
         # scope=1: no condition, has set (all party unconditional)
@@ -322,24 +354,32 @@ def _detect_condition(e):
 # ============================================================
 #  KEYWORD SCAN — classify_effect
 # ============================================================
-def classify_effect(effect):
+def classify_effect(effect, scope_mode='soul'):
     """Keyword-scan based classification (Step 2 supplement).
-    Returns empty bunrui list when nothing matches — no fallback 16 here."""
+    Returns empty bunrui list when nothing matches — no fallback 16 here.
+    scope_mode: 'soul' (default; soul/crystal use this)
+                | 'chara' (chara skills, masou: 默认 scope=0 自身; '自身/自分'→0, 全員/装備セット→1, element/type 限定→2)
+                | 'bd'    (魔剣 BD skills: 默认 scope=1 全体; '自身/自分'→0, 全員/装備セット→1, element/type 限定→2)"""
     e          = effect
     bunrui     = set()
-    scope_info = _detect_scope(e, mode='soul')
+    scope_info = _detect_scope(e, mode=scope_mode)
     condition  = _detect_condition(e)
 
     if 'ダメージ上限' in e:         bunrui.add(17)
-    if '記憶結晶枠' in e:           bunrui.add(19)
+    if '結晶枠' in e:               bunrui.add(19)
     if 'ゲージの最大値' in e:       bunrui.add(18)
     if 'B.D.レベル上限' in e:       bunrui.add(16)
     if 'B.D.ヒット' in e or 'BDヒット' in e:
         bunrui.add(21)
     elif 'ヒット数' in e or 'Hit数' in e:
         bunrui.add(7)
-    if 'B.D.攻撃力' in e or 'BD攻撃力' in e: bunrui.add(3)
-    e_no_bd = e.replace('B.D.攻撃力', '__BD__').replace('BD攻撃力', '__BD__')
+    if any(kw in e for kw in ['B.D.攻撃力', 'BD攻撃力', 'ブレイズドライブ攻撃力',
+                                'BD威力', 'B.D.威力']): bunrui.add(3)
+    e_no_bd = (e.replace('B.D.攻撃力', '__BD__')
+                .replace('BD攻撃力', '__BD__')
+                .replace('ブレイズドライブ攻撃力', '__BD__')
+                .replace('BD威力', '__BD__')
+                .replace('B.D.威力', '__BD__'))
     if re.search(r'攻撃力|攻撃と|攻撃・', e_no_bd): bunrui.add(1)
     if 'ブレイク力' in e:           bunrui.add(2)
     if re.search(r'(B\.D\.|BD)ゲージの(上昇|溜)', e): bunrui.add(6)
@@ -347,15 +387,15 @@ def classify_effect(effect):
     if 'B.D.コスト' in e:           bunrui.add(16)
     if re.search(r'バトル開始時.*ブレイズゲージ|Wave経過ごとに.*ブレイズゲージ', e): bunrui.add(6)
     if re.search(r'Bゲージ', e):    bunrui.add(6)
-    # bunrui=4: スピード / 行動速度 / 速度 (excluding モーション速度)
-    if 'スピード' in e or re.search(r'(?<!モーション)速度', e): bunrui.add(4)
-    if '攻撃モーション' in e or 'モーション速度' in e: bunrui.add(5)
+    # bunrui=4: スピード / 行動速度 / 速度 (excluding モーション速度 全角/半角)
+    if 'スピード' in e or re.search(r'(?<!モーション)(?<!ﾓｰｼｮﾝ)速度', e): bunrui.add(4)
+    if '攻撃モーション' in e or 'モーション速度' in e or 'ﾓｰｼｮﾝ速度' in e: bunrui.add(5)
     if '攻撃範囲' in e and '全体' in e:     bunrui.add(8)
     if any(w in e for w in STATUS_WORDS) and ('無効' in e or '回避' in e): bunrui.add(9)
     if 'HP' in e and '回復' in e and not re.search(r'HP\d*%で復活', e): bunrui.add(11)
     if 'HP' in e and 11 not in bunrui and condition == 0:
-        # Exclude: HP as a % condition (HP50%以下/以上/で) or HP as cost
-        if not re.search(r'HP\d+(?:%以|%で|で)|HP消費|HPを.*消費', e):
+        # Exclude: HP as % condition、HP as cost、HP割合ダメージ (敵側 ailment)、HPが減少 (cost pattern)
+        if not re.search(r'HP\d+(?:%以|%で|で)|HP消費|HPを.*消費|HP割合ダメージ|HPが(?:減少|消耗|ダウン)', e):
             if re.search(r'HPが|HPを|HP\+|HP[^回]', e):
                 bunrui.add(10)
     if re.search(r'ガード(時の|の|時)防御力|魔導バリア', e): bunrui.add(13)
@@ -363,7 +403,7 @@ def classify_effect(effect):
     if '防御力' in e_no_guard:      bunrui.add(12)
     if 'サファイア' in e:           bunrui.add(14)
     if 'ルビー' in e:               bunrui.add(15)
-    if '経験値' in e:               bunrui.add(20)
+    if '経験値' in e or 'EXP' in e: bunrui.add(20)
     for kw in ['命中率', '復活', 'スキル効果を受けられる', '修理時間']:
         if kw in e: bunrui.add(16)
     if 'ガードブレイク' in e: bunrui.add(2)
@@ -389,7 +429,7 @@ def classify_skill_v2(skill, lookup_table, cat_to_bunrui):
     """Two-pass classification for SOUL skills (multi-effects mode).
     Each detected bunrui becomes a separate entry in skill['effects']."""
     name       = skill.get('name', '')
-    effect_raw = skill.get('effect', '')
+    effect_raw = skill.get('effect_text', '')
     effect     = unicodedata.normalize('NFKC', effect_raw)  # normalized for detection
     normed     = norm(effect)
 
@@ -464,6 +504,51 @@ def classify_skill_v2(skill, lookup_table, cat_to_bunrui):
             effects.append({'bunrui': [16], 'scope': scope_info['scope'],
                             'condition': condition, 'bairitu': 1, 'calc_type': 0})
 
+    # Veto: lookup table が出した spurious bunrui を drop。chara classify_skill_chara と同じ思想。
+    kw_set = set(classify_effect(effect)['bunrui'])
+    cur_bnrs = {b for ent in effects for b in (ent.get('bunrui') or [])}
+
+    def _drop(b):
+        nonlocal effects
+        effects = [ent for ent in effects if ent.get('bunrui') != [b]]
+
+    # [3] BD攻 が lookup or kw で出ているなら spurious [1] 攻 を drop
+    if 3 in cur_bnrs and 1 in cur_bnrs and 1 not in kw_set:
+        _drop(1)
+    # [12] 防 が出てるが kw に [1] 攻 が無い場合は spurious [1] drop (例 soul/262/4「防御力20%UP」)
+    if 12 in cur_bnrs and 1 in cur_bnrs and 1 not in kw_set and not re.search(r'攻撃力|攻撃と|攻撃・', effect):
+        _drop(1)
+    # lookup spurious [17] 限 — text に「ダメージ上限」が無い (例 soul/440/2)
+    if 17 in cur_bnrs and 17 not in kw_set and 'ダメージ上限' not in effect:
+        _drop(17)
+    # lookup spurious [5]/[2]/[16]/[8]/[4]/[3]/[21]/[16] etc. — kw 結果に無く、対応 keyword も text に無い場合 drop
+    for spurious_b, kws in [(3,  ['B.D.攻撃力', 'BD攻撃力', 'ブレイズドライブ攻撃力', 'BD威力', 'B.D.威力']),
+                              (5,  ['攻撃モーション', 'モーション速度', 'モーション']),
+                              (2,  ['ブレイク力', 'ガードブレイク']),
+                              (4,  ['スピード', '行動速度']),
+                              (8,  ['攻撃範囲']),
+                              (14, ['サファイア']),
+                              (15, ['ルビー']),
+                              (21, ['B.D.ヒット', 'BDヒット']),
+                              (16, ['命中率', '復活', 'スキル効果を受けられる', '修理時間',
+                                    'B.D.コスト', 'B.D.レベル上限'])]:
+        if (spurious_b in cur_bnrs and spurious_b not in kw_set
+                and not any(kw in effect for kw in kws)
+                and len([ent for ent in effects if spurious_b in (ent.get('bunrui') or [])]) > 0
+                and len(effects) > 1):
+            _drop(spurious_b)
+            cur_bnrs.discard(spurious_b)
+
+    # Veto special: [6] BD値 vs [18] BD最大 — text に「ゲージの最大値」 があれば
+    # [18] が正解で [6] は altema lookup の混同。drop [6] when [18] covered.
+    if 6 in cur_bnrs and 18 in cur_bnrs and 'ゲージの最大値' in effect:
+        _drop(6)
+        cur_bnrs.discard(6)
+
+    if not effects:
+        effects.append({'bunrui': [16], 'scope': scope_info['scope'],
+                        'condition': condition, 'bairitu': 1, 'calc_type': 0})
+
     skill['effects'] = effects
     return skill
 
@@ -472,7 +557,7 @@ def classify_skill_chara(skill, lookup_table, cat_to_bunrui):
     """Two-pass classification for CHARACTER skills (single-effects[0] mode).
     All detected bunrui are merged into a single effects[0] entry."""
     name       = skill.get('name', '')
-    effect_raw = skill.get('effect', '')
+    effect_raw = skill.get('effect_text', '')
     effect     = unicodedata.normalize('NFKC', effect_raw)
 
     scope_info = _detect_scope(effect, mode='chara')
@@ -525,6 +610,13 @@ def classify_skill_chara(skill, lookup_table, cat_to_bunrui):
     if 12 in covered and 12 not in kw_result and covered - {12} and '防御力' not in effect:
         covered.discard(12)
 
+    # Veto: drop lookup-only 4 (スピード/転) when effect has no スピード/行動速度/速度 keyword
+    # (excluding モーション速度).  altema sometimes mis-tags モーション-only skills as スピードUP.
+    # Fix chara/1407 type: 「モーション速度が加速」 lookup 加 cat=4 → bnr [4,5] 但 kw 給 [5] 単独。
+    if (4 in covered and 4 not in kw_result and covered - {4}
+            and not re.search(r'スピード|行動速度|(?<!モーション)速度', effect)):
+        covered.discard(4)
+
     # Veto: drop lookup-only 18 (BD最大値) when effect has no ゲージの最大値 keyword.
     # altema sometimes mis-tags BDゲージ-up skills (最大Nゲージ = max increase) as 最大値UP.
     if 18 in covered and 18 not in kw_result and covered - {18} and 'ゲージの最大値' not in effect:
@@ -536,7 +628,7 @@ def classify_skill_chara(skill, lookup_table, cat_to_bunrui):
         (1,  r'攻撃力|攻撃と|攻撃・'),  # 攻撃モーションが加速 → kw=5, lookup=1
         (7,  r'ヒット数|Hit数|HIT数'),   # 攻撃モーションが加速 → kw=5, lookup=7
         (17, r'ダメージ上限'),            # 記憶結晶経験値UP → kw=20, lookup=17
-        (19, r'記憶結晶枠'),              # 記憶結晶経験値UP → kw=20, lookup=19
+        (19, r'結晶枠'),                  # 記憶結晶経験値UP → kw=20, lookup=19
     ]
     for vb, kw_pat in _keyword_guards:
         if vb in covered and vb not in kw_result and covered - {vb} and not re.search(kw_pat, effect):
@@ -609,6 +701,17 @@ def classify_hit_fields(effect_text, ent, is_bd=False):
     elif re.search(r'1撃目.*2撃目.*3撃目', text):
         # All three stages explicitly listed → each gets +n
         hit_per_stage = [n, n, n]
+    elif (specific := re.findall(r'(\d)撃目[^+\-＋－0-9]{0,5}?([+\-＋－])(\d+)', text)):
+        # Specific-stage patterns: 「N撃目+M」 (sign 直後 or 1–5 文字介在).
+        # Examples: 「3撃目+13」, 「3撃目ヒット数+13」, 「1撃目+1と3撃目+3」, 「2撃目-1と3撃目+5」
+        hit_per_stage = [0, 0, 0]
+        for stage_str, sign, num_str in specific:
+            stage_idx = int(stage_str) - 1
+            if 0 <= stage_idx < 3:
+                v = int(num_str)
+                if sign in ('-', '－'):
+                    v = -v
+                hit_per_stage[stage_idx] = v
     elif re.search(r'1撃目.*ヒット|全体.*1撃目.*ヒット', text):
         m = re.search(r'[+＋](\d+)', text[text.index('1撃目'):])
         v = int(m.group(1)) if m else n

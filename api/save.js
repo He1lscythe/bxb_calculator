@@ -18,12 +18,15 @@ import { Octokit } from '@octokit/rest';
 const REPO = { owner: 'He1lscythe', repo: 'bxb_calculator' };
 const BASE = 'main';
 
+// 値は [filePath, sessionIdsKey]。masou は chara/soul と id namespace が違うため
+// 独立な masou_session_ids を使う（chara id と masou id が衝突して entry を誤って消すのを防ぐ）。
 const ID_BUCKETS = {
-  revise:            'data/characters_revise.json',
-  omoide_revise:     'data/omoide_revise.json',
-  soul_revise:       'data/souls_revise.json',
-  crystal_revise:    'data/crystals_revise.json',
-  bladegraph_revise: 'data/bladegraph_revise.json',
+  revise:            ['data/characters_revise.json', 'session_ids'],
+  omoide_revise:     ['data/omoide_revise.json',     'session_ids'],
+  soul_revise:       ['data/souls_revise.json',      'session_ids'],
+  crystal_revise:    ['data/crystals_revise.json',   'session_ids'],
+  bladegraph_revise: ['data/bladegraph_revise.json', 'session_ids'],
+  masou_revise:      ['data/masou_revise.json',      'masou_session_ids'],
 };
 const FULL_BUCKETS = {
   omoide_templates:  'data/omoide_templates.json',
@@ -74,23 +77,23 @@ export default async function handler(req, res) {
 
   try {
     const body = req.body || {};
-    const sessionIds = Array.isArray(body.session_ids) ? body.session_ids : [];
 
     const octokit = new Octokit({ auth: token });
 
     // Compute the merged content for each touched bucket
     const updates = []; // [{ path, contentText }]
 
-    for (const [key, filePath] of Object.entries(ID_BUCKETS)) {
+    for (const [key, [filePath, sidKey]] of Object.entries(ID_BUCKETS)) {
       if (!(key in body)) continue;
       const patches = body[key];
       if (!Array.isArray(patches)) {
         return res.status(400).json({ error: `${key} must be an array` });
       }
+      const bucketSids = Array.isArray(body[sidKey]) ? body[sidKey] : [];
       // For id-level merge we need session_ids to know which entries to consider
-      if (sessionIds.length === 0 && patches.length === 0) continue;
+      if (bucketSids.length === 0 && patches.length === 0) continue;
       const { content: existing } = await readJsonFromMain(octokit, filePath);
-      const merged = mergeById(existing || [], patches, sessionIds);
+      const merged = mergeById(existing || [], patches, bucketSids);
       updates.push({
         path: filePath,
         contentText: JSON.stringify(merged, null, 2) + '\n',
@@ -142,7 +145,7 @@ export default async function handler(req, res) {
 
     // 构造 PR 标题/正文：页面名 + id+name 列表，方便 review 时一眼看出改了什么
     const pageInfo = (() => {
-      if ('revise' in body || 'omoide_revise' in body) return { name: '魔剣', file: 'pages/characters.html' };
+      if ('revise' in body || 'omoide_revise' in body || 'masou_revise' in body) return { name: '魔剣', file: 'pages/characters.html' };
       if ('soul_revise' in body)       return { name: '魂',     file: 'pages/soul.html' };
       if ('crystal_revise' in body)    return { name: '結晶',   file: 'pages/crystals.html' };
       if ('bladegraph_revise' in body) return { name: '心象結晶', file: 'pages/bladegraph.html' };
