@@ -164,7 +164,7 @@ def _parse_skills_table(table):
         name   = parts[0] if parts else ""
         effect = parts[1] if len(parts) > 1 else ""
         if name or effect:
-            skills.append({"name": name, "effect": effect})
+            skills.append({"name": name, "effect_text": effect})
     return skills
 
 
@@ -312,7 +312,7 @@ def _bairitu_default(bunrui):
 
 
 def assign_bairitu(skill):
-    effect = _norm(skill.get('effect', ''))
+    effect = _norm(skill.get('effect_text', ''))
     effects = skill.get('effects', [])
     bunrui  = effects[0].get('bunrui', []) if effects else []
 
@@ -332,7 +332,7 @@ def assign_bairitu(skill):
 def apply_pipeline(souls, soul_ids=None):
     """Classify skills and assign bairitu.
     soul_ids: set of soul IDs to process; None means process all souls."""
-    table_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'soulskill_table.json')
+    table_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '_lookup', 'soulskill_table.json')
     soulskill_table = {}
     if os.path.exists(table_path):
         with open(table_path, encoding='utf-8') as f:
@@ -346,7 +346,7 @@ def apply_pipeline(souls, soul_ids=None):
             continue
         for skill in soul.get('skills', []):
             classify_skill_v2(skill, soulskill_table, CAT_TO_BUNRUI_SOULSKILL)
-            eff_text = skill.get('effect', '')
+            eff_text = skill.get('effect_text', '')
             for ent in skill.get('effects', []):
                 classify_hit_fields(eff_text, ent)
         count += 1

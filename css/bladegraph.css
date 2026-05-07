@@ -1,0 +1,78 @@
+/* === bladegraph.html specific === */
+#content { max-width: 56rem; width: 100%; margin: 0 auto; padding: 0 16px; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+#page-wrap { max-width: 72rem; width: 100%; display: flex; flex-direction: column; overflow: hidden; }
+
+#filters { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 10px 0 8px; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; }
+#filters input[type=text] { width: 100%; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 13px; outline: none; }
+#filters input[type=text]:focus { border-color: var(--accent); }
+#filters-body { display: flex; flex-direction: column; gap: 8px; }
+.filter-row2 { display: flex; gap: 28px; align-items: flex-start; }
+
+#bg-count { font-size: 12px; color: var(--text2); }
+#bg-count-mob { display: none; font-size: 12px; color: var(--text2); white-space: nowrap; }
+.mob-search-row { display: flex; align-items: center; gap: 8px; }
+.mob-search-row input { flex: 1; min-width: 0; }
+.mob-toolbar { display: none; gap: 6px; align-items: center; flex-wrap: wrap; }
+/* .filter-toggle-btn / .toolbar-btn base styles in shared.css */
+.mob-toolbar > .filter-toggle-btn { flex: 1; min-width: 0; padding: 7px 12px; }
+#f-bunrui .ftog { min-width: 3.4em; text-align: center; }
+.desktop-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 2px; }
+
+#bg-list { display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto; min-height: 0; padding-bottom: 16px; }
+#bg-list::-webkit-scrollbar { width: 4px; }
+#bg-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.bg-row { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color .15s; flex-shrink: 0; }
+.bg-row.expanded { border-color: rgba(91,127,255,.5); }
+.bg-row-hd { display: flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; transition: background .1s; }
+.bg-row-hd { display: flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; transition: background .1s; }
+.bg-row-hd:hover { background: var(--bg3); }
+.bg-row.expanded .expand-btn { transform: rotate(180deg); }
+/* desktop: show desktop layout, hide mobile */
+.bg-row-desktop { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+.bg-row-mobile  { display: none; }
+/* mobile layout parts (only active inside @media) */
+.bg-row-left { display: flex; align-items: center; gap: 6px; min-width: 0; flex: 1; }
+.bg-row-left .row-name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bg-row-right { display: flex; align-items: center; gap: 3px; flex-wrap: wrap; justify-content: flex-end; flex-shrink: 0; }
+
+/* body: hidden by default, display:flex when expanded */
+.bg-body { border-top: 1px solid var(--border); padding: 12px 14px; display: none; gap: 14px; }
+.bg-row.expanded .bg-body { display: flex; }
+
+.bg-icon { width: 84px; height: 84px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); background: var(--bg3); }
+.btn-edit { background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 4px 0; font-size: 11px; cursor: pointer; width: 84px; }
+.btn-edit:hover { background: rgba(91,127,255,.1); }
+
+.eff-line { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
+.eff-line:last-child { margin-bottom: 0; }
+.eff-bairitu { font-size: 14px; font-weight: 700; }
+.eff-pfx { color: var(--text2); font-size: 11px; }
+.eff-cond { font-size: 10px; padding: 1px 4px; border-radius: 3px; background: rgba(255,153,51,.15); color: #ffaa44; border: 1px solid #ff9933; }
+.eff-scope { font-size: 10px; padding: 1px 4px; border-radius: 3px; background: rgba(91,127,255,.15); color: #7b9fff; border: 1px solid #5b7fff; }
+.badge.scope5 { background: rgba(170,85,255,.2); color: #cc88ff; border: 1px solid #aa55ff; font-size: 9px; }
+.badge.time { background: rgba(255,153,51,.15); color: #ffaa44; border: 1px solid #ff9933; font-size: 9px; }
+
+/* edit mode */
+.bg-edit-body { border-top: 1px solid var(--accent); padding: 14px; background: rgba(91,127,255,.04); }
+.bunrui-checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 4px; margin-bottom: 8px; }
+.bunrui-check { display: flex; align-items: center; gap: 5px; font-size: 11px; cursor: pointer; padding: 2px 0; }
+.bunrui-check input { cursor: pointer; accent-color: var(--accent); }
+.edit-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.bg-effect-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; position: relative; margin-top: 8px; }
+
+@media (max-width: 768px) {
+  body { height: auto; overflow-y: auto; }
+  #page-wrap { overflow: visible; }
+  #content { flex: none; overflow: visible; }
+  #bg-list { flex: none; overflow-y: visible; }
+  .mob-toolbar { display: flex; }
+  #bg-count-mob { display: block; }
+  .desktop-bottom { display: none; }
+  #filters-body { display: none; }
+  .filter-row2 { flex-direction: column; }
+  #filters { position: sticky; top: 52px; z-index: 50; background: var(--bg2); margin-top: 0; border-radius: 0; }
+  /* mobile row layout: swap desktop↔mobile divs */
+  .bg-row-desktop { display: none; }
+  .bg-row-mobile  { display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0; justify-content: space-between; }
+}

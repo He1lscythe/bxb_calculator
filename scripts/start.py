@@ -15,13 +15,16 @@ PORT = 8787
 DIR  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(DIR, 'data')
 
-# 与 api/save.js 的 ID_BUCKETS 保持一致
+# 与 api/save.js の ID_BUCKETS と保持一致。
+# 値は (filename, session_ids_key)。masou は chara/soul と id namespace が違うため
+# 独立な masou_session_ids を使う（chara id と masou id が衝突して entry を誤って消すのを防ぐ）。
 ID_BUCKETS = {
-    'revise':            'characters_revise.json',
-    'omoide_revise':     'omoide_revise.json',
-    'soul_revise':       'souls_revise.json',
-    'crystal_revise':    'crystals_revise.json',
-    'bladegraph_revise': 'bladegraph_revise.json',
+    'revise':            ('characters_revise.json', 'session_ids'),
+    'omoide_revise':     ('omoide_revise.json',     'session_ids'),
+    'soul_revise':       ('souls_revise.json',      'session_ids'),
+    'crystal_revise':    ('crystals_revise.json',   'session_ids'),
+    'bladegraph_revise': ('bladegraph_revise.json', 'session_ids'),
+    'masou_revise':      ('masou_revise.json',      'masou_session_ids'),
 }
 
 
@@ -41,21 +44,21 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             length = int(self.headers.get('Content-Length', 0))
             data   = json.loads(self.rfile.read(length))
 
-            session_ids = data.get('session_ids') or []
-            if not isinstance(session_ids, list):
-                session_ids = []
-
             # id-level merge: 与 Vercel api/save.js 的合并逻辑保持一致。
-            # 缺失的 id（在 session_ids 但 patch 里没有）= 用户清空了 diff → 删除条目
-            for key, filename in ID_BUCKETS.items():
+            # 缺失的 id（在 session_ids 但 patch 里没有）= 用户清空了 diff → 删除条目。
+            # bucket 单位で別々の session_ids を読む（masou は chara と id が衝突するため独立）。
+            for key, (filename, sid_key) in ID_BUCKETS.items():
                 if key not in data:
                     continue
                 patches = data[key]
                 if not isinstance(patches, list):
                     continue
-                if not session_ids and not patches:
+                bucket_sids = data.get(sid_key) or []
+                if not isinstance(bucket_sids, list):
+                    bucket_sids = []
+                if not bucket_sids and not patches:
                     continue
-                merged = _merge_by_id(_read_data(filename), patches, session_ids)
+                merged = _merge_by_id(_read_data(filename), patches, bucket_sids)
                 _write_data(filename, json.dumps(merged, ensure_ascii=False, indent=2) + '\n')
 
             # full-overwrite buckets（无 id-merge 语义）

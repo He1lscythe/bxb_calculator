@@ -2,11 +2,25 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<style>
+#loading-screen{position:fixed;inset:0;z-index:9999;background:#0f1117;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .25s ease}
+#loading-screen.done{opacity:0;pointer-events:none}
+#loading-screen::before{content:'';width:36px;height:36px;border:3px solid #2e3250;border-top-color:#5b7fff;border-radius:50%;animation:ls-spin .8s linear infinite}
+#loading-screen::after{content:'読み込み...';color:#8890b0;font-size:13px;font-family:'Segoe UI','Yu Gothic',sans-serif}
+@keyframes ls-spin{to{transform:rotate(360deg)}}
+</style>
 <title>BxB</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
 <meta http-equiv="refresh" content="0; url=pages/characters.html">
 <link rel="canonical" href="pages/characters.html">
 </head>
 <body>
+<div id="loading-screen"></div>
+<div id="page-wrap">
+<script src="components/nav.js"></script>
+</div>
 <a href="pages/characters.html">Redirecting to pages/characters.html...</a>
 <script>location.replace('pages/characters.html');</script>
 </body>

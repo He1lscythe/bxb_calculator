@@ -1,7 +1,6 @@
 # ── Python cache ──────────────────────────────────────────
 __pycache__/
 
-
 # ── Crawl progress (local state) ──────────────────────────
 progress.json
 soul_progress.json
@@ -9,42 +8,25 @@ soul_progress.json
 # 爬虫已不生成；此规则作为保险，防止误生成文件被入库。
 data/*.js
 
-# ── Raw downloaded HTML pages (large) ─────────────────────
-chara_*.html
-charalist.html
-skilllist.html
-soulskill.html
-kiokukessyou.html
-
-# ── Intermediate / derived data ───────────────────────────
-crystals_diverse.json
-crystals_raw.json
-all_effects.txt
+# ── Lookup / intermediate files (large altema scrapes + lookup tables) ──
+_lookup/
 
 # ── Local revise overrides (applied locally, not for Pages) ──
 *_revise.json
 
-# ── Python lookup tables (Python-internal, not for Pages) ─
-skilllist_table.json
-soulskill_table.json
-
-# ── Analysis output files ─────────────────────────────────
-chara_audit.txt
-chara_audit_classify.txt
-e3_bd_atk.txt
-e6_other_self.txt
-
-# ── Misc ──────────────────────────────────────────────────
-test_output.json
-skills_sample.json
-skills_bairitu_sample.json
-structure.md
+# ── Docs not for Pages: 只 commit chara_training / structure / senzai_icon_table ──
+docs/checklist.md
+docs/frontend_ui.md
 docs/hensei.md
-docs/characters-doc-cn.md
-docs/crystals-doc-cn.md
-docs/hensei-doc-cn.md
-docs/soul-doc-cn.md
-docs/bladegraph-doc-cn.md
+docs/motion_table.md
+docs/skills_schema.md
+docs/*_doc_cn.md
+docs/draft_doc_cn.md
+
+# ── Audit one-time analysis (gitignored, local only) ──────
+audit/
+
+# ── Hidden temp / partial JSON ────────────────────────────
 _*.json
 
 # ── Claude local settings ─────────────────────────────────

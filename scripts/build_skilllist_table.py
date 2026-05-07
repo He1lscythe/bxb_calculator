@@ -97,22 +97,24 @@ def parse_skilllist(html):
 
 
 def main():
-    html_path = os.path.join(DIR, "skilllist.html")
+    lookup_dir = os.path.join(DIR, "_lookup")
+    os.makedirs(lookup_dir, exist_ok=True)
+    html_path = os.path.join(lookup_dir, "skilllist.html")
     if os.path.exists(html_path):
-        print(f"Using cached skilllist.html")
+        print(f"Using cached _lookup/skilllist.html")
         with open(html_path, encoding="utf-8") as f:
             html = f.read()
     else:
         html = fetch_skilllist()
         with open(html_path, "w", encoding="utf-8") as f:
             f.write(html)
-        print(f"Saved raw HTML to skilllist.html")
+        print(f"Saved raw HTML to _lookup/skilllist.html")
 
     table, hit, miss = parse_skilllist(html)
     print(f"Parsed: {hit} entries, {miss} skipped")
     print(f"Table size: {len(table)} unique keys")
 
-    out_path = os.path.join(DIR, OUTPUT_FILE)
+    out_path = os.path.join(lookup_dir, OUTPUT_FILE)
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(table, f, ensure_ascii=False, indent=2)
     print(f"Saved to {OUTPUT_FILE}")

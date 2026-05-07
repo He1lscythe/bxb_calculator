@@ -1,0 +1,22 @@
+/* === BxB base — shared by every page === */
+:root {
+  --bg: #0f1117;  --bg2: #1a1d27;  --bg3: #22263a;  --border: #2e3250;
+  --text: #e0e4f0; --text2: #8890b0; --accent: #5b7fff;
+  --ss: #ff5555;  --s: #ff9933;  --aa: #55aaff;  --a: #55cc77;
+  --fire: #ff5533; --water: #3388ff; --wind: #44cc66;
+  --light: #ffcc00; --dark: #aa55ff; --none: #888899;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+button { -webkit-user-select: text; user-select: text; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Segoe UI', 'Yu Gothic', sans-serif;
+  font-size: 14px; height: 100vh;
+  display: flex; justify-content: center; overflow: hidden;
+}
+#page-wrap { max-width: 72rem; width: 100%; display: flex; flex-direction: column; overflow: hidden; }
+html { scrollbar-gutter: stable; }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }

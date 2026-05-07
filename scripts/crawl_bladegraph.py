@@ -18,6 +18,8 @@ import html as htmlmod
 import requests
 from bs4 import BeautifulSoup
 
+from classify_common import classify_effect, _V_PCT_UP, _V_PCT_DOWN
+
 # ============================================================
 #  CONFIG
 # ============================================================
@@ -132,7 +134,7 @@ def parse_second_td(td):
             cleaned = strip_labels(line)
             if cleaned:
                 effect_parts.append(cleaned)
-        result["effect"] = " ".join(effect_parts).strip()
+        result["effect_text"] = " ".join(effect_parts).strip()
 
     # Section 2: acquisition
     if len(sections) >= 3:
@@ -228,41 +230,22 @@ def detect_condition(segment):
 
 
 def extract_bairitu(segment):
-    """Return (bairitu_float, calc_type).  All bladegraph effects are calc_type=0."""
-    m = re.search(r'(\d+(?:\.\d+)?)%UP', segment)
+    """Return (bairitu_float, calc_type). All bladegraph effects are calc_type=0.
+    Uses _V_PCT_UP/_V_PCT_DOWN from classify_common (handles both 半角 % and 全角 ％)."""
+    m = _V_PCT_UP.search(segment)
     if m:
         return round(1 + float(m.group(1)) / 100, 6), 0
-    m = re.search(r'(\d+(?:\.\d+)?)%DOWN', segment)
+    m = _V_PCT_DOWN.search(segment)
     if m:
         return round(1 - float(m.group(1)) / 100, 6), 0
     return 1.0, 0
 
 
-# keyword → internal bunrui (searched in priority order)
-_BUNRUI_KEYWORDS = [
-    (r'ブレイズドライブ攻撃力|B\.D\.攻撃力',   3),
-    (r'サファイア',                           14),
-    (r'モーション速度',                         5),
-    (r'ルビー',                               15),
-    (r'魔剣使いEXP|魔剣使い経験値',            20),
-    (r'ソウルEXP',                            20),
-    (r'記憶結晶経験値|記憶結晶EXP',            19),
-    (r'ブレイク力',                             2),
-    (r'スピード',                               4),
-    (r'防御力',                                12),
-    (r'攻撃力',                                 1),
-    (r'(?<!残)HP',                             10),
-]
-
-
 def match_bunrui_in_seg(segment):
-    """Return list of all matching internal bunrui IDs for a single effect segment."""
-    result = []
-    seen = set()
-    for pattern, bunrui_id in _BUNRUI_KEYWORDS:
-        if re.search(pattern, segment) and bunrui_id not in seen:
-            result.append(bunrui_id)
-            seen.add(bunrui_id)
+    """Return list of internal bunrui IDs for a single effect segment.
+    Delegates to classify_common.classify_effect (shared with chara/soul/crystal).
+    Falls back to [16] when no keyword matches."""
+    result = classify_effect(segment)['bunrui']
     return result if result else [16]
 
 
@@ -311,7 +294,22 @@ def parse_effects(dc, effect_text):
                 entry["name"] = char_name
             effects.append(entry)
 
-    return effects
+    # Merge pass: 同 (bairitu, calc_type, scope, condition, element, type, name) entries 合并 bunrui[]
+    # 跟 crawl_chara.py 行为一致
+    def _merge_key(e):
+        return (e.get('bairitu'), e.get('calc_type'), e.get('scope'),
+                e.get('condition'), e.get('element'), e.get('type'), e.get('name'))
+    merged = []
+    for e in effects:
+        k = _merge_key(e)
+        for m in merged:
+            if _merge_key(m) == k:
+                m['bunrui'] = sorted(set(m['bunrui']) | set(e['bunrui']))
+                break
+        else:
+            merged.append(e)
+
+    return merged
 
 
 # ============================================================
@@ -333,7 +331,7 @@ def parse_row(row):
         return None
 
     td_info = parse_second_td(tds[1])
-    effect_text = td_info.get('effect', '')
+    effect_text = td_info.get('effect_text', '')
 
     # Unwrap single-element list fields
     rea_raw = dc.get('rea')
@@ -355,7 +353,7 @@ def parse_row(row):
     ordered["acquisition"] = td_info.get('acquisition', '')
     if 'illustrator' in td_info:
         ordered["illustrator"] = td_info["illustrator"]
-    ordered["effect"]  = effect_text
+    ordered["effect_text"] = effect_text
     ordered["effects"] = effects
 
     return ordered

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BxB 魔剣データベース</title>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/nav.css">
+<link rel="stylesheet" href="../css/shared.css">
+<link rel="stylesheet" href="../css/characters.css">
+</head>
+<body>
+{{include _loading.html}}
+
+<div id="page-wrap">
+
+<div id="prompt-modal">
+  <div class="latent-overlay" onclick="_promptCancel()"></div>
+  <div class="prompt-panel">
+    <div class="prompt-title" id="prompt-title"></div>
+    <input class="edit-input" id="prompt-input" type="text">
+    <div class="prompt-actions">
+      <button class="btn-cancel" onclick="_promptCancel()">キャンセル</button>
+      <button class="btn-save"   onclick="_promptConfirm()">保存</button>
+    </div>
+  </div>
+</div>
+
+<div id="masou-modal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center">
+  <div class="latent-overlay" onclick="closeMasouModal()"></div>
+  <div class="latent-panel">
+    <div class="latent-panel-header">
+      <span>魔装</span>
+      <button class="latent-close" onclick="closeMasouModal()">×</button>
+    </div>
+    <div class="latent-body" id="masou-body"></div>
+  </div>
+</div>
+
+<div id="latent-modal">
+  <div class="latent-overlay" onclick="closeLatentModal()"></div>
+  <div class="latent-panel">
+    <div class="latent-panel-header">
+      <span>潜在開放</span>
+      <button class="latent-close" onclick="closeLatentModal()">×</button>
+    </div>
+    <div class="latent-body" id="latent-body"></div>
+  </div>
+</div>
+
+<div id="layout">
+  <div id="sidebar">
+    <div id="filters">
+      <div class="search-row">
+        <input type="text" id="search" placeholder="🔍 魔剣名で検索..." oninput="applyFilters()">
+        <span id="char-count-mob"></span>
+      </div>
+      <div class="actions-row">
+        <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
+        <select id="f-sort">
+          <option value="">並び替えなし</option>
+          <option value="攻撃力">攻撃力</option>
+          <option value="防御力">防御力</option>
+          <option value="ブレイク力">ブレイク力</option>
+          <option value="HP">HP</option>
+          <option value="LP">LP</option>
+          <option value="保有魔力">保有魔力</option>
+          <option value="結晶スロット">結晶スロット</option>
+          <option value="B">B</option>
+          <option value="W">W</option>
+          <option value="H">H</option>
+          <option value="BDコスト">BDコスト</option>
+          <option value="__hit_max">合計hit</option>
+          <option value="__bdhit_max">BDヒット</option>
+        </select>
+        <button id="sort-dir" onclick="toggleSortDir()">↓</button>
+        <button class="btn-reset-filters" onclick="resetFilters()">リセット</button>
+      </div>
+      <div id="filters-body">
+      <div class="filter-section">
+        <div class="filter-label">レア度</div>
+        <div class="filter-toggles" id="f-rarity"></div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">属性</div>
+        <div class="filter-toggles" id="f-element"></div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">武器種</div>
+        <div class="filter-toggles grid-6" id="f-type"></div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">状態</div>
+        <div class="filter-toggles" id="f-state">
+          <button class="ftog" data-val="極弐" onclick="toggleFilter('state','極弐',this)">極弐</button>
+          <button class="ftog" data-val="改造" onclick="toggleFilter('state','改造',this)">改造</button>
+          <button class="ftog" data-val="通常" onclick="toggleFilter('state','通常',this)">通常</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">BD特殊効果</div>
+        <div class="filter-toggles" id="f-bdSpecial"></div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">好感稀有度</div>
+        <div class="filter-toggles" id="f-omoideRarity">
+          <button class="ftog" data-val="5" onclick="toggleFilter('omoideRarity',5,this)" style="color:#ff55ff">限定SS</button>
+          <button class="ftog" data-val="4" onclick="toggleFilter('omoideRarity',4,this)" style="color:var(--ss)">SS</button>
+          <button class="ftog" data-val="3" onclick="toggleFilter('omoideRarity',3,this)" style="color:var(--s)">S</button>
+          <button class="ftog" data-val="2" onclick="toggleFilter('omoideRarity',2,this)" style="color:var(--aa)">AA</button>
+          <button class="ftog" data-val="1" onclick="toggleFilter('omoideRarity',1,this)" style="color:var(--a)">A</button>
+        </div>
+      </div>
+
+      </div><!-- #filters-body -->
+      <div id="char-count"></div>
+    </div>
+    <div id="char-list"></div>
+  </div>
+
+  <div id="detail">
+    <div id="detail-mob-bar">
+      <button id="detail-mob-prev" onclick="navChara(-1)" aria-label="前へ">‹</button>
+      <span class="nav-label" id="detail-mob-label"></span>
+      <button onclick="closeDetailMob()" aria-label="閉じる">✕</button>
+      <button id="detail-mob-next" onclick="navChara(1)" aria-label="次へ">›</button>
+    </div>
+    <div id="placeholder">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+      </svg>
+      <p>左の一覧から魔剣を選択してください</p>
+    </div>
+    <div id="chara-detail" style="display:none"></div>
+  </div>
+</div>
+</div>
+
+<script type="module">
+import { Nav, updateReviseBar } from '../js/nav.js';
+import { state, OMOIDE_KEYS } from '../js/state.js';
+import { ELEMENT, WEAPON, RARITY, BUNRUI, BUNRUI_SHORT, BD_SPECIAL,
+         BD_SPECIAL_COLOR, OMOIDE_THRESHOLDS, SCOPE, SCOPE_SHORT, CONDITION,
+         ELEM_COLOR, ELEM_CSS_VAR, ELEMS_ORDER, WEAPONS_ORDER,
+         renderFilterToggles, renderElementFilterToggles,
+         renderEditSelect, renderEditCheckboxes } from '../shared/constants.js';
+import { FilterCore } from '../shared/filter-core.js';
+import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
+import { CHARA_SPEC } from '../shared/chara-spec.js';
+import { escHtml, fmt, fmtNum, fmtBairitu, fmtHitStages, ctPfx,
+         hasOmoide, parseBairituVal, renderRightTags, hideLoading } from '../js/utils.js';
+import { deepApply, computeDiff, _deepDiff } from '../js/edit.js';
+import { applyFilters, initFilterToggles, toggleFilter, toggleFilters,
+         collapseFiltersOnScroll, toggleSortDir, resetFilters,
+         getBestState, getSortValue } from '../js/filter.js';
+import { renderList, renderDetail, selectChar, closeDetailMob, navChara,
+         updateMobNavBar, setupStickyHeights, switchState, renderBDCard,
+         renderStateContent, renderStats, renderBasicInfo,
+         _fmtSortVal, renderSortBadge, _deletedSkillSet,
+         _measureStickyHeights, _scheduleMeasure } from '../js/render.js';
+import { enterEditMode, cancelEdit, saveEdit, saveRevise,
+         toggleBunrui, setPath, getPath, setHit, setHitStage, setHitStageScaling,
+         reRenderActiveState, toggleSkillTombstone, addNewCharaSkill,
+         removeAddedCharaSkill, renderEditDetail, renderEditStateContent,
+         _renderHitEdit, renderBDSpecialToggles, renderBDEffectsEdit,
+         toggleBDSpecial, addBDEffect, removeBDEffect } from '../js/edit.js';
+import { _senzaiLabel, getLinkedThresholds, makeLCSHtml, renderLatentEditBody,
+         toggleLCS, closeLCS, filterLCS, selectLCS,
+         getCrystalSlotsJS, fillOmoideSlots, renderOmoideTemplateBar,
+         showPrompt, _promptConfirm, _promptCancel,
+         saveOmoideTemplate, applyOmoideTemplate, reRenderLatentEdit,
+         ensureOmoideRow, addLatentSlot, removeLatentSlot, changeLatentSlot,
+         openLatentModal, closeLatentModal } from '../js/latent.js';
+import { openMasouModal, closeMasouModal, renderMasouEditSection,
+         toggleMasouBunrui } from '../js/masou.js';
+
+Nav.init();
+
+// ===== DATA LOAD =====
+fetch('../data/senzai_table.json')
+  .then(r => r.ok ? r.json() : {})
+  .then(d => { state.SENZAI_TABLE = d; })
+  .catch(() => {});
+
+fetch('../data/omoide_templates.json')
+  .then(r => r.ok ? r.json() : [])
+  .then(d => {
+    state.omoideTemplates = Array.isArray(d) ? d : [];
+    const sel = document.getElementById('omoide-tpl-sel');
+    if (sel) {
+      const cur = sel.value;
+      sel.innerHTML = '<option value="">テンプレートを選択...</option>'
+        + state.omoideTemplates.map(t => `<option value="${t.id}">${escHtml(t.name)}</option>`).join('');
+      if (cur) sel.value = cur;
+    }
+  })
+  .catch(() => {});
+
+// 魔装データ load + revise 適用
+fetch('../data/masou.json')
+  .then(r => r.ok ? r.json() : [])
+  .then(arr => {
+    state.allMasou = Array.isArray(arr) ? arr : [];
+    return fetch('../data/masou_revise.json').then(r => r.ok ? r.json() : []).catch(() => []);
+  })
+  .then(rev => {
+    (rev || []).forEach(p => {
+      if (p && p.id != null) state.masouReviseData[p.id] = p;
+      // apply revise patch onto matching masou
+      const idx = state.allMasou.findIndex(m => m.id === p.id);
+      if (idx >= 0) deepApply(state.allMasou[idx], p);
+    });
+    // group by chara_id
+    state.masouByChara = {};
+    state.allMasou.forEach(m => {
+      if (m.chara_id == null) return;
+      (state.masouByChara[m.chara_id] = state.masouByChara[m.chara_id] || []).push(m);
+    });
+    // 既選択中の chara があれば再描画して 魔装 button を出す
+    if (state.selectedId != null) selectChar(state.selectedId);
+  })
+  .catch(() => {});
+
+document.addEventListener('DOMContentLoaded', () => {
+  initFilterToggles();
+  fetch('../data/characters.json')
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(arr => {
+      state.allChars = arr;
+      arr.forEach(c => { state.originalData[c.id] = JSON.parse(JSON.stringify(c)); });
+      applyFilters();
+      hideLoading();
+      return fetch('../data/characters_revise.json');
+    })
+    .then(r => r.ok ? r.json() : [])
+    .then(arr => {
+      arr.forEach(c => {
+        state.reviseData[c.id] = c;
+        const idx = state.allChars.findIndex(x => x.id === c.id);
+        if (idx >= 0) deepApply(state.allChars[idx], c);
+      });
+      if (arr.length) applyFilters();
+      return fetch('../data/omoide_revise.json');
+    })
+    .then(r => r.ok ? r.json() : [])
+    .then(arr => {
+      arr.forEach(c => {
+        state.omoideReviseData[c.id] = c;
+        const idx = state.allChars.findIndex(x => x.id === c.id);
+        if (idx >= 0) deepApply(state.allChars[idx], c);
+      });
+      if (arr.length) applyFilters();
+    })
+    .catch(() => {});
+});
+
+window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
+window.addEventListener('resize', _scheduleMeasure, { passive: true });
+
+['f-sort'].forEach(id => {
+  document.getElementById(id)?.addEventListener('change', applyFilters);
+});
+
+// === expose to global scope (needed by HTML inline onclick handlers) ===
+// state は edit 模式で oninput="setPath(state.editData,...)" 等から参照される
+window.state = state;
+Object.assign(window, {
+  parseBairituVal, fmtNum, ctPfx,
+  toggleFilter, toggleSortDir, applyFilters, resetFilters, toggleFilters,
+  selectChar, closeDetailMob, navChara, switchState,
+  enterEditMode, cancelEdit, saveEdit, saveRevise,
+  toggleBunrui, setPath, setHit, setHitStage, setHitStageScaling, reRenderActiveState,
+  toggleSkillTombstone, addNewCharaSkill, removeAddedCharaSkill,
+  renderBDSpecialToggles, renderBDEffectsEdit,
+  toggleBDSpecial, addBDEffect, removeBDEffect,
+  openLatentModal, closeLatentModal,
+  openMasouModal, closeMasouModal, toggleMasouBunrui,
+  toggleLCS, closeLCS, filterLCS, selectLCS,
+  ensureOmoideRow, addLatentSlot, removeLatentSlot, changeLatentSlot,
+  renderOmoideTemplateBar, applyOmoideTemplate, saveOmoideTemplate,
+  showPrompt, _promptConfirm, _promptCancel, reRenderLatentEdit,
+  getCrystalSlotsJS, fillOmoideSlots, initFilterToggles, updateReviseBar,
+});
+</script>
+</body>
+</html>

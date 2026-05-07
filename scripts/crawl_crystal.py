@@ -10,7 +10,7 @@
 
 import argparse, requests, json, re, os, html as htmlmod
 from bs4 import BeautifulSoup
-from classify_common import classify_hit_fields
+from classify_common import classify_hit_fields, classify_effect, _detect_condition as detect_condition
 
 CRYSTAL_ADD_BUNRUI = {6, 7, 9, 11, 16, 17, 19}
 
@@ -19,20 +19,6 @@ WEAPON_MAP  = {
     '長剣': 1, '大剣': 2, '太刀': 3, '杖棒': 4, '弓矢': 5, '連弩': 6,
     '戦斧': 7, '騎槍': 8, '投擲': 9, '拳闘': 10, '魔典': 11, '大鎌': 12,
 }
-
-# 与 classify_common.py 保持一致（が / り 可选；condition=4 表示敌方破甲時触发）
-_HUSHIN = re.compile(r'残(?:り)?HP(?:が)?多いほど|HP残量が多いほど|損傷率が低いほど')
-_HAISUI = re.compile(r'残(?:り)?HP(?:が)?(?:少な|低)いほど|HP残量が少ないほど|HPが(?:少な|低)いほど|損傷率が高いほど|HPを?消耗するほど')
-_BROKEN = re.compile(r'破損状態')
-_BK_TRIG = re.compile(r'敵ブレイク状態|敵がブレイク(?:時|状態|中)|(?<!ガード)ブレイク時')
-
-
-def detect_condition(text):
-    if _BROKEN.search(text):  return 3
-    if _HUSHIN.search(text):  return 1
-    if _HAISUI.search(text):  return 2
-    if _BK_TRIG.search(text): return 4
-    return 0
 
 
 def extract_elem_buki(text):
@@ -132,6 +118,32 @@ def compute_scope(elem, buki, effect_text, tokushu):
     return 0
 
 
+def _build_effect_ent(bunrui_list, scope, elem, buki, txt_elem, txt_buki, tokushu,
+                       condition, emin, emax, calc_type=None, bairitu_override=None):
+    """Helper: build a single effect entry."""
+    ent = {'bunrui': bunrui_list, 'scope': scope}
+    if scope == 2:
+        if txt_elem: ent['element'] = txt_elem
+        if txt_buki: ent['type']    = txt_buki
+    elif scope == 3:
+        if elem: ent['element'] = elem
+        if buki: ent['type']    = buki
+    elif scope == 5:
+        if tokushu: ent['name'] = tokushu
+    ent['condition'] = condition
+    if emin is not None: ent['bairitu_init'] = emin
+    if bairitu_override is not None:
+        ent['bairitu'] = bairitu_override
+    elif emax is not None:
+        ent['bairitu'] = emax
+    ent['calc_type'] = calc_type if calc_type is not None else crystal_calc_type(bunrui_list)
+    # Placeholder default
+    if ent.get('bairitu') is None:
+        ent['bairitu'] = 1
+        ent['calc_type'] = 0
+    return ent
+
+
 def parse_row(row):
     raw = htmlmod.unescape(row.get('data-contents', '{}'))
     try:
@@ -145,29 +157,64 @@ def parse_row(row):
     fields = parse_right_col(tds[1])
     emin, emax = parse_effect_amount(fields.get('効果量', ''))
 
-    bunrui_list = d.get('bunrui', [])
+    altema_bunrui = list(d.get('bunrui', []))
     elem        = d.get('element') or 0
     buki        = d.get('buki_type') or 0
     tokushu     = fields.get('特殊条件', '')
     effect_text = fields.get('効果', '')
     scope       = compute_scope(elem, buki, effect_text, tokushu)
 
+    # Bunrui = altema labeling ∪ classify_effect text supplement
+    # 修「攻撃全体化&攻撃力DOWN」缺 [1]、crystal/584・977「攻撃力DOWN」標籤 [16] 缺 [1] 等。
+    # classify_effect の _find_kw_pos が「攻撃時」等の false-positive を排除済み。
+    kw_bunrui = list(classify_effect(effect_text)['bunrui']) if effect_text else []
+    bunrui_set = set(altema_bunrui) | set(kw_bunrui)
+    bunrui_list = sorted(bunrui_set) if bunrui_set else []
+
     txt_elem, txt_buki = extract_elem_buki(effect_text)
     condition = detect_condition(effect_text)
 
-    effect_ent = {'bunrui': bunrui_list, 'scope': scope}
-    if scope == 2:
-        if txt_elem: effect_ent['element'] = txt_elem
-        if txt_buki: effect_ent['type']    = txt_buki
-    elif scope == 3:
-        if elem: effect_ent['element'] = elem
-        if buki: effect_ent['type']    = buki
-    elif scope == 5:
-        if tokushu: effect_ent['name'] = tokushu
-    effect_ent['condition'] = condition
-    if emin is not None: effect_ent['bairitu_init'] = emin
-    if emax is not None: effect_ent['bairitu']      = emax
-    effect_ent['calc_type'] = crystal_calc_type(bunrui_list)
+    # Multi-entry split: 「ダメージ上限UP&結晶枠+N(上限N)」 形式は限+枠 二段に split。
+    # 限 segment は 効果量 (emin/emax) を継承、枠 segment は inline +N を bairitu に。
+    slot_match = re.search(r'結晶枠[+＋](\d+)', effect_text)
+    effects = []
+
+    if slot_match and 19 in bunrui_set:
+        slot_n = int(slot_match.group(1))
+        # Main segment (e.g. ダメージ上限UP) — 限/その他 stat、effect_amount を使用
+        main_bunrui = sorted(bunrui_set - {19}) or [16]
+        main_ent = _build_effect_ent(main_bunrui, scope, elem, buki, txt_elem, txt_buki,
+                                       tokushu, condition, emin, emax)
+        # Slot segment — inline +N、固定 calc_type=1
+        slot_ent = _build_effect_ent([19], scope, elem, buki, txt_elem, txt_buki,
+                                       tokushu, condition, None, None,
+                                       calc_type=1, bairitu_override=slot_n)
+        classify_hit_fields(effect_text, main_ent)
+        effects = [main_ent, slot_ent]
+    else:
+        # Single entry path (most cases)
+        ent = _build_effect_ent(bunrui_list, scope, elem, buki, txt_elem, txt_buki,
+                                  tokushu, condition, emin, emax)
+        classify_hit_fields(effect_text, ent)
+        if 7 in (ent.get('bunrui') or []) and ent.get('hit_per_stage'):
+            ent['bairitu'] = max(ent['hit_per_stage'])
+        effects = [ent]
+
+    # Merge pass: 同 (bairitu, calc_type, scope, condition, element, type, name) entries 合并 bunrui[]
+    # chara/bg crawler と一致。
+    def _merge_key(e):
+        return (e.get('bairitu'), e.get('calc_type'), e.get('scope'),
+                e.get('condition'), e.get('element'), e.get('type'), e.get('name'))
+    merged = []
+    for e in effects:
+        k = _merge_key(e)
+        for m in merged:
+            if _merge_key(m) == k:
+                m['bunrui'] = sorted(set(m['bunrui']) | set(e['bunrui']))
+                break
+        else:
+            merged.append(e)
+    effects = merged
 
     crystal = {
         'id':     d.get('id'),
@@ -175,14 +222,12 @@ def parse_row(row):
         'kana':   d.get('kana', ''),
         'rarity': d.get('rea'),
     }
+    # '効果' is renamed to 'effect_text' on output (统一 schema); 其他 Japanese keys 保留
     for k in ['効果', '効果量', '特殊条件', '対象', '上限値', '入手方法']:
         v = fields.get(k)
         if v is not None:
-            crystal[k] = v
-    classify_hit_fields(effect_text, effect_ent)
-    crystal['effects'] = [effect_ent]
-    if 7 in effect_ent.get('bunrui'):
-        effect_ent['bairitu'] = max(effect_ent['hit_per_stage'])
+            crystal['effect_text' if k == '効果' else k] = v
+    crystal['effects'] = effects
     return crystal
 
 

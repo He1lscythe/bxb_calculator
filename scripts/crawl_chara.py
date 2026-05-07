@@ -29,6 +29,7 @@ from classify_common import (
     classify_skill_chara,
     classify_effect,
     classify_hit_fields,
+    _val_for_bunrui_bd, norm, ADD_BUNRUI,
 )
 
 # ============================================================
@@ -128,7 +129,7 @@ def parse_bd_skill(table):
     rows = table.find_all("tr")
     name   = rows[0].get_text(strip=True) if len(rows) > 0 else ""
     effect = rows[1].get_text(strip=True) if len(rows) > 1 else ""
-    result = {"name": name, "effect": effect}
+    result = {"name": name, "effect_text": effect}
     m = re.search(r'【消費レベル[：:]\s*(\d+)】', effect)
     if m:
         result["cost"] = int(m.group(1))
@@ -138,8 +139,16 @@ def parse_bd_skill(table):
 def parse_bd_effects(effect_text):
     """Parse BD skill effect text into structured effects list.
     Format: 【消費レベル:N】<damage part>＆<buff part>
-    Returns list of {bunrui, scope, condition, bairitu, calc_type} dicts."""
-    text = unicodedata.normalize('NFKC', effect_text)  # ＆→& 、stays
+
+    设计：与 souls.classify_skill_v2 / chara skills.classify_skill_chara 共用一套语义分析：
+      1. split by `&` → 取 buff 部分
+      2. split buff by `[、&]` → segments
+      3. 每个 segment 独立 classify_effect → bunrui 集合 + scope + condition
+      4. 每个 bunrui 独立调 _val_for_bunrui_bd（关键词位置 → 最近的数字 pattern）
+         force_plus_n=True 因 BD 文案大量「攻撃力+1300」式加算
+      5. merge pass：同 (bairitu, calc_type, scope, condition, element, type) 的 entries 合并 bunrui[]
+    """
+    text = unicodedata.normalize('NFKC', effect_text)
     text = re.sub(r'^【消費レベル:\d+】', '', text)
     if '&' not in text:
         return []
@@ -147,57 +156,64 @@ def parse_bd_effects(effect_text):
     if not buff:
         return []
 
-    def extract_bairitu(seg):
-        m = re.search(r'([\d.]+)倍', seg)
-        if m:
-            return float(m.group(1)), 0
-        m = re.search(r'\+(\d+)', seg)
-        if m:
-            return int(m.group(1)), 1
-        m = re.search(r'(\d+)%', seg)
-        if m:
-            return round(1 + int(m.group(1)) / 100, 4), 0
-        return None, 0
-
-    segments = [s.strip() for s in re.split(r'[、&]', buff) if s.strip()]
-    from collections import defaultdict
-    groups = defaultdict(list)
-    ungrouped = []
-    for seg in segments:
-        bairitu, calc_type = extract_bairitu(seg)
-        if bairitu is not None:
-            groups[(bairitu, calc_type)].append(seg)
-        else:
-            ungrouped.append(seg)
+    # Nested split: top-level 「&」 で group、内側「、」 で sub。同 group 内の「それぞれ N倍」「ともに N%UP」 等
+    # 共有 bairitu は前置 sub にも適用（例 chara/980「攻撃力、防御力、モーション速度がそれぞれ2倍」）。
+    top_groups = [g.strip() for g in buff.split('&') if g.strip()]
 
     entries = []
-    for (bairitu, calc_type), segs in groups.items():
-        cls = classify_effect('、'.join(segs))
-        if not cls['bunrui']:
+    for group in top_groups:
+        sub_segs = [s.strip() for s in re.split(r'[、]', group) if s.strip()]
+        if not sub_segs:
             continue
-        scope = cls['scope']
-        if scope == 0 and '味方' in '、'.join(segs):
-            scope = 1
-        entry = {'bunrui': cls['bunrui'], 'scope': scope,
-                 'condition': cls['condition'],
-                 'bairitu': bairitu, 'calc_type': calc_type}
-        if cls.get('element') is not None:
-            entry['element'] = cls['element']
-        entries.append(entry)
 
-    if ungrouped:
-        cls = classify_effect('、'.join(ungrouped))
-        if cls['bunrui']:
-            scope = cls['scope']
-            if scope == 0 and '味方' in '、'.join(ungrouped):
-                scope = 1
-            entry = {'bunrui': cls['bunrui'], 'scope': scope,
-                     'condition': cls['condition']}
-            if cls.get('element') is not None:
-                entry['element'] = cls['element']
-            entries.append(entry)
+        # First pass: collect each sub の (bunrui, val, calc_type) と group 全体の最大 bairitu
+        sub_data = []   # list of (sub_text, bunrui_list, scope, condition, element, type)
+        shared_v = None
+        shared_ct = None
+        for sub in sub_segs:
+            cls = classify_effect(sub, scope_mode='bd')
+            bunruis = cls.get('bunrui', [])
+            sub_data.append((sub, bunruis, cls.get('scope', 1), cls.get('condition', 0),
+                              cls.get('element'), cls.get('type')))
+            normed = norm(sub)
+            for b in bunruis:
+                v, ct = _val_for_bunrui_bd(normed, b)
+                if v is not None and shared_v is None:
+                    shared_v, shared_ct = v, ct
 
-    return entries
+        # Second pass: build entries — placeholder bairitu falls back to shared_v
+        for sub, bunruis, scope, condition, element, type_val in sub_data:
+            normed = norm(sub)
+            for b in bunruis:
+                v, ct = _val_for_bunrui_bd(normed, b)
+                if v is None:
+                    if shared_v is not None:
+                        v, ct = shared_v, shared_ct
+                    else:
+                        v, ct = 1, 0
+                if ct is None:
+                    ct = 1 if b in ADD_BUNRUI else 0
+                ent = {'bunrui': [b], 'scope': scope, 'condition': condition,
+                       'bairitu': round(v, 6), 'calc_type': ct}
+                if element is not None: ent['element'] = element
+                if type_val is not None: ent['type'] = type_val
+                entries.append(ent)
+
+    # Merge pass: 同非-bunrui 字段的 entries 合并 bunrui[]
+    def _merge_key(e):
+        return (e.get('bairitu'), e.get('calc_type'), e.get('scope'),
+                e.get('condition'), e.get('element'), e.get('type'))
+    merged = []
+    for e in entries:
+        k = _merge_key(e)
+        for m in merged:
+            if _merge_key(m) == k:
+                m['bunrui'] = sorted(set(m['bunrui']) | set(e['bunrui']))
+                break
+        else:
+            merged.append(e)
+
+    return merged
 
 
 def parse_bdhit(effect_text):
@@ -307,7 +323,7 @@ def _elevate_bd(chara, recal, bd_special, bd_special_durations=None):
         best_bd = chara.get('bd_skill')
 
     if best_bd:
-        effect = best_bd.get('effect', '')
+        effect = best_bd.get('effect_text', '')
         if recal or 'bdhit' not in best_bd:
             best_bd['bdhit'] = parse_bdhit(effect)
         if recal or 'duration' not in best_bd:
@@ -354,7 +370,7 @@ def parse_skills_table(table):
             name   = cells[0].get_text(strip=True)
             effect = cells[1].get_text(strip=True)
             if name or effect:
-                skills.append({"name": name, "effect": effect})
+                skills.append({"name": name, "effect_text": effect})
     return skills
 
 
@@ -740,12 +756,14 @@ MULT_BUNRUI = {1,2,3,4,5,8,9,10,12,13,14,15,16,20}  # multiplicative → default
 
 _LV_RE           = re.compile(r'Lv(\d+)\+?$')
 _MAX_BAI         = re.compile(r'最大(\d+(?:\.\d+)?)倍')
+_MAN_BAI         = re.compile(r'(\d+(?:\.\d+)?)万倍')                # 「100万倍」 multiplicative (chara/1561)
 _PLAIN_BAI       = re.compile(r'(\d+(?:\.\d+)?)倍')
 _PLUS_N          = re.compile(r'[+＋](\d+(?:\.\d+)?)')
-_OKU_UP          = re.compile(r'が(\d+(?:\.\d+)?)億アップ')
-_MAN_UP          = re.compile(r'が(\d+(?:\.\d+)?)万アップ')
-_PCT_UP          = re.compile(r'が(\d+(?:\.\d+)?)%アップ')
-_PLAIN_UP        = re.compile(r'が(\d+(?:\.\d+)?)アップ')
+_OKU_PLUS        = re.compile(r'[+＋](\d+(?:\.\d+)?)億')             # 「+50億」 (chara/1613)
+_OKU_UP          = re.compile(r'が?(\d+(?:\.\d+)?)億(?:UP|アップ|上昇|上げる)')
+_MAN_UP          = re.compile(r'が?(\d+(?:\.\d+)?)万(?:UP|アップ|上昇|上げる)')
+_PCT_UP          = re.compile(r'が?(\d+(?:\.\d+)?)%(?:UP|アップ|上昇)')
+_PLAIN_UP        = re.compile(r'が(\d+(?:\.\d+)?)(?:アップ|UP)')
 _MAX_GAUGE       = re.compile(r'数に応じて.*最大(\d+(?:\.\d+)?)ゲージ')
 _BD_LV_ZET       = re.compile(r'B\.D\.レベル上限が絶大に上昇')
 # 熟度 clause max value — three unit variants
@@ -815,6 +833,12 @@ def _effect_extract(effect, bunrui):
         return float(m.group(1)), 0
 
     is_add = any(b in ADD_BUNRUI or b == 21 for b in bunrui)
+
+    # 加算系 patterns — 通常 add bunrui 用、ただし 「Xが+N」 などは mult bunrui (HP/防御力 等) でも有効。
+    # 「+N億」 (chara/1613) と 「Xが+N」 (chara/1453) を全 bunrui で許可。
+    m = _OKU_PLUS.search(base)
+    if m:
+        return float(m.group(1)) * 100_000_000, 1
     if is_add:
         m = _OKU_UP.search(base)
         if m:
@@ -822,20 +846,29 @@ def _effect_extract(effect, bunrui):
         m = _MAN_UP.search(base)
         if m:
             return float(m.group(1)) * 10_000, 1
-        m = _PCT_UP.search(base)
-        if m:
-            return round(1 + float(m.group(1)) / 100, 6), 0
         m = _PLAIN_UP.search(base)
         if m:
             return float(m.group(1)), 1
-        m = _PLUS_N.search(base)
-        if m:
-            return float(m.group(1)), 1
-        m = _MAX_GAUGE.search(effect)   # gauge pattern uses full effect
+        m = _MAX_GAUGE.search(effect)
         if m:
             return float(m.group(1)) / 3, 1
         if _BD_LV_ZET.search(effect):
             return 60.0, 1
+
+    # %UP は all bunrui — 「攻撃力が30%UP」 (chara/1545) 修正。
+    m = _PCT_UP.search(base)
+    if m:
+        return round(1 + float(m.group(1)) / 100, 6), 0
+
+    # 「Xが+N」 / 単独 +N — all bunrui 許可 (chara/1453 の HPが+7764 修正)。
+    m = _PLUS_N.search(base)
+    if m:
+        return float(m.group(1)), 1
+
+    # 「N万倍」 multiplicative (chara/1561 の 100万倍 修正)、_PLAIN_BAI より先に評価.
+    m = _MAN_BAI.search(base)
+    if m:
+        return float(m.group(1)) * 10_000, 0
 
     m = _PLAIN_BAI.search(base)
     if m:
@@ -876,7 +909,7 @@ def _scaling_to_json(max_val, base_val):
 def assign_bairitu_and_scaling(skill):
     """Return (bairitu, bairitu_scaling, calc_type) for a skill."""
     name   = skill.get('name',   '')
-    effect = _norm(skill.get('effect', ''))
+    effect = _norm(skill.get('effect_text', ''))
     effects = skill.get('effects', [])
     bunrui = effects[0].get('bunrui', []) if effects else []
 
@@ -929,7 +962,7 @@ def _compute_element_buff(chara):
     result = _ALL_ELEMENTS
     for state_data in chara.get('states', {}).values():
         for skill in state_data.get('skills', []):
-            effect = skill.get('effect', '')
+            effect = skill.get('effect_text', '')
             if not _ELEM_BUFF_TRIGGER.search(effect):
                 continue
             if '属性不一致でも' in effect:
@@ -1060,7 +1093,7 @@ def apply_pipeline(characters, chara_ids=None, recal=False, bd_special=None, bd_
     recal: if True, always overwrite existing values.
     bd_special: {char_id: [special_ids]} from page crawl.
     bd_special_durations: {char_id: {sid: 'Xs'}} from page crawl."""
-    table_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'skilllist_table.json')
+    table_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '_lookup', 'skilllist_table.json')
     skilllist_table = {}
     if os.path.exists(table_path):
         with open(table_path, encoding='utf-8') as f:
@@ -1087,7 +1120,7 @@ def apply_pipeline(characters, chara_ids=None, recal=False, bd_special=None, bd_
                 if recal or 'calc_type' not in e:
                     e['calc_type'] = ct
                 if recal or 'hit_type' not in e:
-                    classify_hit_fields(skill.get('effect', ''), e)
+                    classify_hit_fields(skill.get('effect_text', ''), e)
         _compute_element_buff(chara)
         count += 1
 

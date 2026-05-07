@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BxB ソウルデータベース</title>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/nav.css">
+<link rel="stylesheet" href="../css/shared.css">
+<link rel="stylesheet" href="../css/soul.css">
+</head>
+<body>
+{{include _loading.html}}
+
+<div id="page-wrap">
+
+<div id="layout">
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div id="filters">
+      <div class="mob-search-row">
+        <input type="text" id="search" placeholder="🔍 ソウル名で検索..."
+               style="padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;"
+               oninput="applyFilters()">
+        <span id="soul-count-mob"></span>
+      </div>
+      <div class="actions-row">
+        <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
+        <select id="f-sort" onchange="applyFilters()">
+          <option value="id">ID順</option>
+          <option value="rarity">レア度順</option>
+        </select>
+        <button id="sort-dir" onclick="toggleSortDir()">↓</button>
+        <button class="btn-reset" onclick="resetFilters()">リセット</button>
+      </div>
+      <div id="filters-body">
+      <div class="filter-section">
+        <div class="filter-label">レア度</div>
+        <div class="filter-toggles" id="f-rarity"></div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">得意属性</div>
+        <div class="filter-toggles" id="f-element"></div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label">得意武器</div>
+        <div class="filter-toggles" id="f-type"></div>
+      </div>
+
+      </div><!-- #filters-body -->
+      <div id="soul-count"></div>
+    </div>
+    <div id="soul-list"></div>
+  </div>
+
+  <!-- DETAIL -->
+  <div id="detail">
+    <div id="detail-mob-bar">
+      <button id="detail-mob-prev" onclick="navSoul(-1)" aria-label="前へ">‹</button>
+      <span class="nav-label" id="detail-mob-label"></span>
+      <button onclick="closeDetailMob()" aria-label="閉じる">✕</button>
+      <button id="detail-mob-next" onclick="navSoul(1)" aria-label="次へ">›</button>
+    </div>
+    <div id="placeholder">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <circle cx="12" cy="8" r="5"/><path d="M3 21c0-4.4 4-8 9-8s9 3.6 9 8"/>
+      </svg>
+      <p>左の一覧からソウルを選択してください</p>
+    </div>
+    <div id="soul-detail" style="display:none"></div>
+  </div>
+</div>
+</div>
+
+<script type="module">
+import { Nav, updateReviseBar } from '../js/nav.js';
+import { state } from '../js/soul-state.js';
+import { ELEMENT, WEAPON, BUNRUI_SHORT, CONDITION, ELEMS_ORDER, WEAPONS_ORDER,
+         renderFilterToggles, renderElementFilterToggles,
+         renderEditSelect, renderEditCheckboxes } from '../shared/constants.js';
+import { FilterCore } from '../shared/filter-core.js';
+import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
+import { SOUL_SPEC } from '../shared/soul-spec.js';
+import { escHtml, fmt, fmtBairitu, fmtHitStages, ctPfx, hideLoading } from '../js/utils.js';
+import { deepApply } from '../js/diff.js';
+import { initFilterToggles, toggleFilter, toggleFilters, collapseFiltersOnScroll,
+         toggleSortDir, resetFilters, applyFilters } from '../js/soul-filter.js';
+import { renderList, selectSoul, closeDetailMob, navSoul, updateMobNavBar,
+         setupStickyHeights, renderDetail, renderAffinityView } from '../js/soul-render.js';
+import { enterEditMode, cancelEdit, saveEdit, saveRevise,
+         toggleBunrui, toggleElem, toggleType, setHitStage, setHitStageScaling,
+         toggleSkillTombstone, addNewSkill, removeAddedSkill,
+         addSkillEffect, removeSkillEffect, reRenderEditSkills } from '../js/soul-edit.js';
+
+Nav.init();
+
+// ===== DATA LOAD =====
+document.addEventListener('DOMContentLoaded', () => {
+  initFilterToggles();
+  fetch('../data/souls.json')
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(arr => {
+      state.allSouls = arr;
+      arr.forEach(s => { state.originalData[s.id] = JSON.parse(JSON.stringify(s)); });
+      return fetch('../data/souls_revise.json');
+    })
+    .then(r => r.ok ? r.json() : [])
+    .then(arr => {
+      arr.forEach(s => {
+        state.reviseData[s.id] = s;
+        const idx = state.allSouls.findIndex(x => x.id === s.id);
+        if (idx >= 0) deepApply(state.allSouls[idx], s);
+      });
+      applyFilters();
+      hideLoading();
+    })
+    .catch(() => { applyFilters(); hideLoading(); });
+});
+
+window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
+window.addEventListener('resize', setupStickyHeights, { passive: true });
+
+// Expose globals for inline HTML onclick handlers
+window.state = state;
+Object.assign(window, {
+  toggleFilter, toggleSortDir, applyFilters, resetFilters, toggleFilters,
+  selectSoul, closeDetailMob, navSoul,
+  enterEditMode, cancelEdit, saveEdit, saveRevise,
+  toggleBunrui, toggleElem, toggleType,
+  setHitStage, setHitStageScaling,
+  toggleSkillTombstone, addNewSkill, removeAddedSkill,
+  addSkillEffect, removeSkillEffect, reRenderEditSkills,
+  updateReviseBar,
+  escHtml, fmtBairitu, setPath: (o,p,v) => { const parts=p.split('.'); let c=o; for(let i=0;i<parts.length-1;i++){if(c[parts[i]]==null)c[parts[i]]={};c=c[parts[i]];} c[parts[parts.length-1]]=v; },
+});
+</script>
+</body>
+</html>

@@ -30,12 +30,12 @@ for chara in chars:
     for sn, sd in chara.get('states', {}).items():
         for skill in sd.get('skills', []):
             skn = skill.get('name', '')
-            eff = skill.get('effect', '')
+            eff = skill.get('effect_text', '')
             s_bun = normalize_field(skill.get('bunrui', []))
             s_sco = skill.get('scope')
             s_con = skill.get('condition')
 
-            fresh = {'name': skn, 'effect': eff}
+            fresh = {'name': skn, 'effect_text': eff}
             classify_skill_chara(fresh, table, CAT_TO_BUNRUI_SKILLLIST)
             fe = (fresh.get('effects') or [{}])[0]
             f_bun = normalize_field(fe.get('bunrui', []))

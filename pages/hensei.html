@@ -1,388 +1,33 @@
+<!-- AUTO-GENERATED from pages_src/hensei.html — DO NOT EDIT. Run `node scripts/build.js` to rebuild. -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BxB 編成</title>
-<style>
-:root{--bg:#0f1117;--bg2:#1a1d27;--bg3:#22263a;--border:#2e3250;--text:#e0e4f0;--text2:#8890b0;--accent:#5b7fff;
-  --fire:#ff5533;--water:#3388ff;--wind:#44cc66;--light:#ffcc00;--dark:#aa55ff;--none:#888899;}
-*{box-sizing:border-box;margin:0;padding:0;}
-button{-webkit-user-select:text;user-select:text;}
-body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',sans-serif;font-size:14px;min-height:100vh;display:flex;justify-content:center;}
-#page-wrap{max-width:72rem;width:100%;display:flex;flex-direction:column;min-height:100svh;}
-
-/* team size bar */
-#team-size-bar{display:flex;gap:8px;padding:10px 16px;background:var(--bg2);border-bottom:1px solid var(--border);align-items:center;flex-shrink:0;}
-
-/* enemy / 副本 / 工会 信息 bar */
-#enemy-bar{padding:8px 16px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center;font-size:12px;flex-shrink:0;}
-#enemy-bar .eb-group{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
-#enemy-bar .eb-label{font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.05em;}
-#enemy-bar .eb-btn{padding:3px 10px;border-radius:5px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:12px;cursor:pointer;}
-#enemy-bar .eb-btn:hover{border-color:var(--accent);color:var(--text);}
-#enemy-bar .eb-btn.on{background:rgba(91,127,255,.22);border-color:var(--accent);color:var(--accent);}
-#enemy-bar .eb-btn.elem-1.on{background:rgba(255,85,51,.22);border-color:var(--fire);color:var(--fire);}
-#enemy-bar .eb-btn.elem-2.on{background:rgba(51,136,255,.22);border-color:var(--water);color:var(--water);}
-#enemy-bar .eb-btn.elem-3.on{background:rgba(68,204,102,.22);border-color:var(--wind);color:var(--wind);}
-#enemy-bar .eb-btn.elem-4.on{background:rgba(255,204,0,.22);border-color:var(--light);color:var(--light);}
-#enemy-bar .eb-btn.elem-5.on{background:rgba(170,85,255,.22);border-color:var(--dark);color:var(--dark);}
-#enemy-bar select{padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;outline:none;cursor:pointer;}
-
-/* 有利武器 — 桌面行内 flex，移动 6 列 × 2 行 grid 对齐 */
-.adv-weapon-grid{display:flex;flex-wrap:wrap;gap:3px;}
-@media(max-width:768px){
-  /* #enemy-bar .eb-adv-weapon{flex-basis:100%;flex-direction:column;align-items:stretch;gap:4px;} */
-  #enemy-bar .eb-adv-weapon{display:flex;justify-content:space-between;align-items:center;}
-  .adv-weapon-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;}
-  .adv-weapon-grid .eb-btn{padding:3px 4px;text-align:center;}
-}
-
-/* エンブレム 4 槽 icon picker（仿 crystals）*/
-#enemy-bar .emblem-slots{display:flex;gap:8px;flex-wrap:wrap;}
-.emblem-slot-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;}
-.emblem-thumb{width:40px;height:40px;border-radius:5px;object-fit:cover;border:1px solid rgba(91,127,255,.4);cursor:pointer;background:var(--bg3);transition:border-color .1s;}
-.emblem-thumb:hover{border-color:var(--accent);}
-.emblem-empty{width:40px;height:40px;border-radius:5px;border:1px dashed var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:20px;line-height:1;transition:border-color .1s,color .1s;}
-.emblem-empty:hover{border-color:var(--accent);color:var(--accent);}
-.emblem-slot-meta{display:flex;align-items:center;gap:2px;}
-.emblem-lv-input{width:34px;padding:1px 3px;border-radius:3px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:10px;outline:none;text-align:center;}
-.emblem-lv-input::-webkit-outer-spin-button,
-.emblem-lv-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
-.emblem-lv-input{-moz-appearance:textfield;}
-.emblem-lv-max{font-size:10px;color:var(--text2);}
-.emblem-rm{position:absolute;top:-6px;right:-6px;width:16px;height:16px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text2);font-size:11px;line-height:1;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;}
-.emblem-rm:hover{border-color:#ff5555;color:#ff5555;}
-
-/* エンブレム modal */
-#emblem-modal{display:none;position:fixed;inset:0;z-index:2200;align-items:center;justify-content:center;}
-#emblem-modal.open{display:flex;}
-#emblem-modal .modal-panel{width:min(640px,96vw);height:min(640px,90vh);}
-.ts-label{font-size:11px;font-weight:700;color:var(--text2);margin-right:4px;letter-spacing:.05em;}
-.size-btn{padding:4px 18px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
-.size-btn:hover{border-color:var(--accent);color:var(--text);}
-.size-btn.active{background:rgba(91,127,255,.22);border-color:var(--accent);color:var(--accent);}
-
-/* slots */
-#slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:16px;align-items:start;}
-.slot-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:opacity .2s;}
-.slot-card.disabled{opacity:.35;pointer-events:none;}
-.slot-header{padding:10px 14px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;min-height:42px;}
-.slot-num{font-size:15px;font-weight:700;color:var(--accent);flex-shrink:0;}
-.slot-chara-name{font-size:12px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;}
-.slot-clear-btn{margin-left:auto;flex-shrink:0;padding:3px 10px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:11px;cursor:pointer;transition:all .1s;}
-.slot-clear-btn:hover{border-color:#ff5555;color:#ff7777;}
-.slot-chara-meta{font-size:10px;color:var(--text2);flex-shrink:0;}
-.slot-body{padding:12px 14px;display:flex;flex-direction:column;gap:14px;}
-
-/* equip row */
-.equip-section{display:flex;flex-direction:column;gap:7px;}
-.equip-label{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;gap:4px;}
-.equip-row{display:flex;gap:10px;align-items:center;}
-.equip-icon{width:40px;height:40px;border-radius:6px;object-fit:cover;background:var(--bg3);border:1px solid var(--border);flex-shrink:0;}
-.equip-icon.soul-img{width:60px;height:60px;border-radius:6px;}
-.equip-icon.bg-img{width:60px;height:60px;border-radius:6px;}
-.equip-icon-empty{width:40px;height:40px;border-radius:6px;background:var(--bg3);border:1px dashed var(--border);flex-shrink:0;}
-.equip-icon-empty.soul-img{width:60px;height:60px;border-radius:6px;}
-.equip-icon-empty.bg-img{width:60px;height:60px;border-radius:6px;}
-.picker-wrap{flex:1;min-width:0;}
-.picker-btn{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:14px;padding:7px 10px;text-align:left;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:border-color .1s;display:block;}
-.picker-row{display:flex;gap:6px;align-items:center;}
-.picker-row .picker-btn{flex:1;width:auto;}
-.picker-btn:hover{border-color:var(--accent);}
-.picker-btn.empty{color:var(--text2);font-style:italic;}
-.picker-btn.has-val{border-color:rgba(91,127,255,.45);}
-.picker-sub{font-size:11px;color:var(--text2);margin-top:3px;padding-left:2px;}
-.elem-dot{display:inline-block;width:7px;height:7px;border-radius:50%;vertical-align:middle;margin-right:3px;}
-
-/* skills panel in slot */
-.skills-panel{display:flex;flex-direction:column;gap:4px;margin-top:4px;}
-.skill-item{background:rgba(0,0,0,.28);border-radius:7px;padding:5px 8px;border-left:2px solid rgba(91,127,255,.4);display:flex;flex-direction:column;gap:5px;}
-.skill-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.skill-eftxt{font-size:11px;color:var(--text2);margin-bottom:4px;line-height:1.5;}
-.eftags{display:flex;flex-wrap:wrap;gap:5px;align-items:center;}
-.tag-b{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600;background:rgba(91,127,255,.18);color:#9bb0ff;border:1px solid rgba(91,127,255,.3);}
-.tag-scope{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;color:var(--text2);background:var(--bg);border:1px solid var(--border);}
-.tag-lim{color:#cc99ff;background:rgba(170,85,255,.15);border-color:rgba(170,85,255,.3);}
-.tag-cond{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;color:#ffaa44;background:rgba(255,170,68,.12);border:1px solid rgba(255,170,68,.3);}
-.tag-val{font-size:13px;font-weight:700;color:#ffe066;padding:0 4px;}
-
-/* collapsible detail panels */
-.detail-wrap{display:none;}
-.detail-wrap.open{display:block;}
-.detail-toggle{background:none;border:none;color:var(--text2);font-size:10px;cursor:pointer;padding:0 2px;line-height:1;vertical-align:middle;margin-left:4px;transition:color .1s;}
-.detail-toggle:hover{color:var(--accent);}
-
-/* crystals */
-.crystals-grid{display:flex;flex-wrap:wrap;gap:6px;}
-.crystal-slot-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;}
-.crystal-thumb{width:38px;height:38px;border-radius:5px;object-fit:cover;border:1px solid rgba(91,127,255,.4);cursor:pointer;transition:border-color .1s;background:var(--bg3);}
-.crystal-thumb:hover{border-color:var(--accent);}
-.crystal-empty{width:38px;height:38px;border-radius:5px;border:1px dashed var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:18px;line-height:1;transition:border-color .1s,color .1s;}
-.crystal-empty:hover{border-color:var(--accent);color:var(--accent);}
-.crystal-rm{background:none;border:none;font-size:9px;color:var(--text2);cursor:pointer;line-height:1;padding:0;}
-.crystal-rm:hover{color:#ff5555;}
-.cr-eff-list{display:flex;flex-direction:column;gap:3px;margin-top:6px;}
-.cr-eff-row{display:flex;align-items:flex-start;gap:6px;padding:4px 0;border-bottom:1px solid rgba(46,50,80,.6);}
-.cr-eff-row:last-child{border-bottom:none;}
-.cr-eff-name{font-size:10px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px;flex-shrink:0;}
-.cr-eff-tags{display:flex;flex-wrap:wrap;gap:3px;flex:1;}
-
-/* ===== ENTITY MODAL (z-index 2000) ===== */
-#entity-modal{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;}
-#entity-modal.open{display:flex;}
-#omoide-modal{display:none;position:fixed;inset:0;z-index:2500;align-items:center;justify-content:center;}
-#omoide-modal.open{display:flex;}
-#omoide-modal .modal-panel{width:min(640px,96vw);max-height:min(720px,90vh);}
-#omoide-modal .modal-body{flex-direction:column;padding:0 14px 12px;overflow-y:auto;gap:6px;}
-#omoide-modal .om-toolbar{display:flex;gap:8px;padding:12px 0 8px;border-bottom:1px solid var(--border);margin-bottom:6px;flex-shrink:0;position:sticky;top:0;background:var(--bg2);z-index:1;}
-/* ===== DETAIL MODAL (z-index 3000) ===== */
-#detail-modal{display:none;position:fixed;inset:0;z-index:3000;align-items:center;justify-content:center;}
-#detail-modal.open{display:flex;}
-
-.modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.65);}
-.modal-panel{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;z-index:1;overflow:hidden;}
-#entity-modal .modal-panel{width:min(720px,96vw);height:min(860px,94vh);}
-#detail-modal .modal-panel{width:min(740px,96vw);height:min(720px,92vh);}
-.modal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px;}
-.modal-header-title{font-size:14px;font-weight:700;flex:1;}
-.modal-close{background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;line-height:1;padding:2px 6px;border-radius:4px;flex-shrink:0;}
-.modal-close:hover{color:var(--text);background:var(--bg3);}
-.modal-body{display:flex;flex:1;overflow:hidden;}
-
-/* sidebar */
-.modal-sidebar{width:230px;min-width:180px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;padding:10px;gap:8px;flex-shrink:0;}
-.modal-sidebar::-webkit-scrollbar{width:4px;}
-.modal-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-.modal-search{width:100%;padding:7px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;outline:none;}
-.modal-search:focus{border-color:var(--accent);}
-.f-section{display:flex;flex-direction:column;gap:4px;}
-.f-label{font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;}
-.f-toggles{display:flex;flex-wrap:wrap;gap:3px;}
-.ftog{font-size:11px;padding:2px 7px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all .1s;white-space:nowrap;}
-.ftog:hover{border-color:var(--accent);color:var(--text);}
-.ftog.on{background:rgba(91,127,255,.25);border-color:var(--accent);color:#7b9fff;font-weight:700;}
-.ftog.elem-1.on{background:rgba(255,85,51,.22);border-color:var(--fire);color:var(--fire);}
-.ftog.elem-2.on{background:rgba(51,136,255,.22);border-color:var(--water);color:var(--water);}
-.ftog.elem-3.on{background:rgba(68,204,102,.22);border-color:var(--wind);color:var(--wind);}
-.ftog.elem-4.on{background:rgba(255,204,0,.22);border-color:var(--light);color:var(--light);}
-.ftog.elem-5.on{background:rgba(170,85,255,.22);border-color:var(--dark);color:var(--dark);}
-.f-sort-row{display:flex;gap:5px;align-items:center;}
-.f-sort-row select{flex:1;min-width:0;padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:11px;outline:none;cursor:pointer;}
-.f-sort-dir{padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;cursor:pointer;flex-shrink:0;}
-.f-sort-dir:hover{border-color:var(--accent);color:var(--accent);}
-.f-reset-btn{padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:11px;cursor:pointer;}
-.f-reset-btn:hover{border-color:var(--accent);color:var(--text);}
-.modal-count{font-size:11px;color:var(--text2);text-align:right;}
-
-/* entity list */
-.em-list{flex:1;overflow-y:auto;overflow-x:hidden;background:var(--bg);}
-.em-list::-webkit-scrollbar{width:4px;}
-.em-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-.em-item{padding:8px 12px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .1s;min-width:0;}
-.em-item:hover{background:var(--bg3);}
-.em-item.active{background:#1e2d5a;border-left:3px solid var(--accent);padding-left:9px;}
-.sort-val{font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0;padding:1px 6px;border-radius:4px;background:rgba(91,127,255,.12);border:1px solid rgba(91,127,255,.3);}
-.stats-panel{margin-top:6px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:3px 2px;}
-.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;}
-.stats-cell{display:flex;justify-content:space-between;font-size:11px;padding:2px 4px;background:var(--bg2);border-radius:4px;min-width:0;}
-.stats-cell .stats-val{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.stats-key{color:var(--text2);}
-.stats-val{font-weight:700;color:var(--accent);}
-.omoide-equip{margin-top:6px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px;}
-.om-toolbar{display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap;}
-.om-btn{font-size:12px;padding:3px 8px;border-radius:4px;border:1px solid var(--accent);background:var(--bg);color:var(--accent);cursor:pointer;}
-.om-btn:hover{background:rgba(91,127,255,.15);}
-.om-row{display:flex;align-items:center;gap:3px;padding:2px 0;flex-wrap:wrap;}
-.om-thresh{font-size:12px;color:var(--text2);min-width:42px;text-align:right;}
-.om-opt{font-size:12px;padding:3px 8px;border-radius:3px;border:1px solid var(--border);background:var(--bg);color:var(--text2);cursor:pointer;white-space:nowrap;}
-.om-opt:hover{border-color:var(--accent);color:var(--text);}
-.om-opt.on{background:rgba(91,127,255,.25);border-color:var(--accent);color:#7b9fff;font-weight:700;}
-.em-icon{width:36px;height:36px;border-radius:5px;object-fit:cover;flex-shrink:0;background:var(--bg3);}
-.em-icon.soul{width:36px;height:36px;border-radius:5px;}
-.em-name{flex:1;font-size:12px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
-.em-effect{font-size:10px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;flex-shrink:0;}
-/* BG list item — rarity+name row + wrapping effect */
-.em-item-bg{align-items:flex-start;}
-.em-bg-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;padding-top:2px;}
-.em-bg-header{display:flex;align-items:center;gap:6px;min-width:0;}
-.em-bg-name{font-size:12px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;}
-.em-bg-eff{font-size:11px;color:var(--text2);line-height:1.5;word-break:break-all;white-space:normal;}
-.em-detail-btn{flex-shrink:0;padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:10px;cursor:pointer;transition:all .1s;white-space:nowrap;}
-.em-detail-btn:hover{border-color:var(--accent);color:var(--accent);}
-.em-clear{padding:8px 12px;border-bottom:1px solid var(--border);cursor:pointer;font-size:12px;color:var(--text2);background:var(--bg);}
-.em-clear:hover{background:var(--bg3);color:#ff7777;}
-.em-clear.sticky{position:sticky;top:0;z-index:2;}
-/* 好感数字输入：去掉浏览器默认上下箭头（Chrome/Firefox 兼容） */
-.aff-input::-webkit-outer-spin-button,
-.aff-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
-.aff-input{-moz-appearance:textfield;}
-.em-no-results{text-align:center;color:var(--text2);padding:40px;font-size:12px;}
-
-/* badges */
-.badge{font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;flex-shrink:0;}
-.badge.elem-1{background:var(--fire);color:#fff;}.badge.elem-2{background:var(--water);color:#fff;}
-.badge.elem-3{background:var(--wind);color:#fff;}.badge.elem-4{background:var(--light);color:#000;}
-.badge.elem-5{background:var(--dark);color:#fff;}.badge.elem-6{background:var(--none);color:#fff;}
-.badge.weapon{background:var(--bg3);color:var(--text2);border:1px solid var(--border);}
-.state-dots{display:flex;gap:2px;flex-shrink:0;}
-.state-dot{width:6px;height:6px;border-radius:50%;background:var(--border);}
-.state-dot.has{background:var(--accent);}
-
-/* ===== SOUL AFFINITY (detail modal) ===== */
-.sdm-aff-grid{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;}
-.sdm-aff-cell{display:flex;flex-direction:column;align-items:center;flex:1;min-width:46px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 4px;gap:2px;}
-.sdm-aff-name{font-size:11px;font-weight:700;}
-.sdm-aff-level{font-size:10px;font-weight:700;}
-.sdm-aff-effect{font-size:10px;color:var(--text2);}
-.sdm-acq-table{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;}
-.sdm-acq-key{font-size:11px;font-weight:700;color:var(--text2);}
-.sdm-acq-val{font-size:12px;}
-/* ===== BG FIELDS (detail modal) ===== */
-.bgdm-layout{display:flex;gap:20px;align-items:flex-start;}
-.bgdm-fields{flex:1;min-width:0;overflow:hidden;}
-.bgdm-field-row{display:grid;grid-template-columns:72px 1fr;gap:4px 12px;margin-bottom:14px;align-items:start;}
-.bgdm-field-key{font-size:11px;font-weight:700;color:var(--text2);padding-top:2px;}
-.bgdm-field-val{font-size:13px;line-height:1.7;}
-.bgdm-eff-line{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-bottom:5px;}
-.bgdm-img-wrap{flex-shrink:0;text-align:center;}
-.bgdm-img-wrap img{max-width:240px;width:100%;height:auto;border-radius:8px;display:block;}
-.bgdm-img-rarity{margin-top:8px;font-size:12px;font-weight:700;text-align:center;color:var(--text2);}
-@media(max-width:768px){
-  .bgdm-layout{flex-direction:column-reverse;}
-  .bgdm-img-wrap{width:100%;text-align:center;}
-  .bgdm-img-wrap img{max-width:160px;margin:0 auto;}
-}
-/* ===== DETAIL MODAL BODY ===== */
-.dm-body{flex:1;overflow-y:auto;padding:20px 24px;}
-.dm-body::-webkit-scrollbar{width:5px;}
-.dm-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-.dm-select-btn{padding:5px 14px;border-radius:6px;border:1px solid var(--accent);background:rgba(91,127,255,.15);color:#7b9fff;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;}
-.dm-select-btn:hover{background:rgba(91,127,255,.3);}
-/* chara header */
-.dm-chara-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border);}
-.dm-chara-icon{width:52px;height:52px;border-radius:7px;object-fit:cover;flex-shrink:0;}
-.dm-chara-info{flex:1;}
-.dm-chara-title{font-size:20px;font-weight:700;margin-bottom:8px;}
-.dm-chara-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
-.dm-meta-chip{display:flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:12px;}
-.dm-meta-chip .elem-dot{width:8px;height:8px;}
-/* state tabs */
-.dm-state-tabs{display:flex;gap:0;margin-bottom:16px;border-bottom:2px solid var(--border);}
-.dm-state-tab{padding:8px 20px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--text2);transition:color .15s;}
-.dm-state-tab:hover{color:var(--text);}
-.dm-state-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
-.dm-state-content{display:none;}
-.dm-state-content.active{display:block;}
-/* sections */
-.dm-section{margin-bottom:20px;}
-.dm-section-title{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
-.dm-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
-/* skills */
-.dm-skills-list{display:flex;flex-direction:column;gap:6px;}
-.dm-skill-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;}
-.dm-skill-name-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;}
-.dm-skill-name{font-weight:600;font-size:13px;color:var(--accent);flex:1;min-width:0;}
-.dm-skill-tags{display:flex;gap:3px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end;}
-.dm-skill-eff-row{display:flex;align-items:flex-start;gap:8px;}
-.dm-skill-eff{font-size:13px;line-height:1.6;flex:1;}
-.dm-skill-bairitu{flex-shrink:0;font-size:12px;color:var(--text2);white-space:nowrap;padding-top:2px;}
-/* bunrui / scope / cond tags (same naming as characters.html) */
-.bunrui-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;background:rgba(91,127,255,.18);color:#7b9fff;border:1px solid rgba(91,127,255,.35);white-space:nowrap;}
-.scope-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;white-space:nowrap;}
-.scope-self{background:rgba(120,120,120,.18);color:#999;border:1px solid rgba(120,120,120,.3);}
-.scope-all{background:rgba(60,180,100,.18);color:#4cbb6e;border:1px solid rgba(60,180,100,.35);}
-.scope-lim{background:rgba(255,180,40,.18);color:#ffb828;border:1px solid rgba(255,180,40,.35);}
-.cond-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;white-space:nowrap;}
-.cond-1{background:rgba(255,200,40,.18);color:#ffd040;border:1px solid rgba(255,200,40,.35);}
-.cond-2{background:rgba(255,80,80,.18);color:#ff6060;border:1px solid rgba(255,80,80,.35);}
-.cond-3{background:rgba(160,80,255,.18);color:#b060ff;border:1px solid rgba(160,80,255,.35);}
-/* BD */
-.dm-bd-card{background:#1a1040;border:1px solid #4433aa;border-radius:8px;padding:12px 14px;}
-.dm-bd-label{font-size:10px;font-weight:700;color:#aa88ff;letter-spacing:.1em;margin-bottom:4px;}
-.dm-bd-name{font-weight:700;font-size:14px;margin-bottom:6px;color:#cc99ff;}
-.dm-bd-eff{font-size:13px;line-height:1.6;}
-/* stats */
-.dm-stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;}
-.dm-stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
-.dm-stat-label{font-size:11px;color:var(--text2);margin-bottom:4px;}
-.dm-stat-row{display:flex;justify-content:space-between;align-items:baseline;margin-top:4px;}
-.dm-stat-row-lbl{font-size:11px;color:var(--text2);}
-.dm-stat-row-val{font-size:14px;font-weight:700;}
-.dm-stat-row-val.init{color:var(--text2);font-size:13px;font-weight:600;}
-/* info table */
-.dm-info-table{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:8px;overflow:hidden;}
-.dm-info-cell{background:var(--bg3);padding:7px 12px;}
-.dm-info-cell.lbl{color:var(--text2);font-size:12px;}
-.dm-info-cell.val{font-weight:600;font-size:13px;}
-.dm-hit-phases{display:flex;gap:4px;align-items:center;}
-.dm-hit-phase{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:12px;}
-.dm-hit-arrow{color:var(--text2);font-size:10px;}
-
-#loading{text-align:center;color:var(--text2);padding:60px;font-size:13px;}
-@media(max-width:768px){#slots-grid{grid-template-columns:1fr;}}
-@media(max-width:768px){
-  #entity-modal .modal-panel,#detail-modal .modal-panel{height:min(860px,88svh);}
-  .modal-sidebar{width:120px;min-width:100px;padding:8px 6px;}
-  .ftog{font-size:10px;padding:2px 4px;}
-  .em-soul-elem{display:none;}
-}
-/* ===== TRAINING PANEL ===== */
-.training-wrap{background:rgba(0,0,0,.18);border:1px solid var(--border);border-radius:7px;padding:8px 10px;display:flex;flex-direction:column;gap:7px;margin-top:2px;}
-.training-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
-.tr-label{font-size:12px;font-weight:700;color:var(--text2);white-space:nowrap;}
-.tr-num{display:flex;align-items:center;gap:3px;}
-.tr-input{width:42px;padding:3px 4px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:14px;text-align:center;outline:none;}
-.tr-input:focus{border-color:var(--accent);}
-.tr-input::-webkit-inner-spin-button,.tr-input::-webkit-outer-spin-button{display:none;}
-.tr-input{-moz-appearance:textfield;}
-.tr-max{font-size:12px;color:var(--text2);}.tr-slider{flex:1;min-width:60px;accent-color:var(--accent);cursor:pointer;height:18px;}
-.tr-slider:disabled{opacity:.35;cursor:default;}
-.tr-lvval{width:42px;padding:3px 4px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--accent);font-size:15px;font-weight:700;text-align:center;outline:none;-moz-appearance:textfield;}
-.tr-lvval:focus{border-color:var(--accent);}
-.tr-lvval::-webkit-inner-spin-button,.tr-lvval::-webkit-outer-spin-button{display:none;}
-.tr-btns{display:flex;gap:2px;}
-.tr-btn{font-size:12px;padding:3px 5px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all .1s;white-space:nowrap;}
-.tr-btn:hover{border-color:var(--accent);color:var(--text);}
-.tr-btn.on{background:rgba(91,127,255,.25);border-color:var(--accent);color:#7b9fff;font-weight:700;}
-.tr-btn.on-fire{background:rgba(255,85,34,.2);border-color:var(--fire);color:var(--fire);}
-
-/* ===== MOBILE SLOT FLIP ===== */
-@keyframes mobFlipOutL{from{transform:rotateY(0);opacity:1}to{transform:rotateY(-90deg);opacity:0}}
-@keyframes mobFlipOutR{from{transform:rotateY(0);opacity:1}to{transform:rotateY(90deg);opacity:0}}
-@keyframes mobFlipInR{from{transform:rotateY(90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
-@keyframes mobFlipInL{from{transform:rotateY(-90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
-@media(max-width:768px){
-  #slots-grid{perspective:700px;display:flex;flex-direction:column;flex:1;padding:8px;gap:0;}
-  .slot-card:not(.mob-hidden){flex:1;}
-  .slot-card.mob-hidden{display:none;}
-  .slot-card.mob-anim-outL{animation:mobFlipOutL .2s ease-in forwards;}
-  .slot-card.mob-anim-outR{animation:mobFlipOutR .2s ease-in forwards;}
-  .slot-card.mob-anim-inR{animation:mobFlipInR .2s ease-out forwards;}
-  .slot-card.mob-anim-inL{animation:mobFlipInL .2s ease-out forwards;}
-}
-#mobile-slot-indicator{display:none;justify-content:center;align-items:center;gap:12px;padding:8px 0 4px;}
-@media(max-width:768px){#mobile-slot-indicator{display:flex;}}
-.msi-dot{width:9px;height:9px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s,transform .2s;flex-shrink:0;}
-.msi-dot.active{background:var(--accent);transform:scale(1.4);}
-.msi-dot.mob-disabled{opacity:.25;cursor:default;}
-</style>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/nav.css">
+<link rel="stylesheet" href="../css/shared.css">
+<link rel="stylesheet" href="../css/hensei.css">
 </head>
 <body>
-<div id="page-wrap">
-<script src="../nav.js"></script>
-<script src="../shared/constants.js"></script>
-<script src="../shared/filter-core.js"></script>
-<script src="../shared/chara-spec.js"></script>
-<script src="../shared/soul-spec.js"></script>
-<script src="../shared/crystal-spec.js"></script>
-<script src="../shared/bg-spec.js"></script>
+<style>
+#loading-screen{position:fixed;inset:0;z-index:99;background:#0f1117;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .25s ease}
+#loading-screen.done{opacity:0;pointer-events:none}
+#loading-screen::before{content:'';width:36px;height:36px;border:3px solid #2e3250;border-top-color:#5b7fff;border-radius:50%;animation:ls-spin .8s linear infinite}
+#loading-screen::after{content:'読み込み...';color:#8890b0;font-size:13px;font-family:'Segoe UI','Yu Gothic',sans-serif}
+@keyframes ls-spin{to{transform:rotate(360deg)}}
+</style>
+<div id="loading-screen"></div>
 
+
+<div id="page-wrap">
 <div id="team-size-bar">
   <span class="ts-label">編成</span>
-  <button class="size-btn"        data-n="1" onclick="setTeamSize(1)">1体</button>
-  <button class="size-btn"        data-n="2" onclick="setTeamSize(2)">2体</button>
-  <button class="size-btn active" data-n="3" onclick="setTeamSize(3)">3体</button>
+  <button class="size-btn"    data-n="1" onclick="setTeamSize(1)">1体</button>
+  <button class="size-btn"    data-n="2" onclick="setTeamSize(2)">2体</button>
+  <button class="size-btn on" data-n="3" onclick="setTeamSize(3)">3体</button>
 </div>
 
 <!-- 敌方 / 副本 / 工会 信息（影响最终乘算）— 内容由 renderEnemyBar() 生成 -->
@@ -453,7 +98,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
     <div class="modal-header">
       <span class="modal-header-title" id="dm-title"></span>
       <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
-        <button class="dm-select-btn" onclick="selectFromDetail()">この魔剣を選択</button>
+        <button class="dm-select-btn" id="dm-select-btn" onclick="selectFromDetail()">この魔剣を選択</button>
         <button class="modal-close" onclick="closeDetailModal()">✕</button>
       </div>
     </div>
@@ -461,11 +106,25 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI','Yu Gothic',s
   </div>
 </div>
 
-<script>
+<script type="module">
+import { Nav } from '../js/nav.js';
+import { ELEMENT, WEAPON, RARITY, BUNRUI, BUNRUI_SHORT, BUNRUI_FILTER, CONDITION,
+         BD_SPECIAL, BD_SPECIAL_COLOR, ELEM_COLOR } from '../shared/constants.js';
+import { FilterCore } from '../shared/filter-core.js';
+import { CHARA_SPEC } from '../shared/chara-spec.js';
+import { SOUL_SPEC } from '../shared/soul-spec.js';
+import { CRYSTAL_SPEC } from '../shared/crystal-spec.js';
+import { BG_SPEC } from '../shared/bg-spec.js';
+import { escHtml, fmtLarge, fmtHitStages, hideLoading, min } from '../js/utils.js';
+import { deepApply } from '../js/diff.js';
+
+Nav.init();
+
+
 // ELEMENT / ELEM_COLOR / WEAPON / RARITY / BUNRUI / BUNRUI_SHORT / CONDITION /
 // BD_SPECIAL 来自 shared/constants.js
 
-let allCharas=[], allSouls=[], allBGs=[], allCrystals=[];
+let allCharas=[], allSouls=[], allBGs=[], allCrystals=[], allMasou=[], masouByChara={};
 let allGuildTitles=[], allGuildEmblems=[];
 let teamSize=3;
 
@@ -480,6 +139,7 @@ let enemy = {
   difficulty: 'Normal',        // 'Normal' | 'Hard' | 'Lunatic'（仅 ギルバト/特別版 有效）
   guildTitle: null,            // guildtitle.json 中的 id
   emblems: [{id:null,level:1},{id:null,level:1},{id:null,level:1},{id:null,level:1}],
+  bd_cap: 0,                   // 副本 BD 上限（0-9 整数）。倍率 = 1 + (bd_cap // 2) * 0.25
 };
 
 // ===== 元素克制表 K[攻击方][被攻击方] =====
@@ -509,11 +169,11 @@ const ELEMENT_K_GUILD_SPECIAL = {
 };
 // 紋章 rarity → 等级上限：rarity 1=25, 2=40, 3=55
 const EMBLEM_RARITY_LV_MAX = {1: 25, 2: 40, 3: 55};
-function emblemLvMax(rarity) {
+export const emblemLvMax = (rarity) => {
   return EMBLEM_RARITY_LV_MAX[+rarity || 1] || EMBLEM_RARITY_LV_MAX[1];
 }
 
-function elementMatchupMult(srcElem, tgtElem, mode) {
+export const elementMatchupMult = (srcElem, tgtElem, mode) => {
   if (mode === 'guildbattle') {
     const k = (ELEMENT_K_GUILD[srcElem]||{})[tgtElem] || 0;
     if (k === 3)  return 15.0;
@@ -533,8 +193,8 @@ function elementMatchupMult(srcElem, tgtElem, mode) {
   if (k === -1) return 0.5;
   return 1.0;
 }
-function mkTr(){return {state:'通常',jukudo:1,awakening:0,marriage:0,moeshin:false,lp:0,level:1,hpPercent:100,affinity:0,omoide_picks:{},soul_lv:1,soul_awakening:0,main_weapon:true};}
-let team=[0,1,2].map(()=>({chara:null,soul:null,bg:null,crystals:[],tr:mkTr()}));
+export const mkTr = () => {return {state:'通常',jukudo:1,awakening:0,marriage:0,moeshin:false,lp:0,level:1,hpPercent:100,affinity:0,omoide_picks:{},soul_lv:1,soul_awakening:0,main_weapon:true,bd_on:false};}
+let team=[0,1,2].map(()=>({chara:null,soul:null,bg:null,masou:null,crystals:[],tr:mkTr()}));
 
 const JUKUDO_MAX_TBL={4:{通常:60,改造:99},3:{通常:50,改造:75,極弐:90},2:{通常:30,改造:45,極弐:70},1:{通常:10,改造:25,極弐:50}};
 const LEVEL_MAX_TBL ={4:{通常:250,改造:255},3:{通常:200,改造:215,極弐:230},2:{通常:150,改造:155,極弐:180},1:{通常:60,改造:99,極弐:120}};
@@ -545,33 +205,7 @@ let SENZAI_TABLE={};
 fetch('../data/senzai_table.json').then(r=>r.ok?r.json():{}).then(d=>{SENZAI_TABLE=d;}).catch(()=>{});
 
 
-function deepApply(target, patch) {
-  for (var k in patch) {
-    if (k === 'id') continue;
-    var pv = patch[k], tv = target[k];
-    if (Array.isArray(tv) && pv && typeof pv === 'object' && !Array.isArray(pv) &&
-        Object.keys(pv).every(kk => /^\d+$/.test(kk))) {
-      for (var idx in pv) {
-        var i = +idx;
-        if (i >= tv.length) continue;
-        var pvi = pv[idx];
-        if (pvi && typeof pvi === 'object' && !Array.isArray(pvi) &&
-            tv[i] && typeof tv[i] === 'object' && !Array.isArray(tv[i])) {
-          deepApply(tv[i], pvi);
-        } else {
-          tv[i] = JSON.parse(JSON.stringify(pvi));
-        }
-      }
-    } else if (pv !== null && typeof pv === 'object' && !Array.isArray(pv) &&
-        tv !== null && typeof tv === 'object' && !Array.isArray(tv)) {
-      deepApply(tv, pv);
-    } else {
-      target[k] = JSON.parse(JSON.stringify(pv));
-    }
-  }
-}
-
-function _applyRevise(arr, revise) {
+export const _applyRevise = (arr, revise) => {
   if (!Array.isArray(revise)) return;
   const idx = new Map(arr.map((c, i) => [c.id, i]));
   revise.forEach(r => {
@@ -585,23 +219,29 @@ Promise.all([
   fetch('../data/souls.json').then(r=>r.json()),
   fetch('../data/bladegraph.json').then(r=>r.json()),
   fetch('../data/crystals.json').then(r=>r.json()),
+  fetch('../data/masou.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/characters_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/omoide_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/souls_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/crystals_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/bladegraph_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('../data/masou_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/guildtitle.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/guildemblem.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
-]).then(([ch,so,bg,cr, chRev, omRev, soRev, crRev, bgRev, gt, ge])=>{
+]).then(([ch,so,bg,cr,ms, chRev, omRev, soRev, crRev, bgRev, msRev, gt, ge])=>{
   _applyRevise(ch, chRev);
   _applyRevise(ch, omRev);
   _applyRevise(so, soRev);
   _applyRevise(cr, crRev);
   _applyRevise(bg, bgRev);
+  _applyRevise(ms, msRev);
   allCharas=ch.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
   allSouls=so.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
   allBGs=bg.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
   allCrystals=cr.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  allMasou=Array.isArray(ms)?ms:[];
+  masouByChara={};
+  allMasou.forEach(m=>{ if(m.chara_id!=null) (masouByChara[m.chara_id]=masouByChara[m.chara_id]||[]).push(m); });
   allGuildTitles=Array.isArray(gt)?gt:[];
   allGuildEmblems=Array.isArray(ge)?ge:[];
   document.getElementById('loading').style.display='none';
@@ -609,48 +249,29 @@ Promise.all([
   renderEnemyBar();
   renderAll();
   updateMobVisible();
+  hideLoading();
 }).catch(()=>{
+  hideLoading();
   document.getElementById('loading').textContent='データ読み込み失敗。start.py を起動してください。';
 });
 
 // ===== HELPERS =====
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function getBestState(c){for(const s of['極弐','改造','通常'])if(c?.states?.[s])return c.states[s];return null;}
-function crystalSlotCount(c, slotIdx){
+const getBestState = (c) => {
+  for (const s of ['極弐', '改造', '通常']) if (c?.states?.[s]) return c.states[s];
+  return null;
+}
+
+export const crystalSlotCount = (c, slotIdx) => {
   if(!c) return 0;
-  const st = getBestState(c);
+  const trState = slotIdx != null ? team[slotIdx]?.tr?.state : null;
+  const st = (trState && c.states?.[trState]) ? c.states[trState] : getBestState(c);
   let n = parseInt(st?.basic_info?.['結晶スロット']??0)||0;
   // 結婚（marriage != 0）→ 結晶スロット +1
   if(slotIdx != null && team[slotIdx]?.tr?.marriage){ n += 1; }
   return n;
 }
 
-function fmtLarge(n){
-  if(typeof n!=='number')return String(n);
-  const a=Math.abs(n);
-  if(a>=100000000)return(Math.round(n/100000000*10)/10)+'億';
-  if(a>=10000)return(Math.round(n/10000*10)/10)+'万';
-  return n.toLocaleString('en-US');
-}
-function fmtHitStages(ef){
-  const hps = Array.isArray(ef.hit_per_stage)?ef.hit_per_stage:[];
-  const sca = Array.isArray(ef.hit_per_stage_scaling)?ef.hit_per_stage_scaling:[0,0,0];
-  if(!hps.length) return '';
-  const ht = ef.hit_type!=null?ef.hit_type:0;
-  const op = ht===2?'×':(ht===3?'=':'+');
-  function stageStr(v,s){return op+v+(s?'(+'+s+'/熟度)':'');}
-  const s0=sca[0]||0,s1=sca[1]||0,s2=sca[2]||0;
-  if(hps.length===3 && hps[0]!==0 && hps[0]===hps[1] && hps[1]===hps[2] && s0===s1 && s1===s2){
-    return stageStr(hps[0], s0);
-  }
-  const parts = hps.map((v,i)=>{
-    if(v==null||v===0) return null;
-    return (i+1)+'撃'+stageStr(v, sca[i]||0);
-  }).filter(Boolean);
-  return parts.join(' / ');
-}
-
-function fmtVal(ef){
+export const fmtVal = (ef) => {
   const bunrui = ef.bunrui || [];
   const isHitOnly = bunrui.length===1 && bunrui[0]===7;
   if(isHitOnly) return fmtHitStages(ef);
@@ -670,33 +291,32 @@ function fmtVal(ef){
   }
   return v;
 }
-function fmtScopeTag(ef){
-  if(ef.scope===5){const nm=ef.name?esc(ef.name).slice(0,12):'限定';return`<span class="tag-scope tag-lim">${nm}限定</span>`;}
+export const fmtScopeTag = (ef) => {
+  if(ef.scope===5){const nm=ef.name?escHtml(ef.name).slice(0,12):'限定';return`<span class="tag-scope tag-lim">${nm}限定</span>`;}
   const elStr=(ef.element!=null?[].concat(ef.element):[]).map(e=>ELEMENT[e]||e).join('/');
   const tyStr=(ef.type!=null?[].concat(ef.type):[]).map(t=>WEAPON[t]||t).join('/');
   const cond=[elStr,tyStr].filter(Boolean).join(' ');
   const lbl={0:'自身',1:'全体',2:'全体',3:'自身',4:'全体'};
   const txt=cond?cond+' '+(lbl[ef.scope]||''):(lbl[ef.scope]||'');
-  return txt?`<span class="tag-scope">${esc(txt)}</span>`:'';
+  return txt?`<span class="tag-scope">${escHtml(txt)}</span>`:'';
 }
-function renderEfRow(ef){
-  const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${esc(BUNRUI_SHORT[b]||b)}</span>`).join('');
+export const renderEfRow = (ef) => {
+  const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${escHtml(BUNRUI_SHORT[b]||b)}</span>`).join('');
   const cond=ef.condition?`<span class="tag-cond">${CONDITION[ef.condition]}</span>`:'';
   return`<div class="eftags">${btags}<span class="tag-val">${fmtVal(ef)}</span>${fmtScopeTag(ef)}${cond}</div>`;
 }
-function _resolveCharaSkills(c){
+export const _resolveCharaSkills = (c, trState) => {
   if(!c||!c.states) return [];
   let stateLabel=null, state=null;
-  for(const s of ['極弐','改造','通常']){
-    if(c.states[s]){ stateLabel=s; state=c.states[s]; break; }
-  }
+  if(trState && c.states[trState]){ stateLabel=trState; state=c.states[trState]; }
+  else { for(const s of ['極弐','改造','通常']){ if(c.states[s]){ stateLabel=s; state=c.states[s]; break; } } }
   if(!state) return [];
   const dead = new Set(Array.isArray(c._deleted_skills)?c._deleted_skills:[]);
   const base = (state.skills||[]).filter(sk=>!dead.has(sk.name||''));
   const added = (c._added_skills && c._added_skills[stateLabel]) || [];
   return base.concat(added);
 }
-function _resolveSoulSkills(s){
+export const _resolveSoulSkills = (s) => {
   if(!s) return [];
   const dead = new Set(Array.isArray(s._deleted_skills)?s._deleted_skills:[]);
   const base = (s.skills||[]).filter(sk=>!dead.has(sk.name||''));
@@ -704,7 +324,7 @@ function _resolveSoulSkills(s){
   return base.concat(added);
 }
 
-function renderSkillsPanel(skills){
+export const renderSkillsPanel = (skills) => {
   if(!skills?.length)return'';
   const rows=skills.map(sk=>{
     const efrows=(sk.effects||[])
@@ -715,25 +335,29 @@ function renderSkillsPanel(skills){
   }).filter(Boolean).join('');
   return rows?'<div class="skills-panel">'+rows+'</div>':'';
 }
-function renderBgPanel(bg){
+export const renderBgPanel = (bg) => {
   if(!bg)return'';
-  return`<div class="skills-panel"><div class="skill-item"><div class="skill-eftxt">${esc(bg.effect||'')}</div>${(bg.effects||[]).map(renderEfRow).join('')}</div></div>`;
+  return`<div class="skills-panel"><div class="skill-item"><div class="skill-eftxt">${escHtml(bg.effect_text||'')}</div>${(bg.effects||[]).map(renderEfRow).join('')}</div></div>`;
 }
-function renderCrystalEffList(ids){
+export const renderMasouPanel = (m) => {
+  if(!m)return'';
+  return`<div class="skills-panel"><div class="skill-item"><div class="skill-eftxt">${escHtml(m.effect_text||'')}</div>${(m.effects||[]).map(renderEfRow).join('')}</div></div>`;
+}
+export const renderCrystalEffList = (ids) => {
   const sel=ids.filter(Boolean).map(id=>allCrystals.find(x=>x.id===id)).filter(Boolean);
   if(!sel.length)return'';
   return'<div class="cr-eff-list">'+sel.map(cr=>{
     const tags=(cr.effects||[]).map(ef=>{
-      const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${esc(BUNRUI_SHORT[b]||b)}</span>`).join('');
+      const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${escHtml(BUNRUI_SHORT[b]||b)}</span>`).join('');
       const val=ef.calc_type===1?'+'+fmtLarge(ef.bairitu):'x'+ef.bairitu;
       return btags+`<span class="tag-val">${val}</span>`;
     }).join(' ');
-    return`<div class="cr-eff-row"><span class="cr-eff-name" title="${esc(cr.name)}">${esc(cr.name)}</span><div class="cr-eff-tags">${tags}</div></div>`;
+    return`<div class="cr-eff-row"><span class="cr-eff-name" title="${escHtml(cr.name)}">${escHtml(cr.name)}</span><div class="cr-eff-tags">${tags}</div></div>`;
   }).join('')+'</div>';
 }
 
 // ===== TEAM =====
-function autoAssignSoul(si){
+export const autoAssignSoul = (si) => {
   const used=new Set(team.filter((_,i)=>i!==si).map(s=>s.soul).filter(Boolean));
   const byId=[...allSouls].sort((a,b)=>a.id-b.id);
   const found=byId.find(s=>!used.has(s.id));
@@ -741,44 +365,44 @@ function autoAssignSoul(si){
   _clampSoulTr(si);
 }
 // 把 tr.soul_lv / tr.soul_awakening 夹紧到当前 soul 的 cap（rarity 决定）
-function _clampSoulTr(si){
+export const _clampSoulTr = (si) => {
   const soul=allSouls.find(x=>x.id===team[si].soul);
   if(!soul) return;
-  const r=soul.rarity||1;
-  const awMax=SOUL_AWK_MAX[r]||0;
+  const awMax=soulAwkMax(soul);
   if(team[si].tr.soul_awakening>awMax) team[si].tr.soul_awakening=awMax;
-  const cap=soulLvCap(r,team[si].tr.soul_awakening);
+  const cap=soulLvCap(soul,team[si].tr.soul_awakening);
   if(team[si].tr.soul_lv>cap) team[si].tr.soul_lv=cap;
 }
-function syncCrystals(si){
+export const syncCrystals = (si) => {
   const c=allCharas.find(x=>x.id===team[si].chara);
   const n=crystalSlotCount(c, si),cur=team[si].crystals;
   if(cur.length<n)team[si].crystals=[...cur,...Array(n-cur.length).fill(null)];
   else if(cur.length>n)team[si].crystals=cur.slice(0,n);
 }
-function setTeamSize(n){
+export const setTeamSize = (n) => {
   teamSize=n;
-  document.querySelectorAll('.size-btn').forEach(b=>b.classList.toggle('active',+b.dataset.n===n));
+  document.querySelectorAll('.size-btn').forEach(b=>b.classList.toggle('on',+b.dataset.n===n));
   for(let i=0;i<3;i++)document.getElementById('slot-'+i).classList.toggle('disabled',i>=n);
   if(isMob()&&mobileActiveSlot>=n){mobileActiveSlot=n-1;updateMobVisible();}
   else if(isMob())updateMobIndicator();
   refreshAllStats();
 }
-function _maxOmoideThreshold(c){
+export const _maxOmoideThreshold = (c) => {
   if(!c||!Array.isArray(c.omoide))return 0;
   return c.omoide.reduce((m,r)=>Math.max(m,+r.threshold||0),0);
 }
-function setChara(si,id){
-  // 清空 chara：只清魔剣 + 結晶；魂 / 心象結晶 保留
-  if(id===null){team[si].chara=null;team[si].crystals=[];renderSlot(si);refreshAllStats();return;}
+export const setChara = (si,id) => {
+  // 清空 chara：只清魔剣 + 結晶 + 魔装；魂 / 心象結晶 保留
+  if(id===null){team[si].chara=null;team[si].crystals=[];team[si].masou=null;renderSlot(si);refreshAllStats();return;}
   const other=team.findIndex((s,i)=>i!==si&&s.chara===id);
   if(other>=0){
-    // swap entire slot — chara/soul/bg/crystals/tr all move together（保留交换语义）
+    // swap entire slot — chara/soul/bg/masou/crystals/tr all move together（保留交换语义）
     [team[si],team[other]]=[team[other],team[si]];
     renderSlot(other);
   } else{
-    // 更换魔剣（非 swap）：只清空結晶，魂 / 心象結晶不动
+    // 更换魔剣（非 swap）：清空結晶 + 魔装（魔装是 chara 限定），魂 / 心象結晶不动
     team[si].chara=id;
+    team[si].masou=null;
     const c=allCharas.find(x=>x.id===id);
     team[si].tr.affinity=_maxOmoideThreshold(c);
     if(!team[si].soul)autoAssignSoul(si);
@@ -788,7 +412,7 @@ function setChara(si,id){
   }
   renderSlot(si);refreshAllStats();
 }
-function setSoul(si,id){
+export const setSoul = (si,id) => {
   if(id===null){team[si].soul=null;renderSlot(si);refreshAllStats();return;}
   const other=team.findIndex((s,i)=>i!==si&&s.soul===id);
   if(other>=0){[team[si].soul,team[other].soul]=[team[other].soul,team[si].soul];_clampSoulTr(other);renderSlot(other);}
@@ -796,30 +420,31 @@ function setSoul(si,id){
   _clampSoulTr(si);
   renderSlot(si);refreshAllStats();
 }
-function setBG(si,id){
+export const setBG = (si,id) => {
   if(id===null){team[si].bg=null;renderSlot(si);refreshAllStats();return;}
   const other=team.findIndex((s,i)=>i!==si&&s.bg===id);
   if(other>=0){[team[si].bg,team[other].bg]=[team[other].bg,team[si].bg];renderSlot(other);}
   else team[si].bg=id;
   renderSlot(si);refreshAllStats();
 }
-function setCrystal(si,ci,id){team[si].crystals[ci]=id;renderSlot(si);refreshAllStats();}
-function clearSlot(si){team[si]={chara:null,soul:null,bg:null,crystals:[],tr:mkTr()};renderSlot(si);refreshAllStats();}
+export const setCrystal = (si,ci,id) => {team[si].crystals[ci]=id;renderSlot(si);refreshAllStats();}
+export const setMasou = (si,id) => {team[si].masou=id;renderSlot(si);refreshAllStats();}
+export const clearSlot = (si) => {team[si]={chara:null,soul:null,bg:null,masou:null,crystals:[],tr:mkTr()};renderSlot(si);refreshAllStats();}
 
-function setTrField(si,key,val){
+export const setTrField = (si,key,val) => {
   team[si].tr[key]=val;
-  // 結婚状態变化时重新同步結晶槽数（结婚 → +1 槽）
-  if(key==='marriage') syncCrystals(si);
+  // state / marriage 変化时 → 結晶スロット数が変わる可能性あり
+  if(key==='marriage' || key==='state') syncCrystals(si);
   renderSlot(si);refreshAllStats();
 }
-function setJukudoSlider(si,val){
+export const setJukudoSlider = (si,val) => {
   const sl=document.getElementById('tr-jkslider-'+si);
   const max=sl?+sl.max:99;
   const inp=document.getElementById('tr-jkinput-'+si);
   if(inp)inp.value=val;
   setTrNum(si,'jukudo',val,max);
 }
-function setTrNum(si,key,val,max){
+export const setTrNum = (si,key,val,max) => {
   const minVal=key==='jukudo'?1:0;
   team[si].tr[key]=Math.min(max,Math.max(minVal,+val||minVal));
   if(key==='jukudo'){const jksl=document.getElementById('tr-jkslider-'+si);if(jksl)jksl.value=team[si].tr[key];}
@@ -836,12 +461,12 @@ function setTrNum(si,key,val,max){
     const lvcapslider=document.getElementById('tr-lvcapslider-'+si);if(lvcapslider)lvcapslider.textContent=' / '+newCap;}
   refreshAllStats();
 }
-function setLevel(si,val){
+export const setLevel = (si,val) => {
   team[si].tr.level=+val;
   const el=document.getElementById('tr-lvval-'+si);if(el)el.value=val;
   refreshAllStats();
 }
-function setLevelInput(si,val){
+export const setLevelInput = (si,val) => {
   const sl=document.getElementById('tr-lvslider-'+si);
   const max=sl?+sl.max:999;
   const v=Math.min(max,Math.max(1,+val||1));
@@ -850,14 +475,14 @@ function setLevelInput(si,val){
   if(sl)sl.value=v;
   refreshAllStats();
 }
-function setHpSlider(si,val){
+export const setHpSlider = (si,val) => {
   const v=Math.min(100,Math.max(0,+val||0));
   team[si].tr.hpPercent=v;
   const inp=document.getElementById('tr-hpinput-'+si);
   if(inp)inp.value=v;
   refreshAllStats();
 }
-function setHpInput(si,val){
+export const setHpInput = (si,val) => {
   let v=+val;
   if(isNaN(v))v=100;
   v=Math.min(100,Math.max(0,v));
@@ -868,7 +493,7 @@ function setHpInput(si,val){
   if(sl)sl.value=Math.round(v);
   refreshAllStats();
 }
-function setAffinity(si,val){
+export const setAffinity = (si,val) => {
   let v=+val;
   if(isNaN(v))v=0;
   v=Math.max(0,Math.floor(v));
@@ -881,48 +506,47 @@ function setAffinity(si,val){
 }
 
 // ====== 魂等级 / 觉醒 setter（与槽位 UI 联动） ======
-function setSoulLv(si,val){
+export const setSoulLv = (si,val) => {
   const soul=allSouls.find(x=>x.id===team[si].soul);
   if(!soul) return;
-  const cap=soulLvCap(soul.rarity, team[si].tr.soul_awakening);
+  const cap=soulLvCap(soul, team[si].tr.soul_awakening);
   const v=Math.max(1,Math.min(cap,Math.floor(+val)||1));
   team[si].tr.soul_lv=v;
   const sl=document.getElementById('soul-lv-slider-'+si); if(sl)sl.value=v;
   const inp=document.getElementById('soul-lv-input-'+si); if(inp)inp.value=v;
   refreshAllStats();
 }
-function setSoulAwk(si,val){
+export const setSoulAwk = (si,val) => {
   const soul=allSouls.find(x=>x.id===team[si].soul);
   if(!soul) return;
-  const r=soul.rarity||1;
-  const max=SOUL_AWK_MAX[r]||0;
+  const max=soulAwkMax(soul);
   const v=Math.max(0,Math.min(max,Math.floor(+val)||0));
   team[si].tr.soul_awakening=v;
   // lv cap 变化 → 重渲魂的 training 行（slider/input 的 max 都要更新）
-  const cap=soulLvCap(r,v);
+  const cap=soulLvCap(soul,v);
   if(team[si].tr.soul_lv>cap) team[si].tr.soul_lv=cap;
   const wrap=document.getElementById('soul-tr-'+si);
   if(wrap) wrap.outerHTML=renderSoulTraining(si,soul);
   refreshAllStats();
 }
-function renderSoulTraining(i, soul){
+export const renderSoulTraining = (i, soul) => {
   if(!soul) return '';
-  const r=soul.rarity||1;
   const aw=team[i].tr.soul_awakening||0;
-  const awMax=SOUL_AWK_MAX[r]||0;
-  const lvCap=soulLvCap(r,aw);
+  const awMax=soulAwkMax(soul);
+  const lvCap=soulLvCap(soul,aw);
   const lv=Math.min(team[i].tr.soul_lv||1,lvCap);
-  return `<div class="training-row" id="soul-tr-${i}" style="margin-top:6px;flex-wrap:nowrap">
-    <span class="tr-label">Lv</span>
-    <input id="soul-lv-slider-${i}" class="tr-slider" type="range" min="1" max="${lvCap}" value="${lv}" oninput="setSoulLv(${i},+this.value)">
-    <input id="soul-lv-input-${i}" class="tr-lvval" type="number" min="1" max="${lvCap}" value="${lv}" onchange="setSoulLv(${i},+this.value)">
-    <span class="tr-max">/ ${lvCap}</span>
-    <span class="tr-label" style="margin-left:6px">覚醒</span>
-    <input class="tr-input" type="number" min="0" max="${awMax}" value="${aw}" onchange="setSoulAwk(${i},+this.value)" style="width:54px">
-    <span class="tr-max">/ ${awMax}</span>
-  </div>`;
+  return min`
+    <div class="training-row" id="soul-tr-${i}" style="margin-top:6px;flex-wrap:nowrap">
+      <span class="tr-label">Lv</span>
+      <input id="soul-lv-slider-${i}" class="tr-slider" type="range" min="1" max="${lvCap}" value="${lv}" oninput="setSoulLv(${i},+this.value)">
+      <input id="soul-lv-input-${i}" class="tr-lvval" type="number" min="1" max="${lvCap}" value="${lv}" onchange="setSoulLv(${i},+this.value)">
+      <span class="tr-max">/ ${lvCap}</span>
+      <span class="tr-label" style="margin-left:6px">覚醒</span>
+      <input class="tr-input" type="number" min="0" max="${awMax}" value="${aw}" onchange="setSoulAwk(${i},+this.value)" style="width:54px">
+      <span class="tr-max">/ ${awMax}</span>
+    </div>`;
 }
-function renderTraining(i,chara){
+export const renderTraining = (i,chara) => {
   if(!chara)return'';
   const r=chara.rarity,tr=team[i].tr;
   const stOpts=r===4?['通常','改造']:['通常','改造','極弐'];
@@ -938,43 +562,89 @@ function renderTraining(i,chara){
   const stHtml=stOpts.map(s=>`<button class="tr-btn${s===tr.state?' on':''}" onclick="setTrField(${i},'state','${s}')">${s}</button>`).join('');
   const mrHtml=[['未婚',0],['花なし',1],['花あり',2]].map(([l,v])=>`<button class="tr-btn${tr.marriage===v?' on':''}" onclick="setTrField(${i},'marriage',${v})">${l}</button>`).join('');
   const lpHtml=[['通常',0],['½↓',1],['¼↓',2]].map(([l,v])=>`<button class="tr-btn${tr.lp===v?' on':''}" onclick="setTrField(${i},'lp',${v})">${l}</button>`).join('');
-  return`<div class="training-wrap">
-    <div class="training-row">
-      <span class="tr-label">改造</span><div class="tr-btns">${stHtml}</div>
-      <span class="tr-label" style="margin-left:auto">結婚</span><div class="tr-btns">${mrHtml}</div>
-    </div>
-    <div class="training-row">
-      <span class="tr-label">熟度</span>
-      <input id="tr-jkslider-${i}" class="tr-slider" type="range" min="1" max="${jMax}" value="${jk}" oninput="setJukudoSlider(${i},+this.value)">
-      <input id="tr-jkinput-${i}" class="tr-input" type="number" min="1" max="${jMax}" value="${jk}" onchange="setTrNum(${i},'jukudo',+this.value,${jMax})"><span class="tr-max"> / ${jMax}</span>
-      <span class="tr-label" style="margin-left:4px">覚醒</span>
-      <input class="tr-input" type="number" min="0" max="${aMax}" value="${aw}" onchange="setTrNum(${i},'awakening',+this.value,${aMax})"><span class="tr-max"> / ${aMax}</span>
-    </div>
-    <div class="training-row">
-      <span class="tr-label">Lv</span>
-      <input id="tr-lvslider-${i}" class="tr-slider" type="range" min="1" max="${lvCap!=null?lvCap:1}" value="${lvCur}" ${lvCap==null?'disabled':''} oninput="setLevel(${i},+this.value)">
-      <input id="tr-lvval-${i}" class="tr-lvval" type="number" min="1" max="${lvCap!=null?lvCap:1}" value="${lvCur}" ${lvCap==null?'disabled':''} onchange="setLevelInput(${i},+this.value)"><span id="tr-lvcapslider-${i}" class="tr-max"> / ${lvCapDisp}</span>
-    </div>
-    <div class="training-row">
-      <span class="tr-label">HP</span>
-      <input id="tr-hpslider-${i}" class="tr-slider" type="range" min="0" max="100" step="1" value="${tr.hpPercent??100}" oninput="setHpSlider(${i},+this.value)">
-      <input id="tr-hpinput-${i}" class="tr-input" type="number" min="0" max="100" step="0.1" value="${tr.hpPercent??100}" onchange="setHpInput(${i},+this.value)" style="width:54px"><span class="tr-max">%</span>
-    </div>
-    <div class="training-row">
-      <span class="tr-label">燃心</span>
-      <button class="tr-btn${tr.moeshin?' on on-fire':''}" style="min-width:30px;text-align:center" onclick="setTrField(${i},'moeshin',${!tr.moeshin})">${tr.moeshin?'ON':'OFF'}</button>
-      <span class="tr-label">LP</span><div class="tr-btns">${lpHtml}</div>
-      <span class="tr-label" style="margin-left:8px">MP</span>
-      <button class="tr-btn${tr.main_weapon!==false?' on':''}" style="min-width:38px;text-align:center" onclick="setTrField(${i},'main_weapon',${!(tr.main_weapon!==false)})">${tr.main_weapon!==false?'あり':'なし'}</button>
-    </div>
-  </div>`;
+  // 末尾「好感 + BD」行：仅当 chara 有 omoide 或 bd_skill 时显示
+  const hasOmoide = (chara.omoide || []).some(r => r.slots && r.slots.length);
+  const hasBd = !!(chara.bd_skill && chara.bd_skill.name);
+  const picks = tr.omoide_picks || {};
+  const equipped = Object.keys(picks).filter(k => picks[k] != null).length;
+  const total = (chara.omoide || []).length;
+  const aff = Math.floor(+tr.affinity || 0);
+  const omoideHtml = hasOmoide
+    ? min`
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="tr-label">好感</span>
+        <input id="aff-input-slot-${i}" type="number" min="0" step="1" value="${aff}" onchange="setAffinity(${i},+this.value)" class="tr-input aff-input" style="width:64px;text-align:right">
+        <span style="color:var(--text2);font-size:11px" id="om-count-${i}">(${equipped}/${total})</span>
+        <button class="tr-btn" style="font-size:11px;padding:3px 8px" onclick="openOmoideModal(${i})">編集</button>
+      </div>`
+    : '';
+  const bdHtml = hasBd
+    ? min`
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="tr-label">BD</span>
+        <button class="tr-btn${tr.bd_on?' on':''}" style="min-width:38px;text-align:center" onclick="setTrField(${i},'bd_on',${!tr.bd_on})">${tr.bd_on?'ON':'OFF'}</button>
+      </div>`
+    : '';
+  const omoideBdRow = (omoideHtml || bdHtml)
+    ? min`<div class="training-row" style="display:flex;align-items:center;gap:10px">${omoideHtml}${bdHtml}</div>`
+    : '';
+
+  return min`
+    <div class="training-wrap">
+      <div class="training-row" style="display:flex;align-items:center;gap:10px">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="tr-label">改造</span>
+          <div class="tr-btns">${stHtml}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="tr-label">結婚</span>
+          <div class="tr-btns">${mrHtml}</div>
+        </div>
+      </div>
+      <div class="training-row">
+        <span class="tr-label">熟度</span>
+        <input id="tr-jkslider-${i}" class="tr-slider" type="range" min="1" max="${jMax}" value="${jk}" oninput="setJukudoSlider(${i},+this.value)">
+        <input id="tr-jkinput-${i}" class="tr-input" type="number" min="1" max="${jMax}" value="${jk}" onchange="setTrNum(${i},'jukudo',+this.value,${jMax})">
+        <span class="tr-max"> / ${jMax}</span>
+        <span class="tr-label" style="margin-left:4px">覚醒</span>
+        <input class="tr-input" type="number" min="0" max="${aMax}" value="${aw}" onchange="setTrNum(${i},'awakening',+this.value,${aMax})">
+        <span class="tr-max"> / ${aMax}</span>
+      </div>
+      <div class="training-row">
+        <span class="tr-label">Lv</span>
+        <input id="tr-lvslider-${i}" class="tr-slider" type="range" min="1" max="${lvCap!=null?lvCap:1}" value="${lvCur}" ${lvCap==null?'disabled':''} oninput="setLevel(${i},+this.value)">
+        <input id="tr-lvval-${i}" class="tr-lvval" type="number" min="1" max="${lvCap!=null?lvCap:1}" value="${lvCur}" ${lvCap==null?'disabled':''} onchange="setLevelInput(${i},+this.value)">
+        <span id="tr-lvcapslider-${i}" class="tr-max"> / ${lvCapDisp}</span>
+      </div>
+      <div class="training-row">
+        <span class="tr-label">HP</span>
+        <input id="tr-hpslider-${i}" class="tr-slider" type="range" min="0" max="100" step="1" value="${tr.hpPercent??100}" oninput="setHpSlider(${i},+this.value)">
+        <input id="tr-hpinput-${i}" class="tr-input" type="number" min="0" max="100" step="0.1" value="${tr.hpPercent??100}" onchange="setHpInput(${i},+this.value)" style="width:54px">
+        <span class="tr-max">%</span>
+      </div>
+      <div class="training-row" style="display:flex;align-items:center;gap:10px">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="tr-label">燃心</span>
+          <button class="tr-btn${tr.moeshin?' on on-fire':''}" style="min-width:30px;text-align:center" onclick="setTrField(${i},'moeshin',${!tr.moeshin})">${tr.moeshin?'ON':'OFF'}</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="tr-label">LP</span>
+          <div class="tr-btns">${lpHtml}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="tr-label">MP</span>
+          <button class="tr-btn${tr.main_weapon!==false?' on':''}" style="min-width:38px;text-align:center" onclick="setTrField(${i},'main_weapon',${!(tr.main_weapon!==false)})">${tr.main_weapon!==false?'あり':'なし'}</button>
+        </div>
+      </div>
+      ${omoideBdRow}
+    </div>`;
 }
 
 // ===== STATS CALCULATOR =====
 const _STAT_KEYS = ['攻撃力','防御力','HP','ブレイク力'];
 const _BUNRUI_TO_STAT = { 1:'攻撃力', 2:'ブレイク力', 10:'HP', 12:'防御力' };
 
-function _capLevel(chara, tr) {
+export const _capLevel = (chara, tr) => {
   const r = chara.rarity;
   const lev1 = LEVEL_1JUK_TBL[r]?.[tr.state];
   const levMax = LEVEL_MAX_TBL[r]?.[tr.state];
@@ -984,7 +654,7 @@ function _capLevel(chara, tr) {
   return Math.min(levMax, lev1 + (jk-1) * 5);
 }
 
-function _baseStat(chara, tr, attr) {
+export const _baseStat = (chara, tr, attr) => {
   const state = chara.states?.[tr.state];
   const stMax = state?.stats?.max?.[attr];
   if (stMax == null) return null;
@@ -1008,7 +678,7 @@ function _baseStat(chara, tr, attr) {
   return v;
 }
 
-function _omoidePicksFor(chara, tr) {
+export const _omoidePicksFor = (chara, tr) => {
   // Returns array of senzai info objects for currently picked icons.
   // Gates by tr.affinity: only thresholds <= affinity contribute.
   const picks = tr.omoide_picks || {};
@@ -1024,7 +694,7 @@ function _omoidePicksFor(chara, tr) {
   return result;
 }
 
-function _selfAppliesChara(c, e) {
+export const _selfAppliesChara = (c, e) => {
   const sc = e.scope;
   if (sc === 0 || sc === 1) return true;
   if (sc === 2 || sc === 3) {
@@ -1039,7 +709,7 @@ function _selfAppliesChara(c, e) {
 
 // 元素 / 武器种匹配。useElementBuff=true 时（仅魔剣技能）拿 tgtChara.element_buff[]
 // 做集合包含判定；其它来源（crystal / bladegraph / soul / guild）依然用单值 element。
-function _matchElemType(e, tgtChara, useElementBuff) {
+export const _matchElemType = (e, tgtChara, useElementBuff) => {
   const elem = e.element;
   let elemOK;
   if (elem == null) {
@@ -1058,7 +728,7 @@ function _matchElemType(e, tgtChara, useElementBuff) {
 
 // Cross-slot: source (srcChara) buffs target (tgtChara). Returns true if effect e applies.
 // useElementBuff=true → 魔剣技能特例，element 走 tgtChara.element_buff[]
-function _buffApplies(srcChara, tgtChara, e, useElementBuff = false) {
+export const _buffApplies = (srcChara, tgtChara, e, useElementBuff = false) => {
   if (!tgtChara) return false;
   const sc = e.scope;
   if (sc == null || sc === 1) return true; // 全体
@@ -1086,7 +756,7 @@ function _buffApplies(srcChara, tgtChara, e, useElementBuff = false) {
 //                    inc  = rarity===5 ? 0.3 : 0.1
 //                    return base + inc * (lv - rarity*10) / (75 - rarity*10)
 const SOUL_AWK_MAX = {1: 13, 2: 11, 3: 9, 4: 7, 5: 5};
-function soulMultiplier(rarity, lv) {
+export const soulMultiplier = (rarity, lv) => {
   const r = +rarity || 1;
   const L = Math.max(1, +lv || 1);
   const maxNoAwk = r * 10;
@@ -1097,10 +767,19 @@ function soulMultiplier(rarity, lv) {
   const inc = r === 5 ? 0.3 : 0.1;
   return base + inc * (L - maxNoAwk) / range;
 }
-function soulLvCap(rarity, awakening) {
-  const r = +rarity || 1;
-  const aw = Math.min(+awakening || 0, SOUL_AWK_MAX[r] || 0);
-  return Math.min(75, r * 10 + aw * 5);
+// soul.max_awakening が定義されてれば SOUL_AWK_MAX[r] を上書き（覚醒不可な特例魂用）
+export const soulAwkMax = (soul) => {
+  const ovr = soul && soul.max_awakening;
+  if (ovr != null && Number.isFinite(+ovr)) return +ovr;
+  const r = +(soul && soul.rarity) || 1;
+  return SOUL_AWK_MAX[r] || 0;
+}
+// lv cap = max_level + aw*5（最多 75）。max_level は通常 rarity*10 だが、souls_revise.json で
+// 上書きされた特例魂（ダイナスティ/ディシディア = 1）は自然に cap=1 + 0 = 1 に落ちる。
+export const soulLvCap = (soul, awakening) => {
+  const maxLv = +(soul && soul.max_level) || 0;
+  const aw = Math.min(+awakening || 0, soulAwkMax(soul));
+  return Math.min(75, maxLv + aw * 5);
 }
 
 // HP-based condition factor (multiplier on bairitu)
@@ -1111,7 +790,7 @@ function soulLvCap(rarity, awakening) {
 // Applied via:
 //   additive: effective = bairitu * factor
 //   multiplicative: effective = (bairitu - 1) * factor + 1
-function _conditionFactor(condition, hpPct) {
+export const _conditionFactor = (condition, hpPct) => {
   if (!condition) return 1;
   // condition=4 (BK状態時) — 二元，依赖全局 enemy.bk
   if (condition === 4) return enemy.bk ? 1 : 0;
@@ -1123,7 +802,7 @@ function _conditionFactor(condition, hpPct) {
   return 1;
 }
 
-function _parseScaling(v) {
+export const _parseScaling = (v) => {
   if (v == null || v === 0 || v === '') return 0;
   if (typeof v === 'number') return v;
   if (typeof v === 'string' && v.indexOf('/') >= 0) {
@@ -1133,13 +812,13 @@ function _parseScaling(v) {
   return parseFloat(v) || 0;
 }
 // Apply 熟度 scaling: bairitu at jukudo = bairitu + jukudo * scaling
-function _scaledBairitu(b, sc, jukudo) {
+export const _scaledBairitu = (b, sc, jukudo) => {
   const s = _parseScaling(sc);
   if (!s) return b;
   return (b || 0) + Math.max(1, jukudo) * s;
 }
 
-function computeStats(chara, tr, slotIdx) {
+export const computeStats = (chara, tr, slotIdx) => {
   if (!chara || !tr) return null;
   const stats = {};
   for (const attr of _STAT_KEYS) {
@@ -1151,7 +830,9 @@ function computeStats(chara, tr, slotIdx) {
   const hits = Array.isArray(baseHitsRaw) ? baseHitsRaw.slice(0, 3).map(h => +h || 0) : [0, 0, 0];
   while (hits.length < 3) hits.push(0);
   let damageLimit = 2147483647;
-  const acc = { stats, damageLimit, hits };
+  // bdCapBonus: bunrui=18（B.D.ゲージの最大値）の effect bairitu を累加。stage 4e で
+  //   bdCap = enemy.bd_cap + bdCapBonus に基づいて 攻撃力 倍率を算出する。
+  const acc = { stats, damageLimit, hits, bdCapBonus: 0 };
   const tgt = chara;
 
   // Apply one effect to acc, scaled by source HP via _conditionFactor.
@@ -1199,6 +880,10 @@ function computeStats(chara, tr, slotIdx) {
       if (b === 17) {
         if (mode === 'add') acc.damageLimit += v;
         else acc.damageLimit *= v;
+      } else if (b === 18) {
+        // bunrui=18: B.D.ゲージ最大値 → bdCap bonus（通常 calc_type=1 add）
+        if (mode === 'add') acc.bdCapBonus += v;
+        else acc.bdCapBonus *= v;
       } else {
         const stat = _BUNRUI_TO_STAT[b];
         if (!stat || acc.stats[stat] == null) continue;
@@ -1246,10 +931,16 @@ function computeStats(chara, tr, slotIdx) {
 
     // Chara skills (current state, with revise) — element 匹配走 tgt.element_buff[]
     if (srcChara) {
-      const skills = _resolveCharaSkills(srcChara);
+      const skills = _resolveCharaSkills(srcChara, slot.tr?.state);
       const charaEffs = [];
       skills.forEach(sk => (sk.effects || []).forEach(e => charaEffs.push(e)));
       _applyList(charaEffs, srcChara, srcHp, srcJk, 1, true);
+    }
+
+    // Masou effects（chara-bound; element 匹配走 tgt.element 直接判定，不走 element_buff[]）
+    if (slot.masou != null) {
+      const masou = allMasou.find(x => x.id === slot.masou);
+      if (masou) _applyList(masou.effects || [], srcChara, srcHp, srcJk, 1, false);
     }
   }
   for (let si = 0; si < teamSize; si++) {
@@ -1276,8 +967,38 @@ function computeStats(chara, tr, slotIdx) {
     _applyList(bg.effects || [], srcChara, srcHp, srcJk);
   }
 
-  // ===== Stage 2.5: Guild title + Emblems（外部 buff，应用在所有 chara 之后）=====
+  // ===== Stage 3: Self-only finishers (結婚 / 燃心 / LP / 主武器) =====
+  const mr = [1.00, 1.03, 1.05][tr.marriage] || 1;
+  for (const k of _STAT_KEYS) acc.stats[k] *= mr;
+  if (tr.moeshin) acc.stats['攻撃力'] *= 1.3;
+  const lpMult = [1.0, 1.1, 1.5][tr.lp] || 1;
+  acc.stats['攻撃力'] *= lpMult;
+  // 主武器装備（あり=1.0 / なし=0.05）作用于 攻撃力 + ブレイク力
+  const mwMult = (tr.main_weapon === false) ? 0.05 : 1.0;
+  acc.stats['攻撃力']    *= mwMult;
+  acc.stats['ブレイク力'] *= mwMult;
+
+  // ===== Stage 4: 敵 / 副本 / 公会 multipliers =====
+  //   元素克制 / BK / 有利武器 / 難易度 / 公会役職 + 4 紋章 / 副本 BD 上限
   const isGuildMode = (enemy.mode === 'guildbattle' || enemy.mode === 'guildbattle_special');
+  // 4a. 元素克制 → 攻撃力 + ブレイク力
+  const elemMult = elementMatchupMult(chara.element, enemy.element, enemy.mode);
+  acc.stats['攻撃力']    *= elemMult;
+  acc.stats['ブレイク力'] *= elemMult;
+  // 4b. BK状態 → 攻撃力（普通 3.0；ギルバト 高耐性 6.0）
+  if (enemy.bk) {
+    const bkMult = (isGuildMode && enemy.bkResistance === 'high') ? 6.0 : 3.0;
+    acc.stats['攻撃力'] *= bkMult;
+  }
+  // 4c. ギルバト/特別版 限定（有利武器 + 難易度）→ 攻撃力
+  if (isGuildMode) {
+    if (chara.type != null && enemy.advantageWeapons && enemy.advantageWeapons.has(chara.type)) {
+      acc.stats['攻撃力'] *= 2.0;
+    }
+    const diffMult = ({Normal:1.0, Hard:0.1, Lunatic:0.005})[enemy.difficulty] ?? 1.0;
+    acc.stats['攻撃力'] *= diffMult;
+  }
+  // 4d. 公会役職 + 4 紋章（外部 buff，按 effects schema 应用）
   const guildEffects = [];
   if (isGuildMode && enemy.guildTitle != null) {
     const gt = allGuildTitles.find(g => g.id === enemy.guildTitle);
@@ -1290,7 +1011,6 @@ function computeStats(chara, tr, slotIdx) {
     if (em.guild_only && !isGuildMode) continue;
     // bairitu 在配置里填的是"满级倍率"。按 level 线性插值到 1.0：
     //   bairitu(lv) = (bairitu_max - 1) * (lv - 1) / (lvMax - 1) + 1
-    // 即 lv=1 → 1.0（无效果）、lv=lvMax → 配置值。乘算语义。
     const lvMax = emblemLvMax(em.rarity);
     const lv = Math.max(1, Math.min(lvMax, +slot.level || 1));
     for (const e of (em.effects || [])) {
@@ -1306,42 +1026,32 @@ function computeStats(chara, tr, slotIdx) {
     // src=null：scope=0/3 不会应用（要 src.id===tgt.id），其他全部按 _buffApplies 走
     _applyList(guildEffects, null, 100, 1, 1);
   }
+  // 4e. BDゲージ上限：enemy.bd_cap = 当前選択値（[0, 9 + bdCapBonus] 範囲）。
+  //     倍率 = 1 + (bd_cap // 2) * 0.25 → 攻撃力 (bunrui=1)。
+  //     bunrui=18 effects は acc.bdCapBonus に累加され、UI 側で slider/input の
+  //     max を 9 + bdCapBonus に拡張するために使う（倍率公式自体には加算しない）。
+  const bdCap = +enemy.bd_cap || 0;
+  const bdCapMult = 1 + Math.floor(bdCap / 2) * 0.25;
+  acc.stats['攻撃力'] *= bdCapMult;
 
-  // ===== Stage 3: Self-only finishers (結婚 / 燃心 / LP / 主武器) =====
-  const mr = [1.00, 1.03, 1.05][tr.marriage] || 1;
-  for (const k of _STAT_KEYS) acc.stats[k] *= mr;
-  if (tr.moeshin) acc.stats['攻撃力'] *= 1.3;
-  const lpMult = [1.0, 1.1, 1.5][tr.lp] || 1;
-  acc.stats['攻撃力'] *= lpMult;
-  // 主武器装備（あり=1.0 / なし=0.05）作用于 攻撃力 + ブレイク力（task 6）
-  const mwMult = (tr.main_weapon === false) ? 0.05 : 1.0;
-  acc.stats['攻撃力']    *= mwMult;
-  acc.stats['ブレイク力'] *= mwMult;
-
-  // ===== Stage 4: 敌方 / 副本 相关乘数（最终乘到 攻撃力 / ブレイク力）=====
-  // 元素克制（task 7+8.5+8.6）
-  const elemMult = elementMatchupMult(chara.element, enemy.element, enemy.mode);
-  acc.stats['攻撃力']    *= elemMult;
-  acc.stats['ブレイク力'] *= elemMult;
-  // BK状態（task 8.2 + 8.4 BK耐性）— 仅作用于 攻撃力
-  if (enemy.bk) {
-    const bkMult = (isGuildMode && enemy.bkResistance === 'high') ? 6.0 : 3.0;
-    acc.stats['攻撃力'] *= bkMult;
-  }
-  // ギルバト/特別版 限定的乘数（task 8.7 / 8.8）
-  if (isGuildMode) {
-    if (chara.type != null && enemy.advantageWeapons && enemy.advantageWeapons.has(chara.type)) {
-      acc.stats['攻撃力'] *= 2.0;
-    }
-    const diffMult = ({Normal:1.0, Hard:0.1, Lunatic:0.005})[enemy.difficulty] ?? 1.0;
-    acc.stats['攻撃力'] *= diffMult;
+  // ===== Stage 5: BD effects（仅 tr.bd_on === true 的 slot 触发，最终步骤）=====
+  for (let si = 0; si < teamSize; si++) {
+    const slot = team[si]; if (!slot) continue;
+    if (!slot.tr?.bd_on) continue;
+    const srcChara = allCharas.find(x => x.id === slot.chara) || null;
+    if (!srcChara) continue;
+    const bdEffs = (srcChara.bd_skill && srcChara.bd_skill.effects) || [];
+    if (!bdEffs.length) continue;
+    const srcHp = slot.tr?.hpPercent ?? 100;
+    const srcJk = Math.max(1, slot.tr?.jukudo || 1);
+    _applyList(bdEffs, srcChara, srcHp, srcJk, 1, true);
   }
 
-  return { stats: acc.stats, damageLimit: acc.damageLimit, hits: acc.hits };
+  return { stats: acc.stats, damageLimit: acc.damageLimit, hits: acc.hits, bdCapBonus: acc.bdCapBonus || 0 };
 }
 
 // ===== ENEMY BAR (敵方/副本/工会信息) =====
-function renderEnemyBar() {
+export const renderEnemyBar = () => {
   const eb = document.getElementById('enemy-bar');
   if (!eb) return;
   const isGuild = (enemy.mode === 'guildbattle' || enemy.mode === 'guildbattle_special');
@@ -1393,7 +1103,7 @@ function renderEnemyBar() {
   let titleHtml = '';
   if (isGuild) {
     const opts = [`<option value="">-- 役職なし --</option>`].concat(
-      allGuildTitles.map(g => `<option value="${g.id}"${enemy.guildTitle===g.id?' selected':''}>${esc(g.name)} — ${esc(g.effect||'')}</option>`)
+      allGuildTitles.map(g => `<option value="${g.id}"${enemy.guildTitle===g.id?' selected':''}>${escHtml(g.name)} — ${escHtml(g.effect_text||'')}</option>`)
     ).join('');
     titleHtml = `<div class="eb-group">
       <span class="eb-label">ギルド役職</span>
@@ -1409,21 +1119,38 @@ function renderEnemyBar() {
     if (slot.id != null) {
       const em = allGuildEmblems.find(g => g.id === slot.id);
       const lvMax = em ? emblemLvMax(em.rarity) : 1;
-      emblemHtml += `<div class="emblem-slot-wrap">
-        <img class="emblem-thumb" src="../icon/emblem/${slot.id}.png" onerror="this.style.visibility='hidden'" title="${esc(em ? em.name : '')}" alt="" onclick="openEmblemModal(${s})">
-        <div class="emblem-slot-meta">
+      emblemHtml += `<div class="emblem-slot-wrap" onclick="openEmblemModal(${s})">
+        <div class="emblem-thumb-wrap">
+          <img class="emblem-thumb" src="../${em && em.image ? em.image : 'icon/emblem/'+slot.id+'.png'}" onerror="this.style.opacity='.3'" title="${escHtml(em ? em.name : '')}" alt="">
+          <button class="emblem-rm" onclick="event.stopPropagation();setEmblem(${s},'')" title="外す">×</button>
+        </div>
+        <div class="emblem-slot-meta" onclick="event.stopPropagation()">
           <input type="number" min="1" max="${lvMax}" value="${slot.level||1}" class="emblem-lv-input" onchange="setEmblemLv(${s},+this.value)">
           <span class="emblem-lv-max">/${lvMax}</span>
         </div>
-        <button class="emblem-rm" onclick="setEmblem(${s},'')" title="外す">×</button>
       </div>`;
     } else {
-      emblemHtml += `<div class="emblem-slot-wrap">
-        <div class="emblem-empty" title="エンブレムを選択" onclick="openEmblemModal(${s})">+</div>
+      emblemHtml += `<div class="emblem-slot-wrap" onclick="openEmblemModal(${s})">
+        <div class="emblem-empty" title="エンブレムを選択">+</div>
+        <div class="emblem-slot-meta" style="visibility:hidden" aria-hidden="true">
+          <input type="number" value="1" class="emblem-lv-input" tabindex="-1">
+          <span class="emblem-lv-max">/1</span>
+        </div>
       </div>`;
     }
   }
   emblemHtml += `</div></div>`;
+
+  // 11. BDゲージ上限条 — slider + integer input。max は _computeBdCapMax で算出。
+  const bdCapMax = _computeBdCapMax();
+  if ((+enemy.bd_cap || 0) > bdCapMax) enemy.bd_cap = bdCapMax;
+  const bdCap = +enemy.bd_cap || 0;
+  const bdCapHtml = `<div class="eb-group">
+    <span class="eb-label">BDゲージ上限</span>
+    <input type="range" min="0" max="${bdCapMax}" step="1" value="${bdCap}" class="bd-cap-slider" oninput="setEnemyBdCap(+this.value)">
+    <input type="number" min="0" max="${bdCapMax}" step="1" value="${bdCap}" class="bd-cap-input" oninput="setEnemyBdCap(this.value)">
+    <span class="bd-cap-max">/${bdCapMax}</span>
+  </div>`;
 
   eb.innerHTML = `
     <div class="eb-group"><span class="eb-label">敵属性</span>${elemBtns}</div>
@@ -1434,27 +1161,38 @@ function renderEnemyBar() {
     ${advWeapHtml}
     ${titleHtml}
     ${emblemHtml}
+    ${bdCapHtml}
   `;
 }
 
-function setEnemyElem(e)  { enemy.element = e;        renderEnemyBar(); refreshAllStats(); }
-function setEnemyBk(b)    { enemy.bk = !!b;           renderEnemyBar(); refreshAllStats(); }
-function setEnemyMode(m)  { enemy.mode = m;           renderEnemyBar(); refreshAllStats(); }
-function setEnemyBkRes(r) { enemy.bkResistance = r;   renderEnemyBar(); refreshAllStats(); }
-function setEnemyDiff(d)  { enemy.difficulty = d;     renderEnemyBar(); refreshAllStats(); }
-function setEnemyGuildTitle(v) { enemy.guildTitle = v ? +v : null; renderEnemyBar(); refreshAllStats(); }
-function toggleAdvWeapon(w) {
+export const setEnemyElem = (e) => { enemy.element = e;        renderEnemyBar(); refreshAllStats(); }
+export const setEnemyBk = (b) => { enemy.bk = !!b;           renderEnemyBar(); refreshAllStats(); }
+export const setEnemyMode = (m) => { enemy.mode = m;           renderEnemyBar(); refreshAllStats(); }
+export const setEnemyBkRes = (r) => { enemy.bkResistance = r;   renderEnemyBar(); refreshAllStats(); }
+export const setEnemyDiff = (d) => { enemy.difficulty = d;     renderEnemyBar(); refreshAllStats(); }
+export const setEnemyGuildTitle = (v) => { enemy.guildTitle = v ? +v : null; renderEnemyBar(); refreshAllStats(); }
+export const setEnemyBdCap = (v) => {
+  let n = parseInt(v, 10); if (!Number.isFinite(n)) n = 0;
+  // 動的 max：slider の max 属性を信頼する（renderEnemyBar 側で 9 + bdCapBonus 拡張済み）
+  const sl = document.querySelector('.bd-cap-slider');
+  const dynMax = sl ? (+sl.max || 9) : 9;
+  enemy.bd_cap = Math.max(0, Math.min(dynMax, n));
+  if (sl) sl.value = enemy.bd_cap;
+  const ip = document.querySelector('.bd-cap-input');  if (ip) ip.value = enemy.bd_cap;
+  refreshAllStats();
+}
+export const toggleAdvWeapon = (w) => {
   if (enemy.advantageWeapons.has(w)) enemy.advantageWeapons.delete(w);
   else enemy.advantageWeapons.add(w);
   renderEnemyBar(); refreshAllStats();
 }
-function setEmblem(slotIdx, v) {
+export const setEmblem = (slotIdx, v) => {
   if (!enemy.emblems[slotIdx]) enemy.emblems[slotIdx] = {id:null, level:1};
   enemy.emblems[slotIdx].id = v ? +v : null;
   enemy.emblems[slotIdx].level = 1;  // 切换时重置 level
   renderEnemyBar(); refreshAllStats();
 }
-function setEmblemLv(slotIdx, lv) {
+export const setEmblemLv = (slotIdx, lv) => {
   if (!enemy.emblems[slotIdx]) enemy.emblems[slotIdx] = {id:null, level:1};
   const em = allGuildEmblems.find(g => g.id === enemy.emblems[slotIdx].id);
   const max = em ? emblemLvMax(em.rarity) : 1;
@@ -1466,17 +1204,17 @@ function setEmblemLv(slotIdx, lv) {
 let emblemModalSlot = -1;
 const emblemModalFilter = { rarity: new Set() };
 
-function openEmblemModal(slotIdx) {
+export const openEmblemModal = (slotIdx) => {
   emblemModalSlot = slotIdx;
   document.getElementById('emblem-modal').classList.add('open');
   _renderEmblemModalSidebar();
   _renderEmblemModalList();
 }
-function closeEmblemModal() {
+export const closeEmblemModal = () => {
   document.getElementById('emblem-modal').classList.remove('open');
   emblemModalSlot = -1;
 }
-function _renderEmblemModalSidebar() {
+export const _renderEmblemModalSidebar = () => {
   const html = `
     <div class="f-section"><div class="f-label">レア度</div><div class="f-toggles">
       ${[1,2,3].map(r =>
@@ -1487,7 +1225,7 @@ function _renderEmblemModalSidebar() {
     <div class="modal-count" id="emblem-count"></div>`;
   document.getElementById('emblem-sidebar').innerHTML = html;
 }
-function _renderEmblemModalList() {
+export const _renderEmblemModalList = () => {
   const list = document.getElementById('emblem-list');
   const isGuildMode = (enemy.mode === 'guildbattle' || enemy.mode === 'guildbattle_special');
   const items = (allGuildEmblems || []).filter(em => {
@@ -1504,34 +1242,34 @@ function _renderEmblemModalList() {
     const dim = (em.guild_only && !isGuildMode) ? ' style="opacity:.55"' : '';
     const gbTag = em.guild_only ? '<span class="badge weapon" style="background:rgba(91,127,255,.18);color:#7b9fff;border-color:rgba(91,127,255,.35)">GB限定</span>' : '';
     html += `<div class="em-item${cur}"${dim} onclick="selectEmblem(${em.id})">
-      <img class="em-icon" src="../icon/emblem/${em.id}.png" onerror="this.style.visibility='hidden'" alt="">
-      <span class="em-name">${esc(em.name||'')}</span>
+      <img class="em-icon" src="../${em.image || 'icon/emblem/'+em.id+'.png'}" onerror="this.style.visibility='hidden'" alt="">
+      <span class="em-name">${escHtml(em.name||'')}</span>
       ${gbTag}
       <span class="badge weapon">★${em.rarity||1}</span>
-      <span class="em-effect">${esc((em.effect||'').slice(0,28))}${(em.effect||'').length>28?'…':''}</span>
+      <span class="em-effect">${escHtml((em.effect_text||'').slice(0,28))}${(em.effect_text||'').length>28?'…':''}</span>
     </div>`;
   }
   list.innerHTML = html;
 }
-function toggleEmblemRarity(r) {
+export const toggleEmblemRarity = (r) => {
   if (emblemModalFilter.rarity.has(r)) emblemModalFilter.rarity.delete(r);
   else emblemModalFilter.rarity.add(r);
   _renderEmblemModalSidebar();
   _renderEmblemModalList();
 }
-function resetEmblemFilter() {
+export const resetEmblemFilter = () => {
   emblemModalFilter.rarity.clear();
   _renderEmblemModalSidebar();
   _renderEmblemModalList();
 }
-function selectEmblem(id) {
+export const selectEmblem = (id) => {
   if (emblemModalSlot < 0) return;
   setEmblem(emblemModalSlot, id == null ? '' : id);
   closeEmblemModal();
 }
 
 // Pick / equip / clear ─────────────────────────────────────
-function pickOmoide(si, threshold, iconId) {
+export const pickOmoide = (si, threshold, iconId) => {
   const tr = team[si].tr;
   if ((+threshold || 0) > (+tr.affinity || 0)) return; // locked
   if (!tr.omoide_picks) tr.omoide_picks = {};
@@ -1545,7 +1283,7 @@ function pickOmoide(si, threshold, iconId) {
   refreshAllStats();
 }
 
-function equipAllOmoide(si) {
+export const equipAllOmoide = (si) => {
   const c = allCharas.find(x => x.id === team[si].chara);
   if (!c) return;
   const tr = team[si].tr;
@@ -1566,34 +1304,16 @@ function equipAllOmoide(si) {
   refreshAllStats();
 }
 
-function clearAllOmoide(si) {
+export const clearAllOmoide = (si) => {
   team[si].tr.omoide_picks = {};
   if (omoideModalSlot === si) _renderOmoideModalBody();
   _refreshOmoideCountLabel(si);
   refreshAllStats();
 }
 
-function renderOmoideEquip(i, chara) {
-  if (!chara || !(chara.omoide || []).length) return '';
-  const tr = team[i].tr;
-  const picks = tr.omoide_picks || {};
-  const equipped = Object.keys(picks).filter(k => picks[k] != null).length;
-  const total = (chara.omoide || []).length;
-  const aff = Math.floor(+tr.affinity || 0);
-  return `<div class="equip-section" id="omoide-section-${i}">
-    <div class="equip-label" style="display:flex;align-items:center;gap:8px;flex-wrap:nowrap">
-      <span style="flex-shrink:0;min-width:64px">好感装備</span>
-      <input type="number" min="0" step="1" value="${aff}" onchange="setAffinity(${i},+this.value)"
-             id="aff-input-slot-${i}" class="aff-input"
-             style="width:64px;padding:3px 6px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;outline:none;text-align:right;flex-shrink:0">
-      <span style="color:var(--text2);font-size:11px;flex-shrink:0" id="om-count-${i}">(${equipped}/${total})</span>
-      <button class="picker-btn has-val" style="margin-left:auto;font-size:11px;padding:3px 10px;flex-shrink:0;width:auto;text-align:center" onclick="openOmoideModal(${i})">編集</button>
-    </div>
-  </div>`;
-}
 
 let omoideModalSlot = -1;
-function openOmoideModal(si) {
+export const openOmoideModal = (si) => {
   omoideModalSlot = si;
   const c = allCharas.find(x => x.id === team[si].chara);
   if (!c) return;
@@ -1601,11 +1321,11 @@ function openOmoideModal(si) {
   _renderOmoideModalBody();
   document.getElementById('omoide-modal').classList.add('open');
 }
-function closeOmoideModal() {
+export const closeOmoideModal = () => {
   document.getElementById('omoide-modal').classList.remove('open');
   omoideModalSlot = -1;
 }
-function _renderOmoideModalBody() {
+export const _renderOmoideModalBody = () => {
   const si = omoideModalSlot;
   if (si < 0) return;
   const c = allCharas.find(x => x.id === team[si].chara);
@@ -1620,10 +1340,14 @@ function _renderOmoideModalBody() {
       const sel = picks[row.threshold] === iconId;
       const lbl = (info.koka || ('icon' + iconId)).replace(/UP|\[★+\]/g, x => x.includes('★') ? x : '');
       const dis = locked ? ' disabled style="cursor:not-allowed"' : '';
-      return `<button class="om-opt${sel?' on':''}"${dis} onclick="pickOmoide(${si},${row.threshold},${iconId})" title="${esc(info.koka||'')}${info.bairitu?' ('+(info.calc_type===1?'+':'×')+info.bairitu+')':''}">${esc(lbl)}</button>`;
+      return `<button class="om-opt${sel?' on':''}"${dis} onclick="pickOmoide(${si},${row.threshold},${iconId})" title="${escHtml(info.koka||'')}${info.bairitu?' ('+(info.calc_type===1?'+':'×')+info.bairitu+')':''}">${escHtml(lbl)}</button>`;
     }).join('');
     const lockTag = locked ? '<span style="font-size:10px;color:#ff7777;margin-left:4px">🔒</span>' : '';
-    return `<div class="om-row"${locked?' style="opacity:.4"':''}><span class="om-thresh">${row.threshold}${lockTag}</span>${opts}</div>`;
+    return min`
+      <div class="om-row${locked?' locked':''}">
+        <div class="om-thresh">${row.threshold}${lockTag}</div>
+        <div class="om-slots">${opts}</div>
+      </div>`;
   }).join('');
   document.getElementById('omoide-modal-body').innerHTML = `
     <div class="om-toolbar">
@@ -1636,7 +1360,7 @@ function _renderOmoideModalBody() {
     ${rows}
   `;
 }
-function _refreshOmoideCountLabel(si) {
+export const _refreshOmoideCountLabel = (si) => {
   const c = allCharas.find(x => x.id === team[si].chara);
   if (!c) return;
   const picks = team[si].tr.omoide_picks || {};
@@ -1645,19 +1369,19 @@ function _refreshOmoideCountLabel(si) {
   if (lbl) lbl.textContent = `(${equipped}/${(c.omoide||[]).length})`;
 }
 
-function _fmtStat(v) {
+export const _fmtStat = (v) => {
   if (v == null || isNaN(v)) return '-';
-  const n = Math.round(v);
+  const n = Math.ceil(v);
   // 超过 13 位数（≥ 1e13）改用科学计数法（小数点后 6 位）
   if (Math.abs(n) >= 1e13) return n.toExponential(6);
   return n.toLocaleString('en-US');
 }
 
-function renderStatsPanel(i, chara) {
+export const renderStatsPanel = (i, chara) => {
   if (!chara) return `<div class="stats-panel" id="stats-panel-${i}"></div>`;
   return `<div class="stats-panel" id="stats-panel-${i}">${_statsInner(i, chara)}</div>`;
 }
-function _statsInner(i, chara) {
+export const _statsInner = (i, chara) => {
   if (!chara) return '';
   const tr = team[i].tr;
   const r = computeStats(chara, tr);
@@ -1687,34 +1411,63 @@ function _statsInner(i, chara) {
   ].join('');
   return `<div class="stats-grid">${cells}</div>`;
 }
-function refreshStatsPanel(i) {
+export const refreshStatsPanel = (i) => {
   const el = document.getElementById('stats-panel-' + i);
   if (!el) return;
   const c = allCharas.find(x => x.id === team[i].chara);
   el.innerHTML = _statsInner(i, c);
 }
-function refreshAllStats() {
+// BDゲージ上限 max 算出: 基礎 9 + team 各 slot の bunrui=18 累加（scope filter 通過分）の最大値。
+// computeStats(chara, tr, si) を team 各 slot で走らせて bdCapBonus を取る。
+const _computeBdCapMax = () => {
+  let bonusMax = 0;
+  for (let si = 0; si < teamSize; si++) {
+    const slot = team[si]; if (!slot) continue;
+    const ch = allCharas.find(x => x.id === slot.chara);
+    if (!ch) continue;
+    const r = computeStats(ch, slot.tr, si);
+    if (r && (r.bdCapBonus || 0) > bonusMax) bonusMax = r.bdCapBonus;
+  }
+  return 9 + Math.floor(bonusMax);
+};
+
+// chara/soul/crystal/bg/masou 切替や 練度 変更で bdCapBonus が変わった時、
+// renderEnemyBar 全体は重いので slider/input/label の max 属性だけ更新する。
+const refreshBdCapMax = () => {
+  const bdCapMax = _computeBdCapMax();
+  if ((+enemy.bd_cap || 0) > bdCapMax) enemy.bd_cap = bdCapMax;
+  const sl  = document.querySelector('.bd-cap-slider');
+  const ip  = document.querySelector('.bd-cap-input');
+  const lbl = document.querySelector('.bd-cap-max');
+  if (sl)  { sl.max  = bdCapMax; sl.value  = enemy.bd_cap; }
+  if (ip)  { ip.max  = bdCapMax; ip.value  = enemy.bd_cap; }
+  if (lbl) lbl.textContent = `/${bdCapMax}`;
+};
+
+export const refreshAllStats = () => {
   for (let i = 0; i < 3; i++) refreshStatsPanel(i);
+  refreshBdCapMax();
 }
 
 // ===== ENTITY MODAL =====
 let emSlot=-1, emType=null, emCi=-1;
 const mf={
   chara:{q:'',rarity:new Set(),element:new Set(),type:new Set(),state:new Set(),bdSpecial:new Set(),omoideRarity:new Set(),sort:'',desc:true},
-  soul: {q:'',rarity:new Set(),element:new Set(),type:new Set()},
+  soul: {q:'',rarity:new Set(),element:new Set(),type:new Set(),sort:'',desc:true},
   bg:   {q:'',rarity:new Set(),element:new Set(),weapon:new Set(),bunrui:new Set()},
   crystal:{q:'',rarity:new Set(),element:new Set(),weapon:new Set(),bunrui:new Set(),condition:new Set(),scope:new Set()},
+  masou: {q:''},
 };
 
-function openEM(si,type,ci=-1){
+export const openEM = (si,type,ci=-1) => {
   emSlot=si; emType=type; emCi=ci;
-  const titles={chara:'魔剣を選択',soul:'ソウルを選択',bg:'心象結晶を選択',crystal:'記憶結晶を選択'};
+  const titles={chara:'魔剣を選択',soul:'ソウルを選択',bg:'心象結晶を選択',crystal:'記憶結晶を選択',masou:'魔装を選択'};
   document.getElementById('em-title').textContent=titles[type]||'選択';
   document.getElementById('entity-modal').classList.add('open');
   buildEMSidebar(type);
   applyEM();
 }
-function closeEM(){document.getElementById('entity-modal').classList.remove('open');emSlot=-1;emType=null;emCi=-1;}
+export const closeEM = () => {document.getElementById('entity-modal').classList.remove('open');emSlot=-1;emType=null;emCi=-1;}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDetailModal();closeEM();}});
 
 // single filter-toggle listener — set up once to avoid duplicate-listener bug
@@ -1730,9 +1483,9 @@ document.getElementById('em-sidebar').addEventListener('click',e=>{
   applyEM();
 });
 
-function buildEMSidebar(type){
+export const buildEMSidebar = (type) => {
   const f=mf[type];
-  let h=`<input type="text" class="modal-search" id="em-search" placeholder="名前で検索..." value="${esc(f.q)}" oninput="mf['${type}'].q=this.value;applyEM()">`;
+  let h=`<input type="text" class="modal-search" id="em-search" placeholder="名前で検索..." value="${escHtml(f.q)}" oninput="mf['${type}'].q=this.value;applyEM()">`;
 
   if(type==='chara'){
     h+=fsec('レア度','rarity',[4,3,2,1].map(k=>[k,RARITY[k]]),f.rarity);
@@ -1758,6 +1511,11 @@ function buildEMSidebar(type){
     h+=fsec('レア度','rarity',[5,4,3,2,1].map(k=>[k,'★'+k]),f.rarity);
     h+=fsec('得意属性','element',[1,2,3,4,5,6].map(k=>[k,ELEMENT[k],k===6?'':'elem-'+k]),f.element);
     h+=fsec('得意武器','type',Object.keys(WEAPON).map(k=>[+k,WEAPON[k]]),f.type);
+    h+=`<div class="f-sort-row"><select id="em-sort" onchange="mf['soul'].sort=this.value;applyEM()">
+      <option value="">並び替えなし</option>
+      <option value="rarity"${f.sort==='rarity'?' selected':''}>レア度</option>
+      <option value="id"${f.sort==='id'?' selected':''}>ID</option>
+    </select><button class="f-sort-dir" onclick="mf['soul'].desc=!mf['soul'].desc;this.textContent=mf['soul'].desc?'↓':'↑';applyEM()">${f.desc?'↓':'↑'}</button></div>`;
   } else if(type==='bg'){
     h+=fsec('レア度','rarity',[5,4,3,2,1].map(k=>[k,'★'+k]),f.rarity);
     h+=fsec('属性','element',[1,2,3,4,5,6].map(k=>[k,ELEMENT[k],k===6?'':'elem-'+k]),f.element);
@@ -1770,6 +1528,8 @@ function buildEMSidebar(type){
     h+=bunruiSec(f.bunrui);
     h+=fsec('条件（発動）','condition',[1,2,3,4].map(k=>[k,CONDITION[k]]),f.condition);
     h+=fsec('条件（対象）','scope',[[0,'自身'],[1,'全体'],[2,'限定']],f.scope);
+  } else if(type==='masou'){
+    // masou は chara 限定の小リスト（typically 1-2 件） — search box のみ、filter section なし
   }
 
   h+=`<div class="f-sort-row"><button class="f-reset-btn" onclick="resetEM()" style="flex:1">リセット</button></div>`;
@@ -1777,19 +1537,22 @@ function buildEMSidebar(type){
   document.getElementById('em-sidebar').innerHTML=h;
 }
 
-function fsec(label,key,opts,activeSet){
+export const fsec = (label,key,opts,activeSet) => {
   const btns=opts.map(([val,text,cls=''])=>{
     const on=activeSet.has(val)?' on':'';
     return`<button class="ftog${cls?' '+cls:''}${on}" data-fkey="${key}" data-fval='${JSON.stringify(val)}'>${text}</button>`;
   }).join('');
   return`<div class="f-section"><div class="f-label">${label}</div><div class="f-toggles">${btns}</div></div>`;
 }
-function bunruiSec(activeSet){
-  const btns=Object.entries(BUNRUI_SHORT).map(([id,name])=>`<button class="ftog${activeSet.has(+id)?' on':''}" data-fkey="bunrui" data-fval="${id}">${name}</button>`).join('');
+export const bunruiSec = (activeSet) => {
+  const btns=Object.entries(BUNRUI_FILTER).map(([id,name])=>{
+    const short=BUNRUI_SHORT[id]||name;
+    return`<button class="ftog${activeSet.has(+id)?' on':''}" data-fkey="bunrui" data-fval="${id}"><span class="ftog-desk">${name}</span><span class="ftog-mob">${short}</span></button>`;
+  }).join('');
   return`<div class="f-section"><div class="f-label">効果</div><div class="f-toggles">${btns}</div></div>`;
 }
 
-function resetEM(){
+export const resetEM = () => {
   const f=mf[emType];
   Object.keys(f).forEach(k=>{if(f[k] instanceof Set)f[k].clear();else if(k==='q')f[k]='';else if(k==='desc')f[k]=true;else f[k]='';});
   buildEMSidebar(emType);
@@ -1854,28 +1617,35 @@ const HENSEI_BG_SPEC = Object.assign({}, BG_SPEC, {
   }),
 });
 
-function applyEM(){
+export const applyEM = () => {
   const type=emType, f=mf[type];
-  let items=[], spec=null;
-  if(type==='chara')      spec = CHARA_SPEC;
-  else if(type==='soul')  spec = SOUL_SPEC;
-  else if(type==='bg')    spec = HENSEI_BG_SPEC;
-  else if(type==='crystal') spec = HENSEI_CRYSTAL_SPEC;
-  if(!spec){ renderEMList([]); return; }
-
-  items = FilterCore.applyFilters(allCharas && type==='chara' ? allCharas
-    : type==='soul' ? allSouls
-    : type==='bg' ? allBGs
-    : allCrystals, {
-      q: f.q, filters: f, sortKey: f.sort, sortDesc: f.desc !== false,
-    }, spec);
-
-  // Default ordering when no spec sortKey
-  if(!f.sort || !spec.sortFns[f.sort]){
-    if(type==='chara'){
-      items.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
-    } else {
-      items.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  let items=[];
+  if(type==='masou'){
+    const cid=team[emSlot]?.chara;
+    items = cid ? (masouByChara[cid]||[]).slice() : [];
+    if(f.q){
+      const q=String(f.q).toLowerCase();
+      items=items.filter(m=>(m.name||'').toLowerCase().indexOf(q)>=0);
+    }
+  } else {
+    let spec=null;
+    if(type==='chara')      spec = CHARA_SPEC;
+    else if(type==='soul')  spec = SOUL_SPEC;
+    else if(type==='bg')    spec = HENSEI_BG_SPEC;
+    else if(type==='crystal') spec = HENSEI_CRYSTAL_SPEC;
+    if(!spec){ renderEMList([]); return; }
+    items = FilterCore.applyFilters(allCharas && type==='chara' ? allCharas
+      : type==='soul' ? allSouls
+      : type==='bg' ? allBGs
+      : allCrystals, {
+        q: f.q, filters: f, sortKey: f.sort, sortDesc: f.desc !== false,
+      }, spec);
+    if(!f.sort || !spec.sortFns[f.sort]){
+      if(type==='chara'){
+        items.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
+      } else {
+        items.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+      }
     }
   }
   const cnt=document.getElementById('em-count');
@@ -1883,21 +1653,21 @@ function applyEM(){
   renderEMList(items);
 }
 
-function _fmtSortVal(v){
+export const _fmtSortVal = (v) => {
   if(v==null) return '—';
   if(typeof v !== 'number') return String(v);
   return Number.isInteger(v) ? v.toLocaleString('en-US') : String(v);
 }
-function renderSortBadge(c, key){
+export const renderSortBadge = (c, key) => {
   const fn = (CHARA_SPEC && CHARA_SPEC.sortFns && CHARA_SPEC.sortFns[key]);
   return `<span class="sort-val">${_fmtSortVal(fn ? fn(c) : null)}</span>`;
 }
 
-function renderEMList(items){
+export const renderEMList = (items) => {
   const list=document.getElementById('em-list');
   const type=emType;
   let h='';
-  const clearTxt={chara:'魔剣を外す',soul:'ソウルを外す',bg:'心象結晶を外す',crystal:'結晶を外す'};
+  const clearTxt={chara:'魔剣を外す',soul:'ソウルを外す',bg:'心象結晶を外す',crystal:'結晶を外す',masou:'魔装を外す'};
   // 4 种选择列表的 "外す" 行都 sticky 在顶部
   h+=`<div class="em-clear sticky" onclick="selectEM(null)">— ${clearTxt[type]||'外す'}</div>`;
   if(!items.length){list.innerHTML=h+'<div class="em-no-results">該当なし</div>';return;}
@@ -1906,75 +1676,111 @@ function renderEMList(items){
     const sortKey = mf.chara.sort;
     h+=items.map(c=>{
       const cur=team[emSlot]?.chara===c.id;
-      const dots=['極弐','改造','通常'].map(s=>`<span class="state-dot ${c.states?.[s]?'has':''}"></span>`).join('');
       const sortBadge = sortKey ? renderSortBadge(c, sortKey) : '';
-      return`<div class="em-item${cur?' active':''}" onclick="selectEM(${c.id})">
-        <img class="em-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
-        <span class="em-name">${esc(c.name)}</span>
-        <span class="badge elem-${c.element}">${ELEMENT[c.element]||''}</span>
-        <span class="badge weapon">${WEAPON[c.type]||''}</span>
-        ${sortBadge}
-        <div class="state-dots">${dots}</div>
-        <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${c.id})">詳細</button>
-      </div>`;
+      const rLabel = RARITY[c.rarity] || c.rarity || '?';
+      return min`
+        <div class="em-item em-item-bg${cur?' active':''}" onclick="selectEM(${c.id})">
+          <img class="em-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
+          <div class="em-bg-body">
+            <div class="em-bg-header">
+              <span class="badge ${rLabel}" style="flex-shrink:0">${rLabel}</span>
+              <span class="badge elem-${c.element}" style="flex-shrink:0">${ELEMENT[c.element]||''}</span>
+              <span class="badge weapon" style="flex-shrink:0">${WEAPON[c.type]||''}</span>
+              ${sortBadge}
+            </div>
+            <span class="em-bg-name">${escHtml(c.name)}</span>
+          </div>
+          <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${c.id})">詳細</button>
+        </div>`;
     }).join('');
   } else if(type==='soul'){
     h+=items.map(s=>{
       const cur=team[emSlot]?.soul===s.id;
       const eb=(s.element||[]).map(e=>`<span class="badge elem-${e}">${ELEMENT[e]||''}</span>`).join('');
-      return`<div class="em-item${cur?' active':''}" onclick="selectEM(${s.id})">
-        <img class="em-icon soul" src="https://img.altema.jp/bxb/soul/icon/${s.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
-        <span class="em-name">${esc(s.name)}</span>
-        <span class="em-soul-elem">${eb}</span><span class="badge weapon">★${s.rarity}</span>
-        <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${s.id},'soul',false)">詳細</button>
-      </div>`;
+      const wb=(s.type||[]).map(t=>`<span class="badge weapon">${WEAPON[t]||''}</span>`).join('');
+      return min`
+        <div class="em-item em-item-bg${cur?' active':''}" onclick="selectEM(${s.id})">
+          <img class="em-icon soul" src="https://img.altema.jp/bxb/soul/icon/${s.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
+          <div class="em-bg-body">
+            <div class="em-bg-header">
+              <span class="badge weapon" style="flex-shrink:0">★${s.rarity}</span>
+              <span class="em-bg-name">${escHtml(s.name)}</span>
+            </div>
+            <div class="em-bg-tags">${eb}${wb}</div>
+          </div>
+          <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${s.id},'soul')">詳細</button>
+        </div>`;
     }).join('');
   } else if(type==='bg'){
     h+=items.map(b=>{
       const cur=team[emSlot]?.bg===b.id;
-      return`<div class="em-item em-item-bg${cur?' active':''}" onclick="selectEM(${b.id})">
-        <img class="em-icon" src="https://img.altema.jp/bxb/blade_graph/icon/${b.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
-        <div class="em-bg-body">
-          <div class="em-bg-header">
-            <span class="badge weapon" style="flex-shrink:0">★${b.rarity}</span>
-            <span class="em-bg-name">${esc(b.name)}</span>
+      return min`
+        <div class="em-item em-item-bg${cur?' active':''}" onclick="selectEM(${b.id})">
+          <img class="em-icon" src="https://img.altema.jp/bxb/blade_graph/icon/${b.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
+          <div class="em-bg-body">
+            <div class="em-bg-header">
+              <span class="badge weapon" style="flex-shrink:0">★${b.rarity}</span>
+              <span class="em-bg-name">${escHtml(b.name)}</span>
+            </div>
+            <span class="em-bg-eff">${escHtml(b.effect_text||'')}</span>
           </div>
-          <span class="em-bg-eff">${esc(b.effect||'')}</span>
-        </div>
-        <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${b.id},'bg',false)">詳細</button>
-      </div>`;
+          <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${b.id},'bg')">詳細</button>
+        </div>`;
     }).join('');
   } else if(type==='crystal'){
     h+=items.map(c=>{
       const cur=team[emSlot]?.crystals[emCi]===c.id;
-      const eff=(c['効果']||'').slice(0,28);
-      return`<div class="em-item${cur?' active':''}" onclick="selectEM(${c.id})">
-        <img class="em-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
-        <span class="em-name">${esc(c.name)}</span>
-        <span class="badge weapon">★${c.rarity}</span>
-        <span class="em-effect">${esc(eff)}${(c['効果']||'').length>28?'…':''}</span>
-        <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${c.id},'crystal',false)">詳細</button>
-      </div>`;
+      return min`
+        <div class="em-item em-item-bg${cur?' active':''}" onclick="selectEM(${c.id})">
+          <img class="em-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
+          <div class="em-bg-body">
+            <div class="em-bg-header">
+              <span class="badge weapon" style="flex-shrink:0">★${c.rarity}</span>
+              <span class="em-bg-name">${escHtml(c.name)}</span>
+            </div>
+            <span class="em-bg-eff">${escHtml(c.effect_text||'')}</span>
+          </div>
+          <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${c.id},'crystal')">詳細</button>
+        </div>`;
+    }).join('');
+  } else if(type==='masou'){
+    h+=items.map(m=>{
+      const cur=team[emSlot]?.masou===m.id;
+      return min`
+        <div class="em-item em-item-bg${cur?' active':''}" onclick="selectEM(${m.id})">
+          <img class="em-icon" src="${escHtml(m.image||'')}" onerror="this.style.visibility='hidden'" alt="">
+          <div class="em-bg-body">
+            <div class="em-bg-header">
+              <span class="em-bg-name">${escHtml(m.name||'')}</span>
+            </div>
+            <span class="em-bg-eff">${escHtml(m.effect_text||'')}</span>
+          </div>
+          <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${m.id},'masou')">詳細</button>
+        </div>`;
     }).join('');
   }
   list.innerHTML=h;
 }
 
-function selectEM(id){
+export const selectEM = (id) => {
   const si=emSlot,type=emType,ci=emCi;
   closeEM();
-  if(type==='chara')   setChara(si,id);
+  if(type==='chara')        setChara(si,id);
   else if(type==='soul')    setSoul(si,id);
   else if(type==='bg')      setBG(si,id);
   else if(type==='crystal') setCrystal(si,ci,id);
+  else if(type==='masou')   setMasou(si,id);
 }
 
 // ===== DETAIL MODAL =====
 let dmCharaId=null, dmEntityType='chara';
 
-function openDetailModal(id, type='chara', showSelect=true){
+export const openDetailModal = (id, type='chara', showSelect=true) => {
   dmCharaId=id; dmEntityType=type;
-  document.querySelector('.dm-select-btn').style.display=showSelect?'':'none';
+  const btn = document.getElementById('dm-select-btn');
+  btn.style.display = showSelect ? '' : 'none';
+  const labels = {chara:'この魔剣を選択', soul:'このソウルを選択', bg:'この心象結晶を選択', crystal:'この記憶結晶を選択', masou:'この魔装を選択'};
+  btn.textContent = labels[type] || 'この魔剣を選択';
   if(type==='chara'){
     const c=allCharas.find(x=>x.id===id);
     if(!c)return;
@@ -2001,15 +1807,25 @@ function openDetailModal(id, type='chara', showSelect=true){
     document.getElementById('dm-title').textContent=c.name;
     document.getElementById('dm-body').innerHTML=renderDMCrystal(c);
     document.getElementById('detail-modal').classList.add('open');
+  } else if(type==='masou'){
+    const m=allMasou.find(x=>x.id===id);
+    if(!m)return;
+    document.getElementById('dm-title').textContent=m.name;
+    document.getElementById('dm-body').innerHTML=renderDMMasou(m);
+    document.getElementById('detail-modal').classList.add('open');
   }
 }
-function closeDetailModal(){document.getElementById('detail-modal').classList.remove('open');dmCharaId=null;}
-function selectFromDetail(){
-  const id=dmCharaId;
-  const si=emSlot;
+export const closeDetailModal = () => {document.getElementById('detail-modal').classList.remove('open');dmCharaId=null;}
+export const selectFromDetail = () => {
+  const id=dmCharaId, type=dmEntityType;
+  const si=emSlot, ci=emCi;
   closeDetailModal();
   closeEM();
-  setChara(si,id);
+  if(type==='soul')         setSoul(si,id);
+  else if(type==='bg')      setBG(si,id);
+  else if(type==='crystal') setCrystal(si,ci,id);
+  else if(type==='masou')   setMasou(si,id);
+  else                      setChara(si,id);
 }
 
 // ===== SOUL DETAIL =====
@@ -2019,7 +1835,7 @@ const _AFF_BDR={'-2':'rgba(255,85,85,.35)','-1':'rgba(255,170,68,.2)','0':null,'
 const _ELEMS_ORDER=['火','水','風','光','闇','無'];
 const _WEAPS_ORDER=['長剣','大剣','太刀','杖棒','弓矢','連弩','戦斧','騎槍','投擲','拳闘','魔典','大鎌'];
 
-function renderDMSoul(s){
+export const renderDMSoul = (s) => {
   const stars='★'.repeat(s.rarity||0)||'?';
   function affCell(name,aff){
     const lv=String(aff?.level??0);
@@ -2027,11 +1843,12 @@ function renderDMSoul(s){
     const clr=_AFF_CLR[lv];
     const bdr=_AFF_BDR[lv];
     const eff=aff?.effect??1;
-    return`<div class="sdm-aff-cell"${bdr?` style="border-color:${bdr}"`:''}>
-      <span class="sdm-aff-name">${esc(name)}</span>
-      <span class="sdm-aff-level"${clr?` style="color:${clr}"`:''}>${label}</span>
-      <span class="sdm-aff-effect">×${eff}</span>
-    </div>`;
+    return min`
+      <div class="sdm-aff-cell"${bdr?` style="border-color:${bdr}"`:''}>
+        <span class="sdm-aff-name">${escHtml(name)}</span>
+        <span class="sdm-aff-level"${clr?` style="color:${clr}"`:''}>${label}</span>
+        <span class="sdm-aff-effect">×${eff}</span>
+      </div>`;
   }
   const elemCells=_ELEMS_ORDER.map(n=>affCell(n,(s.element_affinity||{})[n])).join('');
   const weapCells=_WEAPS_ORDER.map(n=>affCell(n,(s.weapon_affinity||{})[n])).join('');
@@ -2039,34 +1856,44 @@ function renderDMSoul(s){
   const skillCards=skills.map(sk=>{
     const tags=dmRightTags(sk);
     const bairitu=dmFmtBairitu(sk);
-    return`<div class="dm-skill-card">
-      <div class="dm-skill-name-row"><span class="dm-skill-name">${esc(sk.name||'')}</span>${tags}</div>
-      <div class="dm-skill-eff-row"><span class="dm-skill-eff">${esc(sk.effect||'')}</span><span class="dm-skill-bairitu">${bairitu}</span></div>
-    </div>`;
+    return min`
+      <div class="dm-skill-card">
+        <div class="dm-skill-name-row">
+          <span class="dm-skill-name">${escHtml(sk.name||'')}</span>${tags}
+        </div>
+        <div class="dm-skill-eff-row">
+          <span class="dm-skill-eff">${escHtml(sk.effect_text||'')}</span>
+          <span class="dm-skill-bairitu">${bairitu}</span>
+        </div>
+      </div>`;
   }).join('');
   const acqEntries=Object.entries(s.acquisition||{});
-  const acqHtml=acqEntries.length?`<div class="dm-section"><div class="dm-section-title">入手場所</div>
-    <div class="sdm-acq-table">${acqEntries.map(([k,v])=>`<div class="sdm-acq-key">${esc(k)}</div><div class="sdm-acq-val">${esc(v)}</div>`).join('')}</div></div>`:''
-  return`<div class="dm-chara-header">
-    <img src="https://img.altema.jp/bxb/soul/icon/${s.id}.jpg" onerror="this.style.display='none'"
-      style="width:80px;height:auto;border-radius:6px;flex-shrink:0" alt="">
-    <div class="dm-chara-info">
-      <div class="dm-chara-title">${esc(s.name)}</div>
-      <div class="dm-chara-meta">
-        <span class="dm-meta-chip" style="font-weight:700;letter-spacing:1px">${stars}</span>
-        <span class="dm-meta-chip">Lv.${s.max_level||'?'}</span>
-        ${s.url?`<a class="dm-meta-chip" href="${s.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>`:''}
+  const acqHtml=acqEntries.length ? min`
+    <div class="dm-section">
+      <div class="dm-section-title">入手場所</div>
+      <div class="sdm-acq-table">${acqEntries.map(([k,v])=>`<div class="sdm-acq-key">${escHtml(k)}</div><div class="sdm-acq-val">${escHtml(v)}</div>`).join('')}</div>
+    </div>` : '';
+  return min`
+    <div class="dm-chara-header">
+      <img src="https://img.altema.jp/bxb/soul/icon/${s.id}.jpg" onerror="this.style.display='none'"
+        style="width:80px;height:auto;border-radius:6px;flex-shrink:0" alt="">
+      <div class="dm-chara-info">
+        <div class="dm-chara-title">${escHtml(s.name)}</div>
+        <div class="dm-chara-meta">
+          <span class="dm-meta-chip" style="font-weight:700;letter-spacing:1px">${stars}</span>
+          <span class="dm-meta-chip">Lv.${s.max_level||'?'}</span>
+          ${s.url?`<a class="dm-meta-chip" href="${s.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>`:''}
+        </div>
       </div>
     </div>
-  </div>
-  <div class="dm-section"><div class="dm-section-title">属性相性</div><div class="sdm-aff-grid">${elemCells}</div></div>
-  <div class="dm-section"><div class="dm-section-title">得意武器</div><div class="sdm-aff-grid">${weapCells}</div></div>
-  ${skills.length?`<div class="dm-section"><div class="dm-section-title">スキル構成 (${skills.length})</div><div class="dm-skills-list">${skillCards}</div></div>`:''}
-  ${acqHtml}`;
+    <div class="dm-section"><div class="dm-section-title">属性相性</div><div class="sdm-aff-grid">${elemCells}</div></div>
+    <div class="dm-section"><div class="dm-section-title">得意武器</div><div class="sdm-aff-grid">${weapCells}</div></div>
+    ${skills.length ? min`<div class="dm-section"><div class="dm-section-title">スキル構成 (${skills.length})</div><div class="dm-skills-list">${skillCards}</div></div>` : ''}
+    ${acqHtml}`;
 }
 
 // ===== BG DETAIL =====
-function _bgScopeLabel(e){
+export const _bgScopeLabel = (e) => {
   if(e.scope===3){
     if(e.element!=null)return (ELEMENT[e.element]||e.element)+'属性のみ';
     if(e.type!=null){const t=[].concat(e.type);return t.map(v=>WEAPON[v]||v).join('/')+'のみ';}
@@ -2074,35 +1901,59 @@ function _bgScopeLabel(e){
   if(e.scope===5)return (e.name||'')+'のみ';
   return'';
 }
-function renderDMBg(b){
+export const renderDMBg = (b) => {
   const effRows=(b.effects||[]).map(ef=>{
     const btags=(ef.bunrui||[]).map(bn=>`<span class="bunrui-tag">${BUNRUI_SHORT[bn]||bn}</span>`).join('');
     const cond=ef.condition?`<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition]||''}</span>`:'';
     const sl=_bgScopeLabel(ef);
-    const scope=sl?`<span class="tag-scope tag-lim">${esc(sl)}</span>`:'';
+    const scope=sl?`<span class="tag-scope tag-lim">${escHtml(sl)}</span>`:'';
     const val=ef.bairitu!=null?`<span class="tag-val">${ef.calc_type===1?'+':'×'}${fmtLarge(ef.bairitu)}</span>`:'';
     return`<div class="bgdm-eff-line">${btags}${cond}${scope}${val}</div>`;
   }).join('');
   const fields=[];
-  if(b.effect)fields.push(['効果',`<span>${esc(b.effect)}</span>`]);
+  if(b.effect_text)fields.push(['効果',`<span>${escHtml(b.effect_text)}</span>`]);
   if(effRows)fields.push(['効果量',effRows]);
-  if(b.time_start)fields.push(['期間',esc(b.time_start+'〜'+b.time_end)]);
-  if(b.acquisition)fields.push(['入手方法',esc(b.acquisition)]);
-  if(b.illustrator)fields.push(['イラスト',esc(b.illustrator)]);
+  if(b.time_start)fields.push(['期間',escHtml(b.time_start+'〜'+b.time_end)]);
+  if(b.acquisition)fields.push(['入手方法',escHtml(b.acquisition)]);
+  if(b.illustrator)fields.push(['イラスト',escHtml(b.illustrator)]);
   const fieldHtml=fields.map(([k,v])=>`<div class="bgdm-field-row"><div class="bgdm-field-key">${k}</div><div class="bgdm-field-val">${v}</div></div>`).join('');
-  return`<div class="bgdm-layout">
-    <div class="bgdm-fields">${fieldHtml||'<div style="color:var(--text2)">データなし</div>'}</div>
-    <div class="bgdm-img-wrap">
-      <img src="https://img.altema.jp/bxb/blade_graph/icon/${b.id}.jpg" onerror="this.style.display='none'" alt="">
-      <div class="bgdm-img-rarity">★${b.rarity}</div>
-    </div>
-  </div>`;
+  return min`
+    <div class="bgdm-layout">
+      <div class="bgdm-fields">${fieldHtml||'<div style="color:var(--text2)">データなし</div>'}</div>
+      <div class="bgdm-img-wrap">
+        <img src="https://img.altema.jp/bxb/blade_graph/icon/${b.id}.jpg" onerror="this.style.display='none'" alt="">
+        <div class="bgdm-img-rarity">★${b.rarity}</div>
+      </div>
+    </div>`;
+}
+
+// ===== MASOU DETAIL =====
+export const renderDMMasou = (m) => {
+  const effRows=(m.effects||[]).map(ef=>{
+    const btags=(ef.bunrui||[]).map(bn=>`<span class="bunrui-tag">${BUNRUI_SHORT[bn]||bn}</span>`).join('');
+    const cond=ef.condition?`<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition]||''}</span>`:'';
+    const sl=_bgScopeLabel(ef);
+    const scope=sl?`<span class="tag-scope tag-lim">${escHtml(sl)}</span>`:'';
+    const val=ef.bairitu!=null?`<span class="tag-val">${ef.calc_type===1?'+':'×'}${fmtLarge(ef.bairitu)}</span>`:'';
+    return`<div class="bgdm-eff-line">${btags}${cond}${scope}${val}</div>`;
+  }).join('');
+  const fields=[];
+  if(m.effect_text)fields.push(['効果',`<span>${escHtml(m.effect_text)}</span>`]);
+  if(effRows)fields.push(['効果量',effRows]);
+  if(m.acquisition)fields.push(['入手方法',escHtml(m.acquisition)]);
+  if(m.chara_name)fields.push(['対応魔剣',escHtml(m.chara_name)]);
+  const fieldHtml=fields.map(([k,v])=>`<div class="bgdm-field-row"><div class="bgdm-field-key">${k}</div><div class="bgdm-field-val">${v}</div></div>`).join('');
+  return min`
+    <div class="bgdm-layout">
+      <div class="bgdm-fields">${fieldHtml||'<div style="color:var(--text2)">データなし</div>'}</div>
+      ${m.image?`<div class="bgdm-img-wrap"><img src="${escHtml(m.image)}" onerror="this.style.display='none'" alt=""></div>`:''}
+    </div>`;
 }
 
 // ===== CRYSTAL DETAIL =====
-function renderDMCrystal(c){
+export const renderDMCrystal = (c) => {
   const fields=[];
-  if(c['効果'])fields.push(['効果',esc(c['効果'])]);
+  if(c.effect_text)fields.push(['効果',escHtml(c.effect_text)]);
   (c.effects||[]).forEach(ef=>{
     if(ef.bairitu!=null||ef.bairitu_init!=null){
       const pfx=ef.calc_type===1?'+':'×';
@@ -2117,24 +1968,25 @@ function renderDMCrystal(c){
       const scopeTag=fmtScopeTag(ef);
       fields.push(['効果量',`<div class="bgdm-eff-line">${btags}${scopeTag}<span class="tag-val">${range}</span></div>`]);
     }
-    if(ef.condition)fields.push(['発動条件',esc(CONDITION[ef.condition]||String(ef.condition))]);
+    if(ef.condition)fields.push(['発動条件',escHtml(CONDITION[ef.condition]||String(ef.condition))]);
   });
-  if(c['特殊条件'])fields.push(['特殊条件',esc(c['特殊条件'])]);
-  if(c['対象'])fields.push(['対象',esc(c['対象'])]);
-  if(c['上限値'])fields.push(['上限値',esc(c['上限値'])]);
-  if(c['入手方法'])fields.push(['入手方法',esc(c['入手方法'])]);
+  if(c['特殊条件'])fields.push(['特殊条件',escHtml(c['特殊条件'])]);
+  if(c['対象'])fields.push(['対象',escHtml(c['対象'])]);
+  if(c['上限値'])fields.push(['上限値',escHtml(c['上限値'])]);
+  if(c['入手方法'])fields.push(['入手方法',escHtml(c['入手方法'])]);
   const fieldHtml=fields.map(([k,v])=>`<div class="bgdm-field-row"><div class="bgdm-field-key">${k}</div><div class="bgdm-field-val">${v}</div></div>`).join('');
-  return`<div class="bgdm-layout">
-    <div class="bgdm-fields">${fieldHtml||'<div style="color:var(--text2)">データなし</div>'}</div>
-    <div style="flex-shrink:0">
-      <img src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id}.jpg" onerror="this.style.display='none'"
-        style="width:84px;height:84px;border-radius:8px;object-fit:cover;display:block;border:1px solid var(--border)" alt="">
-      <div style="margin-top:8px;font-size:12px;font-weight:700;text-align:center;color:var(--text2)">★${c.rarity}</div>
-    </div>
-  </div>`;
+  return min`
+    <div class="bgdm-layout">
+      <div class="bgdm-fields">${fieldHtml||'<div style="color:var(--text2)">データなし</div>'}</div>
+      <div style="flex-shrink:0">
+        <img src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id}.jpg" onerror="this.style.display='none'"
+          style="width:84px;height:84px;border-radius:8px;object-fit:cover;display:block;border:1px solid var(--border)" alt="">
+        <div style="margin-top:8px;font-size:12px;font-weight:700;text-align:center;color:var(--text2)">★${c.rarity}</div>
+      </div>
+    </div>`;
 }
 
-function renderDMChara(c){
+export const renderDMChara = (c) => {
   const rLbl=RARITY[c.rarity]||String(c.rarity);
   const eClr=ELEM_COLOR[c.element]||'#888';
   const eName=ELEMENT[c.element]||'-';
@@ -2146,38 +1998,45 @@ function renderDMChara(c){
   const contents=['極弐','改造','通常'].filter(s=>stateKeys.includes(s)).map(s=>
     `<div class="dm-state-content" data-state="${s}">${renderDMState(c.states[s],s,c)}</div>`
   ).join('');
-  const bdSection=c.bd_skill?.name?`<div class="dm-section"><div class="dm-section-title">ブレイズドライブ</div>
-    <div class="dm-bd-card"><div class="dm-bd-label">BD SKILL${c.bd_skill.cost!=null?` &nbsp; コスト ${c.bd_skill.cost}`:''}</div>
-    <div class="dm-bd-name">${esc(c.bd_skill.name)}</div>
-    <div class="dm-bd-eff">${esc(c.bd_skill.effect||'')}</div>
-    ${(c.bd_skill.special||[]).length||(c.bd_skill.duration)?`<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">
-      ${(c.bd_skill.special||[]).map(s=>`<span class="bd-sp-tag bd-sp-${s}">${BD_SPECIAL[s]||s}</span>`).join('')}
-      ${c.bd_skill.duration?`<span class="bd-dur-tag">${esc(c.bd_skill.duration)}</span>`:''}
-      ${c.bd_skill.bdhit>1?`<span class="bd-hit-tag">${c.bd_skill.bdhit}連</span>`:''}
-    </div>`:''}</div></div>`:'';
-  return`<div class="dm-chara-header">
-    <img class="dm-chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">
-    <div class="dm-chara-info">
-      <div class="dm-chara-title">${esc(c.name)}</div>
-      <div class="dm-chara-meta">
-        <span class="dm-meta-chip"><span class="badge ${rLbl}">${rLbl}</span></span>
-        <span class="dm-meta-chip"><span class="elem-dot" style="background:${eClr}"></span>${eName}属性</span>
-        <span class="dm-meta-chip">${wName}</span>
-        ${c.url?`<a class="dm-meta-chip" href="${c.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>`:''}
+  const bdSection = c.bd_skill?.name ? min`
+    <div class="dm-section">
+      <div class="dm-section-title">ブレイズドライブ</div>
+      <div class="dm-bd-card">
+        <div class="dm-bd-label">BD SKILL${c.bd_skill.cost!=null?` &nbsp; コスト ${c.bd_skill.cost}`:''}</div>
+        <div class="dm-bd-name">${escHtml(c.bd_skill.name)}</div>
+        <div class="dm-bd-eff">${escHtml(c.bd_skill.effect_text||'')}</div>
+        ${(c.bd_skill.special||[]).length||(c.bd_skill.duration) ? min`
+          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">
+            ${(c.bd_skill.special||[]).map(s=>`<span class="bd-sp-tag bd-sp-${s}">${BD_SPECIAL[s]||s}</span>`).join('')}
+            ${c.bd_skill.duration?`<span class="bd-dur-tag">${escHtml(c.bd_skill.duration)}</span>`:''}
+            ${c.bd_skill.bdhit>1?`<span class="bd-hit-tag">${c.bd_skill.bdhit}連</span>`:''}
+          </div>` : ''}
+      </div>
+    </div>` : '';
+  return min`
+    <div class="dm-chara-header">
+      <img class="dm-chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">
+      <div class="dm-chara-info">
+        <div class="dm-chara-title">${escHtml(c.name)}</div>
+        <div class="dm-chara-meta">
+          <span class="dm-meta-chip"><span class="badge ${rLbl}">${rLbl}</span></span>
+          <span class="dm-meta-chip"><span class="elem-dot" style="background:${eClr}"></span>${eName}属性</span>
+          <span class="dm-meta-chip">${wName}</span>
+          ${c.url?`<a class="dm-meta-chip" href="${c.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>`:''}
+        </div>
       </div>
     </div>
-  </div>
-  ${bdSection}
-  <div class="dm-state-tabs">${tabs}</div>
-  ${contents}`;
+    ${bdSection}
+    <div class="dm-state-tabs">${tabs}</div>
+    ${contents}`;
 }
 
-function switchDMState(label){
+export const switchDMState = (label) => {
   document.querySelectorAll('.dm-state-tab').forEach(t=>t.classList.toggle('active',t.dataset.state===label));
   document.querySelectorAll('.dm-state-content').forEach(d=>d.classList.toggle('active',d.dataset.state===label));
 }
 
-function renderDMState(state,stateLabel,chara){
+export const renderDMState = (state,stateLabel,chara) => {
   const parts=[];
   const dead = new Set(chara && Array.isArray(chara._deleted_skills) ? chara._deleted_skills : []);
   const baseSkills = (state.skills||[]).filter(sk=>!dead.has(sk.name||''));
@@ -2187,10 +2046,16 @@ function renderDMState(state,stateLabel,chara){
     const cards=allSkills.map(s=>{
       const tags=dmRightTags(s);
       const bairitu=dmFmtBairitu(s);
-      return`<div class="dm-skill-card">
-        <div class="dm-skill-name-row"><span class="dm-skill-name">${esc(s.name||'')}</span>${tags}</div>
-        <div class="dm-skill-eff-row"><span class="dm-skill-eff">${esc(s.effect||'')}</span><span class="dm-skill-bairitu">${bairitu}</span></div>
-      </div>`;
+      return min`
+        <div class="dm-skill-card">
+          <div class="dm-skill-name-row">
+            <span class="dm-skill-name">${escHtml(s.name||'')}</span>${tags}
+          </div>
+          <div class="dm-skill-eff-row">
+            <span class="dm-skill-eff">${escHtml(s.effect_text||'')}</span>
+            <span class="dm-skill-bairitu">${bairitu}</span>
+          </div>
+        </div>`;
     }).join('');
     parts.push(`<div class="dm-section"><div class="dm-section-title">スキル構成 (${allSkills.length})</div><div class="dm-skills-list">${cards}</div></div>`);
   }
@@ -2199,7 +2064,7 @@ function renderDMState(state,stateLabel,chara){
   return parts.join('')||'<div style="color:var(--text2);padding:20px">データなし</div>';
 }
 
-function dmRightTags(s){
+export const dmRightTags = (s) => {
   let tags='';
   (s.effects||[]).forEach(e=>{
     (e.bunrui||[]).forEach(b=>tags+=`<span class="bunrui-tag">${BUNRUI_SHORT[b]||b}</span>`);
@@ -2214,7 +2079,7 @@ function dmRightTags(s){
   return`<div class="dm-skill-tags">${tags}</div>`;
 }
 
-function dmFmtBairitu(s){
+export const dmFmtBairitu = (s) => {
   return(s.effects||[]).map(e=>{
     const bunrui = e.bunrui || [];
     const isHitOnly = bunrui.length===1 && bunrui[0]===7;
@@ -2232,47 +2097,57 @@ function dmFmtBairitu(s){
   }).filter(Boolean).join(' / ');
 }
 
-function renderDMStats(stats){
+export const renderDMStats = (stats) => {
   const max=stats.max||{},init=stats.initial||null;
   const cards=Object.keys(max).map(k=>{
     const lbl={HP:'HP','攻撃力':'攻撃力','防御力':'防御力','ブレイク力':'ブレイク力','フルヒット攻撃力':'フルヒット'}[k]||k;
     const mv=max[k]!=null?Number(max[k]).toLocaleString('ja-JP'):'-';
     const iv=init&&init[k]!=null?Number(init[k]).toLocaleString('ja-JP'):null;
-    return`<div class="dm-stat-card"><div class="dm-stat-label">${esc(lbl)}</div>
-      <div class="dm-stat-row"><span class="dm-stat-row-lbl">最大</span><span class="dm-stat-row-val">${mv}</span></div>
-      ${iv!==null?`<div class="dm-stat-row"><span class="dm-stat-row-lbl">初期</span><span class="dm-stat-row-val init">${iv}</span></div>`:''}
-    </div>`;
+    return min`
+      <div class="dm-stat-card">
+        <div class="dm-stat-label">${escHtml(lbl)}</div>
+        <div class="dm-stat-row">
+          <span class="dm-stat-row-lbl">最大</span>
+          <span class="dm-stat-row-val">${mv}</span>
+        </div>
+        ${iv!==null ? min`
+          <div class="dm-stat-row">
+            <span class="dm-stat-row-lbl">初期</span>
+            <span class="dm-stat-row-val init">${iv}</span>
+          </div>` : ''}
+      </div>`;
   }).join('');
   return`<div class="dm-stat-grid">${cards}</div>`;
 }
 
-function renderDMBasicInfo(info){
+export const renderDMBasicInfo = (info) => {
   const rows=Object.entries(info).map(([k,v])=>{
     let dv;
     if(k==='Hit数'&&Array.isArray(v)){
       const phases=v.map((n,i)=>`<span class="dm-hit-phase">${n}</span>${i<v.length-1?'<span class="dm-hit-arrow">-</span>':''}`).join('');
       const total=v.reduce((a,b)=>a+b,0);
       dv=`<div class="dm-hit-phases">${phases}<span style="color:var(--text2);font-size:11px;margin-left:4px">合計${total}hit</span></div>`;
-    } else dv=esc(String(v??'-'));
-    return`<div class="dm-info-cell lbl">${esc(k)}</div><div class="dm-info-cell val">${dv}</div>`;
+    } else dv=escHtml(String(v??'-'));
+    return`<div class="dm-info-cell lbl">${escHtml(k)}</div><div class="dm-info-cell val">${dv}</div>`;
   }).join('');
   return`<div class="dm-info-table">${rows}</div>`;
 }
 
 // ===== RENDER SLOTS =====
-function toggleDetail(id,btn){
+export const toggleDetail = (id,btn) => {
   const el=document.getElementById(id);
   const open=el.classList.toggle('open');
   btn.textContent=open?'▼':'▶';
 }
-function renderAll(){for(let i=0;i<3;i++)renderSlot(i);}
+export const renderAll = () => {for(let i=0;i<3;i++)renderSlot(i);}
 
-function renderSlot(i){
+export const renderSlot = (i) => {
   const t=team[i];
   const chara=allCharas.find(x=>x.id===t.chara)||null;
   const soul=allSouls.find(x=>x.id===t.soul)||null;
   const bg=allBGs.find(x=>x.id===t.bg)||null;
-  const st=chara?getBestState(chara):null;
+  const charaMasouList = chara ? (masouByChara[chara.id]||[]) : [];
+  const masou = (chara && t.masou) ? charaMasouList.find(m=>m.id===t.masou) : null;
   const nCr=crystalSlotCount(chara, i);
   const usedCr=t.crystals.filter(Boolean).length;
   const eclr=chara?(ELEM_COLOR[chara.element]||'#888'):null;
@@ -2280,7 +2155,7 @@ function renderSlot(i){
   const wnam=chara?(WEAPON[chara.type]||''):'';
 
   const hdrName=chara
-    ?`<span class="slot-chara-name">${esc(chara.name)}</span><span class="slot-chara-meta">${enam} ${wnam}</span>`
+    ?`<span class="slot-chara-name">${escHtml(chara.name)}</span><span class="slot-chara-meta">${enam} ${wnam}</span>`
     :`<span class="slot-chara-name" style="color:var(--text2);font-style:italic">未選択</span>`;
 
   const charaIcon=chara
@@ -2300,14 +2175,15 @@ function renderSlot(i){
       const cr=cid?allCrystals.find(x=>x.id===cid):null;
       return cr
         ?`<div class="crystal-slot-wrap">
-            <img class="crystal-thumb" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${cr.id}.jpg"
-              onerror="this.style.visibility='hidden'" title="${esc(cr.name)}"
-              onclick="openEM(${i},'crystal',${ci})">
-            <button class="crystal-rm" onclick="setCrystal(${i},${ci},null)">✕</button>
+            <div class="crystal-thumb-wrap">
+              <img class="crystal-thumb" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${cr.id}.jpg"
+                onerror="this.style.visibility='hidden'" title="${escHtml(cr.name)}"
+                onclick="openEM(${i},'crystal',${ci})">
+              <button class="crystal-rm" onclick="setCrystal(${i},${ci},null)" title="外す">×</button>
+            </div>
           </div>`
         :`<div class="crystal-slot-wrap">
             <div class="crystal-empty" title="結晶を選択" onclick="openEM(${i},'crystal',${ci})">+</div>
-            <span style="font-size:8px;opacity:0">.</span>
           </div>`;
     }).join('');
     const crEffHtml=renderCrystalEffList(t.crystals);
@@ -2318,9 +2194,24 @@ function renderSlot(i){
     </div>`;
   }
 
-  const charaSkills=chara?renderSkillsPanel(_resolveCharaSkills(chara)):'';
+  const charaSkills=chara?renderSkillsPanel(_resolveCharaSkills(chara, t.tr?.state)):'';
   const soulSkills=soul?renderSkillsPanel(_resolveSoulSkills(soul)):'';
   const bgPanel=renderBgPanel(bg);
+  const masouPanel=renderMasouPanel(masou);
+  const masouIcon=masou
+    ?`<img class="equip-icon" src="${escHtml(masou.image||'')}" onerror="this.style.visibility='hidden'" alt="">`
+    :`<div class="equip-icon-empty"></div>`;
+  const masouSection = (chara && charaMasouList.length) ? `
+      <div class="equip-section">
+        <div class="equip-label">魔装${masouPanel?`<button class="detail-toggle" onclick="toggleDetail('col${i}m',this)">▶</button>`:''}</div>
+        <div class="equip-row">${masouIcon}<div class="picker-wrap">
+          <div class="picker-row">
+            <button class="picker-btn ${masou?'has-val':'empty'}" onclick="openEM(${i},'masou')">${masou?escHtml(masou.name):'なし'}</button>
+            ${masou?`<button class="em-detail-btn" onclick="openDetailModal(${masou.id},'masou',false)">詳細</button>`:''}
+          </div>
+        </div></div>
+        ${masouPanel?`<div class="detail-wrap" id="col${i}m">${masouPanel}</div>`:''}
+      </div>` : '';
   document.getElementById('slot-'+i).innerHTML=`
     <div class="slot-header"><span class="slot-num">${i+1}号位</span>${hdrName}<button class="slot-clear-btn" onclick="clearSlot(${i})">外す</button></div>
     <div class="slot-body">
@@ -2328,7 +2219,7 @@ function renderSlot(i){
         <div class="equip-label">魔剣${charaSkills?`<button class="detail-toggle" onclick="toggleDetail('col${i}c',this)">▶</button>`:''}</div>
         <div class="equip-row">${charaIcon}<div class="picker-wrap">
           <div class="picker-row">
-            <button class="picker-btn ${chara?'has-val':'empty'}" onclick="openEM(${i},'chara')">${chara?esc(chara.name):'魔剣を選択...'}</button>
+            <button class="picker-btn ${chara?'has-val':'empty'}" onclick="openEM(${i},'chara')">${chara?escHtml(chara.name):'魔剣を選択...'}</button>
             ${chara?`<button class="em-detail-btn" onclick="openDetailModal(${chara.id},'chara',false)">詳細</button>`:''}
           </div>
           ${chara?`<div class="picker-sub"><span class="elem-dot" style="background:${eclr}"></span>${enam} ${wnam}</div>`:''}
@@ -2336,13 +2227,13 @@ function renderSlot(i){
         ${charaSkills?`<div class="detail-wrap" id="col${i}c">${charaSkills}</div>`:''}
       </div>
       ${renderTraining(i,chara)}
-      ${chara?renderOmoideEquip(i,chara):''}
       ${chara?renderStatsPanel(i,chara):''}
+      ${masouSection}
       <div class="equip-section">
         <div class="equip-label">ソウル${soulSkills?`<button class="detail-toggle" onclick="toggleDetail('col${i}s',this)">▶</button>`:''}</div>
         <div class="equip-row">${soulIcon}<div class="picker-wrap">
           <div class="picker-row">
-            <button class="picker-btn ${soul?'has-val':'empty'}" onclick="openEM(${i},'soul')">${soul?esc(soul.name):'ソウルを選択...'}</button>
+            <button class="picker-btn ${soul?'has-val':'empty'}" onclick="openEM(${i},'soul')">${soul?escHtml(soul.name):'ソウルを選択...'}</button>
             ${soul?`<button class="em-detail-btn" onclick="openDetailModal(${soul.id},'soul',false)">詳細</button>`:''}
           </div>
         </div></div>
@@ -2353,7 +2244,7 @@ function renderSlot(i){
         <div class="equip-label">心象結晶${bgPanel?`<button class="detail-toggle" onclick="toggleDetail('col${i}b',this)">▶</button>`:''}</div>
         <div class="equip-row">${bgIcon}<div class="picker-wrap">
           <div class="picker-row">
-            <button class="picker-btn ${bg?'has-val':'empty'}" onclick="openEM(${i},'bg')">${bg?esc(bg.name):'なし'}</button>
+            <button class="picker-btn ${bg?'has-val':'empty'}" onclick="openEM(${i},'bg')">${bg?escHtml(bg.name):'なし'}</button>
             ${bg?`<button class="em-detail-btn" onclick="openDetailModal(${bg.id},'bg',false)">詳細</button>`:''}
           </div>
         </div></div>
@@ -2368,21 +2259,21 @@ let mobileActiveSlot = 0;
 let _txStart = 0, _tyStart = 0;
 const MOB_DUR = 200;
 
-function isMob(){ return window.innerWidth <= 760; }
+export const isMob = () => { return window.innerWidth <= 760; }
 
-function msiClick(idx){
+export const msiClick = (idx) => {
   if(idx >= teamSize) return;
   flipMobSlot(idx, idx > mobileActiveSlot ? 1 : -1);
 }
 
-function updateMobIndicator(){
+export const updateMobIndicator = () => {
   document.querySelectorAll('.msi-dot').forEach((d, i) => {
     d.classList.toggle('active', i === mobileActiveSlot);
     d.classList.toggle('mob-disabled', i >= teamSize);
   });
 }
 
-function updateMobVisible(){
+export const updateMobVisible = () => {
   if(!isMob()){
     for(let i=0;i<3;i++) document.getElementById('slot-'+i)?.classList.remove('mob-hidden');
     return;
@@ -2392,9 +2283,9 @@ function updateMobVisible(){
 }
 
 const _MOB_ANIM = ['mob-anim-outL','mob-anim-outR','mob-anim-inR','mob-anim-inL'];
-function _clearMobAnim(el){ _MOB_ANIM.forEach(c => el.classList.remove(c)); }
+export const _clearMobAnim = (el) => { _MOB_ANIM.forEach(c => el.classList.remove(c)); }
 
-function flipMobSlot(nextIdx, dir){
+export const flipMobSlot = (nextIdx, dir) => {
   // wrap around within enabled slots
   nextIdx = ((nextIdx % teamSize) + teamSize) % teamSize;
   if(nextIdx === mobileActiveSlot) return;
@@ -2439,6 +2330,27 @@ _sGrid.addEventListener('touchend', e => {
 }, {passive: true});
 
 window.addEventListener('resize', updateMobVisible);
+
+// === expose public API to window for inline handlers ===
+window.state = { team, enemy, emSlot, emType, emCi };
+window.mf = mf;
+Object.assign(window, {
+  emblemLvMax, elementMatchupMult, mkTr, crystalSlotCount, fmtVal, fmtScopeTag,
+  renderEfRow, renderSkillsPanel, renderBgPanel, renderMasouPanel, renderCrystalEffList, autoAssignSoul, syncCrystals,
+  setTeamSize, setChara, setSoul, setBG, setCrystal, setMasou, clearSlot,
+  setTrField, setJukudoSlider, setTrNum, setLevel, setLevelInput, setHpSlider,
+  setHpInput, setAffinity, setSoulLv, setSoulAwk, renderSoulTraining, renderTraining,
+  soulMultiplier, soulLvCap, computeStats, renderEnemyBar, setEnemyElem, setEnemyBk,
+  setEnemyMode, setEnemyBkRes, setEnemyDiff, setEnemyGuildTitle, setEnemyBdCap, toggleAdvWeapon, setEmblem,
+  setEmblemLv, openEmblemModal, closeEmblemModal, toggleEmblemRarity, resetEmblemFilter, selectEmblem,
+  pickOmoide, equipAllOmoide, clearAllOmoide, openOmoideModal, closeOmoideModal,
+  renderStatsPanel, refreshStatsPanel, refreshAllStats, openEM, closeEM, buildEMSidebar,
+  fsec, bunruiSec, resetEM, applyEM, renderSortBadge, renderEMList,
+  selectEM, openDetailModal, closeDetailModal, selectFromDetail, renderDMSoul, renderDMBg, renderDMMasou,
+  renderDMCrystal, renderDMChara, switchDMState, renderDMState, dmRightTags, dmFmtBairitu,
+  renderDMStats, renderDMBasicInfo, toggleDetail, renderAll, renderSlot, isMob,
+  msiClick, updateMobIndicator, updateMobVisible, flipMobSlot
+});
 </script>
 </body>
 </html>
