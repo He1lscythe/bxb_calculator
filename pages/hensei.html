@@ -167,8 +167,8 @@ const ELEMENT_K_GUILD_SPECIAL = {
   5:{1:-3,2:-3,3:-3,4:3, 5:-3,6:-3},
   6:{1:-3,2:-3,3:-3,4:-3,5:-3,6:3},
 };
-// 紋章 rarity → 等级上限：rarity 1=25, 2=40, 3=55
-const EMBLEM_RARITY_LV_MAX = {1: 25, 2: 40, 3: 55};
+// 紋章 rarity → 等级上限：rarity 1=25, 2=40, 3=55, 4=1
+const EMBLEM_RARITY_LV_MAX = {1: 25, 2: 40, 3: 55, 4: 1};
 export const emblemLvMax = (rarity) => {
   return EMBLEM_RARITY_LV_MAX[+rarity || 1] || EMBLEM_RARITY_LV_MAX[1];
 }
@@ -238,7 +238,7 @@ Promise.all([
   allCharas=ch.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
   allSouls=so.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
   allBGs=bg.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
-  allCrystals=cr.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  allCrystals=cr.filter(c=>!c.tombstone).sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
   allMasou=Array.isArray(ms)?ms:[];
   masouByChara={};
   allMasou.forEach(m=>{ if(m.chara_id!=null) (masouByChara[m.chara_id]=masouByChara[m.chara_id]||[]).push(m); });
@@ -830,8 +830,8 @@ export const computeStats = (chara, tr, slotIdx) => {
   const hits = Array.isArray(baseHitsRaw) ? baseHitsRaw.slice(0, 3).map(h => +h || 0) : [0, 0, 0];
   while (hits.length < 3) hits.push(0);
   let damageLimit = 2147483647;
-  // bdCapBonus: bunrui=18（B.D.ゲージの最大値）の effect bairitu を累加。stage 4e で
-  //   bdCap = enemy.bd_cap + bdCapBonus に基づいて 攻撃力 倍率を算出する。
+  // bunrui=18（BDゲージの最大値）effects の bairitu を累加。stage 4e では使わず、UI 側の
+  // BDゲージ上限 slider/input/label の max を 9 + bdCapBonus に拡張するためだけに使う。
   const acc = { stats, damageLimit, hits, bdCapBonus: 0 };
   const tgt = chara;
 
@@ -881,9 +881,8 @@ export const computeStats = (chara, tr, slotIdx) => {
         if (mode === 'add') acc.damageLimit += v;
         else acc.damageLimit *= v;
       } else if (b === 18) {
-        // bunrui=18: B.D.ゲージ最大値 → bdCap bonus（通常 calc_type=1 add）
+        // BDゲージ最大値（chara skill / crystal とも calc_type=1 add 想定; mode='mul' は来ない）
         if (mode === 'add') acc.bdCapBonus += v;
-        else acc.bdCapBonus *= v;
       } else {
         const stat = _BUNRUI_TO_STAT[b];
         if (!stat || acc.stats[stat] == null) continue;
@@ -1188,8 +1187,10 @@ export const toggleAdvWeapon = (w) => {
 }
 export const setEmblem = (slotIdx, v) => {
   if (!enemy.emblems[slotIdx]) enemy.emblems[slotIdx] = {id:null, level:1};
-  enemy.emblems[slotIdx].id = v ? +v : null;
-  enemy.emblems[slotIdx].level = 1;  // 切换时重置 level
+  const newId = v ? +v : null;
+  enemy.emblems[slotIdx].id = newId;
+  const em = newId != null ? allGuildEmblems.find(g => g.id === newId) : null;
+  enemy.emblems[slotIdx].level = em ? emblemLvMax(em.rarity) : 1;
   renderEnemyBar(); refreshAllStats();
 }
 export const setEmblemLv = (slotIdx, lv) => {
@@ -1201,11 +1202,22 @@ export const setEmblemLv = (slotIdx, lv) => {
 }
 
 // ===== EMBLEM MODAL（rarity 筛选 + icon 列表）=====
+// スロット色固定：0→黄(1) / 1→青(2) / 2→緑(3) / 3→赤(4)
+const SLOT_COLORS = [1, 2, 3, 4];
+const COLOR_LABELS = { 1: '黄', 2: '青', 3: '緑', 4: '赤' };
+const COLOR_HEX = { 1: '#ffd040', 2: '#5b8bff', 3: '#5bd47a', 4: '#ff6b6b' };
 let emblemModalSlot = -1;
 const emblemModalFilter = { rarity: new Set() };
 
 export const openEmblemModal = (slotIdx) => {
   emblemModalSlot = slotIdx;
+  const c = SLOT_COLORS[slotIdx];
+  const title = document.querySelector('#emblem-modal .modal-header-title');
+  if (title) {
+    title.innerHTML = c
+      ? `エンブレム選択 <span style="color:${COLOR_HEX[c]};font-size:13px;margin-left:6px">● ${COLOR_LABELS[c]}スロット</span>`
+      : 'エンブレム選択';
+  }
   document.getElementById('emblem-modal').classList.add('open');
   _renderEmblemModalSidebar();
   _renderEmblemModalList();
@@ -1217,7 +1229,7 @@ export const closeEmblemModal = () => {
 export const _renderEmblemModalSidebar = () => {
   const html = `
     <div class="f-section"><div class="f-label">レア度</div><div class="f-toggles">
-      ${[1,2,3].map(r =>
+      ${[1,2,3,4].map(r =>
         `<button class="ftog${emblemModalFilter.rarity.has(r)?' on':''}" onclick="toggleEmblemRarity(${r})">★${r}</button>`
       ).join('')}
     </div></div>
@@ -1228,10 +1240,12 @@ export const _renderEmblemModalSidebar = () => {
 export const _renderEmblemModalList = () => {
   const list = document.getElementById('emblem-list');
   const isGuildMode = (enemy.mode === 'guildbattle' || enemy.mode === 'guildbattle_special');
+  const slotColor = SLOT_COLORS[emblemModalSlot];
   const items = (allGuildEmblems || []).filter(em => {
+    if (slotColor && (+em.color || 0) !== slotColor) return false;
     if (emblemModalFilter.rarity.size > 0 && !emblemModalFilter.rarity.has(+em.rarity || 1)) return false;
     return true;
-  }).sort((a,b) => (b.rarity||1) - (a.rarity||1) || a.id - b.id);
+  }).sort((a,b) => ((a.guild_only?1:0) - (b.guild_only?1:0)) || (a.rarity||1) - (b.rarity||1) || a.id - b.id);
   const cnt = document.getElementById('emblem-count');
   if (cnt) cnt.textContent = items.length + ' 件';
 
@@ -1241,12 +1255,16 @@ export const _renderEmblemModalList = () => {
     const cur = (enemy.emblems[emblemModalSlot] || {}).id === em.id ? ' active' : '';
     const dim = (em.guild_only && !isGuildMode) ? ' style="opacity:.55"' : '';
     const gbTag = em.guild_only ? '<span class="badge weapon" style="background:rgba(91,127,255,.18);color:#7b9fff;border-color:rgba(91,127,255,.35)">GB限定</span>' : '';
-    html += `<div class="em-item${cur}"${dim} onclick="selectEmblem(${em.id})">
+    html += `<div class="em-item em-item-bg${cur}"${dim} onclick="selectEmblem(${em.id})">
       <img class="em-icon" src="../${em.image || 'icon/emblem/'+em.id+'.png'}" onerror="this.style.visibility='hidden'" alt="">
-      <span class="em-name">${escHtml(em.name||'')}</span>
-      ${gbTag}
-      <span class="badge weapon">★${em.rarity||1}</span>
-      <span class="em-effect">${escHtml((em.effect_text||'').slice(0,28))}${(em.effect_text||'').length>28?'…':''}</span>
+      <div class="em-bg-body">
+        <div class="em-bg-header">
+          <span class="badge weapon">★${em.rarity||1}</span>
+          <span class="em-bg-name">${escHtml(em.name||'')}</span>
+          ${gbTag}
+        </div>
+        <div class="em-bg-eff">${escHtml(em.effect_text||'')}</div>
+      </div>
     </div>`;
   }
   list.innerHTML = html;
@@ -1371,10 +1389,9 @@ export const _refreshOmoideCountLabel = (si) => {
 
 export const _fmtStat = (v) => {
   if (v == null || isNaN(v)) return '-';
-  const n = Math.ceil(v);
   // 超过 13 位数（≥ 1e13）改用科学计数法（小数点后 6 位）
-  if (Math.abs(n) >= 1e13) return n.toExponential(6);
-  return n.toLocaleString('en-US');
+  if (Math.abs(v) >= 1e13) return (+v).toExponential(6);
+  return (+v).toLocaleString('en-US');
 }
 
 export const renderStatsPanel = (i, chara) => {
@@ -1401,13 +1418,13 @@ export const _statsInner = (i, chara) => {
   // 显示顺序：攻撃力max / 攻撃力min / 防御力 / HP / BK / Hit数 / ダメ上限
   // 默认每 cell 1/2 行宽（.stats-grid 的 grid-template-columns 设为 repeat(2,1fr)）。
   const cells = [
-    `<div class="stats-cell"><span class="stats-key">攻撃力max</span><span class="stats-val"${yMax}>${_fmtStat(aMax)}</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">攻撃力min</span><span class="stats-val"${yMin}>${_fmtStat(aMin)}</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">防御力</span><span class="stats-val">${_fmtStat(def)}</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">HP</span><span class="stats-val">${_fmtStat(hp)}</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">BK</span><span class="stats-val">${_fmtStat(bk)}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">攻撃力max</span><span class="stats-val"${yMax}>${_fmtStat(Math.ceil(aMax))}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">攻撃力min</span><span class="stats-val"${yMin}>${_fmtStat(Math.ceil(aMin))}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">防御力</span><span class="stats-val">${_fmtStat(Math.ceil(def))}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">HP</span><span class="stats-val">${_fmtStat(Math.ceil(hp))}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">BK</span><span class="stats-val">${_fmtStat(Math.ceil(bk))}</span></div>`,
     `<div class="stats-cell"><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}] 合計 ${total_hits} hit</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(dl)}</span></div>`,
+    `<div class="stats-cell"><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(Math.ceil(dl))}</span></div>`,
   ].join('');
   return `<div class="stats-grid">${cells}</div>`;
 }
@@ -1417,8 +1434,9 @@ export const refreshStatsPanel = (i) => {
   const c = allCharas.find(x => x.id === team[i].chara);
   el.innerHTML = _statsInner(i, c);
 }
-// BDゲージ上限 max 算出: 基礎 9 + team 各 slot の bunrui=18 累加（scope filter 通過分）の最大値。
-// computeStats(chara, tr, si) を team 各 slot で走らせて bdCapBonus を取る。
+// BDゲージ上限 max 算出: 9 + 一切 buff（bunrui=18 effects の累加）→ 最後に floor。
+// 各 slot の bdCapBonus（chara skill / crystal / soul / bg / masou から scope filter 通過分の和）
+// の最大値を採用。例: +9.99 → floor(9+9.99)=18, +13 → floor(9+13)=22。
 const _computeBdCapMax = () => {
   let bonusMax = 0;
   for (let si = 0; si < teamSize; si++) {
@@ -1428,7 +1446,7 @@ const _computeBdCapMax = () => {
     const r = computeStats(ch, slot.tr, si);
     if (r && (r.bdCapBonus || 0) > bonusMax) bonusMax = r.bdCapBonus;
   }
-  return 9 + Math.floor(bonusMax);
+  return Math.floor(9 + bonusMax);
 };
 
 // chara/soul/crystal/bg/masou 切替や 練度 変更で bdCapBonus が変わった時、
@@ -1732,7 +1750,7 @@ export const renderEMList = (items) => {
       const cur=team[emSlot]?.crystals[emCi]===c.id;
       return min`
         <div class="em-item em-item-bg${cur?' active':''}" onclick="selectEM(${c.id})">
-          <img class="em-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
+          <img class="em-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id % 100000}.jpg" onerror="this.style.visibility='hidden'" alt="">
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="badge weapon" style="flex-shrink:0">★${c.rarity}</span>
@@ -1979,7 +1997,7 @@ export const renderDMCrystal = (c) => {
     <div class="bgdm-layout">
       <div class="bgdm-fields">${fieldHtml||'<div style="color:var(--text2)">データなし</div>'}</div>
       <div style="flex-shrink:0">
-        <img src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id}.jpg" onerror="this.style.display='none'"
+        <img src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id % 100000}.jpg" onerror="this.style.display='none'"
           style="width:84px;height:84px;border-radius:8px;object-fit:cover;display:block;border:1px solid var(--border)" alt="">
         <div style="margin-top:8px;font-size:12px;font-weight:700;text-align:center;color:var(--text2)">★${c.rarity}</div>
       </div>
@@ -2176,7 +2194,7 @@ export const renderSlot = (i) => {
       return cr
         ?`<div class="crystal-slot-wrap">
             <div class="crystal-thumb-wrap">
-              <img class="crystal-thumb" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${cr.id}.jpg"
+              <img class="crystal-thumb" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${cr.id % 100000}.jpg"
                 onerror="this.style.visibility='hidden'" title="${escHtml(cr.name)}"
                 onclick="openEM(${i},'crystal',${ci})">
               <button class="crystal-rm" onclick="setCrystal(${i},${ci},null)" title="外す">×</button>

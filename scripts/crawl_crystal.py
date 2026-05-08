@@ -8,11 +8,14 @@
   python crawl_crystal.py --recal  # 同上（无分类pipeline，行为不变）
 """
 
-import argparse, requests, json, re, os, html as htmlmod
+import argparse, copy, requests, json, re, os, html as htmlmod
 from bs4 import BeautifulSoup
-from classify_common import classify_hit_fields, classify_effect, _detect_condition as detect_condition
+from classify_common import classify_hit_fields, classify_effect, _detect_condition as detect_condition, ADD_BUNRUI
 
-CRYSTAL_ADD_BUNRUI = {6, 7, 9, 11, 16, 17, 19}
+# crystal は ADD_BUNRUI（共通の加算分類）+ crystal 固有の add 種類を union。
+#   9 (回避状態異常)、11 (HP回復)、16 (その他) は crystal 文案で add 語義になる。
+#   18 (BDゲージ最大値)、21 (BDヒット数) は ADD_BUNRUI 経由で含まれる（以前は漏れていた）。
+CRYSTAL_ADD_BUNRUI = ADD_BUNRUI | {9, 11, 16}
 
 ELEMENT_MAP = {'火': 1, '水': 2, '風': 3, '光': 4, '闇': 5, '無': 6}
 WEAPON_MAP  = {
@@ -231,6 +234,37 @@ def parse_row(row):
     return crystal
 
 
+def split_pure_memory(crystals):
+    """
+    「○○の純真記憶」結晶を ･攻 / ･速 二件に拡張。
+    元 entry に tombstone=True + split_into=[攻id, 速id] を付け、新 2 件 (bunrui 単一化) を追加。
+    ID は元 id に決定的オフセット：攻 = 元id+100000、速 = 元id+200000。
+    """
+    pure = [c for c in crystals if c.get('name', '').endswith('の純真記憶')]
+    new_entries = []
+    for c in pure:
+        if not c.get('effects'):
+            continue
+        oid = c.get('id') or 0
+        atk_id, spd_id = oid + 100000, oid + 200000
+        atk = copy.deepcopy(c)
+        atk['id'] = atk_id
+        atk['name'] = c['name'] + '･攻'
+        atk['effect_text'] = '攻撃力UP'
+        atk['effects'][0]['bunrui'] = [1]
+        spd = copy.deepcopy(c)
+        spd['id'] = spd_id
+        spd['name'] = c['name'] + '･動'
+        spd['effect_text'] = '攻撃モーション速度UP'
+        spd['effects'][0]['bunrui'] = [5]
+        new_entries.extend([atk, spd])
+        c['tombstone'] = True
+        c['split_into'] = [atk_id, spd_id]
+    crystals.extend(new_entries)
+    if pure:
+        print(f"Split {len(pure)} 純真記憶 crystals → {len(new_entries)} new entries (id +100000/+200000)")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Altema BxB 記憶結晶 Crawler")
     parser.add_argument("--rerun", action="store_true", help="Full re-fetch (default behavior)")
@@ -250,6 +284,8 @@ def main():
 
     crystals = [c for row in rows if (c := parse_row(row))]
     print(f"Parsed {len(crystals)} crystals")
+
+    split_pure_memory(crystals)
 
     def deep_update(target, patch):
         for k, v in patch.items():
