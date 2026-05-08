@@ -334,7 +334,7 @@ export const saveRevise = async () => {
     });
     state.sessionReviseIds.clear();
     if (json.mode === 'remote') {
-      showSaveToast(`✓ 提出済み`);
+      showSaveToast(`✓ 提案受付完了 — 管理者の審査・マージ後に反映されます`);
       status.textContent = '';
     } else {
       status.textContent = '✓ 保存完了';

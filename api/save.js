@@ -16,7 +16,7 @@
 import { Octokit } from '@octokit/rest';
 
 const REPO = { owner: 'He1lscythe', repo: 'bxb_calculator' };
-const BASE = 'main';
+const BASE = 'data-staging';
 
 // 値は [filePath, sessionIdsKey]。masou は chara/soul と id namespace が違うため
 // 独立な masou_session_ids を使う（chara id と masou id が衝突して entry を誤って消すのを防ぐ）。
@@ -49,6 +49,19 @@ async function readJsonFromMain(octokit, path) {
   }
 }
 
+// 字段级 deep merge：plain object 递归合并，array / 标量 直接覆盖。
+// 用途：A 改了 id=22 的 skills.4、B 改了 id=22 的 element_affinity → 两边字段都保留。
+// 注意：B 若想"撤回"A 已合的字段，需要在 PR 合并前手动从 patch 删掉，否则会幽灵保留。
+function deepMerge(target, source) {
+  if (source === null || typeof source !== 'object' || Array.isArray(source)) return source;
+  if (target === null || typeof target !== 'object' || Array.isArray(target)) return source;
+  const result = { ...target };
+  for (const k of Object.keys(source)) {
+    result[k] = deepMerge(target[k], source[k]);
+  }
+  return result;
+}
+
 function mergeById(existing, patches, sessionIds) {
   const sessionSet = new Set(sessionIds);
   const patchMap = new Map((patches || []).map((p) => [p.id, p]));
@@ -57,7 +70,7 @@ function mergeById(existing, patches, sessionIds) {
     if (!sessionSet.has(c.id)) {
       merged.push(c);
     } else if (patchMap.has(c.id)) {
-      merged.push(patchMap.get(c.id));
+      merged.push(deepMerge(c, patchMap.get(c.id)));
       patchMap.delete(c.id);
     }
     // else: deleted (skip)
