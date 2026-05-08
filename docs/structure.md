@@ -205,6 +205,45 @@ node scripts/build.js --watch
 
 ---
 
+## Revise 仓库结构（多分支中转）
+
+```
+GitHub Pages (live)
+    ↑ deploy from main
+main branch
+    ↑ admin 手動 merge data-staging → main（每周一次等）
+data-staging branch          ← all revise edits land here first
+    ↑ admin 手動 merge proposal/save-XXX → data-staging
+proposal/save-{ts}-{rand}   ← API（Vercel /api/save）每次 POST 自动开
+    ↑ POST from frontend
+ユーザー編集
+```
+
+- `*_revise.json` **track 在 git 里**（之前是 gitignore，现在不是）
+- 用户在 GitHub Pages 上修正 → POST → API 创建 PR 到 `data-staging`
+- 你 review/merge PR 到 data-staging 后，定期 `git merge data-staging` 到 main
+- 本地编辑直接 push 到 data-staging（不经 PR）：
+
+```bash
+git checkout data-staging
+git pull origin data-staging
+# 编辑 data/*_revise.json
+git add data/ && git commit -m "..." && git push
+```
+
+**API 字段级 deepMerge + null 撤回**：
+
+| 角色 | 行为 |
+|---|---|
+| 前端 `computeDiff(orig, modified, prevRevise)` | 用户撤回字段（modified 跟 base 相同但 prev 里有）→ emit `field: null` 撤回标记 |
+| API `deepMerge(target, source)` | source 是 plain object → 字段级合并；source[k] === null → 删除 result[k]；空 dict 自动 prune |
+| `mergeById` | deepMerge 后只剩 `{id, name}` 的空 entry 直接丢弃 |
+| 落盘 revise.json | 永远不含 null（撤回标记仅在传输阶段存在） |
+
+start.py `_deep_merge` / `_merge_by_id` 与 Vercel api/save.js 同语义（local + remote 行为一致）。
+
+---
+
 ## 前端 Save 机制
 
 各数据 Viewer（characters / soul / crystals / bladegraph）共享统一的 **revise-only** 保存流程。基础 JSON（characters.json 等）只有爬虫能写，UI 只修改 revise。

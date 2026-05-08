@@ -96,20 +96,56 @@ def _read_data(name):
         return json.load(f)
 
 
+def _deep_merge(target, source):
+    """字段级 deep merge（Vercel api/save.js と同等）。
+    - source[k] is None → result[k] を削除（撤回マーカー）
+    - 再帰後 空 dict になったキーも prune（落盘 revise.json をクリーンに保つ）"""
+    if source is None:
+        return None
+    if not isinstance(source, dict):
+        return source
+    result = dict(target) if isinstance(target, dict) else {}
+    for k, sv in source.items():
+        merged = _deep_merge(result.get(k), sv)
+        if merged is None:
+            result.pop(k, None)
+        else:
+            result[k] = merged
+    for k in list(result.keys()):
+        v = result[k]
+        if isinstance(v, dict) and not v:
+            del result[k]
+    return result
+
+
+def _has_real_content(entry):
+    """id / name 以外のフィールドが残っていれば revise として意味あり"""
+    return any(k not in ('id', 'name') for k in entry)
+
+
 def _merge_by_id(existing, patches, session_ids):
-    """id-level merge：保留未触及的 entry；session_ids 内的 id 用 patch 替换；
-    在 session_ids 但不在 patch 的 id = 删除。"""
+    """id-level merge：保留未触及的 entry；session_ids 内の id は field-level deep merge；
+    session_ids 内なのに patch 不在の id = 削除。
+    deep merge 後 id/name しか残らない空 entry も削除（全フィールドが null 撤回された場合）。"""
     session_set = set(session_ids)
-    patch_map = {p.get('id'): p for p in (patches or []) if p.get('id') is not None}
+    # session_ids 不包含的 patch 直接忽略：避免 existing 同 id 与 patch 同時押し込まれて重複
+    patch_map = {p.get('id'): p for p in (patches or [])
+                 if p.get('id') is not None and p.get('id') in session_set}
     merged = []
     for c in (existing or []):
         cid = c.get('id')
         if cid not in session_set:
             merged.append(c)
         elif cid in patch_map:
-            merged.append(patch_map.pop(cid))
+            entry = _deep_merge(c, patch_map.pop(cid))
+            if _has_real_content(entry):
+                merged.append(entry)
         # else: deleted (skip)
-    merged.extend(patch_map.values())
+    for p in patch_map.values():
+        # 新規 id の patch も deep_merge を通して null マーカーや空 dict を prune
+        entry = _deep_merge({}, p)
+        if _has_real_content(entry):
+            merged.append(entry)
     merged.sort(key=lambda c: c.get('id') or 0)
     return merged
 

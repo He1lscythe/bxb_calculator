@@ -44,14 +44,18 @@ export const saveEdit = () => {
   const id  = state.editData.id;
   const idx = state.allCrystals.findIndex(function(x) { return x.id === id; });
   if (idx >= 0) {
-    const changed = JSON.stringify(state.editData) !== JSON.stringify(state.originalData[id]);
-    state.allCrystals[idx] = state.editData;
-    if (changed) {
-      state.reviseData[id] = computeDiff(state.originalData[id], state.editData);
+    // session 内是否真改过：跟 pre-edit 的 allCrystals[idx] 对比
+    const sessionChanged = JSON.stringify(state.editData) !== JSON.stringify(state.allCrystals[idx]);
+    if (sessionChanged) {
+      state.allCrystals[idx] = state.editData;
+      const totalChanged = JSON.stringify(state.editData) !== JSON.stringify(state.originalData[id]);
+      if (totalChanged) {
+        state.reviseData[id] = computeDiff(state.originalData[id], state.editData);
+      } else {
+        // 改回了 base：清掉 reviseData 但保留 session 让 server 删除条目
+        delete state.reviseData[id];
+      }
       state.sessionReviseIds.add(id);
-    } else {
-      delete state.reviseData[id];
-      state.sessionReviseIds.delete(id);
     }
     updateReviseBar();
   }

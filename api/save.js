@@ -49,33 +49,56 @@ async function readJsonFromMain(octokit, path) {
   }
 }
 
-// 字段级 deep merge：plain object 递归合并，array / 标量 直接覆盖。
-// 用途：A 改了 id=22 的 skills.4、B 改了 id=22 的 element_affinity → 两边字段都保留。
-// 注意：B 若想"撤回"A 已合的字段，需要在 PR 合并前手动从 patch 删掉，否则会幽灵保留。
+// 字段级 deep merge：plain object 递归合并，array / 標量 直接覆盖。
+// 用途：A 改了 id=22 の skills.4、B 改了 id=22 の element_affinity → 両側残留。
+// null は「撤回マーカー」：source[k] === null → result[k] を削除。
+// recursive merge で空オブジェクトになったキーも prune（落盘 revise.json をクリーンに保つ）。
 function deepMerge(target, source) {
-  if (source === null || typeof source !== 'object' || Array.isArray(source)) return source;
-  if (target === null || typeof target !== 'object' || Array.isArray(target)) return source;
-  const result = { ...target };
+  if (source === null) return null;  // top-level null（親が処理する）
+  if (typeof source !== 'object' || Array.isArray(source)) return source;
+  const result = (target !== null && typeof target === 'object' && !Array.isArray(target))
+    ? { ...target }
+    : {};
   for (const k of Object.keys(source)) {
-    result[k] = deepMerge(target[k], source[k]);
+    const merged = deepMerge(result[k], source[k]);
+    if (merged === null) delete result[k];
+    else result[k] = merged;
+  }
+  // null 削除で空になったプレーンオブジェクトを prune
+  for (const k of Object.keys(result)) {
+    const v = result[k];
+    if (v && typeof v === 'object' && !Array.isArray(v) && Object.keys(v).length === 0) {
+      delete result[k];
+    }
   }
   return result;
 }
 
+// id / name 以外のフィールドがあれば revise として意味あり
+const _hasRealContent = entry => Object.keys(entry).some(k => k !== 'id' && k !== 'name');
+
 function mergeById(existing, patches, sessionIds) {
   const sessionSet = new Set(sessionIds);
-  const patchMap = new Map((patches || []).map((p) => [p.id, p]));
+  // session_ids 不包含的 patch 直接忽略：避免 existing 同 id 与 patch 同时被写入造成重复
+  const patchMap = new Map(
+    (patches || []).filter(p => sessionSet.has(p.id)).map(p => [p.id, p])
+  );
   const merged = [];
   for (const c of existing || []) {
     if (!sessionSet.has(c.id)) {
       merged.push(c);
     } else if (patchMap.has(c.id)) {
-      merged.push(deepMerge(c, patchMap.get(c.id)));
+      const entry = deepMerge(c, patchMap.get(c.id));
       patchMap.delete(c.id);
+      if (_hasRealContent(entry)) merged.push(entry);
     }
     // else: deleted (skip)
   }
-  for (const p of patchMap.values()) merged.push(p);
+  for (const p of patchMap.values()) {
+    // 新規 id の patch も deepMerge を通して null マーカーや空 dict を prune
+    const entry = deepMerge({}, p);
+    if (_hasRealContent(entry)) merged.push(entry);
+  }
   merged.sort((a, b) => (a.id ?? 0) - (b.id ?? 0));
   return merged;
 }
