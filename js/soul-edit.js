@@ -70,6 +70,31 @@ export const cancelEdit = () => {
   selectSoul(state.selectedId);
 }
 
+// atk_effect / def_effect 値が「1」(=任意小数表記の 1.0) 時はデフォルトと同じ意味で
+// revise に残す価値が無い → diff 計算前に剥がし「fieldが存在しない」状態にする。
+// "5/4" 等の分式は別途残す（mathematical 1 ではあるが user intent 不明な為）。
+const _isEffectDefault = (v) => {
+  if (v == null) return false;
+  const s = String(v).trim();
+  if (s === '' || s.includes('/')) return false;
+  const n = parseFloat(s);
+  return Number.isFinite(n) && n === 1;
+};
+const _normalizeAffinityForDiff = (soul) => {
+  const c = JSON.parse(JSON.stringify(soul));
+  for (const fld of ['element_affinity', 'weapon_affinity']) {
+    const d = c[fld];
+    if (!d || typeof d !== 'object') continue;
+    for (const k of Object.keys(d)) {
+      const e = d[k];
+      if (!e || typeof e !== 'object') continue;
+      if (_isEffectDefault(e.atk_effect)) delete e.atk_effect;
+      if (_isEffectDefault(e.def_effect)) delete e.def_effect;
+    }
+  }
+  return c;
+};
+
 export const saveEdit = () => {
   if (!state.editData) return;
   // Clean up empty tombstone / added arrays
@@ -82,14 +107,23 @@ export const saveEdit = () => {
   const id  = state.editData.id;
   const idx = state.allSouls.findIndex(x => x.id === id);
   if (idx >= 0) {
-    const changed = JSON.stringify(state.editData) !== JSON.stringify(state.originalData[id]);
-    state.allSouls[idx] = state.editData;
-    if (changed) {
-      state.reviseData[id] = computeDiff(state.originalData[id], state.editData);
-      state.sessionReviseIds.add(id);
-    } else {
-      delete state.reviseData[id];
-      state.sessionReviseIds.delete(id);
+    // session 内是否真改过：拿 editData 跟 pre-edit 的 allSouls[idx] 对比，
+    // 而不是 originalData（base）。撤回到 base 算 session 变化。
+    const sessionChanged = JSON.stringify(state.editData) !== JSON.stringify(state.allSouls[idx]);
+    if (sessionChanged) {
+      state.allSouls[idx] = state.editData;
+      const normalizedEdit = _normalizeAffinityForDiff(state.editData);
+      const prevRevise = state.reviseData[id];   // 撤回検知用
+      const newDiff = computeDiff(state.originalData[id], normalizedEdit, prevRevise);
+      const meaningful = Object.keys(newDiff).some(k => k !== 'id' && k !== 'name');
+      if (meaningful) {
+        state.reviseData[id] = newDiff;
+        state.sessionReviseIds.add(id);
+      } else {
+        // 完全没差异（比如改了又改回来）→ 清空，不入队
+        delete state.reviseData[id];
+        state.sessionReviseIds.delete(id);
+      }
     }
     updateReviseBar();
   }
@@ -108,6 +142,19 @@ export const saveRevise = async () => {
       session_ids: ids,
       soul_revise: pickPatches(state.reviseData, ids),
     });
+    // submit 成功后，refresh state.reviseData[id] 反映 disk 实际状態（去除 null マーカー）。
+    // 否则下次 saveEdit 拿到带 null 的 stale prev → computeDiff 重复产出 null。
+    for (const id of ids) {
+      const idx = state.allSouls.findIndex(s => s.id === id);
+      if (idx < 0) continue;
+      const norm = _normalizeAffinityForDiff(state.allSouls[idx]);
+      const fresh = computeDiff(state.originalData[id], norm);   // no prev → 无 null
+      if (Object.keys(fresh).some(k => k !== 'id' && k !== 'name')) {
+        state.reviseData[id] = fresh;
+      } else {
+        delete state.reviseData[id];
+      }
+    }
     state.sessionReviseIds.clear();
     if (json.mode === 'remote') {
       showSaveToast(`✓ 提案受付完了 — 管理者の審査・マージ後に反映されます`);
@@ -155,17 +202,30 @@ export const renderEditDetail = (s) => {
 
 export const renderEditAffinitySection = (s, field, keys, title) => {
   const cells = keys.map(name => {
-    const aff   = (s[field]||{})[name] || {level:0, effect:1};
+    const aff   = (s[field]||{})[name] || {level:0, atk_effect:'1', def_effect:'1'};
     const lv    = String(aff.level != null ? aff.level : 0);
     const label = AFF_LABEL[lv] || '普通';
     const cls   = AFF_CLS[lv]  || 'aff-0';
-    const path  = `${field}.${name}.effect`;
+    const atkPath = `${field}.${name}.atk_effect`;
+    const defPath = `${field}.${name}.def_effect`;
+    const atkVal  = aff.atk_effect != null ? aff.atk_effect : '1';
+    const defVal  = aff.def_effect != null ? aff.def_effect : '1';
     return min`
       <div class="edit-aff-cell">
         <span class="edit-aff-name">${name}</span>
         <span class="edit-aff-level ${cls}">${label}</span>
-        <input type="text" class="edit-num-xs" value="${aff.effect != null ? aff.effect : 1}"
-               oninput="setPath(state.editData,'${path}',parseAffEffect(this.value))">
+        <div class="edit-aff-inputs">
+          <div class="edit-aff-input-pair">
+            <span class="edit-aff-mini-label">ATK</span>
+            <input type="text" class="edit-num-xs" value="${atkVal}"
+                   oninput="setPath(state.editData,'${atkPath}',parseAffEffect(this.value))">
+          </div>
+          <div class="edit-aff-input-pair">
+            <span class="edit-aff-mini-label">DEF</span>
+            <input type="text" class="edit-num-xs" value="${defVal}"
+                   oninput="setPath(state.editData,'${defPath}',parseAffEffect(this.value))">
+          </div>
+        </div>
       </div>`;
   }).join('');
   return min`

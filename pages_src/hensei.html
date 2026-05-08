@@ -758,6 +758,20 @@ export const soulMultiplier = (rarity, lv) => {
   const inc = r === 5 ? 0.3 : 0.1;
   return base + inc * (L - maxNoAwk) / range;
 }
+// soul affinity の atk/def_effect 値を数値化。"5/4" / "1.9" / 1.9 全部受け入れ、無効値は 1。
+const _parseAff = (s) => {
+  if (s == null) return 1;
+  if (typeof s === 'number') return Number.isFinite(s) ? s : 1;
+  const t = String(s).trim();
+  if (t === '') return 1;
+  if (t.includes('/')) {
+    const [n, d] = t.split('/').map(parseFloat);
+    return (Number.isFinite(n) && Number.isFinite(d) && d !== 0) ? n / d : 1;
+  }
+  const n = parseFloat(t);
+  return Number.isFinite(n) ? n : 1;
+};
+
 // soul.max_awakening が定義されてれば SOUL_AWK_MAX[r] を上書き（覚醒不可な特例魂用）
 export const soulAwkMax = (soul) => {
   const ovr = soul && soul.max_awakening;
@@ -955,6 +969,25 @@ export const computeStats = (chara, tr, slotIdx) => {
     const bg = allBGs.find(x => x.id === slot.bg);
     if (!bg) continue;
     _applyList(bg.effects || [], srcChara, srcHp, srcJk);
+  }
+
+  // ===== Stage 2.5: Soul Affinity (独立乘区, self-only) =====
+  // 自分の chara の element/weapon ↔ 装備した soul の affinity を引き、
+  // atk_effect → 攻撃力 + ブレイク力、def_effect → 防御力 を独立に乗算。
+  const mySlot = team[slotIdx];
+  if (mySlot && mySlot.soul != null) {
+    const mySoul = allSouls.find(x => x.id === mySlot.soul);
+    if (mySoul) {
+      const elemName = _ELEMS_ORDER[(chara.element || 6) - 1];
+      const weapName = _WEAPS_ORDER[(chara.type || 1) - 1];
+      const eAff = (mySoul.element_affinity || {})[elemName] || {};
+      const wAff = (mySoul.weapon_affinity  || {})[weapName] || {};
+      const atkAff = _parseAff(eAff.atk_effect) * _parseAff(wAff.atk_effect);
+      const defAff = _parseAff(eAff.def_effect) * _parseAff(wAff.def_effect);
+      acc.stats['攻撃力']    *= atkAff;
+      acc.stats['ブレイク力'] *= atkAff;
+      acc.stats['防御力']    *= defAff;
+    }
   }
 
   // ===== Stage 3: Self-only finishers (結婚 / 燃心 / LP / 主武器) =====
@@ -1851,12 +1884,13 @@ export const renderDMSoul = (s) => {
     const label=_AFF_LABEL[lv]||'普通';
     const clr=_AFF_CLR[lv];
     const bdr=_AFF_BDR[lv];
-    const eff=aff?.effect??1;
+    const atk=aff?.atk_effect??'1';
+    const def=aff?.def_effect??'1';
     return min`
       <div class="sdm-aff-cell"${bdr?` style="border-color:${bdr}"`:''}>
         <span class="sdm-aff-name">${escHtml(name)}</span>
         <span class="sdm-aff-level"${clr?` style="color:${clr}"`:''}>${label}</span>
-        <span class="sdm-aff-effect">×${eff}</span>
+        <span class="sdm-aff-effect">×${atk} / ×${def}</span>
       </div>`;
   }
   const elemCells=_ELEMS_ORDER.map(n=>affCell(n,(s.element_affinity||{})[n])).join('');

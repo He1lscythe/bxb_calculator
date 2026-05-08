@@ -113,17 +113,18 @@ export const renderDetail = (s) => {
 
 export const renderAffinityView = (s) => {
   function cellHtml(name, affObj, extraStyle) {
-    const aff   = affObj || {level:0, effect:1};
+    const aff   = affObj || {level:0, atk_effect:'1', def_effect:'1'};
     const lv    = String(aff.level != null ? aff.level : 0);
     const label = AFF_LABEL[lv] || '普通';
     const cls   = AFF_CLS[lv]  || 'aff-0';
     const ccls  = AFF_CELL[lv] || '';
-    const eff   = aff.effect != null ? aff.effect : 1;
+    const atk   = aff.atk_effect != null ? aff.atk_effect : '1';
+    const def   = aff.def_effect != null ? aff.def_effect : '1';
     return min`
       <div class="affinity-cell ${ccls}" ${extraStyle||''}>
         <span class="affinity-name">${name}</span>
         <span class="affinity-level ${cls}">${label}</span>
-        <span class="affinity-effect">×${eff}</span>
+        <span class="affinity-effect">×${atk} / ×${def}</span>
       </div>`;
   }
   const elemCells = ELEMS_ORDER.map(n => cellHtml(n, (s.element_affinity||{})[n])).join('');

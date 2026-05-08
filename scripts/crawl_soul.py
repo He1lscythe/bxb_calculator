@@ -139,12 +139,12 @@ def _parse_affinity_table(table, keys):
             val_row = [td.get_text(strip=True) for td in tds]
             for k, v in zip(key_row, val_row):
                 if k in keys:
-                    result[k] = {"level": AFFINITY_TEXT.get(v, 0), "effect": "1"}
+                    result[k] = {"level": AFFINITY_TEXT.get(v, 0)}
             key_row = None
     # fill missing keys with default 普通
     for k in keys:
         if k not in result:
-            result[k] = {"level": 0, "effect": "1"}
+            result[k] = {"level": 0}
     return result
 
 

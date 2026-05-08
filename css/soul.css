@@ -85,6 +85,16 @@
 .edit-aff-cell { display: flex; flex-direction: column; align-items: center; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 7px 4px; gap: 3px; }
 .edit-aff-name  { font-size: 12px; font-weight: 700; }
 .edit-aff-level { font-size: 10px; font-weight: 700; }
+.edit-aff-mini-label { font-size: 9px; color: var(--text2); font-weight: 700; letter-spacing: 0.5px; text-align: center; }
+/* pair 内：label 上 / input 下（始终） */
+.edit-aff-input-pair { display: flex; flex-direction: column; align-items: stretch; gap: 1px; }
+/* mobile: 两 pair 竖排 */
+.edit-aff-inputs { display: flex; flex-direction: column; gap: 3px; width: 100%; }
+/* desktop: 两 pair 横排 */
+@media (min-width: 769px) {
+  .edit-aff-inputs { flex-direction: row; gap: 4px; }
+  .edit-aff-input-pair { flex: 1; min-width: 0; }
+}
 /* .btn-skill-tomb base style in shared.css */
 .skill-edit-card.deleted .skill-name-edit { text-decoration: line-through; color: var(--text2); }
 
