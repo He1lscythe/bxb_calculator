@@ -227,7 +227,7 @@ export const renderDetailBody = (c) => {
 
   return '<div class="body-left">' + rows + '</div>' +
     '<div class="body-right">' +
-      '<img class="crystal-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/' + c.id + '.jpg" onerror="this.style.display=\'none\'" alt="">' +
+      '<img class="crystal-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/' + (c.id % 100000) + '.jpg" onerror="this.style.display=\'none\'" alt="">' +
       '<button class="btn-edit" onclick="enterEditMode(' + c.id + ')">修正</button>' +
     '</div>';
 }

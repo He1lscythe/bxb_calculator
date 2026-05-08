@@ -106,8 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch('../data/crystals.json')
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(arr => {
-      state.allCrystals = arr;
-      arr.forEach(c => { state.originalData[c.id] = JSON.parse(JSON.stringify(c)); });
+      state.allCrystals = arr.filter(c => !c.tombstone);
+      state.allCrystals.forEach(c => { state.originalData[c.id] = JSON.parse(JSON.stringify(c)); });
       applyFilters();
       hideLoading();
       return fetch('../data/crystals_revise.json');

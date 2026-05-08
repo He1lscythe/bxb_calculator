@@ -5,6 +5,7 @@
     "effect_text": "装備した魔剣の攻撃力をアップ",
     "guild_only": false,
     "image": "icon/emblem/1_1_2.png",
+    "color": 1,
     "rarity": 1,
     "effects": [
       {
@@ -20,15 +21,36 @@
   },
   {
     "id": 2,
-    "name": "ブレイクアップⅠ",
-    "effect_text": "出撃魔剣のブレイクがアップ",
+    "name": "ブレイクアップⅡ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のブレイクが大アップ",
     "guild_only": true,
-    "image": "icon/emblem/2_1_1.png",
-    "rarity": 1,
+    "image": "icon/emblem/2_2_1.png",
+    "color": 2,
+    "rarity": 2,
     "effects": [
       {
         "bunrui": [
           2
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.16,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "ガードバリアアップⅠ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のバリアがアップ",
+    "guild_only": true,
+    "image": "icon/emblem/1_12_1.png",
+    "color": 1,
+    "rarity": 1,
+    "effects": [
+      {
+        "bunrui": [
+          13
         ],
         "scope": 1,
         "condition": 0,
@@ -38,19 +60,579 @@
     ]
   },
   {
-    "id": 3,
-    "name": "（サンプル）ギルバト限定·火UP紋章",
-    "effect_text": "ギルバト中、火属性の魔剣の攻撃力UP",
+    "id": 4,
+    "name": "攻撃力アップⅡ",
+    "effect_text": "ギルドバトルに限り出撃魔剣の攻撃力が大アップ",
+    "guild_only": true,
+    "image": "icon/emblem/2_1_1.png",
+    "color": 2,
+    "rarity": 2,
+    "effects": [
+      {
+        "bunrui": [
+          1
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.16,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "モーションアップⅡ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のモーション速度が大アップ",
     "guild_only": true,
     "image": "icon/emblem/2_1_2.png",
+    "color": 3,
+    "rarity": 2,
+    "effects": [
+      {
+        "bunrui": [
+          5
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.16,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "ブレイズドライブヒットⅠ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のBDヒットがアップ",
+    "guild_only": true,
+    "image": "icon/emblem/4_5_2.png",
+    "color": 4,
+    "rarity": 1,
+    "effects": [
+      {
+        "bunrui": [
+          21
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 0,
+        "calc_type": 1
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "ブレイズドライブヒットⅡ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のBDヒットが大アップ",
+    "guild_only": true,
+    "image": "icon/emblem/4_5_2.png",
+    "color": 4,
+    "rarity": 2,
+    "effects": [
+      {
+        "bunrui": [
+          21
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 0,
+        "calc_type": 1
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "防御力アップⅠ",
+    "effect_text": "装備した魔剣の防御力がアップ",
+    "guild_only": false,
+    "image": "icon/emblem/2_3_1.png",
+    "color": 2,
+    "rarity": 1,
+    "effects": [
+      {
+        "bunrui": [
+          12
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.0625,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "スピードアップⅠ",
+    "effect_text": "装備した魔剣のスピードがアップ",
+    "guild_only": false,
+    "image": "icon/emblem/3_6_2.png",
+    "color": 3,
+    "rarity": 1,
+    "effects": [
+      {
+        "bunrui": [
+          4
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.0625,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "ブレイズアップⅠ",
+    "effect_text": "初期ブレイズゲージにボーナス",
+    "guild_only": false,
+    "image": "icon/emblem/4_8_1.png",
+    "color": 4,
+    "rarity": 1,
+    "effects": [
+      {
+        "bunrui": [
+          6
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 0.3,
+        "calc_type": 1
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "サファイアアップⅢ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のサファイアがかなりアップ",
+    "guild_only": true,
+    "image": "icon/emblem/4_17_1.png",
+    "color": 4,
+    "rarity": 3,
+    "effects": [
+      {
+        "bunrui": [
+          14
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "ブレイズドライブアップⅠ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のBD攻撃力がアップ",
+    "guild_only": true,
+    "image": "icon/emblem/2_4_2.png",
+    "color": 2,
+    "rarity": 1,
+    "effects": [
+      {
+        "bunrui": [
+          3
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "ブレイズアップⅡ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のブレイズゲージが大アップ",
+    "guild_only": true,
+    "image": "icon/emblem/2_1_2.png",
+    "color": 4,
+    "rarity": 2,
+    "effects": [
+      {
+        "bunrui": [
+          6
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 0,
+        "calc_type": 1
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "ブレイズドライブアップⅡ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のBD攻撃力が大アップ",
+    "guild_only": true,
+    "image": "icon/emblem/2_4_2.png",
+    "color": 2,
+    "rarity": 2,
+    "effects": [
+      {
+        "bunrui": [
+          3
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "ワンフォーオール",
+    "effect_text": "1回だけマスター、サブマスター以外でもまけん結界が発動可能",
+    "guild_only": true,
+    "image": "icon/emblem/4_16_1.png",
+    "color": 4,
+    "rarity": 4,
+    "effects": [
+      {
+        "bunrui": [
+          16
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1,
+        "calc_type": 1
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "タキサイキア",
+    "effect_text": "ギルドバトルに限りバトル時間が最大3秒延長する",
+    "guild_only": true,
+    "image": "icon/emblem/3_13_2.png",
+    "color": 3,
+    "rarity": 3,
+    "effects": [
+      {
+        "bunrui": [
+          16
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 3,
+        "calc_type": 1
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "マスタープラン",
+    "effect_text": "ギルドバトルに限りバトル時間が最大5秒延長する",
+    "guild_only": true,
+    "image": "icon/emblem/4_13_1.png",
+    "color": 4,
+    "rarity": 3,
+    "effects": [
+      {
+        "bunrui": [
+          16
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 5,
+        "calc_type": 1
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "ワンフォーオール",
+    "effect_text": "最大3回までマスター、サブマスター以外でもまけん結界が発動可能",
+    "guild_only": true,
+    "image": "icon/emblem/4_16_2.png",
+    "color": 4,
+    "rarity": 4,
+    "effects": [
+      {
+        "bunrui": [
+          16
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 3,
+        "calc_type": 1
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "スピードアップⅡ",
+    "effect_text": "装備した魔剣のスピードが大アップ",
+    "guild_only": true,
+    "image": "icon/emblem/3_6_2.png",
+    "color": 3,
+    "rarity": 2,
+    "effects": [
+      {
+        "bunrui": [
+          4
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.16,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "インアメリームード",
+    "effect_text": "ギルドバトルに限り風と光属性の魔剣の攻撃力がかなりアップ",
+    "guild_only": true,
+    "image": "icon/emblem/2_1_1.png",
+    "color": 2,
     "rarity": 3,
     "effects": [
       {
         "bunrui": [
           1
         ],
-        "scope": 3,
-        "element": 1,
+        "scope": 2,
+        "element": [
+          3,
+          4
+        ],
+        "condition": 0,
+        "bairitu": 1.22,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "ゲットユアウィング",
+    "effect_text": "ギルドバトルに限り風と無属性の魔剣のスピードがかなりアップ",
+    "guild_only": true,
+    "image": "icon/emblem/3_6_2.png",
+    "color": 3,
+    "rarity": 3,
+    "effects": [
+      {
+        "bunrui": [
+          4
+        ],
+        "scope": 2,
+        "element": [
+          3,
+          6
+        ],
+        "condition": 0,
+        "bairitu": 1.22,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "チャイルドロック",
+    "effect_text": "ギルドバトルに限り光と闇属性の魔剣の防御力がかなりアップ",
+    "guild_only": true,
+    "image": "icon/emblem/1_3_1.png",
+    "color": 1,
+    "rarity": 3,
+    "effects": [
+      {
+        "bunrui": [
+          12
+        ],
+        "scope": 2,
+        "element": [
+          4,
+          5
+        ],
+        "condition": 0,
+        "bairitu": 1.22,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "ハードデイズナイト",
+    "effect_text": "ギルドバトルに限り闇と無属性の魔剣の攻撃力がかなりアップ",
+    "guild_only": true,
+    "image": "icon/emblem/2_1_1.png",
+    "color": 2,
+    "rarity": 3,
+    "effects": [
+      {
+        "bunrui": [
+          1
+        ],
+        "scope": 2,
+        "element": [
+          5,
+          6
+        ],
+        "condition": 0,
+        "bairitu": 1.22,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "防御力アップⅢ",
+    "effect_text": "ギルドバトルに限り出撃魔剣の防御力がかなりアップ",
+    "guild_only": true,
+    "image": "icon/emblem/1_12_1.png",
+    "color": 1,
+    "rarity": 3,
+    "effects": [
+      {
+        "bunrui": [
+          12
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.22,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "ガードバリアアップⅡ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のバリアが大アップ",
+    "guild_only": true,
+    "image": "icon/emblem/1_12_1.png",
+    "color": 1,
+    "rarity": 2,
+    "effects": [
+      {
+        "bunrui": [
+          13
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "防御力アップⅡ",
+    "effect_text": "ギルドバトルに限り出撃魔剣の防御力が大アップ",
+    "guild_only": true,
+    "image": "icon/emblem/1_3_1.png",
+    "color": 1,
+    "rarity": 2,
+    "effects": [
+      {
+        "bunrui": [
+          12
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.16,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name": "サファイアアップⅡ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のサファイアが大アップ",
+    "guild_only": true,
+    "image": "icon/emblem/4_17_2.png",
+    "color": 4,
+    "rarity": 2,
+    "effects": [
+      {
+        "bunrui": [
+          14
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.16,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "ブレイクアップⅠ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のブレイクがアップ",
+    "guild_only": true,
+    "image": "icon/emblem/2_2_1.png",
+    "color": 2,
+    "rarity": 1,
+    "effects": [
+      {
+        "bunrui": [
+          2
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.0625,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name": "モーションアップⅠ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のモーション速度がアップ",
+    "guild_only": true,
+    "image": "icon/emblem/3_7_1.png",
+    "color": 3,
+    "rarity": 1,
+    "effects": [
+      {
+        "bunrui": [
+          5
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.0625,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "サファイアアップⅠ",
+    "effect_text": "ギルドバトルに限り出撃魔剣のサファイアがアップ",
+    "guild_only": true,
+    "image": "icon/emblem/4_17_1.png",
+    "color": 4,
+    "rarity": 1,
+    "effects": [
+      {
+        "bunrui": [
+          14
+        ],
+        "scope": 1,
+        "condition": 0,
+        "bairitu": 1.0625,
+        "calc_type": 0
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "name": "ナウアンドゼン",
+    "effect_text": "ギルドバトルに限り火と水属性の魔剣のモーション速度がかなりアップ",
+    "guild_only": true,
+    "image": "icon/emblem/3_7_1.png",
+    "color": 3,
+    "rarity": 3,
+    "effects": [
+      {
+        "bunrui": [
+          5
+        ],
+        "scope": 2,
+        "element": [
+          1,
+          2
+        ],
         "condition": 0,
         "bairitu": 1.22,
         "calc_type": 0
