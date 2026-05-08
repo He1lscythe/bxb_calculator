@@ -963,8 +963,8 @@ export const computeStats = (chara, tr, slotIdx) => {
   if (tr.moeshin) acc.stats['攻撃力'] *= 1.3;
   const lpMult = [1.0, 1.1, 1.5][tr.lp] || 1;
   acc.stats['攻撃力'] *= lpMult;
-  // 主武器装備（あり=1.0 / なし=0.05）作用于 攻撃力 + ブレイク力
-  const mwMult = (tr.main_weapon === false) ? 0.05 : 1.0;
+  // 主武器装備（あり=1.0 / なし=1/21）作用于 攻撃力 + ブレイク力
+  const mwMult = (tr.main_weapon === false) ? (1 / 21) : 1.0;
   acc.stats['攻撃力']    *= mwMult;
   acc.stats['ブレイク力'] *= mwMult;
 
@@ -1244,7 +1244,7 @@ export const _renderEmblemModalList = () => {
   if (!items.length) { list.innerHTML = html + '<div class="em-no-results">該当なし</div>'; return; }
   for (const em of items) {
     const cur = (enemy.emblems[emblemModalSlot] || {}).id === em.id ? ' active' : '';
-    const dim = (em.guild_only && !isGuildMode) ? ' style="opacity:.55"' : '';
+    const dim = (em.guild_only && !isGuildMode) ? ' style="opacity:.8"' : '';
     const gbTag = em.guild_only ? '<span class="badge weapon" style="background:rgba(91,127,255,.18);color:#7b9fff;border-color:rgba(91,127,255,.35)">GB限定</span>' : '';
     html += `<div class="em-item em-item-bg${cur}"${dim} onclick="selectEmblem(${em.id})">
       <img class="em-icon" src="../${em.image || 'icon/emblem/'+em.id+'.png'}" onerror="this.style.visibility='hidden'" alt="">
@@ -1427,7 +1427,7 @@ export const refreshStatsPanel = (i) => {
 }
 // BDゲージ上限 max 算出: 9 + 一切 buff（bunrui=18 effects の累加）→ 最後に floor。
 // 各 slot の bdCapBonus（chara skill / crystal / soul / bg / masou から scope filter 通過分の和）
-// の最大値を採用。例: +9.99 → floor(9+9.99)=18, +13 → floor(9+13)=22。
+// の最大値を採用。基础上限 9.9，例: bonus=0 → floor(9.9)=9, bonus=2.84 → floor(12.74)=12。
 const _computeBdCapMax = () => {
   let bonusMax = 0;
   for (let si = 0; si < teamSize; si++) {
@@ -1437,7 +1437,7 @@ const _computeBdCapMax = () => {
     const r = computeStats(ch, slot.tr, si);
     if (r && (r.bdCapBonus || 0) > bonusMax) bonusMax = r.bdCapBonus;
   }
-  return Math.floor(9 + bonusMax);
+  return Math.floor(9.9 + bonusMax);
 };
 
 // chara/soul/crystal/bg/masou 切替や 練度 変更で bdCapBonus が変わった時、
