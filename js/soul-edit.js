@@ -165,8 +165,8 @@ export const renderEditAffinitySection = (s, field, keys, title) => {
       <div class="edit-aff-cell">
         <span class="edit-aff-name">${name}</span>
         <span class="edit-aff-level ${cls}">${label}</span>
-        <input type="number" step="0.01" class="edit-num-xs" value="${aff.effect != null ? aff.effect : 1}"
-               oninput="setPath(state.editData,'${path}',this.value===''?1:+this.value)">
+        <input type="text" class="edit-num-xs" value="${aff.effect != null ? aff.effect : 1}"
+               oninput="setPath(state.editData,'${path}',parseAffEffect(this.value))">
       </div>`;
   }).join('');
   return min`
