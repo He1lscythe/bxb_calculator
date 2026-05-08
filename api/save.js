@@ -16,7 +16,7 @@
 import { Octokit } from '@octokit/rest';
 
 const REPO = { owner: 'He1lscythe', repo: 'bxb_calculator' };
-const BASE = 'main';
+const BASE = 'data-staging';
 
 // 値は [filePath, sessionIdsKey]。masou は chara/soul と id namespace が違うため
 // 独立な masou_session_ids を使う（chara id と masou id が衝突して entry を誤って消すのを防ぐ）。
