@@ -1,6 +1,6 @@
 // js/soul-filter.js
 import { state } from './soul-state.js';
-import { RARITY, ELEMENT, WEAPON, BD_SPECIAL, BD_SPECIAL_COLOR,
+import { RARITY, ELEMENT, WEAPON,
          renderFilterToggles, renderElementFilterToggles } from '../shared/constants.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { SOUL_SPEC } from '../shared/soul-spec.js';
@@ -20,7 +20,7 @@ export const collapseFiltersOnScroll = () => {
   const body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
   if (state._filtersOpenScrollY === null) return;
-  if (Math.abs(window.scrollY - state._filtersOpenScrollY) < 30) return;
+  if (Math.abs(window.scrollY - state._filtersOpenScrollY) < 20) return;
   body.style.display = '';
   const btn = document.getElementById('filter-toggle-btn');
   if (btn) btn.textContent = '▼ 絞り込み';

@@ -96,7 +96,7 @@ import { state } from '../js/cr-state.js';
 import { ELEMENT, WEAPON, BUNRUI_SHORT, CONDITION, SCOPE, SCOPE_SHORT,
          renderFilterToggles, renderElementFilterToggles,
          renderEditSelect } from '../shared/constants.js';
-import { escHtml, fmt, hideLoading } from '../js/utils.js';
+import { escHtml, fmt, parseBairituVal, hideLoading } from '../js/utils.js';
 import { deepApply } from '../js/diff.js';
 import { initFilterToggles, toggleFilters, collapseFiltersOnScroll,
          toggleFilter, expandAll, collapseAll, resetFilters, applyFilters,
@@ -105,6 +105,7 @@ import { initFilterToggles, toggleFilters, collapseFiltersOnScroll,
 import { enterEditMode, cancelEdit, saveEdit, saveRevise,
          toggleCrystalBunrui, setCrystalHitStage, setCrystalHitStageScaling, setCrystalBairitu,
          setCrystalScope, setCrystalElement, setCrystalWeapon,
+         setCrystalLevelMax, setCrystalStep, setCrystalDelta,
          addCrystalEffect, removeCrystalEffect, reRenderCrystalEdit,
          renderEditBody } from '../js/cr-edit.js';
 
@@ -129,11 +130,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (idx >= 0) deepApply(state.allCrystals[idx], c);
       });
       if (arr.length) applyFilters();
+      // crystals_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
+      return fetch('../data/crystals_check.json');
+    })
+    .then(r => r && r.ok ? r.json() : null)
+    .then(arr => {
+      if (Array.isArray(arr)) {
+        state.crystalCheckEnabled = true;
+        arr.forEach(id => state.crystalCheck.add(id));
+        applyFilters();
+      }
     })
     .catch(() => { applyFilters(); hideLoading(); });
 });
 
-window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
+// 「絞り込み」展開中の user-initiated scroll でのみ collapse — touchmove (mobile) / wheel (desktop)。
+// scroll 事件は使わない：filter 操作後の list 高さ変化による浏览器 auto-clamp scrollY を user スクロールと誤判するため。
+window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
+window.addEventListener('wheel',     collapseFiltersOnScroll, { passive: true });
 
 window.state = state;
 Object.assign(window, {
@@ -141,8 +155,9 @@ Object.assign(window, {
   toggleExpand, enterEditMode, cancelEdit, saveEdit, saveRevise,
   toggleCrystalBunrui, setCrystalHitStage, setCrystalHitStageScaling, setCrystalBairitu,
   setCrystalScope, setCrystalElement, setCrystalWeapon,
+  setCrystalLevelMax, setCrystalStep, setCrystalDelta,
   addCrystalEffect, removeCrystalEffect, reRenderCrystalEdit,
-  renderEditBody, updateReviseBar, escHtml, fmt,
+  renderEditBody, updateReviseBar, escHtml, fmt, parseBairituVal,
 });
 </script>
 </body>

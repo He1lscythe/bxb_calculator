@@ -29,7 +29,7 @@ export const collapseFiltersOnScroll = () => {
   const body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
   if (state._filtersOpenScrollY === null) return;
-  if (Math.abs(window.scrollY - state._filtersOpenScrollY) < 30) return;
+  if (Math.abs(window.scrollY - state._filtersOpenScrollY) < 20) return;
   body.style.display = '';
   const btn = document.getElementById('filter-toggle-btn');
   if (btn) btn.textContent = '▼ 絞り込み';
@@ -112,7 +112,27 @@ export const renderList = () => {
   const list = document.getElementById('crystal-list');
   if (!state.filteredCrystals.length) { list.innerHTML = '<div class="no-results">該当なし</div>'; return; }
   list.innerHTML = state.filteredCrystals.map(renderRow).join('');
+  if (state.crystalCheckEnabled) {
+    list.querySelectorAll('.crystal-check-cb').forEach(cb => {
+      cb.addEventListener('change', e => {
+        const id = parseInt(e.target.dataset.id);
+        if (e.target.checked) state.crystalCheck.add(id);
+        else state.crystalCheck.delete(id);
+        saveCrystalCheck();
+      });
+    });
+  }
 }
+
+// 本地 crystals_check.json 写盘
+const saveCrystalCheck = () => {
+  const ids = [...state.crystalCheck].sort((a, b) => a - b);
+  fetch('/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ crystal_check: ids }),
+  }).catch(() => {});
+};
 
 export const fmtRowBairitu = (c) => {
   const parts = [];
@@ -138,20 +158,26 @@ export const renderRow = (c) => {
   const bc = cond ? '<span class="badge bunrui-sm">' + (CONDITION[cond] || cond) + '</span>' : '';
   const bairitu = fmtRowBairitu(c);
   const expandBtn = '<button class="expand-btn" onclick="event.stopPropagation();toggleExpand(' + c.id + ')">▾</button>';
+  // 本地 check: 名字左に checkbox。click は row 展開を発火しない。
+  const checkCb = state.crystalCheckEnabled
+    ? '<input type="checkbox" class="crystal-check-cb" data-id="' + c.id + '"'
+      + (state.crystalCheck.has(c.id) ? ' checked' : '') + ' onclick="event.stopPropagation()">'
+    : '';
 
-  // Desktop: row-badges | name | bunrui+cond | bairitu | expand
+  // Desktop: row-badges | check | name | bunrui+cond | bairitu | expand
   const desktopHtml =
     '<div class="cr-row-desktop">' +
       '<div class="row-badges">' + rb + eb + wb + '</div>' +
+      checkCb +
       '<div class="row-name">' + escHtml(c.name) + '</div>' +
       '<div class="row-bunrui">' + bt + bc + '</div>' +
       bairitu +
     '</div>';
 
-  // Mobile: left(rarity+name) | right(elem+weap+cond+bunrui+bairitu)
+  // Mobile: left(rarity+check+name) | right(elem+weap+cond+bunrui+bairitu)
   const mobileHtml =
     '<div class="cr-row-mobile">' +
-      '<div class="bg-row-left">' + rb + '<span class="row-name">' + escHtml(c.name) + '</span></div>' +
+      '<div class="bg-row-left">' + rb + checkCb + '<span class="row-name">' + escHtml(c.name) + '</span></div>' +
       '<div class="bg-row-right">' + eb + wb + bc + bt + bairitu + '</div>' +
     '</div>';
 

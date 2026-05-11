@@ -39,7 +39,7 @@ export const collapseFiltersOnScroll = () => {
   const body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
   if (state._filtersOpenScrollY === null) return;
-  if (Math.abs(window.scrollY - state._filtersOpenScrollY) < 30) return;
+  if (Math.abs(window.scrollY - state._filtersOpenScrollY) < 20) return;
   body.style.display = '';
   const btn = document.getElementById('filter-toggle-btn');
   if (btn) btn.textContent = '▼ 絞り込み';
@@ -104,7 +104,27 @@ export const renderList = () => {
   const list = document.getElementById('bg-list');
   if (!state.filteredBG.length) { list.innerHTML = '<div class="no-results">該当なし</div>'; return; }
   list.innerHTML = state.filteredBG.map(renderRow).join('');
+  if (state.bgCheckEnabled) {
+    list.querySelectorAll('.bg-check-cb').forEach(cb => {
+      cb.addEventListener('change', e => {
+        const id = parseInt(e.target.dataset.id);
+        if (e.target.checked) state.bgCheck.add(id);
+        else state.bgCheck.delete(id);
+        saveBgCheck();
+      });
+    });
+  }
 }
+
+// 本地 bladegraph_check.json 写盘
+const saveBgCheck = () => {
+  const ids = [...state.bgCheck].sort((a, b) => a - b);
+  fetch('/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ bladegraph_check: ids }),
+  }).catch(() => {});
+};
 
 export const fmtRowBairitu = (c) => {
   const e = c.effects;
@@ -129,20 +149,25 @@ export const renderRow = (c) => {
   const cb = cond ? '<span class="cond-tag cond-' + cond + '">' + (CONDITION[cond]||'') + '</span>' : '';
   const bairitu = fmtRowBairitu(c);
   const expandBtn = '<button class="expand-btn" onclick="event.stopPropagation();toggleExpand(' + c.id + ')">▾</button>';
+  const checkCb = state.bgCheckEnabled
+    ? '<input type="checkbox" class="bg-check-cb" data-id="' + c.id + '"'
+      + (state.bgCheck.has(c.id) ? ' checked' : '') + ' onclick="event.stopPropagation()">'
+    : '';
 
-  // Desktop: row-badges | name | bunrui+cond | bairitu | expand
+  // Desktop: row-badges | check | name | bunrui+cond | bairitu | expand
   const desktopHtml =
     '<div class="bg-row-desktop">' +
       '<div class="row-badges">' + rb + eb + wb + s5b + timeb + '</div>' +
+      checkCb +
       '<div class="row-name">' + escHtml(c.name) + '</div>' +
       '<div class="row-bunrui">' + bt + cb + '</div>' +
       bairitu +
     '</div>';
 
-  // Mobile: left(rarity+name) | right(elem+weap+cond+bunrui+bairitu)
+  // Mobile: left(rarity+check+name) | right(elem+weap+cond+bunrui+bairitu)
   const mobileHtml =
     '<div class="bg-row-mobile">' +
-      '<div class="bg-row-left">' + rb + '<span class="row-name">' + escHtml(c.name) + '</span></div>' +
+      '<div class="bg-row-left">' + rb + checkCb + '<span class="row-name">' + escHtml(c.name) + '</span></div>' +
       '<div class="bg-row-right">' + eb + wb + cb + bt + bairitu + '</div>' +
     '</div>';
 

@@ -1,6 +1,6 @@
 // js/render.js
 import { state } from './state.js';
-import { RARITY, ELEMENT, WEAPON, ELEM_COLOR, BUNRUI_SHORT, BD_SPECIAL,
+import { RARITY, ELEMENT, WEAPON, ELEM_COLOR, BUNRUI_SHORT, CHARA_TAG,
          OMOIDE_THRESHOLDS } from '../shared/constants.js';
 import { updateReviseBar } from './nav.js';
 import { hasOmoide, fmt, fmtNum, fmtBairitu, renderRightTags, escHtml, min } from './utils.js';
@@ -43,6 +43,7 @@ export const renderList = () => {
           <span class="badge elem-${c.element}">${eName}</span>
           <span class="badge weapon">${escHtml(wName)}</span>
         </div>
+        ${state.charaCheckEnabled ? `<input type="checkbox" class="chara-check-cb" data-id="${c.id}" ${state.charaCheck.has(c.id) ? 'checked' : ''}>` : ''}
         <div class="char-name">${escHtml(c.name)}</div>
         ${sortBadge}
         <div class="state-dots">${dots}</div>
@@ -53,12 +54,34 @@ export const renderList = () => {
     el.addEventListener('click', () => selectChar(parseInt(el.dataset.id)));
   });
 
+  if (state.charaCheckEnabled) {
+    list.querySelectorAll('.chara-check-cb').forEach(cb => {
+      cb.addEventListener('click', e => e.stopPropagation());
+      cb.addEventListener('change', e => {
+        const id = parseInt(e.target.dataset.id);
+        if (e.target.checked) state.charaCheck.add(id);
+        else state.charaCheck.delete(id);
+        saveCharaCheck();
+      });
+    });
+  }
+
   // Scroll selected item into view
   if (state.selectedId !== null) {
     const active = list.querySelector('.char-item.active');
     if (active) active.scrollIntoView({block:'nearest'});
   }
 }
+
+// 本地 characters_check.json 写盘（走 start.py /save、本地のみ；生产無 endpoint で静默失败）
+const saveCharaCheck = () => {
+  const ids = [...state.charaCheck].sort((a, b) => a - b);
+  fetch('/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chara_check: ids }),
+  }).catch(() => {});
+};
 
 export const selectChar = (id) => {
   state.selectedId = id;
@@ -143,11 +166,10 @@ export const setupStickyHeights = () => {
 }
 
 export const renderBDCard = (bd) => {
-  const spTags = (bd.special || []).map(s =>
-    `<span class="bd-sp-tag bd-sp-${s}">${BD_SPECIAL[s] || s}</span>`).join('');
+  // bd 専用 tag 列：duration + bdhit。魔剣特性 tag は chara header 側で表示する（chara.tags）。
   const durTag = bd.duration ? `<span class="bd-dur-tag">${escHtml(bd.duration)}</span>` : '';
   const hitTag = (bd.bdhit && bd.bdhit > 1) ? `<span class="bd-hit-tag">${bd.bdhit}連</span>` : '';
-  const rightTags = spTags + durTag + hitTag;
+  const rightTags = durTag + hitTag;
   return min`
     <div class="section">
       <div class="section-title">ブレイズドライブ</div>
@@ -181,6 +203,8 @@ export const renderDetail = (c) => {
   const omoideBtn = hasOmoide(c) ? `<button class="btn-latent btn-omoide" onclick="openLatentModal(${c.id})">潜在開放</button>` : '';
   const masouBtn  = (state.masouByChara && (state.masouByChara[c.id] || []).length) ? `<button class="btn-latent btn-masou" onclick="openMasouModal(${c.id})">魔装</button>` : '';
   const actionsHtml = (omoideBtn || masouBtn) ? `<div class="chara-actions">${masouBtn}${omoideBtn}</div>` : '';
+  const tagsHtml = (c.tags || []).map(s =>
+    `<span class="bd-sp-tag bd-sp-${s}">${CHARA_TAG[s] || s}</span>`).join('');
   return min`
     <div class="chara-header">
       <div class="chara-title">
@@ -195,6 +219,7 @@ export const renderDetail = (c) => {
         <span class="meta-chip">${wName}</span>
         ${c.url ? `<a class="meta-chip" href="${c.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>` : ''}
       </div>
+      ${tagsHtml ? `<div class="chara-tags">${tagsHtml}</div>` : ''}
     </div>
     <div class="state-tabs">${tabs}</div>
     ${bdSection}

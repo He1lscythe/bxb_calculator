@@ -80,7 +80,7 @@ import { Nav, updateReviseBar } from '../js/nav.js';
 import { state } from '../js/bg-state.js';
 import { ELEMENT, WEAPON, BUNRUI_SHORT, CONDITION, SCOPE_SHORT,
          renderFilterToggles, renderElementFilterToggles } from '../shared/constants.js';
-import { escHtml, ctPfx, fmtNum, hideLoading } from '../js/utils.js';
+import { escHtml, ctPfx, fmtNum, parseBairituVal, hideLoading } from '../js/utils.js';
 import { deepApply } from '../js/diff.js';
 import { initFilterToggles, toggleFilters, collapseFiltersOnScroll,
          toggleFilter, expandAll, collapseAll, resetFilters, applyFilters,
@@ -111,11 +111,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (idx >= 0) deepApply(state.allBG[idx], c);
       });
       if (arr.length) applyFilters();
+      // bladegraph_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
+      return fetch('../data/bladegraph_check.json');
+    })
+    .then(r => r && r.ok ? r.json() : null)
+    .then(arr => {
+      if (Array.isArray(arr)) {
+        state.bgCheckEnabled = true;
+        arr.forEach(id => state.bgCheck.add(id));
+        applyFilters();
+      }
     })
     .catch(() => { applyFilters(); hideLoading(); });
 });
 
-window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
+// 「絞り込み」展開中の user-initiated scroll でのみ collapse — touchmove (mobile) / wheel (desktop)。
+// scroll 事件は使わない：filter 操作後の list 高さ変化による浏览器 auto-clamp scrollY を user スクロールと誤判するため。
+window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
+window.addEventListener('wheel',     collapseFiltersOnScroll, { passive: true });
 
 window.state = state;
 Object.assign(window, {
@@ -123,7 +136,7 @@ Object.assign(window, {
   toggleExpand, enterEditMode, cancelEdit, saveEdit, saveRevise,
   reRenderBgEdit, toggleBladeBunrui, toggleBladeElement, toggleBladeType,
   setBladeHitStage, setBladeHitStageScaling, setBladeScope,
-  addBladeEffect, removeBladeEffect, updateReviseBar, escHtml,
+  addBladeEffect, removeBladeEffect, updateReviseBar, escHtml, parseBairituVal,
 });
 </script>
 </body>

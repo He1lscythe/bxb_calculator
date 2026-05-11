@@ -3,7 +3,7 @@ import { state } from './cr-state.js';
 import { ELEMENT, WEAPON, BUNRUI, BUNRUI_SHORT, CONDITION, SCOPE,
          renderEditSelect } from '../shared/constants.js';
 import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
-import { escHtml } from './utils.js';
+import { escHtml, parseBairituVal } from './utils.js';
 import { computeDiff } from './diff.js';
 import { renderDetailBody, crystalElement, crystalWeapon, fmtRowBairitu } from './cr-list.js';
 import { updateReviseBar } from './nav.js';
@@ -176,11 +176,32 @@ export const setCrystalWeapon = (ei, val) => {
   reRenderCrystalEdit();
 }
 
+// 入力を hit 値として正規化：空 → null、"5/4" 等分数 → 文字列保持、純数値 → number。
+const _normalizeHitVal = (v) => {
+  if (v == null) return null;
+  const s = String(v).trim();
+  if (s === '') return null;
+  if (s.includes('/')) return s;
+  const n = parseFloat(s);
+  return Number.isFinite(n) ? n : s;
+};
+// 数値化（max 計算用）
+const _parseHitNum = (v) => {
+  if (v == null) return NaN;
+  if (typeof v === 'number') return v;
+  const s = String(v).trim();
+  if (s.includes('/')) {
+    const [a, b] = s.split('/').map(parseFloat);
+    return (Number.isFinite(a) && Number.isFinite(b) && b !== 0) ? a / b : NaN;
+  }
+  return parseFloat(s);
+};
+
 export const setCrystalBairitu = (ei, val) => {
   const e = state.editData?.effects?.[ei];
   if (!e) return;
-  e.bairitu = val === '' ? null : Number(val);
-  // bunrui 含 7 时，bairitu 也同步 hit_per_stage[]
+  e.bairitu = parseBairituVal(val);
+  // bunrui 含 7 时，bairitu 也同步 hit_per_stage[]（bairitu / hit 各段とも数値・分式文字列両対応）
   if (e.bunrui && e.bunrui.indexOf(7) !== -1) {
     const arr = (Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null,null,null]).slice();
     while (arr.length < 3) arr.push(null);
@@ -198,10 +219,10 @@ export const setCrystalHitStage = (ei, idx, val) => {
   if (!e) return;
   const arr = (Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null,null,null]).slice();
   while (arr.length < 3) arr.push(null);
-  arr[idx] = val === '' ? null : +val;
+  arr[idx] = _normalizeHitVal(val);
   e.hit_per_stage = arr;
-  // bairitu = max(非空 hit_per_stage)
-  const nums = arr.filter(function(v) { return v != null && !isNaN(v); });
+  // bairitu = max(非空 hit_per_stage の数値化値)。分数字列も含めて parse → max。
+  const nums = arr.map(_parseHitNum).filter(v => Number.isFinite(v));
   if (nums.length) {
     e.bairitu = Math.max.apply(null, nums);
     const bairituInp = document.getElementById('edit-bairitu-' + ei);
@@ -214,7 +235,7 @@ export const setCrystalHitStageScaling = (ei, idx, val) => {
   if (!e) return;
   const arr = (Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [null,null,null]).slice();
   while (arr.length < 3) arr.push(null);
-  arr[idx] = val === '' ? null : +val;
+  arr[idx] = _normalizeHitVal(val);
   e.hit_per_stage_scaling = arr;
 }
 
@@ -224,6 +245,41 @@ export const addCrystalEffect = () => {
   state.editData.effects.push({ bunrui:[16], scope:0, condition:0, calc_type:0, bairitu:1 });
   reRenderCrystalEdit();
 }
+
+// ===== 顶层 level_max / weight_step / purity_step（撤回机制）=====
+// step 设 0 / 空 → 撤回该字段（editData 设 null，diff 时 emit null 撤回，落盘时 deepMerge 删字段）
+// step 撤回时 + 联动撤回所有 effect 内对应 delta（语义：step=0 = 该结晶不可调，delta 没意义）
+export const setCrystalLevelMax = (val) => {
+  const cr = state.editData;
+  if (!cr) return;
+  const n = parseFloat(val);
+  if (!Number.isFinite(n) || n <= 0) cr.level_max = null;
+  else cr.level_max = n;
+};
+
+export const setCrystalStep = (kind, val) => {  // kind: 'weight' | 'purity'
+  const cr = state.editData;
+  if (!cr) return;
+  const stepKey  = kind + '_step';
+  const deltaKey = kind + '_delta';
+  const n = parseFloat(val);
+  if (!Number.isFinite(n) || n <= 0) {
+    cr[stepKey] = null;
+    (cr.effects || []).forEach(e => { e[deltaKey] = null; });
+  } else {
+    cr[stepKey] = n;
+  }
+  reRenderCrystalEdit();
+};
+
+export const setCrystalDelta = (ei, kind, val) => {  // kind: 'weight' | 'purity'
+  const e = state.editData?.effects?.[ei];
+  if (!e) return;
+  const deltaKey = kind + '_delta';
+  const n = parseFloat(val);
+  if (!Number.isFinite(n) || n === 0 || val === '') e[deltaKey] = null;
+  else e[deltaKey] = n;
+};
 
 export const removeCrystalEffect = (ei) => {
   if (!state.editData?.effects) return;
@@ -242,11 +298,11 @@ const _renderEffectCard = (e, i, total) => {
   const elemSel  = renderEditSelect({0:'全属性', ...ELEMENT},          e.element || 0, 'setCrystalElement('+i+',this.value)');
   const weapSel  = renderEditSelect({0:'全武器種', ...WEAPON},         e.type || 0, 'setCrystalWeapon('+i+',this.value)');
   const condSel  = renderEditSelect(CONDITION,                        e.condition || 0, 'state.editData.effects['+i+'].condition=+this.value');
-  const ctSel    = renderEditSelect({0:'×', 1:'+'},                   e.calc_type || 0, 'state.editData.effects['+i+'].calc_type=+this.value');
+  const ctSel    = renderEditSelect({0:'×', 1:'+', 2:'+(終)', 3:'×(終)'}, e.calc_type || 0, 'state.editData.effects['+i+'].calc_type=+this.value');
 
-  const bairituInitInput = '<input type="number" step="any" class="edit-num-sm" style="width:90px" value="' + (e.bairitu_init != null ? e.bairitu_init : '') + '" ' +
-    'oninput="state.editData.effects['+i+'].bairitu_init=this.value===\'\'?null:Number(this.value)">';
-  const bairituInput = '<input id="edit-bairitu-'+i+'" type="number" step="any" class="edit-num-sm" style="width:90px" value="' + (e.bairitu != null ? e.bairitu : '') + '" ' +
+  const bairituInitInput = '<input type="text" class="edit-num-sm" style="width:90px" value="' + (e.bairitu_init != null ? e.bairitu_init : '') + '" ' +
+    'oninput="state.editData.effects['+i+'].bairitu_init=parseBairituVal(this.value)">';
+  const bairituInput = '<input id="edit-bairitu-'+i+'" type="text" class="edit-num-sm" style="width:90px" value="' + (e.bairitu != null ? e.bairitu : '') + '" ' +
     'oninput="setCrystalBairitu('+i+',this.value)">';
 
   const nameInput = (e.scope === 5)
@@ -264,12 +320,12 @@ const _renderEffectCard = (e, i, total) => {
     const stageIn = function(idx) {
       const v = hps[idx] != null ? hps[idx] : '';
       return '<div><div class="field-label">' + (idx+1) + '撃</div>' +
-        '<input id="edit-hps-'+i+'-'+idx+'" type="number" step="any" class="edit-num-sm" style="width:60px" value="'+v+'" oninput="setCrystalHitStage('+i+','+idx+',this.value)"></div>';
+        '<input id="edit-hps-'+i+'-'+idx+'" type="text" class="edit-num-sm" style="width:60px" value="'+v+'" oninput="setCrystalHitStage('+i+','+idx+',this.value)"></div>';
     };
     const scaleIn = function(idx) {
       const v = hpss[idx] != null ? hpss[idx] : '';
       return '<div><div class="field-label">' + (idx+1) + '撃+</div>' +
-        '<input type="number" step="any" class="edit-num-sm" style="width:60px" value="'+v+'" oninput="setCrystalHitStageScaling('+i+','+idx+',this.value)"></div>';
+        '<input type="text" class="edit-num-sm" style="width:60px" value="'+v+'" oninput="setCrystalHitStageScaling('+i+','+idx+',this.value)"></div>';
     };
     hitBlock = '<div class="field-label" style="margin-top:6px">ヒット計算 <span style="color:var(--text2);font-weight:400">(bunrui=7のみ)</span></div>' +
       '<div class="skill-edit-meta">' +
@@ -278,6 +334,26 @@ const _renderEffectCard = (e, i, total) => {
         scaleIn(0) + scaleIn(1) + scaleIn(2) +
       '</div>';
   }
+
+  // weight_delta / purity_delta — 仅当 crystal 顶层有对应 step > 0 才显示。
+  // 与「倍率」放一行；宽度 90px 跟 bairitu 同宽（占位公式说明放整段 label 上）。
+  const cr = state.editData || {};
+  const wStep = +cr.weight_step || 0;
+  const pStep = +cr.purity_step || 0;
+  const wDeltaInline = wStep > 0
+    ? '<div><div class="field-label">重 / ' + wStep + 'g</div>' +
+      '<input type="number" step="any" class="edit-num-sm" style="width:90px" value="' + (e.weight_delta != null ? e.weight_delta : '') + '"' +
+      ' oninput="setCrystalDelta(' + i + ',\'weight\',this.value)"></div>'
+    : '';
+  const pDeltaInline = pStep > 0
+    ? '<div><div class="field-label">純 / ' + pStep + '%</div>' +
+      '<input type="number" step="any" class="edit-num-sm" style="width:90px" value="' + (e.purity_delta != null ? e.purity_delta : '') + '"' +
+      ' oninput="setCrystalDelta(' + i + ',\'purity\',this.value)"></div>'
+    : '';
+  // ctSel + init + max 也加 label，让一行内字段对齐
+  const ctWithLabel       = '<div><div class="field-label">type</div>' + ctSel + '</div>';
+  const initWithLabel     = '<div><div class="field-label">init</div>' + bairituInitInput + '</div>';
+  const bairituWithLabel  = '<div><div class="field-label">max</div>' + bairituInput + '</div>';
 
   return '<div class="crystal-effect-card">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:4px">' +
@@ -291,16 +367,26 @@ const _renderEffectCard = (e, i, total) => {
         '<div><div class="field-label">武器</div>' + weapSel + '</div>' +
         '<div><div class="field-label">condition</div>' + condSel + '</div>' +
       '</div>' +
-      '<div class="field-label" style="margin-top:6px">倍率</div>' +
-      '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">' +
-        ctSel + bairituInitInput +
-        '<span style="color:var(--text2)">～</span>' +
-        bairituInput +
+      '<div class="field-label" style="margin-top:6px">倍率' +
+        ((wStep > 0 || pStep > 0) ? ' <span style="color:var(--text2);font-weight:400">／ 重·純 衰減 (per step bairitu 減少；占位公式)</span>' : '') +
+      '</div>' +
+      '<div class="skill-edit-meta">' +
+        ctWithLabel + initWithLabel + bairituWithLabel + wDeltaInline + pDeltaInline +
       '</div>' +
       nameInput +
       hitBlock +
     '</div>';
 }
+
+// step 下拉可选值（含 0 表示「不可调」）
+const _WEIGHT_STEPS = [0, 0.1, 1, 10, 20, 25, 50, 100];
+const _PURITY_STEPS = [0, 0.01, 1, 10, 20, 25, 50, 100];
+
+const _renderStepSelect = (kind, current, opts) => {
+  const cur = +current || 0;
+  const items = opts.map(v => '<option value="' + v + '"' + (v === cur ? ' selected' : '') + '>' + (v === 0 ? '不可調' : v) + '</option>').join('');
+  return '<select class="edit-select" onchange="setCrystalStep(\'' + kind + '\',this.value)">' + items + '</select>';
+};
 
 export const renderEditBody = (c) => {
   const allEffects = (Array.isArray(c.effects) && c.effects.length) ? c.effects
@@ -315,12 +401,26 @@ export const renderEditBody = (c) => {
     ? '<div class="field-row"><div class="field-key">特殊条件</div><div class="field-val edit-ro">' + escHtml(c['特殊条件']) + '</div></div>'
     : '';
 
+  // 顶层 level_max / weight_step / purity_step（撤回机制：空 / 0 → 字段被删）
+  const lvBlock =
+    '<div><div class="field-label">level_max（缺省＝rarity 表）</div>' +
+    '<input type="number" min="0" step="any" class="edit-num-sm" style="width:80px" value="' + (c.level_max != null ? c.level_max : '') + '"' +
+    ' oninput="setCrystalLevelMax(this.value)"></div>';
+  const wStepBlock =
+    '<div><div class="field-label">weight_step (g)</div>' + _renderStepSelect('weight', c.weight_step, _WEIGHT_STEPS) + '</div>';
+  const pStepBlock =
+    '<div><div class="field-label">purity_step (%)</div>' + _renderStepSelect('purity', c.purity_step, _PURITY_STEPS) + '</div>';
+  const topMeta =
+    '<div class="field-label" style="margin-top:8px">結晶 上限 / 颗粒度</div>' +
+    '<div class="skill-edit-meta">' + lvBlock + wStepBlock + pStepBlock + '</div>';
+
   return '<div class="edit-actions">' +
       '<button class="btn-save" onclick="saveEdit()">保存</button>' +
       '<button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>' +
     '</div>' +
     '<div class="edit-ro" style="font-size:13px;color:var(--text);padding:3px 0 8px">' + escHtml(c.name) + '</div>' +
     roEffect + roTokushu +
+    topMeta +
     '<div>' + effEdits + '</div>' +
     '<button class="btn-add-slot" style="margin-top:8px" onclick="addCrystalEffect()">+ 効果追加</button>';
 }

@@ -1,6 +1,6 @@
 // js/filter.js
 import { state } from './state.js';
-import { RARITY, ELEMENT, WEAPON, BD_SPECIAL, BD_SPECIAL_COLOR,
+import { RARITY, ELEMENT, WEAPON, CHARA_TAG, CHARA_TAG_COLOR,
          renderFilterToggles, renderElementFilterToggles } from '../shared/constants.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { CHARA_SPEC } from '../shared/chara-spec.js';
@@ -11,8 +11,8 @@ export const initFilterToggles = () => {
   document.getElementById('f-rarity').innerHTML    = renderFilterToggles('rarity', RARITY, { sort: 'desc' });
   document.getElementById('f-element').innerHTML    = renderElementFilterToggles('element', {only: [1,2,3,4,5,6]});
   document.getElementById('f-type').innerHTML      = renderFilterToggles('type', WEAPON);
-  document.getElementById('f-bdSpecial').innerHTML = renderFilterToggles('bdSpecial', BD_SPECIAL, {
-    attr: function(k){ return BD_SPECIAL_COLOR[k] ? ' style="color:' + BD_SPECIAL_COLOR[k] + '"' : ''; }
+  document.getElementById('f-tags').innerHTML = renderFilterToggles('tags', CHARA_TAG, {
+    attr: function(k){ return CHARA_TAG_COLOR[k] ? ' style="color:' + CHARA_TAG_COLOR[k] + '"' : ''; }
   });
 }
 
@@ -30,7 +30,7 @@ export const collapseFiltersOnScroll = () => {
   const body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
   if (state._filtersOpenScrollY === null) return;
-  if (Math.abs(window.scrollY - state._filtersOpenScrollY) < 30) return;
+  if (Math.abs(window.scrollY - state._filtersOpenScrollY) < 20) return;
   body.style.display = '';
   const btn = document.getElementById('filter-toggle-btn');
   if (btn) btn.textContent = '▼ 絞り込み';

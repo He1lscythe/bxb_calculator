@@ -242,6 +242,21 @@ git add data/ && git commit -m "..." && git push
 
 start.py `_deep_merge` / `_merge_by_id` 与 Vercel api/save.js 同语义（local + remote 行为一致）。
 
+**撤回标记如何产生 — 两种 pattern：**
+
+1. **显式 null 写入 editData**（推荐、所有「dropdown / step / 数值字段」用）：
+   - [js/cr-edit.js setCrystalStep](js/cr-edit.js#L260)、[setCrystalDelta](js/cr-edit.js#L275)：用户改回 0 / 空 → `editData[k] = null` → `computeDiff` 看到 null !== base → emit `{k: null}` → server pop
+   - 这是 dropdown / number input 的天然 path（UI 控件直接对应 null）
+
+2. **saveEdit 落盘前补 null**（用于 toggle UI 等不能写显式 null 的字段）：
+   - [js/edit.js saveEdit](js/edit.js#L189) chara `tags` 字段：toggle 按钮 mutate 数组、无法 emit `null`。
+     `computeDiff` 不 emit「相同字段」（standard diff 语义），但 server `deepMerge` 也不会主动删 existing.tags。
+     → saveEdit 在组装 charDiff 后检查：`hasChar && !('tags' in charDiff)` 时**主动注入** `charDiff.tags = null`，让 server 走 pop 路径。
+   - 仅在 chara 仍有其他真实改动时注入（`hasChar=true`）；
+     chara 完全无改动 / 改回 base 时通过 `totalChanged=false` 走 delete-revise 路径，不需要 null。
+
+**等价性：** local `start.py` 和 remote `api/save.js (Vercel)` 的 `_deep_merge` / `deepMerge` 实现等价（都把 source[k] === null 转为 pop），所以**两种环境下 tags 撤回行为完全一致**。GitHub Pages 走 Vercel API、127.0.0.1 走 start.py，都正确处理 `tags: null`。
+
 ---
 
 ## 前端 Save 机制
@@ -262,10 +277,17 @@ start.py `_deep_merge` / `_merge_by_id` 与 Vercel api/save.js 同语义（local
 ### 核心原则
 
 ```
-基础 JSON      ←  只有爬虫更新
+基础 JSON      ←  只有爬虫更新（pure parser 输出）
 revise JSON    ←  只有 UI 更新
 页面显示       =  基础 + deepApply(characters_revise) + deepApply(omoide_revise)
 ```
+
+> **重要**：`crawl_*.py` 的 `--recal` **不再** merge revise 进 base JSON（之前是 Phase 3
+> 步骤）。base JSON 始终是 parser 单一来源，revise 仅在前端叠加。这样：
+>
+> - 用户删除 revise 条目 → 刷新即可看到 parser 默认值（不必等下次 recal）
+> - parser 改进 → recal 后立即体现，不被 stale revise 覆盖
+> - base JSON 不被污染、回滚一致
 
 ### 字段分流（characters.html 专属）
 
@@ -341,7 +363,47 @@ function updateReviseBar() {
 
 | 文件 | 说明 |
 |------|------|
-| `progress.json` / `progress.js` | 角色爬虫进度，增量爬取时跳过已完成项 |
-| `soul_progress.json` / `soul_progress.js` | 魂爬虫进度，同上 |
+| `progress.json` | 角色爬虫进度，增量爬取时跳过已完成项；含 part-level 状态（见下） |
+| `soul_progress.json` | 魂爬虫进度，同上 |
 | `skilllist.html` | skilllist 页面缓存，build_skilllist_table.py 使用 |
 | `soulskill.html` | soulskill 页面缓存，build_skilllist_table 脚本使用 |
+
+### progress.json 结构（part-level retry）
+
+```jsonc
+{
+  "completed_data_ids": ["1647", ...],   // altema list data_id（曾抓过）
+  "saved_chara_ids":    [1647, ...],     // 详情页 final_id（chara.id）
+  "parts": {                             // key = chara.id (string)、value = 6 part 状态
+    "1647": {
+      "bd_skill":    false,    // wiki 缺失 → 下次脚本会 retry 整页
+      "skills":      true,
+      "基本情報":     true,
+      "ステータス":    true,
+      "プロフィール":  true,
+      "潜在解放":    true
+    }
+  }
+}
+```
+
+**6 part 完整判定**（[scripts/crawl_chara.py](scripts/crawl_chara.py) `_chara_parts_status()`）：
+
+| Part | 数据位置 | 判定 |
+|---|---|---|
+| `bd_skill` | `chara.bd_skill.name` | 顶层 bd_skill 存在 + name 非空 |
+| `skills` | `chara.states[X].skills` | 任一 state 有非空 skills |
+| `基本情報` | `chara.states[X].basic_info` | 任一 state 有非空 basic_info |
+| `ステータス` | `chara.states[X].stats` | 任一 state 有非空 stats |
+| `プロフィール` | `chara.states[X].profile` | 任一 state 有非空 profile |
+| `潜在解放` | `chara.omoide` | 非空 array |
+
+**retry 行为：** wiki 是单页混合 HTML，无法只重抓单个 part。某 chara 任意 part = false → 下次脚本**整页重抓**（已有的 part 也重新解析覆盖）。
+
+**Pending 判定**（[scripts/crawl_chara.py](scripts/crawl_chara.py) main 内 `_should_skip()`）：
+- `--rerun`：跳过判定，重抓全部
+- 未抓过（`data_id ∉ completed_data_ids`）：重抓
+- 已抓但 `parts` 不全 ✓：重抓（这是新行为）
+- 已抓且 `parts` 全 ✓：跳过
+
+**Migration**：旧 progress.json 没 `parts` 字段时，脚本第一次跑会从 characters.json 自动推断并写入。手填 base 数据者注意：`--recal` 会重算 tag、`-rerun` 会重抓 wiki、玩家手改请走 `characters_revise.json`。

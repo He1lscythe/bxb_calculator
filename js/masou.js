@@ -131,9 +131,9 @@ const _renderMasouEffectEdit = (masouId, ei, e) => {
         <div>
           <div class="field-label">倍率</div>
           <div style="display:flex;align-items:center;gap:4px">
-            ${renderEditSelect({0:'×',1:'+'}, e.calc_type, `setPath(state.editData,'${ep}.calc_type',+this.value)`)}
-            <input type="number" step="any" class="edit-num-sm" value="${e.bairitu ?? ''}"
-                   oninput="setPath(state.editData,'${ep}.bairitu',this.value===''?null:Number(this.value))">
+            ${renderEditSelect({0:'×',1:'+',2:'+(終)',3:'×(終)'}, e.calc_type, `setPath(state.editData,'${ep}.calc_type',+this.value)`)}
+            <input type="text" class="edit-num-sm" value="${e.bairitu ?? ''}"
+                   oninput="setPath(state.editData,'${ep}.bairitu',parseBairituVal(this.value))">
           </div>
         </div>
         <div>

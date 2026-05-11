@@ -65,6 +65,19 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             if 'omoide_templates' in data:
                 _write_data('omoide_templates.json', json.dumps(data['omoide_templates'], ensure_ascii=False, indent=2) + '\n')
 
+            # *_check：本地のみのチェック済み id リスト（gitignore 済み・api/save.js 同等品なし）
+            # POST body key → 出力ファイル名のマッピング。crystals_check.json と
+            # bladegraph_check.json は file 名の単複/略形に注意（data/ 配下と同款）。
+            for body_key, filename in (
+                ('soul_check',        'soul_check.json'),
+                ('chara_check',       'characters_check.json'),
+                ('crystal_check',     'crystals_check.json'),
+                ('bladegraph_check',  'bladegraph_check.json'),
+            ):
+                if body_key in data and isinstance(data[body_key], list):
+                    ids = sorted({int(x) for x in data[body_key] if isinstance(x, (int, float))})
+                    _write_data(filename, json.dumps(ids, ensure_ascii=False, indent=2) + '\n')
+
             self._json(200, {'ok': True})
         except Exception as e:
             self._json(500, {'error': str(e)})

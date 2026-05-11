@@ -112,8 +112,8 @@
       </div>
 
       <div class="filter-section">
-        <div class="filter-label">BD特殊効果</div>
-        <div class="filter-toggles" id="f-bdSpecial"></div>
+        <div class="filter-label">魔剣特性</div>
+        <div class="filter-toggles" id="f-tags"></div>
       </div>
 
       <div class="filter-section">
@@ -155,8 +155,8 @@
 <script type="module">
 import { Nav, updateReviseBar } from '../js/nav.js';
 import { state, OMOIDE_KEYS } from '../js/state.js';
-import { ELEMENT, WEAPON, RARITY, BUNRUI, BUNRUI_SHORT, BD_SPECIAL,
-         BD_SPECIAL_COLOR, OMOIDE_THRESHOLDS, SCOPE, SCOPE_SHORT, CONDITION,
+import { ELEMENT, WEAPON, RARITY, BUNRUI, BUNRUI_SHORT, CHARA_TAG,
+         CHARA_TAG_COLOR, OMOIDE_THRESHOLDS, SCOPE, SCOPE_SHORT, CONDITION,
          ELEM_COLOR, ELEM_CSS_VAR, ELEMS_ORDER, WEAPONS_ORDER,
          renderFilterToggles, renderElementFilterToggles,
          renderEditSelect, renderEditCheckboxes } from '../shared/constants.js';
@@ -178,8 +178,8 @@ import { enterEditMode, cancelEdit, saveEdit, saveRevise,
          toggleBunrui, setPath, getPath, setHit, setHitStage, setHitStageScaling,
          reRenderActiveState, toggleSkillTombstone, addNewCharaSkill,
          removeAddedCharaSkill, renderEditDetail, renderEditStateContent,
-         _renderHitEdit, renderBDSpecialToggles, renderBDEffectsEdit,
-         toggleBDSpecial, addBDEffect, removeBDEffect } from '../js/edit.js';
+         _renderHitEdit, renderCharaTagToggles, renderBDEffectsEdit,
+         toggleCharaTag, addBDEffect, removeBDEffect } from '../js/edit.js';
 import { _senzaiLabel, getLinkedThresholds, makeLCSHtml, renderLatentEditBody,
          toggleLCS, closeLCS, filterLCS, selectLCS,
          getCrystalSlotsJS, fillOmoideSlots, renderOmoideTemplateBar,
@@ -266,11 +266,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (idx >= 0) deepApply(state.allChars[idx], c);
       });
       if (arr.length) applyFilters();
+      // characters_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
+      return fetch('../data/characters_check.json');
+    })
+    .then(r => r && r.ok ? r.json() : null)
+    .then(arr => {
+      if (Array.isArray(arr)) {
+        state.charaCheckEnabled = true;
+        arr.forEach(id => state.charaCheck.add(id));
+        applyFilters();
+      }
     })
     .catch(() => {});
 });
 
-window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
+// 「絞り込み」展開中の user-initiated scroll でのみ collapse — touchmove (mobile) / wheel (desktop)。
+// scroll 事件は使わない：filter 操作後の list 高さ変化による浏览器 auto-clamp scrollY を user スクロールと誤判するため。
+window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
+window.addEventListener('wheel',     collapseFiltersOnScroll, { passive: true });
 window.addEventListener('resize', _scheduleMeasure, { passive: true });
 
 ['f-sort'].forEach(id => {
@@ -287,8 +300,8 @@ Object.assign(window, {
   enterEditMode, cancelEdit, saveEdit, saveRevise,
   toggleBunrui, setPath, setHit, setHitStage, setHitStageScaling, reRenderActiveState,
   toggleSkillTombstone, addNewCharaSkill, removeAddedCharaSkill,
-  renderBDSpecialToggles, renderBDEffectsEdit,
-  toggleBDSpecial, addBDEffect, removeBDEffect,
+  renderCharaTagToggles, renderBDEffectsEdit,
+  toggleCharaTag, addBDEffect, removeBDEffect,
   openLatentModal, closeLatentModal,
   openMasouModal, closeMasouModal, toggleMasouBunrui,
   toggleLCS, closeLCS, filterLCS, selectLCS,

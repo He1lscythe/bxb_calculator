@@ -3,7 +3,7 @@ import { state } from './soul-state.js';
 import { ELEMENT, WEAPON, BUNRUI_SHORT, CONDITION,
          ELEMS_ORDER, WEAPONS_ORDER } from '../shared/constants.js';
 import { updateReviseBar } from './nav.js';
-import { escHtml, fmtBairitu, min } from './utils.js';
+import { escHtml, fmtBairitu, fmtAff, min } from './utils.js';
 
 export const AFF_LABEL = {'-2':'超苦手','-1':'苦手','0':'普通','1':'得意','2':'超得意'};
 export const AFF_CLS   = {'-2':'aff-m2','-1':'aff-m1','0':'aff-0','1':'aff-1','2':'aff-2'};
@@ -18,6 +18,7 @@ export const renderList = () => {
   list.innerHTML = state.filteredSouls.map(s => min`
     <div class="soul-item ${s.id === state.selectedId ? 'active' : ''}" data-id="${s.id}">
       <span class="star-badge star-${s.rarity||0}">★${s.rarity||'?'}</span>
+      ${state.soulCheckEnabled ? `<input type="checkbox" class="soul-check-cb" data-id="${s.id}" ${state.soulCheck.has(s.id) ? 'checked' : ''}>` : ''}
       <span class="soul-name">${escHtml(s.name)}</span>
       <img class="soul-icon-thumb" src="https://img.altema.jp/bxb/soul/icon/${s.id}.jpg"
            onerror="this.style.display='none'" alt="">
@@ -27,6 +28,18 @@ export const renderList = () => {
   list.querySelectorAll('.soul-item').forEach(el => {
     el.addEventListener('click', () => selectSoul(parseInt(el.dataset.id)));
   });
+
+  if (state.soulCheckEnabled) {
+    list.querySelectorAll('.soul-check-cb').forEach(cb => {
+      cb.addEventListener('click', e => e.stopPropagation());
+      cb.addEventListener('change', e => {
+        const id = parseInt(e.target.dataset.id);
+        if (e.target.checked) state.soulCheck.add(id);
+        else state.soulCheck.delete(id);
+        saveSoulCheck();
+      });
+    });
+  }
 
   if (state.selectedId !== null) {
     const active = list.querySelector('.soul-item.active');
@@ -118,8 +131,8 @@ export const renderAffinityView = (s) => {
     const label = AFF_LABEL[lv] || '普通';
     const cls   = AFF_CLS[lv]  || 'aff-0';
     const ccls  = AFF_CELL[lv] || '';
-    const atk   = aff.atk_effect != null ? aff.atk_effect : '1';
-    const def   = aff.def_effect != null ? aff.def_effect : '1';
+    const atk   = fmtAff(aff.atk_effect);
+    const def   = fmtAff(aff.def_effect);
     return min`
       <div class="affinity-cell ${ccls}" ${extraStyle||''}>
         <span class="affinity-name">${name}</span>
@@ -229,4 +242,14 @@ export const renderRightTags = (sk) => {
 export const _fmtNumSimple = (b) => {
   return Number.isInteger(b) ? b.toLocaleString('en-US') : String(parseFloat(b.toFixed(6)));
 }
+
+// 本地 soul_check.json 写盘（走 start.py /save，仅本地有效；生产无 endpoint 即静默失败）
+const saveSoulCheck = () => {
+  const ids = [...state.soulCheck].sort((a, b) => a - b);
+  fetch('/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ soul_check: ids }),
+  }).catch(() => {});
+};
 
