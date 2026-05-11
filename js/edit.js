@@ -1,7 +1,7 @@
 // js/edit.js
 import { state, OMOIDE_KEYS } from './state.js';
 import { RARITY, BUNRUI, BUNRUI_SHORT, ELEMENT, WEAPON, CONDITION, SCOPE,
-         BD_SPECIAL, renderEditSelect, renderEditCheckboxes, renderFilterToggles } from '../shared/constants.js';
+         CHARA_TAG, renderEditSelect, renderEditCheckboxes, renderFilterToggles } from '../shared/constants.js';
 import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
 import { escHtml, fmtBairitu, fmtHitStages, ctPfx, hasOmoide, min } from './utils.js';
 import { selectChar, renderDetail, switchState, setupStickyHeights,
@@ -186,6 +186,14 @@ export const saveEdit = () => {
           if (OMOIDE_KEYS.has(key)) { omoideDiff[key] = diff[key]; hasOmoide = true; }
           else                       { charDiff[key]   = diff[key]; hasChar   = true; }
         }
+        // tags 撤回：computeDiff 不 emit 与 base 相同的字段，但 server _deep_merge 也不会
+        // 主动清除 existing revise.tags。chara 仍有其他改动（hasChar）但 tags 已回到 base
+        // 时显式 emit tags=null 触发 server null 撤回（参考 crystal weight_step 机制）。
+        // chara 完全无 chara-level 改动时不注入：totalChanged=false 路径 / hasChar=false
+        // 都会触发整条 revise 删除、不需要 tags=null。
+        if (hasChar && !('tags' in charDiff)) {
+          charDiff.tags = null;
+        }
         if (hasChar)   { state.reviseData[id]       = charDiff;   } else { delete state.reviseData[id]; }
         if (hasOmoide) { state.omoideReviseData[id] = omoideDiff; } else { delete state.omoideReviseData[id]; }
       } else {
@@ -287,8 +295,6 @@ export const renderEditDetail = (c) => {
         <div class="bd-label">BD SKILL${c.bd_skill.cost != null ? `&nbsp;<span class="bd-cost-tag">コスト ${c.bd_skill.cost}</span>` : ''}</div>
         <div class="bd-name">${escHtml(c.bd_skill.name || '')}</div>
         <div class="edit-readonly">${escHtml(c.bd_skill.effect_text || '')}</div>
-        <div class="field-label" style="margin-top:8px">BD特殊効果</div>
-        <div class="bunrui-toggles">${renderBDSpecialToggles(c.bd_skill)}</div>
         <div id="bd-effects-edit-container">${renderBDEffectsEdit(c.bd_skill)}</div>
       </div>
     </div>` : '';
@@ -308,6 +314,10 @@ export const renderEditDetail = (c) => {
         <select class="edit-select" onchange="setPath(state.editData,'type',Number(this.value))">
           ${Object.entries(WEAPON).map(([k,v])=>`<option value="${k}"${c.type==k?' selected':''}>${v}</option>`).join('')}
         </select>
+      </div>
+      <div class="chara-tag-row">
+        <span class="field-label" style="margin:0">魔剣特性</span>
+        <div class="bunrui-toggles">${renderCharaTagToggles(c)}</div>
       </div>
       <div class="edit-actions">
         <button class="btn-save"   onclick="saveEdit()">保存</button>
@@ -383,9 +393,9 @@ export const renderEditStateContent = (c, lbl) => {
               <div>
                 <div class="field-label">倍率</div>
                 <div style="display:flex;align-items:center;gap:4px">
-                  ${renderEditSelect({0:'×',1:'+'}, e.calc_type, `setPath(state.editData,'${ep}.calc_type',+this.value)`)}
-                  <input type="number" step="any" class="edit-num-sm" value="${e.bairitu??''}"
-                         oninput="setPath(state.editData,'${ep}.bairitu',this.value===''?null:Number(this.value))">
+                  ${renderEditSelect({0:'×',1:'+',2:'+(終)',3:'×(終)'}, e.calc_type, `setPath(state.editData,'${ep}.calc_type',+this.value)`)}
+                  <input type="text" class="edit-num-sm" value="${e.bairitu??''}"
+                         oninput="setPath(state.editData,'${ep}.bairitu',parseBairituVal(this.value))">
                 </div>
               </div>
               <div>
@@ -502,17 +512,27 @@ export const reRenderActiveState = () => {
   if (active) switchState(state.editData.id, active, detail);
 }
 
+// 入力を hit 値として正規化：空 → null、"5/4" 等分数 → 文字列保持、純数値 → number。
+const _normalizeHitVal = (v) => {
+  if (v == null) return null;
+  const s = String(v).trim();
+  if (s === '') return null;
+  if (s.includes('/')) return s;
+  const n = parseFloat(s);
+  return Number.isFinite(n) ? n : s;
+};
+
 export const setHitStage = (path, idx, val) => {
   const arr = (getPath(state.editData, path + '.hit_per_stage') || [null, null, null]).slice();
   while (arr.length < 3) arr.push(null);
-  arr[idx] = val === '' ? null : +val;
+  arr[idx] = _normalizeHitVal(val);
   setPath(state.editData, path + '.hit_per_stage', arr);
 }
 
 export const setHitStageScaling = (path, idx, val) => {
   const arr = (getPath(state.editData, path + '.hit_per_stage_scaling') || [null, null, null]).slice();
   while (arr.length < 3) arr.push(null);
-  arr[idx] = val === '' ? null : +val;
+  arr[idx] = _normalizeHitVal(val);
   setPath(state.editData, path + '.hit_per_stage_scaling', arr);
 }
 
@@ -527,13 +547,13 @@ export const _renderHitEdit = (ep, e) => {
   function stageIn(idx) {
     const v = hps[idx] != null ? hps[idx] : '';
     return '<div><div class="field-label">' + (idx + 1) + '撃</div>'
-      + '<input type="number" step="any" class="edit-num-sm" style="width:42px" value="' + v + '"'
+      + '<input type="text" class="edit-num-sm" style="width:42px" value="' + v + '"'
       + ' oninput="setHitStage(\'' + ep + '\',' + idx + ',this.value)"></div>';
   }
   function scaleIn(idx) {
     const v = hpss[idx] != null ? hpss[idx] : '';
     return '<div><div class="field-label">' + (idx + 1) + '撃+</div>'
-      + '<input type="number" step="any" class="edit-num-sm" style="width:42px" value="' + v + '"'
+      + '<input type="text" class="edit-num-sm" style="width:42px" value="' + v + '"'
       + ' oninput="setHitStageScaling(\'' + ep + '\',' + idx + ',this.value)"></div>';
   }
   return '<div class="field-label" style="margin-top:6px">ヒット計算 <span style="font-weight:400;color:var(--text2)">(bunrui=7)</span></div>'
@@ -547,10 +567,11 @@ export const _renderHitEdit = (ep, e) => {
     + '</div>';
 }
 
-export const renderBDSpecialToggles = (bd) => {
-  return [1,2,3,5,6].map(function(sid) {
-    const on = (bd.special || []).includes(sid);
-    return '<button class="btog' + (on ? ' on' : '') + '" onclick="toggleBDSpecial(' + sid + ',this)">' + (BD_SPECIAL[sid] || sid) + '</button>';
+export const renderCharaTagToggles = (c) => {
+  return Object.keys(CHARA_TAG).map(function(k) {
+    const sid = +k;
+    const on = (c.tags || []).includes(sid);
+    return '<button class="btog' + (on ? ' on' : '') + '" onclick="toggleCharaTag(' + sid + ',this)">' + CHARA_TAG[sid] + '</button>';
   }).join('');
 }
 
@@ -576,9 +597,9 @@ export const renderBDEffectsEdit = (bd) => {
       + (isHitOnly ? '' :
           '<div><div class="field-label">倍率</div>'
           + '<div style="display:flex;align-items:center;gap:4px">'
-          + renderEditSelect({0:'×',1:'+'}, e.calc_type, 'setPath(state.editData,\'' + ep + '.calc_type\',+this.value)')
-          + '<input type="number" step="any" class="edit-num-sm" value="' + (e.bairitu != null ? e.bairitu : '') + '"'
-          + ' oninput="setPath(state.editData,\'' + ep + '.bairitu\',this.value===\'\'?null:Number(this.value))">'
+          + renderEditSelect({0:'×',1:'+',2:'+(終)',3:'×(終)'}, e.calc_type, 'setPath(state.editData,\'' + ep + '.calc_type\',+this.value)')
+          + '<input type="text" class="edit-num-sm" value="' + (e.bairitu != null ? e.bairitu : '') + '"'
+          + ' oninput="setPath(state.editData,\'' + ep + '.bairitu\',parseBairituVal(this.value))">'
           + '</div></div>'
           + '<div><div class="field-label">熟度補正</div>'
           + '<input type="text" class="edit-num-sm" value="' + (e.bairitu_scaling != null ? e.bairitu_scaling : '') + '"'
@@ -593,13 +614,12 @@ export const renderBDEffectsEdit = (bd) => {
   return blocks + '<button class="btn-add-slot" style="margin-top:6px" onclick="addBDEffect()">+ 効果追加</button>';
 }
 
-export const toggleBDSpecial = (sid, btn) => {
-  if (!state.editData.bd_skill) return;
-  let arr = (state.editData.bd_skill.special || []).slice();
+export const toggleCharaTag = (sid, btn) => {
+  let arr = (state.editData.tags || []).slice();
   let idx = arr.indexOf(sid);
   if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
   else { arr.push(sid); arr.sort(function(a,b){return a-b;}); btn.classList.add('on'); }
-  state.editData.bd_skill.special = arr;
+  state.editData.tags = arr;
 }
 
 export const addBDEffect = () => {

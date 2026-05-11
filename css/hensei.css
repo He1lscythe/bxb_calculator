@@ -40,21 +40,23 @@
 .emblem-lv-input::-webkit-inner-spin-button,.emblem-lv-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .emblem-lv-input{-moz-appearance:textfield;}
 .emblem-lv-max{font-size:10px;color:var(--text2);}
-.emblem-rm,.crystal-rm{position:absolute;top:-7px;right:-7px;width:16px;height:16px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text2);font-size:14px;line-height:1;cursor:pointer;padding:0 0 2px;display:flex;align-items:center;justify-content:center;}
+.emblem-rm,.crystal-rm{position:absolute;top:-7px;right:-7px;width:16px;height:16px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text2);font-size:14px;line-height:1;cursor:pointer;padding:0 0 1px;display:flex;align-items:center;justify-content:center;}
 .emblem-rm:hover,.crystal-rm:hover{border-color:#ff5555;color:#ff5555;}
 
 /* エンブレム modal */
 #emblem-modal{display:none;position:fixed;inset:0;z-index:2200;align-items:center;justify-content:center;}
 #emblem-modal.open{display:flex;}
-#emblem-modal .modal-panel{width:min(720px,96vw);height:min(960px,90vh);}
+#emblem-modal .modal-panel{width:min(840px,96vw);height:min(960px,90vh);}
 .ts-label{font-size:11px;font-weight:700;color:var(--text2);margin-right:4px;letter-spacing:.05em;}
 .size-btn{padding:4px 18px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
 .size-btn:hover{border-color:var(--accent);color:var(--text);}
 .size-btn.on{background:rgba(91,127,255,.22);border-color:var(--accent);color:var(--accent);}
 
 /* slots */
-#slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:16px;align-items:start;}
-.slot-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:opacity .2s;}
+/* 三张卡片统一高度（默认 stretch），有魔装 / 没魔装的卡片对齐 */
+#slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:16px;align-items:stretch;}
+.slot-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:opacity .2s;display:flex;flex-direction:column;}
+.slot-card .slot-body{flex:1;}
 .slot-card.disabled{opacity:.35;pointer-events:none;}
 .slot-header{padding:10px 14px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;min-height:42px;}
 .slot-num{font-size:15px;font-weight:700;color:var(--accent);flex-shrink:0;}
@@ -90,10 +92,7 @@
 
 .skill-eftxt{font-size:11px;color:var(--text2);margin-bottom:4px;line-height:1.5;}
 .eftags{display:flex;flex-wrap:wrap;gap:5px;align-items:center;}
-.tag-b{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600;background:rgba(91,127,255,.18);color:#9bb0ff;border:1px solid rgba(91,127,255,.3);}
-.tag-scope{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;color:var(--text2);background:var(--bg);border:1px solid var(--border);}
-.tag-lim{color:#cc99ff;background:rgba(170,85,255,.15);border-color:rgba(170,85,255,.3);}
-.tag-cond{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;color:#ffaa44;background:rgba(255,170,68,.12);border:1px solid rgba(255,170,68,.3);}
+/* bunrui-tag / scope-tag / cond-tag は shared.css と統一（characters/soul と同じ視覚）。 */
 .tag-val{font-size:13px;font-weight:700;color:#ffe066;padding:0 4px;}
 
 /* collapsible detail panels */
@@ -110,6 +109,36 @@
 .crystal-empty{width:38px;height:38px;border-radius:5px;border:1px dashed var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:18px;line-height:1;transition:border-color .1s,color .1s;}
 .crystal-empty:hover{border-color:var(--accent);color:var(--accent);}
 /* .crystal-rm 与 .emblem-rm 共用规则（在文件顶部） */
+/* ⚙ 配置按钮（重量/純度 popover 触发）— 位置 thumb 右下角；padding 与 .crystal-rm 一致让 ⚙ 视觉居中 */
+.crystal-cfg-btn{position:absolute;bottom:-6px;right:-6px;width:14px;height:14px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text2);font-size:11px;line-height:1;cursor:pointer;padding:0 0 1px;display:flex;align-items:center;justify-content:center;}
+.crystal-cfg-btn:hover{border-color:var(--accent);color:var(--accent);}
+/* 移动端：结晶 section 整体放大；thumb/×/⚙ 都放大让 touch 友好；
+   字符位置再下移 1px（padding-bottom 0；桌面端 1px 不变） */
+@media(max-width:768px){
+  .crystals-grid{gap:14px;}
+  .crystal-slot-wrap{gap:6px;}
+  .crystal-thumb,.crystal-empty{width:56px;height:56px;border-radius:7px;}
+  .crystal-empty{font-size:26px;}
+  .crystal-rm,.crystal-cfg-btn{width:22px;height:22px;font-size:16px;padding:0;}
+  .crystal-rm{top:-9px;right:-9px;}
+  .crystal-cfg-btn{bottom:-9px;right:-9px;font-size:14px;}
+  .emblem-rm{padding:0;}
+}
+/* 結晶 重量/純度 popover (浮在结晶 slot 上方、↓ 箭头指向 thumb) */
+.crystal-dim-popover{position:absolute;background:var(--bg2);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.5);padding:10px 12px;z-index:3500;font-size:11px;color:var(--text);min-width:240px;}
+.crystal-dim-popover::before,.crystal-dim-popover::after{content:'';position:absolute;width:0;height:0;}
+.crystal-dim-popover::before{bottom:-8px;left:var(--arrow-x,50%);transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid var(--border);}
+.crystal-dim-popover::after{bottom:-7px;left:var(--arrow-x,50%);transform:translateX(-50%);border-left:7px solid transparent;border-right:7px solid transparent;border-top:7px solid var(--bg2);}
+.crystal-dim-popover .pop-title{font-weight:700;color:var(--accent);margin-bottom:6px;font-size:12px;}
+.crystal-dim-popover .pop-row{display:flex;align-items:center;gap:6px;margin:4px 0;}
+.crystal-dim-popover .pop-row label{flex-shrink:0;width:24px;color:var(--text2);}
+.crystal-dim-popover .pop-row input[type="range"]{flex:1;min-width:80px;}
+.crystal-dim-popover .pop-row input[type="number"]{width:56px;padding:3px 6px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:11px;text-align:right;}
+.crystal-dim-popover .pop-row input:focus{border-color:var(--accent);outline:none;}
+.crystal-dim-popover .pop-row .pop-unit{color:var(--text2);font-size:10px;flex-shrink:0;width:14px;}
+.crystal-dim-popover .pop-actions{display:flex;justify-content:space-between;gap:8px;margin-top:8px;}
+.crystal-dim-popover .pop-actions button{padding:3px 10px;font-size:10px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;}
+.crystal-dim-popover .pop-actions button:hover{border-color:var(--accent);color:var(--accent);}
 .cr-eff-list{display:flex;flex-direction:column;gap:3px;margin-top:6px;}
 .cr-eff-row{display:flex;align-items:flex-start;gap:6px;padding:4px 0;border-bottom:1px solid rgba(46,50,80,.6);}
 .cr-eff-row:last-child{border-bottom:none;}
@@ -121,7 +150,7 @@
 #entity-modal.open{display:flex;}
 #omoide-modal{display:none;position:fixed;inset:0;z-index:2500;align-items:center;justify-content:center;}
 #omoide-modal.open{display:flex;}
-#omoide-modal .modal-panel{width:min(720px,96vw);max-height:min(960px,90vh);}
+#omoide-modal .modal-panel{width:min(840px,96vw);max-height:min(960px,90vh);}
 #omoide-modal .modal-body{flex:1;flex-direction:column;overflow-y:auto;padding:0 14px 12px;gap:6px;}
 #omoide-modal .om-toolbar{display:flex;gap:8px;padding:12px 0 8px;border-bottom:1px solid var(--border);margin-bottom:6px;flex-shrink:0;position:sticky;top:0;background:var(--bg2);z-index:1;}
 /* ===== DETAIL MODAL (z-index 3000) ===== */
@@ -130,8 +159,8 @@
 
 .modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.65);}
 .modal-panel{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;z-index:1;overflow:hidden;}
-#entity-modal .modal-panel{width:min(720px,96vw);height:min(960px,94vh);}
-#detail-modal .modal-panel{width:min(740px,96vw);height:min(960px,92vh);}
+#entity-modal .modal-panel{width:min(840px,96vw);height:min(960px,94vh);}
+#detail-modal .modal-panel{width:min(840px,96vw);height:min(960px,92vh);}
 .modal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px;}
 .modal-header-title{font-size:14px;font-weight:700;flex:1;}
 .modal-close{background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;line-height:1;padding:2px 6px;border-radius:4px;flex-shrink:0;}
@@ -139,7 +168,7 @@
 .modal-body{flex:1;display:flex;overflow:hidden;min-height:0;}
 
 /* sidebar */
-.modal-sidebar{width:230px;min-width:180px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;padding:10px;gap:8px;flex-shrink:0;}
+.modal-sidebar{width:300px;min-width:240px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;padding:10px;gap:8px;flex-shrink:0;}
 .modal-sidebar::-webkit-scrollbar{width:4px;}
 .modal-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 .modal-search{width:100%;padding:7px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;outline:none;}
@@ -207,6 +236,24 @@
 /* badges */
 
 .badge.weapon{background:var(--bg3);color:var(--text2);border:1px solid var(--border);}
+
+/* picker modal item header の badge 整列（characters char-list と同じ規則）：
+   全 badge (rarity / element / weapon) 中央寄せ + 高さ統一 */
+.em-bg-header .badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+/* rarity (A / AA / S / SS) 固定 28px：1 文字 / 2 文字でも同じ幅 */
+.em-bg-header .badge.A,
+.em-bg-header .badge.AA,
+.em-bg-header .badge.S,
+.em-bg-header .badge.SS {
+  width: 28px;
+  padding-left: 0;
+  padding-right: 0;
+}
 .state-dots{display:flex;gap:2px;flex-shrink:0;}
 .state-dot{width:6px;height:6px;border-radius:50%;background:var(--border);}
 .state-dot.has{background:var(--accent);}
@@ -336,7 +383,9 @@
 @media(max-width:768px){
   body{height:auto;overflow-y:auto;}
   #page-wrap{overflow:visible;}
-  #slots-grid{perspective:700px;display:flex;flex-direction:column;flex:none;padding:8px;gap:0;}
+  /* 移动端：一次只显示一张 slot-card；底部留 40vh 空白让滑到底时不贴屏幕底部。
+     卡片高度自适应内容（不强制统一），切换 1/2/3 号位时高度可能不同。 */
+  #slots-grid{perspective:700px;display:flex;flex-direction:column;flex:none;padding:8px 8px 40vh;gap:0;}
   .slot-card{overflow:visible;}
   .slot-card:not(.mob-hidden){flex:none;}
   .slot-card.mob-hidden{display:none;}

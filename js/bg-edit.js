@@ -134,17 +134,27 @@ export const toggleBladeElement = (ei, id, btn) => { _toggleBgArrayField(ei, 'el
 
 export const toggleBladeType = (ei, id, btn) => { _toggleBgArrayField(ei, 'type',    id, btn); }
 
+// 入力を hit 値として正規化：空 → null、"5/4" 等分数 → 文字列保持、純数値 → number。
+const _normalizeHitVal = (v) => {
+  if (v == null) return null;
+  const s = String(v).trim();
+  if (s === '') return null;
+  if (s.includes('/')) return s;
+  const n = parseFloat(s);
+  return Number.isFinite(n) ? n : s;
+};
+
 export const setBladeHitStage = (ei, idx, val) => {
   const arr = ((state.editData.effects[ei]||{}).hit_per_stage || [null, null, null]).slice();
   while (arr.length < 3) arr.push(null);
-  arr[idx] = val === '' ? null : +val;
+  arr[idx] = _normalizeHitVal(val);
   state.editData.effects[ei].hit_per_stage = arr;
 }
 
 export const setBladeHitStageScaling = (ei, idx, val) => {
   const arr = ((state.editData.effects[ei]||{}).hit_per_stage_scaling || [null, null, null]).slice();
   while (arr.length < 3) arr.push(null);
-  arr[idx] = val === '' ? null : +val;
+  arr[idx] = _normalizeHitVal(val);
   state.editData.effects[ei].hit_per_stage_scaling = arr;
 }
 
@@ -203,9 +213,9 @@ export const renderEditBody = (c) => {
 
     const scopeSel = renderEditSelect(SCOPE, e.scope, 'setBladeScope('+i+',this.value)');
     const condSel  = renderEditSelect(CONDITION, e.condition, 'state.editData.effects['+i+'].condition=+this.value');
-    const ctSel    = renderEditSelect({0:'×', 1:'+'}, e.calc_type, 'state.editData.effects['+i+'].calc_type=+this.value');
-    const bairituInput = '<input type="number" step="any" class="edit-num-sm" value="'+(e.bairitu!=null?e.bairitu:'')+'" ' +
-      'oninput="state.editData.effects['+i+'].bairitu=this.value===\'\'?null:Number(this.value)">';
+    const ctSel    = renderEditSelect({0:'×', 1:'+', 2:'+(終)', 3:'×(終)'}, e.calc_type, 'state.editData.effects['+i+'].calc_type=+this.value');
+    const bairituInput = '<input type="text" class="edit-num-sm" value="'+(e.bairitu!=null?e.bairitu:'')+'" ' +
+      'oninput="state.editData.effects['+i+'].bairitu=parseBairituVal(this.value)">';
 
     const nameInput = (e.scope === 5)
       ? '<div class="field-label">キャラ名</div><input type="text" class="edit-input" style="width:100%" value="'+escHtml(e.name||'')+'" oninput="state.editData.effects['+i+'].name=this.value">'
@@ -222,12 +232,12 @@ export const renderEditBody = (c) => {
       const stageIn = function(idx){
         const v = hps[idx] != null ? hps[idx] : '';
         return '<div><div class="field-label">' + (idx+1) + '撃</div>' +
-          '<input type="number" step="any" class="edit-num-sm" style="width:60px" value="'+v+'" oninput="setBladeHitStage('+i+','+idx+',this.value)"></div>';
+          '<input type="text" class="edit-num-sm" style="width:60px" value="'+v+'" oninput="setBladeHitStage('+i+','+idx+',this.value)"></div>';
       };
       const scaleIn = function(idx){
         const v = hpss[idx] != null ? hpss[idx] : '';
         return '<div><div class="field-label">' + (idx+1) + '撃+</div>' +
-          '<input type="number" step="any" class="edit-num-sm" style="width:60px" value="'+v+'" oninput="setBladeHitStageScaling('+i+','+idx+',this.value)"></div>';
+          '<input type="text" class="edit-num-sm" style="width:60px" value="'+v+'" oninput="setBladeHitStageScaling('+i+','+idx+',this.value)"></div>';
       };
       hitBlock = '<div class="field-label" style="margin-top:6px">ヒット計算 <span style="color:var(--text2);font-weight:400">(bunrui=7のみ)</span></div>' +
         '<div class="skill-edit-meta">' +

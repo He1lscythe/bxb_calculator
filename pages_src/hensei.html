@@ -100,20 +100,20 @@
 <script type="module">
 import { Nav } from '../js/nav.js';
 import { ELEMENT, WEAPON, RARITY, BUNRUI, BUNRUI_SHORT, BUNRUI_FILTER, CONDITION,
-         BD_SPECIAL, BD_SPECIAL_COLOR, ELEM_COLOR } from '../shared/constants.js';
+         CHARA_TAG, CHARA_TAG_COLOR, ELEM_COLOR } from '../shared/constants.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { CHARA_SPEC } from '../shared/chara-spec.js';
 import { SOUL_SPEC } from '../shared/soul-spec.js';
 import { CRYSTAL_SPEC } from '../shared/crystal-spec.js';
 import { BG_SPEC } from '../shared/bg-spec.js';
-import { escHtml, fmtLarge, fmtHitStages, hideLoading, min } from '../js/utils.js';
+import { escHtml, fmtLarge, fmtBairitu, fmtHitStages, fmtAff, hideLoading, min } from '../js/utils.js';
 import { deepApply } from '../js/diff.js';
 
 Nav.init();
 
 
 // ELEMENT / ELEM_COLOR / WEAPON / RARITY / BUNRUI / BUNRUI_SHORT / CONDITION /
-// BD_SPECIAL 来自 shared/constants.js
+// CHARA_TAG 来自 shared/constants.js
 
 let allCharas=[], allSouls=[], allBGs=[], allCrystals=[], allMasou=[], masouByChara={};
 let allGuildTitles=[], allGuildEmblems=[];
@@ -163,6 +163,12 @@ const EMBLEM_RARITY_LV_MAX = {1: 25, 2: 40, 3: 55, 4: 1};
 export const emblemLvMax = (rarity) => {
   return EMBLEM_RARITY_LV_MAX[+rarity || 1] || EMBLEM_RARITY_LV_MAX[1];
 }
+
+// 結晶 rarity → lv 上限。⚠ rarity 1, 2 数据待验证（rarity 3-6 已确认）。
+// crystal 顶层可有 optional `level_max` 覆盖；缺省则按此表。
+// 注：lv 当前 calc 不接入；常量 + helper 仅 schema 占位，为未来 lv 接入预留。
+const CRYSTAL_RARITY_LV_MAX = {1: 10, 2: 30, 3: 80, 4: 120, 5: 160, 6: 200};
+export const cryLvMax = (cr) => +cr?.level_max || (CRYSTAL_RARITY_LV_MAX[+cr?.rarity] ?? 1);
 
 export const elementMatchupMult = (srcElem, tgtElem, mode) => {
   if (mode === 'guildbattle') {
@@ -266,35 +272,51 @@ export const fmtVal = (ef) => {
   const bunrui = ef.bunrui || [];
   const isHitOnly = bunrui.length===1 && bunrui[0]===7;
   if(isHitOnly) return fmtHitStages(ef);
-  let v;
-  if(ef.calc_type===1){
-    v='+'+fmtLarge(ef.bairitu);
-    if(ef.bairitu_scaling)v+=' + '+ef.bairitu_scaling+'×熟度';
-  } else {
-    const xfmt=n=>'x'+n;
-    const lo=ef.bairitu_init,hi=ef.bairitu;
-    v=(lo!=null&&lo!==hi)?xfmt(lo)+'〜'+xfmt(hi):xfmt(hi);
-    if(ef.bairitu_scaling)v+=' + x'+ef.bairitu_scaling+'×熟度';
+  let v = '';
+  if (ef.bairitu != null && ef.bairitu !== 0) {
+    const sc = ef.bairitu_scaling;
+    // ct: 0=×, 1=+, 2=+(終), 3=×(終)
+    const ct  = ef.calc_type ?? 0;
+    const pfx = ct === 1 ? '+' : ct === 2 ? '+(終)' : ct === 3 ? '×(終)' : 'x';
+    const isAddCt = (ct === 1 || ct === 2);
+    // inner: 加算は単値、乗算は init〜max 範囲対応
+    let inner;
+    if (!isAddCt) {
+      const lo = ef.bairitu_init, hi = ef.bairitu;
+      inner = (lo != null && lo !== hi) ? fmtLarge(lo) + '〜' + fmtLarge(hi) : fmtLarge(hi);
+    } else {
+      inner = fmtLarge(ef.bairitu);
+    }
+    // sc あり → 括弧で括って "+(v + sc * 熟度)"。なし → 単に "+v"。
+    v = pfx + (sc ? '(' + inner + ' + ' + sc + ' * 熟度)' : inner);
   }
-  if(bunrui.includes(7)){
+  if (bunrui.includes(7)) {
     const hitStr = fmtHitStages(ef);
-    if(hitStr) v += ' / ' + hitStr;
+    if (hitStr) v += (v ? ' / ' : '') + hitStr;
   }
   return v;
 }
+// scope tag のスタイル/略称は utils.js / soul-render.js と統一（自/全/X/X·自/X·全）。
 export const fmtScopeTag = (ef) => {
-  if(ef.scope===5){const nm=ef.name?escHtml(ef.name).slice(0,12):'限定';return`<span class="tag-scope tag-lim">${nm}限定</span>`;}
-  const elStr=(ef.element!=null?[].concat(ef.element):[]).map(e=>ELEMENT[e]||e).join('/');
-  const tyStr=(ef.type!=null?[].concat(ef.type):[]).map(t=>WEAPON[t]||t).join('/');
-  const cond=[elStr,tyStr].filter(Boolean).join(' ');
-  const lbl={0:'自身',1:'全体',2:'全体',3:'自身',4:'全体'};
-  const txt=cond?cond+' '+(lbl[ef.scope]||''):(lbl[ef.scope]||'');
-  return txt?`<span class="tag-scope">${escHtml(txt)}</span>`:'';
+  const elStr = ef.element != null ? [].concat(ef.element).map(e => ELEMENT[e] || e).join('/') : '';
+  const tyStr = ef.type    != null ? [].concat(ef.type   ).map(t => WEAPON [t] || t).join('/') : '';
+  const parts = [elStr, tyStr].filter(Boolean);
+  const lim   = parts.join('·');
+  if (ef.scope === 0) return '<span class="scope-tag scope-self">自</span>';
+  if (ef.scope === 1) return '<span class="scope-tag scope-all">全</span>';
+  if (ef.scope === 2) return '<span class="scope-tag scope-lim">'      + (lim || '限') + '</span>';
+  if (ef.scope === 3) return '<span class="scope-tag scope-equip-s">' + (lim || '装') + '·自</span>';
+  if (ef.scope === 4) return '<span class="scope-tag scope-equip-a">' + (lim || '装') + '·全</span>';
+  if (ef.scope === 5) {
+    const nm = ef.name ? escHtml(ef.name).slice(0,12) : '限';
+    return '<span class="scope-tag scope-lim">' + nm + '限定</span>';
+  }
+  return '';
 }
 export const renderEfRow = (ef) => {
-  const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${escHtml(BUNRUI_SHORT[b]||b)}</span>`).join('');
-  const cond=ef.condition?`<span class="tag-cond">${CONDITION[ef.condition]}</span>`:'';
-  return`<div class="eftags">${btags}<span class="tag-val">${fmtVal(ef)}</span>${fmtScopeTag(ef)}${cond}</div>`;
+  const btags = (ef.bunrui||[]).map(b => `<span class="bunrui-tag">${escHtml(BUNRUI_SHORT[b]||b)}</span>`).join('');
+  const cond  = ef.condition ? `<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition]}</span>` : '';
+  return `<div class="eftags">${btags}<span class="tag-val">${fmtVal(ef)}</span>${fmtScopeTag(ef)}${cond}</div>`;
 }
 export const _resolveCharaSkills = (c, trState) => {
   if(!c||!c.states) return [];
@@ -334,12 +356,13 @@ export const renderMasouPanel = (m) => {
   if(!m)return'';
   return`<div class="skills-panel"><div class="skill-item"><div class="skill-eftxt">${escHtml(m.effect_text||'')}</div>${(m.effects||[]).map(renderEfRow).join('')}</div></div>`;
 }
-export const renderCrystalEffList = (ids) => {
-  const sel=ids.filter(Boolean).map(id=>allCrystals.find(x=>x.id===id)).filter(Boolean);
+export const renderCrystalEffList = (cfgs) => {
+  // cfgs: [{id, weight, purity}, ...] or null。取 id 解 allCrystals。
+  const sel=(cfgs||[]).filter(Boolean).map(cfg=>allCrystals.find(x=>x.id===cfg.id)).filter(Boolean);
   if(!sel.length)return'';
   return'<div class="cr-eff-list">'+sel.map(cr=>{
     const tags=(cr.effects||[]).map(ef=>{
-      const btags=(ef.bunrui||[]).map(b=>`<span class="tag-b">${escHtml(BUNRUI_SHORT[b]||b)}</span>`).join('');
+      const btags=(ef.bunrui||[]).map(b=>`<span class="bunrui-tag">${escHtml(BUNRUI_SHORT[b]||b)}</span>`).join('');
       const val=ef.calc_type===1?'+'+fmtLarge(ef.bairitu):'x'+ef.bairitu;
       return btags+`<span class="tag-val">${val}</span>`;
     }).join(' ');
@@ -418,7 +441,98 @@ export const setBG = (si,id) => {
   else team[si].bg=id;
   renderSlot(si);refreshAllStats();
 }
-export const setCrystal = (si,ci,id) => {team[si].crystals[ci]=id;renderSlot(si);refreshAllStats();}
+export const setCrystal = (si,ci,id) => {
+  team[si].crystals[ci] = (id == null) ? null : { id, weight: 100, purity: 100 };
+  renderSlot(si);
+  refreshAllStats();
+}
+// 玩家在 hensei 槽位上调结晶 weight/purity（默认 100，clamp 0..100）
+export const setCrystalDim = (si, ci, dim, val) => {  // dim: 'weight' | 'purity'
+  const cfg = team[si].crystals[ci];
+  if (!cfg) return;
+  const n = +val;
+  if (Number.isFinite(n)) cfg[dim] = Math.max(0, Math.min(100, n));
+  refreshAllStats();
+}
+
+// ===== 結晶 重量/純度 popover（⚙ 触发，浮在 slot-card 正上方）=====
+let _crystalPopEl = null;
+let _crystalPopHandler = null;
+// row 排版：[label][slider][number][unit]、slider/number 双向同步、都触发 setCrystalDim
+const _popRow = (si, ci, kind, step, value, unit) => {
+  const labelTxt = kind === 'weight' ? '重' : '純';
+  const oninp = `setCrystalDim(${si},${ci},'${kind}',this.value)`;
+  return `<div class="pop-row" data-kind="${kind}">
+    <label>${labelTxt}</label>
+    <input type="range"   min="0" max="100" step="${step}" value="${value}" oninput="this.parentNode.querySelector('input[type=number]').value=this.value;${oninp}">
+    <input type="number" min="0" max="100" step="${step}" value="${value}" oninput="this.parentNode.querySelector('input[type=range]').value=this.value;${oninp}">
+    <span class="pop-unit">${unit}</span>
+  </div>`;
+};
+export const openCrystalDimPopover = (si, ci, btnEl) => {
+  closeCrystalDimPopover();
+  const cfg = team[si]?.crystals?.[ci];
+  if (!cfg) return;
+  const cr = allCrystals.find(x => x.id === cfg.id);
+  if (!cr) return;
+  const wStep = +cr.weight_step || 0;
+  const pStep = +cr.purity_step || 0;
+  if (!wStep && !pStep) return;
+  const wRow = wStep > 0 ? _popRow(si, ci, 'weight', wStep, cfg.weight ?? 100, 'g') : '';
+  const pRow = pStep > 0 ? _popRow(si, ci, 'purity', pStep, cfg.purity ?? 100, '%') : '';
+  const pop = document.createElement('div');
+  pop.className = 'crystal-dim-popover';
+  pop.innerHTML = `
+    <div class="pop-title">${escHtml(cr.name)}</div>
+    ${wRow}${pRow}
+    <div class="pop-actions">
+      <button onclick="resetCrystalDim(${si},${ci})">リセット</button>
+      <button onclick="closeCrystalDimPopover()">×</button>
+    </div>`;
+  document.body.appendChild(pop);
+  _crystalPopEl = pop;
+  // 定位：「整个結晶 section 的正上方」— anchor 用 ⚙ 所在的 .equip-section（記憶結晶 那一块）；
+  // 箭头横向指向 ⚙ 自身。
+  const card = btnEl?.closest('.equip-section');
+  const cardRect = card ? card.getBoundingClientRect() : btnEl.getBoundingClientRect();
+  const btnRect = btnEl.getBoundingClientRect();
+  const popW = pop.offsetWidth;
+  const popH = pop.offsetHeight;
+  // 横向：以 slot-card 中心为基准；防溢出
+  let left = cardRect.left + cardRect.width/2 - popW/2 + window.scrollX;
+  const margin = 8;
+  if (left < margin) left = margin;
+  if (left + popW > window.innerWidth - margin) left = window.innerWidth - margin - popW;
+  pop.style.left = left + 'px';
+  // 纵向：卡片**上方**（pop 底边离卡片顶部 12px），箭头朝下指向 ⚙
+  pop.style.top = (cardRect.top - popH - 12 + window.scrollY) + 'px';
+  // 箭头 x：指向 ⚙ 按钮中心（不是卡片中心，更明确指向触发点）
+  const arrowX = btnRect.left + btnRect.width/2 - left + window.scrollX;
+  pop.style.setProperty('--arrow-x', Math.max(12, Math.min(popW - 12, arrowX)) + 'px');
+  setTimeout(() => {
+    _crystalPopHandler = (e) => {
+      if (!pop.contains(e.target) && e.target !== btnEl) closeCrystalDimPopover();
+    };
+    document.addEventListener('click', _crystalPopHandler);
+  }, 0);
+};
+export const closeCrystalDimPopover = () => {
+  if (_crystalPopEl) { _crystalPopEl.remove(); _crystalPopEl = null; }
+  if (_crystalPopHandler) {
+    document.removeEventListener('click', _crystalPopHandler);
+    _crystalPopHandler = null;
+  }
+};
+export const resetCrystalDim = (si, ci) => {
+  const cfg = team[si]?.crystals?.[ci];
+  if (!cfg) return;
+  cfg.weight = 100;
+  cfg.purity = 100;
+  refreshAllStats();
+  if (_crystalPopEl) {
+    _crystalPopEl.querySelectorAll('input').forEach(inp => { inp.value = 100; });
+  }
+}
 export const setMasou = (si,id) => {team[si].masou=id;renderSlot(si);refreshAllStats();}
 export const clearSlot = (si) => {team[si]={chara:null,soul:null,bg:null,masou:null,crystals:[],tr:mkTr()};renderSlot(si);refreshAllStats();}
 
@@ -758,6 +872,20 @@ export const soulMultiplier = (rarity, lv) => {
   const inc = r === 5 ? 0.3 : 0.1;
   return base + inc * (L - maxNoAwk) / range;
 }
+// hit_per_stage* 値を数値化（"1/3" / "0.5" / 0.5 受け入れ、無効値は 0）。
+const _parseHit = (s) => {
+  if (s == null) return 0;
+  if (typeof s === 'number') return Number.isFinite(s) ? s : 0;
+  const t = String(s).trim();
+  if (t === '') return 0;
+  if (t.includes('/')) {
+    const [n, d] = t.split('/').map(parseFloat);
+    return (Number.isFinite(n) && Number.isFinite(d) && d !== 0) ? n / d : 0;
+  }
+  const v = parseFloat(t);
+  return Number.isFinite(v) ? v : 0;
+};
+
 // soul affinity の atk/def_effect 値を数値化。"5/4" / "1.9" / 1.9 全部受け入れ、無効値は 1。
 const _parseAff = (s) => {
   if (s == null) return 1;
@@ -816,11 +944,21 @@ export const _parseScaling = (v) => {
   }
   return parseFloat(v) || 0;
 }
-// Apply 熟度 scaling: bairitu at jukudo = bairitu + jukudo * scaling
-export const _scaledBairitu = (b, sc, jukudo) => {
-  const s = _parseScaling(sc);
-  if (!s) return b;
-  return (b || 0) + Math.max(1, jukudo) * s;
+// chara skill name に Lv2/Lv3/Lv4/Lv5 が含まれるか（Lv50/Lv500 等は対象外）。
+// hensei calc 専用：crawl 段階では effect に保存しない。
+export const _LV2_5_RE = /Lv[2-5](?!\d)/;
+
+// 熟度 scaling 適用：
+//   jkMinus1=true (skill name に Lv2/Lv3/Lv4/Lv5) → b + (jk - 1) * s
+//   それ以外（Lv6+ / Lv1 / 無 Lv 後缀 / chara 以外）→ b + jk * s
+// 任意の jukudo は外側で >=1 にクランプ済み。
+// b / sc 双方とも数値・分式文字列 ("1/2") を受け入れる。
+export const _scaledBairitu = (b, sc, jukudo, jkMinus1 = false) => {
+  const bv = _parseScaling(b);
+  const s  = _parseScaling(sc);
+  if (!s) return bv;
+  const factor = jkMinus1 ? (jukudo - 1) : jukudo;
+  return bv + factor * s;
 }
 
 export const computeStats = (chara, tr, slotIdx) => {
@@ -835,21 +973,35 @@ export const computeStats = (chara, tr, slotIdx) => {
   const hits = Array.isArray(baseHitsRaw) ? baseHitsRaw.slice(0, 3).map(h => +h || 0) : [0, 0, 0];
   while (hits.length < 3) hits.push(0);
   let damageLimit = 2147483647;
-  // bunrui=18（BDゲージの最大値）effects の bairitu を累加。stage 4e では使わず、UI 側の
-  // BDゲージ上限 slider/input/label の max を 9 + bdCapBonus に拡張するためだけに使う。
-  const acc = { stats, damageLimit, hits, bdCapBonus: 0 };
+  // bunrui=18（BDゲージの最大値）は 4 種 calc_type を独立に累加し、最後に合成式で max を計算：
+  //   raw      = ((10 + Σadd) * (1 + Σmul) + ΣfinalAdd) * (1 + ΣfinalMul)
+  //   bdCapMax = floor(raw) - 1
+  // mul/finalMul は (v-1) を累加（「N倍」加性叠加で 1.5×+1.2× → 1.7× の意味）。
+  // base = 10、表示時 -1（BD ゲージ上限は 0-indexed level、buff 無し floor(10)-1 = 9）。
+  const acc = {
+    stats, damageLimit, hits,
+    bdCapAdd: 0,       // ct=1（普通加算）の累加
+    bdCapMul: 0,       // ct=0（普通乗算）の累加：bairitu-1 を加える
+    bdCapFinalAdd: 0,  // ct=2（最終加算）
+    bdCapFinalMul: 0,  // ct=3（最終乗算）：bairitu-1 を加える
+  };
   const tgt = chara;
 
   // Apply one effect to acc, scaled by source HP via _conditionFactor.
   // sourceMult: 来源倍率（魂等级用），默认 1 不影响。
+  // mode: 'add' (ct=1, normal additive) / 'mul' (ct=0, normal multiplicative)
+  //       'final-add' (ct=2, 最終加算) / 'final-mul' (ct=3, 最終乗算)
+  // 加算系（add / final-add）と乗算系（mul / final-mul）は値の適用ロジック共通、ct 過濾だけ違う。
   function _applyEf(e, srcJk, srcHp, mode, sourceMult = 1) {
     const factor = _conditionFactor(e.condition, srcHp);
     const bunrui = e.bunrui || [];
+    const isAddMode = (mode === 'add' || mode === 'final-add');
+    const isMulMode = (mode === 'mul' || mode === 'final-mul');
 
     // ===== Hit 处理（bunrui 含 7）— 每步取整 =====
     // hit_type: 1/0=add (default), 2=mul, 3=set
-    // mode='add' 处理 hit_type 1/0/3；mode='mul' 处理 hit_type 2
-    if (bunrui.includes(7)) {
+    // hit は mode='add'/'mul' のみ処理。final-add/final-mul は hit を再走しない（hit_type=2 で乗算は十分）。
+    if (bunrui.includes(7) && (mode === 'add' || mode === 'mul')) {
       const ht = e.hit_type != null ? e.hit_type : 1;
       const isHitAdd = (ht === 1 || ht === 0 || ht === 3);
       const isHitMul = (ht === 2);
@@ -857,7 +1009,8 @@ export const computeStats = (chara, tr, slotIdx) => {
       const hpss = e.hit_per_stage_scaling || [];
       if ((mode === 'add' && isHitAdd) || (mode === 'mul' && isHitMul)) {
         for (let s = 0; s < 3; s++) {
-          const baseV = (+hps[s] || 0) + Math.max(1, srcJk) * (+hpss[s] || 0);
+          // 新公式：base + (jukudo - 1) * scaling。分数字符列対応のため _parseHit 経由。
+          const baseV = _parseHit(hps[s]) + (srcJk - 1) * _parseHit(hpss[s]);
           if (baseV === 0) continue;
           let v = baseV * sourceMult;
           if (mode === 'add') {
@@ -875,38 +1028,58 @@ export const computeStats = (chara, tr, slotIdx) => {
 
     // ===== Stat / Damage Limit 处理（bunrui 含 1/2/10/12/17 等）=====
     const ct = e.calc_type ?? 1;
-    if (mode === 'add' && ct !== 1) return;
-    if (mode === 'mul' && ct !== 0) return;
-    let v = _scaledBairitu(e.bairitu || 0, e.bairitu_scaling, srcJk) * sourceMult;
-    if (mode === 'add') v = v * factor;
-    else v = (v - 1) * factor + 1;
+    if (mode === 'add'       && ct !== 1) return;
+    if (mode === 'mul'       && ct !== 0) return;
+    if (mode === 'final-add' && ct !== 2) return;
+    if (mode === 'final-mul' && ct !== 3) return;
+    // sourceMult（魂 lv 加成等）の適用 — ゲーム仕様：魂 lv は bairitu に直接乗算される。
+    //   加算：v = bairitu * sourceMult * factor             （加える量を K 倍）
+    //   乗算：v = (bairitu * sourceMult - 1) * factor + 1   （bairitu に直接乗算 →
+    //                                                         condition で净增量を割引）
+    // 例：bairitu=1.5（+50%UP）+ 4★ lv40 (sourceMult=1.4) + 浑身 50%血 (factor=0.5)
+    //   = (1.5*1.4 - 1)*0.5 + 1 = 1.55× （+55%）
+    // bairitu=1 占位 entry も soulMult を受ける — ゲーム仕様で「占位 = ×1 base に魂 lv 倍率」が乗る。
+    const v0 = _scaledBairitu(e.bairitu, e.bairitu_scaling, srcJk, !!e._jkm1);
+    let v;
+    if (isAddMode) v = v0 * sourceMult * factor;
+    else           v = (v0 * sourceMult - 1) * factor + 1;
     for (const b of bunrui) {
       if (b === 7) continue;  // 已在上面处理
       if (b === 17) {
-        if (mode === 'add') acc.damageLimit += v;
-        else acc.damageLimit *= v;
+        if (isAddMode) acc.damageLimit += v;
+        else           acc.damageLimit *= v;
       } else if (b === 18) {
-        // BDゲージ最大値（chara skill / crystal とも calc_type=1 add 想定; mode='mul' は来ない）
-        if (mode === 'add') acc.bdCapBonus += v;
+        // BDゲージ最大値：4 種 mode を独立に累加。mul/finalMul は (v-1) を加える
+        // （v 自体は乗数なので、加性叠加には 1 を引いた残差を取る）。
+        if      (mode === 'add')       acc.bdCapAdd      += v;
+        else if (mode === 'mul')       acc.bdCapMul      += (v - 1);
+        else if (mode === 'final-add') acc.bdCapFinalAdd += v;
+        else if (mode === 'final-mul') acc.bdCapFinalMul += (v - 1);
       } else {
         const stat = _BUNRUI_TO_STAT[b];
         if (!stat || acc.stats[stat] == null) continue;
-        if (mode === 'add') acc.stats[stat] += v;
-        else acc.stats[stat] *= v;
+        if (isAddMode) acc.stats[stat] += v;
+        else           acc.stats[stat] *= v;
       }
     }
   }
+
+  // 全 _applyList 完了後の Final pass 用キュー。BD はここに push しない（skipFinal=true）。
+  const finalDeferred = [];
+
   // Apply a list of effects with srcChara/srcHp/srcJk context: filter by buff scope,
   // then run additive pass, then multiplicative pass.
   // Condition (逆窮鼠/窮鼠/破損) scales bairitu inside _applyEf, no longer a gate.
   // sourceMult: 来源倍率（如魂的 lv 倍率），同时作用于 stat / hit。
   // useElementBuff: 仅魔剣技能 → element 走 tgt.element_buff[]；其他来源传 false。
-  function _applyList(effects, srcChara, srcHp, srcJk, sourceMult = 1, useElementBuff = false) {
+  // skipFinal: BD effects は final pass に参加しない（BD 自体が「最後」なので）。
+  function _applyList(effects, srcChara, srcHp, srcJk, sourceMult = 1, useElementBuff = false, skipFinal = false) {
     if (!effects || !effects.length) return;
     const filtered = effects.filter(e => _buffApplies(srcChara, tgt, e, useElementBuff));
     if (!filtered.length) return;
     for (const e of filtered) _applyEf(e, srcJk, srcHp, 'add', sourceMult);
     for (const e of filtered) _applyEf(e, srcJk, srcHp, 'mul', sourceMult);
+    if (!skipFinal) finalDeferred.push({ effects: filtered, srcJk, srcHp, sourceMult });
   }
 
   // ===== Stage 1: Self omoide (gated by affinity) =====
@@ -924,12 +1097,33 @@ export const computeStats = (chara, tr, slotIdx) => {
     const srcHp = slot.tr?.hpPercent ?? 100;
     const srcJk = Math.max(1, slot.tr?.jukudo || 1);
 
-    // Crystals
+    // Crystals — weight / purity 衰减（占位公式：独立线性、加性叠加；真实公式待测）
+    // step は per-crystal 顶层、delta は per-effect。bairitu_eff = max(minB, max - Σ((100-cfg)/step * delta))
     const crEffs = [];
-    (slot.crystals || []).forEach(cid => {
-      if (!cid) return;
-      const cr = allCrystals.find(x => x.id === cid);
-      if (cr) (cr.effects || []).forEach(e => crEffs.push(e));
+    (slot.crystals || []).forEach(cfg => {
+      if (!cfg) return;
+      const cr = allCrystals.find(x => x.id === cfg.id);
+      if (!cr) return;
+      const wStep = +cr.weight_step || 0;
+      const pStep = +cr.purity_step || 0;
+      for (const e of (cr.effects || [])) {
+        let delta = 0;
+        if (wStep > 0 && e.weight_delta && cfg.weight != null) {
+          delta += (100 - cfg.weight) / wStep * e.weight_delta;
+        }
+        if (pStep > 0 && e.purity_delta && cfg.purity != null) {
+          delta += (100 - cfg.purity) / pStep * e.purity_delta;
+        }
+        // bairitu は数値・分式文字列 ("1/2") 双方受け入れ。
+        const baseB = _parseScaling(e.bairitu);
+        if (delta > 0 && Number.isFinite(baseB)) {
+          const ct = e.calc_type ?? 0;
+          const minB = (ct === 0 || ct === 3) ? 1 : 0;
+          crEffs.push({ ...e, bairitu: Math.max(minB, baseB - delta) });
+        } else {
+          crEffs.push(e);
+        }
+      }
     });
     _applyList(crEffs, srcChara, srcHp, srcJk);
 
@@ -937,7 +1131,12 @@ export const computeStats = (chara, tr, slotIdx) => {
     if (srcChara) {
       const skills = _resolveCharaSkills(srcChara, slot.tr?.state);
       const charaEffs = [];
-      skills.forEach(sk => (sk.effects || []).forEach(e => charaEffs.push(e)));
+      // skill name に Lv2/Lv3/Lv4/Lv5 → bairitu_scaling 公式 (jk-1)*s。それ以外 jk*s。
+      // _jkm1 を effect の浅 copy に注入（src データを汚染しない）。
+      skills.forEach(sk => {
+        const jkm1 = _LV2_5_RE.test(sk.name || '');
+        (sk.effects || []).forEach(e => charaEffs.push(jkm1 ? { ...e, _jkm1: true } : e));
+      });
       _applyList(charaEffs, srcChara, srcHp, srcJk, 1, true);
     }
 
@@ -1038,8 +1237,9 @@ export const computeStats = (chara, tr, slotIdx) => {
     const lv = Math.max(1, Math.min(lvMax, +slot.level || 1));
     for (const e of (em.effects || [])) {
       const ec = Object.assign({}, e);
-      const baseB = +e.bairitu;
-      if (lvMax > 1 && Number.isFinite(baseB)) {
+      // bairitu は数値・分式文字列 ("1/2") 双方受け入れ。
+      const baseB = _parseScaling(e.bairitu);
+      if (lvMax > 1 && Number.isFinite(baseB) && baseB !== 0) {
         ec.bairitu = (baseB - 1) * (lv - 1) / (lvMax - 1) + 1;
       }
       guildEffects.push(ec);
@@ -1049,15 +1249,25 @@ export const computeStats = (chara, tr, slotIdx) => {
     // src=null：scope=0/3 不会应用（要 src.id===tgt.id），其他全部按 _buffApplies 走
     _applyList(guildEffects, null, 100, 1, 1);
   }
-  // 4e. BDゲージ上限：enemy.bd_cap = 当前選択値（[0, 9 + bdCapBonus] 範囲）。
+  // 4e. BDゲージ上限：enemy.bd_cap = 当前選択値（[0, _computeBdCapMax()] 範囲）。
   //     倍率 = 1 + (bd_cap // 2) * 0.25 → 攻撃力 (bunrui=1)。
-  //     bunrui=18 effects は acc.bdCapBonus に累加され、UI 側で slider/input の
-  //     max を 9 + bdCapBonus に拡張するために使う（倍率公式自体には加算しない）。
+  //     bunrui=18 effects は 4 種 ct を独立累加し、合成式
+  //     ((10 + Σadd)*(1 + Σmul) + ΣfinalAdd)*(1 + ΣfinalMul) を floor して -1 で slot ごとに max を出し、
+  //     slot 間の最大値を取って floor → slider/input の max 属性に流す。倍率公式自体には加算しない。
   const bdCap = +enemy.bd_cap || 0;
   const bdCapMult = 1 + Math.floor(bdCap / 2) * 0.25;
   acc.stats['攻撃力'] *= bdCapMult;
 
-  // ===== Stage 5: BD effects（仅 tr.bd_on === true 的 slot 触发，最终步骤）=====
+  // ===== Stage 5: Final pass — 全 normal stage 完了後に ct=2 (最終加算) → ct=3 (最終乗算) =====
+  // BD は finalDeferred に入っていない（_applyList を skipFinal=true で呼ぶ）ので影響しない。
+  for (const it of finalDeferred) {
+    for (const e of it.effects) _applyEf(e, it.srcJk, it.srcHp, 'final-add', it.sourceMult);
+  }
+  for (const it of finalDeferred) {
+    for (const e of it.effects) _applyEf(e, it.srcJk, it.srcHp, 'final-mul', it.sourceMult);
+  }
+
+  // ===== Stage 6: BD effects（仅 tr.bd_on === true 的 slot 触发；BD は全 final 之後に走る）=====
   for (let si = 0; si < teamSize; si++) {
     const slot = team[si]; if (!slot) continue;
     if (!slot.tr?.bd_on) continue;
@@ -1067,10 +1277,13 @@ export const computeStats = (chara, tr, slotIdx) => {
     if (!bdEffs.length) continue;
     const srcHp = slot.tr?.hpPercent ?? 100;
     const srcJk = Math.max(1, slot.tr?.jukudo || 1);
-    _applyList(bdEffs, srcChara, srcHp, srcJk, 1, true);
+    _applyList(bdEffs, srcChara, srcHp, srcJk, 1, true, /* skipFinal */ true);
   }
 
-  return { stats: acc.stats, damageLimit: acc.damageLimit, hits: acc.hits, bdCapBonus: acc.bdCapBonus || 0 };
+  // BDゲージ最大値の合成：((10 + 普通加算) * (1 + 普通乗算) + 最終加算) * (1 + 最終乗算) → floor して -1
+  const bdCapRaw = ((10 + acc.bdCapAdd) * (1 + acc.bdCapMul) + acc.bdCapFinalAdd) * (1 + acc.bdCapFinalMul);
+  const bdCapMax = Math.floor(bdCapRaw) - 1;
+  return { stats: acc.stats, damageLimit: acc.damageLimit, hits: acc.hits, bdCapMax };
 }
 
 // ===== ENEMY BAR (敵方/副本/工会信息) =====
@@ -1196,7 +1409,7 @@ export const setEnemyDiff = (d) => { enemy.difficulty = d;     renderEnemyBar();
 export const setEnemyGuildTitle = (v) => { enemy.guildTitle = v ? +v : null; renderEnemyBar(); refreshAllStats(); }
 export const setEnemyBdCap = (v) => {
   let n = parseInt(v, 10); if (!Number.isFinite(n)) n = 0;
-  // 動的 max：slider の max 属性を信頼する（renderEnemyBar 側で 9 + bdCapBonus 拡張済み）
+  // 動的 max：slider の max 属性を信頼する（renderEnemyBar 側で _computeBdCapMax() 拡張済み）
   const sl = document.querySelector('.bd-cap-slider');
   const dynMax = sl ? (+sl.max || 9) : 9;
   enemy.bd_cap = Math.max(0, Math.min(dynMax, n));
@@ -1458,22 +1671,21 @@ export const refreshStatsPanel = (i) => {
   const c = allCharas.find(x => x.id === team[i].chara);
   el.innerHTML = _statsInner(i, c);
 }
-// BDゲージ上限 max 算出: 9 + 一切 buff（bunrui=18 effects の累加）→ 最後に floor。
-// 各 slot の bdCapBonus（chara skill / crystal / soul / bg / masou から scope filter 通過分の和）
-// の最大値を採用。基础上限 9.9，例: bonus=0 → floor(9.9)=9, bonus=2.84 → floor(12.74)=12。
+// BDゲージ上限 max 算出：各 slot の bdCapMax（computeStats 内で floor((10+Σadd)*(1+Σmul)
+// +ΣfinalAdd)*(1+ΣfinalMul)) - 1 まで完了済み）の最大値を採用。基础 buff 無し = floor(10) - 1 = 9。
 const _computeBdCapMax = () => {
-  let bonusMax = 0;
+  let bdMax = 9;  // baseline (buff 無し時の floor(10)-1)
   for (let si = 0; si < teamSize; si++) {
     const slot = team[si]; if (!slot) continue;
     const ch = allCharas.find(x => x.id === slot.chara);
     if (!ch) continue;
     const r = computeStats(ch, slot.tr, si);
-    if (r && (r.bdCapBonus || 0) > bonusMax) bonusMax = r.bdCapBonus;
+    if (r && (r.bdCapMax || 0) > bdMax) bdMax = r.bdCapMax;
   }
-  return Math.floor(9.9 + bonusMax);
+  return bdMax;
 };
 
-// chara/soul/crystal/bg/masou 切替や 練度 変更で bdCapBonus が変わった時、
+// chara/soul/crystal/bg/masou 切替や 練度 変更で bdCapMax が変わった時、
 // renderEnemyBar 全体は重いので slider/input/label の max 属性だけ更新する。
 const refreshBdCapMax = () => {
   const bdCapMax = _computeBdCapMax();
@@ -1494,7 +1706,7 @@ export const refreshAllStats = () => {
 // ===== ENTITY MODAL =====
 let emSlot=-1, emType=null, emCi=-1;
 const mf={
-  chara:{q:'',rarity:new Set(),element:new Set(),type:new Set(),state:new Set(),bdSpecial:new Set(),omoideRarity:new Set(),sort:'',desc:true},
+  chara:{q:'',rarity:new Set(),element:new Set(),type:new Set(),state:new Set(),tags:new Set(),omoideRarity:new Set(),sort:'',desc:true},
   soul: {q:'',rarity:new Set(),element:new Set(),type:new Set(),sort:'',desc:true},
   bg:   {q:'',rarity:new Set(),element:new Set(),weapon:new Set(),bunrui:new Set()},
   crystal:{q:'',rarity:new Set(),element:new Set(),weapon:new Set(),bunrui:new Set(),condition:new Set(),scope:new Set()},
@@ -1534,8 +1746,8 @@ export const buildEMSidebar = (type) => {
     h+=fsec('属性','element',[1,2,3,4,5,6].map(k=>[k,ELEMENT[k],k===6?'':'elem-'+k]),f.element);
     h+=fsec('武器種','type',Object.keys(WEAPON).map(k=>[+k,WEAPON[k]]),f.type);
     h+=fsec('状態','state',[['極弐','極弐'],['改造','改造'],['通常','通常']],f.state);
-    h+=`<div class="f-section"><div class="f-label">BD特殊効果</div><div class="f-toggles">`
-      +Object.keys(BD_SPECIAL).map(k=>`<button class="ftog${f.bdSpecial.has(+k)?' on':''}" style="color:${BD_SPECIAL_COLOR[k]}" data-fkey="bdSpecial" data-fval="${k}">${BD_SPECIAL[k]}</button>`).join('')
+    h+=`<div class="f-section"><div class="f-label">魔剣特性</div><div class="f-toggles">`
+      +Object.keys(CHARA_TAG).map(k=>`<button class="ftog${f.tags.has(+k)?' on':''}" style="color:${CHARA_TAG_COLOR[k]}" data-fkey="tags" data-fval="${k}">${CHARA_TAG[k]}</button>`).join('')
       +`</div></div>`;
     h+=fsec('好感稀有度','omoideRarity',[[5,'限定SS'],[4,'SS'],[3,'S'],[2,'AA'],[1,'A']],f.omoideRarity);
     h+=`<div class="f-sort-row"><select id="em-sort" onchange="mf['chara'].sort=this.value;applyEM()">
@@ -1771,7 +1983,7 @@ export const renderEMList = (items) => {
     }).join('');
   } else if(type==='crystal'){
     h+=items.map(c=>{
-      const cur=team[emSlot]?.crystals[emCi]===c.id;
+      const cur=team[emSlot]?.crystals[emCi]?.id===c.id;
       return min`
         <div class="em-item em-item-bg${cur?' active':''}" onclick="selectEM(${c.id})">
           <img class="em-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id % 100000}.jpg" onerror="this.style.visibility='hidden'" alt="">
@@ -1884,8 +2096,8 @@ export const renderDMSoul = (s) => {
     const label=_AFF_LABEL[lv]||'普通';
     const clr=_AFF_CLR[lv];
     const bdr=_AFF_BDR[lv];
-    const atk=aff?.atk_effect??'1';
-    const def=aff?.def_effect??'1';
+    const atk=fmtAff(aff?.atk_effect);
+    const def=fmtAff(aff?.def_effect);
     return min`
       <div class="sdm-aff-cell"${bdr?` style="border-color:${bdr}"`:''}>
         <span class="sdm-aff-name">${escHtml(name)}</span>
@@ -1898,7 +2110,7 @@ export const renderDMSoul = (s) => {
   const skills=_resolveSoulSkills(s);
   const skillCards=skills.map(sk=>{
     const tags=dmRightTags(sk);
-    const bairitu=dmFmtBairitu(sk);
+    const bairitu=fmtBairitu(sk);
     return min`
       <div class="dm-skill-card">
         <div class="dm-skill-name-row">
@@ -1949,7 +2161,7 @@ export const renderDMBg = (b) => {
     const btags=(ef.bunrui||[]).map(bn=>`<span class="bunrui-tag">${BUNRUI_SHORT[bn]||bn}</span>`).join('');
     const cond=ef.condition?`<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition]||''}</span>`:'';
     const sl=_bgScopeLabel(ef);
-    const scope=sl?`<span class="tag-scope tag-lim">${escHtml(sl)}</span>`:'';
+    const scope=sl?`<span class="scope-tag scope-lim">${escHtml(sl)}</span>`:'';
     const val=ef.bairitu!=null?`<span class="tag-val">${ef.calc_type===1?'+':'×'}${fmtLarge(ef.bairitu)}</span>`:'';
     return`<div class="bgdm-eff-line">${btags}${cond}${scope}${val}</div>`;
   }).join('');
@@ -1976,7 +2188,7 @@ export const renderDMMasou = (m) => {
     const btags=(ef.bunrui||[]).map(bn=>`<span class="bunrui-tag">${BUNRUI_SHORT[bn]||bn}</span>`).join('');
     const cond=ef.condition?`<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition]||''}</span>`:'';
     const sl=_bgScopeLabel(ef);
-    const scope=sl?`<span class="tag-scope tag-lim">${escHtml(sl)}</span>`:'';
+    const scope=sl?`<span class="scope-tag scope-lim">${escHtml(sl)}</span>`:'';
     const val=ef.bairitu!=null?`<span class="tag-val">${ef.calc_type===1?'+':'×'}${fmtLarge(ef.bairitu)}</span>`:'';
     return`<div class="bgdm-eff-line">${btags}${cond}${scope}${val}</div>`;
   }).join('');
@@ -2048,14 +2260,15 @@ export const renderDMChara = (c) => {
         <div class="dm-bd-label">BD SKILL${c.bd_skill.cost!=null?` &nbsp; コスト ${c.bd_skill.cost}`:''}</div>
         <div class="dm-bd-name">${escHtml(c.bd_skill.name)}</div>
         <div class="dm-bd-eff">${escHtml(c.bd_skill.effect_text||'')}</div>
-        ${(c.bd_skill.special||[]).length||(c.bd_skill.duration) ? min`
+        ${(c.bd_skill.duration || c.bd_skill.bdhit>1) ? min`
           <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">
-            ${(c.bd_skill.special||[]).map(s=>`<span class="bd-sp-tag bd-sp-${s}">${BD_SPECIAL[s]||s}</span>`).join('')}
             ${c.bd_skill.duration?`<span class="bd-dur-tag">${escHtml(c.bd_skill.duration)}</span>`:''}
             ${c.bd_skill.bdhit>1?`<span class="bd-hit-tag">${c.bd_skill.bdhit}連</span>`:''}
           </div>` : ''}
       </div>
     </div>` : '';
+  const tagsHtml = (c.tags || []).map(s =>
+    `<span class="bd-sp-tag bd-sp-${s}">${CHARA_TAG[s] || s}</span>`).join('');
   return min`
     <div class="dm-chara-header">
       <img class="dm-chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">
@@ -2067,6 +2280,7 @@ export const renderDMChara = (c) => {
           <span class="dm-meta-chip">${wName}</span>
           ${c.url?`<a class="dm-meta-chip" href="${c.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>`:''}
         </div>
+        ${tagsHtml?`<div class="dm-chara-tags" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">${tagsHtml}</div>`:''}
       </div>
     </div>
     ${bdSection}
@@ -2088,7 +2302,7 @@ export const renderDMState = (state,stateLabel,chara) => {
   if(allSkills.length){
     const cards=allSkills.map(s=>{
       const tags=dmRightTags(s);
-      const bairitu=dmFmtBairitu(s);
+      const bairitu=fmtBairitu(s);
       return min`
         <div class="dm-skill-card">
           <div class="dm-skill-name-row">
@@ -2122,23 +2336,6 @@ export const dmRightTags = (s) => {
   return`<div class="dm-skill-tags">${tags}</div>`;
 }
 
-export const dmFmtBairitu = (s) => {
-  return(s.effects||[]).map(e=>{
-    const bunrui = e.bunrui || [];
-    const isHitOnly = bunrui.length===1 && bunrui[0]===7;
-    if(isHitOnly) return fmtHitStages(e);
-    let bs='';
-    if(e.bairitu!=null && e.bairitu!==0){
-      bs = e.calc_type===1?('+'+fmtLarge(e.bairitu)):('x'+e.bairitu);
-      if(e.bairitu_scaling) bs += ' + '+e.bairitu_scaling+'*熟度';
-    }
-    if(bunrui.includes(7)){
-      const h = fmtHitStages(e);
-      if(h) bs = bs ? (bs+' / '+h) : h;
-    }
-    return bs;
-  }).filter(Boolean).join(' / ');
-}
 
 export const renderDMStats = (stats) => {
   const max=stats.max||{},init=stats.initial||null;
@@ -2197,8 +2394,10 @@ export const renderSlot = (i) => {
   const enam=chara?(ELEMENT[chara.element]||''):'';
   const wnam=chara?(WEAPON[chara.type]||''):'';
 
+  const charaTagsHtml = chara ? (chara.tags || []).map(s =>
+    `<span class="bd-sp-tag bd-sp-${s}">${CHARA_TAG[s] || s}</span>`).join('') : '';
   const hdrName=chara
-    ?`<span class="slot-chara-name">${escHtml(chara.name)}</span><span class="slot-chara-meta">${enam} ${wnam}</span>`
+    ?`<span class="slot-chara-name">${escHtml(chara.name)}</span>${charaTagsHtml?`<span class="slot-chara-tags" style="display:inline-flex;gap:3px;flex-wrap:wrap;margin-left:6px">${charaTagsHtml}</span>`:''}`
     :`<span class="slot-chara-name" style="color:var(--text2);font-style:italic">未選択</span>`;
 
   const charaIcon=chara
@@ -2214,8 +2413,14 @@ export const renderSlot = (i) => {
   let crystalHtml='';
   if(chara){
     const slots=Array.from({length:nCr},(_,ci)=>{
-      const cid=t.crystals[ci]??null;
+      const cfg=t.crystals[ci]??null;
+      const cid=cfg?.id??null;
       const cr=cid?allCrystals.find(x=>x.id===cid):null;
+      // ⚙ 按钮：仅当 crystal 有 weight_step > 0 或 purity_step > 0 才显示
+      const hasDims = !!(cr && ((+cr.weight_step || 0) > 0 || (+cr.purity_step || 0) > 0));
+      const cfgBtn = hasDims
+        ? `<button class="crystal-cfg-btn" onclick="openCrystalDimPopover(${i},${ci},this)" title="重量/純度">⚙</button>`
+        : '';
       return cr
         ?`<div class="crystal-slot-wrap">
             <div class="crystal-thumb-wrap">
@@ -2223,6 +2428,7 @@ export const renderSlot = (i) => {
                 onerror="this.style.visibility='hidden'" title="${escHtml(cr.name)}"
                 onclick="openEM(${i},'crystal',${ci})">
               <button class="crystal-rm" onclick="setCrystal(${i},${ci},null)" title="外す">×</button>
+              ${cfgBtn}
             </div>
           </div>`
         :`<div class="crystal-slot-wrap">
@@ -2380,7 +2586,8 @@ window.mf = mf;
 Object.assign(window, {
   emblemLvMax, elementMatchupMult, mkTr, crystalSlotCount, fmtVal, fmtScopeTag,
   renderEfRow, renderSkillsPanel, renderBgPanel, renderMasouPanel, renderCrystalEffList, autoAssignSoul, syncCrystals,
-  setTeamSize, setChara, setSoul, setBG, setCrystal, setMasou, clearSlot,
+  setTeamSize, setChara, setSoul, setBG, setCrystal, setCrystalDim, setMasou, clearSlot, cryLvMax,
+  openCrystalDimPopover, closeCrystalDimPopover, resetCrystalDim,
   setTrField, setJukudoSlider, setTrNum, setLevel, setLevelInput, setHpSlider,
   setHpInput, setAffinity, setSoulLv, setSoulAwk, renderSoulTraining, renderTraining,
   soulMultiplier, soulLvCap, computeStats, renderEnemyBar, setEnemyElem, setEnemyBk,
@@ -2390,7 +2597,7 @@ Object.assign(window, {
   renderStatsPanel, refreshStatsPanel, refreshAllStats, openEM, closeEM, buildEMSidebar,
   fsec, bunruiSec, resetEM, applyEM, renderSortBadge, renderEMList,
   selectEM, openDetailModal, closeDetailModal, selectFromDetail, renderDMSoul, renderDMBg, renderDMMasou,
-  renderDMCrystal, renderDMChara, switchDMState, renderDMState, dmRightTags, dmFmtBairitu,
+  renderDMCrystal, renderDMChara, switchDMState, renderDMState, dmRightTags,
   renderDMStats, renderDMBasicInfo, toggleDetail, renderAll, renderSlot, isMob,
   msiClick, updateMobIndicator, updateMobVisible, flipMobSlot
 });

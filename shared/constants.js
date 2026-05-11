@@ -36,8 +36,46 @@ export const BUNRUI_FILTER = {
   16:'他',     17:'ダメージ上限', 18:'BD最大値', 19:'結晶枠', 20:'EXP', 21:'BDhit'
 };
 
-export const BD_SPECIAL       = {1:'時止め',2:'麻痺',3:'強制ブレイク',5:'弱体解除',6:'高倍率バフ'};
-export const BD_SPECIAL_COLOR = {1:'#60c0ff',2:'#c060ff',3:'#ff9a40',5:'#50d070',6:'#ffc840'};
+// ============ 魔剣特性 tag enum ============
+// chara.tags = int[]（顶层字段；旧 chara.bd_skill.special 已整体迁移上来）
+// ⚠ 新 tag 在下方追加 entry（id 唯一、不重用）。
+// 同时改：
+//   - CHARA_TAG_COLOR（同 id 的色彩）
+//   - scripts/crawl_chara.py compute_chara_tags()（自動検出 logic）
+//   - tests/test_data_integrity.cjs 的 EXPECTED_TAG_IDS（chara.tags 校验）
+//   - docs/skills_schema.md CHARA_TAG 表
+export const CHARA_TAG = {
+  1:  '時止め',       // BD 子页面 altema.jp/bxb/tokitomebd
+  2:  '麻痺',         // BD 子页面 altema.jp/bxb/mahibd
+  3:  '強制ブレイク',  // BD 効果文「強制ブレイク」
+  4:  '弱体解除',     // BD 効果文「弱体化解除」「弱体化を解除」
+  5:  'BDバフ',       // BD 子页面 altema.jp/bxb/buffbd
+  6:  'AOE',          // chara skill effect の bunrui に 8 を含む（「攻撃範囲が敵全体になる」全体化）
+  7:  '13倍',         // chara 通常 skill 内 bunrui=[1] + scope∈{1,2} + bairitu>=13（BD 除外）
+  8:  '回復',         // chara skill effect の bunrui に 11 を含む（パッシブ HP 回復）
+  9:  '復活',         // skill / BD 効果文に「復活」「蘇生」
+  10: 'BD回復',       // BD effect の bunrui に 11 を含む（BD 発動時の味方 HP 回復）
+  11: 'ルビー',       // chara skill effect の bunrui に 15 を含む（ルビー量 UP 系 passive buff）
+  12: 'ダメ上限',     // chara skill effect: bunrui に 17 を含む + scope∈{1,2}（団体ダメージ上限 UP；BD 除外）
+  13: 'HIT',          // chara 通常 skill 内 bunrui に 7 を含む + scope∈{1,2}（団体ヒット数 UP；BD 除外）
+  14: 'BDHIT',        // chara 通常 skill 内 bunrui に 21 を含む + scope∈{1,2}（団体 BD ヒット数 UP；BD 除外）
+};
+export const CHARA_TAG_COLOR = {
+  1:  '#60c0ff',
+  2:  '#c060ff',
+  3:  '#ff9a40',
+  4:  '#50d070',
+  5:  '#ffc840',
+  6:  '#ff85b7',  // AOE — pink, range-attack
+  7:  '#e84a4a',  // 13倍 — red, attacker
+  8:  '#5fd8a0',  // 回復 — mint, healer (passive)
+  9:  '#b070ff',  // 復活 — lavender, revive
+  10: '#2db383',  // BD回復 — darker mint, BD-active healer
+  11: '#e0115f',  // ルビー — ruby red gem
+  12: '#4ab8c8',  // ダメ上限 — cyan-blue, hard-cap breaker
+  13: '#4488dd',  // HIT — royal blue, multi-hit
+  14: '#cc7733',  // BDHIT — rust orange, BD multi-hit
+};
 
 // 結晶 effects[].scope（详情/编辑下拉用长版，filter 按钮用短版）
 export const SCOPE       = {0:'自身/制限なし', 1:'セット全体', 2:'セット属性/武器限', 3:'自身属性/武器限', 5:'キャラ限定'};

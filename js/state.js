@@ -20,7 +20,7 @@ export const state = {
   masouSessionReviseIds: new Set(),  // 当前会话で触れた masou_id（revise 提出時の session_ids）
   filterSets:      {
     rarity: new Set(), element: new Set(), type: new Set(),
-    state: new Set(), bdSpecial: new Set(), omoideRarity: new Set(),
+    state: new Set(), tags: new Set(), omoideRarity: new Set(),
   },
 
   // filter panel
@@ -39,6 +39,10 @@ export const state = {
   // sticky header
   _stickyResizeObserver: null,
   _stickyMeasureRAF:     null,
+
+  // 本地用：data/characters_check.json 存在時に per-item check 標記を有効化（soul と同款）
+  charaCheckEnabled: false,
+  charaCheck:        new Set(),
 };
 
 export const OMOIDE_KEYS = new Set(['omoide', 'omoide_template', 'omoide_rarity']);

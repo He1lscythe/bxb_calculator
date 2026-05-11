@@ -272,8 +272,7 @@ def main():
     parser.parse_args()
 
     os.makedirs(DATA_DIR, exist_ok=True)
-    out_path    = os.path.join(DATA_DIR, OUTPUT_FILE)
-    revise_path = os.path.join(DATA_DIR, 'crystals_revise.json')
+    out_path = os.path.join(DATA_DIR, OUTPUT_FILE)
 
     print(f"Fetching {LIST_URL} ...")
     resp = requests.get(LIST_URL, headers=HEADERS, timeout=30)
@@ -287,39 +286,9 @@ def main():
 
     split_pure_memory(crystals)
 
-    def deep_update(target, patch):
-        for k, v in patch.items():
-            if k == 'id':
-                continue
-            tv = target.get(k)
-            # Sparse array diff: target is list, patch is dict with all-numeric keys
-            if isinstance(tv, list) and isinstance(v, dict) and v and \
-                    all(isinstance(kk, str) and kk.isdigit() for kk in v.keys()):
-                for ki, pi in v.items():
-                    idx = int(ki)
-                    if idx >= len(tv):
-                        continue
-                    if isinstance(pi, dict) and isinstance(tv[idx], dict):
-                        deep_update(tv[idx], pi)
-                    else:
-                        tv[idx] = pi
-            elif isinstance(v, dict) and isinstance(tv, dict):
-                deep_update(tv, v)
-            else:
-                target[k] = v
-    if os.path.exists(revise_path):
-        with open(revise_path, encoding='utf-8') as f:
-            revise_map = {c['id']: c for c in json.load(f)}
-        if revise_map:
-            idx_map = {c['id']: i for i, c in enumerate(crystals)}
-            patched = 0
-            for rid, record in revise_map.items():
-                if rid in idx_map:
-                    deep_update(crystals[idx_map[rid]], record)
-                    patched += 1
-                else:
-                    print(f"  [revise] id={rid} not found in crystals, skipping")
-            print(f"Applied {patched} revise patches")
+    # NOTE: crystals_revise.json は recal 時に crystals.json に merge しない。
+    # crystals.json は純粋な parser 出力として保ち、revise は frontend
+    # (crystals.html / hensei.html) がランタイムで deepApply する。
 
     with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(crystals, f, ensure_ascii=False, indent=2)

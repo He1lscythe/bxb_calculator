@@ -56,7 +56,7 @@
 
       <div class="filter-section">
         <div class="filter-label">得意武器</div>
-        <div class="filter-toggles" id="f-type"></div>
+        <div class="filter-toggles grid-6" id="f-type"></div>
       </div>
 
       </div><!-- #filters-body -->
@@ -93,7 +93,7 @@ import { ELEMENT, WEAPON, BUNRUI_SHORT, CONDITION, ELEMS_ORDER, WEAPONS_ORDER,
 import { FilterCore } from '../shared/filter-core.js';
 import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
 import { SOUL_SPEC } from '../shared/soul-spec.js';
-import { escHtml, fmt, fmtBairitu, fmtHitStages, ctPfx, hideLoading } from '../js/utils.js';
+import { escHtml, fmt, fmtBairitu, fmtHitStages, ctPfx, parseBairituVal, hideLoading } from '../js/utils.js';
 import { deepApply } from '../js/diff.js';
 import { initFilterToggles, toggleFilter, toggleFilters, collapseFiltersOnScroll,
          toggleSortDir, resetFilters, applyFilters } from '../js/soul-filter.js';
@@ -123,13 +123,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const idx = state.allSouls.findIndex(x => x.id === s.id);
         if (idx >= 0) deepApply(state.allSouls[idx], s);
       });
+      // soul_check.json は本地のみ存在：fetch 成功なら per-item checkbox UI を有効化
+      return fetch('../data/soul_check.json');
+    })
+    .then(r => r && r.ok ? r.json() : null)
+    .then(arr => {
+      if (Array.isArray(arr)) {
+        state.soulCheckEnabled = true;
+        arr.forEach(id => state.soulCheck.add(id));
+      }
       applyFilters();
       hideLoading();
     })
     .catch(() => { applyFilters(); hideLoading(); });
 });
 
-window.addEventListener('scroll', collapseFiltersOnScroll, { passive: true });
+// 「絞り込み」展開中の user-initiated scroll でのみ collapse — touchmove (mobile) / wheel (desktop)。
+// scroll 事件は使わない：filter 操作後の list 高さ変化による浏览器 auto-clamp scrollY を user スクロールと誤判するため。
+window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
+window.addEventListener('wheel',     collapseFiltersOnScroll, { passive: true });
 window.addEventListener('resize', setupStickyHeights, { passive: true });
 
 // Expose globals for inline HTML onclick handlers
@@ -145,6 +157,7 @@ Object.assign(window, {
   updateReviseBar,
   escHtml, fmtBairitu, setPath: (o,p,v) => { const parts=p.split('.'); let c=o; for(let i=0;i<parts.length-1;i++){if(c[parts[i]]==null)c[parts[i]]={};c=c[parts[i]];} c[parts[parts.length-1]]=v; },
   parseAffEffect: (s) => { s = String(s).trim(); return s === '' ? '1' : s; },
+  parseBairituVal,
 });
 </script>
 </body>

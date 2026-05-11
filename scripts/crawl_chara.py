@@ -44,21 +44,46 @@ BD_SPECIAL_FILE      = "bd_special.json"
 BD_SPECIAL_DUR_FILE  = "bd_special_durations.json"
 REQUEST_DELAY  = 2.0
 
-# BD special effects: id → label
-BD_SPECIAL_LABELS = {
+# ============ progress.json part-level tracking ============
+# 6 part に分けて、wiki から取れなかった part がある chara は次回 retry 対象。
+# 完整判定：bd_skill / 潜在解放 は顶层；其他 4 つは任一 state にあれば true。
+PART_KEYS = ['bd_skill', 'skills', '基本情報', 'ステータス', 'プロフィール', '潜在解放']
+
+
+def _chara_parts_status(chara):
+    """各 part が wiki から取れているか判定 → {part_name: bool} dict 返却."""
+    states = list((chara.get('states') or {}).values())
+    any_state_has = lambda k: any(bool(s.get(k)) for s in states)
+    return {
+        'bd_skill':    bool((chara.get('bd_skill') or {}).get('name')),
+        'skills':      any_state_has('skills'),
+        '基本情報':     any_state_has('basic_info'),
+        'ステータス':    any_state_has('stats'),
+        'プロフィール':  any_state_has('profile'),
+        '潜在解放':    bool(chara.get('omoide')),
+    }
+
+# =========== 魔剣特性 tag（chara.tags = int[]） ============
+# ⚠ 新 tag 在此处追加 (id 唯一、不重用)。同时改：
+#   - shared/constants.js CHARA_TAG / CHARA_TAG_COLOR
+#   - BD_SPECIAL_PAGES（如果有 wiki 子页面来源）
+#   - _BD_SP_TEXT（如果是文本关键词扫描）
+#   - tests/test_data_integrity.cjs expected key set
+#   - docs/skills_schema.md tag 表
+SPECIAL_LABELS = {
     1: '時止め', 2: '麻痺', 3: '強制ブレイク',
-    5: '弱体解除', 6: '高倍率バフ',
+    4: '弱体解除', 5: '高倍率バフ',
 }
 # Sub-pages for page-sourced special effects
 BD_SPECIAL_PAGES = {
     1: 'https://altema.jp/bxb/tokitomebd',
     2: 'https://altema.jp/bxb/mahibd',
-    6: 'https://altema.jp/bxb/buffbd',
+    5: 'https://altema.jp/bxb/buffbd',
 }
-# Text-based detection patterns for remaining specials
+# Text-based detection patterns for remaining tags
 _BD_SP_TEXT = {
     3: re.compile(r'強制ブレイク'),
-    5: re.compile(r'弱体化解除|弱体化を解除'),
+    4: re.compile(r'弱体化解除|弱体化を解除'),
 }
 
 HEADERS = {
@@ -257,7 +282,7 @@ def crawl_bd_special(session, out_dir, char_name_map=None):
     for sid, url in BD_SPECIAL_PAGES.items():
         resp = fetch_page(session, url)
         if not resp:
-            print(f"  [bd_special] Failed to fetch {BD_SPECIAL_LABELS[sid]}")
+            print(f"  [bd_special] Failed to fetch {SPECIAL_LABELS[sid]}")
             continue
         soup = BeautifulSoup(resp.text, 'html.parser')
         ids_found = set()
@@ -296,7 +321,7 @@ def crawl_bd_special(session, out_dir, char_name_map=None):
             special_map.setdefault(cid, [])
             if sid not in special_map[cid]:
                 special_map[cid].append(sid)
-        msg = f"  [bd_special] {BD_SPECIAL_LABELS[sid]}: {len(ids_found)} entries"
+        msg = f"  [bd_special] {SPECIAL_LABELS[sid]}: {len(ids_found)} entries"
         if unresolved:
             msg += f" ({unresolved} name-unresolved, stored by page_id)"
         print(msg)
@@ -309,6 +334,106 @@ def crawl_bd_special(session, out_dir, char_name_map=None):
         json.dump({str(k): {str(sk): sv for sk, sv in v.items()} for k, v in duration_map.items()},
                   f, ensure_ascii=False, indent=2)
     return special_map, duration_map
+
+
+def _parse_bairitu_num(v):
+    """bairitu 値を浮動小数に正規化。分式文字列 "13/2" も対応。失敗時 None。"""
+    if v is None:
+        return None
+    if isinstance(v, (int, float)):
+        return float(v)
+    if isinstance(v, str):
+        s = v.strip()
+        if not s:
+            return None
+        if '/' in s:
+            try:
+                a, b = s.split('/', 1)
+                a, b = float(a), float(b)
+                return a / b if b != 0 else None
+            except (ValueError, ZeroDivisionError):
+                return None
+        try:
+            return float(s)
+        except ValueError:
+            return None
+    return None
+
+
+_REVIVE_RE = re.compile(r'復活|蘇生')
+
+
+def compute_chara_tags(chara, bd_special=None):
+    """魔剣特性 tag set を計算（BD 子页面 + 効果文本扫 + skill effect 数値判定の融合）。
+
+    ⚠ 新 tag 在この関数に detection block 追加。同時に：
+      - shared/constants.js CHARA_TAG / CHARA_TAG_COLOR
+      - tests/test_data_integrity.cjs EXPECTED_TAG_IDS
+      - docs/skills_schema.md CHARA_TAG 表
+      - SPECIAL_LABELS / BD_SPECIAL_PAGES / _BD_SP_TEXT（BD 子页面 / 文本扫源あり時）
+    """
+    tags = set()
+    bd = chara.get('bd_skill') or {}
+    bd_text = unicodedata.normalize('NFKC', bd.get('effect_text', '') or '')
+
+    # ====== BD 子页面来源（1 時止め / 2 麻痺 / 5 BDバフ） ======
+    if bd_special:
+        cid = chara['id']
+        sid = chara.get('sort_id', cid)
+        tags.update(bd_special.get(cid, []))
+        tags.update(bd_special.get(sid, []))
+
+    # ====== BD 効果文本扫描（3 強制ブレイク / 4 弱体解除） ======
+    for tid, pat in _BD_SP_TEXT.items():
+        if pat.search(bd_text):
+            tags.add(tid)
+
+    # ====== chara skill effect 数値・文本判定 ======
+    # 注：tag 6 AOE / 7 13倍 etc. は BD で発火させない（BD は全部 scope=1 / 高倍率なので過剰検出）
+    # tag 8 回復 と tag 10 BD回復 は分離：8 は chara skill effect、10 は BD effect 内の bunrui=11。
+    for state in (chara.get('states') or {}).values():
+        for sk in (state.get('skills') or []):
+            sk_text = sk.get('effect_text', '') or ''
+            # 9 復活: effect_text に 復活 / 蘇生
+            if _REVIVE_RE.search(sk_text):
+                tags.add(9)
+            for e in (sk.get('effects') or []):
+                bunrui = e.get('bunrui') or []
+                ct = e.get('calc_type', 0)
+                b = _parse_bairitu_num(e.get('bairitu'))
+                scope = e.get('scope', 0)
+                # 6 AOE: chara skill effect の bunrui に 8（「攻撃範囲が敵全体になる」全体化）
+                if 8 in bunrui:
+                    tags.add(6)
+                # 7 13倍: chara 通常 skill 内 bunrui=[1] + scope∈{1,2} + bairitu>=13
+                # （BD は除外、calc_type 不問。高倍率 attacker buff の判定）
+                if len(bunrui) == 1 and bunrui[0] == 1 and scope in (1, 2) and b is not None and b >= 13:
+                    tags.add(7)
+                # 8 回復（パッシブ）: chara skill effect の bunrui に 11
+                if 11 in bunrui:
+                    tags.add(8)
+                # 11 ルビー: chara skill effect の bunrui に 15（ルビー量 UP 系 passive buff）
+                if 15 in bunrui:
+                    tags.add(11)
+                # 12 ダメ上限: chara skill effect の bunrui に 17 + scope∈{1,2}（団体ダメ上限；BD 除外、自身 scope=0 除外）
+                if 17 in bunrui and scope in (1, 2):
+                    tags.add(12)
+                # 13 HIT: chara 通常 skill 内 bunrui に 7 + scope∈{1,2}（団体ヒット数 UP；BD 除外）
+                if 7 in bunrui and scope in (1, 2):
+                    tags.add(13)
+                # 14 BDHIT: chara 通常 skill 内 bunrui に 21 + scope∈{1,2}（団体 BD ヒット数 UP；BD 除外）
+                if 21 in bunrui and scope in (1, 2):
+                    tags.add(14)
+    # BD 効果文 復活 も検出
+    if _REVIVE_RE.search(bd_text):
+        tags.add(9)
+
+    # 10 BD回復: BD effect の bunrui に 11（BD 発動時の味方 HP 回復）
+    for e in (bd.get('effects') or []):
+        if 11 in (e.get('bunrui') or []):
+            tags.add(10)
+
+    return sorted(tags)
 
 
 def _elevate_bd(chara, recal, bd_special, bd_special_durations=None):
@@ -341,21 +466,22 @@ def _elevate_bd(chara, recal, bd_special, bd_special_durations=None):
             best_bd['effects'] = parse_bd_effects(effect)
         for _ent in best_bd.get('effects', []):
             if recal or 'hit_type' not in _ent:
-                classify_hit_fields(effect, _ent, is_bd=True)
-        if recal or 'special' not in best_bd:
-            norm_eff = unicodedata.normalize('NFKC', effect)
-            specials = set()
-            for sid, pat in _BD_SP_TEXT.items():
-                if pat.search(norm_eff):
-                    specials.add(sid)
-            if bd_special:
-                # Sub-pages may use either url-id or sort_id; check both
-                specials.update(bd_special.get(chara['id'], []))
-                specials.update(bd_special.get(chara.get('sort_id', chara['id']), []))
-            best_bd['special'] = sorted(specials)
+                classify_hit_fields(effect, _ent, is_bd=True, rarity=chara.get('rarity', 4))
+        # 旧 schema：bd_skill.special 已迁到 chara.tags（顶层）。保险起见 pop 任何残留。
+        best_bd.pop('special', None)
         chara['bd_skill'] = best_bd
     elif 'bd_skill' in chara:
         del chara['bd_skill']
+
+    # ============ 魔剣特性 tag 计算 → chara.tags（顶层） =============
+    # recal 时 overwrite；非 recal 时与玩家既存 tags 求 union（保持 revise 手填的 tag 不丢）。
+    # 検出 logic は compute_chara_tags() に集約（新 tag はそこに追加）。
+    if recal or 'tags' not in chara:
+        computed = compute_chara_tags(chara, bd_special)
+        if recal:
+            chara['tags'] = computed
+        else:
+            chara['tags'] = sorted(set(chara.get('tags') or []) | set(computed))
 
     for sd in chara.get('states', {}).values():
         sd.pop('bd_skill', None)
@@ -824,9 +950,22 @@ def _series_lookup(name):
     return None
 
 
+# 「最終的に / 最終的な / 最後に」 → ct=2 / 3。「な」は名詞を挟む可能性あり。
+_FINAL_PLUS = re.compile(r'最(?:終的[にな]|後に)[^+＋\d]{0,8}?[+＋](\d+(?:\.\d+)?)')
+_FINAL_BAI  = re.compile(r'最(?:終的[にな]|後に)[^\d]{0,8}?(\d+(?:\.\d+)?)倍')
+
 def _effect_extract(effect, bunrui):
     """Returns (value, calc_type) or (None, None)."""
     base = effect[:effect.index('【熟度')] if '【熟度' in effect else effect
+
+    # 「最終的に / 最後に」 → calc_type=2 (最終加算) / 3 (最終乗算)。
+    # 普通の +N / N倍 より優先（同じ数字でも final 用キーワード付きなら final 扱い）。
+    m = _FINAL_PLUS.search(base)
+    if m:
+        return float(m.group(1)), 2
+    m = _FINAL_BAI.search(base)
+    if m:
+        return float(m.group(1)), 3
 
     m = _MAX_BAI.search(base)
     if m:
@@ -894,24 +1033,40 @@ def _bunrui_default(bunrui, effect):
     return 1
 
 
-def _scaling_to_json(max_val, base_val):
-    """Compute (max - base) / 99 and return as float if terminating, else fraction string."""
+# bairitu_scaling 用：rarity ごとの最高熟度
+_RARITY_MAX_JK = {1: 50, 2: 70, 3: 90, 4: 99}
+
+# name に Lv2/Lv3/Lv4/Lv5 を含むか（Lv6+ や Lv1 は対象外。Lv50/Lv500 は別字なので \D|$ で防ぐ）
+_LV_2_5_RE = re.compile(r'Lv[2-5](?!\d)')
+
+
+def _scaling_to_json(max_val, base_val, denom):
+    """Compute (max - base) / denom and return as float if terminating, else fraction string."""
     try:
-        f = (Fraction(str(max_val)) - Fraction(str(base_val))) / 99
+        f = Fraction(str(max_val)) - Fraction(str(base_val))
+        f = f / denom
         d = f.denominator
         while d % 2 == 0: d //= 2
         while d % 5 == 0: d //= 5
         return float(f) if d == 1 else f'{f.numerator}/{f.denominator}'
     except Exception:
-        return round((max_val - base_val) / 99, 6)
+        return round((max_val - base_val) / denom, 6)
 
 
-def assign_bairitu_and_scaling(skill):
-    """Return (bairitu, bairitu_scaling, calc_type) for a skill."""
+def assign_bairitu_and_scaling(skill, rarity=4):
+    """Return (bairitu, bairitu_scaling, calc_type, jk_minus_1) for a skill.
+
+    jk_minus_1: True if name contains Lv2/Lv3/Lv4/Lv5 (calc 用 (jk-1)*s 公式、
+                分母 = rarity 最高熟度 - 1)。それ以外は False (jk*s 公式、分母 = rarity 最高熟度)。
+    """
     name   = skill.get('name',   '')
     effect = _norm(skill.get('effect_text', ''))
     effects = skill.get('effects', [])
     bunrui = effects[0].get('bunrui', []) if effects else []
+
+    jk_minus_1 = bool(_LV_2_5_RE.search(name))
+    rarity_max = _RARITY_MAX_JK.get(rarity, 99)
+    denom      = (rarity_max - 1) if jk_minus_1 else rarity_max
 
     # ── 深化 skills: bairitu from base skill, scaling from 深化 table entry ──
     if '【深化】' in name:
@@ -922,7 +1077,7 @@ def assign_bairitu_and_scaling(skill):
             bairitu, _ = _effect_extract(effect, bunrui)
         if bairitu is None:
             bairitu = _bunrui_default(bunrui, effect)
-        return bairitu, (scaling if scaling is not None else 0), 0
+        return bairitu, (scaling if scaling is not None else 0), 0, jk_minus_1
 
     # ── regular bairitu ──
     v = _table_lookup(name)
@@ -937,14 +1092,14 @@ def assign_bairitu_and_scaling(skill):
     # ── scaling: 熟度 clause with explicit max → exact fraction when non-terminating ──
     max_val = _juku_max_val(effect)
     if max_val is not None:
-        return bairitu, _scaling_to_json(max_val, bairitu), calc_type
+        return bairitu, _scaling_to_json(max_val, bairitu, denom), calc_type, jk_minus_1
 
     # ── scaling: series table (no explicit max in effect) ──
     series = _series_lookup(name)
     if series:
-        return series['bairitu'], series['bairitu_scaling'], 0
+        return series['bairitu'], series['bairitu_scaling'], 0, jk_minus_1
 
-    return bairitu, 0, calc_type
+    return bairitu, 0, calc_type, jk_minus_1
 
 
 # ============================================================
@@ -1112,15 +1267,19 @@ def apply_pipeline(characters, chara_ids=None, recal=False, bd_special=None, bd_
                 if not effects:
                     continue
                 e = effects[0]
-                b, s, ct = assign_bairitu_and_scaling(skill)
+                b, s, ct, _jkm1 = assign_bairitu_and_scaling(skill, rarity=chara.get('rarity', 4))
                 if recal or 'bairitu' not in e:
                     e['bairitu'] = b
                 if recal or 'bairitu_scaling' not in e:
                     e['bairitu_scaling'] = s
                 if recal or 'calc_type' not in e:
                     e['calc_type'] = ct
+                # 旧バージョンが書き込んだ bairitu_scaling_minus_jk_1 をクリーンアップ。
+                # 現在は hensei calc 側で skill.name から判定するので effect には保存しない。
+                if 'bairitu_scaling_minus_jk_1' in e:
+                    del e['bairitu_scaling_minus_jk_1']
                 if recal or 'hit_type' not in e:
-                    classify_hit_fields(skill.get('effect_text', ''), e)
+                    classify_hit_fields(skill.get('effect_text', ''), e, rarity=chara.get('rarity', 4))
         _compute_element_buff(chara)
         count += 1
 
@@ -1176,19 +1335,32 @@ def main():
     senzai_table       = load_json(senzai_table_path, {})
 
     if args.rerun:
-        completed  = set()
-        saved_ids  = set()
-        characters = []
+        completed    = set()
+        saved_ids    = set()
+        characters   = []
+        parts_status = {}
         if os.path.exists(progress_path):
             os.remove(progress_path)
     else:
-        progress   = load_json(progress_path, {"completed_data_ids": [], "saved_chara_ids": []})
-        completed  = set(progress["completed_data_ids"])
-        characters = load_json(output_path, [])
-        saved_ids  = set(c["id"] for c in characters)
+        progress     = load_json(progress_path, {"completed_data_ids": [], "saved_chara_ids": [], "parts": {}})
+        completed    = set(progress.get("completed_data_ids", []))
+        characters   = load_json(output_path, [])
+        saved_ids    = set(c["id"] for c in characters)
+        parts_status = progress.get("parts", {}) or {}
+        # Migration：旧 progress.json 没 parts 字段 → 从 characters.json 推断
+        if not parts_status and characters:
+            print("Migrating progress.json: computing parts status from characters.json...")
+            parts_status = {str(c["id"]): _chara_parts_status(c) for c in characters}
 
     print(f"Already saved: {len(characters)} characters")
     char_index = {c["id"]: i for i, c in enumerate(characters)}
+
+    def _save_progress():
+        save_json(progress_path, {
+            "completed_data_ids": list(completed),
+            "saved_chara_ids":    list(saved_ids),
+            "parts":              parts_status,
+        })
 
     revise_path = os.path.join(out_dir, "characters_revise.json")
     revise_map  = {c["id"]: c for c in load_json(revise_path, [])}
@@ -1253,8 +1425,25 @@ def main():
 
     try:
         char_list = get_char_list(session)
-        pending   = char_list if args.rerun else [c for c in char_list if c["data_id"] not in completed]
-        print(f"Pending: {len(pending)}")
+
+        # pending 判定：未抓 OR 已抓但 part 缺失 → 重抓
+        def _should_skip(c):
+            if args.rerun:
+                return False
+            if c["data_id"] not in completed:
+                return False  # 未抓
+            list_id = int(c.get("chara_id") or c.get("id") or 0)
+            rec_idx = char_index.get(list_id)
+            if rec_idx is None:
+                return False  # 找不到 record → 重抓
+            status = parts_status.get(str(characters[rec_idx]["id"]))
+            if not status or not all(status.get(k, False) for k in PART_KEYS):
+                return False  # part 缺失 → 重抓
+            return True
+
+        pending = [c for c in char_list if not _should_skip(c)]
+        retry_count = sum(1 for c in pending if c["data_id"] in completed)
+        print(f"Pending: {len(pending)} ({retry_count} retry due to missing parts)")
 
         updated_ids = set()
         if not pending:
@@ -1307,7 +1496,14 @@ def main():
                         print(f"  saved states: {list(states.keys()) if states else []}")
 
                     completed.add(c["data_id"])
-                    save_json(progress_path, {"completed_data_ids": list(completed), "saved_chara_ids": list(saved_ids)})
+                    # update part status (record may be the just-saved one or the existing-updated one)
+                    rec = characters[char_index[final_id]] if final_id in char_index else None
+                    if rec is not None:
+                        parts_status[str(final_id)] = _chara_parts_status(rec)
+                        missing = [k for k, v in parts_status[str(final_id)].items() if not v]
+                        if missing:
+                            print(f"  ⚠ wiki missing parts: {missing} (next run will retry)")
+                    _save_progress()
                     save_json(output_path, characters)
                     time.sleep(REQUEST_DELAY)
 
@@ -1315,14 +1511,14 @@ def main():
                     code = e.response.status_code
                     if code in (429, 403):
                         print(f"\nRate limited (HTTP {code}). Saving and stopping.")
-                        save_json(progress_path, {"completed_data_ids": list(completed), "saved_chara_ids": list(saved_ids)})
+                        _save_progress()
                         save_json(output_path, characters)
                         print(f"Progress saved. Completed: {len(completed)}")
                         return
                     raise
                 except Exception as e:
                     print(f"  error: {e}")
-                    save_json(progress_path, {"completed_data_ids": list(completed), "saved_chara_ids": list(saved_ids)})
+                    _save_progress()
                     save_json(output_path, characters)
                     raise
 
@@ -1339,38 +1535,9 @@ def main():
                                        recal=(args.recal or args.rerun), bd_special=bd_special,
                                        bd_special_durations=bd_special_durations)
 
-        # ── Phase 3: apply revise diffs on top of classified output ──
-        if revise_map:
-            def deep_update(target, patch):
-                for k, v in patch.items():
-                    if k == "id":
-                        continue
-                    tv = target.get(k)
-                    # Sparse array diff: target is list, patch is dict with all-numeric keys
-                    if isinstance(tv, list) and isinstance(v, dict) and v and \
-                            all(isinstance(kk, str) and kk.isdigit() for kk in v.keys()):
-                        for ki, pi in v.items():
-                            idx = int(ki)
-                            if idx >= len(tv):
-                                continue
-                            if isinstance(pi, dict) and isinstance(tv[idx], dict):
-                                deep_update(tv[idx], pi)
-                            else:
-                                tv[idx] = pi
-                    elif isinstance(v, dict) and isinstance(tv, dict):
-                        deep_update(tv, v)
-                    else:
-                        target[k] = v
-            out_idx = {c["id"]: i for i, c in enumerate(output)}
-            patched = 0
-            for rid, record in revise_map.items():
-                if rid in out_idx:
-                    deep_update(output[out_idx[rid]], record)
-                    patched += 1
-                else:
-                    print(f"  [revise] id={rid} not found in output, skipping")
-            if patched:
-                print(f"Revise diffs applied: {patched} characters patched")
+        # NOTE: characters_revise.json は recal 時に characters.json に merge しない。
+        # characters.json は純粋な parser 出力として保ち、revise は frontend
+        # (characters.html / hensei.html) がランタイムで deepApply する。
 
         save_json(output_path, output)
         save_senzai_table(senzai_table_path, senzai_table)
@@ -1379,7 +1546,7 @@ def main():
 
     except KeyboardInterrupt:
         print("\nInterrupted. Saving progress...")
-        save_json(progress_path, {"completed_data_ids": list(completed), "saved_chara_ids": list(saved_ids)})
+        _save_progress()
         characters.sort(key=lambda x: x.get("sort_id", x.get("id", 0)), reverse=True)
         save_json(output_path, characters)
         print(f"Saved {len(completed)} completed, {len(characters)} characters.")

@@ -1,6 +1,23 @@
 // ===== Chara Spec =====
 // Usage: import { CHARA_SPEC } from '../shared/chara-spec.js';
 
+// hit_per_stage / scaling 値の数値化（分数字列 "1/3" 含む受け入れ、無効値は 0）
+const _parseHit = (s) => {
+  if (s == null) return 0;
+  if (typeof s === 'number') return Number.isFinite(s) ? s : 0;
+  const t = String(s).trim();
+  if (t === '') return 0;
+  if (t.includes('/')) {
+    const [n, d] = t.split('/').map(parseFloat);
+    return (Number.isFinite(n) && Number.isFinite(d) && d !== 0) ? n / d : 0;
+  }
+  const v = parseFloat(t);
+  return Number.isFinite(v) ? v : 0;
+};
+
+// rarity ごとの「（改造/極弐含む）到達可能な最高熟度」。SS=99 / A=90 / B=70 / C=50
+const _RARITY_MAX_JK = { 1: 50, 2: 70, 3: 90, 4: 99 };
+
 const _bestState = c => {
   if (!c?.states) return null;
   for (const s of ['極弐', '改造', '通常'])
@@ -58,10 +75,13 @@ export const maxHit = c => {
       if (!_selfApplies(c, e)) continue;
       const hps = e.hit_per_stage || [], sca = e.hit_per_stage_scaling || [];
       const ht  = e.hit_type ?? 0;
+      // 分母は chara rarity 由来の最高到達熟度 - 1。state に依らず最大値で評価。
+      const denom = (_RARITY_MAX_JK[c.rarity] ?? 99) - 1;
       for (let k = 0; k < N; k++) {
-        const delta = (hps[k] || 0) + 5 * (sca[k] || 0);
-        if      (ht === 3) { if (hps[k]) stages[k] = hps[k]; }
-        else if (ht === 2) { if (hps[k]) stages[k] = Math.floor(stages[k] * hps[k]); }
+        const baseHit = _parseHit(hps[k]);
+        const delta   = baseHit + denom * _parseHit(sca[k]);
+        if      (ht === 3) { if (baseHit) stages[k] = baseHit; }
+        else if (ht === 2) { if (baseHit) stages[k] = Math.floor(stages[k] * baseHit); }
         else               { stages[k] += delta; }
       }
     }
@@ -77,7 +97,10 @@ export const maxBdhit = c => {
     for (const e of sk.effects || []) {
       if (!(e.bunrui || []).includes(21)) continue;
       if (!_selfApplies(c, e)) continue;
-      const maxB = (e.bairitu || 0) + 98 * (e.bairitu_scaling || 0);
+      // BD effect は name に Lv2-5 を含まないので b + jk*s 公式（jk_max 倍）。
+      // bairitu / bairitu_scaling 双方とも数値 / 分式文字列を _parseHit で解釈。
+      const denomBd = (_RARITY_MAX_JK[c.rarity] ?? 99);
+      const maxB = _parseHit(e.bairitu) + denomBd * _parseHit(e.bairitu_scaling);
       if (e.calc_type === 1) adders += maxB;
       else                   mults  *= maxB;
     }
@@ -93,7 +116,7 @@ export const CHARA_SPEC = {
     type:         { extract: c => c.type },
     omoideRarity: { extract: c => c.omoide_rarity },
     state:        { op: 'any', extract: c => Object.keys(c.states || {}) },
-    bdSpecial:    { op: 'any', extract: c => c.bd_skill?.special || [] },
+    tags:         { op: 'any', extract: c => c.tags || [] },
   },
   sortFns: {
     '攻撃力':      c => _statMax(c, '攻撃力'),

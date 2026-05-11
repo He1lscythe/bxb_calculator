@@ -294,17 +294,17 @@ export const renderEditSkillsSection = (s) => {
           <div>
             <div class="field-label">倍率</div>
             <div style="display:flex;align-items:center;gap:4px">
-              ${renderEditSelect({0:'×',1:'+'}, e.calc_type, `setPath(state.editData,'${ep}.calc_type',+this.value)`)}
-              <input type="number" step="any" class="edit-num-sm" value="${e.bairitu!=null?e.bairitu:''}"
-                     oninput="setPath(state.editData,'${ep}.bairitu',this.value===''?null:+this.value)">
+              ${renderEditSelect({0:'×',1:'+',2:'+(終)',3:'×(終)'}, e.calc_type, `setPath(state.editData,'${ep}.calc_type',+this.value)`)}
+              <input type="text" class="edit-num-sm" value="${e.bairitu!=null?e.bairitu:''}"
+                     oninput="setPath(state.editData,'${ep}.bairitu',parseBairituVal(this.value))">
             </div>
           </div>
         </div>
         ${(bunrui.includes(7)) ? (() => {
           const hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null,null,null];
           const hpss = Array.isArray(e.hit_per_stage_scaling) ? e.hit_per_stage_scaling : [null,null,null];
-          const stageIn = (i) => `<div><div class="field-label">${i+1}撃</div><input type="number" step="any" class="edit-num-sm" style="width:42px" value="${hps[i]!=null?hps[i]:''}" oninput="setHitStage('${ep}',${i},this.value)"></div>`;
-          const scaleIn = (i) => `<div><div class="field-label">${i+1}撃+</div><input type="number" step="any" class="edit-num-sm" style="width:42px" value="${hpss[i]!=null?hpss[i]:''}" oninput="setHitStageScaling('${ep}',${i},this.value)"></div>`;
+          const stageIn = (i) => `<div><div class="field-label">${i+1}撃</div><input type="text" class="edit-num-sm" style="width:42px" value="${hps[i]!=null?hps[i]:''}" oninput="setHitStage('${ep}',${i},this.value)"></div>`;
+          const scaleIn = (i) => `<div><div class="field-label">${i+1}撃+</div><input type="text" class="edit-num-sm" style="width:42px" value="${hpss[i]!=null?hpss[i]:''}" oninput="setHitStageScaling('${ep}',${i},this.value)"></div>`;
           return min`
             <div class="field-label" style="margin-top:6px">ヒット計算 <span style="color:var(--text2);font-weight:400">(bunrui=7のみ)</span></div>
             <div class="skill-edit-meta">
@@ -341,17 +341,28 @@ export const renderEditSkillsSection = (s) => {
     </div>`;
 }
 
+// 入力を hit 値として正規化：空 → null、"5/4" など分数 → 文字列保持、それ以外 → number。
+// 既存の int/float データとの diff を増やさないため、純数値は number で保存。
+const _normalizeHitVal = (v) => {
+  if (v == null) return null;
+  const s = String(v).trim();
+  if (s === '') return null;
+  if (s.includes('/')) return s;
+  const n = parseFloat(s);
+  return Number.isFinite(n) ? n : s;
+};
+
 export const setHitStage = (path, idx, val) => {
   const arr = (getPath(state.editData, path + '.hit_per_stage') || [null, null, null]).slice();
   while (arr.length < 3) arr.push(null);
-  arr[idx] = val === '' ? null : +val;
+  arr[idx] = _normalizeHitVal(val);
   setPath(state.editData, path + '.hit_per_stage', arr);
 }
 
 export const setHitStageScaling = (path, idx, val) => {
   const arr = (getPath(state.editData, path + '.hit_per_stage_scaling') || [null, null, null]).slice();
   while (arr.length < 3) arr.push(null);
-  arr[idx] = val === '' ? null : +val;
+  arr[idx] = _normalizeHitVal(val);
   setPath(state.editData, path + '.hit_per_stage_scaling', arr);
 }
 

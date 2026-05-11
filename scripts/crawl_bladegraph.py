@@ -373,8 +373,7 @@ def main():
     full_mode = args.recal or args.rerun
 
     os.makedirs(DATA_DIR, exist_ok=True)
-    out_path    = os.path.join(DATA_DIR, OUTPUT_FILE)
-    revise_path = os.path.join(DATA_DIR, 'bladegraph_revise.json')
+    out_path = os.path.join(DATA_DIR, OUTPUT_FILE)
 
     # Load existing data
     existing = {}
@@ -415,40 +414,9 @@ def main():
 
     entries = list(merged.values())
 
-    # Apply revise overrides
-    def deep_update(target, patch):
-        for k, v in patch.items():
-            if k == 'id':
-                continue
-            tv = target.get(k)
-            # Sparse array diff: target is list, patch is dict with all-numeric keys
-            if isinstance(tv, list) and isinstance(v, dict) and v and \
-                    all(isinstance(kk, str) and kk.isdigit() for kk in v.keys()):
-                for ki, pi in v.items():
-                    idx = int(ki)
-                    if idx >= len(tv):
-                        continue
-                    if isinstance(pi, dict) and isinstance(tv[idx], dict):
-                        deep_update(tv[idx], pi)
-                    else:
-                        tv[idx] = pi
-            elif isinstance(v, dict) and isinstance(tv, dict):
-                deep_update(tv, v)
-            else:
-                target[k] = v
-    if os.path.exists(revise_path):
-        with open(revise_path, encoding='utf-8') as f:
-            revise_list = json.load(f)
-        revise_map = {e['id']: e for e in revise_list}
-        idx_map    = {e['id']: i for i, e in enumerate(entries)}
-        patched    = 0
-        for rid, record in revise_map.items():
-            if rid in idx_map:
-                deep_update(entries[idx_map[rid]], record)
-                patched += 1
-            else:
-                print(f"  [revise] id={rid} not found in bladegraph, skipping")
-        print(f"Applied {patched} revise patches")
+    # NOTE: bladegraph_revise.json は recal 時に bladegraph.json に merge しない。
+    # bladegraph.json は純粋な parser 出力として保ち、revise は frontend
+    # (bladegraph.html / hensei.html) がランタイムで deepApply する。
 
     # Safety fill: ensure all effects entries have calc_type
     for entry in entries:

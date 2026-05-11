@@ -462,42 +462,14 @@ def main():
         print(f"Applying skill classification and bairitu ({scope_label})...")
         output, count = apply_pipeline(copy.deepcopy(souls), pipeline_ids)
 
-        # ── Phase 3: apply revise diffs ──
-        revise_path = os.path.join(out_dir, "souls_revise.json")
-        def deep_update(target, patch):
-            for k, v in patch.items():
-                if k == 'id':
-                    continue
-                tv = target.get(k)
-                # Sparse array diff: target is list, patch is dict with all-numeric keys
-                if isinstance(tv, list) and isinstance(v, dict) and v and \
-                        all(isinstance(kk, str) and kk.isdigit() for kk in v.keys()):
-                    for ki, pi in v.items():
-                        idx = int(ki)
-                        if idx >= len(tv):
-                            continue
-                        if isinstance(pi, dict) and isinstance(tv[idx], dict):
-                            deep_update(tv[idx], pi)
-                        else:
-                            tv[idx] = pi
-                elif isinstance(v, dict) and isinstance(tv, dict):
-                    deep_update(tv, v)
-                else:
-                    target[k] = v
-        if os.path.exists(revise_path):
-            revise_list = load_json(revise_path, [])
-            soul_idx    = {s["id"]: i for i, s in enumerate(output)}
-            patched     = 0
-            for entry in revise_list:
-                sid = entry.get("id")
-                if sid not in soul_idx:
-                    continue
-                deep_update(output[soul_idx[sid]], entry)
-                patched += 1
-            if patched:
-                print(f"Revise: {patched} soul(s) patched from souls_revise.json")
+        # NOTE: souls_revise.json は recal 時に souls.json に merge しない。
+        # souls.json は純粋な parser 出力として保ち、revise は frontend (soul.html /
+        # hensei.html) がランタイムで deepApply する。
+        # 旧実装は recal で revise を souls.json に焼き込んでいたが、これだと souls.json
+        # が手動編集データで汚染される（編集を削っても次の recal まで残る、source-of-truth が
+        # 不明確になる）ため除去した。
 
-        # Fill in any effects entries still missing calc_type (e.g. from revise patches)
+        # Fill in any effects entries still missing calc_type
         for soul in output:
             for sk in soul.get('skills', []):
                 for ent in sk.get('effects', []):

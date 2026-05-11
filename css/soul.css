@@ -2,9 +2,10 @@
 
 /* ----- layout ----- */
 #layout  { display: flex; flex: 1; overflow: hidden; }
-#sidebar { width: 300px; min-width: 200px; background: var(--bg2); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+#sidebar { width: 340px; min-width: 220px; background: var(--bg2); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
 #filters { padding: 8px 10px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
 #filters-body { display: flex; flex-direction: column; gap: 8px; }
+.filter-toggles.grid-6 { display: grid; grid-template-columns: repeat(6, max-content); gap: 3px; }
 
 /* ----- sidebar controls ----- */
 .actions-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
@@ -40,6 +41,7 @@
 .star-2 { background: var(--wind); color: #fff; }
 .star-1 { background: var(--none); color: #fff; }
 .soul-item .soul-name { flex: 1; font-size: 12px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.soul-check-cb { flex-shrink: 0; width: 14px; height: 14px; margin: 0; cursor: pointer; accent-color: var(--accent); }
 .soul-icon-thumb { width: 44px; height: 28px; object-fit: cover; border-radius: 4px; flex-shrink: 0; opacity: .85; }
 
 /* ----- detail panel ----- */

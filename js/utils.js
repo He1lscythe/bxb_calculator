@@ -25,10 +25,41 @@ export const renderRightTags = (s) => {
 }
 
 export const fmtNum = (v) => {
-  if (typeof v === 'string') return v;
+  if (typeof v === 'string') {
+    // 分式 "100000000/9" → 両側それぞれ千分位化（"100,000,000/9"）。非数値部分は原状維持。
+    if (v.includes('/')) {
+      return v.split('/').map(part => {
+        const t = part.trim();
+        const n = Number(t);
+        if (t === '' || isNaN(n)) return part;
+        return Number.isInteger(n) ? n.toLocaleString('en-US') : String(parseFloat(n.toFixed(4)));
+      }).join('/');
+    }
+    return v;
+  }
   if (Number.isInteger(v)) return v.toLocaleString('en-US');
   return String(parseFloat(v.toFixed(4)));
 }
+
+// soul affinity の atk_effect / def_effect 表示用。
+//   - 含 `/` の文字列 → そのまま（分数表記を保持）
+//   - 数値 / 数値文字列 → 小数 2 位四捨五入、末尾 0 除去（例 1.9 → "1.9"、1.234 → "1.23"、1 → "1"）
+//   - その他 → そのまま toString
+// 編集モードは生値を見せるので別 path（このヘルパは display 専用）。
+export const fmtAff = (v) => {
+  if (v == null) return '1';
+  if (typeof v === 'string') {
+    const t = v.trim();
+    if (t.includes('/')) return t;
+    const n = parseFloat(t);
+    if (!Number.isFinite(n)) return t;
+    return parseFloat(n.toFixed(2)).toString();
+  }
+  if (typeof v === 'number' && Number.isFinite(v)) {
+    return parseFloat(v.toFixed(2)).toString();
+  }
+  return String(v);
+};
 
 export const parseBairituVal = (s) => {
   if (s === '') return null;
@@ -40,7 +71,12 @@ export const parseBairituVal = (s) => {
   return isNaN(n) ? null : n;
 }
 
-export const ctPfx = (ct) => { return ct === 1 ? '+' : '×'; }
+export const ctPfx = (ct) => {
+  if (ct === 1) return '+';
+  if (ct === 2) return '+(終)';
+  if (ct === 3) return '×(終)';
+  return '×';
+}
 
 export const fmtHitStages = (e) => {
   // Render hit_per_stage with optional milestone scaling
@@ -50,7 +86,8 @@ export const fmtHitStages = (e) => {
   const ht  = e.hit_type != null ? e.hit_type : 0;
   const op  = (ht === 2) ? '×' : (ht === 3) ? '=' : '+';  // 2=乗算→×, 3=設定値→=, else→+
   function stageStr(v, s) {
-    return op + fmtNum(v) + (s ? '(+' + fmtNum(s) + '/熟度)' : '');
+    if (!s) return op + fmtNum(v);
+    return op + '(' + fmtNum(v) + ' + ' + fmtNum(s) + ' * 熟度)';
   }
   // Condensed form: all 3 stages identical → show once with "全段"
   const s0 = sc[0] || 0, s1 = sc[1] || 0, s2 = sc[2] || 0;
