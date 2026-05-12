@@ -137,7 +137,7 @@ export const renderAffinityView = (s) => {
       <div class="affinity-cell ${ccls}" ${extraStyle||''}>
         <span class="affinity-name">${name}</span>
         <span class="affinity-level ${cls}">${label}</span>
-        <span class="affinity-effect">×${atk}/×${def}</span>
+        <span class="affinity-effect">×${atk}<span class="aff-sep">/</span>×${def}</span>
       </div>`;
   }
   const elemCells = ELEMS_ORDER.map(n => cellHtml(n, (s.element_affinity||{})[n])).join('');

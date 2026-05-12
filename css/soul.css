@@ -64,6 +64,8 @@
 .affinity-name   { font-size: 12px; font-weight: 700; }
 .affinity-level  { font-size: 10px; font-weight: 700; }
 .affinity-effect { font-size: 11px; color: var(--text2); text-align: center; }
+/* "/" 分隔符：桌面带左右间距、移动端紧贴（mobile @media 内覆盖为 padding 0） */
+.aff-sep { padding: 0 4px; }
 .aff-2  { color: #44ee77; }  .aff-cell-2  { border-color: rgba(68,238,119,.35); }
 .aff-1  { color: #88ee99; }  .aff-cell-1  { border-color: rgba(136,238,153,.2); }
 .aff-0  { color: var(--text2); }
@@ -127,6 +129,7 @@
   #soul-count-mob { display: block; }
   #soul-count { display: none; }
   #filters { position: sticky; top: 52px; z-index: 50; background: var(--bg2); }
+  .aff-sep { padding: 0; }
 }
 
 /* 横屏（iPad / 手机）banner 限高，避免占用过多屏高。
