@@ -154,6 +154,7 @@ import { ELEMENT, WEAPON, RARITY, BUNRUI, BUNRUI_SHORT, CHARA_TAG,
 import { FilterCore } from '../shared/filter-core.js';
 import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
 import { CHARA_SPEC } from '../shared/chara-spec.js';
+import { resolveOmoideTemplates } from '../shared/omoide.js';
 import { escHtml, fmt, fmtNum, fmtBairitu, fmtHitStages, ctPfx,
          hasOmoide, parseBairituVal, renderRightTags, hideLoading } from '../js/utils.js';
 import { deepApply, computeDiff, _deepDiff } from '../js/edit.js';
@@ -187,20 +188,6 @@ Nav.init();
 fetch('../data/senzai_table.json')
   .then(r => r.ok ? r.json() : {})
   .then(d => { state.SENZAI_TABLE = d; })
-  .catch(() => {});
-
-fetch('../data/omoide_templates.json')
-  .then(r => r.ok ? r.json() : [])
-  .then(d => {
-    state.omoideTemplates = Array.isArray(d) ? d : [];
-    const sel = document.getElementById('omoide-tpl-sel');
-    if (sel) {
-      const cur = sel.value;
-      sel.innerHTML = '<option value="">テンプレートを選択...</option>'
-        + state.omoideTemplates.map(t => `<option value="${t.id}">${escHtml(t.name)}</option>`).join('');
-      if (cur) sel.value = cur;
-    }
-  })
   .catch(() => {});
 
 // 魔装データ load + revise 適用
@@ -247,16 +234,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (idx >= 0) deepApply(state.allChars[idx], c);
       });
       if (arr.length) applyFilters();
-      return fetch('../data/omoide_revise.json');
+      return Promise.all([
+        fetch('../data/omoide_revise.json').then(r => r.ok ? r.json() : []),
+        fetch('../data/omoide_templates.json').then(r => r.ok ? r.json() : []),
+      ]);
     })
-    .then(r => r.ok ? r.json() : [])
-    .then(arr => {
-      arr.forEach(c => {
+    .then(([omRev, tmpls]) => {
+      omRev.forEach(c => {
         state.omoideReviseData[c.id] = c;
         const idx = state.allChars.findIndex(x => x.id === c.id);
         if (idx >= 0) deepApply(state.allChars[idx], c);
       });
-      if (arr.length) applyFilters();
+      state.omoideTemplates = Array.isArray(tmpls) ? tmpls : [];
+      // chara.omoide_template != null の場合、templates から omoide slots を還元（live reference）。
+      // edit save 側で omoide_template 非 null 時に omoide=null を流すので、ここで還元しないと slots が空。
+      // originalData にも適用：base が omoide_template を持つ場合に computeDiff が「omoide が変わった」と
+      // 誤判するのを防ぐ。現状 base に omoide_template は無いが防御的に。
+      resolveOmoideTemplates(state.allChars,                state.omoideTemplates);
+      resolveOmoideTemplates(Object.values(state.originalData), state.omoideTemplates);
+      if (omRev.length || tmpls.length) applyFilters();
       // characters_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
       return fetch('../data/characters_check.json');
     })

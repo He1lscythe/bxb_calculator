@@ -202,11 +202,10 @@ export const renderOmoideTemplateBar = (c) => {
   ).join('');
   return min`
     <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap">
-      <select id="omoide-tpl-sel" class="edit-select" style="flex:1;min-width:120px">
+      <select id="omoide-tpl-sel" class="edit-select" style="flex:1;min-width:120px" onchange="applyOmoideTemplate()">
         <option value="">テンプレートを選択...</option>
         ${opts}
       </select>
-      <button class="btn-add-slot" onclick="applyOmoideTemplate()" style="white-space:nowrap;padding:3px 10px">適用</button>
       <button class="btn-add-slot" onclick="saveOmoideTemplate()" style="white-space:nowrap;padding:3px 10px">テンプレ保存</button>
     </div>`;
 }

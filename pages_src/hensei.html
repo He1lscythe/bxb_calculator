@@ -106,8 +106,9 @@ import { CHARA_SPEC } from '../shared/chara-spec.js';
 import { SOUL_SPEC } from '../shared/soul-spec.js';
 import { CRYSTAL_SPEC } from '../shared/crystal-spec.js';
 import { BG_SPEC } from '../shared/bg-spec.js';
-import { escHtml, fmtLarge, fmtBairitu, fmtHitStages, fmtAff, hideLoading, min } from '../js/utils.js';
+import { escHtml, fmtLarge, fmtBairitu, fmtHitStages, fmtAff, hideLoading, min, fmtNum, ctPfx } from '../js/utils.js';
 import { deepApply } from '../js/diff.js';
+import { resolveOmoideTemplates } from '../shared/omoide.js';
 
 Nav.init();
 
@@ -225,9 +226,12 @@ Promise.all([
   fetch('../data/masou_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/guildtitle.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/guildemblem.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
-]).then(([ch,so,bg,cr,ms, chRev, omRev, soRev, crRev, bgRev, msRev, gt, ge])=>{
+  fetch('../data/omoide_templates.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+]).then(([ch,so,bg,cr,ms, chRev, omRev, soRev, crRev, bgRev, msRev, gt, ge, omTpls])=>{
   _applyRevise(ch, chRev);
   _applyRevise(ch, omRev);
+  // omoide_template 還元（revise が template_id だけ保存、slots は templates から取る）
+  resolveOmoideTemplates(ch, Array.isArray(omTpls) ? omTpls : []);
   _applyRevise(so, soRev);
   _applyRevise(cr, crRev);
   _applyRevise(bg, bgRev);
@@ -1594,8 +1598,9 @@ export const _renderOmoideModalBody = () => {
       const info = SENZAI_TABLE[iconId] || SENZAI_TABLE[String(iconId)] || {};
       const sel = picks[row.threshold] === iconId;
       const lbl = (info.koka || ('icon' + iconId)).replace(/UP|\[★+\]/g, x => x.includes('★') ? x : '');
+      const bStr = (info.bairitu != null && info.bairitu !== 0) ? ' (' + ctPfx(info.calc_type) + fmtNum(info.bairitu) + ')' : '';
       const dis = locked ? ' disabled style="cursor:not-allowed"' : '';
-      return `<button class="om-opt${sel?' on':''}"${dis} onclick="pickOmoide(${si},${row.threshold},${iconId})" title="${escHtml(info.koka||'')}${info.bairitu?' ('+(info.calc_type===1?'+':'×')+info.bairitu+')':''}">${escHtml(lbl)}</button>`;
+      return `<button class="om-opt${sel?' on':''}"${dis} onclick="pickOmoide(${si},${row.threshold},${iconId})" title="${escHtml(info.koka||'')}${bStr}">${escHtml(lbl + bStr)}</button>`;
     }).join('');
     const lockTag = locked ? '<span style="font-size:10px;color:#ff7777;margin-left:4px">🔒</span>' : '';
     return min`

@@ -194,6 +194,13 @@ export const saveEdit = () => {
         if (hasChar && !('tags' in charDiff)) {
           charDiff.tags = null;
         }
+        // omoide_template 非 null 时 omoide 数组冗余（render 时 resolveOmoideTemplates
+        // 会从 templates 还原）。显式 null 触发 server _deep_merge 清掉 revise 里 stale
+        // 的 omoide 字段。omoide_template === null（脱离 template 改 slot）则保留 omoide
+        // 完整数组作为显式 override；字段不在 diff 时本条件 false，不影响。
+        if (hasOmoide && omoideDiff.omoide_template != null) {
+          omoideDiff.omoide = null;
+        }
         if (hasChar)   { state.reviseData[id]       = charDiff;   } else { delete state.reviseData[id]; }
         if (hasOmoide) { state.omoideReviseData[id] = omoideDiff; } else { delete state.omoideReviseData[id]; }
       } else {
