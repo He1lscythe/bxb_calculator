@@ -73,37 +73,43 @@
 #placeholder svg { opacity: .3; }
 #chara-detail { /* padding inherited from #detail */ }
 
-/* ----- chara header ----- */
+/* ----- chara header -----
+   flex column 3 行布局（HTML 用 .ch-row 包裹每行）：
+   显示モード:
+     行 1: chara-title 左 | chara-actions 右
+     行 2: chara-meta  左 | btn-edit  右
+     行 3: chara-tags 满行
+   编辑モード:
+     行 1: chara-title 左 | edit-actions 右
+     行 2: chara-edit-meta 满行
+     行 3: chara-tag-row 满行 */
 .chara-header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas: "title actions" "meta edit" "tags tags";
-  gap: 10px 8px; align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin-bottom: 20px; padding: 20px 0 16px;
   border-bottom: 1px solid var(--border);
   position: sticky; top: var(--sticky-bar-h, 0px); z-index: 6; background: var(--bg);
 }
-.chara-header .chara-title    { grid-area: title; }
-.chara-header > .chara-actions{ grid-area: actions; display: flex; gap: 6px; justify-self: end; align-items: center; }
-.chara-header > .btn-edit     { grid-area: edit; }
-.chara-header > .chara-meta   { grid-area: meta; }
-.chara-header > .chara-tags   { grid-area: tags; display: flex; gap: 4px; flex-wrap: wrap; }
-.chara-header:not(:has(.chara-actions)):not(.edit-mode-active) {
-  grid-template-areas: "title title" "meta edit" "tags tags";
+.ch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
 }
-.chara-title { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; min-width: 0; }
+.chara-header .chara-title   { flex: 1; min-width: 0; }
+.chara-header .chara-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+.chara-header .chara-meta    { flex: 1; min-width: 0; }
+.chara-header .chara-tags    { display: flex; gap: 4px; flex-wrap: wrap; }
+.chara-title { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
 .chara-title > span.name-text { min-width: 0; word-break: break-all; }
 .chara-icon { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; flex-shrink: 0; }
-.chara-header.edit-mode-active {
-  grid-template-columns: 1fr auto;
-  grid-template-areas: "title actions" "selects selects" "tags tags";
-}
-.chara-header.edit-mode-active .chara-edit-meta { grid-area: selects; display: flex; gap: 8px; flex-wrap: wrap; }
-.chara-header.edit-mode-active .edit-actions { grid-area: actions; display: flex; gap: 6px; align-self: start; }
-.chara-header.edit-mode-active .chara-tag-row { grid-area: tags; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.btn-latent, .chara-header > .btn-edit { padding: 5px 12px; border-radius: 6px; border: 1px solid #5b7fff; background: rgba(91,127,255,.15); color: #7b9fff; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; width: 80px; text-align: center; }
-.btn-latent:hover, .chara-header > .btn-edit:hover { background: rgba(91,127,255,.3); }
-.chara-header > .btn-edit { justify-self: end; }
+.chara-header.edit-mode-active .chara-edit-meta { display: flex; gap: 8px; flex-wrap: wrap; flex: 1; }
+.chara-header.edit-mode-active .edit-actions   { display: flex; gap: 6px; flex-shrink: 0; }
+.chara-header.edit-mode-active .chara-tag-row  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; flex: 1; }
+.btn-latent, .chara-header .btn-edit { padding: 5px 12px; border-radius: 6px; border: 1px solid #5b7fff; background: rgba(91,127,255,.15); color: #7b9fff; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; width: 80px; text-align: center; }
+.btn-latent:hover, .chara-header .btn-edit:hover { background: rgba(91,127,255,.3); }
 .chara-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .meta-chip { display: flex; align-items: center; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 12px; }
 .meta-chip .elem-dot { width: 8px; height: 8px; }
@@ -219,7 +225,7 @@
 .lcs-opt.lcs-selected { color: var(--accent); font-weight: 600; }
 
 /* ----- mobile ----- */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   body { height: auto; overflow-y: auto; }
   #page-wrap { overflow: visible; }
   #layout { flex-direction: column; overflow: visible; flex: none; }
@@ -238,22 +244,23 @@
   #char-count-mob { display: block; }
   #char-count { display: none; }
   #filters { position: sticky; top: 52px; z-index: 50; background: var(--bg2); }
-  .btn-latent, .chara-header > .btn-edit { width: 70px; padding: 5px 10px; }
-  .chara-header:not(.edit-mode-active) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "title title" "meta meta" "tags tags" "actions edit";
-  }
-  .chara-header:not(.edit-mode-active) > .chara-actions { justify-self: start; flex-direction: row-reverse; }
-  .chara-header:not(.edit-mode-active) > .btn-edit      { justify-self: end; }
-  .chara-header:not(.edit-mode-active):not(:has(.chara-actions)) {
-    grid-template-columns: 1fr;
-    grid-template-areas: "title" "meta" "tags" "edit";
-  }
-  .chara-header.edit-mode-active {
-    grid-template-columns: 1fr;
-    grid-template-areas: "title" "selects" "tags" "actions";
-  }
-  .chara-header.edit-mode-active .edit-actions { justify-content: flex-start; }
-  /* mobile: 魔剣名 左、chara-icon 右 — left-right 靠 */
-  .chara-title { justify-content: space-between; width: 100%; }
+  .btn-latent, .chara-header .btn-edit { width: 70px; padding: 5px 10px; }
+  /* chara-header 不再重排 — flex 3 行布局桌面 / mobile 统一 */
 }
+
+/* 横屏 + 矮屏：chara-header 单行化 — 左 title + meta + tags，右 actions + edit。
+   display: contents 让 .ch-row 退化（其子节点直接作为 .chara-header flex 子），
+   配合 order 重排 + margin-left:auto 把 actions 推到右侧。 */
+@media (orientation: landscape) and (max-height: 600px) {
+  .chara-header { flex-direction: row; align-items: center; flex-wrap: wrap; gap: 8px 14px; }
+  .chara-header > .ch-row { display: contents; }
+  .chara-header .chara-title                            { order: 1; }
+  .chara-header .chara-meta,
+  .chara-header .chara-edit-meta                        { order: 2; }
+  .chara-header .chara-tags,
+  .chara-header .chara-tag-row                          { order: 3; }
+  .chara-header .chara-actions,
+  .chara-header .edit-actions                           { order: 4; margin-left: auto; }
+  .chara-header .btn-edit                               { order: 5; }
+}
+

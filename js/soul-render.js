@@ -57,7 +57,7 @@ export const selectSoul = (id) => {
   det.style.display = 'block';
   det.innerHTML = renderDetail(s);
   // Mobile: show as fullscreen modal
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth <= 900) {
     const dt = document.getElementById('detail');
     dt.classList.add('show-mob');
     dt.scrollTop = 0;
@@ -89,7 +89,7 @@ export const updateMobNavBar = (s) => {
 
 export const setupStickyHeights = () => {
   // 桌面端 --sticky-bar-h=0（无 mob-bar），移动端=mob-bar 高度
-  const isMob = window.innerWidth <= 768;
+  const isMob = window.innerWidth <= 900;
   const bar = document.getElementById('detail-mob-bar');
   const barH = (isMob && bar) ? bar.offsetHeight : 0;
   document.documentElement.style.setProperty('--sticky-bar-h', barH + 'px');
@@ -137,11 +137,12 @@ export const renderAffinityView = (s) => {
       <div class="affinity-cell ${ccls}" ${extraStyle||''}>
         <span class="affinity-name">${name}</span>
         <span class="affinity-level ${cls}">${label}</span>
-        <span class="affinity-effect">×${atk} / ×${def}</span>
+        <span class="affinity-effect">×${atk}/×${def}</span>
       </div>`;
   }
   const elemCells = ELEMS_ORDER.map(n => cellHtml(n, (s.element_affinity||{})[n])).join('');
-  const weapCells = WEAPONS_ORDER.map(n => cellHtml(n, (s.weapon_affinity||{})[n], 'style="min-width:60px"')).join('');
+  // 武器 grid: 6×2（12 weapons / 6 cols）。inline min-width:60px を外し grid を screen 宽以内に納める
+  const weapCells = WEAPONS_ORDER.map(n => cellHtml(n, (s.weapon_affinity||{})[n])).join('');
   return min`
     <div class="section">
       <div class="section-title">属性相性</div>

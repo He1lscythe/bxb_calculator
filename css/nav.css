@@ -10,7 +10,12 @@
   padding: 5px 18px; font-size: 13px; font-weight: 600; color: var(--text2);
   text-decoration: none; border-bottom: 2px solid transparent; transition: color .15s; white-space: nowrap;
 }
-.nav-link:hover { color: var(--text); }
+/* 触屏 (iPad/手机) 不要 :hover — iOS Safari 在有 :hover 的 <a> 上有 hover-to-activate
+   bug：第一次 tap 仅触发 hover 状态（refresh 转圈但不 navigate），第二次 tap 才
+   commit 跳转。@media (hover: hover) 让触屏跳过 :hover，原生 click 直接 navigate。 */
+@media (hover: hover) {
+  .nav-link:hover { color: var(--text); }
+}
 .nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
 #topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 #nav-hamburger {
