@@ -87,14 +87,16 @@
         <button class="btn-reset-filters" onclick="resetFilters()">リセット</button>
       </div>
       <div id="filters-body">
-      <div class="filter-section">
-        <div class="filter-label">レア度</div>
-        <div class="filter-toggles" id="f-rarity"></div>
-      </div>
+      <div class="filter-row2">
+        <div class="filter-section">
+          <div class="filter-label">レア度</div>
+          <div class="filter-toggles" id="f-rarity"></div>
+        </div>
 
-      <div class="filter-section">
-        <div class="filter-label">属性</div>
-        <div class="filter-toggles" id="f-element"></div>
+        <div class="filter-section">
+          <div class="filter-label">属性</div>
+          <div class="filter-toggles" id="f-element"></div>
+        </div>
       </div>
 
       <div class="filter-section">
@@ -102,29 +104,31 @@
         <div class="filter-toggles grid-6" id="f-type"></div>
       </div>
 
-      <div class="filter-section">
-        <div class="filter-label">状態</div>
-        <div class="filter-toggles" id="f-state">
-          <button class="ftog" data-val="極弐" onclick="toggleFilter('state','極弐',this)">極弐</button>
-          <button class="ftog" data-val="改造" onclick="toggleFilter('state','改造',this)">改造</button>
-          <button class="ftog" data-val="通常" onclick="toggleFilter('state','通常',this)">通常</button>
+      <div class="filter-row2">
+        <div class="filter-section">
+          <div class="filter-label">状態</div>
+          <div class="filter-toggles" id="f-state">
+            <button class="ftog" data-val="極弐" onclick="toggleFilter('state','極弐',this)">極弐</button>
+            <button class="ftog" data-val="改造" onclick="toggleFilter('state','改造',this)">改造</button>
+            <button class="ftog" data-val="通常" onclick="toggleFilter('state','通常',this)">通常</button>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <div class="filter-label">好感稀有度</div>
+          <div class="filter-toggles" id="f-omoideRarity">
+            <button class="ftog" data-val="5" onclick="toggleFilter('omoideRarity',5,this)" style="color:#ff55ff">限定SS</button>
+            <button class="ftog" data-val="4" onclick="toggleFilter('omoideRarity',4,this)" style="color:var(--ss)">SS</button>
+            <button class="ftog" data-val="3" onclick="toggleFilter('omoideRarity',3,this)" style="color:var(--s)">S</button>
+            <button class="ftog" data-val="2" onclick="toggleFilter('omoideRarity',2,this)" style="color:var(--aa)">AA</button>
+            <button class="ftog" data-val="1" onclick="toggleFilter('omoideRarity',1,this)" style="color:var(--a)">A</button>
+          </div>
         </div>
       </div>
 
       <div class="filter-section">
         <div class="filter-label">魔剣特性</div>
         <div class="filter-toggles" id="f-tags"></div>
-      </div>
-
-      <div class="filter-section">
-        <div class="filter-label">好感稀有度</div>
-        <div class="filter-toggles" id="f-omoideRarity">
-          <button class="ftog" data-val="5" onclick="toggleFilter('omoideRarity',5,this)" style="color:#ff55ff">限定SS</button>
-          <button class="ftog" data-val="4" onclick="toggleFilter('omoideRarity',4,this)" style="color:var(--ss)">SS</button>
-          <button class="ftog" data-val="3" onclick="toggleFilter('omoideRarity',3,this)" style="color:var(--s)">S</button>
-          <button class="ftog" data-val="2" onclick="toggleFilter('omoideRarity',2,this)" style="color:var(--aa)">AA</button>
-          <button class="ftog" data-val="1" onclick="toggleFilter('omoideRarity',1,this)" style="color:var(--a)">A</button>
-        </div>
       </div>
 
       </div><!-- #filters-body -->
