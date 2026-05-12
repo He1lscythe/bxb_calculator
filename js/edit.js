@@ -175,48 +175,29 @@ export const saveEdit = () => {
     const sessionChanged = JSON.stringify(state.editData) !== JSON.stringify(state.allChars[idx]);
     if (sessionChanged) {
       state.allChars[idx] = state.editData;
-      const totalChanged = JSON.stringify(state.editData) !== JSON.stringify(state.originalData[id]);
-      if (totalChanged) {
-        const diff = computeDiff(state.originalData[id], state.editData);
-        const charDiff = { id: diff.id, name: diff.name };
-        const omoideDiff = { id: diff.id, name: diff.name };
-        let hasChar = false, hasOmoide = false;
-        for (const key in diff) {
-          if (key === 'id' || key === 'name') continue;
-          if (OMOIDE_KEYS.has(key)) { omoideDiff[key] = diff[key]; hasOmoide = true; }
-          else                       { charDiff[key]   = diff[key]; hasChar   = true; }
-        }
-        // tags 撤回：computeDiff 不 emit 与 base 相同的字段，但 server _deep_merge 也不会
-        // 主动清除 existing revise.tags。chara 仍有其他改动（hasChar）但 tags 已回到 base
-        // 时显式 emit tags=null 触发 server null 撤回（参考 crystal weight_step 机制）。
-        // chara 完全无 chara-level 改动时不注入：totalChanged=false 路径 / hasChar=false
-        // 都会触发整条 revise 删除、不需要 tags=null。
-        if (hasChar && !('tags' in charDiff)) {
-          charDiff.tags = null;
-        }
-        // OMOIDE_KEYS 撤回保護：hasOmoide なのに特定 key が diff に居ない場合、
-        // その field は base と一致するように戻った（けど revise には stale 値が
-        // 残ってる可能性）。null 注入で server _deep_merge に pop させる。
-        // 例：template 5 → template 2（rarity 5 → 4=base）切替時、omoide_rarity
-        // が diff に出ないため revise の rarity=5 が残留する bug を防ぐ。
-        if (hasOmoide) {
-          for (const k of OMOIDE_KEYS) {
-            if (!(k in omoideDiff)) omoideDiff[k] = null;
-          }
-        }
-        // omoide_template 非 null 時、omoide 配列は冗長（render 時 resolveOmoideTemplates
-        // が templates から復元）。template 切替時も omoide=null で revise の stale
-        // omoide を明示的に消す。template===null（slot 手改で脱離）時は omoide を残す。
-        if (hasOmoide && omoideDiff.omoide_template != null) {
-          omoideDiff.omoide = null;
-        }
-        if (hasChar)   { state.reviseData[id]       = charDiff;   } else { delete state.reviseData[id]; }
-        if (hasOmoide) { state.omoideReviseData[id] = omoideDiff; } else { delete state.omoideReviseData[id]; }
-      } else {
-        // 这次改回了原始状态：清掉 state.reviseData 但保留 state.sessionReviseIds 让服务端把条目删掉
-        delete state.reviseData[id];
-        delete state.omoideReviseData[id];
+      // prev-revise pattern：合并两个 revise 文件作为 prev，让 _deepDiff 的撤回
+      // 规则自动 emit null 给所有 base→prev→base 的字段（不再需要手动 tags=null /
+      // OMOIDE_KEYS 循环注入）。然后按 OMOIDE_KEYS 拆 diff 进两个 revise。
+      const prevMerged = Object.assign({},
+        state.reviseData[id]       || {},
+        state.omoideReviseData[id] || {}
+      );
+      const diff = computeDiff(state.originalData[id], state.editData, prevMerged);
+      const charDiff   = { id: diff.id, name: diff.name };
+      const omoideDiff = { id: diff.id, name: diff.name };
+      let hasChar = false, hasOmoide = false;
+      for (const key in diff) {
+        if (key === 'id' || key === 'name') continue;
+        if (OMOIDE_KEYS.has(key)) { omoideDiff[key] = diff[key]; hasOmoide = true; }
+        else                       { charDiff[key]   = diff[key]; hasChar   = true; }
       }
+      // omoide_template 非 null 時、omoide 配列は冗長（render 時 resolveOmoideTemplates
+      // が templates から復元）。这是 override 语义而非 retraction，prev-revise 不能替代。
+      if (hasOmoide && omoideDiff.omoide_template != null) {
+        omoideDiff.omoide = null;
+      }
+      if (hasChar)   { state.reviseData[id]       = charDiff;   } else { delete state.reviseData[id]; }
+      if (hasOmoide) { state.omoideReviseData[id] = omoideDiff; } else { delete state.omoideReviseData[id]; }
       state.sessionReviseIds.add(id);
     }
     // sessionChanged === false：用户没改任何东西，原样保留 state.reviseData/state.sessionReviseIds
@@ -278,6 +259,27 @@ export const saveRevise = async () => {
       omoide_revise:      pickPatches(state.omoideReviseData,  ids),
       masou_revise:       pickPatches(state.masouReviseData,   masouIds),
     });
+    // submit 成功后 refresh：用无 prev 的 computeDiff 重算 state.reviseData /
+    // state.omoideReviseData，去除 null 撤回标记，防止下次 saveEdit 拿到 stale
+    // prev 重复 emit null。mirror soul/bg/crystal saveRevise refresh 同款。
+    for (const id of ids) {
+      const idx = state.allChars.findIndex(c => c.id === id);
+      if (idx < 0) continue;
+      const fresh = computeDiff(state.originalData[id], state.allChars[idx]);
+      const charDiff   = { id: fresh.id, name: fresh.name };
+      const omoideDiff = { id: fresh.id, name: fresh.name };
+      let hasChar = false, hasOmoide = false;
+      for (const key in fresh) {
+        if (key === 'id' || key === 'name') continue;
+        if (OMOIDE_KEYS.has(key)) { omoideDiff[key] = fresh[key]; hasOmoide = true; }
+        else                       { charDiff[key]   = fresh[key]; hasChar   = true; }
+      }
+      if (hasOmoide && omoideDiff.omoide_template != null) omoideDiff.omoide = null;
+      if (hasChar)   state.reviseData[id]       = charDiff;
+      else           delete state.reviseData[id];
+      if (hasOmoide) state.omoideReviseData[id] = omoideDiff;
+      else           delete state.omoideReviseData[id];
+    }
     state.sessionReviseIds.clear();
     state.masouSessionReviseIds.clear();
     if (json.mode === 'remote') {
@@ -334,8 +336,8 @@ export const renderEditDetail = (c) => {
           <select class="edit-select" onchange="setPath(state.editData,'element',Number(this.value))">
             ${Object.entries(ELEMENT).map(([k,v])=>`<option value="${k}"${c.element==k?' selected':''}>${v}属性</option>`).join('')}
           </select>
-          <select class="edit-select" onchange="setPath(state.editData,'type',Number(this.value))">
-            ${Object.entries(WEAPON).map(([k,v])=>`<option value="${k}"${c.type==k?' selected':''}>${v}</option>`).join('')}
+          <select class="edit-select" onchange="setPath(state.editData,'weapon',Number(this.value))">
+            ${Object.entries(WEAPON).map(([k,v])=>`<option value="${k}"${c.weapon==k?' selected':''}>${v}</option>`).join('')}
           </select>
         </div>
       </div>
@@ -389,8 +391,8 @@ export const renderEditStateContent = (c, lbl) => {
         ).join('');
         const elemOpts = `<option value=""${e.element==null?' selected':''}>—</option>` +
           Object.entries(ELEMENT).map(([k,v])=>`<option value="${k}"${e.element==+k?' selected':''}>${v}</option>`).join('');
-        const typeOpts = `<option value=""${e.type==null?' selected':''}>—</option>` +
-          Object.entries(WEAPON).map(([k,v])=>`<option value="${k}"${e.type==+k?' selected':''}>${v}</option>`).join('');
+        const typeOpts = `<option value=""${e.weapon==null?' selected':''}>—</option>` +
+          Object.entries(WEAPON).map(([k,v])=>`<option value="${k}"${e.weapon==+k?' selected':''}>${v}</option>`).join('');
         return min`
           <div class="field-label">分類</div>
           <div class="bunrui-toggles">${btogs}</div>
@@ -409,7 +411,7 @@ export const renderEditStateContent = (c, lbl) => {
             </div>
             <div>
               <div class="field-label">type</div>
-              <select class="edit-select" onchange="setPath(state.editData,'${ep}.type',this.value===''?null:+this.value)">${typeOpts}</select>
+              <select class="edit-select" onchange="setPath(state.editData,'${ep}.weapon',this.value===''?null:+this.value)">${typeOpts}</select>
             </div>
             ${isHitOnly ? '' : min`
               <div>

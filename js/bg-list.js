@@ -12,8 +12,8 @@ export const cardElement = (c) => {
 }
 
 export const cardWeapon = (c) => {
-  const e = (c.effects||[]).find(function(e){return e.scope===3 && e.type!=null;});
-  return e ? e.type : 0;
+  const e = (c.effects||[]).find(function(e){return e.scope===3 && e.weapon!=null;});
+  return e ? e.weapon : 0;
 }
 
 export const initFilterToggles = () => {
@@ -132,7 +132,10 @@ export const fmtRowBairitu = (c) => {
   + (e[0].calc_type === 1 ? '+' : '×') + fmtLarge(e[0].bairitu) + '</span>' : '';
 }
 
-export const renderRow = (c) => {
+// renderRowHd 只生成 .bg-row-hd 内部 HTML（desktop + mobile + expand-btn）。
+// saveEdit 后整段替换 hd 内容，避免对 dual-layout 做 patchy 更新（之前 patchy
+// 漏掉 condition tag、bairitu 双层不同步会重复）。
+export const renderRowHd = (c) => {
   const rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
   const ce = cardElement(c), cw = cardWeapon(c);
   const eb = ce ? '<span class="badge elem-' + ce + '">' + (ELEMENT[ce]||ce) + '</span>' : '';
@@ -171,9 +174,13 @@ export const renderRow = (c) => {
       '<div class="bg-row-right">' + eb + wb + cb + bt + bairitu + '</div>' +
     '</div>';
 
+  return desktopHtml + mobileHtml + expandBtn;
+};
+
+export const renderRow = (c) => {
   return '<div class="bg-row" id="row-' + c.id + '">' +
     '<div class="bg-row-hd" onclick="toggleExpand(' + c.id + ')">' +
-      desktopHtml + mobileHtml + expandBtn +
+      renderRowHd(c) +
     '</div>' +
     '<div class="bg-body" id="body-' + c.id + '"></div>' +
   '</div>';
@@ -199,8 +206,8 @@ export const toggleExpand = (id) => {
 export const scopeLabel = (e) => {
   if (e.scope === 3) {
     if (e.element) return ELEMENT[e.element] + '属性のみ';
-    if (e.type != null) {
-      const t = Array.isArray(e.type) ? e.type : [e.type];
+    if (e.weapon != null) {
+      const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
       return t.map(function(v){return WEAPON[v]||v;}).join('/') + 'のみ';
     }
   }

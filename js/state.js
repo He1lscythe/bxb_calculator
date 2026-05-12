@@ -19,7 +19,7 @@ export const state = {
   masouReviseData: {},     // masou_id → patch object
   masouSessionReviseIds: new Set(),  // 当前会话で触れた masou_id（revise 提出時の session_ids）
   filterSets:      {
-    rarity: new Set(), element: new Set(), type: new Set(),
+    rarity: new Set(), element: new Set(), weapon: new Set(),
     state: new Set(), tags: new Set(), omoideRarity: new Set(),
   },
 

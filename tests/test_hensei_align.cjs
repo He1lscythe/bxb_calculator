@@ -132,7 +132,7 @@ const ELEMENT = {1:'火',2:'水',3:'風',4:'光',5:'闇',6:'無'};
 const WEAPON  = {1:'剣',2:'槍',3:'槌',4:'弓'};
 const fmtScopeTag = (ef) => {
   const elStr = ef.element != null ? [].concat(ef.element).map(e => ELEMENT[e] || e).join('/') : '';
-  const tyStr = ef.type    != null ? [].concat(ef.type   ).map(t => WEAPON [t] || t).join('/') : '';
+  const tyStr = ef.weapon    != null ? [].concat(ef.weapon   ).map(t => WEAPON [t] || t).join('/') : '';
   const parts = [elStr, tyStr].filter(Boolean);
   const lim = parts.join('·');
   if (ef.scope === 0) return '<span class="scope-tag scope-self">自</span>';
@@ -145,9 +145,9 @@ const fmtScopeTag = (ef) => {
 eq('scope=0 → 自', fmtScopeTag({scope:0}), '<span class="scope-tag scope-self">自</span>');
 eq('scope=1 → 全', fmtScopeTag({scope:1}), '<span class="scope-tag scope-all">全</span>');
 eq('scope=2 element=5 → 闇', fmtScopeTag({scope:2, element:5}), '<span class="scope-tag scope-lim">闇</span>');
-eq('scope=2 element=5 type=1 → 闇·剣', fmtScopeTag({scope:2, element:5, type:1}), '<span class="scope-tag scope-lim">闇·剣</span>');
+eq('scope=2 element=5 weapon=1 → 闇·剣', fmtScopeTag({scope:2, element:5, weapon:1}), '<span class="scope-tag scope-lim">闇·剣</span>');
 eq('scope=3 element=5 → 闇·自', fmtScopeTag({scope:3, element:5}), '<span class="scope-tag scope-equip-s">闇·自</span>');
-eq('scope=4 type=1 → 剣·全', fmtScopeTag({scope:4, type:1}), '<span class="scope-tag scope-equip-a">剣·全</span>');
+eq('scope=4 weapon=1 → 剣·全', fmtScopeTag({scope:4, weapon:1}), '<span class="scope-tag scope-equip-a">剣·全</span>');
 eq('scope=2 (无属性) → 限', fmtScopeTag({scope:2}), '<span class="scope-tag scope-lim">限</span>');
 
 console.log(`\n${pass} pass, ${fail} fail`);

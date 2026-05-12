@@ -100,7 +100,7 @@
 <script type="module">
 import { Nav } from '../js/nav.js';
 import { ELEMENT, WEAPON, RARITY, BUNRUI, BUNRUI_SHORT, BUNRUI_FILTER, CONDITION,
-         CHARA_TAG, CHARA_TAG_COLOR, ELEM_COLOR } from '../shared/constants.js';
+         CHARA_TAG, CHARA_TAG_COLOR, SOUL_TAG, SOUL_TAG_COLOR, ELEM_COLOR } from '../shared/constants.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { CHARA_SPEC } from '../shared/chara-spec.js';
 import { SOUL_SPEC } from '../shared/soul-spec.js';
@@ -109,6 +109,7 @@ import { BG_SPEC } from '../shared/bg-spec.js';
 import { escHtml, fmtLarge, fmtBairitu, fmtHitStages, fmtAff, hideLoading, min, fmtNum, ctPfx } from '../js/utils.js';
 import { deepApply } from '../js/diff.js';
 import { resolveOmoideTemplates } from '../shared/omoide.js';
+import { enforceScopeConstraints } from '../shared/effect-constraints.js';
 
 Nav.init();
 
@@ -240,6 +241,9 @@ Promise.all([
   allSouls=so.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
   allBGs=bg.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
   allCrystals=cr.filter(c=>!c.tombstone).sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  // base+revise 合并后强制 effect scope 约束（防止 element/type 与 scope=0/1 不一致）
+  enforceScopeConstraints(allBGs);
+  enforceScopeConstraints(allCrystals);
   allMasou=Array.isArray(ms)?ms:[];
   masouByChara={};
   allMasou.forEach(m=>{ if(m.chara_id!=null) (masouByChara[m.chara_id]=masouByChara[m.chara_id]||[]).push(m); });
@@ -303,7 +307,7 @@ export const fmtVal = (ef) => {
 // scope tag のスタイル/略称は utils.js / soul-render.js と統一（自/全/X/X·自/X·全）。
 export const fmtScopeTag = (ef) => {
   const elStr = ef.element != null ? [].concat(ef.element).map(e => ELEMENT[e] || e).join('/') : '';
-  const tyStr = ef.type    != null ? [].concat(ef.type   ).map(t => WEAPON [t] || t).join('/') : '';
+  const tyStr = ef.weapon    != null ? [].concat(ef.weapon   ).map(t => WEAPON [t] || t).join('/') : '';
   const parts = [elStr, tyStr].filter(Boolean);
   const lim   = parts.join('·');
   if (ef.scope === 0) return '<span class="scope-tag scope-self">自</span>';
@@ -809,8 +813,8 @@ export const _selfAppliesChara = (c, e) => {
   if (sc === 2 || sc === 3) {
     const elem = e.element;
     const elemOK = elem == null || (Array.isArray(elem) ? elem.indexOf(c.element) >= 0 : elem === c.element);
-    const tp = e.type;
-    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(c.type) >= 0 : tp === c.type);
+    const tp = e.weapon;
+    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(c.weapon) >= 0 : tp === c.weapon);
     return elemOK && typeOK;
   }
   return false;
@@ -830,8 +834,8 @@ export const _matchElemType = (e, tgtChara, useElementBuff) => {
       : [tgtChara.element];
     elemOK = reqElems.some(r => tgtElems.indexOf(r) >= 0);
   }
-  const tp = e.type;
-  const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.type) >= 0 : tp === tgtChara.type);
+  const tp = e.weapon;
+  const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.weapon) >= 0 : tp === tgtChara.weapon);
   return elemOK && typeOK;
 }
 
@@ -1182,7 +1186,7 @@ export const computeStats = (chara, tr, slotIdx) => {
     const mySoul = allSouls.find(x => x.id === mySlot.soul);
     if (mySoul) {
       const elemName = _ELEMS_ORDER[(chara.element || 6) - 1];
-      const weapName = _WEAPS_ORDER[(chara.type || 1) - 1];
+      const weapName = _WEAPS_ORDER[(chara.weapon || 1) - 1];
       const eAff = (mySoul.element_affinity || {})[elemName] || {};
       const wAff = (mySoul.weapon_affinity  || {})[weapName] || {};
       const atkAff = _parseAff(eAff.atk_effect) * _parseAff(wAff.atk_effect);
@@ -1218,7 +1222,7 @@ export const computeStats = (chara, tr, slotIdx) => {
   }
   // 4c. ギルバト/特別版 限定（有利武器 + 難易度）→ 攻撃力
   if (isGuildMode) {
-    if (chara.type != null && enemy.advantageWeapons && enemy.advantageWeapons.has(chara.type)) {
+    if (chara.weapon != null && enemy.advantageWeapons && enemy.advantageWeapons.has(chara.weapon)) {
       acc.stats['攻撃力'] *= 2.0;
     }
     const diffMult = ({Normal:1.0, Hard:0.1, Lunatic:0.005})[enemy.difficulty] ?? 1.0;
@@ -1711,8 +1715,8 @@ export const refreshAllStats = () => {
 // ===== ENTITY MODAL =====
 let emSlot=-1, emType=null, emCi=-1;
 const mf={
-  chara:{q:'',rarity:new Set(),element:new Set(),type:new Set(),state:new Set(),tags:new Set(),omoideRarity:new Set(),sort:'',desc:true},
-  soul: {q:'',rarity:new Set(),element:new Set(),type:new Set(),sort:'',desc:true},
+  chara:{q:'',rarity:new Set(),element:new Set(),weapon:new Set(),state:new Set(),tags:new Set(),omoideRarity:new Set(),sort:'',desc:true},
+  soul: {q:'',rarity:new Set(),element:new Set(),weapon:new Set(),tags:new Set(),sort:'',desc:true},
   bg:   {q:'',rarity:new Set(),element:new Set(),weapon:new Set(),bunrui:new Set()},
   crystal:{q:'',rarity:new Set(),element:new Set(),weapon:new Set(),bunrui:new Set(),condition:new Set(),scope:new Set()},
   masou: {q:''},
@@ -1749,7 +1753,7 @@ export const buildEMSidebar = (type) => {
   if(type==='chara'){
     h+=fsec('レア度','rarity',[4,3,2,1].map(k=>[k,RARITY[k]]),f.rarity);
     h+=fsec('属性','element',[1,2,3,4,5,6].map(k=>[k,ELEMENT[k],k===6?'':'elem-'+k]),f.element);
-    h+=fsec('武器種','type',Object.keys(WEAPON).map(k=>[+k,WEAPON[k]]),f.type);
+    h+=fsec('武器種','weapon',Object.keys(WEAPON).map(k=>[+k,WEAPON[k]]),f.weapon);
     h+=fsec('状態','state',[['極弐','極弐'],['改造','改造'],['通常','通常']],f.state);
     h+=`<div class="f-section"><div class="f-label">魔剣特性</div><div class="f-toggles">`
       +Object.keys(CHARA_TAG).map(k=>`<button class="ftog${f.tags.has(+k)?' on':''}" style="color:${CHARA_TAG_COLOR[k]}" data-fkey="tags" data-fval="${k}">${CHARA_TAG[k]}</button>`).join('')
@@ -1769,7 +1773,10 @@ export const buildEMSidebar = (type) => {
   } else if(type==='soul'){
     h+=fsec('レア度','rarity',[5,4,3,2,1].map(k=>[k,'★'+k]),f.rarity);
     h+=fsec('得意属性','element',[1,2,3,4,5,6].map(k=>[k,ELEMENT[k],k===6?'':'elem-'+k]),f.element);
-    h+=fsec('得意武器','type',Object.keys(WEAPON).map(k=>[+k,WEAPON[k]]),f.type);
+    h+=fsec('得意武器','weapon',Object.keys(WEAPON).map(k=>[+k,WEAPON[k]]),f.weapon);
+    h+=`<div class="f-section"><div class="f-label">魂特性</div><div class="f-toggles">`
+      +Object.keys(SOUL_TAG).map(k=>`<button class="ftog${f.tags.has(+k)?' on':''}" style="color:${SOUL_TAG_COLOR[k]}" data-fkey="tags" data-fval="${k}">${SOUL_TAG[k]}</button>`).join('')
+      +`</div></div>`;
     h+=`<div class="f-sort-row"><select id="em-sort" onchange="mf['soul'].sort=this.value;applyEM()">
       <option value="">並び替えなし</option>
       <option value="rarity"${f.sort==='rarity'?' selected':''}>レア度</option>
@@ -1845,7 +1852,7 @@ const HENSEI_CRYSTAL_SPEC = Object.assign({}, CRYSTAL_SPEC, {
     weapon: {
       match: function(c, set){
         return (c.effects||[]).some(function(ef){
-          var arr = [].concat(ef.type||[]);
+          var arr = [].concat(ef.weapon||[]);
           for (var v of set) if (arr.indexOf(v)>=0) return true;
           return false;
         });
@@ -1867,7 +1874,7 @@ const HENSEI_BG_SPEC = Object.assign({}, BG_SPEC, {
     weapon: {
       match: function(c, set){
         return (c.effects||[]).some(function(ef){
-          var arr = [].concat(ef.type||[]);
+          var arr = [].concat(ef.weapon||[]);
           for (var v of set) if (arr.indexOf(v)>=0) return true;
           return false;
         });
@@ -1944,7 +1951,7 @@ export const renderEMList = (items) => {
             <div class="em-bg-header">
               <span class="badge ${rLabel}" style="flex-shrink:0">${rLabel}</span>
               <span class="badge elem-${c.element}" style="flex-shrink:0">${ELEMENT[c.element]||''}</span>
-              <span class="badge weapon" style="flex-shrink:0">${WEAPON[c.type]||''}</span>
+              <span class="badge weapon" style="flex-shrink:0">${WEAPON[c.weapon]||''}</span>
               ${sortBadge}
             </div>
             <span class="em-bg-name">${escHtml(c.name)}</span>
@@ -1956,7 +1963,7 @@ export const renderEMList = (items) => {
     h+=items.map(s=>{
       const cur=team[emSlot]?.soul===s.id;
       const eb=(s.element||[]).map(e=>`<span class="badge elem-${e}">${ELEMENT[e]||''}</span>`).join('');
-      const wb=(s.type||[]).map(t=>`<span class="badge weapon">${WEAPON[t]||''}</span>`).join('');
+      const wb=(s.weapon||[]).map(t=>`<span class="badge weapon">${WEAPON[t]||''}</span>`).join('');
       return min`
         <div class="em-item em-item-bg${cur?' active':''}" onclick="selectEM(${s.id})">
           <img class="em-icon soul" src="https://img.altema.jp/bxb/soul/icon/${s.id}.jpg" onerror="this.style.visibility='hidden'" alt="">
@@ -2133,6 +2140,8 @@ export const renderDMSoul = (s) => {
       <div class="dm-section-title">入手場所</div>
       <div class="sdm-acq-table">${acqEntries.map(([k,v])=>`<div class="sdm-acq-key">${escHtml(k)}</div><div class="sdm-acq-val">${escHtml(v)}</div>`).join('')}</div>
     </div>` : '';
+  const tagsHtml = (s.tags || []).map(id =>
+    `<span class="bd-sp-tag" style="color:${SOUL_TAG_COLOR[id]||''}">${SOUL_TAG[id]||id}</span>`).join('');
   return min`
     <div class="dm-chara-header">
       <img src="https://img.altema.jp/bxb/soul/icon/${s.id}.jpg" onerror="this.style.display='none'"
@@ -2144,6 +2153,7 @@ export const renderDMSoul = (s) => {
           <span class="dm-meta-chip">Lv.${s.max_level||'?'}</span>
           ${s.url?`<a class="dm-meta-chip" href="${s.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>`:''}
         </div>
+        ${tagsHtml?`<div class="dm-chara-tags" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">${tagsHtml}</div>`:''}
       </div>
     </div>
     <div class="dm-section"><div class="dm-section-title">属性相性</div><div class="sdm-aff-grid">${elemCells}</div></div>
@@ -2156,7 +2166,7 @@ export const renderDMSoul = (s) => {
 export const _bgScopeLabel = (e) => {
   if(e.scope===3){
     if(e.element!=null)return (ELEMENT[e.element]||e.element)+'属性のみ';
-    if(e.type!=null){const t=[].concat(e.type);return t.map(v=>WEAPON[v]||v).join('/')+'のみ';}
+    if(e.weapon!=null){const t=[].concat(e.weapon);return t.map(v=>WEAPON[v]||v).join('/')+'のみ';}
   }
   if(e.scope===5)return (e.name||'')+'のみ';
   return'';
@@ -2250,7 +2260,7 @@ export const renderDMChara = (c) => {
   const rLbl=RARITY[c.rarity]||String(c.rarity);
   const eClr=ELEM_COLOR[c.element]||'#888';
   const eName=ELEMENT[c.element]||'-';
-  const wName=WEAPON[c.type]||'-';
+  const wName=WEAPON[c.weapon]||'-';
   const stateKeys=Object.keys(c.states||{});
   const tabs=['極弐','改造','通常'].filter(s=>stateKeys.includes(s)).map(s=>
     `<div class="dm-state-tab" data-state="${s}" onclick="switchDMState('${s}')">${s}</div>`
@@ -2333,7 +2343,7 @@ export const dmRightTags = (s) => {
     if(e.scope===0)tags+=`<span class="scope-tag scope-self">自</span>`;
     else if(e.scope===1)tags+=`<span class="scope-tag scope-all">全</span>`;
     else if(e.scope===2||e.scope===3||e.scope===4){
-      const lim=e.element!=null?(ELEMENT[[].concat(e.element)[0]]||'限'):e.type!=null?(WEAPON[[].concat(e.type)[0]]||'限'):'限';
+      const lim=e.element!=null?(ELEMENT[[].concat(e.element)[0]]||'限'):e.weapon!=null?(WEAPON[[].concat(e.weapon)[0]]||'限'):'限';
       tags+=`<span class="scope-tag scope-lim">${lim}</span>`;
     } else if(e.scope===5)tags+=`<span class="scope-tag scope-lim">限</span>`;
     if(e.condition)tags+=`<span class="cond-tag cond-${e.condition}">${CONDITION[e.condition]||''}</span>`;
@@ -2397,7 +2407,7 @@ export const renderSlot = (i) => {
   const usedCr=t.crystals.filter(Boolean).length;
   const eclr=chara?(ELEM_COLOR[chara.element]||'#888'):null;
   const enam=chara?(ELEMENT[chara.element]||''):'';
-  const wnam=chara?(WEAPON[chara.type]||''):'';
+  const wnam=chara?(WEAPON[chara.weapon]||''):'';
 
   const charaTagsHtml = chara ? (chara.tags || []).map(s =>
     `<span class="bd-sp-tag bd-sp-${s}">${CHARA_TAG[s] || s}</span>`).join('') : '';

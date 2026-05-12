@@ -30,7 +30,7 @@ export const renderList = () => {
   list.innerHTML = state.filteredChars.map(c => {
     const rLabel = RARITY[c.rarity] || c.rarity || '?';
     const eName  = ELEMENT[c.element] || String(c.element) || '?';
-    const wName  = WEAPON[c.type] || String(c.type) || '-';
+    const wName  = WEAPON[c.weapon] || String(c.weapon) || '-';
     const stateKeys = Object.keys(c.states || {});
     const dots = ['極弐','改造','通常'].map(s =>
       `<div class="state-dot ${stateKeys.includes(s) ? 'has' : ''}" title="${s}"></div>`
@@ -200,7 +200,7 @@ export const renderDetail = (c) => {
   const rLabel = RARITY[c.rarity] || c.rarity || '?';
   const eName  = ELEMENT[c.element] || c.element || '-';
   const eColor = ELEM_COLOR[c.element] || '#888';
-  const wName  = WEAPON[c.type] || c.type || '-';
+  const wName  = WEAPON[c.weapon] || c.weapon || '-';
   const stateKeys = Object.keys(c.states || {});
 
   const tabs = ['極弐','改造','通常'].filter(s => stateKeys.includes(s)).map(s =>

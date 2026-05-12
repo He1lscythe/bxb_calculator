@@ -420,7 +420,7 @@ def main():
                     "url":         url,
                     "image":       f"https://img.altema.jp/bxb/soul/banner/{sid}.jpg",
                     "element": sorted([ELEMENT_MAP[k] for k, v in detail.get("element_affinity", {}).items() if v.get("level", 0) >= 1]),
-                    "type":    sorted([WEAPON_TYPE_MAP[k] for k, v in detail.get("weapon_affinity", {}).items() if v.get("level", 0) >= 1]),
+                    "weapon":    sorted([WEAPON_TYPE_MAP[k] for k, v in detail.get("weapon_affinity", {}).items() if v.get("level", 0) >= 1]),
                     "element_affinity": detail.get("element_affinity", {}),
                     "weapon_affinity":  detail.get("weapon_affinity", {}),
                     "skills":      detail.get("skills", []),

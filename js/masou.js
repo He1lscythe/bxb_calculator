@@ -31,7 +31,7 @@ const _renderEffectTags = (e) => {
   if (e.scope === 0) sc = '<span class="scope-tag scope-self">自</span>';
   else if (e.scope === 1) sc = '<span class="scope-tag scope-all">全</span>';
   else if (e.scope === 2) {
-    const lim = e.element != null ? (ELEMENT[e.element] || '限') : (e.type != null ? (WEAPON[e.type] || '限') : '限');
+    const lim = e.element != null ? (ELEMENT[e.element] || '限') : (e.weapon != null ? (WEAPON[e.weapon] || '限') : '限');
     sc = `<span class="scope-tag scope-lim">${lim}</span>`;
   }
   const cond = e.condition ? `<span class="cond-tag cond-${e.condition}">${CONDITION[e.condition] || ''}</span>` : '';

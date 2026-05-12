@@ -142,15 +142,15 @@ function _buffApplies(srcChara, tgtChara, e) {
     if (!srcChara || srcChara.id !== tgtChara.id) return false;
     const elem = e.element;
     const elemOK = elem == null || (Array.isArray(elem) ? elem.indexOf(tgtChara.element) >= 0 : elem === tgtChara.element);
-    const tp = e.type;
-    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.type) >= 0 : tp === tgtChara.type);
+    const tp = e.weapon;
+    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.weapon) >= 0 : tp === tgtChara.weapon);
     return elemOK && typeOK;
   }
   if (sc === 2 || sc === 4) {
     const elem = e.element;
     const elemOK = elem == null || (Array.isArray(elem) ? elem.indexOf(tgtChara.element) >= 0 : elem === tgtChara.element);
-    const tp = e.type;
-    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.type) >= 0 : tp === tgtChara.type);
+    const tp = e.weapon;
+    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.weapon) >= 0 : tp === tgtChara.weapon);
     return elemOK && typeOK;
   }
   if (sc === 5) {

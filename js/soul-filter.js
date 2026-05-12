@@ -1,6 +1,6 @@
 // js/soul-filter.js
 import { state } from './soul-state.js';
-import { RARITY, ELEMENT, WEAPON,
+import { RARITY, ELEMENT, WEAPON, SOUL_TAG, SOUL_TAG_COLOR,
          renderFilterToggles, renderElementFilterToggles } from '../shared/constants.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { SOUL_SPEC } from '../shared/soul-spec.js';
@@ -30,7 +30,10 @@ export const collapseFiltersOnScroll = () => {
 export const initFilterToggles = () => {
   document.getElementById('f-rarity').innerHTML  = renderFilterToggles('rarity', {5:'★5',4:'★4',3:'★3',2:'★2',1:'★1'}, {only:[5,4,3,2,1]});
   document.getElementById('f-element').innerHTML = renderElementFilterToggles('element', {skip:[0]});
-  document.getElementById('f-type').innerHTML    = renderFilterToggles('type', WEAPON);
+  document.getElementById('f-weapon').innerHTML    = renderFilterToggles('weapon', WEAPON);
+  document.getElementById('f-tags').innerHTML    = renderFilterToggles('tags', SOUL_TAG, {
+    attr: k => SOUL_TAG_COLOR[k] ? ' style="color:' + SOUL_TAG_COLOR[k] + '"' : '',
+  });
 }
 
 export const toggleFilter = (key, val, btn) => {

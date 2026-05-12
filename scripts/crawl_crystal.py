@@ -127,10 +127,10 @@ def _build_effect_ent(bunrui_list, scope, elem, buki, txt_elem, txt_buki, tokush
     ent = {'bunrui': bunrui_list, 'scope': scope}
     if scope == 2:
         if txt_elem: ent['element'] = txt_elem
-        if txt_buki: ent['type']    = txt_buki
+        if txt_buki: ent['weapon']    = txt_buki
     elif scope == 3:
         if elem: ent['element'] = elem
-        if buki: ent['type']    = buki
+        if buki: ent['weapon']    = buki
     elif scope == 5:
         if tokushu: ent['name'] = tokushu
     ent['condition'] = condition
@@ -207,7 +207,7 @@ def parse_row(row):
     # chara/bg crawler と一致。
     def _merge_key(e):
         return (e.get('bairitu'), e.get('calc_type'), e.get('scope'),
-                e.get('condition'), e.get('element'), e.get('type'), e.get('name'))
+                e.get('condition'), e.get('element'), e.get('weapon'), e.get('name'))
     merged = []
     for e in effects:
         k = _merge_key(e)

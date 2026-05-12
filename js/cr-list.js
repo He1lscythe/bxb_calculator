@@ -80,8 +80,8 @@ export const crystalElement = (c) => {
 }
 
 export const crystalWeapon = (c) => {
-  const e = (c.effects||[]).find(function(e){return (e.scope===2||e.scope===3) && e.type!=null;});
-  return e ? e.type : 0;
+  const e = (c.effects||[]).find(function(e){return (e.scope===2||e.scope===3) && e.weapon!=null;});
+  return e ? e.weapon : 0;
 }
 
 export const crystalScope = (c) => {
@@ -146,7 +146,8 @@ export const fmtRowBairitu = (c) => {
   return parts.length ? '<span class="row-bairitu">' + parts.join(' / ') + '</span>' : '';
 }
 
-export const renderRow = (c) => {
+// renderRowHd 只生成 .crystal-row-hd 内部 HTML — saveEdit 整段替换 hd 避免 patchy bug
+export const renderRowHd = (c) => {
   const elem = crystalElement(c), weap = crystalWeapon(c), cond = crystalCondition(c);
   const rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
   const eb = elem ? '<span class="badge elem-' + elem + '">' + (ELEMENT[elem] || elem) + '</span>' : '';
@@ -181,9 +182,13 @@ export const renderRow = (c) => {
       '<div class="bg-row-right">' + eb + wb + bc + bt + bairitu + '</div>' +
     '</div>';
 
+  return desktopHtml + mobileHtml + expandBtn;
+};
+
+export const renderRow = (c) => {
   return '<div class="crystal-row" id="row-' + c.id + '">' +
     '<div class="crystal-row-hd" onclick="toggleExpand(' + c.id + ')">' +
-      desktopHtml + mobileHtml + expandBtn +
+      renderRowHd(c) +
     '</div>' +
     '<div class="crystal-body" id="body-' + c.id + '"></div>' +
   '</div>';
@@ -210,8 +215,8 @@ export const toggleExpand = (id) => {
 export const scopeLabel = (e) => {
   if (e.scope === 2 || e.scope === 3) {
     if (e.element) return (ELEMENT[e.element] || '') + '属性のみ';
-    if (e.type != null) {
-      const t = Array.isArray(e.type) ? e.type : [e.type];
+    if (e.weapon != null) {
+      const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
       return t.map(function(v) { return WEAPON[v] || v; }).join('/') + 'のみ';
     }
   }

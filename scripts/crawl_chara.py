@@ -199,7 +199,7 @@ def parse_bd_effects(effect_text):
             cls = classify_effect(sub, scope_mode='bd')
             bunruis = cls.get('bunrui', [])
             sub_data.append((sub, bunruis, cls.get('scope', 1), cls.get('condition', 0),
-                              cls.get('element'), cls.get('type')))
+                              cls.get('element'), cls.get('weapon')))
             normed = norm(sub)
             for b in bunruis:
                 v, ct = _val_for_bunrui_bd(normed, b)
@@ -221,13 +221,13 @@ def parse_bd_effects(effect_text):
                 ent = {'bunrui': [b], 'scope': scope, 'condition': condition,
                        'bairitu': round(v, 6), 'calc_type': ct}
                 if element is not None: ent['element'] = element
-                if type_val is not None: ent['type'] = type_val
+                if type_val is not None: ent['weapon'] = type_val
                 entries.append(ent)
 
     # Merge pass: 同非-bunrui 字段的 entries 合并 bunrui[]
     def _merge_key(e):
         return (e.get('bairitu'), e.get('calc_type'), e.get('scope'),
-                e.get('condition'), e.get('element'), e.get('type'))
+                e.get('condition'), e.get('element'), e.get('weapon'))
     merged = []
     for e in entries:
         k = _merge_key(e)
@@ -782,7 +782,7 @@ def get_char_list(session):
             "name":     name,
             "rarity":   d.get("rarity"),
             "element":  d.get("element"),
-            "type":     d.get("type"),
+            "weapon":   d.get("type"),
             "chara_id": chara_id,
             "url":      BASE_URL + href if href else None,
         })
@@ -1481,7 +1481,7 @@ def main():
                             "name":    c["name"],
                             "rarity":  c["rarity"],
                             "element": c["element"],
-                            "type":    c["type"],
+                            "weapon":  c["weapon"],
                             "url":     final_url,
                             "states":  states or {},
                             "omoide":  latent,

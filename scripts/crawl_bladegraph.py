@@ -289,7 +289,7 @@ def parse_effects(dc, effect_text):
             if elem is not None:
                 entry["element"] = elem
             if type_val is not None:
-                entry["type"] = type_val
+                entry["weapon"] = type_val
             if scope == 5 and char_name:
                 entry["name"] = char_name
             effects.append(entry)
@@ -298,7 +298,7 @@ def parse_effects(dc, effect_text):
     # 跟 crawl_chara.py 行为一致
     def _merge_key(e):
         return (e.get('bairitu'), e.get('calc_type'), e.get('scope'),
-                e.get('condition'), e.get('element'), e.get('type'), e.get('name'))
+                e.get('condition'), e.get('element'), e.get('weapon'), e.get('name'))
     merged = []
     for e in effects:
         k = _merge_key(e)

@@ -16,7 +16,7 @@ export const renderRightTags = (s) => {
     } else if (e.scope === 1) {
       tags += '<span class="scope-tag scope-all">全</span>';
     } else if (e.scope === 2) {
-      const lim = e.element != null ? (ELEMENT[e.element] || e.element) : (e.type != null ? (WEAPON[e.type] || e.type) : '限');
+      const lim = e.element != null ? (ELEMENT[e.element] || e.element) : (e.weapon != null ? (WEAPON[e.weapon] || e.weapon) : '限');
       tags += '<span class="scope-tag scope-lim">' + lim + '</span>';
     }
     if (e.condition) tags += '<span class="cond-tag cond-' + e.condition + '">' + (CONDITION[e.condition] || '') + '</span>';
