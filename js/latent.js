@@ -39,24 +39,32 @@ export const getLinkedThresholds = (threshold, omoideRarity) => {
   return null;
 }
 
-export const makeLCSHtml = (iconId, t, slotIdx, restricted) => {
+// 92 senzai option × 40 threshold × 5 slot = 18K+ 隐藏 DOM —— enterEditMode 时
+// 全部建好太重（中低端 Android 100-300ms）。把 option 构建延迟到 toggleLCS 首次打开。
+const _buildLCSOpts = (iconId, t, slotIdx, restricted) => {
   let tbl = (typeof state.SENZAI_TABLE !== 'undefined') ? state.SENZAI_TABLE : {};
   let keys = Object.keys(tbl).sort(function(a, b) { return parseInt(a) - parseInt(b); });
   if (restricted) keys = keys.filter(function(k) { return +k >= 88 && +k <= 92; });
-  let opts = keys.map(function(k) {
+  return keys.map(function(k) {
     const info = tbl[k];
     const bVal = (info.bairitu != null && info.bairitu !== 0) ? ' (' + ctPfx(info.calc_type) + fmtNum(info.bairitu) + ')' : '';
     const label = (info.koka || ('icon ' + k)) + bVal;
     const sel = (iconId != null && parseInt(k) === iconId) ? ' class="lcs-opt lcs-selected"' : ' class="lcs-opt"';
     return '<div' + sel + ' data-val="' + k + '" onclick="selectLCS(this,' + t + ',' + slotIdx + ')">' + escHtml(label) + '</div>';
   }).join('');
+};
+
+export const makeLCSHtml = (iconId, t, slotIdx, restricted) => {
   const triggerLabel = iconId != null ? _senzaiLabel(iconId) : '選択...';
   const searchHtml = restricted ? '' : '<input class="lcs-search" type="text" placeholder="絞込..." oninput="filterLCS(this)">';
+  // data-* 属性で初回開閉時に _buildLCSOpts に必要な情報を保持。.lcs-list は初期空、
+  // toggleLCS が初開時に populate。
+  const iconAttr = iconId != null ? iconId : '';
   return '<div class="latent-edit-chip">'
-    + '<button class="lcs-trigger" onclick="toggleLCS(event,this)">' + escHtml(triggerLabel) + '</button>'
+    + '<button class="lcs-trigger" data-icon="' + iconAttr + '" data-t="' + t + '" data-slot="' + slotIdx + '" data-rest="' + (restricted ? '1' : '0') + '" onclick="toggleLCS(event,this)">' + escHtml(triggerLabel) + '</button>'
     + '<div class="lcs-dropdown">'
     + searchHtml
-    + '<div class="lcs-list">' + opts + '</div>'
+    + '<div class="lcs-list"></div>'
     + '</div>'
     + '<button class="latent-rm-btn" onclick="removeLatentSlot(' + t + ',' + slotIdx + ')">×</button>'
     + '</div>';
@@ -86,6 +94,17 @@ export const toggleLCS = (e, triggerBtn) => {
   const dropdown = chip.querySelector('.lcs-dropdown');
   if (state._lcsOpen === dropdown) { closeLCS(); return; }
   closeLCS();
+  // Lazy build options on first open（enterEditMode 時の構築コスト回避）
+  const list = dropdown.querySelector('.lcs-list');
+  if (list && list.children.length === 0) {
+    const iconStr = triggerBtn.dataset.icon;
+    list.innerHTML = _buildLCSOpts(
+      iconStr === '' ? null : +iconStr,
+      +triggerBtn.dataset.t,
+      +triggerBtn.dataset.slot,
+      triggerBtn.dataset.rest === '1'
+    );
+  }
   const rect = triggerBtn.getBoundingClientRect();
   let top = rect.bottom + 2;
   let left = rect.left;

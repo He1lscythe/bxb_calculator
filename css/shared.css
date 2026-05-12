@@ -1,5 +1,31 @@
 /* === BxB shared UI primitives — loaded by every viewer page === */
 
+/* ----- touch responsiveness（全局・无 media query）-----
+   touch-action: manipulation → 干掉浏览器 300ms 双击缩放检测延迟（iOS Safari /
+     旧 Android Chrome 上肉眼可感）。桌面无 touch，无副作用。
+   -webkit-tap-highlight-color: transparent → 去掉 iOS Safari 点击时的灰色闪光，
+     视觉延迟感消失。桌面无 webkit tap-highlight，无副作用。
+   注意：<a> 不加 touch-action — link 走浏览器原生 navigation（不是 JS click handler），
+   300ms 延迟在原生导航上不存在。在 iPad Safari/Chrome 上反而有偶发 navigation 被
+   吞掉的 race bug，所以排除。 */
+button, [onclick],
+.ftog, .btog,
+.char-item, .soul-item, .cr-item, .bg-item,
+.toolbar-btn, .filter-toggle-btn, .f-reset-btn,
+.lcs-opt, .lcs-trigger,
+.om-opt, .om-btn,
+.eb-btn, .eb-emblem,
+.modal-close, .modal-overlay,
+.btn-edit, .btn-revise-save, .btn-add-slot,
+select, input[type=number] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+/* <a> 只去掉 tap-highlight 灰闪，保留默认 touch-action（让浏览器原生处理 link 导航） */
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* ----- filter bar ----- */
 .filter-section { display: flex; flex-direction: column; gap: 3px; }
 .filter-label { font-size: 10px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .06em; }
@@ -160,7 +186,7 @@
 .field-val  { font-size: 13px; flex: 1; line-height: 1.5; word-break: break-all; }
 
 /* mobile: 倍率テキスト幅を 30% に制限・改行許可（左の効果文を圧迫しない）*/
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .skill-tags-right {
     max-width: 40%;
   }

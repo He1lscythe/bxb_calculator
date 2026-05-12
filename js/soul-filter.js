@@ -16,7 +16,7 @@ export const toggleFilters = () => {
 }
 
 export const collapseFiltersOnScroll = () => {
-  if (window.innerWidth > 768) return;
+  if (window.innerWidth > 900) return;
   const body = document.getElementById('filters-body');
   if (!body || !(body.style.display === 'flex' || body.style.display === 'block')) return;
   if (state._filtersOpenScrollY === null) return;

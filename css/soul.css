@@ -63,7 +63,7 @@
 .affinity-cell { display: flex; flex-direction: column; align-items: center; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 7px 4px; gap: 2px; }
 .affinity-name   { font-size: 12px; font-weight: 700; }
 .affinity-level  { font-size: 10px; font-weight: 700; }
-.affinity-effect { font-size: 11px; color: var(--text2); }
+.affinity-effect { font-size: 11px; color: var(--text2); text-align: center; }
 .aff-2  { color: #44ee77; }  .aff-cell-2  { border-color: rgba(68,238,119,.35); }
 .aff-1  { color: #88ee99; }  .aff-cell-1  { border-color: rgba(136,238,153,.2); }
 .aff-0  { color: var(--text2); }
@@ -101,7 +101,7 @@
 .skill-edit-card.deleted .skill-name-edit { text-decoration: line-through; color: var(--text2); }
 
 /* ----- mobile ----- */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   body { height: auto; overflow-y: auto; }
   #page-wrap { overflow: visible; }
   #layout { flex-direction: column; overflow: visible; flex: none; }
@@ -120,7 +120,6 @@
   #detail.show-mob { display: block; }
   #placeholder { display: none; }
   #detail-mob-bar { display: flex; }
-  .soul-banner { display: none; }
   .soul-header { margin-bottom: 0; padding-top: 12px; box-shadow: 0 -100vh 0 0 var(--bg); }
   #f-type { display: grid; grid-template-columns: repeat(6, 1fr); }
   .filter-toggle-btn { display: block; }
@@ -128,4 +127,15 @@
   #soul-count-mob { display: block; }
   #soul-count { display: none; }
   #filters { position: sticky; top: 52px; z-index: 50; background: var(--bg2); }
+}
+
+/* 横屏（iPad / 手机）banner 限高，避免占用过多屏高。
+   max-height: 720px 排除桌面、覆盖 iPad 横屏 820 / 手机横屏 360-500。 */
+@media (orientation: landscape) and (max-height: 720px) {
+  .soul-banner { max-height: 10vh; width: auto; max-width: 100%; object-fit: contain; }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .soul-banner { display: none; }
+  .soul-meta { display: none; }
 }

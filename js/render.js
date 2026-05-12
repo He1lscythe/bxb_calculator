@@ -84,8 +84,20 @@ const saveCharaCheck = () => {
 };
 
 export const selectChar = (id) => {
+  // 只切換 .active class，不 renderList（rebuild 653+ entry の innerHTML は遅機で 100-300ms）。
+  // list 内容変更が伴うケース（filter / sort）は applyFilters 内で renderList を別途呼ぶ。
+  // 編集後の badge 変更（rarity/element/weapon を変えた稀ケース）は反映されないが、許容。
+  const list = document.getElementById('char-list');
+  if (list) {
+    const prev = list.querySelector('.char-item.active');
+    if (prev) prev.classList.remove('active');
+    const next = list.querySelector(`.char-item[data-id="${id}"]`);
+    if (next) {
+      next.classList.add('active');
+      next.scrollIntoView({ block: 'nearest' });
+    }
+  }
   state.selectedId = id;
-  renderList();
   const c = state.allChars.find(x => x.id === id);
   if (!c) return;
   document.getElementById('placeholder').style.display = 'none';
@@ -98,7 +110,7 @@ export const selectChar = (id) => {
   const active = state.activeState[id] || preferred;
   switchState(id, active, detail);
   // Mobile: show as fullscreen modal
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth <= 900) {
     const dt = document.getElementById('detail');
     dt.classList.add('show-mob');
     dt.scrollTop = 0;
@@ -130,7 +142,7 @@ export const updateMobNavBar = (c) => {
 }
 
 export const _measureStickyHeights = () => {
-  const isMob = window.innerWidth <= 768;
+  const isMob = window.innerWidth <= 900;
   const bar = document.getElementById('detail-mob-bar');
   const header = document.querySelector('#chara-detail .chara-header');
   const barH = (isMob && bar) ? bar.getBoundingClientRect().height : 0;
@@ -207,19 +219,23 @@ export const renderDetail = (c) => {
     `<span class="bd-sp-tag bd-sp-${s}">${CHARA_TAG[s] || s}</span>`).join('');
   return min`
     <div class="chara-header">
-      <div class="chara-title">
-        <span class="name-text">${escHtml(c.name)}</span>
-        <img class="chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">
+      <div class="ch-row">
+        <div class="chara-title">
+          <span class="name-text">${escHtml(c.name)}</span>
+          <img class="chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">
+        </div>
+        ${actionsHtml}
       </div>
-      ${actionsHtml}
-      <button class="btn-edit" onclick="enterEditMode(${c.id})">修正</button>
-      <div class="chara-meta">
-        <span class="meta-chip"><span class="badge ${rLabel}">${rLabel}</span></span>
-        <span class="meta-chip"><span class="elem-dot" style="background:${eColor}"></span>${eName}属性</span>
-        <span class="meta-chip">${wName}</span>
-        ${c.url ? `<a class="meta-chip" href="${c.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>` : ''}
+      <div class="ch-row">
+        <div class="chara-meta">
+          <span class="meta-chip"><span class="badge ${rLabel}">${rLabel}</span></span>
+          <span class="meta-chip"><span class="elem-dot" style="background:${eColor}"></span>${eName}属性</span>
+          <span class="meta-chip">${wName}</span>
+          ${c.url ? `<a class="meta-chip" href="${c.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>` : ''}
+        </div>
+        <button class="btn-edit" onclick="enterEditMode(${c.id})">修正</button>
       </div>
-      ${tagsHtml ? `<div class="chara-tags">${tagsHtml}</div>` : ''}
+      ${tagsHtml ? `<div class="ch-row"><div class="chara-tags">${tagsHtml}</div></div>` : ''}
     </div>
     <div class="state-tabs">${tabs}</div>
     ${bdSection}
