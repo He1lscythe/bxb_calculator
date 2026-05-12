@@ -316,28 +316,34 @@ export const renderEditDetail = (c) => {
     </div>` : '';
   return min`
     <div class="chara-header edit-mode-active">
-      <div class="chara-title">
-        <span class="name-text">${escHtml(c.name)}</span>
-        <img class="chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">
+      <div class="ch-row">
+        <div class="chara-title">
+          <span class="name-text">${escHtml(c.name)}</span>
+          <img class="chara-icon" src="https://img.altema.jp/bxb/chara/icon/${c.id}.jpg" onerror="this.style.display='none'" alt="">
+        </div>
+        <div class="edit-actions">
+          <button class="btn-save"   onclick="saveEdit()">保存</button>
+          <button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>
+        </div>
       </div>
-      <div class="chara-edit-meta">
-        <select class="edit-select" onchange="setPath(state.editData,'rarity',Number(this.value))">
-          ${[4,3,2,1].map(r=>`<option value="${r}"${c.rarity==r?' selected':''}>${RARITY[r]}ランク</option>`).join('')}
-        </select>
-        <select class="edit-select" onchange="setPath(state.editData,'element',Number(this.value))">
-          ${Object.entries(ELEMENT).map(([k,v])=>`<option value="${k}"${c.element==k?' selected':''}>${v}属性</option>`).join('')}
-        </select>
-        <select class="edit-select" onchange="setPath(state.editData,'type',Number(this.value))">
-          ${Object.entries(WEAPON).map(([k,v])=>`<option value="${k}"${c.type==k?' selected':''}>${v}</option>`).join('')}
-        </select>
+      <div class="ch-row">
+        <div class="chara-edit-meta">
+          <select class="edit-select" onchange="setPath(state.editData,'rarity',Number(this.value))">
+            ${[4,3,2,1].map(r=>`<option value="${r}"${c.rarity==r?' selected':''}>${RARITY[r]}ランク</option>`).join('')}
+          </select>
+          <select class="edit-select" onchange="setPath(state.editData,'element',Number(this.value))">
+            ${Object.entries(ELEMENT).map(([k,v])=>`<option value="${k}"${c.element==k?' selected':''}>${v}属性</option>`).join('')}
+          </select>
+          <select class="edit-select" onchange="setPath(state.editData,'type',Number(this.value))">
+            ${Object.entries(WEAPON).map(([k,v])=>`<option value="${k}"${c.type==k?' selected':''}>${v}</option>`).join('')}
+          </select>
+        </div>
       </div>
-      <div class="chara-tag-row">
-        <span class="field-label" style="margin:0">魔剣特性</span>
-        <div class="bunrui-toggles">${renderCharaTagToggles(c)}</div>
-      </div>
-      <div class="edit-actions">
-        <button class="btn-save"   onclick="saveEdit()">保存</button>
-        <button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>
+      <div class="ch-row">
+        <div class="chara-tag-row">
+          <span class="field-label" style="margin:0">魔剣特性</span>
+          <div class="bunrui-toggles">${renderCharaTagToggles(c)}</div>
+        </div>
       </div>
     </div>
     <div class="state-tabs">${tabs}</div>

@@ -14,7 +14,7 @@
 
 /* 有利武器 — 桌面行内 flex，移动 6 列 × 2 行 grid 对齐 */
 .adv-weapon-grid{display:flex;flex-wrap:wrap;gap:3px;}
-@media(max-width:768px){
+@media(max-width: 900px){
   /* #enemy-bar .eb-adv-weapon{flex-basis:100%;flex-direction:column;align-items:stretch;gap:4px;} */
   #enemy-bar .eb-adv-weapon{display:flex;justify-content:space-between;align-items:center;}
   .adv-weapon-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;}
@@ -114,7 +114,7 @@
 .crystal-cfg-btn:hover{border-color:var(--accent);color:var(--accent);}
 /* 移动端：结晶 section 整体放大；thumb/×/⚙ 都放大让 touch 友好；
    字符位置再下移 1px（padding-bottom 0；桌面端 1px 不变） */
-@media(max-width:768px){
+@media(max-width: 900px){
   .crystals-grid{gap:14px;}
   .crystal-slot-wrap{gap:6px;}
   .crystal-thumb,.crystal-empty{width:56px;height:56px;border-radius:7px;}
@@ -277,7 +277,7 @@
 .bgdm-img-wrap{flex-shrink:0;text-align:center;}
 .bgdm-img-wrap img{max-width:240px;width:100%;height:auto;border-radius:8px;display:block;}
 .bgdm-img-rarity{margin-top:8px;font-size:12px;font-weight:700;text-align:center;color:var(--text2);}
-@media(max-width:768px){
+@media(max-width: 900px){
   .bgdm-layout{flex-direction:column-reverse;}
   .bgdm-img-wrap{width:100%;text-align:center;}
   .bgdm-img-wrap img{max-width:160px;margin:0 auto;}
@@ -346,8 +346,8 @@
 
 #loading{text-align:center;color:var(--text2);padding:60px;font-size:13px;}
 .ftog-mob{display:none;}
-@media(max-width:768px){#slots-grid{grid-template-columns:1fr;}}
-@media(max-width:768px){
+@media(max-width: 900px){#slots-grid{grid-template-columns:1fr;}}
+@media(max-width: 900px){
   #entity-modal .modal-panel,#detail-modal .modal-panel,#emblem-modal .modal-panel{height:min(860px,84svh);}
   .modal-sidebar{width:120px;min-width:100px;padding:8px 6px;}
 
@@ -382,14 +382,14 @@
 @keyframes mobFlipInL{from{transform:rotateY(-90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
 /* 触屏全体（含 iPad 横屏 1180px）：解锁 body 纵向滚动 + slot-card overflow。
    桌面（hover:hover/pointer:fine）保持 overflow:hidden + 内部 scroll 容器模式。 */
-@media(max-width:768px),(hover:none) and (pointer:coarse){
+@media(max-width: 900px),(hover:none) and (pointer:coarse){
   body{height:auto;overflow-y:auto;}
   #page-wrap{overflow:visible;}
   .slot-card{overflow:visible;}
 }
 /* 真・狭幅（手机竖横屏）：单 slot 切换 + 翻页动画 + 指示器。
    iPad 横屏 1180px 不进入此 block，保持 3 列布局。 */
-@media(max-width:768px){
+@media(max-width: 900px){
   /* 移动端：一次只显示一张 slot-card；底部留 40vh 空白让滑到底时不贴屏幕底部。
      卡片高度自适应内容（不强制统一），切换 1/2/3 号位时高度可能不同。 */
   #slots-grid{perspective:700px;display:flex;flex-direction:column;flex:none;padding:8px 8px 40vh;gap:0;}
@@ -401,7 +401,7 @@
   .slot-card.mob-anim-inL{animation:mobFlipInL .2s ease-out forwards;}
 }
 #mobile-slot-indicator{display:none;justify-content:center;align-items:center;gap:12px;padding:8px 0 4px;}
-@media(max-width:768px){#mobile-slot-indicator{display:flex;}}
+@media(max-width: 900px){#mobile-slot-indicator{display:flex;}}
 .msi-dot{width:9px;height:9px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s,transform .2s;flex-shrink:0;}
 .msi-dot.active{background:var(--accent);transform:scale(1.4);}
 .msi-dot.mob-disabled{opacity:.25;cursor:default;}
