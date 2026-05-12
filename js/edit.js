@@ -194,10 +194,19 @@ export const saveEdit = () => {
         if (hasChar && !('tags' in charDiff)) {
           charDiff.tags = null;
         }
-        // omoide_template 非 null 时 omoide 数组冗余（render 时 resolveOmoideTemplates
-        // 会从 templates 还原）。显式 null 触发 server _deep_merge 清掉 revise 里 stale
-        // 的 omoide 字段。omoide_template === null（脱离 template 改 slot）则保留 omoide
-        // 完整数组作为显式 override；字段不在 diff 时本条件 false，不影响。
+        // OMOIDE_KEYS 撤回保護：hasOmoide なのに特定 key が diff に居ない場合、
+        // その field は base と一致するように戻った（けど revise には stale 値が
+        // 残ってる可能性）。null 注入で server _deep_merge に pop させる。
+        // 例：template 5 → template 2（rarity 5 → 4=base）切替時、omoide_rarity
+        // が diff に出ないため revise の rarity=5 が残留する bug を防ぐ。
+        if (hasOmoide) {
+          for (const k of OMOIDE_KEYS) {
+            if (!(k in omoideDiff)) omoideDiff[k] = null;
+          }
+        }
+        // omoide_template 非 null 時、omoide 配列は冗長（render 時 resolveOmoideTemplates
+        // が templates から復元）。template 切替時も omoide=null で revise の stale
+        // omoide を明示的に消す。template===null（slot 手改で脱離）時は omoide を残す。
         if (hasOmoide && omoideDiff.omoide_template != null) {
           omoideDiff.omoide = null;
         }
