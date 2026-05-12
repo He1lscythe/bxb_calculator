@@ -71,8 +71,8 @@ scripts/build.js（前端构建）
 |------|------|
 | `characters.json` | **主角色数据**（含两阶段技能分类 + bairitu/bairitu_scaling + calc_type）。crawl_chara.py 输出，characters.html 读取。爬取过程中也作为断点续传存档 |
 | `characters_revise.json` | 角色手动修正 diff（**非 omoide 字段**）。仅存变更字段。页面加载时通过 deepApply 叠加到 characters.json 上 |
-| `omoide_revise.json` | 角色潜在開放 diff（`omoide` / `omoide_template` / `omoide_rarity` 字段）。与 characters_revise 分离，页面加载后单独叠加 |
-| `omoide_templates.json` | 潜在開放槽位模板库。格式：`[{id, name, omoide:[...40 entries...]}]`。id 自增，通过 UI 编辑保存 |
+| `omoide_revise.json` | 角色潜在開放 diff（`omoide` / `omoide_template` / `omoide_rarity` 字段）。与 characters_revise 分离，页面加载后单独叠加。**注：`omoide_template != null` 时 revise 不写 `omoide` 字段；运行时 `resolveOmoideTemplates` 用 templates 还原 slots** |
+| `omoide_templates.json` | 潜在開放槽位模板库。格式：`[{id, name, omoide:[...40 entries...]}]`。id 自增，通过 UI 编辑保存。**chara 引用方式是 live reference**（chara.omoide_template = id），template 内容更新后所有引用 chara 自动跟随 |
 | `souls.json` | **魂数据**（含多效果分类 + bairitu + calc_type + bunrui=7 时 hit_type/hit_per_stage）。soul.html 读取 |
 | `souls_revise.json` | 魂手动修正数据 |
 | `crystals.json` | **記憶結晶数据**（含 effects 数组、bairitu_init/bairitu、scope/condition/calc_type、bunrui=7 时 hit_type/hit_per_stage）。crystals.html 读取 |
@@ -304,6 +304,20 @@ const OMOIDE_KEYS = new Set(['omoide', 'omoide_template', 'omoide_rarity']);
 // diff 中属于 OMOIDE_KEYS 的字段 → omoideReviseData
 // 其余字段 → reviseData
 ```
+
+### omoide_template 压缩（saveEdit 中）
+
+`omoide_template != null`（玩家选/换了 template）时，revise 不存完整 `omoide` 数组 —— 显式注入 `omoide: null` 触发 server `_deep_merge` 清掉 stale 字段：
+
+```javascript
+if (hasOmoide && omoideDiff.omoide_template != null) {
+  omoideDiff.omoide = null;  // 让 server 把 revise.omoide 字段 pop 掉
+}
+```
+
+运行时 `resolveOmoideTemplates(charas, templates)`（[shared/omoide.js](../shared/omoide.js)）在 fetch 后还原 slots：找到 chara.omoide_template 对应 template，把 template.omoide 深拷贝覆盖 chara.omoide。template 找不到则保留 chara.omoide 原值（降级）。
+
+脱离 template（玩家手改 slot）时 `_syncTemplateSelect` 会把 `omoide_template` 置 null。save 时 diff 含 `omoide_template: null` + 完整 `omoide`，注入条件 false，两者都进 revise；server pop 掉 `omoide_template`、保留 `omoide` 作显式 override。
 
 ### 相关变量
 
