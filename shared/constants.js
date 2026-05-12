@@ -47,7 +47,7 @@ export const BUNRUI_FILTER = {
 export const CHARA_TAG = {
   1:  '時止め',       // BD 子页面 altema.jp/bxb/tokitomebd
   2:  '麻痺',         // BD 子页面 altema.jp/bxb/mahibd
-  3:  '強制ブレイク',  // BD 効果文「強制ブレイク」
+  3:  '強制BK',       // BD 効果文「強制ブレイク」
   4:  '弱体解除',     // BD 効果文「弱体化解除」「弱体化を解除」
   5:  'BDバフ',       // BD 子页面 altema.jp/bxb/buffbd
   6:  'AOE',          // chara skill effect の bunrui に 8 を含む（「攻撃範囲が敵全体になる」全体化）
