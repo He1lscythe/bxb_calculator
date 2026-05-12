@@ -71,7 +71,7 @@ def _chara_parts_status(chara):
 #   - tests/test_data_integrity.cjs expected key set
 #   - docs/skills_schema.md tag 表
 SPECIAL_LABELS = {
-    1: '時止め', 2: '麻痺', 3: '強制ブレイク',
+    1: '時止め', 2: '麻痺', 3: '強制BK',
     4: '弱体解除', 5: '高倍率バフ',
 }
 # Sub-pages for page-sourced special effects
