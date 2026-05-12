@@ -5,7 +5,7 @@ import { ELEMENT, WEAPON, BUNRUI, BUNRUI_SHORT, CONDITION, SCOPE,
 import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
 import { escHtml } from './utils.js';
 import { _deepDiff, computeDiff, deepApply } from './diff.js';
-import { renderList, renderDetailBody, cardElement, cardWeapon, fmtRowBairitu } from './bg-list.js';
+import { renderList, renderDetailBody, renderRowHd, cardElement, cardWeapon, fmtRowBairitu } from './bg-list.js';
 import { updateReviseBar } from './nav.js';
 
 const _BG_BUNRUI_ALL = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
@@ -45,14 +45,20 @@ export const saveEdit = () => {
     const sessionChanged = JSON.stringify(state.editData) !== JSON.stringify(state.allBG[idx]);
     if (sessionChanged) {
       state.allBG[idx] = state.editData;
-      const totalChanged = JSON.stringify(state.editData) !== JSON.stringify(state.originalData[id]);
-      if (totalChanged) {
-        state.reviseData[id] = computeDiff(state.originalData[id], state.editData);
+      // prev-revise pattern：把上次落盘的 revise 传给 _deepDiff，
+      // 让叶子撤回（mval==oval 但 prev 有值）自动 emit `null` 触发 server pop。
+      // 不再需要 totalChanged 检查 — meaningful 判定取代之。
+      const prevRevise = state.reviseData[id];
+      const newDiff = computeDiff(state.originalData[id], state.editData, prevRevise);
+      const meaningful = Object.keys(newDiff).some(k => k !== 'id' && k !== 'name');
+      if (meaningful) {
+        state.reviseData[id] = newDiff;
+        state.sessionReviseIds.add(id);
       } else {
-        // 改回了 base：清掉 reviseData 但保留 session 让 server 删除条目
+        // 完全无差异（编辑又撤回到 base，且 prev 也无残留）→ 清空，不入队
         delete state.reviseData[id];
+        state.sessionReviseIds.delete(id);
       }
-      state.sessionReviseIds.add(id);
     }
     updateReviseBar();
   }
@@ -63,26 +69,10 @@ export const saveEdit = () => {
   const body = document.getElementById('body-' + id2);
   const c = idx >= 0 ? state.allBG[idx] : null;
   if (row && c) {
-    const rb = '<span class="badge r'+c.rarity+'">★'+c.rarity+'</span>';
-    const ce2 = cardElement(c), cw2 = cardWeapon(c);
-    const eb = ce2 ? '<span class="badge elem-'+ce2+'">'+(ELEMENT[ce2]||ce2)+'</span>' : '';
-    const wb = cw2 ? '<span class="badge weapon">'+(WEAPON[cw2]||cw2)+'</span>' : '';
-    const hasScope5 = (c.effects||[]).some(function(e){return e.scope===5;});
-    const s5b = hasScope5 ? '<span class="badge scope5">キャラ限</span>' : '';
-    const timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
-    const bt = (c.effects||[]).reduce(function(acc,e){return acc.concat(e.bunrui||[]);}, [])
-      .filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,2)
-      .map(function(b){return '<span class="badge bunrui-sm">'+(BUNRUI_SHORT[b]||b)+'</span>';}).join('');
-    row.querySelector('.row-badges').innerHTML = rb + eb + wb + s5b + timeb;
-    row.querySelector('.row-name').textContent = c.name;
-    row.querySelector('.row-bunrui').innerHTML = bt;
-    const oldBairitu = row.querySelector('.row-bairitu');
-    if (oldBairitu) oldBairitu.remove();
-    const newBairituHtml = fmtRowBairitu(c);
-    if (newBairituHtml) {
-      const btn = row.querySelector('.expand-btn');
-      btn.insertAdjacentHTML('beforebegin', newBairituHtml);
-    }
+    // 整段替换 .bg-row-hd 内容（renderRowHd 与初始 renderRow 同源）— 避免
+    // 之前 patchy 逻辑漏 condition tag、bairitu 在 dual-layout 重复等 bug
+    const hd = row.querySelector('.bg-row-hd');
+    if (hd) hd.innerHTML = renderRowHd(c);
   }
   if (body) { body.className = 'bg-body'; if(c) body.innerHTML = renderDetailBody(c); }
   if (row)  row.classList.add('expanded');
@@ -128,11 +118,22 @@ export const _toggleBgArrayField = (ei, field, id, btn) => {
   if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
   else          { arr.push(id); arr.sort((a,b)=>a-b); btn.classList.add('on'); }
   e[field] = arr.length === 0 ? null : (arr.length === 1 ? arr[0] : arr);
+  // 联动 scope：0↔3 / 1↔2 双向（自身 / セット 两套配对）。2/3/5 manual 时保持。
+  const hasElem = e.element != null;
+  const hasType = e.weapon != null;
+  if (hasElem || hasType) {
+    if (e.scope === 0) e.scope = 3;
+    else if (e.scope === 1) e.scope = 2;
+  } else {
+    if (e.scope === 3) e.scope = 0;
+    else if (e.scope === 2) e.scope = 1;
+  }
+  reRenderBgEdit();
 }
 
 export const toggleBladeElement = (ei, id, btn) => { _toggleBgArrayField(ei, 'element', id, btn); }
 
-export const toggleBladeType = (ei, id, btn) => { _toggleBgArrayField(ei, 'type',    id, btn); }
+export const toggleBladeType = (ei, id, btn) => { _toggleBgArrayField(ei, 'weapon',    id, btn); }
 
 // 入力を hit 値として正規化：空 → null、"5/4" 等分数 → 文字列保持、純数値 → number。
 const _normalizeHitVal = (v) => {
@@ -162,6 +163,11 @@ export const setBladeScope = (ei, val) => {
   const e = state.editData?.effects?.[ei];
   if (!e) return;
   e.scope = +val;
+  // scope=0/1 时 element/type 必须为空 → 用 null（不 delete）让 diff.js 撤回 base 残值
+  if (e.scope === 0 || e.scope === 1) {
+    e.element = null;
+    e.weapon = null;
+  }
   // scope=5 显示 name 输入框 → 重渲
   reRenderBgEdit();
 }
@@ -206,7 +212,7 @@ export const renderEditBody = (c) => {
       return '<button class="btog' + (selElems.indexOf(k)>=0?' on':'') + '" onclick="toggleBladeElement('+i+','+k+',this)">' + ELEMENT[k] + '</button>';
     }).join('');
 
-    const selTypes = e.type == null ? [] : (Array.isArray(e.type) ? e.type : [e.type]);
+    const selTypes = e.weapon == null ? [] : (Array.isArray(e.weapon) ? e.weapon : [e.weapon]);
     const typeTogs = [1,2,3,4,5,6,7,8,9,10,11,12].map(function(k) {
       return '<button class="btog' + (selTypes.indexOf(k)>=0?' on':'') + '" onclick="toggleBladeType('+i+','+k+',this)">' + WEAPON[k] + '</button>';
     }).join('');
@@ -287,6 +293,19 @@ export const saveRevise = async () => {
       session_ids:       ids,
       bladegraph_revise: pickPatches(state.reviseData, ids),
     });
+    // submit 成功后 refresh：用无 prev 的 computeDiff 重算 state.reviseData，
+    // 去掉 null 撤回标记，防止下次 saveEdit 拿到 stale prev → null 重复发射。
+    // mirror js/soul-edit.js:147-157
+    for (const id of ids) {
+      const idx = state.allBG.findIndex(b => b.id === id);
+      if (idx < 0) continue;
+      const fresh = computeDiff(state.originalData[id], state.allBG[idx]);
+      if (Object.keys(fresh).some(k => k !== 'id' && k !== 'name')) {
+        state.reviseData[id] = fresh;
+      } else {
+        delete state.reviseData[id];
+      }
+    }
     state.sessionReviseIds.clear();
     if (json.mode === 'remote') {
       showSaveToast(`✓ 提案受付完了 — 管理者の審査・マージ後に反映されます`);

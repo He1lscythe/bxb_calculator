@@ -5,7 +5,7 @@ const _cardElement = c =>
   (c.effects || []).find(e => e.scope === 3 && e.element != null)?.element ?? 0;
 
 const _cardWeapon = c =>
-  (c.effects || []).find(e => e.scope === 3 && e.type != null)?.type ?? 0;
+  (c.effects || []).find(e => e.scope === 3 && e.weapon != null)?.weapon ?? 0;
 
 export const BG_SPEC = {
   searchFields: ['name'],

@@ -5,7 +5,7 @@ import { ELEMENT, WEAPON, BUNRUI, BUNRUI_SHORT, CONDITION, SCOPE,
 import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
 import { escHtml, parseBairituVal } from './utils.js';
 import { computeDiff } from './diff.js';
-import { renderDetailBody, crystalElement, crystalWeapon, fmtRowBairitu } from './cr-list.js';
+import { renderDetailBody, renderRowHd, crystalElement, crystalWeapon, fmtRowBairitu } from './cr-list.js';
 import { updateReviseBar } from './nav.js';
 
 const _CR_BUNRUI_ALL = Object.keys(BUNRUI).map(Number).sort((a,b)=>a-b);
@@ -48,14 +48,20 @@ export const saveEdit = () => {
     const sessionChanged = JSON.stringify(state.editData) !== JSON.stringify(state.allCrystals[idx]);
     if (sessionChanged) {
       state.allCrystals[idx] = state.editData;
-      const totalChanged = JSON.stringify(state.editData) !== JSON.stringify(state.originalData[id]);
-      if (totalChanged) {
-        state.reviseData[id] = computeDiff(state.originalData[id], state.editData);
+      // prev-revise pattern：传上次落盘的 revise，_deepDiff 的 prev 规则会自动
+      // emit null 撤回标记。配合 server _deep_merge null pop 实现「改回 base 时
+      // 清除 stale revise 字段」的撤回。
+      const prevRevise = state.reviseData[id];
+      const newDiff = computeDiff(state.originalData[id], state.editData, prevRevise);
+      const meaningful = Object.keys(newDiff).some(k => k !== 'id' && k !== 'name');
+      if (meaningful) {
+        state.reviseData[id] = newDiff;
+        state.sessionReviseIds.add(id);
       } else {
-        // 改回了 base：清掉 reviseData 但保留 session 让 server 删除条目
+        // 完全无差异且 prev 也无残留 → 清空，不入队
         delete state.reviseData[id];
+        state.sessionReviseIds.delete(id);
       }
-      state.sessionReviseIds.add(id);
     }
     updateReviseBar();
   }
@@ -65,25 +71,11 @@ export const saveEdit = () => {
   const row  = document.getElementById('row-' + id);
   const body = document.getElementById('body-' + id);
   if (row && idx >= 0) {
-    const c    = state.allCrystals[idx];
-    const elem = crystalElement(c), weap = crystalWeapon(c);
-    const rb = '<span class="badge r' + c.rarity + '">★' + c.rarity + '</span>';
-    const eb = elem ? '<span class="badge elem-' + elem + '">' + (ELEMENT[elem] || elem) + '</span>' : '';
-    const wb = weap ? '<span class="badge weapon">' + (WEAPON[weap] || weap) + '</span>' : '';
-    const bt = (c.effects || []).reduce(function(acc, e) { return acc.concat(e.bunrui || []); }, [])
-      .filter(function(v, i, a) { return a.indexOf(v) === i; })
-      .slice(0, 2)
-      .map(function(b) { return '<span class="badge bunrui-sm">' + (BUNRUI_SHORT[b] || b) + '</span>'; }).join('');
-    row.querySelector('.row-badges').innerHTML = rb + eb + wb;
-    row.querySelector('.row-name').textContent = c.name;
-    row.querySelector('.row-bunrui').innerHTML = bt;
-    const oldBairitu = row.querySelector('.row-bairitu');
-    if (oldBairitu) oldBairitu.remove();
-    const newBairituHtml = fmtRowBairitu(c);
-    if (newBairituHtml) {
-      const btn = row.querySelector('.expand-btn');
-      btn.insertAdjacentHTML('beforebegin', newBairituHtml);
-    }
+    const c = state.allCrystals[idx];
+    // 整段替换 .crystal-row-hd（与初始 renderRow 同源 renderRowHd）— 避免
+    // patchy 更新对 dual-layout 不同步（condition tag 漏、bairitu 重复）
+    const hd = row.querySelector('.crystal-row-hd');
+    if (hd) hd.innerHTML = renderRowHd(c);
   }
   if (body) {
     body.className = 'crystal-body';
@@ -134,14 +126,16 @@ export const setCrystalScope = (ei, val) => {
   if (!e) return;
   val = +val;
   e.scope = val;
+  // 用 null（不 delete）：让 computeDiff 看到 mval=null 与 base 比对，能 emit
+  // null 撤回标记。base 没该字段时 diff.js 会判断为 nullish-equiv 不写冗余 null。
   if (val === 0 || val === 1) {
-    delete e.element; delete e.type; delete e.name;
+    e.element = null; e.weapon = null; e.name = null;
   } else if (val === 2 || val === 3) {
-    delete e.name;
+    e.name = null;
   } else if (val === 5) {
-    delete e.element; delete e.type;
+    e.element = null; e.weapon = null;
     const tok = state.editData['特殊条件'];
-    if (tok) e.name = tok; else delete e.name;
+    e.name = tok ? tok : null;
   }
   reRenderCrystalEdit();
 }
@@ -152,10 +146,16 @@ export const setCrystalElement = (ei, val) => {
   val = +val;
   if (e.scope === 5) return;
   if (val === 0) {
-    delete e.element;
-    if (e.scope !== 1 && e.scope !== 2 && e.type == null) e.scope = 0;
+    e.element = null;
+    // 全清 element/type → 降回无限 scope（0/1 配对的 *限 scope 反向转换）
+    if (e.weapon == null) {
+      if (e.scope === 3) e.scope = 0;
+      else if (e.scope === 2) e.scope = 1;
+    }
   } else {
-    if (e.scope !== 1) e.scope = (e.scope === 2) ? 2 : 3;
+    // 添加 element → 升级到对应 *限 scope（0→3, 1→2; 2/3/5 保持）
+    if (e.scope === 0) e.scope = 3;
+    else if (e.scope === 1) e.scope = 2;
     e.element = val;
   }
   reRenderCrystalEdit();
@@ -167,11 +167,15 @@ export const setCrystalWeapon = (ei, val) => {
   val = +val;
   if (e.scope === 5) return;
   if (val === 0) {
-    delete e.type;
-    if (e.scope !== 1 && e.scope !== 2 && e.element == null) e.scope = 0;
+    e.weapon = null;
+    if (e.element == null) {
+      if (e.scope === 3) e.scope = 0;
+      else if (e.scope === 2) e.scope = 1;
+    }
   } else {
-    if (e.scope !== 1) e.scope = (e.scope === 2) ? 2 : 3;
-    e.type = val;
+    if (e.scope === 0) e.scope = 3;
+    else if (e.scope === 1) e.scope = 2;
+    e.weapon = val;
   }
   reRenderCrystalEdit();
 }
@@ -296,7 +300,7 @@ const _renderEffectCard = (e, i, total) => {
 
   const scopeSel = renderEditSelect(SCOPE,                            e.scope || 0, 'setCrystalScope('+i+',this.value)');
   const elemSel  = renderEditSelect({0:'全属性', ...ELEMENT},          e.element || 0, 'setCrystalElement('+i+',this.value)');
-  const weapSel  = renderEditSelect({0:'全武器種', ...WEAPON},         e.type || 0, 'setCrystalWeapon('+i+',this.value)');
+  const weapSel  = renderEditSelect({0:'全武器種', ...WEAPON},         e.weapon || 0, 'setCrystalWeapon('+i+',this.value)');
   const condSel  = renderEditSelect(CONDITION,                        e.condition || 0, 'state.editData.effects['+i+'].condition=+this.value');
   const ctSel    = renderEditSelect({0:'×', 1:'+', 2:'+(終)', 3:'×(終)'}, e.calc_type || 0, 'state.editData.effects['+i+'].calc_type=+this.value');
 
@@ -436,6 +440,19 @@ export const saveRevise = async () => {
       session_ids:    ids,
       crystal_revise: pickPatches(state.reviseData, ids),
     });
+    // submit 成功后 refresh：用无 prev 的 computeDiff 重算 state.reviseData，
+    // 去掉 null 撤回标记，防止下次 saveEdit 拿到 stale prev 重复 emit null。
+    // mirror js/soul-edit.js:147-157 / js/bg-edit.js 同款。
+    for (const id of ids) {
+      const idx = state.allCrystals.findIndex(c => c.id === id);
+      if (idx < 0) continue;
+      const fresh = computeDiff(state.originalData[id], state.allCrystals[idx]);
+      if (Object.keys(fresh).some(k => k !== 'id' && k !== 'name')) {
+        state.reviseData[id] = fresh;
+      } else {
+        delete state.reviseData[id];
+      }
+    }
     state.sessionReviseIds.clear();
     if (json.mode === 'remote') {
       showSaveToast(`✓ 提案受付完了 — 管理者の審査・マージ後に反映されます`);

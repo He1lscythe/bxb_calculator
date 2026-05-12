@@ -98,6 +98,7 @@ import { ELEMENT, WEAPON, BUNRUI_SHORT, CONDITION, SCOPE, SCOPE_SHORT,
          renderEditSelect } from '../shared/constants.js';
 import { escHtml, fmt, parseBairituVal, hideLoading } from '../js/utils.js';
 import { deepApply } from '../js/diff.js';
+import { enforceScopeConstraints } from '../shared/effect-constraints.js';
 import { initFilterToggles, toggleFilters, collapseFiltersOnScroll,
          toggleFilter, expandAll, collapseAll, resetFilters, applyFilters,
          renderList, renderRow, toggleExpand, renderDetailBody,
@@ -129,6 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const idx = state.allCrystals.findIndex(x => x.id === c.id);
         if (idx >= 0) deepApply(state.allCrystals[idx], c);
       });
+      // base+revise 合并后强制 effect scope 约束：scope ∈ {0,1} 时清 element/type
+      enforceScopeConstraints(state.allCrystals);
       if (arr.length) applyFilters();
       // crystals_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
       return fetch('../data/crystals_check.json');

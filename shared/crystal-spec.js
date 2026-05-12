@@ -5,7 +5,7 @@ const _crystalElement = c =>
   (c.effects || []).find(e => (e.scope === 2 || e.scope === 3) && e.element != null)?.element ?? 0;
 
 const _crystalWeapon = c =>
-  (c.effects || []).find(e => (e.scope === 2 || e.scope === 3) && e.type != null)?.type ?? 0;
+  (c.effects || []).find(e => (e.scope === 2 || e.scope === 3) && e.weapon != null)?.weapon ?? 0;
 
 const _crystalScope = c =>
   ((c.effects || [])[0] || {}).scope || 0;

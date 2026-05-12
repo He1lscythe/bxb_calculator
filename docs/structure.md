@@ -242,20 +242,37 @@ git add data/ && git commit -m "..." && git push
 
 start.py `_deep_merge` / `_merge_by_id` 与 Vercel api/save.js 同语义（local + remote 行为一致）。
 
-**撤回标记如何产生 — 两种 pattern：**
+**撤回标记如何产生（prev-revise pattern — 4 个 viewer 统一）：**
 
-1. **显式 null 写入 editData**（推荐、所有「dropdown / step / 数值字段」用）：
-   - [js/cr-edit.js setCrystalStep](js/cr-edit.js#L260)、[setCrystalDelta](js/cr-edit.js#L275)：用户改回 0 / 空 → `editData[k] = null` → `computeDiff` 看到 null !== base → emit `{k: null}` → server pop
-   - 这是 dropdown / number input 的天然 path（UI 控件直接对应 null）
+所有 viewer (soul / bladegraph / crystal / chara) 的 `saveEdit` 都传 prev 给 computeDiff：
 
-2. **saveEdit 落盘前补 null**（用于 toggle UI 等不能写显式 null 的字段）：
-   - [js/edit.js saveEdit](js/edit.js#L189) chara `tags` 字段：toggle 按钮 mutate 数组、无法 emit `null`。
-     `computeDiff` 不 emit「相同字段」（standard diff 语义），但 server `deepMerge` 也不会主动删 existing.tags。
-     → saveEdit 在组装 charDiff 后检查：`hasChar && !('tags' in charDiff)` 时**主动注入** `charDiff.tags = null`，让 server 走 pop 路径。
-   - 仅在 chara 仍有其他真实改动时注入（`hasChar=true`）；
-     chara 完全无改动 / 改回 base 时通过 `totalChanged=false` 走 delete-revise 路径，不需要 null。
+```js
+const prevRevise = state.reviseData[id];   // chara 还合并 omoideReviseData
+const newDiff = computeDiff(state.originalData[id], state.editData, prevRevise);
+const meaningful = Object.keys(newDiff).some(k => k !== 'id' && k !== 'name');
+if (meaningful) state.reviseData[id] = newDiff;
+else            delete state.reviseData[id];
+```
 
-**等价性：** local `start.py` 和 remote `api/save.js (Vercel)` 的 `_deep_merge` / `deepMerge` 实现等价（都把 source[k] === null 转为 pop），所以**两种环境下 tags 撤回行为完全一致**。GitHub Pages 走 Vercel API、127.0.0.1 走 start.py，都正确处理 `tags: null`。
+[js/diff.js `_deepDiff`](js/diff.js#L24) 的 prev 规则：
+
+| 情形 | emit |
+|---|---|
+| mval == oval, prev 有值 | `null`（撤回标记） |
+| mval == oval, prev 无 | `_NOOP`（不入 diff） |
+| mval / oval 任一 nullish (null/undefined), 另一 defined | 视 nullish 等价：撤回或新设，但**源无字段 + prev 无字段 + 撤回 null** 时不写冗余 null |
+| mval ≠ oval | emit mval |
+
+特殊情况由各 viewer 自管：
+- **crystal**：[js/cr-edit.js setCrystal* handlers](js/cr-edit.js#L132) 在 UI 用户清字段 (level_max / weight_step / scope 0/1 时的 element/type / 等) 时显式 `editData.X = null`，diff 看到 nullish vs defined → emit null
+- **chara**：dual-revise 文件，prev 是 `Object.assign({}, charRevise, omoideRevise)`，diff 后按 OMOIDE_KEYS 拆回两个 revise
+- **chara omoide_template override**（非 retraction）：[js/edit.js:194](js/edit.js#L194) `if (hasOmoide && omoideDiff.omoide_template != null) omoideDiff.omoide = null` —— template 选中时 omoide 数组冗余，强制清
+
+**saveRevise 后 refresh**：submit 成功后用**无 prev** 的 computeDiff 重算 state.reviseData，去除 null 撤回标记，防止下次 saveEdit 拿到 stale prev 重复 emit。例 [js/soul-edit.js:147](js/soul-edit.js#L147)。
+
+**等价性：** local `start.py _deep_merge` 与 Vercel `api/save.js deepMerge` 实现等价（都把 source[k] === null 转为 pop）。GitHub Pages 走 Vercel API、127.0.0.1 走 start.py，行为一致。落盘 revise.json 永远不含 null（撤回标记仅传输阶段存在）。
+
+**enforceScopeConstraints**（[shared/effect-constraints.js](../shared/effect-constraints.js)）：base+revise 合并后扫一遍 effects，强制 `scope ∈ {0, 1}` 删 element/type。修复 server pop 后 base.element 仍残留导致 edit 模式 element 仍选中的 bug。crystal / bladegraph / hensei 加载时调用。
 
 ---
 
@@ -345,14 +362,18 @@ if (hasOmoide && omoideDiff.omoide_template != null) {
   └─ enterEditMode(id)：editData = deepcopy(allChars[id])  ← 含两份 revise 叠加后的值
 
 用户点击「保存」（saveEdit）
-  └─ diff = computeDiff(originalData[id], editData)
+  └─ prevMerged = { ...reviseData[id], ...omoideReviseData[id] }
+  └─ diff = computeDiff(originalData[id], editData, prevMerged)  ← prev-revise pattern
   └─ 按 OMOIDE_KEYS 拆分 diff
        ├─ 非 omoide 字段 → reviseData[id]
        └─ omoide 字段    → omoideReviseData[id]
+  └─ 应用 omoide_template 非 null 时 omoide=null override（不是 retraction）
 
 用户点击顶部 Save 按钮（saveRevise）
   └─ POST /save { revise: [...], omoide_revise: [...] }
-  └─ 成功：reviseData / omoideReviseData 均清空
+  └─ 成功：用无 prev 的 computeDiff refresh reviseData / omoideReviseData
+           （去除 null 撤回标记，下次 save 不重复 emit）
+  └─ sessionReviseIds 清空
 ```
 
 ### updateReviseBar()（nav.js 全局）

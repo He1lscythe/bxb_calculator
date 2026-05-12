@@ -54,9 +54,9 @@ const _selfApplies = (c, e) => {
     const elem = e.element;
     const elemOK = elem == null ||
       (Array.isArray(elem) ? elem.indexOf(c.element) >= 0 : elem === c.element);
-    const tp = e.type;
+    const tp = e.weapon;
     const typeOK = tp == null ||
-      (Array.isArray(tp) ? tp.indexOf(c.type) >= 0 : tp === c.type);
+      (Array.isArray(tp) ? tp.indexOf(c.weapon) >= 0 : tp === c.weapon);
     return elemOK && typeOK;
   }
   return false;
@@ -113,10 +113,10 @@ export const CHARA_SPEC = {
   filters: {
     rarity:       { extract: c => c.rarity },
     element:      { extract: c => c.element },
-    type:         { extract: c => c.type },
+    weapon:         { extract: c => c.weapon },
     omoideRarity: { extract: c => c.omoide_rarity },
     state:        { op: 'any', extract: c => Object.keys(c.states || {}) },
-    tags:         { op: 'any', extract: c => c.tags || [] },
+    tags:         { op: 'all', extract: c => c.tags || [] },
   },
   sortFns: {
     '攻撃力':      c => _statMax(c, '攻撃力'),

@@ -286,7 +286,7 @@ def _detect_scope(e, mode='soul'):
         is scope=1 (party-wide). BD skills are intrinsically party-affecting, so unmarked
         text is treated as 全体 rather than self.
 
-    Returns {'scope': int, 'elements': list[int], 'types': list[int]}
+    Returns {'scope': int, 'elements': list[int], 'weapons': list[int]}
     """
     has_global = ('全員' in e or '味方全体' in e or '全魔剣' in e or
                   '編成魔剣全体' in e or '編成魔剣全て' in e or
@@ -298,7 +298,7 @@ def _detect_scope(e, mode='soul'):
     if '風魔典の' in e:
         return {'scope': 2,
                 'elements': [ELEMENT_MAP['風']],
-                'types':    [WEAPON_TYPE_MAP['魔典']]}
+                'weapons':    [WEAPON_TYPE_MAP['魔典']]}
 
     # Detect elements — supports multiple OR-chain and bare-kanji patterns:
     #   か / ･ / 、 : OR separators
@@ -316,24 +316,24 @@ def _detect_scope(e, mode='soul'):
                 elements.append(eid)
 
     # Detect weapons — supports "魔典か杖棒装備" and "杖棒･連弩装備" OR-chaining
-    types = []
+    weapons = []
     for weapon in _WEAPONS_LIST:
         wid = WEAPON_TYPE_MAP[weapon]
-        if wid not in types:
+        if wid not in weapons:
             if (f'{weapon}か' in e or
                     f'{weapon}･' in e or
                     f'{weapon}装備' in e or
                     f'{weapon}の' in e):
-                types.append(wid)
+                weapons.append(wid)
 
-    has_condition = bool(elements or types)
+    has_condition = bool(elements or weapons)
 
     if mode in ('chara', 'bd'):
         # Self-targeting check takes priority over set keywords.
         # 同セット appears as a trigger ("when set-mate is defeated"), not a party scope.
         if '自身' in e or '自分' in e or '自攻撃力' in e:
             if not has_global:
-                return {'scope': 0, 'elements': [], 'types': []}
+                return {'scope': 0, 'elements': [], 'weapons': []}
         # element/weapon condition → 2; explicit party (全員/味方全体/装備セット) → 1;
         # default → 0 for chara (self), 1 for bd (party-wide).
         if has_condition:
@@ -352,9 +352,9 @@ def _detect_scope(e, mode='soul'):
         elif has_condition:
             scope = 3
         else:
-            return {'scope': 0, 'elements': [], 'types': []}
+            return {'scope': 0, 'elements': [], 'weapons': []}
 
-    return {'scope': scope, 'elements': elements, 'types': types}
+    return {'scope': scope, 'elements': elements, 'weapons': weapons}
 
 
 def _detect_condition(e):
@@ -430,9 +430,9 @@ def classify_effect(effect, scope_mode='soul'):
 
     result = {'bunrui': sorted(bunrui), 'scope': final_scope, 'condition': condition}
     el = _fmt_list(scope_info['elements'])
-    ty = _fmt_list(scope_info['types'])
+    wp = _fmt_list(scope_info['weapons'])
     if el is not None: result['element'] = el
-    if ty is not None: result['type']    = ty
+    if wp is not None: result['weapon']    = wp
     return result
 
 
@@ -478,9 +478,9 @@ def classify_skill_v2(skill, lookup_table, cat_to_bunrui):
         cond = 0 if b in cost_bunruis else condition
         ent = {'bunrui': [b], 'scope': sc, 'condition': cond}
         el = _fmt_list(scope_info['elements'])
-        ty = _fmt_list(scope_info['types'])
+        wp = _fmt_list(scope_info['weapons'])
         if el is not None: ent['element'] = el
-        if ty is not None: ent['type']    = ty
+        if wp is not None: ent['weapon']    = wp
         # For cost bunruis, extract bairitu from cost text only (avoids picking up benefit values)
         src_text = normed_cost if b in cost_bunruis else normed
         v, ct = _val_for_bunrui(src_text, b)
@@ -577,11 +577,11 @@ def classify_skill_v2(skill, lookup_table, cat_to_bunrui):
     # name (scope=5 限定魔剣) も持つ entry は限定キャラ別なので merge しない。
     def _merge_key(e):
         el = e.get('element')
-        ty = e.get('type')
+        wp = e.get('weapon')
         if isinstance(el, list): el = tuple(el)
-        if isinstance(ty, list): ty = tuple(ty)
+        if isinstance(wp, list): wp = tuple(wp)
         return (e.get('bairitu'), e.get('calc_type'), e.get('scope'),
-                e.get('condition'), el, ty)
+                e.get('condition'), el, wp)
     merged = []
     for e in effects:
         if 7 in (e.get('bunrui') or []) or 'name' in e:
@@ -696,9 +696,9 @@ def classify_skill_chara(skill, lookup_table, cat_to_bunrui):
         'condition': condition,
     }
     el = _fmt_list(scope_info['elements'])
-    ty = _fmt_list(scope_info['types'])
+    wp = _fmt_list(scope_info['weapons'])
     if el is not None: entry['element'] = el
-    if ty is not None: entry['type']    = ty
+    if wp is not None: entry['weapon']    = wp
 
     effects = skill.setdefault('effects', [])
     if not effects:
