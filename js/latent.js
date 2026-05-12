@@ -273,6 +273,18 @@ export const applyOmoideTemplate = () => {
   if (!tpl?.omoide) return;
   state.editData.omoide = JSON.parse(JSON.stringify(tpl.omoide));
   state.editData.omoide_template = tpl.id;
+  // template の高閾値 slot に並ぶ icon (88-92) から omoide_rarity を逆引き。
+  // changeLatentSlot の手動更新と同じロジック。最後に見つけた行が勝つ（通常
+  // template 内 rarity 一致なので順序非依存）。
+  for (const row of tpl.omoide) {
+    if (!_OMOIDE_RARITY_TH.has(row.threshold)) continue;
+    for (const icon of (row.slots || [])) {
+      if (_ICON_TO_RARITY[icon] != null) {
+        state.editData.omoide_rarity = _ICON_TO_RARITY[icon];
+        break;
+      }
+    }
+  }
   reRenderLatentEdit();
 }
 
