@@ -52,7 +52,18 @@ export const _deepDiff = (oval, mval, prev) => {
     }
     return Object.keys(sparse).length === 0 ? _NOOP : sparse;
   }
-  // 叶子或类型不匹配
+  // 叶子或类型不匹配。null / undefined 视为同 "无值"（nullish），统一处理：
+  //  - 两边都 nullish → 比"无值无变化"，prev 有值才 emit null 撤回 stale revise
+  //  - mval nullish + oval defined → 用户清除字段 → emit null 撤回 base 值
+  //  - mval defined + oval nullish → 用户新设字段 → emit mval（不能 JSON.parse undefined）
+  //  - 两边都 defined → 比较具体值
+  const mNullish = mval === null || mval === undefined;
+  const oNullish = oval === null || oval === undefined;
+  if (mNullish && oNullish) {
+    return prev !== undefined && prev !== null ? null : _NOOP;
+  }
+  if (mNullish) return null;
+  if (oNullish) return JSON.parse(JSON.stringify(mval));
   if (JSON.stringify(mval) === JSON.stringify(oval)) {
     return prev !== undefined ? null : _NOOP;
   }

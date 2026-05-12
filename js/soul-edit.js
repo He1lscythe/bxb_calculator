@@ -1,7 +1,7 @@
 // js/soul-edit.js
 import { state } from './soul-state.js';
 import { ELEMENT, WEAPON, BUNRUI_SHORT, BUNRUI, CONDITION,
-         ELEMS_ORDER, WEAPONS_ORDER,
+         ELEMS_ORDER, WEAPONS_ORDER, SOUL_TAG,
          renderEditSelect, renderEditCheckboxes } from '../shared/constants.js';
 import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
 import { escHtml, fmtBairitu, fmtHitStages, ctPfx, min } from './utils.js';
@@ -11,6 +11,25 @@ import { selectSoul, setupStickyHeights, _deletedSet,
 import { updateReviseBar } from './nav.js';
 
 const BUNRUI_ALL = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+
+// 魂特性 tag toggle（手動編集；mirror chara.tags pattern in js/edit.js）
+export const renderSoulTagToggles = (s) => {
+  return Object.keys(SOUL_TAG).map(k => {
+    const sid = +k;
+    const on = (s.tags || []).includes(sid);
+    return '<button class="btog' + (on ? ' on' : '') +
+      '" onclick="toggleSoulTag(' + sid + ',this)">' + SOUL_TAG[sid] + '</button>';
+  }).join('');
+};
+
+export const toggleSoulTag = (sid, btn) => {
+  if (!state.editData) return;
+  let tags = state.editData.tags || [];
+  if (tags.includes(sid)) tags = tags.filter(x => x !== sid);
+  else                    tags = [...tags, sid].sort((a, b) => a - b);
+  state.editData.tags = tags;
+  btn.classList.toggle('on');
+};
 
 export const toggleBunrui = (path, b, btn) => {
   // Hard rule: bunrui 含 7 (hit) 必须独占 [7]，与其他 bunrui 互斥
@@ -50,12 +69,12 @@ export const toggleElem = (path, id, btn) => {
 }
 
 export const toggleType = (path, id, btn) => {
-  const v   = getPath(state.editData, path + '.type');
+  const v   = getPath(state.editData, path + '.weapon');
   const arr = v == null ? [] : (Array.isArray(v) ? v.slice() : [v]);
   const idx = arr.indexOf(id);
   if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('on'); }
   else          { arr.push(id); arr.sort((a,b)=>a-b); btn.classList.add('on'); }
-  setPath(state.editData, path + '.type', arr.length === 0 ? null : (arr.length === 1 ? arr[0] : arr));
+  setPath(state.editData, path + '.weapon', arr.length === 0 ? null : (arr.length === 1 ? arr[0] : arr));
 }
 
 export const enterEditMode = (soulId) => {
@@ -92,6 +111,9 @@ const _normalizeAffinityForDiff = (soul) => {
       if (_isEffectDefault(e.def_effect)) delete e.def_effect;
     }
   }
+  // 空 tags 数组 → 当作 base 无 tags 字段处理（diff 不 emit `tags: []` 残留）。
+  // base 也无 tags 时，结合 prev-revise 撤回机制，diff 自动 emit `tags: null` pop。
+  if (Array.isArray(c.tags) && c.tags.length === 0) delete c.tags;
   return c;
 };
 
@@ -194,6 +216,10 @@ export const renderEditDetail = (s) => {
                  oninput="setPath(state.editData,'max_level',this.value===''?null:+this.value)">
         </div>
       </div>
+      <div class="chara-tag-row" style="margin-top:10px">
+        <span class="field-label" style="margin:0">魂特性</span>
+        <div class="bunrui-toggles">${renderSoulTagToggles(s)}</div>
+      </div>
     </div>
     ${renderEditAffinitySection(s, 'element_affinity', ELEMS_ORDER, '属性相性')}
     ${renderEditAffinitySection(s, 'weapon_affinity', WEAPONS_ORDER, '得意武器')}
@@ -266,7 +292,7 @@ export const renderEditSkillsSection = (s) => {
       const elemTogs = Object.entries(ELEMENT).map(([k,v]) =>
         `<button class="btog${selElems.includes(+k)?' on':''}" onclick="toggleElem('${ep}',${k},this)">${v}</button>`
       ).join('');
-      const selTypes = e.type == null ? [] : (Array.isArray(e.type) ? e.type : [e.type]);
+      const selTypes = e.weapon == null ? [] : (Array.isArray(e.weapon) ? e.weapon : [e.weapon]);
       const typeTogs = Object.entries(WEAPON).map(([k,v]) =>
         `<button class="btog${selTypes.includes(+k)?' on':''}" onclick="toggleType('${ep}',${k},this)">${v}</button>`
       ).join('');

@@ -112,6 +112,27 @@ console.log('\n--- chara.tags（魔剣特性）schema ---');
   checkChara(data['characters_revise.json'],  'characters_revise.json');
 }
 
+console.log('\n--- soul.tags（魂特性）schema ---');
+// soul.tags = int[]、各 id ∈ SOUL_TAG keys（玩家手动追加；与 shared/constants.js SOUL_TAG 同步）
+{
+  const EXPECTED_SOUL_TAG_IDS = new Set([1, 2, 3, 4, 5, 6, 7, 8]);
+  const checkSoul = (arr, fname) => {
+    let badShape = 0, badId = 0;
+    for (const s of arr || []) {
+      if ('tags' in s) {
+        if (!Array.isArray(s.tags)) badShape++;
+        else for (const t of s.tags) {
+          if (typeof t !== 'number' || !EXPECTED_SOUL_TAG_IDS.has(t)) badId++;
+        }
+      }
+    }
+    truthy(`${fname}: soul.tags 必须是 int[] (违反 ${badShape})`, badShape === 0);
+    truthy(`${fname}: soul.tags id ∈ SOUL_TAG keys (违反 ${badId})`, badId === 0);
+  };
+  checkSoul(data['souls.json'],        'souls.json');
+  checkSoul(data['souls_revise.json'], 'souls_revise.json');
+}
+
 console.log('\n--- crystal tombstone schema ---');
 const crystals = data['crystals.json'];
 if (crystals) {
@@ -188,7 +209,7 @@ console.log('\n--- soul merge pass：同 key effects 合体到 bunrui[]（不应
         if ((e.bunrui || []).includes(7)) continue;  // hit excluded
         if ('name' in e) continue;                    // scope=5 limited
         const key = JSON.stringify([e.bairitu, e.calc_type, e.scope, e.condition,
-                                     e.element ?? null, e.type ?? null]);
+                                     e.element ?? null, e.weapon ?? null]);
         seen.set(key, (seen.get(key) || 0) + 1);
       }
       for (const cnt of seen.values()) if (cnt > 1) dupGroups++;

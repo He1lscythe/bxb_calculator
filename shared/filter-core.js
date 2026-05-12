@@ -7,8 +7,8 @@
 //     searchFields: ['name','kana',...]
 //     filters: {
 //       <key>: {
-//         extract?: (item) => value     // for 'eq' / 'any' ops
-//         op?: 'eq' | 'any'            // default 'eq'
+//         extract?: (item) => value     // for 'eq' / 'any' / 'all' ops
+//         op?: 'eq' | 'any' | 'all'    // default 'eq'
 //         match?: (item, set) => bool  // overrides op/extract
 //       }
 //     },
@@ -42,6 +42,11 @@ const _matchesItem = (item, state, spec) => {
       let any = false;
       for (const v of sel) { if (arr.indexOf(v) >= 0) { any = true; break; } }
       if (!any) return false;
+    } else if (def.op === 'all') {
+      // 选中的所有 value 都必须在 item 的 array 中（AND）
+      const arr = def.extract(item);
+      if (!Array.isArray(arr)) return false;
+      for (const v of sel) { if (arr.indexOf(v) < 0) return false; }
     } else {
       if (!sel.has(def.extract(item))) return false;
     }

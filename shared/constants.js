@@ -77,6 +77,33 @@ export const CHARA_TAG_COLOR = {
   14: '#cc7733',  // BDHIT — rust orange, BD multi-hit
 };
 
+// ============ 魂特性 tag enum ============
+// soul.tags = int[]（玩家手动追加；无 crawler 自動検出）。
+// ⚠ 新 tag 在下方追加 entry（id 唯一、不重用）。同时改：
+//   - SOUL_TAG_COLOR（同 id 色彩）
+//   - tests/test_data_integrity.cjs EXPECTED_SOUL_TAG_IDS
+//   - docs/skills_schema.md SOUL_TAG 表
+export const SOUL_TAG = {
+  1: '天魔',
+  2: '大罪',
+  3: '特典',
+  4: '全体HIT',
+  5: '全体ダメ限',
+  6: '200億',
+  7: 'ルビー',
+  8: 'BDHIT',
+};
+export const SOUL_TAG_COLOR = {
+  1: '#a040c8',  // 天魔 — 紫
+  2: '#dd4488',  // 大罪 — magenta
+  3: '#ffc840',  // 特典 — 金
+  4: '#4488dd',  // 全体HIT — royal blue
+  5: '#4ab8c8',  // 全体ダメ限 — cyan
+  6: '#e84a4a',  // 200億 — red
+  7: '#e0115f',  // ルビー — ruby
+  8: '#cc7733',  // BDHIT — rust orange
+};
+
 // 結晶 effects[].scope（详情/编辑下拉用长版，filter 按钮用短版）
 export const SCOPE       = {0:'自身/制限なし', 1:'セット全体', 2:'セット属性/武器限', 3:'自身属性/武器限', 5:'キャラ限定'};
 export const SCOPE_SHORT = {0:'自身',           1:'セット全',   2:'セット限',           3:'対象限',           5:'キャラ限'};

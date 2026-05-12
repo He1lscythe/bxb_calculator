@@ -1,7 +1,7 @@
 // js/soul-render.js
 import { state } from './soul-state.js';
 import { ELEMENT, WEAPON, BUNRUI_SHORT, CONDITION,
-         ELEMS_ORDER, WEAPONS_ORDER } from '../shared/constants.js';
+         ELEMS_ORDER, WEAPONS_ORDER, SOUL_TAG, SOUL_TAG_COLOR } from '../shared/constants.js';
 import { updateReviseBar } from './nav.js';
 import { escHtml, fmtBairitu, fmtAff, min } from './utils.js';
 
@@ -112,6 +112,9 @@ export const renderDetail = (s) => {
         ${s.url ? `<a class="meta-chip" href="${escHtml(s.url)}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>` : ''}
         ${acqEntries.length ? `<span class="meta-chip" style="color:var(--text2)">${escHtml(acqEntries[0][0])}</span>` : ''}
       </div>
+      ${(s.tags || []).length ? `<div class="soul-tags" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px">
+        ${(s.tags || []).map(id => `<span class="bd-sp-tag" style="color:${SOUL_TAG_COLOR[id]||''}">${SOUL_TAG[id]||id}</span>`).join('')}
+      </div>` : ''}
     </div>
     ${renderAffinityView(s)}
     ${renderSkillsView(s.skills || [], s)}
@@ -198,8 +201,8 @@ export const fmtType = (v) => {
 export const _ctxKey = (e) => {
   const elem = Array.isArray(e.element) ? e.element.slice().sort().join(',')
            : (e.element != null ? String(e.element) : '');
-  const type = Array.isArray(e.type) ? e.type.slice().sort().join(',')
-           : (e.type != null ? String(e.type) : '');
+  const type = Array.isArray(e.weapon) ? e.weapon.slice().sort().join(',')
+           : (e.weapon != null ? String(e.weapon) : '');
   return [e.scope, elem, type, e.condition || 0].join('|');
 }
 
@@ -208,7 +211,7 @@ export const _renderScopeTag = (e) => {
   if (e.scope === 1) return '<span class="scope-tag scope-all">全</span>';
   const parts = [];
   const el = fmtElem(e.element); if (el) parts.push(el);
-  const ty = fmtType(e.type);   if (ty) parts.push(ty);
+  const ty = fmtType(e.weapon);   if (ty) parts.push(ty);
   if (e.scope === 2) return '<span class="scope-tag scope-lim">'      + (parts.join('·') || '限') + '</span>';
   if (e.scope === 3) return '<span class="scope-tag scope-equip-s">' + (parts.join('·') || '装') + '·自</span>';
   if (e.scope === 4) return '<span class="scope-tag scope-equip-a">' + (parts.join('·') || '装') + '·全</span>';

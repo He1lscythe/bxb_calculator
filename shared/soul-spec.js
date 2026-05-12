@@ -6,7 +6,8 @@ export const SOUL_SPEC = {
   filters: {
     rarity:  { extract: s => s.rarity || 0 },
     element: { op: 'any', extract: s => s.element || [] },
-    type:    { op: 'any', extract: s => s.type    || [] },
+    weapon:    { op: 'any', extract: s => s.weapon    || [] },
+    tags:    { op: 'all', extract: s => s.tags    || [] },
   },
   sortFns: {
     id:     s => s.id     || 0,

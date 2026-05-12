@@ -53,6 +53,13 @@ const _deepDiff = (oval, mval, prev) => {
     }
     return Object.keys(sparse).length === 0 ? _NOOP : sparse;
   }
+  const mNullish = mval === null || mval === undefined;
+  const oNullish = oval === null || oval === undefined;
+  if (mNullish && oNullish) {
+    return prev !== undefined && prev !== null ? null : _NOOP;
+  }
+  if (mNullish) return null;
+  if (oNullish) return JSON.parse(JSON.stringify(mval));
   if (JSON.stringify(mval) === JSON.stringify(oval)) {
     return prev !== undefined ? null : _NOOP;
   }

@@ -113,8 +113,8 @@ def parse_row(row):
             }
             if cls.get('element') is not None:
                 ent['element'] = cls['element']
-            if cls.get('type') is not None:
-                ent['type'] = cls['type']
+            if cls.get('weapon') is not None:
+                ent['weapon'] = cls['weapon']
             effects.append(ent)
 
     return {
