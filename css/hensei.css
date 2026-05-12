@@ -380,13 +380,19 @@
 @keyframes mobFlipOutR{from{transform:rotateY(0);opacity:1}to{transform:rotateY(90deg);opacity:0}}
 @keyframes mobFlipInR{from{transform:rotateY(90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
 @keyframes mobFlipInL{from{transform:rotateY(-90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
-@media(max-width:768px){
+/* 触屏全体（含 iPad 横屏 1180px）：解锁 body 纵向滚动 + slot-card overflow。
+   桌面（hover:hover/pointer:fine）保持 overflow:hidden + 内部 scroll 容器模式。 */
+@media(max-width:768px),(hover:none) and (pointer:coarse){
   body{height:auto;overflow-y:auto;}
   #page-wrap{overflow:visible;}
+  .slot-card{overflow:visible;}
+}
+/* 真・狭幅（手机竖横屏）：单 slot 切换 + 翻页动画 + 指示器。
+   iPad 横屏 1180px 不进入此 block，保持 3 列布局。 */
+@media(max-width:768px){
   /* 移动端：一次只显示一张 slot-card；底部留 40vh 空白让滑到底时不贴屏幕底部。
      卡片高度自适应内容（不强制统一），切换 1/2/3 号位时高度可能不同。 */
   #slots-grid{perspective:700px;display:flex;flex-direction:column;flex:none;padding:8px 8px 40vh;gap:0;}
-  .slot-card{overflow:visible;}
   .slot-card:not(.mob-hidden){flex:none;}
   .slot-card.mob-hidden{display:none;}
   .slot-card.mob-anim-outL{animation:mobFlipOutL .2s ease-in forwards;}
