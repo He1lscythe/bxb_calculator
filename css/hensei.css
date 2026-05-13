@@ -54,6 +54,9 @@
 
 /* slots */
 /* 三张卡片统一高度（默认 stretch），有魔装 / 没魔装的卡片对齐 */
+/* hensei 全局：整页 body 纵向滚动（不像 crystal/bg 是 list 内滚）。base.css body overflow:hidden 在这里覆盖。*/
+body{height:auto;overflow-y:auto;}
+#page-wrap{overflow:visible;}
 #slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:16px;align-items:stretch;}
 .slot-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:opacity .2s;display:flex;flex-direction:column;}
 .slot-card .slot-body{flex:1;}
@@ -380,11 +383,9 @@
 @keyframes mobFlipOutR{from{transform:rotateY(0);opacity:1}to{transform:rotateY(90deg);opacity:0}}
 @keyframes mobFlipInR{from{transform:rotateY(90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
 @keyframes mobFlipInL{from{transform:rotateY(-90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
-/* 触屏全体（含 iPad 横屏 1180px）：解锁 body 纵向滚动 + slot-card overflow。
-   桌面（hover:hover/pointer:fine）保持 overflow:hidden + 内部 scroll 容器模式。 */
+/* body / #page-wrap 滚动已在文件顶部全局覆盖（hensei 全屏 body 滚）。
+   触屏全体：slot-card overflow 解锁（手机模式动画/弹出需要可见）。 */
 @media(max-width: 900px),(hover:none) and (pointer:coarse){
-  body{height:auto;overflow-y:auto;}
-  #page-wrap{overflow:visible;}
   .slot-card{overflow:visible;}
 }
 /* 真・狭幅（手机竖横屏）：单 slot 切换 + 翻页动画 + 指示器。
