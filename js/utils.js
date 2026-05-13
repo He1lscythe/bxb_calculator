@@ -124,14 +124,14 @@ export const fmt = (n) => {
   return String(n);
 }
 
-// row バッジ用：大きい数字を万/億に変換（toFixed(2)）
-export const fmtLarge = (n) => {
+// row バッジ用：大きい数字を万/億に変換。digits は小数桁数（既定 2、cr-eff-list 衰减後表示は 3）。
+export const fmtLarge = (n, digits = 2) => {
   if (n == null) return '-';
   if (typeof n !== 'number') return String(n);
   const a = Math.abs(n);
-  if (a >= 1e8) return parseFloat((n / 1e8).toFixed(2)) + '億';
-  if (a >= 1e4) return parseFloat((n / 1e4).toFixed(2)) + '万';
-  return Number.isInteger(n) ? String(n) : parseFloat(n.toFixed(2)).toString();
+  if (a >= 1e8) return parseFloat((n / 1e8).toFixed(digits)) + '億';
+  if (a >= 1e4) return parseFloat((n / 1e4).toFixed(digits)) + '万';
+  return Number.isInteger(n) ? String(n) : parseFloat(n.toFixed(digits)).toString();
 };
 
 export const escHtml = (s) => {
