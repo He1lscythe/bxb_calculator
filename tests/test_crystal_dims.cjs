@@ -24,14 +24,15 @@ const _parseScaling = (v) => {
   return parseFloat(v) || 0;
 };
 function effectiveBairitu(cr, cfg, e) {
-  const wStep = +cr.weight_step || 0;
-  const pStep = +cr.purity_step || 0;
+  // step / delta 与 bairitu 同：数値・分式 ("1/2") 双方受け入れ → _parseScaling。
+  const wStep = _parseScaling(cr.weight_step);
+  const pStep = _parseScaling(cr.purity_step);
   let delta = 0;
   if (wStep > 0 && e.weight_delta && cfg.weight != null) {
-    delta += (100 - cfg.weight) / wStep * e.weight_delta;
+    delta += (100 - cfg.weight) / wStep * _parseScaling(e.weight_delta);
   }
   if (pStep > 0 && e.purity_delta && cfg.purity != null) {
-    delta += (100 - cfg.purity) / pStep * e.purity_delta;
+    delta += (100 - cfg.purity) / pStep * _parseScaling(e.purity_delta);
   }
   const baseB = _parseScaling(e.bairitu);
   if (!(delta > 0) || !Number.isFinite(baseB)) return e.bairitu;
@@ -167,14 +168,24 @@ truthy('effects[0].weight_delta 保留 null（不联动恢复，玩家自己再�
        !('weight_delta' in ed2.effects[0]) || ed2.effects[0].weight_delta == null);
 
 // setCrystalDelta 撤回
-console.log('\n--- setCrystalDelta(ei, "weight", "" 或 0) → effect.weight_delta=null ---');
+console.log('\n--- setCrystalDelta(ei, "weight", "" 或 0) → effect.weight_delta=null（分式文字列も保持）---');
+// utils.parseBairituVal mirror（cr-edit.js 实际调用此函数）
+const parseBairituVal = (s) => {
+  if (s === '') return null;
+  if (s.includes('/')) {
+    const p = s.trim().split('/');
+    return (p.length === 2 && p[0] !== '' && p[1] !== '') ? s.trim() : null;
+  }
+  const n = Number(s);
+  return isNaN(n) ? null : n;
+};
 function setCrystalDelta(ed, ei, kind, val) {
   const e = ed.effects?.[ei];
   if (!e) return;
   const deltaKey = kind + '_delta';
-  const n = parseFloat(val);
-  if (!Number.isFinite(n) || n === 0 || val === '') e[deltaKey] = null;
-  else e[deltaKey] = n;
+  const v = parseBairituVal(val);
+  if (v == null || v === 0) e[deltaKey] = null;
+  else e[deltaKey] = v;
 }
 const ed3 = {effects: [{weight_delta: 0.3}]};
 setCrystalDelta(ed3, 0, 'weight', '');
@@ -185,6 +196,27 @@ eq('"0" → null', ed4.effects[0].weight_delta, null);
 const ed5 = {effects: [{weight_delta: 0.3}]};
 setCrystalDelta(ed5, 0, 'weight', '0.5');
 eq('"0.5" → 0.5', ed5.effects[0].weight_delta, 0.5);
+const ed6 = {effects: [{}]};
+setCrystalDelta(ed6, 0, 'weight', '1/2');
+eq('"1/2" → "1/2" 文字列保留', ed6.effects[0].weight_delta, '1/2');
+const ed7 = {effects: [{}]};
+setCrystalDelta(ed7, 0, 'purity', '3/4');
+eq('"3/4" → "3/4" 文字列保留', ed7.effects[0].purity_delta, '3/4');
+
+console.log('\n--- 分式 delta も衰减に反映 ---');
+// weight_delta="1/2"=0.5, step=10, weight=80 → 2 step × 0.5 = 1 → 5-1=4
+eq('weight_delta="1/2" (=0.5) → 5-1=4',
+   effectiveBairitu({weight_step:10}, {weight:80, purity:100},
+                    {bairitu:5, weight_delta:'1/2', calc_type:0}), 4);
+// purity_delta="1/4"=0.25, step=20, purity=60 → 2 step × 0.25 = 0.5 → 3-0.5=2.5
+eq('purity_delta="1/4" ct=1 → 3-0.5=2.5',
+   effectiveBairitu({purity_step:20}, {weight:100, purity:60},
+                    {bairitu:3, purity_delta:'1/4', calc_type:1}), 2.5);
+// step も分式: weight_step="1/10"=0.1, weight=99.5, delta=0.01
+// → (100-99.5)/0.1 = 5 step × 0.01 = 0.05 → 5-0.05=4.95
+eq('weight_step="1/10" (=0.1) → 5-0.05=4.95',
+   effectiveBairitu({weight_step:'1/10'}, {weight:99.5, purity:100},
+                    {bairitu:5, weight_delta:0.01, calc_type:0}), 5 - 0.05);
 
 // ===== CRYSTAL_RARITY_LV_MAX 表 =====
 console.log('\n--- cryLvMax: 顶层 level_max 优先；缺省走 rarity 表 ---');

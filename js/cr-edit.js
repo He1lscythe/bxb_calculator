@@ -280,9 +280,10 @@ export const setCrystalDelta = (ei, kind, val) => {  // kind: 'weight' | 'purity
   const e = state.editData?.effects?.[ei];
   if (!e) return;
   const deltaKey = kind + '_delta';
-  const n = parseFloat(val);
-  if (!Number.isFinite(n) || n === 0 || val === '') e[deltaKey] = null;
-  else e[deltaKey] = n;
+  // 与 bairitu 同：'a/b' 分式字符串保留，纯数值存 number，空 / 0 → 撤回。
+  const v = parseBairituVal(val);
+  if (v == null || v === 0) e[deltaKey] = null;
+  else e[deltaKey] = v;
 };
 
 export const removeCrystalEffect = (ei) => {
@@ -346,12 +347,12 @@ const _renderEffectCard = (e, i, total) => {
   const pStep = +cr.purity_step || 0;
   const wDeltaInline = wStep > 0
     ? '<div><div class="field-label">重 / ' + wStep + 'g</div>' +
-      '<input type="number" step="any" class="edit-num-sm" style="width:90px" value="' + (e.weight_delta != null ? e.weight_delta : '') + '"' +
+      '<input type="text" class="edit-num-sm" style="width:90px" value="' + (e.weight_delta != null ? e.weight_delta : '') + '"' +
       ' oninput="setCrystalDelta(' + i + ',\'weight\',this.value)"></div>'
     : '';
   const pDeltaInline = pStep > 0
     ? '<div><div class="field-label">純 / ' + pStep + '%</div>' +
-      '<input type="number" step="any" class="edit-num-sm" style="width:90px" value="' + (e.purity_delta != null ? e.purity_delta : '') + '"' +
+      '<input type="text" class="edit-num-sm" style="width:90px" value="' + (e.purity_delta != null ? e.purity_delta : '') + '"' +
       ' oninput="setCrystalDelta(' + i + ',\'purity\',this.value)"></div>'
     : '';
   // ctSel + init + max 也加 label，让一行内字段对齐
