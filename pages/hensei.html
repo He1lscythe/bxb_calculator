@@ -391,14 +391,6 @@ const _crystalEffectiveBairitu = (cr, cfg, e) => {
   const minB = (ct === 0 || ct === 3) ? 1 : 0;
   return Math.max(minB, baseB - delta);
 };
-// fmtLarge 同様 万/億 缩写、ただし小数点後 3 桁丸め。
-const _fmt3 = (n) => {
-  if (n == null || !Number.isFinite(n)) return '-';
-  const a = Math.abs(n);
-  if (a >= 1e8) return parseFloat((n / 1e8).toFixed(3)) + '億';
-  if (a >= 1e4) return parseFloat((n / 1e4).toFixed(3)) + '万';
-  return Number.isInteger(n) ? String(n) : parseFloat(n.toFixed(3)).toString();
-};
 export const renderCrystalEffList = (cfgs) => {
   // cfgs: [{id, weight, purity}, ...] or null。weight/purity 衰减後 effective bairitu を表示。
   const items = (cfgs || []).filter(Boolean).map(cfg => {
@@ -410,7 +402,7 @@ export const renderCrystalEffList = (cfgs) => {
     const tags = (cr.effects || []).map(ef => {
       const btags = (ef.bunrui || []).map(b => `<span class="bunrui-tag">${escHtml(BUNRUI_SHORT[b]||b)}</span>`).join('');
       const eff = _crystalEffectiveBairitu(cr, cfg, ef);
-      const val = (ef.calc_type === 1 ? '+' : 'x') + _fmt3(eff);
+      const val = (ef.calc_type === 1 ? '+' : 'x') + fmtLarge(eff, 3);
       return btags + `<span class="tag-val">${val}</span>`;
     }).join(' ');
     return `<div class="cr-eff-row"><span class="cr-eff-name" title="${escHtml(cr.name)}">${escHtml(cr.name)}</span><div class="cr-eff-tags">${tags}</div></div>`;
@@ -499,6 +491,9 @@ export const setCrystalDim = (si, ci, dim, val) => {  // dim: 'weight' | 'purity
   if (!cfg) return;
   const n = +val;
   if (Number.isFinite(n)) cfg[dim] = Math.max(0, Math.min(100, n));
+  // cr-eff-list だけ surgical 更新（renderSlot 全量だと .detail-wrap.open 状態を失う）
+  const col = document.getElementById('col' + si + 'r');
+  if (col) col.innerHTML = renderCrystalEffList(team[si].crystals);
   refreshAllStats();
 }
 
@@ -575,6 +570,8 @@ export const resetCrystalDim = (si, ci) => {
   if (!cfg) return;
   cfg.weight = 100;
   cfg.purity = 100;
+  const col = document.getElementById('col' + si + 'r');
+  if (col) col.innerHTML = renderCrystalEffList(team[si].crystals);
   refreshAllStats();
   if (_crystalPopEl) {
     _crystalPopEl.querySelectorAll('input').forEach(inp => { inp.value = 100; });

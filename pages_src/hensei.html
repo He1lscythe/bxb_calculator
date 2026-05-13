@@ -482,6 +482,9 @@ export const setCrystalDim = (si, ci, dim, val) => {  // dim: 'weight' | 'purity
   if (!cfg) return;
   const n = +val;
   if (Number.isFinite(n)) cfg[dim] = Math.max(0, Math.min(100, n));
+  // cr-eff-list だけ surgical 更新（renderSlot 全量だと .detail-wrap.open 状態を失う）
+  const col = document.getElementById('col' + si + 'r');
+  if (col) col.innerHTML = renderCrystalEffList(team[si].crystals);
   refreshAllStats();
 }
 
@@ -558,6 +561,8 @@ export const resetCrystalDim = (si, ci) => {
   if (!cfg) return;
   cfg.weight = 100;
   cfg.purity = 100;
+  const col = document.getElementById('col' + si + 'r');
+  if (col) col.innerHTML = renderCrystalEffList(team[si].crystals);
   refreshAllStats();
   if (_crystalPopEl) {
     _crystalPopEl.querySelectorAll('input').forEach(inp => { inp.value = 100; });
