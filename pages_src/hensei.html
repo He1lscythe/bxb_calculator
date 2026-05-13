@@ -364,18 +364,40 @@ export const renderMasouPanel = (m) => {
   if(!m)return'';
   return`<div class="skills-panel"><div class="skill-item"><div class="skill-eftxt">${escHtml(m.effect_text||'')}</div>${(m.effects||[]).map(renderEfRow).join('')}</div></div>`;
 }
+// 衰减後の effective bairitu — calc 路径と同式（hensei line 1108-1135）。
+const _crystalEffectiveBairitu = (cr, cfg, e) => {
+  const wStep = _parseScaling(cr.weight_step);
+  const pStep = _parseScaling(cr.purity_step);
+  let delta = 0;
+  if (wStep > 0 && e.weight_delta && cfg.weight != null) {
+    delta += (100 - cfg.weight) / wStep * _parseScaling(e.weight_delta);
+  }
+  if (pStep > 0 && e.purity_delta && cfg.purity != null) {
+    delta += (100 - cfg.purity) / pStep * _parseScaling(e.purity_delta);
+  }
+  const baseB = _parseScaling(e.bairitu);
+  if (!Number.isFinite(baseB)) return null;
+  if (delta <= 0) return baseB;
+  const ct = e.calc_type ?? 0;
+  const minB = (ct === 0 || ct === 3) ? 1 : 0;
+  return Math.max(minB, baseB - delta);
+};
 export const renderCrystalEffList = (cfgs) => {
-  // cfgs: [{id, weight, purity}, ...] or null。取 id 解 allCrystals。
-  const sel=(cfgs||[]).filter(Boolean).map(cfg=>allCrystals.find(x=>x.id===cfg.id)).filter(Boolean);
-  if(!sel.length)return'';
-  return'<div class="cr-eff-list">'+sel.map(cr=>{
-    const tags=(cr.effects||[]).map(ef=>{
-      const btags=(ef.bunrui||[]).map(b=>`<span class="bunrui-tag">${escHtml(BUNRUI_SHORT[b]||b)}</span>`).join('');
-      const val=ef.calc_type===1?'+'+fmtLarge(ef.bairitu):'x'+ef.bairitu;
-      return btags+`<span class="tag-val">${val}</span>`;
+  // cfgs: [{id, weight, purity}, ...] or null。weight/purity 衰减後 effective bairitu を表示。
+  const items = (cfgs || []).filter(Boolean).map(cfg => {
+    const cr = allCrystals.find(x => x.id === cfg.id);
+    return cr ? { cr, cfg } : null;
+  }).filter(Boolean);
+  if (!items.length) return '';
+  return '<div class="cr-eff-list">' + items.map(({cr, cfg}) => {
+    const tags = (cr.effects || []).map(ef => {
+      const btags = (ef.bunrui || []).map(b => `<span class="bunrui-tag">${escHtml(BUNRUI_SHORT[b]||b)}</span>`).join('');
+      const eff = _crystalEffectiveBairitu(cr, cfg, ef);
+      const val = (ef.calc_type === 1 ? '+' : 'x') + fmtLarge(eff, 3);
+      return btags + `<span class="tag-val">${val}</span>`;
     }).join(' ');
-    return`<div class="cr-eff-row"><span class="cr-eff-name" title="${escHtml(cr.name)}">${escHtml(cr.name)}</span><div class="cr-eff-tags">${tags}</div></div>`;
-  }).join('')+'</div>';
+    return `<div class="cr-eff-row"><span class="cr-eff-name" title="${escHtml(cr.name)}">${escHtml(cr.name)}</span><div class="cr-eff-tags">${tags}</div></div>`;
+  }).join('') + '</div>';
 }
 
 // ===== TEAM =====
