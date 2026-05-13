@@ -492,8 +492,8 @@ export const openCrystalDimPopover = (si, ci, btnEl) => {
   if (!cfg) return;
   const cr = allCrystals.find(x => x.id === cfg.id);
   if (!cr) return;
-  const wStep = +cr.weight_step || 0;
-  const pStep = +cr.purity_step || 0;
+  const wStep = _parseScaling(cr.weight_step);
+  const pStep = _parseScaling(cr.purity_step);
   if (!wStep && !pStep) return;
   const wRow = wStep > 0 ? _popRow(si, ci, 'weight', wStep, cfg.weight ?? 100, 'g') : '';
   const pRow = pStep > 0 ? _popRow(si, ci, 'purity', pStep, cfg.purity ?? 100, '%') : '';
@@ -1121,15 +1121,16 @@ export const computeStats = (chara, tr, slotIdx) => {
       if (!cfg) return;
       const cr = allCrystals.find(x => x.id === cfg.id);
       if (!cr) return;
-      const wStep = +cr.weight_step || 0;
-      const pStep = +cr.purity_step || 0;
+      // step / delta 与 bairitu 同：数値・分式 ("1/2") 双方受け入れ。
+      const wStep = _parseScaling(cr.weight_step);
+      const pStep = _parseScaling(cr.purity_step);
       for (const e of (cr.effects || [])) {
         let delta = 0;
         if (wStep > 0 && e.weight_delta && cfg.weight != null) {
-          delta += (100 - cfg.weight) / wStep * e.weight_delta;
+          delta += (100 - cfg.weight) / wStep * _parseScaling(e.weight_delta);
         }
         if (pStep > 0 && e.purity_delta && cfg.purity != null) {
-          delta += (100 - cfg.purity) / pStep * e.purity_delta;
+          delta += (100 - cfg.purity) / pStep * _parseScaling(e.purity_delta);
         }
         // bairitu は数値・分式文字列 ("1/2") 双方受け入れ。
         const baseB = _parseScaling(e.bairitu);
@@ -2441,7 +2442,7 @@ export const renderSlot = (i) => {
       const cid=cfg?.id??null;
       const cr=cid?allCrystals.find(x=>x.id===cid):null;
       // ⚙ 按钮：仅当 crystal 有 weight_step > 0 或 purity_step > 0 才显示
-      const hasDims = !!(cr && ((+cr.weight_step || 0) > 0 || (+cr.purity_step || 0) > 0));
+      const hasDims = !!(cr && (_parseScaling(cr.weight_step) > 0 || _parseScaling(cr.purity_step) > 0));
       const cfgBtn = hasDims
         ? `<button class="crystal-cfg-btn" onclick="openCrystalDimPopover(${i},${ci},this)" title="重量/純度">⚙</button>`
         : '';
