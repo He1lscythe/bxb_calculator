@@ -59,6 +59,35 @@ AFFINITY_TEXT = {
     '超得意':  2,
 }
 
+# ============================================================
+#  rarity-based default skill insertion (魔剣使いの証 / 大罪 の証)
+# ============================================================
+# 与 _lookup/soulskill_table.json 已含 entry 对齐；effect_text 用作"是否已含"判断键。
+_DEFAULT_SOUL_SKILLS = {
+    2: ('【魔剣使いの証★★】',     '仲間を守る証。装備セット全ての防御力ややアップ'),
+    3: ('【魔剣使いの証★★★】',   '希望を守る証。装備セット全ての攻撃力がアップ'),
+    4: ('【魔剣使いの証★★★★】', '世界を守り抜く証。装備セット全ての速度が大アップ'),
+}
+_DAIZAI_SKILL = ('【大罪に堕ちた獣の証★★★★★】', '大きな罪を背負う者の証。自分のB.D.ヒット数+7')
+TARGET_RARITY3_TEXT = _DEFAULT_SOUL_SKILLS[3][1]
+
+def _default_skill_entry(rarity, name):
+    if rarity == 5 and '大罪' in (name or ''):
+        return _DAIZAI_SKILL
+    return _DEFAULT_SOUL_SKILLS.get(rarity)
+
+def insert_default_skill(record):
+    """rarity に応じた『魔剣使いの証★N / 大罪に堕ちた獣の証』を skills[0] に挿入。
+    既に同 effect_text を含む場合はスキップ。classify は後段 apply_pipeline で実行。"""
+    entry = _default_skill_entry(record.get('rarity'), record.get('name', ''))
+    if not entry:
+        return
+    skills = record.get('skills') or []
+    target_text = entry[1]
+    if any((s.get('effect_text') or '').strip() == target_text for s in skills):
+        return
+    record['skills'] = [{'name': entry[0], 'effect_text': entry[1]}] + skills
+
 
 # ============================================================
 #  I/O HELPERS
@@ -427,6 +456,10 @@ def main():
                     "acquisition": detail.get("acquisition", {}),
                 }
 
+                # rarity に応じた『魔剣使いの証』/『大罪に堕ちた獣の証』を skills[0] に挿入。
+                # classify は後段 apply_pipeline 内で走る。
+                insert_default_skill(record)
+
                 if sid in soul_index:
                     souls[soul_index[sid]] = record
                 else:
@@ -476,6 +509,17 @@ def main():
                     if 'calc_type' not in ent:
                         b_list = ent.get('bunrui', [])
                         ent['calc_type'] = 1 if any(b in ADD_BUNRUI for b in b_list) else 0
+
+        # rarity=3 默认技能 bairitu 玩家约定 1.1（classify の _bairitu_default は 1）
+        # bunrui / scope / calc_type は classify_common の出力を信用、ここでは bairitu のみ override。
+        for soul in output:
+            if soul.get('rarity') != 3:
+                continue
+            for sk in soul.get('skills', []):
+                if (sk.get('effect_text') or '').strip() != TARGET_RARITY3_TEXT:
+                    continue
+                for eff in sk.get('effects', []):
+                    eff['bairitu'] = 1.1
 
         save_json(output_path, output)
         print(f"Done! {len(output)} souls saved to {OUTPUT_FILE} ({count} recalculated)")

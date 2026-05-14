@@ -131,7 +131,8 @@ let enemy = {
   advantageWeapons: new Set(), // 1-12 武器 ID 集合（仅 ギルバト/特別版 有效）
   difficulty: 'Normal',        // 'Normal' | 'Hard' | 'Lunatic'（仅 ギルバト/特別版 有效）
   guildTitle: null,            // guildtitle.json 中的 id
-  emblems: [{id:null,level:1},{id:null,level:1},{id:null,level:1},{id:null,level:1}],
+  // 第一槽默认装 id=1 攻撃力アップⅠ (rarity=1 黄, lv max=25)；其他槽位空
+  emblems: [{id:1,level:25},{id:null,level:1},{id:null,level:1},{id:null,level:1}],
   bd_cap: 0,                   // 副本 BD 上限（0-9 整数）。倍率 = 1 + (bd_cap // 2) * 0.25
 };
 
@@ -449,6 +450,20 @@ export const setChara = (si,id) => {
     team[si].masou=null;
     const c=allCharas.find(x=>x.id===id);
     team[si].tr.affinity=_maxOmoideThreshold(c);
+    // 重置 tr：默认最高 state（極弐>改造>通常）、awakening=0；SS 特例 38/255，其他 jukudo/lv = state max
+    if(c){
+      const r=c.rarity;
+      const newState=['極弐','改造','通常'].find(s=>c.states?.[s])||'通常';
+      team[si].tr.state=newState;
+      team[si].tr.awakening=0;
+      if(r===4){
+        team[si].tr.jukudo=38;
+        team[si].tr.level=255;
+      } else {
+        team[si].tr.jukudo=JUKUDO_MAX_TBL[r]?.[newState]||1;
+        team[si].tr.level =LEVEL_MAX_TBL[r]?.[newState] ||1;
+      }
+    }
     if(!team[si].soul)autoAssignSoul(si);
     team[si].crystals=[];
     syncCrystals(si);
@@ -456,11 +471,23 @@ export const setChara = (si,id) => {
   }
   renderSlot(si);refreshAllStats();
 }
+// 换 soul 时把 tr.soul_lv / tr.soul_awakening 重置：觉醒=0、lv=该觉醒下的 max（不保留上一只魂的进度）
+const _resetSoulTr = (si) => {
+  team[si].tr.soul_awakening = 0;
+  const s = allSouls.find(x => x.id === team[si].soul);
+  team[si].tr.soul_lv = s ? soulLvCap(s, 0) : 1;
+};
 export const setSoul = (si,id) => {
   if(id===null){team[si].soul=null;renderSlot(si);refreshAllStats();return;}
   const other=team.findIndex((s,i)=>i!==si&&s.soul===id);
-  if(other>=0){[team[si].soul,team[other].soul]=[team[other].soul,team[si].soul];_clampSoulTr(other);renderSlot(other);}
-  else team[si].soul=id;
+  if(other>=0){
+    [team[si].soul,team[other].soul]=[team[other].soul,team[si].soul];
+    _resetSoulTr(other); _resetSoulTr(si);
+    renderSlot(other);
+  } else {
+    team[si].soul=id;
+    _resetSoulTr(si);
+  }
   _clampSoulTr(si);
   renderSlot(si);refreshAllStats();
 }
@@ -584,10 +611,18 @@ export const setJukudoSlider = (si,val) => {
   if(inp)inp.value=val;
   setTrNum(si,'jukudo',val,max);
 }
+export const setAwakeningSlider = (si,val) => {
+  const sl=document.getElementById('tr-awslider-'+si);
+  const max=sl?+sl.max:99;
+  const inp=document.getElementById('tr-awinput-'+si);
+  if(inp)inp.value=val;
+  setTrNum(si,'awakening',val,max);
+}
 export const setTrNum = (si,key,val,max) => {
   const minVal=key==='jukudo'?1:0;
   team[si].tr[key]=Math.min(max,Math.max(minVal,+val||minVal));
   if(key==='jukudo'){const jksl=document.getElementById('tr-jkslider-'+si);if(jksl)jksl.value=team[si].tr[key];}
+  if(key==='awakening'){const awsl=document.getElementById('tr-awslider-'+si);if(awsl)awsl.value=team[si].tr[key];}
   const c=allCharas.find(x=>x.id===team[si].chara); if(!c){refreshAllStats();return;}
   const r=c.rarity,tr=team[si].tr;
   const lev1=LEVEL_1JUK_TBL[r]?.[tr.state],levMax=LEVEL_MAX_TBL[r]?.[tr.state];
@@ -662,11 +697,22 @@ export const setSoulAwk = (si,val) => {
   const max=soulAwkMax(soul);
   const v=Math.max(0,Math.min(max,Math.floor(+val)||0));
   team[si].tr.soul_awakening=v;
-  // lv cap 变化 → 重渲魂的 training 行（slider/input 的 max 都要更新）
+  // surgical 更新：触らないと oninput 中に DOM が outerHTML 置換されて drag が中断する。
+  const awSl=document.getElementById('soul-aw-slider-'+si); if(awSl) awSl.value=v;
+  const awInp=document.getElementById('soul-aw-input-'+si); if(awInp) awInp.value=v;
+  // lv cap 連動：覚醒変化で lv max が動く → slider/input の max + value を更新
   const cap=soulLvCap(soul,v);
   if(team[si].tr.soul_lv>cap) team[si].tr.soul_lv=cap;
+  const lvSl=document.getElementById('soul-lv-slider-'+si);
+  const lvInp=document.getElementById('soul-lv-input-'+si);
+  if(lvSl){ lvSl.max=cap; lvSl.value=team[si].tr.soul_lv; }
+  if(lvInp){ lvInp.max=cap; lvInp.value=team[si].tr.soul_lv; }
+  // /cap 表示の <span class="tr-max">（renderSoulTraining 内で固定値で書き出してた）も更新
   const wrap=document.getElementById('soul-tr-'+si);
-  if(wrap) wrap.outerHTML=renderSoulTraining(si,soul);
+  if(wrap){
+    const lvMaxSpan=wrap.querySelector('.tr-max');
+    if(lvMaxSpan) lvMaxSpan.textContent='/ '+cap;
+  }
   refreshAllStats();
 }
 export const renderSoulTraining = (i, soul) => {
@@ -679,10 +725,11 @@ export const renderSoulTraining = (i, soul) => {
     <div class="training-row" id="soul-tr-${i}" style="margin-top:6px;flex-wrap:nowrap">
       <span class="tr-label">Lv</span>
       <input id="soul-lv-slider-${i}" class="tr-slider" type="range" min="1" max="${lvCap}" value="${lv}" oninput="setSoulLv(${i},+this.value)">
-      <input id="soul-lv-input-${i}" class="tr-lvval" type="number" min="1" max="${lvCap}" value="${lv}" onchange="setSoulLv(${i},+this.value)">
+      <input id="soul-lv-input-${i}" class="tr-lvval" type="number" min="1" max="${lvCap}" value="${lv}" onchange="setSoulLv(${i},+this.value)" style="width:26px;padding:3px 2px">
       <span class="tr-max">/ ${lvCap}</span>
       <span class="tr-label" style="margin-left:6px">覚醒</span>
-      <input class="tr-input" type="number" min="0" max="${awMax}" value="${aw}" onchange="setSoulAwk(${i},+this.value)" style="width:54px">
+      <input id="soul-aw-slider-${i}" class="tr-slider short" type="range" min="0" max="${awMax}" value="${aw}" oninput="setSoulAwk(${i},+this.value)">
+      <input id="soul-aw-input-${i}" class="tr-input" type="number" min="0" max="${awMax}" value="${aw}" onchange="setSoulAwk(${i},+this.value)">
       <span class="tr-max">/ ${awMax}</span>
     </div>`;
 }
@@ -747,7 +794,8 @@ export const renderTraining = (i,chara) => {
         <input id="tr-jkinput-${i}" class="tr-input" type="number" min="1" max="${jMax}" value="${jk}" onchange="setTrNum(${i},'jukudo',+this.value,${jMax})">
         <span class="tr-max"> / ${jMax}</span>
         <span class="tr-label" style="margin-left:4px">覚醒</span>
-        <input class="tr-input" type="number" min="0" max="${aMax}" value="${aw}" onchange="setTrNum(${i},'awakening',+this.value,${aMax})">
+        <input id="tr-awslider-${i}" class="tr-slider short" type="range" min="0" max="${aMax}" value="${aw}" oninput="setAwakeningSlider(${i},+this.value)">
+        <input id="tr-awinput-${i}" class="tr-input" type="number" min="0" max="${aMax}" value="${aw}" onchange="setTrNum(${i},'awakening',+this.value,${aMax})">
         <span class="tr-max"> / ${aMax}</span>
       </div>
       <div class="training-row">
@@ -1675,7 +1723,7 @@ export const renderStatsPanel = (i, chara) => {
 export const _statsInner = (i, chara) => {
   if (!chara) return '';
   const tr = team[i].tr;
-  const r = computeStats(chara, tr);
+  const r = computeStats(chara, tr, i);
   if (!r) return '';
   const dl = +r.damageLimit;
   const aMax = +r.stats['攻撃力']    || 0;
@@ -2631,7 +2679,7 @@ Object.assign(window, {
   renderEfRow, renderSkillsPanel, renderBgPanel, renderMasouPanel, renderCrystalEffList, autoAssignSoul, syncCrystals,
   setTeamSize, setChara, setSoul, setBG, setCrystal, setCrystalDim, setMasou, clearSlot, cryLvMax,
   openCrystalDimPopover, closeCrystalDimPopover, resetCrystalDim,
-  setTrField, setJukudoSlider, setTrNum, setLevel, setLevelInput, setHpSlider,
+  setTrField, setJukudoSlider, setAwakeningSlider, setTrNum, setLevel, setLevelInput, setHpSlider,
   setHpInput, setAffinity, setSoulLv, setSoulAwk, renderSoulTraining, renderTraining,
   soulMultiplier, soulLvCap, computeStats, renderEnemyBar, setEnemyElem, setEnemyBk,
   setEnemyMode, setEnemyBkRes, setEnemyDiff, setEnemyGuildTitle, setEnemyBdCap, toggleAdvWeapon, setEmblem,
