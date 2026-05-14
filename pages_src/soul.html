@@ -110,7 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(arr => {
       state.allSouls = arr;
-      arr.forEach(s => { state.originalData[s.id] = JSON.parse(JSON.stringify(s)); });
+      return fetch('../data/souls_extra.json').then(r => r.ok ? r.json() : []).catch(() => []);
+    })
+    .then(ext => {
+      if (Array.isArray(ext)) state.allSouls.push(...ext);
+      // originalData snapshot: base + extra
+      state.allSouls.forEach(s => {
+        if (!state.originalData[s.id]) state.originalData[s.id] = JSON.parse(JSON.stringify(s));
+      });
       return fetch('../data/souls_revise.json');
     })
     .then(r => r.ok ? r.json() : [])

@@ -108,7 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(arr => {
       state.allBG = arr;
-      arr.forEach(c => { state.originalData[c.id] = JSON.parse(JSON.stringify(c)); });
+      return fetch('../data/bladegraph_extra.json').then(r => r.ok ? r.json() : []).catch(() => []);
+    })
+    .then(ext => {
+      if (Array.isArray(ext)) state.allBG.push(...ext);
+      // originalData snapshot: base + extra
+      state.allBG.forEach(c => {
+        if (!state.originalData[c.id]) state.originalData[c.id] = JSON.parse(JSON.stringify(c));
+      });
       applyFilters();
       hideLoading();
       return fetch('../data/bladegraph_revise.json');

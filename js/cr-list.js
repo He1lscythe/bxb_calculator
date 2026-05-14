@@ -3,7 +3,7 @@ import { state } from './cr-state.js';
 import { ELEMENT, WEAPON, BUNRUI_SHORT, BUNRUI_FILTER, CONDITION, SCOPE_SHORT,
          renderFilterToggles, renderElementFilterToggles } from '../shared/constants.js';
 import { FilterCore } from '../shared/filter-core.js';
-import { CRYSTAL_SPEC } from '../shared/crystal-spec.js';
+import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
 import { escHtml, fmt, fmtLarge } from './utils.js';
 
 export const initFilterToggles = () => {
@@ -258,7 +258,7 @@ export const renderDetailBody = (c) => {
 
   return '<div class="body-left">' + rows + '</div>' +
     '<div class="body-right">' +
-      '<img class="crystal-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/' + (c.id % 100000) + '.jpg" onerror="this.style.display=\'none\'" alt="">' +
+      '<img class="crystal-icon" src="' + crystalImageSrc(c) + '" onerror="this.style.display=\'none\'" alt="">' +
       '<button class="btn-edit" onclick="enterEditMode(' + c.id + ')">修正</button>' +
     '</div>';
 }
