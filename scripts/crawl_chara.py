@@ -1299,6 +1299,22 @@ def apply_pipeline(characters, chara_ids=None, recal=False, bd_special=None, bd_
     for chara in characters:
         fill_omoide_slots(chara, omoide_templates)
 
+    # 字段顺序：omoide_rarity / tags 放在 url 之后（read flow 跟人類記憶順序一致）。
+    # tags / omoide_rarity 是後段追加（_elevate_bd / 上の omoide_rarity ループ）、
+    # naive な dict は末尾に来てしまうため、ここで一括並び替え。
+    for chara in characters:
+        new = {}
+        for k, v in chara.items():
+            if k in ('omoide_rarity', 'tags'):
+                continue
+            new[k] = v
+            if k == 'url':
+                if 'omoide_rarity' in chara: new['omoide_rarity'] = chara['omoide_rarity']
+                if 'tags'          in chara: new['tags']          = chara['tags']
+        for fk in ('omoide_rarity', 'tags'):  # 万一 url 缺失 → 兜底末尾
+            if fk in chara and fk not in new: new[fk] = chara[fk]
+        chara.clear(); chara.update(new)
+
     return characters, count
 
 

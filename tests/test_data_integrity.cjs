@@ -154,15 +154,24 @@ console.log('\n--- crystal lv / 颗粒度 schema (顶层 level_max / weight_step
     if (e?.effects && typeof e.effects === 'object') return Object.values(e.effects);
     return [];
   };
+  // 数値・分式文字列 ("a/b") 双方受け入れ — _parseScaling と同等の解釈で > 0 をチェック。
+  const _parsePos = (v) => {
+    if (typeof v === 'number') return v;
+    if (typeof v === 'string' && v.includes('/')) {
+      const [a, b] = v.split('/').map(Number);
+      return (Number.isFinite(a) && Number.isFinite(b) && b !== 0) ? a / b : NaN;
+    }
+    return NaN;
+  };
   const checkPos = (arr, fname) => {
     let bad = 0;
     for (const c of arr || []) {
       for (const k of ['level_max', 'weight_step', 'purity_step']) {
-        if (k in c && (typeof c[k] !== 'number' || !(c[k] > 0))) bad++;
+        if (k in c && !(_parsePos(c[k]) > 0)) bad++;
       }
       for (const e of _effectsValues(c)) {
         for (const k of ['weight_delta', 'purity_delta']) {
-          if (k in e && (typeof e[k] !== 'number' || !(e[k] > 0))) bad++;
+          if (k in e && !(_parsePos(e[k]) > 0)) bad++;
         }
       }
     }
