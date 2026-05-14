@@ -67,19 +67,46 @@ scripts/build.js（前端构建）
 
 ## JSON 数据文件
 
+### Data Layering（三层数据 pipeline）
+
+每个 entity 有最多三层 data file：
+
+- **`data/{entity}.json`** — crawler 输出，wiki source of truth。`crawl_*.py --rerun` 会重写
+- **`data/{entity}_extra.json`** — 手加的完整 entry（wiki 扒不到的），用户维护。crawler 不动
+- **`data/{entity}_revise.json`** — 对 base+extra 任一 entry 的字段级 patch（sparse diff）。edit UI 自动写
+
+**加载顺序**：`base → concat(extra) → applyRevise(revise)`。所有 viewer 页面（hensei / characters / soul / crystals / bladegraph）都按这个顺序合并。
+
+| 何时改哪个文件 | 操作 |
+|--------------|------|
+| 重新爬 wiki 数据 | 跑 crawler，base 被重写 |
+| 想新增 wiki 没有的 entry | 在 `*_extra.json` 加完整 entry（id 用 high range 避开 base id 空间） |
+| 想字段级微调任何 entry（不管 base 还是 extra） | 用 edit UI；自动写到 `*_revise.json` |
+| 想彻底删一个手加 entry | 从 `*_extra.json` 删行 |
+| 想撤销字段微调 | 删 `*_revise.json` 对应 patch |
+
+存在的 extra 文件（默认 `[]`）：`characters_extra.json` / `souls_extra.json` / `bladegraph_extra.json` / `crystals_extra.json` / `masou_extra.json`。omoide_revise / omoide_templates 是 chara 字段补丁、不需要 extra 层。
+
+### 详细文件清单
+
 | 文件 | 说明 |
 |------|------|
 | `characters.json` | **主角色数据**（含两阶段技能分类 + bairitu/bairitu_scaling + calc_type）。crawl_chara.py 输出，characters.html 读取。爬取过程中也作为断点续传存档 |
-| `characters_revise.json` | 角色手动修正 diff（**非 omoide 字段**）。仅存变更字段。页面加载时通过 deepApply 叠加到 characters.json 上 |
+| `characters_extra.json` | 手加的完整 chara entry（wiki 扒不到）。默认 `[]`。format 同 `characters.json` |
+| `characters_revise.json` | 角色手动修正 diff（**非 omoide 字段**）。仅存变更字段。页面加载时通过 deepApply 叠加到 base+extra 上 |
 | `omoide_revise.json` | 角色潜在開放 diff（`omoide` / `omoide_template` / `omoide_rarity` 字段）。与 characters_revise 分离，页面加载后单独叠加。**注：`omoide_template != null` 时 revise 不写 `omoide` 字段；运行时 `resolveOmoideTemplates` 用 templates 还原 slots** |
 | `omoide_templates.json` | 潜在開放槽位模板库。格式：`[{id, name, omoide:[...40 entries...]}]`。id 自增，通过 UI 编辑保存。**chara 引用方式是 live reference**（chara.omoide_template = id），template 内容更新后所有引用 chara 自动跟随 |
 | `souls.json` | **魂数据**（含多效果分类 + bairitu + calc_type + bunrui=7 时 hit_type/hit_per_stage）。soul.html 读取 |
+| `souls_extra.json` | 手加的完整 soul entry。默认 `[]` |
 | `souls_revise.json` | 魂手动修正数据 |
 | `crystals.json` | **記憶結晶数据**（含 effects 数组、bairitu_init/bairitu、scope/condition/calc_type、bunrui=7 时 hit_type/hit_per_stage）。crystals.html 读取 |
+| `crystals_extra.json` | 手加的完整 crystal entry。默认 `[]` |
 | `crystals_revise.json` | 結晶手动修正数据 |
 | `bladegraph.json` | **心象結晶数据**（含 effects 数组、bairitu、scope/condition/calc_type）。bladegraph.html 读取 |
+| `bladegraph_extra.json` | 手加的完整 bladegraph entry。默认 `[]` |
 | `bladegraph_revise.json` | 心象結晶手动修正数据 |
 | `masou.json` | **魔装数据**（每个 entry 关联 `chara_id`，含 effects 数组、effect_text、image URL）。crawl_masou.py 输出，characters.html 魔装 modal + hensei.html 魔装 picker 读取 |
+| `masou_extra.json` | 手加的完整 masou entry。默认 `[]` |
 | `masou_revise.json` | 魔装手动修正数据 |
 | `guildtitle.json` | 公会役職データ（hensei 用，含 `effect_text` 描述与 effects 数组）。手动维护 |
 | `guildemblem.json` | 紋章データ（hensei 用，含 rarity / guild_only / effect_text / effects）。手动维护 |

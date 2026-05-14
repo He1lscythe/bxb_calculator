@@ -118,7 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(arr => {
       state.allCrystals = arr.filter(c => !c.tombstone);
-      state.allCrystals.forEach(c => { state.originalData[c.id] = JSON.parse(JSON.stringify(c)); });
+      return fetch('../data/crystals_extra.json').then(r => r.ok ? r.json() : []).catch(() => []);
+    })
+    .then(ext => {
+      if (Array.isArray(ext)) state.allCrystals.push(...ext.filter(c => !c.tombstone));
+      // originalData snapshot: base + extra
+      state.allCrystals.forEach(c => {
+        if (!state.originalData[c.id]) state.originalData[c.id] = JSON.parse(JSON.stringify(c));
+      });
       applyFilters();
       hideLoading();
       return fetch('../data/crystals_revise.json');
