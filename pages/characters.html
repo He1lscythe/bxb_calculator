@@ -203,11 +203,15 @@ fetch('../data/senzai_table.json')
   .then(d => { state.SENZAI_TABLE = d; })
   .catch(() => {});
 
-// 魔装データ load + revise 適用
+// 魔装データ load + extra + revise 適用
 fetch('../data/masou.json')
   .then(r => r.ok ? r.json() : [])
   .then(arr => {
     state.allMasou = Array.isArray(arr) ? arr : [];
+    return fetch('../data/masou_extra.json').then(r => r.ok ? r.json() : []).catch(() => []);
+  })
+  .then(ext => {
+    if (Array.isArray(ext)) state.allMasou.push(...ext);
     return fetch('../data/masou_revise.json').then(r => r.ok ? r.json() : []).catch(() => []);
   })
   .then(rev => {
@@ -234,7 +238,14 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(arr => {
       state.allChars = arr;
-      arr.forEach(c => { state.originalData[c.id] = JSON.parse(JSON.stringify(c)); });
+      return fetch('../data/characters_extra.json').then(r => r.ok ? r.json() : []).catch(() => []);
+    })
+    .then(ext => {
+      if (Array.isArray(ext)) state.allChars.push(...ext);
+      // originalData snapshot: base + extra（edit save 时 computeDiff 的 baseline）
+      state.allChars.forEach(c => {
+        if (!state.originalData[c.id]) state.originalData[c.id] = JSON.parse(JSON.stringify(c));
+      });
       applyFilters();
       hideLoading();
       return fetch('../data/characters_revise.json');

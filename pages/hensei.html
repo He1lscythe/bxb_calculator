@@ -113,7 +113,7 @@ import { ELEMENT, WEAPON, RARITY, BUNRUI, BUNRUI_SHORT, BUNRUI_FILTER, CONDITION
 import { FilterCore } from '../shared/filter-core.js';
 import { CHARA_SPEC } from '../shared/chara-spec.js';
 import { SOUL_SPEC } from '../shared/soul-spec.js';
-import { CRYSTAL_SPEC } from '../shared/crystal-spec.js';
+import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
 import { BG_SPEC } from '../shared/bg-spec.js';
 import { escHtml, fmtLarge, fmtBairitu, fmtHitStages, fmtAff, hideLoading, min, fmtNum, ctPfx } from '../js/utils.js';
 import { deepApply } from '../js/diff.js';
@@ -242,6 +242,11 @@ Promise.all([
   fetch('../data/bladegraph.json').then(r=>r.json()),
   fetch('../data/crystals.json').then(r=>r.json()),
   fetch('../data/masou.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('../data/characters_extra.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('../data/souls_extra.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('../data/bladegraph_extra.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('../data/crystals_extra.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('../data/masou_extra.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/characters_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/omoide_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/souls_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
@@ -251,7 +256,14 @@ Promise.all([
   fetch('../data/guildtitle.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/guildemblem.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/omoide_templates.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
-]).then(([ch,so,bg,cr,ms, chRev, omRev, soRev, crRev, bgRev, msRev, gt, ge, omTpls])=>{
+]).then(([ch,so,bg,cr,ms, chExt,soExt,bgExt,crExt,msExt, chRev, omRev, soRev, crRev, bgRev, msRev, gt, ge, omTpls])=>{
+  // ① 先 concat extra 进 base array（手加 entry，wiki 扒不到）
+  if (Array.isArray(chExt)) ch.push(...chExt);
+  if (Array.isArray(soExt)) so.push(...soExt);
+  if (Array.isArray(bgExt)) bg.push(...bgExt);
+  if (Array.isArray(crExt)) cr.push(...crExt);
+  if (Array.isArray(msExt)) ms.push(...msExt);
+  // ② 再 apply revise（patch-only，未匹配 id 丢弃）
   _applyRevise(ch, chRev);
   _applyRevise(ch, omRev);
   // omoide_template 還元（revise が template_id だけ保存、slots は templates から取る）
@@ -2227,7 +2239,7 @@ export const renderEMList = (items) => {
       const cur=team[emSlot]?.crystals[emCi]?.id===c.id;
       return min`
         <div class="em-item em-item-bg${cur?' active':''}" onclick="selectEM(${c.id})">
-          <img class="em-icon" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id % 100000}.jpg" onerror="this.style.visibility='hidden'" alt="">
+          <img class="em-icon" src="${crystalImageSrc(c)}" onerror="this.style.visibility='hidden'" alt="">
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="badge weapon" style="flex-shrink:0">★${c.rarity}</span>
@@ -2478,7 +2490,7 @@ export const renderDMCrystal = (c) => {
     <div class="bgdm-layout">
       <div class="bgdm-fields">${fieldHtml||'<div style="color:var(--text2)">データなし</div>'}</div>
       <div style="flex-shrink:0">
-        <img src="https://img.altema.jp/bxb/kioku_kessyou/icon/${c.id % 100000}.jpg" onerror="this.style.display='none'"
+        <img src="${crystalImageSrc(c)}" onerror="this.style.display='none'"
           style="width:84px;height:84px;border-radius:8px;object-fit:cover;display:block;border:1px solid var(--border)" alt="">
         <div style="margin-top:8px;font-size:12px;font-weight:700;text-align:center;color:var(--text2)">★${c.rarity}</div>
       </div>
@@ -2668,7 +2680,7 @@ export const renderSlot = (i) => {
       return cr
         ?`<div class="crystal-slot-wrap">
             <div class="crystal-thumb-wrap">
-              <img class="crystal-thumb" src="https://img.altema.jp/bxb/kioku_kessyou/icon/${cr.id % 100000}.jpg"
+              <img class="crystal-thumb" src="${crystalImageSrc(cr)}"
                 onerror="this.style.visibility='hidden'" title="${escHtml(cr.name)}"
                 onclick="openEM(${i},'crystal',${ci})">
               <button class="crystal-rm" onclick="setCrystal(${i},${ci},null)" title="外す">×</button>
