@@ -113,6 +113,19 @@ import { enforceScopeConstraints } from '../shared/effect-constraints.js';
 
 Nav.init();
 
+// 仅本地 dev 環境で stats 計算 trace を表示。GitHub Pages 上では UI 入口無効・生成も no-op。
+// 判定対象：localhost / 127.0.0.1 / file:// / LAN IP (192.168.x.x / 10.x.x.x / 172.16-31.x.x) / *.local
+// （スマホ実機テスト時は LAN IP 経由でアクセスするため、これらも dev 扱い）。
+const IS_LOCAL_DEV = (() => {
+  if (typeof location === 'undefined') return false;
+  const h = location.hostname;
+  if (!h || h === 'localhost' || h === '127.0.0.1' || location.protocol === 'file:') return true;
+  if (h.endsWith('.local')) return true;
+  if (/^192\.168\.\d+\.\d+$/.test(h)) return true;
+  if (/^10\.\d+\.\d+\.\d+$/.test(h)) return true;
+  if (/^172\.(1[6-9]|2\d|3[01])\.\d+\.\d+$/.test(h)) return true;
+  return false;
+})();
 
 // ELEMENT / ELEM_COLOR / WEAPON / RARITY / BUNRUI / BUNRUI_SHORT / CONDITION /
 // CHARA_TAG 来自 shared/constants.js
@@ -1070,16 +1083,33 @@ export const computeStats = (chara, tr, slotIdx) => {
   };
   const tgt = chara;
 
+  // ===== Trace 容器（IS_LOCAL_DEV のみ生成、それ以外は no-op）=====
+  // 始終生成 / 同 pass push で必ず最終値と一致。
+  let _curStage = null;
+  const trace = IS_LOCAL_DEV ? {
+    base: _STAT_KEYS.reduce((m, k) => (m[k] = stats[k], m), {}),
+    damageLimitBase: damageLimit,
+    hitsBase: hits.slice(),
+    stages: [],
+  } : null;
+  const _enterStage = IS_LOCAL_DEV
+    ? (key, label) => { _curStage = { key, label, steps: [] }; trace.stages.push(_curStage); }
+    : () => {};
+  const _pushStep = IS_LOCAL_DEV
+    ? (step) => { if (_curStage) _curStage.steps.push(step); }
+    : () => {};
+
   // Apply one effect to acc, scaled by source HP via _conditionFactor.
   // sourceMult: 来源倍率（魂等级用），默认 1 不影响。
   // mode: 'add' (ct=1, normal additive) / 'mul' (ct=0, normal multiplicative)
   //       'final-add' (ct=2, 最終加算) / 'final-mul' (ct=3, 最終乗算)
   // 加算系（add / final-add）と乗算系（mul / final-mul）は値の適用ロジック共通、ct 過濾だけ違う。
-  function _applyEf(e, srcJk, srcHp, mode, sourceMult = 1) {
+  function _applyEf(e, srcJk, srcHp, mode, sourceMult = 1, srcLabel = '') {
     const factor = _conditionFactor(e.condition, srcHp);
     const bunrui = e.bunrui || [];
     const isAddMode = (mode === 'add' || mode === 'final-add');
     const isMulMode = (mode === 'mul' || mode === 'final-mul');
+    const _label = srcLabel || e._srcLabel || '';
 
     // ===== Hit 处理（bunrui 含 7）— 每步取整 =====
     // hit_type: 1/0=add (default), 2=mul, 3=set
@@ -1096,6 +1126,7 @@ export const computeStats = (chara, tr, slotIdx) => {
           const baseV = _parseHit(hps[s]) + (srcJk - 1) * _parseHit(hpss[s]);
           if (baseV === 0) continue;
           let v = baseV * sourceMult;
+          const hitBefore = acc.hits[s];
           if (mode === 'add') {
             v = v * factor;
             if (ht === 3) acc.hits[s] = Math.floor(v);              // set
@@ -1105,6 +1136,12 @@ export const computeStats = (chara, tr, slotIdx) => {
             v = (v - 1) * factor + 1;
             acc.hits[s] = Math.floor(acc.hits[s] * v);
           }
+          _pushStep({
+            src: _label, stat: 'Hit' + (s + 1), op: mode, val: v,
+            hpFactor: factor, sourceMult,
+            scope: e.scope, calc_type: e.calc_type, condition: e.condition,
+            before: hitBefore, after: acc.hits[s],
+          });
         }
       }
     }
@@ -1129,20 +1166,41 @@ export const computeStats = (chara, tr, slotIdx) => {
     for (const b of bunrui) {
       if (b === 7) continue;  // 已在上面处理
       if (b === 17) {
+        const before = acc.damageLimit;
         if (isAddMode) acc.damageLimit += v;
         else           acc.damageLimit *= v;
+        _pushStep({
+          src: _label, stat: 'ダメ上限', op: mode, val: v,
+          bairituRaw: e.bairitu, hpFactor: factor, sourceMult,
+          scope: e.scope, calc_type: e.calc_type, condition: e.condition,
+          before, after: acc.damageLimit,
+        });
       } else if (b === 18) {
         // BDゲージ最大値：4 種 mode を独立に累加。mul/finalMul は (v-1) を加える
         // （v 自体は乗数なので、加性叠加には 1 を引いた残差を取る）。
-        if      (mode === 'add')       acc.bdCapAdd      += v;
-        else if (mode === 'mul')       acc.bdCapMul      += (v - 1);
-        else if (mode === 'final-add') acc.bdCapFinalAdd += v;
-        else if (mode === 'final-mul') acc.bdCapFinalMul += (v - 1);
+        let beforeBD, afterBD, bdKey;
+        if      (mode === 'add')       { beforeBD = acc.bdCapAdd;      acc.bdCapAdd      += v;       afterBD = acc.bdCapAdd;      bdKey = 'BDCap-add'; }
+        else if (mode === 'mul')       { beforeBD = acc.bdCapMul;      acc.bdCapMul      += (v - 1); afterBD = acc.bdCapMul;      bdKey = 'BDCap-mul'; }
+        else if (mode === 'final-add') { beforeBD = acc.bdCapFinalAdd; acc.bdCapFinalAdd += v;       afterBD = acc.bdCapFinalAdd; bdKey = 'BDCap-final-add'; }
+        else if (mode === 'final-mul') { beforeBD = acc.bdCapFinalMul; acc.bdCapFinalMul += (v - 1); afterBD = acc.bdCapFinalMul; bdKey = 'BDCap-final-mul'; }
+        _pushStep({
+          src: _label, stat: bdKey, op: mode, val: v,
+          bairituRaw: e.bairitu, hpFactor: factor, sourceMult,
+          scope: e.scope, calc_type: e.calc_type, condition: e.condition,
+          before: beforeBD, after: afterBD,
+        });
       } else {
         const stat = _BUNRUI_TO_STAT[b];
         if (!stat || acc.stats[stat] == null) continue;
+        const before = acc.stats[stat];
         if (isAddMode) acc.stats[stat] += v;
         else           acc.stats[stat] *= v;
+        _pushStep({
+          src: _label, stat, op: mode, val: v,
+          bairituRaw: e.bairitu, hpFactor: factor, sourceMult,
+          scope: e.scope, calc_type: e.calc_type, condition: e.condition,
+          before, after: acc.stats[stat],
+        });
       }
     }
   }
@@ -1156,21 +1214,34 @@ export const computeStats = (chara, tr, slotIdx) => {
   // sourceMult: 来源倍率（如魂的 lv 倍率），同时作用于 stat / hit。
   // useElementBuff: 仅魔剣技能 → element 走 tgt.element_buff[]；其他来源传 false。
   // skipFinal: BD effects は final pass に参加しない（BD 自体が「最後」なので）。
-  function _applyList(effects, srcChara, srcHp, srcJk, sourceMult = 1, useElementBuff = false, skipFinal = false) {
+  function _applyList(effects, srcChara, srcHp, srcJk, sourceMult = 1, useElementBuff = false, skipFinal = false, srcLabel = '') {
     if (!effects || !effects.length) return;
     const filtered = effects.filter(e => _buffApplies(srcChara, tgt, e, useElementBuff));
     if (!filtered.length) return;
-    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'add', sourceMult);
-    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'mul', sourceMult);
-    if (!skipFinal) finalDeferred.push({ effects: filtered, srcJk, srcHp, sourceMult });
+    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'add', sourceMult, srcLabel);
+    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'mul', sourceMult, srcLabel);
+    if (!skipFinal) finalDeferred.push({ effects: filtered, srcJk, srcHp, sourceMult, srcLabel });
   }
 
   // ===== Stage 1: Self omoide (gated by affinity) =====
   const selfJk = Math.max(1, tr.jukudo || 1);
   const selfHp = tr.hpPercent ?? 100;
-  const picks = _omoidePicksFor(chara, tr);
-  for (const info of picks) _applyEf(info, selfJk, selfHp, 'add');
-  for (const info of picks) _applyEf(info, selfJk, selfHp, 'mul');
+  // trace 用：threshold + koka を捕えるためインライン展開。_omoidePicksFor は外部 API として残す。
+  const _picksWithLabel = [];
+  {
+    const aff = +tr.affinity || 0;
+    const omPicks = tr.omoide_picks || {};
+    (chara.omoide || []).forEach(row => {
+      if ((+row.threshold || 0) > aff) return;
+      const pickedIcon = omPicks[row.threshold];
+      if (pickedIcon == null) return;
+      const info = SENZAI_TABLE[pickedIcon] || SENZAI_TABLE[String(pickedIcon)];
+      if (info) _picksWithLabel.push({ info, label: '思い出 thresh ' + row.threshold + ' ' + (info.koka || '') });
+    });
+  }
+  _enterStage('omoide', 'Stage 1 思い出');
+  for (const p of _picksWithLabel) _applyEf(p.info, selfJk, selfHp, 'add', 1, p.label);
+  for (const p of _picksWithLabel) _applyEf(p.info, selfJk, selfHp, 'mul', 1, p.label);
 
   // ===== Stage 2: External buffs in fixed slot order =====
   // slot s: crystals → chara skills, then souls (1..3), then bgs (1..3)
@@ -1182,6 +1253,7 @@ export const computeStats = (chara, tr, slotIdx) => {
 
     // Crystals — weight / purity 衰减（占位公式：独立线性、加性叠加；真实公式待测）
     // step は per-crystal 顶层、delta は per-effect。bairitu_eff = max(minB, max - Σ((100-cfg)/step * delta))
+    _enterStage('stage2-cr-s' + si, 'Stage 2 Slot' + (si + 1) + ' 記憶結晶');
     const crEffs = [];
     (slot.crystals || []).forEach(cfg => {
       if (!cfg) return;
@@ -1190,6 +1262,7 @@ export const computeStats = (chara, tr, slotIdx) => {
       // step / delta 与 bairitu 同：数値・分式 ("1/2") 双方受け入れ。
       const wStep = _parseScaling(cr.weight_step);
       const pStep = _parseScaling(cr.purity_step);
+      const crLabel = 'Slot' + (si + 1) + ' 結晶 ' + (cr.name || '');
       for (const e of (cr.effects || [])) {
         let delta = 0;
         if (wStep > 0 && e.weight_delta && cfg.weight != null) {
@@ -1203,9 +1276,9 @@ export const computeStats = (chara, tr, slotIdx) => {
         if (delta > 0 && Number.isFinite(baseB)) {
           const ct = e.calc_type ?? 0;
           const minB = (ct === 0 || ct === 3) ? 1 : 0;
-          crEffs.push({ ...e, bairitu: Math.max(minB, baseB - delta) });
+          crEffs.push({ ...e, bairitu: Math.max(minB, baseB - delta), _srcLabel: crLabel });
         } else {
-          crEffs.push(e);
+          crEffs.push({ ...e, _srcLabel: crLabel });
         }
       }
     });
@@ -1213,13 +1286,19 @@ export const computeStats = (chara, tr, slotIdx) => {
 
     // Chara skills (current state, with revise) — element 匹配走 tgt.element_buff[]
     if (srcChara) {
+      _enterStage('stage2-ch-s' + si, 'Stage 2 Slot' + (si + 1) + ' ' + (srcChara.name || '') + ' (魔剣 skill)');
       const skills = _resolveCharaSkills(srcChara, slot.tr?.state);
       const charaEffs = [];
       // skill name に Lv2/Lv3/Lv4/Lv5 → bairitu_scaling 公式 (jk-1)*s。それ以外 jk*s。
       // _jkm1 を effect の浅 copy に注入（src データを汚染しない）。
       skills.forEach(sk => {
         const jkm1 = _LV2_5_RE.test(sk.name || '');
-        (sk.effects || []).forEach(e => charaEffs.push(jkm1 ? { ...e, _jkm1: true } : e));
+        const skLabel = (srcChara.name || '') + ' ' + (sk.name || '');
+        (sk.effects || []).forEach(e => {
+          const ec = { ...e, _srcLabel: skLabel };
+          if (jkm1) ec._jkm1 = true;
+          charaEffs.push(ec);
+        });
       });
       _applyList(charaEffs, srcChara, srcHp, srcJk, 1, true);
     }
@@ -1227,7 +1306,12 @@ export const computeStats = (chara, tr, slotIdx) => {
     // Masou effects（chara-bound; element 匹配走 tgt.element 直接判定，不走 element_buff[]）
     if (slot.masou != null) {
       const masou = allMasou.find(x => x.id === slot.masou);
-      if (masou) _applyList(masou.effects || [], srcChara, srcHp, srcJk, 1, false);
+      if (masou) {
+        _enterStage('stage2-ms-s' + si, 'Stage 2 Slot' + (si + 1) + ' 魔装 ' + (masou.name || ''));
+        const msLabel = 'Slot' + (si + 1) + ' 魔装 ' + (masou.name || '');
+        const msEffs = (masou.effects || []).map(e => ({ ...e, _srcLabel: msLabel }));
+        _applyList(msEffs, srcChara, srcHp, srcJk, 1, false);
+      }
     }
   }
   for (let si = 0; si < teamSize; si++) {
@@ -1237,11 +1321,15 @@ export const computeStats = (chara, tr, slotIdx) => {
     const srcJk = Math.max(1, slot.tr?.jukudo || 1);
     const soul = allSouls.find(x => x.id === slot.soul);
     if (!soul) continue;
+    _enterStage('stage2-so-s' + si, 'Stage 2 Slot' + (si + 1) + ' ' + (soul.name || '') + ' (魂 skill)');
     // 魂的倍率：根据 rarity + lv 计算（task 7+8）。乘到所有 effect 的 bairitu / hit_per_stage 上。
     const soulMult = soulMultiplier(soul.rarity || 1, slot.tr?.soul_lv || 1);
     const skills = _resolveSoulSkills(soul);
     const soulEffs = [];
-    skills.forEach(sk => (sk.effects || []).forEach(e => soulEffs.push(e)));
+    skills.forEach(sk => {
+      const skLabel = (soul.name || '') + ' ' + (sk.name || '');
+      (sk.effects || []).forEach(e => soulEffs.push({ ...e, _srcLabel: skLabel }));
+    });
     _applyList(soulEffs, srcChara, srcHp, srcJk, soulMult);
   }
   for (let si = 0; si < teamSize; si++) {
@@ -1251,7 +1339,10 @@ export const computeStats = (chara, tr, slotIdx) => {
     const srcJk = Math.max(1, slot.tr?.jukudo || 1);
     const bg = allBGs.find(x => x.id === slot.bg);
     if (!bg) continue;
-    _applyList(bg.effects || [], srcChara, srcHp, srcJk);
+    _enterStage('stage2-bg-s' + si, 'Stage 2 Slot' + (si + 1) + ' ' + (bg.name || '') + ' (心象結晶)');
+    const bgLabel = 'Slot' + (si + 1) + ' 心象結晶 ' + (bg.name || '');
+    const bgEffs = (bg.effects || []).map(e => ({ ...e, _srcLabel: bgLabel }));
+    _applyList(bgEffs, srcChara, srcHp, srcJk);
   }
 
   // ===== Stage 2.5: Soul Affinity (独立乘区, self-only) =====
@@ -1267,60 +1358,93 @@ export const computeStats = (chara, tr, slotIdx) => {
       const wAff = (mySoul.weapon_affinity  || {})[weapName] || {};
       const atkAff = _parseAff(eAff.atk_effect) * _parseAff(wAff.atk_effect);
       const defAff = _parseAff(eAff.def_effect) * _parseAff(wAff.def_effect);
-      acc.stats['攻撃力']    *= atkAff;
-      acc.stats['ブレイク力'] *= atkAff;
-      acc.stats['防御力']    *= defAff;
+      _enterStage('affinity', 'Stage 2.5 魂 affinity (自身)');
+      const atkSrc = '元素 ' + elemName + ' atk ' + (eAff.atk_effect ?? '1') + ' × 武器 ' + weapName + ' atk ' + (wAff.atk_effect ?? '1');
+      const defSrc = '元素 ' + elemName + ' def ' + (eAff.def_effect ?? '1') + ' × 武器 ' + weapName + ' def ' + (wAff.def_effect ?? '1');
+      { const before = acc.stats['攻撃力'];    acc.stats['攻撃力']    *= atkAff; _pushStep({ src: atkSrc, stat: '攻撃力',    op: 'mul', val: atkAff, before, after: acc.stats['攻撃力']    }); }
+      { const before = acc.stats['ブレイク力']; acc.stats['ブレイク力'] *= atkAff; _pushStep({ src: atkSrc, stat: 'ブレイク力', op: 'mul', val: atkAff, before, after: acc.stats['ブレイク力'] }); }
+      { const before = acc.stats['防御力'];    acc.stats['防御力']    *= defAff; _pushStep({ src: defSrc, stat: '防御力',    op: 'mul', val: defAff, before, after: acc.stats['防御力']    }); }
     }
   }
 
   // ===== Stage 3: Self-only finishers (結婚 / 燃心 / LP / 主武器) =====
+  _enterStage('stage3', 'Stage 3 結婚 / 燃心 / LP / 主武器');
   const mr = [1.00, 1.03, 1.05][tr.marriage] || 1;
-  for (const k of _STAT_KEYS) acc.stats[k] *= mr;
-  if (tr.moeshin) acc.stats['攻撃力'] *= 1.3;
+  if (mr !== 1) {
+    const mrSrc = '結婚 ' + tr.marriage + ' (×' + mr + ')';
+    for (const k of _STAT_KEYS) {
+      const before = acc.stats[k]; acc.stats[k] *= mr;
+      _pushStep({ src: mrSrc, stat: k, op: 'mul', val: mr, before, after: acc.stats[k] });
+    }
+  }
+  if (tr.moeshin) {
+    const before = acc.stats['攻撃力']; acc.stats['攻撃力'] *= 1.3;
+    _pushStep({ src: '燃心 ×1.3', stat: '攻撃力', op: 'mul', val: 1.3, before, after: acc.stats['攻撃力'] });
+  }
   const lpMult = [1.0, 1.1, 1.5][tr.lp] || 1;
-  acc.stats['攻撃力'] *= lpMult;
+  if (lpMult !== 1) {
+    const before = acc.stats['攻撃力']; acc.stats['攻撃力'] *= lpMult;
+    _pushStep({ src: 'LP ' + tr.lp + ' (×' + lpMult + ')', stat: '攻撃力', op: 'mul', val: lpMult, before, after: acc.stats['攻撃力'] });
+  }
   // 主武器装備（あり=1.0 / なし=1/21）作用于 攻撃力 + ブレイク力
   const mwMult = (tr.main_weapon === false) ? (1 / 21) : 1.0;
-  acc.stats['攻撃力']    *= mwMult;
-  acc.stats['ブレイク力'] *= mwMult;
+  if (mwMult !== 1) {
+    const mwSrc = '主武器なし (×1/21)';
+    { const before = acc.stats['攻撃力'];    acc.stats['攻撃力']    *= mwMult; _pushStep({ src: mwSrc, stat: '攻撃力',    op: 'mul', val: mwMult, before, after: acc.stats['攻撃力']    }); }
+    { const before = acc.stats['ブレイク力']; acc.stats['ブレイク力'] *= mwMult; _pushStep({ src: mwSrc, stat: 'ブレイク力', op: 'mul', val: mwMult, before, after: acc.stats['ブレイク力'] }); }
+  }
 
   // ===== Stage 4: 敵 / 副本 / 公会 multipliers =====
   //   元素克制 / BK / 有利武器 / 難易度 / 公会役職 + 4 紋章 / 副本 BD 上限
+  _enterStage('stage4-env', 'Stage 4 敵 / 副本');
   const isGuildMode = (enemy.mode === 'guildbattle' || enemy.mode === 'guildbattle_special');
   // 4a. 元素克制 → 攻撃力 + ブレイク力
   const elemMult = elementMatchupMult(chara.element, enemy.element, enemy.mode);
-  acc.stats['攻撃力']    *= elemMult;
-  acc.stats['ブレイク力'] *= elemMult;
+  if (elemMult !== 1) {
+    const emSrc = '元素克制 ' + (ELEMENT[chara.element] || '?') + '→' + (ELEMENT[enemy.element] || '?') + ' (×' + elemMult + ')';
+    { const before = acc.stats['攻撃力'];    acc.stats['攻撃力']    *= elemMult; _pushStep({ src: emSrc, stat: '攻撃力',    op: 'mul', val: elemMult, before, after: acc.stats['攻撃力']    }); }
+    { const before = acc.stats['ブレイク力']; acc.stats['ブレイク力'] *= elemMult; _pushStep({ src: emSrc, stat: 'ブレイク力', op: 'mul', val: elemMult, before, after: acc.stats['ブレイク力'] }); }
+  }
   // 4b. BK状態 → 攻撃力（普通 3.0；ギルバト 高耐性 6.0）
   if (enemy.bk) {
     const bkMult = (isGuildMode && enemy.bkResistance === 'high') ? 6.0 : 3.0;
-    acc.stats['攻撃力'] *= bkMult;
+    const before = acc.stats['攻撃力']; acc.stats['攻撃力'] *= bkMult;
+    _pushStep({ src: 'BK状態 ×' + bkMult, stat: '攻撃力', op: 'mul', val: bkMult, before, after: acc.stats['攻撃力'] });
   }
   // 4c. ギルバト/特別版 限定（有利武器 + 難易度）→ 攻撃力
   if (isGuildMode) {
     if (chara.weapon != null && enemy.advantageWeapons && enemy.advantageWeapons.has(chara.weapon)) {
-      acc.stats['攻撃力'] *= 2.0;
+      const before = acc.stats['攻撃力']; acc.stats['攻撃力'] *= 2.0;
+      _pushStep({ src: '有利武器 ' + (WEAPON[chara.weapon] || '?') + ' ×2.0', stat: '攻撃力', op: 'mul', val: 2.0, before, after: acc.stats['攻撃力'] });
     }
     const diffMult = ({Normal:1.0, Hard:0.1, Lunatic:0.005})[enemy.difficulty] ?? 1.0;
-    acc.stats['攻撃力'] *= diffMult;
+    if (diffMult !== 1) {
+      const before = acc.stats['攻撃力']; acc.stats['攻撃力'] *= diffMult;
+      _pushStep({ src: '難易度 ' + enemy.difficulty + ' ×' + diffMult, stat: '攻撃力', op: 'mul', val: diffMult, before, after: acc.stats['攻撃力'] });
+    }
   }
   // 4d. 公会役職 + 4 紋章（外部 buff，按 effects schema 应用）
+  _enterStage('stage4-guild', 'Stage 4 公会役職 + 紋章');
   const guildEffects = [];
   if (isGuildMode && enemy.guildTitle != null) {
     const gt = allGuildTitles.find(g => g.id === enemy.guildTitle);
-    if (gt) (gt.effects || []).forEach(e => guildEffects.push(e));
+    if (gt) {
+      const gtLabel = '役職 ' + (gt.name || '');
+      (gt.effects || []).forEach(e => guildEffects.push({ ...e, _srcLabel: gtLabel }));
+    }
   }
-  for (const slot of (enemy.emblems || [])) {
-    if (slot.id == null) continue;
+  (enemy.emblems || []).forEach((slot, s) => {
+    if (slot.id == null) return;
     const em = allGuildEmblems.find(g => g.id === slot.id);
-    if (!em) continue;
-    if (em.guild_only && !isGuildMode) continue;
+    if (!em) return;
+    if (em.guild_only && !isGuildMode) return;
     // bairitu 在配置里填的是"满级倍率"。按 level 线性插值到 1.0：
     //   bairitu(lv) = (bairitu_max - 1) * (lv - 1) / (lvMax - 1) + 1
     const lvMax = emblemLvMax(em.rarity);
     const lv = Math.max(1, Math.min(lvMax, +slot.level || 1));
+    const emLabel = '紋章 ' + (COLOR_LABELS[SLOT_COLORS[s]] || '') + ' ' + (em.name || '') + ' lv' + lv;
     for (const e of (em.effects || [])) {
-      const ec = Object.assign({}, e);
+      const ec = Object.assign({}, e, { _srcLabel: emLabel });
       // bairitu は数値・分式文字列 ("1/2") 双方受け入れ。
       const baseB = _parseScaling(e.bairitu);
       if (lvMax > 1 && Number.isFinite(baseB) && baseB !== 0) {
@@ -1328,7 +1452,7 @@ export const computeStats = (chara, tr, slotIdx) => {
       }
       guildEffects.push(ec);
     }
-  }
+  });
   if (guildEffects.length) {
     // src=null：scope=0/3 不会应用（要 src.id===tgt.id），其他全部按 _buffApplies 走
     _applyList(guildEffects, null, 100, 1, 1);
@@ -1340,15 +1464,21 @@ export const computeStats = (chara, tr, slotIdx) => {
   //     slot 間の最大値を取って floor → slider/input の max 属性に流す。倍率公式自体には加算しない。
   const bdCap = +enemy.bd_cap || 0;
   const bdCapMult = 1 + Math.floor(bdCap / 2) * 0.25;
-  acc.stats['攻撃力'] *= bdCapMult;
+  if (bdCapMult !== 1) {
+    _enterStage('stage4-bdcap', 'Stage 4 BDゲージ上限');
+    const before = acc.stats['攻撃力']; acc.stats['攻撃力'] *= bdCapMult;
+    _pushStep({ src: 'BDゲージ上限 ' + bdCap + ' (×' + bdCapMult + ')', stat: '攻撃力', op: 'mul', val: bdCapMult, before, after: acc.stats['攻撃力'] });
+  }
 
   // ===== Stage 5: Final pass — 全 normal stage 完了後に ct=2 (最終加算) → ct=3 (最終乗算) =====
   // BD は finalDeferred に入っていない（_applyList を skipFinal=true で呼ぶ）ので影響しない。
+  _enterStage('final-add', 'Stage 5 Final pass (最終加算)');
   for (const it of finalDeferred) {
-    for (const e of it.effects) _applyEf(e, it.srcJk, it.srcHp, 'final-add', it.sourceMult);
+    for (const e of it.effects) _applyEf(e, it.srcJk, it.srcHp, 'final-add', it.sourceMult, it.srcLabel);
   }
+  _enterStage('final-mul', 'Stage 5 Final pass (最終乗算)');
   for (const it of finalDeferred) {
-    for (const e of it.effects) _applyEf(e, it.srcJk, it.srcHp, 'final-mul', it.sourceMult);
+    for (const e of it.effects) _applyEf(e, it.srcJk, it.srcHp, 'final-mul', it.sourceMult, it.srcLabel);
   }
 
   // ===== Stage 6: BD effects（仅 tr.bd_on === true 的 slot 触发；BD は全 final 之後に走る）=====
@@ -1361,13 +1491,18 @@ export const computeStats = (chara, tr, slotIdx) => {
     if (!bdEffs.length) continue;
     const srcHp = slot.tr?.hpPercent ?? 100;
     const srcJk = Math.max(1, slot.tr?.jukudo || 1);
-    _applyList(bdEffs, srcChara, srcHp, srcJk, 1, true, /* skipFinal */ true);
+    _enterStage('stage6-bd-s' + si, 'Stage 6 Slot' + (si + 1) + ' ' + (srcChara.name || '') + ' B.D.');
+    const bdLabel = 'Slot' + (si + 1) + ' ' + (srcChara.name || '') + ' B.D.';
+    const bdEffsLabeled = bdEffs.map(e => ({ ...e, _srcLabel: bdLabel }));
+    _applyList(bdEffsLabeled, srcChara, srcHp, srcJk, 1, true, /* skipFinal */ true);
   }
 
   // BDゲージ最大値の合成：((10 + 普通加算) * (1 + 普通乗算) + 最終加算) * (1 + 最終乗算) → floor して -1
   const bdCapRaw = ((10 + acc.bdCapAdd) * (1 + acc.bdCapMul) + acc.bdCapFinalAdd) * (1 + acc.bdCapFinalMul);
   const bdCapMax = Math.floor(bdCapRaw) - 1;
-  return { stats: acc.stats, damageLimit: acc.damageLimit, hits: acc.hits, bdCapMax };
+  const result = { stats: acc.stats, damageLimit: acc.damageLimit, hits: acc.hits, bdCapMax };
+  if (trace) result.trace = trace;
+  return result;
 }
 
 // ===== ENEMY BAR (敵方/副本/工会信息) =====
@@ -1720,11 +1855,15 @@ export const renderStatsPanel = (i, chara) => {
   if (!chara) return `<div class="stats-panel" id="stats-panel-${i}"></div>`;
   return `<div class="stats-panel" id="stats-panel-${i}">${_statsInner(i, chara)}</div>`;
 }
+// 各 slot の最新 computeStats 結果を保持（trace modal 用、IS_LOCAL_DEV のみ意味あり）
+const _lastTrace = [null, null, null];
+
 export const _statsInner = (i, chara) => {
-  if (!chara) return '';
+  if (!chara) { _lastTrace[i] = null; return ''; }
   const tr = team[i].tr;
   const r = computeStats(chara, tr, i);
-  if (!r) return '';
+  if (!r) { _lastTrace[i] = null; return ''; }
+  _lastTrace[i] = r;
   const dl = +r.damageLimit;
   const aMax = +r.stats['攻撃力']    || 0;
   const aMin = aMax * 0.95;
@@ -1737,16 +1876,21 @@ export const _statsInner = (i, chara) => {
   const yMax = aMax >= dl ? ' style="color:#ffd040"' : '';
   const yMin = aMin >= dl ? ' style="color:#ffd040"' : '';
 
+  // dev 環境のみ stat cell を clickable に。GitHub Pages では cursor も onclick もなし。
+  const ck = IS_LOCAL_DEV
+    ? (k) => ` onclick="openStatTrace(${i},'${k}')" style="cursor:pointer"`
+    : () => '';
+
   // 显示顺序：攻撃力max / 攻撃力min / 防御力 / HP / BK / Hit数 / ダメ上限
   // 默认每 cell 1/2 行宽（.stats-grid 的 grid-template-columns 设为 repeat(2,1fr)）。
   const cells = [
-    `<div class="stats-cell"><span class="stats-key">攻撃力max</span><span class="stats-val"${yMax}>${_fmtStat(Math.ceil(aMax))}</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">攻撃力min</span><span class="stats-val"${yMin}>${_fmtStat(Math.ceil(aMin))}</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">防御力</span><span class="stats-val">${_fmtStat(Math.ceil(def))}</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">HP</span><span class="stats-val">${_fmtStat(Math.ceil(hp))}</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">BK</span><span class="stats-val">${_fmtStat(Math.ceil(bk))}</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}] 合計 ${total_hits} hit</span></div>`,
-    `<div class="stats-cell"><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(Math.ceil(dl))}</span></div>`,
+    `<div class="stats-cell"${ck('攻撃力')}><span class="stats-key">攻撃力max</span><span class="stats-val"${yMax}>${_fmtStat(Math.ceil(aMax))}</span></div>`,
+    `<div class="stats-cell"${ck('攻撃力')}><span class="stats-key">攻撃力min</span><span class="stats-val"${yMin}>${_fmtStat(Math.ceil(aMin))}</span></div>`,
+    `<div class="stats-cell"${ck('防御力')}><span class="stats-key">防御力</span><span class="stats-val">${_fmtStat(Math.ceil(def))}</span></div>`,
+    `<div class="stats-cell"${ck('HP')}><span class="stats-key">HP</span><span class="stats-val">${_fmtStat(Math.ceil(hp))}</span></div>`,
+    `<div class="stats-cell"${ck('ブレイク力')}><span class="stats-key">BK</span><span class="stats-val">${_fmtStat(Math.ceil(bk))}</span></div>`,
+    `<div class="stats-cell"${ck('Hit')}><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}] 合計 ${total_hits} hit</span></div>`,
+    `<div class="stats-cell"${ck('ダメ上限')}><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(Math.ceil(dl))}</span></div>`,
   ].join('');
   return `<div class="stats-grid">${cells}</div>`;
 }
@@ -1807,7 +1951,7 @@ export const openEM = (si,type,ci=-1) => {
   applyEM();
 }
 export const closeEM = () => {document.getElementById('entity-modal').classList.remove('open');emSlot=-1;emType=null;emCi=-1;}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDetailModal();closeEM();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDetailModal();closeEM();closeStatTrace();}});
 
 // single filter-toggle listener — set up once to avoid duplicate-listener bug
 document.getElementById('em-sidebar').addEventListener('click',e=>{
@@ -2671,6 +2815,188 @@ _sGrid.addEventListener('touchend', e => {
 
 window.addEventListener('resize', updateMobVisible);
 
+// ===== STAT TRACE MODAL（IS_LOCAL_DEV のみ）=====
+// 各 stat の計算 trace を stage 別に展開表示。GitHub Pages では UI 入口無効・本ブロック全部 no-op。
+const _statTraceState = { slot: -1, statKey: '攻撃力', openStages: new Set() };
+
+const _STAT_TRACE_TABS = ['攻撃力', '防御力', 'HP', 'ブレイク力', 'Hit', 'ダメ上限'];
+
+const _fmtTraceVal = (v) => {
+  if (v == null || !Number.isFinite(v)) return '-';
+  if (Math.abs(v) >= 10000 || (Math.abs(v) > 0 && Math.abs(v) < 0.01)) return v.toExponential(3);
+  return (+v.toFixed(4)).toString();
+};
+const _fmtTraceStat = (v) => {
+  if (v == null || !Number.isFinite(v)) return '-';
+  if (Math.abs(v) >= 1e13) return v.toExponential(4);
+  return Math.round(v * 100) / 100 < 1 ? (+v.toFixed(4)).toString() : Math.round(v).toLocaleString('en-US');
+};
+const _opSymbol = (op) => {
+  if (op === 'add' || op === 'final-add') return '+';
+  if (op === 'mul' || op === 'final-mul') return '×';
+  return op;
+};
+
+// Hit tab は 3 stage hits + total を 1 view に統合表示するため特別扱い。
+const _statTraceMatch = (step, statKey) => {
+  if (statKey === 'Hit') return /^Hit[123]$/.test(step.stat);
+  return step.stat === statKey;
+};
+
+const _statTraceFinalValue = (trace, statKey) => {
+  if (!trace) return null;
+  if (statKey === 'Hit') return null;  // hit は array なので別途
+  if (statKey === 'ダメ上限') {
+    let last = trace.damageLimitBase;
+    for (const st of trace.stages) for (const s of st.steps) if (s.stat === 'ダメ上限') last = s.after;
+    return last;
+  }
+  let last = trace.base[statKey];
+  for (const st of trace.stages) for (const s of st.steps) if (s.stat === statKey) last = s.after;
+  return last;
+};
+
+const _statTraceBase = (trace, statKey) => {
+  if (!trace) return 0;
+  if (statKey === 'Hit') return 0;
+  if (statKey === 'ダメ上限') return trace.damageLimitBase;
+  return trace.base[statKey] || 0;
+};
+
+export const openStatTrace = (si, statKey) => {
+  if (!IS_LOCAL_DEV) return;
+  _statTraceState.slot = si;
+  _statTraceState.statKey = statKey;
+  _statTraceState.openStages = new Set();  // 全 stage 折りたたみで開始
+  const r = _lastTrace[si];
+  const c = allCharas.find(x => x.id === team[si].chara);
+  const title = document.getElementById('stat-trace-title');
+  if (title) title.textContent = `Slot${si + 1}  ${c?.name || ''} — 計算明細`;
+  _renderStatTraceTabs();
+  _renderStatTraceBody();
+  document.getElementById('stat-trace-modal').classList.add('open');
+};
+
+export const closeStatTrace = () => {
+  const el = document.getElementById('stat-trace-modal');
+  if (el) el.classList.remove('open');
+};
+
+export const setStatTraceTab = (statKey) => {
+  _statTraceState.statKey = statKey;
+  _statTraceState.openStages = new Set();
+  _renderStatTraceTabs();
+  _renderStatTraceBody();
+};
+
+export const toggleStatTraceStage = (key) => {
+  if (_statTraceState.openStages.has(key)) _statTraceState.openStages.delete(key);
+  else _statTraceState.openStages.add(key);
+  _renderStatTraceBody();
+};
+
+const _renderStatTraceTabs = () => {
+  const cur = _statTraceState.statKey;
+  const html = _STAT_TRACE_TABS.map(k => {
+    const label = k === '攻撃力' ? '攻撃力' : k === 'ブレイク力' ? 'BK' : k === 'Hit' ? 'Hit数' : k;
+    return `<button class="${cur === k ? 'on' : ''}" onclick="setStatTraceTab('${k}')">${label}</button>`;
+  }).join('');
+  document.getElementById('stat-trace-tabs').innerHTML = html;
+};
+
+const _renderStatTraceBody = () => {
+  const si = _statTraceState.slot;
+  const statKey = _statTraceState.statKey;
+  const r = _lastTrace[si];
+  const body = document.getElementById('stat-trace-body');
+  if (!r || !r.trace) { body.innerHTML = '<div style="padding:20px;color:var(--text2)">trace なし</div>'; return; }
+  const trace = r.trace;
+
+  // Hit tab は 3 stage の hits を並べる
+  if (statKey === 'Hit') {
+    let html = `<div class="trace-base">Base hits: [${(trace.hitsBase || []).join(', ')}]</div>`;
+    for (const stage of trace.stages) {
+      const hitSteps = stage.steps.filter(s => /^Hit[123]$/.test(s.stat));
+      if (!hitSteps.length) continue;
+      const open = _statTraceState.openStages.has(stage.key);
+      html += `<div class="trace-stage">
+        <div class="trace-stage-head" onclick="toggleStatTraceStage('${stage.key}')">
+          <span><span class="arrow">${open ? '▼' : '▶'}</span> ${escHtml(stage.label)}</span>
+          <span class="trace-stage-tot">${hitSteps.length} 件</span>
+        </div>`;
+      if (open) {
+        html += hitSteps.map(s => `<div class="trace-step">
+          <span class="src" title="${escHtml(s.src)}">${escHtml(s.src)} [${s.stat}]</span>
+          <span class="op">${_opSymbol(s.op)}</span>
+          <span class="val">${_fmtTraceVal(s.val)}</span>
+          <span class="after">${s.before} → ${s.after}</span>
+        </div>`).join('');
+      }
+      html += `</div>`;
+    }
+    const finalHits = r.hits.map(h => Math.floor(+h || 0));
+    html += `<div class="trace-final">最終 hits: [${finalHits.join(', ')}]  合計 ${finalHits.reduce((a, b) => a + b, 0)}</div>`;
+    body.innerHTML = html;
+    return;
+  }
+
+  const base = _statTraceBase(trace, statKey);
+  const finalVal = _statTraceFinalValue(trace, statKey);
+  let html = `<div class="trace-base">${escHtml(statKey)} base: ${_fmtTraceStat(base)}</div>`;
+
+  for (const stage of trace.stages) {
+    const steps = stage.steps.filter(s => _statTraceMatch(s, statKey));
+    const isEmpty = steps.length === 0;
+    const open = _statTraceState.openStages.has(stage.key);
+    const stageBefore = isEmpty ? null : steps[0].before;
+    const stageAfter  = isEmpty ? null : steps[steps.length - 1].after;
+    const headRight = isEmpty
+      ? '<span class="trace-stage-tot">（無し）</span>'
+      : `<span class="trace-stage-tot">${_fmtTraceStat(stageBefore)} → ${_fmtTraceStat(stageAfter)}</span>`;
+    html += `<div class="trace-stage${isEmpty ? ' empty' : ''}">
+      <div class="trace-stage-head" onclick="toggleStatTraceStage('${stage.key}')">
+        <span><span class="arrow">${open ? '▼' : '▶'}</span> ${escHtml(stage.label)}</span>
+        ${headRight}
+      </div>`;
+    if (open && !isEmpty) {
+      html += steps.map(s => `<div class="trace-step">
+        <span class="src" title="${escHtml(s.src)}">${escHtml(s.src)}</span>
+        <span class="op">${_opSymbol(s.op)}</span>
+        <span class="val">${_fmtTraceVal(s.val)}</span>
+        <span class="after">${_fmtTraceStat(s.before)} → ${_fmtTraceStat(s.after)}</span>
+      </div>`).join('');
+    }
+    html += `</div>`;
+  }
+
+  // 最終 + sanity check
+  const displayed = statKey === '攻撃力' ? r.stats['攻撃力']
+                  : statKey === 'ダメ上限' ? r.damageLimit
+                  : r.stats[statKey];
+  const mismatch = displayed != null && finalVal != null && Math.abs(displayed - finalVal) > 1e-3;
+  html += `<div class="trace-final">最終: ${_fmtTraceStat(finalVal)}${mismatch ? '  ⚠ 表示値 ' + _fmtTraceStat(displayed) + ' と不一致' : '  ✓'}</div>`;
+  if (statKey === '攻撃力') {
+    html += `<div class="trace-final" style="opacity:.7;font-weight:400">攻撃力 min = max × 0.95 = ${_fmtTraceStat(finalVal * 0.95)}</div>`;
+  }
+  body.innerHTML = html;
+};
+
+// IS_LOCAL_DEV のみ stat-trace modal を body 末尾に注入
+if (IS_LOCAL_DEV) {
+  document.body.insertAdjacentHTML('beforeend', `
+<div id="stat-trace-modal">
+  <div class="modal-overlay" onclick="closeStatTrace()"></div>
+  <div class="modal-panel stat-trace-panel">
+    <div class="modal-header">
+      <span class="modal-header-title" id="stat-trace-title">計算明細</span>
+      <button class="modal-close" onclick="closeStatTrace()">✕</button>
+    </div>
+    <div class="stat-trace-tabs" id="stat-trace-tabs"></div>
+    <div class="stat-trace-body" id="stat-trace-body"></div>
+  </div>
+</div>`);
+}
+
 // === expose public API to window for inline handlers ===
 window.state = { team, enemy, emSlot, emType, emCi };
 window.mf = mf;
@@ -2690,7 +3016,8 @@ Object.assign(window, {
   selectEM, openDetailModal, closeDetailModal, selectFromDetail, renderDMSoul, renderDMBg, renderDMMasou,
   renderDMCrystal, renderDMChara, switchDMState, renderDMState, dmRightTags,
   renderDMStats, renderDMBasicInfo, toggleDetail, renderAll, renderSlot, isMob,
-  msiClick, updateMobIndicator, updateMobVisible, flipMobSlot
+  msiClick, updateMobIndicator, updateMobVisible, flipMobSlot,
+  openStatTrace, closeStatTrace, setStatTraceTab, toggleStatTraceStage,
 });
 </script>
 </body>
