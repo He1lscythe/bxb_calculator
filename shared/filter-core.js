@@ -23,7 +23,11 @@ const _matchesItem = (item, state, spec) => {
     const fields = spec.searchFields || ['name'];
     let hit = false;
     for (let i = 0; i < fields.length; i++) {
-      const v = item[fields[i]];
+      const f = fields[i];
+      // searchFields 条目支持两种形式：
+      //   string  → 顶层 key（item[key]）
+      //   function → 提取器（extractor(item)），用于嵌套字段如 chara.states[best].profile.CV
+      const v = typeof f === 'function' ? f(item) : item[f];
       if (v != null && String(v).toLowerCase().indexOf(q) >= 0) { hit = true; break; }
     }
     if (!hit) return false;
@@ -61,9 +65,21 @@ const applyFilters = (items, state, spec) => {
     const get  = spec.sortFns[sortKey];
     const desc = state.sortDesc !== false;
     result.sort((a, b) => {
-      let va = get(a) ?? -Infinity;
-      let vb = get(b) ?? -Infinity;
-      return desc ? vb - va : va - vb;
+      const va = get(a);
+      const vb = get(b);
+      // 字符串 sort（unicode codepoint 顺序）：null 永远到末尾、不参与 desc/asc 翻转
+      if (typeof va === 'string' || typeof vb === 'string') {
+        if (va == null && vb == null) return 0;
+        if (va == null) return 1;
+        if (vb == null) return -1;
+        const sa = String(va), sb = String(vb);
+        if (sa === sb) return 0;
+        return desc ? (sa < sb ? 1 : -1) : (sa < sb ? -1 : 1);
+      }
+      // 数値 sort：保留原 -Infinity null 处理（desc=true → null 在末尾、asc=false → null 在开头）
+      const na = va ?? -Infinity;
+      const nb = vb ?? -Infinity;
+      return desc ? nb - na : na - nb;
     });
   }
   return result;
