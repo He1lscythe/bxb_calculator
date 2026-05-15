@@ -264,9 +264,9 @@ Promise.all([
   _applyRevise(bg, bgRev);
   _applyRevise(ms, msRev);
   allCharas=ch.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
-  allSouls=so.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
-  allBGs=bg.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
-  allCrystals=cr.filter(c=>!c.tombstone).sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+  allSouls=so.sort((a,b)=>b.rarity-a.rarity||b.id-a.id);
+  allBGs=bg.sort((a,b)=>b.rarity-a.rarity||b.id-a.id);
+  allCrystals=cr.filter(c=>!c.tombstone).sort((a,b)=>b.rarity-a.rarity||b.id-a.id);
   // base+revise 合并后强制 effect scope 约束（防止 element/type 与 scope=0/1 不一致）
   enforceScopeConstraints(allBGs);
   enforceScopeConstraints(allCrystals);
@@ -2142,7 +2142,7 @@ export const applyEM = () => {
       if(type==='chara'){
         items.sort((a,b)=>(b.sort_id||b.id)-(a.sort_id||a.id));
       } else {
-        items.sort((a,b)=>b.rarity-a.rarity||a.id-b.id);
+        items.sort((a,b)=>b.rarity-a.rarity||b.id-a.id);
       }
     }
   }

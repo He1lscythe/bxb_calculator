@@ -232,29 +232,32 @@ node scripts/build.js --watch
 
 ---
 
-## Revise 仓库结构（多分支中转）
+## Revise 仓库结构（单向积累，main / data-staging 永不合回）
 
 ```
 GitHub Pages (live)
-    ↑ deploy from main
-main branch
-    ↑ admin 手動 merge data-staging → main（每周一次等）
-data-staging branch          ← all revise edits land here first
+    ↑ deploy from main（只 serve code + base data；revise/extra fetch 404 → 空数组、不应用）
+main branch                 ← code + base data only
+    ↓ 每次 main push 后、admin 在 data-staging 上 `git merge main`（保持 data-staging 代码新鲜）
+data-staging branch          ← code + base data + *_revise.json + *_extra.json + omoide_templates.json
     ↑ admin 手動 merge proposal/save-XXX → data-staging
 proposal/save-{ts}-{rand}   ← API（Vercel /api/save）每次 POST 自动开
     ↑ POST from frontend
 ユーザー編集
 ```
 
-- `*_revise.json` **track 在 git 里**（之前是 gitignore，现在不是）
+**关键：data-staging 单向积累、永远不合回 main。** revise/extra 故意只活在 data-staging，main 上 gitignored 让它们不污染 main 树。GitHub Pages 只看 main，所以 live 上只显示 base data；revise/extra 仅给本地 / 离线计算 / 数据校对工作流使用。
+
+- `*_revise.json` / `*_extra.json` / `omoide_templates.json` **仅在 data-staging branch 跟踪**（main 上 gitignored）
 - 用户在 GitHub Pages 上修正 → POST → API 创建 PR 到 `data-staging`
-- 你 review/merge PR 到 data-staging 后，定期 `git merge data-staging` 到 main
-- 本地编辑直接 push 到 data-staging（不经 PR）：
+- admin review/merge PR 到 data-staging。**不要 `git merge data-staging` 到 main**——一旦 merge，revise/extra 会作为 tracked file 进 main 树、之后 gitignore 失效，main 边界就模糊了
+- main 上代码改动 push 后，进 data-staging worktree 跑 `git merge main` 把代码带过来；data-staging 因此始终领先 main 若干个 commit（一半是 merge-main 同步，一半是真实数据更新——属于设计预期，不需要处理）
+- 本地直接编辑数据（不经 PR）：
 
 ```bash
 git checkout data-staging
 git pull origin data-staging
-# 编辑 data/*_revise.json
+# 编辑 data/*_revise.json 或 data/*_extra.json
 git add data/ && git commit -m "..." && git push
 ```
 

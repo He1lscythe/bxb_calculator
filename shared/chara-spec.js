@@ -109,7 +109,7 @@ export const maxBdhit = c => {
 };
 
 export const CHARA_SPEC = {
-  searchFields: ['name'],
+  searchFields: ['name', c => _profile(c, 'CV')],   // CV 嵌套在 best state.profile.CV，用 extractor 取
   filters: {
     rarity:       { extract: c => c.rarity },
     element:      { extract: c => c.element },
@@ -129,6 +129,7 @@ export const CHARA_SPEC = {
     'B':           c => _profile(c, 'B'),
     'W':           c => _profile(c, 'W'),
     'H':           c => _profile(c, 'H'),
+    'CV':          c => _profile(c, 'CV'),   // 字符串 sort：unicode codepoint 顺序（filter-core 自动按 typeof 切换）
     'BDコスト':    c => c.bd_skill?.cost ?? null,
     '__hit_max':   maxHit,
     '__bdhit_max': maxBdhit,
