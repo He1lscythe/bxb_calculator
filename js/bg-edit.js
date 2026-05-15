@@ -291,7 +291,7 @@ export const saveRevise = async () => {
     const ids = Array.from(state.sessionReviseIds);
     const json = await submitRevise({
       session_ids:       ids,
-      bladegraph_revise: pickPatches(state.reviseData, ids),
+      bladegraphs_revise: pickPatches(state.reviseData, ids),
     });
     // submit 成功后 refresh：用无 prev 的 computeDiff 重算 state.reviseData，
     // 去掉 null 撤回标记，防止下次 saveEdit 拿到 stale prev → null 重复发射。

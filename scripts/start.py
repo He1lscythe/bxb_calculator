@@ -19,12 +19,12 @@ DATA_DIR = os.path.join(DIR, 'data')
 # 値は (filename, session_ids_key)。masou は chara/soul と id namespace が違うため
 # 独立な masou_session_ids を使う（chara id と masou id が衝突して entry を誤って消すのを防ぐ）。
 ID_BUCKETS = {
-    'revise':            ('characters_revise.json', 'session_ids'),
-    'omoide_revise':     ('omoide_revise.json',     'session_ids'),
-    'soul_revise':       ('souls_revise.json',      'session_ids'),
-    'crystal_revise':    ('crystals_revise.json',   'session_ids'),
-    'bladegraph_revise': ('bladegraph_revise.json', 'session_ids'),
-    'masou_revise':      ('masou_revise.json',      'masou_session_ids'),
+    'revise':             ('characters_revise.json',  'session_ids'),
+    'omoide_revise':      ('omoide_revise.json',      'session_ids'),
+    'souls_revise':       ('souls_revise.json',       'session_ids'),
+    'crystals_revise':    ('crystals_revise.json',    'session_ids'),
+    'bladegraphs_revise': ('bladegraphs_revise.json', 'session_ids'),
+    'masou_revise':       ('masou_revise.json',       'masou_session_ids'),
 }
 
 
@@ -66,13 +66,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 _write_data('omoide_templates.json', json.dumps(data['omoide_templates'], ensure_ascii=False, indent=2) + '\n')
 
             # *_check：本地のみのチェック済み id リスト（gitignore 済み・api/save.js 同等品なし）
-            # POST body key → 出力ファイル名のマッピング。crystals_check.json と
-            # bladegraph_check.json は file 名の単複/略形に注意（data/ 配下と同款）。
+            # POST body key → 出力ファイル名のマッピング。
+            # chara_check / crystal_check は前端側 key 单数歴史遗留（output file は plural）。
             for body_key, filename in (
-                ('soul_check',        'soul_check.json'),
-                ('chara_check',       'characters_check.json'),
-                ('crystal_check',     'crystals_check.json'),
-                ('bladegraph_check',  'bladegraph_check.json'),
+                ('souls_check',        'souls_check.json'),
+                ('chara_check',        'characters_check.json'),
+                ('crystal_check',      'crystals_check.json'),
+                ('bladegraphs_check',  'bladegraphs_check.json'),
             ):
                 if body_key in data and isinstance(data[body_key], list):
                     ids = sorted({int(x) for x in data[body_key] if isinstance(x, (int, float))})

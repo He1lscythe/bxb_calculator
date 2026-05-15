@@ -16,7 +16,7 @@ function load(name) {
 // ===== 加载真实数据 (用于真实场景测试) =====
 let allCharas = load('characters.json');
 let allSouls  = load('souls.json');
-let allBGs    = load('bladegraph.json');
+let allBGs    = load('bladegraphs.json');
 let allCrystals = load('crystals.json');
 let SENZAI_TABLE = {};
 try { SENZAI_TABLE = load('senzai_table.json'); } catch(e) {}

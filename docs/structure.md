@@ -15,7 +15,7 @@ crawl_soul.py
     ↓ 抓取 + 技能多效果分类
 souls.json
     ↓
-soul.html（魂 Viewer）
+souls.html（魂 Viewer）
 
 crawl_crystal.py
     ↓
@@ -40,7 +40,7 @@ scripts/build.js（前端构建）
 | `crawl_chara.py` | **角色主爬虫**。从 altema.jp 抓取魔剣角色数据，进行两阶段技能分类（lookup table → 关键词补漏）、倍率标注（含 calc_type）、sort_id 补全与排序。支持 `--recal`（重算所有分类）和 `--rerun`（重新爬取+重算）。输出 `characters.json` |
 | `crawl_soul.py` | **魂爬虫**。抓取 altema.jp 魂页面，每个技能效果独立分类（多 effects 条目），含 calc_type。支持 `--recal` / `--rerun`。输出 `souls.json` |
 | `crawl_crystal.py` | **结晶爬虫**。抓取記憶結晶页面，解析效果量，生成含 calc_type 的 effects 数组。支持 `--recal` / `--rerun`。输出 `crystals.json` |
-| `crawl_bladegraph.py` | **心象結晶爬虫**。单页全量抓取 altema 心象結晶列表，解析效果文本、scope/condition 检测、bunrui 关键词匹配（每个 bunrui 独立一条 effects）。支持 `--recal` / `--rerun`。输出 `bladegraph.json` |
+| `crawl_bladegraph.py` | **心象結晶爬虫**。单页全量抓取 altema 心象結晶列表，解析效果文本、scope/condition 检测、bunrui 关键词匹配（每个 bunrui 独立一条 effects）。支持 `--recal` / `--rerun`。输出 `bladegraphs.json` |
 | `crawl_masou.py` | **魔装爬虫**。从 altema.jp 魔装页面抓取每个魔剣的魔装数据（按 `chara_id` 关联）。输出 `masou.json` |
 | `classify_common.py` | **共享分类模块**。被 crawl_chara.py / crawl_soul.py / crawl_crystal.py / crawl_bladegraph.py 共用，包含：元素/武器类型映射、bunrui 关键词表、scope/condition 检测器、`classify_effect()`、`classify_skill_v2()`（魂多效果模式）、`classify_skill_chara()`（角色单 effects[0] 模式）、`classify_hit_fields()`（bunrui=7 时的 hit_type/hit_per_stage）、倍率提取与 calc_type 推断、lookup-veto 规则集。**注**：所有数据源「文字描述」字段统一为 `effect_text`（chara skill / BD / soul skill / bg / crystal / masou），分类器从该字段读 |
 | `build_skilllist_table.py` | 从 altema skilllist 页面构建 `skilllist_table.json`（key = 技能名+效果文本，value = altema bunrui ID 列表） |
@@ -75,7 +75,7 @@ scripts/build.js（前端构建）
 - **`data/{entity}_extra.json`** — 手加的完整 entry（wiki 扒不到的），用户维护。crawler 不动
 - **`data/{entity}_revise.json`** — 对 base+extra 任一 entry 的字段级 patch（sparse diff）。edit UI 自动写
 
-**加载顺序**：`base → concat(extra) → applyRevise(revise)`。所有 viewer 页面（hensei / characters / soul / crystals / bladegraph）都按这个顺序合并。
+**加载顺序**：`base → concat(extra) → applyRevise(revise)`。所有 viewer 页面（hensei / characters / souls / crystals / bladegraphs）都按这个顺序合并。
 
 | 何时改哪个文件 | 操作 |
 |--------------|------|
@@ -85,7 +85,7 @@ scripts/build.js（前端构建）
 | 想彻底删一个手加 entry | 从 `*_extra.json` 删行 |
 | 想撤销字段微调 | 删 `*_revise.json` 对应 patch |
 
-存在的 extra 文件（默认 `[]`）：`characters_extra.json` / `souls_extra.json` / `bladegraph_extra.json` / `crystals_extra.json` / `masou_extra.json`。omoide_revise / omoide_templates 是 chara 字段补丁、不需要 extra 层。
+存在的 extra 文件（默认 `[]`）：`characters_extra.json` / `souls_extra.json` / `bladegraphs_extra.json` / `crystals_extra.json` / `masou_extra.json`。omoide_revise / omoide_templates 是 chara 字段补丁、不需要 extra 层。
 
 ### 详细文件清单
 
@@ -96,20 +96,20 @@ scripts/build.js（前端构建）
 | `characters_revise.json` | 角色手动修正 diff（**非 omoide 字段**）。仅存变更字段。页面加载时通过 deepApply 叠加到 base+extra 上 |
 | `omoide_revise.json` | 角色潜在開放 diff（`omoide` / `omoide_template` / `omoide_rarity` 字段）。与 characters_revise 分离，页面加载后单独叠加。**注：`omoide_template != null` 时 revise 不写 `omoide` 字段；运行时 `resolveOmoideTemplates` 用 templates 还原 slots** |
 | `omoide_templates.json` | 潜在開放槽位模板库。格式：`[{id, name, omoide:[...40 entries...]}]`。id 自增，通过 UI 编辑保存。**chara 引用方式是 live reference**（chara.omoide_template = id），template 内容更新后所有引用 chara 自动跟随 |
-| `souls.json` | **魂数据**（含多效果分类 + bairitu + calc_type + bunrui=7 时 hit_type/hit_per_stage）。soul.html 读取 |
+| `souls.json` | **魂数据**（含多效果分类 + bairitu + calc_type + bunrui=7 时 hit_type/hit_per_stage）。souls.html 读取 |
 | `souls_extra.json` | 手加的完整 soul entry。默认 `[]` |
 | `souls_revise.json` | 魂手动修正数据 |
 | `crystals.json` | **記憶結晶数据**（含 effects 数组、bairitu_init/bairitu、scope/condition/calc_type、bunrui=7 时 hit_type/hit_per_stage）。crystals.html 读取 |
 | `crystals_extra.json` | 手加的完整 crystal entry。默认 `[]` |
 | `crystals_revise.json` | 結晶手动修正数据 |
-| `bladegraph.json` | **心象結晶数据**（含 effects 数组、bairitu、scope/condition/calc_type）。bladegraph.html 读取 |
-| `bladegraph_extra.json` | 手加的完整 bladegraph entry。默认 `[]` |
-| `bladegraph_revise.json` | 心象結晶手动修正数据 |
+| `bladegraphs.json` | **心象結晶数据**（含 effects 数组、bairitu、scope/condition/calc_type）。bladegraphs.html 读取 |
+| `bladegraphs_extra.json` | 手加的完整 bladegraph entry。默认 `[]` |
+| `bladegraphs_revise.json` | 心象結晶手动修正数据 |
 | `masou.json` | **魔装数据**（每个 entry 关联 `chara_id`，含 effects 数组、effect_text、image URL）。crawl_masou.py 输出，characters.html 魔装 modal + hensei.html 魔装 picker 读取 |
 | `masou_extra.json` | 手加的完整 masou entry。默认 `[]` |
 | `masou_revise.json` | 魔装手动修正数据 |
-| `guildtitle.json` | 公会役職データ（hensei 用，含 `effect_text` 描述与 effects 数组）。手动维护 |
-| `guildemblem.json` | 紋章データ（hensei 用，含 rarity / guild_only / effect_text / effects）。手动维护 |
+| `guildtitles.json` | 公会役職データ（hensei 用，含 `effect_text` 描述与 effects 数组）。手动维护 |
+| `guildemblems.json` | 紋章データ（hensei 用，含 rarity / guild_only / effect_text / effects）。手动维护 |
 | `senzai_table.json` | **潜在能力表**。key = altema 图标 ID，value 含 koka/syosai/bunrui/bairitu/bairitu_scaling/calc_type。手动维护 |
 | `soulskill_table.json` | 魂技能 lookup table（从 soulskill 页面构建）。key = 技能名+効果，value = soulskill category_id 列表 |
 | `skilllist_table.json` | 角色技能 lookup table（从 skilllist 页面构建）。key = 技能名+効果，value = altema bunrui ID 列表 |
@@ -139,9 +139,9 @@ scripts/build.js（前端构建）
 | 文件 | 说明 |
 |------|------|
 | `characters.html` | 角色数据库 Viewer。读取 `characters.json`，支持筛选、浏览、编辑（含 calc_type 切换）、潜在能力弹窗 |
-| `soul.html` | 魂数据库 Viewer。读取 `souls.json`，支持筛选、浏览、编辑（含 calc_type 切换） |
+| `souls.html` | 魂数据库 Viewer。读取 `souls.json`，支持筛选、浏览、编辑（含 calc_type 切换） |
 | `crystals.html` | 结晶数据库 Viewer。读取 `crystals.json`，支持筛选、浏览、编辑（含 calc_type 切换） |
-| `bladegraph.html` | 心象結晶数据库 Viewer。读取 `bladegraph.json`，支持筛选（属性/武器/bunrui/条件类型）、浏览、编辑（★/属性/武器/bunrui/倍率） |
+| `bladegraphs.html` | 心象結晶数据库 Viewer。读取 `bladegraphs.json`，支持筛选（属性/武器/bunrui/条件类型）、浏览、编辑（★/属性/武器/bunrui/倍率） |
 | `hensei.html` | 编成 / 伤害模拟器（团队组合 + stats 计算） |
 | `js/nav.js` | 注入顶部导航栏（魔剣/結晶/心象/ソウル/編成），各 viewer 共用 |
 | `shared/constants.js` | 全 viewer 共享的纯数据常量 + UI 渲染助手。<br>常量：`RARITY` / `ELEMENT` / `ELEM_COLOR` / `ELEM_CSS_VAR` / `ELEMS_ORDER` / `WEAPON` / `WEAPONS_ORDER` / `BUNRUI`（长，详情/编辑下拉）/ `BUNRUI_SHORT`（badge / 紧凑标签）/ `BUNRUI_FILTER`（filter 按钮专用，比 SHORT 长比 BUNRUI 短）/ `BD_SPECIAL` / `BD_SPECIAL_COLOR` / `OMOIDE_THRESHOLDS` / `SCOPE`（长）/ `SCOPE_SHORT`（filter 按钮）/ `CONDITION`。<br>助手：`renderFilterToggles(field, map, opts)` / `renderElementFilterToggles(field, opts)` / `renderEditSelect(map, currentVal, onchangeExpr, opts)` / `renderEditCheckboxes(map, selected, onchangeExpr, opts)`，统一 `.ftog` / `.edit-select` / `.bunrui-check` 三种样式，所有 viewer 的 filter 按钮 / 编辑下拉 / 多选 checkbox 都从这里派生 |
@@ -163,9 +163,9 @@ scripts/build.js（前端构建）
 ```
 pages_src/         ← 你编辑这里（页面源 + partials）
 ├── characters.html
-├── soul.html
+├── souls.html
 ├── crystals.html
-├── bladegraph.html
+├── bladegraphs.html
 ├── hensei.html
 └── _loading.html  ← partial（`_` 前缀；build 时不会作为页面输出）
 
@@ -274,7 +274,7 @@ start.py `_deep_merge` / `_merge_by_id` 与 Vercel api/save.js 同语义（local
 
 **撤回标记如何产生（prev-revise pattern — 4 个 viewer 统一）：**
 
-所有 viewer (soul / bladegraph / crystal / chara) 的 `saveEdit` 都传 prev 给 computeDiff：
+所有 viewer (souls / bladegraphs / crystal / chara) 的 `saveEdit` 都传 prev 给 computeDiff：
 
 ```js
 const prevRevise = state.reviseData[id];   // chara 还合并 omoideReviseData
@@ -302,13 +302,13 @@ else            delete state.reviseData[id];
 
 **等价性：** local `start.py _deep_merge` 与 Vercel `api/save.js deepMerge` 实现等价（都把 source[k] === null 转为 pop）。GitHub Pages 走 Vercel API、127.0.0.1 走 start.py，行为一致。落盘 revise.json 永远不含 null（撤回标记仅传输阶段存在）。
 
-**enforceScopeConstraints**（[shared/effect-constraints.js](../shared/effect-constraints.js)）：base+revise 合并后扫一遍 effects，强制 `scope ∈ {0, 1}` 删 element/type。修复 server pop 后 base.element 仍残留导致 edit 模式 element 仍选中的 bug。crystal / bladegraph / hensei 加载时调用。
+**enforceScopeConstraints**（[shared/effect-constraints.js](../shared/effect-constraints.js)）：base+revise 合并后扫一遍 effects，强制 `scope ∈ {0, 1}` 删 element/type。修复 server pop 后 base.element 仍残留导致 edit 模式 element 仍选中的 bug。crystal / bladegraphs / hensei 加载时调用。
 
 ---
 
 ## 前端 Save 机制
 
-各数据 Viewer（characters / soul / crystals / bladegraph）共享统一的 **revise-only** 保存流程。基础 JSON（characters.json 等）只有爬虫能写，UI 只修改 revise。
+各数据 Viewer（characters / souls / crystals / bladegraphs）共享统一的 **revise-only** 保存流程。基础 JSON（characters.json 等）只有爬虫能写，UI 只修改 revise。
 
 ### 稀疏 index diff 格式
 
