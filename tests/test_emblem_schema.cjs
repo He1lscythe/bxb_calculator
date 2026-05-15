@@ -1,4 +1,4 @@
-// 测试 guildemblem.json schema：color (1-4) + rarity (1-4) + lvMax 计算
+// 测试 guildemblems.json schema：color (1-4) + rarity (1-4) + lvMax 计算
 // 用法: node tests/test_emblem_schema.cjs
 
 const fs = require('fs');
@@ -24,12 +24,12 @@ eq('rarity 4 → 1', emblemLvMax(4), 1);
 eq('未知 rarity 0 fallback → 25', emblemLvMax(0), 25);
 eq('null fallback → 25', emblemLvMax(null), 25);
 
-console.log('\n--- 加载 guildemblem.json ---');
+console.log('\n--- 加载 guildemblems.json ---');
 let arr;
 try {
-  arr = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'guildemblem.json'), 'utf8'));
+  arr = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'guildemblems.json'), 'utf8'));
 } catch (e) {
-  console.log('  (guildemblem.json 加载失败，跳过)');
+  console.log('  (guildemblems.json 加载失败，跳过)');
   process.exit(0);
 }
 truthy('是数组', Array.isArray(arr));

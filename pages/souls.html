@@ -1,4 +1,4 @@
-<!-- AUTO-GENERATED from pages_src/soul.html — DO NOT EDIT. Run `node scripts/build.js` to rebuild. -->
+<!-- AUTO-GENERATED from pages_src/souls.html — DO NOT EDIT. Run `node scripts/build.js` to rebuild. -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/nav.css">
 <link rel="stylesheet" href="../css/shared.css">
-<link rel="stylesheet" href="../css/soul.css">
+<link rel="stylesheet" href="../css/souls.css">
 </head>
 <body>
 <style>
@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const idx = state.allSouls.findIndex(x => x.id === s.id);
         if (idx >= 0) deepApply(state.allSouls[idx], s);
       });
-      // soul_check.json は本地のみ存在：fetch 成功なら per-item checkbox UI を有効化
-      return fetch('../data/soul_check.json');
+      // souls_check.json は本地のみ存在：fetch 成功なら per-item checkbox UI を有効化
+      return fetch('../data/souls_check.json');
     })
     .then(r => r && r.ok ? r.json() : null)
     .then(arr => {

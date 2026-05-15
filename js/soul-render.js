@@ -247,13 +247,13 @@ export const _fmtNumSimple = (b) => {
   return Number.isInteger(b) ? b.toLocaleString('en-US') : String(parseFloat(b.toFixed(6)));
 }
 
-// 本地 soul_check.json 写盘（走 start.py /save，仅本地有效；生产无 endpoint 即静默失败）
+// 本地 souls_check.json 写盘（走 start.py /save，仅本地有效；生产无 endpoint 即静默失败）
 const saveSoulCheck = () => {
   const ids = [...state.soulCheck].sort((a, b) => a - b);
   fetch('/save', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ soul_check: ids }),
+    body: JSON.stringify({ souls_check: ids }),
   }).catch(() => {});
 };
 

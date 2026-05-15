@@ -62,7 +62,7 @@
   <div id="sidebar">
     <div id="filters">
       <div class="search-row">
-        <input type="text" id="search" placeholder="🔍 魔剣名で検索..." oninput="applyFilters()">
+        <input type="text" id="search" placeholder="🔍 魔剣名 / CV で検索..." oninput="applyFilters()">
         <span id="char-count-mob"></span>
       </div>
       <div class="actions-row">
@@ -79,6 +79,7 @@
           <option value="B">B</option>
           <option value="W">W</option>
           <option value="H">H</option>
+          <option value="CV">CV</option>
           <option value="BDコスト">BDコスト</option>
           <option value="__hit_max">合計hit</option>
           <option value="__bdhit_max">BDヒット</option>
@@ -297,8 +298,15 @@ window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true })
 window.addEventListener('wheel',     collapseFiltersOnScroll, { passive: true });
 window.addEventListener('resize', _scheduleMeasure, { passive: true });
 
-['f-sort'].forEach(id => {
-  document.getElementById(id)?.addEventListener('change', applyFilters);
+// 切 sort key 时按类型重置 sortDesc 默认方向：
+//   字符串 sort（CV）→ 默认 asc（unicode 从小到大、用户要求）
+//   数值 sort（攻撃力 等）→ 默认 desc（max 第一、原有行为）
+const _STRING_SORT_KEYS = new Set(['CV']);
+document.getElementById('f-sort')?.addEventListener('change', (e) => {
+  state.sortDesc = !_STRING_SORT_KEYS.has(e.target.value);
+  const dirBtn = document.getElementById('sort-dir');
+  if (dirBtn) dirBtn.textContent = state.sortDesc ? '↓' : '↑';
+  applyFilters();
 });
 
 // === expose to global scope (needed by HTML inline onclick handlers) ===

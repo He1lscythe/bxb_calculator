@@ -116,13 +116,13 @@ export const renderList = () => {
   }
 }
 
-// 本地 bladegraph_check.json 写盘
+// 本地 bladegraphs_check.json 写盘
 const saveBgCheck = () => {
   const ids = [...state.bgCheck].sort((a, b) => a - b);
   fetch('/save', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ bladegraph_check: ids }),
+    body: JSON.stringify({ bladegraphs_check: ids }),
   }).catch(() => {});
 };
 
