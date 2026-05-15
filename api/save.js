@@ -6,9 +6,9 @@
 //     session_ids: [int, ...],          // ids touched in this session
 //     revise:           [{id, ...}, ...],   // optional bucket(s); patches present in session
 //     omoide_revise:    [{id, ...}, ...],
-//     soul_revise:      [{id, ...}, ...],
-//     crystal_revise:   [{id, ...}, ...],
-//     bladegraph_revise:[{id, ...}, ...],
+//     souls_revise:       [{id, ...}, ...],
+//     crystals_revise:    [{id, ...}, ...],
+//     bladegraphs_revise: [{id, ...}, ...],
 //     omoide_templates: [...],          // full overwrite (no id-merge)
 //   }
 // Missing id from a bucket but present in session_ids = user cleared its diff → delete entry.
@@ -21,12 +21,12 @@ const BASE = 'data-staging';
 // 値は [filePath, sessionIdsKey]。masou は chara/soul と id namespace が違うため
 // 独立な masou_session_ids を使う（chara id と masou id が衝突して entry を誤って消すのを防ぐ）。
 const ID_BUCKETS = {
-  revise:            ['data/characters_revise.json', 'session_ids'],
-  omoide_revise:     ['data/omoide_revise.json',     'session_ids'],
-  soul_revise:       ['data/souls_revise.json',      'session_ids'],
-  crystal_revise:    ['data/crystals_revise.json',   'session_ids'],
-  bladegraph_revise: ['data/bladegraph_revise.json', 'session_ids'],
-  masou_revise:      ['data/masou_revise.json',      'masou_session_ids'],
+  revise:             ['data/characters_revise.json',  'session_ids'],
+  omoide_revise:      ['data/omoide_revise.json',      'session_ids'],
+  souls_revise:       ['data/souls_revise.json',       'session_ids'],
+  crystals_revise:    ['data/crystals_revise.json',    'session_ids'],
+  bladegraphs_revise: ['data/bladegraphs_revise.json', 'session_ids'],
+  masou_revise:       ['data/masou_revise.json',       'masou_session_ids'],
 };
 const FULL_BUCKETS = {
   omoide_templates:  'data/omoide_templates.json',
@@ -182,9 +182,9 @@ export default async function handler(req, res) {
     // 构造 PR 标题/正文：页面名 + id+name 列表，方便 review 时一眼看出改了什么
     const pageInfo = (() => {
       if ('revise' in body || 'omoide_revise' in body || 'masou_revise' in body) return { name: '魔剣', file: 'pages/characters.html' };
-      if ('soul_revise' in body)       return { name: '魂',     file: 'pages/soul.html' };
-      if ('crystal_revise' in body)    return { name: '結晶',   file: 'pages/crystals.html' };
-      if ('bladegraph_revise' in body) return { name: '心象結晶', file: 'pages/bladegraph.html' };
+      if ('souls_revise' in body)       return { name: '魂',     file: 'pages/souls.html' };
+      if ('crystals_revise' in body)    return { name: '結晶',   file: 'pages/crystals.html' };
+      if ('bladegraphs_revise' in body) return { name: '心象結晶', file: 'pages/bladegraphs.html' };
       if ('omoide_templates' in body)  return { name: '魔剣（潜在テンプレート）', file: 'pages/characters.html' };
       return { name: '?', file: '?' };
     })();

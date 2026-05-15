@@ -3,7 +3,7 @@
 """Altema BxB ブレードグラフ (Heart Crystal) crawler
 
 用法:
-  python crawl_bladegraph.py          # 增量：只添加 bladegraph.json 中没有的新 ID
+  python crawl_bladegraph.py          # 增量：只添加 bladegraphs.json 中没有的新 ID
   python crawl_bladegraph.py --recal  # 全量重新解析（重新抓页面）
   python crawl_bladegraph.py --rerun  # 同上（接口一致用）
 """
@@ -24,7 +24,7 @@ from classify_common import classify_effect, _V_PCT_UP, _V_PCT_DOWN
 #  CONFIG
 # ============================================================
 PAGE_URL      = "https://altema.jp/bxb/bladegraph"
-OUTPUT_FILE   = "bladegraph.json"
+OUTPUT_FILE   = "bladegraphs.json"
 REQUEST_DELAY = 2.0
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -414,9 +414,9 @@ def main():
 
     entries = list(merged.values())
 
-    # NOTE: bladegraph_revise.json は recal 時に bladegraph.json に merge しない。
-    # bladegraph.json は純粋な parser 出力として保ち、revise は frontend
-    # (bladegraph.html / hensei.html) がランタイムで deepApply する。
+    # NOTE: bladegraphs_revise.json は recal 時に bladegraphs.json に merge しない。
+    # bladegraphs.json は純粋な parser 出力として保ち、revise は frontend
+    # (bladegraphs.html / hensei.html) がランタイムで deepApply する。
 
     # Safety fill: ensure all effects entries have calc_type
     for entry in entries:

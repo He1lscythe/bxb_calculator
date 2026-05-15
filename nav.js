@@ -1,11 +1,11 @@
 (function () {
   if (document.getElementById('topbar')) return;
   const PAGES = [
-    { id: 'characters', href: 'characters.html', label: '魔剣' },
-    { id: 'crystals',   href: 'crystals.html',   label: '結晶' },
-    { id: 'bladegraph', href: 'bladegraph.html', label: '心象結晶' },
-    { id: 'soul',       href: 'soul.html',       label: 'ソウル' },
-    { id: 'hensei',     href: 'hensei.html',     label: '編成' },
+    { id: 'characters',  href: 'characters.html',  label: '魔剣' },
+    { id: 'crystals',    href: 'crystals.html',    label: '結晶' },
+    { id: 'bladegraphs', href: 'bladegraphs.html', label: '心象結晶' },
+    { id: 'souls',       href: 'souls.html',       label: 'ソウル' },
+    { id: 'hensei',      href: 'hensei.html',      label: '編成' },
   ];
 
   // detect active page from filename

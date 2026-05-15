@@ -496,7 +496,7 @@ def main():
         output, count = apply_pipeline(copy.deepcopy(souls), pipeline_ids)
 
         # NOTE: souls_revise.json は recal 時に souls.json に merge しない。
-        # souls.json は純粋な parser 出力として保ち、revise は frontend (soul.html /
+        # souls.json は純粋な parser 出力として保ち、revise は frontend (souls.html /
         # hensei.html) がランタイムで deepApply する。
         # 旧実装は recal で revise を souls.json に焼き込んでいたが、これだと souls.json
         # が手動編集データで汚染される（編集を削っても次の recal まで残る、source-of-truth が

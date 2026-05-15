@@ -152,7 +152,7 @@ let enemy = {
   bkResistance: 'normal',      // 'normal' | 'high'（仅 ギルバト/特別版 时有效）
   advantageWeapons: new Set(), // 1-12 武器 ID 集合（仅 ギルバト/特別版 有效）
   difficulty: 'Normal',        // 'Normal' | 'Hard' | 'Lunatic'（仅 ギルバト/特別版 有效）
-  guildTitle: null,            // guildtitle.json 中的 id
+  guildTitle: null,            // guildtitles.json 中的 id
   // 第一槽默认装 id=1 攻撃力アップⅠ (rarity=1 黄, lv max=25)；其他槽位空
   emblems: [{id:1,level:25},{id:null,level:1},{id:null,level:1},{id:null,level:1}],
   bd_cap: 0,                   // 副本 BD 上限（0-9 整数）。倍率 = 1 + (bd_cap // 2) * 0.25
@@ -239,22 +239,22 @@ export const _applyRevise = (arr, revise) => {
 Promise.all([
   fetch('../data/characters.json').then(r=>r.json()),
   fetch('../data/souls.json').then(r=>r.json()),
-  fetch('../data/bladegraph.json').then(r=>r.json()),
+  fetch('../data/bladegraphs.json').then(r=>r.json()),
   fetch('../data/crystals.json').then(r=>r.json()),
   fetch('../data/masou.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/characters_extra.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/souls_extra.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
-  fetch('../data/bladegraph_extra.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('../data/bladegraphs_extra.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/crystals_extra.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/masou_extra.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/characters_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/omoide_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/souls_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/crystals_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
-  fetch('../data/bladegraph_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('../data/bladegraphs_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/masou_revise.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
-  fetch('../data/guildtitle.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
-  fetch('../data/guildemblem.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('../data/guildtitles.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
+  fetch('../data/guildemblems.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('../data/omoide_templates.json').then(r=>r.ok?r.json():[]).catch(()=>[]),
 ]).then(([ch,so,bg,cr,ms, chExt,soExt,bgExt,crExt,msExt, chRev, omRev, soRev, crRev, bgRev, msRev, gt, ge, omTpls])=>{
   // ① 先 concat extra 进 base array（手加 entry，wiki 扒不到）

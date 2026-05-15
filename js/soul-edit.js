@@ -162,7 +162,7 @@ export const saveRevise = async () => {
     const ids = Array.from(state.sessionReviseIds);
     const json = await submitRevise({
       session_ids: ids,
-      soul_revise: pickPatches(state.reviseData, ids),
+      souls_revise: pickPatches(state.reviseData, ids),
     });
     // submit 成功后，refresh state.reviseData[id] 反映 disk 实际状態（去除 null マーカー）。
     // 否则下次 saveEdit 拿到带 null 的 stale prev → computeDiff 重复产出 null。

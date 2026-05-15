@@ -14,10 +14,10 @@ const load = (name) => {
 };
 
 console.log('--- 文件加载 ---');
-const files = ['characters.json', 'souls.json', 'crystals.json', 'bladegraph.json',
-               'masou.json', 'guildemblem.json', 'guildtitle.json',
+const files = ['characters.json', 'souls.json', 'crystals.json', 'bladegraphs.json',
+               'masou.json', 'guildemblems.json', 'guildtitles.json',
                'characters_revise.json', 'souls_revise.json', 'crystals_revise.json',
-               'bladegraph_revise.json', 'masou_revise.json', 'omoide_revise.json'];
+               'bladegraphs_revise.json', 'masou_revise.json', 'omoide_revise.json'];
 const data = {};
 for (const f of files) {
   // revise 文件は main branch 上では gitignored（data-staging のみ tracked）。
@@ -39,7 +39,7 @@ for (const f of files) {
 }
 
 console.log('\n--- effect_text 字段统一（不应有 effect 顶层字段）---');
-for (const fname of ['characters.json', 'souls.json', 'crystals.json', 'bladegraph.json', 'masou.json']) {
+for (const fname of ['characters.json', 'souls.json', 'crystals.json', 'bladegraphs.json', 'masou.json']) {
   const arr = data[fname];
   if (!arr) continue;
   let bad = 0;
@@ -62,8 +62,8 @@ function checkBunrui7(arr, getEffects) {
 }
 truthy(`crystals: bunrui=[7] 独占 (违反: ${checkBunrui7(data['crystals.json'], c => c.effects)})`,
        checkBunrui7(data['crystals.json'], c => c.effects) === 0);
-truthy(`bladegraph: bunrui=[7] 独占`,
-       checkBunrui7(data['bladegraph.json'], c => c.effects) === 0);
+truthy(`bladegraphs: bunrui=[7] 独占`,
+       checkBunrui7(data['bladegraphs.json'], c => c.effects) === 0);
 
 console.log('\n--- soul affinity schema ---');
 const souls = data['souls.json'];
@@ -182,7 +182,7 @@ console.log('\n--- crystal lv / 颗粒度 schema (顶层 level_max / weight_step
 }
 
 console.log('\n--- emblem color/rarity 边界 ---');
-const emblems = data['guildemblem.json'];
+const emblems = data['guildemblems.json'];
 if (emblems) {
   let bad = 0;
   for (const e of emblems) {
@@ -194,7 +194,7 @@ if (emblems) {
 
 console.log('\n--- revise schema：entry 至少有 id+name + 1 个改动字段 ---');
 for (const fname of ['characters_revise.json', 'souls_revise.json', 'crystals_revise.json',
-                     'bladegraph_revise.json', 'masou_revise.json', 'omoide_revise.json']) {
+                     'bladegraphs_revise.json', 'masou_revise.json', 'omoide_revise.json']) {
   const arr = data[fname];
   if (!arr) continue;
   let bad = 0;
@@ -261,7 +261,7 @@ function findNulls(obj, path = '') {
   return found;
 }
 for (const fname of ['characters_revise.json', 'souls_revise.json', 'crystals_revise.json',
-                     'bladegraph_revise.json', 'masou_revise.json']) {
+                     'bladegraphs_revise.json', 'masou_revise.json']) {
   const arr = data[fname];
   if (!arr) continue;
   let nullCount = 0;
