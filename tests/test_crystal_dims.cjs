@@ -42,7 +42,9 @@ const cryLvMax = (cr) => +cr?.level_max || (CRYSTAL_RARITY_LV_MAX[+cr?.rarity] ?
 function effectiveBairitu(cr, cfg, e) {
   const baseB = _parseScaling(e.bairitu);
   if (!Number.isFinite(baseB)) return e.bairitu;
-  const wPos = cfg.weight != null ? cfg.weight / 100 : null;
+  // weight 维度：[weight_min, 100] 线性插值。wMin≥100 → wPos=null (退化)
+  const wMin = +cr.weight_min || 0;
+  const wPos = (cfg.weight != null && wMin < 100) ? (cfg.weight - wMin) / (100 - wMin) : null;
   const pPos = cfg.purity != null ? cfg.purity / 100 : null;
   const maxLv = cryLvMax(cr);
   const lvVal = cfg.lv != null ? cfg.lv : maxLv;
@@ -298,6 +300,120 @@ eq('rarity=6 缺省 → 200', cryLvMax({rarity:6}), 200);
 eq('rarity=4, level_max=200 覆盖 → 200', cryLvMax({rarity:4, level_max:200}), 200);
 eq('rarity 不存在 → 1', cryLvMax({rarity:99}), 1);
 eq('null → 1', cryLvMax(null), 1);
+
+// ===== weight_min 下界 =====
+console.log('\n--- weight_min 下界（weight 维度 [weight_min, 100] 线性插值）---');
+// baseB=5, ct=0, w_delta=0.2, weight_min=10
+// weight=10  → wPos=0    → factor=0.2 → eff = (5-1)·0.2 + 1 = 1.8
+// weight=100 → wPos=1    → factor=1   → eff = baseB = 5 (无衰减、保留 raw)
+// weight=55  → wPos=0.5  → factor=0.2 + 0.5·0.8 = 0.6 → eff = (5-1)·0.6 + 1 = 3.4
+eq('wMin=10, w=10 → 端点 factor=delta',
+   effectiveBairitu({weight_min:10}, {weight:10, purity:100}, {bairitu:5, weight_delta:0.2, calc_type:0}), 1.8);
+eq('wMin=10, w=100 → factor=1 (raw)',
+   effectiveBairitu({weight_min:10}, {weight:100, purity:100}, {bairitu:5, weight_delta:0.2, calc_type:0}), 5);
+eq('wMin=10, w=55 (中点) → factor=0.6',
+   effectiveBairitu({weight_min:10}, {weight:55, purity:100}, {bairitu:5, weight_delta:0.2, calc_type:0}), 3.4);
+
+// add 系也对：bairitu=5, ct=1, w_delta=0.2, wMin=10, w=10 → eff = 5·0.2 = 1
+eq('wMin=10, w=10, ct=1 → 1',
+   effectiveBairitu({weight_min:10}, {weight:10, purity:100}, {bairitu:5, weight_delta:0.2, calc_type:1}), 1);
+
+// 三维叠加 + weight_min：wMin=20, w=60 (wPos=0.5)
+{
+  // w_delta=0.5, w_pos=0.5 → fw = 0.5+0.5·0.5 = 0.75
+  // p_delta=0.5, purity=50 → fp = 0.75
+  // lv_delta=0.5, rarity=4 max_lv=120, lv=60 (lvPos=59/119) → flv = 0.5+0.5·(59/119)
+  const expectedFlv = 0.5 + 0.5 * (59/119);
+  const expectedFactor = 0.75 * 0.75 * expectedFlv;
+  const expected = (4-1) * expectedFactor + 1;
+  eq('三维叠加 + wMin=20',
+     effectiveBairitu({weight_min:20, rarity:4}, {weight:60, purity:50, lv:60},
+                      {bairitu:4, weight_delta:0.5, purity_delta:0.5, lv_delta:0.5, calc_type:0}),
+     expected);
+}
+
+// 退化：wMin≥100 → wPos=null → factor_w=1
+eq('wMin=100 退化 → factor_w=1, raw bairitu',
+   effectiveBairitu({weight_min:100}, {weight:50, purity:100}, {bairitu:5, weight_delta:0.5, calc_type:0}), 5);
+
+// weight_min 缺省 = 0：兼容旧公式
+eq('weight_min 缺省 = 0 → 旧公式',
+   effectiveBairitu({}, {weight:50, purity:100}, {bairitu:5, weight_delta:0.5, calc_type:0}),
+   effectiveBairitu({weight_min:0}, {weight:50, purity:100}, {bairitu:5, weight_delta:0.5, calc_type:0}));
+
+// ===== setCrystalLevelMax 联动清 lv_delta =====
+console.log('\n--- setCrystalLevelMax 联动：cryLvMax<=1 时清掉所有 effect.lv_delta ---');
+const _RARITY_LV_MAX_TBL = {1:10, 2:30, 3:80, 4:120, 5:160, 6:200};
+const _cryLvMaxLocal = (cr) => +cr?.level_max || (_RARITY_LV_MAX_TBL[+cr?.rarity] ?? 1);
+function setCrystalLevelMax(cr, val) {
+  const n = parseFloat(val);
+  if (!Number.isFinite(n) || n <= 0) cr.level_max = null;
+  else cr.level_max = n;
+  if (_cryLvMaxLocal(cr) <= 1) {
+    (cr.effects || []).forEach(e => { e.lv_delta = null; });
+  }
+}
+
+// rarity=4 (max_lv 默认 120) + level_max=1 → cryLvMax=1 → 清 lv_delta
+{
+  const cr = {rarity:4, level_max: 80, effects:[{lv_delta:0.5}, {lv_delta:0.3}]};
+  setCrystalLevelMax(cr, '1');
+  eq('level_max=1 → cr.level_max=1', cr.level_max, 1);
+  eq('  effects[0].lv_delta 清 null', cr.effects[0].lv_delta, null);
+  eq('  effects[1].lv_delta 清 null', cr.effects[1].lv_delta, null);
+}
+// level_max='200' → cryLvMax=200>1 → 不清
+{
+  const cr = {rarity:4, level_max: 80, effects:[{lv_delta:0.5}]};
+  setCrystalLevelMax(cr, '200');
+  eq('level_max=200 不清 lv_delta', cr.effects[0].lv_delta, 0.5);
+}
+// 空 → level_max=null + rarity 表 fallback (rarity=4=120>1) → 不清
+{
+  const cr = {rarity:4, level_max: 80, effects:[{lv_delta:0.5}]};
+  setCrystalLevelMax(cr, '');
+  eq('"" → level_max null + rarity 表>1 不清', cr.effects[0].lv_delta, 0.5);
+  eq('  cr.level_max null', cr.level_max, null);
+}
+// 空 + rarity=99（不在表） → cryLvMax=1 → 清
+{
+  const cr = {rarity:99, level_max: 5, effects:[{lv_delta:0.5}]};
+  setCrystalLevelMax(cr, '');
+  eq('"" + rarity 不在表 → 清 lv_delta', cr.effects[0].lv_delta, null);
+}
+
+// ===== setCrystalWeightMin =====
+console.log('\n--- setCrystalWeightMin ---');
+function setCrystalWeightMin(cr, val) {
+  const n = parseFloat(val);
+  if (!Number.isFinite(n) || n <= 0) cr.weight_min = null;
+  else cr.weight_min = Math.min(100, n);
+}
+{
+  const cr = {};
+  setCrystalWeightMin(cr, '10');
+  eq('"10" → 10', cr.weight_min, 10);
+}
+{
+  const cr = {weight_min:10};
+  setCrystalWeightMin(cr, '');
+  eq('"" → null (撤回)', cr.weight_min, null);
+}
+{
+  const cr = {weight_min:10};
+  setCrystalWeightMin(cr, '0');
+  eq('"0" → null (撤回)', cr.weight_min, null);
+}
+{
+  const cr = {};
+  setCrystalWeightMin(cr, '150');
+  eq('"150" → 100 (clamp)', cr.weight_min, 100);
+}
+{
+  const cr = {weight_min:10};
+  setCrystalWeightMin(cr, 'abc');
+  eq('"abc" → null (撤回)', cr.weight_min, null);
+}
 
 console.log(`\n${pass} pass, ${fail} fail`);
 if (fail) process.exit(1);

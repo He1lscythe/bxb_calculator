@@ -250,15 +250,36 @@ export const addCrystalEffect = () => {
   reRenderCrystalEdit();
 }
 
-// ===== 顶层 level_max / weight_step / purity_step（撤回机制）=====
+// ===== 顶层 level_max / weight_min / weight_step / purity_step（撤回机制）=====
 // step 设 0 / 空 → 撤回该字段（editData 设 null，diff 时 emit null 撤回，落盘时 deepMerge 删字段）
 // step 撤回时 + 联动撤回所有 effect 内对应 delta（语义：step=0 = 该结晶不可调，delta 没意义）
+// level_max=1（cryLvMax 退化为 1）时同语义：lv 维度不能调、清掉所有 effect.lv_delta
+
+// rarity → max_lv 表（与 hensei.html cryLvMax 一致；inline 避免跨文件 import）
+const _RARITY_LV_MAX_TBL = {1:10, 2:30, 3:80, 4:120, 5:160, 6:200};
+const _cryLvMaxLocal = (cr) => +cr?.level_max || (_RARITY_LV_MAX_TBL[+cr?.rarity] ?? 1);
+
 export const setCrystalLevelMax = (val) => {
   const cr = state.editData;
   if (!cr) return;
   const n = parseFloat(val);
   if (!Number.isFinite(n) || n <= 0) cr.level_max = null;
   else cr.level_max = n;
+  // cryLvMax 退化为 1 → lv 维度不能调、清掉所有 effect 的 lv_delta
+  // （与 setCrystalStep(weight/purity, 0) 联动清对应 delta 同语义）
+  if (_cryLvMaxLocal(cr) <= 1) {
+    (cr.effects || []).forEach(e => { e.lv_delta = null; });
+  }
+  reRenderCrystalEdit();
+};
+
+export const setCrystalWeightMin = (val) => {
+  const cr = state.editData;
+  if (!cr) return;
+  const n = parseFloat(val);
+  // 空 / 0 / 非数 → 撤回（cr.weight_min=null、diff 时 null 撤回标记、落盘清字段）
+  if (!Number.isFinite(n) || n <= 0) cr.weight_min = null;
+  else cr.weight_min = Math.min(100, n);
 };
 
 export const setCrystalStep = (kind, val) => {  // kind: 'weight' | 'purity'
@@ -355,10 +376,12 @@ const _renderEffectCard = (e, i, total) => {
       '<input type="text" class="edit-num-sm" style="width:90px" value="' + (e.purity_delta != null ? e.purity_delta : '') + '"' +
       ' oninput="setCrystalDelta(' + i + ',\'purity\',this.value)"></div>'
     : '';
-  const lvDeltaInline =
-    '<div><div class="field-label" title="0=Lv1時0倍, 1=不衰減, 留空=該維度不衰減; 支持小数/分数">Lv delta</div>' +
-    '<input type="text" class="edit-num-sm" style="width:90px" value="' + (e.lv_delta != null ? e.lv_delta : '') + '"' +
-    ' oninput="setCrystalDelta(' + i + ',\'lv\',this.value)"></div>';
+  // cryLvMax<=1 时 lv 维度退化、隐藏输入框（与 weight_step=0 时 wDeltaInline 隐藏同模式）
+  const lvDeltaInline = (_cryLvMaxLocal(cr) > 1)
+    ? '<div><div class="field-label" title="0=Lv1時0倍, 1=不衰減, 留空=該維度不衰減; 支持小数/分数">Lv delta</div>' +
+      '<input type="text" class="edit-num-sm" style="width:90px" value="' + (e.lv_delta != null ? e.lv_delta : '') + '"' +
+      ' oninput="setCrystalDelta(' + i + ',\'lv\',this.value)"></div>'
+    : '';
   // ctSel + init + max 也加 label，让一行内字段对齐
   const ctWithLabel       = '<div><div class="field-label">type</div>' + ctSel + '</div>';
   const initWithLabel     = '<div><div class="field-label">init</div>' + bairituInitInput + '</div>';
@@ -408,18 +431,22 @@ export const renderEditBody = (c) => {
     ? '<div class="field-row"><div class="field-key">特殊条件</div><div class="field-val edit-ro">' + escHtml(c['特殊条件']) + '</div></div>'
     : '';
 
-  // 顶层 level_max / weight_step / purity_step（撤回机制：空 / 0 → 字段被删）
+  // 顶层 level_max / weight_min / weight_step / purity_step（撤回机制：空 / 0 → 字段被删）
   const lvBlock =
     '<div><div class="field-label">level_max（缺省＝rarity 表）</div>' +
     '<input type="number" min="0" step="any" class="edit-num-sm" style="width:80px" value="' + (c.level_max != null ? c.level_max : '') + '"' +
     ' oninput="setCrystalLevelMax(this.value)"></div>';
+  const wMinBlock =
+    '<div><div class="field-label" title="0%重量を表す物理下限 (g)。空/0=下界 0g">weight_min (g)</div>' +
+    '<input type="number" min="0" max="100" step="any" class="edit-num-sm" style="width:80px" value="' + (c.weight_min != null ? c.weight_min : '') + '"' +
+    ' oninput="setCrystalWeightMin(this.value)"></div>';
   const wStepBlock =
     '<div><div class="field-label">weight_step (g)</div>' + _renderStepSelect('weight', c.weight_step, _WEIGHT_STEPS) + '</div>';
   const pStepBlock =
     '<div><div class="field-label">purity_step (%)</div>' + _renderStepSelect('purity', c.purity_step, _PURITY_STEPS) + '</div>';
   const topMeta =
-    '<div class="field-label" style="margin-top:8px">結晶 上限 / 颗粒度</div>' +
-    '<div class="skill-edit-meta">' + lvBlock + wStepBlock + pStepBlock + '</div>';
+    '<div class="field-label" style="margin-top:8px">結晶 上限 / 下限 / 颗粒度</div>' +
+    '<div class="skill-edit-meta">' + lvBlock + wMinBlock + wStepBlock + pStepBlock + '</div>';
 
   return '<div class="edit-actions">' +
       '<button class="btn-save" onclick="saveEdit()">保存</button>' +
