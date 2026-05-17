@@ -238,6 +238,19 @@ def parse_row(row):
         if v is not None:
             crystal['effect_text' if k == '効果' else k] = v
     crystal['effects'] = effects
+
+    # 「○○の秘録記憶」系列共通 metadata（user 校准、所有 entry invariant）：
+    # 顶层 weight_step=0.1 / purity_step=20 / weight_min=30、effects[0] (main) 三 delta=1/10。
+    # effects[1] 結晶枠+N segment 不加 delta（固定加成、无颗粒度）。
+    # 写到 base data 而不是 revise、新 wiki 加 ○○の秘録記憶 自动覆盖。
+    if crystal['name'].endswith('の秘録記憶'):
+        crystal['weight_step'] = 0.1
+        crystal['purity_step'] = 20
+        crystal['weight_min']  = 30
+        if effects:
+            effects[0]['weight_delta'] = '1/10'
+            effects[0]['purity_delta'] = '1/10'
+            effects[0]['lv_delta']     = '1/10'
     return crystal
 
 
