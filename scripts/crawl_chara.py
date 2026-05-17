@@ -848,15 +848,15 @@ SKILL_TABLE = {
     '喝采':              {1:1.5,  2:2.0,   3:3.0},
     '抱擁':              {1:1.5,  2:2.0,   3:3.0},
     '共鳴':              {1:1.5,  2:2.0,   3:3.0},
-    '律動':              {5:2.0,  6:2.3},
-    '奮迅':              {5:2.1,  6:2.4},
+    '律動':              {4:1.75, 5:2.0,   6:2.3},
+    '奮迅':              {4:1.919,5:2.1,  6:2.4},
     '恩寵':              {3:1.5,  4:1.7},
     '猛追':              {4:1.8,  5:2.1},
     '渇望':              {1:0.4,  2:0.6,   3:0.8,   4:1.0},
     # Special named skills
     '狩猟神の才能':      {1:0.4,  2:0.6,   3:0.8,   4:1.0},
     '破壊神の波動':      {3:1.3,  4:1.8,   5:2.25,  6:2.55},
-    '破壊神の律動':      {3:1.3,  4:1.7},
+    '破壊神の律動':      {3:1.3,  4:1.7,   5:2.0,   6:2.3},
     '破壊神の咆哮':      {1:1.0,  2:2.0,   3:3.5},
     '破壊神の急襲':      {1:1.0,  2:2.0},
     '天狼神の波動':      {3:2.5,  4:3.3},
@@ -867,7 +867,7 @@ SKILL_TABLE = {
     '決闘神の寵愛':      {3:10,   4:12.5},
     '重圧神の資質':      {3:10,   4:12.5},
     # 深化 (per-proficiency increment)
-    '波動【深化】':      {4:0.0031,  5:0.00768, 6:0.00768},
+    '波動【深化】':      {2:0.00255, 3:0.00357, 4:0.0031,  5:0.00768, 6:0.00768},
     '脈動【深化】':      {4:0.005,   5:0.005,   6:0.008},
     '覇気【深化】':      {5:0.00768, 6:0.00768},
     '鼓動【深化】':      {4:0.0072,  5:0.011},
@@ -1358,24 +1358,36 @@ def main():
         if os.path.exists(progress_path):
             os.remove(progress_path)
     else:
-        progress     = load_json(progress_path, {"completed_data_ids": [], "saved_chara_ids": [], "parts": {}})
+        progress     = load_json(progress_path, {"completed_data_ids": [], "saved_chara_ids": [], "parts": {}, "data_id_to_final_id": {}})
         completed    = set(progress.get("completed_data_ids", []))
         characters   = load_json(output_path, [])
         saved_ids    = set(c["id"] for c in characters)
         parts_status = progress.get("parts", {}) or {}
+        # data_id (wiki HTML data-id 属性、稳定不变) → final_id (record.id) 映射。
+        # wiki 偶尔会重新分配 URL 里的 chara_id (列表/详情页 URL 数字)，但 data_id
+        # 是 wiki 内部 ID，跨重命名稳定。用它做 skip 判定，避免每次 --recal 因为
+        # URL 号变化而把整批已抓的 chara 重抓一遍。
+        data_id_to_final_id = {str(k): v for k, v in (progress.get("data_id_to_final_id") or {}).items()}
         # Migration：旧 progress.json 没 parts 字段 → 从 characters.json 推断
         if not parts_status and characters:
             print("Migrating progress.json: computing parts status from characters.json...")
             parts_status = {str(c["id"]): _chara_parts_status(c) for c in characters}
 
     print(f"Already saved: {len(characters)} characters")
+    # char_index 同时索引 final_id (record.id) 和 list_id (record.sort_id)。
+    # incremental 阶段拿到 detail final_id 后再用 final_id 查、对应 record.id。
     char_index = {c["id"]: i for i, c in enumerate(characters)}
+    for i, c in enumerate(characters):
+        sid = c.get("sort_id")
+        if sid is not None and sid not in char_index:
+            char_index[sid] = i
 
     def _save_progress():
         save_json(progress_path, {
-            "completed_data_ids": list(completed),
-            "saved_chara_ids":    list(saved_ids),
-            "parts":              parts_status,
+            "completed_data_ids":   list(completed),
+            "saved_chara_ids":      list(saved_ids),
+            "parts":                parts_status,
+            "data_id_to_final_id":  data_id_to_final_id,
         })
 
     revise_path = os.path.join(out_dir, "characters_revise.json")
@@ -1443,16 +1455,25 @@ def main():
         char_list = get_char_list(session)
 
         # pending 判定：未抓 OR 已抓但 part 缺失 → 重抓
+        # 用 data_id (wiki HTML data-id 属性) 做主 key——wiki 会偶尔重新分配 URL chara_id
+        # (URL /bxb/chara/<n> 的数字)，但 data_id 是 wiki 内部 ID、跨 URL 重命名稳定。
+        # 旧 list_id (= sort_id) → record 映射会因 URL 重命名失效，导致 _should_skip
+        # 永远找不到 record → 整批 chara 被判 pending 重抓（2s/次）。
         def _should_skip(c):
             if args.rerun:
                 return False
-            if c["data_id"] not in completed:
+            data_id = c.get("data_id")
+            if data_id not in completed:
                 return False  # 未抓
-            list_id = int(c.get("chara_id") or c.get("id") or 0)
-            rec_idx = char_index.get(list_id)
-            if rec_idx is None:
-                return False  # 找不到 record → 重抓
-            status = parts_status.get(str(characters[rec_idx]["id"]))
+            # 用 data_id_to_final_id 反查 record id（稳定）；fallback：list_id (= URL chara_id) 查 char_index
+            final_id = data_id_to_final_id.get(str(data_id))
+            if final_id is None:
+                list_id = int(c.get("chara_id") or c.get("id") or 0)
+                rec_idx = char_index.get(list_id)
+                if rec_idx is None:
+                    return False  # 找不到 record → 重抓
+                final_id = characters[rec_idx]["id"]
+            status = parts_status.get(str(final_id))
             if not status or not all(status.get(k, False) for k in PART_KEYS):
                 return False  # part 缺失 → 重抓
             return True
@@ -1512,6 +1533,10 @@ def main():
                         print(f"  saved states: {list(states.keys()) if states else []}")
 
                     completed.add(c["data_id"])
+                    # 记录 data_id → final_id：wiki list 有时多个 data_id (不同变种/旧 URL) 跳到同一 final_id；
+                    # 不记的话下次 --recal 还得 re-fetch detail page 才能确认 "data_id 对应哪个 final_id"。
+                    if c.get("data_id") is not None:
+                        data_id_to_final_id[str(c["data_id"])] = final_id
                     # update part status (record may be the just-saved one or the existing-updated one)
                     rec = characters[char_index[final_id]] if final_id in char_index else None
                     if rec is not None:
