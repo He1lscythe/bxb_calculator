@@ -405,7 +405,10 @@ const _crystalDimFactor = (pos, deltaRaw) => {
 const _crystalEffectiveBairitu = (cr, cfg, e) => {
   const baseB = _parseScaling(e.bairitu);
   if (!Number.isFinite(baseB)) return null;
-  const wPos = cfg.weight != null ? cfg.weight / 100 : null;
+  // weight 维度新增 weight_min 下界：pos = (weight - wMin) / (100 - wMin)
+  // wMin ≥ 100（异常 case）→ wPos=null → factor=1 不衰减（防 ÷0）
+  const wMin = +cr.weight_min || 0;
+  const wPos = (cfg.weight != null && wMin < 100) ? (cfg.weight - wMin) / (100 - wMin) : null;
   const pPos = cfg.purity != null ? cfg.purity / 100 : null;
   const maxLv = cryLvMax(cr);
   const lvVal = cfg.lv != null ? cfg.lv : maxLv;
@@ -550,10 +553,13 @@ export const setCrystalDim = (si, ci, dim, val) => {  // dim: 'weight' | 'purity
   if (!cfg) return;
   const n = +val;
   if (!Number.isFinite(n)) return;
+  const cr = allCrystals.find(x => x.id === cfg.id);
   if (dim === 'lv') {
-    const cr = allCrystals.find(x => x.id === cfg.id);
     const maxLv = cryLvMax(cr);
     cfg.lv = Math.max(1, Math.min(maxLv, Math.round(n)));
+  } else if (dim === 'weight') {
+    const wMin = +cr?.weight_min || 0;
+    cfg.weight = Math.max(wMin, Math.min(100, n));
   } else {
     cfg[dim] = Math.max(0, Math.min(100, n));
   }
@@ -588,7 +594,7 @@ export const openCrystalDimPopover = (si, ci, btnEl) => {
   const maxLv = cryLvMax(cr);
   if (!wStep && !pStep && !(hasLv && maxLv > 1)) return;
   const wRow = wStep > 0 ? _popRow(si, ci, 'weight', {
-    label: '重', min: 0, max: 100, step: wStep, value: cfg.weight ?? 100, unit: 'g',
+    label: '重', min: +cr.weight_min || 0, max: 100, step: wStep, value: cfg.weight ?? 100, unit: 'g',
     oninp: `setCrystalDim(${si},${ci},'weight',this.value)`,
   }) : '';
   const pRow = pStep > 0 ? _popRow(si, ci, 'purity', {
