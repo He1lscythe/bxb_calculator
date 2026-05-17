@@ -399,23 +399,33 @@ export const renderMasouPanel = (m) => {
   if(!m)return'';
   return`<div class="skills-panel"><div class="skill-item"><div class="skill-eftxt">${escHtml(m.effect_text||'')}</div>${(m.effects||[]).map(renderEfRow).join('')}</div></div>`;
 }
-// 衰减後の effective bairitu — calc 路径と同式（hensei line 1108-1135）。
+// 乗性 delta 三次元公式（weight / purity / lv）：
+//   factor_i = delta + (1 - delta) * pos     (pos ∈ [0,1])
+//   ct=0/3 (mult/final-mult): eff = (baseB - 1) * factor + 1   (neutral=1)
+//   ct=1/2 (add /final-add):  eff = baseB * factor             (neutral=0)
+// delta 缺字段 / 空串 → factor=1 不衰减; delta=0 → 端点満衰减; step 仅 slider 颗粒度、不入公式。
+const _crystalDimFactor = (pos, deltaRaw) => {
+  if (deltaRaw == null || deltaRaw === '') return 1;
+  const d = _parseScaling(deltaRaw);
+  if (!Number.isFinite(d)) return 1;
+  if (pos == null || !Number.isFinite(pos)) return 1;
+  return d + (1 - d) * pos;
+};
 const _crystalEffectiveBairitu = (cr, cfg, e) => {
-  const wStep = _parseScaling(cr.weight_step);
-  const pStep = _parseScaling(cr.purity_step);
-  let delta = 0;
-  if (wStep > 0 && e.weight_delta && cfg.weight != null) {
-    delta += (100 - cfg.weight) / wStep * _parseScaling(e.weight_delta);
-  }
-  if (pStep > 0 && e.purity_delta && cfg.purity != null) {
-    delta += (100 - cfg.purity) / pStep * _parseScaling(e.purity_delta);
-  }
   const baseB = _parseScaling(e.bairitu);
   if (!Number.isFinite(baseB)) return null;
-  if (delta <= 0) return baseB;
+  const wPos = cfg.weight != null ? cfg.weight / 100 : null;
+  const pPos = cfg.purity != null ? cfg.purity / 100 : null;
+  const maxLv = cryLvMax(cr);
+  const lvVal = cfg.lv != null ? cfg.lv : maxLv;
+  const lvPos = maxLv > 1 ? (lvVal - 1) / (maxLv - 1) : 1;
+  const fw  = _crystalDimFactor(wPos,  e.weight_delta);
+  const fp  = _crystalDimFactor(pPos,  e.purity_delta);
+  const flv = _crystalDimFactor(lvPos, e.lv_delta);
+  const factor = fw * fp * flv;
+  if (factor === 1) return baseB;
   const ct = e.calc_type ?? 0;
-  const minB = (ct === 0 || ct === 3) ? 1 : 0;
-  return Math.max(minB, baseB - delta);
+  return (ct === 0 || ct === 3) ? ((baseB - 1) * factor + 1) : (baseB * factor);
 };
 export const renderCrystalEffList = (cfgs) => {
   // cfgs: [{id, weight, purity}, ...] or null。weight/purity 衰减後 effective bairitu を表示。
@@ -533,16 +543,29 @@ export const setBG = (si,id) => {
   renderSlot(si);refreshAllStats();
 }
 export const setCrystal = (si,ci,id) => {
-  team[si].crystals[ci] = (id == null) ? null : { id, weight: 100, purity: 100 };
+  if (id == null) { team[si].crystals[ci] = null; }
+  else {
+    const cr = allCrystals.find(x => x.id === id);
+    team[si].crystals[ci] = { id, weight: 100, purity: 100, lv: cryLvMax(cr) };
+  }
   renderSlot(si);
   refreshAllStats();
 }
-// 玩家在 hensei 槽位上调结晶 weight/purity（默认 100，clamp 0..100）
-export const setCrystalDim = (si, ci, dim, val) => {  // dim: 'weight' | 'purity'
+// 玩家在 hensei 槽位上调结晶 weight/purity/lv
+//   weight/purity: 默认 100, clamp 0..100
+//   lv:            默认 cryLvMax, clamp 1..max_lv, 整数
+export const setCrystalDim = (si, ci, dim, val) => {  // dim: 'weight' | 'purity' | 'lv'
   const cfg = team[si].crystals[ci];
   if (!cfg) return;
   const n = +val;
-  if (Number.isFinite(n)) cfg[dim] = Math.max(0, Math.min(100, n));
+  if (!Number.isFinite(n)) return;
+  if (dim === 'lv') {
+    const cr = allCrystals.find(x => x.id === cfg.id);
+    const maxLv = cryLvMax(cr);
+    cfg.lv = Math.max(1, Math.min(maxLv, Math.round(n)));
+  } else {
+    cfg[dim] = Math.max(0, Math.min(100, n));
+  }
   // cr-eff-list だけ surgical 更新（renderSlot 全量だと .detail-wrap.open 状態を失う）
   const col = document.getElementById('col' + si + 'r');
   if (col) col.innerHTML = renderCrystalEffList(team[si].crystals);
@@ -553,13 +576,12 @@ export const setCrystalDim = (si, ci, dim, val) => {  // dim: 'weight' | 'purity
 let _crystalPopEl = null;
 let _crystalPopHandler = null;
 // row 排版：[label][slider][number][unit]、slider/number 双向同步、都触发 setCrystalDim
-const _popRow = (si, ci, kind, step, value, unit) => {
-  const labelTxt = kind === 'weight' ? '重' : '純';
-  const oninp = `setCrystalDim(${si},${ci},'${kind}',this.value)`;
+const _popRow = (si, ci, kind, opts) => {
+  const { label, min, max, step, value, unit, oninp } = opts;
   return `<div class="pop-row" data-kind="${kind}">
-    <label>${labelTxt}</label>
-    <input type="range"   min="0" max="100" step="${step}" value="${value}" oninput="this.parentNode.querySelector('input[type=number]').value=this.value;${oninp}">
-    <input type="number" min="0" max="100" step="${step}" value="${value}" oninput="this.parentNode.querySelector('input[type=range]').value=this.value;${oninp}">
+    <label>${label}</label>
+    <input type="range"   min="${min}" max="${max}" step="${step}" value="${value}" oninput="this.parentNode.querySelector('input[type=number]').value=this.value;${oninp}">
+    <input type="number" min="${min}" max="${max}" step="${step}" value="${value}" oninput="this.parentNode.querySelector('input[type=range]').value=this.value;${oninp}">
     <span class="pop-unit">${unit}</span>
   </div>`;
 };
@@ -571,14 +593,26 @@ export const openCrystalDimPopover = (si, ci, btnEl) => {
   if (!cr) return;
   const wStep = _parseScaling(cr.weight_step);
   const pStep = _parseScaling(cr.purity_step);
-  if (!wStep && !pStep) return;
-  const wRow = wStep > 0 ? _popRow(si, ci, 'weight', wStep, cfg.weight ?? 100, 'g') : '';
-  const pRow = pStep > 0 ? _popRow(si, ci, 'purity', pStep, cfg.purity ?? 100, '%') : '';
+  const hasLv = (cr.effects || []).some(e => e.lv_delta !== undefined);
+  const maxLv = cryLvMax(cr);
+  if (!wStep && !pStep && !(hasLv && maxLv > 1)) return;
+  const wRow = wStep > 0 ? _popRow(si, ci, 'weight', {
+    label: '重', min: 0, max: 100, step: wStep, value: cfg.weight ?? 100, unit: 'g',
+    oninp: `setCrystalDim(${si},${ci},'weight',this.value)`,
+  }) : '';
+  const pRow = pStep > 0 ? _popRow(si, ci, 'purity', {
+    label: '純', min: 0, max: 100, step: pStep, value: cfg.purity ?? 100, unit: '%',
+    oninp: `setCrystalDim(${si},${ci},'purity',this.value)`,
+  }) : '';
+  const lvRow = (hasLv && maxLv > 1) ? _popRow(si, ci, 'lv', {
+    label: 'Lv', min: 1, max: maxLv, step: 1, value: cfg.lv ?? maxLv, unit: '',
+    oninp: `setCrystalDim(${si},${ci},'lv',this.value)`,
+  }) : '';
   const pop = document.createElement('div');
   pop.className = 'crystal-dim-popover';
   pop.innerHTML = `
     <div class="pop-title">${escHtml(cr.name)}</div>
-    ${wRow}${pRow}
+    ${wRow}${pRow}${lvRow}
     <div class="pop-actions">
       <button onclick="resetCrystalDim(${si},${ci})">リセット</button>
       <button onclick="closeCrystalDimPopover()">×</button>
@@ -622,11 +656,19 @@ export const resetCrystalDim = (si, ci) => {
   if (!cfg) return;
   cfg.weight = 100;
   cfg.purity = 100;
+  const cr = allCrystals.find(x => x.id === cfg.id);
+  const maxLv = cryLvMax(cr);
+  cfg.lv = maxLv;
   const col = document.getElementById('col' + si + 'r');
   if (col) col.innerHTML = renderCrystalEffList(team[si].crystals);
   refreshAllStats();
+  // popover 内 slider/number 也同步重置到各自的 max
   if (_crystalPopEl) {
-    _crystalPopEl.querySelectorAll('input').forEach(inp => { inp.value = 100; });
+    _crystalPopEl.querySelectorAll('.pop-row').forEach(row => {
+      const kind = row.getAttribute('data-kind');
+      const resetVal = kind === 'lv' ? maxLv : 100;
+      row.querySelectorAll('input').forEach(inp => { inp.value = resetVal; });
+    });
   }
 }
 export const setMasou = (si,id) => {team[si].masou=id;renderSlot(si);refreshAllStats();}
@@ -1272,32 +1314,20 @@ export const computeStats = (chara, tr, slotIdx) => {
     const srcHp = slot.tr?.hpPercent ?? 100;
     const srcJk = Math.max(1, slot.tr?.jukudo || 1);
 
-    // Crystals — weight / purity 衰减（占位公式：独立线性、加性叠加；真实公式待测）
-    // step は per-crystal 顶层、delta は per-effect。bairitu_eff = max(minB, max - Σ((100-cfg)/step * delta))
+    // Crystals — 乗性 delta 三次元衰减（weight / purity / lv）、step 仅 slider 颗粒度、不入公式。
+    // 公式见 _crystalEffectiveBairitu / _crystalDimFactor (renderEffList 上方)。
     _enterStage('stage2-cr-s' + si, 'Stage 2 Slot' + (si + 1) + ' 記憶結晶');
     const crEffs = [];
     (slot.crystals || []).forEach(cfg => {
       if (!cfg) return;
       const cr = allCrystals.find(x => x.id === cfg.id);
       if (!cr) return;
-      // step / delta 与 bairitu 同：数値・分式 ("1/2") 双方受け入れ。
-      const wStep = _parseScaling(cr.weight_step);
-      const pStep = _parseScaling(cr.purity_step);
       const crLabel = 'Slot' + (si + 1) + ' 結晶 ' + (cr.name || '');
       for (const e of (cr.effects || [])) {
-        let delta = 0;
-        if (wStep > 0 && e.weight_delta && cfg.weight != null) {
-          delta += (100 - cfg.weight) / wStep * _parseScaling(e.weight_delta);
-        }
-        if (pStep > 0 && e.purity_delta && cfg.purity != null) {
-          delta += (100 - cfg.purity) / pStep * _parseScaling(e.purity_delta);
-        }
-        // bairitu は数値・分式文字列 ("1/2") 双方受け入れ。
-        const baseB = _parseScaling(e.bairitu);
-        if (delta > 0 && Number.isFinite(baseB)) {
-          const ct = e.calc_type ?? 0;
-          const minB = (ct === 0 || ct === 3) ? 1 : 0;
-          crEffs.push({ ...e, bairitu: Math.max(minB, baseB - delta), _srcLabel: crLabel });
+        const eff = _crystalEffectiveBairitu(cr, cfg, e);
+        const rawB = _parseScaling(e.bairitu);
+        if (eff != null && Number.isFinite(rawB) && eff !== rawB) {
+          crEffs.push({ ...e, bairitu: eff, _srcLabel: crLabel });
         } else {
           crEffs.push({ ...e, _srcLabel: crLabel });
         }
@@ -2672,10 +2702,11 @@ export const renderSlot = (i) => {
       const cfg=t.crystals[ci]??null;
       const cid=cfg?.id??null;
       const cr=cid?allCrystals.find(x=>x.id===cid):null;
-      // ⚙ 按钮：仅当 crystal 有 weight_step > 0 或 purity_step > 0 才显示
-      const hasDims = !!(cr && (_parseScaling(cr.weight_step) > 0 || _parseScaling(cr.purity_step) > 0));
+      // ⚙ 按钮：仅当 crystal 有 weight_step > 0 / purity_step > 0 / 任意 effect 含 lv_delta 才显示
+      const hasLvDelta = !!(cr && (cr.effects || []).some(e => e.lv_delta !== undefined) && cryLvMax(cr) > 1);
+      const hasDims = !!(cr && (_parseScaling(cr.weight_step) > 0 || _parseScaling(cr.purity_step) > 0 || hasLvDelta));
       const cfgBtn = hasDims
-        ? `<button class="crystal-cfg-btn" onclick="openCrystalDimPopover(${i},${ci},this)" title="重量/純度">⚙</button>`
+        ? `<button class="crystal-cfg-btn" onclick="openCrystalDimPopover(${i},${ci},this)" title="重量/純度/Lv">⚙</button>`
         : '';
       return cr
         ?`<div class="crystal-slot-wrap">

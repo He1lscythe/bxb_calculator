@@ -276,14 +276,13 @@ export const setCrystalStep = (kind, val) => {  // kind: 'weight' | 'purity'
   reRenderCrystalEdit();
 };
 
-export const setCrystalDelta = (ei, kind, val) => {  // kind: 'weight' | 'purity'
+export const setCrystalDelta = (ei, kind, val) => {  // kind: 'weight' | 'purity' | 'lv'
   const e = state.editData?.effects?.[ei];
   if (!e) return;
   const deltaKey = kind + '_delta';
-  // 与 bairitu 同：'a/b' 分式字符串保留，纯数值存 number，空 / 0 → 撤回。
-  const v = parseBairituVal(val);
-  if (v == null || v === 0) e[deltaKey] = null;
-  else e[deltaKey] = v;
+  // 与 bairitu 同：'a/b' 分式字符串保留、纯数值存 number、空 → 撤回 (null)。
+  // 注意：0 = 端点満衰减（cfg=0/lv=1 时 factor=0）、必须保留为数值 0、不再撤回。
+  e[deltaKey] = parseBairituVal(val);   // '' → null；'0' → 0；'1/2' → '1/2'；'0.5' → 0.5
 };
 
 export const removeCrystalEffect = (ei) => {
@@ -340,21 +339,26 @@ const _renderEffectCard = (e, i, total) => {
       '</div>';
   }
 
-  // weight_delta / purity_delta — 仅当 crystal 顶层有对应 step > 0 才显示。
-  // 与「倍率」放一行；宽度 90px 跟 bairitu 同宽（占位公式说明放整段 label 上）。
+  // weight_delta / purity_delta / lv_delta — 三个 delta 都支持数値・分式 ("1/2")、留空 → 撤回字段。
+  // 新公式：factor = delta + (1-delta) * pos、ct=0/3 用 (baseB-1)*factor+1、ct=1/2 用 baseB*factor。
+  // delta=0 → 端点満衰減; delta 缺/留空 → 不衰减; step 仅 slider 颗粒度、不入公式。
   const cr = state.editData || {};
   const wStep = +cr.weight_step || 0;
   const pStep = +cr.purity_step || 0;
   const wDeltaInline = wStep > 0
-    ? '<div><div class="field-label">重 / ' + wStep + 'g</div>' +
+    ? '<div><div class="field-label" title="0=0g時0倍, 1=不衰減, 留空=該維度不衰減; 支持小数/分数 (例 1/2)">重量 delta</div>' +
       '<input type="text" class="edit-num-sm" style="width:90px" value="' + (e.weight_delta != null ? e.weight_delta : '') + '"' +
       ' oninput="setCrystalDelta(' + i + ',\'weight\',this.value)"></div>'
     : '';
   const pDeltaInline = pStep > 0
-    ? '<div><div class="field-label">純 / ' + pStep + '%</div>' +
+    ? '<div><div class="field-label" title="0=0%時0倍, 1=不衰減, 留空=該維度不衰減; 支持小数/分数">純度 delta</div>' +
       '<input type="text" class="edit-num-sm" style="width:90px" value="' + (e.purity_delta != null ? e.purity_delta : '') + '"' +
       ' oninput="setCrystalDelta(' + i + ',\'purity\',this.value)"></div>'
     : '';
+  const lvDeltaInline =
+    '<div><div class="field-label" title="0=Lv1時0倍, 1=不衰減, 留空=該維度不衰減; 支持小数/分数">Lv delta</div>' +
+    '<input type="text" class="edit-num-sm" style="width:90px" value="' + (e.lv_delta != null ? e.lv_delta : '') + '"' +
+    ' oninput="setCrystalDelta(' + i + ',\'lv\',this.value)"></div>';
   // ctSel + init + max 也加 label，让一行内字段对齐
   const ctWithLabel       = '<div><div class="field-label">type</div>' + ctSel + '</div>';
   const initWithLabel     = '<div><div class="field-label">init</div>' + bairituInitInput + '</div>';
@@ -372,11 +376,9 @@ const _renderEffectCard = (e, i, total) => {
         '<div><div class="field-label">武器</div>' + weapSel + '</div>' +
         '<div><div class="field-label">condition</div>' + condSel + '</div>' +
       '</div>' +
-      '<div class="field-label" style="margin-top:6px">倍率' +
-        ((wStep > 0 || pStep > 0) ? ' <span style="color:var(--text2);font-weight:400">／ 重·純 衰減 (per step bairitu 減少；占位公式)</span>' : '') +
-      '</div>' +
+      '<div class="field-label" style="margin-top:6px">倍率 <span style="color:var(--text2);font-weight:400">／ 重·純·Lv 乗性衰減 (delta = 端点相対倍率, 0=完全失効, 留空=不衰減)</span></div>' +
       '<div class="skill-edit-meta">' +
-        ctWithLabel + initWithLabel + bairituWithLabel + wDeltaInline + pDeltaInline +
+        ctWithLabel + initWithLabel + bairituWithLabel + lvDeltaInline + wDeltaInline + pDeltaInline +
       '</div>' +
       nameInput +
       hitBlock +
