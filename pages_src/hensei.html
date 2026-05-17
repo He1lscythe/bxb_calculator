@@ -998,9 +998,11 @@ export const _buffApplies = (srcChara, tgtChara, e, useElementBuff = false) => {
     return _matchElemType(e, tgtChara, useElementBuff);
   }
   if (sc === 5) {
+    // chara 限定：精确相等のみ（substring を許すと "魔剣グラム" effect が
+    // "魔剣グラム:Blaze" 等の別 chara に誤発火する。wiki 上 effect.name は
+    // tgtChara.name と完全一致するのが正常 — 一致しない = wiki 表記不整合）
     const nm = e.name;
-    if (!nm || !tgtChara.name) return false;
-    return tgtChara.name === nm || tgtChara.name.indexOf(nm) >= 0;
+    return !!nm && tgtChara.name === nm;
   }
   return false;
 }

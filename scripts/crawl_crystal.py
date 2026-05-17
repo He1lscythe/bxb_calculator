@@ -165,6 +165,13 @@ def parse_row(row):
     buki        = d.get('buki_type') or 0
     tokushu     = fields.get('特殊条件', '')
     effect_text = fields.get('効果', '')
+    # Fallback: 「○○の秘録記憶」 chara 限定結晶、wiki 旧版未填【特殊条件】行 → name 前缀兜底
+    # (54 件 1024-1116 等が空欄、4 件 1295-1298 のみ填好)
+    if not tokushu:
+        m = re.match(r'^(.+)の秘録記憶$', d.get('name', ''))
+        if m:
+            tokushu = m.group(1)
+            fields['特殊条件'] = tokushu   # 出力 crystal['特殊条件'] にも反映、scope=5 entry と整合
     scope       = compute_scope(elem, buki, effect_text, tokushu)
 
     # Bunrui = altema labeling ∪ classify_effect text supplement
