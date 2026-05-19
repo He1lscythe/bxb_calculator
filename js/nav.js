@@ -66,10 +66,9 @@ export const Nav = {
   },
 };
 
-// reads sessionReviseIds from either legacy global or window.state (ES module pages)
+// 所有 viewer 都通过 window.state = state 暴露 — 不再 fallback 到 legacy 全局
 export const updateReviseBar = () => {
-  const sr    = window.state?.sessionReviseIds
-             ?? (typeof sessionReviseIds !== 'undefined' ? sessionReviseIds : new Set());
+  const sr    = window.state?.sessionReviseIds ?? new Set();
   // characters ページでは masou 編集も同じ save bar をトリガする（独立 set）
   const msr   = window.state?.masouSessionReviseIds ?? new Set();
   const count = sr.size + msr.size;

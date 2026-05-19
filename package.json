@@ -6,9 +6,15 @@
   "type": "module",
   "scripts": {
     "build:local": "node scripts/build.js",
-    "watch": "node scripts/build.js --watch"
+    "watch": "node scripts/build.js --watch",
+    "test": "node tests/run_all.cjs",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@octokit/rest": "^21.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^10.4.0",
+    "globals": "^17.6.0"
   }
 }
