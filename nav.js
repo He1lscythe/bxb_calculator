@@ -1,20 +1,20 @@
 (function () {
   if (document.getElementById('topbar')) return;
   const PAGES = [
-    { id: 'characters',  href: 'characters.html',  label: '魔剣' },
-    { id: 'crystals',    href: 'crystals.html',    label: '結晶' },
+    { id: 'characters', href: 'characters.html', label: '魔剣' },
+    { id: 'crystals', href: 'crystals.html', label: '結晶' },
     { id: 'bladegraphs', href: 'bladegraphs.html', label: '心象結晶' },
-    { id: 'souls',       href: 'souls.html',       label: 'ソウル' },
-    { id: 'hensei',      href: 'hensei.html',      label: '編成' },
+    { id: 'souls', href: 'souls.html', label: 'ソウル' },
+    { id: 'hensei', href: 'hensei.html', label: '編成' },
   ];
 
   // detect active page from filename
-  const  path = window.location.pathname.replace(/\/$/, '');
-  const  file = path.split('/').pop() || 'characters.html';
-  const  activePage = file.replace(/\.html$/, '');
+  const path = window.location.pathname.replace(/\/$/, '');
+  const file = path.split('/').pop() || 'characters.html';
+  const activePage = file.replace(/\.html$/, '');
 
   // build nav links
-  const  links = PAGES.map(function (p) {
+  const links = PAGES.map(function (p) {
     const cls = p.id === activePage ? 'nav-link active' : 'nav-link';
     return '<a href="' + p.href + '" class="' + cls + '">' + p.label + '</a>';
   }).join('');
@@ -22,16 +22,18 @@
   // topbar HTML
   const html =
     '<div id="topbar">' +
-      '<h1>⚔ BxB</h1>' +
-      '<nav id="page-nav">' + links + '</nav>' +
-      '<div id="topbar-right">' +
-        '<div id="save-toast"></div>' +
-        '<div id="revise-bar">' +
-          '<button class="btn-revise-save" onclick="typeof saveRevise===\'function\'&&saveRevise()">Save</button>' +
-          '<span id="revise-status"></span>' +
-        '</div>' +
-        '<button id="nav-hamburger" onclick="(function(){var n=document.getElementById(\'page-nav\');n.classList.toggle(\'open\');})()" aria-label="メニュー">☰</button>' +
-      '</div>' +
+    '<h1>⚔ BxB</h1>' +
+    '<nav id="page-nav">' +
+    links +
+    '</nav>' +
+    '<div id="topbar-right">' +
+    '<div id="save-toast"></div>' +
+    '<div id="revise-bar">' +
+    '<button class="btn-revise-save" onclick="typeof saveRevise===\'function\'&&saveRevise()">Save</button>' +
+    '<span id="revise-status"></span>' +
+    '</div>' +
+    '<button id="nav-hamburger" onclick="(function(){var n=document.getElementById(\'page-nav\');n.classList.toggle(\'open\');})()" aria-label="メニュー">☰</button>' +
+    '</div>' +
     '</div>';
 
   // inject CSS into <head>
@@ -58,17 +60,17 @@
     '#save-toast a:hover{text-decoration:underline;}' +
     '@keyframes save-toast-in{from{opacity:0;transform:translateX(8px);}to{opacity:1;transform:translateX(0);}}' +
     '@media(max-width:600px){' +
-      '#nav-hamburger{display:block;}' +
-      '#page-nav{' +
-        'display:none;position:absolute;top:52px;left:0;right:0;' +
-        'flex-direction:column;background:var(--bg2);' +
-        'border-bottom:2px solid var(--border);' +
-        'box-shadow:0 6px 16px rgba(0,0,0,.5);z-index:99;' +
-      '}' +
-      '#page-nav.open{display:flex;}' +
-      '.nav-link{padding:12px 20px;border-bottom:1px solid var(--border);border-right:none;white-space:normal;}' +
-      '.nav-link.active{border-bottom-color:var(--border);border-left:3px solid var(--accent);padding-left:17px;}' +
-      /* topbar 保持 sticky（默认值）——sticky 本身就是定位元素，#page-nav 的 absolute 定位仍以 topbar 为锚 */
+    '#nav-hamburger{display:block;}' +
+    '#page-nav{' +
+    'display:none;position:absolute;top:52px;left:0;right:0;' +
+    'flex-direction:column;background:var(--bg2);' +
+    'border-bottom:2px solid var(--border);' +
+    'box-shadow:0 6px 16px rgba(0,0,0,.5);z-index:99;' +
+    '}' +
+    '#page-nav.open{display:flex;}' +
+    '.nav-link{padding:12px 20px;border-bottom:1px solid var(--border);border-right:none;white-space:normal;}' +
+    '.nav-link.active{border-bottom-color:var(--border);border-left:3px solid var(--accent);padding-left:17px;}' +
+    /* topbar 保持 sticky（默认值）——sticky 本身就是定位元素，#page-nav 的 absolute 定位仍以 topbar 为锚 */
     '}';
 
   let style = document.createElement('style');
@@ -79,7 +81,7 @@
   document.currentScript.insertAdjacentHTML('afterend', html);
 
   // close menu when clicking outside nav
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', function (e) {
     const nav = document.getElementById('page-nav');
     const hamburger = document.getElementById('nav-hamburger');
     if (!nav || !hamburger) return;
@@ -91,7 +93,7 @@
 
 // shared across all pages — reads each page's own sessionReviseIds (Set of this-session edits)
 function updateReviseBar() {
-  const sr = (typeof sessionReviseIds !== 'undefined') ? sessionReviseIds : new Set();
+  const sr = typeof sessionReviseIds !== 'undefined' ? sessionReviseIds : new Set();
   const count = sr.size;
   const bar = document.getElementById('revise-bar');
   const btn = document.querySelector('.btn-revise-save');

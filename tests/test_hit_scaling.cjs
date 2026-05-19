@@ -5,14 +5,23 @@ const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
 
-let pass = 0, fail = 0;
+let pass = 0,
+  fail = 0;
 const eq = (label, a, b) => {
-  const ok = (typeof a === 'number' && typeof b === 'number')
-    ? Math.abs(a - b) < 1e-9
-    : a === b;
-  if (ok) pass++; else { fail++; console.error(`✗ ${label}: got=${JSON.stringify(a)} expected=${JSON.stringify(b)}`); }
+  const ok = typeof a === 'number' && typeof b === 'number' ? Math.abs(a - b) < 1e-9 : a === b;
+  if (ok) pass++;
+  else {
+    fail++;
+    console.error(`✗ ${label}: got=${JSON.stringify(a)} expected=${JSON.stringify(b)}`);
+  }
 };
-const truthy = (label, cond) => { if (cond) pass++; else { fail++; console.error(`✗ ${label}`); } };
+const truthy = (label, cond) => {
+  if (cond) pass++;
+  else {
+    fail++;
+    console.error(`✗ ${label}`);
+  }
+};
 
 // ===== _parseHit (与 hensei.html / chara-spec.js 同实现) =====
 const _parseHit = (s) => {
@@ -22,7 +31,7 @@ const _parseHit = (s) => {
   if (t === '') return 0;
   if (t.includes('/')) {
     const [n, d] = t.split('/').map(parseFloat);
-    return (Number.isFinite(n) && Number.isFinite(d) && d !== 0) ? n / d : 0;
+    return Number.isFinite(n) && Number.isFinite(d) && d !== 0 ? n / d : 0;
   }
   const v = parseFloat(t);
   return Number.isFinite(v) ? v : 0;
@@ -34,9 +43,9 @@ eq('undefined → 0', _parseHit(undefined), 0);
 eq('"" → 0', _parseHit(''), 0);
 eq('number 2 → 2', _parseHit(2), 2);
 eq('number 1.66 → 1.66', _parseHit(1.66), 1.66);
-eq('"5/98" → 5/98', _parseHit('5/98'), 5/98);
-eq('"1/3" → 1/3', _parseHit('1/3'), 1/3);
-eq('"10/98" → 10/98', _parseHit('10/98'), 10/98);
+eq('"5/98" → 5/98', _parseHit('5/98'), 5 / 98);
+eq('"1/3" → 1/3', _parseHit('1/3'), 1 / 3);
+eq('"10/98" → 10/98', _parseHit('10/98'), 10 / 98);
 eq('"2.5" → 2.5', _parseHit('2.5'), 2.5);
 eq('"abc" → 0', _parseHit('abc'), 0);
 eq('"1/0" (除数 0) → 0', _parseHit('1/0'), 0);
@@ -49,7 +58,7 @@ const calcBaseV = (hps, hpss, jk) => _parseHit(hps) + (jk - 1) * _parseHit(hpss)
 //   stored: hps=2, sca="5/98" → at jk=99 → 2 + 98*(5/98) = 7（与「最大+7」吻合）
 eq('jk=1: base 2 alone', calcBaseV(2, '5/98', 1), 2);
 eq('jk=99: max +7', calcBaseV(2, '5/98', 99), 7);
-eq('jk=50 中段', calcBaseV(2, '5/98', 50), 2 + 49 * 5/98);
+eq('jk=50 中段', calcBaseV(2, '5/98', 50), 2 + (49 * 5) / 98);
 // SS chara skill「1～3撃目+3 + 10 milestones × +1」hps=3, sca="10/98", max +13
 eq('jk=99 hps=3 sca="10/98" → 13', calcBaseV(3, '10/98', 99), 13);
 eq('jk=1 hps=3 sca="10/98" → 3', calcBaseV(3, '10/98', 1), 3);
@@ -73,7 +82,7 @@ eq('SS no scaling hps=5 → 5', charaMaxDelta(4, 5, 0), 5);
 // ===== chara-spec maxBd: bairitu / bairitu_scaling 双方とも分式対応 =====
 console.log('\n--- chara-spec maxBd: bairitu も分式文字列 ("3/2") 受け入れ ---');
 const charaMaxBdB = (rarity, b, sc) => {
-  const denomBd = (_RARITY_MAX_JK[rarity] ?? 99);
+  const denomBd = _RARITY_MAX_JK[rarity] ?? 99;
   return _parseHit(b) + denomBd * _parseHit(sc);
 };
 eq('SS b="3/2" sc=0 → 1.5', charaMaxBdB(4, '3/2', 0), 1.5);
@@ -104,7 +113,10 @@ truthy('"5/4" 类型是 string', typeof _normalizeHitVal('5/4') === 'string');
 // ===== Parser: classify_hit_fields (Python 调) =====
 console.log('\n--- classify_common.py classify_hit_fields ---');
 function runPython(args) {
-  const r = spawnSync('python', ['-c', args], { encoding: 'utf8', cwd: path.resolve(__dirname, '..') });
+  const r = spawnSync('python', ['-c', args], {
+    encoding: 'utf8',
+    cwd: path.resolve(__dirname, '..'),
+  });
   return (r.stdout || '') + (r.stderr || '');
 }
 const py = `
@@ -129,46 +141,61 @@ for text, b, ct, rarity in cases:
     out.append({'hps': ent['hit_per_stage'], 'sca': ent['hit_per_stage_scaling']})
 print(json.dumps(out, ensure_ascii=False))
 `;
-const out = runPython(py).trim().split('\n').filter(l => l.startsWith('[')).pop();
+const out = runPython(py)
+  .trim()
+  .split('\n')
+  .filter((l) => l.startsWith('['))
+  .pop();
 let parsed = null;
-try { parsed = JSON.parse(out); } catch (e) { console.error('python JSON parse failed:', out); }
+try {
+  parsed = JSON.parse(out);
+} catch (e) {
+  console.error('python JSON parse failed:', out);
+}
 if (parsed) {
   // case 0: SS rarity, 1～3撃目+2, 5 milestones × +1 → hps [2,2,2], sca ["5/98","5/98","5/98"]
   eq('case0 hps[0] = 2', parsed[0].hps[0], 2);
   eq('case0 hps[2] = 2', parsed[0].hps[2], 2);
   eq('case0 sca[0] = "5/98"', parsed[0].sca[0], '5/98');
   // case 1: SS, 10 milestones × +1 → "10/98"
-  eq('case1 hps = [3,3,3]', JSON.stringify(parsed[1].hps), JSON.stringify([3,3,3]));
+  eq('case1 hps = [3,3,3]', JSON.stringify(parsed[1].hps), JSON.stringify([3, 3, 3]));
   eq('case1 sca[0] = "10/98"', parsed[1].sca[0], '10/98');
   // case 2: 3撃目+13 一段 → hps [0,0,13]
-  eq('case2 hps = [0,0,13]', JSON.stringify(parsed[2].hps), JSON.stringify([0,0,13]));
-  eq('case2 sca = [0,0,0]', JSON.stringify(parsed[2].sca), JSON.stringify([0,0,0]));
+  eq('case2 hps = [0,0,13]', JSON.stringify(parsed[2].hps), JSON.stringify([0, 0, 13]));
+  eq('case2 sca = [0,0,0]', JSON.stringify(parsed[2].sca), JSON.stringify([0, 0, 0]));
   // case 3: 1撃目+1 と 3撃目+3 → [1,0,3]
-  eq('case3 hps = [1,0,3]', JSON.stringify(parsed[3].hps), JSON.stringify([1,0,3]));
+  eq('case3 hps = [1,0,3]', JSON.stringify(parsed[3].hps), JSON.stringify([1, 0, 3]));
   // case 4: 第三撃のみ+5 → [0,0,5]
-  eq('case4 hps = [0,0,5]', JSON.stringify(parsed[4].hps), JSON.stringify([0,0,5]));
+  eq('case4 hps = [0,0,5]', JSON.stringify(parsed[4].hps), JSON.stringify([0, 0, 5]));
   // case 5: A rarity (3) → denom 89
-  eq('case5 (A) sca[0] = "6/89"', parsed[5].sca[0], '6/89');  // 6 milestones × 1
+  eq('case5 (A) sca[0] = "6/89"', parsed[5].sca[0], '6/89'); // 6 milestones × 1
   // case 6: B rarity (2) → denom 69
-  eq('case6 (B) sca[0] = "3/69"', parsed[6].sca[0], '3/69');  // 3 milestones × 1
+  eq('case6 (B) sca[0] = "3/69"', parsed[6].sca[0], '3/69'); // 3 milestones × 1
 }
 
 // ===== 数据完整性：现存 chara 的 sca 与新公式吻合 =====
 console.log('\n--- characters.json: 非零 scaling 必须是分式字符串 "X/{rarity-1}" ---');
 const ROOT = path.resolve(__dirname, '..');
 const chars = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'characters.json'), 'utf8'));
-const denomFor = r => (_RARITY_MAX_JK[r] ?? 99) - 1;
-let scaTotal = 0, scaBad = 0;
+const denomFor = (r) => (_RARITY_MAX_JK[r] ?? 99) - 1;
+let scaTotal = 0,
+  scaBad = 0;
 function walkSca(c, x) {
-  if (Array.isArray(x)) { x.forEach(it => walkSca(c, it)); return; }
+  if (Array.isArray(x)) {
+    x.forEach((it) => walkSca(c, it));
+    return;
+  }
   if (!x || typeof x !== 'object') return;
   const sca = x.hit_per_stage_scaling;
-  if (Array.isArray(sca) && sca.some(v => v)) {
+  if (Array.isArray(sca) && sca.some((v) => v)) {
     const expectedDenom = denomFor(c.rarity);
-    sca.forEach(v => {
+    sca.forEach((v) => {
       if (!v) return;
       scaTotal++;
-      if (typeof v !== 'string' || !v.includes('/')) { scaBad++; return; }
+      if (typeof v !== 'string' || !v.includes('/')) {
+        scaBad++;
+        return;
+      }
       const denom = parseInt(v.split('/')[1], 10);
       if (denom !== expectedDenom) scaBad++;
     });

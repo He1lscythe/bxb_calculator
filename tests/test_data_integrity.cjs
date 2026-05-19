@@ -4,20 +4,41 @@
 const fs = require('fs');
 const path = require('path');
 
-let pass = 0, fail = 0;
-const truthy = (label, cond) => { if (cond) pass++; else { fail++; console.error(`✗ ${label}`); } };
+let pass = 0,
+  fail = 0;
+const truthy = (label, cond) => {
+  if (cond) pass++;
+  else {
+    fail++;
+    console.error(`✗ ${label}`);
+  }
+};
 
 const ROOT = path.resolve(__dirname, '..');
 const load = (name) => {
-  try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'data', name), 'utf8')); }
-  catch (e) { return null; }
+  try {
+    return JSON.parse(fs.readFileSync(path.join(ROOT, 'data', name), 'utf8'));
+  } catch (e) {
+    return null;
+  }
 };
 
 console.log('--- 文件加载 ---');
-const files = ['characters.json', 'souls.json', 'crystals.json', 'bladegraphs.json',
-               'masou.json', 'guildemblems.json', 'guildtitles.json',
-               'characters_revise.json', 'souls_revise.json', 'crystals_revise.json',
-               'bladegraphs_revise.json', 'masou_revise.json', 'omoide_revise.json'];
+const files = [
+  'characters.json',
+  'souls.json',
+  'crystals.json',
+  'bladegraphs.json',
+  'masou.json',
+  'guildemblems.json',
+  'guildtitles.json',
+  'characters_revise.json',
+  'souls_revise.json',
+  'crystals_revise.json',
+  'bladegraphs_revise.json',
+  'masou_revise.json',
+  'omoide_revise.json',
+];
 const data = {};
 for (const f of files) {
   // revise 文件は main branch 上では gitignored（data-staging のみ tracked）。
@@ -39,7 +60,13 @@ for (const f of files) {
 }
 
 console.log('\n--- effect_text 字段统一（不应有 effect 顶层字段）---');
-for (const fname of ['characters.json', 'souls.json', 'crystals.json', 'bladegraphs.json', 'masou.json']) {
+for (const fname of [
+  'characters.json',
+  'souls.json',
+  'crystals.json',
+  'bladegraphs.json',
+  'masou.json',
+]) {
   const arr = data[fname];
   if (!arr) continue;
   let bad = 0;
@@ -60,21 +87,29 @@ function checkBunrui7(arr, getEffects) {
   }
   return violations;
 }
-truthy(`crystals: bunrui=[7] 独占 (违反: ${checkBunrui7(data['crystals.json'], c => c.effects)})`,
-       checkBunrui7(data['crystals.json'], c => c.effects) === 0);
-truthy(`bladegraphs: bunrui=[7] 独占`,
-       checkBunrui7(data['bladegraphs.json'], c => c.effects) === 0);
+truthy(
+  `crystals: bunrui=[7] 独占 (违反: ${checkBunrui7(data['crystals.json'], (c) => c.effects)})`,
+  checkBunrui7(data['crystals.json'], (c) => c.effects) === 0,
+);
+truthy(
+  `bladegraphs: bunrui=[7] 独占`,
+  checkBunrui7(data['bladegraphs.json'], (c) => c.effects) === 0,
+);
 
 console.log('\n--- soul affinity schema ---');
 const souls = data['souls.json'];
 if (souls) {
-  let bad = 0, total = 0;
+  let bad = 0,
+    total = 0;
   for (const s of souls) {
     for (const fld of ['element_affinity', 'weapon_affinity']) {
       const d = s[fld] || {};
       for (const [k, v] of Object.entries(d)) {
         total++;
-        if (typeof v !== 'object' || v === null) { bad++; continue; }
+        if (typeof v !== 'object' || v === null) {
+          bad++;
+          continue;
+        }
         if (!('level' in v)) bad++;
         // atk/def_effect 可选；如果有，必须是 string
         if ('atk_effect' in v && typeof v.atk_effect !== 'string') bad++;
@@ -93,23 +128,27 @@ console.log('\n--- chara.tags（魔剣特性）schema ---');
 {
   const EXPECTED_TAG_IDS = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
   const checkChara = (arr, fname) => {
-    let badShape = 0, badId = 0, residualSpecial = 0;
+    let badShape = 0,
+      badId = 0,
+      residualSpecial = 0;
     for (const c of arr || []) {
       if ('tags' in c) {
         if (!Array.isArray(c.tags)) badShape++;
-        else for (const t of c.tags) {
-          if (typeof t !== 'number' || !EXPECTED_TAG_IDS.has(t)) badId++;
-        }
+        else
+          for (const t of c.tags) {
+            if (typeof t !== 'number' || !EXPECTED_TAG_IDS.has(t)) badId++;
+          }
       }
       // bd_skill.special 不应残留
-      if (c.bd_skill && typeof c.bd_skill === 'object' && 'special' in c.bd_skill) residualSpecial++;
+      if (c.bd_skill && typeof c.bd_skill === 'object' && 'special' in c.bd_skill)
+        residualSpecial++;
     }
     truthy(`${fname}: chara.tags 必须是 int[] (违反 ${badShape})`, badShape === 0);
     truthy(`${fname}: chara.tags id ∈ CHARA_TAG keys (违反 ${badId})`, badId === 0);
     truthy(`${fname}: 不残留 bd_skill.special (违反 ${residualSpecial})`, residualSpecial === 0);
   };
-  checkChara(data['characters.json'],         'characters.json');
-  checkChara(data['characters_revise.json'],  'characters_revise.json');
+  checkChara(data['characters.json'], 'characters.json');
+  checkChara(data['characters_revise.json'], 'characters_revise.json');
 }
 
 console.log('\n--- soul.tags（魂特性）schema ---');
@@ -117,26 +156,28 @@ console.log('\n--- soul.tags（魂特性）schema ---');
 {
   const EXPECTED_SOUL_TAG_IDS = new Set([1, 2, 3, 4, 5, 6, 7, 8]);
   const checkSoul = (arr, fname) => {
-    let badShape = 0, badId = 0;
+    let badShape = 0,
+      badId = 0;
     for (const s of arr || []) {
       if ('tags' in s) {
         if (!Array.isArray(s.tags)) badShape++;
-        else for (const t of s.tags) {
-          if (typeof t !== 'number' || !EXPECTED_SOUL_TAG_IDS.has(t)) badId++;
-        }
+        else
+          for (const t of s.tags) {
+            if (typeof t !== 'number' || !EXPECTED_SOUL_TAG_IDS.has(t)) badId++;
+          }
       }
     }
     truthy(`${fname}: soul.tags 必须是 int[] (违反 ${badShape})`, badShape === 0);
     truthy(`${fname}: soul.tags id ∈ SOUL_TAG keys (违反 ${badId})`, badId === 0);
   };
-  checkSoul(data['souls.json'],        'souls.json');
+  checkSoul(data['souls.json'], 'souls.json');
   checkSoul(data['souls_revise.json'], 'souls_revise.json');
 }
 
 console.log('\n--- crystal tombstone schema ---');
 const crystals = data['crystals.json'];
 if (crystals) {
-  const ts = crystals.filter(c => c.tombstone);
+  const ts = crystals.filter((c) => c.tombstone);
   let bad = 0;
   for (const t of ts) {
     if (!Array.isArray(t.split_into) || t.split_into.length !== 2) bad++;
@@ -145,7 +186,9 @@ if (crystals) {
   truthy(`crystal tombstone split_into 全部正确 (${ts.length} tombstone, 错 ${bad})`, bad === 0);
 }
 
-console.log('\n--- crystal lv / 颗粒度 schema (顶层 level_max / weight_step / purity_step + effect delta) ---');
+console.log(
+  '\n--- crystal lv / 颗粒度 schema (顶层 level_max / weight_step / purity_step + effect delta) ---',
+);
 // 字段 optional；若存在必须是正数。0 / null は「不可調」= 字段缺省 で表現するため残留禁止。
 // 注：crystals_revise.json effects は稀疏 index 形式 ({"0":{...},"1":{...}})、crystals.json は配列。両対応。
 {
@@ -159,7 +202,7 @@ console.log('\n--- crystal lv / 颗粒度 schema (顶层 level_max / weight_step
     if (typeof v === 'number') return v;
     if (typeof v === 'string' && v.includes('/')) {
       const [a, b] = v.split('/').map(Number);
-      return (Number.isFinite(a) && Number.isFinite(b) && b !== 0) ? a / b : NaN;
+      return Number.isFinite(a) && Number.isFinite(b) && b !== 0 ? a / b : NaN;
     }
     return NaN;
   };
@@ -180,8 +223,8 @@ console.log('\n--- crystal lv / 颗粒度 schema (顶层 level_max / weight_step
     }
     truthy(`${fname}: crystal 顶层 > 0 / effect delta >= 0 (违反 ${bad})`, bad === 0);
   };
-  checkPos(data['crystals.json'],         'crystals.json');
-  checkPos(data['crystals_revise.json'],  'crystals_revise.json');
+  checkPos(data['crystals.json'], 'crystals.json');
+  checkPos(data['crystals_revise.json'], 'crystals_revise.json');
 }
 
 console.log('\n--- emblem color/rarity 边界 ---');
@@ -196,13 +239,19 @@ if (emblems) {
 }
 
 console.log('\n--- revise schema：entry 至少有 id+name + 1 个改动字段 ---');
-for (const fname of ['characters_revise.json', 'souls_revise.json', 'crystals_revise.json',
-                     'bladegraphs_revise.json', 'masou_revise.json', 'omoide_revise.json']) {
+for (const fname of [
+  'characters_revise.json',
+  'souls_revise.json',
+  'crystals_revise.json',
+  'bladegraphs_revise.json',
+  'masou_revise.json',
+  'omoide_revise.json',
+]) {
   const arr = data[fname];
   if (!arr) continue;
   let bad = 0;
   for (const e of arr) {
-    const realKeys = Object.keys(e).filter(k => k !== 'id' && k !== 'name');
+    const realKeys = Object.keys(e).filter((k) => k !== 'id' && k !== 'name');
     if (realKeys.length === 0) bad++;
   }
   truthy(`${fname}: 无空 entry（${arr.length} entries, 空 ${bad}）`, bad === 0);
@@ -218,10 +267,16 @@ console.log('\n--- soul merge pass：同 key effects 合体到 bunrui[]（不应
     for (const sk of s.skills || []) {
       const seen = new Map();
       for (const e of sk.effects || []) {
-        if ((e.bunrui || []).includes(7)) continue;  // hit excluded
-        if ('name' in e) continue;                    // scope=5 limited
-        const key = JSON.stringify([e.bairitu, e.calc_type, e.scope, e.condition,
-                                     e.element ?? null, e.weapon ?? null]);
+        if ((e.bunrui || []).includes(7)) continue; // hit excluded
+        if ('name' in e) continue; // scope=5 limited
+        const key = JSON.stringify([
+          e.bairitu,
+          e.calc_type,
+          e.scope,
+          e.condition,
+          e.element ?? null,
+          e.weapon ?? null,
+        ]);
         seen.set(key, (seen.get(key) || 0) + 1);
       }
       for (const cnt of seen.values()) if (cnt > 1) dupGroups++;
@@ -238,18 +293,21 @@ console.log('\n--- recal 不再 merge revise 进 base JSON（HP+犠牲 cost-spli
 //   この test が失敗する。
 {
   const souls = data['souls.json'];
-  const target = (souls || []).filter(s => [174, 206, 402, 415].includes(s.id));
-  let checked = 0, withCost10 = 0;
+  const target = (souls || []).filter((s) => [174, 206, 402, 415].includes(s.id));
+  let checked = 0,
+    withCost10 = 0;
   for (const s of target) {
     for (const sk of s.skills || []) {
       const et = sk.effect_text || '';
       if (!/最大HPを犠牲に.*他魔剣.*攻撃力45%UP/.test(et)) continue;
       checked++;
-      if ((sk.effects || []).some(e => (e.bunrui || []).includes(10))) withCost10++;
+      if ((sk.effects || []).some((e) => (e.bunrui || []).includes(10))) withCost10++;
     }
   }
-  truthy(`souls.json HP+犠牲 cost-split：${checked}/${target.length} skills 含 bunrui=[10] cost-side`,
-         checked > 0 && withCost10 === checked);
+  truthy(
+    `souls.json HP+犠牲 cost-split：${checked}/${target.length} skills 含 bunrui=[10] cost-side`,
+    checked > 0 && withCost10 === checked,
+  );
 }
 
 console.log('\n--- revise 不应残留 null 字段 ---');
@@ -263,8 +321,13 @@ function findNulls(obj, path = '') {
   }
   return found;
 }
-for (const fname of ['characters_revise.json', 'souls_revise.json', 'crystals_revise.json',
-                     'bladegraphs_revise.json', 'masou_revise.json']) {
+for (const fname of [
+  'characters_revise.json',
+  'souls_revise.json',
+  'crystals_revise.json',
+  'bladegraphs_revise.json',
+  'masou_revise.json',
+]) {
   const arr = data[fname];
   if (!arr) continue;
   let nullCount = 0;

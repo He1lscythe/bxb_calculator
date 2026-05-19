@@ -8,7 +8,9 @@
 export const resolveOmoideTemplates = (charas, templates) => {
   if (!Array.isArray(charas) || !Array.isArray(templates)) return;
   const tmap = {};
-  templates.forEach(t => { if (t?.id != null) tmap[t.id] = t; });
+  templates.forEach((t) => {
+    if (t?.id != null) tmap[t.id] = t;
+  });
   for (const c of charas) {
     if (c == null || c.omoide_template == null) continue;
     const tpl = tmap[c.omoide_template];

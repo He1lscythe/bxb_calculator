@@ -5,21 +5,33 @@ const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
 
-let pass = 0, fail = 0;
+let pass = 0,
+  fail = 0;
 const eq = (label, a, b) => {
-  const ok = (typeof a === 'number' && typeof b === 'number')
-    ? Math.abs(a - b) < 1e-9
-    : a === b;
-  if (ok) pass++; else { fail++; console.error(`✗ ${label}: got=${JSON.stringify(a)} expected=${JSON.stringify(b)}`); }
+  const ok = typeof a === 'number' && typeof b === 'number' ? Math.abs(a - b) < 1e-9 : a === b;
+  if (ok) pass++;
+  else {
+    fail++;
+    console.error(`✗ ${label}: got=${JSON.stringify(a)} expected=${JSON.stringify(b)}`);
+  }
 };
-const truthy = (label, cond) => { if (cond) pass++; else { fail++; console.error(`✗ ${label}`); } };
+const truthy = (label, cond) => {
+  if (cond) pass++;
+  else {
+    fail++;
+    console.error(`✗ ${label}`);
+  }
+};
 
 // ===== Lv2-5 検出 (与 hensei.html _LV2_5_RE 同步) =====
 const _LV2_5_RE = /Lv[2-5](?!\d)/;
 
 console.log('--- _LV2_5_RE: Lv2/Lv3/Lv4/Lv5 のみ命中（Lv50/Lv500 等は除外）---');
-truthy('"禁式･冥魔神の波動【深化】Lv5+" → true',  _LV2_5_RE.test('禁式･冥魔神の波動【深化】Lv5+'));
-truthy('"禁式･嵐魔神の加速回路【深化】Lv2+" → true', _LV2_5_RE.test('禁式･嵐魔神の加速回路【深化】Lv2+'));
+truthy('"禁式･冥魔神の波動【深化】Lv5+" → true', _LV2_5_RE.test('禁式･冥魔神の波動【深化】Lv5+'));
+truthy(
+  '"禁式･嵐魔神の加速回路【深化】Lv2+" → true',
+  _LV2_5_RE.test('禁式･嵐魔神の加速回路【深化】Lv2+'),
+);
 truthy('"破壊神Lv3" → true', _LV2_5_RE.test('破壊神Lv3'));
 truthy('"波動Lv4" → true', _LV2_5_RE.test('波動Lv4'));
 truthy('"禁式･冥魔神の波動【深化】Lv6+" → false', !_LV2_5_RE.test('禁式･冥魔神の波動【深化】Lv6+'));
@@ -46,8 +58,8 @@ eq('null → 0', _parseScaling(null), 0);
 eq('0 → 0', _parseScaling(0), 0);
 eq('"" → 0', _parseScaling(''), 0);
 eq('0.00768 → 0.00768', _parseScaling(0.00768), 0.00768);
-eq('"2/99" → 2/99', _parseScaling('2/99'), 2/99);
-eq('"5/98" → 5/98', _parseScaling('5/98'), 5/98);
+eq('"2/99" → 2/99', _parseScaling('2/99'), 2 / 99);
+eq('"5/98" → 5/98', _parseScaling('5/98'), 5 / 98);
 eq('"1/0" 除 0 → 0', _parseScaling('1/0'), 0);
 eq('"0.005" → 0.005', _parseScaling('0.005'), 0.005);
 
@@ -55,27 +67,35 @@ eq('"0.005" → 0.005', _parseScaling('0.005'), 0.005);
 // b / sc 双方とも数値・分式文字列 ("1/2") を受け入れる（_parseScaling 経由）。
 const _scaledBairitu = (b, sc, jukudo, jkMinus1 = false) => {
   const bv = _parseScaling(b);
-  const s  = _parseScaling(sc);
+  const s = _parseScaling(sc);
   if (!s) return bv;
-  const factor = jkMinus1 ? (jukudo - 1) : jukudo;
+  const factor = jkMinus1 ? jukudo - 1 : jukudo;
   return bv + factor * s;
 };
 
 console.log('\n--- _scaledBairitu jkMinus1=true → b + (jk-1)*s ---');
 // SS Lv5「波動【深化】」 base 1.75 + scaling 0.00768
 eq('jk=1 → 1.75 (no contribution)', _scaledBairitu(1.75, 0.00768, 1, true), 1.75);
-eq('jk=99 → 1.75 + 98*0.00768 = 2.50264', _scaledBairitu(1.75, 0.00768, 99, true), 1.75 + 98 * 0.00768);
+eq(
+  'jk=99 → 1.75 + 98*0.00768 = 2.50264',
+  _scaledBairitu(1.75, 0.00768, 99, true),
+  1.75 + 98 * 0.00768,
+);
 // SS noLv「真解放-TRUE END-」 base 3 + scaling "2/99"... 但 noLv 应该用 jk=99 才到 5。
 // Lv2-5 + "2/98" 才能 jk=99 到 5。我们测 fraction 也兼容 jkMinus1。
-eq('jk=99 b=3 sc="2/98" jkm1=true → 5', _scaledBairitu(3, '2/98', 99, true), 3 + 98 * (2/98));
+eq('jk=99 b=3 sc="2/98" jkm1=true → 5', _scaledBairitu(3, '2/98', 99, true), 3 + 98 * (2 / 98));
 
 console.log('\n--- _scaledBairitu jkMinus1=false → b + jk*s（缺省）---');
 // SS Lv6「波動【深化】」 base 2.0 + scaling 0.00768
 eq('jk=99 → 2 + 99*0.00768 = 2.76032', _scaledBairitu(2.0, 0.00768, 99, false), 2.0 + 99 * 0.00768);
 eq('jk=1 → 2 + 1*0.00768 = 2.00768', _scaledBairitu(2.0, 0.00768, 1, false), 2.0 + 1 * 0.00768);
 // SS noLv「真解放-TRUE END-」 base 3 + scaling "2/99" → jk=99 到 5
-eq('jk=99 b=3 sc="2/99" jkm1=false → 5', _scaledBairitu(3, '2/99', 99, false), 3 + 99 * (2/99));
-eq('jk=1 b=3 sc="2/99" jkm1=false → 3 + 2/99', _scaledBairitu(3, '2/99', 1, false), 3 + 1 * (2/99));
+eq('jk=99 b=3 sc="2/99" jkm1=false → 5', _scaledBairitu(3, '2/99', 99, false), 3 + 99 * (2 / 99));
+eq(
+  'jk=1 b=3 sc="2/99" jkm1=false → 3 + 2/99',
+  _scaledBairitu(3, '2/99', 1, false),
+  3 + 1 * (2 / 99),
+);
 // 系列表 noLv 「対魔剣殲滅魔導兵器」 base 2.0 + scaling 0.015 (rarity A → jk_max=90)
 eq('jk=90 b=2 sc=0.015 jkm1=false → 3.35', _scaledBairitu(2.0, 0.015, 90, false), 2 + 90 * 0.015);
 
@@ -88,13 +108,17 @@ console.log('\n--- _scaledBairitu: bairitu 自身も分式文字列 ("1/2") を�
 eq('b="1/2" sc=null → 0.5', _scaledBairitu('1/2', null, 99, false), 0.5);
 eq('b="1/2" sc=0 → 0.5', _scaledBairitu('1/2', 0, 99, true), 0.5);
 eq('b="3/4" sc=0.01 jk=10 → 0.75 + 0.1', _scaledBairitu('3/4', 0.01, 10, false), 0.85);
-eq('b="2/3" sc="1/6" jk=2 jkm1=true → 2/3 + 1/6 = 5/6', _scaledBairitu('2/3', '1/6', 2, true), 2/3 + 1/6);
+eq(
+  'b="2/3" sc="1/6" jk=2 jkm1=true → 2/3 + 1/6 = 5/6',
+  _scaledBairitu('2/3', '1/6', 2, true),
+  2 / 3 + 1 / 6,
+);
 eq('b="1/0" 無効 sc=null → 0', _scaledBairitu('1/0', null, 99, true), 0);
 
 console.log('\n--- 没 scaling 的 skill：Lv2-5 vs Lv6+ vs noLv 行为完全一致（短路返回 b）---');
 // 同 base 同 jukudo、不同 jkm1，输出必须相同
-const b1 = _scaledBairitu(2.0, 0, 99, true);   // Lv5 想象
-const b2 = _scaledBairitu(2.0, 0, 99, false);  // Lv6+ / noLv 想象
+const b1 = _scaledBairitu(2.0, 0, 99, true); // Lv5 想象
+const b2 = _scaledBairitu(2.0, 0, 99, false); // Lv6+ / noLv 想象
 const b3 = _scaledBairitu(2.0, null, 50, true);
 const b4 = _scaledBairitu(2.0, null, 50, false);
 eq('Lv5+sc=0 == Lv6+sc=0 (jk=99)', b1, b2);
@@ -103,18 +127,24 @@ eq('值都等于 base', b1, 2.0);
 
 // ===== 浅 copy 注入 _jkm1 不污染源 =====
 console.log('\n--- chara skill effects 平铺时 _jkm1 注入不污染源 ---');
-const sk = { name: '禁式･波動【深化】Lv5+', effects: [{bunrui:[1], bairitu:1.75, bairitu_scaling:0.00768, calc_type:0}] };
+const sk = {
+  name: '禁式･波動【深化】Lv5+',
+  effects: [{ bunrui: [1], bairitu: 1.75, bairitu_scaling: 0.00768, calc_type: 0 }],
+};
 const charaEffs = [];
 const jkm1 = _LV2_5_RE.test(sk.name);
-sk.effects.forEach(e => charaEffs.push(jkm1 ? { ...e, _jkm1: true } : e));
+sk.effects.forEach((e) => charaEffs.push(jkm1 ? { ...e, _jkm1: true } : e));
 truthy('charaEffs[0]._jkm1 === true', charaEffs[0]._jkm1 === true);
 truthy('源 effect 不含 _jkm1（浅 copy）', !('_jkm1' in sk.effects[0]));
 truthy('源 effect.bairitu 不变', sk.effects[0].bairitu === 1.75);
 
-const sk2 = { name: '禁式･脈動【深化】Lv6+', effects: [{bunrui:[5], bairitu:2.66, bairitu_scaling:0.008}] };
+const sk2 = {
+  name: '禁式･脈動【深化】Lv6+',
+  effects: [{ bunrui: [5], bairitu: 2.66, bairitu_scaling: 0.008 }],
+};
 const eff2 = [];
 const jkm12 = _LV2_5_RE.test(sk2.name);
-sk2.effects.forEach(e => eff2.push(jkm12 ? { ...e, _jkm1: true } : e));
+sk2.effects.forEach((e) => eff2.push(jkm12 ? { ...e, _jkm1: true } : e));
 truthy('Lv6+ skill: 不命中 → 直接 push 原 ref', eff2[0] === sk2.effects[0]);
 truthy('Lv6+ skill: 不带 _jkm1', !eff2[0]._jkm1);
 
@@ -149,9 +179,17 @@ print(json.dumps(out, ensure_ascii=False))
 `;
 const r = spawnSync('python', ['-c', py], { encoding: 'utf8', cwd: path.resolve(__dirname, '..') });
 const stdout = (r.stdout || '') + (r.stderr || '');
-const last = stdout.trim().split('\n').filter(l => l.trim().startsWith('[')).pop();
+const last = stdout
+  .trim()
+  .split('\n')
+  .filter((l) => l.trim().startsWith('['))
+  .pop();
 let parsed = null;
-try { parsed = JSON.parse(last); } catch (e) { console.error('python output parse failed:', stdout); }
+try {
+  parsed = JSON.parse(last);
+} catch (e) {
+  console.error('python output parse failed:', stdout);
+}
 
 if (parsed) {
   // case 0: SS noLv「最大5倍」 → s = "2/99", jkm1=False
@@ -180,19 +218,25 @@ const ROOT = path.resolve(__dirname, '..');
 const chars = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'characters.json'), 'utf8'));
 let leftovers = 0;
 function walk(x) {
-  if (Array.isArray(x)) { x.forEach(walk); return; }
+  if (Array.isArray(x)) {
+    x.forEach(walk);
+    return;
+  }
   if (!x || typeof x !== 'object') return;
   if ('bairitu_scaling_minus_jk_1' in x) leftovers++;
   for (const v of Object.values(x)) walk(v);
 }
 walk(chars);
-truthy(`characters.json 中无 bairitu_scaling_minus_jk_1 字段（残留 ${leftovers}）`, leftovers === 0);
+truthy(
+  `characters.json 中无 bairitu_scaling_minus_jk_1 字段（残留 ${leftovers}）`,
+  leftovers === 0,
+);
 
 // ===== 实数据校验：现存 chara skill scaling 与公式自洽 =====
 console.log('\n--- 实数据：jk=max 时还原效果文字「最大N倍」 ---');
 // 取一个明确含「熟度…最大N倍」的 skill 来验证
 let verified = 0;
-const _RARITY_MAX_JK = { 1:50, 2:70, 3:90, 4:99 };
+const _RARITY_MAX_JK = { 1: 50, 2: 70, 3: 90, 4: 99 };
 for (const c of chars) {
   for (const state of Object.values(c.states || {})) {
     for (const sk of state.skills || []) {
@@ -219,7 +263,7 @@ const parseBairituVal = (s) => {
   if (s === '') return null;
   if (s.includes('/')) {
     const p = s.trim().split('/');
-    return (p.length === 2 && p[0] !== '' && p[1] !== '') ? s.trim() : null;
+    return p.length === 2 && p[0] !== '' && p[1] !== '' ? s.trim() : null;
   }
   const n = Number(s);
   return isNaN(n) ? null : n;
