@@ -28,6 +28,7 @@ from classify_common import (
     classify_hit_fields,
     norm as _norm_common,
 )
+from crawl_validate import validate_completeness
 
 # ============================================================
 #  CONFIG
@@ -523,6 +524,14 @@ def main():
 
         save_json(output_path, output)
         print(f"Done! {len(output)} souls saved to {OUTPUT_FILE} ({count} recalculated)")
+
+        # Schema 自检（合并 base + extra + revise 后看缺什么字段）
+        validate_completeness(
+            output, out_dir, viewer_name='soul',
+            required=['id', 'name', 'rarity', 'element', 'weapon', 'skills'],
+            expected_optional=['element_affinity'],
+            extra_file='souls_extra.json', revise_file='souls_revise.json',
+        )
 
     except KeyboardInterrupt:
         print("\nInterrupted. Saving progress...")
