@@ -10,6 +10,11 @@ import { renderOmoideTemplateBar, renderLatentEditBody, reRenderLatentEdit } fro
 import { renderMasouEditSection } from './masou.js';
 import { updateReviseBar } from './nav.js';
 import { CHARA_SPEC } from '../shared/chara-spec.js';
+// 用 shared diff.js 的 3 参数 computeDiff/_deepDiff/deepApply（撤回机制依赖 prev）。
+// 历史上 chara 自带 2 参版导致 prevMerged 被丢、retraction 失效。re-export 让
+// pages_src/characters.html 的 import { deepApply, computeDiff, _deepDiff } 不变。
+import { _deepDiff, computeDiff, deepApply } from './diff.js';
+export { _deepDiff, computeDiff, deepApply };
 
 export const getPath = (obj, pathStr) => {
   return pathStr.split('.').reduce((cur, k) => (cur == null ? undefined : cur[k]), obj);
@@ -72,66 +77,7 @@ export const cancelEdit = () => {
   selectChar(state.selectedId);
 }
 
-export const _deepDiff = (oval, mval) => {
-  // Plain object: recurse into changed keys
-  if (mval && typeof mval === 'object' && !Array.isArray(mval) &&
-      oval && typeof oval === 'object' && !Array.isArray(oval)) {
-    const sub = {};
-    for (const k in mval)
-      if (JSON.stringify(mval[k]) !== JSON.stringify(oval[k]))
-        sub[k] = _deepDiff(oval[k], mval[k]);
-    return sub;
-  }
-  // Same-length array of objects: sparse index-keyed diff (only changed indices)
-  if (Array.isArray(oval) && Array.isArray(mval) && oval.length === mval.length &&
-      mval.length > 0 &&
-      mval.every(x => x && typeof x === 'object' && !Array.isArray(x))) {
-    const sparse = {};
-    mval.forEach((m, i) => {
-      if (JSON.stringify(m) !== JSON.stringify(oval[i]))
-        sparse[i] = _deepDiff(oval[i], m);
-    });
-    return sparse;
-  }
-  return JSON.parse(JSON.stringify(mval));
-}
-
-export const computeDiff = (original, modified) => {
-  const diff = { id: modified.id, name: modified.name };
-  for (const key in modified) {
-    if (key === 'id') continue;
-    if (JSON.stringify(modified[key]) !== JSON.stringify(original[key]))
-      diff[key] = _deepDiff(original[key], modified[key]);
-  }
-  return diff;
-}
-
-export const deepApply = (target, patch) => {
-  for (var k in patch) {
-    if (k === 'id') continue;
-    let pv = patch[k], tv = target[k];
-    // Sparse array diff: target field is array, patch is plain object with numeric-string keys
-    if (Array.isArray(tv) && pv && typeof pv === 'object' && !Array.isArray(pv) &&
-        Object.keys(pv).every(kk => /^\d+$/.test(kk))) {
-      for (const idx in pv) {
-        const i = +idx;
-        if (i >= tv.length) continue;
-        const pvi = pv[idx];
-        if (pvi && typeof pvi === 'object' && !Array.isArray(pvi) &&
-            tv[i] && typeof tv[i] === 'object' && !Array.isArray(tv[i])) {
-          deepApply(tv[i], pvi);
-        } else {
-          tv[i] = JSON.parse(JSON.stringify(pvi));
-        }
-      }
-    } else if (pv !== null && typeof pv === 'object' && !Array.isArray(pv) &&
-        tv !== null && typeof tv === 'object' && !Array.isArray(tv)) {
-      deepApply(tv, pv);
-    } else {
-      target[k] = JSON.parse(JSON.stringify(pv));
-    }
-  }
-}
+// _deepDiff / computeDiff / deepApply 已 import + re-export from ./diff.js (上方)
 
 export const saveEdit = () => {
   if (!state.editData) return;

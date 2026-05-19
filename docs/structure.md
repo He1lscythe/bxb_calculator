@@ -274,7 +274,7 @@ start.py `_deep_merge` / `_merge_by_id` 与 Vercel api/save.js 同语义（local
 
 **撤回标记如何产生（prev-revise pattern — 4 个 viewer 统一）：**
 
-所有 viewer (souls / bladegraphs / crystal / chara) 的 `saveEdit` 都传 prev 给 computeDiff：
+所有 viewer (souls / bladegraphs / crystals / chara) 的 `saveEdit` 都传 prev 给 [js/diff.js](js/diff.js) 的 `computeDiff`。注意 chara 历史上自带 2 参版 computeDiff、prev 被悄悄丢弃导致 retraction 失效；现已统一 import `js/diff.js` 的 3 参版（[js/edit.js 顶部 re-export](js/edit.js#L13)）。
 
 ```js
 const prevRevise = state.reviseData[id];   // chara 还合并 omoideReviseData
@@ -290,13 +290,23 @@ else            delete state.reviseData[id];
 |---|---|
 | mval == oval, prev 有值 | `null`（撤回标记） |
 | mval == oval, prev 无 | `_NOOP`（不入 diff） |
-| mval / oval 任一 nullish (null/undefined), 另一 defined | 视 nullish 等价：撤回或新设，但**源无字段 + prev 无字段 + 撤回 null** 时不写冗余 null |
-| mval ≠ oval | emit mval |
+| mval / oval 都 nullish, prev 有值 | `null`（撤回 stale revise） |
+| mval / oval 都 nullish, prev 无 | `_NOOP` |
+| mval defined + oval nullish (base 无字段), **prev == mval** | `_NOOP`（防 base 无字段 + revise 加字段时 mval 被反复无脑塞进每次 diff） |
+| mval defined + oval nullish, prev != mval / prev 无 | emit mval clone |
+| mval nullish + oval defined | `null`（用户清掉、撤回 base 值） |
+| mval ≠ oval, 都 defined | emit mval clone |
 
 特殊情况由各 viewer 自管：
 - **crystal**：[js/cr-edit.js setCrystal* handlers](js/cr-edit.js#L132) 在 UI 用户清字段 (level_max / weight_step / scope 0/1 时的 element/type / 等) 时显式 `editData.X = null`，diff 看到 nullish vs defined → emit null
 - **chara**：dual-revise 文件，prev 是 `Object.assign({}, charRevise, omoideRevise)`，diff 后按 OMOIDE_KEYS 拆回两个 revise
 - **chara omoide_template override**（非 retraction）：[js/edit.js:194](js/edit.js#L194) `if (hasOmoide && omoideDiff.omoide_template != null) omoideDiff.omoide = null` —— template 选中时 omoide 数组冗余，强制清
+
+**已知陷阱**：base 无字段 + revise 新增字段（如 chara base 无 `bd_skill`、用户手动给某 chara revise 加 `bd_skill`）：
+- `originalData[id].bd_skill === undefined`、`editData.bd_skill` 是 object → `_deepDiff` 走 leaf 分支 (oNullish + mval defined)
+- 若没有 prev-aware 判定，每次 saveEdit 都会把整个 bd_skill 无脑 clone 进 charDiff，导致用户撤回其他字段时 charDiff 缺少撤回标记 → server `_deep_merge` 保留 stale 字段
+- prev-aware 修复（上面表格第 5 行）：prev 跟 mval 等同时 emit `_NOOP`，让用户撤回别字段的 null 标记能正常进 charDiff
+- 测试覆盖：[tests/test_diff.cjs](tests/test_diff.cjs) "base 无字段 + revise 新增字段" 场景
 
 **saveRevise 后 refresh**：submit 成功后用**无 prev** 的 computeDiff 重算 state.reviseData，去除 null 撤回标记，防止下次 saveEdit 拿到 stale prev 重复 emit。例 [js/soul-edit.js:147](js/soul-edit.js#L147)。
 
@@ -309,6 +319,64 @@ else            delete state.reviseData[id];
 ## 前端 Save 机制
 
 各数据 Viewer（characters / souls / crystals / bladegraphs）共享统一的 **revise-only** 保存流程。基础 JSON（characters.json 等）只有爬虫能写，UI 只修改 revise。
+
+### saveEdit / saveRevise 完整 pipeline
+
+四个 viewer 编辑器（[edit.js](js/edit.js) chara / [cr-edit.js](js/cr-edit.js) / [soul-edit.js](js/soul-edit.js) / [bg-edit.js](js/bg-edit.js)）走同一套 flow：
+
+```
+1. 加载 (页面 init)
+   fetch base → state.allXxx[]
+   fetch extra → 并入 state.allXxx[]（concat、不 mutate base）
+   state.originalData[id] = JSON.parse(JSON.stringify(allXxx[id]))  ← snapshot 在 revise 合并前
+   fetch revise → state.reviseData[id] = entry; deepApply(allXxx[idx], entry)
+   (chara 额外：fetch omoide_revise → state.omoideReviseData + 二次 deepApply)
+
+2. enterEditMode(id)
+   state.editData = JSON.parse(JSON.stringify(state.allXxx[idx]))   ← 含 revise 合并结果
+   渲染编辑 UI
+
+3. 用户改字段
+   通过 set*(...) 或 setPath(state.editData, path, val) 直接写 editData
+   特殊：用户清字段 (level_max 输入空、scope→0/1 后的 element 等) 显式置 null、
+        让 _deepDiff 看到 nullish vs defined → emit null 撤回标记
+
+4. saveEdit() [in-session only — 不发网络]
+   sessionChanged = JSON.stringify(editData) !== JSON.stringify(allXxx[idx])
+   if (sessionChanged) {
+     allXxx[idx] = editData                                ← live state 推进
+     prev = state.reviseData[id]  // chara: merge with omoideReviseData
+     newDiff = computeDiff(originalData[id], editData, prev)  ← 3 参版 (js/diff.js)
+     if (any meaningful key in newDiff) state.reviseData[id] = newDiff
+     else                                delete state.reviseData[id]
+     state.sessionReviseIds.add(id)
+   }
+   关 editData、更新右上「未保存」徽章
+
+5. saveRevise()  [user 点「保存」按钮 — 发网络]
+   ids = Array.from(sessionReviseIds)
+   POST {
+     session_ids: ids,
+     <bucket>_revise: pickPatches(reviseData, ids)   // 只送有 patch 的 id
+   }
+   → 本地 (127.0.0.1 / LAN IP) 走 start.py /save
+   → 否则 走 Vercel /api/save (开 PR 到 data-staging)
+
+6. server _merge_by_id(existing, patches, session_ids)
+   - id in session_set + in patch_map  → _deep_merge(existing entry, patch)
+   - id in session_set + 不在 patch    → 整条删除（用户改回全部 base 值的语义）
+   - id 不在 session_set                → existing 保留 (并发安全)
+   - _deep_merge: source[k] === null → result.pop(k);
+                  source[k] dict → recurse;  其他 → 覆盖
+   - 落盘前 prune 空 dict / 只剩 {id,name} 的 entry
+
+7. saveRevise 回调
+   submit 成功 → 用**无 prev** 的 computeDiff 重算 state.reviseData[id] = newDiff'
+   (清掉 null 撤回标记、防止下次 saveEdit 拿 stale prev 重复 emit null)
+   sessionReviseIds.clear()
+```
+
+注意 step 4 的 sessionChanged 跟 allXxx[idx] 比、不是跟 originalData 比 —— allXxx 已经合并 revise，反映"编辑前的实际状态"，否则会误判用户什么都没改时也 sessionChanged。
 
 ### 稀疏 index diff 格式
 

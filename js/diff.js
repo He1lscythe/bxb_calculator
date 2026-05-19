@@ -55,7 +55,10 @@ export const _deepDiff = (oval, mval, prev) => {
   // 叶子或类型不匹配。null / undefined 视为同 "无值"（nullish），统一处理：
   //  - 两边都 nullish → 比"无值无变化"，prev 有值才 emit null 撤回 stale revise
   //  - mval nullish + oval defined → 用户清除字段 → emit null 撤回 base 值
-  //  - mval defined + oval nullish → 用户新设字段 → emit mval（不能 JSON.parse undefined）
+  //  - mval defined + oval nullish → 用户新设字段 → emit mval（不能 JSON.parse undefined）；
+  //    但若 prev 已记录相同 mval（server 端 revise.json 已有）→ _NOOP 避免重复 emit。
+  //    （未加判定的话、base 无字段 + revise 加字段 + 用户撤回别字段时会把整个新字段无脑塞进
+  //    每次 diff、导致 server 端永远收不到撤回 patch — chara bd_skill 撤回 bug 根因）
   //  - 两边都 defined → 比较具体值
   const mNullish = mval === null || mval === undefined;
   const oNullish = oval === null || oval === undefined;
@@ -63,7 +66,12 @@ export const _deepDiff = (oval, mval, prev) => {
     return prev !== undefined && prev !== null ? null : _NOOP;
   }
   if (mNullish) return null;
-  if (oNullish) return JSON.parse(JSON.stringify(mval));
+  if (oNullish) {
+    if (prev !== undefined && prev !== null && JSON.stringify(prev) === JSON.stringify(mval)) {
+      return _NOOP;
+    }
+    return JSON.parse(JSON.stringify(mval));
+  }
   if (JSON.stringify(mval) === JSON.stringify(oval)) {
     return prev !== undefined ? null : _NOOP;
   }
