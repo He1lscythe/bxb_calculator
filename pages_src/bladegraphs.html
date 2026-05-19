@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!state.originalData[c.id]) state.originalData[c.id] = JSON.parse(JSON.stringify(c));
       });
       applyFilters();
-      hideLoading();
+      // hideLoading 推迟到 revise deepApply 完之后、避免 base→revise 闪烁
       return fetch('../data/bladegraphs_revise.json');
     })
     .then(r => r.ok ? r.json() : [])
@@ -122,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // 防止 server pop null 后 element 仍残留在 base 端造成不一致
       enforceScopeConstraints(state.allBG);
       if (arr.length) applyFilters();
+      hideLoading();
       // bladegraphs_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
       return fetch('../data/bladegraphs_check.json');
     })

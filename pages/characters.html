@@ -248,7 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!state.originalData[c.id]) state.originalData[c.id] = JSON.parse(JSON.stringify(c));
       });
       applyFilters();
-      hideLoading();
+      // hideLoading 推迟到 revise + omoide_revise + templates 都 deepApply 完之后
+      // 避免用户先看 base 数据、再被 revise 覆盖闪烁
       return fetch('../data/characters_revise.json');
     })
     .then(r => r.ok ? r.json() : [])
@@ -278,6 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
       resolveOmoideTemplates(state.allChars,                state.omoideTemplates);
       resolveOmoideTemplates(Object.values(state.originalData), state.omoideTemplates);
       if (omRev.length || tmpls.length) applyFilters();
+      hideLoading();
       // characters_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
       return fetch('../data/characters_check.json');
     })
@@ -289,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         applyFilters();
       }
     })
-    .catch(() => {});
+    .catch(() => { hideLoading(); });
 });
 
 // 「絞り込み」展開中の user-initiated scroll でのみ collapse — touchmove (mobile) / wheel (desktop)。
