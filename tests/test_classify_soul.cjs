@@ -5,7 +5,8 @@
 const path = require('path');
 const { spawnSync } = require('child_process');
 
-let pass = 0, fail = 0;
+let pass = 0,
+  fail = 0;
 const eqDeep = (label, actual, expected) => {
   const ok = JSON.stringify(actual) === JSON.stringify(expected);
   if (ok) pass++;
@@ -42,38 +43,44 @@ print(json.dumps(out, ensure_ascii=False))
 // 1 回の python 起動で全 case を回す（spawnSync を 1 回に抑える）
 const cases = [
   // ── HP cost-side / veto / condition guard ──
-  { id: 'hp-gisei-no-cond',         text: '最大HPを犠牲に同装備セットの他魔剣攻撃力45%UP' },
-  { id: 'hp-daisho-no-cond',        text: '最大HPを代償に、HPを消耗するほど攻撃力が超UP' },
-  { id: 'hp-shouhi-activation',     text: '拳闘装備で自分の攻撃時にHPを消費してダメージ増' },
-  { id: 'hp-gisei-haisui',          text: '最大HPを犠牲に、残HPが多いほどモーション速度が超UP' },
-  { id: 'hp-daisho-haisui-konshin', text: '最大HPを代償に、残HP多いほど攻撃力が超絶UP(最大150%UP)' },
+  { id: 'hp-gisei-no-cond', text: '最大HPを犠牲に同装備セットの他魔剣攻撃力45%UP' },
+  { id: 'hp-daisho-no-cond', text: '最大HPを代償に、HPを消耗するほど攻撃力が超UP' },
+  { id: 'hp-shouhi-activation', text: '拳闘装備で自分の攻撃時にHPを消費してダメージ増' },
+  { id: 'hp-gisei-haisui', text: '最大HPを犠牲に、残HPが多いほどモーション速度が超UP' },
+  {
+    id: 'hp-daisho-haisui-konshin',
+    text: '最大HPを代償に、残HP多いほど攻撃力が超絶UP(最大150%UP)',
+  },
   { id: 'hp-daisho-haisui-konshin2', text: '最大HPを代償に、自身の損傷率が低いほど攻撃力が超UP' },
-  { id: 'hp-daisho-konshin',        text: '最大HPを代償に、残HPが少ないほど攻撃力が超UP(最大150%UP)' },
+  { id: 'hp-daisho-konshin', text: '最大HPを代償に、残HPが少ないほど攻撃力が超UP(最大150%UP)' },
 
   // ── 非 HP cost-side（防御力 / ブレイク力 / B.D.攻撃力 等）──
-  { id: 'def-cost-haisui',  text: '防御力を代償に、残HPが多いほど攻撃力が超UP' },
-  { id: 'bk-cost-no-cond',  text: 'ブレイク力を代償に、さらに攻撃力がUP' },
-  { id: 'mei-cost-pct',     text: '命中率40%DOWNを代償に、破損時攻撃力80%UP' },
-  { id: 'bd-cost-pct',      text: 'B.D.攻撃力25%DOWNを代償に、ダメージ上限6.66億UPし、残HPが多いほど攻撃力UP(最大50%)' },
+  { id: 'def-cost-haisui', text: '防御力を代償に、残HPが多いほど攻撃力が超UP' },
+  { id: 'bk-cost-no-cond', text: 'ブレイク力を代償に、さらに攻撃力がUP' },
+  { id: 'mei-cost-pct', text: '命中率40%DOWNを代償に、破損時攻撃力80%UP' },
+  {
+    id: 'bd-cost-pct',
+    text: 'B.D.攻撃力25%DOWNを代償に、ダメージ上限6.66億UPし、残HPが多いほど攻撃力UP(最大50%)',
+  },
 
   // ── 並列 buff merge pass：同 (bairitu, ct, scope, cond, element, type) は 1 entry に合体 ──
-  { id: 'merge-3stats',     text: '大鎌装備で攻撃力とブレイク力とスピード77%UP' },
-  { id: 'merge-2stats',     text: '攻撃力とサファイア獲得量45%UP' },
+  { id: 'merge-3stats', text: '大鎌装備で攻撃力とブレイク力とスピード77%UP' },
+  { id: 'merge-2stats', text: '攻撃力とサファイア獲得量45%UP' },
 
   // ── cost-split + condition：cost_bunruis を Step 2 で union しないと cost-side 漏れる ──
-  { id: 'no-split-haisui',  text: '残HPが多いほど攻撃力が超UP' },                           // cost-split 無し → bunrui=[1] のみ
-  { id: 'no-split-attack',  text: '攻撃力50%UP' },                                           // 単純 buff
+  { id: 'no-split-haisui', text: '残HPが多いほど攻撃力が超UP' }, // cost-split 無し → bunrui=[1] のみ
+  { id: 'no-split-attack', text: '攻撃力50%UP' }, // 単純 buff
 
   // ── HP 消費 (activation cost) + bunrui=10 抑制 (cost-split 無し) ──
   { id: 'hp-shouhi-attack', text: '攻撃時のHP消費を代償に、攻撃力30%UP' },
 
   // ── 背水 (condition=2) variant：「HPが減るほど」「残HPが減るほど」 ──
-  { id: 'haisui-heru',         text: '長剣か太刀装備でHPが減るほど攻撃力UP' },           // id=44 シンプル背水
-  { id: 'haisui-zan-heru',     text: '残HPが減るほど攻撃力UP' },                          // 残 prefix variant
-  { id: 'haisui-zanri-heru',   text: '残りHPが減るほど攻撃力UP' },                        // 残り prefix
-  { id: 'haisui-sukunai',      text: '残HPが少ないほど攻撃力UP' },                        // 既存 background
-  { id: 'haisui-shoumou',      text: 'HPを消耗するほど攻撃力が超UP' },                    // 既存 background
-  { id: 'konshin-ooi',         text: '残HPが多いほど攻撃力UP' },                          // 既存 浑身（regression）
+  { id: 'haisui-heru', text: '長剣か太刀装備でHPが減るほど攻撃力UP' }, // id=44 シンプル背水
+  { id: 'haisui-zan-heru', text: '残HPが減るほど攻撃力UP' }, // 残 prefix variant
+  { id: 'haisui-zanri-heru', text: '残りHPが減るほど攻撃力UP' }, // 残り prefix
+  { id: 'haisui-sukunai', text: '残HPが少ないほど攻撃力UP' }, // 既存 background
+  { id: 'haisui-shoumou', text: 'HPを消耗するほど攻撃力が超UP' }, // 既存 background
+  { id: 'konshin-ooi', text: '残HPが多いほど攻撃力UP' }, // 既存 浑身（regression）
   // ↑「HP消費を代償に」 — cost_text の HP 消費キーワード で classify_effect が 10 を出さない。
   //   activation-cost なので bunrui=10 出ないのが正解。
 ];
@@ -90,13 +97,18 @@ if (r.status !== 0) {
   console.error(r.stderr || r.stdout);
   process.exit(1);
 }
-const lines = (r.stdout || '').trim().split('\n').filter(l => l.trim().startsWith('['));
+const lines = (r.stdout || '')
+  .trim()
+  .split('\n')
+  .filter((l) => l.trim().startsWith('['));
 const results = JSON.parse(lines[lines.length - 1]);
 const byId = {};
-cases.forEach((c, i) => { byId[c.id] = results[i]; });
+cases.forEach((c, i) => {
+  byId[c.id] = results[i];
+});
 
-const bunruiSetOf = (effs) => new Set(effs.flatMap(e => e.bunrui || []));
-const findEntry  = (effs, b) => effs.find(e => (e.bunrui || []).includes(b));
+const bunruiSetOf = (effs) => new Set(effs.flatMap((e) => e.bunrui || []));
+const findEntry = (effs, b) => effs.find((e) => (e.bunrui || []).includes(b));
 
 // ===== HP cost-side / veto =====
 console.log('--- HP cost-side / veto ---');
@@ -129,8 +141,10 @@ console.log('--- HP cost-side / veto ---');
 //    cost_bunruis の Step-2 union が必須（id=370 プロメテウス case）
 {
   const effs = byId['hp-gisei-haisui'];
-  truthy('HP+犠牲 + 残HP多い (condition=1): bunrui=[10] cost-side preserved (Step-2 union 効く)',
-         bunruiSetOf(effs).has(10));
+  truthy(
+    'HP+犠牲 + 残HP多い (condition=1): bunrui=[10] cost-side preserved (Step-2 union 効く)',
+    bunruiSetOf(effs).has(10),
+  );
   const e10 = findEntry(effs, 10);
   truthy('HP+犠牲 + 残HP多い: bunrui=[10] cost-side condition=0', e10 && e10.condition === 0);
   const e5 = findEntry(effs, 5);
@@ -184,16 +198,20 @@ console.log('\n--- 非 HP cost-side ---');
 {
   const effs = byId['mei-cost-pct'];
   const e1 = findEntry(effs, 1);
-  truthy('命中率DOWN cost + 攻撃力80%UP benefit: bunrui=[1] bairitu=1.8',
-         e1 && Math.abs(e1.bairitu - 1.8) < 1e-9);
+  truthy(
+    '命中率DOWN cost + 攻撃力80%UP benefit: bunrui=[1] bairitu=1.8',
+    e1 && Math.abs(e1.bairitu - 1.8) < 1e-9,
+  );
 }
 
 // 11. B.D.攻撃力25%DOWN cost — bunrui=[3] bairitu=0.75
 {
   const effs = byId['bd-cost-pct'];
   const e3 = findEntry(effs, 3);
-  truthy('B.D.攻撃力25%DOWN cost: bunrui=[3] bairitu=0.75',
-         e3 && Math.abs(e3.bairitu - 0.75) < 1e-9);
+  truthy(
+    'B.D.攻撃力25%DOWN cost: bunrui=[3] bairitu=0.75',
+    e3 && Math.abs(e3.bairitu - 0.75) < 1e-9,
+  );
 }
 
 // ===== merge pass =====
@@ -223,7 +241,10 @@ console.log('\n--- no cost-split path ---');
 // 14. 「残HPが多いほど攻撃力が超UP」→ cost-split 無し、condition=1、bunrui=[1] のみ（HP cost-side 無し）
 {
   const effs = byId['no-split-haisui'];
-  truthy('no-split haisui: bunrui=[1] のみ', bunruiSetOf(effs).has(1) && !bunruiSetOf(effs).has(10));
+  truthy(
+    'no-split haisui: bunrui=[1] のみ',
+    bunruiSetOf(effs).has(1) && !bunruiSetOf(effs).has(10),
+  );
   const e1 = findEntry(effs, 1);
   truthy('no-split haisui: cond=1 (浑身)', e1 && e1.condition === 1);
 }
@@ -231,17 +252,22 @@ console.log('\n--- no cost-split path ---');
 // 15. 「攻撃力50%UP」→ シンプル
 {
   const effs = byId['no-split-attack'];
-  truthy('simple buff: bunrui=[1] cond=0 bairitu=1.5',
-         bunruiSetOf(effs).has(1) && findEntry(effs, 1).condition === 0
-         && Math.abs(findEntry(effs, 1).bairitu - 1.5) < 1e-9);
+  truthy(
+    'simple buff: bunrui=[1] cond=0 bairitu=1.5',
+    bunruiSetOf(effs).has(1) &&
+      findEntry(effs, 1).condition === 0 &&
+      Math.abs(findEntry(effs, 1).bairitu - 1.5) < 1e-9,
+  );
 }
 
 // 16. 「攻撃時のHP消費を代償に、攻撃力30%UP」— HP消費 = activation cost, cost_text "攻撃時のHP消費を" の
 //    classify_effect は HP 消費 negative regex で bunrui=10 出さない。activation cost is by design 排除。
 {
   const effs = byId['hp-shouhi-attack'];
-  truthy('HP消費 activation: bunrui=[10] not present (activation cost by design)',
-         !bunruiSetOf(effs).has(10));
+  truthy(
+    'HP消費 activation: bunrui=[10] not present (activation cost by design)',
+    !bunruiSetOf(effs).has(10),
+  );
   const e1 = findEntry(effs, 1);
   truthy('HP消費 activation: bunrui=[1] bairitu=1.3', e1 && Math.abs(e1.bairitu - 1.3) < 1e-9);
 }

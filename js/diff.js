@@ -16,7 +16,7 @@ export const setPath = (obj, pathStr, value) => {
 
 // _NOOP sentinel：表示子节点完全没变化（既无 modified 差异、也无 prev 撤回）
 const _NOOP = Symbol('diff-noop');
-const _isObj = x => x !== null && typeof x === 'object' && !Array.isArray(x);
+const _isObj = (x) => x !== null && typeof x === 'object' && !Array.isArray(x);
 
 // 第三个参数 prev 为可选：上次提交到 staging 的 revise diff（用于侦测"撤回"）。
 // 若 prev[k] 存在但 modified[k] 已退回 base，emit null 标记该字段需在 staging 删除。
@@ -31,8 +31,13 @@ export const _deepDiff = (oval, mval, prev) => {
     }
     return Object.keys(sub).length === 0 ? _NOOP : sub;
   }
-  if (Array.isArray(oval) && Array.isArray(mval) && oval.length === mval.length &&
-      mval.length > 0 && mval.every(x => x && typeof x === 'object' && !Array.isArray(x))) {
+  if (
+    Array.isArray(oval) &&
+    Array.isArray(mval) &&
+    oval.length === mval.length &&
+    mval.length > 0 &&
+    mval.every((x) => x && typeof x === 'object' && !Array.isArray(x))
+  ) {
     const sparse = {};
     // 需要处理的 index = (mval 与 oval 不同的) ∪ (prev 涉及的)。
     // 仅看 mval !== oval 会漏掉 "prev 有值但用户已 revert 到 oval" 的 index。
@@ -41,7 +46,7 @@ export const _deepDiff = (oval, mval, prev) => {
       if (JSON.stringify(m) !== JSON.stringify(oval[i])) indices.add(i);
     });
     if (prev && typeof prev === 'object') {
-      Object.keys(prev).forEach(k => {
+      Object.keys(prev).forEach((k) => {
         const i = +k;
         if (Number.isInteger(i) && i >= 0 && i < mval.length) indices.add(i);
       });
@@ -92,22 +97,40 @@ export const computeDiff = (original, modified, prevRevise) => {
 export const deepApply = (target, patch) => {
   for (const k in patch) {
     if (k === 'id') continue;
-    const pv = patch[k], tv = target[k];
-    if (Array.isArray(tv) && pv && typeof pv === 'object' && !Array.isArray(pv) &&
-        Object.keys(pv).every(kk => /^\d+$/.test(kk))) {
+    const pv = patch[k],
+      tv = target[k];
+    if (
+      Array.isArray(tv) &&
+      pv &&
+      typeof pv === 'object' &&
+      !Array.isArray(pv) &&
+      Object.keys(pv).every((kk) => /^\d+$/.test(kk))
+    ) {
       for (const idx in pv) {
         const i = +idx;
         if (i >= tv.length) continue;
         const pvi = pv[idx];
-        if (pvi && typeof pvi === 'object' && !Array.isArray(pvi) &&
-            tv[i] && typeof tv[i] === 'object' && !Array.isArray(tv[i])) {
+        if (
+          pvi &&
+          typeof pvi === 'object' &&
+          !Array.isArray(pvi) &&
+          tv[i] &&
+          typeof tv[i] === 'object' &&
+          !Array.isArray(tv[i])
+        ) {
           deepApply(tv[i], pvi);
         } else {
           tv[i] = JSON.parse(JSON.stringify(pvi));
         }
       }
-    } else if (pv !== null && typeof pv === 'object' && !Array.isArray(pv) &&
-               tv !== null && typeof tv === 'object' && !Array.isArray(tv)) {
+    } else if (
+      pv !== null &&
+      typeof pv === 'object' &&
+      !Array.isArray(pv) &&
+      tv !== null &&
+      typeof tv === 'object' &&
+      !Array.isArray(tv)
+    ) {
       deepApply(tv, pv);
     } else {
       target[k] = JSON.parse(JSON.stringify(pv));

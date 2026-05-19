@@ -3,8 +3,14 @@
 // 詳細 modal とエディタ section を出す。effects schema は chara skill / soul と統一。
 
 import { state } from './state.js';
-import { ELEMENT, WEAPON, BUNRUI_SHORT, CONDITION, SCOPE,
-         renderEditSelect } from '../shared/constants.js';
+import {
+  ELEMENT,
+  WEAPON,
+  BUNRUI_SHORT,
+  CONDITION,
+  SCOPE,
+  renderEditSelect,
+} from '../shared/constants.js';
 import { escHtml, fmtBairitu, min } from './utils.js';
 // 注: edit.js の setPath / parseBairituVal は inline onchange handler から
 // window.setPath / window.parseBairituVal で参照する（characters.html で expose 済み）。
@@ -26,15 +32,24 @@ export const closeMasouModal = () => {
 };
 
 const _renderEffectTags = (e) => {
-  const bnr = (e.bunrui || []).map(b => `<span class="bunrui-tag">${BUNRUI_SHORT[b] || b}</span>`).join('');
-  let sc  = '';
+  const bnr = (e.bunrui || [])
+    .map((b) => `<span class="bunrui-tag">${BUNRUI_SHORT[b] || b}</span>`)
+    .join('');
+  let sc = '';
   if (e.scope === 0) sc = '<span class="scope-tag scope-self">自</span>';
   else if (e.scope === 1) sc = '<span class="scope-tag scope-all">全</span>';
   else if (e.scope === 2) {
-    const lim = e.element != null ? (ELEMENT[e.element] || '限') : (e.weapon != null ? (WEAPON[e.weapon] || '限') : '限');
+    const lim =
+      e.element != null
+        ? ELEMENT[e.element] || '限'
+        : e.weapon != null
+          ? WEAPON[e.weapon] || '限'
+          : '限';
     sc = `<span class="scope-tag scope-lim">${lim}</span>`;
   }
-  const cond = e.condition ? `<span class="cond-tag cond-${e.condition}">${CONDITION[e.condition] || ''}</span>` : '';
+  const cond = e.condition
+    ? `<span class="cond-tag cond-${e.condition}">${CONDITION[e.condition] || ''}</span>`
+    : '';
   return bnr + sc + cond;
 };
 
@@ -48,7 +63,7 @@ const _renderMasouCard = (m) => min`
       </div>
       <div class="skill-effect-row">
         <span class="skill-effect">${escHtml(m.effect_text || '')}</span>
-        <span class="skill-bairitu">${fmtBairitu({effects: m.effects || []})}</span>
+        <span class="skill-bairitu">${fmtBairitu({ effects: m.effects || [] })}</span>
       </div>
       <div style="font-size:11px;color:var(--text2);margin-top:6px">
         入手: ${escHtml(m.acquisition || '—')}
@@ -65,7 +80,7 @@ export const renderMasouEditSection = (chara) => {
   const list = state.masouByChara[chara.id] || [];
   if (!list.length) return '';
   const overrides = (state.editData && state.editData.masou_overrides) || {};
-  const cards = list.map(m => _renderMasouEditCard(m, overrides[m.id])).join('');
+  const cards = list.map((m) => _renderMasouEditCard(m, overrides[m.id])).join('');
   return min`
     <div class="section" style="margin-top:16px">
       <div class="section-title">魔装 (${list.length})</div>
@@ -84,7 +99,7 @@ const _renderMasouEditCard = (m, override) => {
   if (Array.isArray(ovEffs)) {
     effs = ovEffs;
   } else if (ovEffs && typeof ovEffs === 'object') {
-    effs = baseEffs.map(e => Object.assign({}, e));
+    effs = baseEffs.map((e) => Object.assign({}, e));
     Object.entries(ovEffs).forEach(([k, patch]) => {
       const i = +k;
       if (!isNaN(i) && i >= 0 && i < effs.length && patch && typeof patch === 'object') {
@@ -111,9 +126,10 @@ const _renderMasouEffectEdit = (masouId, ei, e) => {
   const ep = `masou_overrides.${masouId}.effects.${ei}`;
   const bunrui = e.bunrui || [];
   const isHitOnly = bunrui.length === 1 && bunrui[0] === 7;
-  const BUNRUI_ALL = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
-  const btogs = BUNRUI_ALL.map(b =>
-    `<button class="btog${bunrui.includes(b)?' on':''}" onclick="toggleMasouBunrui(${masouId},${ei},${b},this)">${BUNRUI_SHORT[b] || b}</button>`
+  const BUNRUI_ALL = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+  const btogs = BUNRUI_ALL.map(
+    (b) =>
+      `<button class="btog${bunrui.includes(b) ? ' on' : ''}" onclick="toggleMasouBunrui(${masouId},${ei},${b},this)">${BUNRUI_SHORT[b] || b}</button>`,
   ).join('');
   return min`
     <div class="field-label">分類</div>
@@ -121,17 +137,20 @@ const _renderMasouEffectEdit = (masouId, ei, e) => {
     <div class="skill-edit-meta">
       <div>
         <div class="field-label">scope</div>
-        ${renderEditSelect({0:'自身',1:'全体',2:'限定'}, e.scope, `setPath(state.editData,'${ep}.scope',+this.value)`)}
+        ${renderEditSelect({ 0: '自身', 1: '全体', 2: '限定' }, e.scope, `setPath(state.editData,'${ep}.scope',+this.value)`)}
       </div>
       <div>
         <div class="field-label">condition</div>
         ${renderEditSelect(CONDITION, e.condition, `setPath(state.editData,'${ep}.condition',+this.value)`)}
       </div>
-      ${isHitOnly ? '' : min`
+      ${
+        isHitOnly
+          ? ''
+          : min`
         <div>
           <div class="field-label">倍率</div>
           <div style="display:flex;align-items:center;gap:4px">
-            ${renderEditSelect({0:'×',1:'+',2:'+(終)',3:'×(終)'}, e.calc_type, `setPath(state.editData,'${ep}.calc_type',+this.value)`)}
+            ${renderEditSelect({ 0: '×', 1: '+', 2: '+(終)', 3: '×(終)' }, e.calc_type, `setPath(state.editData,'${ep}.calc_type',+this.value)`)}
             <input type="text" class="edit-num-sm" value="${e.bairitu ?? ''}"
                    oninput="setPath(state.editData,'${ep}.bairitu',parseBairituVal(this.value))">
           </div>
@@ -140,26 +159,28 @@ const _renderMasouEffectEdit = (masouId, ei, e) => {
           <div class="field-label">熟度補正</div>
           <input type="text" class="edit-num-sm" value="${e.bairitu_scaling ?? 0}"
                  oninput="setPath(state.editData,'${ep}.bairitu_scaling',parseBairituVal(this.value))">
-        </div>`}
+        </div>`
+      }
     </div>`;
 };
 
 // btog handler — mirrors edit.js toggleBunrui pattern with hit-mutex.
 export const toggleMasouBunrui = (masouId, ei, b, btn) => {
-  const overrides = state.editData.masou_overrides = state.editData.masou_overrides || {};
+  const overrides = (state.editData.masou_overrides = state.editData.masou_overrides || {});
   const list = state.masouByChara[state.editData.id] || [];
-  const m = list.find(x => x.id === masouId);
+  const m = list.find((x) => x.id === masouId);
   if (!m) return;
-  const ov  = overrides[masouId] = overrides[masouId] || JSON.parse(JSON.stringify({effects: m.effects || []}));
-  const eff = ov.effects[ei] = ov.effects[ei] || {};
+  const ov = (overrides[masouId] =
+    overrides[masouId] || JSON.parse(JSON.stringify({ effects: m.effects || [] })));
+  const eff = (ov.effects[ei] = ov.effects[ei] || {});
   let bunrui = (eff.bunrui || []).slice();
   // hit-mutex hard rule: bunrui=[7] standalone
   const has = bunrui.includes(b);
   if (b === 7) {
     bunrui = has ? [] : [7];
   } else {
-    bunrui = bunrui.filter(x => x !== 7);
-    if (has) bunrui = bunrui.filter(x => x !== b);
+    bunrui = bunrui.filter((x) => x !== 7);
+    if (has) bunrui = bunrui.filter((x) => x !== b);
     else bunrui.push(b);
   }
   bunrui.sort((a, b) => a - b);
