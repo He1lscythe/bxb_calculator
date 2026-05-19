@@ -166,16 +166,19 @@ console.log('\n--- crystal lv / 颗粒度 schema (顶层 level_max / weight_step
   const checkPos = (arr, fname) => {
     let bad = 0;
     for (const c of arr || []) {
-      for (const k of ['level_max', 'weight_step', 'purity_step']) {
+      // 顶层 上限/下限/颗粒度：若存在必须 > 0（0/null 表「不可調」用字段缺省、不允许残留）
+      for (const k of ['level_max', 'weight_step', 'purity_step', 'weight_min']) {
         if (k in c && !(_parsePos(c[k]) > 0)) bad++;
       }
+      // effect 内 delta：允许 0（新语义：端点満衰减、cfg=端点 时 factor=0、effect 失效）；
+      // 不允许负、不允许 NaN。null/missing 视为「该维不衰减」、不会出现在落盘 revise.json。
       for (const e of _effectsValues(c)) {
-        for (const k of ['weight_delta', 'purity_delta']) {
-          if (k in e && !(_parsePos(e[k]) > 0)) bad++;
+        for (const k of ['weight_delta', 'purity_delta', 'lv_delta']) {
+          if (k in e && !(_parsePos(e[k]) >= 0)) bad++;
         }
       }
     }
-    truthy(`${fname}: crystal lv/颗粒度/delta 字段若存在必须 > 0 (违反 ${bad})`, bad === 0);
+    truthy(`${fname}: crystal 顶层 > 0 / effect delta >= 0 (违反 ${bad})`, bad === 0);
   };
   checkPos(data['crystals.json'],         'crystals.json');
   checkPos(data['crystals_revise.json'],  'crystals_revise.json');
