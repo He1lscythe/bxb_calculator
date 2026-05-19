@@ -11,6 +11,7 @@
 import argparse, copy, requests, json, re, os, html as htmlmod
 from bs4 import BeautifulSoup
 from classify_common import classify_hit_fields, classify_effect, _detect_condition as detect_condition, ADD_BUNRUI
+from crawl_validate import validate_completeness
 
 # crystal は ADD_BUNRUI（共通の加算分類）+ crystal 固有の add 種類を union。
 #   9 (回避状態異常)、11 (HP回復)、16 (その他) は crystal 文案で add 語義になる。
@@ -313,6 +314,14 @@ def main():
     with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(crystals, f, ensure_ascii=False, indent=2)
     print(f"Saved {len(crystals)} crystals to {OUTPUT_FILE}")
+
+    # Schema 自检（合并 base + extra + revise 后看缺什么字段）
+    validate_completeness(
+        crystals, DATA_DIR, viewer_name='crystal',
+        required=['id', 'name', 'rarity', 'effects'],
+        expected_optional=[],
+        extra_file='crystals_extra.json', revise_file='crystals_revise.json',
+    )
 
 
 if __name__ == '__main__':

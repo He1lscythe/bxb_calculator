@@ -19,6 +19,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from classify_common import classify_effect, _V_PCT_UP, _V_PCT_DOWN
+from crawl_validate import validate_completeness
 
 # ============================================================
 #  CONFIG
@@ -430,6 +431,14 @@ def main():
     with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(entries, f, ensure_ascii=False, indent=2)
     print(f"Saved {len(entries)} entries to {OUTPUT_FILE}")
+
+    # Schema 自检（合并 base + extra + revise 后看缺什么字段）
+    validate_completeness(
+        entries, DATA_DIR, viewer_name='bladegraph',
+        required=['id', 'name', 'rarity', 'effects'],
+        expected_optional=[],
+        extra_file='bladegraphs_extra.json', revise_file='bladegraphs_revise.json',
+    )
 
 
 if __name__ == '__main__':

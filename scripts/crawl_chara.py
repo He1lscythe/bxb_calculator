@@ -31,6 +31,7 @@ from classify_common import (
     classify_hit_fields,
     _val_for_bunrui_bd, norm, ADD_BUNRUI,
 )
+from crawl_validate import validate_completeness
 
 # ============================================================
 #  CONFIG
@@ -1584,6 +1585,15 @@ def main():
         save_senzai_table(senzai_table_path, senzai_table)
         print(f"Done! {len(output)} characters saved to {OUTPUT_FILE} ({count} recalculated)")
         print(f"Senzai table: {len(senzai_table)} icons in {SENZAI_TABLE_FILE}")
+
+        # Schema 自检：合并 base + extra + revise 后看每条 entry 缺哪些必需 / 期望字段
+        # user 已经手动补过的字段不再 warn（合并后已存在）
+        validate_completeness(
+            output, out_dir, viewer_name='chara',
+            required=['id', 'sort_id', 'name', 'rarity', 'element', 'weapon', 'states'],
+            expected_optional=['bd_skill', 'omoide', 'tags'],
+            extra_file='characters_extra.json', revise_file='characters_revise.json',
+        )
 
     except KeyboardInterrupt:
         print("\nInterrupted. Saving progress...")
