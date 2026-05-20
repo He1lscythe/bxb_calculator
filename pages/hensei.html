@@ -1498,7 +1498,6 @@
         return bv + factor * s;
       };
 
-
       // ===== ENEMY BAR (敵方/副本/工会信息) =====
       export const renderEnemyBar = () => {
         const eb = document.getElementById('enemy-bar');
@@ -1924,17 +1923,36 @@
       // stats-calc.js computeStats 用 ctx — 数据集 + 队伍状态 + helper / 常量 を 1 つの object に。
       // 函数調用時に fresh build（state mutable のため snapshot）、helper 引用は closure scope 経由。
       const _buildStatsCtx = () => ({
-        allCharas, allCrystals, allSouls, allMasou, allBGs,
-        allGuildTitles, allGuildEmblems,
+        allCharas,
+        allCrystals,
+        allSouls,
+        allMasou,
+        allBGs,
+        allGuildTitles,
+        allGuildEmblems,
         SENZAI_TABLE,
-        team, teamSize, enemy,
-        SLOT_COLORS, COLOR_LABELS,
+        team,
+        teamSize,
+        enemy,
+        SLOT_COLORS,
+        COLOR_LABELS,
         IS_LOCAL_DEV,
-        _STAT_KEYS, _BUNRUI_TO_STAT, _LV2_5_RE,
-        _baseStat, _resolveCharaSkills, _resolveSoulSkills,
-        _crystalEffectiveBairitu, _buffApplies,
-        _conditionFactor, _parseScaling, _parseHit, _parseAff, _scaledBairitu,
-        soulMultiplier, elementMatchupMult, emblemLvMax,
+        _STAT_KEYS,
+        _BUNRUI_TO_STAT,
+        _LV2_5_RE,
+        _baseStat,
+        _resolveCharaSkills,
+        _resolveSoulSkills,
+        _crystalEffectiveBairitu,
+        _buffApplies,
+        _conditionFactor,
+        _parseScaling,
+        _parseHit,
+        _parseAff,
+        _scaledBairitu,
+        soulMultiplier,
+        elementMatchupMult,
+        emblemLvMax,
       });
 
       export const _statsInner = (i, chara) => {
