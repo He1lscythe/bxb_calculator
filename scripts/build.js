@@ -15,11 +15,11 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
-const SRC  = path.join(ROOT, 'pages_src');
-const OUT  = path.join(ROOT, 'pages');
+const SRC = path.join(ROOT, 'pages_src');
+const OUT = path.join(ROOT, 'pages');
 
 const INCLUDE_RE = /\{\{\s*include\s+([^}\s]+)\s*\}\}/g;
-const MAX_DEPTH  = 10;
+const MAX_DEPTH = 10;
 
 const resolveIncludes = (text, stack = []) => {
   if (stack.length > MAX_DEPTH) {
@@ -34,7 +34,9 @@ const resolveIncludes = (text, stack = []) => {
     try {
       content = fs.readFileSync(fragPath, 'utf8');
     } catch (e) {
-      throw new Error(`partial not found: ${fragPath} (referenced from ${stack[stack.length - 1] || 'top'})`);
+      throw new Error(
+        `partial not found: ${fragPath} (referenced from ${stack[stack.length - 1] || 'top'})`,
+      );
     }
     return resolveIncludes(content, stack.concat(name));
   });
@@ -52,11 +54,17 @@ const buildFile = (file) => {
 const buildAll = () => {
   if (!fs.existsSync(OUT)) fs.mkdirSync(OUT, { recursive: true });
   // Partials (filenames starting with `_`) are include-only, not built as pages.
-  const files = fs.readdirSync(SRC).filter(f => f.endsWith('.html') && !f.startsWith('_'));
-  let ok = 0, fail = 0;
+  const files = fs.readdirSync(SRC).filter((f) => f.endsWith('.html') && !f.startsWith('_'));
+  let ok = 0,
+    fail = 0;
   for (const f of files) {
-    try { buildFile(f); ok++; }
-    catch (e) { console.error(`[fail] ${f}: ${e.message}`); fail++; }
+    try {
+      buildFile(f);
+      ok++;
+    } catch (e) {
+      console.error(`[fail] ${f}: ${e.message}`);
+      fail++;
+    }
   }
   const ts = new Date().toLocaleTimeString();
   console.log(`[build ${ts}] ${ok} ok${fail ? `, ${fail} fail` : ''}`);
@@ -70,8 +78,11 @@ if (process.argv.includes('--watch')) {
   const debounce = () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      try { buildAll(); }
-      catch (e) { console.error('[error]', e.message); }
+      try {
+        buildAll();
+      } catch (e) {
+        console.error('[error]', e.message);
+      }
     }, 150);
   };
   fs.watch(SRC, { persistent: true }, debounce);

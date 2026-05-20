@@ -1,6 +1,9 @@
 # ── Python cache ──────────────────────────────────────────
 __pycache__/
 
+# ── Node modules ──────────────────────────────────────────
+node_modules/
+
 # ── Crawl progress (local state) ──────────────────────────
 progress.json
 soul_progress.json
@@ -23,6 +26,9 @@ data/characters_check.json
 data/crystals_check.json
 data/bladegraphs_check.json
 
+# ── crawler schema 自检报告（每次 crawl 重生、不入 git） ──
+data/crawl_warnings_*.json
+
 # ── Docs not for Pages: 只 commit chara_training / structure / senzai_icon_table ──
 docs/checklist.md
 docs/frontend_ui.md
@@ -42,3 +48,8 @@ draft/
 
 # ── Claude local settings ─────────────────────────────────
 .claude/
+
+# ── Playwright artifacts ──────────────────────────────────
+test-results/
+playwright-report/
+playwright/.cache/

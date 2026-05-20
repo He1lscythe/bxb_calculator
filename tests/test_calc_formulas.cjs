@@ -2,13 +2,20 @@
 // _applyEf の bairitu × sourceMult × condition 結合公式
 // 用法: node tests/test_calc_formulas.cjs
 
-let pass = 0, fail = 0;
+let pass = 0,
+  fail = 0;
 const eq = (label, a, b) => {
   const ok = Math.abs(a - b) < 1e-6;
-  if (ok) pass++; else { fail++; console.error(`✗ ${label}: ${a} ≠ ${b}`); }
+  if (ok) pass++;
+  else {
+    fail++;
+    console.error(`✗ ${label}: ${a} ≠ ${b}`);
+  }
 };
 
-console.log('--- BD ゲージ上限 max = floor(((10+Σadd)*(1+Σmul) + ΣfinalAdd)*(1+ΣfinalMul)) - 1 ---');
+console.log(
+  '--- BD ゲージ上限 max = floor(((10+Σadd)*(1+Σmul) + ΣfinalAdd)*(1+ΣfinalMul)) - 1 ---',
+);
 // 合成公式（bunrui=18 4 種 calc_type 累加）：
 //   raw      = ((10 + add) * (1 + mul) + finalAdd) * (1 + finalMul)
 //   bdCapMax = floor(raw) - 1
@@ -19,40 +26,38 @@ const bdCapMaxRaw = (add = 0, mul = 0, finalAdd = 0, finalMul = 0) =>
 const bdCapMax = (...args) => Math.floor(bdCapMaxRaw(...args)) - 1;
 
 // 観測データ検証（実機 ゲーム内表示）
-eq('無加成 → 9 (10 - 1)',                          bdCapMax(0),                  9);
-eq('+2.84 結晶 → 11 (floor(12.84)-1)',             bdCapMax(2.84),              11);
-eq('+3.6 結晶 → 12 (floor(13.6)-1)',               bdCapMax(3.6),               12);
-eq('1個×4魂 (K≈1) → 39 (floor(40)-1)',             bdCapMax(0,    3),           39);  // 1+(4-1)
-eq('2個×4魂 (K≈1) → 69 (floor(70)-1)',             bdCapMax(0,    6),           69);  // 1+2*(4-1)
+eq('無加成 → 9 (10 - 1)', bdCapMax(0), 9);
+eq('+2.84 結晶 → 11 (floor(12.84)-1)', bdCapMax(2.84), 11);
+eq('+3.6 結晶 → 12 (floor(13.6)-1)', bdCapMax(3.6), 12);
+eq('1個×4魂 (K≈1) → 39 (floor(40)-1)', bdCapMax(0, 3), 39); // 1+(4-1)
+eq('2個×4魂 (K≈1) → 69 (floor(70)-1)', bdCapMax(0, 6), 69); // 1+2*(4-1)
 
 // 普通加算のみ
-eq('add=0.05 → 9 (10.05-1)',          bdCapMax(0.05),  9);
-eq('add=0.99 → 9 (10.99-1)',          bdCapMax(0.99),  9);
-eq('add=1 → 10 (11-1)',               bdCapMax(1),    10);
-eq('add=3 → 12 (13-1)',               bdCapMax(3),    12);
-eq('add=15.83 → 24 (25.83-1)',        bdCapMax(15.83),24);
+eq('add=0.05 → 9 (10.05-1)', bdCapMax(0.05), 9);
+eq('add=0.99 → 9 (10.99-1)', bdCapMax(0.99), 9);
+eq('add=1 → 10 (11-1)', bdCapMax(1), 10);
+eq('add=3 → 12 (13-1)', bdCapMax(3), 12);
+eq('add=15.83 → 24 (25.83-1)', bdCapMax(15.83), 24);
 
 // 普通乗算（ct=0）
-eq('mul=0.5 (1.5×) → 14 (15-1)',                  bdCapMax(0,    0.5),         14);
-eq('mul=1 (2×) → 19 (20-1)',                       bdCapMax(0,    1),           19);
-eq('add=2 + mul=0.5 → 17 ((10+2)*1.5-1=17)',       bdCapMax(2,    0.5),         17);
+eq('mul=0.5 (1.5×) → 14 (15-1)', bdCapMax(0, 0.5), 14);
+eq('mul=1 (2×) → 19 (20-1)', bdCapMax(0, 1), 19);
+eq('add=2 + mul=0.5 → 17 ((10+2)*1.5-1=17)', bdCapMax(2, 0.5), 17);
 
 // 最終加算（ct=2）
-eq('finalAdd=2.5 → 11 (12.5-1)',                   bdCapMax(0,    0,   2.5),    11);
-eq('add=2 + mul=0.5 + finalAdd=3 → 20 ((10+2)*1.5+3-1=20)',
-                                                    bdCapMax(2,    0.5, 3),      20);
+eq('finalAdd=2.5 → 11 (12.5-1)', bdCapMax(0, 0, 2.5), 11);
+eq('add=2 + mul=0.5 + finalAdd=3 → 20 ((10+2)*1.5+3-1=20)', bdCapMax(2, 0.5, 3), 20);
 
 // 最終乗算（ct=3）
-eq('finalMul=1 (2×) → 19 (20-1)',                  bdCapMax(0,    0,   0,   1), 19);
-eq('全 4 種：(10+2)*1.5+3=21, *1.5=31.5, floor-1 → 30',
-                                                    bdCapMax(2,    0.5, 3,   0.5), 30);
+eq('finalMul=1 (2×) → 19 (20-1)', bdCapMax(0, 0, 0, 1), 19);
+eq('全 4 種：(10+2)*1.5+3=21, *1.5=31.5, floor-1 → 30', bdCapMax(2, 0.5, 3, 0.5), 30);
 
 console.log('\n--- 主武器なし倍率 = 1/21 (前: 0.05) ---');
-const mwMult = (mainWeapon) => (mainWeapon === false) ? (1 / 21) : 1.0;
+const mwMult = (mainWeapon) => (mainWeapon === false ? 1 / 21 : 1.0);
 eq('main_weapon=true → 1', mwMult(true), 1);
 eq('main_weapon=undefined → 1', mwMult(undefined), 1);
-eq('main_weapon=false → 1/21', mwMult(false), 1/21);
-eq('1/21 ≈ 0.04762', mwMult(false), 1/21);
+eq('main_weapon=false → 1/21', mwMult(false), 1 / 21);
+eq('1/21 ≈ 0.04762', mwMult(false), 1 / 21);
 
 console.log('\n--- BDゲージ攻撃力倍率 = 1 + floor(bd_cap/2)*0.25 ---');
 const bdCapMult = (bdCap) => 1 + Math.floor(bdCap / 2) * 0.25;
@@ -77,7 +82,7 @@ eq('aff 1/1 (default): 防 不变', r.def, 800);
 console.log('\n--- 完整 stat pipeline 简化模拟 ---');
 // base * 結婚 * 燃心 * lp * 主武器 * affinity → final
 function pipeline(base, marriage, moeshin, lp, mainWeapon, atkAff) {
-  const mr = [1.00, 1.03, 1.05][marriage] || 1;
+  const mr = [1.0, 1.03, 1.05][marriage] || 1;
   const mo = moeshin ? 1.3 : 1;
   const lpM = [1.0, 1.1, 1.5][lp] || 1;
   const mw = mwMult(mainWeapon);
@@ -99,8 +104,12 @@ const _fmtStat = (v) => {
 };
 const ceil = Math.ceil;
 // 模拟显示：max/min ceil 后再 fmt
-function displayMax(aMax) { return _fmtStat(ceil(aMax)); }
-function displayDef(d) { return _fmtStat(d); }  // 防御力直接显示
+function displayMax(aMax) {
+  return _fmtStat(ceil(aMax));
+}
+function displayDef(d) {
+  return _fmtStat(d);
+} // 防御力直接显示
 console.log(`  攻擊力 max=12345.67 → "${displayMax(12345.67)}" (期望 ceil=12,346)`);
 console.log(`  防御力 800.0  → "${displayDef(800)}" (期望 800)`);
 console.log(`  防御力 800.5 → "${displayDef(800.5)}" (期望 800.5 不取整)`);
@@ -119,14 +128,15 @@ eq('防御力 不取整 800.5 直接显示', _fmtStat(800.5).includes('.5') ? 1 
 console.log('\n--- 乗算公式 v = (bairitu * sourceMult - 1) * factor + 1 ---');
 const _conditionFactor = (cond, hp) => {
   if (!cond) return 1;
-  let h = +hp; if (isNaN(h)) h = 100;
+  let h = +hp;
+  if (isNaN(h)) h = 100;
   h = Math.max(0, Math.min(100, h));
-  if (cond === 1) return h / 100;          // 浑身
-  if (cond === 2) return (100 - h) / 100;   // 背水
-  if (cond === 3) return h < 50 ? 1 : 0;    // 破損
+  if (cond === 1) return h / 100; // 浑身
+  if (cond === 2) return (100 - h) / 100; // 背水
+  if (cond === 3) return h < 50 ? 1 : 0; // 破損
   return 1;
 };
-const SOUL_AWK_MAX = {1: 13, 2: 11, 3: 9, 4: 7, 5: 5};
+const SOUL_AWK_MAX = { 1: 13, 2: 11, 3: 9, 4: 7, 5: 5 };
 const soulMultiplier = (rarity, lv) => {
   const r = +rarity || 1;
   const L = Math.max(1, +lv || 1);
@@ -136,7 +146,7 @@ const soulMultiplier = (rarity, lv) => {
   const range = 75 - maxNoAwk;
   if (range <= 0) return base;
   const inc = r === 5 ? 0.3 : 0.1;
-  return base + inc * (L - maxNoAwk) / range;
+  return base + (inc * (L - maxNoAwk)) / range;
 };
 // ゲーム仕様：bairitu=1 占位 entry も soulMult を受ける（「占位 ×1 base に魂 lv 倍率乗る」）。
 // ガード無し — soulMult > 1 のとき bairitu=1 でも (1*sourceMult - 1)*factor + 1 が 1 を超える。
@@ -148,14 +158,14 @@ const _applyAdd = (v0, sourceMult, condition, hp) =>
 // === 用户指定的两个 case ===
 // Case A: 5★ lv=75 / bairitu=2.5 (150%UP) / 浑身 / 满血 → 4.5
 {
-  const sm = soulMultiplier(5, 75);   // = 1.8
+  const sm = soulMultiplier(5, 75); // = 1.8
   eq('5★ lv75 sourceMult', sm, 1.8);
   const v = _applyMul(2.5, sm, 1, 100);
   eq('5★ lv75 bairitu=2.5 浑身 100%血 → 4.5', v, 4.5);
 }
 // Case B: 4★ lv=40 / bairitu=1.5 (50%UP) / 浑身 / 半血 → 1.55
 {
-  const sm = soulMultiplier(4, 40);   // = 1.4
+  const sm = soulMultiplier(4, 40); // = 1.4
   eq('4★ lv40 sourceMult', sm, 1.4);
   const v = _applyMul(1.5, sm, 1, 50);
   eq('4★ lv40 bairitu=1.5 浑身 50%血 → 1.55', v, 1.55);
@@ -163,10 +173,10 @@ const _applyAdd = (v0, sourceMult, condition, hp) =>
 
 // === sourceMult=1（魂以外 source）→ 两公式等价 ===
 console.log('\n--- sourceMult=1（chara/結晶/bg/魔装）→ formula reduces to (v0-1)*factor+1 ---');
-eq('bairitu=1.5 浑身 100%血 → 1.5',  _applyMul(1.5, 1, 1, 100), 1.5);
-eq('bairitu=1.5 浑身 50%血 → 1.25',   _applyMul(1.5, 1, 1, 50),  1.25);
-eq('bairitu=1.5 背水 0%血 → 1.5',    _applyMul(1.5, 1, 2, 0),   1.5);
-eq('bairitu=1.5 背水 100%血 → 1',    _applyMul(1.5, 1, 2, 100), 1);
+eq('bairitu=1.5 浑身 100%血 → 1.5', _applyMul(1.5, 1, 1, 100), 1.5);
+eq('bairitu=1.5 浑身 50%血 → 1.25', _applyMul(1.5, 1, 1, 50), 1.25);
+eq('bairitu=1.5 背水 0%血 → 1.5', _applyMul(1.5, 1, 2, 0), 1.5);
+eq('bairitu=1.5 背水 100%血 → 1', _applyMul(1.5, 1, 2, 100), 1);
 
 // === bairitu=2 / 各 condition × HP ===
 console.log('\n--- bairitu=2 (100%UP) × condition × HP 行列 ---');
@@ -205,25 +215,25 @@ eq('新正解: 2.5×1.8 浑身満血 → 4.5', _applyMul(2.5, 1.8, 1, 100), 4.5)
 // === bairitu=1 占位 entry も soulMult を受ける（ゲーム仕様）===
 console.log('\n--- bairitu=1 + soulMult > 1 → 占位でも増幅される（ガード無し）---');
 // 5★ lv75: (1 * 1.8 - 1)*1 + 1 = 1.8
-eq('bairitu=1 + 5★ lv75 + 無条件 → 1.8',           _applyMul(1, 1.8, 0, 100), 1.8);
+eq('bairitu=1 + 5★ lv75 + 無条件 → 1.8', _applyMul(1, 1.8, 0, 100), 1.8);
 // 4★ lv40: (1 * 1.4 - 1)*1 + 1 = 1.4
-eq('bairitu=1 + 4★ lv40 + 無条件 → 1.4',           _applyMul(1, 1.4, 0, 100), 1.4);
+eq('bairitu=1 + 4★ lv40 + 無条件 → 1.4', _applyMul(1, 1.4, 0, 100), 1.4);
 // + 浑身 50%血: (1*1.8 - 1)*0.5 + 1 = 1.4
-eq('bairitu=1 + 5★ lv75 + 浑身 50%血 → 1.4',       _applyMul(1, 1.8, 1, 50),  1.4);
+eq('bairitu=1 + 5★ lv75 + 浑身 50%血 → 1.4', _applyMul(1, 1.8, 1, 50), 1.4);
 // + 背水 0%血: (1*1.4 - 1)*1 + 1 = 1.4
-eq('bairitu=1 + 4★ lv40 + 背水 0%血 → 1.4',        _applyMul(1, 1.4, 2, 0),   1.4);
+eq('bairitu=1 + 4★ lv40 + 背水 0%血 → 1.4', _applyMul(1, 1.4, 2, 0), 1.4);
 // sourceMult=1（chara skill 等）→ bairitu=1 は完全 no-op
-eq('bairitu=1 + sourceMult=1 → 1（no-op）',         _applyMul(1, 1, 0, 100),   1);
-eq('bairitu=1 + sourceMult=1 + 浑身 50%血 → 1',    _applyMul(1, 1, 1, 50),    1);
+eq('bairitu=1 + sourceMult=1 → 1（no-op）', _applyMul(1, 1, 0, 100), 1);
+eq('bairitu=1 + sourceMult=1 + 浑身 50%血 → 1', _applyMul(1, 1, 1, 50), 1);
 
 // === sourceMult 边界值 ===
 console.log('\n--- soulMultiplier 边界値 ---');
 eq('rarity=4 lv=1: 1.01', soulMultiplier(4, 1), 1.01);
-eq('rarity=4 lv=40 (maxNoAwk): 1.40', soulMultiplier(4, 40), 1.40);
+eq('rarity=4 lv=40 (maxNoAwk): 1.40', soulMultiplier(4, 40), 1.4);
 eq('rarity=4 lv=75 (満覚醒): 1.5', soulMultiplier(4, 75), 1.5);
-eq('rarity=5 lv=50 (maxNoAwk): 1.50', soulMultiplier(5, 50), 1.50);
+eq('rarity=5 lv=50 (maxNoAwk): 1.50', soulMultiplier(5, 50), 1.5);
 eq('rarity=5 lv=75 (満覚醒): 1.8', soulMultiplier(5, 75), 1.8);
-eq('rarity=1 lv=10 (maxNoAwk): 1.10', soulMultiplier(1, 10), 1.10);
+eq('rarity=1 lv=10 (maxNoAwk): 1.10', soulMultiplier(1, 10), 1.1);
 
 console.log(`\n${pass} pass, ${fail} fail`);
 if (fail) process.exit(1);

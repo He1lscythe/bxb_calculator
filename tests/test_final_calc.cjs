@@ -4,26 +4,35 @@
 const { spawnSync } = require('child_process');
 const path = require('path');
 
-let pass = 0, fail = 0;
+let pass = 0,
+  fail = 0;
 const eq = (label, a, b) => {
-  const ok = (typeof a === 'number' && typeof b === 'number')
-    ? Math.abs(a - b) < 1e-9
-    : a === b;
-  if (ok) pass++; else { fail++; console.error(`✗ ${label}: got=${JSON.stringify(a)} expected=${JSON.stringify(b)}`); }
+  const ok = typeof a === 'number' && typeof b === 'number' ? Math.abs(a - b) < 1e-9 : a === b;
+  if (ok) pass++;
+  else {
+    fail++;
+    console.error(`✗ ${label}: got=${JSON.stringify(a)} expected=${JSON.stringify(b)}`);
+  }
 };
-const truthy = (label, cond) => { if (cond) pass++; else { fail++; console.error(`✗ ${label}`); } };
+const truthy = (label, cond) => {
+  if (cond) pass++;
+  else {
+    fail++;
+    console.error(`✗ ${label}`);
+  }
+};
 
 // ===== _applyEf 简化模拟 (与 hensei.html 同 ct 过滤逻辑) =====
 function _applyEf(acc, e, mode) {
   const ct = e.calc_type ?? 1;
-  if (mode === 'add'       && ct !== 1) return;
-  if (mode === 'mul'       && ct !== 0) return;
+  if (mode === 'add' && ct !== 1) return;
+  if (mode === 'mul' && ct !== 0) return;
   if (mode === 'final-add' && ct !== 2) return;
   if (mode === 'final-mul' && ct !== 3) return;
-  const isAddMode = (mode === 'add' || mode === 'final-add');
+  const isAddMode = mode === 'add' || mode === 'final-add';
   const v = e.bairitu;
   if (isAddMode) acc.stat += v;
-  else           acc.stat *= v;
+  else acc.stat *= v;
 }
 
 // ===== ct 过滤：mode↔ct 严格对应 =====
@@ -33,18 +42,18 @@ function check(ct, mode, baseStat, expected, label) {
   _applyEf(acc, { calc_type: ct, bairitu: 10 }, mode);
   eq(label, acc.stat, expected);
 }
-check(1, 'add',       100, 110, 'ct=1 + add → +10');
-check(1, 'mul',       100, 100, 'ct=1 + mul → 不应用');
+check(1, 'add', 100, 110, 'ct=1 + add → +10');
+check(1, 'mul', 100, 100, 'ct=1 + mul → 不应用');
 check(1, 'final-add', 100, 100, 'ct=1 + final-add → 不应用');
-check(0, 'mul',       100, 1000, 'ct=0 + mul → ×10');
-check(0, 'add',       100, 100, 'ct=0 + add → 不应用');
+check(0, 'mul', 100, 1000, 'ct=0 + mul → ×10');
+check(0, 'add', 100, 100, 'ct=0 + add → 不应用');
 check(2, 'final-add', 100, 110, 'ct=2 + final-add → +10');
-check(2, 'add',       100, 100, 'ct=2 + add → 不应用 (final 不被 normal pass 触发)');
-check(2, 'mul',       100, 100, 'ct=2 + mul → 不应用');
+check(2, 'add', 100, 100, 'ct=2 + add → 不应用 (final 不被 normal pass 触发)');
+check(2, 'mul', 100, 100, 'ct=2 + mul → 不应用');
 check(2, 'final-mul', 100, 100, 'ct=2 + final-mul → 不应用 (final-add ≠ final-mul)');
 check(3, 'final-mul', 100, 1000, 'ct=3 + final-mul → ×10');
 check(3, 'final-add', 100, 100, 'ct=3 + final-add → 不应用');
-check(3, 'mul',       100, 100, 'ct=3 + mul → 不应用 (final 不被 normal pass 触发)');
+check(3, 'mul', 100, 100, 'ct=3 + mul → 不应用 (final 不被 normal pass 触发)');
 
 // ===== Stage 顺序：normal-add → normal-mul → final-add → final-mul → BD =====
 console.log('\n--- Pipeline 顺序：normal → final → BD ---');
@@ -66,14 +75,15 @@ function pipeline(initial, effects, bdEffects) {
 // normal: 100 + 50 = 150 → ×2 = 300
 // final:  300 + 20 = 320 → ×0.5 = 160
 // BD:     160 × 3 = 480
-const rA = pipeline(100,
+const rA = pipeline(
+  100,
   [
-    {calc_type:1, bairitu:50},
-    {calc_type:0, bairitu:2},
-    {calc_type:2, bairitu:20},
-    {calc_type:3, bairitu:0.5},
+    { calc_type: 1, bairitu: 50 },
+    { calc_type: 0, bairitu: 2 },
+    { calc_type: 2, bairitu: 20 },
+    { calc_type: 3, bairitu: 0.5 },
   ],
-  [{calc_type:0, bairitu:3}]
+  [{ calc_type: 0, bairitu: 3 }],
 );
 eq('正确顺序: 100 +50 ×2 +20 ×0.5 ×3 → 480', rA, 480);
 
@@ -81,30 +91,42 @@ eq('正确顺序: 100 +50 ×2 +20 ×0.5 ×3 → 480', rA, 480);
 // base=100, ×2 (ct=0), +50 (ct=2)
 //   错序（先 +50 再 ×2）: (100+50)*2 = 300
 //   正确（先 ×2 再 +50）: 100*2+50 = 250
-const rB = pipeline(100, [
-  {calc_type:0, bairitu:2},
-  {calc_type:2, bairitu:50},
-], []);
+const rB = pipeline(
+  100,
+  [
+    { calc_type: 0, bairitu: 2 },
+    { calc_type: 2, bairitu: 50 },
+  ],
+  [],
+);
 eq('final-add 在 normal-mul 之后: 100×2+50 = 250', rB, 250);
 
 // 验证 final-mul 在 final-add 之后
 // base=100, +20 (ct=2), ×0.5 (ct=3)
 //   错序: 100×0.5+20 = 70
 //   正确: (100+20)×0.5 = 60
-const rC = pipeline(100, [
-  {calc_type:3, bairitu:0.5},  // 输入顺序故意打乱
-  {calc_type:2, bairitu:20},
-], []);
+const rC = pipeline(
+  100,
+  [
+    { calc_type: 3, bairitu: 0.5 }, // 输入顺序故意打乱
+    { calc_type: 2, bairitu: 20 },
+  ],
+  [],
+);
 eq('final-mul 在 final-add 之后: (100+20)×0.5 = 60', rC, 60);
 
 // 验证 BD 在所有 final 之后
 // base=100, +20 (ct=2), ×0.5 (ct=3), BD +50 (ct=1)
 //   错序（BD 先）: ((100+50)+20)*0.5 = 85
 //   正确（BD 最后）: ((100+20)*0.5)+50 = 110
-const rD = pipeline(100, [
-  {calc_type:2, bairitu:20},
-  {calc_type:3, bairitu:0.5},
-], [{calc_type:1, bairitu:50}]);
+const rD = pipeline(
+  100,
+  [
+    { calc_type: 2, bairitu: 20 },
+    { calc_type: 3, bairitu: 0.5 },
+  ],
+  [{ calc_type: 1, bairitu: 50 }],
+);
 eq('BD 在所有 final 之后: (100+20)*0.5+50 = 110', rD, 110);
 
 // ===== BD 自身 ct=2/3 也不进 final pass（finalDeferred 跳过） =====
@@ -112,8 +134,8 @@ eq('BD 在所有 final 之后: (100+20)*0.5+50 = 110', rD, 110);
 // 因为 BD 走 _applyList(..., skipFinal=true)，effect 不入 finalDeferred
 console.log('\n--- BD effects 即使 ct=2/3 也不参与 final pass（Stage 6 走自己的 add/mul） ---');
 const acc = { stat: 100 };
-const nonBd = [{calc_type:2, bairitu:20}];
-const bd    = [{calc_type:2, bairitu:99}];  // BD 内若有 ct=2，本不应触发；BD stage 只跑 add/mul
+const nonBd = [{ calc_type: 2, bairitu: 20 }];
+const bd = [{ calc_type: 2, bairitu: 99 }]; // BD 内若有 ct=2，本不应触发；BD stage 只跑 add/mul
 // Stage normal
 for (const e of nonBd) _applyEf(acc, e, 'add');
 for (const e of nonBd) _applyEf(acc, e, 'mul');
@@ -167,13 +189,21 @@ print(json.dumps(out, ensure_ascii=False))
 `;
 const r = spawnSync('python', ['-c', py], { encoding: 'utf8', cwd: path.resolve(__dirname, '..') });
 const out = (r.stdout || '') + (r.stderr || '');
-const last = out.trim().split('\n').filter(l => l.trim().startsWith('[')).pop();
+const last = out
+  .trim()
+  .split('\n')
+  .filter((l) => l.trim().startsWith('['))
+  .pop();
 let parsed = null;
-try { parsed = JSON.parse(last); } catch (e) { console.error('python parse failed:', out); }
+try {
+  parsed = JSON.parse(last);
+} catch (e) {
+  console.error('python parse failed:', out);
+}
 if (parsed) {
   parsed.forEach((p, i) => {
     eq(`case${i} val: ${p.text}`, p.val, p.expected_val);
-    eq(`case${i} ct:  ${p.text}`, p.ct,  p.expected_ct);
+    eq(`case${i} ct:  ${p.text}`, p.ct, p.expected_ct);
   });
 }
 
@@ -196,11 +226,22 @@ for text, bunrui, expected in cases:
     out.append({'v': v, 'ct': ct, 'ev': expected[0], 'ec': expected[1], 't': text[:25]})
 print(json.dumps(out, ensure_ascii=False))
 `;
-const r2 = spawnSync('python', ['-c', py2], { encoding: 'utf8', cwd: path.resolve(__dirname, '..') });
+const r2 = spawnSync('python', ['-c', py2], {
+  encoding: 'utf8',
+  cwd: path.resolve(__dirname, '..'),
+});
 const out2 = (r2.stdout || '') + (r2.stderr || '');
-const last2 = out2.trim().split('\n').filter(l => l.trim().startsWith('[')).pop();
+const last2 = out2
+  .trim()
+  .split('\n')
+  .filter((l) => l.trim().startsWith('['))
+  .pop();
 let p2 = null;
-try { p2 = JSON.parse(last2); } catch (e) { console.error('python2 parse failed:', out2); }
+try {
+  p2 = JSON.parse(last2);
+} catch (e) {
+  console.error('python2 parse failed:', out2);
+}
 if (p2) {
   p2.forEach((p, i) => {
     eq(`chara case${i} val: ${p.t}`, p.v, p.ev);
@@ -211,27 +252,26 @@ if (p2) {
 // ===== bunrui=18 BDゲージ最大値 合成公式 =====
 // raw = ((10 + Σadd) * (1 + Σmul) + ΣfinalAdd) * (1 + ΣfinalMul)
 // bdCapMax = floor(raw) - 1
-console.log('\n--- bunrui=18 合成公式: floor((10 + Σadd)*(1 + Σmul) + ΣfinalAdd)*(1 + ΣfinalMul)) - 1 ---');
-const bdRaw = (add, mul, fAdd, fMul) =>
-  ((10 + add) * (1 + mul) + fAdd) * (1 + fMul);
+console.log(
+  '\n--- bunrui=18 合成公式: floor((10 + Σadd)*(1 + Σmul) + ΣfinalAdd)*(1 + ΣfinalMul)) - 1 ---',
+);
+const bdRaw = (add, mul, fAdd, fMul) => ((10 + add) * (1 + mul) + fAdd) * (1 + fMul);
 const bdMax = (...args) => Math.floor(bdRaw(...args)) - 1;
 
-eq('全 0 → 9 (10-1)',                  bdMax(0,    0,   0,   0),   9);
-eq('add=3 → 12 (13-1)',                 bdMax(3,    0,   0,   0),   12);
-eq('mul=0.5 (1.5×) → 14 (15-1)',        bdMax(0,    0.5, 0,   0),   14);
-eq('finalAdd=2.5 → 11 (12.5-1 → floor 12 - 1)',
-                                          bdMax(0,    0,   2.5, 0),   11);
-eq('finalMul=1 (2×) → 19 (20-1)',       bdMax(0,    0,   0,   1),   19);
-eq('add=2 + mul=0.5 → 17 ((10+2)*1.5-1)',bdMax(2,    0.5, 0,   0),   17);
-eq('add=2 + mul=0.5 + finalAdd=3 → 20',  bdMax(2,    0.5, 3,   0),   20);
-eq('全 4 種：raw=31.5, floor 31 - 1 = 30',
-                                          bdMax(2,    0.5, 3,   0.5), 30);
+eq('全 0 → 9 (10-1)', bdMax(0, 0, 0, 0), 9);
+eq('add=3 → 12 (13-1)', bdMax(3, 0, 0, 0), 12);
+eq('mul=0.5 (1.5×) → 14 (15-1)', bdMax(0, 0.5, 0, 0), 14);
+eq('finalAdd=2.5 → 11 (12.5-1 → floor 12 - 1)', bdMax(0, 0, 2.5, 0), 11);
+eq('finalMul=1 (2×) → 19 (20-1)', bdMax(0, 0, 0, 1), 19);
+eq('add=2 + mul=0.5 → 17 ((10+2)*1.5-1)', bdMax(2, 0.5, 0, 0), 17);
+eq('add=2 + mul=0.5 + finalAdd=3 → 20', bdMax(2, 0.5, 3, 0), 20);
+eq('全 4 種：raw=31.5, floor 31 - 1 = 30', bdMax(2, 0.5, 3, 0.5), 30);
 
 // 観測データ（実機）対照 — 1 個 / 2 個 ×4 魂は (1+Σnet) で表現（K=1 近似）
-eq('実機: 1個×4魂 → 39',                  bdMax(0, 3, 0, 0),     39);
-eq('実機: 2個×4魂 → 69',                  bdMax(0, 6, 0, 0),     69);
-eq('実機: +2.84 結晶 → 11',               bdMax(2.84, 0, 0, 0),  11);
-eq('実機: +3.6 結晶 → 12',                bdMax(3.6, 0, 0, 0),   12);
+eq('実機: 1個×4魂 → 39', bdMax(0, 3, 0, 0), 39);
+eq('実機: 2個×4魂 → 69', bdMax(0, 6, 0, 0), 69);
+eq('実機: +2.84 結晶 → 11', bdMax(2.84, 0, 0, 0), 11);
+eq('実機: +3.6 結晶 → 12', bdMax(3.6, 0, 0, 0), 12);
 
 console.log(`\n${pass} pass, ${fail} fail`);
 if (fail) process.exit(1);

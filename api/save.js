@@ -21,15 +21,15 @@ const BASE = 'data-staging';
 // 値は [filePath, sessionIdsKey]。masou は chara/soul と id namespace が違うため
 // 独立な masou_session_ids を使う（chara id と masou id が衝突して entry を誤って消すのを防ぐ）。
 const ID_BUCKETS = {
-  revise:             ['data/characters_revise.json',  'session_ids'],
-  omoide_revise:      ['data/omoide_revise.json',      'session_ids'],
-  souls_revise:       ['data/souls_revise.json',       'session_ids'],
-  crystals_revise:    ['data/crystals_revise.json',    'session_ids'],
+  revise: ['data/characters_revise.json', 'session_ids'],
+  omoide_revise: ['data/omoide_revise.json', 'session_ids'],
+  souls_revise: ['data/souls_revise.json', 'session_ids'],
+  crystals_revise: ['data/crystals_revise.json', 'session_ids'],
   bladegraphs_revise: ['data/bladegraphs_revise.json', 'session_ids'],
-  masou_revise:       ['data/masou_revise.json',       'masou_session_ids'],
+  masou_revise: ['data/masou_revise.json', 'masou_session_ids'],
 };
 const FULL_BUCKETS = {
-  omoide_templates:  'data/omoide_templates.json',
+  omoide_templates: 'data/omoide_templates.json',
 };
 
 function setCors(res) {
@@ -54,11 +54,10 @@ async function readJsonFromMain(octokit, path) {
 // null は「撤回マーカー」：source[k] === null → result[k] を削除。
 // recursive merge で空オブジェクトになったキーも prune（落盘 revise.json をクリーンに保つ）。
 function deepMerge(target, source) {
-  if (source === null) return null;  // top-level null（親が処理する）
+  if (source === null) return null; // top-level null（親が処理する）
   if (typeof source !== 'object' || Array.isArray(source)) return source;
-  const result = (target !== null && typeof target === 'object' && !Array.isArray(target))
-    ? { ...target }
-    : {};
+  const result =
+    target !== null && typeof target === 'object' && !Array.isArray(target) ? { ...target } : {};
   for (const k of Object.keys(source)) {
     const merged = deepMerge(result[k], source[k]);
     if (merged === null) delete result[k];
@@ -74,14 +73,16 @@ function deepMerge(target, source) {
   return result;
 }
 
-// id / name 以外のフィールドがあれば revise として意味あり
-const _hasRealContent = entry => Object.keys(entry).some(k => k !== 'id' && k !== 'name');
+// id / name / chara_id / chara_name 以外のフィールドがあれば revise として意味あり。
+// chara_id / chara_name は masou_revise の可読 metadata（同 id/name 思路）、撤回判定に含めない。
+const _META_KEYS = new Set(['id', 'name', 'chara_id', 'chara_name']);
+const _hasRealContent = (entry) => Object.keys(entry).some((k) => !_META_KEYS.has(k));
 
 function mergeById(existing, patches, sessionIds) {
   const sessionSet = new Set(sessionIds);
   // session_ids 不包含的 patch 直接忽略：避免 existing 同 id 与 patch 同时被写入造成重复
   const patchMap = new Map(
-    (patches || []).filter(p => sessionSet.has(p.id)).map(p => [p.id, p])
+    (patches || []).filter((p) => sessionSet.has(p.id)).map((p) => [p.id, p]),
   );
   const merged = [];
   for (const c of existing || []) {
@@ -164,7 +165,11 @@ export default async function handler(req, res) {
     for (const u of updates) {
       let sha;
       try {
-        const { data } = await octokit.rest.repos.getContent({ ...REPO, path: u.path, ref: branchName });
+        const { data } = await octokit.rest.repos.getContent({
+          ...REPO,
+          path: u.path,
+          ref: branchName,
+        });
         sha = data.sha;
       } catch (e) {
         if (e.status !== 404) throw e;
@@ -181,11 +186,13 @@ export default async function handler(req, res) {
 
     // 构造 PR 标题/正文：页面名 + id+name 列表，方便 review 时一眼看出改了什么
     const pageInfo = (() => {
-      if ('revise' in body || 'omoide_revise' in body || 'masou_revise' in body) return { name: '魔剣', file: 'pages/characters.html' };
-      if ('souls_revise' in body)       return { name: '魂',     file: 'pages/souls.html' };
-      if ('crystals_revise' in body)    return { name: '結晶',   file: 'pages/crystals.html' };
+      if ('revise' in body || 'omoide_revise' in body || 'masou_revise' in body)
+        return { name: '魔剣', file: 'pages/characters.html' };
+      if ('souls_revise' in body) return { name: '魂', file: 'pages/souls.html' };
+      if ('crystals_revise' in body) return { name: '結晶', file: 'pages/crystals.html' };
       if ('bladegraphs_revise' in body) return { name: '心象結晶', file: 'pages/bladegraphs.html' };
-      if ('omoide_templates' in body)  return { name: '魔剣（潜在テンプレート）', file: 'pages/characters.html' };
+      if ('omoide_templates' in body)
+        return { name: '魔剣（潜在テンプレート）', file: 'pages/characters.html' };
       return { name: '?', file: '?' };
     })();
 
@@ -204,11 +211,15 @@ export default async function handler(req, res) {
     items.sort((a, b) => (a.id ?? 0) - (b.id ?? 0));
 
     // 标题：[页面] 名字1, 名字2, 名字3 (+N more)
-    const titleNames = items.slice(0, 3).map((it) => it.name).join(', ');
+    const titleNames = items
+      .slice(0, 3)
+      .map((it) => it.name)
+      .join(', ');
     const more = items.length > 3 ? ` +${items.length - 3}` : '';
-    const titleSuffix = items.length > 0
-      ? ` ${titleNames}${more}`
-      : ` (${updates.map((u) => u.path.split('/').pop()).join(', ')})`;
+    const titleSuffix =
+      items.length > 0
+        ? ` ${titleNames}${more}`
+        : ` (${updates.map((u) => u.path.split('/').pop()).join(', ')})`;
     const title = `[${pageInfo.name}]${titleSuffix}`;
 
     // 正文：完整 id + name 列表 + 文件清单

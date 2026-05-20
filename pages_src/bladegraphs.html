@@ -1,154 +1,218 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BxB 心象結晶データベース</title>
-<link rel="icon" href="../favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="../css/base.css">
-<link rel="stylesheet" href="../css/nav.css">
-<link rel="stylesheet" href="../css/shared.css">
-<link rel="stylesheet" href="../css/bladegraphs.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BxB 心象結晶データベース</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/shared.css" />
+    <link rel="stylesheet" href="../css/bladegraphs.css" />
+  </head>
+  <body>
+    {{include _loading.html}}
 
-{{include _loading.html}}
+    <div id="page-wrap">
+      <div id="content">
+        <div id="filters">
+          <div class="mob-search-row">
+            <input
+              type="text"
+              id="search"
+              placeholder="🔍 心象結晶名で検索..."
+              oninput="applyFilters()"
+            />
+            <span id="bg-count-mob"></span>
+          </div>
+          <div class="mob-toolbar">
+            <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">
+              ▼ 絞り込み
+            </button>
+            <button class="toolbar-btn" onclick="expandAll()">全展開</button>
+            <button class="toolbar-btn" onclick="collapseAll()">全収起</button>
+            <button class="toolbar-btn" onclick="resetFilters()">リセット</button>
+          </div>
+          <div id="filters-body">
+            <div class="filter-row2">
+              <div class="filter-section">
+                <div class="filter-label">レア度</div>
+                <div class="filter-toggles" id="f-rarity"></div>
+              </div>
 
-<div id="page-wrap">
-<div id="content">
-  <div id="filters">
-    <div class="mob-search-row">
-      <input type="text" id="search" placeholder="🔍 心象結晶名で検索..." oninput="applyFilters()">
-      <span id="bg-count-mob"></span>
-    </div>
-    <div class="mob-toolbar">
-      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
-      <button class="toolbar-btn" onclick="expandAll()">全展開</button>
-      <button class="toolbar-btn" onclick="collapseAll()">全収起</button>
-      <button class="toolbar-btn" onclick="resetFilters()">リセット</button>
-    </div>
-    <div id="filters-body">
-    <div class="filter-row2">
-      <div class="filter-section">
-        <div class="filter-label">レア度</div>
-        <div class="filter-toggles" id="f-rarity"></div>
+              <div class="filter-section">
+                <div class="filter-label">属性</div>
+                <div class="filter-toggles" id="f-element"></div>
+              </div>
+            </div>
+
+            <div class="filter-section">
+              <div class="filter-label">武器</div>
+              <div class="filter-toggles" id="f-weapon"></div>
+            </div>
+
+            <div class="filter-section">
+              <div class="filter-label">効果</div>
+              <div class="filter-toggles" id="f-bunrui"></div>
+            </div>
+
+            <div class="filter-row2">
+              <div class="filter-section">
+                <div class="filter-label">条件（対象）</div>
+                <div class="filter-toggles" id="f-scope"></div>
+              </div>
+              <div class="filter-section">
+                <div class="filter-label">条件（発動）</div>
+                <div class="filter-toggles" id="f-condition"></div>
+              </div>
+            </div>
+          </div>
+          <!-- #filters-body -->
+          <div class="desktop-bottom">
+            <div id="bg-count"></div>
+            <div style="display: flex; gap: 6px">
+              <button onclick="expandAll()" class="toolbar-btn">全展開</button>
+              <button onclick="collapseAll()" class="toolbar-btn">全収起</button>
+              <button onclick="resetFilters()" class="toolbar-btn">リセット</button>
+            </div>
+          </div>
+        </div>
+        <div id="bg-list"></div>
       </div>
-
-      <div class="filter-section">
-        <div class="filter-label">属性</div>
-        <div class="filter-toggles" id="f-element"></div>
-      </div>
     </div>
 
-    <div class="filter-section">
-      <div class="filter-label">武器</div>
-      <div class="filter-toggles" id="f-weapon"></div>
-    </div>
+    <script type="module">
+      import { Nav, updateReviseBar } from '../js/nav.js';
+      import { state } from '../js/bg-state.js';
+      import {
+        ELEMENT,
+        WEAPON,
+        BUNRUI_SHORT,
+        CONDITION,
+        SCOPE_SHORT,
+        renderFilterToggles,
+        renderElementFilterToggles,
+      } from '../shared/constants.js';
+      import { escHtml, ctPfx, fmtNum, parseBairituVal, hideLoading } from '../js/utils.js';
+      import { deepApply } from '../js/diff.js';
+      import { enforceScopeConstraints } from '../shared/effect-constraints.js';
+      import {
+        initFilterToggles,
+        toggleFilters,
+        collapseFiltersOnScroll,
+        toggleFilter,
+        expandAll,
+        collapseAll,
+        resetFilters,
+        applyFilters,
+        renderList,
+        renderRow,
+        toggleExpand,
+        renderDetailBody,
+      } from '../js/bg-list.js';
+      import {
+        enterEditMode,
+        cancelEdit,
+        saveEdit,
+        saveRevise,
+        reRenderBgEdit,
+        toggleBladeBunrui,
+        toggleBladeElement,
+        toggleBladeType,
+        setBladeHitStage,
+        setBladeHitStageScaling,
+        setBladeScope,
+        addBladeEffect,
+        removeBladeEffect,
+        renderEditBody,
+      } from '../js/bg-edit.js';
 
-    <div class="filter-section">
-      <div class="filter-label">効果</div>
-      <div class="filter-toggles" id="f-bunrui"></div>
-    </div>
+      Nav.init();
 
-    <div class="filter-row2">
-      <div class="filter-section">
-        <div class="filter-label">条件（対象）</div>
-        <div class="filter-toggles" id="f-scope"></div>
-      </div>
-      <div class="filter-section">
-        <div class="filter-label">条件（発動）</div>
-        <div class="filter-toggles" id="f-condition"></div>
-      </div>
-    </div>
-
-    </div><!-- #filters-body -->
-    <div class="desktop-bottom">
-      <div id="bg-count"></div>
-      <div style="display:flex;gap:6px;">
-        <button onclick="expandAll()" class="toolbar-btn">全展開</button>
-        <button onclick="collapseAll()" class="toolbar-btn">全収起</button>
-        <button onclick="resetFilters()" class="toolbar-btn">リセット</button>
-      </div>
-    </div>
-  </div>
-  <div id="bg-list"></div>
-</div>
-</div>
-
-<script type="module">
-import { Nav, updateReviseBar } from '../js/nav.js';
-import { state } from '../js/bg-state.js';
-import { ELEMENT, WEAPON, BUNRUI_SHORT, CONDITION, SCOPE_SHORT,
-         renderFilterToggles, renderElementFilterToggles } from '../shared/constants.js';
-import { escHtml, ctPfx, fmtNum, parseBairituVal, hideLoading } from '../js/utils.js';
-import { deepApply } from '../js/diff.js';
-import { enforceScopeConstraints } from '../shared/effect-constraints.js';
-import { initFilterToggles, toggleFilters, collapseFiltersOnScroll,
-         toggleFilter, expandAll, collapseAll, resetFilters, applyFilters,
-         renderList, renderRow, toggleExpand, renderDetailBody } from '../js/bg-list.js';
-import { enterEditMode, cancelEdit, saveEdit, saveRevise,
-         reRenderBgEdit, toggleBladeBunrui, toggleBladeElement, toggleBladeType,
-         setBladeHitStage, setBladeHitStageScaling, setBladeScope,
-         addBladeEffect, removeBladeEffect, renderEditBody } from '../js/bg-edit.js';
-
-Nav.init();
-
-document.addEventListener('DOMContentLoaded', () => {
-  initFilterToggles();
-  fetch('../data/bladegraphs.json')
-    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(arr => {
-      state.allBG = arr;
-      return fetch('../data/bladegraphs_extra.json').then(r => r.ok ? r.json() : []).catch(() => []);
-    })
-    .then(ext => {
-      if (Array.isArray(ext)) state.allBG.push(...ext);
-      // originalData snapshot: base + extra
-      state.allBG.forEach(c => {
-        if (!state.originalData[c.id]) state.originalData[c.id] = JSON.parse(JSON.stringify(c));
+      document.addEventListener('DOMContentLoaded', () => {
+        initFilterToggles();
+        fetch('../data/bladegraphs.json')
+          .then((r) => {
+            if (!r.ok) throw new Error(r.status);
+            return r.json();
+          })
+          .then((arr) => {
+            state.allBG = arr;
+            return fetch('../data/bladegraphs_extra.json')
+              .then((r) => (r.ok ? r.json() : []))
+              .catch(() => []);
+          })
+          .then((ext) => {
+            if (Array.isArray(ext)) state.allBG.push(...ext);
+            // originalData snapshot: base + extra
+            state.allBG.forEach((c) => {
+              if (!state.originalData[c.id])
+                state.originalData[c.id] = JSON.parse(JSON.stringify(c));
+            });
+            applyFilters();
+            // hideLoading 推迟到 revise deepApply 完之后、避免 base→revise 闪烁
+            return fetch('../data/bladegraphs_revise.json');
+          })
+          .then((r) => (r.ok ? r.json() : []))
+          .then((arr) => {
+            arr.forEach((c) => {
+              state.reviseData[c.id] = c;
+              const idx = state.allBG.findIndex((x) => x.id === c.id);
+              if (idx >= 0) deepApply(state.allBG[idx], c);
+            });
+            // base+revise 合并后强制 effect scope 约束：scope ∈ {0,1} 时清 element/type，
+            // 防止 server pop null 后 element 仍残留在 base 端造成不一致
+            enforceScopeConstraints(state.allBG);
+            if (arr.length) applyFilters();
+            hideLoading();
+            // bladegraphs_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
+            return fetch('../data/bladegraphs_check.json');
+          })
+          .then((r) => (r && r.ok ? r.json() : null))
+          .then((arr) => {
+            if (Array.isArray(arr)) {
+              state.bgCheckEnabled = true;
+              arr.forEach((id) => state.bgCheck.add(id));
+              applyFilters();
+            }
+          })
+          .catch(() => {
+            applyFilters();
+            hideLoading();
+          });
       });
-      applyFilters();
-      hideLoading();
-      return fetch('../data/bladegraphs_revise.json');
-    })
-    .then(r => r.ok ? r.json() : [])
-    .then(arr => {
-      arr.forEach(c => {
-        state.reviseData[c.id] = c;
-        const idx = state.allBG.findIndex(x => x.id === c.id);
-        if (idx >= 0) deepApply(state.allBG[idx], c);
+
+      // 「絞り込み」展開中の user-initiated scroll でのみ collapse — touchmove (mobile) / wheel (desktop)。
+      // scroll 事件は使わない：filter 操作後の list 高さ変化による浏览器 auto-clamp scrollY を user スクロールと誤判するため。
+      window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
+      window.addEventListener('wheel', collapseFiltersOnScroll, { passive: true });
+
+      window.state = state;
+      Object.assign(window, {
+        applyFilters,
+        toggleFilter,
+        expandAll,
+        collapseAll,
+        resetFilters,
+        toggleFilters,
+        toggleExpand,
+        enterEditMode,
+        cancelEdit,
+        saveEdit,
+        saveRevise,
+        reRenderBgEdit,
+        toggleBladeBunrui,
+        toggleBladeElement,
+        toggleBladeType,
+        setBladeHitStage,
+        setBladeHitStageScaling,
+        setBladeScope,
+        addBladeEffect,
+        removeBladeEffect,
+        updateReviseBar,
+        escHtml,
+        parseBairituVal,
       });
-      // base+revise 合并后强制 effect scope 约束：scope ∈ {0,1} 时清 element/type，
-      // 防止 server pop null 后 element 仍残留在 base 端造成不一致
-      enforceScopeConstraints(state.allBG);
-      if (arr.length) applyFilters();
-      // bladegraphs_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
-      return fetch('../data/bladegraphs_check.json');
-    })
-    .then(r => r && r.ok ? r.json() : null)
-    .then(arr => {
-      if (Array.isArray(arr)) {
-        state.bgCheckEnabled = true;
-        arr.forEach(id => state.bgCheck.add(id));
-        applyFilters();
-      }
-    })
-    .catch(() => { applyFilters(); hideLoading(); });
-});
-
-// 「絞り込み」展開中の user-initiated scroll でのみ collapse — touchmove (mobile) / wheel (desktop)。
-// scroll 事件は使わない：filter 操作後の list 高さ変化による浏览器 auto-clamp scrollY を user スクロールと誤判するため。
-window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
-window.addEventListener('wheel',     collapseFiltersOnScroll, { passive: true });
-
-window.state = state;
-Object.assign(window, {
-  applyFilters, toggleFilter, expandAll, collapseAll, resetFilters, toggleFilters,
-  toggleExpand, enterEditMode, cancelEdit, saveEdit, saveRevise,
-  reRenderBgEdit, toggleBladeBunrui, toggleBladeElement, toggleBladeType,
-  setBladeHitStage, setBladeHitStageScaling, setBladeScope,
-  addBladeEffect, removeBladeEffect, updateReviseBar, escHtml, parseBairituVal,
-});
-</script>
-</body>
+    </script>
+  </body>
 </html>

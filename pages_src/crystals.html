@@ -1,165 +1,242 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BxB 結晶データベース</title>
-<link rel="icon" href="../favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="../css/base.css">
-<link rel="stylesheet" href="../css/nav.css">
-<link rel="stylesheet" href="../css/shared.css">
-<link rel="stylesheet" href="../css/crystals.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BxB 結晶データベース</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/shared.css" />
+    <link rel="stylesheet" href="../css/crystals.css" />
+  </head>
+  <body>
+    {{include _loading.html}}
 
-{{include _loading.html}}
+    <div id="page-wrap">
+      <div id="content">
+        <div id="filters">
+          <!-- Search row: input always, mob count visible only on mobile -->
+          <div class="mob-search-row">
+            <input
+              type="text"
+              id="search"
+              placeholder="🔍 結晶名で検索..."
+              oninput="applyFilters()"
+            />
+            <span id="crystal-count-mob"></span>
+          </div>
+          <!-- Mobile-only toolbar: toggle + action buttons -->
+          <div class="mob-toolbar">
+            <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">
+              ▼ 絞り込み
+            </button>
+            <button class="toolbar-btn" onclick="expandAll()">全展開</button>
+            <button class="toolbar-btn" onclick="collapseAll()">全収起</button>
+            <button class="toolbar-btn" onclick="resetFilters()">リセット</button>
+          </div>
+          <!-- Filter body: always visible on desktop, collapsible on mobile -->
+          <div id="filters-body">
+            <div class="filter-row2">
+              <div class="filter-section">
+                <div class="filter-label">レア度</div>
+                <div class="filter-toggles" id="f-rarity"></div>
+              </div>
 
-<div id="page-wrap">
-<div id="content">
-  <div id="filters">
-    <!-- Search row: input always, mob count visible only on mobile -->
-    <div class="mob-search-row">
-      <input type="text" id="search" placeholder="🔍 結晶名で検索..." oninput="applyFilters()">
-      <span id="crystal-count-mob"></span>
-    </div>
-    <!-- Mobile-only toolbar: toggle + action buttons -->
-    <div class="mob-toolbar">
-      <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">▼ 絞り込み</button>
-      <button class="toolbar-btn" onclick="expandAll()">全展開</button>
-      <button class="toolbar-btn" onclick="collapseAll()">全収起</button>
-      <button class="toolbar-btn" onclick="resetFilters()">リセット</button>
-    </div>
-    <!-- Filter body: always visible on desktop, collapsible on mobile -->
-    <div id="filters-body">
-    <div class="filter-row2">
-      <div class="filter-section">
-        <div class="filter-label">レア度</div>
-        <div class="filter-toggles" id="f-rarity"></div>
-      </div>
+              <div class="filter-section">
+                <div class="filter-label">属性</div>
+                <div class="filter-toggles" id="f-element"></div>
+              </div>
+            </div>
 
-      <div class="filter-section">
-        <div class="filter-label">属性</div>
-        <div class="filter-toggles" id="f-element"></div>
-      </div>
-    </div>
+            <div class="filter-section">
+              <div class="filter-label">武器種</div>
+              <div class="filter-toggles" id="f-weapon"></div>
+            </div>
 
-    <div class="filter-section">
-      <div class="filter-label">武器種</div>
-      <div class="filter-toggles" id="f-weapon"></div>
-    </div>
+            <div class="filter-section">
+              <div class="filter-label">効果</div>
+              <div class="filter-toggles" id="f-bunrui"></div>
+            </div>
 
-    <div class="filter-section">
-      <div class="filter-label">効果</div>
-      <div class="filter-toggles" id="f-bunrui"></div>
-    </div>
-
-    <div class="filter-row2">
-      <div class="filter-section">
-        <div class="filter-label">条件（対象）</div>
-        <div class="filter-toggles" id="f-scope"></div>
-      </div>
-      <div class="filter-section">
-        <div class="filter-label">条件（発動）</div>
-        <div class="filter-toggles" id="f-condition">
-          <!-- populated by JS: renderFilterToggles('condition', CONDITION, {skip:[0]}) -->
+            <div class="filter-row2">
+              <div class="filter-section">
+                <div class="filter-label">条件（対象）</div>
+                <div class="filter-toggles" id="f-scope"></div>
+              </div>
+              <div class="filter-section">
+                <div class="filter-label">条件（発動）</div>
+                <div class="filter-toggles" id="f-condition">
+                  <!-- populated by JS: renderFilterToggles('condition', CONDITION, {skip:[0]}) -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- #filters-body -->
+          <!-- Desktop-only bottom bar: count + action buttons -->
+          <div class="desktop-bottom">
+            <div id="crystal-count"></div>
+            <div style="display: flex; gap: 6px">
+              <button onclick="expandAll()" class="toolbar-btn">全展開</button>
+              <button onclick="collapseAll()" class="toolbar-btn">全収起</button>
+              <button onclick="resetFilters()" class="toolbar-btn">リセット</button>
+            </div>
+          </div>
         </div>
+        <div id="crystal-list"></div>
       </div>
+      <!-- #content -->
     </div>
+    <!-- #page-wrap -->
 
-    </div><!-- #filters-body -->
-    <!-- Desktop-only bottom bar: count + action buttons -->
-    <div class="desktop-bottom">
-      <div id="crystal-count"></div>
-      <div style="display:flex;gap:6px;">
-        <button onclick="expandAll()" class="toolbar-btn">全展開</button>
-        <button onclick="collapseAll()" class="toolbar-btn">全収起</button>
-        <button onclick="resetFilters()" class="toolbar-btn">リセット</button>
-      </div>
-    </div>
-  </div>
-  <div id="crystal-list"></div>
-</div><!-- #content -->
-</div><!-- #page-wrap -->
+    <script type="module">
+      import { Nav, updateReviseBar } from '../js/nav.js';
+      import { state } from '../js/cr-state.js';
+      import {
+        ELEMENT,
+        WEAPON,
+        BUNRUI_SHORT,
+        CONDITION,
+        SCOPE,
+        SCOPE_SHORT,
+        renderFilterToggles,
+        renderElementFilterToggles,
+        renderEditSelect,
+      } from '../shared/constants.js';
+      import { escHtml, fmt, parseBairituVal, hideLoading } from '../js/utils.js';
+      import { deepApply } from '../js/diff.js';
+      import { enforceScopeConstraints } from '../shared/effect-constraints.js';
+      import {
+        initFilterToggles,
+        toggleFilters,
+        collapseFiltersOnScroll,
+        toggleFilter,
+        expandAll,
+        collapseAll,
+        resetFilters,
+        applyFilters,
+        renderList,
+        renderRow,
+        toggleExpand,
+        renderDetailBody,
+        crystalElement,
+        crystalWeapon,
+        crystalScope,
+      } from '../js/cr-list.js';
+      import {
+        enterEditMode,
+        cancelEdit,
+        saveEdit,
+        saveRevise,
+        toggleCrystalBunrui,
+        setCrystalHitStage,
+        setCrystalHitStageScaling,
+        setCrystalBairitu,
+        setCrystalScope,
+        setCrystalElement,
+        setCrystalWeapon,
+        setCrystalLevelMax,
+        setCrystalWeightMin,
+        setCrystalStep,
+        setCrystalDelta,
+        addCrystalEffect,
+        removeCrystalEffect,
+        reRenderCrystalEdit,
+        renderEditBody,
+      } from '../js/cr-edit.js';
 
-<script type="module">
-import { Nav, updateReviseBar } from '../js/nav.js';
-import { state } from '../js/cr-state.js';
-import { ELEMENT, WEAPON, BUNRUI_SHORT, CONDITION, SCOPE, SCOPE_SHORT,
-         renderFilterToggles, renderElementFilterToggles,
-         renderEditSelect } from '../shared/constants.js';
-import { escHtml, fmt, parseBairituVal, hideLoading } from '../js/utils.js';
-import { deepApply } from '../js/diff.js';
-import { enforceScopeConstraints } from '../shared/effect-constraints.js';
-import { initFilterToggles, toggleFilters, collapseFiltersOnScroll,
-         toggleFilter, expandAll, collapseAll, resetFilters, applyFilters,
-         renderList, renderRow, toggleExpand, renderDetailBody,
-         crystalElement, crystalWeapon, crystalScope } from '../js/cr-list.js';
-import { enterEditMode, cancelEdit, saveEdit, saveRevise,
-         toggleCrystalBunrui, setCrystalHitStage, setCrystalHitStageScaling, setCrystalBairitu,
-         setCrystalScope, setCrystalElement, setCrystalWeapon,
-         setCrystalLevelMax, setCrystalWeightMin, setCrystalStep, setCrystalDelta,
-         addCrystalEffect, removeCrystalEffect, reRenderCrystalEdit,
-         renderEditBody } from '../js/cr-edit.js';
+      Nav.init();
 
-Nav.init();
-
-document.addEventListener('DOMContentLoaded', () => {
-  initFilterToggles();
-  fetch('../data/crystals.json')
-    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(arr => {
-      state.allCrystals = arr.filter(c => !c.tombstone);
-      return fetch('../data/crystals_extra.json').then(r => r.ok ? r.json() : []).catch(() => []);
-    })
-    .then(ext => {
-      if (Array.isArray(ext)) state.allCrystals.push(...ext.filter(c => !c.tombstone));
-      // originalData snapshot: base + extra
-      state.allCrystals.forEach(c => {
-        if (!state.originalData[c.id]) state.originalData[c.id] = JSON.parse(JSON.stringify(c));
+      document.addEventListener('DOMContentLoaded', () => {
+        initFilterToggles();
+        fetch('../data/crystals.json')
+          .then((r) => {
+            if (!r.ok) throw new Error(r.status);
+            return r.json();
+          })
+          .then((arr) => {
+            state.allCrystals = arr.filter((c) => !c.tombstone);
+            return fetch('../data/crystals_extra.json')
+              .then((r) => (r.ok ? r.json() : []))
+              .catch(() => []);
+          })
+          .then((ext) => {
+            if (Array.isArray(ext)) state.allCrystals.push(...ext.filter((c) => !c.tombstone));
+            // originalData snapshot: base + extra
+            state.allCrystals.forEach((c) => {
+              if (!state.originalData[c.id])
+                state.originalData[c.id] = JSON.parse(JSON.stringify(c));
+            });
+            applyFilters();
+            // hideLoading 推迟到 revise deepApply 完之后、避免 base→revise 闪烁
+            return fetch('../data/crystals_revise.json');
+          })
+          .then((r) => (r.ok ? r.json() : []))
+          .then((arr) => {
+            arr.forEach((c) => {
+              state.reviseData[c.id] = c;
+              const idx = state.allCrystals.findIndex((x) => x.id === c.id);
+              if (idx >= 0) deepApply(state.allCrystals[idx], c);
+            });
+            // base+revise 合并后强制 effect scope 约束：scope ∈ {0,1} 时清 element/type
+            enforceScopeConstraints(state.allCrystals);
+            if (arr.length) applyFilters();
+            hideLoading();
+            // crystals_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
+            return fetch('../data/crystals_check.json');
+          })
+          .then((r) => (r && r.ok ? r.json() : null))
+          .then((arr) => {
+            if (Array.isArray(arr)) {
+              state.crystalCheckEnabled = true;
+              arr.forEach((id) => state.crystalCheck.add(id));
+              applyFilters();
+            }
+          })
+          .catch(() => {
+            applyFilters();
+            hideLoading();
+          });
       });
-      applyFilters();
-      hideLoading();
-      return fetch('../data/crystals_revise.json');
-    })
-    .then(r => r.ok ? r.json() : [])
-    .then(arr => {
-      arr.forEach(c => {
-        state.reviseData[c.id] = c;
-        const idx = state.allCrystals.findIndex(x => x.id === c.id);
-        if (idx >= 0) deepApply(state.allCrystals[idx], c);
+
+      // 「絞り込み」展開中の user-initiated scroll でのみ collapse — touchmove (mobile) / wheel (desktop)。
+      // scroll 事件は使わない：filter 操作後の list 高さ変化による浏览器 auto-clamp scrollY を user スクロールと誤判するため。
+      window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
+      window.addEventListener('wheel', collapseFiltersOnScroll, { passive: true });
+
+      window.state = state;
+      Object.assign(window, {
+        applyFilters,
+        toggleFilter,
+        expandAll,
+        collapseAll,
+        resetFilters,
+        toggleFilters,
+        toggleExpand,
+        enterEditMode,
+        cancelEdit,
+        saveEdit,
+        saveRevise,
+        toggleCrystalBunrui,
+        setCrystalHitStage,
+        setCrystalHitStageScaling,
+        setCrystalBairitu,
+        setCrystalScope,
+        setCrystalElement,
+        setCrystalWeapon,
+        setCrystalLevelMax,
+        setCrystalWeightMin,
+        setCrystalStep,
+        setCrystalDelta,
+        addCrystalEffect,
+        removeCrystalEffect,
+        reRenderCrystalEdit,
+        renderEditBody,
+        updateReviseBar,
+        escHtml,
+        fmt,
+        parseBairituVal,
       });
-      // base+revise 合并后强制 effect scope 约束：scope ∈ {0,1} 时清 element/type
-      enforceScopeConstraints(state.allCrystals);
-      if (arr.length) applyFilters();
-      // crystals_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
-      return fetch('../data/crystals_check.json');
-    })
-    .then(r => r && r.ok ? r.json() : null)
-    .then(arr => {
-      if (Array.isArray(arr)) {
-        state.crystalCheckEnabled = true;
-        arr.forEach(id => state.crystalCheck.add(id));
-        applyFilters();
-      }
-    })
-    .catch(() => { applyFilters(); hideLoading(); });
-});
-
-// 「絞り込み」展開中の user-initiated scroll でのみ collapse — touchmove (mobile) / wheel (desktop)。
-// scroll 事件は使わない：filter 操作後の list 高さ変化による浏览器 auto-clamp scrollY を user スクロールと誤判するため。
-window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
-window.addEventListener('wheel',     collapseFiltersOnScroll, { passive: true });
-
-window.state = state;
-Object.assign(window, {
-  applyFilters, toggleFilter, expandAll, collapseAll, resetFilters, toggleFilters,
-  toggleExpand, enterEditMode, cancelEdit, saveEdit, saveRevise,
-  toggleCrystalBunrui, setCrystalHitStage, setCrystalHitStageScaling, setCrystalBairitu,
-  setCrystalScope, setCrystalElement, setCrystalWeapon,
-  setCrystalLevelMax, setCrystalWeightMin, setCrystalStep, setCrystalDelta,
-  addCrystalEffect, removeCrystalEffect, reRenderCrystalEdit,
-  renderEditBody, updateReviseBar, escHtml, fmt, parseBairituVal,
-});
-</script>
-</body>
+    </script>
+  </body>
 </html>

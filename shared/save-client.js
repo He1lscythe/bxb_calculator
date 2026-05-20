@@ -18,8 +18,8 @@ export const isLocalEnv = () => {
   );
 };
 
-export const submitRevise = async body => {
-  const local    = isLocalEnv();
+export const submitRevise = async (body) => {
+  const local = isLocalEnv();
   const endpoint = local ? '/save' : VERCEL_API;
   const res = await fetch(endpoint, {
     method: 'POST',
@@ -27,13 +27,17 @@ export const submitRevise = async body => {
     body: JSON.stringify(body),
   });
   let json;
-  try { json = await res.json(); } catch (_) { json = {}; }
+  try {
+    json = await res.json();
+  } catch (_) {
+    json = {};
+  }
   if (!res.ok) throw new Error(json.error || `HTTP ${res.status}`);
   return { ...json, mode: local ? 'local' : 'remote' };
 };
 
 export const pickPatches = (reviseData, ids) =>
-  ids.filter(id => reviseData?.[id]).map(id => reviseData[id]);
+  ids.filter((id) => reviseData?.[id]).map((id) => reviseData[id]);
 
 export const showSaveToast = (html, durationMs = 6000) => {
   const t = document.getElementById('save-toast');
