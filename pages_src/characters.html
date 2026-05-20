@@ -375,6 +375,11 @@
         })
         .then((ext) => {
           if (Array.isArray(ext)) state.allMasou.push(...ext);
+          // originalData snapshot：base + extra（saveEdit 时 computeDiff 的 baseline）
+          state.allMasou.forEach((m) => {
+            if (!state.masouOriginalData[m.id])
+              state.masouOriginalData[m.id] = JSON.parse(JSON.stringify(m));
+          });
           return fetch('../data/masou_revise.json')
             .then((r) => (r.ok ? r.json() : []))
             .catch(() => []);

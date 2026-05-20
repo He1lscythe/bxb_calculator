@@ -169,10 +169,32 @@ export const saveEdit = () => {
           mergedPatch = Object.assign({}, patch, { effects: next });
         }
         state.allMasou[i] = Object.assign({}, state.allMasou[i], mergedPatch);
-        state.masouReviseData[+mid] = Object.assign({ id: +mid }, mergedPatch);
-        // session 内に masou を触れたことを記録 → updateReviseBar が右上の保存
-        // ボタンを点ける + saveRevise が masou_revise を提出する根拠になる。
-        state.masouSessionReviseIds.add(+mid);
+        const mb = state.allMasou[i];
+        // 用 computeDiff(base, current, prev) 算 diff、撤回到 base 时自动 emit null
+        // 撤回标记（同 chara/cr/soul/bg 套路）、server _deep_merge 自动 pop。
+        // metadata 字段 (name / chara_id / chara_name) 始终带进 entry 让 revise.json 可读
+        // （server _hasRealContent 已豁免、metadata-only entry 会被整条删）。
+        const orig = state.masouOriginalData[+mid];
+        if (orig) {
+          const prev = state.masouReviseData[+mid];
+          const diff = computeDiff(orig, mb, prev);
+          // 注意 diff 已含 id + name、被 Object.assign 后面参数覆盖。
+          // meaningful check 用跟 server _hasRealContent 同款豁免（id/name/chara_id/chara_name）
+          const meaningful = Object.keys(diff).some(
+            (k) => k !== 'id' && k !== 'name' && k !== 'chara_id' && k !== 'chara_name',
+          );
+          if (meaningful) {
+            state.masouReviseData[+mid] = Object.assign(
+              { id: +mid, name: mb.name, chara_id: mb.chara_id, chara_name: mb.chara_name },
+              diff,
+            );
+            state.masouSessionReviseIds.add(+mid);
+          } else {
+            // 撤回到 base：清 revise entry、session id 也清
+            delete state.masouReviseData[+mid];
+            state.masouSessionReviseIds.delete(+mid);
+          }
+        }
       }
     });
     // 再グルーピング

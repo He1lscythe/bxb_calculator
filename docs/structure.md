@@ -267,8 +267,10 @@ git add data/ && git commit -m "..." && git push
 |---|---|
 | 前端 `computeDiff(orig, modified, prevRevise)` | 用户撤回字段（modified 跟 base 相同但 prev 里有）→ emit `field: null` 撤回标记 |
 | API `deepMerge(target, source)` | source 是 plain object → 字段级合并；source[k] === null → 删除 result[k]；空 dict 自动 prune |
-| `mergeById` | deepMerge 后只剩 `{id, name}` 的空 entry 直接丢弃 |
+| `mergeById` | deepMerge 后只剩 metadata 字段（`id / name / chara_id / chara_name`）的空 entry 直接丢弃 |
 | 落盘 revise.json | 永远不含 null（撤回标记仅在传输阶段存在） |
+
+**`_hasRealContent` metadata 豁免列表**：`{id, name, chara_id, chara_name}`。`chara_id` / `chara_name` 是 masou_revise 的可读 metadata（同 `id` / `name` 思路、不参与撤回判定）。其他 viewer 的 revise entry 不含这两字段、不受影响。
 
 start.py `_deep_merge` / `_merge_by_id` 与 Vercel api/save.js 同语义（local + remote 行为一致）。
 
@@ -301,6 +303,7 @@ else            delete state.reviseData[id];
 - **crystal**：[js/cr-edit.js setCrystal* handlers](js/cr-edit.js#L132) 在 UI 用户清字段 (level_max / weight_step / scope 0/1 时的 element/type / 等) 时显式 `editData.X = null`，diff 看到 nullish vs defined → emit null
 - **chara**：dual-revise 文件，prev 是 `Object.assign({}, charRevise, omoideRevise)`，diff 后按 OMOIDE_KEYS 拆回两个 revise
 - **chara omoide_template override**（非 retraction）：[js/edit.js:194](js/edit.js#L194) `if (hasOmoide && omoideDiff.omoide_template != null) omoideDiff.omoide = null` —— template 选中时 omoide 数组冗余，强制清
+- **chara masou_overrides**（chara editor 内嵌）：跟 chara/cr/soul/bg 同款走 `computeDiff(masouOriginalData[mid], allMasou[i], prevRevise)`、撤回时自动 emit `null`。`masouOriginalData` 在 [characters.html](pages_src/characters.html#L376) masou load 时（base + extra 合并完、deepApply(revise) 之前）snapshot。落盘 entry 含 `id / name / chara_id / chara_name` 4 个 metadata 字段、可读。saveReviseCharaCore refresh 阶段也用无 prev 的 computeDiff 重算 masouReviseData（[shared/save-edit-base.js:204](shared/save-edit-base.js#L204)）
 
 **已知陷阱**：base 无字段 + revise 新增字段（如 chara base 无 `bd_skill`、用户手动给某 chara revise 加 `bd_skill`）：
 - `originalData[id].bd_skill === undefined`、`editData.bd_skill` 是 object → `_deepDiff` 走 leaf 分支 (oNullish + mval defined)
