@@ -12,9 +12,13 @@ import {
   renderEditSelect,
   renderEditCheckboxes,
 } from '../shared/constants.js';
-import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
+import {
+  saveEditSingleViewer,
+  saveReviseSingleViewer,
+  wrapSaveReviseUi,
+} from '../shared/save-edit-base.js';
 import { escHtml, fmtBairitu, fmtHitStages, ctPfx, min } from './utils.js';
-import { getPath, setPath, _deepDiff, computeDiff, deepApply } from './diff.js';
+import { getPath, setPath } from './diff.js';
 import { selectSoul, setupStickyHeights, _deletedSet, AFF_LABEL, AFF_CLS } from './soul-render.js';
 import { updateReviseBar } from './nav.js';
 
@@ -156,7 +160,7 @@ const _normalizeAffinityForDiff = (soul) => {
 
 export const saveEdit = () => {
   if (!state.editData) return;
-  // Clean up empty tombstone / added arrays
+  // Clean up empty tombstone / added arrays — viewer-specific pre-diff cleanup
   if (
     Array.isArray(state.editData._deleted_skills) &&
     state.editData._deleted_skills.length === 0
@@ -166,72 +170,25 @@ export const saveEdit = () => {
   if (Array.isArray(state.editData._added_skills) && state.editData._added_skills.length === 0) {
     delete state.editData._added_skills;
   }
-  const id = state.editData.id;
-  const idx = state.allSouls.findIndex((x) => x.id === id);
-  if (idx >= 0) {
-    // session 内是否真改过：拿 editData 跟 pre-edit 的 allSouls[idx] 对比，
-    // 而不是 originalData（base）。撤回到 base 算 session 变化。
-    const sessionChanged = JSON.stringify(state.editData) !== JSON.stringify(state.allSouls[idx]);
-    if (sessionChanged) {
-      state.allSouls[idx] = state.editData;
-      const normalizedEdit = _normalizeAffinityForDiff(state.editData);
-      const prevRevise = state.reviseData[id]; // 撤回検知用
-      const newDiff = computeDiff(state.originalData[id], normalizedEdit, prevRevise);
-      const meaningful = Object.keys(newDiff).some((k) => k !== 'id' && k !== 'name');
-      if (meaningful) {
-        state.reviseData[id] = newDiff;
-        state.sessionReviseIds.add(id);
-      } else {
-        // 完全没差异（比如改了又改回来）→ 清空，不入队
-        delete state.reviseData[id];
-        state.sessionReviseIds.delete(id);
-      }
-    }
-    updateReviseBar();
-  }
+  const { idx } = saveEditSingleViewer(state, {
+    collectionKey: 'allSouls',
+    normalizeForDiff: _normalizeAffinityForDiff,
+  });
+  if (idx >= 0) updateReviseBar();
   state.editData = null;
   selectSoul(state.selectedId);
 };
 
-export const saveRevise = async () => {
-  const btn = document.querySelector('.btn-revise-save');
-  const status = document.getElementById('revise-status');
-  btn.textContent = '保存中...';
-  btn.disabled = true;
-  try {
-    const ids = Array.from(state.sessionReviseIds);
-    const json = await submitRevise({
-      session_ids: ids,
-      souls_revise: pickPatches(state.reviseData, ids),
-    });
-    // submit 成功后，refresh state.reviseData[id] 反映 disk 实际状態（去除 null マーカー）。
-    // 否则下次 saveEdit 拿到带 null 的 stale prev → computeDiff 重复产出 null。
-    for (const id of ids) {
-      const idx = state.allSouls.findIndex((s) => s.id === id);
-      if (idx < 0) continue;
-      const norm = _normalizeAffinityForDiff(state.allSouls[idx]);
-      const fresh = computeDiff(state.originalData[id], norm); // no prev → 无 null
-      if (Object.keys(fresh).some((k) => k !== 'id' && k !== 'name')) {
-        state.reviseData[id] = fresh;
-      } else {
-        delete state.reviseData[id];
-      }
-    }
-    state.sessionReviseIds.clear();
-    if (json.mode === 'remote') {
-      showSaveToast(`✓ 提案受付完了 — 管理者の審査・マージ後に反映されます`);
-      status.textContent = '';
-    } else {
-      status.textContent = '✓ 保存完了';
-    }
-  } catch (err) {
-    status.textContent = '保存失敗';
-    console.error(err);
-  } finally {
-    btn.disabled = false;
-    updateReviseBar();
-  }
-};
+export const saveRevise = () =>
+  wrapSaveReviseUi(
+    () =>
+      saveReviseSingleViewer(state, {
+        collectionKey: 'allSouls',
+        bucketKey: 'souls_revise',
+        normalizeForDiff: _normalizeAffinityForDiff,
+      }),
+    updateReviseBar,
+  );
 
 export const renderEditDetail = (s) => {
   return min`

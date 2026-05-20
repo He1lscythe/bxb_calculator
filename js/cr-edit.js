@@ -9,9 +9,12 @@ import {
   SCOPE,
   renderEditSelect,
 } from '../shared/constants.js';
-import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
+import {
+  saveEditSingleViewer,
+  saveReviseSingleViewer,
+  wrapSaveReviseUi,
+} from '../shared/save-edit-base.js';
 import { escHtml, parseBairituVal } from './utils.js';
-import { computeDiff } from './diff.js';
 import {
   renderDetailBody,
   renderRowHd,
@@ -59,34 +62,8 @@ export const cancelEdit = () => {
 };
 
 export const saveEdit = () => {
-  if (!state.editData) return;
-  const id = state.editData.id;
-  const idx = state.allCrystals.findIndex(function (x) {
-    return x.id === id;
-  });
-  if (idx >= 0) {
-    // session 内是否真改过：跟 pre-edit 的 allCrystals[idx] 对比
-    const sessionChanged =
-      JSON.stringify(state.editData) !== JSON.stringify(state.allCrystals[idx]);
-    if (sessionChanged) {
-      state.allCrystals[idx] = state.editData;
-      // prev-revise pattern：传上次落盘的 revise，_deepDiff 的 prev 规则会自动
-      // emit null 撤回标记。配合 server _deep_merge null pop 实现「改回 base 时
-      // 清除 stale revise 字段」的撤回。
-      const prevRevise = state.reviseData[id];
-      const newDiff = computeDiff(state.originalData[id], state.editData, prevRevise);
-      const meaningful = Object.keys(newDiff).some((k) => k !== 'id' && k !== 'name');
-      if (meaningful) {
-        state.reviseData[id] = newDiff;
-        state.sessionReviseIds.add(id);
-      } else {
-        // 完全无差异且 prev 也无残留 → 清空，不入队
-        delete state.reviseData[id];
-        state.sessionReviseIds.delete(id);
-      }
-    }
-    updateReviseBar();
-  }
+  const { idx, id } = saveEditSingleViewer(state, { collectionKey: 'allCrystals' });
+  if (idx >= 0) updateReviseBar();
   state.editingId = null;
   state.editData = null;
 
@@ -662,42 +639,12 @@ export const renderEditBody = (c) => {
   );
 };
 
-export const saveRevise = async () => {
-  const btn = document.querySelector('.btn-revise-save');
-  const status = document.getElementById('revise-status');
-  btn.textContent = '保存中...';
-  btn.disabled = true;
-  try {
-    const ids = Array.from(state.sessionReviseIds);
-    const json = await submitRevise({
-      session_ids: ids,
-      crystals_revise: pickPatches(state.reviseData, ids),
-    });
-    // submit 成功后 refresh：用无 prev 的 computeDiff 重算 state.reviseData，
-    // 去掉 null 撤回标记，防止下次 saveEdit 拿到 stale prev 重复 emit null。
-    // mirror js/soul-edit.js:147-157 / js/bg-edit.js 同款。
-    for (const id of ids) {
-      const idx = state.allCrystals.findIndex((c) => c.id === id);
-      if (idx < 0) continue;
-      const fresh = computeDiff(state.originalData[id], state.allCrystals[idx]);
-      if (Object.keys(fresh).some((k) => k !== 'id' && k !== 'name')) {
-        state.reviseData[id] = fresh;
-      } else {
-        delete state.reviseData[id];
-      }
-    }
-    state.sessionReviseIds.clear();
-    if (json.mode === 'remote') {
-      showSaveToast(`✓ 提案受付完了 — 管理者の審査・マージ後に反映されます`);
-      status.textContent = '';
-    } else {
-      status.textContent = '✓ 保存完了';
-    }
-  } catch (err) {
-    status.textContent = '保存失敗';
-    console.error(err);
-  } finally {
-    btn.disabled = false;
-    updateReviseBar();
-  }
-};
+export const saveRevise = () =>
+  wrapSaveReviseUi(
+    () =>
+      saveReviseSingleViewer(state, {
+        collectionKey: 'allCrystals',
+        bucketKey: 'crystals_revise',
+      }),
+    updateReviseBar,
+  );

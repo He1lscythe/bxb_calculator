@@ -9,9 +9,12 @@ import {
   SCOPE,
   renderEditSelect,
 } from '../shared/constants.js';
-import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
+import {
+  saveEditSingleViewer,
+  saveReviseSingleViewer,
+  wrapSaveReviseUi,
+} from '../shared/save-edit-base.js';
 import { escHtml } from './utils.js';
-import { _deepDiff, computeDiff, deepApply } from './diff.js';
 import {
   renderList,
   renderDetailBody,
@@ -59,39 +62,13 @@ export const cancelEdit = () => {
 };
 
 export const saveEdit = () => {
-  if (!state.editData) return;
-  const id = state.editData.id;
-  const idx = state.allBG.findIndex(function (x) {
-    return x.id === id;
-  });
-  if (idx >= 0) {
-    // session 内是否真改过：跟 pre-edit 的 allBG[idx] 对比
-    const sessionChanged = JSON.stringify(state.editData) !== JSON.stringify(state.allBG[idx]);
-    if (sessionChanged) {
-      state.allBG[idx] = state.editData;
-      // prev-revise pattern：把上次落盘的 revise 传给 _deepDiff，
-      // 让叶子撤回（mval==oval 但 prev 有值）自动 emit `null` 触发 server pop。
-      // 不再需要 totalChanged 检查 — meaningful 判定取代之。
-      const prevRevise = state.reviseData[id];
-      const newDiff = computeDiff(state.originalData[id], state.editData, prevRevise);
-      const meaningful = Object.keys(newDiff).some((k) => k !== 'id' && k !== 'name');
-      if (meaningful) {
-        state.reviseData[id] = newDiff;
-        state.sessionReviseIds.add(id);
-      } else {
-        // 完全无差异（编辑又撤回到 base，且 prev 也无残留）→ 清空，不入队
-        delete state.reviseData[id];
-        state.sessionReviseIds.delete(id);
-      }
-    }
-    updateReviseBar();
-  }
-  const id2 = id;
+  const { idx, id } = saveEditSingleViewer(state, { collectionKey: 'allBG' });
+  if (idx >= 0) updateReviseBar();
   state.editingId = null;
   state.editData = null;
 
-  const row = document.getElementById('row-' + id2);
-  const body = document.getElementById('body-' + id2);
+  const row = document.getElementById('row-' + id);
+  const body = document.getElementById('body-' + id);
   const c = idx >= 0 ? state.allBG[idx] : null;
   if (row && c) {
     // 整段替换 .bg-row-hd 内容（renderRowHd 与初始 renderRow 同源）— 避免
@@ -444,42 +421,9 @@ export const renderEditBody = (c) => {
   );
 };
 
-export const saveRevise = async () => {
-  const btn = document.querySelector('.btn-revise-save');
-  const status = document.getElementById('revise-status');
-  btn.textContent = '保存中...';
-  btn.disabled = true;
-  try {
-    const ids = Array.from(state.sessionReviseIds);
-    const json = await submitRevise({
-      session_ids: ids,
-      bladegraphs_revise: pickPatches(state.reviseData, ids),
-    });
-    // submit 成功后 refresh：用无 prev 的 computeDiff 重算 state.reviseData，
-    // 去掉 null 撤回标记，防止下次 saveEdit 拿到 stale prev → null 重复发射。
-    // mirror js/soul-edit.js:147-157
-    for (const id of ids) {
-      const idx = state.allBG.findIndex((b) => b.id === id);
-      if (idx < 0) continue;
-      const fresh = computeDiff(state.originalData[id], state.allBG[idx]);
-      if (Object.keys(fresh).some((k) => k !== 'id' && k !== 'name')) {
-        state.reviseData[id] = fresh;
-      } else {
-        delete state.reviseData[id];
-      }
-    }
-    state.sessionReviseIds.clear();
-    if (json.mode === 'remote') {
-      showSaveToast(`✓ 提案受付完了 — 管理者の審査・マージ後に反映されます`);
-      status.textContent = '';
-    } else {
-      status.textContent = '✓ 保存完了';
-    }
-  } catch (err) {
-    status.textContent = '保存失敗';
-    console.error(err);
-  } finally {
-    btn.disabled = false;
-    updateReviseBar();
-  }
-};
+export const saveRevise = () =>
+  wrapSaveReviseUi(
+    () =>
+      saveReviseSingleViewer(state, { collectionKey: 'allBG', bucketKey: 'bladegraphs_revise' }),
+    updateReviseBar,
+  );

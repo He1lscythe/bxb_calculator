@@ -13,7 +13,11 @@ import {
   renderEditCheckboxes,
   renderFilterToggles,
 } from '../shared/constants.js';
-import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
+import {
+  saveEditCharaCore,
+  saveReviseCharaCore,
+  wrapSaveReviseUi,
+} from '../shared/save-edit-base.js';
 import { escHtml, fmtBairitu, fmtHitStages, ctPfx, hasOmoide, min } from './utils.js';
 import {
   selectChar,
@@ -140,56 +144,8 @@ export const saveEdit = () => {
     });
     if (!Object.keys(state.editData._added_skills).length) delete state.editData._added_skills;
   }
-  const id = state.editData.id;
-  const idx = state.allChars.findIndex((x) => x.id === id);
-  if (idx >= 0) {
-    // 本次会话有没有真的改东西：拿当前 state.editData 跟「编辑前的 state.allChars[idx]」对比，
-    // 而不是跟 state.originalData 对比（后者不含已加载的 revise 补丁，会误判）
-    const sessionChanged = JSON.stringify(state.editData) !== JSON.stringify(state.allChars[idx]);
-    if (sessionChanged) {
-      state.allChars[idx] = state.editData;
-      // prev-revise pattern：合并两个 revise 文件作为 prev，让 _deepDiff 的撤回
-      // 规则自动 emit null 给所有 base→prev→base 的字段（不再需要手动 tags=null /
-      // OMOIDE_KEYS 循环注入）。然后按 OMOIDE_KEYS 拆 diff 进两个 revise。
-      const prevMerged = Object.assign(
-        {},
-        state.reviseData[id] || {},
-        state.omoideReviseData[id] || {},
-      );
-      const diff = computeDiff(state.originalData[id], state.editData, prevMerged);
-      const charDiff = { id: diff.id, name: diff.name };
-      const omoideDiff = { id: diff.id, name: diff.name };
-      let hasChar = false,
-        hasOmoide = false;
-      for (const key in diff) {
-        if (key === 'id' || key === 'name') continue;
-        if (OMOIDE_KEYS.has(key)) {
-          omoideDiff[key] = diff[key];
-          hasOmoide = true;
-        } else {
-          charDiff[key] = diff[key];
-          hasChar = true;
-        }
-      }
-      // omoide_template 非 null 時、omoide 配列は冗長（render 時 resolveOmoideTemplates
-      // が templates から復元）。这是 override 语义而非 retraction，prev-revise 不能替代。
-      if (hasOmoide && omoideDiff.omoide_template != null) {
-        omoideDiff.omoide = null;
-      }
-      if (hasChar) {
-        state.reviseData[id] = charDiff;
-      } else {
-        delete state.reviseData[id];
-      }
-      if (hasOmoide) {
-        state.omoideReviseData[id] = omoideDiff;
-      } else {
-        delete state.omoideReviseData[id];
-      }
-      state.sessionReviseIds.add(id);
-    }
-    // sessionChanged === false：用户没改任何东西，原样保留 state.reviseData/state.sessionReviseIds
-  }
+  // Core diff + revise split (chara 多 bucket：reviseData + omoideReviseData)
+  saveEditCharaCore(state, { OMOIDE_KEYS });
   // 魔装 overrides をローカル data に書き戻し（永続化はまだ未実装；session 内のみ反映）
   if (masouOverrides) {
     Object.entries(masouOverrides).forEach(([mid, patch]) => {
@@ -232,64 +188,8 @@ export const saveEdit = () => {
   selectChar(state.selectedId);
 };
 
-export const saveRevise = async () => {
-  let btn = document.querySelector('.btn-revise-save');
-  let status = document.getElementById('revise-status');
-  btn.textContent = '保存中...';
-  btn.disabled = true;
-  try {
-    const ids = Array.from(state.sessionReviseIds);
-    const masouIds = Array.from(state.masouSessionReviseIds);
-    const json = await submitRevise({
-      session_ids: ids,
-      masou_session_ids: masouIds,
-      revise: pickPatches(state.reviseData, ids),
-      omoide_revise: pickPatches(state.omoideReviseData, ids),
-      masou_revise: pickPatches(state.masouReviseData, masouIds),
-    });
-    // submit 成功后 refresh：用无 prev 的 computeDiff 重算 state.reviseData /
-    // state.omoideReviseData，去除 null 撤回标记，防止下次 saveEdit 拿到 stale
-    // prev 重复 emit null。mirror soul/bg/crystal saveRevise refresh 同款。
-    for (const id of ids) {
-      const idx = state.allChars.findIndex((c) => c.id === id);
-      if (idx < 0) continue;
-      const fresh = computeDiff(state.originalData[id], state.allChars[idx]);
-      const charDiff = { id: fresh.id, name: fresh.name };
-      const omoideDiff = { id: fresh.id, name: fresh.name };
-      let hasChar = false,
-        hasOmoide = false;
-      for (const key in fresh) {
-        if (key === 'id' || key === 'name') continue;
-        if (OMOIDE_KEYS.has(key)) {
-          omoideDiff[key] = fresh[key];
-          hasOmoide = true;
-        } else {
-          charDiff[key] = fresh[key];
-          hasChar = true;
-        }
-      }
-      if (hasOmoide && omoideDiff.omoide_template != null) omoideDiff.omoide = null;
-      if (hasChar) state.reviseData[id] = charDiff;
-      else delete state.reviseData[id];
-      if (hasOmoide) state.omoideReviseData[id] = omoideDiff;
-      else delete state.omoideReviseData[id];
-    }
-    state.sessionReviseIds.clear();
-    state.masouSessionReviseIds.clear();
-    if (json.mode === 'remote') {
-      showSaveToast(`✓ 提案受付完了 — 管理者の審査・マージ後に反映されます`);
-      status.textContent = '';
-    } else {
-      status.textContent = '✓ 保存完了';
-    }
-  } catch (err) {
-    status.textContent = '保存失敗';
-    console.error(err);
-  } finally {
-    btn.disabled = false;
-    updateReviseBar();
-  }
-};
+export const saveRevise = () =>
+  wrapSaveReviseUi(() => saveReviseCharaCore(state, { OMOIDE_KEYS }), updateReviseBar);
 
 export const renderEditDetail = (c) => {
   const stateKeys = Object.keys(c.states || {});
