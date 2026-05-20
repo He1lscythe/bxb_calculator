@@ -360,8 +360,8 @@ export const renderEditDetail = (c) => {
         </div>
       </div>
     </div>
-    <div class="state-tabs">${tabs}</div>
     ${bdEditSection}
+    <div class="state-tabs">${tabs}</div>
     ${contents}
     ${renderMasouEditSection(c)}
     <div class="section" style="margin-top:16px">
