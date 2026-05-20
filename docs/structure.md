@@ -495,6 +495,51 @@ function updateReviseBar() {
 ---
 
 
+## Tests / CI
+
+### Node 单测（tests/run_all.cjs）
+
+`tests/test_*.cjs` 都是纯 Node、无浏览器、不依赖外部服务。`npm test` 跑 `tests/run_all.cjs` 串联所有 cjs spec、当前 715 pass / 0 fail。
+
+主要 spec：
+
+| 文件 | 覆盖 |
+|---|---|
+| `test_calculator.cjs` | hensei stats 算法 mirror（700 行复刻、计划 Step G 切换为 import 真 stats-calc.js） |
+| `test_diff.cjs` | `js/diff.js` `computeDiff` / `_deepDiff` 稀疏 dict + null 撤回标记 |
+| `test_save_edit_base.cjs` | `shared/save-edit-base.js` 4 core 函数 + chara/cr/soul/bg/masou 对齐场景 |
+| `test_edit_retraction.cjs` | prev-revise pattern：编辑 → 撤回 → revise 整条删 |
+| `test_revise_merge.cjs` | server `_deep_merge` + `_hasRealContent` metadata 豁免 |
+| `test_data_integrity.cjs` | base + extra + revise 合并后字段完整性 |
+| `test_calc_formulas.cjs` / `test_final_calc.cjs` / `test_hit_scaling.cjs` / `test_crystal_dims.cjs` / `test_crystal_split.cjs` / `test_bairitu_scaling.cjs` / `test_soul_affinity.cjs` / `test_classify_soul.cjs` / `test_hensei_align.cjs` / `test_emblem_schema.cjs` | 各算法/分类/schema 单测 |
+
+### Playwright UI smoke（tests/ui/*.spec.js）
+
+5 个 viewer 的端到端 smoke：load → 列表渲染 → enterEditMode → saveEdit → revise-bar → saveRevise（mock /save endpoint）。
+
+| 文件 | 覆盖 |
+|---|---|
+| `tests/ui/characters.spec.js` | chara list + detail + edit + save + masou state 暴露 |
+| `tests/ui/crystals.spec.js` | crystal row 展开 + edit + save |
+| `tests/ui/souls.spec.js` | soul detail + edit + save |
+| `tests/ui/bladegraphs.spec.js` | bg row 展开 + edit + save |
+| `tests/ui/hensei.spec.js` | 3 slot 容器 + setChara → stats panel 渲染非 0 攻撃力/HP |
+
+`tests/ui/helpers.js` 提供 `attachPageErrorWatcher`（监听 pageerror / console error）+ `mockSaveEndpoints`（拦截 /save + Vercel /api/save、返回 mock 成功 JSON，不真发请求）。
+
+跑法：`npm run test:ui`（或 `npx playwright test`）。`playwright.config.js` 自动起 `python -m http.server 8765 --bind 127.0.0.1` 作为静态 web server、跑完即停。仅 chromium-headless-shell、~112MB（local 装一次、`AppData/Local/ms-playwright/`、git 不入）。
+
+### CI workflows
+
+| 文件 | 触发 | 跑什么 |
+|---|---|---|
+| `.github/workflows/test.yml` | push / PR to main | `npm ci && npm test && npm run lint` |
+| `.github/workflows/ui.yml` | push / PR to main | `npm ci && npx playwright install --with-deps chromium && npm run test:ui` |
+
+两个 workflow 独立 job（并行）。lint 配置 `eslint.config.js` 只 enforce 3 条 critical rule（no-undef / no-unused-vars / no-redeclare）、warning 不 fail。Prettier 不进 CI（`npm run format` 给开发者手动用）。
+
+---
+
 ## 运行时文件（gitignored）
 
 | 文件 | 说明 |
