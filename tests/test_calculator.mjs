@@ -1,16 +1,33 @@
-// 测试 hensei.html 计算器逻辑
-// 用法: node tests/test_calculator.js
-// 镜像 hensei.html 的核心计算函数 (computeStats / _baseStat / _buffApplies / _conditionMet / ...)
-// 然后跑一组场景验证：单魔剑/双魔剑/三魔剑、各种 scope/condition/状态
+// 测试 hensei.html 计算器逻辑（Step G post-migration）。
+// 用法: node tests/test_calculator.mjs
+//
+// 历史：之前是 .cjs + 700 行 mirror（自复刻 computeStats / _baseStat / _buffApplies 等）。
+// Step G P1a-followup 后切到 import 真 stats-calc.js：mirror 9 个 helper 删除（用 stats-calc 的）、
+// mirror computeStats 改成 thin wrapper 转发到 real computeStats（保留旧 4-参签名兼容 75 个 test）。
+// `buildTestCtx(team, teamSize, opts)` 构造 14 字段 ctx 注入数据集 / enemy 默认值等。
 
-const fs = require('fs');
-const path = require('path');
+import { readFileSync, writeFileSync } from 'node:fs';
+import { resolve, dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve(__dirname, '..');
-const DATA_DIR = path.join(ROOT, 'data');
-const TESTS_DIR = __dirname;
+import {
+  computeStats as realComputeStats,
+  _STAT_KEYS,
+  _BUNRUI_TO_STAT,
+  _capLevel,
+  JUKUDO_MAX_TBL,
+  LEVEL_MAX_TBL,
+  LEVEL_1JUK_TBL,
+  AWAKENING_MAX_TBL,
+  AWAKENING_MULT_TBL,
+} from '../js/stats-calc.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const ROOT = resolve(__dirname, '..');
+const DATA_DIR = join(ROOT, 'data');
 function load(name) {
-  return JSON.parse(fs.readFileSync(path.join(DATA_DIR, name), 'utf8'));
+  return JSON.parse(readFileSync(join(DATA_DIR, name), 'utf8'));
 }
 
 // ===== 加载真实数据 (用于真实场景测试) =====
@@ -87,253 +104,65 @@ applyRevise(allCharas, tryLoad('omoide_revise.json'));
 applyRevise(allSouls, tryLoad('souls_revise.json'));
 applyRevise(allCrystals, tryLoad('crystals_revise.json'));
 
-// ===== 常量 (与 hensei.html 一致) =====
-const _STAT_KEYS = ['攻撃力', '防御力', 'HP', 'ブレイク力'];
-const _BUNRUI_TO_STAT = { 1: '攻撃力', 2: 'ブレイク力', 10: 'HP', 12: '防御力' };
-const JUKUDO_MAX_TBL = {
-  4: { 通常: 60, 改造: 99 },
-  3: { 通常: 50, 改造: 75, 極弐: 90 },
-  2: { 通常: 30, 改造: 45, 極弐: 70 },
-  1: { 通常: 10, 改造: 25, 極弐: 50 },
-};
-const LEVEL_MAX_TBL = {
-  4: { 通常: 250, 改造: 255 },
-  3: { 通常: 200, 改造: 215, 極弐: 230 },
-  2: { 通常: 150, 改造: 155, 極弐: 180 },
-  1: { 通常: 60, 改造: 99, 極弐: 120 },
-};
-const LEVEL_1JUK_TBL = {
-  4: { 通常: 60, 改造: 70 },
-  3: { 通常: 40, 改造: 50, 極弐: 65 },
-  2: { 通常: 30, 改造: 35, 極弐: 60 },
-  1: { 通常: 15, 改造: 20, 極弐: 35 },
-};
-const AWAKENING_MAX_TBL = { 4: 9, 3: 14, 2: 36, 1: 24 };
-const AWAKENING_MULT_TBL = { 4: 1.43, 3: 2.42, 2: 4.45, 1: 5.37 };
-
-// ===== 计算函数 (与 hensei.html 完全镜像) =====
-function _capLevel(chara, tr) {
-  const r = chara.rarity;
-  const lev1 = LEVEL_1JUK_TBL[r]?.[tr.state];
-  const levMax = LEVEL_MAX_TBL[r]?.[tr.state];
-  if (lev1 == null || levMax == null) return null;
-  const jMax = JUKUDO_MAX_TBL[r]?.[tr.state] ?? 1;
-  const jk = Math.min(Math.max(1, tr.jukudo || 1), jMax);
-  return Math.min(levMax, lev1 + (jk - 1) * 5);
-}
-function _baseStat(chara, tr, attr) {
-  const state = chara.states?.[tr.state];
-  const stMax = state?.stats?.max?.[attr];
-  if (stMax == null) return null;
-  const sourceState = tr.state === '通常' ? state : chara.states?.['通常'];
-  const initial = sourceState?.stats?.initial?.[attr];
-  const normalMax = sourceState?.stats?.max?.[attr];
-  const r = chara.rarity;
-  const levMax = LEVEL_MAX_TBL[r]?.[tr.state];
-  const cap = _capLevel(chara, tr);
-  if (cap == null || levMax == null || levMax <= 1 || initial == null || normalMax == null)
-    return stMax;
-  const lvBase = Math.min(tr.level || 1, cap);
-  let v = stMax * (1 - (((levMax - lvBase) / (levMax - 1)) * initial) / normalMax);
-  if ((tr.level || 1) > cap) {
-    const aMax = AWAKENING_MAX_TBL[chara.rarity] || 1;
-    const mult = AWAKENING_MULT_TBL[chara.rarity] || 1;
-    const overLv = (tr.level || 1) - cap;
-    v = v * (1 + (overLv / (aMax * 5)) * (mult - 1));
-  }
-  return v;
-}
-function _resolveCharaSkills(c) {
-  if (!c || !c.states) return [];
-  let stateLabel = null,
-    state = null;
-  for (const s of ['極弐', '改造', '通常']) {
-    if (c.states[s]) {
-      stateLabel = s;
-      state = c.states[s];
-      break;
-    }
-  }
-  if (!state) return [];
-  const dead = new Set(Array.isArray(c._deleted_skills) ? c._deleted_skills : []);
-  const base = (state.skills || []).filter((sk) => !dead.has(sk.name || ''));
-  const added = (c._added_skills && c._added_skills[stateLabel]) || [];
-  return base.concat(added);
-}
-function _resolveSoulSkills(s) {
-  if (!s) return [];
-  const dead = new Set(Array.isArray(s._deleted_skills) ? s._deleted_skills : []);
-  const base = (s.skills || []).filter((sk) => !dead.has(sk.name || ''));
-  const added = Array.isArray(s._added_skills) ? s._added_skills : [];
-  return base.concat(added);
-}
-function _omoidePicksFor(chara, tr) {
-  const picks = tr.omoide_picks || {};
-  const aff = +tr.affinity || 0;
-  const result = [];
-  (chara.omoide || []).forEach((row) => {
-    if ((+row.threshold || 0) > aff) return;
-    const pickedIcon = picks[row.threshold];
-    if (pickedIcon == null) return;
-    const info = SENZAI_TABLE[pickedIcon] || SENZAI_TABLE[String(pickedIcon)];
-    if (info) result.push(info);
+// ===== buildTestCtx — 注入 stats-calc.js 需要的 14 字段 ctx =====
+//
+// computeStats(chara, tr, slotIdx, ctx) 接 14 字段 ctx：
+//   数据集     allCharas, allCrystals, allSouls, allMasou, allBGs,
+//             allGuildTitles, allGuildEmblems, SENZAI_TABLE
+//   队伍/敌方  team, teamSize, enemy
+//   UI 常量    SLOT_COLORS, COLOR_LABELS, IS_LOCAL_DEV
+//
+// crystals 在 test 内 slot.crystals 是 [id] 数组（hensei 实际是 [{id, weight, purity, lv}]）。
+// 兼容性：buildTestCtx 把 [id] map 成 [{id, weight: 100, purity: 100, lv: cryLvMax(cr)}]、
+// 这样 stats-calc.js 看到的 cfg 结构跟 hensei 一致；旧 test 用 [id] 不用改。
+function buildTestCtx(team, teamSize, opts = {}) {
+  // 规范化 crystals：数字 id → {id, weight=100, purity=100, lv=null（让 calc 用 default maxLv）}
+  const normTeam = team.map((slot) => {
+    if (!slot) return slot;
+    const crs = (slot.crystals || []).map((c) => {
+      if (c == null) return null;
+      if (typeof c === 'number') return { id: c, weight: 100, purity: 100 };
+      return c;
+    });
+    return { ...slot, crystals: crs };
   });
-  return result;
+  return {
+    allCharas: opts.allCharas || allCharas,
+    allCrystals: opts.allCrystals || allCrystals,
+    allSouls: opts.allSouls || allSouls,
+    allMasou: opts.allMasou || [],
+    allBGs: opts.allBGs || allBGs,
+    allGuildTitles: opts.allGuildTitles || [],
+    allGuildEmblems: opts.allGuildEmblems || [],
+    SENZAI_TABLE: opts.SENZAI_TABLE || SENZAI_TABLE,
+    team: normTeam,
+    teamSize,
+    enemy: opts.enemy || {
+      mode: 'normal',
+      element: 6,
+      bk: false,
+      advantageWeapons: new Set(),
+      bd_cap: 0,
+      emblems: [],
+      difficulty: 'Normal',
+      guildTitle: null,
+    },
+    SLOT_COLORS: ['#5470c6', '#ee6666', '#5fbb6e'],
+    COLOR_LABELS: { '#5470c6': '青', '#ee6666': '赤', '#5fbb6e': '緑' },
+    IS_LOCAL_DEV: false,
+  };
 }
-function _buffApplies(srcChara, tgtChara, e) {
-  if (!tgtChara) return false;
-  const sc = e.scope;
-  if (sc == null || sc === 1) return true;
-  if (sc === 0) return !!srcChara && srcChara.id === tgtChara.id;
-  if (sc === 3) {
-    if (!srcChara || srcChara.id !== tgtChara.id) return false;
-    const elem = e.element;
-    const elemOK =
-      elem == null ||
-      (Array.isArray(elem) ? elem.indexOf(tgtChara.element) >= 0 : elem === tgtChara.element);
-    const tp = e.weapon;
-    const typeOK =
-      tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.weapon) >= 0 : tp === tgtChara.weapon);
-    return elemOK && typeOK;
-  }
-  if (sc === 2 || sc === 4) {
-    const elem = e.element;
-    const elemOK =
-      elem == null ||
-      (Array.isArray(elem) ? elem.indexOf(tgtChara.element) >= 0 : elem === tgtChara.element);
-    const tp = e.weapon;
-    const typeOK =
-      tp == null || (Array.isArray(tp) ? tp.indexOf(tgtChara.weapon) >= 0 : tp === tgtChara.weapon);
-    return elemOK && typeOK;
-  }
-  if (sc === 5) {
-    const nm = e.name;
-    if (!nm || !tgtChara.name) return false;
-    return tgtChara.name === nm || tgtChara.name.indexOf(nm) >= 0;
-  }
-  return false;
-}
-function _conditionFactor(condition, hpPct) {
-  if (!condition) return 1;
-  let h = +hpPct;
-  if (isNaN(h)) h = 100;
-  h = Math.max(0, Math.min(100, h));
-  if (condition === 1) return h / 100;
-  if (condition === 2) return (100 - h) / 100;
-  if (condition === 3) return h < 50 ? 1 : 0;
-  return 1;
-}
-function _parseScaling(v) {
-  if (v == null || v === 0 || v === '') return 0;
-  if (typeof v === 'number') return v;
-  if (typeof v === 'string' && v.indexOf('/') >= 0) {
-    const parts = v.split('/').map(Number);
-    return parts[1] ? parts[0] / parts[1] : 0;
-  }
-  return parseFloat(v) || 0;
-}
-function _scaledBairitu(b, sc, jukudo) {
-  const s = _parseScaling(sc);
-  if (!s) return b;
-  return (b || 0) + Math.max(1, jukudo) * s;
-}
+
+// ===== Thin wrapper：保留 mirror 旧 sig (chara, tr, team, teamSize)、转发到 real =====
+// slotIdx：通过 chara.id 在 team 里查找匹配 slot（多 slot 装同一 chara 取首个）；找不到默认 0。
+// 旧 mirror 的 self 判定走 tgt = chara；real 用 team[slotIdx].chara 找 self —
+// 二者在 tgt = team[slotIdx].chara === chara 时等价、否则 stage 2.5 affinity 段需要正确 slot。
 function computeStats(chara, tr, team, teamSize) {
   if (!chara || !tr) return null;
-  const stats = {};
-  for (const attr of _STAT_KEYS) {
-    const b = _baseStat(chara, tr, attr);
-    stats[attr] = b != null ? b : 0;
-  }
-  let damageLimit = 2147483647;
-  const acc = { stats, damageLimit };
-  const tgt = chara;
-
-  function _applyEf(e, srcJk, srcHp, mode) {
-    const ct = e.calc_type ?? 1;
-    if (mode === 'add' && ct !== 1) return;
-    if (mode === 'mul' && ct !== 0) return;
-    let v = _scaledBairitu(e.bairitu || 0, e.bairitu_scaling, srcJk);
-    const factor = _conditionFactor(e.condition, srcHp);
-    if (mode === 'add') v = v * factor;
-    else v = (v - 1) * factor + 1;
-    const bunrui = e.bunrui || [];
-    for (const b of bunrui) {
-      if (b === 17) {
-        if (mode === 'add') acc.damageLimit += v;
-        else acc.damageLimit *= v;
-      } else {
-        const stat = _BUNRUI_TO_STAT[b];
-        if (!stat || acc.stats[stat] == null) continue;
-        if (mode === 'add') acc.stats[stat] += v;
-        else acc.stats[stat] *= v;
-      }
-    }
-  }
-  function _applyList(effects, srcChara, srcHp, srcJk) {
-    if (!effects || !effects.length) return;
-    const filtered = effects.filter((e) => _buffApplies(srcChara, tgt, e));
-    if (!filtered.length) return;
-    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'add');
-    for (const e of filtered) _applyEf(e, srcJk, srcHp, 'mul');
-  }
-
-  const selfJk = Math.max(1, tr.jukudo || 1);
-  const selfHp = tr.hpPercent ?? 100;
-  const picks = _omoidePicksFor(chara, tr);
-  for (const info of picks) _applyEf(info, selfJk, selfHp, 'add');
-  for (const info of picks) _applyEf(info, selfJk, selfHp, 'mul');
-
-  for (let si = 0; si < teamSize; si++) {
-    const slot = team[si];
-    if (!slot) continue;
-    const srcChara = allCharas.find((x) => x.id === slot.chara) || null;
-    const srcHp = slot.tr?.hpPercent ?? 100;
-    const srcJk = Math.max(1, slot.tr?.jukudo || 1);
-    const crEffs = [];
-    (slot.crystals || []).forEach((cid) => {
-      if (!cid) return;
-      const cr = allCrystals.find((x) => x.id === cid);
-      if (cr) (cr.effects || []).forEach((e) => crEffs.push(e));
-    });
-    _applyList(crEffs, srcChara, srcHp, srcJk);
-    if (srcChara) {
-      const skills = _resolveCharaSkills(srcChara);
-      const charaEffs = [];
-      skills.forEach((sk) => (sk.effects || []).forEach((e) => charaEffs.push(e)));
-      _applyList(charaEffs, srcChara, srcHp, srcJk);
-    }
-  }
-  for (let si = 0; si < teamSize; si++) {
-    const slot = team[si];
-    if (!slot) continue;
-    const srcChara = allCharas.find((x) => x.id === slot.chara) || null;
-    const srcHp = slot.tr?.hpPercent ?? 100;
-    const srcJk = Math.max(1, slot.tr?.jukudo || 1);
-    const soul = allSouls.find((x) => x.id === slot.soul);
-    if (!soul) continue;
-    const skills = _resolveSoulSkills(soul);
-    const soulEffs = [];
-    skills.forEach((sk) => (sk.effects || []).forEach((e) => soulEffs.push(e)));
-    _applyList(soulEffs, srcChara, srcHp, srcJk);
-  }
-  for (let si = 0; si < teamSize; si++) {
-    const slot = team[si];
-    if (!slot) continue;
-    const srcChara = allCharas.find((x) => x.id === slot.chara) || null;
-    const srcHp = slot.tr?.hpPercent ?? 100;
-    const srcJk = Math.max(1, slot.tr?.jukudo || 1);
-    const bg = allBGs.find((x) => x.id === slot.bg);
-    if (!bg) continue;
-    _applyList(bg.effects || [], srcChara, srcHp, srcJk);
-  }
-
-  const mr = [1.0, 1.03, 1.05][tr.marriage] || 1;
-  for (const k of _STAT_KEYS) acc.stats[k] *= mr;
-  if (tr.moeshin) acc.stats['攻撃力'] *= 1.3;
-  const lpMult = [1.0, 1.1, 1.5][tr.lp] || 1;
-  acc.stats['攻撃力'] *= lpMult;
-
-  return { stats: acc.stats, damageLimit: acc.damageLimit };
+  let slotIdx = team.findIndex((s) => s && s.chara === chara.id);
+  if (slotIdx < 0) slotIdx = 0;
+  const ctx = buildTestCtx(team, teamSize);
+  return realComputeStats(chara, tr, slotIdx, ctx);
 }
 
 // ===== 测试框架 =====
@@ -537,12 +366,16 @@ const MOCK_OTHER = {
     },
   },
 };
-// MOCK_NAMED_BG: scope=5 名前限定 攻+1500, name="レヴァンテイン" (子串匹配)
+// MOCK_NAMED_BG: scope=5 名前限定 攻+1500, name="魔剣レヴァンテイン=TRUE"
+// (post-Step-G drift adjusted：real stats-calc.js 用精确等値匹配、不再 substring。
+// commit 975b381 修正、为了不误判 "魔剣グラム" vs "魔剣グラム:Blaze")
 const MOCK_NAMED_BG = {
   id: 999202,
   name: 'MOCK_NAMED_BG',
   rarity: 4,
-  effects: [{ bunrui: [1], scope: 5, name: 'レヴァンテイン', calc_type: 1, bairitu: 1500 }],
+  effects: [
+    { bunrui: [1], scope: 5, name: '魔剣レヴァンテイン=TRUE', calc_type: 1, bairitu: 1500 },
+  ],
 };
 
 // MOCK_TRUE_END: 浑身 multiplicative ×5 攻撃力 (模拟「真解放-TRUE END-」jk=99 状态)
@@ -1798,8 +1631,8 @@ ${fmtScope('bg effects', bgScopes)}
 - 50 组随机三人队 fuzz → R18
 `;
 
-fs.writeFileSync(
-  path.join(TESTS_DIR, 'calculator_test_results.md'),
+writeFileSync(
+  join(__dirname, 'calculator_test_results.md'),
   '# 计算器测试结果\n\n' +
     '测试脚本: `node tests/test_calculator.js`\n\n' +
     `**通过: ${pass} / ${pass + fail}** ${fail === 0 ? '✓' : '✗'}\n\n` +

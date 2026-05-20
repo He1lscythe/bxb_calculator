@@ -174,7 +174,46 @@
       import { deepApply } from '../js/diff.js';
       import { resolveOmoideTemplates } from '../shared/omoide.js';
       import { enforceScopeConstraints } from '../shared/effect-constraints.js';
-      import { computeStats } from '../js/stats-calc.js';
+      import {
+        computeStats,
+        // 14 constants
+        _STAT_KEYS,
+        _BUNRUI_TO_STAT,
+        _LV2_5_RE,
+        SOUL_AWK_MAX,
+        EMBLEM_RARITY_LV_MAX,
+        CRYSTAL_RARITY_LV_MAX,
+        JUKUDO_MAX_TBL,
+        LEVEL_MAX_TBL,
+        LEVEL_1JUK_TBL,
+        AWAKENING_MAX_TBL,
+        AWAKENING_MULT_TBL,
+        ELEMENT_K_NORMAL,
+        ELEMENT_K_GUILD,
+        ELEMENT_K_GUILD_SPECIAL,
+        // 19 helpers + mkTr
+        _parseScaling,
+        _parseHit,
+        _parseAff,
+        _scaledBairitu,
+        _crystalDimFactor,
+        cryLvMax,
+        emblemLvMax,
+        elementMatchupMult,
+        soulAwkMax,
+        soulLvCap,
+        soulMultiplier,
+        _capLevel,
+        _resolveCharaSkills,
+        _resolveSoulSkills,
+        _selfAppliesChara,
+        _matchElemType,
+        _baseStat,
+        _crystalEffectiveBairitu,
+        _buffApplies,
+        _conditionFactor,
+        mkTr,
+      } from '../js/stats-calc.js';
 
       Nav.init();
 
@@ -226,81 +265,9 @@
         bd_cap: 0, // 副本 BD 上限（0-9 整数）。倍率 = 1 + (bd_cap // 2) * 0.25
       };
 
-      // ===== 元素克制表 K[攻击方][被攻击方] =====
-      const ELEMENT_K_NORMAL = {
-        1: { 1: 0, 2: -1, 3: 1, 4: 0, 5: 0, 6: 0 }, // 火
-        2: { 1: 1, 2: 0, 3: -1, 4: 0, 5: 0, 6: 0 }, // 水
-        3: { 1: 1, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0 }, // 風
-        4: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0 }, // 光
-        5: { 1: 0, 2: 0, 3: 0, 4: 1, 5: 0, 6: 0 }, // 闇
-        6: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 }, // 無
-      };
-      const ELEMENT_K_GUILD = {
-        1: { 1: 0, 2: -2, 3: 3, 4: 0, 5: 0, 6: 2 },
-        2: { 1: 3, 2: 0, 3: -2, 4: 0, 5: 0, 6: 2 },
-        3: { 1: -2, 2: 3, 3: 0, 4: 0, 5: 0, 6: 2 },
-        4: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 3, 6: 2 },
-        5: { 1: 0, 2: 0, 3: 0, 4: 3, 5: 0, 6: 2 },
-        6: { 1: 2, 2: 2, 3: 2, 4: 2, 5: 2, 6: 3 },
-      };
-      const ELEMENT_K_GUILD_SPECIAL = {
-        1: { 1: -3, 2: -3, 3: 3, 4: -3, 5: -3, 6: -3 },
-        2: { 1: 3, 2: -3, 3: -3, 4: -3, 5: -3, 6: -3 },
-        3: { 1: -3, 2: 3, 3: -3, 4: -3, 5: -3, 6: -3 },
-        4: { 1: -3, 2: -3, 3: -3, 4: -3, 5: 3, 6: -3 },
-        5: { 1: -3, 2: -3, 3: -3, 4: 3, 5: -3, 6: -3 },
-        6: { 1: -3, 2: -3, 3: -3, 4: -3, 5: -3, 6: 3 },
-      };
-      // 紋章 rarity → 等级上限：rarity 1=25, 2=40, 3=55, 4=1
-      const EMBLEM_RARITY_LV_MAX = { 1: 25, 2: 40, 3: 55, 4: 1 };
-      export const emblemLvMax = (rarity) => {
-        return EMBLEM_RARITY_LV_MAX[+rarity || 1] || EMBLEM_RARITY_LV_MAX[1];
-      };
-
-      // 結晶 rarity → lv 上限。⚠ rarity 1, 2 数据待验证（rarity 3-6 已确认）。
-      // crystal 顶层可有 optional `level_max` 覆盖；缺省则按此表。
-      // 注：lv 当前 calc 不接入；常量 + helper 仅 schema 占位，为未来 lv 接入预留。
-      const CRYSTAL_RARITY_LV_MAX = { 1: 10, 2: 30, 3: 80, 4: 120, 5: 160, 6: 200 };
-      export const cryLvMax = (cr) => +cr?.level_max || (CRYSTAL_RARITY_LV_MAX[+cr?.rarity] ?? 1);
-
-      export const elementMatchupMult = (srcElem, tgtElem, mode) => {
-        if (mode === 'guildbattle') {
-          const k = (ELEMENT_K_GUILD[srcElem] || {})[tgtElem] || 0;
-          if (k === 3) return 15.0;
-          if (k === 2) return 10.0;
-          if (k === -2) return 0.1;
-          return 1.0;
-        }
-        if (mode === 'guildbattle_special') {
-          const k = (ELEMENT_K_GUILD_SPECIAL[srcElem] || {})[tgtElem] || 0;
-          if (k === 3) return 15.0; // 特別版正向克制（用 ギルバト 同值）
-          if (k === -3) return 0.01;
-          return 1.0;
-        }
-        // normal / other
-        const k = (ELEMENT_K_NORMAL[srcElem] || {})[tgtElem] || 0;
-        if (k === 1) return 2.0;
-        if (k === -1) return 0.5;
-        return 1.0;
-      };
-      export const mkTr = () => {
-        return {
-          state: '通常',
-          jukudo: 1,
-          awakening: 0,
-          marriage: 0,
-          moeshin: false,
-          lp: 0,
-          level: 1,
-          hpPercent: 100,
-          affinity: 0,
-          omoide_picks: {},
-          soul_lv: 1,
-          soul_awakening: 0,
-          main_weapon: true,
-          bd_on: false,
-        };
-      };
+      // ELEMENT_K_* / EMBLEM_RARITY_LV_MAX / CRYSTAL_RARITY_LV_MAX / emblemLvMax /
+      // cryLvMax / elementMatchupMult / mkTr / JUKUDO_MAX_TBL / LEVEL_MAX_TBL /
+      // LEVEL_1JUK_TBL / AWAKENING_MAX_TBL / AWAKENING_MULT_TBL 都 import 自 stats-calc.js。
       let team = [0, 1, 2].map(() => ({
         chara: null,
         soul: null,
@@ -310,26 +277,6 @@
         tr: mkTr(),
       }));
 
-      const JUKUDO_MAX_TBL = {
-        4: { 通常: 60, 改造: 99 },
-        3: { 通常: 50, 改造: 75, 極弐: 90 },
-        2: { 通常: 30, 改造: 45, 極弐: 70 },
-        1: { 通常: 10, 改造: 25, 極弐: 50 },
-      };
-      const LEVEL_MAX_TBL = {
-        4: { 通常: 250, 改造: 255 },
-        3: { 通常: 200, 改造: 215, 極弐: 230 },
-        2: { 通常: 150, 改造: 155, 極弐: 180 },
-        1: { 通常: 60, 改造: 99, 極弐: 120 },
-      };
-      const LEVEL_1JUK_TBL = {
-        4: { 通常: 60, 改造: 70 },
-        3: { 通常: 40, 改造: 50, 極弐: 65 },
-        2: { 通常: 30, 改造: 35, 極弐: 60 },
-        1: { 通常: 15, 改造: 20, 極弐: 35 },
-      };
-      const AWAKENING_MAX_TBL = { 4: 9, 3: 14, 2: 36, 1: 24 };
-      const AWAKENING_MULT_TBL = { 4: 1.43, 3: 2.42, 2: 4.45, 1: 5.37 };
       let SENZAI_TABLE = {};
       fetch('../data/senzai_table.json')
         .then((r) => (r.ok ? r.json() : {}))
@@ -553,36 +500,7 @@
           : '';
         return `<div class="eftags">${btags}<span class="tag-val">${fmtVal(ef)}</span>${fmtScopeTag(ef)}${cond}</div>`;
       };
-      export const _resolveCharaSkills = (c, trState) => {
-        if (!c || !c.states) return [];
-        let stateLabel = null,
-          state = null;
-        if (trState && c.states[trState]) {
-          stateLabel = trState;
-          state = c.states[trState];
-        } else {
-          for (const s of ['極弐', '改造', '通常']) {
-            if (c.states[s]) {
-              stateLabel = s;
-              state = c.states[s];
-              break;
-            }
-          }
-        }
-        if (!state) return [];
-        const dead = new Set(Array.isArray(c._deleted_skills) ? c._deleted_skills : []);
-        const base = (state.skills || []).filter((sk) => !dead.has(sk.name || ''));
-        const added = (c._added_skills && c._added_skills[stateLabel]) || [];
-        return base.concat(added);
-      };
-      export const _resolveSoulSkills = (s) => {
-        if (!s) return [];
-        const dead = new Set(Array.isArray(s._deleted_skills) ? s._deleted_skills : []);
-        const base = (s.skills || []).filter((sk) => !dead.has(sk.name || ''));
-        const added = Array.isArray(s._added_skills) ? s._added_skills : [];
-        return base.concat(added);
-      };
-
+      // _resolveCharaSkills / _resolveSoulSkills import 自 stats-calc.js。
       export const renderSkillsPanel = (skills) => {
         if (!skills?.length) return '';
         const rows = skills
@@ -606,37 +524,7 @@
         if (!m) return '';
         return `<div class="skills-panel"><div class="skill-item"><div class="skill-eftxt">${escHtml(m.effect_text || '')}</div>${(m.effects || []).map(renderEfRow).join('')}</div></div>`;
       };
-      // 乗性 delta 三次元公式（weight / purity / lv）：
-      //   factor_i = delta + (1 - delta) * pos     (pos ∈ [0,1])
-      //   ct=0/3 (mult/final-mult): eff = (baseB - 1) * factor + 1   (neutral=1)
-      //   ct=1/2 (add /final-add):  eff = baseB * factor             (neutral=0)
-      // delta 缺字段 / 空串 → factor=1 不衰减; delta=0 → 端点満衰减; step 仅 slider 颗粒度、不入公式。
-      const _crystalDimFactor = (pos, deltaRaw) => {
-        if (deltaRaw == null || deltaRaw === '') return 1;
-        const d = _parseScaling(deltaRaw);
-        if (!Number.isFinite(d)) return 1;
-        if (pos == null || !Number.isFinite(pos)) return 1;
-        return d + (1 - d) * pos;
-      };
-      const _crystalEffectiveBairitu = (cr, cfg, e) => {
-        const baseB = _parseScaling(e.bairitu);
-        if (!Number.isFinite(baseB)) return null;
-        // weight 维度新增 weight_min 下界：pos = (weight - wMin) / (100 - wMin)
-        // wMin ≥ 100（异常 case）→ wPos=null → factor=1 不衰减（防 ÷0）
-        const wMin = +cr.weight_min || 0;
-        const wPos = cfg.weight != null && wMin < 100 ? (cfg.weight - wMin) / (100 - wMin) : null;
-        const pPos = cfg.purity != null ? cfg.purity / 100 : null;
-        const maxLv = cryLvMax(cr);
-        const lvVal = cfg.lv != null ? cfg.lv : maxLv;
-        const lvPos = maxLv > 1 ? (lvVal - 1) / (maxLv - 1) : 1;
-        const fw = _crystalDimFactor(wPos, e.weight_delta);
-        const fp = _crystalDimFactor(pPos, e.purity_delta);
-        const flv = _crystalDimFactor(lvPos, e.lv_delta);
-        const factor = fw * fp * flv;
-        if (factor === 1) return baseB;
-        const ct = e.calc_type ?? 0;
-        return ct === 0 || ct === 3 ? (baseB - 1) * factor + 1 : baseB * factor;
-      };
+      // _crystalDimFactor / _crystalEffectiveBairitu import 自 stats-calc.js。
       export const renderCrystalEffList = (cfgs) => {
         // cfgs: [{id, weight, purity}, ...] or null。weight/purity 衰减後 effective bairitu を表示。
         const items = (cfgs || [])
@@ -1273,43 +1161,7 @@
       };
 
       // ===== STATS CALCULATOR =====
-      const _STAT_KEYS = ['攻撃力', '防御力', 'HP', 'ブレイク力'];
-      const _BUNRUI_TO_STAT = { 1: '攻撃力', 2: 'ブレイク力', 10: 'HP', 12: '防御力' };
-
-      export const _capLevel = (chara, tr) => {
-        const r = chara.rarity;
-        const lev1 = LEVEL_1JUK_TBL[r]?.[tr.state];
-        const levMax = LEVEL_MAX_TBL[r]?.[tr.state];
-        if (lev1 == null || levMax == null) return null;
-        const jMax = JUKUDO_MAX_TBL[r]?.[tr.state] ?? 1;
-        const jk = Math.min(Math.max(1, tr.jukudo || 1), jMax);
-        return Math.min(levMax, lev1 + (jk - 1) * 5);
-      };
-
-      export const _baseStat = (chara, tr, attr) => {
-        const state = chara.states?.[tr.state];
-        const stMax = state?.stats?.max?.[attr];
-        if (stMax == null) return null;
-        // initial / max ratio: always from 通常 state for non-通常 calculation
-        const sourceState = tr.state === '通常' ? state : chara.states?.['通常'];
-        const initial = sourceState?.stats?.initial?.[attr];
-        const normalMax = sourceState?.stats?.max?.[attr];
-        const r = chara.rarity;
-        const levMax = LEVEL_MAX_TBL[r]?.[tr.state];
-        const cap = _capLevel(chara, tr);
-        if (cap == null || levMax == null || levMax <= 1 || initial == null || normalMax == null)
-          return stMax;
-        const lvBase = Math.min(tr.level || 1, cap);
-        let v = stMax * (1 - (((levMax - lvBase) / (levMax - 1)) * initial) / normalMax);
-        // Awakening boost when level exceeds base cap
-        if ((tr.level || 1) > cap) {
-          const aMax = AWAKENING_MAX_TBL[chara.rarity] || 1;
-          const mult = AWAKENING_MULT_TBL[chara.rarity] || 1;
-          const overLv = (tr.level || 1) - cap;
-          v = v * (1 + (overLv / (aMax * 5)) * (mult - 1));
-        }
-        return v;
-      };
+      // _STAT_KEYS / _BUNRUI_TO_STAT / _capLevel / _baseStat import 自 stats-calc.js。
 
       export const _omoidePicksFor = (chara, tr) => {
         // Returns array of senzai info objects for currently picked icons.
@@ -1327,177 +1179,9 @@
         return result;
       };
 
-      export const _selfAppliesChara = (c, e) => {
-        const sc = e.scope;
-        if (sc === 0 || sc === 1) return true;
-        if (sc === 2 || sc === 3) {
-          const elem = e.element;
-          const elemOK =
-            elem == null ||
-            (Array.isArray(elem) ? elem.indexOf(c.element) >= 0 : elem === c.element);
-          const tp = e.weapon;
-          const typeOK =
-            tp == null || (Array.isArray(tp) ? tp.indexOf(c.weapon) >= 0 : tp === c.weapon);
-          return elemOK && typeOK;
-        }
-        return false;
-      };
-
-      // 元素 / 武器种匹配。useElementBuff=true 时（仅魔剣技能）拿 tgtChara.element_buff[]
-      // 做集合包含判定；其它来源（crystal / bladegraph / soul / guild）依然用单值 element。
-      export const _matchElemType = (e, tgtChara, useElementBuff) => {
-        const elem = e.element;
-        let elemOK;
-        if (elem == null) {
-          elemOK = true;
-        } else {
-          const reqElems = Array.isArray(elem) ? elem : [elem];
-          const tgtElems =
-            useElementBuff && Array.isArray(tgtChara.element_buff) && tgtChara.element_buff.length
-              ? tgtChara.element_buff
-              : [tgtChara.element];
-          elemOK = reqElems.some((r) => tgtElems.indexOf(r) >= 0);
-        }
-        const tp = e.weapon;
-        const typeOK =
-          tp == null ||
-          (Array.isArray(tp) ? tp.indexOf(tgtChara.weapon) >= 0 : tp === tgtChara.weapon);
-        return elemOK && typeOK;
-      };
-
-      // Cross-slot: source (srcChara) buffs target (tgtChara). Returns true if effect e applies.
-      // useElementBuff=true → 魔剣技能特例，element 走 tgtChara.element_buff[]
-      export const _buffApplies = (srcChara, tgtChara, e, useElementBuff = false) => {
-        if (!tgtChara) return false;
-        const sc = e.scope;
-        if (sc == null || sc === 1) return true; // 全体
-        if (sc === 0) {
-          return !!srcChara && srcChara.id === tgtChara.id;
-        }
-        if (sc === 3) {
-          if (!srcChara || srcChara.id !== tgtChara.id) return false;
-          return _matchElemType(e, tgtChara, useElementBuff);
-        }
-        if (sc === 2 || sc === 4) {
-          return _matchElemType(e, tgtChara, useElementBuff);
-        }
-        if (sc === 5) {
-          // chara 限定：精确相等のみ（substring を許すと "魔剣グラム" effect が
-          // "魔剣グラム:Blaze" 等の別 chara に誤発火する。wiki 上 effect.name は
-          // tgtChara.name と完全一致するのが正常 — 一致しない = wiki 表記不整合）
-          const nm = e.name;
-          return !!nm && tgtChara.name === nm;
-        }
-        return false;
-      };
-
-      // 魂等级 → 倍率加成。rarity 对应的"无觉醒最高等级" = rarity*10，超过后线性增长到 lv=75。
-      //   lv ≤ rarity*10:  1 + 0.01*lv
-      //   lv > rarity*10:  base = 1 + 0.1*rarity
-      //                    inc  = rarity===5 ? 0.3 : 0.1
-      //                    return base + inc * (lv - rarity*10) / (75 - rarity*10)
-      const SOUL_AWK_MAX = { 1: 13, 2: 11, 3: 9, 4: 7, 5: 5 };
-      export const soulMultiplier = (rarity, lv) => {
-        const r = +rarity || 1;
-        const L = Math.max(1, +lv || 1);
-        const maxNoAwk = r * 10;
-        if (L <= maxNoAwk) return 1 + 0.01 * L;
-        const base = 1 + 0.1 * r;
-        const range = 75 - maxNoAwk;
-        if (range <= 0) return base;
-        const inc = r === 5 ? 0.3 : 0.1;
-        return base + (inc * (L - maxNoAwk)) / range;
-      };
-      // hit_per_stage* 値を数値化（"1/3" / "0.5" / 0.5 受け入れ、無効値は 0）。
-      const _parseHit = (s) => {
-        if (s == null) return 0;
-        if (typeof s === 'number') return Number.isFinite(s) ? s : 0;
-        const t = String(s).trim();
-        if (t === '') return 0;
-        if (t.includes('/')) {
-          const [n, d] = t.split('/').map(parseFloat);
-          return Number.isFinite(n) && Number.isFinite(d) && d !== 0 ? n / d : 0;
-        }
-        const v = parseFloat(t);
-        return Number.isFinite(v) ? v : 0;
-      };
-
-      // soul affinity の atk/def_effect 値を数値化。"5/4" / "1.9" / 1.9 全部受け入れ、無効値は 1。
-      const _parseAff = (s) => {
-        if (s == null) return 1;
-        if (typeof s === 'number') return Number.isFinite(s) ? s : 1;
-        const t = String(s).trim();
-        if (t === '') return 1;
-        if (t.includes('/')) {
-          const [n, d] = t.split('/').map(parseFloat);
-          return Number.isFinite(n) && Number.isFinite(d) && d !== 0 ? n / d : 1;
-        }
-        const n = parseFloat(t);
-        return Number.isFinite(n) ? n : 1;
-      };
-
-      // soul.max_awakening が定義されてれば SOUL_AWK_MAX[r] を上書き（覚醒不可な特例魂用）
-      export const soulAwkMax = (soul) => {
-        const ovr = soul && soul.max_awakening;
-        if (ovr != null && Number.isFinite(+ovr)) return +ovr;
-        const r = +(soul && soul.rarity) || 1;
-        return SOUL_AWK_MAX[r] || 0;
-      };
-      // lv cap = max_level + aw*5（最多 75）。max_level は通常 rarity*10 だが、souls_revise.json で
-      // 上書きされた特例魂（ダイナスティ/ディシディア = 1）は自然に cap=1 + 0 = 1 に落ちる。
-      export const soulLvCap = (soul, awakening) => {
-        const maxLv = +(soul && soul.max_level) || 0;
-        const aw = Math.min(+awakening || 0, soulAwkMax(soul));
-        return Math.min(75, maxLv + aw * 5);
-      };
-
-      // HP-based condition factor (multiplier on bairitu)
-      //   1=逆窮鼠 → linear hp%/100  (0 at 0% HP → 1 at 100% HP)
-      //   2=窮鼠   → linear (100-hp%)/100  (1 at 0% HP → 0 at 100% HP)
-      //   3=破損 → binary  (1 if hp%<50 else 0)
-      //   0/null → 1
-      // Applied via:
-      //   additive: effective = bairitu * factor
-      //   multiplicative: effective = (bairitu - 1) * factor + 1
-      export const _conditionFactor = (condition, hpPct) => {
-        if (!condition) return 1;
-        // condition=4 (BK状態時) — 二元，依赖全局 enemy.bk
-        if (condition === 4) return enemy.bk ? 1 : 0;
-        let h = +hpPct;
-        if (isNaN(h)) h = 100;
-        h = Math.max(0, Math.min(100, h));
-        if (condition === 1) return h / 100;
-        if (condition === 2) return (100 - h) / 100;
-        if (condition === 3) return h < 50 ? 1 : 0;
-        return 1;
-      };
-
-      export const _parseScaling = (v) => {
-        if (v == null || v === 0 || v === '') return 0;
-        if (typeof v === 'number') return v;
-        if (typeof v === 'string' && v.indexOf('/') >= 0) {
-          const parts = v.split('/').map(Number);
-          return parts[1] ? parts[0] / parts[1] : 0;
-        }
-        return parseFloat(v) || 0;
-      };
-      // chara skill name に Lv2/Lv3/Lv4/Lv5 が含まれるか（Lv50/Lv500 等は対象外）。
-      // hensei calc 専用：crawl 段階では effect に保存しない。
-      export const _LV2_5_RE = /Lv[2-5](?!\d)/;
-
-      // 熟度 scaling 適用：
-      //   jkMinus1=true (skill name に Lv2/Lv3/Lv4/Lv5) → b + (jk - 1) * s
-      //   それ以外（Lv6+ / Lv1 / 無 Lv 後缀 / chara 以外）→ b + jk * s
-      // 任意の jukudo は外側で >=1 にクランプ済み。
-      // b / sc 双方とも数値・分式文字列 ("1/2") を受け入れる。
-      export const _scaledBairitu = (b, sc, jukudo, jkMinus1 = false) => {
-        const bv = _parseScaling(b);
-        const s = _parseScaling(sc);
-        if (!s) return bv;
-        const factor = jkMinus1 ? jukudo - 1 : jukudo;
-        return bv + factor * s;
-      };
-
+      // _selfAppliesChara / _matchElemType / _buffApplies / SOUL_AWK_MAX / soulMultiplier /
+      // _parseHit / _parseAff / soulAwkMax / soulLvCap / _conditionFactor / _parseScaling /
+      // _LV2_5_RE / _scaledBairitu 都 import 自 stats-calc.js。
       // ===== ENEMY BAR (敵方/副本/工会信息) =====
       export const renderEnemyBar = () => {
         const eb = document.getElementById('enemy-bar');
@@ -1922,6 +1606,8 @@
 
       // stats-calc.js computeStats 用 ctx — 数据集 + 队伍状态 + helper / 常量 を 1 つの object に。
       // 函数調用時に fresh build（state mutable のため snapshot）、helper 引用は closure scope 経由。
+      // ctx 缩到 14 字段（数据集 + 队伍/敌方 + UI 常量）。helper / 常量都已经在
+      // stats-calc.js module scope export、不再 ctx 注入。
       const _buildStatsCtx = () => ({
         allCharas,
         allCrystals,
@@ -1937,22 +1623,6 @@
         SLOT_COLORS,
         COLOR_LABELS,
         IS_LOCAL_DEV,
-        _STAT_KEYS,
-        _BUNRUI_TO_STAT,
-        _LV2_5_RE,
-        _baseStat,
-        _resolveCharaSkills,
-        _resolveSoulSkills,
-        _crystalEffectiveBairitu,
-        _buffApplies,
-        _conditionFactor,
-        _parseScaling,
-        _parseHit,
-        _parseAff,
-        _scaledBairitu,
-        soulMultiplier,
-        elementMatchupMult,
-        emblemLvMax,
       });
 
       export const _statsInner = (i, chara) => {
