@@ -505,7 +505,7 @@ function updateReviseBar() {
 
 | 文件 | 覆盖 |
 |---|---|
-| `test_calculator.cjs` | hensei stats 算法 mirror（700 行复刻、计划 Step G 切换为 import 真 stats-calc.js） |
+| `test_calculator.mjs` | hensei stats 算法 — Step G 后切到 import 真 `js/stats-calc.js`（thin wrapper 兼容旧 4-参 sig），通过 `buildTestCtx(team, teamSize, opts)` 注入 14 字段 ctx。mirror 9 个 helper 全删（用 stats-calc.js export 的真版本）。81 pass。 |
 | `test_diff.cjs` | `js/diff.js` `computeDiff` / `_deepDiff` 稀疏 dict + null 撤回标记 |
 | `test_save_edit_base.cjs` | `shared/save-edit-base.js` 4 core 函数 + chara/cr/soul/bg/masou 对齐场景 |
 | `test_edit_retraction.cjs` | prev-revise pattern：编辑 → 撤回 → revise 整条删 |

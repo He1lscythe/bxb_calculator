@@ -1,5 +1,7 @@
-// Master test runner — 跑所有 tests/test_*.cjs，汇总通过率
+// Master test runner — 跑所有 tests/test_*.{cjs,mjs}，汇总通过率
 // 用法: node tests/run_all.cjs
+//
+// Node ≥ 14 原生支持 .mjs（ESM）和 .cjs（CommonJS）混合 — spawn 子进程跑、不需要 flag。
 
 const { spawnSync } = require('child_process');
 const fs = require('fs');
@@ -7,7 +9,7 @@ const path = require('path');
 
 const TESTS = fs
   .readdirSync(__dirname)
-  .filter((f) => f.startsWith('test_') && f.endsWith('.cjs'))
+  .filter((f) => f.startsWith('test_') && (f.endsWith('.cjs') || f.endsWith('.mjs')))
   .sort();
 
 let totalPass = 0,
