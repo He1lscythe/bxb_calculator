@@ -8,6 +8,7 @@
     "build:local": "node scripts/build.js",
     "watch": "node scripts/build.js --watch",
     "test": "node tests/run_all.cjs",
+    "test:ui": "playwright test",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{js,cjs,html,css,md}\"",
     "format:check": "prettier --check \"**/*.{js,cjs,html,css,md}\""
@@ -16,6 +17,7 @@
     "@octokit/rest": "^21.0.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "eslint": "^10.4.0",
     "globals": "^17.6.0",
     "prettier": "^3.8.3"
