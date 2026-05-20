@@ -265,8 +265,8 @@ export const renderDetail = (c) => {
       </div>
       ${tagsHtml ? `<div class="ch-row"><div class="chara-tags">${tagsHtml}</div></div>` : ''}
     </div>
-    <div class="state-tabs">${tabs}</div>
     ${bdSection}
+    <div class="state-tabs">${tabs}</div>
     ${contents}`;
 };
 
