@@ -199,6 +199,27 @@ export const saveReviseCharaCore = async (state, opts) => {
     if (hasOmoide) state.omoideReviseData[id] = omoideDiff;
     else delete state.omoideReviseData[id];
   }
+  // refresh masouReviseData：用无 prev 的 computeDiff、清掉 null 撤回标记。
+  // chara_id / chara_name 作 metadata 写进 entry（同 saveEdit 时的格式）、与 server 端
+  // _hasRealContent 豁免列表保持一致。
+  for (const mid of masouIds) {
+    const m = state.allMasou.find((x) => x.id === mid);
+    if (!m) continue;
+    const orig = state.masouOriginalData[mid];
+    if (!orig) continue;
+    const fresh = computeDiff(orig, m);
+    const meaningful = Object.keys(fresh).some(
+      (k) => k !== 'id' && k !== 'name' && k !== 'chara_id' && k !== 'chara_name',
+    );
+    if (meaningful) {
+      state.masouReviseData[mid] = Object.assign(
+        { id: mid, name: m.name, chara_id: m.chara_id, chara_name: m.chara_name },
+        fresh,
+      );
+    } else {
+      delete state.masouReviseData[mid];
+    }
+  }
   state.sessionReviseIds.clear();
   state.masouSessionReviseIds.clear();
   return json;

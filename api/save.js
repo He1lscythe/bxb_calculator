@@ -73,8 +73,10 @@ function deepMerge(target, source) {
   return result;
 }
 
-// id / name 以外のフィールドがあれば revise として意味あり
-const _hasRealContent = (entry) => Object.keys(entry).some((k) => k !== 'id' && k !== 'name');
+// id / name / chara_id / chara_name 以外のフィールドがあれば revise として意味あり。
+// chara_id / chara_name は masou_revise の可読 metadata（同 id/name 思路）、撤回判定に含めない。
+const _META_KEYS = new Set(['id', 'name', 'chara_id', 'chara_name']);
+const _hasRealContent = (entry) => Object.keys(entry).some((k) => !_META_KEYS.has(k));
 
 function mergeById(existing, patches, sessionIds) {
   const sessionSet = new Set(sessionIds);

@@ -14,7 +14,8 @@ export const state = {
   omoideTemplates: [],
   // 魔装：data/masou.json から派生。chara_id → masou[] でグループ済み。
   // 編集セッション中の修正は state.editData.masou_added / masou_deleted_ids で追跡。
-  allMasou: [], // 平の masou 配列（masou.json 原貌）
+  allMasou: [], // 平の masou 配列（masou.json + extra + revise 適用後）
+  masouOriginalData: {}, // masou_id → snapshot of (base + extra)、computeDiff baseline
   masouByChara: {}, // {chara_id: [masou objects]}
   masouReviseData: {}, // masou_id → patch object
   masouSessionReviseIds: new Set(), // 当前会话で触れた masou_id（revise 提出時の session_ids）

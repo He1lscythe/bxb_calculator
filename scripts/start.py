@@ -131,9 +131,13 @@ def _deep_merge(target, source):
     return result
 
 
+_META_KEYS = frozenset({'id', 'name', 'chara_id', 'chara_name'})
+
+
 def _has_real_content(entry):
-    """id / name 以外のフィールドが残っていれば revise として意味あり"""
-    return any(k not in ('id', 'name') for k in entry)
+    """metadata 以外のフィールドが残っていれば revise として意味あり。
+    chara_id / chara_name は masou_revise の可読 metadata、撤回判定に含めない。"""
+    return any(k not in _META_KEYS for k in entry)
 
 
 def _merge_by_id(existing, patches, session_ids):

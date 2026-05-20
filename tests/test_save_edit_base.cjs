@@ -37,6 +37,31 @@ const _deepDiff = (oval, mval, prev) => {
     }
     return Object.keys(sub).length === 0 ? _NOOP : sub;
   }
+  // array 分支：等长全 object → sparse index-keyed diff
+  if (
+    Array.isArray(oval) &&
+    Array.isArray(mval) &&
+    oval.length === mval.length &&
+    mval.length > 0 &&
+    mval.every((x) => x && typeof x === 'object' && !Array.isArray(x))
+  ) {
+    const sparse = {};
+    const indices = new Set();
+    mval.forEach((m, i) => {
+      if (JSON.stringify(m) !== JSON.stringify(oval[i])) indices.add(i);
+    });
+    if (prev && typeof prev === 'object') {
+      Object.keys(prev).forEach((k) => {
+        const i = +k;
+        if (Number.isInteger(i) && i >= 0 && i < mval.length) indices.add(i);
+      });
+    }
+    for (const i of indices) {
+      const cd = _deepDiff(oval[i], mval[i], prev ? prev[i] : undefined);
+      if (cd !== _NOOP) sparse[i] = cd;
+    }
+    return Object.keys(sparse).length === 0 ? _NOOP : sparse;
+  }
   const mNullish = mval === null || mval === undefined;
   const oNullish = oval === null || oval === undefined;
   if (mNullish && oNullish) return prev != null ? null : _NOOP;
@@ -291,6 +316,152 @@ console.log('\n--- saveEditCharaCore: 同时撤回 chara + omoide → 两个 sto
   eq('reviseData[1].rarity null', s.reviseData[1]?.rarity, null);
   // omoide: omoide 撤回 → null
   eq('omoideReviseData[1].omoide null', s.omoideReviseData[1]?.omoide, null);
+}
+
+// ===== masou_overrides 流（chara editor 内嵌、跟 chara/cr/soul/bg 用 computeDiff + prev 对齐）=====
+// 模拟 edit.js masou_overrides 块的核心逻辑（不含 patch/array dict 转换）。
+// 验证：撤回到 base 时 entry 整条删（不残留 null）。
+const META_KEYS = new Set(['id', 'name', 'chara_id', 'chara_name']);
+function masouSaveOverride(state, mid, mergedMasou, prev) {
+  // mergedMasou: state.allMasou[i] 已经合并 patch 后的状态（caller 责任）
+  const orig = state.masouOriginalData[mid];
+  if (!orig) return;
+  const diff = computeDiff(orig, mergedMasou, prev);
+  const meaningful = Object.keys(diff).some((k) => !META_KEYS.has(k));
+  if (meaningful) {
+    state.masouReviseData[mid] = Object.assign(
+      {
+        id: mid,
+        name: mergedMasou.name,
+        chara_id: mergedMasou.chara_id,
+        chara_name: mergedMasou.chara_name,
+      },
+      diff,
+    );
+    state.masouSessionReviseIds.add(mid);
+  } else {
+    delete state.masouReviseData[mid];
+    state.masouSessionReviseIds.delete(mid);
+  }
+}
+
+const makeMasouState = (masouBase = []) => ({
+  allMasou: JSON.parse(JSON.stringify(masouBase)),
+  masouOriginalData: masouBase.reduce((m, x) => ((m[x.id] = JSON.parse(JSON.stringify(x))), m), {}),
+  masouReviseData: {},
+  masouSessionReviseIds: new Set(),
+});
+
+console.log('\n--- masou: 改 effect 字段 → sparse-dict diff 进 reviseData (带 metadata) ---');
+{
+  const base = [
+    {
+      id: 510,
+      name: '白焔',
+      chara_id: 1527,
+      chara_name: 'バハムート=オメガ:Blaze',
+      effects: [{ bunrui: [1], bairitu: 1.3, bairitu_scaling: 0 }],
+    },
+  ];
+  const s = makeMasouState(base);
+  // user 改 effects[0].bairitu_scaling 0 → 1
+  s.allMasou[0] = JSON.parse(JSON.stringify(base[0]));
+  s.allMasou[0].effects[0].bairitu_scaling = 1;
+  masouSaveOverride(s, 510, s.allMasou[0], undefined);
+  eq('reviseData[510] 含 metadata + sparse-dict diff', s.masouReviseData[510], {
+    id: 510,
+    name: '白焔',
+    chara_id: 1527,
+    chara_name: 'バハムート=オメガ:Blaze',
+    effects: { 0: { bairitu_scaling: 1 } },
+  });
+  truthy('sessionReviseIds has 510', s.masouSessionReviseIds.has(510));
+}
+
+console.log('\n--- masou: 撤回到 base 值 → entry 整条删（不残留 null）---');
+{
+  const base = [
+    {
+      id: 510,
+      name: '白焔',
+      chara_id: 1527,
+      chara_name: 'バハムート=オメガ:Blaze',
+      effects: [{ bunrui: [1], bairitu: 1.3, bairitu_scaling: 0 }],
+    },
+  ];
+  const s = makeMasouState(base);
+  // 第 1 次：改 bairitu_scaling 0 → 1
+  s.allMasou[0] = JSON.parse(JSON.stringify(base[0]));
+  s.allMasou[0].effects[0].bairitu_scaling = 1;
+  masouSaveOverride(s, 510, s.allMasou[0], undefined);
+  truthy('第 1 次 saveEdit: reviseData[510] 存在', !!s.masouReviseData[510]);
+  const prev = s.masouReviseData[510];
+  // 第 2 次：撤回回 0
+  s.allMasou[0].effects[0].bairitu_scaling = 0;
+  masouSaveOverride(s, 510, s.allMasou[0], prev);
+  // diff 应该是 {id, name, effects: {0: {bairitu_scaling: null}}}
+  // meaningful check 看 'effects' (不是 META_KEYS) → meaningful=true → 仍保留 entry 含 null 撤回标记
+  truthy(
+    '第 2 次撤回: reviseData[510] 含 null 撤回标记',
+    s.masouReviseData[510]?.effects?.[0]?.bairitu_scaling === null,
+  );
+  truthy('sessionReviseIds 仍含 510 (要 submit 撤回)', s.masouSessionReviseIds.has(510));
+}
+
+console.log('\n--- masou: refresh (no prev) 后撤回完成 → entry 整条删 ---');
+{
+  // 模拟 saveReviseCharaCore refresh 阶段（submit 成功后用无 prev 的 computeDiff 重算）
+  const base = [
+    {
+      id: 510,
+      name: '白焔',
+      chara_id: 1527,
+      chara_name: 'バハムート=オメガ:Blaze',
+      effects: [{ bunrui: [1], bairitu: 1.3, bairitu_scaling: 0 }],
+    },
+  ];
+  const s = makeMasouState(base);
+  // allMasou 跟 base 一致（撤回后状态）
+  // refresh：用无 prev 的 computeDiff、应该 diff 完全空（只 id/name）→ entry 删
+  s.masouReviseData[510] = { id: 510, name: '白焔', effects: { 0: { bairitu_scaling: null } } };
+  // 模拟 refresh：no prev
+  const fresh = computeDiff(s.masouOriginalData[510], s.allMasou[0]);
+  const meaningful = Object.keys(fresh).some((k) => !META_KEYS.has(k));
+  if (meaningful) {
+    s.masouReviseData[510] = Object.assign(
+      {
+        id: 510,
+        name: s.allMasou[0].name,
+        chara_id: s.allMasou[0].chara_id,
+        chara_name: s.allMasou[0].chara_name,
+      },
+      fresh,
+    );
+  } else {
+    delete s.masouReviseData[510];
+  }
+  truthy('refresh 后 reviseData[510] 整条删', !s.masouReviseData[510]);
+}
+
+console.log('\n--- masou: chara_id / chara_name 是 metadata、不影响 meaningful 判定 ---');
+{
+  // 即使 entry 只剩 metadata + chara_id + chara_name、也应判 meaningful=false
+  const entry = { id: 510, name: '白焔', chara_id: 1527, chara_name: 'バハムート=オメガ:Blaze' };
+  const meaningful = Object.keys(entry).some((k) => !META_KEYS.has(k));
+  eq('metadata-only entry: meaningful=false', meaningful, false);
+}
+
+console.log('\n--- masou: 有 effects 改动时 meaningful=true ---');
+{
+  const entry = {
+    id: 510,
+    name: '白焔',
+    chara_id: 1527,
+    chara_name: 'バハムート=オメガ:Blaze',
+    effects: { 0: { bairitu: 2 } },
+  };
+  const meaningful = Object.keys(entry).some((k) => !META_KEYS.has(k));
+  eq('effects 改动: meaningful=true', meaningful, true);
 }
 
 console.log(`\n${pass} pass, ${fail} fail`);
