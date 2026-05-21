@@ -515,17 +515,20 @@ function updateReviseBar() {
 
 ### Playwright UI smoke（tests/ui/*.spec.js）
 
-5 个 viewer 的端到端 smoke：load → 列表渲染 → enterEditMode → saveEdit → revise-bar → saveRevise（mock /save endpoint）。
+5 个 viewer 端到端覆盖：smoke（load + 列表 + API 暴露）+ saveRevise body 校验 + 行为验证。16 个 test。
 
 | 文件 | 覆盖 |
 |---|---|
-| `tests/ui/characters.spec.js` | chara list + detail + edit + save + masou state 暴露 |
-| `tests/ui/crystals.spec.js` | crystal row 展开 + edit + save |
-| `tests/ui/souls.spec.js` | soul detail + edit + save |
-| `tests/ui/bladegraphs.spec.js` | bg row 展开 + edit + save |
-| `tests/ui/hensei.spec.js` | 3 slot 容器 + setChara → stats panel 渲染非 0 攻撃力/HP |
+| `tests/ui/characters.spec.js` (4 test) | smoke + saveEdit/Revise UI flow + saveRevise POST body 含 `revise` bucket rarity 改动 + 撤回 e2e（改 → 改回 base → emit `rarity: null`） |
+| `tests/ui/crystals.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `crystals_revise` bucket level_max 改动 |
+| `tests/ui/souls.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `souls_revise` bucket rarity 改动 |
+| `tests/ui/bladegraphs.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `bladegraphs_revise` bucket rarity 改动 |
+| `tests/ui/hensei.spec.js` (3 test) | 3 slot 容器 + setChara → stats panel 非 0 + **enemy.bk 切换**（騎槍 chara + ドキドキドクター 結晶 → 攻撃力 ×12，含 condition=4 BK状態時 crystal ×4 + Stage 4 enemy.bk ×3） |
 
-`tests/ui/helpers.js` 提供 `attachPageErrorWatcher`（监听 pageerror / console error）+ `mockSaveEndpoints`（拦截 /save + Vercel /api/save、返回 mock 成功 JSON，不真发请求）。
+`tests/ui/helpers.js` 3 个工具：
+- `attachPageErrorWatcher(page)` — 监听 pageerror / console.error、test 末尾 assert empty
+- `mockSaveEndpoints(page)` — 拦截 /save + Vercel /api/save、返回 mock 200（不 capture body）
+- `captureSaveEndpoint(page)` — 同上 + 把 POST body JSON 收集到返回数组，供 test 断言 saveRevise payload（如 `expect(captured[0].revise[0].rarity).toBe(3)`）
 
 跑法：`npm run test:ui`（或 `npx playwright test`）。`playwright.config.js` 自动起 `python -m http.server 8765 --bind 127.0.0.1` 作为静态 web server、跑完即停。仅 chromium-headless-shell、~112MB（local 装一次、`AppData/Local/ms-playwright/`、git 不入）。
 

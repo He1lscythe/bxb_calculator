@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { attachPageErrorWatcher, mockSaveEndpoints } from './helpers.js';
+import { attachPageErrorWatcher, mockSaveEndpoints, captureSaveEndpoint } from './helpers.js';
 
 test.describe('bladegraphs viewer smoke', () => {
   test('load + list 渲染 + 无 JS error + key API 暴露', async ({ page }) => {
@@ -56,6 +56,38 @@ test.describe('bladegraphs viewer smoke', () => {
 
     await page.evaluate(() => window.saveRevise());
     await expect(page.locator('#revise-bar')).toBeHidden({ timeout: 3000 });
+
+    expect(errors, errors.join('\n')).toEqual([]);
+  });
+
+  test('saveRevise → POST body 含 rarity 改动 (bladegraphs_revise bucket)', async ({ page }) => {
+    const errors = attachPageErrorWatcher(page);
+    const captured = await captureSaveEndpoint(page);
+
+    await page.goto('/pages/bladegraphs.html');
+    await page.waitForSelector('.bg-row', { timeout: 15000 });
+
+    const { id, newRarity } = await page.evaluate(() => {
+      const id = window.state.allBG[0].id;
+      window.toggleExpand?.(id);
+      window.enterEditMode(id);
+      const orig = window.state.editData.rarity ?? 4;
+      const next = orig === 4 ? 3 : 4;
+      window.state.editData.rarity = next;
+      window.saveEdit();
+      return { id, newRarity: next };
+    });
+
+    await page.evaluate(() => window.saveRevise());
+    await expect(page.locator('#revise-bar')).toBeHidden({ timeout: 3000 });
+
+    expect(captured.length).toBe(1);
+    const body = captured[0];
+    expect(body.session_ids).toContain(id);
+    expect(Array.isArray(body.bladegraphs_revise)).toBe(true);
+    const entry = body.bladegraphs_revise.find((e) => e.id === id);
+    expect(entry).toBeDefined();
+    expect(entry.rarity).toBe(newRarity);
 
     expect(errors, errors.join('\n')).toEqual([]);
   });

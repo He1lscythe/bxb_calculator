@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { attachPageErrorWatcher, mockSaveEndpoints } from './helpers.js';
+import { attachPageErrorWatcher, mockSaveEndpoints, captureSaveEndpoint } from './helpers.js';
 
 test.describe('characters viewer smoke', () => {
   test('load + list 渲染 + 无 JS error + key API 暴露', async ({ page }) => {
@@ -75,6 +75,89 @@ test.describe('characters viewer smoke', () => {
     await page.evaluate(() => window.saveRevise());
     // saveRevise 后 sessionReviseIds.clear() → revise-bar 重新 hidden
     await expect(page.locator('#revise-bar')).toBeHidden({ timeout: 3000 });
+
+    expect(errors, errors.join('\n')).toEqual([]);
+  });
+
+  test('saveRevise → POST body 含 rarity 改动 (revise bucket)', async ({ page }) => {
+    const errors = attachPageErrorWatcher(page);
+    const captured = await captureSaveEndpoint(page);
+
+    await page.goto('/pages/characters.html');
+    await page.waitForSelector('.char-item', { timeout: 15000 });
+    await page.locator('.char-item').first().click();
+    await page.waitForSelector('#chara-detail .chara-header', { timeout: 5000 });
+
+    const { id, name, origRarity, newRarity } = await page.evaluate(() => {
+      const id = window.state.selectedId;
+      window.enterEditMode(id);
+      const orig = window.state.editData.rarity;
+      const next = orig === 4 ? 3 : 4;
+      window.state.editData.rarity = next;
+      window.saveEdit();
+      return { id, name: window.state.editData?.name ?? null, origRarity: orig, newRarity: next };
+    });
+
+    await page.evaluate(() => window.saveRevise());
+    await expect(page.locator('#revise-bar')).toBeHidden({ timeout: 3000 });
+
+    expect(captured.length).toBe(1);
+    const body = captured[0];
+    expect(body.session_ids).toContain(id);
+    expect(Array.isArray(body.revise)).toBe(true);
+    const entry = body.revise.find((e) => e.id === id);
+    expect(entry).toBeDefined();
+    expect(entry.rarity).toBe(newRarity);
+    expect(entry.id).toBe(id);
+    // metadata 字段也带（chara 的 entry 有 id + name）
+    if (name) expect(entry.name).toBe(name);
+
+    expect(errors, errors.join('\n')).toEqual([]);
+  });
+
+  test('撤回 e2e：改 rarity → 改回 base → POST body emit null (撤回标记)', async ({ page }) => {
+    const errors = attachPageErrorWatcher(page);
+    const captured = await captureSaveEndpoint(page);
+
+    await page.goto('/pages/characters.html');
+    await page.waitForSelector('.char-item', { timeout: 15000 });
+    await page.locator('.char-item').first().click();
+    await page.waitForSelector('#chara-detail .chara-header', { timeout: 5000 });
+
+    // 第一步：rarity base → newRarity、saveRevise 验 entry 含 rarity=newRarity
+    const { id, origRarity, newRarity } = await page.evaluate(() => {
+      const id = window.state.selectedId;
+      window.enterEditMode(id);
+      const orig = window.state.editData.rarity;
+      const next = orig === 4 ? 3 : 4;
+      window.state.editData.rarity = next;
+      window.saveEdit();
+      return { id, origRarity: orig, newRarity: next };
+    });
+    await page.evaluate(() => window.saveRevise());
+    await expect(page.locator('#revise-bar')).toBeHidden({ timeout: 3000 });
+
+    expect(captured.length).toBe(1);
+    const firstEntry = captured[0].revise.find((e) => e.id === id);
+    expect(firstEntry.rarity).toBe(newRarity);
+
+    // 第二步：改回 base（origRarity） → saveEdit + saveRevise → body 应含 rarity:null（撤回标记）
+    await page.evaluate(
+      ({ id, orig }) => {
+        window.enterEditMode(id);
+        window.state.editData.rarity = orig;
+        window.saveEdit();
+      },
+      { id, orig: origRarity },
+    );
+    await page.evaluate(() => window.saveRevise());
+    await expect(page.locator('#revise-bar')).toBeHidden({ timeout: 3000 });
+
+    expect(captured.length).toBe(2);
+    const secondEntry = captured[1].revise.find((e) => e.id === id);
+    expect(secondEntry).toBeDefined();
+    // prev-revise pattern：改回 base → diff emit rarity=null
+    expect(secondEntry.rarity).toBeNull();
 
     expect(errors, errors.join('\n')).toEqual([]);
   });

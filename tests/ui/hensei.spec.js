@@ -74,4 +74,70 @@ test.describe('hensei viewer smoke', () => {
 
     expect(errors, errors.join('\n')).toEqual([]);
   });
+
+  test('enemy.bk 切换：騎槍 chara + ドキドキドクター 結晶 → 攻撃力 ×12', async ({ page }) => {
+    // 復刻 user 之前手动验过的 case：ドキドキドクター (crystal id 1367)
+    // effect: bunrui=[1] 攻撃力 / scope=3 自身 + weapon=8 騎槍 / condition=4 BK状態時 /
+    //         calc_type=0 mult / bairitu=4
+    // BK=false → factor=0 → eff=(4-1)*0+1=1 → 結晶不生效
+    // BK=true  → factor=1 → eff=(4-1)*1+1=4 → 結晶 ×4
+    //          + Stage 4 enemy.bk 自身 ×3.0 (normal mode、stats-calc.js Stage 4b)
+    //          → 总效果 ×12
+    const errors = attachPageErrorWatcher(page);
+    await mockSaveEndpoints(page);
+
+    await page.goto('/pages/hensei.html');
+    await page.waitForFunction(
+      () => typeof window.setChara === 'function' && Array.isArray(window.state?.team),
+      null,
+      { timeout: 15000 },
+    );
+    await page.waitForFunction(() => typeof window.setEnemyBk === 'function', null, {
+      timeout: 5000,
+    });
+
+    // 找一个 weapon=8（騎槍）+ rarity=4 chara
+    const charaId = await page.evaluate(async () => {
+      const arr = await fetch('../data/characters.json').then((r) => r.json());
+      const c = arr.find((x) => x.weapon === 8 && x.rarity === 4 && x.states && !x.tombstone);
+      return c?.id ?? null;
+    });
+    expect(charaId, '找不到 weapon=8 騎槍 rarity=4 chara').not.toBeNull();
+
+    // 装 chara 到 slot 0
+    await page.evaluate((id) => window.setChara(0, id), charaId);
+    await expect(page.locator('#stats-panel-0')).toContainText('攻撃力max', { timeout: 3000 });
+
+    // 验证 crystal 1367 在 crystals.json
+    const crystalOk = await page.evaluate(async () => {
+      const arr = await fetch('../data/crystals.json').then((r) => r.json());
+      return !!arr.find((x) => x.id === 1367);
+    });
+    expect(crystalOk, 'crystals.json 不含 id 1367 ドキドキドクター').toBe(true);
+
+    // 装 結晶 1367 到 slot 0 crystals[0]
+    await page.evaluate(() => window.setCrystal(0, 0, 1367));
+
+    const parseNum = (s) => +String(s).replace(/[,\s]/g, '') || 0;
+
+    // BK=false（默认）→ 攻撃力 X1
+    const atkBefore = parseNum(
+      (await page.locator('#stats-panel-0 .stats-val').first().textContent()) || '0',
+    );
+    expect(atkBefore).toBeGreaterThan(0);
+
+    // 切 BK=true、等 refresh
+    await page.evaluate(() => window.setEnemyBk(true));
+    await page.waitForTimeout(200); // refresh 是同步 dom 替换、给个微间隔确保
+
+    const atkAfter = parseNum(
+      (await page.locator('#stats-panel-0 .stats-val').first().textContent()) || '0',
+    );
+
+    // 期望 atkAfter ≈ 12 × atkBefore（结晶 ×4 × Stage 4 BK ×3）
+    expect(atkAfter).toBeGreaterThan(atkBefore * 11);
+    expect(atkAfter).toBeLessThan(atkBefore * 13);
+
+    expect(errors, errors.join('\n')).toEqual([]);
+  });
 });
