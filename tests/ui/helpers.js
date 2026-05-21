@@ -6,14 +6,26 @@
 
 export const attachPageErrorWatcher = (page) => {
   const errors = [];
+  // 真实 404 通过 page.on('response') 检查、跳过 gitignored optional 文件
+  // (*_revise / *_extra / *_check / omoide_templates)、对其他 404 记 error。
+  // viewer 加载时 fetch 这些 optional file 有 .catch(() => []) / [] 兜底、本地 data-staging
+  // 上文件存在不会 404、main / CI 上不存在就 404 — 不算 test error。
+  page.on('response', (resp) => {
+    if (resp.status() !== 404) return;
+    const url = resp.url();
+    if (/_(revise|extra|check)\.json|omoide_templates\.json|favicon/.test(url)) return;
+    errors.push(`response 404: ${url}`);
+  });
   page.on('pageerror', (err) => errors.push(`pageerror: ${err.message}`));
   page.on('console', (msg) => {
-    if (msg.type() === 'error') {
-      const txt = msg.text();
-      // favicon / chrome devtools / extra.json 404 等无害噪音忽略
-      if (/favicon|net::ERR_FAILED.*\.ico|DevTools/.test(txt)) return;
-      errors.push(`console.error: ${txt}`);
-    }
+    if (msg.type() !== 'error') return;
+    const txt = msg.text();
+    // favicon / chrome devtools 噪音忽略
+    if (/favicon|net::ERR_FAILED.*\.ico|DevTools/.test(txt)) return;
+    // 浏览器把 fetch 404 也以 console.error 报 "Failed to load resource ... 404"
+    // — page.on('response') 已经处理这类、避免 double-count、全部忽略
+    if (/Failed to load resource.*\b40[0-9]\b/.test(txt)) return;
+    errors.push(`console.error: ${txt}`);
   });
   return errors;
 };
