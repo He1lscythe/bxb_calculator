@@ -36,6 +36,18 @@ export const mockSaveEndpoints = async (page) => {
   );
 };
 
+// mock saveRevise POST 返回 500 error — 用于测错误处理（wrapSaveReviseUi catch 分支）
+export const mockSaveEndpointError = async (page, status = 500) => {
+  const handler = (route) =>
+    route.fulfill({
+      status,
+      contentType: 'application/json',
+      body: JSON.stringify({ error: `mock ${status}` }),
+    });
+  await page.route('**/save', handler);
+  await page.route('https://bxb-calculator.vercel.app/api/save', handler);
+};
+
 // 拦截 + capture body。返回 captured 数组、test 在调用 saveRevise 后读它做 assert。
 // 每次 saveRevise POST 会 append 一个 entry（JSON parse postData、失败则 rawBody string）。
 export const captureSaveEndpoint = async (page) => {

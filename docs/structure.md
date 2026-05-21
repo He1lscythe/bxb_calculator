@@ -515,20 +515,21 @@ function updateReviseBar() {
 
 ### Playwright UI smoke（tests/ui/*.spec.js）
 
-5 个 viewer 端到端覆盖：smoke（load + 列表 + API 暴露）+ saveRevise body 校验 + 行为验证。16 个 test。
+5 个 viewer 端到端覆盖：smoke + saveRevise body 校验 + 行为验证 + 复杂集成场景 + 错误处理。23 个 test。
 
 | 文件 | 覆盖 |
 |---|---|
-| `tests/ui/characters.spec.js` (4 test) | smoke + saveEdit/Revise UI flow + saveRevise POST body 含 `revise` bucket rarity 改动 + 撤回 e2e（改 → 改回 base → emit `rarity: null`） |
+| `tests/ui/characters.spec.js` (9 test) | smoke + saveEdit/Revise UI flow + saveRevise POST body 含 `revise` bucket rarity 改动 + 撤回 e2e + omoide_template override（→ `omoide_revise.omoide = null`）+ bd_skill edit（→ `revise.bd_skill`）+ masou_overrides edit（→ `masou_revise` bucket 含 metadata + 稀疏 effects）+ filter UI（toggleFilter rarity → list count 减少 / resetFilters 恢复）+ 错误处理（saveRevise 500 → revise-bar 不清空 / btn 重 enabled / sessionReviseIds 非空） |
 | `tests/ui/crystals.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `crystals_revise` bucket level_max 改动 |
 | `tests/ui/souls.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `souls_revise` bucket rarity 改动 |
 | `tests/ui/bladegraphs.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `bladegraphs_revise` bucket rarity 改动 |
-| `tests/ui/hensei.spec.js` (3 test) | 3 slot 容器 + setChara → stats panel 非 0 + **enemy.bk 切换**（騎槍 chara + ドキドキドクター 結晶 → 攻撃力 ×12，含 condition=4 BK状態時 crystal ×4 + Stage 4 enemy.bk ×3） |
+| `tests/ui/hensei.spec.js` (5 test) | 3 slot 容器 + setChara → stats panel 非 0 + **enemy.bk 切换**（騎槍 chara + ドキドキドクター 結晶 → 攻撃力 ×12，crystal ×4 + Stage 4 enemy.bk ×3）+ crystal slider（setCrystalDim weight/purity/lv → state 同步 + clamp 0/100/cryLvMax 边界）+ **scope=5 名前精确匹配**（ティナ×ブレイドの秘録記憶 + ティナ×ブレイド chara → ダメ上限 +1.3G；不匹配 chara → ダメ上限 不变；验 commit 975b381 精确等値匹配） |
 
-`tests/ui/helpers.js` 3 个工具：
+`tests/ui/helpers.js` 4 个工具：
 - `attachPageErrorWatcher(page)` — 监听 pageerror / console.error、test 末尾 assert empty
 - `mockSaveEndpoints(page)` — 拦截 /save + Vercel /api/save、返回 mock 200（不 capture body）
-- `captureSaveEndpoint(page)` — 同上 + 把 POST body JSON 收集到返回数组，供 test 断言 saveRevise payload（如 `expect(captured[0].revise[0].rarity).toBe(3)`）
+- `captureSaveEndpoint(page)` — 同上 + 把 POST body JSON 收集到返回数组（如 `expect(captured[0].revise[0].rarity).toBe(3)`）
+- `mockSaveEndpointError(page, status=500)` — mock 返回 error status、用于测 wrapSaveReviseUi catch 分支
 
 跑法：`npm run test:ui`（或 `npx playwright test`）。`playwright.config.js` 自动起 `python -m http.server 8765 --bind 127.0.0.1` 作为静态 web server、跑完即停。仅 chromium-headless-shell、~112MB（local 装一次、`AppData/Local/ms-playwright/`、git 不入）。
 
