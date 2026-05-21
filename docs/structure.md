@@ -515,17 +515,21 @@ function updateReviseBar() {
 
 ### Playwright UI smoke（tests/ui/*.spec.js）
 
-5 个 viewer 的端到端 smoke：load → 列表渲染 → enterEditMode → saveEdit → revise-bar → saveRevise（mock /save endpoint）。
+5 个 viewer 端到端覆盖：smoke + saveRevise body 校验 + 行为验证 + 复杂集成场景 + 错误处理。23 个 test。
 
 | 文件 | 覆盖 |
 |---|---|
-| `tests/ui/characters.spec.js` | chara list + detail + edit + save + masou state 暴露 |
-| `tests/ui/crystals.spec.js` | crystal row 展开 + edit + save |
-| `tests/ui/souls.spec.js` | soul detail + edit + save |
-| `tests/ui/bladegraphs.spec.js` | bg row 展开 + edit + save |
-| `tests/ui/hensei.spec.js` | 3 slot 容器 + setChara → stats panel 渲染非 0 攻撃力/HP |
+| `tests/ui/characters.spec.js` (9 test) | smoke + saveEdit/Revise UI flow + saveRevise POST body 含 `revise` bucket rarity 改动 + 撤回 e2e + omoide_template override（→ `omoide_revise.omoide = null`）+ bd_skill edit（→ `revise.bd_skill`）+ masou_overrides edit（→ `masou_revise` bucket 含 metadata + 稀疏 effects）+ filter UI（toggleFilter rarity → list count 减少 / resetFilters 恢复）+ 错误处理（saveRevise 500 → revise-bar 不清空 / btn 重 enabled / sessionReviseIds 非空） |
+| `tests/ui/crystals.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `crystals_revise` bucket level_max 改动 |
+| `tests/ui/souls.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `souls_revise` bucket rarity 改动 |
+| `tests/ui/bladegraphs.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `bladegraphs_revise` bucket rarity 改动 |
+| `tests/ui/hensei.spec.js` (5 test) | 3 slot 容器 + setChara → stats panel 非 0 + **enemy.bk 切换**（騎槍 chara + ドキドキドクター 結晶 → 攻撃力 ×12，crystal ×4 + Stage 4 enemy.bk ×3）+ crystal slider（setCrystalDim weight/purity/lv → state 同步 + clamp 0/100/cryLvMax 边界）+ **scope=5 名前精确匹配**（ティナ×ブレイドの秘録記憶 + ティナ×ブレイド chara → ダメ上限 +1.3G；不匹配 chara → ダメ上限 不变；验 commit 975b381 精确等値匹配） |
 
-`tests/ui/helpers.js` 提供 `attachPageErrorWatcher`（监听 pageerror / console error）+ `mockSaveEndpoints`（拦截 /save + Vercel /api/save、返回 mock 成功 JSON，不真发请求）。
+`tests/ui/helpers.js` 4 个工具：
+- `attachPageErrorWatcher(page)` — 监听 pageerror / console.error、test 末尾 assert empty
+- `mockSaveEndpoints(page)` — 拦截 /save + Vercel /api/save、返回 mock 200（不 capture body）
+- `captureSaveEndpoint(page)` — 同上 + 把 POST body JSON 收集到返回数组（如 `expect(captured[0].revise[0].rarity).toBe(3)`）
+- `mockSaveEndpointError(page, status=500)` — mock 返回 error status、用于测 wrapSaveReviseUi catch 分支
 
 跑法：`npm run test:ui`（或 `npx playwright test`）。`playwright.config.js` 自动起 `python -m http.server 8765 --bind 127.0.0.1` 作为静态 web server、跑完即停。仅 chromium-headless-shell、~112MB（local 装一次、`AppData/Local/ms-playwright/`、git 不入）。
 
@@ -537,6 +541,17 @@ function updateReviseBar() {
 | `.github/workflows/ui.yml` | push / PR to main | `npm ci && npx playwright install --with-deps chromium && npm run test:ui` |
 
 两个 workflow 独立 job（并行）。lint 配置 `eslint.config.js` 只 enforce 3 条 critical rule（no-undef / no-unused-vars / no-redeclare）、warning 不 fail。Prettier 不进 CI（`npm run format` 给开发者手动用）。
+
+### Dead code audit（手动 audit、不进 CI）
+
+ESLint 默认不查跨文件 dead exports / dead imports / arity 不匹配。手动 audit 用：
+
+| 脚本 | 用途 |
+|---|---|
+| `scripts/audit_dead_code.mjs` | 扫描 js / shared / pages_src / pages / tests，输出 4 份 markdown 到 `audit/` 目录（gitignored）：`dead-exports.md` / `redundant-exports.md` / `dead-imports.md` / `arity-mismatch.md`。纯 regex 实现、精度 ~90%、漏报误报正常 |
+| `scripts/fix_dead_imports.mjs` | 读 `audit/dead-imports.md`、re-verify 每条、批量删 import block 内 dead named symbols（整段删 / 部分重写两种）。`--dry-run` 预览 |
+
+用法：refactor / 删 helper / 重命名 后跑一次。当前 dead-exports = 0 / redundant-exports = 0 / dead-imports = 0。arity-mismatch 142 条多数是 JS optional-arg convention 的 false positive，报告内有 disclaimer。
 
 ---
 

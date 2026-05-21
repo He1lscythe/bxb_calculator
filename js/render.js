@@ -1,16 +1,7 @@
 // js/render.js
 import { state } from './state.js';
-import {
-  RARITY,
-  ELEMENT,
-  WEAPON,
-  ELEM_COLOR,
-  BUNRUI_SHORT,
-  CHARA_TAG,
-  OMOIDE_THRESHOLDS,
-} from '../shared/constants.js';
-import { updateReviseBar } from './nav.js';
-import { hasOmoide, fmt, fmtNum, fmtBairitu, renderRightTags, escHtml, min } from './utils.js';
+import { RARITY, ELEMENT, WEAPON, ELEM_COLOR, CHARA_TAG } from '../shared/constants.js';
+import { hasOmoide, fmt, fmtBairitu, renderRightTags, escHtml, min } from './utils.js';
 import { CHARA_SPEC } from '../shared/chara-spec.js';
 
 export const _fmtSortVal = (v) => {
@@ -154,7 +145,7 @@ export const updateMobNavBar = (c) => {
   if (label) label.textContent = c && idx >= 0 ? `${idx + 1} / ${state.filteredChars.length}` : '';
 };
 
-export const _measureStickyHeights = () => {
+const _measureStickyHeights = () => {
   const isMob = window.innerWidth <= 900;
   const bar = document.getElementById('detail-mob-bar');
   const header = document.querySelector('#chara-detail .chara-header');
@@ -190,7 +181,7 @@ export const setupStickyHeights = () => {
   }
 };
 
-export const renderBDCard = (bd) => {
+const renderBDCard = (bd) => {
   // bd 専用 tag 列：duration + bdhit。魔剣特性 tag は chara header 側で表示する（chara.tags）。
   const durTag = bd.duration ? `<span class="bd-dur-tag">${escHtml(bd.duration)}</span>` : '';
   const hitTag = bd.bdhit && bd.bdhit > 1 ? `<span class="bd-hit-tag">${bd.bdhit}連</span>` : '';
@@ -284,7 +275,7 @@ export const _deletedSkillSet = (c) => {
   return new Set(Array.isArray(c && c._deleted_skills) ? c._deleted_skills : []);
 };
 
-export const renderStateContent = (sectionState, stateLabel, chara) => {
+const renderStateContent = (sectionState, stateLabel, chara) => {
   const parts = [];
   const dead = _deletedSkillSet(chara);
 
@@ -346,7 +337,7 @@ export const renderStateContent = (sectionState, stateLabel, chara) => {
   return parts.join('') || '<div class="no-results">データなし</div>';
 };
 
-export const renderStats = (stats, stateLabel) => {
+const renderStats = (stats, stateLabel) => {
   const STAT_LABELS = {
     HP: 'HP',
     攻撃力: '攻撃力',
@@ -387,7 +378,7 @@ export const renderStats = (stats, stateLabel) => {
   return `<div class="stat-grid">${cards}</div>`;
 };
 
-export const renderBasicInfo = (info) => {
+const renderBasicInfo = (info) => {
   const rows = Object.entries(info)
     .map(([k, v]) => {
       let displayVal;

@@ -7,7 +7,6 @@ import {
   BUNRUI_FILTER,
   CONDITION,
   SCOPE_SHORT,
-  SCOPE,
   renderFilterToggles,
   renderElementFilterToggles,
 } from '../shared/constants.js';
@@ -15,14 +14,14 @@ import { FilterCore } from '../shared/filter-core.js';
 import { BG_SPEC } from '../shared/bg-spec.js';
 import { escHtml, ctPfx, fmtNum, fmtLarge } from './utils.js';
 
-export const cardElement = (c) => {
+const cardElement = (c) => {
   const e = (c.effects || []).find(function (e) {
     return e.scope === 3 && e.element != null;
   });
   return e ? e.element : 0;
 };
 
-export const cardWeapon = (c) => {
+const cardWeapon = (c) => {
   const e = (c.effects || []).find(function (e) {
     return e.scope === 3 && e.weapon != null;
   });

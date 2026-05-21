@@ -2,34 +2,23 @@
 import { state, OMOIDE_KEYS } from './state.js';
 import {
   RARITY,
-  BUNRUI,
   BUNRUI_SHORT,
   ELEMENT,
   WEAPON,
   CONDITION,
-  SCOPE,
   CHARA_TAG,
   renderEditSelect,
-  renderEditCheckboxes,
-  renderFilterToggles,
 } from '../shared/constants.js';
 import {
   saveEditCharaCore,
   saveReviseCharaCore,
   wrapSaveReviseUi,
 } from '../shared/save-edit-base.js';
-import { escHtml, fmtBairitu, fmtHitStages, ctPfx, hasOmoide, min } from './utils.js';
-import {
-  selectChar,
-  renderDetail,
-  switchState,
-  setupStickyHeights,
-  _deletedSkillSet,
-} from './render.js';
-import { renderOmoideTemplateBar, renderLatentEditBody, reRenderLatentEdit } from './latent.js';
+import { escHtml, min } from './utils.js';
+import { selectChar, switchState, setupStickyHeights, _deletedSkillSet } from './render.js';
+import { renderOmoideTemplateBar, renderLatentEditBody } from './latent.js';
 import { renderMasouEditSection } from './masou.js';
 import { updateReviseBar } from './nav.js';
-import { CHARA_SPEC } from '../shared/chara-spec.js';
 // 用 shared diff.js 的 3 参数 computeDiff/_deepDiff/deepApply（撤回机制依赖 prev）。
 // 历史上 chara 自带 2 参版导致 prevMerged 被丢、retraction 失效。re-export 让
 // pages_src/characters.html 的 import { deepApply, computeDiff, _deepDiff } 不变。
@@ -293,7 +282,7 @@ export const renderEditDetail = (c) => {
     </div>`;
 };
 
-export const renderEditStateContent = (c, lbl) => {
+const renderEditStateContent = (c, lbl) => {
   const state = c.states[lbl];
   const p = `states.${lbl}`;
   const parts = [];
@@ -557,7 +546,7 @@ export const setHitStageScaling = (path, idx, val) => {
   setPath(state.editData, path + '.hit_per_stage_scaling', arr);
 };
 
-export const _renderHitEdit = (ep, e) => {
+const _renderHitEdit = (ep, e) => {
   if (!(e.bunrui || []).includes(7)) return '';
   const ht = e.hit_type != null ? e.hit_type : 0;
   const hps = Array.isArray(e.hit_per_stage) ? e.hit_per_stage : [null, null, null];

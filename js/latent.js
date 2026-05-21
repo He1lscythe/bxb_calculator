@@ -1,5 +1,5 @@
 // js/latent.js
-import { state, OMOIDE_KEYS } from './state.js';
+import { state } from './state.js';
 
 let _promptCb = null;
 
@@ -7,12 +7,10 @@ const _OMOIDE_RARITY_TH = new Set([6000, 30000, 45000, 60000, 75000, 90000]);
 const _OMOIDE_RARITY_STRICT_TH = new Set([45000, 60000, 75000, 90000]);
 const _ICON_TO_RARITY = { 88: 1, 89: 2, 90: 3, 91: 4, 92: 5 };
 import { OMOIDE_THRESHOLDS } from '../shared/constants.js';
-import { submitRevise, showSaveToast } from '../shared/save-client.js';
-import { escHtml, fmt, fmtNum, ctPfx, hasOmoide, min } from './utils.js';
-import { selectChar } from './render.js';
-import { updateReviseBar } from './nav.js';
+import { submitRevise } from '../shared/save-client.js';
+import { escHtml, fmtNum, ctPfx, hasOmoide, min } from './utils.js';
 
-export const _senzaiLabel = (iconId) => {
+const _senzaiLabel = (iconId) => {
   const tbl = typeof state.SENZAI_TABLE !== 'undefined' ? state.SENZAI_TABLE : {};
   const info = tbl[iconId] || tbl[String(iconId)] || {};
   const bVal =
@@ -22,7 +20,7 @@ export const _senzaiLabel = (iconId) => {
   return (info.koka || 'icon ' + iconId) + bVal;
 };
 
-export const getLinkedThresholds = (threshold, omoideRarity) => {
+const getLinkedThresholds = (threshold, omoideRarity) => {
   const star1 = [10, 200, 700, 2000, 3000, 5000, 7000, 9000, 13000];
   const s2h = [],
     s3h = [];
@@ -88,7 +86,7 @@ const _buildLCSOpts = (iconId, t, slotIdx, restricted) => {
     .join('');
 };
 
-export const makeLCSHtml = (iconId, t, slotIdx, restricted) => {
+const makeLCSHtml = (iconId, t, slotIdx, restricted) => {
   const triggerLabel = iconId != null ? _senzaiLabel(iconId) : '選択...';
   const searchHtml = restricted
     ? ''

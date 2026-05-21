@@ -229,45 +229,10 @@
 
     <script type="module">
       import { Nav, updateReviseBar } from '../js/nav.js';
-      import { state, OMOIDE_KEYS } from '../js/state.js';
-      import {
-        ELEMENT,
-        WEAPON,
-        RARITY,
-        BUNRUI,
-        BUNRUI_SHORT,
-        CHARA_TAG,
-        CHARA_TAG_COLOR,
-        OMOIDE_THRESHOLDS,
-        SCOPE,
-        SCOPE_SHORT,
-        CONDITION,
-        ELEM_COLOR,
-        ELEM_CSS_VAR,
-        ELEMS_ORDER,
-        WEAPONS_ORDER,
-        renderFilterToggles,
-        renderElementFilterToggles,
-        renderEditSelect,
-        renderEditCheckboxes,
-      } from '../shared/constants.js';
-      import { FilterCore } from '../shared/filter-core.js';
-      import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
-      import { CHARA_SPEC } from '../shared/chara-spec.js';
+      import { state } from '../js/state.js';
       import { resolveOmoideTemplates } from '../shared/omoide.js';
-      import {
-        escHtml,
-        fmt,
-        fmtNum,
-        fmtBairitu,
-        fmtHitStages,
-        ctPfx,
-        hasOmoide,
-        parseBairituVal,
-        renderRightTags,
-        hideLoading,
-      } from '../js/utils.js';
-      import { deepApply, computeDiff, _deepDiff } from '../js/edit.js';
+      import { fmtNum, ctPfx, parseBairituVal, hideLoading } from '../js/utils.js';
+      import { deepApply, computeDiff } from '../js/edit.js';
       import {
         applyFilters,
         initFilterToggles,
@@ -276,26 +241,12 @@
         collapseFiltersOnScroll,
         toggleSortDir,
         resetFilters,
-        getBestState,
-        getSortValue,
       } from '../js/filter.js';
       import {
-        renderList,
-        renderDetail,
         selectChar,
         closeDetailMob,
         navChara,
-        updateMobNavBar,
-        setupStickyHeights,
         switchState,
-        renderBDCard,
-        renderStateContent,
-        renderStats,
-        renderBasicInfo,
-        _fmtSortVal,
-        renderSortBadge,
-        _deletedSkillSet,
-        _measureStickyHeights,
         _scheduleMeasure,
       } from '../js/render.js';
       import {
@@ -305,7 +256,6 @@
         saveRevise,
         toggleBunrui,
         setPath,
-        getPath,
         setHit,
         setHitStage,
         setHitStageScaling,
@@ -313,9 +263,6 @@
         toggleSkillTombstone,
         addNewCharaSkill,
         removeAddedCharaSkill,
-        renderEditDetail,
-        renderEditStateContent,
-        _renderHitEdit,
         renderCharaTagToggles,
         renderBDEffectsEdit,
         toggleCharaTag,
@@ -323,10 +270,6 @@
         removeBDEffect,
       } from '../js/edit.js';
       import {
-        _senzaiLabel,
-        getLinkedThresholds,
-        makeLCSHtml,
-        renderLatentEditBody,
         toggleLCS,
         closeLCS,
         filterLCS,
@@ -347,12 +290,7 @@
         openLatentModal,
         closeLatentModal,
       } from '../js/latent.js';
-      import {
-        openMasouModal,
-        closeMasouModal,
-        renderMasouEditSection,
-        toggleMasouBunrui,
-      } from '../js/masou.js';
+      import { openMasouModal, closeMasouModal, toggleMasouBunrui } from '../js/masou.js';
 
       Nav.init();
 
