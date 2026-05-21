@@ -103,25 +103,21 @@ export const resetFilters = () => {
   applyFilters();
 };
 
-export const crystalElement = (c) => {
+const crystalElement = (c) => {
   const e = (c.effects || []).find(function (e) {
     return (e.scope === 2 || e.scope === 3) && e.element != null;
   });
   return e ? e.element : 0;
 };
 
-export const crystalWeapon = (c) => {
+const crystalWeapon = (c) => {
   const e = (c.effects || []).find(function (e) {
     return (e.scope === 2 || e.scope === 3) && e.weapon != null;
   });
   return e ? e.weapon : 0;
 };
 
-export const crystalScope = (c) => {
-  return ((c.effects || [])[0] || {}).scope || 0;
-};
-
-export const crystalCondition = (c) => {
+const crystalCondition = (c) => {
   return ((c.effects || [])[0] || {}).condition || 0;
 };
 

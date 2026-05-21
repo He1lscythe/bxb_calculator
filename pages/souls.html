@@ -144,30 +144,7 @@
     <script type="module">
       import { Nav, updateReviseBar } from '../js/nav.js';
       import { state } from '../js/soul-state.js';
-      import {
-        ELEMENT,
-        WEAPON,
-        BUNRUI_SHORT,
-        CONDITION,
-        ELEMS_ORDER,
-        WEAPONS_ORDER,
-        renderFilterToggles,
-        renderElementFilterToggles,
-        renderEditSelect,
-        renderEditCheckboxes,
-      } from '../shared/constants.js';
-      import { FilterCore } from '../shared/filter-core.js';
-      import { submitRevise, pickPatches, showSaveToast } from '../shared/save-client.js';
-      import { SOUL_SPEC } from '../shared/soul-spec.js';
-      import {
-        escHtml,
-        fmt,
-        fmtBairitu,
-        fmtHitStages,
-        ctPfx,
-        parseBairituVal,
-        hideLoading,
-      } from '../js/utils.js';
+      import { escHtml, fmtBairitu, parseBairituVal, hideLoading } from '../js/utils.js';
       import { deepApply } from '../js/diff.js';
       import {
         initFilterToggles,
@@ -179,14 +156,10 @@
         applyFilters,
       } from '../js/soul-filter.js';
       import {
-        renderList,
         selectSoul,
         closeDetailMob,
         navSoul,
-        updateMobNavBar,
         setupStickyHeights,
-        renderDetail,
-        renderAffinityView,
       } from '../js/soul-render.js';
       import {
         enterEditMode,

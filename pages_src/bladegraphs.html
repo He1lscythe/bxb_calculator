@@ -84,16 +84,7 @@
     <script type="module">
       import { Nav, updateReviseBar } from '../js/nav.js';
       import { state } from '../js/bg-state.js';
-      import {
-        ELEMENT,
-        WEAPON,
-        BUNRUI_SHORT,
-        CONDITION,
-        SCOPE_SHORT,
-        renderFilterToggles,
-        renderElementFilterToggles,
-      } from '../shared/constants.js';
-      import { escHtml, ctPfx, fmtNum, parseBairituVal, hideLoading } from '../js/utils.js';
+      import { escHtml, parseBairituVal, hideLoading } from '../js/utils.js';
       import { deepApply } from '../js/diff.js';
       import { enforceScopeConstraints } from '../shared/effect-constraints.js';
       import {
@@ -105,10 +96,7 @@
         collapseAll,
         resetFilters,
         applyFilters,
-        renderList,
-        renderRow,
         toggleExpand,
-        renderDetailBody,
       } from '../js/bg-list.js';
       import {
         enterEditMode,
@@ -124,7 +112,6 @@
         setBladeScope,
         addBladeEffect,
         removeBladeEffect,
-        renderEditBody,
       } from '../js/bg-edit.js';
 
       Nav.init();

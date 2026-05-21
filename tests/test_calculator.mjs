@@ -12,14 +12,9 @@ import { fileURLToPath } from 'node:url';
 
 import {
   computeStats as realComputeStats,
-  _STAT_KEYS,
   _BUNRUI_TO_STAT,
   _capLevel,
   JUKUDO_MAX_TBL,
-  LEVEL_MAX_TBL,
-  LEVEL_1JUK_TBL,
-  AWAKENING_MAX_TBL,
-  AWAKENING_MULT_TBL,
 } from '../js/stats-calc.js';
 
 const __filename = fileURLToPath(import.meta.url);

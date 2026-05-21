@@ -2,7 +2,6 @@
 import { state } from './state.js';
 import {
   RARITY,
-  ELEMENT,
   WEAPON,
   CHARA_TAG,
   CHARA_TAG_COLOR,
@@ -72,11 +71,6 @@ export const getBestState = (c) => {
     if (c.states?.[s]) return c.states[s];
   }
   return null;
-};
-
-export const getSortValue = (c, key) => {
-  const fn = CHARA_SPEC.sortFns[key];
-  return fn ? fn(c) : null;
 };
 
 export const resetFilters = () => {

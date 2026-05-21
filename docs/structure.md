@@ -538,6 +538,17 @@ function updateReviseBar() {
 
 两个 workflow 独立 job（并行）。lint 配置 `eslint.config.js` 只 enforce 3 条 critical rule（no-undef / no-unused-vars / no-redeclare）、warning 不 fail。Prettier 不进 CI（`npm run format` 给开发者手动用）。
 
+### Dead code audit（手动 audit、不进 CI）
+
+ESLint 默认不查跨文件 dead exports / dead imports / arity 不匹配。手动 audit 用：
+
+| 脚本 | 用途 |
+|---|---|
+| `scripts/audit_dead_code.mjs` | 扫描 js / shared / pages_src / pages / tests，输出 4 份 markdown 到 `audit/` 目录（gitignored）：`dead-exports.md` / `redundant-exports.md` / `dead-imports.md` / `arity-mismatch.md`。纯 regex 实现、精度 ~90%、漏报误报正常 |
+| `scripts/fix_dead_imports.mjs` | 读 `audit/dead-imports.md`、re-verify 每条、批量删 import block 内 dead named symbols（整段删 / 部分重写两种）。`--dry-run` 预览 |
+
+用法：refactor / 删 helper / 重命名 后跑一次。当前 dead-exports = 0 / redundant-exports = 0 / dead-imports = 0。arity-mismatch 142 条多数是 JS optional-arg convention 的 false positive，报告内有 disclaimer。
+
 ---
 
 ## 运行时文件（gitignored）

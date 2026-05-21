@@ -15,13 +15,7 @@ import {
   wrapSaveReviseUi,
 } from '../shared/save-edit-base.js';
 import { escHtml, parseBairituVal } from './utils.js';
-import {
-  renderDetailBody,
-  renderRowHd,
-  crystalElement,
-  crystalWeapon,
-  fmtRowBairitu,
-} from './cr-list.js';
+import { renderDetailBody, renderRowHd } from './cr-list.js';
 import { updateReviseBar } from './nav.js';
 
 const _CR_BUNRUI_ALL = Object.keys(BUNRUI)

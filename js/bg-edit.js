@@ -3,7 +3,6 @@ import { state } from './bg-state.js';
 import {
   ELEMENT,
   WEAPON,
-  BUNRUI,
   BUNRUI_SHORT,
   CONDITION,
   SCOPE,
@@ -15,14 +14,7 @@ import {
   wrapSaveReviseUi,
 } from '../shared/save-edit-base.js';
 import { escHtml } from './utils.js';
-import {
-  renderList,
-  renderDetailBody,
-  renderRowHd,
-  cardElement,
-  cardWeapon,
-  fmtRowBairitu,
-} from './bg-list.js';
+import { renderDetailBody, renderRowHd } from './bg-list.js';
 import { updateReviseBar } from './nav.js';
 
 const _BG_BUNRUI_ALL = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
@@ -114,7 +106,7 @@ export const toggleBladeBunrui = (ei, b, btn) => {
   reRenderBgEdit(); // 全量重渲：互斥导致多 btn 状态变
 };
 
-export const _toggleBgArrayField = (ei, field, id, btn) => {
+const _toggleBgArrayField = (ei, field, id, btn) => {
   const e = state.editData?.effects?.[ei];
   if (!e) return;
   const v = e[field];

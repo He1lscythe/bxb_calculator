@@ -3,14 +3,7 @@
 // 詳細 modal とエディタ section を出す。effects schema は chara skill / soul と統一。
 
 import { state } from './state.js';
-import {
-  ELEMENT,
-  WEAPON,
-  BUNRUI_SHORT,
-  CONDITION,
-  SCOPE,
-  renderEditSelect,
-} from '../shared/constants.js';
+import { ELEMENT, WEAPON, BUNRUI_SHORT, CONDITION, renderEditSelect } from '../shared/constants.js';
 import { escHtml, fmtBairitu, min } from './utils.js';
 // 注: edit.js の setPath / parseBairituVal は inline onchange handler から
 // window.setPath / window.parseBairituVal で参照する（characters.html で expose 済み）。

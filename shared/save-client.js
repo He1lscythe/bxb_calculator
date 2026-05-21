@@ -6,7 +6,7 @@
 
 const VERCEL_API = 'https://bxb-calculator.vercel.app/api/save';
 
-export const isLocalEnv = () => {
+const isLocalEnv = () => {
   const h = location.hostname;
   return (
     h === 'localhost' ||
