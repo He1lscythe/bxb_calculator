@@ -140,4 +140,145 @@ test.describe('hensei viewer smoke', () => {
 
     expect(errors, errors.join('\n')).toEqual([]);
   });
+
+  test('crystal slider: setCrystalDim 改 weight/purity/lv → state 同步 + stats refresh', async ({
+    page,
+  }) => {
+    // setCrystalDim(si, ci, dim, val) 改完后：
+    //   1. state.team[si].crystals[ci][dim] = val
+    //   2. refreshAllStats 触发、#stats-panel-i 重渲（即使数字不变也要刷一次）
+    // 不强求 stats 数字精确校验（要找 scope != 5 + weight_delta crystal 数据 没有），
+    // 只验接口 + state 同步。
+    const errors = attachPageErrorWatcher(page);
+    await mockSaveEndpoints(page);
+
+    await page.goto('/pages/hensei.html');
+    await page.waitForFunction(
+      () => typeof window.setChara === 'function' && Array.isArray(window.state?.team),
+      null,
+      { timeout: 15000 },
+    );
+
+    // 装 rarity=4 chara + 任意 crystal
+    const setup = await page.evaluate(async () => {
+      const charas = await fetch('../data/characters.json').then((r) => r.json());
+      const c = charas.find((x) => x.rarity === 4 && x.states && !x.tombstone);
+      if (!c) return null;
+      window.setChara(0, c.id);
+      // 装一个有 weight_delta 的 crystal（scope=5 没关系、weight slider 依然工作）
+      const crystals = await fetch('../data/crystals.json').then((r) => r.json());
+      const cr = crystals.find((x) => x.effects?.[0]?.weight_delta);
+      if (!cr) return null;
+      window.setCrystal(0, 0, cr.id);
+      return { charaId: c.id, crystalId: cr.id };
+    });
+    expect(setup, 'setup fail').not.toBeNull();
+
+    // 默认 weight=100
+    const initWeight = await page.evaluate(() => window.state.team[0].crystals[0]?.weight);
+    expect(initWeight).toBe(100);
+
+    // setCrystalDim weight=50
+    await page.evaluate(() => window.setCrystalDim(0, 0, 'weight', 50));
+    const w50 = await page.evaluate(() => window.state.team[0].crystals[0]?.weight);
+    expect(w50).toBe(50);
+
+    // purity 也试
+    await page.evaluate(() => window.setCrystalDim(0, 0, 'purity', 30));
+    const p30 = await page.evaluate(() => window.state.team[0].crystals[0]?.purity);
+    expect(p30).toBe(30);
+
+    // lv（应当 clamp 到 cryLvMax）
+    await page.evaluate(() => window.setCrystalDim(0, 0, 'lv', 1));
+    const lv1 = await page.evaluate(() => window.state.team[0].crystals[0]?.lv);
+    expect(lv1).toBe(1);
+
+    // 边界：weight 上限 100、下限 0
+    await page.evaluate(() => window.setCrystalDim(0, 0, 'weight', 200));
+    const wOver = await page.evaluate(() => window.state.team[0].crystals[0]?.weight);
+    expect(wOver).toBeLessThanOrEqual(100); // clamp 到 100
+
+    await page.evaluate(() => window.setCrystalDim(0, 0, 'weight', -10));
+    const wUnder = await page.evaluate(() => window.state.team[0].crystals[0]?.weight);
+    expect(wUnder).toBeGreaterThanOrEqual(0); // clamp 到 0
+
+    expect(errors, errors.join('\n')).toEqual([]);
+  });
+
+  test('scope=5 名前精确匹配 e2e (ティナ×ブレイドの秘録記憶 + ティナ×ブレイド)', async ({
+    page,
+  }) => {
+    // crystal id 1025「ティナ×ブレイドの秘録記憶」effect: scope=5 + name="ティナ×ブレイド"
+    //   bunrui=17 ダメ上限 / calc_type=1 add / bairitu=1300000000
+    // stats-calc.js scope=5 用**精确等値匹配**（commit 975b381）：
+    //   tgtChara.name === e.name 才应用 buff，substring 不应用
+    // e2e 验证：
+    //   - 装 chara name="ティナ×ブレイド" → ダメ上限 ≈ 2147483647 + 1300000000
+    //   - 装其他不匹配 chara → ダメ上限 = 2147483647（base）
+    const errors = attachPageErrorWatcher(page);
+    await mockSaveEndpoints(page);
+
+    await page.goto('/pages/hensei.html');
+    await page.waitForFunction(
+      () => typeof window.setChara === 'function' && Array.isArray(window.state?.team),
+      null,
+      { timeout: 15000 },
+    );
+
+    // 找 chara id：精确名「ティナ×ブレイド」+ 一个不匹配但 rarity=4 的
+    const ids = await page.evaluate(async () => {
+      const arr = await fetch('../data/characters.json').then((r) => r.json());
+      const match = arr.find((x) => x.name === 'ティナ×ブレイド' && !x.tombstone);
+      const other = arr.find(
+        (x) => x.name !== 'ティナ×ブレイド' && x.rarity === 4 && x.states && !x.tombstone,
+      );
+      return { matchId: match?.id ?? null, otherId: other?.id ?? null };
+    });
+    expect(ids.matchId, '找不到 name=ティナ×ブレイド chara').not.toBeNull();
+    expect(ids.otherId).not.toBeNull();
+
+    // 找 ダメ上限 cell 在 stats panel 第几个 .stats-val（基于 _statsInner 显示顺序：
+    // 攻撃力max / 攻撃力min / 防御力 / HP / BK / Hit数 / ダメ上限 = 第 7 个、index 6）
+    const parseNum = (s) => +String(s).replace(/[,\s]/g, '') || 0;
+
+    // 对比"同 chara 装 vs 不装 crystal"避免不同 chara 自带 skill 偏差。
+    // 用 setCrystal(0, 0, null) 清结晶、ダメ上限 应回到该 chara 自身 base。
+
+    const readDamage = async () =>
+      parseNum((await page.locator('#stats-panel-0 .stats-val').nth(6).textContent()) || '');
+
+    // match chara：装 crystal 跟不装 crystal 的差
+    await page.evaluate((id) => {
+      window.setChara(0, id);
+      window.setCrystal(0, 0, null);
+    }, ids.matchId);
+    await expect(page.locator('#stats-panel-0')).toContainText('ダメ上限', { timeout: 3000 });
+    const matchBase = await readDamage();
+
+    await page.evaluate(() => window.setCrystal(0, 0, 1025));
+    await page.waitForTimeout(200);
+    const matchWithCrystal = await readDamage();
+    const matchDelta = matchWithCrystal - matchBase;
+
+    // unmatch chara：装 crystal 跟不装 crystal 的差
+    await page.evaluate((id) => {
+      window.setChara(0, id);
+      window.setCrystal(0, 0, null);
+    }, ids.otherId);
+    await page.waitForTimeout(200);
+    const unmatchBase = await readDamage();
+
+    await page.evaluate(() => window.setCrystal(0, 0, 1025));
+    await page.waitForTimeout(200);
+    const unmatchWithCrystal = await readDamage();
+    const unmatchDelta = unmatchWithCrystal - unmatchBase;
+
+    // 关键 assert：
+    //   match chara → crystal 1025 buff 应用、delta >= 1.3G
+    //   unmatch chara → crystal 1025 buff 不应用、delta = 0
+    expect(matchDelta).toBeGreaterThanOrEqual(1000000000); // 至少 1G 提升
+    expect(unmatchDelta).toBe(0); // 不变
+
+    expect(errors, errors.join('\n')).toEqual([]);
+  });
 });
