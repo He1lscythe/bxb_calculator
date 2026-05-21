@@ -4,22 +4,20 @@ import {
   ELEMENT,
   WEAPON,
   BUNRUI_SHORT,
-  BUNRUI,
   CONDITION,
   ELEMS_ORDER,
   WEAPONS_ORDER,
   SOUL_TAG,
   renderEditSelect,
-  renderEditCheckboxes,
 } from '../shared/constants.js';
 import {
   saveEditSingleViewer,
   saveReviseSingleViewer,
   wrapSaveReviseUi,
 } from '../shared/save-edit-base.js';
-import { escHtml, fmtBairitu, fmtHitStages, ctPfx, min } from './utils.js';
+import { escHtml, min } from './utils.js';
 import { getPath, setPath } from './diff.js';
-import { selectSoul, setupStickyHeights, _deletedSet, AFF_LABEL, AFF_CLS } from './soul-render.js';
+import { selectSoul, _deletedSet, AFF_LABEL, AFF_CLS } from './soul-render.js';
 import { updateReviseBar } from './nav.js';
 
 const BUNRUI_ALL = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
@@ -223,7 +221,7 @@ export const renderEditDetail = (s) => {
     <div id="skills-edit-section">${renderEditSkillsSection(s)}</div>`;
 };
 
-export const renderEditAffinitySection = (s, field, keys, title) => {
+const renderEditAffinitySection = (s, field, keys, title) => {
   const cells = keys
     .map((name) => {
       const aff = (s[field] || {})[name] || { level: 0, atk_effect: '1', def_effect: '1' };
@@ -260,7 +258,7 @@ export const renderEditAffinitySection = (s, field, keys, title) => {
     </div>`;
 };
 
-export const renderEditSkillsSection = (s) => {
+const renderEditSkillsSection = (s) => {
   const baseSkills = s.skills || [];
   const addedSkills = Array.isArray(s._added_skills) ? s._added_skills : [];
   if (!baseSkills.length && !addedSkills.length) {
@@ -447,7 +445,7 @@ export const removeAddedSkill = (i) => {
   reRenderEditSkills();
 };
 
-export const _getSkillRef = (src, i) => {
+const _getSkillRef = (src, i) => {
   if (src === 'added') return (state.editData._added_skills || [])[i];
   return (state.editData.skills || [])[i];
 };

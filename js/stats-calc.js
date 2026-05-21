@@ -62,7 +62,7 @@ export const AWAKENING_MAX_TBL = { 4: 9, 3: 14, 2: 36, 1: 24 };
 export const AWAKENING_MULT_TBL = { 4: 1.43, 3: 2.42, 2: 4.45, 1: 5.37 };
 
 // ===== 元素克制表 K[攻击方][被攻击方] =====
-export const ELEMENT_K_NORMAL = {
+const ELEMENT_K_NORMAL = {
   1: { 1: 0, 2: -1, 3: 1, 4: 0, 5: 0, 6: 0 }, // 火
   2: { 1: 1, 2: 0, 3: -1, 4: 0, 5: 0, 6: 0 }, // 水
   3: { 1: 1, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0 }, // 風
@@ -71,7 +71,7 @@ export const ELEMENT_K_NORMAL = {
   6: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 }, // 無
 };
 
-export const ELEMENT_K_GUILD = {
+const ELEMENT_K_GUILD = {
   1: { 1: 0, 2: -2, 3: 3, 4: 0, 5: 0, 6: 2 },
   2: { 1: 3, 2: 0, 3: -2, 4: 0, 5: 0, 6: 2 },
   3: { 1: -2, 2: 3, 3: 0, 4: 0, 5: 0, 6: 2 },
@@ -80,7 +80,7 @@ export const ELEMENT_K_GUILD = {
   6: { 1: 2, 2: 2, 3: 2, 4: 2, 5: 2, 6: 3 },
 };
 
-export const ELEMENT_K_GUILD_SPECIAL = {
+const ELEMENT_K_GUILD_SPECIAL = {
   1: { 1: -3, 2: -3, 3: 3, 4: -3, 5: -3, 6: -3 },
   2: { 1: 3, 2: -3, 3: -3, 4: -3, 5: -3, 6: -3 },
   3: { 1: -3, 2: 3, 3: -3, 4: -3, 5: -3, 6: -3 },

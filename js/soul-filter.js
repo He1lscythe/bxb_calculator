@@ -1,8 +1,6 @@
 // js/soul-filter.js
 import { state } from './soul-state.js';
 import {
-  RARITY,
-  ELEMENT,
   WEAPON,
   SOUL_TAG,
   SOUL_TAG_COLOR,

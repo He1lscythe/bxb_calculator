@@ -201,7 +201,7 @@ export const SCOPE_SHORT = { 0: '自身', 1: 'セット全', 2: 'セット限', 
 export const CONDITION = { 0: 'なし', 1: '逆窮鼠', 2: '窮鼠', 3: '破損', 4: '敵ブレイク状態' };
 
 // 元素 → CSS 颜色变量名（用于 filter 按钮 inline style.color）
-export const ELEM_CSS_VAR = {
+const ELEM_CSS_VAR = {
   1: '--fire',
   2: '--water',
   3: '--wind',
@@ -224,7 +224,7 @@ export const OMOIDE_THRESHOLDS = [
 // =====================================================================
 
 // 共用过滤：按 opts.skip / opts.only 选 key
-export function _pickKeys(map, opts) {
+function _pickKeys(map, opts) {
   opts = opts || {};
   const skip = opts.skip ? new Set(opts.skip.map(Number)) : null;
   const only = opts.only ? new Set(opts.only.map(Number)) : null;
@@ -327,30 +327,4 @@ export function renderEditSelect(map, currentVal, onchangeExpr, opts) {
       .join('') +
     '</select>'
   );
-}
-
-// 编辑模式 multi-checkbox 网格（每个 input 触发 onchangeExpr，this 即 input）
-//   selected : number[] | Set<number>
-export function renderEditCheckboxes(map, selected, onchangeExpr, opts) {
-  opts = opts || {};
-  const cls = opts.cls || 'bunrui-check';
-  const sel = selected instanceof Set ? selected : new Set((selected || []).map(Number));
-  return _pickKeys(map, opts)
-    .map(function (k) {
-      const checked = sel.has(+k) ? 'checked' : '';
-      return (
-        '<label class="' +
-        cls +
-        '"><input type="checkbox" value="' +
-        k +
-        '" ' +
-        checked +
-        ' onchange="' +
-        onchangeExpr +
-        '"> ' +
-        map[k] +
-        '</label>'
-      );
-    })
-    .join('');
 }

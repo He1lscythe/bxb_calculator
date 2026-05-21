@@ -59,7 +59,7 @@ const _selfApplies = (c, e) => {
   return false;
 };
 
-export const maxHit = (c) => {
+const maxHit = (c) => {
   const state = _bestState(c);
   if (!state) return null;
   const base = state.basic_info?.['Hit数'];
@@ -91,7 +91,7 @@ export const maxHit = (c) => {
   return stages.reduce((a, b) => a + b, 0);
 };
 
-export const maxBdhit = (c) => {
+const maxBdhit = (c) => {
   if (c.bd_skill?.bdhit == null) return null;
   let adders = 0,
     mults = 1;

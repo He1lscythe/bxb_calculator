@@ -10,12 +10,11 @@ import {
   SOUL_TAG,
   SOUL_TAG_COLOR,
 } from '../shared/constants.js';
-import { updateReviseBar } from './nav.js';
 import { escHtml, fmtBairitu, fmtAff, min } from './utils.js';
 
 export const AFF_LABEL = { '-2': '超苦手', '-1': '苦手', 0: '普通', 1: '得意', 2: '超得意' };
 export const AFF_CLS = { '-2': 'aff-m2', '-1': 'aff-m1', 0: 'aff-0', 1: 'aff-1', 2: 'aff-2' };
-export const AFF_CELL = {
+const AFF_CELL = {
   '-2': 'aff-cell-m2',
   '-1': 'aff-cell-m1',
   0: '',
@@ -154,7 +153,7 @@ export const renderDetail = (s) => {
     }`;
 };
 
-export const renderAffinityView = (s) => {
+const renderAffinityView = (s) => {
   function cellHtml(name, affObj, extraStyle) {
     const aff = affObj || { level: 0, atk_effect: '1', def_effect: '1' };
     const lv = String(aff.level != null ? aff.level : 0);
@@ -188,7 +187,7 @@ export const _deletedSet = (s) => {
   return new Set(Array.isArray(s && s._deleted_skills) ? s._deleted_skills : []);
 };
 
-export const renderSkillsView = (skills, soul) => {
+const renderSkillsView = (skills, soul) => {
   const dead = _deletedSet(soul);
   const baseV = (skills || []).filter((sk) => !dead.has(sk.name || ''));
   const addedV = Array.isArray(soul && soul._added_skills) ? soul._added_skills : [];
@@ -216,7 +215,7 @@ export const renderSkillsView = (skills, soul) => {
     </div>`;
 };
 
-export const fmtElem = (v) => {
+const fmtElem = (v) => {
   if (v == null) return null;
   const ids = Array.isArray(v) ? v : [v];
   return ids
@@ -226,7 +225,7 @@ export const fmtElem = (v) => {
     .join('/');
 };
 
-export const fmtType = (v) => {
+const fmtType = (v) => {
   if (v == null) return null;
   const ids = Array.isArray(v) ? v : [v];
   return ids
@@ -236,7 +235,7 @@ export const fmtType = (v) => {
     .join('/');
 };
 
-export const _ctxKey = (e) => {
+const _ctxKey = (e) => {
   const elem = Array.isArray(e.element)
     ? e.element.slice().sort().join(',')
     : e.element != null
@@ -250,7 +249,7 @@ export const _ctxKey = (e) => {
   return [e.scope, elem, type, e.condition || 0].join('|');
 };
 
-export const _renderScopeTag = (e) => {
+const _renderScopeTag = (e) => {
   if (e.scope === 0) return '<span class="scope-tag scope-self">自</span>';
   if (e.scope === 1) return '<span class="scope-tag scope-all">全</span>';
   const parts = [];
@@ -267,7 +266,7 @@ export const _renderScopeTag = (e) => {
   return '';
 };
 
-export const _renderCondTag = (e) => {
+const _renderCondTag = (e) => {
   if (!e.condition) return '';
   return (
     '<span class="cond-tag cond-' + e.condition + '">' + (CONDITION[e.condition] || '') + '</span>'
@@ -301,10 +300,6 @@ export const renderRightTags = (sk) => {
     tags += _renderCondTag(g.ctx);
   });
   return '<div class="skill-tags-right">' + tags + '</div>';
-};
-
-export const _fmtNumSimple = (b) => {
-  return Number.isInteger(b) ? b.toLocaleString('en-US') : String(parseFloat(b.toFixed(6)));
 };
 
 // 本地 souls_check.json 写盘（走 start.py /save，仅本地有效；生产无 endpoint 即静默失败）
