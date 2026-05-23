@@ -4,8 +4,10 @@
 Altema BxB ソウル 全量爬虫 + 技能分类 一体化脚本
 
 用法:
-  python crawl_soul.py              # 增量爬取，跳过已处理
-  python crawl_soul.py --rerun      # 全量重新爬取
+  python crawl_soul.py                      # 增量爬取，跳过已处理
+  python crawl_soul.py --rerun              # 全量重新爬取
+  python crawl_soul.py --recal              # 增量爬取 + Phase 2 全量重算分类
+  python crawl_soul.py --ids 378,391        # 只对这些 soul id 重抓 detail page、其他不动
 
 流程: 爬取 → 技能分类(bunrui/scope/condition) → 倍率标注(bairitu) → souls.json
 """
@@ -390,9 +392,28 @@ def main():
     parser = argparse.ArgumentParser(description="Altema BxB ソウル Crawler + Classifier")
     parser.add_argument("--rerun", action="store_true", help="Re-scrape all souls from scratch")
     parser.add_argument("--recal", action="store_true", help="Recalculate skill classification for all souls without re-scraping")
+    parser.add_argument("--ids", type=str, default=None,
+                        help="只重抓指定 soul id (逗号分隔，例: 378,391)。"
+                             "强制重抓这些 id 的 detail page、其他 entry 不动。"
+                             "与 --rerun 互斥；可与 --recal 组合（局部重抓 + 全量分类）")
     args = parser.parse_args()
 
-    if args.rerun:
+    # --ids 解析 + 互斥检查
+    if args.ids:
+        try:
+            args.ids = set(int(x.strip()) for x in args.ids.split(',') if x.strip())
+        except ValueError as e:
+            parser.error(f"--ids 解析失败: {e}")
+        if not args.ids:
+            parser.error("--ids 不能为空")
+        if args.rerun:
+            parser.error("--ids 与 --rerun 互斥（--ids 本身就是局部 rerun）")
+    else:
+        args.ids = None
+
+    if args.ids:
+        mode = f"--ids ({len(args.ids)} souls, force re-scrape)"
+    elif args.rerun:
         mode = "FULL RERUN"
     elif args.recal:
         mode = "incremental crawl + RECALCULATE ALL"
@@ -426,7 +447,16 @@ def main():
 
     try:
         soul_list = get_soul_list(session)
-        pending   = soul_list if args.rerun else [s for s in soul_list if s["id"] not in completed]
+        if args.ids:
+            pending = [s for s in soul_list if int(s["id"]) in args.ids]
+            found   = {int(s["id"]) for s in pending}
+            missing = args.ids - found
+            if missing:
+                print(f"WARN: soul id 不在 wiki list (跳过): {sorted(missing)}")
+        elif args.rerun:
+            pending = soul_list
+        else:
+            pending = [s for s in soul_list if s["id"] not in completed]
         print(f"Pending: {len(pending)}")
 
         updated_ids = set()

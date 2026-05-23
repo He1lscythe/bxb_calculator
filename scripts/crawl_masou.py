@@ -28,7 +28,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 from classify_common import classify_effect, _val_for_bunrui, norm  # noqa: E402
 
 URL  = 'https://altema.jp/bxb/masoulist'
-CACHE = os.path.join(os.path.dirname(__file__), '_masou_raw.html')
+# wiki HTML cache — 跟 _lookup/skilllist.html / soulskill.html 同 dir、_lookup/ 整个 gitignored
+CACHE = os.path.join(ROOT, '_lookup', '_masou_raw.html')
 OUT  = os.path.join(ROOT, 'data', 'masou.json')
 REV  = os.path.join(ROOT, 'data', 'masou_revise.json')
 
