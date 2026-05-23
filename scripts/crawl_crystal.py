@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Altema BxB 記憶結晶 crawler
+"""Altema BxB 記憶結晶 crawler — 単一ページ全量
 
 用法:
-  python crawl_crystal.py          # 全量抓取（单页，每次重新抓）
-  python crawl_crystal.py --rerun  # 同上（接口一致用）
-  python crawl_crystal.py --recal  # 同上（无分类pipeline，行为不变）
+  python crawl_crystal.py          # fetch + parse + 全量上書き
 """
 
 import argparse, copy, requests, json, re, os, html as htmlmod
@@ -287,10 +285,9 @@ def split_pure_memory(crystals):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Altema BxB 記憶結晶 Crawler")
-    parser.add_argument("--rerun", action="store_true", help="Full re-fetch (default behavior)")
-    parser.add_argument("--recal", action="store_true", help="No-op for crystal (no pipeline)")
-    parser.parse_args()
+    # 単一ページ全量 crawler — 毎回 fetch + parse + 全量上書き。
+    # incremental 余地なし（list 一回で全 entry が取れる）、CLI flag も無し。
+    argparse.ArgumentParser(description="Altema BxB 記憶結晶 Crawler").parse_args()
 
     os.makedirs(DATA_DIR, exist_ok=True)
     out_path = os.path.join(DATA_DIR, OUTPUT_FILE)

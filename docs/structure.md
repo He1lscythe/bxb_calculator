@@ -35,33 +35,18 @@ scripts/build.js（前端构建）
 
 ## 爬虫 / 数据处理脚本
 
-| 文件 | 用途 |
-|------|------|
-| `crawl_chara.py` | **角色主爬虫**。从 altema.jp 抓取魔剣角色数据，进行两阶段技能分类（lookup table → 关键词补漏）、倍率标注（含 calc_type）、sort_id 补全与排序。支持 `--recal`（重算所有分类）和 `--rerun`（重新爬取+重算）。输出 `characters.json` |
-| `crawl_soul.py` | **魂爬虫**。抓取 altema.jp 魂页面，每个技能效果独立分类（多 effects 条目），含 calc_type。支持 `--recal` / `--rerun`。输出 `souls.json` |
-| `crawl_crystal.py` | **结晶爬虫**。抓取記憶結晶页面，解析效果量，生成含 calc_type 的 effects 数组。支持 `--recal` / `--rerun`。输出 `crystals.json` |
-| `crawl_bladegraph.py` | **心象結晶爬虫**。单页全量抓取 altema 心象結晶列表，解析效果文本、scope/condition 检测、bunrui 关键词匹配（每个 bunrui 独立一条 effects）。支持 `--recal` / `--rerun`。输出 `bladegraphs.json` |
-| `crawl_masou.py` | **魔装爬虫**。从 altema.jp 魔装页面抓取每个魔剣的魔装数据（按 `chara_id` 关联）。输出 `masou.json` |
+| 文件 | 用途 | 增量策略 |
+|------|------|---------|
+| `crawl_chara.py` | **角色主爬虫**。从 altema.jp 抓取魔剣角色数据，两阶段技能分类（lookup table → 关键词补漏）+ 倍率标注（含 calc_type）+ sort_id 补全。输出 `characters.json` | 详情页多页、有 `progress.json` part-level 跟踪。`--rerun` 全量、`--recal` 不重抓只重算分类、`--ids K1,K2` 局部重抓指定 final_id（与 `--rerun` 互斥、可配 `--recal`） |
+| `crawl_soul.py` | **魂爬虫**。抓取 altema.jp 魂页面，每个技能效果独立分类（多 effects 条目），含 calc_type。输出 `souls.json` | 详情页多页、有 `soul_progress.json` (`completed_ids` 二值)。`--rerun` 全量、`--recal` 重算分类、`--ids K1,K2` 局部重抓（与 `--rerun` 互斥） |
+| `crawl_crystal.py` | **结晶爬虫**。抓取記憶結晶页面，解析效果量，生成含 calc_type 的 effects 数组。输出 `crystals.json` | 单页全量、无 CLI flag、每次跑全量 fetch+parse+覆盖 |
+| `crawl_bladegraph.py` | **心象結晶爬虫**。单页全量抓取 altema 心象結晶列表，解析效果文本、scope/condition 检测、bunrui 关键词匹配（每个 bunrui 独立一条 effects）。输出 `bladegraphs.json` | 单页全量、无 CLI flag、每次跑全量 fetch+parse+覆盖（classify 改动可用 `git diff` 检视） |
+| `crawl_masou.py` | **魔装爬虫**。从 altema.jp 魔装页面抓取每个魔剣的魔装数据（按 `chara_id` 关联）。输出 `masou.json` | 单页全量、`--cached` dev 工具（用 `scripts/_masou_raw.html` 离线 parse） |
 | `classify_common.py` | **共享分类模块**。被 crawl_chara.py / crawl_soul.py / crawl_crystal.py / crawl_bladegraph.py 共用，包含：元素/武器类型映射、bunrui 关键词表、scope/condition 检测器、`classify_effect()`、`classify_skill_v2()`（魂多效果模式）、`classify_skill_chara()`（角色单 effects[0] 模式）、`classify_hit_fields()`（bunrui=7 时的 hit_type/hit_per_stage）、倍率提取与 calc_type 推断、lookup-veto 规则集。**注**：所有数据源「文字描述」字段统一为 `effect_text`（chara skill / BD / soul skill / bg / crystal / masou），分类器从该字段读 |
 | `build_skilllist_table.py` | 从 altema skilllist 页面构建 `skilllist_table.json`（key = 技能名+效果文本，value = altema bunrui ID 列表） |
 | `fetch_pages.py` | 工具脚本。单独抓取并保存 Altema HTML 页面，供调试分析 |
 | `download_omoide_icons.py` | 工具脚本。批量下载潜在能力图标到 `omoide_icon/` 目录 |
 | `start.py` | 本地服务器（端口 8787）。托管 viewer 页面，并提供 `/save` POST 接口，把前端编辑写回 JSON 文件 |
-
----
-
-## 辅助 / 一次性脚本
-
-| 文件 | 用途 | 状态 |
-|------|------|------|
-| `classify_calc_type.py` | 独立诊断脚本。对全量魔剣/魂技能重新推算 calc_type 并生成差异报告（Discrepancy A/B/C）。现已被 pipeline 覆盖，保留供核查 | 可重复运行 |
-| `audit_chara.py` | 角色数据质检脚本。检查 bairitu / scope 等字段合理性 | 可重复运行 |
-| `audit_chara_classify.py` | 技能分类质检脚本。统计未分类/低置信度条目 | 可重复运行 |
-| `extract_e3_e6.py` | 提取 bunrui=3（BD攻撃力）/ bunrui=6（BDゲージ）中 scope=0/self 的技能列表，用于人工核查 | 可重复运行 |
-| `fix_threshold_100.py` | 一次性修复：将 omoide threshold=100 改为 10，并从 threshold=200 复制 slots | 已完成 |
-| `migrate_omoide.py` | 一次性迁移：将旧格式 omoide 数据迁移至新阈值列表 | 已完成 |
-| `parse_latent_sample.py` | 开发潜在能力抓取逻辑时使用的测试脚本 | 已完成 |
-| `parse_latent_b_sample.py` | B 类潜在能力解析测试脚本 | 已完成 |
 
 ---
 
@@ -598,8 +583,17 @@ ESLint 默认不查跨文件 dead exports / dead imports / arity 不匹配。手
 
 **Pending 判定**（[scripts/crawl_chara.py](scripts/crawl_chara.py) main 内 `_should_skip()`）：
 - `--rerun`：跳过判定，重抓全部
+- `--ids K1,K2`：绕过 `_should_skip`、直接用 `data_id_to_final_id` 反查 → filter pending；只抓这几个、其他完全不动
 - 未抓过（`data_id ∉ completed_data_ids`）：重抓
 - 已抓但 `parts` 不全 ✓：重抓（这是新行为）
 - 已抓且 `parts` 全 ✓：跳过
+
+**`--ids` 局部重抓**（chara / soul 共同）：
+- 用法：`python crawl_chara.py --ids 1647,1648,1649`（逗号分隔多个 final_id；soul 同形式）
+- 语义：强制重抓这些 id 的 detail page、整条 record 覆盖（不走 chara 默认的"仅 detect 新加 state"路径）
+- 与 `--rerun` **互斥**（argparse 显式报错）
+- 与 `--recal` **正交**：单独 `--ids K` → Phase 2 只对 K 重新分类；`--ids K --recal` → 局部重抓 + 全量分类
+- chara 反查靠 `progress.json` 的 `data_id_to_final_id`；新 id 未在 map 里 → 报 WARN 跳过（先跑一次默认 incremental 让 list 阶段建好 map、再用 `--ids` 微调）
+- soul 直接用 `s["id"]` 比对（soul 的 list id == final id、无重命名问题）
 
 **Migration**：旧 progress.json 没 `parts` 字段时，脚本第一次跑会从 characters.json 自动推断并写入。手填 base 数据者注意：`--recal` 会重算 tag、`-rerun` 会重抓 wiki、玩家手改请走 `characters_revise.json`。

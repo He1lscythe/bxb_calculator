@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Altema BxB ブレードグラフ (Heart Crystal) crawler
+"""Altema BxB ブレードグラフ (Heart Crystal) crawler — 単一ページ全量
 
 用法:
-  python crawl_bladegraph.py          # 增量：只添加 bladegraphs.json 中没有的新 ID
-  python crawl_bladegraph.py --recal  # 全量重新解析（重新抓页面）
-  python crawl_bladegraph.py --rerun  # 同上（接口一致用）
+  python crawl_bladegraph.py          # fetch + parse + 全量上書き
 """
 
 import argparse
@@ -364,25 +362,13 @@ def parse_row(row):
 #  MAIN
 # ============================================================
 def main():
-    parser = argparse.ArgumentParser(description="Altema BxB ブレードグラフ Crawler")
-    parser.add_argument("--recal", action="store_true",
-                        help="Re-parse all entries (re-fetch page)")
-    parser.add_argument("--rerun", action="store_true",
-                        help="Same as --recal (for interface consistency)")
-    args = parser.parse_args()
-
-    full_mode = args.recal or args.rerun
+    # 単一ページ全量 crawler — 毎回 fetch + parse + 全量上書き。
+    # incremental 余地なし（list 一回で全 entry が取れる）、CLI flag も無し。
+    # classify が変わって base が変わるのが心配なら git diff data/bladegraphs.json で確認する。
+    argparse.ArgumentParser(description="Altema BxB ブレードグラフ Crawler").parse_args()
 
     os.makedirs(DATA_DIR, exist_ok=True)
     out_path = os.path.join(DATA_DIR, OUTPUT_FILE)
-
-    # Load existing data
-    existing = {}
-    if os.path.exists(out_path) and not full_mode:
-        with open(out_path, encoding='utf-8') as f:
-            existing_list = json.load(f)
-        existing = {e['id']: e for e in existing_list}
-        print(f"Loaded {len(existing)} existing entries from {OUTPUT_FILE}")
 
     # Fetch page
     print("Fetching bladegraph page...")
@@ -401,19 +387,7 @@ def main():
         if entry:
             parsed[entry['id']] = entry
 
-    # Merge: full_mode → use all parsed; else add only new IDs
-    if full_mode:
-        merged = dict(parsed)
-    else:
-        merged = dict(existing)
-        new_count = 0
-        for eid, entry in parsed.items():
-            if eid not in merged:
-                merged[eid] = entry
-                new_count += 1
-        print(f"Added {new_count} new entries")
-
-    entries = list(merged.values())
+    entries = list(parsed.values())
 
     # NOTE: bladegraphs_revise.json は recal 時に bladegraphs.json に merge しない。
     # bladegraphs.json は純粋な parser 出力として保ち、revise は frontend

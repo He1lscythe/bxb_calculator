@@ -4,8 +4,11 @@
 Altema BxB 魔剣 全量爬虫 + 技能分类 + 倍率标注 一体化脚本
 
 用法:
-  python crawl_chara.py              # 增量爬取，跳过已处理角色
-  python crawl_chara.py --rerun      # 全量重新爬取
+  python crawl_chara.py                       # 增量爬取，跳过已处理角色
+  python crawl_chara.py --rerun               # 全量重新爬取
+  python crawl_chara.py --recal               # 增量爬取 + Phase 2 全量重算分类
+  python crawl_chara.py --ids 1647,1648       # 只对这些 final_id 重抓 detail page、其他 entry 不动
+                                              #   (反查 data_id 用 progress.json 的 data_id_to_final_id map)
 
 流程: 爬取 → 技能分类(bunrui/scope/condition) → 倍率标注(bairitu) → characters.json
 """
@@ -52,11 +55,16 @@ PART_KEYS = ['bd_skill', 'skills', '基本情報', 'ステータス', 'プロフ
 
 
 def _chara_parts_status(chara):
-    """各 part が wiki から取れているか判定 → {part_name: bool} dict 返却."""
+    """各 part が wiki から取れているか判定 → {part_name: bool} dict 返却.
+
+    bd_skill: 顶层 or state 内任一 → True。
+    Phase 1 record (state 内 bd_skill 未 elevate) と Phase 2 record (顶层 elevated) どちらでも正しく判定。
+    """
     states = list((chara.get('states') or {}).values())
     any_state_has = lambda k: any(bool(s.get(k)) for s in states)
+    any_state_has_bd = any(bool((s.get('bd_skill') or {}).get('name')) for s in states)
     return {
-        'bd_skill':    bool((chara.get('bd_skill') or {}).get('name')),
+        'bd_skill':    bool((chara.get('bd_skill') or {}).get('name')) or any_state_has_bd,
         'skills':      any_state_has('skills'),
         '基本情報':     any_state_has('basic_info'),
         'ステータス':    any_state_has('stats'),
@@ -1328,9 +1336,28 @@ def main():
                         help="Re-scrape all characters from scratch")
     parser.add_argument("--recal", action="store_true",
                         help="Recalculate skill classification for all characters without re-scraping")
+    parser.add_argument("--ids", type=str, default=None,
+                        help="只重抓指定 final_id (逗号分隔，例: 1647,1648)。"
+                             "强制重抓这些 id 的 detail page、其他 entry 不动。"
+                             "与 --rerun 互斥；可与 --recal 组合（局部重抓 + 全量分类）")
     args = parser.parse_args()
 
-    if args.rerun:
+    # --ids 解析 + 互斥检查
+    if args.ids:
+        try:
+            args.ids = set(int(x.strip()) for x in args.ids.split(',') if x.strip())
+        except ValueError as e:
+            parser.error(f"--ids 解析失败: {e}")
+        if not args.ids:
+            parser.error("--ids 不能为空")
+        if args.rerun:
+            parser.error("--ids 与 --rerun 互斥（--ids 本身就是局部 rerun）")
+    else:
+        args.ids = None
+
+    if args.ids:
+        mode = f"--ids ({len(args.ids)} chara, force re-scrape)"
+    elif args.rerun:
         mode = "FULL RERUN"
     elif args.recal:
         mode = "incremental crawl + RECALCULATE ALL"
@@ -1479,9 +1506,22 @@ def main():
                 return False  # part 缺失 → 重抓
             return True
 
-        pending = [c for c in char_list if not _should_skip(c)]
-        retry_count = sum(1 for c in pending if c["data_id"] in completed)
-        print(f"Pending: {len(pending)} ({retry_count} retry due to missing parts)")
+        if args.ids:
+            # --ids 模式：反查 data_id（用 progress.json 的 data_id_to_final_id map），
+            # 只 keep 这些 data_id 对应的 char_list entry。
+            target_data_ids = {did for did, fid in data_id_to_final_id.items() if fid in args.ids}
+            found = {data_id_to_final_id[d] for d in target_data_ids}
+            missing = args.ids - found
+            if missing:
+                print(f"WARN: id 在 progress 里查不到 data_id (跳过): {sorted(missing)}")
+                print(f"      (这些 id 从未在本机抓过、或 progress.json 没建 data_id_to_final_id map)")
+                print(f"      可先 `python crawl_chara.py` 让 list 阶段建好 map、再用 --ids 微调")
+            pending = [c for c in char_list if str(c.get("data_id")) in target_data_ids]
+            print(f"Pending: {len(pending)} (--ids 模式、force re-scrape)")
+        else:
+            pending = [c for c in char_list if not _should_skip(c)]
+            retry_count = sum(1 for c in pending if c["data_id"] in completed)
+            print(f"Pending: {len(pending)} ({retry_count} retry due to missing parts)")
 
         updated_ids = set()
         if not pending:
@@ -1496,13 +1536,22 @@ def main():
                     m        = re.search(r"/bxb/chara/(\d+)", final_url)
                     final_id = int(m.group(1)) if m else int(c["chara_id"] or c["id"] or 0)
 
-                    if final_id in saved_ids and not args.rerun:
+                    # --rerun / --ids: force full overwrite。
+                    # 通常 incremental: 只 detect 新加的 state、不动其他字段（保守、防 wiki noise）。
+                    # 但 base 已记 part 不全（parts.X has false）→ 强制 update states（重抓的目的就是补缺、
+                    # 不然 _should_skip 看 parts.bd_skill=false → 重抓 → 走这分支不动 → 永远死循环）
+                    if final_id in saved_ids and not args.rerun and not args.ids:
                         existing_idx = char_index.get(final_id)
                         if existing_idx is not None and states:
                             existing_states = set(characters[existing_idx].get("states", {}).keys())
                             gained = set(states.keys()) - existing_states
-                            if gained:
-                                print(f"  UPDATE: new states {gained}")
+                            prev_parts = parts_status.get(str(final_id))
+                            force_update = bool(prev_parts) and not all(prev_parts.get(k, False) for k in PART_KEYS)
+                            if gained or force_update:
+                                reason = []
+                                if gained:       reason.append(f"new states {gained}")
+                                if force_update: reason.append(f"parts incomplete: {[k for k in PART_KEYS if not prev_parts.get(k, False)]}")
+                                print(f"  UPDATE: {' + '.join(reason)}")
                                 characters[existing_idx]["states"] = states
                                 characters[existing_idx]["url"]    = final_url
                                 updated_ids.add(final_id)
@@ -1565,6 +1614,9 @@ def main():
                     raise
 
         # ── Phase 2: classify + bairitu ──
+        # --ids: scope = updated_ids 子集、recal=True 让被抓的 entry 重新分类
+        # --recal/--rerun: scope = all、recal=True
+        # default: scope = updated_ids、recal=False（incremental、保留已有 bairitu 等字段）
         pipeline_ids = None if (args.rerun or args.recal) else updated_ids
         scope_label  = "all" if pipeline_ids is None else f"{len(pipeline_ids)} updated"
         print("\n" + "=" * 60)
@@ -1574,7 +1626,8 @@ def main():
                 c["sort_id"] = c.get("id", 0)
         characters.sort(key=lambda x: x.get("sort_id", x.get("id", 0)), reverse=True)
         output, count = apply_pipeline(copy.deepcopy(characters), pipeline_ids,
-                                       recal=(args.recal or args.rerun), bd_special=bd_special,
+                                       recal=bool(args.recal or args.rerun or args.ids),
+                                       bd_special=bd_special,
                                        bd_special_durations=bd_special_durations)
 
         # NOTE: characters_revise.json は recal 時に characters.json に merge しない。
