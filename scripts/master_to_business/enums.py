@@ -27,20 +27,106 @@ MATH_TYPE = {
 MATH_TYPE_BY_NAME = {v: k for k, v in MATH_TYPE.items()}
 
 # ============================================================
-# Parameter (#JS) — JobSkill.Parameter 完整 enum
-# 91 项 + sentinel/extension = 105 行 (含 BE-only / sentinel)
-#
-# Phase 1b 填充：从 unpacking/table.md L228-345 的跨表合并表 copy 全表
-# 暂留空、当前只 cover demo 用、build script 先 fail 提示要填
+# Parameter (#JS) — JobSkill.Parameter 完整 enum (91 项 + None=0)
+# 来源: unpacking/table.md L228-345 跨表合并表
+# 注释 = 业务含义 (中文 from table.md 注列)
+# 注: BE-only (Enemy_BreakAttack 等 13 项) 不在此、runtime calc 时另建 #JS↔#BE 映射表
 # ============================================================
 PARAMETER = {
-    # TODO Phase 1b: 填 91 项完整 #JS Parameter
-    # 优先级排序: base damage 池 (Attack/Defense/Speed/MotionSpeed/HP) 先
-    # 然后 HP-curve (RemHP_* / Vitality_* / FellDown_*)
-    # 然后 Break gate / JG / Wave
-    # 最后 sentinel + JS-only schema 字段 (WeaponArtsCost / HP / HitCount)
+    0: "None",
+    1: "Attack",                          # 攻击力
+    2: "Defense",                         # 防御力
+    3: "Heal",                            # 血量
+    4: "GuardBreak",                      # 破甲力
+    5: "GuardDefense",                    # 格挡防御
+    6: "BlazeAttack",                     # BD攻击力
+    7: "Speed",                           # 转速
+    8: "MotionSpeed",                     # 攻速
+    9: "PlayerHit",                       # 命中率
+    10: "EnemyHit",                       # 闪避率
+    11: "SapphireDrop",                   # 打蓝
+    12: "Attack_Sapphire",
+    13: "RubyDrop",                       # 打红
+    14: "TimeHeal",
+    15: "TimeHeal_Main",
+    16: "AttackCount",
+    17: "Raise",                          # 复活
+    18: "Mez",                            # 麻痹
+    19: "Stun",                           # 眩晕
+    20: "TheWorld",
+    21: "ForceBreak",
+    22: "DamageHeal",
+    23: "DamageLimitBreak",               # 破限
+    24: "BlazeLock",
+    25: "AllTarget",                      # aoe（攻）
+    26: "SuicideAttack",                  # 扣血攻击
+    27: "Blaze13",
+    28: "RemHP_Attack",                   # 背水攻
+    29: "RemHP_Defense",                  # 背水防
+    30: "RemHP_BlazeAttack",              # 背水BD攻
+    31: "RemHP_PlayerHit",                # 背水命中
+    32: "RemHP_EnemyHit",
+    33: "RemHP_Speed",                    # 背水转速
+    34: "RemHP_MotionSpeed",              # 背水攻速
+    35: "RemHP_Sapphire",                 # 背水打蓝
+    36: "Vitality_Attack",                # 浑身攻
+    37: "Vitality_Defense",               # 浑身防
+    38: "Vitality_BlazeAttack",           # 浑身BD攻
+    39: "Vitality_PlayerHit",
+    40: "Vitality_EnemyHit",              # 浑身闪避
+    41: "Vitality_Speed",                 # 浑身转速
+    42: "Vitality_MotionSpeed",           # 浑身攻速
+    43: "Vitality_Sapphire",              # 浑身打蓝
+    44: "Break_Attack",                   # 破损攻
+    45: "Break_Defense",                  # 破损防
+    46: "Break_BlazeAttack",
+    47: "Break_PlayerHit",
+    48: "Break_EnemyHit",
+    49: "Break_Speed",                    # 破损转速
+    50: "FellDown_Attack",                # 队友倒地攻
+    51: "FellDown_Defense",
+    52: "FellDown_BlazeAttack",
+    53: "FellDown_PlayerHit",
+    54: "FellDown_EnemyHit",
+    55: "FellDown_Speed",                 # 队友倒地转速
+    56: "JustGuard_Sapphire",             # JG加蓝
+    57: "JustGuard_MinDamage",            # JG减伤
+    58: "JustGuard_Heal",                 # JG回血
+    59: "Wave_Heal",                      # 过w回血
+    60: "Wave_BlazeUP",                   # 过w回BD
+    61: "Enemy_Attack",
+    62: "Enemy_Defense",
+    63: "Enemy_GuardBreak",
+    64: "Enemy_GuardDefense",
+    65: "Enemy_BlazeAttack",
+    66: "InstantDeath",                   # 即死
+    67: "BlazeAbsorb",                    # 分解
+    68: "RateDamage",                     # 百分比伤害
+    69: "BlazeLockPurge",                 # BD锁
+    70: "Random_Attack",                  # 暴击
+    71: "WeaponArtsCost",                 # bd cost
+    72: "WeaponArtsHitCount",             # bd hit
+    73: "WeaponArtsHitCountKeepDamage",   # bd hit
+    74: "HP",                             # HP
+    75: "HitCount",                       # hit
+    76: "HitCountKeepDamage",             # hit
+    77: "UserExp",                        # 用户exp
+    78: "AnyElement",                     # 属性移植
+    79: "BarrierInvokePermission",
+    80: "BlazeGauge",                     # 开局bd条
+    81: "BlazeGaugePointRate",            # bd条获取效率
+    82: "BlazeGaugeMaxLevel",             # 最大bd
+    83: "EventDropRate",                  # 活动掉落
+    84: "EventSupplyBonus",
+    85: "GuildBattleTimeLimit",
+    86: "MaterialExp",                    # 结晶经验
+    87: "JobExp",                         # 魂经验
+    88: "Prayer",
+    89: "Rise_AttackRate",                # 攻击效果放大
+    90: "Rise_DefenseRate",
 }
-PARAMETER_BY_NAME: dict = {}  # 反查、Phase 1b 同步生成
+# 反查
+PARAMETER_BY_NAME = {v: k for k, v in PARAMETER.items()}
 
 
 # ============================================================
@@ -128,7 +214,7 @@ EVOLVE_COUNT = {
 if __name__ == "__main__":
     print("=== enum schema summary ===")
     print(f"MATH_TYPE: {len(MATH_TYPE)} values")
-    print(f"PARAMETER: {len(PARAMETER)} values (Phase 1b 填充中)")
+    print(f"PARAMETER: {len(PARAMETER)} values (#JS 91 项)")
     print(f"TARGET_SCOPE: {len(TARGET_SCOPE)} values (Phase 1c 填充中)")
     print(f"CONDITION_TYPE: {len(CONDITION_TYPE)} values (Phase 1c 填充中)")
     print(f"TARGET_ELEMENT: {len(TARGET_ELEMENT)} values")
