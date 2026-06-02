@@ -130,24 +130,60 @@ PARAMETER_BY_NAME = {v: k for k, v in PARAMETER.items()}
 
 
 # ============================================================
-# target_scope — 技能作用范围
-# 来源: weapons.weapon_skills[].range / jobs.job_skills[].range
+# range — 技能作用范围
+# 来源: jobs.job_skills[].range / weapon_innate_skills.range / weapon_arts_effects.range
+# 实测 distinct: {'All', 'Single', 'None', 'all'}
+# 注: 'all' lowercase 是 master typo (jobs.json 有 1 处)、build script normalize 成 'All'
 # ============================================================
-TARGET_SCOPE = {
-    # TODO Phase 1c: master 实际只见 "All" / "Single" 2 值（前面 explore 调研）
-    # 但要确认是字符串 enum 还是 int enum、是否还有 None / Self / Party 等
-    # 暂留空
+RANGE = {
+    "All": "All",         # 全体
+    "Single": "Single",   # 单体
+    "None": "None",       # 无目标 (passive / self-only)
 }
+RANGE_NORMALIZE = {"all": "All"}  # case 修正
 
 
 # ============================================================
-# condition_type — 触发条件
-# 来源: master_tables 直给字段（替代 wiki classify_common._detect_condition NLP）
+# 条件字段说明（不是单一 enum！）
 # ============================================================
-CONDITION_TYPE = {
-    # TODO Phase 1c: 等价 wiki 5 值 (0=無 1=浑身 2=背水 3=破損 4=敵BK)
-    # master 可能 enum 不同、需读 weapon_skills/job_skills 实际 distinct 值
-}
+# wiki 把"条件"折叠成 5 值 CONDITION enum (浑身/背水/破損/敵BK/無) — 丢信息
+# master 把条件分散到多字段、表达更丰富：
+#
+# 1. HP-curve / Break / FellDown — 通过 parameter prefix 表达
+#    - Vitality_* = 浑身 (HP 多越强)、HP-curve func: VitalitySkillRate
+#    - RemHP_*    = 背水 (HP 少越强)、HP-curve func: RemHpSkillRate
+#    - Break_*    = 破損 (HP < 阈值)、hard gate: IsBreak
+#    - FellDown_* = 队友倒地、hard gate
+#    详见 unpacking/HOWTO_battle/02_psv_gates.md
+#
+# 2. 限定条件 — 独立字段
+#    - element_condition: int (target_element_id 同 enum)
+#    - weapon_type_condition: int (target_weapon_type_id 同 enum)
+#    - enemy_element_id: int (敵元素限定、Enemy_* parameter 用)
+#    - weapon_base_id: int (特定 chara 限定、对应 wiki scope=5)
+#    - is_blaze: bool (是否 BD 模式、IsBlaze gate)
+#
+# 3. master 独有 (wiki 没的) 条件字段
+#    - greater_than_bust_condition / less_than_bust_condition: 胸围限定 (joke / 隐藏机制?)
+#    - limit_count: 次数限制
+#    - effective_rate: 触发概率
+#    - skill_effect_duration: buff 持续时间
+#    - just_guard_threshold: JG 阈值
+#
+# Phase 2 build script 不做 condition flatten — 透传所有字段、前端按需 decode
+# ============================================================
+CONDITION_FIELD_NAMES = [
+    'element_condition',
+    'weapon_type_condition',
+    'enemy_element_id',
+    'weapon_base_id',
+    'greater_than_bust_condition',
+    'less_than_bust_condition',
+    'limit_count',
+    'effective_rate',
+    'skill_effect_duration',
+    'just_guard_threshold',
+]
 
 
 # ============================================================
@@ -215,8 +251,8 @@ if __name__ == "__main__":
     print("=== enum schema summary ===")
     print(f"MATH_TYPE: {len(MATH_TYPE)} values")
     print(f"PARAMETER: {len(PARAMETER)} values (#JS 91 项)")
-    print(f"TARGET_SCOPE: {len(TARGET_SCOPE)} values (Phase 1c 填充中)")
-    print(f"CONDITION_TYPE: {len(CONDITION_TYPE)} values (Phase 1c 填充中)")
+    print(f"RANGE: {len(RANGE)} values (+ normalize)")
+    print(f"CONDITION_FIELD_NAMES: {len(CONDITION_FIELD_NAMES)} fields (非 enum、字段名列表)")
     print(f"TARGET_ELEMENT: {len(TARGET_ELEMENT)} values")
     print(f"TARGET_WEAPON_TYPE: {len(TARGET_WEAPON_TYPE)} values")
     print(f"RARITY: {len(RARITY)} values")
