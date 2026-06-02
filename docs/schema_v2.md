@@ -314,21 +314,104 @@ block 顺序对 `Multiply` / `Addition` 池**数学等价**（结合律 + 交换
 
 ### 对前端 hensei calc 的 implication
 
-**问题**：wiki hensei 用 master `max_attack` + 用户输入熟度 / 等级 / 装结晶/魂/魔装 自己算 base — **是错的**（与游戏实际计算偏差）。
+server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复刻 server fold、不读 user_weapon raw、**沿用 wiki crawl chara_training.md 公式 + master initial_/max_ 字段**（用户决定）。
 
-**v2 设计选项**（Phase 3 决定）：
+---
 
-A. **接受 master `max_attack` 作 max-spec 模拟值** — 显示用、不当真实战斗 base
-B. **复刻 server fold 公式** — 公式有（[§1.1.1-1.1.2](../../unpacking/HOWTO_battle/01_setup.md)）但 BH 衰减率未公开
-C. **Frida hook 自己 user_weapon 真实数据当 fixture** — 准确但 user-specific
+## 3.7 hensei 基础属性 base 计算（v2 简化版、Phase 3 前端复刻）
 
-**倾向方案**：**B + A 兜底**
-- v2 build script `build_characters.py` 同时 expose:
-  - `master_max_*` (raw master 字段、不动)
-  - `raw_*` (level/mature/affection 加成后、不含 slot)
-  - 让前端 hensei 按 server fold 公式重算 fold value (with 用户输入的 slot 配置 + BH 把数 + costume)
-- 不实现 BH 衰减（用满 BH ×1.30 假设、UI 加注 disclaimer）
-- 高级用户可选 Frida hook 提供真实 user_weapon 当对照
+### 输入字段（全部来自 master `weapons.json`）
+
+| 字段 | 来源 | 说明 |
+|---|---|---|
+| `initial_*` | `weapons.initial_hp/attack/defense/break/speed` | 通常状态 lv=1 1 熟度时的属性 |
+| `max_*` | `weapons.max_hp/attack/defense/break/speed` | 该 variant 最高等级最高熟度时属性（来自当前 variant、不是通常版） |
+| `max_mature` | `weapons.max_mature` | 该 variant 最大熟度（替代 wiki 熟度上限表） |
+| `rarity` | `weapons.rarity` | 1=A / 2=AA / 3=S / 4=SS |
+
+**不看 `raw_*` 字段**（那是 user_weapon 服务器推的、不在 master 里）。
+
+### 等级上限 / 觉醒（沿用 [chara_training.md](chara_training.md) 公式）
+
+**等级上限（熟度最大时）**：写死表（wiki 玩家观测，master 无对应字段）
+
+| 稀有度 | 通常 | 改造 | 極弐 |
+|---|---|---|---|
+| SS | 250 | 255 | — |
+| S | 200 | 215 | 230 |
+| AA | 150 | 155 | 180 |
+| A | 60 | 99 | 120 |
+
+**1 熟度时的等级上限**：写死表
+
+| 稀有度 | 通常 | 改造 | 極弐 |
+|---|---|---|---|
+| SS | 60 | 70 | — |
+| S | 40 | 50 | 65 |
+| AA | 30 | 35 | 60 |
+| A | 15 | 20 | 35 |
+
+**熟度 N → 等级上限**：
+
+```
+熟度上限_at_N = min(等级上限, 1熟上限 + (N − 1) × 5)
+```
+
+`max_mature` 用 master 字段读、不写死表（wiki 熟度上限表作废）。
+
+**觉醒**：每觉醒 +5 等级、不受其他限制
+
+| 稀有度 | SS | S | AA | A |
+|---|---|---|---|---|
+| 最大觉醒数 | 9 | 14 | 36 | 24 |
+| 满觉醒倍率 | 1.43 | 2.42 | 4.45 | 5.37 |
+
+`实际等级上限 = 熟度对应上限 + 觉醒数 × 5`
+
+### 等级 → 属性公式（沿用 wiki）
+
+**通常魔剑**（无改造 / 極弐）：
+
+```
+属性 = stats.max × (1 − (通常最高等级 − 当前lv) / (通常最高等级 − 1) × stats.initial / stats.max)
+```
+
+**改造 / 極弐魔剑**：
+
+```
+属性 = (该 state 的 stats.max) × (1 − (该 state 最高等级 − 当前lv) / (该 state 最高等级 − 1) × 通常 stats.initial / 通常 stats.max)
+```
+
+注：改造/極弐 用 **通常**的 `initial/max` 比值（不是改造自身 initial）。
+
+**觉醒下属性扩展**（lv > cap = 熟度上限 + 觉醒前等级时）：
+
+```
+1. 先按上式取 lv = cap 算 k（分母仍用最高等级、不是 cap）
+2. 最终 = k × (1 + (当前lv − cap) / (最大觉醒数 × 5) × (满觉醒倍率 − 1))
+```
+
+### Burning Heart (BH) — v2 简化为二元 toggle
+
+| 状态 | 倍率 |
+|---|---|
+| BH on (默认) | ×1.3 |
+| BH off | ×1.0 |
+
+**不实现衰减**（docs §1.1.2 衰减率未公开）、UI 加 toggle、默认 on。
+作用：仅攻撃力（同 wiki "燃心" 概念、跟 server fold 的 BH multiplier 同源但简化为二态）。
+
+### 結婚 / LP（沿用 wiki [chara_training.md](chara_training.md)）
+
+**結婚**：
+- 未結婚 ×1.00、結婚（花无）×1.03、結婚（花有）×1.05 — 作用攻防 HP BK 4 项
+- 結婚 → 結晶 slot +1
+
+**LP**（剩余 LP / 总 LP）：
+- 正常（> 1/2 LP）×1.0
+- 低 LP（≤ 1/2 LP）×1.1
+- 危機（≤ 1/4 LP）×1.5
+- 仅作用攻撃力
 
 ---
 
