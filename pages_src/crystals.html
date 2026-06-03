@@ -61,12 +61,21 @@
     function renderDetail(c) {
       if (!c) return;
       const mx = c.max_value !== null ? `${c.initial_value} ~ ${c.max_value}` : `${c.initial_value} ~ <i style="opacity:0.5">(max 未取得)</i>`;
+      // 同名「隠し」拆分技能 (user 决策: 保持单 bunrui per skill bar、隠し 半透明)
+      const sameName = all.filter(x => x.name === c.name);
+      const sub = sameName.filter(x => x.id !== c.id).slice(0, 5);
+      const subH = sub.length ? `<h3>同名 (隠し)</h3><ul style="font-size:11px;opacity:0.5">
+        ${sub.map(x => `<li>${x.parameter} / ${x.math_type} / ${x.initial_value}${x.max_value?'→'+x.max_value:''}</li>`).join('')}
+        </ul>` : '';
       $('detail').innerHTML = `${imgWithFallback(crystalIcon(c.id), c.name)}
         <h2>${c.name}</h2>
         <p>${RARITY_LABEL[c.rarity]} / ${ELEMENT_LABEL[c.element_id]||''}${WEAPON_LABEL[c.weapon_type_id]||''} / id=${c.id}</p>
-        <p><b>${c.parameter}</b> / ${c.math_type} / lv max ${c.max_level}</p>
+        <p><b>${c.parameter}</b> / ${c.math_type||'(NoEffect)'} / lv max ${c.max_level}</p>
         <p>倍率: ${mx} (rank ${c.initial_value_rank||'-'})</p>
-        <p style="font-size:11px;opacity:0.8">${c.description||''}</p>`;
+        <p style="font-size:11px;opacity:0.6">weight_step: <i>解包未提供、Phase 7 edit 时手动添加</i></p>
+        <p style="font-size:11px;opacity:0.6">purity_step: <i>同上</i></p>
+        <p style="font-size:11px;opacity:0.8">${c.description||''}</p>
+        ${subH}`;
     }
     init();
   </script>
