@@ -20,6 +20,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_ROOT / "data"
 OUT = DATA_DIR / "crystals.json"
 UNMATCHED = DATA_DIR / "_wiki_unmatched_crystals.json"
+AUDIT_NULL_MATH = DATA_DIR / "_audit_crystals_null_math.json"
+AUDIT_NULL_MAX = DATA_DIR / "_audit_crystals_null_max.json"
 WIKI_AUX = DATA_DIR / "_wiki_aux.json"
 
 
@@ -70,13 +72,12 @@ def build():
                 "initial_value": entry.get("initial_value"),
             })
 
-        out.append({
+        record = {
             "id": entry.get("id"),
             "name": name,
             "rarity": entry.get("rarity"),
             "parameter": param,
             "parameter_type": entry.get("parameter_type"),
-            "math_type": math,
             "initial_value": entry.get("initial_value"),
             "initial_value_rank": entry.get("initial_value_rank"),
             "max_value": max_value,
@@ -85,14 +86,30 @@ def build():
             "element_id": entry.get("element_id"),
             "weapon_type_id": entry.get("weapon_type_id"),
             "description": entry.get("description"),
-        })
+        }
+        # parameter=NoEffect 不输出 math_type 字段 (sentinel、无意义)
+        if param != 'NoEffect':
+            record["math_type"] = math
+        out.append(record)
 
     DATA_DIR.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
     UNMATCHED.write_text(json.dumps(unmatched, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # audit: null math_type (跳过 NoEffect) + null max_value
+    null_math_audit = [{'id': r['id'], 'name': r['name'], 'parameter': r['parameter']}
+                       for r in out if r.get('math_type') is None and r['parameter'] != 'NoEffect']
+    null_max_audit = [{'id': r['id'], 'name': r['name'], 'parameter': r['parameter'],
+                       'initial_value': r['initial_value'], 'rarity': r['rarity']}
+                      for r in out if r['max_value'] is None]
+    AUDIT_NULL_MATH.write_text(json.dumps(null_math_audit, ensure_ascii=False, indent=2), encoding="utf-8")
+    AUDIT_NULL_MAX.write_text(json.dumps(null_max_audit, ensure_ascii=False, indent=2), encoding="utf-8")
+
     print(f"wrote {len(out)} crystal entries → {OUT}")
     print(f"  matched wiki max_value: {len(out) - len(unmatched)} / {len(out)}")
     print(f"  unmatched (max_value=null): {len(unmatched)} → {UNMATCHED}")
+    print(f"  audit null math_type (排除 NoEffect): {len(null_math_audit)} → {AUDIT_NULL_MATH}")
+    print(f"  audit null max_value: {len(null_max_audit)} → {AUDIT_NULL_MAX}")
     if warnings:
         print(f"WARN: {len(warnings)} issues")
         for w in warnings[:5]:
