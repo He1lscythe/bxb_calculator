@@ -1,113 +1,63 @@
-// ===== Filter Core =====
-// Spec-driven filter+sort engine.
-// Usage: import { FilterCore } from '../shared/filter-core.js';
-//
-// spec shape:
-//   {
-//     searchFields: ['name','kana',...]
-//     filters: {
-//       <key>: {
-//         extract?: (item) => value     // for 'eq' / 'any' / 'all' ops
-//         op?: 'eq' | 'any' | 'all'    // default 'eq'
-//         match?: (item, set) => bool  // overrides op/extract
-//       }
-//     },
-//     sortFns: { <key>: (item) => number }
-//   }
-//
-// state shape: { q, filters: { key: Set }, sortKey, sortDesc }
+// shared/filter-core.js — v2 通用 filter / sort utility
+// 简化版、不实现 wiki 的 sparse spec 系统。
+// 每 viewer 自行 import + 调 matchAll / applySort / renderToggles。
 
-const _matchesItem = (item, state, spec) => {
-  if (state.q) {
-    const q = String(state.q).toLowerCase();
-    const fields = spec.searchFields || ['name'];
-    let hit = false;
-    for (let i = 0; i < fields.length; i++) {
-      const f = fields[i];
-      // searchFields 条目支持两种形式：
-      //   string  → 顶层 key（item[key]）
-      //   function → 提取器（extractor(item)），用于嵌套字段如 chara.states[best].profile.CV
-      const v = typeof f === 'function' ? f(item) : item[f];
-      if (v != null && String(v).toLowerCase().indexOf(q) >= 0) {
-        hit = true;
-        break;
-      }
-    }
-    if (!hit) return false;
-  }
-  const filters = state.filters || {};
-  const defs = spec.filters || {};
-  for (const key in defs) {
-    const sel = filters[key];
-    if (!sel || !sel.size) continue;
-    const def = defs[key];
-    if (typeof def.match === 'function') {
-      if (!def.match(item, sel)) return false;
-    } else if (def.op === 'any') {
-      const arr = def.extract(item);
-      if (!Array.isArray(arr)) return false;
-      let any = false;
-      for (const v of sel) {
-        if (arr.indexOf(v) >= 0) {
-          any = true;
-          break;
-        }
-      }
-      if (!any) return false;
-    } else if (def.op === 'all') {
-      // 选中的所有 value 都必须在 item 的 array 中（AND）
-      const arr = def.extract(item);
-      if (!Array.isArray(arr)) return false;
-      for (const v of sel) {
-        if (arr.indexOf(v) < 0) return false;
-      }
-    } else {
-      if (!sel.has(def.extract(item))) return false;
-    }
+import { ELEMENT_LABEL, WEAPON_LABEL, RARITY_LABEL, RARITY_ORDER } from './constants.js';
+
+export const rarityOptions = () => RARITY_ORDER.map((id) => ({ id, label: RARITY_LABEL[id] }));
+export const elementOptions = () => [1, 2, 3, 4, 5, 6].map((id) => ({ id, label: ELEMENT_LABEL[id] }));
+export const weaponTypeOptions = () => Array.from({ length: 12 }, (_, i) => ({
+  id: i + 1, label: WEAPON_LABEL[i + 1],
+}));
+
+// generic filter — state = {rarity:Set, element:Set, weapon:Set, search:str}
+// fields = {rarity:'rarity', element:'element_id', weapon:'weapon_type_id'}
+export const matchAll = (item, state, fields = {}) => {
+  const rk = fields.rarity || 'rarity';
+  const ek = fields.element || 'element_id';
+  const wk = fields.weapon || 'weapon_type_id';
+  if (state.rarity?.size && !state.rarity.has(item[rk])) return false;
+  if (state.element?.size && !state.element.has(item[ek])) return false;
+  if (state.weapon?.size && !state.weapon.has(item[wk])) return false;
+  if (state.search) {
+    const s = state.search.toLowerCase();
+    const name = (item.name || '').toLowerCase();
+    if (!name.includes(s)) return false;
   }
   return true;
 };
 
-const applyFilters = (items, state, spec) => {
-  const result = items.filter((it) => _matchesItem(it, state, spec));
-  const sortKey = state.sortKey;
-  if (sortKey && spec.sortFns?.[sortKey]) {
-    const get = spec.sortFns[sortKey];
-    const desc = state.sortDesc !== false;
-    result.sort((a, b) => {
-      const va = get(a);
-      const vb = get(b);
-      // 字符串 sort（unicode codepoint 顺序）：null 永远到末尾、不参与 desc/asc 翻转
-      if (typeof va === 'string' || typeof vb === 'string') {
-        if (va == null && vb == null) return 0;
-        if (va == null) return 1;
-        if (vb == null) return -1;
-        const sa = String(va),
-          sb = String(vb);
-        if (sa === sb) return 0;
-        return desc ? (sa < sb ? 1 : -1) : sa < sb ? -1 : 1;
-      }
-      // 数値 sort：保留原 -Infinity null 处理（desc=true → null 在末尾、asc=false → null 在开头）
-      const na = va ?? -Infinity;
-      const nb = vb ?? -Infinity;
-      return desc ? nb - na : na - nb;
-    });
-  }
-  return result;
-};
-
-const toggleFilterValue = (set, val, btn) => {
-  if (set.has(val)) {
-    set.delete(val);
-    btn?.classList.remove('on');
-  } else {
-    set.add(val);
-    btn?.classList.add('on');
+export const renderToggles = (container, label, opts, state, onchange) => {
+  if (!container) return;
+  const sset = state[label] ||= new Set();
+  container.innerHTML = '';
+  for (const opt of opts) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = opt.label;
+    btn.className = 'ftog' + (sset.has(opt.id) ? ' active' : '');
+    btn.onclick = () => {
+      if (sset.has(opt.id)) sset.delete(opt.id); else sset.add(opt.id);
+      btn.classList.toggle('active');
+      onchange?.();
+    };
+    container.appendChild(btn);
   }
 };
 
-const resetFilters = (filters) => {
-  for (const k in filters) filters[k].clear();
+export const buildComparator = (key, dir = 'desc') => {
+  const mul = dir === 'asc' ? 1 : -1;
+  return (a, b) => {
+    const va = a[key] ?? 0;
+    const vb = b[key] ?? 0;
+    if (va < vb) return -1 * mul;
+    if (va > vb) return 1 * mul;
+    return 0;
+  };
 };
 
-export const FilterCore = { applyFilters, toggleFilterValue, resetFilters };
+export const applyFilterSort = (items, state, fields, sortKey, sortDir) => {
+  let out = items.filter((it) => matchAll(it, state, fields));
+  if (sortKey) out = out.slice().sort(buildComparator(sortKey, sortDir));
+  return out;
+};
