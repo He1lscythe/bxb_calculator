@@ -28,14 +28,19 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_ROOT / "data"
 OUT = DATA_DIR / "characters.json"
 WIKI_AUX = DATA_DIR / "_wiki_aux.json"
+AUDIT_TAGS_UNMATCHED = DATA_DIR / "_audit_chara_tags_unmatched.json"
 
 EVOLVE_NAME = {0: "通常", 1: "改造", 2: "極弐"}
 
 
-def load_wiki_skill_scaling():
+def load_wiki_aux():
     if not WIKI_AUX.is_file():
-        return {}
-    return json.loads(WIKI_AUX.read_text(encoding="utf-8")).get("chara_skill_value_scaling", {})
+        return {}, {}
+    aux = json.loads(WIKI_AUX.read_text(encoding="utf-8"))
+    return (
+        aux.get("chara_skill_value_scaling", {}),
+        aux.get("chara_tags", {}),
+    )
 
 
 def normalize_range(r):
@@ -147,7 +152,7 @@ def build_bd_skill(weapon_arts, weapon_arts_suffix, wiki_scaling, warnings, ctx_
 def build():
     src = master_file("weapons.json")
     raw = json.loads(src.read_text(encoding="utf-8"))
-    wiki_scaling = load_wiki_skill_scaling()
+    wiki_scaling, wiki_tags = load_wiki_aux()
 
     # group by base_id
     groups = defaultdict(list)
@@ -159,6 +164,7 @@ def build():
 
     out = []
     warnings = []
+    tags_unmatched = []
     for bid, variants in groups.items():
         # sort by evolve_count
         variants.sort(key=lambda v: v.get("evolve_count", 0))
@@ -189,16 +195,22 @@ def build():
         bd_skill = build_bd_skill(v0.get("weapon_arts"), v0.get("weapon_arts_suffix"),
                                   wiki_scaling, warnings, v0.get("id"))
 
+        # chara.tags: 从 wiki 拷 (Phase 6.4)、name match
+        chara_name = v0.get("base_name") or v0.get("name")
+        tags = wiki_tags.get(chara_name, [])
+        if not tags and chara_name:
+            tags_unmatched.append({"id": bid, "name": chara_name})
+
         # chara-level meta
         out.append({
             "id": bid,
-            "name": v0.get("base_name") or v0.get("name"),
+            "name": chara_name,
             "rarity": v0.get("rarity"),
             "element_id": v0.get("element_id"),
             "weapon_type_id": v0.get("weapon_type_id"),
             "weapon_tag_ids": v0.get("weapon_tag_ids"),  # 武器分类 (非 chara.tags)
-            "tags": [],          # 待定、留空
-            "omoide": [],        # 待定、留空
+            "tags": tags,        # 从 wiki main 拷 (Phase 6.4)、wiki 没的留空
+            "omoide": [],        # 待 Phase 8 抓包
             "states": states,
             "bd_skill": bd_skill,
             "weapon_arts_id": v0.get("weapon_arts_id"),
@@ -209,7 +221,12 @@ def build():
 
     DATA_DIR.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    AUDIT_TAGS_UNMATCHED.write_text(json.dumps(tags_unmatched, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    tags_matched = sum(1 for c in out if c["tags"])
     print(f"wrote {len(out)} characters (from {len(raw)} weapon variants) → {OUT}")
+    print(f"  chara.tags matched wiki: {tags_matched} / {len(out)} ({100*tags_matched//len(out)}%)")
+    print(f"  chara.tags unmatched (留空): {len(tags_unmatched)} → {AUDIT_TAGS_UNMATCHED}")
     if warnings:
         print(f"WARN: {len(warnings)} issues")
         for w in warnings[:5]:
