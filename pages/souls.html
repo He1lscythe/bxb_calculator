@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ソウル — v2</title>
+  <title>BxB ソウルデータベース v2</title>
   <link rel="stylesheet" href="../css/v2.css" />
 </head>
 <body>
@@ -14,13 +14,13 @@
     <a href="crystals.html">記憶結晶</a>
     <a href="bladegraphs.html">心象結晶</a>
     <a href="hensei.html">編成</a>
-    <span style="float:right;font-size:11px;opacity:0.6">v2 / master_tables</span>
+    <span class="version">v2 / master_tables</span>
   </header>
   <main>
     <aside>
-      <h3>検索</h3><input type="text" id="search" placeholder="名前..." />
+      <div class="search-row"><input type="text" id="search" placeholder="🔍 ソウル名で検索..." /></div>
       <div id="filters"></div>
-      <p style="font-size:11px;opacity:0.6"><span id="count">-</span> 件</p>
+      <p class="count-badge"><span id="count">-</span> 件</p>
     </aside>
     <section id="list"></section>
     <article id="detail"><p style="opacity:0.6">ソウルを選択</p></article>
@@ -30,10 +30,10 @@
     import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
     import { applySpec, renderSpecFilters } from '../shared/filter-core.js';
     import { soulSpec } from '../shared/soul-spec.js';
-    import { soulIcon, imgWithFallback } from '../shared/image-paths.js';
+    import { soulIcon } from '../shared/image-paths.js';
 
     const state = { search: '', sort: 'rarity', dir: 'desc' };
-    let all = []; let selected = null;
+    let all = [], selected = null;
     const $ = (id) => document.getElementById(id);
 
     async function init() {
@@ -42,37 +42,70 @@
       $('search').oninput = (e) => { state.search = e.target.value; render(); };
       render();
     }
+
     function render() {
       const filtered = applySpec(all, soulSpec, state);
       $('count').textContent = filtered.length;
-      $('list').innerHTML = filtered.map((s) => `<div class="item ${selected===s.id?'selected':''}" data-id="${s.id}">
-        ${s.texture_id ? imgWithFallback(soulIcon(s.texture_id), s.name) : ''}
-        <div><span class="rarity-${s.rarity}">${RARITY_LABEL[s.rarity]}</span> <b>${s.name}</b><br><small>${s.code || ''}</small></div>
-      </div>`).join('');
+      $('list').innerHTML = filtered.slice(0, 600).map(s => `<div class="item ${selected===s.id?'selected':''}" data-id="${s.id}">
+        ${s.texture_id ? `<img class="icon" src="${soulIcon(s.texture_id)}" alt="" onerror="this.style.display='none'">` : '<div class="icon"></div>'}
+        <div class="meta">
+          <b>${s.name}</b>
+          <div class="badge-row">
+            <span class="rarity-${s.rarity}">${RARITY_LABEL[s.rarity]}</span> · ${s.code||''}
+            ${s.only_partner ? '<span class="tag-badge">P</span>' : ''}
+          </div>
+        </div>
+      </div>`).join('') + (filtered.length > 600 ? `<p style="opacity:0.6;padding:6px">+${filtered.length-600} more</p>` : '');
       $('list').onclick = (e) => {
         const el = e.target.closest('.item'); if (!el) return;
         selected = +el.dataset.id;
-        renderDetail(all.find((x) => x.id === selected)); render();
+        renderDetail(all.find(x => x.id === selected));
+        render();
       };
     }
+
     function renderDetail(s) {
       if (!s) return;
-      const ea = Object.entries(s.element_affinity || {}).map(([eid, r]) =>
-        `${ELEMENT_LABEL[eid]||eid}: +${r.positive_value}/-${r.negative_value} (${r.rank_string})`).join('  ');
-      const wa = Object.entries(s.weapon_affinity || {}).map(([wid, r]) =>
-        `${WEAPON_LABEL[wid]||wid}: +${r.positive_value}/-${r.negative_value} (${r.rank_string})`).join('  ');
-      // (隠し) 技能 displayable=false → 50% 透明度
-      const skills = (s.skills || []).map((sk) => {
-        const hidden = sk.displayable === false;
-        const style = hidden ? 'opacity:0.5' : '';
-        const badge = hidden ? '<span style="font-size:9px;opacity:0.7"> [隠]</span>' : '';
-        return `<li style="${style}"><b>${sk.name}</b>${badge}: ${sk.parameter}/${sk.math_type}/${sk.value} range=${sk.range}<br><small>${sk.description||''}</small></li>`;
+      // affinity grid (6 elements + 12 weapons)
+      const ea = [1,2,3,4,5,6].map(eid => {
+        const r = s.element_affinity?.[String(eid)];
+        const p = r?.positive_value ?? 1;
+        const n = r?.negative_value ?? 1;
+        const cls = p > 1.1 ? 'pos' : (p < 0.9 ? 'neg' : '');
+        return `<div class="cell"><span class="label e${eid}">${ELEMENT_LABEL[eid]}</span>
+          <span class="${cls}">×${p.toFixed(2)}</span><br><span class="neg">/${n.toFixed(2)}</span></div>`;
       }).join('');
-      $('detail').innerHTML = `${s.texture_id ? imgWithFallback(soulIcon(s.texture_id), s.name) : ''}
-        <h2>${s.name}</h2><p>${RARITY_LABEL[s.rarity]} / ${s.code} / id=${s.id}</p>
-        <h3>属性相性</h3><p style="font-size:11px">${ea}</p>
-        <h3>武器相性</h3><p style="font-size:11px">${wa}</p>
-        <h3>スキル (${(s.skills||[]).length})</h3><ul style="font-size:11px">${skills}</ul>`;
+      const wa = [1,2,3,4,5,6,7,8,9,10,11,12].map(wid => {
+        const r = s.weapon_affinity?.[String(wid)];
+        const p = r?.positive_value ?? 1;
+        const n = r?.negative_value ?? 1;
+        const cls = p > 1.1 ? 'pos' : (p < 0.9 ? 'neg' : '');
+        return `<div class="cell"><span class="label">${WEAPON_LABEL[wid]}</span>
+          <span class="${cls}">×${p.toFixed(2)}</span><br><span class="neg">/${n.toFixed(2)}</span></div>`;
+      }).join('');
+      // skills (隠し displayable=false → 50% opacity)
+      const skills = (s.skills||[]).map(sk => {
+        const hidden = sk.displayable === false;
+        return `<div class="skill-bar ${hidden?'hidden-skill':''}">
+          <b>${sk.name||'-'}</b>${hidden?' <small>[隠]</small>':''}
+          <div><small>${sk.parameter}/${sk.math_type}/${sk.value} range=${sk.range}${sk.element_condition?` /elem=${ELEMENT_LABEL[sk.element_condition]}`:''}${sk.weapon_type_condition?` /wpn=${WEAPON_LABEL[sk.weapon_type_condition]}`:''}</small></div>
+          ${sk.description ? `<div style="font-size:10px;opacity:0.7;margin-top:2px">${sk.description}</div>` : ''}
+        </div>`;
+      }).join('');
+
+      $('detail').innerHTML = `
+        ${s.texture_id ? `<img class="icon lg" src="${soulIcon(s.texture_id)}" alt="${s.name}" onerror="this.style.display='none'">` : ''}
+        <h2>${s.name}</h2>
+        <p><span class="rarity-${s.rarity}">${RARITY_LABEL[s.rarity]}</span> · ${s.code||''} <small>· id ${s.id}</small></p>
+        ${s.only_partner?'<p><span class="tag-badge">パートナー専用</span></p>':''}
+
+        <h3>属性相性 (正/負)</h3>
+        <div class="affinity-grid">${ea}</div>
+        <h3>武器相性</h3>
+        <div class="affinity-grid">${wa}</div>
+
+        <h3>スキル (${(s.skills||[]).length})</h3>
+        ${skills}`;
     }
     init();
   </script>

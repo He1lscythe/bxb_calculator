@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>記憶結晶 — v2</title>
+  <title>BxB 記憶結晶データベース v2</title>
   <link rel="stylesheet" href="../css/v2.css" />
 </head>
 <body>
@@ -13,13 +13,13 @@
     <a href="crystals.html">記憶結晶</a>
     <a href="bladegraphs.html">心象結晶</a>
     <a href="hensei.html">編成</a>
-    <span style="float:right;font-size:11px;opacity:0.6">v2 / master_tables</span>
+    <span class="version">v2 / master_tables</span>
   </header>
   <main>
     <aside>
-      <h3>検索</h3><input type="text" id="search" placeholder="名前..." />
+      <div class="search-row"><input type="text" id="search" placeholder="🔍 結晶名で検索..." /></div>
       <div id="filters"></div>
-      <p style="font-size:11px;opacity:0.6"><span id="count">-</span> 件</p>
+      <p class="count-badge"><span id="count">-</span> 件</p>
     </aside>
     <section id="list"></section>
     <article id="detail"><p style="opacity:0.6">結晶を選択</p></article>
@@ -29,10 +29,10 @@
     import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
     import { applySpec, renderSpecFilters } from '../shared/filter-core.js';
     import { crystalSpec } from '../shared/crystal-spec.js';
-    import { crystalIcon, imgWithFallback } from '../shared/image-paths.js';
+    import { crystalIcon } from '../shared/image-paths.js';
 
     const state = { search: '', sort: 'rarity', dir: 'desc' };
-    let all = []; let selected = null;
+    let all = [], selected = null;
     const $ = (id) => document.getElementById(id);
 
     async function init() {
@@ -41,36 +41,58 @@
       $('search').oninput = (e) => { state.search = e.target.value; render(); };
       render();
     }
+
     function render() {
       const filtered = applySpec(all, crystalSpec, state);
       $('count').textContent = filtered.length;
-      $('list').innerHTML = filtered.slice(0, 500).map((c) => `<div class="item ${selected===c.id?'selected':''}" data-id="${c.id}">
-        ${imgWithFallback(crystalIcon(c.id), c.name)}
-        <div><span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]}</span> ${ELEMENT_LABEL[c.element_id]||''}${WEAPON_LABEL[c.weapon_type_id]||''}<br><b>${c.name}</b></div>
-      </div>`).join('') + (filtered.length > 500 ? `<p style="opacity:0.6">+${filtered.length-500} more (絞り込んでください)</p>` : '');
+      $('list').innerHTML = filtered.slice(0, 500).map(c => `<div class="item ${selected===c.id?'selected':''}" data-id="${c.id}">
+        <img class="icon" src="${crystalIcon(c.id)}" alt="" onerror="this.style.display='none'">
+        <div class="meta">
+          <b>${c.name}</b>
+          <div class="badge-row">
+            <span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]}</span>
+            <span class="e${c.element_id}">${ELEMENT_LABEL[c.element_id]||''}</span>
+            ${WEAPON_LABEL[c.weapon_type_id]||''}
+            <small>· ${c.parameter}</small>
+          </div>
+        </div>
+      </div>`).join('') + (filtered.length > 500 ? `<p style="opacity:0.6;padding:6px">+${filtered.length-500} more (絞り込んでください)</p>` : '');
       $('list').onclick = (e) => {
         const el = e.target.closest('.item'); if (!el) return;
         selected = +el.dataset.id;
-        renderDetail(all.find((x) => x.id === selected)); render();
+        renderDetail(all.find(x => x.id === selected));
+        render();
       };
     }
+
     function renderDetail(c) {
       if (!c) return;
       const mx = c.max_value !== null ? `${c.initial_value} ~ ${c.max_value}` : `${c.initial_value} ~ <i style="opacity:0.5">(max 未取得)</i>`;
-      // 同名「隠し」拆分技能 (user 决策: 保持单 bunrui per skill bar、隠し 半透明)
-      const sameName = all.filter(x => x.name === c.name);
-      const sub = sameName.filter(x => x.id !== c.id).slice(0, 5);
-      const subH = sub.length ? `<h3>同名 (隠し)</h3><ul style="font-size:11px;opacity:0.5">
-        ${sub.map(x => `<li>${x.parameter} / ${x.math_type} / ${x.initial_value}${x.max_value?'→'+x.max_value:''}</li>`).join('')}
-        </ul>` : '';
-      $('detail').innerHTML = `${imgWithFallback(crystalIcon(c.id), c.name)}
+      // 同名隠し (master 多 effect 拆成多 entry、保持单 bunrui)
+      const sameName = all.filter(x => x.name === c.name && x.id !== c.id).slice(0, 5);
+      const subH = sameName.length ? `<h3>同名 (隠し)</h3>
+        ${sameName.map(x => `<div class="skill-bar hidden-skill">
+          <b>${x.parameter}</b> / ${x.math_type||'(NoEffect)'} / ${x.initial_value}${x.max_value?'→'+x.max_value:''}
+        </div>`).join('')}` : '';
+
+      $('detail').innerHTML = `
+        <img class="icon lg" src="${crystalIcon(c.id)}" alt="${c.name}" onerror="this.style.display='none'">
         <h2>${c.name}</h2>
-        <p>${RARITY_LABEL[c.rarity]} / ${ELEMENT_LABEL[c.element_id]||''}${WEAPON_LABEL[c.weapon_type_id]||''} / id=${c.id}</p>
-        <p><b>${c.parameter}</b> / ${c.math_type||'(NoEffect)'} / lv max ${c.max_level}</p>
-        <p>倍率: ${mx} (rank ${c.initial_value_rank||'-'})</p>
-        <p style="font-size:11px;opacity:0.6">weight_step: <i>解包未提供、Phase 7 edit 时手动添加</i></p>
-        <p style="font-size:11px;opacity:0.6">purity_step: <i>同上</i></p>
-        <p style="font-size:11px;opacity:0.8">${c.description||''}</p>
+        <p><span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]}</span> · <span class="e${c.element_id}">${ELEMENT_LABEL[c.element_id]||''}</span> · ${WEAPON_LABEL[c.weapon_type_id]||''} <small>· id ${c.id}</small></p>
+        <h3>効果</h3>
+        <table class="stats-table">
+          <tr><th>parameter</th><td>${c.parameter}</td></tr>
+          <tr><th>math_type</th><td>${c.math_type||'<i>(NoEffect)</i>'}</td></tr>
+          <tr><th>倍率</th><td>${mx}</td></tr>
+          <tr><th>等級上限</th><td>${c.max_level}</td></tr>
+          <tr><th>初期 rank</th><td>${c.initial_value_rank||'-'}</td></tr>
+        </table>
+        <h3>重量/純度 (Phase 7 edit 手動添加)</h3>
+        <table class="stats-table">
+          <tr><th>weight_step</th><td><i style="opacity:0.5">- (解包未提供)</i></td></tr>
+          <tr><th>purity_step</th><td><i style="opacity:0.5">- (解包未提供)</i></td></tr>
+        </table>
+        ${c.description ? `<p class="profile-text">${c.description}</p>` : ''}
         ${subH}`;
     }
     init();
