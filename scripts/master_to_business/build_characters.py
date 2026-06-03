@@ -98,8 +98,10 @@ def build_skills(weapon_skills, wiki_scaling, warnings, ctx_id):
     return out
 
 
-def build_bd_skill(weapon_arts, wiki_scaling, warnings, ctx_id):
-    """weapons.weapon_arts → bd_skill (顶层、跨 state 共享)"""
+def build_bd_skill(weapon_arts, weapon_arts_suffix, wiki_scaling, warnings, ctx_id):
+    """weapons.weapon_arts → bd_skill (顶层、跨 state 共享)。
+    bd_skill.name 用 weapons.weapon_arts_suffix (master weapon_arts.name 通常是空字符串)。
+    """
     if not weapon_arts:
         return None
     effects_out = []
@@ -123,11 +125,12 @@ def build_bd_skill(weapon_arts, wiki_scaling, warnings, ctx_id):
             "duration_value": e.get("duration_value"),
             "effect_id": e.get("effect_id"),
         })
-    bd_name = weapon_arts.get("name") or weapon_arts.get("description", "")
+    # bd name: 优先 weapon_arts_suffix (真正 BD 技名)、fallback weapon_arts.name
+    bd_name = weapon_arts_suffix or weapon_arts.get("name") or ""
     bd_scaling = wiki_scaling.get(bd_name, 0.0) if bd_name else 0.0
     return {
         "id": weapon_arts.get("id"),
-        "name": weapon_arts.get("name"),
+        "name": bd_name,
         "description": weapon_arts.get("description"),
         "cost": weapon_arts.get("cost"),
         "range": normalize_range(weapon_arts.get("range")),
@@ -172,7 +175,7 @@ def build():
                 "stats": build_stats(v),
                 "weapon_skills": build_skills(v.get("weapon_skills"), wiki_scaling, warnings, v.get("id")),
                 "attack_motion_id": v.get("attack_motion_id"),
-                "motion_speed1": v.get("motion_speed1"),
+                "motion_speed": v.get("motion_speed"),
                 "motion_speed2": v.get("motion_speed2"),
                 "motion_speed3": v.get("motion_speed3"),
                 "hit_counts": v.get("hit_counts"),
@@ -182,8 +185,9 @@ def build():
                 "size": v.get("size"),
             }
 
-        # bd_skill: 用 v0 (通常) 的 weapon_arts (跨 state 通常共享)
-        bd_skill = build_bd_skill(v0.get("weapon_arts"), wiki_scaling, warnings, v0.get("id"))
+        # bd_skill: 用 v0 (通常) 的 weapon_arts + weapon_arts_suffix (BD 技名)
+        bd_skill = build_bd_skill(v0.get("weapon_arts"), v0.get("weapon_arts_suffix"),
+                                  wiki_scaling, warnings, v0.get("id"))
 
         # chara-level meta
         out.append({
@@ -198,7 +202,6 @@ def build():
             "states": states,
             "bd_skill": bd_skill,
             "weapon_arts_id": v0.get("weapon_arts_id"),
-            "has_live2d": v0.get("has_live2d"),
         })
 
     # 按 base_id 排序便于 diff 稳定
