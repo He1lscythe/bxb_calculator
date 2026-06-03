@@ -320,20 +320,23 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复�
 
 ## 3.7 hensei 基础属性 base 计算（v2 简化版、Phase 3 前端复刻）
 
-### 输入字段（全部来自 master `weapons.json`）
+### 输入字段（全部来自 master `weapons.json`、每个 variant 各自查）
 
 | 字段 | 来源 | 说明 |
 |---|---|---|
-| `initial_*` | `weapons.initial_hp/attack/defense/break/speed` | 通常状态 lv=1 1 熟度时的属性 |
-| `max_*` | `weapons.max_hp/attack/defense/break/speed` | 该 variant 最高等级最高熟度时属性（来自当前 variant、不是通常版） |
-| `max_mature` | `weapons.max_mature` | 该 variant 最大熟度（替代 wiki 熟度上限表） |
+| `initial_hp/attack/defense/break/speed` | `weapons.initial_*` | 该 variant 1 等级 1 熟度的属性 |
+| `max_hp/attack/defense/break/speed` | `weapons.max_*` | 该 variant 最高等级最高熟度的属性 |
+| `max_mature` | `weapons.max_mature` | 该 variant 最大熟度（master 直读、替代 wiki 熟度上限表） |
+| `max_lp` | `weapons.max_lp` | 该 variant 最大 LP |
 | `rarity` | `weapons.rarity` | 1=A / 2=AA / 3=S / 4=SS |
+| `evolve_count` / `evolve_name` | `weapons.evolve_count/evolve_name` | 0=通常 / 1=改 / 2=改極弐 |
 
-**不看 `raw_*` 字段**（那是 user_weapon 服务器推的、不在 master 里）。
+**不读** `initial_max_level` / `max_max_level` 字段（master 也有、但用 wiki 写死表更稳）。
+**不看 `raw_*` 字段**（那是 user_weapon server fold 字段、不在 master 里）。
 
-### 等级上限 / 觉醒（沿用 [chara_training.md](chara_training.md) 公式）
+### 等级上限表（沿用 wiki [chara_training.md](chara_training.md)、写死）
 
-**等级上限（熟度最大时）**：写死表（wiki 玩家观测，master 无对应字段）
+**等级上限（熟度最大时）**：
 
 | 稀有度 | 通常 | 改造 | 極弐 |
 |---|---|---|---|
@@ -342,7 +345,7 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复�
 | AA | 150 | 155 | 180 |
 | A | 60 | 99 | 120 |
 
-**1 熟度时的等级上限**：写死表
+**1 熟度时的等级上限**：
 
 | 稀有度 | 通常 | 改造 | 極弐 |
 |---|---|---|---|
@@ -351,43 +354,49 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复�
 | AA | 30 | 35 | 60 |
 | A | 15 | 20 | 35 |
 
-**熟度 N → 等级上限**：
+**熟度 N → 等级上限**（公式沿用 wiki）：
 
 ```
 熟度上限_at_N = min(等级上限, 1熟上限 + (N − 1) × 5)
 ```
 
-`max_mature` 用 master 字段读、不写死表（wiki 熟度上限表作废）。
+参数取值：
+- `等级上限` ← 上面 4×3 写死表查（按 rarity + evolve_count）
+- `1熟上限` ← 第二张 4×3 写死表查
+- `N` ← 用户输入（1 ≤ N ≤ `max_mature`、`max_mature` 来自 master 字段）
 
-**觉醒**：每觉醒 +5 等级、不受其他限制
+### 觉醒（写死表 — master 无对应字段）
 
 | 稀有度 | SS | S | AA | A |
 |---|---|---|---|---|
 | 最大觉醒数 | 9 | 14 | 36 | 24 |
 | 满觉醒倍率 | 1.43 | 2.42 | 4.45 | 5.37 |
 
-`实际等级上限 = 熟度对应上限 + 觉醒数 × 5`
+- 每觉醒 +5 等级、不受其他限制
+- `实际等级上限 = 熟度对应上限 + 觉醒数 × 5`
 
-### 等级 → 属性公式（沿用 wiki）
+### 等级 → 属性公式（**统一公式**、不分通常 / 改造）
 
-**通常魔剑**（无改造 / 極弐）：
-
-```
-属性 = stats.max × (1 − (通常最高等级 − 当前lv) / (通常最高等级 − 1) × stats.initial / stats.max)
-```
-
-**改造 / 極弐魔剑**：
+每个 variant (state) 各自查自己的 `initial_*` / `max_*`，公式跟通常魔剣完全一样：
 
 ```
-属性 = (该 state 的 stats.max) × (1 − (该 state 最高等级 − 当前lv) / (该 state 最高等级 − 1) × 通常 stats.initial / 通常 stats.max)
+属性 = max × (1 − (等级上限 − 当前lv) / (等级上限 − 1) × initial / max)
 ```
 
-注：改造/極弐 用 **通常**的 `initial/max` 比值（不是改造自身 initial）。
+参数取值：
+- `等级上限` ← wiki 写死表（该 rarity + evolve_count 的"等级上限（熟度最大时）"）
+- `initial` / `max` ← master `weapons.initial_*` / `max_*`（每 variant 各自字段、不借用通常）
 
-**觉醒下属性扩展**（lv > cap = 熟度上限 + 觉醒前等级时）：
+> 关键修正：master 各 variant 都有自己的 `initial_*` 字段（改造/極弐 不再借用通常的 initial/max 比值）。验证 sample base_id=1001:
+> - 通常 100101: `initial_attack=5700, max_attack=12000`
+> - 改造 100102: `initial_attack=7410, max_attack=15600`
+>
+> wiki 原公式假设改造 initial 用通常的、是因为 wiki 只爬到通常的 stats（改造的没 wiki page 写明 initial）。master 直给、不需绕。
+
+**觉醒下属性扩展**（lv > cap = 熟度上限）：
 
 ```
-1. 先按上式取 lv = cap 算 k（分母仍用最高等级、不是 cap）
+1. 先按上式取 lv = cap 算 k（分母仍用"等级上限（熟度最大时）"、不是 cap）
 2. 最终 = k × (1 + (当前lv − cap) / (最大觉醒数 × 5) × (满觉醒倍率 − 1))
 ```
 
