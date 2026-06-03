@@ -1,265 +1,75 @@
 <!-- AUTO-GENERATED from pages_src/crystals.html — DO NOT EDIT. Run `node scripts/build.js` to rebuild. -->
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BxB 結晶データベース</title>
-    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/nav.css" />
-    <link rel="stylesheet" href="../css/shared.css" />
-    <link rel="stylesheet" href="../css/crystals.css" />
-  </head>
-  <body>
-    <style>
-  #loading-screen {
-    position: fixed;
-    inset: 0;
-    z-index: 99;
-    background: #0f1117;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    transition: opacity 0.25s ease;
-  }
-  #loading-screen.done {
-    opacity: 0;
-    pointer-events: none;
-  }
-  #loading-screen::before {
-    content: '';
-    width: 36px;
-    height: 36px;
-    border: 3px solid #2e3250;
-    border-top-color: #5b7fff;
-    border-radius: 50%;
-    animation: ls-spin 0.8s linear infinite;
-  }
-  #loading-screen::after {
-    content: '読み込み...';
-    color: #8890b0;
-    font-size: 13px;
-    font-family: 'Segoe UI', 'Yu Gothic', sans-serif;
-  }
-  @keyframes ls-spin {
-    to {
-      transform: rotate(360deg);
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>記憶結晶 — v2</title>
+  <link rel="stylesheet" href="../css/v2.css" />
+</head>
+<body>
+  <header>
+    <a href="characters.html">魔剣</a>
+    <a href="souls.html">ソウル</a>
+    <a href="crystals.html">記憶結晶</a>
+    <a href="bladegraphs.html">心象結晶</a>
+    <a href="hensei.html">編成</a>
+    <span style="float:right;font-size:11px;opacity:0.6">v2 / master_tables</span>
+  </header>
+  <main>
+    <aside>
+      <h3>検索</h3><input type="text" id="search" placeholder="名前..." />
+      <h3>★</h3><div id="f-rarity"></div>
+      <h3>属性</h3><div id="f-element"></div>
+      <h3>武器</h3><div id="f-weapon"></div>
+      <p style="font-size:11px;opacity:0.6"><span id="count">-</span> 件</p>
+    </aside>
+    <section id="list"></section>
+    <article id="detail"><p style="opacity:0.6">結晶を選択</p></article>
+  </main>
+  <script type="module">
+    import { loadCrystals } from '../shared/data-loader.js';
+    import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
+    import * as fc from '../shared/filter-core.js';
+    import { crystalIcon, imgWithFallback } from '../shared/image-paths.js';
+
+    const state = { rarity: new Set(), element: new Set(), weapon: new Set(), search: '' };
+    let all = []; let selected = null;
+    const $ = (id) => document.getElementById(id);
+
+    async function init() {
+      all = await loadCrystals();
+      fc.renderToggles($('f-rarity'), 'rarity', fc.rarityOptions(), state, render);
+      fc.renderToggles($('f-element'), 'element', fc.elementOptions(), state, render);
+      fc.renderToggles($('f-weapon'), 'weapon', fc.weaponTypeOptions(), state, render);
+      $('search').oninput = (e) => { state.search = e.target.value; render(); };
+      render();
     }
-  }
-</style>
-<div id="loading-screen"></div>
-
-
-    <div id="page-wrap">
-      <div id="content">
-        <div id="filters">
-          <!-- Search row: input always, mob count visible only on mobile -->
-          <div class="mob-search-row">
-            <input
-              type="text"
-              id="search"
-              placeholder="🔍 結晶名で検索..."
-              oninput="applyFilters()"
-            />
-            <span id="crystal-count-mob"></span>
-          </div>
-          <!-- Mobile-only toolbar: toggle + action buttons -->
-          <div class="mob-toolbar">
-            <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">
-              ▼ 絞り込み
-            </button>
-            <button class="toolbar-btn" onclick="expandAll()">全展開</button>
-            <button class="toolbar-btn" onclick="collapseAll()">全収起</button>
-            <button class="toolbar-btn" onclick="resetFilters()">リセット</button>
-          </div>
-          <!-- Filter body: always visible on desktop, collapsible on mobile -->
-          <div id="filters-body">
-            <div class="filter-row2">
-              <div class="filter-section">
-                <div class="filter-label">レア度</div>
-                <div class="filter-toggles" id="f-rarity"></div>
-              </div>
-
-              <div class="filter-section">
-                <div class="filter-label">属性</div>
-                <div class="filter-toggles" id="f-element"></div>
-              </div>
-            </div>
-
-            <div class="filter-section">
-              <div class="filter-label">武器種</div>
-              <div class="filter-toggles" id="f-weapon"></div>
-            </div>
-
-            <div class="filter-section">
-              <div class="filter-label">効果</div>
-              <div class="filter-toggles" id="f-bunrui"></div>
-            </div>
-
-            <div class="filter-row2">
-              <div class="filter-section">
-                <div class="filter-label">条件（対象）</div>
-                <div class="filter-toggles" id="f-scope"></div>
-              </div>
-              <div class="filter-section">
-                <div class="filter-label">条件（発動）</div>
-                <div class="filter-toggles" id="f-condition">
-                  <!-- populated by JS: renderFilterToggles('condition', CONDITION, {skip:[0]}) -->
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- #filters-body -->
-          <!-- Desktop-only bottom bar: count + action buttons -->
-          <div class="desktop-bottom">
-            <div id="crystal-count"></div>
-            <div style="display: flex; gap: 6px">
-              <button onclick="expandAll()" class="toolbar-btn">全展開</button>
-              <button onclick="collapseAll()" class="toolbar-btn">全収起</button>
-              <button onclick="resetFilters()" class="toolbar-btn">リセット</button>
-            </div>
-          </div>
-        </div>
-        <div id="crystal-list"></div>
-      </div>
-      <!-- #content -->
-    </div>
-    <!-- #page-wrap -->
-
-    <script type="module">
-      import { Nav, updateReviseBar } from '../js/nav.js';
-      import { state } from '../js/cr-state.js';
-      import { escHtml, fmt, parseBairituVal, hideLoading } from '../js/utils.js';
-      import { deepApply } from '../js/diff.js';
-      import { enforceScopeConstraints } from '../shared/effect-constraints.js';
-      import {
-        initFilterToggles,
-        toggleFilters,
-        collapseFiltersOnScroll,
-        toggleFilter,
-        expandAll,
-        collapseAll,
-        resetFilters,
-        applyFilters,
-        toggleExpand,
-      } from '../js/cr-list.js';
-      import {
-        enterEditMode,
-        cancelEdit,
-        saveEdit,
-        saveRevise,
-        toggleCrystalBunrui,
-        setCrystalHitStage,
-        setCrystalHitStageScaling,
-        setCrystalBairitu,
-        setCrystalScope,
-        setCrystalElement,
-        setCrystalWeapon,
-        setCrystalLevelMax,
-        setCrystalWeightMin,
-        setCrystalStep,
-        setCrystalDelta,
-        addCrystalEffect,
-        removeCrystalEffect,
-        reRenderCrystalEdit,
-        renderEditBody,
-      } from '../js/cr-edit.js';
-
-      Nav.init();
-
-      document.addEventListener('DOMContentLoaded', () => {
-        initFilterToggles();
-        fetch('../data/crystals.json')
-          .then((r) => {
-            if (!r.ok) throw new Error(r.status);
-            return r.json();
-          })
-          .then((arr) => {
-            state.allCrystals = arr.filter((c) => !c.tombstone);
-            return fetch('../data/crystals_extra.json')
-              .then((r) => (r.ok ? r.json() : []))
-              .catch(() => []);
-          })
-          .then((ext) => {
-            if (Array.isArray(ext)) state.allCrystals.push(...ext.filter((c) => !c.tombstone));
-            // originalData snapshot: base + extra
-            state.allCrystals.forEach((c) => {
-              if (!state.originalData[c.id])
-                state.originalData[c.id] = JSON.parse(JSON.stringify(c));
-            });
-            applyFilters();
-            // hideLoading 推迟到 revise deepApply 完之后、避免 base→revise 闪烁
-            return fetch('../data/crystals_revise.json');
-          })
-          .then((r) => (r.ok ? r.json() : []))
-          .then((arr) => {
-            arr.forEach((c) => {
-              state.reviseData[c.id] = c;
-              const idx = state.allCrystals.findIndex((x) => x.id === c.id);
-              if (idx >= 0) deepApply(state.allCrystals[idx], c);
-            });
-            // base+revise 合并后强制 effect scope 约束：scope ∈ {0,1} 时清 element/type
-            enforceScopeConstraints(state.allCrystals);
-            if (arr.length) applyFilters();
-            hideLoading();
-            // crystals_check.json は本地のみ：fetch 成功なら per-item checkbox UI を有効化
-            return fetch('../data/crystals_check.json');
-          })
-          .then((r) => (r && r.ok ? r.json() : null))
-          .then((arr) => {
-            if (Array.isArray(arr)) {
-              state.crystalCheckEnabled = true;
-              arr.forEach((id) => state.crystalCheck.add(id));
-              applyFilters();
-            }
-          })
-          .catch(() => {
-            applyFilters();
-            hideLoading();
-          });
-      });
-
-      // 「絞り込み」展開中の user-initiated scroll でのみ collapse — touchmove (mobile) / wheel (desktop)。
-      // scroll 事件は使わない：filter 操作後の list 高さ変化による浏览器 auto-clamp scrollY を user スクロールと誤判するため。
-      window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
-      window.addEventListener('wheel', collapseFiltersOnScroll, { passive: true });
-
-      window.state = state;
-      Object.assign(window, {
-        applyFilters,
-        toggleFilter,
-        expandAll,
-        collapseAll,
-        resetFilters,
-        toggleFilters,
-        toggleExpand,
-        enterEditMode,
-        cancelEdit,
-        saveEdit,
-        saveRevise,
-        toggleCrystalBunrui,
-        setCrystalHitStage,
-        setCrystalHitStageScaling,
-        setCrystalBairitu,
-        setCrystalScope,
-        setCrystalElement,
-        setCrystalWeapon,
-        setCrystalLevelMax,
-        setCrystalWeightMin,
-        setCrystalStep,
-        setCrystalDelta,
-        addCrystalEffect,
-        removeCrystalEffect,
-        reRenderCrystalEdit,
-        renderEditBody,
-        updateReviseBar,
-        escHtml,
-        fmt,
-        parseBairituVal,
-      });
-    </script>
-  </body>
+    function render() {
+      const fields = { rarity: 'rarity', element: 'element_id', weapon: 'weapon_type_id' };
+      const filtered = fc.applyFilterSort(all, state, fields, 'rarity', 'desc');
+      $('count').textContent = filtered.length;
+      $('list').innerHTML = filtered.slice(0, 500).map((c) => `<div class="item ${selected===c.id?'selected':''}" data-id="${c.id}">
+        ${imgWithFallback(crystalIcon(c.id), c.name)}
+        <div><span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]}</span> ${ELEMENT_LABEL[c.element_id]||''}${WEAPON_LABEL[c.weapon_type_id]||''}<br><b>${c.name}</b></div>
+      </div>`).join('') + (filtered.length > 500 ? `<p style="opacity:0.6">+${filtered.length-500} more (絞り込んでください)</p>` : '');
+      $('list').onclick = (e) => {
+        const el = e.target.closest('.item'); if (!el) return;
+        selected = +el.dataset.id;
+        renderDetail(all.find((x) => x.id === selected)); render();
+      };
+    }
+    function renderDetail(c) {
+      if (!c) return;
+      const mx = c.max_value !== null ? `${c.initial_value} ~ ${c.max_value}` : `${c.initial_value} ~ <i style="opacity:0.5">(max 未取得)</i>`;
+      $('detail').innerHTML = `${imgWithFallback(crystalIcon(c.id), c.name)}
+        <h2>${c.name}</h2>
+        <p>${RARITY_LABEL[c.rarity]} / ${ELEMENT_LABEL[c.element_id]||''}${WEAPON_LABEL[c.weapon_type_id]||''} / id=${c.id}</p>
+        <p><b>${c.parameter}</b> / ${c.math_type} / lv max ${c.max_level}</p>
+        <p>倍率: ${mx} (rank ${c.initial_value_rank||'-'})</p>
+        <p style="font-size:11px;opacity:0.8">${c.description||''}</p>`;
+    }
+    init();
+  </script>
+</body>
 </html>
