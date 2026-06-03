@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>心象結晶 — v2</title>
+  <title>BxB 心象結晶データベース v2</title>
   <link rel="stylesheet" href="../css/v2.css" />
 </head>
 <body>
@@ -13,13 +13,13 @@
     <a href="crystals.html">記憶結晶</a>
     <a href="bladegraphs.html">心象結晶</a>
     <a href="hensei.html">編成</a>
-    <span style="float:right;font-size:11px;opacity:0.6">v2 / master_tables</span>
+    <span class="version">v2 / master_tables</span>
   </header>
   <main>
     <aside>
-      <h3>検索</h3><input type="text" id="search" placeholder="名前..." />
+      <div class="search-row"><input type="text" id="search" placeholder="🔍 心象結晶名で検索..." /></div>
       <div id="filters"></div>
-      <p style="font-size:11px;opacity:0.6"><span id="count">-</span> 件</p>
+      <p class="count-badge"><span id="count">-</span> 件</p>
     </aside>
     <section id="list"></section>
     <article id="detail"><p style="opacity:0.6">心象結晶を選択</p></article>
@@ -29,10 +29,10 @@
     import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
     import { applySpec, renderSpecFilters } from '../shared/filter-core.js';
     import { bgSpec } from '../shared/bg-spec.js';
-    import { bgIcon, imgWithFallback } from '../shared/image-paths.js';
+    import { bgIcon } from '../shared/image-paths.js';
 
     const state = { search: '', sort: 'rarity', dir: 'desc' };
-    let all = []; let selected = null;
+    let all = [], selected = null;
     const $ = (id) => document.getElementById(id);
 
     async function init() {
@@ -41,27 +41,58 @@
       $('search').oninput = (e) => { state.search = e.target.value; render(); };
       render();
     }
+
     function render() {
       const filtered = applySpec(all, bgSpec, state);
       $('count').textContent = filtered.length;
-      $('list').innerHTML = filtered.map((b) => `<div class="item ${selected===b.id?'selected':''}" data-id="${b.id}">
-        ${imgWithFallback(bgIcon(b.id), b.name)}
-        <div><span class="rarity-${b.rarity}">${RARITY_LABEL[b.rarity]}</span><br><b>${b.name}</b><br>
-        <small>${(b.element_ids||[]).map(e=>ELEMENT_LABEL[e]).join('')}${(b.weapon_type_ids||[]).map(w=>WEAPON_LABEL[w]).join('')}</small></div>
-      </div>`).join('');
+      $('list').innerHTML = filtered.slice(0, 600).map(b => {
+        const elems = (b.element_ids||[]).map(e => `<span class="e${e}">${ELEMENT_LABEL[e]}</span>`).join('');
+        const wpns = (b.weapon_type_ids||[]).map(w => WEAPON_LABEL[w]).join('');
+        const hasTime = !!(b.skill_effective_time || b.long_skill_effective_time);
+        return `<div class="item ${selected===b.id?'selected':''}" data-id="${b.id}">
+          <img class="icon" src="${bgIcon(b.id)}" alt="" onerror="this.style.display='none'">
+          <div class="meta">
+            <b>${b.name}</b>
+            <div class="badge-row">
+              <span class="rarity-${b.rarity}">${RARITY_LABEL[b.rarity]}</span>
+              ${elems} ${wpns}
+              ${hasTime ? '<span class="tag-badge">時</span>' : ''}
+            </div>
+          </div>
+        </div>`;
+      }).join('');
       $('list').onclick = (e) => {
         const el = e.target.closest('.item'); if (!el) return;
         selected = +el.dataset.id;
-        renderDetail(all.find((x) => x.id === selected)); render();
+        renderDetail(all.find(x => x.id === selected));
+        render();
       };
     }
+
     function renderDetail(b) {
       if (!b) return;
-      const skills = (b.skills||[]).map(s => `<li>${s.parameter}/${s.math_type}/${s.value} range=${s.range} ${s.element_id?'/elem='+ELEMENT_LABEL[s.element_id]:''}${s.weapon_type_id?'/weapon='+WEAPON_LABEL[s.weapon_type_id]:''}<br><small>${s.description||''}</small></li>`).join('');
-      $('detail').innerHTML = `${imgWithFallback(bgIcon(b.id), b.name)}
-        <h2>${b.name}</h2><p>${RARITY_LABEL[b.rarity]} / id=${b.id} / by ${b.author_name||'-'}</p>
-        <p style="font-size:11px;opacity:0.7">${b.description||''}</p>
-        <h3>スキル (${(b.skills||[]).length})</h3><ul style="font-size:11px">${skills}</ul>`;
+      const skills = (b.skills||[]).map(sk => {
+        const hidden = sk.displayable === false;
+        return `<div class="skill-bar ${hidden?'hidden-skill':''}">
+          <b>${sk.parameter}</b>${hidden?' <small>[隠]</small>':''}: ${sk.math_type||''}/${sk.value} range=${sk.range}
+          ${sk.element_id?` /elem=${ELEMENT_LABEL[sk.element_id]}`:''}${sk.weapon_type_id?` /wpn=${WEAPON_LABEL[sk.weapon_type_id]}`:''}
+          ${sk.start_time||sk.end_time?` /time=${sk.start_time}-${sk.end_time}`:''}
+          ${sk.description ? `<div style="font-size:10px;opacity:0.7;margin-top:2px">${sk.description}</div>` : ''}
+        </div>`;
+      }).join('');
+      const elems = (b.element_ids||[]).map(e => `<span class="e${e}">${ELEMENT_LABEL[e]}</span>`).join(' ');
+      const wpns = (b.weapon_type_ids||[]).map(w => WEAPON_LABEL[w]).join('/');
+
+      $('detail').innerHTML = `
+        <img class="icon lg" src="${bgIcon(b.id)}" alt="${b.name}" onerror="this.style.display='none'">
+        <h2>${b.name}</h2>
+        <p><span class="rarity-${b.rarity}">${RARITY_LABEL[b.rarity]}</span> <small>· id ${b.id} · by ${b.author_name||'-'}</small></p>
+        ${elems||wpns ? `<p>限定: ${elems} ${wpns}</p>` : ''}
+        ${b.skill_effective_time ? `<p><span class="tag-badge">時間限定</span> ${b.skill_effective_time}</p>` : ''}
+        ${b.long_skill_effective_time ? `<p style="font-size:11px;opacity:0.8">${b.long_skill_effective_time}</p>` : ''}
+        <h3>スキル (${(b.skills||[]).length})</h3>
+        ${skills}
+        ${b.description ? `<details><summary>説明</summary><p class="profile-text">${b.description}</p></details>` : ''}`;
     }
     init();
   </script>
