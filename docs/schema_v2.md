@@ -405,7 +405,7 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复�
 
 ### 結婚 / LP（v2 修正 wiki [chara_training.md](chara_training.md) 漏项）
 
-**結婚倍率**（作用**攻防 HP BK speed 5 项**、wiki 漏 speed）：
+**結婚倍率**（作用**攻防 HP BK speed 5 项**）：
 
 | 状态 | 倍率 | 結晶 slot | max_lp |
 |---|---|---|---|
