@@ -60,8 +60,13 @@
         `${ELEMENT_LABEL[eid]||eid}: +${r.positive_value}/-${r.negative_value} (${r.rank_string})`).join('  ');
       const wa = Object.entries(s.weapon_affinity || {}).map(([wid, r]) =>
         `${WEAPON_LABEL[wid]||wid}: +${r.positive_value}/-${r.negative_value} (${r.rank_string})`).join('  ');
-      const skills = (s.skills || []).map((sk) =>
-        `<li><b>${sk.name}</b>: ${sk.parameter}/${sk.math_type}/${sk.value} range=${sk.range}<br><small>${sk.description||''}</small></li>`).join('');
+      // (隠し) 技能 displayable=false → 50% 透明度
+      const skills = (s.skills || []).map((sk) => {
+        const hidden = sk.displayable === false;
+        const style = hidden ? 'opacity:0.5' : '';
+        const badge = hidden ? '<span style="font-size:9px;opacity:0.7"> [隠]</span>' : '';
+        return `<li style="${style}"><b>${sk.name}</b>${badge}: ${sk.parameter}/${sk.math_type}/${sk.value} range=${sk.range}<br><small>${sk.description||''}</small></li>`;
+      }).join('');
       $('detail').innerHTML = `${s.texture_id ? imgWithFallback(soulIcon(s.texture_id), s.name) : ''}
         <h2>${s.name}</h2><p>${RARITY_LABEL[s.rarity]} / ${s.code} / id=${s.id}</p>
         <h3>属性相性</h3><p style="font-size:11px">${ea}</p>

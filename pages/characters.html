@@ -74,22 +74,50 @@
 
     function renderDetail(c) {
       if (!c) { $('detail').innerHTML = '<p style="opacity:0.6">魔剣を選択</p>'; return; }
+      // states 各 state 详细
       const states = Object.entries(c.states || {}).map(([name, st]) => {
         const stats = st.stats || {};
-        return `<details><summary><b>${EVOLVE_NAME[st.evolve_count]||name}</b> (variant ${st.variant_id})</summary>
-        <pre>HP:${stats.initial_hp}→${stats.max_hp} 攻:${stats.initial_attack}→${stats.max_attack} 防:${stats.initial_defense}→${stats.max_defense}
-BK:${stats.initial_break}→${stats.max_break} 速:${stats.initial_speed}→${stats.max_speed}
-熟度:${stats.max_mature} lv:${stats.initial_max_level}→${stats.max_max_level} LP:${stats.max_lp}</pre>
-        <p style="font-size:11px;opacity:0.7">${(st.weapon_skills||[]).map(s=>`<b>${s.name}</b>: ${s.parameter}/${s.math_type}/${s.value}${s.value_scaling?` (+${s.value_scaling}/熟度)`:''}<br>${s.description||''}`).join('<br><br>')}</p>
+        const skills = (st.weapon_skills || []).map(s => {
+          // souls 隠し 同策略: displayable=false 半透明 (chara weapon_skills 也有 displayable?)
+          // 暂时全显示
+          return `<li><b>${s.name}</b>: ${s.parameter}/${s.math_type}/${s.value}${s.value_scaling?` (+${s.value_scaling}/熟度)`:''}<br><small>${s.description||''}</small></li>`;
+        }).join('');
+        return `<details><summary><b>${EVOLVE_NAME[st.evolve_count]||name}</b> · variant ${st.variant_id} · slot ${stats.initial_slot||'-'}</summary>
+          <pre>HP : ${stats.initial_hp}→${stats.max_hp}
+攻撃力: ${stats.initial_attack}→${stats.max_attack}
+防御力: ${stats.initial_defense}→${stats.max_defense}
+BK : ${stats.initial_break}→${stats.max_break}
+速度: ${stats.initial_speed}→${stats.max_speed}
+熟度: max ${stats.max_mature} · lv ${stats.initial_max_level}→${stats.max_max_level} · LP ${stats.max_lp} · 結晶スロット ${stats.initial_slot}</pre>
+          <h3>スキル (${(st.weapon_skills||[]).length})</h3>
+          <ul style="font-size:11px;opacity:0.85">${skills}</ul>
         </details>`;
       }).join('');
+      // bd
       const bd = c.bd_skill;
-      const bdH = bd ? `<h3>BD</h3><b>${bd.name||bd.description||''}</b> cost ${bd.cost} / ${bd.hit_count} 連 / ${bd.range}<br><small>${(bd.effects||[]).map(e=>`${e.parameter} ${e.math_type} ${e.value}${e.duration_value?` ${e.duration_value}s`:''}`).join(' / ')}</small>` : '';
+      const bdEffects = bd ? (bd.effects||[]).map(e => `<li>${e.parameter} / ${e.math_type} / ${e.value}${e.duration_value?` · ${e.duration_value}s`:''}</li>`).join('') : '';
+      const bdH = bd ? `<h3>BD: ${bd.name||''}</h3>
+        <p style="font-size:11px">cost ${bd.cost} · ${bd.hit_count} 連 · ${bd.range}<br>${bd.description||''}</p>
+        <ul style="font-size:11px">${bdEffects}</ul>` : '';
+      // profile
+      const p = c.profile || {};
+      const profileH = `<h3>プロフィール</h3><pre>年齢: ${p.age||'-'}  身長: ${p.height||'-'}  体重: ${p.weight||'-'}
+B/W/H: ${p.three_size_b||'-'}/${p.three_size_w||'-'}/${p.three_size_h||'-'} (bust ${p.bust||'-'})
+CV: ${p.cv||'-'} (${p.cv_kana||''})
+${p.flavor_text||''}</pre>
+        ${p.intro?`<details><summary>自己紹介</summary><p style="font-size:11px;opacity:0.85">${p.intro}</p></details>`:''}
+        ${p.description?`<details><summary>魔剣説明</summary><p style="font-size:11px;opacity:0.85">${p.description}</p></details>`:''}`;
+      // tags badge
+      const tagsLabel = { 1:'時止め', 2:'麻痺', 3:'強制BK', 4:'弱体解除', 5:'BDバフ', 6:'AOE', 7:'13倍',
+        8:'回復', 9:'復活', 10:'BD回復', 11:'ルビー', 12:'ダメ上限', 13:'HIT', 14:'BDHIT' };
+      const tagsH = c.tags && c.tags.length
+        ? `<p>${c.tags.map(t => `<span class="ftog active" style="font-size:10px">${tagsLabel[t]||t}</span>`).join(' ')}</p>` : '';
       const v0 = c.states?.['通常']?.variant_id || c.states?.['改造']?.variant_id;
-      $('detail').innerHTML = `${v0 ? imgWithFallback(charaIcon(v0), c.name) : ''}
+      $('detail').innerHTML = `${v0 ? `<img src="${charaIcon(v0)}" alt="${c.name}" class="icon lg" onerror="this.style.display='none'">` : ''}
         <h2>${c.name}</h2>
         <p>${RARITY_LABEL[c.rarity]} / ${ELEMENT_LABEL[c.element_id]||''}${WEAPON_LABEL[c.weapon_type_id]||''} (base_id ${c.id})</p>
-        ${states}${bdH}`;
+        ${tagsH}
+        ${states}${bdH}${profileH}`;
     }
     init();
   </script>
