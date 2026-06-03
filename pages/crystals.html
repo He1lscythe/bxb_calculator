@@ -19,9 +19,7 @@
   <main>
     <aside>
       <h3>検索</h3><input type="text" id="search" placeholder="名前..." />
-      <h3>★</h3><div id="f-rarity"></div>
-      <h3>属性</h3><div id="f-element"></div>
-      <h3>武器</h3><div id="f-weapon"></div>
+      <div id="filters"></div>
       <p style="font-size:11px;opacity:0.6"><span id="count">-</span> 件</p>
     </aside>
     <section id="list"></section>
@@ -30,24 +28,22 @@
   <script type="module">
     import { loadCrystals } from '../shared/data-loader.js';
     import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
-    import * as fc from '../shared/filter-core.js';
+    import { applySpec, renderSpecFilters } from '../shared/filter-core.js';
+    import { crystalSpec } from '../shared/crystal-spec.js';
     import { crystalIcon, imgWithFallback } from '../shared/image-paths.js';
 
-    const state = { rarity: new Set(), element: new Set(), weapon: new Set(), search: '' };
+    const state = { search: '', sort: 'rarity', dir: 'desc' };
     let all = []; let selected = null;
     const $ = (id) => document.getElementById(id);
 
     async function init() {
       all = await loadCrystals();
-      fc.renderToggles($('f-rarity'), 'rarity', fc.rarityOptions(), state, render);
-      fc.renderToggles($('f-element'), 'element', fc.elementOptions(), state, render);
-      fc.renderToggles($('f-weapon'), 'weapon', fc.weaponTypeOptions(), state, render);
+      renderSpecFilters($('filters'), crystalSpec, state, render);
       $('search').oninput = (e) => { state.search = e.target.value; render(); };
       render();
     }
     function render() {
-      const fields = { rarity: 'rarity', element: 'element_id', weapon: 'weapon_type_id' };
-      const filtered = fc.applyFilterSort(all, state, fields, 'rarity', 'desc');
+      const filtered = applySpec(all, crystalSpec, state);
       $('count').textContent = filtered.length;
       $('list').innerHTML = filtered.slice(0, 500).map((c) => `<div class="item ${selected===c.id?'selected':''}" data-id="${c.id}">
         ${imgWithFallback(crystalIcon(c.id), c.name)}

@@ -19,7 +19,7 @@
   <main>
     <aside>
       <h3>検索</h3><input type="text" id="search" placeholder="名前..." />
-      <h3>★</h3><div id="f-rarity"></div>
+      <div id="filters"></div>
       <p style="font-size:11px;opacity:0.6"><span id="count">-</span> 件</p>
     </aside>
     <section id="list"></section>
@@ -28,21 +28,22 @@
   <script type="module">
     import { loadBladegraphs } from '../shared/data-loader.js';
     import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
-    import * as fc from '../shared/filter-core.js';
+    import { applySpec, renderSpecFilters } from '../shared/filter-core.js';
+    import { bgSpec } from '../shared/bg-spec.js';
     import { bgIcon, imgWithFallback } from '../shared/image-paths.js';
 
-    const state = { rarity: new Set(), search: '' };
+    const state = { search: '', sort: 'rarity', dir: 'desc' };
     let all = []; let selected = null;
     const $ = (id) => document.getElementById(id);
 
     async function init() {
       all = await loadBladegraphs();
-      fc.renderToggles($('f-rarity'), 'rarity', fc.rarityOptions(), state, render);
+      renderSpecFilters($('filters'), bgSpec, state, render);
       $('search').oninput = (e) => { state.search = e.target.value; render(); };
       render();
     }
     function render() {
-      const filtered = fc.applyFilterSort(all, state, { rarity: 'rarity' }, 'rarity', 'desc');
+      const filtered = applySpec(all, bgSpec, state);
       $('count').textContent = filtered.length;
       $('list').innerHTML = filtered.map((b) => `<div class="item ${selected===b.id?'selected':''}" data-id="${b.id}">
         ${imgWithFallback(bgIcon(b.id), b.name)}
