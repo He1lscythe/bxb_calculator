@@ -403,13 +403,17 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复�
 **不实现衰减**（docs §1.1.2 衰减率未公开）、UI 加 toggle、默认 on。
 作用：仅攻撃力（同 wiki "燃心" 概念、跟 server fold 的 BH multiplier 同源但简化为二态）。
 
-### 結婚 / LP（沿用 wiki [chara_training.md](chara_training.md)）
+### 結婚 / LP（v2 修正 wiki [chara_training.md](chara_training.md) 漏项）
 
-**結婚**：
-- 未結婚 ×1.00、結婚（花无）×1.03、結婚（花有）×1.05 — 作用攻防 HP BK 4 项
-- 結婚 → 結晶 slot +1
+**結婚倍率**（作用**攻防 HP BK speed 5 项**、wiki 漏 speed）：
 
-**LP**（剩余 LP / 总 LP）：
+| 状态 | 倍率 | 結晶 slot | max_lp |
+|---|---|---|---|
+| 未結婚 | ×1.00 | +0 | +0 |
+| 結婚（花无）| ×1.03 | +1 | +3 |
+| 結婚（花有）| ×1.05 | +1 | +3 |
+
+**LP**（剩余 LP / 总 LP、`max_lp` 来自 master + 結婚加成）：
 - 正常（> 1/2 LP）×1.0
 - 低 LP（≤ 1/2 LP）×1.1
 - 危機（≤ 1/4 LP）×1.5
