@@ -20,9 +20,7 @@
     <aside>
       <h3>検索</h3>
       <input type="text" id="search" placeholder="名前..." />
-      <h3>★</h3><div id="f-rarity"></div>
-      <h3>属性</h3><div id="f-element"></div>
-      <h3>武器</h3><div id="f-weapon"></div>
+      <div id="filters"></div>
       <p style="font-size:11px;opacity:0.6"><span id="count">-</span> 件</p>
     </aside>
     <section id="list"></section>
@@ -31,10 +29,11 @@
   <script type="module">
     import { loadCharacters } from '../shared/data-loader.js';
     import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL, EVOLVE_NAME } from '../shared/constants.js';
-    import * as fc from '../shared/filter-core.js';
+    import { applySpec, renderSpecFilters } from '../shared/filter-core.js';
+    import { charaSpec } from '../shared/chara-spec.js';
     import { charaIcon, imgWithFallback } from '../shared/image-paths.js';
 
-    const state = { rarity: new Set(), element: new Set(), weapon: new Set(), search: '' };
+    const state = { search: '', sort: 'sort_order', dir: 'desc' };
     let all = [];
     let selected = null;
 
@@ -42,16 +41,13 @@
 
     async function init() {
       all = await loadCharacters();
-      fc.renderToggles($('f-rarity'), 'rarity', fc.rarityOptions(), state, render);
-      fc.renderToggles($('f-element'), 'element', fc.elementOptions(), state, render);
-      fc.renderToggles($('f-weapon'), 'weapon', fc.weaponTypeOptions(), state, render);
+      renderSpecFilters($('filters'), charaSpec, state, render);
       $('search').oninput = (e) => { state.search = e.target.value; render(); };
       render();
     }
 
     function render() {
-      const fields = { rarity: 'rarity', element: 'element_id', weapon: 'weapon_type_id' };
-      const filtered = fc.applyFilterSort(all, state, fields, 'rarity', 'desc');
+      const filtered = applySpec(all, charaSpec, state);
       $('count').textContent = filtered.length;
       $('list').innerHTML = filtered.map((c) => {
         const v0 = c.states?.['通常']?.variant_id || c.states?.['改造']?.variant_id;

@@ -61,3 +61,87 @@ export const applyFilterSort = (items, state, fields, sortKey, sortDir) => {
   if (sortKey) out = out.slice().sort(buildComparator(sortKey, sortDir));
   return out;
 };
+
+// ============================================================
+// spec-driven filter — 通用 facet/sort spec、各 viewer module 用
+// spec = {
+//   facets: [{ key, label, options:[{id,label}], match(item, selectedIds) }],
+//   sorts: [{ key, label, getter(item) -> num }],
+// }
+// state = { [facet.key]: Set(id), search: str, sort: 'key', dir: 'asc'|'desc' }
+// ============================================================
+
+export const applySpec = (items, spec, state) => {
+  let out = items;
+  // facets
+  for (const f of spec.facets || []) {
+    const sel = state[f.key];
+    if (sel && sel.size > 0) {
+      out = out.filter((it) => f.match(it, sel));
+    }
+  }
+  // search
+  if (state.search) {
+    const s = state.search.toLowerCase();
+    out = out.filter((it) => (it.name || '').toLowerCase().includes(s));
+  }
+  // sort
+  if (state.sort && spec.sorts) {
+    const sort = spec.sorts.find((x) => x.key === state.sort);
+    if (sort) {
+      const mul = state.dir === 'asc' ? 1 : -1;
+      out = out.slice().sort((a, b) => (sort.getter(a) - sort.getter(b)) * mul);
+    }
+  }
+  return out;
+};
+
+export const renderSpecFilters = (container, spec, state, onchange) => {
+  if (!container) return;
+  container.innerHTML = '';
+  // sort dropdown
+  if (spec.sorts?.length) {
+    const sortBox = document.createElement('div');
+    sortBox.innerHTML = `<h3>並び替え</h3><div class="row">
+      <select id="sort-key" style="flex:1">${spec.sorts.map(s => `<option value="${s.key}" ${state.sort===s.key?'selected':''}>${s.label}</option>`).join('')}</select>
+      <select id="sort-dir"><option value="desc" ${state.dir==='desc'?'selected':''}>↓</option><option value="asc" ${state.dir==='asc'?'selected':''}>↑</option></select>
+    </div>`;
+    container.appendChild(sortBox);
+    sortBox.querySelector('#sort-key').onchange = (e) => { state.sort = e.target.value; onchange?.(); };
+    sortBox.querySelector('#sort-dir').onchange = (e) => { state.dir = e.target.value; onchange?.(); };
+  }
+  // facets
+  for (const f of spec.facets || []) {
+    const sset = state[f.key] ||= new Set();
+    const h = document.createElement('h3');
+    h.textContent = f.label;
+    container.appendChild(h);
+    const box = document.createElement('div');
+    container.appendChild(box);
+    for (const opt of f.options) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = opt.label;
+      btn.className = 'ftog' + (sset.has(opt.id) ? ' active' : '');
+      btn.onclick = () => {
+        if (sset.has(opt.id)) sset.delete(opt.id); else sset.add(opt.id);
+        btn.classList.toggle('active');
+        onchange?.();
+      };
+      box.appendChild(btn);
+    }
+  }
+  // reset
+  const reset = document.createElement('button');
+  reset.textContent = 'リセット';
+  reset.style.marginTop = '8px';
+  reset.onclick = () => {
+    for (const f of spec.facets || []) state[f.key]?.clear();
+    state.search = '';
+    const searchInput = document.querySelector('#search');
+    if (searchInput) searchInput.value = '';
+    onchange?.();
+    renderSpecFilters(container, spec, state, onchange);
+  };
+  container.appendChild(reset);
+};
