@@ -69,16 +69,22 @@
       const c = chars.find(x => x.id === cid);
       if (!c) return;
       const stateKey = $('state-pick').value || Object.keys(c.states)[0];
-      const result = calcHenseiStats(c, stateKey, {
-        lv: +$('lv').value || 1,
-        mature: +$('mature').value || 1,
-        awakening: +$('awk').value || 0,
-        rarity: c.rarity,
-        marriage: $('marriage').value,
-        bh_on: $('bh').checked,
-        lp: 999, max_lp: c.states[stateKey]?.stats?.max_lp || 9,
-        hp_percent: +$('hp_percent').value || 100,
-      });
+      // v2 stats-calc 新 API: team[3] array、含跨 slot buff stack
+      const team = [
+        {
+          chara: c, state: stateKey,
+          lv: +$('lv').value || 1,
+          mature: +$('mature').value || 1,
+          awakening: +$('awk').value || 0,
+          marriage: $('marriage').value,
+          bh_on: $('bh').checked,
+          lp: 999, max_lp: c.states[stateKey]?.stats?.max_lp || 9,
+          hp_percent: +$('hp_percent').value || 100,
+          // soul/crystals/bg/masou 暂 null、Phase 6.2 完整 UI 时再填
+        },
+        null, null,  // 其他 2 slot 空
+      ];
+      const result = calcHenseiStats(team, 0);
       if (!result) { $('stats-panel').innerHTML = '<p>無効な state</p>'; return; }
       $('stats-panel').innerHTML = `<h2>${c.name} (${stateKey})</h2>
         <p>${RARITY_LABEL[c.rarity]} / ${ELEMENT_LABEL[c.element_id]||''}${WEAPON_LABEL[c.weapon_type_id]||''}</p>
@@ -89,12 +95,13 @@
           <tr><td>防御力</td><td style="padding:2px 12px;text-align:right">${result.defense.toLocaleString()}</td></tr>
           <tr><td>ブレイク</td><td style="padding:2px 12px;text-align:right">${result.break.toLocaleString()}</td></tr>
           <tr><td>スピード</td><td style="padding:2px 12px;text-align:right">${result.speed}</td></tr>
+          <tr><td>ダメ上限</td><td style="padding:2px 12px;text-align:right">${result.damage_limit?.toLocaleString()||'-'}</td></tr>
         </table>
         <p style="font-size:11px;opacity:0.7;margin-top:12px">
-          結婚 ×${result.marriage_mult} / BH ×${result.bh} / LP ×${result.lp_mult}
+          結婚 ×${result.marriage_mult} / BH ×${result.bh} / LP ×${result.lp_mult} / Random ×${result.random_avg} (avg)
         </p>
         <p style="font-size:11px;opacity:0.5">
-          ⚠ v2 minimal hensei: 1 slot only、未含 buff (魂/結晶/魔装/bg)、未含 50 步 EAD pipeline、未含 HP-curve scale 精确公式
+          ⚠ v2 hensei: 1 slot demo (chara only)、soul/結晶/bg/魔装 picker 待 Phase 6.2 完整 UI
         </p>`;
     }
     init();
