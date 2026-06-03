@@ -1,0 +1,32 @@
+/* css/v2.css — v2 viewer 共享 minimal style */
+body { font-family: sans-serif; margin: 0; background: #1a1a2e; color: #e0e0e0; }
+header { padding: 8px 16px; background: #16213e; border-bottom: 1px solid #444; }
+header a { color: #4ecca3; margin-right: 12px; text-decoration: none; }
+header a:hover { text-decoration: underline; }
+main { display: grid; grid-template-columns: 200px 1fr 350px; gap: 8px; padding: 8px; min-height: 90vh; }
+@media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+aside, section, article { background: #16213e; padding: 8px; border-radius: 6px; overflow: auto; max-height: 90vh; }
+h2 { margin: 8px 0; font-size: 16px; }
+h3 { margin: 8px 0 4px; font-size: 13px; color: #4ecca3; }
+.ftog { padding: 4px 8px; margin: 2px; background: #1a1a2e; color: #ccc; border: 1px solid #444; cursor: pointer; border-radius: 3px; font-size: 11px; }
+.ftog.active { background: #4ecca3; color: #1a1a2e; }
+input[type=text], input[type=number] { padding: 4px; background: #1a1a2e; color: #fff; border: 1px solid #444; box-sizing: border-box; }
+input[type=text] { width: 100%; }
+.item { padding: 6px; margin: 2px 0; cursor: pointer; border-radius: 4px; display: flex; align-items: center; gap: 6px; }
+.item:hover { background: #1a1a2e; }
+.item.selected { background: #4ecca3; color: #1a1a2e; }
+.icon { width: 48px; height: 48px; object-fit: cover; border-radius: 4px; }
+.icon.lg { width: 96px; height: 96px; }
+.rarity-4 { color: #f1c40f; font-weight: bold; }
+.rarity-3 { color: #e74c3c; font-weight: bold; }
+.rarity-2 { color: #3498db; }
+.rarity-1 { color: #95a5a6; }
+pre { white-space: pre-wrap; font-size: 11px; }
+ul { padding-left: 16px; }
+details { margin: 4px 0; }
+summary { cursor: pointer; padding: 2px 0; }
+button { background: #4ecca3; color: #1a1a2e; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px; }
+button:hover { opacity: 0.85; }
+.stats-panel { background: #1a1a2e; padding: 8px; border-radius: 4px; font-family: monospace; font-size: 12px; }
+.row { display: flex; gap: 8px; align-items: center; margin: 4px 0; }
+label { font-size: 11px; opacity: 0.8; }
