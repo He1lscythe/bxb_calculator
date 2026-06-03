@@ -1,158 +1,258 @@
 <!-- AUTO-GENERATED from pages_src/hensei.html — DO NOT EDIT. Run `node scripts/build.js` to rebuild. -->
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BxB 編成 v2</title>
-  <link rel="stylesheet" href="../css/v2.css" />
-</head>
-<body>
-  <header>
-    <a href="characters.html">魔剣</a>
-    <a href="souls.html">ソウル</a>
-    <a href="crystals.html">記憶結晶</a>
-    <a href="bladegraphs.html">心象結晶</a>
-    <a href="hensei.html">編成</a>
-    <span class="version">v2 / hensei demo</span>
-  </header>
-  <main style="grid-template-columns: 1fr 380px;">
-    <section>
-      <h3>目標 slot</h3>
-      <div class="actions-row">
-        <button id="t0" class="ftog active">slot 1</button>
-        <button id="t1" class="ftog">slot 2</button>
-        <button id="t2" class="ftog">slot 3</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BxB 編成 v2</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/shared.css" />
+    <link rel="stylesheet" href="../css/hensei.css" />
+  </head>
+  <body>
+    <style>
+  #loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: #0f1117;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    transition: opacity 0.25s ease;
+  }
+  #loading-screen.done {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #loading-screen::before {
+    content: '';
+    width: 36px;
+    height: 36px;
+    border: 3px solid #2e3250;
+    border-top-color: #5b7fff;
+    border-radius: 50%;
+    animation: ls-spin 0.8s linear infinite;
+  }
+  #loading-screen::after {
+    content: '読み込み...';
+    color: #8890b0;
+    font-size: 13px;
+    font-family: 'Segoe UI', 'Yu Gothic', sans-serif;
+  }
+  @keyframes ls-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+<div id="loading-screen"></div>
+
+
+    <div id="page-wrap">
+      <div id="hensei-wrap" style="padding: 12px; overflow-y: auto;">
+
+        <!-- Team Size Bar -->
+        <div class="ts-bar" style="display:flex;gap:8px;align-items:center;margin-bottom:12px">
+          <span class="ts-label">編成サイズ</span>
+          <button class="size-btn" data-size="1">1</button>
+          <button class="size-btn active" data-size="3">3</button>
+          <span style="margin-left:auto;font-size:11px;color:var(--text2)">
+            目標 slot:
+            <button class="size-btn target-btn" data-target="0">slot 1</button>
+            <button class="size-btn target-btn" data-target="1">slot 2</button>
+            <button class="size-btn target-btn" data-target="2">slot 3</button>
+          </span>
+        </div>
+
+        <!-- 3 slot card -->
+        <div id="slots-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:12px"></div>
+
+        <!-- Stats panel -->
+        <div id="stats-wrap"></div>
       </div>
-      <div id="slots"></div>
-    </section>
-    <article id="stats-panel" class="stats-panel">
-      <p style="opacity:0.6">魔剣を選んで stats を計算</p>
-    </article>
-  </main>
-  <script type="module">
-    import { loadCharacters, loadSouls, loadCrystals, loadBladegraphs, loadMasou } from '../shared/data-loader.js';
-    import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
-    import { calcHenseiStats } from '../shared/stats-calc.js';
+    </div>
 
-    const $ = (id) => document.getElementById(id);
-    let chars = [], souls = [], crystals = [], bgs = [], masous = [];
-    let target = 0;
-    const team = [
-      { _empty: true },
-      { _empty: true },
-      { _empty: true },
-    ];
+    <script type="module">
+      import { loadCharacters, loadSouls, loadCrystals, loadBladegraphs, loadMasou } from '../shared/data-loader.js';
+      import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
+      import { charaIcon, soulIcon, bgIcon, crystalIcon } from '../shared/image-paths.js';
+      import { calcHenseiStats } from '../shared/stats-calc.js';
 
-    async function init() {
-      [chars, souls, crystals, bgs, masous] = await Promise.all([
-        loadCharacters(), loadSouls(), loadCrystals(), loadBladegraphs(), loadMasou(),
-      ]);
-      chars.sort((a, b) => (b.rarity - a.rarity) || a.id - b.id);
-      souls.sort((a, b) => (b.rarity - a.rarity) || a.id - b.id);
-      bgs.sort((a, b) => (b.rarity - a.rarity) || a.id - b.id);
-      [0, 1, 2].forEach(i => $('t' + i).onclick = () => { target = i; recalc(); renderTabs(); });
-      renderSlots();
-      renderTabs();
-    }
+      let chars = [], souls = [], crystals = [], bgs = [], masous = [];
+      let target = 0;
+      const team = [{}, {}, {}];
 
-    function renderTabs() {
-      [0, 1, 2].forEach(i => $('t' + i).classList.toggle('active', i === target));
-    }
+      const $ = (id) => document.getElementById(id);
 
-    function renderSlots() {
-      $('slots').innerHTML = [0, 1, 2].map(i => `<div class="slot-card ${i===target?'target':''}">
-        <h4>slot ${i+1}${i===target?' <span class="tag-badge">目標</span>':''}</h4>
-        <div class="row"><label>魔剣</label>
-          <select id="chara-${i}" style="flex:1"><option value="">--</option>${chars.map(c => `<option value="${c.id}">${RARITY_LABEL[c.rarity]} ${c.name}</option>`).join('')}</select>
-        </div>
-        <div class="row"><label>state</label>
-          <select id="state-${i}" style="flex:1"></select>
-        </div>
-        <div class="row"><label>熟度</label><input type="number" id="mature-${i}" value="99" min="1" />
-          <label>等級</label><input type="number" id="lv-${i}" value="255" min="1" />
-          <label>覚醒</label><input type="number" id="awk-${i}" value="0" min="0" /></div>
-        <div class="row">
-          <label><input type="checkbox" id="bh-${i}" checked /> BH ×1.3</label>
-          <label>結婚</label><select id="mar-${i}"><option value="none">無</option><option value="no_flower">花無</option><option value="with_flower" selected>花有</option></select>
-          <label>HP%</label><input type="number" id="hp-${i}" value="100" min="0" max="100" />
-        </div>
-        <div class="row"><label>ソウル</label>
-          <select id="soul-${i}" style="flex:1"><option value="">--</option>${souls.map(s => `<option value="${s.id}">${RARITY_LABEL[s.rarity]||''} ${s.name}</option>`).join('')}</select>
-        </div>
-        <div class="row"><label>心象結晶</label>
-          <select id="bg-${i}" style="flex:1"><option value="">--</option>${bgs.map(b => `<option value="${b.id}">${RARITY_LABEL[b.rarity]} ${b.name}</option>`).join('')}</select>
-        </div>
-      </div>`).join('');
-      [0,1,2].forEach(i => {
-        ['chara', 'state', 'mature', 'lv', 'awk', 'bh', 'mar', 'hp', 'soul', 'bg'].forEach(k => {
-          const el = $(`${k}-${i}`);
-          if (!el) return;
-          el.onchange = () => updateSlot(i);
-          if (el.type === 'number' || el.type === 'text') el.oninput = () => updateSlot(i);
+      async function init() {
+        [chars, souls, crystals, bgs, masous] = await Promise.all([
+          loadCharacters(), loadSouls(), loadCrystals(), loadBladegraphs(), loadMasou(),
+        ]);
+        chars.sort((a, b) => (b.rarity - a.rarity) || ((b.extras?.sort_order||0) - (a.extras?.sort_order||0)));
+        souls.sort((a, b) => (b.rarity||0) - (a.rarity||0));
+        bgs.sort((a, b) => (b.rarity||0) - (a.rarity||0));
+        document.querySelectorAll('.target-btn').forEach(btn => {
+          btn.onclick = () => { target = +btn.dataset.target; recalc(); updateTargetUI(); };
         });
-        $(`chara-${i}`).onchange = () => onCharaChange(i);
-      });
-    }
+        updateTargetUI();
+        renderSlots();
+        document.getElementById('loading-screen')?.remove();
+      }
 
-    function onCharaChange(i) {
-      const cid = +$(`chara-${i}`).value;
-      const c = chars.find(x => x.id === cid);
-      const sel = $(`state-${i}`);
-      if (!c) { sel.innerHTML = ''; updateSlot(i); return; }
-      const states = Object.keys(c.states || {});
-      sel.innerHTML = states.map(s => `<option value="${s}">${s}</option>`).join('');
-      updateSlot(i);
-    }
+      function updateTargetUI() {
+        document.querySelectorAll('.target-btn').forEach(b => b.classList.toggle('active', +b.dataset.target === target));
+        document.querySelectorAll('.slot-card').forEach((card, i) => card.classList.toggle('is-target', i === target));
+      }
 
-    function updateSlot(i) {
-      const cid = +$(`chara-${i}`).value;
-      const c = chars.find(x => x.id === cid);
-      if (!c) { team[i] = { _empty: true }; recalc(); return; }
-      const stateKey = $(`state-${i}`).value || Object.keys(c.states)[0];
-      const soulId = +$(`soul-${i}`).value;
-      const bgId = +$(`bg-${i}`).value;
-      team[i] = {
-        chara: c, state: stateKey,
-        lv: +$(`lv-${i}`).value || 1,
-        mature: +$(`mature-${i}`).value || 1,
-        awakening: +$(`awk-${i}`).value || 0,
-        marriage: $(`mar-${i}`).value,
-        bh_on: $(`bh-${i}`).checked,
-        lp: 999, max_lp: c.states[stateKey]?.stats?.max_lp || 9,
-        hp_percent: +$(`hp-${i}`).value || 100,
-        soul: souls.find(s => s.id === soulId) || null,
-        bg: bgs.find(b => b.id === bgId) || null,
-        crystals: [],   // Phase 7 加 picker
-        masou: null,
-      };
-      recalc();
-    }
+      function renderSlots() {
+        $('slots-grid').innerHTML = [0, 1, 2].map(i => {
+          const t = team[i] || {};
+          const c = t.chara;
+          return `<div class="slot-card ${i===target?'is-target':''}" data-slot="${i}">
+            <div class="slot-header">
+              <span class="slot-num">slot ${i+1}</span>
+              <span class="slot-chara-name">${c ? c.name : '<i style="opacity:0.5">未編成</i>'}</span>
+              ${c ? `<button class="slot-clear-btn" data-act="clear-${i}">解除</button>` : ''}
+            </div>
+            <div class="slot-body">
+              <div class="equip-section">
+                <div class="equip-label">魔剣</div>
+                <div class="picker-row">
+                  ${c ? `<img class="equip-icon" src="${charaIcon(c.states?.[t.state||'通常']?.variant_id)}" alt="" onerror="this.style.display='none'">` : '<div class="equip-icon-empty"></div>'}
+                  <div class="picker-wrap">
+                    <select class="picker-btn" data-act="chara-${i}">
+                      <option value="">-- 魔剣を選択 --</option>
+                      ${chars.map(ch => `<option value="${ch.id}" ${c?.id===ch.id?'selected':''}>${RARITY_LABEL[ch.rarity]} ${ch.name}</option>`).join('')}
+                    </select>
+                    ${c ? `<div class="picker-sub">${RARITY_LABEL[c.rarity]} <span class="elem-dot" style="background:var(--${['','fire','water','wind','light','dark','none'][c.element_id]||'none'})"></span>${ELEMENT_LABEL[c.element_id]||''}${WEAPON_LABEL[c.weapon_type_id]||''}</div>` : ''}
+                  </div>
+                </div>
+              </div>
 
-    function recalc() {
-      const t = team[target];
-      if (!t || t._empty) { $('stats-panel').innerHTML = '<p style="opacity:0.6">目標 slot の魔剣を選択</p>'; return; }
-      const r = calcHenseiStats(team, target);
-      if (!r) { $('stats-panel').innerHTML = '<p>計算失敗</p>'; return; }
-      const c = t.chara;
-      $('stats-panel').innerHTML = `<h2>${c.name}</h2>
-        <p><span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]}</span> · <span class="e${c.element_id}">${ELEMENT_LABEL[c.element_id]||''}</span> · ${WEAPON_LABEL[c.weapon_type_id]||''} (${t.state})</p>
-        <p style="font-size:11px;opacity:0.7">lv ${r.lv} / cap ${r.cap} / max with awk ${r.max_lv_with_awk}</p>
-        <table>
-          <tr><td>HP</td><td class="val">${r.hp.toLocaleString()}</td></tr>
-          <tr><td>攻撃力</td><td class="val atk">${r.attack.toLocaleString()}</td></tr>
-          <tr><td>防御力</td><td class="val">${r.defense.toLocaleString()}</td></tr>
-          <tr><td>ブレイク</td><td class="val">${r.break.toLocaleString()}</td></tr>
-          <tr><td>スピード</td><td class="val">${r.speed}</td></tr>
-          <tr><td>ダメ上限</td><td class="val">${r.damage_limit?.toLocaleString()||'-'}</td></tr>
-        </table>
-        <h3>倍率内訳</h3>
-        <p style="font-size:11px">結婚 ×${r.marriage_mult} · BH ×${r.bh} · LP ×${r.lp_mult} · soul affinity ×${r.affinity_mult.toFixed(3)} · Random ×${r.random_avg} (avg)</p>
-        <p style="font-size:10px;opacity:0.5">
-          ⚠ v2 hensei demo: 3 slot 跨 buff stack ✓ / soul/bg ✓ / 結晶 picker / 魔装 picker / 敵 bar / 紋章 / omoide → Phase 7 補
-        </p>`;
-    }
-    init();
-  </script>
-</body>
+              ${c ? `
+              <div class="equip-section">
+                <div class="equip-row">
+                  <label style="font-size:11px;width:50px">state</label>
+                  <select class="picker-btn" data-act="state-${i}" style="flex:1">
+                    ${Object.keys(c.states||{}).map(s => `<option value="${s}" ${t.state===s?'selected':''}>${s}</option>`).join('')}
+                  </select>
+                </div>
+                <div class="equip-row">
+                  <label style="font-size:11px;width:50px">熟度</label>
+                  <input type="number" data-act="mature-${i}" value="${t.mature||99}" min="1" max="${c.states?.[t.state]?.stats?.max_mature||99}" style="width:70px;padding:3px 6px;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:4px">
+                  <label style="font-size:11px;width:35px;margin-left:8px">lv</label>
+                  <input type="number" data-act="lv-${i}" value="${t.lv||255}" min="1" style="width:70px;padding:3px 6px;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:4px">
+                  <label style="font-size:11px;width:35px;margin-left:8px">覚醒</label>
+                  <input type="number" data-act="awk-${i}" value="${t.awakening||0}" min="0" style="width:50px;padding:3px 6px;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:4px">
+                </div>
+                <div class="equip-row">
+                  <label style="font-size:11px"><input type="checkbox" data-act="bh-${i}" ${t.bh_on!==false?'checked':''}> 燃心 ×1.3</label>
+                  <label style="font-size:11px;margin-left:8px">結婚</label>
+                  <select data-act="mar-${i}" style="padding:3px 6px;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:11px">
+                    <option value="none" ${t.marriage==='none'?'selected':''}>無</option>
+                    <option value="no_flower" ${t.marriage==='no_flower'?'selected':''}>花無</option>
+                    <option value="with_flower" ${(!t.marriage||t.marriage==='with_flower')?'selected':''}>花有</option>
+                  </select>
+                  <label style="font-size:11px;margin-left:8px">HP%</label>
+                  <input type="number" data-act="hp-${i}" value="${t.hp_percent??100}" min="0" max="100" style="width:50px;padding:3px 6px;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:4px">
+                </div>
+              </div>
+
+              <div class="equip-section">
+                <div class="equip-label">ソウル</div>
+                <div class="picker-row">
+                  ${t.soul ? `<img class="equip-icon" src="${soulIcon(t.soul.texture_id)}" alt="" onerror="this.style.display='none'">` : '<div class="equip-icon-empty"></div>'}
+                  <select class="picker-btn" data-act="soul-${i}">
+                    <option value="">-- ソウル --</option>
+                    ${souls.map(s => `<option value="${s.id}" ${t.soul?.id===s.id?'selected':''}>${RARITY_LABEL[s.rarity]||s.rarity+'★'} ${s.name}</option>`).join('')}
+                  </select>
+                </div>
+              </div>
+
+              <div class="equip-section">
+                <div class="equip-label">心象結晶</div>
+                <div class="picker-row">
+                  ${t.bg ? `<img class="equip-icon" src="${bgIcon(t.bg.id)}" alt="" onerror="this.style.display='none'">` : '<div class="equip-icon-empty"></div>'}
+                  <select class="picker-btn" data-act="bg-${i}">
+                    <option value="">-- 心象結晶 --</option>
+                    ${bgs.map(b => `<option value="${b.id}" ${t.bg?.id===b.id?'selected':''}>${b.rarity}★ ${b.name}</option>`).join('')}
+                  </select>
+                </div>
+              </div>
+              ` : ''}
+            </div>
+          </div>`;
+        }).join('');
+        bindSlotEvents();
+      }
+
+      function bindSlotEvents() {
+        document.querySelectorAll('[data-act]').forEach(el => {
+          const [act, i] = el.dataset.act.split('-');
+          const idx = +i;
+          const handler = () => updateSlot(idx, act, el);
+          if (el.tagName === 'SELECT' || el.type === 'checkbox') el.onchange = handler;
+          else el.oninput = handler;
+          if (act === 'clear') el.onclick = () => { team[idx] = {}; renderSlots(); recalc(); };
+        });
+      }
+
+      function updateSlot(i, act, el) {
+        const t = team[i] = team[i] || {};
+        if (act === 'chara') {
+          const cid = +el.value;
+          const c = chars.find(x => x.id === cid);
+          team[i] = c ? { chara: c, state: Object.keys(c.states||{})[0], mature: 99, lv: 255, awakening: 0, marriage: 'with_flower', bh_on: true, lp: 9, max_lp: 9, hp_percent: 100 } : {};
+          renderSlots();
+        } else if (act === 'state') t.state = el.value;
+        else if (act === 'mature') t.mature = +el.value;
+        else if (act === 'lv') t.lv = +el.value;
+        else if (act === 'awk') t.awakening = +el.value;
+        else if (act === 'bh') t.bh_on = el.checked;
+        else if (act === 'mar') t.marriage = el.value;
+        else if (act === 'hp') t.hp_percent = +el.value;
+        else if (act === 'soul') t.soul = souls.find(s => s.id === +el.value) || null;
+        else if (act === 'bg') t.bg = bgs.find(b => b.id === +el.value) || null;
+        recalc();
+      }
+
+      function recalc() {
+        const t = team[target];
+        if (!t?.chara) { $('stats-wrap').innerHTML = '<p style="color:var(--text2);padding:12px">目標 slot の魔剣を選択</p>'; return; }
+        const r = calcHenseiStats(team, target);
+        if (!r) { $('stats-wrap').innerHTML = '<p>計算失敗</p>'; return; }
+        const c = t.chara;
+        $('stats-wrap').innerHTML = `<div class="slot-card" style="max-width:520px;margin:0 auto">
+          <div class="slot-header">
+            <span class="slot-num">stats</span>
+            <span class="slot-chara-name">${c.name} (${t.state})</span>
+            <span class="slot-chara-meta">${RARITY_LABEL[c.rarity]} ${ELEMENT_LABEL[c.element_id]||''}${WEAPON_LABEL[c.weapon_type_id]||''}</span>
+          </div>
+          <div class="slot-body">
+            <table style="border-collapse:collapse;font-family:monospace;font-size:13px;width:100%">
+              <tr><td style="padding:3px 8px">HP</td><td style="padding:3px 8px;text-align:right">${r.hp.toLocaleString()}</td></tr>
+              <tr><td style="padding:3px 8px">攻撃力</td><td style="padding:3px 8px;text-align:right;color:#ffe066;font-weight:700">${r.attack.toLocaleString()}</td></tr>
+              <tr><td style="padding:3px 8px">防御力</td><td style="padding:3px 8px;text-align:right">${r.defense.toLocaleString()}</td></tr>
+              <tr><td style="padding:3px 8px">ブレイク力</td><td style="padding:3px 8px;text-align:right">${r.break.toLocaleString()}</td></tr>
+              <tr><td style="padding:3px 8px">速度</td><td style="padding:3px 8px;text-align:right">${r.speed}</td></tr>
+              <tr><td style="padding:3px 8px">ダメ上限</td><td style="padding:3px 8px;text-align:right">${r.damage_limit?.toLocaleString()||'-'}</td></tr>
+            </table>
+            <div style="font-size:11px;color:var(--text2);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
+              lv ${r.lv} / cap ${r.cap} / max ${r.max_lv_with_awk}<br>
+              結婚 ×${r.marriage_mult} · BH ×${r.bh} · LP ×${r.lp_mult} · soul ×${r.affinity_mult.toFixed(3)} · Random ×${r.random_avg}
+            </div>
+            <div style="font-size:10px;color:var(--text2);opacity:0.6;margin-top:6px">
+              ⚠ Phase 6 demo: chara/state/熟度/lv/awk/結婚/BH/HP%/soul/bg ✓ — 結晶 picker / 魔装 picker / 敵 bar / 紋章 / omoide → Phase 7
+            </div>
+          </div>
+        </div>`;
+      }
+      init();
+    </script>
+  </body>
 </html>

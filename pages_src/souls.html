@@ -1,112 +1,288 @@
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BxB ソウルデータベース v2</title>
-  <link rel="stylesheet" href="../css/v2.css" />
-</head>
-<body>
-  <header>
-    <a href="characters.html">魔剣</a>
-    <a href="souls.html">ソウル</a>
-    <a href="crystals.html">記憶結晶</a>
-    <a href="bladegraphs.html">心象結晶</a>
-    <a href="hensei.html">編成</a>
-    <span class="version">v2 / master_tables</span>
-  </header>
-  <main>
-    <aside>
-      <div class="search-row"><input type="text" id="search" placeholder="🔍 ソウル名で検索..." /></div>
-      <div id="filters"></div>
-      <p class="count-badge"><span id="count">-</span> 件</p>
-    </aside>
-    <section id="list"></section>
-    <article id="detail"><p style="opacity:0.6">ソウルを選択</p></article>
-  </main>
-  <script type="module">
-    import { loadSouls } from '../shared/data-loader.js';
-    import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
-    import { applySpec, renderSpecFilters } from '../shared/filter-core.js';
-    import { soulSpec } from '../shared/soul-spec.js';
-    import { soulIcon } from '../shared/image-paths.js';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BxB ソウルデータベース v2</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/shared.css" />
+    <link rel="stylesheet" href="../css/souls.css" />
+  </head>
+  <body>
+    {{include _loading.html}}
 
-    const state = { search: '', sort: 'rarity', dir: 'desc' };
-    let all = [], selected = null;
-    const $ = (id) => document.getElementById(id);
-
-    async function init() {
-      all = await loadSouls();
-      renderSpecFilters($('filters'), soulSpec, state, render);
-      $('search').oninput = (e) => { state.search = e.target.value; render(); };
-      render();
-    }
-
-    function render() {
-      const filtered = applySpec(all, soulSpec, state);
-      $('count').textContent = filtered.length;
-      $('list').innerHTML = filtered.slice(0, 600).map(s => `<div class="item ${selected===s.id?'selected':''}" data-id="${s.id}">
-        ${s.texture_id ? `<img class="icon" src="${soulIcon(s.texture_id)}" alt="" onerror="this.style.display='none'">` : '<div class="icon"></div>'}
-        <div class="meta">
-          <b>${s.name}</b>
-          <div class="badge-row">
-            <span class="rarity-${s.rarity}">${RARITY_LABEL[s.rarity]}</span> · ${s.code||''}
-            ${s.only_partner ? '<span class="tag-badge">P</span>' : ''}
+    <div id="page-wrap">
+      <div id="layout">
+        <div id="sidebar">
+          <div id="filters">
+            <div class="mob-search-row">
+              <input type="text" id="search" placeholder="🔍 ソウル名で検索..." />
+              <span id="soul-count-mob"></span>
+            </div>
+            <div class="actions-row">
+              <button class="filter-toggle-btn" id="filter-toggle-btn">▼ 絞り込み</button>
+              <select id="f-sort">
+                <option value="id">ID順</option>
+                <option value="rarity">レア度順</option>
+                <option value="max_level">最大Lv順</option>
+              </select>
+              <button id="sort-dir">↓</button>
+              <button class="btn-reset" id="btn-reset">リセット</button>
+            </div>
+            <div id="filters-body">
+              <div class="filter-section">
+                <div class="filter-label">レア度</div>
+                <div class="filter-toggles" id="f-rarity"></div>
+              </div>
+              <div class="filter-section">
+                <div class="filter-label">得意属性</div>
+                <div class="filter-toggles" id="f-element"></div>
+              </div>
+              <div class="filter-section">
+                <div class="filter-label">得意武器</div>
+                <div class="filter-toggles grid-6" id="f-weapon"></div>
+              </div>
+            </div>
+            <div id="soul-count"></div>
           </div>
+          <div id="soul-list"></div>
         </div>
-      </div>`).join('') + (filtered.length > 600 ? `<p style="opacity:0.6;padding:6px">+${filtered.length-600} more</p>` : '');
-      $('list').onclick = (e) => {
-        const el = e.target.closest('.item'); if (!el) return;
-        selected = +el.dataset.id;
-        renderDetail(all.find(x => x.id === selected));
-        render();
+
+        <div id="detail">
+          <div id="detail-mob-bar">
+            <button id="detail-mob-prev" aria-label="前へ">‹</button>
+            <span class="nav-label" id="detail-mob-label"></span>
+            <button id="detail-mob-close" aria-label="閉じる">✕</button>
+            <button id="detail-mob-next" aria-label="次へ">›</button>
+          </div>
+          <div id="placeholder">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <circle cx="12" cy="8" r="5" />
+              <path d="M3 21c0-4.4 4-8 9-8s9 3.6 9 8" />
+            </svg>
+            <p>左の一覧からソウルを選択してください</p>
+          </div>
+          <div id="soul-detail" style="display: none"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { loadSouls } from '../shared/data-loader.js';
+      import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
+      import { soulIcon } from '../shared/image-paths.js';
+
+      const RARITY_OPTS = [
+        { id: 5, label: '5★', color: '#ff55ff' },
+        { id: 4, label: 'SS', color: 'var(--ss)' },
+        { id: 3, label: 'S', color: 'var(--s)' },
+        { id: 2, label: 'AA', color: 'var(--aa)' },
+        { id: 1, label: 'A', color: 'var(--a)' },
+      ];
+      const ELEMENT_OPTS = [1,2,3,4,5,6].map(id => ({ id, label: ELEMENT_LABEL[id] }));
+      const WEAPON_OPTS = [1,2,3,4,5,6,7,8,9,10,11,12].map(id => ({ id, label: WEAPON_LABEL[id] }));
+
+      const filterState = {
+        rarity: new Set(), element: new Set(), weapon: new Set(),
+        search: '', sortKey: 'id', sortDir: 'desc',
       };
-    }
+      let allSouls = [];
+      let selectedId = null;
+      let filteredList = [];
 
-    function renderDetail(s) {
-      if (!s) return;
-      // affinity grid (6 elements + 12 weapons)
-      const ea = [1,2,3,4,5,6].map(eid => {
-        const r = s.element_affinity?.[String(eid)];
-        const p = r?.positive_value ?? 1;
-        const n = r?.negative_value ?? 1;
-        const cls = p > 1.1 ? 'pos' : (p < 0.9 ? 'neg' : '');
-        return `<div class="cell"><span class="label e${eid}">${ELEMENT_LABEL[eid]}</span>
-          <span class="${cls}">×${p.toFixed(2)}</span><br><span class="neg">/${n.toFixed(2)}</span></div>`;
-      }).join('');
-      const wa = [1,2,3,4,5,6,7,8,9,10,11,12].map(wid => {
-        const r = s.weapon_affinity?.[String(wid)];
-        const p = r?.positive_value ?? 1;
-        const n = r?.negative_value ?? 1;
-        const cls = p > 1.1 ? 'pos' : (p < 0.9 ? 'neg' : '');
-        return `<div class="cell"><span class="label">${WEAPON_LABEL[wid]}</span>
-          <span class="${cls}">×${p.toFixed(2)}</span><br><span class="neg">/${n.toFixed(2)}</span></div>`;
-      }).join('');
-      // skills (隠し displayable=false → 50% opacity)
-      const skills = (s.skills||[]).map(sk => {
-        const hidden = sk.displayable === false;
-        return `<div class="skill-bar ${hidden?'hidden-skill':''}">
-          <b>${sk.name||'-'}</b>${hidden?' <small>[隠]</small>':''}
-          <div><small>${sk.parameter}/${sk.math_type}/${sk.value} range=${sk.range}${sk.element_condition?` /elem=${ELEMENT_LABEL[sk.element_condition]}`:''}${sk.weapon_type_condition?` /wpn=${WEAPON_LABEL[sk.weapon_type_condition]}`:''}</small></div>
-          ${sk.description ? `<div style="font-size:10px;opacity:0.7;margin-top:2px">${sk.description}</div>` : ''}
-        </div>`;
-      }).join('');
+      const $ = (id) => document.getElementById(id);
 
-      $('detail').innerHTML = `
-        ${s.texture_id ? `<img class="icon lg" src="${soulIcon(s.texture_id)}" alt="${s.name}" onerror="this.style.display='none'">` : ''}
-        <h2>${s.name}</h2>
-        <p><span class="rarity-${s.rarity}">${RARITY_LABEL[s.rarity]}</span> · ${s.code||''} <small>· id ${s.id}</small></p>
-        ${s.only_partner?'<p><span class="tag-badge">パートナー専用</span></p>':''}
+      function renderToggles(container, opts, key) {
+        const el = $(container);
+        if (!el) return;
+        el.innerHTML = opts.map(o => {
+          const sty = o.color ? `style="color:${o.color}"` : '';
+          return `<button class="ftog" data-val="${o.id}" ${sty}>${o.label}</button>`;
+        }).join('');
+        el.querySelectorAll('.ftog').forEach(btn => {
+          btn.onclick = () => {
+            const v = +btn.dataset.val;
+            const s = filterState[key];
+            if (s.has(v)) s.delete(v); else s.add(v);
+            btn.classList.toggle('active');
+            applyFilters();
+          };
+        });
+      }
 
-        <h3>属性相性 (正/負)</h3>
-        <div class="affinity-grid">${ea}</div>
-        <h3>武器相性</h3>
-        <div class="affinity-grid">${wa}</div>
+      function applyFilters() {
+        const s = filterState;
+        filteredList = allSouls.filter(so => {
+          if (s.rarity.size && !s.rarity.has(so.rarity)) return false;
+          if (s.element.size) {
+            const ok = Object.entries(so.element_affinity || {}).some(([eid, r]) =>
+              s.element.has(+eid) && (r.positive_value || 0) > 1);
+            if (!ok) return false;
+          }
+          if (s.weapon.size) {
+            const ok = Object.entries(so.weapon_affinity || {}).some(([wid, r]) =>
+              s.weapon.has(+wid) && (r.positive_value || 0) > 1);
+            if (!ok) return false;
+          }
+          if (s.search) {
+            const q = s.search.toLowerCase();
+            if (!(so.name||'').toLowerCase().includes(q) &&
+                !(so.kana||'').toLowerCase().includes(q) &&
+                !(so.code||'').toLowerCase().includes(q)) return false;
+          }
+          return true;
+        });
+        const mul = s.sortDir === 'asc' ? 1 : -1;
+        filteredList.sort((a, b) => ((a[s.sortKey] ?? 0) - (b[s.sortKey] ?? 0)) * mul);
+        renderList();
+      }
 
-        <h3>スキル (${(s.skills||[]).length})</h3>
-        ${skills}`;
-    }
-    init();
-  </script>
-</body>
+      function renderList() {
+        $('soul-list').innerHTML = filteredList.map(so => {
+          const ge = Object.entries(so.element_affinity||{}).filter(([_, r]) => (r.positive_value||0) > 1).map(([eid]) => ELEMENT_LABEL[eid]).join('');
+          const gw = Object.entries(so.weapon_affinity||{}).filter(([_, r]) => (r.positive_value||0) > 1).map(([wid]) => WEAPON_LABEL[wid]).join('');
+          return `<div class="soul-item ${selectedId===so.id?'active':''}" data-id="${so.id}">
+            ${so.texture_id ? `<img class="soul-thumb" src="${soulIcon(so.texture_id)}" alt="" onerror="this.style.display='none'">` : ''}
+            <div class="soul-info">
+              <div class="soul-name">${so.name}</div>
+              <div class="soul-meta">
+                <span class="rarity-${so.rarity}">${RARITY_LABEL[so.rarity]||so.rarity}</span>
+                ${so.code ? `<span class="soul-code">${so.code}</span>` : ''}
+                <span class="aff-elem">${ge}</span>
+                <span class="aff-wpn">${gw}</span>
+              </div>
+            </div>
+          </div>`;
+        }).join('');
+        $('soul-count').textContent = `${filteredList.length} 件`;
+        $('soul-count-mob').textContent = `${filteredList.length}`;
+        $('soul-list').onclick = (e) => {
+          const el = e.target.closest('.soul-item');
+          if (!el) return;
+          selectSoul(+el.dataset.id);
+        };
+      }
+
+      function selectSoul(id) {
+        selectedId = id;
+        const so = allSouls.find(x => x.id === id);
+        if (!so) return;
+        renderDetail(so);
+        renderList();
+        $('placeholder').style.display = 'none';
+        $('soul-detail').style.display = 'block';
+        $('detail').classList.add('show-mob');
+      }
+
+      function renderDetail(so) {
+        const ea = [1,2,3,4,5,6].map(eid => {
+          const r = so.element_affinity?.[String(eid)] || {};
+          const p = r.positive_value ?? 1;
+          const n = r.negative_value ?? 1;
+          const cls = p > 1.1 ? 'aff-good' : (p < 0.9 ? 'aff-bad' : 'aff-mid');
+          return `<div class="aff-cell ${cls}">
+            <div class="aff-label elem-${eid}">${ELEMENT_LABEL[eid]}</div>
+            <div class="aff-pos">×${p.toFixed(2)}</div>
+            <div class="aff-neg">/${n.toFixed(2)}</div>
+          </div>`;
+        }).join('');
+        const wa = [1,2,3,4,5,6,7,8,9,10,11,12].map(wid => {
+          const r = so.weapon_affinity?.[String(wid)] || {};
+          const p = r.positive_value ?? 1;
+          const n = r.negative_value ?? 1;
+          const cls = p > 1.1 ? 'aff-good' : (p < 0.9 ? 'aff-bad' : 'aff-mid');
+          return `<div class="aff-cell ${cls}">
+            <div class="aff-label">${WEAPON_LABEL[wid]}</div>
+            <div class="aff-pos">×${p.toFixed(2)}</div>
+            <div class="aff-neg">/${n.toFixed(2)}</div>
+          </div>`;
+        }).join('');
+        const skills = (so.skills||[]).map(sk => {
+          const hidden = sk.displayable === false;
+          return `<div class="soul-skill ${hidden?'hidden-skill':''}">
+            <div class="skill-head">
+              <span class="skill-name">${sk.name||'-'}</span>
+              ${hidden ? '<span class="skill-hide">[隠]</span>' : ''}
+            </div>
+            <div class="skill-params">
+              <span class="param-tag">${sk.parameter}</span>
+              <span>${sk.math_type||''}</span>
+              <span>${sk.value??''}</span>
+              <span>range=${sk.range||'-'}</span>
+              ${sk.element_condition ? `<span class="elem-${sk.element_condition}">elem=${ELEMENT_LABEL[sk.element_condition]}</span>` : ''}
+              ${sk.weapon_type_condition ? `<span>wpn=${WEAPON_LABEL[sk.weapon_type_condition]}</span>` : ''}
+            </div>
+            ${sk.description ? `<div class="skill-desc">${sk.description}</div>` : ''}
+          </div>`;
+        }).join('');
+
+        $('soul-detail').innerHTML = `
+          <div class="soul-header">
+            ${so.texture_id ? `<img class="soul-icon" src="${soulIcon(so.texture_id)}" alt="${so.name}" onerror="this.style.display='none'">` : ''}
+            <div class="soul-title">
+              <h2>${so.name}</h2>
+              <div class="soul-meta-line">
+                <span class="rarity-${so.rarity}">${RARITY_LABEL[so.rarity]||so.rarity}★</span>
+                <span class="soul-code">${so.code||''}</span>
+                <span class="soul-id">id ${so.id}</span>
+                ${so.only_partner ? '<span class="tag-badge">パートナー専用</span>' : ''}
+                ${so.max_level ? `<span>Lv${so.max_level}</span>` : ''}
+              </div>
+            </div>
+          </div>
+          <h3 class="section-title">属性相性 (×正値 / 負値)</h3>
+          <div class="affinity-grid">${ea}</div>
+          <h3 class="section-title">武器相性</h3>
+          <div class="affinity-grid affinity-grid-12">${wa}</div>
+          <h3 class="section-title">スキル (${(so.skills||[]).length})</h3>
+          <div class="skills-list">${skills}</div>`;
+      }
+
+      function resetFilters() {
+        ['rarity', 'element', 'weapon'].forEach(k => filterState[k].clear());
+        filterState.search = '';
+        $('search').value = '';
+        document.querySelectorAll('.ftog.active').forEach(b => b.classList.remove('active'));
+        applyFilters();
+      }
+      function toggleSortDir() {
+        filterState.sortDir = filterState.sortDir === 'desc' ? 'asc' : 'desc';
+        $('sort-dir').textContent = filterState.sortDir === 'desc' ? '↓' : '↑';
+        applyFilters();
+      }
+      function navSoul(dir) {
+        if (!filteredList.length) return;
+        const idx = filteredList.findIndex(s => s.id === selectedId);
+        const next = (idx + dir + filteredList.length) % filteredList.length;
+        selectSoul(filteredList[next].id);
+      }
+      function closeDetailMob() {
+        $('detail').classList.remove('show-mob');
+        selectedId = null;
+        $('placeholder').style.display = 'block';
+        $('soul-detail').style.display = 'none';
+        renderList();
+      }
+
+      async function init() {
+        allSouls = await loadSouls();
+        renderToggles('f-rarity', RARITY_OPTS, 'rarity');
+        renderToggles('f-element', ELEMENT_OPTS, 'element');
+        renderToggles('f-weapon', WEAPON_OPTS, 'weapon');
+        $('search').oninput = (e) => { filterState.search = e.target.value; applyFilters(); };
+        $('f-sort').onchange = (e) => { filterState.sortKey = e.target.value; applyFilters(); };
+        $('sort-dir').onclick = toggleSortDir;
+        $('btn-reset').onclick = resetFilters;
+        $('filter-toggle-btn').onclick = () => $('filters-body').classList.toggle('open');
+        $('detail-mob-prev').onclick = () => navSoul(-1);
+        $('detail-mob-next').onclick = () => navSoul(1);
+        $('detail-mob-close').onclick = closeDetailMob;
+        applyFilters();
+        document.getElementById('loading-screen')?.remove();
+      }
+      init();
+    </script>
+  </body>
 </html>

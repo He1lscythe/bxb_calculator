@@ -1,102 +1,259 @@
 <!-- AUTO-GENERATED from pages_src/crystals.html — DO NOT EDIT. Run `node scripts/build.js` to rebuild. -->
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BxB 記憶結晶データベース v2</title>
-  <link rel="stylesheet" href="../css/v2.css" />
-</head>
-<body>
-  <header>
-    <a href="characters.html">魔剣</a>
-    <a href="souls.html">ソウル</a>
-    <a href="crystals.html">記憶結晶</a>
-    <a href="bladegraphs.html">心象結晶</a>
-    <a href="hensei.html">編成</a>
-    <span class="version">v2 / master_tables</span>
-  </header>
-  <main>
-    <aside>
-      <div class="search-row"><input type="text" id="search" placeholder="🔍 結晶名で検索..." /></div>
-      <div id="filters"></div>
-      <p class="count-badge"><span id="count">-</span> 件</p>
-    </aside>
-    <section id="list"></section>
-    <article id="detail"><p style="opacity:0.6">結晶を選択</p></article>
-  </main>
-  <script type="module">
-    import { loadCrystals } from '../shared/data-loader.js';
-    import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
-    import { applySpec, renderSpecFilters } from '../shared/filter-core.js';
-    import { crystalSpec } from '../shared/crystal-spec.js';
-    import { crystalIcon } from '../shared/image-paths.js';
-
-    const state = { search: '', sort: 'rarity', dir: 'desc' };
-    let all = [], selected = null;
-    const $ = (id) => document.getElementById(id);
-
-    async function init() {
-      all = await loadCrystals();
-      renderSpecFilters($('filters'), crystalSpec, state, render);
-      $('search').oninput = (e) => { state.search = e.target.value; render(); };
-      render();
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BxB 記憶結晶データベース v2</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/shared.css" />
+    <link rel="stylesheet" href="../css/crystals.css" />
+  </head>
+  <body>
+    <style>
+  #loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: #0f1117;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    transition: opacity 0.25s ease;
+  }
+  #loading-screen.done {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #loading-screen::before {
+    content: '';
+    width: 36px;
+    height: 36px;
+    border: 3px solid #2e3250;
+    border-top-color: #5b7fff;
+    border-radius: 50%;
+    animation: ls-spin 0.8s linear infinite;
+  }
+  #loading-screen::after {
+    content: '読み込み...';
+    color: #8890b0;
+    font-size: 13px;
+    font-family: 'Segoe UI', 'Yu Gothic', sans-serif;
+  }
+  @keyframes ls-spin {
+    to {
+      transform: rotate(360deg);
     }
+  }
+</style>
+<div id="loading-screen"></div>
 
-    function render() {
-      const filtered = applySpec(all, crystalSpec, state);
-      $('count').textContent = filtered.length;
-      $('list').innerHTML = filtered.slice(0, 500).map(c => `<div class="item ${selected===c.id?'selected':''}" data-id="${c.id}">
-        <img class="icon" src="${crystalIcon(c.id)}" alt="" onerror="this.style.display='none'">
-        <div class="meta">
-          <b>${c.name}</b>
-          <div class="badge-row">
-            <span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]}</span>
-            <span class="e${c.element_id}">${ELEMENT_LABEL[c.element_id]||''}</span>
-            ${WEAPON_LABEL[c.weapon_type_id]||''}
-            <small>· ${c.parameter}</small>
+
+    <div id="page-wrap">
+      <div id="content">
+        <div id="filters">
+          <div class="mob-search-row">
+            <input type="text" id="search" placeholder="🔍 結晶名で検索..." />
+            <span id="crystal-count-mob"></span>
+          </div>
+          <div class="mob-toolbar">
+            <button class="filter-toggle-btn" id="filter-toggle-btn">▼ 絞り込み</button>
+            <button class="toolbar-btn" id="btn-expand">全展開</button>
+            <button class="toolbar-btn" id="btn-collapse">全収起</button>
+            <button class="toolbar-btn" id="btn-reset">リセット</button>
+          </div>
+          <div id="filters-body">
+            <div class="filter-row2">
+              <div class="filter-section">
+                <div class="filter-label">レア度</div>
+                <div class="filter-toggles" id="f-rarity"></div>
+              </div>
+              <div class="filter-section">
+                <div class="filter-label">属性</div>
+                <div class="filter-toggles" id="f-element"></div>
+              </div>
+            </div>
+            <div class="filter-section">
+              <div class="filter-label">武器種</div>
+              <div class="filter-toggles" id="f-weapon"></div>
+            </div>
+            <div class="filter-section">
+              <div class="filter-label">効果</div>
+              <div class="filter-toggles" id="f-parameter"></div>
+            </div>
+          </div>
+          <div class="desktop-bottom">
+            <div id="crystal-count"></div>
+            <div style="display: flex; gap: 6px">
+              <button class="toolbar-btn" id="btn-expand-d">全展開</button>
+              <button class="toolbar-btn" id="btn-collapse-d">全収起</button>
+              <button class="toolbar-btn" id="btn-reset-d">リセット</button>
+            </div>
           </div>
         </div>
-      </div>`).join('') + (filtered.length > 500 ? `<p style="opacity:0.6;padding:6px">+${filtered.length-500} more (絞り込んでください)</p>` : '');
-      $('list').onclick = (e) => {
-        const el = e.target.closest('.item'); if (!el) return;
-        selected = +el.dataset.id;
-        renderDetail(all.find(x => x.id === selected));
-        render();
+        <div id="crystal-list"></div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { loadCrystals } from '../shared/data-loader.js';
+      import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
+      import { crystalIcon } from '../shared/image-paths.js';
+
+      const RARITY_OPTS = [
+        { id: 6, label: '6★' }, { id: 5, label: '5★' },
+        { id: 4, label: 'SS', color: 'var(--ss)' },
+        { id: 3, label: 'S', color: 'var(--s)' },
+        { id: 2, label: 'AA', color: 'var(--aa)' },
+        { id: 1, label: 'A', color: 'var(--a)' },
+      ];
+      const ELEMENT_OPTS = [1,2,3,4,5,6].map(id => ({ id, label: ELEMENT_LABEL[id] }));
+      const WEAPON_OPTS = [1,2,3,4,5,6,7,8,9,10,11,12].map(id => ({ id, label: WEAPON_LABEL[id] }));
+      const PARAM_OPTS = [
+        { id: 'Attack', label: '攻撃' }, { id: 'Defense', label: '防御' },
+        { id: 'HP', label: 'HP' }, { id: 'Speed', label: '速度' },
+        { id: 'MotionSpeed', label: '攻速' }, { id: 'GuardBreak', label: 'BK' },
+        { id: 'BlazeAttack', label: 'BD攻撃' }, { id: 'DamageLimitBreak', label: 'ダメ上限' },
+      ];
+
+      const filterState = {
+        rarity: new Set(), element: new Set(), weapon: new Set(), parameter: new Set(),
+        search: '', expanded: new Set(),
       };
-    }
+      let allCrystals = [];
+      let filteredList = [];
 
-    function renderDetail(c) {
-      if (!c) return;
-      const mx = c.max_value !== null ? `${c.initial_value} ~ ${c.max_value}` : `${c.initial_value} ~ <i style="opacity:0.5">(max 未取得)</i>`;
-      // 同名隠し (master 多 effect 拆成多 entry、保持单 bunrui)
-      const sameName = all.filter(x => x.name === c.name && x.id !== c.id).slice(0, 5);
-      const subH = sameName.length ? `<h3>同名 (隠し)</h3>
-        ${sameName.map(x => `<div class="skill-bar hidden-skill">
-          <b>${x.parameter}</b> / ${x.math_type||'(NoEffect)'} / ${x.initial_value}${x.max_value?'→'+x.max_value:''}
-        </div>`).join('')}` : '';
+      const $ = (id) => document.getElementById(id);
 
-      $('detail').innerHTML = `
-        <img class="icon lg" src="${crystalIcon(c.id)}" alt="${c.name}" onerror="this.style.display='none'">
-        <h2>${c.name}</h2>
-        <p><span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]}</span> · <span class="e${c.element_id}">${ELEMENT_LABEL[c.element_id]||''}</span> · ${WEAPON_LABEL[c.weapon_type_id]||''} <small>· id ${c.id}</small></p>
-        <h3>効果</h3>
-        <table class="stats-table">
-          <tr><th>parameter</th><td>${c.parameter}</td></tr>
-          <tr><th>math_type</th><td>${c.math_type||'<i>(NoEffect)</i>'}</td></tr>
-          <tr><th>倍率</th><td>${mx}</td></tr>
-          <tr><th>等級上限</th><td>${c.max_level}</td></tr>
-          <tr><th>初期 rank</th><td>${c.initial_value_rank||'-'}</td></tr>
-        </table>
-        <h3>重量/純度 (Phase 7 edit 手動添加)</h3>
-        <table class="stats-table">
-          <tr><th>weight_step</th><td><i style="opacity:0.5">- (解包未提供)</i></td></tr>
-          <tr><th>purity_step</th><td><i style="opacity:0.5">- (解包未提供)</i></td></tr>
-        </table>
-        ${c.description ? `<p class="profile-text">${c.description}</p>` : ''}
-        ${subH}`;
-    }
-    init();
-  </script>
-</body>
+      function renderToggles(container, opts, key) {
+        const el = $(container);
+        if (!el) return;
+        el.innerHTML = opts.map(o => {
+          const sty = o.color ? `style="color:${o.color}"` : '';
+          return `<button class="ftog" data-val="${o.id}" ${sty}>${o.label}</button>`;
+        }).join('');
+        el.querySelectorAll('.ftog').forEach(btn => {
+          btn.onclick = () => {
+            const v = btn.dataset.val;
+            const val = (isNaN(+v) || key === 'parameter') ? v : +v;
+            const s = filterState[key];
+            if (s.has(val)) s.delete(val); else s.add(val);
+            btn.classList.toggle('active');
+            applyFilters();
+          };
+        });
+      }
+
+      function applyFilters() {
+        const s = filterState;
+        filteredList = allCrystals.filter(c => {
+          if (s.rarity.size && !s.rarity.has(c.rarity)) return false;
+          if (s.element.size && !s.element.has(c.element_id)) return false;
+          if (s.weapon.size && !s.weapon.has(c.weapon_type_id)) return false;
+          if (s.parameter.size && !s.parameter.has(c.parameter)) return false;
+          if (s.search) {
+            const q = s.search.toLowerCase();
+            if (!(c.name||'').toLowerCase().includes(q)) return false;
+          }
+          return true;
+        });
+        filteredList.sort((a, b) => (b.rarity - a.rarity) || a.id - b.id);
+        renderList();
+      }
+
+      function renderList() {
+        $('crystal-list').innerHTML = filteredList.slice(0, 500).map(c => {
+          const mx = c.max_value != null ? `${c.initial_value}~${c.max_value}` : `${c.initial_value}~?`;
+          const expanded = filterState.expanded.has(c.id);
+          return `<div class="cr-row ${expanded?'expanded':''}" data-id="${c.id}">
+            <div class="cr-summary">
+              <img class="cr-thumb" src="${crystalIcon(c.id)}" alt="" onerror="this.style.display='none'">
+              <div class="cr-name">${c.name}</div>
+              <div class="cr-meta">
+                <span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]||c.rarity+'★'}</span>
+                <span class="elem-${c.element_id}">${ELEMENT_LABEL[c.element_id]||''}</span>
+                ${WEAPON_LABEL[c.weapon_type_id]||''}
+                <span class="param-tag">${c.parameter}</span>
+                <span class="cr-val">${mx}</span>
+              </div>
+            </div>
+            ${expanded ? renderDetail(c) : ''}
+          </div>`;
+        }).join('') + (filteredList.length > 500 ? `<div class="more-msg">+${filteredList.length-500} more (絞り込んでください)</div>` : '');
+        $('crystal-count').textContent = `${filteredList.length} 件`;
+        $('crystal-count-mob').textContent = `${filteredList.length}`;
+        $('crystal-list').onclick = (e) => {
+          const row = e.target.closest('.cr-row');
+          if (!row) return;
+          const id = +row.dataset.id;
+          if (filterState.expanded.has(id)) filterState.expanded.delete(id);
+          else filterState.expanded.add(id);
+          renderList();
+        };
+      }
+
+      function renderDetail(c) {
+        const mx = c.max_value != null ? `${c.initial_value} ~ ${c.max_value}` : `${c.initial_value} ~ <i>(max 未取得)</i>`;
+        const sameName = allCrystals.filter(x => x.name === c.name && x.id !== c.id).slice(0, 5);
+        const subH = sameName.length ? `<div class="cr-sub-section">
+          <div class="cr-sub-title">同名 (隠し)</div>
+          ${sameName.map(x => `<div class="cr-sub-row hidden-skill">
+            <b>${x.parameter}</b> / ${x.math_type||'(NoEffect)'} / ${x.initial_value}${x.max_value?'→'+x.max_value:''}
+          </div>`).join('')}
+        </div>` : '';
+        return `<div class="cr-detail">
+          <table class="cr-stats">
+            <tr><th>parameter</th><td><span class="param-tag">${c.parameter}</span></td>
+                <th>math_type</th><td>${c.math_type||'<i>(NoEffect)</i>'}</td></tr>
+            <tr><th>倍率</th><td colspan="3">${mx}</td></tr>
+            <tr><th>等級上限</th><td>${c.max_level}</td>
+                <th>初期 rank</th><td>${c.initial_value_rank||'-'}</td></tr>
+            <tr><th>重量段</th><td><i style="opacity:0.5">解包未提供 (Phase 7 edit)</i></td>
+                <th>純度段</th><td><i style="opacity:0.5">同上</i></td></tr>
+          </table>
+          ${c.description ? `<div class="cr-desc">${c.description}</div>` : ''}
+          ${subH}
+        </div>`;
+      }
+
+      function expandAll() {
+        filteredList.slice(0, 500).forEach(c => filterState.expanded.add(c.id));
+        renderList();
+      }
+      function collapseAll() {
+        filterState.expanded.clear();
+        renderList();
+      }
+      function resetFilters() {
+        ['rarity', 'element', 'weapon', 'parameter'].forEach(k => filterState[k].clear());
+        filterState.search = '';
+        $('search').value = '';
+        document.querySelectorAll('.ftog.active').forEach(b => b.classList.remove('active'));
+        applyFilters();
+      }
+
+      async function init() {
+        allCrystals = await loadCrystals();
+        renderToggles('f-rarity', RARITY_OPTS, 'rarity');
+        renderToggles('f-element', ELEMENT_OPTS, 'element');
+        renderToggles('f-weapon', WEAPON_OPTS, 'weapon');
+        renderToggles('f-parameter', PARAM_OPTS, 'parameter');
+        $('search').oninput = (e) => { filterState.search = e.target.value; applyFilters(); };
+        $('btn-expand').onclick = expandAll;
+        $('btn-collapse').onclick = collapseAll;
+        $('btn-reset').onclick = resetFilters;
+        $('btn-expand-d').onclick = expandAll;
+        $('btn-collapse-d').onclick = collapseAll;
+        $('btn-reset-d').onclick = resetFilters;
+        $('filter-toggle-btn').onclick = () => $('filters-body').classList.toggle('open');
+        applyFilters();
+        document.getElementById('loading-screen')?.remove();
+      }
+      init();
+    </script>
+  </body>
 </html>

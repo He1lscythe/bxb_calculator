@@ -1,100 +1,203 @@
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BxB 心象結晶データベース v2</title>
-  <link rel="stylesheet" href="../css/v2.css" />
-</head>
-<body>
-  <header>
-    <a href="characters.html">魔剣</a>
-    <a href="souls.html">ソウル</a>
-    <a href="crystals.html">記憶結晶</a>
-    <a href="bladegraphs.html">心象結晶</a>
-    <a href="hensei.html">編成</a>
-    <span class="version">v2 / master_tables</span>
-  </header>
-  <main>
-    <aside>
-      <div class="search-row"><input type="text" id="search" placeholder="🔍 心象結晶名で検索..." /></div>
-      <div id="filters"></div>
-      <p class="count-badge"><span id="count">-</span> 件</p>
-    </aside>
-    <section id="list"></section>
-    <article id="detail"><p style="opacity:0.6">心象結晶を選択</p></article>
-  </main>
-  <script type="module">
-    import { loadBladegraphs } from '../shared/data-loader.js';
-    import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
-    import { applySpec, renderSpecFilters } from '../shared/filter-core.js';
-    import { bgSpec } from '../shared/bg-spec.js';
-    import { bgIcon } from '../shared/image-paths.js';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BxB 心象結晶データベース v2</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/shared.css" />
+    <link rel="stylesheet" href="../css/bladegraphs.css" />
+  </head>
+  <body>
+    {{include _loading.html}}
 
-    const state = { search: '', sort: 'rarity', dir: 'desc' };
-    let all = [], selected = null;
-    const $ = (id) => document.getElementById(id);
-
-    async function init() {
-      all = await loadBladegraphs();
-      renderSpecFilters($('filters'), bgSpec, state, render);
-      $('search').oninput = (e) => { state.search = e.target.value; render(); };
-      render();
-    }
-
-    function render() {
-      const filtered = applySpec(all, bgSpec, state);
-      $('count').textContent = filtered.length;
-      $('list').innerHTML = filtered.slice(0, 600).map(b => {
-        const elems = (b.element_ids||[]).map(e => `<span class="e${e}">${ELEMENT_LABEL[e]}</span>`).join('');
-        const wpns = (b.weapon_type_ids||[]).map(w => WEAPON_LABEL[w]).join('');
-        const hasTime = !!(b.skill_effective_time || b.long_skill_effective_time);
-        return `<div class="item ${selected===b.id?'selected':''}" data-id="${b.id}">
-          <img class="icon" src="${bgIcon(b.id)}" alt="" onerror="this.style.display='none'">
-          <div class="meta">
-            <b>${b.name}</b>
-            <div class="badge-row">
-              <span class="rarity-${b.rarity}">${RARITY_LABEL[b.rarity]}</span>
-              ${elems} ${wpns}
-              ${hasTime ? '<span class="tag-badge">時</span>' : ''}
+    <div id="page-wrap">
+      <div id="content">
+        <div id="filters">
+          <div class="mob-search-row">
+            <input type="text" id="search" placeholder="🔍 心象結晶名で検索..." />
+            <span id="bg-count-mob"></span>
+          </div>
+          <div class="mob-toolbar">
+            <button class="filter-toggle-btn" id="filter-toggle-btn">▼ 絞り込み</button>
+            <button class="toolbar-btn" id="btn-expand">全展開</button>
+            <button class="toolbar-btn" id="btn-collapse">全収起</button>
+            <button class="toolbar-btn" id="btn-reset">リセット</button>
+          </div>
+          <div id="filters-body">
+            <div class="filter-section">
+              <div class="filter-label">レア度</div>
+              <div class="filter-toggles" id="f-rarity"></div>
+            </div>
+            <div class="filter-section">
+              <div class="filter-label">属性 (限定)</div>
+              <div class="filter-toggles" id="f-element"></div>
+            </div>
+            <div class="filter-section">
+              <div class="filter-label">武器 (限定)</div>
+              <div class="filter-toggles" id="f-weapon"></div>
+            </div>
+            <div class="filter-section">
+              <div class="filter-label">時間限定</div>
+              <div class="filter-toggles" id="f-time">
+                <button class="ftog" data-val="1">あり</button>
+                <button class="ftog" data-val="0">なし</button>
+              </div>
             </div>
           </div>
-        </div>`;
-      }).join('');
-      $('list').onclick = (e) => {
-        const el = e.target.closest('.item'); if (!el) return;
-        selected = +el.dataset.id;
-        renderDetail(all.find(x => x.id === selected));
-        render();
+          <div class="desktop-bottom">
+            <div id="bg-count"></div>
+            <div style="display: flex; gap: 6px">
+              <button class="toolbar-btn" id="btn-expand-d">全展開</button>
+              <button class="toolbar-btn" id="btn-collapse-d">全収起</button>
+              <button class="toolbar-btn" id="btn-reset-d">リセット</button>
+            </div>
+          </div>
+        </div>
+        <div id="bg-list"></div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { loadBladegraphs } from '../shared/data-loader.js';
+      import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
+      import { bgIcon } from '../shared/image-paths.js';
+
+      const RARITY_OPTS = [
+        { id: 5, label: '5★' }, { id: 4, label: '4★' }, { id: 3, label: '3★' },
+        { id: 2, label: '2★' }, { id: 1, label: '1★' },
+      ];
+      const ELEMENT_OPTS = [1,2,3,4,5,6].map(id => ({ id, label: ELEMENT_LABEL[id] }));
+      const WEAPON_OPTS = [1,2,3,4,5,6,7,8,9,10,11,12].map(id => ({ id, label: WEAPON_LABEL[id] }));
+
+      const filterState = {
+        rarity: new Set(), element: new Set(), weapon: new Set(), time: new Set(),
+        search: '', expanded: new Set(),
       };
-    }
+      let allBgs = [], filteredList = [];
+      const $ = (id) => document.getElementById(id);
 
-    function renderDetail(b) {
-      if (!b) return;
-      const skills = (b.skills||[]).map(sk => {
-        const hidden = sk.displayable === false;
-        return `<div class="skill-bar ${hidden?'hidden-skill':''}">
-          <b>${sk.parameter}</b>${hidden?' <small>[隠]</small>':''}: ${sk.math_type||''}/${sk.value} range=${sk.range}
-          ${sk.element_id?` /elem=${ELEMENT_LABEL[sk.element_id]}`:''}${sk.weapon_type_id?` /wpn=${WEAPON_LABEL[sk.weapon_type_id]}`:''}
-          ${sk.start_time||sk.end_time?` /time=${sk.start_time}-${sk.end_time}`:''}
-          ${sk.description ? `<div style="font-size:10px;opacity:0.7;margin-top:2px">${sk.description}</div>` : ''}
+      function renderToggles(container, opts, key) {
+        const el = $(container);
+        if (!el) return;
+        el.innerHTML = opts.map(o => `<button class="ftog" data-val="${o.id}">${o.label}</button>`).join('');
+        el.querySelectorAll('.ftog').forEach(btn => {
+          btn.onclick = () => {
+            const v = +btn.dataset.val;
+            const s = filterState[key];
+            if (s.has(v)) s.delete(v); else s.add(v);
+            btn.classList.toggle('active');
+            applyFilters();
+          };
+        });
+      }
+
+      function applyFilters() {
+        const s = filterState;
+        filteredList = allBgs.filter(b => {
+          if (s.rarity.size && !s.rarity.has(b.rarity)) return false;
+          if (s.element.size && !(b.element_ids||[]).some(e => s.element.has(e))) return false;
+          if (s.weapon.size && !(b.weapon_type_ids||[]).some(w => s.weapon.has(w))) return false;
+          if (s.time.size) {
+            const has = !!(b.skill_effective_time || b.long_skill_effective_time);
+            if (!s.time.has(has ? 1 : 0)) return false;
+          }
+          if (s.search && !(b.name||'').toLowerCase().includes(s.search.toLowerCase())) return false;
+          return true;
+        });
+        filteredList.sort((a, b) => (b.rarity - a.rarity) || a.id - b.id);
+        renderList();
+      }
+
+      function renderList() {
+        $('bg-list').innerHTML = filteredList.map(b => {
+          const expanded = filterState.expanded.has(b.id);
+          const elems = (b.element_ids||[]).map(e => `<span class="elem-${e}">${ELEMENT_LABEL[e]}</span>`).join('');
+          const wpns = (b.weapon_type_ids||[]).map(w => WEAPON_LABEL[w]).join('/');
+          const hasTime = !!(b.skill_effective_time || b.long_skill_effective_time);
+          return `<div class="bg-row ${expanded?'expanded':''}" data-id="${b.id}">
+            <div class="bg-summary">
+              <img class="bg-thumb" src="${bgIcon(b.id)}" alt="" onerror="this.style.display='none'">
+              <div class="bg-name">${b.name}</div>
+              <div class="bg-meta">
+                <span class="rarity-${b.rarity}">${b.rarity}★</span>
+                ${elems} ${wpns}
+                ${hasTime ? '<span class="tag-badge">時</span>' : ''}
+              </div>
+            </div>
+            ${expanded ? renderDetail(b) : ''}
+          </div>`;
+        }).join('');
+        $('bg-count').textContent = `${filteredList.length} 件`;
+        $('bg-count-mob').textContent = `${filteredList.length}`;
+        $('bg-list').onclick = (e) => {
+          const row = e.target.closest('.bg-row');
+          if (!row) return;
+          const id = +row.dataset.id;
+          if (filterState.expanded.has(id)) filterState.expanded.delete(id);
+          else filterState.expanded.add(id);
+          renderList();
+        };
+      }
+
+      function renderDetail(b) {
+        const skills = (b.skills||[]).map(sk => {
+          const hidden = sk.displayable === false;
+          return `<div class="bg-skill ${hidden?'hidden-skill':''}">
+            <b>${sk.parameter}</b>${hidden?' <small>[隠]</small>':''}
+            <span>${sk.math_type||''}/${sk.value} range=${sk.range}</span>
+            ${sk.element_id ? ` <span class="elem-${sk.element_id}">elem=${ELEMENT_LABEL[sk.element_id]}</span>` : ''}
+            ${sk.weapon_type_id ? ` wpn=${WEAPON_LABEL[sk.weapon_type_id]}` : ''}
+            ${sk.start_time || sk.end_time ? ` time=${sk.start_time||''}-${sk.end_time||''}` : ''}
+            ${sk.description ? `<div class="bg-skill-desc">${sk.description}</div>` : ''}
+          </div>`;
+        }).join('');
+        return `<div class="bg-detail">
+          ${b.author_name ? `<div class="bg-author">by ${b.author_name}</div>` : ''}
+          ${b.skill_effective_time ? `<div class="bg-time"><span class="tag-badge">時間限定</span> ${b.skill_effective_time}</div>` : ''}
+          ${b.long_skill_effective_time ? `<div class="bg-time-long">${b.long_skill_effective_time}</div>` : ''}
+          <div class="bg-skills">${skills}</div>
+          ${b.description ? `<details><summary>説明</summary><div class="bg-desc">${b.description}</div></details>` : ''}
         </div>`;
-      }).join('');
-      const elems = (b.element_ids||[]).map(e => `<span class="e${e}">${ELEMENT_LABEL[e]}</span>`).join(' ');
-      const wpns = (b.weapon_type_ids||[]).map(w => WEAPON_LABEL[w]).join('/');
+      }
 
-      $('detail').innerHTML = `
-        <img class="icon lg" src="${bgIcon(b.id)}" alt="${b.name}" onerror="this.style.display='none'">
-        <h2>${b.name}</h2>
-        <p><span class="rarity-${b.rarity}">${RARITY_LABEL[b.rarity]}</span> <small>· id ${b.id} · by ${b.author_name||'-'}</small></p>
-        ${elems||wpns ? `<p>限定: ${elems} ${wpns}</p>` : ''}
-        ${b.skill_effective_time ? `<p><span class="tag-badge">時間限定</span> ${b.skill_effective_time}</p>` : ''}
-        ${b.long_skill_effective_time ? `<p style="font-size:11px;opacity:0.8">${b.long_skill_effective_time}</p>` : ''}
-        <h3>スキル (${(b.skills||[]).length})</h3>
-        ${skills}
-        ${b.description ? `<details><summary>説明</summary><p class="profile-text">${b.description}</p></details>` : ''}`;
-    }
-    init();
-  </script>
-</body>
+      function expandAll() { filteredList.forEach(b => filterState.expanded.add(b.id)); renderList(); }
+      function collapseAll() { filterState.expanded.clear(); renderList(); }
+      function resetFilters() {
+        ['rarity', 'element', 'weapon', 'time'].forEach(k => filterState[k].clear());
+        filterState.search = '';
+        $('search').value = '';
+        document.querySelectorAll('.ftog.active').forEach(b => b.classList.remove('active'));
+        applyFilters();
+      }
+
+      async function init() {
+        allBgs = await loadBladegraphs();
+        renderToggles('f-rarity', RARITY_OPTS, 'rarity');
+        renderToggles('f-element', ELEMENT_OPTS, 'element');
+        renderToggles('f-weapon', WEAPON_OPTS, 'weapon');
+        document.querySelectorAll('#f-time .ftog').forEach(btn => {
+          btn.onclick = () => {
+            const v = +btn.dataset.val;
+            if (filterState.time.has(v)) filterState.time.delete(v); else filterState.time.add(v);
+            btn.classList.toggle('active');
+            applyFilters();
+          };
+        });
+        $('search').oninput = (e) => { filterState.search = e.target.value; applyFilters(); };
+        $('btn-expand').onclick = expandAll;
+        $('btn-collapse').onclick = collapseAll;
+        $('btn-reset').onclick = resetFilters;
+        $('btn-expand-d').onclick = expandAll;
+        $('btn-collapse-d').onclick = collapseAll;
+        $('btn-reset-d').onclick = resetFilters;
+        $('filter-toggle-btn').onclick = () => $('filters-body').classList.toggle('open');
+        applyFilters();
+        document.getElementById('loading-screen')?.remove();
+      }
+      init();
+    </script>
+  </body>
 </html>

@@ -1,155 +1,447 @@
 <!-- AUTO-GENERATED from pages_src/characters.html — DO NOT EDIT. Run `node scripts/build.js` to rebuild. -->
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BxB 魔剣データベース v2</title>
-  <link rel="stylesheet" href="../css/v2.css" />
-</head>
-<body>
-  <header>
-    <a href="characters.html">魔剣</a>
-    <a href="souls.html">ソウル</a>
-    <a href="crystals.html">記憶結晶</a>
-    <a href="bladegraphs.html">心象結晶</a>
-    <a href="hensei.html">編成</a>
-    <span class="version">v2 / master_tables</span>
-  </header>
-  <main>
-    <aside>
-      <div class="search-row"><input type="text" id="search" placeholder="🔍 魔剣名で検索..." /></div>
-      <div id="filters"></div>
-      <p class="count-badge"><span id="count">-</span> 件</p>
-    </aside>
-    <section id="list"></section>
-    <article id="detail"><p style="opacity:0.6">魔剣を選択</p></article>
-  </main>
-  <script type="module">
-    import { loadCharacters } from '../shared/data-loader.js';
-    import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL, EVOLVE_NAME } from '../shared/constants.js';
-    import { applySpec, renderSpecFilters } from '../shared/filter-core.js';
-    import { charaSpec } from '../shared/chara-spec.js';
-    import { charaIcon } from '../shared/image-paths.js';
-
-    const TAGS_LABEL = { 1:'時止め', 2:'麻痺', 3:'強制BK', 4:'弱体解除', 5:'BDバフ', 6:'AOE', 7:'13倍',
-      8:'回復', 9:'復活', 10:'BD回復', 11:'ルビー', 12:'ダメ上限', 13:'HIT', 14:'BDHIT' };
-
-    const state = { search: '', sort: 'sort_order', dir: 'desc' };
-    let all = [], selected = null, currentState = null;
-    const $ = (id) => document.getElementById(id);
-
-    async function init() {
-      all = await loadCharacters();
-      renderSpecFilters($('filters'), charaSpec, state, render);
-      $('search').oninput = (e) => { state.search = e.target.value; render(); };
-      render();
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BxB 魔剣データベース v2</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/shared.css" />
+    <link rel="stylesheet" href="../css/characters.css" />
+  </head>
+  <body>
+    <style>
+  #loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: #0f1117;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    transition: opacity 0.25s ease;
+  }
+  #loading-screen.done {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #loading-screen::before {
+    content: '';
+    width: 36px;
+    height: 36px;
+    border: 3px solid #2e3250;
+    border-top-color: #5b7fff;
+    border-radius: 50%;
+    animation: ls-spin 0.8s linear infinite;
+  }
+  #loading-screen::after {
+    content: '読み込み...';
+    color: #8890b0;
+    font-size: 13px;
+    font-family: 'Segoe UI', 'Yu Gothic', sans-serif;
+  }
+  @keyframes ls-spin {
+    to {
+      transform: rotate(360deg);
     }
+  }
+</style>
+<div id="loading-screen"></div>
 
-    function render() {
-      const filtered = applySpec(all, charaSpec, state);
-      $('count').textContent = filtered.length;
-      $('list').innerHTML = filtered.slice(0, 600).map(c => {
-        const v0 = c.states?.['通常']?.variant_id || c.states?.['改造']?.variant_id;
-        return `<div class="item ${selected===c.id?'selected':''}" data-id="${c.id}">
-          ${v0 ? `<img class="icon" src="${charaIcon(v0)}" alt="" onerror="this.style.display='none'">` : '<div class="icon"></div>'}
-          <div class="meta">
-            <b>${c.name}</b>
-            <div class="badge-row">
-              <span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]}</span>
-              <span class="e${c.element_id}">${ELEMENT_LABEL[c.element_id]||''}</span>
-              ${WEAPON_LABEL[c.weapon_type_id]||''}
-              ${(c.tags||[]).slice(0,3).map(t => `<span class="tag-badge">${TAGS_LABEL[t]||t}</span>`).join('')}
+
+    <div id="page-wrap">
+      <div id="layout">
+        <div id="sidebar">
+          <div id="filters">
+            <div class="search-row">
+              <input type="text" id="search" placeholder="🔍 魔剣名 / CV で検索..." />
+              <span id="char-count-mob"></span>
+            </div>
+            <div class="actions-row">
+              <button class="filter-toggle-btn" id="filter-toggle-btn">▼ 絞り込み</button>
+              <select id="f-sort">
+                <option value="">並び替えなし</option>
+                <option value="max_attack">攻撃力</option>
+                <option value="max_defense">防御力</option>
+                <option value="max_break">ブレイク力</option>
+                <option value="max_hp">HP</option>
+                <option value="max_lp">LP</option>
+                <option value="mp">保有魔力</option>
+                <option value="initial_slot">結晶スロット</option>
+                <option value="B">B</option>
+                <option value="W">W</option>
+                <option value="H">H</option>
+                <option value="CV">CV</option>
+                <option value="bd_cost">BDコスト</option>
+                <option value="bd_hit">BDヒット</option>
+                <option value="sort_order">実装順</option>
+              </select>
+              <button id="sort-dir">↓</button>
+              <button class="btn-reset-filters" id="btn-reset">リセット</button>
+            </div>
+            <div id="filters-body">
+              <div class="filter-row2">
+                <div class="filter-section">
+                  <div class="filter-label">レア度</div>
+                  <div class="filter-toggles" id="f-rarity"></div>
+                </div>
+                <div class="filter-section">
+                  <div class="filter-label">属性</div>
+                  <div class="filter-toggles" id="f-element"></div>
+                </div>
+              </div>
+              <div class="filter-section">
+                <div class="filter-label">武器種</div>
+                <div class="filter-toggles grid-6" id="f-weapon"></div>
+              </div>
+              <div class="filter-row2">
+                <div class="filter-section">
+                  <div class="filter-label">状態</div>
+                  <div class="filter-toggles" id="f-state">
+                    <button class="ftog" data-val="極弐">極弐</button>
+                    <button class="ftog" data-val="改造">改造</button>
+                    <button class="ftog" data-val="通常">通常</button>
+                  </div>
+                </div>
+              </div>
+              <div class="filter-section">
+                <div class="filter-label">魔剣特性</div>
+                <div class="filter-toggles" id="f-tags"></div>
+              </div>
+            </div>
+            <div id="char-count"></div>
+          </div>
+          <div id="char-list"></div>
+        </div>
+
+        <div id="detail">
+          <div id="detail-mob-bar">
+            <button id="detail-mob-prev" aria-label="前へ">‹</button>
+            <span class="nav-label" id="detail-mob-label"></span>
+            <button id="detail-mob-close" aria-label="閉じる">✕</button>
+            <button id="detail-mob-next" aria-label="次へ">›</button>
+          </div>
+          <div id="placeholder">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+            <p>左の一覧から魔剣を選択してください</p>
+          </div>
+          <div id="chara-detail" style="display: none"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { loadCharacters } from '../shared/data-loader.js';
+      import {
+        RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL, EVOLVE_NAME,
+      } from '../shared/constants.js';
+      import { charaIcon } from '../shared/image-paths.js';
+
+      const RARITY_OPTS = [
+        { id: 4, label: 'SS', color: 'var(--ss)' },
+        { id: 3, label: 'S', color: 'var(--s)' },
+        { id: 2, label: 'AA', color: 'var(--aa)' },
+        { id: 1, label: 'A', color: 'var(--a)' },
+      ];
+      const ELEMENT_OPTS = [
+        { id: 1, label: '火', color: 'var(--fire)' },
+        { id: 2, label: '水', color: 'var(--water)' },
+        { id: 3, label: '風', color: 'var(--wind)' },
+        { id: 4, label: '光', color: 'var(--light)' },
+        { id: 5, label: '闇', color: 'var(--dark)' },
+        { id: 6, label: '無', color: 'var(--none)' },
+      ];
+      const WEAPON_OPTS = [1,2,3,4,5,6,7,8,9,10,11,12].map(id => ({ id, label: WEAPON_LABEL[id] }));
+      const TAGS_LABEL = { 1:'時止め', 2:'麻痺', 3:'強制BK', 4:'弱体解除', 5:'BDバフ', 6:'AOE', 7:'13倍',
+        8:'回復', 9:'復活', 10:'BD回復', 11:'ルビー', 12:'ダメ上限', 13:'HIT', 14:'BDHIT' };
+      const TAGS_OPTS = Object.entries(TAGS_LABEL).map(([id, label]) => ({ id: +id, label }));
+
+      const filterState = {
+        rarity: new Set(), element: new Set(), weapon: new Set(),
+        state: new Set(), tags: new Set(),
+        search: '', sortKey: '', sortDir: 'desc',
+      };
+      let allChars = [];
+      let selectedId = null;
+      let filteredList = [];
+      let currentState = null;
+
+      const $ = (id) => document.getElementById(id);
+
+      // ===== filter buttons =====
+      function renderToggles(container, opts, key, opts2 = {}) {
+        const el = $(container);
+        if (!el) return;
+        el.innerHTML = opts.map(o => {
+          const sty = o.color ? `style="color:${o.color}"` : '';
+          return `<button class="ftog" data-val="${o.id}" ${sty}>${o.label}</button>`;
+        }).join('');
+        el.querySelectorAll('.ftog').forEach(btn => {
+          btn.onclick = () => {
+            const v = btn.dataset.val;
+            const val = isNaN(+v) ? v : +v;
+            const s = filterState[key];
+            if (s.has(val)) s.delete(val); else s.add(val);
+            btn.classList.toggle('active');
+            applyFilters();
+          };
+        });
+      }
+
+      // ===== filter + sort =====
+      function applyFilters() {
+        const s = filterState;
+        filteredList = allChars.filter(c => {
+          if (s.rarity.size && !s.rarity.has(c.rarity)) return false;
+          if (s.element.size && !s.element.has(c.element_id)) return false;
+          if (s.weapon.size && !s.weapon.has(c.weapon_type_id)) return false;
+          if (s.state.size) {
+            const ok = Object.keys(c.states || {}).some(st => s.state.has(st));
+            if (!ok) return false;
+          }
+          if (s.tags.size && !(c.tags || []).some(t => s.tags.has(t))) return false;
+          if (s.search) {
+            const q = s.search.toLowerCase();
+            const name = (c.name || '').toLowerCase();
+            const cv = (c.profile?.cv || '').toLowerCase();
+            if (!name.includes(q) && !cv.includes(q)) return false;
+          }
+          return true;
+        });
+        if (s.sortKey) {
+          const get = (c) => {
+            if (s.sortKey === 'sort_order') return c.extras?.sort_order ?? 0;
+            if (s.sortKey === 'mp') return c.extras?.mp ?? 0;
+            if (s.sortKey === 'initial_slot') return Math.max(...Object.values(c.states||{}).map(x => x.stats?.initial_slot || 0), 0);
+            if (s.sortKey === 'max_lp') return Math.max(...Object.values(c.states||{}).map(x => x.stats?.max_lp || 0), 0);
+            if (s.sortKey === 'bd_cost') return c.bd_skill?.cost ?? 0;
+            if (s.sortKey === 'bd_hit') return c.bd_skill?.hit_count ?? 0;
+            if (s.sortKey === 'B') return c.profile?.three_size_b ?? 0;
+            if (s.sortKey === 'W') return c.profile?.three_size_w ?? 0;
+            if (s.sortKey === 'H') return c.profile?.three_size_h ?? 0;
+            if (s.sortKey === 'CV') return c.profile?.cv || '';
+            if (s.sortKey.startsWith('max_')) {
+              return Math.max(...Object.values(c.states||{}).map(x => x.stats?.[s.sortKey] || 0), 0);
+            }
+            return c[s.sortKey] ?? 0;
+          };
+          const mul = s.sortDir === 'asc' ? 1 : -1;
+          filteredList.sort((a, b) => {
+            const va = get(a), vb = get(b);
+            if (va < vb) return -1 * mul;
+            if (va > vb) return 1 * mul;
+            return 0;
+          });
+        } else {
+          filteredList.sort((a, b) => (b.rarity - a.rarity) || ((b.extras?.sort_order||0) - (a.extras?.sort_order||0)));
+        }
+        renderList();
+      }
+
+      function renderList() {
+        const html = filteredList.map(c => {
+          const v0 = c.states?.['通常']?.variant_id || c.states?.['改造']?.variant_id || c.states?.['極弐']?.variant_id;
+          const rcls = `rarity-${c.rarity}`;
+          const elem = ELEMENT_LABEL[c.element_id] || '';
+          const wpn = WEAPON_LABEL[c.weapon_type_id] || '';
+          const states = Object.keys(c.states || {}).map(s => `<span class="state-dot ${s==='極弐'?'k':(s==='改造'?'g':'n')}" title="${s}"></span>`).join('');
+          const tags = (c.tags||[]).slice(0,3).map(t => `<span class="tag-mini">${TAGS_LABEL[t]||t}</span>`).join('');
+          return `<div class="char-item ${selectedId===c.id?'active':''}" data-id="${c.id}">
+            ${v0 ? `<img class="char-thumb" src="${charaIcon(v0)}" alt="" onerror="this.style.display='none'">` : ''}
+            <div class="char-info">
+              <div class="char-name">${c.name}</div>
+              <div class="char-meta">
+                <span class="${rcls}">${RARITY_LABEL[c.rarity]}</span>
+                <span class="elem-${c.element_id}">${elem}</span>
+                ${wpn}
+                ${states}
+                ${tags}
+              </div>
+            </div>
+          </div>`;
+        }).join('');
+        $('char-list').innerHTML = html;
+        const count = filteredList.length;
+        $('char-count').textContent = `${count} 件`;
+        $('char-count-mob').textContent = `${count}`;
+        $('char-list').onclick = (e) => {
+          const el = e.target.closest('.char-item');
+          if (!el) return;
+          selectChar(+el.dataset.id);
+        };
+      }
+
+      function selectChar(id) {
+        selectedId = id;
+        const c = allChars.find(x => x.id === id);
+        if (!c) return;
+        // 优先 極弐 → 改造 → 通常
+        currentState = c.states['極弐'] ? '極弐' : (c.states['改造'] ? '改造' : '通常');
+        renderDetail(c);
+        renderList();
+        $('placeholder').style.display = 'none';
+        $('chara-detail').style.display = 'block';
+        $('detail').classList.add('show-mob');
+      }
+
+      function renderDetail(c) {
+        const v0 = c.states?.[currentState]?.variant_id;
+        const tags = (c.tags||[]).map(t => `<span class="tag-badge">${TAGS_LABEL[t]||t}</span>`).join('');
+        const stateNames = Object.keys(c.states || {});
+        const tabs = stateNames.map(s => `<button class="state-tab ${currentState===s?'active':''}" data-st="${s}">${s}</button>`).join('');
+
+        const bd = c.bd_skill;
+        const bdEffects = bd ? (bd.effects||[]).map(e =>
+          `<div class="bd-effect">${e.parameter} <span class="bd-mt">${e.math_type||''}</span> ${e.value??''}${e.duration_value?` · ${e.duration_value}s`:''}</div>`).join('') : '';
+        const bdH = bd?.name ? `<div class="bd-card">
+          <div class="bd-header">
+            <span class="bd-name">${bd.name}</span>
+            <span class="bd-cost">cost ${bd.cost}</span>
+            <span class="bd-hit">${bd.hit_count} 連</span>
+            <span class="bd-range">${bd.range||''}</span>
+          </div>
+          <div class="bd-desc">${bd.description||''}</div>
+          <div class="bd-effects">${bdEffects}</div>
+        </div>` : '';
+
+        const p = c.profile || {};
+        const profileH = `<div class="profile-section">
+          <div class="profile-row"><span class="profile-label">年齢</span><span>${p.age||'-'}</span></div>
+          <div class="profile-row"><span class="profile-label">身長</span><span>${p.height||'-'}</span></div>
+          <div class="profile-row"><span class="profile-label">体重</span><span>${p.weight||'-'}</span></div>
+          <div class="profile-row"><span class="profile-label">B/W/H</span><span>${p.three_size_b||'-'}/${p.three_size_w||'-'}/${p.three_size_h||'-'}</span></div>
+          <div class="profile-row"><span class="profile-label">CV</span><span>${p.cv||'-'} ${p.cv_kana?`(${p.cv_kana})`:''}</span></div>
+          ${p.like ? `<div class="profile-row"><span class="profile-label">好き</span><span>${p.like}</span></div>` : ''}
+          ${p.dislike ? `<div class="profile-row"><span class="profile-label">嫌い</span><span>${p.dislike}</span></div>` : ''}
+          ${p.flavor_text ? `<div class="profile-flavor">${p.flavor_text}</div>` : ''}
+          ${p.intro ? `<details><summary>自己紹介</summary><div class="profile-text">${p.intro}</div></details>` : ''}
+          ${p.description ? `<details><summary>魔剣説明</summary><div class="profile-text">${p.description}</div></details>` : ''}
+        </div>`;
+
+        $('chara-detail').innerHTML = `
+          <div class="chara-header">
+            ${v0 ? `<img class="chara-icon" src="${charaIcon(v0)}" alt="${c.name}" onerror="this.style.display='none'">` : ''}
+            <div class="chara-title">
+              <h2>${c.name}</h2>
+              <div class="chara-meta">
+                <span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]}</span>
+                <span class="elem-${c.element_id}">${ELEMENT_LABEL[c.element_id]||''}</span>
+                ${WEAPON_LABEL[c.weapon_type_id]||''}
+                <span class="chara-id">base_id ${c.id}</span>
+              </div>
+              ${tags ? `<div class="chara-tags">${tags}</div>` : ''}
             </div>
           </div>
-        </div>`;
-      }).join('') + (filtered.length > 600 ? `<p style="opacity:0.6;padding:6px">+${filtered.length-600} more</p>` : '');
-      $('list').onclick = (e) => {
-        const el = e.target.closest('.item');
-        if (!el) return;
-        selected = +el.dataset.id;
-        const c = all.find(x => x.id === selected);
-        currentState = Object.keys(c.states||{})[0] || null;
-        renderDetail(c);
-        render();
-      };
-    }
+          <div class="state-tabs">${tabs}</div>
+          <div class="state-content" id="state-content"></div>
+          ${bdH}
+          <h3 class="section-title">プロフィール</h3>
+          ${profileH}`;
 
-    function renderDetail(c) {
-      if (!c) { $('detail').innerHTML = '<p style="opacity:0.6">魔剣を選択</p>'; return; }
-      const v0 = c.states?.['通常']?.variant_id || c.states?.['改造']?.variant_id;
-      const tags = (c.tags||[]).map(t => `<span class="tag-badge">${TAGS_LABEL[t]||t}</span>`).join(' ');
-      const stateNames = Object.keys(c.states || {});
-      const tabs = stateNames.map(s => `<div class="state-tab ${currentState===s?'active':''}" data-st="${s}">${s}</div>`).join('');
+        $('chara-detail').querySelectorAll('.state-tab').forEach(el => {
+          el.onclick = () => { currentState = el.dataset.st; renderDetail(c); };
+        });
+        renderStateContent(c);
+      }
 
-      // BD card
-      const bd = c.bd_skill;
-      const bdEffects = bd ? (bd.effects||[]).map(e => `<li>${e.parameter} / ${e.math_type} / ${e.value}${e.duration_value?` · ${e.duration_value}s`:''}</li>`).join('') : '';
-      const bdH = bd?.name ? `<div class="bd-card">
-        <h4>BD: ${bd.name}</h4>
-        <div class="bd-meta">cost ${bd.cost} · ${bd.hit_count} 連 · ${bd.range}</div>
-        <div style="font-size:11px;margin:4px 0">${bd.description||''}</div>
-        <ul style="font-size:11px;margin:0;padding-left:18px">${bdEffects}</ul>
-      </div>` : '';
+      function renderStateContent(c) {
+        const st = c.states[currentState];
+        if (!st) return;
+        const s = st.stats || {};
+        const statsHtml = `<table class="stats-table">
+          <tr><th>HP</th><td class="init">${s.initial_hp||'-'}</td><td>→</td><td class="max">${s.max_hp||'-'}</td>
+              <th>攻撃力</th><td class="init">${s.initial_attack||'-'}</td><td>→</td><td class="max">${s.max_attack||'-'}</td></tr>
+          <tr><th>防御力</th><td class="init">${s.initial_defense||'-'}</td><td>→</td><td class="max">${s.max_defense||'-'}</td>
+              <th>ブレイク力</th><td class="init">${s.initial_break||'-'}</td><td>→</td><td class="max">${s.max_break||'-'}</td></tr>
+          <tr><th>速度</th><td class="init">${s.initial_speed||'-'}</td><td>→</td><td class="max">${s.max_speed||'-'}</td>
+              <th>結晶スロット</th><td colspan="3">${s.initial_slot||'-'}</td></tr>
+          <tr><th>熟度上限</th><td colspan="3">${s.max_mature}</td><th>等級上限</th><td colspan="3">${s.initial_max_level}→${s.max_max_level}</td></tr>
+          <tr><th>LP</th><td colspan="3">${s.max_lp||'-'}</td><th>variant</th><td colspan="3">${st.variant_id}</td></tr>
+        </table>`;
+        const skills = (st.weapon_skills||[]).map(sk => `<tr>
+          <td class="skill-name">${sk.name||'-'}</td>
+          <td><span class="param-tag">${sk.parameter}</span><br><small>${sk.math_type||''} ${sk.value??''}${sk.value_scaling?` (+${sk.value_scaling}/熟)`:''}</small></td>
+          <td><small>${sk.range||''} ${sk.target_element_id?'/elem='+ELEMENT_LABEL[sk.target_element_id]:''}${sk.weapon_type_id?'/wpn='+WEAPON_LABEL[sk.weapon_type_id]:''}</small></td>
+        </tr>
+        <tr class="skill-desc-row"><td colspan="3"><small>${sk.description||''}</small></td></tr>`).join('');
+        $('state-content').innerHTML = `${statsHtml}
+          <h3 class="section-title">スキル (${(st.weapon_skills||[]).length})</h3>
+          <table class="skills-table">${skills}</table>`;
+      }
 
-      // profile
-      const p = c.profile || {};
-      const profileH = `<h3>プロフィール</h3>
-        <dl class="profile-grid">
-          <dt>年齢</dt><dd>${p.age||'-'}</dd>
-          <dt>身長</dt><dd>${p.height||'-'}</dd>
-          <dt>体重</dt><dd>${p.weight||'-'}</dd>
-          <dt>B/W/H</dt><dd>${p.three_size_b||'-'}/${p.three_size_w||'-'}/${p.three_size_h||'-'}</dd>
-          <dt>CV</dt><dd>${p.cv||'-'} (${p.cv_kana||''})</dd>
-          ${p.like ? `<dt>好き</dt><dd>${p.like}</dd>` : ''}
-          ${p.dislike ? `<dt>嫌い</dt><dd>${p.dislike}</dd>` : ''}
-        </dl>
-        ${p.flavor_text ? `<p class="profile-text"><em>${p.flavor_text}</em></p>` : ''}
-        ${p.intro ? `<details><summary>自己紹介</summary><p class="profile-text">${p.intro}</p></details>` : ''}
-        ${p.description ? `<details><summary>魔剣説明</summary><p class="profile-text">${p.description}</p></details>` : ''}`;
+      function resetFilters() {
+        Object.keys(filterState).forEach(k => {
+          if (filterState[k] instanceof Set) filterState[k].clear();
+        });
+        filterState.search = '';
+        filterState.sortKey = '';
+        filterState.sortDir = 'desc';
+        $('search').value = '';
+        $('f-sort').value = '';
+        $('sort-dir').textContent = '↓';
+        document.querySelectorAll('.ftog.active').forEach(b => b.classList.remove('active'));
+        applyFilters();
+      }
 
-      $('detail').innerHTML = `
-        ${v0 ? `<img class="icon lg" src="${charaIcon(v0)}" alt="${c.name}" onerror="this.style.display='none'">` : ''}
-        <h2>${c.name}</h2>
-        <p><span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]}</span> · <span class="e${c.element_id}">${ELEMENT_LABEL[c.element_id]||''}</span> · ${WEAPON_LABEL[c.weapon_type_id]||''} <small>· base_id ${c.id}</small></p>
-        ${tags ? `<p>${tags}</p>` : ''}
-        <div class="state-tabs">${tabs}</div>
-        <div class="state-content" id="state-content"></div>
-        ${bdH}
-        ${profileH}`;
+      function toggleSortDir() {
+        filterState.sortDir = filterState.sortDir === 'desc' ? 'asc' : 'desc';
+        $('sort-dir').textContent = filterState.sortDir === 'desc' ? '↓' : '↑';
+        applyFilters();
+      }
 
-      // bind state tab
-      $('detail').querySelectorAll('.state-tab').forEach(el => {
-        el.onclick = () => { currentState = el.dataset.st; renderDetail(c); };
-      });
-      renderStateContent(c);
-    }
+      function navChara(dir) {
+        if (!filteredList.length) return;
+        const idx = filteredList.findIndex(c => c.id === selectedId);
+        const next = (idx + dir + filteredList.length) % filteredList.length;
+        selectChar(filteredList[next].id);
+      }
 
-    function renderStateContent(c) {
-      const st = c.states[currentState];
-      if (!st) return;
-      const s = st.stats || {};
-      const statsTable = `<table class="stats-table">
-        <tr><th>HP</th><td class="init">${s.initial_hp||'-'}</td><td>→</td><td class="max">${s.max_hp||'-'}</td>
-            <th>攻撃力</th><td class="init">${s.initial_attack||'-'}</td><td>→</td><td class="max">${s.max_attack||'-'}</td></tr>
-        <tr><th>防御力</th><td class="init">${s.initial_defense||'-'}</td><td>→</td><td class="max">${s.max_defense||'-'}</td>
-            <th>BK</th><td class="init">${s.initial_break||'-'}</td><td>→</td><td class="max">${s.max_break||'-'}</td></tr>
-        <tr><th>速度</th><td class="init">${s.initial_speed||'-'}</td><td>→</td><td class="max">${s.max_speed||'-'}</td>
-            <th>結晶スロット</th><td colspan="3">${s.initial_slot||'-'}</td></tr>
-        <tr><th>熟度上限</th><td colspan="3">${s.max_mature}</td><th>等級上限</th><td colspan="3">${s.initial_max_level}→${s.max_max_level}</td></tr>
-        <tr><th>LP</th><td colspan="7">${s.max_lp||'-'}</td></tr>
-      </table>`;
-      const skills = (st.weapon_skills||[]).map(sk => `<tr>
-        <td><span class="skill-name">${sk.name||'-'}</span><br><span class="skill-desc">${sk.description||''}</span></td>
-        <td style="white-space:nowrap">${sk.parameter}<br><small>${sk.math_type||''} ${sk.value??''}${sk.value_scaling?` (+${sk.value_scaling}/熟)`:''}</small></td>
-        <td><small>${sk.range||''} ${sk.target_element_id?'/elem='+ELEMENT_LABEL[sk.target_element_id]:''}${sk.weapon_type_id?'/wpn='+WEAPON_LABEL[sk.weapon_type_id]:''}</small></td>
-      </tr>`).join('');
-      $('state-content').innerHTML = `${statsTable}
-        <h4>スキル (${(st.weapon_skills||[]).length})</h4>
-        <table class="skills-table">${skills}</table>`;
-    }
+      function closeDetailMob() {
+        $('detail').classList.remove('show-mob');
+        selectedId = null;
+        $('placeholder').style.display = 'block';
+        $('chara-detail').style.display = 'none';
+        renderList();
+      }
 
-    init();
-  </script>
-</body>
+      // ===== init =====
+      async function init() {
+        allChars = await loadCharacters();
+        renderToggles('f-rarity', RARITY_OPTS, 'rarity');
+        renderToggles('f-element', ELEMENT_OPTS, 'element');
+        renderToggles('f-weapon', WEAPON_OPTS, 'weapon');
+        renderToggles('f-tags', TAGS_OPTS, 'tags');
+        // 状態 facet bound separately
+        document.querySelectorAll('#f-state .ftog').forEach(btn => {
+          btn.onclick = () => {
+            const v = btn.dataset.val;
+            if (filterState.state.has(v)) filterState.state.delete(v); else filterState.state.add(v);
+            btn.classList.toggle('active');
+            applyFilters();
+          };
+        });
+        $('search').oninput = (e) => { filterState.search = e.target.value; applyFilters(); };
+        $('f-sort').onchange = (e) => { filterState.sortKey = e.target.value; applyFilters(); };
+        $('sort-dir').onclick = toggleSortDir;
+        $('btn-reset').onclick = resetFilters;
+        $('filter-toggle-btn').onclick = () => $('filters-body').classList.toggle('open');
+        $('detail-mob-prev').onclick = () => navChara(-1);
+        $('detail-mob-next').onclick = () => navChara(1);
+        $('detail-mob-close').onclick = closeDetailMob;
+        applyFilters();
+        document.getElementById('loading-screen')?.remove();
+      }
+      init();
+    </script>
+  </body>
 </html>
