@@ -22,7 +22,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from paths import master_file  # noqa: E402
-from enums import PARAMETER_BY_NAME, MATH_TYPE_BY_NAME, RANGE_NORMALIZE  # noqa: E402
+from enums import PARAMETER_ALL_NAMES, MATH_TYPE_BY_NAME, RANGE_NORMALIZE  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_ROOT / "data"
@@ -70,7 +70,7 @@ def build_skills(weapon_skills, wiki_scaling, warnings, ctx_id):
         param = sk.get("parameter")
         math = sk.get("math_type")
         name = sk.get("name")
-        if param and param not in PARAMETER_BY_NAME:
+        if param and param not in PARAMETER_ALL_NAMES:
             warnings.append(f"chara id={ctx_id}: param {param!r}")
         if math and math not in MATH_TYPE_BY_NAME:
             warnings.append(f"chara id={ctx_id}: math_type {math!r}")
@@ -106,7 +106,7 @@ def build_bd_skill(weapon_arts, wiki_scaling, warnings, ctx_id):
     for e in weapon_arts.get("weapon_arts_effects") or []:
         param = e.get("parameter")
         math = e.get("math_type")
-        if param and param not in PARAMETER_BY_NAME:
+        if param and param not in PARAMETER_ALL_NAMES:
             warnings.append(f"chara id={ctx_id} bd: param {param!r}")
         if math and math not in MATH_TYPE_BY_NAME:
             warnings.append(f"chara id={ctx_id} bd: math_type {math!r}")
