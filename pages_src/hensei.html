@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>編成 — v2</title>
+  <title>BxB 編成 v2</title>
   <link rel="stylesheet" href="../css/v2.css" />
 </head>
 <body>
@@ -13,94 +13,142 @@
     <a href="crystals.html">記憶結晶</a>
     <a href="bladegraphs.html">心象結晶</a>
     <a href="hensei.html">編成</a>
-    <span style="float:right;font-size:11px;opacity:0.6">v2 / minimal hensei (1 slot demo)</span>
+    <span class="version">v2 / hensei demo</span>
   </header>
-  <main style="grid-template-columns: 300px 1fr;">
-    <aside>
-      <h3>魔剣選択</h3>
-      <select id="chara-pick" style="width:100%"><option value="">--</option></select>
-      <h3>State</h3>
-      <select id="state-pick" style="width:100%"></select>
-      <h3>練度</h3>
-      <div class="row"><label>熟度</label><input type="number" id="mature" value="99" min="1" /></div>
-      <div class="row"><label>等級</label><input type="number" id="lv" value="255" min="1" /></div>
-      <div class="row"><label>覚醒</label><input type="number" id="awk" value="0" min="0" /></div>
-      <h3>状態</h3>
-      <div class="row"><label><input type="checkbox" id="bh" checked /> 燃心 BH ×1.3</label></div>
-      <div class="row"><label>結婚</label>
-        <select id="marriage"><option value="none">無</option><option value="no_flower">花無</option><option value="with_flower" selected>花有</option></select>
+  <main style="grid-template-columns: 1fr 380px;">
+    <section>
+      <h3>目標 slot</h3>
+      <div class="actions-row">
+        <button id="t0" class="ftog active">slot 1</button>
+        <button id="t1" class="ftog">slot 2</button>
+        <button id="t2" class="ftog">slot 3</button>
       </div>
-      <div class="row"><label>HP %</label><input type="number" id="hp_percent" value="100" min="0" max="100" /></div>
-    </aside>
-    <section id="stats-panel" class="stats-panel">
-      <p style="opacity:0.6">魔剣を選んで stats を計算</p>
+      <div id="slots"></div>
     </section>
+    <article id="stats-panel" class="stats-panel">
+      <p style="opacity:0.6">魔剣を選んで stats を計算</p>
+    </article>
   </main>
   <script type="module">
-    import { loadCharacters } from '../shared/data-loader.js';
-    import { EVOLVE_NAME, RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
+    import { loadCharacters, loadSouls, loadCrystals, loadBladegraphs, loadMasou } from '../shared/data-loader.js';
+    import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
     import { calcHenseiStats } from '../shared/stats-calc.js';
 
     const $ = (id) => document.getElementById(id);
-    let chars = [];
+    let chars = [], souls = [], crystals = [], bgs = [], masous = [];
+    let target = 0;
+    const team = [
+      { _empty: true },
+      { _empty: true },
+      { _empty: true },
+    ];
 
     async function init() {
-      chars = await loadCharacters();
+      [chars, souls, crystals, bgs, masous] = await Promise.all([
+        loadCharacters(), loadSouls(), loadCrystals(), loadBladegraphs(), loadMasou(),
+      ]);
       chars.sort((a, b) => (b.rarity - a.rarity) || a.id - b.id);
-      $('chara-pick').innerHTML = '<option value="">--</option>' +
-        chars.map(c => `<option value="${c.id}">${RARITY_LABEL[c.rarity]} ${c.name}</option>`).join('');
-      $('chara-pick').onchange = onCharaChange;
-      ['state-pick', 'mature', 'lv', 'awk', 'bh', 'marriage', 'hp_percent'].forEach(id =>
-        $(id).onchange = recalc, $(id).oninput = recalc);
+      souls.sort((a, b) => (b.rarity - a.rarity) || a.id - b.id);
+      bgs.sort((a, b) => (b.rarity - a.rarity) || a.id - b.id);
+      [0, 1, 2].forEach(i => $('t' + i).onclick = () => { target = i; recalc(); renderTabs(); });
+      renderSlots();
+      renderTabs();
     }
 
-    function onCharaChange() {
-      const cid = +$('chara-pick').value;
+    function renderTabs() {
+      [0, 1, 2].forEach(i => $('t' + i).classList.toggle('active', i === target));
+    }
+
+    function renderSlots() {
+      $('slots').innerHTML = [0, 1, 2].map(i => `<div class="slot-card ${i===target?'target':''}">
+        <h4>slot ${i+1}${i===target?' <span class="tag-badge">目標</span>':''}</h4>
+        <div class="row"><label>魔剣</label>
+          <select id="chara-${i}" style="flex:1"><option value="">--</option>${chars.map(c => `<option value="${c.id}">${RARITY_LABEL[c.rarity]} ${c.name}</option>`).join('')}</select>
+        </div>
+        <div class="row"><label>state</label>
+          <select id="state-${i}" style="flex:1"></select>
+        </div>
+        <div class="row"><label>熟度</label><input type="number" id="mature-${i}" value="99" min="1" />
+          <label>等級</label><input type="number" id="lv-${i}" value="255" min="1" />
+          <label>覚醒</label><input type="number" id="awk-${i}" value="0" min="0" /></div>
+        <div class="row">
+          <label><input type="checkbox" id="bh-${i}" checked /> BH ×1.3</label>
+          <label>結婚</label><select id="mar-${i}"><option value="none">無</option><option value="no_flower">花無</option><option value="with_flower" selected>花有</option></select>
+          <label>HP%</label><input type="number" id="hp-${i}" value="100" min="0" max="100" />
+        </div>
+        <div class="row"><label>ソウル</label>
+          <select id="soul-${i}" style="flex:1"><option value="">--</option>${souls.map(s => `<option value="${s.id}">${RARITY_LABEL[s.rarity]||''} ${s.name}</option>`).join('')}</select>
+        </div>
+        <div class="row"><label>心象結晶</label>
+          <select id="bg-${i}" style="flex:1"><option value="">--</option>${bgs.map(b => `<option value="${b.id}">${RARITY_LABEL[b.rarity]} ${b.name}</option>`).join('')}</select>
+        </div>
+      </div>`).join('');
+      [0,1,2].forEach(i => {
+        ['chara', 'state', 'mature', 'lv', 'awk', 'bh', 'mar', 'hp', 'soul', 'bg'].forEach(k => {
+          const el = $(`${k}-${i}`);
+          if (!el) return;
+          el.onchange = () => updateSlot(i);
+          if (el.type === 'number' || el.type === 'text') el.oninput = () => updateSlot(i);
+        });
+        $(`chara-${i}`).onchange = () => onCharaChange(i);
+      });
+    }
+
+    function onCharaChange(i) {
+      const cid = +$(`chara-${i}`).value;
       const c = chars.find(x => x.id === cid);
-      if (!c) { $('stats-panel').innerHTML = '<p style="opacity:0.6">魔剣を選んで stats を計算</p>'; return; }
+      const sel = $(`state-${i}`);
+      if (!c) { sel.innerHTML = ''; updateSlot(i); return; }
       const states = Object.keys(c.states || {});
-      $('state-pick').innerHTML = states.map(s => `<option value="${s}">${s}</option>`).join('');
+      sel.innerHTML = states.map(s => `<option value="${s}">${s}</option>`).join('');
+      updateSlot(i);
+    }
+
+    function updateSlot(i) {
+      const cid = +$(`chara-${i}`).value;
+      const c = chars.find(x => x.id === cid);
+      if (!c) { team[i] = { _empty: true }; recalc(); return; }
+      const stateKey = $(`state-${i}`).value || Object.keys(c.states)[0];
+      const soulId = +$(`soul-${i}`).value;
+      const bgId = +$(`bg-${i}`).value;
+      team[i] = {
+        chara: c, state: stateKey,
+        lv: +$(`lv-${i}`).value || 1,
+        mature: +$(`mature-${i}`).value || 1,
+        awakening: +$(`awk-${i}`).value || 0,
+        marriage: $(`mar-${i}`).value,
+        bh_on: $(`bh-${i}`).checked,
+        lp: 999, max_lp: c.states[stateKey]?.stats?.max_lp || 9,
+        hp_percent: +$(`hp-${i}`).value || 100,
+        soul: souls.find(s => s.id === soulId) || null,
+        bg: bgs.find(b => b.id === bgId) || null,
+        crystals: [],   // Phase 7 加 picker
+        masou: null,
+      };
       recalc();
     }
 
     function recalc() {
-      const cid = +$('chara-pick').value;
-      const c = chars.find(x => x.id === cid);
-      if (!c) return;
-      const stateKey = $('state-pick').value || Object.keys(c.states)[0];
-      // v2 stats-calc 新 API: team[3] array、含跨 slot buff stack
-      const team = [
-        {
-          chara: c, state: stateKey,
-          lv: +$('lv').value || 1,
-          mature: +$('mature').value || 1,
-          awakening: +$('awk').value || 0,
-          marriage: $('marriage').value,
-          bh_on: $('bh').checked,
-          lp: 999, max_lp: c.states[stateKey]?.stats?.max_lp || 9,
-          hp_percent: +$('hp_percent').value || 100,
-          // soul/crystals/bg/masou 暂 null、Phase 6.2 完整 UI 时再填
-        },
-        null, null,  // 其他 2 slot 空
-      ];
-      const result = calcHenseiStats(team, 0);
-      if (!result) { $('stats-panel').innerHTML = '<p>無効な state</p>'; return; }
-      $('stats-panel').innerHTML = `<h2>${c.name} (${stateKey})</h2>
-        <p>${RARITY_LABEL[c.rarity]} / ${ELEMENT_LABEL[c.element_id]||''}${WEAPON_LABEL[c.weapon_type_id]||''}</p>
-        <p>lv ${result.lv} / cap ${result.cap} / max with awk ${result.max_lv_with_awk}</p>
-        <table style="border-collapse:collapse;font-size:13px">
-          <tr><td>HP</td><td style="padding:2px 12px;text-align:right">${result.hp.toLocaleString()}</td></tr>
-          <tr><td>攻撃力</td><td style="padding:2px 12px;text-align:right;color:#f1c40f"><b>${result.attack.toLocaleString()}</b></td></tr>
-          <tr><td>防御力</td><td style="padding:2px 12px;text-align:right">${result.defense.toLocaleString()}</td></tr>
-          <tr><td>ブレイク</td><td style="padding:2px 12px;text-align:right">${result.break.toLocaleString()}</td></tr>
-          <tr><td>スピード</td><td style="padding:2px 12px;text-align:right">${result.speed}</td></tr>
-          <tr><td>ダメ上限</td><td style="padding:2px 12px;text-align:right">${result.damage_limit?.toLocaleString()||'-'}</td></tr>
+      const t = team[target];
+      if (!t || t._empty) { $('stats-panel').innerHTML = '<p style="opacity:0.6">目標 slot の魔剣を選択</p>'; return; }
+      const r = calcHenseiStats(team, target);
+      if (!r) { $('stats-panel').innerHTML = '<p>計算失敗</p>'; return; }
+      const c = t.chara;
+      $('stats-panel').innerHTML = `<h2>${c.name}</h2>
+        <p><span class="rarity-${c.rarity}">${RARITY_LABEL[c.rarity]}</span> · <span class="e${c.element_id}">${ELEMENT_LABEL[c.element_id]||''}</span> · ${WEAPON_LABEL[c.weapon_type_id]||''} (${t.state})</p>
+        <p style="font-size:11px;opacity:0.7">lv ${r.lv} / cap ${r.cap} / max with awk ${r.max_lv_with_awk}</p>
+        <table>
+          <tr><td>HP</td><td class="val">${r.hp.toLocaleString()}</td></tr>
+          <tr><td>攻撃力</td><td class="val atk">${r.attack.toLocaleString()}</td></tr>
+          <tr><td>防御力</td><td class="val">${r.defense.toLocaleString()}</td></tr>
+          <tr><td>ブレイク</td><td class="val">${r.break.toLocaleString()}</td></tr>
+          <tr><td>スピード</td><td class="val">${r.speed}</td></tr>
+          <tr><td>ダメ上限</td><td class="val">${r.damage_limit?.toLocaleString()||'-'}</td></tr>
         </table>
-        <p style="font-size:11px;opacity:0.7;margin-top:12px">
-          結婚 ×${result.marriage_mult} / BH ×${result.bh} / LP ×${result.lp_mult} / Random ×${result.random_avg} (avg)
-        </p>
-        <p style="font-size:11px;opacity:0.5">
-          ⚠ v2 hensei: 1 slot demo (chara only)、soul/結晶/bg/魔装 picker 待 Phase 6.2 完整 UI
+        <h3>倍率内訳</h3>
+        <p style="font-size:11px">結婚 ×${r.marriage_mult} · BH ×${r.bh} · LP ×${r.lp_mult} · soul affinity ×${r.affinity_mult.toFixed(3)} · Random ×${r.random_avg} (avg)</p>
+        <p style="font-size:10px;opacity:0.5">
+          ⚠ v2 hensei demo: 3 slot 跨 buff stack ✓ / soul/bg ✓ / 結晶 picker / 魔装 picker / 敵 bar / 紋章 / omoide → Phase 7 補
         </p>`;
     }
     init();
