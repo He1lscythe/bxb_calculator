@@ -47,8 +47,61 @@ def normalize_range(r):
     return RANGE_NORMALIZE.get(r, r) if r else r
 
 
+def _split_three_size(s):
+    """'87/57/83' → (87, 57, 83) — wiki 三围拆开"""
+    if not s or not isinstance(s, str):
+        return None, None, None
+    parts = s.split("/")
+    if len(parts) != 3:
+        return None, None, None
+    try:
+        return int(parts[0]), int(parts[1]), int(parts[2])
+    except ValueError:
+        return None, None, None
+
+
+def build_profile(w):
+    """profile 字段 — age/CV/3围/marriage 等。三围拆 B/W/H、master three_size 字符串拆开"""
+    b, waist, h = _split_three_size(w.get("three_size"))
+    return {
+        "age": w.get("age"),
+        "height": w.get("height"),
+        "height_value": w.get("height_value"),
+        "weight": w.get("weight"),
+        "bust": w.get("bust"),
+        "three_size": w.get("three_size"),
+        "three_size_b": b,
+        "three_size_w": waist,
+        "three_size_h": h,
+        "cv": w.get("cv"),
+        "cv_kana": w.get("cv_kana"),
+        "kana": w.get("kana"),
+        "intro": w.get("intro"),
+        "flavor_text": w.get("flavor_text"),
+        "description": w.get("description"),
+        "like": w.get("like"),
+        "dislike": w.get("dislike"),
+        "marriage_message": w.get("marriage_message"),
+    }
+
+
+def build_extras(w):
+    """额外 9 字段、暂不在 HTML 显示、留作 schema 字段"""
+    return {
+        "sort_order": w.get("sort_order"),
+        "min_damage_rate": w.get("min_damage_rate"),
+        "rarity_code": w.get("rarity_code"),
+        "mp": w.get("mp"),
+        "mp_cost": w.get("mp_cost"),
+        "brave_cost": w.get("brave_cost"),
+        "guard_cost": w.get("guard_cost"),
+        "hit_rate_rank": w.get("hit_rate_rank"),
+        "evade_rate_rank": w.get("evade_rate_rank"),
+    }
+
+
 def build_stats(w):
-    """master weapons entry 提取 stats + level/mature 元数据"""
+    """master weapons entry 提取 stats + level/mature 元数据 + initial_slot"""
     return {
         "initial_hp": w.get("initial_hp"),
         "max_hp": w.get("max_hp"),
@@ -57,6 +110,7 @@ def build_stats(w):
         "initial_defense": w.get("initial_defense"),
         "max_defense": w.get("max_defense"),
         "initial_break": w.get("initial_break"),
+        "initial_slot": w.get("initial_slot"),
         "max_break": w.get("max_break"),
         "initial_speed": w.get("initial_speed"),
         "max_speed": w.get("max_speed"),
@@ -211,6 +265,8 @@ def build():
             "weapon_tag_ids": v0.get("weapon_tag_ids"),  # 武器分类 (非 chara.tags)
             "tags": tags,        # 从 wiki main 拷 (Phase 6.4)、wiki 没的留空
             "omoide": [],        # 待 Phase 8 抓包
+            "profile": build_profile(v0),    # Phase 6.2 profile 面板
+            "extras": build_extras(v0),      # Phase 6.2 暂不显示字段
             "states": states,
             "bd_skill": bd_skill,
             "weapon_arts_id": v0.get("weapon_arts_id"),
