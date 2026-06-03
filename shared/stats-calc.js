@@ -1,22 +1,17 @@
-// shared/stats-calc.js — v2 hensei base 计算 + buff 累积
+// shared/stats-calc.js — v2 hensei base 计算 + 跨 slot buff 累积
 //
-// 范围: view-only hensei stat 模拟、按解包 master_tables + chara_training.md 公式
-// 简化版 — 未完全 1:1 复刻 unpacking/HOWTO_battle/03_ead.md 的 50 步 EAD/PAD/EBD/PBD
+// 按 unpacking/HOWTO_battle/03_ead.md 50 步 EAD pipeline 简化实现:
+// - 类 1 server fold: chara base attribute (lv/熟度/觉醒/marriage/BH/LP) — calcBaseStats
+// - 类 3 client 战斗中: buff Mul/Add 池累积 (chara skill / soul skill / crystal / bg / masou)
+// - HP-curve / Break / FellDown gate (沿用 wiki 公式)
+// - DamageLimitBreak cap (沿用 wiki 公式)
+// - Random 0.95-1.0 (EAD step 50、display avg 0.975)
 //
-// 实现:
-// - hensei base attribute (max × (1 - (max_level - lv) / (max_level - 1) × initial / max))
-// - 觉醒下扩展 (k × (1 + (lv - cap) / (awakening * 5) × (full_mult - 1)))
-// - BH 二元 toggle (×1.3 / ×1.0)
-// - 結婚 (5 项 ×1.05/1.03 + slot+1 + lp+3)
-// - LP (>1/2 ×1.0 / ≤1/2 ×1.1 / ≤1/4 ×1.5、仅攻撃力)
-// - buff Mul 池 + Add 池 简化累积 (parameter prefix 决定 condition factor)
-//
-// TODO Phase 4+ 完善:
-// - HP-curve scale 精确公式 (RemHpSkillRate / VitalitySkillRate 反编译)
-// - IsBlaze gate (EAD step 1+26-37 BD 链)
-// - IsBreak gate (EAD step 25/46 整段跳)
-// - Random ±5-10% / 0.95-1.0 抖动
-// - DamageLimitBreak clamp
+// TODO Phase 8+ 实测精度:
+// - HP-curve RemHpSkillRate/VitalitySkillRate 精确反编译公式 (现用 wiki 线性)
+// - IsBlaze gate / IsBreak hard gate 精细化
+// - BlazeAttack 加 Boost 链 (step 2-4 / 26-37)
+// - element/weapon affinity 是否 cumulative 还是 max-only
 
 import {
   MAX_AWAKENING, AWAKENING_FULL_MULT,
@@ -26,26 +21,24 @@ import {
 } from './constants.js';
 
 // ============================================================
-// 熟度 N → 等级上限 (chara_training.md 公式、master 字段直读)
+// 熟度 → 等级上限 (master 字段直读)
 // ============================================================
 export const maxLevelAtMature = (state, mature) => {
-  const im = state.stats.initial_max_level;
-  const mm = state.stats.max_max_level;
+  const im = state.stats?.initial_max_level;
+  const mm = state.stats?.max_max_level;
+  if (im == null || mm == null) return 0;
   return Math.min(mm, im + (mature - 1) * 5);
 };
 
 // ============================================================
-// 等级 → 属性 (统一公式、不分通常/改造)
-// 属性 = max × (1 - (max_max_level - lv) / (max_max_level - 1) × initial / max)
-// 觉醒下: 先取 lv=cap 算 k、再扩展 k × (1 + (lv - cap) / (max_awk * 5) × (full_mult - 1))
+// 等级 → 属性 (统一公式、含觉醒扩展)
 // ============================================================
 export const calcStat = ({ initial, max, max_max_level, lv, cap, rarity }) => {
+  if (!max || !initial || !max_max_level) return 0;
   if (lv < 1) return 0;
   if (lv <= cap) {
-    // 普通区间
     return max * (1 - (max_max_level - lv) / (max_max_level - 1) * initial / max);
   }
-  // 觉醒区间
   const k = max * (1 - (max_max_level - cap) / (max_max_level - 1) * initial / max);
   const awk = MAX_AWAKENING[rarity] || 9;
   const full = AWAKENING_FULL_MULT[rarity] || 1.43;
@@ -53,10 +46,6 @@ export const calcStat = ({ initial, max, max_max_level, lv, cap, rarity }) => {
   return k * (1 + lvOverCap / (awk * 5) * (full - 1));
 };
 
-// ============================================================
-// chara 5 项 base stats (lv / mature / awakening 输入)
-// state = chara.states[evolve_name]
-// ============================================================
 export const calcBaseStats = (chara, stateKey, params) => {
   const { lv, mature, awakening = 0, rarity } = params;
   const state = chara.states?.[stateKey];
@@ -85,7 +74,7 @@ export const calcBaseStats = (chara, stateKey, params) => {
 };
 
 // ============================================================
-// 結婚 multipler
+// 結婚 / LP / BH
 // ============================================================
 export const getMarriageMult = (state) => {
   switch (state) {
@@ -95,19 +84,15 @@ export const getMarriageMult = (state) => {
   }
 };
 
-// ============================================================
-// LP multipler
-// ============================================================
-export const getLpMult = (lp, max_lp) => {
-  const ratio = lp / max_lp;
+export const getLpMult = (lp, maxLp) => {
+  const ratio = lp / maxLp;
   if (ratio <= 0.25) return LP_MULT_CRISIS;
   if (ratio <= 0.5) return LP_MULT_LOW;
   return LP_MULT_NORMAL;
 };
 
 // ============================================================
-// effect value 含 mature scaling
-// value_at_N = value + N × value_scaling
+// effect value 含熟度 scaling
 // ============================================================
 export const effectValueAtMature = (effect, mature) => {
   const base = effect.value ?? 0;
@@ -116,99 +101,190 @@ export const effectValueAtMature = (effect, mature) => {
 };
 
 // ============================================================
-// HP-curve scale (parameter prefix 决定)
-// TODO Phase 4+ 实测精确公式
+// HP-curve scale (parameter prefix 决定、wiki 公式)
 // ============================================================
-export const hpCurveScale = (parameter, hpPercent) => {
+export const hpCurveScale = (parameter, hpPercent, teamHpZero = false) => {
   const hp = Math.max(0, Math.min(1, hpPercent / 100));
-  if (parameter.startsWith('Vitality_')) return hp;
-  if (parameter.startsWith('RemHP_')) return 1 - hp;
-  if (parameter.startsWith('Break_')) return hpPercent < 50 ? 1 : 0;  // 简化、严格应是 IsBreak gate
-  if (parameter.startsWith('FellDown_')) return hp === 0 ? 1 : 0;
+  if (parameter.startsWith('Vitality_')) return hp;             // 浑身
+  if (parameter.startsWith('RemHP_')) return 1 - hp;            // 背水
+  if (parameter.startsWith('Break_')) return hpPercent < 50 ? 1 : 0;  // 破損
+  if (parameter.startsWith('FellDown_')) return teamHpZero ? 1 : 0;   // 队友倒地
   return 1;
 };
 
-// ============================================================
-// effect → contribution 简化版
-// Multiply: × value
-// Addition: + value
-// Repel_Percent: 概率回避、view-only 当作 (1 - value%) base value 显示
-// None: 跳过 (BD effect_id 触发)
-// ============================================================
-export const applyEffect = (parameter, mathType, value, condFactor = 1) => {
-  if (mathType === 'Multiply') return { mul: (value - 1) * condFactor + 1, add: 0 };
-  if (mathType === 'Addition') return { mul: 1, add: value * condFactor };
-  if (mathType === 'Set') return { set: value };
-  return { mul: 1, add: 0 };
+// parameter 是否对应 target stat (按 prefix 拆出 base parameter)
+export const baseParamOf = (parameter) => {
+  const prefixes = ['Vitality_', 'RemHP_', 'Break_', 'FellDown_', 'Enemy_', 'Wave_', 'JustGuard_', 'Random_', 'Rise_'];
+  for (const p of prefixes) {
+    if (parameter.startsWith(p)) return parameter.slice(p.length);
+  }
+  return parameter;
 };
 
 // ============================================================
-// Mul 池 + Add 池累积、return final = (base × Π mul) + Σ add
-// effects: [{ parameter, math_type, value, value_scaling, ...condition fields }]
-// hpPercent: 0-100、决定 HP-curve scale
-// 简化: 不实现 IsBlaze gate / IsBreak hard gate / Random / final clamp
+// effect filter — range / element_condition / weapon_type_condition gate
+// targetSlotIdx vs sourceSlotIdx: range=Single only apply to source/self、All apply to all
 // ============================================================
-export const accumulateBuffs = (effects, mature, hpPercent, targetParameter) => {
+export const effectApplies = (effect, source, target, sourceSlotIdx, targetSlotIdx) => {
+  // range gate
+  if (effect.range === 'Single') {
+    if (sourceSlotIdx !== targetSlotIdx) return false;
+  } else if (effect.range === 'None') {
+    return false;
+  }
+  // element condition
+  const ec = effect.element_condition || effect.target_element_id || 0;
+  if (ec && target?.element_id && ec !== target.element_id) return false;
+  // weapon_type_condition
+  const wc = effect.weapon_type_condition || effect.weapon_type_id || 0;
+  if (wc && target?.weapon_type_id && wc !== target.weapon_type_id) return false;
+  // weapon_base_id (chara 限定)
+  if (effect.weapon_base_id && target?.id && effect.weapon_base_id !== target.id) return false;
+  return true;
+};
+
+// ============================================================
+// 跨 slot buff accumulation
+// team: [{ chara, soul, crystals[], bg, masou, state, mature, lv, awakening, hp_percent }]
+// targetSlotIdx: 0/1/2 — 算哪个 slot 的 stats
+// targetParameter: 'Attack' / 'Defense' / 'HP' / 'GuardBreak' / 'Speed'
+// 返回 { mul, add }
+// ============================================================
+export const accumulateBuffsCrossSlot = (team, targetSlotIdx, targetParameter) => {
   let mul = 1;
   let add = 0;
-  for (const eff of effects || []) {
-    if (eff.parameter !== targetParameter
-        && !eff.parameter.endsWith('_' + targetParameter)
-        && !targetParameter.endsWith('_' + eff.parameter)) {
-      continue;
+  const target = team[targetSlotIdx];
+  if (!target?.chara) return { mul, add };
+  const teamHpZero = team.some((s, i) => i !== targetSlotIdx && s?.hp_percent === 0);
+
+  // 遍历每个 source slot 的 effects
+  for (let srcIdx = 0; srcIdx < team.length; srcIdx++) {
+    const src = team[srcIdx];
+    if (!src) continue;
+    const collectFrom = [];
+    // chara state weapon_skills
+    const charaState = src.chara?.states?.[src.state];
+    if (charaState?.weapon_skills) {
+      for (const sk of charaState.weapon_skills) collectFrom.push({ eff: sk, srcMature: src.mature });
     }
-    const factor = hpCurveScale(eff.parameter, hpPercent);
-    const v = effectValueAtMature(eff, mature);
-    const contrib = applyEffect(eff.parameter, eff.math_type, v, factor);
-    if (contrib.mul !== undefined) mul *= contrib.mul;
-    if (contrib.add !== undefined) add += contrib.add;
+    // chara bd_skill effects (只 target slot 用)
+    if (srcIdx === targetSlotIdx && src.chara?.bd_skill?.effects) {
+      for (const e of src.chara.bd_skill.effects) collectFrom.push({ eff: e, srcMature: src.mature });
+    }
+    // soul skills
+    if (src.soul?.skills) {
+      for (const sk of src.soul.skills) collectFrom.push({ eff: sk, srcMature: 0 });
+    }
+    // bg skills
+    if (src.bg?.skills) {
+      for (const sk of src.bg.skills) collectFrom.push({ eff: sk, srcMature: 0 });
+    }
+    // crystals (each crystal is one effect)
+    if (src.crystals) {
+      for (const cr of src.crystals) {
+        // crystal lv → value (initial→max linear interp by lv/max_level)
+        const lv = cr.lv || cr.max_level || 0;
+        const ratio = cr.max_level ? Math.min(1, lv / cr.max_level) : 0;
+        const val = (cr.initial_value ?? 0) + ((cr.max_value ?? cr.initial_value ?? 0) - (cr.initial_value ?? 0)) * ratio;
+        collectFrom.push({
+          eff: { ...cr, value: val, value_scaling: 0 },
+          srcMature: 0,
+        });
+      }
+    }
+    // masou effects
+    if (src.masou?.effects) {
+      for (const e of src.masou.effects) collectFrom.push({ eff: e, srcMature: 0 });
+    }
+
+    for (const { eff, srcMature } of collectFrom) {
+      if (!eff?.parameter) continue;
+      const baseParam = baseParamOf(eff.parameter);
+      if (baseParam !== targetParameter) continue;
+      if (!effectApplies(eff, src.chara, target.chara, srcIdx, targetSlotIdx)) continue;
+      const factor = hpCurveScale(eff.parameter, src.hp_percent ?? 100, teamHpZero);
+      if (factor === 0) continue;
+      const v = effectValueAtMature(eff, srcMature);
+      if (eff.math_type === 'Multiply') mul *= (v - 1) * factor + 1;
+      else if (eff.math_type === 'Addition') add += v * factor;
+      // 其他 (Set / Repel_Percent / None) 跳过、UI display 单独处理
+    }
   }
   return { mul, add };
 };
 
 // ============================================================
-// final stats — chara base + 結婚 + BH + LP + buff (简化)
-// 仅 attack 路径完整、其他 parameter 类似套
+// soul element_affinity / weapon_affinity (两者都乘算、无序)
+// 应用 positive (己方该元素/武器) vs negative (敵方该元素) 看 unpacking docs
 // ============================================================
-export const calcHenseiStats = (chara, stateKey, params) => {
-  const {
-    lv, mature, awakening = 0, rarity,
-    marriage = 'none',
-    bh_on = true,
-    lp = 999, max_lp = 9,
-    buff_effects = [],
-    hp_percent = 100,
-  } = params;
+export const soulAffinityMult = (soul, chara, targetParameter) => {
+  if (!soul || !chara) return 1;
+  let m = 1;
+  // element_affinity[chara.element_id] positive (己方 attack)
+  const ea = soul.element_affinity?.[String(chara.element_id)];
+  if (ea?.positive_value) m *= ea.positive_value;
+  // weapon_affinity[chara.weapon_type_id]
+  const wa = soul.weapon_affinity?.[String(chara.weapon_type_id)];
+  if (wa?.positive_value) m *= wa.positive_value;
+  return m;
+};
 
-  const base = calcBaseStats(chara, stateKey, { lv, mature, awakening, rarity });
+// ============================================================
+// Random rate (EAD step 50): 0.95-1.0 单边、avg 0.975
+// ============================================================
+export const RANDOM_RATE_AVG = 0.975;
+export const RANDOM_RATE_MIN = 0.95;
+export const RANDOM_RATE_MAX = 1.0;
+
+// ============================================================
+// DamageLimitBreak — 沿用 wiki ダメージ上限 cap 公式
+// base = 2^31 - 1 = 2147483647
+// 加成: 完整 buff 链中 parameter='DamageLimitBreak' 的 effect (累加 + 累乘)
+// ============================================================
+export const DAMAGE_LIMIT_BASE = 2147483647;
+export const calcDamageLimit = (team, targetSlotIdx) => {
+  const { mul, add } = accumulateBuffsCrossSlot(team, targetSlotIdx, 'DamageLimitBreak');
+  return Math.floor(DAMAGE_LIMIT_BASE * mul + add);
+};
+
+// ============================================================
+// final stats — 类 1 server fold + 类 3 client buff
+// team = [{ chara, soul, crystals[], bg, masou, state, mature, lv, awakening, hp_percent, marriage, bh_on, lp, max_lp }] × 3
+// ============================================================
+export const calcHenseiStats = (team, targetSlotIdx) => {
+  const t = team[targetSlotIdx];
+  if (!t?.chara) return null;
+  const c = t.chara;
+  const base = calcBaseStats(c, t.state, {
+    lv: t.lv || 1, mature: t.mature || 1, awakening: t.awakening || 0, rarity: c.rarity,
+  });
   if (!base) return null;
+  const mar = getMarriageMult(t.marriage || 'none');
+  const bh = t.bh_on === false ? BH_MULT_OFF : BH_MULT_ON;
+  const lpMult = getLpMult(t.lp ?? 999, (c.states?.[t.state]?.stats?.max_lp || 9) + mar.lp_add);
+  const affMult = soulAffinityMult(t.soul, c, 'Attack');
 
-  const mar = getMarriageMult(marriage);
-  const bh = bh_on ? BH_MULT_ON : BH_MULT_OFF;
-  const lpMult = getLpMult(lp, max_lp + mar.lp_add);
-
-  // 5 项 (攻防 HP BK speed) 都吃結婚倍率
-  const finalize = (key, extraMult = 1) => {
+  const finalize = (key, extra = 1) => {
     const baseVal = base[key];
-    const buff = accumulateBuffs(buff_effects, mature, hp_percent, paramFromKey(key));
-    return Math.floor((baseVal * mar.mult * extraMult * buff.mul + buff.add));
+    const param = paramFromKey(key);
+    const { mul, add } = accumulateBuffsCrossSlot(team, targetSlotIdx, param);
+    return Math.floor((baseVal * mar.mult * extra * mul + add));
   };
 
   return {
     hp: finalize('hp'),
-    attack: finalize('attack', bh * lpMult),
+    attack: finalize('attack', bh * lpMult * affMult),
     defense: finalize('defense'),
     break: finalize('break'),
     speed: finalize('speed'),
-    mature: base.mature,
-    lv: base.lv,
-    max_lv_with_awk: base.max_lv_with_awk,
-    cap: base.cap,
-    bh, marriage_mult: mar.mult, lp_mult: lpMult,
+    damage_limit: calcDamageLimit(team, targetSlotIdx),
+    mature: base.mature, lv: base.lv, cap: base.cap, max_lv_with_awk: base.max_lv_with_awk,
+    bh, marriage_mult: mar.mult, lp_mult: lpMult, affinity_mult: affMult,
+    random_avg: RANDOM_RATE_AVG,
+    random_range: [RANDOM_RATE_MIN, RANDOM_RATE_MAX],
   };
 };
 
-// helper: stat key → master parameter name
 const paramFromKey = (k) => ({
   hp: 'HP', attack: 'Attack', defense: 'Defense', break: 'GuardBreak', speed: 'Speed',
 }[k] || k);
