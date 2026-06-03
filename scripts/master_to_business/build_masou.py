@@ -15,7 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from paths import master_file  # noqa: E402
-from enums import PARAMETER_BY_NAME, MATH_TYPE_BY_NAME  # noqa: E402
+from enums import PARAMETER_ALL_NAMES, MATH_TYPE_BY_NAME  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_ROOT / "data"
@@ -43,7 +43,7 @@ def build():
         for e in entry.get("weapon_costume_effects") or []:
             param = e.get("parameter")
             math = e.get("math_type")
-            if param and param not in PARAMETER_BY_NAME:
+            if param and param not in PARAMETER_ALL_NAMES:
                 warnings.append(f"masou id={entry.get('id')}: param {param!r} not in #JS")
             if math and math not in MATH_TYPE_BY_NAME:
                 warnings.append(f"masou id={entry.get('id')}: math_type {math!r}")

@@ -22,6 +22,8 @@ MATH_TYPE = {
     0: "Multiply",     # 乘算 — fmul 池累乘 (默认值 1.0)
     1: "Addition",     # 加算 — fadd 池累加 (默认值 0)
     2: "Set",          # 設定値 — 直接覆盖
+    3: "Repel_Percent",  # 概率回避 — value=N 表示 N% 概率完全免疫该 parameter (soul 対麻痺適正 等)
+    4: "None",           # BD 特殊効果占位 — 不走数值运算、靠 effect_id 触发 hardcoded 机制 (強制ブレイク / 弱体解除 / 時止め 等)
 }
 # 反查
 MATH_TYPE_BY_NAME = {v: k for k, v in MATH_TYPE.items()}
@@ -125,8 +127,45 @@ PARAMETER = {
     89: "Rise_AttackRate",                # 攻击效果放大
     90: "Rise_DefenseRate",
 }
-# 反查
+
+# ============================================================
+# PARAMETER_BE_ONLY — BE# (BattleEngine.Skill.Parameter) 独有的 13 项
+# 这些不在 #JS JobSkill.Parameter 里、但 master 数据 / runtime 用到
+# 来源: unpacking/table.md L228-345 跨表合并表 (JS# = '—' 行)
+# key = BE# (避开 JS# 0-90 区间)
+# ============================================================
+PARAMETER_BE_ONLY = {
+    18: "RaiseBreak",
+    28: "JustGuardTime",
+    30: "CancelDebuff",
+    71: "Enemy_BreakAttack",              # 破甲攻击 (weapons.json 84 处实际用)
+    76: "Random_Begin",                   # sentinel 边界
+    78: "Random_Defense",                 # EAD swap path 池 (master 0 占用、runtime 入参)
+    79: "Random_End",                     # sentinel
+    80: "Condition_Begin",                # sentinel
+    81: "Condition_End",                  # sentinel
+    82: "Condition_Count_Begin",          # sentinel
+    83: "Condition_Count_JG_Attack",      # EAD step 19 JG count Attack 池
+    84: "Condition_Count_JG_Defense",     # EAD step 13 swap path
+    85: "Condition_Count_End",            # sentinel
+}
+
+# ============================================================
+# PARAMETER_EXTENSION — 既不在 #JS 也不在 #BE、master 独有 / sentinel
+# memory_slot_skills.json 独有的扩展 enum
+# ============================================================
+PARAMETER_EXTENSION = {
+    "MaterialSlotQuantity",   # senzai 「記憶結晶装備数UP」用 (2 entry)
+    "NoEffect",               # sentinel (jobs/weapons/materials 各几个占位 entry)
+}
+
+# 反查 — 合并三类、用 set 验证 build script 出现的 parameter 是否合法
 PARAMETER_BY_NAME = {v: k for k, v in PARAMETER.items()}
+PARAMETER_ALL_NAMES = (
+    set(PARAMETER.values())
+    | set(PARAMETER_BE_ONLY.values())
+    | PARAMETER_EXTENSION
+)
 
 
 # ============================================================
