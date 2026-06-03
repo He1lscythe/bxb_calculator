@@ -14,7 +14,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from paths import master_file  # noqa: E402
-from enums import PARAMETER_ALL_NAMES, MATH_TYPE_BY_NAME  # noqa: E402
+from enums import PARAMETER_ALL_NAMES, MATH_TYPE_BY_NAME, PARAMETER_MATH_TYPE  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_ROOT / "data"
@@ -39,14 +39,19 @@ def build():
     warnings = []
     for entry in raw:
         param = entry.get("parameter")
-        math = entry.get("math_type")
+        # master materials.json 无 math_type 字段、按 parameter 查 PARAMETER_MATH_TYPE 表补
+        math = PARAMETER_MATH_TYPE.get(param) if param else None
         name = entry.get("name")
         if param and param not in PARAMETER_ALL_NAMES:
             warnings.append(f"crystal id={entry.get('id')}: param {param!r}")
         if math and math not in MATH_TYPE_BY_NAME:
             warnings.append(f"crystal id={entry.get('id')}: math_type {math!r}")
 
-        max_value = wiki_max.get(name)
+        # 名字含 "純真記憶" 的 max_value 强制 5 (rule by user)
+        if name and '純真記憶' in name:
+            max_value = 5.0
+        else:
+            max_value = wiki_max.get(name)
         if max_value is None:
             unmatched.append({
                 "id": entry.get("id"),

@@ -226,6 +226,62 @@ CONDITION_FIELD_NAMES = [
 
 
 # ============================================================
+# PARAMETER_MATH_TYPE — 默认 math_type 映射 (105 项、按 parameter)
+# 来源: unpacking/table.md L227-353 跨表合并表 math_type 列 (主类型)
+# 用于: build_crystals (master materials.json 无 math_type 字段、按 parameter 查表补)
+# null = 该 parameter 在 master 没 skill 实例或 0 占用 (Enemy_*/sentinel/废弃)
+# ============================================================
+PARAMETER_MATH_TYPE = {
+    "None": None,
+    "Attack": "Multiply", "Defense": "Multiply", "Heal": "Addition",
+    "GuardBreak": "Multiply", "GuardDefense": "Multiply", "BlazeAttack": "Multiply",
+    "Speed": "Multiply", "MotionSpeed": "Multiply",
+    "PlayerHit": "Multiply", "EnemyHit": "Multiply",
+    "SapphireDrop": "Multiply", "Attack_Sapphire": None, "RubyDrop": "Multiply",
+    "TimeHeal": None, "TimeHeal_Main": None, "AttackCount": None,
+    "Raise": "Multiply", "RaiseBreak": None,
+    "Mez": "Repel_Percent", "Stun": "Repel_Percent",
+    "TheWorld": None, "ForceBreak": None, "DamageHeal": None,
+    "DamageLimitBreak": "Addition", "BlazeLock": None,
+    "AllTarget": "Multiply", "SuicideAttack": "Addition",
+    "JustGuardTime": None, "Blaze13": None, "CancelDebuff": None,
+    "Rise_AttackRate": "Multiply", "Rise_DefenseRate": None,
+    "RemHP_Attack": "Multiply", "RemHP_Defense": "Multiply", "RemHP_BlazeAttack": "Multiply",
+    "RemHP_PlayerHit": "Multiply", "RemHP_EnemyHit": None,
+    "RemHP_Speed": "Multiply", "RemHP_MotionSpeed": "Multiply", "RemHP_Sapphire": "Multiply",
+    "Vitality_Attack": "Multiply", "Vitality_Defense": "Multiply", "Vitality_BlazeAttack": "Multiply",
+    "Vitality_PlayerHit": None, "Vitality_EnemyHit": "Multiply",
+    "Vitality_Speed": "Multiply", "Vitality_MotionSpeed": "Multiply", "Vitality_Sapphire": "Multiply",
+    "Break_Attack": "Multiply", "Break_Defense": "Multiply", "Break_BlazeAttack": "Multiply",
+    "Break_PlayerHit": "Multiply", "Break_EnemyHit": "Multiply", "Break_Speed": "Multiply",
+    "FellDown_Attack": "Multiply", "FellDown_Defense": "Multiply", "FellDown_BlazeAttack": "Multiply",
+    "FellDown_PlayerHit": "Multiply", "FellDown_EnemyHit": "Multiply", "FellDown_Speed": "Multiply",
+    "JustGuard_Sapphire": "Multiply", "JustGuard_MinDamage": "Multiply", "JustGuard_Heal": "Addition",
+    "Wave_Heal": "Multiply", "Wave_BlazeUP": "Addition",
+    "Enemy_Attack": None, "Enemy_Defense": None,
+    "Enemy_GuardBreak": None, "Enemy_GuardDefense": None, "Enemy_BlazeAttack": None,
+    "Enemy_BreakAttack": "Multiply",
+    "InstantDeath": "Repel_Percent", "BlazeAbsorb": "Repel_Percent",
+    "RateDamage": "Repel_Percent", "BlazeLockPurge": "Repel_Percent",
+    "Random_Begin": None, "Random_Attack": "Multiply", "Random_Defense": None, "Random_End": None,
+    "Condition_Begin": None, "Condition_End": None,
+    "Condition_Count_Begin": None,
+    "Condition_Count_JG_Attack": None, "Condition_Count_JG_Defense": None,
+    "Condition_Count_End": None,
+    "Prayer": None,
+    "WeaponArtsCost": "Addition", "WeaponArtsHitCount": "Multiply", "WeaponArtsHitCountKeepDamage": "Multiply",
+    "HP": "Multiply", "HitCount": "Addition", "HitCountKeepDamage": "Addition",
+    "UserExp": "Multiply", "AnyElement": "Multiply",
+    "BarrierInvokePermission": None,
+    "BlazeGauge": "Addition", "BlazeGaugePointRate": "Multiply", "BlazeGaugeMaxLevel": "Addition",
+    "EventDropRate": "Multiply", "EventSupplyBonus": None, "GuildBattleTimeLimit": None,
+    "MaterialExp": "Multiply", "JobExp": "Multiply",
+    "MaterialSlotQuantity": "Addition",   # senzai 独有 (master 实际 Addition)
+    "NoEffect": None,                      # sentinel
+}
+
+
+# ============================================================
 # target_element — 元素属性
 # 来源: master_tables.elements.json
 # ============================================================
