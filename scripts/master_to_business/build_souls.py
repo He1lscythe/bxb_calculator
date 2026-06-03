@@ -62,9 +62,6 @@ def build():
         for sk in entry.get("job_skills") or []:
             param = sk.get("parameter")
             math = sk.get("math_type")
-            # master typo: 偶见 'Addition ' 末尾空格 (soul id=1322)
-            if isinstance(math, str):
-                math = math.strip()
             if param and param not in PARAMETER_ALL_NAMES:
                 warnings.append(f"soul id={entry.get('id')}: param {param!r}")
             if math and math not in MATH_TYPE_BY_NAME:
