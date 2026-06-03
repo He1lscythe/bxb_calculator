@@ -47,9 +47,19 @@ def build():
         if math and math not in MATH_TYPE_BY_NAME:
             warnings.append(f"crystal id={entry.get('id')}: math_type {math!r}")
 
-        # 名字含 "純真記憶" 的 max_value 强制 5 (rule by user)
+        # hard rules (用户指定):
+        # - 純真記憶 max=5
+        # - 秘録記憶 max=1.3e9 (1,300,000,000)
+        # - メルティレコード max=2.6
+        # - parameter=NoEffect → max=initial_value (sentinel)
         if name and '純真記憶' in name:
             max_value = 5.0
+        elif name and '秘録記憶' in name:
+            max_value = 1300000000.0
+        elif name and 'メルティレコード' in name:
+            max_value = 2.6
+        elif param == 'NoEffect':
+            max_value = entry.get('initial_value')
         else:
             max_value = wiki_max.get(name)
         if max_value is None:
