@@ -5,7 +5,10 @@
 - masou : D:/bxb/weapon/stand/s/{7位}.png → crawl/icons/masou/{wc_id}.png         (~622 file)
 - crystal: D:/bxb/materia/icon/{id}_{N}.png → crawl/icons/crystal/{id}_{N}.png    (~3348 file)
 - bg    : D:/bxb/picture/m/{id}.png → crawl/icons/bg/{pic_id}.png                  (~499 file)
-- soul  : D:/bxb/npc/atlas/{texture_id}.png → crawl/icons/soul/{texture_id}.png   (~486 file)
+- soul  : D:/bxb/npc/stand/m/{texture_id}.png → crawl/icons/soul/{texture_id}.png  (~478 file)
+- misc  : D:/bxb/_misc/marriage_*.png → crawl/icons/_misc/                          (3 file)
+- app_icons: D:/bxb/_app_icons/icon_weapon_type_42_*.png + icon_element_list_*.png  (~18 file)
+             → crawl/icons/_app_icons/   (chara icon 叠层用)
 
 总 ~6000 file、~150 MB。crawl/icons/ 在 .gitignore 排除 (跟 omoide_icon/ 同策略)。
 
@@ -70,6 +73,43 @@ def main():
     c, fi, sk = _copy_dir(src, dest, lambda n: bool(re.match(r'^\d{6}\.png$', n)), force=force)
     print(f"  copied {c}, filtered (非 6位) {fi}, skipped existing {sk}")
 
+    # 1b. chara variant fallback: master 列了 variant、源 weapon/stand/s 没此 file
+    #     用同 base_id (variant_id // 100) 其他 variant 的 png 当 fallback、复制到 missing 名字
+    #     例: variant 100603 (改造) missing → 拷 100601 (通常) → 命名 100603.png
+    import json as _json
+    from paths import master_file
+    weapons = _json.loads(master_file("weapons.json").read_text(encoding="utf-8"))
+    fb_copied = 0
+    fb_no_source = 0
+    fb_skipped = 0
+    for w in weapons:
+        vid = w.get("id")
+        bid = w.get("base_id")
+        if vid is None or bid is None:
+            continue
+        target = dest / f"{vid}.png"
+        if target.is_file() and not force:
+            continue
+        # 尝试同 base 其他 variant
+        candidates = [bid * 100 + n for n in (1, 2, 3) if bid * 100 + n != vid]
+        # 优先源目录、再 fallback dest 已拷的
+        found = None
+        for cv in candidates:
+            csrc = src / f"{cv}.png"
+            if csrc.is_file():
+                found = csrc
+                break
+            cdst = dest / f"{cv}.png"
+            if cdst.is_file():
+                found = cdst
+                break
+        if found:
+            shutil.copy2(found, target)
+            fb_copied += 1
+        else:
+            fb_no_source += 1
+    print(f"  variant fallback: copied {fb_copied} (同 base_id 复用)、no fallback {fb_no_source}")
+
     # 2. masou: weapon/stand/s 7 位
     dest = ICONS_DIR / "masou"
     print(f"\n=== masou ({dest}) ===")
@@ -90,11 +130,30 @@ def main():
     c, fi, sk = _copy_dir(src, dest, lambda n: bool(re.match(r'^\d+\.png$', n)), force=force)
     print(f"  copied {c}, filtered {fi}, skipped existing {sk}")
 
-    # 5. soul: npc/atlas (99% cover、stand 只 26%)
-    src = DBXB / "npc/atlas"
+    # 5. soul: npc/stand/m (banner 大图)、按 texture_id 命名拷过去
+    src = DBXB / "npc/stand/m"
     dest = ICONS_DIR / "soul"
     print(f"\n=== soul ({dest}) ===")
     c, fi, sk = _copy_dir(src, dest, lambda n: bool(re.match(r'^\d+\.png$', n)), force=force)
+    print(f"  copied {c}, filtered {fi}, skipped existing {sk}")
+
+    # 6. _misc: marriage_*.png (chara icon 結婚框叠层)
+    src = DBXB / "_misc"
+    dest = ICONS_DIR / "_misc"
+    print(f"\n=== _misc/marriage ({dest}) ===")
+    c, fi, sk = _copy_dir(src, dest, lambda n: bool(re.match(r'^marriage_\d+\.png$', n)), force=force)
+    print(f"  copied {c}, filtered {fi}, skipped existing {sk}")
+
+    # 7. _app_icons: weapon_type_42_* + element_list_* (chara icon 左上 type + 右上 element 叠层)
+    src = DBXB / "_app_icons"
+    dest = ICONS_DIR / "_app_icons"
+    print(f"\n=== _app_icons (weapon_type_42 + element_list) ({dest}) ===")
+    c, fi, sk = _copy_dir(
+        src, dest,
+        lambda n: bool(re.match(r'^icon_weapon_type_42_\d+\.png$', n))
+        or bool(re.match(r'^icon_element_list_\d+\.png$', n)),
+        force=force,
+    )
     print(f"  copied {c}, filtered {fi}, skipped existing {sk}")
 
     print(f"\n=== DONE ===")

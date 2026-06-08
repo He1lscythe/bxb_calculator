@@ -1,5 +1,18 @@
 # BxB Crawl — 文件结构说明
 
+> ⚠️ **Phase 0-5 v2 重写后本文大部分内容过时**（涉及 wiki crawl pipeline / wiki schema / 21 项 bunrui / scope/condition 体系）。
+> v2 实际架构看：
+> - [schema_v2.md](schema_v2.md) — master_tables → data/ 业务 JSON schema
+> - [hensei_calc.md](hensei_calc.md) — 4-stage hensei stat 计算 + UI 联动 checklist
+>
+> Phase 6 (view-only 5 viewer 1:1 + hensei calc + enemy bar + BlazeGauge 系统) 已完成。
+> Phase 7 (4-bucket edit mode、sparse diff、start.py/api/save.js、v2-chara/soul/cr edit modal、修正按钮、撤回机制) 已完成、含 Session 1-4。
+> 新 edit pipeline: [shared/v2-revise-core.js](../shared/v2-revise-core.js) (computeDiff/deepApply/撤回)、4 adapter (chara/soul/crystal/masou) `deepApply` wrap、[js/v2-{chara,soul,cr}-edit.js](../js/) inline edit modal、[shared/v2-save-client.js](../shared/v2-save-client.js) POST /save 路由 (local start.py 8787 / Vercel api/save.js)。
+>
+> 本文保留作 archive、待后续 round 整体重写为 v2 版本。
+
+---
+
 ## 整体流程
 
 ```

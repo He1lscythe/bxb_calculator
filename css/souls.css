@@ -28,7 +28,7 @@
 #detail-mob-bar .nav-label { font-size: 12px; color: var(--text2); flex: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
 
 /* ----- soul list ----- */
-#soul-list { flex: 1; overflow-y: auto; }
+#soul-list { flex: 1; overflow-y: auto; scrollbar-gutter: stable; }
 #soul-list::-webkit-scrollbar { width: 4px; }
 #soul-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 .soul-item { padding: 8px 10px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; gap: 7px; transition: background .1s; }
@@ -45,7 +45,7 @@
 .soul-icon-thumb { width: 44px; height: 28px; object-fit: cover; border-radius: 4px; flex-shrink: 0; opacity: .85; }
 
 /* ----- detail panel ----- */
-#detail { flex: 1; overflow-y: auto; padding: 0 24px 20px; }
+#detail { flex: 1; overflow-y: auto; scrollbar-gutter: stable; padding: 0 24px 20px; }
 #detail::-webkit-scrollbar { width: 5px; }
 #detail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 #placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text2); gap: 8px; }
@@ -54,7 +54,7 @@
 .soul-header { margin-bottom: 16px; padding: 20px 0 16px; border-bottom: 1px solid var(--border); position: sticky; top: var(--sticky-bar-h, 0px); z-index: 6; background: var(--bg); }
 .soul-header-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
 .soul-title { font-size: 22px; font-weight: 700; flex: 1; line-height: 1.3; }
-.soul-banner { width: 100%; height: auto; border-radius: 8px; display: block; margin-bottom: 12px; }
+.soul-banner { max-height: 320px; max-width: 100%; width: auto; height: auto; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto 12px; }
 .soul-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .meta-chip { display: flex; align-items: center; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 12px; }
 
@@ -114,6 +114,7 @@
     position: fixed; inset: 0; z-index: 200;
     background: var(--bg);
     overflow-y: auto;
+    scrollbar-gutter: stable;
     overscroll-behavior: contain;
     padding: 0;
   }

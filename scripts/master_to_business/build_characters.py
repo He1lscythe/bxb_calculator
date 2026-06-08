@@ -85,19 +85,8 @@ def build_profile(w):
     }
 
 
-def build_extras(w):
-    """额外 9 字段、暂不在 HTML 显示、留作 schema 字段"""
-    return {
-        "sort_order": w.get("sort_order"),
-        "min_damage_rate": w.get("min_damage_rate"),
-        "rarity_code": w.get("rarity_code"),
-        "mp": w.get("mp"),
-        "mp_cost": w.get("mp_cost"),
-        "brave_cost": w.get("brave_cost"),
-        "guard_cost": w.get("guard_cost"),
-        "hit_rate_rank": w.get("hit_rate_rank"),
-        "evade_rate_rank": w.get("evade_rate_rank"),
-    }
+# build_extras: 已废弃 — 字段直接 inline 到顶层 chara dict
+# (per-chara、非 per-state、不应再嵌套一层)
 
 
 def build_stats(w):
@@ -203,16 +192,48 @@ def build_bd_skill(weapon_arts, weapon_arts_suffix, wiki_scaling, warnings, ctx_
     }
 
 
+def load_attack_motions():
+    """attack_motions.json → {id: name} map (motion_id ↔ モーション名)"""
+    src = master_file("attack_motions.json")
+    arr = json.loads(src.read_text(encoding="utf-8"))
+    return {x["id"]: x.get("name") for x in arr}
+
+
+def load_npc_motion_durations():
+    """data/_npc_motions.json → {motion_id: [attack1_dur_sec, attack2, attack3]}
+    npc_motions.json 是 unpacking dump_npc_motions.py 跑出来的、含 SmoothMoves clip authored duration"""
+    p = DATA_DIR / "_npc_motions.json"
+    if not p.is_file():
+        return {}
+    raw = json.loads(p.read_text(encoding="utf-8"))
+    out = {}
+    for k, v in raw.items():
+        clips = v.get("clips", {})
+        out[int(k)] = [
+            clips.get("attack1", {}).get("duration", 0) or 0,
+            clips.get("attack2", {}).get("duration", 0) or 0,
+            clips.get("attack3", {}).get("duration", 0) or 0,
+        ]
+    return out
+
+
 def build():
     src = master_file("weapons.json")
     raw = json.loads(src.read_text(encoding="utf-8"))
     wiki_scaling, wiki_tags = load_wiki_aux()
+    motion_id_to_name = load_attack_motions()
+    motion_id_to_durations = load_npc_motion_durations()
+
+    # base_id 黑名单 — placeholder/未公開 chara、UI 不渲染、build 时跳过
+    BLACKLIST_BASE_IDS = {9998, 9999}   # 「謎に包まれている」占位
 
     # group by base_id
     groups = defaultdict(list)
     for w in raw:
         bid = w.get("base_id")
         if bid is None:
+            continue
+        if bid in BLACKLIST_BASE_IDS:
             continue
         groups[bid].append(w)
 
@@ -235,9 +256,13 @@ def build():
                 "stats": build_stats(v),
                 "weapon_skills": build_skills(v.get("weapon_skills"), wiki_scaling, warnings, v.get("id")),
                 "attack_motion_id": v.get("attack_motion_id"),
+                "attack_motion_name": motion_id_to_name.get(v.get("attack_motion_id")),
                 "motion_speed": v.get("motion_speed"),
                 "motion_speed2": v.get("motion_speed2"),
                 "motion_speed3": v.get("motion_speed3"),
+                # SmoothMoves clip authored duration (秒) for attack1/2/3
+                # 用 (duration / motion_speed_effective) 算实际段时长 — 单位秒
+                "motion_durations": motion_id_to_durations.get(v.get("attack_motion_id"), [0, 0, 0]),
                 "hit_counts": v.get("hit_counts"),
                 "attack_count": v.get("attack_count"),
                 "attack_hits": v.get("attack_hits"),
@@ -255,21 +280,29 @@ def build():
         if not tags and chara_name:
             tags_unmatched.append({"id": bid, "name": chara_name})
 
-        # chara-level meta
+        # chara-level meta — per-chara 字段直接放顶层、不再嵌套 extras
         out.append({
             "id": bid,
             "name": chara_name,
             "rarity": v0.get("rarity"),
+            "rarity_code": v0.get("rarity_code"),
             "element_id": v0.get("element_id"),
             "weapon_type_id": v0.get("weapon_type_id"),
             "weapon_tag_ids": v0.get("weapon_tag_ids"),  # 武器分类 (非 chara.tags)
             "tags": tags,        # 从 wiki main 拷 (Phase 6.4)、wiki 没的留空
+            "sort_order": v0.get("sort_order"),
+            "min_damage_rate": v0.get("min_damage_rate"),
+            "mp": v0.get("mp"),
+            "mp_cost": v0.get("mp_cost"),
+            "brave_cost": v0.get("brave_cost"),
+            "guard_cost": v0.get("guard_cost"),
+            "hit_rate_rank": v0.get("hit_rate_rank"),
+            "evade_rate_rank": v0.get("evade_rate_rank"),
+            "weapon_arts_id": v0.get("weapon_arts_id"),
             "omoide": [],        # 待 Phase 8 抓包
             "profile": build_profile(v0),    # Phase 6.2 profile 面板
-            "extras": build_extras(v0),      # Phase 6.2 暂不显示字段
             "states": states,
             "bd_skill": bd_skill,
-            "weapon_arts_id": v0.get("weapon_arts_id"),
         })
 
     # 按 base_id 排序便于 diff 稳定

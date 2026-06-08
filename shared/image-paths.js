@@ -23,6 +23,41 @@ export const soulIcon = (textureId) => `${BASE}/soul/${textureId}.png`;
 export const crystalIcon = (materialId, suffix = 1) =>
   `${BASE}/crystal/${materialId}_${suffix}.png`;
 
+// chara icon 叠层资源 (尺寸都跟 chara icon 100×100 配合好):
+// - marriage 框 100×100 (=base)、level 1/2/3 红→粉→金渐变
+// - weapon_type_42 42×42 (左上角)
+// - element_list 33×33 (右上角)
+export const marriageOverlay = (level = 2) => `${BASE}/_misc/marriage_${level}.png`;
+export const weaponTypeIcon = (weaponTypeId) => `${BASE}/_app_icons/icon_weapon_type_42_${weaponTypeId}.png`;
+export const elementIcon = (elementId) => `${BASE}/_app_icons/icon_element_list_${elementId}.png`;
+
+// chara icon 叠层 HTML 生成器 — 4 层 z-index: base / marriage / type / element
+// 用法:
+//   container.innerHTML = charaIconStack({
+//     variantId: c.id, name: c.name,
+//     elementId: c.element, weaponTypeId: c.weapon,
+//     marriageLevel: 2,  // 0 = 不叠 marriage、1/2/3 = 红/粉/金
+//   });
+export const charaIconStack = ({
+  variantId, name = '', elementId, weaponTypeId, marriageLevel = 0, className = 'chara-thumb',
+}) => {
+  const safe = String(name).replace(/"/g, '&quot;');
+  const hideErr = `onerror="this.style.visibility='hidden'"`;
+  const layers = [
+    `<img class="ct-base" src="${charaIcon(variantId)}" alt="${safe}" ${hideErr}>`,
+  ];
+  if (marriageLevel) {
+    layers.push(`<img class="ct-marriage" src="${marriageOverlay(marriageLevel)}" alt="" ${hideErr}>`);
+  }
+  if (weaponTypeId) {
+    layers.push(`<img class="ct-type" src="${weaponTypeIcon(weaponTypeId)}" alt="" ${hideErr}>`);
+  }
+  if (elementId) {
+    layers.push(`<img class="ct-element" src="${elementIcon(elementId)}" alt="" ${hideErr}>`);
+  }
+  return `<div class="${className}">${layers.join('')}</div>`;
+};
+
 // 通用 <img> 标签生成器、含 onerror text fallback
 // 用法:
 //   container.innerHTML = imgWithFallback(charaIcon(100101), name);

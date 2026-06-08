@@ -138,50 +138,92 @@ wiki 5 值 `condition` enum 在 v2 拆成多字段：
 
 ### 3.1 characters.json
 
+字段位置原则: per-chara (跨 state 不变) 直接放顶层；per-state (随進化变) 放 states.<X> 里。
+不再用 `extras` 嵌套层。
+
 ```jsonc
 {
+  // ===== per-chara 字段（顶层、不嵌套）=====
   "id": 1001,                       // base_id 4 位
   "name": "レヴァンテイン",
-  "rarity": 4,
+  "rarity": 4,                      // 1=A 2=AA 3=S 4=SS
+  "rarity_code": "4",               // master rarity_code (字符串、不一定跟 rarity 数值同)
   "element_id": 1,
   "weapon_type_id": 1,
+  "weapon_tag_ids": "2",            // master 武器分类 (非 chara.tags)
+  "tags": [5, 12],                  // chara 特性 tag (从 wiki main 拷)、wiki 没的留 []
+  "sort_order": 16911,              // 排序权重
+  "min_damage_rate": 0.02,
+  "mp": 633,                        // 保有魔力
+  "mp_cost": 63,
+  "brave_cost": 33,
+  "guard_cost": 2,
+  "hit_rate_rank": 0,
+  "evade_rate_rank": 0,
+  "weapon_arts_id": 691,
+  "omoide": [],                     // Phase 8 抓包后填、留空 = view-only 不展示
+  "profile": {                      // 角色 profile (age/cv/height/...)、跨 state 不变
+    "age": "27歳", "cv": "...", "height": "...", "weight": "...",
+    "three_size": "72/51/75", "three_size_b": 72, "three_size_w": 51, "three_size_h": 75,
+    "like": "...", "dislike": "...", "flavor_text": "...", "description": "...",
+    "marriage_message": "...", "intro": "..."
+  },
+
+  // ===== per-state 字段（嵌套 states.<X>）=====
   "states": {
-    "通常": {                       // EVOLVE_COUNT[0]
-      "variant_id": 100101,         // weapons.id 6 位
-      "stats": {
+    "通常": {                        // EVOLVE_COUNT[0]
+      "variant_id": 100101,          // weapons.id 6 位
+      "evolve_count": 0,
+      "evolve_name": "通常",
+      "stats": {                     // 全 stat + level/mature/lp/slot 都是 per-state
         "initial_hp": ..., "max_hp": ...,
         "initial_attack": ..., "max_attack": ...,
         "initial_defense": ..., "max_defense": ...,
         "initial_break": ..., "max_break": ...,
-        "initial_speed": ..., "max_speed": ...
+        "initial_speed": ..., "max_speed": ...,
+        "initial_slot": 3,            // 結晶スロット (per-state、改造で +1)
+        "max_attack_rank": "ss", "max_defense_rank": "s",
+        "max_mature": 60, "initial_max_level": 60, "max_max_level": 250,
+        "max_lp": 6
       },
       "weapon_skills": [
         {
-          "innate_id": 10101,        // weapon_innate_skills key
+          "id": 80618,
           "name": "...",
-          "parameter": "Attack",     // #JS 1
+          "parameter": "Attack",     // #JS 91 项 enum string
           "math_type": "Multiply",
           "value": 1.05,
+          "value_scaling": 0.0,
           "range": "All",
           "target_element_id": 1,
           "weapon_type_id": 0,
-          "description": "..."
+          "description": "...",
+          // ... 其他 condition 字段
         }
-      ]
+      ],
+      "attack_motion_id": 815,        // モーション (per-state、変身でモーション変わる)
+      "motion_speed": 2.0,
+      "motion_speed2": ..., "motion_speed3": ...,
+      "hit_counts": [3, 3, 14],
+      "attack_count": 3,
+      "attack_hits": "3,3,14",
+      "reach_id": 3,
+      "size": 1
     },
-    "改造": { ... },                // EVOLVE_COUNT[1]
-    "極弐": { ... }                 // EVOLVE_COUNT[2] (optional)
+    "改造": { ... },                  // EVOLVE_COUNT[1]
+    "極弐": { ... }                   // EVOLVE_COUNT[2] (optional)
   },
-  "bd_skill": {                    // weapons.weapon_arts 内嵌 → 顶层 (跨 state 共享)
+
+  "bd_skill": {                       // weapons.weapon_arts 内嵌 → 顶层 (跨 state 共享)
     "name": "...",
-    "cost": 3,                     // WeaponArtsCost
-    "hit_count": 16,               // WeaponArtsHitCount
+    "cost": 3,                        // WeaponArtsCost
+    "hit_count": 16,                  // WeaponArtsHitCount
     "range": "All",
-    "duration_type": "Timer",
-    "duration_value": 30.0,
+    "value": 0.8, "value_scaling": 0.0, "additional_value": 33.0,
+    "use_all": true, "clip_id": 176,
+    "description": "...",
     "effects": [...]
-  },
-  "omoide": []                     // Phase 1+ 留空、待抓包 (memory_slot_skills 关联)
+  }
 }
 ```
 
@@ -314,7 +356,7 @@ block 顺序对 `Multiply` / `Addition` 池**数学等价**（结合律 + 交换
 
 ### 对前端 hensei calc 的 implication
 
-server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复刻 server fold、不读 user_weapon raw、**沿用 wiki crawl chara_training.md 公式 + master initial_/max_ 字段**（用户决定）。
+server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复刻 server fold、不读 user_weapon raw、**沿用旧 wiki 等级公式 + master initial_/max_ 字段**（用户决定）。具体公式见 [hensei_calc.md](hensei_calc.md) Base 计算段。
 
 ---
 
@@ -403,7 +445,7 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复�
 **不实现衰减**（docs §1.1.2 衰减率未公开）、UI 加 toggle、默认 on。
 作用：仅攻撃力（同 wiki "燃心" 概念、跟 server fold 的 BH multiplier 同源但简化为二态）。
 
-### 結婚 / LP（v2 修正 wiki [chara_training.md](chara_training.md) 漏项）
+### 結婚 / LP (详见 [hensei_calc.md](hensei_calc.md) chara_meta source)
 
 **結婚倍率**（作用**攻防 HP BK speed 5 项**）：
 

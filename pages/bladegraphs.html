@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BxB 心象結晶データベース v2</title>
+    <title>BxB 心象結晶データベース</title>
     <link rel="icon" href="../favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/nav.css" />
@@ -57,42 +57,62 @@
       <div id="content">
         <div id="filters">
           <div class="mob-search-row">
-            <input type="text" id="search" placeholder="🔍 心象結晶名で検索..." />
+            <input
+              type="text"
+              id="search"
+              placeholder="🔍 心象結晶名で検索..."
+              oninput="applyFilters()"
+            />
             <span id="bg-count-mob"></span>
           </div>
           <div class="mob-toolbar">
-            <button class="filter-toggle-btn" id="filter-toggle-btn">▼ 絞り込み</button>
-            <button class="toolbar-btn" id="btn-expand">全展開</button>
-            <button class="toolbar-btn" id="btn-collapse">全収起</button>
-            <button class="toolbar-btn" id="btn-reset">リセット</button>
+            <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilters()">
+              ▼ 絞り込み
+            </button>
+            <button class="toolbar-btn" onclick="expandAll()">全展開</button>
+            <button class="toolbar-btn" onclick="collapseAll()">全収起</button>
+            <button class="toolbar-btn" onclick="resetFilters()">リセット</button>
           </div>
           <div id="filters-body">
-            <div class="filter-section">
-              <div class="filter-label">レア度</div>
-              <div class="filter-toggles" id="f-rarity"></div>
-            </div>
-            <div class="filter-section">
-              <div class="filter-label">属性 (限定)</div>
-              <div class="filter-toggles" id="f-element"></div>
-            </div>
-            <div class="filter-section">
-              <div class="filter-label">武器 (限定)</div>
-              <div class="filter-toggles" id="f-weapon"></div>
-            </div>
-            <div class="filter-section">
-              <div class="filter-label">時間限定</div>
-              <div class="filter-toggles" id="f-time">
-                <button class="ftog" data-val="1">あり</button>
-                <button class="ftog" data-val="0">なし</button>
+            <div class="filter-row2">
+              <div class="filter-section">
+                <div class="filter-label">レア度</div>
+                <div class="filter-toggles" id="f-rarity"></div>
+              </div>
+
+              <div class="filter-section">
+                <div class="filter-label">属性</div>
+                <div class="filter-toggles" id="f-element"></div>
               </div>
             </div>
+
+            <div class="filter-section">
+              <div class="filter-label">武器</div>
+              <div class="filter-toggles" id="f-weapon"></div>
+            </div>
+
+            <div class="filter-section">
+              <div class="filter-label">効果</div>
+              <div class="filter-toggles" id="f-effect"></div>
+            </div>
+
+            <div class="filter-section">
+              <div class="filter-label">条件（対象）</div>
+              <div class="filter-toggles" id="f-scope"></div>
+            </div>
+
+            <div class="filter-section">
+              <div class="filter-label">条件（発動）</div>
+              <div class="filter-toggles" id="f-condition_trigger"></div>
+            </div>
           </div>
+          <!-- #filters-body -->
           <div class="desktop-bottom">
             <div id="bg-count"></div>
             <div style="display: flex; gap: 6px">
-              <button class="toolbar-btn" id="btn-expand-d">全展開</button>
-              <button class="toolbar-btn" id="btn-collapse-d">全収起</button>
-              <button class="toolbar-btn" id="btn-reset-d">リセット</button>
+              <button onclick="expandAll()" class="toolbar-btn">全展開</button>
+              <button onclick="collapseAll()" class="toolbar-btn">全収起</button>
+              <button onclick="resetFilters()" class="toolbar-btn">リセット</button>
             </div>
           </div>
         </div>
@@ -101,143 +121,74 @@
     </div>
 
     <script type="module">
-      import { loadBladegraphs } from '../shared/data-loader.js';
-      import { RARITY_LABEL, ELEMENT_LABEL, WEAPON_LABEL } from '../shared/constants.js';
-      import { bgIcon } from '../shared/image-paths.js';
+      import { Nav, updateReviseBar } from '../js/nav.js';
+      import { state } from '../js/bg-state.js';
+      import { escHtml, parseBairituVal, hideLoading } from '../js/utils.js';
+      import { deepApply } from '../js/diff.js';
+      import { enforceScopeConstraints } from '../shared/effect-constraints.js';
+      import {
+        initFilterToggles,
+        toggleFilters,
+        collapseFiltersOnScroll,
+        toggleFilter,
+        expandAll,
+        collapseAll,
+        resetFilters,
+        applyFilters,
+        toggleExpand,
+      } from '../js/bg-list.js';
+      // Phase 7 Session 1: 删 js/bg-edit.js import、Phase 7 不复活 bg edit (master 数据 100% 准确、无 server-fold 字段需补)
+      import { adaptBgList } from '../shared/v2-bg-adapter.js';
 
-      const RARITY_OPTS = [
-        { id: 5, label: '5★' }, { id: 4, label: '4★' }, { id: 3, label: '3★' },
-        { id: 2, label: '2★' }, { id: 1, label: '1★' },
-      ];
-      const ELEMENT_OPTS = [1,2,3,4,5,6].map(id => ({ id, label: ELEMENT_LABEL[id] }));
-      const WEAPON_OPTS = [1,2,3,4,5,6,7,8,9,10,11,12].map(id => ({ id, label: WEAPON_LABEL[id] }));
+      Nav.init();
 
-      const filterState = {
-        rarity: new Set(), element: new Set(), weapon: new Set(), time: new Set(),
-        search: '', expanded: new Set(),
-      };
-      let allBgs = [], filteredList = [];
-      const $ = (id) => document.getElementById(id);
-
-      function renderToggles(container, opts, key) {
-        const el = $(container);
-        if (!el) return;
-        el.innerHTML = opts.map(o => `<button class="ftog" data-val="${o.id}">${o.label}</button>`).join('');
-        el.querySelectorAll('.ftog').forEach(btn => {
-          btn.onclick = () => {
-            const v = +btn.dataset.val;
-            const s = filterState[key];
-            if (s.has(v)) s.delete(v); else s.add(v);
-            btn.classList.toggle('active');
+      // ===== DATA LOAD (v2 schema → wiki adapter) =====
+      document.addEventListener('DOMContentLoaded', () => {
+        initFilterToggles();
+        fetch('../data/bladegraphs.json')
+          .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then((arr) => {
+            state.allBG = adaptBgList(arr);
+            state.allBG.forEach((c) => {
+              if (!state.originalData[c.id])
+                state.originalData[c.id] = JSON.parse(JSON.stringify(c));
+            });
+            enforceScopeConstraints(state.allBG);
             applyFilters();
-          };
-        });
-      }
+            hideLoading();
+          })
+          .catch(() => { applyFilters(); hideLoading(); });
+      });
 
-      function applyFilters() {
-        const s = filterState;
-        filteredList = allBgs.filter(b => {
-          if (s.rarity.size && !s.rarity.has(b.rarity)) return false;
-          if (s.element.size && !(b.element_ids||[]).some(e => s.element.has(e))) return false;
-          if (s.weapon.size && !(b.weapon_type_ids||[]).some(w => s.weapon.has(w))) return false;
-          if (s.time.size) {
-            const has = !!(b.skill_effective_time || b.long_skill_effective_time);
-            if (!s.time.has(has ? 1 : 0)) return false;
-          }
-          if (s.search && !(b.name||'').toLowerCase().includes(s.search.toLowerCase())) return false;
-          return true;
-        });
-        filteredList.sort((a, b) => (b.rarity - a.rarity) || a.id - b.id);
-        renderList();
-      }
+      // 「絞り込み」展開中の user-initiated scroll でのみ collapse — touchmove (mobile) / wheel (desktop)。
+      // scroll 事件は使わない：filter 操作後の list 高さ変化による浏览器 auto-clamp scrollY を user スクロールと誤判するため。
+      window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
+      window.addEventListener('wheel', collapseFiltersOnScroll, { passive: true });
 
-      function renderList() {
-        $('bg-list').innerHTML = filteredList.map(b => {
-          const expanded = filterState.expanded.has(b.id);
-          const elems = (b.element_ids||[]).map(e => `<span class="elem-${e}">${ELEMENT_LABEL[e]}</span>`).join('');
-          const wpns = (b.weapon_type_ids||[]).map(w => WEAPON_LABEL[w]).join('/');
-          const hasTime = !!(b.skill_effective_time || b.long_skill_effective_time);
-          return `<div class="bg-row ${expanded?'expanded':''}" data-id="${b.id}">
-            <div class="bg-summary">
-              <img class="bg-thumb" src="${bgIcon(b.id)}" alt="" onerror="this.style.display='none'">
-              <div class="bg-name">${b.name}</div>
-              <div class="bg-meta">
-                <span class="rarity-${b.rarity}">${b.rarity}★</span>
-                ${elems} ${wpns}
-                ${hasTime ? '<span class="tag-badge">時</span>' : ''}
-              </div>
-            </div>
-            ${expanded ? renderDetail(b) : ''}
-          </div>`;
-        }).join('');
-        $('bg-count').textContent = `${filteredList.length} 件`;
-        $('bg-count-mob').textContent = `${filteredList.length}`;
-        $('bg-list').onclick = (e) => {
-          const row = e.target.closest('.bg-row');
-          if (!row) return;
-          const id = +row.dataset.id;
-          if (filterState.expanded.has(id)) filterState.expanded.delete(id);
-          else filterState.expanded.add(id);
-          renderList();
-        };
-      }
+      window.state = state;
+      Object.assign(window, {
+        applyFilters,
+        toggleFilter,
+        expandAll,
+        collapseAll,
+        resetFilters,
+        toggleFilters,
+        toggleExpand,
+        // Phase 7 Session 1: 删 edit 函数引用、view-only 期靠下方 _noop stub
+        updateReviseBar,
+        escHtml,
+        parseBairituVal,
+      });
 
-      function renderDetail(b) {
-        const skills = (b.skills||[]).map(sk => {
-          const hidden = sk.displayable === false;
-          return `<div class="bg-skill ${hidden?'hidden-skill':''}">
-            <b>${sk.parameter}</b>${hidden?' <small>[隠]</small>':''}
-            <span>${sk.math_type||''}/${sk.value} range=${sk.range}</span>
-            ${sk.element_id ? ` <span class="elem-${sk.element_id}">elem=${ELEMENT_LABEL[sk.element_id]}</span>` : ''}
-            ${sk.weapon_type_id ? ` wpn=${WEAPON_LABEL[sk.weapon_type_id]}` : ''}
-            ${sk.start_time || sk.end_time ? ` time=${sk.start_time||''}-${sk.end_time||''}` : ''}
-            ${sk.description ? `<div class="bg-skill-desc">${sk.description}</div>` : ''}
-          </div>`;
-        }).join('');
-        return `<div class="bg-detail">
-          ${b.author_name ? `<div class="bg-author">by ${b.author_name}</div>` : ''}
-          ${b.skill_effective_time ? `<div class="bg-time"><span class="tag-badge">時間限定</span> ${b.skill_effective_time}</div>` : ''}
-          ${b.long_skill_effective_time ? `<div class="bg-time-long">${b.long_skill_effective_time}</div>` : ''}
-          <div class="bg-skills">${skills}</div>
-          ${b.description ? `<details><summary>説明</summary><div class="bg-desc">${b.description}</div></details>` : ''}
-        </div>`;
-      }
-
-      function expandAll() { filteredList.forEach(b => filterState.expanded.add(b.id)); renderList(); }
-      function collapseAll() { filterState.expanded.clear(); renderList(); }
-      function resetFilters() {
-        ['rarity', 'element', 'weapon', 'time'].forEach(k => filterState[k].clear());
-        filterState.search = '';
-        $('search').value = '';
-        document.querySelectorAll('.ftog.active').forEach(b => b.classList.remove('active'));
-        applyFilters();
-      }
-
-      async function init() {
-        allBgs = await loadBladegraphs();
-        renderToggles('f-rarity', RARITY_OPTS, 'rarity');
-        renderToggles('f-element', ELEMENT_OPTS, 'element');
-        renderToggles('f-weapon', WEAPON_OPTS, 'weapon');
-        document.querySelectorAll('#f-time .ftog').forEach(btn => {
-          btn.onclick = () => {
-            const v = +btn.dataset.val;
-            if (filterState.time.has(v)) filterState.time.delete(v); else filterState.time.add(v);
-            btn.classList.toggle('active');
-            applyFilters();
-          };
-        });
-        $('search').oninput = (e) => { filterState.search = e.target.value; applyFilters(); };
-        $('btn-expand').onclick = expandAll;
-        $('btn-collapse').onclick = collapseAll;
-        $('btn-reset').onclick = resetFilters;
-        $('btn-expand-d').onclick = expandAll;
-        $('btn-collapse-d').onclick = collapseAll;
-        $('btn-reset-d').onclick = resetFilters;
-        $('filter-toggle-btn').onclick = () => $('filters-body').classList.toggle('open');
-        applyFilters();
-        document.getElementById('loading-screen')?.remove();
-      }
-      init();
+      // ===== Phase 6 view-only: edit 操作全 no-op =====
+      const _noop = () => {};
+      Object.assign(window, {
+        enterEditMode: _noop, cancelEdit: _noop, saveEdit: _noop, saveRevise: _noop,
+        reRenderBgEdit: _noop,
+        toggleBladeBunrui: _noop, toggleBladeElement: _noop, toggleBladeType: _noop,
+        setBladeHitStage: _noop, setBladeHitStageScaling: _noop,
+        setBladeScope: _noop, addBladeEffect: _noop, removeBladeEffect: _noop,
+      });
     </script>
   </body>
 </html>

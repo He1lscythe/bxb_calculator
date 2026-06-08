@@ -1,26 +1,43 @@
-// shared/bg-spec.js
-import { rarityOptions, elementOptions, weaponTypeOptions } from './filter-core.js';
+// ===== BG (Bladegraph) Spec =====
+// Usage: import { BG_SPEC } from '../shared/bg-spec.js';
 
-export const bgSpec = {
-  facets: [
-    { key: 'rarity', label: '★',
-      options: rarityOptions(),
-      match: (b, sel) => sel.has(b.rarity) },
-    { key: 'element', label: '属性 (限定)',
-      options: elementOptions(),
-      match: (b, sel) => (b.element_ids || []).some(e => sel.has(e)) },
-    { key: 'weapon', label: '武器 (限定)',
-      options: weaponTypeOptions(),
-      match: (b, sel) => (b.weapon_type_ids || []).some(w => sel.has(w)) },
-    { key: 'time', label: '時間限定',
-      options: [{ id: 1, label: 'あり' }, { id: 0, label: 'なし' }],
-      match: (b, sel) => {
-        const has = !!(b.skill_effective_time || b.long_skill_effective_time);
-        return sel.has(has ? 1 : 0);
-      } },
-  ],
-  sorts: [
-    { key: 'id', label: 'ID', getter: (b) => b.id },
-    { key: 'rarity', label: '★', getter: (b) => b.rarity ?? 0 },
-  ],
+import { classifyParameter, conditionTrigger, bgScopeTags } from './v2-parameter-class.js';
+
+// bg 有多个 skill、所有 filter 用 op='any' 检测 skills[] 任一命中
+export const BG_SPEC = {
+  searchFields: ['name'],
+  filters: {
+    rarity: { extract: (b) => b.rarity },
+    // 跟 crystal 统一: 保留 0、选「全」时含无限定的 skill
+    element: {
+      op: 'any',
+      extract: (b) => {
+        const ids = [...new Set((b._v2_skills || []).map((s) => s.element_id || 0))];
+        return ids.length ? ids : [0];
+      },
+    },
+    weapon: {
+      op: 'any',
+      extract: (b) => {
+        const ids = [...new Set((b._v2_skills || []).map((s) => s.weapon_type_id || 0))];
+        return ids.length ? ids : [0];
+      },
+    },
+    effect: {
+      op: 'any',
+      extract: (b) => (b._v2_skills || []).map((s) => classifyParameter(s.parameter)).filter(Boolean),
+    },
+    condition_trigger: {
+      op: 'any',
+      extract: (b) => (b._v2_skills || []).map((s) => conditionTrigger(s.parameter)),
+    },
+    scope: { op: 'any', extract: (b) => bgScopeTags(b) },
+    time: {                                              // 時間限定 (bg 独有)
+      extract: (b) => (b.skill_effective_time || b.long_skill_effective_time) ? 1 : 0,
+    },
+  },
+  sortFns: {
+    rarity: (c) => c.rarity || 0,
+    id: (c) => c.id || 0,
+  },
 };
