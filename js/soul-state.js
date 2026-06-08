@@ -1,0 +1,17 @@
+// js/soul-state.js — souls.html 的可变状态单例
+export const state = {
+  allSouls: [],
+  filteredSouls: [],
+  selectedId: null,
+  sortDesc: true,
+  reviseData: {},
+  sessionReviseIds: new Set(),
+  originalData: {},
+  editingId: null,
+  editData: null,
+  filterSets: { rarity: new Set(), element: new Set(), weapon: new Set(), tags: new Set() },
+  _filtersOpenScrollY: null,
+  // 本地用：data/souls_check.json 存在时启用 per-item check 标记
+  soulCheckEnabled: false,
+  soulCheck: new Set(),
+};

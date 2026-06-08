@@ -13,8 +13,8 @@ from pathlib import Path
 UNPACKING_ROOT = Path("F:/bxb")
 MASTER_TABLES_DIR = UNPACKING_ROOT / "master_tables"
 
-# 日期文件夹命名 YYYY_MM_DD
-_DATE_FOLDER_RE = re.compile(r"^\d{4}_\d{2}_\d{2}$")
+# 日期文件夹命名 YYYY_MM_DD 或 YYYY_MM_DD_HH_MM_SS (新版含时间戳)
+_DATE_FOLDER_RE = re.compile(r"^\d{4}_\d{2}_\d{2}(_\d{2}_\d{2}_\d{2})?$")
 
 
 def latest_master_dir() -> Path:

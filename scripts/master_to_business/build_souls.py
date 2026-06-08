@@ -101,6 +101,8 @@ def build():
             "code": entry.get("code"),
             "max_level": entry.get("max_level"),
             "only_partner": entry.get("only_partner"),
+            "texture_id": entry.get("texture_id"),    # icons/soul/{texture_id}.png
+            "sort_order": entry.get("sort_order"),
             "job_arts_id": entry.get("job_arts_id"),
             "job_arts": ja,
             "element_affinity": element_aff,

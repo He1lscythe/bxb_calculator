@@ -2,6 +2,8 @@
 // scripts/serve.js — 零依赖静态文件服务器、供 Playwright webServer 用。
 // 跑通 `python -m http.server` 同样的功能、但跨平台（Windows/Linux/Mac 都不需要 python 别名）。
 // 用法：node scripts/serve.js [port=8765]
+//
+// 注: 不含 /save endpoint。本地 edit save 要跑 scripts/start.py (port 8787、含 POST /save)。
 
 import http from 'node:http';
 import fs from 'node:fs';

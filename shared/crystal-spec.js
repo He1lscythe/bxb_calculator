@@ -1,30 +1,37 @@
-// shared/crystal-spec.js
-import { rarityOptions, elementOptions, weaponTypeOptions } from './filter-core.js';
+// ===== Crystal Spec =====
+// Usage: import { CRYSTAL_SPEC } from '../shared/crystal-spec.js';
 
-export const crystalSpec = {
-  facets: [
-    { key: 'rarity', label: '★',
-      options: rarityOptions(),
-      match: (c, sel) => sel.has(c.rarity) },
-    { key: 'element', label: '属性',
-      options: elementOptions(),
-      match: (c, sel) => sel.has(c.element_id) },
-    { key: 'weapon', label: '武器',
-      options: weaponTypeOptions(),
-      match: (c, sel) => sel.has(c.weapon_type_id) },
-    { key: 'parameter', label: '効果',
-      options: [
-        { id: 'Attack', label: '攻撃力' }, { id: 'Defense', label: '防御' }, { id: 'HP', label: 'HP' },
-        { id: 'Speed', label: '速度' }, { id: 'MotionSpeed', label: '攻速' },
-        { id: 'GuardBreak', label: 'BK' }, { id: 'BlazeAttack', label: 'BD攻撃' },
-        { id: 'DamageLimitBreak', label: 'ダメ上限' },
-      ],
-      match: (c, sel) => sel.has(c.parameter) },
-  ],
-  sorts: [
-    { key: 'id', label: 'ID', getter: (c) => c.id },
-    { key: 'rarity', label: '★', getter: (c) => c.rarity ?? 0 },
-    { key: 'max_value', label: '最大倍率', getter: (c) => c.max_value ?? 0 },
-    { key: 'initial_value', label: '初期倍率', getter: (c) => c.initial_value ?? 0 },
-  ],
+import { classifyParameter, conditionTrigger, crystalScopeTags } from './v2-parameter-class.js';
+
+export const CRYSTAL_SPEC = {
+  searchFields: ['name'],
+  filters: {
+    rarity: { extract: (c) => c.rarity },
+    // element / weapon 用 op:'any' + array 含 0、跟 bg 统一逻辑、选「全」(0) 命中无限定 entry
+    element: { op: 'any', extract: (c) => [c.element_id || 0] },
+    weapon: { op: 'any', extract: (c) => [c.weapon_type_id || 0] },
+    effect: { extract: (c) => classifyParameter(c.parameter) },
+    condition_trigger: { extract: (c) => conditionTrigger(c.parameter) },
+    scope: { op: 'any', extract: (c) => crystalScopeTags(c) },
+  },
+  sortFns: {
+    rarity: (c) => c.rarity || 0,
+    id: (c) => c.id || 0,
+  },
+};
+
+// crystal アイコン URL 解决器：
+//   cr.image 缺省 → wiki デフォルト URL
+//   cr.image = "http(s)://..." / "//..." → そのまま URL
+//   cr.image = repo 相対パス（"icon/crystal/foo.png"）→ pages/ から見て "../" 前缀
+// guildemblem.image / masou.image と同じ約定。
+// crystal icon: ../icons/crystal/{id}_1.png (v2 命名规则、_1 默认、_2 fallback)
+// onerror 兜底由 cr-list.js 内 <img onerror> 处理
+export const crystalImageSrc = (cr) => {
+  const img = cr && cr.image;
+  if (img) {
+    if (/^(https?:)?\/\//i.test(img)) return img;
+    return '../' + img;
+  }
+  return '../icons/crystal/' + ((cr && cr.id) || 0) + '_1.png';
 };
