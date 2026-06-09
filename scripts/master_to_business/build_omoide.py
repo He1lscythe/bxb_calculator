@@ -1,4 +1,4 @@
-→ bxb-wiki/data/omoide/{base_id}.json
+→ bxb_wiki/data/omoide/{base_id}.json
 
 来源是 实测采集 + Python 整理结果、不是 master_tables 直给。
 ~629 chara 覆盖 (用户未拥有的 ~25 chara 没数据、UI fallback empty)。
