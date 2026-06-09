@@ -1,0 +1,148 @@
+// v2 souls.json (master_tables schema) → wiki souls.json shape
+// 让 main 旧版 js/soul-render.js / js/utils.js / shared/soul-spec.js 1:1 跑起来。
+//
+// 复用 chara-adapter 的:
+//   paramToBunruiAndCondition / _MATH_TYPE_TO_CALC / _RANGE_TO_SCOPE / injectHitStages
+
+import {
+  paramToBunruiAndCondition,
+  injectHitStages,
+  MATH_TYPE_TO_CALC,
+  RANGE_TO_SCOPE,
+} from './chara-adapter.js';
+import { deepApply } from './revise-core.js';
+import { ELEMENT, WEAPON } from './constants.js';
+
+// v2 rank (int -4..5) → wiki level (-2..2、5 档)
+// 看 master data: rank -4=d / -3=dplus / -2=cplus / -1=c / 0=b / 1=bplus / 2=a / 3=aplus / 4=s / 5=splus
+function v2RankToWikiLevel(rank) {
+  if (rank == null) return 0;
+  if (rank <= -3) return -2;       // d / dplus → 超苦手
+  if (rank <= -1) return -1;       // c / cplus → 苦手
+  if (rank === 0) return 0;        // b → 普通
+  if (rank <= 2) return 1;         // bplus / a → 得意
+  return 2;                        // aplus / s / splus / ss → 超得意
+}
+
+// v2 affinity ({"1": {positive_value, negative_value, rank, ...}, ...})
+// → { affinity: wiki shape, ids: 得意 id array (level>=1、给 filter 用) }
+function _v2ElementAffinityToWiki(v2aff) {
+  const out = {};
+  const ids = [];
+  if (!v2aff) return { affinity: out, ids };
+  for (const [k, v] of Object.entries(v2aff)) {
+    const elemId = +k;
+    const elemName = ELEMENT[elemId];
+    if (!elemName) continue;
+    const level = v2RankToWikiLevel(v.rank);
+    out[elemName] = {
+      level,
+      atk_effect: v.positive_value ?? 1,
+      def_effect: v.negative_value ?? 1,
+    };
+    if (level >= 1) ids.push(elemId);
+  }
+  return { affinity: out, ids };
+}
+
+function _v2WeaponAffinityToWiki(v2aff) {
+  const out = {};
+  const ids = [];
+  if (!v2aff) return { affinity: out, ids };
+  for (const [k, v] of Object.entries(v2aff)) {
+    const wpnId = +k;
+    const wpnName = WEAPON[wpnId];
+    if (!wpnName) continue;
+    const level = v2RankToWikiLevel(v.rank);
+    out[wpnName] = {
+      level,
+      atk_effect: v.positive_value ?? 1,
+      def_effect: v.negative_value ?? 1,
+    };
+    if (level >= 1) ids.push(wpnId);
+  }
+  return { affinity: out, ids };
+}
+
+// v2 soul skill → wiki skill (含 effects[])。返回 null 表示该 skill 跳过。
+function _v2SoulSkillToWiki(sk) {
+  if (sk.parameter === 'NoEffect') return null;
+  const { bunrui, condition } = paramToBunruiAndCondition(sk.parameter);
+  const calc_type = MATH_TYPE_TO_CALC[sk.math_type];
+  if (calc_type == null) return null;
+  let scope = RANGE_TO_SCOPE[sk.range] ?? 0;
+  const eff = {
+    bunrui: [bunrui],
+    scope,
+    condition,
+    bairitu: sk.value,
+    bairitu_scaling: sk.value_scaling || 0,
+    calc_type,
+    _parameter: sk.parameter,   // soul renderRightTags 用 PARAMETER_CLASS_SHORT 反查
+  };
+  // HitCount (bunrui=7) — 注入 stage 分段字段 (soul 可能 values=[a,b,c] 只给特定段加)
+  if (bunrui === 7) injectHitStages(eff, sk);
+  // 元素 / 武器 / chara 限定
+  if (sk.element_condition) {
+    eff.element = sk.element_condition;
+    eff.scope = 2;
+  }
+  if (sk.weapon_type_condition) {
+    eff.weapon = sk.weapon_type_condition;
+    eff.scope = 2;
+  }
+  if (sk.weapon_base_id) {
+    eff.scope = 5;
+  }
+  return {
+    name: sk.name || '',
+    effect_text: sk.description || '',
+    effects: [eff],
+    _displayable: sk.displayable !== false,  // 用户决策: displayable=false 时 UI 50% 透明
+  };
+}
+
+export function v2SoulToWiki(s) {
+  // 屏蔽 6 位 id soul (placeholder 无技能、~42 个、其中 1 个有 skills 接受丢失)
+  if (s.id != null && s.id >= 100000) return null;
+  const skills = (s.skills || []).map(_v2SoulSkillToWiki).filter(Boolean);
+  // wikiId = texture_id (跟 icons/soul/{texture_id}.png 文件名对齐)、fallback s.id
+  const wikiId = s.texture_id ?? s.id;
+  const elemAff = _v2ElementAffinityToWiki(s.element_affinity);
+  const wpnAff = _v2WeaponAffinityToWiki(s.weapon_affinity);
+  return {
+    _master: s,                                   // 原 master entry (hensei stats-calc 用)
+    id: wikiId,
+    sort_id: s.sort_order ?? wikiId,
+    master_id: s.id,                              // master jobs.id (hensei link 等)
+    name: s.name,
+    rarity: s.rarity,
+    max_level: s.max_level,
+    image: null,                                  // soul-render 走 ../icons/soul/{id}.png
+    url: null,
+    tags: [],                                     // v2 没 soul tag、UI 不渲染 badge
+    acquisition: {},                              // v2 没"入手場所"字段
+    element: elemAff.ids,                         // SOUL_SPEC.filters.element 用、得意属性 id 数组 (level>=1)
+    weapon: wpnAff.ids,                           // SOUL_SPEC.filters.weapon 用、得意武器 id 数组
+    element_affinity: elemAff.affinity,
+    weapon_affinity: wpnAff.affinity,
+    skills,
+  };
+}
+
+// Phase 7 Session 2: 加 revise 参数、deepApply patch 合到 master 再转 wiki shape
+export function adaptSoulList(arr, revise = []) {
+  if (!Array.isArray(arr)) return [];
+  const reviseById = new Map();
+  for (const r of (revise || [])) {
+    if (r && r.id != null) reviseById.set(r.id, r);
+  }
+  const merged = arr.map((s) => {
+    const patch = reviseById.get(s.id);
+    if (!patch) return s;
+    const cloned = JSON.parse(JSON.stringify(s));
+    deepApply(cloned, patch);
+    return cloned;
+  });
+  return merged.map(v2SoulToWiki).filter(Boolean);
+}

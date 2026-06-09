@@ -3,17 +3,17 @@ import { state } from './cr-state.js';
 import {
   ELEMENT,
   WEAPON,
-  BUNRUI_SHORT,
   CONDITION,
   renderFilterToggles,
   renderElementFilterToggles,
 } from '../shared/constants.js';
 import {
   PARAMETER_CLASS_LABEL,
+  PARAMETER_CLASS_SHORT,
   COND_TRIGGER_LABEL,
   SCOPE_LABEL,
   classifyParameter,
-} from '../shared/v2-parameter-class.js';
+} from '../shared/parameter-class.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
 import { escHtml, fmt, fmtLarge } from './utils.js';
@@ -208,7 +208,7 @@ export const renderRowHd = (c) => {
   // 効果 tag: 用 v2 parameter class (跟 filter 一致)、不用旧 wiki bunrui
   const _cls = c.parameter ? classifyParameter(c.parameter) : null;
   const bt = _cls
-    ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_LABEL[_cls] || _cls) + '</span>'
+    ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[_cls] || _cls) + '</span>'
     : '';
   const bc = cond ? '<span class="badge bunrui-sm">' + (CONDITION[cond] || cond) + '</span>' : '';
   const bairitu = fmtRowBairitu(c);
@@ -322,15 +322,10 @@ export const scopeLabel = (e) => {
 
 const renderEffLine = (e) => {
   // 効果 tag: v2 parameter class (跟 filter 一致)
-  // e._v2_parameter 由 adapter 注入 (若有)、否则 fallback 旧 bunrui
-  const _cls = e._v2_parameter ? classifyParameter(e._v2_parameter) : null;
+  const _cls = e._parameter ? classifyParameter(e._parameter) : null;
   const bTags = _cls
-    ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_LABEL[_cls] || _cls) + '</span>'
-    : (e.bunrui || [])
-        .map(function (b) {
-          return '<span class="badge bunrui-sm">' + (BUNRUI_SHORT[b] || b) + '</span>';
-        })
-        .join(' ');
+    ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[_cls] || _cls) + '</span>'
+    : '';
   const scopeStr = scopeLabel(e) ? '<span class="eff-scope">' + scopeLabel(e) + '</span>' : '';
   const condStr = e.condition
     ? '<span class="eff-cond">' + (CONDITION[e.condition] || '') + '</span>'
@@ -370,6 +365,21 @@ export const renderDetailBody = (c) => {
   if (c['対象']) fields.push(['対象', escHtml(c['対象'])]);
   if (c['上限値']) fields.push(['上限値', escHtml(c['上限値'])]);
   if (c['入手方法']) fields.push(['入手方法', escHtml(c['入手方法'])]);
+
+  // master 7 个 server-fold 字段 (跟 edit mode 一致、缺省 fallback)
+  const m = c._master || {};
+  const factorVal = (v, def) => (v != null ? v : def);
+  const factorHtml = (label, v) =>
+    `<span style="margin-right:10px"><span style="color:var(--text2)">${label}</span> ${v}</span>`;
+  const factorRow =
+    factorHtml('Lv', factorVal(m.M_L_max, 1)) +
+    factorHtml('重量', factorVal(m.M_W_max, 1)) +
+    factorHtml('純度', factorVal(m.M_P_max, 1)) +
+    factorHtml('重量 min', factorVal(m.min_weight, 0)) +
+    factorHtml('重量 max', factorVal(m.max_weight, 100)) +
+    factorHtml('純度 min', factorVal(m.min_purity, 0)) +
+    factorHtml('純度 max', factorVal(m.max_purity, 100));
+  fields.push(['因子', factorRow]);
 
   const rows = fields
     .map(function (pair) {

@@ -146,7 +146,7 @@
       import { Nav, updateReviseBar } from '../js/nav.js';
       import { state } from '../js/soul-state.js';
       import { escHtml, fmtBairitu, parseBairituVal, hideLoading } from '../js/utils.js';
-      import { deepApply } from '../js/diff.js';
+      import { deepApply } from '../shared/revise-core.js';
       import {
         initFilterToggles,
         toggleFilter,
@@ -162,8 +162,8 @@
         navSoul,
         setupStickyHeights,
       } from '../js/soul-render.js';
-      // Phase 7 Session 3: v2-soul-edit (tags only)
-      import { adaptSoulList } from '../shared/v2-soul-adapter.js';
+      // Phase 7 Session 3: soul-edit (tags only)
+      import { adaptSoulList } from '../shared/soul-adapter.js';
       import {
         enterEditMode,
         cancelEdit,
@@ -171,7 +171,7 @@
         saveRevise,
         cancelRevise,
         toggleSoulTag,
-      } from '../js/v2-soul-edit.js';
+      } from '../js/soul-edit.js';
 
       Nav.init();
 
@@ -219,7 +219,7 @@
         escHtml,
         fmtBairitu,
         parseBairituVal,
-        // Phase 7 Session 3: v2-soul-edit active (tags only)
+        // Phase 7 Session 3: soul-edit active (tags only)
         enterEditMode,
         cancelEdit,
         saveEdit,

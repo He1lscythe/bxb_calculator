@@ -227,7 +227,7 @@ export const renderDetail = (c) => {
   const bdSection = c.bd_skill?.name ? renderBDCard(c.bd_skill) : '';
   // Phase 7 Session 3: omoide 数据 lazy fetch (data/omoide/{base_id}.json)、不预先判 hasOmoide
   //   v2 chara.omoide=[] (master 无)、真实数据在 Frida-抓 data/omoide/*.json、所以按钮永远显示、
-  //   modal 内 fetch 失败显示 "(なし)" — v2-omoide-view.js 处理
+  //   modal 内 fetch 失败显示 "(なし)" — omoide-view.js 处理
   const omoideBtn = `<button class="btn-latent btn-omoide" onclick="openLatentModal(${c.id})">潜在開放</button>`;
   // masou_by_chara 用 base_id (4位) 索引、chara wiki shape 的 c.id 是 variant_id (6位) → 走 _master.id
   const baseId = c._master?.id ?? c.id;

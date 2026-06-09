@@ -105,9 +105,6 @@
         ELEMENT,
         WEAPON,
         RARITY,
-        BUNRUI,
-        BUNRUI_SHORT,
-        BUNRUI_FILTER,
         CONDITION,
         CHARA_TAG,
         CHARA_TAG_COLOR,
@@ -120,7 +117,17 @@
       import { SOUL_SPEC } from '../shared/soul-spec.js';
       import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
       import { BG_SPEC } from '../shared/bg-spec.js';
-      import { PARAMETER_CLASS_LABEL, COND_TRIGGER_LABEL, SCOPE_LABEL } from '../shared/v2-parameter-class.js';
+      import { PARAMETER_CLASS_LABEL, PARAMETER_CLASS_SHORT, COND_TRIGGER_LABEL, SCOPE_LABEL, classifyParameter } from '../shared/parameter-class.js';
+      // hensei badge helper: v2 _parameter(s) → PARAMETER_CLASS_SHORT
+      const _efBadges = (ef) => {
+        const paramList = Array.isArray(ef._parameters)
+          ? ef._parameters
+          : (ef._parameter ? [ef._parameter] : []);
+        return paramList.map((p) => {
+          const cls = classifyParameter(p);
+          return `<span class="bunrui-tag">${PARAMETER_CLASS_SHORT[cls] || cls}</span>`;
+        }).join('');
+      };
       import {
         escHtml,
         fmtLarge,
@@ -132,15 +139,15 @@
         fmtNum,
         ctPfx,
       } from '../js/utils.js';
-      import { deepApply } from '../js/diff.js';
+      import { deepApply } from '../shared/revise-core.js';
       // omoide_templates 已删除 (用户决策: omoide 数据走 Frida 抓包、走 chara._omoide_slots、不用 templates)
       import { enforceScopeConstraints } from '../shared/effect-constraints.js';
-      import { adaptCharaList } from '../shared/v2-chara-adapter.js';
+      import { adaptCharaList } from '../shared/chara-adapter.js';
       import { charaIconStack } from '../shared/image-paths.js';
-      import { adaptSoulList } from '../shared/v2-soul-adapter.js';
-      import { adaptCrystalList } from '../shared/v2-crystal-adapter.js';
-      import { adaptMasouList } from '../shared/v2-masou-adapter.js';
-      import { adaptBgList } from '../shared/v2-bg-adapter.js';
+      import { adaptSoulList } from '../shared/soul-adapter.js';
+      import { adaptCrystalList } from '../shared/crystal-adapter.js';
+      import { adaptMasouList } from '../shared/masou-adapter.js';
+      import { adaptBgList } from '../shared/bg-adapter.js';
       // ===== v2 stats-calc (Phase 6.1 4-stage) =====
       import {
         computeStats,
@@ -153,7 +160,7 @@
         AWAKENING_MAX as AWAKENING_MAX_TBL,
         AWAKENING_FULL_MULT as AWAKENING_MULT_TBL,
         _STAT_KEYS,
-      } from '../shared/stats-calc-v2.js';
+      } from '../shared/stats-calc.js';
       import {
         SOUL_AWK_MAX,
         EMBLEM_RARITY_LV_MAX,
@@ -265,34 +272,13 @@
         fetch('../data/masou.json')
           .then((r) => (r.ok ? r.json() : []))
           .catch(() => []),
-        fetch('../data/characters_extra.json')
-          .then((r) => (r.ok ? r.json() : []))
-          .catch(() => []),
-        fetch('../data/souls_extra.json')
-          .then((r) => (r.ok ? r.json() : []))
-          .catch(() => []),
-        fetch('../data/bladegraphs_extra.json')
-          .then((r) => (r.ok ? r.json() : []))
-          .catch(() => []),
-        fetch('../data/crystals_extra.json')
-          .then((r) => (r.ok ? r.json() : []))
-          .catch(() => []),
-        fetch('../data/masou_extra.json')
-          .then((r) => (r.ok ? r.json() : []))
-          .catch(() => []),
         fetch('../data/chara_revise.json')
-          .then((r) => (r.ok ? r.json() : []))
-          .catch(() => []),
-        fetch('../data/omoide_revise.json')
           .then((r) => (r.ok ? r.json() : []))
           .catch(() => []),
         fetch('../data/soul_revise.json')
           .then((r) => (r.ok ? r.json() : []))
           .catch(() => []),
         fetch('../data/crystal_revise.json')
-          .then((r) => (r.ok ? r.json() : []))
-          .catch(() => []),
-        fetch('../data/bladegraphs_revise.json')
           .then((r) => (r.ok ? r.json() : []))
           .catch(() => []),
         fetch('../data/masou_revise.json')
@@ -312,16 +298,9 @@
             bg,
             cr,
             ms,
-            chExt,
-            soExt,
-            bgExt,
-            crExt,
-            msExt,
             chRev,
-            omRev,
             soRev,
             crRev,
-            bgRev,
             msRev,
             gt,
             ge,
@@ -443,9 +422,7 @@
         return '';
       };
       export const renderEfRow = (ef) => {
-        const btags = (ef.bunrui || [])
-          .map((b) => `<span class="bunrui-tag">${escHtml(BUNRUI_SHORT[b] || b)}</span>`)
-          .join('');
+        const btags = _efBadges(ef);
         const cond = ef.condition
           ? `<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition]}</span>`
           : '';
@@ -492,9 +469,7 @@
             .map(({ cr, cfg }) => {
               const tags = (cr.effects || [])
                 .map((ef) => {
-                  const btags = (ef.bunrui || [])
-                    .map((b) => `<span class="bunrui-tag">${escHtml(BUNRUI_SHORT[b] || b)}</span>`)
-                    .join('');
+                  const btags = _efBadges(ef);
                   const eff = _crystalEffectiveBairitu(cr, cfg, ef);
                   const val = (ef.calc_type === 1 ? '+' : 'x') + fmtLarge(eff, 3);
                   return btags + `<span class="tag-val">${val}</span>`;
@@ -1157,7 +1132,7 @@
     </div>`;
       };
 
-      // ===== STATS CALCULATOR (用 shared/stats-calc-v2.js 4-stage) =====
+      // ===== STATS CALCULATOR (用 shared/stats-calc.js 4-stage) =====
 
       // ===== ENEMY BAR (敵方/副本/工会信息) =====
       export const renderEnemyBar = () => {
@@ -1244,7 +1219,7 @@
             const lvMax = em ? emblemLvMax(em.rarity) : 1;
             emblemHtml += `<div class="emblem-slot-wrap" onclick="openEmblemModal(${s})">
         <div class="emblem-thumb-wrap">
-          <img class="emblem-thumb" src="../${em && em.image ? em.image : 'icon/emblem/' + slot.id + '.png'}" onerror="this.style.opacity='.3'" title="${escHtml(em ? em.name : '')}" alt="">
+          <img class="emblem-thumb" src="../${em && em.image ? em.image : 'icons/emblem/' + slot.id + '.png'}" onerror="this.style.opacity='.3'" title="${escHtml(em ? em.name : '')}" alt="">
           <button class="emblem-rm" onclick="event.stopPropagation();setEmblem(${s},'')" title="外す">×</button>
         </div>
         <div class="emblem-slot-meta" onclick="event.stopPropagation()">
@@ -1428,7 +1403,7 @@
             ? '<span class="badge weapon" style="background:rgba(91,127,255,.18);color:#7b9fff;border-color:rgba(91,127,255,.35)">GB限定</span>'
             : '';
           html += `<div class="em-item em-item-bg${cur}"${dim} onclick="selectEmblem(${em.id})">
-      <img class="em-icon" src="../${em.image || 'icon/emblem/' + em.id + '.png'}" onerror="this.style.visibility='hidden'" alt="">
+      <img class="em-icon" src="../${em.image || 'icons/emblem/' + em.id + '.png'}" onerror="this.style.visibility='hidden'" alt="">
       <div class="em-bg-body">
         <div class="em-bg-header">
           <span class="badge weapon">★${em.rarity || 1}</span>
@@ -1647,6 +1622,9 @@
         const spdSet = +r.speed?.setFrames || 0;
         // r.motionSpeed = { speeds: [m1, m2, m3], durationsFrames: [fr1, fr2, fr3] }
         const msFrames = Array.isArray(r.motionSpeed?.durationsFrames) ? r.motionSpeed.durationsFrames : [0, 0, 0];
+        const msSpeeds = Array.isArray(r.motionSpeed?.speeds) ? r.motionSpeed.speeds : [0, 0, 0];
+        // motion_durations 全空 (data/_npc_motions.json 缺该 motion_id) → fallback 显示倍率
+        const msMissing = msFrames.every((v) => !v);
 
         const yMax = aMax >= dl ? ' style="color:#ffd040"' : '';
         const yMin = aMin >= dl ? ' style="color:#ffd040"' : '';
@@ -1666,7 +1644,7 @@
           `<div class="stats-cell"${ck('ブレイク力')}><span class="stats-key">BK</span><span class="stats-val">${_fmtStat(Math.ceil(bk))}</span></div>`,
           `<div class="stats-cell"${ck('Hit')}><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}] 合計 ${total_hits} hit</span></div>`,
           `<div class="stats-cell"${ck('転速')}><span class="stats-key">転速</span><span class="stats-val">${spdRecover.toFixed(1)} · ${spdFrames + spdSet}fr</span></div>`,
-          `<div class="stats-cell"${ck('攻速')}><span class="stats-key">攻速</span><span class="stats-val">[${msFrames.map((v) => (v || '—')).join(', ')}] 計 ${msFrames.reduce((a, b) => a + b, 0)}fr</span></div>`,
+          `<div class="stats-cell"${ck('攻速')}><span class="stats-key">攻速</span><span class="stats-val">${msMissing ? `×[${msSpeeds.map((v) => v.toFixed(2)).join(', ')}] (時間データ不明)` : `[${msFrames.map((v) => (v || '—')).join(', ')}] 計 ${msFrames.reduce((a, b) => a + b, 0)}fr`}</span></div>`,
           `<div class="stats-cell"${ck('ダメ上限')}><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(Math.ceil(dl))}</span></div>`,
         ].join('');
         return `<div class="stats-grid">${cells}</div>`;
@@ -2044,16 +2022,6 @@
           .join('');
         return `<div class="f-section"><div class="f-label">${label}</div><div class="f-toggles">${btns}</div></div>`;
       };
-      export const bunruiSec = (activeSet) => {
-        const btns = Object.entries(BUNRUI_FILTER)
-          .map(([id, name]) => {
-            const short = BUNRUI_SHORT[id] || name;
-            return `<button class="ftog${activeSet.has(+id) ? ' on' : ''}" data-fkey="bunrui" data-fval="${id}"><span class="ftog-desk">${name}</span><span class="ftog-mob">${short}</span></button>`;
-          })
-          .join('');
-        return `<div class="f-section"><div class="f-label">効果</div><div class="f-toggles">${btns}</div></div>`;
-      };
-
       export const resetEM = () => {
         const f = mf[emType];
         Object.keys(f).forEach((k) => {
@@ -2388,7 +2356,7 @@
           .map((sk) => {
             const tags = dmRightTags(sk);
             const bairitu = fmtBairitu(sk);
-            const dim = sk._displayable === false ? ' style="opacity:0.5"' : '';
+            const dim = sk._displayable === false ? ' style="opacity:0.8"' : '';
             return min`
       <div class="dm-skill-card"${dim}>
         <div class="dm-skill-name-row">
@@ -2450,9 +2418,7 @@
       export const renderDMBg = (b) => {
         const effRows = (b.effects || [])
           .map((ef) => {
-            const btags = (ef.bunrui || [])
-              .map((bn) => `<span class="bunrui-tag">${BUNRUI_SHORT[bn] || bn}</span>`)
-              .join('');
+            const btags = _efBadges(ef);
             const cond = ef.condition
               ? `<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition] || ''}</span>`
               : '';
@@ -2491,9 +2457,7 @@
       export const renderDMMasou = (m) => {
         const effRows = (m.effects || [])
           .map((ef) => {
-            const btags = (ef.bunrui || [])
-              .map((bn) => `<span class="bunrui-tag">${BUNRUI_SHORT[bn] || bn}</span>`)
-              .join('');
+            const btags = _efBadges(ef);
             const cond = ef.condition
               ? `<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition] || ''}</span>`
               : '';
@@ -2539,9 +2503,7 @@
             } else {
               range = pfx + fmtLarge(mn ?? mx);
             }
-            const btags = (ef.bunrui || [])
-              .map((b) => `<span class="bunrui-tag">${BUNRUI_SHORT[b] || b}</span>`)
-              .join('');
+            const btags = _efBadges(ef);
             const scopeTag = fmtScopeTag(ef);
             fields.push([
               '効果量',
@@ -2686,9 +2648,7 @@
       export const dmRightTags = (s) => {
         let tags = '';
         (s.effects || []).forEach((e) => {
-          (e.bunrui || []).forEach(
-            (b) => (tags += `<span class="bunrui-tag">${BUNRUI_SHORT[b] || b}</span>`),
-          );
+          tags += _efBadges(e);
           if (e.scope === 0) tags += `<span class="scope-tag scope-self">自</span>`;
           else if (e.scope === 1) tags += `<span class="scope-tag scope-all">全</span>`;
           else if (e.scope === 2 || e.scope === 3 || e.scope === 4) {
@@ -3293,7 +3253,6 @@
         closeEM,
         buildEMSidebar,
         fsec,
-        bunruiSec,
         resetEM,
         applyEM,
         renderSortBadge,

@@ -37,16 +37,31 @@ def load_wiki_max_value():
 
 
 def _resolve_max_value(name, param, initial_value, wiki_max):
-    """硬规则 + wiki_aux 反查 max_value。无匹配 → None。"""
-    if name and '純真記憶' in name:
-        return 5.0
-    if name and '秘録記憶' in name:
-        return 1300000000.0
-    if name and 'メルティレコード' in name:
-        return 2.6
+    """wiki_aux 反查 max_value。无匹配 → None。
+    NoEffect parameter 的 max_value 跟 initial_value 一致 (sentinel、不显示 range)。
+    純真記憶 / 秘録記憶 / メルティレコード 硬规则已删、改在 _resolve_factors 里写 revise"""
     if param == 'NoEffect':
         return initial_value
     return wiki_max.get(name)
+
+
+def _resolve_factors(name):
+    """特殊 series 的 3 因子 override (user 决策、2026-06-08)。
+    返回 dict 或 None。值可为 number 或分式字符串 'a/b' (前端 parseBairituVal 处理)"""
+    if not name:
+        return None
+    if '秘録記憶' in name:
+        return {'M_L_max': 10, 'M_W_max': 10, 'M_P_max': 10}
+    if '純真記憶' in name:
+        return {'M_L_max': '500/113'}
+    if 'メルティレコード' in name or 'ディアリィレコード' in name:
+        return {'M_L_max': 2}
+    if 'アビス' in name:
+        if name.endswith('･超'):
+            return {'M_P_max': 5}
+        if name.endswith('･攻') or name.endswith('･動'):
+            return {'M_P_max': 4}
+    return None
 
 
 def build():
@@ -69,6 +84,11 @@ def build():
         if math and math not in MATH_TYPE_BY_NAME:
             warnings.append(f"crystal id={cid}: math_type {math!r}")
 
+        description = entry.get("description")
+        # メルティレコード / ディアリィレコード 系列 description 删 `\n[...のみ]` 限定文段 (从首个 \n 截断)
+        if description and name and ('メルティレコード' in name or 'ディアリィレコード' in name):
+            description = description.split('\n', 1)[0]
+
         record = {
             "id": cid,
             "name": name,
@@ -81,28 +101,30 @@ def build():
             "conditional_parameter": entry.get("conditional_parameter"),
             "element_id": entry.get("element_id"),
             "weapon_type_id": entry.get("weapon_type_id"),
-            "description": entry.get("description"),
+            "description": description,
         }
         if param != 'NoEffect':
             record["math_type"] = math
         out.append(record)
 
-        # revise 初始: 只写有 max_value 的 entry (无的留 null → Phase 8 反编译补)
-        max_value = _resolve_max_value(name, param, initial_value, wiki_max)
-        if max_value is not None:
-            revise.append({
-                "id": cid,
-                "name": name,
-                "max_value": max_value,
-            })
+        # revise 初始: 特殊 series (factors 命中) 走三因子、不写 max_value；其余从 wiki_aux 反查 max_value
+        factors = _resolve_factors(name)
+        if factors:
+            entry_rev = {"id": cid, "name": name}
+            entry_rev.update(factors)
+            revise.append(entry_rev)
         else:
-            unmatched.append({
-                "id": cid,
-                "name": name,
-                "parameter": param,
-                "initial_value": initial_value,
-                "rarity": entry.get("rarity"),
-            })
+            max_value = _resolve_max_value(name, param, initial_value, wiki_max)
+            if max_value is not None:
+                revise.append({"id": cid, "name": name, "max_value": max_value})
+            else:
+                unmatched.append({
+                    "id": cid,
+                    "name": name,
+                    "parameter": param,
+                    "initial_value": initial_value,
+                    "rarity": entry.get("rarity"),
+                })
 
     DATA_DIR.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -55,7 +55,12 @@ def build():
 
     out = []
     warnings = []
+    skipped_unknown = 0
     for entry in raw:
+        # 跳过占位 entry: description="データ不明" (icon 也不存在、UI 显示无意义)
+        if entry.get("description") == "データ不明":
+            skipped_unknown += 1
+            continue
         element_aff, weapon_aff = split_abilities(entry.get("job_abilities"))
 
         skills_out = []
@@ -113,7 +118,7 @@ def build():
 
     DATA_DIR.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"wrote {len(out)} soul entries → {OUT}")
+    print(f"wrote {len(out)} soul entries → {OUT} (skipped {skipped_unknown} データ不明 placeholder)")
     if warnings:
         print(f"WARN: {len(warnings)} issues")
         for w in warnings[:5]:

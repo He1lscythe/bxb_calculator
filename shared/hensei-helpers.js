@@ -1,6 +1,6 @@
 // shared/hensei-helpers.js — hensei viewer UI 用辅助函数 / 等级表
 //
-// 跟 stats-calc-v2 分离: 这些纯 UI 辅助 (lv slider 范围 / skill 列表渲染 / 类型解析)
+// 跟 stats-calc 分离: 这些纯 UI 辅助 (lv slider 范围 / skill 列表渲染 / 类型解析)
 // 不参与核心 stat 计算。
 
 // ============================================================
@@ -59,6 +59,37 @@ export const cryLvMax = (cr) =>
 
 export const emblemLvMax = (rarity) => EMBLEM_RARITY_LV_MAX[+rarity] ?? 1;
 
+// M_L_max / M_W_max / M_P_max 的值可以是 number 或分式字符串 ('5/1.13')
+// 缺省 / 空 / 解析失败 → 1 (不缩放)
+function parseFactor(v) {
+  if (v == null) return 1;
+  if (typeof v === 'number') return Number.isFinite(v) ? v : 1;
+  if (typeof v === 'string') {
+    const s = v.trim();
+    if (!s) return 1;
+    if (s.includes('/')) {
+      const [a, b] = s.split('/');
+      const na = Number(a), nb = Number(b);
+      if (Number.isFinite(na) && Number.isFinite(nb) && nb !== 0) return na / nb;
+      return 1;
+    }
+    const n = Number(s);
+    return Number.isFinite(n) ? n : 1;
+  }
+  return 1;
+}
+
+// crystal "bairitu" (display mode 显示的 lv max 时的最大効果量)
+//   - 三因子任一非 null → initial × M_L_max × M_W_max × M_P_max
+//   - 否则 → master.max_value (兼容 wiki_aux 来的普通结晶)
+export function crystalMaxBairitu(m) {
+  if (!m) return null;
+  const hasFactor = m.M_L_max != null || m.M_W_max != null || m.M_P_max != null;
+  if (!hasFactor) return m.max_value != null ? m.max_value : null;
+  const init = Number(m.initial_value) || 0;
+  return init * parseFactor(m.M_L_max) * parseFactor(m.M_W_max) * parseFactor(m.M_P_max);
+}
+
 // crystal effect 实际数值 — Phase 7 Session 2: unpacking §18.2 三因子公式 + fallback
 //
 // 判定 (基于 crystal 数据是否含 server-fold 参数):
@@ -71,7 +102,7 @@ export const emblemLvMax = (rarity) => EMBLEM_RARITY_LV_MAX[+rarity] ?? 1;
 //   M_P(P) = 1 + (M_P_max − 1) × (P − min_purity) / (max_purity − min_purity)
 //
 // cfg 缺省值: lv = lvMax / weight = max_weight / purity = max_purity (跟 lv 一致默认满)
-// 跟 stats-calc-v2 内 crystal effect collection 用同样公式
+// 跟 stats-calc 内 crystal effect collection 用同样公式
 export function crystalEffectiveValue(cr, cfg) {
   if (!cr?._master) return 0;
   const m = cr._master;
@@ -87,10 +118,10 @@ export function crystalEffectiveValue(cr, cfg) {
     return initV + (maxV - initV) * ratio;
   }
 
-  // 三因子公式
-  const ML_max = m.M_L_max ?? 1;
-  const MW_max = m.M_W_max ?? 1;
-  const MP_max = m.M_P_max ?? 1;
+  // 三因子公式 — M_*_max 支持小数 / 分式字符串 ('5/1.13')、parseFactor 统一展开
+  const ML_max = parseFactor(m.M_L_max);
+  const MW_max = parseFactor(m.M_W_max);
+  const MP_max = parseFactor(m.M_P_max);
   const minW = m.min_weight ?? 0;
   const maxW = m.max_weight ?? 100;
   const minP = m.min_purity ?? 0;
@@ -137,7 +168,7 @@ export function soulMultiplier(rarity, lv) {
 }
 
 // ============================================================
-// 元素相性 (chara vs enemy、stats-calc-v2 Phase 6.13 用)
+// 元素相性 (chara vs enemy、stats-calc Phase 6.13 用)
 // 元素 K 表 跟 wiki main:js/stats-calc.js L60-90 一致、mode 三选一
 // ============================================================
 const ELEMENT_K_NORMAL = {

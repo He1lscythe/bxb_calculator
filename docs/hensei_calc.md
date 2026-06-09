@@ -125,7 +125,7 @@ factor=0 时不衰减 (×1)、factor=1 时全量 (×value)。
 
 ## DamageLimitBreak (DLB) — 伤害输出 cap、跟 stat 显示无关
 
-hensei viewer **只显示 stat (Attack / Defense / HP / BK)**、不算伤害输出、所以 DLB cap 不进 stats-calc-v2。
+hensei viewer **只显示 stat (Attack / Defense / HP / BK)**、不算伤害输出、所以 DLB cap 不进 stats-calc。
 
 如果未来加伤害预估面板、再按 unpacking [09_damage_clamp.md §9.5](../../unpacking/HOWTO_battle/09_damage_clamp.md#95-updatelimitmaxdamage--0x1943078--核心公式) 实现：
 
@@ -152,7 +152,7 @@ clamp(repel_rate, 0, 100)
 历史遗留、不再支持:
 
 - **`Set`** (`math_type=2` / `calc_type=4`): master 数据 chara 端无、UI 不渲染、collect 阶段跳过
-- **「最終加算」** (`calc_type=2`): wiki classify_common 的 NLP fabrication、master 没对应字段
+- **「最終加算」** (`calc_type=2`): 早期 plan 假想字段、master 没对应、彻底废弃
 - **「最終乗算」** (`calc_type=3`): 同上
 
 `utils.js` `ctPfx()` 不再覆盖 calc_type 2/3/4。adapter `_MATH_TYPE_TO_CALC` 表只保留 Multiply/Addition/Repel_Percent。
@@ -202,7 +202,7 @@ export function applyStaged(base, parameter, effects) {
 
 ## UI 控件 ↔ 计算联动 checklist
 
-**每次修改 hensei viewer / stats-calc-v2 必检**。Playwright e2e 测试也按此表覆盖。
+**每次修改 hensei viewer / stats-calc 必检**。Playwright e2e 测试也按此表覆盖。
 
 ### 控件 → tr 字段 → 影响
 
@@ -257,7 +257,7 @@ console 输入 `window.__DEBUG_STATS = true` → 切控件时输出：
 ### Playwright e2e 测试覆盖目标
 
 每控件 1 个 test case：
-1. setup: target slot 装入 chara (用 wiki id = master `variant_id` 6 位、例 100101)
+1. setup: target slot 装入 chara (用 master `variant_id` 6 位、例 100101)
 2. read base stat (`#slot-{N} .stats-cell:nth-child(M) .stats-val`、M=1 攻撃力max)
 3. 改控件 → assert stat 数值变化方向 + 量级合理 (e.g. LP 档从 0→2 攻撃力 should ×1.5)
 

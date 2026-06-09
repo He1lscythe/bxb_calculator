@@ -1,612 +1,197 @@
-# BxB Crawl — 文件结构说明
+# 项目结构 (v2)
 
-> ⚠️ **Phase 0-5 v2 重写后本文大部分内容过时**（涉及 wiki crawl pipeline / wiki schema / 21 项 bunrui / scope/condition 体系）。
-> v2 实际架构看：
-> - [schema_v2.md](schema_v2.md) — master_tables → data/ 业务 JSON schema
-> - [hensei_calc.md](hensei_calc.md) — 4-stage hensei stat 计算 + UI 联动 checklist
->
-> Phase 6 (view-only 5 viewer 1:1 + hensei calc + enemy bar + BlazeGauge 系统) 已完成。
-> Phase 7 (4-bucket edit mode、sparse diff、start.py/api/save.js、v2-chara/soul/cr edit modal、修正按钮、撤回机制) 已完成、含 Session 1-4。
-> 新 edit pipeline: [shared/v2-revise-core.js](../shared/v2-revise-core.js) (computeDiff/deepApply/撤回)、4 adapter (chara/soul/crystal/masou) `deepApply` wrap、[js/v2-{chara,soul,cr}-edit.js](../js/) inline edit modal、[shared/v2-save-client.js](../shared/v2-save-client.js) POST /save 路由 (local start.py 8787 / Vercel api/save.js)。
->
-> 本文保留作 archive、待后续 round 整体重写为 v2 版本。
+按解包 `master_tables/` 重建的项目结构、`refactor/unpacking-source` branch (长期独立、永不 merge 回 main)。
+
+**baseline**: npm test 135/135 全绿、5 类 image 覆盖率 100% (chara/masou/crystal/bg/soul)。
 
 ---
 
-## 整体流程
+## 数据 pipeline
 
 ```
-fetch_pages.py（可选）
-    ↓ 保存 HTML 页面
-crawl_chara.py  ──────────────────────────────────────────────
-    ↓ 抓取 + 技能分类（两阶段） + 倍率标注                    |
-characters_classified.json                         classify_common.py
-    ↓                                                   ↑        ↑
-characters.html（角色 Viewer）                      crawl_chara.py  crawl_soul.py
-
-crawl_soul.py
-    ↓ 抓取 + 技能多效果分类
-souls.json
-    ↓
-souls.html（魂 Viewer）
-
-crawl_crystal.py
-    ↓
-crystals.json
-    ↓
-crystals.html（结晶 Viewer）
-
-start.py（本地服务器 :8787）
-    ↑ /save POST → 写回 JSON
-
-scripts/build.js（前端构建）
-    pages_src/*.html  +  fragments/*  →  pages/*.html  ← GH Pages serve
-    （消除 inline 片段重复；详见 Build Pipeline 章节）
+unpacking/master_tables/<latest>/master_data/*.json   (解包源数据、ground truth)
+    │
+    ▼
+scripts/master_to_business/build_*.py                 (8 个 build script、详见下方)
+    │
+    ▼
+data/*.json    (业务 JSON: master + revise + audit)
+    │
+    ▼  +  data/*_revise.json  (4 bucket: chara / soul / crystal / masou)
+    │     │
+    │     ▼
+shared/*-adapter.js                                    (deepApply(master, revise))
+    │
+    ▼
+js/*-list.js / *-render.js / hensei.html              (viewer 渲染 + hensei 计算)
 ```
 
----
-
-## 爬虫 / 数据处理脚本
-
-| 文件 | 用途 | 增量策略 |
-|------|------|---------|
-| `crawl_chara.py` | **角色主爬虫**。从 altema.jp 抓取魔剣角色数据，两阶段技能分类（lookup table → 关键词补漏）+ 倍率标注（含 calc_type）+ sort_id 补全。输出 `characters.json` | 详情页多页、有 `progress.json` part-level 跟踪。`--rerun` 全量、`--recal` 不重抓只重算分类、`--ids K1,K2` 局部重抓指定 final_id（与 `--rerun` 互斥、可配 `--recal`） |
-| `crawl_soul.py` | **魂爬虫**。抓取 altema.jp 魂页面，每个技能效果独立分类（多 effects 条目），含 calc_type。输出 `souls.json` | 详情页多页、有 `soul_progress.json` (`completed_ids` 二值)。`--rerun` 全量、`--recal` 重算分类、`--ids K1,K2` 局部重抓（与 `--rerun` 互斥） |
-| `crawl_crystal.py` | **结晶爬虫**。抓取記憶結晶页面，解析效果量，生成含 calc_type 的 effects 数组。输出 `crystals.json` | 单页全量、无 CLI flag、每次跑全量 fetch+parse+覆盖 |
-| `crawl_bladegraph.py` | **心象結晶爬虫**。单页全量抓取 altema 心象結晶列表，解析效果文本、scope/condition 检测、bunrui 关键词匹配（每个 bunrui 独立一条 effects）。输出 `bladegraphs.json` | 单页全量、无 CLI flag、每次跑全量 fetch+parse+覆盖（classify 改动可用 `git diff` 检视） |
-| `crawl_masou.py` | **魔装爬虫**。从 altema.jp 魔装页面抓取每个魔剣的魔装数据（按 `chara_id` 关联）。输出 `masou.json` | 单页全量、`--cached` dev 工具（用 `scripts/_masou_raw.html` 离线 parse） |
-| `classify_common.py` | **共享分类模块**。被 crawl_chara.py / crawl_soul.py / crawl_crystal.py / crawl_bladegraph.py 共用，包含：元素/武器类型映射、bunrui 关键词表、scope/condition 检测器、`classify_effect()`、`classify_skill_v2()`（魂多效果模式）、`classify_skill_chara()`（角色单 effects[0] 模式）、`classify_hit_fields()`（bunrui=7 时的 hit_type/hit_per_stage）、倍率提取与 calc_type 推断、lookup-veto 规则集。**注**：所有数据源「文字描述」字段统一为 `effect_text`（chara skill / BD / soul skill / bg / crystal / masou），分类器从该字段读 |
-| `build_skilllist_table.py` | 从 altema skilllist 页面构建 `skilllist_table.json`（key = 技能名+效果文本，value = altema bunrui ID 列表） |
-| `fetch_pages.py` | 工具脚本。单独抓取并保存 Altema HTML 页面，供调试分析 |
-| `download_omoide_icons.py` | 工具脚本。批量下载潜在能力图标到 `omoide_icon/` 目录 |
-| `start.py` | 本地服务器（端口 8787）。托管 viewer 页面，并提供 `/save` POST 接口，把前端编辑写回 JSON 文件 |
+**关键模块**:
+- master 数据来源: [scripts/master_to_business/paths.py](../scripts/master_to_business/paths.py) 自动 detect `master_tables/` 下最新日期文件夹
+- 4 bucket revise: `chara_revise.json` (tags + skill value_scaling) / `soul_revise.json` (tags) / `crystal_revise.json` (max_value / M_L/W/P_max / min_max weight/purity) / `masou_revise.json` (skill value_scaling)
+- sparse diff core: [shared/revise-core.js](../shared/revise-core.js) (`computeDiff` / `deepApply` / 撤回 / tombstone null)
+- 一次性 wiki 提取产物: `data/_wiki_aux.json` (含 `crystal_max_value` / `chara_tags` / `chara_skill_value_scaling` / `masou_value_scaling`、永不重跑)
 
 ---
 
-## JSON 数据文件
+## 目录结构
 
-### Data Layering（三层数据 pipeline）
-
-每个 entity 有最多三层 data file：
-
-- **`data/{entity}.json`** — crawler 输出，wiki source of truth。`crawl_*.py --rerun` 会重写
-- **`data/{entity}_extra.json`** — 手加的完整 entry（wiki 扒不到的），用户维护。crawler 不动
-- **`data/{entity}_revise.json`** — 对 base+extra 任一 entry 的字段级 patch（sparse diff）。edit UI 自动写
-
-**加载顺序**：`base → concat(extra) → applyRevise(revise)`。所有 viewer 页面（hensei / characters / souls / crystals / bladegraphs）都按这个顺序合并。
-
-| 何时改哪个文件 | 操作 |
-|--------------|------|
-| 重新爬 wiki 数据 | 跑 crawler，base 被重写 |
-| 想新增 wiki 没有的 entry | 在 `*_extra.json` 加完整 entry（id 用 high range 避开 base id 空间） |
-| 想字段级微调任何 entry（不管 base 还是 extra） | 用 edit UI；自动写到 `*_revise.json` |
-| 想彻底删一个手加 entry | 从 `*_extra.json` 删行 |
-| 想撤销字段微调 | 删 `*_revise.json` 对应 patch |
-
-存在的 extra 文件（默认 `[]`）：`characters_extra.json` / `souls_extra.json` / `bladegraphs_extra.json` / `crystals_extra.json` / `masou_extra.json`。omoide_revise / omoide_templates 是 chara 字段补丁、不需要 extra 层。
-
-### 详细文件清单
-
-| 文件 | 说明 |
-|------|------|
-| `characters.json` | **主角色数据**（含两阶段技能分类 + bairitu/bairitu_scaling + calc_type）。crawl_chara.py 输出，characters.html 读取。爬取过程中也作为断点续传存档 |
-| `characters_extra.json` | 手加的完整 chara entry（wiki 扒不到）。默认 `[]`。format 同 `characters.json` |
-| `characters_revise.json` | 角色手动修正 diff（**非 omoide 字段**）。仅存变更字段。页面加载时通过 deepApply 叠加到 base+extra 上 |
-| `omoide_revise.json` | 角色潜在開放 diff（`omoide` / `omoide_template` / `omoide_rarity` 字段）。与 characters_revise 分离，页面加载后单独叠加。**注：`omoide_template != null` 时 revise 不写 `omoide` 字段；运行时 `resolveOmoideTemplates` 用 templates 还原 slots** |
-| `omoide_templates.json` | 潜在開放槽位模板库。格式：`[{id, name, omoide:[...40 entries...]}]`。id 自增，通过 UI 编辑保存。**chara 引用方式是 live reference**（chara.omoide_template = id），template 内容更新后所有引用 chara 自动跟随 |
-| `souls.json` | **魂数据**（含多效果分类 + bairitu + calc_type + bunrui=7 时 hit_type/hit_per_stage）。souls.html 读取 |
-| `souls_extra.json` | 手加的完整 soul entry。默认 `[]` |
-| `souls_revise.json` | 魂手动修正数据 |
-| `crystals.json` | **記憶結晶数据**（含 effects 数组、bairitu_init/bairitu、scope/condition/calc_type、bunrui=7 时 hit_type/hit_per_stage）。crystals.html 读取 |
-| `crystals_extra.json` | 手加的完整 crystal entry。默认 `[]` |
-| `crystals_revise.json` | 結晶手动修正数据 |
-| `bladegraphs.json` | **心象結晶数据**（含 effects 数组、bairitu、scope/condition/calc_type）。bladegraphs.html 读取 |
-| `bladegraphs_extra.json` | 手加的完整 bladegraph entry。默认 `[]` |
-| `bladegraphs_revise.json` | 心象結晶手动修正数据 |
-| `masou.json` | **魔装数据**（每个 entry 关联 `chara_id`，含 effects 数组、effect_text、image URL）。crawl_masou.py 输出，characters.html 魔装 modal + hensei.html 魔装 picker 读取 |
-| `masou_extra.json` | 手加的完整 masou entry。默认 `[]` |
-| `masou_revise.json` | 魔装手动修正数据 |
-| `guildtitles.json` | 公会役職データ（hensei 用，含 `effect_text` 描述与 effects 数组）。手动维护 |
-| `guildemblems.json` | 紋章データ（hensei 用，含 rarity / guild_only / effect_text / effects）。手动维护 |
-| `senzai_table.json` | **潜在能力表**。key = altema 图标 ID，value 含 koka/syosai/bunrui/bairitu/bairitu_scaling/calc_type。手动维护 |
-| `soulskill_table.json` | 魂技能 lookup table（从 soulskill 页面构建）。key = 技能名+効果，value = soulskill category_id 列表 |
-| `skilllist_table.json` | 角色技能 lookup table（从 skilllist 页面构建）。key = 技能名+効果，value = altema bunrui ID 列表 |
-| `bd_special.json` | **BD 特殊効果**。`{char_id (sort_id): [special_ids]}`。crawl_chara 从 `tokitomebd`/`mahibd`/`buffbd` 三个页面爬取 |
-| `bd_special_durations.json` | **BD 特殊効果精确时长**。`{base_sort_id: {sid: 'Xs'}}`。`_elevate_bd` 在 `parse_bd_duration` 返回 `'数秒'` 时用此覆盖 |
-
----
-
-## 文档
-
-| 文件 | 说明 |
-|------|------|
-| `structure.md` | 本文件。项目文件结构总览（爬虫 / 数据文件 / 前端 / Save 机制） |
-| `skills_schema.md` | 完整 JSON 结构说明。包括 element/武器类型映射、bunrui 分类表（21种）、scope/condition/calc_type 定义、分类流程（两阶段）、爬虫参数表、Filter / Sort 共享 spec 系统、Revise 文件稀疏 index 格式 |
-| `chara_training.md` | 魔剣 練度・状態。改造状态、熟度上限、等级公式、結婚/LP/燃心、觉醒倍率 |
-| `senzai_icon_table.md` | 潜在開放 icon ID → 効果名/詳細/倍率/熟度補正/算法/分類 对照表 |
-| `motion_table.md` | モーション 出現数表（魔剣攻击动作分类） |
-| `frontend_ui.md` | **viewer 页面 UI/CSS 实现细节**。移动端全屏 modal、sticky 头部链、CSS 级联陷阱、grid 布局矩阵、z-index 栈速查、modal 调试 checklist |
-
----
-
-## 前端文件
-
-> **源文件在 `pages_src/`**，**构建产物在 `pages/`**（GH Pages 直接 serve，浏览器访问的也是 `pages/`）。
-> 编辑 `pages_src/`，运行 `node scripts/build.js` 或 `npm run build` 重建 `pages/`。详见下文 [Build Pipeline](#build-pipeline)。
-
-| 文件 | 说明 |
-|------|------|
-| `characters.html` | 角色数据库 Viewer。读取 `characters.json`，支持筛选、浏览、编辑（含 calc_type 切换）、潜在能力弹窗 |
-| `souls.html` | 魂数据库 Viewer。读取 `souls.json`，支持筛选、浏览、编辑（含 calc_type 切换） |
-| `crystals.html` | 结晶数据库 Viewer。读取 `crystals.json`，支持筛选、浏览、编辑（含 calc_type 切换） |
-| `bladegraphs.html` | 心象結晶数据库 Viewer。读取 `bladegraphs.json`，支持筛选（属性/武器/bunrui/条件类型）、浏览、编辑（★/属性/武器/bunrui/倍率） |
-| `hensei.html` | 编成 / 伤害模拟器（团队组合 + stats 计算） |
-| `js/nav.js` | 注入顶部导航栏（魔剣/結晶/心象/ソウル/編成），各 viewer 共用 |
-| `shared/constants.js` | 全 viewer 共享的纯数据常量 + UI 渲染助手。<br>常量：`RARITY` / `ELEMENT` / `ELEM_COLOR` / `ELEM_CSS_VAR` / `ELEMS_ORDER` / `WEAPON` / `WEAPONS_ORDER` / `BUNRUI`（长，详情/编辑下拉）/ `BUNRUI_SHORT`（badge / 紧凑标签）/ `BUNRUI_FILTER`（filter 按钮专用，比 SHORT 长比 BUNRUI 短）/ `BD_SPECIAL` / `BD_SPECIAL_COLOR` / `OMOIDE_THRESHOLDS` / `SCOPE`（长）/ `SCOPE_SHORT`（filter 按钮）/ `CONDITION`。<br>助手：`renderFilterToggles(field, map, opts)` / `renderElementFilterToggles(field, opts)` / `renderEditSelect(map, currentVal, onchangeExpr, opts)` / `renderEditCheckboxes(map, selected, onchangeExpr, opts)`，统一 `.ftog` / `.edit-select` / `.bunrui-check` 三种样式，所有 viewer 的 filter 按钮 / 编辑下拉 / 多选 checkbox 都从这里派生 |
-| `shared/filter-core.js` | 共用 filter+sort 引擎（声明式 spec 驱动）。详见 `skills_schema.md`「Filter / Sort 共享 spec 系统」 |
-| `shared/chara-spec.js` | chara 的 filter/sort spec，含 `maxHit`/`maxBdhit` 工具函数 |
-| `shared/soul-spec.js` | soul 的 filter/sort spec |
-| `shared/crystal-spec.js` | crystal 的 filter/sort spec |
-| `shared/bg-spec.js` | bladegraph 的 filter/sort spec |
-| `omoide_icon/` | 潜在能力图标目录（从 altema 下载）。由 `download_omoide_icons.py` 生成 |
-
----
-
-## Build Pipeline
-
-为消除 5 个 viewer page 之间共享的 inline 片段（如 loading-screen 内联 CSS）多处重复，引入轻量构建步骤：从 `pages_src/` 生成 `pages/`，支持 `{{include}}` partial 解析。
-
-### 目录关系
-
-```
-pages_src/         ← 你编辑这里（页面源 + partials）
-├── characters.html
-├── souls.html
-├── crystals.html
-├── bladegraphs.html
-├── hensei.html
-└── _loading.html  ← partial（`_` 前缀；build 时不会作为页面输出）
-
-scripts/
-└── build.js       ← node 脚本，~70 行，零依赖
-
-pages/             ← 构建产物（git 跟踪、GH Pages serve、浏览器访问）
-├── characters.html ← 顶部带 banner 警告 "AUTO-GENERATED ... DO NOT EDIT"
-└── ...
-```
-
-### Include 语法 + Partial 约定
-
-`pages_src/*.html` 中可写：
-
-```html
-{{include _loading.html}}
-{{include subdir/_foo.html}}
-```
-
-- **`_` 前缀文件 = partial**：`buildAll` 跳过它们（不生成对应 `pages/` 输出），但能被 include
-- 解析时按 `pages_src/` 为根做相对路径解析
-- 嵌套 include 支持（partial 可以 include 别的 partial）
-- 循环检测（A → B → A 会报错）
-- 最大嵌套深度 10
-
-### 命令
-
-| 命令 | 行为 |
+| 路径 | 用途 |
 |---|---|
-| `node scripts/build.js` 或 `npm run build` | 一次性 build 所有 page |
-| `node scripts/build.js --watch` 或 `npm run watch` | 持续运行，监视 `pages_src/`，改动 150ms debounce 后自动 rebuild |
-
-### 开发流
-
-两个 terminal：
-
-```bash
-# Terminal 1 — 本地 server
-python scripts/start.py
-
-# Terminal 2 — watch 模式自动 rebuild
-node scripts/build.js --watch
-```
-
-改 `pages_src/*` → watch 自动 rebuild → 浏览器 F5 即看到新版本。
-
-### 不需要 build 的修改
-
-- 改 `js/*.js` / `shared/*.js` —— 浏览器直接 fetch 这些 ES module，**不**经过 build
-- 改 `css/*.css` —— 各 page 直接 `<link>`，也**不**经过 build
-- 改 `data/*.json` —— 数据文件，无需 build
-
-### 何时该写 partial
-
-- 同一段 HTML/inline CSS/inline JS 在 ≥ 2 个 page 中**完全一样**且未来同改
-- 文件名加 `_` 前缀（`pages_src/_xxx.html`）让 build 跳过它
-- 否则不写（避免过度抽象）
-
-### 何时不该 inline 进 partial
-
-- ES module 文件（`js/*` / `shared/*`）—— 浏览器有 module 缓存，inline 反而失去优势，让浏览器 fetch 即可
-- page 之间 **不**共享的 page-specific 片段 —— 直接写在 `pages_src/<page>.html` 里
+| [scripts/](../scripts/) | 反复使用的脚本 (build / dev server / cleanup 工具) |
+| [scripts/master_to_business/](../scripts/master_to_business/) | v2 build pipeline + utility |
+| [shared/](../shared/) | JS 共享模块 (跨 viewer 复用) |
+| [js/](../js/) | viewer 业务代码 (5 viewer 各自 list / render / edit) |
+| [pages_src/](../pages_src/) | HTML 源 (5 viewer + `_loading.html` partial) |
+| pages/ | build 产物 (.gitignore 排除) |
+| [data/](../data/) | 业务 JSON (master + revise + audit + wiki_aux) |
+| icons/ | 本地图标资源 (.gitignore 排除、`copy_images.py` 从 D:/bxb 拷) |
+| omoide_icon/ | Frida 抓的 omoide icon (.gitignore 排除) |
+| [docs/](../docs/) | 项目文档 |
+| [tests/unit/](../tests/unit/) | 单测 (npm test 135/135) |
+| [tests/ui/](../tests/ui/) | Playwright e2e 测试 |
+| audit/ | `audit_dead_code.mjs` 输出 (.gitignore 排除) |
 
 ---
 
-## Revise 仓库结构（单向积累，main / data-staging 永不合回）
+## scripts/ — 反复使用脚本
 
-```
-GitHub Pages (live)
-    ↑ deploy from main（只 serve code + base data；revise/extra fetch 404 → 空数组、不应用）
-main branch                 ← code + base data only
-    ↓ 每次 main push 后、admin 在 data-staging 上 `git merge main`（保持 data-staging 代码新鲜）
-data-staging branch          ← code + base data + *_revise.json + *_extra.json + omoide_templates.json
-    ↑ admin 手動 merge proposal/save-XXX → data-staging
-proposal/save-{ts}-{rand}   ← API（Vercel /api/save）每次 POST 自动开
-    ↑ POST from frontend
-ユーザー編集
-```
-
-**关键：data-staging 单向积累、永远不合回 main。** revise/extra 故意只活在 data-staging，main 上 gitignored 让它们不污染 main 树。GitHub Pages 只看 main，所以 live 上只显示 base data；revise/extra 仅给本地 / 离线计算 / 数据校对工作流使用。
-
-- `*_revise.json` / `*_extra.json` / `omoide_templates.json` **仅在 data-staging branch 跟踪**（main 上 gitignored）
-- 用户在 GitHub Pages 上修正 → POST → API 创建 PR 到 `data-staging`
-- admin review/merge PR 到 data-staging。**不要 `git merge data-staging` 到 main**——一旦 merge，revise/extra 会作为 tracked file 进 main 树、之后 gitignore 失效，main 边界就模糊了
-- main 上代码改动 push 后，进 data-staging worktree 跑 `git merge main` 把代码带过来；data-staging 因此始终领先 main 若干个 commit（一半是 merge-main 同步，一半是真实数据更新——属于设计预期，不需要处理）
-- 本地直接编辑数据（不经 PR）：
-
-```bash
-git checkout data-staging
-git pull origin data-staging
-# 编辑 data/*_revise.json 或 data/*_extra.json
-git add data/ && git commit -m "..." && git push
-```
-
-**API 字段级 deepMerge + null 撤回**：
-
-| 角色 | 行为 |
-|---|---|
-| 前端 `computeDiff(orig, modified, prevRevise)` | 用户撤回字段（modified 跟 base 相同但 prev 里有）→ emit `field: null` 撤回标记 |
-| API `deepMerge(target, source)` | source 是 plain object → 字段级合并；source[k] === null → 删除 result[k]；空 dict 自动 prune |
-| `mergeById` | deepMerge 后只剩 metadata 字段（`id / name / chara_id / chara_name`）的空 entry 直接丢弃 |
-| 落盘 revise.json | 永远不含 null（撤回标记仅在传输阶段存在） |
-
-**`_hasRealContent` metadata 豁免列表**：`{id, name, chara_id, chara_name}`。`chara_id` / `chara_name` 是 masou_revise 的可读 metadata（同 `id` / `name` 思路、不参与撤回判定）。其他 viewer 的 revise entry 不含这两字段、不受影响。
-
-start.py `_deep_merge` / `_merge_by_id` 与 Vercel api/save.js 同语义（local + remote 行为一致）。
-
-**撤回标记如何产生（prev-revise pattern — 4 个 viewer 统一）：**
-
-所有 viewer (souls / bladegraphs / crystals / chara) 的 `saveEdit` 都传 prev 给 [js/diff.js](js/diff.js) 的 `computeDiff`。注意 chara 历史上自带 2 参版 computeDiff、prev 被悄悄丢弃导致 retraction 失效；现已统一 import `js/diff.js` 的 3 参版（[js/edit.js 顶部 re-export](js/edit.js#L13)）。
-
-```js
-const prevRevise = state.reviseData[id];   // chara 还合并 omoideReviseData
-const newDiff = computeDiff(state.originalData[id], state.editData, prevRevise);
-const meaningful = Object.keys(newDiff).some(k => k !== 'id' && k !== 'name');
-if (meaningful) state.reviseData[id] = newDiff;
-else            delete state.reviseData[id];
-```
-
-[js/diff.js `_deepDiff`](js/diff.js#L24) 的 prev 规则：
-
-| 情形 | emit |
-|---|---|
-| mval == oval, prev 有值 | `null`（撤回标记） |
-| mval == oval, prev 无 | `_NOOP`（不入 diff） |
-| mval / oval 都 nullish, prev 有值 | `null`（撤回 stale revise） |
-| mval / oval 都 nullish, prev 无 | `_NOOP` |
-| mval defined + oval nullish (base 无字段), **prev == mval** | `_NOOP`（防 base 无字段 + revise 加字段时 mval 被反复无脑塞进每次 diff） |
-| mval defined + oval nullish, prev != mval / prev 无 | emit mval clone |
-| mval nullish + oval defined | `null`（用户清掉、撤回 base 值） |
-| mval ≠ oval, 都 defined | emit mval clone |
-
-特殊情况由各 viewer 自管：
-- **crystal**：[js/cr-edit.js setCrystal* handlers](js/cr-edit.js#L132) 在 UI 用户清字段 (level_max / weight_step / scope 0/1 时的 element/type / 等) 时显式 `editData.X = null`，diff 看到 nullish vs defined → emit null
-- **chara**：dual-revise 文件，prev 是 `Object.assign({}, charRevise, omoideRevise)`，diff 后按 OMOIDE_KEYS 拆回两个 revise
-- **chara omoide_template override**（非 retraction）：[js/edit.js:194](js/edit.js#L194) `if (hasOmoide && omoideDiff.omoide_template != null) omoideDiff.omoide = null` —— template 选中时 omoide 数组冗余，强制清
-- **chara masou_overrides**（chara editor 内嵌）：跟 chara/cr/soul/bg 同款走 `computeDiff(masouOriginalData[mid], allMasou[i], prevRevise)`、撤回时自动 emit `null`。`masouOriginalData` 在 [characters.html](pages_src/characters.html#L376) masou load 时（base + extra 合并完、deepApply(revise) 之前）snapshot。落盘 entry 含 `id / name / chara_id / chara_name` 4 个 metadata 字段、可读。saveReviseCharaCore refresh 阶段也用无 prev 的 computeDiff 重算 masouReviseData（[shared/save-edit-base.js:204](shared/save-edit-base.js#L204)）
-
-**已知陷阱**：base 无字段 + revise 新增字段（如 chara base 无 `bd_skill`、用户手动给某 chara revise 加 `bd_skill`）：
-- `originalData[id].bd_skill === undefined`、`editData.bd_skill` 是 object → `_deepDiff` 走 leaf 分支 (oNullish + mval defined)
-- 若没有 prev-aware 判定，每次 saveEdit 都会把整个 bd_skill 无脑 clone 进 charDiff，导致用户撤回其他字段时 charDiff 缺少撤回标记 → server `_deep_merge` 保留 stale 字段
-- prev-aware 修复（上面表格第 5 行）：prev 跟 mval 等同时 emit `_NOOP`，让用户撤回别字段的 null 标记能正常进 charDiff
-- 测试覆盖：[tests/test_diff.cjs](tests/test_diff.cjs) "base 无字段 + revise 新增字段" 场景
-
-**saveRevise 后 refresh**：submit 成功后用**无 prev** 的 computeDiff 重算 state.reviseData，去除 null 撤回标记，防止下次 saveEdit 拿到 stale prev 重复 emit。例 [js/soul-edit.js:147](js/soul-edit.js#L147)。
-
-**等价性：** local `start.py _deep_merge` 与 Vercel `api/save.js deepMerge` 实现等价（都把 source[k] === null 转为 pop）。GitHub Pages 走 Vercel API、127.0.0.1 走 start.py，行为一致。落盘 revise.json 永远不含 null（撤回标记仅传输阶段存在）。
-
-**enforceScopeConstraints**（[shared/effect-constraints.js](../shared/effect-constraints.js)）：base+revise 合并后扫一遍 effects，强制 `scope ∈ {0, 1}` 删 element/type。修复 server pop 后 base.element 仍残留导致 edit 模式 element 仍选中的 bug。crystal / bladegraphs / hensei 加载时调用。
-
----
-
-## 前端 Save 机制
-
-各数据 Viewer（characters / souls / crystals / bladegraphs）共享统一的 **revise-only** 保存流程。基础 JSON（characters.json 等）只有爬虫能写，UI 只修改 revise。
-
-### saveEdit / saveRevise 完整 pipeline
-
-四个 viewer 编辑器（[edit.js](js/edit.js) chara / [cr-edit.js](js/cr-edit.js) / [soul-edit.js](js/soul-edit.js) / [bg-edit.js](js/bg-edit.js)）走同一套 flow：
-
-```
-1. 加载 (页面 init)
-   fetch base → state.allXxx[]
-   fetch extra → 并入 state.allXxx[]（concat、不 mutate base）
-   state.originalData[id] = JSON.parse(JSON.stringify(allXxx[id]))  ← snapshot 在 revise 合并前
-   fetch revise → state.reviseData[id] = entry; deepApply(allXxx[idx], entry)
-   (chara 额外：fetch omoide_revise → state.omoideReviseData + 二次 deepApply)
-
-2. enterEditMode(id)
-   state.editData = JSON.parse(JSON.stringify(state.allXxx[idx]))   ← 含 revise 合并结果
-   渲染编辑 UI
-
-3. 用户改字段
-   通过 set*(...) 或 setPath(state.editData, path, val) 直接写 editData
-   特殊：用户清字段 (level_max 输入空、scope→0/1 后的 element 等) 显式置 null、
-        让 _deepDiff 看到 nullish vs defined → emit null 撤回标记
-
-4. saveEdit() [in-session only — 不发网络]
-   sessionChanged = JSON.stringify(editData) !== JSON.stringify(allXxx[idx])
-   if (sessionChanged) {
-     allXxx[idx] = editData                                ← live state 推进
-     prev = state.reviseData[id]  // chara: merge with omoideReviseData
-     newDiff = computeDiff(originalData[id], editData, prev)  ← 3 参版 (js/diff.js)
-     if (any meaningful key in newDiff) state.reviseData[id] = newDiff
-     else                                delete state.reviseData[id]
-     state.sessionReviseIds.add(id)
-   }
-   关 editData、更新右上「未保存」徽章
-
-5. saveRevise()  [user 点「保存」按钮 — 发网络]
-   ids = Array.from(sessionReviseIds)
-   POST {
-     session_ids: ids,
-     <bucket>_revise: pickPatches(reviseData, ids)   // 只送有 patch 的 id
-   }
-   → 本地 (127.0.0.1 / LAN IP) 走 start.py /save
-   → 否则 走 Vercel /api/save (开 PR 到 data-staging)
-
-6. server _merge_by_id(existing, patches, session_ids)
-   - id in session_set + in patch_map  → _deep_merge(existing entry, patch)
-   - id in session_set + 不在 patch    → 整条删除（用户改回全部 base 值的语义）
-   - id 不在 session_set                → existing 保留 (并发安全)
-   - _deep_merge: source[k] === null → result.pop(k);
-                  source[k] dict → recurse;  其他 → 覆盖
-   - 落盘前 prune 空 dict / 只剩 {id,name} 的 entry
-
-7. saveRevise 回调
-   submit 成功 → 用**无 prev** 的 computeDiff 重算 state.reviseData[id] = newDiff'
-   (清掉 null 撤回标记、防止下次 saveEdit 拿 stale prev 重复 emit null)
-   sessionReviseIds.clear()
-```
-
-注意 step 4 的 sessionChanged 跟 allXxx[idx] 比、不是跟 originalData 比 —— allXxx 已经合并 revise，反映"编辑前的实际状态"，否则会误判用户什么都没改时也 sessionChanged。
-
-### 稀疏 index diff 格式
-
-`computeDiff` / `_deepDiff` 对**等长全是 object 的数组**（如 `skills`、`effects`、`omoide`）使用 index-keyed 稀疏格式，仅记录变了的下标。详见 `skills_schema.md`「Revise 文件稀疏 index 格式」。
-
-```json
-"skills": { "2": { "effects": { "0": { "bunrui": [1] } } } }
-```
-
-合并端（`deepApply` JS 客户端、`deep_update` Python 服务端）通过「target 是数组 + patch 是 object 且所有 key 是数字」识别。
-
-
-### 核心原则
-
-```
-基础 JSON      ←  只有爬虫更新（pure parser 输出）
-revise JSON    ←  只有 UI 更新
-页面显示       =  基础 + deepApply(characters_revise) + deepApply(omoide_revise)
-```
-
-> **重要**：`crawl_*.py` 的 `--recal` **不再** merge revise 进 base JSON（之前是 Phase 3
-> 步骤）。base JSON 始终是 parser 单一来源，revise 仅在前端叠加。这样：
->
-> - 用户删除 revise 条目 → 刷新即可看到 parser 默认值（不必等下次 recal）
-> - parser 改进 → recal 后立即体现，不被 stale revise 覆盖
-> - base JSON 不被污染、回滚一致
-
-### 字段分流（characters.html 专属）
-
-characters.html 对角色的 revise 分成两个文件：
-
-| 文件 | 包含字段 |
-|------|---------|
-| `characters_revise.json` | 除 omoide 外的所有字段（rarity、states、bd_skill 等） |
-| `omoide_revise.json` | `omoide` / `omoide_template` / `omoide_rarity` |
-
-判断逻辑在 `saveEdit()`：
-```javascript
-const OMOIDE_KEYS = new Set(['omoide', 'omoide_template', 'omoide_rarity']);
-// diff 中属于 OMOIDE_KEYS 的字段 → omoideReviseData
-// 其余字段 → reviseData
-```
-
-### omoide_template 压缩（saveEdit 中）
-
-`omoide_template != null`（玩家选/换了 template）时，revise 不存完整 `omoide` 数组 —— 显式注入 `omoide: null` 触发 server `_deep_merge` 清掉 stale 字段：
-
-```javascript
-if (hasOmoide && omoideDiff.omoide_template != null) {
-  omoideDiff.omoide = null;  // 让 server 把 revise.omoide 字段 pop 掉
-}
-```
-
-运行时 `resolveOmoideTemplates(charas, templates)`（[shared/omoide.js](../shared/omoide.js)）在 fetch 后还原 slots：找到 chara.omoide_template 对应 template，把 template.omoide 深拷贝覆盖 chara.omoide。template 找不到则保留 chara.omoide 原值（降级）。
-
-脱离 template（玩家手改 slot）时 `_syncTemplateSelect` 会把 `omoide_template` 置 null。save 时 diff 含 `omoide_template: null` + 完整 `omoide`，注入条件 false，两者都进 revise；server pop 掉 `omoide_template`、保留 `omoide` 作显式 override。
-
-### 相关变量
-
-| 变量 | 位置 | 说明 |
-|------|------|------|
-| `reviseData` | 各页面 | `{ id: obj, ... }`，当前会话积累的非 omoide diff |
-| `omoideReviseData` | characters.html | `{ id: obj, ... }`，当前会话积累的 omoide diff |
-| `sessionReviseIds` | 各页面 | `Set<id>`，**本次会话**中实际改动过的 id，控制 Save 按钮显示 |
-| `originalData` | 各页面 | `{ id: obj, ... }`，页面加载时对基础数据的快照，整个会话不变 |
-
-### 数据流
-
-```
-页面加载
-  └─ fetch characters.json → allChars
-       └─ originalData[id] = deepcopy(c)         ← 快照，会话内不变
-  └─ fetch characters_revise.json
-       └─ reviseData[id] = c
-       └─ deepApply(allChars[idx], c)
-  └─ fetch omoide_revise.json
-       └─ omoideReviseData[id] = c
-       └─ deepApply(allChars[idx], c)            ← omoide 字段叠加
-
-用户进入编辑模式
-  └─ enterEditMode(id)：editData = deepcopy(allChars[id])  ← 含两份 revise 叠加后的值
-
-用户点击「保存」（saveEdit）
-  └─ prevMerged = { ...reviseData[id], ...omoideReviseData[id] }
-  └─ diff = computeDiff(originalData[id], editData, prevMerged)  ← prev-revise pattern
-  └─ 按 OMOIDE_KEYS 拆分 diff
-       ├─ 非 omoide 字段 → reviseData[id]
-       └─ omoide 字段    → omoideReviseData[id]
-  └─ 应用 omoide_template 非 null 时 omoide=null override（不是 retraction）
-
-用户点击顶部 Save 按钮（saveRevise）
-  └─ POST /save { revise: [...], omoide_revise: [...] }
-  └─ 成功：用无 prev 的 computeDiff refresh reviseData / omoideReviseData
-           （去除 null 撤回标记，下次 save 不重复 emit）
-  └─ sessionReviseIds 清空
-```
-
-### updateReviseBar()（nav.js 全局）
-
-```js
-function updateReviseBar() {
-  var sr = (typeof sessionReviseIds !== 'undefined') ? sessionReviseIds : new Set();
-  var count = sr.size;
-  bar.style.display = count > 0 ? 'flex' : 'none';
-  btn.textContent   = count > 0 ? 'Save (' + count + ')' : 'Save';
-  status.textContent = '';
-}
-```
-
-- 读各页面自己的 `sessionReviseIds`（`let` 顶层变量，全局可见）
-- Save 按钮的 `onclick` 用 `typeof saveRevise==='function'&&saveRevise()`，对无编辑功能的页面（hensei）安全
-
----
-
-
-## Tests / CI
-
-### Node 单测（tests/run_all.cjs）
-
-`tests/test_*.cjs` 都是纯 Node、无浏览器、不依赖外部服务。`npm test` 跑 `tests/run_all.cjs` 串联所有 cjs spec、当前 715 pass / 0 fail。
-
-主要 spec：
-
-| 文件 | 覆盖 |
-|---|---|
-| `test_calculator.mjs` | hensei stats 算法 — Step G 后切到 import 真 `js/stats-calc.js`（thin wrapper 兼容旧 4-参 sig），通过 `buildTestCtx(team, teamSize, opts)` 注入 14 字段 ctx。mirror 9 个 helper 全删（用 stats-calc.js export 的真版本）。81 pass。 |
-| `test_diff.cjs` | `js/diff.js` `computeDiff` / `_deepDiff` 稀疏 dict + null 撤回标记 |
-| `test_save_edit_base.cjs` | `shared/save-edit-base.js` 4 core 函数 + chara/cr/soul/bg/masou 对齐场景 |
-| `test_edit_retraction.cjs` | prev-revise pattern：编辑 → 撤回 → revise 整条删 |
-| `test_revise_merge.cjs` | server `_deep_merge` + `_hasRealContent` metadata 豁免 |
-| `test_data_integrity.cjs` | base + extra + revise 合并后字段完整性 |
-| `test_calc_formulas.cjs` / `test_final_calc.cjs` / `test_hit_scaling.cjs` / `test_crystal_dims.cjs` / `test_crystal_split.cjs` / `test_bairitu_scaling.cjs` / `test_soul_affinity.cjs` / `test_classify_soul.cjs` / `test_hensei_align.cjs` / `test_emblem_schema.cjs` | 各算法/分类/schema 单测 |
-
-### Playwright UI smoke（tests/ui/*.spec.js）
-
-5 个 viewer 端到端覆盖：smoke + saveRevise body 校验 + 行为验证 + 复杂集成场景 + 错误处理。23 个 test。
-
-| 文件 | 覆盖 |
-|---|---|
-| `tests/ui/characters.spec.js` (9 test) | smoke + saveEdit/Revise UI flow + saveRevise POST body 含 `revise` bucket rarity 改动 + 撤回 e2e + omoide_template override（→ `omoide_revise.omoide = null`）+ bd_skill edit（→ `revise.bd_skill`）+ masou_overrides edit（→ `masou_revise` bucket 含 metadata + 稀疏 effects）+ filter UI（toggleFilter rarity → list count 减少 / resetFilters 恢复）+ 错误处理（saveRevise 500 → revise-bar 不清空 / btn 重 enabled / sessionReviseIds 非空） |
-| `tests/ui/crystals.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `crystals_revise` bucket level_max 改动 |
-| `tests/ui/souls.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `souls_revise` bucket rarity 改动 |
-| `tests/ui/bladegraphs.spec.js` (3 test) | smoke + edit/save + saveRevise POST body 含 `bladegraphs_revise` bucket rarity 改动 |
-| `tests/ui/hensei.spec.js` (5 test) | 3 slot 容器 + setChara → stats panel 非 0 + **enemy.bk 切换**（騎槍 chara + ドキドキドクター 結晶 → 攻撃力 ×12，crystal ×4 + Stage 4 enemy.bk ×3）+ crystal slider（setCrystalDim weight/purity/lv → state 同步 + clamp 0/100/cryLvMax 边界）+ **scope=5 名前精确匹配**（ティナ×ブレイドの秘録記憶 + ティナ×ブレイド chara → ダメ上限 +1.3G；不匹配 chara → ダメ上限 不变；验 commit 975b381 精确等値匹配） |
-
-`tests/ui/helpers.js` 4 个工具：
-- `attachPageErrorWatcher(page)` — 监听 pageerror / console.error、test 末尾 assert empty
-- `mockSaveEndpoints(page)` — 拦截 /save + Vercel /api/save、返回 mock 200（不 capture body）
-- `captureSaveEndpoint(page)` — 同上 + 把 POST body JSON 收集到返回数组（如 `expect(captured[0].revise[0].rarity).toBe(3)`）
-- `mockSaveEndpointError(page, status=500)` — mock 返回 error status、用于测 wrapSaveReviseUi catch 分支
-
-跑法：`npm run test:ui`（或 `npx playwright test`）。`playwright.config.js` 自动起 `python -m http.server 8765 --bind 127.0.0.1` 作为静态 web server、跑完即停。仅 chromium-headless-shell、~112MB（local 装一次、`AppData/Local/ms-playwright/`、git 不入）。
-
-### CI workflows
-
-| 文件 | 触发 | 跑什么 |
-|---|---|---|
-| `.github/workflows/test.yml` | push / PR to main | `npm ci && npm test && npm run lint` |
-| `.github/workflows/ui.yml` | push / PR to main | `npm ci && npx playwright install --with-deps chromium && npm run test:ui` |
-
-两个 workflow 独立 job（并行）。lint 配置 `eslint.config.js` 只 enforce 3 条 critical rule（no-undef / no-unused-vars / no-redeclare）、warning 不 fail。Prettier 不进 CI（`npm run format` 给开发者手动用）。
-
-### Dead code audit（手动 audit、不进 CI）
-
-ESLint 默认不查跨文件 dead exports / dead imports / arity 不匹配。手动 audit 用：
+### 根目录
 
 | 脚本 | 用途 |
 |---|---|
-| `scripts/audit_dead_code.mjs` | 扫描 js / shared / pages_src / pages / tests，输出 4 份 markdown 到 `audit/` 目录（gitignored）：`dead-exports.md` / `redundant-exports.md` / `dead-imports.md` / `arity-mismatch.md`。纯 regex 实现、精度 ~90%、漏报误报正常 |
-| `scripts/fix_dead_imports.mjs` | 读 `audit/dead-imports.md`、re-verify 每条、批量删 import block 内 dead named symbols（整段删 / 部分重写两种）。`--dry-run` 预览 |
+| [build.js](../scripts/build.js) | 静态 build (pages_src/*.html + fragments → pages/*.html)、支持 `--watch` 模式 |
+| [serve.js](../scripts/serve.js) | 本地静态 dev server |
+| [start.py](../scripts/start.py) | 本地 dev server + `POST /save` endpoint (写回 `data/*_revise.json`) |
+| [audit_dead_code.mjs](../scripts/audit_dead_code.mjs) | dead exports / redundant exports / dead imports / arity mismatch 4 份报告 |
+| [fix_dead_imports.mjs](../scripts/fix_dead_imports.mjs) | 读 audit 报告、batch 删 dead imports (含 `--dry-run` 模式) |
 
-用法：refactor / 删 helper / 重命名 后跑一次。当前 dead-exports = 0 / redundant-exports = 0 / dead-imports = 0。arity-mismatch 142 条多数是 JS optional-arg convention 的 false positive，报告内有 disclaimer。
+### scripts/master_to_business/ — v2 build pipeline + utility
+
+**Build scripts** (master → data、跑一次再跑 idempotent):
+
+| 脚本 | 输入 | 输出 |
+|---|---|---|
+| [build_senzai.py](../scripts/master_to_business/build_senzai.py) | `memory_slot_skills.json` | `data/senzai_table.json` |
+| [build_souls.py](../scripts/master_to_business/build_souls.py) | `jobs.json` | `data/souls.json` |
+| [build_crystals.py](../scripts/master_to_business/build_crystals.py) | `materials.json` + `_wiki_aux.json` | `data/crystals.json` + `data/crystal_revise.json` + audit |
+| [build_bladegraphs.py](../scripts/master_to_business/build_bladegraphs.py) | `pictures.json` | `data/bladegraphs.json` |
+| [build_characters.py](../scripts/master_to_business/build_characters.py) | `weapons.json` + `weapon_innate_skills.json` + `_wiki_aux.json` | `data/characters.json` |
+| [build_masou.py](../scripts/master_to_business/build_masou.py) | `weapon_costumes.json` + `_wiki_aux.json` | `data/masou.json` |
+| [build_omoide.py](../scripts/master_to_business/build_omoide.py) | `unpacking/draft/out/memory_slot/summary/*.json` (Frida 抓) | `data/omoide/{base_id}.json` |
+| [build_all.py](../scripts/master_to_business/build_all.py) | 上面全部 | 跑全套 + 错误报告 |
+
+**Utility 模块** (反复使用、被 build script import):
+
+| 模块 | 用途 |
+|---|---|
+| [paths.py](../scripts/master_to_business/paths.py) | 自动 detect 最新 `master_tables/` + 提供 `master_file()` helper |
+| [enums.py](../scripts/master_to_business/enums.py) | #JS 91 项 parameter / 3 math_type / 各 enum 映射 |
+| [image_paths.py](../scripts/master_to_business/image_paths.py) | master id → D:/bxb 本地 image path 反查 |
+| [copy_images.py](../scripts/master_to_business/copy_images.py) | 数据更新时拷 D:/bxb → `icons/` (含 soul 7 张 fallback 段) |
+| [gen_motion_table.py](../scripts/master_to_business/gen_motion_table.py) | `characters.json` → `docs/motion_table.md` (master 改 motion_id 后重跑) |
+| [fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) | 抓 altema wiki「入手方法」字段、patch 进 `data/crystals.json` (字段 `入手方法`) + `data/bladegraphs.json` (字段 `acquisition`)、按 name 匹配 |
 
 ---
 
-## 运行时文件（gitignored）
+## shared/ — JS 共享模块
 
-| 文件 | 说明 |
-|------|------|
-| `progress.json` | 角色爬虫进度，增量爬取时跳过已完成项；含 part-level 状态（见下） |
-| `soul_progress.json` | 魂爬虫进度，同上 |
-| `skilllist.html` | skilllist 页面缓存，build_skilllist_table.py 使用 |
-| `soulskill.html` | soulskill 页面缓存，build_skilllist_table 脚本使用 |
+| 模块 | 用途 |
+|---|---|
+| [stats-calc-v2.js](../shared/stats-calc-v2.js) | hensei 7-stage stat 计算 (HP-curve / Break gate / 4 stage apply / DLB cap / Speed / MotionSpeed / enemy mods) |
+| [hensei-helpers.js](../shared/hensei-helpers.js) | UI 用 lv/觉醒/熟度表 + soulMultiplier / crystalEffectiveValue / crystalMaxBairitu / BlazeGauge 系统 |
+| [revise-core.js](../shared/revise-core.js) | sparse diff core (`computeDiff` 三参含撤回 + `deepApply` + tombstone null) |
+| [save-client.js](../shared/save-client.js) | POST /save 路由 (local `start.py:8787` / Vercel `/api/save.js`) + toast 反馈 |
+| [chara-adapter.js](../shared/chara-adapter.js) / [soul-adapter.js](../shared/soul-adapter.js) / [crystal-adapter.js](../shared/crystal-adapter.js) / [masou-adapter.js](../shared/masou-adapter.js) | v2 master → wiki shape adapter (含 `deepApply(master, revise)` wrap) |
+| [image-paths.js](../shared/image-paths.js) | master id → `icons/` 相对路径 + `charaIconStack` 叠层 helper (marriage 框 + element + weapon_type) |
+| [constants.js](../shared/constants.js) | PARAMETER (91) / MATH_TYPE / RANGE / ELEMENT / WEAPON / CONDITION 等 enum |
+| [parameter-class.js](../shared/parameter-class.js) | PARAMETER_CLASS (35 类 v2 効果分类) + PARAMETER_CLASS_LABEL/SHORT |
+| [filter-core.js](../shared/filter-core.js) | viewer filter 通用 utility (applySpec / renderSpecFilters / sort / reset) |
+| [chara-spec.js](../shared/chara-spec.js) / [soul-spec.js](../shared/soul-spec.js) / [crystal-spec.js](../shared/crystal-spec.js) / [bg-spec.js](../shared/bg-spec.js) | 4 viewer 各自 filter spec (facet / sort options) |
+| [data-loader.js](../shared/data-loader.js) | fetch data/*.json (cache + loadAll) |
 
-### progress.json 结构（part-level retry）
+---
 
-```jsonc
-{
-  "completed_data_ids": ["1647", ...],   // altema list data_id（曾抓过）
-  "saved_chara_ids":    [1647, ...],     // 详情页 final_id（chara.id）
-  "parts": {                             // key = chara.id (string)、value = 6 part 状态
-    "1647": {
-      "bd_skill":    false,    // wiki 缺失 → 下次脚本会 retry 整页
-      "skills":      true,
-      "基本情報":     true,
-      "ステータス":    true,
-      "プロフィール":  true,
-      "潜在解放":    true
-    }
-  }
-}
+## js/ — viewer 业务代码
+
+5 viewer 各自一套 list / render / edit + 公共 nav / utils / state:
+
+| 模块 | 用途 |
+|---|---|
+| `js/nav.js` | 顶部 navbar + revise bar (未保存 N 条修正) |
+| `js/utils.js` | DOM / 字符串 / 数字格式 utility |
+| `js/state.js` | 全局 state (allCharas / allSouls / 各 reviseData / sessionReviseIds 等) |
+| `js/render.js` | chara list/render (主 viewer) |
+| `js/edit.js` / `chara-edit.js` | chara edit modal (tags + skills value_scaling + masou_overrides) |
+| `js/soul-render.js` / `soul-edit.js` | soul viewer + tags edit |
+| `js/cr-list.js` / `cr-edit.js` / `cr-state.js` | crystal viewer + inline 8 字段 edit |
+| `js/bg-list.js` / `bg-edit.js` | bladegraph viewer + edit module (用户决策保留、HTML 暂不暴露按钮) |
+| `js/omoide-view.js` | omoide picker modal (hensei + chara 详情页用) |
+
+hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内、调用 `shared/stats-calc-v2.js`。
+
+---
+
+## data/ — 业务 JSON
+
+**Master 数据** (build_*.py 输出):
+- `characters.json` (654 chara) / `souls.json` (488) / `crystals.json` (2063) / `bladegraphs.json` (506) / `masou.json` (712) / `senzai_table.json` / `motions.json`
+- `guildtitles.json` / `guildemblems.json` (手工维护、无 build script)
+- `omoide/{base_id}.json` (629 file、Frida 抓、.gitignore 排除)
+
+**Revise** (用户编辑产物、4 bucket):
+- `chara_revise.json` / `soul_revise.json` / `crystal_revise.json` / `masou_revise.json`
+
+**Audit / 一次性产物**:
+- `_wiki_aux.json` — 一次性 wiki 提取 (crystal_max_value + chara_tags + chara_skill_value_scaling + masou_value_scaling)、永不重跑
+- `_audit_crystals_null_math.json` — math_type 反查失败的 crystal audit
+- `_wiki_unmatched_crystals.json` — wiki_aux 未匹配的 crystal audit
+
+---
+
+## Dev server / Build / Test
+
+| 命令 | 用途 |
+|---|---|
+| `python scripts/start.py` | 本地 dev server (端口 8787) + `POST /save` endpoint 写回 `data/*_revise.json` |
+| `node scripts/serve.js` | 纯静态 dev server (不含 /save) |
+| `node scripts/build.js` | 全量 build (`pages_src/` + fragments → `pages/`)、用户开 `--watch` 模式自动重 build |
+| `npm test` | 135/135 单测 (tests/unit/ + tests/v2/) |
+| `npx playwright test` | UI e2e (tests/ui/、5 viewer 渲染 + hensei 装备联动) |
+
+**保存流程**:
+1. viewer edit mode → `computeDiff(orig, edit, prev)` → 入 `state.reviseData[id]` + `sessionReviseIds.add`
+2. 顶部 revise bar 显示 "未保存 N 条修正"、点 "保存" → `submitRevise(body)` POST /save
+3. local: `start.py` deep merge 入 `data/*_revise.json` + 写盘
+4. Vercel 生产: `/api/save.js` 推 `data-staging` branch + 自动 PR
+5. `data-staging` branch 单向积累、不合回 main (本 branch 是 refactor/unpacking-source、user memory 决策)
+
+---
+
+## 数据更新 workflow
+
+```bash
+# 1. 跑解包脚本 / 拿最新 unpacking/master_tables/<latest>/
+# (在 unpacking 仓库内、不属于本项目)
+
+# 2. master → business JSON (data/*.json)
+python scripts/master_to_business/build_all.py
+
+# 3. wiki 抓「入手方法」、patch 进 data/crystals.json + data/bladegraphs.json
+python scripts/master_to_business/fetch_wiki_acquisition.py
+
+# 4. (按需) 拷 D:/bxb 图标 → icons/ (含 soul 7 张 fallback)
+python scripts/master_to_business/copy_images.py
+
+# 5. (按需) chara master 改 motion_id 后重新生成 motion table
+python scripts/master_to_business/gen_motion_table.py
 ```
 
-**6 part 完整判定**（[scripts/crawl_chara.py](scripts/crawl_chara.py) `_chara_parts_status()`）：
+## Cleanup 历史 (2026-06-09)
 
-| Part | 数据位置 | 判定 |
-|---|---|---|
-| `bd_skill` | `chara.bd_skill.name` | 顶层 bd_skill 存在 + name 非空 |
-| `skills` | `chara.states[X].skills` | 任一 state 有非空 skills |
-| `基本情報` | `chara.states[X].basic_info` | 任一 state 有非空 basic_info |
-| `ステータス` | `chara.states[X].stats` | 任一 state 有非空 stats |
-| `プロフィール` | `chara.states[X].profile` | 任一 state 有非空 profile |
-| `潜在解放` | `chara.omoide` | 非空 array |
-
-**retry 行为：** wiki 是单页混合 HTML，无法只重抓单个 part。某 chara 任意 part = false → 下次脚本**整页重抓**（已有的 part 也重新解析覆盖）。
-
-**Pending 判定**（[scripts/crawl_chara.py](scripts/crawl_chara.py) main 内 `_should_skip()`）：
-- `--rerun`：跳过判定，重抓全部
-- `--ids K1,K2`：绕过 `_should_skip`、直接用 `data_id_to_final_id` 反查 → filter pending；只抓这几个、其他完全不动
-- 未抓过（`data_id ∉ completed_data_ids`）：重抓
-- 已抓但 `parts` 不全 ✓：重抓（这是新行为）
-- 已抓且 `parts` 全 ✓：跳过
-
-**`--ids` 局部重抓**（chara / soul 共同）：
-- 用法：`python crawl_chara.py --ids 1647,1648,1649`（逗号分隔多个 final_id；soul 同形式）
-- 语义：强制重抓这些 id 的 detail page、整条 record 覆盖（不走 chara 默认的"仅 detect 新加 state"路径）
-- 与 `--rerun` **互斥**（argparse 显式报错）
-- 与 `--recal` **正交**：单独 `--ids K` → Phase 2 只对 K 重新分类；`--ids K --recal` → 局部重抓 + 全量分类
-- chara 反查靠 `progress.json` 的 `data_id_to_final_id`；新 id 未在 map 里 → 报 WARN 跳过（先跑一次默认 incremental 让 list 阶段建好 map、再用 `--ids` 微调）
-- soul 直接用 `s["id"]` 比对（soul 的 list id == final id、无重命名问题）
-
-**Migration**：旧 progress.json 没 `parts` 字段时，脚本第一次跑会从 characters.json 自动推断并写入。手填 base 数据者注意：`--recal` 会重算 tag、`-rerun` 会重抓 wiki、玩家手改请走 `characters_revise.json`。
+本次清理:
+- 删 `scripts/master_to_business/migrate_old_revise.py` (一次性 init、跑过了)
+- 删 `data/bd_special.json` + `data/bd_special_durations.json` (wiki 时代残留)
+- 删 整个 `draft/` 目录 (12 file、2026-05 早期临时工作)
+- 重写本文件 (v2 化)
+- 新增 `fetch_wiki_acquisition.py` (反复使用、抓 wiki「入手方法」字段 patch crystal/bg)

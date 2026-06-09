@@ -1,7 +1,7 @@
 // ===== Crystal Spec =====
 // Usage: import { CRYSTAL_SPEC } from '../shared/crystal-spec.js';
 
-import { classifyParameter, conditionTrigger, crystalScopeTags } from './v2-parameter-class.js';
+import { classifyParameter, conditionTrigger, crystalScopeTags } from './parameter-class.js';
 
 export const CRYSTAL_SPEC = {
   searchFields: ['name'],
@@ -23,15 +23,13 @@ export const CRYSTAL_SPEC = {
 // crystal アイコン URL 解决器：
 //   cr.image 缺省 → wiki デフォルト URL
 //   cr.image = "http(s)://..." / "//..." → そのまま URL
-//   cr.image = repo 相対パス（"icon/crystal/foo.png"）→ pages/ から見て "../" 前缀
-// guildemblem.image / masou.image と同じ約定。
-// crystal icon: ../icons/crystal/{id}_1.png (v2 命名规则、_1 默认、_2 fallback)
-// onerror 兜底由 cr-list.js 内 <img onerror> 处理
+//   cr.image = repo 相対パス（"icons/crystal/foo.png"）→ pages/ から見て "../" 前缀
+// crystal icon: ../icons/crystal/{id}.png — copy_images.py cascade _1 → _2 → _3 → _4 后已归一化无后缀
 export const crystalImageSrc = (cr) => {
   const img = cr && cr.image;
   if (img) {
     if (/^(https?:)?\/\//i.test(img)) return img;
     return '../' + img;
   }
-  return '../icons/crystal/' + ((cr && cr.id) || 0) + '_1.png';
+  return '../icons/crystal/' + ((cr && cr.id) || 0) + '.png';
 };

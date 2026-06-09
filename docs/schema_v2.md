@@ -1,6 +1,6 @@
 # Schema v2 — 按解包 master_tables 设计
 
-> **Status**: WIP (Phase 1 enum + 设计原则)、Phase 2 起填实际 build script 输出 schema
+> **Status**: v2 当前规范 (Phase 0-8 重构完成、npm test 135/135)
 >
 > **Scope**: refactor/unpacking-source branch 限定、永不 merge 回 main
 >
@@ -11,22 +11,25 @@
 
 ## 1. 设计原则
 
-### 1.1 完全脱离 wiki 推断体系
-
-wiki crawl 项目的核心 enum 在 v2 全部废弃：
-
-| 旧 wiki enum | 用途 | v2 替代 |
-|---|---|---|
-| `bunrui` (21 种 int) | 技能分类 | `parameter` (#JS 91 项字符串)、信息更全 |
-| `calc_type` (4 种 int) | 倍率作用方式 | `math_type` (3 种字符串)、删 wiki 推断的 2/3 "最终加算/最终乗算" |
-| `scope` (5 种 int) | 作用范围 | `range` (3 种字符串) + 多条件字段 (`element_condition` 等) |
-| `condition` (5 种 int) | 触发条件 | 分散到 parameter prefix (HP-curve / Break) + 多条件字段 |
-
-### 1.2 数据来源单一权威
+### 1.1 数据来源单一权威
 
 - `master_tables/*.json` 是游戏服务器下发数据、ground truth
-- 不做 classify (wiki 那种 NLP 关键词扫)、所有字段直接透传
-- 不跟 wiki 数据 cross-check stats、信任解包 `initial_*` / `max_*`
+- 所有字段直接透传、不做 NLP 关键词分类
+- 信任解包 `initial_*` / `max_*` stats
+
+### 1.2 核心 enum
+
+详见 [scripts/master_to_business/enums.py](../scripts/master_to_business/enums.py):
+
+- `parameter`: 91 项 (#JS JobSkill.Parameter)
+- `math_type`: 3 项 (`Multiply` / `Addition` / `Set`)
+- `range`: 3 项 (`All` / `Single` / `None`)
+- 条件字段拆分: HP-curve prefix (`Vitality_` / `RemHP_`) + Break gate prefix (`Break_`) + 结构化条件字段 (`element_id` / `weapon_type_id` / `conditional_parameter` 等)
+
+server-fold 字段 (非 master 直给、走 `*_revise.json`):
+- crystal: `max_value` / `M_L_max` / `M_W_max` / `M_P_max` / `min_weight` / `max_weight` / `min_purity` / `max_purity`
+- chara skill / masou skill: `value_scaling` (每熟度增量)
+- chara: `tags` (14 种特性 enum)
 
 ### 1.3 id 体系
 
@@ -512,18 +515,3 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复�
 | 战斗 setup | [01_setup.md](../../unpacking/HOWTO_battle/01_setup.md) |
 | RVA 表 | [A_rva_table.md](../../unpacking/HOWTO_battle/A_rva_table.md) |
 
----
-
-## 6. Phase 进度跟踪
-
-| Phase | 状态 | 输出 |
-|---|---|---|
-| 0 分支 + paths.py | ✅ done | scripts/master_to_business/paths.py |
-| 1a enums.py 骨架 | ✅ done | 7 enum + EVOLVE_COUNT |
-| 1b PARAMETER 91 项 | ✅ done | #JS 完整 enum |
-| 1c RANGE + 条件字段说明 | ✅ done | RANGE + CONDITION_FIELD_NAMES |
-| 1d schema_v2.md outline | ✅ done | 本文档 |
-| 2 build scripts (6 个) | 🚧 pending | data/*.json |
-| 3 前端 rewrite | 🚧 pending | shared/* + pages_src/* |
-| 4 测试 | 🚧 pending | tests/* 全重写 |
-| 5 清理（不 merge）| 🚧 pending | 删 wiki crawl 代码 |

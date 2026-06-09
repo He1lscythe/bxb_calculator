@@ -11,7 +11,7 @@ from pathlib import Path
 # master_tables 在 unpacking 项目下、跟 crawl 项目平行
 # 绝对路径写死（user-specific、当前唯一开发者机器）
 UNPACKING_ROOT = Path("F:/OneDrive - Northeastern University/Game/BxB/unpacking")
-MASTER_TABLES_DIR = UNPACKING_ROOT / "master_tables"
+MASTER_TABLES_DIR = UNPACKING_ROOT / "master_tables" / "master_data"
 
 # 日期文件夹命名 YYYY_MM_DD 或 YYYY_MM_DD_HH_MM_SS (新版含时间戳)
 _DATE_FOLDER_RE = re.compile(r"^\d{4}_\d{2}_\d{2}(_\d{2}_\d{2}_\d{2})?$")
