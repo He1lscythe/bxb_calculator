@@ -190,36 +190,56 @@ def bg_acquisitions(soup):
     return out
 
 
-def patch_json(json_path, acq_map, field_name, hard_resolver=None):
-    """按 name 匹配 acq_map、注入 entry[field_name]。hard_resolver(name) → str|None 优先于 wiki。
+def patch_revise(master_path, revise_path, acq_map, field_name, hard_resolver=None):
+    """从 master 按 name 匹配 acq_map、注入 *_revise.json 内 entry[field_name]。
+    revise 数据跟 master 解耦、build_all 重 build master 不影响 revise (用户决策 2026-06-09)。
+    hard_resolver(name) → str|None 优先于 wiki。
     返回 (matched_total, hard_count, wiki_count, total, sample_unmatched)"""
-    arr = json.loads(json_path.read_text(encoding='utf-8'))
+    master = json.loads(master_path.read_text(encoding='utf-8'))
+    if revise_path.is_file():
+        revise = json.loads(revise_path.read_text(encoding='utf-8'))
+    else:
+        revise = []
+    revise_by_id = {r['id']: r for r in revise if isinstance(r, dict) and 'id' in r}
+
     hard_count = 0
     wiki_count = 0
     unmatched_sample = []
-    for entry in arr:
-        name = entry.get('name')
-        if not name:
+    for m_entry in master:
+        mid = m_entry.get('id')
+        name = m_entry.get('name')
+        if mid is None or not name:
             continue
+
         hard = hard_resolver(name) if hard_resolver else None
         if hard:
-            entry[field_name] = hard
+            value = hard
             hard_count += 1
         else:
             base = _normalize_name(name)
-            hit = acq_map.get(base)
-            if hit is None:
+            value = acq_map.get(base)
+            if value is None:
                 for k in _alt_keys(base):
-                    hit = acq_map.get(k)
-                    if hit is not None:
+                    value = acq_map.get(k)
+                    if value is not None:
                         break
-            if hit is not None:
-                entry[field_name] = hit
-                wiki_count += 1
-            elif len(unmatched_sample) < 5:
-                unmatched_sample.append(name)
-    json_path.write_text(json.dumps(arr, ensure_ascii=False, indent=2), encoding='utf-8')
-    return hard_count + wiki_count, hard_count, wiki_count, len(arr), unmatched_sample
+            if value is None:
+                if len(unmatched_sample) < 5:
+                    unmatched_sample.append(name)
+                continue
+            wiki_count += 1
+
+        # 写入 revise (merge: 已有 entry 加字段、没的话新建)
+        if mid not in revise_by_id:
+            revise_by_id[mid] = {'id': mid, 'name': name}
+        revise_by_id[mid][field_name] = value
+
+    final = sorted(revise_by_id.values(), key=lambda r: r['id'])
+    revise_path.write_text(
+        json.dumps(final, ensure_ascii=False, indent=2),
+        encoding='utf-8',
+    )
+    return hard_count + wiki_count, hard_count, wiki_count, len(master), unmatched_sample
 
 
 def main():
@@ -232,9 +252,12 @@ def main():
         cr_soup = fetch_soup(CRYSTAL_URL)
         cr_map = crystal_acquisitions(cr_soup)
         print(f"  wiki crystal 入手方法: {len(cr_map)} entries")
-        m, hard, wiki, t, sample = patch_json(DATA_DIR / "crystals.json", cr_map, '入手方法', _resolve_crystal_hard)
+        m, hard, wiki, t, sample = patch_revise(
+            DATA_DIR / "crystals.json", DATA_DIR / "crystal_revise.json",
+            cr_map, '入手方法', _resolve_crystal_hard,
+        )
         pct = 100 * m / t if t else 0
-        print(f"crystal: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  → data/crystals.json")
+        print(f"crystal: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  → data/crystal_revise.json")
         if m < t:
             print(f"  unmatched sample (前 5): {sample}")
 
@@ -242,9 +265,12 @@ def main():
         bg_soup = fetch_soup(BG_URL)
         bg_map = bg_acquisitions(bg_soup)
         print(f"  wiki bg 入手方法: {len(bg_map)} entries")
-        m, hard, wiki, t, sample = patch_json(DATA_DIR / "bladegraphs.json", bg_map, 'acquisition', _resolve_bg_hard)
+        m, hard, wiki, t, sample = patch_revise(
+            DATA_DIR / "bladegraphs.json", DATA_DIR / "bg_revise.json",
+            bg_map, 'acquisition', _resolve_bg_hard,
+        )
         pct = 100 * m / t if t else 0
-        print(f"bg: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  → data/bladegraphs.json")
+        print(f"bg: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  → data/bg_revise.json")
         if m < t:
             print(f"  unmatched sample (前 5): {sample}")
 

@@ -312,15 +312,19 @@ test('omoide: clearAllOmoide → stat 不含 omoide buff (Session 3 patch: setCh
 });
 
 test('omoide: equipAllOmoide → stat 增加 (picker 自动选所有候选)', async ({ page }) => {
+  // omoide data (data/omoide/{base_id}.json、Frida 抓的、108 MB) 在 .gitignore 内、CI 上不存在 → skip
+  const hasOmoide = await page.request.get('/data/omoide/1001.json').then((r) => r.ok()).catch(() => false);
+  test.skip(!hasOmoide, 'data/omoide/1001.json not present (.gitignore 排除、CI 上没 omoide fixture)');
+
   await waitHenseiReady(page);
   await page.evaluate(() => window.setChara(0, 100101));
-  await page.waitForTimeout(1600);  // 等 omoide fetch 完
+  await page.waitForTimeout(2000);  // 等 omoide fetch 完 (CI Linux 慢、本地 1600ms 足够)
   // Session 3 patch: setChara 默认已自动 equipAll、先 clear 再测 equipAll 增量
   await page.evaluate(() => window.clearAllOmoide(0));
-  await page.waitForTimeout(50);
+  await page.waitForTimeout(150);
   const beforePick = await readStat(page, 0, 1);
   await page.evaluate(() => window.equipAllOmoide(0));
-  await page.waitForTimeout(100);
+  await page.waitForTimeout(250);
   const afterPick = await readStat(page, 0, 1);
   expect(afterPick).toBeGreaterThan(beforePick);
 });
@@ -373,12 +377,12 @@ test('crystal 装入 + lv 1 → max → effect init → max', async ({ page }) =
   await waitHenseiReady(page);
   await setupSlot0WithChara(page, 100101);
   await page.evaluate(() => window.setCrystal(0, 0, 120101));  // Attack Mul init=1.01 max=1.22
-  await page.waitForTimeout(80);
+  await page.waitForTimeout(200);
   await page.evaluate(() => window.setCrystalDim(0, 0, 'lv', 1));
-  await page.waitForTimeout(80);
+  await page.waitForTimeout(200);
   const lv1 = await readStat(page, 0, 1);
   await page.evaluate(() => window.setCrystalDim(0, 0, 'lv', 20));  // crystal max_level=20
-  await page.waitForTimeout(80);
+  await page.waitForTimeout(200);
   const lvMax = await readStat(page, 0, 1);
   expect(lvMax).toBeGreaterThan(lv1);
 });

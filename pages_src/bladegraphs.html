@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BxB 心象結晶データベース</title>
-    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../icons/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/nav.css" />
     <link rel="stylesheet" href="../css/shared.css" />
@@ -105,10 +105,12 @@
       // ===== DATA LOAD (v2 schema → wiki adapter) =====
       document.addEventListener('DOMContentLoaded', () => {
         initFilterToggles();
-        fetch('../data/bladegraphs.json')
-          .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
-          .then((arr) => {
-            state.allBG = adaptBgList(arr);
+        Promise.all([
+          fetch('../data/bladegraphs.json').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }),
+          fetch('../data/bg_revise.json').then((r) => r.ok ? r.json() : []).catch(() => []),
+        ])
+          .then(([arr, revise]) => {
+            state.allBG = adaptBgList(arr, revise);
             state.allBG.forEach((c) => {
               if (!state.originalData[c.id])
                 state.originalData[c.id] = JSON.parse(JSON.stringify(c));
