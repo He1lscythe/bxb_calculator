@@ -284,6 +284,9 @@
         fetch('../data/masou_revise.json')
           .then((r) => (r.ok ? r.json() : []))
           .catch(() => []),
+        fetch('../data/bg_revise.json')
+          .then((r) => (r.ok ? r.json() : []))
+          .catch(() => []),
         fetch('../data/guildtitles.json')
           .then((r) => (r.ok ? r.json() : []))
           .catch(() => []),
@@ -302,14 +305,16 @@
             soRev,
             crRev,
             msRev,
+            bgRev,
             gt,
             ge,
           ]) => {
             // v2 schema → wiki shape via adapter (Phase 6.2)
             // Phase 7 Session 2: 4 adapter 都接 revise (deepApply patch 到 master 再转 wiki shape)
+            // 2026-06-09: bg-adapter 也接 revise (acquisition 走 revise)
             ch = adaptCharaList(ch, chRev);
             so = adaptSoulList(so, soRev);
-            bg = adaptBgList(bg);
+            bg = adaptBgList(bg, bgRev);
             cr = adaptCrystalList(cr, crRev);
             ms = adaptMasouList(ms, msRev);
             allCharas = ch.sort((a, b) => (b.sort_id || b.id) - (a.sort_id || a.id));
