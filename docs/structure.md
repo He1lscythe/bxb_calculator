@@ -51,7 +51,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [tests/unit/](../tests/unit/) | 单测 (npm test 135/135) |
 | [tests/ui/](../tests/ui/) | Playwright e2e 测试 |
 | audit/ | `audit_dead_code.mjs` 输出 (.gitignore 排除) |
-| `../master_tables/` | master_tables (crawl 仓库 `data/master-tables` branch 的 git worktree、跟 crawl 同级、`BxB/master_tables/`) |
+| `../master_tables/` | master_tables (bxb-wiki 仓库 `data/master-tables` branch 的 git worktree、跟 bxb-wiki 同级、`BxB/master_tables/`) |
 
 ---
 
@@ -93,7 +93,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [gen_motion_table.py](../scripts/master_to_business/gen_motion_table.py) | `characters.json` → `docs/motion_table.md` (master 改 motion_id 后重跑) |
 | [fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) | 抓 altema wiki「入手方法」字段、patch 进 `data/crystals.json` (字段 `入手方法`) + `data/bladegraphs.json` (字段 `acquisition`)、按 name 匹配 |
 | [dump_npc_motions.py](../scripts/master_to_business/dump_npc_motions.py) | UnityPy 解 `D:/bxb/_dat_cache/assets/npc-motion-*.dat` → `data/_npc_motions.json` (chara motion clip duration、weapons.json 变后重生、小时级) |
-| [build_memory_slot_skills.py](../scripts/master_to_business/build_memory_slot_skills.py) | 从 HouseTop response (cross-repo `unpacking/draft/out/account/` + `crawl/data/omoide/`) → `data/_memory_slot_skills.json` (senzai 反查表、秒级) |
+| [build_memory_slot_skills.py](../scripts/master_to_business/build_memory_slot_skills.py) | 从 HouseTop response (cross-repo `unpacking/draft/out/account/` + `bxb-wiki/data/omoide/`) → `data/_memory_slot_skills.json` (senzai 反查表、秒级) |
 
 ---
 
