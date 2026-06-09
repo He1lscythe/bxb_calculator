@@ -48,7 +48,7 @@ async function readJsonFromBase(octokit, path) {
   }
 }
 
-// 字段级 deep merge (跟 shared/v2-revise-core.js deepApply + scripts/start.py _deep_merge 等价)
+// 字段级 deep merge (跟 shared/revise-core.js deepApply + scripts/start.py _deep_merge 等价)
 // - source[k] === null → 删 result[k] (tombstone 撤回标记)
 // - 空 dict prune (落盘 revise.json 保持干净)
 function deepMerge(target, source) {

@@ -289,10 +289,10 @@
         switchState,
         _scheduleMeasure,
       } from '../js/render.js';
-      // Phase 7 Session 3: v2-chara-edit (tags + skills value_scaling + masou_overrides) + v2-omoide-view (view-only) + masou modal (active)
-      import { openMasouModal, closeMasouModal, toggleMasouBunrui } from '../js/masou.js';
-      import { adaptCharaList } from '../shared/v2-chara-adapter.js';
-      import { adaptMasouList } from '../shared/v2-masou-adapter.js';
+      // Phase 7 Session 3: chara-edit (tags + skills value_scaling + masou_overrides) + omoide-view (view-only) + masou modal (active)
+      import { openMasouModal, closeMasouModal } from '../js/masou.js';
+      import { adaptCharaList } from '../shared/chara-adapter.js';
+      import { adaptMasouList } from '../shared/masou-adapter.js';
       import {
         enterEditMode,
         cancelEdit,
@@ -302,8 +302,8 @@
         toggleCharaTag,
         setSkillScaling,
         setMasouScaling,
-      } from '../js/v2-chara-edit.js';
-      import { openLatentModal, closeLatentModal } from '../js/v2-omoide-view.js';
+      } from '../js/chara-edit.js';
+      import { openLatentModal, closeLatentModal } from '../js/omoide-view.js';
 
       Nav.init();
 
@@ -329,7 +329,7 @@
           .then(([arr, chRev, masouArr, masouRev]) => {
             state.allChars = adaptCharaList(arr, chRev);
             state.allChars.forEach((c) => {
-              // Bug B 修: key 用 base_id 4位 (跟 v2-chara-edit state.editingId 一致)、
+              // Bug B 修: key 用 base_id 4位 (跟 chara-edit state.editingId 一致)、
               // 不用 c.id (wiki variant_id 6位)。否则 saveEdit/cancelRevise 读 state.originalData[baseId] = undefined
               const baseId = c._master?.id ?? c.id;
               if (!state.originalData[baseId])
@@ -399,7 +399,6 @@
         closeLatentModal,
         openMasouModal,
         closeMasouModal,
-        toggleMasouBunrui,
       });
 
       // 旧 wiki edit/latent inline-onclick handler stub — v2 master 这些字段不可编辑、UI 渲染遗留 onclick 不让报错

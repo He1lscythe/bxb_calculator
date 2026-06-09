@@ -3,17 +3,17 @@ import { state } from './bg-state.js';
 import {
   ELEMENT,
   WEAPON,
-  BUNRUI_SHORT,
   CONDITION,
   renderFilterToggles,
   renderElementFilterToggles,
 } from '../shared/constants.js';
 import {
   PARAMETER_CLASS_LABEL,
+  PARAMETER_CLASS_SHORT,
   COND_TRIGGER_LABEL,
   SCOPE_LABEL,
   classifyParameter,
-} from '../shared/v2-parameter-class.js';
+} from '../shared/parameter-class.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { BG_SPEC } from '../shared/bg-spec.js';
 import { escHtml, ctPfx, fmtNum, fmtLarge } from './utils.js';
@@ -198,10 +198,10 @@ export const renderRowHd = (c) => {
   const timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
   // 効果 tag: 用 v2 parameter class (跟 filter 一致)、unique by class id
   const _seen = new Set();
-  const bt = (c._v2_skills || [])
+  const bt = (c._skills || [])
     .map((sk) => sk.parameter && classifyParameter(sk.parameter))
     .filter((cls) => cls && !_seen.has(cls) && _seen.add(cls))
-    .map((cls) => '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_LABEL[cls] || cls) + '</span>')
+    .map((cls) => '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[cls] || cls) + '</span>')
     .join('');
   // first non-zero condition
   const cond =
@@ -327,15 +327,11 @@ export const scopeLabel = (e) => {
 export const renderDetailBody = (c) => {
   const effRows = (c.effects || [])
     .map(function (e, i) {
-      // 効果 tag: v2 parameter class (跟 filter 一致)、fallback 旧 bunrui
-      const _cls = e._v2_parameter ? classifyParameter(e._v2_parameter) : null;
+      // 効果 tag: v2 parameter class (跟 filter 一致)
+      const _cls = e._parameter ? classifyParameter(e._parameter) : null;
       const bTags = _cls
-        ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_LABEL[_cls] || _cls) + '</span>'
-        : (e.bunrui || [])
-            .map(function (b) {
-              return '<span class="badge bunrui-sm">' + (BUNRUI_SHORT[b] || b) + '</span>';
-            })
-            .join(' ');
+        ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[_cls] || _cls) + '</span>'
+        : '';
       const condStr = e.condition
         ? '<span class="eff-cond">' + (CONDITION[e.condition] || '') + '</span>'
         : '';
@@ -381,9 +377,6 @@ export const renderDetailBody = (c) => {
     '<img class="bg-icon" src="../icons/bg/' +
     c.id +
     '.png" onerror="this.style.display=\'none\'" alt="">' +
-    '<button class="btn-edit" onclick="enterEditMode(' +
-    c.id +
-    ')">修正</button>' +
     '</div>'
   );
 };

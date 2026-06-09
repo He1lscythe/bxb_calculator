@@ -1,5 +1,6 @@
 // js/utils.js
-import { BUNRUI_SHORT, ELEMENT, WEAPON, CONDITION } from '../shared/constants.js';
+import { ELEMENT, WEAPON, CONDITION } from '../shared/constants.js';
+import { PARAMETER_CLASS_SHORT, classifyParameter } from '../shared/parameter-class.js';
 
 export const hasOmoide = (c) => {
   return (
@@ -13,8 +14,12 @@ export const hasOmoide = (c) => {
 export const renderRightTags = (s) => {
   let tags = '';
   (s.effects || []).forEach(function (e) {
-    (e.bunrui || []).forEach(function (b) {
-      tags += '<span class="bunrui-tag">' + (BUNRUI_SHORT[b] || b) + '</span>';
+    const paramList = Array.isArray(e._parameters)
+      ? e._parameters
+      : (e._parameter ? [e._parameter] : []);
+    paramList.forEach(function (p) {
+      const cls = classifyParameter(p);
+      tags += '<span class="bunrui-tag">' + (PARAMETER_CLASS_SHORT[cls] || cls) + '</span>';
     });
     if (e.scope === 0) {
       tags += '<span class="scope-tag scope-self">自</span>';

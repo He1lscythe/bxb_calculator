@@ -28,7 +28,6 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_ROOT / "data"
 OUT = DATA_DIR / "characters.json"
 WIKI_AUX = DATA_DIR / "_wiki_aux.json"
-AUDIT_TAGS_UNMATCHED = DATA_DIR / "_audit_chara_tags_unmatched.json"
 
 EVOLVE_NAME = {0: "通常", 1: "改造", 2: "極弐"}
 
@@ -239,7 +238,6 @@ def build():
 
     out = []
     warnings = []
-    tags_unmatched = []
     for bid, variants in groups.items():
         # sort by evolve_count
         variants.sort(key=lambda v: v.get("evolve_count", 0))
@@ -277,8 +275,6 @@ def build():
         # chara.tags: 从 wiki 拷 (Phase 6.4)、name match
         chara_name = v0.get("base_name") or v0.get("name")
         tags = wiki_tags.get(chara_name, [])
-        if not tags and chara_name:
-            tags_unmatched.append({"id": bid, "name": chara_name})
 
         # chara-level meta — per-chara 字段直接放顶层、不再嵌套 extras
         out.append({
@@ -310,12 +306,10 @@ def build():
 
     DATA_DIR.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
-    AUDIT_TAGS_UNMATCHED.write_text(json.dumps(tags_unmatched, ensure_ascii=False, indent=2), encoding="utf-8")
 
     tags_matched = sum(1 for c in out if c["tags"])
     print(f"wrote {len(out)} characters (from {len(raw)} weapon variants) → {OUT}")
     print(f"  chara.tags matched wiki: {tags_matched} / {len(out)} ({100*tags_matched//len(out)}%)")
-    print(f"  chara.tags unmatched (留空): {len(tags_unmatched)} → {AUDIT_TAGS_UNMATCHED}")
     if warnings:
         print(f"WARN: {len(warnings)} issues")
         for w in warnings[:5]:

@@ -46,78 +46,8 @@ export const WEAPONS_ORDER = [
 
 export const RARITY = { 4: 'SS', 3: 'S', 2: 'AA', 1: 'A' };
 
-// 长格式（详情字段 / 编辑下拉）
-export const BUNRUI = {
-  1: '攻撃力',
-  2: 'ブレイク力',
-  3: 'BD攻撃力',
-  4: 'スピード',
-  5: '攻撃モーション',
-  6: 'BDゲージ',
-  7: 'ヒット数',
-  8: '攻撃全体化',
-  9: '状態異常回避',
-  10: 'HP',
-  11: 'HP回復',
-  12: '防御力',
-  13: '被ダメ軽減',
-  14: 'サファイア',
-  15: 'ルビー',
-  16: 'その他',
-  17: 'ダメージ上限',
-  18: 'ゲージ最大値',
-  19: '結晶枠',
-  20: '獲得EXP',
-  21: 'BDヒット数',
-};
-// 短格式（badge / 紧凑标签）
-export const BUNRUI_SHORT = {
-  1: '攻',
-  2: 'BK',
-  3: 'BD攻',
-  4: '転',
-  5: '速',
-  6: 'BD値',
-  7: 'hit',
-  8: 'aoe',
-  9: '異常',
-  10: 'HP',
-  11: '回復',
-  12: '防',
-  13: '軽',
-  14: '蓝',
-  15: '紅',
-  16: '他',
-  17: '限',
-  18: 'BD最大',
-  19: '枠',
-  20: 'EXP',
-  21: 'BDhit',
-};
-// 中等格式（筛选按钮专用，比 SHORT 长比 BUNRUI 短）
-export const BUNRUI_FILTER = {
-  1: '攻撃力',
-  2: 'BK力',
-  3: 'BD攻撃力',
-  4: 'スピード',
-  5: 'モーション',
-  6: 'BD上昇',
-  7: 'hit',
-  8: 'aoe',
-  9: '異常',
-  10: 'HP',
-  11: '回復',
-  12: '防御力',
-  13: 'ダメージ軽減',
-  14: 'サファイア',
-  15: 'ルビー',
-  16: '他',
-  17: 'ダメージ上限',
-  18: 'BD最大値',
-  19: '結晶枠',
-  20: 'EXP',
-  21: 'BDhit',
-};
+// 注: 旧 wiki BUNRUI / BUNRUI_SHORT / BUNRUI_FILTER (21 类) 已删、统一用
+//     shared/parameter-class.js 的 PARAMETER_CLASS_LABEL / PARAMETER_CLASS_SHORT (35 类、按 master parameter)
 
 // ============ 魔剣特性 tag enum ============
 // chara.tags = int[]（顶层字段；旧 chara.bd_skill.special 已整体迁移上来）

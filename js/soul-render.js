@@ -1,9 +1,9 @@
 // js/soul-render.js
 import { state } from './soul-state.js';
+import { PARAMETER_CLASS_SHORT, classifyParameter } from '../shared/parameter-class.js';
 import {
   ELEMENT,
   WEAPON,
-  BUNRUI_SHORT,
   CONDITION,
   ELEMS_ORDER,
   WEAPONS_ORDER,
@@ -195,8 +195,10 @@ const renderSkillsView = (skills, soul) => {
   if (!all.length) return '';
   const cards = all
     .map(
-      (sk) => min`
-    <div class="skill-card">
+      (sk) => {
+        const dim = sk._displayable === false ? ' style="opacity:0.8"' : '';
+        return min`
+    <div class="skill-card"${dim}>
       <div class="skill-name-row">
         <span class="skill-name">${escHtml(sk.name || '')}</span>
         ${renderRightTags(sk)}
@@ -205,7 +207,8 @@ const renderSkillsView = (skills, soul) => {
         <span class="skill-effect">${escHtml(sk.effect_text || '')}</span>
         <span class="skill-bairitu">${fmtBairitu(sk)}</span>
       </div>
-    </div>`,
+    </div>`;
+      },
     )
     .join('');
   return min`
@@ -274,7 +277,7 @@ const _renderCondTag = (e) => {
 };
 
 export const renderRightTags = (sk) => {
-  const groups = []; // [{key, ctx, bunruis: []}]
+  const groups = []; // [{key, ctx, params: []}]
   (sk.effects || []).forEach(function (e) {
     const key = _ctxKey(e);
     let g = null;
@@ -284,17 +287,20 @@ export const renderRightTags = (sk) => {
         break;
       }
     if (!g) {
-      g = { key: key, ctx: e, bunruis: [] };
+      g = { key: key, ctx: e, params: [] };
       groups.push(g);
     }
-    (e.bunrui || []).forEach(function (b) {
-      g.bunruis.push(b);
-    });
+    if (Array.isArray(e._parameters)) {
+      e._parameters.forEach((p) => g.params.push(p));
+    } else if (e._parameter) {
+      g.params.push(e._parameter);
+    }
   });
   let tags = '';
   groups.forEach(function (g) {
-    g.bunruis.forEach(function (b) {
-      tags += '<span class="bunrui-tag">' + (BUNRUI_SHORT[b] || b) + '</span>';
+    g.params.forEach(function (p) {
+      const cls = classifyParameter(p);
+      tags += '<span class="bunrui-tag">' + (PARAMETER_CLASS_SHORT[cls] || cls) + '</span>';
     });
     tags += _renderScopeTag(g.ctx);
     tags += _renderCondTag(g.ctx);

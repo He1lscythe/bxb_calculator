@@ -22,7 +22,7 @@ PORT = 8787
 DIR  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(DIR, 'data')
 
-# 4 bucket (chara/masou/soul/crystal)、跟 v2-save-client.js POST body 一致
+# 4 bucket (chara/masou/soul/crystal)、跟 save-client.js POST body 一致
 # value = (filename, session_ids_key)
 # masou 独立 session_ids_key 因为 masou.id 7 位、chara base_id 4 位、namespace 重叠风险低但保留 wiki main 同 pattern
 ID_BUCKETS = {
@@ -97,7 +97,7 @@ def _read_data(name):
 
 
 def _deep_merge(target, source):
-    """字段级 deep merge (跟 shared/v2-revise-core.js deepApply 等价、Python 版)
+    """字段级 deep merge (跟 shared/revise-core.js deepApply 等价、Python 版)
     - source[k] is None → 删除 result[k] (tombstone 撤回标记)
     - 空 dict prune (保持 revise.json 干净)"""
     if source is None:

@@ -130,7 +130,7 @@
       import { Nav, updateReviseBar } from '../js/nav.js';
       import { state } from '../js/cr-state.js';
       import { escHtml, fmt, parseBairituVal, hideLoading } from '../js/utils.js';
-      import { deepApply } from '../js/diff.js';
+      import { deepApply } from '../shared/revise-core.js';
       import { enforceScopeConstraints } from '../shared/effect-constraints.js';
       import {
         initFilterToggles,
@@ -143,8 +143,8 @@
         applyFilters,
         toggleExpand,
       } from '../js/cr-list.js';
-      // Phase 7 Session 2: v2-cr-edit.js — 8 字段 inline edit + revise bar
-      import { adaptCrystalList } from '../shared/v2-crystal-adapter.js';
+      // Phase 7 Session 2: cr-edit.js — 8 字段 inline edit + revise bar
+      import { adaptCrystalList } from '../shared/crystal-adapter.js';
       import {
         enterEditMode,
         cancelEdit,
@@ -152,7 +152,7 @@
         saveRevise,
         cancelRevise,
         setCrField,
-      } from '../js/v2-cr-edit.js';
+      } from '../js/cr-edit.js';
 
       Nav.init();
 
@@ -195,7 +195,7 @@
         escHtml,
         fmt,
         parseBairituVal,
-        // Phase 7 Session 2: v2-cr-edit active
+        // Phase 7 Session 2: cr-edit active
         enterEditMode,
         cancelEdit,
         saveEdit,
