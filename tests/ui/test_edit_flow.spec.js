@@ -241,7 +241,7 @@ test.describe('crystal edit', () => {
       window.saveEdit();
       const editedMax = window.state.allCrystals.find((x) => x.id === id)._master.max_value;
       window.cancelRevise(id);
-      const restoredMax = window.state.allCrystals.find((x) => x.id === id)._master.max_value;
+      const restoredMax = window.state.allCrystals.find((x) => x.id === id)._master.max_value ?? null;
       return {
         origMax,
         editedMax,
