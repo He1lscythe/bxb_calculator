@@ -39,25 +39,6 @@ export default [
     },
   },
 
-  // 根 nav.js — legacy global script（非 module、可能 index.html 直接 <script src>）
-  // 内部用 `typeof sessionReviseIds !== 'undefined'` 探测各 viewer 自己的全局
-  {
-    files: ['nav.js'],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'script',
-      globals: {
-        ...globals.browser,
-        sessionReviseIds: 'readonly',   // 各 viewer 自己的全局、root nav.js typeof 检测
-      },
-    },
-    rules: {
-      'no-undef': 'error',
-      'no-unused-vars': 'off',          // updateReviseBar 是公共 API、虽然外部脚本调用
-      'no-redeclare': 'error',
-    },
-  },
-
   // Vercel api/ (package.json "type":"module" → .js 默认 ESM)
   {
     files: ['api/**/*.js'],
