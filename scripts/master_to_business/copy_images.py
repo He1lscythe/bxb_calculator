@@ -1,16 +1,16 @@
-"""copy_images.py — 一次性从 D:\bxb 把图片拷到 bxb-wiki/icons/
+"""copy_images.py — 一次性从 D:\bxb 把图片拷到 bxb_wiki/icons/
 
 源 → 目标:
-- chara : D:/bxb/weapon/stand/s/{6位}.png → bxb-wiki/icons/chara/{variant_id}.png    (~1106 file)
-- masou : D:/bxb/weapon/stand/s/{7位}.png → bxb-wiki/icons/masou/{wc_id}.png         (~622 file)
-- crystal: D:/bxb/materia/icon/{id}_{N}.png → bxb-wiki/icons/crystal/{id}_{N}.png    (~3348 file)
-- bg    : D:/bxb/picture/m/{id}.png → bxb-wiki/icons/bg/{pic_id}.png                  (~499 file)
-- soul  : D:/bxb/npc/stand/m/{texture_id}.png → bxb-wiki/icons/soul/{texture_id}.png  (~478 file)
-- misc  : D:/bxb/_misc/marriage_*.png → bxb-wiki/icons/_misc/                          (3 file)
+- chara : D:/bxb/weapon/stand/s/{6位}.png → bxb_wiki/icons/chara/{variant_id}.png    (~1106 file)
+- masou : D:/bxb/weapon/stand/s/{7位}.png → bxb_wiki/icons/masou/{wc_id}.png         (~622 file)
+- crystal: D:/bxb/materia/icon/{id}_{N}.png → bxb_wiki/icons/crystal/{id}_{N}.png    (~3348 file)
+- bg    : D:/bxb/picture/m/{id}.png → bxb_wiki/icons/bg/{pic_id}.png                  (~499 file)
+- soul  : D:/bxb/npc/stand/m/{texture_id}.png → bxb_wiki/icons/soul/{texture_id}.png  (~478 file)
+- misc  : D:/bxb/_misc/marriage_*.png → bxb_wiki/icons/_misc/                          (3 file)
 - app_icons: D:/bxb/_app_icons/icon_weapon_type_42_*.png + icon_element_list_*.png  (~18 file)
-             → bxb-wiki/icons/_app_icons/   (chara icon 叠层用)
+             → bxb_wiki/icons/_app_icons/   (chara icon 叠层用)
 
-总 ~6000 file、~150 MB。bxb-wiki/icons/ 在 .gitignore 排除 (跟 omoide_icon/ 同策略)。
+总 ~6000 file、~150 MB。bxb_wiki/icons/ 在 .gitignore 排除 (跟 omoide_icon/ 同策略)。
 
 设计:
 - 不依赖 master_tables (源/目标按 D:\bxb 文件命名直接拷、master 不参与)
