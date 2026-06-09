@@ -34,12 +34,9 @@ EVOLVE_NAME = {0: "通常", 1: "改造", 2: "極弐"}
 
 def load_wiki_aux():
     if not WIKI_AUX.is_file():
-        return {}, {}
+        return {}
     aux = json.loads(WIKI_AUX.read_text(encoding="utf-8"))
-    return (
-        aux.get("chara_skill_value_scaling", {}),
-        aux.get("chara_tags", {}),
-    )
+    return aux.get("chara_skill_value_scaling", {})
 
 
 def normalize_range(r):
@@ -219,7 +216,7 @@ def load_npc_motion_durations():
 def build():
     src = master_file("weapons.json")
     raw = json.loads(src.read_text(encoding="utf-8"))
-    wiki_scaling, wiki_tags = load_wiki_aux()
+    wiki_scaling = load_wiki_aux()
     motion_id_to_name = load_attack_motions()
     motion_id_to_durations = load_npc_motion_durations()
 
@@ -272,11 +269,8 @@ def build():
         bd_skill = build_bd_skill(v0.get("weapon_arts"), v0.get("weapon_arts_suffix"),
                                   wiki_scaling, warnings, v0.get("id"))
 
-        # chara.tags: 从 wiki 拷 (Phase 6.4)、name match
+        # chara-level meta — tags 字段已迁到 chara_revise.json (deepApply 注入)、master 不含
         chara_name = v0.get("base_name") or v0.get("name")
-        tags = wiki_tags.get(chara_name, [])
-
-        # chara-level meta — per-chara 字段直接放顶层、不再嵌套 extras
         out.append({
             "id": bid,
             "name": chara_name,
@@ -285,7 +279,6 @@ def build():
             "element_id": v0.get("element_id"),
             "weapon_type_id": v0.get("weapon_type_id"),
             "weapon_tag_ids": v0.get("weapon_tag_ids"),  # 武器分类 (非 chara.tags)
-            "tags": tags,        # 从 wiki main 拷 (Phase 6.4)、wiki 没的留空
             "sort_order": v0.get("sort_order"),
             "min_damage_rate": v0.get("min_damage_rate"),
             "mp": v0.get("mp"),
@@ -307,9 +300,7 @@ def build():
     DATA_DIR.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    tags_matched = sum(1 for c in out if c["tags"])
     print(f"wrote {len(out)} characters (from {len(raw)} weapon variants) → {OUT}")
-    print(f"  chara.tags matched wiki: {tags_matched} / {len(out)} ({100*tags_matched//len(out)}%)")
     if warnings:
         print(f"WARN: {len(warnings)} issues")
         for w in warnings[:5]:

@@ -120,7 +120,7 @@ export function v2SoulToWiki(s) {
     max_level: s.max_level,
     image: null,                                  // soul-render 走 ../icons/soul/{id}.png
     url: null,
-    tags: [],                                     // v2 没 soul tag、UI 不渲染 badge
+    tags: Array.isArray(s.tags) ? s.tags : [],    // tags 走 soul_revise.json (deepApply 注入)
     acquisition: {},                              // v2 没"入手場所"字段
     element: elemAff.ids,                         // SOUL_SPEC.filters.element 用、得意属性 id 数组 (level>=1)
     weapon: wpnAff.ids,                           // SOUL_SPEC.filters.weapon 用、得意武器 id 数组
