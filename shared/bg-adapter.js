@@ -9,6 +9,7 @@ import {
   MATH_TYPE_TO_CALC,
   RANGE_TO_SCOPE,
 } from './chara-adapter.js';
+import { deepApply } from './revise-core.js';
 
 function _v2BgSkillToEffect(sk) {
   if (sk.parameter === 'NoEffect') return null;
@@ -63,6 +64,18 @@ export function v2BgToWiki(b) {
   };
 }
 
-export function adaptBgList(arr) {
-  return (arr || []).map(v2BgToWiki);
+export function adaptBgList(arr, revise = []) {
+  if (!Array.isArray(arr)) return [];
+  const reviseById = new Map();
+  for (const r of (revise || [])) {
+    if (r && r.id != null) reviseById.set(r.id, r);
+  }
+  const merged = arr.map((b) => {
+    const patch = reviseById.get(b.id);
+    if (!patch) return b;
+    const cloned = JSON.parse(JSON.stringify(b));
+    deepApply(cloned, patch);
+    return cloned;
+  });
+  return merged.map(v2BgToWiki);
 }

@@ -9,10 +9,10 @@
 ## 数据 pipeline
 
 ```
-master_tables/<latest>/master_data/*.json   (外部源数据、ground truth)
+BxB/master_tables/master_data/<latest>/*.json   (外部源数据、ground truth、git worktree)
     │
     ▼
-scripts/master_to_business/build_*.py                 (8 个 build script、详见下方)
+scripts/master_to_business/build_*.py            (8 个 build script、详见下方)
     │
     ▼
 data/*.json    (业务 JSON: master + revise + audit)
@@ -20,14 +20,14 @@ data/*.json    (业务 JSON: master + revise + audit)
     ▼  +  data/*_revise.json  (4 bucket: chara / soul / crystal / masou)
     │     │
     │     ▼
-shared/*-adapter.js                                    (deepApply(master, revise))
+shared/*-adapter.js                              (deepApply(master, revise))
     │
     ▼
-js/*-list.js / *-render.js / hensei.html              (viewer 渲染 + hensei 计算)
+js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 ```
 
 **关键模块**:
-- master 数据来源: [scripts/master_to_business/paths.py](../scripts/master_to_business/paths.py) 自动 detect `master_tables/` 下最新日期文件夹
+- master 数据来源: [scripts/master_to_business/paths.py](../scripts/master_to_business/paths.py) 自动 detect `BxB/master_tables/master_data/` 下最新日期文件夹 (git worktree、`master_tables` branch)
 - 4 bucket revise: `chara_revise.json` (tags + skill value_scaling) / `soul_revise.json` (tags) / `crystal_revise.json` (max_value / M_L/W/P_max / min_max weight/purity) / `masou_revise.json` (skill value_scaling)
 - sparse diff core: [shared/revise-core.js](../shared/revise-core.js) (`computeDiff` / `deepApply` / 撤回 / tombstone null)
 - 一次性 wiki 提取产物: `data/_wiki_aux.json` (含 `crystal_max_value` / `chara_tags` / `chara_skill_value_scaling` / `masou_value_scaling`、永不重跑)
@@ -44,13 +44,14 @@ js/*-list.js / *-render.js / hensei.html              (viewer 渲染 + hensei �
 | [js/](../js/) | viewer 业务代码 (5 viewer 各自 list / render / edit) |
 | [pages_src/](../pages_src/) | HTML 源 (5 viewer + `_loading.html` partial) |
 | pages/ | build 产物 (.gitignore 排除) |
-| [data/](../data/) | 业务 JSON (master + revise + audit + wiki_aux) |
+| [data/](../data/) | 业务 JSON (master + revise + audit + wiki_aux + derived _*) |
 | icons/ | 本地图标资源 (.gitignore 排除、`copy_images.py` 从 D:/bxb 拷) |
 | omoide_icon/ | omoide icon (.gitignore 排除) |
 | [docs/](../docs/) | 项目文档 |
 | [tests/unit/](../tests/unit/) | 单测 (npm test 135/135) |
 | [tests/ui/](../tests/ui/) | Playwright e2e 测试 |
 | audit/ | `audit_dead_code.mjs` 输出 (.gitignore 排除) |
+| `../master_tables/` | master_tables (crawl 仓库 `master_tables` branch 的 git worktree、跟 crawl 同级、`BxB/master_tables/`) |
 
 ---
 
@@ -72,7 +73,7 @@ js/*-list.js / *-render.js / hensei.html              (viewer 渲染 + hensei �
 
 | 脚本 | 输入 | 输出 |
 |---|---|---|
-| [build_senzai.py](../scripts/master_to_business/build_senzai.py) | `memory_slot_skills.json` | `data/senzai_table.json` |
+| [build_senzai.py](../scripts/master_to_business/build_senzai.py) | `data/_memory_slot_skills.json` | `data/senzai_table.json` |
 | [build_souls.py](../scripts/master_to_business/build_souls.py) | `jobs.json` | `data/souls.json` |
 | [build_crystals.py](../scripts/master_to_business/build_crystals.py) | `materials.json` + `_wiki_aux.json` | `data/crystals.json` + `data/crystal_revise.json` + audit |
 | [build_bladegraphs.py](../scripts/master_to_business/build_bladegraphs.py) | `pictures.json` | `data/bladegraphs.json` |

@@ -11,7 +11,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from paths import master_file  # noqa: E402
 from enums import PARAMETER_ALL_NAMES, MATH_TYPE_BY_NAME  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -20,7 +19,11 @@ OUT = DATA_DIR / "senzai_table.json"
 
 
 def build():
-    src = master_file("memory_slot_skills.json")
+    src = DATA_DIR / "_memory_slot_skills.json"
+    if not src.is_file():
+        raise FileNotFoundError(
+            f"{src} not found — 跑 build_memory_slot_skills.py 先生成"
+        )
     raw = json.loads(src.read_text(encoding="utf-8"))
     assert isinstance(raw, dict), f"expected dict from {src}"
 
