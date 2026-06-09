@@ -312,6 +312,10 @@ test('omoide: clearAllOmoide → stat 不含 omoide buff (Session 3 patch: setCh
 });
 
 test('omoide: equipAllOmoide → stat 增加 (picker 自动选所有候选)', async ({ page }) => {
+  // omoide data (data/omoide/{base_id}.json、Frida 抓的、108 MB) 在 .gitignore 内、CI 上不存在 → skip
+  const hasOmoide = await page.request.get('/data/omoide/1001.json').then((r) => r.ok()).catch(() => false);
+  test.skip(!hasOmoide, 'data/omoide/1001.json not present (.gitignore 排除、CI 上没 omoide fixture)');
+
   await waitHenseiReady(page);
   await page.evaluate(() => window.setChara(0, 100101));
   await page.waitForTimeout(2000);  // 等 omoide fetch 完 (CI Linux 慢、本地 1600ms 足够)
