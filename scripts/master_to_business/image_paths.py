@@ -1,6 +1,6 @@
 """image_paths.py — master id → 本地 icon path 解析。
 
-crawl/icons/ 在 .gitignore 排除、~150MB 不入 git。
+bxb-wiki/icons/ 在 .gitignore 排除、~150MB 不入 git。
 
 命名规则:
 - chara : icons/chara/{weapons.id 6位}.png           99.8%

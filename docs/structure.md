@@ -51,7 +51,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [tests/unit/](../tests/unit/) | 单测 (npm test 135/135) |
 | [tests/ui/](../tests/ui/) | Playwright e2e 测试 |
 | audit/ | `audit_dead_code.mjs` 输出 (.gitignore 排除) |
-| `../master_tables/` | master_tables (crawl 仓库 `master_tables` branch 的 git worktree、跟 crawl 同级、`BxB/master_tables/`) |
+| `../master_tables/` | master_tables (bxb-wiki 仓库 `master_tables` branch 的 git worktree、跟 bxb-wiki 同级、`BxB/master_tables/`) |
 
 ---
 
