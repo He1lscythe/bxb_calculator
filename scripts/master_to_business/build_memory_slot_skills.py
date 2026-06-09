@@ -1,16 +1,16 @@
 """build_memory_slot_skills.py — 从 HouseTop response + omoide 反查 memory_slot 技能字典。
 
 迁自 unpacking/draft/build_skill_id_index.py 内 memory_slot 段 (用户决策 2026-06-09、
-脚本搬 crawl/scripts/master_to_business/)。
+脚本搬 bxb-wiki/scripts/master_to_business/)。
 
 数据 chain:
   HouseTop response (Frida hook 抓的) → memory_slot 内 weapon_skills → 反查表
   优先级 source:
     (a) unpacking/draft/out/account/house_tops.json (cross-repo、Frida 累计 batch)
     (b) unpacking/draft/out/maken2_decoded* 内 *_resp.json (cross-repo、单 HouseTop response)
-    (c) crawl/data/omoide/<base_id>.json (629 个、Phase 6.7 已抓)
+    (c) bxb-wiki/data/omoide/<base_id>.json (629 个、Phase 6.7 已抓)
 
-输出: crawl/data/_memory_slot_skills.json
+输出: bxb-wiki/data/_memory_slot_skills.json
   { skill_id_str: { name, parameter, math_type, value, category_for_memory_slot, description } }
 
 用法: python scripts/master_to_business/build_memory_slot_skills.py
@@ -67,7 +67,7 @@ def collect_sources():
                 if isinstance(j.get('user_weapon'), dict) and 'user_weapon_memory_slots' in j:
                     sources.append((str(jf), j))
 
-    # (c) crawl/data/omoide/<base_id>.json
+    # (c) bxb-wiki/data/omoide/<base_id>.json
     if OMOIDE_DIR.is_dir():
         for jf in sorted(OMOIDE_DIR.glob('*.json')):
             try:

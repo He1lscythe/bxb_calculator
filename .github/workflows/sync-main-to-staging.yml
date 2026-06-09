@@ -1,0 +1,32 @@
+name: sync-main-to-staging
+
+# main push 后自动 merge 进 data-staging、触发 GitHub Pages 重新部署
+# 2026-06-09 单 worktree 架构: main = 框架 + 数据集 (icons/omoide/master JSON)、
+# data-staging = main + 5 *_revise.json (Vercel PR target、user edit 流入)
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: data-staging
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge origin/main into data-staging
+        run: |
+          git fetch origin main
+          git merge origin/main --no-edit
+          git push origin data-staging
