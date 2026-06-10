@@ -52,6 +52,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [tests/ui/](../tests/ui/) | Playwright e2e 测试 |
 | audit/ | `audit_dead_code.mjs` 输出 (.gitignore 排除) |
 | `../master_tables/` | master_tables (bxb_wiki 仓库 `data/master-tables` branch 的 git worktree、跟 bxb_wiki 同级、`BxB/master_tables/`) |
+| `../data_staging/` | data-staging branch 的常驻 git worktree (2026-06-10 建、跟 bxb_wiki 同级)。revise 同步 / main→data-staging 本地 merge 都在这里做 (`*_revise.json` 在 main gitignored、data-staging tracked — 此 worktree 是它们的 git 归宿) |
 
 ---
 

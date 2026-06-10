@@ -44,7 +44,6 @@ const _renderMasouCard = (m) => min`
     <div class="masou-body">
       <div class="skill-name-row">
         <span class="skill-name">${escHtml(m.name || '')}</span>
-        <span style="font-size:11px;color:var(--text2)">id=${m.id}</span>
       </div>
       <div class="masou-effects">
         ${(m.effects || []).map(_renderEffectRow).join('') || '<div class="om-empty">(effect なし)</div>'}
