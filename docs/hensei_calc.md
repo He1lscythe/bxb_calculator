@@ -293,3 +293,38 @@ console 输入 `window.__DEBUG_STATS = true` → 切控件时输出：
 - LP: 4 档 `[1.0, 1.1, 1.5, 2.0]` 普通 / `[1.0, 1.3, 2.0, 5.0]` Blaze (unpacking §3.8)
 - HitCount: 逐段 `max(1, floor(base[i] × Π Mul + Σ Add))` (unpacking §17.3)
 - omoide Mul → stage 3 (用户决策)
+
+---
+
+## 計算 trace (dev 専用)
+
+`computeStats(chara, tr, slotIdx, ctx)` — `ctx.traceEnabled=true` 时返回值带 `trace` 字段、
+hensei stat-trace modal (stats-cell 点击) 的数据源。Pages 生产环境 (非 localhost/LAN) 不传 flag、零开销。
+
+```js
+trace = {
+  base: { 攻撃力, 防御力, HP, ブレイク力 },     // applyStaged 入口 base
+  damageLimitBase: 2147483647,
+  hitsBase: [h1, h2, h3],
+  speedBase: base.Speed,                        // 転速链起点
+  motionBase: [m1, m2, m3],                     // 攻速链起点 (motion_speed 1-3)
+  stages: [{ key, label, steps: [{ src, stat, op, val, before, after }] }],
+}
+```
+
+| stage key | 内容 |
+|---|---|
+| s1_omoide_add / s2a_masou_add / s2b_masou_mul | applyStaged Stage 1-2 |
+| s3_lp | LP tier ×Total (只攻撃力) |
+| s4_other_mul / s5_other_add | chara/crystal/bg/soul/chara_meta 等 |
+| s6_enemy_break / s7_inline3 / s7b_ceil | step48/49 / step51 / 出口 ceil |
+| s8_enemy_mods | 属性相性/難度/有利武器/BD cap (逐因子、链尾=ceil 后显示值) |
+| s9_hits | Hit1-3 逐 effect 链 + floor/max(1) 终步 |
+| s10_damage_limit | DamageLimitBreak fold + floor 终步 |
+| s11_speed | 転速: recover → ×Mul链 → ×partner → +Add链 (fold 等价重演) |
+| s12_motion | 攻速1-3: motion_speed_i → ×Mul链 → +Add链 |
+
+- step.stat ∈ { 攻撃力/防御力/HP/ブレイク力/Hit1-3/ダメ上限/転速/攻速1-3 }、UI 按 tab filter
+- step.src = `{skill/装备名}@S{slot}` (collectEffects 的 `_src_name`)
+- speed/motion 实际计算保持 fold (输出 bit 一致)、trace 链为数学等价重演 (Mul 全在 Add 前)
+- 单测: `tests/unit/test_stats_trace.mjs` (gate / on-off 一致 / 各链尾 == 输出 / 链连续性)

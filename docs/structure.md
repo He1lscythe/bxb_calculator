@@ -101,7 +101,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 
 | 模块 | 用途 |
 |---|---|
-| [stats-calc-v2.js](../shared/stats-calc-v2.js) | hensei 7-stage stat 计算 (HP-curve / Break gate / 4 stage apply / DLB cap / Speed / MotionSpeed / enemy mods) |
+| [stats-calc.js](../shared/stats-calc.js) | hensei 7-stage stat 计算 (HP-curve / Break gate / 4 stage apply / DLB cap / Speed / MotionSpeed / enemy mods)、`ctx.traceEnabled` 时返回 dev trace (stat-trace modal 数据源、见 hensei_calc.md) |
 | [hensei-helpers.js](../shared/hensei-helpers.js) | UI 用 lv/觉醒/熟度表 + soulMultiplier / crystalEffectiveValue / crystalMaxBairitu / BlazeGauge 系统 |
 | [revise-core.js](../shared/revise-core.js) | sparse diff core (`computeDiff` 三参含撤回 + `deepApply` + tombstone null) |
 | [save-client.js](../shared/save-client.js) | POST /save 路由 (local `start.py:8787` / Vercel `/api/save.js`) + toast 反馈 |
@@ -133,7 +133,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | `js/bg-list.js` / `bg-edit.js` | bladegraph viewer + edit module (用户决策保留、HTML 暂不暴露按钮) |
 | `js/omoide-view.js` | omoide picker modal (hensei + chara 详情页用) |
 
-hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内、调用 `shared/stats-calc-v2.js`。
+hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内、调用 `shared/stats-calc.js`。
 
 ---
 
