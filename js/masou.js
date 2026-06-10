@@ -39,7 +39,7 @@ const _renderEffectRow = (e) => {
 
 const _renderMasouCard = (m) => min`
   <div class="skill-card masou-card">
-    <img class="masou-img" src="../icons/masou/${m.id}.png"
+    <img class="masou-img" loading="lazy" src="../icons/masou/${m.id}.png"
          onerror="this.style.visibility='hidden'" alt="">
     <div class="masou-body">
       <div class="skill-name-row">

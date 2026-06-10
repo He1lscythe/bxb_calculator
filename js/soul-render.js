@@ -11,6 +11,7 @@ import {
   SOUL_TAG_COLOR,
 } from '../shared/constants.js';
 import { escHtml, fmtBairitu, fmtAff, min } from './utils.js';
+import { setupLazyImg } from '../shared/lazy-img.js';
 
 export const AFF_LABEL = { '-2': '超苦手', '-1': '苦手', 0: '普通', 1: '得意', 2: '超得意' };
 export const AFF_CLS = { '-2': 'aff-m2', '-1': 'aff-m1', 0: 'aff-0', 1: 'aff-1', 2: 'aff-2' };
@@ -35,11 +36,15 @@ export const renderList = () => {
       <span class="star-badge star-${s.rarity || 0}">★${s.rarity || '?'}</span>
       ${state.soulCheckEnabled ? `<input type="checkbox" class="soul-check-cb" data-id="${s.id}" ${state.soulCheck.has(s.id) ? 'checked' : ''}>` : ''}
       <span class="soul-name">${escHtml(s.name)}</span>
-      <img class="soul-icon-thumb" src="../icons/soul/${s.id}.png"
+      <img class="soul-icon-thumb" data-src="../icons/soul/${s.id}.png"
            onerror="this.style.display='none'" alt="">
     </div>`,
     )
     .join('');
+
+  // native `loading=lazy` 只看 document viewport、#soul-list 自己 scroll → 失效
+  // IO-based custom lazy、root=#soul-list、按内部 scroll 进度按需 fetch
+  setupLazyImg(list);
 
   list.querySelectorAll('.soul-item').forEach((el) => {
     el.addEventListener('click', () => selectSoul(parseInt(el.dataset.id)));
@@ -122,7 +127,7 @@ export const renderDetail = (s) => {
         <div class="soul-title">${escHtml(s.name)}</div>
         <button class="btn-edit" onclick="enterEditMode(${s.id})">修正</button>
       </div>
-      <img class="soul-banner" src="${escHtml(s.image || `../icons/soul/${s.id}.png`)}"
+      <img class="soul-banner" loading="lazy" src="${escHtml(s.image || `../icons/soul/${s.id}.png`)}"
            onerror="this.style.display='none'" alt="${escHtml(s.name)}">
       <div class="soul-meta">
         <span class="meta-chip star-${stars}" style="font-weight:700;letter-spacing:1px">${'★'.repeat(stars) || '?'}</span>

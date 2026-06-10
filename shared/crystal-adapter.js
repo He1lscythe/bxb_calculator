@@ -29,8 +29,6 @@ function _v2CrystalToWikiEffect(c) {
     bairitu_init: c.initial_value,                 // 初期値 (master 直读)
     bairitu_scaling: 0,
     calc_type,
-    weight_step: null,                             // master 无 (Phase 7 edit 手填)
-    purity_step: null,
     _parameter: c.parameter,                    // v2 原 parameter (cr-list renderEffLine 用)
   };
   if (c.element_id) {
