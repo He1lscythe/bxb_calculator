@@ -1626,6 +1626,7 @@
         SLOT_COLORS,
         COLOR_LABELS,
         IS_LOCAL_DEV,
+        traceEnabled: IS_LOCAL_DEV,   // dev 才生成 trace (stat-trace modal 用)、Pages 0 开销
       });
 
       export const _statsInner = (i, chara) => {
@@ -3008,7 +3009,7 @@
       // 各 stat の計算 trace を stage 別に展開表示。GitHub Pages では UI 入口無効・本ブロック全部 no-op。
       const _statTraceState = { slot: -1, statKey: '攻撃力', openStages: new Set() };
 
-      const _STAT_TRACE_TABS = ['攻撃力', '防御力', 'HP', 'ブレイク力', 'Hit', 'ダメ上限'];
+      const _STAT_TRACE_TABS = ['攻撃力', '防御力', 'HP', 'ブレイク力', 'Hit', '転速', '攻速', 'ダメ上限'];
 
       const _fmtTraceVal = (v) => {
         if (v == null || !Number.isFinite(v)) return '-';
@@ -3029,19 +3030,26 @@
         return op;
       };
 
-      // Hit tab は 3 stage hits + total を 1 view に統合表示するため特別扱い。
+      // Hit / 攻速 tab は 3 stage を 1 view に統合表示するため特別扱い。
       const _statTraceMatch = (step, statKey) => {
         if (statKey === 'Hit') return /^Hit[123]$/.test(step.stat);
+        if (statKey === '攻速') return /^攻速[123]$/.test(step.stat);
         return step.stat === statKey;
       };
 
       const _statTraceFinalValue = (trace, statKey) => {
         if (!trace) return null;
-        if (statKey === 'Hit') return null; // hit は array なので別途
+        if (statKey === 'Hit' || statKey === '攻速') return null; // array なので別途
         if (statKey === 'ダメ上限') {
           let last = trace.damageLimitBase;
           for (const st of trace.stages)
             for (const s of st.steps) if (s.stat === 'ダメ上限') last = s.after;
+          return last;
+        }
+        if (statKey === '転速') {
+          let last = trace.speedBase;
+          for (const st of trace.stages)
+            for (const s of st.steps) if (s.stat === '転速') last = s.after;
           return last;
         }
         let last = trace.base[statKey];
@@ -3052,8 +3060,9 @@
 
       const _statTraceBase = (trace, statKey) => {
         if (!trace) return 0;
-        if (statKey === 'Hit') return 0;
+        if (statKey === 'Hit' || statKey === '攻速') return 0;
         if (statKey === 'ダメ上限') return trace.damageLimitBase;
+        if (statKey === '転速') return trace.speedBase || 0;
         return trace.base[statKey] || 0;
       };
 
@@ -3111,6 +3120,39 @@
           return;
         }
         const trace = r.trace;
+
+        // 攻速 tab: 3 段 (攻速1/2/3) 並べ、Hit と同 pattern
+        if (statKey === '攻速') {
+          let html = `<div class="trace-base">Base motion_speed: [${(trace.motionBase || []).map((v) => _fmtTraceVal(v)).join(', ')}]</div>`;
+          for (const stage of trace.stages) {
+            const msSteps = stage.steps.filter((s) => /^攻速[123]$/.test(s.stat));
+            if (!msSteps.length) continue;
+            const open = _statTraceState.openStages.has(stage.key);
+            html += `<div class="trace-stage">
+        <div class="trace-stage-head" onclick="toggleStatTraceStage('${stage.key}')">
+          <span><span class="arrow">${open ? '▼' : '▶'}</span> ${escHtml(stage.label)}</span>
+          <span class="trace-stage-tot">${msSteps.length} 件</span>
+        </div>`;
+            if (open) {
+              html += msSteps
+                .map(
+                  (s) => `<div class="trace-step">
+          <span class="src" title="${escHtml(s.src)}">${escHtml(s.src)} [${s.stat}]</span>
+          <span class="op">${_opSymbol(s.op)}</span>
+          <span class="val">${_fmtTraceVal(s.val)}</span>
+          <span class="after">${_fmtTraceVal(s.before)} → ${_fmtTraceVal(s.after)}</span>
+        </div>`,
+                )
+                .join('');
+            }
+            html += `</div>`;
+          }
+          const spds = (r.motionSpeed?.speeds || []).map((v) => _fmtTraceVal(v));
+          const frs = r.motionSpeed?.durationsFrames || [];
+          html += `<div class="trace-final">最終 speeds: [${spds.join(', ')}]  frames: [${frs.map((v) => v || '—').join(', ')}] 計 ${frs.reduce((a, b) => a + (b || 0), 0)}fr</div>`;
+          body.innerHTML = html;
+          return;
+        }
 
         // Hit tab は 3 stage の hits を並べる
         if (statKey === 'Hit') {
@@ -3183,12 +3225,19 @@
             ? r.stats['攻撃力']
             : statKey === 'ダメ上限'
               ? r.damageLimit
-              : r.stats[statKey];
+              : statKey === '転速'
+                ? r.speed?.latestRecover
+                : r.stats[statKey];
         const mismatch =
           displayed != null && finalVal != null && Math.abs(displayed - finalVal) > 1e-3;
         html += `<div class="trace-final">最終: ${_fmtTraceStat(finalVal)}${mismatch ? '  ⚠ 表示値 ' + _fmtTraceStat(displayed) + ' と不一致' : '  ✓'}</div>`;
         if (statKey === '攻撃力') {
           html += `<div class="trace-final" style="opacity:.7;font-weight:400">攻撃力 min = max × 0.95 = ${_fmtTraceStat(finalVal * 0.95)}</div>`;
+        }
+        if (statKey === '転速') {
+          const cf = r.speed?.cooldownFrames || 0;
+          const sf = r.speed?.setFrames || 0;
+          html += `<div class="trace-final" style="opacity:.7;font-weight:400">cooldown = ceil(6000 / recover) = ${cf}fr (+set ${sf}fr = ${cf + sf}fr)</div>`;
         }
         body.innerHTML = html;
       };
