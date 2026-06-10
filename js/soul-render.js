@@ -254,24 +254,22 @@ const _ctxKey = (e) => {
     : e.weapon != null
       ? String(e.weapon)
       : '';
-  return [e.scope, elem, type, e.condition || 0].join('|');
+  return [e.range || '', elem, type, e.condition || 0].join('|');
 };
 
 const _renderScopeTag = (e) => {
-  if (e.scope === 0) return '<span class="scope-tag scope-self">自</span>';
-  if (e.scope === 1) return '<span class="scope-tag scope-all">全</span>';
-  const parts = [];
-  const el = fmtElem(e.element);
-  if (el) parts.push(el);
-  const ty = fmtType(e.weapon);
-  if (ty) parts.push(ty);
-  if (e.scope === 2)
+  // 直读 master 字段、不再用 scope enum
+  // element/weapon 限定: 标 "限" + 详细 label; 否则按 range 标 全 / 自
+  if (e.element || e.weapon) {
+    const parts = [];
+    const el = fmtElem(e.element);
+    if (el) parts.push(el);
+    const ty = fmtType(e.weapon);
+    if (ty) parts.push(ty);
     return '<span class="scope-tag scope-lim">' + (parts.join('·') || '限') + '</span>';
-  if (e.scope === 3)
-    return '<span class="scope-tag scope-equip-s">' + (parts.join('·') || '装') + '·自</span>';
-  if (e.scope === 4)
-    return '<span class="scope-tag scope-equip-a">' + (parts.join('·') || '装') + '·全</span>';
-  return '';
+  }
+  if (e.range === 'All') return '<span class="scope-tag scope-all">全</span>';
+  return '<span class="scope-tag scope-self">自</span>';
 };
 
 const _renderCondTag = (e) => {

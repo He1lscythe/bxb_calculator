@@ -2,13 +2,12 @@
 // 让 main 旧版 js/soul-render.js / js/utils.js / shared/soul-spec.js 1:1 跑起来。
 //
 // 复用 chara-adapter 的:
-//   paramToBunruiAndCondition / _MATH_TYPE_TO_CALC / _RANGE_TO_SCOPE / injectHitStages
+//   paramToBunruiAndCondition / MATH_TYPE_TO_CALC / injectHitStages
 
 import {
   paramToBunruiAndCondition,
   injectHitStages,
   MATH_TYPE_TO_CALC,
-  RANGE_TO_SCOPE,
 } from './chara-adapter.js';
 import { deepApply } from './revise-core.js';
 import { ELEMENT, WEAPON } from './constants.js';
@@ -70,10 +69,9 @@ function _v2SoulSkillToWiki(sk) {
   const { bunrui, condition } = paramToBunruiAndCondition(sk.parameter);
   const calc_type = MATH_TYPE_TO_CALC[sk.math_type];
   if (calc_type == null) return null;
-  let scope = RANGE_TO_SCOPE[sk.range] ?? 0;
   const eff = {
     bunrui: [bunrui],
-    scope,
+    range: sk.range,             // master 原 'All' / 'Single' / 'None' 透传
     condition,
     bairitu: sk.value,
     bairitu_scaling: sk.value_scaling || 0,
@@ -82,18 +80,10 @@ function _v2SoulSkillToWiki(sk) {
   };
   // HitCount (bunrui=7) — 注入 stage 分段字段 (soul 可能 values=[a,b,c] 只给特定段加)
   if (bunrui === 7) injectHitStages(eff, sk);
-  // 元素 / 武器 / chara 限定
-  if (sk.element_condition) {
-    eff.element = sk.element_condition;
-    eff.scope = 2;
-  }
-  if (sk.weapon_type_condition) {
-    eff.weapon = sk.weapon_type_condition;
-    eff.scope = 2;
-  }
-  if (sk.weapon_base_id) {
-    eff.scope = 5;
-  }
+  // 元素 / 武器 / chara 限定 — 透传 master 字段、不再用 scope 编码
+  if (sk.element_condition) eff.element = sk.element_condition;
+  if (sk.weapon_type_condition) eff.weapon = sk.weapon_type_condition;
+  if (sk.weapon_base_id) eff.weapon_base_id = sk.weapon_base_id;
   return {
     name: sk.name || '',
     effect_text: sk.description || '',

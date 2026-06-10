@@ -173,13 +173,14 @@ export const SCOPE_LABEL = {
   3: 'キャラ限定',
 };
 
+// crystal/bg 共用统一逻辑: SELF/SET 看 range='All'、CHARA 看 chara_base_id 非空
+// 两个字段都由 build_*_aux.py 注入到 *_revise.json (crystal range / chara_base_id; bg chara_base_id)
+// crystal range 缺省 = Single (revise 不写)、bg skill range 来自 master 原生
 export function crystalScopeTags(c) {
   const tags = [];
-  const desc = c.description || '';
-  const name = c.name || '';
-  if (desc.includes('同装備セット')) tags.push(2);    // set
-  else tags.push(1);                                  // self
-  if (name.includes('純真記憶') || name.includes('秘録記憶')) tags.push(3); // chara
+  if (c.range === 'All') tags.push(2);   // 装備セット (revise.range='All' 注入)
+  else tags.push(1);                      // 自身 (缺省)
+  if (c.chara_base_id) tags.push(3);     // キャラ限定 (revise.chara_base_id 注入)
   return tags;
 }
 
@@ -189,5 +190,6 @@ export function bgScopeTags(b) {
     if (sk.range === 'All') tagsSet.add(2);
     else tagsSet.add(1);
   }
+  if (b.chara_base_id) tagsSet.add(3);   // build_bg_aux 反查 chara_base_id → キャラ限定 facet
   return [...tagsSet];
 }

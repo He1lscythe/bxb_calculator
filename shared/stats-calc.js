@@ -169,10 +169,10 @@ function _effectApplies(eff, targetChara, srcSlot, targetSlot) {
     const need = eff.weapon_type_condition || eff.weapon_type_id;
     if (need && targetChara?._master?.weapon_type_id !== need) return false;
   }
-  // chara 限定 (weapon_base_id matches target base_id)
-  if (eff.weapon_base_id) {
-    if (targetChara?._master?.id !== eff.weapon_base_id) return false;
-  }
+  // chara 限定 — soul: weapon_base_id (master 原生)、crystal/bg: chara_base_id (build_*_aux.py 反查 characters.json)
+  // 两路径都跟 targetChara._master.id 严格比对
+  const limId = eff.weapon_base_id || eff.chara_base_id;
+  if (limId && targetChara?._master?.id !== limId) return false;
   return true;
 }
 
@@ -325,15 +325,20 @@ export function collectEffects(team, targetSlotIdx, ctx) {
         math_type: cr._master.math_type,
         value,
         value_scaling: 0,
-        range: cr._master.conditional_parameter ? 'Single' : 'All',
+        range: cr._master.range || 'Single',   // build_crystal_aux 走 desc 同装備セット 注入 All、否则 Single 缺省
         target_element_id: cr._master.element_id,
         weapon_type_id: cr._master.weapon_type_id,
+        chara_base_id: cr.chara_base_id || null,   // build_crystal_aux 走 name 純真/秘録 反查 chara id 注入
       }, { valueOverride: value });
     }
 
-    // 5. bg (slot.bg._skills 或 _master.skills)
+    // 5. bg (slot.bg._skills 或 _master.skills) — bg-level chara_base_id 注入每个 skill
     const bgSkills = slot.bg?._skills || slot.bg?._master?.skills || [];
-    for (const sk of bgSkills) pushEff(slot.chara, i, 'bg', sk);
+    const bgCharaId = slot.bg?.chara_base_id || null;
+    for (const sk of bgSkills) {
+      const skWithLimit = bgCharaId ? { ...sk, chara_base_id: bgCharaId } : sk;
+      pushEff(slot.chara, i, 'bg', skWithLimit);
+    }
 
     // 6. masou (slot.masou 是 single object、不是 array)
     const masouObj = Array.isArray(slot.masou) ? slot.masou : (slot.masou ? [slot.masou] : []);
@@ -414,8 +419,8 @@ export function collectEffects(team, targetSlotIdx, ctx) {
       if (param === 'NoEffect') continue;
       const bairitu = lvScaled != null ? lvScaled : eff.bairitu;
       if (bairitu == null || bairitu === 0) continue;
-      // calc_type 0/1 = Mul/Add、scope: 1=全装备 / 2=限定 / 3=自身限定 / 5=chara限定
-      const range = (eff.scope === 2 || eff.scope === 3) ? 'Single' : 'All';
+      // eff.range 是 master 原 'All' / 'Single' / 'None' (adapter 透传)、缺省 'All'
+      const range = eff.range === 'Single' ? 'Single' : 'All';
       collected.push({
         _source: 'enemy_buff', _src_slot: targetSlotIdx, _src_label: srcLabel,
         parameter: param, base_parameter: param,

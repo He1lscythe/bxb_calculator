@@ -131,7 +131,6 @@
       import { state } from '../js/cr-state.js';
       import { escHtml, fmt, parseBairituVal, hideLoading } from '../js/utils.js';
       import { deepApply } from '../shared/revise-core.js';
-      import { enforceScopeConstraints } from '../shared/effect-constraints.js';
       import {
         initFilterToggles,
         toggleFilters,
@@ -170,7 +169,6 @@
               if (!state.originalData[c.id])
                 state.originalData[c.id] = JSON.parse(JSON.stringify(c));
             });
-            enforceScopeConstraints(state.allCrystals);
             applyFilters();
             hideLoading();
           })

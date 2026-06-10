@@ -117,16 +117,12 @@ export const resetFilters = () => {
 };
 
 const crystalElement = (c) => {
-  const e = (c.effects || []).find(function (e) {
-    return (e.scope === 2 || e.scope === 3) && e.element != null;
-  });
+  const e = (c.effects || []).find((e) => e.element != null);
   return e ? e.element : 0;
 };
 
 const crystalWeapon = (c) => {
-  const e = (c.effects || []).find(function (e) {
-    return (e.scope === 2 || e.scope === 3) && e.weapon != null;
-  });
+  const e = (c.effects || []).find((e) => e.weapon != null);
   return e ? e.weapon : 0;
 };
 
@@ -326,20 +322,12 @@ export const toggleExpand = (id) => {
 };
 
 export const scopeLabel = (e) => {
-  if (e.scope === 2 || e.scope === 3) {
-    if (e.element) return (ELEMENT[e.element] || '') + '属性のみ';
-    if (e.weapon != null) {
-      const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
-      return (
-        t
-          .map(function (v) {
-            return WEAPON[v] || v;
-          })
-          .join('/') + 'のみ'
-      );
-    }
+  // 直读 element / weapon (adapter 已不再注入 eff.scope)
+  if (e.element) return (ELEMENT[e.element] || '') + '属性のみ';
+  if (e.weapon != null) {
+    const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
+    return t.map((v) => WEAPON[v] || v).join('/') + 'のみ';
   }
-  if (e.scope === 5) return escHtml(e.name || '') + 'のみ';
   return '';
 };
 

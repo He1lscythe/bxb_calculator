@@ -46,17 +46,13 @@ const _profile = (c, key) => {
 };
 
 const _selfApplies = (c, e) => {
-  const sc = e.scope;
-  if (sc === 0 || sc === 1) return true;
-  if (sc === 2 || sc === 3) {
-    const elem = e.element;
-    const elemOK =
-      elem == null || (Array.isArray(elem) ? elem.indexOf(c.element) >= 0 : elem === c.element);
-    const tp = e.weapon;
-    const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(c.weapon) >= 0 : tp === c.weapon);
-    return elemOK && typeOK;
-  }
-  return false;
+  // 直读 master 字段 (adapter 已不再生成 eff.scope)、element / weapon 兼容数组与单值
+  const elem = e.element;
+  const elemOK =
+    elem == null || (Array.isArray(elem) ? elem.indexOf(c.element) >= 0 : elem === c.element);
+  const tp = e.weapon;
+  const typeOK = tp == null || (Array.isArray(tp) ? tp.indexOf(c.weapon) >= 0 : tp === c.weapon);
+  return elemOK && typeOK;
 };
 
 const maxHit = (c) => {

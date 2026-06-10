@@ -117,16 +117,6 @@ export const SOUL_TAG_COLOR = {
   8: '#cc7733', // BDHIT — rust orange
 };
 
-// 結晶 effects[].scope（详情/编辑下拉用长版，filter 按钮用短版）
-export const SCOPE = {
-  0: '自身/制限なし',
-  1: 'セット全体',
-  2: 'セット属性/武器限',
-  3: '自身属性/武器限',
-  5: 'キャラ限定',
-};
-export const SCOPE_SHORT = { 0: '自身', 1: 'セット全', 2: 'セット限', 3: '対象限', 5: 'キャラ限' };
-
 // effects[].condition：1=逆窮鼠(HP高) / 2=窮鼠(HP低) / 3=破損状態 / 4=敵ブレイク中
 export const CONDITION = { 0: 'なし', 1: '逆窮鼠', 2: '窮鼠', 3: '破損', 4: '敵ブレイク状態' };
 
@@ -185,7 +175,7 @@ function _pickKeys(map, opts) {
 
 // 渲染一行 filter toggle 按钮（class .ftog，配合各页 toggleFilter(field,key,btn)）
 //   field      : toggleFilter 的字段名
-//   map        : 数据 const（如 ELEMENT / WEAPON / BUNRUI_SHORT / SCOPE / CONDITION）
+//   map        : 数据 const（如 ELEMENT / WEAPON / BUNRUI_SHORT / CONDITION）
 //   opts.skip  : 跳过的 key 数组（如 [0]）
 //   opts.only  : 仅渲染这些 key
 //   opts.attr  : (key) => 附加属性串（含前导空格），如 ' style="color:var(--fire)"'
