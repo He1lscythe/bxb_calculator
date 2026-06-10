@@ -58,6 +58,32 @@ export class VirtualList {
     this._scrollEl.addEventListener('scroll', this._scrollHandler, { passive: true });
     window.addEventListener('resize', this._scrollHandler, { passive: true });
 
+    // ResizeObserver 兜底: row mount 后尺寸再变 (img async load 撑高 / 字体加载 / scrollbar 宽度变化
+    // 导致 text re-wrap) 时重测。_render 的同步 measure 只反映 append 那一刻、之后的变化全靠这里。
+    this._roScheduled = false;
+    this._ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver((entries) => {
+      let changed = false;
+      for (const entry of entries) {
+        const node = entry.target;
+        const id = node._vlistId;
+        if (id == null || this.visibleNodes.get(id) !== node) continue;
+        const real = node.offsetHeight;
+        if (real > 0 && real !== this.heights.get(id)) {
+          this.heights.set(id, real);
+          const item = this.items.find((x) => this.getRowId(x) === id);
+          if (item) this.onMeasure?.(item, real);
+          changed = true;
+        }
+      }
+      if (changed && !this._roScheduled) {
+        this._roScheduled = true;
+        requestAnimationFrame(() => {
+          this._roScheduled = false;
+          this._relayout();
+        });
+      }
+    }) : null;
+
     this._render();
   }
 
@@ -65,7 +91,7 @@ export class VirtualList {
     this.items = items || [];
     // visible nodes 可能 stale (例如 expandAll 把所有 state.expandedIds 加上、row 内容要重新 render)
     // 清掉 visibleNodes、_render 会重新 build + 测量
-    for (const node of this.visibleNodes.values()) node.remove();
+    for (const node of this.visibleNodes.values()) this._removeNode(node);
     this.visibleNodes.clear();
     this._relayout();
   }
@@ -79,6 +105,7 @@ export class VirtualList {
       const item = this.items.find((x) => this.getRowId(x) === id);
       if (item) {
         const newNode = this._buildNode(item, parseInt(node.style.top, 10) || 0);
+        this._ro?.unobserve(node);
         node.replaceWith(newNode);
         this.visibleNodes.set(id, newNode);
         // 测量真实高
@@ -102,6 +129,7 @@ export class VirtualList {
   destroy() {
     this._scrollEl.removeEventListener('scroll', this._scrollHandler);
     window.removeEventListener('resize', this._scrollHandler);
+    this._ro?.disconnect();
     for (const node of this.visibleNodes.values()) node.remove();
     this.visibleNodes.clear();
   }
@@ -143,7 +171,7 @@ export class VirtualList {
 
   _render() {
     if (!this.layout.length) {
-      for (const node of this.visibleNodes.values()) node.remove();
+      for (const node of this.visibleNodes.values()) this._removeNode(node);
       this.visibleNodes.clear();
       return;
     }
@@ -174,7 +202,7 @@ export class VirtualList {
     // 移除 off-screen nodes
     for (const [id, node] of this.visibleNodes) {
       if (!needIds.has(id)) {
-        node.remove();
+        this._removeNode(node);
         this.visibleNodes.delete(id);
       }
     }
@@ -210,7 +238,14 @@ export class VirtualList {
     node.style.top = `${top}px`;
     node.style.left = '0';
     node.style.right = '0';
+    node._vlistId = this.getRowId(item);   // RO callback 反查 row id
+    this._ro?.observe(node);
     return node;
+  }
+
+  _removeNode(node) {
+    this._ro?.unobserve(node);
+    node.remove();
   }
 }
 
