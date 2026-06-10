@@ -115,7 +115,7 @@
 
       Nav.init();
 
-      // ===== DATA LOAD (v2 schema → wiki adapter) =====
+      // ===== DATA LOAD (master schema → wiki adapter) =====
       // Phase 7 Session 1: 同时 fetch crystal_revise.json (含 max_value 等 server-fold 字段)
       document.addEventListener('DOMContentLoaded', () => {
         initFilterToggles();
@@ -163,7 +163,7 @@
       });
 
       // 旧 wiki cr-edit 函数 (bunrui/scope/element/weapon/step/delta/effect add/remove 等) 全 noop —
-      // v2 master 这些字段不可编辑 (100% 准确)、UI 渲染遗留 onclick 不让报错
+      // master 这些字段不可编辑 (100% 准确)、UI 渲染遗留 onclick 不让报错
       const _noop = () => {};
       Object.assign(window, {
         toggleCrystalBunrui: _noop,

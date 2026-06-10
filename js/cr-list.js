@@ -226,7 +226,7 @@ export const renderRowHd = (c) => {
     ? '<span class="badge elem-' + elem + '">' + (ELEMENT[elem] || elem) + '</span>'
     : '';
   const wb = weap ? '<span class="badge weapon">' + (WEAPON[weap] || weap) + '</span>' : '';
-  // 効果 tag: 用 v2 parameter class (跟 filter 一致)、不用旧 wiki bunrui
+  // 効果 tag: 用 parameter class (跟 filter 一致)、不用旧 wiki bunrui
   const _cls = c.parameter ? classifyParameter(c.parameter) : null;
   const bt = _cls
     ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[_cls] || _cls) + '</span>'
@@ -333,7 +333,7 @@ export const scopeLabel = (e) => {
 };
 
 const renderEffLine = (e) => {
-  // 効果 tag: v2 parameter class (跟 filter 一致)
+  // 効果 tag: parameter class (跟 filter 一致)
   const _cls = e._parameter ? classifyParameter(e._parameter) : null;
   const bTags = _cls
     ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[_cls] || _cls) + '</span>'

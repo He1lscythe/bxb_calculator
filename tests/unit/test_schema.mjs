@@ -1,5 +1,5 @@
-// tests/v2/test_schema_v2.mjs — v2 业务 JSON 字段完整性验证
-// 跑: node --test tests/v2/test_schema_v2.mjs
+// tests/unit/test_schema.mjs — 业务 JSON 字段完整性验证
+// 跑: node --test tests/unit/test_schema.mjs
 import { test } from 'node:test';
 import assert from 'node:assert';
 import fs from 'node:fs';

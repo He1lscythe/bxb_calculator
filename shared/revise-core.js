@@ -1,7 +1,7 @@
-// shared/revise-core.js — Sparse Diff Engine for v2 revise system
+// shared/revise-core.js — Sparse Diff Engine for revise system
 //
 // Phase 7 Session 1: 从零写、不抄 wiki main (旧 shared/save-edit-base.js 已删)。
-// 算法借鉴 wiki main 三参 computeDiff + 撤回机制 + sparse array dict 编码、按 v2 schema 重写。
+// 算法借鉴 wiki main 三参 computeDiff + 撤回机制 + sparse array dict 编码、按 master schema 重写。
 //
 // 公开 API:
 //   computeDiff(original, modified, prevRevise = null) — 返 sparse patch (null = tombstone / clear field)

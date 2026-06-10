@@ -49,7 +49,6 @@ const _showModal = (html) => {
   if (!modal) {
     modal = document.createElement('div');
     modal.id = 'soul-edit-modal';
-    modal.className = 'v2-edit-modal';
     document.body.appendChild(modal);
   }
   modal.innerHTML = `<div class="ce-modal-overlay" onclick="cancelEdit()"></div>${html}`;

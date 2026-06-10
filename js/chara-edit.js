@@ -52,12 +52,12 @@ const _renderTagsSection = (c) => {
 };
 
 const _renderSkillsSection = (c) => {
-  const v2 = c._master;
-  if (!v2?.states) return '';
-  const stateNames = Object.keys(v2.states);
+  const m = c._master;
+  if (!m?.states) return '';
+  const stateNames = Object.keys(m.states);
   if (!stateNames.length) return '';
   const blocks = stateNames.map((sname) => {
-    const sd = v2.states[sname];
+    const sd = m.states[sname];
     const rows = (sd.weapon_skills || []).map((sk, i) => {
       const scaling = sk.value_scaling ?? 0;
       return `<div class="ce-skill-row">

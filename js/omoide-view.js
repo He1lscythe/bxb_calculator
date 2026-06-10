@@ -4,9 +4,9 @@
 // .omoide-row / .omoide-label / .omoide-slots / .latent-slot / .latent-slot-koka /
 // .latent-slot-syosai / .latent-slot-bairitu 现有样式。
 //
-// 数据源切换 (旧 wiki → v2):
+// 数据源切换 (旧 wiki → master):
 //   旧: c.omoide[].slots[iconId] + state.SENZAI_TABLE[iconId] = { koka, syosai, bairitu, calc_type, bairitu_scaling }
-//   v2: data/omoide/{base_id}.json .slots[].memory_slot.weapon_skills[] = { name, description, parameter, math_type, value, value_scaling }
+//   master: data/omoide/{base_id}.json .slots[].memory_slot.weapon_skills[] = { name, description, parameter, math_type, value, value_scaling }
 //
 // 映射:
 //   koka      ← weapon_skill.name

@@ -1,4 +1,4 @@
-// tests/v2/test_crystal_formula.mjs — Phase 7 Session 2: crystal effective value 公式单测
+// tests/unit/test_crystal_formula.mjs — Phase 7 Session 2: crystal effective value 公式单测
 //
 // 覆盖:
 // - fallback (M_L/W/P_max 都没填) → max_value × lv 线性插值

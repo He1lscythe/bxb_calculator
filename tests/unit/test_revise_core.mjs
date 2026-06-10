@@ -1,4 +1,4 @@
-// tests/v2/test_revise_core.mjs — Phase 7 Session 1 sparse diff unit tests
+// tests/unit/test_revise_core.mjs — Phase 7 Session 1 sparse diff unit tests
 import { test } from 'node:test';
 import assert from 'node:assert';
 import {
