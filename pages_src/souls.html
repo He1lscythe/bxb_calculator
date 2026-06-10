@@ -135,10 +135,10 @@
 
       Nav.init();
 
-      // ===== DATA LOAD (v2 schema → wiki adapter) =====
-      // Phase 6.2 view-only: souls.json 来自 master_tables (v2 schema)、
+      // ===== DATA LOAD (master schema → wiki adapter) =====
+      // Phase 6.2 view-only: souls.json 来自 master_tables (master schema)、
       // 通过 adapter 转成旧 wiki shape 喂给 soul-render/soul-filter/utils module、UI 1:1 wiki 不变。
-      // souls_extra / souls_revise / souls_check 在 v2 仓库不再维护、fetch 失败 fallback []。
+      // souls_extra / souls_revise / souls_check 在 仓库不再维护、fetch 失败 fallback []。
       // Phase 7 Session 2: 同时 fetch soul_revise.json (含 tags 等 user 编辑字段)
       document.addEventListener('DOMContentLoaded', () => {
         initFilterToggles();
@@ -188,7 +188,7 @@
         toggleSoulTag,
       });
 
-      // 旧 wiki soul-edit inline-onclick stub — v2 master 这些字段不可编辑、UI 渲染遗留 onclick 不让报错
+      // 旧 wiki soul-edit inline-onclick stub — master 这些字段不可编辑、UI 渲染遗留 onclick 不让报错
       const _noop = () => {};
       Object.assign(window, {
         toggleBunrui: _noop, toggleElem: _noop, toggleType: _noop,

@@ -1,5 +1,5 @@
-// tests/v2/test_stats_calc.mjs — Phase 6.1 4-stage 公式单测
-// 跑: node --test tests/v2/test_stats_calc.mjs
+// tests/unit/test_stats_calc.mjs — Phase 6.1 4-stage 公式单测
+// 跑: node --test tests/unit/test_stats_calc.mjs
 import { test } from 'node:test';
 import assert from 'node:assert';
 import {
@@ -165,6 +165,21 @@ test('applyStaged: masou Add + Mul (stage 2 floor)', () => {
   ];
   // 10000 + 100 = 10100、×1.5 = 15150、floor 15150、ceil 15150
   assert.strictEqual(applyStaged(10000, 'Attack', eff), 15150);
+});
+test('applyStaged: masou 静的 Mul 走 s2b、server-fold floor 在后 (2026-06-10)', () => {
+  // base 1001 × 1.5 = 1501.5 → s2c floor → 1501 (floor 在 mul 后、ceil 前)
+  const eff = [
+    { _source: 'masou', parameter: 'Attack', base_parameter: 'Attack', math_type: 'Multiply', value: 1.5, condition_factor: 1 },
+  ];
+  assert.strictEqual(applyStaged(1001, 'Attack', eff), 1501);
+});
+test('applyStaged: masou HP-curve (Vitality_) 走 s4a 非 s2b — floor 时机可区分', () => {
+  // Vitality_Attack 是 client 动态、不能 server-fold:
+  //   s2c floor(1001)=1001 → s4a ×1.5 = 1501.5 → 出口 ceil 1502 (若误入 s2b 会 floor 成 1501)
+  const eff = [
+    { _source: 'masou', parameter: 'Vitality_Attack', base_parameter: 'Attack', math_type: 'Multiply', value: 1.5, condition_factor: 1 },
+  ];
+  assert.strictEqual(applyStaged(1001, 'Attack', eff), 1502);
 });
 test('applyStaged: chara_skill Mul (stage 3)', () => {
   const eff = [{ _source: 'chara_skill', base_parameter: 'Attack', math_type: 'Multiply', value: 1.2, condition_factor: 1 }];
@@ -630,8 +645,8 @@ test('omoide scaling fallback: jukudo=1 也加 0.003 (公式 jukudo 不减 1、�
   //   floor → 5000
   // omoide Add scaling fallback: value = 1000 + 0.003 × 1 = 1000.003 (jukudo 不减 1、验证 jukudo=1 时也加 0.003)
   // stage 1 omoide Add: 5000 + 1000.003 = 6000.003
-  // stage 4 ceil → 6001
-  assert.strictEqual(r.stats['攻撃力'], 6001);
+  // stage 2 終 server-fold floor (2026-06-10 用户确认: base+omoide+masou 都是 server 算、返回整数) → 6000
+  assert.strictEqual(r.stats['攻撃力'], 6000);
 });
 
 test('omoideEffectiveScaling helper: description 含「熟度」+ scaling null → 0.003', async () => {

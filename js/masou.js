@@ -21,7 +21,7 @@ export const closeMasouModal = () => {
   if (m) m.style.display = 'none';
 };
 
-// v2 shape (parameter / math_type / value / value_scaling / effect_text)、跟 master 直读
+// master shape (parameter / math_type / value / value_scaling / effect_text)、跟 master 直读
 const _renderEffectRow = (e) => {
   const param = escHtml(e.parameter || '');
   const math = e.math_type ? `<span class="masou-eff-math">[${escHtml(e.math_type)}]</span>` : '';
