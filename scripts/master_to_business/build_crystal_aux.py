@@ -1,7 +1,7 @@
 """build_crystal_aux.py — crystals.json + characters.json → 注入 range / chara_base_id 进 crystal_revise
 
 后处理脚本、跑在 build_crystals.py 之后:
-- range: master.description 含 "同装備セット" → revise patch 加 "range": "All" (缺省 Single 不写)
+- range: master.description NFKC 后含 "装備セット" (兼半角 装備ｾｯﾄ) → revise patch 加 "range": "All" (缺省 Single 不写)
 - chara_base_id: master.name 含 "の純真記憶" / "の秘録記憶" → 提取前缀、查 characters.json:
     1. NFKC + ･→・ 后 exact name 匹配 → 取 chara id
     2. 否则查下面 CHARA_LIMIT_ID_OVERRIDE 表 (substring 多候选 + nickname 缩写都人工映射)
@@ -144,8 +144,9 @@ def main():
         if "chara_limit" in patch:
             del patch["chara_limit"]
 
-        # range
-        if "同装備セット" in desc:
+        # range: desc 含「装備セット」(NFKC 归一、兼半角 装備ｾｯﾄ) → All
+        # (2026-06-10 用户修正: 旧规则 "同装備セット" 全角 only 只命中 12/58)
+        if "装備セット" in unicodedata.normalize("NFKC", desc):
             if patch.get("range") != "All":
                 patch["range"] = "All"
                 n_range += 1
