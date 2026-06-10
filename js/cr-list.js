@@ -16,6 +16,7 @@ import {
 } from '../shared/parameter-class.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
+import { crystalShowWeightRange, crystalShowPurityRange } from '../shared/hensei-helpers.js';
 import { escHtml, fmt, fmtLarge } from './utils.js';
 import { VirtualList } from '../shared/virtual-list.js';
 
@@ -378,7 +379,8 @@ export const renderDetailBody = (c) => {
   if (c['上限値']) fields.push(['上限値', escHtml(c['上限値'])]);
   if (c['入手方法']) fields.push(['入手方法', escHtml(c['入手方法'])]);
 
-  // master 7 个 server-fold 字段 (跟 edit mode 一致、缺省 fallback)
+  // master server-fold 字段 (跟 edit mode 一致、缺省 fallback)
+  // 重量 / 純度 没数 (M_W_max/M_P_max=null 或 =1) 时、不显示对应 min/max — 防误导
   const m = c._master || {};
   const factorVal = (v, def) => (v != null ? v : def);
   const factorHtml = (label, v) =>
@@ -387,10 +389,8 @@ export const renderDetailBody = (c) => {
     factorHtml('Lv', factorVal(m.M_L_max, 1)) +
     factorHtml('重量', factorVal(m.M_W_max, 1)) +
     factorHtml('純度', factorVal(m.M_P_max, 1)) +
-    factorHtml('重量 min', factorVal(m.min_weight, 0)) +
-    factorHtml('重量 max', factorVal(m.max_weight, 100)) +
-    factorHtml('純度 min', factorVal(m.min_purity, 0)) +
-    factorHtml('純度 max', factorVal(m.max_purity, 100));
+    (crystalShowWeightRange(m) ? factorHtml('重量 min', factorVal(m.min_weight, 0)) + factorHtml('重量 max', factorVal(m.max_weight, 100)) : '') +
+    (crystalShowPurityRange(m) ? factorHtml('純度 min', factorVal(m.min_purity, 0)) + factorHtml('純度 max', factorVal(m.max_purity, 100)) : '');
   fields.push(['因子', factorRow]);
 
   const rows = fields
