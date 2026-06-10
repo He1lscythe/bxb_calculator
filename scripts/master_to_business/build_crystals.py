@@ -128,6 +128,26 @@ def build():
 
     DATA_DIR.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # revise merge 语义 (2026-06-10 事故修正: 旧版整写、把现有 revise 的非 build 字段
+    # — 入手方法 / range / chara_base_id / weight_step / purity_step / 用户手填 min/max 等 — 全丢):
+    #   build 管的字段 (max_value / 三因子 M_L/W/P_max) 以 build 为准、其余字段从现有 revise 保留
+    if OUT_REVISE.is_file():
+        existing_by_id = {e["id"]: e for e in json.loads(OUT_REVISE.read_text(encoding="utf-8")) if "id" in e}
+        build_ids = set()
+        merged = []
+        for ent in revise:
+            build_ids.add(ent["id"])
+            prev = existing_by_id.get(ent["id"])
+            if prev:
+                keep = {k: v for k, v in prev.items() if k not in ent}
+                ent = {**ent, **keep}
+            merged.append(ent)
+        # 现有 revise 里 build 没输出的 entry (纯用户手填、或 master 删除后的 orphan) 保留
+        for cid, prev in existing_by_id.items():
+            if cid not in build_ids:
+                merged.append(prev)
+        revise = merged
     OUT_REVISE.write_text(json.dumps(revise, ensure_ascii=False, indent=2), encoding="utf-8")
     UNMATCHED.write_text(json.dumps(unmatched, ensure_ascii=False, indent=2), encoding="utf-8")
 
