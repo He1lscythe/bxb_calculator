@@ -94,6 +94,8 @@ def main():
     new_revise = [revise_by_id[b["id"]] for b in master if b["id"] in revise_by_id]
     orphans = [e for e in revise if e.get("id") not in seen_ids]
     new_revise.extend(orphans)
+    # 过滤无实质内容的 placeholder (只有 id+name、没字段)
+    new_revise = [p for p in new_revise if any(k not in ("id", "name") for k in p)]
 
     REVISE.write_text(
         json.dumps(new_revise, ensure_ascii=False, indent=2) + "\n",
