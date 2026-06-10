@@ -17,6 +17,23 @@ import {
 import { FilterCore } from '../shared/filter-core.js';
 import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
 import { escHtml, fmt, fmtLarge } from './utils.js';
+import { VirtualList } from '../shared/virtual-list.js';
+
+let _vlist = null;
+
+// kind-wise estimate (测量第一个 row 后更新、未测 row 用 estimate 跟实际更接近、scrollbar 稳定)
+const _kindH = { collapsed: 48, expanded: 420, edit: 520 };
+const _crystalKind = (c) => state.editingId === c.id ? 'edit' : state.expandedIds.has(c.id) ? 'expanded' : 'collapsed';
+
+// 给外部 (cr-edit.js / toggleExpand 等) 调用、通知 row 高度变化
+export const invalidateRow = (id) => {
+  if (_vlist) _vlist.invalidateRow(id);
+};
+
+// cr-edit.js 在 module init 时注册 edit body 渲染器、避免循环 import
+// renderRow 在 state.editingId === c.id 时调它生成 edit form
+let _editBodyRenderer = null;
+export const registerEditBodyRenderer = (fn) => { _editBodyRenderer = fn; };
 
 export const initFilterToggles = () => {
   document.getElementById('f-rarity').innerHTML = renderFilterToggles(
@@ -73,31 +90,19 @@ export const toggleFilter = (key, val, btn) => {
 };
 
 export const expandAll = () => {
+  // virtual scrolling: 只 mark state、行真实 DOM 由 vlist 按 viewport lazy render
   state.filteredCrystals.forEach(function (c) {
-    if (state.editingId === c.id || state.expandedIds.has(c.id)) return;
-    const row = document.getElementById('row-' + c.id);
-    const body = document.getElementById('body-' + c.id);
-    if (row && body) {
-      state.expandedIds.add(c.id);
-      row.classList.add('expanded');
-      body.innerHTML = renderDetailBody(c);
-    }
+    if (state.editingId !== c.id) state.expandedIds.add(c.id);
   });
+  // 重排所有 row 高度 (estimateHeight 内按 expandedIds 给 420px)、vlist 自动 re-render visible
+  if (_vlist) _vlist.setItems(state.filteredCrystals);
 };
 
 export const collapseAll = () => {
-  state.expandedIds.forEach(function (id) {
-    if (state.editingId === id) return;
-    const row = document.getElementById('row-' + id);
-    const body = document.getElementById('body-' + id);
-    if (row && body) {
-      row.classList.remove('expanded');
-      body.innerHTML = '';
-    }
-  });
   state.filteredCrystals.forEach(function (c) {
     if (state.editingId !== c.id) state.expandedIds.delete(c.id);
   });
+  if (_vlist) _vlist.setItems(state.filteredCrystals);
 };
 
 export const resetFilters = () => {
@@ -147,7 +152,7 @@ export const applyFilters = () => {
   document.getElementById('crystal-count').textContent = ct;
   const mob = document.getElementById('crystal-count-mob');
   if (mob) mob.textContent = ct;
-  state.expandedIds.clear();
+  // 不清 expandedIds — 保留用户先前 expand 状态、被 filter 掉的 row 不在 DOM、无影响
   state.editingId = null;
   state.editData = null;
   renderList();
@@ -156,18 +161,37 @@ export const applyFilters = () => {
 export const renderList = () => {
   const list = document.getElementById('crystal-list');
   if (!state.filteredCrystals.length) {
+    if (_vlist) { _vlist.destroy(); _vlist = null; }
+    list.style.position = '';
+    list.style.height = '';
     list.innerHTML = '<div class="no-results">該当なし</div>';
     return;
   }
-  list.innerHTML = state.filteredCrystals.map(renderRow).join('');
-  if (state.crystalCheckEnabled) {
-    list.querySelectorAll('.crystal-check-cb').forEach((cb) => {
-      cb.addEventListener('change', (e) => {
-        const id = parseInt(e.target.dataset.id);
-        if (e.target.checked) state.crystalCheck.add(id);
-        else state.crystalCheck.delete(id);
-        saveCrystalCheck();
-      });
+  // virtual scrolling: 屏幕外 row 不在 DOM、img 不 fetch、expand all 不卡
+  if (!_vlist) {
+    list.innerHTML = '';
+    _vlist = new VirtualList({
+      container: list,
+      items: state.filteredCrystals,
+      getRowId: (c) => c.id,
+      renderRow,
+      estimateHeight: (c) => _kindH[_crystalKind(c)],
+      onMeasure: (c, real) => { _kindH[_crystalKind(c)] = real; },
+      gap: 5,
+    });
+  } else {
+    _vlist.setItems(state.filteredCrystals);
+  }
+  // check cb 用 delegation 在 list 上 (因为 row 是动态 add/remove)
+  if (state.crystalCheckEnabled && !list._cbDelegated) {
+    list._cbDelegated = true;
+    list.addEventListener('change', (e) => {
+      const cb = e.target.closest('.crystal-check-cb');
+      if (!cb) return;
+      const id = parseInt(cb.dataset.id);
+      if (cb.checked) state.crystalCheck.add(id);
+      else state.crystalCheck.delete(id);
+      saveCrystalCheck();
     });
   }
 };
@@ -266,8 +290,19 @@ export const renderRowHd = (c) => {
 };
 
 export const renderRow = (c) => {
+  // virtual list: row 动态进出 DOM、body 内容必须按 state 重新生成 (而不是依赖之前 innerHTML 残留)
+  const isEditing = state.editingId === c.id;
+  const expanded = isEditing || state.expandedIds.has(c.id);
+  let bodyHtml = '';
+  let bodyClass = 'crystal-body';
+  if (isEditing && _editBodyRenderer) {
+    bodyHtml = _editBodyRenderer(state.editData || c);
+    bodyClass = 'crystal-edit-body';
+  } else if (expanded) {
+    bodyHtml = renderDetailBody(c);
+  }
   return (
-    '<div class="crystal-row" id="row-' +
+    '<div class="crystal-row' + (expanded ? ' expanded' : '') + '" id="row-' +
     c.id +
     '">' +
     '<div class="crystal-row-hd" onclick="toggleExpand(' +
@@ -275,31 +310,19 @@ export const renderRow = (c) => {
     ')">' +
     renderRowHd(c) +
     '</div>' +
-    '<div class="crystal-body" id="body-' +
+    '<div class="' + bodyClass + '" id="body-' +
     c.id +
-    '"></div>' +
+    '">' + bodyHtml + '</div>' +
     '</div>'
   );
 };
 
 export const toggleExpand = (id) => {
   if (state.editingId === id) return;
-  const row = document.getElementById('row-' + id);
-  const body = document.getElementById('body-' + id);
-  if (!row || !body) return;
-
-  if (state.expandedIds.has(id)) {
-    state.expandedIds.delete(id);
-    row.classList.remove('expanded');
-    body.innerHTML = '';
-  } else {
-    state.expandedIds.add(id);
-    row.classList.add('expanded');
-    const c = state.allCrystals.find(function (x) {
-      return x.id === id;
-    });
-    if (c) body.innerHTML = renderDetailBody(c);
-  }
+  if (state.expandedIds.has(id)) state.expandedIds.delete(id);
+  else state.expandedIds.add(id);
+  // virtual list 内的 renderRow 会按 state.expandedIds 决定 body 内容、invalidateRow 重测高度
+  if (_vlist) _vlist.invalidateRow(id);
 };
 
 export const scopeLabel = (e) => {
@@ -398,7 +421,7 @@ export const renderDetailBody = (c) => {
     rows +
     '</div>' +
     '<div class="body-right">' +
-    '<img class="crystal-icon" src="' +
+    '<img class="crystal-icon" loading="lazy" src="' +
     crystalImageSrc(c) +
     '" onerror="this.style.display=\'none\'" alt="">' +
     '<button class="btn-edit" onclick="enterEditMode(' +
