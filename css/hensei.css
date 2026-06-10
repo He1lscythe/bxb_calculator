@@ -40,7 +40,7 @@
 .emblem-lv-input::-webkit-inner-spin-button,.emblem-lv-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .emblem-lv-input{-moz-appearance:textfield;}
 .emblem-lv-max{font-size:10px;color:var(--text2);}
-.emblem-rm,.crystal-rm{position:absolute;top:-7px;right:-7px;width:16px;height:16px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text2);font-size:14px;line-height:1;cursor:pointer;padding:0 0 1px;display:flex;align-items:center;justify-content:center;}
+.emblem-rm,.crystal-rm{position:absolute;top:-6px;right:-6px;width:14px;height:14px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text2);font-size:14px;line-height:1;cursor:pointer;padding:0 0 2px;display:flex;align-items:center;justify-content:center;}
 .emblem-rm:hover,.crystal-rm:hover{border-color:#ff5555;color:#ff5555;}
 
 /* エンブレム modal */
@@ -165,8 +165,9 @@ body{height:auto;overflow-y:auto;}
 .modal-panel{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;z-index:1;overflow:hidden;}
 #entity-modal .modal-panel{width:min(840px,96vw);height:min(960px,94vh);}
 #detail-modal .modal-panel{width:min(840px,96vw);height:min(960px,92vh);}
-/* crystal 内容少 (effect_text + 因子)、1/3 高度足够 */
-#detail-modal.dm-crystal .modal-panel{height:min(320px,40vh);}
+/* crystal / masou 内容少 (effect_text + 因子)、1/3 高度足够 */
+#detail-modal.dm-crystal .modal-panel,
+#detail-modal.dm-masou .modal-panel{height:min(320px,40vh);}
 /* bg 内容中等 (多 effect line + acquisition + illustrator)、1/2 高度 */
 #detail-modal.dm-bg .modal-panel{height:min(480px,55vh);}
 .modal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px;}
@@ -432,7 +433,8 @@ body{height:auto;overflow-y:auto;}
 .trace-stage-head .arrow{display:inline-block;width:14px;color:var(--text2);}
 .trace-stage-tot{color:var(--text2);font-size:11px;font-weight:400;}
 .trace-stage.empty .trace-stage-head{opacity:.42;cursor:default;}
-.trace-step{display:grid;grid-template-columns:1fr 30px 100px 1fr;gap:8px;padding:3px 16px 3px 36px;font-size:12px;align-items:center;}
+/* src (description) 1fr 吃掉剩余宽度、op/val/after 固定窄列 */
+.trace-step{display:grid;grid-template-columns:1fr 24px 72px 200px;gap:8px;padding:3px 16px 3px 36px;font-size:12px;align-items:center;}
 .trace-step:nth-child(even){background:rgba(255,255,255,.02);}
 .trace-step .src{color:var(--text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .trace-step .op{color:var(--accent);text-align:right;font-weight:700;}

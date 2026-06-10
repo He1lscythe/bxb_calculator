@@ -107,7 +107,7 @@ export function baseStats(charaWiki, tr) {
   const effLv = Math.min(tr.level || 1, cap + (tr.awakening || 0) * 5);
   const max_max_level = stats.max_max_level;
   // base stat 已经在 server-fold (chara 创建时) 完成 floor 取整 (unpacking 01_setup.md §1.5)
-  // hensei v2 客户端用 master initial_/max_ 字段重算 base、需 floor 模拟 server 行为
+  // hensei 客户端用 master initial_/max_ 字段重算 base、需 floor 模拟 server 行为
   return {
     HP: Math.floor(_baseStatRaw(stats.initial_hp, stats.max_hp, max_max_level, effLv, cap, m.rarity)),
     Attack: Math.floor(_baseStatRaw(stats.initial_attack, stats.max_attack, max_max_level, effLv, cap, m.rarity)),
@@ -241,7 +241,8 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     const entry = {
       _source: source,
       _src_slot: srcSlot,
-      _src_name: opts.srcName || raw.name || null,   // trace 显示用 (skill/装备名)
+      // trace 显示用: description (效果文) 优先、fallback name (2026-06-10 用户决策)
+      _src_name: opts.srcName || raw.description || raw.name || null,
       parameter: param,
       base_parameter: baseParameter(param),
       math_type: raw.math_type,
@@ -249,9 +250,11 @@ export function collectEffects(team, targetSlotIdx, ctx) {
       condition_factor: factor,
     };
     // HitCount / AttackCount: 携带逐段 stages 数组 (master values [v0,v1,v2] 或 broadcast value)
+    // opts.stageMult: soul 等级倍率 (values 数组路径不走 valueOverride、单独乘;单值路径 value 已 scaled)
     if (entry.base_parameter === 'HitCount' || entry.base_parameter === 'AttackCount') {
+      const sm = opts.stageMult ?? 1;
       if (Array.isArray(raw.values) && raw.values.length === 3) {
-        entry._stages = raw.values.map((v) => Number(v) || 0);
+        entry._stages = raw.values.map((v) => (Number(v) || 0) * sm);
       } else {
         const v = Number(value) || 0;
         entry._stages = [v, v, v];
@@ -278,7 +281,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     // 不考虑伤害公式 (Phase 8 IsBlaze gate)、只把 effects 当普通 buff 加入
     if (trSlot.bd_on && cMaster.bd_skill?.effects) {
       for (const eff of cMaster.bd_skill.effects) {
-        pushEff(slot.chara, i, 'bd_skill', eff, { srcName: cMaster.bd_skill.name || 'BD' });
+        pushEff(slot.chara, i, 'bd_skill', eff, { srcName: eff.description || cMaster.bd_skill.name || 'BD' });
       }
     }
 
@@ -311,7 +314,8 @@ export function collectEffects(team, targetSlotIdx, ctx) {
       const sourceMult = soulMultiplier(sMaster.rarity || 1, trSlot.soul_lv || 1);
       for (const sk of sMaster.skills) {
         const scaled = (sk.value || 0) * sourceMult;
-        pushEff(slot.chara, i, 'soul', sk, { valueOverride: scaled });
+        // stageMult: HitCount values=[a,b,c] 数组路径也吃等级加成 (2026-06-10 用户确认)
+        pushEff(slot.chara, i, 'soul', sk, { valueOverride: scaled, stageMult: sourceMult });
       }
     }
 
@@ -338,13 +342,13 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     const bgCharaId = slot.bg?.chara_base_id || null;
     for (const sk of bgSkills) {
       const skWithLimit = bgCharaId ? { ...sk, chara_base_id: bgCharaId } : sk;
-      pushEff(slot.chara, i, 'bg', skWithLimit, { srcName: slot.bg?.name });
+      pushEff(slot.chara, i, 'bg', skWithLimit, { srcName: sk.description || slot.bg?.name });
     }
 
     // 6. masou (slot.masou 是 single object、不是 array)
     const masouObj = Array.isArray(slot.masou) ? slot.masou : (slot.masou ? [slot.masou] : []);
     for (const ms of masouObj) {
-      for (const eff of ms?.effects || []) pushEff(slot.chara, i, 'masou', eff, { srcName: ms.name });
+      for (const eff of ms?.effects || []) pushEff(slot.chara, i, 'masou', eff, { srcName: eff.effect_text || ms.name });
     }
 
     // 7. chara_meta: 結婚 / 燃心 / LP / MP 装備 — 只对 target slot 自身
@@ -521,9 +525,8 @@ export function applyStaged(base, parameter, effects, opts = {}) {
 
   let v = base;
   // 逐 effect apply: +0 / ×1 跳过 (数学严格无影响、trace 减噪)
-  const addPass = (stageKey, filter) => {
-    for (const e of same) {
-      if (!filter(e)) continue;
+  const addPass = (stageKey, list) => {
+    for (const e of list) {
       const val = e.value * (e.condition_factor ?? 1);
       if (val === 0) continue;
       const before = v;
@@ -531,9 +534,8 @@ export function applyStaged(base, parameter, effects, opts = {}) {
       _push(stageKey, traceSrcLabel(e), 'add', val, before, v);
     }
   };
-  const mulPass = (stageKey, filter) => {
-    for (const e of same) {
-      if (!filter(e)) continue;
+  const mulPass = (stageKey, list) => {
+    for (const e of list) {
       const val = 1 + (e.value - 1) * (e.condition_factor ?? 1);
       if (val === 1) continue;
       const before = v;
@@ -542,25 +544,47 @@ export function applyStaged(base, parameter, effects, opts = {}) {
     }
   };
 
+  // HP-curve / gate 前缀 (Vitality_/RemHP_/Break_/FellDown_) 是 client 动态值、不能 server-fold —
+  // masou 此类 effect 不进 s2a/s2b (server-fold 段)、改走 s4a/s5a (2026-06-10 用户决策)
+  const _isDynamic = (e) => /^(Vitality_|RemHP_|Break_|FellDown_)/.test(e.parameter || '');
+
   // Stage 1: omoide Add
-  addPass('s1_omoide_add', (e) => e._source === 'omoide' && e.math_type === 'Addition');
-  // Stage 2a: masou Add
-  addPass('s2a_masou_add', (e) => e._source === 'masou' && e.math_type === 'Addition');
-  // Stage 2b: masou Mul
-  mulPass('s2b_masou_mul', (e) => e._source === 'masou' && e.math_type === 'Multiply');
+  addPass('s1_omoide_add', same.filter((e) => e._source === 'omoide' && e.math_type === 'Addition'));
+  // Stage 2a: masou Add (静的のみ)
+  addPass('s2a_masou_add', same.filter((e) => e._source === 'masou' && e.math_type === 'Addition' && !_isDynamic(e)));
+  // Stage 2b: masou Mul (静的のみ)
+  mulPass('s2b_masou_mul', same.filter((e) => e._source === 'masou' && e.math_type === 'Multiply' && !_isDynamic(e)));
+  // Stage 2 終: server-fold floor — base + omoide + masou 都是 server 侧算的、返回整数
+  {
+    const b = v;
+    v = Math.floor(v);
+    if (v !== b) _push('s2c_floor', 'server-fold floor', 'floor', null, b, v);
+  }
   // Stage 3: × LP tier (step 4 位置、× Total 直接层)
   if (lpMult !== 1) {
     const b = v;
     v *= lpMult;
     _push('s3_lp', 'LP tier', 'mul', lpMult, b, v);
   }
-  // Stage 4: other Mul (chara_skill/bd_skill/crystal/bg/soul/chara_meta/soul_affinity/omoide_mul)
-  mulPass('s4_other_mul', (e) => _OTHER_SOURCES.has(e._source) && e.math_type === 'Multiply');
-  // Stage 5: other Add
-  addPass('s5_other_add', (e) => _OTHER_SOURCES.has(e._source) && e.math_type === 'Addition');
+  // Stage 4/5: other Mul / Add (chara_skill/bd_skill/crystal/bg/soul/chara_meta/soul_affinity/omoide_mul)
+  // 顺序 (2026-06-10 用户决策、计算跟 trace 显示一致、stage 一级目录可见分类):
+  //   s4a 非 soul Mul (chara/crystal/bg/魔装/meta…) → s4b ソウル Mul → s5a 非 soul Add → s5b ソウル Add
+  //   各类内按 slot 升序 (stable sort、同 slot 内保持 collectEffects push 顺序)
+  const _isSoulSrc = (e) => e._source === 'soul' || e._source === 'soul_affinity';
+  const _bySlot = (arr) => [...arr].sort((a, b) => (a._src_slot ?? 0) - (b._src_slot ?? 0));
+  // others 池 = _OTHER_SOURCES + masou 动态 (HP-curve 类、不能 server-fold)
+  const others = same.filter(
+    (e) => _OTHER_SOURCES.has(e._source) || (e._source === 'masou' && _isDynamic(e)),
+  );
+  const othersNonSoul = _bySlot(others.filter((e) => !_isSoulSrc(e)));
+  const othersSoul = _bySlot(others.filter(_isSoulSrc));
+  mulPass('s4a_other_mul', othersNonSoul.filter((e) => e.math_type === 'Multiply'));
+  mulPass('s4b_soul_mul', othersSoul.filter((e) => e.math_type === 'Multiply'));
+  addPass('s5a_other_add', othersNonSoul.filter((e) => e.math_type === 'Addition'));
+  addPass('s5b_soul_add', othersSoul.filter((e) => e.math_type === 'Addition'));
   // Stage 6: Enemy_Break Mul → Add (step 48/49、gate enemy.bk 在 condition_factor)
-  mulPass('s6_enemy_break', (e) => e._source === 'enemy_break' && e.math_type === 'Multiply');
-  addPass('s6_enemy_break', (e) => e._source === 'enemy_break' && e.math_type === 'Addition');
+  mulPass('s6_enemy_break', same.filter((e) => e._source === 'enemy_break' && e.math_type === 'Multiply'));
+  addPass('s6_enemy_break', same.filter((e) => e._source === 'enemy_break' && e.math_type === 'Addition'));
   // Stage 7: × 3 inline (step 51、enemy.bk gate、跟 step 48/49 独立)
   if (enemyBkX3 !== 1) {
     const b = v;
@@ -625,9 +649,12 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
         s1_omoide_add: mkStage('s1_omoide_add', 'おもいで Add (Stage 1)'),
         s2a_masou_add: mkStage('s2a_masou_add', '魔装 Add (Stage 2a)'),
         s2b_masou_mul: mkStage('s2b_masou_mul', '魔装 Mul (Stage 2b)'),
+        s2c_floor: mkStage('s2c_floor', 'server-fold floor (Stage 2 終)'),
         s3_lp: mkStage('s3_lp', 'LP tier (×Total)'),
-        s4_other_mul: mkStage('s4_other_mul', 'その他 Mul (chara/crystal/bg/soul…)'),
-        s5_other_add: mkStage('s5_other_add', 'その他 Add'),
+        s4a_other_mul: mkStage('s4a_other_mul', 'Mul — chara/crystal/bg/魔装…'),
+        s4b_soul_mul: mkStage('s4b_soul_mul', 'Mul — ソウル'),
+        s5a_other_add: mkStage('s5a_other_add', 'Add — chara/crystal/bg/魔装…'),
+        s5b_soul_add: mkStage('s5b_soul_add', 'Add — ソウル'),
         s6_enemy_break: mkStage('s6_enemy_break', 'Enemy Break (step48/49)'),
         s7_inline3: mkStage('s7_inline3', '敵BK inline ×3 (step51)'),
         s7b_ceil: mkStage('s7b_ceil', '出口 ceil'),
@@ -695,38 +722,40 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   const baseHits = Array.isArray(stateData?.hit_counts) ? stateData.hit_counts.slice(0, 3) : [0, 0, 0];
   while (baseHits.length < 3) baseHits.push(0);
   if (trace) trace.hitsBase = baseHits.slice();
+  // hits 逐 effect 序贯计算 (2026-06-10 用户确认):
+  //   每次加成立即 floor、再做下一次运算。例: base 3、soul Add +6×1.8 → floor(3+10.8)=13 → 下一 effect 从 13 起
+  //   顺序跟 stats stage 4/5 一致: Mul (非soul→soul、slot 升序) → Add (同分类)
+  const _isSoulHit = (e) => e._source === 'soul' || e._source === 'soul_affinity';
+  const _hitPool = effects.filter(
+    (e) => e.base_parameter === 'HitCount' || e.base_parameter === 'AttackCount',
+  );
+  const _hitOrder = (arr) => [...arr].sort(
+    (a, b) => (_isSoulHit(a) ? 1 : 0) - (_isSoulHit(b) ? 1 : 0) || (a._src_slot ?? 0) - (b._src_slot ?? 0),
+  );
+  const orderedHitEffects = [
+    ..._hitOrder(_hitPool.filter((e) => e.math_type === 'Multiply')),
+    ..._hitOrder(_hitPool.filter((e) => e.math_type === 'Addition')),
+  ];
   const hits = baseHits.map((baseI, stageI) => {
     if (!baseI) return 0;  // 该段不存在 (chara 1-3 段攻击不固定)、不参与
-    let mulProd = 1;
-    let addSum = 0;
-    // trace 链 (Mul 全在 Add 前、链式 = baseI×Π+Σ 数学等价): baseI → ×mul... → +add... → floor/max(1)
-    let tCur = baseI;
+    let cur = baseI;
     const hitStat = `Hit${stageI + 1}`;
-    for (const e of effects) {
-      if (e.base_parameter !== 'HitCount' && e.base_parameter !== 'AttackCount') continue;
+    for (const e of orderedHitEffects) {
       const stageVal = (e._stages?.[stageI] ?? e.value) * (e.condition_factor ?? 1);
       if (stageVal === 0) continue;
-      if (e.math_type === 'Multiply') {
-        mulProd *= stageVal;
-        if (stHits) {
-          const b = tCur;
-          tCur *= stageVal;
-          stHits.steps.push({ src: traceSrcLabel(e), stat: hitStat, op: 'mul', val: stageVal, before: b, after: tCur });
-        }
-      } else if (e.math_type === 'Addition') {
-        addSum += stageVal;
-        if (stHits) {
-          // add 在 trace 链里排到 mul 后才数学等价 — 这里直接记 (effects 内 mul/add 交错时链式中间值仅参考)
-          const b = tCur;
-          tCur += stageVal;
-          stHits.steps.push({ src: traceSrcLabel(e), stat: hitStat, op: 'add', val: stageVal, before: b, after: tCur });
-        }
+      const b = cur;
+      if (e.math_type === 'Multiply') cur = Math.floor(cur * stageVal);
+      else cur = Math.floor(cur + stageVal);
+      if (stHits && cur !== b) {
+        stHits.steps.push({
+          src: traceSrcLabel(e), stat: hitStat,
+          op: e.math_type === 'Multiply' ? 'mul' : 'add', val: stageVal, before: b, after: cur,
+        });
       }
     }
-    const v = Math.floor(baseI * mulProd + addSum);
-    const out = Math.max(1, v);
-    if (stHits && out !== tCur) {
-      stHits.steps.push({ src: 'floor / max(1)', stat: hitStat, op: 'floor', val: null, before: tCur, after: out });
+    const out = Math.max(1, cur);
+    if (stHits && out !== cur) {
+      stHits.steps.push({ src: 'max(1)', stat: hitStat, op: 'max', val: null, before: cur, after: out });
     }
     return out;
   });
@@ -761,7 +790,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
     }
   }
 
-  // bdCapMax: BD ゲージ上限 max 計算 (v2 简化、不沿用 wiki 旧 -1 / mul 累加设计)
+  // bdCapMax: BD ゲージ上限 max 計算 (简化、不沿用 wiki 旧 -1 / mul 累加设计)
   //   bdCapMax = max(9, floor((9 + Σadd) × Π mul))
   //   base = 9 (默认上限、跟 UI 显示对齐、不再用 10-1 indexed)
   //   add 累加: Σ value × cf

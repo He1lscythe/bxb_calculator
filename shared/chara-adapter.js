@@ -1,4 +1,4 @@
-// v2 characters.json (master_tables schema) → wiki characters.json shape
+// characters.json (master_tables schema) → wiki characters.json shape
 // 让 main 旧版 js/render.js / js/utils.js / shared/chara-spec.js 1:1 跑起来、UI 100% 一致。
 //
 // Phase 7 Session 2: adaptCharaList(arr, revise) deepApply revise patch 到 master 后转 wiki shape
@@ -6,15 +6,15 @@
 import { deepApply } from './revise-core.js';
 //
 // 核心映射:
-//   v2.parameter (#JS 91 项 enum string) → wiki.bunrui (int 1-21)
-//   v2.math_type ('Multiply'/'Addition'/'Repel_Percent') → wiki.calc_type (0/1/2)
+//   master.parameter (#JS 91 项 enum string) → wiki.bunrui (int 1-21)
+//   master.math_type ('Multiply'/'Addition'/'Repel_Percent') → wiki.calc_type (0/1/2)
 //   (Set / None / NoEffect 整条 skill 跳过、不渲染)
-//   v2.range ('All'/'Single'/'None') + target_element_id/weapon_type_id/weapon_base_id 直接透传到 wiki effect (不再编码 scope)
+//   master.range ('All'/'Single'/'None') + target_element_id/weapon_type_id/weapon_base_id 直接透传到 wiki effect (不再编码 scope)
 //   HP-curve prefix (Vitality_/RemHP_/Break_) → wiki.condition (1/2/3) + base parameter
-//   v2.weapon_skills[] → wiki.skills[].effects[] (一 skill 一 effect、不拆 bunrui 数组)
-//   v2.stats.{initial_hp,max_hp,initial_attack,...} → wiki.stats.{initial,max}.{HP,攻撃力,...}
-//   v2.profile (顶层、ja-EN 双语 key) → wiki.states.{X}.profile (内嵌、日文 key)
-//   v2.mp (顶层) → wiki.basic_info.保有魔力
+//   master.weapon_skills[] → wiki.skills[].effects[] (一 skill 一 effect、不拆 bunrui 数组)
+//   master.stats.{initial_hp,max_hp,initial_attack,...} → wiki.stats.{initial,max}.{HP,攻撃力,...}
+//   master.profile (顶层、ja-EN 双语 key) → wiki.states.{X}.profile (内嵌、日文 key)
+//   master.mp (顶层) → wiki.basic_info.保有魔力
 
 // PARAMETER (#JS name) → wiki bunrui id
 // wiki BUNRUI: 1=攻撃力 2=ブレイク力 3=BD攻撃力 4=スピード 5=攻撃モーション 6=BDゲージ
@@ -124,8 +124,8 @@ export const MATH_TYPE_TO_CALC = {
 };
 const _MATH_TYPE_TO_CALC = MATH_TYPE_TO_CALC;
 
-// stats: v2 stats.{initial_hp/max_hp/...} → wiki stats.{initial,max}.{HP,攻撃力,...}
-function _v2StatsToWiki(stats, hitCounts) {
+// stats: master stats.{initial_hp/max_hp/...} → wiki stats.{initial,max}.{HP,攻撃力,...}
+function _statsToWiki(stats, hitCounts) {
   if (!stats) return null;
   const totalHit = (hitCounts || []).reduce((a, b) => a + (b || 0), 0) || 1;
   const max = {};
@@ -156,7 +156,7 @@ function _motionLabel(stateData) {
   return stateData.attack_motion_id != null ? String(stateData.attack_motion_id) : '-';
 }
 
-function _v2BasicInfo(stateData, chara) {
+function _basicInfo(stateData, chara) {
   return {
     'モーション': _motionLabel(stateData),
     'Hit数': Array.isArray(stateData.hit_counts) ? stateData.hit_counts : [],
@@ -169,8 +169,8 @@ function _v2BasicInfo(stateData, chara) {
   };
 }
 
-// v2 profile (顶层、ja-EN 双语 key) → wiki state.profile (日文 key)
-function _v2ProfileToWiki(prof) {
+// master profile (顶层、ja-EN 双语 key) → wiki state.profile (日文 key)
+function _profileToWiki(prof) {
   if (!prof) return {};
   const out = {};
   if (prof.age) out['年齢'] = prof.age;
@@ -207,9 +207,9 @@ export function injectHitStages(eff, s) {
   eff.hit_type = _MATH_TYPE_TO_HIT_TYPE[s.math_type] ?? 0;
 }
 
-// v2 weapon_skill → wiki skill (含 effects[])。返回 null 表示该 skill 整条跳过。
+// master weapon_skill → wiki skill (含 effects[])。返回 null 表示该 skill 整条跳过。
 // 跳过条件: parameter=NoEffect / math_type ∈ {None, Set} / math_type 未在 _MATH_TYPE_TO_CALC 表中
-function _v2WeaponSkillToWiki(s) {
+function _weaponSkillToWiki(s) {
   if (s.parameter === 'NoEffect') return null;
   const { bunrui, condition } = paramToBunruiAndCondition(s.parameter);
   const calc_type = _MATH_TYPE_TO_CALC[s.math_type];
@@ -237,8 +237,8 @@ function _v2WeaponSkillToWiki(s) {
   };
 }
 
-// v2 bd_skill → wiki bd_skill
-function _v2BdSkillToWiki(bd, cost) {
+// master bd_skill → wiki bd_skill
+function _bdSkillToWiki(bd, cost) {
   if (!bd) return null;
   // duration: effects[0].duration_value + duration
   let duration = '';
@@ -249,7 +249,7 @@ function _v2BdSkillToWiki(bd, cost) {
   }
   // bd effects 折叠成一条带多 bunrui[] (wiki 风格)、过滤 NoEffect/None
   const bunruiList = [];
-  const v2ParamList = [];
+  const paramList = [];
   let bdCalc = 0;
   let bdBairitu = null;
   let bdRange = null;
@@ -259,7 +259,7 @@ function _v2BdSkillToWiki(bd, cost) {
     if (ctMaybe == null) continue;   // None / Set / 未识别 跳过
     const { bunrui } = paramToBunruiAndCondition(e.parameter);
     if (!bunruiList.includes(bunrui)) bunruiList.push(bunrui);
-    if (!v2ParamList.includes(e.parameter)) v2ParamList.push(e.parameter);
+    if (!paramList.includes(e.parameter)) paramList.push(e.parameter);
     if (bdBairitu == null && e.value != null) {
       bdBairitu = e.value;
       bdCalc = ctMaybe;
@@ -272,7 +272,7 @@ function _v2BdSkillToWiki(bd, cost) {
     condition: 0,
     bairitu: bdBairitu ?? 0,
     calc_type: bdCalc,
-    _parameters: v2ParamList,   // BD effect 多 parameter (折叠)、跟 bunruiList 平行
+    _parameters: paramList,   // BD effect 多 parameter (折叠)、跟 bunruiList 平行
   }] : [];
   const cost_ = bd.cost != null ? bd.cost : cost;
   const effectText = cost_ != null
@@ -288,20 +288,20 @@ function _v2BdSkillToWiki(bd, cost) {
   };
 }
 
-export function v2CharaToWiki(c) {
-  const v2States = c.states || {};
-  const stateNames = Object.keys(v2States);
+export function charaToWiki(c) {
+  const masterStates = c.states || {};
+  const stateNames = Object.keys(masterStates);
   // wiki id = state '通常' variant_id (6 位)、缺则 fallback 改造 / 極弐 / base*100
-  const primary = v2States['通常'] || v2States['改造'] || v2States['極弐'] || Object.values(v2States)[0];
+  const primary = masterStates['通常'] || masterStates['改造'] || masterStates['極弐'] || Object.values(masterStates)[0];
   const wikiId = primary?.variant_id ?? (c.id * 100 + 1);
 
   const wikiStates = {};
-  for (const [sname, sd] of Object.entries(v2States)) {
+  for (const [sname, sd] of Object.entries(masterStates)) {
     wikiStates[sname] = {
-      skills: (sd.weapon_skills || []).map(_v2WeaponSkillToWiki).filter(Boolean),
-      basic_info: _v2BasicInfo(sd, c),
-      stats: _v2StatsToWiki(sd.stats, sd.hit_counts),
-      profile: _v2ProfileToWiki(c.profile),
+      skills: (sd.weapon_skills || []).map(_weaponSkillToWiki).filter(Boolean),
+      basic_info: _basicInfo(sd, c),
+      stats: _statsToWiki(sd.stats, sd.hit_counts),
+      profile: _profileToWiki(c.profile),
     };
   }
 
@@ -318,7 +318,7 @@ export function v2CharaToWiki(c) {
     omoide_rarity: null,
     tags: Array.isArray(c.tags) ? c.tags : [],
     states: wikiStates,
-    bd_skill: _v2BdSkillToWiki(c.bd_skill, c.bd_skill?.cost),
+    bd_skill: _bdSkillToWiki(c.bd_skill, c.bd_skill?.cost),
     omoide: [],
   };
 }
@@ -338,5 +338,5 @@ export function adaptCharaList(arr, revise = []) {
     deepApply(cloned, patch);
     return cloned;
   });
-  return merged.map(v2CharaToWiki);
+  return merged.map(charaToWiki);
 }

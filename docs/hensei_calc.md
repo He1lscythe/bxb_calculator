@@ -31,17 +31,28 @@ collection: 遍历 3 slot、给每个 effect 打 source tag
 
 omoide memory slot 加成走 stage 1、不参与 base 计算。
 
-## Stage 表
+## Stage 表 (跟 trace stage key 一致)
 
 | stage | source | math_type 过滤 | 含义 |
 |---|---|---|---|
-| **1** | `omoide` (memory slot) | `Addition` | 好感加算 — omoide 槽插入的 memory slot effect |
-| **2a** | `masou` | `Addition` | masou 装备 add 部分 |
-| **2b** | `masou` | `Multiply` | masou 装备 mul 部分 |
-| **3** | `chara_skill` / `crystal` / `bg` / `soul` | `Multiply` | 其他乘算 |
-| **4** | `chara_skill` / `crystal` / `bg` / `soul` | `Addition` | 最后加算 |
+| **s1** | `omoide` (memory slot) | `Addition` | 好感加算 — omoide 槽插入的 memory slot effect |
+| **s2a** | `masou` (静的のみ) | `Addition` | masou 装备 add — **HP-curve 类 (Vitality_/RemHP_/Break_/FellDown_) 除外** |
+| **s2b** | `masou` (静的のみ) | `Multiply` | masou 装备 mul — 同上除外 |
+| **s2c** | server-fold floor | — | Stage 2 終: base+omoide+masou 都是 server 算、返回整数 → floor |
+| **s3** | LP tier | (×Total) | 只 Attack、入口 lpMult |
+| **s4a** | `chara_skill` / `bd_skill` / `crystal` / `bg` / `chara_meta` / `omoide_mul` / `enemy_buff` | `Multiply` | 非 soul 类乘算、slot 升序 |
+| **s4b** | `soul` / `soul_affinity` | `Multiply` | soul 类乘算 (排非 soul 后)、slot 升序 |
+| **s5a** | 非 soul 类 (同 s4a) | `Addition` | 非 soul 类加算 |
+| **s5b** | soul 类 | `Addition` | soul 类加算 |
+| **s6** | `enemy_break` | Mul → Add | step 48/49、gate enemy.bk |
+| **s7** | inline ×3 | (×Total) | step 51、只 Attack、enemy.bk gate |
+| **s7b** | 出口 ceil | — | 唯一 round 点 |
+| **s8** | enemy mods | (×Attack/BK) | 属性相性/難度/有利武器/BD cap、stage 后 ceil |
 | 独立 | 任何 source | `Repel_Percent` | status 回避率、独立通道、不进 stat pipeline |
 | skip | 任何 source | `None` / `Set` / `NoEffect` parameter | 跳过、不渲染、不参与 calc |
+
+s4/s5 的执行顺序 = trace 显示顺序 (2026-06-10 用户决策): 非 soul (slot 升序) → soul (slot 升序)、
+逐 effect apply (`shared/stats-calc.js applyStaged`)。
 
 ## Apply 公式 (7-stage + ceil、unpacking 03_ead.md 校准 2026-06-06)
 
@@ -52,19 +63,23 @@ v = floor(base)                                       Stage 0 base (server-fold 
 v += Σ(stage 1 omoide Addition × cf)                  Stage 1 omoide Add (Frida 抓包 affection_threshold gate)
 v += Σ(stage 2a masou Addition × cf)
 v *= Π(stage 2b masou Multiply × cf)                  Stage 2 masou (Add → Mul)
+v = floor(v)                                          Stage 2 終 server-fold floor (base+omoide+masou 都 server 算、返回整数)
 v *= lpMult                                           Stage 3 × LP tier (step 4、× Total 直接层)
-v *= Π(stage 4 other Multiply × cf)                   Stage 4 other Mul (chara_skill / bd_skill / crystal / bg / soul / chara_meta / soul_affinity / omoide_mul)
-v += Σ(stage 5 other Addition × cf)                   Stage 5 other Add
+v *= Π(s4a 非soul Multiply × cf)                      Stage 4a chara_skill / bd_skill / crystal / bg / chara_meta / omoide_mul / enemy_buff (slot 升序)
+v *= Π(s4b soul Multiply × cf)                        Stage 4b soul / soul_affinity (slot 升序、排非 soul 后)
+v += Σ(s5a 非soul Addition × cf)                      Stage 5a 同 4a 分类
+v += Σ(s5b soul Addition × cf)                        Stage 5b 同 4b 分类
 v *= Π(stage 6a enemy_break Multiply × cf)            Stage 6a Enemy_BreakAttack Mul (step 48、gate enemy.bk)
 v += Σ(stage 6b enemy_break Addition × cf)            Stage 6b Enemy_BreakAttack Add (step 49)
 v *= enemyBkX3                                        Stage 7 × 3 inline (step 51、enemy.bk gate、独立 cached gate)
 v = ceil(v)                                           出口 ceil (caller get_Damage frintp + fcvtps、唯一 round 点)
 ```
 
-**取整位置** (unpacking §3.12 audit):
+**取整位置**:
 - Stage 0 base = `floor(_baseStatRaw)` (server-fold 模拟、chara 创建时 server 已 int)
-- 中间 stage 全程 double、**0 round** (docs §3.12.1: EAD 50 步 d8 链全函数 0 ARM64 rounding 指令)
-- 出口 ceil = caller `get_Damage` `frintp + fcvtps`、整 pipeline 唯一 round 点
+- **Stage 2 終 floor** (2026-06-10 用户确认): base + omoide + masou 都是 server-fold、server 返回整数 → `floor(v)`
+- Stage 3 起 (client 侧 EAD pipeline) 全程 double、0 中间 round (unpacking §3.12.1: 50 步 d8 链 0 ARM64 rounding 指令)
+- 出口 ceil = caller `get_Damage` `frintp + fcvtps`、client pipeline 唯一 round 点
 
 **LP tier × Total** (step 4、unpacking §3.5):
 - `computeStats` (普通攻击、UI 显示): HpCheck `[1.0, 1.1, 1.5, 2.0]` → tier 0/1/2/3
@@ -90,7 +105,7 @@ hensei「防御力」显示 = `s10` (玩家防御吸收量、damage units) = `ba
 - 只显示玩家防御值、**不算被打时最终伤害** (即不模拟 §19.12 `final_damage = prevTotal × s8 + max(0, prevTotal × (1 - s8) - s10)` 公式中的 final_damage、只显示 s10)
 - **SwapAttackDefense=true 模式** (剑魂特殊玩法、§19.2 表)**不考虑**、所有 Attack/Defense chain 按 `swap=false` (正常对战)
 
-v2 简化模型跟 §19 phase 1-5 累积公式数学等价 (mul/add 累积、ARM64 不同 phase 物理位置不影响结果)、跳过 7 phase 内部细分。
+简化模型跟 §19 phase 1-5 累积公式数学等价 (mul/add 累积、ARM64 不同 phase 物理位置不影响结果)、跳过 7 phase 内部细分。
 
 **Defense stat 流经的 stage** (跟 Attack 不同点):
 - ✅ Stage 1-2 (omoide / masou Add+Mul) 同
@@ -157,46 +172,28 @@ clamp(repel_rate, 0, 100)
 
 `utils.js` `ctPfx()` 不再覆盖 calc_type 2/3/4。adapter `_MATH_TYPE_TO_CALC` 表只保留 Multiply/Addition/Repel_Percent。
 
-## 实现 sketch
+## 实现
 
-`shared/stats-calc.js` 加 helper (待 hensei viewer 阶段落地):
+实际实现在 [shared/stats-calc.js](../shared/stats-calc.js):
+- `collectEffects(team, targetSlotIdx, ctx)` — 3 slot 全 source 收集进 effects[] 池、附 `_source` / `_src_slot` / `_src_name` (trace 显示)、
+  按 `range` + `target_element_id` / `weapon_type_id` / `weapon_base_id` / `chara_base_id` 决定 target 命中 (`_effectApplies`)、
+  HP-curve / gate 类在收集时算好 `condition_factor`
+- `applyStaged(base, parameter, effects, opts)` — 按上面 stage 表逐 effect apply (+0/×1 跳过、出口 ceil)
+- soul: 收集时 `value × soulMultiplier(rarity, soul_lv)` 一刀切 (所有 math_type、Multiply 直乘是游戏行为、2026-06-10 用户实测确认 ×1.45 → lv50 ×2.175)、
+  HitCount `values=[a,b,c]` 数组每段同样 × soulMultiplier (`stageMult` 路径)
+- crystal: 收集时 `crystalEffectiveValue(cr, cfg)` (lv/weight/purity 三参公式)
 
-```js
-const STAGE = { OMOIDE: 1, MASOU: 2, OTHER_MUL: 3, OTHER_ADD: 4 };
+## その他 panel 値 (4 stat 以外)
 
-// collection 时打 tag
-export function tagEffect(eff, source) {
-  let stage;
-  if (source === 'omoide') stage = STAGE.OMOIDE;
-  else if (source === 'masou') stage = STAGE.MASOU;
-  else if (eff.math_type === 'Multiply') stage = STAGE.OTHER_MUL;
-  else if (eff.math_type === 'Addition') stage = STAGE.OTHER_ADD;
-  else stage = null;  // Repel_Percent / 未识别 → 独立处理
-  return { ...eff, _source: source, _stage: stage };
-}
-
-export function applyStaged(base, parameter, effects) {
-  const same = effects.filter(e => e.parameter === parameter);
-  const pick = (stage, mt) => same.filter(e => e._stage === stage && e.math_type === mt);
-  const sumAdd = arr => arr.reduce((s, e) => s + e.value * (e.condition_factor ?? 1), 0);
-  const prodMul = arr => arr.reduce((p, e) => p * (1 + (e.value - 1) * (e.condition_factor ?? 1)), 1);
-
-  let v = base;
-  v += sumAdd(pick(STAGE.OMOIDE, 'Addition'));           // stage 1
-  v += sumAdd(pick(STAGE.MASOU, 'Addition'));            // stage 2a
-  v *= prodMul(pick(STAGE.MASOU, 'Multiply'));           // stage 2b
-  v = Math.floor(v);                                     // ★ stage 2 后 floor
-  v *= prodMul(pick(STAGE.OTHER_MUL, 'Multiply'));       // stage 3
-  v += sumAdd(pick(STAGE.OTHER_ADD, 'Addition'));        // stage 4
-  return Math.ceil(v);                                   // ★ 最终 ceil
-}
-```
-
-## 跨 slot effect 收集
-
-3 slot 各自的 chara_skill / soul / crystal / bg / masou / omoide effect 全部收到一个 effects[] 池、附 `_source` 标签、按 effect.range + target_element_id + weapon_type_id 决定 target slot 是否命中 (命中决定 condition_factor 是否 = 0)、然后走上面 applyStaged()。
-
-具体 collection 实现在 hensei viewer 阶段落地、暂不实现。
+| 値 | 公式 | 实现 |
+|---|---|---|
+| Hit1-3 | 逐 effect 序贯 `cur = floor(cur op effVal)`、**每步 floor 再做下一步**、顺序 = Mul (非soul→soul、slot 升序) → Add 同分类、终 `max(1)` | `_computeImpl` hits loop |
+| フルヒット攻撃力 | `floor(Attack × Σhits)` | 同上 |
+| ダメ上限 | `floor(2^31-1 × ΠMul + ΣAdd)` DamageLimitBreak 池、单 loop 按 effects 顺序 | 同上 |
+| 転速 | `latestRecover = ΣAdd + (soul_lv/100+1) × ΠMul × base.Speed`、cooldown = `max(1, ceil(6000/recover))` fr | `_computeSpeed` |
+| 攻速 1-3 | `motion_speed_i × ΠMul + ΣAdd`、帧 = `1 + max(1, ceil(dur/spd × 60))` | `_computeMotionSpeed` |
+| BD上限 max | `max(9, floor((9 + Σadd) × Πmul))` BlazeGaugeMaxLevel 池 | `_computeImpl` |
+| 初期BD | BlazeGauge Add (mode 1 直接 / mode 2 队伍属性 count) → cumsum 反查 level | `computeBlazeGaugePoints` + `bdCapFromBlazeGauge` |
 
 ---
 
@@ -218,34 +215,37 @@ export function applyStaged(base, parameter, effects) {
 | **LP** 档 | `tr.lp` | 攻撃力 × {1.0/1.1/1.5} | ✅ |
 | **MP** toggle | `tr.have_mp` | 攻撃力 / ブレイク力 × {1.0 / (1/21)} (なし時) | ✅ |
 | **BD ON/OFF** toggle | `tr.bd_on` | ON → `bd_skill.effects[]` 当普通 buff 加入 stat (例: Attack ×50)。不影响 IsBlaze gate / BD 伤害公式 (Phase 8) | ✅ |
-| **soul level** slider | `tr.soul_lv` | soul effect value 按 (soul_lv / soul_max_lv) 线性 scale | ✅ |
-| **soul 觉醒** slider | `tr.soul_awakening` | soul max_lv += 5 × soul_awakening | ✅ |
+| **soul level** slider | `tr.soul_lv` | 所有 soul effect `value × soulMultiplier(rarity, lv)` (表: lv≤r×10 → 1+0.01lv; 之后到 75 渐进 +0.3/+0.1)。Multiply 直乘 (×1.45 → lv50 ×2.175、游戏行为)、HitCount values 数组同样缩放 | ✅ |
+| **soul 觉醒** slider | `tr.soul_awakening` | soul max_lv += 5 × soul_awakening (cap 75) | ✅ |
 | **soul affinity** (元素/武器相性倍率) | (自动、装备 chara 决定) | 攻撃力/ブレイク力 × positive_value、防御力 × negative_value | ✅ |
-| **crystal lv** slider | `crystals[i].lv` | effect value 在 `initial_value → max_value` 线性插值 | ✅ |
-| **crystal 重量段** slider | `crystals[i].weight` | effect 値衰减 | ❌ master 无、Phase 7 edit 手填 |
-| **crystal 純度段** slider | `crystals[i].purity` | effect 値増強 | ❌ 同上 |
+| **crystal lv** slider | `crystals[i].lv` | `crystalEffectiveValue`: 三因子 (M_L/W/P_max) 或 max_value 线性插值 | ✅ |
+| **crystal 重量** slider | `crystals[i].weight` | 三因子公式 weight 维度 (M_W_max + min/max_weight + weight_step revise) | ✅ |
+| **crystal 純度** slider | `crystals[i].purity` | 三因子公式 purity 维度 | ✅ |
 | **target slot** 切换 (1/2/3) | (UI、不存 tr) | 改算哪个 slot 的 stat、跨 slot range='All' buff 仍来自其他 slot | ✅ |
-| **omoide picks** (memory slot) | `tr.omoide_picks` | omoide source Add effect (stage 1) | ❌ master 无 owned-slot 数据、Phase 8 抓包 |
+| **omoide picks** (memory slot) | `tr.omoide_picks` | omoide source effect (Add → s1、Mul → s4a)、`_omoide_slots` Frida 抓包数据 + affection_threshold gate | ✅ |
 | **enemy element** | `ctx.enemy.element` | 元素相性倍率参考、影响显示 (实际伤害公式 Phase 8) | UI only |
 | **enemy break** | `ctx.enemy.bk` | Enemy_Break parameter factor = 1 if true | ✅ |
 
-### Source → Stage 映射 (4-stage pipeline)
+### Source → Stage 映射 (跟 trace stage key 一致)
 
 | _source | Stage | math_type | 触发自 |
 |---|---|---|---|
-| `omoide` | 1 (Add) | Addition | tr.omoide_picks 选中的 memory slot |
-| `omoide_mul` | 4 (Mul) | Multiply | omoide source 的 Mul effect |
-| `masou` | 2 (Add → Mul) | Add or Mul | 装备 masou.effects |
-| `chara_skill` | 4 (Mul) / 5 (Add) | Mul / Add | chara state.weapon_skills |
-| `bd_skill` | 4 / 5 | Mul / Add | tr.bd_on=true 时 chara.bd_skill.effects |
-| `enemy_break` | **6 (Mul → Add)** | Mul / Add | parameter 前缀 `Enemy_Break_*`、gate `enemy.bk` (unpacking §3.9 step 48/49) |
-| **LP tier** | **3 (× Attack)** | Multiply | `opts.lpMult` 入口决定 (computeStats HpCheck / computeStatsBlaze LpCheck) |
-| **inline ×3** | **7 (× Attack)** | Multiply | `opts.enemyBkX3` step 51、enemy.bk gate (unpacking §3.10) |
-| `crystal` | 3 / 4 | Mul / Add | 装备 crystal (按 lv 插值) |
-| `bg` | 3 / 4 | Mul / Add | 装备 bg.skills |
-| `soul` | 3 / 4 | Mul / Add | 装备 soul.skills (按 soul_lv scale) |
-| `chara_meta` | 3 (Mul) | Mul | 3 种 chara metadata 倍率: 結婚 (`tr.marriage`) / 燃心 (`tr.moeshin`) / MP 装備 (`tr.have_mp`)。**LP 不在这里**、走独立 stage 6 `lp_tier` source |
-| `soul_affinity` | 3 (Mul) | Mul | soul 元素 + 武器 相性倍率 (固定乘) |
+| `omoide` | s1 (Add) | Addition | tr.omoide_picks 选中的 memory slot |
+| `omoide_mul` | s4a (Mul) | Multiply | omoide source 的 Mul effect |
+| `masou` (静的) | s2a (Add) → s2b (Mul) | Add or Mul | 装备 masou.effects、parameter 无 HP-curve 前缀 (server-fold 可) |
+| `masou` (動的) | s4a / s5a | Mul / Add | parameter 含 Vitality_/RemHP_/Break_/FellDown_ 前缀 — client 动态值、不能 server-fold (2026-06-10 用户决策) |
+| **LP tier** | **s3 (× Attack)** | Multiply | `opts.lpMult` 入口决定 (computeStats HpCheck / computeStatsBlaze LpCheck) |
+| `chara_skill` | s4a (Mul) / s5a (Add) | Mul / Add | chara state.weapon_skills |
+| `bd_skill` | s4a / s5a | Mul / Add | tr.bd_on=true 时 chara.bd_skill.effects |
+| `crystal` | s4a / s5a | Mul / Add | 装备 crystal (`crystalEffectiveValue` lv/weight/purity) |
+| `bg` | s4a / s5a | Mul / Add | 装备 bg.skills |
+| `chara_meta` | s4a (Mul) | Mul | 結婚 (`tr.marriage`) / 燃心 (`tr.moeshin`) / MP 装備 (`tr.have_mp`)。**LP 不在这里**、走 s3 |
+| `enemy_buff` | s4a / s5a | Mul / Add | enemy bar guildTitle / emblems |
+| `soul` | **s4b / s5b** (排非 soul 后) | Mul / Add | 装备 soul.skills (× soulMultiplier) |
+| `soul_affinity` | **s4b** (Mul) | Mul | soul 元素 + 武器 相性倍率 (固定乘) |
+| `enemy_break` | **s6 (Mul → Add)** | Mul / Add | parameter 前缀 `Enemy_Break_*`、gate `enemy.bk` (unpacking §3.9 step 48/49) |
+| **inline ×3** | **s7 (× Attack)** | Multiply | `opts.enemyBkX3` step 51、enemy.bk gate (unpacking §3.10) |
+| enemy mods | **s8 (× Attack/BK)** | Multiply | 属性相性 (全局)、難度/BK耐性/有利武器 (guild gate)、BD cap — `_computeEnemyMods` 硬编码倍率、stage 后乘 + ceil |
 
 ### 验证调试
 
@@ -291,7 +291,10 @@ console 输入 `window.__DEBUG_STATS = true` → 切控件时输出：
 测试公式校准依据 (Phase 6.1 Step 0):
 - soul effect: `soulMultiplier(rarity, lv)` × `effect.value` (v1 main:js/stats-calc.js L210)
 - LP: 4 档 `[1.0, 1.1, 1.5, 2.0]` 普通 / `[1.0, 1.3, 2.0, 5.0]` Blaze (unpacking §3.8)
-- HitCount: 逐段 `max(1, floor(base[i] × Π Mul + Σ Add))` (unpacking §17.3)
+- HitCount: 逐段、逐 effect 序贯计算、**每次加成立即 floor 再做下一次** (2026-06-10 用户实测修正、替代旧 §17.3 一次性 fold):
+  `cur = floor(cur op effVal)` 逐 effect、顺序 = Mul (非soul→soul、slot 升序) → Add (同分类)、终值 `max(1, cur)`
+  例: base 3、soul Add +6 (×1.8 等级) → floor(3+10.8)=13 → 下一 effect 从 13 起
+- soul HitCount `values=[a,b,c]` 数组: 每段 × soulMultiplier (跟单值路径一致吃等级加成)
 - omoide Mul → stage 3 (用户决策)
 
 ---
@@ -314,17 +317,19 @@ trace = {
 
 | stage key | 内容 |
 |---|---|
-| s1_omoide_add / s2a_masou_add / s2b_masou_mul | applyStaged Stage 1-2 |
+| s1_omoide_add / s2a_masou_add / s2b_masou_mul / s2c_floor | applyStaged Stage 1-2 + server-fold floor |
 | s3_lp | LP tier ×Total (只攻撃力) |
-| s4_other_mul / s5_other_add | chara/crystal/bg/soul/chara_meta 等 |
+| s4a_other_mul / s4b_soul_mul | Mul: 非 soul 类 (chara/crystal/bg/魔装/meta、slot 升序) → soul 类 |
+| s5a_other_add / s5b_soul_add | Add: 同上分类、计算顺序 = stage 顺序 |
 | s6_enemy_break / s7_inline3 / s7b_ceil | step48/49 / step51 / 出口 ceil |
 | s8_enemy_mods | 属性相性/難度/有利武器/BD cap (逐因子、链尾=ceil 后显示值) |
-| s9_hits | Hit1-3 逐 effect 链 + floor/max(1) 终步 |
+| s9_hits | Hit1-3 逐 effect 序贯 (每步 floor、after=floor 后值) + max(1) 终步 |
 | s10_damage_limit | DamageLimitBreak fold + floor 终步 |
 | s11_speed | 転速: recover → ×Mul链 → ×partner → +Add链 (fold 等价重演) |
 | s12_motion | 攻速1-3: motion_speed_i → ×Mul链 → +Add链 |
 
 - step.stat ∈ { 攻撃力/防御力/HP/ブレイク力/Hit1-3/ダメ上限/転速/攻速1-3 }、UI 按 tab filter
+- UI tab 只渲染相关 stage: 攻撃力等 4 stat → s1-s8; Hit → s9; ダメ上限 → s10; 転速 → s11; 攻速 → s12
 - step.src = `{skill/装备名}@S{slot}` (collectEffects 的 `_src_name`)
 - speed/motion 实际计算保持 fold (输出 bit 一致)、trace 链为数学等价重演 (Mul 全在 Add 前)
 - 单测: `tests/unit/test_stats_trace.mjs` (gate / on-off 一致 / 各链尾 == 输出 / 链连续性)

@@ -98,7 +98,7 @@ test('trace: traceEnabled=true → trace 结构齐全', () => {
   assert.ok(Array.isArray(r.trace.motionBase));
   // stage keys 完整
   const keys = r.trace.stages.map((s) => s.key);
-  for (const k of ['s1_omoide_add', 's4_other_mul', 's8_enemy_mods', 's9_hits', 's10_damage_limit', 's11_speed', 's12_motion']) {
+  for (const k of ['s1_omoide_add', 's4a_other_mul', 's4b_soul_mul', 's5a_other_add', 's5b_soul_add', 's8_enemy_mods', 's9_hits', 's10_damage_limit', 's11_speed', 's12_motion']) {
     assert.ok(keys.includes(k), `missing stage ${k}`);
   }
 });
@@ -197,7 +197,97 @@ test('trace: step src 含 skill 名 + slot 标', () => {
 });
 
 // ============================================================
-// 5. enemy mods stage (element matchup)
+// 5. s4a/s4b 分 stage: 非 soul 类 (s4a 按 slot)、soul 类 (s4b)
+// ============================================================
+test('trace: s4a=非soul(slot顺)、s4b=soul、计算顺序 = stage 顺序', () => {
+  const chara0 = mockChara();
+  const chara1 = mockChara({ id: 1002, name: 'TEST2' });
+  const soul0 = {
+    _master: {
+      id: 100, name: 'SOUL_A', rarity: 5, max_level: 10,
+      skills: [{ name: 'SOUL_ATK', parameter: 'Attack', math_type: 'Multiply', value: 1.5 }],
+      element_affinity: {}, weapon_affinity: {},
+    },
+    id: 100, name: 'SOUL_A',
+  };
+  const ctx = (() => {
+    const team = [
+      { chara: chara0.id, soul: soul0.id, bg: null, masou: null, crystals: [], tr: mkTr() },
+      { chara: chara1.id, soul: null, bg: null, masou: null, crystals: [], tr: mkTr() },
+      { chara: null, soul: null, bg: null, masou: null, crystals: [], tr: mkTr() },
+    ];
+    return {
+      team, allCharas: [chara0, chara1], allSouls: [soul0], allBGs: [], allMasou: [], allCrystals: [],
+      allGuildTitles: [], allGuildEmblems: [],
+      enemy: { element: 0, bk: false },
+      traceEnabled: true,
+    };
+  })();
+  const r = computeStats(chara0, ctx.team[0].tr, 0, ctx);
+  // 非 soul → s4a (按 slot 顺)、soul → s4b
+  const s4a = r.trace.stages.find((s) => s.key === 's4a_other_mul');
+  const s4b = r.trace.stages.find((s) => s.key === 's4b_soul_mul');
+  const aSrcs = s4a.steps.filter((s) => s.stat === '攻撃力').map((s) => s.src);
+  const bSrcs = s4b.steps.filter((s) => s.stat === '攻撃力').map((s) => s.src);
+  assert.ok(aSrcs.every((s) => !s.includes('SOUL_ATK')), `s4a 不应含 soul: ${JSON.stringify(aSrcs)}`);
+  assert.ok(bSrcs.some((s) => s.includes('SOUL_ATK')), `s4b 应含 soul: ${JSON.stringify(bSrcs)}`);
+  // s4a 内 slot 顺序: @S1 在 @S2 前
+  const s1Idx = aSrcs.findIndex((s) => s.includes('@S1'));
+  const s2Idx = aSrcs.findIndex((s) => s.includes('@S2'));
+  assert.ok(s1Idx >= 0 && s2Idx >= 0 && s1Idx < s2Idx, `slot 顺序: ${JSON.stringify(aSrcs)}`);
+  // 计算顺序 = stage 顺序: s4b 第一步的 before === s4a 最后一步的 after
+  const aAtk = s4a.steps.filter((s) => s.stat === '攻撃力');
+  const bAtk = s4b.steps.filter((s) => s.stat === '攻撃力');
+  assert.strictEqual(bAtk[0].before, aAtk[aAtk.length - 1].after, 's4a→s4b 链应连续');
+});
+
+// ============================================================
+// 6. hits 序贯 floor + soul values 数组等级加成 (2026-06-10 用户实测)
+// ============================================================
+test('hits: 每步 floor 后再做下一步 (非一次性 fold)', () => {
+  // base hit 3、chara skill Mul ×1.5 → floor(4.5)=4、再 Add +0.9 → floor(4.9)=4
+  // 旧 fold 公式: floor(3×1.5+0.9) = floor(5.4) = 5 — 行为不同、锁新值
+  const chara = mockChara();
+  chara._master.states['通常'].weapon_skills = [
+    { name: 'HITx1.5', parameter: 'HitCount', math_type: 'Multiply', value: 1.5, value_scaling: 0 },
+    { name: 'HIT+0.9', parameter: 'HitCount', math_type: 'Addition', value: 0.9, value_scaling: 0 },
+  ];
+  const ctx = buildCtx([{ chara }]);
+  const r = computeStats(chara, ctx.team[0].tr, 0, ctx);
+  assert.strictEqual(r.hits[0], 4, '逐步 floor: floor(floor(3×1.5)+0.9) = 4 (旧 fold 是 5)');
+});
+
+test('hits: soul values=[a,b,c] 数组吃 soulMultiplier', () => {
+  // 5★ soul lv50 → soulMultiplier = 1.5; values=[2,0,0] Addition → 段1 +2×1.5=+3 → floor(3+3)=6
+  const chara = mockChara({
+    states: {
+      '通常': {
+        ...mockChara()._master.states['通常'],
+        weapon_skills: [],
+      },
+    },
+  });
+  const soul = {
+    _master: {
+      id: 101, name: 'HIT_SOUL', rarity: 5, max_level: 10,
+      skills: [{ name: 'SOUL_HIT', parameter: 'HitCount', math_type: 'Addition', value: 0, values: [2, 0, 0] }],
+      element_affinity: {}, weapon_affinity: {},
+    },
+    id: 101, name: 'HIT_SOUL',
+  };
+  const tr = { ...mkTr(), soul_lv: 50 };
+  const team = [{ chara: chara.id, soul: soul.id, bg: null, masou: null, crystals: [], tr }];
+  const ctx = {
+    team, allCharas: [chara], allSouls: [soul], allBGs: [], allMasou: [], allCrystals: [],
+    allGuildTitles: [], allGuildEmblems: [],
+    enemy: { element: 0, bk: false },
+  };
+  const r = computeStats(chara, team[0].tr, 0, ctx);
+  assert.strictEqual(r.hits[0], 6, 'values[0]=2 × soulMult 1.5 = +3 → 3+3=6 (未缩放则 5)');
+});
+
+// ============================================================
+// 7. enemy mods stage (element matchup)
 // ============================================================
 test('trace: enemy element matchup 进 s8_enemy_mods、链尾 == 显示值', () => {
   const chara = mockChara();   // element_id=1

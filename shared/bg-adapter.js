@@ -1,7 +1,7 @@
-// v2 bladegraphs.json → wiki bladegraphs.json shape
+// master bladegraphs.json → wiki bladegraphs.json shape
 // 让 main js/bg-list.js / shared/bg-spec.js / js/utils.js 1:1 跑起来。
 //
-// v2 bg.skills[] 多 skill → wiki effects[] 平铺一组 (wiki bg 不分 skill、只一组 effects)
+// master bg.skills[] 多 skill → wiki effects[] 平铺一组 (wiki bg 不分 skill、只一组 effects)
 
 import {
   paramToBunruiAndCondition,
@@ -10,7 +10,7 @@ import {
 } from './chara-adapter.js';
 import { deepApply } from './revise-core.js';
 
-function _v2BgSkillToEffect(sk) {
+function _bgSkillToEffect(sk) {
   if (sk.parameter === 'NoEffect') return null;
   const { bunrui, condition } = paramToBunruiAndCondition(sk.parameter);
   const calc_type = MATH_TYPE_TO_CALC[sk.math_type];
@@ -30,9 +30,9 @@ function _v2BgSkillToEffect(sk) {
   return eff;
 }
 
-export function v2BgToWiki(b) {
-  const effects = (b.skills || []).map(_v2BgSkillToEffect).filter(Boolean);
-  // effect_text: 汇总各 skill description (wiki bg 一句话、v2 多 skill 拼接)
+export function bgToWiki(b) {
+  const effects = (b.skills || []).map(_bgSkillToEffect).filter(Boolean);
+  // effect_text: 汇总各 skill description (wiki bg 一句话、master 多 skill 拼接)
   const effect_text = (b.skills || [])
     .map(sk => sk.description)
     .filter(Boolean)
@@ -70,5 +70,5 @@ export function adaptBgList(arr, revise = []) {
     deepApply(cloned, patch);
     return cloned;
   });
-  return merged.map(v2BgToWiki);
+  return merged.map(bgToWiki);
 }

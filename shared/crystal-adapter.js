@@ -1,7 +1,7 @@
-// v2 crystals.json → wiki crystals.json shape
+// master crystals.json → wiki crystals.json shape
 // 让 main js/cr-list.js / shared/crystal-spec.js / js/utils.js 1:1 跑起来。
 //
-// v2 crystal 平铺单 effect 字段 → wiki effects[] 包成数组 (一个 crystal 一般一个 effect)
+// master crystal 平铺单 effect 字段 → wiki effects[] 包成数组 (一个 crystal 一般一个 effect)
 //
 // Phase 7 Session 1: master crystals.json 不再含 max_value、改读 data/crystal_revise.json 补
 // adaptCrystalList(arr, revise = []) 内 deepApply 把 revise patch 合到 master、再转 wiki shape
@@ -14,7 +14,7 @@ import {
 import { deepApply } from './revise-core.js';
 import { crystalMaxBairitu } from './hensei-helpers.js';
 
-function _v2CrystalToWikiEffect(c) {
+function _crystalToWikiEffect(c) {
   const { bunrui, condition } = paramToBunruiAndCondition(c.parameter);
   const calc_type = MATH_TYPE_TO_CALC[c.math_type];
   if (calc_type == null) return null;
@@ -25,7 +25,7 @@ function _v2CrystalToWikiEffect(c) {
     bairitu_init: c.initial_value,                 // 初期値 (master 直读)
     bairitu_scaling: 0,
     calc_type,
-    _parameter: c.parameter,                    // v2 原 parameter (cr-list renderEffLine 用)
+    _parameter: c.parameter,                    // master 原 parameter (cr-list renderEffLine 用)
   };
   if (c.element_id) eff.element = c.element_id;
   if (c.weapon_type_id) eff.weapon = c.weapon_type_id;
@@ -34,9 +34,9 @@ function _v2CrystalToWikiEffect(c) {
   return eff;
 }
 
-export function v2CrystalToWiki(c) {
+export function crystalToWiki(c) {
   // NoEffect 不过滤 (用户决策、归到「その他」类)、但生成 placeholder effect 避免 render 报空
-  const eff = c.parameter === 'NoEffect' ? null : _v2CrystalToWikiEffect(c);
+  const eff = c.parameter === 'NoEffect' ? null : _crystalToWikiEffect(c);
   return {
     _master: c,                            // 原 master entry (hensei stats-calc 用)
     id: c.id,
@@ -73,5 +73,5 @@ export function adaptCrystalList(arr, revise = []) {
     deepApply(cloned, patch);
     return cloned;
   });
-  return merged.map(v2CrystalToWiki);
+  return merged.map(crystalToWiki);
 }
