@@ -17,7 +17,7 @@ import { state } from './cr-state.js';
 import { computeDiff } from '../shared/revise-core.js';
 import { submitRevise, showSaveToast } from '../shared/save-client.js';
 import { escHtml, parseBairituVal } from './utils.js';
-import { renderDetailBody, renderRowHd } from './cr-list.js';
+import { invalidateRow, registerEditBodyRenderer } from './cr-list.js';
 import { updateReviseBar } from './nav.js';
 import { crystalMaxBairitu } from '../shared/hensei-helpers.js';
 
@@ -98,18 +98,16 @@ const _renderEditBody = (c) => {
     fieldsSec;
 };
 
+// 注册给 cr-list.js renderRow 用 — virtual list 重 build node 时按 state.editingId 决定渲染 edit body
+registerEditBodyRenderer(_renderEditBody);
+
 export const enterEditMode = (id) => {
   if (state.editingId !== null && state.editingId !== id) cancelEdit();
   const c = state.allCrystals.find((x) => x.id === id);
   if (!c) return;
   state.editData = JSON.parse(JSON.stringify(c));
   state.editingId = id;
-  const row = document.getElementById('row-' + id);
-  const body = document.getElementById('body-' + id);
-  if (!row || !body) return;
-  row.classList.add('expanded');
-  body.className = 'crystal-edit-body';
-  body.innerHTML = _renderEditBody(state.editData);
+  invalidateRow(id);   // renderRow 看 editingId 自动渲染 edit body + 重测高度
 };
 
 export const cancelEdit = () => {
@@ -117,12 +115,7 @@ export const cancelEdit = () => {
   const id = state.editingId;
   state.editingId = null;
   state.editData = null;
-  const c = state.allCrystals.find((x) => x.id === id);
-  const body = document.getElementById('body-' + id);
-  if (body && c) {
-    body.className = 'crystal-body';
-    body.innerHTML = renderDetailBody(c);
-  }
+  invalidateRow(id);
 };
 
 // live edit: 修改 editData._master[field]、不立即落盘
@@ -194,20 +187,10 @@ export const saveEdit = () => {
     if (eff0) eff0.bairitu = crystalMaxBairitu(state.allCrystals[idx]._master);
   }
 
-  // 退出 edit mode + 重 render detail body
+  // 退出 edit mode — renderRow 看 editingId=null 自动转 detail body + 重测高度
   state.editingId = null;
   state.editData = null;
-  const c = state.allCrystals[idx];
-  const row = document.getElementById('row-' + id);
-  const body = document.getElementById('body-' + id);
-  if (row) {
-    const hd = row.querySelector('.crystal-row-hd');
-    if (hd) hd.innerHTML = renderRowHd(c);
-  }
-  if (body) {
-    body.className = 'crystal-body';
-    body.innerHTML = renderDetailBody(c);
-  }
+  invalidateRow(id);
   updateReviseBar();
 };
 
@@ -226,18 +209,8 @@ export const cancelRevise = (id) => {
     // 同步 wiki shape effects[0].bairitu (display 用)、跟 saveEdit 同 sync
     const eff0 = state.allCrystals[idx].effects?.[0];
     if (eff0) eff0.bairitu = crystalMaxBairitu(state.allCrystals[idx]._master);
-    const c = state.allCrystals[idx];
-    const row = document.getElementById('row-' + id);
-    const body = document.getElementById('body-' + id);
-    if (row) {
-      const hd = row.querySelector('.crystal-row-hd');
-      if (hd) hd.innerHTML = renderRowHd(c);
-    }
-    if (body && !state.editingId) {
-      body.className = 'crystal-body';
-      body.innerHTML = renderDetailBody(c);
-    }
   }
+  invalidateRow(id);
   updateReviseBar();
 };
 
