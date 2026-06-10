@@ -35,10 +35,12 @@
 /* mobile layout parts .bg-row-left / .bg-row-right 现在在 shared.css */
 
 /* body: hidden by default, display:flex when expanded */
-.bg-body { border-top: 1px solid var(--border); padding: 12px 14px; display: none; gap: 14px; }
+.bg-body { border-top: 1px solid var(--border); padding: 8px 12px; display: none; gap: 14px; }
 .bg-row.expanded .bg-body { display: flex; }
 
-.bg-icon { width: 84px; height: 84px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); background: var(--bg3); }
+/* 高度固定 → row 高度不依赖 img 加载、vlist measure 永远准。
+   aspect-ratio 做横向占位 (宽 = height × 180/276)、防 img 加载前宽度 0 → 文本区变宽 → 加载后 re-wrap 变行数 */
+.bg-icon { height: 115px; width: auto; aspect-ratio: 180 / 276; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); background: var(--bg3); }
 .btn-edit { background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 4px 0; font-size: 11px; cursor: pointer; width: 84px; }
 .btn-edit:hover { background: rgba(91,127,255,.1); }
 
@@ -73,4 +75,6 @@
   /* mobile row layout: swap desktop↔mobile divs */
   .bg-row-desktop { display: none; }
   .bg-row-mobile  { display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0; justify-content: space-between; }
+  /* 窄屏 field-key 砍窄、长 label (入手方法等) 自动 wrap */
+  .field-key { width: 24px; min-width: 24px; }
 }

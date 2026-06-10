@@ -198,7 +198,7 @@ export const renderRowHd = (c) => {
   const wb = cw ? '<span class="badge weapon">' + (WEAPON[cw] || cw) + '</span>' : '';
   const s5b = c.chara_base_id ? '<span class="badge scope5">キャラ限</span>' : '';
   const timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
-  // 効果 tag: 用 v2 parameter class (跟 filter 一致)、unique by class id
+  // 効果 tag: 用 parameter class (跟 filter 一致)、unique by class id
   const _seen = new Set();
   const bt = (c._skills || [])
     .map((sk) => sk.parameter && classifyParameter(sk.parameter))
@@ -311,7 +311,7 @@ export const scopeLabel = (e) => {
 export const renderDetailBody = (c) => {
   const effRows = (c.effects || [])
     .map(function (e, i) {
-      // 効果 tag: v2 parameter class (跟 filter 一致)
+      // 効果 tag: parameter class (跟 filter 一致)
       const _cls = e._parameter ? classifyParameter(e._parameter) : null;
       const bTags = _cls
         ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[_cls] || _cls) + '</span>'

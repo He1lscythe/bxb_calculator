@@ -158,7 +158,7 @@
       import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
       import { BG_SPEC } from '../shared/bg-spec.js';
       import { PARAMETER_CLASS_LABEL, PARAMETER_CLASS_SHORT, COND_TRIGGER_LABEL, SCOPE_LABEL, classifyParameter } from '../shared/parameter-class.js';
-      // hensei badge helper: v2 _parameter(s) → PARAMETER_CLASS_SHORT
+      // hensei badge helper: _parameter(s) → PARAMETER_CLASS_SHORT
       const _efBadges = (ef) => {
         const paramList = Array.isArray(ef._parameters)
           ? ef._parameters
@@ -188,7 +188,7 @@
       import { adaptCrystalList } from '../shared/crystal-adapter.js';
       import { adaptMasouList } from '../shared/masou-adapter.js';
       import { adaptBgList } from '../shared/bg-adapter.js';
-      // ===== v2 stats-calc (Phase 6.1 4-stage) =====
+      // ===== stats-calc (Phase 6.1 4-stage) =====
       import {
         computeStats,
         baseStats,
@@ -351,7 +351,7 @@
             gt,
             ge,
           ]) => {
-            // v2 schema → wiki shape via adapter (Phase 6.2)
+            // master schema → wiki shape via adapter (Phase 6.2)
             // Phase 7 Session 2: 4 adapter 都接 revise (deepApply patch 到 master 再转 wiki shape)
             // 2026-06-09: bg-adapter 也接 revise (acquisition 走 revise)
             ch = adaptCharaList(ch, chRev);
@@ -368,8 +368,9 @@
             allMasou = Array.isArray(ms) ? ms : [];
             masouByChara = {};
             allMasou.forEach((m) => {
-              if (m.chara_id != null)
-                (masouByChara[m.chara_id] = masouByChara[m.chara_id] || []).push(m);
+              // masou.json 用 weapon_base_id (chara base_id 4位) 关联、不再叫 chara_id
+              if (m.weapon_base_id != null)
+                (masouByChara[m.weapon_base_id] = masouByChara[m.weapon_base_id] || []).push(m);
             });
             allGuildTitles = Array.isArray(gt) ? gt : [];
             allGuildEmblems = Array.isArray(ge) ? ge : [];
@@ -491,7 +492,24 @@
       };
       export const renderMasouPanel = (m) => {
         if (!m) return '';
-        return `<div class="skills-panel"><div class="skill-item"><div class="skill-eftxt">${escHtml(m.effect_text || '')}</div>${(m.effects || []).map(renderEfRow).join('')}</div></div>`;
+        // masou.effects 是 master shape ({parameter, math_type, value, value_scaling, effect_text})、
+        // renderEfRow 期待 wiki shape — inline 转换 (masou 无 element/weapon/range 限定、固定自身)
+        const rows = (m.effects || [])
+          .map((e) => {
+            if (!e || e.parameter === 'NoEffect') return '';
+            const ef = {
+              _parameter: e.parameter,
+              bairitu: e.value,
+              bairitu_scaling: e.value_scaling || 0,
+              calc_type: e.math_type === 'Addition' ? 1 : 0,
+              condition: 0,
+            };
+            const txt = e.effect_text ? `<div class="skill-eftxt">${escHtml(e.effect_text)}</div>` : '';
+            return `<div class="skill-item">${txt}${renderEfRow(ef)}</div>`;
+          })
+          .filter(Boolean)
+          .join('');
+        return rows ? `<div class="skills-panel">${rows}</div>` : '';
       };
       // crystal effect 倍率: crystalEffectiveValue(cr, cfg) (cfg.lv 在 initial → max 线性插值)。
       export const renderCrystalEffList = (cfgs) => {
@@ -566,7 +584,7 @@
         refreshAllStats();
       };
       export const _maxOmoideThreshold = (c) => {
-        // v2: omoide 在 chara._omoide_slots[].affection_threshold (Frida 抓包 lazy fetch)
+        // omoide 在 chara._omoide_slots[].affection_threshold (Frida 抓包 lazy fetch)
         const slots = c?._omoide_slots;
         if (!Array.isArray(slots) || !slots.length) return 0;
         return slots.reduce((m, s) => Math.max(m, +s.affection_threshold || 0), 0);
@@ -1471,7 +1489,7 @@
         closeEmblemModal();
       };
 
-      // Pick / equip / clear (v2: 索引 slot_idx → skillId、不依赖 SENZAI_TABLE) ─────────
+      // Pick / equip / clear (索引 slot_idx → skillId、不依赖 SENZAI_TABLE) ─────────
       // 候选 skill 短 label: param + math + value (例 'Attack ×1.20' / 'Defense +240')
       const _omoideSkillLabel = (sk) => {
         if (!sk) return '';
@@ -1626,6 +1644,7 @@
         SLOT_COLORS,
         COLOR_LABELS,
         IS_LOCAL_DEV,
+        traceEnabled: IS_LOCAL_DEV,   // dev 才生成 trace (stat-trace modal 用)、Pages 0 开销
       });
 
       export const _statsInner = (i, chara) => {
@@ -1819,7 +1838,7 @@
           sort: '',
           desc: true,
         },
-        // Phase 7 Session 3 patch: bg / crystal facet 用 v2 schema (effect / condition_trigger / scope)
+        // Phase 7 Session 3 patch: bg / crystal facet 用 master schema (effect / condition_trigger / scope)
         // 跟 crystals.html / bladegraphs.html viewer 一致 (问题 4)
         bg: {
           q: '',
@@ -2003,7 +2022,7 @@
             Object.keys(WEAPON).map((k) => [+k, WEAPON[k]]),
             f.weapon,
           );
-          // Phase 7 Session 3 patch (问题 4): 改用 v2 PARAMETER_CLASS_LABEL / COND_TRIGGER_LABEL / SCOPE_LABEL
+          // Phase 7 Session 3 patch (问题 4): 改用 PARAMETER_CLASS_LABEL / COND_TRIGGER_LABEL / SCOPE_LABEL
           h += fsec('効果', 'effect',
             Object.entries(PARAMETER_CLASS_LABEL).map(([k, v]) => [+k, v]),
             f.effect);
@@ -2032,7 +2051,7 @@
             [1, 2, 3, 4, 5, 6].map((k) => [k, ELEMENT[k], k === 6 ? '' : 'elem-' + k]),
             f.element,
           );
-          // Phase 7 Session 3 patch (问题 4): 改用 v2 PARAMETER_CLASS_LABEL / COND_TRIGGER_LABEL / SCOPE_LABEL
+          // Phase 7 Session 3 patch (问题 4): 改用 PARAMETER_CLASS_LABEL / COND_TRIGGER_LABEL / SCOPE_LABEL
           h += fsec('効果', 'effect',
             Object.entries(PARAMETER_CLASS_LABEL).map(([k, v]) => [+k, v]),
             f.effect);
@@ -2072,7 +2091,7 @@
         applyEM();
       };
 
-      // Phase 7 Session 3 patch (问题 4): em-picker filter 直接用 v2 CRYSTAL_SPEC / BG_SPEC
+      // Phase 7 Session 3 patch (问题 4): em-picker filter 直接用 CRYSTAL_SPEC / BG_SPEC
       // (跟 crystals.html / bladegraphs.html viewer 1:1 一致)、不再 wrap。
       // 旧 wiki bunrui/scope/condition wrap 已废、effect/condition_trigger/scope 走 spec extract。
 
@@ -2081,8 +2100,10 @@
           f = mf[type];
         let items = [];
         if (type === 'masou') {
-          const cid = team[emSlot]?.chara;
-          items = cid ? (masouByChara[cid] || []).slice() : [];
+          const cid = team[emSlot]?.chara;   // variant_id (6位)
+          const charaObj = cid ? allCharas.find((x) => x.id === cid) : null;
+          const baseId = charaObj?._master?.id ?? cid;   // masouByChara 索引用 base_id (4位)
+          items = baseId ? (masouByChara[baseId] || []).slice() : [];
           if (f.q) {
             const q = String(f.q).toLowerCase();
             items = items.filter((m) => (m.name || '').toLowerCase().indexOf(q) >= 0);
@@ -2243,12 +2264,12 @@
               const cur = team[emSlot]?.masou === m.id;
               return min`
         <div class="em-item em-item-bg${cur ? ' active' : ''}" onclick="selectEM(${m.id})">
-          <img class="em-icon" data-src="${escHtml(m.image || '')}" onerror="this.style.visibility='hidden'" alt="">
+          <img class="em-icon" data-src="../icons/masou/${m.id}.png" onerror="this.style.visibility='hidden'" alt="">
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="em-bg-name">${escHtml(m.name || '')}</span>
             </div>
-            <span class="em-bg-eff">${escHtml(m.effect_text || '')}</span>
+            <span class="em-bg-eff">${escHtml((m.effects || []).map((e) => e?.effect_text).filter(Boolean).join(' / '))}</span>
           </div>
           <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${m.id},'masou')">詳細</button>
         </div>`;
@@ -2497,26 +2518,29 @@
 
       // ===== MASOU DETAIL =====
       export const renderDMMasou = (m) => {
+        // masou.effects 是 master shape ({parameter, math_type, value, value_scaling, effect_text})
         const effRows = (m.effects || [])
-          .map((ef) => {
+          .map((e) => {
+            if (!e || e.parameter === 'NoEffect') return '';
+            const ef = { _parameter: e.parameter, bairitu: e.value, calc_type: e.math_type === 'Addition' ? 1 : 0 };
             const btags = _efBadges(ef);
-            const cond = ef.condition
-              ? `<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition] || ''}</span>`
+            const sc = e.value_scaling
+              ? `<span style="color:var(--text2);font-size:11px"> (+${e.value_scaling}×熟度)</span>`
               : '';
-            const sl = _bgScopeLabel(ef);
-            const scope = sl ? `<span class="scope-tag scope-lim">${escHtml(sl)}</span>` : '';
             const val =
               ef.bairitu != null
-                ? `<span class="tag-val">${ef.calc_type === 1 ? '+' : '×'}${fmtLarge(ef.bairitu)}</span>`
+                ? `<span class="tag-val">${ef.calc_type === 1 ? '+' : '×'}${fmtLarge(ef.bairitu)}</span>${sc}`
                 : '';
-            return `<div class="bgdm-eff-line">${btags}${cond}${scope}${val}</div>`;
+            return `<div class="bgdm-eff-line">${btags}${val}</div>`;
           })
+          .filter(Boolean)
           .join('');
+        const effTexts = (m.effects || []).map((e) => e?.effect_text).filter(Boolean).join(' / ');
         const fields = [];
-        if (m.effect_text) fields.push(['効果', `<span>${escHtml(m.effect_text)}</span>`]);
+        if (effTexts) fields.push(['効果', `<span>${escHtml(effTexts)}</span>`]);
         if (effRows) fields.push(['効果量', effRows]);
-        if (m.acquisition) fields.push(['入手方法', escHtml(m.acquisition)]);
-        if (m.chara_name) fields.push(['対応魔剣', escHtml(m.chara_name)]);
+        const baseChara = m.weapon_base_id ? allCharas.find((c) => c._master?.id === m.weapon_base_id) : null;
+        if (baseChara) fields.push(['対応魔剣', escHtml(baseChara.name)]);
         const fieldHtml = fields
           .map(
             ([k, v]) =>
@@ -2526,7 +2550,7 @@
         return min`
     <div class="bgdm-layout">
       <div class="bgdm-fields">${fieldHtml || '<div style="color:var(--text2)">データなし</div>'}</div>
-      ${m.image ? `<div class="bgdm-img-wrap"><img loading="lazy" src="${escHtml(m.image)}" onerror="this.style.display='none'" alt=""></div>` : ''}
+      <div class="bgdm-img-wrap"><img loading="lazy" src="../icons/masou/${m.id}.png" onerror="this.parentElement.style.display='none'" alt=""></div>
     </div>`;
       };
 
@@ -2783,7 +2807,8 @@
         const chara = allCharas.find((x) => x.id === t.chara) || null;
         const soul = allSouls.find((x) => x.id === t.soul) || null;
         const bg = allBGs.find((x) => x.id === t.bg) || null;
-        const charaMasouList = chara ? masouByChara[chara.id] || [] : [];
+        // masouByChara 用 base_id (4位) 索引、chara wiki shape 的 c.id 是 variant_id (6位) → 走 _master.id
+        const charaMasouList = chara ? masouByChara[chara._master?.id ?? chara.id] || [] : [];
         const masou = chara && t.masou ? charaMasouList.find((m) => m.id === t.masou) : null;
         const nCr = crystalSlotCount(chara, i);
         const usedCr = t.crystals.filter(Boolean).length;
@@ -2852,7 +2877,7 @@
         const bgPanel = renderBgPanel(bg);
         const masouPanel = renderMasouPanel(masou);
         const masouIcon = masou
-          ? `<img class="equip-icon" loading="lazy" src="${escHtml(masou.image || '')}" onerror="this.style.visibility='hidden'" alt="">`
+          ? `<img class="equip-icon" loading="lazy" src="../icons/masou/${masou.id}.png" onerror="this.style.visibility='hidden'" alt="">`
           : `<div class="equip-icon-empty"></div>`;
         const masouSection =
           chara && charaMasouList.length
@@ -3008,7 +3033,7 @@
       // 各 stat の計算 trace を stage 別に展開表示。GitHub Pages では UI 入口無効・本ブロック全部 no-op。
       const _statTraceState = { slot: -1, statKey: '攻撃力', openStages: new Set() };
 
-      const _STAT_TRACE_TABS = ['攻撃力', '防御力', 'HP', 'ブレイク力', 'Hit', 'ダメ上限'];
+      const _STAT_TRACE_TABS = ['攻撃力', '防御力', 'HP', 'ブレイク力', 'Hit', '転速', '攻速', 'ダメ上限'];
 
       const _fmtTraceVal = (v) => {
         if (v == null || !Number.isFinite(v)) return '-';
@@ -3029,19 +3054,26 @@
         return op;
       };
 
-      // Hit tab は 3 stage hits + total を 1 view に統合表示するため特別扱い。
+      // Hit / 攻速 tab は 3 stage を 1 view に統合表示するため特別扱い。
       const _statTraceMatch = (step, statKey) => {
         if (statKey === 'Hit') return /^Hit[123]$/.test(step.stat);
+        if (statKey === '攻速') return /^攻速[123]$/.test(step.stat);
         return step.stat === statKey;
       };
 
       const _statTraceFinalValue = (trace, statKey) => {
         if (!trace) return null;
-        if (statKey === 'Hit') return null; // hit は array なので別途
+        if (statKey === 'Hit' || statKey === '攻速') return null; // array なので別途
         if (statKey === 'ダメ上限') {
           let last = trace.damageLimitBase;
           for (const st of trace.stages)
             for (const s of st.steps) if (s.stat === 'ダメ上限') last = s.after;
+          return last;
+        }
+        if (statKey === '転速') {
+          let last = trace.speedBase;
+          for (const st of trace.stages)
+            for (const s of st.steps) if (s.stat === '転速') last = s.after;
           return last;
         }
         let last = trace.base[statKey];
@@ -3052,8 +3084,9 @@
 
       const _statTraceBase = (trace, statKey) => {
         if (!trace) return 0;
-        if (statKey === 'Hit') return 0;
+        if (statKey === 'Hit' || statKey === '攻速') return 0;
         if (statKey === 'ダメ上限') return trace.damageLimitBase;
+        if (statKey === '転速') return trace.speedBase || 0;
         return trace.base[statKey] || 0;
       };
 
@@ -3112,6 +3145,39 @@
         }
         const trace = r.trace;
 
+        // 攻速 tab: 3 段 (攻速1/2/3) 並べ、Hit と同 pattern
+        if (statKey === '攻速') {
+          let html = `<div class="trace-base">Base motion_speed: [${(trace.motionBase || []).map((v) => _fmtTraceVal(v)).join(', ')}]</div>`;
+          for (const stage of trace.stages) {
+            const msSteps = stage.steps.filter((s) => /^攻速[123]$/.test(s.stat));
+            if (!msSteps.length) continue;
+            const open = _statTraceState.openStages.has(stage.key);
+            html += `<div class="trace-stage">
+        <div class="trace-stage-head" onclick="toggleStatTraceStage('${stage.key}')">
+          <span><span class="arrow">${open ? '▼' : '▶'}</span> ${escHtml(stage.label)}</span>
+          <span class="trace-stage-tot">${msSteps.length} 件</span>
+        </div>`;
+            if (open) {
+              html += msSteps
+                .map(
+                  (s) => `<div class="trace-step">
+          <span class="src" title="${escHtml(s.src)}">${escHtml(s.src)} [${s.stat}]</span>
+          <span class="op">${_opSymbol(s.op)}</span>
+          <span class="val">${_fmtTraceVal(s.val)}</span>
+          <span class="after">${_fmtTraceVal(s.before)} → ${_fmtTraceVal(s.after)}</span>
+        </div>`,
+                )
+                .join('');
+            }
+            html += `</div>`;
+          }
+          const spds = (r.motionSpeed?.speeds || []).map((v) => _fmtTraceVal(v));
+          const frs = r.motionSpeed?.durationsFrames || [];
+          html += `<div class="trace-final">最終 speeds: [${spds.join(', ')}]  frames: [${frs.map((v) => v || '—').join(', ')}] 計 ${frs.reduce((a, b) => a + (b || 0), 0)}fr</div>`;
+          body.innerHTML = html;
+          return;
+        }
+
         // Hit tab は 3 stage の hits を並べる
         if (statKey === 'Hit') {
           let html = `<div class="trace-base">Base hits: [${(trace.hitsBase || []).join(', ')}]</div>`;
@@ -3148,7 +3214,17 @@
         const finalVal = _statTraceFinalValue(trace, statKey);
         let html = `<div class="trace-base">${escHtml(statKey)} base: ${_fmtTraceStat(base)}</div>`;
 
+        // tab 只显示自己相关的 stage (其他属性専用 stage 不渲染、即便空也不显示 無し)
+        const _SPECIAL_STAGES = { 'ダメ上限': 's10_damage_limit', '転速': 's11_speed' };
+        const _NON_CALC = new Set(['s9_hits', 's10_damage_limit', 's11_speed', 's12_motion']);
+        const _stageRelevant = (stage) => {
+          const special = _SPECIAL_STAGES[statKey];
+          if (special) return stage.key === special;
+          return !_NON_CALC.has(stage.key);   // 攻撃力/防御力/HP/BK → calc stages のみ
+        };
+
         for (const stage of trace.stages) {
+          if (!_stageRelevant(stage)) continue;
           const steps = stage.steps.filter((s) => _statTraceMatch(s, statKey));
           const isEmpty = steps.length === 0;
           const open = _statTraceState.openStages.has(stage.key);
@@ -3183,12 +3259,19 @@
             ? r.stats['攻撃力']
             : statKey === 'ダメ上限'
               ? r.damageLimit
-              : r.stats[statKey];
+              : statKey === '転速'
+                ? r.speed?.latestRecover
+                : r.stats[statKey];
         const mismatch =
           displayed != null && finalVal != null && Math.abs(displayed - finalVal) > 1e-3;
         html += `<div class="trace-final">最終: ${_fmtTraceStat(finalVal)}${mismatch ? '  ⚠ 表示値 ' + _fmtTraceStat(displayed) + ' と不一致' : '  ✓'}</div>`;
         if (statKey === '攻撃力') {
           html += `<div class="trace-final" style="opacity:.7;font-weight:400">攻撃力 min = max × 0.95 = ${_fmtTraceStat(finalVal * 0.95)}</div>`;
+        }
+        if (statKey === '転速') {
+          const cf = r.speed?.cooldownFrames || 0;
+          const sf = r.speed?.setFrames || 0;
+          html += `<div class="trace-final" style="opacity:.7;font-weight:400">cooldown = ceil(6000 / recover) = ${cf}fr (+set ${sf}fr = ${cf + sf}fr)</div>`;
         }
         body.innerHTML = html;
       };

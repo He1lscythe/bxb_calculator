@@ -1,4 +1,4 @@
-# 项目结构 (v2)
+# 项目结构
 
 按解包 `master_tables/` 重建的项目结构、`refactor/unpacking-source` branch (长期独立、永不 merge 回 main)。
 
@@ -39,7 +39,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | 路径 | 用途 |
 |---|---|
 | [scripts/](../scripts/) | 反复使用的脚本 (build / dev server / cleanup 工具) |
-| [scripts/master_to_business/](../scripts/master_to_business/) | v2 build pipeline + utility |
+| [scripts/master_to_business/](../scripts/master_to_business/) | build pipeline + utility |
 | [shared/](../shared/) | JS 共享模块 (跨 viewer 复用) |
 | [js/](../js/) | viewer 业务代码 (5 viewer 各自 list / render / edit) |
 | [pages_src/](../pages_src/) | HTML 源 (5 viewer + `_loading.html` partial) |
@@ -52,6 +52,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [tests/ui/](../tests/ui/) | Playwright e2e 测试 |
 | audit/ | `audit_dead_code.mjs` 输出 (.gitignore 排除) |
 | `../master_tables/` | master_tables (bxb_wiki 仓库 `data/master-tables` branch 的 git worktree、跟 bxb_wiki 同级、`BxB/master_tables/`) |
+| `../data_staging/` | data-staging branch 的常驻 git worktree (2026-06-10 建、跟 bxb_wiki 同级)。revise 同步 / main→data-staging 本地 merge 都在这里做 (`*_revise.json` 在 main gitignored、data-staging tracked — 此 worktree 是它们的 git 归宿) |
 
 ---
 
@@ -67,7 +68,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [audit_dead_code.mjs](../scripts/audit_dead_code.mjs) | dead exports / redundant exports / dead imports / arity mismatch 4 份报告 |
 | [fix_dead_imports.mjs](../scripts/fix_dead_imports.mjs) | 读 audit 报告、batch 删 dead imports (含 `--dry-run` 模式) |
 
-### scripts/master_to_business/ — v2 build pipeline + utility
+### scripts/master_to_business/ — build pipeline + utility
 
 **Build scripts** (master → data、跑一次再跑 idempotent):
 
@@ -101,16 +102,16 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 
 | 模块 | 用途 |
 |---|---|
-| [stats-calc-v2.js](../shared/stats-calc-v2.js) | hensei 7-stage stat 计算 (HP-curve / Break gate / 4 stage apply / DLB cap / Speed / MotionSpeed / enemy mods) |
+| [stats-calc.js](../shared/stats-calc.js) | hensei 7-stage stat 计算 (HP-curve / Break gate / 4 stage apply / DLB cap / Speed / MotionSpeed / enemy mods)、`ctx.traceEnabled` 时返回 dev trace (stat-trace modal 数据源、见 hensei_calc.md) |
 | [hensei-helpers.js](../shared/hensei-helpers.js) | UI 用 lv/觉醒/熟度表 + soulMultiplier / crystalEffectiveValue / crystalMaxBairitu / BlazeGauge 系统 |
 | [revise-core.js](../shared/revise-core.js) | sparse diff core (`computeDiff` 三参含撤回 + `deepApply` + tombstone null) |
 | [save-client.js](../shared/save-client.js) | POST /save 路由 (local `start.py:8787` / Vercel `/api/save.js`) + toast 反馈 |
-| [chara-adapter.js](../shared/chara-adapter.js) / [soul-adapter.js](../shared/soul-adapter.js) / [crystal-adapter.js](../shared/crystal-adapter.js) / [masou-adapter.js](../shared/masou-adapter.js) | v2 master → wiki shape adapter (含 `deepApply(master, revise)` wrap) |
+| [chara-adapter.js](../shared/chara-adapter.js) / [soul-adapter.js](../shared/soul-adapter.js) / [crystal-adapter.js](../shared/crystal-adapter.js) / [masou-adapter.js](../shared/masou-adapter.js) | master → wiki shape adapter (含 `deepApply(master, revise)` wrap) |
 | [image-paths.js](../shared/image-paths.js) | master id → `icons/` 相对路径 + `charaIconStack` 叠层 helper (marriage 框 + element + weapon_type、含 `lazy: 'native'\|'io'` 选项) |
 | [virtual-list.js](../shared/virtual-list.js) | 简单 virtual scrolling、屏幕外 row 不在 DOM、用在 cr-list / bg-list (2063+506 expand all 不卡) |
 | [lazy-img.js](../shared/lazy-img.js) | IntersectionObserver-based img lazy、`setupLazyImg(scrollRoot)` swap `data-src→src`、适用自定义 scroll 容器 (native HTML5 lazy 只看 document viewport、容器 scroll 失效) |
 | [constants.js](../shared/constants.js) | PARAMETER (91) / MATH_TYPE / RANGE / ELEMENT / WEAPON / CONDITION 等 enum |
-| [parameter-class.js](../shared/parameter-class.js) | PARAMETER_CLASS (35 类 v2 効果分类) + PARAMETER_CLASS_LABEL/SHORT |
+| [parameter-class.js](../shared/parameter-class.js) | PARAMETER_CLASS (35 类効果分类) + PARAMETER_CLASS_LABEL/SHORT |
 | [filter-core.js](../shared/filter-core.js) | viewer filter 通用 utility (applySpec / renderSpecFilters / sort / reset) |
 | [chara-spec.js](../shared/chara-spec.js) / [soul-spec.js](../shared/soul-spec.js) / [crystal-spec.js](../shared/crystal-spec.js) / [bg-spec.js](../shared/bg-spec.js) | 4 viewer 各自 filter spec (facet / sort options) |
 | [data-loader.js](../shared/data-loader.js) | fetch data/*.json (cache + loadAll) |
@@ -133,7 +134,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | `js/bg-list.js` / `bg-edit.js` | bladegraph viewer + edit module (用户决策保留、HTML 暂不暴露按钮) |
 | `js/omoide-view.js` | omoide picker modal (hensei + chara 详情页用) |
 
-hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内、调用 `shared/stats-calc-v2.js`。
+hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内、调用 `shared/stats-calc.js`。
 
 ---
 
@@ -161,7 +162,7 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 | `python scripts/start.py` | 本地 dev server (端口 8787) + `POST /save` endpoint 写回 `data/*_revise.json` |
 | `node scripts/serve.js` | 纯静态 dev server (不含 /save) |
 | `node scripts/build.js` | 全量 build (`pages_src/` + fragments → `pages/`)、用户开 `--watch` 模式自动重 build |
-| `npm test` | 135/135 单测 (tests/unit/ + tests/v2/) |
+| `npm test` | 135/135 单测 (tests/unit/) |
 | `npx playwright test` | UI e2e (tests/ui/、5 viewer 渲染 + hensei 装备联动) |
 
 **保存流程**:
@@ -198,5 +199,5 @@ python scripts/master_to_business/gen_motion_table.py
 - 删 `scripts/master_to_business/migrate_old_revise.py` (一次性 init、跑过了)
 - 删 `data/bd_special.json` + `data/bd_special_durations.json` (wiki 时代残留)
 - 删 整个 `draft/` 目录 (12 file、2026-05 早期临时工作)
-- 重写本文件 (v2 化)
+- 重写本文件
 - 新增 `fetch_wiki_acquisition.py` (反复使用、抓 wiki「入手方法」字段 patch crystal/bg)

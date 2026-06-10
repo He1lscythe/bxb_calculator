@@ -1,7 +1,7 @@
 """build_senzai.py — memory_slot_skills.json → data/senzai_table.json
 
 直接透传 master 字段、不做 wiki classify (bunrui/scope/condition 那套)。
-output schema 见 docs/schema_v2.md §3.6。
+output schema 见 docs/schema.md §3.6。
 
 用法: python scripts/master_to_business/build_senzai.py
 """

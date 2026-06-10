@@ -21,7 +21,7 @@ export const closeMasouModal = () => {
   if (m) m.style.display = 'none';
 };
 
-// v2 shape (parameter / math_type / value / value_scaling / effect_text)、跟 master 直读
+// master shape (parameter / math_type / value / value_scaling / effect_text)、跟 master 直读
 const _renderEffectRow = (e) => {
   const param = escHtml(e.parameter || '');
   const math = e.math_type ? `<span class="masou-eff-math">[${escHtml(e.math_type)}]</span>` : '';
@@ -44,7 +44,6 @@ const _renderMasouCard = (m) => min`
     <div class="masou-body">
       <div class="skill-name-row">
         <span class="skill-name">${escHtml(m.name || '')}</span>
-        <span style="font-size:11px;color:var(--text2)">id=${m.id}</span>
       </div>
       <div class="masou-effects">
         ${(m.effects || []).map(_renderEffectRow).join('') || '<div class="om-empty">(effect なし)</div>'}

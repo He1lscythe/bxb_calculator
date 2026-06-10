@@ -1,6 +1,6 @@
-# Schema v2 — 按解包 master_tables 设计
+# Schema — 按解包 master_tables 设计
 
-> **Status**: v2 当前规范 (Phase 0-8 重构完成、npm test 135/135)
+> **Status**: 当前规范 (Phase 0-8 重构完成、npm test 135/135)
 >
 > **Scope**: refactor/unpacking-source branch 限定、永不 merge 回 main
 >
@@ -87,7 +87,7 @@ master 有 case typo (`'all'` lowercase 1 处)、build script normalize 成 `All
 
 ### 2.4 条件字段（非单 enum、结构化字段集）
 
-wiki 5 值 `condition` enum 在 v2 拆成多字段：
+wiki 5 值 `condition` enum 在 master 拆成多字段：
 
 #### HP-curve / hard gate（用 parameter prefix 表达）
 
@@ -360,11 +360,11 @@ block 顺序对 `Multiply` / `Addition` 池**数学等价**（结合律 + 交换
 
 ### 对前端 hensei calc 的 implication
 
-server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复刻 server fold、不读 user_weapon raw、**沿用旧 wiki 等级公式 + master initial_/max_ 字段**（用户决定）。具体公式见 [hensei_calc.md](hensei_calc.md) Base 计算段。
+server fold 公式 docs 完备、但 BH 衰减率未公开。简化：不复刻 server fold、不读 user_weapon raw、**沿用旧 wiki 等级公式 + master initial_/max_ 字段**（用户决定）。具体公式见 [hensei_calc.md](hensei_calc.md) Base 计算段。
 
 ---
 
-## 3.7 hensei 基础属性 base 计算（v2 简化版、Phase 3 前端复刻）
+## 3.7 hensei 基础属性 base 计算（简化版、Phase 3 前端复刻）
 
 ### 输入字段（全部来自 master `weapons.json`、每个 variant 各自查）
 
@@ -439,7 +439,7 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。v2 简化：不复�
 2. 最终 = k × (1 + (当前lv − cap) / (最大觉醒数 × 5) × (满觉醒倍率 − 1))
 ```
 
-### Burning Heart (BH) — v2 简化为二元 toggle
+### Burning Heart (BH) — 简化为二元 toggle
 
 | 状态 | 倍率 |
 |---|---|

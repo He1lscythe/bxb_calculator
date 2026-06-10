@@ -56,7 +56,7 @@ export const RARITY = { 4: 'SS', 3: 'S', 2: 'AA', 1: 'A' };
 //   - CHARA_TAG_COLOR（同 id 的色彩）
 //   - scripts/crawl_chara.py compute_chara_tags()（自動検出 logic）
 //   - tests/test_data_integrity.cjs 的 EXPECTED_TAG_IDS（chara.tags 校验）
-//   - docs/schema_v2.md CHARA_TAG 表
+//   - docs/schema.md CHARA_TAG 表
 export const CHARA_TAG = {
   1: '時止め', // BD 子页面 altema.jp/bxb/tokitomebd
   2: '麻痺', // BD 子页面 altema.jp/bxb/mahibd
@@ -95,7 +95,7 @@ export const CHARA_TAG_COLOR = {
 // ⚠ 新 tag 在下方追加 entry（id 唯一、不重用）。同时改：
 //   - SOUL_TAG_COLOR（同 id 色彩）
 //   - tests/test_data_integrity.cjs EXPECTED_SOUL_TAG_IDS
-//   - docs/schema_v2.md SOUL_TAG 表
+//   - docs/schema.md SOUL_TAG 表
 export const SOUL_TAG = {
   1: '天魔',
   2: '大罪',

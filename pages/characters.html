@@ -272,7 +272,7 @@
       import { state } from '../js/state.js';
       // omoide_templates 已删除 (用户决策: omoide 走 Frida 抓包 chara._omoide_slots、不用 templates)
       import { fmtNum, ctPfx, parseBairituVal, hideLoading } from '../js/utils.js';
-      // Phase 7 Session 1: 删旧 edit module (js/edit.js / save-edit-base.js)、Session 2/3 改用 v2 edit
+      // Phase 7 Session 1: 删旧 edit module (js/edit.js / save-edit-base.js)、Session 2/3 改用新 edit
       import {
         applyFilters,
         initFilterToggles,
@@ -307,11 +307,11 @@
 
       Nav.init();
 
-      // ===== DATA LOAD (v2 schema → wiki adapter) =====
-      // Phase 6 view-only: characters.json / masou.json 来自 master_tables (v2 schema)、
+      // ===== DATA LOAD (master schema → wiki adapter) =====
+      // Phase 6 view-only: characters.json / masou.json 来自 master_tables (master schema)、
       // 通过 adapter 转成旧 wiki shape 喂给 render/filter/utils module、UI 1:1 wiki 不变。
       // characters_extra / characters_revise / masou_extra / masou_revise / omoide_revise /
-      // omoide_templates / senzai_table / characters_check 在 v2 仓库不再维护、fetch 失败 fallback []。
+      // omoide_templates / senzai_table / characters_check 在 仓库不再维护、fetch 失败 fallback []。
       fetch('../data/senzai_table.json')
         .then((r) => (r.ok ? r.json() : {}))
         .then((d) => { state.SENZAI_TABLE = d; })
@@ -336,7 +336,7 @@
                 state.originalData[baseId] = JSON.parse(JSON.stringify(c));
             });
             // masou 数据 deepApply revise + 按 weapon_base_id 分组 (chara edit modal 内嵌 masou_overrides 用)
-            // v2 masou.json 用 weapon_base_id (chara base_id 4位) 关联、不再叫 chara_id
+            // masou.json 用 weapon_base_id (chara base_id 4位) 关联、不再叫 chara_id
             state.allMasou = adaptMasouList(masouArr, masouRev);
             state.masouByChara = {};
             state.masouOriginalData = {};
@@ -401,7 +401,7 @@
         closeMasouModal,
       });
 
-      // 旧 wiki edit/latent inline-onclick handler stub — v2 master 这些字段不可编辑、UI 渲染遗留 onclick 不让报错
+      // 旧 wiki edit/latent inline-onclick handler stub — master 这些字段不可编辑、UI 渲染遗留 onclick 不让报错
       const _noop = () => {};
       Object.assign(window, {
         toggleBunrui: _noop,
