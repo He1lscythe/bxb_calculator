@@ -61,6 +61,55 @@ export const cryLvMax = (cr) =>
 
 export const emblemLvMax = (rarity) => EMBLEM_RARITY_LV_MAX[+rarity] ?? 1;
 
+// hensei ⚙ popover 维度可用性判定 — 跟 button 显示条件同源、避免漂移
+// hasW: master.M_W_max 非 null (revise 走 cr-edit '重量' frac dropdown 填)
+// hasP: master.M_P_max 非 null
+// hasLv: cryLvMax(cr) > 1
+// button 显示 = hasW || hasP || hasLv (任一 true 才有 popover 可开)
+export const crystalDimAvailability = (cr) => {
+  const m = cr?._master || {};
+  return {
+    hasW: m.M_W_max != null,
+    hasP: m.M_P_max != null,
+    hasLv: cr ? cryLvMax(cr) > 1 : false,
+  };
+};
+
+// hensei popover slider 最小刻度。revise 没填 weight_step/purity_step 时 fallback。
+//   weight: 0.1 (默认 0.1g 单位)
+//   purity: 0.01 (默认 1% 内 0.01 细分)
+//   lv: 1 (整数级)
+export const crystalSliderStep = (m, dim) => {
+  if (dim === 'weight') return m?.weight_step ?? 0.1;
+  if (dim === 'purity') return m?.purity_step ?? 0.01;
+  return 1;   // lv 或其他
+};
+
+// crystal master server-fold 字段 clamp:
+//   M_W_max / M_P_max 数值 0-100 (frac '5/1.13' 字符串透传不 clamp)
+//   其他字段透传
+export const clampCrystalMasterField = (field, val) => {
+  if ((field === 'M_W_max' || field === 'M_P_max') && typeof val === 'number' && Number.isFinite(val)) {
+    return Math.max(0, Math.min(100, val));
+  }
+  return val;
+};
+
+// crystal 因子行: 重量/純度 range (min/max) 是否显示
+//   M_W_max null 或 =1 → 无 weight 缩放、min/max 都默认 100、不显示 range
+//   M_P_max 同理
+export const crystalShowWeightRange = (m) => m?.M_W_max != null && m.M_W_max !== 1;
+export const crystalShowPurityRange = (m) => m?.M_P_max != null && m.M_P_max !== 1;
+
+// cr-edit min_weight / min_purity 输入 placeholder
+//   重量/純度 无缩放时、placeholder 显 100 (语义: 值固定 100)
+//   有缩放时、显 0 (语义: range 起点)
+export const crystalMinPlaceholder = (field, m) => {
+  if (field === 'min_weight') return (m?.M_W_max == null || m.M_W_max === 1) ? 100 : 0;
+  if (field === 'min_purity') return (m?.M_P_max == null || m.M_P_max === 1) ? 100 : 0;
+  return null;
+};
+
 // M_L_max / M_W_max / M_P_max 的值可以是 number 或分式字符串 ('5/1.13')
 // 缺省 / 空 / 解析失败 → 1 (不缩放)
 function parseFactor(v) {

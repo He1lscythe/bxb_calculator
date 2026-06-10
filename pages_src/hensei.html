@@ -169,6 +169,8 @@
         LEVEL_MAX_TBL,
         LEVEL_1JUK_TBL,
         cryLvMax,
+        crystalDimAvailability,
+        crystalSliderStep,
         emblemLvMax,
         elementMatchupMult,
         soulAwkMax,
@@ -708,12 +710,8 @@
         const cr = allCrystals.find((x) => x.id === cfg.id);
         if (!cr) return;
         const m = cr._master || {};
-        // 重量/純度 slider: 需 M_W_max/M_P_max != null + weight_step/purity_step 非 null 才显示
-        // (step=null 表示「不可调」、只有 max 值生效、跟 cr-edit 的 dropdown 默认 none 一致)
-        const hasW = m.M_W_max != null && m.weight_step != null;
-        const hasP = m.M_P_max != null && m.purity_step != null;
+        const { hasW, hasP, hasLv } = crystalDimAvailability(cr);
         const maxLv = cryLvMax(cr);
-        const hasLv = maxLv > 1;
         if (!hasW && !hasP && !hasLv) return;
         const minW = m.min_weight ?? 0;
         const maxW = m.max_weight ?? 100;
@@ -724,7 +722,7 @@
               label: '重',
               min: minW,
               max: maxW,
-              step: m.weight_step,
+              step: crystalSliderStep(m, 'weight'),
               value: cfg.weight ?? maxW,
               unit: 'g',
               oninp: `setCrystalDim(${si},${ci},'weight',this.value)`,
@@ -735,7 +733,7 @@
               label: '純',
               min: minP,
               max: maxP,
-              step: m.purity_step,
+              step: crystalSliderStep(m, 'purity'),
               value: cfg.purity ?? maxP,
               unit: '%',
               oninp: `setCrystalDim(${si},${ci},'purity',this.value)`,
@@ -2241,6 +2239,10 @@
       export const openDetailModal = (id, type = 'chara', showSelect = true) => {
         dmCharaId = id;
         dmEntityType = type;
+        const modal = document.getElementById('detail-modal');
+        // 清旧 dm-type class、加新的 (CSS 按 type 控 panel height: chara/soul/masou 默认、crystal 1/3、bg 1/2)
+        modal.classList.remove('dm-chara', 'dm-soul', 'dm-bg', 'dm-crystal', 'dm-masou');
+        modal.classList.add('dm-' + type);
         const btn = document.getElementById('dm-select-btn');
         btn.style.display = showSelect ? '' : 'none';
         const labels = {
@@ -2774,12 +2776,9 @@
             const cfg = t.crystals[ci] ?? null;
             const cid = cfg?.id ?? null;
             const cr = cid ? allCrystals.find((x) => x.id === cid) : null;
-            // ⚙ 按钮：Phase 7 Session 2 — 用 master + revise 的 M_W_max / M_P_max / max_level 判定
-            // (revise 没填 M_W_max / M_P_max → 维度不可调; max_level > 1 → Lv 可调)
-            const m = cr?._master || {};
-            const hasDims = !!(
-              cr && (m.M_W_max != null || m.M_P_max != null || cryLvMax(cr) > 1)
-            );
+            // ⚙ 按钮显示条件: 走 crystalDimAvailability 单一来源、跟 popover 同步
+            const { hasW, hasP, hasLv } = crystalDimAvailability(cr);
+            const hasDims = !!(cr && (hasW || hasP || hasLv));
             const cfgBtn = hasDims
               ? `<button class="crystal-cfg-btn" onclick="openCrystalDimPopover(${i},${ci},this)" title="重量/純度/Lv">⚙</button>`
               : '';

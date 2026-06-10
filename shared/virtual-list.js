@@ -188,13 +188,12 @@ export class VirtualList {
       this.inner.appendChild(node);
       this.visibleNodes.set(e.id, node);
 
-      // 测量真实高度、若跟 cache 不同则 mark relayout
       const real = node.offsetHeight;
-      if (real > 0 && real !== e.height) {
-        this.heights.set(e.id, real);
-        needsRelayout = true;
-        this.onMeasure?.(e.item, real);   // 外部回调更新 kind-wise estimate (scrollbar 稳定)
-      }
+      const had = this.heights.get(e.id);
+      const dec = decideMeasure(real, had, e.height);
+      if (dec.shouldCache) this.heights.set(e.id, real);
+      if (dec.shouldRelayout) needsRelayout = true;
+      if (dec.shouldNotify) this.onMeasure?.(e.item, real);
     }
     if (needsRelayout) {
       // 用 rAF 避免 sync layout thrashing
@@ -214,6 +213,25 @@ export class VirtualList {
     return node;
   }
 }
+
+// row 测量后行为决策 — 纯函数、可单测
+//
+// 关键设计 (2026-06-10 修 bg vlist 高度失准 bug):
+// shouldCache **总是** true (real > 0 时)、不论 real 是否跟 e.height 同。
+//   若 real==e.height (estimate 凑巧准) 不 cache、那 row 后续仍走 estimate; 后面其他 row
+//   不同 kind value 测到、kindH 更新 → 这 row 的 estimate 漂到新 kindH → layout 错位。
+//   例: bg 1023 (4-field 187px) measure 时 kindH=187、real==e.height、旧版不 cache。
+//     随后 bg 1022 (3-field 156px) measure → kindH→156、_computeLayout 给 1023 用 estimate=156、错。
+// shouldRelayout = real ≠ estimate (real==estimate 时 layout 已正确)。
+// shouldNotify = prevCached ≠ real (避免重复触发 onMeasure callback)。
+export const decideMeasure = (real, prevCached, estimate) => {
+  if (!(real > 0)) return { shouldCache: false, shouldRelayout: false, shouldNotify: false };
+  return {
+    shouldCache: true,
+    shouldRelayout: real !== estimate,
+    shouldNotify: prevCached !== real,
+  };
+};
 
 function _findScrollParent(el) {
   // 找真正能滚的祖先 (有 overflow:scroll/auto + 内容确实 > 容器)

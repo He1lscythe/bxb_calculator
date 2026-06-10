@@ -19,7 +19,7 @@ import { submitRevise, showSaveToast } from '../shared/save-client.js';
 import { escHtml, parseBairituVal } from './utils.js';
 import { invalidateRow, registerEditBodyRenderer } from './cr-list.js';
 import { updateReviseBar } from './nav.js';
-import { crystalMaxBairitu } from '../shared/hensei-helpers.js';
+import { crystalMaxBairitu, clampCrystalMasterField, crystalMinPlaceholder } from '../shared/hensei-helpers.js';
 
 // server-fold 字段 + UI label + 默认值 + 数据类型 (int / float / frac / select) + 可选 width 覆盖
 // type='frac' 支持分式字符串 ('5/1.13')、走 parseBairituVal、input type='text'
@@ -66,11 +66,14 @@ const _renderEditBody = (c) => {
   const inputFor = (f) => {
     const v = getVal(f.key);
     const w = f.width || 68;
-    const placeholder = f.def == null ? 'null' : String(f.def);
+    let placeholder = f.def == null ? 'null' : String(f.def);
     // 联动 disabled: dep master field 为 null 时本字段不可改
     const dep = _DEP_KEY[f.key];
     const disabled = dep && (m[dep] == null || m[dep] === '');
     const disAttr = disabled ? ' disabled' : '';
+    // 重量/純度 没缩放 (M_W_max/M_P_max=null 或 =1) 时、min_weight/min_purity placeholder 走 helper (100 而非 0)
+    const minPh = crystalMinPlaceholder(f.key, m);
+    if (minPh != null) placeholder = String(minPh);
     // frac 类型走 text input (允许 '5/1.13' 分式)、其他走 number input
     if (f.type === 'frac') {
       return `<div><div class="field-label">${f.label}</div>` +
@@ -152,7 +155,8 @@ export const cancelEdit = () => {
 // live edit: 修改 editData._master[field]、不立即落盘
 // frac 字段走 parseBairituVal、可存分式 'a/b' 字符串或 number；其他字段走 Number 强转
 // 联动: M_W_max ↔ weight_step、M_P_max ↔ purity_step
-//   重量擦除 → weight_step=null；重量从 null 变非 null + step=null → step=0.1 (purity 同理 → 0.01)
+//   重量擦除 → weight_step=null;重量从 null 变非 null + step=null → step=0.1 (purity 同理 → 0.01)
+// clamp: M_W_max / M_P_max 数值形态强制 0-100 (分式字符串 '5/1.13' 透传不 clamp)
 export const setCrField = (field, val) => {
   if (!state.editData) return;
   state.editData._master = state.editData._master || {};
@@ -161,7 +165,7 @@ export const setCrField = (field, val) => {
   if (val === '' || val == null) {
     m[field] = null;
   } else if (def?.type === 'frac') {
-    m[field] = parseBairituVal(String(val));
+    m[field] = clampCrystalMasterField(field, parseBairituVal(String(val)));
   } else {
     const n = +val;
     m[field] = Number.isFinite(n) ? n : null;
@@ -170,9 +174,10 @@ export const setCrField = (field, val) => {
   else if (field === 'M_P_max') _syncCoupling('purity');
 };
 
-// M_W_max / M_P_max 改动后同步 dependents (step + min/max) + 直接更新 DOM (避免 invalidateRow 失焦)
-//   master null → 全 dependents 擦除 + disabled
+// M_W_max / M_P_max 改动后同步 dependents (step + min/max + min placeholder) + 直接更新 DOM (避免 invalidateRow 失焦)
+//   master null → 全 dependents 擦除 + disabled、min placeholder=100
 //   master 非 null + step 仍 null → step 自动填 (weight=0.1 / purity=0.01)
+//   M_W_max=1 (非 null 但无缩放) → field enabled、min placeholder 仍 100
 const _syncCoupling = (dim) => {
   const m = state.editData?._master;
   if (!m) return;
@@ -193,6 +198,10 @@ const _syncCoupling = (dim) => {
   _updateFieldDOM(stepKey, m[stepKey], masterNull);
   _updateFieldDOM(minKey, m[minKey], masterNull);
   _updateFieldDOM(maxRangeKey, m[maxRangeKey], masterNull);
+  // min 字段 placeholder 实时更新 (M_W_max=null/1 → 100、>1 → 0)
+  const minEl = document.querySelector(`[data-field="${minKey}"]`);
+  const minPh = crystalMinPlaceholder(minKey, m);
+  if (minEl && minPh != null) minEl.placeholder = String(minPh);
 };
 
 const _updateFieldDOM = (key, val, disabled) => {
