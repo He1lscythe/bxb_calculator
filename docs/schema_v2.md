@@ -27,7 +27,8 @@
 - 条件字段拆分: HP-curve prefix (`Vitality_` / `RemHP_`) + Break gate prefix (`Break_`) + 结构化条件字段 (`element_id` / `weapon_type_id` / `conditional_parameter` 等)
 
 server-fold 字段 (非 master 直给、走 `*_revise.json`):
-- crystal: `max_value` / `M_L_max` / `M_W_max` / `M_P_max` / `min_weight` / `max_weight` / `min_purity` / `max_purity`
+- crystal: `max_value` / `M_L_max` / `M_W_max` / `M_P_max` / `min_weight` / `max_weight` / `min_purity` / `max_purity` / `weight_step` / `purity_step` (slider 刻度)、`range` (`'All'` 缺省 Single、build_crystal_aux 扫 desc 同装備セット 注入)、`chara_base_id` (int、build_crystal_aux 扫 name 純真/秘録 + 反查 characters.json 注入、含 41 项 OVERRIDE dict 处理 nickname/缩写/substring 多候选)
+- bg: `chara_base_id` (int、build_bg_aux 扫 desc [Xのみ] + element_id/weapon_type_id=0 注入、共用 OVERRIDE dict)
 - chara skill / masou skill: `value_scaling` (每熟度增量)
 - chara: `tags` (14 种特性 enum)
 

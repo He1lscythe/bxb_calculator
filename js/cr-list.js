@@ -16,7 +16,25 @@ import {
 } from '../shared/parameter-class.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
+import { crystalShowWeightRange, crystalShowPurityRange } from '../shared/hensei-helpers.js';
 import { escHtml, fmt, fmtLarge } from './utils.js';
+import { VirtualList } from '../shared/virtual-list.js';
+
+let _vlist = null;
+
+// kind-wise estimate (测量第一个 row 后更新、未测 row 用 estimate 跟实际更接近、scrollbar 稳定)
+const _kindH = { collapsed: 48, expanded: 420, edit: 520 };
+const _crystalKind = (c) => state.editingId === c.id ? 'edit' : state.expandedIds.has(c.id) ? 'expanded' : 'collapsed';
+
+// 给外部 (cr-edit.js / toggleExpand 等) 调用、通知 row 高度变化
+export const invalidateRow = (id) => {
+  if (_vlist) _vlist.invalidateRow(id);
+};
+
+// cr-edit.js 在 module init 时注册 edit body 渲染器、避免循环 import
+// renderRow 在 state.editingId === c.id 时调它生成 edit form
+let _editBodyRenderer = null;
+export const registerEditBodyRenderer = (fn) => { _editBodyRenderer = fn; };
 
 export const initFilterToggles = () => {
   document.getElementById('f-rarity').innerHTML = renderFilterToggles(
@@ -73,31 +91,19 @@ export const toggleFilter = (key, val, btn) => {
 };
 
 export const expandAll = () => {
+  // virtual scrolling: 只 mark state、行真实 DOM 由 vlist 按 viewport lazy render
   state.filteredCrystals.forEach(function (c) {
-    if (state.editingId === c.id || state.expandedIds.has(c.id)) return;
-    const row = document.getElementById('row-' + c.id);
-    const body = document.getElementById('body-' + c.id);
-    if (row && body) {
-      state.expandedIds.add(c.id);
-      row.classList.add('expanded');
-      body.innerHTML = renderDetailBody(c);
-    }
+    if (state.editingId !== c.id) state.expandedIds.add(c.id);
   });
+  // 重排所有 row 高度 (estimateHeight 内按 expandedIds 给 420px)、vlist 自动 re-render visible
+  if (_vlist) _vlist.setItems(state.filteredCrystals);
 };
 
 export const collapseAll = () => {
-  state.expandedIds.forEach(function (id) {
-    if (state.editingId === id) return;
-    const row = document.getElementById('row-' + id);
-    const body = document.getElementById('body-' + id);
-    if (row && body) {
-      row.classList.remove('expanded');
-      body.innerHTML = '';
-    }
-  });
   state.filteredCrystals.forEach(function (c) {
     if (state.editingId !== c.id) state.expandedIds.delete(c.id);
   });
+  if (_vlist) _vlist.setItems(state.filteredCrystals);
 };
 
 export const resetFilters = () => {
@@ -112,16 +118,12 @@ export const resetFilters = () => {
 };
 
 const crystalElement = (c) => {
-  const e = (c.effects || []).find(function (e) {
-    return (e.scope === 2 || e.scope === 3) && e.element != null;
-  });
+  const e = (c.effects || []).find((e) => e.element != null);
   return e ? e.element : 0;
 };
 
 const crystalWeapon = (c) => {
-  const e = (c.effects || []).find(function (e) {
-    return (e.scope === 2 || e.scope === 3) && e.weapon != null;
-  });
+  const e = (c.effects || []).find((e) => e.weapon != null);
   return e ? e.weapon : 0;
 };
 
@@ -147,7 +149,7 @@ export const applyFilters = () => {
   document.getElementById('crystal-count').textContent = ct;
   const mob = document.getElementById('crystal-count-mob');
   if (mob) mob.textContent = ct;
-  state.expandedIds.clear();
+  // 不清 expandedIds — 保留用户先前 expand 状态、被 filter 掉的 row 不在 DOM、无影响
   state.editingId = null;
   state.editData = null;
   renderList();
@@ -156,18 +158,37 @@ export const applyFilters = () => {
 export const renderList = () => {
   const list = document.getElementById('crystal-list');
   if (!state.filteredCrystals.length) {
+    if (_vlist) { _vlist.destroy(); _vlist = null; }
+    list.style.position = '';
+    list.style.height = '';
     list.innerHTML = '<div class="no-results">該当なし</div>';
     return;
   }
-  list.innerHTML = state.filteredCrystals.map(renderRow).join('');
-  if (state.crystalCheckEnabled) {
-    list.querySelectorAll('.crystal-check-cb').forEach((cb) => {
-      cb.addEventListener('change', (e) => {
-        const id = parseInt(e.target.dataset.id);
-        if (e.target.checked) state.crystalCheck.add(id);
-        else state.crystalCheck.delete(id);
-        saveCrystalCheck();
-      });
+  // virtual scrolling: 屏幕外 row 不在 DOM、img 不 fetch、expand all 不卡
+  if (!_vlist) {
+    list.innerHTML = '';
+    _vlist = new VirtualList({
+      container: list,
+      items: state.filteredCrystals,
+      getRowId: (c) => c.id,
+      renderRow,
+      estimateHeight: (c) => _kindH[_crystalKind(c)],
+      onMeasure: (c, real) => { _kindH[_crystalKind(c)] = real; },
+      gap: 5,
+    });
+  } else {
+    _vlist.setItems(state.filteredCrystals);
+  }
+  // check cb 用 delegation 在 list 上 (因为 row 是动态 add/remove)
+  if (state.crystalCheckEnabled && !list._cbDelegated) {
+    list._cbDelegated = true;
+    list.addEventListener('change', (e) => {
+      const cb = e.target.closest('.crystal-check-cb');
+      if (!cb) return;
+      const id = parseInt(cb.dataset.id);
+      if (cb.checked) state.crystalCheck.add(id);
+      else state.crystalCheck.delete(id);
+      saveCrystalCheck();
     });
   }
 };
@@ -266,8 +287,19 @@ export const renderRowHd = (c) => {
 };
 
 export const renderRow = (c) => {
+  // virtual list: row 动态进出 DOM、body 内容必须按 state 重新生成 (而不是依赖之前 innerHTML 残留)
+  const isEditing = state.editingId === c.id;
+  const expanded = isEditing || state.expandedIds.has(c.id);
+  let bodyHtml = '';
+  let bodyClass = 'crystal-body';
+  if (isEditing && _editBodyRenderer) {
+    bodyHtml = _editBodyRenderer(state.editData || c);
+    bodyClass = 'crystal-edit-body';
+  } else if (expanded) {
+    bodyHtml = renderDetailBody(c);
+  }
   return (
-    '<div class="crystal-row" id="row-' +
+    '<div class="crystal-row' + (expanded ? ' expanded' : '') + '" id="row-' +
     c.id +
     '">' +
     '<div class="crystal-row-hd" onclick="toggleExpand(' +
@@ -275,48 +307,28 @@ export const renderRow = (c) => {
     ')">' +
     renderRowHd(c) +
     '</div>' +
-    '<div class="crystal-body" id="body-' +
+    '<div class="' + bodyClass + '" id="body-' +
     c.id +
-    '"></div>' +
+    '">' + bodyHtml + '</div>' +
     '</div>'
   );
 };
 
 export const toggleExpand = (id) => {
   if (state.editingId === id) return;
-  const row = document.getElementById('row-' + id);
-  const body = document.getElementById('body-' + id);
-  if (!row || !body) return;
-
-  if (state.expandedIds.has(id)) {
-    state.expandedIds.delete(id);
-    row.classList.remove('expanded');
-    body.innerHTML = '';
-  } else {
-    state.expandedIds.add(id);
-    row.classList.add('expanded');
-    const c = state.allCrystals.find(function (x) {
-      return x.id === id;
-    });
-    if (c) body.innerHTML = renderDetailBody(c);
-  }
+  if (state.expandedIds.has(id)) state.expandedIds.delete(id);
+  else state.expandedIds.add(id);
+  // virtual list 内的 renderRow 会按 state.expandedIds 决定 body 内容、invalidateRow 重测高度
+  if (_vlist) _vlist.invalidateRow(id);
 };
 
 export const scopeLabel = (e) => {
-  if (e.scope === 2 || e.scope === 3) {
-    if (e.element) return (ELEMENT[e.element] || '') + '属性のみ';
-    if (e.weapon != null) {
-      const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
-      return (
-        t
-          .map(function (v) {
-            return WEAPON[v] || v;
-          })
-          .join('/') + 'のみ'
-      );
-    }
+  // 直读 element / weapon (adapter 已不再注入 eff.scope)
+  if (e.element) return (ELEMENT[e.element] || '') + '属性のみ';
+  if (e.weapon != null) {
+    const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
+    return t.map((v) => WEAPON[v] || v).join('/') + 'のみ';
   }
-  if (e.scope === 5) return escHtml(e.name || '') + 'のみ';
   return '';
 };
 
@@ -355,8 +367,9 @@ export const renderDetailBody = (c) => {
   const effRows = (c.effects || []).map(renderEffLine).join('');
 
   const fields = [];
-  if (c.effect_text) fields.push(['効果', escHtml(c.effect_text)]);
-  if (effRows) fields.push(['効果量', '<div>' + effRows + '</div>']);
+  // row-hd 已显示 effect tag + bairitu、body 不重复効果量、改放 master.description (in-game 长文)
+  const desc = c._master?.description;
+  if (desc) fields.push(['説明', escHtml(desc).replace(/\n/g, '<br>')]);
   if (c['特殊条件'])
     fields.push([
       '特殊条件',
@@ -366,7 +379,8 @@ export const renderDetailBody = (c) => {
   if (c['上限値']) fields.push(['上限値', escHtml(c['上限値'])]);
   if (c['入手方法']) fields.push(['入手方法', escHtml(c['入手方法'])]);
 
-  // master 7 个 server-fold 字段 (跟 edit mode 一致、缺省 fallback)
+  // master server-fold 字段 (跟 edit mode 一致、缺省 fallback)
+  // 重量 / 純度 没数 (M_W_max/M_P_max=null 或 =1) 时、不显示对应 min/max — 防误导
   const m = c._master || {};
   const factorVal = (v, def) => (v != null ? v : def);
   const factorHtml = (label, v) =>
@@ -375,10 +389,8 @@ export const renderDetailBody = (c) => {
     factorHtml('Lv', factorVal(m.M_L_max, 1)) +
     factorHtml('重量', factorVal(m.M_W_max, 1)) +
     factorHtml('純度', factorVal(m.M_P_max, 1)) +
-    factorHtml('重量 min', factorVal(m.min_weight, 0)) +
-    factorHtml('重量 max', factorVal(m.max_weight, 100)) +
-    factorHtml('純度 min', factorVal(m.min_purity, 0)) +
-    factorHtml('純度 max', factorVal(m.max_purity, 100));
+    (crystalShowWeightRange(m) ? factorHtml('重量 min', factorVal(m.min_weight, 0)) + factorHtml('重量 max', factorVal(m.max_weight, 100)) : '') +
+    (crystalShowPurityRange(m) ? factorHtml('純度 min', factorVal(m.min_purity, 0)) + factorHtml('純度 max', factorVal(m.max_purity, 100)) : '');
   fields.push(['因子', factorRow]);
 
   const rows = fields
@@ -398,7 +410,7 @@ export const renderDetailBody = (c) => {
     rows +
     '</div>' +
     '<div class="body-right">' +
-    '<img class="crystal-icon" src="' +
+    '<img class="crystal-icon" loading="lazy" src="' +
     crystalImageSrc(c) +
     '" onerror="this.style.display=\'none\'" alt="">' +
     '<button class="btn-edit" onclick="enterEditMode(' +

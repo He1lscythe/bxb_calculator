@@ -17,18 +17,20 @@ import {
 import { FilterCore } from '../shared/filter-core.js';
 import { BG_SPEC } from '../shared/bg-spec.js';
 import { escHtml, ctPfx, fmtNum, fmtLarge } from './utils.js';
+import { VirtualList } from '../shared/virtual-list.js';
+
+let _vlist = null;
+const _kindH = { collapsed: 48, expanded: 360 };
+const _bgKind = (c) => state.expandedIds.has(c.id) ? 'expanded' : 'collapsed';
+export const invalidateRow = (id) => { if (_vlist) _vlist.invalidateRow(id); };
 
 const cardElement = (c) => {
-  const e = (c.effects || []).find(function (e) {
-    return e.scope === 3 && e.element != null;
-  });
+  const e = (c.effects || []).find((e) => e.element != null);
   return e ? e.element : 0;
 };
 
 const cardWeapon = (c) => {
-  const e = (c.effects || []).find(function (e) {
-    return e.scope === 3 && e.weapon != null;
-  });
+  const e = (c.effects || []).find((e) => e.weapon != null);
   return e ? e.weapon : 0;
 };
 
@@ -86,30 +88,16 @@ export const toggleFilter = (key, val, btn) => {
 
 export const expandAll = () => {
   state.filteredBG.forEach(function (c) {
-    if (state.editingId === c.id || state.expandedIds.has(c.id)) return;
-    const row = document.getElementById('row-' + c.id);
-    const body = document.getElementById('body-' + c.id);
-    if (row && body) {
-      state.expandedIds.add(c.id);
-      row.classList.add('expanded');
-      body.innerHTML = renderDetailBody(c);
-    }
+    if (state.editingId !== c.id) state.expandedIds.add(c.id);
   });
+  if (_vlist) _vlist.setItems(state.filteredBG);
 };
 
 export const collapseAll = () => {
-  state.expandedIds.forEach(function (id) {
-    if (state.editingId === id) return;
-    const row = document.getElementById('row-' + id);
-    const body = document.getElementById('body-' + id);
-    if (row && body) {
-      row.classList.remove('expanded');
-      body.innerHTML = '';
-    }
-  });
   state.filteredBG.forEach(function (c) {
     if (state.editingId !== c.id) state.expandedIds.delete(c.id);
   });
+  if (_vlist) _vlist.setItems(state.filteredBG);
 };
 
 export const resetFilters = () => {
@@ -137,7 +125,7 @@ export const applyFilters = () => {
   document.getElementById('bg-count').textContent = ct;
   const mob = document.getElementById('bg-count-mob');
   if (mob) mob.textContent = ct;
-  state.expandedIds.clear();
+  // 不清 expandedIds — 保留用户先前 expand 状态、被 filter 掉的 row 不在 DOM、无影响
   state.editingId = null;
   state.editData = null;
   renderList();
@@ -146,18 +134,35 @@ export const applyFilters = () => {
 export const renderList = () => {
   const list = document.getElementById('bg-list');
   if (!state.filteredBG.length) {
+    if (_vlist) { _vlist.destroy(); _vlist = null; }
+    list.style.position = '';
+    list.style.height = '';
     list.innerHTML = '<div class="no-results">該当なし</div>';
     return;
   }
-  list.innerHTML = state.filteredBG.map(renderRow).join('');
-  if (state.bgCheckEnabled) {
-    list.querySelectorAll('.bg-check-cb').forEach((cb) => {
-      cb.addEventListener('change', (e) => {
-        const id = parseInt(e.target.dataset.id);
-        if (e.target.checked) state.bgCheck.add(id);
-        else state.bgCheck.delete(id);
-        saveBgCheck();
-      });
+  if (!_vlist) {
+    list.innerHTML = '';
+    _vlist = new VirtualList({
+      container: list,
+      items: state.filteredBG,
+      getRowId: (c) => c.id,
+      renderRow,
+      estimateHeight: (c) => _kindH[_bgKind(c)],
+      onMeasure: (c, real) => { _kindH[_bgKind(c)] = real; },
+      gap: 5,
+    });
+  } else {
+    _vlist.setItems(state.filteredBG);
+  }
+  if (state.bgCheckEnabled && !list._cbDelegated) {
+    list._cbDelegated = true;
+    list.addEventListener('change', (e) => {
+      const cb = e.target.closest('.bg-check-cb');
+      if (!cb) return;
+      const id = parseInt(cb.dataset.id);
+      if (cb.checked) state.bgCheck.add(id);
+      else state.bgCheck.delete(id);
+      saveBgCheck();
     });
   }
 };
@@ -191,10 +196,7 @@ export const renderRowHd = (c) => {
     cw = cardWeapon(c);
   const eb = ce ? '<span class="badge elem-' + ce + '">' + (ELEMENT[ce] || ce) + '</span>' : '';
   const wb = cw ? '<span class="badge weapon">' + (WEAPON[cw] || cw) + '</span>' : '';
-  const hasScope5 = (c.effects || []).some(function (e) {
-    return e.scope === 5;
-  });
-  const s5b = hasScope5 ? '<span class="badge scope5">キャラ限</span>' : '';
+  const s5b = c.chara_base_id ? '<span class="badge scope5">キャラ限</span>' : '';
   const timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
   // 効果 tag: 用 v2 parameter class (跟 filter 一致)、unique by class id
   const _seen = new Set();
@@ -271,8 +273,10 @@ export const renderRowHd = (c) => {
 };
 
 export const renderRow = (c) => {
+  const expanded = state.expandedIds.has(c.id);
+  const bodyHtml = expanded ? renderDetailBody(c) : '';
   return (
-    '<div class="bg-row" id="row-' +
+    '<div class="bg-row' + (expanded ? ' expanded' : '') + '" id="row-' +
     c.id +
     '">' +
     '<div class="bg-row-hd" onclick="toggleExpand(' +
@@ -282,45 +286,25 @@ export const renderRow = (c) => {
     '</div>' +
     '<div class="bg-body" id="body-' +
     c.id +
-    '"></div>' +
+    '">' + bodyHtml + '</div>' +
     '</div>'
   );
 };
 
 export const toggleExpand = (id) => {
   if (state.editingId === id) return;
-  const row = document.getElementById('row-' + id);
-  const body = document.getElementById('body-' + id);
-  if (!row || !body) return;
-  if (state.expandedIds.has(id)) {
-    state.expandedIds.delete(id);
-    row.classList.remove('expanded');
-    body.innerHTML = '';
-  } else {
-    state.expandedIds.add(id);
-    row.classList.add('expanded');
-    const c = state.allBG.find(function (x) {
-      return x.id === id;
-    });
-    if (c) body.innerHTML = renderDetailBody(c);
-  }
+  if (state.expandedIds.has(id)) state.expandedIds.delete(id);
+  else state.expandedIds.add(id);
+  if (_vlist) _vlist.invalidateRow(id);
 };
 
 export const scopeLabel = (e) => {
-  if (e.scope === 3) {
-    if (e.element) return ELEMENT[e.element] + '属性のみ';
-    if (e.weapon != null) {
-      const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
-      return (
-        t
-          .map(function (v) {
-            return WEAPON[v] || v;
-          })
-          .join('/') + 'のみ'
-      );
-    }
+  // 直读 element / weapon (adapter 已不再注入 eff.scope)
+  if (e.element) return (ELEMENT[e.element] || '') + '属性のみ';
+  if (e.weapon != null) {
+    const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
+    return t.map((v) => WEAPON[v] || v).join('/') + 'のみ';
   }
-  if (e.scope === 5) return escHtml(e.name || '') + 'のみ';
   return '';
 };
 
@@ -374,7 +358,7 @@ export const renderDetailBody = (c) => {
     rows +
     '</div>' +
     '<div class="body-right">' +
-    '<img class="bg-icon" src="../icons/bg/' +
+    '<img class="bg-icon" loading="lazy" src="../icons/bg/' +
     c.id +
     '.png" onerror="this.style.display=\'none\'" alt="">' +
     '</div>'

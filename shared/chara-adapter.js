@@ -9,7 +9,7 @@ import { deepApply } from './revise-core.js';
 //   v2.parameter (#JS 91 项 enum string) → wiki.bunrui (int 1-21)
 //   v2.math_type ('Multiply'/'Addition'/'Repel_Percent') → wiki.calc_type (0/1/2)
 //   (Set / None / NoEffect 整条 skill 跳过、不渲染)
-//   v2.range ('All'/'Single'/'None') + target_element_id/weapon_type_id/weapon_base_id → wiki.scope (0/1/2/5)
+//   v2.range ('All'/'Single'/'None') + target_element_id/weapon_type_id/weapon_base_id 直接透传到 wiki effect (不再编码 scope)
 //   HP-curve prefix (Vitality_/RemHP_/Break_) → wiki.condition (1/2/3) + base parameter
 //   v2.weapon_skills[] → wiki.skills[].effects[] (一 skill 一 effect、不拆 bunrui 数组)
 //   v2.stats.{initial_hp,max_hp,initial_attack,...} → wiki.stats.{initial,max}.{HP,攻撃力,...}
@@ -124,14 +124,6 @@ export const MATH_TYPE_TO_CALC = {
 };
 const _MATH_TYPE_TO_CALC = MATH_TYPE_TO_CALC;
 
-// export 让其他 adapter 复用
-export const RANGE_TO_SCOPE = {
-  All: 1,             // セット全体
-  Single: 0,          // 自身
-  None: 0,
-};
-const _RANGE_TO_SCOPE = RANGE_TO_SCOPE;
-
 // stats: v2 stats.{initial_hp/max_hp/...} → wiki stats.{initial,max}.{HP,攻撃力,...}
 function _v2StatsToWiki(stats, hitCounts) {
   if (!stats) return null;
@@ -222,10 +214,9 @@ function _v2WeaponSkillToWiki(s) {
   const { bunrui, condition } = paramToBunruiAndCondition(s.parameter);
   const calc_type = _MATH_TYPE_TO_CALC[s.math_type];
   if (calc_type == null) return null;
-  let scope = _RANGE_TO_SCOPE[s.range] ?? 0;
   const eff = {
     bunrui: [bunrui],
-    scope,
+    range: s.range,             // master 原 'All' / 'Single' / 'None' 透传
     condition,
     bairitu: s.value,
     bairitu_scaling: s.value_scaling || 0,
@@ -235,18 +226,10 @@ function _v2WeaponSkillToWiki(s) {
   // HitCount (bunrui=7) — 注入 stage 分段字段、让 fmtHitStages 渲染
   // WeaponArtsHitCount (bunrui=21、BD hit) 不分 stage、不注入、走普通 bairitu 路径
   if (bunrui === 7) injectHitStages(eff, s);
-  // 元素 / 武器 / chara 限定
-  if (s.target_element_id) {
-    eff.element = s.target_element_id;
-    eff.scope = 2;
-  }
-  if (s.weapon_type_id) {
-    eff.weapon = s.weapon_type_id;
-    eff.scope = 2;
-  }
-  if (s.weapon_base_id) {
-    eff.scope = 5;
-  }
+  // 元素 / 武器 / chara 限定 — 透传 master 字段
+  if (s.target_element_id) eff.element = s.target_element_id;
+  if (s.weapon_type_id) eff.weapon = s.weapon_type_id;
+  if (s.weapon_base_id) eff.weapon_base_id = s.weapon_base_id;
   return {
     name: s.name || '',
     effect_text: s.description || '',
@@ -269,7 +252,7 @@ function _v2BdSkillToWiki(bd, cost) {
   const v2ParamList = [];
   let bdCalc = 0;
   let bdBairitu = null;
-  let bdScope = 0;
+  let bdRange = null;
   for (const e of (bd.effects || [])) {
     if (e.parameter === 'NoEffect') continue;
     const ctMaybe = _MATH_TYPE_TO_CALC[e.math_type];
@@ -280,12 +263,12 @@ function _v2BdSkillToWiki(bd, cost) {
     if (bdBairitu == null && e.value != null) {
       bdBairitu = e.value;
       bdCalc = ctMaybe;
-      bdScope = _RANGE_TO_SCOPE[e.range] ?? 0;
+      bdRange = e.range;
     }
   }
   const wikiBdEffects = bunruiList.length ? [{
     bunrui: bunruiList,
-    scope: bdScope,
+    range: bdRange,
     condition: 0,
     bairitu: bdBairitu ?? 0,
     calc_type: bdCalc,

@@ -18,11 +18,11 @@
 #f-bunrui .ftog { min-width: 3.4em; text-align: center; }
 .desktop-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 2px; }
 
-#crystal-list { display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto; min-height: 0; padding-bottom: 16px; }
+#crystal-list { display: block; flex: 1; overflow-y: auto; scrollbar-gutter: stable; min-height: 0; padding-bottom: 16px; position: relative; }
 #crystal-list::-webkit-scrollbar { width: 4px; }
 #crystal-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-.crystal-row { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color .15s; flex-shrink: 0; }
+.crystal-row { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color .15s; }
 .crystal-row.expanded { border-color: rgba(91,127,255,.5); }
 .crystal-row-hd { display: flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; transition: background .1s; }
 .crystal-row-hd:hover { background: var(--bg3); }
@@ -33,7 +33,7 @@
 .crystal-check-cb { flex-shrink: 0; width: 14px; height: 14px; margin: 0; cursor: pointer; accent-color: var(--accent); }
 
 /* body: hidden by default, display:flex when expanded */
-.crystal-body { border-top: 1px solid var(--border); padding: 12px 14px; display: none; gap: 14px; }
+.crystal-body { border-top: 1px solid var(--border); padding: 6px 14px; display: none; gap: 14px; }
 .crystal-row.expanded .crystal-body { display: flex; }
 
 .crystal-icon { width: 84px; height: 84px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); background: var(--bg3); }

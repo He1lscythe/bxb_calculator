@@ -17,23 +17,38 @@ import { state } from './cr-state.js';
 import { computeDiff } from '../shared/revise-core.js';
 import { submitRevise, showSaveToast } from '../shared/save-client.js';
 import { escHtml, parseBairituVal } from './utils.js';
-import { renderDetailBody, renderRowHd } from './cr-list.js';
+import { invalidateRow, registerEditBodyRenderer } from './cr-list.js';
 import { updateReviseBar } from './nav.js';
-import { crystalMaxBairitu } from '../shared/hensei-helpers.js';
+import { crystalMaxBairitu, clampCrystalMasterField, crystalMinPlaceholder } from '../shared/hensei-helpers.js';
 
-// 8 个 server-fold 字段 + UI label + 默认值 + 数据类型 (int / float / frac) + 可选 width 覆盖
+// server-fold 字段 + UI label + 默认值 + 数据类型 (int / float / frac / select) + 可选 width 覆盖
 // type='frac' 支持分式字符串 ('5/1.13')、走 parseBairituVal、input type='text'
+// type='select' 走 <select>、value=null 显示 'none'
+const _WEIGHT_STEP_OPTS = [null, 0.1, 1, 10, 20, 25, 50];
+const _PURITY_STEP_OPTS = [null, 0.01, 1, 10, 20, 25, 50];
 const _EDIT_FIELDS = [
-  { key: 'max_value',  label: '最大値',        type: 'float', def: null, width: 100 },
-  { key: 'M_L_max',    label: 'Lv',           type: 'frac',  def: 1 },
-  { key: 'M_W_max',    label: '重量',         type: 'frac',  def: 1 },
-  { key: 'M_P_max',    label: '純度',         type: 'frac',  def: 1 },
-  { key: 'min_weight', label: '重量 min',     type: 'int',   def: 0 },
-  { key: 'max_weight', label: '重量 max',     type: 'int',   def: 100 },
-  { key: 'min_purity', label: '純度 min',     type: 'int',   def: 0 },
-  { key: 'max_purity', label: '純度 max',     type: 'int',   def: 100 },
+  { key: 'max_value',   label: '最大値',     type: 'float',  def: null, width: 100 },
+  { key: 'M_L_max',     label: 'Lv',         type: 'frac',   def: 1 },
+  { key: 'M_W_max',     label: '重量',       type: 'frac',   def: 1 },
+  { key: 'M_P_max',     label: '純度',       type: 'frac',   def: 1 },
+  { key: 'min_weight',  label: '重量 min',   type: 'int',    def: 0 },
+  { key: 'max_weight',  label: '重量 max',   type: 'int',    def: 100 },
+  { key: 'min_purity',  label: '純度 min',   type: 'int',    def: 0 },
+  { key: 'max_purity',  label: '純度 max',   type: 'int',    def: 100 },
+  { key: 'weight_step', label: 'W step',     type: 'select', def: null, opts: _WEIGHT_STEP_OPTS, width: 70 },
+  { key: 'purity_step', label: 'P step',     type: 'select', def: null, opts: _PURITY_STEP_OPTS, width: 70 },
 ];
 const _FIELD_BY_KEY = Object.fromEntries(_EDIT_FIELDS.map((f) => [f.key, f]));
+// 联动依赖图: dependent field → master field 必须 != null 才 enabled
+// M_W_max null → weight_step/min_weight/max_weight 全 disabled + 擦除；M_P_max 同理
+const _DEP_KEY = {
+  weight_step: 'M_W_max',
+  min_weight:  'M_W_max',
+  max_weight:  'M_W_max',
+  purity_step: 'M_P_max',
+  min_purity:  'M_P_max',
+  max_purity:  'M_P_max',
+};
 
 // 旧 wiki cr-edit 视觉 pattern (2026-06-08 用户决策):
 // - 顶部 .edit-actions (保存 / キャンセル)
@@ -51,17 +66,36 @@ const _renderEditBody = (c) => {
   const inputFor = (f) => {
     const v = getVal(f.key);
     const w = f.width || 68;
-    const placeholder = f.def == null ? 'null' : String(f.def);
+    let placeholder = f.def == null ? 'null' : String(f.def);
+    // 联动 disabled: dep master field 为 null 时本字段不可改
+    const dep = _DEP_KEY[f.key];
+    const disabled = dep && (m[dep] == null || m[dep] === '');
+    const disAttr = disabled ? ' disabled' : '';
+    // 重量/純度 没缩放 (M_W_max/M_P_max=null 或 =1) 时、min_weight/min_purity placeholder 走 helper (100 而非 0)
+    const minPh = crystalMinPlaceholder(f.key, m);
+    if (minPh != null) placeholder = String(minPh);
     // frac 类型走 text input (允许 '5/1.13' 分式)、其他走 number input
     if (f.type === 'frac') {
       return `<div><div class="field-label">${f.label}</div>` +
-        `<input type="text" class="edit-num-sm" style="width:${w}px" value="${escHtml(String(v))}" ` +
-        `placeholder="${placeholder}" oninput="setCrField('${f.key}',this.value)"></div>`;
+        `<input type="text" data-field="${f.key}" class="edit-num-sm" style="width:${w}px" value="${escHtml(String(v))}" ` +
+        `placeholder="${placeholder}"${disAttr} oninput="setCrField('${f.key}',this.value)"></div>`;
+    }
+    // select 类型 (weight_step / purity_step)
+    if (f.type === 'select') {
+      const cur = m[f.key];
+      const opts = f.opts.map((o) => {
+        const ov = o == null ? '' : String(o);
+        const lbl = o == null ? 'none' : String(o);
+        const sel = ((cur == null || cur === '') && o == null) || cur === o ? ' selected' : '';
+        return `<option value="${ov}"${sel}>${lbl}</option>`;
+      }).join('');
+      return `<div><div class="field-label">${f.label}</div>` +
+        `<select data-field="${f.key}" class="edit-num-sm" style="width:${w}px"${disAttr} onchange="setCrField('${f.key}',this.value)">${opts}</select></div>`;
     }
     const step = f.type === 'int' ? '1' : 'any';
     return `<div><div class="field-label">${f.label}</div>` +
-      `<input type="number" class="edit-num-sm" style="width:${w}px" step="${step}" value="${v}" ` +
-      `placeholder="${placeholder}" oninput="setCrField('${f.key}',this.value)"></div>`;
+      `<input type="number" data-field="${f.key}" class="edit-num-sm" style="width:${w}px" step="${step}" value="${v}" ` +
+      `placeholder="${placeholder}"${disAttr} oninput="setCrField('${f.key}',this.value)"></div>`;
   };
 
   // 只读 effect_text / 特殊条件 (旧 wiki pattern、master 不可编辑直接展示)
@@ -98,18 +132,16 @@ const _renderEditBody = (c) => {
     fieldsSec;
 };
 
+// 注册给 cr-list.js renderRow 用 — virtual list 重 build node 时按 state.editingId 决定渲染 edit body
+registerEditBodyRenderer(_renderEditBody);
+
 export const enterEditMode = (id) => {
   if (state.editingId !== null && state.editingId !== id) cancelEdit();
   const c = state.allCrystals.find((x) => x.id === id);
   if (!c) return;
   state.editData = JSON.parse(JSON.stringify(c));
   state.editingId = id;
-  const row = document.getElementById('row-' + id);
-  const body = document.getElementById('body-' + id);
-  if (!row || !body) return;
-  row.classList.add('expanded');
-  body.className = 'crystal-edit-body';
-  body.innerHTML = _renderEditBody(state.editData);
+  invalidateRow(id);   // renderRow 看 editingId 自动渲染 edit body + 重测高度
 };
 
 export const cancelEdit = () => {
@@ -117,30 +149,66 @@ export const cancelEdit = () => {
   const id = state.editingId;
   state.editingId = null;
   state.editData = null;
-  const c = state.allCrystals.find((x) => x.id === id);
-  const body = document.getElementById('body-' + id);
-  if (body && c) {
-    body.className = 'crystal-body';
-    body.innerHTML = renderDetailBody(c);
-  }
+  invalidateRow(id);
 };
 
 // live edit: 修改 editData._master[field]、不立即落盘
 // frac 字段走 parseBairituVal、可存分式 'a/b' 字符串或 number；其他字段走 Number 强转
+// 联动: M_W_max ↔ weight_step、M_P_max ↔ purity_step
+//   重量擦除 → weight_step=null;重量从 null 变非 null + step=null → step=0.1 (purity 同理 → 0.01)
+// clamp: M_W_max / M_P_max 数值形态强制 0-100 (分式字符串 '5/1.13' 透传不 clamp)
 export const setCrField = (field, val) => {
   if (!state.editData) return;
   state.editData._master = state.editData._master || {};
-  if (val === '' || val == null) {
-    state.editData._master[field] = null;
-    return;
-  }
+  const m = state.editData._master;
   const def = _FIELD_BY_KEY[field];
-  if (def?.type === 'frac') {
-    state.editData._master[field] = parseBairituVal(String(val));
-    return;
+  if (val === '' || val == null) {
+    m[field] = null;
+  } else if (def?.type === 'frac') {
+    m[field] = clampCrystalMasterField(field, parseBairituVal(String(val)));
+  } else {
+    const n = +val;
+    m[field] = Number.isFinite(n) ? n : null;
   }
-  const n = +val;
-  state.editData._master[field] = Number.isFinite(n) ? n : null;
+  if (field === 'M_W_max') _syncCoupling('weight');
+  else if (field === 'M_P_max') _syncCoupling('purity');
+};
+
+// M_W_max / M_P_max 改动后同步 dependents (step + min/max + min placeholder) + 直接更新 DOM (避免 invalidateRow 失焦)
+//   master null → 全 dependents 擦除 + disabled、min placeholder=100
+//   master 非 null + step 仍 null → step 自动填 (weight=0.1 / purity=0.01)
+//   M_W_max=1 (非 null 但无缩放) → field enabled、min placeholder 仍 100
+const _syncCoupling = (dim) => {
+  const m = state.editData?._master;
+  if (!m) return;
+  const isW = dim === 'weight';
+  const maxKey = isW ? 'M_W_max' : 'M_P_max';
+  const stepKey = isW ? 'weight_step' : 'purity_step';
+  const stepAuto = isW ? 0.1 : 0.01;
+  const minKey = isW ? 'min_weight' : 'min_purity';
+  const maxRangeKey = isW ? 'max_weight' : 'max_purity';
+  const masterNull = m[maxKey] == null;
+  if (masterNull) {
+    m[stepKey] = null;
+    m[minKey] = null;
+    m[maxRangeKey] = null;
+  } else if (m[stepKey] == null) {
+    m[stepKey] = stepAuto;
+  }
+  _updateFieldDOM(stepKey, m[stepKey], masterNull);
+  _updateFieldDOM(minKey, m[minKey], masterNull);
+  _updateFieldDOM(maxRangeKey, m[maxRangeKey], masterNull);
+  // min 字段 placeholder 实时更新 (M_W_max=null/1 → 100、>1 → 0)
+  const minEl = document.querySelector(`[data-field="${minKey}"]`);
+  const minPh = crystalMinPlaceholder(minKey, m);
+  if (minEl && minPh != null) minEl.placeholder = String(minPh);
+};
+
+const _updateFieldDOM = (key, val, disabled) => {
+  const el = document.querySelector(`[data-field="${key}"]`);
+  if (!el) return;
+  el.disabled = disabled;
+  el.value = val == null ? '' : String(val);
 };
 
 // session save: 算 diff、入 reviseData、更新 allCrystals 让 viewer 即时反映
@@ -194,20 +262,10 @@ export const saveEdit = () => {
     if (eff0) eff0.bairitu = crystalMaxBairitu(state.allCrystals[idx]._master);
   }
 
-  // 退出 edit mode + 重 render detail body
+  // 退出 edit mode — renderRow 看 editingId=null 自动转 detail body + 重测高度
   state.editingId = null;
   state.editData = null;
-  const c = state.allCrystals[idx];
-  const row = document.getElementById('row-' + id);
-  const body = document.getElementById('body-' + id);
-  if (row) {
-    const hd = row.querySelector('.crystal-row-hd');
-    if (hd) hd.innerHTML = renderRowHd(c);
-  }
-  if (body) {
-    body.className = 'crystal-body';
-    body.innerHTML = renderDetailBody(c);
-  }
+  invalidateRow(id);
   updateReviseBar();
 };
 
@@ -226,18 +284,8 @@ export const cancelRevise = (id) => {
     // 同步 wiki shape effects[0].bairitu (display 用)、跟 saveEdit 同 sync
     const eff0 = state.allCrystals[idx].effects?.[0];
     if (eff0) eff0.bairitu = crystalMaxBairitu(state.allCrystals[idx]._master);
-    const c = state.allCrystals[idx];
-    const row = document.getElementById('row-' + id);
-    const body = document.getElementById('body-' + id);
-    if (row) {
-      const hd = row.querySelector('.crystal-row-hd');
-      if (hd) hd.innerHTML = renderRowHd(c);
-    }
-    if (body && !state.editingId) {
-      body.className = 'crystal-body';
-      body.innerHTML = renderDetailBody(c);
-    }
   }
+  invalidateRow(id);
   updateReviseBar();
 };
 

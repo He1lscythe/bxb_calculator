@@ -181,9 +181,9 @@
       } from '../js/utils.js';
       import { deepApply } from '../shared/revise-core.js';
       // omoide_templates 已删除 (用户决策: omoide 数据走 Frida 抓包、走 chara._omoide_slots、不用 templates)
-      import { enforceScopeConstraints } from '../shared/effect-constraints.js';
       import { adaptCharaList } from '../shared/chara-adapter.js';
       import { charaIconStack } from '../shared/image-paths.js';
+      import { setupLazyImg } from '../shared/lazy-img.js';
       import { adaptSoulList } from '../shared/soul-adapter.js';
       import { adaptCrystalList } from '../shared/crystal-adapter.js';
       import { adaptMasouList } from '../shared/masou-adapter.js';
@@ -209,6 +209,8 @@
         LEVEL_MAX_TBL,
         LEVEL_1JUK_TBL,
         cryLvMax,
+        crystalDimAvailability,
+        crystalSliderStep,
         emblemLvMax,
         elementMatchupMult,
         soulAwkMax,
@@ -221,7 +223,7 @@
         parseAff as _parseAff,
         BLAZE_GAUGE_POINTS_BASE_A,
       } from '../shared/hensei-helpers.js';
-      // weight_step / purity_step master 永无值、Phase 7 edit 才补
+      // weight_step / purity_step: master 不含、revise 注入 (走 cr-edit dropdown)、缺省 null = slider 不显示
       const _parseScaling = () => 0;
       const _crystalEffectiveBairitu = (cr, cfg) => crystalEffectiveValue(cr, cfg);
 
@@ -363,9 +365,6 @@
             allCrystals = cr
               .filter((c) => !c.tombstone)
               .sort((a, b) => b.rarity - a.rarity || b.id - a.id);
-            // base+revise 合并后强制 effect scope 约束（防止 element/type 与 scope=0/1 不一致）
-            enforceScopeConstraints(allBGs);
-            enforceScopeConstraints(allCrystals);
             allMasou = Array.isArray(ms) ? ms : [];
             masouByChara = {};
             allMasou.forEach((m) => {
@@ -453,18 +452,15 @@
             : '';
         const parts = [elStr, tyStr].filter(Boolean);
         const lim = parts.join('·');
-        if (ef.scope === 0) return '<span class="scope-tag scope-self">自</span>';
-        if (ef.scope === 1) return '<span class="scope-tag scope-all">全</span>';
-        if (ef.scope === 2) return '<span class="scope-tag scope-lim">' + (lim || '限') + '</span>';
-        if (ef.scope === 3)
-          return '<span class="scope-tag scope-equip-s">' + (lim || '装') + '·自</span>';
-        if (ef.scope === 4)
-          return '<span class="scope-tag scope-equip-a">' + (lim || '装') + '·全</span>';
-        if (ef.scope === 5) {
-          const nm = ef.name ? escHtml(ef.name).slice(0, 12) : '限';
-          return '<span class="scope-tag scope-lim">' + nm + '限定</span>';
+        // 直读 master range / element / weapon / weapon_base_id (adapter 已不再注入 eff.scope)
+        if (ef.weapon_base_id) {
+          return '<span class="scope-tag scope-lim">キャラ限</span>';
         }
-        return '';
+        if (ef.element != null || ef.weapon != null) {
+          return '<span class="scope-tag scope-lim">' + (lim || '限') + '</span>';
+        }
+        if (ef.range === 'All') return '<span class="scope-tag scope-all">全</span>';
+        return '<span class="scope-tag scope-self">自</span>';
       };
       export const renderEfRow = (ef) => {
         const btags = _efBadges(ef);
@@ -754,12 +750,8 @@
         const cr = allCrystals.find((x) => x.id === cfg.id);
         if (!cr) return;
         const m = cr._master || {};
-        // Phase 7 Session 2: 改用 master + revise 注入的 M_W_max / M_P_max / max_level 判定
-        // (取代旧 wiki weight_step / purity_step / effects[].lv_delta 字段)
-        const hasW = m.M_W_max != null;
-        const hasP = m.M_P_max != null;
+        const { hasW, hasP, hasLv } = crystalDimAvailability(cr);
         const maxLv = cryLvMax(cr);
-        const hasLv = maxLv > 1;
         if (!hasW && !hasP && !hasLv) return;
         const minW = m.min_weight ?? 0;
         const maxW = m.max_weight ?? 100;
@@ -770,7 +762,7 @@
               label: '重',
               min: minW,
               max: maxW,
-              step: 1,
+              step: crystalSliderStep(m, 'weight'),
               value: cfg.weight ?? maxW,
               unit: 'g',
               oninp: `setCrystalDim(${si},${ci},'weight',this.value)`,
@@ -781,7 +773,7 @@
               label: '純',
               min: minP,
               max: maxP,
-              step: 1,
+              step: crystalSliderStep(m, 'purity'),
               value: cfg.purity ?? maxP,
               unit: '%',
               oninp: `setCrystalDim(${si},${ci},'purity',this.value)`,
@@ -1264,7 +1256,7 @@
             const lvMax = em ? emblemLvMax(em.rarity) : 1;
             emblemHtml += `<div class="emblem-slot-wrap" onclick="openEmblemModal(${s})">
         <div class="emblem-thumb-wrap">
-          <img class="emblem-thumb" src="../${em && em.image ? em.image : 'icons/emblem/' + slot.id + '.png'}" onerror="this.style.opacity='.3'" title="${escHtml(em ? em.name : '')}" alt="">
+          <img class="emblem-thumb" loading="lazy" src="../${em && em.image ? em.image : 'icons/emblem/' + slot.id + '.png'}" onerror="this.style.opacity='.3'" title="${escHtml(em ? em.name : '')}" alt="">
           <button class="emblem-rm" onclick="event.stopPropagation();setEmblem(${s},'')" title="外す">×</button>
         </div>
         <div class="emblem-slot-meta" onclick="event.stopPropagation()">
@@ -1448,7 +1440,7 @@
             ? '<span class="badge weapon" style="background:rgba(91,127,255,.18);color:#7b9fff;border-color:rgba(91,127,255,.35)">GB限定</span>'
             : '';
           html += `<div class="em-item em-item-bg${cur}"${dim} onclick="selectEmblem(${em.id})">
-      <img class="em-icon" src="../${em.image || 'icons/emblem/' + em.id + '.png'}" onerror="this.style.visibility='hidden'" alt="">
+      <img class="em-icon" data-src="../${em.image || 'icons/emblem/' + em.id + '.png'}" onerror="this.style.visibility='hidden'" alt="">
       <div class="em-bg-body">
         <div class="em-bg-header">
           <span class="badge weapon">★${em.rarity || 1}</span>
@@ -1460,6 +1452,7 @@
     </div>`;
         }
         list.innerHTML = html;
+        setupLazyImg(list);
       };
       export const toggleEmblemRarity = (r) => {
         if (emblemModalFilter.rarity.has(r)) emblemModalFilter.rarity.delete(r);
@@ -2170,7 +2163,7 @@
               const rLabel = RARITY[c.rarity] || c.rarity || '?';
               return min`
         <div class="em-item em-item-bg${cur ? ' active' : ''}" onclick="selectEM(${c.id})">
-          ${charaIconStack({ variantId: c.id, name: c.name, elementId: c.element, weaponTypeId: c.weapon, marriageLevel: 2, className: 'em-thumb' })}
+          ${charaIconStack({ variantId: c.id, name: c.name, elementId: c.element, weaponTypeId: c.weapon, marriageLevel: 2, className: 'em-thumb', lazy: 'io' })}
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="badge ${rLabel}" style="flex-shrink:0">${rLabel}</span>
@@ -2196,7 +2189,7 @@
                 .join('');
               return min`
         <div class="em-item em-item-bg${cur ? ' active' : ''}" onclick="selectEM(${s.id})">
-          <img class="em-icon soul" src="../icons/soul/${s.id}.png" onerror="this.style.visibility='hidden'" alt="">
+          <img class="em-icon soul" data-src="../icons/soul/${s.id}.png" onerror="this.style.visibility='hidden'" alt="">
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="badge weapon" style="flex-shrink:0">★${s.rarity}</span>
@@ -2214,7 +2207,7 @@
               const cur = team[emSlot]?.bg === b.id;
               return min`
         <div class="em-item em-item-bg${cur ? ' active' : ''}" onclick="selectEM(${b.id})">
-          <img class="em-icon" src="../icons/bg/${b.id}.png" onerror="this.style.visibility='hidden'" alt="">
+          <img class="em-icon" data-src="../icons/bg/${b.id}.png" onerror="this.style.visibility='hidden'" alt="">
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="badge weapon" style="flex-shrink:0">★${b.rarity}</span>
@@ -2232,7 +2225,7 @@
               const cur = team[emSlot]?.crystals[emCi]?.id === c.id;
               return min`
         <div class="em-item em-item-bg${cur ? ' active' : ''}" onclick="selectEM(${c.id})">
-          <img class="em-icon" src="${crystalImageSrc(c)}" onerror="this.style.visibility='hidden'" alt="">
+          <img class="em-icon" data-src="${crystalImageSrc(c)}" onerror="this.style.visibility='hidden'" alt="">
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="badge weapon" style="flex-shrink:0">★${c.rarity}</span>
@@ -2250,7 +2243,7 @@
               const cur = team[emSlot]?.masou === m.id;
               return min`
         <div class="em-item em-item-bg${cur ? ' active' : ''}" onclick="selectEM(${m.id})">
-          <img class="em-icon" src="${escHtml(m.image || '')}" onerror="this.style.visibility='hidden'" alt="">
+          <img class="em-icon" data-src="${escHtml(m.image || '')}" onerror="this.style.visibility='hidden'" alt="">
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="em-bg-name">${escHtml(m.name || '')}</span>
@@ -2263,6 +2256,8 @@
             .join('');
         }
         list.innerHTML = h;
+        // IO-based lazy: list 自己 scroll、native lazy 失效、按内部 scroll 进度按需 fetch
+        setupLazyImg(list);
       };
 
       export const selectEM = (id) => {
@@ -2284,6 +2279,10 @@
       export const openDetailModal = (id, type = 'chara', showSelect = true) => {
         dmCharaId = id;
         dmEntityType = type;
+        const modal = document.getElementById('detail-modal');
+        // 清旧 dm-type class、加新的 (CSS 按 type 控 panel height: chara/soul/masou 默认、crystal 1/3、bg 1/2)
+        modal.classList.remove('dm-chara', 'dm-soul', 'dm-bg', 'dm-crystal', 'dm-masou');
+        modal.classList.add('dm-' + type);
         const btn = document.getElementById('dm-select-btn');
         btn.style.display = showSelect ? '' : 'none';
         const labels = {
@@ -2430,7 +2429,7 @@
           .join('');
         return min`
     <div class="dm-chara-header">
-      <img src="../icons/soul/${s.id}.png" onerror="this.style.display='none'"
+      <img loading="lazy" src="../icons/soul/${s.id}.png" onerror="this.style.display='none'"
         style="width:80px;height:auto;border-radius:6px;flex-shrink:0" alt="">
       <div class="dm-chara-info">
         <div class="dm-chara-title">${escHtml(s.name)}</div>
@@ -2450,14 +2449,12 @@
 
       // ===== BG DETAIL =====
       export const _bgScopeLabel = (e) => {
-        if (e.scope === 3) {
-          if (e.element != null) return (ELEMENT[e.element] || e.element) + '属性のみ';
-          if (e.weapon != null) {
-            const t = [].concat(e.weapon);
-            return t.map((v) => WEAPON[v] || v).join('/') + 'のみ';
-          }
+        // 直读 element / weapon (adapter 已不再注入 eff.scope)
+        if (e.element != null) return (ELEMENT[e.element] || e.element) + '属性のみ';
+        if (e.weapon != null) {
+          const t = [].concat(e.weapon);
+          return t.map((v) => WEAPON[v] || v).join('/') + 'のみ';
         }
-        if (e.scope === 5) return (e.name || '') + 'のみ';
         return '';
       };
       export const renderDMBg = (b) => {
@@ -2492,7 +2489,7 @@
     <div class="bgdm-layout">
       <div class="bgdm-fields">${fieldHtml || '<div style="color:var(--text2)">データなし</div>'}</div>
       <div class="bgdm-img-wrap">
-        <img src="../icons/bg/${b.id}.png" onerror="this.style.display='none'" alt="">
+        <img loading="lazy" src="../icons/bg/${b.id}.png" onerror="this.style.display='none'" alt="">
         <div class="bgdm-img-rarity">★${b.rarity}</div>
       </div>
     </div>`;
@@ -2529,7 +2526,7 @@
         return min`
     <div class="bgdm-layout">
       <div class="bgdm-fields">${fieldHtml || '<div style="color:var(--text2)">データなし</div>'}</div>
-      ${m.image ? `<div class="bgdm-img-wrap"><img src="${escHtml(m.image)}" onerror="this.style.display='none'" alt=""></div>` : ''}
+      ${m.image ? `<div class="bgdm-img-wrap"><img loading="lazy" src="${escHtml(m.image)}" onerror="this.style.display='none'" alt=""></div>` : ''}
     </div>`;
       };
 
@@ -2572,7 +2569,7 @@
     <div class="bgdm-layout">
       <div class="bgdm-fields">${fieldHtml || '<div style="color:var(--text2)">データなし</div>'}</div>
       <div style="flex-shrink:0">
-        <img src="${crystalImageSrc(c)}" onerror="this.style.display='none'"
+        <img loading="lazy" src="${crystalImageSrc(c)}" onerror="this.style.display='none'"
           style="width:84px;height:84px;border-radius:8px;object-fit:cover;display:block;border:1px solid var(--border)" alt="">
         <div style="margin-top:8px;font-size:12px;font-weight:700;text-align:center;color:var(--text2)">★${c.rarity}</div>
       </div>
@@ -2694,17 +2691,20 @@
         let tags = '';
         (s.effects || []).forEach((e) => {
           tags += _efBadges(e);
-          if (e.scope === 0) tags += `<span class="scope-tag scope-self">自</span>`;
-          else if (e.scope === 1) tags += `<span class="scope-tag scope-all">全</span>`;
-          else if (e.scope === 2 || e.scope === 3 || e.scope === 4) {
+          // 直读 master range / element / weapon / weapon_base_id (adapter 已不再注入 eff.scope)
+          if (e.weapon_base_id) {
+            tags += `<span class="scope-tag scope-lim">キャラ限</span>`;
+          } else if (e.element != null || e.weapon != null) {
             const lim =
               e.element != null
                 ? ELEMENT[[].concat(e.element)[0]] || '限'
-                : e.weapon != null
-                  ? WEAPON[[].concat(e.weapon)[0]] || '限'
-                  : '限';
+                : WEAPON[[].concat(e.weapon)[0]] || '限';
             tags += `<span class="scope-tag scope-lim">${lim}</span>`;
-          } else if (e.scope === 5) tags += `<span class="scope-tag scope-lim">限</span>`;
+          } else if (e.range === 'All') {
+            tags += `<span class="scope-tag scope-all">全</span>`;
+          } else {
+            tags += `<span class="scope-tag scope-self">自</span>`;
+          }
           if (e.condition)
             tags += `<span class="cond-tag cond-${e.condition}">${CONDITION[e.condition] || ''}</span>`;
         });
@@ -2804,10 +2804,10 @@
           ? charaIconStack({ variantId: chara.id, name: chara.name, elementId: chara.element, weaponTypeId: chara.weapon, marriageLevel: 2, className: 'equip-thumb' })
           : `<div class="equip-icon-empty"></div>`;
         const soulIcon = soul
-          ? `<img class="equip-icon soul-img" src="../icons/soul/${soul.id}.png" onerror="this.style.visibility='hidden'" alt="">`
+          ? `<img class="equip-icon soul-img" loading="lazy" src="../icons/soul/${soul.id}.png" onerror="this.style.visibility='hidden'" alt="">`
           : `<div class="equip-icon-empty soul-img"></div>`;
         const bgIcon = bg
-          ? `<img class="equip-icon bg-img" src="../icons/bg/${bg.id}.png" onerror="this.style.visibility='hidden'" alt="">`
+          ? `<img class="equip-icon bg-img" loading="lazy" src="../icons/bg/${bg.id}.png" onerror="this.style.visibility='hidden'" alt="">`
           : `<div class="equip-icon-empty bg-img"></div>`;
 
         let crystalHtml = '';
@@ -2816,19 +2816,16 @@
             const cfg = t.crystals[ci] ?? null;
             const cid = cfg?.id ?? null;
             const cr = cid ? allCrystals.find((x) => x.id === cid) : null;
-            // ⚙ 按钮：Phase 7 Session 2 — 用 master + revise 的 M_W_max / M_P_max / max_level 判定
-            // (revise 没填 M_W_max / M_P_max → 维度不可调; max_level > 1 → Lv 可调)
-            const m = cr?._master || {};
-            const hasDims = !!(
-              cr && (m.M_W_max != null || m.M_P_max != null || cryLvMax(cr) > 1)
-            );
+            // ⚙ 按钮显示条件: 走 crystalDimAvailability 单一来源、跟 popover 同步
+            const { hasW, hasP, hasLv } = crystalDimAvailability(cr);
+            const hasDims = !!(cr && (hasW || hasP || hasLv));
             const cfgBtn = hasDims
               ? `<button class="crystal-cfg-btn" onclick="openCrystalDimPopover(${i},${ci},this)" title="重量/純度/Lv">⚙</button>`
               : '';
             return cr
               ? `<div class="crystal-slot-wrap">
             <div class="crystal-thumb-wrap">
-              <img class="crystal-thumb" src="${crystalImageSrc(cr)}"
+              <img class="crystal-thumb" loading="lazy" src="${crystalImageSrc(cr)}"
                 onerror="this.style.visibility='hidden'" title="${escHtml(cr.name)}"
                 onclick="openEM(${i},'crystal',${ci})">
               <button class="crystal-rm" onclick="setCrystal(${i},${ci},null)" title="外す">×</button>
@@ -2855,7 +2852,7 @@
         const bgPanel = renderBgPanel(bg);
         const masouPanel = renderMasouPanel(masou);
         const masouIcon = masou
-          ? `<img class="equip-icon" src="${escHtml(masou.image || '')}" onerror="this.style.visibility='hidden'" alt="">`
+          ? `<img class="equip-icon" loading="lazy" src="${escHtml(masou.image || '')}" onerror="this.style.visibility='hidden'" alt="">`
           : `<div class="equip-icon-empty"></div>`;
         const masouSection =
           chara && charaMasouList.length
