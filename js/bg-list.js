@@ -25,16 +25,12 @@ const _bgKind = (c) => state.expandedIds.has(c.id) ? 'expanded' : 'collapsed';
 export const invalidateRow = (id) => { if (_vlist) _vlist.invalidateRow(id); };
 
 const cardElement = (c) => {
-  const e = (c.effects || []).find(function (e) {
-    return e.scope === 3 && e.element != null;
-  });
+  const e = (c.effects || []).find((e) => e.element != null);
   return e ? e.element : 0;
 };
 
 const cardWeapon = (c) => {
-  const e = (c.effects || []).find(function (e) {
-    return e.scope === 3 && e.weapon != null;
-  });
+  const e = (c.effects || []).find((e) => e.weapon != null);
   return e ? e.weapon : 0;
 };
 
@@ -200,10 +196,7 @@ export const renderRowHd = (c) => {
     cw = cardWeapon(c);
   const eb = ce ? '<span class="badge elem-' + ce + '">' + (ELEMENT[ce] || ce) + '</span>' : '';
   const wb = cw ? '<span class="badge weapon">' + (WEAPON[cw] || cw) + '</span>' : '';
-  const hasScope5 = (c.effects || []).some(function (e) {
-    return e.scope === 5;
-  });
-  const s5b = hasScope5 ? '<span class="badge scope5">キャラ限</span>' : '';
+  const s5b = c.chara_base_id ? '<span class="badge scope5">キャラ限</span>' : '';
   const timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
   // 効果 tag: 用 v2 parameter class (跟 filter 一致)、unique by class id
   const _seen = new Set();
@@ -306,20 +299,12 @@ export const toggleExpand = (id) => {
 };
 
 export const scopeLabel = (e) => {
-  if (e.scope === 3) {
-    if (e.element) return ELEMENT[e.element] + '属性のみ';
-    if (e.weapon != null) {
-      const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
-      return (
-        t
-          .map(function (v) {
-            return WEAPON[v] || v;
-          })
-          .join('/') + 'のみ'
-      );
-    }
+  // 直读 element / weapon (adapter 已不再注入 eff.scope)
+  if (e.element) return (ELEMENT[e.element] || '') + '属性のみ';
+  if (e.weapon != null) {
+    const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
+    return t.map((v) => WEAPON[v] || v).join('/') + 'のみ';
   }
-  if (e.scope === 5) return escHtml(e.name || '') + 'のみ';
   return '';
 };
 

@@ -18,12 +18,8 @@ function _v2CrystalToWikiEffect(c) {
   const { bunrui, condition } = paramToBunruiAndCondition(c.parameter);
   const calc_type = MATH_TYPE_TO_CALC[c.math_type];
   if (calc_type == null) return null;
-  // scope: element/weapon 限定 → 2; 否则 0 (自身/制限なし)
-  // crystal 没 range 字段、按 element_id / weapon_type_id 决定
-  let scope = 0;
   const eff = {
     bunrui: [bunrui],
-    scope,
     condition,
     bairitu: crystalMaxBairitu(c),                 // 三因子任一非 null → initial × Π；否则 master.max_value
     bairitu_init: c.initial_value,                 // 初期値 (master 直读)
@@ -31,14 +27,8 @@ function _v2CrystalToWikiEffect(c) {
     calc_type,
     _parameter: c.parameter,                    // v2 原 parameter (cr-list renderEffLine 用)
   };
-  if (c.element_id) {
-    eff.element = c.element_id;
-    eff.scope = 2;
-  }
-  if (c.weapon_type_id) {
-    eff.weapon = c.weapon_type_id;
-    eff.scope = 2;
-  }
+  if (c.element_id) eff.element = c.element_id;
+  if (c.weapon_type_id) eff.weapon = c.weapon_type_id;
   // HitCount 注入 stage 字段
   if (bunrui === 7) injectHitStages(eff, c);
   return eff;
@@ -63,6 +53,9 @@ export function v2CrystalToWiki(c) {
     element_id: c.element_id || 0,
     weapon_type_id: c.weapon_type_id || 0,
     conditional_parameter: c.conditional_parameter || false,
+    // build_crystal_aux.py 注入的派生字段 (走 crystal_revise.json deepApply)
+    range: c.range || 'Single',
+    chara_base_id: c.chara_base_id || null,
   };
 }
 

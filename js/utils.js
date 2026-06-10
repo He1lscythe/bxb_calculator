@@ -21,18 +21,17 @@ export const renderRightTags = (s) => {
       const cls = classifyParameter(p);
       tags += '<span class="bunrui-tag">' + (PARAMETER_CLASS_SHORT[cls] || cls) + '</span>';
     });
-    if (e.scope === 0) {
-      tags += '<span class="scope-tag scope-self">自</span>';
-    } else if (e.scope === 1) {
-      tags += '<span class="scope-tag scope-all">全</span>';
-    } else if (e.scope === 2) {
+    // 直读 master range / element / weapon (adapter 已不再注入 eff.scope)
+    if (e.element != null || e.weapon != null) {
       const lim =
         e.element != null
           ? ELEMENT[e.element] || e.element
-          : e.weapon != null
-            ? WEAPON[e.weapon] || e.weapon
-            : '限';
+          : WEAPON[e.weapon] || e.weapon;
       tags += '<span class="scope-tag scope-lim">' + lim + '</span>';
+    } else if (e.range === 'All') {
+      tags += '<span class="scope-tag scope-all">全</span>';
+    } else {
+      tags += '<span class="scope-tag scope-self">自</span>';
     }
     if (e.condition)
       tags +=

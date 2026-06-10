@@ -141,7 +141,6 @@
       } from '../js/utils.js';
       import { deepApply } from '../shared/revise-core.js';
       // omoide_templates 已删除 (用户决策: omoide 数据走 Frida 抓包、走 chara._omoide_slots、不用 templates)
-      import { enforceScopeConstraints } from '../shared/effect-constraints.js';
       import { adaptCharaList } from '../shared/chara-adapter.js';
       import { charaIconStack } from '../shared/image-paths.js';
       import { setupLazyImg } from '../shared/lazy-img.js';
@@ -324,9 +323,6 @@
             allCrystals = cr
               .filter((c) => !c.tombstone)
               .sort((a, b) => b.rarity - a.rarity || b.id - a.id);
-            // base+revise 合并后强制 effect scope 约束（防止 element/type 与 scope=0/1 不一致）
-            enforceScopeConstraints(allBGs);
-            enforceScopeConstraints(allCrystals);
             allMasou = Array.isArray(ms) ? ms : [];
             masouByChara = {};
             allMasou.forEach((m) => {
@@ -414,18 +410,15 @@
             : '';
         const parts = [elStr, tyStr].filter(Boolean);
         const lim = parts.join('·');
-        if (ef.scope === 0) return '<span class="scope-tag scope-self">自</span>';
-        if (ef.scope === 1) return '<span class="scope-tag scope-all">全</span>';
-        if (ef.scope === 2) return '<span class="scope-tag scope-lim">' + (lim || '限') + '</span>';
-        if (ef.scope === 3)
-          return '<span class="scope-tag scope-equip-s">' + (lim || '装') + '·自</span>';
-        if (ef.scope === 4)
-          return '<span class="scope-tag scope-equip-a">' + (lim || '装') + '·全</span>';
-        if (ef.scope === 5) {
-          const nm = ef.name ? escHtml(ef.name).slice(0, 12) : '限';
-          return '<span class="scope-tag scope-lim">' + nm + '限定</span>';
+        // 直读 master range / element / weapon / weapon_base_id (adapter 已不再注入 eff.scope)
+        if (ef.weapon_base_id) {
+          return '<span class="scope-tag scope-lim">キャラ限</span>';
         }
-        return '';
+        if (ef.element != null || ef.weapon != null) {
+          return '<span class="scope-tag scope-lim">' + (lim || '限') + '</span>';
+        }
+        if (ef.range === 'All') return '<span class="scope-tag scope-all">全</span>';
+        return '<span class="scope-tag scope-self">自</span>';
       };
       export const renderEfRow = (ef) => {
         const btags = _efBadges(ef);
@@ -2414,14 +2407,12 @@
 
       // ===== BG DETAIL =====
       export const _bgScopeLabel = (e) => {
-        if (e.scope === 3) {
-          if (e.element != null) return (ELEMENT[e.element] || e.element) + '属性のみ';
-          if (e.weapon != null) {
-            const t = [].concat(e.weapon);
-            return t.map((v) => WEAPON[v] || v).join('/') + 'のみ';
-          }
+        // 直读 element / weapon (adapter 已不再注入 eff.scope)
+        if (e.element != null) return (ELEMENT[e.element] || e.element) + '属性のみ';
+        if (e.weapon != null) {
+          const t = [].concat(e.weapon);
+          return t.map((v) => WEAPON[v] || v).join('/') + 'のみ';
         }
-        if (e.scope === 5) return (e.name || '') + 'のみ';
         return '';
       };
       export const renderDMBg = (b) => {
@@ -2658,17 +2649,20 @@
         let tags = '';
         (s.effects || []).forEach((e) => {
           tags += _efBadges(e);
-          if (e.scope === 0) tags += `<span class="scope-tag scope-self">自</span>`;
-          else if (e.scope === 1) tags += `<span class="scope-tag scope-all">全</span>`;
-          else if (e.scope === 2 || e.scope === 3 || e.scope === 4) {
+          // 直读 master range / element / weapon / weapon_base_id (adapter 已不再注入 eff.scope)
+          if (e.weapon_base_id) {
+            tags += `<span class="scope-tag scope-lim">キャラ限</span>`;
+          } else if (e.element != null || e.weapon != null) {
             const lim =
               e.element != null
                 ? ELEMENT[[].concat(e.element)[0]] || '限'
-                : e.weapon != null
-                  ? WEAPON[[].concat(e.weapon)[0]] || '限'
-                  : '限';
+                : WEAPON[[].concat(e.weapon)[0]] || '限';
             tags += `<span class="scope-tag scope-lim">${lim}</span>`;
-          } else if (e.scope === 5) tags += `<span class="scope-tag scope-lim">限</span>`;
+          } else if (e.range === 'All') {
+            tags += `<span class="scope-tag scope-all">全</span>`;
+          } else {
+            tags += `<span class="scope-tag scope-self">自</span>`;
+          }
           if (e.condition)
             tags += `<span class="cond-tag cond-${e.condition}">${CONDITION[e.condition] || ''}</span>`;
         });

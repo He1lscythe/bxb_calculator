@@ -7,7 +7,6 @@ import {
   paramToBunruiAndCondition,
   injectHitStages,
   MATH_TYPE_TO_CALC,
-  RANGE_TO_SCOPE,
 } from './chara-adapter.js';
 import { deepApply } from './revise-core.js';
 
@@ -16,17 +15,9 @@ function _v2BgSkillToEffect(sk) {
   const { bunrui, condition } = paramToBunruiAndCondition(sk.parameter);
   const calc_type = MATH_TYPE_TO_CALC[sk.math_type];
   if (calc_type == null) return null;
-  // bg scope wiki: 0 自身 / 1 全体 / 3 装備属性·自身 (主要)
-  // v2 range All/Single + element_id/weapon_type_id 决定
-  let scope;
-  if (sk.element_id || sk.weapon_type_id) {
-    scope = sk.range === 'All' ? 2 : 3;            // 限定 — 全体 or 自身
-  } else {
-    scope = sk.range === 'All' ? 1 : 0;             // 无限定
-  }
   const eff = {
     bunrui: [bunrui],
-    scope,
+    range: sk.range,                           // master 原生 'All' / 'Single' / 'None' 透传
     condition,
     bairitu: sk.value,
     bairitu_scaling: sk.value_scaling || 0,
@@ -61,6 +52,8 @@ export function v2BgToWiki(b) {
     long_skill_effective_time: b.long_skill_effective_time || '',
     // master 原 skills (给 filter 用、效果分类/条件発動/対象 都要遍历 skills)
     _skills: b.skills || [],
+    // build_bg_aux.py 注入的派生字段 (走 bg_revise.json deepApply)
+    chara_base_id: b.chara_base_id || null,
   };
 }
 
