@@ -378,8 +378,9 @@ export const renderDetailBody = (c) => {
   const effRows = (c.effects || []).map(renderEffLine).join('');
 
   const fields = [];
-  if (c.effect_text) fields.push(['効果', escHtml(c.effect_text)]);
-  if (effRows) fields.push(['効果量', '<div>' + effRows + '</div>']);
+  // row-hd 已显示 effect tag + bairitu、body 不重复効果量、改放 master.description (in-game 长文)
+  const desc = c._master?.description;
+  if (desc) fields.push(['説明', escHtml(desc).replace(/\n/g, '<br>')]);
   if (c['特殊条件'])
     fields.push([
       '特殊条件',

@@ -38,22 +38,27 @@ export const elementIcon = (elementId) => `${BASE}/_app_icons/icon_element_list_
 //     elementId: c.element, weaponTypeId: c.weapon,
 //     marriageLevel: 2,  // 0 = 不叠 marriage、1/2/3 = 红/粉/金
 //   });
+// lazy 模式:
+//   'native' (默认): `loading="lazy"`、native HTML5 lazy、适用 document-scroll 场景 (slot card 等)
+//   'io': src→data-src、caller 需调 setupLazyImg(scrollRoot)、适用自定义 scroll 容器 (modal list 等)
 export const charaIconStack = ({
   variantId, name = '', elementId, weaponTypeId, marriageLevel = 0, className = 'chara-thumb',
+  lazy = 'native',
 }) => {
   const safe = String(name).replace(/"/g, '&quot;');
-  const hideErr = `onerror="this.style.visibility='hidden'"`;
+  const onerr = `onerror="this.style.visibility='hidden'"`;
+  const srcAttr = (s) => lazy === 'io' ? `data-src="${s}"` : `src="${s}" loading="lazy"`;
   const layers = [
-    `<img class="ct-base" src="${charaIcon(variantId)}" alt="${safe}" ${hideErr}>`,
+    `<img class="ct-base" ${srcAttr(charaIcon(variantId))} alt="${safe}" ${onerr}>`,
   ];
   if (marriageLevel) {
-    layers.push(`<img class="ct-marriage" src="${marriageOverlay(marriageLevel)}" alt="" ${hideErr}>`);
+    layers.push(`<img class="ct-marriage" ${srcAttr(marriageOverlay(marriageLevel))} alt="" ${onerr}>`);
   }
   if (weaponTypeId) {
-    layers.push(`<img class="ct-type" src="${weaponTypeIcon(weaponTypeId)}" alt="" ${hideErr}>`);
+    layers.push(`<img class="ct-type" ${srcAttr(weaponTypeIcon(weaponTypeId))} alt="" ${onerr}>`);
   }
   if (elementId) {
-    layers.push(`<img class="ct-element" src="${elementIcon(elementId)}" alt="" ${hideErr}>`);
+    layers.push(`<img class="ct-element" ${srcAttr(elementIcon(elementId))} alt="" ${onerr}>`);
   }
   return `<div class="${className}">${layers.join('')}</div>`;
 };
@@ -63,5 +68,5 @@ export const charaIconStack = ({
 //   container.innerHTML = imgWithFallback(charaIcon(100101), name);
 export const imgWithFallback = (src, alt = '') => {
   const safe = String(alt).replace(/"/g, '&quot;');
-  return `<img src="${src}" alt="${safe}" onerror="this.style.display='none'" class="icon">`;
+  return `<img src="${src}" loading="lazy" alt="${safe}" onerror="this.style.display='none'" class="icon">`;
 };

@@ -27,7 +27,7 @@
 - 条件字段拆分: HP-curve prefix (`Vitality_` / `RemHP_`) + Break gate prefix (`Break_`) + 结构化条件字段 (`element_id` / `weapon_type_id` / `conditional_parameter` 等)
 
 server-fold 字段 (非 master 直给、走 `*_revise.json`):
-- crystal: `max_value` / `M_L_max` / `M_W_max` / `M_P_max` / `min_weight` / `max_weight` / `min_purity` / `max_purity`
+- crystal: `max_value` / `M_L_max` / `M_W_max` / `M_P_max` / `min_weight` / `max_weight` / `min_purity` / `max_purity` / `weight_step` / `purity_step` (后两个控制 hensei slider 最小刻度、null = slider 不显示、M_W_max/M_P_max=null 时联动擦除)
 - chara skill / masou skill: `value_scaling` (每熟度增量)
 - chara: `tags` (14 种特性 enum)
 

@@ -54,8 +54,10 @@ export function omoideEffectiveScaling(sk) {
 // ============================================================
 // crystal / emblem lv cap query
 // ============================================================
+// 字段名是 max_level (master 直供、adapter passthrough)、不是 level_max
+// 缺省时按 rarity 表 fallback (历史兼容、当前 2063 个 master 全有 max_level)
 export const cryLvMax = (cr) =>
-  +cr?.level_max || (CRYSTAL_RARITY_LV_MAX[+cr?.rarity] ?? 1);
+  +cr?.max_level || (CRYSTAL_RARITY_LV_MAX[+cr?.rarity] ?? 1);
 
 export const emblemLvMax = (rarity) => EMBLEM_RARITY_LV_MAX[+rarity] ?? 1;
 
