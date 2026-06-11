@@ -97,7 +97,8 @@ def main():
 
     latest_id = state["latest_id"] or container.get("latest-id") or 0
     container["latest-id"] = int(latest_id)
-    label = tsoup.find("a", href="/topics")
+    # お知らせ 页签（href 已本地化，不再用 /topics 定位）
+    label = tsoup.find("a", string=re.compile(r"お知らせ"))
     if label:
         label.string = f"お知らせ (latest-id: {latest_id})"
 

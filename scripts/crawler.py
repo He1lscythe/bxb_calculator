@@ -355,6 +355,42 @@ def recrawl(num, versions, r2_needed, rss_ts=None, rss_ts_source="rss"):
     return "edit"
 
 
+def update_version_selects(num, versions):
+    """给多版本话题的每个版本页面注入版本切换下拉框（自选中，切换即跳转）。"""
+    entry = versions.get(str(num))
+    if not entry or len(entry["versions"]) <= 1:
+        return
+    vs = list(reversed(entry["versions"]))  # 新 → 旧
+    for v in entry["versions"]:
+        path = HTML_DIR / v["file"]
+        if not path.exists():
+            continue
+        soup = parse_file(path)
+        for old in soup.find_all("select", class_="version_select"):
+            old.decompose()
+        heading = soup.find("div", class_="news_heading")
+        if heading is None:
+            continue
+        title_div = heading.find("div", class_="news_title") or heading
+        select = soup.new_tag("select")
+        select["class"] = "version_select"
+        select["onchange"] = "if(this.value)location.href=this.value"
+        select["style"] = "margin-left:8px;max-width:200px"
+        for w in vs:
+            opt = soup.new_tag("option")
+            opt["value"] = "./" + w["file"]
+            opt.string = w["ts"]
+            if w["file"] == v["file"]:
+                opt["selected"] = "selected"
+            select.append(opt)
+        anchor = title_div.find("a", class_="title_text")
+        if anchor:
+            anchor.insert_after(select)
+        else:
+            title_div.append(select)
+        write_page(path, soup)
+
+
 # ---------------------------------------------------------------- 增量爬新
 
 def _match_rss_item(title, time_mmdd_hhmm, rss_items, used_slugs):

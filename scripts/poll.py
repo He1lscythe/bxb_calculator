@@ -26,7 +26,14 @@ from common import (
     save_state,
     save_versions,
 )
-from crawler import crawl_new, find_canonical, recent_ids, recrawl, stage_r2_assets
+from crawler import (
+    crawl_new,
+    find_canonical,
+    recent_ids,
+    recrawl,
+    stage_r2_assets,
+    update_version_selects,
+)
 
 CRON_HOURLY = "1 * * * *"
 CRON_QUARTER = "16,31,46 * * * *"
@@ -174,6 +181,9 @@ def do_execute(mode):
             if c["id"] not in edited:
                 changes.append(c)
 
+    for c in changes:
+        update_version_selects(c["id"], versions)
+
     staged = stage_r2_assets(r2_needed, manifest)
     if changes:
         state["last_change_at"] = now_utc_iso()
@@ -213,6 +223,8 @@ def do_seed():
     # 最近 40 id 重爬：补 hash、捕获存档期间漏掉的编辑
     r2_needed = set()
     changes = window_recrawl(versions, r2_needed, rss_ts_by_id)
+    for c in changes:
+        update_version_selects(c["id"], versions)
     staged = stage_r2_assets(r2_needed, manifest)
 
     if changes:
