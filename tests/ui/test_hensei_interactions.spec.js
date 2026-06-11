@@ -554,3 +554,29 @@ test('enemy.emblems[0] 默认装 id=1 (guild_only=false) → 全局生效、norm
   // emblem id=1 攻撃力アップⅠ 是 guild_only=false (全局生效)
   expect(withEmblem).toBeGreaterThan(noEmblem);
 });
+
+// ============================================================
+// 秘録記憶: 自分の chara_base_id 一致 → 結晶枠 +1 (上限1)
+// ============================================================
+test('秘録記憶 装着 → 結晶枠 +1、外す → 戻る、他人の秘録は無効', async ({ page }) => {
+  await waitHenseiReady(page);
+  // 練刀･有里村正 (base 1519) ← 54150008 が自分の秘録記憶
+  const vid = await page.evaluate(() => window.state.allCharas.find((c) => c._master?.id === 1519)?.id);
+  expect(vid).toBeTruthy();
+  await page.evaluate((id) => window.setChara(0, id), vid);
+  await page.waitForTimeout(800);
+  const base = await page.evaluate(() => window.state.team[0].crystals.length);
+  expect(base).toBeGreaterThan(0);
+  // 自分の秘録記憶 → +1
+  await page.evaluate(() => window.setCrystal(0, 0, 54150008));
+  await page.waitForTimeout(100);
+  expect(await page.evaluate(() => window.state.team[0].crystals.length)).toBe(base + 1);
+  // 外す → 戻る (固定点 sync)
+  await page.evaluate(() => window.setCrystal(0, 0, null));
+  await page.waitForTimeout(100);
+  expect(await page.evaluate(() => window.state.team[0].crystals.length)).toBe(base);
+  // 他人の秘録記憶 (七詩村正 1518 の 54150009) → 変化なし
+  await page.evaluate(() => window.setCrystal(0, 0, 54150009));
+  await page.waitForTimeout(100);
+  expect(await page.evaluate(() => window.state.team[0].crystals.length)).toBe(base);
+});
