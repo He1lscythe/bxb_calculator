@@ -11,7 +11,6 @@ from common import (
     TOPICS_FILE,
     load_json,
     load_state,
-    load_versions,
     parse_file,
     write_page,
 )
@@ -39,41 +38,14 @@ def derive_heading(num, canonical):
     return heading
 
 
-def inject_version_selects(tsoup, versions):
-    """幂等注入下拉框：仅多版本条目显示，标题链接始终指向最新版（canonical）。"""
+def strip_version_selects(tsoup):
+    """列表页不显示版本下拉框（版本切换在详情页内完成），清掉历史注入。"""
     for old in tsoup.find_all("select", class_="version_select"):
         old.decompose()
-    for num, entry in versions.items():
-        vs = entry["versions"]
-        if len(vs) <= 1:
-            continue
-        heading = tsoup.find("div", class_="news_heading", id=str(num))
-        if heading is None:
-            continue
-        title_div = heading.find("div", class_="news_title") or heading
-        select = tsoup.new_tag("select")
-        select["class"] = "version_select"
-        select["onchange"] = "if(this.value)location.href=this.value"
-        select["style"] = "margin-left:8px;max-width:200px"
-        placeholder = tsoup.new_tag("option")
-        placeholder["value"] = ""
-        placeholder.string = f"履歴 ({len(vs)})"
-        select.append(placeholder)
-        for v in reversed(vs):  # 新 → 旧
-            opt = tsoup.new_tag("option")
-            opt["value"] = f"html/{v['file']}"
-            opt.string = v["ts"]
-            select.append(opt)
-        anchor = title_div.find("a", class_="title_text")
-        if anchor:
-            anchor.insert_after(select)
-        else:
-            title_div.append(select)
 
 
 def main():
     state = load_state()
-    versions = load_versions()
     changes = load_json(CHANGES_JSON, {"changes": []})["changes"]
 
     src = TOPICS_FILE if TOPICS_FILE.exists() else BLANK_FILE
@@ -102,7 +74,7 @@ def main():
     if label:
         label.string = f"お知らせ (latest-id: {latest_id})"
 
-    inject_version_selects(tsoup, versions)
+    strip_version_selects(tsoup)
     write_page(TOPICS_FILE, tsoup)
     print(f"Topics.html 已更新：{len(ordered)} 条，latest-id {latest_id}")
 

@@ -37,7 +37,7 @@
       <a class="title_text">
        【リディが】教えて！リディちゃんの部屋 #80【お答え!!】
       </a>
-      <select class="version_select" onchange="if(this.value)location.href=this.value" style="margin-left:8px;max-width:200px">
+      <select class="version_select" onchange="if(this.value)bxbSwitchVersion(this.value)" style="margin-left:8px;max-width:200px">
        <option selected="selected" value="./04685_20260504.html">
         2026/06/11 12:07:16
        </option>
@@ -1071,5 +1071,19 @@ gtag('config', 'G-C5DZFTSEB3');
     </script>
    </div>
   </section>
+  <script id="version-switcher-js">
+   function bxbSwitchVersion(u){
+  fetch(u).then(function(r){return r.text();}).then(function(t){
+    var d = new DOMParser().parseFromString(t, "text/html");
+    var nb = d.querySelector(".news_body");
+    var cur = document.querySelector(".news_body");
+    if (nb && cur) { cur.replaceWith(document.importNode(nb, true)); }
+    var tm = d.querySelector(".news_heading .time");
+    var ct = document.querySelector(".news_heading .time");
+    if (tm && ct) { ct.replaceWith(document.importNode(tm, true)); }
+    if (window.twttr && twttr.widgets && twttr.widgets.load) { twttr.widgets.load(); }
+  });
+}
+  </script>
  </body>
 </html>

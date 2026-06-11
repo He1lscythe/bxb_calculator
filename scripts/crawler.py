@@ -355,8 +355,25 @@ def recrawl(num, versions, r2_needed, rss_ts=None, rss_ts_source="rss"):
     return "edit"
 
 
+# 页内版本切换：fetch 对方版本文件，仅替换 news_body 与时间，无跳转无闪烁
+VERSION_SWITCH_JS = """
+function bxbSwitchVersion(u){
+  fetch(u).then(function(r){return r.text();}).then(function(t){
+    var d = new DOMParser().parseFromString(t, "text/html");
+    var nb = d.querySelector(".news_body");
+    var cur = document.querySelector(".news_body");
+    if (nb && cur) { cur.replaceWith(document.importNode(nb, true)); }
+    var tm = d.querySelector(".news_heading .time");
+    var ct = document.querySelector(".news_heading .time");
+    if (tm && ct) { ct.replaceWith(document.importNode(tm, true)); }
+    if (window.twttr && twttr.widgets && twttr.widgets.load) { twttr.widgets.load(); }
+  });
+}
+"""
+
+
 def update_version_selects(num, versions):
-    """给多版本话题的每个版本页面注入版本切换下拉框（自选中，切换即跳转）。"""
+    """给多版本话题的每个版本页面注入页内版本切换器（下拉框 + 局部替换脚本）。"""
     entry = versions.get(str(num))
     if not entry or len(entry["versions"]) <= 1:
         return
@@ -368,13 +385,16 @@ def update_version_selects(num, versions):
         soup = parse_file(path)
         for old in soup.find_all("select", class_="version_select"):
             old.decompose()
+        old_js = soup.find("script", id="version-switcher-js")
+        if old_js:
+            old_js.decompose()
         heading = soup.find("div", class_="news_heading")
         if heading is None:
             continue
         title_div = heading.find("div", class_="news_title") or heading
         select = soup.new_tag("select")
         select["class"] = "version_select"
-        select["onchange"] = "if(this.value)location.href=this.value"
+        select["onchange"] = "if(this.value)bxbSwitchVersion(this.value)"
         select["style"] = "margin-left:8px;max-width:200px"
         for w in vs:
             opt = soup.new_tag("option")
@@ -388,6 +408,9 @@ def update_version_selects(num, versions):
             anchor.insert_after(select)
         else:
             title_div.append(select)
+        js = soup.new_tag("script", id="version-switcher-js")
+        js.string = VERSION_SWITCH_JS
+        (soup.body or soup).append(js)
         write_page(path, soup)
 
 
