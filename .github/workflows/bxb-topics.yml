@@ -59,6 +59,22 @@ jobs:
     env:
       R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
     steps:
+      - name: Preflight config check
+        env:
+          KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          KEY_SECRET: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          BUCKET: ${{ vars.R2_BUCKET }}
+          PUB_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
+        run: |
+          fail=0
+          [ -n "$KEY_ID" ]     || { echo "::error::Secret R2_ACCESS_KEY_ID 未设置"; fail=1; }
+          [ -n "$KEY_SECRET" ] || { echo "::error::Secret R2_SECRET_ACCESS_KEY 未设置"; fail=1; }
+          [ -n "$ENDPOINT" ]   || { echo "::error::Secret R2_ENDPOINT 未设置"; fail=1; }
+          [ -n "$BUCKET" ]     || { echo "::error::Variable R2_BUCKET 未设置（注意在 Variables 标签页，不是 Secrets）"; fail=1; }
+          [ -n "$PUB_URL" ]    || { echo "::error::Variable R2_PUBLIC_BASE_URL 未设置（缺失会导致页面无 R2 回退链接）"; fail=1; }
+          exit $fail
+
       - uses: actions/checkout@v4
         with:
           ref: topics
@@ -86,7 +102,8 @@ jobs:
           RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
         run: |
           sudo apt-get update -q && sudo apt-get install -y -q rclone
-          rclone copy r2-staging "R2:${{ vars.R2_BUCKET }}" --transfers 8 --s3-no-check-bucket
+          rclone version
+          rclone copy r2-staging "R2:${{ vars.R2_BUCKET }}" --transfers 8 --s3-no-check-bucket -v --stats-one-line
           # 上传成功后才记入 manifest（失败则下轮重试）
           (cd r2-staging && find . -type f | sed 's|^\./||') >> state/r2_manifest.txt
           sort -u -o state/r2_manifest.txt state/r2_manifest.txt
