@@ -394,6 +394,17 @@
         return null;
       };
 
+      // 秘録記憶 (desc [結晶枠+1(上限1)]): chara_base_id が自分の base_id と一致する
+      // 秘録記憶を装備中 → 結晶枠 +1。複数装備でも +1 のみ (上限1、some で自然に cap)
+      const _hasOwnHiroku = (c, crystals) => {
+        const baseId = c?._master?.id;
+        if (!baseId || !Array.isArray(crystals)) return false;
+        return crystals.some((cfg) => {
+          if (!cfg?.id) return false;
+          const cr = allCrystals.find((x) => x.id === cfg.id);
+          return !!(cr && (cr.name || '').includes('秘録記憶') && cr.chara_base_id === baseId);
+        });
+      };
       export const crystalSlotCount = (c, slotIdx) => {
         if (!c) return 0;
         const trState = slotIdx != null ? team[slotIdx]?.tr?.state : null;
@@ -401,6 +412,10 @@
         let n = parseInt(st?.basic_info?.['結晶スロット'] ?? 0) || 0;
         // 結婚（marriage != 0）→ 結晶スロット +1
         if (slotIdx != null && team[slotIdx]?.tr?.marriage) {
+          n += 1;
+        }
+        // 自分の秘録記憶 装備中 → 結晶枠 +1 (上限1)
+        if (slotIdx != null && _hasOwnHiroku(c, team[slotIdx]?.crystals)) {
           n += 1;
         }
         return n;
@@ -565,10 +580,14 @@
       };
       export const syncCrystals = (si) => {
         const c = allCharas.find((x) => x.id === team[si].chara);
-        const n = crystalSlotCount(c, si),
-          cur = team[si].crystals;
+        // slice が秘録記憶本体を外すと結晶枠も -1 (連鎖) → 固定点まで再計算
+        let n = crystalSlotCount(c, si);
+        while (team[si].crystals.length > n) {
+          team[si].crystals = team[si].crystals.slice(0, n);
+          n = crystalSlotCount(c, si);
+        }
+        const cur = team[si].crystals;
         if (cur.length < n) team[si].crystals = [...cur, ...Array(n - cur.length).fill(null)];
-        else if (cur.length > n) team[si].crystals = cur.slice(0, n);
       };
       export const setTeamSize = (n) => {
         teamSize = n;
@@ -716,6 +735,8 @@
             lv: cryLvMax(cr),
           };
         }
+        // 秘録記憶 着脱で結晶枠が ±1 しうる
+        syncCrystals(si);
         renderSlot(si);
         refreshAllStats();
       };
