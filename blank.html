@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   お知らせ - ブレイブソード×ブレイズソウル
+  </title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+  <meta content="telephone=no" name="format-detection"/>
+  <link href="html/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="html/css/application-8b5a79c93669c65fd3c25248879bc4eb50b055b177681c54b3789c39c3959504.css" media="all" rel="stylesheet"/>
+  <link href="https://bxb.grimoire.codes/topics/feed.rss" rel="alternate" title="お知らせ - ブレイブソード×ブレイズソウル" type="application/rss+xml"/>
+  <link href="https://bxb.grimoire.codes/topics/feed.atom" rel="alternate" title="お知らせ - ブレイブソード×ブレイズソウル" type="application/atom+xml"/>
+  <meta content="authenticity_token" name="csrf-param"/>
+  <meta content="x+ICuHHdqM3p9gVWQqdEM3LY8Yh/4z1/7IWSk+OSiy9DJ0xerbde+1itIBHnuyjUEL/eCkdKm53rkpBNZL7ETQ==" name="csrf-token"/>
+  <script src="html/js/jquery.min.js">
+  </script>
+  <script src="html/js/jquery-migrate.min.js">
+  </script>
+  <script src="html/js/bootstrap.min.js">
+  </script>
+  <script src="html/js/jquery.lazyload-b6ec1cfaa6f50265f6bb47fecfedeb6eb98ea99c194aae8e5c6a2fc8579ca7b6.js">
+  </script>
+ </head>
+ <body id="news">
+  <style>
+   /* 初始不闪，保留原本每个 news_heading 的 display 逻辑 */
+   .news_container {
+    visibility: hidden;
+   }
+  </style>
+  <p id="pageTop">
+   <a href="/topics#">
+    ▲
+   </a>
+  </p>
+  <div class="container banner_topic">
+   <div class="row">
+    <div class="col-xs-12 col-md-12 text-center">
+     <img alt="魔剣機関からのお知らせ" class="img-responsive img-responsive-overwrite" src="html/assets/title_topic-34c66d60ffb0770312e04d2377c7d665be8a1b12380be680cb82c087c0b8db79.png"/>
+    </div>
+   </div>
+  </div>
+  <div class="topics_navigation">
+   <div class="row">
+    <div class="tab col-xs-6 active">
+     <a href="/topics">
+      お知らせ
+     </a>
+    </div>
+    <div class="tab col-xs-6">
+     <a href="/topics/trouble">
+      不具合情報
+     </a>
+    </div>
+   </div>
+  </div>
+  <section class="news_headlines">
+   <div class="news_scrollbox">
+    <div class="news_container">
+     <!-- 新闻列表开始（全部包含在news_container内，实际页面中应包含所有 news_heading 项） -->
+     <!-- 此处应包含完整的新闻列表 -->
+     <!-- 新闻列表结束 -->
+    </div>
+   </div>
+   </div>
+   <!-- 分页控件 -->
+   <div class="text-center" id="pagination" style="margin:20px 0; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;">
+    <button class="btn btn-default" id="prevPage">
+     上一页
+    </button>
+    <span id="pageIndicator", style="color: yellow">
+    </span>
+    <button class="btn btn-default" id="nextPage">
+     下一页
+    </button>
+    <!-- 跳转输入框 -->
+    <div style="display: flex; align-items: center; gap: 5px;">
+     <input id="jumpInput" min="1" placeholder="页码" style="width:70px" type="number"/>
+     <button class="btn btn-default" id="jumpButton">
+      跳转
+     </button>
+    </div>
+    <!-- 搜索功能 -->
+    <div style="margin-top:10px;">
+     <input id="searchInput" placeholder="搜索关键字 用空格分隔" style="width:200px" type="text"/>
+     <button class="btn btn-default" id="searchButton">
+      搜索
+     </button>
+     <button class="btn btn-default" id="clearSearchButton">
+      清除
+     </button>
+    </div>
+   </div>
+  </section>
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-C5DZFTSEB3">
+  </script>
+  <script>
+   window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-C5DZFTSEB3");
+  </script>
+  <footer>
+   <div class="text-center">
+    © 2015 grimoire Co.,Ltd. All Rights Reserved.
+   </div>
+  </footer>
+  <script>
+   $(function () {
+        var topBtn = $("#pageTop");
+        topBtn.hide();
+        $(window).scroll(function () {
+          if ($(this).scrollTop() > 80) {
+            topBtn.fadeIn();
+          } else {
+            topBtn.fadeOut();
+          }
+        });
+        topBtn.click(function () {
+          $("body,html").animate({ scrollTop: 0 }, 500);
+          return false;
+        });
+      });
+  </script>
+  <!-- 分页 & 搜索 脚本 -->
+  <script>
+   $(document).ready(function () {
+        var perPage = 10;
+        // 保存所有新闻项
+        var $allItems = $(".news_container .news_heading");
+        // 当前要显示的新闻项集合（支持搜索过滤）
+        var filteredItems = $allItems;
+        var totalItems = filteredItems.length;
+        var totalPages = Math.ceil(totalItems / perPage);
+        var currentPage = 1;
+
+        function showPage(page) {
+          if (page < 1 || page > totalPages) return;
+          currentPage = page;
+          $allItems.hide();
+          filteredItems.slice((page - 1) * perPage, page * perPage).show();
+          $("#pageIndicator").text("第 " + currentPage + " 页 / 共 " + totalPages + " 页");
+        }
+
+        $("#prevPage").click(function () {
+          if (currentPage > 1) {
+            showPage(currentPage - 1);
+          }
+        });
+
+        $("#nextPage").click(function () {
+          if (currentPage < totalPages) {
+            showPage(currentPage + 1);
+          }
+        });
+
+        $("#jumpButton").click(function () {
+          var target = parseInt($("#jumpInput").val(), 10);
+          if (!isNaN(target) && target >= 1 && target <= totalPages) {
+            showPage(target);
+          } else {
+            alert("请输入 1 到 " + totalPages + " 之间的页码。");
+          }
+        });
+
+        $("#searchButton").click(function () {
+        var keywordInput = $("#searchInput").val().trim();
+        if (keywordInput === "") {
+            filteredItems = $allItems;
+        } else {
+            // 用空格分割关键词，忽略多个空格
+            var keywords = keywordInput.split(/\s+/);
+            
+            filteredItems = $allItems.filter(function () {
+            var text = $(this).find("a.title_text").text();
+            // 只要匹配任意一个关键词，就返回 true
+            return keywords.some(function (kw) {
+                return text.indexOf(kw) !== -1;
+            });
+            });
+        }
+        totalItems = filteredItems.length;
+        totalPages = Math.ceil(totalItems / perPage);
+        currentPage = 1;
+        showPage(currentPage);
+        });
+
+        $("#clearSearchButton").click(function () {
+          $("#searchInput").val("");
+          filteredItems = $allItems;
+          totalItems = filteredItems.length;
+          totalPages = Math.ceil(totalItems / perPage);
+          currentPage = 1;
+          showPage(currentPage);
+        });
+
+        // 初始显示第一页
+        showPage(currentPage);
+
+        // 现在把容器显示出来
+        $(".news_container").css("visibility", "visible");
+      });
+  </script>
+ </body>
+</html>
