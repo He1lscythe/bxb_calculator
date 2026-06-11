@@ -221,6 +221,7 @@ clamp(repel_rate, 0, 100)
 | **crystal lv** slider | `crystals[i].lv` | `crystalEffectiveValue`: 三因子 (M_L/W/P_max) 或 max_value 线性插值 | ✅ |
 | **crystal 重量** slider | `crystals[i].weight` | 三因子公式 weight 维度 (M_W_max + min/max_weight + weight_step revise) | ✅ |
 | **crystal 純度** slider | `crystals[i].purity` | 三因子公式 purity 维度 | ✅ |
+| **秘録記憶 装備** | `crystals[]` 内容 | 自分の `chara_base_id` 一致の秘録記憶装備中 → 結晶枠 +1 (desc `[結晶枠+1(上限1)]`、複数でも +1)。`crystalSlotCount` 判定、外すと `syncCrystals` が固定点まで收敛 (slice が秘録本体を外す連鎖対応) | ✅ |
 | **target slot** 切换 (1/2/3) | (UI、不存 tr) | 改算哪个 slot 的 stat、跨 slot range='All' buff 仍来自其他 slot | ✅ |
 | **omoide picks** (memory slot) | `tr.omoide_picks` | omoide source effect (Add → s1、Mul → s4a)、`_omoide_slots` Frida 抓包数据 + affection_threshold gate | ✅ |
 | **enemy element** | `ctx.enemy.element` | 元素相性倍率参考、影响显示 (实际伤害公式 Phase 8) | UI only |
