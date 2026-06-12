@@ -35,9 +35,9 @@ from crawler import (
     update_version_selects,
 )
 
-CRON_HOURLY = "1 * * * *"
-CRON_QUARTER = "16,31,46 * * * *"
-CRON_DAILY = "1 19 * * *"  # 04:01 JST 安全网
+CRON_HOURLY = "5 * * * *"
+CRON_QUARTER = "20,35,50 * * * *"
+CRON_DAILY = "5 7 * * *"  # 16:05 JST 安全网
 WINDOW_HOURS = 5
 WINDOW_IDS = 40
 
