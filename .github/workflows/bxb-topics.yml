@@ -5,9 +5,9 @@ name: bxb-topics-crawler
 
 on:
   schedule:
-    - cron: '1 * * * *'          # 每小时基线（整点后 1 分钟）
-    - cron: '16,31,46 * * * *'   # 加密轮询（仅检测到更新后的 5h 窗口内生效）
-    - cron: '1 19 * * *'         # 每日安全网滑窗 = 04:01 JST
+    - cron: '5 * * * *'          # 每小时基线（整点后 5 分钟）
+    - cron: '20,35,50 * * * *'   # 加密轮询（仅检测到更新后的 5h 窗口内生效）
+    - cron: '5 7 * * *'          # 每日安全网滑窗 = 16:05 JST
   workflow_dispatch:
     inputs:
       mode:
