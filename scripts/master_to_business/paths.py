@@ -8,10 +8,11 @@ import re
 from pathlib import Path
 
 
-# master_tables 物理位置 BxB/master_tables/、是 crawl 仓库 data/master-tables branch 的 git worktree
-# 绝对路径写死（user-specific、当前唯一开发者机器）
+# master_tables 物理位置 BxB/master_tables/、是 crawl 仓库 data/master-tables branch 的 git worktree。
+# 本地默认绝对路径写死(开发者机器);CI 经 env BXB_MASTER_TABLES 指向 checkout 目录。
 BXB_ROOT = Path("F:/OneDrive - Northeastern University/Game/BxB")
-MASTER_TABLES_DIR = BXB_ROOT / "master_tables" / "master_data"
+_ENV_MT = os.environ.get("BXB_MASTER_TABLES")
+MASTER_TABLES_DIR = (Path(_ENV_MT) if _ENV_MT else BXB_ROOT / "master_tables") / "master_data"
 
 # 日期文件夹命名 YYYY_MM_DD 或 YYYY_MM_DD_HH_MM_SS (新版含时间戳)
 _DATE_FOLDER_RE = re.compile(r"^\d{4}_\d{2}_\d{2}(_\d{2}_\d{2}_\d{2})?$")

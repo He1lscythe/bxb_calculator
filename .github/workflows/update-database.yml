@@ -1,0 +1,141 @@
+name: update-database
+
+# 纯 HTTP API 拉最新 master → 重建业务 JSON → 提交。零模拟器/ADB/Frida。
+# 见 scripts/ci/run_update.py + unpacking/HOWTO_api_replay.md。
+#
+# 提交去向 (3 branch):
+#   main           : data/*.json (6 表) + _npc_motions.json + icons/ (新实体的图)  → 触发 sync→data-staging + Pages
+#   data-staging   : crystal_revise.json + bg_revise.json (带字段级安全检查)
+#   data/master-tables : master_data/<JST日期>/ + asset_version/<ver>/ 快照 + changelog + 索引
+#
+# 模块 C (icons + 增量 npc-motion): 经无鉴权 CDN (version_lz4 manifest + package_lz4 .dat) + UnityPy 解。
+# 全量 npc-motion 重生 / 重绘图强刷仍走本地 (新动作罕见、重绘更罕见)。
+
+on:
+  schedule:
+    - cron: '1 7 * * *'    # JST 16:01 (服务器 16:00 发版后)
+    - cron: '1 15 * * *'   # JST 00:01 (服务器 00:00 发版后)
+  workflow_dispatch:
+
+concurrency:
+  group: update-database
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout data/master-tables (归档目标 + changelog baseline)
+        uses: actions/checkout@v4
+        with:
+          ref: data/master-tables
+          path: _mt
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout data-staging (revise 提交目标)
+        uses: actions/checkout@v4
+        with:
+          ref: data-staging
+          path: _ds
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch 现版 revise from data-staging (安全检查基准)
+        run: |
+          git fetch origin data-staging
+          git checkout origin/data-staging -- \
+            data/crystal_revise.json data/bg_revise.json || \
+            echo "WARN: data-staging revise 取失败、用空基准"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: pip install -r scripts/ci/requirements.txt
+
+      - name: Run update (模块 A+B+D)
+        id: run
+        env:
+          BXB_UNIQUE_KEY: ${{ secrets.BXB_UNIQUE_KEY }}
+          BXB_BOOTSTRAP_KEY: ${{ secrets.BXB_BOOTSTRAP_KEY }}
+          BXB_MASTER_TABLES: ${{ github.workspace }}/_mt
+          RUNNER_TEMP: ${{ runner.temp }}
+        run: |
+          set +e
+          python scripts/ci/run_update.py
+          echo "rc=$?" >> "$GITHUB_OUTPUT"
+          set -e
+
+      - name: Load summary
+        id: sum
+        run: |
+          F="${{ runner.temp }}/ci_update_summary.json"
+          if [ -f "$F" ]; then
+            echo "snapshot_status=$(jq -r '.snapshot_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
+            echo "revise_safe=$(jq -r '.revise_safe // false' "$F")" >> "$GITHUB_OUTPUT"
+            echo "revise_changed=$(jq -r '(.revise_changed // []) | length' "$F")" >> "$GITHUB_OUTPUT"
+          else
+            echo "snapshot_status=error" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Configure git
+        run: |
+          git config --global user.name "bxb-db-bot"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # D: master_tables 快照 + changelog → data/master-tables
+      - name: Commit data/master-tables
+        if: steps.sum.outputs.snapshot_status == 'archived'
+        working-directory: _mt
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "无快照变更"; exit 0
+          fi
+          git commit -m "data(master-tables): snapshot $(date -u +%FT%TZ) (API auto)"
+          git pull --rebase origin data/master-tables || true
+          git push origin HEAD:data/master-tables
+
+      # A + C: 业务表 + _npc_motions + icons → main
+      - name: Commit main (data + npc_motions + icons)
+        run: |
+          git add data/characters.json data/souls.json data/crystals.json \
+                  data/bladegraphs.json data/masou.json data/senzai_table.json \
+                  data/_npc_motions.json data/_wiki_unmatched_crystals.json \
+                  data/_audit_crystals_null_math.json icons/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "data/icons 无变更"; exit 0
+          fi
+          git commit -m "data: master_data auto-update $(date -u +%FT%TZ)"
+          git pull --rebase origin main || true
+          git push origin HEAD:main
+
+      # B: revise → data-staging (安全检查通过且有变更才提交;用独立 _ds checkout)
+      - name: Commit data-staging (revise)
+        if: steps.sum.outputs.revise_safe == 'true' && steps.sum.outputs.revise_changed != '0'
+        working-directory: _ds
+        run: |
+          cp ../data/crystal_revise.json ../data/bg_revise.json data/
+          git add data/crystal_revise.json data/bg_revise.json
+          if git diff --cached --quiet; then echo "revise 无变更"; exit 0; fi
+          git commit -m "data(revise): 入手方法/range refresh $(date -u +%FT%TZ)"
+          git pull --rebase origin data-staging || true
+          git push origin HEAD:data-staging
+
+      - name: Revise 安全检查未过 → 告警
+        if: steps.sum.outputs.revise_safe == 'false'
+        run: |
+          echo "::error::revise 字段级安全检查未通过 (有条目/字段丢失) — 已跳过 revise 提交,需人工查 build_crystals merge"
+          exit 1

@@ -96,6 +96,26 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [dump_npc_motions.py](../scripts/master_to_business/dump_npc_motions.py) | UnityPy 解 `D:/bxb/_dat_cache/assets/npc-motion-*.dat` → `data/_npc_motions.json` (chara motion clip duration、weapons.json 变后重生、小时级) |
 | [build_memory_slot_skills.py](../scripts/master_to_business/build_memory_slot_skills.py) | 从 HouseTop response (cross-repo `unpacking/draft/out/account/` + `bxb_wiki/data/omoide/`) → `data/_memory_slot_skills.json` (senzai 反查表、秒级) |
 
+### scripts/ci/ — 云端自动更新数据库 (GitHub Actions, 免模拟器/ADB)
+
+`.github/workflows/update-database.yml` 每天 JST 16:01 + 00:01 跑、纯 HTTP 从游戏 API 拉最新 master 重建业务 JSON。逆向 + 协议见 `unpacking/HOWTO_api_replay.md`。
+
+| 脚本 | 用途 |
+|---|---|
+| [maken2_api.py](../scripts/ci/maken2_api.py) | 游戏 API 客户端: `login` (设备指纹 + 静态 bootstrap key) → session → `get_master_data` (X-Session 头) / `get_asset_version`。maken2 AES-256-CBC+gzip+msgpack。凭据走 env `BXB_UNIQUE_KEY`/`BXB_BOOTSTRAP_KEY` (GitHub secrets) |
+| [master_tables_archive.py](../scripts/ci/master_tables_archive.py) | master dict → `master_data/<JST日期>/` 快照 (split + 派生 weapon_innate_skills/arts/effects) + changelog + 索引。port 自 unpacking split_tables/build_skill_id_index/update_master_tables |
+| [diff_master_tables.py](../scripts/ci/diff_master_tables.py) | changelog 引擎 (整体 port 自 unpacking;CI 版加"空字段归一"——API 省略空字段、避免与 ADB 版 schema 差异误报全表) |
+| [revise_safety.py](../scripts/ci/revise_safety.py) | revise 字段级安全检查 (防用户手填字段被冲、丢条目/字段则中止提交) |
+| [cdn.py](../scripts/ci/cdn.py) | 资源 CDN 客户端 (无鉴权): `current` 版本号 → `version-{ver}.gz` manifest (gzip+msgpack) → `{name}.v{ver}.dat` 资源 |
+| [extract_assets.py](../scripts/ci/extract_assets.py) | port parse_unity_dat: `.dat` → PNG (`dat_to_base_path` + UnityPy) / npc-motion 时长 |
+| [sync_icons.py](../scripts/ci/sync_icons.py) | manifest 驱动: 缺失 icon → 下 .dat → extract → copy_images。重建结果与本地 copy_images 逐字节一致 |
+| [sync_npc_motions.py](../scripts/ci/sync_npc_motions.py) | 增量补 `_npc_motions.json` (manifest npc-motion vs 基线、只下缺的) |
+| [run_update.py](../scripts/ci/run_update.py) | 编排: A (master→6 表)、B (fetch_wiki+aux→revise+安全检查)、C (asset-version→icons+npc-motion)、D (快照+changelog)。各模块失败优雅降级 |
+
+提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise → **data-staging** (安全检查通过且有变更);master_data + asset_version 快照 → **data/master-tables**。`paths.py`/`copy_images.py` 都加了 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向 checkout/临时目录、本地默认不变。
+
+> asset-version 流程 (2026-06-12 抓包确认、`Maken.HTTP.Get/Download` @ OnePlus): `GET bxb-asset.grimoire.codes/version_lz4/android/current` → 版本号、`/version-{ver}.gz` → manifest、`package_lz4/android/{name}.v{ver}.dat` → 资源,全程**无鉴权纯 CDN**。新动作 (npc-motion) + 新实体图 (icons) 都增量自动补。全量 npc-motion 重生 / 重绘图强刷仍走本地 (罕见)。
+
 ---
 
 ## shared/ — JS 共享模块
