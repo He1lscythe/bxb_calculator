@@ -20,6 +20,7 @@
   python scripts/master_to_business/copy_images.py --force   # 覆盖已存在
 """
 import json
+import os
 import re
 import shutil
 import struct
@@ -30,7 +31,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 ICONS_DIR = PROJECT_ROOT / "icons"
 DATA_DIR = PROJECT_ROOT / "data"
 
-DBXB = Path("D:/bxb")
+# 本地默认 D:/bxb;CI 经 env BXB_ASSETS_DIR 指向assets 临时目录 (图标同步 下载+extract 落点)
+DBXB = Path(os.environ.get("BXB_ASSETS_DIR", "D:/bxb"))
 
 
 def _png_size(p: Path):

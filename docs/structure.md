@@ -93,6 +93,22 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [gen_motion_table.py](../scripts/master_to_business/gen_motion_table.py) | `characters.json` → `docs/motion_table.md` (master 改 motion_id 后重跑) |
 | [fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) | 抓 altema wiki「入手方法」字段、patch 进 `data/crystals.json` (字段 `入手方法`) + `data/bladegraphs.json` (字段 `acquisition`)、按 name 匹配 |
 
+
+`.github/workflows/update-database.yml` 每天 JST 16:01 + 00:01 跑、
+
+| 脚本 | 用途 |
+|---|---|
+| [master_tables_archive.py](../scripts/ci/master_tables_archive.py) | master dict → `master_data/<JST日期>/` 快照 (split + 派生 weapon_innate_skills/arts/effects) + changelog + 索引。port 自 unpacking split_tables/build_skill_id_index/update_master_tables |
+| [diff_master_tables.py](../scripts/ci/diff_master_tables.py) | changelog 引擎 (整体 port 自 unpacking;CI 版加"空字段归一"——API 省略空字段、避免与 API 版 schema 差异误报全表) |
+| [revise_safety.py](../scripts/ci/revise_safety.py) | revise 字段级安全检查 (防用户手填字段被冲、丢条目/字段则中止提交) |
+| [图标同步.py](../scripts/ci/图标同步.py) | manifest 驱动: 缺失 icon → 下 .dat → extract → copy_images。重建结果与本地 copy_images 逐字节一致 |
+| [动作同步.py](../scripts/ci/动作同步.py) | 增量补 `_npc_motions.json` (manifest npc-motion vs 基线、只下缺的) |
+| [
+
+提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise → **data-staging** (安全检查通过且有变更);master_data + asset_version 快照 → **master_tables**。`paths.py`/`copy_images.py` 都加了 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向 checkout/临时目录、本地默认不变。
+
+> asset-version 流程 (2026-06-12 实测确认、`
+
 ---
 
 ## shared/ — JS 共享模块
