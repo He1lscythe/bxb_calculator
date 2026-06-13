@@ -13,8 +13,13 @@ name: update-database
 
 on:
   schedule:
-    - cron: '15 7 * * *'   # JST 16:15 (服务器 16:00 发版后)
-    - cron: '15 15 * * *'  # JST 00:15 (服务器 00:00 发版后)
+    # GitHub 定时器会延迟/丢弃单次 run，每档隔 1h 打 3 枪兜底（job 幂等、无变更 no-op）。
+    - cron: '15 7 * * *'   # JST 16:15 (服务器 16:00 发版后，第 1 枪)
+    - cron: '15 8 * * *'   # JST 17:15 (第 2 枪)
+    - cron: '15 9 * * *'   # JST 18:15 (第 3 枪)
+    - cron: '15 15 * * *'  # JST 00:15 (服务器 00:00 发版后，第 1 枪)
+    - cron: '15 16 * * *'  # JST 01:15 (第 2 枪)
+    - cron: '15 17 * * *'  # JST 02:15 (第 3 枪)
   workflow_dispatch:
 
 concurrency:
