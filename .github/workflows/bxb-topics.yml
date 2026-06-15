@@ -146,6 +146,36 @@ jobs:
               });
             }
 
+            // 正式公告发布 → 自动关闭对应的 [图床先行] 预警 issue
+            const catMap = { events: 'events', campaign: 'campaign', gachas: 'gacha' };
+            const targets = new Set();
+            for (const c of data.changes) {
+              const f = `html/${c.canonical}`;
+              if (!fs.existsSync(f)) continue;
+              const txt = fs.readFileSync(f, 'utf8');
+              const re = /images\/topics\/(events|campaign|gachas)\/(\d+)\//g;
+              let m;
+              while ((m = re.exec(txt)) !== null) targets.add(`${catMap[m[1]]}:${m[2]}`);
+            }
+            if (targets.size) {
+              const { owner, repo } = context.repo;
+              const open = await github.paginate(github.rest.issues.listForRepo, {
+                owner, repo, state: 'open', per_page: 100,
+              });
+              for (const iss of open) {
+                const mm = iss.title.match(/^\[图床先行\]\s+(\S+)\s+id=(\d+)\b/);
+                if (mm && targets.has(`${mm[1]}:${mm[2]}`)) {
+                  await github.rest.issues.createComment({
+                    owner, repo, issue_number: iss.number,
+                    body: '正式公告已发布，自动关闭本图床先行预警。',
+                  });
+                  await github.rest.issues.update({
+                    owner, repo, issue_number: iss.number, state: 'closed',
+                  });
+                }
+              }
+            }
+
   # 图床先行探测: event/campaign/gacha 的 title 图常先于公告上线。
   # 每次触发都跑(加密轮询 :20/:35/:50 跳过)，独立于 RSS 变更；needs crawl 串在其后避免并发推送竞态。
   probe:
