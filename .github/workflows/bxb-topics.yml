@@ -145,3 +145,58 @@ jobs:
                 ].join('\n'),
               });
             }
+
+  # 图床先行探测: event/campaign/gacha 的 title 图常先于公告上线。
+  # 每次触发都跑(加密轮询 :20/:35/:50 跳过)，独立于 RSS 变更；needs crawl 串在其后避免并发推送竞态。
+  probe:
+    needs: crawl
+    if: ${{ always() && github.event.schedule != '20,35,50 * * * *' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: topics
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Probe asset frontier
+        run: python scripts/probe_assets.py
+
+      - name: Commit probe state
+        run: |
+          git config user.name "bxb-archive-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/asset_probe.json
+          if git diff --cached --quiet; then
+            echo "probe state 无变化"
+          else
+            git commit -m "probe: asset frontier $(date -u +%FT%TZ)"
+            git pull --rebase origin topics || true
+            git push origin topics
+          fi
+
+      - name: Open issues for asset hits (email via Watch)
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            if (!fs.existsSync('state/probe_hits.json')) return;
+            const data = JSON.parse(fs.readFileSync('state/probe_hits.json', 'utf8'));
+            for (const h of (data.hits || [])) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `[图床先行] ${h.category} id=${h.id} 资源已上线`,
+                body: [
+                  `检测到 **${h.category}** id \`${h.id}\` 的 title 图已上传图床，公告可能尚未发布。`,
+                  ``,
+                  `- 图: ${h.url}`,
+                  `- 序列: ${h.sequence}`,
+                  `- 探测时间 (JST): ${h.ts}`,
+                ].join('\n'),
+              });
+            }
