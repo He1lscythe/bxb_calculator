@@ -4,10 +4,9 @@
 name: bxb-topics-crawler
 
 on:
-  schedule:
-    - cron: '5 * * * *'          # 每小时基线（整点后 5 分钟）
-    - cron: '20,35,50 * * * *'   # 加密轮询（仅检测到更新后的 5h 窗口内生效）
-    - cron: '5 7 * * *'          # 每日安全网滑窗 = 16:05 JST
+  # 定时触发由 Cloudflare Worker 调 workflow_dispatch:每小时 mode=auto + 每日 mode=window。
+  # GitHub schedule 已移除(高峰丢跑)。加密轮询(5h 窗口每 15min)随之取消 —
+  # 二次编辑会被下一次每小时 auto 轮询补上。
   workflow_dispatch:
     inputs:
       mode:
@@ -49,7 +48,6 @@ jobs:
       - id: poll
         run: >
           python scripts/poll.py --check
-          --schedule "${{ github.event.schedule }}"
           --dispatch "${{ inputs.mode == 'window' && 'window' || '' }}"
 
   crawl:
@@ -177,10 +175,10 @@ jobs:
             }
 
   # 图床先行探测: event/campaign/gacha 的 title 图常先于公告上线。
-  # 每次触发都跑(加密轮询 :20/:35/:50 跳过)，独立于 RSS 变更；needs crawl 串在其后避免并发推送竞态。
+  # 每次触发都跑(Worker 每小时 auto + 每日 window)，独立于 RSS 变更；needs crawl 串在其后避免并发推送竞态。
   probe:
     needs: crawl
-    if: ${{ always() && github.event.schedule != '20,35,50 * * * *' }}
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
