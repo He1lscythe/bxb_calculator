@@ -1,0 +1,15 @@
+name = "bxb-dispatch"
+main = "src/index.js"
+compatibility_date = "2026-06-16"
+
+# 可靠定时触发 GitHub Actions(绕开 GitHub schedule 丢跑)。
+# 全部 UTC。GitHub 原生 cron 保留作兜底。
+#   15 7,15 * * *  → update-database  (JST 16:15 / 00:15)
+#   5 * * * *      → topics auto       (每小时 :05)
+#   8 7 * * *      → topics window     (JST 16:08 每日兜底重爬)
+[triggers]
+crons = ["15 7,15 * * *", "5 * * * *", "8 7 * * *"]
+
+# Secret(不写在这里，用 `wrangler secret put` 或 dashboard 设):
+#   GH_TOKEN     fine-grained PAT (bxb_calculator, Actions: Read and write)
+#   TRIGGER_KEY  /trigger 手动测试端点的鉴权随机串
