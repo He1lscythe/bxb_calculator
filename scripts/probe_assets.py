@@ -65,6 +65,49 @@ def url_exists(path):
         return False
 
 
+def _series(path_fmt, cap=40):
+    """探 path_fmt.format(n=1..) 直到第一个 404,返回存在的完整 URL 列表(N 连续)。"""
+    urls = []
+    for n in range(1, cap + 1):
+        p = path_fmt.format(n=n)
+        if url_exists(p):
+            urls.append(f"{ASSET_BASE}/{p}")
+        else:
+            break
+    return urls
+
+
+def enumerate_images(cat, i):
+    """命中后枚举该实体的全部图 URL(每类命名不同,探到 404 为止)。
+
+    gacha    : title_{id}_1..N
+    events   : title.jpg (或 title_{id}.jpg) + leaflet_1{id}_1..M
+    campaign : title_{id}.jpg / title.jpg + title_{id}_1..N + info_{id}_1..K
+    """
+    out = []
+    if cat == "gacha":
+        out += _series(f"gachas/{i}/title_{i}_{{n}}.jpg")
+    elif cat == "events":
+        if url_exists(f"events/{i}/title.jpg"):
+            out.append(f"{ASSET_BASE}/events/{i}/title.jpg")
+        elif url_exists(f"events/{i}/title_{i}.jpg"):
+            out.append(f"{ASSET_BASE}/events/{i}/title_{i}.jpg")
+        out += _series(f"events/{i}/leaflet_1{i}_{{n}}.jpg")
+    elif cat == "campaign":
+        for single in (f"campaign/{i}/title_{i}.jpg", f"campaign/{i}/title.jpg"):
+            if url_exists(single):
+                out.append(f"{ASSET_BASE}/{single}")
+        out += _series(f"campaign/{i}/title_{i}_{{n}}.jpg")
+        out += _series(f"campaign/{i}/info_{i}_{{n}}.jpg")
+    # 去重保序
+    seen, uniq = set(), []
+    for u in out:
+        if u not in seen:
+            seen.add(u)
+            uniq.append(u)
+    return uniq
+
+
 def archive_recent_max(cats):
     """近 LOOKBACK_DAYS 天归档页里、属于 cats 的最大 id (< ID_CAP)。"""
     cutoff = int((datetime.now() - timedelta(days=LOOKBACK_DAYS)).strftime("%Y%m%d"))
@@ -103,9 +146,11 @@ def probe_seq(name, cats, cand_fn, state):
                 url = f"{ASSET_BASE}/{path}"
                 if j not in found:
                     found.add(j)
+                    imgs = enumerate_images(cat, j)
                     new_hits.append({"sequence": name, "category": cat,
-                                     "id": j, "url": url, "ts": now_jst_str()})
-                    print(f"  ★ 命中 {cat} id={j}: {url}")
+                                     "id": j, "url": url, "images": imgs,
+                                     "ts": now_jst_str()})
+                    print(f"  ★ 命中 {cat} id={j}: {len(imgs)} 张图 {imgs[:1]}")
                 else:
                     print(f"  · 已知 {cat} id={j} (已报过)")
                 s["floor"] = max(s.get("floor", 0), j)
