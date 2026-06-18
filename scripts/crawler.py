@@ -330,6 +330,23 @@ def save_new_version(num, fresh_raw, base_url, entry, ts, ts_source, versions, r
     })
 
 
+def latest_tsuiki_ts(raw, canonical):
+    """正文里找所有 'M/D HH:MM追記' 时间,返回最新一条 'YYYY/MM/DD HH:MM:00';无则 None。
+    年份取 canonical 文件名的年(追記不含年);追記月日 < 公告月日则视为跨年 +1。"""
+    base_y, base_mo, base_d = int(canonical[6:10]), int(canonical[10:12]), int(canonical[12:14])
+    text = BeautifulSoup(raw, "lxml").get_text(" ")
+    best = None
+    for m in re.finditer(r"(\d{1,2})\s*/\s*(\d{1,2})[\s　]+(\d{1,2})\s*[:：]\s*(\d{2})\s*追記", text):
+        mo, d, hh, mm = (int(m.group(i)) for i in range(1, 5))
+        y = base_y + (1 if (mo, d) < (base_mo, base_d) else 0)
+        key = (y, mo, d, hh, mm)
+        if best is None or key > best:
+            best = key
+    if best:
+        return f"{best[0]:04d}/{best[1]:02d}/{best[2]:02d} {best[3]:02d}:{best[4]:02d}:00"
+    return None
+
+
 def recrawl(num, versions, r2_needed, rss_ts=None, rss_ts_source="rss"):
     """重爬已知 id。返回 'edit'（产生新版本）/ 'same' / 'miss'。"""
     entry = ensure_version_entry(num, versions)
@@ -348,9 +365,13 @@ def recrawl(num, versions, r2_needed, rss_ts=None, rss_ts_source="rss"):
         if legacy_equal(fresh_raw, HTML_DIR / entry["canonical"]):
             last["hash"] = h  # 内容相同，补登 hash，下次直接快速比对
             return "same"
-    # RSS pubDate 没随编辑更新 (silent edit:官网加注记但 pubDate 不变) → rss_ts 会跟上一版相同,
-    # 改用检测时间,避免两个版本时间戳重复、版本切换器分不清。
-    if rss_ts and rss_ts != last["ts"]:
+    # 版本时间戳优先级:① 正文「M/D HH:MM追記」最新一条(官网改动必带追記、最准)
+    #   ② RSS pubDate(若随编辑更新了、与上一版不同) ③ 检测时间兜底。
+    # 避免 silent edit(改正文但 pubDate 不变)时与上一版时间戳重复。
+    tsuiki = latest_tsuiki_ts(fresh_raw, entry["canonical"])
+    if tsuiki:
+        ts, ts_source = tsuiki, "tsuiki"
+    elif rss_ts and rss_ts != last["ts"]:
         ts, ts_source = rss_ts, rss_ts_source
     else:
         ts, ts_source = now_jst_str(), "detected"

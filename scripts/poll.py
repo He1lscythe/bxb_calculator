@@ -39,7 +39,8 @@ CRON_HOURLY = "5 * * * *"
 CRON_QUARTER = "20,35,50 * * * *"
 CRON_DAILY = "5 7 * * *"  # 16:05 JST 安全网
 WINDOW_HOURS = 5
-WINDOW_IDS = 40
+WINDOW_IDS = 40       # 全量安全网窗口(每日 / need_window)
+RECENT_WINDOW = 15   # 每小时小窗口:重爬最近 N 条比 hash,抓 silent edit(RSS pubDate 不变的暗改)
 
 
 def fetch_rss():
@@ -103,7 +104,8 @@ def do_check(schedule, dispatch):
         gh_output("mode", "none")
         return
     rss_items = fetch_rss()
-    gh_output("mode", "rss" if rss_has_change(state, rss_items) else "none")
+    # 小时档:RSS 有新/变 → rss;否则 → recent(仍重爬最近 RECENT_WINDOW 条抓 silent edit,不再 none 跳过)
+    gh_output("mode", "rss" if rss_has_change(state, rss_items) else "recent")
 
 
 def change_for(num, versions, change_type):
@@ -123,9 +125,9 @@ def change_for(num, versions, change_type):
     }
 
 
-def window_recrawl(versions, r2_needed, rss_ts_by_id):
+def window_recrawl(versions, r2_needed, rss_ts_by_id, n=WINDOW_IDS):
     changes = []
-    for num in recent_ids(WINDOW_IDS):
+    for num in recent_ids(n):
         status = recrawl(num, versions, r2_needed, rss_ts=rss_ts_by_id.get(num))
         if status == "edit":
             changes.append(change_for(num, versions, "edit"))
@@ -174,12 +176,12 @@ def do_execute(mode):
             need_window = True
         known["pubDate"] = it["pubdate_raw"]
 
-    # 3) 滑窗重爬（安全网 / 无法定向时）
-    if need_window:
-        edited = {c["id"] for c in changes}
-        for c in window_recrawl(versions, r2_needed, rss_ts_by_id):
-            if c["id"] not in edited:
-                changes.append(c)
+    # 3) 窗口重爬:full(40,need_window/每日安全网)或 small(RECENT_WINDOW,每次都跑、抓 silent edit)
+    win = WINDOW_IDS if need_window else RECENT_WINDOW
+    edited = {c["id"] for c in changes}
+    for c in window_recrawl(versions, r2_needed, rss_ts_by_id, n=win):
+        if c["id"] not in edited:
+            changes.append(c)
 
     for c in changes:
         update_version_selects(c["id"], versions)
@@ -243,7 +245,7 @@ def main():
     g.add_argument("--seed", action="store_true")
     ap.add_argument("--schedule", default="")
     ap.add_argument("--dispatch", default="")
-    ap.add_argument("--mode", default="rss", choices=["rss", "window"])
+    ap.add_argument("--mode", default="rss", choices=["rss", "recent", "window"])
     args = ap.parse_args()
 
     if args.check:
