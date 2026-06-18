@@ -178,7 +178,7 @@ def notify_master_data():
         return
     title, nodes = changelog_to_nodes(cl.read_text(encoding="utf-8"))
     url = telegraph_page(title, nodes)
-    msg = f"📊 master_data 更新 {folder.name}\n{url}"
+    msg = f"📊 master_data 更新 {folder.name}\n{url}\n#master_data"
     j = tg("sendMessage", chat_id=TG_CHAT, text=msg, disable_web_page_preview=False)
     print("master_data 通知:", "ok" if j.get("ok") else j.get("description"), "|", url)
 
@@ -261,7 +261,7 @@ def notify_asset_version():
             {"tag": "figcaption", "children": [nm]},
         ]})
     page = telegraph_page(f"asset_version {new_v} 新增/调整", nodes)
-    j = tg("sendMessage", chat_id=TG_CHAT, text=f"🖼 asset_version {new_v}（{len(imgs)} 图 / delta {len(delta)}）\n{page}")
+    j = tg("sendMessage", chat_id=TG_CHAT, text=f"🖼 asset_version {new_v}（{len(imgs)} 图 / delta {len(delta)}）\n{page}\n#asset_version")
     print("asset_version 通知:", "ok" if j.get("ok") else j.get("description"), "|", page)
 
 
