@@ -130,9 +130,21 @@ jobs:
             if (!TG_TOKEN || !TG_CHAT) { core.info('未配置 TELEGRAM secret、跳过通知'); return; }
             if (!fs.existsSync('state/changes.json')) return;
             const data = JSON.parse(fs.readFileSync('state/changes.json', 'utf8'));
+            const slugTag = (slug) => {
+              if (!slug) return '#topic';
+              const map = [['event_', '#event'], ['c_', '#campaign'], ['g_', '#gacha'],
+                ['info_4koma', '#info_4koma'], ['info_kaini', '#info_kaini'], ['balance_', '#balance'],
+                ['yokoku_', '#yokoku'], ['loginbonus', '#loginbonus'], ['update_', '#update'],
+                ['medal_', '#medal_shop'], ['guildbattle', '#guildbattle'], ['ridy_room', '#ridy_room'],
+                ['advance_diapack', '#diapack'], ['advance_', '#diapack']];
+              for (const [pre, tag] of map) if (slug.startsWith(pre)) return tag;
+              const keep = [];  // 兜底:取到第一个数字/Camel 段前的前缀
+              for (const p of slug.split('_')) { if (/^\d/.test(p) || /^[A-Z]/.test(p)) break; keep.push(p); }
+              return '#' + (keep.join('_') || 'topic');
+            };
             for (const c of (data.changes || [])) {
               const prefix = c.type === 'new' ? '🆕 [新公告]' : '✏️ [修改]';
-              const text = `${prefix} ${c.title}\n${c.url_official}`;
+              const text = `${prefix} ${c.title}\n${c.url_official}\n${slugTag(c.slug)}`;
               const r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -194,7 +206,8 @@ jobs:
             for (const h of (data.hits || [])) {
               const imgs = (h.images && h.images.length) ? h.images : (h.url ? [h.url] : []);
               if (!imgs.length) continue;
-              const caption = `🔔 [图床先行] ${h.category} id=${h.id}（${imgs.length} 图）\ntitle 图已上图床、公告可能尚未发布。`;
+              const catTag = { gacha: '#gacha', events: '#event', campaign: '#campaign' }[h.category] || '';
+              const caption = `🔔 [图床先行] ${h.category} id=${h.id}（${imgs.length} 图）\ntitle 图已上图床、公告可能尚未发布。\n#preview ${catTag}`.trim();
               // sendMediaGroup 相册,每组最多 10 张;caption 放第一组第一张
               let first = true;
               for (let k = 0; k < imgs.length; k += 10) {
