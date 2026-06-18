@@ -19,6 +19,11 @@ TG_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TG_CHAT = os.environ.get("TELEGRAM_CHAT_ID")
 _MT = os.environ.get("BXB_MASTER_TABLES")
 MT = Path(_MT) if _MT else None
+# 固定 Telegraph 账号 token(GitHub secret)。配了 → 建的页可后续 editPage 原地更新;
+# 没配 → 退回匿名 createAccount(一次性、不可编辑、向后兼容本地)。
+TELEGRAPH_TOKEN = os.environ.get("TELEGRAPH_TOKEN")
+# 快照名 → 已建 Telegraph 页面 path 的映射(随 data/master-tables 提交)。供 editPage 原地更新。
+INDEX_PATH = (MT / "state" / "telegraph_index.json") if MT else None
 
 
 def tg(method, **payload):
@@ -26,21 +31,48 @@ def tg(method, **payload):
     return r.json()
 
 
-def telegraph_page(title, nodes):
-    """匿名建号 + 建页,返回公开 URL。"""
-    acc = requests.post("https://api.telegra.ph/createAccount",
-                        data={"short_name": "bxb", "author_name": "BxB Bot"}, timeout=20).json()
-    token = acc["result"]["access_token"]
-    r = requests.post("https://api.telegra.ph/createPage", data={
+def _load_tg_index():
+    if INDEX_PATH and INDEX_PATH.is_file():
+        try:
+            return json.loads(INDEX_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            return {}
+    return {}
+
+
+def _save_tg_index(idx):
+    if not INDEX_PATH:
+        return
+    INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
+    INDEX_PATH.write_text(json.dumps(idx, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def telegraph_upsert(title, nodes, path=None):
+    """建页;若给 path 且配了 TELEGRAPH_TOKEN → editPage 原地改(URL/path 不变)。返回 (url, path)。
+    没配 TELEGRAPH_TOKEN 时每次匿名 createAccount 建新页(无法后续编辑)。editPage 失败(path 失效/
+    token 不匹配)自动回退 createPage。"""
+    token = TELEGRAPH_TOKEN
+    if not token:
+        acc = requests.post("https://api.telegra.ph/createAccount",
+                            data={"short_name": "bxb", "author_name": "BxB Bot"}, timeout=20).json()
+        token = acc["result"]["access_token"]
+    data = {
         "access_token": token,
         "title": title[:256],
         "author_name": "BxB Bot",
         "content": json.dumps(nodes, ensure_ascii=False),
         "return_content": "false",
-    }, timeout=30).json()
+    }
+    if path and TELEGRAPH_TOKEN:
+        r = requests.post("https://api.telegra.ph/editPage",
+                          data=dict(data, path=path), timeout=30).json()
+        if r.get("ok"):
+            return r["result"]["url"], r["result"]["path"]
+        print(f"  editPage({path}) 失败: {r.get('error')}、改为新建")
+    r = requests.post("https://api.telegra.ph/createPage", data=data, timeout=30).json()
     if not r.get("ok"):
         raise RuntimeError(f"telegraph createPage 失败: {r.get('error')}")
-    return r["result"]["url"]
+    return r["result"]["url"], r["result"]["path"]
 
 
 _INLINE_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|`([^`]+)`")
@@ -177,7 +209,15 @@ def notify_master_data():
         print("无 changelog、跳过")
         return
     title, nodes = changelog_to_nodes(cl.read_text(encoding="utf-8"))
-    url = telegraph_page(title, nodes)
+    idx = _load_tg_index()
+    section = idx.setdefault("master_data", {})
+    existing = section.get(folder.name)
+    url, path = telegraph_upsert(title, nodes, path=(existing or {}).get("path"))
+    section[folder.name] = {"path": path, "url": url}
+    _save_tg_index(idx)
+    if existing:  # 已建过 → editPage 原地更新、URL 不变、频道旧链接自动指向新内容、不重发
+        print(f"master_data 已原地更新 Telegraph(URL 不变、不重发频道): {url}")
+        return
     msg = f"📊 master_data 更新 {folder.name}\n{url}\n#master_data"
     j = tg("sendMessage", chat_id=TG_CHAT, text=msg, disable_web_page_preview=False)
     print("master_data 通知:", "ok" if j.get("ok") else j.get("description"), "|", url)
@@ -260,7 +300,15 @@ def notify_asset_version():
             {"tag": "img", "attrs": {"src": url}},
             {"tag": "figcaption", "children": [nm]},
         ]})
-    page = telegraph_page(f"asset_version {new_v} 新增/调整", nodes)
+    idx = _load_tg_index()
+    section = idx.setdefault("asset_version", {})
+    existing = section.get(str(new_v))
+    page, path = telegraph_upsert(f"asset_version {new_v} 新增/调整", nodes, path=(existing or {}).get("path"))
+    section[str(new_v)] = {"path": path, "url": page}
+    _save_tg_index(idx)
+    if existing:
+        print(f"asset_version 已原地更新 Telegraph(URL 不变、不重发频道): {page}")
+        return
     j = tg("sendMessage", chat_id=TG_CHAT, text=f"🖼 asset_version {new_v}（{len(imgs)} 图 / delta {len(delta)}）\n{page}\n#asset_version")
     print("asset_version 通知:", "ok" if j.get("ok") else j.get("description"), "|", page)
 

@@ -111,8 +111,9 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [sync_icons.py](../scripts/ci/sync_icons.py) | manifest 驱动: 缺失 icon → 下 .dat → extract → copy_images。重建结果与本地 copy_images 逐字节一致 |
 | [sync_npc_motions.py](../scripts/ci/sync_npc_motions.py) | 增量补 `_npc_motions.json` (manifest npc-motion vs 基线、只下缺的) |
 | [run_update.py](../scripts/ci/run_update.py) | 编排: A (master→6 表)、B (fetch_wiki+aux→revise+安全检查)、C (asset-version→icons+npc-motion)、D (快照+changelog)。各模块失败优雅降级 |
+| [notify.py](../scripts/ci/notify.py) | 更新后发 Telegram 频道通知: `master_data` changelog → Telegraph 文章、`asset_version` delta → 解 PNG→R2→Telegraph 图册。Telegraph 用固定账号 (secret `TELEGRAPH_TOKEN`) `createPage`,page path 记进 `master_tables/state/telegraph_index.json` (随 data/master-tables 提交);同一快照重生 changelog 时 `editPage` **原地更新** (URL 不变、频道旧链接自动指向新内容、不重发)。无 `TELEGRAPH_TOKEN` 则退回匿名建页 (不可编辑) |
 
-提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise → **data-staging** (安全检查通过且有变更);master_data + asset_version 快照 → **data/master-tables**。`paths.py`/`copy_images.py` 都加了 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向 checkout/临时目录、本地默认不变。
+提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise → **data-staging** (安全检查通过且有变更);master_data + asset_version 快照 + `state/telegraph_index.json` → **data/master-tables**。`paths.py`/`copy_images.py` 都加了 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向 checkout/临时目录、本地默认不变。
 
 > asset-version 流程 (2026-06-12 抓包确认、`Maken.HTTP.Get/Download` @ OnePlus): `GET bxb-asset.grimoire.codes/version_lz4/android/current` → 版本号、`/version-{ver}.gz` → manifest、`package_lz4/android/{name}.v{ver}.dat` → 资源,全程**无鉴权纯 CDN**。新动作 (npc-motion) + 新实体图 (icons) 都增量自动补。全量 npc-motion 重生 / 重绘图强刷仍走本地 (罕见)。
 
