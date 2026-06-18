@@ -134,11 +134,11 @@ def changelog_to_nodes(md):
         st = raw.strip()
         if not st:
             i += 1
-        elif st.startswith("## "):
-            nodes.append({"tag": "h3", "children": _inline(st[3:].strip())})
-            i += 1
-        elif st.startswith("### "):
-            nodes.append({"tag": "h4", "children": _inline(st[4:].strip())})
+        elif st.startswith("#"):
+            # markdown 标题:## → h3、###/####/… → h4(Telegraph 只支持 h3/h4)
+            level = len(st) - len(st.lstrip("#"))
+            nodes.append({"tag": "h3" if level <= 2 else "h4",
+                          "children": _inline(st.lstrip("#").strip())})
             i += 1
         elif st == "---":
             nodes.append({"tag": "hr"})
