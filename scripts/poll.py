@@ -28,6 +28,7 @@ from common import (
 )
 from crawler import (
     crawl_new,
+    extract_edit_note,
     find_canonical,
     recent_ids,
     recrawl,
@@ -116,13 +117,18 @@ def change_for(num, versions, change_type):
     a = soup.find("a", class_="title_text")
     if a:
         title = a.get_text(strip=True)
-    return {
+    change = {
         "id": num, "type": change_type, "title": title,
         "canonical": canonical, "ts": entry["versions"][-1]["ts"],
         "slug": entry.get("slug"),
         "url_official": f"{SITE}/topics/{num}",
         "mirror": f"html/{canonical}",
     }
+    if change_type == "edit":
+        note = extract_edit_note(soup)
+        if note:
+            change["edit_note"] = note
+    return change
 
 
 def window_recrawl(versions, r2_needed, rss_ts_by_id, n=WINDOW_IDS):

@@ -347,6 +347,22 @@ def latest_tsuiki_ts(raw, canonical):
     return None
 
 
+def extract_edit_note(soup):
+    """提取页面的「追記」注记文字(= 本次修改的部分),供编辑通知附在链接下方。
+    优先含 追記 的 .caution_t 整块;无则全文取含 追記 的文本节点。多条按出现序拼接。"""
+    notes = []
+    for el in soup.select(".caution_t"):
+        t = el.get_text(" ", strip=True)
+        if "追記" in t and t not in notes:
+            notes.append(t)
+    if not notes:
+        for s in soup.find_all(string=lambda x: x and "追記" in x):
+            t = " ".join(s.split())
+            if t and t not in notes:
+                notes.append(t)
+    return "\n".join(notes)
+
+
 def recrawl(num, versions, r2_needed, rss_ts=None, rss_ts_source="rss"):
     """重爬已知 id。返回 'edit'（产生新版本）/ 'same' / 'miss'。"""
     entry = ensure_version_entry(num, versions)
