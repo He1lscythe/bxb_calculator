@@ -108,6 +108,15 @@ jobs:
           git pull --rebase origin data/master-tables || true
           git push origin HEAD:data/master-tables
 
+      # master_data changelog → Telegraph 文章 → 发频道
+      - name: Notify Telegram (master_data changelog)
+        if: steps.sum.outputs.snapshot_status == 'archived'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          BXB_MASTER_TABLES: ${{ github.workspace }}/_mt
+        run: python scripts/ci/notify.py master_data
+
       # A + C: 业务表 + _npc_motions + icons → main
       - name: Commit main (data + npc_motions + icons)
         run: |
