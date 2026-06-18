@@ -348,8 +348,12 @@ def recrawl(num, versions, r2_needed, rss_ts=None, rss_ts_source="rss"):
         if legacy_equal(fresh_raw, HTML_DIR / entry["canonical"]):
             last["hash"] = h  # 内容相同，补登 hash，下次直接快速比对
             return "same"
-    ts = rss_ts or now_jst_str()
-    ts_source = rss_ts_source if rss_ts else "detected"
+    # RSS pubDate 没随编辑更新 (silent edit:官网加注记但 pubDate 不变) → rss_ts 会跟上一版相同,
+    # 改用检测时间,避免两个版本时间戳重复、版本切换器分不清。
+    if rss_ts and rss_ts != last["ts"]:
+        ts, ts_source = rss_ts, rss_ts_source
+    else:
+        ts, ts_source = now_jst_str(), "detected"
     save_new_version(num, fresh_raw, base_url, entry, ts, ts_source, versions, r2_needed)
     print(f"  topic {num} 检测到修改，已存为新版本（{ts}）")
     return "edit"
