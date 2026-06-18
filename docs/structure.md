@@ -105,7 +105,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [动作同步.py](../scripts/ci/动作同步.py) | 增量补 `_npc_motions.json` (manifest npc-motion vs 基线、只下缺的) |
 | [
 
-提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise → **data-staging** (安全检查通过且有变更);master_data + asset_version 快照 → **master_tables**。`paths.py`/`copy_images.py` 都加了 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向 checkout/临时目录、本地默认不变。
+提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise → **data-staging** (安全检查通过且有变更);master_data + asset_version 快照 + `state/通知索引.json` → **master_tables**。`paths.py`/`copy_images.py` 都加了 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向 checkout/临时目录、本地默认不变。
 
 > asset-version 流程 (2026-06-12 实测确认、`
 
