@@ -84,6 +84,7 @@ jobs:
           F="${{ runner.temp }}/ci_update_summary.json"
           if [ -f "$F" ]; then
             echo "snapshot_status=$(jq -r '.snapshot_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
+            echo "asset_version_status=$(jq -r '.asset_version_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
             echo "revise_safe=$(jq -r '.revise_safe // false' "$F")" >> "$GITHUB_OUTPUT"
             echo "revise_changed=$(jq -r '(.revise_changed // []) | length' "$F")" >> "$GITHUB_OUTPUT"
           else
@@ -111,11 +112,27 @@ jobs:
       # master_data changelog → Telegraph 文章 → 发频道
       - name: Notify Telegram (master_data changelog)
         if: steps.sum.outputs.snapshot_status == 'archived'
+        continue-on-error: true
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           BXB_MASTER_TABLES: ${{ github.workspace }}/_mt
         run: python scripts/ci/notify.py master_data
+
+      # asset_version delta → 解 PNG → 传 R2 → Telegraph 图册 → 发频道
+      - name: Notify Telegram (asset_version 图册)
+        if: steps.sum.outputs.asset_version_status == 'archived'
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          BXB_MASTER_TABLES: ${{ github.workspace }}/_mt
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
+        run: python scripts/ci/notify.py asset_version
 
       # A + C: 业务表 + _npc_motions + icons → main
       - name: Commit main (data + npc_motions + icons)

@@ -183,6 +183,88 @@ def notify_master_data():
     print("master_data 通知:", "ok" if j.get("ok") else j.get("description"), "|", url)
 
 
+def _r2_client():
+    import boto3
+    return boto3.client(
+        "s3",
+        endpoint_url=os.environ["R2_ENDPOINT"],
+        aws_access_key_id=os.environ["R2_ACCESS_KEY_ID"],
+        aws_secret_access_key=os.environ["R2_SECRET_ACCESS_KEY"],
+        region_name="auto",
+    )
+
+
+def asset_delta(new_v, prev_v):
+    base = MT / "asset_version"
+    new = json.loads((base / str(new_v) / "_asset-version_source.json").read_text(encoding="utf-8"))
+    old = {"files": []}
+    if prev_v is not None:
+        old = json.loads((base / str(prev_v) / "_asset-version_source.json").read_text(encoding="utf-8"))
+    of = {f["name"]: f for f in old.get("files", [])}
+    nf = {f["name"]: f for f in new["files"]}
+    delta = sorted((set(nf) - set(of)) | {n for n in set(of) & set(nf) if of[n].get("md5") != nf[n].get("md5")})
+    return delta, nf
+
+
+def notify_asset_version():
+    """最新两个 asset_version 快照算 delta → 下 .dat → 解 PNG → 传 R2 → Telegraph 图册 → 发链接。"""
+    base = MT / "asset_version"
+    vs = sorted(int(p.name) for p in base.iterdir() if p.is_dir() and p.name.isdigit())
+    if not vs:
+        print("无 asset_version 快照、跳过")
+        return
+    new_v, prev_v = vs[-1], (vs[-2] if len(vs) >= 2 else None)
+    delta, nf = asset_delta(new_v, prev_v)
+    if not delta:
+        print("asset_version 无 delta、跳过")
+        return
+
+    r2_pub = os.environ.get("R2_PUBLIC_BASE_URL", "").rstrip("/")
+    r2_bucket = os.environ.get("R2_BUCKET")
+    if not (r2_pub and r2_bucket and os.environ.get("R2_ACCESS_KEY_ID")):
+        print(f"未配 R2、跳过 asset 图册(delta {len(delta)} 项)")
+        return
+
+    import tempfile
+    sys.path.insert(0, str(Path(__file__).resolve().parent))  # cdn / extract_assets 同目录
+    import cdn
+    import extract_assets
+
+    s3 = _r2_client()
+    tmp = Path(tempfile.mkdtemp(prefix="assetprev_"))
+    imgs = []  # (asset_name, public_url)
+    for name in delta:
+        ent = nf[name]
+        dat = tmp / "_dat" / f"{name}.dat"
+        if not cdn.download_dat(name, ent["version"], dat, ent.get("md5")):
+            continue
+        try:
+            written = extract_assets.extract_png(dat, name, tmp)
+        except Exception:
+            written = []
+        for p in written:
+            p = Path(p)
+            key = f"asset_preview/{new_v}/{name}__{p.name}"
+            try:
+                s3.upload_file(str(p), r2_bucket, key, ExtraArgs={"ContentType": "image/png"})
+                imgs.append((name, f"{r2_pub}/{key}"))
+            except Exception as e:
+                print(f"  R2 上传失败 {key}: {e}")
+    if not imgs:
+        print(f"asset delta {len(delta)} 项无可展示图、跳过")
+        return
+
+    nodes = [{"tag": "h4", "children": [f"asset {prev_v}→{new_v}:{len(imgs)} 张图 / delta {len(delta)} 项"]}]
+    for nm, url in imgs:
+        nodes.append({"tag": "figure", "children": [
+            {"tag": "img", "attrs": {"src": url}},
+            {"tag": "figcaption", "children": [nm]},
+        ]})
+    page = telegraph_page(f"asset_version {new_v} 新增/调整", nodes)
+    j = tg("sendMessage", chat_id=TG_CHAT, text=f"🖼 asset_version {new_v}（{len(imgs)} 图 / delta {len(delta)}）\n{page}")
+    print("asset_version 通知:", "ok" if j.get("ok") else j.get("description"), "|", page)
+
+
 def main():
     if not TG_TOKEN or not TG_CHAT:
         print("未配置 TELEGRAM secret、跳过通知")
@@ -190,6 +272,8 @@ def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else ""
     if mode == "master_data":
         notify_master_data()
+    elif mode == "asset_version":
+        notify_asset_version()
     else:
         print(f"未知 mode: {mode!r}")
 
