@@ -38,12 +38,12 @@ async function dispatch(env, workflowFile, inputs) {
 
 // 按触发的 cron 表达式决定调哪个 workflow
 async function runForCron(cron, env) {
-  if (cron === "15 7,15 * * *") {
+  if (cron === "1 7,15 * * *") {  // JST 16:01 / 00:01
     await dispatch(env, "update-database.yml");
   } else if (cron === "8 7 * * *") {
     await dispatch(env, "bxb-topics.yml", { mode: "window" });
   } else {
-    // "5 * * * *" 及其它:按 topics 每小时 auto 轮询
+    // "1 * * * *" 及其它:按 topics 每小时 auto 轮询
     await dispatch(env, "bxb-topics.yml", { mode: "auto" });
   }
 }
