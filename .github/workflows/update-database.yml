@@ -116,6 +116,7 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAPH_TOKEN: ${{ secrets.TELEGRAPH_TOKEN }}
           BXB_MASTER_TABLES: ${{ github.workspace }}/_mt
         run: python scripts/ci/notify.py master_data
 
@@ -126,6 +127,7 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAPH_TOKEN: ${{ secrets.TELEGRAPH_TOKEN }}
           BXB_MASTER_TABLES: ${{ github.workspace }}/_mt
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -133,6 +135,18 @@ jobs:
           R2_BUCKET: ${{ vars.R2_BUCKET }}
           R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
         run: python scripts/ci/notify.py asset_version
+
+      # Telegraph 索引(快照 → 页面 path 映射)→ data/master-tables;下次同快照重生 changelog 时 editPage 原地更新
+      - name: Commit telegraph index
+        if: steps.sum.outputs.snapshot_status == 'archived' || steps.sum.outputs.asset_version_status == 'archived'
+        continue-on-error: true
+        working-directory: _mt
+        run: |
+          git add state/telegraph_index.json 2>/dev/null || true
+          if git diff --cached --quiet; then echo "telegraph index 无变更"; exit 0; fi
+          git commit -m "data(master-tables): telegraph index $(date -u +%FT%TZ)"
+          git pull --rebase origin data/master-tables || true
+          git push origin HEAD:data/master-tables
 
       # A + C: 业务表 + _npc_motions + icons → main
       - name: Commit main (data + npc_motions + icons)
