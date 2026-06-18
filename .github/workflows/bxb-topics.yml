@@ -144,8 +144,9 @@ jobs:
             };
             for (const c of (data.changes || [])) {
               const prefix = c.type === 'new' ? '🆕 [新公告]' : '✏️ [修改]';
-              let text = `${prefix} ${c.title}\n${c.url_official}\n${slugTag(c.slug)}`;
+              let text = `${prefix} ${c.title}\n${c.url_official}`;
               if (c.edit_note) text += `\n\n📝 ${c.edit_note.slice(0, 800)}`;  // 修改的「追記」文字
+              text += `\n\n${slugTag(c.slug)}`;  // hashtag 永远在最下方
               const r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
