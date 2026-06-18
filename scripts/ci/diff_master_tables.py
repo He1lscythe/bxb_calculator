@@ -680,10 +680,156 @@ def _render_modified_entry_first(modified: list, pk: str, table: str,
     return lines
 
 
+WEAPON_MASS_THRESHOLD = 5  # 一个 skill 子项改动影响 ≥N 个 weapon → 按字段聚合;否则逐 weapon
+
+
+def _render_weapon_detail(oe: dict, ne: dict, diff_fields: list, pk: str,
+                          context: dict | None) -> list[str]:
+    """单个 weapon 明细(基于新值、与新增同布局);变化的字段显示 **old → new** 加粗。"""
+    context = context or {}
+    e = ne
+    chg = set(diff_fields)
+
+    def T(field, label, val_str):  # 变化字段 → **label=old → new**(整体加粗);否则 label=val
+        if field in chg:
+            return f'**{label}={oe.get(field)} → {ne.get(field)}**'
+        return f'{label}={val_str}'
+
+    def TE(field, label, ekind):  # enum 字段(element/type/rarity)
+        v = ne.get(field)
+        if field in chg:
+            return f'**{label}={_enum(context, ekind, oe.get(field))} → {_enum(context, ekind, v)}**'
+        return f'{label}={_enum(context, ekind, v)}'
+
+    lines = [f'- {_entry_label(e, pk, "weapons", context, side="new")}']
+    bn = e.get('base_name'); cn = e.get('costume_name')
+    if bn:
+        cstr = f' (costume: {cn})' if cn else ''
+        lines.append(f'  - base_name: {bn}{cstr}')
+    tags = []
+    for fld, lbl, ekind in (('element_id', 'element', 'elements'),
+                            ('weapon_type_id', 'type', 'weapon_types'),
+                            ('rarity', 'rarity', 'rarities')):
+        if e.get(fld) not in (None, '', 0):
+            tags.append(TE(fld, lbl, ekind))
+    if e.get('cv'):
+        tags.append(T('cv', 'cv', e['cv']))
+    if tags:
+        lines.append(f'  - {" / ".join(tags)}')
+    stat_parts = []
+    for k, lbl in (('max_hp', 'HP'), ('max_attack', 'ATK'), ('max_defense', 'DEF'),
+                   ('max_speed', 'SPD'), ('max_break', 'BREAK')):
+        if e.get(k) is not None:
+            stat_parts.append(T(k, lbl, e[k]))
+    if stat_parts:
+        lines.append(f'  - max stats: {" / ".join(stat_parts)}')
+    misc = []
+    hc = e.get('hit_counts'); ac = e.get('attack_count')
+    if hc is not None or ac is not None:
+        hcs = T('hit_counts', 'hit_counts', hc)
+        misc.append(f'{hcs} ({ac}段)' if ac else hcs)
+    ms = [str(x) for x in (e.get('motion_speed'), e.get('motion_speed2'), e.get('motion_speed3')) if x is not None]
+    if ms:
+        misc.append(f'motion_speed=[{"/".join(ms)}]')
+    if e.get('mp'):
+        misc.append(T('mp', 'mp', e['mp']))
+    if misc:
+        lines.append(f'  - {"  ".join(misc)}')
+    extras = []
+    if e.get('three_size'):
+        extras.append(T('three_size', 'three_size', e['three_size']))
+    if e.get('initial_slot') is not None:
+        extras.append(T('initial_slot', 'initial_slot', e['initial_slot']))
+    if extras:
+        lines.append(f'  - {" / ".join(extras)}')
+    wa = e.get('weapon_arts') or {}
+    wa_suffix = e.get('weapon_arts_suffix'); wa_id = e.get('weapon_arts_id')
+    if wa_suffix or wa_id:
+        lines.append(f'  - BD: {wa_suffix or "?"} (arts_id={wa_id})')
+        if wa.get('description'):
+            lines.append(f'    - description: {_truncate(wa["description"], 120)}')
+        bd_meta = [f'{k}={wa[k]}' for k in ('cost', 'hit_count', 'value', 'additional_value')
+                   if wa.get(k) is not None]
+        if bd_meta:
+            lines.append(f'    - {" / ".join(bd_meta)}')
+    ws = e.get('weapon_skills') or []
+    if ws:
+        lines.append(f'  - innate skills ({len(ws)}):')
+        for sk in ws:
+            op = '+' if sk.get('math_type') == 'Addition' else '×'
+            lines.append(f'    - {sk.get("parameter")} {sk.get("math_type")} {op}{sk.get("value")} '
+                         f'— {_truncate(sk.get("description") or "", 80)}')
+    return lines
+
+
+def _render_weapons_modified(modified: list, pk: str, table: str,
+                              context: dict | None) -> list[str]:
+    """weapons 调整分流:技能子项改动影响 ≥WEAPON_MASS_THRESHOLD 个 weapon → 字段聚合;
+    其余(标量改动 / 影响少数 weapon 的技能改动)→ 逐 weapon、同新增完整格式。"""
+    nested = set()
+    for _, oe, ne, dfs in modified:
+        for f in dfs:
+            if _is_list_of_dicts(oe.get(f)) or _is_list_of_dicts(ne.get(f)):
+                nested.add(f)
+
+    # 统计每个 nested 字段的子项改动跨多少 weapon + 每个 weapon 各 nested 字段的子改动 key 集
+    field_owners = {f: defaultdict(list) for f in nested}
+    weapon_keys = defaultdict(lambda: defaultdict(set))  # pid -> field -> {change_key}
+    for pid, oe, ne, dfs in modified:
+        for f in (set(dfs) & nested):
+            old_arr = oe.get(f) or []; new_arr = ne.get(f) or []
+            subpk = _detect_subpk(old_arr) or _detect_subpk(new_arr)
+            if not subpk:
+                key = ('blob', None)
+                field_owners[f][key].append(pid); weapon_keys[pid][f].add(key); continue
+            ob = {it[subpk]: it for it in old_arr if subpk in it}
+            nb = {it[subpk]: it for it in new_arr if subpk in it}
+            for k in nb.keys() - ob.keys():
+                key = ('add', k); field_owners[f][key].append(pid); weapon_keys[pid][f].add(key)
+            for k in ob.keys() - nb.keys():
+                key = ('rem', k); field_owners[f][key].append(pid); weapon_keys[pid][f].add(key)
+            for k in ob.keys() & nb.keys():
+                if ob[k] == nb[k]:
+                    continue
+                sig = json.dumps(sorted((f2, str(ob[k].get(f2)), str(nb[k].get(f2)))
+                                        for f2 in set(ob[k]) | set(nb[k]) if ob[k].get(f2) != nb[k].get(f2)),
+                                 ensure_ascii=False)
+                key = ('mod', k, sig); field_owners[f][key].append(pid); weapon_keys[pid][f].add(key)
+    mass = {f: {k for k, pids in field_owners[f].items() if len(pids) >= WEAPON_MASS_THRESHOLD}
+            for f in nested}
+
+    individual, mass_only = [], []
+    for item in modified:
+        pid, oe, ne, dfs = item
+        has_scalar = any(f not in nested for f in dfs)
+        has_nonmass = any(k not in mass[f] for f in (set(dfs) & nested) for k in weapon_keys[pid][f])
+        (individual if (has_scalar or has_nonmass) else mass_only).append(item)
+
+    lines = []
+    if individual:
+        lines += [f'### 调整 ({len(individual)})', '']
+        for pid, oe, ne, dfs in sorted(individual, key=lambda t: t[0]):
+            lines += _render_weapon_detail(oe, ne, dfs, pk, context)
+        lines.append('')
+    if mass_only:
+        lines += [f'### 调整 ({len(mass_only)},技能批量·按字段聚合)', '']
+        by_field = defaultdict(list)
+        for item in mass_only:
+            for f in (set(item[3]) & nested):
+                by_field[f].append(item)
+        for f in sorted(by_field):
+            lines.append(f'#### `{f}` ({len(by_field[f])} 个)')
+            lines += _render_nested_array_diff(f, by_field[f], pk, table, context)
+            lines.append('')
+    return lines
+
+
 def _render_modified_section(modified: list, pk: str, table: str = '',
                               context: dict | None = None) -> list[str]:
     if not modified:
         return []
+    if table == 'weapons':
+        return _render_weapons_modified(modified, pk, table, context)
     # `materials` / `jobs` 走 entry-first 渲染 (per-entry: `[id] [name] [rarity]` header
     # + nested change list)、而非字段聚合。
     # materials: 每个 material 的 description 改动各自独立、字段聚合只会产出一墙单 id 行。
