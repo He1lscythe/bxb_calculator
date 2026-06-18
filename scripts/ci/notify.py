@@ -43,14 +43,81 @@ def telegraph_page(title, nodes):
     return r["result"]["url"]
 
 
-def _clean(s):
-    # [`113003`](weapons.json#L52768) → 113003 ; 去反引号(Telegraph pre 里链接无效)
-    s = re.sub(r"\[`?([^`\]]+)`?\]\([^)]+\)", r"\1", s)
-    return s.replace("`", "")
+_INLINE_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|`([^`]+)`")
+
+
+def _inline(s):
+    """行内 markdown → Telegraph children 数组:[`id`](rel) → code(相对链接丢) /
+    [text](http) → a / **x** → b / `x` → code;其余纯文本。"""
+    out, pos = [], 0
+    for m in _INLINE_RE.finditer(s):
+        if m.start() > pos:
+            out.append(s[pos:m.start()])
+        if m.group(1) is not None:  # [text](url)
+            text, url = m.group(1).strip("`"), m.group(2)
+            if url.startswith("http"):
+                out.append({"tag": "a", "attrs": {"href": url}, "children": [text]})
+            else:
+                out.append({"tag": "code", "children": [text]})  # 相对链接无效、保留 id 为 code
+        elif m.group(3) is not None:  # **bold**
+            out.append({"tag": "b", "children": [m.group(3)]})
+        elif m.group(4) is not None:  # `code`
+            out.append({"tag": "code", "children": [m.group(4)]})
+        pos = m.end()
+    if pos < len(s):
+        out.append(s[pos:])
+    return out or [s]
+
+
+def _table_to_ul(tbl):
+    """markdown 表格行 → ul(Telegraph 不支持 table)。每行 → 'col0: 表头1 值1 / 表头2 值2 …'。"""
+    rows = [[c.strip() for c in ln.strip().strip("|").split("|")] for ln in tbl]
+    rows = [r for r in rows if r]
+    if len(rows) < 2:
+        return []
+    header = rows[0]
+    items = []
+    for r in rows[1:]:
+        if all(set(c) <= set("-: ") for c in r):  # 跳过 |---|---| 分隔行
+            continue
+        rest = " / ".join(f"{header[k]} {r[k]}" for k in range(1, len(r)) if k < len(header))
+        items.append({"tag": "li", "children": [f"{r[0]}: {rest}" if rest else r[0]]})
+    return [{"tag": "ul", "children": items}] if items else []
+
+
+def _block_to_ul(block):
+    """连续列表行 → ul。Telegraph 不渲染嵌套 ul(会展平不换行),所以:
+    每个顶层 '- ' = 一个 li;更深层级 (  - /    - ) 用 <br> 换行 + 全角空格缩进塞进同一 li;
+    非 '-' 续行同样 <br> 接到当前 li。缩进 0/2/4 空格 = 层级 0/1/2。
+    """
+    ul = {"tag": "ul", "children": []}
+    cur = None  # 当前顶层 li
+    for raw in block:
+        m = re.match(r"^( *)-\s+(.*)$", raw)
+        if m:
+            level = len(m.group(1)) // 2
+            inline = _inline(m.group(2))
+            if level == 0 or cur is None:
+                cur = {"tag": "li", "children": list(inline)}
+                ul["children"].append(cur)
+            else:
+                marker = "　" * level + ("• " if level == 1 else "– ")
+                cur["children"].append({"tag": "br"})
+                cur["children"].append(marker)
+                cur["children"].extend(inline)
+        else:
+            cont = raw.strip()
+            if cur is not None and cont:
+                cur["children"].append({"tag": "br"})
+                cur["children"].append("　　")
+                cur["children"].extend(_inline(cont))
+    return ul
 
 
 def changelog_to_nodes(md):
-    """changelog.md → (title, Telegraph 节点)。每个 ## 段 → h4 标题 + pre 正文(等宽、保排版)。"""
+    """changelog.md → (title, Telegraph 节点)。完整转换:
+    #/## → h3、### → h4、表格 → ul、嵌套列表 → 嵌套 ul/li、--- → hr、其余 → p。
+    """
     lines = md.splitlines()
     title = "master_data changelog"
     body = []
@@ -59,21 +126,41 @@ def changelog_to_nodes(md):
             title = ln[2:].strip()
         else:
             body.append(ln)
-    sections, h, cur = [], None, []
-    for ln in body:
-        if ln.startswith("## "):
-            sections.append((h, cur))
-            h, cur = ln[3:].strip(), []
-        else:
-            cur.append(ln)
-    sections.append((h, cur))
+
     nodes = []
-    for h, b in sections:
-        if h:
-            nodes.append({"tag": "h4", "children": [h]})
-        text = "\n".join(_clean(x) for x in b).strip("\n")
-        if text:
-            nodes.append({"tag": "pre", "children": [text]})
+    i, n = 0, len(body)
+    while i < n:
+        raw = body[i]
+        st = raw.strip()
+        if not st:
+            i += 1
+        elif st.startswith("## "):
+            nodes.append({"tag": "h3", "children": _inline(st[3:].strip())})
+            i += 1
+        elif st.startswith("### "):
+            nodes.append({"tag": "h4", "children": _inline(st[4:].strip())})
+            i += 1
+        elif st == "---":
+            nodes.append({"tag": "hr"})
+            i += 1
+        elif st.startswith("|"):
+            tbl = []
+            while i < n and body[i].strip().startswith("|"):
+                tbl.append(body[i])
+                i += 1
+            nodes.extend(_table_to_ul(tbl))
+        elif re.match(r"^\s*-\s+", raw):
+            block = []
+            while i < n:
+                ls = body[i].strip()
+                if not ls or ls.startswith(("## ", "### ", "|")) or ls == "---":
+                    break
+                block.append(body[i])
+                i += 1
+            nodes.append(_block_to_ul(block))
+        else:
+            nodes.append({"tag": "p", "children": _inline(st)})
+            i += 1
     return title, nodes
 
 
