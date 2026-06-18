@@ -17,7 +17,6 @@ on:
 
 permissions:
   contents: write
-  issues: write
 
 concurrency:
   group: bxb-topics-crawler
@@ -119,59 +118,36 @@ jobs:
             git push origin topics
           fi
 
-      - name: Open issues for changes (email via Watch)
-        uses: actions/github-script@v7
+      - name: Notify Telegram (公告变更)
         env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
           PAGES_BASE_URL: ${{ vars.PAGES_BASE_URL }}
+        uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
+            const { TG_TOKEN, TG_CHAT } = process.env;
+            if (!TG_TOKEN || !TG_CHAT) { core.info('未配置 TELEGRAM secret、跳过通知'); return; }
             if (!fs.existsSync('state/changes.json')) return;
             const data = JSON.parse(fs.readFileSync('state/changes.json', 'utf8'));
             const base = (process.env.PAGES_BASE_URL || '').replace(/\/$/, '');
-            for (const c of data.changes) {
-              const prefix = c.type === 'new' ? '[新公告]' : '[修改]';
+            for (const c of (data.changes || [])) {
+              const prefix = c.type === 'new' ? '🆕 [新公告]' : '✏️ [修改]';
               const mirror = base ? `${base}/${c.mirror}` : c.mirror;
-              await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title: `${prefix} ${c.title}`,
-                body: [
-                  `- 时间 (JST): ${c.ts}`,
-                  `- 官网: ${c.url_official}`,
-                  `- 镜像: ${mirror}`,
-                ].join('\n'),
+              const text = [
+                `${prefix} ${c.title}`,
+                `时间 (JST): ${c.ts}`,
+                `官网: ${c.url_official}`,
+                `镜像: ${mirror}`,
+              ].join('\n');
+              const r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: TG_CHAT, text, disable_web_page_preview: false }),
               });
-            }
-
-            // 正式公告发布 → 自动关闭对应的 [图床先行] 预警 issue
-            const catMap = { events: 'events', campaign: 'campaign', gachas: 'gacha' };
-            const targets = new Set();
-            for (const c of data.changes) {
-              const f = `html/${c.canonical}`;
-              if (!fs.existsSync(f)) continue;
-              const txt = fs.readFileSync(f, 'utf8');
-              const re = /images\/topics\/(events|campaign|gachas)\/(\d+)\//g;
-              let m;
-              while ((m = re.exec(txt)) !== null) targets.add(`${catMap[m[1]]}:${m[2]}`);
-            }
-            if (targets.size) {
-              const { owner, repo } = context.repo;
-              const open = await github.paginate(github.rest.issues.listForRepo, {
-                owner, repo, state: 'open', per_page: 100,
-              });
-              for (const iss of open) {
-                const mm = iss.title.match(/^\[图床先行\]\s+(\S+)\s+id=(\d+)\b/);
-                if (mm && targets.has(`${mm[1]}:${mm[2]}`)) {
-                  await github.rest.issues.createComment({
-                    owner, repo, issue_number: iss.number,
-                    body: '正式公告已发布，自动关闭本图床先行预警。',
-                  });
-                  await github.rest.issues.update({
-                    owner, repo, issue_number: iss.number, state: 'closed',
-                  });
-                }
-              }
+              const j = await r.json();
+              if (!j.ok) core.warning(`telegram sendMessage 失败 (${c.title}): ${j.description}`);
             }
 
   # 图床先行探测: event/campaign/gacha 的 title 图常先于公告上线。
@@ -207,24 +183,36 @@ jobs:
             git push origin topics
           fi
 
-      - name: Open issues for asset hits (email via Watch)
+      - name: Notify Telegram (图床先行,发 title 图)
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
+            const { TG_TOKEN, TG_CHAT } = process.env;
+            if (!TG_TOKEN || !TG_CHAT) { core.info('未配置 TELEGRAM secret、跳过通知'); return; }
             if (!fs.existsSync('state/probe_hits.json')) return;
             const data = JSON.parse(fs.readFileSync('state/probe_hits.json', 'utf8'));
             for (const h of (data.hits || [])) {
-              await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title: `[图床先行] ${h.category} id=${h.id} 资源已上线`,
-                body: [
-                  `检测到 **${h.category}** id \`${h.id}\` 的 title 图已上传图床，公告可能尚未发布。`,
-                  ``,
-                  `- 图: ${h.url}`,
-                  `- 序列: ${h.sequence}`,
-                  `- 探测时间 (JST): ${h.ts}`,
-                ].join('\n'),
+              const caption = [
+                `🔔 [图床先行] ${h.category} id=${h.id}`,
+                `title 图已上图床、公告可能尚未发布。`,
+                h.url,
+              ].join('\n');
+              // 先试 sendPhoto(直接推图);失败(如图暂不可达)退回 sendMessage
+              let r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendPhoto`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: TG_CHAT, photo: h.url, caption }),
               });
+              let j = await r.json();
+              if (!j.ok) {
+                r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                  method: 'POST', headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ chat_id: TG_CHAT, text: caption }),
+                });
+                j = await r.json();
+              }
+              if (!j.ok) core.warning(`telegram 通知失败 id=${h.id}: ${j.description}`);
             }
