@@ -51,6 +51,19 @@
 .size-btn{padding:4px 18px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
 .size-btn:hover{border-color:var(--accent);color:var(--text);}
 .size-btn.on{background:rgba(91,127,255,.22);border-color:var(--accent);color:var(--accent);}
+/* 編成 export / import 按钮 (透明底跟 size-btn 区分、靠右) */
+.io-btn{padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.io-btn:hover{border-color:var(--accent);color:var(--text);background:var(--bg3);}
+/* export/import modal */
+#io-modal{display:none;position:fixed;inset:0;z-index:2700;align-items:center;justify-content:center;}
+#io-modal.open{display:flex;}
+#io-modal .modal-panel{width:min(560px,94vw);max-height:90vh;}
+.io-body{flex-direction:column;gap:16px;padding:16px;overflow-y:auto;}
+.io-sec{display:flex;flex-direction:column;gap:8px;}
+.io-label{font-size:12px;font-weight:700;color:var(--text2);}
+.io-ta{width:100%;box-sizing:border-box;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:11px;font-family:monospace;padding:8px;resize:vertical;word-break:break-all;}
+.io-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.io-msg{font-size:12px;color:#7dd99f;min-height:16px;}
 
 /* slots */
 /* 三张卡片统一高度（默认 stretch），有魔装 / 没魔装的卡片对齐 */
