@@ -1,7 +1,7 @@
 // shared/revise-core.js — Sparse Diff Engine for revise system
 //
 // Phase 7 Session 1: 从零写、不抄 wiki main (旧 shared/save-edit-base.js 已删)。
-// 算法借鉴 wiki main 三参 computeDiff + 撤回机制 + sparse array dict 编码、按 master schema 重写。
+// 算法借鉴 wiki main 三参 computeDiff + 撤回机制、按 master schema 重写。
 //
 // 公开 API:
 //   computeDiff(original, modified, prevRevise = null) — 返 sparse patch (null = tombstone / clear field)
@@ -9,7 +9,10 @@
 //   pickPatches(reviseBucket, ids)                    — 按 sessionReviseIds 过滤 (提交时用)
 //   isPlainObject(v)                                  — utility
 //
-// Sparse array dict 编码: 数组用 `{ "5": { ... } }` 代替完整数组 (省带宽)、deepApply 自动还原
+// 数组编码 (2026-06-19 替换旧 index 稀疏):
+//   带 id 的对象数组 (weapon_skills / soul.skills) → id-keyed dict `{ "<id>": {...} }` 局部 patch
+//     (robust 到重排/增删、deepApply 按 element.id 匹配;找不到 id 则跳过)
+//   标量数组 (tags) / 无 id 对象数组 (masou effects) → 整组替换 (patch 直接是整个数组)
 // null 当 tombstone: deepApply 时删 key、computeDiff 时表示用户清字段 / 撤回
 
 // ============================================================
@@ -19,12 +22,11 @@ export function isPlainObject(v) {
   return v !== null && typeof v === 'object' && !Array.isArray(v);
 }
 
-// 数字 key 全是非负整数 → 视为 sparse array dict (用 deepApply 还原数组)
-function _isArrayDict(o) {
-  if (!isPlainObject(o)) return false;
-  const keys = Object.keys(o);
-  if (!keys.length) return false;
-  return keys.every((k) => /^\d+$/.test(k));
+// 全元素是 plain object 且都有 `id` → 用 id 做稳定 key 的对象数组 (weapon_skills / soul.skills)。
+// revise patch 对这类数组按 id 局部 patch (robust 到重排/增删);其余数组 (标量 tags / 无 id
+// 对象数组如 masou effects) 整组替换。2026-06-19 用户决策:彻底替换旧的 index 稀疏编码。
+function _isObjIdArray(arr) {
+  return Array.isArray(arr) && arr.length > 0 && arr.every((e) => isPlainObject(e) && e.id != null);
 }
 
 // ============================================================
@@ -39,7 +41,8 @@ function _isArrayDict(o) {
 //   {} (空对象) — 完全无变化
 //   { field: value } — 字段被改成 value
 //   { field: null } — 字段被撤回/清除 (deepMerge 时删 key)
-//   { field: { 0: {...}, 3: null } } — sparse array (第 0 项改、第 3 项 tombstone)
+//   { field: { "<id>": {...}, "<id>": null } } — id-keyed 对象数组局部 patch (按 id、null=撤回)
+//   { field: [...] } — 标量/无 id 数组整组替换
 //
 // 撤回规则:
 //   - modified === original && prevRevise 内有此字段 → emit null (清掉 prev)
@@ -65,39 +68,40 @@ function _deepDiff(orig, mod, prev) {
   // mod nullish (orig 有值): 用户清掉了字段
   if (mNull) return null;
 
-  // 数组: 用 sparse dict 编码
+  // 数组
   if (Array.isArray(orig) || Array.isArray(mod)) {
     const oArr = Array.isArray(orig) ? orig : [];
     const mArr = Array.isArray(mod) ? mod : [];
-    const pArr = Array.isArray(prev) ? prev : (isPlainObject(prev) ? prev : {});
-    // 整数组替换的简单 case: 如果 length 变了或元素不全是 plain object、直接 emit 整数组
-    // 但 wiki main 用 sparse dict 省带宽、我们跟随
-    const sparse = {};
-    const maxLen = Math.max(oArr.length, mArr.length);
-    let hasChange = false;
-    for (let i = 0; i < maxLen; i++) {
-      const d = _deepDiff(
-        i < oArr.length ? oArr[i] : null,
-        i < mArr.length ? mArr[i] : null,
-        Array.isArray(pArr) ? (i < pArr.length ? pArr[i] : null) : pArr[i],
-      );
-      if (d === undefined) continue;   // 无 diff、跳过
-      sparse[i] = d;
-      hasChange = true;
-    }
-    if (!hasChange) {
-      // 数组完全相同、但 prev 内还有 sparse 修改 → 全 emit null 撤回
-      if (isPlainObject(prev) || Array.isArray(prev)) {
-        const pKeys = Array.isArray(prev) ? prev.map((_, i) => i) : Object.keys(prev);
-        if (pKeys.length) {
+    // (a) 带 id 的对象数组 (weapon_skills / soul.skills) → 按 id 局部 diff、key=id (robust 到重排)
+    if (_isObjIdArray(oArr) && _isObjIdArray(mArr)) {
+      const oById = new Map(oArr.map((e) => [String(e.id), e]));
+      const mById = new Map(mArr.map((e) => [String(e.id), e]));
+      const pById = isPlainObject(prev) ? prev : {};
+      const out = {};
+      let hasChange = false;
+      for (const id of new Set([...oById.keys(), ...mById.keys()])) {
+        const d = _deepDiff(oById.get(id) ?? null, mById.get(id) ?? null, pById[id]);
+        if (d === undefined) continue;
+        out[id] = d;
+        hasChange = true;
+      }
+      if (!hasChange) {
+        // 整组无变化、但 prev 内还有残留 → 逐 id 撤回
+        if (isPlainObject(prev) && Object.keys(prev).length) {
           const revoke = {};
-          for (const k of pKeys) revoke[k] = null;
+          for (const id of Object.keys(prev)) revoke[id] = null;
           return revoke;
         }
+        return undefined;
       }
+      return out;
+    }
+    // (b) 标量数组 (tags) / 无 id 对象数组 (masou effects) → 整组替换
+    if (JSON.stringify(oArr) === JSON.stringify(mArr)) {
+      if (prev != null) return null; // 改回原值、撤回 prev
       return undefined;
     }
-    return sparse;
+    return mArr;
   }
 
   // 标量 / 字符串 / 数字 / boolean
@@ -131,33 +135,23 @@ function _deepDiff(orig, mod, prev) {
 // deepApply — 用 patch 修改 target (in-place)
 // ============================================================
 // null 值 → 删 key (tombstone)
-// sparse array dict ({ "0": ..., "3": null }) 自动应用到目标数组对应 index
+// id-keyed 对象数组 patch ({ "<id>": {...} }) 按 element.id 匹配应用;Array 值 = 整组替换
 // 返回修改后的 target (方便链式)
 export function deepApply(target, patch) {
   if (!isPlainObject(patch)) return target;
   for (const k of Object.keys(patch)) {
     const v = patch[k];
     if (v === null) {
-      // tombstone: 删 key (数组也允许、用 splice 不太合理、保留 dict pattern: 数组项设 null 让上层判定)
-      if (Array.isArray(target)) {
-        target[+k] = null;
-      } else {
-        delete target[k];
-      }
-      continue;
-    }
-    if (isPlainObject(v) && _isArrayDict(v) && Array.isArray(target[k])) {
-      // sparse array 应用到数组 (覆盖某些 index)
-      for (const idx of Object.keys(v)) {
-        const i = +idx;
-        const subPatch = v[idx];
-        if (subPatch === null) {
-          target[k][i] = null;
-        } else if (isPlainObject(subPatch) && isPlainObject(target[k][i])) {
-          deepApply(target[k][i], subPatch);
-        } else {
-          target[k][i] = subPatch;
-        }
+      delete target[k]; // tombstone: 删 key (撤回)
+    } else if (Array.isArray(v)) {
+      target[k] = v; // 整组替换 (标量数组 / 无 id 对象数组)
+    } else if (isPlainObject(v) && _isObjIdArray(target[k])) {
+      // 按 id 局部 patch 到对象数组 (key=id、robust 到重排;找不到该 id → 跳过)
+      for (const id of Object.keys(v)) {
+        const sub = v[id];
+        if (sub === null) continue; // 撤回 tombstone (save 已 prune;此处当作无 patch 跳过)
+        const el = target[k].find((e) => String(e.id) === id);
+        if (el && isPlainObject(sub)) deepApply(el, sub);
       }
     } else if (isPlainObject(v) && isPlainObject(target[k])) {
       deepApply(target[k], v);
@@ -208,24 +202,4 @@ export function setPath(obj, path, value) {
     cur = cur[p];
   }
   cur[parts[parts.length - 1]] = value;
-}
-
-// ============================================================
-// mergeRevise — 应用 revise bucket 到 master 数组、产 final 数据
-// ============================================================
-// masterArr: Array<{id, ...}> (例 chara list、各 chara wiki shape)
-// reviseBucket: Array<{id, ...patch}>
-// returns: 新数组、不修改 master (clone + apply、跟 wiki main pattern 一致)
-export function mergeRevise(masterArr, reviseBucket) {
-  if (!Array.isArray(masterArr)) return [];
-  if (!Array.isArray(reviseBucket) || !reviseBucket.length) return masterArr;
-  const reviseById = new Map();
-  for (const r of reviseBucket) {
-    if (r && r.id != null) reviseById.set(r.id, r);
-  }
-  return masterArr.map((m) => {
-    const r = reviseById.get(m.id);
-    if (!r) return m;
-    return deepApply(JSON.parse(JSON.stringify(m)), r);
-  });
 }

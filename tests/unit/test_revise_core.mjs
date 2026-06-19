@@ -1,11 +1,11 @@
-// tests/unit/test_revise_core.mjs — Phase 7 Session 1 sparse diff unit tests
+// tests/unit/test_revise_core.mjs — sparse diff unit tests
+// 2026-06-19: 数组编码从 index 稀疏 → id-keyed(对象数组带 id)/ 整组替换(标量/无 id)。
 import { test } from 'node:test';
 import assert from 'node:assert';
 import {
   computeDiff,
   deepApply,
   pickPatches,
-  mergeRevise,
   getPath,
   setPath,
   isPlainObject,
@@ -38,18 +38,33 @@ test('computeDiff: 嵌套 object 部分变化', () => {
   assert.deepStrictEqual(computeDiff(orig, mod), { stats: { atk: 120 } });
 });
 
-test('computeDiff: 数组用 sparse dict 编码', () => {
-  const orig = { skills: [{ v: 1 }, { v: 2 }, { v: 3 }] };
-  const mod = { skills: [{ v: 1 }, { v: 99 }, { v: 3 }] };
-  // 只第 1 项变化、用 sparse dict
-  assert.deepStrictEqual(computeDiff(orig, mod), { skills: { 1: { v: 99 } } });
+// ============================================================
+// computeDiff — 数组 (2026-06-19 新规则)
+// ============================================================
+test('computeDiff: 带 id 对象数组 → 按 id 局部 diff (key=id、非 index)', () => {
+  const orig = { skills: [{ id: 10, v: 1 }, { id: 20, v: 2 }, { id: 30, v: 3 }] };
+  const mod = { skills: [{ id: 10, v: 1 }, { id: 20, v: 99 }, { id: 30, v: 3 }] };
+  assert.deepStrictEqual(computeDiff(orig, mod), { skills: { 20: { v: 99 } } });
 });
 
-test('computeDiff: tags 数组替换 (全 emit、用 sparse)', () => {
+test('computeDiff: 带 id 对象数组重排但内容相同 → 无 diff', () => {
+  const orig = { skills: [{ id: 10, v: 1 }, { id: 20, v: 2 }] };
+  const mod = { skills: [{ id: 20, v: 2 }, { id: 10, v: 1 }] }; // 仅顺序变
+  assert.strictEqual(computeDiff(orig, mod), undefined);
+});
+
+test('computeDiff: 标量数组 (tags) → 整组替换', () => {
   const orig = { tags: [1, 2, 5] };
   const mod = { tags: [1, 3, 5] };
-  // 第 1 项 2→3 变化
-  assert.deepStrictEqual(computeDiff(orig, mod), { tags: { 1: 3 } });
+  assert.deepStrictEqual(computeDiff(orig, mod), { tags: [1, 3, 5] });
+});
+
+test('computeDiff: 无 id 对象数组 (masou effects) → 整组替换', () => {
+  const orig = { effects: [{ p: 'A', vs: 0 }, { p: 'B', vs: 0 }] };
+  const mod = { effects: [{ p: 'A', vs: 1.5 }, { p: 'B', vs: 0 }] };
+  assert.deepStrictEqual(computeDiff(orig, mod), {
+    effects: [{ p: 'A', vs: 1.5 }, { p: 'B', vs: 0 }],
+  });
 });
 
 // ============================================================
@@ -57,8 +72,8 @@ test('computeDiff: tags 数组替换 (全 emit、用 sparse)', () => {
 // ============================================================
 test('computeDiff: 撤回 — mod 改回 orig + prev 有值 → emit null', () => {
   const orig = { value: 1.5 };
-  const mod = { value: 1.5 };            // 改回原值
-  const prev = { value: 2.0 };           // 上次保存的修改
+  const mod = { value: 1.5 };
+  const prev = { value: 2.0 };
   assert.deepStrictEqual(computeDiff(orig, mod, prev), { value: null });
 });
 
@@ -73,6 +88,13 @@ test('computeDiff: 撤回 — 嵌套字段撤回', () => {
   const mod = { stats: { atk: 100 } };
   const prev = { stats: { atk: 120 } };
   assert.deepStrictEqual(computeDiff(orig, mod, prev), { stats: { atk: null } });
+});
+
+test('computeDiff: 撤回 — id 数组字段改回 + prev 有值 → 该 id 字段 null', () => {
+  const orig = { skills: [{ id: 20, v: 2 }] };
+  const mod = { skills: [{ id: 20, v: 2 }] }; // 改回
+  const prev = { skills: { 20: { v: 99 } } };
+  assert.deepStrictEqual(computeDiff(orig, mod, prev), { skills: { 20: { v: null } } });
 });
 
 // ============================================================
@@ -96,19 +118,64 @@ test('deepApply: 嵌套递归', () => {
   assert.deepStrictEqual(t, { stats: { atk: 120, def: 50 } });
 });
 
-test('deepApply: sparse array dict 应用到数组', () => {
-  const t = { skills: [{ v: 1 }, { v: 2 }, { v: 3 }] };
-  deepApply(t, { skills: { 1: { v: 99 } } });
-  assert.deepStrictEqual(t.skills, [{ v: 1 }, { v: 99 }, { v: 3 }]);
+test('deepApply: 带 id 对象数组 patch 按 id 命中', () => {
+  const t = { skills: [{ id: 10, v: 1 }, { id: 20, v: 2 }, { id: 30, v: 3 }] };
+  deepApply(t, { skills: { 20: { v: 99 } } });
+  assert.deepStrictEqual(t.skills, [{ id: 10, v: 1 }, { id: 20, v: 99 }, { id: 30, v: 3 }]);
+});
+
+test('deepApply: id 对象数组重排后仍按 id 命中 (非 index)', () => {
+  const t = { skills: [{ id: 20, v: 2 }, { id: 10, v: 1 }] }; // id20 在 index 0
+  deepApply(t, { skills: { 20: { v: 99 } } });
+  assert.deepStrictEqual(t.skills, [{ id: 20, v: 99 }, { id: 10, v: 1 }]);
+});
+
+test('deepApply: id 找不到 → 跳过 (不报错、不改其它)', () => {
+  const t = { skills: [{ id: 10, v: 1 }] };
+  deepApply(t, { skills: { 999: { v: 99 } } });
+  assert.deepStrictEqual(t.skills, [{ id: 10, v: 1 }]);
+});
+
+test('deepApply: 数组值 → 整组替换 (标量 / 无 id 对象数组)', () => {
+  const t = { tags: [1, 2, 5], effects: [{ p: 'A', vs: 0 }] };
+  deepApply(t, { tags: [1, 3, 5], effects: [{ p: 'A', vs: 1.5 }] });
+  assert.deepStrictEqual(t.tags, [1, 3, 5]);
+  assert.deepStrictEqual(t.effects, [{ p: 'A', vs: 1.5 }]);
+});
+
+test('deepApply: id 数组字段 tombstone (null) → 跳过 (不删元素)', () => {
+  const t = { skills: [{ id: 20, v: 2 }] };
+  deepApply(t, { skills: { 20: null } });
+  assert.deepStrictEqual(t.skills, [{ id: 20, v: 2 }]); // 元素保留
 });
 
 test('deepApply: round-trip — diff 后 apply 等于 modified', () => {
-  const orig = { tags: [1, 2], stats: { atk: 100 }, skills: [{ v: 1 }, { v: 2 }] };
-  const mod = { tags: [1, 3], stats: { atk: 100 }, skills: [{ v: 1 }, { v: 99 }] };
+  const orig = {
+    tags: [1, 2],
+    stats: { atk: 100 },
+    skills: [{ id: 10, v: 1 }, { id: 20, v: 2 }],
+    effects: [{ p: 'A', vs: 0 }],
+  };
+  const mod = {
+    tags: [1, 3],
+    stats: { atk: 100 },
+    skills: [{ id: 10, v: 1 }, { id: 20, v: 99 }],
+    effects: [{ p: 'A', vs: 1.5 }],
+  };
   const patch = computeDiff(orig, mod);
   const reconstructed = JSON.parse(JSON.stringify(orig));
   deepApply(reconstructed, patch);
   assert.deepStrictEqual(reconstructed, mod);
+});
+
+test('deepApply: round-trip — id 数组重排后 apply 仍正确 (robust)', () => {
+  const orig = { skills: [{ id: 10, v: 1 }, { id: 20, v: 2 }] };
+  const mod = { skills: [{ id: 10, v: 1 }, { id: 20, v: 99 }] };
+  const patch = computeDiff(orig, mod); // { skills: { 20: { v: 99 } } }
+  // 重排后的 master (id20 在前) 也能按 id 命中
+  const reordered = { skills: [{ id: 20, v: 2 }, { id: 10, v: 1 }] };
+  deepApply(reordered, patch);
+  assert.deepStrictEqual(reordered.skills, [{ id: 20, v: 99 }, { id: 10, v: 1 }]);
 });
 
 // ============================================================
@@ -133,29 +200,6 @@ test('pickPatches: ids array 也支持', () => {
 });
 
 // ============================================================
-// mergeRevise — master + revise → final
-// ============================================================
-test('mergeRevise: revise 覆盖 master 字段', () => {
-  const master = [
-    { id: 1001, name: 'A', tags: [], stats: { atk: 100 } },
-    { id: 1002, name: 'B', tags: [], stats: { atk: 200 } },
-  ];
-  const revise = [
-    { id: 1001, tags: [1, 5], stats: { atk: 150 } },
-  ];
-  const final = mergeRevise(master, revise);
-  assert.deepStrictEqual(final[0], { id: 1001, name: 'A', tags: [1, 5], stats: { atk: 150 } });
-  assert.deepStrictEqual(final[1], master[1]);   // 未改的保留
-});
-
-test('mergeRevise: 不修改原 master 数组 (clone)', () => {
-  const master = [{ id: 1, value: 1.5 }];
-  const revise = [{ id: 1, value: 2.0 }];
-  mergeRevise(master, revise);
-  assert.strictEqual(master[0].value, 1.5);   // master 未被修改
-});
-
-// ============================================================
 // getPath / setPath
 // ============================================================
 test('getPath / setPath: 嵌套字段', () => {
@@ -170,7 +214,7 @@ test('setPath: 自动建 object / array', () => {
   setPath(o, 'a.b.c', 1);
   assert.deepStrictEqual(o, { a: { b: { c: 1 } } });
   const o2 = {};
-  setPath(o2, 'list.0.x', 5);   // 第二段 '0' 是数字 → 建 array
+  setPath(o2, 'list.0.x', 5);
   assert.deepStrictEqual(o2, { list: [{ x: 5 }] });
 });
 
