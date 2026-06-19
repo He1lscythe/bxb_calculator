@@ -10,6 +10,11 @@ const PAGES = [
   { id: 'hensei', href: 'hensei.html', label: '編成' },
 ];
 
+// 「攻略」下拉菜单项（点击展开）。各项是独立页面（多为 iframe 包装的自包含攻略页）。
+const GUIDES = [
+  { id: 'dungeon_yggdrasil', href: 'dungeon_yggdrasil.html', label: '大迷宮 ユグドラシル' },
+];
+
 const _activePage = () => {
   const file = window.location.pathname.replace(/\/$/, '').split('/').pop() || 'characters.html';
   return file.replace(/\.html$/, '');
@@ -20,9 +25,19 @@ const _render = () => {
   const links = PAGES.map(
     (p) => `<a href="${p.href}" class="nav-link${p.id === active ? ' active' : ''}">${p.label}</a>`,
   ).join('');
+  const guidesActive = GUIDES.some((g) => g.id === active);
+  const guideItems = GUIDES.map(
+    (g) =>
+      `<a href="${g.href}" class="nav-dropdown-item${g.id === active ? ' active' : ''}">${g.label}</a>`,
+  ).join('');
+  const guides = `<div class="nav-dropdown">
+        <button type="button" class="nav-link nav-dropdown-btn${guidesActive ? ' active' : ''}"
+          aria-haspopup="true" aria-expanded="false" onclick="Nav.toggleDropdown(event)">攻略 <span class="nav-caret">▾</span></button>
+        <div class="nav-dropdown-menu">${guideItems}</div>
+      </div>`;
   return `<div id="topbar">
     <h1>⚔ BxB</h1>
-    <nav id="page-nav">${links}</nav>
+    <nav id="page-nav">${links}${guides}</nav>
     <div id="topbar-right">
       <div id="save-toast"></div>
       <div id="revise-bar">
@@ -45,7 +60,8 @@ export const Nav = {
     // 转但不 navigate，第二次 tap 才生效）。原因不明（hover/:active emulation 或
     // 系统手势识别）。用 pointerdown + 显式 location.assign 绕开浏览器的 <a>
     // 处理流程，pointerdown 在 touchstart 之前触发，确保抢在任何 hover 模拟前。
-    document.querySelectorAll('.nav-link').forEach((link) => {
+    // 只对带 href 的导航 <a> 绑定（排除「攻略」下拉按钮——它是 <button>、走 onclick 展开）
+    document.querySelectorAll('#page-nav a[href]').forEach((link) => {
       link.addEventListener('pointerdown', (e) => {
         // 中键/右键不处理；ctrl/cmd+click 让默认行为生效（新标签打开）
         if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
@@ -59,10 +75,25 @@ export const Nav = {
       const hb = document.getElementById('nav-hamburger');
       if (nav && hb && !nav.contains(e.target) && e.target !== hb && !hb.contains(e.target))
         nav.classList.remove('open');
+      // 点到下拉之外 → 收起展开的「攻略」菜单
+      document.querySelectorAll('.nav-dropdown.open').forEach((dd) => {
+        if (!dd.contains(e.target)) {
+          dd.classList.remove('open');
+          dd.querySelector('.nav-dropdown-btn')?.setAttribute('aria-expanded', 'false');
+        }
+      });
     });
   },
   toggleMenu() {
     document.getElementById('page-nav')?.classList.toggle('open');
+  },
+  toggleDropdown(e) {
+    e.preventDefault();
+    e.stopPropagation(); // 不让本次 click 冒泡到 document 的关闭逻辑
+    const dd = e.currentTarget.closest('.nav-dropdown');
+    if (!dd) return;
+    const open = dd.classList.toggle('open');
+    e.currentTarget.setAttribute('aria-expanded', open ? 'true' : 'false');
   },
 };
 

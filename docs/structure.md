@@ -42,8 +42,8 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [scripts/master_to_business/](../scripts/master_to_business/) | build pipeline + utility |
 | [shared/](../shared/) | JS 共享模块 (跨 viewer 复用) |
 | [js/](../js/) | viewer 业务代码 (5 viewer 各自 list / render / edit) |
-| [pages_src/](../pages_src/) | HTML 源 (5 viewer + `_loading.html` partial) |
-| pages/ | build 产物 (.gitignore 排除) |
+| [pages_src/](../pages_src/) | HTML 源 (5 viewer + 攻略 iframe 包装页 `dungeon_yggdrasil.html` + `_loading.html` partial) |
+| pages/ | build 产物 (已 tracked、deploy 用)。另含静态拷入的 `dungeon_map.html` (攻略地图、自包含单文件、非 build 产物;更新时直接覆盖、wrapper 用 iframe 嵌它) |
 | [data/](../data/) | 业务 JSON (master + revise + audit + wiki_aux + derived _*) |
 | icons/ | 本地图标资源 (.gitignore 排除、`copy_images.py` 从 D:/bxb 拷) |
 | omoide_icon/ | Frida 抓的 omoide icon (.gitignore 排除) |
