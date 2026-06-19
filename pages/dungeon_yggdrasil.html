@@ -1,0 +1,52 @@
+<!-- AUTO-GENERATED from pages_src/dungeon_yggdrasil.html — DO NOT EDIT. Run `node scripts/build.js` to rebuild. -->
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>大迷宮 ユグドラシル 攻略 | BxB</title>
+    <link rel="icon" href="../icons/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <style>
+      /* 站点 navbar 在上、地图 iframe 占满剩余高度。地图自带固定 #bar 在 iframe 内
+         (top:10px)，因 iframe 起点已在 topbar 之下，二者不再重叠。 */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+      /* 攻略页铺满全宽:覆盖 base.css 的 #page-wrap{max-width:72rem}(否则地图被卡在中间留白)。
+         但 navbar 仍限回 72rem 居中,位置与其它页保持一致(align-items:center 让 topbar 居中、地图 100% 铺满)。 */
+      #page-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        max-width: none;
+        width: 100%;
+      }
+      #topbar {
+        width: 100%;
+        max-width: 72rem;
+      }
+      #dungeon-frame {
+        flex: 1 1 auto;
+        width: 100%;
+        border: 0;
+        display: block;
+        background: #efe6d2;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="page-wrap">
+      <iframe id="dungeon-frame" src="dungeon_map.html" title="大迷宮 ユグドラシル"></iframe>
+    </div>
+    <script type="module">
+      import { Nav } from '../js/nav.js';
+      Nav.init();
+    </script>
+  </body>
+</html>
