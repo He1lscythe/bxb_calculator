@@ -228,7 +228,7 @@ export const setMasouScaling = (masouId, idx, val) => {
 // ============================================================
 
 // 算 chara patch (sparse diff、对比 originalData _master vs editData._master)
-//   patch = { id (base_id), name, tags?, states?: { [stateName]: { weapon_skills: { [idx]: { value_scaling } } } } }
+//   patch = { id (base_id), name, tags?, states?: { [stateName]: { weapon_skills: { [skillId]: { value_scaling } } } } }
 const _buildCharaPatch = (orig, edited) => {
   const baseId = _baseIdOf(edited);
   if (!baseId) return null;
@@ -252,8 +252,8 @@ const _buildCharaPatch = (orig, edited) => {
     editSkills.forEach((sk, i) => {
       const origVs = origSkills[i]?.value_scaling ?? 0;
       const editVs = sk.value_scaling ?? 0;
-      if (origVs !== editVs) {
-        skillPatch[i] = { value_scaling: editVs };
+      if (origVs !== editVs && sk.id != null) {
+        skillPatch[sk.id] = { value_scaling: editVs }; // 按 skill id (非 index、robust 到重排)
       }
     });
     if (Object.keys(skillPatch).length) {
@@ -269,8 +269,10 @@ const _buildCharaPatch = (orig, edited) => {
   return patch;
 };
 
-// 算 masou patch (sparse、跟 masou_revise.json schema 一致):
-//   { id (weapon_costumes.id), name, chara_id, chara_name, effects: { [idx]: { value_scaling } } }
+// 算 masou patch (跟 masou_revise.json schema 一致):
+//   { id (weapon_costumes.id), name, chara_id, chara_name, effects: [...] }
+//   masou effects 无 id (parameter 也不保证唯一) → 整组替换 (full-replace、非 index 稀疏)。
+//   caveat: 整组替换会"冻结"effects 数组、master 改 effect 时被 revise 覆盖;但 masou 极少 revise、可接受。
 const _buildMasouPatches = () => {
   const patches = [];
   for (const masouId of Object.keys(state.masouEditData)) {
@@ -279,21 +281,20 @@ const _buildMasouPatches = () => {
     const m = (state.allMasou || []).find((x) => x.id == masouId);
     if (!m) continue;
     const orig = state.masouOriginalData?.[masouId] || m;
-    const effPatch = {};
-    for (const idx of Object.keys(ed.effects)) {
-      const origVs = orig.effects?.[idx]?.value_scaling ?? 0;
-      const editVs = ed.effects[idx].value_scaling ?? 0;
-      if (origVs !== editVs) {
-        effPatch[idx] = { value_scaling: editVs };
-      }
-    }
-    if (Object.keys(effPatch).length) {
+    const baseEffects = Array.isArray(orig.effects) ? orig.effects : [];
+    // 用 master effects 套上编辑过的 value_scaling、产出完整 effects 数组
+    const merged = baseEffects.map((e, i) =>
+      ed.effects[i] && ed.effects[i].value_scaling != null
+        ? { ...e, value_scaling: ed.effects[i].value_scaling }
+        : e,
+    );
+    if (JSON.stringify(merged) !== JSON.stringify(baseEffects)) {
       patches.push({
         id: +masouId,
         name: m.name,
         chara_id: m.chara_id,
         chara_name: m.chara_name,
-        effects: effPatch,
+        effects: merged,
       });
     }
   }
