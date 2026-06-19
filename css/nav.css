@@ -17,6 +17,32 @@
   .nav-link:hover { color: var(--text); }
 }
 .nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+/* === 攻略 下拉 === */
+.nav-dropdown { position: relative; display: inline-flex; align-items: stretch; }
+/* 复用 .nav-link 的 padding/字号/颜色;只去掉 <button> 的默认边框/底色(否则会显出一个框) */
+.nav-dropdown-btn {
+  background: none; border: none; border-bottom: 2px solid transparent;
+  cursor: pointer; font-family: inherit;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.nav-caret { font-size: 10px; transition: transform .15s; }
+.nav-dropdown.open .nav-caret { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  display: none; position: absolute; top: 100%; left: 0; min-width: 200px;
+  background: var(--bg2); border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 8px 8px; box-shadow: 0 8px 18px rgba(0,0,0,.45);
+  z-index: 101; padding: 4px 0;
+}
+.nav-dropdown.open .nav-dropdown-menu { display: block; }
+.nav-dropdown-item {
+  display: block; padding: 9px 16px; font-size: 13px; font-weight: 600;
+  color: var(--text2); text-decoration: none; white-space: nowrap;
+  border-left: 3px solid transparent;
+}
+@media (hover: hover) {
+  .nav-dropdown-item:hover { color: var(--text); background: var(--bg3); }
+}
+.nav-dropdown-item.active { color: var(--accent); border-left-color: var(--accent); }
 #topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 #nav-hamburger {
   display: none; background: none; border: none; color: var(--text);
@@ -56,4 +82,12 @@
   #page-nav.open { display: flex; }
   .nav-link { padding: 12px 20px; border-bottom: 1px solid var(--border); border-right: none; white-space: normal; }
   .nav-link.active { border-bottom-color: var(--border); border-left: 3px solid var(--accent); padding-left: 17px; }
+  /* 下拉在窄屏内联展开（不浮层） */
+  .nav-dropdown { display: block; width: 100%; }
+  .nav-dropdown-btn { width: 100%; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  .nav-dropdown-menu {
+    position: static; min-width: 0; box-shadow: none; border: none;
+    border-radius: 0; padding: 0; background: var(--bg3);
+  }
+  .nav-dropdown-item { padding: 11px 32px; border-bottom: 1px solid var(--border); }
 }
