@@ -65,6 +65,7 @@ export function mkTr() {
     omoide_picks: [],
     soul_lv: 1,
     soul_awakening: 0,
+    bd_count: null,        // BD 条数 (null → 默认取 bd_skill.cost);BD buff 倍率 = value + additional_value × bd_count
   };
 }
 
@@ -124,18 +125,19 @@ export function baseStats(charaWiki, tr) {
 // HP-curve / Break gate / FellDown / Enemy_Break factor
 // 按 docs/hensei_calc.md 沿用 wiki 线性公式 (Phase 8 Frida 实测精化)
 // ============================================================
-// parameter 有 HP-curve prefix 时、按 source HP / target HP / Break / FellDown / EnemyBreak 算 factor
+// parameter 有 HP-curve prefix 时、按 **接收方(target)自身 HP** 算 factor (该 buff 应用到谁就看谁的 HP;
+// range=All 的 HP-curve buff 从别 slot 来时、用 target 的 HP 而非 source 的、2026-06-19 修正)。
 //   Vitality_*  → factor = hp_pct / 100
 //   RemHP_*     → factor = (100 - hp_pct) / 100
 //   Break_*     → factor = 1 if hp_pct <= 50 else 0  (unpacking §2.3: IsBreak = HpRate ≤ 0.5 含等号)
 //   FellDown_*  → factor = 1 if 任一队友 hp=0 else 0
 //   Enemy_Break*→ factor = 1 if enemy.bk else 0
 // 无 prefix → factor = 1
-export function conditionFactor(parameter, srcHpPct, anyTeammateZero, enemyBk) {
+export function conditionFactor(parameter, hpPct, anyTeammateZero, enemyBk) {
   if (!parameter) return 1;
-  if (parameter.startsWith('Vitality_')) return Math.max(0, Math.min(1, srcHpPct / 100));
-  if (parameter.startsWith('RemHP_')) return Math.max(0, Math.min(1, (100 - srcHpPct) / 100));
-  if (parameter.startsWith('Break_')) return srcHpPct <= 50 ? 1 : 0;
+  if (parameter.startsWith('Vitality_')) return Math.max(0, Math.min(1, hpPct / 100));
+  if (parameter.startsWith('RemHP_')) return Math.max(0, Math.min(1, (100 - hpPct) / 100));
+  if (parameter.startsWith('Break_')) return hpPct <= 50 ? 1 : 0;
   if (parameter.startsWith('FellDown_')) return anyTeammateZero ? 1 : 0;
   if (parameter.startsWith('Enemy_Break')) return enemyBk ? 1 : 0;
   return 1;
@@ -156,23 +158,31 @@ export function baseParameter(p) {
 // Effect 命中检查 (target slot 是否吃此 effect)
 // ============================================================
 // effect 的 range / target_element_id / weapon_type_id / weapon_base_id 决定哪个 slot 吃。
-function _effectApplies(eff, targetChara, srcSlot, targetSlot) {
+export function _effectApplies(eff, targetChara, srcChara, srcSlot, targetSlot) {
   // range: 'All' = 装备者 + 队友 (全队)、'Single' = 仅装备者自身
   if (eff.range === 'Single' && srcSlot !== targetSlot) return false;
-  // element 限定
-  if (eff.element_condition || eff.target_element_id) {
-    const need = eff.element_condition || eff.target_element_id;
-    if (need && targetChara?._master?.element_id !== need) return false;
+  const sm = srcChara?._master;    // 装备者 (source / equipper、effect 所在装备挂的魔剣)
+  const tm = targetChara?._master; // 接收方 (target、正在算 stat 的魔剣)
+  // *_condition (souls「X属性装備で…」): 判**装备者自身**的属性 / 武器门槛、不命中整条不激活。
+  //   souls 全用 *_condition、weapons 全用 target_element_id/weapon_type_id (2026-06-19 扫描确认、语义相反)。
+  //   range=Single 时 src===target、跟旧 target 判定等价;range=All 才有区别 (看装备者、非接收方)。
+  if (eff.element_condition && sm?.element_id !== eff.element_condition) return false;
+  if (eff.weapon_type_condition && sm?.weapon_type_id !== eff.weapon_type_condition) return false;
+  // target_element_id / weapon_type_id (weapons/crystals「X属性の味方…」): 判**接收方**过滤。
+  if (eff.target_element_id) {
+    const need = eff.target_element_id;
+    let ok = tm?.element_id === need;
+    // extra_element_id (chara_revise): is_original_skill 的他魔剣 buff 可被额外属性接收
+    if (!ok && eff.is_original_skill && Array.isArray(tm?.extra_element_id) && tm.extra_element_id.includes(need)) {
+      ok = true;
+    }
+    if (!ok) return false;
   }
-  // weapon 限定
-  if (eff.weapon_type_condition || eff.weapon_type_id) {
-    const need = eff.weapon_type_condition || eff.weapon_type_id;
-    if (need && targetChara?._master?.weapon_type_id !== need) return false;
-  }
+  if (eff.weapon_type_id && tm?.weapon_type_id !== eff.weapon_type_id) return false;
   // chara 限定 — soul: weapon_base_id (master 原生)、crystal/bg: chara_base_id (build_*_aux.py 反查 characters.json)
-  // 两路径都跟 targetChara._master.id 严格比对
+  // 跟 targetChara._master.id 严格比对
   const limId = eff.weapon_base_id || eff.chara_base_id;
-  if (limId && targetChara?._master?.id !== limId) return false;
+  if (limId && tm?.id !== limId) return false;
   return true;
 }
 
@@ -219,12 +229,14 @@ export function collectEffects(team, targetSlotIdx, ctx) {
   function pushEff(srcChara, srcSlot, source, raw, opts = {}) {
     // raw is master-shape effect: {parameter, math_type, value, value_scaling, range, element_condition, weapon_type_condition, weapon_base_id, weapon_type_id, target_element_id, ...}
     if (!raw || raw.parameter === 'NoEffect') return;
-    if (!_effectApplies(raw, targetChara, srcSlot, targetSlotIdx)) return;
+    if (!_effectApplies(raw, targetChara, srcChara, srcSlot, targetSlotIdx)) return;
     const param = raw.parameter;
     // Enemy_Break_* parameter 强制 _source='enemy_break'、不论原 source、走 stage 5 独立 (unpacking §3.7 step 47/48)
     if (param && param.startsWith('Enemy_Break')) source = 'enemy_break';
-    const srcHp = team[srcSlot]?.tr?.hp ?? 100;
-    const factor = conditionFactor(param, srcHp, anyTeammateZero, enemyBk);
+    // HP-curve (Vitality/RemHP/Break) factor 用 TARGET 自身 HP (tr=目标 slot 的 tr);
+    // range=All 的 HP-curve buff 从别 slot 来时、看接收方而非 source 的 HP。
+    const tgtHp = tr?.hp ?? 100;
+    const factor = conditionFactor(param, tgtHp, anyTeammateZero, enemyBk);
     if (factor === 0) return;
     // chara skill: value_scaling × jukudo 熟度成长
     // omoide source 走 omoideEffectiveScaling fallback (Frida 抓的 value_scaling 全空、用户实测 0.003)
@@ -251,7 +263,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     };
     // HitCount / AttackCount: 携带逐段 stages 数组 (master values [v0,v1,v2] 或 broadcast value)
     // opts.stageMult: soul 等级倍率 (values 数组路径不走 valueOverride、单独乘;单值路径 value 已 scaled)
-    if (entry.base_parameter === 'HitCount' || entry.base_parameter === 'AttackCount') {
+    if (entry.base_parameter === 'HitCount' || entry.base_parameter === 'AttackCount' || entry.base_parameter === 'HitCountKeepDamage') {
       const sm = opts.stageMult ?? 1;
       if (Array.isArray(raw.values) && raw.values.length === 3) {
         entry._stages = raw.values.map((v) => (Number(v) || 0) * sm);
@@ -261,6 +273,22 @@ export function collectEffects(team, targetSlotIdx, ctx) {
       }
     }
     collected.push(entry);
+    // HitCountKeepDamage 第二效果「减攻」: 加 B hit 的同时 Attack ×= A/(A+B)、フルヒット保持不变 (用户 2026-06-19)。
+    //   A = 目标魔剣原始 hit_counts 之和 (characters.json、未经任何计算)、B = 本效果加 hit 总量 = Σ_stages。
+    //   分类到 Attack、进 PSV 池 (applyStaged Stage 4 Mul、跟原 source 同 stage)。
+    if (entry.base_parameter === 'HitCountKeepDamage') {
+      const B = (entry._stages || []).reduce((s, x) => s + (x || 0), 0);
+      const tState = targetChara?._master?.states?.[tr?.state] || Object.values(targetChara?._master?.states || {})[0];
+      const A = (tState?.hit_counts || []).reduce((s, x) => s + (x || 0), 0);
+      if (A > 0 && A + B > 0) {
+        collected.push({
+          _source: source, _src_slot: srcSlot,
+          _src_name: `${entry._src_name || 'KeepDamage'} (减攻 A/(A+B))`,
+          parameter: 'Attack', base_parameter: 'Attack',
+          math_type: 'Multiply', value: A / (A + B), condition_factor: factor,
+        });
+      }
+    }
   }
 
   // 遍历 3 slot (用 resolvedTeam)
@@ -280,8 +308,14 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     // 1b. bd_skill.effects (tr.bd_on=true 时激活、BD 释放后队伍 buff)
     // 不考虑伤害公式 (Phase 8 IsBlaze gate)、只把 effects 当普通 buff 加入
     if (trSlot.bd_on && cMaster.bd_skill?.effects) {
+      // BD 条数: buff 倍率/值 = value + additional_value × bdCount (默认 bdCount = bd_skill.cost、hensei UI 可调 0..bdCapMax)
+      const bdCount = trSlot.bd_count != null ? trSlot.bd_count : (cMaster.bd_skill.cost ?? 0);
       for (const eff of cMaster.bd_skill.effects) {
-        pushEff(slot.chara, i, 'bd_skill', eff, { srcName: eff.description || cMaster.bd_skill.name || 'BD' });
+        const scaled = (eff.value || 0) + (eff.additional_value || 0) * bdCount;
+        pushEff(slot.chara, i, 'bd_skill', eff, {
+          srcName: eff.description || cMaster.bd_skill.name || 'BD',
+          valueOverride: scaled,
+        });
       }
     }
 
@@ -598,6 +632,102 @@ export function applyStaged(base, parameter, effects, opts = {}) {
 }
 
 // ============================================================
+// Server-fold 顺序 (HP / HitCount 战前一次性 server fold、不走 EAD 分组 pipeline)
+// 顺序 (2026-06-19 用户指定，复刻 server 拼 weapon_skills 数组的 block 顺序):
+//   自身好感(omoide) → 自身costume(masou) →
+//   各 slot[ 技能(chara_skill/bd/meta) → 结晶(crystal) → costume(masou、自身已在前面、跳过) ] →
+//   各 slot bg → 各 slot soul → 其余(他 slot omoide / enemy_buff 等)
+// 逐 effect 应用(不分组 Mul/Add)、对顺序敏感(HitCount 每步 clamp、HP 加算落在乘算内/外取决于位置)。
+// ============================================================
+export function orderServerFold(list, targetSlotIdx) {
+  const taken = new Set();
+  const out = [];
+  const take = (pred) => {
+    for (const e of list) {
+      if (taken.has(e) || !pred(e)) continue;
+      taken.add(e);
+      out.push(e);
+    }
+  };
+  const T = targetSlotIdx;
+  take((e) => (e._source === 'omoide' || e._source === 'omoide_mul') && e._src_slot === T); // 自身好感
+  take((e) => e._source === 'masou' && e._src_slot === T); // 自身costume
+  for (let s = 0; s < 3; s++) {
+    take((e) => (e._source === 'chara_skill' || e._source === 'bd_skill' || e._source === 'chara_meta') && e._src_slot === s);
+    take((e) => e._source === 'crystal' && e._src_slot === s);
+    if (s !== T) take((e) => e._source === 'masou' && e._src_slot === s); // 后面位置 costume 排除自己
+  }
+  for (let s = 0; s < 3; s++) take((e) => e._source === 'bg' && e._src_slot === s);
+  for (let s = 0; s < 3; s++) take((e) => (e._source === 'soul' || e._source === 'soul_affinity') && e._src_slot === s);
+  take(() => true); // 其余(他 slot omoide / enemy_buff 等) 按原顺序补尾
+  return out;
+}
+
+// HP 战前 server-fold: 按 orderServerFold 顺序逐 effect 应用 (Mul 直乘、Add 直加、不分组)。
+// 自身/靠前 slot 的加算因排在自身乘算之前 → 落在乘算"内";靠后 slot 的加算排在之后 → 落在"外"。
+// (unpacking archive/HOWTO_hp_calc.md: max_hp = (base + Σ前置Add) × Π自身Mul + Σ后置Add、slot 顺序敏感)
+export function serverFoldHP(base, effects, targetSlotIdx, opts = {}) {
+  const ordered = orderServerFold(effects.filter((e) => e.base_parameter === 'HP'), targetSlotIdx);
+  const st = opts.traceStages?.s_hp_fold;
+  const _norm = (x) => Math.round(x * 1e9) / 1e9;
+  let v = base;
+  for (const e of ordered) {
+    const cf = e.condition_factor ?? 1;
+    const before = v;
+    if (e.math_type === 'Multiply') {
+      const f = 1 + (e.value - 1) * cf;
+      if (f === 1) continue;
+      v *= f;
+      if (st) st.steps.push({ src: traceSrcLabel(e), stat: 'HP', op: 'mul', val: f, before, after: v });
+    } else if (e.math_type === 'Addition') {
+      const a = e.value * cf;
+      if (a === 0) continue;
+      v += a;
+      if (st) st.steps.push({ src: traceSrcLabel(e), stat: 'HP', op: 'add', val: a, before, after: v });
+    }
+  }
+  const out = Math.floor(_norm(v)); // server max_hp 为整数 (base 已 floor、用户决策 2026-06-19)
+  if (st && out !== v) st.steps.push({ src: 'server-fold floor', stat: 'HP', op: 'floor', val: null, before: v, after: out });
+  return out;
+}
+
+// HitCount 战前 server-fold (DeckHitCount、unpacking 17_hitcount.md §17.2.1/§17.8.3):
+//   按 orderServerFold 顺序逐 effect、每步 cur = trunc(cur op val) (战前 fcvtzs)、每步 clamp ≥1。
+//   per-step clamp 对顺序敏感、所以不分组 Mul/Add。返回各段 hit 数组。
+export function serverFoldHitCount(baseHits, effects, targetSlotIdx, stHits = null) {
+  const ordered = orderServerFold(
+    effects.filter(
+      (e) => e.base_parameter === 'HitCount' || e.base_parameter === 'AttackCount' || e.base_parameter === 'HitCountKeepDamage',
+    ),
+    targetSlotIdx,
+  );
+  return baseHits.map((baseI, stageI) => {
+    if (!baseI) return 0; // 该段不存在 (chara 1-3 段攻击不固定)、不参与
+    let cur = baseI;
+    const hitStat = `Hit${stageI + 1}`;
+    for (const e of ordered) {
+      const stageVal = (e._stages?.[stageI] ?? e.value) * (e.condition_factor ?? 1);
+      if (e.math_type === 'Multiply' ? stageVal === 1 : stageVal === 0) continue; // ×1 / +0 无影响
+      const b = cur;
+      if (e.math_type === 'Multiply') cur = Math.trunc(cur * stageVal);
+      else cur = Math.trunc(cur + stageVal);
+      if (cur <= 0) cur = 1; // ★ per-step clamp ≥1 (战前 §17.2.1、顺序敏感)
+      if (stHits && cur !== b) {
+        stHits.steps.push({
+          src: traceSrcLabel(e), stat: hitStat,
+          op: e.math_type === 'Multiply' ? 'mul' : 'add', val: stageVal, before: b, after: cur,
+        });
+      }
+    }
+    const out = Math.max(1, cur);
+    if (stHits && out !== cur) {
+      stHits.steps.push({ src: 'max(1)', stat: hitStat, op: 'max', val: null, before: cur, after: out });
+    }
+    return out;
+  });
+}
+
+// ============================================================
 // Repel_Percent 独立通道 — 不影响 stat
 // ============================================================
 export function repelRate(effects, parameter) {
@@ -658,6 +788,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
         s6_enemy_break: mkStage('s6_enemy_break', 'Enemy Break (step48/49)'),
         s7_inline3: mkStage('s7_inline3', '敵BK inline ×3 (step51)'),
         s7b_ceil: mkStage('s7b_ceil', '出口 ceil'),
+        s_hp_fold: mkStage('s_hp_fold', 'HP server-fold (逐 effect 顺序)'),
       }
     : null;
 
@@ -670,7 +801,9 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   // applyStaged 对每个 stat 跑 (LP / inline×3 只影响 Attack、其他 stat 传 opts={})
   const optsAtk = { lpMult, enemyBkX3, traceStages, statLabel: '攻撃力' };
   const stats = {
-    HP: applyStaged(base.HP, 'HP', effects, { traceStages, statLabel: 'HP' }),
+    // HP / HitCount 走战前 server-fold (orderServerFold 顺序逐 effect)、不走 EAD 分组 pipeline。
+    // 攻撃力/防御力/ブレイク力 仍走 applyStaged (in-battle EAD §3.3、Mul-then-Add 分组是逆向实证的真实顺序)。
+    HP: serverFoldHP(base.HP, effects, slotIdx, { traceStages }),
     Attack: applyStaged(base.Attack, 'Attack', effects, optsAtk),
     Defense: applyStaged(base.Defense, 'Defense', effects, { traceStages, statLabel: '防御力' }),
     GuardBreak: applyStaged(base.GuardBreak, 'GuardBreak', effects, { traceStages, statLabel: 'ブレイク力' }),
@@ -722,43 +855,9 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   const baseHits = Array.isArray(stateData?.hit_counts) ? stateData.hit_counts.slice(0, 3) : [0, 0, 0];
   while (baseHits.length < 3) baseHits.push(0);
   if (trace) trace.hitsBase = baseHits.slice();
-  // hits 逐 effect 序贯计算 (2026-06-10 用户确认):
-  //   每次加成立即 floor、再做下一次运算。例: base 3、soul Add +6×1.8 → floor(3+10.8)=13 → 下一 effect 从 13 起
-  //   顺序跟 stats stage 4/5 一致: Mul (非soul→soul、slot 升序) → Add (同分类)
-  const _isSoulHit = (e) => e._source === 'soul' || e._source === 'soul_affinity';
-  const _hitPool = effects.filter(
-    (e) => e.base_parameter === 'HitCount' || e.base_parameter === 'AttackCount',
-  );
-  const _hitOrder = (arr) => [...arr].sort(
-    (a, b) => (_isSoulHit(a) ? 1 : 0) - (_isSoulHit(b) ? 1 : 0) || (a._src_slot ?? 0) - (b._src_slot ?? 0),
-  );
-  const orderedHitEffects = [
-    ..._hitOrder(_hitPool.filter((e) => e.math_type === 'Multiply')),
-    ..._hitOrder(_hitPool.filter((e) => e.math_type === 'Addition')),
-  ];
-  const hits = baseHits.map((baseI, stageI) => {
-    if (!baseI) return 0;  // 该段不存在 (chara 1-3 段攻击不固定)、不参与
-    let cur = baseI;
-    const hitStat = `Hit${stageI + 1}`;
-    for (const e of orderedHitEffects) {
-      const stageVal = (e._stages?.[stageI] ?? e.value) * (e.condition_factor ?? 1);
-      if (stageVal === 0) continue;
-      const b = cur;
-      if (e.math_type === 'Multiply') cur = Math.floor(cur * stageVal);
-      else cur = Math.floor(cur + stageVal);
-      if (stHits && cur !== b) {
-        stHits.steps.push({
-          src: traceSrcLabel(e), stat: hitStat,
-          op: e.math_type === 'Multiply' ? 'mul' : 'add', val: stageVal, before: b, after: cur,
-        });
-      }
-    }
-    const out = Math.max(1, cur);
-    if (stHits && out !== cur) {
-      stHits.steps.push({ src: 'max(1)', stat: hitStat, op: 'max', val: null, before: cur, after: out });
-    }
-    return out;
-  });
+  // hits 战前 server-fold (serverFoldHitCount: orderServerFold 顺序 + 每步 trunc + 每步 clamp ≥1、
+  // unpacking 17_hitcount.md §17.2.1/§17.8.3、2026-06-19 用户确认替代旧 Mul-then-Add 分组)
+  const hits = serverFoldHitCount(baseHits, effects, slotIdx, stHits);
   const totalHits = hits.reduce((s, h) => s + h, 0);
 
   // damageLimit — DamageLimitBreak Mul + Add 池 fold (unpacking §9.5 / wiki main:js/stats-calc.js L559-561)

@@ -97,6 +97,41 @@ v = ceil(v)                                           出口 ceil (caller get_Da
 - 跟 Stage 6 Enemy_BreakAttack 用**独立 gate** (cached isBreak vs fresh EnemyGuard.IsBreak)
 - 通常两 gate 等价、hensei 简化用同 `enemy.bk` flag
 
+## HP / HitCount — 战前 server-fold (不走上面的 EAD 分组 pipeline)
+
+**攻撃力/防御力/ブレイク力** 走 in-battle EAD pipeline (applyStaged、Mul-then-Add 分组、unpacking 03_ead.md §3.3 逆向实证)。
+但 **HP 和 HitCount 是战前 (CreateBattleSession / DeckHitCount) server 一次性 fold 的、客户端不重算**:
+
+- **HP** (unpacking archive/HOWTO_hp_calc.md): `max_hp = (base + Σ前置slot的HP-Add) × Π自身HP-Mul + Σ后置slot的HP-Add`、**slot 顺序敏感** (自身/靠前 slot 的加算落在乘算"内"、靠后 slot 落在"外")。**终值 `floor` 取整** (server max_hp 为整数、base 已 floor、用户决策 2026-06-19;唯一一次取整、中间不 round)。
+- **HitCount** (unpacking 17_hitcount.md §17.2.1 / §17.8.3): 逐 effect `cur = trunc(cur op val)` + **每步 clamp ≥1**;per-step clamp **对顺序敏感** (`Mul→clamp→Mul ≠ Mul→Mul→clamp`)。
+
+两者都按 **server 拼 weapon_skills 数组的 block 顺序逐 effect 应用、不分组 Mul/Add** (2026-06-19 用户指定、`shared/stats-calc.js orderServerFold`):
+
+```
+自身好感(omoide) → 自身costume(masou) →
+  1号位[技能(chara_skill/bd/結婚等meta) → 结晶 → costume] →
+  2号位[技能 → 结晶 → costume] → 3号位[技能 → 结晶 → costume]  (各 slot 自身的 costume 已在最前面、此处跳过) →
+  1/2/3号位 bg → 1/2/3号位 魂(soul)
+```
+
+> ⚠ caveat: server 数组的精确 block 顺序文档本身标注「推测、未验证」(weapon_skills_order.md);hensei 是从多 wiki 源自己收集的、按此顺序**尽量贴近**、非逐位精确。HP 的 slot 顺序效应也是实测推算。
+> 实现: `serverFoldHP()` (HP)、`_computeImpl` hits loop (HitCount) 都调 `orderServerFold(list, targetSlotIdx)`。trace 里 HP 走独立 stage `s_hp_fold`。
+
+### HitCountKeepDamage (双效果、2026-06-19 用户)
+
+`HitCountKeepDamage` parameter 有两个效果:
+1. **加 hit**:跟普通 HitCount 一样计入段数(`serverFoldHitCount` filter 含它)。
+2. **减攻(保伤)**:加了 B 段的同时把 Attack ×= `A / (A + B)`,让フルヒット = Attack×段数 保持不变。
+   - `A` = 目标魔剣**原始 hit_counts 之和**(characters.json、未经任何计算);`B` = 本效果加 hit 总量(`value × 3` 或 `Σvalues[]`)。
+   - 这条减攻 `math_type=Multiply`、`parameter=Attack`,进 **Attack PSV 池**(applyStaged Stage 4 Mul、跟原 source 同 stage)。
+   - 实现在 `collectEffects` 的 `pushEff`:推完 hit entry 后,若是 HitCountKeepDamage 再派生一条 Attack Mul effect。
+
+### BD 条数 (bd_count、2026-06-19 用户)
+
+`tr.bd_on=ON` 时 bd_skill.effects 当 buff 加入。各 effect 倍率/值 = `value + additional_value × bd_count`:
+- `bd_count` 来自 hensei BD toggle 右侧输入框(`tr.bd_count`、默认 = `bd_skill.cost`、范围 0..bdCapMax)。
+- 例 天業剣クリーフォート bd effect `value=20.48, additional_value=1.36`,bd_count=7 → 20.48 + 1.36×7 = 30.00。
+
 ## Defense stat 公式 (unpacking 19_defense.md §19 PAD step 3)
 
 hensei「防御力」显示 = `s10` (玩家防御吸收量、damage units) = `base × Π Mul + Σ Add`。
@@ -124,7 +159,7 @@ hensei「防御力」显示 = `s10` (玩家防御吸收量、damage units) = `ba
 - `JustGuard_MinDamage` (PSV param 62): JG 时修正保底比例、同上
 - §19.4 7 phase 内部细分 (用户决策简化、数学等价无影响)
 
-`condition_factor` 在 collection 阶段算好、跟 value 配套存：
+`condition_factor` 在 collection 阶段算好、跟 value 配套存（`hp_pct` = **接收方 target 自身 HP%**，range=All 的 HP-curve buff 从别 slot 来时看接收方而非 source，2026-06-19 修正）：
 - HP-curve `Vitality_*`: `factor = hp_pct / 100`
 - HP-curve `RemHP_*`: `factor = (100 - hp_pct) / 100`
 - Break gate `Break_*`: `factor = 1 if hp_pct < 50 else 0`
@@ -176,7 +211,10 @@ clamp(repel_rate, 0, 100)
 
 实际实现在 [shared/stats-calc.js](../shared/stats-calc.js):
 - `collectEffects(team, targetSlotIdx, ctx)` — 3 slot 全 source 收集进 effects[] 池、附 `_source` / `_src_slot` / `_src_name` (trace 显示)、
-  按 `range` + `target_element_id` / `weapon_type_id` / `weapon_base_id` / `chara_base_id` 决定 target 命中 (`_effectApplies`)、
+  按 `range` + element/weapon/chara 限定决定命中 (`_effectApplies`):
+  - **`element_condition` / `weapon_type_condition`**(souls「X属性装備で…」)= 判**装备者(source/equipper)**自身属性·武器、不命中整条不激活 (range=All 时看装备者而非接收方、2026-06-19 扫描确认: souls 全用 *_condition、weapons 全用 target_*)。
+  - **`target_element_id` / `weapon_type_id`**(weapons/crystals「X属性の味方…」)= 判**接收方(target)**过滤 (+ `extra_element_id` 扩展接收)。
+  - `weapon_base_id` / `chara_base_id` = 限定到特定魔剣 (跟 target id 比对)。
   HP-curve / gate 类在收集时算好 `condition_factor`
 - `applyStaged(base, parameter, effects, opts)` — 按上面 stage 表逐 effect apply (+0/×1 跳过、出口 ceil)
 - soul: 收集时 `value × soulMultiplier(rarity, soul_lv)` 一刀切 (所有 math_type、Multiply 直乘是游戏行为、2026-06-10 用户实测确认 ×1.45 → lv50 ×2.175)、
@@ -187,7 +225,7 @@ clamp(repel_rate, 0, 100)
 
 | 値 | 公式 | 实现 |
 |---|---|---|
-| Hit1-3 | 逐 effect 序贯 `cur = floor(cur op effVal)`、**每步 floor 再做下一步**、顺序 = Mul (非soul→soul、slot 升序) → Add 同分类、终 `max(1)` | `_computeImpl` hits loop |
+| Hit1-3 | 战前 server-fold:按 `orderServerFold` 顺序逐 effect、每步 `cur = trunc(cur op val)` + **每步 clamp ≥1**(顺序敏感、见上节)、终 `max(1)` | `_computeImpl` hits loop |
 | フルヒット攻撃力 | `floor(Attack × Σhits)` | 同上 |
 | ダメ上限 | `floor(2^31-1 × ΠMul + ΣAdd)` DamageLimitBreak 池、单 loop 按 effects 顺序 | 同上 |
 | 転速 | `latestRecover = ΣAdd + (soul_lv/100+1) × ΠMul × base.Speed`、cooldown = `max(1, ceil(6000/recover))` fr | `_computeSpeed` |
@@ -214,7 +252,8 @@ clamp(repel_rate, 0, 100)
 | **燃心** toggle | `tr.moeshin` | 攻撃力 × 1.3 | ✅ |
 | **LP** 档 | `tr.lp` | 攻撃力 × {1.0/1.1/1.5} | ✅ |
 | **MP** toggle | `tr.have_mp` | 攻撃力 / ブレイク力 × {1.0 / (1/21)} (なし時) | ✅ |
-| **BD ON/OFF** toggle | `tr.bd_on` | ON → `bd_skill.effects[]` 当普通 buff 加入 stat (例: Attack ×50)。不影响 IsBlaze gate / BD 伤害公式 (Phase 8) | ✅ |
+| **BD ON/OFF** toggle | `tr.bd_on` | ON → `bd_skill.effects[]` 当普通 buff 加入 stat、倍率 = `value + additional_value × bd_count`。不影响 IsBlaze gate / BD 伤害公式 (Phase 8) | ✅ |
+| **BD 条数** input (仅 bd_on 时显示) | `tr.bd_count` | bd_skill effect 的 `additional_value × bd_count`。默认 `bd_skill.cost`、范围 0..bdCapMax | ✅ |
 | **soul level** slider | `tr.soul_lv` | 所有 soul effect `value × soulMultiplier(rarity, lv)` (表: lv≤r×10 → 1+0.01lv; 之后到 75 渐进 +0.3/+0.1)。Multiply 直乘 (×1.45 → lv50 ×2.175、游戏行为)、HitCount values 数组同样缩放 | ✅ |
 | **soul 觉醒** slider | `tr.soul_awakening` | soul max_lv += 5 × soul_awakening (cap 75) | ✅ |
 | **soul affinity** (元素/武器相性倍率) | (自动、装备 chara 决定) | 攻撃力/ブレイク力 × positive_value、防御力 × negative_value | ✅ |
@@ -292,8 +331,8 @@ console 输入 `window.__DEBUG_STATS = true` → 切控件时输出：
 测试公式校准依据 (Phase 6.1 Step 0):
 - soul effect: `soulMultiplier(rarity, lv)` × `effect.value` (v1 main:js/stats-calc.js L210)
 - LP: 4 档 `[1.0, 1.1, 1.5, 2.0]` 普通 / `[1.0, 1.3, 2.0, 5.0]` Blaze (unpacking §3.8)
-- HitCount: 逐段、逐 effect 序贯计算、**每次加成立即 floor 再做下一次** (2026-06-10 用户实测修正、替代旧 §17.3 一次性 fold):
-  `cur = floor(cur op effVal)` 逐 effect、顺序 = Mul (非soul→soul、slot 升序) → Add (同分类)、终值 `max(1, cur)`
+- HitCount: 逐段、逐 effect 序贯、按 `orderServerFold`(server 拼接顺序、不分组 Mul/Add)、每步 `cur = trunc(cur op val)` + **每步 clamp ≥1** (2026-06-19 用户确认、unpacking 17_hitcount §17.2.1/§17.8.3、替代旧 Mul-then-Add 分组):
+  `cur = trunc(cur op effVal); if cur<=0: cur=1` 逐 effect、终值 `max(1, cur)`
   例: base 3、soul Add +6 (×1.8 等级) → floor(3+10.8)=13 → 下一 effect 从 13 起
 - soul HitCount `values=[a,b,c]` 数组: 每段 × soulMultiplier (跟单值路径一致吃等级加成)
 - omoide Mul → stage 3 (用户决策)
