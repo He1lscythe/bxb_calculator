@@ -26,14 +26,13 @@ jobs:
       - name: Fetch revise data from data-staging
         # *_revise.json 在 .gitignore 内 (main 不 commit、走 data-staging 单向积累)
         # CI 跑 UI test 需 revise 数据 (deepApply 注入 max_value/tags/acquisition)、从 data-staging checkout
+        # 单文件缺失只 warn 不 fail (某 revise 可能临时不在 data-staging、UI test 仍应跑)
         run: |
           git fetch origin data-staging
-          git checkout origin/data-staging -- \
-            data/chara_revise.json \
-            data/soul_revise.json \
-            data/crystal_revise.json \
-            data/masou_revise.json \
-            data/bg_revise.json
+          for f in chara_revise soul_revise crystal_revise masou_revise bg_revise; do
+            git checkout origin/data-staging -- "data/$f.json" \
+              || echo "::warning::data/$f.json 不在 data-staging、跳过"
+          done
 
       - name: Run UI smoke tests
         run: npm run test:ui
