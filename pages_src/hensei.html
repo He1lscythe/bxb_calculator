@@ -19,6 +19,9 @@
         <button class="size-btn" data-n="1" onclick="setTeamSize(1)">1体</button>
         <button class="size-btn" data-n="2" onclick="setTeamSize(2)">2体</button>
         <button class="size-btn on" data-n="3" onclick="setTeamSize(3)">3体</button>
+        <button class="io-btn" style="margin-left: auto" onclick="openIoModal()" title="編成を コード/URL/.json で書き出し">export</button>
+        <button class="io-btn" onclick="openIoModal()" title="編成を コード/ファイル から読み込み">import</button>
+        <input type="file" id="hensei-import-file" accept="application/json,.json" style="display: none" onchange="importHenseiFile(this)" />
       </div>
 
       <!-- 敌方 / 副本 / 工会 信息（影响最终乘算）— 内容由 renderEnemyBar() 生成 -->
@@ -79,6 +82,37 @@
           <button class="modal-close" onclick="closeOmoideModal()">✕</button>
         </div>
         <div class="modal-body" id="omoide-modal-body"></div>
+      </div>
+    </div>
+
+    <!-- ===== EXPORT / IMPORT MODAL ===== -->
+    <div id="io-modal">
+      <div class="modal-overlay" onclick="closeIoModal()"></div>
+      <div class="modal-panel">
+        <div class="modal-header">
+          <span class="modal-header-title">編成 export / import</span>
+          <button class="modal-close" onclick="closeIoModal()">✕</button>
+        </div>
+        <div class="modal-body io-body">
+          <div class="io-sec">
+            <div class="io-label">export</div>
+            <textarea id="io-export-str" class="io-ta" rows="3" readonly></textarea>
+            <div class="io-btns">
+              <button class="io-btn" onclick="copyIoString()">copy code</button>
+              <button class="io-btn" onclick="copyIoUrl()">copy URL</button>
+              <button class="io-btn" onclick="ioDownloadJson()">.json</button>
+            </div>
+          </div>
+          <div class="io-sec">
+            <div class="io-label">import</div>
+            <textarea id="io-import-str" class="io-ta" rows="3" placeholder="paste code (bxb1:...) here"></textarea>
+            <div class="io-btns">
+              <button class="io-btn" onclick="ioImportString()">read code</button>
+              <button class="io-btn" onclick="triggerImportHensei()">file</button>
+            </div>
+          </div>
+          <div id="io-msg" class="io-msg"></div>
+        </div>
       </div>
     </div>
 
@@ -340,6 +374,13 @@
             renderAll();
             updateMobVisible();
             hideLoading();
+            // URL #hash 分享码 → 自动载入配置 (用完清掉 hash、避免 reload 重复应用)
+            const _h = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+            if (/^bxb[01]:/.test(_h)) {
+              _decodeHensei(_h)
+                .then((o) => { _applyHenseiConfig(o); history.replaceState(null, '', location.pathname + location.search); })
+                .catch(() => {});
+            }
           },
         )
         .catch(() => {
@@ -562,6 +603,172 @@
         } else if (isMob()) updateMobIndicator();
         refreshAllStats();
       };
+
+      // ===== 編成 export / import (.json 文件 + 分享码 + URL #hash、deflate-raw 压缩) =====
+      // 紧凑对象: 省略 tr/enemy 默认值 + 空 slot/crystals (import 时 merge 默认补回)。
+      const _ENEMY_DEF = { element: 6, bk: false, mode: 'normal', bkResistance: 'normal', difficulty: 'Normal', guildTitle: null, bd_cap: 0 };
+      const _DEF_EMBLEMS = [{ id: 1, level: 25 }, { id: null, level: 1 }, { id: null, level: 1 }, { id: null, level: 1 }];
+      const _DEF_EMBLEMS_STR = JSON.stringify(_DEF_EMBLEMS);
+      const _henseiCompact = () => {
+        const def = mkTr();
+        const ctr = (tr) => {
+          const o = {};
+          for (const k in def) {
+            if (k === 'omoide_picks') continue;
+            if (tr[k] !== def[k] && tr[k] !== undefined) o[k] = tr[k];
+          }
+          if (tr.omoide_picks && Object.keys(tr.omoide_picks).length) o.omoide_picks = tr.omoide_picks;
+          return o;
+        };
+        const cslot = (s) => {
+          const o = {};
+          for (const k of ['chara', 'soul', 'bg', 'masou']) if (s[k] != null) o[k] = s[k];
+          const cr = (s.crystals || [])
+            .filter((c) => c && c.id != null) // 过滤未填的结晶槽 (null)
+            .map((c) => ({ id: c.id, lv: c.lv, weight: c.weight, purity: c.purity }));
+          if (cr.length) o.crystals = cr;
+          const t = ctr(s.tr || {});
+          if (Object.keys(t).length) o.tr = t;
+          return o;
+        };
+        const ce = () => {
+          const o = {};
+          for (const k in _ENEMY_DEF) if (enemy[k] !== _ENEMY_DEF[k]) o[k] = enemy[k];
+          // emblems: 保留 4 槽位置 (filter 会丢位置)、与默认相同则省略
+          const emb = [0, 1, 2, 3].map((i) => {
+            const e = (enemy.emblems || [])[i];
+            return e && e.id != null ? { id: e.id, level: e.level } : { id: null, level: 1 };
+          });
+          if (JSON.stringify(emb) !== _DEF_EMBLEMS_STR) o.emblems = emb;
+          const aw = [...(enemy.advantageWeapons || [])];
+          if (aw.length) o.advantageWeapons = aw;
+          return o;
+        };
+        return { v: 1, teamSize, team: team.map(cslot), enemy: ce() };
+      };
+
+      // 把配置(紧凑或全量)灌回 team/enemy 并重渲染。缺失/失效 id 跳过、tr/enemy 缺省补默认值。
+      const _applyHenseiConfig = (data) => {
+        if (!data || !Array.isArray(data.team)) throw new Error('invalid format (no team)');
+        const validId = (arr, id) => (id != null && Array.isArray(arr) && arr.some((x) => x.id === id) ? id : null);
+        for (let i = 0; i < 3; i++) {
+          const s = data.team[i] || {};
+          team[i].chara = validId(allCharas, s.chara);
+          team[i].soul = validId(allSouls, s.soul);
+          team[i].bg = validId(allBGs, s.bg);
+          team[i].masou = validId(allMasou, s.masou);
+          team[i].crystals = Array.isArray(s.crystals)
+            ? s.crystals
+                .filter((c) => c && c.id != null && allCrystals.some((x) => x.id === c.id))
+                .map((c) => ({ id: c.id, lv: c.lv ?? 1, weight: c.weight ?? 0, purity: c.purity ?? 0 }))
+            : [];
+          team[i].tr = { ...mkTr(), ...(s.tr || {}) };
+        }
+        // enemy 先重置默认 (紧凑对象省略默认字段、不重置会残留上一份的非默认值)
+        Object.assign(enemy, _ENEMY_DEF, { emblems: _DEF_EMBLEMS.map((e) => ({ ...e })), advantageWeapons: new Set() });
+        if (data.enemy && typeof data.enemy === 'object') {
+          const { advantageWeapons, emblems, ...rest } = data.enemy;
+          Object.assign(enemy, rest);
+          enemy.advantageWeapons = new Set(Array.isArray(advantageWeapons) ? advantageWeapons : []);
+          // emblems: 仅当带了才覆盖 (省略=默认、保留上面 reset 的默认);归一 4 槽 + 校验 id (失效置 null)
+          if (Array.isArray(emblems)) {
+            enemy.emblems = [0, 1, 2, 3].map((i) => {
+              const e = emblems[i] || {};
+              const id = e.id != null && allGuildEmblems.some((g) => g.id === e.id) ? e.id : null;
+              return { id, level: Math.max(1, Math.floor(+e.level) || 1) };
+            });
+          }
+          // guildTitle 校验 (失效置 null)
+          if (enemy.guildTitle != null && !allGuildTitles.some((g) => g.id === enemy.guildTitle)) enemy.guildTitle = null;
+        }
+        renderEnemyBar();
+        renderAll();
+        setTeamSize([1, 2, 3].includes(data.teamSize) ? data.teamSize : 3); // 含 refreshAllStats
+        updateMobVisible();
+      };
+
+      // ---- 压缩编码: deflate-raw + base64url (原生 CompressionStream、无依赖;无则退回纯 base64url) ----
+      const _b64 = (bytes) => { let s = ''; for (let i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i]); return btoa(s); };
+      const _toUrl = (b) => b.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+      const _fromUrl = (s) => s.replace(/-/g, '+').replace(/_/g, '/');
+      const _bytes = (b64) => { const bin = atob(b64); const a = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); return a; };
+      // pipeThrough 模式: 自动处理背压 (手动 writer.write/close 在浏览器会死锁)
+      const _deflate = async (str) => {
+        if (typeof CompressionStream === 'undefined') return null;
+        const s = new Blob([str]).stream().pipeThrough(new CompressionStream('deflate-raw'));
+        return new Uint8Array(await new Response(s).arrayBuffer());
+      };
+      const _inflate = async (bytes) => {
+        const s = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+        return await new Response(s).text();
+      };
+      const _encodeHensei = async () => {
+        const json = JSON.stringify(_henseiCompact());
+        const z = await _deflate(json);
+        if (z) return 'bxb1:' + _toUrl(_b64(z));                            // 压缩
+        return 'bxb0:' + _toUrl(btoa(unescape(encodeURIComponent(json))));  // fallback 纯 base64url(utf8)
+      };
+      const _decodeHensei = async (str) => {
+        str = (str || '').trim();
+        if (str.startsWith('bxb1:')) return JSON.parse(await _inflate(_bytes(_fromUrl(str.slice(5)))));
+        if (str.startsWith('bxb0:')) return JSON.parse(decodeURIComponent(escape(atob(_fromUrl(str.slice(5))))));
+        return JSON.parse(str); // 容错: 直接粘 JSON
+      };
+
+      const _ioMsg = (m) => { const el = document.getElementById('io-msg'); if (el) el.textContent = m || ''; };
+      export const closeIoModal = () => document.getElementById('io-modal')?.classList.remove('open');
+      export const openIoModal = async () => {
+        document.getElementById('io-modal')?.classList.add('open');
+        const imp = document.getElementById('io-import-str'); if (imp) imp.value = '';
+        _ioMsg('');
+        const ta = document.getElementById('io-export-str');
+        if (ta) {
+          ta.value = 'generating...';
+          try { ta.value = await _encodeHensei(); }
+          catch (e) { ta.value = ''; _ioMsg('encode failed: ' + e.message); }
+        }
+      };
+      export const copyIoString = async () => {
+        const s = document.getElementById('io-export-str')?.value || '';
+        try { await navigator.clipboard.writeText(s); _ioMsg('code copied ✓'); }
+        catch { _ioMsg('copy failed — select the text above manually'); }
+      };
+      export const copyIoUrl = async () => {
+        const url = location.origin + location.pathname + '#' + (document.getElementById('io-export-str')?.value || '');
+        try { await navigator.clipboard.writeText(url); _ioMsg('URL copied ✓'); }
+        catch { document.getElementById('io-export-str').value = url; _ioMsg('copy failed — select the URL above manually'); }
+      };
+      export const ioDownloadJson = () => {
+        try {
+          const blob = new Blob([JSON.stringify(_henseiCompact(), null, 1)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `bxb-hensei-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.json`;
+          document.body.appendChild(a); a.click(); a.remove();
+          URL.revokeObjectURL(url);
+          _ioMsg('.json saved ✓');
+        } catch (e) { _ioMsg('export failed: ' + e.message); }
+      };
+      export const ioImportString = async () => {
+        const s = (document.getElementById('io-import-str')?.value || '').trim();
+        if (!s) { _ioMsg('paste a code first'); return; }
+        try { _applyHenseiConfig(await _decodeHensei(s)); _ioMsg('loaded ✓'); setTimeout(closeIoModal, 500); }
+        catch (e) { _ioMsg('load failed: ' + e.message); }
+      };
+      export const triggerImportHensei = () => document.getElementById('hensei-import-file')?.click();
+      export const importHenseiFile = (input) => {
+        const file = input?.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try { _applyHenseiConfig(JSON.parse(reader.result)); _ioMsg('loaded ✓'); closeIoModal(); }
+          catch (e) { _ioMsg('load failed: ' + e.message); }
+          input.value = '';
+        };
+        reader.readAsText(file);
+      };
+
       export const _maxOmoideThreshold = (c) => {
         // omoide 在 chara._omoide_slots[].affection_threshold (Frida 抓包 lazy fetch)
         const slots = c?._omoide_slots;
@@ -875,6 +1082,15 @@
         renderSlot(si);
         refreshAllStats();
       };
+      // BD 条数 (value + additional_value × 条数;0..bdCapMax、默认 bd_skill.cost)
+      export const setBdCount = (si, val) => {
+        const cap = Math.floor(_lastTrace[si]?.bdCapMax ?? 9);
+        const v = Math.max(0, Math.min(cap, Math.floor(+val || 0)));
+        team[si].tr.bd_count = v;
+        const inp = document.getElementById('bdcnt-' + si);
+        if (inp) inp.value = v;
+        refreshAllStats();
+      };
       export const setJukudoSlider = (si, val) => {
         const sl = document.getElementById('tr-jkslider-' + si);
         const max = sl ? +sl.max : 99;
@@ -1099,16 +1315,19 @@
           ? min`
       <div style="display:flex;align-items:center;gap:6px">
         <span class="tr-label">好感</span>
-        <input id="aff-input-slot-${i}" type="number" min="0" step="1" value="${aff}" onchange="setAffinity(${i},+this.value)" class="tr-input aff-input" style="width:64px;text-align:right">
+        <input id="aff-input-slot-${i}" type="number" min="0" step="1" value="${aff}" onchange="setAffinity(${i},+this.value)" class="tr-input aff-input" style="width:48px;text-align:right">
         <span style="color:var(--text2);font-size:11px" id="om-count-${i}">(${equipped}/${total})</span>
         <button class="tr-btn" style="font-size:11px;padding:3px 8px" onclick="openOmoideModal(${i})">編集</button>
       </div>`
           : '';
+        const bdCount = tr.bd_count != null ? tr.bd_count : (chara.bd_skill?.cost ?? 0);
+        const bdCapMaxN = Math.floor(_lastTrace[i]?.bdCapMax ?? 9);
         const bdHtml = hasBd
           ? min`
       <div style="display:flex;align-items:center;gap:6px">
         <span class="tr-label">BD</span>
         <button class="tr-btn${tr.bd_on ? ' on' : ''}" style="min-width:38px;text-align:center" onclick="setTrField(${i},'bd_on',${!tr.bd_on})">${tr.bd_on ? 'ON' : 'OFF'}</button>
+        ${tr.bd_on ? min`<input id="bdcnt-${i}" type="number" min="0" max="${bdCapMaxN}" step="1" value="${bdCount}" onchange="setBdCount(${i},+this.value)" class="tr-input" style="width:26px;text-align:right" title="BD条数 (倍率 = value + additional_value × 条数)"><span class="tr-max">/ ${bdCapMaxN}</span>` : ''}
       </div>`
           : '';
         const omoideBdRow =
@@ -1189,7 +1408,7 @@
         const modeOpts = [
           ['normal', '普通'],
           ['guildbattle', 'ギルバト'],
-          ['guildbattle_special', 'ギルバト特別版'],
+          ['guildbattle_special', 'ギルバト七罪王'],
           ['other', '他'],
         ]
           .map(
@@ -3196,8 +3415,8 @@
         let html = `<div class="trace-base">${escHtml(statKey)} base: ${_fmtTraceStat(base)}</div>`;
 
         // tab 只显示自己相关的 stage (其他属性専用 stage 不渲染、即便空也不显示 無し)
-        const _SPECIAL_STAGES = { 'ダメ上限': 's10_damage_limit', '転速': 's11_speed' };
-        const _NON_CALC = new Set(['s9_hits', 's10_damage_limit', 's11_speed', 's12_motion']);
+        const _SPECIAL_STAGES = { 'ダメ上限': 's10_damage_limit', '転速': 's11_speed', 'HP': 's_hp_fold' };
+        const _NON_CALC = new Set(['s9_hits', 's10_damage_limit', 's11_speed', 's12_motion', 's_hp_fold']);
         const _stageRelevant = (stage) => {
           const special = _SPECIAL_STAGES[statKey];
           if (special) return stage.key === special;
@@ -3303,6 +3522,15 @@
         autoAssignSoul,
         syncCrystals,
         setTeamSize,
+        openIoModal,
+        closeIoModal,
+        copyIoString,
+        copyIoUrl,
+        ioDownloadJson,
+        ioImportString,
+        triggerImportHensei,
+        importHenseiFile,
+        setBdCount,
         setChara,
         setSoul,
         setBG,
