@@ -183,7 +183,7 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 | `python scripts/start.py` | 本地 dev server (端口 8787) + `POST /save` endpoint 写回 `data/*_revise.json` |
 | `node scripts/serve.js` | 纯静态 dev server (不含 /save) |
 | `node scripts/build.js` | 全量 build (`pages_src/` + fragments → `pages/`)、用户开 `--watch` 模式自动重 build |
-| `npm test` | 135/135 单测 (tests/unit/) |
+| `npm test` | 264/264 单测 (tests/unit/) |
 | `npx playwright test` | UI e2e (tests/ui/、5 viewer 渲染 + hensei 装备联动) |
 
 **保存流程**:
@@ -192,6 +192,10 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 3. local: `start.py` deep merge 入 `data/*_revise.json` + 写盘
 4. Vercel 生产: `/api/save.js` 推 `data-staging` branch + 自动 PR
 5. `data-staging` branch 单向积累、不合回 main (本 branch 是 refactor/unpacking-source、user memory 决策)
+
+**数值输入分式支持 (2026-06-20)**: edit mode 的 `value_scaling` (chara skill / masou) 和 crystal `max_value` / `M_L/W/P_max` **既接受分式字符串 (`"5/1.13"`) 也接受小数/整数**。分式存 string、小数/整数存 number (`parseBairituVal`);hensei 计算时由 `parseHit` / `parseFactor` / chara-adapter `_parseFrac` 展开成数字。测试见 [tests/unit/test_fraction_support.mjs](../tests/unit/test_fraction_support.mjs)(覆盖所有消费点)。
+
+**分享 (export/import)**: `_henseiCompact` → deflate-raw + base64url → `#hash` / .json 文件。`omoide_picks` 非空时随之导出(装备 chara 时 auto-equip「攻撃優先」会写入)。导入 (`_applyHenseiConfig`) 对每个魔剣**懒加载 omoide 数据**(`_ensureOmoideLoaded`、`autoEquip=false` 保留导入的 picks)→ 恢复好感显示 + 计算;否则 `_omoide_slots` 未加载、好感行不渲染且 omoide buff 不生效。
 
 ---
 

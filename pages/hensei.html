@@ -229,6 +229,7 @@
         collectEffects,
         applyStaged,
         conditionFactor,
+        baseParameter,
         repelRate,
         mkTr,
         AWAKENING_MAX as AWAKENING_MAX_TBL,
@@ -725,6 +726,8 @@
         renderAll();
         setTeamSize([1, 2, 3].includes(data.teamSize) ? data.teamSize : 3); // 含 refreshAllStats
         updateMobVisible();
+        // import 后触发 omoide 懒加载 (autoEquip=false: 保留导入的 omoide_picks);fetch 完成后 re-render 显示好感
+        for (let i = 0; i < 3; i++) if (team[i].chara != null) _ensureOmoideLoaded(team[i].chara, false);
       };
 
       // ---- 压缩编码: deflate-raw + base64url (原生 CompressionStream、无依赖;无则退回纯 base64url) ----
@@ -815,6 +818,34 @@
         if (!Array.isArray(slots) || !slots.length) return 0;
         return slots.reduce((m, s) => Math.max(m, +s.affection_threshold || 0), 0);
       };
+
+      // omoide data lazy fetch: 注入 chara._omoide_slots、完成后 re-render 用到该 chara 的 slot。
+      //   omoide json 按 base_id 4 位命名 (data/omoide/1001.json)、chara.id 是 variant_id 6 位 → 取 _master.id。
+      //   autoEquip=true: fetch 后自动「攻撃優先」全装備 (setChara 换魔剣时)。
+      //   autoEquip=false: 仅 re-render (import 时、保留导入的 omoide_picks)。
+      const _ensureOmoideLoaded = (id, autoEquip) => {
+        const c = allCharas.find((x) => x.id === id);
+        if (!c || c._omoide_loaded) return;
+        c._omoide_loaded = true;
+        c._omoide_slots = [];
+        const baseId = c._master?.id ?? Math.floor(id / 100);
+        fetch(`../data/omoide/${baseId}.json`)
+          .then((r) => (r.ok ? r.json() : null))
+          .then((data) => {
+            if (data?.slots) c._omoide_slots = data.slots.map((s) => s.memory_slot).filter(Boolean);
+            if (team.some((s) => s.chara === id)) {
+              team.forEach((slot, slotIdx) => {
+                if (slot.chara === id) {
+                  renderSlot(slotIdx);
+                  if (autoEquip) { try { equipAllOmoide(slotIdx); } catch (_) {} }
+                }
+              });
+              refreshAllStats();
+            }
+          })
+          .catch(() => {});
+      };
+
       export const setChara = (si, id) => {
         // 清空 chara：只清魔剣 + 結晶 + 魔装；魂 / 心象結晶 保留
         if (id === null) {
@@ -835,32 +866,8 @@
           team[si].chara = id;
           team[si].masou = null;
           const c = allCharas.find((x) => x.id === id);
-          // omoide data lazy fetch: 异步加载、注入 chara._omoide_slots、完成后 re-render slot
-          // omoide json 按 base_id 4 位命名 (data/omoide/1001.json)、chara.id 是 variant_id 6 位 → 取前 4 位
-          if (c && !c._omoide_loaded) {
-            c._omoide_loaded = true;
-            c._omoide_slots = [];
-            const baseId = c._master?.id ?? Math.floor(id / 100);
-            fetch(`../data/omoide/${baseId}.json`)
-              .then((r) => r.ok ? r.json() : null)
-              .then((data) => {
-                if (data?.slots) {
-                  c._omoide_slots = data.slots.map((s) => s.memory_slot).filter(Boolean);
-                }
-                // 用户决策: fetch 完后重 render slot 让「好感 input + 編集」按钮出现 (问题 2)、
-                // 并自动「全装備（攻撃優先）」(问题 3)
-                if (team.some((s) => s.chara === id)) {
-                  team.forEach((slot, slotIdx) => {
-                    if (slot.chara === id) {
-                      renderSlot(slotIdx);
-                      try { equipAllOmoide(slotIdx); } catch (_) {}
-                    }
-                  });
-                  refreshAllStats();
-                }
-              })
-              .catch(() => {});
-          }
+          // omoide data lazy fetch (注入 _omoide_slots → re-render + 自動「攻撃優先」全装備)
+          _ensureOmoideLoaded(id, true);
           // 用户决策: 默认 affinity = 90000 (最大、解锁全部 slot)、不再用 _maxOmoideThreshold (问题 3)
           team[si].tr.affinity = 90000;
           // 重置 tr：默认最高 state（極弐>改造>通常）、awakening=0；SS 特例 38/255，其他 jukudo/lv = state max
@@ -1757,8 +1764,13 @@
         refreshAllStats();
       };
 
-      export const equipAllOmoide = (si) => {
-        // 每 unlocked slot 自动选第一个候选 (或攻击类优先)
+      // 好感装備の優先属性 [master parameter, ラベル] — equipAllOmoide / モーダルのボタンで共用
+      const _OMOIDE_PRIO = [
+        ['Attack', '攻撃'], ['Defense', '防御'], ['HP', 'HP'], ['GuardBreak', 'BK'],
+        ['BlazeAttack', 'BD攻撃'], ['MotionSpeed', '攻速'], ['Speed', '転速'],
+      ];
+      export const equipAllOmoide = (si, prio = 'Attack') => {
+        // 各 unlocked slot に prio 属性の候補を優先選択 (なければ第一候補)
         const c = allCharas.find((x) => x.id === team[si].chara);
         if (!c) return;
         const tr = team[si].tr;
@@ -1768,8 +1780,8 @@
           if ((+slot.affection_threshold || 0) > aff) return;
           const cands = slot.weapon_skills || [];
           if (!cands.length) return;
-          // 攻击优先 (Attack Mul/Add > 其他 Mul/Add)
-          let pick = cands.find((sk) => sk.parameter === 'Attack');
+          // prio 属性優先 (HP-curve prefix は baseParameter で吸収: Vitality_Attack → Attack)
+          let pick = cands.find((sk) => baseParameter(sk.parameter) === prio);
           if (!pick) pick = cands[0];
           tr.omoide_picks[idx] = pick.id;
         });
@@ -1836,7 +1848,7 @@
       <span style="font-size:13px;color:var(--text2);font-weight:600">好感:</span>
       <input type="number" min="0" step="1" value="${aff}" onchange="setAffinity(${si},+this.value)"
         style="width:80px;padding:4px 6px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;text-align:right">
-      <button class="om-btn" onclick="equipAllOmoide(${si})">全装備（攻撃優先）</button>
+      ${_OMOIDE_PRIO.map(([p, lbl]) => `<button class="om-btn" onclick="equipAllOmoide(${si},'${p}')">${lbl}優先</button>`).join('')}
       <button class="om-btn" onclick="clearAllOmoide(${si})">全解除</button>
     </div>
     ${rows}
@@ -1925,6 +1937,12 @@
 
         const yMax = aMax >= dl ? ' style="color:#ffd040"' : '';
         const yMin = aMin >= dl ? ' style="color:#ffd040"' : '';
+        // 転速 / 攻速 が上限(最速)に到達したら攻撃力と同じ黄 #ffd040 で表示:
+        //   転速: cooldown(下限 1fr) + set(1fr) = 最小 2fr → 到顶
+        //   攻速: 各有効段が 2fr 下限 (3 段攻撃 = 計 6fr「2+2+2」) → 到顶
+        const ySpd = (spdFrames + spdSet) > 0 && (spdFrames + spdSet) <= 2 ? ' style="color:#ffd040"' : '';
+        const _msActive = msFrames.filter((v) => v > 0);
+        const yMs = !msMissing && _msActive.length > 0 && _msActive.every((v) => v <= 2) ? ' style="color:#ffd040"' : '';
 
         // dev 環境のみ stat cell を clickable に。GitHub Pages では cursor も onclick もなし。
         const ck = IS_LOCAL_DEV
@@ -1939,9 +1957,9 @@
           `<div class="stats-cell"${ck('防御力')}><span class="stats-key">防御力</span><span class="stats-val">${_fmtStat(Math.ceil(def))}</span></div>`,
           `<div class="stats-cell"${ck('HP')}><span class="stats-key">HP</span><span class="stats-val">${_fmtStat(Math.ceil(hp))}</span></div>`,
           `<div class="stats-cell"${ck('ブレイク力')}><span class="stats-key">BK</span><span class="stats-val">${_fmtStat(Math.ceil(bk))}</span></div>`,
-          `<div class="stats-cell"${ck('Hit')}><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}] 合計 ${total_hits} hit</span></div>`,
-          `<div class="stats-cell"${ck('転速')}><span class="stats-key">転速</span><span class="stats-val">${spdRecover.toFixed(1)} · ${spdFrames + spdSet}fr</span></div>`,
-          `<div class="stats-cell"${ck('攻速')}><span class="stats-key">攻速</span><span class="stats-val">${msMissing ? `×[${msSpeeds.map((v) => v.toFixed(2)).join(', ')}] (時間データ不明)` : `[${msFrames.map((v) => (v || '—')).join(', ')}] 計 ${msFrames.reduce((a, b) => a + b, 0)}fr`}</span></div>`,
+          `<div class="stats-cell"${ck('Hit')}><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}] 計 ${total_hits}</span></div>`,
+          `<div class="stats-cell"${ck('転速')}><span class="stats-key">転速</span><span class="stats-val"${ySpd}>${spdRecover.toFixed(1)} · ${spdFrames + spdSet}fr</span></div>`,
+          `<div class="stats-cell"${ck('攻速')}><span class="stats-key">攻速</span><span class="stats-val"${yMs}>${msMissing ? `×[${msSpeeds.map((v) => v.toFixed(2)).join(', ')}] (時間データ不明)` : `[${msFrames.map((v) => (v || '—')).join(', ')}] 計 ${msFrames.reduce((a, b) => a + b, 0)}fr`}</span></div>`,
           `<div class="stats-cell"${ck('ダメ上限')}><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(Math.ceil(dl))}</span></div>`,
         ].join('');
         return `<div class="stats-grid">${cells}</div>`;
