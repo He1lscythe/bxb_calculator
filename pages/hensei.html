@@ -1003,9 +1003,10 @@
         const cr = allCrystals.find((x) => x.id === cfg.id);
         if (!cr) return;
         const m = cr._master || {};
+        const desc = m.description || cr.description || '';
         const { hasW, hasP, hasLv } = crystalDimAvailability(cr);
         const maxLv = cryLvMax(cr);
-        if (!hasW && !hasP && !hasLv) return;
+        // 无滑条也开 popover (至少看 name + description);name 下、滑条上插 description
         const minW = m.min_weight ?? 0;
         const maxW = m.max_weight ?? 100;
         const minP = m.min_purity ?? 0;
@@ -1047,6 +1048,7 @@
         pop.className = 'crystal-dim-popover';
         pop.innerHTML = `
     <div class="pop-title">${escHtml(cr.name)}</div>
+    ${desc ? `<div class="pop-desc">${escHtml(desc)}</div>` : ''}
     ${wRow}${pRow}${lvRow}
     <div class="pop-actions">
       <button onclick="resetCrystalDim(${si},${ci})">リセット</button>
@@ -3099,12 +3101,8 @@
             const cfg = t.crystals[ci] ?? null;
             const cid = cfg?.id ?? null;
             const cr = cid ? allCrystals.find((x) => x.id === cid) : null;
-            // ⚙ 按钮显示条件: 走 crystalDimAvailability 单一来源、跟 popover 同步
-            const { hasW, hasP, hasLv } = crystalDimAvailability(cr);
-            const hasDims = !!(cr && (hasW || hasP || hasLv));
-            const cfgBtn = hasDims
-              ? `<button class="crystal-cfg-btn" onclick="openCrystalDimPopover(${i},${ci},this)" title="重量/純度/Lv">⚙</button>`
-              : '';
+            // ⚙ 按钮: 装备 crystal 后一直显示 (即使无滑条、点开也能看 description)
+            const cfgBtn = `<button class="crystal-cfg-btn" onclick="openCrystalDimPopover(${i},${ci},this)" title="詳細">⚙</button>`;
             return cr
               ? `<div class="crystal-slot-wrap">
             <div class="crystal-thumb-wrap">
