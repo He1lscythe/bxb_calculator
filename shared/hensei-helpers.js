@@ -136,7 +136,7 @@ function parseFactor(v) {
 export function crystalMaxBairitu(m) {
   if (!m) return null;
   const hasFactor = m.M_L_max != null || m.M_W_max != null || m.M_P_max != null;
-  if (!hasFactor) return m.max_value != null ? m.max_value : null;
+  if (!hasFactor) return m.max_value != null ? parseHit(m.max_value) : null;   // max_value 可为分式字符串
   const init = Number(m.initial_value) || 0;
   return init * parseFactor(m.M_L_max) * parseFactor(m.M_W_max) * parseFactor(m.M_P_max);
 }
@@ -164,7 +164,7 @@ export function crystalEffectiveValue(cr, cfg) {
   // fallback: 5 个三因子参数 (M_L/W/P_max) 都没填 → max_value 简单 lv 线性
   const hasFormula = m.M_L_max != null || m.M_W_max != null || m.M_P_max != null;
   if (!hasFormula) {
-    const maxV = m.max_value ?? initV;   // wiki 抽的、Session 1 迁到 crystal_revise.json
+    const maxV = m.max_value != null ? parseHit(m.max_value) : initV;   // wiki 抽的、Session 1 迁到 crystal_revise.json (可为分式字符串)
     const ratio = lvMax > 1 ? Math.max(0, Math.min(1, (lv - 1) / (lvMax - 1))) : 0;
     return initV + (maxV - initV) * ratio;
   }

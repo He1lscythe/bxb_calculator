@@ -27,7 +27,7 @@ import { crystalMaxBairitu, clampCrystalMasterField, crystalMinPlaceholder } fro
 const _WEIGHT_STEP_OPTS = [null, 0.1, 1, 10, 20, 25, 50];
 const _PURITY_STEP_OPTS = [null, 0.01, 1, 10, 20, 25, 50];
 const _EDIT_FIELDS = [
-  { key: 'max_value',   label: '最大値',     type: 'float',  def: null, width: 100 },
+  { key: 'max_value',   label: '最大値',     type: 'frac',   def: null, width: 100 },
   { key: 'M_L_max',     label: 'Lv',         type: 'frac',   def: 1 },
   { key: 'M_W_max',     label: '重量',       type: 'frac',   def: 1 },
   { key: 'M_P_max',     label: '純度',       type: 'frac',   def: 1 },

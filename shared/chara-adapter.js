@@ -190,6 +190,20 @@ function _profileToWiki(prof) {
 // math_type → hit_type (utils.js fmtHitStages 用): 0=Add(+) 2=Mul(×) 3=Set(=)
 const _MATH_TYPE_TO_HIT_TYPE = { Addition: 0, Multiply: 2, Set: 3 };
 
+// value_scaling 可为 number 或分式字符串 ('5/1.13', edit mode 支持分式保存)、统一解析为 number (无效→0)
+function _parseFrac(v) {
+  if (v == null) return 0;
+  if (typeof v === 'number') return Number.isFinite(v) ? v : 0;
+  const t = String(v).trim();
+  if (t === '') return 0;
+  if (t.includes('/')) {
+    const [a, b] = t.split('/').map(parseFloat);
+    return Number.isFinite(a) && Number.isFinite(b) && b !== 0 ? a / b : 0;
+  }
+  const n = parseFloat(t);
+  return Number.isFinite(n) ? n : 0;
+}
+
 // HitCount 系 effect 注入 hit_per_stage / hit_per_stage_scaling / hit_type
 //   chara: value=N, values=null      → hit_per_stage = [N, N, N]  (全段统一)
 //   soul:  value=0, values=[a, b, c] → hit_per_stage = [a, b, c]  (按 stage 分段)
@@ -202,7 +216,7 @@ export function injectHitStages(eff, s) {
     const v = Number(s.value) || 0;
     eff.hit_per_stage = [v, v, v];
   }
-  const sc = Number(s.value_scaling) || 0;
+  const sc = _parseFrac(s.value_scaling);
   eff.hit_per_stage_scaling = [sc, sc, sc];
   eff.hit_type = _MATH_TYPE_TO_HIT_TYPE[s.math_type] ?? 0;
 }
@@ -219,7 +233,7 @@ function _weaponSkillToWiki(s) {
     range: s.range,             // master 原 'All' / 'Single' / 'None' 透传
     condition,
     bairitu: s.value,
-    bairitu_scaling: s.value_scaling || 0,
+    bairitu_scaling: _parseFrac(s.value_scaling),
     calc_type,
     _parameter: s.parameter,   // chara renderRightTags 用 PARAMETER_CLASS_SHORT 反查
   };
