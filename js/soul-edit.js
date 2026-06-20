@@ -146,8 +146,7 @@ export const saveRevise = async () => {
     if (r.mode === 'local') {
       showSaveToast(`保存しました (${patches.length} 件、local)`);
     } else {
-      const url = r.prUrl ? `<a href="${r.prUrl}" target="_blank">${r.prUrl}</a>` : '(no url)';
-      showSaveToast(`PR を作成しました: ${url}`, 30000);
+      showSaveToast('提出済み');
     }
     // 保存成功 — 清 sessionReviseIds / reviseData、让 revise bar 消失
     ids.forEach((id) => delete state.reviseData[id]);
