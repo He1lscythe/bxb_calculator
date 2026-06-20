@@ -116,25 +116,39 @@ test.describe('chara edit', () => {
     expect(result.sessionAfter).toBe(false);
   });
 
-  test('setSkillScaling → patch 含 states.{state}.weapon_skills.{i}.value_scaling', async ({ page }) => {
+  test('setSkillScaling → patch 含 states.{state}.weapon_skills.{skillId}.value_scaling (id-keyed)', async ({ page }) => {
     const result = await page.evaluate(() => {
       const c = window.state.allChars.find((x) => x._master?.id === 1001);
       window.enterEditMode(c.id);
-      // 找一个 state + skill 改 scaling
+      // 找一个 state + skill 改 scaling (patch 按 skill id 而非 index)
       const stateName = Object.keys(window.state.editData._master.states)[0];
-      const origScaling = window.state.editData._master.states[stateName].weapon_skills[0]?.value_scaling;
+      const skillId = window.state.editData._master.states[stateName].weapon_skills[0]?.id;
       window.setSkillScaling(stateName, 0, 0.0123);
       window.saveEdit();
       const patch = window.state.reviseData[1001];
       return {
         stateName,
-        origScaling,
-        hasStatesPatch: !!patch?.states?.[stateName]?.weapon_skills?.['0'],
-        patchScaling: patch?.states?.[stateName]?.weapon_skills?.['0']?.value_scaling,
+        skillId,
+        hasStatesPatch: !!patch?.states?.[stateName]?.weapon_skills?.[skillId],
+        patchScaling: patch?.states?.[stateName]?.weapon_skills?.[skillId]?.value_scaling,
       };
     });
     expect(result.hasStatesPatch).toBe(true);
     expect(result.patchScaling).toBe(0.0123);
+  });
+
+  test('setSkillScaling 支持分式输入 → patch 保留分式字符串', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const c = window.state.allChars.find((x) => x._master?.id === 1001);
+      window.enterEditMode(c.id);
+      const stateName = Object.keys(window.state.editData._master.states)[0];
+      const skillId = window.state.editData._master.states[stateName].weapon_skills[0]?.id;
+      window.setSkillScaling(stateName, 0, '0.26/60');   // 分式输入
+      window.saveEdit();
+      const patch = window.state.reviseData[1001];
+      return { patchScaling: patch?.states?.[stateName]?.weapon_skills?.[skillId]?.value_scaling };
+    });
+    expect(result.patchScaling).toBe('0.26/60');   // 分式串原样保存 (消费端 parseHit 展开)
   });
 });
 
@@ -208,6 +222,17 @@ test.describe('crystal edit', () => {
     expect(result.hasPatch).toBe(true);
     expect(result.patchMaxValue).toBe(99.99);
     expect(result.sessionHas).toBe(true);
+  });
+
+  test('setCrField max_value 支持分式 → patch 保留分式字符串', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const c = window.state.allCrystals[0];
+      window.enterEditMode(c.id);
+      window.setCrField('max_value', '5/1.13');   // 分式输入
+      window.saveEdit();
+      return { patchMaxValue: window.state.reviseData[c.id]?.max_value };
+    });
+    expect(result.patchMaxValue).toBe('5/1.13');   // 分式串原样保存 (crystalMaxBairitu/parseHit 展开)
   });
 
   test('saveRevise 成功 → button 消失 + reviseData 清空', async ({ page }) => {

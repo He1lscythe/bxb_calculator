@@ -35,6 +35,7 @@ import {
   bdCapFromBlazeGauge,
   crystalEffectiveValue,
   omoideEffectiveScaling,
+  parseHit,
 } from './hensei-helpers.js';
 
 // ============================================================
@@ -247,7 +248,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     } else {
       const scaling = (source === 'omoide' || source === 'omoide_mul')
         ? omoideEffectiveScaling(raw)
-        : (raw.value_scaling || 0);
+        : parseHit(raw.value_scaling);   // value_scaling 可为分式字符串 ('5/1.13')、parseHit 统一展开
       value = (raw.value || 0) + (scaling * srcJk);
     }
     const entry = {
