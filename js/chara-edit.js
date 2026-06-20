@@ -17,7 +17,7 @@
 import { state } from './state.js';
 import { CHARA_TAG, CHARA_TAG_COLOR } from '../shared/constants.js';
 import { submitRevise, showSaveToast } from '../shared/save-client.js';
-import { escHtml } from './utils.js';
+import { escHtml, parseBairituVal } from './utils.js';
 import { selectChar } from './render.js';
 import { updateReviseBar } from './nav.js';
 import { charaIconStack } from '../shared/image-paths.js';
@@ -68,7 +68,8 @@ const _renderSkillsSection = (c) => {
         </div>
         <div class="ce-skill-scaling">
           <label>熟度補正</label>
-          <input class="ce-input" type="number" step="any" value="${scaling}"
+          <input class="ce-input" type="text" value="${escHtml(String(scaling))}"
+            placeholder="0 (分式可: 5/1.13)"
             oninput="setSkillScaling('${escHtml(sname)}',${i},this.value)">
         </div>
         ${sk.description ? `<div class="ce-skill-desc">${escHtml(sk.description)}</div>` : ''}
@@ -103,7 +104,8 @@ const _renderMasouSection = (c) => {
         </div>
         <div class="ce-skill-scaling">
           <label>熟度補正</label>
-          <input class="ce-input" type="number" step="any" value="${scaling}"
+          <input class="ce-input" type="text" value="${escHtml(String(scaling))}"
+            placeholder="0 (分式可: 5/1.13)"
             oninput="setMasouScaling(${masouId},${i},this.value)">
         </div>
         ${eff.effect_text ? `<div class="ce-skill-desc">${escHtml(eff.effect_text)}</div>` : ''}
@@ -212,15 +214,17 @@ export const setSkillScaling = (stateName, skillIdx, val) => {
   if (!state.editData?._master?.states?.[stateName]) return;
   const sk = state.editData._master.states[stateName].weapon_skills?.[skillIdx];
   if (!sk) return;
-  const n = +val;
-  sk.value_scaling = Number.isFinite(n) ? n : 0;
+  // 分式 ('5/1.13') 存 string、小数/整数存 number、空/无效 → 0 (hensei 计算时 parseHit 统一解析)
+  const v = parseBairituVal(String(val));
+  sk.value_scaling = v == null ? 0 : v;
 };
 
 export const setMasouScaling = (masouId, idx, val) => {
   state.masouEditData[masouId] = state.masouEditData[masouId] || { effects: {} };
   state.masouEditData[masouId].effects = state.masouEditData[masouId].effects || {};
-  const n = +val;
-  state.masouEditData[masouId].effects[idx] = { value_scaling: Number.isFinite(n) ? n : 0 };
+  // 分式存 string、小数/整数存 number、空/无效 → 0 (hensei 计算时 parseHit 统一解析)
+  const v = parseBairituVal(String(val));
+  state.masouEditData[masouId].effects[idx] = { value_scaling: v == null ? 0 : v };
 };
 
 // ============================================================
