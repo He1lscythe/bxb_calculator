@@ -2,7 +2,9 @@
 """
 BxB v2 viewer local dev server (Phase 7 Session 1)
 - GET  /*           : serve static files from crawl directory
+- GET  /share?k=    : 编成短链反查 (本地 data/_shortlinks.json、镜像 api/share.js)
 - POST /save        : write *_revise.json files (4 bucket: chara/masou/soul/crystal)
+- POST /share       : 编成短链写入 (key = sha256→base64url 前10位、与 api/share.js 一致)
 
 v2 vs wiki main 差异:
 - 4 bucket (砍 bg/omoide/omoide_templates/_check 共 6 个)
@@ -11,12 +13,15 @@ v2 vs wiki main 差异:
 
 跟 api/save.js (Vercel) 同 deepMerge 算法 + 同 ID_BUCKETS schema、本地/远端语义一致。
 """
+import base64
+import hashlib
 import http.server
 import json
 import os
 import socket
 import threading
 import webbrowser
+from urllib.parse import urlparse, parse_qs
 
 PORT = 8787
 DIR  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,6 +37,9 @@ ID_BUCKETS = {
     'masou_revise':   ('masou_revise.json',   'masou_session_ids'),
 }
 
+# 编成短链本地存储 (test-only、被 .gitignore 的 _*.json 覆盖、忽略 TTL)
+_SHORTLINKS = '_shortlinks.json'
+
 
 class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *a, **kw):
@@ -41,7 +49,37 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
         super().end_headers()
 
+    def do_GET(self):
+        # /share?k=<key> → 反查 #hash (其余路径走默认静态文件服务)
+        if urlparse(self.path).path == '/share':
+            k = (parse_qs(urlparse(self.path).query).get('k') or [''])[0]
+            h = _read_shortlinks().get(k)
+            if not h:
+                self._json(404, {'error': 'not found'})
+            else:
+                self._json(200, {'hash': h})
+            return
+        super().do_GET()
+
     def do_POST(self):
+        if self.path == '/share':
+            try:
+                length = int(self.headers.get('Content-Length', 0))
+                body = json.loads(self.rfile.read(length))
+                h = body.get('hash', '')
+                if (not isinstance(h, str)
+                        or not (h.startswith('bxb1:') or h.startswith('bxb0:'))
+                        or len(h) > 4000):
+                    self._json(400, {'error': 'invalid hash'})
+                    return
+                bare = _derive_key(h)
+                store = _read_shortlinks()
+                store[bare] = h
+                _write_data(_SHORTLINKS, json.dumps(store, ensure_ascii=False, indent=2) + '\n')
+                self._json(200, {'key': bare})
+            except Exception as e:
+                self._json(500, {'error': str(e)})
+            return
         if self.path != '/save':
             self.send_error(404)
             return
@@ -92,6 +130,20 @@ def _read_data(name):
     path = os.path.join(DATA_DIR, name)
     if not os.path.exists(path):
         return []
+    with open(path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def _derive_key(s):
+    """内容寻址 key: sha256 → base64url → 前 10 位。必须与 api/share.js deriveKey 一致。"""
+    return base64.urlsafe_b64encode(hashlib.sha256(s.encode('utf-8')).digest()).decode().rstrip('=')[:10]
+
+
+def _read_shortlinks():
+    """短链存储是 dict (bare → #hash)、缺省 {} (区别于 _read_data 的 [] 默认)。"""
+    path = os.path.join(DATA_DIR, _SHORTLINKS)
+    if not os.path.exists(path):
+        return {}
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
