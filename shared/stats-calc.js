@@ -38,6 +38,9 @@ import {
   parseHit,
 } from './hensei-helpers.js';
 
+// 倍率四舍五入到 5 位小数 (复刻游戏精度、用户决策 2026-06-20): ×1.894815 → ×1.89482 再乘算
+const _round5 = (x) => Math.round((Number(x) || 0) * 1e5) / 1e5;
+
 // ============================================================
 // 等级 / 熟度 / 觉醒 (跟 master 字段直读)
 // ============================================================
@@ -251,6 +254,8 @@ export function collectEffects(team, targetSlotIdx, ctx) {
         : parseHit(raw.value_scaling);   // value_scaling 可为分式字符串 ('5/1.13')、parseHit 统一展开
       value = (raw.value || 0) + (scaling * srcJk);
     }
+    // 倍率 (Multiply) 计算前先四舍五入到 5 位小数 (加算值 = 平值、不动)
+    if (raw.math_type === 'Multiply') value = _round5(value);
     const entry = {
       _source: source,
       _src_slot: srcSlot,
@@ -286,7 +291,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
           _source: source, _src_slot: srcSlot,
           _src_name: `${entry._src_name || 'KeepDamage'} (减攻 A/(A+B))`,
           parameter: 'Attack', base_parameter: 'Attack',
-          math_type: 'Multiply', value: A / (A + B), condition_factor: factor,
+          math_type: 'Multiply', value: _round5(A / (A + B)), condition_factor: factor,
         });
       }
     }
@@ -571,7 +576,8 @@ export function applyStaged(base, parameter, effects, opts = {}) {
   };
   const mulPass = (stageKey, list) => {
     for (const e of list) {
-      const val = 1 + (e.value - 1) * (e.condition_factor ?? 1);
+      // 倍率先 round 到 5 位小数 (覆盖 meta/emblem 等非 collectEffects.pushEff 来源的 Mul)
+      const val = 1 + (_round5(e.value) - 1) * (e.condition_factor ?? 1);
       if (val === 1) continue;
       const before = v;
       v *= val;
@@ -606,17 +612,22 @@ export function applyStaged(base, parameter, effects, opts = {}) {
   //   s4a 非 soul Mul (chara/crystal/bg/魔装/meta…) → s4b ソウル Mul → s5a 非 soul Add → s5b ソウル Add
   //   各类内按 slot 升序 (stable sort、同 slot 内保持 collectEffects push 顺序)
   const _isSoulSrc = (e) => e._source === 'soul' || e._source === 'soul_affinity';
+  const _isBd = (e) => e._source === 'bd_skill';
   const _bySlot = (arr) => [...arr].sort((a, b) => (a._src_slot ?? 0) - (b._src_slot ?? 0));
   // others 池 = _OTHER_SOURCES + masou 动态 (HP-curve 类、不能 server-fold)
   const others = same.filter(
     (e) => _OTHER_SOURCES.has(e._source) || (e._source === 'masou' && _isDynamic(e)),
   );
-  const othersNonSoul = _bySlot(others.filter((e) => !_isSoulSrc(e)));
+  // bd_skill 战斗时生效 → 排到 Mul/Add 池最后 (soul 之后);其余非 soul → s4a/s5a、soul → s4b/s5b
+  const othersNonSoul = _bySlot(others.filter((e) => !_isSoulSrc(e) && !_isBd(e)));
   const othersSoul = _bySlot(others.filter(_isSoulSrc));
+  const bdEffs = _bySlot(others.filter(_isBd));
   mulPass('s4a_other_mul', othersNonSoul.filter((e) => e.math_type === 'Multiply'));
   mulPass('s4b_soul_mul', othersSoul.filter((e) => e.math_type === 'Multiply'));
+  mulPass('s4c_bd_mul', bdEffs.filter((e) => e.math_type === 'Multiply'));
   addPass('s5a_other_add', othersNonSoul.filter((e) => e.math_type === 'Addition'));
   addPass('s5b_soul_add', othersSoul.filter((e) => e.math_type === 'Addition'));
+  addPass('s5c_bd_add', bdEffs.filter((e) => e.math_type === 'Addition'));
   // Stage 6: Enemy_Break Mul → Add (step 48/49、gate enemy.bk 在 condition_factor)
   mulPass('s6_enemy_break', same.filter((e) => e._source === 'enemy_break' && e.math_type === 'Multiply'));
   addPass('s6_enemy_break', same.filter((e) => e._source === 'enemy_break' && e.math_type === 'Addition'));
@@ -654,13 +665,15 @@ export function orderServerFold(list, targetSlotIdx) {
   take((e) => (e._source === 'omoide' || e._source === 'omoide_mul') && e._src_slot === T); // 自身好感
   take((e) => e._source === 'masou' && e._src_slot === T); // 自身costume
   for (let s = 0; s < 3; s++) {
-    take((e) => (e._source === 'chara_skill' || e._source === 'bd_skill' || e._source === 'chara_meta') && e._src_slot === s);
+    take((e) => (e._source === 'chara_skill' || e._source === 'chara_meta') && e._src_slot === s);
     take((e) => e._source === 'crystal' && e._src_slot === s);
     if (s !== T) take((e) => e._source === 'masou' && e._src_slot === s); // 后面位置 costume 排除自己
   }
   for (let s = 0; s < 3; s++) take((e) => e._source === 'bg' && e._src_slot === s);
   for (let s = 0; s < 3; s++) take((e) => (e._source === 'soul' || e._source === 'soul_affinity') && e._src_slot === s);
-  take(() => true); // 其余(他 slot omoide / enemy_buff 等) 按原顺序补尾
+  take((e) => e._source !== 'bd_skill'); // 其余(他 slot omoide / enemy_buff 等)、bd 除外
+  // bd_skill 最后: BD 战斗时(発動後)生效、排在所有 buff 之后 (用户 2026-06-20)
+  take(() => true);
   return out;
 }
 
@@ -784,8 +797,10 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
         s3_lp: mkStage('s3_lp', 'LP tier (×Total)'),
         s4a_other_mul: mkStage('s4a_other_mul', 'Mul — chara/crystal/bg/魔装…'),
         s4b_soul_mul: mkStage('s4b_soul_mul', 'Mul — ソウル'),
+        s4c_bd_mul: mkStage('s4c_bd_mul', 'Mul — BD (戦闘時)'),
         s5a_other_add: mkStage('s5a_other_add', 'Add — chara/crystal/bg/魔装…'),
         s5b_soul_add: mkStage('s5b_soul_add', 'Add — ソウル'),
+        s5c_bd_add: mkStage('s5c_bd_add', 'Add — BD (戦闘時)'),
         s6_enemy_break: mkStage('s6_enemy_break', 'Enemy Break (step48/49)'),
         s7_inline3: mkStage('s7_inline3', '敵BK inline ×3 (step51)'),
         s7b_ceil: mkStage('s7b_ceil', '出口 ceil'),

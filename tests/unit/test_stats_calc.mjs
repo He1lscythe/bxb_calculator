@@ -8,6 +8,7 @@ import {
   baseStats,
   applyStaged,
   collectEffects,
+  orderServerFold,
   conditionFactor,
   baseParameter,
   repelRate,
@@ -1364,6 +1365,42 @@ test('blazeGaugePoints: chara ×0.5 + soul ×0.5 混合 → IDEAL × 0.5 × 0.5 
   assert.strictEqual(r.blazeGaugePoints[0], 25);
   // i=9: 140 × 0.2525 = 35.35 → floor 35
   assert.strictEqual(r.blazeGaugePoints[9], 35);
+});
+
+// ============================================================
+// 倍率 round5 (2026-06-20): 所有 Multiply 倍率计算前先四舍五入到 5 位小数
+// ============================================================
+test('倍率 round5: Multiply 1.894815 → 用 1.89482 (DamageLimit floor×2^31 放大可见)', () => {
+  // DamageLimit = floor((2^31-1) × Π倍率)、base 巨大 + floor 不 ceil → 5 位舍入差异可观测
+  const c = mockChara({
+    states: {
+      '通常': {
+        ...mockChara()._master.states['通常'],
+        weapon_skills: [
+          { parameter: 'DamageLimitBreak', math_type: 'Multiply', value: 1.894815, value_scaling: 0, range: 'Single' },
+        ],
+      },
+    },
+  });
+  const ctx = buildCtx([{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null]);
+  const r = computeStats(c, ctx.team[0].tr, 0, ctx);
+  const DEFAULT = 2147483647;
+  assert.strictEqual(r.damageLimit, Math.floor(DEFAULT * 1.89482));       // round5 后
+  assert.notStrictEqual(r.damageLimit, Math.floor(DEFAULT * 1.894815));   // ≠ 未 round 的全精度
+});
+
+// ============================================================
+// bd_skill 战斗时生效 → server-fold 顺序排最后 (2026-06-20)
+// ============================================================
+test('orderServerFold: bd_skill 排在所有 buff 最后 (战斗时生效、在 魂/bg/结晶 之后)', () => {
+  const mk = (src, slot = 0) => ({ _source: src, _src_slot: slot, base_parameter: 'HitCount' });
+  const list = [mk('bd_skill'), mk('chara_skill'), mk('soul'), mk('crystal'), mk('bg'), mk('omoide')];
+  const ordered = orderServerFold(list, 0);
+  assert.strictEqual(ordered[ordered.length - 1]._source, 'bd_skill', 'bd 必须是最后一个');
+  const bdIdx = ordered.findIndex((e) => e._source === 'bd_skill');
+  for (const s of ['soul', 'bg', 'crystal', 'chara_skill', 'omoide']) {
+    assert.ok(ordered.findIndex((e) => e._source === s) < bdIdx, `${s} 应排在 bd 之前`);
+  }
 });
 
 console.log('\n[test_stats_calc] all tests defined');
