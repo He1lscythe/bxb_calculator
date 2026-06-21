@@ -58,7 +58,7 @@ test('smoke: setChara → slot 渲染内容', async ({ page }) => {
 });
 
 // ============================================================
-// chara_meta (8): 結婚 / 燃心 / LP / MP (have_mp)
+// chara_meta (8): 結婚 / 燃心 / LP / MP (tr.mp slider、§3.9.1 _mpRate)
 // ============================================================
 test('chara_meta: 結婚 0 → 1 → 攻撃力 ×1.03', async ({ page }) => {
   await waitHenseiReady(page);
@@ -133,11 +133,12 @@ test('chara_meta: LP 3 + bd_on → 仍用普通表 ×2.0 (hensei 算普通攻击
   expect(afterLp).toBeLessThanOrEqual(Math.ceil(afterBd * 2.0) + 5);
 });
 
-test('chara_meta: MP あり → なし → 攻撃力 ×(1/21)', async ({ page }) => {
+test('chara_meta: MP 滿 → 空 (slider=0) → 攻撃力 ×(1/21) (§3.9.1 mp_ratio=0)', async ({ page }) => {
   await waitHenseiReady(page);
   await setupSlot0WithChara(page, 100101);
   const before = await readStat(page, 0, 1);
-  await setTr(page, 0, 'have_mp', false);
+  await page.evaluate(() => window.setMpInput(0, 0)); // MP 空 → mp_ratio 0 → rate 1/21
+  await page.waitForTimeout(80);
   const after = await readStat(page, 0, 1);
   const expected = Math.ceil(before / 21);
   expect(after).toBeGreaterThanOrEqual(expected - 2);
