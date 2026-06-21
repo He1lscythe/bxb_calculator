@@ -779,6 +779,18 @@
         return slots.reduce((m, s) => Math.max(m, +s.affection_threshold || 0), 0);
       };
 
+      // 已装备好感数 = 仅算「好感度已解锁 (affection_threshold ≤ affinity)」的 pick。
+      // 锁定槽 (好感不足) 不计、跟 stats-calc 的 gate + 模态显示一致。
+      // (import 的 #hash 可能带高于当前好感的 picks → 不该算/显示成已装备)
+      const _omoideEquippedCount = (chara, tr) => {
+        const picks = tr?.omoide_picks || {};
+        const aff = +tr?.affinity || 0;
+        const slots = chara?._omoide_slots || [];
+        return Object.keys(picks).filter(
+          (k) => picks[k] != null && slots[+k] && (+slots[+k].affection_threshold || 0) <= aff,
+        ).length;
+      };
+
       // omoide data lazy fetch: 注入 chara._omoide_slots、完成后 re-render 用到该 chara 的 slot。
       //   omoide json 按 base_id 4 位命名 (data/omoide/1001.json)、chara.id 是 variant_id 6 位 → 取 _master.id。
       //   autoEquip=true: fetch 后自动「攻撃優先」全装備 (setChara 换魔剣时)。
@@ -1316,8 +1328,7 @@
         // 末尾「好感 + BD」行：仅当 chara 有 omoide 或 bd_skill 时显示
         const hasOmoide = Array.isArray(chara._omoide_slots) && chara._omoide_slots.length > 0;
         const hasBd = !!(chara.bd_skill && chara.bd_skill.name);
-        const picks = tr.omoide_picks || {};
-        const equipped = Object.keys(picks).filter((k) => picks[k] != null).length;
+        const equipped = _omoideEquippedCount(chara, tr);
         const total = (chara._omoide_slots || []).length;
         const aff = Math.floor(+tr.affinity || 0);
         const omoideHtml = hasOmoide
@@ -1788,7 +1799,7 @@
             const cands = slot.weapon_skills || [];
             const opts = cands
               .map((sk) => {
-                const sel = picks[idx] === sk.id;
+                const sel = !locked && picks[idx] === sk.id;   // 锁定槽 (好感不足) 不显示勾选
                 const dis = locked ? ' disabled style="cursor:not-allowed"' : '';
                 const lbl = _omoideSkillLabel(sk);
                 const tooltip = `${sk.name || ''}${sk.description ? ' — ' + sk.description : ''}`;
@@ -1819,8 +1830,7 @@
       export const _refreshOmoideCountLabel = (si) => {
         const c = allCharas.find((x) => x.id === team[si].chara);
         if (!c) return;
-        const picks = team[si].tr.omoide_picks || {};
-        const equipped = Object.keys(picks).filter((k) => picks[k] != null).length;
+        const equipped = _omoideEquippedCount(c, team[si].tr);
         const lbl = document.getElementById('om-count-' + si);
         if (lbl) lbl.textContent = `(${equipped}/${(c._omoide_slots || []).length})`;
       };
