@@ -13,6 +13,7 @@ import {
   baseParameter,
   repelRate,
   mkTr,
+  mpRate,
   AWAKENING_MAX,
   AWAKENING_FULL_MULT,
 } from '../../shared/stats-calc.js';
@@ -1401,6 +1402,18 @@ test('orderServerFold: bd_skill 排在所有 buff 最后 (战斗时生效、在 
   for (const s of ['soul', 'bg', 'crystal', 'chara_skill', 'omoide']) {
     assert.ok(ordered.findIndex((e) => e._source === s) < bdIdx, `${s} 应排在 bd 之前`);
   }
+});
+
+// ============================================================
+// MP rate (§3.9.1、2026-06-21): 攻撃力/ブレイク力 × rate
+// ============================================================
+test('mpRate: ratio≥0.5→1、ratio 0→1/21、null→满、maxMp 0→1', () => {
+  assert.strictEqual(mpRate(null, 230), 1);            // null = 满 (默认)
+  assert.strictEqual(mpRate(230, 230), 1);             // ratio 1
+  assert.strictEqual(mpRate(115, 230), 1);             // ratio 0.5 边界
+  assert.ok(Math.abs(mpRate(0, 230) - 1 / 21) < 1e-9);  // ratio 0 → 1/21 (旧 have_mp=false)
+  assert.ok(Math.abs(mpRate(57.5, 230) - (1 - (20 / 21) * Math.sqrt(0.5))) < 1e-9); // ratio 0.25
+  assert.strictEqual(mpRate(100, 0), 1);               // 无 mp 数据 → 1
 });
 
 console.log('\n[test_stats_calc] all tests defined');

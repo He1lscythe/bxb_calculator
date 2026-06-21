@@ -251,7 +251,7 @@ clamp(repel_rate, 0, 100)
 | **結婚** toggle | `tr.marriage` | 5 项 stat × {1.0/1.03/1.05}、結晶 slot +1 (state 内 initial_slot+1) | ✅ |
 | **燃心** toggle | `tr.moeshin` | 攻撃力 × 1.3 | ✅ |
 | **LP** 档 | `tr.lp` | 攻撃力 × {1.0/1.1/1.5} | ✅ |
-| **MP** toggle | `tr.have_mp` | 攻撃力 / ブレイク力 × {1.0 / (1/21)} (なし時) | ✅ |
+| **MP** slider [0, `_master.mp`] | `tr.mp` (null=満) | 攻撃力 / ブレイク力 × MP rate (unpacking §3.9.1): `mp_ratio = mp / _master.mp`;`mp_ratio < 0.5 → 1 − (20/21)·√(1 − 2·mp_ratio)`、`≥ 0.5 → 1.0`。境界 ratio 0 → 1/21、ratio 0.5 → 1.0 (旧 have_mp toggle 两端的泛化) | ✅ |
 | **BD ON/OFF** toggle | `tr.bd_on` | ON → `bd_skill.effects[]` 当普通 buff 加入 stat、倍率 = `value + additional_value × bd_count`。不影响 IsBlaze gate / BD 伤害公式 (Phase 8) | ✅ |
 | **BD 条数** input (仅 bd_on 时显示) | `tr.bd_count` | bd_skill effect 的 `additional_value × bd_count`。默认 `bd_skill.cost`、范围 0..bdCapMax | ✅ |
 | **soul level** slider | `tr.soul_lv` | 所有 soul effect `value × soulMultiplier(rarity, lv)` (表: lv≤r×10 → 1+0.01lv; 之后到 75 渐进 +0.3/+0.1)。Multiply 直乘 (×1.45 → lv50 ×2.175、游戏行为)、HitCount values 数组同样缩放 | ✅ |
@@ -279,7 +279,7 @@ clamp(repel_rate, 0, 100)
 | `bd_skill` | s4a / s5a | Mul / Add | tr.bd_on=true 时 chara.bd_skill.effects |
 | `crystal` | s4a / s5a | Mul / Add | 装备 crystal (`crystalEffectiveValue` lv/weight/purity) |
 | `bg` | s4a / s5a | Mul / Add | 装备 bg.skills |
-| `chara_meta` | s4a (Mul) | Mul | 結婚 (`tr.marriage`) / 燃心 (`tr.moeshin`) / MP 装備 (`tr.have_mp`)。**LP 不在这里**、走 s3 |
+| `chara_meta` | s4a (Mul) | Mul | 結婚 (`tr.marriage`) / 燃心 (`tr.moeshin`) / MP (`tr.mp` → `mpRate`、攻撃/ブレイク)。**LP 不在这里**、走 s3 |
 | `enemy_buff` | s4a / s5a | Mul / Add | enemy bar guildTitle / emblems |
 | `soul` | **s4b / s5b** (排非 soul 后) | Mul / Add | 装备 soul.skills (× soulMultiplier) |
 | `soul_affinity` | **s4b** (Mul) | Mul | soul 元素 + 武器 相性倍率 (固定乘) |

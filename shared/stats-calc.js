@@ -41,6 +41,17 @@ import {
 // 倍率四舍五入到 5 位小数 (复刻游戏精度、用户决策 2026-06-20): ×1.894815 → ×1.89482 再乘算
 const _round5 = (x) => Math.round((Number(x) || 0) * 1e5) / 1e5;
 
+// MP rate (unpacking §3.9.1、攻撃力/ブレイク力 × rate): mp_ratio = curMp / maxMp
+//   mp_ratio < 0.5 → rate = 1 − (20/21)·√(1 − 2·mp_ratio);  否则 → 1.0
+//   curMp=null → 满 → rate 1;curMp=0 → 1/21 (跟旧 have_mp=false 一致)
+export const mpRate = (curMp, maxMp) => {
+  const max = +maxMp || 0;
+  if (max <= 0) return 1;
+  const cur = curMp == null ? max : Math.max(0, Math.min(max, +curMp || 0));
+  const ratio = cur / max;
+  return ratio >= 0.5 ? 1 : 1 - (20 / 21) * Math.sqrt(1 - 2 * ratio);
+};
+
 // ============================================================
 // 等级 / 熟度 / 觉醒 (跟 master 字段直读)
 // ============================================================
@@ -62,7 +73,7 @@ export function mkTr() {
     marriage: 0,           // 0=无 / 1=花無 / 2=花有
     moeshin: false,        // 燃心
     lp: 0,                 // LP 档 (0=満 / 1=低 / 2=危機)
-    have_mp: true,
+    mp: null,              // 当前 MP (null = 满);mp_ratio<0.5 时攻撃/ブレイク × _mpRate
     bd_on: false,          // BD 状态 (IsBlaze gate、Phase 8 实测)
     hp: 100,               // HP%
     affinity: 0,
@@ -412,11 +423,11 @@ export function collectEffects(team, targetSlotIdx, ctx) {
       }
       // LP tier 不进 effects、由 computeStats / computeStatsBlaze 入口算 lpMult 传给 applyStaged
       // (unpacking §3.5 step 4 × Total 直接层、按 IsBlaze 切表)
-      const mwMult = trSlot.have_mp === false ? 1 / 21 : 1;
+      const mwMult = mpRate(trSlot.mp, cMaster.mp);
       if (mwMult !== 1) {
         for (const attr of ['Attack', 'GuardBreak']) {
           collected.push({
-            _source: 'chara_meta', _src_slot: i, _src_name: 'MP装備なし',
+            _source: 'chara_meta', _src_slot: i, _src_name: 'MP',
             parameter: attr, base_parameter: attr,
             math_type: 'Multiply', value: mwMult, condition_factor: 1,
           });
