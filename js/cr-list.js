@@ -210,8 +210,8 @@ export const fmtRowBairitu = (c) => {
     const pfx = e.calc_type === 1 ? '+' : '×';
     const mn = e.bairitu_init,
       mx = e.bairitu;
-    if (mn != null && mx != null && mn !== mx) parts.push(pfx + fmtLarge(mn) + '~' + fmtLarge(mx));
-    else parts.push(pfx + fmtLarge(mn != null ? mn : mx));
+    if (mn != null && mx != null && mn !== mx) parts.push(pfx + fmtLarge(mn, 3) + '~' + fmtLarge(mx, 3));
+    else parts.push(pfx + fmtLarge(mn != null ? mn : mx, 3));
   });
   return parts.length ? '<span class="row-bairitu">' + parts.join(' / ') + '</span>' : '';
 };

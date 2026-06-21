@@ -221,6 +221,11 @@
       // weight_step / purity_step: master 不含、revise 注入 (走 cr-edit dropdown)、缺省 null = slider 不显示
       const _parseScaling = () => 0;
       const _crystalEffectiveBairitu = (cr, cfg) => crystalEffectiveValue(cr, cfg);
+      // popover 实时倍率串: crystalEffectiveValue (随 lv/weight/purity 联动)、round 到 3 位小数 + calc_type 前缀
+      const _crBairituStr = (cr, cfg) => {
+        const v = Math.round(crystalEffectiveValue(cr, cfg) * 1000) / 1000;
+        return (cr?.effects?.[0]?.calc_type === 1 ? '+' : '×') + v;
+      };
 
       Nav.init();
 
@@ -664,6 +669,7 @@
                 .map((c) => ({ id: c.id, lv: c.lv ?? 1, weight: c.weight ?? 0, purity: c.purity ?? 0 }))
             : [];
           team[i].tr = { ...mkTr(), ...(s.tr || {}) };
+          if (s.tr?.have_mp === false) team[i].tr.mp = 0; // 旧 #hash 兼容: have_mp=false → MP 空
         }
         // enemy 先重置默认 (紧凑对象省略默认字段、不重置会残留上一份的非默认值)
         Object.assign(enemy, _ENEMY_DEF, { emblems: _DEF_EMBLEMS.map((e) => ({ ...e })), advantageWeapons: new Set() });
@@ -952,6 +958,9 @@
         }
         const col = document.getElementById('col' + si + 'r');
         if (col) col.innerHTML = renderCrystalEffList(team[si].crystals);
+        // popover name 右侧实时倍率跟 slider 联动
+        const bEl = document.getElementById('pop-bairitu-' + si + '-' + ci);
+        if (bEl && cr) bEl.textContent = _crBairituStr(cr, cfg);
         refreshAllStats();
       };
 
@@ -1019,7 +1028,7 @@
         const pop = document.createElement('div');
         pop.className = 'crystal-dim-popover';
         pop.innerHTML = `
-    <div class="pop-title">${escHtml(cr.name)}</div>
+    <div class="pop-title">${escHtml(cr.name)} <span id="pop-bairitu-${si}-${ci}" class="pop-bairitu">${_crBairituStr(cr, cfg)}</span></div>
     ${desc ? `<div class="pop-desc">${escHtml(desc)}</div>` : ''}
     ${wRow}${pRow}${lvRow}
     <div class="pop-actions">
@@ -1196,12 +1205,32 @@
       export const setHpInput = (si, val) => {
         let v = +val;
         if (isNaN(v)) v = 100;
-        v = Math.min(100, Math.max(0, v));
+        v = Math.min(100, Math.max(0, Math.round(v * 100) / 100));   // 支持 2 位小数、超出自动 round
         team[si].tr.hp = v;
         const inp = document.getElementById('tr-hpinput-' + si);
         if (inp) inp.value = v;
         const sl = document.getElementById('tr-hpslider-' + si);
         if (sl) sl.value = Math.round(v);
+        refreshAllStats();
+      };
+      const _mpMaxOf = (si) => Math.floor(+allCharas.find((x) => x.id === team[si].chara)?._master?.mp || 0);
+      export const setMpSlider = (si, val) => {
+        const v = Math.max(0, Math.min(_mpMaxOf(si), Math.round(+val) || 0));
+        team[si].tr.mp = v;
+        const inp = document.getElementById('tr-mpinput-' + si);
+        if (inp) inp.value = v;
+        refreshAllStats();
+      };
+      export const setMpInput = (si, val) => {
+        const max = _mpMaxOf(si);
+        let v = +val;
+        if (isNaN(v)) v = max;
+        v = Math.max(0, Math.min(max, Math.round(v)));
+        team[si].tr.mp = v;
+        const inp = document.getElementById('tr-mpinput-' + si);
+        if (inp) inp.value = v;
+        const sl = document.getElementById('tr-mpslider-' + si);
+        if (sl) sl.value = v;
         refreshAllStats();
       };
       export const setAffinity = (si, val) => {
@@ -1315,7 +1344,7 @@
           )
           .join('');
         const lpHtml = [
-          ['通常', 0],
+          ['½↑', 0],
           ['½↓', 1],
           ['¼↓', 2],
           ['0', 3],
@@ -1325,6 +1354,17 @@
               `<button class="tr-btn${tr.lp === v ? ' on' : ''}" onclick="setTrField(${i},'lp',${v})">${l}</button>`,
           )
           .join('');
+        // MP: [0, chara.mp] 滑条 (mp_ratio<0.5 时攻撃/ブレイク × rate、见 stats-calc _mpRate);mp 数据缺则不显示。独立一行、紧跟 HP
+        const mpMax = Math.floor(+chara._master?.mp || 0);
+        const mpCur = tr.mp != null ? tr.mp : mpMax;
+        const mpRow = mpMax > 0
+          ? `<div class="training-row">
+        <span class="tr-label">MP</span>
+        <input id="tr-mpslider-${i}" class="tr-slider" type="range" min="0" max="${mpMax}" step="1" value="${mpCur}" oninput="setMpSlider(${i},+this.value)">
+        <input id="tr-mpinput-${i}" class="tr-input" type="number" min="0" max="${mpMax}" step="1" value="${mpCur}" onchange="setMpInput(${i},+this.value)" style="width:42px">
+        <span class="tr-max">/ ${mpMax}</span>
+      </div>`
+          : '';
         // 末尾「好感 + BD」行：仅当 chara 有 omoide 或 bd_skill 时显示
         const hasOmoide = Array.isArray(chara._omoide_slots) && chara._omoide_slots.length > 0;
         const hasBd = !!(chara.bd_skill && chara.bd_skill.name);
@@ -1386,9 +1426,10 @@
       <div class="training-row">
         <span class="tr-label">HP</span>
         <input id="tr-hpslider-${i}" class="tr-slider" type="range" min="0" max="100" step="1" value="${tr.hp ?? 100}" oninput="setHpSlider(${i},+this.value)">
-        <input id="tr-hpinput-${i}" class="tr-input" type="number" min="0" max="100" step="0.1" value="${tr.hp ?? 100}" onchange="setHpInput(${i},+this.value)" style="width:54px">
+        <input id="tr-hpinput-${i}" class="tr-input" type="number" min="0" max="100" step="0.01" value="${tr.hp ?? 100}" onchange="setHpInput(${i},+this.value)" style="width:50px">
         <span class="tr-max">%</span>
       </div>
+      ${mpRow}
       <div class="training-row" style="display:flex;align-items:center;gap:10px">
         <div style="display:flex;align-items:center;gap:6px">
           <span class="tr-label">燃心</span>
@@ -1397,10 +1438,6 @@
         <div style="display:flex;align-items:center;gap:6px">
           <span class="tr-label">LP</span>
           <div class="tr-btns">${lpHtml}</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <span class="tr-label">MP</span>
-          <button class="tr-btn${tr.have_mp !== false ? ' on' : ''}" style="min-width:38px;text-align:center" onclick="setTrField(${i},'have_mp',${!(tr.have_mp !== false)})">${tr.have_mp !== false ? 'あり' : 'なし'}</button>
         </div>
       </div>
       ${omoideBdRow}
@@ -1915,6 +1952,9 @@
         const ySpd = (spdFrames + spdSet) > 0 && (spdFrames + spdSet) <= 2 ? ' style="color:#ffd040"' : '';
         const _msActive = msFrames.filter((v) => v > 0);
         const yMs = !msMissing && _msActive.length > 0 && _msActive.every((v) => v <= 2) ? ' style="color:#ffd040"' : '';
+        // 攻速 per-stage: 各段到 2fr 下限(最速)标黄;总 fr 仅当全段到下限时标黄
+        const _msSeg = msFrames.map((v) => (!v ? '—' : v <= 2 ? `<span style="color:#ffd040">${v}</span>` : String(v))).join(', ');
+        const _msTotal = msFrames.reduce((a, b) => a + b, 0);
 
         // dev 環境のみ stat cell を clickable に。GitHub Pages では cursor も onclick もなし。
         const ck = IS_LOCAL_DEV
@@ -1931,7 +1971,7 @@
           `<div class="stats-cell"${ck('ブレイク力')}><span class="stats-key">BK</span><span class="stats-val">${_fmtStat(Math.ceil(bk))}</span></div>`,
           `<div class="stats-cell"${ck('Hit')}><span class="stats-key">Hit数</span><span class="stats-val">[${hits.join(', ')}] 計 ${total_hits}</span></div>`,
           `<div class="stats-cell"${ck('転速')}><span class="stats-key">転速</span><span class="stats-val"${ySpd}>${spdRecover.toFixed(1)} · ${spdFrames + spdSet}fr</span></div>`,
-          `<div class="stats-cell"${ck('攻速')}><span class="stats-key">攻速</span><span class="stats-val"${yMs}>${msMissing ? `×[${msSpeeds.map((v) => v.toFixed(2)).join(', ')}] (時間データ不明)` : `[${msFrames.map((v) => (v || '—')).join(', ')}] 計 ${msFrames.reduce((a, b) => a + b, 0)}fr`}</span></div>`,
+          `<div class="stats-cell"${ck('攻速')}><span class="stats-key">攻速</span><span class="stats-val">${msMissing ? `×[${msSpeeds.map((v) => v.toFixed(2)).join(', ')}] (時間データ不明)` : `[${_msSeg}] <span${yMs}>計 ${_msTotal}fr</span>`}</span></div>`,
           `<div class="stats-cell"${ck('ダメ上限')}><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(Math.ceil(dl))}</span></div>`,
         ].join('');
         return `<div class="stats-grid">${cells}</div>`;
@@ -2788,6 +2828,7 @@
       export const renderDMCrystal = (c) => {
         const fields = [];
         if (c.effect_text) fields.push(['効果', escHtml(c.effect_text)]);
+        if (c.description) fields.push(['説明', escHtml(c.description).replace(/\n/g, '<br>')]); // 効果量 上方
         (c.effects || []).forEach((ef) => {
           if (ef.bairitu != null || ef.bairitu_init != null) {
             const pfx = ef.calc_type === 1 ? '+' : '×';
@@ -3576,6 +3617,8 @@
         setLevelInput,
         setHpSlider,
         setHpInput,
+        setMpSlider,
+        setMpInput,
         setAffinity,
         setSoulLv,
         setSoulAwk,
