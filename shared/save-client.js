@@ -20,7 +20,7 @@
 
 const VERCEL_API = 'https://bxb-calculator.vercel.app/api/save';
 
-const isLocalEnv = () => {
+export const isLocalEnv = () => {
   if (typeof location === 'undefined') return false;
   const h = location.hostname;
   return (
