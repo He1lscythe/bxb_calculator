@@ -2,6 +2,8 @@
 // Usage: import { Nav, updateReviseBar } from '../js/nav.js';
 //        Nav.init();
 
+import { isLocalEnv } from '../shared/save-client.js';
+
 const PAGES = [
   { id: 'characters', href: 'characters.html', label: '魔剣' },
   { id: 'crystals', href: 'crystals.html', label: '結晶' },
@@ -42,7 +44,7 @@ const _render = () => {
       <div id="save-toast"></div>
       <div id="revise-bar">
         <button class="btn-revise-save"
-          onclick="typeof saveRevise==='function'&&saveRevise()">Save</button>
+          onclick="typeof saveRevise==='function'&&saveRevise()">${isLocalEnv() ? 'Save' : 'Submit'}</button>
         <span id="revise-status"></span>
       </div>
       <button id="nav-hamburger" onclick="Nav.toggleMenu()" aria-label="メニュー">☰</button>
@@ -108,7 +110,9 @@ export const updateReviseBar = () => {
   const status = document.getElementById('revise-status');
   if (!bar || !btn) return;
   bar.style.display = count > 0 ? 'flex' : 'none';
-  btn.textContent = count > 0 ? `Save (${count})` : 'Save';
+  // local (start.py) 直接写盘 → Save;GitHub Pages / Vercel 走 PR → Submit (提出済み)
+  const label = isLocalEnv() ? 'Save' : 'Submit';
+  btn.textContent = count > 0 ? `${label} (${count})` : label;
   if (status) status.textContent = '';
 };
 
