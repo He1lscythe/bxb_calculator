@@ -312,9 +312,10 @@ test('omoide: clearAllOmoide → stat 不含 omoide buff (Session 3 patch: setCh
 });
 
 test('omoide: equipAllOmoide → stat 增加 (picker 自动选所有候选)', async ({ page }) => {
-  // omoide data (data/omoide/{base_id}.json、Frida 抓的、108 MB) 在 .gitignore 内、CI 上不存在 → skip
+  // omoide data (data/omoide/{base_id}.json、Frida 抓) 2026-06-09 起已入 git tracked → 正常都在;
+  // 防御性 guard: 万一缺失 (旧 checkout) 才 skip
   const hasOmoide = await page.request.get('/data/omoide/1001.json').then((r) => r.ok()).catch(() => false);
-  test.skip(!hasOmoide, 'data/omoide/1001.json not present (.gitignore 排除、CI 上没 omoide fixture)');
+  test.skip(!hasOmoide, 'data/omoide/1001.json not present');
 
   await waitHenseiReady(page);
   await page.evaluate(() => window.setChara(0, 100101));
@@ -327,6 +328,34 @@ test('omoide: equipAllOmoide → stat 增加 (picker 自动选所有候选)', as
   await page.waitForTimeout(250);
   const afterPick = await readStat(page, 0, 1);
   expect(afterPick).toBeGreaterThan(beforePick);
+});
+
+test('omoide: 锁定槽 (好感不足) 不显示勾选 — #hash 导入高好感 picks 后按好感度 gate (2026-06-20)', async ({ page }) => {
+  await waitHenseiReady(page);
+  await page.evaluate(() => window.setChara(0, 100101));
+  await page.waitForTimeout(2000); // omoide fetch + auto-equip (affinity 90000、全选)
+  const info = await page.evaluate(() => {
+    const c = window.state.allCharas.find((x) => x._master?.id === 1001);
+    const slots = c?._omoide_slots || [];
+    if (!slots.length) return { noOmoide: true };
+    // 模拟「导入了 picks 全选但好感很低」: 好感设到中位 threshold-1 → 后一半槽锁定
+    const ths = slots.map((s) => +s.affection_threshold || 0).sort((a, b) => a - b);
+    const aff = Math.max(0, ths[Math.floor(ths.length / 2)] - 1);
+    window.state.team[0].tr.affinity = aff;
+    window.openOmoideModal(0);
+    const body = document.getElementById('omoide-modal-body');
+    const r = {
+      checked: body.querySelectorAll('.om-opt.on').length,
+      lockedRows: body.querySelectorAll('.om-row.locked').length,
+      lockedChecked: body.querySelectorAll('.om-row.locked .om-opt.on').length,
+    };
+    window.closeOmoideModal();
+    return r;
+  });
+  test.skip(info.noOmoide, 'chara 100101 无 omoide 数据');
+  expect(info.lockedRows, '中位好感应锁住部分槽').toBeGreaterThan(0);
+  expect(info.lockedChecked, '锁定槽不应有勾选').toBe(0);   // ← 本次修复: 锁定槽 sel = !locked
+  expect(info.checked, '解锁槽仍应勾选').toBeGreaterThan(0);
 });
 
 // ============================================================

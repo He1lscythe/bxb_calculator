@@ -55,8 +55,9 @@ export class VirtualList {
 
     this._scheduled = false;
     this._scrollHandler = () => this._schedule();
+    this._resizeHandler = () => this._onResize();
     this._scrollEl.addEventListener('scroll', this._scrollHandler, { passive: true });
-    window.addEventListener('resize', this._scrollHandler, { passive: true });
+    window.addEventListener('resize', this._resizeHandler, { passive: true });
 
     // ResizeObserver 兜底: row mount 后尺寸再变 (img async load 撑高 / 字体加载 / scrollbar 宽度变化
     // 导致 text re-wrap) 时重测。_render 的同步 measure 只反映 append 那一刻、之后的变化全靠这里。
@@ -89,8 +90,11 @@ export class VirtualList {
 
   setItems(items) {
     this.items = items || [];
-    // visible nodes 可能 stale (例如 expandAll 把所有 state.expandedIds 加上、row 内容要重新 render)
-    // 清掉 visibleNodes、_render 会重新 build + 测量
+    // 高度缓存按 id、但行高依赖渲染 kind (collapsed / expanded / edit)。
+    // expandAll / collapseAll / applyFilters 改 kind 但不走 invalidateRow → 旧 kind 高度残留、
+    // totalHeight 失真 (虚高→底部空白 / 虚低→底部被截)。setItems = item/上下文变了、清掉重测。
+    this.heights.clear();
+    // visible nodes 可能 stale (内容要重新 render)、清掉、_render 会重新 build + 测量
     for (const node of this.visibleNodes.values()) this._removeNode(node);
     this.visibleNodes.clear();
     this._relayout();
@@ -128,7 +132,7 @@ export class VirtualList {
 
   destroy() {
     this._scrollEl.removeEventListener('scroll', this._scrollHandler);
-    window.removeEventListener('resize', this._scrollHandler);
+    window.removeEventListener('resize', this._resizeHandler);
     this._ro?.disconnect();
     for (const node of this.visibleNodes.values()) node.remove();
     this.visibleNodes.clear();
@@ -167,6 +171,19 @@ export class VirtualList {
       this._scheduled = false;
       this._render();
     });
+  }
+
+  // resize: scroll 父元素可能随响应式断点变化 (desktop #list overflow:auto ↔ mobile overflow:visible→window)。
+  // 重新检测、变了就把 scroll 监听迁到新元素 — 否则滚动接不到 (只显示初始那批、往下空白)、
+  // 或虚拟化按错容器算 (mobile overflow:visible 时 container.clientHeight=全内容 → 全量渲染、占内存)。
+  _onResize() {
+    const newEl = _findScrollParent(this.container);
+    if (newEl !== this._scrollEl) {
+      this._scrollEl.removeEventListener('scroll', this._scrollHandler);
+      this._scrollEl = newEl;
+      this._scrollEl.addEventListener('scroll', this._scrollHandler, { passive: true });
+    }
+    this._schedule();
   }
 
   _render() {

@@ -164,7 +164,7 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 **Master 数据** (build_*.py 输出):
 - `characters.json` (654 chara) / `souls.json` (488) / `crystals.json` (2063) / `bladegraphs.json` (506) / `masou.json` (712) / `senzai_table.json` / `motions.json`
 - `guildtitles.json` / `guildemblems.json` (手工维护、无 build script)
-- `omoide/{base_id}.json` (629 file、Frida 抓、.gitignore 排除)
+- `omoide/{base_id}.json` (638 file、Frida 抓、2026-06-09 起入 git tracked)
 
 **Revise** (用户编辑产物、4 bucket):
 - `chara_revise.json` / `soul_revise.json` / `crystal_revise.json` / `masou_revise.json`
