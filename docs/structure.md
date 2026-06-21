@@ -197,6 +197,8 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 
 **分享 (export/import)**: `_henseiCompact` → deflate-raw + base64url → `#hash` / .json 文件。`omoide_picks` 非空时随之导出(装备 chara 时 auto-equip「攻撃優先」会写入)。导入 (`_applyHenseiConfig`) 对每个魔剣**懒加载 omoide 数据**(`_ensureOmoideLoaded`、`autoEquip=false` 保留导入的 picks)→ 恢复好感显示 + 计算;否则 `_omoide_slots` 未加载、好感行不渲染且 omoide buff 不生效。
 
+**短链 (2026-06-21)**: export 三按钮 = `copy url`(短链)/ `copy code`(`bxb1:` 串、同旧)/ `.json`。`copy url` 把 `bxb1:` 串 POST 到短链 API,拿回 key 拼成 `…/hensei.html#s:<key>` 复制。打开 `#s:<key>` 时 GET 反查回 `bxb1:` 串再走 `_decodeHensei`/`_applyHenseiConfig`。存储 **Upstash Redis (Vercel KV)**:key = `sha256(串)→base64url 前10位`(内容寻址幂等、TTL 2 年);端点 [api/share.js](../api/share.js)(`POST {hash}→{key}` / `GET ?k=→{hash}`),local 镜像 = `start.py` 的 `/share`(存 `data/_shortlinks.json`、gitignored、test-only)。key 算法 JS↔Python 一致(测试 [tests/unit/test_shortlink_key.mjs](../tests/unit/test_shortlink_key.mjs))。客户端路由复用 hensei 自带 `IS_LOCAL_DEV`(local→`/share`、否则→`bxb-calculator.vercel.app/api/share`)。旧的长 `#bxb1:` 链接仍兼容。**部署前置**:Vercel 接 Upstash 集成注入 `KV_REST_API_URL`/`KV_REST_API_TOKEN`(或 `UPSTASH_REDIS_REST_*`)。
+
 ---
 
 ## 数据更新 workflow

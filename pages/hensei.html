@@ -138,8 +138,8 @@
             <div class="io-label">export</div>
             <textarea id="io-export-str" class="io-ta" rows="3" readonly></textarea>
             <div class="io-btns">
+              <button class="io-btn" onclick="copyIoUrl()">copy url</button>
               <button class="io-btn" onclick="copyIoString()">copy code</button>
-              <button class="io-btn" onclick="copyIoUrl()">copy URL</button>
               <button class="io-btn" onclick="ioDownloadJson()">.json</button>
             </div>
           </div>
@@ -284,6 +284,10 @@
         return false;
       })();
 
+      // 短链 API (编成 #hash → #s:<key>):local → start.py /share、否则 → Vercel /api/share
+      const _SHARE_API = 'https://bxb-calculator.vercel.app/api/share';
+      const _shareEndpoint = () => (IS_LOCAL_DEV ? '/share' : _SHARE_API);
+
       // ELEMENT / ELEM_COLOR / WEAPON / RARITY / BUNRUI / BUNRUI_SHORT / CONDITION /
       // CHARA_TAG 来自 shared/constants.js
 
@@ -422,9 +426,18 @@
             hideLoading();
             // URL #hash 分享码 → 自动载入配置 (用完清掉 hash、避免 reload 重复应用)
             const _h = decodeURIComponent((location.hash || '').replace(/^#/, ''));
-            if (/^bxb[01]:/.test(_h)) {
+            const _clearHash = () => history.replaceState(null, '', location.pathname + location.search);
+            const _sm = _h.match(/^s:([A-Za-z0-9_-]{1,16})$/);
+            if (_sm) {
+              // 短链 #s:<key> → GET 反查回 bxb1 串再解码;失败留住 hash、静默
+              fetch(_shareEndpoint() + '?k=' + encodeURIComponent(_sm[1]))
+                .then((r) => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
+                .then((j) => _decodeHensei(j.hash))
+                .then((o) => { _applyHenseiConfig(o); _clearHash(); })
+                .catch(() => {});
+            } else if (/^bxb[01]:/.test(_h)) {
               _decodeHensei(_h)
-                .then((o) => { _applyHenseiConfig(o); history.replaceState(null, '', location.pathname + location.search); })
+                .then((o) => { _applyHenseiConfig(o); _clearHash(); })
                 .catch(() => {});
             }
           },
@@ -782,10 +795,28 @@
         try { await navigator.clipboard.writeText(s); _ioMsg('code copied ✓'); }
         catch { _ioMsg('copy failed — select the text above manually'); }
       };
+      // copy url: POST #hash 到短链 API、拿 key 拼成 …#s:<key> 复制。失败仅提示 (用户可改用 copy code)
       export const copyIoUrl = async () => {
-        const url = location.origin + location.pathname + '#' + (document.getElementById('io-export-str')?.value || '');
-        try { await navigator.clipboard.writeText(url); _ioMsg('URL copied ✓'); }
-        catch { document.getElementById('io-export-str').value = url; _ioMsg('copy failed — select the URL above manually'); }
+        _ioMsg('shortening…');
+        let code = (document.getElementById('io-export-str')?.value || '').trim();
+        if (!/^bxb[01]:/.test(code)) {
+          try { code = await _encodeHensei(); }
+          catch (e) { _ioMsg('encode failed: ' + e.message); return; }
+        }
+        try {
+          const res = await fetch(_shareEndpoint(), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ hash: code }),
+          });
+          const json = await res.json().catch(() => ({}));
+          if (!res.ok || !json.key) throw new Error(json.error || 'HTTP ' + res.status);
+          const url = location.origin + location.pathname + '#s:' + json.key;
+          try { await navigator.clipboard.writeText(url); _ioMsg('short url copied ✓'); }
+          catch { document.getElementById('io-export-str').value = url; _ioMsg('copy failed — select the url above manually'); }
+        } catch (e) {
+          _ioMsg('short link failed: ' + e.message);
+        }
       };
       export const ioDownloadJson = () => {
         try {
