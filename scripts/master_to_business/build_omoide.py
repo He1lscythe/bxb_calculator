@@ -1,4 +1,4 @@
-"""build_omoide.py — unpacking/draft/out/memory_slot/summary/{base_id}.json
+"""build_omoide.py — unpacking/outputs/memory_slot/summary/{base_id}.json
 → bxb_wiki/data/omoide/{base_id}.json
 
 来源是 Frida 抓包 + Python 整理结果、不是 master_tables 直给。
@@ -9,12 +9,14 @@
 
 用法: python scripts/master_to_business/build_omoide.py
 """
+import os
 import shutil
+import stat
 import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-SRC_DIR = Path("F:/OneDrive - Northeastern University/Game/BxB/unpacking/draft/out/memory_slot/summary")
+SRC_DIR = Path("F:/OneDrive - Northeastern University/Game/BxB/unpacking/outputs/memory_slot/summary")
 DEST_DIR = PROJECT_ROOT / "data" / "omoide"
 
 
@@ -24,7 +26,10 @@ def main():
         sys.exit(1)
 
     if DEST_DIR.exists():
-        shutil.rmtree(DEST_DIR)
+        def _rm_readonly(func, path, _):
+            os.chmod(path, stat.S_IWRITE)
+            func(path)
+        shutil.rmtree(DEST_DIR, onerror=_rm_readonly)
     DEST_DIR.mkdir(parents=True)
 
     files = sorted(SRC_DIR.glob("*.json"))
