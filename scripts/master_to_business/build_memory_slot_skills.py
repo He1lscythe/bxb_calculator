@@ -6,8 +6,8 @@
 数据 chain:
   HouseTop response (Frida hook 抓的) → memory_slot 内 weapon_skills → 反查表
   优先级 source:
-    (a) unpacking/draft/out/account/house_tops.json (cross-repo、Frida 累计 batch)
-    (b) unpacking/draft/out/maken2_decoded* 内 *_resp.json (cross-repo、单 HouseTop response)
+    (a) unpacking/outputs/account/house_tops.json (cross-repo、Frida 累计 batch)
+    (b) unpacking/outputs/maken2_decoded* 内 *_resp.json (cross-repo、单 HouseTop response)
     (c) bxb_wiki/data/omoide/<base_id>.json (629 个、Phase 6.7 已抓)
 
 输出: bxb_wiki/data/_memory_slot_skills.json
@@ -51,13 +51,13 @@ def walk_slots(obj):
 def collect_sources():
     sources = []
     # (a) aggregated house_tops.json
-    ht_path = UNPACKING / 'draft' / 'out' / 'account' / 'house_tops.json'
+    ht_path = UNPACKING / 'outputs' / 'account' / 'house_tops.json'
     if ht_path.is_file():
         sources.append((str(ht_path), json.loads(ht_path.read_text(encoding='utf-8'))))
 
     # (b) 个別 HouseTop in maken2_decoded_jiend / maken2_decoded
-    for d in (UNPACKING / 'draft' / 'out' / 'maken2_decoded_jiend',
-              UNPACKING / 'draft' / 'out' / 'maken2_decoded'):
+    for d in (UNPACKING / 'outputs' / 'maken2_decoded_jiend',
+              UNPACKING / 'outputs' / 'maken2_decoded'):
         if d.is_dir():
             for jf in d.glob('*_resp.json'):
                 try:
