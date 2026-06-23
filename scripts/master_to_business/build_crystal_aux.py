@@ -144,9 +144,12 @@ def main():
         if "chara_limit" in patch:
             del patch["chara_limit"]
 
-        # range: desc 含「装備セット」(NFKC 归一、兼半角 装備ｾｯﾄ) → All
-        # (2026-06-10 用户修正: 旧规则 "同装備セット" 全角 only 只命中 12/58)
-        if "装備セット" in unicodedata.normalize("NFKC", desc):
+        # range: desc 含「装備セット」→ 全队 All。「同セット」也是全队,但「同セット…戦闘不能」
+        # 是条件式 (触发=任意队友同套魔剣戦闘不能、加成对象=自身) → 不算 All,故 同セット 分支排除含「戦闘不能」的。
+        # (2026-06-10: 旧规则 "同装備セット" 全角 only 只命中 12/58 → 放宽成 "装備セット";
+        #  2026-06-23: 补 "同セット" 目标式,但排除 "戦闘不能" 条件式 (天狼神の波動/戻れない旅路 等误判))
+        _desc_norm = unicodedata.normalize("NFKC", desc)
+        if "装備セット" in _desc_norm or ("同セット" in _desc_norm and "戦闘不能" not in _desc_norm):
             if patch.get("range") != "All":
                 patch["range"] = "All"
                 n_range += 1
