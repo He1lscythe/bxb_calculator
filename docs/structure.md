@@ -107,7 +107,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [diff_master_tables.py](../scripts/ci/diff_master_tables.py) | changelog 引擎 (整体 port 自 unpacking;CI 版加"空字段归一"——API 省略空字段、避免与 ADB 版 schema 差异误报全表) |
 | [revise_safety.py](../scripts/ci/revise_safety.py) | revise 字段级安全检查 (防用户手填字段被冲、丢条目/字段则中止提交) |
 | [cdn.py](../scripts/ci/cdn.py) | 资源 CDN 客户端 (无鉴权): `current` 版本号 → `version-{ver}.gz` manifest (gzip+msgpack) → `{name}.v{ver}.dat` 资源 |
-| [extract_assets.py](../scripts/ci/extract_assets.py) | port parse_unity_dat: `.dat` → PNG (`dat_to_base_path` + UnityPy) / npc-motion 时长 |
+| [extract_assets.py](../scripts/ci/extract_assets.py) | port parse_unity_dat_v4: `.dat` → PNG / npc-motion 时长。`extract_png` = luma/chroma 配对 YCoCg 合成 + 跳退化贴图(≤4×4/全透明/纯单色)+ 忽略 Sprite 用其 backing Texture2D(本版本 Sprite.image 抛错);无图返回 `[]`(notify/sync 不收) |
 | [sync_icons.py](../scripts/ci/sync_icons.py) | manifest 驱动: 缺失 icon → 下 .dat → extract → copy_images。重建结果与本地 copy_images 逐字节一致 |
 | [sync_npc_motions.py](../scripts/ci/sync_npc_motions.py) | 增量补 `_npc_motions.json` (manifest npc-motion vs 基线、只下缺的) |
 | [run_update.py](../scripts/ci/run_update.py) | 编排: A (master→6 表)、B (fetch_wiki+aux→revise+安全检查)、C (asset-version→icons+npc-motion)、D (快照+changelog)。各模块失败优雅降级 |

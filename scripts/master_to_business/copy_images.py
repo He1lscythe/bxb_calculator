@@ -139,43 +139,14 @@ def main():
     c, fi, sk = _copy_dir(src, dest, lambda n: bool(re.match(r'^\d{7}\.png$', n)), force=force)
     print(f"  copied {c}, filtered (非 7位) {fi}, skipped existing {sk}")
 
-    # 3. crystal: materia/icon — 命名归一化
-    #    源: {id}_{N}.png (N=1..4)、cascade _1 → _2 → _3 → _4 拷过来 rename 成 {id}.png (无后缀)
-    #    HTML 端 src 简化为 ../icons/crystal/{id}.png、不用 onerror fallback
+    # 3. crystal: materia/icon/{id}.png → crystal/{id}.png
+    #    extract_assets/parse_unity_dat_v4 已 Sprite-only → materia-icon 单张无后缀 {id}.png;
+    #    旧 {id}_{N} cascade 不再需要 (D:/bxb 重解后无 _N 源)。
     src = DBXB / "materia/icon"
     dest = ICONS_DIR / "crystal"
-    print(f"\n=== crystal ({dest}) — cascade _1 → _2 → _3 → _4、dest 无后缀 ===")
-    dest.mkdir(parents=True, exist_ok=True)
-    # 先扫源目录、按 id 分组各 suffix 路径
-    from collections import defaultdict
-    sources = defaultdict(dict)   # id → {suffix_int: Path}
-    if src.is_dir():
-        for f in src.iterdir():
-            m = re.match(r'^(\d+)_(\d+)\.png$', f.name)
-            if m: sources[int(m.group(1))][int(m.group(2))] = f
-    # 清旧 {id}_{N}.png (老命名残留、新逻辑只放 {id}.png)
-    cleaned = 0
-    for f in dest.iterdir():
-        if re.match(r'^\d+_\d+\.png$', f.name):
-            f.unlink(); cleaned += 1
-    copied = skipped = no_src = 0
-    suffix_used = defaultdict(int)
-    for cid, sufs in sources.items():
-        # cascade pick: _1 → _2 → _3 → _4
-        chosen = None
-        for n in (1, 2, 3, 4):
-            if n in sufs: chosen = (n, sufs[n]); break
-        if not chosen:
-            no_src += 1; continue
-        n, src_path = chosen
-        target = dest / f"{cid}.png"
-        if target.is_file() and not force and target.stat().st_size == src_path.stat().st_size:
-            skipped += 1; continue
-        shutil.copy2(src_path, target)
-        copied += 1
-        suffix_used[n] += 1
-    print(f"  cleaned {cleaned} old {{id}}_{{N}}.png | copied {copied} | skipped {skipped} | no_src {no_src}")
-    print(f"  cascade picked: " + ", ".join(f"_{n}={suffix_used[n]}" for n in sorted(suffix_used)))
+    print(f"\n=== crystal ({dest}) ===")
+    c, fi, sk = _copy_dir(src, dest, lambda n: bool(re.match(r'^\d+\.png$', n)), force=force)
+    print(f"  copied {c} | skipped(exist) {sk} | filtered {fi}")
 
     # 4. bg: cascade picture/m/{id}.png → picture/m/{id}_1.png → picture/ll/{id}.png
     #    部分 bg 在 m/ 只有 _1/_2 拼图变体 (1043/1129/5012)、9079 只有 ll/
