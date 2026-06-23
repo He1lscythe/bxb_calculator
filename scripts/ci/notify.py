@@ -246,14 +246,24 @@ def asset_delta(new_v, prev_v):
     return delta, nf
 
 
-def notify_asset_version():
-    """最新两个 asset_version 快照算 delta → 下 .dat → 解 PNG → 传 R2 → Telegraph 图册 → 发链接。"""
+def notify_asset_version(target_v=None):
+    """asset_version 快照算 delta → 下 .dat → 解 PNG(合成)→ 传 R2 → Telegraph 图册 → 发链接。
+    target_v 指定版本(重发历史页:页已在 telegraph_index → editPage 原地更新、URL 不变、不重发频道);
+    None = 最新两个快照。"""
     base = MT / "asset_version"
     vs = sorted(int(p.name) for p in base.iterdir() if p.is_dir() and p.name.isdigit())
     if not vs:
         print("无 asset_version 快照、跳过")
         return
-    new_v, prev_v = vs[-1], (vs[-2] if len(vs) >= 2 else None)
+    if target_v is not None:
+        if target_v not in vs:
+            print(f"指定 asset_version {target_v} 无快照、跳过")
+            return
+        new_v = target_v
+        older = [v for v in vs if v < target_v]
+        prev_v = older[-1] if older else None
+    else:
+        new_v, prev_v = vs[-1], (vs[-2] if len(vs) >= 2 else None)
     delta, nf = asset_delta(new_v, prev_v)
     if not delta:
         print("asset_version 无 delta、跳过")
@@ -321,7 +331,8 @@ def main():
     if mode == "master_data":
         notify_master_data()
     elif mode == "asset_version":
-        notify_asset_version()
+        tv = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].strip().isdigit() else None
+        notify_asset_version(tv)
     else:
         print(f"未知 mode: {mode!r}")
 
