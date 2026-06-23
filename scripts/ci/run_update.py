@@ -1,10 +1,11 @@
 """run_update.py — CI 端到端更新编排 (纯 HTTP API, 免模拟器/ADB)。
 
 模块:
+  npc-motion 预取            : build 之前抓 asset manifest + 增量 _npc_motions.json (新动作当轮即进 build_characters)
   A. master → 业务表        : login → get_master_data → archive(split+派生) → build_all → data/*.json
   D. 归档 + changelog        : archive_master_data 写 master_tables/<date>/ (含 changelog + 索引)
   B. revise                  : fetch_wiki + aux → crystal_revise/bg_revise + 字段级安全检查
-  C. icons + npc-motion      : (Phase 3) asset-version → CDN → extract → copy_images / npc_motions merge
+  C. icons + asset 归档      : (Phase 3) asset-version → CDN → extract → copy_images;asset_version 快照归档 (manifest 复用预取)
 
 各模块失败优雅降级:icons/asset/wiki 失败不阻塞 A 的 data 产出。
 
@@ -98,20 +99,34 @@ def module_b(revise_base: dict) -> dict:
     return {"revise_safe": safe, "revise_changed": changed}
 
 
-def module_c() -> dict:
-    """C: asset-version (无鉴权 CDN) → 归档 + 增量 npc-motion + icons。"""
-    print("== 模块 C: asset-version → npc-motion + icons ==")
-    manifest = cdn.get_manifest()
-    print(f"  asset_version = {manifest.get('version')} | files = {len(manifest.get('files', []))}")
+def prefetch_npc_motions():
+    """build 之前: 抓 asset manifest + 增量补 _npc_motions.json,让 build_characters 当轮就读到新动作时长
+    (否则 build 在 module C 抓 motion 之前、新角色攻速差一轮)。
+    返回 (manifest 或 None, summary)。失败优雅降级 (manifest=None → build 用现有基线、module C 再重抓)。"""
+    print("== 预取 (build 前): asset manifest + npc-motion ==")
+    try:
+        manifest = cdn.get_manifest()
+        print(f"  asset_version = {manifest.get('version')} | files = {len(manifest.get('files', []))}")
+        nm = sync_npc_motions.sync(manifest)
+        return manifest, {"npc_motions_added": len(nm.get("added", []))}
+    except Exception as e:
+        print(f"  npc-motion 预取失败 (降级、build 用现有 _npc_motions.json): {type(e).__name__}: {e}")
+        return None, {"npc_motions_added": 0, "npc_motions_prefetch_error": str(e)}
+
+
+def module_c(manifest) -> dict:
+    """C: asset-version 归档 + icons (npc-motion 已在 build 前预取)。manifest 复用预取结果、None 则重抓。"""
+    print("== 模块 C: asset-version 归档 + icons ==")
+    if manifest is None:
+        manifest = cdn.get_manifest()
+        print(f"  asset_version = {manifest.get('version')} | files = {len(manifest.get('files', []))}")
     root = mta.master_tables_root()
     av_status, av_folder, _ = mta.archive_asset_version(manifest, root)
     print(f"  asset_version 归档: {av_status} → {av_folder.name}")
-    nm = sync_npc_motions.sync(manifest)
     ic = sync_icons.sync(manifest)
     return {
         "asset_version": manifest.get("version"),
         "asset_version_status": av_status,
-        "npc_motions_added": len(nm.get("added", [])),
         "icons_downloaded": ic.get("downloaded", 0),
     }
 
@@ -135,12 +150,20 @@ def main():
     print(f"login ok: user_id={session.login_resp.get('user_id')}\n")
 
     revise_base = snapshot_revise_base()  # build 前快照 (安全检查基准)
+
+    # npc-motion 预取 (build 之前): 新 weapon 引入的新动作当轮就进 _npc_motions.json、
+    # build_characters 立即读到时长。manifest 复用给 module C (asset 归档 + icons)。
+    manifest, nm_summary = (None, {})
+    if not only_p1:
+        manifest, nm_summary = prefetch_npc_motions()
+
     summary = module_a_d(session)
+    summary.update(nm_summary)
 
     if not only_p1:
         summary.update(module_b(revise_base))
         try:
-            summary.update(module_c())
+            summary.update(module_c(manifest))
         except Exception as e:
             print(f"  模块 C 失败 (降级、不阻塞 data): {type(e).__name__}: {e}")
             summary["module_c_error"] = str(e)
