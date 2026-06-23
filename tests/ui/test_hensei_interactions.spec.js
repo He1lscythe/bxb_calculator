@@ -359,6 +359,35 @@ test('omoide: 锁定槽 (好感不足) 不显示勾选 — #hash 导入高好感
   expect(info.checked, '解锁槽仍应勾选').toBeGreaterThan(0);
 });
 
+test('omoide: 改好感 → 装备计数标签自动更新 (setAffinity 联动 _refreshOmoideCountLabel、2026-06-23)', async ({ page }) => {
+  await waitHenseiReady(page);
+  await page.evaluate(() => window.setChara(0, 100101));
+  await page.waitForTimeout(2000); // omoide fetch + auto-equip (affinity 90000、全选)
+  const parse = () =>
+    page.evaluate(() => {
+      const el = document.getElementById('om-count-0');
+      const m = (el?.textContent || '').match(/\((\d+)\/(\d+)\)/);
+      return m ? { eq: +m[1], total: +m[2] } : null;
+    });
+  const full = await parse();
+  test.skip(!full || full.total === 0, 'chara 100101 无 omoide');
+  expect(full.eq).toBe(full.total); // 90000 全解锁、全装备
+  // 降好感 → 锁住上半 → 计数应下降 (本次修复: setAffinity 调 _refreshOmoideCountLabel)
+  await page.evaluate(() => {
+    const c = window.state.allCharas.find((x) => x._master?.id === 1001);
+    const ths = (c._omoide_slots || []).map((s) => +s.affection_threshold || 0).sort((a, b) => a - b);
+    window.setAffinity(0, Math.max(0, ths[Math.floor(ths.length / 2)] - 1));
+  });
+  await page.waitForTimeout(80);
+  const dropped = await parse();
+  expect(dropped.total).toBe(full.total); // 总数不变
+  expect(dropped.eq).toBeLessThan(full.eq); // 已装备下降
+  // 升回 90000 → picks 都还在、gating 重新计入 → 恢复
+  await page.evaluate(() => window.setAffinity(0, 90000));
+  await page.waitForTimeout(80);
+  expect((await parse()).eq).toBe(full.eq);
+});
+
 // ============================================================
 // Soul / Crystal / enemy_break
 // ============================================================

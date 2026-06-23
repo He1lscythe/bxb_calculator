@@ -1273,6 +1273,7 @@
         const slotInp = document.getElementById('aff-input-slot-' + si);
         if (slotInp && +slotInp.value !== v) slotInp.value = v;
         if (omoideModalSlot === si) _renderOmoideModalBody();
+        _refreshOmoideCountLabel(si);   // 好感变 → 重算「已解锁(threshold ≤ aff)且已选」的装备数 (否则 40/40 不动)
         refreshAllStats();
       };
 
