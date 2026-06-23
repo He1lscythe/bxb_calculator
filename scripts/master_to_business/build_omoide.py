@@ -8,7 +8,9 @@
 
 用法: python scripts/master_to_business/build_omoide.py
 """
+import os
 import shutil
+import stat
 import sys
 from pathlib import Path
 
@@ -23,7 +25,10 @@ def main():
         sys.exit(1)
 
     if DEST_DIR.exists():
-        shutil.rmtree(DEST_DIR)
+        def _rm_readonly(func, path, _):
+            os.chmod(path, stat.S_IWRITE)
+            func(path)
+        shutil.rmtree(DEST_DIR, onerror=_rm_readonly)
     DEST_DIR.mkdir(parents=True)
 
     files = sorted(SRC_DIR.glob("*.json"))

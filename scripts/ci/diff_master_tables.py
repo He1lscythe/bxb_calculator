@@ -1,19 +1,19 @@
 """Diff two master_tables/<yyyy_mm_dd>/ folders → produce markdown changelog.
 
 Usage:
-    python draft/diff_master_tables.py <old_date> <new_date>
-    # e.g. python draft/diff_master_tables.py 2026_05_23 2026_06_03
+    python scripts/ci/diff_master_tables.py <old_date> <new_date>
+    # e.g. python scripts/ci/diff_master_tables.py 2026_05_23 2026_06_03
     # → prints changelog to stdout
 
-Or import:
-    from draft.diff_master_tables import diff_folders
+Or import (同目录):
+    from diff_master_tables import diff_folders
     md = diff_folders(Path('master_tables/2026_05_23'), Path('master_tables/2026_06_03'))
 """
 import sys, json, argparse
 from pathlib import Path
 from collections import defaultdict
 
-# Tables produced by draft/split_tables.py from local-master.dat
+# Tables produced by master_tables_archive.py (ex-draft/split_tables.py) from local-master.dat
 # (the 5 "derived" tables — memory_slot_skills/weapon_innate_skills/weapon_arts/
 #  weapon_arts_effects/npc_motions — come from server responses, not master.dat;
 #  if present in only one folder we skip them rather than treat as removed)

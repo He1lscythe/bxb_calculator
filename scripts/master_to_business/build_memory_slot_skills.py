@@ -51,13 +51,13 @@ def walk_slots(obj):
 def collect_sources():
     sources = []
     # (a) aggregated house_tops.json
-    ht_path = UNPACKING / 'draft' / 'out' / 'account' / 'house_tops.json'
+    ht_path = UNPACKING / 'outputs' / 'account' / 'house_tops.json'
     if ht_path.is_file():
         sources.append((str(ht_path), json.loads(ht_path.read_text(encoding='utf-8'))))
 
     # (b) 个別 HouseTop in 解析结果 / 解析结果
-    for d in (UNPACKING / 'draft' / 'out' / '解析结果
-              UNPACKING / 'draft' / 'out' / '解析结果
+    for d in (UNPACKING / 'outputs' / '解析结果
+              UNPACKING / 'outputs' / '解析结果
         if d.is_dir():
             for jf in d.glob('*_resp.json'):
                 try:
