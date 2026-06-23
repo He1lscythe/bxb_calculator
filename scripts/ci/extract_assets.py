@@ -1,15 +1,20 @@
 """extract_assets.py — .dat → PNG / npc-motion 时长。port 自 unpacking parse_unity_dat_v3 + dump_npc_motions。
 
-- extract_png: Texture2D/Sprite → PNG,按 dat_to_base_path 落到 <out>/<cat>/<id>.png (多资产 _1/_2)。
-  布局与 D:/bxb 一致 → 给 copy_images (BXB_ASSETS_DIR=<out>) 当源。
+- extract_png: Texture2D/Sprite → PNG,与 parse_unity_dat_v4 同款处理:
+    · luma/chroma 配对 → YCoCg 合成单张 RGBA(<base>_luminance + <base>_chrominance)
+    · 忽略 Sprite(其 .image 本 UnityPy 版本抛错)→ 导其 backing/独立 Texture2D(同一图、无冗余)
+    · 退化贴图(≤4×4 占位 / 全透明 / 纯单色)→ 跳过(npc-motion dummy 等)→ 无图则返回 []
+  单输出 → <out>/<cat>/<id>.png;多输出 → <out>/<cat>/<id>/<对象名>.png。布局与 D:/bxb 一致 → 给 copy_images 当源。
 - parse_npc_motion: npc-motion-*.dat → {clip_name: {fps, frames, duration}} (攻速时长)。
-依赖 UnityPy + Pillow。
+依赖 UnityPy + Pillow + numpy。
 """
 import re
 from collections import OrderedDict
 from pathlib import Path
 
 import UnityPy
+import numpy as np
+from PIL import Image
 
 _PNG_TYPES = ("Texture2D", "Sprite")
 
@@ -26,20 +31,104 @@ def dat_to_base_path(name: str, out_dir: Path) -> Path:
     return out_dir.joinpath(*dir_parts, filename)
 
 
+def _img_of(data):
+    try:
+        return data.image
+    except Exception:
+        return None
+
+
+def _is_degenerate(img) -> bool:
+    """非展示图(占位/空白)→ True:2×2 dummy / 全透明 / 纯单色。"""
+    if img is None:
+        return True
+    w, h = img.size
+    if w <= 4 and h <= 4:
+        return True
+    ex = img.getextrema()
+    if ex and isinstance(ex[0], tuple):
+        if len(ex) >= 4 and ex[-1][1] == 0:          # 全透明
+            return True
+        if all(mn == mx for mn, mx in ex):           # 纯单色
+            return True
+    elif ex and ex[0] == ex[1]:
+        return True
+    return False
+
+
+def _combine_ycocg(luma_img, chro_img):
+    """luminance(A8 全分辨率,Y 在 alpha)+ chrominance(RGB 降采样)→ RGBA。"""
+    W, H = luma_img.size
+    Y = np.asarray(luma_img.convert("RGBA").getchannel("A"), np.float32)
+    C = np.asarray(chro_img.convert("RGB").resize((W, H), Image.BILINEAR), np.float32)
+    Cg = C[..., 0] - 128.0
+    Co = C[..., 2] - 128.0
+    t = Y - Cg
+    rgb = np.clip(np.stack([t + Co, Y + Cg, t - Co], -1), 0, 255).astype("uint8")
+    out = Image.fromarray(rgb, "RGB").convert("RGBA")
+    out.putalpha(Image.fromarray(C[..., 1].astype("uint8"), "L"))
+    return out
+
+
 def extract_png(dat_path: Path, name: str, out_dir: Path) -> list:
-    """解 .dat 导出所有 Texture2D/Sprite → PNG。返回写出的 Path 列表。"""
+    """解 .dat 导出图片(luma/chroma 合成 + 跳退化)。返回写出的 Path 列表(无图 → [])。
+
+    只用 Texture2D:本 UnityPy 版本 Sprite.image 抛 AssertionError,而 Sprite 的 backing
+    Texture2D 是同一张图、稳定可解 → 忽略 Sprite、导其 backing/独立 Texture2D(一图、无冗余)。
+    """
     env = UnityPy.load(str(dat_path))
     base_stem = dat_to_base_path(name, out_dir)
-    cands = [o for o in env.objects if o.type.name in _PNG_TYPES]
-    written = []
-    if not cands:
-        return written
-    for idx, obj in enumerate(cands, 1):
-        stem = base_stem if len(cands) == 1 else base_stem.parent / f"{base_stem.name}_{idx}"
+    tex_data = {}
+    for o in env.objects:
+        if o.type.name != "Texture2D":
+            continue
         try:
-            img = obj.read().image
-            if img is None:
-                continue
+            d = o.read()
+        except Exception:
+            continue
+        tex_data[getattr(d, "m_Name", "") or ""] = d
+
+    items, used = [], set()
+    # 1. luma/chroma 配对 → YCoCg 合成
+    pair = {}
+    for nm in tex_data:
+        if nm.endswith("_luminance"):
+            pair.setdefault(nm[:-len("_luminance")], {})["L"] = nm
+        elif nm.endswith("_chrominance"):
+            pair.setdefault(nm[:-len("_chrominance")], {})["C"] = nm
+    for b, lc in pair.items():
+        if "L" in lc and "C" in lc:
+            items.append((b or "image", "combined", (tex_data[lc["L"]], tex_data[lc["C"]])))
+            used.add(lc["L"]); used.add(lc["C"])
+    # 2. 独立 Texture2D(非配对 / 非退化)
+    for nm, d in tex_data.items():
+        if nm in used or _is_degenerate(_img_of(d)):
+            continue
+        items.append((nm or "tex", "image", d))
+
+    if not items:
+        return []
+
+    single = len(items) == 1
+    written, seen = [], set()
+    for nm, kind, payload in items:
+        if single:
+            stem = base_stem
+        else:
+            safe = re.sub(r"[^\w.\-]", "_", nm) or "asset"
+            s, k = safe, 2
+            while s in seen:
+                s, k = f"{safe}_{k}", k + 1
+            seen.add(s)
+            stem = base_stem / s
+        try:
+            if kind == "combined":
+                lum, chro = payload
+                img = _combine_ycocg(lum.image, chro.image)
+            else:
+                img = payload.image
+                if _is_degenerate(img):
+                    continue
             out = stem.with_suffix(".png")
             out.parent.mkdir(parents=True, exist_ok=True)
             img.save(out, "PNG", compress_level=1)
