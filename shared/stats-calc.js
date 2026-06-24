@@ -194,10 +194,13 @@ export function _effectApplies(eff, targetChara, srcChara, srcSlot, targetSlot) 
     if (!ok) return false;
   }
   if (eff.weapon_type_id && tm?.weapon_type_id !== eff.weapon_type_id) return false;
-  // chara 限定 — soul: weapon_base_id (master 原生)、crystal/bg: chara_base_id (build_*_aux.py 反查 characters.json)
-  // 跟 targetChara._master.id 严格比对
-  const limId = eff.weapon_base_id || eff.chara_base_id;
-  if (limId && tm?.id !== limId) return false;
+  // 魔剣门槛 weapon_base_id (soul master 原生 / crystal·bg build_*_aux.py 反查 characters.json 注入、统一字段名):
+  //   语义 = 「**装备者(source)** 那把魔剣的 base id == X 才激活这条技能」、跟 sm.id 比对、不是 tm。
+  //   chara≡魔剣 (同一 base id 空间)、所以 chara 限定结晶/刻印也归到 weapon_base_id。
+  //   按装备者判 → range=All 时门槛只判一次、范围交给 range (range=Single 时 src===target、行为不变)。
+  //   (旧版误比 tm: All-range 时只有「接收方那把恰好==X」才过、队友漏吃、2026-06-24 修正)
+  const limId = eff.weapon_base_id;
+  if (limId && sm?.id !== limId) return false;
   return true;
 }
 
@@ -227,10 +230,21 @@ function _resolveSlot(slot, ctx) {
   };
 }
 
-// 专属条件 override: 个别魔剣技能的触发条件只在 description、master 无字段 → 手动标 skill_id → 条件类型。
+// 专属条件 override: 个别魔剣技能的触发条件只在 description、master 无结构化字段 → 手动标 skill_id → 条件。
 // (这类技能极少;新增时往表加一行 + 在 pushEff 加对应 factor 分支。区别于通用 mpRate)
+//   { type:'mp_not_full' }           魔力未満で発動 (看装备者自身 MP)
+//   { type:'team_has', wbid:<base> } 「Xと同編成で」発動 (队伍任一 slot 的魔剣 base id == wbid)
 const SKILL_COND_OVERRIDE = {
-  60009: 'mp_not_full', // 気高き悪食の世界樹: 魔力未満で攻撃力 ×3
+  60009: { type: 'mp_not_full' }, // 気高き悪食の世界樹: 魔力未満で攻撃力 ×3
+  // 「Xと同編成で」: 条件只在描述、需队伍中含指定魔剣 (base id) 才激活
+  60007: { type: 'team_has', wbid: 1176 }, // アマツミカボシ: アマテラス同編成で ヒット数+10
+  80442: { type: 'team_has', wbid: 1176 }, // アマツミカボシ: アマテラス同編成で ダメージ上限+30億
+  60066: { type: 'team_has', wbid: 1519 }, // 練刀･有里村正 同編成で 攻撃モーション加速
+  60067: { type: 'team_has', wbid: 1518 }, // 練刀･七詩村正 同編成で 攻撃力×1.5
+  80181: { type: 'team_has', wbid: 1606 }, // 司書王使･吽形 同編成で 味方全体ダメージ上限+1.3億
+  80182: { type: 'team_has', wbid: 1605 }, // 司書王使･阿形 同編成で 味方全体ヒット数+1
+  80198: { type: 'team_has', wbid: 1182 }, // 魔天猫ルコ 同編成で 味方全体ダメージ上限+2.2億
+  80199: { type: 'team_has', wbid: 1528 }, // 魔天猫リーナ×ロスト 同編成で 全属性攻撃モーション加速
 };
 // Rise_AttackRate 放大器生效的 source (放大「自身 loadout 的 Attack 系增益」、排除 omoide/chara_meta/soul_affinity/enemy_buff)
 const _RISE_AMP_SOURCES = new Set(['chara_skill', 'crystal', 'bg', 'soul']);
@@ -260,12 +274,18 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     // range=All 的 HP-curve buff 从别 slot 来时、看接收方而非 source 的 HP。
     const tgtHp = tr?.hp ?? 100;
     let factor = conditionFactor(param, tgtHp, anyTeammateZero, enemyBk);
-    // 专属条件 override (条件只在描述、master 无字段;仅 chara_skill 的指定 skill_id)
-    if (source === 'chara_skill' && SKILL_COND_OVERRIDE[raw.id] === 'mp_not_full') {
-      const maxMp = +srcChara?._master?.mp || 0;        // 源魔剣自身 MP 上限
-      const curRaw = resolvedTeam[srcSlot]?.tr?.mp;
-      const curMp = curRaw == null ? maxMp : curRaw;    // null = 满
-      factor = maxMp > 0 && curMp < maxMp ? 1 : 0;       // 魔力未満 → 1 (生效)、満 → 0
+    // 专属条件 override (条件只在描述、master 无结构化字段;仅 chara_skill 的指定 skill_id)
+    const _ov = source === 'chara_skill' ? SKILL_COND_OVERRIDE[raw.id] : null;
+    if (_ov) {
+      if (_ov.type === 'mp_not_full') {
+        const maxMp = +srcChara?._master?.mp || 0;        // 源魔剣自身 MP 上限
+        const curRaw = resolvedTeam[srcSlot]?.tr?.mp;
+        const curMp = curRaw == null ? maxMp : curRaw;    // null = 满
+        factor = maxMp > 0 && curMp < maxMp ? 1 : 0;       // 魔力未満 → 1 (生效)、満 → 0
+      } else if (_ov.type === 'team_has') {
+        // 「Xと同編成で」: 队伍任一 slot 的魔剣 base id == wbid 才激活 (源 slot 自身≠伙伴、不会误判)
+        factor = resolvedTeam.some((s) => s?.chara?._master?.id === _ov.wbid) ? 1 : 0;
+      }
     }
     if (factor === 0) return;
     // chara skill: value_scaling × jukudo 熟度成长
@@ -399,15 +419,15 @@ export function collectEffects(team, targetSlotIdx, ctx) {
         range: cr._master.range || 'Single',   // build_crystal_aux 走 desc 同装備セット 注入 All、否则 Single 缺省
         target_element_id: cr._master.element_id,
         weapon_type_id: cr._master.weapon_type_id,
-        chara_base_id: cr.chara_base_id || null,   // build_crystal_aux 走 name 純真/秘録 反查 chara id 注入
+        weapon_base_id: cr.weapon_base_id || null,   // build_crystal_aux 走 name 純真/秘録 反查 chara(≡魔剣) base id 注入、按装备者判
       }, { valueOverride: value, srcName: cr.name });
     }
 
-    // 5. bg (slot.bg._skills 或 _master.skills) — bg-level chara_base_id 注入每个 skill
+    // 5. bg (slot.bg._skills 或 _master.skills) — bg-level weapon_base_id 注入每个 skill
     const bgSkills = slot.bg?._skills || slot.bg?._master?.skills || [];
-    const bgCharaId = slot.bg?.chara_base_id || null;
+    const bgWeaponId = slot.bg?.weapon_base_id || null;
     for (const sk of bgSkills) {
-      const skWithLimit = bgCharaId ? { ...sk, chara_base_id: bgCharaId } : sk;
+      const skWithLimit = bgWeaponId ? { ...sk, weapon_base_id: bgWeaponId } : sk;
       pushEff(slot.chara, i, 'bg', skWithLimit, { srcName: sk.description || slot.bg?.name });
     }
 

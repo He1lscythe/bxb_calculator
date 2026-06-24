@@ -456,7 +456,7 @@
         return null;
       };
 
-      // 秘録記憶 (desc [結晶枠+1(上限1)]): chara_base_id が自分の base_id と一致する
+      // 秘録記憶 (desc [結晶枠+1(上限1)]): weapon_base_id が自分の base_id と一致する
       // 秘録記憶を装備中 → 結晶枠 +1。複数装備でも +1 のみ (上限1、some で自然に cap)
       const _hasOwnHiroku = (c, crystals) => {
         const baseId = c?._master?.id;
@@ -464,7 +464,7 @@
         return crystals.some((cfg) => {
           if (!cfg?.id) return false;
           const cr = allCrystals.find((x) => x.id === cfg.id);
-          return !!(cr && (cr.name || '').includes('秘録記憶') && cr.chara_base_id === baseId);
+          return !!(cr && (cr.name || '').includes('秘録記憶') && cr.weapon_base_id === baseId);
         });
       };
       export const crystalSlotCount = (c, slotIdx) => {

@@ -53,7 +53,7 @@ export function bgToWiki(b) {
     // master 原 skills (给 filter 用、效果分类/条件発動/対象 都要遍历 skills)
     _skills: b.skills || [],
     // build_bg_aux.py 注入的派生字段 (走 bg_revise.json deepApply)
-    chara_base_id: b.chara_base_id || null,
+    weapon_base_id: b.weapon_base_id || null,   // chara(≡魔剣) 限定 [Xのみ] 反查注入、stats-calc 按装备者判
   };
 }
 

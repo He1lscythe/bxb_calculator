@@ -4,7 +4,7 @@
 //   range            'Single' 仅装备者自身;'All'/缺省 全队
 //   element_condition / weapon_type_condition  → 判**装备者(source)**自身属性/武器门槛 (souls「X属性装備で」)
 //   target_element_id / weapon_type_id          → 判**接收方(target)**过滤 (weapons「X属性の味方」) + extra_element_id 扩展
-//   weapon_base_id / chara_base_id              → 限定到特定魔剣 (跟 target id 比对)
+//   weapon_base_id                              → 判**装备者(source)**那把魔剣 base id 门槛 (soul「X装備で」/ crystal·bg「Xのみ」、统一字段)
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { _effectApplies } from '../../shared/stats-calc.js';
@@ -97,13 +97,22 @@ test('weapon_type_id: 看接收方武器', () => {
 });
 
 // ============================================================
-// weapon_base_id / chara_base_id — 限定特定魔剣 (target id)
+// weapon_base_id — 装备者(source)门槛: 装备者那把魔剣 base id == X 才激活
+//   (soul「X装備で」/ crystal·bg「Xのみ」统一字段;chara≡魔剣 同一 base id 空间)
+//   2026-06-24: 旧实现误比 target → All-range「装備者は X、全体に…」队友漏吃 → 改比 sm
 // ============================================================
-test('weapon_base_id / chara_base_id: 跟 target id 比对', () => {
-  assert.equal(ok({ range: 'All', weapon_base_id: 1001 }, C(1, 0, 1001), C(1), 0, 1), true);
-  assert.equal(ok({ range: 'All', weapon_base_id: 1001 }, C(1, 0, 1002), C(1), 0, 1), false);
-  assert.equal(ok({ range: 'All', chara_base_id: 1676 }, C(6, 0, 1676), C(1), 0, 1), true);
-  assert.equal(ok({ range: 'All', chara_base_id: 1676 }, C(6, 0, 1677), C(1), 0, 1), false);
+test('weapon_base_id: 跟装备者(source) id 比对、range=All 全队吃 (シュレディンガー型)', () => {
+  // 装备者(source)id=1551 → 命中、即使接收方是别的魔剣 (range=All 全队吃)
+  assert.equal(ok({ range: 'All', weapon_base_id: 1551 }, C(1, 0, 9999), C(1, 0, 1551), 0, 1), true);
+  // 装备者 id≠1551 → 不激活、即使接收方 id 恰好==1551 (不再误判 target)
+  assert.equal(ok({ range: 'All', weapon_base_id: 1551 }, C(1, 0, 1551), C(1, 0, 1002), 0, 1), false);
+});
+test('weapon_base_id: range=Single 时 src===target、看自身魔剣 (旧行为不变)', () => {
+  assert.equal(ok({ range: 'Single', weapon_base_id: 1001 }, C(1, 0, 1001), C(1, 0, 1001), 1, 1), true);
+  assert.equal(ok({ range: 'Single', weapon_base_id: 1001 }, C(1, 0, 1002), C(1, 0, 1002), 1, 1), false);
+});
+test('weapon_base_id=9999 哨兵: 无真实魔剣命中 → 永不激活 (装备者也不会是 9999)', () => {
+  assert.equal(ok({ range: 'All', weapon_base_id: 9999 }, C(1, 0, 1551), C(1, 0, 1551), 0, 1), false);
 });
 
 // ============================================================

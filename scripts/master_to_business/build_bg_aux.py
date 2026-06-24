@@ -1,8 +1,9 @@
-"""build_bg_aux.py — bladegraphs.json + characters.json → 注入 chara_base_id 进 bg_revise
+"""build_bg_aux.py — bladegraphs.json + characters.json → 注入 weapon_base_id 进 bg_revise
 
 跑在 build_bladegraphs.py 之后:
-- chara_base_id: 任一 picture_skill 的 description 含 [Xのみ] 且 element_id==0 && weapon_type_id==0
-  → 提取 X、查 characters.json (NFKC exact + 共用 OVERRIDE 表) → 写 chara_base_id (int)
+- weapon_base_id: 任一 picture_skill 的 description 含 [Xのみ] 且 element_id==0 && weapon_type_id==0
+  → 提取 X、查 characters.json (NFKC exact + 共用 OVERRIDE 表) → 写 weapon_base_id (= chara≡魔剣 base id, int)
+  (字段名跟 soul/crystal 统一为 weapon_base_id;stats-calc 按**装备者**判)
 
 bg master 原生有 range (All/Single/None)、不需要写 revise。
 
@@ -19,7 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_crystal_aux import (  # noqa: E402
     CHARA_LIMIT_ID_OVERRIDE,
     build_chara_name_to_id,
-    resolve_chara_base_id,
+    resolve_weapon_base_id,
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -65,20 +66,22 @@ def main():
 
         patch = revise_by_id.get(bid)
 
-        # 兼旧 schema: 清掉之前可能写的 chara_limit (string 字段)
+        # 兼旧 schema: 清掉之前可能写的 chara_limit (string) / chara_base_id (旧字段名)、统一 weapon_base_id
         if patch and "chara_limit" in patch:
             del patch["chara_limit"]
+        if patch and "chara_base_id" in patch:
+            del patch["chara_base_id"]
 
         if pfx is None:
-            if patch and "chara_base_id" in patch:
-                del patch["chara_base_id"]
+            if patch and "weapon_base_id" in patch:
+                del patch["weapon_base_id"]
             continue
 
-        cid = resolve_chara_base_id(pfx, name_to_id)
+        cid = resolve_weapon_base_id(pfx, name_to_id)
         if cid is None:
             n_chara_skip += 1
-            if patch and "chara_base_id" in patch:
-                del patch["chara_base_id"]
+            if patch and "weapon_base_id" in patch:
+                del patch["weapon_base_id"]
             if len(unresolved_samples) < 10:
                 unresolved_samples.append((bid, b.get("name",""), pfx))
             continue
@@ -86,8 +89,8 @@ def main():
         if patch is None:
             patch = {"id": bid, "name": b.get("name", "")}
             revise_by_id[bid] = patch
-        if patch.get("chara_base_id") != cid:
-            patch["chara_base_id"] = cid
+        if patch.get("weapon_base_id") != cid:
+            patch["weapon_base_id"] = cid
             n_chara += 1
 
     seen_ids = {b["id"] for b in master}
@@ -102,8 +105,8 @@ def main():
         encoding="utf-8",
     )
     print(f"OK: bg_revise updated.")
-    print(f"    chara_base_id patches: {n_chara}")
-    print(f"    chara_base_id unresolved (skip gate): {n_chara_skip}")
+    print(f"    weapon_base_id patches: {n_chara}")
+    print(f"    weapon_base_id unresolved (skip gate): {n_chara_skip}")
     if unresolved_samples:
         print(f"    unresolved samples:")
         for s in unresolved_samples:

@@ -196,7 +196,7 @@ export const renderRowHd = (c) => {
     cw = cardWeapon(c);
   const eb = ce ? '<span class="badge elem-' + ce + '">' + (ELEMENT[ce] || ce) + '</span>' : '';
   const wb = cw ? '<span class="badge weapon">' + (WEAPON[cw] || cw) + '</span>' : '';
-  const s5b = c.chara_base_id ? '<span class="badge scope5">キャラ限</span>' : '';
+  const s5b = c.weapon_base_id ? '<span class="badge scope5">キャラ限</span>' : '';
   const timeb = c.time_start ? '<span class="badge time">時間</span>' : '';
   // 効果 tag: 用 parameter class (跟 filter 一致)、unique by class id
   const _seen = new Set();

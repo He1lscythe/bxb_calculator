@@ -55,7 +55,7 @@ export function crystalToWiki(c) {
     conditional_parameter: c.conditional_parameter || false,
     // build_crystal_aux.py 注入的派生字段 (走 crystal_revise.json deepApply)
     range: c.range || 'Single',
-    chara_base_id: c.chara_base_id || null,
+    weapon_base_id: c.weapon_base_id || null,   // chara(≡魔剣) 限定: 純真/秘録 反查注入、stats-calc 按装备者判
   };
 }
 
