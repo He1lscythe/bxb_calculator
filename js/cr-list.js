@@ -207,9 +207,10 @@ export const fmtRowBairitu = (c) => {
   const parts = [];
   (c.effects || []).forEach(function (e) {
     if (e.bairitu_init == null && e.bairitu == null) return;
-    const pfx = e.calc_type === 1 ? '+' : '×';
     const mn = e.bairitu_init,
       mx = e.bairitu;
+    // addition 负值不再前缀 '+' (避免 '+-x')
+    const pfx = e.calc_type === 1 ? ((mn != null ? mn : mx) < 0 ? '' : '+') : '×';
     if (mn != null && mx != null && mn !== mx) parts.push(pfx + fmtLarge(mn, 3) + '~' + fmtLarge(mx, 3));
     else parts.push(pfx + fmtLarge(mn != null ? mn : mx, 3));
   });
@@ -345,9 +346,10 @@ const renderEffLine = (e) => {
   let bStr = '';
   if (e.bairitu_init != null || e.bairitu != null) {
     const unit = e.calc_type === 1 ? '' : '倍';
-    const pfx = e.calc_type === 1 ? '+' : '×';
     const mn = e.bairitu_init,
       mx = e.bairitu;
+    // addition 负值不再前缀 '+' (避免 '+-x')
+    const pfx = e.calc_type === 1 ? ((mn != null ? mn : mx) < 0 ? '' : '+') : '×';
     const num =
       mn != null && mx != null && mn !== mx
         ? fmt(mn) + '<span class="sep">～</span>' + fmt(mx)

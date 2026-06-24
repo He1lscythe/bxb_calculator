@@ -220,11 +220,13 @@
       } from '../shared/hensei-helpers.js';
       // weight_step / purity_step: master 不含、revise 注入 (走 cr-edit dropdown)、缺省 null = slider 不显示
       const _parseScaling = () => 0;
+      // addition 倍率显示: 负值不再前缀 '+' (避免 '+-x');非负才加 '+'。乘算/终乘符号照旧。
+      const _addP = (v) => (+v < 0 ? '' : '+');
       const _crystalEffectiveBairitu = (cr, cfg) => crystalEffectiveValue(cr, cfg);
       // popover 实时倍率串: crystalEffectiveValue (随 lv/weight/purity 联动)、round 到 3 位小数 + calc_type 前缀
       const _crBairituStr = (cr, cfg) => {
         const v = Math.round(crystalEffectiveValue(cr, cfg) * 1000) / 1000;
-        return (cr?.effects?.[0]?.calc_type === 1 ? '+' : '×') + v;
+        return (cr?.effects?.[0]?.calc_type === 1 ? _addP(v) : '×') + v;
       };
 
       Nav.init();
@@ -450,7 +452,7 @@
           const sc = ef.bairitu_scaling;
           // ct: 0=×, 1=+, 2=+(終), 3=×(終)
           const ct = ef.calc_type ?? 0;
-          const pfx = ct === 1 ? '+' : ct === 2 ? '+(終)' : ct === 3 ? '×(終)' : 'x';
+          const pfx = ct === 1 ? _addP(ef.bairitu) : ct === 2 ? (ef.bairitu < 0 ? '(終)' : '+(終)') : ct === 3 ? '×(終)' : 'x';
           const isAddCt = ct === 1 || ct === 2;
           // inner: 加算は単値、乗算は init〜max 範囲対応
           let inner;
@@ -565,7 +567,7 @@
                 .map((ef) => {
                   const btags = _efBadges(ef);
                   const eff = _crystalEffectiveBairitu(cr, cfg, ef);
-                  const val = (ef.calc_type === 1 ? '+' : 'x') + fmtLarge(eff, 3);
+                  const val = (ef.calc_type === 1 ? _addP(eff) : 'x') + fmtLarge(eff, 3);
                   return btags + `<span class="tag-val">${val}</span>`;
                 })
                 .join(' ');
@@ -1784,7 +1786,7 @@
         if (!sk) return '';
         const v = sk.value;
         const math = sk.math_type;
-        const op = math === 'Multiply' ? '×' : math === 'Addition' ? '+' : '?';
+        const op = math === 'Multiply' ? '×' : math === 'Addition' ? _addP(v) : '?';
         return `${sk.parameter || '?'} ${op}${v != null ? fmtNum(v) : '?'}`;
       };
 
@@ -2791,7 +2793,7 @@
             const scope = sl ? `<span class="scope-tag scope-lim">${escHtml(sl)}</span>` : '';
             const val =
               ef.bairitu != null
-                ? `<span class="tag-val">${ef.calc_type === 1 ? '+' : '×'}${fmtLarge(ef.bairitu)}</span>`
+                ? `<span class="tag-val">${ef.calc_type === 1 ? _addP(ef.bairitu) : '×'}${fmtLarge(ef.bairitu)}</span>`
                 : '';
             return `<div class="bgdm-eff-line">${btags}${cond}${scope}${val}</div>`;
           })
@@ -2831,7 +2833,7 @@
               : '';
             const val =
               ef.bairitu != null
-                ? `<span class="tag-val">${ef.calc_type === 1 ? '+' : '×'}${fmtLarge(ef.bairitu)}</span>${sc}`
+                ? `<span class="tag-val">${ef.calc_type === 1 ? _addP(ef.bairitu) : '×'}${fmtLarge(ef.bairitu)}</span>${sc}`
                 : '';
             return `<div class="bgdm-eff-line">${btags}${val}</div>`;
           })
@@ -2863,9 +2865,9 @@
         if (c.description) fields.push(['説明', escHtml(c.description).replace(/\n/g, '<br>')]); // 効果量 上方
         (c.effects || []).forEach((ef) => {
           if (ef.bairitu != null || ef.bairitu_init != null) {
-            const pfx = ef.calc_type === 1 ? '+' : '×';
             const mn = ef.bairitu_init,
               mx = ef.bairitu;
+            const pfx = ef.calc_type === 1 ? _addP(mn != null ? mn : mx) : '×';
             let range;
             if (mn != null && mx != null && mn !== mx) {
               range = pfx + fmtLarge(mn) + '～' + pfx + fmtLarge(mx);
@@ -3347,8 +3349,8 @@
           ? (+v.toFixed(4)).toString()
           : Math.round(v).toLocaleString('en-US');
       };
-      const _opSymbol = (op) => {
-        if (op === 'add' || op === 'final-add') return '+';
+      const _opSymbol = (op, val) => {
+        if (op === 'add' || op === 'final-add') return +val < 0 ? '' : '+'; // addition 负值不前缀 '+'
         if (op === 'mul' || op === 'final-mul') return '×';
         return op;
       };
@@ -3461,7 +3463,7 @@
                 .map(
                   (s) => `<div class="trace-step">
           <span class="src" title="${escHtml(s.src)}">${escHtml(s.src)} [${s.stat}]</span>
-          <span class="op">${_opSymbol(s.op)}</span>
+          <span class="op">${_opSymbol(s.op, s.val)}</span>
           <span class="val">${_fmtTraceVal(s.val)}</span>
           <span class="after">${_fmtTraceVal(s.before)} → ${_fmtTraceVal(s.after)}</span>
         </div>`,
@@ -3494,7 +3496,7 @@
                 .map(
                   (s) => `<div class="trace-step">
           <span class="src" title="${escHtml(s.src)}">${escHtml(s.src)} [${s.stat}]</span>
-          <span class="op">${_opSymbol(s.op)}</span>
+          <span class="op">${_opSymbol(s.op, s.val)}</span>
           <span class="val">${_fmtTraceVal(s.val)}</span>
           <span class="after">${s.before} → ${s.after}</span>
         </div>`,
@@ -3542,7 +3544,7 @@
               .map(
                 (s) => `<div class="trace-step">
         <span class="src" title="${escHtml(s.src)}">${escHtml(s.src)}</span>
-        <span class="op">${_opSymbol(s.op)}</span>
+        <span class="op">${_opSymbol(s.op, s.val)}</span>
         <span class="val">${_fmtTraceVal(s.val)}</span>
         <span class="after">${_fmtTraceStat(s.before)} → ${_fmtTraceStat(s.after)}</span>
       </div>`,
