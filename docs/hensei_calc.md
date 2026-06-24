@@ -173,6 +173,19 @@ v *= 1 + (value - 1) × factor
 ```
 factor=0 时不衰减 (×1)、factor=1 时全量 (×value)。
 
+### 専属条件 override (`SKILL_COND_OVERRIDE`、2026-06-23)
+个别魔剣技能的触发条件**只在 description 文字里、master 无字段** → 用 `stats-calc.js` 的 `SKILL_COND_OVERRIDE` 表 (skill_id → 条件类型) 手动标,`pushEff` 命中时换算 factor:
+- `60009` **気高き悪食の世界樹**: `mp_not_full` → `factor = 1 if curMp < maxMp else 0` (魔力未満で `Attack ×3`)。
+- 区别于通用 **mpRate** (所有魔剣: 自身基础攻击/ブレイク随 `mp_ratio<0.5` 缩放);这是**个別技能专属触发**,两者解耦。
+- 新增同类 (条件只在描述的专属技能) → 表加一行 + `pushEff` 加对应 factor 分支即可。
+
+### Rise_AttackRate 放大器 (meta-pass、2026-06-23)
+`Rise_AttackRate` 是元倍率「**魔剣が持つ攻撃力アップスキルを V 倍受ける(潜在Skill除く)**」。collectEffects 收完所有 effect 后做一次 meta-pass:
+- 目标自身 (魔剣固有) 有 `Rise_AttackRate` (值 V) → 把目标**自身 loadout** (`_src_slot===target`) 的 **Attack 系** (`base_parameter==='Attack'`,含条件式 `Vitality_/RemHP_/Break_/FellDown_Attack`) 增益 ×V:
+  - `Multiply M → 1 + (M-1)·V`;`Addition A → A·V`。
+- **source 限** `chara_skill / crystal / bg / soul`;**排除** `omoide`(「潜在Skill除く」、因 `is_original_skill` 在自身/omoide 全为 true 无法区分,故按 source 排)、`chara_meta`(結婚/燃心/LP/MP)、`soul_affinity`、`enemy_buff`、`Rise` 自身。
+- 目前仅 2 个魔剣: `1508 蒼き悪竜の渇欲` / `1530 もちもち` (均 V=2.5);它们自身无 Attack-up 技能,放大的是装在该角色上的结晶/魂/BG/技能 Attack 增益。
+
 ## DamageLimitBreak (DLB) — 伤害输出 cap、跟 stat 显示无关
 
 hensei viewer **只显示 stat (Attack / Defense / HP / BK)**、不算伤害输出、所以 DLB cap 不进 stats-calc。

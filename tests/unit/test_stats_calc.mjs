@@ -1416,4 +1416,49 @@ test('mpRate: ratio≥0.5→1、ratio 0→1/21、null→满、maxMp 0→1', () =
   assert.strictEqual(mpRate(100, 0), 1);               // 无 mp 数据 → 1
 });
 
+// ============================================================
+// 専属条件 override (mp_not_full) + Rise_AttackRate 放大器 (2026-06-23)
+// ============================================================
+function _charaWithSkills(skills, over = {}) {
+  const c = mockChara(over);
+  c._master.states['通常'].weapon_skills = skills;
+  return c;
+}
+
+test('skill override: 気高き悪食 (60009) Attack×3 — MP 満→不生效 / 未満→×3', () => {
+  const skill = { id: 60009, parameter: 'Attack', math_type: 'Multiply', value: 3.0, value_scaling: 0, range: 'Single' };
+  const build = (mp) => {
+    const c = _charaWithSkills([{ ...skill }], { mp: 100 });
+    const tr = mkTr(); tr.mp = mp; tr.hp = 100;
+    return buildCtx([{ chara: c, tr }]);
+  };
+  const cFull = build(100); // 満
+  const eFull = collectEffects(cFull.team, 0, cFull).filter((e) => e._source === 'chara_skill' && e.base_parameter === 'Attack');
+  assert.strictEqual(eFull.length, 0, 'MP 満 → 気高き悪食 不生效');
+  const cLow = build(50); // 未満 (ratio 0.5、mpRate 不罚但本技能触发)
+  const eLow = collectEffects(cLow.team, 0, cLow).filter((e) => e._source === 'chara_skill' && e.base_parameter === 'Attack');
+  assert.strictEqual(eLow.length, 1);
+  assert.strictEqual(eLow[0].value, 3.0, 'MP 未満 → ×3');
+});
+
+test('Rise_AttackRate (80004) 放大 chara_skill Attack ×1.2 → ×1.5', () => {
+  const c = _charaWithSkills([
+    { id: 80004, parameter: 'Rise_AttackRate', math_type: 'Multiply', value: 2.5, value_scaling: 0, range: 'Single' },
+    { id: 88888, parameter: 'Attack', math_type: 'Multiply', value: 1.2, value_scaling: 0, range: 'Single' },
+  ]);
+  const ctx = buildCtx([{ chara: c, tr: mkTr() }]);
+  const atk = collectEffects(ctx.team, 0, ctx).filter((e) => e._source === 'chara_skill' && e.parameter === 'Attack');
+  assert.strictEqual(atk.length, 1);
+  assert.ok(Math.abs(atk[0].value - 1.5) < 1e-9, '1+(1.2-1)·2.5 = 1.5');
+});
+
+test('Rise_AttackRate 控制组: 无 Rise → Attack 不放大 (×1.2)', () => {
+  const c = _charaWithSkills([
+    { id: 88888, parameter: 'Attack', math_type: 'Multiply', value: 1.2, value_scaling: 0, range: 'Single' },
+  ]);
+  const ctx = buildCtx([{ chara: c, tr: mkTr() }]);
+  const atk = collectEffects(ctx.team, 0, ctx).filter((e) => e._source === 'chara_skill' && e.parameter === 'Attack');
+  assert.ok(Math.abs(atk[0].value - 1.2) < 1e-9);
+});
+
 console.log('\n[test_stats_calc] all tests defined');
