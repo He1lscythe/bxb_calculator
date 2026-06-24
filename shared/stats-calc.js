@@ -227,6 +227,14 @@ function _resolveSlot(slot, ctx) {
   };
 }
 
+// 专属条件 override: 个别魔剣技能的触发条件只在 description、master 无字段 → 手动标 skill_id → 条件类型。
+// (这类技能极少;新增时往表加一行 + 在 pushEff 加对应 factor 分支。区别于通用 mpRate)
+const SKILL_COND_OVERRIDE = {
+  60009: 'mp_not_full', // 気高き悪食の世界樹: 魔力未満で攻撃力 ×3
+};
+// Rise_AttackRate 放大器生效的 source (放大「自身 loadout 的 Attack 系增益」、排除 omoide/chara_meta/soul_affinity/enemy_buff)
+const _RISE_AMP_SOURCES = new Set(['chara_skill', 'crystal', 'bg', 'soul']);
+
 // ============================================================
 // 收集 effects (3 slot 所有 source、target = targetSlot)
 // ============================================================
@@ -251,7 +259,14 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     // HP-curve (Vitality/RemHP/Break) factor 用 TARGET 自身 HP (tr=目标 slot 的 tr);
     // range=All 的 HP-curve buff 从别 slot 来时、看接收方而非 source 的 HP。
     const tgtHp = tr?.hp ?? 100;
-    const factor = conditionFactor(param, tgtHp, anyTeammateZero, enemyBk);
+    let factor = conditionFactor(param, tgtHp, anyTeammateZero, enemyBk);
+    // 专属条件 override (条件只在描述、master 无字段;仅 chara_skill 的指定 skill_id)
+    if (source === 'chara_skill' && SKILL_COND_OVERRIDE[raw.id] === 'mp_not_full') {
+      const maxMp = +srcChara?._master?.mp || 0;        // 源魔剣自身 MP 上限
+      const curRaw = resolvedTeam[srcSlot]?.tr?.mp;
+      const curMp = curRaw == null ? maxMp : curRaw;    // null = 满
+      factor = maxMp > 0 && curMp < maxMp ? 1 : 0;       // 魔力未満 → 1 (生效)、満 → 0
+    }
     if (factor === 0) return;
     // chara skill: value_scaling × jukudo 熟度成长
     // omoide source 走 omoideEffectiveScaling fallback (Frida 抓的 value_scaling 全空、用户实测 0.003)
@@ -517,6 +532,22 @@ export function collectEffects(team, targetSlotIdx, ctx) {
       const scaledEff = { ...eff, bairitu: bairituScaled };
       _pushEnemyEffect(scaledEff, 'emblem');
       void bs;
+    }
+  }
+
+  // === Rise_AttackRate 放大器 (meta-pass、2026-06-23): 目标自身有 Rise_AttackRate (魔剣固有) →
+  //     把目标「自身 loadout」(_src_slot===target) 的 Attack 系 (base_parameter==='Attack') 增益 ×V。
+  //     source 限 chara_skill/crystal/bg/soul (排除 omoide「潜在Skill除く」/ chara_meta / soul_affinity / enemy_buff)。
+  //     目前仅 1508 蒼き悪竜の渇欲 / 1530 もちもち (均 ×2.5)。
+  const _rise = collected.find((e) => e.parameter === 'Rise_AttackRate' && e._src_slot === targetSlotIdx);
+  if (_rise) {
+    const V = _rise.value || 1;
+    for (const e of collected) {
+      if (e._src_slot !== targetSlotIdx) continue;
+      if (e.base_parameter !== 'Attack' || !_RISE_AMP_SOURCES.has(e._source)) continue;
+      if (e.math_type === 'Multiply') e.value = _round5(1 + (e.value - 1) * V);  // 增益部分 ×V
+      else if (e.math_type === 'Addition') e.value = e.value * V;
+      e._rise_amp = V; // trace 标记
     }
   }
 
