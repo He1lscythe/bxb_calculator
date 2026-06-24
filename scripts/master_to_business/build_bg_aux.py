@@ -66,11 +66,9 @@ def main():
 
         patch = revise_by_id.get(bid)
 
-        # 兼旧 schema: 清掉之前可能写的 chara_limit (string) / chara_base_id (旧字段名)、统一 weapon_base_id
+        # 兼旧 schema: 清掉之前可能写的 chara_limit (string)、统一 weapon_base_id
         if patch and "chara_limit" in patch:
             del patch["chara_limit"]
-        if patch and "chara_base_id" in patch:
-            del patch["chara_base_id"]
 
         if pfx is None:
             if patch and "weapon_base_id" in patch:
