@@ -545,7 +545,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     for (const e of collected) {
       if (e._src_slot !== targetSlotIdx) continue;
       if (e.base_parameter !== 'Attack' || !_RISE_AMP_SOURCES.has(e._source)) continue;
-      if (e.math_type === 'Multiply') e.value = _round5(1 + (e.value - 1) * V);  // 增益部分 ×V
+      if (e.math_type === 'Multiply') e.value = _round5(e.value * V);  // 倍率直接 ×V (×1.2 → ×3.0)
       else if (e.math_type === 'Addition') e.value = e.value * V;
       e._rise_amp = V; // trace 标记
     }
