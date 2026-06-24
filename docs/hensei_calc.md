@@ -182,7 +182,7 @@ factor=0 时不衰减 (×1)、factor=1 时全量 (×value)。
 ### Rise_AttackRate 放大器 (meta-pass、2026-06-23)
 `Rise_AttackRate` 是元倍率「**魔剣が持つ攻撃力アップスキルを V 倍受ける(潜在Skill除く)**」。collectEffects 收完所有 effect 后做一次 meta-pass:
 - 目标自身 (魔剣固有) 有 `Rise_AttackRate` (值 V) → 把目标**自身 loadout** (`_src_slot===target`) 的 **Attack 系** (`base_parameter==='Attack'`,含条件式 `Vitality_/RemHP_/Break_/FellDown_Attack`) 增益 ×V:
-  - `Multiply M → 1 + (M-1)·V`;`Addition A → A·V`。
+  - `Multiply M → M·V` (倍率直接 ×V,例 ×1.2 → ×3.0);`Addition A → A·V`。
 - **source 限** `chara_skill / crystal / bg / soul`;**排除** `omoide`(「潜在Skill除く」、因 `is_original_skill` 在自身/omoide 全为 true 无法区分,故按 source 排)、`chara_meta`(結婚/燃心/LP/MP)、`soul_affinity`、`enemy_buff`、`Rise` 自身。
 - 目前仅 2 个魔剣: `1508 蒼き悪竜の渇欲` / `1530 もちもち` (均 V=2.5);它们自身无 Attack-up 技能,放大的是装在该角色上的结晶/魂/BG/技能 Attack 增益。
 
