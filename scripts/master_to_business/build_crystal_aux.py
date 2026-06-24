@@ -141,11 +141,9 @@ def main():
             patch = {"id": mid, "name": name}
             revise_by_id[mid] = patch
 
-        # 兼旧 schema: 清掉之前可能写的 chara_limit (string 字段) / chara_base_id (旧字段名)、统一走 weapon_base_id (int)
+        # 兼旧 schema: 清掉之前可能写的 chara_limit (string 字段)、统一走 weapon_base_id (int)
         if "chara_limit" in patch:
             del patch["chara_limit"]
-        if "chara_base_id" in patch:
-            del patch["chara_base_id"]
 
         # range: desc 含「装備セット」→ 全队 All。「同セット」也是全队,但「同セット…戦闘不能」
         # 是条件式 (触发=任意队友同套魔剣戦闘不能、加成对象=自身) → 不算 All,故 同セット 分支排除含「戦闘不能」的。
