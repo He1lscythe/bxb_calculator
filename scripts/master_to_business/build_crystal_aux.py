@@ -1,14 +1,15 @@
-"""build_crystal_aux.py — crystals.json + characters.json → 注入 range / chara_base_id 进 crystal_revise
+"""build_crystal_aux.py — crystals.json + characters.json → 注入 range / weapon_base_id 进 crystal_revise
 
 后处理脚本、跑在 build_crystals.py 之后:
 - range: master.description NFKC 后含 "装備セット" (兼半角 装備ｾｯﾄ) → revise patch 加 "range": "All" (缺省 Single 不写)
-- chara_base_id: master.name 含 "の純真記憶" / "の秘録記憶" → 提取前缀、查 characters.json:
-    1. NFKC + ･→・ 后 exact name 匹配 → 取 chara id
+- weapon_base_id: master.name 含 "の純真記憶" / "の秘録記憶" → 提取前缀、查 characters.json:
+    1. NFKC + ･→・ 后 exact name 匹配 → 取 chara(≡魔剣) id
     2. 否则查下面 CHARA_LIMIT_ID_OVERRIDE 表 (substring 多候选 + nickname 缩写都人工映射)
-    3. 仍命不中 → 不写 chara_base_id (hensei 不 gate、effect 照算)
+    3. 仍命不中 → 不写 weapon_base_id (hensei 不 gate、effect 照算)
+  (字段名跟 soul 统一为 weapon_base_id;chara≡魔剣、同一 base id 空间)
 
 不覆盖现有 revise 字段 (max_value / M_L_max 等)、只 merge 新字段。
-hensei stats-calc 装备时按 chara_base_id 跟 targetChara._master.id 严格相等比对、不对则 effect 不生效。
+hensei stats-calc 装备时按 weapon_base_id 跟**装备者(source)** _master.id 严格相等比对、不对则 effect 不生效。
 
 用法: python scripts/master_to_business/build_crystal_aux.py
 """
@@ -24,7 +25,7 @@ REVISE = DATA_DIR / "crystal_revise.json"
 CHARA = DATA_DIR / "characters.json"
 
 
-# 不能 NFKC 完整匹配 characters.json name 的 crystal prefix → chara_base_id
+# 不能 NFKC 完整匹配 characters.json name 的 crystal prefix → weapon_base_id (chara≡魔剣 base id)
 # (24 单候选 substring + 8 多候选 substring 用户决策 + 9 nickname/缩写)
 CHARA_LIMIT_ID_OVERRIDE = {
     # 24 单候选 (substring 唯一命中 chara、自动反查)
@@ -91,8 +92,8 @@ def build_chara_name_to_id(chara_list):
     return out
 
 
-def resolve_chara_base_id(pfx: str, name_to_id: dict):
-    """prefix → chara_base_id (int) 或 None。
+def resolve_weapon_base_id(pfx: str, name_to_id: dict):
+    """prefix → weapon_base_id (= chara≡魔剣 base id, int) 或 None。
     1. NFKC exact 比对 characters.json
     2. CHARA_LIMIT_ID_OVERRIDE 查表 (人工映射的 substring + nickname)
     3. 仍命不中 → None
@@ -140,9 +141,11 @@ def main():
             patch = {"id": mid, "name": name}
             revise_by_id[mid] = patch
 
-        # 兼旧 schema: 清掉之前可能写的 chara_limit (string 字段)、统一走 chara_base_id (int)
+        # 兼旧 schema: 清掉之前可能写的 chara_limit (string 字段) / chara_base_id (旧字段名)、统一走 weapon_base_id (int)
         if "chara_limit" in patch:
             del patch["chara_limit"]
+        if "chara_base_id" in patch:
+            del patch["chara_base_id"]
 
         # range: desc 含「装備セット」→ 全队 All。「同セット」也是全队,但「同セット…戦闘不能」
         # 是条件式 (触发=任意队友同套魔剣戦闘不能、加成对象=自身) → 不算 All,故 同セット 分支排除含「戦闘不能」的。
@@ -156,24 +159,24 @@ def main():
         elif patch.get("range") == "All":
             del patch["range"]
 
-        # chara_base_id
+        # weapon_base_id (純真/秘録記憶 → chara≡魔剣 base id)
         pfx = _extract_chara_pfx(name)
         if pfx:
-            cid = resolve_chara_base_id(pfx, name_to_id)
+            cid = resolve_weapon_base_id(pfx, name_to_id)
             if cid is not None:
-                if patch.get("chara_base_id") != cid:
-                    patch["chara_base_id"] = cid
+                if patch.get("weapon_base_id") != cid:
+                    patch["weapon_base_id"] = cid
                     n_chara += 1
             else:
                 # resolve 失败 — 不 gate、记录供人工补 OVERRIDE
                 n_chara_skip += 1
-                if "chara_base_id" in patch:
-                    del patch["chara_base_id"]
+                if "weapon_base_id" in patch:
+                    del patch["weapon_base_id"]
                 if len(unresolved_samples) < 10:
                     unresolved_samples.append((mid, name, _norm(pfx)))
-        elif "chara_base_id" in patch:
+        elif "weapon_base_id" in patch:
             # 不是 純真/秘録 entry、清掉残留
-            del patch["chara_base_id"]
+            del patch["weapon_base_id"]
 
     seen_ids = {m["id"] for m in master}
     new_revise = [revise_by_id[m["id"]] for m in master if m["id"] in revise_by_id]
@@ -188,8 +191,8 @@ def main():
     )
     print(f"OK: crystal_revise updated.")
     print(f"    range patches: {n_range}")
-    print(f"    chara_base_id patches: {n_chara}")
-    print(f"    chara_base_id unresolved (skip gate): {n_chara_skip}")
+    print(f"    weapon_base_id patches: {n_chara}")
+    print(f"    weapon_base_id unresolved (skip gate): {n_chara_skip}")
     if unresolved_samples:
         print(f"    unresolved samples (前 10 — 补 OVERRIDE dict 可让 gate 生效):")
         for s in unresolved_samples:
