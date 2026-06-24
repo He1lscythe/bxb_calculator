@@ -75,11 +75,11 @@ def module_a_d(session) -> dict:
 
 
 def module_b(revise_base: dict) -> dict:
-    """B: fetch_wiki (入手方法) + aux (range/chara_base_id) → revise + 安全检查。
+    """B: fetch_wiki (入手方法) + aux (range/weapon_base_id) → revise + 安全检查。
 
     revise_base = {fname: tempfile_path} 即 build 前 (data-staging 现版) 的快照,用于安全检查。
     """
-    print("== 模块 B: revise (入手方法 + range/chara_base_id) ==")
+    print("== 模块 B: revise (入手方法 + range/weapon_base_id) ==")
     _run("fetch_wiki_acquisition.py", optional=True)  # altema HTTP、失败不致命
     _run("build_crystal_aux.py", optional=True)
     _run("build_bg_aux.py", optional=True)

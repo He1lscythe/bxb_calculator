@@ -1461,4 +1461,73 @@ test('Rise_AttackRate 控制组: 无 Rise → Attack 不放大 (×1.2)', () => {
   assert.ok(Math.abs(atk[0].value - 1.2) < 1e-9);
 });
 
+// ============================================================
+// soul weapon_base_id — 装备者(source)门槛、range=All 全队吃 (2026-06-24)
+// ============================================================
+test('soul weapon_base_id (All): 门槛判装备者、队友也吃 / 装备者不符 → 全员不吃', () => {
+  const soulSkill = { id: 99001, parameter: 'Attack', math_type: 'Multiply', value: 1.13, range: 'All', weapon_base_id: 1551 };
+  const soul = mockSoul({ skills: [soulSkill] });
+  // slot0 装 シュレディンガー(1551) + 该 soul、slot1 队友是别的魔剣(1002)
+  const ctxHit = buildCtx([
+    { chara: mockChara({ id: 1551 }), soul, tr: mkTr() },
+    { chara: mockChara({ id: 1002 }), tr: mkTr() },
+    null,
+  ]);
+  const eMate = collectEffects(ctxHit.team, 1, ctxHit).filter((e) => e._source === 'soul' && e.parameter === 'Attack');
+  assert.strictEqual(eMate.length, 1, '装备者=1551 → range=All 队友(slot1)也吃到');
+  // 装备者≠1551 (soul 挂在 1003 身上)、即使队友恰好是 1551 → 不激活 (旧实现会误判 target)
+  const ctxMiss = buildCtx([
+    { chara: mockChara({ id: 1003 }), soul, tr: mkTr() },
+    { chara: mockChara({ id: 1551 }), tr: mkTr() },
+    null,
+  ]);
+  const eMate2 = collectEffects(ctxMiss.team, 1, ctxMiss).filter((e) => e._source === 'soul' && e.parameter === 'Attack');
+  assert.strictEqual(eMate2.length, 0, '装备者≠1551 → 不激活 (不再误判接收方是 1551)');
+  const eSelf2 = collectEffects(ctxMiss.team, 0, ctxMiss).filter((e) => e._source === 'soul' && e.parameter === 'Attack');
+  assert.strictEqual(eSelf2.length, 0, '装备者≠1551 → 装备者自身也不激活');
+});
+
+// ============================================================
+// 「Xと同編成で」override — 队伍含指定魔剣才激活 (2026-06-24)
+// ============================================================
+test('同編成 override (60067): 練刀･七詩村正(1518)在队 → Attack×1.5、不在 → 不生效', () => {
+  const skill = { id: 60067, parameter: 'Attack', math_type: 'Multiply', value: 1.5, value_scaling: 0, range: 'Single' };
+  const src = _charaWithSkills([{ ...skill }]); // id 1001
+  const has = buildCtx([
+    { chara: src, tr: mkTr() },
+    { chara: mockChara({ id: 1518, name: '練刀･七詩村正' }), tr: mkTr() },
+    null,
+  ]);
+  const eHas = collectEffects(has.team, 0, has).filter((e) => e._source === 'chara_skill' && e.parameter === 'Attack');
+  assert.strictEqual(eHas.length, 1, '伙伴在队 → 60067 生效');
+  assert.ok(Math.abs(eHas[0].value - 1.5) < 1e-9, '同編成成立 → ×1.5');
+  const no = buildCtx([
+    { chara: src, tr: mkTr() },
+    { chara: mockChara({ id: 1002 }), tr: mkTr() },
+    null,
+  ]);
+  const eNo = collectEffects(no.team, 0, no).filter((e) => e._source === 'chara_skill' && e.parameter === 'Attack');
+  assert.strictEqual(eNo.length, 0, '伙伴不在队 → 60067 不生效');
+});
+
+test('同編成 override (80182, range=All): 司書王使･阿形(1605)在队 → 味方全体 HitCount+1', () => {
+  const skill = { id: 80182, parameter: 'HitCount', math_type: 'Addition', value: 1, value_scaling: 0, range: 'All' };
+  const src = _charaWithSkills([{ ...skill }]); // id 1001
+  const has = buildCtx([
+    { chara: src, tr: mkTr() },
+    { chara: mockChara({ id: 1605, name: '司書王使･阿形' }), tr: mkTr() },
+    null,
+  ]);
+  // range=All → 队友(slot1)也应吃到
+  const eMate = collectEffects(has.team, 1, has).filter((e) => e._source === 'chara_skill' && e.base_parameter === 'HitCount');
+  assert.strictEqual(eMate.length, 1, '伙伴在队 + range=All → 队友也吃到 +1');
+  const no = buildCtx([
+    { chara: src, tr: mkTr() },
+    { chara: mockChara({ id: 1002 }), tr: mkTr() },
+    null,
+  ]);
+  const eNo = collectEffects(no.team, 1, no).filter((e) => e._source === 'chara_skill' && e.base_parameter === 'HitCount');
+  assert.strictEqual(eNo.length, 0, '伙伴不在队 → 不生效');
+});
+
 console.log('\n[test_stats_calc] all tests defined');

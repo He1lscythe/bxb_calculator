@@ -173,10 +173,21 @@ v *= 1 + (value - 1) × factor
 ```
 factor=0 时不衰减 (×1)、factor=1 时全量 (×value)。
 
-### 専属条件 override (`SKILL_COND_OVERRIDE`、2026-06-23)
-个别魔剣技能的触发条件**只在 description 文字里、master 无字段** → 用 `stats-calc.js` 的 `SKILL_COND_OVERRIDE` 表 (skill_id → 条件类型) 手动标,`pushEff` 命中时换算 factor:
-- `60009` **気高き悪食の世界樹**: `mp_not_full` → `factor = 1 if curMp < maxMp else 0` (魔力未満で `Attack ×3`)。
-- 区别于通用 **mpRate** (所有魔剣: 自身基础攻击/ブレイク随 `mp_ratio<0.5` 缩放);这是**个別技能专属触发**,两者解耦。
+### 専属条件 override (`SKILL_COND_OVERRIDE`、2026-06-23 / 扩展 2026-06-24)
+个别魔剣技能的触发条件**只在 description 文字里、master 无结构化字段** → 用 `stats-calc.js` 的 `SKILL_COND_OVERRIDE` 表 (skill_id → 条件对象) 手动标,`pushEff` 命中 (仅 `source==='chara_skill'`) 时换算 factor:
+- `{ type:'mp_not_full' }` — `60009` **気高き悪食の世界樹**: `factor = 1 if curMp < maxMp else 0` (魔力未満で `Attack ×3`)。区别于通用 **mpRate** (所有魔剣自身基础攻击/ブレイク随 `mp_ratio<0.5` 缩放);这是**个別技能专属触发**、解耦。
+- `{ type:'team_has', wbid:<base id> }` — 「**Xと同編成で**」(队伍含指定魔剣才发动): `factor = 1 if 队伍任一 slot 的 chara._master.id === wbid else 0`。共 8 条 (master 无字段、伙伴名只在描述):
+
+  | skill_id | 来源魔剣 | 伙伴 (wbid) | 效果 | range |
+  |---|---|---|---|---|
+  | 60007 / 80442 | アマツミカボシ | アマテラス (1176) | ヒット数+10 / ダメ上限+30億 | Single |
+  | 60066 | — | 練刀･有里村正 (1519) | 攻撃モーション加速 | Single |
+  | 60067 | — | 練刀･七詩村正 (1518) | 攻撃力×1.5 | Single |
+  | 80181 | — | 司書王使･吽形 (1606) | 味方全体ダメ上限+1.3億 | All |
+  | 80182 | — | 司書王使･阿形 (1605) | 味方全体ヒット数+1 | All |
+  | 80198 | — | 魔天猫ルコ (1182) | 味方全体ダメ上限+2.2億 | All |
+  | 80199 | — | 魔天猫リーナ×ロスト (1528) | 全属性攻撃モーション加速 | All |
+
 - 新增同类 (条件只在描述的专属技能) → 表加一行 + `pushEff` 加对应 factor 分支即可。
 
 ### Rise_AttackRate 放大器 (meta-pass、2026-06-23)
@@ -227,7 +238,7 @@ clamp(repel_rate, 0, 100)
   按 `range` + element/weapon/chara 限定决定命中 (`_effectApplies`):
   - **`element_condition` / `weapon_type_condition`**(souls「X属性装備で…」)= 判**装备者(source/equipper)**自身属性·武器、不命中整条不激活 (range=All 时看装备者而非接收方、2026-06-19 扫描确认: souls 全用 *_condition、weapons 全用 target_*)。
   - **`target_element_id` / `weapon_type_id`**(weapons/crystals「X属性の味方…」)= 判**接收方(target)**过滤 (+ `extra_element_id` 扩展接收)。
-  - `weapon_base_id` / `chara_base_id` = 限定到特定魔剣 (跟 target id 比对)。
+  - **`weapon_base_id`**(soul「X装備で」master 原生 / crystal·bg「Xのみ・純真/秘録記憶」build_*_aux 反查注入、**统一字段名**)= 判**装备者(source)**那把魔剣 base id 门槛 (跟 `sm.id` 比对、不是 target;range=All 时门槛只判装备者一次、范围交给 range)。chara≡魔剣、同一 base id 空间。*(2026-06-24: 旧实现误比 target、All-range「装備者は X、全体に…」型队友漏吃 → 修为比 sm)*
   HP-curve / gate 类在收集时算好 `condition_factor`
 - `applyStaged(base, parameter, effects, opts)` — 按上面 stage 表逐 effect apply (+0/×1 跳过、出口 ceil)
 - soul: 收集时 `value × soulMultiplier(rarity, soul_lv)` 一刀切 (所有 math_type、Multiply 直乘是游戏行为、2026-06-10 用户实测确认 ×1.45 → lv50 ×2.175)、
@@ -273,7 +284,7 @@ clamp(repel_rate, 0, 100)
 | **crystal lv** slider | `crystals[i].lv` | `crystalEffectiveValue`: 三因子 (M_L/W/P_max) 或 max_value 线性插值 | ✅ |
 | **crystal 重量** slider | `crystals[i].weight` | 三因子公式 weight 维度 (M_W_max + min/max_weight + weight_step revise) | ✅ |
 | **crystal 純度** slider | `crystals[i].purity` | 三因子公式 purity 维度 | ✅ |
-| **秘録記憶 装備** | `crystals[]` 内容 | 自分の `chara_base_id` 一致の秘録記憶装備中 → 結晶枠 +1 (desc `[結晶枠+1(上限1)]`、複数でも +1)。`crystalSlotCount` 判定、外すと `syncCrystals` が固定点まで收敛 (slice が秘録本体を外す連鎖対応) | ✅ |
+| **秘録記憶 装備** | `crystals[]` 内容 | 自分の `weapon_base_id` 一致の秘録記憶装備中 → 結晶枠 +1 (desc `[結晶枠+1(上限1)]`、複数でも +1)。`crystalSlotCount` 判定、外すと `syncCrystals` が固定点まで收敛 (slice が秘録本体を外す連鎖対応) | ✅ |
 | **target slot** 切换 (1/2/3) | (UI、不存 tr) | 改算哪个 slot 的 stat、跨 slot range='All' buff 仍来自其他 slot | ✅ |
 | **omoide picks** (memory slot) | `tr.omoide_picks` | omoide source effect (Add → s1、Mul → s4a)、`_omoide_slots` Frida 抓包数据 + affection_threshold gate | ✅ |
 | **enemy element** | `ctx.enemy.element` | 元素相性倍率参考、影响显示 (实际伤害公式 Phase 8) | UI only |

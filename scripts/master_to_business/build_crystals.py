@@ -130,7 +130,7 @@ def build():
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
 
     # revise merge 语义 (2026-06-10 事故修正: 旧版整写、把现有 revise 的非 build 字段
-    # — 入手方法 / range / chara_base_id / weight_step / purity_step / 用户手填 min/max 等 — 全丢):
+    # — 入手方法 / range / weapon_base_id / weight_step / purity_step / 用户手填 min/max 等 — 全丢):
     #   build 管的字段 (max_value / 三因子 M_L/W/P_max) 以 build 为准、其余字段从现有 revise 保留
     if OUT_REVISE.is_file():
         existing_by_id = {e["id"]: e for e in json.loads(OUT_REVISE.read_text(encoding="utf-8")) if "id" in e}
