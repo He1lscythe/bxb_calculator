@@ -1441,7 +1441,7 @@ test('skill override: 気高き悪食 (60009) Attack×3 — MP 満→不生效 /
   assert.strictEqual(eLow[0].value, 3.0, 'MP 未満 → ×3');
 });
 
-test('Rise_AttackRate (80004) 放大 chara_skill Attack ×1.2 → ×1.5', () => {
+test('Rise_AttackRate (80004) 放大 chara_skill Attack ×1.2 → ×3.0 (倍率直接 ×2.5)', () => {
   const c = _charaWithSkills([
     { id: 80004, parameter: 'Rise_AttackRate', math_type: 'Multiply', value: 2.5, value_scaling: 0, range: 'Single' },
     { id: 88888, parameter: 'Attack', math_type: 'Multiply', value: 1.2, value_scaling: 0, range: 'Single' },
@@ -1449,7 +1449,7 @@ test('Rise_AttackRate (80004) 放大 chara_skill Attack ×1.2 → ×1.5', () => 
   const ctx = buildCtx([{ chara: c, tr: mkTr() }]);
   const atk = collectEffects(ctx.team, 0, ctx).filter((e) => e._source === 'chara_skill' && e.parameter === 'Attack');
   assert.strictEqual(atk.length, 1);
-  assert.ok(Math.abs(atk[0].value - 1.5) < 1e-9, '1+(1.2-1)·2.5 = 1.5');
+  assert.ok(Math.abs(atk[0].value - 3.0) < 1e-9, '1.2 × 2.5 = 3.0');
 });
 
 test('Rise_AttackRate 控制组: 无 Rise → Attack 不放大 (×1.2)', () => {
