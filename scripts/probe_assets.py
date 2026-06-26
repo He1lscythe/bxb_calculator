@@ -15,9 +15,11 @@
 
 title 命名 (当前方案，实测 200):
   events   : images/topics/events/{id}/title.jpg
-  campaign : images/topics/campaign/{id}/title_{id}.jpg
+  campaign : images/topics/campaign/{id}/title_{id}.jpg + 续图 title_{id}_{x:02d}.jpg (补零两位、x=1..)
   gacha    : images/topics/gachas/{id}/title_{id}_1.jpg
 CDN 行为: 存在=200，不存在=403 (R2 后端，非 404)。
+续图补零: campaign 续图实测是 title_{id}_01.jpg 这种补零两位 (title_{id}_1.jpg 非补零=403、2026-06-24 实测 1263);
+  _series 每个 n 同时试补零/非补零变体、兜底两种命名。
 """
 import glob
 import json
@@ -43,6 +45,7 @@ def line_candidates(i):
         ("events", f"events/{i}/title.jpg"),
         ("events", f"events/{i}/title_{i}.jpg"),
         ("campaign", f"campaign/{i}/title_{i}.jpg"),
+        ("campaign", f"campaign/{i}/title_{i}_01.jpg"),  # 续图补零 (无单张 title 的 campaign 兜底检测)
         ("campaign", f"campaign/{i}/title_{i}_1.jpg"),
         ("campaign", f"campaign/{i}/title.jpg"),
     ]
@@ -65,15 +68,25 @@ def url_exists(path):
         return False
 
 
-def _series(path_fmt, cap=40):
-    """探 path_fmt.format(n=1..) 直到第一个 404,返回存在的完整 URL 列表(N 连续)。"""
+def _series(path_fmts, cap=40):
+    """探 n=1.. 直到某个 n 所有命名变体都不存在,返回存在的完整 URL 列表(N 连续)。
+
+    path_fmts 可为单个 format 字符串、或多个变体的 list (如补零 title_{id}_{n:02d} +
+    非补零 title_{id}_{n});每个 n 依次试各变体、取第一个命中,全 404 才停。
+    """
+    if isinstance(path_fmts, str):
+        path_fmts = [path_fmts]
     urls = []
     for n in range(1, cap + 1):
-        p = path_fmt.format(n=n)
-        if url_exists(p):
-            urls.append(f"{ASSET_BASE}/{p}")
-        else:
+        hit = None
+        for fmt in path_fmts:
+            p = fmt.format(n=n)
+            if url_exists(p):
+                hit = p
+                break
+        if hit is None:
             break
+        urls.append(f"{ASSET_BASE}/{hit}")
     return urls
 
 
@@ -82,7 +95,7 @@ def enumerate_images(cat, i):
 
     gacha    : title_{id}_1..N
     events   : title.jpg (或 title_{id}.jpg) + leaflet_1{id}_1..M
-    campaign : title_{id}.jpg / title.jpg + title_{id}_1..N + info_{id}_1..K
+    campaign : title_{id}.jpg / title.jpg + title_{id}_{x:02d}..N (续图补零两位) + info_{id}_..K
     """
     out = []
     if cat == "gacha":
@@ -97,8 +110,15 @@ def enumerate_images(cat, i):
         for single in (f"campaign/{i}/title_{i}.jpg", f"campaign/{i}/title.jpg"):
             if url_exists(single):
                 out.append(f"{ASSET_BASE}/{single}")
-        out += _series(f"campaign/{i}/title_{i}_{{n}}.jpg")
-        out += _series(f"campaign/{i}/info_{i}_{{n}}.jpg")
+        # 续图: 补零两位 title_{id}_01.. (当前格式) + 非补零 title_{id}_1.. (兼容旧)
+        out += _series([
+            f"campaign/{i}/title_{i}_{{n:02d}}.jpg",
+            f"campaign/{i}/title_{i}_{{n}}.jpg",
+        ])
+        out += _series([
+            f"campaign/{i}/info_{i}_{{n:02d}}.jpg",
+            f"campaign/{i}/info_{i}_{{n}}.jpg",
+        ])
     # 去重保序
     seen, uniq = set(), []
     for u in out:
