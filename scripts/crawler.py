@@ -347,19 +347,44 @@ def latest_tsuiki_ts(raw, canonical):
     return None
 
 
+def _update_ts_key(s):
+    """'6/26 14:25' / '06/10 17:00' → (mo, d, hh, mm) 比较元组;无法解析 → (0,0,0,0)。
+    仅用于同页内挑「最晚」一条更新;跨年(12月→1月)极罕见、不处理。"""
+    m = re.search(r"(\d{1,2})\s*/\s*(\d{1,2})\D+?(\d{1,2})\s*[:：]\s*(\d{2})", s or "")
+    return tuple(int(m.group(i)) for i in range(1, 5)) if m else (0, 0, 0, 0)
+
+
 def extract_edit_note(soup):
-    """提取页面的「追記」注记文字(= 本次修改的部分),供编辑通知附在链接下方。
-    优先含 追記 的 .caution_t 整块;无则全文取含 追記 的文本节点。多条按出现序拼接。"""
+    """提取本次修改内容,供编辑通知附在链接下方。
+    **限定正文容器 .news_body**(排除标题/面包屑里的「追記」字样、避免回显标题)、两类来源:
+      ① update_info_container「更新ログ」块: 官网每次改动新增一条 (带 timestamp + body)。
+         取 update_info_container_timestamp 最晚的一块的 update_info_container_body 全文 (最准)。
+         注意 body 的 id="tgl_content" 在多块间重复、不能按 id 选、只能逐块按 class 取。
+      ② 含「追記」的 .caution_t 注意框 (正文内、按出现序拼接)。
+    update_info 在前、追記 caution 在后 (exact 去重);都没有则空串 (workflow 不显示 📝)。"""
+    body = soup.select_one(".news_body") or soup
     notes = []
-    for el in soup.select(".caution_t"):
+
+    # ① update_info_container: 时间戳最晚一块的 body
+    best = None  # (ts_key, text)
+    for cont in body.select(".update_info_container"):
+        body_el = cont.select_one(".update_info_container_body")
+        if not body_el:
+            continue
+        ts_el = cont.select_one(".update_info_container_timestamp")
+        key = _update_ts_key(ts_el.get_text(" ", strip=True) if ts_el else "")
+        text = body_el.get_text("\n", strip=True)
+        if text and (best is None or key > best[0]):
+            best = (key, text)
+    if best and best[1]:
+        notes.append(best[1])
+
+    # ② 正文内含「追記」的 .caution_t (选项2: 限定 .news_body、排除标题节点)
+    for el in body.select(".caution_t"):
         t = el.get_text(" ", strip=True)
         if "追記" in t and t not in notes:
             notes.append(t)
-    if not notes:
-        for s in soup.find_all(string=lambda x: x and "追記" in x):
-            t = " ".join(s.split())
-            if t and t not in notes:
-                notes.append(t)
+
     return "\n".join(notes)
 
 
