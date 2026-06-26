@@ -313,12 +313,12 @@
         advantageWeapons: new Set(), // 1-12 武器 ID 集合（仅 ギルバト/特別版 有效）
         difficulty: 'Normal', // 'Normal' | 'Hard' | 'Lunatic'（仅 ギルバト/特別版 有效）
         guildTitle: null, // guildtitles.json 中的 id
-        // 第一槽默认装 id=1 攻撃力アップⅠ (rarity=1 黄, lv max=25)；其他槽位空
+        // 默认 4 槽: 攻撃力アップⅠ(id1) / 攻撃力アップⅡ(id4) / タキサイキア(id16) / マスタープラン(id17)、均满级
         emblems: [
           { id: 1, level: 25 },
-          { id: null, level: 1 },
-          { id: null, level: 1 },
-          { id: null, level: 1 },
+          { id: 4, level: 40 },
+          { id: 16, level: 55 },
+          { id: 17, level: 55 },
         ],
         bd_cap: 0, // 副本 BD 上限（0-9 整数）。倍率 = 1 + (bd_cap // 2) * 0.25
       };
@@ -668,7 +668,7 @@
       // ===== 編成 export / import (.json 文件 + 分享码 + URL #hash、deflate-raw 压缩) =====
       // 紧凑对象: 省略 tr/enemy 默认值 + 空 slot/crystals (import 时 merge 默认补回)。
       const _ENEMY_DEF = { element: 6, bk: false, mode: 'normal', bkResistance: 'normal', difficulty: 'Normal', guildTitle: null, bd_cap: 0 };
-      const _DEF_EMBLEMS = [{ id: 1, level: 25 }, { id: null, level: 1 }, { id: null, level: 1 }, { id: null, level: 1 }];
+      const _DEF_EMBLEMS = [{ id: 1, level: 25 }, { id: 4, level: 40 }, { id: 16, level: 55 }, { id: 17, level: 55 }];
       const _DEF_EMBLEMS_STR = JSON.stringify(_DEF_EMBLEMS);
       const _henseiCompact = () => {
         const def = mkTr();
@@ -919,14 +919,20 @@
           const c = allCharas.find((x) => x.id === id);
           // omoide data lazy fetch (注入 _omoide_slots → re-render + 自動「攻撃優先」全装備)
           _ensureOmoideLoaded(id, true);
-          // 用户决策: 默认 affinity = 90000 (最大、解锁全部 slot)、不再用 _maxOmoideThreshold (问题 3)
+          // 换魔剣 → 整条练度 tr 重置到默认 (HP/MP/BD ON/BD条数/結婚/燃心/LP 全归零、不带上个魔剣的值);
+          // 仅保留 soul 进度 (soul_lv/soul_awakening)、因 soul 不随魔剣换。再叠魔剣特定初始值。
+          const _keepSoulLv = team[si].tr.soul_lv;
+          const _keepSoulAwk = team[si].tr.soul_awakening;
+          team[si].tr = mkTr();
+          team[si].tr.soul_lv = _keepSoulLv;
+          team[si].tr.soul_awakening = _keepSoulAwk;
+          // 默认 affinity = 90000 (最大、解锁全部 omoide slot)
           team[si].tr.affinity = 90000;
-          // 重置 tr：默认最高 state（極弐>改造>通常）、awakening=0；SS 特例 38/255，其他 jukudo/lv = state max
+          // 默认最高 state（極弐>改造>通常）；SS(r=4) 特例 jukudo 38/level 255、其他 = state max (awakening 已由 mkTr 置 0)
           if (c) {
             const r = c.rarity;
             const newState = ['極弐', '改造', '通常'].find((s) => c.states?.[s]) || '通常';
             team[si].tr.state = newState;
-            team[si].tr.awakening = 0;
             if (r === 4) {
               team[si].tr.jukudo = 38;
               team[si].tr.level = 255;
@@ -969,7 +975,8 @@
         }
         _clampSoulTr(si);
         renderSlot(si);
-        resetBdCapToInitial();   // soul 变 → BlazeGaugePointRate pipeline 可能变 → 重置 bd_cap
+        // 不重置 bd_cap: 换 soul 不该把用户手设的 BDゲージ上限拍回 initial (initialBlazeGauge 来自 chara skill、非 soul)。
+        // refreshAllStats → refreshBdCapMax 已处理「soul 改了 bdCapMax (BlazeGaugeMaxLevel)」时的 max 更新 + 必要下钳。
         refreshAllStats();
       };
       export const setBG = (si, id) => {
