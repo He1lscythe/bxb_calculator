@@ -9,6 +9,13 @@ GitHub 原生 `schedule`(cron)是尽力而为的,高峰期会延迟甚至**直�
 | `15 7,15 * * *` | 16:15 / 00:15 | `update-database.yml` |
 | `5 * * * *` | 每小时 :05 | `bxb-topics.yml`(mode=auto 轮询) |
 | `8 7 * * *` | 16:08 | `bxb-topics.yml`(mode=window 每日兜底重爬) |
+| `29 15 * * *` | 00:29 | `daily.yml` time_point 1(账号日常维护)|
+| `29 20 * * *` | 05:29 | `daily.yml` time_point 2 |
+| `29 1 * * *` | 10:29 | `daily.yml` time_point 3 |
+| `29 8 * * *` | 17:29 | `daily.yml` time_point 4 |
+
+> ⚠ `daily.yml` 必须在**默认分支 main**(workflow_dispatch 只认默认分支;它 `checkout: ref: routines` 拉账号日常代码)。
+> 测试:`/trigger?key=<KEY>&wf=daily-2`。
 
 GitHub 两个 workflow 的原生 `schedule:` **保留作兜底**(job 幂等,重复触发只会 no-op / rebase)。
 跑稳几天后若想去掉原生 cron 也可以,留着无害。
@@ -41,6 +48,10 @@ Worker → **Settings → Triggers → Cron Triggers** → 逐条添加:
 15 7,15 * * *
 5 * * * *
 8 7 * * *
+29 15 * * *
+29 20 * * *
+29 1 * * *
+29 8 * * *
 ```
 
 ### 5. 验证(不用等到点)

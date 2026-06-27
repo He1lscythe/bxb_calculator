@@ -1,0 +1,75 @@
+name: BxB Daily Tasks
+
+# 账号日常维护 cron。本 workflow 文件在 main(默认分支、才能被 workflow_dispatch 触发);
+# daily/ + scripts 代码在 routines 分支、由下方 checkout(ref: routines)拉取。
+# 由 Cloudflare cron(bxb-dispatch worker)在 4 个 UTC 时刻 dispatch、映射 time_point:
+#   29 15 * * * → time_point 1 (JST 00:29)
+#   29 20 * * * → time_point 2 (JST 05:29)
+#   29 1  * * * → time_point 3 (JST 10:29)
+#   29 8  * * * → time_point 4 (JST 17:29)
+on:
+  workflow_dispatch:
+    inputs:
+      time_point:
+        description: "时间点代称 1-4 (JST 00:29 / 05:29 / 10:29 / 17:29)"
+        required: true
+        type: choice
+        options: ["1", "2", "3", "4"]
+      shards:
+        description: "分片数 N(并行 job 数,各跑 1/N 账号、各自独立 IP)"
+        required: false
+        default: "10"
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.gen.outputs.matrix }}
+    steps:
+      - id: gen
+        run: |
+          N=${{ inputs.shards }}
+          echo "matrix=[$(seq -s, 0 $((N-1)))]" >> "$GITHUB_OUTPUT"
+
+  run:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10            # 同时最多 10 个 job(=10 个 IP);按需调
+      matrix:
+        shard: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: routines
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements-daily.txt
+      - name: Fetch accounts from R2 (private)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: >
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts.csv" accounts.csv
+          --endpoint-url "${{ secrets.R2_ENDPOINT }}"
+      - name: Run shard
+        env:
+          PYTHONUNBUFFERED: "1"
+          BXB_BOOTSTRAP_KEY: ${{ secrets.BXB_BOOTSTRAP_KEY }}
+        run: >
+          python -m daily
+          --time-point ${{ inputs.time_point }}
+          --shard ${{ matrix.shard }}/${{ inputs.shards }}
+          --accounts-file accounts.csv
+          --concurrency 30
+          --rate 10.0
+          --out "results-${{ matrix.shard }}.csv"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: results-tp${{ inputs.time_point }}-shard${{ matrix.shard }}
+          path: "results-${{ matrix.shard }}.csv"
+          if-no-files-found: ignore
