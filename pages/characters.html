@@ -3,6 +3,8 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <!-- 提前并行下载主数据 (与 JS 模块图重叠、缩短首屏) -->
+    <link rel="preload" as="fetch" href="../data/characters.json" />
     <title>BxB 魔剣データベース</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="../icons/favicon.ico" type="image/x-icon" />
@@ -330,13 +332,8 @@
         ])
           .then(([arr, chRev, masouArr, masouRev]) => {
             state.allChars = adaptCharaList(arr, chRev);
-            state.allChars.forEach((c) => {
-              // Bug B 修: key 用 base_id 4位 (跟 chara-edit state.editingId 一致)、
-              // 不用 c.id (wiki variant_id 6位)。否则 saveEdit/cancelRevise 读 state.originalData[baseId] = undefined
-              const baseId = c._master?.id ?? c.id;
-              if (!state.originalData[baseId])
-                state.originalData[baseId] = JSON.parse(JSON.stringify(c));
-            });
+            // originalData (撤回/diff 基线) 改懒克隆: 进入编辑某 chara 时才在 chara-edit.enterEditMode 拷贝、
+            // 不再加载时全量克隆 655 角色 (省启动 CPU、key 仍是 base_id 4位)。
             // masou 数据 deepApply revise + 按 weapon_base_id 分组 (chara edit modal 内嵌 masou_overrides 用)
             // masou.json 用 weapon_base_id (chara base_id 4位) 关联、不再叫 chara_id
             state.allMasou = adaptMasouList(masouArr, masouRev);

@@ -182,6 +182,9 @@ export const enterEditMode = (wikiId) => {
   if (!c) return;
   state.editData = JSON.parse(JSON.stringify(c));
   state.editingId = _baseIdOf(state.editData);
+  // originalData (撤回/diff 基线) 懒克隆: 仅首次编辑该 chara 时拷 (c 此刻仍是 pristine)。
+  // 替代加载时全量克隆 655 角色、省启动 CPU。
+  if (!state.originalData[state.editingId]) state.originalData[state.editingId] = JSON.parse(JSON.stringify(c));
   // masouEditData 不每次 reset — 让用户在多个 chara 间切换、masou edit 保留
   _showModal(_renderModalBody(state.editData));
 };
@@ -197,8 +200,8 @@ export const cancelEdit = () => {
 // ============================================================
 export const toggleCharaTag = (tagId) => {
   if (!state.editData) return;
-  // Bug A 修: source of truth 是 _master.tags (_buildCharaPatch 读这个生成 patch)
-  // wiki 顶层 state.editData.tags 也同步、让 _renderTagsSection (读 c.tags) 立即反映
+  // source of truth 是 _master.tags (_buildCharaPatch 读它生成 patch);
+  // wiki 顶层 state.editData.tags 同步、让 _renderTagsSection (读 c.tags) 立即反映
   state.editData._master = state.editData._master || {};
   state.editData._master.tags = state.editData._master.tags || [];
   const arr = state.editData._master.tags;

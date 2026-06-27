@@ -141,6 +141,8 @@ export const enterEditMode = (id) => {
   if (!c) return;
   state.editData = JSON.parse(JSON.stringify(c));
   state.editingId = id;
+  // originalData 懒克隆: 仅首次编辑该 crystal 时拷 (替代加载时全量克隆、省启动 CPU)
+  if (!state.originalData[id]) state.originalData[id] = JSON.parse(JSON.stringify(c));
   invalidateRow(id);   // renderRow 看 editingId 自动渲染 edit body + 重测高度
 };
 

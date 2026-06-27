@@ -3,6 +3,8 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <!-- 提前并行下载主数据 (与 JS 模块图重叠、缩短首屏) -->
+    <link rel="preload" as="fetch" href="../data/souls.json" />
     <title>BxB ソウルデータベース</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="../icons/favicon.ico" type="image/x-icon" />
@@ -190,10 +192,7 @@
         ])
           .then(([arr, revise]) => {
             state.allSouls = adaptSoulList(arr, revise);
-            state.allSouls.forEach((s) => {
-              if (!state.originalData[s.id])
-                state.originalData[s.id] = JSON.parse(JSON.stringify(s));
-            });
+            // originalData 改懒克隆 (soul-edit.enterEditMode 进入编辑时才拷)、不再加载时全量克隆
             applyFilters();
             hideLoading();
           })

@@ -2,6 +2,8 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <!-- 提前并行下载主数据 (与 JS 模块图重叠、缩短首屏) -->
+    <link rel="preload" as="fetch" href="../data/bladegraphs.json" />
     <title>BxB 心象結晶データベース</title>
     {{include _head.html}}
     <link rel="stylesheet" href="../css/bladegraphs.css" />
@@ -106,10 +108,8 @@
         ])
           .then(([arr, revise]) => {
             state.allBG = adaptBgList(arr, revise);
-            state.allBG.forEach((c) => {
-              if (!state.originalData[c.id])
-                state.originalData[c.id] = JSON.parse(JSON.stringify(c));
-            });
+            // originalData 改懒克隆 (见下方 _ensureBgOriginal;bg edit 复活时在 enterEditMode 内调用)、
+            // 不再加载时全量克隆 — 省启动 CPU。
             applyFilters();
             hideLoading();
           })
@@ -137,6 +137,11 @@
       });
 
       // ===== Phase 6 view-only: edit 操作全 no-op =====
+      // originalData 懒克隆 helper (保留备用): 将来恢复 bg edit 时、把 enterEditMode 改成真函数、
+      // 进入编辑时调 _ensureBgOriginal(c) 拿撤回/diff 基线 (参考 cr-edit.js;不在加载时全量克隆)。
+      const _ensureBgOriginal = (c) => {
+        if (!state.originalData[c.id]) state.originalData[c.id] = JSON.parse(JSON.stringify(c));
+      };
       const _noop = () => {};
       Object.assign(window, {
         enterEditMode: _noop, cancelEdit: _noop, saveEdit: _noop, saveRevise: _noop,

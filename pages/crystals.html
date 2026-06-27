@@ -3,6 +3,8 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <!-- 提前并行下载主数据 (与 JS 模块图重叠、缩短首屏) -->
+    <link rel="preload" as="fetch" href="../data/crystals.json" />
     <title>BxB 結晶データベース</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="../icons/favicon.ico" type="image/x-icon" />
@@ -167,10 +169,7 @@
         ])
           .then(([arr, revise]) => {
             state.allCrystals = adaptCrystalList(arr, revise);
-            state.allCrystals.forEach((c) => {
-              if (!state.originalData[c.id])
-                state.originalData[c.id] = JSON.parse(JSON.stringify(c));
-            });
+            // originalData 改懒克隆 (cr-edit.enterEditMode 进入编辑时才拷)、不再加载时全量克隆
             applyFilters();
             hideLoading();
           })
