@@ -45,16 +45,17 @@ const DAILY_HOUR_TP = { 15: "1", 20: "2", 1: "3", 8: "4" };  // UTC hour → tim
 
 // 按触发的 cron 表达式决定调哪个 workflow
 async function runForCron(cron, env) {
-  if (cron === "1 7,15 * * *") {  // JST 16:01 / 00:01
-    await dispatch(env, "update-database.yml");
-  } else if (cron === "8 7 * * *") {
+  if (cron === "8 7 * * *") {
     await dispatch(env, "bxb-topics.yml", { mode: "window" });
   } else if (cron === DAILY_CRON) {
     const tp = DAILY_HOUR_TP[new Date().getUTCHours()];
     if (tp) await dispatch(env, "daily.yml", { time_point: tp, shards: "10" });
   } else {
-    // "1 * * * *" 及其它:按 topics 每小时 auto 轮询
+    // "1 * * * *" 每小时:topics auto 轮询;UTC 7/15 点额外触发 update-database (JST 16:01 / 00:01)。
+    // (一条 cron 触发两个 workflow、省 cron 槽。)
     await dispatch(env, "bxb-topics.yml", { mode: "auto" });
+    const h = new Date().getUTCHours();
+    if (h === 7 || h === 15) await dispatch(env, "update-database.yml");
   }
 }
 
