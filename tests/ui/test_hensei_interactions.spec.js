@@ -1,6 +1,6 @@
-// tests/ui/test_hensei_interactions.spec.js — Phase 6.6 e2e
+// tests/ui/test_hensei_interactions.spec.js — e2e
 // 覆盖 docs/hensei_calc.md「UI 控件 ↔ 计算联动 checklist」18 控件。
-// 公式已按 unpacking + v1 校准 (Phase 6.1 Step 0)。
+// 公式已按 unpacking + v1 校准。
 
 import { test, expect } from '@playwright/test';
 
@@ -460,7 +460,7 @@ test('enemy break OFF → ON → Enemy_BreakAttack 激活 (chara 107701)', async
 });
 
 // ============================================================
-// Phase 6.12 — Speed (転速) + MotionSpeed (攻速) cell
+// — Speed (転速) + MotionSpeed (攻速) cell
 // stats panel 顺序: 攻撃力max(1) / min(2) / 防御力(3) / HP(4) / BK(5) / Hit数(6) / 転速(7) / 攻速(8) / ダメ上限(9)
 // ============================================================
 async function readStatText(page, slot, idx) {
@@ -509,7 +509,7 @@ test('MotionSpeed: 装 chara 100101 → 攻速 fr 转换正确 (motion_speed [4,
 });
 
 // ============================================================
-// Phase 6.13 — enemy bar 字段接 stats-calc
+// — enemy bar 字段接 stats-calc
 // ============================================================
 test('enemy.element 切换 → 攻撃力 变 (元素相性)', async ({ page }) => {
   await waitHenseiReady(page);

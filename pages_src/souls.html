@@ -120,7 +120,7 @@
         navSoul,
         setupStickyHeights,
       } from '../js/soul-render.js';
-      // Phase 7 Session 3: soul-edit (tags only)
+      // soul-edit (tags only)
       import { adaptSoulList } from '../shared/soul-adapter.js';
       import {
         enterEditMode,
@@ -134,10 +134,10 @@
       Nav.init();
 
       // ===== DATA LOAD (master schema → wiki adapter) =====
-      // Phase 6.2 view-only: souls.json 来自 master_tables (master schema)、
+      // view-only: souls.json 来自 master_tables (master schema)、
       // 通过 adapter 转成旧 wiki shape 喂给 soul-render/soul-filter/utils module、UI 1:1 wiki 不变。
       // souls_extra / souls_revise / souls_check 在 仓库不再维护、fetch 失败 fallback []。
-      // Phase 7 Session 2: 同时 fetch soul_revise.json (含 tags 等 user 编辑字段)
+      // 同时 fetch soul_revise.json (含 tags 等 user 编辑字段)
       document.addEventListener('DOMContentLoaded', () => {
         initFilterToggles();
         Promise.all([
@@ -174,7 +174,7 @@
         escHtml,
         fmtBairitu,
         parseBairituVal,
-        // Phase 7 Session 3: soul-edit active (tags only)
+        // soul-edit active (tags only)
         enterEditMode,
         cancelEdit,
         saveEdit,

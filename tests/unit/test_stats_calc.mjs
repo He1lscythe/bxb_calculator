@@ -1,4 +1,4 @@
-// tests/unit/test_stats_calc.mjs — Phase 6.1 4-stage 公式单测
+// tests/unit/test_stats_calc.mjs — 4-stage 公式单测
 // 跑: node --test tests/unit/test_stats_calc.mjs
 import { test } from 'node:test';
 import assert from 'node:assert';
@@ -81,7 +81,7 @@ function mockMasou(over = {}) {
 
 function buildCtx(slots, opts = {}) {
   // slots: [{chara: charaObj | null, soul, bg, masou, crystals: [{id, lv}, ...], tr}]
-  // opts.enemy, opts.allGuildTitles, opts.allGuildEmblems — Phase 6.13 enemy mods 用
+  // opts.enemy, opts.allGuildTitles, opts.allGuildEmblems — enemy mods 用
   const allCharas = slots.filter((s) => s?.chara).map((s) => s.chara);
   const allSouls = slots.filter((s) => s?.soul).map((s) => s.soul);
   const allBGs = slots.filter((s) => s?.bg).map((s) => s.bg);
@@ -966,7 +966,7 @@ test('Vitality_MotionSpeed × HP (HP=100 满激活 speeds 大、HP=0 不激活)'
 });
 
 // ============================================================
-// 14. Phase 6.13: enemy bar 字段接 stats-calc (element / mode / difficulty / bkRes / advWeapons / guildTitle / emblems / bd_cap)
+// 14. enemy bar 字段接 stats-calc (element / mode / difficulty / bkRes / advWeapons / guildTitle / emblems / bd_cap)
 // ============================================================
 // mockChara element_id=1 (火) / weapon_type_id=1 (长剣)
 test('enemy element matchup: 火 vs 水 mode=normal → ×0.5 Attack', () => {
