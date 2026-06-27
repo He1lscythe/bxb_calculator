@@ -1,4 +1,4 @@
-// js/omoide-view.js — Phase 7 Session 3 omoide「潜在開放」view-only
+// js/omoide-view.js — omoide「潜在開放」view-only
 //
 // 视觉 1:1 旧 wiki main:js/latent.js openLatentModal — 复用 css/characters.css 内
 // .omoide-row / .omoide-label / .omoide-slots / .latent-slot / .latent-slot-koka /

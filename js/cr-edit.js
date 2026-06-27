@@ -1,4 +1,4 @@
-// js/cr-edit.js — Phase 7 Session 2 crystal inline edit
+// js/cr-edit.js — crystal inline edit
 //
 // scope: 8 个 server-fold 字段 (master 不可观测、归 revise 管):
 //   max_value / M_L_max / M_W_max / M_P_max
@@ -240,7 +240,7 @@ export const saveEdit = () => {
   } else {
     // 落盘 patch shape (跟 crystal_revise.json schema 一致):
     //   { id, name, max_value: ..., M_L_max: ..., ... }
-    // 直接平铺 8 字段到 patch 顶层 (没有 _master wrapper、Phase 7 plan 设计)
+    // 直接平铺 8 字段到 patch 顶层 (没有 _master wrapper、plan 设计)
     const patch = { id, name: edited.name };
     for (const f of _EDIT_FIELDS) {
       const v = editMasterSubset[f.key];

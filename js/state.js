@@ -31,7 +31,7 @@ export const state = {
   // filter panel
   _filtersOpenScrollY: null,
 
-  // edit mode (Phase 7 Session 3: 加 editingId 当前编辑中 chara base_id)
+  // edit mode (加 editingId 当前编辑中 chara base_id)
   editingId: null,
   editData: null,
   reviseData: {},

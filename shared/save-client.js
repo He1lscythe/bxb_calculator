@@ -1,4 +1,4 @@
-// shared/save-client.js — Phase 7 Session 2 save client
+// shared/save-client.js — save client
 //
 // 用法:
 //   import { submitRevise, showSaveToast } from '../shared/save-client.js';

@@ -1,6 +1,6 @@
-// js/chara-edit.js — Phase 7 Session 3 chara edit modal
+// js/chara-edit.js — chara edit modal
 //
-// scope (Phase 7 plan):
+// scope:
 //   - chara.tags (14 enum 按钮 toggle)
 //   - 各 state.weapon_skills[i].value_scaling (master 已 bake 一次、user 可修正)
 //   - 嵌入 masou_overrides: chara 关联 masou 的 effects[i].value_scaling

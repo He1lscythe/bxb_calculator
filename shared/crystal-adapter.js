@@ -3,7 +3,7 @@
 //
 // master crystal 平铺单 effect 字段 → wiki effects[] 包成数组 (一个 crystal 一般一个 effect)
 //
-// Phase 7 Session 1: master crystals.json 不再含 max_value、改读 data/crystal_revise.json 补
+// master crystals.json 不再含 max_value、改读 data/crystal_revise.json 补
 // adaptCrystalList(arr, revise = []) 内 deepApply 把 revise patch 合到 master、再转 wiki shape
 
 import {

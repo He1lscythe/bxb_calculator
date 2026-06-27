@@ -224,7 +224,7 @@
       import { adaptCrystalList } from '../shared/crystal-adapter.js';
       import { adaptMasouList } from '../shared/masou-adapter.js';
       import { adaptBgList } from '../shared/bg-adapter.js';
-      // ===== stats-calc (Phase 6.1 4-stage) =====
+      // ===== stats-calc (4-stage) =====
       import {
         computeStats,
         baseStats,
@@ -399,8 +399,8 @@
             gt,
             ge,
           ]) => {
-            // master schema → wiki shape via adapter (Phase 6.2)
-            // Phase 7 Session 2: 4 adapter 都接 revise (deepApply patch 到 master 再转 wiki shape)
+            // master schema → wiki shape via adapter
+            // 4 adapter 都接 revise (deepApply patch 到 master 再转 wiki shape)
             // 2026-06-09: bg-adapter 也接 revise (acquisition 走 revise)
             ch = adaptCharaList(ch, chRev);
             so = adaptSoulList(so, soRev);
@@ -1015,7 +1015,7 @@
         refreshAllStats();
       };
       // 玩家在 hensei 槽位上调结晶 weight/purity/lv
-      // Phase 7 Session 2: weight/purity 用 master M_W_max/M_P_max 字段判定 + min_/max_ revise 范围
+      // weight/purity 用 master M_W_max/M_P_max 字段判定 + min_/max_ revise 范围
       //   weight: clamp min_weight..max_weight, 缺省 100 (跟 master 默认值)
       //   purity: clamp min_purity..max_purity, 缺省 100
       //   lv:     clamp 1..cryLvMax, 整数
@@ -2191,7 +2191,7 @@
           sort: '',
           desc: true,
         },
-        // Phase 7 Session 3 patch: bg / crystal facet 用 master schema (effect / condition_trigger / scope)
+        // bg / crystal facet 用 master schema (effect / condition_trigger / scope)
         // 跟 crystals.html / bladegraphs.html viewer 一致 (问题 4)
         bg: {
           q: '',
@@ -2375,7 +2375,7 @@
             Object.keys(WEAPON).map((k) => [+k, WEAPON[k]]),
             f.weapon,
           );
-          // Phase 7 Session 3 patch (问题 4): 改用 PARAMETER_CLASS_LABEL / COND_TRIGGER_LABEL / SCOPE_LABEL
+          // (问题 4): 改用 PARAMETER_CLASS_LABEL / COND_TRIGGER_LABEL / SCOPE_LABEL
           h += fsec('効果', 'effect',
             Object.entries(PARAMETER_CLASS_LABEL).map(([k, v]) => [+k, v]),
             f.effect);
@@ -2404,7 +2404,7 @@
             [1, 2, 3, 4, 5, 6].map((k) => [k, ELEMENT[k], k === 6 ? '' : 'elem-' + k]),
             f.element,
           );
-          // Phase 7 Session 3 patch (问题 4): 改用 PARAMETER_CLASS_LABEL / COND_TRIGGER_LABEL / SCOPE_LABEL
+          // (问题 4): 改用 PARAMETER_CLASS_LABEL / COND_TRIGGER_LABEL / SCOPE_LABEL
           h += fsec('効果', 'effect',
             Object.entries(PARAMETER_CLASS_LABEL).map(([k, v]) => [+k, v]),
             f.effect);
@@ -2444,7 +2444,7 @@
         applyEM();
       };
 
-      // Phase 7 Session 3 patch (问题 4): em-picker filter 直接用 CRYSTAL_SPEC / BG_SPEC
+      // (问题 4): em-picker filter 直接用 CRYSTAL_SPEC / BG_SPEC
       // (跟 crystals.html / bladegraphs.html viewer 1:1 一致)、不再 wrap。
       // 旧 wiki bunrui/scope/condition wrap 已废、effect/condition_trigger/scope 走 spec extract。
 

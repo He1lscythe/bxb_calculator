@@ -120,7 +120,7 @@ export function soulToWiki(s) {
   };
 }
 
-// Phase 7 Session 2: 加 revise 参数、deepApply patch 合到 master 再转 wiki shape
+// 加 revise 参数、deepApply patch 合到 master 再转 wiki shape
 export function adaptSoulList(arr, revise = []) {
   if (!Array.isArray(arr)) return [];
   const reviseById = new Map();

@@ -1,4 +1,4 @@
-// js/soul-edit.js — Phase 7 Session 3 soul edit modal
+// js/soul-edit.js — soul edit modal
 //
 // scope: 只 soul.tags (SOUL_TAG 8 enum 按钮 toggle)
 // 其他 soul 字段 (skills / element_affinity / weapon_affinity / stats) 全只读 — master 准确。
