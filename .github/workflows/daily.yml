@@ -73,3 +73,48 @@ jobs:
           name: results-tp${{ inputs.time_point }}-shard${{ matrix.shard }}
           path: "results-${{ matrix.shard }}.csv"
           if-no-files-found: ignore
+
+  # 仅 time_point 1:把各分片读到的 diamond 合并回 R2 的 accounts.csv(单 writer,回写前写时间戳备份)。
+  aggregate:
+    needs: run
+    if: ${{ inputs.time_point == '1' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: routines
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Fetch base accounts.csv from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+        run: >
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts.csv" accounts.csv
+          --endpoint-url "${{ secrets.R2_ENDPOINT }}"
+      - name: Download tp1 shard results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: results-tp1-shard*
+          path: merged_results
+          merge-multiple: true
+      - name: Merge diamond into accounts.csv
+        run: >
+          python -m daily.writeback
+          --base accounts.csv
+          --results-dir merged_results
+          --out accounts.new.csv
+          --min-rows 1
+      - name: Backup + write back to R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+        run: |
+          JST_DATE=$(TZ=Asia/Tokyo date +%Y%m%d)
+          aws s3 cp accounts.csv "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts-${JST_DATE}.csv" --endpoint-url "${{ secrets.R2_ENDPOINT }}"
+          aws s3 cp accounts.new.csv "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts.csv" --endpoint-url "${{ secrets.R2_ENDPOINT }}"
