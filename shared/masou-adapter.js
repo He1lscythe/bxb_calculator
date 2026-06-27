@@ -1,6 +1,6 @@
 // shared/masou-adapter.js — masou.json + masou_revise.json → final shape
 //
-// Phase 7 Session 2: masou.json schema 已是 raw shape (跟 wiki main 几乎一致)、
+// masou.json schema 已是 raw shape (跟 wiki main 几乎一致)、
 // 不做 schema 转换、仅 deepApply revise patch (effects[].value_scaling 等)
 //
 // masou_revise key 是 weapon_costumes.id (7 位)、独立 masou_session_ids namespace

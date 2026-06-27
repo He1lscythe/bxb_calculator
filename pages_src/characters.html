@@ -230,7 +230,7 @@
       import { state } from '../js/state.js';
       // omoide_templates 已删除 (用户决策: omoide 走 Frida 抓包 chara._omoide_slots、不用 templates)
       import { fmtNum, ctPfx, parseBairituVal, hideLoading } from '../js/utils.js';
-      // Phase 7 Session 1: 删旧 edit module (js/edit.js / save-edit-base.js)、Session 2/3 改用新 edit
+      // 删旧 edit module (js/edit.js / save-edit-base.js)、Session 2/3 改用新 edit
       import {
         applyFilters,
         initFilterToggles,
@@ -247,7 +247,7 @@
         switchState,
         _scheduleMeasure,
       } from '../js/render.js';
-      // Phase 7 Session 3: chara-edit (tags + skills value_scaling + masou_overrides) + omoide-view (view-only) + masou modal (active)
+      // chara-edit (tags + skills value_scaling + masou_overrides) + omoide-view (view-only) + masou modal (active)
       import { openMasouModal, closeMasouModal } from '../js/masou.js';
       import { adaptCharaList } from '../shared/chara-adapter.js';
       import { adaptMasouList } from '../shared/masou-adapter.js';
@@ -266,7 +266,7 @@
       Nav.init();
 
       // ===== DATA LOAD (master schema → wiki adapter) =====
-      // Phase 6 view-only: characters.json / masou.json 来自 master_tables (master schema)、
+      // view-only: characters.json / masou.json 来自 master_tables (master schema)、
       // 通过 adapter 转成旧 wiki shape 喂给 render/filter/utils module、UI 1:1 wiki 不变。
       // characters_extra / characters_revise / masou_extra / masou_revise / omoide_revise /
       // omoide_templates / senzai_table / characters_check 在 仓库不再维护、fetch 失败 fallback []。
@@ -275,7 +275,7 @@
         .then((d) => { state.SENZAI_TABLE = d; })
         .catch(() => {});
 
-      // Phase 7 Session 3: fetch chara + masou data 并 deepApply revise (chara/masou edit mode 需要 masou data)
+      // fetch chara + masou data 并 deepApply revise (chara/masou edit mode 需要 masou data)
       document.addEventListener('DOMContentLoaded', () => {
         initFilterToggles();
         Promise.all([
@@ -339,7 +339,7 @@
         switchState,
         initFilterToggles,
         updateReviseBar,
-        // Phase 7 Session 3: chara/soul edit + omoide-view + masou modal active
+        // chara/soul edit + omoide-view + masou modal active
         enterEditMode,
         cancelEdit,
         saveEdit,

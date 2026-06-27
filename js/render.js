@@ -225,7 +225,7 @@ export const renderDetail = (c) => {
     .join('');
 
   const bdSection = c.bd_skill?.name ? renderBDCard(c.bd_skill) : '';
-  // Phase 7 Session 3: omoide 数据 lazy fetch (data/omoide/{base_id}.json)、不预先判 hasOmoide
+  // omoide 数据 lazy fetch (data/omoide/{base_id}.json)、不预先判 hasOmoide
   //   master chara.omoide=[] (无该字段)、真实数据在 Frida-抓 data/omoide/*.json、所以按钮永远显示、
   //   modal 内 fetch 失败显示 "(なし)" — omoide-view.js 处理
   const omoideBtn = `<button class="btn-latent btn-omoide" onclick="openLatentModal(${c.id})">潜在開放</button>`;

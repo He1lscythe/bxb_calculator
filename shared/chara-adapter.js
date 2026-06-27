@@ -1,7 +1,7 @@
 // characters.json (master_tables schema) → wiki characters.json shape
 // 让 js/render.js / js/utils.js / shared/chara-spec.js 直接消费、UI 一致。
 //
-// Phase 7 Session 2: adaptCharaList(arr, revise) deepApply revise patch 到 master 后转 wiki shape
+// adaptCharaList(arr, revise) deepApply revise patch 到 master 后转 wiki shape
 
 import { deepApply } from './revise-core.js';
 //
@@ -115,7 +115,7 @@ export function paramToBunruiAndCondition(param) {
 //   2 Repel_Percent→ '×N %' (概率回避、value=N 表示 N% 几率全免疫)
 // 跳过 (return null): None / NoEffect / Set / 未识别
 //   - None/NoEffect: BD 特殊効果占位、不该作为数值效果显示
-//   - Set: master 数据 chara 端无、UI 不渲染 (Phase 7 edit 若需再加回)
+//   - Set: master 数据 chara 端无、UI 不渲染 (edit 若需再加回)
 // export 让 soul-adapter / crystal-adapter / bg-adapter 复用
 export const MATH_TYPE_TO_CALC = {
   Multiply: 0,
@@ -337,7 +337,7 @@ export function charaToWiki(c) {
   };
 }
 
-// Phase 7 Session 2: 加 revise 参数、deepApply patch 合到 master 再转 wiki shape
+// 加 revise 参数、deepApply patch 合到 master 再转 wiki shape
 //   revise: chara_revise.json (sparse diff、按 base_id 4 位)
 export function adaptCharaList(arr, revise = []) {
   if (!Array.isArray(arr)) return [];

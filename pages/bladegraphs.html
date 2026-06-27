@@ -140,7 +140,7 @@
         applyFilters,
         toggleExpand,
       } from '../js/bg-list.js';
-      // Phase 7 Session 1: 删 js/bg-edit.js import、Phase 7 不复活 bg edit (master 数据 100% 准确、无 server-fold 字段需补)
+      // 删 js/bg-edit.js import、不复活 bg edit (master 数据 100% 准确、无 server-fold 字段需补)
       import { adaptBgList } from '../shared/bg-adapter.js';
 
       Nav.init();
@@ -176,13 +176,13 @@
         resetFilters,
         toggleFilters,
         toggleExpand,
-        // Phase 7 Session 1: 删 edit 函数引用、view-only 期靠下方 _noop stub
+        // 删 edit 函数引用、view-only 期靠下方 _noop stub
         updateReviseBar,
         escHtml,
         parseBairituVal,
       });
 
-      // ===== Phase 6 view-only: edit 操作全 no-op =====
+      // ===== view-only: edit 操作全 no-op =====
       // originalData 懒克隆 helper (保留备用): 将来恢复 bg edit 时、把 enterEditMode 改成真函数、
       // 进入编辑时调 _ensureBgOriginal(c) 拿撤回/diff 基线 (参考 cr-edit.js;不在加载时全量克隆)。
       const _ensureBgOriginal = (c) => {

@@ -1,5 +1,5 @@
 // js/masou.js — 魔装 (masou) view modal、chara detail page 用。
-// Phase 7 Session 4 重构: 删全部旧 wiki edit-mode 代码 (renderMasouEditSection /
+// 重构: 删全部旧 wiki edit-mode 代码 (renderMasouEditSection /
 // _renderMasouEditCard / _renderMasouEffectEdit / toggleMasouBunrui)、edit pipeline
 // 走 chara-edit.js masou_overrides modal、跟此文件解耦。
 
