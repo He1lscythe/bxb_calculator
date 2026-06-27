@@ -1,10 +1,9 @@
-// tests/ui/test_crystal_vlist.spec.js — crystal 虚拟列表回归 (2026-06-20)
+// tests/ui/test_crystal_vlist.spec.js — crystal 虚拟列表行为
 //
-// 修两个会导致"只显示上面一部分、往下空白 / 全量渲染占内存"的 bug:
+// 覆盖两点:
 //   A. resize 跨响应式断点 (desktop #crystal-list overflow:auto ↔ mobile overflow:visible→window)
-//      后 scroll 父元素失效 → virtual-list 现在 resize 时重检测 _scrollEl + 重绑监听。
-//   B. expandAll/collapseAll/applyFilters 改 row kind 但不走 invalidateRow、旧高度残留 →
-//      virtual-list 的 setItems 现在清 heights 缓存、totalHeight 不再失真。
+//      时 virtual-list 重检测 _scrollEl + 重绑监听、保持虚拟化。
+//   B. expandAll/collapseAll/applyFilters 改 row kind 时、setItems 清 heights 缓存、totalHeight 不失真。
 import { test, expect } from '@playwright/test';
 
 async function loadCrystals(page) {

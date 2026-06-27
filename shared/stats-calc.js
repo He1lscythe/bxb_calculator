@@ -1,4 +1,4 @@
-// shared/stats-calc.js — Hensei 4-stage 计算 (Phase 6.1)
+// shared/stats-calc.js — Hensei 4-stage 计算
 //
 // 按 docs/hensei_calc.md 设计:
 //   base = lv × 熟度 × 觉醒  (内嵌)
@@ -9,7 +9,7 @@
 //   Repel_Percent: 独立 status 回避率通道
 //
 // Effect 来源 (_source):
-//   omoide      — chara.omoide[] memory slot (master 没数据、暂时空、未来 Phase 8 抓包)
+//   omoide      — chara omoide memory slot effect (Frida 抓包、按 affection_threshold gate)
 //   masou       — masou.effects (装到 chara 的装备 skill)
 //   chara_skill — chara state.weapon_skills (chara 自身被动 skill)
 //   crystal     — 装备的 crystal effect (×6 slot)
@@ -38,7 +38,7 @@ import {
   parseHit,
 } from './hensei-helpers.js';
 
-// 倍率四舍五入到 5 位小数 (复刻游戏精度、用户决策 2026-06-20): ×1.894815 → ×1.89482 再乘算
+// 倍率四舍五入到 5 位小数 (复刻游戏精度): ×1.894815 → ×1.89482 再乘算
 const _round5 = (x) => Math.round((Number(x) || 0) * 1e5) / 1e5;
 
 // MP rate (unpacking §3.9.1、攻撃力/ブレイク力 × rate): mp_ratio = curMp / maxMp
@@ -74,7 +74,7 @@ export function mkTr() {
     moeshin: false,        // 燃心
     lp: 0,                 // LP 档 (0=満 / 1=低 / 2=危機)
     mp: null,              // 当前 MP (null = 满);mp_ratio<0.5 时攻撃/ブレイク × _mpRate
-    bd_on: false,          // BD 状态 (IsBlaze gate、Phase 8 实测)
+    bd_on: false,          // BD 状态 (IsBlaze gate)
     hp: 100,               // HP%
     affinity: 0,
     omoide_picks: [],
@@ -93,7 +93,7 @@ export function maxLevelAtMature(stateData, mature) {
 }
 
 // chara state base stat at given lv/mature/awakening
-// 公式 (用户决策、修正 wiki v1 公式 bug — 旧公式 lv=1 给 max-initial 不直观):
+// 公式:
 //   base 段 (lv ≤ cap): initial + (max - initial) * (lv - 1) / (max_max_level - 1)
 //     lv=1 → initial、lv=max_max_level → max、线性插值
 //   觉醒段 (lv > cap): 上式 × (1 + (lv-cap)/(awk_max*5) * (mult-1))
@@ -138,10 +138,10 @@ export function baseStats(charaWiki, tr) {
 
 // ============================================================
 // HP-curve / Break gate / FellDown / Enemy_Break factor
-// 按 docs/hensei_calc.md 沿用 wiki 线性公式 (Phase 8 Frida 实测精化)
+// 按 docs/hensei_calc.md 的 wiki 线性公式
 // ============================================================
 // parameter 有 HP-curve prefix 时、按 **接收方(target)自身 HP** 算 factor (该 buff 应用到谁就看谁的 HP;
-// range=All 的 HP-curve buff 从别 slot 来时、用 target 的 HP 而非 source 的、2026-06-19 修正)。
+// range=All 的 HP-curve buff 从别 slot 来时、用 target 的 HP 而非 source 的)。
 //   Vitality_*  → factor = hp_pct / 100
 //   RemHP_*     → factor = (100 - hp_pct) / 100
 //   Break_*     → factor = 1 if hp_pct <= 50 else 0  (unpacking §2.3: IsBreak = HpRate ≤ 0.5 含等号)
@@ -179,7 +179,7 @@ export function _effectApplies(eff, targetChara, srcChara, srcSlot, targetSlot) 
   const sm = srcChara?._master;    // 装备者 (source / equipper、effect 所在装备挂的魔剣)
   const tm = targetChara?._master; // 接收方 (target、正在算 stat 的魔剣)
   // *_condition (souls「X属性装備で…」): 判**装备者自身**的属性 / 武器门槛、不命中整条不激活。
-  //   souls 全用 *_condition、weapons 全用 target_element_id/weapon_type_id (2026-06-19 扫描确认、语义相反)。
+  //   souls 全用 *_condition、weapons 全用 target_element_id/weapon_type_id (语义相反)。
   //   range=Single 时 src===target、跟旧 target 判定等价;range=All 才有区别 (看装备者、非接收方)。
   if (eff.element_condition && sm?.element_id !== eff.element_condition) return false;
   if (eff.weapon_type_condition && sm?.weapon_type_id !== eff.weapon_type_condition) return false;
@@ -198,7 +198,6 @@ export function _effectApplies(eff, targetChara, srcChara, srcSlot, targetSlot) 
   //   语义 = 「**装备者(source)** 那把魔剣的 base id == X 才激活这条技能」、跟 sm.id 比对、不是 tm。
   //   chara≡魔剣 (同一 base id 空间)、所以 chara 限定结晶/刻印也归到 weapon_base_id。
   //   按装备者判 → range=All 时门槛只判一次、范围交给 range (range=Single 时 src===target、行为不变)。
-  //   (旧版误比 tm: All-range 时只有「接收方那把恰好==X」才过、队友漏吃、2026-06-24 修正)
   const limId = eff.weapon_base_id;
   if (limId && sm?.id !== limId) return false;
   return true;
@@ -289,7 +288,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     }
     if (factor === 0) return;
     // chara skill: value_scaling × jukudo 熟度成长
-    // omoide source 走 omoideEffectiveScaling fallback (Frida 抓的 value_scaling 全空、用户实测 0.003)
+    // omoide source 走 omoideEffectiveScaling fallback (value_scaling 空时走实测 fallback、见 docs/hensei_calc.md)
     const srcJk = team[srcSlot]?.tr?.jukudo || 1;
     let value;
     if (opts.valueOverride != null) {
@@ -305,7 +304,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     const entry = {
       _source: source,
       _src_slot: srcSlot,
-      // trace 显示用: description (效果文) 优先、fallback name (2026-06-10 用户决策)
+      // trace 显示用: description (效果文) 优先、fallback name
       _src_name: opts.srcName || raw.description || raw.name || null,
       parameter: param,
       base_parameter: baseParameter(param),
@@ -325,7 +324,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
       }
     }
     collected.push(entry);
-    // HitCountKeepDamage 第二效果「减攻」: 加 B hit 的同时 Attack ×= A/(A+B)、フルヒット保持不变 (用户 2026-06-19)。
+    // HitCountKeepDamage 第二效果「减攻」: 加 B hit 的同时 Attack ×= A/(A+B)、フルヒット保持不变。
     //   A = 目标魔剣原始 hit_counts 之和 (characters.json、未经任何计算)、B = 本效果加 hit 总量 = Σ_stages。
     //   分类到 Attack、进 PSV 池 (applyStaged Stage 4 Mul、跟原 source 同 stage)。
     if (entry.base_parameter === 'HitCountKeepDamage') {
@@ -358,7 +357,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     }
 
     // 1b. bd_skill.effects (tr.bd_on=true 时激活、BD 释放后队伍 buff)
-    // 不考虑伤害公式 (Phase 8 IsBlaze gate)、只把 effects 当普通 buff 加入
+    // 不考虑伤害公式 (IsBlaze gate)、只把 effects 当普通 buff 加入
     if (trSlot.bd_on && cMaster.bd_skill?.effects) {
       // BD 条数: buff 倍率/值 = value + additional_value × bdCount (默认 bdCount = bd_skill.cost、hensei UI 可调 0..bdCapMax)
       const bdCount = trSlot.bd_count != null ? trSlot.bd_count : (cMaster.bd_skill.cost ?? 0);
@@ -376,7 +375,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     //      chara._omoide_slots  = [{ affection_threshold, weapon_skills: [候选...] }, ...] (40 slot、Frida 抓包)
     //      trSlot.omoide_picks  = { [slotIdx]: skillId }  (用户在 picker 内选的)
     //    每 slot 激活条件: picks[slotIdx] != null && affection_threshold ≤ tr.affinity
-    //    用户决策: Add → _source='omoide' (stage 1)、Mul → _source='omoide_mul' (stage 3)
+    //    Add → _source='omoide' (stage 1)、Mul → _source='omoide_mul' (stage 3)
     //    空 picks (用户未在 picker 选过) → 不激活任何 omoide buff
     const omoideSlots = slot.chara?._omoide_slots || [];
     const omoidePicks = trSlot.omoide_picks || {};
@@ -394,18 +393,18 @@ export function collectEffects(team, targetSlotIdx, ctx) {
 
     // 3. soul (按 v1: sourceMult × effect.value、不分 Mul/Add)
     //   v1 main:js/stats-calc.js L766: soulMult = soulMultiplier(soul.rarity, tr.soul_lv)
-    //   用户决策: mul = effect.value × soulMult、add = effect.value × soulMult (一刀切)
+    //   mul = effect.value × soulMult、add = effect.value × soulMult (一刀切)
     if (slot.soul?._master?.skills) {
       const sMaster = slot.soul._master;
       const sourceMult = soulMultiplier(sMaster.rarity || 1, trSlot.soul_lv || 1);
       for (const sk of sMaster.skills) {
         const scaled = (sk.value || 0) * sourceMult;
-        // stageMult: HitCount values=[a,b,c] 数组路径也吃等级加成 (2026-06-10 用户确认)
+        // stageMult: HitCount values=[a,b,c] 数组路径也吃等级加成
         pushEff(slot.chara, i, 'soul', sk, { valueOverride: scaled, stageMult: sourceMult });
       }
     }
 
-    // 4. crystals (6 slot、Phase 7 Session 2: 用 crystalEffectiveValue 统一公式 + fallback)
+    // 4. crystals (6 slot、用 crystalEffectiveValue 统一公式 + fallback)
     //   公式跟 shared/hensei-helpers.js crystalEffectiveValue 一致 (单一来源、避免漂移)
     //   cfg 三参 lv / weight / purity 都来自 cr._config (hensei UI 滑条)
     for (const cr of slot.crystals || []) {
@@ -497,7 +496,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     }
   }
 
-  // === Phase 6.13: enemy guildTitle + emblems effects (wiki schema、需转 master shape)
+  // === enemy guildTitle + emblems effects (wiki schema、需转 master shape)
   // wiki effect: { bunrui: [int], scope, condition, bairitu, calc_type, element?, weapon? }
   // → 转 master: { parameter, math_type, value, range, target_element_id, weapon_type_id }
   // gate:
@@ -555,7 +554,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     }
   }
 
-  // === Rise_AttackRate 放大器 (meta-pass、2026-06-23): 目标自身有 Rise_AttackRate (魔剣固有) →
+  // === Rise_AttackRate 放大器 (meta-pass): 目标自身有 Rise_AttackRate (魔剣固有) →
   //     把目标「自身 loadout」(_src_slot===target) 的 Attack 系 (base_parameter==='Attack') 增益 ×V。
   //     source 限 chara_skill/crystal/bg/soul (排除 omoide「潜在Skill除く」/ chara_meta / soul_affinity / enemy_buff)。
   //     目前仅 1508 蒼き悪竜の渇欲 / 1530 もちもち (均 ×2.5)。
@@ -594,7 +593,7 @@ function emblemLvMaxLocal(rarity) {
 // inline ×3 = step 51 (enemy.bk 时 Total ×= 3、跟 step 48/49 Enemy_BreakAttack 独立 gate)
 
 // omoide_mul 来自 omoide source 的 Multiply effect
-// enemy_buff = enemy bar guildTitle / emblems 的 effects (Phase 6.13、走 stage 3 Mul + stage 4 Add)
+// enemy_buff = enemy bar guildTitle / emblems 的 effects (走 stage 3 Mul + stage 4 Add)
 const _OTHER_SOURCES = new Set(['chara_skill', 'bd_skill', 'crystal', 'bg', 'soul', 'chara_meta', 'soul_affinity', 'omoide_mul', 'enemy_buff']);
 
 // HpCheck 普通攻击表 (unpacking §3.5.3): tier 0..3
@@ -611,8 +610,8 @@ export const traceSrcLabel = (e) =>
 //   opts.enemyBkX3 — enemy.bk=true 时 Total ×3 (step 51 inline)
 //   opts.traceStages — {stageKey: stageObj} (dev trace、null=off)、opts.statLabel — trace step.stat 用 display 名
 //
-// 实现说明: 旧版 sumAdd/prodMul fold、为 trace 逐 effect 化。数学差异仅浮点结合顺序
-// (v+(a+b) vs (v+a)+b)、出口 _norm(1e9 round)+ceil 吸收、unit test 锁行为一致。
+// 逐 effect fold (非 sumAdd/prodMul 合并)、便于 trace 单步展示。浮点结合顺序差异
+// (v+(a+b) vs (v+a)+b) 由出口 _norm(1e9 round)+ceil 吸收。
 export function applyStaged(base, parameter, effects, opts = {}) {
   const same = effects.filter((e) => e.base_parameter === parameter);
   const _norm = (x) => Math.round(x * 1e9) / 1e9;
@@ -648,7 +647,7 @@ export function applyStaged(base, parameter, effects, opts = {}) {
   };
 
   // HP-curve / gate 前缀 (Vitality_/RemHP_/Break_/FellDown_) 是 client 动态值、不能 server-fold —
-  // masou 此类 effect 不进 s2a/s2b (server-fold 段)、改走 s4a/s5a (2026-06-10 用户决策)
+  // masou 此类 effect 不进 s2a/s2b (server-fold 段)、改走 s4a/s5a
   const _isDynamic = (e) => /^(Vitality_|RemHP_|Break_|FellDown_)/.test(e.parameter || '');
 
   // Stage 1: omoide Add
@@ -670,7 +669,7 @@ export function applyStaged(base, parameter, effects, opts = {}) {
     _push('s3_lp', 'LP tier', 'mul', lpMult, b, v);
   }
   // Stage 4/5: other Mul / Add (chara_skill/bd_skill/crystal/bg/soul/chara_meta/soul_affinity/omoide_mul)
-  // 顺序 (2026-06-10 用户决策、计算跟 trace 显示一致、stage 一级目录可见分类):
+  // 顺序 (计算跟 trace 显示一致、stage 一级目录可见分类):
   //   s4a 非 soul Mul (chara/crystal/bg/魔装/meta…) → s4b ソウル Mul → s5a 非 soul Add → s5b ソウル Add
   //   各类内按 slot 升序 (stable sort、同 slot 内保持 collectEffects push 顺序)
   const _isSoulSrc = (e) => e._source === 'soul' || e._source === 'soul_affinity';
@@ -707,7 +706,7 @@ export function applyStaged(base, parameter, effects, opts = {}) {
 
 // ============================================================
 // Server-fold 顺序 (HP / HitCount 战前一次性 server fold、不走 EAD 分组 pipeline)
-// 顺序 (2026-06-19 用户指定，复刻 server 拼 weapon_skills 数组的 block 顺序):
+// 顺序 (复刻 server 拼 weapon_skills 数组的 block 顺序):
 //   自身好感(omoide) → 自身costume(masou) →
 //   各 slot[ 技能(chara_skill/bd/meta) → 结晶(crystal) → costume(masou、自身已在前面、跳过) ] →
 //   各 slot bg → 各 slot soul → 其余(他 slot omoide / enemy_buff 等)
@@ -734,7 +733,7 @@ export function orderServerFold(list, targetSlotIdx) {
   for (let s = 0; s < 3; s++) take((e) => e._source === 'bg' && e._src_slot === s);
   for (let s = 0; s < 3; s++) take((e) => (e._source === 'soul' || e._source === 'soul_affinity') && e._src_slot === s);
   take((e) => e._source !== 'bd_skill'); // 其余(他 slot omoide / enemy_buff 等)、bd 除外
-  // bd_skill 最后: BD 战斗时(発動後)生效、排在所有 buff 之后 (用户 2026-06-20)
+  // bd_skill 最后: BD 战斗时(発動後)生效、排在所有 buff 之后
   take(() => true);
   return out;
 }
@@ -762,7 +761,7 @@ export function serverFoldHP(base, effects, targetSlotIdx, opts = {}) {
       if (st) st.steps.push({ src: traceSrcLabel(e), stat: 'HP', op: 'add', val: a, before, after: v });
     }
   }
-  const out = Math.floor(_norm(v)); // server max_hp 为整数 (base 已 floor、用户决策 2026-06-19)
+  const out = Math.floor(_norm(v)); // server max_hp 为整数 (base 已 floor)
   if (st && out !== v) st.steps.push({ src: 'server-fold floor', stat: 'HP', op: 'floor', val: null, before: v, after: out });
   return out;
 }
@@ -887,7 +886,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
     GuardBreak: applyStaged(base.GuardBreak, 'GuardBreak', effects, { traceStages, statLabel: 'ブレイク力' }),
   };
 
-  // Phase 6.13: enemy bar 硬编码倍率 (element matchup / difficulty / bkRes / advWeapons / bd_cap)
+  // enemy bar 硬编码倍率 (element matchup / difficulty / bkRes / advWeapons / bd_cap)
   // guildTitle/emblems 已通过 collectEffects 走 stage 3/4、这里只处理硬编码字段
   const stEnemyMods = mkStage('s8_enemy_mods', '敵 mods (相性/難度等)');
   const enemyMods = _computeEnemyMods(chara, tr, ctx);
@@ -934,7 +933,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   while (baseHits.length < 3) baseHits.push(0);
   if (trace) trace.hitsBase = baseHits.slice();
   // hits 战前 server-fold (serverFoldHitCount: orderServerFold 顺序 + 每步 trunc + 每步 clamp ≥1、
-  // unpacking 17_hitcount.md §17.2.1/§17.8.3、2026-06-19 用户确认替代旧 Mul-then-Add 分组)
+  // unpacking 17_hitcount.md §17.2.1/§17.8.3)
   const hits = serverFoldHitCount(baseHits, effects, slotIdx, stHits);
   const totalHits = hits.reduce((s, h) => s + h, 0);
 
@@ -1204,7 +1203,7 @@ function _computeMotionSpeed(chara, tr, effects, trace = null, traceStage = null
 }
 
 // ============================================================
-// Phase 6.13: enemy bar 硬编码倍率 (element matchup / difficulty / bkRes / advWeapons / bd_cap)
+// enemy bar 硬编码倍率 (element matchup / difficulty / bkRes / advWeapons / bd_cap)
 // element / bd_cap 全局生效；difficulty / bkRes-high / advWeapons 仅 isGuildMode 生效
 // 返 { attackMul, bkMul } — 在 _computeImpl 内乘到 Attack / GuardBreak (stage 后、UI 显示前)
 // guildTitle/emblems 不在此处、走 collectEffects 注入 enemy_buff source
@@ -1275,6 +1274,6 @@ export const _STAT_KEYS = ['HP', '攻撃力', '防御力', 'ブレイク力'];
 // ============================================================
 // hensei 防御力 = s10 (玩家防御吸收量、damage units) = base × Π Mul + Σ Add
 // = applyStaged(base.Defense, 'Defense', effects)
-// 用户决策:
+// 说明:
 //   - 只显示玩家防御值 (s10)、不算被打时最终伤害
 //   - SwapAttackDefense=true 模式 (剑魂特殊玩法) 不考虑、所有 chain 按 swap=false (正常对战)
