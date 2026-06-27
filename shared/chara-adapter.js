@@ -1,5 +1,5 @@
 // characters.json (master_tables schema) → wiki characters.json shape
-// 让 main 旧版 js/render.js / js/utils.js / shared/chara-spec.js 1:1 跑起来、UI 100% 一致。
+// 让 js/render.js / js/utils.js / shared/chara-spec.js 直接消费、UI 一致。
 //
 // Phase 7 Session 2: adaptCharaList(arr, revise) deepApply revise patch 到 master 后转 wiki shape
 

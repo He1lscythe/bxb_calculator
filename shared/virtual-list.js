@@ -268,13 +268,9 @@ export class VirtualList {
 
 // row 测量后行为决策 — 纯函数、可单测
 //
-// 关键设计 (2026-06-10 修 bg vlist 高度失准 bug):
-// shouldCache **总是** true (real > 0 时)、不论 real 是否跟 e.height 同。
-//   若 real==e.height (estimate 凑巧准) 不 cache、那 row 后续仍走 estimate; 后面其他 row
-//   不同 kind value 测到、kindH 更新 → 这 row 的 estimate 漂到新 kindH → layout 错位。
-//   例: bg 1023 (4-field 187px) measure 时 kindH=187、real==e.height、旧版不 cache。
-//     随后 bg 1022 (3-field 156px) measure → kindH→156、_computeLayout 给 1023 用 estimate=156、错。
-// shouldRelayout = real ≠ estimate (real==estimate 时 layout 已正确)。
+// shouldCache = real > 0 (测到真高就缓存、不论是否等于 estimate):
+//   每个 row 缓存自己的真实高度、避免后续别的 row 更新 kindH 时本 row 的 estimate 漂移导致 layout 错位。
+// shouldRelayout = real ≠ estimate (相等时 layout 已正确)。
 // shouldNotify = prevCached ≠ real (避免重复触发 onMeasure callback)。
 export const decideMeasure = (real, prevCached, estimate) => {
   if (!(real > 0)) return { shouldCache: false, shouldRelayout: false, shouldNotify: false };

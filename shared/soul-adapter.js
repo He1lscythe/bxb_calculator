@@ -1,5 +1,5 @@
 // souls.json (master_tables schema) → wiki souls.json shape
-// 让 main 旧版 js/soul-render.js / js/utils.js / shared/soul-spec.js 1:1 跑起来。
+// 让 js/soul-render.js / js/utils.js / shared/soul-spec.js 直接消费。
 //
 // 复用 chara-adapter 的:
 //   paramToBunruiAndCondition / MATH_TYPE_TO_CALC / injectHitStages
