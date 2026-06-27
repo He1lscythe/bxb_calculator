@@ -1,9 +1,10 @@
 // bxb-dispatch — Cloudflare Worker
 //
 // 用 Cloudflare 的 Cron Trigger(可靠、即时、不会像 GitHub schedule 那样排队丢弃)
-// 去调 GitHub 的 workflow_dispatch API，可靠地定时触发两个 workflow:
+// 去调 GitHub 的 workflow_dispatch API，可靠地定时触发:
 //   update-database.yml  (JST 16:15 / 00:15)
 //   bxb-topics.yml       (每小时 auto 轮询 + 每日 window 兜底重爬)
+//   daily.yml            (账号日常维护、4 个时间点;文件在 main、checkout routines)
 //
 // GitHub 原生 cron 仍保留作兜底(job 幂等，重复触发只会 no-op / rebase)。
 //
@@ -36,12 +37,18 @@ async function dispatch(env, workflowFile, inputs) {
   return res.status;
 }
 
+// daily.yml(账号日常维护)4 个时间点:UTC cron → time_point。
+// daily.yml 文件在 main(默认分支、才能被 dispatch)、内部 checkout routines 拉代码。
+const DAILY_CRON_TP = { "29 15 * * *": "1", "29 20 * * *": "2", "29 1 * * *": "3", "29 8 * * *": "4" };
+
 // 按触发的 cron 表达式决定调哪个 workflow
 async function runForCron(cron, env) {
   if (cron === "1 7,15 * * *") {  // JST 16:01 / 00:01
     await dispatch(env, "update-database.yml");
   } else if (cron === "8 7 * * *") {
     await dispatch(env, "bxb-topics.yml", { mode: "window" });
+  } else if (DAILY_CRON_TP[cron]) {
+    await dispatch(env, "daily.yml", { time_point: DAILY_CRON_TP[cron], shards: "10" });
   } else {
     // "1 * * * *" 及其它:按 topics 每小时 auto 轮询
     await dispatch(env, "bxb-topics.yml", { mode: "auto" });
@@ -53,7 +60,7 @@ export default {
     ctx.waitUntil(runForCron(event.cron, env));
   },
 
-  // 手动测试端点: GET /trigger?key=<TRIGGER_KEY>&wf=update-database|topics-auto|topics-window
+  // 手动测试端点: GET /trigger?key=<TRIGGER_KEY>&wf=update-database|topics-auto|topics-window|daily-1..4
   async fetch(req, env) {
     const u = new URL(req.url);
     if (u.pathname !== "/trigger") {
@@ -68,6 +75,8 @@ export default {
       status = await dispatch(env, "update-database.yml");
     } else if (wf === "topics-window") {
       status = await dispatch(env, "bxb-topics.yml", { mode: "window" });
+    } else if (wf.startsWith("daily-")) {  // daily-1..4
+      status = await dispatch(env, "daily.yml", { time_point: wf.slice(6) || "2", shards: "10" });
     } else {
       status = await dispatch(env, "bxb-topics.yml", { mode: "auto" });
     }

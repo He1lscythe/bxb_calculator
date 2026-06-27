@@ -7,9 +7,10 @@ compatibility_date = "2026-06-16"
 #   1 7,15 * * *   → update-database  (JST 16:01 / 00:01)
 #   1 * * * *      → topics auto       (每小时 :01)
 #   8 7 * * *      → topics window     (JST 16:08 每日兜底重爬)
+#   29 15/20/1/8 * * * → daily 时间点 1/2/3/4 (账号日常、JST 00:29/05:29/10:29/17:29)
 # 注:此文件为参考记录(dashboard 粘贴部署),实际 cron 以 Worker dashboard 为准。
 [triggers]
-crons = ["1 7,15 * * *", "1 * * * *", "8 7 * * *"]
+crons = ["1 7,15 * * *", "1 * * * *", "8 7 * * *", "29 15 * * *", "29 20 * * *", "29 1 * * *", "29 8 * * *"]
 
 # Secret(不写在这里，用 `wrangler secret put` 或 dashboard 设):
 #   GH_TOKEN     fine-grained PAT (bxb_calculator, Actions: Read and write)
