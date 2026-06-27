@@ -18,7 +18,7 @@ on:
       shards:
         description: "分片数 N(并行 job 数,各跑 1/N 账号、各自独立 IP)"
         required: false
-        default: "10"
+        default: "16"
 
 jobs:
   prepare:
@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 10            # 同时最多 10 个 job(=10 个 IP);按需调
+      max-parallel: 16            # 同时最多 16 个 job(=16 个 IP);账号免费版 20 并发上限、留 headroom 给 update-database/topics
       matrix:
         shard: ${{ fromJSON(needs.prepare.outputs.matrix) }}
     steps:
