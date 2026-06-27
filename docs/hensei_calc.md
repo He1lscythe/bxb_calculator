@@ -359,7 +359,8 @@ console 输入 `window.__DEBUG_STATS = true` → 切控件时输出：
   `cur = trunc(cur op effVal); if cur<=0: cur=1` 逐 effect、终值 `max(1, cur)`
   例: base 3、soul Add +6 (×1.8 等级) → floor(3+10.8)=13 → 下一 effect 从 13 起
 - soul HitCount `values=[a,b,c]` 数组: 每段 × soulMultiplier (跟单值路径一致吃等级加成)
-- omoide Mul → stage 3 (用户决策)
+- omoide Mul → stage 3
+- omoide `value_scaling`: master/Frida 抓包多为空。description 含「熟度UPにつれて…」字样的 skill 实测真实 scaling = **0.003 / 熟度** (`OMOIDE_FALLBACK_SCALING`、`shared/hensei-helpers.js` `omoideEffectiveScaling`);effect value = `value + 0.003 × (熟度-1)`
 
 ---
 

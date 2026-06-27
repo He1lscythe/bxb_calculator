@@ -37,10 +37,10 @@ export const LEVEL_1JUK_TBL = {
 };
 
 // ============================================================
-// memory_slot (omoide) skill scaling fallback (Phase 7 Session 3 patch)
+// memory_slot (omoide) skill scaling fallback
 // ============================================================
 // Frida 抓 data/omoide/{base_id}.json 时 weapon_skills[].value_scaling 字段全 0 / null。
-// 用户实测: description 含「熟度UPにつれて...」字样的 skill 真实 scaling = 0.003 / 熟度。
+// description 含「熟度UPにつれて...」字样的 skill 真实 scaling = 0.003 / 熟度 (见 docs/hensei_calc.md)。
 // 这是 Frida 数据 gap、不是 game data 真值 0。fallback 应只对「描述含熟度」的 skill 生效。
 export const OMOIDE_FALLBACK_SCALING = 0.003;
 
@@ -141,10 +141,10 @@ export function crystalMaxBairitu(m) {
   return init * parseFactor(m.M_L_max) * parseFactor(m.M_W_max) * parseFactor(m.M_P_max);
 }
 
-// crystal effect 实际数值 — Phase 7 Session 2: unpacking §18.2 三因子公式 + fallback
+// crystal effect 实际数值 — unpacking §18.2 三因子公式 + fallback
 //
 // 判定 (基于 crystal 数据是否含 server-fold 参数):
-//   - revise 没填 M_L_max / M_W_max / M_P_max 任一 → fallback: max_value 简单 lv 线性 (跟 Session 1 之前一致)
+//   - revise 没填 M_L_max / M_W_max / M_P_max 任一 → fallback: max_value 简单 lv 线性
 //   - 至少一个填了 → 三因子公式 value = initial_value × M_L × M_W × M_P
 //
 // 公式 (unpacking §18.2):
@@ -164,7 +164,7 @@ export function crystalEffectiveValue(cr, cfg) {
   // fallback: 5 个三因子参数 (M_L/W/P_max) 都没填 → max_value 简单 lv 线性
   const hasFormula = m.M_L_max != null || m.M_W_max != null || m.M_P_max != null;
   if (!hasFormula) {
-    const maxV = m.max_value != null ? parseHit(m.max_value) : initV;   // wiki 抽的、Session 1 迁到 crystal_revise.json (可为分式字符串)
+    const maxV = m.max_value != null ? parseHit(m.max_value) : initV;   // crystal_revise.json 的 max_value (可为分式字符串)
     const ratio = lvMax > 1 ? Math.max(0, Math.min(1, (lv - 1) / (lvMax - 1))) : 0;
     return initV + (maxV - initV) * ratio;
   }
@@ -219,7 +219,7 @@ export function soulMultiplier(rarity, lv) {
 }
 
 // ============================================================
-// 元素相性 (chara vs enemy、stats-calc Phase 6.13 用)
+// 元素相性 (chara vs enemy、stats-calc 用)
 // 元素 K 表 跟 wiki main:js/stats-calc.js L60-90 一致、mode 三选一
 // ============================================================
 const ELEMENT_K_NORMAL = {
@@ -267,7 +267,7 @@ export function elementMatchupMult(srcElem, tgtElem, mode) {
   return 1.0;
 }
 
-// hensei enemy bar 硬编码倍率 (Phase 6.13)
+// hensei enemy bar 硬编码倍率
 export const DIFFICULTY_MULT = { Normal: 1.0, Hard: 0.1, Lunatic: 0.005 };
 export const BK_RES_MULT = { normal: 3.0, high: 6.0 };
 export const ADVANTAGE_WEAPON_MULT = 2.0;
@@ -275,7 +275,7 @@ export const ADVANTAGE_WEAPON_MULT = 2.0;
 // slider UI step=0.01 允许细滑、但公式 floor 让半 step 倍率不变 (即 n=4.5 跟 n=4 同倍率)
 export function bdCapMult(n) { return 1 + Math.floor((+n || 0) / 2) * 0.25; }
 
-// blaze_gauge_points 「A 表 base」(unpacking §1.3.3.5 实测、力試し副本数据、61 项)
+// blaze_gauge_points 「A 表 base」(unpacking §1.3.3.5、力試し副本数据、61 项)
 // 每项 = level i 升级需要的 BlazeGauge points 累计
 // 「只魔剣 skill」pipeline 用此表: `floor(A[i] × Π chara_skill_value)`
 export const BLAZE_GAUGE_POINTS_BASE_A = [
@@ -292,8 +292,8 @@ export const BLAZE_GAUGE_POINTS_BASE_A = [
 export const BLAZE_GAUGE_POINTS_BASE_IDEAL = Array.from({ length: 61 }, (_, i) => (i < 9 ? 100 : 140 * (i - 8)));
 
 // 魂等级补正 L(level) (unpacking §1.3.3.5)
-//   只附在魂上 (魔剣 skill 不带)、Lv1 实测 = 1.01、Lv2+ 系数 (线性 / 指数 / 查表) 待实测
-//   当前简化: 所有 lv 用 1.01 (Lv1 实测值作近似)
+//   只附在魂上 (魔剣 skill 不带)、Lv1 = 1.01、Lv2+ 系数 (线性/指数/查表) 未知
+//   当前简化: 所有 lv 用 1.01 (Lv1 值近似)
 export function blazeGaugeSoulLevelMult(_lv) { return 1.01; }
 
 // bdCapFromBlazeGauge — cumsum 反查 totalGauge points 在数组中能到第几 level (小数允许)
@@ -358,7 +358,7 @@ export function calcTypeToMath(c) { return _CALC_TYPE_TO_MATH[c] || 'Multiply'; 
 
 // ============================================================
 // chara / soul skill 列表 (UI render 用、tombstone + add 处理)
-// chara state.weapon_skills (master) + chara._added_skills / _deleted_skills (Phase 7 edit)
+// chara state.weapon_skills (master) + chara._added_skills / _deleted_skills (edit)
 // ============================================================
 export function resolveCharaSkills(charaWiki, stateName) {
   const cMaster = charaWiki?._master;

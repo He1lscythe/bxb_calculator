@@ -1,5 +1,5 @@
-// tests/ui/test_edit_flow.spec.js — Phase 7 Session 4 e2e
-// 3 viewer 编辑 → save → revise bar 行为验证 + bug A/B 回归测试。
+// tests/ui/test_edit_flow.spec.js
+// 3 viewer (chara/soul/crystal) 编辑 → save → revise bar 行为 e2e。
 //
 // /save endpoint mock: scripts/serve.js (Playwright webServer) 是纯静态、无 /save。
 // 用 page.route() 拦截 POST /save 返 `{ok: true}`、避免 404 + 防止改 data/*_revise.json。
@@ -37,7 +37,7 @@ test.describe('chara edit', () => {
     await waitViewerReady(page, 'allChars');
   });
 
-  test('toggleCharaTag 改 _master.tags (Bug A 回归)', async ({ page }) => {
+  test('toggleCharaTag 改 _master.tags', async ({ page }) => {
     const result = await page.evaluate(() => {
       const c = window.state.allChars.find((x) => x._master?.id === 1001);
       if (!c) return { err: 'chara 1001 not found' };
@@ -95,24 +95,25 @@ test.describe('chara edit', () => {
     expect(barDisplayAfter).toBe('none');
   });
 
-  test('cancelRevise → state 还原 baseline (Bug B 回归: originalData key = base_id)', async ({ page }) => {
+  test('cancelRevise → state 还原 baseline (originalData key = base_id)', async ({ page }) => {
     const result = await page.evaluate(() => {
       const c = window.state.allChars.find((x) => x._master?.id === 1001);
       const baseId = 1001;
-      const origTagsCount = (window.state.originalData[baseId]?._master?.tags || []).length;
+      // 基线从实时对象读 (编辑前即 pristine);originalData 现为懒克隆、enterEditMode 时才填
+      const origTagsCount = c._master.tags.length;
       window.enterEditMode(c.id);
+      const origKeyedByBase = !!window.state.originalData[baseId];   // enterEditMode 懒克隆进 originalData[base_id]
       window.toggleCharaTag(7);
       window.saveEdit();
       const tagsAfterSave = window.state.allChars.find((x) => x._master?.id === baseId)._master.tags.length;
       window.cancelRevise(baseId);
       const tagsAfterCancel = window.state.allChars.find((x) => x._master?.id === baseId)._master.tags.length;
       const sessionAfter = window.state.sessionReviseIds.has(baseId);
-      return { origTagsCount, tagsAfterSave, tagsAfterCancel, sessionAfter };
+      return { origTagsCount, origKeyedByBase, tagsAfterSave, tagsAfterCancel, sessionAfter };
     });
-    // originalData[baseId] 应该存在 (Bug B 修后 key = base_id)
-    expect(result.origTagsCount).toBeGreaterThanOrEqual(0);   // 拿得到 baseline (不是 undefined)
+    expect(result.origKeyedByBase).toBe(true);   // enterEditMode 懒克隆进 originalData[base_id]
     expect(result.tagsAfterSave).toBeGreaterThan(result.origTagsCount);   // save 后 tags 多了
-    expect(result.tagsAfterCancel).toBe(result.origTagsCount);   // cancel 后还原
+    expect(result.tagsAfterCancel).toBe(result.origTagsCount);   // cancel 后还原到 pristine
     expect(result.sessionAfter).toBe(false);
   });
 
@@ -260,7 +261,8 @@ test.describe('crystal edit', () => {
     const result = await page.evaluate(() => {
       const c = window.state.allCrystals[0];
       const id = c.id;
-      const origMax = window.state.originalData[id]?._master?.max_value ?? null;
+      // 基线从实时对象读 (编辑前即 pristine);originalData 现为懒克隆、enterEditMode 时才填
+      const origMax = c._master.max_value ?? null;
       window.enterEditMode(c.id);
       window.setCrField('max_value', 12345);
       window.saveEdit();

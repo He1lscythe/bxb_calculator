@@ -60,17 +60,14 @@ test('decideMeasure: real 变化 (prevCached != real) → shouldNotify=true', ()
 });
 
 // ============================================================
-// 回归: 模拟 bg 1022/1023 的 bug 场景
+// real == estimate 时仍须 cache (各 row 独立缓存、不随 kindH 漂移)
 // ============================================================
-test('regression: bg 1023 measure 时 kindH 凑巧准、cache 现在 set', () => {
-  // 1023 (4-field, 187) measure 时 kindH[expanded]=187 (因之前 row 也 187)
-  // estimate=187, real=187 → 旧版 cache 不存。新版存。
+test('real == estimate (187) 时仍 cache', () => {
   const dec = decideMeasure(187, undefined, 187);
   assert.strictEqual(dec.shouldCache, true, 'cache MUST be set even when real == estimate');
 });
 
-test('regression: bg 1022 (3-field, 156) measure → 触发 relayout', () => {
-  // 1022 estimate=187 (kindH=187), real=156 → 不同 → relayout, kindH→156
+test('real (156) ≠ estimate (187) → cache + relayout + notify', () => {
   const dec = decideMeasure(156, undefined, 187);
   assert.strictEqual(dec.shouldCache, true);
   assert.strictEqual(dec.shouldRelayout, true);
