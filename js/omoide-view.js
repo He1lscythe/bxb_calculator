@@ -26,17 +26,22 @@ const _MATH_PREFIX = { Multiply: '×', Addition: '+', Set: '=' };
 const _fmtBairituJP = (sk) => {
   const v = sk.value;
   if (v == null || v === 0) return '';
-  const pfx = _MATH_PREFIX[sk.math_type] || '';
+  // addition 负值不前缀 '+' (避免 '+-x');億/万 缩写按绝对值算、符号单独前置
+  let pfx = _MATH_PREFIX[sk.math_type] || '';
+  if (sk.math_type === 'Addition' && v < 0) pfx = '';
+  const neg = v < 0;
+  const av = Math.abs(v);
   let valStr;
-  if (v >= 1e8) {
-    const b = v / 1e8;
+  if (av >= 1e8) {
+    const b = av / 1e8;
     valStr = (b % 1 === 0 ? b : parseFloat(b.toFixed(2))) + '億';
-  } else if (v >= 1e4) {
-    const m = v / 1e4;
+  } else if (av >= 1e4) {
+    const m = av / 1e4;
     valStr = (m % 1 === 0 ? m : parseFloat(m.toFixed(2))) + '万';
   } else {
-    valStr = (v % 1 === 0) ? String(v) : String(parseFloat(v.toFixed(4)));
+    valStr = (av % 1 === 0) ? String(av) : String(parseFloat(av.toFixed(4)));
   }
+  if (neg) valStr = '-' + valStr;
   const sc = omoideEffectiveScaling(sk);
   if (sc !== 0) {
     const scStr = (sc % 1 === 0) ? String(sc) : String(parseFloat(sc.toFixed(4)));

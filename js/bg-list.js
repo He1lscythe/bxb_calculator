@@ -181,7 +181,7 @@ export const fmtRowBairitu = (c) => {
   const e = c.effects;
   return e && e[0] && e[0].bairitu
     ? '<span class="row-bairitu">' +
-        (e[0].calc_type === 1 ? '+' : '×') +
+        ctPfx(e[0].calc_type, e[0].bairitu) +
         fmtLarge(e[0].bairitu) +
         '</span>'
     : '';
@@ -323,7 +323,7 @@ export const renderDetailBody = (c) => {
       const bStr =
         e.bairitu != null
           ? '<span class="eff-pfx">' +
-            ctPfx(e.calc_type) +
+            ctPfx(e.calc_type, e.bairitu) +
             '</span><span class="eff-bairitu">' +
             fmtNum(e.bairitu) +
             '</span>'

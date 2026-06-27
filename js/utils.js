@@ -98,8 +98,9 @@ export const parseBairituVal = (s) => {
 //   1 Addition (+)
 //   2 Repel_Percent — 概率回避 (前缀 ×、suffix % 在 fmtBairitu 处理)
 // 历史废弃: wiki「最終加算/最終乗算」、Set (master 数据 chara 端无)
-export const ctPfx = (ct) => {
-  if (ct === 1) return '+';
+// val 传入时：addition 负值不前缀 '+' (避免 '+-x')；不传 val 时按旧行为 addition→'+'
+export const ctPfx = (ct, val) => {
+  if (ct === 1) return (val != null && +val < 0) ? '' : '+';
   return '×';   // 0 Multiply / 2 Repel_Percent 都用 ×
 };
 
@@ -111,8 +112,9 @@ export const fmtHitStages = (e) => {
   const ht = e.hit_type != null ? e.hit_type : 0;
   const op = ht === 2 ? '×' : ht === 3 ? '=' : '+'; // 2=乗算→×, 3=設定値→=, else→+
   function stageStr(v, s) {
-    if (!s) return op + fmtNum(v);
-    return op + '(' + fmtNum(v) + ' + ' + fmtNum(s) + ' * 熟度)';
+    const o = (op === '+' && +v < 0) ? '' : op;   // addition 负值不前缀 '+' (避免 '+-x')
+    if (!s) return o + fmtNum(v);
+    return o + '(' + fmtNum(v) + ' + ' + fmtNum(s) + ' * 熟度)';
   }
   // Condensed form: all 3 stages identical → show once with "全段"
   const s0 = sc[0] || 0,
@@ -146,7 +148,7 @@ export const fmtBairitu = (s) => {
       let bairituStr = '';
       if (e.bairitu != null && e.bairitu !== 0) {
         const sc = e.bairitu_scaling;
-        const pfx = ctPfx(e.calc_type);
+        const pfx = ctPfx(e.calc_type, e.bairitu);
         bairituStr = pfx + (sc ? '(' : '') + fmtNum(e.bairitu);
         if (sc) bairituStr += ' + ' + fmtNum(sc) + ' * 熟度)';
         if (e.calc_type === 2) bairituStr += ' %';   // Repel_Percent
