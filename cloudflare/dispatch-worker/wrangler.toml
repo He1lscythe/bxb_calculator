@@ -4,13 +4,12 @@ compatibility_date = "2026-06-16"
 
 # 可靠定时触发 GitHub Actions(绕开 GitHub schedule 丢跑)。GitHub 原生 schedule 已移除,
 # 这是唯一定时触发源(+ 手动 workflow_dispatch)。全部 UTC。
-#   1 7,15 * * *   → update-database  (JST 16:01 / 00:01)
-#   1 * * * *      → topics auto       (每小时 :01)
+#   1 * * * *      → topics auto (每小时 :01);UTC 7/15 点 worker 额外触发 update-database (JST 16:01 / 00:01)
 #   8 7 * * *      → topics window     (JST 16:08 每日兜底重爬)
 #   29 1,8,15,20 * * * → daily(账号日常、1 条 cron 覆盖 4 时刻;worker 按 UTC 小时 15/20/1/8 映射 tp 1/2/3/4)
-# 注:此文件为参考记录(dashboard 粘贴部署),实际 cron 以 Worker dashboard 为准。Cloudflare 每 Worker 上限 5 条 cron。
+# 注:此文件为参考记录(dashboard 粘贴部署),实际 cron 以 Worker dashboard 为准。Cloudflare 每 Worker 上限 5 条 cron(此处 3 条)。
 [triggers]
-crons = ["1 7,15 * * *", "1 * * * *", "8 7 * * *", "29 1,8,15,20 * * *"]
+crons = ["1 * * * *", "8 7 * * *", "29 1,8,15,20 * * *"]
 
 # Secret(不写在这里，用 `wrangler secret put` 或 dashboard 设):
 #   GH_TOKEN     fine-grained PAT (bxb_calculator, Actions: Read and write)

@@ -6,12 +6,11 @@ GitHub 原生 `schedule`(cron)是尽力而为的,高峰期会延迟甚至**直�
 
 | Worker cron (UTC) | JST | 触发 |
 |---|---|---|
-| `15 7,15 * * *` | 16:15 / 00:15 | `update-database.yml` |
-| `5 * * * *` | 每小时 :05 | `bxb-topics.yml`(mode=auto 轮询) |
+| `1 * * * *` | 每小时 :01 | `bxb-topics.yml`(mode=auto 轮询);UTC **7/15** 点 worker 额外触发 `update-database.yml`(JST 16:01 / 00:01)|
 | `8 7 * * *` | 16:08 | `bxb-topics.yml`(mode=window 每日兜底重爬) |
 | `29 1,8,15,20 * * *` | 00:29/05:29/10:29/17:29 | `daily.yml`(账号日常;1 条 cron 覆盖 4 时刻、worker 按 UTC 小时 15/20/1/8 映射 time_point 1/2/3/4)|
 
-> ⚠ daily 合成 1 条 cron 是因为 Cloudflare 每 Worker 上限 **5 条**(此处共 4 条)。
+> ⚠ Cloudflare 每 Worker 上限 **5 条 cron**,这里压到 **3 条**:`1 7,15` 并进每小时 `1 * * * *`(一条 cron 触发两个 workflow)、daily 4 时刻合成 1 条。留余量给以后。
 > `daily.yml` 必须在**默认分支 main**(workflow_dispatch 只认默认分支;它 `checkout: ref: routines` 拉账号日常代码)。
 > 测试:`/trigger?key=<KEY>&wf=daily-2`(手动按 time_point)。
 
@@ -43,8 +42,7 @@ Worker → **Settings → Variables and Secrets** → Add(类型选 **Secret/加
 ### 4. 配 Cron Triggers
 Worker → **Settings → Triggers → Cron Triggers** → 逐条添加:
 ```
-15 7,15 * * *
-5 * * * *
+1 * * * *
 8 7 * * *
 29 1,8,15,20 * * *
 ```
