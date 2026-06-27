@@ -38,7 +38,22 @@
         background: #efe6d2;
       }
     </style>
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3cb8202c2e6a4aed881bca5fb8c75948"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- Cloudflare Web Analytics (本地/局域网/file:// 浏览不加载、避免污染统计) -->
+    <script>
+      (() => {
+        const h = location.hostname;
+        const local =
+          !h || h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0' ||
+          location.protocol === 'file:' ||
+          /^192\.168\./.test(h) || /^10\./.test(h) || /^172\.(1[6-9]|2\d|3[01])\./.test(h);
+        if (local) return;
+        const s = document.createElement('script');
+        s.defer = true;
+        s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        s.setAttribute('data-cf-beacon', '{"token": "3cb8202c2e6a4aed881bca5fb8c75948"}');
+        document.head.appendChild(s);
+      })();
+    </script>
   </head>
   <body>
     <div id="page-wrap">
