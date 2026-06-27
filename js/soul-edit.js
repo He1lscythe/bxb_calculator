@@ -75,6 +75,8 @@ export const enterEditMode = (id) => {
   if (!s) return;
   state.editData = JSON.parse(JSON.stringify(s));
   state.editingId = id;
+  // originalData 懒克隆: 仅首次编辑该 soul 时拷 (替代加载时全量克隆、省启动 CPU)
+  if (!state.originalData[id]) state.originalData[id] = JSON.parse(JSON.stringify(s));
   _showModal(_renderModalBody(state.editData));
 };
 
