@@ -37,9 +37,11 @@ async function dispatch(env, workflowFile, inputs) {
   return res.status;
 }
 
-// daily.yml(账号日常维护)4 个时间点:UTC cron → time_point。
+// daily.yml(账号日常维护):合成 1 条 cron(Cloudflare 每 Worker 上限 5 条),
+// minute 29、UTC 小时 1/8/15/20 一次覆盖 4 个时刻;按触发时的 UTC 小时映射 time_point。
 // daily.yml 文件在 main(默认分支、才能被 dispatch)、内部 checkout routines 拉代码。
-const DAILY_CRON_TP = { "29 15 * * *": "1", "29 20 * * *": "2", "29 1 * * *": "3", "29 8 * * *": "4" };
+const DAILY_CRON = "29 1,8,15,20 * * *";
+const DAILY_HOUR_TP = { 15: "1", 20: "2", 1: "3", 8: "4" };  // UTC hour → time_point (JST 00:29/05:29/10:29/17:29)
 
 // 按触发的 cron 表达式决定调哪个 workflow
 async function runForCron(cron, env) {
@@ -47,8 +49,9 @@ async function runForCron(cron, env) {
     await dispatch(env, "update-database.yml");
   } else if (cron === "8 7 * * *") {
     await dispatch(env, "bxb-topics.yml", { mode: "window" });
-  } else if (DAILY_CRON_TP[cron]) {
-    await dispatch(env, "daily.yml", { time_point: DAILY_CRON_TP[cron], shards: "10" });
+  } else if (cron === DAILY_CRON) {
+    const tp = DAILY_HOUR_TP[new Date().getUTCHours()];
+    if (tp) await dispatch(env, "daily.yml", { time_point: tp, shards: "10" });
   } else {
     // "1 * * * *" 及其它:按 topics 每小时 auto 轮询
     await dispatch(env, "bxb-topics.yml", { mode: "auto" });
