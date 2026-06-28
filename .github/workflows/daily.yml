@@ -65,7 +65,8 @@ jobs:
           --shard ${{ matrix.shard }}/${{ inputs.shards }}
           --accounts-file accounts.csv
           --concurrency 30
-          --rate 10.0
+          --rate 3.0
+          --total-rate 30.0
           --out "results-${{ matrix.shard }}.csv"
       - uses: actions/upload-artifact@v4
         if: always()
