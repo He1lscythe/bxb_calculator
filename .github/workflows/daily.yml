@@ -1,12 +1,5 @@
 name: bxb-daily-tasks
 
-# 账号日常维护 cron。本 workflow 文件在 main(默认分支、才能被 workflow_dispatch 触发);
-# daily/ + scripts 代码在 routines 分支、由下方 checkout(ref: routines)拉取。
-# 由 Cloudflare cron(bxb-dispatch worker)在 4 个 UTC 时刻 dispatch、映射 time_point:
-#   29 15 * * * → time_point 1 (JST 00:29)
-#   29 20 * * * → time_point 2 (JST 05:29)
-#   29 1  * * * → time_point 3 (JST 10:29)
-#   29 8  * * * → time_point 4 (JST 17:29)
 on:
   workflow_dispatch:
     inputs:
@@ -36,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 12             # 同时最多 12 个 job(=12 个 IP);账号免费版 20 并发上限,留足 headroom 给 update-database/topics
+      max-parallel: 12
       matrix:
         shard: ${{ fromJSON(needs.prepare.outputs.matrix) }}
     steps:
@@ -61,23 +54,27 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
           BXB_BOOTSTRAP_KEY: ${{ secrets.BXB_BOOTSTRAP_KEY }}
-        run: >
-          python -m daily
-          --time-point ${{ inputs.time_point }}
-          --shard ${{ matrix.shard }}/${{ inputs.shards }}
-          --accounts-file accounts.csv
-          --concurrency 30
-          --rate 3.0
-          --total-rate 30.0
-          --out "results-${{ matrix.shard }}.csv"
-      - uses: actions/upload-artifact@v4
+        run: |
+          set -o pipefail
+          python -m daily \
+            --time-point ${{ inputs.time_point }} \
+            --shard ${{ matrix.shard }}/${{ inputs.shards }} \
+            --accounts-file accounts.csv \
+            --concurrency 30 --rate 3.0 --total-rate 30.0 \
+            --out "results-${{ matrix.shard }}.csv" 2>&1 | tee "shard-${{ matrix.shard }}.log"
+      - name: Upload results + log to R2 (private)
         if: always()
-        with:
-          name: results-tp${{ inputs.time_point }}-shard${{ matrix.shard }}
-          path: "results-${{ matrix.shard }}.csv"
-          if-no-files-found: ignore
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          JST=$(TZ=Asia/Tokyo date +%F)
+          [ -f "results-${{ matrix.shard }}.csv" ] && aws s3 cp "results-${{ matrix.shard }}.csv" "$B/results/tp${{ inputs.time_point }}/shard-${{ matrix.shard }}.csv" --endpoint-url "$E" || true
+          aws s3 cp "shard-${{ matrix.shard }}.log" "$B/logs/${JST}/tp${{ inputs.time_point }}-shard${{ matrix.shard }}.log" --endpoint-url "$E" || true
 
-  # 仅 time_point 1:把各分片读到的 diamond 合并回 R2 的 accounts.csv(单 writer,回写前写时间戳备份)。
   aggregate:
     needs: run
     if: ${{ inputs.time_point == '1' }}
@@ -89,21 +86,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Fetch base accounts.csv from R2
+      - name: Fetch base accounts.csv + tp1 results from R2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
-        run: >
-          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts.csv" accounts.csv
-          --endpoint-url "${{ secrets.R2_ENDPOINT }}"
-      - name: Download tp1 shard results
-        uses: actions/download-artifact@v4
-        with:
-          pattern: results-tp1-shard*
-          path: merged_results
-          merge-multiple: true
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          aws s3 cp "$B/accounts.csv" accounts.csv --endpoint-url "$E"
+          mkdir -p merged_results
+          aws s3 cp "$B/results/tp1/" merged_results/ --recursive --endpoint-url "$E"
       - name: Merge diamond into accounts.csv
         run: >
           python -m daily.writeback
@@ -111,13 +104,31 @@ jobs:
           --results-dir merged_results
           --out accounts.new.csv
           --min-rows 1
-      - name: Backup + write back to R2
+      - name: Backup + write back accounts.csv, then delete tp1 results from R2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
         run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
           JST_DATE=$(TZ=Asia/Tokyo date +%Y%m%d)
-          aws s3 cp accounts.csv "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts-${JST_DATE}.csv" --endpoint-url "${{ secrets.R2_ENDPOINT }}"
-          aws s3 cp accounts.new.csv "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts.csv" --endpoint-url "${{ secrets.R2_ENDPOINT }}"
+          aws s3 cp accounts.csv "$B/accounts-${JST_DATE}.csv" --endpoint-url "$E"
+          aws s3 cp accounts.new.csv "$B/accounts.csv" --endpoint-url "$E"
+          aws s3 rm "$B/results/tp1/" --recursive --endpoint-url "$E"
+
+  cleanup-old-runs:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Delete previous daily runs (keep current)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate "/repos/${{ github.repository }}/actions/workflows/daily.yml/runs?per_page=100" \
+            --jq '.workflow_runs[].id' | while read -r id; do
+              [ "$id" = "${{ github.run_id }}" ] && continue
+              echo "delete run $id"
+              gh api -X DELETE "/repos/${{ github.repository }}/actions/runs/$id" || true
+            done
