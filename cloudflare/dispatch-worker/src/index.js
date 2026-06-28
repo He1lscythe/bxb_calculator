@@ -49,7 +49,7 @@ async function runForCron(cron, env) {
     await dispatch(env, "bxb-topics.yml", { mode: "window" });
   } else if (cron === DAILY_CRON) {
     const tp = DAILY_HOUR_TP[new Date().getUTCHours()];
-    if (tp) await dispatch(env, "daily.yml", { time_point: tp, shards: "10" });
+    if (tp) await dispatch(env, "daily.yml", { time_point: tp });   // shards 用 daily.yml 默认
   } else {
     // "1 * * * *" 每小时:topics auto 轮询;UTC 7/15 点额外触发 update-database (JST 16:01 / 00:01)。
     // (一条 cron 触发两个 workflow、省 cron 槽。)
@@ -80,7 +80,7 @@ export default {
     } else if (wf === "topics-window") {
       status = await dispatch(env, "bxb-topics.yml", { mode: "window" });
     } else if (wf.startsWith("daily-")) {  // daily-1..4
-      status = await dispatch(env, "daily.yml", { time_point: wf.slice(6) || "2", shards: "10" });
+      status = await dispatch(env, "daily.yml", { time_point: wf.slice(6) || "2" });   // shards 用 daily.yml 默认
     } else {
       status = await dispatch(env, "bxb-topics.yml", { mode: "auto" });
     }
