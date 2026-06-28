@@ -18,7 +18,7 @@ on:
       shards:
         description: "分片数 N(并行 job 数,各跑 1/N 账号、各自独立 IP)"
         required: false
-        default: "16"
+        default: "12"
 
 jobs:
   prepare:
@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 16            # 同时最多 16 个 job(=16 个 IP);账号免费版 20 并发上限、留 headroom 给 update-database/topics
+      max-parallel: 12             # 同时最多 12 个 job(=12 个 IP);账号免费版 20 并发上限,留足 headroom 给 update-database/topics
       matrix:
         shard: ${{ fromJSON(needs.prepare.outputs.matrix) }}
     steps:
@@ -55,6 +55,8 @@ jobs:
         run: >
           aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts.csv" accounts.csv
           --endpoint-url "${{ secrets.R2_ENDPOINT }}"
+      - name: Stagger start (sleep shard×60s)
+        run: sleep $(( ${{ matrix.shard }} * 60 ))
       - name: Run shard
         env:
           PYTHONUNBUFFERED: "1"
