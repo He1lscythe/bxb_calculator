@@ -1,0 +1,97 @@
+name: bxb-first-clear
+
+on:
+  workflow_dispatch:
+    inputs:
+      deck:
+        description: "用于打副本的 deck(1-9,不可用自动回退 deck1)"
+        required: true
+        type: choice
+        default: "1"
+        options: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      quest_ids:
+        description: "quest_id,逗号分隔(按填写顺序打,每个 quest 所有难度升序)"
+        required: true
+      shards:
+        description: "分片数 N"
+        required: false
+        default: "12"
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.gen.outputs.matrix }}
+    steps:
+      - id: gen
+        run: |
+          N=${{ inputs.shards }}
+          echo "matrix=[$(seq -s, 0 $((N-1)))]" >> "$GITHUB_OUTPUT"
+
+  run:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        shard: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: routines
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements-daily.txt
+      - name: Fetch accounts from R2 (private)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: >
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts.csv" accounts.csv
+          --endpoint-url "${{ secrets.R2_ENDPOINT }}"
+      - name: Stagger start (sleep shard×60s)
+        run: sleep $(( ${{ matrix.shard }} * 60 ))
+      - name: Run first-clear shard
+        env:
+          PYTHONUNBUFFERED: "1"
+          BXB_BOOTSTRAP_KEY: ${{ secrets.BXB_BOOTSTRAP_KEY }}
+        run: |
+          set -o pipefail
+          python -m daily.first_clear \
+            --deck ${{ inputs.deck }} \
+            --quest-ids "${{ inputs.quest_ids }}" \
+            --shard ${{ matrix.shard }}/${{ inputs.shards }} \
+            --accounts-file accounts.csv \
+            --concurrency 30 --rate 3.0 --total-rate 30.0 \
+            --out "results-${{ matrix.shard }}.csv" 2>&1 | tee "shard-${{ matrix.shard }}.log"
+      - name: Upload results + log to R2 (private)
+        if: always()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          JST=$(TZ=Asia/Tokyo date +%F)
+          [ -f "results-${{ matrix.shard }}.csv" ] && aws s3 cp "results-${{ matrix.shard }}.csv" "$B/logs/${JST}/first-clear-shard${{ matrix.shard }}.csv" --endpoint-url "$E" || true
+          aws s3 cp "shard-${{ matrix.shard }}.log" "$B/logs/${JST}/first-clear-shard${{ matrix.shard }}.log" --endpoint-url "$E" || true
+
+  cleanup-old-runs:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Delete previous first-clear runs (keep current)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate "/repos/${{ github.repository }}/actions/workflows/first-clear.yml/runs?per_page=100" \
+            --jq '.workflow_runs[].id' | while read -r id; do
+              [ "$id" = "${{ github.run_id }}" ] && continue
+              echo "delete run $id"
+              gh api -X DELETE "/repos/${{ github.repository }}/actions/runs/$id" || true
+            done
