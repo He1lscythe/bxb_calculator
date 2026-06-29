@@ -106,17 +106,14 @@ jobs:
           aws s3 cp "$B/accounts.csv" accounts.csv --endpoint-url "$E"
           mkdir -p merged_results
           aws s3 cp "$B/results/gacha/" merged_results/ --recursive --endpoint-url "$E" || true
-      - name: Merge rarity4 into accounts.csv (union)
-        run: >
-          python -m daily.writeback
-          --base accounts.csv
-          --results-dir merged_results
-          --out accounts.new.csv
-          --min-rows 1
-          --results-col rarity4
-          --base-col rarity4_base_ids
-          --mode union
-          --sep " "
+      - name: Merge rarity4 (union) + diamond (replace) into accounts.csv
+        run: |
+          python -m daily.writeback --base accounts.csv --results-dir merged_results \
+            --out accounts.tmp.csv --min-rows 1 \
+            --results-col rarity4 --base-col rarity4_base_ids --mode union --sep " "
+          python -m daily.writeback --base accounts.tmp.csv --results-dir merged_results \
+            --out accounts.new.csv --min-rows 1 \
+            --results-col diamond --base-col diamond --mode replace
       - name: Backup + write back accounts.csv, then delete gacha results from R2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
