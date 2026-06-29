@@ -1,0 +1,147 @@
+name: bxb-gacha
+
+on:
+  workflow_dispatch:
+    inputs:
+      gacha_schedule_id:
+        description: "gacha_schedule_id(GetGachaTop 里的池 id)"
+        required: true
+      mode:
+        description: "single / sequential"
+        required: true
+        type: choice
+        options: ["single", "sequential"]
+      count:
+        description: "每号最多抽几次(预算不够会提前停)"
+        required: true
+        default: "1"
+      shards:
+        description: "分片数 N"
+        required: false
+        default: "12"
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.gen.outputs.matrix }}
+    steps:
+      - id: gen
+        run: |
+          N=${{ inputs.shards }}
+          echo "matrix=[$(seq -s, 0 $((N-1)))]" >> "$GITHUB_OUTPUT"
+
+  run:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        shard: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: routines
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements-daily.txt
+      - name: Fetch accounts from R2 (private)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: >
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts.csv" accounts.csv
+          --endpoint-url "${{ secrets.R2_ENDPOINT }}"
+      - name: Stagger start (sleep shard×60s)
+        run: sleep $(( ${{ matrix.shard }} * 60 ))
+      - name: Run gacha shard
+        env:
+          PYTHONUNBUFFERED: "1"
+          BXB_BOOTSTRAP_KEY: ${{ secrets.BXB_BOOTSTRAP_KEY }}
+        run: |
+          set -o pipefail
+          python -m daily.gacha \
+            --gacha-schedule-id ${{ inputs.gacha_schedule_id }} \
+            --mode ${{ inputs.mode }} \
+            --count ${{ inputs.count }} \
+            --shard ${{ matrix.shard }}/${{ inputs.shards }} \
+            --accounts-file accounts.csv \
+            --concurrency 30 --rate 3.0 --total-rate 30.0 \
+            --out "results-${{ matrix.shard }}.csv" 2>&1 | tee "shard-${{ matrix.shard }}.log"
+      - name: Upload results + log to R2 (private)
+        if: always()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          JST=$(TZ=Asia/Tokyo date +%F)
+          [ -f "results-${{ matrix.shard }}.csv" ] && aws s3 cp "results-${{ matrix.shard }}.csv" "$B/results/gacha/shard-${{ matrix.shard }}.csv" --endpoint-url "$E" || true
+          aws s3 cp "shard-${{ matrix.shard }}.log" "$B/logs/${JST}/gacha-shard${{ matrix.shard }}.log" --endpoint-url "$E" || true
+
+  aggregate:
+    needs: run
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: routines
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Fetch base accounts.csv + gacha results from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          aws s3 cp "$B/accounts.csv" accounts.csv --endpoint-url "$E"
+          mkdir -p merged_results
+          aws s3 cp "$B/results/gacha/" merged_results/ --recursive --endpoint-url "$E" || true
+      - name: Merge rarity4 into accounts.csv (union)
+        run: >
+          python -m daily.writeback
+          --base accounts.csv
+          --results-dir merged_results
+          --out accounts.new.csv
+          --min-rows 1
+          --results-col rarity4
+          --base-col rarity4_base_ids
+          --mode union
+          --sep " "
+      - name: Backup + write back accounts.csv, then delete gacha results from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          JST_DATE=$(TZ=Asia/Tokyo date +%Y%m%d)
+          aws s3 cp accounts.csv "$B/accounts-${JST_DATE}-gacha.csv" --endpoint-url "$E"
+          aws s3 cp accounts.new.csv "$B/accounts.csv" --endpoint-url "$E"
+          aws s3 rm "$B/results/gacha/" --recursive --endpoint-url "$E" || true
+
+  cleanup-old-runs:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Delete previous gacha runs (keep current)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate "/repos/${{ github.repository }}/actions/workflows/gacha.yml/runs?per_page=100" \
+            --jq '.workflow_runs[].id' | while read -r id; do
+              [ "$id" = "${{ github.run_id }}" ] && continue
+              echo "delete run $id"
+              gh api -X DELETE "/repos/${{ github.repository }}/actions/runs/$id" || true
+            done
