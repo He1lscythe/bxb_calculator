@@ -40,14 +40,22 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install -r requirements-daily.txt
-      - name: Fetch accounts from R2 (private)
+      - name: Fetch accounts + resolve run set (first-run vs re-run) from R2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
-        run: >
-          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts.csv" accounts.csv
-          --endpoint-url "${{ secrets.R2_ENDPOINT }}"
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          aws s3 cp "$B/accounts.csv" accounts.csv --endpoint-url "$E"
+          JST=$(TZ=Asia/Tokyo date +%F)
+          if aws s3 cp "$B/runstate/${JST}/daily-${{ inputs.time_point }}.csv" outcome.csv --endpoint-url "$E" 2>/dev/null; then
+            echo "re-run: hit runstate/${JST}/daily-${{ inputs.time_point }}.csv"
+            python -m daily.select_failed --accounts accounts.csv --outcome outcome.csv --out run_accounts.csv
+          else
+            echo "first run: no runstate/${JST}/daily-${{ inputs.time_point }}.csv"
+            cp accounts.csv run_accounts.csv
+          fi
       - name: Stagger start (sleep shard×60s)
         run: sleep $(( ${{ matrix.shard }} * 60 ))
       - name: Run shard
@@ -59,7 +67,7 @@ jobs:
           python -m daily \
             --time-point ${{ inputs.time_point }} \
             --shard ${{ matrix.shard }}/${{ inputs.shards }} \
-            --accounts-file accounts.csv \
+            --accounts-file run_accounts.csv \
             --concurrency 30 --rate 3.0 --total-rate 30.0 \
             --out "results-${{ matrix.shard }}.csv" 2>&1 | tee "shard-${{ matrix.shard }}.log"
       - name: Upload results + log to R2 (private)
@@ -77,7 +85,7 @@ jobs:
 
   aggregate:
     needs: run
-    if: ${{ !cancelled() && inputs.time_point == '1' }}
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -86,7 +94,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Fetch base accounts.csv + tp1 results from R2
+      - name: Fetch this run's results + prior outcome + base accounts.csv from R2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
@@ -94,17 +102,25 @@ jobs:
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
         run: |
           B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
-          aws s3 cp "$B/accounts.csv" accounts.csv --endpoint-url "$E"
+          JST=$(TZ=Asia/Tokyo date +%F)
           mkdir -p merged_results
-          aws s3 cp "$B/results/tp1/" merged_results/ --recursive --endpoint-url "$E"
-      - name: Merge diamond into accounts.csv
-        run: >
-          python -m daily.writeback
-          --base accounts.csv
-          --results-dir merged_results
-          --out accounts.new.csv
-          --min-rows 1
-      - name: Backup + write back accounts.csv, then delete tp1 results from R2
+          aws s3 cp "$B/results/tp${{ inputs.time_point }}/" merged_results/ --recursive --endpoint-url "$E" || true
+          aws s3 cp "$B/accounts.csv" accounts.csv --endpoint-url "$E"
+          aws s3 cp "$B/runstate/${JST}/daily-${{ inputs.time_point }}.csv" prior.csv --endpoint-url "$E" 2>/dev/null || true
+      - name: Build outcome (merge prior + this run) and write to R2 runstate
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          JST=$(TZ=Asia/Tokyo date +%F)
+          [ -f prior.csv ] && P="--prior prior.csv" || P=""
+          python -m daily.outcome --results-dir merged_results --out outcome.csv $P
+          aws s3 cp outcome.csv "$B/runstate/${JST}/daily-${{ inputs.time_point }}.csv" --endpoint-url "$E"
+      - name: Merge diamond into accounts.csv (tp1 only), backup + write back to R2
+        if: ${{ inputs.time_point == '1' }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
@@ -113,9 +129,17 @@ jobs:
         run: |
           B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
           JST_DATE=$(TZ=Asia/Tokyo date +%Y%m%d)
+          python -m daily.writeback --base accounts.csv --results-dir merged_results --out accounts.new.csv --min-rows 1
           aws s3 cp accounts.csv "$B/accounts-${JST_DATE}.csv" --endpoint-url "$E"
           aws s3 cp accounts.new.csv "$B/accounts.csv" --endpoint-url "$E"
-          aws s3 rm "$B/results/tp1/" --recursive --endpoint-url "$E"
+      - name: Delete this run's results from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          aws s3 rm "$B/results/tp${{ inputs.time_point }}/" --recursive --endpoint-url "$E" || true
 
   cleanup-old-runs:
     runs-on: ubuntu-latest
