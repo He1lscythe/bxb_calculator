@@ -242,8 +242,9 @@ def asset_delta(new_v, prev_v):
         old = json.loads((base / str(prev_v) / "_asset-version_source.json").read_text(encoding="utf-8"))
     of = {f["name"]: f for f in old.get("files", [])}
     nf = {f["name"]: f for f in new["files"]}
-    delta = sorted((set(nf) - set(of)) | {n for n in set(of) & set(nf) if of[n].get("md5") != nf[n].get("md5")})
-    return delta, nf
+    added = sorted(set(nf) - set(of))
+    modified = sorted(n for n in set(of) & set(nf) if of[n].get("md5") != nf[n].get("md5"))
+    return added, modified, nf
 
 
 def notify_asset_version(target_v=None):
@@ -264,7 +265,8 @@ def notify_asset_version(target_v=None):
         prev_v = older[-1] if older else None
     else:
         new_v, prev_v = vs[-1], (vs[-2] if len(vs) >= 2 else None)
-    delta, nf = asset_delta(new_v, prev_v)
+    added, modified, nf = asset_delta(new_v, prev_v)
+    delta = added + modified
     if not delta:
         print("asset_version 无 delta、跳过")
         return
@@ -282,34 +284,50 @@ def notify_asset_version(target_v=None):
 
     s3 = _r2_client()
     tmp = Path(tempfile.mkdtemp(prefix="assetprev_"))
-    imgs = []  # (asset_name, public_url)
-    for name in delta:
-        ent = nf[name]
-        dat = tmp / "_dat" / f"{name}.dat"
-        if not cdn.download_dat(name, ent["version"], dat, ent.get("md5")):
-            continue
-        try:
-            written = extract_assets.extract_png(dat, name, tmp)
-        except Exception:
-            written = []
-        for p in written:
-            p = Path(p)
-            key = f"asset_preview/{new_v}/{name}__{p.name}"
+
+    def _collect(names):
+        out = []  # (asset_name, public_url)
+        for name in names:
+            ent = nf[name]
+            dat = tmp / "_dat" / f"{name}.dat"
+            if not cdn.download_dat(name, ent["version"], dat, ent.get("md5")):
+                continue
             try:
-                s3.upload_file(str(p), r2_bucket, key, ExtraArgs={"ContentType": "image/png"})
-                imgs.append((name, f"{r2_pub}/{key}"))
-            except Exception as e:
-                print(f"  R2 上传失败 {key}: {e}")
+                written = extract_assets.extract_png(dat, name, tmp)
+            except Exception:
+                written = []
+            for p in written:
+                p = Path(p)
+                key = f"asset_preview/{new_v}/{name}__{p.name}"
+                try:
+                    s3.upload_file(str(p), r2_bucket, key, ExtraArgs={"ContentType": "image/png"})
+                    out.append((name, f"{r2_pub}/{key}"))
+                except Exception as e:
+                    print(f"  R2 上传失败 {key}: {e}")
+        return out
+
+    imgs_added = _collect(added)
+    imgs_mod = _collect(modified)
+    imgs = imgs_added + imgs_mod
     if not imgs:
         print(f"asset delta {len(delta)} 项无可展示图、跳过")
         return
 
-    nodes = [{"tag": "h4", "children": [f"asset {prev_v}→{new_v}:{len(imgs)} 张图 / delta {len(delta)} 项"]}]
-    for nm, url in imgs:
-        nodes.append({"tag": "figure", "children": [
+    def _figs(group):
+        return [{"tag": "figure", "children": [
             {"tag": "img", "attrs": {"src": url}},
             {"tag": "figcaption", "children": [nm]},
-        ]})
+        ]} for nm, url in group]
+
+    nodes = [{"tag": "h4", "children": [
+        f"asset {prev_v}→{new_v}:新增 {len(imgs_added)} / 调整 {len(imgs_mod)}（共 {len(imgs)} 图 / delta {len(delta)} 项）"]}]
+    if imgs_added:
+        nodes.append({"tag": "h3", "children": ["🆕 新增"]})
+        nodes.extend(_figs(imgs_added))
+    if imgs_mod:
+        nodes.append({"tag": "hr"})
+        nodes.append({"tag": "h3", "children": ["🛠 调整"]})
+        nodes.extend(_figs(imgs_mod))
     idx = _load_tg_index()
     section = idx.setdefault("asset_version", {})
     existing = section.get(str(new_v))
@@ -319,7 +337,7 @@ def notify_asset_version(target_v=None):
     if existing:
         print(f"asset_version 已原地更新 Telegraph(URL 不变、不重发频道): {page}")
         return
-    j = tg("sendMessage", chat_id=TG_CHAT, text=f"🖼 asset_version {new_v}（{len(imgs)} 图 / delta {len(delta)}）\n{page}\n#asset_version")
+    j = tg("sendMessage", chat_id=TG_CHAT, text=f"🖼 asset_version {new_v}（新增 {len(imgs_added)} / 调整 {len(imgs_mod)}，共 {len(imgs)} 图）\n{page}\n#asset_version")
     print("asset_version 通知:", "ok" if j.get("ok") else j.get("description"), "|", page)
 
 
