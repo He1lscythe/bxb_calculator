@@ -36,6 +36,19 @@ export const LEVEL_1JUK_TBL = {
   1: { '通常': 30, '改造': 35 },
 };
 
+// chara state 的熟度/Lv 上限参数 — master 直读、字段缺失才回退上面的硬编码表。
+// master 会新增 state 组合(如 S/AA/A 極弐)且数值随版本调整,表跟不上;
+// stats-calc(maxLevelAtMature)一直直读 master,UI 从这里取值才能跟计算一致。
+export const charaLvParams = (chara, state) => {
+  const r = +chara?.rarity || 0;
+  const st = chara?._master?.states?.[state]?.stats || {};
+  return {
+    jMax: st.max_mature != null ? +st.max_mature : (JUKUDO_MAX_TBL[r]?.[state] ?? 0),
+    lev1: st.initial_max_level != null ? +st.initial_max_level : (LEVEL_1JUK_TBL[r]?.[state] ?? null),
+    levMax: st.max_max_level != null ? +st.max_max_level : (LEVEL_MAX_TBL[r]?.[state] ?? null),
+  };
+};
+
 // ============================================================
 // memory_slot (omoide) skill scaling fallback
 // ============================================================
