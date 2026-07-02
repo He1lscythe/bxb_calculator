@@ -174,6 +174,7 @@
       import { adaptCharaList } from '../shared/chara-adapter.js';
       import { charaIconStack } from '../shared/image-paths.js';
       import { setupLazyImg } from '../shared/lazy-img.js';
+      import { VirtualList } from '../shared/virtual-list.js';
       import { adaptSoulList } from '../shared/soul-adapter.js';
       import { adaptCrystalList } from '../shared/crystal-adapter.js';
       import { adaptMasouList } from '../shared/masou-adapter.js';
@@ -196,9 +197,7 @@
         SOUL_AWK_MAX,
         EMBLEM_RARITY_LV_MAX,
         CRYSTAL_RARITY_LV_MAX,
-        JUKUDO_MAX_TBL,
-        LEVEL_MAX_TBL,
-        LEVEL_1JUK_TBL,
+        charaLvParams,
         cryLvMax,
         crystalDimAvailability,
         crystalSliderStep,
@@ -280,8 +279,8 @@
       };
 
       // ELEMENT_K_* / EMBLEM_RARITY_LV_MAX / CRYSTAL_RARITY_LV_MAX / emblemLvMax /
-      // cryLvMax / elementMatchupMult / mkTr / JUKUDO_MAX_TBL / LEVEL_MAX_TBL /
-      // LEVEL_1JUK_TBL / AWAKENING_MAX_TBL / AWAKENING_MULT_TBL 都 import 自 stats-calc.js。
+      // cryLvMax / elementMatchupMult / mkTr / charaLvParams(熟度/Lv 上限 master 直读) /
+      // AWAKENING_MAX_TBL / AWAKENING_MULT_TBL 都 import 自 stats-calc.js / hensei-helpers.js。
       let team = [0, 1, 2].map(() => ({
         chara: null,
         soul: null,
@@ -893,8 +892,9 @@
               team[si].tr.jukudo = 38;
               team[si].tr.level = 255;
             } else {
-              team[si].tr.jukudo = JUKUDO_MAX_TBL[r]?.[newState] || 1;
-              team[si].tr.level = LEVEL_MAX_TBL[r]?.[newState] || 1;
+              const p = charaLvParams(c, newState);
+              team[si].tr.jukudo = p.jMax || 1;
+              team[si].tr.level = p.levMax || 1;
             }
           }
           if (!team[si].soul) autoAssignSoul(si);
@@ -1187,15 +1187,13 @@
           refreshAllStats();
           return;
         }
-        const r = c.rarity,
-          tr = team[si].tr;
-        const lev1 = LEVEL_1JUK_TBL[r]?.[tr.state],
-          levMax = LEVEL_MAX_TBL[r]?.[tr.state];
+        const tr = team[si].tr;
+        const { jMax, lev1, levMax } = charaLvParams(c, tr.state);
         if (lev1 == null || levMax == null) {
           refreshAllStats();
           return;
         }
-        const jk = Math.min(tr.jukudo, JUKUDO_MAX_TBL[r]?.[tr.state] ?? 0);
+        const jk = Math.min(tr.jukudo, jMax);
         const base = jk === 0 ? lev1 - 5 : Math.min(levMax, lev1 + (jk - 1) * 5);
         const newCap = base + tr.awakening * 5;
         const slider = document.getElementById('tr-lvslider-' + si);
@@ -1349,14 +1347,14 @@
         if (!chara) return '';
         const r = chara.rarity,
           tr = team[i].tr;
-        const stOpts = r === 4 ? ['通常', '改造'] : ['通常', '改造', '極弐'];
-        if (!stOpts.includes(tr.state)) team[i].tr.state = tr.state = '通常';
-        const jMax = JUKUDO_MAX_TBL[r]?.[tr.state] ?? 0;
+        // state 选项按 master 实际有的 state 过滤(如 SS 无極弐、部分 S/A 无極弐),不按稀有度硬编码
+        const stOpts = ['通常', '改造', '極弐'].filter((s) => chara.states?.[s]);
+        if (!stOpts.length) stOpts.push('通常');
+        if (!stOpts.includes(tr.state)) team[i].tr.state = tr.state = stOpts[0];
+        const { jMax, lev1, levMax } = charaLvParams(chara, tr.state);
         const aMax = AWAKENING_MAX_TBL[r] ?? 0;
         const jk = Math.min(Math.max(1, tr.jukudo || 1), jMax),
           aw = Math.min(tr.awakening, aMax);
-        const lev1 = LEVEL_1JUK_TBL[r]?.[tr.state],
-          levMax = LEVEL_MAX_TBL[r]?.[tr.state];
         let lvCap = null;
         if (lev1 != null && levMax != null) {
           const base = jk === 0 ? lev1 - 5 : Math.min(levMax, lev1 + (jk - 1) * 5);
@@ -1699,6 +1697,7 @@
             : 'エンブレム選択';
         }
         document.getElementById('emblem-modal').classList.add('open');
+        document.getElementById('emblem-list').scrollTop = 0;
         _renderEmblemModalSidebar();
         _renderEmblemModalList();
       };
@@ -2181,6 +2180,8 @@
         };
         document.getElementById('em-title').textContent = titles[type] || '選択';
         document.getElementById('entity-modal').classList.add('open');
+        // 5 种类型共用 #em-list 滚动容器 → 每次打开归零,避免上个类型的滚动位置串过来
+        document.getElementById('em-list').scrollTop = 0;
         buildEMSidebar(type);
         applyEM();
       };
@@ -2402,9 +2403,10 @@
       // (跟 crystals.html / bladegraphs.html viewer 1:1 一致)、不再 wrap。
       // 旧 wiki bunrui/scope/condition wrap 已废、effect/condition_trigger/scope 走 spec extract。
 
-      export const applyEM = () => {
-        const type = emType,
-          f = mf[type];
+      export const applyEMNow = () => {
+        const type = emType;
+        if (!type) return;
+        const f = mf[type];
         let items = [];
         if (type === 'masou') {
           const cid = team[emSlot]?.chara;   // variant_id (6位)
@@ -2454,6 +2456,21 @@
         renderEMList(items);
       };
 
+      // 点击(开选择器 / 切筛选)已同步提交即时反馈(开 modal、ftog .on),
+      // 重活(过滤 + 渲染数百条)推迟到下一帧后再跑 → INP 只算即时反馈那帧;
+      // rAF 双跳保证先绘制反馈帧;pending 合并去重(连点多个筛选只渲染一次最终态)。
+      let _emRenderPending = false;
+      export const applyEM = () => {
+        if (_emRenderPending) return;
+        _emRenderPending = true;
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => {
+            _emRenderPending = false;
+            applyEMNow();
+          }),
+        );
+      };
+
       export const _fmtSortVal = (v) => {
         if (v == null) return '—';
         if (typeof v !== 'number') return String(v);
@@ -2464,34 +2481,25 @@
         return `<span class="sort-val">${_fmtSortVal(fn ? fn(c) : null)}</span>`;
       };
 
-      export const renderEMList = (items) => {
-        const list = document.getElementById('em-list');
+      // 选择列表 virtual scrolling(与 crystals/bladegraphs 同一套 VirtualList):
+      // 全量 innerHTML 时 crystal 2063 行每次打开要数百 ms → 只把 viewport±buffer 内的行建成 DOM。
+      // 骨架: #em-list(scroll 容器)直下 = sticky 外す行 / 該当なし / #em-vlist(VirtualList 容器)。
+      // VirtualList 构造时探测 scroll 祖先 → 不能在 modal 隐藏时构造
+      // (applyEMNow 的 emType 守卫会拦掉 closeEM 之后的延迟执行)。
+      // 屏外行根本不在 DOM → 不再需要 data-src/setupLazyImg,native lazy 就够。
+      let _emVL = null;
+      const _emRowH = { chara: 62, soul: 62, bg: 62, crystal: 62, masou: 62 };
+      const _emRowHTML = (item) => {
         const type = emType;
-        let h = '';
-        const clearTxt = {
-          chara: '魔剣を外す',
-          soul: 'ソウルを外す',
-          bg: '心象結晶を外す',
-          crystal: '結晶を外す',
-          masou: '魔装を外す',
-        };
-        // 4 种选择列表的 "外す" 行都 sticky 在顶部
-        h += `<div class="em-clear sticky" onclick="selectEM(null)">— ${clearTxt[type] || '外す'}</div>`;
-        if (!items.length) {
-          list.innerHTML = h + '<div class="em-no-results">該当なし</div>';
-          return;
-        }
-
         if (type === 'chara') {
+          const c = item;
+          const cur = team[emSlot]?.chara === c.id;
           const sortKey = mf.chara.sort;
-          h += items
-            .map((c) => {
-              const cur = team[emSlot]?.chara === c.id;
-              const sortBadge = sortKey ? renderSortBadge(c, sortKey) : '';
-              const rLabel = RARITY[c.rarity] || c.rarity || '?';
-              return min`
+          const sortBadge = sortKey ? renderSortBadge(c, sortKey) : '';
+          const rLabel = RARITY[c.rarity] || c.rarity || '?';
+          return min`
         <div class="em-item em-item-bg${cur ? ' active' : ''}" onclick="selectEM(${c.id})">
-          ${charaIconStack({ variantId: c.id, name: c.name, elementId: c.element, weaponTypeId: c.weapon, marriageLevel: 2, className: 'em-thumb', lazy: 'io' })}
+          ${charaIconStack({ variantId: c.id, name: c.name, elementId: c.element, weaponTypeId: c.weapon, marriageLevel: 2, className: 'em-thumb' })}
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="badge ${rLabel}" style="flex-shrink:0">${rLabel}</span>
@@ -2503,21 +2511,19 @@
           </div>
           <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${c.id})">詳細</button>
         </div>`;
-            })
+        }
+        if (type === 'soul') {
+          const s = item;
+          const cur = team[emSlot]?.soul === s.id;
+          const eb = (s.element || [])
+            .map((e) => `<span class="badge elem-${e}">${ELEMENT[e] || ''}</span>`)
             .join('');
-        } else if (type === 'soul') {
-          h += items
-            .map((s) => {
-              const cur = team[emSlot]?.soul === s.id;
-              const eb = (s.element || [])
-                .map((e) => `<span class="badge elem-${e}">${ELEMENT[e] || ''}</span>`)
-                .join('');
-              const wb = (s.weapon || [])
-                .map((t) => `<span class="badge weapon">${WEAPON[t] || ''}</span>`)
-                .join('');
-              return min`
+          const wb = (s.weapon || [])
+            .map((t) => `<span class="badge weapon">${WEAPON[t] || ''}</span>`)
+            .join('');
+          return min`
         <div class="em-item em-item-bg${cur ? ' active' : ''}" onclick="selectEM(${s.id})">
-          <img class="em-icon soul" data-src="../icons/soul/${s.id}.png" onerror="this.style.visibility='hidden'" alt="">
+          <img class="em-icon soul" src="../icons/soul/${s.id}.png" loading="lazy" onerror="this.style.visibility='hidden'" alt="">
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="badge weapon" style="flex-shrink:0">★${s.rarity}</span>
@@ -2527,15 +2533,13 @@
           </div>
           <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${s.id},'soul')">詳細</button>
         </div>`;
-            })
-            .join('');
-        } else if (type === 'bg') {
-          h += items
-            .map((b) => {
-              const cur = team[emSlot]?.bg === b.id;
-              return min`
+        }
+        if (type === 'bg') {
+          const b = item;
+          const cur = team[emSlot]?.bg === b.id;
+          return min`
         <div class="em-item em-item-bg${cur ? ' active' : ''}" onclick="selectEM(${b.id})">
-          <img class="em-icon" data-src="../icons/bg/${b.id}.png" onerror="this.style.visibility='hidden'" alt="">
+          <img class="em-icon" src="../icons/bg/${b.id}.png" loading="lazy" onerror="this.style.visibility='hidden'" alt="">
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="badge weapon" style="flex-shrink:0">★${b.rarity}</span>
@@ -2545,15 +2549,13 @@
           </div>
           <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${b.id},'bg')">詳細</button>
         </div>`;
-            })
-            .join('');
-        } else if (type === 'crystal') {
-          h += items
-            .map((c) => {
-              const cur = team[emSlot]?.crystals[emCi]?.id === c.id;
-              return min`
+        }
+        if (type === 'crystal') {
+          const c = item;
+          const cur = team[emSlot]?.crystals[emCi]?.id === c.id;
+          return min`
         <div class="em-item em-item-bg${cur ? ' active' : ''}" onclick="selectEM(${c.id})">
-          <img class="em-icon" data-src="${crystalImageSrc(c)}" onerror="this.style.visibility='hidden'" alt="">
+          <img class="em-icon" src="${crystalImageSrc(c)}" loading="lazy" onerror="this.style.visibility='hidden'" alt="">
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="badge weapon" style="flex-shrink:0">★${c.rarity}</span>
@@ -2563,15 +2565,13 @@
           </div>
           <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${c.id},'crystal')">詳細</button>
         </div>`;
-            })
-            .join('');
-        } else if (type === 'masou') {
-          h += items
-            .map((m) => {
-              const cur = team[emSlot]?.masou === m.id;
-              return min`
+        }
+        if (type === 'masou') {
+          const m = item;
+          const cur = team[emSlot]?.masou === m.id;
+          return min`
         <div class="em-item em-item-bg${cur ? ' active' : ''}" onclick="selectEM(${m.id})">
-          <img class="em-icon" data-src="../icons/masou/${m.id}.png" onerror="this.style.visibility='hidden'" alt="">
+          <img class="em-icon" src="../icons/masou/${m.id}.png" loading="lazy" onerror="this.style.visibility='hidden'" alt="">
           <div class="em-bg-body">
             <div class="em-bg-header">
               <span class="em-bg-name">${escHtml(m.name || '')}</span>
@@ -2580,12 +2580,45 @@
           </div>
           <button class="em-detail-btn" onclick="event.stopPropagation();openDetailModal(${m.id},'masou')">詳細</button>
         </div>`;
-            })
-            .join('');
         }
-        list.innerHTML = h;
-        // IO-based lazy: list 自己 scroll、native lazy 失效、按内部 scroll 进度按需 fetch
-        setupLazyImg(list);
+        return '';
+      };
+      export const renderEMList = (items) => {
+        const list = document.getElementById('em-list');
+        const clearTxt = {
+          chara: '魔剣を外す',
+          soul: 'ソウルを外す',
+          bg: '心象結晶を外す',
+          crystal: '結晶を外す',
+          masou: '魔装を外す',
+        };
+        // 静态骨架只建一次(sticky 外す行在 VirtualList 容器外 = 和从前一样常驻顶部)
+        if (!document.getElementById('em-vlist')) {
+          list.innerHTML =
+            '<div class="em-clear sticky" id="em-clear-row" onclick="selectEM(null)"></div>' +
+            '<div class="em-no-results" id="em-no-results" style="display:none">該当なし</div>' +
+            '<div id="em-vlist"></div>';
+        }
+        document.getElementById('em-clear-row').textContent = `— ${clearTxt[emType] || '外す'}`;
+        document.getElementById('em-no-results').style.display = items.length ? 'none' : '';
+        if (!items.length) {
+          if (_emVL) _emVL.setItems([]);
+          return;
+        }
+        if (!_emVL) {
+          _emVL = new VirtualList({
+            container: document.getElementById('em-vlist'),
+            items,
+            getRowId: (x) => x.id,
+            renderRow: _emRowHTML,
+            estimateHeight: () => _emRowH[emType] || 62,
+            onMeasure: (x, real) => {
+              _emRowH[emType] = real;
+            },
+          });
+        } else {
+          _emVL.setItems(items);
+        }
       };
 
       export const selectEM = (id) => {

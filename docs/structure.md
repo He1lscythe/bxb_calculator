@@ -124,12 +124,12 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | 模块 | 用途 |
 |---|---|
 | [stats-calc.js](../shared/stats-calc.js) | hensei 7-stage stat 计算 (HP-curve / Break gate / 4 stage apply / DLB cap / Speed / MotionSpeed / enemy mods)、`ctx.traceEnabled` 时返回 dev trace (stat-trace modal 数据源、见 hensei_calc.md) |
-| [hensei-helpers.js](../shared/hensei-helpers.js) | UI 用 lv/觉醒/熟度表 + soulMultiplier / crystalEffectiveValue / crystalMaxBairitu / BlazeGauge 系统 |
+| [hensei-helpers.js](../shared/hensei-helpers.js) | UI 用 lv/觉醒/熟度参数 (`charaLvParams` master 直读 states.stats、硬编码表仅 fallback) + soulMultiplier / crystalEffectiveValue / crystalMaxBairitu / BlazeGauge 系统 |
 | [revise-core.js](../shared/revise-core.js) | sparse diff core (`computeDiff` 三参含撤回 + `deepApply` + tombstone null)。数组 (2026-06-19):带 id 对象数组 (weapon_skills/soul.skills) 按 **id** 局部 patch (robust 到重排);标量数组 (tags)/无 id 数组 (masou effects) 整组替换;已弃用 index 稀疏 |
 | [save-client.js](../shared/save-client.js) | POST /save 路由 (local `start.py:8787` / Vercel `/api/save.js`) + toast 反馈 |
 | [chara-adapter.js](../shared/chara-adapter.js) / [soul-adapter.js](../shared/soul-adapter.js) / [crystal-adapter.js](../shared/crystal-adapter.js) / [masou-adapter.js](../shared/masou-adapter.js) | master → wiki shape adapter (含 `deepApply(master, revise)` wrap) |
 | [image-paths.js](../shared/image-paths.js) | master id → `icons/` 相对路径 + `charaIconStack` 叠层 helper (marriage 框 + element + weapon_type、含 `lazy: 'native'\|'io'` 选项) |
-| [virtual-list.js](../shared/virtual-list.js) | 简单 virtual scrolling、屏幕外 row 不在 DOM、用在 cr-list / bg-list (2063+506 expand all 不卡) |
+| [virtual-list.js](../shared/virtual-list.js) | 简单 virtual scrolling、屏幕外 row 不在 DOM、用在 cr-list / bg-list (2063+506 expand all 不卡) + hensei 实体选择器 #em-list (5 类型共用、crystal 2063 行秒开) |
 | [lazy-img.js](../shared/lazy-img.js) | IntersectionObserver-based img lazy、`setupLazyImg(scrollRoot)` swap `data-src→src`、适用自定义 scroll 容器 (native HTML5 lazy 只看 document viewport、容器 scroll 失效) |
 | [constants.js](../shared/constants.js) | PARAMETER (91) / MATH_TYPE / RANGE / ELEMENT / WEAPON / CONDITION 等 enum |
 | [parameter-class.js](../shared/parameter-class.js) | PARAMETER_CLASS (35 类効果分类) + PARAMETER_CLASS_LABEL/SHORT |
