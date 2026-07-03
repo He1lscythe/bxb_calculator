@@ -73,3 +73,30 @@ test('B. expandAll→collapseAll 后高度不虚高 + 滚到底有 row', async (
   // 底部不空白
   expect(diag.inVP, '滚到底视口 row 数').toBeGreaterThan(0);
 });
+
+test('C. 销毁→短内容重建→恢复全量 后 列表滚动仍补渲染 (scroll 监听重探测, 2026-07-03)', async ({ page }) => {
+  await page.setViewportSize({ width: 1120, height: 1259 });
+  await loadCrystals(page);
+
+  // 0 结果 → renderList 销毁 vlist;少量结果 → 重建 (此刻内容比容器短、scrollHeight==clientHeight
+  // → _findScrollParent 曾误回退 window);清空 → setItems 全量。
+  await page.fill('#search', 'zzzzzz');
+  await page.waitForTimeout(300);
+  await page.fill('#search', 'かまいたち');
+  await page.waitForTimeout(300);
+  const few = await page.evaluate(() => window.state.filteredCrystals.length);
+  expect(few, '短内容重建前提').toBeGreaterThan(0);
+  expect(few).toBeLessThan(10);
+  await page.fill('#search', '');
+  await page.waitForTimeout(400);
+
+  await page.evaluate(() => {
+    document.getElementById('crystal-list').scrollTop = 3000;
+  });
+  await page.waitForTimeout(400);
+  const tops = await page.evaluate(() =>
+    [...document.querySelectorAll('.crystal-row')].map((r) => parseInt(r.style.top, 10)),
+  );
+  // 修前: 监听留在 window、列表滚动不触发 _render → row 停在初始窗 (lastTop ~1364) → 3000 处空白
+  expect(Math.max(...tops), '滚到 3000 后应渲染该区域的 row').toBeGreaterThan(2400);
+});
