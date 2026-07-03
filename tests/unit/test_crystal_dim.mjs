@@ -82,6 +82,25 @@ test('crystalDimAvailability: cr=null 安全 (空 slot)', () => {
   assert.deepStrictEqual(a, { hasW: false, hasP: false, hasLv: false });
 });
 
+test('crystalDimAvailability: 固定重量 min==max → hasW=false (滑条不显示、值恒 M_W_max)', () => {
+  const a = crystalDimAvailability({
+    _master: { M_W_max: 1.5, min_weight: 100, max_weight: 100, max_level: 1 },
+  });
+  assert.strictEqual(a.hasW, false);
+});
+
+test('crystalDimAvailability: 固定纯度 min==max → hasP=false', () => {
+  const a = crystalDimAvailability({
+    _master: { M_P_max: 1.31, min_purity: 100, max_purity: 100, max_level: 1 },
+  });
+  assert.strictEqual(a.hasP, false);
+});
+
+test('crystalDimAvailability: range 留空 (0/100 缺省) → hasW 不受影响', () => {
+  const a = crystalDimAvailability({ _master: { M_W_max: 1.5, max_level: 1 } });
+  assert.strictEqual(a.hasW, true);
+});
+
 // ============================================================
 // crystalSliderStep — revise 没填 weight_step / purity_step 时 fallback
 // ============================================================
