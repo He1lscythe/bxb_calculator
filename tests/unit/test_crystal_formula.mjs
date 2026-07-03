@@ -141,15 +141,46 @@ test('退化: max_level=1 → ratio=0、fallback init=max_value 时也走 init',
   assert.strictEqual(crystalEffectiveValue(cr, { lv: 1 }), 5.0);
 });
 
-test('退化: 三因子 max_weight == min_weight → MW=1 (无插值)', () => {
+test('固定重量: min_weight == max_weight → MW 恒取 M_W_max (2026-07-02 语义)', () => {
   const cr = mkCrystal({
     initial_value: 1.0,
     max_level: 10,
     M_W_max: 2.0,
     min_weight: 50, max_weight: 50,
   });
-  // 不管 W 值都 MW=1
-  assert.strictEqual(crystalEffectiveValue(cr, { lv: 10, weight: 50, purity: 100 }), 1.0);
+  // 不管 W 值都 MW = M_W_max
+  assert.strictEqual(crystalEffectiveValue(cr, { lv: 10, weight: 50, purity: 100 }), 2.0);
+  assert.strictEqual(crystalEffectiveValue(cr, {}), 2.0);
+});
+
+test('固定重量 min=max=100 + M_W_max=1.5 → init × 1.5 (用户填法)', () => {
+  const cr = mkCrystal({
+    initial_value: 1.2,
+    max_level: 1,
+    M_W_max: 1.5,
+    min_weight: 100, max_weight: 100,
+  });
+  assert.strictEqual(Math.abs(crystalEffectiveValue(cr, {}) - 1.8) < 1e-9, true);
+});
+
+test('固定纯度: min_purity == max_purity → MP 恒取 M_P_max', () => {
+  const cr = mkCrystal({
+    initial_value: 1.0,
+    max_level: 1,
+    M_P_max: 1.31,
+    min_purity: 100, max_purity: 100,
+  });
+  assert.strictEqual(Math.abs(crystalEffectiveValue(cr, {}) - 1.31) < 1e-9, true);
+});
+
+test('固定重量约定不影响 lv: max_level=1 + M_L_max → ML=1', () => {
+  const cr = mkCrystal({
+    initial_value: 2.0,
+    max_level: 1,
+    M_L_max: 1.2,
+  });
+  // lv 维度保持既有语义: lvMax=1 → ML=1、不取 M_L_max
+  assert.strictEqual(crystalEffectiveValue(cr, {}), 2.0);
 });
 
 console.log('\n[test_crystal_formula] all tests defined');

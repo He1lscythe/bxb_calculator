@@ -82,8 +82,8 @@ export const emblemLvMax = (rarity) => EMBLEM_RARITY_LV_MAX[+rarity] ?? 1;
 export const crystalDimAvailability = (cr) => {
   const m = cr?._master || {};
   return {
-    hasW: m.M_W_max != null,
-    hasP: m.M_P_max != null,
+    hasW: m.M_W_max != null && (m.min_weight ?? 0) < (m.max_weight ?? 100),
+    hasP: m.M_P_max != null && (m.min_purity ?? 0) < (m.max_purity ?? 100),
     hasLv: cr ? cryLvMax(cr) > 1 : false,
   };
 };
@@ -110,9 +110,12 @@ export const clampCrystalMasterField = (field, val) => {
 
 // crystal 因子行: 重量/純度 range (min/max) 是否显示
 //   M_W_max null 或 =1 → 无 weight 缩放、min/max 都默认 100、不显示 range
+//   min==max(固定重量/纯度、恒取 M_*_max)→ range 无意义、也不显示
 //   M_P_max 同理
-export const crystalShowWeightRange = (m) => m?.M_W_max != null && m.M_W_max !== 1;
-export const crystalShowPurityRange = (m) => m?.M_P_max != null && m.M_P_max !== 1;
+export const crystalShowWeightRange = (m) =>
+  m?.M_W_max != null && m.M_W_max !== 1 && (m.min_weight ?? 0) < (m.max_weight ?? 100);
+export const crystalShowPurityRange = (m) =>
+  m?.M_P_max != null && m.M_P_max !== 1 && (m.min_purity ?? 0) < (m.max_purity ?? 100);
 
 // cr-edit min_weight / min_purity 输入 placeholder
 //   重量/純度 无缩放时、placeholder 显 100 (语义: 值固定 100)
@@ -192,9 +195,11 @@ export function crystalEffectiveValue(cr, cfg) {
   const maxP = m.max_purity ?? 100;
   const W = cfg?.weight ?? maxW;
   const P = cfg?.purity ?? maxP;
+  // 固定重量/纯度约定: 显式填 min==max → 该维度不可调、恒取满值 M_*_max
+  // (lv 不适用此约定: max_level=1 → ML=1 是既有语义、等级固定=初始值)
   const ML = lvMax > 1 ? 1 + ((ML_max - 1) * (lv - 1)) / (lvMax - 1) : 1;
-  const MW = maxW > minW ? 1 + ((MW_max - 1) * (W - minW)) / (maxW - minW) : 1;
-  const MP = maxP > minP ? 1 + ((MP_max - 1) * (P - minP)) / (maxP - minP) : 1;
+  const MW = maxW > minW ? 1 + ((MW_max - 1) * (W - minW)) / (maxW - minW) : MW_max;
+  const MP = maxP > minP ? 1 + ((MP_max - 1) * (P - minP)) / (maxP - minP) : MP_max;
   return initV * ML * MW * MP;
 }
 
