@@ -282,8 +282,8 @@ clamp(repel_rate, 0, 100)
 | **soul 觉醒** slider | `tr.soul_awakening` | soul max_lv += 5 × soul_awakening (cap 75) | ✅ |
 | **soul affinity** (元素/武器相性倍率) | (自动、装备 chara 决定) | 攻撃力/ブレイク力 × positive_value、防御力 × negative_value | ✅ |
 | **crystal lv** slider | `crystals[i].lv` | `crystalEffectiveValue`: 三因子 (M_L/W/P_max) 或 max_value 线性插值 | ✅ |
-| **crystal 重量** slider | `crystals[i].weight` | 三因子公式 weight 维度 (M_W_max + min/max_weight + weight_step revise) | ✅ |
-| **crystal 純度** slider | `crystals[i].purity` | 三因子公式 purity 维度 | ✅ |
+| **crystal 重量** slider | `crystals[i].weight` | 三因子公式 weight 维度 (M_W_max + min/max_weight + weight_step revise)。**固定重量约定 (2026-07-02)**: revise 显式填 `min_weight == max_weight`(如 100/100)→ M_W 恒取 M_W_max、⚙ 不显示重量滑条、因子行不显示 range(用于只存在单一重量的结晶,如 M_W_max=1.5 恒 ×1.5);留空(缺省 0/100)行为不变 | ✅ |
+| **crystal 純度** slider | `crystals[i].purity` | 三因子公式 purity 维度(固定纯度约定同 weight:`min_purity == max_purity` → 恒 M_P_max)。**lv 维度不适用此约定**(`max_level=1 → M_L=1` 是既有语义) | ✅ |
 | **秘録記憶 装備** | `crystals[]` 内容 | 自分の `weapon_base_id` 一致の秘録記憶装備中 → 結晶枠 +1 (desc `[結晶枠+1(上限1)]`、複数でも +1)。`crystalSlotCount` 判定、外すと `syncCrystals` が固定点まで收敛 (slice が秘録本体を外す連鎖対応) | ✅ |
 | **target slot** 切换 (1/2/3) | (UI、不存 tr) | 改算哪个 slot 的 stat、跨 slot range='All' buff 仍来自其他 slot | ✅ |
 | **omoide picks** (memory slot) | `tr.omoide_picks` | omoide source effect (Add → s1、Mul → s4a)、`_omoide_slots` Frida 抓包数据 + affection_threshold gate | ✅ |
