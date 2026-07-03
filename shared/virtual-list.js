@@ -156,12 +156,25 @@ export class VirtualList {
   _relayout() {
     this._computeLayout();
     this.inner.style.height = `${this.totalHeight}px`;
+    // 内容高度变化会改变滚动归属:构造时内容比容器短 (scrollHeight==clientHeight、如"搜到 1 条"
+    // 时销毁重建) → _findScrollParent 误回退 window、之后 setItems 变长列表滚动接不到事件 →
+    // 只剩初始那窗行、下面空白。每次 relayout (inner 高度已更新) 重探测一次、变了就迁移监听。
+    this._rebindScroll();
     // 已 mount 的 node、top 可能变化、同步更新
     for (const e of this.layout) {
       const node = this.visibleNodes.get(e.id);
       if (node) node.style.top = `${e.top}px`;
     }
     this._render();
+  }
+
+  _rebindScroll() {
+    const el = _findScrollParent(this.container);
+    if (el !== this._scrollEl) {
+      this._scrollEl.removeEventListener('scroll', this._scrollHandler);
+      this._scrollEl = el;
+      this._scrollEl.addEventListener('scroll', this._scrollHandler, { passive: true });
+    }
   }
 
   _schedule() {
@@ -177,12 +190,7 @@ export class VirtualList {
   // 重新检测、变了就把 scroll 监听迁到新元素 — 否则滚动接不到 (只显示初始那批、往下空白)、
   // 或虚拟化按错容器算 (mobile overflow:visible 时 container.clientHeight=全内容 → 全量渲染、占内存)。
   _onResize() {
-    const newEl = _findScrollParent(this.container);
-    if (newEl !== this._scrollEl) {
-      this._scrollEl.removeEventListener('scroll', this._scrollHandler);
-      this._scrollEl = newEl;
-      this._scrollEl.addEventListener('scroll', this._scrollHandler, { passive: true });
-    }
+    this._rebindScroll();
     this._schedule();
   }
 
