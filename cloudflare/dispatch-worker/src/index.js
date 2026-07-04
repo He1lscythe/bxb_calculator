@@ -44,24 +44,28 @@ const DAILY_CRON = "29 1,8,15,20 * * *";
 const DAILY_HOUR_TP = { 15: "1", 20: "2", 1: "3", 8: "4" };  // UTC hour → time_point (JST 00:29/05:29/10:29/17:29)
 
 // 按触发的 cron 表达式决定调哪个 workflow
-async function runForCron(cron, env) {
+// scheduledTime = cron 的计划时刻(epoch ms)。小时判定必须用它而不是 new Date():
+// Cron Trigger 是 best-effort、执行可能被推迟到下一个整点之后 → getUTCHours() 查表 miss、
+// 静默不 dispatch(实证 2026-07-04 daily-3 丢失)。计划时刻不受执行延迟影响。
+async function runForCron(cron, env, scheduledTime) {
+  const hour = new Date(scheduledTime || Date.now()).getUTCHours();
   if (cron === "8 7 * * *") {
     await dispatch(env, "bxb-topics.yml", { mode: "window" });
   } else if (cron === DAILY_CRON) {
-    const tp = DAILY_HOUR_TP[new Date().getUTCHours()];
+    const tp = DAILY_HOUR_TP[hour];
     if (tp) await dispatch(env, "daily.yml", { time_point: tp });   // shards 用 daily.yml 默认
+    else console.log(`daily cron fired at unexpected hour ${hour}, no dispatch`);
   } else {
     // "1 * * * *" 每小时:topics auto 轮询;UTC 7/15 点额外触发 update-database (JST 16:01 / 00:01)。
     // (一条 cron 触发两个 workflow、省 cron 槽。)
     await dispatch(env, "bxb-topics.yml", { mode: "auto" });
-    const h = new Date().getUTCHours();
-    if (h === 7 || h === 15) await dispatch(env, "update-database.yml");
+    if (hour === 7 || hour === 15) await dispatch(env, "update-database.yml");
   }
 }
 
 export default {
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(runForCron(event.cron, env));
+    ctx.waitUntil(runForCron(event.cron, env, event.scheduledTime));
   },
 
   // 手动测试端点: GET /trigger?key=<TRIGGER_KEY>&wf=update-database|topics-auto|topics-window|daily-1..4
