@@ -171,8 +171,7 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 
 **Audit / 一次性产物**:
 - `_wiki_aux.json` — 一次性 wiki 提取 (crystal_max_value + chara_tags + chara_skill_value_scaling + masou_value_scaling)、永不重跑
-- `_audit_crystals_null_math.json` — math_type 反查失败的 crystal audit
-- `_wiki_unmatched_crystals.json` — wiki_aux 未匹配的 crystal audit
+- `_audit_crystals_null_math.json` / `_wiki_unmatched_crystals.json` — build_crystals 每轮重生的诊断输出、gitignored 不入库 (2026-07-04 起)
 
 ---
 

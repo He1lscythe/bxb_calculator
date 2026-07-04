@@ -153,8 +153,7 @@ jobs:
         run: |
           git add data/characters.json data/souls.json data/crystals.json \
                   data/bladegraphs.json data/masou.json data/senzai_table.json \
-                  data/_npc_motions.json data/_wiki_unmatched_crystals.json \
-                  data/_audit_crystals_null_math.json icons/ 2>/dev/null || true
+                  data/_npc_motions.json icons/ 2>/dev/null || true
           # crystal/bg_revise 被上面「Fetch 现版 revise」步骤的 git checkout 顺带 staged 进 index 了;
           # 它们是 data-staging-only (main 不跟踪 revise)、从 main 提交里 reset 掉、避免被裸 commit 扫进来
           git reset -q HEAD data/crystal_revise.json data/bg_revise.json 2>/dev/null || true
