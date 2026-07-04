@@ -1,7 +1,6 @@
-"""build_all.py — 跑 Phase 2.0 + 2.1-2.6 全套 build script。
+"""build_all.py — 跑 Phase 2.1-2.6 全套 build script。
 
 执行顺序:
-  0. (一次性、可省略) extract_wiki_aux.py 产 _wiki_aux.json
   1. build_senzai.py
   2. build_masou.py
   3. build_bladegraphs.py
@@ -16,7 +15,6 @@ incremental skip (2026-06-09):
 用法:
   python scripts/master_to_business/build_all.py              # incremental: 上游 unchanged → 跳
   python scripts/master_to_business/build_all.py --force      # 强制全 build (调试 / 手改 master 时用)
-  python scripts/master_to_business/build_all.py --with-wiki  # 含 extract_wiki_aux (一般不需要)
 """
 import json
 import sys
@@ -81,14 +79,6 @@ STEPS = [
 
 
 def main():
-    if "--with-wiki" in sys.argv:
-        import extract_wiki_aux  # noqa
-        print("=" * 60)
-        print("PHASE 2.0: extract_wiki_aux (一次性、慎跑)")
-        print("=" * 60)
-        extract_wiki_aux.main()
-        print()
-
     force = "--force" in sys.argv
     need, reason = _needs_build()
     if not force and not need:
