@@ -282,6 +282,20 @@ test('baseStats: awakening 满 → ×AWAKENING_FULL_MULT', () => {
   const expected = 13000 * AWAKENING_FULL_MULT[4];
   assert.ok(Math.abs(b.Attack - expected) < 1, `expected ~${expected}, got ${b.Attack}`);
 });
+test('baseStats: 転速 Speed 不吃觉醒段 (cap 处封顶、awakening 无加成)', () => {
+  const c = mockChara(); // initial_speed 9 / max_speed 22 / max_max_level 250
+  const awkMax = AWAKENING_MAX[4];
+  // 熟度 60 → cap = min(250, 60+59*5) = 250、lv 拉到 cap + 觉醒*5 满
+  const capped = { ...mkTr(), state: '通常', level: 250, jukudo: 60, awakening: 0 };
+  const awakened = { ...mkTr(), state: '通常', level: 250 + awkMax * 5, jukudo: 60, awakening: awkMax };
+  const bCap = baseStats(c, capped);
+  const bAwk = baseStats(c, awakened);
+  // Speed 封顶 = max_speed = 22 (lv=cap=max_max_level → t=1)
+  assert.strictEqual(bCap.Speed, 22);
+  // 觉醒满、Speed 仍 22 (不放大); 但 Attack 仍吃觉醒段放大 → 对照
+  assert.strictEqual(bAwk.Speed, 22);
+  assert.ok(bAwk.Attack > bCap.Attack, 'Attack 仍吃觉醒段、应大于 cap 值');
+});
 
 // ============================================================
 // 6. computeStats 集成 — chara + soul + crystal effect 全走完
