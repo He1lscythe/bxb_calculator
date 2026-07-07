@@ -97,13 +97,14 @@ export function maxLevelAtMature(stateData, mature) {
 //   base 段 (lv ≤ cap): initial + (max - initial) * (lv - 1) / (max_max_level - 1)
 //     lv=1 → initial、lv=max_max_level → max、线性插值
 //   觉醒段 (lv > cap): 上式 × (1 + (lv-cap)/(awk_max*5) * (mult-1))
-function _baseStatRaw(initial, max, max_max_level, lv, cap, rarity) {
+// noAwakening=true → 只算 base 段、觉醒不放大 (転速 Speed 用: cap 处即封顶、超 cap 的觉醒等级不加成)
+function _baseStatRaw(initial, max, max_max_level, lv, cap, rarity, noAwakening = false) {
   if (!max || !initial || !max_max_level) return 0;
   if (lv < 1) return 0;
   const lvBase = Math.min(lv, cap);
   const t = max_max_level > 1 ? (lvBase - 1) / (max_max_level - 1) : 0;
   const base = initial + (max - initial) * t;
-  if (lv <= cap) return base;
+  if (noAwakening || lv <= cap) return base;
   const awkMax = AWAKENING_MAX[rarity] || 9;
   const fullMult = AWAKENING_FULL_MULT[rarity] || 1.43;
   const lvOver = lv - cap;
@@ -129,7 +130,8 @@ export function baseStats(charaWiki, tr) {
     Attack: Math.floor(_baseStatRaw(stats.initial_attack, stats.max_attack, max_max_level, effLv, cap, m.rarity)),
     Defense: Math.floor(_baseStatRaw(stats.initial_defense, stats.max_defense, max_max_level, effLv, cap, m.rarity)),
     GuardBreak: Math.floor(_baseStatRaw(stats.initial_break, stats.max_break, max_max_level, effLv, cap, m.rarity)),
-    Speed: Math.floor(_baseStatRaw(stats.initial_speed, stats.max_speed, max_max_level, effLv, cap, m.rarity)),
+    // 転速 Speed 不吃觉醒段放大 (noAwakening): cap(熟度决定)处封顶、觉醒等级不再提升 base.Speed
+    Speed: Math.floor(_baseStatRaw(stats.initial_speed, stats.max_speed, max_max_level, effLv, cap, m.rarity, true)),
     _lv: effLv,
     _cap: cap,
     _max_lv_with_awk: cap + (tr.awakening || 0) * 5,

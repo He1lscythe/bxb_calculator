@@ -28,6 +28,7 @@ collection: 遍历 3 slot、给每个 effect 打 source tag
 - 熟度 → 等级上限: `min(max_max_level, initial_max_level + (mature - 1) × 5)`
 - **觉醒倍率内嵌** (`MAX_AWAKENING` / `AWAKENING_FULL_MULT`): SS 9 段觉醒满 → ×1.43、S 14 段 → ×2.42、AA 36 段 → ×4.45、A 24 段 → ×5.37
 - 觉醒倍率应用在 base 算法里、**不进 stage pipeline**
+- **例外: 転速 (Speed) 不吃觉醒段** (`_baseStatRaw(..., noAwakening=true)`): Speed 在熟度决定的 cap 处封顶、超 cap 的觉醒等级不再放大。HP/攻撃力/防御力/ブレイク力 四项照常吃觉醒段
 
 omoide memory slot 加成走 stage 1、不参与 base 计算。
 
@@ -252,7 +253,7 @@ clamp(repel_rate, 0, 100)
 | Hit1-3 | 战前 server-fold:按 `orderServerFold` 顺序逐 effect、每步 `cur = trunc(cur op val)` + **每步 clamp ≥1**(顺序敏感、见上节)、终 `max(1)` | `_computeImpl` hits loop |
 | フルヒット攻撃力 | `floor(Attack × Σhits)` | 同上 |
 | ダメ上限 | `floor(2^31-1 × ΠMul + ΣAdd)` DamageLimitBreak 池、单 loop 按 effects 顺序 | 同上 |
-| 転速 | `latestRecover = ΣAdd + (soul_lv/100+1) × ΠMul × base.Speed`、cooldown = `max(1, ceil(6000/recover))` fr | `_computeSpeed` |
+| 転速 | `latestRecover = ΣAdd + (soul_lv/100+1) × ΠMul × base.Speed`、cooldown = `max(1, ceil(6000/recover))` fr。`base.Speed` **不含觉醒段**(熟度 cap 处封顶) | `_computeSpeed` |
 | 攻速 1-3 | `motion_speed_i × ΠMul + ΣAdd`、帧 = `1 + max(1, ceil(dur/spd × 60))` | `_computeMotionSpeed` |
 | BD上限 max | `max(9, floor((9 + Σadd) × Πmul))` BlazeGaugeMaxLevel 池 | `_computeImpl` |
 | 初期BD | BlazeGauge Add (mode 1 直接 / mode 2 队伍属性 count) → cumsum 反查 level | `computeBlazeGaugePoints` + `bdCapFromBlazeGauge` |
