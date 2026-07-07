@@ -56,12 +56,19 @@ export const mpRate = (curMp, maxMp) => {
 // 等级 / 熟度 / 觉醒 (跟 master 字段直读)
 // ============================================================
 // 觉醒 (master 没 awakening 字段、跟 chara.rarity 挂钩):
-//   rarity 4 (SS) → 9 次觉醒、满 ×1.43
-//   rarity 3 (S)  → 14 次、       ×2.42
-//   rarity 2 (AA) → 36 次、       ×4.45
-//   rarity 1 (A)  → 24 次、       ×5.37
+//   最大觉醒数: rarity 4 (SS) → 9 次、3 (S) → 14 次、2 (AA) → 36 次、1 (A) → 24 次
+//   满觉醒倍率按属性区分 (HP / Attack / Defense / GuardBreak; Speed 不吃觉醒段):
+//     rarity 4 (SS): HP ×1.33 / 攻 ×1.43 / 防 ×1.28 / BK ×1.46
+//     rarity 3 (S):  HP ×1.34 / 攻 ×2.42 / 防 ×1.26 / BK ×1.54
+//     rarity 2 (AA): HP ×1.82 / 攻 ×4.45 / 防 ×1.63 / BK ×1.31
+//     rarity 1 (A):  HP ×2.36 / 攻 ×5.37 / 防 ×4.12 / BK ×2.1
 export const AWAKENING_MAX = { 4: 9, 3: 14, 2: 36, 1: 24 };
-export const AWAKENING_FULL_MULT = { 4: 1.43, 3: 2.42, 2: 4.45, 1: 5.37 };
+export const AWAKENING_FULL_MULT = {
+  4: { HP: 1.33, Attack: 1.43, Defense: 1.28, GuardBreak: 1.46 },
+  3: { HP: 1.34, Attack: 2.42, Defense: 1.26, GuardBreak: 1.54 },
+  2: { HP: 1.82, Attack: 4.45, Defense: 1.63, GuardBreak: 1.31 },
+  1: { HP: 2.36, Attack: 5.37, Defense: 4.12, GuardBreak: 2.1 },
+};
 
 // 默认 tr (hensei UI 初始化用) — 字段名对齐 hensei.html
 export function mkTr() {
@@ -96,17 +103,17 @@ export function maxLevelAtMature(stateData, mature) {
 // 公式:
 //   base 段 (lv ≤ cap): initial + (max - initial) * (lv - 1) / (max_max_level - 1)
 //     lv=1 → initial、lv=max_max_level → max、线性插值
-//   觉醒段 (lv > cap): 上式 × (1 + (lv-cap)/(awk_max*5) * (mult-1))
-// noAwakening=true → 只算 base 段、觉醒不放大 (転速 Speed 用: cap 处即封顶、超 cap 的觉醒等级不加成)
-function _baseStatRaw(initial, max, max_max_level, lv, cap, rarity, noAwakening = false) {
+//   觉醒段 (lv > cap): 上式 × (1 + (lv-cap)/(awk_max*5) * (mult-1))、mult = AWAKENING_FULL_MULT[rarity][statKey]
+// statKey=null → 只算 base 段、觉醒不放大 (転速 Speed 用: cap 处即封顶、超 cap 的觉醒等级不加成)
+function _baseStatRaw(initial, max, max_max_level, lv, cap, rarity, statKey = null) {
   if (!max || !initial || !max_max_level) return 0;
   if (lv < 1) return 0;
   const lvBase = Math.min(lv, cap);
   const t = max_max_level > 1 ? (lvBase - 1) / (max_max_level - 1) : 0;
   const base = initial + (max - initial) * t;
-  if (noAwakening || lv <= cap) return base;
+  if (!statKey || lv <= cap) return base;
   const awkMax = AWAKENING_MAX[rarity] || 9;
-  const fullMult = AWAKENING_FULL_MULT[rarity] || 1.43;
+  const fullMult = AWAKENING_FULL_MULT[rarity]?.[statKey] ?? 1;
   const lvOver = lv - cap;
   return base * (1 + lvOver / (awkMax * 5) * (fullMult - 1));
 }
@@ -126,12 +133,12 @@ export function baseStats(charaWiki, tr) {
   // base stat 已经在 server-fold (chara 创建时) 完成 floor 取整 (unpacking 01_setup.md §1.5)
   // hensei 客户端用 master initial_/max_ 字段重算 base、需 floor 模拟 server 行为
   return {
-    HP: Math.floor(_baseStatRaw(stats.initial_hp, stats.max_hp, max_max_level, effLv, cap, m.rarity)),
-    Attack: Math.floor(_baseStatRaw(stats.initial_attack, stats.max_attack, max_max_level, effLv, cap, m.rarity)),
-    Defense: Math.floor(_baseStatRaw(stats.initial_defense, stats.max_defense, max_max_level, effLv, cap, m.rarity)),
-    GuardBreak: Math.floor(_baseStatRaw(stats.initial_break, stats.max_break, max_max_level, effLv, cap, m.rarity)),
-    // 転速 Speed 不吃觉醒段放大 (noAwakening): cap(熟度决定)处封顶、觉醒等级不再提升 base.Speed
-    Speed: Math.floor(_baseStatRaw(stats.initial_speed, stats.max_speed, max_max_level, effLv, cap, m.rarity, true)),
+    HP: Math.floor(_baseStatRaw(stats.initial_hp, stats.max_hp, max_max_level, effLv, cap, m.rarity, 'HP')),
+    Attack: Math.floor(_baseStatRaw(stats.initial_attack, stats.max_attack, max_max_level, effLv, cap, m.rarity, 'Attack')),
+    Defense: Math.floor(_baseStatRaw(stats.initial_defense, stats.max_defense, max_max_level, effLv, cap, m.rarity, 'Defense')),
+    GuardBreak: Math.floor(_baseStatRaw(stats.initial_break, stats.max_break, max_max_level, effLv, cap, m.rarity, 'GuardBreak')),
+    // 転速 Speed 不吃觉醒段放大 (statKey=null): cap(熟度决定)处封顶、觉醒等级不再提升 base.Speed
+    Speed: Math.floor(_baseStatRaw(stats.initial_speed, stats.max_speed, max_max_level, effLv, cap, m.rarity)),
     _lv: effLv,
     _cap: cap,
     _max_lv_with_awk: cap + (tr.awakening || 0) * 5,

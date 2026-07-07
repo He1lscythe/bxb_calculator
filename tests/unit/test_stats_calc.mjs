@@ -273,14 +273,18 @@ test('baseStats: lv max_max jukudo high → max', () => {
   // jukudo 60 → cap = min(250, 60 + 59*5) = min(250, 355) = 250
   assert.strictEqual(b.Attack, 13000);
 });
-test('baseStats: awakening 满 → ×AWAKENING_FULL_MULT', () => {
+test('baseStats: awakening 满 → ×AWAKENING_FULL_MULT (按属性各查各的倍率)', () => {
   const c = mockChara();
   const awkMax = AWAKENING_MAX[4]; // SS=9
   const tr = { ...mkTr(), state: '通常', level: 250 + awkMax * 5, jukudo: 60, awakening: awkMax };
   const b = baseStats(c, tr);
-  // base at cap 250: 13000、then awk 满 ×1.43 = 18590
-  const expected = 13000 * AWAKENING_FULL_MULT[4];
-  assert.ok(Math.abs(b.Attack - expected) < 1, `expected ~${expected}, got ${b.Attack}`);
+  // base at cap 250 = max_*、awk 满后各属性乘各自倍率:
+  //   HP 15000×1.33 / Attack 13000×1.43 / Defense 5000×1.28 / GuardBreak 1000×1.46
+  const M = AWAKENING_FULL_MULT[4];
+  assert.ok(Math.abs(b.HP - 15000 * M.HP) < 1, `HP expected ~${15000 * M.HP}, got ${b.HP}`);
+  assert.ok(Math.abs(b.Attack - 13000 * M.Attack) < 1, `Attack expected ~${13000 * M.Attack}, got ${b.Attack}`);
+  assert.ok(Math.abs(b.Defense - 5000 * M.Defense) < 1, `Defense expected ~${5000 * M.Defense}, got ${b.Defense}`);
+  assert.ok(Math.abs(b.GuardBreak - 1000 * M.GuardBreak) < 1, `GuardBreak expected ~${1000 * M.GuardBreak}, got ${b.GuardBreak}`);
 });
 test('baseStats: 転速 Speed 不吃觉醒段 (cap 处封顶、awakening 无加成)', () => {
   const c = mockChara(); // initial_speed 9 / max_speed 22 / max_max_level 250

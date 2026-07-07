@@ -26,9 +26,13 @@ collection: 遍历 3 slot、给每个 effect 打 source tag
 
 - 等级公式: `max × (1 - (max_max_level - lv) / (max_max_level - 1) × initial / max)`
 - 熟度 → 等级上限: `min(max_max_level, initial_max_level + (mature - 1) × 5)`
-- **觉醒倍率内嵌** (`MAX_AWAKENING` / `AWAKENING_FULL_MULT`): SS 9 段觉醒满 → ×1.43、S 14 段 → ×2.42、AA 36 段 → ×4.45、A 24 段 → ×5.37
+- **觉醒倍率内嵌** (`MAX_AWAKENING` / `AWAKENING_FULL_MULT`): 满觉醒倍率**按属性区分**（HP / 攻 / 防 / BK）:
+  - SS 9 段觉醒满 → HP ×1.33 / 攻 ×1.43 / 防 ×1.28 / BK ×1.46
+  - S 14 段 → HP ×1.34 / 攻 ×2.42 / 防 ×1.26 / BK ×1.54
+  - AA 36 段 → HP ×1.82 / 攻 ×4.45 / 防 ×1.63 / BK ×1.31
+  - A 24 段 → HP ×2.36 / 攻 ×5.37 / 防 ×4.12 / BK ×2.1
 - 觉醒倍率应用在 base 算法里、**不进 stage pipeline**
-- **例外: 転速 (Speed) 不吃觉醒段** (`_baseStatRaw(..., noAwakening=true)`): Speed 在熟度决定的 cap 处封顶、超 cap 的觉醒等级不再放大。HP/攻撃力/防御力/ブレイク力 四项照常吃觉醒段
+- **例外: 転速 (Speed) 不吃觉醒段** (`_baseStatRaw` 不传 `statKey` → 觉醒不放大): Speed 在熟度决定的 cap 处封顶、超 cap 的觉醒等级不再放大。HP/攻撃力/防御力/ブレイク力 四项照常吃觉醒段、各查各的倍率
 
 omoide memory slot 加成走 stage 1、不参与 base 计算。
 
