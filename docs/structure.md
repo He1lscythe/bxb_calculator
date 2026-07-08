@@ -96,6 +96,10 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 
 `.github/workflows/update-database.yml` 每天 JST 16:01 + 00:01 跑、
 
+手动重发 workflow(changelog 渲染逻辑更新后重生成历史页;都走 通知索引 → `editPage` 原地更新、URL 不变、不重发频道):
+- `repost-通知渠道.yml` — asset_version 图册重发(输入 asset_version 号、留空=最新)
+- `通知发布.yml` — master_data changelog 重发(输入 `md_date` 文件夹名、留空=最新;自动找前置快照重跑 `diff_master_tables.py` 重写 `changelog.md` → notify → changelog+index 回提交 master_tables)
+
 | 脚本 | 用途 |
 |---|---|
 | [master_tables_archive.py](../scripts/ci/master_tables_archive.py) | master dict → `master_data/<JST日期>/` 快照 (split + 派生 weapon_innate_skills/arts/effects) + changelog + 索引。port 自 unpacking split_tables/build_skill_id_index/update_master_tables |

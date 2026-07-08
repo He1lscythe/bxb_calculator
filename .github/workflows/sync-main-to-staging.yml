@@ -3,10 +3,20 @@ name: sync-main-to-staging
 # main push 后自动 merge 进 data-staging、触发 GitHub Pages 重新部署
 # 2026-06-09 单 worktree 架构: main = 框架 + 数据集 (icons/omoide/master JSON)、
 # data-staging = main + 5 *_revise.json (Vercel PR target、user edit 流入)
+# workflow_run: update-database 用 GITHUB_TOKEN push main 不触发 push 事件 (防递归)、
+# 完事后由此触发补 sync;workflow_dispatch 手动兜底
 
 on:
   push:
     branches: [main]
+  workflow_run:
+    workflows: [update-database]
+    types: [completed]
+  workflow_dispatch:
+
+concurrency:
+  group: sync-main-to-staging
+  cancel-in-progress: false
 
 jobs:
   sync:
