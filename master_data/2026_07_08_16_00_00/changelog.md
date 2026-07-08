@@ -20,8 +20,9 @@
     - description: 敵全体に超強力な16連ダメージ＆wave中、防御力UP
     - cost=3 / hit_count=16 / value=3.4875 / additional_value=0.0
   - innate skills (2):
-    - HP Multiply ×1.5 — 光属性の魔剣のHPが大幅にアップ
-    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: HP Multiply ×1.5 — 光属性の魔剣のHPが大幅にアップ**
+    - **新增: DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ**
+    - **删除: HP Multiply ×1.25 — 光属性の魔剣のHPがかなりアップ**
 - [`100903`](weapons.json#L3648) ヴァルプルギス【極弐】
   - base_name: ヴァルプルギス (costume: 極弐魔装)
   - element=光(4) / type=杖棒(4) / rarity=S(3) / cv=村川梨衣
@@ -32,8 +33,9 @@
     - description: 敵全体に超強力な16連ダメージ＆wave中、防御力UP
     - cost=3 / hit_count=16 / value=3.4875 / additional_value=0.0
   - innate skills (2):
-    - HP Multiply ×1.75 — 光属性の魔剣のHPが絶大にアップ
-    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: HP Multiply ×1.75 — 光属性の魔剣のHPが絶大にアップ**
+    - **新增: DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ**
+    - **删除: HP Multiply ×1.5 — 光属性の魔剣のHPが大幅にアップ**
 - [`107502`](weapons.json#L29442) シュムハザ【極】
   - base_name: シュムハザ (costume: 極魔装)
   - element=闇(5) / type=杖棒(4) / rarity=S(3) / cv=野引香里
@@ -44,9 +46,10 @@
     - description: 敵全体に超強力な21連ダメージ＆攻撃力25%UP
     - cost=2 / hit_count=21 / value=1.75714 / additional_value=0.0
   - innate skills (3):
-    - Attack Multiply ×1.75 — 闇属性の魔剣の攻撃力が絶大にアップ
-    - Enemy_BreakAttack Multiply ×2.0 — ブレイク時に自身の攻撃力が2倍にアップ
-    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: Attack Multiply ×1.75 — 闇属性の魔剣の攻撃力が絶大にアップ**
+    - **新增: Enemy_BreakAttack Multiply ×2.0 — ブレイク時に自身の攻撃力が2倍にアップ**
+    - **新增: DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ**
+    - **删除: Attack Multiply ×1.5 — 闇属性の魔剣の攻撃力が大幅にアップ**
 - [`107503`](weapons.json#L29618) シュムハザ【極弐】
   - base_name: シュムハザ (costume: 極弐魔装)
   - element=闇(5) / type=杖棒(4) / rarity=S(3) / cv=野引香里
@@ -57,9 +60,10 @@
     - description: 敵全体に超強力な21連ダメージ＆攻撃力25%UP
     - cost=2 / hit_count=21 / value=2.1 / additional_value=0.0
   - innate skills (3):
-    - Attack Multiply ×1.74232 — 闇属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
-    - Enemy_BreakAttack Multiply ×2.0 — ブレイク時に自身の攻撃力が2倍にアップ
-    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: Attack Multiply ×1.74232 — 闇属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】**
+    - **新增: Enemy_BreakAttack Multiply ×2.0 — ブレイク時に自身の攻撃力が2倍にアップ**
+    - **新增: DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ**
+    - **删除: Attack Multiply ×1.75 — 闇属性の魔剣の攻撃力が絶大にアップ**
 - [`112701`](weapons.json#L50167) ミョルニル
   - base_name: ミョルニル (costume: 魔装)
   - element=風(3) / type=連弩(6) / rarity=S(3) / cv=高野麻里佳
@@ -70,8 +74,9 @@
     - description: 敵全体に超強力な16連ダメージ＆一瞬だけスピード狂化
     - cost=4 / hit_count=16 / value=5.45 / additional_value=0.0
   - innate skills (2):
-    - HP Multiply ×1.5 — 風属性の魔剣のHPが大幅にアップ
-    - Vitality_Attack Multiply ×1.3 — 残HPが多いほど攻撃力がかなりアップ
+    - **新增: HP Multiply ×1.5 — 風属性の魔剣のHPが大幅にアップ**
+    - **新增: Vitality_Attack Multiply ×1.3 — 残HPが多いほど攻撃力がかなりアップ**
+    - **删除: HP Multiply ×1.25 — 風属性の魔剣のHPがかなりアップ**
 - [`112702`](weapons.json#L50324) ミョルニル【極】
   - base_name: ミョルニル (costume: 極魔装)
   - element=風(3) / type=連弩(6) / rarity=S(3) / cv=高野麻里佳
@@ -82,9 +87,10 @@
     - description: 敵全体に超強力な16連ダメージ＆一瞬だけスピード狂化
     - cost=4 / hit_count=16 / value=5.45 / additional_value=0.0
   - innate skills (3):
-    - HP Multiply ×1.75 — 風属性の魔剣のHPが絶大にアップ
-    - Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ
-    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: HP Multiply ×1.75 — 風属性の魔剣のHPが絶大にアップ**
+    - **新增: Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ**
+    - **新增: DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ**
+    - **删除: HP Multiply ×1.25 — 風属性の魔剣のHPがかなりアップ**
 - [`112703`](weapons.json#L50500) ミョルニル【極弐】
   - base_name: ミョルニル (costume: 極弐魔装)
   - element=風(3) / type=連弩(6) / rarity=S(3) / cv=高野麻里佳
@@ -95,9 +101,10 @@
     - description: 敵全体に超強力な16連ダメージ＆一瞬だけスピード狂化
     - cost=4 / hit_count=16 / value=5.45 / additional_value=0.0
   - innate skills (3):
-    - HP Multiply ×1.75 — 風属性の魔剣のHPが絶大にアップ【熟度UPにつれてさらに効果値UP】
-    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
-    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: HP Multiply ×1.75 — 風属性の魔剣のHPが絶大にアップ【熟度UPにつれてさらに効果値UP】**
+    - **新增: Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ**
+    - **新增: DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ**
+    - **删除: HP Multiply ×1.75 — 風属性の魔剣のHPが絶大にアップ**
 - [`115102`](weapons.json#L60382) アスカロン【極】
   - base_name: アスカロン (costume: 極魔装)
   - element=闇(5) / type=大剣(2) / rarity=S(3) / cv=小堀幸
@@ -108,9 +115,10 @@
     - description: 敵全体に超強力な14連ダメージ＆1分間攻撃力13%UP
     - cost=6 / hit_count=14 / value=8.7 / additional_value=0.0
   - innate skills (3):
-    - Attack Multiply ×1.5 — 全属性の魔剣の攻撃力が大幅にアップ
-    - HitCount Addition +1.0 — 大剣の魔剣の1撃目2撃目3撃目のヒット数を+1する
-    - DamageLimitBreak Addition +600000000.0 — 大剣の魔剣のダメージ上限が6億アップ
+    - **新增: Attack Multiply ×1.5 — 全属性の魔剣の攻撃力が大幅にアップ**
+    - **新增: HitCount Addition +1.0 — 大剣の魔剣の1撃目2撃目3撃目のヒット数を+1する**
+    - **新增: DamageLimitBreak Addition +600000000.0 — 大剣の魔剣のダメージ上限が6億アップ**
+    - **删除: Attack Multiply ×1.25 — 全属性の魔剣の攻撃力がかなりアップ**
 - [`116901`](weapons.json#L66749) フライパン
   - base_name: フライパン (costume: 魔装)
   - element=火(1) / type=杖棒(4) / rarity=S(3) / cv=山岡ゆり
@@ -121,7 +129,8 @@
     - description: 敵全体に超強力な29連ダメージ＆数秒だけ時を止める
     - cost=5 / hit_count=29 / value=3.5 / additional_value=0.0
   - innate skills (1):
-    - Attack Multiply ×1.5 — 火属性の魔剣の攻撃力が大幅にアップ
+    - **新增: Attack Multiply ×1.5 — 火属性の魔剣の攻撃力が大幅にアップ**
+    - **删除: Attack Multiply ×1.25 — 火属性の魔剣の攻撃力がかなりアップ**
 - [`116902`](weapons.json#L66887) フライパン【極】
   - base_name: フライパン (costume: 極魔装)
   - element=火(1) / type=杖棒(4) / rarity=S(3) / cv=山岡ゆり
@@ -132,9 +141,10 @@
     - description: 敵全体に超強力な29連ダメージ＆数秒だけ時を止める
     - cost=5 / hit_count=29 / value=3.5 / additional_value=0.0
   - innate skills (3):
-    - Attack Multiply ×1.75 — 火属性の魔剣の攻撃力が絶大にアップ
-    - Enemy_BreakAttack Multiply ×2.0 — ブレイク時に自身の攻撃力が2倍にアップ
-    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: Attack Multiply ×1.75 — 火属性の魔剣の攻撃力が絶大にアップ**
+    - **新增: Enemy_BreakAttack Multiply ×2.0 — ブレイク時に自身の攻撃力が2倍にアップ**
+    - **新增: DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ**
+    - **删除: Attack Multiply ×1.5 — 火属性の魔剣の攻撃力が大幅にアップ**
 - [`116903`](weapons.json#L67063) フライパン【極弐】
   - base_name: フライパン (costume: 極弐魔装)
   - element=火(1) / type=杖棒(4) / rarity=S(3) / cv=山岡ゆり
@@ -145,9 +155,10 @@
     - description: 敵全体に超強力な29連ダメージ＆数秒だけ時を止める
     - cost=5 / hit_count=29 / value=3.8 / additional_value=0.0
   - innate skills (3):
-    - Attack Multiply ×1.74232 — 火属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
-    - Enemy_BreakAttack Multiply ×2.0 — ブレイク時に自身の攻撃力が2倍にアップ
-    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: Attack Multiply ×1.74232 — 火属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】**
+    - **新增: Enemy_BreakAttack Multiply ×2.0 — ブレイク時に自身の攻撃力が2倍にアップ**
+    - **新增: DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ**
+    - **删除: Attack Multiply ×1.75 — 火属性の魔剣の攻撃力が絶大にアップ**
 - [`123201`](weapons.json#L93784) アクケルテ
   - base_name: アクケルテ (costume: 魔装)
   - element=風(3) / type=連弩(6) / rarity=S(3) / cv=久保田梨沙
@@ -160,7 +171,7 @@
   - innate skills (3):
     - JustGuard_Sapphire Multiply ×4.0 — ジャストガード時のサファイアの量がかなり増加
     - MotionSpeed Multiply ×1.5 — 風属性の魔剣の攻撃モーションがかなり加速
-    - Speed Multiply ×1.1 — 風属性の魔剣の行動速度がアップ
+    - **新增: Speed Multiply ×1.1 — 風属性の魔剣の行動速度がアップ**
 - [`123202`](weapons.json#L93960) アクケルテ【極】
   - base_name: アクケルテ (costume: 極魔装)
   - element=風(3) / type=連弩(6) / rarity=S(3) / cv=久保田梨沙
@@ -173,8 +184,8 @@
   - innate skills (4):
     - JustGuard_Sapphire Multiply ×6.0 — ジャストガード時のサファイアの量が大幅に増加
     - MotionSpeed Multiply ×2.0 — 風属性の魔剣の攻撃モーションが大幅に加速
-    - Speed Multiply ×1.25 — 風属性の魔剣の行動速度がかなりアップ
-    - HitCount Addition +1.0 — 風属性の魔剣の1撃目2撃目3撃目のヒット数を+1する
+    - **新增: Speed Multiply ×1.25 — 風属性の魔剣の行動速度がかなりアップ**
+    - **新增: HitCount Addition +1.0 — 風属性の魔剣の1撃目2撃目3撃目のヒット数を+1する**
 - [`123203`](weapons.json#L94155) アクケルテ【極弐】
   - base_name: アクケルテ (costume: 極弐魔装)
   - element=風(3) / type=連弩(6) / rarity=S(3) / cv=久保田梨沙
@@ -187,8 +198,8 @@
   - innate skills (4):
     - JustGuard_Sapphire Multiply ×6.0 — ジャストガード時のサファイアの量が大幅に増加
     - MotionSpeed Multiply ×2.33 — 風属性の魔剣の攻撃モーションが絶大に加速
-    - Speed Multiply ×1.5 — 風属性の魔剣の行動速度が大幅にアップ
-    - HitCount Addition +2.0 — 風属性の魔剣の1撃目2撃目3撃目のヒット数を+2する
+    - **新增: Speed Multiply ×1.5 — 風属性の魔剣の行動速度が大幅にアップ**
+    - **新增: HitCount Addition +2.0 — 風属性の魔剣の1撃目2撃目3撃目のヒット数を+2する**
 - [`158301`](weapons.json#L237490) †邪なる堕天せし者†
   - base_name: †邪なる堕天せし者† (costume: 魔装)
   - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=嶺内ともみ
@@ -211,7 +222,7 @@
     - cost=5 / hit_count=73 / value=1.36 / additional_value=0.0
   - innate skills (2):
     - Break_Attack Multiply ×3.3 — 自身が破損状態になると攻撃力が絶大にアップ
-    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ**
 
 ---
 
