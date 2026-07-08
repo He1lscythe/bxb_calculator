@@ -202,8 +202,13 @@ def latest_md_folder():
     return fs[-1] if fs else None
 
 
-def notify_master_data():
-    folder = latest_md_folder()
+def notify_master_data(target: str | None = None):
+    """target 指定 master_data/<date> 文件夹名(重发历史页:页已在 telegraph_index →
+    editPage 原地更新、URL 不变、不重发频道);缺省 = 最新文件夹。"""
+    folder = (MT / "master_data" / target) if target else latest_md_folder()
+    if target and not folder.is_dir():
+        print(f"master_data/{target} 不存在、跳过")
+        return
     cl = (folder / "changelog.md") if folder else None
     if not cl or not cl.is_file():
         print("无 changelog、跳过")
@@ -347,7 +352,8 @@ def main():
         return
     mode = sys.argv[1] if len(sys.argv) > 1 else ""
     if mode == "master_data":
-        notify_master_data()
+        target = sys.argv[2].strip() if len(sys.argv) > 2 and sys.argv[2].strip() else None
+        notify_master_data(target)
     elif mode == "asset_version":
         tv = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].strip().isdigit() else None
         notify_asset_version(tv)

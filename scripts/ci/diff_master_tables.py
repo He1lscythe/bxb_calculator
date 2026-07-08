@@ -753,12 +753,38 @@ def _render_weapon_detail(oe: dict, ne: dict, diff_fields: list, pk: str,
         if bd_meta:
             lines.append(f'    - {" / ".join(bd_meta)}')
     ws = e.get('weapon_skills') or []
-    if ws:
+    ows = oe.get('weapon_skills') or []
+    if ws or ows:
+        # 与标量字段的 **old → new** 约定一致:技能子项按 sub-PK 对齐新旧,
+        # 新增技能整行加粗、删除标注、值/描述变化 old → new 加粗;未变化的平铺
+        def _sk_line(sk):
+            op = '+' if sk.get('math_type') == 'Addition' else '×'
+            return (f'{sk.get("parameter")} {sk.get("math_type")} {op}{sk.get("value")} '
+                    f'— {_truncate(sk.get("description") or "", 80)}')
+        subpk = _detect_subpk(ws) or _detect_subpk(ows)
+        ob = {it[subpk]: it for it in ows if subpk in it} if subpk else {}
+        nb = {it[subpk]: it for it in ws if subpk in it} if subpk else {}
         lines.append(f'  - innate skills ({len(ws)}):')
         for sk in ws:
-            op = '+' if sk.get('math_type') == 'Addition' else '×'
-            lines.append(f'    - {sk.get("parameter")} {sk.get("math_type")} {op}{sk.get("value")} '
-                         f'— {_truncate(sk.get("description") or "", 80)}')
+            k = sk.get(subpk) if subpk else None
+            if subpk and k not in ob:
+                lines.append(f'    - **新增: {_sk_line(sk)}**')
+            elif subpk and ob.get(k) != sk:
+                osk = ob[k]
+                op = '+' if sk.get('math_type') == 'Addition' else '×'
+                oop = '+' if osk.get('math_type') == 'Addition' else '×'
+                val = (f'**{oop}{osk.get("value")} → {op}{sk.get("value")}**'
+                       if osk.get('value') != sk.get('value') else f'{op}{sk.get("value")}')
+                desc_o = osk.get('description') or ''
+                desc_n = sk.get('description') or ''
+                desc = (_truncate(desc_n, 80) if desc_o == desc_n
+                        else f'**{_truncate(desc_o, 60)} → {_truncate(desc_n, 60)}**')
+                lines.append(f'    - {sk.get("parameter")} {sk.get("math_type")} {val} — {desc}')
+            else:
+                lines.append(f'    - {_sk_line(sk)}')
+        if subpk:
+            for k in sorted(ob.keys() - nb.keys(), key=str):
+                lines.append(f'    - **删除: {_sk_line(ob[k])}**')
     return lines
 
 

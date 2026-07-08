@@ -100,6 +100,10 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 
 `.github/workflows/update-database.yml` 每天 JST 16:01 + 00:01 跑、纯 HTTP 从游戏 API 拉最新 master 重建业务 JSON。逆向 + 协议见 `unpacking/HOWTO_api_replay.md`。
 
+手动重发 workflow(changelog 渲染逻辑更新后重生成历史页;都走 telegraph_index → `editPage` 原地更新、URL 不变、不重发频道):
+- `repost-telegraph.yml` — asset_version 图册重发(输入 asset_version 号、留空=最新)
+- `repost-master-data.yml` — master_data changelog 重发(输入 `md_date` 文件夹名、留空=最新;自动找前置快照重跑 `diff_master_tables.py` 重写 `changelog.md` → notify → changelog+index 回提交 data/master-tables)
+
 | 脚本 | 用途 |
 |---|---|
 | [maken2_api.py](../scripts/ci/maken2_api.py) | 游戏 API 客户端: `login` (设备指纹 + 静态 bootstrap key) → session → `get_master_data` (X-Session 头) / `get_asset_version`。maken2 AES-256-CBC+gzip+msgpack。凭据走 env `BXB_UNIQUE_KEY`/`BXB_BOOTSTRAP_KEY` (GitHub secrets) |
