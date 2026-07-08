@@ -1,15 +1,21 @@
 name: repost-telegraph
 
-# 手动重发某个 asset_version 的 Telegraph 图册。
-# 用途: extract_assets 合成逻辑更新后,用存着的 TELEGRAPH_TOKEN 重新生成历史页面的合并图。
+# 手动重发 Telegraph 页 (渲染/合成逻辑更新后重生成历史页)。
 # 页已在 telegraph_index → editPage 原地更新 (URL 不变、不重发频道);不在则新建。
-# 留空 asset_version = 最新版。
+# target 留空 = 最新。
 
 on:
   workflow_dispatch:
     inputs:
-      asset_version:
-        description: 'asset_version 号 (如 12491);留空 = 最新版'
+      kind:
+        description: '重发类型'
+        required: true
+        type: choice
+        options:
+          - asset-version
+          - master-data
+      target:
+        description: 'asset-version: 版本号 (如 12491) / master-data: 文件夹名 (如 2026_07_08_16_00_00);留空 = 最新'
         required: false
         default: ''
 
@@ -31,7 +37,7 @@ jobs:
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout data/master-tables (asset_version 快照 + telegraph_index)
+      - name: Checkout data/master-tables
         uses: actions/checkout@v4
         with:
           ref: data/master-tables
@@ -46,7 +52,33 @@ jobs:
       - name: Install deps
         run: pip install -r scripts/ci/requirements.txt
 
+      - name: Resolve master_data target + regenerate changelog
+        if: ${{ inputs.kind == 'master-data' }}
+        run: |
+          NEW="${{ inputs.target }}"
+          cd _mt/master_data
+          LIST=$(ls -d */ | tr -d / | grep -E '^[0-9]{4}_' | sort)
+          [ -z "$NEW" ] && NEW=$(echo "$LIST" | tail -1)
+          if ! echo "$LIST" | grep -qx "$NEW"; then echo "master_data/$NEW 不存在"; exit 1; fi
+          OLD=$(echo "$LIST" | grep -x -B1 "$NEW" | head -1)
+          if [ -z "$OLD" ] || [ "$OLD" = "$NEW" ]; then echo "$NEW 无前置快照"; exit 1; fi
+          echo "OLD=$OLD" >> "$GITHUB_ENV"
+          echo "NEW=$NEW" >> "$GITHUB_ENV"
+          cd "$GITHUB_WORKSPACE"
+          python scripts/ci/diff_master_tables.py "$OLD" "$NEW" \
+            --root _mt/master_data --out "_mt/master_data/$NEW/changelog.md"
+
+      - name: Repost master_data changelog (editPage 原地更新)
+        if: ${{ inputs.kind == 'master-data' }}
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAPH_TOKEN: ${{ secrets.TELEGRAPH_TOKEN }}
+          BXB_MASTER_TABLES: ${{ github.workspace }}/_mt
+        run: python scripts/ci/notify.py master_data "$NEW"
+
       - name: Repost asset_version 图册 (合成图 + editPage 原地更新)
+        if: ${{ inputs.kind == 'asset-version' }}
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -57,20 +89,20 @@ jobs:
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_BUCKET: ${{ vars.R2_BUCKET }}
           R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
-        run: python scripts/ci/notify.py asset_version "${{ github.event.inputs.asset_version }}"
+        run: python scripts/ci/notify.py asset_version "${{ inputs.target }}"
 
       - name: Configure git
         run: |
           git config --global user.name "bxb-db-bot"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      # telegraph_index 若新建了页 (原地 editPage 不变 path、无需提交;新建才有变更) → 回写
-      - name: Commit telegraph index (若有变更)
+      - name: Commit telegraph index + changelog (若有变更)
         working-directory: _mt
         continue-on-error: true
         run: |
           git add state/telegraph_index.json 2>/dev/null || true
-          if git diff --cached --quiet; then echo "telegraph index 无变更"; exit 0; fi
-          git commit -m "data(master-tables): telegraph index repost $(date -u +%FT%TZ)"
+          if [ -n "$NEW" ]; then git add "master_data/$NEW/changelog.md" 2>/dev/null || true; fi
+          if git diff --cached --quiet; then echo "无变更"; exit 0; fi
+          git commit -m "data(master-tables): telegraph repost $(date -u +%FT%TZ)"
           git pull --rebase origin data/master-tables || true
           git push origin HEAD:data/master-tables

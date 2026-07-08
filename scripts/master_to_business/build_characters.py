@@ -114,6 +114,10 @@ def build_skills(weapon_skills, wiki_scaling, warnings, ctx_id):
         param = sk.get("parameter")
         math = sk.get("math_type")
         name = sk.get("name")
+        # 活动限定技能(如「【イベント限定】衝突転移耐性Lv5」)是活动期间服务器临时
+        # 挂在 weapons 上的、活动结束即消失 → 不写入 characters.json
+        if name and name.startswith("【イベント限定】"):
+            continue
         if param and param not in PARAMETER_ALL_NAMES:
             warnings.append(f"chara id={ctx_id}: param {param!r}")
         if math and math not in MATH_TYPE_BY_NAME:
