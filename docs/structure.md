@@ -96,9 +96,9 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 
 `.github/workflows/update-database.yml` 每天 JST 16:01 + 00:01 跑、
 
-手动重发 workflow(changelog 渲染逻辑更新后重生成历史页;都走 通知索引 → `editPage` 原地更新、URL 不变、不重发频道):
-- `repost-通知渠道.yml` — asset_version 图册重发(输入 asset_version 号、留空=最新)
-- `通知发布.yml` — master_data changelog 重发(输入 `md_date` 文件夹名、留空=最新;自动找前置快照重跑 `diff_master_tables.py` 重写 `changelog.md` → notify → changelog+index 回提交 master_tables)
+手动重发 workflow `repost-通知渠道.yml`(渲染/合成逻辑更新后重生成历史页;走 通知索引 → `editPage` 原地更新、URL 不变、不重发频道)。输入 `kind` 二选一 + `target`(留空=最新):
+- `kind=asset-version` — 图册重发(`target`=asset_version 号)
+- `kind=master-data` — changelog 重发(`target`=文件夹名如 `2026_07_08_16_00_00`;自动找前置快照重跑 `diff_master_tables.py` 重写 `changelog.md` → notify → changelog+index 回提交 master_tables)
 
 | 脚本 | 用途 |
 |---|---|
