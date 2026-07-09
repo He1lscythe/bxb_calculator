@@ -1,0 +1,4480 @@
+# master_data changelog: 2026_07_08_16_00_00 → 2026_07_09_16_00_00
+
+## 总览
+
+| 表 | 新增 | 删除 | 调整 |
+|---|---:|---:|---:|
+| weapons | 0 | 0 | 322 |
+| materials | 3 | 0 | 0 |
+| items | 2 | 0 | 0 |
+| jobs | 1 | 0 | 0 |
+| scenarios | 10 | 0 | 0 |
+
+## weapons
+
+### 调整 (322)
+
+- [`100401`](weapons.json#L1278) リヴァイアサン
+  - base_name: リヴァイアサン (costume: 魔装)
+  - element=水(2) / type=騎槍(8) / rarity=S(3) / cv=木村珠莉
+  - max stats: HP=8325 / ATK=6200 / DEF=8500 / SPD=12 / BREAK=4700
+  - hit_counts=[1, 2, 2] (3段)  motion_speed=[4.0/4.0/1.0]  mp=109
+  - three_size=84/56/82 / initial_slot=4
+  - BD: タイダルウェイブ (arts_id=4)
+    - description: 敵全体に超強力な20連ダメージ＆敵を強制ブレイク
+    - cost=2 / hit_count=20 / value=1.845 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`100402`](weapons.json#L1435) リヴァイアサン【極】
+  - base_name: リヴァイアサン (costume: 極魔装)
+  - element=水(2) / type=騎槍(8) / rarity=S(3) / cv=木村珠莉
+  - max stats: HP=10822 / ATK=8060 / DEF=11050 / SPD=12 / BREAK=6110
+  - hit_counts=[2, 2, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=109
+  - three_size=84/56/82 / initial_slot=5
+  - BD: タイダルウェイブ (arts_id=4)
+    - description: 敵全体に超強力な20連ダメージ＆敵を強制ブレイク
+    - cost=2 / hit_count=20 / value=1.845 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`100403`](weapons.json#L1592) リヴァイアサン【極弐】
+  - base_name: リヴァイアサン (costume: 極弐魔装)
+  - element=水(2) / type=騎槍(8) / rarity=S(3) / cv=木村珠莉
+  - max stats: HP=14070 / ATK=9880 / DEF=14370 / SPD=14 / BREAK=8450
+  - hit_counts=[3, 3, 5] (3段)  motion_speed=[4.0/4.0/2.0]  mp=122
+  - three_size=84/56/82 / initial_slot=6
+  - BD: ジェネシスフラッド (arts_id=10004)
+    - description: 敵全体に超強力な20連ダメージ＆敵を強制ブレイク
+    - cost=2 / hit_count=20 / value=1.845 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101201`](weapons.json#L4571) ヴォルケイノ
+  - base_name: ヴォルケイノ (costume: 魔装)
+  - element=火(1) / type=大剣(2) / rarity=AA(2) / cv=村中知
+  - max stats: HP=4200 / ATK=1980 / DEF=4000 / SPD=12 / BREAK=550
+  - hit_counts=[3, 4, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=126
+  - three_size=82/56/80 / initial_slot=2
+  - BD: 烈火轟天撃 (arts_id=12)
+    - description: 敵全体に強力な16連ダメージ
+    - cost=2 / hit_count=16 / value=1.92188 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 火属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101202`](weapons.json#L4715) ヴォルケイノ【極】
+  - base_name: ヴォルケイノ (costume: 極魔装)
+  - element=火(1) / type=大剣(2) / rarity=AA(2) / cv=村中知
+  - max stats: HP=5460 / ATK=2600 / DEF=5200 / SPD=12 / BREAK=720
+  - hit_counts=[4, 4, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=126
+  - three_size=82/56/80 / initial_slot=2
+  - BD: 烈火轟天撃 (arts_id=12)
+    - description: 敵全体に強力な16連ダメージ
+    - cost=2 / hit_count=16 / value=1.92188 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 火属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101203`](weapons.json#L4859) ヴォルケイノ【極弐】
+  - base_name: ヴォルケイノ (costume: 極弐魔装)
+  - element=火(1) / type=大剣(2) / rarity=AA(2) / cv=村中知
+  - max stats: HP=7100 / ATK=3380 / DEF=6760 / SPD=16 / BREAK=940
+  - hit_counts=[5, 5, 8] (3段)  motion_speed=[4.0/4.0/2.5]  mp=136
+  - three_size=84/56/80 / initial_slot=3
+  - BD: 焔獄烈火轟天撃 (arts_id=10012)
+    - description: 敵全体に超強力な16連ダメージ＆攻撃力10%UP
+    - cost=2 / hit_count=16 / value=2.25 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 火属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101501`](weapons.json#L5792) 宝剣小狐丸
+  - base_name: 宝剣小狐丸 (costume: 魔装)
+  - element=火(1) / type=太刀(3) / rarity=AA(2) / cv=髙橋ミナミ
+  - max stats: HP=4200 / ATK=1600 / DEF=3500 / SPD=22 / BREAK=3200
+  - hit_counts=[1, 2, 2] (3段)  motion_speed=[4.0/4.0/1.0]  mp=126
+  - three_size=83/56/82 / initial_slot=1
+  - BD: 憑依魔狐の斬 (arts_id=15)
+    - description: 敵全体に強力な13連ダメージ＆攻撃力10%UP
+    - cost=2 / hit_count=13 / value=2.36538 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 火属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101502`](weapons.json#L5949) 宝剣小狐丸【極】
+  - base_name: 宝剣小狐丸 (costume: 極魔装)
+  - element=火(1) / type=太刀(3) / rarity=AA(2) / cv=髙橋ミナミ
+  - max stats: HP=5460 / ATK=2080 / DEF=4550 / SPD=22 / BREAK=4160
+  - hit_counts=[2, 2, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=126
+  - three_size=83/56/82 / initial_slot=2
+  - BD: 憑依魔狐の斬 (arts_id=15)
+    - description: 敵全体に強力な13連ダメージ＆攻撃力10%UP
+    - cost=2 / hit_count=13 / value=2.36538 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 火属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101503`](weapons.json#L6106) 宝剣小狐丸【極弐】
+  - base_name: 宝剣小狐丸 (costume: 極弐魔装)
+  - element=火(1) / type=太刀(3) / rarity=AA(2) / cv=髙橋ミナミ
+  - max stats: HP=7100 / ATK=3120 / DEF=5920 / SPD=25 / BREAK=6240
+  - hit_counts=[3, 3, 5] (3段)  motion_speed=[3.0/3.0/1.2]  mp=130
+  - three_size=84/56/82 / initial_slot=3
+  - BD: 秘剣･憑依九焔の舞 (arts_id=10015)
+    - description: 敵全体に強力な13連ダメージ＆攻撃力10%UP
+    - cost=2 / hit_count=13 / value=2.36538 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.25 — 火属性の魔剣のHPがかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101601`](weapons.json#L6263) ダイルテンガ
+  - base_name: ダイルテンガ (costume: 魔装)
+  - element=火(1) / type=騎槍(8) / rarity=AA(2) / cv=松田利冴
+  - max stats: HP=4500 / ATK=2300 / DEF=3700 / SPD=12 / BREAK=3600
+  - hit_counts=[1, 2, 2] (3段)  motion_speed=[4.0/4.0/1.0]  mp=116
+  - three_size=81/57/74 / initial_slot=3
+  - BD: フラムアサルト (arts_id=16)
+    - description: 敵全体に強力な17連ダメージ
+    - cost=1 / hit_count=17 / value=0.882353 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 火属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101602`](weapons.json#L6407) ダイルテンガ【極】
+  - base_name: ダイルテンガ (costume: 極魔装)
+  - element=火(1) / type=騎槍(8) / rarity=AA(2) / cv=松田利冴
+  - max stats: HP=5850 / ATK=2990 / DEF=4810 / SPD=12 / BREAK=4680
+  - hit_counts=[2, 2, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=116
+  - three_size=81/57/74 / initial_slot=3
+  - BD: フラムアサルト (arts_id=16)
+    - description: 敵全体に強力な17連ダメージ
+    - cost=1 / hit_count=17 / value=0.882353 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 火属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101603`](weapons.json#L6551) ダイルテンガ【極弐】
+  - base_name: ダイルテンガ (costume: 極弐魔装)
+  - element=火(1) / type=騎槍(8) / rarity=AA(2) / cv=松田利冴
+  - max stats: HP=7610 / ATK=3890 / DEF=6260 / SPD=20 / BREAK=6090
+  - hit_counts=[3, 3, 5] (3段)  motion_speed=[3.5/2.5/1.2]  mp=120
+  - three_size=81/57/74 / initial_slot=4
+  - BD: グランブレイズバースト (arts_id=10016)
+    - description: 敵全体に強力な17連ダメージ＆一瞬だけスピード狂化
+    - cost=1 / hit_count=17 / value=0.882353 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 火属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101801`](weapons.json#L7096) ビーストキラー
+  - base_name: ビーストキラー (costume: 魔装)
+  - element=火(1) / type=連弩(6) / rarity=AA(2) / cv=村中知
+  - max stats: HP=4200 / ATK=2600 / DEF=4300 / SPD=12 / BREAK=1200
+  - hit_counts=[3, 4, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=186
+  - three_size=86/56/84 / initial_slot=3
+  - BD: 魂を背負いしケモノ (arts_id=18)
+    - description: 敵全体に強力な17連ダメージ
+    - cost=2 / hit_count=17 / value=1.80882 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 全属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101802`](weapons.json#L7240) ビーストキラー【極】
+  - base_name: ビーストキラー (costume: 極魔装)
+  - element=火(1) / type=連弩(6) / rarity=AA(2) / cv=村中知
+  - max stats: HP=5460 / ATK=3380 / DEF=5590 / SPD=12 / BREAK=1560
+  - hit_counts=[4, 4, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=186
+  - three_size=86/56/84 / initial_slot=3
+  - BD: 魂を背負いしケモノ (arts_id=18)
+    - description: 敵全体に強力な17連ダメージ
+    - cost=2 / hit_count=17 / value=1.80882 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 全属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`101803`](weapons.json#L7384) ビーストキラー【極弐】
+  - base_name: ビーストキラー (costume: 極弐魔装)
+  - element=火(1) / type=連弩(6) / rarity=AA(2) / cv=村中知
+  - max stats: HP=7100 / ATK=6090 / DEF=7270 / SPD=19 / BREAK=2810
+  - hit_counts=[5, 5, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=196
+  - three_size=87/56/84 / initial_slot=4
+  - BD: 万魂群立つ猛毅のケモノ (arts_id=10018)
+    - description: 敵全体に強力な17連ダメージ＆30秒攻撃力15%UP
+    - cost=2 / hit_count=17 / value=1.80882 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.1 — 全属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102001`](weapons.json#L7929) ナターシャ
+  - base_name: ナターシャ (costume: 魔装)
+  - element=水(2) / type=長剣(1) / rarity=AA(2) / cv=中島沙樹
+  - max stats: HP=4700 / ATK=2300 / DEF=3500 / SPD=23 / BREAK=1600
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=95
+  - three_size=73/55/77 / initial_slot=3
+  - BD: シスターキッス (arts_id=20)
+    - description: 敵全体に強力な11連ダメージ
+    - cost=1 / hit_count=11 / value=1.36364 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 水属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102002`](weapons.json#L8073) ナターシャ【極】
+  - base_name: ナターシャ (costume: 極魔装)
+  - element=水(2) / type=長剣(1) / rarity=AA(2) / cv=中島沙樹
+  - max stats: HP=6110 / ATK=2990 / DEF=4550 / SPD=23 / BREAK=2080
+  - hit_counts=[3, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=95
+  - three_size=73/55/77 / initial_slot=3
+  - BD: シスターキッス (arts_id=20)
+    - description: 敵全体に強力な11連ダメージ
+    - cost=1 / hit_count=11 / value=1.36364 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 水属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102003`](weapons.json#L8217) ナターシャ【極弐】
+  - base_name: ナターシャ (costume: 極弐魔装)
+  - element=水(2) / type=長剣(1) / rarity=AA(2) / cv=中島沙樹
+  - max stats: HP=7950 / ATK=3890 / DEF=5920 / SPD=27 / BREAK=2710
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[4.0/4.0/2.5]  mp=99
+  - three_size=75/55/77 / initial_slot=4
+  - BD: フラワリングシスターキッス (arts_id=10020)
+    - description: 敵全体に超強力な11連ダメージ＆防御力10%UP
+    - cost=1 / hit_count=11 / value=1.64 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 水属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102401`](weapons.json#L9538) マグロ
+  - base_name: マグロ (costume: 魔装)
+  - element=水(2) / type=大剣(2) / rarity=AA(2) / cv=中島沙樹
+  - max stats: HP=4200 / ATK=2729 / DEF=4500 / SPD=13 / BREAK=612
+  - hit_counts=[2, 3, 4] (3段)  motion_speed=[4.0/4.0/1.0]  mp=129
+  - three_size=81/56/78 / initial_slot=2
+  - BD: ぴちぴちマグロすぺしゃる (arts_id=24)
+    - description: 敵全体に強力な11連ダメージ
+    - cost=2 / hit_count=11 / value=2.79545 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 水属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102402`](weapons.json#L9682) マグロ【極】
+  - base_name: マグロ (costume: 極魔装)
+  - element=水(2) / type=大剣(2) / rarity=AA(2) / cv=中島沙樹
+  - max stats: HP=5460 / ATK=3550 / DEF=5850 / SPD=13 / BREAK=800
+  - hit_counts=[3, 3, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=129
+  - three_size=81/56/78 / initial_slot=2
+  - BD: ぴちぴちマグロすぺしゃる (arts_id=24)
+    - description: 敵全体に強力な11連ダメージ
+    - cost=2 / hit_count=11 / value=2.79545 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 水属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102403`](weapons.json#L9826) マグロ【極弐】
+  - base_name: マグロ (costume: 極弐魔装)
+  - element=水(2) / type=大剣(2) / rarity=AA(2) / cv=中島沙樹
+  - max stats: HP=7100 / ATK=4620 / DEF=7610 / SPD=17 / BREAK=1040
+  - hit_counts=[4, 4, 11] (3段)  motion_speed=[2.0/2.0/1.5]  mp=134
+  - three_size=82/57/79 / initial_slot=3
+  - BD: えたーなるマグロふぁんたじー (arts_id=10024)
+    - description: 敵全体に超強力な15連ダメージ＆敵を強制ブレイク
+    - cost=2 / hit_count=15 / value=2.79545 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 水属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102801`](weapons.json#L11147) リュカオン
+  - base_name: リュカオン (costume: 魔装)
+  - element=風(3) / type=長剣(1) / rarity=AA(2) / cv=髙橋ミナミ
+  - max stats: HP=4500 / ATK=2200 / DEF=4300 / SPD=27 / BREAK=1600
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=99
+  - three_size=62/53/65 / initial_slot=3
+  - BD: うーわんわんお！ (arts_id=28)
+    - description: 敵全体に強力な8連ダメージ
+    - cost=2 / hit_count=8 / value=3.84375 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 風属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102802`](weapons.json#L11291) リュカオン【極】
+  - base_name: リュカオン (costume: 極魔装)
+  - element=風(3) / type=長剣(1) / rarity=AA(2) / cv=髙橋ミナミ
+  - max stats: HP=5850 / ATK=2860 / DEF=5590 / SPD=27 / BREAK=2080
+  - hit_counts=[3, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=99
+  - three_size=62/53/65 / initial_slot=3
+  - BD: うーわんわんお！ (arts_id=28)
+    - description: 敵全体に強力な8連ダメージ
+    - cost=2 / hit_count=8 / value=3.84375 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 風属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102803`](weapons.json#L11435) リュカオン【極弐】
+  - base_name: リュカオン (costume: 極弐魔装)
+  - element=風(3) / type=長剣(1) / rarity=AA(2) / cv=髙橋ミナミ
+  - max stats: HP=7820 / ATK=4320 / DEF=6880 / SPD=31 / BREAK=3120
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[2.0/2.0/1.4]  mp=110
+  - three_size=62/53/65 / initial_slot=4
+  - BD: がるるぅ！わんわんおっ!! (arts_id=10028)
+    - description: 敵全体に超強力な8連ダメージ＆スピード10%UP
+    - cost=2 / hit_count=8 / value=5.0 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 風属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102901`](weapons.json#L11592) ネザードワーフ
+  - base_name: ネザードワーフ (costume: 魔装)
+  - element=風(3) / type=戦斧(7) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=4700 / ATK=3200 / DEF=4500 / SPD=12 / BREAK=416
+  - hit_counts=[1, 1, 2] (3段)  motion_speed=[4.0/4.0/1.0]  mp=126
+  - three_size=87/58/75 / initial_slot=2
+  - BD: 月下乱撃斬 (arts_id=29)
+    - description: 敵全体に強力な17連ダメージ
+    - cost=2 / hit_count=17 / value=1.80882 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.1 — 風属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102902`](weapons.json#L11736) ネザードワーフ【極】
+  - base_name: ネザードワーフ (costume: 極魔装)
+  - element=風(3) / type=戦斧(7) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=6110 / ATK=4160 / DEF=5850 / SPD=12 / BREAK=540
+  - hit_counts=[2, 1, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=126
+  - three_size=87/58/75 / initial_slot=2
+  - BD: 月下乱撃斬 (arts_id=29)
+    - description: 敵全体に強力な17連ダメージ
+    - cost=2 / hit_count=17 / value=1.80882 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.1 — 風属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`102903`](weapons.json#L11880) ネザードワーフ【極弐】
+  - base_name: ネザードワーフ (costume: 極弐魔装)
+  - element=風(3) / type=戦斧(7) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=7950 / ATK=6610 / DEF=6550 / SPD=16 / BREAK=790
+  - hit_counts=[4, 3, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=134
+  - three_size=89/58/75 / initial_slot=3
+  - BD: 満月兎双嵐撃 (arts_id=10029)
+    - description: 敵全体に超強力な22連ダメージ＆攻撃力10%UP
+    - cost=2 / hit_count=22 / value=1.80882 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.25 — 風属性の魔剣がかなりガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`104001`](weapons.json#L16064) ガ・ジャルグ
+  - base_name: ガ・ジャルグ (costume: 魔装)
+  - element=光(4) / type=騎槍(8) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=4200 / ATK=3300 / DEF=4300 / SPD=12 / BREAK=2900
+  - hit_counts=[1, 2, 2] (3段)  motion_speed=[4.0/4.0/1.0]  mp=115
+  - three_size=72/58/73 / initial_slot=1
+  - BD: 連迅葬破衝 (arts_id=40)
+    - description: 敵全体に強力な14連ダメージ＆防御力10%UP
+    - cost=2 / hit_count=14 / value=2.19643 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 光属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`104002`](weapons.json#L16221) ガ・ジャルグ【極】
+  - base_name: ガ・ジャルグ (costume: 極魔装)
+  - element=光(4) / type=騎槍(8) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=5460 / ATK=4290 / DEF=5590 / SPD=12 / BREAK=3770
+  - hit_counts=[2, 2, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=115
+  - three_size=72/58/73 / initial_slot=2
+  - BD: 連迅葬破衝 (arts_id=40)
+    - description: 敵全体に強力な14連ダメージ＆防御力10%UP
+    - cost=2 / hit_count=14 / value=2.19643 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 光属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`104003`](weapons.json#L16378) ガ・ジャルグ【極弐】
+  - base_name: ガ・ジャルグ (costume: 極弐魔装)
+  - element=光(4) / type=騎槍(8) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=7100 / ATK=5580 / DEF=7270 / SPD=15 / BREAK=4910
+  - hit_counts=[3, 3, 5] (3段)  motion_speed=[3.0/3.0/1.3]  mp=128
+  - three_size=72/58/73 / initial_slot=3
+  - BD: 必滅･絶破連衝刃 (arts_id=10040)
+    - description: 敵全体に強力な14連ダメージ＆防御力10%UP
+    - cost=2 / hit_count=14 / value=2.19643 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 光属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105101`](weapons.json#L20441) ネクロノミコン
+  - base_name: ネクロノミコン (costume: 魔装)
+  - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=浜崎奈々
+  - max stats: HP=8200 / ATK=6750 / DEF=8500 / SPD=43 / BREAK=1400
+  - hit_counts=[3, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=97
+  - three_size=72/55/78 / initial_slot=4
+  - BD: ニャルラトホテプ (arts_id=51)
+    - description: 敵全体に超強力な15連ダメージ＆自分HP回復
+    - cost=2 / hit_count=15 / value=2.46 / additional_value=0.0
+  - innate skills (3):
+    - Vitality_Attack Multiply ×1.3 — 残HPが多いほど攻撃力がかなりアップ
+    - Defense Multiply ×1.5 — 闇属性の魔剣の防御力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105102`](weapons.json#L20617) ネクロノミコン【極】
+  - base_name: ネクロノミコン (costume: 極魔装)
+  - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=浜崎奈々
+  - max stats: HP=10660 / ATK=8775 / DEF=11050 / SPD=43 / BREAK=1820
+  - hit_counts=[4, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=97
+  - three_size=72/55/78 / initial_slot=5
+  - BD: ニャルラトホテプ (arts_id=51)
+    - description: 敵全体に超強力な15連ダメージ＆自分HP回復
+    - cost=2 / hit_count=15 / value=2.46 / additional_value=0.0
+  - innate skills (4):
+    - Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ
+    - Defense Multiply ×1.75 — 闇属性の魔剣の防御力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105103`](weapons.json#L20812) ネクロノミコン【極弐】
+  - base_name: ネクロノミコン (costume: 極弐魔装)
+  - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=浜崎奈々
+  - max stats: HP=12800 / ATK=15900 / DEF=13260 / SPD=43 / BREAK=2190
+  - hit_counts=[5, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=107
+  - three_size=74/56/79 / initial_slot=6
+  - BD: 名状し難き這い寄る混沌 (arts_id=10051)
+    - description: 敵全体に超強力な20連ダメージ＆自分HP回復
+    - cost=2 / hit_count=20 / value=2.46 / additional_value=0.0
+  - innate skills (4):
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - Defense Multiply ×1.74232 — 闇属性の魔剣の防御力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105501`](weapons.json#L22171) 虎徹
+  - base_name: 虎徹 (costume: 魔装)
+  - element=火(1) / type=太刀(3) / rarity=A(1) / cv=浜崎奈々
+  - max stats: HP=3000 / ATK=922 / DEF=800 / SPD=20 / BREAK=800
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=127
+  - three_size=80/57/83 / initial_slot=1
+  - BD: 虎吼斬 (arts_id=55)
+    - description: 敵全体に5連ダメージ
+    - cost=1 / hit_count=5 / value=2.0 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.05 — 火属性の魔剣のHPが少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105502`](weapons.json#L22315) 虎徹【極】
+  - base_name: 虎徹 (costume: 極魔装)
+  - element=火(1) / type=太刀(3) / rarity=A(1) / cv=浜崎奈々
+  - max stats: HP=3900 / ATK=1198 / DEF=1040 / SPD=20 / BREAK=1040
+  - hit_counts=[3, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=127
+  - three_size=80/57/83 / initial_slot=1
+  - BD: 虎吼斬 (arts_id=55)
+    - description: 敵全体に5連ダメージ
+    - cost=1 / hit_count=5 / value=2.0 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.05 — 火属性の魔剣のHPが少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105503`](weapons.json#L22459) 虎徹【極弐】
+  - base_name: 虎徹 (costume: 極弐魔装)
+  - element=火(1) / type=太刀(3) / rarity=A(1) / cv=浜崎奈々
+  - max stats: HP=5070 / ATK=2830 / DEF=2720 / SPD=24 / BREAK=2270
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=132
+  - three_size=80/57/83 / initial_slot=3
+  - BD: 虎吼爆焔斬 (arts_id=10055)
+    - description: 敵全体に強力な5連ダメージ＆ブレイク30%UP
+    - cost=1 / hit_count=5 / value=3.0 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 火属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105801`](weapons.json#L23392) ファイアフライ
+  - base_name: ファイアフライ (costume: 魔装)
+  - element=火(1) / type=連弩(6) / rarity=A(1) / cv=慶長佑香
+  - max stats: HP=2800 / ATK=550 / DEF=1000 / SPD=13 / BREAK=500
+  - hit_counts=[5, 7, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=185
+  - three_size=83/56/81 / initial_slot=1
+  - BD: レッドゾーン (arts_id=58)
+    - description: 敵全体に13連ダメージ
+    - cost=1 / hit_count=13 / value=0.769231 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.05 — 火属性の魔剣のHPが少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105802`](weapons.json#L23536) ファイアフライ【極】
+  - base_name: ファイアフライ (costume: 極魔装)
+  - element=火(1) / type=連弩(6) / rarity=A(1) / cv=慶長佑香
+  - max stats: HP=3640 / ATK=710 / DEF=1300 / SPD=13 / BREAK=650
+  - hit_counts=[6, 7, 12] (3段)  motion_speed=[4.0/4.0/1.0]  mp=185
+  - three_size=83/56/81 / initial_slot=1
+  - BD: レッドゾーン (arts_id=58)
+    - description: 敵全体に13連ダメージ
+    - cost=1 / hit_count=13 / value=0.769231 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.05 — 火属性の魔剣のHPが少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105803`](weapons.json#L23680) ファイアフライ【極弐】
+  - base_name: ファイアフライ (costume: 極弐魔装)
+  - element=火(1) / type=連弩(6) / rarity=A(1) / cv=慶長佑香
+  - max stats: HP=4740 / ATK=1620 / DEF=3090 / SPD=16 / BREAK=1250
+  - hit_counts=[7, 8, 12] (3段)  motion_speed=[4.0/4.0/1.0]  mp=190
+  - three_size=83/56/81 / initial_slot=3
+  - BD: 超全開レッドゾーン (arts_id=10058)
+    - description: 敵全体に強力な13連ダメージ＆敵を強制ブレイク
+    - cost=1 / hit_count=13 / value=1.2 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 火属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105901`](weapons.json#L23837) ルーンロッド
+  - base_name: ルーンロッド (costume: 魔装)
+  - element=火(1) / type=杖棒(4) / rarity=A(1) / cv=荒川美穂
+  - max stats: HP=3000 / ATK=2200 / DEF=900 / SPD=15 / BREAK=500
+  - hit_counts=[1, 1, 2] (3段)  motion_speed=[4.0/4.0/1.0]  mp=91
+  - three_size=77/54/75 / initial_slot=1
+  - BD: レッドマジック (arts_id=59)
+    - description: 敵全体に7連ダメージ
+    - cost=2 / hit_count=7 / value=2.92857 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 火属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105902`](weapons.json#L23981) ルーンロッド【極】
+  - base_name: ルーンロッド (costume: 極魔装)
+  - element=火(1) / type=杖棒(4) / rarity=A(1) / cv=荒川美穂
+  - max stats: HP=3900 / ATK=2860 / DEF=1170 / SPD=15 / BREAK=650
+  - hit_counts=[2, 1, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=91
+  - three_size=77/54/75 / initial_slot=1
+  - BD: レッドマジック (arts_id=59)
+    - description: 敵全体に7連ダメージ
+    - cost=2 / hit_count=7 / value=2.92857 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 火属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`105903`](weapons.json#L24125) ルーンロッド【極弐】
+  - base_name: ルーンロッド (costume: 極弐魔装)
+  - element=火(1) / type=杖棒(4) / rarity=A(1) / cv=荒川美穂
+  - max stats: HP=5250 / ATK=7260 / DEF=2820 / SPD=21 / BREAK=3200
+  - hit_counts=[3, 2, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=97
+  - three_size=79/54/75 / initial_slot=3
+  - BD: シンレッドマジック (arts_id=10059)
+    - description: 敵全体に強力な7連ダメージ＆スピード10%UP
+    - cost=2 / hit_count=7 / value=4.28571 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.1 — 火属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`106001`](weapons.json#L24282) ルーンブレード
+  - base_name: ルーンブレード (costume: 魔装)
+  - element=水(2) / type=長剣(1) / rarity=A(1) / cv=山川琴美
+  - max stats: HP=3200 / ATK=950 / DEF=800 / SPD=20 / BREAK=750
+  - hit_counts=[2, 3, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=90
+  - three_size=77/56/76 / initial_slot=1
+  - BD: ブルーマジック (arts_id=60)
+    - description: 敵全体に5連ダメージ
+    - cost=1 / hit_count=5 / value=2.0 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 水属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`106002`](weapons.json#L24426) ルーンブレード【極】
+  - base_name: ルーンブレード (costume: 極魔装)
+  - element=水(2) / type=長剣(1) / rarity=A(1) / cv=山川琴美
+  - max stats: HP=4160 / ATK=1240 / DEF=1040 / SPD=20 / BREAK=1000
+  - hit_counts=[3, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=90
+  - three_size=77/56/76 / initial_slot=1
+  - BD: ブルーマジック (arts_id=60)
+    - description: 敵全体に5連ダメージ
+    - cost=1 / hit_count=5 / value=2.0 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 水属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`106003`](weapons.json#L24570) ルーンブレード【極弐】
+  - base_name: ルーンブレード (costume: 極弐魔装)
+  - element=水(2) / type=長剣(1) / rarity=A(1) / cv=山川琴美
+  - max stats: HP=5000 / ATK=2480 / DEF=1890 / SPD=24 / BREAK=2400
+  - hit_counts=[4, 4, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=92
+  - three_size=79/56/76 / initial_slot=3
+  - BD: エヴァーブルーマジック (arts_id=10060)
+    - description: 敵全体に強力な5連ダメージ＆防御力10%UP
+    - cost=1 / hit_count=5 / value=3.2 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.1 — 水属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`106801`](weapons.json#L27443) ボーンククリ
+  - base_name: ボーンククリ (costume: 魔装)
+  - element=風(3) / type=大剣(2) / rarity=A(1) / cv=木村珠莉
+  - max stats: HP=3200 / ATK=1220 / DEF=1000 / SPD=9 / BREAK=263
+  - hit_counts=[2, 3, 4] (3段)  motion_speed=[4.0/4.0/1.0]  mp=119
+  - three_size=87/59/86 / initial_slot=1
+  - BD: ストームアサルト (arts_id=68)
+    - description: 敵全体に7連ダメージ
+    - cost=1 / hit_count=7 / value=1.42857 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 風属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`106802`](weapons.json#L27587) ボーンククリ【極】
+  - base_name: ボーンククリ (costume: 極魔装)
+  - element=風(3) / type=大剣(2) / rarity=A(1) / cv=木村珠莉
+  - max stats: HP=4160 / ATK=1540 / DEF=1300 / SPD=9 / BREAK=350
+  - hit_counts=[3, 3, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=119
+  - three_size=87/59/86 / initial_slot=1
+  - BD: ストームアサルト (arts_id=68)
+    - description: 敵全体に7連ダメージ
+    - cost=1 / hit_count=7 / value=1.42857 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 風属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`106803`](weapons.json#L27731) ボーンククリ【極弐】
+  - base_name: ボーンククリ (costume: 極弐魔装)
+  - element=風(3) / type=大剣(2) / rarity=A(1) / cv=木村珠莉
+  - max stats: HP=5410 / ATK=3690 / DEF=3200 / SPD=15 / BREAK=1040
+  - hit_counts=[4, 4, 7] (3段)  motion_speed=[2.0/2.0/1.2]  mp=130
+  - three_size=89/60/87 / initial_slot=3
+  - BD: テンペストアサルト (arts_id=10068)
+    - description: 敵全体に強力な7連ダメージ＆敵を強制ブレイク
+    - cost=1 / hit_count=7 / value=2.5 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.1 — 風属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`106901`](weapons.json#L27888) ワイルドエッジ
+  - base_name: ワイルドエッジ (costume: 魔装)
+  - element=風(3) / type=長剣(1) / rarity=A(1) / cv=水野マリコ
+  - max stats: HP=2800 / ATK=850 / DEF=900 / SPD=23 / BREAK=200
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=93
+  - three_size=62/57/70 / initial_slot=1
+  - BD: 獣爪斬 (arts_id=69)
+    - description: 敵全体に6連ダメージ
+    - cost=1 / hit_count=6 / value=1.66667 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.05 — 風属性の魔剣の行動速度が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`106902`](weapons.json#L28032) ワイルドエッジ【極】
+  - base_name: ワイルドエッジ (costume: 極魔装)
+  - element=風(3) / type=長剣(1) / rarity=A(1) / cv=水野マリコ
+  - max stats: HP=3640 / ATK=1110 / DEF=1170 / SPD=23 / BREAK=260
+  - hit_counts=[3, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=93
+  - three_size=62/57/70 / initial_slot=1
+  - BD: 獣爪斬 (arts_id=69)
+    - description: 敵全体に6連ダメージ
+    - cost=1 / hit_count=6 / value=1.66667 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.05 — 風属性の魔剣の行動速度が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`106903`](weapons.json#L28176) ワイルドエッジ【極弐】
+  - base_name: ワイルドエッジ (costume: 極弐魔装)
+  - element=風(3) / type=長剣(1) / rarity=A(1) / cv=水野マリコ
+  - max stats: HP=4380 / ATK=2420 / DEF=1755 / SPD=28 / BREAK=520
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=96
+  - three_size=63/57/70 / initial_slot=3
+  - BD: 森羅獣爪斬 (arts_id=10069)
+    - description: 敵全体に強力な6連ダメージ＆敵を強制ブレイク
+    - cost=1 / hit_count=6 / value=2.68 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 風属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`107001`](weapons.json#L28333) ビーストファング
+  - base_name: ビーストファング (costume: 魔装)
+  - element=風(3) / type=拳闘(10) / rarity=A(1) / cv=中川亜紀子
+  - max stats: HP=3000 / ATK=300 / DEF=800 / SPD=44 / BREAK=250
+  - hit_counts=[4, 6, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=79
+  - three_size=62/56/70 / initial_slot=1
+  - BD: グランイーター (arts_id=70)
+    - description: 敵全体に8連ダメージ
+    - cost=2 / hit_count=8 / value=2.5625 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.05 — 風属性の魔剣が少しガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`107002`](weapons.json#L28477) ビーストファング【極】
+  - base_name: ビーストファング (costume: 極魔装)
+  - element=風(3) / type=拳闘(10) / rarity=A(1) / cv=中川亜紀子
+  - max stats: HP=3900 / ATK=390 / DEF=1040 / SPD=44 / BREAK=330
+  - hit_counts=[5, 6, 11] (3段)  motion_speed=[4.0/4.0/1.0]  mp=79
+  - three_size=62/56/70 / initial_slot=1
+  - BD: グランイーター (arts_id=70)
+    - description: 敵全体に8連ダメージ
+    - cost=2 / hit_count=8 / value=2.5625 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.05 — 風属性の魔剣が少しガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`107003`](weapons.json#L28621) ビーストファング【極弐】
+  - base_name: ビーストファング (costume: 極弐魔装)
+  - element=風(3) / type=拳闘(10) / rarity=A(1) / cv=中川亜紀子
+  - max stats: HP=5070 / ATK=1250 / DEF=1360 / SPD=48 / BREAK=530
+  - hit_counts=[6, 7, 11] (3段)  motion_speed=[3.0/3.0/1.0]  mp=85
+  - three_size=63/56/71 / initial_slot=3
+  - BD: ハイグランイーター (arts_id=10070)
+    - description: 敵全体に強力な8連ダメージ＆スピード10%UP
+    - cost=2 / hit_count=8 / value=3.86 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.1 — 風属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`107701`](weapons.json#L31210) ゲイボルグ=ゼロ
+  - base_name: ゲイボルグ=ゼロ (costume: 魔装)
+  - element=風(3) / type=騎槍(8) / rarity=SS(4) / cv=清和祐子
+  - max stats: HP=11900 / ATK=27100 / DEF=10000 / SPD=26 / BREAK=1300
+  - hit_counts=[3, 4, 4] (3段)  motion_speed=[2.4/2.2/1.3]  mp=250
+  - three_size=87/57/82 / initial_slot=3
+  - BD: ディープカーネイジ (arts_id=77)
+    - description: 敵全体に超絶強力な28連ダメージ＆スピード50%UP
+    - cost=3 / hit_count=28 / value=2.89179 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.74232 — 風属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - FellDown_Attack Multiply ×2.5 — 同セットの魔剣が倒されると自攻撃力がかなりアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - Enemy_BreakAttack Multiply ×7.0 — ブレイク時に自身の攻撃力が7倍にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`107702`](weapons.json#L31424) ゲイボルグ=ゼロ【極】
+  - base_name: ゲイボルグ=ゼロ (costume: 極魔装)
+  - element=風(3) / type=騎槍(8) / rarity=SS(4) / cv=清和祐子
+  - max stats: HP=15470 / ATK=35200 / DEF=13000 / SPD=26 / BREAK=1690
+  - hit_counts=[4, 4, 7] (3段)  motion_speed=[2.4/2.2/1.3]  mp=250
+  - three_size=87/57/82 / initial_slot=4
+  - BD: ディープカーネイジ (arts_id=77)
+    - description: 敵全体に超絶強力な28連ダメージ＆スピード50%UP
+    - cost=3 / hit_count=28 / value=2.89179 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 風属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - FellDown_Attack Multiply ×3.3 — 同セットの魔剣が倒されると自攻撃力が大幅にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - Enemy_BreakAttack Multiply ×7.0 — ブレイク時に自身の攻撃力が7倍にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`108101`](weapons.json#L32856) ゲイボルグ
+  - base_name: ゲイボルグ (costume: 魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=清和祐子
+  - max stats: HP=8100 / ATK=5800 / DEF=9900 / SPD=24 / BREAK=1600
+  - hit_counts=[2, 3, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=131
+  - three_size=87/57/82 / initial_slot=4
+  - BD: 魔天竜刃嵐獄衝 (arts_id=81)
+    - description: 敵全体に超強力な24連ダメージ＆スピード30%UP
+    - cost=3 / hit_count=24 / value=2.325 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 風属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`108102`](weapons.json#L33013) ゲイボルグ【極】
+  - base_name: ゲイボルグ (costume: 極魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=清和祐子
+  - max stats: HP=10600 / ATK=7600 / DEF=12900 / SPD=24 / BREAK=2100
+  - hit_counts=[3, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=131
+  - three_size=87/57/82 / initial_slot=5
+  - BD: 魔天竜刃嵐獄衝 (arts_id=81)
+    - description: 敵全体に超強力な24連ダメージ＆スピード30%UP
+    - cost=3 / hit_count=24 / value=2.325 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 風属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`108103`](weapons.json#L33170) ゲイボルグ【極弐】
+  - base_name: ゲイボルグ (costume: 極弐魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=清和祐子
+  - max stats: HP=13780 / ATK=9880 / DEF=16770 / SPD=28 / BREAK=2730
+  - hit_counts=[4, 4, 6] (3段)  motion_speed=[3.2/3.2/1.2]  mp=137
+  - three_size=87/57/82 / initial_slot=6
+  - BD: 疾風怒濤･魔天嵐竜槍 (arts_id=10081)
+    - description: 敵全体に超強力な24連ダメージ＆スピード30%UP
+    - cost=3 / hit_count=24 / value=2.325 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 風属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`109701`](weapons.json#L39412) ティンダロスの猟犬
+  - base_name: ティンダロスの猟犬 (costume: 魔装)
+  - element=闇(5) / type=杖棒(4) / rarity=AA(2) / cv=末柄里恵
+  - max stats: HP=4300 / ATK=2300 / DEF=3900 / SPD=37 / BREAK=500
+  - hit_counts=[3, 3, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=94
+  - three_size=89/59/88 / initial_slot=4
+  - BD: セレブロスパイナルキス (arts_id=97)
+    - description: 敵全体に強力な18連ダメージ
+    - cost=3 / hit_count=18 / value=2.58333 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 闇属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`109702`](weapons.json#L39556) ティンダロスの猟犬【極】
+  - base_name: ティンダロスの猟犬 (costume: 極魔装)
+  - element=闇(5) / type=杖棒(4) / rarity=AA(2) / cv=末柄里恵
+  - max stats: HP=5590 / ATK=2990 / DEF=5070 / SPD=37 / BREAK=650
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=94
+  - three_size=89/59/88 / initial_slot=4
+  - BD: セレブロスパイナルキス (arts_id=97)
+    - description: 敵全体に強力な18連ダメージ
+    - cost=3 / hit_count=18 / value=2.58333 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 闇属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`109703`](weapons.json#L39700) ティンダロスの猟犬【極弐】
+  - base_name: ティンダロスの猟犬 (costume: 極弐魔装)
+  - element=闇(5) / type=杖棒(4) / rarity=AA(2) / cv=末柄里恵
+  - max stats: HP=8390 / ATK=4490 / DEF=7610 / SPD=40 / BREAK=850
+  - hit_counts=[5, 4, 6] (3段)  motion_speed=[3.0/2.0/1.0]  mp=100
+  - three_size=91/59/88 / initial_slot=5
+  - BD: リクオル･ケレブロスピナリス (arts_id=10097)
+    - description: 敵全体に超強力な18連ダメージ＆スピード20%UP
+    - cost=3 / hit_count=18 / value=3.0 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.5 — 闇属性の魔剣の行動速度が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`109901`](weapons.json#L40245) フレイムハリアー
+  - base_name: フレイムハリアー (costume: 魔装)
+  - element=火(1) / type=弓矢(5) / rarity=AA(2) / cv=谷口夢奈
+  - max stats: HP=3900 / ATK=1900 / DEF=4600 / SPD=56 / BREAK=1480
+  - hit_counts=[4, 4, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=91
+  - three_size=68/56/74 / initial_slot=2
+  - BD: ノティスレスキル (arts_id=99)
+    - description: 敵全体に強力な19連ダメージ＆数秒だけ時を止める
+    - cost=2 / hit_count=19 / value=1.61842 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 火属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`109902`](weapons.json#L40402) フレイムハリアー【極】
+  - base_name: フレイムハリアー (costume: 極魔装)
+  - element=火(1) / type=弓矢(5) / rarity=AA(2) / cv=谷口夢奈
+  - max stats: HP=5100 / ATK=2470 / DEF=6000 / SPD=56 / BREAK=1930
+  - hit_counts=[5, 4, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=91
+  - three_size=68/56/74 / initial_slot=2
+  - BD: ノティスレスキル (arts_id=99)
+    - description: 敵全体に強力な19連ダメージ＆数秒だけ時を止める
+    - cost=2 / hit_count=19 / value=1.61842 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 火属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`109903`](weapons.json#L40559) フレイムハリアー【極弐】
+  - base_name: フレイムハリアー (costume: 極弐魔装)
+  - element=火(1) / type=弓矢(5) / rarity=AA(2) / cv=谷口夢奈
+  - max stats: HP=6630 / ATK=3960 / DEF=7800 / SPD=60 / BREAK=3090
+  - hit_counts=[6, 5, 9] (3段)  motion_speed=[4.0/3.8/2.0]  mp=101
+  - three_size=69/57/76 / initial_slot=3
+  - BD: インセンシブルスナイプ (arts_id=10099)
+    - description: 敵全体に強力な19連ダメージ＆数秒だけ時を止める
+    - cost=2 / hit_count=19 / value=1.61842 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 火属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`110401`](weapons.json#L42294) ワイバーン
+  - base_name: ワイバーン (costume: 魔装)
+  - element=風(3) / type=杖棒(4) / rarity=AA(2) / cv=種﨑敦美
+  - max stats: HP=4700 / ATK=1000 / DEF=3700 / SPD=25 / BREAK=1200
+  - hit_counts=[5, 6, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=50
+  - three_size=78/57/81 / initial_slot=2
+  - BD: ヘヴィプレスバースト (arts_id=104)
+    - description: 敵全体に強力な19連ダメージ
+    - cost=2 / hit_count=19 / value=1.61842 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 風属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`110402`](weapons.json#L42438) ワイバーン【極】
+  - base_name: ワイバーン (costume: 極魔装)
+  - element=風(3) / type=杖棒(4) / rarity=AA(2) / cv=種﨑敦美
+  - max stats: HP=6100 / ATK=1300 / DEF=4800 / SPD=25 / BREAK=1560
+  - hit_counts=[6, 6, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=50
+  - three_size=78/57/81 / initial_slot=2
+  - BD: ヘヴィプレスバースト (arts_id=104)
+    - description: 敵全体に強力な19連ダメージ
+    - cost=2 / hit_count=19 / value=1.61842 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 風属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`110403`](weapons.json#L42582) ワイバーン【極弐】
+  - base_name: ワイバーン (costume: 極弐魔装)
+  - element=風(3) / type=杖棒(4) / rarity=AA(2) / cv=種﨑敦美
+  - max stats: HP=8400 / ATK=2100 / DEF=6900 / SPD=29 / BREAK=2160
+  - hit_counts=[7, 7, 9] (3段)  motion_speed=[3.8/3.8/1.2]  mp=58
+  - three_size=79/57/82 / initial_slot=3
+  - BD: ヘヴィクラッシュバーン (arts_id=10104)
+    - description: 敵全体に強力な19連ダメージ＆敵を強制ブレイク
+    - cost=2 / hit_count=19 / value=1.61842 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 風属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`111101`](weapons.json#L45119) ケットシークイン
+  - base_name: ケットシークイン (costume: 魔装)
+  - element=光(4) / type=騎槍(8) / rarity=S(3) / cv=髙橋ミナミ
+  - max stats: HP=8000 / ATK=4900 / DEF=9500 / SPD=27 / BREAK=2000
+  - hit_counts=[1, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=88
+  - three_size=92/58/88 / initial_slot=1
+  - BD: クインテットクイーン (arts_id=111)
+    - description: 敵全体に超強力な22連ダメージ＆防御力10%UP
+    - cost=2 / hit_count=22 / value=1.67727 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 光属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`111102`](weapons.json#L45276) ケットシークイン【極】
+  - base_name: ケットシークイン (costume: 極魔装)
+  - element=光(4) / type=騎槍(8) / rarity=S(3) / cv=髙橋ミナミ
+  - max stats: HP=9999 / ATK=6000 / DEF=11000 / SPD=27 / BREAK=2200
+  - hit_counts=[2, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=88
+  - three_size=92/58/88 / initial_slot=2
+  - BD: クインテットクイーン (arts_id=111)
+    - description: 敵全体に超強力な22連ダメージ＆防御力10%UP
+    - cost=2 / hit_count=22 / value=1.67727 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 光属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`111601`](weapons.json#L47008) バールのようなもの神殺
+  - base_name: バールのようなもの神殺 (costume: 魔装)
+  - element=光(4) / type=大剣(2) / rarity=SS(4) / cv=末柄里恵
+  - max stats: HP=14800 / ATK=32940 / DEF=12000 / SPD=20 / BREAK=120
+  - hit_counts=[5, 4, 7] (3段)  motion_speed=[2.4/1.9/1.3]  mp=366
+  - three_size=91/53/73 / initial_slot=3
+  - BD: 瞑狂死酔スレイゴッド (arts_id=116)
+    - description: 敵全体に超絶強力な42連ダメージ＆数秒間攻撃力1.5倍
+    - cost=6 / hit_count=42 / value=4.28429 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.74232 — 光属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - JustGuard_Sapphire Multiply ×4.0 — ジャストガード時のサファイアの量がかなり増加
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`111602`](weapons.json#L47222) バールのようなもの神殺【極】
+  - base_name: バールのようなもの神殺 (costume: 極魔装)
+  - element=光(4) / type=大剣(2) / rarity=SS(4) / cv=末柄里恵
+  - max stats: HP=19240 / ATK=42800 / DEF=15600 / SPD=20 / BREAK=160
+  - hit_counts=[6, 4, 10] (3段)  motion_speed=[2.4/1.9/1.3]  mp=366
+  - three_size=91/53/73 / initial_slot=4
+  - BD: 瞑狂死酔スレイゴッド (arts_id=116)
+    - description: 敵全体に超絶強力な42連ダメージ＆数秒間攻撃力1.5倍
+    - cost=6 / hit_count=42 / value=4.28429 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - RemHP_Attack Multiply ×2.6 — 残HPが少ないほど攻撃力が超絶大にアップ
+    - JustGuard_Sapphire Multiply ×6.0 — ジャストガード時のサファイアの量が大幅に増加
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`114501`](weapons.json#L59183) ひのきのぼう
+  - base_name: ひのきのぼう (costume: 魔装)
+  - element=光(4) / type=杖棒(4) / rarity=AA(2) / cv=せきしほ
+  - max stats: HP=5500 / ATK=1555 / DEF=3000 / SPD=39 / BREAK=999
+  - hit_counts=[5, 5, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=55
+  - three_size=72/57/78 / initial_slot=2
+  - BD: ゴールデンリベンジ (arts_id=145)
+    - description: 敵全体に強力な30連ダメージ
+    - cost=1 / hit_count=30 / value=0.5 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.1 — 光属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`114502`](weapons.json#L59327) ひのきのぼう【極】
+  - base_name: ひのきのぼう (costume: 極魔装)
+  - element=光(4) / type=杖棒(4) / rarity=AA(2) / cv=せきしほ
+  - max stats: HP=7200 / ATK=2100 / DEF=3900 / SPD=39 / BREAK=1300
+  - hit_counts=[6, 5, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=55
+  - three_size=72/57/78 / initial_slot=2
+  - BD: ゴールデンリベンジ (arts_id=145)
+    - description: 敵全体に強力な30連ダメージ
+    - cost=1 / hit_count=30 / value=0.5 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.1 — 光属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`114503`](weapons.json#L59471) ひのきのぼう【極弐】
+  - base_name: ひのきのぼう (costume: 極弐魔装)
+  - element=光(4) / type=杖棒(4) / rarity=AA(2) / cv=せきしほ
+  - max stats: HP=9360 / ATK=3150 / DEF=5070 / SPD=42 / BREAK=1690
+  - hit_counts=[7, 6, 8] (3段)  motion_speed=[3.0/3.5/1.3]  mp=64
+  - three_size=72/57/78 / initial_slot=3
+  - BD: ゴールデンレジェンド (arts_id=10145)
+    - description: 敵全体に強力な30連ダメージ＆攻撃力10%UP
+    - cost=1 / hit_count=30 / value=0.5 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.25 — 光属性の魔剣がかなりガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`114601`](weapons.json#L59628) ガ・ボウ
+  - base_name: ガ・ボウ (costume: 魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=AA(2) / cv=田中あいみ
+  - max stats: HP=3600 / ATK=400 / DEF=3900 / SPD=14 / BREAK=1000
+  - hit_counts=[3, 4, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=121
+  - three_size=72/59/77 / initial_slot=1
+  - BD: 葬破暴却槍 (arts_id=146)
+    - description: 敵全体に強力な12連ダメージ＆敵を強制ブレイク
+    - cost=4 / hit_count=12 / value=5.375 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 闇属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`114602`](weapons.json#L59785) ガ・ボウ【極】
+  - base_name: ガ・ボウ (costume: 極魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=AA(2) / cv=田中あいみ
+  - max stats: HP=4680 / ATK=520 / DEF=5070 / SPD=14 / BREAK=1300
+  - hit_counts=[4, 4, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=121
+  - three_size=72/59/77 / initial_slot=2
+  - BD: 葬破暴却槍 (arts_id=146)
+    - description: 敵全体に強力な12連ダメージ＆敵を強制ブレイク
+    - cost=4 / hit_count=12 / value=5.375 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 闇属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`114603`](weapons.json#L59942) ガ・ボウ【極弐】
+  - base_name: ガ・ボウ (costume: 極弐魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=AA(2) / cv=田中あいみ
+  - max stats: HP=6090 / ATK=980 / DEF=6600 / SPD=18 / BREAK=1800
+  - hit_counts=[5, 5, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=128
+  - three_size=73/59/78 / initial_slot=3
+  - BD: 煌破螺旋暴却葬 (arts_id=10146)
+    - description: 敵全体に超強力な12連ダメージ＆敵を強制ブレイク
+    - cost=4 / hit_count=12 / value=6.0 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 闇属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`116101`](weapons.json#L65326) ジャガーノート
+  - base_name: ジャガーノート (costume: 魔装)
+  - element=闇(5) / type=戦斧(7) / rarity=S(3) / cv=三森すずこ
+  - max stats: HP=11000 / ATK=5200 / DEF=4300 / SPD=43 / BREAK=200
+  - hit_counts=[5, 6, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=168
+  - three_size=77/54/72 / initial_slot=2
+  - BD: ディヴァインフロート (arts_id=161)
+    - description: 敵全体に超強力な20連ダメージ＆3wave攻撃力17%UP
+    - cost=4 / hit_count=20 / value=5.0 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.75 — 全属性の魔剣が絶大にガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`116102`](weapons.json#L65483) ジャガーノート【極】
+  - base_name: ジャガーノート (costume: 極魔装)
+  - element=闇(5) / type=戦斧(7) / rarity=S(3) / cv=三森すずこ
+  - max stats: HP=14300 / ATK=6760 / DEF=5590 / SPD=43 / BREAK=260
+  - hit_counts=[6, 6, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=168
+  - three_size=77/54/72 / initial_slot=3
+  - BD: ディヴァインフロート (arts_id=161)
+    - description: 敵全体に超強力な20連ダメージ＆3wave攻撃力17%UP
+    - cost=4 / hit_count=20 / value=5.0 / additional_value=0.0
+  - innate skills (4):
+    - GuardBreak Multiply ×1.75 — 全属性の魔剣が絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×5.0 — ブレイク時に自身の攻撃力が5倍
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`116301`](weapons.json#L66092) カールスナウト
+  - base_name: カールスナウト (costume: 魔装)
+  - element=光(4) / type=長剣(1) / rarity=AA(2) / cv=赤﨑千夏
+  - max stats: HP=5500 / ATK=780 / DEF=5500 / SPD=41 / BREAK=780
+  - hit_counts=[3, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=99
+  - three_size=74/56/73 / initial_slot=2
+  - BD: グレティルプロミス (arts_id=163)
+    - description: 敵全体に強力な11連ダメージ
+    - cost=2 / hit_count=11 / value=2.79545 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 光属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`116302`](weapons.json#L66236) カールスナウト【極】
+  - base_name: カールスナウト (costume: 極魔装)
+  - element=光(4) / type=長剣(1) / rarity=AA(2) / cv=赤﨑千夏
+  - max stats: HP=7150 / ATK=1020 / DEF=7150 / SPD=41 / BREAK=1020
+  - hit_counts=[4, 3, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=99
+  - three_size=74/56/73 / initial_slot=2
+  - BD: グレティルプロミス (arts_id=163)
+    - description: 敵全体に強力な11連ダメージ
+    - cost=2 / hit_count=11 / value=2.79545 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 光属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`116303`](weapons.json#L66380) カールスナウト【極弐】
+  - base_name: カールスナウト (costume: 極弐魔装)
+  - element=光(4) / type=長剣(1) / rarity=AA(2) / cv=赤﨑千夏
+  - max stats: HP=9130 / ATK=1510 / DEF=9410 / SPD=45 / BREAK=1510
+  - hit_counts=[5, 4, 9] (3段)  motion_speed=[3.0/3.0/1.0]  mp=108
+  - three_size=74/56/73 / initial_slot=3
+  - BD: グレティルコントラクト (arts_id=10163)
+    - description: 敵全体に超強力な11連ダメージ＆一瞬だけスピード狂化
+    - cost=2 / hit_count=11 / value=4.0 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 光属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`116401`](weapons.json#L66537) リヴァイヴ
+  - base_name: リヴァイヴ (costume: 魔装)
+  - element=火(1) / type=投擲(9) / rarity=S(3) / cv=大原さやか
+  - max stats: HP=15200 / ATK=4300 / DEF=3200 / SPD=16 / BREAK=3600
+  - hit_counts=[4, 10, 6] (3段)  motion_speed=[3.0/2.0/1.0]  mp=151
+  - three_size=108/58/85 / initial_slot=3
+  - BD: 災厄再現《十字胎内》 (arts_id=164)
+    - description: 敵全体に超強力な24連ダメージ＆自分HP回復
+    - cost=4 / hit_count=24 / value=3.225 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 火属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`116402`](weapons.json#L66694) リヴァイヴ【極】
+  - base_name: リヴァイヴ (costume: 極魔装)
+  - element=火(1) / type=投擲(9) / rarity=S(3) / cv=大原さやか
+  - max stats: HP=19760 / ATK=5590 / DEF=4160 / SPD=16 / BREAK=4680
+  - hit_counts=[5, 10, 9] (3段)  motion_speed=[3.0/2.0/1.0]  mp=151
+  - three_size=108/58/85 / initial_slot=4
+  - BD: 災厄再現《十字胎内》 (arts_id=164)
+    - description: 敵全体に超強力な24連ダメージ＆自分HP回復
+    - cost=4 / hit_count=24 / value=3.225 / additional_value=0.0
+  - innate skills (4):
+    - Speed Multiply ×1.5 — 火属性の魔剣の行動速度が大幅にアップ
+    - Enemy_BreakAttack Multiply ×5.0 — ブレイク時に自身の攻撃力が5倍にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`116403`](weapons.json#L66889) リヴァイヴ【極弐】
+  - base_name: リヴァイヴ (costume: 極弐魔装)
+  - element=火(1) / type=投擲(9) / rarity=S(3) / cv=大原さやか
+  - max stats: HP=25690 / ATK=7270 / DEF=5410 / SPD=18 / BREAK=6090
+  - hit_counts=[6, 11, 9] (3段)  motion_speed=[2.0/2.0/1.2]  mp=165
+  - three_size=110/58/86 / initial_slot=5
+  - BD: 災厄開闢アゲイン《冥聖棺装》 (arts_id=10164)
+    - description: 敵全体に超強力な24連ダメージ＆自分HP回復
+    - cost=4 / hit_count=24 / value=3.225 / additional_value=0.0
+  - innate skills (4):
+    - Speed Multiply ×1.75 — 火属性の魔剣の行動速度が絶大にアップ
+    - Enemy_BreakAttack Multiply ×5.0 — ブレイク時に自身の攻撃力が5倍にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`117901`](weapons.json#L72549) ぎんいろ
+  - base_name: ぎんいろ (costume: 魔装)
+  - element=光(4) / type=拳闘(10) / rarity=S(3) / cv=山下七海
+  - max stats: HP=7777 / ATK=6700 / DEF=7500 / SPD=31 / BREAK=3700
+  - hit_counts=[2, 4, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=299
+  - three_size=70/57/72 / initial_slot=2
+  - BD: 無名…しいて言えば､殲滅 (arts_id=179)
+    - description: 敵全体に超強力な41連ダメージ＆数秒だけスピード暴走
+    - cost=7 / hit_count=41 / value=3.5 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 全属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`117902`](weapons.json#L72706) ぎんいろ【極】
+  - base_name: ぎんいろ (costume: 極魔装)
+  - element=光(4) / type=拳闘(10) / rarity=S(3) / cv=山下七海
+  - max stats: HP=10120 / ATK=8710 / DEF=9750 / SPD=31 / BREAK=4810
+  - hit_counts=[3, 2, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=299
+  - three_size=70/57/72 / initial_slot=3
+  - BD: 無名…しいて言えば､殲滅 (arts_id=179)
+    - description: 敵全体に超強力な41連ダメージ＆数秒だけスピード暴走
+    - cost=7 / hit_count=41 / value=3.5 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.5 — 全属性の魔剣の行動速度が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`117903`](weapons.json#L72863) ぎんいろ【極弐】
+  - base_name: ぎんいろ (costume: 極弐魔装)
+  - element=光(4) / type=拳闘(10) / rarity=S(3) / cv=山下七海
+  - max stats: HP=13300 / ATK=10020 / DEF=11680 / SPD=33 / BREAK=5300
+  - hit_counts=[4, 5, 10] (3段)  motion_speed=[3.0/2.0/1.5]  mp=312
+  - three_size=70/57/72 / initial_slot=4
+  - BD: 無名…あるいは貴方のための殲滅 (arts_id=10179)
+    - description: 敵全体に超強力な46連ダメージ＆数秒だけスピード暴走
+    - cost=7 / hit_count=46 / value=3.0 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.75 — 全属性の魔剣の行動速度が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`119001`](weapons.json#L77782) 鬼丸国綱
+  - base_name: 鬼丸国綱 (costume: 魔装)
+  - element=闇(5) / type=太刀(3) / rarity=S(3) / cv=大原さやか
+  - max stats: HP=10050 / ATK=4300 / DEF=3240 / SPD=32 / BREAK=2300
+  - hit_counts=[2, 2, 2] (3段)  motion_speed=[4.0/4.0/1.0]  mp=218
+  - three_size=97/70/94 / initial_slot=2
+  - BD: 屠鬼冥吼呪燎斬 (arts_id=190)
+    - description: 敵全体に超強力な22連ダメージ＆15秒攻撃力15%UP
+    - cost=4 / hit_count=22 / value=3.51818 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 闇属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`119002`](weapons.json#L77939) 鬼丸国綱【極】
+  - base_name: 鬼丸国綱 (costume: 極魔装)
+  - element=闇(5) / type=太刀(3) / rarity=S(3) / cv=大原さやか
+  - max stats: HP=13070 / ATK=5590 / DEF=4220 / SPD=32 / BREAK=2990
+  - hit_counts=[3, 2, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=218
+  - three_size=97/70/94 / initial_slot=3
+  - BD: 屠鬼冥吼呪燎斬 (arts_id=190)
+    - description: 敵全体に超強力な22連ダメージ＆15秒攻撃力15%UP
+    - cost=4 / hit_count=22 / value=3.51818 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 闇属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`119003`](weapons.json#L78096) 鬼丸国綱【極弐】
+  - base_name: 鬼丸国綱 (costume: 極弐魔装)
+  - element=闇(5) / type=太刀(3) / rarity=S(3) / cv=大原さやか
+  - max stats: HP=19610 / ATK=7270 / DEF=5490 / SPD=34 / BREAK=4790
+  - hit_counts=[4, 3, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=240
+  - three_size=99/70/94 / initial_slot=4
+  - BD: 大冥斬･悪鬼獄滅 (arts_id=10190)
+    - description: 敵全体に超強力な22連ダメージ＆15秒攻撃力15%UP
+    - cost=4 / hit_count=22 / value=3.51818 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.75 — 闇属性の魔剣の攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`119401`](weapons.json#L79951) 童子切安綱
+  - base_name: 童子切安綱 (costume: 魔装)
+  - element=火(1) / type=太刀(3) / rarity=S(3) / cv=土師亜文
+  - max stats: HP=11230 / ATK=10980 / DEF=2900 / SPD=31 / BREAK=5430
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[2.0/3.0/1.0]  mp=246
+  - three_size=66/56/67 / initial_slot=2
+  - BD: 秘剣･血吸雷光【酒呑】 (arts_id=194)
+    - description: 敵全体に超強力な29連ダメージ＆一瞬だけスピード狂化
+    - cost=5 / hit_count=29 / value=3.41379 / additional_value=0.0
+  - innate skills (2):
+    - Break_Attack Multiply ×2.0 — 自身が破損状態になると攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`119402`](weapons.json#L80108) 童子切安綱【極】
+  - base_name: 童子切安綱 (costume: 極魔装)
+  - element=火(1) / type=太刀(3) / rarity=S(3) / cv=土師亜文
+  - max stats: HP=14600 / ATK=14280 / DEF=3770 / SPD=31 / BREAK=7060
+  - hit_counts=[3, 2, 6] (3段)  motion_speed=[2.0/3.0/1.0]  mp=246
+  - three_size=66/56/67 / initial_slot=3
+  - BD: 秘剣･血吸雷光【酒呑】 (arts_id=194)
+    - description: 敵全体に超強力な29連ダメージ＆一瞬だけスピード狂化
+    - cost=5 / hit_count=29 / value=3.41379 / additional_value=0.0
+  - innate skills (2):
+    - Break_Attack Multiply ×2.5 — 自身が破損状態になると攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`119403`](weapons.json#L80265) 童子切安綱【極弐】
+  - base_name: 童子切安綱 (costume: 極弐魔装)
+  - element=火(1) / type=太刀(3) / rarity=S(3) / cv=土師亜文
+  - max stats: HP=18980 / ATK=18570 / DEF=4910 / SPD=34 / BREAK=9180
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[2.0/2.0/1.2]  mp=271
+  - three_size=69/56/68 / initial_slot=4
+  - BD: 絶剣･焔鬼滅迅【童子切】 (arts_id=10194)
+    - description: 敵全体に超強力な29連ダメージ＆一瞬だけスピード狂化
+    - cost=5 / hit_count=29 / value=3.41379 / additional_value=0.0
+  - innate skills (2):
+    - Break_Attack Multiply ×3.3 — 自身が破損状態になると攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`120101`](weapons.json#L82901) オグン
+  - base_name: オグン (costume: 魔装)
+  - element=風(3) / type=戦斧(7) / rarity=AA(2) / cv=田村奈央
+  - max stats: HP=6000 / ATK=2560 / DEF=4560 / SPD=36 / BREAK=420
+  - hit_counts=[3, 7, 11] (3段)  motion_speed=[3.0/2.0/1.0]  mp=61
+  - three_size=70/55/73 / initial_slot=2
+  - BD: 鉄と開拓の革命開闢 (arts_id=201)
+    - description: 敵全体に超強力な21連ダメージ＆敵を強制ブレイク
+    - cost=2 / hit_count=21 / value=2.21429 / additional_value=0.0
+  - innate skills (2):
+    - Break_Attack Multiply ×2.0 — 自身が破損状態になると攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`120102`](weapons.json#L83058) オグン【極】
+  - base_name: オグン (costume: 極魔装)
+  - element=風(3) / type=戦斧(7) / rarity=AA(2) / cv=田村奈央
+  - max stats: HP=7800 / ATK=3330 / DEF=5930 / SPD=36 / BREAK=550
+  - hit_counts=[4, 7, 14] (3段)  motion_speed=[3.0/2.0/1.0]  mp=61
+  - three_size=70/55/73 / initial_slot=3
+  - BD: 鉄と開拓の革命開闢 (arts_id=201)
+    - description: 敵全体に超強力な21連ダメージ＆敵を強制ブレイク
+    - cost=2 / hit_count=21 / value=2.21429 / additional_value=0.0
+  - innate skills (2):
+    - Break_Attack Multiply ×2.5 — 自身が破損状態になると攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`120103`](weapons.json#L83215) オグン【極弐】
+  - base_name: オグン (costume: 極弐魔装)
+  - element=風(3) / type=戦斧(7) / rarity=AA(2) / cv=田村奈央
+  - max stats: HP=10140 / ATK=4330 / DEF=7710 / SPD=40 / BREAK=720
+  - hit_counts=[5, 8, 14] (3段)  motion_speed=[3.0/2.0/1.1]  mp=66
+  - three_size=70/55/73 / initial_slot=4
+  - BD: アイアンパスファインダー (arts_id=10201)
+    - description: 敵全体に超強力な21連ダメージ＆敵を強制ブレイク
+    - cost=2 / hit_count=21 / value=2.21429 / additional_value=0.0
+  - innate skills (2):
+    - Break_Attack Multiply ×3.3 — 自身が破損状態になると攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`121201`](weapons.json#L87557) ヘルファイアワークス
+  - base_name: ヘルファイアワークス (costume: 魔装)
+  - element=火(1) / type=魔典(11) / rarity=S(3) / cv=星谷美緒
+  - max stats: HP=5900 / ATK=2800 / DEF=5000 / SPD=30 / BREAK=2800
+  - hit_counts=[4, 4, 10] (3段)  motion_speed=[3.0/2.0/1.0]  mp=260
+  - three_size=71/55/69 / initial_slot=1
+  - BD: 魔に咲け一輪の大華火 (arts_id=212)
+    - description: 敵全体に超強力な37連ダメージ＆20秒ブレイク力2倍
+    - cost=6 / hit_count=37 / value=3.02 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 火属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`121202`](weapons.json#L87714) ヘルファイアワークス【極】
+  - base_name: ヘルファイアワークス (costume: 極魔装)
+  - element=火(1) / type=魔典(11) / rarity=S(3) / cv=星谷美緒
+  - max stats: HP=7670 / ATK=3640 / DEF=6500 / SPD=30 / BREAK=3640
+  - hit_counts=[5, 4, 13] (3段)  motion_speed=[3.0/2.0/1.0]  mp=260
+  - three_size=71/55/69 / initial_slot=2
+  - BD: 魔に咲け一輪の大華火 (arts_id=212)
+    - description: 敵全体に超強力な37連ダメージ＆20秒ブレイク力2倍
+    - cost=6 / hit_count=37 / value=3.02 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.75 — 火属性の魔剣の攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`121203`](weapons.json#L87871) ヘルファイアワークス【極弐】
+  - base_name: ヘルファイアワークス (costume: 極弐魔装)
+  - element=火(1) / type=魔典(11) / rarity=S(3) / cv=星谷美緒
+  - max stats: HP=11130 / ATK=6560 / DEF=9430 / SPD=32 / BREAK=4740
+  - hit_counts=[6, 5, 13] (3段)  motion_speed=[2.8/2.2/1.2]  mp=286
+  - three_size=71/55/71 / initial_slot=3
+  - BD: 地獄に花咲く紅蓮の業華 (arts_id=10212)
+    - description: 敵全体に超強力な37連ダメージ＆20秒ブレイク力2倍
+    - cost=6 / hit_count=37 / value=3.02 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.75 — 火属性の魔剣の攻撃力が絶大にアップ
+    - MotionSpeed Multiply ×1.5 — 火属性の魔剣の攻撃モーションがかなり加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`121401`](weapons.json#L88518) イノケンティウス
+  - base_name: イノケンティウス (costume: 魔装)
+  - element=火(1) / type=騎槍(8) / rarity=S(3) / cv=尾崎真実
+  - max stats: HP=11900 / ATK=5300 / DEF=3650 / SPD=51 / BREAK=1020
+  - hit_counts=[3, 4, 6] (3段)  motion_speed=[2.0/2.0/1.0]  mp=136
+  - three_size=84/53/80 / initial_slot=1
+  - BD: 焔帝魔槍の神逆無双 (arts_id=214)
+    - description: 敵全体に超強力な29連ダメージ＆1waveヒット数が+6
+    - cost=3 / hit_count=29 / value=2.07 / additional_value=0.0
+  - innate skills (2):
+    - InstantDeath Repel_Percent ×50.0 — 即死特性の攻撃を確率で回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`121402`](weapons.json#L88675) イノケンティウス【極】
+  - base_name: イノケンティウス (costume: 極魔装)
+  - element=火(1) / type=騎槍(8) / rarity=S(3) / cv=尾崎真実
+  - max stats: HP=15470 / ATK=6890 / DEF=4750 / SPD=51 / BREAK=1330
+  - hit_counts=[4, 4, 9] (3段)  motion_speed=[2.0/2.0/1.0]  mp=136
+  - three_size=84/53/80 / initial_slot=2
+  - BD: 焔帝魔槍の神逆無双 (arts_id=214)
+    - description: 敵全体に超強力な29連ダメージ＆1waveヒット数が+6
+    - cost=3 / hit_count=29 / value=2.07 / additional_value=0.0
+  - innate skills (2):
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`121403`](weapons.json#L88832) イノケンティウス【極弐】
+  - base_name: イノケンティウス (costume: 極弐魔装)
+  - element=火(1) / type=騎槍(8) / rarity=S(3) / cv=尾崎真実
+  - max stats: HP=20120 / ATK=8960 / DEF=6180 / SPD=54 / BREAK=1730
+  - hit_counts=[5, 5, 9] (3段)  motion_speed=[2.0/2.0/1.3]  mp=148
+  - three_size=85/53/81 / initial_slot=3
+  - BD: 真・焔帝魔槍の断罪蓮華 (arts_id=10214)
+    - description: 敵全体に超強力な29連ダメージ＆1waveヒット数が+6
+    - cost=3 / hit_count=29 / value=2.07 / additional_value=0.0
+  - innate skills (3):
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - RemHP_Attack Multiply ×1.3 — 残HPが少ないほど攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`121701`](weapons.json#L89836) セイバートゥース
+  - base_name: セイバートゥース (costume: 魔装)
+  - element=水(2) / type=騎槍(8) / rarity=S(3) / cv=田中美海
+  - max stats: HP=11240 / ATK=4070 / DEF=3420 / SPD=54 / BREAK=680
+  - hit_counts=[3, 4, 7] (3段)  motion_speed=[2.0/3.0/1.0]  mp=70
+  - three_size=84/59/82 / initial_slot=1
+  - BD: 頂点捕食プレデターファング (arts_id=217)
+    - description: 敵全体に超強力な29連ダメージ＆3wave攻撃力13%UP
+    - cost=4 / hit_count=29 / value=2.66897 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.1 — 火属性の魔剣の攻撃力がアップ
+    - Attack Multiply ×1.1 — 水属性の魔剣の攻撃力がアップ
+    - Attack Multiply ×1.1 — 風属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`121702`](weapons.json#L90031) セイバートゥース【極】
+  - base_name: セイバートゥース (costume: 極魔装)
+  - element=水(2) / type=騎槍(8) / rarity=S(3) / cv=田中美海
+  - max stats: HP=14620 / ATK=5300 / DEF=4450 / SPD=54 / BREAK=890
+  - hit_counts=[4, 4, 10] (3段)  motion_speed=[2.0/3.0/1.0]  mp=70
+  - three_size=84/59/82 / initial_slot=2
+  - BD: 頂点捕食プレデターファング (arts_id=217)
+    - description: 敵全体に超強力な29連ダメージ＆3wave攻撃力13%UP
+    - cost=4 / hit_count=29 / value=2.66897 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.5 — 火属性の魔剣の攻撃力が大幅にアップ
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - Attack Multiply ×1.5 — 風属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`121901`](weapons.json#L90640) ダイラタンシー
+  - base_name: ダイラタンシー (costume: 魔装)
+  - element=水(2) / type=連弩(6) / rarity=AA(2) / cv=高橋李依
+  - max stats: HP=7500 / ATK=1150 / DEF=2000 / SPD=39 / BREAK=200
+  - hit_counts=[9, 9, 9] (3段)  motion_speed=[3.0/2.0/1.0]  mp=54
+  - three_size=自由自在 / initial_slot=1
+  - BD: レイノルズ魔導力学現象 (arts_id=219)
+    - description: 敵全体に強力な31連ダメージ＆自分HP回復
+    - cost=2 / hit_count=31 / value=0.991935 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 水属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`121902`](weapons.json#L90797) ダイラタンシー【極】
+  - base_name: ダイラタンシー (costume: 極魔装)
+  - element=水(2) / type=連弩(6) / rarity=AA(2) / cv=高橋李依
+  - max stats: HP=9750 / ATK=1500 / DEF=2600 / SPD=39 / BREAK=260
+  - hit_counts=[10, 9, 12] (3段)  motion_speed=[3.0/2.0/1.0]  mp=54
+  - three_size=自由自在 / initial_slot=2
+  - BD: レイノルズ魔導力学現象 (arts_id=219)
+    - description: 敵全体に強力な31連ダメージ＆自分HP回復
+    - cost=2 / hit_count=31 / value=0.991935 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.25 — 水属性の魔剣のHPがかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`121903`](weapons.json#L90954) ダイラタンシー【極弐】
+  - base_name: ダイラタンシー (costume: 極弐魔装)
+  - element=水(2) / type=連弩(6) / rarity=AA(2) / cv=高橋李依
+  - max stats: HP=12680 / ATK=1950 / DEF=3380 / SPD=42 / BREAK=340
+  - hit_counts=[11, 10, 12] (3段)  motion_speed=[3.0/2.0/1.0]  mp=60
+  - three_size=自由自在 / initial_slot=3
+  - BD: 応用魔導力学式剛化流体射出 (arts_id=10219)
+    - description: 敵全体に強力な31連ダメージ＆自分HP回復
+    - cost=2 / hit_count=31 / value=0.991935 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.5 — 水属性の魔剣のHPが大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`122001`](weapons.json#L91111) ヤタガラス
+  - base_name: ヤタガラス (costume: 魔装)
+  - element=火(1) / type=連弩(6) / rarity=S(3) / cv=相内沙英
+  - max stats: HP=8930 / ATK=2180 / DEF=8000 / SPD=27 / BREAK=3320
+  - hit_counts=[3, 8, 12] (3段)  motion_speed=[4.0/4.0/1.0]  mp=208
+  - three_size=73/57/76 / initial_slot=2
+  - BD: 焔魂奈落核融合 (arts_id=220)
+    - description: 敵全体に超強力な13連ダメージ＆敵を強制ブレイク
+    - cost=5 / hit_count=13 / value=7.61538 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 火属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`122002`](weapons.json#L91268) ヤタガラス【極】
+  - base_name: ヤタガラス (costume: 極魔装)
+  - element=火(1) / type=連弩(6) / rarity=S(3) / cv=相内沙英
+  - max stats: HP=11610 / ATK=2840 / DEF=10400 / SPD=27 / BREAK=4320
+  - hit_counts=[4, 8, 15] (3段)  motion_speed=[4.0/4.0/1.0]  mp=208
+  - three_size=73/57/76 / initial_slot=3
+  - BD: 焔魂奈落核融合 (arts_id=220)
+    - description: 敵全体に超強力な13連ダメージ＆敵を強制ブレイク
+    - cost=5 / hit_count=13 / value=7.61538 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.4969 — 火属性の魔剣の攻撃力が大幅にアップ【熟度UPにつれてさらに効果値UP】
+    - Enemy_BreakAttack Multiply ×3.0 — ブレイク時に火属性の魔剣の攻撃力が3倍
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`122003`](weapons.json#L91444) ヤタガラス【極弐】
+  - base_name: ヤタガラス (costume: 極弐魔装)
+  - element=火(1) / type=連弩(6) / rarity=S(3) / cv=相内沙英
+  - max stats: HP=18580 / ATK=3700 / DEF=13520 / SPD=30 / BREAK=5620
+  - hit_counts=[5, 9, 15] (3段)  motion_speed=[3.0/3.0/1.2]  mp=232
+  - three_size=74/58/77 / initial_slot=4
+  - BD: 焔魂翔破黄金太陽 (arts_id=10220)
+    - description: 敵全体に超強力な13連ダメージ＆敵を強制ブレイク
+    - cost=5 / hit_count=13 / value=7.61538 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.74232 — 火属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Enemy_BreakAttack Multiply ×3.0 — ブレイク時に火属性の魔剣の攻撃力が3倍
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`122401`](weapons.json#L92586) アクアディンゲン
+  - base_name: アクアディンゲン (costume: 魔装)
+  - element=水(2) / type=魔典(11) / rarity=S(3) / cv=吉岡茉祐
+  - max stats: HP=11730 / ATK=4180 / DEF=3330 / SPD=48 / BREAK=620
+  - hit_counts=[5, 5, 10] (3段)  motion_speed=[2.0/2.0/1.0]  mp=216
+  - three_size=78/56/77 / initial_slot=3
+  - BD: ナイハーゴの葬送歌 (arts_id=224)
+    - description: 敵全体に超強力な32連ダメージ＆15秒攻撃全体化
+    - cost=4 / hit_count=32 / value=2.5 / additional_value=0.0
+  - innate skills (3):
+    - RemHP_Attack Multiply ×1.3 — 残HPが少ないほど攻撃力がかなりアップ
+    - GuardDefense Multiply ×0.75 — 水属性の魔剣のガード時の防御力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`122402`](weapons.json#L92762) アクアディンゲン【極】
+  - base_name: アクアディンゲン (costume: 極魔装)
+  - element=水(2) / type=魔典(11) / rarity=S(3) / cv=吉岡茉祐
+  - max stats: HP=15250 / ATK=5440 / DEF=4330 / SPD=48 / BREAK=810
+  - hit_counts=[6, 5, 13] (3段)  motion_speed=[2.0/2.0/1.0]  mp=216
+  - three_size=78/56/77 / initial_slot=4
+  - BD: ナイハーゴの葬送歌 (arts_id=224)
+    - description: 敵全体に超強力な32連ダメージ＆15秒攻撃全体化
+    - cost=4 / hit_count=32 / value=2.5 / additional_value=0.0
+  - innate skills (4):
+    - RemHP_Attack Multiply ×1.8 — 残HPが少ないほど攻撃力が大幅にアップ
+    - GuardDefense Multiply ×0.625 — 水属性の魔剣のガード時の防御力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`122403`](weapons.json#L92957) アクアディンゲン【極弐】
+  - base_name: アクアディンゲン (costume: 極弐魔装)
+  - element=水(2) / type=魔典(11) / rarity=S(3) / cv=吉岡茉祐
+  - max stats: HP=19830 / ATK=8160 / DEF=5630 / SPD=51 / BREAK=1060
+  - hit_counts=[7, 6, 13] (3段)  motion_speed=[2.0/2.0/1.0]  mp=232
+  - three_size=80/56/77 / initial_slot=5
+  - BD: 遥かな水より出づるモノ (arts_id=10224)
+    - description: 敵全体に超強力な32連ダメージ＆15秒攻撃全体化
+    - cost=4 / hit_count=32 / value=2.5 / additional_value=0.0
+  - innate skills (4):
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - GuardDefense Multiply ×0.62577 — 水属性の魔剣のガード時の防御力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`122501`](weapons.json#L93152) ΦΦΦ
+  - base_name: ΦΦΦ (costume: 魔装)
+  - element=光(4) / type=投擲(9) / rarity=S(3) / cv=涼本あきほ
+  - max stats: HP=7900 / ATK=7500 / DEF=3750 / SPD=39 / BREAK=580
+  - hit_counts=[2, 3, 7] (3段)  motion_speed=[3.0/3.0/3.0]  mp=160
+  - three_size=72/51/69 / initial_slot=1
+  - BD: 終焉に歓喜せよ愚かなる刃 (arts_id=225)
+    - description: 敵全体に超強力な50連ダメージ＆10秒ﾓｰｼｮﾝ30%高速化
+    - cost=5 / hit_count=50 / value=2.2 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 光属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`122502`](weapons.json#L93309) ΦΦΦ【極】
+  - base_name: ΦΦΦ (costume: 極魔装)
+  - element=光(4) / type=投擲(9) / rarity=S(3) / cv=涼本あきほ
+  - max stats: HP=10270 / ATK=9750 / DEF=4880 / SPD=39 / BREAK=760
+  - hit_counts=[3, 3, 10] (3段)  motion_speed=[3.0/3.0/3.0]  mp=160
+  - three_size=72/51/69 / initial_slot=2
+  - BD: 終焉に歓喜せよ愚かなる刃 (arts_id=225)
+    - description: 敵全体に超強力な50連ダメージ＆10秒ﾓｰｼｮﾝ30%高速化
+    - cost=5 / hit_count=50 / value=2.2 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.75 — 光属性の魔剣の攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`122901`](weapons.json#L94765) 天狗椛
+  - base_name: 天狗椛 (costume: 魔装)
+  - element=風(3) / type=戦斧(7) / rarity=AA(2) / cv=佐々木未来
+  - max stats: HP=6480 / ATK=3150 / DEF=3870 / SPD=62 / BREAK=450
+  - hit_counts=[2, 2, 12] (3段)  motion_speed=[3.0/3.0/2.0]  mp=89
+  - three_size=62/50/68 / initial_slot=2
+  - BD: 天狗の王の山嵐 (arts_id=229)
+    - description: 敵全体に強力な28連ダメージ＆スピード45%UP
+    - cost=3 / hit_count=28 / value=1.66071 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.1 — 風属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`122902`](weapons.json#L94922) 天狗椛【極】
+  - base_name: 天狗椛 (costume: 極魔装)
+  - element=風(3) / type=戦斧(7) / rarity=AA(2) / cv=佐々木未来
+  - max stats: HP=8430 / ATK=4100 / DEF=5040 / SPD=62 / BREAK=590
+  - hit_counts=[3, 2, 15] (3段)  motion_speed=[3.0/3.0/2.0]  mp=89
+  - three_size=62/50/68 / initial_slot=3
+  - BD: 天狗の王の山嵐 (arts_id=229)
+    - description: 敵全体に強力な28連ダメージ＆スピード45%UP
+    - cost=3 / hit_count=28 / value=1.66071 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 風属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`122903`](weapons.json#L95079) 天狗椛【極弐】
+  - base_name: 天狗椛 (costume: 極弐魔装)
+  - element=風(3) / type=戦斧(7) / rarity=AA(2) / cv=佐々木未来
+  - max stats: HP=10430 / ATK=5100 / DEF=7040 / SPD=62 / BREAK=690
+  - hit_counts=[4, 3, 15] (3段)  motion_speed=[3.0/3.0/2.0]  mp=95
+  - three_size=62/50/68 / initial_slot=4
+  - BD: 嵐天狗嶺･大椛 (arts_id=10229)
+    - description: 敵全体に強力な28連ダメージ＆Wave中、スピード45%UP
+    - cost=3 / hit_count=28 / value=1.66071 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 風属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`123401`](weapons.json#L97139) 雷斧ペルーン
+  - base_name: 雷斧ペルーン (costume: 魔装)
+  - element=闇(5) / type=戦斧(7) / rarity=S(3) / cv=洲崎綾
+  - max stats: HP=11680 / ATK=6520 / DEF=2970 / SPD=42 / BREAK=540
+  - hit_counts=[4, 5, 8] (3段)  motion_speed=[3.0/3.0/1.0]  mp=264
+  - three_size=72/55/74 / initial_slot=2
+  - BD: 轟覇･雷霆舞塵 (arts_id=234)
+    - description: 敵全体に超強力な22連ダメージ＆味方HP回復
+    - cost=7 / hit_count=22 / value=5.72727 / additional_value=0.0
+  - innate skills (3):
+    - AllTarget Multiply ×0.6 — 攻撃力は下がるが自分の攻撃範囲が敵全体になる
+    - Stun Repel_Percent ×50.0 — スタンの発生を確率で回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`123402`](weapons.json#L97315) 雷斧ペルーン【極】
+  - base_name: 雷斧ペルーン (costume: 極魔装)
+  - element=闇(5) / type=戦斧(7) / rarity=S(3) / cv=洲崎綾
+  - max stats: HP=15190 / ATK=8480 / DEF=3870 / SPD=42 / BREAK=710
+  - hit_counts=[5, 5, 11] (3段)  motion_speed=[3.0/3.0/1.0]  mp=264
+  - three_size=72/55/74 / initial_slot=3
+  - BD: 轟覇･雷霆舞塵 (arts_id=234)
+    - description: 敵全体に超強力な22連ダメージ＆味方HP回復
+    - cost=7 / hit_count=22 / value=5.72727 / additional_value=0.0
+  - innate skills (3):
+    - AllTarget Multiply ×0.8 — 攻撃力はやや下がるが自分の攻撃範囲が敵全体になる
+    - Stun Repel_Percent ×100.0 — スタンの発生を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`124801`](weapons.json#L103067) スコル＆ハティ
+  - base_name: スコル＆ハティ (costume: 魔装)
+  - element=風(3) / type=大鎌(12) / rarity=S(3) / cv=日岡なつみ
+  - max stats: HP=7500 / ATK=2240 / DEF=3200 / SPD=27 / BREAK=200
+  - hit_counts=[6, 6, 9] (3段)  motion_speed=[3.0/3.0/2.0]  mp=120
+  - three_size=およそ73/56/74…くらい？ / initial_slot=1
+  - BD: 憎き敵さえ嘲て嗤うお食事タイム (arts_id=248)
+    - description: 敵全体に超強力な58連ダメージ＆15秒攻撃全体化
+    - cost=4 / hit_count=58 / value=1.33 / additional_value=0.0
+  - innate skills (3):
+    - Speed Multiply ×1.25 — 風属性の魔剣の行動速度がかなりアップ
+    - MotionSpeed Multiply ×1.3 — 風属性の魔剣の攻撃モーションが加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`124802`](weapons.json#L103243) スコル＆ハティ【極】
+  - base_name: スコル＆ハティ (costume: 極魔装)
+  - element=風(3) / type=大鎌(12) / rarity=S(3) / cv=日岡なつみ
+  - max stats: HP=9750 / ATK=2910 / DEF=4160 / SPD=27 / BREAK=260
+  - hit_counts=[7, 6, 12] (3段)  motion_speed=[3.0/3.0/2.0]  mp=120
+  - three_size=およそ73/56/74…くらい？ / initial_slot=2
+  - BD: 憎き敵さえ嘲て嗤うお食事タイム (arts_id=248)
+    - description: 敵全体に超強力な58連ダメージ＆15秒攻撃全体化
+    - cost=4 / hit_count=58 / value=1.33 / additional_value=0.0
+  - innate skills (4):
+    - Speed Multiply ×1.5 — 風属性の魔剣の行動速度が大幅にアップ
+    - MotionSpeed Multiply ×1.5 — 風属性の魔剣の攻撃モーションがかなり加速
+    - HitCount Addition +1.0 — 風属性の魔剣の1撃目2撃目3撃目のヒット数を+1する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`124803`](weapons.json#L103438) スコル＆ハティ【極弐】
+  - base_name: スコル＆ハティ (costume: 極弐魔装)
+  - element=風(3) / type=大鎌(12) / rarity=S(3) / cv=日岡なつみ
+  - max stats: HP=12680 / ATK=4670 / DEF=5410 / SPD=35 / BREAK=340
+  - hit_counts=[8, 7, 12] (3段)  motion_speed=[3.0/3.0/2.0]  mp=132
+  - three_size=およそ73/56/74…くらい？ / initial_slot=3
+  - BD: 遥かな天さえ追い喰むモフモフタイム (arts_id=10248)
+    - description: 敵全体に超強力な58連ダメージ＆15秒攻撃全体化
+    - cost=4 / hit_count=58 / value=1.33 / additional_value=0.0
+  - innate skills (4):
+    - Speed Multiply ×1.75 — 風属性の魔剣の行動速度が絶大にアップ
+    - MotionSpeed Multiply ×2.0 — 風属性の魔剣の攻撃モーションが大幅に加速
+    - HitCount Addition +2.0 — 風属性の魔剣の1撃目2撃目3撃目のヒット数を+2する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`125501`](weapons.json#L106392) 獣王ベヒモス
+  - base_name: 獣王ベヒモス (costume: 魔装)
+  - element=風(3) / type=杖棒(4) / rarity=S(3) / cv=原紗友里
+  - max stats: HP=9950 / ATK=7890 / DEF=7820 / SPD=32 / BREAK=2370
+  - hit_counts=[2, 4, 7] (3段)  motion_speed=[2.0/2.0/1.0]  mp=231
+  - three_size=72/58/74 / initial_slot=2
+  - BD: 獣王降臨キングスオーダー (arts_id=255)
+    - description: 敵全体に超強力な21連ダメージ＆3wave攻撃力17%UP
+    - cost=4 / hit_count=21 / value=3.95 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.25 — 風属性の魔剣のHPがかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`125502`](weapons.json#L106549) 獣王ベヒモス【極】
+  - base_name: 獣王ベヒモス (costume: 極魔装)
+  - element=風(3) / type=杖棒(4) / rarity=S(3) / cv=原紗友里
+  - max stats: HP=12940 / ATK=10260 / DEF=10170 / SPD=32 / BREAK=3090
+  - hit_counts=[3, 4, 10] (3段)  motion_speed=[2.0/2.0/1.0]  mp=231
+  - three_size=72/58/74 / initial_slot=3
+  - BD: 獣王降臨キングスオーダー (arts_id=255)
+    - description: 敵全体に超強力な21連ダメージ＆3wave攻撃力17%UP
+    - cost=4 / hit_count=21 / value=3.95 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.5 — 風属性の魔剣のHPが大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`125503`](weapons.json#L106706) 獣王ベヒモス【極弐】
+  - base_name: 獣王ベヒモス (costume: 極弐魔装)
+  - element=風(3) / type=杖棒(4) / rarity=S(3) / cv=原紗友里
+  - max stats: HP=16830 / ATK=13340 / DEF=13230 / SPD=38 / BREAK=4020
+  - hit_counts=[4, 5, 10] (3段)  motion_speed=[2.0/2.5/1.2]  mp=266
+  - three_size=73/58/74 / initial_slot=4
+  - BD: 妖隷獣王デストラクトサモン (arts_id=10255)
+    - description: 敵全体に超強力な21連ダメージ＆3wave攻撃力17%UP
+    - cost=4 / hit_count=21 / value=3.95 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.75 — 風属性の魔剣のHPが絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`127001`](weapons.json#L113600) ウルトラマリン
+  - base_name: ウルトラマリン (costume: 魔装)
+  - element=水(2) / type=魔典(11) / rarity=S(3) / cv=田中美海
+  - max stats: HP=10820 / ATK=2800 / DEF=3860 / SPD=41 / BREAK=280
+  - hit_counts=[11, 11, 11] (3段)  motion_speed=[3.0/3.0/1.0]  mp=320
+  - three_size=86/59/82 / initial_slot=2
+  - BD: ディープディープパラダイス (arts_id=270)
+    - description: 敵全体に超強力な31連ダメージ＆20秒だけ攻撃全体化
+    - cost=2 / hit_count=31 / value=1.19032 / additional_value=0.0
+  - innate skills (3):
+    - SapphireDrop Multiply ×1.5 — 自分の獲得するサファイア量が少し増加
+    - RubyDrop Multiply ×1.5 — 自分が攻撃した時のルビーの量が少し増加
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`127002`](weapons.json#L113776) ウルトラマリン【極】
+  - base_name: ウルトラマリン (costume: 極魔装)
+  - element=水(2) / type=魔典(11) / rarity=S(3) / cv=田中美海
+  - max stats: HP=14070 / ATK=3640 / DEF=5020 / SPD=41 / BREAK=370
+  - hit_counts=[12, 11, 14] (3段)  motion_speed=[3.0/3.0/1.0]  mp=320
+  - three_size=86/59/82 / initial_slot=3
+  - BD: ディープディープパラダイス (arts_id=270)
+    - description: 敵全体に超強力な31連ダメージ＆20秒だけ攻撃全体化
+    - cost=2 / hit_count=31 / value=1.19032 / additional_value=0.0
+  - innate skills (3):
+    - SapphireDrop Multiply ×2.0 — 自分の獲得するサファイアの量がかなり増加
+    - RubyDrop Multiply ×2.0 — 自分が攻撃した時のルビーの量がかなり増加
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`127003`](weapons.json#L113952) ウルトラマリン【極弐】
+  - base_name: ウルトラマリン (costume: 極弐魔装)
+  - element=水(2) / type=魔典(11) / rarity=S(3) / cv=田中美海
+  - max stats: HP=18300 / ATK=4740 / DEF=6530 / SPD=44 / BREAK=490
+  - hit_counts=[13, 12, 14] (3段)  motion_speed=[3.2/3.2/1.2]  mp=354
+  - three_size=89/60/84 / initial_slot=4
+  - BD: ビヨンドザホライゾン (arts_id=10270)
+    - description: 敵全体に超強力な31連ダメージ＆20秒だけ攻撃全体化
+    - cost=2 / hit_count=31 / value=1.19032 / additional_value=0.0
+  - innate skills (3):
+    - SapphireDrop Multiply ×3.0 — 自分の獲得するサファイアの量が大幅に増加
+    - RubyDrop Multiply ×3.0 — 自分が攻撃した時のルビーの量が大幅に増加
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`127301`](weapons.json#L114975) マンイーター
+  - base_name: マンイーター (costume: 魔装)
+  - element=水(2) / type=戦斧(7) / rarity=AA(2) / cv=金元寿子
+  - max stats: HP=6900 / ATK=2180 / DEF=4800 / SPD=62 / BREAK=200
+  - hit_counts=[9, 7, 10] (3段)  motion_speed=[3.0/3.0/1.0]  mp=48
+  - three_size=73/56/76 / initial_slot=2
+  - BD: あるいは捕食される摂理 (arts_id=273)
+    - description: 敵全体に超強力な48連ダメージ＆自分モーション加速
+    - cost=2 / hit_count=48 / value=0.75 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.1 — 水属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`127302`](weapons.json#L115132) マンイーター【極】
+  - base_name: マンイーター (costume: 極魔装)
+  - element=水(2) / type=戦斧(7) / rarity=AA(2) / cv=金元寿子
+  - max stats: HP=8970 / ATK=2840 / DEF=6240 / SPD=62 / BREAK=260
+  - hit_counts=[10, 7, 13] (3段)  motion_speed=[3.0/3.0/1.0]  mp=48
+  - three_size=73/56/76 / initial_slot=3
+  - BD: あるいは捕食される摂理 (arts_id=273)
+    - description: 敵全体に超強力な48連ダメージ＆自分モーション加速
+    - cost=2 / hit_count=48 / value=0.75 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 水属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`127303`](weapons.json#L115289) マンイーター【極弐】
+  - base_name: マンイーター (costume: 極弐魔装)
+  - element=水(2) / type=戦斧(7) / rarity=AA(2) / cv=金元寿子
+  - max stats: HP=11670 / ATK=3700 / DEF=8120 / SPD=66 / BREAK=340
+  - hit_counts=[11, 8, 13] (3段)  motion_speed=[4.0/4.0/1.4]  mp=52
+  - three_size=73/56/76 / initial_slot=4
+  - BD: 然して連鎖する暴食 (arts_id=10273)
+    - description: 敵全体に超強力な48連ダメージ＆自分モーション加速
+    - cost=2 / hit_count=48 / value=0.75 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`127901`](weapons.json#L117554) エアガイツ
+  - base_name: エアガイツ (costume: 魔装)
+  - element=風(3) / type=拳闘(10) / rarity=S(3) / cv=咲々木瞳
+  - max stats: HP=6240 / ATK=4700 / DEF=7110 / SPD=44 / BREAK=800
+  - hit_counts=[2, 2, 16] (3段)  motion_speed=[4.0/4.0/1.0]  mp=235
+  - three_size=73/57/77 / initial_slot=3
+  - BD: ヴィントホーゼファオスト (arts_id=279)
+    - description: 敵全体に超強力な45連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=4 / hit_count=45 / value=1.72 / additional_value=0.0
+  - innate skills (3):
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - RemHP_Attack Multiply ×1.3 — 残HPが少ないほど攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`127902`](weapons.json#L117730) エアガイツ【極】
+  - base_name: エアガイツ (costume: 極魔装)
+  - element=風(3) / type=拳闘(10) / rarity=S(3) / cv=咲々木瞳
+  - max stats: HP=8120 / ATK=6110 / DEF=9250 / SPD=44 / BREAK=1040
+  - hit_counts=[3, 2, 19] (3段)  motion_speed=[4.0/4.0/1.0]  mp=235
+  - three_size=73/57/77 / initial_slot=4
+  - BD: ヴィントホーゼファオスト (arts_id=279)
+    - description: 敵全体に超強力な45連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=4 / hit_count=45 / value=1.72 / additional_value=0.0
+  - innate skills (4):
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - RemHP_Attack Multiply ×1.8 — 残HPが少ないほど攻撃力が大幅にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`127903`](weapons.json#L117925) エアガイツ【極弐】
+  - base_name: エアガイツ (costume: 極弐魔装)
+  - element=風(3) / type=拳闘(10) / rarity=S(3) / cv=咲々木瞳
+  - max stats: HP=12180 / ATK=7950 / DEF=12030 / SPD=47 / BREAK=1360
+  - hit_counts=[4, 3, 19] (3段)  motion_speed=[3.4/3.4/1.2]  mp=259
+  - three_size=74/57/77 / initial_slot=5
+  - BD: シュトゥルムヘルシャフト (arts_id=10279)
+    - description: 敵全体に超強力な45連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=4 / hit_count=45 / value=1.72 / additional_value=0.0
+  - innate skills (4):
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128101`](weapons.json#L118648) ツクヨミ
+  - base_name: ツクヨミ (costume: 魔装)
+  - element=闇(5) / type=太刀(3) / rarity=S(3) / cv=照井春佳
+  - max stats: HP=12130 / ATK=4400 / DEF=3970 / SPD=37 / BREAK=500
+  - hit_counts=[4, 5, 9] (3段)  motion_speed=[2.0/3.0/1.0]  mp=198
+  - three_size=94/62/87 / initial_slot=1
+  - BD: 冥劔御神鏡･八咫憑黄泉 (arts_id=281)
+    - description: 敵全体に超絶強力な31連ダメージ＆15秒ﾓｰｼｮﾝ25%高速化
+    - cost=7 / hit_count=31 / value=5.87097 / additional_value=0.0
+  - innate skills (3):
+    - RemHP_Attack Multiply ×1.3 — 残HPが少ないほど攻撃力がかなりアップ
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128102`](weapons.json#L118824) ツクヨミ【極】
+  - base_name: ツクヨミ (costume: 極魔装)
+  - element=闇(5) / type=太刀(3) / rarity=S(3) / cv=照井春佳
+  - max stats: HP=15770 / ATK=5720 / DEF=5170 / SPD=37 / BREAK=650
+  - hit_counts=[5, 5, 12] (3段)  motion_speed=[2.0/3.0/1.0]  mp=198
+  - three_size=94/62/87 / initial_slot=2
+  - BD: 冥劔御神鏡･八咫憑黄泉 (arts_id=281)
+    - description: 敵全体に超絶強力な31連ダメージ＆15秒ﾓｰｼｮﾝ25%高速化
+    - cost=7 / hit_count=31 / value=5.87097 / additional_value=0.0
+  - innate skills (3):
+    - RemHP_Attack Multiply ×1.8 — 残HPが少ないほど攻撃力が大幅にアップ
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128103`](weapons.json#L119000) ツクヨミ【極弐】
+  - base_name: ツクヨミ (costume: 極弐魔装)
+  - element=闇(5) / type=太刀(3) / rarity=S(3) / cv=照井春佳
+  - max stats: HP=17350 / ATK=6300 / DEF=6730 / SPD=40 / BREAK=850
+  - hit_counts=[6, 6, 12] (3段)  motion_speed=[4.0/4.0/1.4]  mp=208
+  - three_size=94/62/87 / initial_slot=3
+  - BD: 月讀ノ神鏡劔 (arts_id=10281)
+    - description: 敵全体に超絶強力な31連ダメージ＆15秒ﾓｰｼｮﾝ25%高速化
+    - cost=7 / hit_count=31 / value=5.87097 / additional_value=0.0
+  - innate skills (3):
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128201`](weapons.json#L119176) 紅天撃カーマイン
+  - base_name: 紅天撃カーマイン (costume: 魔装)
+  - element=火(1) / type=拳闘(10) / rarity=S(3) / cv=吉岡茉祐
+  - max stats: HP=10240 / ATK=3330 / DEF=3900 / SPD=28 / BREAK=300
+  - hit_counts=[3, 6, 12] (3段)  motion_speed=[3.0/3.0/1.0]  mp=74
+  - three_size=87/58/82 / initial_slot=3
+  - BD: 紅天カレジオブグローリー (arts_id=282)
+    - description: 敵全体に超強力な25連ダメージ＆5秒間サファイア量UP
+    - cost=3 / hit_count=25 / value=2.52 / additional_value=0.0
+  - innate skills (4):
+    - RemHP_Attack Multiply ×1.3 — 残HPが少ないほど攻撃力がかなりアップ
+    - RemHP_Speed Multiply ×1.8 — 残HPが少ないほどスピードが大幅にアップ
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128202`](weapons.json#L119371) 紅天撃カーマイン【極】
+  - base_name: 紅天撃カーマイン (costume: 極魔装)
+  - element=火(1) / type=拳闘(10) / rarity=S(3) / cv=吉岡茉祐
+  - max stats: HP=13320 / ATK=4330 / DEF=5070 / SPD=28 / BREAK=390
+  - hit_counts=[4, 6, 15] (3段)  motion_speed=[3.0/3.0/1.0]  mp=74
+  - three_size=87/58/82 / initial_slot=4
+  - BD: 紅天カレジオブグローリー (arts_id=282)
+    - description: 敵全体に超強力な25連ダメージ＆5秒間サファイア量UP
+    - cost=3 / hit_count=25 / value=2.52 / additional_value=0.0
+  - innate skills (5):
+    - RemHP_Attack Multiply ×1.8 — 残HPが少ないほど攻撃力が大幅にアップ
+    - RemHP_Speed Multiply ×1.7935 — 残HPが少ないほどスピードが大幅にアップ【熟度UPにつれてさらに効果値UP】
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128203`](weapons.json#L119585) 紅天撃カーマイン【極弐】
+  - base_name: 紅天撃カーマイン (costume: 極弐魔装)
+  - element=火(1) / type=拳闘(10) / rarity=S(3) / cv=吉岡茉祐
+  - max stats: HP=17320 / ATK=5630 / DEF=6600 / SPD=31 / BREAK=510
+  - hit_counts=[5, 7, 15] (3段)  motion_speed=[2.8/2.8/1.2]  mp=81
+  - three_size=89/58/83 / initial_slot=5
+  - BD: 超紅冥撃ヴァラーオブレジェンド (arts_id=10282)
+    - description: 敵全体に超強力な25連ダメージ＆5秒間サファイア量UP
+    - cost=3 / hit_count=25 / value=2.52 / additional_value=0.0
+  - innate skills (5):
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - RemHP_Speed Multiply ×2.2455 — 残HPが少ないほどスピードが絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128501`](weapons.json#L120646) キャンサル
+  - base_name: キャンサル (costume: 魔装)
+  - element=風(3) / type=太刀(3) / rarity=S(3) / cv=加隈亜衣
+  - max stats: HP=8400 / ATK=4650 / DEF=8000 / SPD=22 / BREAK=1300
+  - hit_counts=[2, 4, 8] (3段)  motion_speed=[3.0/3.0/3.0]  mp=220
+  - three_size=79/57/76 / initial_slot=2
+  - BD: 終焉のアルタルフ (arts_id=285)
+    - description: 敵全体に超強力な22連ダメージ＆wave中、攻撃力20%UP
+    - cost=6 / hit_count=22 / value=5.07273 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.5 — 風属性の魔剣が大幅にガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128502`](weapons.json#L120803) キャンサル【極】
+  - base_name: キャンサル (costume: 極魔装)
+  - element=風(3) / type=太刀(3) / rarity=S(3) / cv=加隈亜衣
+  - max stats: HP=10920 / ATK=6050 / DEF=10400 / SPD=22 / BREAK=1690
+  - hit_counts=[3, 4, 11] (3段)  motion_speed=[3.0/3.0/3.0]  mp=220
+  - three_size=79/57/76 / initial_slot=3
+  - BD: 終焉のアルタルフ (arts_id=285)
+    - description: 敵全体に超強力な22連ダメージ＆wave中、攻撃力20%UP
+    - cost=6 / hit_count=22 / value=5.07273 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.75 — 風属性の魔剣が絶大にガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128503`](weapons.json#L120960) キャンサル【極弐】
+  - base_name: キャンサル (costume: 極弐魔装)
+  - element=風(3) / type=太刀(3) / rarity=S(3) / cv=加隈亜衣
+  - max stats: HP=14200 / ATK=7870 / DEF=13520 / SPD=24 / BREAK=2200
+  - hit_counts=[4, 5, 11] (3段)  motion_speed=[2.0/2.0/1.3]  mp=244
+  - three_size=79/57/76 / initial_slot=4
+  - BD: 勇壮無比なるカルキノス (arts_id=10285)
+    - description: 敵全体に超強力な22連ダメージ＆wave中、攻撃力20%UP
+    - cost=6 / hit_count=22 / value=5.07273 / additional_value=0.0
+  - innate skills (3):
+    - GuardBreak Multiply ×1.75 — 風属性の魔剣が絶大にガードブレイクしやすく
+    - Stun Repel_Percent ×100.0 — スタンの発生を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128601`](weapons.json#L121136) カプリコルン
+  - base_name: カプリコルン (costume: 魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=日岡なつみ
+  - max stats: HP=12000 / ATK=3700 / DEF=4800 / SPD=30 / BREAK=2100
+  - hit_counts=[3, 6, 6] (3段)  motion_speed=[3.0/3.0/1.0]  mp=222
+  - three_size=69/55/76 / initial_slot=2
+  - BD: ファウヌスビートアルゲディ (arts_id=286)
+    - description: 敵全体に超強力な37連ダメージ＆1waveヒット数が+6
+    - cost=6 / hit_count=37 / value=3.3 / additional_value=0.0
+  - innate skills (5):
+    - HP Multiply ×1.25 — 風属性の魔剣のHPがかなりアップ
+    - InstantDeath Repel_Percent ×50.0 — 即死特性の攻撃を確率で回避する
+    - RateDamage Repel_Percent ×50.0 — 割合ダメージ攻撃を確率で回避する
+    - Attack Multiply ×1.25 — 風属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128602`](weapons.json#L121350) カプリコルン【極】
+  - base_name: カプリコルン (costume: 極魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=日岡なつみ
+  - max stats: HP=15600 / ATK=4810 / DEF=6240 / SPD=30 / BREAK=2730
+  - hit_counts=[4, 6, 9] (3段)  motion_speed=[3.0/3.0/1.0]  mp=222
+  - three_size=69/55/76 / initial_slot=3
+  - BD: ファウヌスビートアルゲディ (arts_id=286)
+    - description: 敵全体に超強力な37連ダメージ＆1waveヒット数が+6
+    - cost=6 / hit_count=37 / value=3.3 / additional_value=0.0
+  - innate skills (5):
+    - HP Multiply ×1.5 — 風属性の魔剣のHPが大幅にアップ
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - RateDamage Repel_Percent ×100.0 — 割合ダメージ攻撃を完全回避する
+    - Attack Multiply ×1.5 — 風属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128603`](weapons.json#L121564) カプリコルン【極弐】
+  - base_name: カプリコルン (costume: 極弐魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=日岡なつみ
+  - max stats: HP=20280 / ATK=6260 / DEF=8120 / SPD=33 / BREAK=3550
+  - hit_counts=[5, 7, 9] (3段)  motion_speed=[3.0/3.0/1.2]  mp=244
+  - three_size=69/55/77 / initial_slot=4
+  - BD: テュフォーンビート･デネブアルゲディ (arts_id=10286)
+    - description: 敵全体に超強力な37連ダメージ＆1waveヒット数が+6
+    - cost=6 / hit_count=37 / value=3.3 / additional_value=0.0
+  - innate skills (5):
+    - HP Multiply ×1.75 — 風属性の魔剣のHPが絶大にアップ
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - RateDamage Repel_Percent ×100.0 — 割合ダメージ攻撃を完全回避する
+    - Attack Multiply ×1.5 — 風属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128801`](weapons.json#L122287) レオ
+  - base_name: レオ (costume: 魔装)
+  - element=光(4) / type=拳闘(10) / rarity=S(3) / cv=井口裕香
+  - max stats: HP=10740 / ATK=2820 / DEF=3800 / SPD=48 / BREAK=340
+  - hit_counts=[4, 4, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=142
+  - three_size=65/54/67 / initial_slot=1
+  - BD: ライオンハート (arts_id=288)
+    - description: 敵全体に超絶強力な50連ダメージ＆45秒ﾓｰｼｮﾝ30%高速化
+    - cost=9 / hit_count=50 / value=5.34 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.3 — 光属性の魔剣の攻撃モーションが加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128802`](weapons.json#L122444) レオ【極】
+  - base_name: レオ (costume: 極魔装)
+  - element=光(4) / type=拳闘(10) / rarity=S(3) / cv=井口裕香
+  - max stats: HP=13970 / ATK=3670 / DEF=4940 / SPD=48 / BREAK=450
+  - hit_counts=[5, 4, 12] (3段)  motion_speed=[4.0/4.0/1.0]  mp=142
+  - three_size=65/54/67 / initial_slot=2
+  - BD: ライオンハート (arts_id=288)
+    - description: 敵全体に超絶強力な50連ダメージ＆45秒ﾓｰｼｮﾝ30%高速化
+    - cost=9 / hit_count=50 / value=5.34 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.5 — 光属性の魔剣の攻撃モーションがかなり加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`128803`](weapons.json#L122601) レオ【極弐】
+  - base_name: レオ (costume: 極弐魔装)
+  - element=光(4) / type=拳闘(10) / rarity=S(3) / cv=井口裕香
+  - max stats: HP=18170 / ATK=4780 / DEF=6430 / SPD=51 / BREAK=590
+  - hit_counts=[6, 5, 12] (3段)  motion_speed=[3.0/2.0/1.4]  mp=156
+  - three_size=65/54/67 / initial_slot=3
+  - BD: ブレイブハート･レグルス (arts_id=10288)
+    - description: 敵全体に超絶強力な50連ダメージ＆45秒ﾓｰｼｮﾝ30%高速化
+    - cost=9 / hit_count=50 / value=5.34 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×2.0 — 光属性の魔剣の攻撃モーションが大幅に加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`129701`](weapons.json#L126221) セクメト=イブ
+  - base_name: セクメト=イブ (costume: 魔装)
+  - element=火(1) / type=魔典(11) / rarity=SS(4) / cv=高橋李依
+  - max stats: HP=15630 / ATK=12094 / DEF=5900 / SPD=39 / BREAK=2960
+  - hit_counts=[9, 4, 10] (3段)  motion_speed=[2.0/2.0/1.0]  mp=616
+  - three_size=92/56/80 / initial_slot=3
+  - BD: 天焔《大地が朱に染まる理由》 (arts_id=297)
+    - description: 敵全体に超絶強力な38連ダメージ＆30秒ブレイク力2倍
+    - cost=8 / hit_count=38 / value=6.10526 / additional_value=0.0
+  - innate skills (5):
+    - InstantDeath Repel_Percent ×50.0 — 即死特性の攻撃を確率で回避する
+    - Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ
+    - Vitality_Attack Multiply ×2.0 — 残HPが多いほど攻撃力がアップ（最大2倍）
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`129702`](weapons.json#L126435) セクメト=イブ【極】
+  - base_name: セクメト=イブ (costume: 極魔装)
+  - element=火(1) / type=魔典(11) / rarity=SS(4) / cv=高橋李依
+  - max stats: HP=20320 / ATK=15730 / DEF=7670 / SPD=39 / BREAK=3850
+  - hit_counts=[10, 4, 13] (3段)  motion_speed=[2.0/2.0/1.0]  mp=616
+  - three_size=92/56/80 / initial_slot=4
+  - BD: 天焔《大地が朱に染まる理由》 (arts_id=297)
+    - description: 敵全体に超絶強力な38連ダメージ＆30秒ブレイク力2倍
+    - cost=8 / hit_count=38 / value=6.10526 / additional_value=0.0
+  - innate skills (5):
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - Vitality_Attack Multiply ×2.0 — 残HPが多いほど攻撃力がアップ（最大2倍）
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`129801`](weapons.json#L126649) バステト
+  - base_name: バステト (costume: 魔装)
+  - element=火(1) / type=魔典(11) / rarity=S(3) / cv=高橋李依
+  - max stats: HP=13600 / ATK=4840 / DEF=3200 / SPD=46 / BREAK=1620
+  - hit_counts=[8, 3, 9] (3段)  motion_speed=[2.0/2.0/1.0]  mp=380
+  - three_size=91/55/80 / initial_slot=2
+  - BD: 神眼インフェクションデス (arts_id=298)
+    - description: 敵全体に超強力な24連ダメージ＆敵を30秒だけ麻痺
+    - cost=7 / hit_count=24 / value=5.70833 / additional_value=0.0
+  - innate skills (4):
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - MotionSpeed Multiply ×1.5 — 火属性の魔剣の攻撃モーションがかなり加速
+    - Speed Multiply ×1.1 — 火属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`129802`](weapons.json#L126844) バステト【極】
+  - base_name: バステト (costume: 極魔装)
+  - element=火(1) / type=魔典(11) / rarity=S(3) / cv=高橋李依
+  - max stats: HP=17680 / ATK=6300 / DEF=4160 / SPD=46 / BREAK=2110
+  - hit_counts=[9, 3, 12] (3段)  motion_speed=[2.0/2.0/1.0]  mp=380
+  - three_size=91/55/80 / initial_slot=3
+  - BD: 神眼インフェクションデス (arts_id=298)
+    - description: 敵全体に超強力な24連ダメージ＆敵を30秒だけ麻痺
+    - cost=7 / hit_count=24 / value=5.70833 / additional_value=0.0
+  - innate skills (5):
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - MotionSpeed Multiply ×2.0 — 火属性の魔剣の攻撃モーションが大幅に加速
+    - Speed Multiply ×1.25 — 火属性の魔剣の行動速度がかなりアップ
+    - HitCount Addition +1.0 — 火属性の魔剣の1撃目2撃目3撃目のヒット数を+1する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`129803`](weapons.json#L127058) バステト【極弐】
+  - base_name: バステト (costume: 極弐魔装)
+  - element=火(1) / type=魔典(11) / rarity=S(3) / cv=高橋李依
+  - max stats: HP=19450 / ATK=8190 / DEF=5410 / SPD=49 / BREAK=2750
+  - hit_counts=[10, 4, 12] (3段)  motion_speed=[3.0/3.0/1.0]  mp=390
+  - three_size=91/55/81 / initial_slot=4
+  - BD: 魔神眼インビテイションデス (arts_id=10298)
+    - description: 敵全体に超強力な24連ダメージ＆敵を30秒だけ麻痺
+    - cost=7 / hit_count=24 / value=5.70833 / additional_value=0.0
+  - innate skills (5):
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - MotionSpeed Multiply ×2.33 — 火属性の魔剣の攻撃モーションが絶大に加速
+    - Speed Multiply ×1.5 — 火属性の魔剣の行動速度が大幅にアップ
+    - HitCount Addition +2.0 — 火属性の魔剣の1撃目2撃目3撃目のヒット数を+2する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`130101`](weapons.json#L128304) メギストス
+  - base_name: メギストス (costume: 魔装)
+  - element=火(1) / type=長剣(1) / rarity=S(3) / cv=奥野香耶
+  - max stats: HP=12300 / ATK=9150 / DEF=3840 / SPD=56 / BREAK=2300
+  - hit_counts=[2, 4, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=180
+  - three_size=82/60/84 / initial_slot=2
+  - BD: 楽園創成セラフ=イレ (arts_id=301)
+    - description: 敵全体に超絶強力な25連ダメージ＆1waveスピード25%UP
+    - cost=3 / hit_count=25 / value=3.12 / additional_value=0.0
+  - innate skills (2):
+    - AllTarget Multiply ×0.6 — 攻撃力は下がるが自分の攻撃範囲が敵全体になる
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`130102`](weapons.json#L128461) メギストス【極】
+  - base_name: メギストス (costume: 極魔装)
+  - element=火(1) / type=長剣(1) / rarity=S(3) / cv=奥野香耶
+  - max stats: HP=15990 / ATK=11900 / DEF=5000 / SPD=56 / BREAK=2990
+  - hit_counts=[3, 4, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=180
+  - three_size=82/60/84 / initial_slot=3
+  - BD: 楽園創成セラフ=イレ (arts_id=301)
+    - description: 敵全体に超絶強力な25連ダメージ＆1waveスピード25%UP
+    - cost=3 / hit_count=25 / value=3.12 / additional_value=0.0
+  - innate skills (2):
+    - AllTarget Multiply ×0.8 — 攻撃力はやや下がるが自分の攻撃範囲が敵全体になる
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`130103`](weapons.json#L128618) メギストス【極弐】
+  - base_name: メギストス (costume: 極弐魔装)
+  - element=火(1) / type=長剣(1) / rarity=S(3) / cv=奥野香耶
+  - max stats: HP=20790 / ATK=13820 / DEF=6500 / SPD=60 / BREAK=3890
+  - hit_counts=[4, 5, 6] (3段)  motion_speed=[4.0/4.0/1.4]  mp=200
+  - three_size=83/60/84 / initial_slot=4
+  - BD: 凰々楽土エクシリウム (arts_id=10301)
+    - description: 敵全体に超絶強力な25連ダメージ＆1waveスピード25%UP
+    - cost=3 / hit_count=25 / value=3.12 / additional_value=0.0
+  - innate skills (2):
+    - AllTarget Multiply ×1.0 — 攻撃力を下げずに自分の攻撃範囲が敵全体になる
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`130301`](weapons.json#L129208) 災厄の理想郷ユートピア
+  - base_name: 災厄の理想郷ユートピア (costume: 魔装)
+  - element=風(3) / type=戦斧(7) / rarity=SS(4) / cv=吉田有里
+  - max stats: HP=17500 / ATK=19200 / DEF=11000 / SPD=25 / BREAK=1600
+  - hit_counts=[4, 3, 7] (3段)  motion_speed=[4.0/4.0/2.0]  mp=550
+  - three_size=63/54/66 / initial_slot=3
+  - BD: 強制された神判の承認 (arts_id=303)
+    - description: 敵全体に超絶強力な63連ダメージ＆15秒間ヒット数が+30
+    - cost=8 / hit_count=63 / value=3.5 / additional_value=0.0
+  - innate skills (6):
+    - AllTarget Multiply ×0.8 — 攻撃力はやや下がるが自分の攻撃範囲が敵全体になる
+    - MotionSpeed Multiply ×1.5 — 風属性の魔剣の攻撃モーションがかなり加速
+    - Speed Multiply ×2.0 — 戦斧の魔剣のスピードが2倍にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - HitCount Addition +2.0 — 自身の1撃目2撃目3撃目のヒット数を+2する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`130302`](weapons.json#L129441) 災厄の理想郷ユートピア【極】
+  - base_name: 災厄の理想郷ユートピア (costume: 極魔装)
+  - element=風(3) / type=戦斧(7) / rarity=SS(4) / cv=吉田有里
+  - max stats: HP=22750 / ATK=24960 / DEF=14300 / SPD=25 / BREAK=2080
+  - hit_counts=[5, 3, 10] (3段)  motion_speed=[4.0/4.0/2.0]  mp=550
+  - three_size=63/54/66 / initial_slot=4
+  - BD: 強制された神判の承認 (arts_id=303)
+    - description: 敵全体に超絶強力な63連ダメージ＆15秒間ヒット数が+30
+    - cost=8 / hit_count=63 / value=3.5 / additional_value=0.0
+  - innate skills (6):
+    - AllTarget Multiply ×1.0 — 攻撃力を下げずに自分の攻撃範囲が敵全体になる
+    - MotionSpeed Multiply ×2.0 — 風属性の魔剣の攻撃モーションが大幅に加速
+    - Speed Multiply ×2.0 — 戦斧の魔剣のスピードが2倍にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - HitCount Addition +2.0 — 自身の1撃目2撃目3撃目のヒット数を+2する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`131401`](weapons.json#L133018) ヴェロニカ=エフ
+  - base_name: ヴェロニカ=エフ (costume: 魔装)
+  - element=風(3) / type=戦斧(7) / rarity=SS(4) / cv=石川由依
+  - max stats: HP=14200 / ATK=20600 / DEF=5600 / SPD=21 / BREAK=5600
+  - hit_counts=[3, 2, 3] (3段)  motion_speed=[2.0/3.0/1.0]  mp=560
+  - three_size=113/57/88 / initial_slot=2
+  - BD: 勇敢なる福音の風 (arts_id=314)
+    - description: 敵全体に超強力な32連ダメージ＆数秒間サファイア2倍
+    - cost=5 / hit_count=32 / value=3.60938 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.75 — 風属性の魔剣の攻撃力が絶大にアップ
+    - JustGuard_Sapphire Multiply ×4.0 — ジャストガード時のサファイアの量がかなり増加
+    - Vitality_Attack Multiply ×2.0 — 風属性の味方全体が、残HPが多いほど攻撃力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 風属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`131402`](weapons.json#L133232) ヴェロニカ=エフ【極】
+  - base_name: ヴェロニカ=エフ (costume: 極魔装)
+  - element=風(3) / type=戦斧(7) / rarity=SS(4) / cv=石川由依
+  - max stats: HP=18460 / ATK=26780 / DEF=7280 / SPD=21 / BREAK=7280
+  - hit_counts=[4, 2, 6] (3段)  motion_speed=[2.0/3.0/1.0]  mp=560
+  - three_size=113/57/88 / initial_slot=3
+  - BD: 勇敢なる福音の風 (arts_id=314)
+    - description: 敵全体に超強力な32連ダメージ＆数秒間サファイア2倍
+    - cost=5 / hit_count=32 / value=3.60938 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 風属性の魔剣の攻撃力が超絶大アップ
+    - JustGuard_Sapphire Multiply ×6.0 — ジャストガード時のサファイアの量が大幅に増加
+    - Vitality_Attack Multiply ×2.0 — 風属性の味方全体が、残HPが多いほど攻撃力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 風属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`131501`](weapons.json#L133446) ヴェロニカ
+  - base_name: ヴェロニカ (costume: 魔装)
+  - element=風(3) / type=戦斧(7) / rarity=S(3) / cv=石川由依
+  - max stats: HP=12400 / ATK=10820 / DEF=3100 / SPD=19 / BREAK=1550
+  - hit_counts=[4, 3, 3] (3段)  motion_speed=[2.0/3.0/1.0]  mp=260
+  - three_size=112/57/88 / initial_slot=2
+  - BD: ブレイブリーラヴソング (arts_id=315)
+    - description: 敵全体に超強力な29連ダメージ＆自分HP完全回復
+    - cost=8 / hit_count=29 / value=6.2069 / additional_value=0.0
+  - innate skills (3):
+    - Wave_BlazeUP Addition +100.0 — Wave経過ごとにブレイズゲージが回復する
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`131502`](weapons.json#L133622) ヴェロニカ【極】
+  - base_name: ヴェロニカ (costume: 極魔装)
+  - element=風(3) / type=戦斧(7) / rarity=S(3) / cv=石川由依
+  - max stats: HP=16120 / ATK=14070 / DEF=4030 / SPD=19 / BREAK=2020
+  - hit_counts=[5, 3, 6] (3段)  motion_speed=[2.0/3.0/1.0]  mp=260
+  - three_size=112/57/88 / initial_slot=3
+  - BD: ブレイブリーラヴソング (arts_id=315)
+    - description: 敵全体に超強力な29連ダメージ＆自分HP完全回復
+    - cost=8 / hit_count=29 / value=6.2069 / additional_value=0.0
+  - innate skills (3):
+    - Wave_BlazeUP Addition +200.0 — Wave経過ごとにブレイズゲージがかなり回復する
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`131503`](weapons.json#L133798) ヴェロニカ【極弐】
+  - base_name: ヴェロニカ (costume: 極弐魔装)
+  - element=風(3) / type=戦斧(7) / rarity=S(3) / cv=石川由依
+  - max stats: HP=20960 / ATK=18300 / DEF=5240 / SPD=21 / BREAK=2630
+  - hit_counts=[6, 4, 6] (3段)  motion_speed=[2.0/3.0/1.2]  mp=288
+  - three_size=115/57/90 / initial_slot=4
+  - BD: フェイスフルカンタービレ (arts_id=10315)
+    - description: 敵全体に超強力な29連ダメージ＆自分HP完全回復
+    - cost=8 / hit_count=29 / value=6.2069 / additional_value=0.0
+  - innate skills (3):
+    - Wave_BlazeUP Addition +350.0 — Wave経過ごとにブレイズゲージが大幅に回復する
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`132701`](weapons.json#L137775) シルフィード
+  - base_name: シルフィード (costume: 魔装)
+  - element=風(3) / type=投擲(9) / rarity=S(3) / cv=橘田いずみ
+  - max stats: HP=8801 / ATK=1080 / DEF=3840 / SPD=43 / BREAK=50
+  - hit_counts=[12, 11, 15] (3段)  motion_speed=[3.0/3.0/1.0]  mp=319
+  - three_size=89/58/86 / initial_slot=2
+  - BD: 風の道はオールグリーン (arts_id=327)
+    - description: 敵全体に超強力な66連ダメージ＆15秒ﾓｰｼｮﾝ30%高速化
+    - cost=5 / hit_count=66 / value=1.55 / additional_value=0.0
+  - innate skills (3):
+    - Vitality_Attack Multiply ×1.3 — 残HPが多いほど攻撃力がかなりアップ
+    - Speed Multiply ×1.1 — 風属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`132702`](weapons.json#L137951) シルフィード【極】
+  - base_name: シルフィード (costume: 極魔装)
+  - element=風(3) / type=投擲(9) / rarity=S(3) / cv=橘田いずみ
+  - max stats: HP=11450 / ATK=1410 / DEF=5000 / SPD=43 / BREAK=70
+  - hit_counts=[13, 11, 18] (3段)  motion_speed=[3.0/3.0/1.0]  mp=319
+  - three_size=89/58/86 / initial_slot=3
+  - BD: 風の道はオールグリーン (arts_id=327)
+    - description: 敵全体に超強力な66連ダメージ＆15秒ﾓｰｼｮﾝ30%高速化
+    - cost=5 / hit_count=66 / value=1.55 / additional_value=0.0
+  - innate skills (3):
+    - Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ
+    - Speed Multiply ×1.25 — 風属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`134701`](weapons.json#L143946) リンドヴルム
+  - base_name: リンドヴルム (costume: 魔装)
+  - element=風(3) / type=大鎌(12) / rarity=S(3) / cv=浜崎奈々
+  - max stats: HP=10100 / ATK=7500 / DEF=7200 / SPD=20 / BREAK=2500
+  - hit_counts=[4, 3, 3] (3段)  motion_speed=[3.0/3.0/2.0]  mp=260
+  - three_size=75/55/76 / initial_slot=2
+  - BD: ブレイブリーラヴウィング (arts_id=347)
+    - description: 敵全体に強力な33連ダメージ＆自分HP回復
+    - cost=6 / hit_count=33 / value=3.1 / additional_value=0.0
+  - innate skills (2):
+    - BlazeAttack Multiply ×2.5 — 風属性の魔剣のB.D.攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`134702`](weapons.json#L144103) リンドヴルム【極】
+  - base_name: リンドヴルム (costume: 極魔装)
+  - element=風(3) / type=大鎌(12) / rarity=S(3) / cv=浜崎奈々
+  - max stats: HP=13130 / ATK=9750 / DEF=9360 / SPD=20 / BREAK=3250
+  - hit_counts=[5, 3, 6] (3段)  motion_speed=[3.0/3.0/2.0]  mp=260
+  - three_size=75/55/76 / initial_slot=3
+  - BD: ブレイブリーラヴウィング (arts_id=347)
+    - description: 敵全体に強力な33連ダメージ＆自分HP回復
+    - cost=6 / hit_count=33 / value=3.1 / additional_value=0.0
+  - innate skills (2):
+    - BlazeAttack Multiply ×3.0 — 風属性の魔剣のB.D.攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135001`](weapons.json#L145240) ダンデライオン
+  - base_name: ダンデライオン (costume: 魔装)
+  - element=火(1) / type=戦斧(7) / rarity=S(3) / cv=橋本ちなみ
+  - max stats: HP=7800 / ATK=4000 / DEF=4500 / SPD=31 / BREAK=2500
+  - hit_counts=[5, 5, 5] (3段)  motion_speed=[3.0/3.0/3.0]  mp=109
+  - three_size=73/56/74 / initial_slot=2
+  - BD: 一面に咲くたんぽぽの花 (arts_id=350)
+    - description: 敵全体に超強力な41連ダメージ＆数秒だけブレイク2倍
+    - cost=5 / hit_count=41 / value=2.2 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.25 — 火属性の魔剣がかなりガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135002`](weapons.json#L145397) ダンデライオン【極】
+  - base_name: ダンデライオン (costume: 極魔装)
+  - element=火(1) / type=戦斧(7) / rarity=S(3) / cv=橋本ちなみ
+  - max stats: HP=10140 / ATK=5200 / DEF=5850 / SPD=31 / BREAK=3250
+  - hit_counts=[6, 5, 8] (3段)  motion_speed=[3.0/3.0/3.0]  mp=109
+  - three_size=73/56/74 / initial_slot=3
+  - BD: 一面に咲くたんぽぽの花 (arts_id=350)
+    - description: 敵全体に超強力な41連ダメージ＆数秒だけブレイク2倍
+    - cost=5 / hit_count=41 / value=2.2 / additional_value=0.0
+  - innate skills (4):
+    - GuardBreak Multiply ×1.5 — 火属性の魔剣が大幅にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×5.0 — ブレイク時に自身の攻撃力が5倍
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135003`](weapons.json#L145592) ダンデライオン【極弐】
+  - base_name: ダンデライオン (costume: 極弐魔装)
+  - element=火(1) / type=戦斧(7) / rarity=S(3) / cv=橋本ちなみ
+  - max stats: HP=13190 / ATK=6760 / DEF=7610 / SPD=33 / BREAK=4230
+  - hit_counts=[7, 6, 8] (3段)  motion_speed=[3.0/2.0/2.0]  mp=118
+  - three_size=73/56/74 / initial_slot=4
+  - BD: 千里を包む黄色の災 (arts_id=10350)
+    - description: 敵全体に超強力な41連ダメージ＆数秒だけブレイク2倍
+    - cost=5 / hit_count=41 / value=2.2 / additional_value=0.0
+  - innate skills (4):
+    - GuardBreak Multiply ×1.75 — 火属性の魔剣が絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×5.0 — ブレイク時に自身の攻撃力が5倍
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135301`](weapons.json#L146258) ヴァルハラ
+  - base_name: ヴァルハラ (costume: 魔装)
+  - element=光(4) / type=太刀(3) / rarity=S(3) / cv=駒形友梨
+  - max stats: HP=8500 / ATK=3050 / DEF=4000 / SPD=28 / BREAK=650
+  - hit_counts=[5, 4, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=190
+  - three_size=72/59/74 / initial_slot=2
+  - BD: 神獄覇門ヴァラスカルヴ (arts_id=353)
+    - description: 敵全体に超強力な42連ダメージ＆1waveヒット数が+3
+    - cost=6 / hit_count=42 / value=2.65714 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.25 — 光属性の魔剣がかなりガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135302`](weapons.json#L146415) ヴァルハラ【極】
+  - base_name: ヴァルハラ (costume: 極魔装)
+  - element=光(4) / type=太刀(3) / rarity=S(3) / cv=駒形友梨
+  - max stats: HP=11050 / ATK=3970 / DEF=5200 / SPD=28 / BREAK=850
+  - hit_counts=[6, 4, 13] (3段)  motion_speed=[4.0/4.0/1.0]  mp=190
+  - three_size=72/59/74 / initial_slot=3
+  - BD: 神獄覇門ヴァラスカルヴ (arts_id=353)
+    - description: 敵全体に超強力な42連ダメージ＆1waveヒット数が+3
+    - cost=6 / hit_count=42 / value=2.65714 / additional_value=0.0
+  - innate skills (4):
+    - GuardBreak Multiply ×1.5 — 光属性の魔剣が大幅にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×5.0 — ブレイク時に自身の攻撃力が5倍
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135303`](weapons.json#L146610) ヴァルハラ【極弐】
+  - base_name: ヴァルハラ (costume: 極弐魔装)
+  - element=光(4) / type=太刀(3) / rarity=S(3) / cv=駒形友梨
+  - max stats: HP=13260 / ATK=4770 / DEF=6240 / SPD=28 / BREAK=1020
+  - hit_counts=[7, 5, 13] (3段)  motion_speed=[4.0/4.0/1.0]  mp=200
+  - three_size=72/59/74 / initial_slot=4
+  - BD: 神絶國天オーディンスゲイト (arts_id=353)
+    - description: 敵全体に超強力な42連ダメージ＆1waveヒット数が+3
+    - cost=6 / hit_count=42 / value=2.65714 / additional_value=0.0
+  - innate skills (4):
+    - GuardBreak Multiply ×1.75 — 光属性の魔剣が絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×5.0 — ブレイク時に自身の攻撃力が5倍
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135501`](weapons.json#L147371) レディル
+  - base_name: レディル (costume: 魔装)
+  - element=火(1) / type=長剣(1) / rarity=S(3) / cv=ファイルーズあい
+  - max stats: HP=8000 / ATK=4000 / DEF=3000 / SPD=30 / BREAK=2000
+  - hit_counts=[5, 5, 5] (3段)  motion_speed=[3.0/3.0/1.2]  mp=110
+  - three_size=82/57/83 / initial_slot=1
+  - BD: ブラッドハート･ドラゴニア (arts_id=355)
+    - description: 敵全体に超強力な55連ダメージ＆敵を強制ブレイク
+    - cost=5 / hit_count=55 / value=1.8 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.5 — 火属性の魔剣の攻撃モーションがかなり加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135502`](weapons.json#L147528) レディル【極】
+  - base_name: レディル (costume: 極魔装)
+  - element=火(1) / type=長剣(1) / rarity=S(3) / cv=ファイルーズあい
+  - max stats: HP=10400 / ATK=5200 / DEF=3900 / SPD=30 / BREAK=2600
+  - hit_counts=[6, 5, 8] (3段)  motion_speed=[3.0/3.0/1.2]  mp=110
+  - three_size=82/57/83 / initial_slot=2
+  - BD: ブラッドハート･ドラゴニア (arts_id=355)
+    - description: 敵全体に超強力な55連ダメージ＆敵を強制ブレイク
+    - cost=5 / hit_count=55 / value=1.8 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×2.0 — 火属性の魔剣の攻撃モーションが大幅に加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135503`](weapons.json#L147685) レディル【極弐】
+  - base_name: レディル (costume: 極弐魔装)
+  - element=火(1) / type=長剣(1) / rarity=S(3) / cv=ファイルーズあい
+  - max stats: HP=13520 / ATK=6760 / DEF=5070 / SPD=33 / BREAK=3380
+  - hit_counts=[7, 6, 8] (3段)  motion_speed=[2.4/2.2/1.4]  mp=120
+  - three_size=84/57/85 / initial_slot=3
+  - BD: ドラゴブラッド･クリムゾンビート (arts_id=10355)
+    - description: 敵全体に超強力な55連ダメージ＆敵を強制ブレイク
+    - cost=5 / hit_count=55 / value=1.8 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×2.33 — 火属性の魔剣の攻撃モーションが絶大に加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135601`](weapons.json#L147842) エヴァンス
+  - base_name: エヴァンス (costume: 魔装)
+  - element=水(2) / type=大鎌(12) / rarity=S(3) / cv=百田絵理花
+  - max stats: HP=10100 / ATK=2100 / DEF=5730 / SPD=45 / BREAK=573
+  - hit_counts=[13, 12, 16] (3段)  motion_speed=[3.0/3.0/1.0]  mp=191
+  - three_size=76/58/74 / initial_slot=2
+  - BD: 原始の海のスープと発狂 (arts_id=356)
+    - description: 敵全体に超絶強力な40連ダメージ＆1waveヒット数が+6
+    - cost=7 / hit_count=40 / value=4.6 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.25 — 水属性の魔剣の攻撃力がかなりアップ
+    - Speed Multiply ×1.25 — 全属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135602`](weapons.json#L148018) エヴァンス【極】
+  - base_name: エヴァンス (costume: 極魔装)
+  - element=水(2) / type=大鎌(12) / rarity=S(3) / cv=百田絵理花
+  - max stats: HP=13130 / ATK=2730 / DEF=7450 / SPD=45 / BREAK=750
+  - hit_counts=[14, 12, 19] (3段)  motion_speed=[3.0/3.0/1.0]  mp=191
+  - three_size=76/58/74 / initial_slot=3
+  - BD: 原始の海のスープと発狂 (arts_id=356)
+    - description: 敵全体に超絶強力な40連ダメージ＆1waveヒット数が+6
+    - cost=7 / hit_count=40 / value=4.6 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - Speed Multiply ×1.5 — 全属性の魔剣の行動速度が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135603`](weapons.json#L148194) エヴァンス【極弐】
+  - base_name: エヴァンス (costume: 極弐魔装)
+  - element=水(2) / type=大鎌(12) / rarity=S(3) / cv=百田絵理花
+  - max stats: HP=17070 / ATK=3960 / DEF=9690 / SPD=48 / BREAK=980
+  - hit_counts=[15, 13, 19] (3段)  motion_speed=[2.2/2.2/1.3]  mp=211
+  - three_size=78/58/76 / initial_slot=4
+  - BD: 最古の命の坩堝と狂騒 (arts_id=10356)
+    - description: 敵全体に超絶強力な40連ダメージ＆1waveヒット数が+6
+    - cost=7 / hit_count=40 / value=4.6 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.75 — 水属性の魔剣の攻撃力が絶大にアップ
+    - Speed Multiply ×1.5 — 全属性の魔剣の行動速度が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135801`](weapons.json#L148841) サーペンテイン
+  - base_name: サーペンテイン (costume: 魔装)
+  - element=風(3) / type=弓矢(5) / rarity=S(3) / cv=鬼頭明里
+  - max stats: HP=9400 / ATK=7250 / DEF=4300 / SPD=30 / BREAK=400
+  - hit_counts=[4, 5, 6] (3段)  motion_speed=[4.0/4.0/2.0]  mp=230
+  - three_size=81/57/79 / initial_slot=2
+  - BD: サーペントサーヴァント (arts_id=358)
+    - description: 敵全体に超強力な42連ダメージ＆1waveヒット数が+3
+    - cost=4 / hit_count=42 / value=1.84286 / additional_value=0.0
+  - innate skills (2):
+    - Break_Attack Multiply ×2.0 — 自身が破損状態になると攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135802`](weapons.json#L148998) サーペンテイン【極】
+  - base_name: サーペンテイン (costume: 極魔装)
+  - element=風(3) / type=弓矢(5) / rarity=S(3) / cv=鬼頭明里
+  - max stats: HP=12220 / ATK=9430 / DEF=5590 / SPD=30 / BREAK=520
+  - hit_counts=[5, 5, 9] (3段)  motion_speed=[4.0/4.0/2.0]  mp=230
+  - three_size=81/57/79 / initial_slot=3
+  - BD: サーペントサーヴァント (arts_id=358)
+    - description: 敵全体に超強力な42連ダメージ＆1waveヒット数が+3
+    - cost=4 / hit_count=42 / value=1.84286 / additional_value=0.0
+  - innate skills (2):
+    - Break_Attack Multiply ×2.5 — 自身が破損状態になると攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`135803`](weapons.json#L149155) サーペンテイン【極弐】
+  - base_name: サーペンテイン (costume: 極弐魔装)
+  - element=風(3) / type=弓矢(5) / rarity=S(3) / cv=鬼頭明里
+  - max stats: HP=15890 / ATK=12260 / DEF=7270 / SPD=33 / BREAK=680
+  - hit_counts=[6, 6, 9] (3段)  motion_speed=[4.0/4.0/2.0]  mp=250
+  - three_size=81/57/79 / initial_slot=4
+  - BD: インビジブルインぺリアル (arts_id=10358)
+    - description: 敵全体に超強力な42連ダメージ＆1waveヒット数が+3
+    - cost=4 / hit_count=42 / value=1.84286 / additional_value=0.0
+  - innate skills (2):
+    - Break_Attack Multiply ×3.3 — 自身が破損状態になると攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`136101`](weapons.json#L150078) アルギュロス=ぎんいろ
+  - base_name: アルギュロス=ぎんいろ (costume: 魔装)
+  - element=闇(5) / type=拳闘(10) / rarity=SS(4) / cv=山下七海
+  - max stats: HP=12800 / ATK=5420 / DEF=12700 / SPD=36 / BREAK=230
+  - hit_counts=[10, 8, 13] (3段)  motion_speed=[2.0/3.0/2.0]  mp=580
+  - three_size=70/57/72 / initial_slot=2
+  - BD: 戦火を照らす白銀色の暴虐 (arts_id=361)
+    - description: 敵全体に超絶強力な63連ダメージ＆数秒間スピード暴走
+    - cost=7 / hit_count=63 / value=3.5 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×13.0 — 魔典の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 拳闘の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 長剣の魔剣の攻撃力が13倍アップ
+    - Speed Multiply ×1.5 — 全属性の魔剣の行動速度が大幅にアップ
+    - Defense Multiply ×1.5 — 全属性の魔剣の防御力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`136102`](weapons.json#L150311) アルギュロス=ぎんいろ【極】
+  - base_name: アルギュロス=ぎんいろ (costume: 極魔装)
+  - element=闇(5) / type=拳闘(10) / rarity=SS(4) / cv=山下七海
+  - max stats: HP=16640 / ATK=7050 / DEF=16510 / SPD=36 / BREAK=300
+  - hit_counts=[11, 8, 16] (3段)  motion_speed=[2.0/3.0/2.0]  mp=580
+  - three_size=70/57/72 / initial_slot=3
+  - BD: 戦火を照らす白銀色の暴虐 (arts_id=361)
+    - description: 敵全体に超絶強力な63連ダメージ＆数秒間スピード暴走
+    - cost=7 / hit_count=63 / value=3.5 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×13.0 — 魔典の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 拳闘の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 長剣の魔剣の攻撃力が13倍アップ
+    - Speed Multiply ×1.75 — 全属性の魔剣の行動速度が絶大にアップ
+    - Defense Multiply ×1.75 — 全属性の魔剣の防御力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`136301`](weapons.json#L150934) 災厄の蒼花アブソリュート
+  - base_name: 災厄の蒼花アブソリュート (costume: 魔装)
+  - element=水(2) / type=長剣(1) / rarity=SS(4) / cv=田所あずさ
+  - max stats: HP=14000 / ATK=8150 / DEF=8800 / SPD=32 / BREAK=1850
+  - hit_counts=[7, 8, 12] (3段)  motion_speed=[2.0/2.0/3.0]  mp=560
+  - three_size=90/58/83 / initial_slot=3
+  - BD: パーフェクトフローズンフラワー (arts_id=363)
+    - description: 敵全体に超絶強力な46連ダメージ＆20秒間敵の時間が停止＆強制ブレイクし、攻撃力とモーション速度が13倍
+    - cost=8 / hit_count=46 / value=5.2 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - HitCount Addition +4.0 — 大剣の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - HitCount Addition +5.0 — 水属性の魔剣の1撃目2撃目3撃目のヒット数を+5する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`136302`](weapons.json#L151184) 災厄の蒼花アブソリュート【極】
+  - base_name: 災厄の蒼花アブソリュート (costume: 極魔装)
+  - element=水(2) / type=長剣(1) / rarity=SS(4) / cv=田所あずさ
+  - max stats: HP=18200 / ATK=10600 / DEF=11440 / SPD=32 / BREAK=2410
+  - hit_counts=[8, 8, 15] (3段)  motion_speed=[2.0/2.0/3.0]  mp=560
+  - three_size=90/58/83 / initial_slot=4
+  - BD: パーフェクトフローズンフラワー (arts_id=363)
+    - description: 敵全体に超絶強力な46連ダメージ＆20秒間敵の時間が停止＆強制ブレイクし、攻撃力とモーション速度が13倍
+    - cost=8 / hit_count=46 / value=5.2 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - HitCount Addition +4.0 — 大剣の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - HitCount Addition +5.0 — 水属性の魔剣の1撃目2撃目3撃目のヒット数を+5する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`136601`](weapons.json#L152219) 酉王アメノウズメ
+  - base_name: 酉王アメノウズメ (costume: 魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=永野愛理
+  - max stats: HP=5550 / ATK=4340 / DEF=9870 / SPD=41 / BREAK=960
+  - hit_counts=[6, 3, 6] (3段)  motion_speed=[2.0/3.0/1.0]  mp=217
+  - three_size=こけこっこーーーー♪♪ / initial_slot=3
+  - BD: 天岩戸で大騒ぎ (arts_id=366)
+    - description: 敵全体に超強力な31連ダメージ＆スピード50%UP
+    - cost=3 / hit_count=31 / value=1.8 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.5 — 風属性の魔剣の攻撃モーションがかなり加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`136602`](weapons.json#L152376) 酉王アメノウズメ【極】
+  - base_name: 酉王アメノウズメ (costume: 極魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=永野愛理
+  - max stats: HP=7220 / ATK=5650 / DEF=12840 / SPD=41 / BREAK=1250
+  - hit_counts=[7, 3, 9] (3段)  motion_speed=[2.0/3.0/1.0]  mp=217
+  - three_size=こけこっこーーーー♪♪ / initial_slot=4
+  - BD: 天岩戸で大騒ぎ (arts_id=366)
+    - description: 敵全体に超強力な31連ダメージ＆スピード50%UP
+    - cost=3 / hit_count=31 / value=1.8 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×2.0 — 風属性の魔剣の攻撃モーションが大幅に加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`137201`](weapons.json#L153413) アル=アジフ
+  - base_name: アル=アジフ (costume: 魔装)
+  - element=光(4) / type=魔典(11) / rarity=SS(4) / cv=浜崎奈々
+  - max stats: HP=12000 / ATK=15000 / DEF=8000 / SPD=22 / BREAK=1300
+  - hit_counts=[3, 3, 12] (3段)  motion_speed=[2.0/2.0/1.2]  mp=720
+  - three_size=74/55/79 / initial_slot=3
+  - BD: 久遠に這い臥せ無貌の神々 (arts_id=372)
+    - description: 敵全体に超絶強力な53連ダメージ＆自分HP回復
+    - cost=8 / hit_count=53 / value=3.96 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ
+    - MotionSpeed Multiply ×2.0 — 光属性の魔剣の攻撃モーションが大幅に加速
+    - SapphireDrop Multiply ×2.0 — 自分の獲得するサファイアの量がかなり増加
+    - DamageLimitBreak Addition +2500000000.0 — 光属性の魔剣のダメージ上限が25億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`137202`](weapons.json#L153627) アル=アジフ【極】
+  - base_name: アル=アジフ (costume: 極魔装)
+  - element=光(4) / type=魔典(11) / rarity=SS(4) / cv=浜崎奈々
+  - max stats: HP=15600 / ATK=19500 / DEF=10400 / SPD=22 / BREAK=1690
+  - hit_counts=[4, 3, 15] (3段)  motion_speed=[2.0/2.0/1.2]  mp=720
+  - three_size=74/55/79 / initial_slot=4
+  - BD: 久遠に這い臥せ無貌の神々 (arts_id=372)
+    - description: 敵全体に超絶強力な53連ダメージ＆自分HP回復
+    - cost=8 / hit_count=53 / value=3.96 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - MotionSpeed Multiply ×2.33 — 光属性の魔剣の攻撃モーションが絶大に加速
+    - SapphireDrop Multiply ×3.0 — 自分の獲得するサファイアの量が大幅に増加
+    - DamageLimitBreak Addition +2500000000.0 — 光属性の魔剣のダメージ上限が25億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`137601`](weapons.json#L155116) アクアライン
+  - base_name: アクアライン (costume: 魔装)
+  - element=水(2) / type=弓矢(5) / rarity=A(1) / cv=田中あいみ
+  - max stats: HP=2700 / ATK=500 / DEF=1300 / SPD=28 / BREAK=950
+  - hit_counts=[3, 5, 4] (3段)  motion_speed=[4.0/4.0/1.0]  mp=90
+  - three_size=90/60/82 / initial_slot=1
+  - BD: フォール･イントゥ･ホライゾン (arts_id=376)
+    - description: 敵全体に13連ダメージ＆ブレイク力10%UP
+    - cost=5 / hit_count=13 / value=4.23 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.15 — 水属性の魔剣の攻撃モーションが少し加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`137602`](weapons.json#L155273) アクアライン【極】
+  - base_name: アクアライン (costume: 極魔装)
+  - element=水(2) / type=弓矢(5) / rarity=A(1) / cv=田中あいみ
+  - max stats: HP=3510 / ATK=650 / DEF=1690 / SPD=28 / BREAK=1240
+  - hit_counts=[4, 5, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=90
+  - three_size=90/60/82 / initial_slot=1
+  - BD: フォール･イントゥ･ホライゾン (arts_id=376)
+    - description: 敵全体に13連ダメージ＆ブレイク力10%UP
+    - cost=5 / hit_count=13 / value=4.23 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.15 — 水属性の魔剣の攻撃モーションが少し加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`137603`](weapons.json#L155430) アクアライン【極弐】
+  - base_name: アクアライン (costume: 極弐魔装)
+  - element=水(2) / type=弓矢(5) / rarity=A(1) / cv=田中あいみ
+  - max stats: HP=4570 / ATK=1560 / DEF=4060 / SPD=31 / BREAK=2980
+  - hit_counts=[5, 6, 7] (3段)  motion_speed=[4.0/4.0/1.1]  mp=99
+  - three_size=94/60/83 / initial_slot=3
+  - BD: エンド･オブ･オケアノス (arts_id=10376)
+    - description: 敵全体に13連ダメージ＆ブレイク力10%UP
+    - cost=5 / hit_count=13 / value=4.23 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.3 — 水属性の魔剣の攻撃モーションが加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`137701`](weapons.json#L155587) かまいたち
+  - base_name: かまいたち (costume: 魔装)
+  - element=風(3) / type=大鎌(12) / rarity=AA(2) / cv=涼本あきほ
+  - max stats: HP=6400 / ATK=3750 / DEF=3200 / SPD=57 / BREAK=710
+  - hit_counts=[2, 8, 2] (3段)  motion_speed=[3.0/3.0/3.0]  mp=80
+  - three_size=62/53/68 / initial_slot=2
+  - BD: ウィーゼルインザナイト (arts_id=377)
+    - description: 敵全体に強力な50連ダメージ＆スピード30%UP
+    - cost=3 / hit_count=50 / value=1.0 / additional_value=0.0
+  - innate skills (3):
+    - Speed Multiply ×1.1 — 風属性の魔剣の行動速度がアップ
+    - MotionSpeed Multiply ×1.15 — 風属性の魔剣の攻撃モーションが少し加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`137702`](weapons.json#L155763) かまいたち【極】
+  - base_name: かまいたち (costume: 極魔装)
+  - element=風(3) / type=大鎌(12) / rarity=AA(2) / cv=涼本あきほ
+  - max stats: HP=8320 / ATK=4880 / DEF=4160 / SPD=57 / BREAK=930
+  - hit_counts=[3, 8, 5] (3段)  motion_speed=[3.0/3.0/3.0]  mp=80
+  - three_size=62/53/68 / initial_slot=3
+  - BD: ウィーゼルインザナイト (arts_id=377)
+    - description: 敵全体に強力な50連ダメージ＆スピード30%UP
+    - cost=3 / hit_count=50 / value=1.0 / additional_value=0.0
+  - innate skills (3):
+    - Speed Multiply ×1.25 — 風属性の魔剣の行動速度がかなりアップ
+    - MotionSpeed Multiply ×1.3 — 風属性の魔剣の攻撃モーションが加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`137703`](weapons.json#L155939) かまいたち【極弐】
+  - base_name: かまいたち (costume: 極弐魔装)
+  - element=風(3) / type=大鎌(12) / rarity=AA(2) / cv=涼本あきほ
+  - max stats: HP=10820 / ATK=6350 / DEF=5410 / SPD=65 / BREAK=1210
+  - hit_counts=[4, 9, 5] (3段)  motion_speed=[3.0/3.0/4.0]  mp=90
+  - three_size=62/53/68 / initial_slot=4
+  - BD: ウィーゼルインザサイクロン (arts_id=10377)
+    - description: 敵全体に強力な50連ダメージ＆スピード50%UP
+    - cost=3 / hit_count=50 / value=1.0 / additional_value=0.0
+  - innate skills (3):
+    - Speed Multiply ×1.5 — 風属性の魔剣の行動速度が大幅にアップ
+    - MotionSpeed Multiply ×1.5 — 風属性の魔剣の攻撃モーションがかなり加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`138201`](weapons.json#L157719) ヨルムンガンド
+  - base_name: ヨルムンガンド (costume: 魔装)
+  - element=水(2) / type=弓矢(5) / rarity=S(3) / cv=花守ゆみり
+  - max stats: HP=6920 / ATK=4440 / DEF=4870 / SPD=22 / BREAK=4440
+  - hit_counts=[3, 4, 6] (3段)  motion_speed=[3.0/3.0/3.0]  mp=248
+  - three_size=104/58/91 / initial_slot=1
+  - BD: ミドガルズの世界輪廻 (arts_id=382)
+    - description: 敵全体に超強力な22連ダメージ＆数秒間ブレイク力2倍
+    - cost=6 / hit_count=22 / value=5.1 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.25 — 水属性の魔剣の攻撃力がかなりアップ
+    - JustGuard_Sapphire Multiply ×3.0 — ジャストガード時のサファイア量が少し増加
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`138202`](weapons.json#L157895) ヨルムンガンド【極】
+  - base_name: ヨルムンガンド (costume: 極魔装)
+  - element=水(2) / type=弓矢(5) / rarity=S(3) / cv=花守ゆみり
+  - max stats: HP=9000 / ATK=5780 / DEF=6340 / SPD=22 / BREAK=5780
+  - hit_counts=[4, 4, 9] (3段)  motion_speed=[3.0/3.0/3.0]  mp=248
+  - three_size=104/58/91 / initial_slot=2
+  - BD: ミドガルズの世界輪廻 (arts_id=382)
+    - description: 敵全体に超強力な22連ダメージ＆数秒間ブレイク力2倍
+    - cost=6 / hit_count=22 / value=5.1 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - JustGuard_Sapphire Multiply ×4.0 — ジャストガード時のサファイアの量がかなり増加
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`138203`](weapons.json#L158071) ヨルムンガンド【極弐】
+  - base_name: ヨルムンガンド (costume: 極弐魔装)
+  - element=水(2) / type=弓矢(5) / rarity=S(3) / cv=花守ゆみり
+  - max stats: HP=11700 / ATK=7520 / DEF=8250 / SPD=24 / BREAK=7520
+  - hit_counts=[5, 5, 9] (3段)  motion_speed=[4.0/4.0/1.5]  mp=272
+  - three_size=109/58/91 / initial_slot=3
+  - BD: ミドガルズ･ラグナバイト (arts_id=10382)
+    - description: 敵全体に超強力な22連ダメージ＆数秒間ブレイク力2倍
+    - cost=6 / hit_count=22 / value=5.1 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.75 — 水属性の魔剣の攻撃力が絶大にアップ
+    - JustGuard_Sapphire Multiply ×6.0 — ジャストガード時のサファイアの量が大幅に増加
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`138301`](weapons.json#L158247) ケツアルコアトル
+  - base_name: ケツアルコアトル (costume: 魔装)
+  - element=風(3) / type=大剣(2) / rarity=S(3) / cv=近藤玲奈
+  - max stats: HP=8100 / ATK=5200 / DEF=7400 / SPD=38 / BREAK=1020
+  - hit_counts=[3, 6, 8] (3段)  motion_speed=[1.5/1.5/2.2]  mp=175
+  - three_size=62/47/63 / initial_slot=2
+  - BD: マジカルブレイク★ゴートゥヘル (arts_id=383)
+    - description: 敵全体に超強力な51連ダメージ＆20秒ブレイク力2倍
+    - cost=4 / hit_count=51 / value=1.51765 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 風属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`138302`](weapons.json#L158404) ケツアルコアトル【極】
+  - base_name: ケツアルコアトル (costume: 極魔装)
+  - element=風(3) / type=大剣(2) / rarity=S(3) / cv=近藤玲奈
+  - max stats: HP=10530 / ATK=6760 / DEF=9620 / SPD=38 / BREAK=1330
+  - hit_counts=[4, 6, 11] (3段)  motion_speed=[1.5/1.5/2.2]  mp=175
+  - three_size=62/47/63 / initial_slot=3
+  - BD: マジカルブレイク★ゴートゥヘル (arts_id=383)
+    - description: 敵全体に超強力な51連ダメージ＆20秒ブレイク力2倍
+    - cost=4 / hit_count=51 / value=1.51765 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.75 — 風属性の魔剣の攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`140101`](weapons.json#L164540) バステト×サマー
+  - base_name: バステト×サマー (costume: 魔装)
+  - element=火(1) / type=大剣(2) / rarity=S(3) / cv=高橋李依
+  - max stats: HP=10400 / ATK=8600 / DEF=3550 / SPD=40 / BREAK=970
+  - hit_counts=[2, 3, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=240
+  - three_size=91/55/80 / initial_slot=2
+  - BD: 海眼ナツヤスミデス (arts_id=401)
+    - description: 敵全体に超強力な49連ダメージ＆20秒ﾓｰｼｮﾝ30%高速化
+    - cost=4 / hit_count=49 / value=1.58 / additional_value=0.0
+  - innate skills (4):
+    - Vitality_Attack Multiply ×1.3 — 残HPが多いほど攻撃力がかなりアップ
+    - Mez Repel_Percent ×50.0 — 麻痺の発生を確率で回避する
+    - Attack Multiply ×1.25 — 火属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`140102`](weapons.json#L164735) バステト×サマー【極】
+  - base_name: バステト×サマー (costume: 極魔装)
+  - element=火(1) / type=大剣(2) / rarity=S(3) / cv=高橋李依
+  - max stats: HP=13520 / ATK=11180 / DEF=4620 / SPD=40 / BREAK=1270
+  - hit_counts=[3, 3, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=240
+  - three_size=91/55/80 / initial_slot=3
+  - BD: 海眼ナツヤスミデス (arts_id=401)
+    - description: 敵全体に超強力な49連ダメージ＆20秒ﾓｰｼｮﾝ30%高速化
+    - cost=4 / hit_count=49 / value=1.58 / additional_value=0.0
+  - innate skills (5):
+    - Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ
+    - Mez Repel_Percent ×100.0 — 麻痺の発生を完全回避する
+    - Attack Multiply ×1.5 — 火属性の魔剣の攻撃力が大幅にアップ
+    - DamageLimitBreak Addition +700000000.0 — 自身のダメージ上限が7億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`140301`](weapons.json#L165339) レオ×エッジ
+  - base_name: レオ×エッジ (costume: 魔装)
+  - element=光(4) / type=長剣(1) / rarity=S(3) / cv=井口裕香
+  - max stats: HP=7400 / ATK=6800 / DEF=4900 / SPD=41 / BREAK=580
+  - hit_counts=[3, 3, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=120
+  - three_size=66/53/65 / initial_slot=2
+  - BD: 灼熱ブレイド獅子ゲイザー (arts_id=403)
+    - description: 敵全体に超絶強力な28連ダメージ＆一瞬だけスピード狂化
+    - cost=4 / hit_count=28 / value=3.8 / additional_value=0.0
+  - innate skills (2):
+    - RemHP_Speed Multiply ×1.3 — 残HPが少ないほどスピードがかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`140302`](weapons.json#L165496) レオ×エッジ【極】
+  - base_name: レオ×エッジ (costume: 極魔装)
+  - element=光(4) / type=長剣(1) / rarity=S(3) / cv=井口裕香
+  - max stats: HP=9620 / ATK=8840 / DEF=6370 / SPD=41 / BREAK=760
+  - hit_counts=[4, 3, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=120
+  - three_size=66/53/65 / initial_slot=3
+  - BD: 灼熱ブレイド獅子ゲイザー (arts_id=403)
+    - description: 敵全体に超絶強力な28連ダメージ＆一瞬だけスピード狂化
+    - cost=4 / hit_count=28 / value=3.8 / additional_value=0.0
+  - innate skills (2):
+    - RemHP_Speed Multiply ×1.8 — 残HPが少ないほどスピードが大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`141801`](weapons.json#L171277) ジャガーノート=ルナ
+  - base_name: ジャガーノート=ルナ (costume: 魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=SS(4) / cv=三森すずこ
+  - max stats: HP=13050 / ATK=13800 / DEF=10750 / SPD=38 / BREAK=1560
+  - hit_counts=[5, 3, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=380
+  - three_size=77/54/72 / initial_slot=3
+  - BD: L.U.N.A.C.Y. (arts_id=418)
+    - description: 敵全体に超絶強力な52連ダメージ＆味方HP回復
+    - cost=5 / hit_count=52 / value=3.5 / additional_value=0.0
+  - innate skills (5):
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - Attack Multiply ×1.74232 — 闇属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Speed Multiply ×1.3 — 残HPが多いほどスピードがかなりアップ
+    - DamageLimitBreak Addition +500000000.0 — 闇属性の魔剣のダメージ上限が5億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`141802`](weapons.json#L171491) ジャガーノート=ルナ【極】
+  - base_name: ジャガーノート=ルナ (costume: 極魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=SS(4) / cv=三森すずこ
+  - max stats: HP=16970 / ATK=17940 / DEF=13980 / SPD=38 / BREAK=2030
+  - hit_counts=[6, 3, 12] (3段)  motion_speed=[4.0/4.0/1.0]  mp=380
+  - three_size=77/54/72 / initial_slot=4
+  - BD: L.U.N.A.C.Y. (arts_id=418)
+    - description: 敵全体に超絶強力な52連ダメージ＆味方HP回復
+    - cost=5 / hit_count=52 / value=3.5 / additional_value=0.0
+  - innate skills (5):
+    - Vitality_Attack Multiply ×2.55 — 残HPが多いほど攻撃力が超絶大にアップ
+    - Attack Multiply ×2.0 — 闇属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Speed Multiply ×1.8 — 残HPが多いほどスピードが大幅にアップ
+    - DamageLimitBreak Addition +500000000.0 — 闇属性の魔剣のダメージ上限が5億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`143101`](weapons.json#L177237) 魔拳グラム=スサノオ
+  - base_name: 魔拳グラム=スサノオ (costume: 魔装)
+  - element=火(1) / type=拳闘(10) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=9200 / ATK=14000 / DEF=3800 / SPD=23 / BREAK=3100
+  - hit_counts=[5, 5, 9] (3段)  motion_speed=[3.0/3.0/1.0]  mp=440
+  - three_size=80/56/75 / initial_slot=3
+  - BD: 建速須佐之男ワールド (arts_id=431)
+    - description: 敵全体に超絶強力な88連ダメージ＆20秒間スピード50%UP
+    - cost=8 / hit_count=88 / value=2.8 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.74232 — 火属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`143102`](weapons.json#L177451) 魔拳グラム=スサノオ【極】
+  - base_name: 魔拳グラム=スサノオ (costume: 極魔装)
+  - element=火(1) / type=拳闘(10) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=11960 / ATK=18200 / DEF=4940 / SPD=23 / BREAK=4030
+  - hit_counts=[6, 5, 12] (3段)  motion_speed=[3.0/3.0/1.0]  mp=440
+  - three_size=80/56/75 / initial_slot=4
+  - BD: 建速須佐之男ワールド (arts_id=431)
+    - description: 敵全体に超絶強力な88連ダメージ＆20秒間スピード50%UP
+    - cost=8 / hit_count=88 / value=2.8 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 火属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - RemHP_Attack Multiply ×2.6 — 残HPが少ないほど攻撃力が超絶大にアップ
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`143201`](weapons.json#L177665) 狗王ナナツサヤ
+  - base_name: 狗王ナナツサヤ (costume: 魔装)
+  - element=水(2) / type=大剣(2) / rarity=S(3) / cv=駒形友梨
+  - max stats: HP=9600 / ATK=4500 / DEF=4200 / SPD=45 / BREAK=310
+  - hit_counts=[7, 7, 7] (3段)  motion_speed=[4.0/4.0/2.0]  mp=180
+  - three_size=68/55/70 / initial_slot=2
+  - BD: 弐拾と参つの式神演舞 (arts_id=432)
+    - description: 敵全体に超強力な38連ダメージ＆10秒間サファイア量UP
+    - cost=7 / hit_count=38 / value=3.31579 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.25 — 水属性の魔剣の攻撃力がかなりアップ
+    - MotionSpeed Multiply ×1.5 — 水属性の魔剣の攻撃モーションがかなり加速
+    - GuardBreak Multiply ×1.25 — 水属性の魔剣がかなりガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`143202`](weapons.json#L177860) 狗王ナナツサヤ【極】
+  - base_name: 狗王ナナツサヤ (costume: 極魔装)
+  - element=水(2) / type=大剣(2) / rarity=S(3) / cv=駒形友梨
+  - max stats: HP=12480 / ATK=5850 / DEF=5460 / SPD=45 / BREAK=410
+  - hit_counts=[8, 7, 10] (3段)  motion_speed=[4.0/4.0/2.0]  mp=180
+  - three_size=68/55/70 / initial_slot=3
+  - BD: 弐拾と参つの式神演舞 (arts_id=432)
+    - description: 敵全体に超強力な38連ダメージ＆10秒間サファイア量UP
+    - cost=7 / hit_count=38 / value=3.31579 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - MotionSpeed Multiply ×2.0 — 水属性の魔剣の攻撃モーションが大幅に加速
+    - GuardBreak Multiply ×1.5 — 水属性の魔剣が大幅にガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`143203`](weapons.json#L178055) 狗王ナナツサヤ【極弐】
+  - base_name: 狗王ナナツサヤ (costume: 極弐魔装)
+  - element=水(2) / type=大剣(2) / rarity=S(3) / cv=駒形友梨
+  - max stats: HP=16230 / ATK=7610 / DEF=7100 / SPD=48 / BREAK=540
+  - hit_counts=[9, 8, 10] (3段)  motion_speed=[3.7/3.7/2.0]  mp=198
+  - three_size=69/55/70 / initial_slot=4
+  - BD: 七支剣舞･神狗王 (arts_id=10432)
+    - description: 敵全体に超強力な38連ダメージ＆10秒間サファイア量UP
+    - cost=7 / hit_count=38 / value=3.31579 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.75 — 水属性の魔剣の攻撃力が絶大にアップ
+    - MotionSpeed Multiply ×2.0 — 水属性の魔剣の攻撃モーションが大幅に加速
+    - GuardBreak Multiply ×1.5 — 水属性の魔剣が大幅にガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`143301`](weapons.json#L178250) ジエンド=NULL
+  - base_name: ジエンド=NULL (costume: 魔装)
+  - element=光(4) / type=長剣(1) / rarity=SS(4) / cv=照井春佳
+  - max stats: HP=11800 / ATK=6800 / DEF=7400 / SPD=31 / BREAK=1400
+  - hit_counts=[5, 8, 13] (3段)  motion_speed=[2.0/2.0/2.0]  mp=470
+  - three_size=NULL/NULL/NULL / initial_slot=2
+  - BD: 悠遠なる虚無《ﾌﾞﾚｲｸﾀﾞｳﾝ†ﾌﾞﾚｲﾄﾞﾗｲﾝⅡ》 (arts_id=433)
+    - description: 敵全体に超絶強力な52連ダメージ＆数秒間サファイア2倍
+    - cost=7 / hit_count=52 / value=3.5 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.75 — 光属性の魔剣の攻撃力が絶大にアップ
+    - Wave_BlazeUP Addition +200.0 — Wave経過ごとにブレイズゲージがかなり回復する
+    - RemHP_Attack Multiply ×2.1 — 光属性の味方全体が、残HPが少ないほど攻撃力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 光属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`143302`](weapons.json#L178464) ジエンド=NULL【極】
+  - base_name: ジエンド=NULL (costume: 極魔装)
+  - element=光(4) / type=長剣(1) / rarity=SS(4) / cv=照井春佳
+  - max stats: HP=15340 / ATK=8840 / DEF=9620 / SPD=31 / BREAK=1820
+  - hit_counts=[6, 8, 16] (3段)  motion_speed=[2.0/2.0/2.0]  mp=470
+  - three_size=NULL/NULL/NULL / initial_slot=3
+  - BD: 悠遠なる虚無《ﾌﾞﾚｲｸﾀﾞｳﾝ†ﾌﾞﾚｲﾄﾞﾗｲﾝⅡ》 (arts_id=433)
+    - description: 敵全体に超絶強力な52連ダメージ＆数秒間サファイア2倍
+    - cost=7 / hit_count=52 / value=3.5 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ
+    - Wave_BlazeUP Addition +350.0 — Wave経過ごとにブレイズゲージが大幅に回復する
+    - RemHP_Attack Multiply ×2.1 — 光属性の味方全体が、残HPが少ないほど攻撃力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 光属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`144201`](weapons.json#L181956) パンドラ=エラー
+  - base_name: パンドラ=エラー (costume: 魔装)
+  - element=光(4) / type=騎槍(8) / rarity=SS(4) / cv=田村ゆかり
+  - max stats: HP=12800 / ATK=8850 / DEF=12500 / SPD=26 / BREAK=2550
+  - hit_counts=[4, 7, 12] (3段)  motion_speed=[1.5/1.5/1.2]  mp=500
+  - three_size=90/54/72 / initial_slot=2
+  - BD: 秩序贖え例外なる聖櫃 (arts_id=442)
+    - description: 敵全体に超絶強力な82連ダメージ＆数秒だけ攻撃力2倍
+    - cost=8 / hit_count=82 / value=2.56098 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.75 — 光属性の魔剣の攻撃力が絶大にアップ
+    - Vitality_Attack Multiply ×2.0 — 光属性の味方全体が、残HPが多いほど攻撃力が絶大にアップ
+    - Defense Multiply ×1.5 — 光属性の魔剣の防御力が大幅にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 光属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`144202`](weapons.json#L182170) パンドラ=エラー【極】
+  - base_name: パンドラ=エラー (costume: 極魔装)
+  - element=光(4) / type=騎槍(8) / rarity=SS(4) / cv=田村ゆかり
+  - max stats: HP=16640 / ATK=11510 / DEF=16250 / SPD=26 / BREAK=3320
+  - hit_counts=[5, 7, 15] (3段)  motion_speed=[1.5/1.5/1.2]  mp=500
+  - three_size=90/54/72 / initial_slot=3
+  - BD: 秩序贖え例外なる聖櫃 (arts_id=442)
+    - description: 敵全体に超絶強力な82連ダメージ＆数秒だけ攻撃力2倍
+    - cost=8 / hit_count=82 / value=2.56098 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ
+    - Vitality_Attack Multiply ×2.0 — 光属性の味方全体が、残HPが多いほど攻撃力が絶大にアップ
+    - Defense Multiply ×1.75 — 光属性の魔剣の防御力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 光属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`144301`](weapons.json#L182384) パンドラ
+  - base_name: パンドラ (costume: 魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=SS(4) / cv=田村ゆかり
+  - max stats: HP=13600 / ATK=10200 / DEF=11000 / SPD=26 / BREAK=1200
+  - hit_counts=[4, 7, 12] (3段)  motion_speed=[1.5/1.5/1.2]  mp=540
+  - three_size=90/54/72 / initial_slot=2
+  - BD: 混沌齎せ希望なき開闢 (arts_id=443)
+    - description: 敵全体に超絶強力な82連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=8 / hit_count=82 / value=3.0 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.75 — 闇属性の魔剣の攻撃力が絶大にアップ
+    - BlazeAttack Multiply ×2.5 — 全属性の魔剣のB.D.攻撃力が大幅にアップ
+    - RemHP_Attack Multiply ×1.8 — 闇属性の味方全体が、残HPが少ないほど攻撃力が大幅にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 闇属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`144302`](weapons.json#L182598) パンドラ【極】
+  - base_name: パンドラ (costume: 極魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=SS(4) / cv=田村ゆかり
+  - max stats: HP=17680 / ATK=13260 / DEF=14300 / SPD=26 / BREAK=1560
+  - hit_counts=[5, 7, 15] (3段)  motion_speed=[1.5/1.5/1.2]  mp=540
+  - three_size=90/54/72 / initial_slot=3
+  - BD: 混沌齎せ希望なき開闢 (arts_id=443)
+    - description: 敵全体に超絶強力な82連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=8 / hit_count=82 / value=3.0 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 闇属性の魔剣の攻撃力が超絶大アップ
+    - BlazeAttack Multiply ×3.0 — 全属性の魔剣のB.D.攻撃力が絶大にアップ
+    - RemHP_Attack Multiply ×2.1 — 闇属性の味方全体が、残HPが少ないほど攻撃力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 闇属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`144901`](weapons.json#L185043) アイスエイジ
+  - base_name: アイスエイジ (costume: 魔装)
+  - element=水(2) / type=投擲(9) / rarity=S(3) / cv=木村千咲
+  - max stats: HP=8900 / ATK=5500 / DEF=6000 / SPD=30 / BREAK=330
+  - hit_counts=[2, 3, 9] (3段)  motion_speed=[2.0/2.0/1.2]  mp=273
+  - three_size=73/53/70 / initial_slot=2
+  - BD: 局地的氷河期注意報 (arts_id=449)
+    - description: 敵全体に超強力な33連ダメージ＆数秒だけ敵が凍える
+    - cost=6 / hit_count=33 / value=3.38182 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`144902`](weapons.json#L185200) アイスエイジ【極】
+  - base_name: アイスエイジ (costume: 極魔装)
+  - element=水(2) / type=投擲(9) / rarity=S(3) / cv=木村千咲
+  - max stats: HP=11570 / ATK=7150 / DEF=7800 / SPD=30 / BREAK=430
+  - hit_counts=[3, 3, 12] (3段)  motion_speed=[2.0/2.0/1.2]  mp=273
+  - three_size=73/53/70 / initial_slot=3
+  - BD: 局地的氷河期注意報 (arts_id=449)
+    - description: 敵全体に超強力な33連ダメージ＆数秒だけ敵が凍える
+    - cost=6 / hit_count=33 / value=3.38182 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.75 — 水属性の魔剣の攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`144903`](weapons.json#L185357) アイスエイジ【極弐】
+  - base_name: アイスエイジ (costume: 極弐魔装)
+  - element=水(2) / type=投擲(9) / rarity=S(3) / cv=木村千咲
+  - max stats: HP=15050 / ATK=9300 / DEF=10140 / SPD=32 / BREAK=560
+  - hit_counts=[4, 4, 12] (3段)  motion_speed=[2.0/2.0/1.2]  mp=299
+  - three_size=73/53/70 / initial_slot=4
+  - BD: 絶対零域アイスエイジ (arts_id=10449)
+    - description: 敵全体に超強力な33連ダメージ＆数秒だけ敵が凍える
+    - cost=6 / hit_count=33 / value=3.38182 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.75 — 水属性の魔剣の攻撃力が絶大にアップ
+    - Mez Repel_Percent ×100.0 — 麻痺の発生を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`145201`](weapons.json#L186237) ノーネーム
+  - base_name: ノーネーム (costume: 魔装)
+  - element=無(6) / type=長剣(1) / rarity=SS(4) / cv=山下七海
+  - max stats: HP=11200 / ATK=16790 / DEF=10000 / SPD=32 / BREAK=210
+  - hit_counts=[5, 6, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=590
+  - three_size=70/57/72 / initial_slot=3
+  - BD: 名前さえない純粋な災厄 (arts_id=452)
+    - description: 敵全体に超絶強力な78連ダメージ＆数秒間攻撃力2倍
+    - cost=7 / hit_count=78 / value=2.5 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.4969 — 全属性の魔剣の攻撃力が大幅にアップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - Vitality_Speed Multiply ×1.8 — 残HPが多いほどスピードが大幅にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`145202`](weapons.json#L186451) ノーネーム【極】
+  - base_name: ノーネーム (costume: 極魔装)
+  - element=無(6) / type=長剣(1) / rarity=SS(4) / cv=山下七海
+  - max stats: HP=14560 / ATK=21820 / DEF=13000 / SPD=32 / BREAK=280
+  - hit_counts=[6, 6, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=590
+  - three_size=70/57/72 / initial_slot=4
+  - BD: 名前さえない純粋な災厄 (arts_id=452)
+    - description: 敵全体に超絶強力な78連ダメージ＆数秒間攻撃力2倍
+    - cost=7 / hit_count=78 / value=2.5 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.74232 — 全属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Attack Multiply ×2.55 — 残HPが多いほど攻撃力が超絶大にアップ
+    - Vitality_Speed Multiply ×2.25 — 残HPが多いほどスピードが絶大にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`145501`](weapons.json#L187331) セイバートゥース=ムゥ
+  - base_name: セイバートゥース=ムゥ (costume: 魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=SS(4) / cv=田中美海
+  - max stats: HP=13600 / ATK=13890 / DEF=8500 / SPD=28 / BREAK=2510
+  - hit_counts=[4, 4, 13] (3段)  motion_speed=[3.0/3.0/1.0]  mp=630
+  - three_size=87/59/83 / initial_slot=3
+  - BD: 完全捕食プレデターエクスマキナ (arts_id=455)
+    - description: 敵全体に超絶強力な45連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=7 / hit_count=45 / value=4.8 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.5 — 闇属性の魔剣の攻撃力が大幅にアップ
+    - AllTarget Multiply ×0.8 — 攻撃力はやや下がるが自分の攻撃範囲が敵全体になる
+    - Speed Multiply ×2.0 — 騎槍のスピードが2倍にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`145502`](weapons.json#L187545) セイバートゥース=ムゥ【極】
+  - base_name: セイバートゥース=ムゥ (costume: 極魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=SS(4) / cv=田中美海
+  - max stats: HP=17680 / ATK=18050 / DEF=11050 / SPD=28 / BREAK=3270
+  - hit_counts=[5, 4, 16] (3段)  motion_speed=[3.0/3.0/1.0]  mp=630
+  - three_size=87/59/83 / initial_slot=4
+  - BD: 完全捕食プレデターエクスマキナ (arts_id=455)
+    - description: 敵全体に超絶強力な45連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=7 / hit_count=45 / value=4.8 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.75 — 闇属性の魔剣の攻撃力が絶大にアップ
+    - AllTarget Multiply ×1.0 — 攻撃力を下げずに自分の攻撃範囲が敵全体になる
+    - Speed Multiply ×2.0 — 騎槍のスピードが2倍にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`145601`](weapons.json#L187759) アルマゲスト
+  - base_name: アルマゲスト (costume: 魔装)
+  - element=光(4) / type=弓矢(5) / rarity=S(3) / cv=阿澄佳奈
+  - max stats: HP=6000 / ATK=5000 / DEF=3000 / SPD=40 / BREAK=700
+  - hit_counts=[4, 6, 10] (3段)  motion_speed=[3.0/3.0/1.0]  mp=170
+  - three_size=87/60/86 / initial_slot=1
+  - BD: 果てしなく偉大にしてどうしようもないもの (arts_id=456)
+    - description: 敵全体に超強力な50連ダメージ＆1waveヒット数が+6
+    - cost=5 / hit_count=50 / value=2.1 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×1.5 — 光属性の魔剣の攻撃モーションがかなり加速
+    - RemHP_Speed Multiply ×1.1 — 残HPが少ないほどスピードがすこしアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`145602`](weapons.json#L187935) アルマゲスト【極】
+  - base_name: アルマゲスト (costume: 極魔装)
+  - element=光(4) / type=弓矢(5) / rarity=S(3) / cv=阿澄佳奈
+  - max stats: HP=7800 / ATK=6500 / DEF=3900 / SPD=40 / BREAK=910
+  - hit_counts=[5, 6, 13] (3段)  motion_speed=[3.0/3.0/1.0]  mp=170
+  - three_size=87/60/86 / initial_slot=2
+  - BD: 果てしなく偉大にしてどうしようもないもの (arts_id=456)
+    - description: 敵全体に超強力な50連ダメージ＆1waveヒット数が+6
+    - cost=5 / hit_count=50 / value=2.1 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×2.0 — 光属性の魔剣の攻撃モーションが大幅に加速
+    - RemHP_Speed Multiply ×1.2 — 残HPが少ないほどスピードがアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`145603`](weapons.json#L188111) アルマゲスト【極弐】
+  - base_name: アルマゲスト (costume: 極弐魔装)
+  - element=光(4) / type=弓矢(5) / rarity=S(3) / cv=阿澄佳奈
+  - max stats: HP=9360 / ATK=7800 / DEF=4680 / SPD=40 / BREAK=1100
+  - hit_counts=[6, 7, 13] (3段)  motion_speed=[2.0/2.0/1.0]  mp=178
+  - three_size=90/60/87 / initial_slot=3
+  - BD: 全てを滅ぼす尊大なる真理あるいはどうしようもないもの (arts_id=10456)
+    - description: 敵全体に超強力な50連ダメージ＆1waveヒット数が+6
+    - cost=5 / hit_count=50 / value=2.1 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×2.0 — 光属性の魔剣の攻撃モーションが大幅に加速
+    - RemHP_Speed Multiply ×1.3 — 残HPが少ないほどスピードがかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`145701`](weapons.json#L188287) 煌刀ソハヤ
+  - base_name: 煌刀ソハヤ (costume: 魔装)
+  - element=光(4) / type=太刀(3) / rarity=SS(4) / cv=星谷美緒
+  - max stats: HP=8800 / ATK=20100 / DEF=6100 / SPD=28 / BREAK=3700
+  - hit_counts=[5, 3, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=679
+  - three_size=68/49/65 / initial_slot=3
+  - BD: 全てを過去にする最強オブ最強の煌めき (arts_id=457)
+    - description: 敵全体に超絶強力な64連ダメージ＆数秒だけﾓｰｼｮﾝ2倍高速化
+    - cost=9 / hit_count=64 / value=3.81 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.74232 — 光属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Break_Attack Multiply ×2.5 — 自身が破損状態になると攻撃力が大幅にアップ
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`145702`](weapons.json#L188501) 煌刀ソハヤ【極】
+  - base_name: 煌刀ソハヤ (costume: 極魔装)
+  - element=光(4) / type=太刀(3) / rarity=SS(4) / cv=星谷美緒
+  - max stats: HP=11440 / ATK=26130 / DEF=7930 / SPD=28 / BREAK=4810
+  - hit_counts=[6, 3, 11] (3段)  motion_speed=[4.0/4.0/1.0]  mp=679
+  - three_size=68/49/65 / initial_slot=4
+  - BD: 全てを過去にする最強オブ最強の煌めき (arts_id=457)
+    - description: 敵全体に超絶強力な64連ダメージ＆数秒だけﾓｰｼｮﾝ2倍高速化
+    - cost=9 / hit_count=64 / value=3.81 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - Break_Attack Multiply ×3.3 — 自身が破損状態になると攻撃力が絶大にアップ
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`146701`](weapons.json#L192154) 神竜イザナギ
+  - base_name: 神竜イザナギ (costume: 魔装)
+  - element=闇(5) / type=弓矢(5) / rarity=SS(4) / cv=竹達彩奈
+  - max stats: HP=14500 / ATK=16500 / DEF=11600 / SPD=23 / BREAK=3000
+  - hit_counts=[4, 8, 8] (3段)  motion_speed=[1.8/1.5/1.0]  mp=620
+  - three_size=79/54/74 / initial_slot=3
+  - BD: 神世七代天地開闢 (arts_id=467)
+    - description: 敵全体に超絶強力な60連ダメージ＆15秒攻撃全体化(減無)
+    - cost=8 / hit_count=60 / value=3.5 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×1.5 — 全属性の魔剣の攻撃力が大幅にアップ
+    - Vitality_Attack Multiply ×1.3 — 残HPが多いほど攻撃力がかなりアップ
+    - HitCount Addition +7.951 — 自身の1撃目2撃目3撃目のヒット数を+8する【熟度21,41,60,80,99をそれぞれ超えると+1ずつ効果値UP】
+    - Vitality_MotionSpeed Multiply ×3.0 — 弓矢の味方全体が、残HPが多いほどモーションが絶大に加速(最大3倍)
+    - DamageLimitBreak Addition +1300000000.0 — 自身のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`146702`](weapons.json#L192387) 神竜イザナギ【極】
+  - base_name: 神竜イザナギ (costume: 極魔装)
+  - element=闇(5) / type=弓矢(5) / rarity=SS(4) / cv=竹達彩奈
+  - max stats: HP=18850 / ATK=21450 / DEF=15080 / SPD=23 / BREAK=3900
+  - hit_counts=[5, 8, 11] (3段)  motion_speed=[1.8/1.5/1.0]  mp=620
+  - three_size=79/54/74 / initial_slot=4
+  - BD: 神世七代天地開闢 (arts_id=467)
+    - description: 敵全体に超絶強力な60連ダメージ＆15秒攻撃全体化(減無)
+    - cost=8 / hit_count=60 / value=3.5 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ
+    - HitCount Addition +7.951 — 自身の1撃目2撃目3撃目のヒット数を+8する【熟度21,41,60,80,99をそれぞれ超えると+1ずつ効果値UP】
+    - Vitality_MotionSpeed Multiply ×3.0 — 弓矢の味方全体が、残HPが多いほどモーションが絶大に加速(最大3倍)
+    - DamageLimitBreak Addition +1300000000.0 — 自身のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`146801`](weapons.json#L192620) アマツミカボシ
+  - base_name: アマツミカボシ (costume: 魔装)
+  - element=水(2) / type=投擲(9) / rarity=SS(4) / cv=優木かな
+  - max stats: HP=16910 / ATK=23000 / DEF=8500 / SPD=27 / BREAK=2400
+  - hit_counts=[3, 3, 7] (3段)  motion_speed=[1.6/1.5/1.0]  mp=799
+  - three_size=93/64/94 / initial_slot=4
+  - BD: 天変穿ち地異抉る明の星 (arts_id=468)
+    - description: 敵全体に超絶強力な29連ダメージ＆wave中、攻撃力50%UP
+    - cost=9 / hit_count=29 / value=8.41 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.75 — アマツミカボシの攻撃力が絶大にアップ
+    - Defense Multiply ×1.75 — アマツミカボシの防御力が絶大にアップ
+    - HitCount Addition +10.0 — アマテラスと同編成で自分のヒット数それぞれ+10
+    - DamageLimitBreak Addition +3000000000.0 — アマテラスと同編成で自身のダメージ上限が30億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`146802`](weapons.json#L192834) アマツミカボシ【極】
+  - base_name: アマツミカボシ (costume: 極魔装)
+  - element=水(2) / type=投擲(9) / rarity=SS(4) / cv=優木かな
+  - max stats: HP=21990 / ATK=29900 / DEF=11050 / SPD=27 / BREAK=3120
+  - hit_counts=[4, 3, 10] (3段)  motion_speed=[1.6/1.5/1.0]  mp=799
+  - three_size=93/64/94 / initial_slot=5
+  - BD: 天変穿ち地異抉る明の星 (arts_id=468)
+    - description: 敵全体に超絶強力な29連ダメージ＆wave中、攻撃力50%UP
+    - cost=9 / hit_count=29 / value=8.41 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.75 — アマツミカボシの攻撃力が絶大にアップ
+    - Defense Multiply ×1.75 — アマツミカボシの防御力が絶大にアップ
+    - HitCount Addition +10.0 — アマテラスと同編成で自分のヒット数それぞれ+10
+    - DamageLimitBreak Addition +3000000000.0 — アマテラスと同編成で自身のダメージ上限が30億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`147601`](weapons.json#L195907) カオス
+  - base_name: カオス (costume: 魔装)
+  - element=無(6) / type=連弩(6) / rarity=SS(4) / cv=釘宮理恵
+  - max stats: HP=10100 / ATK=13270 / DEF=12450 / SPD=42 / BREAK=1300
+  - hit_counts=[3, 6, 10] (3段)  motion_speed=[2.5/2.5/1.5]  mp=100
+  - three_size=74/58/76 / initial_slot=3
+  - BD: 天籟に咲け、遊堕に香る混沌の華 (arts_id=476)
+    - description: 敵全体に超絶強力な15連ダメージ＆1waveの間、味方の攻撃力とﾓｰｼｮﾝ速度13倍＆13秒間自身3000ずつHP回復
+    - cost=1 / hit_count=15 / value=1.8 / additional_value=0.0
+  - innate skills (4):
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - MotionSpeed Multiply ×2.325 — 全属性の魔剣の攻撃モーションが絶大に加速【熟度UPにつれてさらに効果値UP】
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`147602`](weapons.json#L196126) カオス【極】
+  - base_name: カオス (costume: 極魔装)
+  - element=無(6) / type=連弩(6) / rarity=SS(4) / cv=釘宮理恵
+  - max stats: HP=13650 / ATK=17560 / DEF=16320 / SPD=42 / BREAK=1690
+  - hit_counts=[4, 6, 13] (3段)  motion_speed=[2.5/2.5/1.5]  mp=100
+  - three_size=74/58/76 / initial_slot=4
+  - BD: 天籟に咲け、遊堕に香る混沌の華 (arts_id=476)
+    - description: 敵全体に超絶強力な15連ダメージ＆1waveの間、味方の攻撃力とﾓｰｼｮﾝ速度13倍＆13秒間自身3000ずつHP回復
+    - cost=1 / hit_count=15 / value=1.8 / additional_value=0.0
+  - innate skills (5):
+    - Vitality_Attack Multiply ×2.55 — 残HPが多いほど攻撃力が超絶大にアップ
+    - MotionSpeed Multiply ×2.652 — 全属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値UP】
+    - BlazeGauge Addition +100.0 — バトル開始時にブレイズゲージが上昇する(1ゲージ)
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`148501`](weapons.json#L199361) バステト=ステラ
+  - base_name: バステト=ステラ (costume: 魔装)
+  - element=闇(5) / type=投擲(9) / rarity=SS(4) / cv=高橋李依
+  - max stats: HP=7600 / ATK=16400 / DEF=7500 / SPD=27 / BREAK=500
+  - hit_counts=[2, 4, 10] (3段)  motion_speed=[2.0/2.0/1.5]  mp=600
+  - three_size=78/58/72 / initial_slot=2
+  - BD: 魔玩ホシガキレイデス (arts_id=485)
+    - description: 敵全体に超絶強力な48連ダメージ＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度とスピードが30倍
+    - cost=8 / hit_count=48 / value=3.96 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×2.325 — 闇属性の魔剣の攻撃モーションが絶大に加速【熟度UPにつれてさらに効果値UP】
+    - Attack Multiply ×1.75 — 闇属性の魔剣の攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`148502`](weapons.json#L199561) バステト=ステラ【極】
+  - base_name: バステト=ステラ (costume: 極魔装)
+  - element=闇(5) / type=投擲(9) / rarity=SS(4) / cv=高橋李依
+  - max stats: HP=9880 / ATK=21320 / DEF=9750 / SPD=27 / BREAK=650
+  - hit_counts=[3, 4, 13] (3段)  motion_speed=[2.0/2.0/1.5]  mp=600
+  - three_size=78/58/72 / initial_slot=3
+  - BD: 魔玩ホシガキレイデス (arts_id=485)
+    - description: 敵全体に超絶強力な48連ダメージ＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度とスピードが30倍
+    - cost=8 / hit_count=48 / value=3.96 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×2.652 — 闇属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値UP】
+    - Attack Multiply ×2.0 — 闇属性の魔剣の攻撃力が超絶大アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`149001`](weapons.json#L201321) レイバーインヴェスティ
+  - base_name: レイバーインヴェスティ (costume: 魔装)
+  - element=風(3) / type=魔典(11) / rarity=SS(4) / cv=立石みこ
+  - max stats: HP=13000 / ATK=21700 / DEF=9500 / SPD=25 / BREAK=1600
+  - hit_counts=[2, 3, 7] (3段)  motion_speed=[1.2/2.0/1.0]  mp=550
+  - three_size=76/56/80 / initial_slot=3
+  - BD: 真理を示せ灼爆錬花 (arts_id=490)
+    - description: 敵全体に超強力な78連ダメージ＆一瞬だけスピード778倍
+    - cost=7 / hit_count=78 / value=1.92 / additional_value=0.0
+  - innate skills (8):
+    - HP Multiply ×0.0 — 味方全体の耐久力をベットとして激減させる
+    - HP Addition +13.0 — 倍にして返す誓いを胸に更に耐久力を激減させる
+    - Defense Multiply ×0.0 — 一生のお願いを切って限界まで耐久力を激減させる
+    - Raise Multiply ×1.0 — 味方全体が戦闘不能になっても7回完全復活できる
+    - Vitality_Attack Multiply ×2.0 — 味方全体が、残HPが多いほど攻撃力が絶大にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - FellDown_Attack Multiply ×13.0 — 味方が倒されると自身の攻撃力がアップ（最大13倍）
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`149002`](weapons.json#L201592) レイバーインヴェスティ【極】
+  - base_name: レイバーインヴェスティ (costume: 極魔装)
+  - element=風(3) / type=魔典(11) / rarity=SS(4) / cv=立石みこ
+  - max stats: HP=16900 / ATK=28210 / DEF=12350 / SPD=25 / BREAK=2080
+  - hit_counts=[3, 3, 10] (3段)  motion_speed=[1.2/2.0/1.0]  mp=550
+  - three_size=76/56/80 / initial_slot=4
+  - BD: 真理を示せ灼爆錬花 (arts_id=490)
+    - description: 敵全体に超強力な78連ダメージ＆一瞬だけスピード778倍
+    - cost=7 / hit_count=78 / value=1.92 / additional_value=0.0
+  - innate skills (8):
+    - HP Multiply ×0.0 — 味方全体の耐久力をベットとして激減させる
+    - HP Addition +13.0 — 倍にして返す誓いを胸に更に耐久力を激減させる
+    - Defense Multiply ×0.0 — 一生のお願いを切って限界まで耐久力を激減させる
+    - Raise Multiply ×1.0 — 味方全体が戦闘不能になっても7回完全復活できる
+    - Vitality_Attack Multiply ×2.3 — 味方全体が、残HPが多いほど攻撃力が超絶大にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - FellDown_Attack Multiply ×13.0 — 味方が倒されると自身の攻撃力がアップ（最大13倍）
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`149401`](weapons.json#L202724) 天斧セレネ
+  - base_name: 天斧セレネ (costume: 魔装)
+  - element=水(2) / type=戦斧(7) / rarity=SS(4) / cv=河野ひより	
+  - max stats: HP=14000 / ATK=12200 / DEF=14000 / SPD=22 / BREAK=3450
+  - hit_counts=[4, 7, 9] (3段)  motion_speed=[1.5/1.5/1.3]  mp=666
+  - three_size=101/54/86 / initial_slot=2
+  - BD: あなたが落としたのは夜を照らす美しき斧ですか (arts_id=494)
+    - description: 敵全体に超絶強力な33連ダメージ＆15秒攻撃全体化(減無)
+    - cost=6 / hit_count=33 / value=4.75 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×13.0 — 戦斧の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 大剣の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 杖棒の魔剣の攻撃力が13倍アップ
+    - Defense Multiply ×1.5 — 全属性の魔剣の防御力が大幅にアップ
+    - MotionSpeed Multiply ×2.0 — 全属性の魔剣の攻撃モーションが大幅に加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`149402`](weapons.json#L202957) 天斧セレネ【極】
+  - base_name: 天斧セレネ (costume: 極魔装)
+  - element=水(2) / type=戦斧(7) / rarity=SS(4) / cv=河野ひより	
+  - max stats: HP=18200 / ATK=15860 / DEF=18200 / SPD=22 / BREAK=4490
+  - hit_counts=[5, 7, 12] (3段)  motion_speed=[1.5/1.5/1.3]  mp=666
+  - three_size=101/54/86 / initial_slot=3
+  - BD: あなたが落としたのは夜を照らす美しき斧ですか (arts_id=494)
+    - description: 敵全体に超絶強力な33連ダメージ＆15秒攻撃全体化(減無)
+    - cost=6 / hit_count=33 / value=4.75 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×13.0 — 戦斧の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 大剣の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 杖棒の魔剣の攻撃力が13倍アップ
+    - Defense Multiply ×1.75 — 全属性の魔剣の防御力が絶大にアップ
+    - MotionSpeed Multiply ×2.33 — 全属性の魔剣の攻撃モーションが絶大に加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`149801`](weapons.json#L204394) イミティション=ロール=サンタ=ピュア
+  - base_name: イミティション=ロール=サンタ=ピュア (costume: 魔装)
+  - element=光(4) / type=大鎌(12) / rarity=SS(4) / cv=加隈亜衣
+  - max stats: HP=12000 / ATK=20000 / DEF=7800 / SPD=33 / BREAK=4800
+  - hit_counts=[2, 4, 9] (3段)  motion_speed=[2.0/2.0/1.0]  mp=800
+  - three_size=67/55/69 / initial_slot=2
+  - BD: 聖典模倣永久凍結領域 (arts_id=498)
+    - description: 敵全体に超絶強力な80連ダメージ＆数秒だけ攻撃力100%UP
+    - cost=6 / hit_count=80 / value=2.0 / additional_value=0.0
+  - innate skills (8):
+    - BlazeLockPurge Repel_Percent ×100.0 — 味方全体がBlazeLockを完全回避する
+    - Attack Multiply ×1.74232 — 全属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - SapphireDrop Multiply ×2.0 — 自分の獲得するサファイアの量がかなり増加
+    - InstantDeath Repel_Percent ×100.0 — 光属性の魔剣が即死特性の攻撃を完全回避
+    - BlazeAbsorb Repel_Percent ×100.0 — 光属性の魔剣が勇気分解を完全回避
+    - Mez Repel_Percent ×100.0 — 光属性の魔剣が麻痺の発生を完全回避
+    - Stun Repel_Percent ×100.0 — 光属性の魔剣がスタンの発生を完全回避
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`149802`](weapons.json#L204665) イミティション=ロール=サンタ=ピュア【極】
+  - base_name: イミティション=ロール=サンタ=ピュア (costume: 極魔装)
+  - element=光(4) / type=大鎌(12) / rarity=SS(4) / cv=加隈亜衣
+  - max stats: HP=15600 / ATK=26000 / DEF=10140 / SPD=33 / BREAK=6240
+  - hit_counts=[3, 4, 12] (3段)  motion_speed=[2.0/2.0/1.0]  mp=800
+  - three_size=67/55/69 / initial_slot=3
+  - BD: 聖典模倣永久凍結領域 (arts_id=498)
+    - description: 敵全体に超絶強力な80連ダメージ＆数秒だけ攻撃力100%UP
+    - cost=6 / hit_count=80 / value=2.0 / additional_value=0.0
+  - innate skills (8):
+    - BlazeLockPurge Repel_Percent ×100.0 — 味方全体がBlazeLockを完全回避する
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - SapphireDrop Multiply ×2.0 — 自分の獲得するサファイアの量がかなり増加
+    - InstantDeath Repel_Percent ×100.0 — 光属性の魔剣が即死特性の攻撃を完全回避
+    - BlazeAbsorb Repel_Percent ×100.0 — 光属性の魔剣が勇気分解を完全回避
+    - Mez Repel_Percent ×100.0 — 光属性の魔剣が麻痺の発生を完全回避
+    - Stun Repel_Percent ×100.0 — 光属性の魔剣がスタンの発生を完全回避
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`149901`](weapons.json#L204936) 業王剣タケミカヅチ
+  - base_name: 業王剣タケミカヅチ (costume: 魔装)
+  - element=光(4) / type=太刀(3) / rarity=SS(4) / cv=中原麻衣
+  - max stats: HP=13500 / ATK=20100 / DEF=11000 / SPD=32 / BREAK=2250
+  - hit_counts=[2, 3, 7] (3段)  motion_speed=[2.0/2.0/1.0]  mp=702
+  - three_size=80/58/78 / initial_slot=3
+  - BD: 神雷発氣天戟璽獄 (arts_id=499)
+    - description: 敵全体に超絶強力な60連ダメージ＆敵を数秒だけ麻痺
+    - cost=7 / hit_count=60 / value=3.1 / additional_value=0.0
+  - innate skills (7):
+    - HitCount Addition +4.0 — 光属性の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - HitCount Addition +4.0 — 水属性の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - GuardBreak Multiply ×1.75 — 全属性の魔剣が絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×7.0 — ブレイク時に自身の攻撃力が7倍
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`149902`](weapons.json#L205188) 業王剣タケミカヅチ【極】
+  - base_name: 業王剣タケミカヅチ (costume: 極魔装)
+  - element=光(4) / type=太刀(3) / rarity=SS(4) / cv=中原麻衣
+  - max stats: HP=17550 / ATK=26130 / DEF=14300 / SPD=32 / BREAK=2930
+  - hit_counts=[3, 3, 10] (3段)  motion_speed=[2.0/2.0/1.0]  mp=702
+  - three_size=80/58/78 / initial_slot=4
+  - BD: 神雷発氣天戟璽獄 (arts_id=499)
+    - description: 敵全体に超絶強力な60連ダメージ＆敵を数秒だけ麻痺
+    - cost=7 / hit_count=60 / value=3.1 / additional_value=0.0
+  - innate skills (7):
+    - HitCount Addition +4.0 — 光属性の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - HitCount Addition +4.0 — 水属性の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ
+    - GuardBreak Multiply ×2.0 — 全属性の魔剣が超絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×7.0 — ブレイク時に自身の攻撃力が7倍
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`150701`](weapons.json#L208451) 菌王キノコリオンヌ
+  - base_name: 菌王キノコリオンヌ (costume: 魔装)
+  - element=風(3) / type=投擲(9) / rarity=SS(4) / cv=金田朋子
+  - max stats: HP=6400 / ATK=8500 / DEF=14800 / SPD=38 / BREAK=2000
+  - hit_counts=[1, 2, 13] (3段)  motion_speed=[1.5/1.5/1.2]  mp=500
+  - three_size=66/54/68 / initial_slot=3
+  - BD: プリンセスキノコリオンパレード！ (arts_id=507)
+    - description: 敵全体に超絶強力な50連ダメージ＆10秒間ヒット数が+6
+    - cost=8 / hit_count=50 / value=4.16 / additional_value=0.0
+  - innate skills (5):
+    - MotionSpeed Multiply ×2.51 — 全属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値UP】
+    - RubyDrop Multiply ×5.0 — 味方が攻撃した時のルビーの量が超絶大に増加
+    - JobExp Multiply ×1.35 — 味方全体の獲得ソウル経験値が超アップ
+    - MaterialExp Multiply ×1.35 — 自身の獲得記憶結晶経験値が超アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`150702`](weapons.json#L208665) 菌王キノコリオンヌ【極】
+  - base_name: 菌王キノコリオンヌ (costume: 極魔装)
+  - element=風(3) / type=投擲(9) / rarity=SS(4) / cv=金田朋子
+  - max stats: HP=8320 / ATK=11050 / DEF=19240 / SPD=38 / BREAK=2600
+  - hit_counts=[2, 2, 16] (3段)  motion_speed=[1.5/1.5/1.2]  mp=500
+  - three_size=66/54/68 / initial_slot=4
+  - BD: プリンセスキノコリオンパレード！ (arts_id=507)
+    - description: 敵全体に超絶強力な50連ダメージ＆10秒間ヒット数が+6
+    - cost=8 / hit_count=50 / value=4.16 / additional_value=0.0
+  - innate skills (5):
+    - MotionSpeed Multiply ×2.51 — 全属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値UP】
+    - RubyDrop Multiply ×5.0 — 味方が攻撃した時のルビーの量が超絶大に増加
+    - JobExp Multiply ×1.35 — 味方全体の獲得ソウル経験値が超アップ
+    - MaterialExp Multiply ×1.35 — 自身の獲得記憶結晶経験値が超アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`151501`](weapons.json#L211888) デミエクス=ブライド
+  - base_name: デミエクス=ブライド (costume: 魔装)
+  - element=光(4) / type=杖棒(4) / rarity=SS(4) / cv=岡咲美保
+  - max stats: HP=16800 / ATK=12100 / DEF=11500 / SPD=21 / BREAK=3500
+  - hit_counts=[3, 3, 8] (3段)  motion_speed=[2.0/1.5/1.5]  mp=600
+  - three_size=76/58/82 / initial_slot=3
+  - BD: 追随せし封約の流星 (arts_id=515)
+    - description: 敵全体に超絶強力な150連ダメージ＆敵が数秒だけ動けなくなる
+    - cost=6 / hit_count=150 / value=2.6 / additional_value=0.0
+  - innate skills (6):
+    - BlazeAttack Multiply ×2.989 — 光属性の魔剣のB.D.攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Break_Attack Multiply ×2.0 — 自身が破損状態になると攻撃力がかなりアップ
+    - WeaponArtsHitCount Addition +50.0 — 光属性の魔剣のB.D.ヒット数を+50する
+    - SapphireDrop Multiply ×1.5 — 自分の獲得するサファイア量が少し増加
+    - Vitality_Speed Multiply ×0.1 — 味方全体が、残HPが多いほどスピード超絶大にダウン（最大0.1倍）
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`151502`](weapons.json#L212121) デミエクス=ブライド【極】
+  - base_name: デミエクス=ブライド (costume: 極魔装)
+  - element=光(4) / type=杖棒(4) / rarity=SS(4) / cv=岡咲美保
+  - max stats: HP=21840 / ATK=15730 / DEF=14950 / SPD=21 / BREAK=4550
+  - hit_counts=[4, 4, 8] (3段)  motion_speed=[2.0/1.5/1.5]  mp=600
+  - three_size=76/58/82 / initial_slot=4
+  - BD: 追随せし封約の流星 (arts_id=515)
+    - description: 敵全体に超絶強力な150連ダメージ＆敵が数秒だけ動けなくなる
+    - cost=6 / hit_count=150 / value=2.6 / additional_value=0.0
+  - innate skills (6):
+    - BlazeAttack Multiply ×3.4847 — 光属性の魔剣のB.D.攻撃力が超絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Break_Attack Multiply ×2.5 — 自身が破損状態になると攻撃力が大幅にアップ
+    - WeaponArtsHitCount Addition +50.0 — 光属性の魔剣のB.D.ヒット数を+50する
+    - SapphireDrop Multiply ×2.0 — 自分の獲得するサファイアの量がかなり増加
+    - Vitality_Speed Multiply ×0.1 — 味方全体が、残HPが多いほどスピード超絶大にダウン（最大0.1倍）
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`151601`](weapons.json#L212354) ミョルニル=アルファ
+  - base_name: ミョルニル=アルファ (costume: 魔装)
+  - element=風(3) / type=拳闘(10) / rarity=SS(4) / cv=高野麻里佳
+  - max stats: HP=13200 / ATK=25300 / DEF=9310 / SPD=28 / BREAK=1320
+  - hit_counts=[2, 2, 6] (3段)  motion_speed=[2.0/1.5/2.0]  mp=450
+  - three_size=61/53/69 / initial_slot=3
+  - BD: 万象を滅す人造の神撃 (arts_id=516)
+    - description: 敵全体に強力な50連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=7 / hit_count=50 / value=2.51 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.4969 — 風属性の魔剣の攻撃力が大幅にアップ【熟度UPにつれてさらに効果値UP】
+    - MotionSpeed Multiply ×2.33 — 風属性の魔剣の攻撃モーションが絶大に加速
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`151602`](weapons.json#L212568) ミョルニル=アルファ【極】
+  - base_name: ミョルニル=アルファ (costume: 極魔装)
+  - element=風(3) / type=拳闘(10) / rarity=SS(4) / cv=高野麻里佳
+  - max stats: HP=17160 / ATK=32890 / DEF=12110 / SPD=28 / BREAK=1720
+  - hit_counts=[3, 3, 6] (3段)  motion_speed=[2.0/1.5/2.0]  mp=450
+  - three_size=61/53/69 / initial_slot=4
+  - BD: 万象を滅す人造の神撃 (arts_id=516)
+    - description: 敵全体に強力な50連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=7 / hit_count=50 / value=2.51 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.74232 — 風属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - MotionSpeed Multiply ×2.66 — 風属性の魔剣の攻撃モーションが超絶大に加速
+    - Vitality_Attack Multiply ×2.55 — 残HPが多いほど攻撃力が超絶大にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`152301`](weapons.json#L215044) ジャガーノート=ロスト
+  - base_name: ジャガーノート=ロスト (costume: 魔装)
+  - element=光(4) / type=戦斧(7) / rarity=SS(4) / cv=三森すずこ
+  - max stats: HP=9800 / ATK=22000 / DEF=9700 / SPD=32 / BREAK=5000
+  - hit_counts=[3, 3, 10] (3段)  motion_speed=[3.0/2.0/1.0]  mp=420
+  - three_size=61/51/69 / initial_slot=3
+  - BD: カルネイジサルヴェイション (arts_id=523)
+    - description: 敵全体に超強力な72連ダメージ＆数秒間サファイア2倍
+    - cost=7 / hit_count=72 / value=2.6 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - HitCount Addition +6.0 — 戦斧の魔剣の1撃目2撃目3撃目のヒット数を+6する
+    - Enemy_BreakAttack Multiply ×4.0 — ブレイク時に戦斧の魔剣の攻撃力が4倍アップ
+    - DamageLimitBreak Addition +1500000000.0 — 自身のダメージ上限が15億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`152302`](weapons.json#L215277) ジャガーノート=ロスト【極】
+  - base_name: ジャガーノート=ロスト (costume: 極魔装)
+  - element=光(4) / type=戦斧(7) / rarity=SS(4) / cv=三森すずこ
+  - max stats: HP=12740 / ATK=28600 / DEF=12610 / SPD=32 / BREAK=6500
+  - hit_counts=[4, 3, 13] (3段)  motion_speed=[3.0/2.0/1.0]  mp=420
+  - three_size=61/51/69 / initial_slot=4
+  - BD: カルネイジサルヴェイション (arts_id=523)
+    - description: 敵全体に超強力な72連ダメージ＆数秒間サファイア2倍
+    - cost=7 / hit_count=72 / value=2.6 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - HitCount Addition +6.0 — 戦斧の魔剣の1撃目2撃目3撃目のヒット数を+6する
+    - Enemy_BreakAttack Multiply ×4.0 — ブレイク時に戦斧の魔剣の攻撃力が4倍アップ
+    - DamageLimitBreak Addition +1500000000.0 — 自身のダメージ上限が15億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`154201`](weapons.json#L222880) レヴァンテイン=ロスト
+  - base_name: レヴァンテイン=ロスト (costume: 魔装)
+  - element=無(6) / type=投擲(9) / rarity=SS(4) / cv=綾瀬有
+  - max stats: HP=12200 / ATK=14700 / DEF=6000 / SPD=33 / BREAK=3300
+  - hit_counts=[4, 6, 8] (3段)  motion_speed=[1.5/1.8/1.1]  mp=360
+  - three_size=87/57/83 / initial_slot=3
+  - BD: ワールドエンドカタストロフィー (arts_id=542)
+    - description: 敵全体に超強力な31連ダメージ＆10秒だけ攻撃力2倍
+    - cost=7 / hit_count=31 / value=4.74194 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×5.0 — 火属性の魔剣の攻撃力が極大アップ
+    - Speed Multiply ×1.25 — 全属性の魔剣の行動速度がかなりアップ
+    - DamageLimitBreak Addition +1500000000.0 — 火属性の魔剣のダメージ上限が15億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`154202`](weapons.json#L223113) レヴァンテイン=ロスト【極】
+  - base_name: レヴァンテイン=ロスト (costume: 極魔装)
+  - element=無(6) / type=投擲(9) / rarity=SS(4) / cv=綾瀬有
+  - max stats: HP=15860 / ATK=19110 / DEF=7800 / SPD=33 / BREAK=4290
+  - hit_counts=[5, 6, 11] (3段)  motion_speed=[1.5/1.8/1.1]  mp=360
+  - three_size=87/57/83 / initial_slot=4
+  - BD: ワールドエンドカタストロフィー (arts_id=542)
+    - description: 敵全体に超強力な31連ダメージ＆10秒だけ攻撃力2倍
+    - cost=7 / hit_count=31 / value=4.74194 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×5.0 — 火属性の魔剣の攻撃力が極大アップ
+    - Speed Multiply ×1.5 — 全属性の魔剣の行動速度が大幅にアップ
+    - DamageLimitBreak Addition +1500000000.0 — 火属性の魔剣のダメージ上限が15億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`154301`](weapons.json#L223346) ぎんいろ=ロスト
+  - base_name: ぎんいろ=ロスト (costume: 魔装)
+  - element=水(2) / type=魔典(11) / rarity=SS(4) / cv=山下七海
+  - max stats: HP=10000 / ATK=13800 / DEF=11000 / SPD=45 / BREAK=1300
+  - hit_counts=[9, 8, 13] (3段)  motion_speed=[1.2/1.8/1.0]  mp=620
+  - three_size=70/57/72 / initial_slot=3
+  - BD: 殲滅領域《白銀絶華》 (arts_id=543)
+    - description: 敵全体に超絶強力な92連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=8 / hit_count=92 / value=2.28261 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Defense Multiply ×1.75 — 全属性の魔剣の防御力が絶大にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - HitCount Addition +6.0 — 魔典の魔剣の1撃目2撃目3撃目のヒット数を+6する
+    - Speed Multiply ×3.0 — 魔典の魔剣のスピードが3倍アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`154302`](weapons.json#L223598) ぎんいろ=ロスト【極】
+  - base_name: ぎんいろ=ロスト (costume: 極魔装)
+  - element=水(2) / type=魔典(11) / rarity=SS(4) / cv=山下七海
+  - max stats: HP=13000 / ATK=17940 / DEF=14300 / SPD=45 / BREAK=1690
+  - hit_counts=[10, 8, 16] (3段)  motion_speed=[1.2/1.8/1.0]  mp=620
+  - three_size=70/57/72 / initial_slot=4
+  - BD: 殲滅領域《白銀絶華》 (arts_id=543)
+    - description: 敵全体に超絶強力な92連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=8 / hit_count=92 / value=2.28261 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Defense Multiply ×2.0 — 全属性の魔剣の防御力が超絶大アップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - HitCount Addition +6.0 — 魔典の魔剣の1撃目2撃目3撃目のヒット数を+6する
+    - Speed Multiply ×3.0 — 魔典の魔剣のスピードが3倍アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`154601`](weapons.json#L224592) 天帝ユリウス
+  - base_name: 天帝ユリウス (costume: 魔装)
+  - element=光(4) / type=弓矢(5) / rarity=SS(4) / cv=丸岡和佳奈
+  - max stats: HP=12000 / ATK=14500 / DEF=10000 / SPD=27 / BREAK=1000
+  - hit_counts=[3, 6, 9] (3段)  motion_speed=[2.0/1.5/1.1]  mp=540
+  - three_size=64/52/71 / initial_slot=2
+  - BD: 神権降臨《セレスタルディクテイター》 (arts_id=546)
+    - description: 敵全体に超絶強力な28連ダメージ＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度とスピードが30倍
+    - cost=8 / hit_count=28 / value=7.0 / additional_value=0.0
+  - innate skills (4):
+    - Speed Multiply ×1.75 — 光属性の魔剣の行動速度が絶大にアップ
+    - Attack Multiply ×1.74232 — 光属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×1.25 — 光属性の魔剣がかなりガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`154602`](weapons.json#L224811) 天帝ユリウス【極】
+  - base_name: 天帝ユリウス (costume: 極魔装)
+  - element=光(4) / type=弓矢(5) / rarity=SS(4) / cv=丸岡和佳奈
+  - max stats: HP=15600 / ATK=18850 / DEF=13000 / SPD=27 / BREAK=1300
+  - hit_counts=[4, 6, 12] (3段)  motion_speed=[2.0/1.5/1.1]  mp=540
+  - three_size=64/52/71 / initial_slot=3
+  - BD: 神権降臨《セレスタルディクテイター》 (arts_id=546)
+    - description: 敵全体に超絶強力な28連ダメージ＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度とスピードが30倍
+    - cost=8 / hit_count=28 / value=7.0 / additional_value=0.0
+  - innate skills (4):
+    - Speed Multiply ×2.0 — 光属性の魔剣の行動速度が超絶大アップ
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×1.5 — 光属性の魔剣が大幅にガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`154701`](weapons.json#L225030) 妙純傳持･八咫=ソハヤ
+  - base_name: 妙純傳持･八咫=ソハヤ (costume: 魔装)
+  - element=闇(5) / type=太刀(3) / rarity=SS(4) / cv=星谷美緒
+  - max stats: HP=8800 / ATK=20100 / DEF=6100 / SPD=28 / BREAK=2000
+  - hit_counts=[5, 3, 8] (3段)  motion_speed=[3.5/3.5/1.2]  mp=679
+  - three_size=68/49/65 / initial_slot=3
+  - BD: 神鏡反転《最強オブ最強の漆黒》 (arts_id=547)
+    - description: 敵全体に超絶強力な64連ダメージ＆数秒だけﾓｰｼｮﾝ2倍高速化
+    - cost=9 / hit_count=64 / value=3.81 / additional_value=0.0
+  - innate skills (5):
+    - HitCount Addition +4.0 — 太刀の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - MotionSpeed Multiply ×2.33 — 太刀の魔剣の攻撃モーションが絶大に加速
+    - Break_Attack Multiply ×2.0 — 自身が破損状態になると攻撃力がかなりアップ
+    - DamageLimitBreak Addition +1500000000.0 — 自身のダメージ上限が15億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`154702`](weapons.json#L225244) 妙純傳持･八咫=ソハヤ【極】
+  - base_name: 妙純傳持･八咫=ソハヤ (costume: 極魔装)
+  - element=闇(5) / type=太刀(3) / rarity=SS(4) / cv=星谷美緒
+  - max stats: HP=11440 / ATK=26130 / DEF=7930 / SPD=28 / BREAK=2600
+  - hit_counts=[6, 3, 11] (3段)  motion_speed=[3.5/3.5/1.2]  mp=679
+  - three_size=68/49/65 / initial_slot=4
+  - BD: 神鏡反転《最強オブ最強の漆黒》 (arts_id=547)
+    - description: 敵全体に超絶強力な64連ダメージ＆数秒だけﾓｰｼｮﾝ2倍高速化
+    - cost=9 / hit_count=64 / value=3.81 / additional_value=0.0
+  - innate skills (5):
+    - HitCount Addition +4.0 — 太刀の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - MotionSpeed Multiply ×2.33 — 太刀の魔剣の攻撃モーションが絶大に加速
+    - Break_Attack Multiply ×2.5 — 自身が破損状態になると攻撃力が大幅にアップ
+    - DamageLimitBreak Addition +1500000000.0 — 自身のダメージ上限が15億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`155201`](weapons.json#L229740) ミョルニル=マグナ=ロスト
+  - base_name: ミョルニル=マグナ=ロスト (costume: 魔装)
+  - element=火(1) / type=連弩(6) / rarity=SS(4) / cv=高野麻里佳
+  - max stats: HP=16000 / ATK=12686 / DEF=11000 / SPD=33 / BREAK=1600
+  - hit_counts=[11, 10, 12] (3段)  motion_speed=[3.0/2.1/1.1]  mp=688
+  - three_size=勝負はしないよ / initial_slot=3
+  - BD: 万世に横臥せし純然たる真理 (arts_id=552)
+    - description: 敵全体に超強力な68連ダメージ＆30秒サファイア1.5倍
+    - cost=7 / hit_count=68 / value=2.16176 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 火属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - SapphireDrop Multiply ×2.0 — 火属性の魔剣の獲得するサファイアの量がかなり増加
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`155202`](weapons.json#L229954) ミョルニル=マグナ=ロスト【極】
+  - base_name: ミョルニル=マグナ=ロスト (costume: 極魔装)
+  - element=火(1) / type=連弩(6) / rarity=SS(4) / cv=高野麻里佳
+  - max stats: HP=20800 / ATK=16500 / DEF=14300 / SPD=33 / BREAK=2080
+  - hit_counts=[12, 10, 15] (3段)  motion_speed=[3.0/2.1/1.1]  mp=688
+  - three_size=勝負はしないよ / initial_slot=4
+  - BD: 万世に横臥せし純然たる真理 (arts_id=552)
+    - description: 敵全体に超強力な68連ダメージ＆30秒サファイア1.5倍
+    - cost=7 / hit_count=68 / value=2.16176 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 火属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - SapphireDrop Multiply ×3.0 — 火属性の魔剣の獲得するサファイアの量が大幅に増加
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`156301`](weapons.json#L234225) 偽聖剣エクスカリバー≠ロスト
+  - base_name: 偽聖剣エクスカリバー≠ロスト (costume: 魔装)
+  - element=光(4) / type=投擲(9) / rarity=SS(4) / cv=長縄まりあ
+  - max stats: HP=16500 / ATK=13600 / DEF=9500 / SPD=36 / BREAK=3200
+  - hit_counts=[11, 2, 5] (3段)  motion_speed=[2.0/1.8/1.2]  mp=660
+  - three_size=75/51/75 / initial_slot=3
+  - BD: ERASE≠VICE《遵奉せし真約の刃》 (arts_id=563)
+    - description: 敵全体に超絶強力な106連ダメージ＆1wave自身ﾓｰｼｮﾝ13倍＆ダメージ上限13億上昇
+    - cost=9 / hit_count=106 / value=3.0 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×5.0 — 自身の攻撃力が5倍
+    - BlazeAbsorb Repel_Percent ×100.0 — 光属性の勇気分解を完全回避
+    - SapphireDrop Multiply ×3.0 — 自分の獲得するサファイアの量が大幅に増加
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`156302`](weapons.json#L234470) 偽聖剣エクスカリバー≠ロスト【極】
+  - base_name: 偽聖剣エクスカリバー≠ロスト (costume: 極魔装)
+  - element=光(4) / type=投擲(9) / rarity=SS(4) / cv=長縄まりあ
+  - max stats: HP=21450 / ATK=17680 / DEF=12350 / SPD=36 / BREAK=4160
+  - hit_counts=[12, 2, 8] (3段)  motion_speed=[2.0/1.8/1.2]  mp=660
+  - three_size=75/51/75 / initial_slot=4
+  - BD: ERASE≠VICE《遵奉せし真約の刃》 (arts_id=563)
+    - description: 敵全体に超絶強力な106連ダメージ＆1wave自身ﾓｰｼｮﾝ13倍＆ダメージ上限13億上昇
+    - cost=9 / hit_count=106 / value=3.0 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×5.0 — 自身の攻撃力が5倍
+    - BlazeAbsorb Repel_Percent ×100.0 — 光属性の勇気分解を完全回避
+    - SapphireDrop Multiply ×4.0 — 自分の獲得するサファイアの量が絶大に増加
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`156901`](weapons.json#L236851) マンイーター=スピカ
+  - base_name: マンイーター=スピカ (costume: 魔装)
+  - element=水(2) / type=投擲(9) / rarity=SS(4) / cv=金元寿子
+  - max stats: HP=5300 / ATK=23000 / DEF=8200 / SPD=40 / BREAK=8000
+  - hit_counts=[5, 5, 6] (3段)  motion_speed=[2.1/2.1/1.2]  mp=390
+  - three_size=72/54/72 / initial_slot=3
+  - BD: 榮轟皆毀＝嚇シテ冥フ幾星葬 (arts_id=569)
+    - description: 敵全体に超強力な45連ダメージ＆30秒間防御力2倍
+    - cost=6 / hit_count=45 / value=2.89 / additional_value=0.0
+  - innate skills (7):
+    - RemHP_Attack Multiply ×2.5 — 残HPが少ないほど攻撃力がアップ(最大2.5倍)
+    - RemHP_Speed Multiply ×2.5 — 残HPが少ないほどスピードがアップ(最大2.5倍)
+    - RemHP_MotionSpeed Multiply ×2.5 — 残HPが少ないほどモーション速度がアップ(最大2.5倍)
+    - RemHP_Sapphire Multiply ×2.5 — 残HPが少ないほどサファイア獲得量がアップ(最大2.5倍)
+    - RemHP_PlayerHit Multiply ×1.3 — 残HPが少ないほど命中率がアップ（最大1.3倍）
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`156902`](weapons.json#L237103) マンイーター=スピカ【極】
+  - base_name: マンイーター=スピカ (costume: 極魔装)
+  - element=水(2) / type=投擲(9) / rarity=SS(4) / cv=金元寿子
+  - max stats: HP=6890 / ATK=29900 / DEF=10660 / SPD=40 / BREAK=10400
+  - hit_counts=[6, 5, 9] (3段)  motion_speed=[2.1/2.1/1.2]  mp=390
+  - three_size=72/54/72 / initial_slot=4
+  - BD: 榮轟皆毀＝嚇シテ冥フ幾星葬 (arts_id=569)
+    - description: 敵全体に超強力な45連ダメージ＆30秒間防御力2倍
+    - cost=6 / hit_count=45 / value=2.89 / additional_value=0.0
+  - innate skills (7):
+    - RemHP_Attack Multiply ×2.5 — 残HPが少ないほど攻撃力がアップ(最大2.5倍)
+    - RemHP_Speed Multiply ×2.5 — 残HPが少ないほどスピードがアップ(最大2.5倍)
+    - RemHP_MotionSpeed Multiply ×2.5 — 残HPが少ないほどモーション速度がアップ(最大2.5倍)
+    - RemHP_Sapphire Multiply ×2.5 — 残HPが少ないほどサファイア獲得量がアップ(最大2.5倍)
+    - RemHP_PlayerHit Multiply ×1.3 — 残HPが少ないほど命中率がアップ（最大1.3倍）
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`157001`](weapons.json#L237355) 麒麟円文螺鈿白櫃
+  - base_name: 麒麟円文螺鈿白櫃 (costume: 魔装)
+  - element=無(6) / type=魔典(11) / rarity=SS(4) / cv=近藤玲奈
+  - max stats: HP=13500 / ATK=14840 / DEF=10400 / SPD=41 / BREAK=3850
+  - hit_counts=[5, 5, 9] (3段)  motion_speed=[1.8/1.8/1.0]  mp=540
+  - three_size=93/59/82 / initial_slot=3
+  - BD: 欠して刎ねぬ彩大限の棺たれ (arts_id=570)
+    - description: 敵全体に超強力な49連ダメージ＆味方HP回復
+    - cost=8 / hit_count=49 / value=2.95 / additional_value=0.0
+  - innate skills (4):
+    - HitCount Addition +4.0 — 全属性の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - Speed Multiply ×1.75 — 全属性の魔剣の行動速度が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`157002`](weapons.json#L237550) 麒麟円文螺鈿白櫃【極】
+  - base_name: 麒麟円文螺鈿白櫃 (costume: 極魔装)
+  - element=無(6) / type=魔典(11) / rarity=SS(4) / cv=近藤玲奈
+  - max stats: HP=17550 / ATK=19300 / DEF=13520 / SPD=41 / BREAK=5010
+  - hit_counts=[6, 5, 12] (3段)  motion_speed=[1.8/1.8/1.0]  mp=540
+  - three_size=93/59/82 / initial_slot=4
+  - BD: 欠して刎ねぬ彩大限の棺たれ (arts_id=570)
+    - description: 敵全体に超強力な49連ダメージ＆味方HP回復
+    - cost=8 / hit_count=49 / value=2.95 / additional_value=0.0
+  - innate skills (4):
+    - HitCount Addition +4.0 — 全属性の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ
+    - Speed Multiply ×2.0 — 全属性の魔剣の行動速度が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`157601`](weapons.json#L239814) 神竜機関バハムート=ロスト
+  - base_name: 神竜機関バハムート=ロスト (costume: 魔装)
+  - element=無(6) / type=拳闘(10) / rarity=SS(4) / cv=竹達彩奈
+  - max stats: HP=24000 / ATK=13000 / DEF=12300 / SPD=31 / BREAK=2100
+  - hit_counts=[13, 13, 7] (3段)  motion_speed=[2.2/2.0/1.2]  mp=613
+  - three_size=69/52/67 / initial_slot=3
+  - BD: 《ⅩⅢ》ドライツェン=ドミニエ=ディ=ヴェイト (arts_id=576)
+    - description: 敵全体に超絶強力な66連ダメージ＆数秒間攻撃力13倍
+    - cost=7 / hit_count=66 / value=3.1 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - RemHP_Attack Multiply ×2.5 — 拳闘の味方全体が、残HPが少ないほど攻撃力アップ(最大2.5倍)
+    - RemHP_Attack Multiply ×2.5 — 大剣の味方全体が、残HPが少ないほど攻撃力アップ(最大2.5倍)
+    - FellDown_Attack Multiply ×0.001 — 同セットの魔剣が倒されると自攻撃力が超ダウン
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`157602`](weapons.json#L240066) 神竜機関バハムート=ロスト【極】
+  - base_name: 神竜機関バハムート=ロスト (costume: 極魔装)
+  - element=無(6) / type=拳闘(10) / rarity=SS(4) / cv=竹達彩奈
+  - max stats: HP=31200 / ATK=16900 / DEF=15990 / SPD=31 / BREAK=2730
+  - hit_counts=[14, 13, 10] (3段)  motion_speed=[2.2/2.0/1.2]  mp=613
+  - three_size=69/52/67 / initial_slot=4
+  - BD: 《ⅩⅢ》ドライツェン=ドミニエ=ディ=ヴェイト (arts_id=576)
+    - description: 敵全体に超絶強力な66連ダメージ＆数秒間攻撃力13倍
+    - cost=7 / hit_count=66 / value=3.1 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - RemHP_Attack Multiply ×2.5 — 拳闘の味方全体が、残HPが少ないほど攻撃力アップ(最大2.5倍)
+    - RemHP_Attack Multiply ×2.5 — 大剣の味方全体が、残HPが少ないほど攻撃力アップ(最大2.5倍)
+    - FellDown_Attack Multiply ×0.001 — 同セットの魔剣が倒されると自攻撃力が超ダウン
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`158601`](weapons.json#L243847) マカナ
+  - base_name: マカナ (costume: 魔装)
+  - element=風(3) / type=大鎌(12) / rarity=A(1) / cv=市川ひかる
+  - max stats: HP=3200 / ATK=1900 / DEF=1400 / SPD=19 / BREAK=800
+  - hit_counts=[1, 2, 3] (3段)  motion_speed=[2.5/2.0/1.0]  mp=150
+  - three_size=59/48/50 / initial_slot=1
+  - BD: マーシー･オブ･ザ･サン (arts_id=586)
+    - description: 敵全体に10連ダメージ＆30秒間攻撃力10%UP
+    - cost=5 / hit_count=10 / value=5.5 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.15 — 風属性の魔剣の攻撃モーションが少し加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`158602`](weapons.json#L244004) マカナ【極】
+  - base_name: マカナ (costume: 極魔装)
+  - element=風(3) / type=大鎌(12) / rarity=A(1) / cv=市川ひかる
+  - max stats: HP=4160 / ATK=2470 / DEF=1820 / SPD=19 / BREAK=1040
+  - hit_counts=[2, 2, 6] (3段)  motion_speed=[2.5/2.0/1.0]  mp=150
+  - three_size=59/48/50 / initial_slot=1
+  - BD: マーシー･オブ･ザ･サン (arts_id=586)
+    - description: 敵全体に10連ダメージ＆30秒間攻撃力10%UP
+    - cost=5 / hit_count=10 / value=5.5 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.15 — 風属性の魔剣の攻撃モーションが少し加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`158801`](weapons.json#L244575) レヴァンテイン=ビースト
+  - base_name: レヴァンテイン=ビースト (costume: 魔装)
+  - element=火(1) / type=戦斧(7) / rarity=SS(4) / cv=綾瀬有
+  - max stats: HP=13800 / ATK=11500 / DEF=7500 / SPD=41 / BREAK=3400
+  - hit_counts=[3, 7, 15] (3段)  motion_speed=[1.8/2.0/1.2]  mp=560
+  - three_size=60/55/67 / initial_slot=3
+  - BD: 妖狐天焉･玉屋鍵屋之大業火 (arts_id=588)
+    - description: 敵全体に超絶強力な35連ダメージ＆敵を強制ブレイク
+    - cost=6 / hit_count=35 / value=4.5 / additional_value=0.0
+  - innate skills (6):
+    - Enemy_BreakAttack Multiply ×7.0 — ブレイク時に自身の攻撃力が7倍アップ
+    - Attack Multiply ×1.74232 — 火属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×1.75 — 火属性の魔剣が絶大にガードブレイクしやすく
+    - Defense Multiply ×1.75 — 火属性の魔剣の防御力が絶大にアップ
+    - DamageLimitBreak Addition +1993880000.0 — 自身のダメージ上限が20億アップ【熟度UPで効果値がUP（最大約26億）】
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`158802`](weapons.json#L244808) レヴァンテイン=ビースト【極】
+  - base_name: レヴァンテイン=ビースト (costume: 極魔装)
+  - element=火(1) / type=戦斧(7) / rarity=SS(4) / cv=綾瀬有
+  - max stats: HP=17940 / ATK=14950 / DEF=9750 / SPD=41 / BREAK=4420
+  - hit_counts=[4, 7, 18] (3段)  motion_speed=[1.8/2.0/1.2]  mp=560
+  - three_size=60/55/67 / initial_slot=4
+  - BD: 妖狐天焉･玉屋鍵屋之大業火 (arts_id=588)
+    - description: 敵全体に超絶強力な35連ダメージ＆敵を強制ブレイク
+    - cost=6 / hit_count=35 / value=4.5 / additional_value=0.0
+  - innate skills (6):
+    - Enemy_BreakAttack Multiply ×7.0 — ブレイク時に自身の攻撃力が7倍アップ
+    - Attack Multiply ×2.0 — 火属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×2.0 — 火属性の魔剣が超絶大にガードブレイクしやすく
+    - Defense Multiply ×2.0 — 火属性の魔剣の防御力が超絶大アップ
+    - DamageLimitBreak Addition +1993880000.0 — 自身のダメージ上限が20億アップ【熟度UPで効果値がUP（最大約26億）】
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`159201`](weapons.json#L246273) 御神拳マカミ
+  - base_name: 御神拳マカミ (costume: 魔装)
+  - element=水(2) / type=拳闘(10) / rarity=S(3) / cv=天海由梨奈
+  - max stats: HP=10200 / ATK=7400 / DEF=3900 / SPD=33 / BREAK=2300
+  - hit_counts=[3, 3, 6] (3段)  motion_speed=[1.6/1.6/1.2]  mp=360
+  - three_size=78/56/74 / initial_slot=3
+  - BD: 御神犬･氷武ノ追牙 (arts_id=592)
+    - description: 敵全体に超強力な22連ダメージ＆数秒だけﾓｰｼｮﾝ2倍高速化
+    - cost=4 / hit_count=22 / value=3.52 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×2.0 — 全属性の魔剣の攻撃モーションが大幅に加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`159202`](weapons.json#L246430) 御神拳マカミ【極】
+  - base_name: 御神拳マカミ (costume: 極魔装)
+  - element=水(2) / type=拳闘(10) / rarity=S(3) / cv=天海由梨奈
+  - max stats: HP=13260 / ATK=9620 / DEF=5070 / SPD=33 / BREAK=2990
+  - hit_counts=[4, 3, 9] (3段)  motion_speed=[1.6/1.6/1.2]  mp=360
+  - three_size=78/56/74 / initial_slot=4
+  - BD: 御神犬･氷武ノ追牙 (arts_id=592)
+    - description: 敵全体に超強力な22連ダメージ＆数秒だけﾓｰｼｮﾝ2倍高速化
+    - cost=4 / hit_count=22 / value=3.52 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×2.33 — 全属性の魔剣の攻撃モーションが絶大に加速
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`159901`](weapons.json#L248961) ダインスレイフ=ビースト
+  - base_name: ダインスレイフ=ビースト (costume: 魔装)
+  - element=闇(5) / type=大鎌(12) / rarity=SS(4) / cv=山村響
+  - max stats: HP=17200 / ATK=14200 / DEF=5100 / SPD=32 / BREAK=2300
+  - hit_counts=[3, 6, 10] (3段)  motion_speed=[1.8/1.8/1.0]  mp=333
+  - three_size=みんなちょっと違うの…♥/46/66 / initial_slot=2
+  - BD: ブラッドライン†レゾナンス (arts_id=599)
+    - description: 敵全体に超絶強力な99連ダメージ＆20秒攻防スピードが20%UP
+    - cost=9 / hit_count=99 / value=2.85 / additional_value=0.0
+  - innate skills (5):
+    - RemHP_Attack Multiply ×3.0 — 闇属性の味方全体が、残HPが少ないほど攻撃力がアップ(最大3倍)【熟度UPで効果値がUP（最大4.48倍）】
+    - RemHP_MotionSpeed Multiply ×3.0 — 闇属性の味方全体が、残HPが少ないほどモーション速度が絶大にアップ(最大3倍)
+    - Defense Multiply ×1.5 — 闇属性の魔剣の防御力が大幅にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 闇属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`159902`](weapons.json#L249199) ダインスレイフ=ビースト【極】
+  - base_name: ダインスレイフ=ビースト (costume: 極魔装)
+  - element=闇(5) / type=大鎌(12) / rarity=SS(4) / cv=山村響
+  - max stats: HP=22360 / ATK=18460 / DEF=6630 / SPD=32 / BREAK=2990
+  - hit_counts=[4, 8, 14] (3段)  motion_speed=[1.8/1.8/1.0]  mp=333
+  - three_size=みんなちょっと違うの…♥/46/66 / initial_slot=3
+  - BD: ブラッドライン†レゾナンス (arts_id=599)
+    - description: 敵全体に超絶強力な99連ダメージ＆20秒攻防スピードが20%UP
+    - cost=9 / hit_count=99 / value=2.85 / additional_value=0.0
+  - innate skills (5):
+    - RemHP_Attack Multiply ×3.0 — 闇属性の味方全体が、残HPが少ないほど攻撃力がアップ(最大3倍)【熟度UPで効果値がUP（最大4.48倍）】
+    - RemHP_MotionSpeed Multiply ×3.0 — 闇属性の味方全体が、残HPが少ないほどモーション速度が絶大にアップ(最大3倍)
+    - Defense Multiply ×1.75 — 闇属性の魔剣の防御力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 闇属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`160801`](weapons.json#L252305) 神兎カルバノグ
+  - base_name: 神兎カルバノグ (costume: 魔装)
+  - element=闇(5) / type=連弩(6) / rarity=SS(4) / cv=高尾奏音
+  - max stats: HP=10000 / ATK=13600 / DEF=6540 / SPD=38 / BREAK=3330
+  - hit_counts=[7, 8, 10] (3段)  motion_speed=[2.0/2.0/1.2]  mp=750
+  - three_size=とっぷしーくれっとですよう♪ / initial_slot=3
+  - BD: みらくるはっぴーうさうさぱにっくう！ (arts_id=608)
+    - description: 敵全体に超強力な42連ダメージ＆数秒だけ時を止めて敵と｢なかよし｣する＆自分のスピードが25%UP
+    - cost=6 / hit_count=42 / value=3.1 / additional_value=0.0
+  - innate skills (7):
+    - Vitality_Attack Multiply ×2.0 — 残HPが多いほど攻撃力が超絶大アップ(最大2倍)【熟度UPで効果値が大幅UP(最大3.48倍)】
+    - Vitality_MotionSpeed Multiply ×2.66 — 残HPが多いほどモーション速度が超絶大に加速(最大2.66倍)【熟度UPで効果値が大幅UP(最大3.94倍)】
+    - Vitality_Speed Multiply ×3.0 — 残HPが多いほど行動速度がアップ(最大3倍)
+    - PlayerHit Multiply ×1.5 — 自身の命中率が1.5倍アップ
+    - AnyElement Multiply ×1.0 — 光属性を対象とした他魔剣からのスキル効果を受けられる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`160802`](weapons.json#L252569) 神兎カルバノグ【極】
+  - base_name: 神兎カルバノグ (costume: 極魔装)
+  - element=闇(5) / type=連弩(6) / rarity=SS(4) / cv=高尾奏音
+  - max stats: HP=13000 / ATK=17680 / DEF=8510 / SPD=38 / BREAK=4330
+  - hit_counts=[8, 8, 13] (3段)  motion_speed=[2.0/2.0/1.2]  mp=750
+  - three_size=とっぷしーくれっとですよう♪ / initial_slot=4
+  - BD: みらくるはっぴーうさうさぱにっくう！ (arts_id=608)
+    - description: 敵全体に超強力な42連ダメージ＆数秒だけ時を止めて敵と｢なかよし｣する＆自分のスピードが25%UP
+    - cost=6 / hit_count=42 / value=3.1 / additional_value=0.0
+  - innate skills (7):
+    - Vitality_Attack Multiply ×2.0 — 残HPが多いほど攻撃力が超絶大アップ(最大2倍)【熟度UPで効果値が大幅UP(最大3.48倍)】
+    - Vitality_MotionSpeed Multiply ×2.66 — 残HPが多いほどモーション速度が超絶大に加速(最大2.66倍)【熟度UPで効果値が大幅UP(最大3.94倍)】
+    - Vitality_Speed Multiply ×3.0 — 残HPが多いほど行動速度がアップ(最大3倍)
+    - PlayerHit Multiply ×1.5 — 自身の命中率が1.5倍アップ
+    - AnyElement Multiply ×1.0 — 光属性を対象とした他魔剣からのスキル効果を受けられる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`160901`](weapons.json#L252833) セロトニン
+  - base_name: セロトニン (costume: 魔装)
+  - element=闇(5) / type=魔典(11) / rarity=SS(4) / cv=会沢紗弥
+  - max stats: HP=11800 / ATK=9935 / DEF=11620 / SPD=32 / BREAK=2780
+  - hit_counts=[5, 5, 10] (3段)  motion_speed=[2.0/2.0/1.2]  mp=320
+  - three_size=87/59/85 / initial_slot=2
+  - BD: 幸福絶漲セロトニンショット (arts_id=609)
+    - description: 敵全体に超絶強力な64連ダメージ＆弱体化を解除＆1wave攻撃力13%UP
+    - cost=6 / hit_count=64 / value=2.75 / additional_value=0.0
+  - innate skills (6):
+    - Heal Addition +500.0 — 味方全体が、非行動時にHPが徐々に大回復
+    - DamageLimitBreak Addition +1000000000.0 — 闇属性の魔剣のダメージ上限が10億アップ
+    - Vitality_MotionSpeed Multiply ×4.0 — 闇属性の味方全体が、残HPが多いほどモーション速度が超絶大に加速(最大4倍)
+    - Vitality_Attack Multiply ×1.75 — 闇属性の味方全体が、残HPが多いほど攻撃力が大幅にアップ
+    - Speed Multiply ×0.6 — 味方全体がリラックスしてしまい、スピードがダウン
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`160902`](weapons.json#L253078) セロトニン【極】
+  - base_name: セロトニン (costume: 極魔装)
+  - element=闇(5) / type=魔典(11) / rarity=SS(4) / cv=会沢紗弥
+  - max stats: HP=15340 / ATK=12920 / DEF=15110 / SPD=32 / BREAK=3620
+  - hit_counts=[6, 5, 13] (3段)  motion_speed=[2.0/2.0/1.2]  mp=320
+  - three_size=87/59/85 / initial_slot=3
+  - BD: 幸福絶漲セロトニンショット (arts_id=609)
+    - description: 敵全体に超絶強力な64連ダメージ＆弱体化を解除＆1wave攻撃力13%UP
+    - cost=6 / hit_count=64 / value=2.75 / additional_value=0.0
+  - innate skills (6):
+    - Heal Addition +500.0 — 味方全体が、非行動時にHPが徐々に大回復
+    - DamageLimitBreak Addition +1000000000.0 — 闇属性の魔剣のダメージ上限が10億アップ
+    - Vitality_MotionSpeed Multiply ×4.0 — 闇属性の味方全体が、残HPが多いほどモーション速度が超絶大に加速(最大4倍)
+    - Vitality_Attack Multiply ×2.0 — 闇属性の味方全体が、残HPが多いほど攻撃力が絶大にアップ
+    - Speed Multiply ×0.6 — 味方全体がリラックスしてしまい、スピードがダウン
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`161401`](weapons.json#L254441) ウスサマ
+  - base_name: ウスサマ (costume: 魔装)
+  - element=火(1) / type=魔典(11) / rarity=A(1) / cv=稲垣好
+  - max stats: HP=2730 / ATK=1040 / DEF=790 / SPD=16 / BREAK=380
+  - hit_counts=[4, 3, 7] (3段)  motion_speed=[3.0/3.0/1.2]  mp=75
+  - three_size=70/68/73 / initial_slot=1
+  - BD: 完全消毒ウスサマファイアー (arts_id=614)
+    - description: 敵全体に15連ダメージ＆10秒間攻撃力10%UP
+    - cost=4 / hit_count=15 / value=2.87 / additional_value=0.0
+  - innate skills (2):
+    - HitCount Addition +1.0 — 火属性の魔剣の1撃目2撃目3撃目のヒット数を+1する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`161402`](weapons.json#L254598) ウスサマ【極】
+  - base_name: ウスサマ (costume: 極魔装)
+  - element=火(1) / type=魔典(11) / rarity=A(1) / cv=稲垣好
+  - max stats: HP=3540 / ATK=1340 / DEF=1020 / SPD=16 / BREAK=490
+  - hit_counts=[5, 3, 10] (3段)  motion_speed=[3.0/3.0/1.2]  mp=75
+  - three_size=70/68/73 / initial_slot=1
+  - BD: 完全消毒ウスサマファイアー (arts_id=614)
+    - description: 敵全体に15連ダメージ＆10秒間攻撃力10%UP
+    - cost=4 / hit_count=15 / value=2.87 / additional_value=0.0
+  - innate skills (2):
+    - HitCount Addition +1.0 — 火属性の魔剣の1撃目2撃目3撃目のヒット数を+1する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`161801`](weapons.json#L255905) ラピスフィロソフィア
+  - base_name: ラピスフィロソフィア (costume: 魔装)
+  - element=風(3) / type=魔典(11) / rarity=SS(4) / cv=市ノ瀬加那
+  - max stats: HP=13 / ATK=15410 / DEF=13 / SPD=25 / BREAK=910
+  - hit_counts=[3, 6, 6] (3段)  motion_speed=[2.0/1.6/1.0]  mp=380
+  - three_size=72/58/75 / initial_slot=2
+  - BD: 真理を顕せ黄金錬界 (arts_id=618)
+    - description: 敵全体に消費ゲージ数に応じた77連ダメージ＆ベットとして一瞬モーション速度が超絶ダウンし、リターンとしてしばらくの間攻撃力77%UP
+    - cost=7 / hit_count=77 / value=0.0273 / additional_value=10.0
+  - innate skills (7):
+    - Vitality_Attack Multiply ×1.99232 — 風属性の味方全体が、残HPが多いほど攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_MotionSpeed Multiply ×2.66 — 風属性の味方全体が、残HPが多いほどモーション速度が絶大に加速
+    - Heal Addition +50.0 — 味方全体が、非行動時にHPが徐々に少し回復
+    - HP Addition +7764.0 — 味方全体のHPが+7764
+    - Defense Addition +7764.0 — 味方全体の防御力が+7764
+    - HitCount Addition +7.0 — 風魔典の魔剣の1撃目2撃目3撃目のヒット数を+7する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`161802`](weapons.json#L256169) ラピスフィロソフィア【極】
+  - base_name: ラピスフィロソフィア (costume: 極魔装)
+  - element=風(3) / type=魔典(11) / rarity=SS(4) / cv=市ノ瀬加那
+  - max stats: HP=13 / ATK=20030 / DEF=13 / SPD=25 / BREAK=1180
+  - hit_counts=[4, 6, 9] (3段)  motion_speed=[2.0/1.6/1.0]  mp=380
+  - three_size=72/58/75 / initial_slot=3
+  - BD: 真理を顕せ黄金錬界 (arts_id=618)
+    - description: 敵全体に消費ゲージ数に応じた77連ダメージ＆ベットとして一瞬モーション速度が超絶ダウンし、リターンとしてしばらくの間攻撃力77%UP
+    - cost=7 / hit_count=77 / value=0.0273 / additional_value=10.0
+  - innate skills (7):
+    - Vitality_Attack Multiply ×2.29232 — 風属性の味方全体が、残HPが多いほど攻撃力が超絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_MotionSpeed Multiply ×3.05 — 風属性の味方全体が、残HPが多いほどモーション速度が超絶大に加速
+    - Heal Addition +50.0 — 味方全体が、非行動時にHPが徐々に少し回復
+    - HP Addition +7764.0 — 味方全体のHPが+7764
+    - Defense Addition +7764.0 — 味方全体の防御力が+7764
+    - HitCount Addition +7.0 — 風魔典の魔剣の1撃目2撃目3撃目のヒット数を+7する
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`161901`](weapons.json#L256433) 天煌の冥ミステリオン
+  - base_name: 天煌の冥ミステリオン (costume: 魔装)
+  - element=闇(5) / type=大鎌(12) / rarity=SS(4) / cv=秋奈
+  - max stats: HP=11700 / ATK=20720 / DEF=8970 / SPD=22 / BREAK=5560
+  - hit_counts=[2, 4, 8] (3段)  motion_speed=[2.0/2.0/1.0]  mp=777
+  - three_size=90/51/71 / initial_slot=2
+  - BD: 煌の十天･朧なる神の秘儀再臨 (arts_id=619)
+    - description: 敵全体に超絶強力な7連ダメージ＆77秒間、自身のHPが徐々に回復
+    - cost=7 / hit_count=7 / value=27.0 / additional_value=0.0
+  - innate skills (6):
+    - HitCount Addition +1.951 — 闇属性の味方全体の1～3撃目ヒット数を+2する【熟度21,41,60,80,99でさらに+1(最大+7)】
+    - MotionSpeed Multiply ×2.325 — 闇属性の魔剣の攻撃モーションが絶大に加速【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×1.75 — 闇属性の魔剣が絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に闇属性の魔剣の攻撃力が3.5倍アップ
+    - MotionSpeed Multiply ×0.2 — 火属性の魔剣のモーション速度が超絶大にダウン
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`161902`](weapons.json#L256666) 天煌の冥ミステリオン【極】
+  - base_name: 天煌の冥ミステリオン (costume: 極魔装)
+  - element=闇(5) / type=大鎌(12) / rarity=SS(4) / cv=秋奈
+  - max stats: HP=15200 / ATK=26930 / DEF=11650 / SPD=22 / BREAK=7220
+  - hit_counts=[3, 4, 11] (3段)  motion_speed=[2.0/2.0/1.0]  mp=777
+  - three_size=90/51/71 / initial_slot=3
+  - BD: 煌の十天･朧なる神の秘儀再臨 (arts_id=619)
+    - description: 敵全体に超絶強力な7連ダメージ＆77秒間、自身のHPが徐々に回復
+    - cost=7 / hit_count=7 / value=27.0 / additional_value=0.0
+  - innate skills (6):
+    - HitCount Addition +1.951 — 闇属性の味方全体の1～3撃目ヒット数を+2する【熟度21,41,60,80,99でさらに+1(最大+7)】
+    - MotionSpeed Multiply ×2.652 — 闇属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×2.0 — 闇属性の魔剣が超絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に闇属性の魔剣の攻撃力が3.5倍アップ
+    - MotionSpeed Multiply ×0.2 — 火属性の魔剣のモーション速度が超絶大にダウン
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`162001`](weapons.json#L256899) ネクロノミコン=ロスト
+  - base_name: ネクロノミコン=ロスト (costume: 魔装)
+  - element=火(1) / type=魔典(11) / rarity=SS(4) / cv=浜崎奈々
+  - max stats: HP=10000 / ATK=15120 / DEF=11640 / SPD=21 / BREAK=1170
+  - hit_counts=[4, 2, 3] (3段)  motion_speed=[1.7/1.7/1.2]  mp=331
+  - three_size=77/55/79 / initial_slot=3
+  - BD: 【The Outer God】果しなき魔王の呼び声 (arts_id=620)
+    - description: 敵全体に超絶強力な20連ダメージ＆自分HP回復＆1waveの間、味方のHPが徐々に回復し防御力130%UP
+    - cost=9 / hit_count=20 / value=13.65 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - Raise Multiply ×1.0 — 魔典の魔剣が戦闘不能になっても2回完全復活できる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`162002`](weapons.json#L257156) ネクロノミコン=ロスト【極】
+  - base_name: ネクロノミコン=ロスト (costume: 極魔装)
+  - element=火(1) / type=魔典(11) / rarity=SS(4) / cv=浜崎奈々
+  - max stats: HP=13000 / ATK=19650 / DEF=15130 / SPD=21 / BREAK=1520
+  - hit_counts=[5, 2, 6] (3段)  motion_speed=[1.7/1.7/1.2]  mp=331
+  - three_size=77/55/79 / initial_slot=4
+  - BD: 【The Outer God】果しなき魔王の呼び声                                   (arts_id=620)
+    - description: 敵全体に超絶強力な20連ダメージ＆自分HP回復＆1waveの間、味方のHPが徐々に回復し防御力130%UP
+    - cost=9 / hit_count=20 / value=13.65 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ
+    - Raise Multiply ×1.0 — 魔典の魔剣が戦闘不能になっても2回完全復活できる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`162701`](weapons.json#L258707) バグイーター
+  - base_name: バグイーター (costume: 魔装)
+  - element=水(2) / type=拳闘(10) / rarity=S(3) / cv=秋奈
+  - max stats: HP=6100 / ATK=2920 / DEF=5760 / SPD=65 / BREAK=410
+  - hit_counts=[7, 6, 8] (3段)  motion_speed=[2.0/2.0/1.6]  mp=189
+  - three_size=65/54/69 / initial_slot=3
+  - BD: もしくは搾取される空想 (arts_id=627)
+    - description: 敵全体に超強力な47連ダメージ＆13秒だけ敵の動きを止める
+    - cost=4 / hit_count=47 / value=1.65 / additional_value=0.0
+  - innate skills (4):
+    - RemHP_Attack Multiply ×1.65 — 水属性の味方全体が、残HPが少ないほど攻撃力がかなりアップ
+    - RemHP_MotionSpeed Multiply ×2.25 — 水属性の味方全体が、残HPが少ないほどモーション速度がかなり加速
+    - RemHP_Speed Multiply ×1.65 — 水属性の味方全体が、残HPが少ないほどスピードがかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`162702`](weapons.json#L258902) バグイーター【極】
+  - base_name: バグイーター (costume: 極魔装)
+  - element=水(2) / type=拳闘(10) / rarity=S(3) / cv=秋奈
+  - max stats: HP=7930 / ATK=3790 / DEF=7480 / SPD=65 / BREAK=530
+  - hit_counts=[8, 6, 11] (3段)  motion_speed=[2.0/2.0/1.6]  mp=189
+  - three_size=65/54/69 / initial_slot=4
+  - BD: もしくは搾取される空想 (arts_id=627)
+    - description: 敵全体に超強力な47連ダメージ＆13秒だけ敵の動きを止める
+    - cost=4 / hit_count=47 / value=1.65 / additional_value=0.0
+  - innate skills (4):
+    - RemHP_Attack Multiply ×1.8 — 水属性の味方全体が、残HPが少ないほど攻撃力が大幅にアップ
+    - RemHP_MotionSpeed Multiply ×2.4 — 水属性の味方全体が、残HPが少ないほどモーション速度が大幅に加速
+    - RemHP_Speed Multiply ×1.8 — 水属性の味方全体が、残HPが少ないほどスピードが大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`165401`](weapons.json#L263637) バールのようなもの=ビースト
+  - base_name: バールのようなもの=ビースト (costume: 魔装)
+  - element=無(6) / type=戦斧(7) / rarity=SS(4) / cv=末柄里恵
+  - max stats: HP=14160 / ATK=13700 / DEF=8310 / SPD=44 / BREAK=8000
+  - hit_counts=[12, 1, 10] (3段)  motion_speed=[1.8/1.3/1.2]  mp=340
+  - three_size=95/58/87 / initial_slot=3
+  - BD: 絶対絶滅マッドネスビースト (arts_id=654)
+    - description: 敵全体に超強力な84連ダメージ＆30秒間敵の動きを止め、30秒間500ずつ味方HP回復
+    - cost=7 / hit_count=84 / value=1.75 / additional_value=0.0
+  - innate skills (6):
+    - Enemy_BreakAttack Multiply ×10.0 — ブレイク時に自身の攻撃力が10倍【熟度上昇で効果UP（最大13倍）】
+    - MotionSpeed Multiply ×2.33 — 全属性の魔剣の攻撃モーションが絶大に加速
+    - AnyElement Multiply ×1.0 — 光属性を対象とした他魔剣からのスキル効果を受けられる
+    - AnyElement Multiply ×1.0 — 闇属性を対象とした他魔剣からのスキル効果を受けられる
+    - DamageLimitBreak Addition +1300000000.0 — 自身のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`165402`](weapons.json#L263882) バールのようなもの=ビースト【極】
+  - base_name: バールのようなもの=ビースト (costume: 極魔装)
+  - element=無(6) / type=戦斧(7) / rarity=SS(4) / cv=末柄里恵
+  - max stats: HP=18400 / ATK=17800 / DEF=10800 / SPD=44 / BREAK=10390
+  - hit_counts=[13, 1, 13] (3段)  motion_speed=[1.8/1.3/1.2]  mp=340
+  - three_size=95/58/87 / initial_slot=4
+  - BD: 絶対絶滅マッドネスビースト (arts_id=654)
+    - description: 敵全体に超強力な84連ダメージ＆30秒間敵の動きを止め、30秒間500ずつ味方HP回復
+    - cost=7 / hit_count=84 / value=1.75 / additional_value=0.0
+  - innate skills (6):
+    - Enemy_BreakAttack Multiply ×10.0 — ブレイク時に自身の攻撃力が10倍【熟度上昇で効果UP（最大13倍）】
+    - MotionSpeed Multiply ×2.66 — 全属性の魔剣の攻撃モーションが超絶大に加速
+    - AnyElement Multiply ×1.0 — 光属性を対象とした他魔剣からのスキル効果を受けられる
+    - AnyElement Multiply ×1.0 — 闇属性を対象とした他魔剣からのスキル効果を受けられる
+    - DamageLimitBreak Addition +1300000000.0 — 自身のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`165901`](weapons.json#L264603) 焔華剣テュフォーン
+  - base_name: 焔華剣テュフォーン (costume: 魔装)
+  - element=火(1) / type=拳闘(10) / rarity=SS(4) / cv=Lynn
+  - max stats: HP=14660 / ATK=15650 / DEF=5540 / SPD=50 / BREAK=2590
+  - hit_counts=[10, 6, 10] (3段)  motion_speed=[2.2/2.2/1.2]  mp=1300
+  - three_size=111/65/89 / initial_slot=3
+  - BD: 原初の灼焔《The Flame》 (arts_id=659)
+    - description: 敵全体に超絶強力な160連ダメージ＆13秒間サファイア量2倍
+    - cost=9 / hit_count=160 / value=1.71 / additional_value=0.0
+  - innate skills (7):
+    - DamageLimitBreak Addition +1300000000.0 — 味方全体のダメージ上限が13億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - GuardBreak Multiply ×1.75 — 火属性の魔剣のブレイク力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Attack Multiply ×13.0 — 残HPが多いほど攻撃力がアップ(最大13倍)
+    - Vitality_BlazeAttack Multiply ×13.0 — 残HPが多いほどB.D.攻撃力がアップ(最大13倍)
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`165902`](weapons.json#L264855) 焔華剣テュフォーン【極】
+  - base_name: 焔華剣テュフォーン (costume: 極魔装)
+  - element=火(1) / type=拳闘(10) / rarity=SS(4) / cv=Lynn
+  - max stats: HP=19050 / ATK=20340 / DEF=7200 / SPD=50 / BREAK=3360
+  - hit_counts=[11, 6, 13] (3段)  motion_speed=[2.2/2.2/1.2]  mp=1300
+  - three_size=111/65/89 / initial_slot=4
+  - BD: 原初の灼焔《The Flame》 (arts_id=659)
+    - description: 敵全体に超絶強力な160連ダメージ＆13秒間サファイア量2倍
+    - cost=9 / hit_count=160 / value=1.71 / additional_value=0.0
+  - innate skills (7):
+    - DamageLimitBreak Addition +1300000000.0 — 味方全体のダメージ上限が13億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - GuardBreak Multiply ×2.0 — 火属性の魔剣のブレイク力が超絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Attack Multiply ×13.0 — 残HPが多いほど攻撃力がアップ(最大13倍)
+    - Vitality_BlazeAttack Multiply ×13.0 — 残HPが多いほどB.D.攻撃力がアップ(最大13倍)
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`166301`](weapons.json#L266287) ラベンダー
+  - base_name: ラベンダー (costume: 魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=S(3) / cv=朝井彩加
+  - max stats: HP=15770 / ATK=4300 / DEF=6160 / SPD=15 / BREAK=330
+  - hit_counts=[5, 3, 5] (3段)  motion_speed=[2.0/2.0/1.4]  mp=191
+  - three_size=ボクのサイズには価値ないです…！ / initial_slot=3
+  - BD: シークレット･ラストノーツ (arts_id=663)
+    - description: 敵全体に超強力な33連ダメージ＆30秒間ヒット数が+6
+    - cost=4 / hit_count=33 / value=2.35 / additional_value=0.0
+  - innate skills (2):
+    - BlazeGauge Addition +100.0 — バトル開始時にブレイズゲージが上昇する(1ゲージ)
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`166302`](weapons.json#L266444) ラベンダー【極】
+  - base_name: ラベンダー (costume: 極魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=S(3) / cv=朝井彩加
+  - max stats: HP=20500 / ATK=5580 / DEF=8000 / SPD=15 / BREAK=420
+  - hit_counts=[6, 3, 8] (3段)  motion_speed=[2.0/2.0/1.4]  mp=191
+  - three_size=ボクのサイズには価値ないです…！ / initial_slot=4
+  - BD: シークレット･ラストノーツ (arts_id=663)
+    - description: 敵全体に超強力な33連ダメージ＆30秒間ヒット数が+6
+    - cost=4 / hit_count=33 / value=2.35 / additional_value=0.0
+  - innate skills (2):
+    - BlazeGauge Addition +200.0 — バトル開始時にブレイズゲージが上昇する(2ゲージ)
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`166501`](weapons.json#L266991) バハムート=オメガ:Blaze
+  - base_name: バハムート=オメガ:Blaze (costume: 魔装)
+  - element=無(6) / type=拳闘(10) / rarity=SS(4) / cv=竹達彩奈
+  - max stats: HP=15430 / ATK=20620 / DEF=7540 / SPD=38 / BREAK=3970
+  - hit_counts=[3, 3, 10] (3段)  motion_speed=[2.1/2.0/1.1]  mp=1250
+  - three_size=70/53/68 / initial_slot=3
+  - BD: 零式竜王機構･無色ナル熾天輪廻 (arts_id=665)
+    - description: 敵全体に超絶強力な48連ダメージ＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度が30倍
+    - cost=4 / hit_count=48 / value=2.18 / additional_value=0.0
+  - innate skills (6):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - DamageLimitBreak Addition +1000000000.0 — 無属性の魔剣のダメージ上限が10億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGauge Addition +150.0 — バトル開始時に、無属性魔剣の数に応じてブレイズゲージが上昇する(最大4.5ゲージ)
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に無属性の魔剣の攻撃力が3.5倍アップ
+    - Raise Multiply ×0.5 — 味方全体が戦闘不能になっても3回HP50%で復活できる
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`166502`](weapons.json#L267236) バハムート=オメガ:Blaze【極】
+  - base_name: バハムート=オメガ:Blaze (costume: 極魔装)
+  - element=無(6) / type=拳闘(10) / rarity=SS(4) / cv=竹達彩奈
+  - max stats: HP=20050 / ATK=26800 / DEF=9800 / SPD=38 / BREAK=5150
+  - hit_counts=[4, 3, 13] (3段)  motion_speed=[2.1/2.0/1.1]  mp=1250
+  - three_size=70/53/68 / initial_slot=4
+  - BD: 零式竜王機構･無色ナル熾天輪廻 (arts_id=665)
+    - description: 敵全体に超絶強力な48連ダメージ＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度が30倍
+    - cost=4 / hit_count=48 / value=2.18 / additional_value=0.0
+  - innate skills (6):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - DamageLimitBreak Addition +1000000000.0 — 無属性の魔剣のダメージ上限が10億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGauge Addition +150.0 — バトル開始時に、無属性魔剣の数に応じてブレイズゲージが上昇する(最大4.5ゲージ)
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に無属性の魔剣の攻撃力が3.5倍アップ
+    - Raise Multiply ×0.5 — 味方全体が戦闘不能になっても3回HP50%で復活できる
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`166801`](weapons.json#L268171) ナナツサヤ=ビースト
+  - base_name: ナナツサヤ=ビースト (costume: 魔装)
+  - element=水(2) / type=戦斧(7) / rarity=SS(4) / cv=駒形友梨
+  - max stats: HP=14000 / ATK=16230 / DEF=6310 / SPD=42 / BREAK=4330
+  - hit_counts=[5, 4, 8] (3段)  motion_speed=[1.8/1.8/1.1]  mp=480
+  - three_size=69/55/70 / initial_slot=3
+  - BD: 忠義と妖狗の七刃閃武 (arts_id=668)
+    - description: 敵全体に超絶強力な35連ダメージ＆13秒間スピードとモーション狂化
+    - cost=8 / hit_count=35 / value=6.0 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×13.0 — 戦斧の魔剣の攻撃力が13倍
+    - Raise Multiply ×1.0 — 戦斧の魔剣が戦闘不能になっても3回完全復活できる
+    - Wave_Heal Multiply ×0.1 — Wave経過ごとに味方全体のHPが自動回復する
+    - Speed Multiply ×1.5 — 全属性の魔剣の行動速度が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`166802`](weapons.json#L268397) ナナツサヤ=ビースト【極】
+  - base_name: ナナツサヤ=ビースト (costume: 極魔装)
+  - element=水(2) / type=戦斧(7) / rarity=SS(4) / cv=駒形友梨
+  - max stats: HP=18200 / ATK=21090 / DEF=8200 / SPD=42 / BREAK=5620
+  - hit_counts=[6, 4, 11] (3段)  motion_speed=[1.8/1.8/1.1]  mp=480
+  - three_size=69/55/70 / initial_slot=4
+  - BD: 忠義と妖狗の七刃閃武 (arts_id=668)
+    - description: 敵全体に超絶強力な35連ダメージ＆13秒間スピードとモーション狂化
+    - cost=8 / hit_count=35 / value=6.0 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×13.0 — 戦斧の魔剣の攻撃力が13倍
+    - Raise Multiply ×1.0 — 戦斧の魔剣が戦闘不能になっても3回完全復活できる
+    - Wave_Heal Multiply ×0.1 — Wave経過ごとに味方全体のHPが自動回復する
+    - Speed Multiply ×1.75 — 全属性の魔剣の行動速度が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`167501`](weapons.json#L271297) リコさまちゃん
+  - base_name: リコさまちゃん (costume: 魔装)
+  - element=水(2) / type=大鎌(12) / rarity=SS(4) / cv=諸星すみれ
+  - max stats: HP=11500 / ATK=12600 / DEF=8570 / SPD=42 / BREAK=2940
+  - hit_counts=[8, 6, 9] (3段)  motion_speed=[1.8/1.8/1.2]  mp=13
+  - three_size=61/54/66 / initial_slot=3
+  - BD: 疑似解錠･ワールドレイルブレイズ (arts_id=675)
+    - description: 敵全体に超絶強力な40連ダメージ＆一瞬だけ攻撃力2倍
+    - cost=3 / hit_count=40 / value=2.0 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×13.0 — 大鎌の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 騎槍の魔剣の攻撃力が13倍アップ
+    - Speed Multiply ×3.0 — 大鎌の魔剣のスピードが3倍アップ
+    - Speed Multiply ×3.0 — 騎槍の魔剣のスピードが3倍アップ
+    - HP Multiply ×0.33 — 存在の重みに耐えられず、味方全体のHPがダウン
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`167502`](weapons.json#L271530) リコさまちゃん【極】
+  - base_name: リコさまちゃん (costume: 極魔装)
+  - element=水(2) / type=大鎌(12) / rarity=SS(4) / cv=諸星すみれ
+  - max stats: HP=14950 / ATK=16370 / DEF=11130 / SPD=42 / BREAK=3810
+  - hit_counts=[9, 6, 12] (3段)  motion_speed=[1.8/1.8/1.2]  mp=13
+  - three_size=61/54/66 / initial_slot=4
+  - BD: 疑似解錠･ワールドレイルブレイズ (arts_id=675)
+    - description: 敵全体に超絶強力な40連ダメージ＆一瞬だけ攻撃力2倍
+    - cost=3 / hit_count=40 / value=2.0 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×13.0 — 大鎌の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 騎槍の魔剣の攻撃力が13倍アップ
+    - Speed Multiply ×3.0 — 大鎌の魔剣のスピードが3倍アップ
+    - Speed Multiply ×3.0 — 騎槍の魔剣のスピードが3倍アップ
+    - HP Multiply ×0.33 — 存在の重みに耐えられず、味方全体のHPがダウン
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`167601`](weapons.json#L271763) ハルピュイア=ホロウ.ALICE
+  - base_name: ハルピュイア=ホロウ.ALICE (costume: 魔装)
+  - element=無(6) / type=大鎌(12) / rarity=SS(4) / cv=小原好美
+  - max stats: HP=12000 / ATK=24070 / DEF=6000 / SPD=30 / BREAK=680
+  - hit_counts=[4, 7, 17] (3段)  motion_speed=[1.8/1.9/1.3]  mp=555
+  - three_size=100/69/86 / initial_slot=6
+  - BD: HOLLOW-BLOSSOM《Bandersnatch》 (arts_id=676)
+    - description: 敵全体に超絶強力な88連ダメージ＆弱体化を解除
+    - cost=6 / hit_count=88 / value=1.8 / additional_value=0.0
+  - innate skills (7):
+    - RemHP_Speed Multiply ×2.0 — 味方全体が、残HPが少ないほどスピード超絶大にアップ（最大2倍）
+    - Vitality_Speed Multiply ×0.1 — 味方全体が、残HPが多いほどスピード超絶大にダウン（最大0.1倍）
+    - DamageLimitBreak Addition +0.0 — 基礎的な記憶結晶装備可能数が6つになる
+    - Raise Multiply ×0.01 — 戦闘不能になっても3回HP1%で復活できる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - AnyElement Multiply ×1.0 — 風属性を対象とした他魔剣からのスキル効果を受けられる
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`167602`](weapons.json#L272015) ハルピュイア=ホロウ.ALICE【極】
+  - base_name: ハルピュイア=ホロウ.ALICE (costume: 極魔装)
+  - element=無(6) / type=大鎌(12) / rarity=SS(4) / cv=小原好美
+  - max stats: HP=15600 / ATK=31280 / DEF=7800 / SPD=30 / BREAK=880
+  - hit_counts=[5, 7, 20] (3段)  motion_speed=[1.8/1.9/1.3]  mp=555
+  - three_size=100/69/86 / initial_slot=7
+  - BD: HOLLOW-BLOSSOM《Bandersnatch》 (arts_id=676)
+    - description: 敵全体に超絶強力な88連ダメージ＆弱体化を解除
+    - cost=6 / hit_count=88 / value=1.8 / additional_value=0.0
+  - innate skills (7):
+    - RemHP_Speed Multiply ×2.0 — 味方全体が、残HPが少ないほどスピード超絶大にアップ（最大2倍）
+    - Vitality_Speed Multiply ×0.1 — 味方全体が、残HPが多いほどスピード超絶大にダウン（最大0.1倍）
+    - DamageLimitBreak Addition +0.0 — 基礎的な記憶結晶装備可能数が7つになる
+    - Raise Multiply ×0.01 — 戦闘不能になっても3回HP1%で復活できる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - AnyElement Multiply ×1.0 — 風属性を対象とした他魔剣からのスキル効果を受けられる
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`168001`](weapons.json#L273513) 魔顕グラム=ブキダス
+  - base_name: 魔顕グラム=ブキダス (costume: 魔装)
+  - element=光(4) / type=大剣(2) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=13850 / ATK=11550 / DEF=12930 / SPD=25 / BREAK=4840
+  - hit_counts=[9, 10, 7] (3段)  motion_speed=[1.8/1.8/1.2]  mp=1600
+  - three_size=65/55/70 / initial_slot=4
+  - BD: 剣創世界ノイエヴェルト (arts_id=680)
+    - description: 敵全体に消費ゲージ数に応じた10連ダメージ＆10wave攻撃力が10倍
+    - cost=3 / hit_count=10 / value=0.8 / additional_value=33.0
+  - innate skills (6):
+    - HitCount Multiply ×2.5 — 大剣の魔剣のヒット数を2.5倍にする
+    - HitCount Multiply ×2.5 — 長剣の魔剣のヒット数を2.5倍にする
+    - HitCount Multiply ×2.5 — 拳闘の魔剣のヒット数を2.5倍にする
+    - GuardBreak Multiply ×1.75 — 全属性の魔剣が絶大にガードブレイクしやすく
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`168002`](weapons.json#L273746) 魔顕グラム=ブキダス【極】
+  - base_name: 魔顕グラム=ブキダス (costume: 極魔装)
+  - element=光(4) / type=大剣(2) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=18000 / ATK=15010 / DEF=16800 / SPD=25 / BREAK=6280
+  - hit_counts=[10, 10, 10] (3段)  motion_speed=[1.8/1.8/1.2]  mp=1600
+  - three_size=65/55/70 / initial_slot=5
+  - BD: 剣創世界ノイエヴェルト (arts_id=680)
+    - description: 敵全体に消費ゲージ数に応じた10連ダメージ＆10wave攻撃力が10倍
+    - cost=3 / hit_count=10 / value=0.8 / additional_value=33.0
+  - innate skills (6):
+    - HitCount Multiply ×2.5 — 大剣の魔剣のヒット数を2.5倍にする
+    - HitCount Multiply ×2.5 — 長剣の魔剣のヒット数を2.5倍にする
+    - HitCount Multiply ×2.5 — 拳闘の魔剣のヒット数を2.5倍にする
+    - GuardBreak Multiply ×2.0 — 全属性の魔剣が超絶大にガードブレイクしやすく
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`168101`](weapons.json#L273979) 煌征剣エクスカリバー≠ルカ
+  - base_name: 煌征剣エクスカリバー≠ルカ (costume: 魔装)
+  - element=火(1) / type=長剣(1) / rarity=SS(4) / cv=長縄まりあ
+  - max stats: HP=13080 / ATK=47120 / DEF=5540 / SPD=55 / BREAK=1070
+  - hit_counts=[1, 1, 2] (3段)  motion_speed=[2.0/2.0/1.2]  mp=1300
+  - three_size=81/54/75 / initial_slot=3
+  - BD: 灼滅なる焔:降誕せし煌征の剣 (arts_id=681)
+    - description: 敵全体に消費ゲージ数に応じた3連ダメージ＆13waveスピード狂化
+    - cost=6 / hit_count=3 / value=0.2 / additional_value=200.0
+  - innate skills (6):
+    - DamageLimitBreak Addition +1300000000.0 — 味方全体のダメージ上限が13億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - RemHP_Attack Multiply ×13.0 — 残HPが少ないほど攻撃力がアップ(最大13倍)
+    - DamageLimitBreak Addition +8000000000.0 — 自身のダメージ上限が80億アップ
+    - WeaponArtsCost Addition +-3.0 — 戦闘時に火属性魔剣のB.D.コストを-3
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`168102`](weapons.json#L274212) 煌征剣エクスカリバー≠ルカ【極】
+  - base_name: 煌征剣エクスカリバー≠ルカ (costume: 極魔装)
+  - element=火(1) / type=長剣(1) / rarity=SS(4) / cv=長縄まりあ
+  - max stats: HP=17000 / ATK=61250 / DEF=7200 / SPD=55 / BREAK=1380
+  - hit_counts=[2, 2, 4] (3段)  motion_speed=[2.0/2.0/1.2]  mp=1300
+  - three_size=81/54/75 / initial_slot=4
+  - BD: 灼滅なる焔:降誕せし煌征の剣 (arts_id=681)
+    - description: 敵全体に消費ゲージ数に応じた3連ダメージ＆13waveスピード狂化
+    - cost=6 / hit_count=3 / value=0.2 / additional_value=200.0
+  - innate skills (6):
+    - DamageLimitBreak Addition +1300000000.0 — 味方全体のダメージ上限が13億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - RemHP_Attack Multiply ×13.0 — 残HPが少ないほど攻撃力がアップ(最大13倍)
+    - DamageLimitBreak Addition +8000000000.0 — 自身のダメージ上限が80億アップ
+    - WeaponArtsCost Addition +-3.0 — 戦闘時に火属性魔剣のB.D.コストを-3
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`168401`](weapons.json#L275311) 天星ソハヤ=コスモ
+  - base_name: 天星ソハヤ=コスモ (costume: 魔装)
+  - element=無(6) / type=太刀(3) / rarity=SS(4) / cv=星谷美緒
+  - max stats: HP=7930 / ATK=17620 / DEF=3240 / SPD=18 / BREAK=1000
+  - hit_counts=[8, 4, 15] (3段)  motion_speed=[1.8/2.2/1.3]  mp=590
+  - three_size=68/49/65 / initial_slot=4
+  - BD: 全てを銀河にする神秘オブ神秘の極光 (arts_id=684)
+    - description: 敵全体に消費ゲージ数に応じた42連ダメージ＆3wave攻撃力13倍(消費ゲージ数に応じて倍率上昇)
+    - cost=3 / hit_count=42 / value=0.02 / additional_value=42.0
+  - innate skills (7):
+    - HitCount Multiply ×2.5 — 太刀の魔剣のヒット数を2.5倍にする
+    - HitCount Multiply ×2.5 — 連弩の魔剣のヒット数を2.5倍にする
+    - HitCount Multiply ×2.5 — 投擲の魔剣のヒット数を2.5倍にする
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが2.66倍に加速【熟度UPで効果値が大幅UP(最大約3.94倍)】
+    - EnemyHit Multiply ×0.25 — 自身に攻撃が当たる確率を75%低下させる
+    - AllTarget Multiply ×0.8 — 攻撃力はやや下がるが自分の攻撃範囲が敵全体になる
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`168402`](weapons.json#L275563) 天星ソハヤ=コスモ【極】
+  - base_name: 天星ソハヤ=コスモ (costume: 極魔装)
+  - element=無(6) / type=太刀(3) / rarity=SS(4) / cv=星谷美緒
+  - max stats: HP=10300 / ATK=22900 / DEF=4200 / SPD=18 / BREAK=1300
+  - hit_counts=[9, 4, 18] (3段)  motion_speed=[1.8/2.2/1.3]  mp=590
+  - three_size=68/49/65 / initial_slot=5
+  - BD: 全てを銀河にする神秘オブ神秘の極光 (arts_id=684)
+    - description: 敵全体に消費ゲージ数に応じた42連ダメージ＆3wave攻撃力13倍(消費ゲージ数に応じて倍率上昇)
+    - cost=3 / hit_count=42 / value=0.02 / additional_value=42.0
+  - innate skills (7):
+    - HitCount Multiply ×2.5 — 太刀の魔剣のヒット数を2.5倍にする
+    - HitCount Multiply ×2.5 — 連弩の魔剣のヒット数を2.5倍にする
+    - HitCount Multiply ×2.5 — 投擲の魔剣のヒット数を2.5倍にする
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが2.66倍に加速【熟度UPで効果値が大幅UP(最大約3.94倍)】
+    - EnemyHit Multiply ×0.25 — 自身に攻撃が当たる確率を75%低下させる
+    - AllTarget Multiply ×1.0 — 攻撃力を下げずに自分の攻撃範囲が敵全体になる
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`168501`](weapons.json#L275815) 終焉剣アポカリプス
+  - base_name: 終焉剣アポカリプス (costume: 魔装)
+  - element=闇(5) / type=大剣(2) / rarity=SS(4) / cv=山根綺
+  - max stats: HP=11540 / ATK=28160 / DEF=19240 / SPD=50000 / BREAK=7100
+  - hit_counts=[2, 3, 4] (3段)  motion_speed=[2.0/1.6/1.2]  mp=1300
+  - three_size=80/55/71 / initial_slot=3
+  - BD: 原初の終焉《The Apocalypse》 (arts_id=685)
+    - description: 敵全体に終焉を齎す99連ダメージ【消費ゲージに応じてダメージUP】＆弱体化解除＆60秒間敵が戦意喪失する＆13秒間自身のダメージ上限+50億
+    - cost=9 / hit_count=99 / value=13.0 / additional_value=3.0
+  - innate skills (8):
+    - DamageLimitBreak Addition +1300000000.0 — 味方全体のダメージ上限が13億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - Speed Multiply ×0.001 — 鍵師の圧力で味方全体のスピードが激減
+    - Speed Addition +500.0 — 自身の最終的なスピードが500上昇し超絶加速
+    - Attack Multiply ×30.0 — 自身の攻撃力が30倍
+    - DamageLimitBreak Addition +3000000000.0 — 自身のダメージ上限が30億アップ
+    - SapphireDrop Multiply ×0.05 — 味方全体の獲得するサファイア量が0.05倍にダウン
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`168502`](weapons.json#L276110) 終焉剣アポカリプス【極】
+  - base_name: 終焉剣アポカリプス (costume: 極魔装)
+  - element=闇(5) / type=大剣(2) / rarity=SS(4) / cv=山根綺
+  - max stats: HP=15000 / ATK=36600 / DEF=25000 / SPD=50000 / BREAK=9230
+  - hit_counts=[3, 3, 7] (3段)  motion_speed=[2.0/1.6/1.2]  mp=1300
+  - three_size=80/55/71 / initial_slot=4
+  - BD: 原初の終焉《The Apocalypse》 (arts_id=685)
+    - description: 敵全体に終焉を齎す99連ダメージ【消費ゲージに応じてダメージUP】＆弱体化解除＆60秒間敵が戦意喪失する＆13秒間自身のダメージ上限+50億
+    - cost=9 / hit_count=99 / value=13.0 / additional_value=3.0
+  - innate skills (8):
+    - DamageLimitBreak Addition +1300000000.0 — 味方全体のダメージ上限が13億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - Speed Multiply ×0.001 — 鍵師の圧力で味方全体のスピードが激減
+    - Speed Addition +500.0 — 自身の最終的なスピードが500上昇し超絶加速
+    - Attack Multiply ×30.0 — 自身の攻撃力が30倍
+    - DamageLimitBreak Addition +3000000000.0 — 自身のダメージ上限が30億アップ
+    - SapphireDrop Multiply ×0.05 — 味方全体の獲得するサファイア量が0.05倍にダウン
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`169101`](weapons.json#L278675) 魔王侍女ロサ
+  - base_name: 魔王侍女ロサ (costume: 魔装)
+  - element=無(6) / type=連弩(6) / rarity=SS(4) / cv=飯田ヒカル
+  - max stats: HP=15100 / ATK=13080 / DEF=5240 / SPD=22 / BREAK=970
+  - hit_counts=[2, 3, 11] (3段)  motion_speed=[2.0/2.0/1.2]  mp=633
+  - three_size=72/51/75 / initial_slot=3
+  - BD: レジェンダリー･ブックマーク (arts_id=691)
+    - description: 敵全体に消費ゲージ数に応じた63連ダメージ＆wave中、味方の攻撃力･ﾌﾞﾚｲｸ力･ﾓｰｼｮﾝ速度が50倍
+    - cost=4 / hit_count=63 / value=0.8 / additional_value=33.0
+  - innate skills (6):
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - MotionSpeed Multiply ×13.0 — 自身のモーション速度が13倍に加速【熟度UPにつれてさらに効果値がUP(最大18倍)】
+    - BlazeAttack Multiply ×50.0 — 自身のB.D.攻撃力が50倍
+    - DamageLimitBreak Addition +1300000000.0 — 闇属性の魔剣のダメージ上限が13億アップ
+    - DamageLimitBreak Addition +1300000000.0 — 無属性の魔剣のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+- [`169102`](weapons.json#L278932) 魔王侍女ロサ【極】
+  - base_name: 魔王侍女ロサ (costume: 極魔装)
+  - element=無(6) / type=連弩(6) / rarity=SS(4) / cv=飯田ヒカル
+  - max stats: HP=19630 / ATK=17000 / DEF=6800 / SPD=22 / BREAK=1260
+  - hit_counts=[3, 3, 14] (3段)  motion_speed=[2.0/2.0/1.2]  mp=633
+  - three_size=72/51/75 / initial_slot=4
+  - BD: レジェンダリー･ブックマーク (arts_id=691)
+    - description: 敵全体に消費ゲージ数に応じた63連ダメージ＆wave中、味方の攻撃力･ﾌﾞﾚｲｸ力･ﾓｰｼｮﾝ速度が50倍
+    - cost=4 / hit_count=63 / value=0.8 / additional_value=33.0
+  - innate skills (6):
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - MotionSpeed Multiply ×13.0 — 自身のモーション速度が13倍に加速【熟度UPにつれてさらに効果値がUP(最大18倍)】
+    - BlazeAttack Multiply ×50.0 — 自身のB.D.攻撃力が50倍
+    - DamageLimitBreak Addition +1300000000.0 — 闇属性の魔剣のダメージ上限が13億アップ
+    - DamageLimitBreak Addition +1300000000.0 — 無属性の魔剣のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — 無人島に手ぶらで挑む自信と覚悟（稀に突然の漂流により、自信は全くなくとも覚悟せざるを得ない場合がある）で「流れ着いたサンダル」の取得数が上がる。**
+
+## materials
+
+### 新增 (3)
+
+- [`44150105`](materials.json#L17797) ジャスト･アウェイ rarity=4
+  - 遠く遠く、離れすぎてる。[無のみ]
+[ﾀﾞﾒｰｼﾞ上限がUP][上限値:高]
+- [`52140097`](materials.json#L20457) ゴールデン･レジェンド rarity=5
+  - 無人島ゼロから生活開始。[無戦斧]
+[残HP多いほど攻撃力UP][上限値:超高]
+- [`131010027`](materials.json#L28983) 島へん rarity=3
+  - この島、なにか変…！[上限値:高]
+[流れ着いたサンダルの獲得量UP]
+
+## items
+
+### 新增 (2)
+
+- [`91264`](items.json#L130357) 流れ着いたサンダル
+  - 「ドキドキ！魔剣王漂流記｣ 作戦に貢献した証。
+- [`2500043`](items.json#L164551) アイ・アム・漂流王
+  - 漂流経験者だけど、なんか質問ある？
+
+## jobs
+
+### 新增 (1)
+
+- [`1567`](jobs.json#L196835) バカンス rarity=4
+  - rarity=4 / max_level=40
+  - job_abilities (18):
+    - WeaponType 長剣(1): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 大剣(2): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 太刀(3): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 杖棒(4): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 弓矢(5): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 連弩(6): pos=1.7 / neg=1.105 (rank=s 超得意)
+    - WeaponType 戦斧(7): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 騎槍(8): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 投擲(9): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 拳闘(10): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 魔典(11): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 大鎌(12): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - Element 火(1): pos=1.7 / neg=1.105 (rank=s 超得意)
+    - Element 水(2): pos=1.7 / neg=1.105 (rank=s 超得意)
+    - Element 風(3): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - Element 光(4): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - Element 闇(5): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - Element 無(6): pos=0.3 / neg=0.3 (rank=d 超苦手)
+  - job_skills (8):
+    - Speed Multiply ×1.2 — 世界を守り抜く証。装備セット全ての速度が大アップ
+    - MotionSpeed Multiply ×1.5 — 連弩装備でモーション速度とスピード50%UP
+    - HitCount Addition +0.0 — 自身のヒット数それぞれ1にする代わりに、ダメージ上限200億UP
+    - BlazeAttack Multiply ×0.0001 — B.D.攻撃力を代償に、B.D.コスト-3
+    - Raise Multiply ×0.01 — 連弩装備で3度だけHP1%で復活
+    - Speed Multiply ×1.5 — 連弩装備でスピード50%UP
+    - DamageLimitBreak Addition +20000000000.0 — 自身のダメージ上限200億UP
+    - WeaponArtsCost Addition +-3.0 — B.D.コスト-3
+
+## scenarios
+
+### 新增 (10)
+
+- [`326401`](scenarios.json#L9823) ドキドキのバケーション♪
+- [`326402`](scenarios.json#L9833) そして魔剣王は…
+- [`326403`](scenarios.json#L9843) 流されてアイランド
+- [`326404`](scenarios.json#L9853) 無人島生活スタート
+- [`326405`](scenarios.json#L9863) サバイバルゲーム
+- [`326406`](scenarios.json#L9873) いきなりおとぎ伝説
+- [`326407`](scenarios.json#L9883) 失われた大秘宝
+- [`326408`](scenarios.json#L9893) エンドレスバケーション
+- [`326409`](scenarios.json#L9903) ドキドキ！魔剣王漂流記
+- [`326410`](scenarios.json#L9913) 自由の島
+
+---
+
+★ 跳过的 derived 表(非 local-master.dat 产物,需 server response 聚合):
+- `memory_slot_skills.json`
+- `npc_motions.json`
