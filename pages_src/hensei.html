@@ -15,6 +15,7 @@
         <button class="size-btn" data-n="1" onclick="setTeamSize(1)">1体</button>
         <button class="size-btn" data-n="2" onclick="setTeamSize(2)">2体</button>
         <button class="size-btn on" data-n="3" onclick="setTeamSize(3)">3体</button>
+        <button id="score-btn" class="size-btn" style="display: none" onclick="openScoreModal()" title="メイン魔剣の 40s 推定スコアを計算">スコア計算</button>
         <button class="io-btn" style="margin-left: auto" onclick="openIoModal()" title="編成を コード/URL/.json で書き出し">export</button>
         <button class="io-btn" onclick="openIoModal()" title="編成を コード/ファイル から読み込み">import</button>
         <input type="file" id="hensei-import-file" accept="application/json,.json" style="display: none" onchange="importHenseiFile(this)" />
@@ -109,6 +110,18 @@
           </div>
           <div id="io-msg" class="io-msg"></div>
         </div>
+      </div>
+    </div>
+
+    <!-- ===== GUILD SCORE MODAL (ギルバト スコア計算) ===== -->
+    <div id="score-modal">
+      <div class="modal-overlay" onclick="closeScoreModal()"></div>
+      <div class="modal-panel">
+        <div class="modal-header">
+          <span class="modal-header-title">スコア計算</span>
+          <button class="modal-close" onclick="closeScoreModal()">✕</button>
+        </div>
+        <div class="modal-body io-body" id="score-body"></div>
       </div>
     </div>
 
@@ -213,6 +226,7 @@
         parseAff as _parseAff,
         BLAZE_GAUGE_POINTS_BASE_A,
       } from '../shared/hensei-helpers.js';
+      import { simulateGuildScore, computeGuildScore, GUILD_BATTLE_SECONDS } from '../shared/guild-score.js';
       // weight_step / purity_step: master 不含、revise 注入 (走 cr-edit dropdown)、缺省 null = slider 不显示
       const _parseScaling = () => 0;
       // addition 倍率显示: 负值不再前缀 '+' (避免 '+-x');非负才加 '+'。乘算/终乘符号照旧。
@@ -257,6 +271,8 @@
       let allGuildTitles = [],
         allGuildEmblems = [];
       let teamSize = 3;
+      // ギルバト スコア計算 的 メイン (carry) slot — 互斥单选、默认 slot-0
+      let mainSlot = 0;
 
       // ===== 敌方/副本/工会信息（影响最终乘算）=====
       // 默认 element=6 (無)、mode='normal' → 元素克制全 0、mult=1，不影响默认计算
@@ -608,6 +624,8 @@
       };
       export const setTeamSize = (n) => {
         teamSize = n;
+        // 缩编到 mainSlot 之下时回落 slot-0 (メイン 只能选启用 slot、UI 在 score-modal 内)
+        if (mainSlot >= n) mainSlot = 0;
         document
           .querySelectorAll('.size-btn')
           .forEach((b) => b.classList.toggle('on', +b.dataset.n === n));
@@ -660,7 +678,8 @@
           if (aw.length) o.advantageWeapons = aw;
           return o;
         };
-        return { v: 1, teamSize, team: team.map(cslot), enemy: ce() };
+        // mainSlot 默认 0 时省略 (import 侧缺省补 0、老 hash 兼容)
+        return { v: 1, teamSize, ...(mainSlot ? { mainSlot } : {}), team: team.map(cslot), enemy: ce() };
       };
 
       // 把配置(紧凑或全量)灌回 team/enemy 并重渲染。缺失/失效 id 跳过、tr/enemy 缺省补默认值。
@@ -681,6 +700,7 @@
           team[i].tr = { ...mkTr(), ...(s.tr || {}) };
           if (s.tr?.have_mp === false) team[i].tr.mp = 0; // 旧 #hash 兼容: have_mp=false → MP 空
         }
+        mainSlot = [0, 1, 2].includes(data.mainSlot) ? data.mainSlot : 0;
         // enemy 先重置默认 (紧凑对象省略默认字段、不重置会残留上一份的非默认值)
         Object.assign(enemy, _ENEMY_DEF, { emblems: _DEF_EMBLEMS.map((e) => ({ ...e })), advantageWeapons: new Set() });
         if (data.enemy && typeof data.enemy === 'object') {
@@ -1608,6 +1628,97 @@
     ${emblemHtml}
     ${bdCapHtml}
   `;
+        // スコア計算 按钮只在 guild 模式显示 (score-btn 在 #team-size-bar 静态 HTML、不随 bar 重渲、
+        // 命令式切可见性;renderEnemyBar 覆盖 init / setEnemyMode / hash import 三条路径)
+        const sb = document.getElementById('score-btn');
+        if (sb) sb.style.display = isGuild ? '' : 'none';
+      };
+
+      // ===== ギルバト スコア計算 modal =====
+      // 開始秒: 还剩多少秒时开始输出 = 输出窗口长度 (40=满窗口、开幕 buff 咏唱等损耗填更小)、
+      // clamp 0〜40+加时 (v1 = 40)、接受小数、默认满窗口
+      let scoreStartSec = GUILD_BATTLE_SECONDS;
+      export const closeScoreModal = () =>
+        document.getElementById('score-modal')?.classList.remove('open');
+      export const openScoreModal = () => {
+        renderScoreModal();
+        document.getElementById('score-modal')?.classList.add('open');
+      };
+      // 结果骨架只建一次 (左侧 label 固定、数值跨切换/开关保留)、之后只同步 controls 状态;
+      // 数值只在按下 計算 时刷新 — 切 メイン/開始秒 不清旧值
+      const _SCORE_VAL_IDS = ['score-v-dmg', 'score-v-score', 'score-v-base', 'score-v-diff', 'score-v-barrier'];
+      const renderScoreModal = () => {
+        const body = document.getElementById('score-body');
+        if (!body) return;
+        if (!body.firstChild) {
+          const row = (k, id, hl) =>
+            `<div class="score-row${hl ? ' hl' : ''}"><span>${k}</span><span class="score-val" id="${id}"></span></div>`;
+          body.innerHTML = min`
+      <div class="score-ctrl">
+        <span class="tr-label">メイン</span>
+        <div class="tr-btns">${[0, 1, 2].map((i) => `<button class="tr-btn" onclick="setScoreMainSlot(${i})">${i + 1}</button>`).join('')}</div>
+        <span class="tr-label">開始秒</span>
+        <input id="score-start-sec" class="tr-input" type="number" min="0" max="${GUILD_BATTLE_SECONDS}" step="0.1" style="width:56px" title="残り何秒から出力開始か (${GUILD_BATTLE_SECONDS}=フル)" onchange="setScoreStartSec(this.value)">
+        <button class="tr-btn score-run-btn" onclick="runScoreCalc()">計算</button>
+      </div>
+      <div id="score-result">
+        <div class="score-carry" id="score-carry"></div>
+        ${row('推定ダメージ', 'score-v-dmg')}
+        ${row('獲得ギルドスコア', 'score-v-score', true)}
+        ${row('基礎スコア', 'score-v-base')}
+        ${row('難易度ボーナス', 'score-v-diff')}
+        ${row('結界ボーナス', 'score-v-barrier')}
+      </div>`;
+        }
+        // controls 状态同步: メイン .on/disabled + 開始秒 值
+        body.querySelectorAll('.score-ctrl .tr-btns .tr-btn').forEach((b, i) => {
+          b.classList.toggle('on', mainSlot === i);
+          b.disabled = i >= teamSize;
+        });
+        const ip = document.getElementById('score-start-sec');
+        if (ip) ip.value = scoreStartSec;
+      };
+      export const setScoreMainSlot = (i) => {
+        if (i >= teamSize) return;
+        mainSlot = i;
+        renderScoreModal();
+      };
+      export const setScoreStartSec = (v) => {
+        let n = parseFloat(v);
+        if (!Number.isFinite(n)) n = GUILD_BATTLE_SECONDS;
+        scoreStartSec = Math.min(Math.max(0, n), GUILD_BATTLE_SECONDS);
+        renderScoreModal();
+      };
+      export const runScoreCalc = () => {
+        const carry = document.getElementById('score-carry');
+        if (!carry) return;
+        const setV = (id, v) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = v;
+        };
+        const chara = allCharas.find((x) => x.id === team[mainSlot].chara) || null;
+        if (!chara) {
+          carry.textContent = `メイン (${mainSlot + 1}号位) の魔剣が未選択です`;
+          _SCORE_VAL_IDS.forEach((id) => setV(id, ''));
+          return;
+        }
+        const r = computeStats(chara, team[mainSlot].tr, mainSlot, _buildStatsCtx());
+        const sim = simulateGuildScore({
+          aMax: +r.stats['攻撃力'] || 0,
+          dl: +r.damageLimit || 0,
+          hits: r.hits || [0, 0, 0],
+          durF: r.motionSpeed?.durationsFrames || [0, 0, 0],
+          cdF: +r.speed?.cooldownFrames || 0,
+          setF: +r.speed?.setFrames || 0,
+          startSeconds: scoreStartSec,
+        });
+        const g = computeGuildScore(sim.totalDamage, enemy.difficulty);
+        carry.textContent = `メイン: ${chara.name}（${mainSlot + 1}号位）`;
+        setV('score-v-dmg', sim.totalDamage.toLocaleString('en-US'));
+        setV('score-v-score', g.score.toLocaleString('en-US'));
+        setV('score-v-base', g.scoreBase.toLocaleString('en-US'));
+        setV('score-v-diff', '×' + g.diffBonus);
+        setV('score-v-barrier', '×' + g.barrierBonus);
       };
 
       export const setEnemyElem = (e) => {
@@ -3642,6 +3753,7 @@
         get allCrystals() { return allCrystals; },
         get allBGs() { return allBGs; },
         get allMasou() { return allMasou; },
+        get mainSlot() { return mainSlot; },
       };
       window.mf = mf;
       Object.assign(window, {
@@ -3659,6 +3771,11 @@
         autoAssignSoul,
         syncCrystals,
         setTeamSize,
+        setScoreMainSlot,
+        setScoreStartSec,
+        runScoreCalc,
+        openScoreModal,
+        closeScoreModal,
         openIoModal,
         closeIoModal,
         copyIoString,
