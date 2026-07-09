@@ -403,3 +403,54 @@ trace = {
 - step.src = `{skill/装备名}@S{slot}` (collectEffects 的 `_src_name`)
 - speed/motion 实际计算保持 fold (输出 bit 一致)、trace 链为数学等价重演 (Mul 全在 Add 前)
 - 单测: `tests/unit/test_stats_trace.mjs` (gate / on-off 一致 / 各链尾 == 输出 / 链连续性)
+
+---
+
+## ギルバト スコア計算 (`shared/guild-score.js`)
+
+hensei 编成页 guild 模式 (`enemy.mode = guildbattle / guildbattle_special`) 下 `#team-size-bar` 显示
+「スコア計算」按钮 → modal 内选「メイン」(carry) 1/2/3号位 + 填「開始秒」(还剩多少秒开始输出 =
+输出窗口长度、40=满窗口、小数可、clamp 0〜40+加时 (v1=40)、默认 40)、按「計算」才模拟、
+下方明细 (推定ダメージ / 獲得ギルドスコア / 基礎スコア / 難易度ボーナス / 結界ボーナス) —
+左侧 label 骨架固定 (只建一次)、メイン 行预留高度、值只在按 計算 时刷新 (切 メイン/開始秒 不清旧值)。
+メイン 互斥单选、teamSize 之外的号位 disabled、缩编时 ≥teamSize 回落 1号位、
+走 bxb1 hash 持久化 (`mainSlot` 字段、默认 0 省略);開始秒不持久化。
+
+`simulateGuildScore(input)` — 纯函数、stat 输入全部来自 メイン slot 的 `computeStats` 返回:
+`aMax` = `stats['攻撃力']`、`dl` = `damageLimit`、`hits` = `hits[3]`、
+`durF` = `motionSpeed.durationsFrames[3]`、`cdF/setF` = `speed.cooldownFrames/setFrames`、
+外加 UI 的 `startSeconds`。
+
+### 模型 (高频重叠 loop)
+
+```
+loopFrames  = (f1+f2+f3) + 1 + (cdF+setF) + 1        # §8.6 十帧模型: 3段攻速 + BT + 転速 + BT
+loopSeconds = loopFrames / 60                         # 最小 10fr (攻速 2+2+2 + cd1 + set1 + 2)
+offset[i]   = Σ_{j<i} f_j / 60                        # 段 i 起跑偏移 = 前面各段攻速帧累计
+perHit      = mean_{r∈{1.00..0.95}} min(dl, aMax×r)   # 波动率 6 档均匀 (03_ead.md §3.9.2)、每档各自吃 dl 封顶
+
+win = clamp(startSeconds, 0, 40)                      # 開始秒 = 剩余输出时间 = 窗口长度 (缺省=满窗口)
+for k while k×loopSeconds < win:                      # loop 每 P 重开、hit 列后台并行堆叠 (不等打完)
+  for i in 0..2 (N_i > 0):
+    start = k×loopSeconds + offset[i]                 # 段 i 的 hit 在 start + h×0.15 (h=0..N_i-1)
+    total += count(h: start + h×0.15 < win)           # timestamp < 窗口末尾严格 (恰好落界不计)
+
+totalDamage = floor(perHit × total)                   # 推定ダメージ
+```
+
+### ギルドスコア换算 (`computeGuildScore(totalDamage, difficulty)`)
+
+```
+基礎スコア score_base   = floor(totalDamage / 1e7)
+難易度ボーナス diff     = { Normal: 1, Hard: 5, Lunatic: 10 }[enemy.difficulty]
+結界ボーナス barrier    = 2.6 (固定)
+獲得ギルドスコア score  = score_base × diff × barrier   # ×26/10 整数运算避 float 噪声、最多 1 位小数
+```
+
+- **高频重叠语义**: loop 周期只含动作帧+転速 (~零点几秒)、每个 loop 的 hit 列 (可长达数秒) 并行堆叠、
+  40s 内大量重叠 — 实证敲定的模型。offset 只在末尾跨窗口边界的 loop 里影响截断。
+- **攻速缺失兜底**: `durF` 全 0 (`_npc_motions` 缺 motion_id) → 有 hit 的段按 2fr、3 段合计回落最小 6fr。
+- **v1 固定**: `battleSeconds=40`、`hitInterval=0.15` (普通; Blaze 0.05 未実装)、无加时 buff。
+- 返回 `{ totalDamage, totalHits, loops, perHit }` + `{ scoreBase, diffBonus, barrierBonus, score }`。
+- 单测: `tests/unit/test_guild_score.mjs` (手算对拍 + 逐 hit 枚举 brute-force 复算、最小 10fr、
+  dl 封顶、窗口截断/落界边界、開始秒=剩余窗口、durF 兜底、スコア换算)。

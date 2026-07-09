@@ -639,3 +639,109 @@ test('秘録記憶 装着 → 結晶枠 +1、外す → 戻る、他人の秘録
   await page.waitForTimeout(100);
   expect(await page.evaluate(() => window.state.team[0].crystals.length)).toBe(base);
 });
+
+// ============================================================
+// ギルバト スコア計算: score-btn 可见性 / modal 内 メイン 互斥 / 計算 / mainSlot 持久化
+// ============================================================
+test('score-btn: guild 模式显示、普通/他 隐藏', async ({ page }) => {
+  await waitHenseiReady(page);
+  const btn = page.locator('#score-btn');
+  await expect(btn).toBeHidden();
+  await page.evaluate(() => window.setEnemyMode('guildbattle'));
+  await expect(btn).toBeVisible();
+  await page.evaluate(() => window.setEnemyMode('normal'));
+  await expect(btn).toBeHidden();
+  await page.evaluate(() => window.setEnemyMode('guildbattle_special'));
+  await expect(btn).toBeVisible();
+  await page.evaluate(() => window.setEnemyMode('other'));
+  await expect(btn).toBeHidden();
+});
+
+test('modal 内 メイン 1/2/3号位 互斥 + 缩 teamSize 回落 + disabled', async ({ page }) => {
+  await waitHenseiReady(page);
+  await page.evaluate(() => window.openScoreModal());
+  const btn = (n) => page.locator('#score-body .score-ctrl .tr-btn', { hasText: new RegExp(`^${n}$`) });
+  // 默认 1号位 亮
+  await expect(btn(1)).toHaveClass(/\bon\b/);
+  await expect(btn(2)).not.toHaveClass(/\bon\b/);
+  // 点 2号位 → 互斥切换
+  await btn(2).click();
+  await expect(btn(2)).toHaveClass(/\bon\b/);
+  await expect(btn(1)).not.toHaveClass(/\bon\b/);
+  expect(await page.evaluate(() => window.state.mainSlot)).toBe(1);
+  // 缩编到 1体 → mainSlot 回落 0、再开 modal 2/3号位 disabled
+  await page.evaluate(() => { window.closeScoreModal(); window.setTeamSize(1); window.openScoreModal(); });
+  expect(await page.evaluate(() => window.state.mainSlot)).toBe(0);
+  await expect(btn(1)).toHaveClass(/\bon\b/);
+  await expect(btn(2)).toBeDisabled();
+  await expect(btn(3)).toBeDisabled();
+});
+
+test('計算: 骨架 label 固定、按 計算 填值、無魔剣 提示、開始秒=剩余窗口', async ({ page }) => {
+  await waitHenseiReady(page);
+  await page.evaluate(() => window.setEnemyMode('guildbattle'));
+  await page.locator('#score-btn').click();
+  await expect(page.locator('#score-modal')).toBeVisible();
+  const runBtn = page.locator('#score-body .score-run-btn');
+  // 打开时骨架 label 齐全、值全空、開始秒 默认 40
+  const skeleton = await page.locator('#score-result').textContent();
+  for (const l of ['推定ダメージ', '獲得ギルドスコア', '基礎スコア', '難易度ボーナス', '結界ボーナス'])
+    expect(skeleton).toContain(l);
+  expect(skeleton).not.toMatch(/\d/);
+  expect(await page.locator('#score-start-sec').inputValue()).toBe('40');
+  // 无 chara 按 計算 → carry 行提示未選択、值保持空
+  await runBtn.click();
+  expect(await page.locator('#score-carry').textContent()).toContain('未選択');
+  expect(await page.locator('#score-v-dmg').textContent()).toBe('');
+  // 装 chara → 計算 → carry 行 + 5 值填充
+  await page.evaluate(() => window.closeScoreModal());
+  await setupSlot0WithChara(page, 100101);
+  await page.locator('#score-btn').click();
+  await runBtn.click();
+  expect(await page.locator('#score-carry').textContent()).toContain('メイン:');
+  expect(await page.locator('#score-v-dmg').textContent()).toMatch(/\d[\d,]{3,}/);
+  expect(await page.locator('#score-v-barrier').textContent()).toBe('×2.6');
+  const dmg = async () => {
+    await runBtn.click();
+    return parseInt((await page.locator('#score-v-dmg').textContent()).replace(/[^\d]/g, ''), 10);
+  };
+  const dmgFull = await dmg();
+  // 開始秒=20 (剩 20s 开始) → 旧值保留 (只有 計算 才刷新)、再按 計算 → ダメージ 变小
+  await page.evaluate(() => window.setScoreStartSec(20));
+  expect(parseInt((await page.locator('#score-v-dmg').textContent()).replace(/[^\d]/g, ''), 10)).toBe(dmgFull);
+  const dmg20 = await dmg();
+  expect(dmg20).toBeLessThan(dmgFull);
+  expect(dmg20).toBeGreaterThan(0);
+  // 難易度 Hard → スコア = 基礎 × 5 × 2.6
+  await page.evaluate(() => window.setEnemyDiff('Hard'));
+  await runBtn.click();
+  const num = async (id) => parseFloat((await page.locator(id).textContent()).replace(/[^\d.]/g, ''));
+  expect(await page.locator('#score-v-diff').textContent()).toBe('×5');
+  expect(await num('#score-v-score')).toBeCloseTo(Math.round((await num('#score-v-base')) * 5 * 26) / 10, 5);
+});
+
+test('移动端 .size-btn padding 缩窄 (4px 9px)', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await waitHenseiReady(page);
+  const pad = await page.evaluate(() => getComputedStyle(document.querySelector('.size-btn')).padding);
+  expect(pad).toBe('4px 9px');
+});
+
+test('bxb1 往返: mainSlot 保留', async ({ page }) => {
+  await waitHenseiReady(page);
+  await setupSlot0WithChara(page, 100101);
+  await page.evaluate(() => window.setScoreMainSlot(1));
+  const code = await page.evaluate(async () => {
+    await window.openIoModal();
+    return document.getElementById('io-export-str').value;
+  });
+  expect(code).toMatch(/^bxb1:/);
+  // 改到 3号位 再 import → 应回滚到导出时的 2号位 (mainSlot=1)
+  await page.evaluate(() => window.setScoreMainSlot(2));
+  await page.evaluate((c) => {
+    document.getElementById('io-import-str').value = c;
+    return window.ioImportString();
+  }, code);
+  await page.waitForTimeout(300);
+  expect(await page.evaluate(() => window.state.mainSlot)).toBe(1);
+});

@@ -51,6 +51,24 @@
 .size-btn{padding:4px 18px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
 .size-btn:hover{border-color:var(--accent);color:var(--text);}
 .size-btn.on{background:rgba(91,127,255,.22);border-color:var(--accent);color:var(--accent);}
+/* 移动端 1/2/3体 缩窄 (加 スコア計算 后一行放得下) */
+@media(max-width: 900px){
+  .size-btn{padding:4px 9px;}
+}
+/* ギルバト スコア計算 modal */
+#score-modal{display:none;position:fixed;inset:0;z-index:2600;align-items:center;justify-content:center;}
+#score-modal.open{display:flex;}
+#score-modal .modal-panel{width:min(420px,94vw);max-height:70vh;}
+.score-ctrl{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.score-ctrl .tr-btn{padding:3px 10px;}
+.score-ctrl .tr-btn:disabled{opacity:.35;cursor:default;pointer-events:none;}
+.score-run-btn{margin-left:auto;}
+#score-result{display:flex;flex-direction:column;gap:2px;}
+/* メイン行 + 各行 min-height 预留、計算 前后布局不跳 */
+.score-carry{font-size:12px;color:var(--text2);min-height:17px;}
+.score-row{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;padding:2px 0;min-height:19px;}
+.score-row.hl{min-height:25px;}
+.score-row.hl .score-val{font-size:18px;font-weight:700;color:var(--accent);}
 /* 編成 export / import 按钮 (透明底跟 size-btn 区分、靠右) */
 .io-btn{padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
 .io-btn:hover{border-color:var(--accent);color:var(--text);background:var(--bg3);}
