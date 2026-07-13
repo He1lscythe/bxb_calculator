@@ -65,8 +65,10 @@ jobs:
         run: >
           aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts.csv" accounts.csv
           --endpoint-url "${{ secrets.R2_ENDPOINT }}"
-      - name: Stagger start (sleep shard×60s)
-        run: sleep $(( ${{ matrix.shard }} * 60 ))
+      - name: Stagger start (shard×60s + 随机 0-15s)
+        run: |
+          sleep $(( ${{ matrix.shard }} * 60 ))
+          sleep $(( RANDOM % 16 ))
       - name: Run first-clear shard
         env:
           PYTHONUNBUFFERED: "1"

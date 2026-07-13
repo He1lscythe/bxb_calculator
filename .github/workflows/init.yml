@@ -82,8 +82,10 @@ jobs:
             --exclude "data/*" --exclude "outputs/*" \
             --exclude "*.pyc" --exclude "*/__pycache__/*"
       - run: pip install -r requirements-daily.txt
-      - name: Stagger start
-        run: sleep $(( ${{ matrix.shard }} * 60 ))
+      - name: Stagger start (shard×60s + 随机 0-15s)
+        run: |
+          sleep $(( ${{ matrix.shard }} * 60 ))
+          sleep $(( RANDOM % 16 ))
       - name: Run init shard (${{ inputs.mode }})
         env:
           PYTHONUNBUFFERED: "1"

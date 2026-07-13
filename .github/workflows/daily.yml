@@ -70,8 +70,10 @@ jobs:
             echo "first run: no runstate/${JST}/daily-${{ inputs.time_point }}.csv"
             cp accounts.csv run_accounts.csv
           fi
-      - name: Stagger start (sleep shard×60s)
-        run: sleep $(( ${{ matrix.shard }} * 60 ))
+      - name: Stagger start (shard×60s + 随机 0-15s)
+        run: |
+          sleep $(( ${{ matrix.shard }} * 60 ))
+          sleep $(( RANDOM % 16 ))
       - name: Run shard
         env:
           PYTHONUNBUFFERED: "1"
