@@ -1,0 +1,212 @@
+name: bxb-init
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        required: true
+        type: choice
+        default: "fresh"
+        options: ["fresh", "resume"]
+      batch_date:
+        required: false
+        default: ""
+      count:
+        required: false
+        default: ""
+      platform:
+        required: false
+        type: choice
+        default: "android"
+        options: ["android", "ios", "random"]
+      shards:
+        required: false
+        default: ""
+      total_rate:
+        required: false
+        default: ""
+      max_runtime:
+        required: false
+        default: "300"
+      max_wait:
+        required: false
+        default: "3600"
+      discard_age:
+        required: false
+        default: "24"
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.gen.outputs.matrix }}
+      shards: ${{ steps.gen.outputs.shards }}
+      count: ${{ steps.gen.outputs.count }}
+      total_rate: ${{ steps.gen.outputs.total_rate }}
+      date: ${{ steps.gen.outputs.date }}
+    steps:
+      - id: gen
+        run: |
+          N="${{ inputs.shards }}"; N="${N:-${{ vars.BXB_RUN_SHARDS }}}"; N="${N:-16}"
+          COUNT="${{ inputs.count }}"; COUNT="${COUNT:-${{ vars.BXB_INIT_COUNT }}}"; COUNT="${COUNT:-1000}"
+          TR="${{ inputs.total_rate }}"; TR="${TR:-${{ vars.BXB_RUN_TOTAL_RATE }}}"; TR="${TR:-8}"
+          DATE="${{ inputs.batch_date }}"; DATE="${DATE:-$(TZ=Asia/Tokyo date +%F)}"
+          echo "shards=$N"      >> "$GITHUB_OUTPUT"
+          echo "count=$COUNT"   >> "$GITHUB_OUTPUT"
+          echo "total_rate=$TR" >> "$GITHUB_OUTPUT"
+          echo "date=$DATE"     >> "$GITHUB_OUTPUT"
+          echo "matrix=[$(seq -s, 0 $((N-1)))]" >> "$GITHUB_OUTPUT"
+          echo "mode=${{ inputs.mode }} batch=$DATE shards=$N count=$COUNT total_rate=$TR"
+
+  run:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix:
+        shard: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Fetch routines code from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/routines/" . --recursive \
+            --endpoint-url "${{ secrets.R2_ENDPOINT }}" \
+            --exclude ".git/*" --exclude "scripts/_boot.py" \
+            --exclude "data/*" --exclude "outputs/*" \
+            --exclude "*.pyc" --exclude "*/__pycache__/*"
+      - run: pip install -r requirements-daily.txt
+      - name: Stagger start
+        run: sleep $(( ${{ matrix.shard }} * 60 ))
+      - name: Run init shard (${{ inputs.mode }})
+        env:
+          PYTHONUNBUFFERED: "1"
+          BXB_BOOTSTRAP_KEY: ${{ secrets.BXB_BOOTSTRAP_KEY }}
+          BXB_APP_VERSION: ${{ vars.BXB_APP_VERSION }}
+          BXB_UNITY_VERSION: ${{ vars.BXB_UNITY_VERSION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          set -e
+          N="${{ needs.prepare.outputs.shards }}"
+          COUNT="${{ needs.prepare.outputs.count }}"
+          TR="${{ needs.prepare.outputs.total_rate }}"
+          DATE="${{ needs.prepare.outputs.date }}"
+          CONC="${{ vars.BXB_RUN_CONCURRENCY }}"; CONC="${CONC:-8}"
+          MR="${{ inputs.max_runtime }}"; DA="${{ inputs.discard_age }}"; MW="${{ inputs.max_wait }}"
+          PER_RATE=$(python -c "print(${TR}/${N})")
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          SF="$B/init_account/$DATE/state/shard-${{ matrix.shard }}"
+          if [ "${{ inputs.mode }}" = "resume" ]; then
+            mkdir -p data/init_account
+            aws s3 cp "$SF/" data/init_account/ --recursive --endpoint-url "$E"
+            python -m scripts.init_account --resume-shard 0/1 \
+              --concurrency "$CONC" --total-rate "$PER_RATE" \
+              --max-wait "$MW" --max-runtime "$MR" --discard-age "$DA" > "shard-${{ matrix.shard }}.log" 2>&1
+          else
+            PER=$(( (COUNT + N - 1) / N ))
+            REMAIN=$(( COUNT - ${{ matrix.shard }} * PER ))
+            if [ "$REMAIN" -le 0 ]; then exit 0; fi
+            [ "$PER" -gt "$REMAIN" ] && PER=$REMAIN
+            python -m scripts.init_account --count "$PER" \
+              --concurrency "$CONC" --total-rate "$PER_RATE" \
+              --platform "${{ inputs.platform }}" \
+              --max-wait "$MW" --max-runtime "$MR" > "shard-${{ matrix.shard }}.log" 2>&1
+          fi
+      - name: Upload shard state + accounts part + log to R2
+        if: always()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          DATE="${{ needs.prepare.outputs.date }}"
+          SF="$B/init_account/$DATE/state/shard-${{ matrix.shard }}"
+          if [ -n "$(ls -A data/init_account 2>/dev/null)" ]; then
+            aws s3 sync data/init_account/ "$SF/" --delete --endpoint-url "$E" || true
+          else
+            echo "local state empty, skip sync"
+          fi
+          aws s3 cp "shard-${{ matrix.shard }}.log" "$B/init_account/$DATE/logs/${{ inputs.mode }}-shard-${{ matrix.shard }}.log" --endpoint-url "$E" || true
+
+  aggregate:
+    needs: [prepare, run]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build accounts.csv from state (done set = 权威源,不依赖 existing,结构上不可能覆盖丢号)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          D="${{ needs.prepare.outputs.date }}"
+          mkdir -p state
+          aws s3 cp "$B/init_account/$D/state/" state/ --recursive --endpoint-url "$E" || true
+          python - <<'PY'
+          import json, glob, csv
+          DEVICE_COLS = ['device', 'os_version', 'device_unique_identifier', 'graphics_memory_size',
+                         'graphics_device_name', 'processor_count', 'processor_frequency',
+                         'processor_type', 'system_memory_size']
+          COLS = ['unique_key', 'platform', 'platform_name', 'username', 'diamond', 'rarity4_base_ids'] + DEVICE_COLS
+          PLAT = {1: 'ios', 2: 'android'}
+          rows = []
+          for fp in glob.glob('state/**/*.json', recursive=True):
+              try:
+                  d = json.load(open(fp, encoding='utf-8'))
+              except Exception:
+                  continue
+              if 'hunt' not in d.get('steps_done', []):      # 只收完整跑完(done)的号
+                  continue
+              uk = d.get('unique_key')
+              if not uk:
+                  continue
+              dev = d.get('device') or {}
+              row = {'unique_key': uk, 'platform': d.get('platform'),
+                     'platform_name': PLAT.get(d.get('platform'), '?'),
+                     'username': d.get('username') or '',
+                     'diamond': d.get('diamond', 0),                       # state 无则占位 0(daily 回填)
+                     'rarity4_base_ids': d.get('rarity4_base_ids', '')}    # fresh 写进 state 的起始 26 SS
+              for c in DEVICE_COLS:
+                  row[c] = dev.get(c, '')
+              rows.append(row)
+          rows.sort(key=lambda r: r['unique_key'])
+          with open('accounts.csv', 'w', encoding='utf-8', newline='') as out:
+              w = csv.DictWriter(out, fieldnames=COLS)
+              w.writeheader()
+              w.writerows(rows)
+          print(f'done accounts from state = {len(rows)}')
+          PY
+          if [ -s accounts.csv ] && [ "$(wc -l < accounts.csv)" -gt 1 ]; then
+            aws s3 cp accounts.csv "$B/init_account/$D/accounts.csv" --endpoint-url "$E"
+            aws s3 rm "$B/init_account/$D/parts/" --recursive --endpoint-url "$E" || true
+          fi
+
+  cleanup-old-runs:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Delete previous init runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate "/repos/${{ github.repository }}/actions/workflows/init.yml/runs?per_page=100" \
+            --jq '.workflow_runs[].id' | while read -r id; do
+              [ "$id" = "${{ github.run_id }}" ] && continue
+              gh api -X DELETE "/repos/${{ github.repository }}/actions/runs/$id" || true
+            done

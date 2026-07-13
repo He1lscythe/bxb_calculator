@@ -4,24 +4,30 @@ on:
   workflow_dispatch:
     inputs:
       time_point:
-        description: "时间点代称 1-4 (JST 00:29 / 05:29 / 10:29 / 17:29)"
         required: true
         type: choice
         options: ["1", "2", "3", "4"]
       shards:
-        description: "分片数 N(并行 job 数,各跑 1/N 账号、各自独立 IP)"
         required: false
-        default: "12"
+        default: ""
+      total_rate:
+        required: false
+        default: ""
 
 jobs:
   prepare:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.gen.outputs.matrix }}
+      shards: ${{ steps.gen.outputs.shards }}
+      total_rate: ${{ steps.gen.outputs.total_rate }}
     steps:
       - id: gen
         run: |
-          N=${{ inputs.shards }}
+          N="${{ inputs.shards }}"; N="${N:-${{ vars.BXB_RUN_SHARDS }}}"; N="${N:-16}"
+          TR="${{ inputs.total_rate }}"; TR="${TR:-${{ vars.BXB_RUN_TOTAL_RATE }}}"; TR="${TR:-8}"
+          echo "shards=$N"      >> "$GITHUB_OUTPUT"
+          echo "total_rate=$TR" >> "$GITHUB_OUTPUT"
           echo "matrix=[$(seq -s, 0 $((N-1)))]" >> "$GITHUB_OUTPUT"
 
   run:
@@ -29,16 +35,24 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 12
+      max-parallel: 16
       matrix:
         shard: ${{ fromJSON(needs.prepare.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: routines
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Fetch routines code from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/routines/" . --recursive \
+            --endpoint-url "${{ secrets.R2_ENDPOINT }}" \
+            --exclude ".git/*" --exclude "scripts/_boot.py" \
+            --exclude "data/*" --exclude "outputs/*" \
+            --exclude "*.pyc" --exclude "*/__pycache__/*"
       - run: pip install -r requirements-daily.txt
       - name: Fetch accounts + resolve run set (first-run vs re-run) from R2
         env:
@@ -62,14 +76,18 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
           BXB_BOOTSTRAP_KEY: ${{ secrets.BXB_BOOTSTRAP_KEY }}
+          BXB_APP_VERSION: ${{ vars.BXB_APP_VERSION }}
+          BXB_UNITY_VERSION: ${{ vars.BXB_UNITY_VERSION }}
         run: |
-          set -o pipefail
+          N="${{ needs.prepare.outputs.shards }}"
+          TR="${{ needs.prepare.outputs.total_rate }}"
+          CONC="${{ vars.BXB_RUN_CONCURRENCY }}"; CONC="${CONC:-8}"
           python -m daily \
             --time-point ${{ inputs.time_point }} \
-            --shard ${{ matrix.shard }}/${{ inputs.shards }} \
+            --shard ${{ matrix.shard }}/$N \
             --accounts-file run_accounts.csv \
-            --concurrency 30 --rate 3.0 --total-rate 30.0 \
-            --out "results-${{ matrix.shard }}.csv" 2>&1 | tee "shard-${{ matrix.shard }}.log"
+            --concurrency "$CONC" --rate 3.0 --total-rate "$TR" \
+            --out "results-${{ matrix.shard }}.csv" > "shard-${{ matrix.shard }}.log" 2>&1
       - name: Upload results + log to R2 (private)
         if: always()
         env:
@@ -88,12 +106,20 @@ jobs:
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: routines
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Fetch routines code from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/routines/" . --recursive \
+            --endpoint-url "${{ secrets.R2_ENDPOINT }}" \
+            --exclude ".git/*" --exclude "scripts/_boot.py" \
+            --exclude "data/*" --exclude "outputs/*" \
+            --exclude "*.pyc" --exclude "*/__pycache__/*"
       - name: Fetch this run's results + prior outcome + base accounts.csv from R2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
