@@ -357,22 +357,26 @@ def _update_ts_key(s):
 def extract_edit_note(soup):
     """提取本次修改内容,供编辑通知附在链接下方。
     **限定正文容器 .news_body**(排除标题/面包屑里的「追記」字样、避免回显标题)、两类来源:
-      ① update_info_container「更新ログ」块: 官网每次改动新增一条 (带 timestamp + body)。
-         取 update_info_container_timestamp 最晚的一块的 update_info_container_body 全文 (最准)。
+      ① 「更新ログ」块: 官网每次改动新增一条 (带 timestamp + body)。
+         外层容器类名有 update_info_container / update_Ninfo_container(带编号、2025-06 起、
+         同页可两种并存)两代模板 → 不按外层选、锚定稳定的内层 update_info_container_body,
+         经 parent 取同块 timestamp;取时间戳最晚一块的 body 全文 (最准)。
+         **时间戳解析不出的块直接丢**: 部分公告正文内容框复用同款 body 类名但无时间戳
+         (03642 技能详情框/04461 性能介绍框实证)、放进来会把正文当修改内容发。
          注意 body 的 id="tgl_content" 在多块间重复、不能按 id 选、只能逐块按 class 取。
       ② 含「追記」的 .caution_t 注意框 (正文内、按出现序拼接)。
     update_info 在前、追記 caution 在后 (exact 去重);都没有则空串 (workflow 不显示 📝)。"""
     body = soup.select_one(".news_body") or soup
     notes = []
 
-    # ① update_info_container: 时间戳最晚一块的 body
+    # ① 更新ログ: 时间戳最晚一块的 body (按内层类名锚定、外层容器叫什么都兼容;无 ts 不要)
     best = None  # (ts_key, text)
-    for cont in body.select(".update_info_container"):
-        body_el = cont.select_one(".update_info_container_body")
-        if not body_el:
-            continue
-        ts_el = cont.select_one(".update_info_container_timestamp")
+    for body_el in body.select(".update_info_container_body"):
+        cont = body_el.parent
+        ts_el = cont.select_one(".update_info_container_timestamp") if cont else None
         key = _update_ts_key(ts_el.get_text(" ", strip=True) if ts_el else "")
+        if key == (0, 0, 0, 0):
+            continue
         text = body_el.get_text("\n", strip=True)
         if text and (best is None or key > best[0]):
             best = (key, text)
