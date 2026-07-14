@@ -13,6 +13,9 @@ on:
       total_rate:
         required: false
         default: ""
+      tasks:
+        required: false
+        default: "1,2,3,4,5,6,7"
 
 jobs:
   prepare:
@@ -89,6 +92,7 @@ jobs:
             --shard ${{ matrix.shard }}/$N \
             --accounts-file run_accounts.csv \
             --concurrency "$CONC" --rate 3.0 --total-rate "$TR" \
+            --tasks "${{ inputs.tasks }}" \
             --out "results-${{ matrix.shard }}.csv" > "shard-${{ matrix.shard }}.log" 2>&1
       - name: Upload results + log to R2 (private)
         if: always()
