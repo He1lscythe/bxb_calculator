@@ -65,7 +65,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
         run: >
-          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts.csv" accounts.csv
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts/yuu/accounts.csv" accounts.csv
           --endpoint-url "${{ secrets.R2_ENDPOINT }}"
       - name: Stagger start (shard×60s + 随机 0-15s)
         run: |
@@ -129,7 +129,7 @@ jobs:
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
         run: |
           B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
-          aws s3 cp "$B/accounts.csv" accounts.csv --endpoint-url "$E"
+          aws s3 cp "$B/accounts/yuu/accounts.csv" accounts.csv --endpoint-url "$E"
           mkdir -p merged_results
           aws s3 cp "$B/results/gacha/" merged_results/ --recursive --endpoint-url "$E" || true
       - name: Merge rarity4 (union) + diamond (replace) into accounts.csv
@@ -149,8 +149,8 @@ jobs:
         run: |
           B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
           JST_DATE=$(TZ=Asia/Tokyo date +%Y%m%d)
-          aws s3 cp accounts.csv "$B/accounts-${JST_DATE}-gacha.csv" --endpoint-url "$E"
-          aws s3 cp accounts.new.csv "$B/accounts.csv" --endpoint-url "$E"
+          aws s3 cp accounts.csv "$B/accounts/yuu/accounts-${JST_DATE}-gacha.csv" --endpoint-url "$E"
+          aws s3 cp accounts.new.csv "$B/accounts/yuu/accounts.csv" --endpoint-url "$E"
           aws s3 rm "$B/results/gacha/" --recursive --endpoint-url "$E" || true
 
   cleanup-old-runs:
