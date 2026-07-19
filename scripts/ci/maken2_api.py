@@ -67,6 +67,15 @@ def get_credentials():
     return uk, bk.encode("ascii")
 
 
+def _require_version(env_key: str) -> str:
+    """版本号必须由 env / repo variable 注入 (与 daily 共用同源)。缺失直接失败,不兜底旧值。
+    旧兜底默认值会在游戏升版后静默过期、导致 login 被服务器无声拒绝 (无 session / 无 error_reason)。"""
+    v = os.environ.get(env_key)
+    if not v:
+        raise SystemExit(f"缺版本号 {env_key}: 必须由 repo variable / env 注入 (不兜底; 见 update-database.yml)")
+    return v
+
+
 def _device_fingerprint(unique_key: str) -> dict:
     # device_unique_identifier 不参与账号校验 (实测全 0 也能登录) — 填占位即可
     return {
@@ -74,7 +83,7 @@ def _device_fingerprint(unique_key: str) -> dict:
         "platform": 2,
         "device": "ci-runner",
         "os_version": "Linux",
-        "app_version": os.environ.get("BXB_APP_VERSION", "2.5.34"),
+        "app_version": _require_version("BXB_APP_VERSION"),
         "device_unique_identifier": "0" * 32,
         "graphics_memory_size": 0,
         "graphics_device_name": "ci",
@@ -82,7 +91,7 @@ def _device_fingerprint(unique_key: str) -> dict:
         "processor_frequency": 0,
         "processor_type": "ci",
         "system_memory_size": 0,
-        "unity_version": "2021.3.58f1",
+        "unity_version": _require_version("BXB_UNITY_VERSION"),
         "request_token": uuid.uuid4().hex,  # 客户端随机 Guid、无服务器状态
     }
 
@@ -112,6 +121,11 @@ class Session:
         if d.get("error_reason"):
             raise RuntimeError(
                 f"/master_data error: {d.get('error_type')}/{d.get('error_reason')}"
+            )
+        # 未认证/兜底响应可能无 error_reason 但也无正文 → 校验关键字段,缺则视为「没正确拿到」
+        if not d.get("master_data_version"):
+            raise RuntimeError(
+                f"/master_data 未正确返回 (无 master_data_version; keys={list(d)[:6]})"
             )
         return d
 
