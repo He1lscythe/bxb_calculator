@@ -7,7 +7,8 @@
   B. revise                  : fetch_wiki + aux → crystal_revise/bg_revise + 字段级安全检查
   C. icons + asset 归档      : (Phase 3) asset-version → CDN → extract → copy_images;asset_version 快照归档 (manifest 复用预取)
 
-各模块失败优雅降级:icons/asset/wiki 失败不阻塞 A 的 data 产出。
+致命失败 (login / master_data / asset_version manifest) → 直接非零退出、workflow 失败。
+其余优雅降级:icons/wiki/npc-motion 预取失败不阻塞 A 的 data 产出。
 
 env:
   BXB_UNIQUE_KEY / BXB_BOOTSTRAP_KEY   API 凭据 (必需)
@@ -115,19 +116,25 @@ def prefetch_npc_motions():
 
 
 def module_c(manifest) -> dict:
-    """C: asset-version 归档 + icons (npc-motion 已在 build 前预取)。manifest 复用预取结果、None 则重抓。"""
+    """C: asset-version 归档 + icons (npc-motion 已在 build 前预取)。manifest 复用预取结果、None 则重抓。
+    asset_version manifest 获取 + 归档失败 → 致命 (raise、不吞);icons 下载失败 → 降级 (不阻塞)。"""
     print("== 模块 C: asset-version 归档 + icons ==")
     if manifest is None:
-        manifest = cdn.get_manifest()
+        manifest = cdn.get_manifest()  # 失败 raise → 致命 (没正确拿到 asset_version.gz)
         print(f"  asset_version = {manifest.get('version')} | files = {len(manifest.get('files', []))}")
     root = mta.master_tables_root()
     av_status, av_folder, _ = mta.archive_asset_version(manifest, root)
     print(f"  asset_version 归档: {av_status} → {av_folder.name}")
-    ic = sync_icons.sync(manifest)
+    try:
+        ic = sync_icons.sync(manifest)
+        icons_dl = ic.get("downloaded", 0)
+    except Exception as e:
+        print(f"  icons 下载失败 (降级、不阻塞 asset_version): {type(e).__name__}: {e}")
+        icons_dl = 0
     return {
         "asset_version": manifest.get("version"),
         "asset_version_status": av_status,
-        "icons_downloaded": ic.get("downloaded", 0),
+        "icons_downloaded": icons_dl,
     }
 
 
@@ -162,11 +169,7 @@ def main():
 
     if not only_p1:
         summary.update(module_b(revise_base))
-        try:
-            summary.update(module_c(manifest))
-        except Exception as e:
-            print(f"  模块 C 失败 (降级、不阻塞 data): {type(e).__name__}: {e}")
-            summary["module_c_error"] = str(e)
+        summary.update(module_c(manifest))  # asset_version 失败 → 致命 (不再吞错降级)
 
     out = Path(os.environ.get("RUNNER_TEMP", tempfile.gettempdir())) / "ci_update_summary.json"
     out.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
