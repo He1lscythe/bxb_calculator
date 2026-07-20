@@ -346,6 +346,13 @@ def notify_asset_version(target_v=None):
     print("asset_version 通知:", "ok" if j.get("ok") else j.get("description"), "|", page)
 
 
+def notify_scenario(version):
+    """scenario .mu3 新版归档 → 发频道一条消息 (只报版本号、无 Telegraph 页)。"""
+    msg = f"📖 scenario 更新\n最新版本: {version}\n#scenario"
+    j = tg("sendMessage", chat_id=TG_CHAT, text=msg, disable_web_page_preview=True)
+    print("scenario 通知:", "ok" if j.get("ok") else j.get("description"))
+
+
 def main():
     if not TG_TOKEN or not TG_CHAT:
         print("未配置 TELEGRAM secret、跳过通知")
@@ -357,6 +364,8 @@ def main():
     elif mode == "asset_version":
         tv = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].strip().isdigit() else None
         notify_asset_version(tv)
+    elif mode == "scenario":
+        notify_scenario(sys.argv[2] if len(sys.argv) > 2 else "?")
     else:
         print(f"未知 mode: {mode!r}")
 

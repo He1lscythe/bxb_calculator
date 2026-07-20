@@ -96,9 +96,9 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [dump_npc_motions.py](../scripts/master_to_business/dump_npc_motions.py) | UnityPy 解 `D:/bxb/_dat_cache/assets/npc-motion-*.dat` → `data/_npc_motions.json` (chara motion clip duration、weapons.json 变后重生、小时级) |
 | [build_memory_slot_skills.py](../scripts/master_to_business/build_memory_slot_skills.py) | 从 HouseTop response (cross-repo `unpacking/draft/out/account/` + `bxb_wiki/data/omoide/`) → `data/_memory_slot_skills.json` (senzai 反查表、秒级) |
 
-### scripts/ci/ — 云端自动更新数据库 (GitHub Actions, 免模拟器/ADB)
+### scripts/ci/ — 云端自动更新数据库 (GitHub Actions)
 
-`.github/workflows/update-database.yml` 每天 JST 16:01 + 00:01 跑、纯 HTTP 从游戏 API 拉最新 master 重建业务 JSON。逆向 + 协议见 `unpacking/HOWTO_api_replay.md`。
+`.github/workflows/update-database.yml` 每天 JST 16:01 + 00:01 跑、纯 HTTP 从游戏 API 拉最新 master 重建业务 JSON。
 
 手动重发 workflow `repost-telegraph.yml`(渲染/合成逻辑更新后重生成历史页;走 telegraph_index → `editPage` 原地更新、URL 不变、不重发频道)。输入 `kind` 二选一 + `target`(留空=最新):
 - `kind=asset-version` — 图册重发(`target`=asset_version 号)
@@ -114,10 +114,11 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [extract_assets.py](../scripts/ci/extract_assets.py) | port parse_unity_dat_v4: `.dat` → PNG / npc-motion 时长。`extract_png` = luma/chroma 配对 YCoCg 合成 + 跳退化贴图(≤4×4/全透明/纯单色)+ 忽略 Sprite 用其 backing Texture2D(本版本 Sprite.image 抛错);无图返回 `[]`(notify/sync 不收) |
 | [sync_icons.py](../scripts/ci/sync_icons.py) | manifest 驱动: 缺失 icon → 下 .dat → extract → copy_images。重建结果与本地 copy_images 逐字节一致 |
 | [sync_npc_motions.py](../scripts/ci/sync_npc_motions.py) | 增量补 `_npc_motions.json` (manifest npc-motion vs 基线、只下缺的) |
+| [sync_scenario.py](../scripts/ci/sync_scenario.py) | 监测 `utage3_scenario_version`(login 响应)、新版从 CDN `scenario_lz4/android/scenario-{ver}.mu3` 下载 → **Rijndael-256-CBC 解密**(256bit block/ZeroPadding、纯 Python `pycryptoplus`、全量 ~2.5min、只在有新版时跑)→ ① 存 UnityFS 累积 `scenario/unity3d/scenario-{ver}.unity3d`(git 自动 delta、每版 ~40KB)② UnityPy `read_typetree` 抽 `AdvChapterData.importGridList` → 每本 `scenario/{book}.tsv`(Utage 原生命令表、多 grid 用 `# sheet名` 分段、裁尾部空 cell、cell 内 `\t\r\n\\` 转义)。`unity3d/` 文件已存在=unchanged。本地 Windows 有更快的 `.NET` 版 `draft/decrypt_scenario_mu3.py` |
 | [run_update.py](../scripts/ci/run_update.py) | 编排: **npc-motion 预取 (build 前、新动作当轮进 build_characters)** → A (master→6 表)、B (fetch_wiki+aux→revise+安全检查)、C (asset-version→icons+快照、manifest 复用预取)、D (快照+changelog)。各模块失败优雅降级 |
 | [notify.py](../scripts/ci/notify.py) | 更新后发 Telegram 频道通知: `master_data` changelog → Telegraph 文章、`asset_version` delta → 解 PNG→R2→Telegraph 图册。Telegraph 用固定账号 (secret `TELEGRAPH_TOKEN`) `createPage`,page path 记进 `master_tables/state/telegraph_index.json` (随 data/master-tables 提交);同一快照重生 changelog 时 `editPage` **原地更新** (URL 不变、频道旧链接自动指向新内容、不重发)。无 `TELEGRAPH_TOKEN` 则退回匿名建页 (不可编辑) |
 
-提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise → **data-staging** (安全检查通过且有变更);master_data + asset_version 快照 + `state/telegraph_index.json` → **data/master-tables**。`paths.py`/`copy_images.py` 都加了 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向 checkout/临时目录、本地默认不变。
+提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise → **data-staging** (安全检查通过且有变更);master_data + asset_version 快照 + `state/telegraph_index.json` + `scenario/`(`unity3d/scenario-<ver>.unity3d` 累积 + `{book}.tsv` 每本可读表)→ **data/master-tables**。scenario 版本(`utage3_scenario_version`)独立于 master_data 跳、单独 commit + 发 `#scenario` 频道消息(只报版本号、无 Telegraph 页);二进制 ~6MB/版 git 自动 delta(每版 ~40KB)、TSV 约 15.5MB 文本(整游戏剧情、每版只 diff 变化的 book);翻译回灌以 `.unity3d` 为无损母本叠加 Text、TSV 只作对照。`paths.py`/`copy_images.py` 都加了 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向 checkout/临时目录、本地默认不变。
 
 > asset-version 流程 (2026-06-12 抓包确认、`Maken.HTTP.Get/Download` @ OnePlus): `GET bxb-asset.grimoire.codes/version_lz4/android/current` → 版本号、`/version-{ver}.gz` → manifest、`package_lz4/android/{name}.v{ver}.dat` → 资源,全程**无鉴权纯 CDN**。新动作 (npc-motion) + 新实体图 (icons) 都增量自动补。全量 npc-motion 重生 / 重绘图强刷仍走本地 (罕见)。
 
@@ -224,11 +225,3 @@ python scripts/master_to_business/copy_images.py
 python scripts/master_to_business/gen_motion_table.py
 ```
 
-## Cleanup 历史 (2026-06-09)
-
-本次清理:
-- 删 `scripts/master_to_business/migrate_old_revise.py` (一次性 init、跑过了)
-- 删 `data/bd_special.json` + `data/bd_special_durations.json` (wiki 时代残留)
-- 删 整个 `draft/` 目录 (12 file、2026-05 早期临时工作)
-- 重写本文件
-- 新增 `fetch_wiki_acquisition.py` (反复使用、抓 wiki「入手方法」字段 patch crystal/bg)
