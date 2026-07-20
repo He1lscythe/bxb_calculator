@@ -8,3 +8,4 @@ Pillow            # 模块 C: PNG 编码
 numpy             # 模块 C: extract_assets luma/chroma → YCoCg 合成
 boto3             # notify.py asset_version: 解出的 PNG 传 R2 (S3 兼容) 供 Telegraph 图册
 pycryptoplus      # sync_scenario: scenario.mu3 Rijndael-256-CBC 解密 (256-bit block、pycryptodome 不支持)
+setuptools        # pycryptoplus 依赖 pkg_resources (Python 3.12 runner 默认不带、否则 import 即崩)
