@@ -21,8 +21,8 @@ import re
 from pathlib import Path
 
 import requests
-import UnityPy
-from CryptoPlus.Cipher import python_Rijndael
+# UnityPy / CryptoPlus 惰性 import(在用到的函数内)—— 它们(尤其 CryptoPlus 依赖 pkg_resources)
+# import 失败不应连累 run_update 顶层 import scenario 而拖垮整个更新;sync() 里各步 try/except 兜住。
 
 ASSET_BASE = "https://bxb-asset.grimoire.codes"
 SCENARIO_BASE = ASSET_BASE + "/scenario_lz4/android"
@@ -39,6 +39,7 @@ def scenario_dir(root) -> Path:
 
 
 def _decrypt(blob: bytes) -> bytes:
+    from CryptoPlus.Cipher import python_Rijndael  # 惰性:见顶部说明
     c = python_Rijndael.new(AES_KEY, python_Rijndael.MODE_CBC, AES_IV, blocksize=BLOCK)
     return c.decrypt(blob)
 
@@ -84,6 +85,7 @@ def _safe_book_filename(name: str) -> str:
 
 def _extract_tsv(bundle_path, out_dir) -> int:
     """从解密后的 UnityFS 抽每本 book 的 TSV 到 out_dir。返回写出的 book 数。"""
+    import UnityPy  # 惰性:见顶部说明
     out_dir = Path(out_dir)
     env = UnityPy.load(str(bundle_path))
     n = 0
