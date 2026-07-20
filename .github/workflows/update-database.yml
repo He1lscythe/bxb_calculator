@@ -92,6 +92,8 @@ jobs:
           if [ -f "$F" ]; then
             echo "snapshot_status=$(jq -r '.snapshot_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
             echo "asset_version_status=$(jq -r '.asset_version_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
+            echo "scenario_status=$(jq -r '.scenario_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
+            echo "scenario_version=$(jq -r '.scenario_version // ""' "$F")" >> "$GITHUB_OUTPUT"
             echo "revise_safe=$(jq -r '.revise_safe // false' "$F")" >> "$GITHUB_OUTPUT"
             echo "revise_changed=$(jq -r '(.revise_changed // []) | length' "$F")" >> "$GITHUB_OUTPUT"
           else
@@ -115,6 +117,24 @@ jobs:
           git commit -m "data(master_tables): snapshot $(date -u +%FT%TZ) (API auto)"
           git pull --rebase origin master_tables || true
           git push origin HEAD:master_tables
+
+      # 独立于 master_data 快照 (scenario 版本单独跳);上面 snapshot 步若同轮也归档了会顺带 git add -A 提交、此处即 no-op
+        if: steps.sum.outputs.scenario_status == 'archived'
+        working-directory: _mt
+        run: |
+          git add scenario/ 2>/dev/null || true
+          if git diff --cached --quiet; then echo "scenario 无变更 (已随快照提交)"; exit 0; fi
+          git commit -m "data(master_tables): scenario ${{ steps.sum.outputs.scenario_version }} $(date -u +%FT%TZ)"
+          git pull --rebase origin master_tables || true
+          git push origin HEAD:master_tables
+
+      # scenario 新版 → 发频道一条消息 (#scenario、只报版本号)
+        if: steps.sum.outputs.scenario_status == 'archived'
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/ci/notify.py scenario "${{ steps.sum.outputs.scenario_version }}"
 
         if: steps.sum.outputs.snapshot_status == 'archived'
         continue-on-error: true

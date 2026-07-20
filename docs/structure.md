@@ -93,6 +93,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [gen_motion_table.py](../scripts/master_to_business/gen_motion_table.py) | `characters.json` → `docs/motion_table.md` (master 改 motion_id 后重跑) |
 | [fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) | 抓 altema wiki「入手方法」字段、patch 进 `data/crystals.json` (字段 `入手方法`) + `data/bladegraphs.json` (字段 `acquisition`)、按 name 匹配 |
 
+### scripts/ci/ — 云端自动更新数据库 (GitHub Actions)
 
 `.github/workflows/update-database.yml` 每天 JST 16:01 + 00:01 跑、
 
@@ -109,7 +110,6 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [动作同步.py](../scripts/ci/动作同步.py) | 增量补 `_npc_motions.json` (manifest npc-motion vs 基线、只下缺的) |
 | [
 
-提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise → **data-staging** (安全检查通过且有变更);master_data + asset_version 快照 + `state/通知索引.json` → **master_tables**。`paths.py`/`copy_images.py` 都加了 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向 checkout/临时目录、本地默认不变。
 
 > asset-version 流程 (2026-06-12 实测确认、`
 
@@ -215,11 +215,3 @@ python scripts/master_to_business/copy_images.py
 python scripts/master_to_business/gen_motion_table.py
 ```
 
-## Cleanup 历史 (2026-06-09)
-
-本次清理:
-- 删 `scripts/master_to_business/migrate_old_revise.py` (一次性 init、跑过了)
-- 删 `data/bd_special.json` + `data/bd_special_durations.json` (wiki 时代残留)
-- 删 整个 `draft/` 目录 (12 file、2026-05 早期临时工作)
-- 重写本文件
-- 新增 `fetch_wiki_acquisition.py` (反复使用、抓 wiki「入手方法」字段 patch crystal/bg)
