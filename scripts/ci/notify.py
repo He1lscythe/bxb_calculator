@@ -346,10 +346,29 @@ def notify_asset_version(target_v=None):
     print("asset_version 通知:", "ok" if j.get("ok") else j.get("description"), "|", page)
 
 
-def notify_scenario(version):
-    """scenario .mu3 新版归档 → 发频道一条消息 (只报版本号、无 Telegraph 页)。"""
-    msg = f"📖 scenario 更新\n最新版本: {version}\n#scenario"
-    j = tg("sendMessage", chat_id=TG_CHAT, text=msg, disable_web_page_preview=True)
+def notify_scenario(version, summary_path=None):
+    """scenario 新版归档 → 发频道消息 (版本号 + 新增/修改的 book 列表,从 ci_update_summary.json 读)。"""
+    added, modified = [], []
+    if summary_path and os.path.exists(summary_path):
+        try:
+            s = json.loads(Path(summary_path).read_text(encoding="utf-8"))
+            added = s.get("scenario_added") or []
+            modified = s.get("scenario_modified") or []
+        except Exception:  # noqa: BLE001
+            pass
+
+    def cap(lst, k=25):
+        return ", ".join(lst[:k]) + (f" …(共 {len(lst)})" if len(lst) > k else "")
+
+    lines = [f"📖 scenario 更新  最新版本: {version}"]
+    if added:
+        lines.append(f"🆕 新增 {len(added)} 本: {cap(added)}")
+    if modified:
+        lines.append(f"✏️ 修改 {len(modified)} 本: {cap(modified)}")
+    if not added and not modified:
+        lines.append("(book 内容无变化)")
+    lines.append("#scenario")
+    j = tg("sendMessage", chat_id=TG_CHAT, text="\n".join(lines), disable_web_page_preview=True)
     print("scenario 通知:", "ok" if j.get("ok") else j.get("description"))
 
 
@@ -365,7 +384,8 @@ def main():
         tv = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].strip().isdigit() else None
         notify_asset_version(tv)
     elif mode == "scenario":
-        notify_scenario(sys.argv[2] if len(sys.argv) > 2 else "?")
+        notify_scenario(sys.argv[2] if len(sys.argv) > 2 else "?",
+                        sys.argv[3] if len(sys.argv) > 3 else None)
     else:
         print(f"未知 mode: {mode!r}")
 

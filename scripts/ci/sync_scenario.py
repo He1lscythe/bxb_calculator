@@ -83,12 +83,14 @@ def _safe_book_filename(name: str) -> str:
     return base + ".tsv"
 
 
-def _extract_tsv(bundle_path, out_dir) -> int:
-    """从解密后的 UnityFS 抽每本 book 的 TSV 到 out_dir。返回写出的 book 数。"""
+def _extract_tsv(bundle_path, out_dir) -> dict:
+    """从解密后的 UnityFS 抽每本 book 的 TSV 到 out_dir。写盘前对比旧内容,收集 新增/修改 的 book。
+    返回 {count, added:[book...], modified:[book...]}。(首次归档 = 全部 added;book 删除不追踪。)"""
     import UnityPy  # 惰性:见顶部说明
     out_dir = Path(out_dir)
     env = UnityPy.load(str(bundle_path))
-    n = 0
+    count = 0
+    added, modified = [], []
     for o in env.objects:
         if o.type.name != "MonoBehaviour":
             continue
@@ -103,9 +105,16 @@ def _extract_tsv(bundle_path, out_dir) -> int:
         body = _render_book_tsv(grids)
         if not body.strip():
             continue
-        (out_dir / _safe_book_filename(name)).write_text(body, encoding="utf-8")
-        n += 1
-    return n
+        stem = name[:-5] if name.endswith(".book") else name
+        p = out_dir / _safe_book_filename(name)
+        old = p.read_text(encoding="utf-8") if p.exists() else None
+        if old is None:
+            added.append(stem)
+        elif old != body:
+            modified.append(stem)
+        p.write_text(body, encoding="utf-8")
+        count += 1
+    return {"count": count, "added": sorted(added), "modified": sorted(modified)}
 
 
 def sync(version, root) -> dict:
@@ -141,11 +150,12 @@ def sync(version, root) -> dict:
     u3d.mkdir(parents=True, exist_ok=True)
     dest.write_bytes(pt)
     try:
-        tsv = _extract_tsv(dest, d)
+        ex = _extract_tsv(dest, d)
     except Exception as e:  # noqa: BLE001
         return {"status": "archived", "version": version, "path": str(dest), "size": len(pt),
-                "tsv": 0, "error": f"TSV 抽取失败 {type(e).__name__}: {e}"}
-    return {"status": "archived", "version": version, "path": str(dest), "size": len(pt), "tsv": tsv}
+                "tsv": 0, "added": [], "modified": [], "error": f"TSV 抽取失败 {type(e).__name__}: {e}"}
+    return {"status": "archived", "version": version, "path": str(dest), "size": len(pt),
+            "tsv": ex["count"], "added": ex["added"], "modified": ex["modified"]}
 
 
 if __name__ == "__main__":

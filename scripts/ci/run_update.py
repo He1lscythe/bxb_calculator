@@ -150,13 +150,15 @@ def module_scenario(session) -> dict:
     root = mta.master_tables_root()
     res = sync_scenario.sync(ver, root)
     if res["status"] == "archived":
-        tail = f" ({res['size']:,} bytes, {res.get('tsv', 0)} TSV)"
+        tail = (f" ({res['size']:,} bytes, {res.get('tsv', 0)} TSV; "
+                f"新增 {len(res.get('added', []))} / 修改 {len(res.get('modified', []))} 本)")
     elif res.get("error"):
         tail = f" — {res['error']}"
     else:
         tail = ""
     print(f"  scenario {ver}: {res['status']}{tail}")
-    return {"scenario_status": res["status"], "scenario_version": ver}
+    return {"scenario_status": res["status"], "scenario_version": ver,
+            "scenario_added": res.get("added", []), "scenario_modified": res.get("modified", [])}
 
 
 def snapshot_revise_base() -> dict:
