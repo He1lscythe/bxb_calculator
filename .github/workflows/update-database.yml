@@ -139,7 +139,7 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python scripts/ci/notify.py scenario "${{ steps.sum.outputs.scenario_version }}"
+        run: python scripts/ci/notify.py scenario "${{ steps.sum.outputs.scenario_version }}" "${{ runner.temp }}/ci_update_summary.json"
 
       # master_data changelog → Telegraph 文章 → 发频道
       - name: Notify Telegram (master_data changelog)
