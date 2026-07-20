@@ -1,0 +1,2169 @@
+# E_592_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Se	強風	TRUE
+Bg	戦場跡
+	黒グラデーション		エフェクト表
+	レヴァ	慌て破損
+FadeIn	black					1.5
+Tween	レヴァ	ShakePosition	x=5				NoWait
+	レヴァ	慌て破損						……ぐ、うっ……ヘ、ル……！
+CharacterOff	レヴァ
+	ヘル	悲しい破損						………………
+Tween	ヘル	MoveBy	y=-500 time=2				NoWait
+Wait						.5
+Se	倒れる
+Wait						.5
+CharacterOff	ヘル
+Wait						1
+	レヴァ	慌て破損						……ぐっ…………\nヘル……ヘル……！
+Tween	レヴァ	MoveBy	y=-20				NoWait
+	レヴァ							お願い、返事……して、ヘル……
+	レヴァ							どう、して……私を、庇って……\nヘル…………
+CharacterOff	レヴァ
+	ヘル	<Off>						………………
+CharacterOff	ヘル
+	レヴァ	慌て破損
+Tween	レヴァ	ShakePosition	x=5				NoWait
+	レヴァ	慌て破損						……ごめんね……\n守って、あげられなくて……\nごめん、ね……
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=false
+	　　　　　　　　　　
+Bg	曇天					0
+FadeIn	black					.5
+	レヴァ	<Off>						こんな、ことに……なる、なら……\nもっと、ちゃん、と……\n伝えて……おけば、よかった……
+	レヴァ	<Off>						……お願い、ヘル<dash=2>
+FadeOut	black					1.3
+CharacterOff						0
+StopSe						1
+Bg	黒背景					0
+Param	character_grayout=false
+	イベントロゴ592		エフェクト表
+Wait						1
+FadeIn	black					1.3
+	　　　　　　　　　　							\n<color=blue><dash=2>ロストレコードリコレクションズ<dash=2></color>
+Param	character_grayout=true
+FadeOut	black					1.3
+CharacterOff						0
+Bg	草原B					0
+	ディーア	悔しい2				0
+Wait						2
+FadeIn	black					1
+	ディーア	悔しい2						はぁ、はぁ……
+CharacterOff
+Bgm	平和
+	ヘル		1_3_b
+	レヴァ		3_3					はー！ いっぱい買ったねぇ！\nマイマスター！
+CharacterOff
+	ディーア	汗2						そりゃあ、あれだけの店を\n回ったからな……
+CharacterOff
+	ヘル		1_3_b
+	レヴァ		3_3
+Tween	レヴァ	MoveBy	x=10				NoWait
+	レヴァ							はい、この袋も持ってね、お願い！
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	MoveBy	y=-10				NoWait
+	ディーア	驚き2						おっと……
+Tween	ディーア	ShakePosition	x=5				NoWait
+	ディーア	悔しい2						うっ……\nに、荷物、重い……
+CharacterOff
+	レヴァ		3_3
+	ヘル		1_3_b					……お姉ちゃん、\nいくら久しぶりだからって、\nはしゃぎ過ぎよ
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァ							だって、ヘルと一緒に\n買い物できるのが嬉しいんだもん！
+Tween	レヴァ	PunchPosition	y=50				NoWait
+	レヴァ							さぁ、次はどこに行こうかなー♪
+CharacterOff
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						えっ、まだ買い物するのか!?
+CharacterOff
+	ヘル		1_3_b
+	レヴァ		3_3					当然でしょ！\nまだまだ買いたいものが\nたくさんあるもの！
+	レヴァ							あ、そうだ！\n次は洋服を買いに行こうよっ！\n新しいお揃いの服が欲しかったの！
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	ヘル							いやよ……恥ずかしいじゃない
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァ							あっ、ヘル照れてる？\nかわいいなーもう！
+Tween	レヴァ	PunchPosition	y=50				NoWait
+Tween	レヴァ	MoveBy	x=-150
+Se	ポップイン
+	ヘル							ちょっと、抱き着かないで……！
+	レヴァ
+Tween	レヴァ	PunchPosition	y=50				NoWait
+	レヴァ							抱き着くっ！\n妹を抱きしめない姉なんて\nこの魔界に存在しないんだから！
+Tween	ヘル	ShakePosition	x=5				NoWait
+	ヘル							もう、適当なこと言わないで……！
+CharacterOff
+	ディーア	汗2						レヴァ、そのくらいにしないと\nヘルが苦しそうだぞ？
+CharacterOff
+	ヘル		1_3_b
+	レヴァ		3_3
+Tween	レヴァ	PunchPosition	y=50				NoWait
+	レヴァ	慌て						えっ!?\nごめんねヘル、苦しかった!?
+Tween	ヘル	MoveBy	x=-10				NoWait
+	ヘル	悲しい						べ、別に、嫌なわけじゃ……
+Tween	レヴァ	MoveBy	x=-20				NoWait
+	レヴァ	通常						そうかぁー\nヘルは頭なでなでの方が好きかぁー
+	ヘル
+Tween	ヘル	PunchPosition	y=50				NoWait
+	ヘル	通常						そういう問題じゃないわよ……！
+Tween	ヘル	MoveBy	x=-20				NoWait
+	ヘル							まったく……\nあんまりベタベタしないでちょうだい
+Tween	ヘル	MoveBy	x=-10				NoWait
+	レヴァ							うーん！ ツンツンしてるヘルも\nすっごくかわいー！\n思いっきりなでなでしてあげるっ！
+Tween	ヘル	PunchPosition	y=30				NoWait
+	ヘル							私の話聞いてたのかしら
+CharacterOff
+	ディーア	笑い2						二人は本当に仲が良いな
+CharacterOff
+	レヴァ		3_3
+	ヘル		1_3_b					これのどこが……!?
+	レヴァ
+Tween	レヴァ	MoveBy	x=-20				Add
+Tween	レヴァ	PunchPosition	y=50				NoWait
+	レヴァ							えへへ、やっぱり分かるー!?\n魔界で一番仲がいい姉妹だもの！
+	ヘル							ちょっと、重いってば……！
+CharacterOff
+	ディーア	通常2						ヘルは相変わらずツンツンしてるな\nそんなにレヴァを遠ざけたいのか？
+	ディーア	驚き2						本気で嫌ってわけじゃないだろ？
+CharacterOff
+	レヴァ		3_3
+	ヘル		1_3_b					別に……マイマスターには、\n関係ないことよ
+Tween	レヴァ	PunchPosition	y=50				NoWait
+	レヴァ							照れてるんだよねっ！\nだから照れ隠しだよねーっ！
+CharacterOff
+	ディーア	笑い2						なるほど照れてるのか……
+CharacterOff
+	レヴァ		3_3
+	ヘル		1_3_b
+Tween	ヘル	PunchPosition	y=50				NoWait
+	ヘル							照れてないってば！
+Tween	レヴァ	MoveBy	x=-20				NoWait
+	レヴァ							顔真っ赤じゃない！\nやっぱりヘル、最高にかわいいー♪
+FadeOut	black					.2
+CharacterOff						0
+Bg	黒背景					0
+StopBgm
+Se	回想
+	　　　　　　　　　　					0
+FadeIn	black					0
+	？？？？							<color=red>…………みーつけたっ♪</color>
+FadeOut	black					.5
+CharacterOff						0
+Bg	草原B
+FadeIn	black					.5
+Wait						.5
+Se	闇3
+Se	闇2
+FadeOut	purple					.5
+Bgm	絶望
+Bg	草原B(曇り)					1
+FadeIn	purple					.5
+Wait						.7
+	ディーア	悔しい2						…………ッ!?
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	本気	3_3					え？\nなに、突然……
+	ヘル							……なにか、くる……!?
+FadeOut	red					.3
+Wait						.3
+	ヘル		1_3_b
+	レヴァ	慌て	3_3
+Se	火3
+Se	火事					.5
+Shake	Graphics	ShakePosition	time=1.5				NoWait
+FadeIn	redo					.3
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァ							きゃああっ!!
+Tween	ヘル	MoveBy	x=20				NoWait
+	ヘル							お姉ちゃん！
+CharacterOff
+	ディーア	本気2						レヴァ！ ヘル！
+CharacterOff
+Se	風1
+	レヴァロスト	レヴァ？	a1 2			.7
+Tween	レヴァロスト	MoveBy	y=-100				NoWait
+	レヴァロスト	レヴァ？						レヴァンテイン、やっと見つけたっ！
+CharacterOff
+Bgm	緊迫
+	ディーア	悔しい2						な、レヴァンテイン……!?
+CharacterOff
+	レヴァ	慌て	3_3
+	ヘル	悲しい	1_3_b					お姉、ちゃん……？
+	レヴァ	慌て						なんなの、この、魔力……
+CharacterOff
+	ディーア	怒り2						まさか……\nお前も、<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>か……？
+CharacterOff
+	レヴァロスト	レヴァ	p3					えへへっ、だいせいかーい！\n立てば紅、座れば業火、\n歩く姿は終末戦争！
+Tween	レヴァロスト	PunchPosition	y=50				NoWait
+	レヴァロスト	レヴァ						レヴァンテイン=ロストちゃん推参!!
+	レヴァロスト	レヴァ						レヴァンテインは、\nこの私が燃やし尽くしちゃうよっ！
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	慌て	3_3					レヴァンテイン……ロスト……？\nどういう、こと……
+	レヴァ	慌て						まさか、私を狙って……？
+CharacterOff
+	レヴァロスト	レヴァ	p3
+Tween	レヴァロスト	PunchPosition	y=50				NoWait
+	レヴァロスト	レヴァ						そうだよっ！ 私は、\n『レヴァンテイン』を\n破壊しに来たのっ！
+CharacterOff
+	ヘル		1_3
+	レヴァ	慌て	3_3					そんな……！
+	レヴァ	慌て	3_3_b
+Tween	ヘル	MoveTo	x=0				NoWait
+	ヘル							……そんなこと、させると思う？
+	レヴァ							ヘル……!?
+	ヘル							下がってて、お姉ちゃん
+CharacterOff
+	レヴァロスト	レヴァ	p3					あら？ 勇敢ね、ヘル！\n"お姉ちゃん"のこと庇うなんてっ！
+CharacterOff
+	レヴァ	慌て	3_3_b
+	ヘル		2_3					……気安く呼ばないで
+	ヘル							あなたがどんな兵器でも関係ないわ、\nお姉ちゃんには指一本触れさせない
+	ヘル							私がすぐに焼き尽くして……
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	黒背景		エフェクト裏			0
+Wait						.2
+Se	火3
+Se	火事
+	オーラ赤2		エフェクト表2
+	オーラ炎		エフェクト表			.5
+Wait						.3
+FadeOut	red					.5
+CharacterOff						0
+Bg	草原B(曇り)					0
+ImageEffectOff	SpriteCamera	Bloom
+Param	character_grayout=true
+	レヴァ		3_3
+	ヘル		2_3
+FadeIn	red					.5
+Tween	ヘル	ShakePosition	x=10
+	ヘル							あ、ぐっ……
+Tween	ヘル	MoveBy	y=-20				NoWait
+Se	倒れる
+CharacterOff	ヘル					.5
+Wait						.5
+	レヴァ	慌て						ヘルっ!!
+CharacterOff
+Param	character_grayout=false
+	オーラ炎		エフェクト表
+	レヴァロスト	レヴァ	p3
+Se	火事
+Wait						.5
+CharacterOff	オーラ炎					1
+	レヴァロスト	レヴァ						えっと、何を\n焼き尽くすって言ったっけ？
+Param	character_grayout=true
+StopSe
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	慌て	3_3
+	ヘル							ぐぅ……お、おねえちゃ……
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァ	慌て						やめてっ!!\nヘルは関係ないでしょう！
+CharacterOff
+	レヴァロスト	レヴァ	p3					やめて欲しい？\nあなたがこのまま私に破壊されるなら\nヘルは助けてあげてもいいよっ♪
+CharacterOff
+	ディーア	悔しい2						そんなこと、させるわけないだろ！
+CharacterOff
+Param	character_grayout=false
+StopBgm
+	黒グラデーション		エフェクト裏
+	レヴァロスト	レヴァ						えー残念！\nなら……みーんな燃やしちゃうね！
+Bgm	魔王バトル
+Se	光1
+	アネセサリロゴ	赤	エフェクト表			.5
+Wait						.5
+CharacterOff	アネセサリロゴ					.5
+Wait						.5
+Se	火2
+	オーラ炎		エフェクト表			1
+	レヴァロスト	レヴァ						私は、レヴァンテインを\n破壊するために造られた\n<ruby=ロスト>《対魔剣殲滅魔導兵器》</ruby>だもん！
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	レヴァ	慌て	2_2					……っ、マイマスター！
+	ディーア							ああ、迎撃だ、レヴァ！
+CharacterOff
+Param	character_grayout=false
+	アネセサリロゴ	赤	エフェクト裏
+	レヴァロスト	レヴァ						さぁ、大人しく\n私の炎に焼かれてねっ♪
+	オーラ炎		エフェクト表			1
+Param	character_grayout=true
+FadeOut	red					1
+Se	火2
+Se	光3
+Se	火3
+Wait						2
+If	isdebug==true
+CharacterOff
+Jump	*E_592_02
+EndIf
+EndScenario
+
+# E_592_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔王バトル
+Bg	黒背景
+FadeIn	black					.5
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	火3
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+CharacterOff						0
+Bg	草原B(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	レヴァ	慌て	2_2
+	ディーア	悔しい2	1_2
+Tween	ディーア	ShakePosition	x=10				NoWait
+Tween	レヴァ	ShakePosition	x=10				NoWait
+	レヴァ	慌て						きゃあっ！
+	ディーア	悔しい2						くっ……！
+CharacterOff
+Param	character_grayout=false
+	オーラ炎		エフェクト表
+Se	火1
+	レヴァロスト	レヴァ	p3					まだまだぁ！\nすっごいのいっくよぉ！
+FadeOut	red					.3
+CharacterOff						0
+Se	火3
+Se	光2
+Wait						.3
+	レヴァ	本気	p7			0
+FadeIn	red					.3
+	レヴァ	本気	p7					ぐっ……まだっ！
+CharacterOff
+	レヴァロスト	レヴァ	p3			.5		まだ、何？
+CharacterOff
+	レヴァ	慌て	p7					…………っ!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	火2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+CharacterOff						0
+Bg	草原B(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	レヴァ	慌て破損	画面外_左
+Tween	レヴァ	MoveTo	x=0				NoWait
+	レヴァ	慌て破損						きゃあああっ!!
+CharacterOff
+	ディーア	本気2	1_2
+	ヘル		2_2					お姉ちゃん！
+	ディーア	本気2						レヴァ！
+CharacterOff
+	レヴァロスト	レヴァ	p3					他人の心配、してる場合かなぁ？
+FadeOut	red					.3
+CharacterOff						0
+Se	火3
+Se	光2
+Wait						.3
+	ヘル	悲しい破損	2_2
+	ディーア	悔しい2	1_2
+FadeIn	red					.3
+Tween	ディーア	ShakePosition	x=10				NoWait
+Tween	ヘル	ShakePosition	x=10				NoWait
+	ヘル							あああっ!!
+	ディーア							ぐあっ……！
+CharacterOff
+	レヴァロスト	レヴァ	p3					はぁ、あっという間だね♪
+CharacterOff
+	レヴァ	慌て破損	3_3
+Tween	レヴァ	ShakePosition	x=10				NoWait
+	レヴァ							（駄目……体が、動かない……）
+CharacterOff
+	レヴァロスト	レヴァ						そろそろ、壊れて？
+Param	character_grayout=false
+Se	火3
+	オーラ炎		エフェクト表			1
+	集中線		エフェクト表2			1
+Wait						1
+CharacterOff						0
+	黒グラデーション		エフェクト表
+	レヴァ	慌て破損	3_3
+Tween	レヴァ	MoveBy	y=-10
+	レヴァ	慌て破損						（壊される……！）
+Param	character_grayout=true
+CharacterOff	黒グラデーション
+CharacterOff	集中線
+	ヘル	悲しい破損	1_4
+Tween	ヘル	MoveTo	x=0 time=1				NoWait
+	ヘル							お姉ちゃん、危ない！
+Se	ジャストガード
+FadeOut	white					.3
+FadeIn	white					.3
+	レヴァ	慌て破損						ヘル……！
+CharacterOff
+	レヴァロスト	レヴァ本気	p3			0
+Tween	レヴァロスト	MoveBy	x=-10				NoWait
+	レヴァロスト							………………っ!!
+CharacterOff
+	ヘル	悲しい破損	3_3
+	レヴァ	慌て破損	3_3					…………え、今……
+CharacterOff
+	ディーア	怒り2						（このままじゃまずい……）
+	ディーア	本気2						レヴァ！ ヘル！\n一度撤退するぞ！
+CharacterOff
+	ヘル	通常破損	3_3
+	レヴァ	慌て破損	3_3
+Tween	レヴァ	ShakePosition	x=5				NoWait
+	レヴァ	慌て破損						でも……!!
+CharacterOff
+	ヘル	通常破損	2_2
+	ディーア	怒り2	1_2					ヘル、できるな？
+	ヘル							まかせて、マイマスター
+CharacterOff
+	レヴァ	慌て破損						ヘル……!!
+CharacterOff
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+	ディーア	本気2	1_2
+	ヘル	通常破損	2_2					ブレイズドライブ……!!
+Se	光3
+FadeOut	#604579					.3
+StopBgm
+CharacterOff						0
+Se	火3
+Wait						1.5
+	レヴァロスト	レヴァ	p3			0
+	土煙		エフェクト表			0
+FadeIn	#604579					.5
+CharacterOff	土煙					1
+Wait						1
+	レヴァロスト	レヴァ						……へぇ\nま、そうだよね！\nレヴァンテイン=ヘルの炎なんて<dash=2>
+	レヴァロスト							……って、あれれっ？
+FadeOut	white					.3
+CharacterOff						0
+ZoomCamera	SpriteCamera	1.5	-350	250		.1
+FadeIn	white					.3
+Wait						1
+ZoomCamera	SpriteCamera	1.5	350	250		1.5
+Wait						1
+FadeOut	white					.3
+ZoomCamera	SpriteCamera	1				.1
+FadeIn	white					.3
+	レヴァロスト	レヴァ本気	p3					……逃げちゃったのかな？
+	レヴァロスト	レヴァ本気						………………
+	レヴァロスト	レヴァ						……うーん、\n予定と違うけど、まぁいっか♪
+Tween	レヴァロスト	PunchPosition	y=50				NoWait
+	レヴァロスト	レヴァ						どうせ破壊するのは変わらないんだし\nちょっとなら時間あげてもいっか！\n私ってば優しいー！
+FadeOut	black					.5
+Param	character_grayout=false
+CharacterOff						0
+Bg	曇天					0
+	　　　　　　　　　　					0
+FadeIn	black					.5
+	レヴァロスト	<Off>						ふふっ、\n貴重なお別れの時間\nだーいじに使ってねっ♪
+FadeOut	black					1
+CharacterOff						0
+Bg	草原A(曇り)
+Param	character_grayout=true
+Bgm	絶望
+	ディーア	悔しい2
+FadeIn	black					1
+	ディーア	悔しい2						……逃げ切れたみたいだな
+CharacterOff
+	ヘル	通常破損	1_3_b
+	レヴァ	慌て破損	3_3					………………
+	ヘル	通常破損						だけど、見つかるのも時間の問題よ
+CharacterOff
+	ディーア	怒り2						ああ、確かにそうだな\nまだ街までは距離があるし\n今のうちに……
+CharacterOff
+	レヴァ	慌て破損	3_3
+	ヘル	悲しい破損	1_3_b
+Wait						.5
+FadeOut	lime					.5
+Se	回復
+FadeIn	lime					.7
+	レヴァ	慌て	3_3			.5
+	ヘル	通常	1_3_b			.5
+Wait						.7
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						あくまで、応急手当だ\n万全とは程遠い……
+CharacterOff
+	ヘル	通常	1_3_b
+	レヴァ	通常	3_3					うん、大丈夫……\nありがとう、マイマスター
+	レヴァ							ヘルは大丈夫？
+	ヘル	通常						ええ、お姉ちゃんこそ\n無理はしないで
+CharacterOff
+	ディーア	怒り2						ごめんな、二人とも……
+	ディーア							とにかく、このまま街に戻って、\nちゃんとクランさんに診てもらおう
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	本気	3_3					……待って、マイマスター
+CharacterOff
+	ディーア	驚き2						どうした、レヴァ？
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	本気	3_3					私ね、あの子と……\nレヴァンテイン=ロストと\n少し話をしてみたいの
+CharacterOff
+	ディーア	驚き2						えっ？
+CharacterOff
+	レヴァ	本気	3_3
+	ヘル	通常	1_3_b					お姉ちゃん、正気なの……？
+	ヘル	悲しい						あいつはお姉ちゃんを\n破壊しようとしたのよ……？
+	ヘル	悲しい						話すことなんて何もないわ\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>は……敵なのよ
+	レヴァ	本気						分かってるけど……\nちょっと気になることがあって
+CharacterOff
+	ディーア	怒り2						……気になること？
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	悲しい	3_3					うーん、まだはっきりと\n言葉にはできないんだけど……
+	レヴァ	本気						ロストは確か……\n魔剣を改造した兵器、だよね
+CharacterOff
+	ディーア	怒り2						……ああ
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	本気	3_3					なら、あのレヴァンテイン=ロストは\nどこかの<ruby=わたし>レヴァンテイン</ruby>を\n改造して造られたってこと？
+CharacterOff
+	ディーア	怒り2						……ああ、\n恐らくそういうことだろうな
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	本気	3_3					そっか……
+	ヘル	通常						……お姉ちゃん？
+	レヴァ	悲しい						なんか、違和感がある、のかな\n雰囲気が変というか……\n私と似てないというか……
+	ヘル							……改造されているから、\nじゃないかしら
+	ヘル							今までのロストも\nそうだったでしょう？
+FadeOut	black					.7
+Se	回想
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	神社（夜）					0
+StopBgm
+Param	character_grayout=false
+FadeIn	black					.5
+	ごくひらロスト	拡大	エフェクト表					対魔剣殲滅魔導兵器LS_No.13471\n禁式･獄刀大包平=ロスト
+	ごくひらロスト							それが私の名前\nそれが私の役割
+	ごくひらロスト							<dash=2>私はそのために造られた\n兵器だもの
+FadeOut	black					.3
+CharacterOff						0
+Bg	和風市街（夜）
+Se	回想
+	ジャガーノート=ロスト					0
+FadeIn	black					.3
+	ジャガーノート=ロスト							……うわうわうわー、かわいそぉー
+	ジャガーノート=ロスト							そうやってまた\n救った気になってるんだぁ\n救えないなぁ、救われないなぁー
+CharacterOff
+	ディーア	驚き2	1_2
+	ジャガーノート		2_2
+	ジャガーノート							……救われないのは\nあなたの方じゃないんですかー？
+	ジャガーノート							<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>だか\nなんだか知らないですけどー
+	ジャガーノート							救うことをやめて\nただの"破壊兵器"に\n成り下がるなんて<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+Bg	草原A(曇り)					0
+Bgm	絶望
+Se	回想
+	レヴァ	本気	3_3
+	ヘル	通常	1_3			0
+FadeIn	black					.3
+	ヘル							……改造されると、\n意志に関わらず破壊兵器になる、\nだから……
+	レヴァ	本気						そうなんだけど、\nそれだけじゃなくて……
+	ヘル							あいつはお姉ちゃんを\n傷つけようとしたのよ……？\n似てるはずがないじゃない
+	レヴァ	本気						そうかなぁ……
+	レヴァ	悲しい						でも、うーん、なんかなぁ……
+	ヘル							……どんな事実があったとしても\nあいつがお姉ちゃんを\n破壊しようとしてるのは事実よ
+	ヘル	悲しい						お姉ちゃんお願い\n今は一旦街に戻って……
+StopBgm
+CharacterOff
+	黒背景		エフェクト表
+	レヴァロスト	<Off>						追ーいついたーっ♪
+CharacterOff
+Bgm	緊迫
+	ディーア	本気2						………………!!\n二人とも、上だ!!
+StopBgm
+CharacterOff
+Param	character_grayout=false
+	レヴァ	慌て	3_3
+	ヘル		1_3
+	レヴァ&ヘル	<Off>						…………!?
+Param	character_grayout=true
+FadeOut	black					.5
+CharacterOff						0
+Se	風1
+FadeIn	black					.5
+	レヴァロスト	レヴァ	b1			.5
+Tween	レヴァロスト	MoveBy	y=-100				NoWait
+	レヴァロスト	レヴァ
+Wait						.5
+CharacterOff
+Bgm	魔王バトル
+	ディーア	悔しい2						レヴァンテイン=ロスト……！
+CharacterOff
+	レヴァロスト	レヴァ						さあ、最期のお別れは\n済んだかなっ？
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_592_03
+EndIf
+EndScenario
+
+# E_592_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	草原A(曇り)
+Param	character_grayout=false
+	レヴァロスト	レヴァ	p3
+FadeIn	black					.5
+	レヴァロスト	レヴァ	p3					もう十分時間はあげたし、\n覚悟はできたよねっ？
+	レヴァロスト	レヴァ						さぁ、私に焼かれちゃおうっ♪
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	火3
+Se	火事
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	草原A(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	レヴァ	慌て	3_3_b
+	ヘル		3_3
+Se	ジャストガード
+Tween	ヘル	MoveBy	x=20				NoWait
+	ヘル							くっ……!!
+Tween	ヘル	MoveTo	x=0				NoWait
+	ヘル							……早く逃げて、お姉ちゃん
+	レヴァ	慌て						ヘル……!?
+	ヘル							闘うのは……私一人で十分だわ\n破壊なんて絶対にさせない……
+	ヘル							私がお姉ちゃんの盾になる
+CharacterOff
+Param	character_grayout=false
+	レヴァロスト	レヴァ	p3					それは無理だよっ♪\nさっきので、私の力を\n思い知ったでしょ？
+Se	火1
+	オーラ炎		エフェクト表			.7
+	レヴァロスト	レヴァ	p3					ね？ 抵抗はやめなよ♪
+Param	character_grayout=true
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	火3
+Se	光2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	草原A(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	ヘル	悲しい破損
+Tween	ヘル	ShakePosition	x=10				NoWait
+	ヘル							……ぐっ……だめ、私たちは、\n倒れる、わけには……
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	レヴァロスト	レヴァ	p3					往生際が悪いなぁ……
+CharacterOff	黒グラデーション
+Tween	レヴァロスト	PunchPosition	y=50				NoWait
+	レヴァロスト	レヴァ						私はただ\nレヴァンテインを破壊できれば\nそれでいいのっ！
+Param	character_grayout=true
+CharacterOff
+	レヴァ	慌て	p7					………………！
+CharacterOff
+	レヴァロスト	レヴァ	p3					そうすれば任務達成なんだからっ♪
+CharacterOff
+	ディーア	本気2						させるか……！
+CharacterOff
+	ヘル	通常破損						お姉ちゃん、避けて！
+CharacterOff
+	レヴァロスト	レヴァ						邪魔しないで？
+FadeOut	red					.3
+CharacterOff						0
+Wait						.5
+Se	火2
+	ヘル	悲しい破損
+FadeIn	red					.3
+Se	ガードブレイク
+Tween	ヘル	ShakePosition	x=10				Add
+	ヘル							………………っ
+Tween	ヘル	MoveBy	y=-100 time=2				NoWait
+Wait						.5
+Se	倒れる
+Wait						.5
+CharacterOff
+	レヴァ	慌て	p7					ヘル!!
+	レヴァ							ヘル、しっかりして……！
+CharacterOff
+	ヘル	悲しい破損						私は、大丈夫……だから……
+CharacterOff
+	レヴァロスト	レヴァ	p3					また庇ったの？\nもう、いい加減諦めてよ！
+	レヴァロスト	レヴァ						私は早くレヴァンテインを\n破壊したいの！
+CharacterOff
+	レヴァ	慌て						どうして……！\nなんで私を狙うの……？
+CharacterOff
+	レヴァロスト	レヴァ	p3
+Tween	レヴァロスト	PunchPosition	y=50				NoWait
+	レヴァロスト	レヴァ	p3					どうして、なんでって\n何回も聞かれても、\nそういう役割なんだってば！
+	レヴァロスト							破壊するのに理由が必要なの？\n理由なく破壊するのはおかしい？
+	レヴァロスト	レヴァ						ねぇねぇ、あなたなら分かるでしょ？\n今までのロストって\nそうだったよねっ？
+CharacterOff
+	レヴァ	本気	2_2
+	ディーア	怒り2	1_2					……ああ\n確かにロストが造られた目的は\n『魔剣を破壊する』ことにある……
+CharacterOff
+	レヴァロスト	レヴァ						ほらぁ！\nだからね、私たちは魔剣を\n破壊するための兵器ってだけで……！
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	慌て	2_2					だけどそれだけで\n私を破壊するなんて……！
+CharacterOff
+	レヴァロスト	レヴァ
+Tween	レヴァロスト	PunchPosition	y=50				NoWait
+	レヴァロスト							それ以外の理由が欲しかったの？\nでもごめんね、そういうの\nぜーんぜん無いの！
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	慌て	2_2					なっ……!?
+CharacterOff
+Param	character_grayout=false
+	レヴァロスト	レヴァ						深い思いとか？ 考えとか？\n……ないないっ！
+Se	火1
+Se	光1
+	オーラ炎		エフェクト表			1
+	レヴァロスト	レヴァ						私は完璧なロストだもん！\n命令を受けて、それを遂行する！\nそれだけっ！
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	レヴァ		2_2					でも、あなたは……！
+CharacterOff
+	ヘル	通常破損						お姉ちゃん、危ない……！
+CharacterOff
+Param	character_grayout=false
+	レヴァロスト	レヴァ						心配しないで！\n私がさくっと破壊してあげるからっ！
+Se	火1
+	オーラ炎		エフェクト表			1
+Param	character_grayout=true
+CharacterOff
+	ディーア	本気2						レヴァ!!
+CharacterOff
+	ヘル	悲しい破損						……！
+CharacterOff
+	レヴァ	慌て						………………っ!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	火3
+Se	光2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	草原A(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+FadeOut	white					.3
+CharacterOff						0
+Se	ジャストガード
+	ヘル	通常破損	p4			0
+	レヴァ	慌て	2_2_b			0
+FadeIn	white					.3
+Tween	ヘル	MoveBy	x=10				NoWait
+	ヘル	通常破損						絶対、破壊なんてさせないわ……！
+CharacterOff
+Param	character_grayout=false
+	オーラ炎		エフェクト表			0
+Se	火1
+Wait						.1
+CharacterOff	オーラ炎					1
+	レヴァロスト	レヴァ本気						………………またー？
+Param	character_grayout=true
+CharacterOff
+	ヘル	通常破損	1_3
+	レヴァ	悲しい	3_3					………………
+	ヘル	通常破損
+	レヴァ	悲しい	3_3_b
+Tween	ヘル	MoveBy	x=-20
+	ヘル	通常破損						お姉ちゃん、下がってて
+	レヴァ	本気						ううん、私は逃げない……！
+	ヘル	悲しい破損						お姉ちゃん！
+CharacterOff
+	レヴァロスト	レヴァ						あははっ！\nせっかく隙を作ってもらったのに\n逃げないんだ？
+	レヴァロスト	レヴァ						ま、私はその方が好都合だけどねっ！
+CharacterOff
+Param	character_grayout=false
+Bgm	キノコリオン
+	レヴァ	本気	3_3_b
+	ディーア	怒り2	2_3
+	ヘル	通常破損	1_3_b					……マイマスター、力を貸して
+Se	光1
+	オーラ青		エフェクト表			1
+	ディーア							ああ\nいけるか、ヘル？
+	ヘル	通常破損						当たり前よ\n……お姉ちゃんは、私が守ってみせる
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	レヴァロスト	レヴァ本気						…………そう
+CharacterOff	黒グラデーション
+	レヴァロスト	レヴァ						なら、まとめて終わりにしよっか♪
+Param	character_grayout=true
+If	isdebug==true
+CharacterOff
+Jump	*E_592_04
+EndIf
+EndScenario
+
+# E_592_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	草原A(曇り)
+	ヘル	悲しい破損	1_2
+	レヴァ	慌て	2_2
+FadeIn	black					.5
+Tween	ヘル	ShakePosition	x=10				NoWait
+	ヘル	悲しい破損						くっ……ううっ……
+CharacterOff
+	ディーア	本気2						ヘル、大丈夫か！
+CharacterOff
+	レヴァロスト	レヴァ	p3					だから言ったでしょ？
+	レヴァロスト	レヴァ						<ruby=ヘル>あなた</ruby>が\nいくら頑張っても無駄なのっ♪
+CharacterOff
+	レヴァロスト	レヴァ	p3
+	ヘル	通常破損	3_3
+Tween	ヘル	MoveBy	x=-10				NoWait
+	ヘル							行かせない……
+	レヴァロスト	レヴァ	p3					邪魔だよっ♪
+Se	打1
+Tween	ヘル	MoveBy	x=10				NoWait
+	ヘル	悲しい破損						くぅっ……！
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	慌て	2_2					ヘル!!
+CharacterOff
+	ヘル	悲しい破損						お姉ちゃん……逃げて……
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	慌て	2_2					……ヘルに手を出さないで
+	レヴァ	悲しい
+Tween	ディーア	MoveBy	x=10				NoWait
+	ディーア	悔しい2						レヴァ、今はヘルを連れて\n撤退するのが最優先だ！
+	レヴァ	悲しい						ううん、だめだよ、\nマイマスター
+	レヴァ	悲しい						……私、やっぱり話を<dash=2>
+CharacterOff
+Param	character_grayout=false
+Se	光1
+Se	火1
+	オーラ炎		エフェクト表			1
+	レヴァロスト	レヴァ	p3					まだそんなこと言ってるの？\nほんっと、のんきだね♪
+CharacterOff
+Param	character_grayout=true
+	ヘル	悲しい破損						お姉ちゃん、だめ……！
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	笑い	2_2					大丈夫だよ、ヘル\n私、簡単に破壊されたりしないから
+CharacterOff
+	オーラ炎		エフェクト表
+	レヴァロスト	レヴァ本気	p3
+Se	火事
+Wait						.1
+CharacterOff	オーラ炎					1
+	レヴァロスト							………………
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ		2_2					また、だね
+CharacterOff
+	レヴァロスト	レヴァ	p3					……えっ、なにが？
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	本気	2_2					……あなたは時々そうやって、\nどこか遠くを見るような目をする
+	レヴァ							……何かを考えているような、\n迷っているような……
+CharacterOff
+	レヴァロスト	レヴァ	p3					そんなことないよ！\n大体、兵器が何を迷うっていうの？
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	悲しい	2_2					……マイマスター\n私、分かったわ
+	ディーア	怒り2						……分かったって？
+	レヴァ	本気						さっき言った、違和感の正体……
+CharacterOff
+	レヴァロスト	レヴァ	p3					…………？
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	本気	2_2					ずっとおかしいと思ってたの
+	レヴァ	悲しい						私を破壊するために\n作られた兵器と言いながら、
+	レヴァ							あなたは\n手加減をしているように見える
+	レヴァ	本気						……本気で壊そうと思えば\nいくらでも隙はあったはずなのに
+CharacterOff
+	レヴァロスト	レヴァ	p3					それは、毎回邪魔が入るからで<dash=2>
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	本気	2_2					いいえ、そうじゃない\nもし、私が感じたことが\n合ってるなら……
+	レヴァ	本気						……あなたは、\n私を破壊することを\n"恐れて"いる
+	ディーア	驚き2						恐れている……？
+	レヴァ	慌て						そういうこと！
+CharacterOff
+	レヴァロスト	レヴァ	p3					なっ……私は、そんなこと……
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	慌て	2_2					私がまだここに立っていることが\n何よりの証拠だと思わない？
+CharacterOff
+	レヴァロスト	レヴァ本気	p3					………………
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	慌て	2_2					それに、あなたはマイマスターや\nヘルを傷つけた……
+CharacterOff
+	レヴァロスト	レヴァ本気	p3					……邪魔されたら排除するって、\n当たり前のことでしょ？
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	悲しい	2_2					……やっぱり、そうなのね
+	レヴァ	慌て						どんなに形が変わっても、\n私は、『レヴァンテイン』は絶対に\nヘルを傷つけたりしないわ！
+CharacterOff
+	レヴァロスト	レヴァ本気	p3					………………
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	悲しい	2_2					あなたが何度か\n動きを止めた時の表情……
+	レヴァ	慌て						その目の奥にある感情は何だろうって\nずっと考えてた……
+	レヴァ	慌て						……それでね、さっき\nやっと分かったの
+	レヴァ	本気						あなたの目の奥に見えたのは\n私への破壊願望でも、\nヘルに対しての憎しみでもない……！
+	レヴァ	慌て						もう、自分を偽るのはやめにしない？
+CharacterOff
+	レヴァロスト	レヴァ本気	p3					…………っ!?
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァ	本気	2_2					あなたは、\n"レヴァンテイン"じゃないわ
+CharacterOff
+	ヘル	通常破損						えっ……？
+CharacterOff
+StopBgm
+	ディーア	怒り2	1_2
+	レヴァ	本気	2_2					そうでしょう？\n……『レヴァンテイン=ヘル』
+CharacterOff
+	レヴァロスト	レヴァ本気						………………
+Se	闇1
+	レヴァロスト	通常				1
+Wait						.5
+	レヴァロスト							………………\n………………そう
+FadeOut	black					.7
+CharacterOff						0
+Wait						.5
+Param	character_grayout=false
+	イベントスチル59202		エフェクト表
+Bgm	魔王バトル
+Se	闇2
+FadeIn	black					.5
+	レヴァロスト	<Off>						……あなたは、やっぱり\nお見通しなのね
+Param	character_grayout=true
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_592_05
+EndIf
+EndScenario
+
+# E_592_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	草原A(曇り)
+	ディーア	悔しい2
+FadeIn	black					.5
+	ディーア	悔しい2						レヴァンテイン=ロストが、\nヘル……？
+CharacterOff
+	レヴァロスト	通常	p3					……もう隠す必要もないわね
+CharacterOff
+	レヴァ	本気	3_3
+	ヘル	通常破損	1_3_b					まさか……あなた……
+CharacterOff
+	レヴァロスト	通常	p3					そう、私は<dash=2>\n"レヴァンテイン=ヘル"だったモノ
+CharacterOff
+	レヴァ	本気	3_3
+	ヘル	通常破損	1_3_b					そんな……私、なの……？
+	ヘル	悲しい破損						だって……\nだってその体は……！
+CharacterOff
+	レヴァロスト	通常	p3					そうよ、これは正真正銘\n"レヴァンテイン"の姿……
+CharacterOff
+	ディーア	悔しい2						レヴァンテインの体に\nヘルの、精神……
+	ディーア	怒り2						レヴァンテイン=ロストは、\n二人が融合した姿、なのか……
+CharacterOff
+	レヴァ	慌て	3_3
+	ヘル	悲しい破損	1_3_b					そん、な……
+CharacterOff
+	レヴァロスト	通常	p3					もういいでしょう\n……私はレヴァンテインを破壊する
+CharacterOff
+	ヘル	悲しい破損	1_3_b
+	レヴァ	悲しい	3_3					どうしてそんなこと言うの？\nあなたは、レヴァンテイン=ヘル\nなんでしょう？
+CharacterOff
+	レヴァロスト	通常	p3					その名前で呼ばないで
+	レヴァロスト							今の私は、ヘルでも\nレヴァンテインでもない\nただの消えかけた醜い炎よ……
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	火3
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+Bg	草原A(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	レヴァ	慌て
+Tween	レヴァ	MoveBy	x=10				NoWait
+	レヴァ							くっ……！
+CharacterOff
+	ディーア	悔しい2						レヴァ、大丈夫か!?
+CharacterOff
+	ヘル	悲しい破損	1_3_b
+	レヴァ	慌て	3_3					私は平気……だけど、あの子は……
+CharacterOff
+	レヴァロスト		p3					自分の心配をしたらどう？
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	黒背景		エフェクト裏			0
+Wait						.2
+Se	火3
+Se	火事
+	オーラ赤2		エフェクト表2
+	オーラ炎		エフェクト表			.5
+Wait						.3
+FadeOut	red					.5
+CharacterOff						0
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Bloom
+	レヴァ	悲しい	2_2
+	ディーア	悔しい2	1_2
+FadeIn	red					.5
+	ディーア							くっ…………!!
+	レヴァ	悲しい						レヴァンテイン=ロスト……\nあなたは……
+CharacterOff
+	レヴァロスト	本気	p3					……もう何も聞きたくないわ
+CharacterOff
+	ディーア	悔しい2	1_2
+	レヴァ	慌て	2_2					聞いて、ヘル……！
+CharacterOff
+	レヴァロスト	通常	p3					ヘルじゃないと言ったでしょう
+	レヴァロスト							あなたのヘルは\nそこに倒れてるじゃない
+	レヴァロスト							……私はあなたの妹じゃない\nあなただって、\n私のお姉ちゃんじゃない
+CharacterOff
+	ディーア	悔しい2	1_2
+	レヴァ	慌て	2_2					…………！
+CharacterOff
+	レヴァロスト	通常	p3					……だから、お姉ちゃんみたいに\n振る舞わないで
+	レヴァロスト							お姉ちゃんみたいに喋らないで\nお姉ちゃんみたいに優しくしないで
+	レヴァロスト	本気						もう私は間違えない\nお姉ちゃんを取り戻す\nそのためにあなたを破壊するの
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	火3
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	草原A(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Se	ジャストガード
+	ヘル	通常破損	1_3
+	レヴァ	慌て	3_3
+Tween	ヘル	MoveTo	x=0				Add
+	ヘル	通常破損						だめ……お姉ちゃんは\n絶対傷つけさせない……！
+	ヘル		2_3_b
+	レヴァ	慌て						ヘル……!!
+CharacterOff
+	レヴァロスト	本気	p3					……もう立ち上がる力もないのに\nやはりあなたは邪魔するのね
+	レヴァロスト	通常						どうしても、私を止めたいんでしょう
+CharacterOff
+	レヴァ	慌て	3_3_b
+	ヘル	通常破損	1_3
+Tween	ヘル	ShakePosition	x=10				NoWait
+	ヘル	通常破損						止める……止めてみせるわ……
+	レヴァ	慌て						ヘルやめて！\n無理しちゃだめよ！
+CharacterOff
+	ヘル	通常破損	3_3
+	レヴァロスト		1_3					……あなたが後悔しないように、\nお別れの時間をあげたのに\nそれも無駄にして……
+	レヴァロスト	通常						……あなたはいつだってそう\n肝心な所で、踏み出せない
+	ヘル	通常破損						……分かったようなことを言わないで
+	レヴァロスト	通常						分かるわ\nだって私は"ヘルだったモノ"だから
+	レヴァロスト	本気						もう終わりなのよ？\n本当に最後の最後
+	ヘル	通常破損						何が言いたいの
+	レヴァロスト	通常						………………\nお姉ちゃんに、甘えなくていいの？
+	ヘル	悲しい破損						………………!!
+	レヴァロスト	通常						大切なお姉ちゃんに、\n気持ちを伝えたいでしょう？
+	レヴァロスト	本気						これはその、最後の機会よ
+	ヘル	悲しい破損						違う、私には、そんな……
+	レヴァロスト	通常						<dash=2>『そんな資格はない』
+CharacterOff
+	レヴァ	悲しい						…………え？
+CharacterOff
+	レヴァロスト	通常	1_3
+	ヘル	悲しい破損	3_3					…………っ！
+	レヴァロスト	通常						あなたはそうやって\n自分自身を許せなくて\nそして最後になって……後悔するの
+CharacterOff
+	レヴァ	慌て						ヘル…………！
+CharacterOff
+	ヘル	通常破損
+Tween	ヘル	ShakePosition	x=10				NoWait
+	ヘル	通常破損						後悔なんて、しないわ……\nこれが最後じゃない、\n最後にさせない……
+CharacterOff
+	レヴァロスト	通常						……そうよね\nあなたならそう言うわね
+	レヴァロスト							だけどヘル\nあなたにレヴァンテインを\n守る力なんてないわ
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	レヴァロスト							とても辛いことね
+	レヴァロスト							大事な人を守れずに、\n目の前で破壊される……
+	レヴァロスト							自分の身を\n引き裂かれるよりも、辛い……
+	レヴァロスト							あなたと私が\n違う部分があるとすれば……\n私はそれを、知ってるってこと<dash=2>
+	レヴァロスト							……いや、知っているだけじゃない\n私は<dash=2>
+Param	character_grayout=true
+CharacterOff
+	ヘル	悲しい破損						あなたは……あなたはもしかして、\nお姉ちゃん、を……
+CharacterOff
+	レヴァロスト	通常						……大丈夫、安心して？\nあなたがその苦しみを\n知ることはないわ
+	レヴァロスト	あはは						『ヘルのことも、後でちゃんと、\n　破壊してあげるからっ♪』
+If	isdebug==true
+CharacterOff
+Jump	*E_592_06
+EndIf
+EndScenario
+
+# E_592_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔王バトル
+Bg	草原A(曇り)
+	ヘル	悲しい破損	2_2
+	ディーア	悔しい2	1_2
+FadeIn	black					.5
+Tween	ディーア	ShakePosition	x=10				NoWait
+Tween	ヘル	ShakePosition	x=10				NoWait
+	ヘル	悲しい破損						くぅっ……!!
+	ディーア	悔しい2						ぐぁっ……！
+CharacterOff
+	レヴァ	慌て						ヘル！\nマスター!!
+CharacterOff
+	レヴァロスト		p3					どれだけ気持ちがあったって\n力の差は埋まらないわ
+	レヴァロスト							……レヴァンテイン=ヘル\nあなたに、その力はないもの
+CharacterOff
+	ヘル	悲しい破損						うっ……お姉ちゃんだけは……\nお姉ちゃん、だけは……
+Tween	ヘル	MoveBy	y=-800 time=2				NoWait
+Wait						.5
+Se	倒れる
+Wait						.5
+CharacterOff
+	レヴァロスト		p3					さあ、これで本当に\nあなた一人だけね\n……レヴァンテイン
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	火3
+Se	火事
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+Bg	草原A(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	レヴァ	悲しい
+Tween	レヴァ	MoveBy	x=10				NoWait
+	レヴァ	悲しい						……うぅっ…………
+Tween	レヴァ	MoveBy	x=-10
+CharacterOff
+	レヴァロスト		p3					…………なんなの
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	黒背景		エフェクト裏			0
+Wait						.2
+Se	火3
+Se	火事
+	オーラ赤2		エフェクト表2
+	オーラ炎		エフェクト表			.5
+Wait						.3
+FadeOut	red					.5
+CharacterOff						0
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Bloom
+	レヴァ	悲しい
+FadeIn	red					.5
+Tween	レヴァ	ShakePosition	x=5				NoWait
+	レヴァ	悲しい						…………ぐぅっ……
+CharacterOff
+	ディーア	悔しい2						……レヴァ、お前!?
+CharacterOff
+	ヘル							お姉ちゃん、何を……
+CharacterOff
+	レヴァ	本気						やっぱり私、\nあなたと戦うことはできない
+CharacterOff
+	レヴァロスト		p3					……どういうつもり？
+CharacterOff
+	レヴァ	悲しい						……私はあなたと\n話がしたいだけだもの
+	レヴァ	本気						言ったでしょ、私は絶対、\n『ヘル』を傷つけたりしないわ
+CharacterOff
+	レヴァロスト	本気	p3					いいわ、そっちがその気なら……\nすぐに破壊してあげる
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	草原A(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	レヴァ	慌て
+Tween	レヴァ	MoveBy	y=-10				NoWait
+	レヴァ							くぅっ……うう……！
+CharacterOff
+	レヴァロスト	本気	p3					……いい加減にして
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	黒背景		エフェクト裏			0
+Wait						.2
+Se	火3
+Se	火事
+	オーラ赤2		エフェクト表2
+	オーラ炎		エフェクト表			.5
+Wait						.3
+FadeOut	red					.5
+CharacterOff						0
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Bloom
+	レヴァ	悲しい
+FadeIn	red					.5
+Tween	レヴァ	ShakePosition	x=10				NoWait
+	レヴァ							………………っ!!
+CharacterOff
+	レヴァロスト	本気	p3					反撃しなければ、私がいつか\n手を止めるとでも？
+CharacterOff
+	ディーア	本気2						レヴァ、ダメだ\nそれ以上は……！
+CharacterOff
+	レヴァロスト	通常	1_3
+	レヴァ	笑い	3_3					私は……いいの……
+	レヴァロスト	通常						……大人しく破壊されるのね\nいいわ、跡形もなく燃やしてあげる
+	レヴァ	悲しい						だめ、私はあなたに\n破壊されるわけにはいかない……
+	レヴァロスト	本気						だったら反撃すればいいでしょ？\n惨めったらしく\n抵抗すればいいじゃない
+FadeOut	red					.3
+Se	火2
+FadeIn	red					.3
+	レヴァ	悲しい
+Tween	レヴァ	MoveBy	x=20
+CharacterOff
+	ディーア	悔しい2						レヴァンテイン……？
+CharacterOff
+	レヴァロスト	本気	1_3
+	レヴァ	悲しい	3_3					……反撃なんてしないわ
+	レヴァロスト							どうして？\n反撃しなければ、\n破壊されるだけよ
+	レヴァ							うーん……そっか……
+	レヴァ							それは……あんまり\n考えてなかったわね……
+	レヴァロスト							何を呑気な……
+	レヴァ	悲しい						困ったなぁ……\n私ね、壊されたくはないけど、\nあなたに反撃もしたくないの
+	レヴァロスト	本気						……そんな我儘が通じると思うの
+	レヴァ	笑い						そうね、通じると思うわ\n私はそう信じてる\nあなたが"ヘル"なら……
+	レヴァロスト	通常						何度言えば分かるの……？\n私はヘルじゃない……
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァ	悲しい						ううん、あなたはヘルよ
+	レヴァロスト	通常						やめて……
+	レヴァ							だって、私はその顔を\n知っているもの
+	レヴァ							あなたがかつて、\n邪悪な冥焔として\n忌み嫌われていた頃と同じ……
+	レヴァ							ずっと一人ぼっちで……\n悲しそうで……
+	レヴァロスト							…………っ
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァ	慌て						ヘル……あなたは……
+	レヴァロスト	通常						呼ばないで……\nやめて、近寄らないで
+StopBgm
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァ	悲しい						ねぇ、ヘル……\n最後に心から笑ったのは、いつ？
+	レヴァロスト	本気						…………っ!!
+	レヴァ							どれだけ長い間、\n一人きりで戦ってきたの？
+	レヴァロスト							あなたは、あなたは……\nお姉ちゃんじゃないわ
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァ	慌て						ヘル……
+Tween	レヴァロスト	MoveBy	x=-20				NoWait
+	レヴァロスト							やめて！
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	黒背景		エフェクト裏			0
+Wait						.2
+Se	火3
+Se	火事
+	オーラ赤2		エフェクト表2
+	オーラ炎		エフェクト表			.5
+Wait						.3
+FadeOut	red					.5
+CharacterOff						0
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Bloom
+	レヴァ	悲しい	3_3
+FadeIn	red					.5
+Tween	レヴァ	ShakePosition	x=10				NoWait
+	レヴァ	悲しい						…………っ、ヘル!!
+CharacterOff
+	レヴァロスト	本気						お姉ちゃんみたいなこと言わないで！\nお姉ちゃんみたいな顔しないで!!
+	レヴァロスト							私、私は、お姉ちゃんを\n取り戻すために……!!
+FadeOut	white					1
+Se	火3
+StopBgm
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F
+	レヴァ		3_3
+	ヘル		1_3_b
+Wait						2
+FadeIn	black					0
+	レヴァ	通常						ヘルー！\n今日もかわいいねー！
+	ヘル							……やめて、私に近付かないで
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァ							もう、つれないなぁ！\nでもそこがかわいいんだよねー！
+	ヘル							……ちょっと！
+CharacterOff
+Bg	黒背景
+	レヴァロスト	<Off>						<dash=2>どうして今更\nこんな記憶を思い出すのかしら
+CharacterOff
+	レヴァ	通常						ヘル大好き！
+FadeOut	black					.5
+Bg	黒背景
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Param	character_grayout=false
+	レヴァロスト	<Off>
+Wait						1
+Bgm	絶望
+FadeIn	black					.5
+	レヴァロスト	<Off>						<dash=2>私も、\nお姉ちゃんが大好きだった
+CharacterOff
+	レヴァ
+Tween	レヴァ	ScaleBy	x=0.1 y=0.1 time=40				NoWait
+Tween	レヴァ	MoveBy	y=420 time=40				NoWait
+	レヴァロスト	<Off>						だけど私には\nお姉ちゃんに近付く資格なんてない\n……そう思っていた
+	レヴァロスト	<Off>						私が近づいたら、\nお姉ちゃんの炎を汚してしまう
+	レヴァロスト	<Off>						だから何度も突き放して\n距離をとって、冷たく接した
+CharacterOff						2
+	レヴァロスト	<Off>						あの世界で一番美しくて\n綺麗で、明るくて優しい赤い炎
+	レヴァロスト	<Off>						それを、私のせいで\n汚すことなんて、許されない
+FadeOut	black					.5
+CharacterOff
+	レヴァ	拡大笑い	エフェクト表			0
+Wait						.5
+FadeIn	black					.5
+	レヴァロスト	<Off>						……でも本当は分かってた\nお姉ちゃんはそんなこと恐れてない
+	レヴァロスト	<Off>						でも、私自身が許せないの……
+	レヴァロスト	<Off>						お姉ちゃんの、優しくて\n温かい笑顔を……見続けられるなら
+	レヴァロスト	<Off>						私はずっと、お姉ちゃんに\n触れられなくたって構わない
+	レヴァロスト	<Off>						そばに居ることが出来れば\nそれだけで<dash=2>
+CharacterOff
+	レヴァロスト	<Off>						<dash=2>なのに、私は……
+FadeOut	black					.5
+CharacterOff						0
+Bg	戦場跡
+Bgm	絶望
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	レヴァ	慌て破損
+FadeIn	black					.5
+	レヴァ	慌て破損						…………ヘル……！
+	ヘル	悲しい破損						（ああ、お姉ちゃんが私を\n　呼んでる……）
+	レヴァ	慌て破損
+Tween	レヴァ	ShakePosition	x=5				NoWait
+	レヴァ	慌て破損						……ぐっ……ううっ……\nヘル……ヘル……！
+CharacterOff	レヴァ
+	ヘル	<Off>						（聞こえてるのに……動けない\n　どうして、私の体、動、かないの）
+CharacterOff	ヘル
+	レヴァ	慌て破損						ううっ……ごめんね……\n守ってあげられなくて、ごめんね……
+CharacterOff	レヴァ
+	ヘル	<Off>						（謝らないで、お姉ちゃん\n　私の方が、役に立てなくて<dash=2>）
+CharacterOff	ヘル
+	レヴァ	慌て破損						こんなことになるなら……\nちゃんと伝えておけば良かった……
+CharacterOff	レヴァ
+	ヘル	<Off>						（ああ、お姉ちゃん待って……\n　もう少し、近くに来て……）
+CharacterOff	ヘル
+	レヴァ	慌て破損						……お願い、ヘル<dash=2>
+CharacterOff	レヴァ
+	ヘル	<Off>						（聞こえない、聞こえないわ……\n　お姉ちゃんの、声、が……\n　聞こ、え、ない……）
+FadeOut	black					1
+CharacterOff						0
+StopBgm
+ImageEffectOff	SpriteCamera	GrayScale
+Wait						.5
+Bg	黒背景					0
+FadeIn	black					.7
+	ヘル	<Off>						あ、あれ、私……\n生きて……
+	ヘル	<Off>						お姉ちゃん……？
+	ヘル	<Off>						お姉ちゃん、良かった、無事\nだったのね……
+	イベントスチル392L	L1	エフェクト裏
+	レヴァロスト	通常真				.3
+	ヘル	<Off>						…………え
+Bgm	絶望
+	ヘル	<Off>						なに、これ……
+	ヘル	<Off>						なんで、これ、お姉ちゃんの服……
+	レヴァロスト	悔しい真
+	ヘル	<Off>						この、赤い炎、どうして\n私から湧き出てくるの……
+	ヘル	<Off>						私の髪、どうして赤いの……
+	ヘル	<Off>						どうして全部、お姉ちゃん、の……
+	ヘル	<Off>						私、私は、誰なの……
+	ヘル	<Off>						お姉ちゃんどこ!?\nお姉ちゃん！
+	レヴァロスト	怒り真
+	ヘル	<Off>						いやだ……そんな……\n私、私は、お姉ちゃんは……
+	ヘル	<Off>						私のせいだ……\n私のせい、私が、私が……!!
+FadeOut	black					.5
+CharacterOff						0
+FadeIn	black					.5
+	ヘル	<Off>						あぁ……あぁぁ……！
+	ヘル	<Off>						お姉ちゃんどこ!?\nお姉ちゃん!! お姉ちゃん!!
+	ヘル	<Off>						いや、嘘、\nそんなの嘘……!!
+	ヘル	<Off>						お姉ちゃん……\nお姉ちゃんお姉ちゃんお姉ちゃん!!
+	ヘル	<Off>						いやぁあああああああああああっ!!!!
+FadeOut	black					.5
+CharacterOff
+	イベントスチル392L	L2	エフェクト裏
+	レヴァロスト	泣き真
+FadeIn	black					.5
+	レヴァロスト	泣き真						お姉ちゃん……おねえ、ちゃ……
+	？？？？							<ruby=ヘル>お前</ruby>が\n残ったことには意味がある
+	レヴァロスト	悔しい真						そんな、もの……ないわ……
+	？？？？							良い方法を教えよう
+	レヴァロスト	泣き真						もう、放って、おいて……
+	？？？？							<dash=2>大事なレヴァンテインを\n取り戻す方法を……
+	レヴァロスト	通常真						え…………？
+	レヴァロスト	怒り真						本当、本当に!?\n教えて、どうすれば\nお姉ちゃんを……！
+	？？？？							レヴァンテインは今、\n失った魔核機関を
+	？？？？							レヴァンテイン=ヘルの\nもので補っている
+	？？？？							それと同じことだ
+	？？？？							失われてしまったのなら、\n代わりを用意すればいい
+	レヴァロスト	怒り真						………………！
+	？？？？							心配するな、\n素材はいくらでもある
+	？？？？							<dash=2>並行世界の\nレヴァンテインを使えばいいのだから
+FadeOut	black					.5
+CharacterOff						0
+FadeIn	black					.5
+	？？？？							<dash=2>並行世界のレヴァンテインを\n全て破壊しろ
+FadeOut	black					.5
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	草原A(曇り)
+Param	character_grayout=false
+	イベントスチル59202		エフェクト表
+FadeIn	black					.5
+	レヴァロスト	<Off>						あの時、絶対に取り戻すって誓った!!\n私の、たった一人のお姉ちゃんを!!
+	レヴァロスト	<Off>						だから、誰にも邪魔はさせない!!
+CharacterOff
+	レヴァ	笑い						…………そっか
+	レヴァ	笑い						……でも、ちょっと安心したなぁ
+CharacterOff
+	レヴァロスト	本気	p3					…………
+CharacterOff
+	レヴァ	笑い						ちゃんと、怒ったりできるじゃない
+CharacterOff
+	レヴァロスト	通常	p3					………………っ!?
+CharacterOff
+	レヴァ	笑い						良かった……\nあなたがまだ\n心を失わないでくれて
+	レヴァ							……ヘルでいてくれて
+CharacterOff
+	レヴァロスト	本気	p3					……っ!!\n馬鹿にして……！
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	草原A(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	レヴァ	慌て
+Tween	レヴァ	MoveBy	x=10				NoWait
+	レヴァ	慌て						……っ！
+CharacterOff
+	レヴァロスト	通常	p3					私はあなたを破壊する
+	レヴァロスト		p3					必ず<dash=2>破壊するの!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	剣閃
+Se	火3
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	草原A(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	レヴァロスト		p3					そしてお姉ちゃんを取り戻す！
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	黒背景		エフェクト裏			0
+Wait						.2
+Se	火3
+Se	光3
+Se	火事
+	オーラ赤2		エフェクト表2
+	オーラ炎		エフェクト表			.5
+Wait						.3
+FadeOut	red					.5
+CharacterOff						0
+	　　　　　　　　　　
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Bloom
+Shake	Graphics		x=2 y=2 time=1.5				NoWait
+FadeIn	red					.5
+Wait						.5
+	レヴァロスト		p3					大好きな、大切なお姉ちゃんを\n取り戻すの……っ!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	火3
+Se	光2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	草原A(曇り)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	レヴァロスト	泣き	p3					だって、だってだって……!!\nお姉ちゃんは私のせいで<dash=2>!!
+CharacterOff
+	レヴァ	笑い						<dash=2>ヘルのせいじゃないよ
+CharacterOff
+	レヴァ		3_3
+	レヴァロスト	通常	1_3_b					…………!!
+	レヴァ	笑い						ヘルのせいじゃない
+	レヴァロスト	本気						どうして……そんな、こと
+	レヴァ	本気						分かるよ
+	レヴァロスト	通常						分かるはずないわ……\nあなたは私のお姉ちゃんじゃない
+	レヴァロスト	本気						お姉ちゃんの気持ちが、\nあなたなんかに……
+	レヴァ	笑い						確かに、私は\nあなたのお姉ちゃんじゃない
+	レヴァ	笑い						私のそばには、\nかわいい妹がいてくれる
+	レヴァロスト	通常						そう、違う道を辿った……\nだから、同じ存在であるわけが……
+	レヴァ	本気						私はあなたのお姉ちゃんじゃないけど
+	レヴァ	本気						『レヴァンテイン』の妹は\n『レヴァンテイン=ヘル』なの
+	レヴァ	本気						これだけは絶対に揺るがない
+	レヴァ	笑い						だから、私……\nあなたのお姉ちゃんの気持ちが\n分かるような気がする
+	レヴァロスト	本気						嘘、嘘よ……
+	レヴァ	笑い						お願い、ヘル<dash=2>
+	レヴァロスト	通常						<dash=4>!!
+FadeOut	black					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	戦場跡
+StopBgm						2
+	レヴァ	慌て破損
+FadeIn	black					.5
+	レヴァ	慌て破損						こんなことになるなら……\nちゃんと伝えておけば良かった……
+CharacterOff
+	ヘル	悲しい破損						（ああ、お姉ちゃん待って……\n　もう少し、近くに来て……）
+CharacterOff
+	レヴァ	慌て破損						……お願い、ヘル<dash=2>
+FadeOut	black					.7
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	白背景
+Bgm	結婚					1
+	レヴァ	拡大笑い	エフェクト表
+FadeIn	black					.5
+	レヴァ							『どうか自分を責めないで\n　これ以上、痛い思いをしないで』
+	レヴァ							『私ね、あなたが封印されていた間、\n　ずっと後悔していたの』
+	レヴァ							『だから、マスターの元で会えた時\n　すごく、すっごく嬉しかったの』
+	レヴァ							『少しでも長く近くに居て、\n　少しでもあなたのこと、\n　幸せにしてあげたいって思ってた』
+	レヴァ							『ヘル、私は<dash=2>』
+	レヴァ							『あなたが幸せなら\n　それが私の一番の幸せ』
+	レヴァロスト	<Off>						（ああ、これが……\n　あの時、聞こえなかった\n　お姉ちゃんの、言葉<dash=2>）
+CharacterOff
+	レヴァロスト	泣き						おねえ、ちゃ……
+CharacterOff
+	レヴァ	拡大笑い	エフェクト表					<dash=2>ずーっと大好きよ、ヘル
+FadeOut	white					1
+CharacterOff						0
+Bg	草原A(曇り)					0
+	レヴァ	笑い	3_3
+	レヴァロスト	泣き	1_3
+Wait						.5
+FadeIn	white					.5
+Tween	レヴァロスト	MoveBy	x=10				NoWait
+	レヴァロスト	泣き						お姉ちゃん……！\nお姉ちゃんお姉ちゃん!!
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァ	笑い						辛かったね、痛かったよね……\nでも、もういいの\n苦しまないで欲しいの……
+	レヴァロスト	泣き						だけど、私はもう\n『レヴァンテイン』を破壊して……\n何人も傷つけて……
+	レヴァ	笑い						そうね、でもそれ以上に、\nあなたが傷ついているの
+	レヴァロスト	泣き						違う、私は傷ついてなんか……
+	レヴァ	笑い						こんなに泣いてるのに\n傷ついてないなんて嘘だよ
+	レヴァ							ヘル……これ以上、傷つかないで
+	レヴァロスト	泣き						私、私は、ヘルじゃ、な……
+	レヴァ	通常						じゃあ、\nレヴァンテイン=ロスト
+	レヴァ							あなたはレヴァンテインでも\nヘルでもない
+	レヴァ							たった一人の、\nレヴァンテイン=ロストよ
+	レヴァロスト	通常						…………!!
+	レヴァ	通常						私と、ヘルと、一緒に帰ろう？\n傷ついてきた分、ううん……\nそれ以上に、幸せになろう
+	レヴァロスト	泣き						私、私……！
+	レヴァ	通常						ねっ！\nいいよね、マイマスター！
+CharacterOff
+	ディーア	通常2						……ああ、良いに決まってる
+CharacterOff
+	レヴァロスト	通常	1_3
+	レヴァ	通常	3_3					さすがマイマスター♪
+	レヴァロスト	通常						いいのかな……\n今更、あなたたちと、\n一緒に、なんて……
+	レヴァ
+Tween	レヴァ	PunchPosition	y=50				NoWait
+	レヴァ	通常						いいの！\nむしろ、そうじゃなきゃダメなの！
+	レヴァ	笑い						だから、ね
+	レヴァロスト	笑い						…………あり、がとう\nありがとう……！
+	レヴァロスト	通常						……少ししか、存在できない、けど\nだけど、許されるなら
+	レヴァロスト	笑い						お姉ちゃんの願いを叶えたい
+	レヴァ	慌て						こら、違うでしょ！\nあなたの気持ちを、もっと正直に！
+	レヴァロスト	笑い						……私……私、幸せになりたい……！
+	レヴァ	通常						……うん！\nよく言えました！
+	レヴァ	笑い						……一緒に幸せになろう\nレヴァンテイン=ロスト
+	レヴァロスト	泣き						うっ、ううっ、お姉ちゃん……！
+CharacterOff
+	ディーア	通常2						良かった、これで……
+StopBgm
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	黒背景		エフェクト裏			0
+Wait						.2
+Se	火3
+Se	光3
+Se	火事
+	オーラ赤2		エフェクト表2
+	オーラ炎		エフェクト表			.5
+Wait						.3
+FadeOut	red					.5
+CharacterOff						0
+	　　　　　　　　　　
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Bloom
+	黒グラデーション		エフェクト表			0
+	ディーア	黒2				0
+FadeIn	red					.5
+Tween	ディーア	ShakePosition	x=5
+	ディーア	黒2
+Se	倒れる
+Tween	ディーア	MoveBy	y=-500
+Wait						.5
+	レヴァロスト	通常						………………え？
+CharacterOff
+Param	character_grayout=false
+	レヴァ	慌て	3_3
+	ヘル	悲しい	1_3_b
+	レヴァ&ヘル							…………!?
+Param	character_grayout=true
+CharacterOff
+	レヴァロスト	通常						なに、これ……\n私……勝手に……
+FadeOut	black					.5
+CharacterOff						0
+	黒グラデーション		エフェクト表
+	？？？？
+FadeIn	black					.5
+	？？？？							……ほーんと、困るんですよう
+	？？？？							言われた通りにできない悪い子は……\nこうするしか\nないじゃないですかあ
+If	isdebug==true
+CharacterOff
+Jump	*E_592_07
+EndIf
+EndScenario
+
+# E_592_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	草原A(曇り)
+	ヘル		1_3_b
+	レヴァ	慌て	3_3
+FadeIn	black					.5
+	ヘル							…………!?
+	レヴァ							マイマスター!!
+CharacterOff
+	ディーア	悔しい2
+Tween	ディーア	ShakePosition	x=5				NoWait
+	ディーア							ぐっ……オレは大丈夫、だ……\nそれより、何が……!?
+CharacterOff
+	レヴァ		3_3
+	ヘル	悲しい	1_3_b					それが、分からないの……！
+	レヴァ	慌て						レヴァンテイン=ロスト……!?
+CharacterOff
+	レヴァロスト
+Tween	レヴァロスト	ShakePosition	x=5				NoWait
+	レヴァロスト	通常						だ、め……\n体が、うご、かない、の……
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	慌て	3_3					どうして急に……！
+FadeOut	black					.5
+CharacterOff						0
+FadeIn	black					.5
+Se	闇1
+	カルバノグ	兎通常				.5		えへへえ♪\n意外とうまくいきましたねえ♪
+CharacterOff
+	ディーア	悔しい2						カルバノグ……!!
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	慌て	3_3					あなた、何をしたの!?
+CharacterOff
+	カルバノグ	兎通常						……そうですねえ、ちょっとだけ、\n"いじって"みたというかあ♪
+CharacterOff
+	ディーア	怒り2						弄った……？
+CharacterOff
+Param	character_grayout=false
+Se	火事
+	オーラ炎		エフェクト表			.5
+	レヴァロスト							やめて……\n炎が、勝手に……！
+Param	character_grayout=true
+CharacterOff
+	カルバノグ	兎通常						お手伝いしたんですよう♪\nレヴァンテインを破壊するために♪
+CharacterOff
+	レヴァロスト	通常						やめて……！
+	レヴァロスト	通常						私はもう……\nレヴァンテインを破壊しないって\n決めたの……
+	カルバノグ	兎悲しい						それならやっぱりぃ\n処分するしかないですねえ♪
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	慌て	3_3					させない！
+	レヴァ	通常						レヴァンテイン=ロストは、\nもう私の大事な家族なんだから！
+CharacterOff
+	レヴァロスト							…………!!
+CharacterOff
+	カルバノグ	兎悲しい						うーん、でも……\n役に立たないロストを放置したら\nカルバが怒られちゃうんですよお
+	カルバノグ	兎通常						だからレヴァンテイン=ロストさんが\n今まで通りレヴァンテインを\n破壊してくれればあ……♪
+CharacterOff
+	レヴァロスト							もう……絶対にやらない
+	レヴァロスト							お姉ちゃんを取り戻すために\nレヴァンテインを破壊するのは……\nもう……
+CharacterOff
+	カルバノグ	兎通常						えっ、あれ？ ええー？\nもしかしてその話、\nまだ信じていたんですかあ？
+CharacterOff
+	黒グラデーション		エフェクト表
+	レヴァロスト							え…………？
+CharacterOff
+	カルバノグ	兎通常						レヴァンテインを壊したら\nレヴァンテインが戻ってくるなんて
+	カルバノグ							そんな都合の良いこと\nあるわけないですよう♪
+CharacterOff
+	黒グラデーション		エフェクト表
+	レヴァロスト							な、何を、言って……？
+Tween	レヴァロスト	ShakePosition	x=10				NoWait
+	レヴァロスト							私を……騙したの……？
+CharacterOff
+	カルバノグ	兎悲しい						だってえ、そうでも言わないと\n『お姉ちゃん、お姉ちゃん』って\n泣いて動かなかったじゃないですかあ
+	カルバノグ	兎通常						お仕事は、ちゃんと\nやってもらわないと困るのでえ♪
+CharacterOff
+	黒グラデーション		エフェクト表
+	レヴァロスト							そん、な……\n私が、今までしてきたことは……
+Tween	レヴァロスト	ShakePosition	x=10				NoWait
+	レヴァロスト							ぜん、ぶ……無駄……
+CharacterOff
+	カルバノグ							そんなことありませんよう？
+	カルバノグ							だってカルバたち、おかげで\nすっごく助かったんですよう♪
+CharacterOff
+	黒グラデーション		エフェクト表
+	レヴァロスト							…………え
+CharacterOff
+	カルバノグ							他の世界を襲撃してえ♪
+CharacterOff
+	黒グラデーション		エフェクト表
+	レヴァロスト							<dash=4>やめ、て
+CharacterOff
+	カルバノグ							たくさんのヘルの幸せを奪ってえ♪
+CharacterOff
+	黒グラデーション		エフェクト表
+	レヴァロスト							いや、やめて……っ!!
+CharacterOff
+	カルバノグ							たっくさん、レヴァンテインを\n破壊してくれたじゃないですかあ♪
+CharacterOff
+	黒グラデーション		エフェクト表
+	レヴァロスト	泣き
+Tween	レヴァロスト	ShakePosition	x=10				NoWait
+	レヴァロスト	泣き						ああ、ああああああ……！
+CharacterOff
+	カルバノグ	兎通常						<dash=2>今までお仕事、\nご苦労さまですよう♪
+CharacterOff
+	黒グラデーション		エフェクト表
+	レヴァロスト	泣き
+Tween	レヴァロスト	ShakePosition	x=10				NoWait
+	レヴァロスト							いやぁぁああああああ!!!!
+Wait						.5
+	オーラ炎		エフェクト表			1
+Se	光3
+Se	火3
+Se	闇3
+FadeOut	white					1
+	レヴァロスト	通常真				0
+Wait						1
+Bgm	緊迫
+Se	火事
+FadeIn	white					.3
+Wait						1.5
+CharacterOff
+	ディーア	本気2						カルバノグ!!
+CharacterOff
+	レヴァ	慌て						どうしてこんな……！
+CharacterOff
+Param	character_grayout=false
+	カルバノグ	兎通常						魔剣使いさんの動きくらい\nお見通しってことですよう♪
+	カルバノグ							これ以上ロストを魔剣として\n戦力にされると、困るのでえ♪
+	オーラ青		エフェクト表			1
+	カルバノグ							ではではあ、カルバは忙しいので！\nこれでさよなら、なのですよう♪
+Se	闇1
+CharacterOff	カルバノグ					.7
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						待てっ!! カルバノグ!!
+CharacterOff
+	ヘル							マイマスター！
+	レヴァロスト	通常真						私、わ、わたし、は……！
+	レヴァロスト	怒り真						ああ、ああ……！\nああああああぁぁぁぁぁぁぁぁぁ!!
+FadeOut	white					.3
+CharacterOff						0
+Se	火3
+Shake	Graphics	ShakePosition	time=2	easeInQuart			NoWait
+Param	character_grayout=false
+	オーラ炎		エフェクト表			0
+	ディーア	悔しい2				0
+	　　　　　　　　　　
+FadeIn	white					.3
+Wait						1
+	ディーア	本気2						レヴァンテイン=ロスト！
+Param	character_grayout=true
+CharacterOff
+	ヘル		2_2
+	レヴァ	慌て	1_2					力が、暴走してる……!!
+	ヘル							マイマスター、危ない！
+CharacterOff
+Se	火事
+	オーラ炎		エフェクト表			.5
+CharacterOff
+	ディーア	悔しい2						これは……
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	慌て	3_3					私たちの、炎……
+	ヘル	通常						マイマスター……\nこのままじゃ……！
+CharacterOff
+	ディーア	怒り2						ああ、とにかく\nレヴァンテイン=ロストの力を\n抑えるんだ！
+	ディーア	悔しい2						この勢いで炎が拡がれば……\n魔界全体が……火の海になる……！
+Se	火事
+Bg	草原A(火事)					.7
+CharacterOff
+Param	character_grayout=false
+	イベントスチル59201		エフェクト表
+	レヴァロスト	<Off>						私、わた、し……は…………
+Param	character_grayout=true
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_592_08
+EndIf
+EndScenario
+
+# E_592_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	黒背景
+FadeIn	black					1
+	レヴァロスト	<Off>						<dash=2>目を閉じるとすぐに\n鮮明に浮かぶ光景がある
+FadeOut	black					.5
+Bg	戦場跡
+FadeIn	black					.5
+	レヴァロスト	<Off>						それは私の手で作り出してきた、\n数えきれない残酷な世界
+	レヴァロスト	<Off>						瀕死のレヴァンテイン\nそして姉を守れないヘル……
+	レヴァロスト	<Off>						もう二度と見たくなかった光景を\n私は自らの手で引き起こす
+	レヴァロスト	<Off>						幸せそうに寄り添う\nレヴァンテインとヘルを見るたび、\n私の心のどこかが軋んだ
+FadeOut	black					.5
+Bg	黒背景
+Param	character_grayout=false
+	黒グラデーション		エフェクト表			0
+	レヴァロスト	通常真				0
+FadeIn	black					.5
+	レヴァロスト							今思えば、\nそれは羨望だったのかもしれない
+	レヴァロスト							私が失ったものを、\n全て持っている\n彼女たちに対しての……
+	レヴァロスト							軋む心を無視して、\n私は全てを燃やした
+FadeOut	black					.5
+CharacterOff						0
+Bg	戦場跡
+Se	火事	TRUE
+FadeIn	black					.5
+	オーラ炎		エフェクト表
+	レヴァロスト	<Off>						何度も、何度も<dash=2>
+	レヴァロスト	<Off>						その度に、心のどこかが\n壊れていく音がした
+	レヴァロスト	<Off>						レヴァンテインの苦痛に歪む悲鳴も\nヘルの悲しみと憎しみの声も\n何度も聞いた
+	レヴァロスト	<Off>						そしてもう、聞きたくなかった
+	レヴァロスト	<Off>						だから、それを打ち消すために\n声の限り叫んで、叫んで、叫んで……
+CharacterOff
+StopSe
+Bg	黒背景
+	レヴァロスト	<Off>						やがて聞こえる声が誰のものなのか\n私には分からなくなった
+	レヴァロスト	<Off>						泣くことも、叫ぶことも、\n不毛なだけだった
+FadeOut	black					.5
+CharacterOff						0
+	レヴァロスト	通常真
+	オーラ炎		エフェクト表
+Se	火事	TRUE
+FadeIn	black					.5
+	レヴァロスト	通常真						だから私は\n感情を胸の奥底に押し込めた
+	レヴァロスト							お姉ちゃんが戻ってくるなら\nまた私に笑いかけてくれるなら……
+	レヴァロスト							それを、それだけを信じて\n沢山の命を、奪って、奪って<dash=2>
+	レヴァロスト	泣き真						でもそれは…………\n…………全部、無駄、だった……
+	レヴァロスト	泣き真						私、私は今まで、何のために……
+	レヴァロスト	怒り真						許されない\nこんな罪は絶対に許されない
+	レヴァロスト	怒り真						私は、許されちゃいけない
+	レヴァロスト	通常真						このまま燃えて、燃えて、\n燃え尽きたとしてもきっと……
+	レヴァロスト							……私の罪は、消えない
+FadeOut	black					.5
+	イベントスチル59201		エフェクト表
+FadeIn	black					.5
+	レヴァロスト	<Off>						お姉ちゃん……\n私、どうしたらいいの……
+FadeOut	black					.5
+CharacterOff						0
+StopSe
+Bg	草原A(火事)					0
+Param	character_grayout=true
+FadeIn	black					.5
+Bgm	緊迫
+	ディーア	悔しい2						くっ……駄目なのか！
+CharacterOff
+	レヴァ		3_3
+	ヘル	通常破損	1_3_b					魔力を削ってるはずなのに……\n全然収まらないなんて
+CharacterOff
+	ディーア	悔しい2						他に方法はないのか！
+CharacterOff
+	ヘル	通常破損						これ以上は…………
+CharacterOff
+	レヴァロスト	泣き真						ごめんなさい、ごめんなさい……\n私のせい、ぜんぶ私のせいで
+CharacterOff
+	レヴァ	慌て						あなたのせいじゃない！
+CharacterOff
+	レヴァロスト	泣き真						もうやめて……私のこと、\n救おうとしないで……\nもう……見捨てて、逃げて……
+CharacterOff
+	レヴァ							そんなことできるわけないわ！
+CharacterOff
+	レヴァロスト	泣き真						もう燃やして……\n私を……私の存在を……
+CharacterOff
+	ディーア	怒り2						レヴァンテイン=ロスト……
+CharacterOff
+	レヴァロスト	泣き真						もう見たくない……\nレヴァンテインが\n消えるところなんて……
+CharacterOff
+	ヘル	通常破損						……そうね\n私も、そんなところは、\n見たくない……
+CharacterOff
+	レヴァ	慌て						……だから、諦めろっていうの？
+CharacterOff
+	ヘル	悲しい破損						でも、お姉ちゃん、\nもう私たちに出来ることは……
+CharacterOff
+	レヴァ	本気						そうだとしても、私は諦めない
+CharacterOff
+	レヴァ		3_3
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァロスト	怒り真	1_3					こっちにこないで……！
+	レヴァ	本気						あなたを一人にはしないわ
+Tween	レヴァ	MoveBy	x=-10				NoWait
+	レヴァ							ほら、こうしてぎゅっとすれば\nあったかいくらいでしょ？
+	レヴァロスト	泣き真						やめて、やめて……！\nあなたまで燃えてしまうわ！\n私を置いて離れて……
+	レヴァ							ううん、離れない
+	レヴァ							妹を抱き締めない姉なんて\nこの魔界に存在しないんだから！
+	レヴァロスト	怒り真						どうして、どうしてなの……\nお願いだから、\n私を置いて、逃げて……
+	レヴァ	慌て						もう、あなたって言ってることが\n滅茶苦茶よ！
+	レヴァロスト	通常真						え…………？
+	レヴァ	本気						この炎を止められなかったら\nどうせ全部燃えちゃうじゃない
+	レヴァ	慌て						そうしたら、あなたも、魔界も\nみんなが傷つく……\nそれはあなたが一番望まないこと！
+	レヴァ	通常						だから、私たちは諦めない！\nそうだよね、ヘル？
+CharacterOff
+	ヘル	通常破損						……もちろんよ\nむしろ、諦めちゃだめでしょう？
+CharacterOff
+	レヴァ	通常	3_3
+	レヴァロスト	泣き真	1_3					ヘルまで、どうして……！
+	レヴァ	慌て						私たちの炎で、あなたの炎を\n抑え込むの……！
+CharacterOff
+	ヘル	通常破損						結局は力のぶつかり合いってことに\nなるわね……
+CharacterOff
+	ディーア	本気2						三人とも、勝手に無茶するな！
+CharacterOff
+	ヘル	通常破損	1_3_b
+	レヴァ	慌て	3_3					マスター！\nまさか今更止めるなんて……！
+CharacterOff
+	ディーア	通常2						無茶するなら、オレも一緒にする
+CharacterOff
+Bgm	キノコリオン
+	ヘル		1_3_b
+	レヴァ	通常	3_3					あははっ、何それ！
+CharacterOff
+	ディーア	笑い2						魔剣と魔剣使いは、\n一心同体だからな……！
+CharacterOff
+	ヘル	通常破損	1_3_b
+	レヴァ	笑い	3_3					全員の力を合わせろってことねっ！
+	レヴァ	通常						何をしても、ここで\n食い止めてみせる！
+	レヴァ	通常						これ以上\n誰も傷つけさせたりしない
+	レヴァ	通常						誰にもあなたを\n傷つけさせない……！
+	レヴァ	笑い						レヴァンテイン=ロスト！\n私を、私たちを信じて！
+CharacterOff
+	レヴァロスト	通常真						…………っ!!
+	レヴァロスト	笑い真						……わかったわ
+Param	character_grayout=false
+	白背景		エフェクト表			1
+Wait						1
+	レヴァロスト	笑い真						<size=20>…………ありがとう、\nお姉ちゃん</size>
+If	isdebug==true
+CharacterOff
+Jump	*E_592_09
+EndIf
+EndScenario
+
+# E_592_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+Se	火事
+StopBgm
+Bg	草原A(鎮火)
+FadeIn	black					.5
+Wait						1.5
+	ディーア	悔しい3						はぁ、はぁ……\n食い止めた、のか？
+CharacterOff
+	レヴァ	通常	1_3
+	ヘル	通常破損	3_3_b					炎は、消えた、みたいね……
+	レヴァ	通常						やった、やったよ！\nレヴァンテイン=ロスト！
+CharacterOff
+	レヴァロスト	笑い真						良かった……\nありがとう、みん、な……
+Tween	レヴァロスト	MoveBy	y=-50				NoWait
+Wait						.5
+Se	倒れる
+CharacterOff						.5
+Wait						1
+	ディーア	悔しい3						レヴァンテイン=ロスト！
+CharacterOff
+	レヴァ	慌て	3_3
+	ヘル	悲しい破損	1_3_b					……力を、使い果たしたのね
+	レヴァ	慌て						そんな……！\nじゃあ、あなたは……
+FadeOut	black					.2
+CharacterOff						0
+	イベントスチル59203		エフェクト表			0
+	　　　　　　　　　　
+Bgm	神秘
+Param	character_grayout=false
+FadeIn	black					1
+	レヴァロスト	<Off>						……ええ、これでお別れ……\nでもいいの
+	レヴァロスト	<Off>						この魔界を、"お姉ちゃん"がいる\nこの場所を守れたから\nそれで十分……
+	レヴァロスト	<Off>						……私が犯した罪を思えば、これでも\n報われすぎているくらいだもの
+Param	character_grayout=true
+CharacterOff
+	ヘル	通常破損	1_3_b
+	レヴァ	慌て	3_3					レヴァンテイン=ロスト……
+CharacterOff
+Param	character_grayout=false
+	イベントスチル59203		エフェクト表
+	レヴァロスト	<Off>						ごめんなさい……\nレヴァンテインも、ヘルも、\nあなたも、傷つけてごめんなさい
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						そんなこと、もう誰も責めないさ
+CharacterOff
+	レヴァ	慌て	3_3
+	ヘル	通常破損	1_3_b					そうよ、それにあなたは\n魔界をちゃんと救って……！
+CharacterOff
+	レヴァロスト	通常真						いいえ、私は今まで、\nたくさん奪って、傷つけて、\n許されないことをして<dash=2>
+CharacterOff
+	ヘル		1_3_b
+	レヴァ	本気	3_3					だめよ、レヴァンテイン=ロスト
+FadeOut	white					.7
+Param	character_grayout=false
+CharacterOff
+	カバー上部		カバー上部			0
+	イベントスチル59205		エフェクト表
+Tween	イベントスチル59205	MoveBy	y=-700 time=0
+Wait						.3
+	　　　　　　　　　　
+FadeIn	white					1
+	レヴァ	<Off>						もう誰も傷つけないで\nあなた自身も、傷つけないで
+	レヴァロスト	<Off>						でも…………
+	レヴァ	<Off>						どんな場所にいても\nどんな罪を背負っていても\n誰だって、幸せになれるわ……
+	レヴァロスト	<Off>						………………幸せに
+	レヴァ	<Off>						ううん、私が幸せにしてみせる！
+	レヴァ	<Off>						私たち、また必ず会えるから！
+	レヴァロスト	<Off>						……そう、かしら
+	レヴァ	<Off>						絶対そうよ！\nそんな気がするもん！
+	レヴァロスト	<Off>						……そう、ね\nそうだったら……いいな
+	レヴァ	<Off>						その時はね、たくさんお話するの！\n約束よ！
+	レヴァロスト	<Off>						……うん
+	レヴァ	<Off>						たくさんお出かけして\nたくさん遊んで、\nお買い物も一緒に行くの！
+	レヴァロスト	<Off>						……うん
+	レヴァ	<Off>						かわいい服もたくさん着せて\nおいしいものもいっぱい食べるの！
+	レヴァロスト	<Off>						……たくさん、あるのね
+	レヴァ	<Off>						うん！\nあなたのこと、いっぱい抱き締めて\nいっぱい笑顔にする！
+	レヴァロスト	<Off>						…………うん
+	レヴァ	<Off>						……いっぱい幸せにするからね！\nレヴァンテイン=ロスト
+	レヴァロスト	<Off>						……ああ、ああ、私、もう\nこんなに、幸せなのに……
+	レヴァロスト	<Off>						これ以上、受け取って\nいいの、かな……？
+	レヴァ	<Off>						幸せに限度なんてないよ\nだから私と、私たちと、\nこれからいっぱい、幸せになろう？
+	レヴァロスト	<Off>						…………うん、ありがとう\n"お姉ちゃん"
+FadeOut	white					1.5
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_592_01
+EndIf
+EndScenario

@@ -1,0 +1,371 @@
+# E_1052_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	黒背景					0
+Param	character_grayout=false
+	7章地図
+FadeIn	black					.5
+	第99魔鍵調査局							第99魔鍵調査局より、\n全ての魔剣使いに通達！
+	第99魔鍵調査局							魔鍵ユグドラシル内に\n新たな未開領域が発見された！
+FadeOut	black					.3
+CharacterOff						0
+Bg	大灯台					0
+	          
+FadeIn	black					.3
+	第99魔鍵調査局							諸君！\n同士たる魔剣使い諸君!!
+	第99魔鍵調査局							我々はたゆまぬ努力と\n数多の犠牲によって、\n新たな領域へ挑む権利を得た！
+	第99魔鍵調査局							ユグドラシルの新たな深淵、\nアビスへと……！
+FadeOut	black					.2
+Bg	遺跡C					0
+	          					0
+FadeIn	black					.2
+	第99魔鍵調査局							勇気ある魔剣使いたちよ！
+	第99魔鍵調査局							世界から与えられた最大の謎、\n大いなる魔鍵へと再び挑む時がきた！
+	第99魔鍵調査局							魔界に覇を唱え、\n我こそは魔王たらんと挑む者よ!!\n今こそ魔鍵へ集うがいい！
+	第99魔鍵調査局							アビスは諸君らの\n挑戦を待っている！
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	洞窟A					0
+	          					0
+Wait						1
+Bgm	作戦会議
+FadeIn	white					1
+Wait						1
+	リディ	笑い2	2_2			1
+	ディーア	通常2	1_2			1
+	          
+Wait						1
+Param	character_grayout=true
+	リディ	笑い2						やっとついたね！\nここが新しく発見された\n未開領域なの？
+	ディーア	笑い2						ああ、\nこの先に空間が\n何層も連なっているらしい
+Tween	リディ	MoveBy	x=-10				NoWait
+	リディ	驚き2						そんな場所が\nまだ見つかっていなかったんだね
+	ディーア	通常2						それだけユグドラシルには\n謎が多いんだ
+	ディーア	笑い2						まずは急ごう\nこの未開領域には\nきっと未知の物質や遺物が眠ってる
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	笑い2						ねえねえ！\n宝物もあったりするのかな!?
+	ディーア	通常2						ああ、魔剣機関の先遣隊が\nそういう物質を確認してるらしい
+	ディーア	通常2						宝になるかはわからないけど、\nうまく使えば魔剣使いとして\n力を高められるはずだ
+	リディ	笑い2						それじゃあ、\nぜったいに手に入れないとだね！
+	ディーア	怒り2						ああ！\n魔王を目指すには、\n避けては通れない試練だ！
+	ディーア	通常2						既に多くの魔剣使いが\n到着している……！
+	ディーア	笑い2						オレも負けてられない！
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	笑い2						うん、そうだね！\nマスター、がんばって！
+	ディーア	通常2						ありがとう\nそれじゃあ、さっそく<dash=2>
+	ディーア	驚き2						って、あれ？
+CharacterOff
+	魔剣使い1052		画面外_左
+Tween	魔剣使い1052	MoveBy	x=700 time=3				NoWait
+Wait						1.5
+	魔剣使い1052							はぁ……\nまったく無駄骨か……
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						なんであの魔剣使いは\n引き返してきたんだ……？
+CharacterOff
+	魔剣使い1052							ん？\nお前たちも未開領域に\n挑みに来たのか？
+CharacterOff
+	ディーア	驚き2						ああ、その通りだけど……
+CharacterOff
+	魔剣使い1052							悪いこと言わないから、\n引き返したほうがいい\nこの先にはなにもないからな
+CharacterOff
+	ディーア	怪しい2						それはどういう……
+CharacterOff
+	魔剣使い1052							見ればわかるさ、\n付いてこい
+Se	走る
+FadeOut	black					.3
+Param	character_grayout=false
+StopBgm
+CharacterOff						0
+	ディーア	驚き2				0
+Bg	洞窟A					0
+Wait						1
+Bgm	絶望
+FadeIn	black					.3
+	ディーア	驚き2						ほんとだ……\nただ空間が広がっているだけだな……
+CharacterOff
+	魔剣使い1052							魔剣機関がああまで仰々しく言うから\n期待してたんだがな
+	魔剣使い1052							ご覧の通り、宝や遺物はない\n下に続く空間も同じだよ
+CharacterOff
+	ディーア	怪しい2						でも、\n魔剣機関の報告を見る限り、\nなにもないってことはないだろう？
+CharacterOff
+	魔剣使い1052							まあ、詳しく調べたら\nなにか出るかもしれないが……\nそれも難しくてな
+CharacterOff
+	ディーア	怪しい2						もしかして、\n長く留まれない理由があるのか？
+CharacterOff
+	魔剣使い1052							この領域は\n一定の周期で復元されるんだ
+	魔剣使い1052							構造物も修復されるし、\nそれまでに撤退しなければ\n内部の探索者は危険に晒される
+CharacterOff
+	ディーア	怪しい2						そういえば、\n魔剣機関も言ってたな……
+CharacterOff
+	魔剣使い1052							アビスの【リカバリーシステム】って\n魔剣機関は命名したみたいだ
+CharacterOff
+	ディーア	怪しい2						なるほど、それで……
+CharacterOff
+	魔剣使い1052							魔剣機関にはその原理を\n解明する動機があるかもしれないが\n俺らには旨味が少ない
+	魔剣使い1052							俺ももう一度、\n最下層までは行ってみるが\nなにも見つからないだろうな……
+Tween	魔剣使い1052	RotateTo	y=180 time=0				NoWait
+Tween	魔剣使い1052	MoveBy	x=700 time=2				NoWait
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	リディ	悲しい2	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						…………
+Tween	リディ	MoveBy	x=-10				NoWait
+	リディ	悲しい2						どうするの、マスター？\n引き返しちゃう？
+StopBgm
+	ディーア	笑い2						……いや、進もう\n価値があるかどうかは\nオレたち自身で決めるべきだ
+	リディ	笑い2						うん♪\nそれじゃあ、一緒に<dash=2>
+Param	character_grayout=false
+Se	アラート
+	結界		エフェクト裏			1
+FadeOut	red					.2
+FadeIn	red					.2
+Wait						.3
+FadeOut	red					.2
+FadeIn	red					.2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	驚き2						えっ!? なにこれ!?
+	ディーア	本気2						リディ、離れるな！
+Se	光3
+FadeOut	white					.5
+CharacterOff	結界					0
+Bg	遺跡C					0
+Param	character_grayout=true
+FadeIn	white					.5
+Se	ドーン
+	ディーア	悔しい2						止まった……！\nリディ、大丈夫か!?
+Bgm	図書館
+	リディ	悲しい2						う、うん……！\nでも、さっきと場所も違うし、\n他の人達もいなくなっちゃったよ？
+	ディーア	怪しい2						……異空間じゃない\n位相をずらしているのか……？
+	ディーア	怒り2						特定の魔力に反応して？\nそれとも並行の……
+Tween	リディ	MoveBy	x=-10				NoWait
+	リディ	驚き2						マスター？
+	ディーア	笑い2						はは……！\nなにもないなんて、\nよく言ったもんだ！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	怒り2						この魔力の濃さ、反応……！\nここが本当の未開領域だったんだ！
+	リディ	驚き2						さっきの場所が\n偽物だったっていうこと？
+	ディーア	笑い2						ああ、魔剣機関の先遣隊も\nここに入りかけたんだろうな
+	ディーア	怪しい2						でも、\nどうしてオレたちだけが\nこんなに簡単に……？
+Se	マイクノイズ	TRUE
+FadeOut	white					.2
+FadeIn	white					.2
+	ディーア	悔しい2						ぐっ!?
+Param	character_grayout=false
+CharacterOff						0
+	　　　　　　　　　　
+ImageEffect	SpriteCamera	Sepia
+Bg	研究所A_過去
+Wait						.1
+Bg	酒場の地下_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	研究所B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	研究所C_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	廃墟A_過去
+Wait						.1
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地B2_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	戦場跡
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	black					.1
+Bg	水銀の大地
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Wait						1
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	遺跡C					0
+	リディ	悲しい2	2_2			0
+	ディーア	悔しい2	1_2			0
+Param	character_grayout=true
+StopSe
+FadeIn	white					.2
+	ディーア	悔しい2						なんだ、いったい……？
+	ディーア	驚き2						これはまさか……\n記憶が？
+Tween	リディ	MoveBy	x=-20				NoWait
+	リディ	悲しい2						マスター、大丈夫!?\nしっかりして!?
+	ディーア	悔しい2						オレは、平気だ……！
+	ディーア	怒り2						わざわざ呼んだくせに、\nまったく、素直じゃないな\n魔鍵ユグドラシル<dash=2>!!
+	リディ	悲しい2						本当に大丈夫、マスター？
+	リディ	悲しい2						ここ、なんだか変だよ\nつらくて、悲しくて……\nそんな気持ちになっちゃうの
+	ディーア	怒り2						ああ、オレも感じてるけど、\nそれでも進まなきゃいけない
+	ディーア	通常2						わざわざ招いたんだ、\n望み通りに踏破してやろう\n今更、拒絶しても遅い
+	リディ	悲しい2						うん……
+	ディーア	笑い2						それに……\nほら、あれを見てくれ！
+FadeOut	black					.3
+Param	character_grayout=false
+CharacterOff						0
+	アビスアイテム					0
+	オーラ青		エフェクト表			0
+FadeIn	black					.3
+Wait						1.5
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	笑い2	1_2			0
+	リディ	驚き2	2_2			0
+FadeIn	black					.3
+	リディ	驚き2						えっ、あれって……？
+	ディーア	通常2						魔剣機関の報告書にあった、\n<ruby=Central Unidentified Beta Elements>未確認魔導核β型</ruby>……\n【魔鍵遺物C.U.B.E】だろう
+	ディーア	笑い2						強い魔力が込められた結晶だと思う\n魔剣機関に届ければ\nオレたちの力になるはずだ
+	ディーア	通常2						空間の謎も解明しないといけないし、\n進むだけの価値は十分にある
+StopBgm
+	ディーア	怪しい2						とはいえ……
+	リディ	驚き2						マスター、あそこ！
+Bgm	バトル
+Param	character_grayout=false
+Se	闇1
+CharacterOff
+	アビス防衛機兵1		2_3					サーチ……魔力照合……\n魔力波動近似……\nアイデンティファイ……同位体……
+Se	闇1
+	アビス防衛機兵2		1_3			.3
+	アビス防衛機兵3		3_3			.3
+	アビス防衛機兵1							エラー、エラー\nリソース……該当除外済み……
+	アビス防衛機兵1							エネミー……\nリジェクト……リジェクト……
+Param	character_grayout=true
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						そう簡単に\n進ませてはくれなさそうだな！
+	リディ	驚き2						どうするの、マスター？
+	ディーア	目閉じ2						たしか、\nリカバリーシステムで\n期限があるんだったな
+	ディーア	本気2						それまでに最深部まで辿り着くぞ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1052_02
+EndIf
+EndScenario
+
+# E_1052_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	凱旋
+Bg	遺跡C					0
+	リディ	通常2	2_2			0
+	ディーア	悔しい2	1_2			0
+FadeIn	white					.5
+	ディーア	悔しい2						はぁ、はぁ……！
+	ディーア	通常2						ようやく最深部まで\nたどり着いたな……！
+	リディ	通常2						つよい魔物がいっぱいで\n大変だったね！
+	ディーア	笑い2						だけど、\nそれだけの成果はあった
+	ディーア	笑い2						あの素材もたっぷり\n手に入ったしな
+	リディ	笑い2						うん！
+	ディーア	通常2						それに、\nこの奥には大きな魔力反応があるぞ！\nきっとすごい<dash=2>
+StopBgm
+FadeOut	white					.3
+Se	闇1
+Bg	洞窟A					0
+FadeIn	white					.3
+	ディーア	驚き2						……え？
+Bgm	図書館
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	驚き2						こ、ここはどこ!?\nまた場所が変わっちゃったよ!?
+CharacterOff
+	魔剣使い1052							おーい、お前たち！
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+	リディ							あっ！\nあの時の魔剣使いさん！
+CharacterOff
+	魔剣使い1052							姿が見えないから、\n引き返したと思ったんだが、\nついてきてたんだな
+	魔剣使い1052							言ったとおり\n目ぼしいものはなかっただろ？
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	驚き2						でも、\nリディたちさっきまで……！
+	ディーア	怒り2						…………
+	ディーア	通常2						ああ、言われたとおりだったよ
+	リディ	驚き2						マスター……？
+CharacterOff
+	魔剣使い1052							そうか、\nじゃあ気をつけて帰れよ
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	怒り2	1_2			0
+	リディ	驚き2	2_2			0
+Wait						.5
+FadeIn	black					.3
+	リディ	驚き2						ねぇ、これって\nどういうことなの？
+	ディーア	怒り2						きっと位相が戻って、\n元の場所に接続されたんだ
+	リディ	悔しい2						でも、あんないきなり……
+	ディーア	目閉じ2						あの先には\n進ませたくなかったんだろうな
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	驚き2						なんとか戻れないのかな？\nせっかくあそこまで行ったのに……
+	ディーア	通常2						……いや\n今はここで引き返そう
+	リディ	悲しい2						で、でも……！
+	ディーア	笑い2						きっと\nユグドラシルが言ってるんだ\n今はまだ先に進むときじゃないって
+	ディーア	通常2						それに、ユグドラシルは逃げないさ\n必要なときにオレたちを呼んでくれる\n今回みたいにな
+	リディ	悲しい2						うん、わかった……
+	リディ	怒り2						でも、\nあのアビスってなんだったんだろ？
+	リディ	悲しい2						ただの空間じゃなくて、\nなんだか、色んなものが\n混ざってたような……
+Tween	リディ	MoveBy	x=-20				NoWait
+	リディ	悲しい2						途中の魔物も、\nどこかで知ってる感じがしたよ？\nどういうことなの？
+	ディーア	怒り2						…………
+	ディーア	怒り2						記憶の交差路、か
+	ディーア	目閉じ2						敗れて、さまよって、\n断片になって……\nここに行き着いたんだな……
+	リディ	驚き2						マスター？
+	ディーア	笑い2						いや、なんでもない\nそれより早く戻ることにしよう\n遅くなっちゃうからな
+	リディ	通常2						マスターがそう言うなら、\nリディはいいけど……
+	ディーア	通常2						心配しなくても、\nいつかまた来ることになるさ
+	ディーア	目閉じ2						必ず、な……
+StopBgm
+	ディーア	怒り2						その時こそ、\nユグドラシルの全てを……！
+Param	character_grayout=false
+FadeOut	black					.3
+CharacterOff						0
+	オーラ紫		エフェクト表			0
+Bg	遺跡C					0
+Wait						2
+FadeIn	black					.3
+Se	心拍
+Wait						2
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1052_01
+EndIf
+EndScenario

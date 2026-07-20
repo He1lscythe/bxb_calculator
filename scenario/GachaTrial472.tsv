@@ -1,0 +1,594 @@
+# G_472_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	神秘
+Bg	白背景
+Param	character_grayout=false
+	トライアルスチル47201		エフェクト表			0
+FadeIn	white					.5
+	織姫	<Off>						だ、ダメ、マスターちゃん……\nヒメ達、ウソカップルなんだよ？
+	織姫	<Off>						それにヒメ、は、初めてで……\nこんなこと……
+	ディーア	<Off>						でも、ウソの彼氏だから……\nこれも、ノーカンなんだろ……？
+	織姫	<Off>						っ……
+	織姫	<Off>						そう、だね\nウソなら……いっかな……？
+FadeOut	white					.3
+CharacterOff	トライアルスチル47201					0
+	トライアルスチル47204		エフェクト表			0
+FadeIn	white					.3
+	織姫	<Off>						マスターちゃん、ヒメと……♥
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	酒場_宿屋					0
+	          
+Wait						1
+Bgm	平和
+FadeIn	white					1
+	          　　　　　　　							\n  　　  　　<color=blue><dash=2>前日<dash=2></color>
+Param	character_grayout=true
+CharacterOff
+	織姫	通常	p3b
+	ミル	通常	p7
+	ミル	通常						それでね！\nミルの彼ピ、やさしくて！\nすっごく胸キュンしちゃったの♪
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	嬉しい						いいなー！\n超キュンじゃん！ あげみじゃん！
+	ミル	通常						でっしょー!!\nそれに、彼ピが新しい水着も\n選んでくれたんだ★
+	ミル	通常						ちょっとまってね♪
+Tween	ミル	MoveBy	x=800 time=1				NoWait
+Wait						.5
+Tween	ミル	MoveBy	x=-800 time=1				Add
+	ミル	水着						じゃーん♪
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	オーラ桃		エフェクト裏			0
+	ミル	水着				0
+ZoomCamera	SpriteCamera	1.3				0	NoWait
+FadeIn	white					.3
+	ミル	水着						ね！ いいでしょ★
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+	ミル	水着	p7			0
+	織姫	通常	p3b			0
+ZoomCamera	SpriteCamera	1				0	NoWait
+FadeIn	white					.3
+	織姫	通常						うわー！\nかわいいー♪
+	ミル	水着						えへへへ♪\n選んでる時の彼ピったらぁ、\nまっかに照れちゃったの……♪
+	ミル	水着						それがかわいくてぇ、\nマジ好きピって感じ♥
+	織姫	嬉しい						へー！\nよかったね、ミルちゃん♪
+Tween	ミル	MoveBy	x=-10				NoWait
+	ミル	水着						うん！\nそういえばお姉ちゃんは最近どう？\n彼ピと進展した？
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	慌て						えっ!?\nも、もちろん！\nヒメ達、マジラブだし！
+	ミル	水着						わぁ♪ その話、教えて！\nデートはどこ行ってるの？
+Tween	織姫	MoveBy	x=-20				NoWait
+	織姫	慌て						で、デートは、えっとぉ……\n森でキノコを狩ったり……
+	ミル	水着						き、きのこ狩り？\nデートで……？\nそういうの流行りなの……？
+	織姫	慌て						そ、そうなの……！\nうちの彼ピ、ワイルドが好きで……！
+	ミル	水着						なにそれ！ いいじゃん♪\nもっとその話、聞かせて！
+StopBgm
+Tween	織姫	MoveBy	x=-20				NoWait
+	織姫	慌て						あ、あはは……\nひ、ヒメの彼ピのことは\nこのくらいで……
+Bgm	都市
+CharacterOff
+	ディーア	通常2						織姫、ミル\nこんなところにいたんだな
+CharacterOff
+	織姫	通常	p3b
+	ミル	水着	p7
+Tween	ミル	PunchPosition	y=30				NoWait
+	ミル	水着						あ、マスターちゃん！\nちーっす♪
+	織姫	通常						やっほー、マスターちゃん★
+	織姫	悲しい						<size=20>た、助かったぁ……</size>
+	ミル	水着						マスターちゃん、\nミル達のこと、探してたの？
+CharacterOff
+	ディーア	笑い2						ああ、そうなんだ\n実は二人に珍しい依頼が来てて
+	ディーア	通常2						二人はこの雑誌、知っているか？
+CharacterOff
+	織姫	通常	p3b
+	ミル	水着	p7
+	ミル	水着						あ、それ！\nミル達もいつも読んでるよ！
+	織姫	嬉しい						イケてるギャルは\nみーんなそれを参考にしてるの！
+	ミル	水着						あれ、マスターちゃん\nお仕事ってもしかして……!!
+CharacterOff
+	ディーア	笑い2						ああ、雑誌の記者が\n織姫とミルが恋愛上手な魔剣って\n聞いたらしくて
+	ディーア	通常2						理想のデートについて、\n二人のインタビューを\n載せたいそうなんだ
+CharacterOff
+	織姫	慌て	p3b
+	ミル	水着	p7
+	ミル	水着						マジ!?\nアガっちゃうんですけど★
+	織姫	慌て						で、デート……
+CharacterOff
+	ディーア	笑い2						報酬もいいし、\nオレとしては受けてほしいけど……
+CharacterOff
+	織姫	慌て	p3b
+	ミル	水着	p7
+	ミル	水着						はいはーい★\nミルちゃん、やっちゃうよー♪
+	ミル	水着						お姉ちゃんもやるよね？\n一緒に彼ピを自慢しようよ★
+	織姫	慌て						ひ、ヒメは……
+CharacterOff
+	織姫	慌て	画面外_左_b
+	ディーア	笑い2
+	ディーア	笑い2						それじゃあ<dash=2>
+Tween	織姫	MoveBy	x=450 time=1				NoWait
+	織姫	慌て						ま、マスターちゃん！\nその前にちょっと来て!!
+	ディーア	驚き2						お、織姫!?
+StopBgm
+Se	走る
+Tween	織姫	MoveBy	x=-800 time=1				NoWait
+Tween	ディーア	MoveBy	x=-1600 time=1				NoWait
+Wait						.5
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場の地下					0
+Param	character_grayout=false
+	集中線		エフェクト表			0
+	織姫	照れ拡大	エフェクト裏			0
+Bgm	緊迫
+FadeIn	black					.1
+	織姫	照れ拡大						ま、マスターちゃん！\nヒメ、どうしたらいいのー!?
+StopBgm
+Param	character_grayout=true
+CharacterOff
+	織姫	悲しい	2_4_b			0
+	ディーア	驚き2	3_4			0
+	ディーア	驚き2						……え？
+Bgm	コメディ
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	あはは						え？ じゃないよ！\nマスターちゃんは知ってるでしょ？\nヒメが恋愛経験ないって！
+	織姫	あはは						だから\nウソ彼ピになってって\n頼んだんじゃん！
+	ディーア	汗2						そ、そうだけど\nほら、インタビューだけだし、\n理想のデートは想像で……
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	照れ						そういうのすぐバレるから！
+	ディーア	汗2						じゃ、じゃあ、\n依頼は断って<dash=2>
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	照れ						せっかくの機会なのに\n断ったらもっと怪しいじゃん！
+StopBgm
+Tween	織姫	MoveBy	x=-20				NoWait
+	織姫	悲しい						そ、それに、ミルちゃんも\nあんなに喜んでたし……
+	ディーア	怪しい2						なるほど……
+	ディーア	笑い2						よし！\nだったらオレとデートをしよう
+Bgm	わくわく
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	照れ						……へ？\nま、マスターちゃんとデート!?\nヒメが!?
+	ディーア	通常2						ああ、オレは依頼を受けたいし\n織姫も恋愛経験をつみたいんだろ？\nだから本当にデートをすればいいんだ
+	織姫	照れ						で、でも、\nヒメ、はじめてだし……\nうまくいくかな……？
+	ディーア	笑い2						雑誌のデートプランを\n参考にすれば大丈夫だよ
+	ディーア	通常2						理想のデート、再現してみよう
+	織姫	照れ						マスターちゃんと\nキラキラなデートを……
+FadeOut	white					.5
+CharacterOff						0
+Bg	市街地A					0
+	オーラ桃		エフェクト裏			0
+	ディーア	笑い2	3_4			0
+	織姫	嬉しい	2_4_b			0
+FadeIn	white					.5
+	織姫							マスターちゃん♥
+	ディーア							ひーめ♥
+Param	character_grayout=false
+	二人							えへへへへ♥
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	通常2	3_4			0
+	織姫	照れ	2_4_b			0
+FadeIn	white					.3
+	織姫	照れ						い、いいかも……！
+	ディーア	通常2						よかった！\nそれじゃあ織姫、よろしくな！
+	織姫	嬉しい						うん♪\nおけまる水産★
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地B					0
+	ディーア	通常2	3_4			0
+	織姫	通常	画面外_左_b			0
+Wait						1
+Bgm	都市
+FadeIn	black					.3
+Tween	織姫	MoveTo	x=-100 time=1				NoWait
+	織姫	通常						マスターちゃん、お待たせ！\n待った？
+	ディーア	笑い2						大丈夫だよ、織姫\nオレも来たばかりだから
+	織姫	嬉しい						あっ！\n今の、カップルっぽかったよね★
+	ディーア	通常2						そうだな\nこういう感じでデートを再現しよう
+	織姫	嬉しい						うん♪\n今日の予定はマスターちゃんが\n決めてくれたんだよね？
+	ディーア	通常2						雑誌に書いてある\nデートプラン通りだけどな
+	ディーア	通常2						まずは話題のカフェに行って、\nカップルメニューを楽しむ
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	嬉しい						それって限定パフェだよね★\nマカインスタで、\nバズリまくってたやつ♪
+	ディーア	笑い2						それから\nタピオカ、チャレンジだったか？\nその写真を撮る！
+	織姫	嬉しい						うんうん！
+	ディーア	笑い2						最後は人気のデートスポットで\nツーショット、\nっていうのが今日の予定だ
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	嬉しい						いいじゃん♪\nキラキラなデートっぽい！\nじゃあ、早く行こ★
+	ディーア	通常2						あ、その前に……！
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	笑い2						織姫、手をつなごう
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	あはは						へ……？\nて、手をつなぐの!?
+	ディーア	通常2						ああ、本によると、\nデートは移動中も大事らしい\nカップルは手をつなぐのが普通だとも
+Tween	織姫	MoveBy	x=-20				NoWait
+	織姫	照れ						で、でも、\nヒメ達、ウソカップルだし……\nそこまでは……
+	ディーア	怒り2						いや、練習だからこそ\nちゃんとやらないとダメだ……！
+	ディーア	怒り2						オレは依頼のため、\n織姫は経験のために！\n頑張ってデートをしよう！
+	ディーア	通常2						それにウソカップルだから、\n今日やることもウソでノーカンだよ
+	織姫	照れ						そ、そうだね……！\nカップルらしく……！
+Param	character_grayout=false
+	織姫	照れ						じゃあ……えいっ！
+Tween	織姫	MoveBy	x=50				NoWait
+Wait						.2
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	慌て						ひゃっ！ あ、あったかい……！\nこ、これでいいのかな？
+Param	character_grayout=true
+	ディーア	笑い2						ああ！\nそれじゃあ出発しよう
+	織姫	照れ						う、うん！
+Param	character_grayout=false
+	オーラ桃		エフェクト裏			.3
+	織姫	照れ						（な、なんかマジのデートみたい♪\n　えへへ……♪）
+StopBgm
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_カフェ					0
+	ディーア	驚き2	3_4			0
+	織姫	嬉しい	2_4_b			0
+Bgm	ショッピング
+Se	ガヤB	TRUE
+Param	character_grayout=true
+FadeIn	black					.3
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	嬉しい						うわー！\n本当にキラキラしてるー！\nマカインスタに上げまくろ★
+	ディーア	驚き2						確かに女の子に\n人気なのもわかるな
+	ディーア	笑い2						あ、噂のパフェが来たぞ！
+	店員							おまたせしました！\nこちらカップル限定パフェの\nタピオカジュースセットになります
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	嬉しい						きゃー！\nめちゃカワー★
+	織姫	嬉しい						マスターちゃん、マスターちゃん！\n先に自撮りしていい？\nミルちゃんにも見せてあげるの！
+	ディーア	通常2						ああ、もちろん！
+	織姫	通常						やったー★\nちょっとまってね……！
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	嬉しい						うん、オッケー★\nじゃあ、一緒に食べよ♪
+	織姫	あはは						……って、あれ？\nスプーンが一本しかないよ？
+StopBgm						1
+StopSe						10
+	ディーア	怪しい2						本当だ……\nまさか、カップル限定って……
+	織姫	照れ						マスターちゃんと、\n食べさせあいっこするの!?
+	ディーア	怪しい2						だから、カップル限定か……
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	あはは						そ、そういうの憧れてたけど……！\nウソカップルなのにいいの……!?
+	ディーア	怒り2						織姫……やるぞ
+	織姫	慌て						ま、マスターちゃん!?\nでも、ヒメ達……！
+	ディーア	通常2						大丈夫だよ\nオレたちはウソカップル\nなにをしてもウソでノーカンだろ？
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	本気2						依頼のためにも、やろう!!
+	織姫	照れ						そ、そうだよね……\nこれはウソだから、\nいいんだよね……？
+StopSe
+Tween	織姫	MoveBy	x=20				NoWait
+	織姫	照れ						じゃ、じゃあ、\nまずはマスターちゃんに……！
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト表
+	織姫	照れ拡大	エフェクト裏
+Bgm	穏やか
+	織姫	照れ拡大						あ、あーん……
+Param	character_grayout=true
+CharacterOff
+	織姫	照れ	2_4_b
+	ディーア	目閉じ2	3_4
+	ディーア	目閉じ2						あー……んっ！
+Tween	ディーア	PunchPosition	y=10				NoWait
+	ディーア	笑い2						おっ！ このパフェ美味しいな！\nありがとう織姫！
+	織姫	あはは						よ、よかったぁ……！
+	ディーア	汗2						もっと恥ずかしいと思ったけど、\n案外、平気なもんだな\nあまり織姫も意識しすぎずにやろう
+	織姫	照れ						そ、そうだねっ……！
+	織姫	照れ						（次はマスターちゃんから……\n　あれ？ それって間接キ<dash=2>）
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	笑い2						織姫\nはい、あーん……
+	織姫	照れ						あ、ちょ、ちょっと……！
+	ディーア	笑い2						大丈夫、\nこれはウソだから！
+StopBgm
+Shake	織姫		x=2				NoWait
+	織姫	照れ						う、うぅ……！
+Param	character_grayout=false
+Se	心拍
+CharacterOff
+	オーラ桃		エフェクト表
+	織姫	悲しい拡大	エフェクト裏
+	織姫	悲しい拡大						あっ……あーん……！
+Param	character_grayout=true
+CharacterOff
+	織姫	悲しい	1_2_b
+	ディーア	悔しい2	2_2
+	          
+StopSe
+	店員							申し訳ありませんお客様！
+Tween	織姫	MoveBy	x=-60				NoWait
+Tween	織姫	PunchPosition	y=40				NoWait
+	織姫	慌て						うひゃあああ!?
+Bgm	コメディ
+	店員							スプーンをもう一本、\nお渡ししておりませんでした!!
+	織姫	照れ						え……？\n食べさせあいっこしなくても\nよかったの？
+	ディーア	汗2						そ、そうだったんだな\nじゃあ、普通に食べようか
+	織姫	照れ						う、うん……
+	織姫	照れ						（でも、安心したはずなのに\n　なんでもやもやするの……？）
+	織姫	照れ						（このままじゃ、ダメだよね……\n　ヒメももっと積極的に……！）
+	織姫	あはは						ま、マスターちゃん！\nパフェの前に先にやろうよ！\nタピオカチャレンジ!!
+	ディーア	通常2						ああ、いいぞ\nでも、オレもやり方は詳しくなくて
+	織姫	嬉しい						ヒメが調べるね！\nえっと、タピオカチャレンジは\nカップをヒメの<dash=2>
+	織姫	慌て						えぇ!?\nヒメの胸に乗せるの!?
+Shake	織姫		x=5				NoWait
+	織姫	慌て						む、むりぃ……\nひ、ヒメ達ウソカップルなのに\nこんなのできないよぉ……！
+	ディーア	笑い2						そんなに照れることないだろ？\n少し変わってるけど、\n流行りってそういうものだし
+	ディーア	汗2						それに、オレたちは\nウソのカップルなんだから\n気にしなくていいって
+	織姫	照れ						そ、そうだよね……\nみんなもやってる……！\nノーカンだし、ウソだし……！
+	織姫	あはは						じゃあ、マスターちゃん\nヒメがタピオカ乗せるから、\n写真、撮って……？
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル44902		エフェクト表			0
+	織姫	胸拡大	エフェクト裏			0
+Wait						.5
+FadeIn	white					.3
+	織姫	胸拡大						は、はい、どうぞ……♥
+	織姫	胸拡大						（ま、マスターちゃんが\n　ヒメをじっと見てる……！）
+	ディーア	<Off>						いくぞ……\nはい、もちひつ<dash=2>
+	織姫	胸拡大						うっ、うぅ……！
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2	3_4			0
+	織姫	慌て	2_4_b			0
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	慌て						まってむりむり、ほんとむり！		1560-19		ボイスつける
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						うわぁ！\n急に動くと……！
+Se	ポップイン
+FadeOut	white					0
+Param	character_grayout=false
+CharacterOff						0
+	オーラ桃		エフェクト表			0
+	織姫	胸拡大	エフェクト裏			0
+Wait						1
+FadeIn	white					.5
+	織姫	胸拡大						ちょ、マスターちゃん!?\nど、どこ触ってるのー！
+	ディーア	<Off>						こ、これはわざとじゃ……！
+Se	ポップイン
+Tween	織姫	PunchPosition	y=5				NoWait
+	織姫	胸拡大						ひゃあ……！\nはやくどいてよー！
+	店員	<Off>						お客様、\n店内ではお静かにお願いします
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	驚き2	2_2			0
+	織姫	照れ	1_2_b			0
+	          
+FadeIn	black					.3
+Tween	ディーア	PunchPosition	y=30				NoWait
+Tween	織姫	PunchPosition	y=30				NoWait
+	二人							ご、ごめんなさい！
+Param	character_grayout=true
+	織姫	照れ						と、とりまパフェ食べよっか！
+	ディーア	汗2						あ、ああ、そうだな……！
+StopBgm
+FadeOut	black					.3
+Param	character_grayout=true
+Bg	市街地A					0
+CharacterOff						0
+	織姫	あはは	2_4_b			0
+	ディーア	通常2	3_4			0
+Wait						1
+Bgm	穏やか
+FadeIn	black					.3
+	ディーア	通常2						パフェ、美味しかったな\n店の雰囲気もよかったし、\nいい勉強になったよ
+	織姫	あはは						う、うん\nそうだったね……
+	黒グラデーション		エフェクト裏
+	織姫	悲しい						（でも、ヒメだけ緊張して\n　上手に経験できなかったよね）
+	織姫	悲しい						（せっかくマスターちゃんと\n　デートできたのに、次で最後……）
+CharacterOff	黒グラデーション
+	ディーア	笑い2						最後は人気のデートスポットだな
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	教会前					0
+	織姫	照れ	2_4_b			0
+	ディーア	通常2	3_4			0
+Bgm	穏やか
+FadeIn	black					.3
+	ディーア	通常2						この教会の前か\n確かここで記念撮影をすると<dash=2>
+	織姫	照れ						カップルはずーっと幸せになれる\n恋人達の聖地なんだって
+	ディーア	笑い2						よし、今日のラストだ\nいい写真を撮ろう！
+	織姫	照れ						（そ、そうだよ、もう最後\n　ここで勇気を出さないと……！）
+	織姫	照れ						…………
+	織姫	あはは						マスターちゃん……\nもっと、恋人みたいなこと\nできない？
+Tween	織姫	MoveBy	x=20				NoWait
+	ディーア	驚き2						えっ、もっとか？
+	織姫	あはは						だって、ヒメ達、\nウソでもカップルなんだよ！\nもっと……！
+Tween	織姫	MoveBy	x=30				NoWait
+StopBgm
+	織姫	悲しい						あっ……！
+Tween	織姫	MoveBy	x=30				NoWait
+Tween	ディーア	MoveBy	x=30				NoWait
+Se	倒れる
+FadeOut	black					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	          
+FadeIn	black					.3
+	ディーア	<Off>						いたた……\n織姫、大丈夫か……？
+FadeOut	white					.3
+CharacterOff						0
+Bg	白背景					0
+	トライアルスチル47201		エフェクト表			0
+Bgm	神秘
+FadeIn	white					1
+	織姫	<Off>						マスターちゃん、\n顔がちかいよ……？
+	ディーア	<Off>						ご、ごめん……！\nで、でも、カップルなら……\nこういうのも普通なんだよな？
+	織姫	<Off>						そ、それは……！
+	織姫	<Off>						だ、ダメ、マスターちゃん……\nヒメ達、ウソカップルなんだよ？
+	ディーア	<Off>						織姫……
+	織姫	<Off>						それにヒメ、は、初めてで……\nこんなこと……
+	ディーア	<Off>						でも、ウソの彼氏だから……\nこれも、ノーカンなんだろ……？
+	織姫	<Off>						っ……
+	織姫	<Off>						そう、だね\nウソなら……いっかな……？
+StopBgm
+FadeOut	white					.3
+CharacterOff	トライアルスチル47201					0
+	トライアルスチル47203		エフェクト表			0
+Se	心拍	TRUE
+FadeIn	white					.3
+	織姫	<Off>						マスターちゃん、ヒメと……♥
+	トライアルスチル47204		エフェクト表			0
+Wait						.5
+ZoomCamera	SpriteCamera	1.2				2	NoWait
+Wait						2
+StopSe
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=true
+ZoomCamera	SpriteCamera	1				0	NoWait
+	ディーア	驚き2	2_2			0
+	織姫	照れ	1_2_b			0
+	キノコリオン		p5u			0
+Bg	教会前
+FadeIn	black					.3
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコっ！
+Bgm	バトル
+Param	character_grayout=false
+Tween	織姫	MoveBy	x=-200				NoWait
+Tween	織姫	PunchPosition	y=100				NoWait
+Tween	ディーア	MoveBy	x=200				NoWait
+Tween	ディーア	PunchPosition	y=100				NoWait
+	二人							うわぁああああ!?
+Param	character_grayout=true
+	ディーア	驚き2						き、キノコリオン!?
+	織姫	慌て						なんでこんなところにいるのー!?
+CharacterOff
+	ディーア	怒り2						仕方ない！\n行くぞ、織姫！
+CharacterOff
+	織姫	通常						もー！\nせっかくのデートを邪魔して！\nこうなったら！
+CharacterOff
+	織姫	通常拡大	エフェクト表
+	織姫	通常拡大						ヒメが秒でかたづけてやんよ！		1560-15
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*G_472_02
+EndIf
+EndScenario
+
+# G_472_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	穏やか
+Bg	教会前
+Param	character_grayout=true
+	織姫	悲しい	2_4_b			0
+	ディーア	汗2	3_4			0
+FadeIn	white					.5
+	ディーア	汗2						はぁ……\nキノコリオンは無事に倒せたけど……
+Param	character_grayout=false
+CharacterOff
+	土煙		エフェクト表
+Wait						.3
+CharacterOff	土煙					1.5
+Wait						1.7
+Param	character_grayout=true
+CharacterOff
+	ディーア	汗2	3_4
+	織姫	悲しい	2_4_b
+	織姫	悲しい						うぅ……
+	ディーア	汗2						あいつが暴れたせいで、\n荒れちゃったな……
+	織姫	悲しい						せっかくの恋人聖地が……！\nしゅんです……
+	織姫	悲しい						……ごめんね、マスターちゃん
+	ディーア	驚き2						織姫？
+	織姫	悲しい						せっかくデートしてくれたのに\nカフェデートも\n記念撮影も台無しに……
+StopBgm
+	ディーア	笑い2						でも、オレは楽しかったぞ！
+	織姫	悲しい						マスターちゃん？
+Bgm	凱旋
+	ディーア	笑い2						確かに理想通りのデートは\nできなかったけど、\nオレは織姫と一緒で楽しかった
+	ディーア	通常2						それがいちばん大切なんじゃないか？
+	織姫	悲しい						でも、それでいいのかな……？
+	ディーア	笑い2						いいんだよ\nだってデートは一緒に思い出を\nつくるためのものだろ？
+	ディーア	通常2						上手くいかなかったことも、\n全部、オレ達の大切な思い出だ
+	ディーア	通常2						だからオレ達のデートとして、\n今日は大成功だったんだよ
+Tween	ディーア	MoveBy	x=-30				NoWait
+	ディーア	通常2						オレ達だけの思い出、\nつくれただろ？
+	織姫	照れ						……うん、そうだね
+	織姫	嬉しい						そっか、\nヒメ、マスターちゃんと\n思い出をつくれたんだ……！
+	織姫	嬉しい						ウソカップルだけど、\n本当のカップルみたいに
+	織姫	照れ						えへへ♪
+	織姫	嬉しい						じゃあ、ウソ彼ピのマスターちゃん！\nもう一回、記念撮影しよ！\n思い出がちゃんと残るように！
+	ディーア	笑い2						ああ、もちろんだ！
+	織姫	嬉しい						いくよー、ピース★
+FadeOut	white					1
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	トライアルスチル47202		エフェクト表			0
+FadeIn	white					1
+	織姫	<Off>						マスターちゃん、\n今日はありがと★
+	織姫	<Off>						マスターちゃんとのデート、\nとっても楽しかったよ♥
+StopBgm
+FadeOut	black					1
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ミル	通常	p7			0
+	織姫	嬉しい	p3b			0
+Wait						1
+Bgm	平和
+FadeIn	black					.3
+	織姫	嬉しい						それでそれで……！\n彼ピとキュンでラブなデート\nができたのー♪
+	織姫	照れ						えへへー♪\nあのときの照れた彼ピ、\nめちゃかわだったなー♪
+	ミル	通常						いいなー！\nでも、なんでインタビュー断ったの？\nせっかくいいデートできたのに
+	織姫	嬉しい						ヒメ、思ったんだ♪\n彼ピとのデートは\n自慢のためにするものじゃないって♪
+	織姫	嬉しい						ヒメと彼ピだけの\n大切な秘密で思い出なんだから★
+	ミル	通常						うわー♪\nお姉ちゃん、かっこいー★
+	ミル	通常						じゃあ、ミルもやーめよ！\nミルもお姉ちゃんみたいに\nもっと最強かわいくならないと★
+	織姫	あはは						そっか……えへへ♪
+StopBgm
+	ミル	通常						それで？\nお姉ちゃんは今度は\n彼ピとどんなことするの？
+Bgm	コメディ
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	慌て						へ？\nこ、今度……!?
+	ミル	通常						そうそう！\n次はおうちデート？
+	織姫	慌て						お、おうちデート!?
+	ミル	通常						彼ピと二人でいい雰囲気になって、\nそのままいぇいいぇい♪ みたいな★
+	織姫	照れ						え、えっとぉ……！
+Se	走る
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	驚き2	3_4			0
+	織姫	慌て	2_4_b			0
+FadeIn	black					.3
+	織姫	慌て						ま、マスターちゃーん！
+	ディーア	驚き2						お、織姫!?\n今度はどうしたんだ!?
+	織姫	照れ						ひ、ヒメとおうちデートしてー！
+	ディーア	汗2						お、おうち……？
+	織姫	あはは						ヒメ、やっぱりまだ経験が足りないの！
+Tween	織姫	PunchPosition	y=30				NoWait
+	織姫	照れ						マスターちゃんと\nいい雰囲気でいぇいいぇいしないと\nいけないの！
+	ディーア	驚き2						お、織姫、落ち着いてくれ！
+	織姫	照れ						マスターちゃん、\nヒメともーっと経験しようよー！
+CharacterOff
+	織姫	照れ拡大	エフェクト表					マスターちゃんは、\nヒメのウソ彼ピなんだから！
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_472_01
+EndIf
+EndScenario

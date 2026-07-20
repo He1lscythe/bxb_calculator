@@ -1,0 +1,405 @@
+# Subroutine
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+*メインシナリオタイトル
+Param	character_grayout=false
+ChangeMessageWindow	QuestName
+Se	シナリオスタート
+	看板背景		スタート背景
+	メイン看板		スタートタイトルOUT
+Tween	メイン看板	ColorTo	time=0.1 a=0.0
+Tween	メイン看板	MoveTo	time=0.1 x=0
+Tween	メイン看板	ColorTo	time=5.3 a=1.0			NoWait
+								<param=quest_name>
+CharacterOff	メイン看板
+CharacterOff	看板背景
+StopSound	All
+ChangeMessageWindow	MessageWindow
+Param	character_grayout=true
+EndSubroutine
+*サブシナリオタイトル
+Param	character_grayout=false
+ChangeMessageWindow	QuestName
+Se	シナリオスタート
+	看板背景		スタート背景
+	サブ看板		スタートタイトルOUT
+Tween	サブ看板	ColorTo	time=0.1 a=0.0
+Tween	サブ看板	MoveTo	time=0.1 x=0
+Tween	サブ看板	ColorTo	time=5.3 a=1.0			NoWait
+								<param=quest_name>
+CharacterOff	サブ看板
+CharacterOff	看板背景
+StopSound	All
+ChangeMessageWindow	MessageWindow
+Param	character_grayout=true
+EndSubroutine
+*イベントクエストタイトル
+Param	character_grayout=false
+ChangeMessageWindow	QuestName
+Se	シナリオスタート
+	看板背景		スタート背景
+	イベント看板		スタートタイトルOUT
+Tween	イベント看板	ColorTo	time=0.1 a=0.0
+Tween	イベント看板	MoveTo	time=0.1 x=0
+Tween	イベント看板	ColorTo	time=5.3 a=1.0			NoWait
+								<param=quest_name>
+CharacterOff	イベント看板
+CharacterOff	看板背景
+StopSound	All
+ChangeMessageWindow	MessageWindow
+Param	character_grayout=true
+EndSubroutine
+*イベントクエストタイトル2
+Param	character_grayout=false
+ChangeMessageWindow	QuestName
+Se	ガヤA
+	看板背景		スタート背景
+	イベント看板2		スタートタイトルOUT
+Tween	イベント看板2	ColorTo	time=0.1 a=0.0
+Tween	イベント看板2	MoveTo	time=0.1 x=0
+Tween	イベント看板2	ColorTo	time=5.3 a=1.0			NoWait
+								<param=quest_name>
+CharacterOff	イベント看板2
+CharacterOff	看板背景
+StopSound	All
+ChangeMessageWindow	MessageWindow
+Param	character_grayout=true
+EndSubroutine
+*イベントクエストタイトル3
+Param	character_grayout=false
+ChangeMessageWindow	QuestName
+Se	シナリオスタート
+	看板背景		スタート背景
+	イベント看板2		スタートタイトルOUT
+Tween	イベント看板2	ColorTo	time=0.1 a=0.0
+Tween	イベント看板2	MoveTo	time=0.1 x=0
+Tween	イベント看板2	ColorTo	time=5.3 a=1.0			NoWait
+								<param=quest_name>
+CharacterOff	イベント看板2
+CharacterOff	看板背景
+StopSound	All
+ChangeMessageWindow	MessageWindow
+Param	character_grayout=true
+EndSubroutine
+*アリスイベントタイトル
+Param	character_grayout=false
+ChangeMessageWindow	QuestName
+Se	ボス殺
+	看板背景		スタート背景
+	イベント看板		スタートタイトルOUT
+Tween	イベント看板	ColorTo	time=0.1 a=0.0
+Tween	イベント看板	MoveTo	time=0.1 x=0
+Tween	イベント看板	ColorTo	time=5.3 a=1.0			NoWait
+								<param=quest_name>
+CharacterOff	イベント看板
+CharacterOff	看板背景
+StopSound	All
+ChangeMessageWindow	MessageWindow
+Param	character_grayout=true
+EndSubroutine
+*メインシナリオ終了5
+Bgm	タイトル
+Wait						1
+	？？？	<Off>						おっと、もう此処へいらっしゃるとは\n賢明なる貴方であれば…お気づきかと
+	？？？	<Off>						辿れる記憶は今は此処まで
+	？？？	<Off>						果たして覇王ゼフの復活は成ったのか\n覇王剣ラグナロクの行方、\n太陽王アークの行く末は…
+	？？？	<Off>						そして、アークを裏切ってしまった\nアクアの真意とは一体何なのか
+	？？？	<Off>						一部の勇者から英雄視されるように\nなったという勇者ルルと勇者王シドウ
+	？？？	<Off>						彼らがリディを暗殺しようとする\n本当の理由とは如何に――
+	？？？	<Off>						問いの答えはいずれ出会う未来にて、\nそれがどんなに辛く悲しく\n嘆き苦しむ結果になろうとも
+	？？？	<Off>						貴方なら必ず見届けられると\n信じております…\n今はただ、その時を待つのみ
+	？？？	<Off>						全てが解き明かされるその時まで\n暫し、魔界の喧噪をお楽しみ下さい\nそれではまた…
+Wait						1
+EndSubroutine
+*メインシナリオ終了6
+Bgm	タイトル
+Wait						1
+	？？？	<Off>						おっと、もう此処へいらっしゃるとは\n賢明なる貴方であれば…お気づきかと
+	？？？	<Off>						辿れる記憶は今は此処まで
+	？？？	<Off>						冥葬医師団と白リディの野望は\n果たして本当に潰えたのか
+	？？？	<Off>						そして突如現れた神を名乗る少女\n『モモ』が語る真実とは
+	？？？	<Off>						一方、覇王ゼフの復活を企む\nアーク率いる太陽聖域の\n本当の目的とは一体何なのか
+	？？？	<Off>						そんな混沌を極める魔界の中で、\n絶望の果てに勇者ルルが見たものは…
+	？？？	<Off>						問いの答えはいずれ出会う未来にて―\nそれがどんなに辛く悲しく\n嘆き苦しむ結果になろうとも
+	？？？	<Off>						貴方なら必ず見届けられると\n信じております…\n今はただ、その時を待つのみ
+	？？？	<Off>						全てが解き明かされるその時まで\n暫し、魔界の喧噪をお楽しみ下さい\nそれではまた…
+Wait						1
+EndSubroutine
+
+# Template
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+EndScenario
+
+# Monsters
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Bg	神殿B
+	ディーア	通常	player					主人公です！
+	謎の声	通常	monster					謎の声
+	キノコリオン	通常	monster					キノコリオン
+	カエル型モンスター	通常	monster					カエル型モンスター
+	コウモリ型モンスター	通常	monster					コウモリ型モンスター
+	妖精型モンスター	通常	monster					妖精型モンスター
+	クマ型モンスター	通常	monster					クマ型モンスター
+	カニ型モンスター	通常	monster					カニ型モンスター
+	悪魔型モンスター	通常	monster					悪魔型モンスター
+	兵士	通常	monster					兵士
+	兵士長	通常	monster					兵士長
+	ガーディアン	通常	monster					ガーディアン
+	ドラゴン	通常	monster					ドラゴン
+Bg	神殿B_過去
+	クレイモア型冥獣	通常	monster					クレイモア型冥獣
+	グレイヴ型冥獣	通常	monster					グレイヴ型冥獣
+	ガントレット型冥獣	通常	monster					ガントレット型冥獣
+	アロウ型冥獣	通常	monster					アロウ型冥獣
+	カタナ型冥獣	通常	monster					カタナ型冥獣
+	ワンドメイス型冥獣	通常	monster					ワンドメイス型冥獣
+	アルバレスト型冥獣	通常	monster					アルバレスト型冥獣
+	アクス型冥獣	通常	monster					アクス型冥獣
+	トマホーク型冥獣	通常	monster					トマホーク型冥獣
+	グリモワール型冥獣	通常	monster					グリモワール型冥獣
+	サイス型冥獣	通常	monster					サイス型冥獣
+	ダガー型冥獣	通常	monster					ダガー型冥獣
+	アンノウン型冥獣	通常	monster					アンノウン型冥獣
+Bg	神殿A
+	Ω級グレイヴ型冥獣	通常	monster					Ω級グレイヴ型冥獣
+	Ω級ガントレット型冥獣	通常	monster					Ω級ガントレット型冥獣
+	Ω級アロウ型冥獣	通常	monster					Ω級アロウ型冥獣
+	Ω級カタナ型冥獣	通常	monster					Ω級カタナ型冥獣
+	Ω級ワンドメイス型冥獣	通常	monster					Ω級ワンドメイス型冥獣
+	Ω級クレイモア型冥獣	通常	monster					Ω級クレイモア型冥獣
+	Ω級ダガー型冥獣	通常	monster					Ω級ダガー型冥獣
+	Ω級アルバレスト型冥獣	通常	monster					Ω級アルバレスト型冥獣
+	Ω級アクス型冥獣	通常	monster					Ω級アクス型冥獣
+	Ω級トマホーク型冥獣	通常	monster					Ω級トマホーク型冥獣
+	Ω級グリモワール型冥獣	通常	monster					Ω級グリモワール型冥獣
+	Ω級サイス型冥獣	通常	monster					Ω級サイス型冥獣
+	Ω級アンノウン型冥獣	通常	monster					Ω級アンノウン型冥獣
+Bg	魔術空間
+	叛逆勇者マーガレット	通常	monster					叛逆勇者マーガレット
+	叛逆勇者マーガレット	抜刀	monster					叛逆勇者マーガレット
+	霊獣姫タマモノマエ	通常	monster					霊獣姫タマモノマエ
+	魔剣実験体エレ=ロス	通常	monster					魔剣実験体エレ=ロス
+	嘆き土塊の獣マーガリート	通常	monster					嘆き土塊の獣マーガリート
+	霊獣姫エリザベート	通常	monster					霊獣姫エリザベート
+	異変スーヴァ	通常	monster					異変スーヴァ
+	業炎のブラム	通常	monster					業炎のブラム
+	星屑の織姫ミコト	通常	monster					星屑の織姫ミコト
+	冥葬コス	通常	monster					冥葬コス
+	煉獄の医師ブラムフラム	通常	monster					煉獄の医師ブラムフラム
+	太陽王アーク＋ソエル	通常	monster					太陽王アーク＋ソエル
+	天業なる陽光ソエルアーク	通常	monster					天業なる陽光ソエルアーク
+	覇王ゼフ＋ラグナロク	通常	monster					覇王ゼフ＋ラグナロク
+	覇天魔王ゼフ	通常	monster					覇天魔王ゼフ
+Bg	神殿A_過去
+	天使像	通常	monster					天使像
+	深淵の賢者	通常	monster					深淵の賢者
+	強欲なる黒き獣	通常	monster					強欲なる黒き獣
+	霊獣姫ジャンヌダルク	通常	monster					霊獣姫ジャンヌダルク
+	霊獣姫アトラクナクア	通常	monster					霊獣姫アトラクナクア
+	霊獣姫モルガン=ルフェ	通常	monster					霊獣姫モルガン=ルフェ
+	霊獣姫アルビダ	通常	monster					霊獣姫アルビダ
+	霊獣姫カーミラ	通常	monster					霊獣姫カーミラ
+	霊獣姫トモエゴゼン	通常	monster					霊獣姫トモエゴゼン
+	霊獣姫クラリモンド	通常	monster					霊獣姫クラリモンド
+	霊獣姫ウリエル	通常	monster					霊獣姫ウリエル
+	霊獣姫コノハナサクヤ	通常	monster					霊獣姫コノハナサクヤ
+	霊獣姫クレオパトラ	通常	monster					霊獣姫クレオパトラ
+	霊獣姫マルコシアス	通常	monster					霊獣姫マルコシアス
+	魔導人形	通常	monster					魔導人形
+	神罰に狂う魔天猫	通常	monster					神罰に狂う魔天猫
+EndScenario
+
+# Backgrounds
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+BgOff
+	ディーア	通常	2_2					主人公です！
+	リディ	笑い	1_2					リディちゃんです！
+Bg	遺跡A
+	リディ	笑い	1_2					遺跡A
+Bg	遺跡B
+	リディ	笑い	1_2					遺跡B
+Bg	遺跡C
+	リディ	笑い	1_2					遺跡C
+Bg	研究所A
+	リディ	笑い	1_2					研究所A
+Bg	研究所B
+	リディ	笑い	1_2					研究所B
+Bg	研究所C
+	リディ	笑い	1_2					研究所C
+Bg	砂漠A
+	リディ	笑い	1_2					砂漠A
+Bg	山岳A
+	リディ	笑い	1_2					山岳A
+Bg	山岳B
+	リディ	笑い	1_2					山岳B
+Bg	森林A
+	リディ	笑い	1_2					森林A
+Bg	断層A
+	リディ	笑い	1_2					断層A
+Bg	市街地A
+	リディ	笑い	1_2					市街地A
+Bg	市街地A2
+	リディ	笑い	1_2					市街地A2
+Bg	市街地B
+	リディ	笑い	1_2					市街地B
+Bg	市街地B2
+	リディ	笑い	1_2					市街地B2
+Bg	神殿A
+	リディ	笑い	1_2					神殿A
+Bg	神殿B
+	リディ	笑い	1_2					神殿B
+Bg	廃墟A
+	リディ	笑い	1_2					廃墟A
+Bg	草原A
+	リディ	笑い	1_2					草原A
+Bg	草原B
+	リディ	笑い	1_2					草原B
+Bg	草原C
+	リディ	笑い	1_2					草原C
+Bg	瀑布A
+	リディ	笑い	1_2					瀑布A
+Bg	洞窟A
+	リディ	笑い	1_2					洞窟A
+Bg	洞窟B
+	リディ	笑い	1_2					洞窟B
+Bg	洞窟C
+	リディ	笑い	1_2					洞窟C
+Bg	魔術空間
+	リディ	笑い	1_2					魔術空間
+Bg	毒の沼地
+	リディ	笑い	1_2					毒の沼地
+Bg	宝石鉱山
+	リディ	笑い	1_2					宝石鉱山
+Bg	廃病院
+	リディ	笑い	1_2					廃病院
+Bg	灰の大地
+	リディ	笑い	1_2					灰の大地
+Bg	固まった溶岩の大地
+	リディ	笑い	1_2					固まった溶岩の大地
+Bg	魔導コロシアム
+	リディ	笑い	1_2					魔導コロシアム
+Bg	凍りついた神殿城
+	リディ	笑い	1_2					凍りついた神殿城
+Bg	骨ばかりの冥界
+	リディ	笑い	1_2					骨ばかりの冥界
+Bg	風穴の周囲
+	リディ	笑い	1_2					風穴の周囲
+Bg	風穴の内部
+	リディ	笑い	1_2					風穴の内部
+Bg	塩湖
+	リディ	笑い	1_2					塩湖
+Bg	色鮮やかな大森林
+	リディ	笑い	1_2					色鮮やかな大森林
+Bg	鉄鋼の街
+	リディ	笑い	1_2					鉄鋼の街
+Bg	元老院会議室
+	リディ	笑い	1_2					元老院会議室
+Bg	鍛冶病院
+	リディ	笑い	1_2					鍛冶病院
+Bg	酒場1F
+	リディ	笑い	1_2					酒場1F
+Bg	酒場の地下
+	リディ	笑い	1_2					酒場の地下
+	リディ	笑い	1_2					*イベント用表記
+Bg	仲間001
+	リディ	笑い	1_2					仲間001
+	リディ	笑い	1_2					*チュートリアル用
+Bg	瀑布グレー
+	リディ	笑い	1_2					瀑布グレー
+Bg	廃墟グレー
+	リディ	笑い	1_2					廃墟グレー
+Bg	水晶グレー
+	リディ	笑い	1_2					水晶グレー
+Bg	溶岩グレー
+	リディ	笑い	1_2					溶岩グレー
+Bg	魔殿グレー
+	リディ	笑い	1_2					魔殿グレー
+Bg	神殿グレー
+	リディ	笑い	1_2					神殿グレー
+Bg	病院グレー
+	リディ	笑い	1_2					病院グレー
+	リディ	笑い	1_2					*過去で使うやつ
+Bg	遺跡A_過去
+	リディ	笑い	1_2					遺跡A_過去
+Bg	遺跡B_過去
+	リディ	笑い	1_2					遺跡B_過去
+Bg	遺跡C_過去
+	リディ	笑い	1_2					遺跡C_過去
+Bg	研究所A_過去
+	リディ	笑い	1_2					研究所A_過去
+Bg	研究所B_過去
+	リディ	笑い	1_2					研究所B_過去
+Bg	研究所C_過去
+	リディ	笑い	1_2					研究所C_過去
+Bg	砂漠A_過去
+	リディ	笑い	1_2					砂漠A_過去
+Bg	山岳A_過去
+	リディ	笑い	1_2					山岳A_過去
+Bg	山岳B_過去
+	リディ	笑い	1_2					山岳B_過去
+Bg	森林A_過去
+	リディ	笑い	1_2					森林A_過去
+Bg	断層A_過去
+	リディ	笑い	1_2					断層A_過去
+Bg	市街地A_過去
+	リディ	笑い	1_2					市街地A_過去
+Bg	市街地A2_過去
+	リディ	笑い	1_2					市街地A2_過去
+Bg	市街地B_過去
+	リディ	笑い	1_2					市街地B_過去
+Bg	市街地B2_過去
+	リディ	笑い	1_2					市街地B2_過去
+Bg	神殿A_過去
+	リディ	笑い	1_2					神殿A_過去
+Bg	神殿B_過去
+	リディ	笑い	1_2					神殿B_過去
+Bg	廃墟A_過去
+	リディ	笑い	1_2					廃墟A_過去
+Bg	草原A_過去
+	リディ	笑い	1_2					草原A_過去
+Bg	草原B_過去
+	リディ	笑い	1_2					草原B_過去
+Bg	草原C_過去
+	リディ	笑い	1_2					草原C_過去
+Bg	瀑布A_過去
+	リディ	笑い	1_2					瀑布A_過去
+Bg	洞窟A_過去
+	リディ	笑い	1_2					洞窟A_過去
+Bg	洞窟B_過去
+	リディ	笑い	1_2					洞窟B_過去
+Bg	洞窟C_過去
+	リディ	笑い	1_2					洞窟C_過去
+Bg	魔術空間_過去
+	リディ	笑い	1_2					魔術空間_過去
+Bg	毒の沼地_過去
+	リディ	笑い	1_2					毒の沼地_過去
+Bg	宝石鉱山_過去
+	リディ	笑い	1_2					宝石鉱山_過去
+Bg	廃病院_過去
+	リディ	笑い	1_2					廃病院_過去
+Bg	灰の大地_過去
+	リディ	笑い	1_2					灰の大地_過去
+Bg	固まった溶岩の大地_過去
+	リディ	笑い	1_2					固まった溶岩の大地_過去
+Bg	魔導コロシアム_過去
+	リディ	笑い	1_2					魔導コロシアム_過去
+Bg	凍りついた神殿城_過去
+	リディ	笑い	1_2					凍りついた神殿城_過去
+Bg	骨ばかりの冥界_過去
+	リディ	笑い	1_2					骨ばかりの冥界_過去
+Bg	風穴の周囲_過去
+	リディ	笑い	1_2					風穴の周囲_過去
+Bg	風穴の内部_過去
+	リディ	笑い	1_2					風穴の内部_過去
+Bg	塩湖_過去
+	リディ	笑い	1_2					塩湖_過去
+Bg	色鮮やかな大森林_過去
+	リディ	笑い	1_2					色鮮やかな大森林_過去
+Bg	元老院会議室_過去
+	リディ	笑い	1_2					元老院会議室_過去
+Bg	鍛冶病院_過去
+	リディ	笑い	1_2					鍛冶病院_過去
+Bg	酒場1F_過去
+	リディ	笑い	1_2					酒場1F_過去
+Bg	酒場の地下_過去
+	リディ	笑い	1_2					酒場の地下_過去
+EndScenario

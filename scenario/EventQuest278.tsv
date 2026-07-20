@@ -1,0 +1,1519 @@
+# E_278_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	酒場1F
+	ディーア	怪しい2	1_2
+	リディ	悔しい2	2_2
+FadeIn	white					.5
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	悔しい2						うみにいきたーーーーい!!
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						いきたいいきたい\nいきたーーーーーーい!!
+	ディーア	驚き2						ど、どうしたんだいきなり……
+	リディ	怒り2						どうしたんだじゃなくて！\nリディは海に行きたいの！
+	ディーア	汗2						……いや、海ならこの間から\n何回か行ってるだろ？
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							全部マスターのお仕事じゃん！
+	ディーア	あはは2						まあそうだけど……\nでもオレが仕事してる間、\nリディは結構遊んでるだろ？
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							リディはマスターと海に行きたいの！\nマスターと海で遊びたいの！
+	リディ	悔しい2						それなのにこの間から\nずっと任務だったり、\n変なのに襲われたり……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						もっと普通の夏がいいの！
+	ディーア	悔しい2						普通の夏って言われてもなあ……
+	ディーア	絶望2						魔界の夏なんて……\nこんなもんだろ……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						ちがうでしょー！\nマスターの不運と節操なしを\n魔界のせいにしないで！
+	リディ	悲しい2						むぅ……マスターはリディと\n海で遊びたくないの？
+	ディーア	汗2						そりゃあまあ……遊びたいけど……
+	リディ	笑い2						でしょ!?\nじゃあ海に遊びに行くしかないよ♪
+	ディーア	怪しい2						でも、海かあ……
+FadeOut	white					2
+Bg	海岸
+Bgm	絶望
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+Wait						.2
+FadeIn	white
+	バステト×サマー		画面外_上
+Wait						.1
+Tween	バステト×サマー	MoveTo	y=-350 x=0 z=250 time=1	easeInOutCirc
+	　　　　　　　　　　
+Shake	Graphics		time=2				NoWait
+	スモーク		エフェクト表			.5
+Wait	　　　　　　　　　　					.5
+CharacterOff	スモーク					2
+Wait						.5
+CharacterOff
+	リディ	水着驚き2	2_3					マスター!?
+CharacterOff
+	ディーア	悔しい2	2_3					リディ、下がってろ……！\nこいつが今回のターゲットだ！
+FadeOut	white					.7
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア？	通常F
+FadeIn	white					.7
+	ディーア？	通常F						よお、オレ<dash=2>
+	ディーア？	笑いF						随分遅かったな？
+CharacterOff
+	ディーア	驚き2						なっ……！
+FadeOut	white					1
+CharacterOff
+ImageEffectOff	SpriteCamera	Sepia
+Bgm	平和
+Bg	酒場1F
+	リディ	悔しい2	2_2
+	ディーア	絶望2	1_2
+FadeIn	white					.5
+	ディーア	絶望2						オレ、海に行くたびに\n何か起きるからな……
+	ディーア	絶望2						結局バカンスに行っても\nどうせ任務とかになるんだよな……\nハハ……
+Tween	ディーア	ScaleAdd	x=-0.05 y=-0.05 time=3				NoWait
+Shake	ディーア		x=10 time=2				NoWait
+	ディーア	絶望2						なんか最近、魔海に嫌われてる\n気がするんだよな……オレ……
+	リディ	驚き2						あぁ、マスターがどんどん\nしぼんでいく……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	悔しい2						ほら！もうマスターしっかりして！
+Shake	ディーア		x=10 time=0.5				NoWait
+	ディーア	絶望2						海……作戦司令書……幻想体……\nうぅ……
+	リディ	悔しい2						もーしっかりしてってば！\nほらマスター、これなんてどう？
+Tween	ディーア	ScaleAdd	x=0.05 y=0.05 time=0.5
+	ディーア	驚き2						これは……魔界の情報誌？
+	リディ	通常2						そう！ほらここ！\nオルドーバ音楽海岸！
+	ディーア							音楽海岸？\nなんだそれ
+	リディ	驚き2						えっとね、誰も演奏してないのに\nずっと音楽が聞こえる、\n不思議な海岸……なんだって！
+	ディーア	通常2						へぇ……なんだか面白そうだな
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	笑い2						でしょー♪\nリディ、ここに行きたいなぁ……
+	ディーア	怪しい2						ふむふむ……なになに？\n夕暮れ時の音楽海岸を二人で過ごせば\nきっとあなたの恋も……？
+Se	打1
+Tween	リディ	PunchPosition	x=-120				NoWait
+	リディ	悔しい2						わあああ!!
+	ディーア	驚き2						うわあ！\nちょ、今読んでたのに！
+	リディ	悔しい2						そこから先は読まなくていーの！
+	リディ	照れ2						でも行きたくなったでしょ？
+	ディーア	怪しい2						そうだな……\n確かにたまにはちゃんとした\nバカンスに行きたいよな
+	ディーア	通常2						よし、じゃあここに行くか！
+	リディ	驚き2						ほんと!?\n海、一緒に行ってくれるの!?
+	ディーア	通常2						ああ、せっかくリディが\n誘ってくれたことだしな
+	リディ	照れ2						やったぁ♪\nえへへ、楽しみだなぁ♪\nねえねえ、いつ行くいつ行く？
+	ディーア	嬉しい2						その前にまずは準備だな！\n浮き輪を買って、ビーチボールも……
+CharacterOff
+	ルビカンテ		1_2_b
+	アルスマグナ		2_2					おや、マスターさん？
+	アルスマグナ							この雑誌、浮き輪の話……\nこれは理論的に考えて、\nバカンスの準備ですか？
+	ルビカンテ		1_2					もしかして、海、行くんですか？\nあの、ルビカンテの居場所は、\nありますか？
+CharacterOff
+	リディ	通常2	2_2
+	ディーア	驚き2	1_2					ん？ああ、二人も行くか？
+	リディ							え？
+CharacterOff
+	ルビカンテ		1_2_b
+	アルスマグナ		2_2					もちろんです！\n理論上、アルスマグナも\n連れて行くべきです！
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	悔しい2	2_2					ちょちょ、マスター！
+	ディーア	驚き2						ん？
+	リディ	悔しい2						ふ、二人で行くんじゃ\nなかったの……？
+CharacterOff
+	アルスマグナ		2_2
+	ルビカンテ		1_2					……ご主人さまの隣は、\nルビカンテの場所……ですから？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	怒り2	2_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							リディが最初に予約したの！
+	ディーア	あはは2						まあまあ、みんなでいたほうが\n楽しいだろ
+	リディ	悔しい2						むぅ……そんなことになるとは\n思ってたけど……
+	ディーア	通常2						まあまあ、後でかき氷\n買ってあげるからさ
+	リディ	怒り2						むー……絶対だからね
+	ディーア	あはは2						はいはい
+	ディーア	あはは2	1_2_b
+Tween	リディ	MoveBy	x=-80
+	リディ	怒り2						リディだけだからね！
+	ディーア	汗2	1_2					わかったわかった
+	ディーア	汗2	1_2_b
+Tween	リディ	MoveBy	x=80
+	リディ	笑い2						よしっ！\nじゃあ明日出発ね！
+	ディーア	驚き2						明日!?\nそんなにすぐ行くのか？
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	照れ2						もちろん！\nだって待ちきれないもん♪
+Tween	リディ	MoveTo	x=800 time=2				NoWait
+	リディ	照れ2						ふんふふ～ん♪\nてんちょー！リディ明日休みます！
+CharacterOff	リディ
+Tween	ディーア	MoveTo	x=0
+	ディーア	通常2						やれやれ……まあ、リディも\nいつも頑張ってくれているからな
+	ディーア	通常2						よし、今回こそはとびっきり楽しい\nバカンスにするぞ！
+FadeOut	black					1
+CharacterOff
+	　　　　　　　　　　
+StopBgm						1
+Bg	海岸
+Wait						.1
+FadeIn	black					1
+	　　　　　　　　　　							<color=blue><dash=2>翌日</color>
+	　　　　　　　　　　							\n　 　<color=blue><dash=2>オルドーバ音楽海岸<dash=2></color>
+CharacterOff
+	リディ	水着絶望2	2_2
+	ディーア	絶望水着2	1_2					………………
+	リディ							………………
+CharacterOff
+Bgm	魔王バトル
+	アリス	笑い						これはこれは、奇遇だな魔剣使い
+CharacterOff
+	リディ	水着絶望2	2_2
+	ディーア	絶望水着2	1_2					オレ、やっぱり海に嫌われてる\nかもしれない
+CharacterOff
+	アリス	蔑み						なんだ、人の顔を見るなり嫌そうに
+	アリス							この魔帝アリスを前にして、\nそのような不遜な態度を取るとは\n<dash=2>ナメられたものだな？
+CharacterOff
+	リディ	水着驚き2	2_2
+	ディーア	汗水着2	1_2					いや、決してそういうわけでは……
+	ディーア	怪しい水着2						でも、なんでアリス様が海に？\nそんなタイプには見えないけど……
+CharacterOff
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着	2_2					ろ、論理的に考えてこの展開は……
+	ルビカンテ	水着	1_2					る、ルビカンテの居場所、\n取るつもりですか……？
+CharacterOff
+	リディ	水着驚き2	2_2
+	ディーア	あはは水着2	1_2					いや、流石にそういうつもりは\nないと思うぞ
+	リディ							ひょっとして、アリス様も\nバカンスに来たの？
+CharacterOff
+	アリス	蔑み						バカンス？
+CharacterOff
+Bgm	コメディ
+	ディーア	あはは水着2	1_2
+	リディ	水着驚き2	2_2					だってここ、観光地でしょ？\n観光雑誌にも載ってたし
+	ディーア	怪しい水着2						ああ、なんでも夕暮れ時に\n二人で来ればなんとかって
+	ディーア	てへぺろ水着2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	水着悔しい2						それは忘れて！
+CharacterOff
+	アリス	蔑み						……ほう、つまりこのアリスが\nお邪魔虫であると言いたいわけか
+CharacterOff
+	リディ	水着驚き2	2_2
+	ディーア	驚き水着2	1_2					いやいやいや！\nそこまでは言ってませんけど！
+CharacterOff
+	アリス	蔑み						ふん、冗談だ
+StopBgm						2
+	アリス	通常2						それに、そもそも邪魔なのは\n貴様らの方だしな
+CharacterOff
+	リディ	水着驚き2	2_2
+	ディーア	驚き水着2	1_2					……え？
+	リディ							それってどういう……
+CharacterOff
+	アリス	通常2						どうもこうもあるものか\n貴様らは邪魔だと言っている
+	アリス	蔑み						この海域は先刻より\n魔帝アリスが占拠した\nバカンスなら他所へ行け
+CharacterOff
+Param	character_grayout=false
+	リディ	水着驚き2	2_2
+	ディーア	驚き水着2	1_2
+	二人
+Tween	リディ	PunchPosition	y=50				NoWait
+Tween	ディーア	PunchPosition	y=50				NoWait
+	二人							えええぇぇぇ!?
+Param	character_grayout=true
+Bgm	緊迫
+	ディーア	悔しい水着2						占拠って……\nじゃあ、観光客たちは？
+CharacterOff
+	アリス	通常2						海なんていくらでもあるだろう\nリゾルタはどうだ、定番じゃないか？\n最近乱痴気騒ぎがあったようだが……
+CharacterOff
+	リディ	水着悲しい2	2_2
+	ディーア	汗水着2	1_2					ああ、それ多分オレたちですね
+CharacterOff
+	アリス	蔑み						……まあ、そんなことだろうとは\n思っていたがな
+	アリス							そういうわけだ、私にも予定がある\n早急に立ち去ってもらうぞ
+CharacterOff
+	ディーア	汗水着2	1_2
+	リディ	水着悔しい2	2_2					それにしても、せめて理由くらい……
+CharacterOff
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着	2_2					そうです、論理的な説明を求めます！
+CharacterOff
+	アリス	蔑み						好奇心旺盛なのは構わんが、\n無用な知欲は命取りだぞ
+CharacterOff
+	リディ	水着悲しい2	2_2
+	ディーア	悔しい水着2	1_2					取り付く島もない、か……\nどうする、リディ？
+	リディ	水着悲しい2						うぅー……\nまあでも、アリス様がいうなら\n仕方ないかなぁ……
+	リディ							うん、リディはいいよ\n帰ろ、マスター？
+	ディーア	悔しい水着2						そうか……\nまあそりゃそうだよな、\nすごい楽しみにしてたもんな
+	リディ	水着驚き2						え？\nマスター？
+CharacterOff
+	アリス	通常2						ふん、わかればいい\n穏便に済んで何よりだ
+CharacterOff
+	ディーア	悔しい水着2						<dash=2>いいえ、立ち去りません
+CharacterOff
+	アリス	通常2						ほう？\nもう一度言ってみろ、愚物
+CharacterOff
+	ディーア	怒り水着2						立ち去ることはできません
+	ディーア							約束したんです\nリディと、この海で遊ぶって
+	ディーア							リディだってすごく楽しみにしてた\nだから、不当な占拠を黙って\nみている訳にはいかないんです
+CharacterOff
+	リディ	水着照れ2						マスター……！
+CharacterOff
+	ディーア	怒り水着2						今回ばかりは、\nアリス様には従えません
+CharacterOff
+	アリス	通常2						……なるほど、そうかそうか
+	アリス	笑い						クク……この魔帝アリスに対し\nそこまでの啖呵を切るとは\n大したものだ
+	アリス	通常2						よかろう、ならば貴様のその意気に\n応えてやろうではないか
+CharacterOff
+	リディ	水着驚き2	2_2
+	ディーア	嬉しい水着2	1_2					じゃあ……!!
+CharacterOff
+	アリス	笑い						<dash=2>では宣戦布告といこう
+CharacterOff
+	リディ	水着驚き2	2_2
+	ディーア	驚き水着2	1_2					え？
+CharacterOff
+	アリス	通常2						何を驚いている\n強者が弱者の上に立つのは\nこの魔界の理だろう？
+	アリス	笑い						まさか、覚悟もなく\n啖呵を切ったのではあるまい？
+CharacterOff
+	リディ	水着驚き2	2_2
+	ディーア	汗水着2	1_2					いや、それは……
+	リディ	水着絶望2						アリス様、ひょっとして\nすごい怒ってない……？
+CharacterOff
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着	2_2					理論上、これはかなり\n危険な状態なのでは……!?
+	ルビカンテ	水着	1_2					あうあう……ご主人さま……
+FadeOut	black					1
+CharacterOff
+Param	character_grayout=false
+	イミティション=アリス	武器状態	1_2
+Tween	イミティション=アリス	MoveBy	y=2000 time=0
+	アリス	通常2	2_2
+Wait						.5
+Bgm	魔王バトル
+FadeIn	black					.1
+Se	魔剣出る
+Tween	イミティション=アリス	MoveBy	y=-2000 time=1
+	アリス	通常2						六大異変エイビシュタット城主にして\n《すべてを知るもの》そして<dash=2>
+Se	光3
+FadeOut	white					.5
+CharacterOff
+	イミティション=アリス	幻想体
+FadeIn	white					1
+	イミティション=アリス	幻想体						元･六大魔王が一人、\nこの魔帝アリスが宣言しよう
+CharacterOff
+Param	character_grayout=true
+	リディ	水着悔しい2	2_2
+	ディーア	悔しい水着2	1_2					くっ……\nなんだ、この魔力反応は……!?
+	ディーア	悔しい水着2						魔剣じゃない……\nいや、魔剣より更に高次の……!?
+FadeOut	white					.1
+CharacterOff
+	イミティション=アリス	幻想体
+ZoomCamera	SpriteCamera	1.3	0	350		0
+Wait						.1
+FadeIn	white					.1
+	イミティション=アリス	幻想体						さあ、お茶会の時間だ<dash=2>!!
+FadeOut	white					.3
+CharacterOff
+ZoomCamera	SpriteCamera	1				0
+	　　　　　　　　　　
+Bg	イベントスチル27801
+Wait						.3
+FadeIn	white					1
+	　　　　　　　　　　							　　
+FadeOut	white					1
+CharacterOff
+Bg	研究所A
+Bgm	図書館
+FadeIn	white					1
+	　　　　　　　　　　							\n 　　　　<color=blue><dash=2>世界図書館<dash=2></color>
+	ロルリアンレット	怪しいH						それで慌てて逃げてきた、と
+CharacterOff
+	リディ	悲しい2	2_2
+	ディーア	絶望2	1_2					…………まあ、はい
+CharacterOff
+	ロルリアンレット	怪しいH						……情けないわね
+CharacterOff
+	ディーア	絶望2	1_2
+	リディ	悔しい2	2_2					途中までかっこよかったのになぁ……
+	ディーア	汗2						追い打ちをかけようと\nしないでくれ……
+CharacterOff
+	ロルリアンレット	驚きH						それにしても、あのアリスが\n魔剣を……ねえ
+FadeOut	white					1
+ImageEffect	SpriteCamera	Sepia
+Bg	海岸
+Bgm	魔王バトル
+	イミティション=アリス	幻想体
+FadeIn	white					.1
+	イミティション=アリス	幻想体						どうした、そんなものか？
+CharacterOff
+	ディーア	悔しい水着2						ぐっ……
+CharacterOff
+	イミティション=アリス	幻想体						非力なものだ、こちらはまだ鞘から\n抜いてさえいないというのに
+CharacterOff
+	ディーア	悔しい水着2						この魔力、尋常じゃない……
+	ディーア							六大魔王のそれとも違う……\nこれは……
+	ディーア	驚き水着2						まさか、原初六魔剣……？
+CharacterOff
+	イミティション=アリス	幻想体						よく知っているじゃないか、魔剣使い
+	イミティション=アリス	幻想体						貴様など本来拝むことさえ許されぬ\n魔剣だが……
+	イミティション=アリス	幻想体						特別だ、本物の"魔剣"を\n見せてやろう<dash=2>!!
+Se	光3
+Se	闇3
+FadeOut	white					1
+CharacterOff
+ImageEffectOff	SpriteCamera	Sepia
+Bg	研究所A
+Bgm	図書館
+	ロルリアンレット	怪しいH
+FadeIn	white					.3
+	ロルリアンレット							それで、このザマね
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	悔しい2	1_2					あと少しで一矢報いることが\nできたんですが……
+	リディ	怒り2						手も足も出ずボコボコに\nされてたじゃん！
+CharacterOff
+	ロルリアンレット	怪しいH						盛ったわね
+CharacterOff
+Bgm	コメディ
+	ディーア	怪しい2	1_2
+	リディ	絶望2	2_2					情けない……
+	ディーア	怪しい2						うぅ……返す言葉もございません……
+CharacterOff
+	ロルリアンレット	驚きH						他の魔剣はどうしたの？
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	驚き2	1_2					一旦クランさんに預けて……
+FadeOut	black					.5
+CharacterOff
+Bg	鍛冶病院
+	ルビカンテ	水着
+FadeIn	black					.5
+	ルビカンテ	水着						きゅー……？
+CharacterOff
+	アルスマグナ	水着						ぜ、全然論理的じゃない……
+CharacterOff
+	鍛冶医クランベリー	怪しい2						はいはい、いいから動かないの
+FadeOut	black					.5
+CharacterOff
+Bg	研究所A
+	リディ	悔しい2	2_2
+	ディーア	悔しい2	1_2
+FadeIn	black					.5
+	ディーア	悔しい2						流石に、原初六魔剣が相手じゃあ……
+CharacterOff
+	ロルリアンレット	怪しいH						それはそうでしょうね\n……それにしても、\nアリスが<ruby=アポカリプス>魔剣</ruby>をねえ？
+	ロルリアンレット	怒りH						にわかには信じがたい……\nいえ、そんなことはありえないはず\nなのだけれど……
+CharacterOff
+	ディーア	驚き2
+	リディ	驚き2						ありえない？
+CharacterOff
+	ロルリアンレット	怒りH						ええ、ありえないわ
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2					でも、確かにあれは\n普通の魔剣じゃなかったし……
+CharacterOff
+	ロルリアンレット	怒りH						ありえないけれど……\nでも、もし使ったとすれば……\n……いえ、推測の域を出ないわね
+	ロルリアンレット	通常H						情報提供に感謝するわ\n下がりなさい、魔剣使い
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	汗2	1_2					いえ、要件はそれだけじゃなくて……
+CharacterOff
+	ロルリアンレット	驚きH						何かしら？\n手短に済ませなさい
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	汗2	1_2					その、なんていうか……
+	ディーア	あはは2						アリス様からオルドーバ音楽海岸を\n取り戻すのをロールお嬢様にも\n手伝って欲しいんですけど……
+CharacterOff
+	ロルリアンレット	怪しいH						嫌よ
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	悔しい2	1_2					即答!?\nなんで!?
+CharacterOff
+	ロルリアンレット	怒りH	2_3_b					なんで？\nなんでって言ったかしら？
+	ロルリアンレット	悪い顔H						むしろなんで私があなたを\n手伝わなければならないのかしら
+	ロルリアンレット	ニヤリH						マリー、お客様がお帰りよ\n玄関から蹴り出してやりなさい
+CharacterOff
+	ププッピマリー		画面外_右
+Tween	ププッピマリー	MoveTo	x=90	easeOutQuint
+	ププッピマリー							かしこまりました
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	悔しい2	1_2					ま、待って！\nでもアリス様に勝つには\nロールお嬢様の力が！
+CharacterOff
+	ロルリアンレット	怪しいH						その娘のために海を\n取り返すんでしょう？\n自分でやりなさいよみっともない
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2					むぅ……ロールちゃん、だめ？
+CharacterOff
+	ロルリアンレット	悪い顔H						残念だけれど、そんなに暇じゃないの
+	ロルリアンレット	怪しいH						だいたい私にメリットがなにもないわ\n<size=20><dash=2>そもそもその海だって私誘われてないし</size>
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2					メリット……メリットかぁ……
+	ディーア	怪しい2						ロールお嬢様に何か得になるもの
+	ディーア	怪しい2						そんなものあるかなあ……？
+CharacterOff
+StopBgm						.5
+	ロルリアンレット	怪しいH						…………はぁ
+	ロルリアンレット	ドヤ顔H						……そうね、なら情報を集めてきて\nもらおうかしら
+CharacterOff
+Bgm	図書館
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2					情報？
+CharacterOff
+	ロルリアンレット	ドヤ顔H						ええ\nアリスが何を企んでいるのか、\n興味があるわ
+CharacterOff
+	リディ	悲しい2	2_2
+	ディーア	悔しい2	1_2					でも、情報なんてどうやって……
+	リディ	悲しい2						アリス様、絶対教えて\nくれなさそうだし……
+CharacterOff
+	ロルリアンレット	通常H						別に、直接聞き出す必要はないわ
+	ロルリアンレット	怪しいH						反響器マクシャイルは\n知っているかしら？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2					ああ、雑誌に載ってた！
+	ディーア	怪しい2						ええと、確か……あの海岸にある、\n音楽を奏でる貝殻……だっけ？
+CharacterOff
+	ロルリアンレット	通常H						正確には貝殻のような\n見た目をした魔術器よ
+CharacterOff
+	ププッピマリー							反響器マクシャイルは持ち主の\n感情を記録し、\n音楽として再生する魔術器です
+	ププッピマリー							そして今、魔帝アリス様が音楽海岸を\n占拠すると宣言したのであれば、\n持ち主も当然……
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	きらーん2	1_2					そうか……！\nそれを集めてくれば、\nアリス様の狙いがわかる……!!
+CharacterOff
+	ププッピマリー							また、かの魔術器はその特性ゆえに、\n恋を叶える力があるとも……
+CharacterOff
+	ロルリアンレット	怒りH						余計なことは言わなくていいわ\nマリー
+CharacterOff
+	ププッピマリー							失礼致しました
+CharacterOff
+	ロルリアンレット	怪しいH						ほら、あなたもわかったらさっさと\n行きなさい\n私は予定が詰まっていて忙しいの
+CharacterOff
+	リディ	笑い2	2_2
+	ディーア	嬉しい2	1_2					ありがとう、ロール様！\n恩に着ます！
+	リディ	照れ2						やったねマスター！\nはやく行こ！
+	ディーア	怒り2						ああ、もう一度音楽海岸へ……!!
+Se	走る
+Tween	リディ	MoveTo	x=-800 time=2	easeInSine			Add
+Tween	ディーア	MoveTo	x=-1000 time=2	easeInSine
+CharacterOff
+Bgm	絶望
+	ロルリアンレット	怒りH						……ふん
+CharacterOff
+	ププッピマリー							ロールお嬢様
+CharacterOff
+	ロルリアンレット	怒りH						何よ
+CharacterOff
+	ププッピマリー							海には、ついて行かなくて\nよろしかったのですか？
+CharacterOff
+	ロルリアンレット	怪しいH						……別に、今回は彼には\n呼ばれていないようだしね
+CharacterOff
+	ププッピマリー							……ですが
+CharacterOff
+	ロルリアンレット	怪しいH						わかってるわ\nマリー、支度しておきなさい
+CharacterOff
+	ププッピマリー							承知しました
+Tween	ププッピマリー	MoveTo	x=-800 time=2	easeInSine			NoWait
+StopBgm						2
+Wait						.5
+FadeOut	black					2
+CharacterOff
+Bgm	緊迫
+Bg	海岸
+	イミティション=ロール	改造
+FadeIn	black					1
+	イミティション=ロール	改造						……で、なんで\n私が呼ばれたのかしら？
+	イミティション=ロール	改造						偽物に頼るなんて、\n猫の手でも借りたい状況……\nというわけかしらね？
+CharacterOff
+	ディーア	通常2						アリス様を相手にするなら、\nこれ以上の適任はいないよ
+CharacterOff
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着	2_2					魔帝アリスに対抗できるのは、\n理論上ロールお嬢様くらいですし
+	ルビカンテ	水着	1_2					……ご主人さまの隣はルビカンテの\n居場所だって、わかってますか？
+CharacterOff
+	イミティション=ロール	改造						はぁ……心配しなくても取らないわよ
+	イミティション=ロール	改造						まあいいわ、私自身も\n気になることはあるしね
+CharacterOff
+	ディーア	悔しい2						よし、それじゃあまずは\nアリス様の……
+CharacterOff
+	アリス	通常2						私の、何だ？
+CharacterOff
+	ディーア	驚き2						うわぁ！\nアリス様!?
+CharacterOff
+	アリス	蔑み						愚民め……この海域は\n私が占拠したと言ったはずだが、\n聞こえていなかったのか？
+Bgm	魔王バトル
+	アリス	通常2						どうやらまだ\nやられたりないと見えるな？
+CharacterOff
+	ディーア	本気2						みんな……来るぞ!!
+CharacterOff
+	アリス	蔑み						ふん……魔剣が雁首揃えて、\n数を増やせばこの魔帝に対抗\nできるとでも思ったのか
+Se	闇3
+Se	光3
+FadeOut	white					.5
+CharacterOff
+	イミティション=アリス	幻想体
+FadeIn	white					.5
+	イミティション=アリス	幻想体						<dash=2>やれやれ、世話が焼ける
+CharacterOff
+	イミティション=ロール	改造						<size=20>……ふぅん、ロルリアンレットが言っていたのは\nこれのことね</size>
+CharacterOff
+	ディーア	悔しい2						くっ……イミティション=ロール!!
+CharacterOff
+	イミティション=ロール	改造						はいはい、わかってるわよ……ッ!!
+Se	火2
+FadeOut	red					.1
+Wait						.1
+FadeIn	red					.1
+Wait						.2
+Se	闇3
+FadeOut	purple					.1
+CharacterOff
+	イミティション=アリス	幻想体
+Wait						.1
+FadeIn	pueple					.1
+Wait						.2
+Se	斬2
+FadeOut	white					.1
+Wait						.1
+FadeIn	white					.1
+	イミティション=アリス	幻想体						くはは！\n偽物ごときでこの私に歯向かうか！
+CharacterOff
+	イミティション=ロール	改造						言ってなさい、大嘘吐き
+CharacterOff
+	ディーア	悔しい2						オレたちが食い止めている間に、\n魔術器を……!!
+CharacterOff
+Param	character_grayout=false
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着	2_2					ロジカルですね！
+Se	走る
+Tween	ルビカンテ	MoveBy	x=-1000 time=2	easeInSine			Add
+Tween	アルスマグナ	MoveBy	x=1000 time=2	easeInSine
+CharacterOff
+	イミティション=アリス	幻想体	2_3_b					ほう、そういう作戦か<dash=2>\nではこうしよう
+Se	闇3
+FadeOut	white					.1
+	ルビカンテ	幻想体	1_3			1
+	アルスマグナ	幻想体	3_3			1
+	幻想体エフェクト		エフェクト表			3
+FadeIn	white					.1
+Wait						2
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	2_3					幻想体<dash=2>!?
+CharacterOff
+	アルスマグナ	水着						ああもう、つくづく\n論理的じゃないですね！
+CharacterOff
+	ルビカンテ	水着						る、ルビカンテの\n居場所、奪うんですか……？
+CharacterOff
+	イミティション=ロール	改造	1_2_b
+	ディーア	悔しい2	2_2					くっ……
+	イミティション=ロール	改造	1_2					<size=20>ちっ……</size>
+	イミティション=ロール	改造						あら、なりふり構って\nいられなくなったのかしら？
+CharacterOff
+	イミティション=アリス	幻想体						戯れるなよ偽物、\nよほど命が惜しくないとみえる
+CharacterOff
+	ディーア	絶望2	2_2
+	イミティション=ロール	改造	1_2					ほら魔剣使い、しっかりしなさい\nあの娘のためにこの海岸を\n取り戻すんでしょう？
+	イミティション=ロール	改造	1_2_b
+	ディーア	驚き2						…………！
+	ディーア	悔しい2						そうだ、こんなところで\n挫けている場合じゃないんだ
+	ディーア	本気2						リディのためにも、こんなところで\n諦めるわけにはいかないんだ……！
+CharacterOff
+	イミティション=アリス	幻想体						クク……せいぜい\n飽きさせないでくれよ、愚物!!
+CharacterOff
+	ディーア	本気2						よし……行くぞ、みんな!!
+FadeOut	white					1.5
+If	isdebug==true
+CharacterOff
+Jump	*E_278_01
+EndIf
+EndScenario
+
+# E_278_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	海岸
+Bg	海岸
+	　　　　　　　　　　
+FadeIn	white					.5
+	　　　　　　　　　　							\n　　　<color=blue><dash=2>オルドーバ音楽海岸<dash=2></color>
+	アルスマグナ	水着						ふふん、水掛け攻撃なら\n理論上負けませんよ！
+	アルスマグナ	水着						えいっ！
+Se	水1
+FadeOut	lightblue					.1
+CharacterOff
+	ルビカンテ	水着
+FadeIn	lightblue					.7
+Tween	ルビカンテ	PunchPosition	y=50				NoWait
+	ルビカンテ	水着						ひゃうっ！
+CharacterOff
+	アルスマグナ	水着						イッツロジカル！\n海では理論上水属性のほうが有利！
+	アルスマグナ	水着						火属性でありながらこの\nアルスマグナに水掛け合戦を\n挑むなど<dash=2>
+	ルビカンテ	水着						え、えいっ！
+Se	水1
+FadeOut	lightblue					.1
+CharacterOff
+	アルスマグナ	水着
+FadeIn	lightblue					.7
+Tween	アルスマグナ	PunchPosition	y=50				NoWait
+	アルスマグナ	水着						はうっ!?
+CharacterOff
+	ルビカンテ	水着						仕返し、してもいいですか？
+CharacterOff
+	アルスマグナ	水着						ぷはっ！\nか、確認する前にやるなんて、\n確かに理論上は有効な攻撃ですが<dash=2>
+CharacterOff
+	ルビカンテ	水着						え、えいっ！
+Se	水1
+FadeOut	lightblue					.1
+CharacterOff
+	アルスマグナ	水着
+FadeIn	lightblue					.7
+Tween	アルスマグナ	PunchPosition	y=50				NoWait
+	アルスマグナ	水着						ひゃうんっ！
+CharacterOff
+	ルビカンテ	水着						つ、つめたいですか？\n気持ちいいですか？
+CharacterOff
+	アルスマグナ	水着						や、やりましたね……！\nもう逃しませんよ！
+	アルスマグナ	水着						水属性の本領発揮です！\n超越展開魔術りろ<dash=2>
+CharacterOff
+	リディ	水着照れ2						えーいっ！
+Se	水1
+FadeOut	lightblue					.1
+CharacterOff
+Param	character_grayout=false
+	アルスマグナ	水着	3_3
+	ルビカンテ	水着	1_3_b
+FadeIn	lightblue					.7
+Tween	ルビカンテ	PunchPosition	y=50				NoWait
+Tween	アルスマグナ	PunchPosition	y=50				NoWait
+	二人							ひゃあ！\nうわあ！
+CharacterOff
+Param	character_grayout=true
+	リディ	水着照れ2						あははは！\nふふーん、油断大敵だよ♪
+CharacterOff
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着	2_2					むぅ……まだ負けてませんからね!!
+	ルビカンテ	水着	1_2					うぅー……!!
+FadeOut	black					.5
+CharacterOff
+	ロルリアンレット	怪しいH
+FadeIn	black					.5
+	ロルリアンレット							……あれは何をやってるのかしら？
+CharacterOff
+	ディーア	通常水着2	1_2_b
+	イミティション=ロール	改造	2_2					この魔剣使いと遊ぶ権利を賭けて\n水掛け合戦だそうよ
+CharacterOff
+	ロルリアンレット	怪しいH						ふぅん、元気なものね
+CharacterOff
+	ディーア	通常水着2	1_2_b
+	イミティション=ロール	改造	2_2					で、あなたはここにいて\nいいのかしら？
+	ディーア	汗水着2	1_2					ちょっと休憩……
+CharacterOff
+	ロルリアンレット	怪しいH						ふん、だらしないわね
+CharacterOff
+	ディーア	あはは水着2	1_2_b
+	イミティション=ロール	改造	2_2					あるいは人気者気取りかしら？
+	ディーア	あはは水着2	1_2					別にそういうわけじゃないって
+	ディーア	通常水着2						それにしても、ロールお嬢様って\nイミティション=ロールとは\n普通に話すんですね
+CharacterOff
+	ロルリアンレット	通常H						……何かおかしいことでも？
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	あはは水着2	1_2					いや、もっと警戒しているというか\n避けているのだと思っていたので……
+CharacterOff
+	ロルリアンレット	通常H						警戒？\nそんなの必要ないわ
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	驚き水着2	1_2					え？
+CharacterOff
+	ロルリアンレット	通常H						魔典イミティションは元々\n世界図書館の蔵書よ？
+	ロルリアンレット	ドヤ顔H						私の本を、私が理解していないはずは\nないでしょう？
+CharacterOff
+	ディーア	驚き水着2	1_2_b
+	イミティション=ロール	改造	2_2					そのとおりね\nそれに<ruby=イミティション>本当の私</ruby>は\n無に等しい存在……
+	イミティション=ロール							<ruby=ロールお嬢様>本物の私</ruby>の魔力がなければ、\nただの意志のない魔力の霧よ
+	ディーア	驚き水着2	1_2					なるほど、警戒するまでもないわけか
+CharacterOff
+	ロルリアンレット	怪しいH						……まあ、私と同じ顔がもう一人\nいるというのは、あまり気分の\n良いものではないけれど
+CharacterOff
+	ディーア	あはは水着2	1_2_b
+	イミティション=ロール	改造	2_2					な、何よ\n言っておくけど、ここに先に来たのは\n私よ？
+CharacterOff
+	ロルリアンレット	怪しいH						ふん、別に何も言っていないわ
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	あはは水着2	1_2					それにしても、ロールお嬢様が\n来てくれて助かりました
+CharacterOff
+	ロルリアンレット	怪しいH						別に、私は何もしてないわ
+	ロルリアンレット	通常H						実際アリスも勝手に手を\n引いたようだし、\n私が手伝う必要はなかったでしょう？
+CharacterOff
+	ディーア	あはは水着2	1_2_b
+	イミティション=ロール	改造	2_2					そう言う割には結構急いで\n助けに来たわよね
+CharacterOff
+	ロルリアンレット	怪しいH						私はバカンスを楽しみに来ただけよ\n決してこの魔剣使いを助けるため\nなどではないわ
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	あはは水着2	1_2					あはは、わかってますって
+CharacterOff
+	ロルリアンレット	悪い顔H						まあ、あの"大嘘つき"に\n興味があったのは事実だけれど
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	驚き水着2	1_2					大嘘つき？
+	ディーア	驚き水着2	1_2_b
+	イミティション=ロール	改造	2_2					イミティション=アリスのことよ
+	ディーア	怪しい水着2	1_2					ああ……\nまさか、あれが偽物だったとは……
+FadeOut	white					.5
+ImageEffect	SpriteCamera	Sepia
+CharacterOff
+StopBgm
+	　　　　　　　　　　
+FadeIn	white					.5
+	　　　　　　　　　　							\n　　　　　<color=blue><dash=2>数時間前<dash=2></color>
+Se	斬1
+FadeOut	white					.1
+Wait						.1
+FadeIn	white					.1
+Se	斬2
+FadeOut	white					.1
+	イミティション=アリス	幻想体
+Se	ガード
+FadeIn	white					.5
+Wait						.1
+Bgm	魔王バトル
+	イミティション=アリス	幻想体						……随分と諦めの悪いやつだ
+CharacterOff
+	ディーア	悔しい2						リディとの約束が\n賭かってるからな……ッ！
+CharacterOff
+	イミティション=アリス	幻想体						ふん、約束なあ？
+	イミティション=アリス	幻想体						それに命を張るほどのものなのか、\nあるいはそういう性質なのか……
+	イミティション=アリス	幻想体						<size=20>なるほど、魔帝アリスが\n気にかけるのも頷ける……ふむ</size>
+Se	光3
+FadeOut	white					.1
+CharacterOff						1
+	イミティション=アリス	アリス
+FadeIn	white					.5
+	イミティション=アリス	アリス						<dash=2>気が変わった
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2					なんだって……？
+	リディ	悔しい2						い、嫌な予感しかしない……
+CharacterOff
+	イミティション=アリス	アリス						戯れるのはつまらん\nそれにこのままでは埒が明かん
+	イミティション=アリス	アリス						ならば、貴様の限界を試すというのも\n一興かと思ってな
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	汗2	1_2					もう既にかなり限界なんですけど……
+	リディ	驚き2						今までのは、全然本気じゃなかった\nってこと……？
+CharacterOff
+	イミティション=アリス	アリス						当然だろう？\nこの魔帝アリスを何だと思っている
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	悔しい2	1_2					くっ……
+CharacterOff
+	イミティション=アリス	アリス						そう身構えるな\n何も海岸まるごと\n吹き飛ばしたりはしない
+	イミティション=アリス	アリス						だが、多少の損害……\nまあ、腕の一本や二本くらいは\n覚悟してもらおうか
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	汗2	1_2					全然"多少"じゃない！
+CharacterOff
+	イミティション=アリス	アリス						くはは！\nその程度で何を動揺している？
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	あはは2	1_2					アリス様知ってます？\n人間って腕二本しかないんですよ？
+CharacterOff
+	イミティション=アリス	アリス						腕が無くなったらクランベリーに\n直してもらえ
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	汗2	1_2					いやいや！\nオレ魔剣じゃないですから！
+CharacterOff
+StopBgm
+Param	character_grayout=false
+	アリス	蔑み
+	もうひとりのアリス	<Off>						<dash=2>もういい、その辺にしておけ
+CharacterOff
+Param	character_grayout=true
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2					……え？
+CharacterOff
+Param	character_grayout=false
+Bgm	絶望
+	アリス		1_2
+	イミティション=アリス	？	2_2
+Wait						2
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2					アリス様……が、二人……？
+CharacterOff
+	イミティション=アリス	？						……そうか、準備が整ったか
+CharacterOff
+	アリス							ご苦労だった\n悪くない働きだ、イミティション
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							イミティション……!?
+CharacterOff
+	イミティション=アリス							そういうわけだ、悪いが手合わせは\n次の機会にな
+CharacterOff						2
+Wait						2
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	リディ							あれ？\nき、消えちゃった……？
+	リディ	悔しい2						ていうか、あのアリス様\nイミティションだったの!?
+	ディーア	悔しい2						ああ、そうみたいだな……
+	ディーア							それにしても、準備って\n何のことだ……？
+FadeOut	white					.5
+CharacterOff
+ImageEffectOff	SpriteCamera	Sepia
+Bgm	海岸
+	イミティション=ロール	改造	2_2
+	ディーア	悔しい水着2	1_2
+FadeIn	white					.5
+	ディーア	悔しい水着2						まさか、アリス様のイミティションも\n存在していたなんて……
+	ディーア	悔しい水着2	1_2_b
+	イミティション=ロール	改造						まあ、私は最初から\n気付いていたけれど
+	ディーア	怪しい水着2	1_2					でも魔剣イミティションは\n一つしか存在しないはず……
+	ディーア	怪しい水着2	1_2_b
+	イミティション=ロール	改造						当然ね\n人工的に複製したものを除いて、\n同じ魔剣は二つと存在しないもの
+CharacterOff
+	ロルリアンレット	怪しいH						あのイミティションは、\n魔剣イミティションを\n指してるわけじゃないわ
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	悔しい水着2	1_2					なら、あのアリス様は一体……？
+	ディーア	悔しい水着2	1_2_b
+	イミティション=ロール	改造						さあね\nでもあのアリスのやることだもの\nだいたいの予想はつくわ
+CharacterOff
+	ロルリアンレット	怪しいH						どうせ魔剣の理論や魔界の法則なんて\n全部無視して、とんでもない方法で\n作ったんでしょう
+CharacterOff
+	ディーア	怪しい水着2	1_2_b
+	イミティション=ロール	改造	2_2					イミティション=アリスだなんて、\n皮肉ったらしい名前まで付けてね
+CharacterOff
+	ロルリアンレット	怪しいH						あんなの絶対、<ruby=イミティション>偽物の私</ruby>に\nちょっかいを出すための道具よ
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	汗水着2	1_2					いやいや、まさかそんなわけ……
+	ディーア	汗水着2	1_2_b
+	イミティション=ロール	改造						そうとしか思えないわ\nだってあれ、\n終焉の魔剣アポカリプスよ？
+	ディーア	驚き水着2	1_2					…………!!\nやっぱり、あれは原初六魔剣の……？
+CharacterOff
+	ロルリアンレット	通常H						正確には、アポカリプスに似た\n手作り魔剣ね
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	怪しい水着2	1_2					でも、なんでアリス様は\nそんなものを作ったんだ……？
+	ディーア							魔帝アリスほどの人なら、\n原初六魔剣がなくたって今の魔界で\n不自由することなんかないはずなのに
+CharacterOff
+	ロルリアンレット	悪い顔H						だから嫌がらせだと言っているのよ
+CharacterOff
+	ディーア	驚き水着2	1_2_b
+	イミティション=ロール	改造	2_2					あんなもの、このご時世じゃ権力の\n誇示にしか使い道はないものね
+CharacterOff
+	ロルリアンレット	悪い顔H						それをわざわざ、あえて\nイミティションとして再現するなんて\n私への嫌がらせ以外の何物でもないわ
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	怪しい水着2	1_2					……うーん、本当にそうですかね？
+CharacterOff
+	ロルリアンレット	通常H						あら、何か思い当たる\n可能性でもあるの？
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	怪しい水着2	1_2					今まで、アリス様はアポカリプスを\nずっと隠匿し続けてきたわけですし
+	ディーア							それを表に出して、隠し続けてきた\n手の内を明かしてまで、\n嫌がらせをしようと思いますかね？
+CharacterOff
+	ロルリアンレット	怪しいH						それ以外になにかあるかしら？
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	怪しい水着2	1_2					例えば、魔剣イミティションに\n模倣されることの懸念や\n危険性の検証……
+	ディーア	驚き水着2						ひょっとして……\nロール様が心配だった、とか……？
+CharacterOff
+	ロルリアンレット	怪しいH						……………………………………………\n……………………………正気かしら？
+CharacterOff
+Bgm	コメディ
+	ディーア	汗水着2	1_2_b
+	イミティション=ロール	改造	2_2					寒気がしたわ
+CharacterOff
+	ロルリアンレット	怒りH						おかしいわね、真夏のはずなのに
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	汗水着2	1_2					えぇ、そんなに嫌ですか……？
+CharacterOff
+	ロルリアンレット	通常H						ええ嫌よ\nそれにありえないわ
+	ロルリアンレット	通常H						あの魔帝アリスに限って、\nそんなこと気にするはずがないもの
+CharacterOff
+	ディーア	驚き水着2	1_2_b
+	イミティション=ロール	改造	2_2					暇つぶしと魔界の存続以外に\n興味のない奴よ？\nそんなこと気にするはずがないわ
+	ディーア	あはは水着2	1_2					まあ、あくまで憶測ですけど……
+CharacterOff
+	ロルリアンレット	怒りH						そんな適当な憶測は\n二度と言わないでほしいわね
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	汗水着2	1_2					すいません……
+CharacterOff
+	リディ	水着驚き2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							おーいマスター！\nマスターも一緒に遊ぼー♪
+CharacterOff
+	ロルリアンレット	通常H						ほら、呼ばれてるわよ
+CharacterOff
+	イミティション=ロール	改造	2_2
+	ディーア	通常水着2	1_2					それならせっかくだしロールお嬢様と\nイミティションも一緒に……
+CharacterOff
+	ロルリアンレット	怪しいH						私はいいわ
+CharacterOff
+	イミティション=ロール	改造						私もパス\nほら、行ってやりなさい
+CharacterOff
+	ディーア	通常水着2						ああ、わかった\nじゃあ、また後で！
+CharacterOff
+	ディーア	<Off>						おまたせ！
+	リディ	<Off>						もーおそーい！
+CharacterOff
+StopBgm						1
+	イミティション=ロール	改造						……魔帝アリスの目的、ねえ
+CharacterOff
+	ロルリアンレット	怪しいH						今回はそれのついでなんでしょうけど\n引き続き調べる必要がありそうね
+CharacterOff
+Bgm	絶望
+	イミティション=ロール	改造						そうね\nでもそれより、まず先に……
+FadeOut	black					.5
+CharacterOff
+	　　　　　　　　　　
+FadeIn	black					.5
+ChangeSoundVolume	Bgm	0
+Se	雨
+ImageEffect	SpriteCamera	Sepia
+Bg	海底
+Wait						.1
+Bg	海岸
+ImageEffectOff	SpriteCamera	Sepia
+StopSe
+ChangeSoundVolume	Bgm	1
+Wait						.1
+	ディーア	怪しい水着2	1_2
+	リディ	水着驚き2	2_2
+	リディ							<dash=2>え？
+	ディーア	通常水着2						ん？\nどうした、リディ？
+	リディ							え、マスターこそ何か言わなかった？
+	ディーア	驚き水着2						いや、何も言ってないけど……
+CharacterOff
+FadeIn	black					.5
+ChangeSoundVolume	Bgm	0
+Se	雨
+ImageEffect	SpriteCamera	Sepia
+Bg	海底
+Wait						.1
+Bg	海岸
+ImageEffectOff	SpriteCamera	Sepia
+StopSe
+ChangeSoundVolume	Bgm	1
+Wait						.1
+	ディーア	怒り水着2	1_2
+	リディ	水着驚き2	2_2
+	ディーア	怒り水着2						……!?
+StopBgm						3
+	リディ	水着驚き2						ひゃっ、つめた……!!
+CharacterOff
+	アルスマグナ	水着	2_2
+	ルビカンテ	水着	1_2					な、なんですか……？
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着						あれ、なんか前にも\nこんなことがあったような……
+FadeOut	black					1
+CharacterOff
+	　　　　　　　　　　
+Shake	Graphics		x=5 y=5 time=5				NoWait
+Se	火事	TRUE
+FadeIn	black					.1
+Wait						2
+Se	水3
+FadeOut	lightblue					.3
+Bg	凍結海域
+Wait						2
+CharacterOff
+ZoomCamera	SpriteCamera	1.5	-350	250		.1
+StopSe
+FadeIn	lightblue					.5
+Wait						.2
+ZoomCamera	SpriteCamera	1.5	350	250		1.5
+Wait						1
+FadeOut	white					.3
+ZoomCamera	SpriteCamera	1				.1
+	ディーア	怒り水着2	1_2
+	リディ	水着悔しい2	2_2
+FadeIn	white					.3
+Bgm	絶望
+	ディーア							こ、これは……!!
+CharacterOff
+	イミティション=アリス	通常s						…………来たか
+CharacterOff
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着	2_2					イミティション=アリス!!
+CharacterOff
+	ディーア	悔しい水着2	1_2
+	リディ	水着驚き2	2_2
+	ディーア	悔しい水着2						さっき言ってた準備って、\nこれのことだったのか……!!
+CharacterOff
+	アリス							そのとおり、貴様のおかげで全て\nうまく行った\n礼を言うぞ、魔剣使い
+CharacterOff
+	ディーア	悔しい水着2	1_2
+	リディ	水着驚き2	2_2
+	リディ	水着驚き2						本物のアリス様まで！
+CharacterOff
+	アルスマグナ	水着	2_2
+	ルビカンテ	水着	1_2					な、なにしにきたんですか……？
+CharacterOff
+	アリス	笑い						そう警戒するな\nただ貴様に礼を言いに来ただけだ
+	アリス	通常2						まずは協力感謝するぞ、魔剣使い……\nそして、ロルリアンレット
+CharacterOff
+	ディーア	驚き水着2	1_2
+	リディ	水着驚き2	2_2
+	ディーア	驚き水着2						ロールお嬢様……!?
+CharacterOff
+	ロルリアンレット	怪しいH						ふん、どうせそんなことだろうと\n思ったわ
+CharacterOff
+	ディーア	怒り水着2	1_2
+	リディ	水着悔しい2	2_2
+	ディーア	怒り水着2						協力……？\n一体なんの……!!
+CharacterOff
+	アリス							この"海が凍結する"現象……\n聞いたことくらいはあるだろう？\nあるいは既に知っているか？
+	アリス							魔界の海底に広がる\n永遠に溶けることのない氷\n<ruby=コキュートス>無限凍結</ruby>
+	アリス	笑い						そう、<color=blue>古代兵器ドゥルガー</color>の墓場だよ
+CharacterOff
+	ディーア	悔しい水着2	1_2
+	リディ	水着驚き2	2_2
+	ディーア							古代兵器、ドゥルガー……!?
+CharacterOff
+	ロルリアンレット	怪しいH						<color=blue>対天使殲滅竜騎ドゥルガー</color>\n……厳密にはそれの試作機\nドゥルガー･プロトタイプね
+FadeOut	black					1
+CharacterOff
+Param	character_grayout=false
+Se	火事
+ZoomCamera	SpriteCamera	1.5	-350	250		.1
+	ドゥルガー･プロトタイプ
+Bg	海底
+	ロルリアンレット	<Off>
+FadeIn	black					.5
+Shake	Graphics		x=5 y=5 time=3				NoWait
+ZoomCamera	SpriteCamera	1.5	350	250		3	Add
+	ロルリアンレット	<Off>						どうやら海底の<ruby=コキュートス>無限凍結</ruby>に\n封印されていた個体が、何機か\n再起動したようね
+FadeOut	black					1
+CharacterOff
+	イミティション=ロール
+StopSe
+ZoomCamera	SpriteCamera	1
+Bg	凍結海域
+Wait						2
+FadeIn	black					.5
+Param	character_grayout=true
+	イミティション=ロール							それにしても、\nこんなものよく見つけたわね
+CharacterOff
+	アリス	通常2						だいたいの場所は目星が\nついていたからな
+CharacterOff
+	ディーア	怪しい水着2	画面外_左_b
+Se	走る
+Tween	ディーア	MoveTo	x=300 time=3				NoWait
+	イミティション=アリス	通常s	2_3					後はこいつを解体するだけなんだが\n……おい、逃げるな
+Bgm	コメディ
+CharacterOff
+	ディーア	悔しい水着2	1_2
+	リディ	水着悔しい2	2_2
+	ディーア							いやいやいや!!\nドゥルガーはマズいですって！
+	ディーア							こいつが起動する前に\n海から離れないと……!!
+CharacterOff
+	アリス	蔑み						おいおい、貴様が逃げたら\n誰がこいつを倒すんだ？
+CharacterOff
+	ディーア	絶望水着2	1_2
+	リディ	水着悔しい2	2_2
+	ディーア							……………………なんて？
+CharacterOff
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着	2_2					ドゥルガーを倒す……？
+	ルビカンテ	水着	1_2					い、今から……ですか……？
+CharacterOff
+	ディーア	怪しい水着2	1_2
+	リディ	水着悔しい2	2_2
+	ディーア							すいません、\nよく聞こえなかったんですけど
+CharacterOff
+	イミティション=アリス	通常s						そうかそうか、\nならばもう一度言ってやろう
+CharacterOff
+	ディーア	あはは水着2	1_2
+	リディ	水着悔しい2	2_2
+	ディーア							いや、結構です！\n聞かなかったことに……
+CharacterOff
+	アリス	蔑み						さっさと倒してこい、馬鹿者
+CharacterOff
+	ディーア	絶望水着2	1_2
+	リディ	水着絶望2	2_2
+	ディーア							イヤだ!!やりたくない!!\n今日はそんな予定じゃなかった!!
+CharacterOff
+	イミティション=アリス	通常s						何を言っている\n今更だろう、そんなもの
+CharacterOff
+	アリス	笑い						必要であれば、魔剣機関に通達して\n正式に任務として発令してもらうが？
+CharacterOff
+	ディーア	絶望水着2	1_2
+	リディ	水着絶望2	2_2
+	ディーア							ひ、ひどい……あんまりだ……
+CharacterOff
+	イミティション=アリス	通常s						酷いものか、貴様がドゥルガーを\n再起動させたんだ\n責任は取ってもらわねば困るな！
+CharacterOff
+	ディーア	驚き水着2	1_2
+	リディ	水着驚き2	2_2
+	ディーア							…………え？
+	リディ							マスターがドゥルガーを……？
+CharacterOff
+Bgm	絶望
+	アリス							ふん、知らなかったのか？\nこいつには二重の封印があってな
+	アリス							一つは海中深く沈め、魔力による\n干渉を一切受けなくするための\n<ruby=コキュートス>無限凍結</ruby>だ
+CharacterOff
+	イミティション=アリス	通常s						とはいえ、それも限界がある\nこの魔帝と司書王に類する魔力を\n持った者が戦闘行為を行えば……
+CharacterOff
+	アリス							その魔力振は<ruby=コキュートス>無限凍結</ruby>を\n突き抜けて届くだろうな
+CharacterOff
+	ディーア	驚き水着2	1_2
+	リディ	水着悔しい2	2_2
+	リディ							だからドゥルガーが起動を……
+	ディーア	悔しい水着2						でも、それはアリス様の\nせいですよね……？
+CharacterOff
+	アリス	笑い						そしてもう一つが、こいつの機能を\n停止させておくための魔術器だ
+CharacterOff
+	ディーア	驚き水着2	1_2
+	リディ	水着驚き2	2_2
+	リディ							魔術器……!?
+	ディーア							まさか、反響器マクシャイルが\n奏でる子守唄……!!
+	ディーア	悔しい水着2						でも、あれは持ち主の感情を\n音楽に変えるだけのものじゃ……
+CharacterOff
+	アリス							そうとも、古代兵器ドゥルガーを\n二度と起動させてはならないと願う、\n人々の祈りと願い……
+	アリス							それは魔力を通せば強力な束縛として\n機能するんだが……\n何故か急にその魔術器の数が減ってな
+	アリス	笑い						おや、心当たりがありそうな顔だが？
+CharacterOff
+	ディーア	絶望水着2	1_2
+	リディ	水着悔しい2	2_2
+	ディーア							うそだろ…………
+	リディ							でもあれはロールお嬢様が\n集めてきてって……
+CharacterOff
+	ロルリアンレット	悪い顔H						何のことかしら？
+CharacterOff
+	ディーア	驚き水着2	1_2
+	リディ	水着驚き2	2_2
+	リディ							ちょ、ロール様!?
+	ディーア							ま、まさかそれも全部\n計算の上で……!?
+CharacterOff
+	アリス							そういうわけだ、\nドゥルガー･プロトタイプの討滅……\n頼んだぞ、魔剣使い
+CharacterOff
+	ディーア	絶望水着2	1_2
+	リディ	水着絶望2	2_2
+	ディーア							理不尽過ぎる……\nそんなのあるかよ……
+CharacterOff
+	イミティション=アリス	通常s						まあそう落ち込むな\n人々のためだと思えば、\n重荷ではないだろう？
+CharacterOff
+	アリス	笑い						ああ、ついでにドゥルガーを構成する\n水晶の回収も頼む、研究に必要でな
+CharacterOff
+	ディーア	汗水着2	1_2
+	リディ	水着悔しい2	2_2
+	ディーア							そっちがメインでしょう!!\n絶対やりませんからね!!
+CharacterOff
+	アリス	笑い						そうかそうか、そんなに嫌なら\n仕方ない……
+	アリス							残念だ、せっかく貴様に我が宝物庫\nから報酬を出してやろうかと\n思っていたものを
+CharacterOff
+	ディーア	あはは水着2	1_2
+	リディ	水着悔しい2	2_2
+	リディ							報酬って言われても……
+	ディーア							そんな報酬なんかで釣られるわけ……
+CharacterOff
+	アリス							イミティションたちの水着を\n用意したんだが
+CharacterOff
+	ディーア	きらーん水着2	1_2
+	リディ	水着絶望2	2_2
+Bgm	コメディ
+	ディーア							詳しく聞かせてください
+	リディ							ちょっとマスター？
+CharacterOff
+	ルビカンテ	水着	2_2
+	アルスマグナ	水着	1_2					あのマスターさん？\n随分と論理的じゃない発言が\n聞こえたのですが
+	アルスマグナ	水着	1_2_b
+	ルビカンテ	水着						……ルビカンテじゃ、\nだめなんですか……？
+CharacterOff
+	ディーア	あはは水着2	1_2
+	リディ	水着悔しい2	2_2
+	ディーア							いやいや、決してそういう意味では
+	ディーア							ていうかアリス様も\n水着とか着るんですね
+CharacterOff
+	アリス							なに、魔術礼装の研究も兼ねてな
+CharacterOff
+	ロルリアンレット	ニヤリH						ふぅん？\n外界を知らないヒキニートがどんな\n水着を選ぶのか、これは見ものね？
+CharacterOff
+	アリス	笑い						心配するなよロルリアンレット\n貴様の水着もきっちり再現して\n用意してあるからな
+CharacterOff
+	ロルリアンレット	慌てH						はぁ!?\nちょ、どこからそんな……!?
+CharacterOff
+	アリス	笑い						クク……私に知らないことなど\nあるはずないだろう？
+	アリス	笑い						ほら、試しに着てみるがいい
+Se	光3
+FadeOut	white					.5
+CharacterOff
+	イミティション=アリス	水着
+FadeIn	white					1.5
+Wait						.2
+	イミティション=アリス	水着						……ほう、悪くない
+Se	光3
+FadeOut	white					.2
+CharacterOff
+	イミティション=ロール	驚き水着
+FadeIn	white					1
+	イミティション=ロール	驚き水着						………………は？
+CharacterOff
+	ロルリアンレット	慌てH						………………ッッッ!?
+CharacterOff
+	イミティション=アリス	水着	2_2
+	イミティション=ロール	通常水着	1_2					ちょっと<ruby=ロールお嬢様>本物の私</ruby>!?\nなんでアリスに水着がバレてるのよ！
+CharacterOff
+	ロルリアンレット	慌てH						わ、私だって知らないわよ！\n貴女が知らないんだから当然でしょう!!
+CharacterOff
+	ディーア	驚き水着2	1_2
+	リディ	水着驚き2	2_2
+	ディーア							あれ？その格好……\nロールお嬢様、ひょっとして\n泳げな……
+CharacterOff
+	ロルリアンレット	慌てH	2_2					そ、そんなことあるわけ\nないでしょう!?
+CharacterOff
+	イミティション=アリス	水着	2_2
+	イミティション=ロール	通常水着	1_2					そうよ！\nお、泳ぎ方くらい知ってるわよ!!
+CharacterOff
+	アリス	笑い						知識として、だけな
+CharacterOff
+	ディーア	あはは水着2	1_2
+	リディ	水着照れ2	2_2
+	リディ							泳げないんだ……
+	ディーア							泳げないんだな……
+CharacterOff
+	イミティション=ロール	通常水着						ああもう！\nうるさいわね！
+CharacterOff
+	アリス	笑い						クク、似合ってるじゃないか\n<ruby=フロイライン>お嬢様</ruby>
+CharacterOff
+	ロルリアンレット	怒りH						やったわねアリス……\n覚えてなさいよ……!!
+CharacterOff
+	ディーア	あはは水着2	1_2
+	リディ	水着照れ2	2_2
+	ディーア							でも確かにちょっと似合って<dash=2>
+CharacterOff
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			.5
+	ロルリアンレット	怒りH						うっさいわよバカ！\nあんたはさっさとドゥルガー\n倒してきなさい!!
+Se	光2
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=true
+	ディーア	驚き水着2	1_2
+	リディ	水着驚き2	2_2
+FadeIn	white					.1
+	ディーア							こ、これは……転移魔術？
+	リディ							わああああ!!
+Se	光3
+Param	character_grayout=false
+	オーラ青		エフェクト表			.5
+FadeOut	white					1	NoWait
+ImageEffect	SpriteCamera	Vortex
+Wait						1
+ImageEffectOff	SpriteCamera	Vortex
+CharacterOff
+	ロルリアンレット	怪しいH	2_2
+	アリス		1_2_b
+StopBgm						2
+Wait						.5
+Param	character_grayout=true
+FadeIn	white					.5
+	ロルリアンレット	怪しいH						はぁ……\nほんと覚えておきなさいよ、アリス
+	アリス	笑い	1_2					クク、私に挑むのなら受けて立つぞ？
+	アリス	笑い	1_2_b
+	ロルリアンレット	怪しいH						望むところ……\nと言いたいところだけど、\n今はやめておくわ
+	アリス	通常2	1_2					ほう、珍しい\n先刻もやけに協力的だとは\n思っていたが……
+	アリス							これは一体どういう風の吹き回しだ？
+	アリス	通常2	1_2_b
+	ロルリアンレット	怒りH						別になにもないわ\n……ただ、あの兵器を\n放置しておきたくないだけよ
+FadeOut	black					.1
+CharacterOff
+Bgm	海底					3
+Bg	海底
+	ディーア	驚き水着2	1_2
+	リディ	水着驚き2	2_2
+Wait						1
+Se	光3
+FadeIn	black					1
+	リディ							わああああ！\nお、溺れ……
+	リディ							って……あれ？\n深海なのに息ができる……？
+CharacterOff
+	イミティション=ロール	驚き水着s						結界を張っているからね\nあまり私から離れないようにしなさい
+CharacterOff
+	ディーア	通常水着2	1_2
+	リディ	水着通常2	2_2
+	リディ							海に遊びに来たはずなのに、\n海底探検になっちゃった
+	ディーア	あはは水着2						あはは……\n結局バカンスできなくてごめんな
+	リディ							別にいいよ、\nこれはこれで楽しいもん♪
+CharacterOff
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着	2_2					魔海の底なんて、\nなかなか来る機会ないですし
+	ルビカンテ	水着	1_2					なんだか不思議な感じ……です？
+CharacterOff
+	ディーア	あはは水着2	1_2
+	リディ	水着通常2	2_2
+	ディーア	あはは水着2						まあ、こういうのも\nオレたちらしいよな
+	リディ	水着照れ2						マスターの運がないだけだけどね
+	ディーア	汗水着2						あはは……
+	リディ	水着悲しい2						でも、やっぱりバカンスには\n行きたかったなぁ……
+	ディーア	通常水着2						まあ、また来年があるよ
+	リディ	水着照れ2						うん、そうだねっ！
+	リディ							ねえマスター、来年は何をしよっか？
+CharacterOff
+	イミティション=ロール	驚き水着s						もう来年の話？
+CharacterOff
+	ディーア	驚き水着2	1_2
+	リディ	水着照れ2	2_2
+	リディ							いいじゃん、楽しみなんだし♪
+	ディーア	通常水着2
+	リディ							リディはね、夏祭りとか行きたい！\nわたあめ食べたり金魚すくったり……
+	ディーア	怪しい水着2
+	リディ	水着驚き2						あ、旅行にも行きたいなあ！\nそれからそれから……
+	ディーア	驚き水着2						そ、そんなにたくさんあるの？
+CharacterOff
+	イミティション=ロール	驚き水着s						随分と欲張りね
+CharacterOff
+	ディーア	驚き水着2	1_2
+	リディ	水着悔しい2	2_2
+	リディ							だって楽しみだったバカンスも\nできなくなっちゃったし……\nこれくらいはいいでしょ？
+	ディーア	あはは水着2						やっぱり根に持ってます？
+	リディ	水着照れ2						ふふ、全部叶えてくれたら\n許してあげる♪
+CharacterOff
+	ルビカンテ	水着
+	アルスマグナ	水着						じゃあ、アルスマグナは\n花火がしたいです！
+CharacterOff
+	ディーア	驚き水着2	1_2
+	リディ	水着通常2	2_2
+	ディーア							花火？\n水属性なのに？
+CharacterOff
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着	2_2					水遊びはたくさんしましたからね！\n論理的に考えて次は火属性かと！
+	ルビカンテ	水着	1_2					ルビカンテも、\nやってもいいですか……？
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着						もちろんです！\n最初からそのつもりですから！
+CharacterOff
+	ディーア	通常水着2
+	ディーア							よし、じゃあ来年こそは全部やるか！
+CharacterOff
+Param	character_grayout=false
+	アルスマグナ	水着	3_3
+	ルビカンテ	水着	1_3
+	リディ	水着照れ2	2_3
+Tween	アルスマグナ	PunchPosition	y=50				NoWait
+Tween	ルビカンテ	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	三人							やったぁー！
+CharacterOff
+Param	character_grayout=true
+	ディーア	通常水着2	1_2_b
+	イミティション=ロール	驚き水着s	2_2					……賑やかなものね
+	ディーア	通常水着2	1_2					イミティション=ロールは\nなにかやりたいこととかないのか？
+	ディーア	通常水着2	1_2_b
+	イミティション=ロール	驚き水着s						やりたいこと……\nそうね、色々あるけれど
+	イミティション=ロール	通常水着s						とりあえず、こいつを倒してから\n考えることにするわ
+StopBgm						2
+FadeOut	black					.1
+CharacterOff
+Param	character_grayout=false
+	幻想体エフェクト		エフェクト表
+	災厄を照らす向日葵	幻想体	1_3			4
+	オートクレール	幻想体	3_3			4
+	ドゥルガー･プロトタイプ		2_3_b
+FadeIn	black					1
+Se	闇1
+Se	闇2
+Wait						5
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい水着2	1_2
+	イミティション=ロール	驚き水着s	2_2
+	ディーア							こいつが、\nドゥルガー･プロトタイプ……!!
+	ディーア	悔しい水着2	1_2_b
+	イミティション=ロール	驚き水着s						幻想体もいるわね\nこれは……ドゥルガーの防衛機構の\nひとつかしら？
+	ディーア	怒り水着2	1_2					ああ……どうやら、オレの魔剣に\n反応しているらしい
+	ディーア	怒り水着2	1_2_b
+	イミティション=ロール	驚き水着s						敵対する相手を再現して精神的にも\n攻撃するタイプのシステムね\n……悪趣味だわ
+CharacterOff
+Param	character_grayout=false
+	幻想体エフェクト		エフェクト表
+	ドゥルガー･プロトタイプ
+Se	アラート	TRUE
+FadeOut	red					.7
+FadeIn	red					.1
+FadeOut	red					.7
+FadeIn	red					.1
+FadeOut	red					.7
+FadeIn	red					.1
+	ドゥルガー･プロトタイプ							《試製対天使級兵装\n　code竜戦騎\n　ドゥルガー･プロトタイプ起動》
+	ドゥルガー･プロトタイプ							《索敵完了 生命体反応あり》
+CharacterOff
+Param	character_grayout=true
+ChangeSoundVolume	Se	.5
+Bgm	魔王バトル
+	イミティション=ロール	通常水着s	2_2
+	ディーア	本気水着2	1_2					イミティション=ロール!!
+	ディーア	本気水着2	1_2_b
+	イミティション=ロール	通常水着s						結界なら任せなさい<dash=2>!!
+CharacterOff
+Param	character_grayout=false
+	幻想体エフェクト		エフェクト表
+ChangeSoundVolume	Se	1
+	ドゥルガー･プロトタイプ							《天使と認定》
+CharacterOff
+Param	character_grayout=true
+ChangeSoundVolume	Se	.5
+	ディーア	悔しい水着2	1_2
+	リディ	水着悲しい2	2_2
+	リディ							……倒せるの？
+	ディーア	悔しい水着2						さあな、それでも、\nだれかがやらなきゃいけない仕事だ
+	リディ							やっぱり、アリス様に\n助けてもらって……
+	ディーア	悔しい水着2						いや、そうはいかない
+	ディーア							アリス様がやったんじゃ、\n人々の脅威がアリス様に\n移るだけだからな
+	ディーア	通常水着2						こういうのは魔剣機関が\n対処したほうが、都合がいいんだよ
+	ディーア	あはは水着2						多分、アリス様も最初から\n全部そのつもりだっただろうしな
+	リディ							でも……
+CharacterOff
+	イミティション=ロール	驚き水着s						あら、私を忘れてないかしら？\n仮にもロールお嬢様と同等の\n性能を持つ魔剣よ？
+	イミティション=ロール	驚き水着s						準備さえしてあれば、ドゥルガーの\n攻撃を防ぐことくらいはできるわ
+CharacterOff
+Param	character_grayout=false
+	幻想体エフェクト		エフェクト表
+	ドゥルガー･プロトタイプ
+Wait						.1
+CharacterOff	幻想体エフェクト					1
+ChangeSoundVolume	Se	1
+Se	水2
+	ドゥルガー･プロトタイプ							《周囲の人間は離れてください》
+CharacterOff
+Param	character_grayout=true
+ChangeSoundVolume	Se	.5
+	イミティション=ロール	通常水着s						……それに、こいつには\n個人的な恨みもあるもの
+CharacterOff
+	ルビカンテ	水着	1_2_b
+	アルスマグナ	水着	2_2					アルスマグナもいますよ！\n論理的な作戦なら任せてください！
+	ルビカンテ	水着	1_2					ルビカンテも、\n手伝っていい……ですよね？
+CharacterOff
+	ディーア	怒り水着2						もちろん！\n……よし！やるぞ、みんな!!
+CharacterOff
+ChangeSoundVolume	Se	1
+	ドゥルガー･プロトタイプ							《これより単独での\n　掃討作戦を開始します》
+CharacterOff
+ChangeSoundVolume	Se	.5
+	ディーア	本気水着2	1_2_b
+	イミティション=ロール	通常水着s	2_2					初撃来るわよ、備えて！
+	ディーア	本気水着2	1_2					これを防いだらすぐに攻撃開始だ！\n行くぞ……!!
+CharacterOff
+ChangeSoundVolume	Se	1
+Shake	Graphics	x=5 y=5 time=20					NoWait
+	ドゥルガー･プロトタイプ							《周囲の人間は離れて<dash=2>》
+StopSe
+Se	水2
+Se	水3
+Se	光3
+FadeOut	white					2
+Wait						2
+If	isdebug==true
+CharacterOff
+Jump	*E_278_02
+EndIf
+EndScenario

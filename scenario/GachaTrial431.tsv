@@ -1,0 +1,443 @@
+# G_431_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	酒場_宿屋
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏
+	ホロウ
+FadeIn	black					.5
+	ホロウ							はぁ……ど、どうしよう……
+Tween	ホロウ	ShakePosition	x=5				NoWait
+	ホロウ							最近マスターさん、\n私のこと、全然使って、くれない……
+	ホロウ							この前の任務の\nあれのせい、かな……
+Param	character_grayout=true
+FadeOut	black					.3
+Se	回想
+CharacterOff						0
+Bgm	バトル
+Bg	草原A					0
+	　　　　　　　　　　					0
+FadeIn	black					.3
+	　　　　　　　　　　							\n　　　　　 　<color=blue>―数日前―</color>
+FadeOut	black					.5
+CharacterOff						0
+	魔物		2_3_m			0
+FadeIn	black					.3
+	魔物							………………！
+CharacterOff
+	ホロウ	驚き						え……？
+CharacterOff
+	魔物		2_3_m					………………!!
+Tween	魔物	PunchPosition	x=-50				NoWait
+Wait						.2
+FadeOut	white					.1
+CharacterOff						0
+Se	斬1
+	ホロウ	通常				0
+FadeIn	white					.1
+	ホロウ	通常
+FadeOut	white					.1
+	ホロウ	破損
+FadeIn	white					.1
+Tween	ホロウ	ShakePosition	x=5				NoWait
+	ホロウ	破損						ひゃあうっ……！
+Wait						.5
+CharacterOff
+	ディーア	本気2						ホロウ、大丈夫か！
+CharacterOff
+	ホロウ	破損
+Tween	ホロウ	ShakePosition	x=5				NoWait
+	ホロウ	破損						だ、大丈夫です……\n……すごく、い、痛いですけど
+CharacterOff
+	ホロウ	破損	1_2_b
+	ディーア	悔しい2	2_2					怪我してるじゃないか……！\n無理はしないで、さがっててくれ
+	ディーア	通常2						大丈夫、\nあとはオレがなんとかするから
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=2				NoWait
+Wait						.5
+CharacterOff
+	ホロウ	破損						そ、そんな、マスターさん！\n待って、ください\nま、マスターさん……！
+Tween	ホロウ	ShakePosition	x=5				NoWait
+	ホロウ	破損						わ、私……\nまだ、戦える、のに……！
+FadeOut	black					.3
+Se	回想
+CharacterOff						0
+Bgm	平和
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏			0
+	ホロウ					0
+FadeIn	black					.5
+	ホロウ							<dash=2>あれから、マスターさん\n任務に、誘ってくれない……
+	ホロウ							私が、役に立てなかったから……？
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常2	画面外_右
+Tween	ディーア	MoveTo	x=0 time=4				NoWait
+	ディーア							えーと、確かこの辺に……
+CharacterOff
+	ホロウ							<size=40>あっ！\nマ、マスターさん……！</size>
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						うわっ、びっくりした！
+CharacterOff
+	ディーア	驚き2	2_2
+	ホロウ	驚き	1_2_b
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ	驚き						あっ、ごめんなさい……！\n声、おっきくて……
+Tween	ホロウ	MoveBy	x=-10				NoWait
+	ホロウ	通常						まだ、人と話すの、\n慣れて、なくて……
+	ディーア	通常2						いや、ごめん\nオレの方がぼーっとしてたんだ
+	ディーア	驚き2						それよりホロウ、どうしたんだ？
+	ホロウ							あの、えと……もしかして\nに、任務に、行くんですか？
+	ディーア	汗2						えっ？ あ、ああ……\nまあ、そんな感じだ
+	ホロウ							えっと、それなら……\nその、私も、一緒に……！
+	ディーア	汗2						ごめんな、今日は連れて行けないんだ\nまた今度にしてくれるか？
+	ホロウ							えっ……
+	ディーア	通常2						それじゃあ、もう時間だから\nまた後でな
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=3				NoWait
+Wait						.7
+	ホロウ	驚き
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ	驚き						えっ、あっ、マスターさん……！
+	ホロウ							やっぱり……誘ってくれない……\n私のこと、使ってくれない……
+Tween	ホロウ	ShakePosition	x=5				NoWait
+	ホロウ	泣き						どうしようどうしよう……\n私、また、使われなくなるのかな……
+FadeOut	black					.7
+CharacterOff						0
+	　　　　　　　　　　					0
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　　　 　<color=blue>―2時間後―</color>
+CharacterOff						0
+Bgm	マイページ
+	ディーア	通常2	画面外_左			0
+Tween	ディーア	MoveTo	x=0 time=2				NoWait
+	ディーア							ただいま
+CharacterOff
+	ホロウ							あっ、マスターさん……
+	ホロウ							（ちゃんと、マスターさんに\n　聞かないと……）
+CharacterOff
+	ディーア	通常2	2_2
+	ホロウ		画面外_左
+Tween	ホロウ	MoveTo	x=-90 time=3				NoWait
+	ホロウ		1_2_b					ま、マスターさん……
+	ホロウ	通常						……ええと、その\n聞きたいことがあります……
+	ディーア	通常2						なんだ？
+	ホロウ							こ、この前の任務のこと、で……\nもしかして、マスターさん\nお、怒って、ますか……？
+Tween	ホロウ	ShakePosition	x=5				NoWait
+	ホロウ	泣き						わ、私が、怪我して……\nた、戦えなく、なったから……
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						まさか！\n怒ってるわけないだろ？
+Tween	ホロウ	MoveBy	x=10				NoWait
+	ホロウ	通常						じゃ、じゃあ……\n今度の任務は、\n連れて行ってくれません、か……？
+Tween	ディーア	MoveBy	x=10				NoWait
+	ディーア	汗2						……ご、ごめんな、\n連れて行きたいんだけど
+	ディーア							ちょっと次の任務だと\n急すぎる、というか……
+Tween	ホロウ	MoveBy	x=-10				NoWait
+	ホロウ							（だめ……なんだか\n　避けられてる……）
+	ホロウ	泣き						（マスターさんと任務に行くためには\n　どうしたら、どうしたら……！）
+	ディーア	驚き2						ホロウ……？
+StopBgm
+Tween	ホロウ	MoveBy	x=10				NoWait
+	ホロウ	驚き						……えと、そうだ！\n私のこと、お姉ちゃんだと思って、\nその、甘えていいですから！……ね？
+Bgm	コメディ
+	ディーア
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア							……お、お姉ちゃん……？
+	ホロウ	通常						マ、マスターさん\n任務で、疲れてるかなって、思って\nえと、甘えたいかなって……
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ							だから、ええと、えと、\nぎゅ、ぎゅーってしてあげ、ます！
+	ディーア							そんな突然……うわっ!?
+Tween	ホロウ	MoveBy	x=20				NoWait
+Se	ポップイン
+	ホロウ	嬉しい						ぎゅーー……
+	ディーア	にやけ2						ふわぁ……柔らかい……
+	ホロウ	嬉しい						な、ナデナデも、します……！
+	ディーア							く、くすぐったい……！
+Tween	ホロウ	MoveBy	x=-20				NoWait
+	ホロウ							あ、あの、マスターさん\nど、どうですか？\nこれで、任務に……！
+	ディーア	笑い2						え？ ああ、そうだな……\nこれで元気いっぱいで\n任務にいけそうだよ
+	ホロウ	通常						う、その、そうじゃ、なくて……
+CharacterOff
+	ホロウ							（だめ……きっとまだ\n　足りないんだ……）
+CharacterOff
+	ディーア	笑い2	2_2
+	ホロウ	通常	1_2_b
+Tween	ホロウ	MoveBy	y=-40
+	ホロウ							はい、マスターさん……！
+	ディーア	驚き2						……え？\nそ、その姿勢はまさか……！
+	ホロウ							えと、ひざまくら、です……！
+Tween	ホロウ	MoveBy	x=20				NoWait
+	ホロウ							え、えいっ！
+Tween	ホロウ	MoveBy	x=-20				NoWait
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア							うわっ!?
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	　　　　　　　　　　					0
+FadeIn	black					.5
+	ホロウ	<Off>						<size=40>ひゃうっ！</size>
+CharacterOff
+Bg	酒場_宿屋					0
+	ホロウ	拡大通常	エフェクト表			0		あっ、えっと、ごめんなさい\n慣れてなくて、声、おっきいですよね
+	ホロウ	拡大嬉しい	エフェクト表					……ど、どうですか、マスターさん
+CharacterOff
+Param	character_grayout=false
+Se	ラブ
+	オーラ桃		エフェクト裏
+	ディーア	にやけ2						膝枕……\nや、柔らかくて……最高……！
+Param	character_grayout=true
+CharacterOff
+	ホロウ	拡大嬉しい	エフェクト表					え、えへへ♪
+CharacterOff
+	ホロウ	嬉しい						（きっとマスターさんも、これで\n　私のひざまくらが恋しくて\n　任務に連れて行きたくなる、はず）
+	ホロウ							あ、あの、マスターさん、\n今度の任務、なんです、けど……！
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						はっ！\nそうか、すっかり忘れてた……
+	ディーア	悔しい2						今日中に次の任務の準備を\nしないと……
+CharacterOff
+	ホロウ	泣き
+Tween	ホロウ	ShakePosition	x=5				NoWait
+	ホロウ	泣き						え……ええっ？\nい、行っちゃうんですか……？
+CharacterOff
+	ディーア	汗2						ああ、ごめんな、\n名残惜しいけど、ずっと\n甘えてるわけにもいかないんだ
+CharacterOff
+	ホロウ	泣き						うう……じゃ、じゃあせめて、
+	ホロウ	通常						マスターさんが私のことを、\n忘れないように\nしないと、ですね……！
+CharacterOff
+	ホロウ	通常	1_2_b
+Tween	ホロウ	MoveBy	x=10				NoWait
+	ディーア	笑い2	2_2					大丈夫だって、\nホロウのことは忘れな……
+	ホロウ	口開き
+Tween	ホロウ	MoveBy	x=10				NoWait
+	ホロウ							………………
+	ディーア	驚き2						ホロウ？ どうした？
+CharacterOff
+	ホロウ	拡大口開き	エフェクト表					あ、あ……
+	ディーア	<Off>						え……？
+CharacterOff						0
+	ホロウ	拡大口開き2	エフェクト表			0		……あーーーーん
+	ディーア	<Off>						ええっ!?
+FadeOut	black					.5
+CharacterOff						0
+Bg	黒背景					0
+	　　　　　　　　　　
+FadeIn	black					.5
+	ホロウ	<Off>						がじがじがじ………
+	ディーア	<Off>						ちょっ、痛っ!?
+	ホロウ	<Off>						はむはむ……がじがじ……
+CharacterOff
+Bg	酒場_宿屋
+	ディーア	汗2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	汗2						す、ストップ！\n指をかじるなっ！
+CharacterOff
+	ホロウ
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ							……あっ！ あの、その\nマスターさんがいつでも私のこと、\n思い出せるようにって……
+CharacterOff
+	ホロウ		1_2_b
+	ディーア	汗2	2_2					かじらなくても平気だって！\nちゃんと覚えてるからさ！
+	ホロウ	泣き
+Tween	ホロウ	ShakePosition	x=5				NoWait
+	ホロウ	泣き						じゃあ私、どうしたら、\nマスターさんと……
+	ディーア	通常2						え？ ……ああ、そっか\nホロウはオレのこと、\n心配してくれてるんだよな？
+	ホロウ	通常						えっ、えっと……
+StopBgm						1
+	ディーア	笑い2						色々してくれるのも、\n任務で疲れてるからって\n労ってくれたんだろ？
+	ディーア	通常2						ありがとな
+	ホロウ
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ	通常						えっ、ええと、ち、ちが……！
+	ホロウ	泣き						（どうしよう、どうしよう\n　どうしたら伝わるの……？）
+	ホロウ	通常						（……私、\n　私が伝えたい気持ちは……）
+CharacterOff
+	キノコリオン		画面外_左
+Se	風1
+Tween	キノコリオン	MoveTo	x=0
+CharacterOff
+Bgm	緊迫
+	ホロウ							えっ……!?
+	ディーア	悔しい2						なっ、キノコリオン!?
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコノコーッ!!
+CharacterOff
+	ディーア	悔しい2						なんでこんなところに……！
+CharacterOff
+	ホロウ
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ							…………っ!!
+	ホロウ							（私……私が、\n　伝えたいことは……！）
+	ホロウ							（マスターさんに、使って欲しい\n　命令して、欲しい……）
+	ホロウ							（私は、\n　マスターさんと一緒に……！）
+StopBgm
+	ホロウ							マスターさん……私のお願い、\n聞いてもらえませんか……
+CharacterOff
+	ディーア	驚き2						ホロウ……？
+CharacterOff
+	ホロウ							ずっと、考えてました……\nど、どうしたら、マスターさんに\nまた、使って、もらえるか……
+Bgm	バトル
+	ホロウ	拡大通常	エフェクト表					私、ちゃんと、戦えます……！\nだから……それを今、証明、します
+	ホロウ							マスターさんに、その、強めに\n命令とか、して欲しいん、です
+	ホロウ							マスターさんに使われてるって\n実感、したいん、です……！
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	ShakePosition	x=10				NoWait
+	キノコリオン							ノコッ!! ノコーッ！
+CharacterOff
+	ホロウ							お願い、します\nマスターさん……！
+CharacterOff
+	ディーア	本気2						……ああ、分かった\n行くぞ、ホロウ!!
+CharacterOff
+	ホロウ							はい……！
+If	isdebug==true
+CharacterOff
+Jump	*G_431_02
+EndIf
+EndScenario
+
+# G_431_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	酒場_宿屋
+	キノコリオン
+FadeIn	white					.5
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコーッ!!
+CharacterOff
+	ホロウ	嬉しい						（ああ……やっぱり……\n　この戦いの空気が、好き……♪）
+	ホロウ	驚き						（それに、なんだろう、マスターさん\n　前と少し、違う……？）
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ	嬉しい						……ばーん♪
+FadeOut	white					.1
+CharacterOff						0
+	キノコリオン					0
+Se	銃2
+FadeIn	white					.1
+Wait						.7
+Tween	キノコリオン	ShakePosition	x=10				Add
+	キノコリオン							ノコッ!?
+Se	敵殺
+Tween	キノコリオン	MoveBy	y=-300
+CharacterOff
+Bgm	平和
+	ホロウ		1_2_b
+	ディーア	通常2	2_2					よし……\nホロウ、怪我はないか？
+	ホロウ	通常
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ							えっ、えと……\n全然、大丈夫、です
+	ディーア	笑い2						そうか、良かった
+Tween	ホロウ	MoveBy	x=10				NoWait
+	ホロウ							あの、あの、マスターさん？
+	ディーア							うん？
+	ホロウ	通常						なんだか、その、前の任務の時と、\n違うって、思って……
+	ホロウ	驚き						なんというか……\n使われた時の心地？ が、\n良くなった、というか……
+	ディーア	通常2						ああ、良かった\n成果は出てるみたいだな
+Tween	ホロウ	PunchPosition	y=10				NoWait
+	ホロウ	驚き						成果、って……？
+	ディーア	怒り2						あの時……
+FadeOut	black					.3
+Se	回想
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	草原A					0
+	ホロウ	破損				0
+FadeIn	black					.3
+	ホロウ	破損						だ、大丈夫です……\n……すごく、い、痛いですけど
+FadeOut	black					.5
+CharacterOff						0
+Bg	酒場_宿屋					0
+ImageEffectOff	SpriteCamera	Sepia
+	ホロウ	驚き	1_2_b
+	ディーア	怒り2	2_2
+FadeIn	black					.3
+	ディーア	怒り2						ホロウに怪我をさせてしまったのは\nオレの力が足りなかったからだ
+	ディーア							だから、連弩の扱い方の\n練習をしてて……
+	ホロウ	驚き
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ							え、ええ……？
+	ホロウ							じゃ、じゃあマスターさんが\n出かけるとき……わ、私を\n連れて行ってくれなかった、のは……
+	ディーア	汗2						ああ、あれは\n……隠れて、特訓してたからなんだ
+Bgm	凱旋
+	ディーア	通常2						オレのせいで\nホロウをあんな目に遭わせるわけには\nいかないからな
+	ホロウ
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ	通常						そ、それじゃあ、私のために……？
+Tween	ホロウ	ShakePosition	x=5				NoWait
+	ホロウ	泣き						ご、ごめんなさい……！\nわ、私、勝手に\n避けられてるんだと、思って……！
+	ディーア	通常2						オレの方こそ不安にさせてごめん\nだけど、避けてたわけじゃないんだ
+	ディーア	笑い2						ホロウさえ良ければ\nまたオレと一緒に任務に\n行ってくれると助かる
+	ホロウ	泣き
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ	泣き						…………っ!!
+	ホロウ	通常						私……あの、そのえっと……\nう、う、嬉しい、です……！
+Tween	ホロウ	MoveBy	x=10				NoWait
+	ホロウ							けど、できれば、その……\nもっと命令っぽく、\n言ってくれません、か……？
+	ディーア	驚き2						命令っぽく？
+	ディーア	通常2						……これからも、\n一緒に戦ってくれ、ホロウ
+	ホロウ	嬉しい
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ	嬉しい						…………はい！
+	ホロウ	嬉しい						（はぁ……マスターさんに\n　下品なお願い、しちゃった……♪）
+	ディーア	あはは2						まぁ、次の任務は予定が決まってるし\nすぐにってわけじゃないけど
+Tween	ホロウ	MoveBy	x=10				NoWait
+	ホロウ	嬉しい						えへへ、うれしい、です\nマスターさん……♪
+	ホロウ	口開き						…………あ、あーーーー
+CharacterOff
+	ディーア	驚き2						え、ちょ、ホロウ!?
+CharacterOff
+Bgm	コメディ
+	ホロウ	拡大口開き2	エフェクト表					がじがじがじー
+CharacterOff
+	ホロウ	口開き	1_2_b
+	ディーア	驚き2	2_2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						うわっ!?\nホロウ、かじるなって！
+	ホロウ	驚き						えと、私との約束、\n忘れないように、印を……
+	ディーア	汗2						忘れないから大丈夫だって！
+	ホロウ	通常						じゃあ、じゃあ、\nかじりませんから……
+Tween	ホロウ	MoveBy	x=10				NoWait
+	ホロウ	嬉しい						ずっと、マスターさんに\nくっついてても……\n……い、いい、ですか？
+	ディーア
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						は、背後にずっといるつもりか!?
+	ホロウ	通常						に、任務までで、大丈夫ですから……
+	ディーア	汗2						それはちょっと困るかも！
+Tween	ホロウ	MoveBy	x=10				NoWait
+	ホロウ	口開き						では、やっぱり、かじる方向で……
+	ディーア	汗2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア							うわっ!! 大丈夫、大丈夫だから！\n絶対忘れないから！
+Tween	ホロウ	MoveBy	y=-10				NoWait
+	ホロウ							がじがじ……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア							ちょっ!?\n色んなところかじるなってば!?
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	ホロウ	拡大嬉しい	エフェクト表					……えへへ♪\nこれからも、マスターさんに\n使ってもらえる……♪
+	ホロウ							わたし、とっても、\nうれしい、です……♪
+Param	character_grayout=true
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_431_01
+EndIf
+EndScenario

@@ -1,0 +1,789 @@
+# E_588_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	和の国の町
+Bg	酒場1F					0
+	丑王アコ	嬉しい_逆
+FadeIn	white					0
+	丑王アコ	嬉しい_逆						笑う門には世界平和♪\n年末占い、はじめちゃいます♪
+	丑王アコ	通常_逆						お相手は私、丑王アコ♪\n平和で幸せなお正月のため、
+	丑王アコ	嬉しい_逆						お悩みはぜーんぶ\n解決しちゃいましょう♪
+FadeOut	white					.2
+CharacterOff						0
+	マハ	怒り	画面外_左_b			0
+	丑王アコ	通常_逆	p7			0
+FadeIn	white					.2
+	丑王アコ	通常_逆						一人目の相談者は……
+Se	走る
+Tween	マハ	MoveTo	x=-150 time=1.5				NoWait
+	マハ	通常						アコちゃーん！
+	丑王アコ	通常_逆						あら、マハちゃん？\nどうしたの？
+Tween	マハ	PunchPosition	y=30				NoWait
+	マハ	泣き						もうすぐ年が変わっちゃうよぉ！\nネズミの時代が終わっちゃうよー！
+Tween	マハ	MoveBy	x=20				NoWait
+	マハ	泣き						来年もちゃんと\nマハが活躍できるか占って!!
+	丑王アコ	嬉しい_逆						なるほど、分かりました♪
+Tween	丑王アコ	MoveBy	x=-20				NoWait
+	丑王アコ	嬉しい_逆						それでは、拝見ふむふむ……♪
+	丑王アコ	通常_逆						うん！\nマハちゃんは来年も絶好調♪
+Tween	マハ	PunchPosition	y=30				NoWait
+	マハ	泣き						ほ、ほんとに!?\nネズミの時代、終わらない!?
+	丑王アコ	嬉しい_逆						明日もまた平和が昇る♪\n年が変わってもマハちゃんはマハちゃん
+	丑王アコ	嬉しい_逆						いつでも元気いっぱいな\nマハちゃんなら大丈夫だよ♪\n来年も頑張って♪
+	マハ	通常						ありがとう、アコちゃん！
+Tween	マハ	RotateTo	y=180 time=0.2
+Tween	マハ	MoveBy	x=800 time=2				NoWait
+Se	走る
+	丑王アコ	嬉しい_逆						良いお年をー♪
+Tween	丑王アコ	MoveBy	x=20				NoWait
+	丑王アコ	通常_逆						次は<dash=2>
+CharacterOff	マハ
+	タケミカヅチ		画面外_左_b
+	　　　　　　　　　　　		3_4
+Se	走る
+Tween	タケミカヅチ	MoveTo	x=-150 time=2				NoWait
+Wait						.5
+	丑王アコ	通常_逆						タケミちゃん！\n一体どうしたの？
+	タケミカヅチ	通常						聞いてよアコちゃーん！\nみんなが忙しいからって、\nぜんぜん相撲してくれないのぉ！
+	丑王アコ	悲しい_逆						年末は忙しいものね……
+	丑王アコ	通常_逆						それじゃあ、\nお相撲運を占いましょう♪
+Tween	丑王アコ	MoveBy	x=-20				NoWait
+	丑王アコ	本気_逆						えーと……
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff	オーラ青					1
+Param	character_grayout=true
+	丑王アコ	嬉しい_逆						待てば世界の平和あり♪
+	丑王アコ	嬉しい_逆						今すぐお相撲はできないけれど、\n待てばきっとチャンス到来！　
+	丑王アコ	通常_逆						機は逃さず、\n大相撲大会を開いちゃいましょう♪
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	タケミカヅチ	拡大笑い	エフェクト裏
+	タケミカヅチ	拡大笑い						<size=40>大！ 相撲！ 大会!!</size>
+Param	character_grayout=true
+CharacterOff
+	丑王アコ	嬉しい_逆	p7
+	タケミカヅチ	笑い	p3
+	タケミカヅチ	笑い						いいじゃん、気合入ってきたー!!
+	丑王アコ	嬉しい_逆						元気が出たなら良かった♪\n準備のお手伝いもできるから\nいつでも言って♪
+	タケミカヅチ	笑い						ありがとう！\nその時はアコちゃんも\n一緒に相撲やろう！
+	丑王アコ	通常_逆						うん！\n楽しみにしてるね♪
+	タケミカヅチ	笑い						アコちゃん、良いお年を！
+Se	走る
+Tween	タケミカヅチ	MoveBy	x=-800 time=2				NoWait
+Wait						.5
+Tween	丑王アコ	MoveTo	x=0				NoWait
+	丑王アコ	嬉しい_逆						良いお年をー♪\nそれでは次の方ー♪
+	丑王アコ	通常_逆						一に平和、二に平和\n三四も平和で、五に世界平和♪
+CharacterOff
+	丑王アコ	嬉しい_逆_拡大	エフェクト表
+	丑王アコ	嬉しい_逆_拡大						世のため、世界平和のため、\nお悩みはぜーんぶ\nアコが解決しちゃいますよ♪
+StopBgm						1
+FadeOut	black					.3
+CharacterOff						0
+	丑王アコ	通常_逆	2_2			0
+	ディーア	通常2	画面外_左_b			0
+FadeIn	black					.3
+Tween	ディーア	MoveTo	x=-90 time=2				NoWait
+Bgm	平和
+	ディーア	通常2						アコ、ここにいたのか
+	丑王アコ	嬉しい_逆						マスターさん♪
+	丑王アコ	通常_逆						マスターさんも、\n占いをご所望ですか？
+	ディーア	通常2						いや、アコが働きづめだから、\n疲れてないかなって\n様子を見に来たんだ
+	丑王アコ	嬉しい_逆						ありがとうございます♪\nでも、疲れてなんていませんよ
+	丑王アコ	通常_逆						塵も積もれば世界平和♪\n平和のためならへっちゃらです♪
+	丑王アコ	嬉しい_逆						それにお正月になったら、\n素敵なことも待っていますしね
+	ディーア	笑い2						ああ、\nみんなで初日の出を見に行くって\n約束したもんな
+	丑王アコ	嬉しい_逆						はい！\n今から楽しみです♪
+	丑王アコ	通常_逆						みなさんが笑顔で、平和で、幸福で
+	丑王アコ	嬉しい_逆						綺麗なお日様が登るのを見ながら、\n一年の幸せをお願いするんです♪
+	丑王アコ	通常_逆						きっと、\n素晴らしいお正月になるでしょう♪
+	ディーア	笑い2						オレもそう思うよ
+	丑王アコ	嬉しい_逆						ふふ♪\nそのためにも、\nもっとみなさんに幸福を届けないと♪　
+Tween	丑王アコ	PunchPosition	y=30				NoWait
+	丑王アコ	嬉しい_逆						目指せ、世界平和の下の力持ち♪\nもぉ、もぉ、すーぐお正月ー♪
+FadeOut	white					1
+CharacterOff						0
+	丑王アコ	通常_逆	p7			0
+	研究員		p3b			0
+Wait						.5
+FadeIn	white					.3
+	研究員							忙しすぎて\nぜんぜん休めないんです……
+	丑王アコ	嬉しい_逆						世界平和が万事\nまずは心を休めましょう♪
+FadeOut	black					.2
+CharacterOff						0
+	丑王アコ	通常_逆	p7			0
+	旅人		p3b			0
+FadeIn	black					.2
+	旅人							子どもがはしゃぎすぎて\n心配なんだ……
+	丑王アコ	通常_逆						子どもは風の子、平和の子♪\n元気なことは良い証です♪
+FadeOut	black					.2
+CharacterOff						0
+	勇者A					0
+FadeIn	black					.2
+	勇者A							足を怪我して<dash=2>
+FadeOut	black					.2
+CharacterOff						0
+	市場のおばちゃん					0
+FadeIn	black					.2
+	市場のおばちゃん							不幸続きで<dash=2>
+FadeOut	black					.2
+CharacterOff						0
+	勇者B					0
+FadeIn	black					.2
+	勇者B							タンスに小指ぶつけて<dash=2>
+FadeOut	white					.5
+CharacterOff						0
+	ディーア	通常2				0
+FadeIn	white					.5
+	ディーア	驚き2						街の人の悩みも聞いてるのか……
+	ディーア	怪しい2						それにしても<dash=2>
+FadeOut	white					.5
+Param	character_grayout=false
+CharacterOff						0
+Bg	市街地A					0
+	市場のおばちゃん		p2			0
+	魔導師メアルー･スル		p4			0
+	旅人		p6			0
+	女の子		p7			0
+	                    
+FadeIn	white					.5
+Se	ガヤA
+Tween	女の子	PunchPosition	y=30				NoWait
+Wait						1.5
+CharacterOff
+	リディ	通常2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	通常2						最後尾はこちらでーす！\nちゃんと並んでくださーい!!
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=true
+	ディーア	怪しい2				0
+Bg	酒場1F					0
+FadeIn	white					.5
+	ディーア	怪しい2						相談にくる人が多すぎる気が……
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	怒り2	1_2_b			0
+	丑王アコ	悲しい_逆	2_2			0
+FadeIn	black					.3
+	丑王アコ	悲しい_逆						うーん、どうしてでしょう？\n悩んでいる人がとても多いです
+	ディーア	驚き2						アコも気になるか？
+FadeOut	black					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	市街地A					0
+	黒グラデーション		エフェクト表			0
+	　　　　　　　　　　　
+FadeIn	black					.3
+	ディーア	<Off>						さっきから街に出てもため息ばかり\n聞こえてくるんだ
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	丑王アコ	悲しい_逆				0
+FadeIn	black					.3
+Param	character_grayout=true
+	丑王アコ	悲しい_逆						そうですね、\nここに来る人だけじゃないです\n街でもたくさんの人が悩んでる……
+Bgm	わくわく
+	丑王アコ	本気_逆						このままではいけません……！
+CharacterOff
+	丑王アコ	通常_逆_拡大	エフェクト表
+	丑王アコ	通常_逆_拡大						マスターさん、決めました！\n世界平和のため、\nみなさんの笑顔のため！
+	丑王アコ	通常_逆_拡大						みなさんがお正月を楽しめるよう\n厄祓いをしに行きましょう!!
+CharacterOff
+	丑王アコ	通常_逆	2_2
+	ディーア	驚き2	1_2_b
+	ディーア	驚き2						厄祓い？
+	丑王アコ	通常_逆						ええ、厄祓いです♪\n私は幸福の魔剣と呼ばれていますから
+	丑王アコ	嬉しい_逆						お悩みを解決してから、\nその力をすこーし使って、\n一年の厄もスッキリと♪
+	丑王アコ	通常_逆						そうすれば、みなさん、\n平和なお正月を迎えられます♪
+	ディーア	通常2						そうか、分かった！\nじゃあオレも協力するよ！
+	丑王アコ	嬉しい_逆						ありがとうございます♪\nそれではお正月も間近ですし、\n早速、参りましょう♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						ああ！
+Param	character_grayout=false
+CharacterOff
+StopBgm						.5
+	集中線		エフェクト表
+	丑王アコ	嬉しい_逆_拡大	エフェクト裏
+	丑王アコ	嬉しい_逆_拡大						<dash=2>街の人が全員、\n幸せになるまで！
+Param	character_grayout=true
+CharacterOff
+	丑王アコ	嬉しい_逆	2_2
+	ディーア	驚き2	1_2_b
+	ディーア	驚き2						…………え？
+	丑王アコ	通常_逆						どうしましたか？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						ま、街の人……全員？
+	丑王アコ	嬉しい_逆						はい♪ 当然です♪
+	ディーア	あはは2						いや、流石に街の全員は\n……すごい数だし、\n時間も足りないだろう？
+Se	回想
+FadeOut	white					.5
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+Bg	市街地A					0
+	市場のおばちゃん		p2			0
+	魔導師メアルー･スル		p4			0
+	旅人		p6			0
+	女の子		p7			0
+	                    					0
+FadeIn	white					.5
+Wait						1
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Sepia
+	ディーア	あはは2	1_2_b			0
+	丑王アコ		2_2			0
+Bg	酒場1F					0
+FadeIn	white					.5
+StopBgm						.5
+	丑王アコ	通常_逆						でも、誰かを特別扱いするのは\nダメです♪
+FadeOut	white					.5
+Bgm	神秘
+Bg	白背景					0
+CharacterOff						0
+	丑王アコ	通常_逆				0
+FadeIn	white					.5
+	丑王アコ	通常_逆						誰かが幸福で、誰かが不幸\nそれでは世界平和とは言えません
+	丑王アコ	嬉しい_逆						小さな幸せがあふれる、\n幸せな世界\nそれが私の夢なんです♪
+FadeOut	white					.3
+Bg	酒場1F					0
+CharacterOff						0
+	丑王アコ	通常_逆	2_2			0
+	ディーア	驚き2	1_2_b			0
+FadeIn	white					.3
+	ディーア	驚き2						アコ……
+	丑王アコ	通常_逆						マスターさん、\nまず世界平和より始めよ\nともいいます
+	丑王アコ	嬉しい_逆						考えるよりも先に\n動いてみましょう♪
+	ディーア	怒り2						……そうか、\nそこまでアコが言うなら
+	ディーア	通常2						分かった！\nオレもアコの夢が叶えられるように\n精一杯協力するよ
+	丑王アコ	通常_逆						よろしくお願いしますね、\nマスターさん♪\nそれではしゅっぱーつ！
+StopBgm						.5
+	丑王アコ	嬉しい_逆						せかいーへいわー♪\n世界平和はいりませんかー♪
+Tween	丑王アコ	MoveBy	x=-800 time=2.5				NoWait
+Wait						1
+CharacterOff	丑王アコ
+	ディーア	怒り2						……そうと決まれば\n急がないといけないな
+Se	回想
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	笑い2	1_2_b			0
+	丑王アコ	嬉しい_逆	2_2			0
+ImageEffect	SpriteCamera	Sepia
+FadeIn	black					.3
+	丑王アコ	嬉しい_逆						はい！\n今から楽しみです♪
+	丑王アコ	通常_逆						みなさんが笑顔で、平和で、幸福で
+	丑王アコ	嬉しい_逆						綺麗なお日様が登るのを見ながら、\n一年の幸せをお願いするんです♪
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	怒り2	1_2_b			0
+FadeIn	black					.3
+	ディーア	怒り2						一緒に、初日の出を観るって\n約束したんだから
+Se	走る
+Tween	ディーア	MoveBy	x=-800 time=2.5				NoWait
+Wait						.5
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	市街地A					0
+Bgm	和の国の町
+CharacterOff						0
+	丑王アコ	通常_逆	p7			0
+	女の子		p3b			0
+FadeIn	black					.3
+Tween	女の子	PunchPosition	y=30				NoWait
+	女の子							おかあさぁん!\nどこいったのぉー!?
+Tween	丑王アコ	MoveBy	x=-30				NoWait
+	丑王アコ	通常_逆						大丈夫、私が一緒に探してあげる♪　
+Tween	丑王アコ	MoveBy	x=60				NoWait
+	丑王アコ	通常_逆						おかーさん！\nどこにいらっしゃいますかー！
+FadeOut	white					.2
+CharacterOff						0
+	丑王アコ	通常_逆	p7			0
+	旅人		p3b			0
+FadeIn	white					.2
+	旅人							すごく体が重いんだ……
+	丑王アコ	通常_逆						たくさんの厄を背負っていますね！
+	丑王アコ	嬉しい_逆						えいっ！
+Param	character_grayout=false
+Se	チャージ
+	オーラ青		エフェクト表			1
+Wait						.5
+CharacterOff	オーラ青					1
+Param	character_grayout=true
+	丑王アコ	通常_逆						これでどうですか？
+Tween	旅人	PunchPosition	y=30				NoWait
+	旅人							おお！\n楽になった、ありがとう！
+	丑王アコ	嬉しい_逆						世界平和が万事♪\nこれくらい、お安い御用です♪
+FadeOut	white					.2
+CharacterOff						0
+	コウモリ型モンスター					0
+FadeIn	white					.2
+	コウモリ型モンスター							グォオオオ!!
+CharacterOff
+	丑王アコ	本気_逆	2_2
+	ディーア	驚き2	1_2_b
+	ディーア	驚き2						魔物まで\n入り込んでくるなんて!!
+	丑王アコ	通常_逆						大山鳴動して世界平和はならず♪\n年末は静かにしてください！\nマスターさん、行きましょう！
+Tween	丑王アコ	MoveBy	x=-800 time=2				NoWait
+Se	走る
+Wait						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	市街地B					0
+CharacterOff						0
+	ディーア	悔しい2				0
+Wait						1
+FadeIn	black					.3
+	ディーア	悔しい2						はぁ……はぁ……
+	ディーア	怒り2						厄祓いを始めてから\nもう、だいぶ経ったな……
+	ディーア	怒り2						（少しずつ解決できてるが、\n　いくらなんでも多すぎる……!）
+CharacterOff
+	ディーア	怒り2	p3b
+	丑王アコ	通常_逆	p7
+	丑王アコ	通常_逆						まだまだ困っている方が\nたくさんです！
+	丑王アコ	嬉しい_逆						レッツ世界平和♪\nまだまだいきますよー♪
+StopBgm
+	ディーア	怒り2						なぁ、アコ
+Tween	丑王アコ	MoveBy	x=-20				NoWait
+	丑王アコ	通常_逆						どうしましたか、マスターさん？
+	ディーア	あはは2						いや、厄祓いを続けてきたけれど\n人が多すぎると思って
+	ディーア	怒り2						やっぱり街は広くて、\n困っている人も数え切れない
+	丑王アコ	悲しい_逆						そうですね、\nどうしても時間は\nかかっちゃいます……
+	ディーア	悔しい2						もう大晦日は三日後だ……
+	ディーア	怒り2						このまま人助けをしていたら、\nアコが初日の出に間に合わない
+	丑王アコ	悲しい_逆						…………
+	ディーア	怒り2						だから<dash=2>
+	丑王アコ	悲しい_逆						仕方がありませんね
+	丑王アコ	悲しい_逆						初日の出を観るのは、諦めます
+Bgm	絶望
+	ディーア	驚き2						……え？
+	丑王アコ	通常_逆						お正月も厄祓いをします！
+	丑王アコ	嬉しい_逆						そうすれば、一人でも多くの方が\n新年を幸福に始められますから♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						いや、それじゃあダメだ！
+	丑王アコ	本気_逆						マスターさん？
+	ディーア	悔しい2						お正月まで働き続けるなんて……
+	ディーア	悔しい2						そんなの、\n他のみんなが幸せになっても、\nアコは幸せって言えるのか？
+	ディーア	怒り2						初日の出を観るの、\nあんなに楽しみにしてただろ？
+Se	回想
+FadeOut	black					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	笑い2	1_2_b			0
+	丑王アコ	嬉しい_逆	2_2			0
+	                   
+ImageEffect	SpriteCamera	Sepia
+FadeIn	black					.3
+Wait						1
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	市街地B					0
+CharacterOff						0
+	ディーア	悔しい2	p3b			0
+	丑王アコ	通常_逆	p7			0
+FadeIn	black					.3
+Param	character_grayout=true
+	丑王アコ	悲しい_逆						確かに、楽しみでした……
+	ディーア	悔しい2						初日の出だけじゃない、\nおせちや初詣、\nもっと楽しいことがたくさんある
+	ディーア	悔しい2						それを全部諦めるなんて<dash=2>
+	丑王アコ	本気_逆						ですが、それは私の都合です
+	丑王アコ	本気_逆						私の幸せの前に、\nみんなの幸せです\n世界平和が大切です
+	丑王アコ	本気_逆						自分だけ特別扱いなんて、\n誰かが不幸のまま楽しむなんて、\n私にはできません
+	ディーア	驚き2						そんな……
+	丑王アコ	通常_逆						多くの人が幸せになるなら\n世界平和に近づくなら、\n私はなんだってします
+	丑王アコ	嬉しい_逆						人事をつくして\n世界平和を待つんです
+	丑王アコ	通常_逆						たとえすぐには\n平和にならないとしても
+	丑王アコ	通常_逆						私にかけてくれた願いを叶えたい\nみなさんに笑顔になってもらいたい\nそのために働きたいんです
+	ディーア	怒り2						…………
+	ディーア	悔しい2						アコがしていることは立派だ\n世界平和も素晴らしい夢だと思う
+	ディーア	悔しい2						それでもオレは、\nアコにも幸せに\nお正月を過ごしてほしい
+	丑王アコ	嬉しい_逆						お気持ちは嬉しいです、マスターさん
+	丑王アコ	通常_逆						でも、ごめんなさい\nこの間にも苦しんでる人がいます
+	丑王アコ	通常_逆						だから……\n私、行きますね
+	ディーア	驚き2						え……!?
+	丑王アコ	嬉しい_逆						どうか、マスターさんは\nみんなのところへ\n戻ってあげてください
+	ディーア	驚き2						いや、アコが続けるなら\nオレも……!!
+	丑王アコ	通常_逆						大丈夫です♪\nもうたくさん、\nお手伝いしてくれましたから♪
+	丑王アコ	通常_逆						それに、マスターさんを\n待っている子がたくさんいます
+	丑王アコ	通常_逆						だから、戻ってあげてください\nみんなの幸せのために♪
+	ディーア	悔しい2						それは……！
+	丑王アコ	嬉しい_逆						良いお年をマスターさん♪　\nマスターさんもどうか幸せなお正月を
+	丑王アコ	通常_逆						あなたも、私が幸せになってほしい\n一人なんですから♪
+Se	走る
+Tween	丑王アコ	MoveBy	x=-800 time=2				NoWait
+Wait						1
+CharacterOff	丑王アコ
+	ディーア	驚き2						あ、待ってくれ！\nアコ!!
+	ディーア	怒り2						………………
+	ディーア	怒り2						……みんなの幸せのため、か
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	市街地A					0
+CharacterOff						0
+	丑王アコ	通常_逆	p7			0
+	市場のおばちゃん		p3b			0
+FadeIn	black					.3
+Tween	市場のおばちゃん	PunchPosition	y=30				NoWait
+	市場のおばちゃん							いやー\n本当に助かったよ
+	丑王アコ	通常_逆						それは良かったです♪\nどうか、良いお年を！
+	市場のおばちゃん							ああ、お嬢ちゃんもね！\nおっと、早く正月の準備をしないと\n家族で初日の出を観るんだ！
+	丑王アコ	通常_逆						…………
+	丑王アコ	嬉しい_逆						それは、いいことですね♪
+FadeOut	black					.3
+CharacterOff						0
+	丑王アコ	通常_逆				0
+FadeIn	black					.3
+	丑王アコ	通常_逆						さっきの方、幸せそうでしたね
+	丑王アコ	嬉しい_逆						ね、マスターさん♪
+CharacterOff
+	                    
+Wait						1
+CharacterOff
+	丑王アコ	悲しい_逆						あ……私ったら
+	丑王アコ	悲しい_逆						もうマスターさんは\nたくさん手伝ってくれた
+	丑王アコ	悲しい_逆						今は、みんなと一緒に\n年の瀬を楽しめているはず\n……だから、これが正しいの
+	丑王アコ	本気_逆						初日の出はきっと綺麗だけど……
+	丑王アコ	通常_逆						再来年もあるし、\nその時は、今度こそ……
+	ネームプレート	ディーア	1_2					いや、約束は\n『来年、みんなで初日の出を観る』\n……だろ？
+CharacterOff
+	丑王アコ	照れ_逆						え、マスターさん……？
+Bgm	凱旋
+CharacterOff
+	ディーア	笑い2						おまたせ、アコ
+CharacterOff
+	タケミカヅチ	通常	p7
+	マハ	通常	p3
+	マハ	通常						御主人様だけじゃないよ！
+	タケミカヅチ	通常						私達も来ちゃった♪
+CharacterOff
+	丑王アコ	照れ_逆						マハちゃん、タケミちゃん……
+CharacterOff
+	リディ	笑い2						リディ達も来たよ！
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	クラレント	通常	p2b			0
+	ザッハトルテ	通常	p5			0
+	L.O.V.E.	通常	p8b			0
+	                   					0
+FadeIn	white					.8
+Wait						.5
+CharacterOff
+	イゾルデ	通常	p8u
+	モノホシザオ	通常	p5
+	ファフニル	通常	p2b
+	                   
+Wait						.8
+CharacterOff
+	キノコリオンヌ	通常	p2b
+	メアリー	通常	p5
+	ラーゼ	通常	p8
+	                   
+Wait						.8
+CharacterOff
+	アルマース	通常	p8b
+	ブライド	通常	p2
+	ミョルファ		p5
+	                   
+Wait						.8
+CharacterOff
+	サクラメント	通常	p2
+	カシウス	通常	p5
+	ペルセポネ	通常	p7
+	                   
+Wait						.8
+CharacterOff
+	カイロス	通常	p5
+	アドレナリン	通常	p8b
+	アスモデウス=サラ	通常	p2b
+	                   
+Wait						.8
+CharacterOff
+	サフィンの篝火	通常	p2b
+	月影	通常	p8b
+	ホロウ	通常	p6
+	                   
+Wait						.8
+CharacterOff
+	騎典姫ドルシネア	通常	p2b
+	お燐	通常	p8b
+	ヱレキテリ	通常	p5
+	                   
+Wait						.8
+CharacterOff
+Param	character_grayout=true
+	ディーア	笑い2	1_2_b
+	丑王アコ	照れ_逆	2_2
+	丑王アコ	照れ_逆						ど、どうしたんですか？\nみんなまで？
+	ディーア	笑い2						もちろん、アコを手伝いに来たんだよ\n厄祓い、続けるんだろ？
+	丑王アコ	悲しい_逆						え、ええ……\nでも、マスターさんはさっき……
+	ディーア	通常2						確かに、\nオレたち二人なら、\n間に合わないと思った
+	ディーア	笑い2						けど、アコが心から\n幸せな正月を願っているなら、\nそれを叶えるのがマスターの仕事だ
+	ディーア	通常2						だから、\nみんなに協力をお願いしたんだ
+	ディーア	あはは2						この人数なら\nきっと正月までに間に合うだろ？
+CharacterOff
+	タケミカヅチ	通常	p7
+	マハ	通常	p3b
+	マハ	通常						マハ達も協力しますよ！\n相談にも乗ってもらいましたから！
+	タケミカヅチ	笑い						お正月はアコちゃんもいないとね♪
+CharacterOff
+	ディーア	通常2	1_2_b
+	丑王アコ	照れ	2_2
+	丑王アコ	悲しい_逆						だ、ダメですよ……\n私のお手伝いをしたら\nみんなのお正月が<dash=2>
+	ディーア	笑い2						大丈夫、台無しになんてならない\nオレたちは幸せなお正月を\n過ごすために、ここに来たんだ
+	ディーア	笑い2						アコも揃った、幸せなお正月を
+	ディーア	通常2						それにアコの話を聞いて\n考えたんだ
+	ディーア	通常2						今のままじゃ、\nアコの求める\n世界平和にはならないって
+	丑王アコ	悲しい_逆						え……
+	ディーア	通常2						だって、アコが幸せじゃない
+	ディーア	笑い2						アコが幸せになれないなら\nオレも幸せになれない
+	ディーア	通常2						アコが言ってたとおりだよ
+Se	回想
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+Bg	白背景					0
+CharacterOff						0
+	丑王アコ	通常_逆				0
+FadeIn	white					.2
+	丑王アコ	通常_逆						誰かが幸福で、誰かが不幸\nそれでは世界平和とは言えません
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	市街地A					0
+CharacterOff						0
+	丑王アコ	照れ_逆	2_2			0
+	ディーア	通常2	1_2_b			0
+FadeIn	white					.3
+	ディーア	通常2						アコだって、\nアコが幸せにしたい世界の一人\n幸せになっていい一人なんだ
+Tween	ディーア	MoveBy	x=20				NoWait
+	ディーア	笑い2						だから、\nみんなで協力して幸福をつかもう\n本当に幸せな正月を迎えよう！
+	丑王アコ	照れ_逆						……マスターさん
+	丑王アコ	本気_逆						……船頭多くして丑平和に登る
+	丑王アコ	本気_逆						確かに……\nマスターさんの言うとおりです
+	丑王アコ	本気_逆						私がいないことで、\nみんなが幸せになれないなら……
+	丑王アコ	通常_逆						私が世界平和のために\nするべきことは一つですね……
+CharacterOff
+	丑王アコ	悲しい_逆						あの、みんな\n私……街の人を幸せにしたいんです
+	丑王アコ	悲しい_逆						厄を祓って、素敵なお正月を\nプレゼントしたい……
+	丑王アコ	本気_逆						だから、みんな\n私に力を貸してください
+CharacterOff
+	タケミカヅチ	通常	3_3
+	リディ	笑い2	2_3
+	マハ	通常	1_3
+	マハ	通常						うん！
+	リディ	笑い2						もちろんだよ！
+CharacterOff
+	ディーア	笑い2	1_2_b
+	丑王アコ	嬉しい_逆	2_2
+	丑王アコ	嬉しい_逆						えへへ……
+	丑王アコ	嬉しい_逆						……ありがとうございます\nみんな、マスターさん
+	ディーア	笑い2						じゃあ、決まりだ！\nさっそく、みんなで手分けして<dash=2>
+StopBgm
+CharacterOff
+	ディーア	通常2	p7
+	リディ	驚き2	1_3
+Tween	リディ	MoveBy	x=50				NoWait
+	リディ	驚き2						ちょっとまって、マスター！
+	ディーア	驚き2						リディ？
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	悔しい2						あのね、\nさっき変なキノコリオンがいたの
+	ディーア	驚き2						……え\n変なキノコリオン？
+CharacterOff
+	亥王シシガミ	通常	p7b
+	マハ	通常	p3
+Tween	マハ	PunchPosition	y=30				NoWait
+	マハ	通常						あ、それ！\nマハも見ましたよ！
+	亥王シシガミ	通常						私も見たよぉ！\nあっちのほうで走り回ってたの
+CharacterOff
+	丑王アコ	本気_逆	2_2
+	ディーア	驚き2	1_2_b
+	ディーア	怪しい2						…………
+	ディーア	怪しい2						年末とはいえ、\nいくらなんでもトラブルが\n多すぎると思っていたけど
+	ディーア	怒り2						……まさか
+	丑王アコ	本気_逆						……マスターさん、\n世界平和もと暗しでしょうか？
+	ディーア	怒り2						確かめに行こう！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	市街地B					0
+CharacterOff						0
+	厄キノコリオン					0
+FadeIn	black					.3
+Tween	厄キノコリオン	PunchPosition	y=30				NoWait
+Bgm	緊迫
+	厄キノコリオン							ノコーノコーノコー
+CharacterOff
+	ディーア	驚き2						あれが、\n奇妙なキノコリオンか！
+CharacterOff
+	厄キノコリオン		1_3
+	厄キノコリオン 		2_3
+	厄キノコリオン  		3_3
+	厄キノコリオン							モウ、ルビーハデナイゾ……
+	厄キノコリオン 							タオサレタウラミヲ……
+	厄キノコリオン  							ハラサデオクベキカ……
+CharacterOff
+	ディーア	驚き2	1_2_b
+	丑王アコ	本気_逆	2_2
+	丑王アコ	本気_逆						あの言葉、\nきっと、倒された魔物の怨念です！
+	丑王アコ	本気_逆						それがキノコリオンたちに\n取り憑いて、\n不幸を撒いていたんですね……
+	ディーア	怪しい2						じゃあ……
+	丑王アコ	嬉しい_逆						はい♪
+CharacterOff
+	厄キノコリオン		p3
+	丑王アコ		p7b
+Tween	丑王アコ	MoveBy	x=-60				NoWait
+	丑王アコ	通常_逆						えいっ！
+Tween	丑王アコ	PunchPosition	y=30				NoWait
+Se	突1
+FadeOut	white					.1
+FadeIn	white					.1
+Tween	厄キノコリオン	PunchPosition	y=30				NoWait
+	厄キノコリオン							ノコー!?
+	丑王アコ	通常_逆						頭のお札を浄化して\nとってあげれば……
+Se	チャージ
+FadeOut	white					.3
+CharacterOff	厄キノコリオン					0
+	キノコリオン		p3			0
+FadeIn	white					.3
+	キノコリオン							ノコノコノコー！
+Tween	キノコリオン	RotateTo	y=180 time=0.5
+Tween	キノコリオン	MoveBy	x=800 time=2				NoWait
+Se	走る
+Wait						1
+CharacterOff	キノコリオン
+	ディーア	あはは2	1_2_b
+	ディーア	あはは2						す、すっきりした顔で\n逃げていったな……
+	丑王アコ	嬉しい_逆						怨念がいなくなったからです♪
+	丑王アコ	嬉しい_逆						これを続ければ、\n街の人にも幸福が戻るでしょう♪
+	丑王アコ	通常_逆						それにしても、\n世界平和は小説より奇なり、\n三人よれば世界平和の知恵♪
+	丑王アコ	本気_逆						私は目の前に夢中になって、\nちゃんと見えていなかったんですね
+	丑王アコ	嬉しい_逆						気づけたのは、みなさんのおかげです
+	ディーア	笑い2						じゃあ、原因が分かったし、\nキノコリオンの厄を祓おう！
+StopBgm
+	丑王アコ	照れ_逆						でも、その前に、\nマスターさん……
+	ディーア	驚き2						……え？
+Bgm	神秘
+	丑王アコ	嬉しい_逆						私のために、ありがとうございます♪
+	ディーア	笑い2						お礼なら、\nちゃんとお正月を迎えた後でいいよ
+	丑王アコ	嬉しい_逆						ふふ♪\nそれでは、厄祓いが終わったあとで♪
+	丑王アコ	嬉しい_逆						みんなとマスターさんには、\nお礼をしないといけませんね♪
+	丑王アコ	通常_逆						楽しみにしていてください！
+	ディーア	笑い2						ああ、分かった
+Bgm	キノコリオン
+CharacterOff
+	丑王アコ	嬉しい_逆_拡大	エフェクト表
+	丑王アコ	嬉しい_逆_拡大						それでは、\n厄を祓って、福を集めて\n平和なお正月を目指しましょう！
+	丑王アコ	嬉しい_逆_拡大						レッツ世界平和♪\nレッツゴー初日の出♪
+FadeOut	white					.7
+Param	character_grayout=false
+Bg	白背景					0
+CharacterOff						0
+	イベントロゴ588		エフェクト表			0
+	                    
+FadeIn	white					.7
+								\n　　　　 <color=blue>丑にひかれて福あつめ♪</color>
+Param	character_grayout=true
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_588_02
+EndIf
+EndScenario
+
+# E_588_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	凱旋
+Bg	日の出
+FadeIn	white					1
+Wait						2							アコの一人称視点へ変更
+	丑王アコ	嬉しい_逆				.5		あけましておめでとうございます、\nマスターさん♪
+	丑王アコ	嬉しい_逆						とても綺麗な日の出……\n優しくて、あったかくて……♪
+	丑王アコ	通常_逆						この景色をたくさんの人が\n幸せな気持ちで観ています……
+	丑王アコ	通常_逆						同じ気持ちで平和を願っています
+	丑王アコ	嬉しい_逆						……私、これを見れて良かった\nマスターさんとこの景色を観れて\n本当によかったです♪
+	丑王アコ	嬉しい_逆						それでは、マスターさん、\n新しい年に向かって、\n一緒にお願いしましょう♪
+CharacterOff
+	丑王アコ	嬉しい_逆_拡大	エフェクト表
+	丑王アコ	嬉しい_逆_拡大						今年も平和で\n幸せな一年になりますように！
+FadeOut	white					1
+Param	character_grayout=true
+Bg	酒場1F(正月)					0
+CharacterOff						0
+	リディ	通常着物2	p3b			0
+	亥王シシガミ	通常	p8b			0
+	丑王アコ	通常_逆	p5			0
+StopBgm
+Wait						1
+FadeIn	white					.5
+Bgm	和の国の町
+	丑王アコ	通常_逆						はい、こちらをどうぞ♪\n手伝ってくれたお礼だよ♪
+	リディ	通常着物2						これって、年賀はがき？
+	丑王アコ	嬉しい_逆						うん♪\nキノコリオンのお札がね、\n浄化したら切手になったの♪
+	丑王アコ	通常_逆						災い転じて世界平和となす
+	丑王アコ	嬉しい_逆						厄が祓われた分、\nとても幸福な切手になったんだよ♪
+	丑王アコ	嬉しい_逆						この切手をつけて年賀状を送れば、\n一年の開運間違いなし♪
+	亥王シシガミ	通常						それじゃあ、\nこれをマスターに送ったら、\nマスターが一年幸せに？
+	丑王アコ	嬉しい_逆						もちろん♪
+Tween	亥王シシガミ	PunchPosition	y=30				NoWait
+	亥王シシガミ	通常						じゃあ、たっくさんちょうだい♪
+	亥王シシガミ	通常						えへへぇ、マスター♪\nたーっくさん送って、\n幸せをあげるからね♪
+	丑王アコ	通常_逆						ですって♪\nマスターさん、良かったですね♪
+	丑王アコ	通常_逆						……マスターさんも年賀状を？
+	丑王アコ	嬉しい_逆						はい、もちろん♪
+StopBgm
+CharacterOff
+	丑王アコ	嬉しい_逆_拡大	エフェクト表
+	丑王アコ	嬉しい_逆_拡大						でも、その前に……\nちょっと、こちらへ来てください♪
+	丑王アコ	嬉しい_逆_拡大						世界平和の手のなる方へー♪
+FadeOut	black					.5
+CharacterOff						0
+	丑王アコ	嬉しい_逆				0
+Wait						1
+FadeIn	black					.5
+Bgm	凱旋
+	丑王アコ	嬉しい_逆						ふふ♪\n今回、マスターさんのおかげで、\nたくさんの人を幸せにできました♪
+	丑王アコ	嬉しい_逆						それに、私にも\n素敵なお正月をくれました♪
+	丑王アコ	照れ_逆						なので……
+	丑王アコ	照れ_逆						誰かを特別扱いなんて……\n本当はダメなんですよ？
+	丑王アコ	照れ_逆						ダメですけれど、\nでも、マスターさんはたくさん\n頑張ってくれましたから……
+	丑王アコ	嬉しい_逆						ご褒美、\n欲しいものはありませんか？
+	丑王アコ	嬉しい_逆						今日だけ特別に叶えちゃいます♪
+	丑王アコ	照れ_逆						……えっ？\nひざ、まくらですか？
+	丑王アコ	嬉しい_逆						もぉ、しかたないですねぇ♪\nでしたら……\nアコの膝枕をどうぞ♪
+Param	character_grayout=false
+FadeOut	white					.5
+CharacterOff						0
+	オーラ桃		エフェクト裏			0
+	丑王アコ	嬉しい_逆_拡大	エフェクト表			0
+FadeIn	white					.5
+	丑王アコ	嬉しい_逆_拡大						ふふ、なでなで♪\nアコの思いも天に昇る……
+	丑王アコ	嬉しい_逆_拡大						世界平和は寝て待て、といいますし♪
+	丑王アコ	嬉しい_逆_拡大						今日はマスターさんも寝正月\nゆっくり、お休みしてくださいね♪
+	丑王アコ	嬉しい_逆_拡大						今年もよろしくおねがいします♪\nマスターさん♪
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_588_01
+EndIf
+EndScenario

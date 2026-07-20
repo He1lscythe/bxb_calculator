@@ -1,0 +1,122 @@
+# E_1055_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	白背景					0
+Param	character_grayout=false
+	おつかれBG1		エフェクト表			0
+FadeIn	white					.5
+	レヴァンテイン	<Off>						アリス様、見てください！\nきれいな桜です！
+	魔帝アリス	<Off>						ククク……\n人の世に徒桜、楽しませてくれるわ
+CharacterOff
+	おつかれBG2		エフェクト表
+	バールのようなもの	<Off>						すごーい！\n謎の光がついてくるよー!!
+	煌刀ソハヤ	<Off>						でしょー♪\nソハヤちゃんの謎の光は\nサイキョー♪ だからね♪
+	レヴァンテイン	<Off>						あの二人は\n何をやってるんでしょうね……
+	魔帝アリス	<Off>						ククク♪\n好きにさせておくがよかろう\n今宵はせっかくの宴だ
+StopBgm
+	レヴァンテイン	<Off>						あれ、誰か走ってきますよ？
+FadeOut	black					.5
+Bg	市街地A					0
+Se	走る
+CharacterOff						0
+	レヴァビ	驚き拡大				0
+	集中線		エフェクト表			0
+FadeIn	black					.3
+Bgm	コメディ
+	レヴァビ							た、助けてくださーい!!
+CharacterOff
+	レヴァ	通常
+	レヴァ							びーすとちゃんじゃない！\nそんなに慌ててどうしたの？
+CharacterOff
+	レヴァビ	驚き
+Tween	レヴァビ	PunchPosition	y=30				NoWait
+	レヴァビ							たいへん、たいへんなんです！
+	レヴァビ							ぱーてぃの準備をお手伝い\nしていたのですが……！
+CharacterOff
+	レヴァ	通常
+	レヴァ							あら、それは立派じゃない♪
+	レヴァ							そういえば\nもうすぐ７周年だもんね！
+CharacterOff
+	レヴァビ	悲しい2
+Tween	レヴァビ	PunchPosition	y=30				NoWait
+	レヴァビ							ひゃああああ！
+	レヴァビ							ついて来ちゃいました……！
+CharacterOff
+	レヴァ	慌て
+	レヴァ							ついてきたって……、\n一体何が……
+CharacterOff
+	キノコリオン	通常
+	キノコリオン							パ……\nパ…………
+CharacterOff
+	レヴァ	慌て
+	レヴァ							あら\nキノコリオンじゃない
+CharacterOff
+	キノコリオン	通常
+	キノコリオン							パ……\nパ…………
+	集中線		エフェクト表
+Se	パワーアップ
+	キノコリオン	大						<size=40>パーティー\nノコ～～～～～～!!</size>
+CharacterOff
+	レヴァ	慌て
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ							わああ！ な、なに!?
+CharacterOff
+	ならず者カエル
+Tween	ならず者カエル	PunchPosition	y=30				NoWait
+	ならず者カエル							パーティだゲロゲロ～!!
+CharacterOff
+	ならず者うさぎ
+Tween	ならず者うさぎ	PunchPosition	y=30				NoWait
+	ならず者うさぎ							パーティだピョン～!!
+CharacterOff
+	ならず者グリズリー
+Tween	ならず者グリズリー	PunchPosition	y=30				NoWait
+	ならず者グリズリー							パーティだクマ～!!
+CharacterOff
+	レヴァビ	悲しい2
+Shake	レヴァビ		x=5				NoWait
+	レヴァビ							きゃあ～～～!!\nおたすけ～～～!!
+Tween	レヴァビ	PunchPosition	y=30				NoWait
+	レヴァビ	怒り						このままでは\nぱーてぃがひらけないのです！
+	レヴァビ	悲しい2						せっかくのお祝いなのに～！
+CharacterOff
+	レヴァ	慌て
+	レヴァ							落ち着いて、びーすとちゃん！\nどうしてこうなっちゃったの？
+CharacterOff
+	レヴァビ	悲しい
+	レヴァビ							まものさんたちも\nぱーてぃに来たそうだったので……
+	レヴァビ							そのかわりにこの如意宝珠で\nおいのりをしてあげたのですが……
+Tween	レヴァビ	PunchPosition	y=30				NoWait
+	レヴァビ	悲しい2						そしたらなんと！\nあばれだしてしまったのです!!
+	レヴァビ	悲しい						くぅーん……\nしっぱいしてしまったのです……
+CharacterOff
+	レヴァ	通常
+	レヴァ							大丈夫よ、びーすとちゃん\n失敗は誰にでもあるからね♪
+	レヴァ							さて、どうしましょう\nアリス様……
+	レヴァ	慌て						アリス様……？\nあれ、アリス様がいない！
+	レヴァ	本気						むむむ……こうなったら\n私たちでなんとかしなきゃ！
+Bgm	バトル
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ							びーすとちゃん！\n一緒に頑張ろう！
+CharacterOff
+	レヴァビ	笑い2
+Tween	レヴァビ	PunchPosition	y=30				NoWait
+	レヴァビ							はい、よろしくお願いしますっ！
+	レヴァビ	笑い						こゃーん♪\n頑張るのですーっ!!
+FadeOut	black					.5
+CharacterOff						0
+Bg	白背景					0
+Wait						1
+	イベントロゴ如意宝珠		エフェクト表			0
+Tween	イベントロゴ如意宝珠	MoveBy	y=-50 time=0				NoWait
+FadeIn	black					1
+Wait						3
+If	isdebug==true					3
+CharacterOff
+Jump	*E_1055_01
+EndIf
+EndScenario

@@ -1,0 +1,691 @@
+# E_1092_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Se	時計	TRUE
+Bg	月夜の大地					0
+Param	character_grayout=false
+	？？？？	<Off>				0
+FadeIn	black					.5
+	？？？？							<color=blue>空間固定、亜種領域展開確認<dash=2>\n記憶中枢より因子抽出、\n結合パターン測定<dash=2></color>
+	？？？？							<color=blue>外的、内的な\n最適解の発見を目的に\nルートを固定し実行</color>
+Bg	黒背景					0
+	？？？？							<color=blue>…………演算開始</color>
+StopSe
+FadeOut	white					1
+CharacterOff						0
+Bg	カジノ					0
+	せし子	通常				0
+Param	character_grayout=true
+Wait						1
+FadeIn						1
+Bgm	わくわく
+	せし子	通常						へぇ、面白くなってきた！\nこれが魔剣たちが集いし宴！\n混沌の舞踏会！
+CharacterOff
+	イモケンピ	通常						それは大げさすぎるけど……\nみんなのおかげで\nパーティーの準備ができたよ♪
+CharacterOff
+	フラウ	通常	2_2
+	バロックフロート	笑い	1_2
+	バロックフロート	笑い						謙遜しなくていいわよ\nこんなにステキなパーティーが\nできるんだもの
+CharacterOff
+	リディ	笑い正装2						それじゃあイモケンピちゃん\n開始の挨拶をお願い！
+CharacterOff
+	イモケンピ	通常
+Tween	イモケンピ	PunchPosition	y=30				NoWait
+	イモケンピ	通常						わ、私でいいの？
+CharacterOff
+	グレイプニル	通常						準備がんばったのはイモケンピだし\n……ぐれもそれがいいと思う
+CharacterOff
+	イモケンピ	通常						じゃあ恥ずかしいけど……\nこほんっ！
+Tween	イモケンピ	PunchPosition	y=30				NoWait
+	イモケンピ	通常						みんなで\nパーティー、楽しもうね！\nかんぱーい！
+Param	character_grayout=false
+CharacterOff
+	せし子	通常	p7b
+	リディ	笑い正装2	2_3
+	グレイプニル	嬉しい	p3b
+	全員							かんぱーい！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Param	character_grayout=true
+CharacterOff						0
+	マビノギオン	通常				0
+Wait						1
+FadeIn	black					.3
+	マビノギオン	通常						うーん、\nどれにしようかしら？
+CharacterOff
+	イノケン	通常						どうしたマビノギオン？\n聡明な君にしては\n随分と悩み顔ではないか
+CharacterOff
+	マビノギオン	通常						実はプレゼント用に\nいくつか魔導書をもってきたのだけど\nどれも素敵だから決められなくて
+	マビノギオン	通常						イノケンティウスちゃん、\nアドバイスくれないかしら？
+CharacterOff
+	イノケン	通常						ふっ、いいだろう\n決断は我が得意分野だからな！
+FadeOut	black					.3
+CharacterOff						0
+	陽菜さま	通常2	p2b			0
+	秘剣マカブイン	通常2	p8b			0
+	ジュジュ	通常	2_3			0
+FadeIn	black					.3
+	ジュジュ	通常						こんなすごいパーティー会場に\nふさわしいのは
+Tween	ジュジュ	PunchPosition	y=30				NoWait
+	ジュジュ	通常						かわいいジュジュと\nマスターちゃんよね♪
+	秘剣マカブイン	通常2						ちがうよ、\nマスターくんと私のパーティ♪
+	陽菜さま	通常2						ううん、だんなさまは\nひなとパーティーを楽しむの♪
+Param	character_grayout=false
+	三人							むむむむ……！
+Param	character_grayout=true
+	ジュジュ							こうなったら<dash=2>
+	秘剣マカブイン							だれがマスターくんを\n虜にできるか<dash=2>
+Tween	陽菜さま	PunchPosition	y=30				NoWait
+	陽菜さま							勝負だよっ♪
+FadeOut	black					.3
+CharacterOff						0
+	スレイプニル	たまらん	p7b			0
+	グレイプニル	驚き	p3			0
+FadeIn	black					.3
+	スレイプニル	たまらん						グレちゃんっ！\nこれが例の新刊ですよ……！
+Shake	グレイプニル		x=3 time=3				NoWait
+	グレイプニル	恍惚						はぁ、はぁ……！\nあるじの魅力がやばすぎたかまり、\n海に流れて星になるぅ……！
+	スレイプニル	たまらん						この刊だけでも尊みの極みですけど\n過去作も見てると、\nもっとしんどいんですよね……！
+	スレイプニル	笑い						長く続いているからこその\nよさみがふかみってやつですよ！
+Tween	グレイプニル	MoveBy	x=10				NoWait
+	グレイプニル	恍惚						す、スレ、これ借りてもいい？
+	スレイプニル	笑い						布教用ですから大丈夫ですよ！\n保存用と観賞用もとってあります！
+	グレイプニル	恍惚						えへへ、ありがとう
+Tween	グレイプニル	MoveBy	x=-20				NoWait
+	グレイプニル	驚き						そういえば……\nくんくん、あるじはどこかな？
+	スレイプニル	通常						旦那さまですか？\nそういえば、見ていませんね
+	スレイプニル	驚き						はっ……！\nもしやパーティーの陽気な雰囲気に\n気になるあの子とリア充に……！
+Tween	スレイプニル	PunchPosition	y=30				NoWait
+	スレイプニル	ぐる目						そんなことは許せないDEATH！\nするなら美少年と……！
+CharacterOff
+	ヘルファイアワークス	通常	画面外_右
+Tween	ヘルファイアワークス	MoveBy	x=-500 time=1				NoWait
+Wait						1
+	ヘルファイアワークス	通常						うぷぷ、リア充のお話？\n爆発させちゃう？
+CharacterOff
+	黒グラデーション		エフェクト表
+	グレイプニル	通常						パーティーのたのしみがやばくて、\nいまもいいけど……
+	グレイプニル	恍惚						あるじと一緒に\nよさみがふかいパーティーに\nしたい……
+CharacterOff	黒グラデーション
+	グレイプニル	通常						よし……！
+	グレイプニル	驚き						ぐれ、\nちょっとあるじをさがしてくるね？
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	グレイプニル	通常				0
+FadeIn	black					.3
+	グレイプニル	通常						あるじ、あるじ、くんくん……！\nここにもいない……
+FadeOut	black					.3
+CharacterOff
+Bg	アリス庭園					0
+	グレイプニル	通常				0
+FadeIn	black					.3
+	グレイプニル	通常						こっちにもいない……
+FadeOut	black					.3
+CharacterOff						0
+Bg	カジノ					0
+	グレイプニル	驚き	画面外_右			0
+Tween	グレイプニル	MoveBy	x=-700 time=1				NoWait
+FadeIn	black					.3
+	グレイプニル	驚き						あるじ……どこぉ……？
+FadeOut	black					1
+CharacterOff						0
+	グレイプニル	通常				0
+Wait						1.5
+FadeIn	black					1
+	グレイプニル	通常						いっぱい探したけど\n見つけられなかった……\nあるじぃ……
+CharacterOff
+	イモケンピ	通常						パーティー、楽しんでくれたかな？\n芋けんぴもたくさん用意したけど\n完食で嬉しかったよ♪
+	イモケンピ	通常						それじゃあ、\n今日はお疲れ様でしたー！
+StopBgm						3
+	グレイプニル	通常						うぅ……\nパーティーも終わっちゃった……\nあるじぃ……
+StopBgm
+CharacterOff
+	グレイプニル=ロスト	冷酷						グレイプニル……\nあるじのことを探していたの？
+Bgm	絶望
+CharacterOff
+	グレイプニル	驚き						ロストの、ぐれ？
+CharacterOff
+	グレイプニル=ロスト	冷酷						うん、そうだよ\nこっちのグレイプニル
+	グレイプニル=ロスト	冷酷						途中から\nパーティーに出てなかったのは\nあるじを探していたから？
+CharacterOff
+	グレイプニル	通常						う、うん……\nあるじいないと、尊くないし……
+CharacterOff
+	グレイプニル=ロスト	冷酷						そう……\nやっぱりグレと同じだね
+	グレイプニル=ロスト	冷酷						グレもあるじだけが大切だから\nわかるよ
+CharacterOff
+	グレイプニル	通常						ロストのぐれは、知ってるの？\nあるじがどこにいるか
+CharacterOff
+	グレイプニル=ロスト	冷酷						…………\n気づいていないの？
+	グレイプニル=ロスト	冷酷						あるじはいないよ
+CharacterOff
+	グレイプニル	驚き						いない……？ あるじが？
+CharacterOff
+	グレイプニル=ロスト	冷酷						早く目を醒まして\n間に合わなくなる前に
+CharacterOff	グレイプニル=ロスト					.5
+Wait						.5
+CharacterOff
+	グレイプニル	驚き
+Tween	グレイプニル	PunchPosition	y=30				NoWait
+	グレイプニル	驚き						まっ、まって……！
+	グレイプニル	驚き						消えちゃった……\nあるじがいない？ どういうこと？
+	グレイプニル	驚き						あるじ……\nどこかにいっちゃったなら\nぐれがさがさないと……
+	グレイプニル	通常						あるじはぐれのこと、\n探してくれたんだから……
+	グレイプニル	通常						こんどはぐれが……
+StopBgm						0
+Se	アラート	TRUE
+CharacterOff						0
+Bg	月夜の大地					0
+	？？？？	<Off>						<color=blue>現時点の観測限界に到達\n…………演算再開</color>
+Bg	黒背景					0
+Se	マイクノイズ	TRUE
+Wait						2
+FadeOut	black					.3
+StopSe
+StopBgm
+CharacterOff						0
+Bg	カジノ					0
+	リディ	笑い正装2				0
+FadeIn	black					.3
+Bgm	緊迫
+	リディ	笑い正装2						それじゃあイモケンピちゃん\n開始の挨拶をお願い！
+CharacterOff
+	グレイプニル	驚き						……っ!?
+CharacterOff
+	イモケンピ	通常						じゃあ恥ずかしいけど……\nこほんっ！
+Tween	イモケンピ	PunchPosition	y=30				NoWait
+	イモケンピ	通常						みんなで\nパーティー、楽しもうね！\nかんぱーい！
+CharacterOff
+	グレイプニル	驚き						………………どうして？\nパーティー、さっき終わったのに\nまた始まってる
+CharacterOff
+	イモケンピ	通常	2_2
+	グレイプニル	通常	画面外_左
+Tween	グレイプニル	MoveBy	x=500 time=1				NoWait
+	グレイプニル	通常						い、イモケンピ？\nなんでまたパーティーやってるの？
+	イモケンピ	通常						え、なんのこと？\nパーティーは今から始まるんだよ？
+	イモケンピ	通常						幹事として、先輩として\nがんばらないとっ！
+Se	走る
+Tween	イモケンピ	MoveBy	x=700 time=1				NoWait
+	グレイプニル	驚き						あっ、まって……！
+Tween	グレイプニル	MoveBy	x=50
+	グレイプニル	通常						うぅ……
+Shake	グレイプニル		x=5 time=1				NoWait
+	グレイプニル	通常						やばい、やばい……！\nこれぜったいにやばみがやばい……\nへんなことが起こってる……！
+Se	走る
+Tween	グレイプニル	MoveBy	x=-700 time=1				NoWait
+	グレイプニル	驚き						あるじ、さがさないと……!!
+FadeOut	black					.3
+CharacterOff						0
+	グレイプニル	驚き	画面外_右			0
+	イモケンピ	通常				0
+FadeIn	black					.3
+	イモケンピ	通常						イモケンピの\n芋けんぴタワーはここだよ♪
+Tween	グレイプニル	MoveBy	x=-1400 time=3				NoWait
+	グレイプニル	驚き						あるじ……あるじ……
+CharacterOff						0
+Bg	黒背景					0
+	？？？？	<Off>						<color=blue>…………演算再開</color>
+CharacterOff						0
+Bg	カジノ					0
+	グレイプニル	驚き	画面外_左			0
+	フラウ	通常	2_2			0
+	バロックフロート	笑い	1_2			0
+	バロックフロート	笑い						みんな！\n一緒にブレイズドライモボール\nやろう♪
+Tween	グレイプニル	MoveBy	x=500 time=1				NoWait
+	グレイプニル	驚き						あるじ……
+CharacterOff						0
+Bg	黒背景					0
+								<color=blue>…………演算再開</color>
+CharacterOff						0
+Bg	カジノ					0
+	グレイプニル	驚き	画面外_右			0
+	せし子	通常	2_2			0
+	リディ	笑い正装2	1_2			0
+	せし子	通常						くくく、\n漆黒の闇を映しし、天幕の宴よ！\n我が威厳を魔界に届けよ！
+	リディ	笑い正装2						わぁ、せし子ちゃんのビデオ\nかわいい♪\nなんか目が光ってる！
+	せし子	怒り						かわいくないし、\n†邪なる堕天せし者†！\nせし子って言うなぁー!!
+Tween	グレイプニル	MoveBy	x=-400 time=1				NoWait
+	グレイプニル	驚き						だめ、あるじいない……\nどこにもいない……
+Tween	グレイプニル	MoveBy	x=400 time=1				NoWait
+Wait						.5
+StopBgm
+Se	マイクノイズ	TRUE
+CharacterOff						0
+Bg	黒背景					0
+	？？？？	<Off>						<color=blue>…………演算再開</color>
+Bg	カジノ					0
+	？？？？	<Off>						<color=blue>…………演算再開</color>
+Bg	和室（昼）					0
+	？？？？	<Off>						<color=blue>…………演算再開</color>
+Bg	月夜の大地					0
+	？？？？	<Off>						<color=blue>…………演算再開</color>
+Bg	魔術空間					0
+	？？？？	<Off>						<color=blue>試行回数、\n規定の3000に無事到達<dash=4>\n滅亡に至る因子特定</color>
+StopSe
+StopBgm
+FadeOut	white					1
+CharacterOff						0
+Bg	カジノ					0
+	グレイプニル	通常				0
+Wait						0
+FadeIn	white					1
+Bgm	絶望
+	グレイプニル	通常						はぁ、はぁ……\nきゅーん、あるじぃ……
+	グレイプニル	驚き						ずっと、パーティーがつづいてる\nでもあるじだけいない……
+	グレイプニル	通常						あるじの放置プレイならいいけど、\nこんなのイヤ……
+	グレイプニル	驚き						くんくん、あるじの匂いがしない……\n尊みがきえて無になってむり……\nぐれの匂いしか<dash=6>
+Tween	グレイプニル	PunchPosition	y=30				NoWait
+	グレイプニル	通常						<dash=2>なんで、\nぐれの匂いしかしないの……？\nみんなは……？
+	グレイプニル	驚き						みんなここにいるはずなのに\nスレも、イモケンピも、\nロストのぐれの匂いもしない……
+	グレイプニル	驚き						ちがう、ぐれしかいないんだ\nこれ、もしかして<dash=2>
+CharacterOff
+	賢狼	シルエット	1_2					ああ、気づいてしまったのか\nグレイプニル
+CharacterOff
+	グレイプニル	驚き						っ……！\nおまえ、は……
+CharacterOff
+	賢狼	通常	1_2			1		久しぶりだね\n蒼月鉄鎖のグレイプニル
+CharacterOff
+	グレイプニル	驚き						賢、狼……？
+StopBgm
+CharacterOff
+	賢狼	通常	1_2					ある意味ではその通り\n……ちょっと、話をしようか
+FadeOut	black					1
+CharacterOff						0
+Bg	月夜の大地					0
+	賢狼	通常	1_2			0
+Wait						1
+FadeIn	black					1
+Bgm	図書館
+	賢狼	通常						さすがはグレイプニル\nその状態でも\n本能的に異変を察知するとはね
+	賢狼	通常						キミが気づいた通り、\nこの世界はキミの<ruby=ルークスステラ>魔核深層</ruby>\n心の中に創られた亜空間だ
+CharacterOff
+	グレイプニル	通常						だから、他のみんなはいない\nみんなはぐれが……
+	グレイプニル	通常						ちがう……\nおまえがつくったまぼろし……
+CharacterOff
+	賢狼	通常	1_2					今のボクに\n外界に干渉できる力はないからね\nキミの記憶を使わせてもらったんだ
+	賢狼	通常						ただキミの意識が目覚めたのは\n予想外だった……\nこの通り、謝罪をさせてくれ
+CharacterOff
+	グレイプニル	通常						あるじにめいわくかけないなら\nいいけど……
+	グレイプニル	通常						おまえ、だれ？\nぐれは賢狼のこと知ってるけど、\nお前のことは知らない……
+CharacterOff
+	賢狼	通常	1_2					ああ、そうだろう\nこうして今のキミと話すのは\n初めてだ
+	賢狼	通常						ボクは賢狼……魔天狼の別側面\nキミが対峙した破壊の力に対して\n守護者としての自我の一つ
+	賢狼	通常						彼は魔界を壊そうとしたけど、\nボクの優先事項は魔界の存続なんだ
+	賢狼	通常						憎しみに染まった彼と比べて、\nいくばくか理性的だろ？
+CharacterOff
+	グレイプニル	通常						よく、わからないけど……\nぐれの味方なの？
+CharacterOff
+	賢狼	通常	1_2					どうだろうね\nキミの主にソウルを託しもしたが……\nそれも一つの手段だよ
+Se	マイクノイズ
+	賢狼	暴走	1_2					とにかく、今のボクは<dash=2>\nマカイノ<dash=2>チツジョ<dash=4>\nホジヲ<dash=6>
+StopSe
+CharacterOff
+	グレイプニル	驚き
+Tween	グレイプニル	PunchPosition	y=10				NoWait
+	グレイプニル	驚き						っ……!?\nだい、じょうぶ……？
+CharacterOff
+	賢狼	通常	1_2					……失礼\n演算に処理能力を使いすぎててね
+	賢狼	通常	1_2					ボクら魔天を冠する者は\n情報生命体となり不死を得ている
+	賢狼	通常						その膨大な処理能力を使って\nこの空間でとあるシミュレートを\nしているんだ
+CharacterOff
+	グレイプニル	通常						しみゅ、れーと？
+CharacterOff
+	賢狼	通常	1_2					そう、どうすれば\n魔界が続いていくかという試行だ
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル10921		エフェクト表			0
+FadeIn	white					.3
+	賢狼	<Off>	1_2					さっき言ったように、\nボクは魔界にこれからも続いてほしい
+	賢狼	<Off>	1_2					だけど過去二度も賢狼の封印は解け、\n一度はキミと主によって\n二度目はロストのキミの力で倒された
+FadeOut	white					.3
+CharacterOff						0
+	イベントスチル460BG		エフェクト表			0
+FadeIn	white					.3
+	賢狼	<Off>						しかし、そのどれも瀬戸際での戦いで\n安定的な魔界の存続とは程遠い
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	賢狼	通常	1_2			0
+FadeIn	white					.3
+	賢狼	通常						だからこそ\n今後に起こりうる魔界の滅亡を\n割り出していたんだ
+	賢狼	通常						魔界を滅ぼす原因がわかれば\n先んじて対処もできるだろう？
+CharacterOff
+	グレイプニル	通常						よく、わかんないけど……\nこのパーティーは？\nぐれだけ何回もぐるぐるしてたけど
+CharacterOff
+	賢狼	通常	1_2					キミが最も期待している出来事\n滅亡に対する希望の象徴
+	賢狼	通常						魔界の永続を計算するためには\nそのサンプリングが必要でね
+	賢狼	通常						キミには苦労をかけたが\nおかげでいい結果を得られたよ
+CharacterOff
+	グレイプニル	通常						…………そう\nじゃあ、もうぐれを帰らせて……\nあるじにあわせて……
+	グレイプニル	恍惚						あるじに会えなさすぎて\nもう、ぐれはまじむりです\nあるじくんくんしないとむりむりむり
+StopBgm
+CharacterOff
+	賢狼	通常	1_2					…………\nああ、そうしてあげたかったけど\nダメなんだ
+Se	光1
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=false
+	グレロストチェーン3	拘束用	エフェクト表			0
+	グレイプニル	驚き				0
+FadeIn	white					.2
+Bgm	緊迫
+	グレイプニル	驚き						っ…………!?\nな、なんで……？
+CharacterOff
+	賢狼	暴走	1_2					ああ、本当に残念だよ\nグレイプニル……
+	賢狼	暴走						ナンドもナンドも繰り返して\nけれども結果は同じ
+	賢狼	暴走						魔界は滅びる
+	賢狼	暴走						キミの主\n<param=name>\nの存在によって
+CharacterOff
+	グレロストチェーン3	拘束用	エフェクト表
+	グレイプニル	驚き
+	グレイプニル	驚き						あるじが\n魔界をほろぼす……？
+	グレイプニル	驚き						いみわかんない、\nそんなのありえない\nだってあるじは<dash=2>
+CharacterOff
+	賢狼	暴走	1_2					彼がいないと仮定した\nこの仮説世界のみが存続したのが\n証明だよ
+	賢狼	暴走						主本人か、\nあるいは彼にまつわる行動の結果かは\nボクにもわからない
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale				0
+Bg	戦場跡					0
+	          					0
+FadeIn						.3
+	賢狼	<Off>	1_2					だが彼は\nこれから訪れる魔界の危機の\n引き金を引くだろう
+FadeOut						.3
+ImageEffectOff	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	月夜の大地					0
+	賢狼	暴走	1_2			0
+FadeIn						.3
+	賢狼	暴走						だから……\nボクは彼を排除しなければいけない
+CharacterOff
+	グレロストチェーン3	拘束用	エフェクト表
+	グレイプニル	通常
+Se	コインロック
+Shake	グレイプニル		x=2				NoWait
+	グレイプニル	通常						っ……！\nんっ、ぐるる……！ 離して……！\nあるじ以外にしばられるのイヤ……！
+CharacterOff
+	賢狼	暴走	1_2					言った通り、今のボクには\n外界に影響を与えるほどの力はない
+	賢狼	暴走						それ故に、\nキミの体を使って外界に干渉し\n主を排除する
+	賢狼	暴走						分かってくれ
+	賢狼	暴走						<color=red>コレもマカイのタメなんだ</color>
+CharacterOff
+	グレロストチェーン3	拘束用	エフェクト表
+	グレイプニル	通常						おまえ、おかしくなってる
+CharacterOff
+	賢狼	暴走	1_2					愛する世界が滅びに向かってると\nわかればこうもなるさ
+	賢狼	暴走						彼一人の犠牲で\n世界のすべてが救われるなら\nその犠牲は払われるべきだろう？
+CharacterOff
+	グレロストチェーン3	拘束用	エフェクト表
+	グレイプニル	驚き
+	グレイプニル	驚き						させ、ない……！\nぐれは、あるじを、まもる……！
+CharacterOff
+	賢狼	暴走	1_2					無駄な抵抗だ
+	賢狼	暴走						キミの魔核の中とはいえ\n全域に渡ってボクの支配が進んでいる\nマスターもいないのにどう戦う？
+CharacterOff
+	グレロストチェーン3	拘束用	エフェクト表
+	グレイプニル	驚き
+	グレイプニル	驚き						…………はぁ、はぁ\nだめ、このくさり、ほどけない……
+CharacterOff
+	賢狼	暴走	1_2					わかっただろう？\nではその体を<dash=2>
+StopBgm
+CharacterOff
+	グレロストチェーン3	拘束用	エフェクト表
+	グレイプニル	通常
+	グレイプニル	通常						………………
+Se	チャージ
+	オーラ赤		エフェクト表2			.5
+	グレイプニル	通常						うん、わかった
+Bgm	魔獣バトル
+Se	アラート
+FadeOut	red					.2
+FadeIn	red					.2
+Wait						.5
+FadeOut	red					.2
+FadeIn	red					.2
+Wait						.5
+FadeOut	red					.2
+FadeIn	red					.2
+Wait						.5
+FadeOut	red					.2
+FadeIn	red					.2
+CharacterOff
+	賢狼	暴走	1_2					っ……！\nこれは、自分の魔力を暴走させて!?
+CharacterOff
+	オーラ赤		エフェクト表2
+	グレロストチェーン3	拘束用	エフェクト表
+	グレイプニル	通常
+	グレイプニル	通常						あるじがいるから魔界は尊い\nあるじがいる魔界を守ることが\nぐれの役目……！
+	グレイプニル	通常						あるじの幸せのためなら、\nぐれが救われなくたって\nかまわない……！
+CharacterOff
+	賢狼	暴走	1_2					自らを魔核崩壊させるだと……!?
+	賢狼	暴走						本当にロジカルじゃないな……！\nためらいもなしに\n自滅を選ぶなんて……！
+CharacterOff
+	オーラ赤		エフェクト表2
+	グレロストチェーン3	拘束用	エフェクト表
+	グレイプニル	通常
+	グレイプニル	通常						あるじ、あるじ……\nまっててね、あるじはぜったいに\n傷つけさせたりしないから
+	グレイプニル	通常						あるじがいるからぐれはたのしかった\nあるじがいるから魔界も尊かった
+StopBgm
+	グレイプニル	通常						あるじのためなら<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	笑い2				0
+Bgm	ロルリアンレットB
+FadeIn	white					.3
+	ディーア	笑い2						グレイプニル
+FadeOut	white					.3
+CharacterOff						0
+Bg	カジノ					0
+	イモケンピ	通常	p8b			0
+	スレイプニル	通常	p2b			0
+	リディ	笑い正装2	p5			0
+	          		1_2
+FadeIn	white					.3
+	全員							グレちゃん！
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	月夜の大地					0
+	オーラ赤		エフェクト表2			0
+	グレロストチェーン3	拘束用	エフェクト表			0
+	グレイプニル	絶望				0
+FadeIn	white					.3
+	グレイプニル	絶望						みんな、あるじ……
+	グレイプニル	絶望						あるじ……きっと、かなしむ……\nみんなとも、もう会えない……
+CharacterOff	オーラ赤					1
+	グレイプニル	通常						でも、ぐれは……
+StopBgm
+CharacterOff
+	賢狼	暴走	1_2					ハハハ！ イマダ……!!
+CharacterOff
+	グレロストチェーン3	拘束用	エフェクト表
+	グレイプニル	驚き						っ……！
+Se	ガードブレイク
+FadeOut	white					.2
+FadeIn	white					.2
+CharacterOff	グレロストチェーン3					1
+	グレイプニル							あれ……？
+CharacterOff
+	グレイプニル=ロスト	ニヤリ						はぁ……\nやっぱりおんなじグレなんだね
+CharacterOff
+Bgm	結婚
+	グレイプニル	驚き						ロストのグレ……？
+CharacterOff
+	賢狼	暴走	1_2					グレイプニル=ロストだと!?\nなぜグレイプニルの魔核深層に!?
+CharacterOff
+	グレイプニル=ロスト	通常						グレは本物のグレじゃない\nこっちのグレの中にいた力の欠片
+	グレイプニル=ロスト	通常						こっちのグレとあるじは\n覚えていないけど
+	グレイプニル=ロスト	通常						あの戦いで\nあるじとこっちのグレに\nグレの力をあげた
+	グレイプニル=ロスト	通常						だからグレは、\nグレはずっとここにいたの
+CharacterOff
+	賢狼	暴走	1_2					そうか、\n分岐した同一存在だからこそ……！
+CharacterOff
+	グレイプニル=ロスト	通常						でも、グレにできるのはここまで\nこっちのグレの手で\nアイツを倒さないと止められない
+CharacterOff
+	グレイプニル	通常						ぐれが、たおす……？
+CharacterOff
+	グレイプニル=ロスト	通常						そう、\nそれでちゃんとあるじのところに\nこっちのグレは帰るの
+	グレイプニル=ロスト	悲しい						前にグレも同じことをした\nこっちのグレとあるじが無事ならって
+	グレイプニル=ロスト	悲しい						でも……\nグレはあるじを哀しませちゃった
+	グレイプニル=ロスト	悲しい						あるじは優しいから、\nみんなが一緒なのが一番なのに\n哀しませちゃった
+CharacterOff
+	グレイプニル	通常						うん……\nあるじは、あるじだから
+	グレイプニル	通常						あるじもぐれも、ロストのぐれも\nみんながいないと、だめ……
+CharacterOff
+	グレイプニル=ロスト	通常						あの時、あるじは言ってた\nグレたちを救う力が自分にないから\n選べなかったって
+	グレイプニル=ロスト	通常						力はグレがあげる\nだからこっちのグレも強くなって？\nあるじがもう哀しまないように
+CharacterOff
+	グレイプニル	通常						あるじ……
+	グレイプニル	通常						ぐれはあるじが大事、\nあるじのいる魔界が大事……
+	グレイプニル	通常						だから、\nぐれがあるじを守るために……！
+StopBgm
+FadeOut	white					.3
+CharacterOff						0
+Bg	白背景					0
+	          					0
+FadeIn	white					.3
+	ディーア	<Off>						ああ、\nオレはいつでもみんなの近くにいる
+	ディーア	<Off>						一緒に戦うぞ、グレイプニル
+FadeOut	white					.3
+CharacterOff						0
+Bg	月夜の大地					0
+	グレイプニル	驚き				0
+	オーラ青		エフェクト表			0
+FadeIn	white					.3
+Bgm	決戦
+	グレイプニル	驚き						きこえた、きこえた……！\nあるじのこえ、やっときこえた！
+	グレイプニル	恍惚						はぁ、はぁ……あるじぃ\n尊みがふかすぎて宇宙になる\nあるじがいたら強くなれる
+Se	チャージ
+	オーラ青		エフェクト表			1
+	グレイプニル	通常						ぐれは……あるじのところに帰る！
+CharacterOff
+	賢狼	驚き	1_2					<ruby=ボク>賢狼</ruby>の力と<ruby=グレイプニル>蒼月鉄鎖</ruby>の\n並行励起……！
+	賢狼	驚き						それをグレイプニルが……？\nそんなのボクの情報にはない……！
+	賢狼	驚き						なぜだ!?\nなぜあの男のためにここまでする!?
+	賢狼	驚き						魔界を維持するには\n必要な犠牲だとわからないのか……！
+CharacterOff
+	グレイプニル	通常
+	オーラ青		エフェクト表
+	グレイプニル	通常						あるじがいないのに、\n魔界だけあっても意味ない……
+	グレイプニル	通常						ぐれは魔界が大事\nあるじとぐれがいっしょの魔界が大事\nだから<dash=2>
+Se	チャージ
+Bgm	タイトル
+FadeOut	white					2
+CharacterOff						0
+Bg	白背景					0
+	グレイプニル	拡大魔王尻	エフェクト表			2
+	          
+FadeIn						1
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	グレイプニル	拡大魔王胸	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	グレイプニル	拡大魔王顔	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+Bg	月夜の大地					0
+CharacterOff						0
+	グレイプニル	魔王				0
+	          
+FadeIn	white					.3
+	グレイプニル	魔王						あなたはもう休みなさい、賢狼
+CharacterOff
+	賢狼	驚き	1_2					グレイプニル……！\nおまえ、意識が……！
+CharacterOff
+	グレイプニル	魔王						あなたの滅亡の方程式には\nまだ知らない因子がある……
+	グレイプニル	魔王						今のグレ、そしてあるじの力……\nあなたを倒して証明してみせる……
+CharacterOff
+	グレイプニル	拡大魔王顔	エフェクト表					ぐれたちは\nあるじと一緒なら魔界を救えるって
+If	isdebug==true
+CharacterOff
+Jump	*E_1092_02
+EndIf
+EndScenario
+
+# E_1092_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	凱旋
+Bg	月夜の大地					0
+	賢狼	驚き				0
+FadeIn	white					.5
+	賢狼	驚き						魔王装……\nロストの力を借りて成し遂げた\n魔王の魔剣としてのキミか
+	賢狼	通常						ああ、たしかにキミたちの成長は\n組み込むべき因子だったようだ
+	賢狼	通常						長く生きすぎた弊害かな？\n変化にはどうにも臆病でね……
+CharacterOff
+	グレイプニル	魔王						賢狼……
+CharacterOff
+	賢狼	通常						今回はキミの言うとおり\nボクはしばらく眠りにつくとしよう
+	賢狼	通常						でも覚えておきなよ、\n蒼月鉄鎖のグレイプニル\nキミの主は大いなる運命の中にいる
+	賢狼	通常						彼が滅びをもたらさないように\n支えてあげるんだ
+CharacterOff
+	グレイプニル	魔王						……うん、\nぐれがあるじをまもるよ
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	カジノ					0
+	グレイプニル	嬉しい拡大	エフェクト表			0
+Wait						2
+FadeIn	white					1
+Bgm	わくわく
+	グレイプニル	嬉しい拡大						はぁ、はぁ……！\nあるじ、あるじ……！
+CharacterOff
+	ディーア	汗2	2_2
+	グレイプニル	嬉しい	1_2_b
+	グレイプニル	嬉しい						なまのあるじが尊い、\nあるじのいない世界まじむりすぎ
+Tween	グレイプニル	PunchPosition	y=30				NoWait
+	グレイプニル	嬉しい						あるじ、あるじ、くんくん……！
+	ディーア	汗2						ぐ、グレイプニル……！\nそんなにくっついたら動けないって！
+	ディーア	汗2						ほら、\nもうパーティーもはじまるんだぞ？
+	グレイプニル	驚き						はっ……！\nそうだった、3000回やったけど\nほんとにはじめてのパーティー
+CharacterOff
+	リディ	笑い正装2						美味しいごちそうも\nたっくさん用意してあるからね！
+CharacterOff
+	イモケンピ	通常						みんなで一緒にいられる毎日を\nお祝いしよっ！
+CharacterOff
+	スレイプニル	通常						グレちゃんが喜びそうな本も\nたくさんもってきましたよ……！
+CharacterOff
+	ディーア	汗2	2_2
+	グレイプニル	嬉しい	1_2_b
+	グレイプニル	嬉しい						うん、うん、\n今度こそ一回きりの尊みなパーティー\nはぁ、尊みがふかい……♪
+	ディーア	怪しい2						一回きり？
+	グレイプニル	通常						あるじはしらなくてよいのです\nでもグレにはよさみがふかみ……
+	ディーア	通常2						そっか、\n魔核に異変が起きた時は\nどうしたのかって思ったけど
+	ディーア	笑い2						元気になってよかったよ
+	グレイプニル	嬉しい						えへへ♪\nぜんぶ、あるじと<dash=2>
+CharacterOff
+	グレイプニル=ロスト	通常
+	グレイプニル=ロスト	通常						…………
+CharacterOff
+	グレイプニル	通常						ロストのぐれのおかげ♪
+	グレイプニル	通常						あるじ、\nパーティー、たのしもうね\nあるじはぐれがずっと守るからね
+	グレイプニル	嬉しい						あるじがいるから\n魔界もパーティーも尊い
+CharacterOff
+	グレイプニル	嬉しい拡大	エフェクト表					あぁ……\nやばみがふかみでまじまつりぃ♪
+FadeOut	white					3
+If	isdebug==true
+CharacterOff
+Jump	*E_1092_01
+EndIf
+EndScenario

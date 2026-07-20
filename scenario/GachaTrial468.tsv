@@ -1,0 +1,459 @@
+# G_468_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	神秘
+Bg	酒場の地下
+Param	character_grayout=false
+	トライアルスチル46803		エフェクト表
+FadeIn	white					.5
+	トライアルスチル46803		エフェクト表
+	渡橋あみら	<Off>						おにーさんは、アミのこと\nえっちな目で見ないよね♥
+	渡橋あみら	<Off>						ちゃーんと我慢できる、\nオトナのヒトだよねぇ♥
+	ディーア	<Off>						お、オレは……
+	ディーア	<Off>						オレは……！
+FadeOut	black					.7
+StopBgm						1
+	黒背景		エフェクト表			0
+CharacterOff
+FadeIn	black					.7
+	　　　　　　　　　　							\n  　　  <color=blue><dash=2>遡ること5分前<dash=2></color>
+Bgm	平和
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	1_3
+	リディ	笑い2	3_3_a
+	渡橋あみら	笑い3	画面外_右_b
+	ディーア	驚き2						ウェディング写真のモデル？
+	リディ	笑い2						うん！\nカメラマンをしてるお客さんがね、\nここの酒場の雰囲気が好きらしくて
+	リディ	驚き2						衣装は持ってくるから\nここで写真撮らせてほしいんだって！
+	ディーア	汗2						それで、オレたちがモデルに？
+	リディ	驚き2						うん、マスターが新郎役で、\n魔剣のみんなが新婦役ね！
+	ディーア	笑い2						そうか、わかった\nみんなも喜びそうだな
+Se	走る
+Tween	渡橋あみら	MoveTo	x=0				NoWait
+	渡橋あみら	笑い3						あ、リディちゃんとおにーさん♪\nどうかした？
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	驚き2						あ、アミちゃん♪
+	リディ	笑い2						いまね、魔剣のみんなに\nウェディングドレスの\nモデルをお願いしようと思ってたの
+Tween	渡橋あみら	PunchPosition	y=30				NoWait
+	渡橋あみら	笑い3						すごぉい、アミも着たーい♪
+	リディ	笑い2						すごいよねぇ！
+	リディ	驚き2						でも、大人用のドレスしかないから\nリディ達は着れないみたいなの
+	ディーア	笑い2						二人はもう少し待ってからだな
+	渡橋あみら	笑い3						そっかぁ\nじゃあ、子ども用の服があるときは、\nアミにも着させてね？
+	リディ	笑い2						うん♪ そのときは\nリディといっしょに写真撮ろ♪
+Tween	渡橋あみら	PunchPosition	y=30				NoWait
+	渡橋あみら	笑い3						うんっ！ ぜったい撮ろうねっ♪
+	渡橋あみら	笑い3						あ、リディちゃん、\nそろそろアルバイトの時間じゃない？
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	驚き2						そうだった！\nアミちゃん、教えてくれてありがと！
+Tween	渡橋あみら	PunchPosition	y=50				NoWait
+	渡橋あみら	笑い3						終わったら遊ぼーね♪
+	リディ	笑い2						うん、じゃああとでね♪
+Se	走る
+Tween	リディ	MoveTo	x=-600 time=1.5				NoWait
+Wait						1.5
+StopBgm
+	渡橋あみら	笑い						うふふ……
+	渡橋あみら	通常						おにーさん♥
+	渡橋あみら	笑い						ふたりっきりになっちゃったね……？
+	ディーア	驚き2						ん？\nああ、そうだな
+	ディーア	笑い2						アミちゃんは\nリディとよく遊ぶのか？
+	渡橋あみら	通常						うん、リディちゃんとは\n仲良しのお友達だよ？
+	渡橋あみら	笑い						でもぉ……
+Bgm	神秘
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+	トライアルスチル46803		エフェクト表			0
+FadeIn	white					.3
+	渡橋あみら	<Off>						おにーさんとは、もぉっと\n"なかよし"になりたいなぁ♥
+CharacterOff
+Param	character_grayout=true
+	ディーア	汗2	1_2_b
+	渡橋あみら	笑い	p6b
+	ディーア	汗2						あ、あれ、アミちゃん？\nちょっと近い……
+Tween	渡橋あみら	MoveBy	x=-10				NoWait
+	渡橋あみら	笑い						ねぇ、おにーさん？
+Tween	渡橋あみら	MoveBy	x=-10				NoWait
+	渡橋あみら	通常						<size=20>さっき、アミのおっぱい見てたでしょ？</size>
+	ディーア	絶望2						なっ……
+	ディーア	怪しい2						そ、そんなことはないぞ？\nオレは、良識あるオトナだし……
+	渡橋あみら	笑い						ふぅ～ん♥
+Tween	渡橋あみら	MoveBy	x=-15				NoWait
+	渡橋あみら	通常						じゃあ、こうやって\nそばに行っても……
+FadeOut	white					.3
+CharacterOff
+Param	character_grayout=false
+	トライアルスチル46803		エフェクト表
+FadeIn	white					.3
+	渡橋あみら	<Off>						おにーさんは、アミのこと\nえっちな目で見ないよね♥
+	渡橋あみら	<Off>						ちゃーんと我慢できる、\nオトナのヒトだよねぇ♥
+	ディーア	<Off>						お、オレは……
+	ディーア	<Off>						オレは……！
+StopBgm
+	リディ	<Off>						マスター？
+CharacterOff
+Param	character_grayout=false
+	リディ	通常2	画面外_左
+	渡橋あみら	笑い3	2_3_b			0
+	ディーア	絶望2	1_2			0
+StopBgm
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	ディーア	MoveBy	x=270				NoWait
+Tween	リディ	MoveTo	x=-160				NoWait
+Se	走る
+Param	character_grayout=true
+	ディーア							どぅわっ!!
+Bgm	平和
+	リディ	驚き2						どうしたのマスター？\nヘンな声出して……
+	ディーア	絶望2						い、いや、なんでもない\n本当に何でもないんだ
+	リディ	怒り2						ふぅん……
+	リディ	驚き2						あ、そうそう\nリディの髪留めが無いんだけど、\nこのへんで見なかった？
+	ディーア	絶望2						お、オレは、見てない……\n何も見てないぞ……
+Tween	渡橋あみら	PunchPosition	y=50				NoWait
+	渡橋あみら	笑い3						……リディちゃんあれじゃない？\nあの机の上に置いてあるの！
+	リディ	笑い2						あ、ほんとだ！\nアミちゃんありがとう♪
+	渡橋あみら	笑い3						どういたしまして♪
+	リディ	驚き2						じゃあ、リディはバイトに戻るね～
+Se	走る
+Tween	リディ	MoveTo	x=-800 time=2.5				NoWait
+	ディーア	本気2						お、オレも部屋に戻る！
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=1.5
+	リディ	驚き2						マスターも？
+	ディーア	汗2						あぁ、急に予定を思い出してさ……
+	リディ	驚き2						ふぅん、ヘンなの
+StopSe
+StopBgm
+	黒グラデーション		エフェクト裏			.5
+	渡橋あみら	笑い						ふふふ……
+Param	character_grayout=false
+	トライアルスチル46807		エフェクト表
+	渡橋あみら	<Off>						もう少しかなぁ♥
+FadeOut	black					.7
+Wait						1
+Bgm	都市
+CharacterOff						0
+Bg	酒場1F					0
+	　　　　　　　　　　					0
+FadeIn	black					.7
+	　　　　　　　　　　							\n 　　　　　　<color=blue><dash=2>翌朝<dash=2></color>
+CharacterOff
+	ディーア	通常2	1_2			0
+	リディ	驚き2	2_2			0
+Param	character_grayout=true
+	アシスタントさん	<Off>						お一人目、\nメイクアップ完了で～す
+	リディ	驚き2						わくわく……
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	ダインスレイフ	花嫁				0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.5
+	ダインスレイフ	花嫁						ごきげんよう、マスター様\nいかがですか？ 私の花嫁姿は……♪
+	ダインスレイフ	花嫁						理性なんて全て捨てて、\n私にお任せしたくなりましたか……♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	嬉しい2	1_2
+	リディ	笑い2	2_2
+	ディーア	嬉しい2						ダインスレイフ……\nいつも綺麗だけど、\n今日は一段と綺麗だな……
+	リディ	笑い2						うん……リディもみとれちゃった……
+	アシスタントさん	<Off>						お二人目もどうぞ～！
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	レヴァンテイン=ハル	花嫁				0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.5
+	レヴァンテイン=ハル	花嫁						ハルが例えてあげる♪\nマスターが泥なら、今日のハルは\nその傍に咲く睡蓮の花よ♪
+	レヴァンテイン=ハル	花嫁						美しすぎる蒼き魔剣\nレヴァンテイン=ハルが\nあなたのそばにいてあげるわ♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	嬉しい2	1_2
+	リディ	笑い2	2_2
+	ディーア	嬉しい2						おぉ……\nハルのドレスも、すごく似合ってるな\n雰囲気が髪の色とぴったりだ
+	リディ	笑い2						うん、ハルちゃんもすっごく可愛い！\nみんな本物のモデルさんみたい！
+	アシスタントさん	<Off>						それでは準備が整いましたので、\n新郎モデルさんもあちらの部屋で\nご準備お願いします！
+	ディーア	怪しい2						新郎モデルさんって……
+	ディーア	驚き2						あっ、オレか！
+	リディ	笑い2						ほらマスター、二人に負けないように\nカッコよく着替えてきてね！
+	ディーア	笑い2						ああ、任せとけ！
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=1.5			Add
+FadeOut	black					1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	　　　　　　　　　　　　　　　　					0
+	ディーア	驚き2	1_2_b			0
+Wait						.5
+FadeIn	black					.3
+	ディーア	驚き2						「男性の着替えはこの部屋で！」\nって言われたけど……誰もいないな
+	ディーア	怪しい2						オレはドレスじゃないし、\n一人で大丈夫ってことか
+	ディーア	驚き2						あっ！\n向こうにタキシードが掛けてある
+	ディーア	汗2						それに、下着類まで全部新品で……
+	ディーア	通常2						よし……
+FadeOut	black					.3
+Wait						.5
+CharacterOff
+	渡橋あみら	通常2	画面外_下			0
+	ディーア	通常裸2	1_2_b			0
+FadeIn	black					.5
+StopBgm
+	ディーア	通常裸2						誰も見てないし、\nさっさと着替えよう
+Bgm	コメディ
+	ディーア	怪しい裸2						でも、下着まで替える意味あるか？
+	ディーア	汗裸2						外見は中身からってことなのかな……
+	ディーア	驚き裸2						あれ、靴下は……
+	ディーア	汗裸2						あ、ベッドの下か
+Tween	ディーア	MoveTo	x=-10 time=1.5				Add
+	ディーア	怪しい裸2						ん？ ちょっと待て、\nこの靴下、いま動いて……
+StopBgm
+Tween	渡橋あみら	MoveTo	y=-400 time=0.4				NoWait
+	渡橋あみら	通常2						おにーさん♥
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	ディーア	MoveBy	x=-120				NoWait
+	ディーア	絶望裸2						うわああああああｯ!!
+Bgm	緊迫
+Tween	渡橋あみら	MoveBy	x=90				NoWait
+	渡橋あみら	通常2						どうしたの？ おにーさん、\nそんなにおっきぃ声だして……♥
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	絶望裸2						あ、アミちゃんこそ！\nどうしてベッドの下なんかに……
+StopBgm
+	渡橋あみら	笑い2						それはぁ……
+FadeOut	white					.3
+CharacterOff
+	トライアルスチル46801		エフェクト表
+Param	character_grayout=false
+Bgm	神秘
+FadeIn	white					.3
+	渡橋あみら	<Off>						おにーさんと\nふたりっきりになるためだよ♥
+	ディーア	<Off>						お、オレと……？
+	渡橋あみら	<Off>						うんっ♥
+	渡橋あみら	<Off>						ねえ、おにーさん？\nアミね、このへん蚊に\n刺されちゃったみたいなの……♥
+	ディーア	<Off>						このへんっていうのは……
+	渡橋あみら	<Off>						んーと……
+FadeOut	white					.3
+CharacterOff
+	トライアルスチル46802		エフェクト表
+FadeIn	white					.3
+	渡橋あみら	<Off>						このへん♥
+	渡橋あみら	<Off>						おにーさん、見える？
+	ディーア	<Off>						ちょ、ちょっと見えないかなぁ……
+	渡橋あみら	<Off>						え～、見えないのぉ？
+	渡橋あみら	<Off>						じゃあアミも、おにーさんみたいに\n服、脱いじゃおっかなぁ……♥
+	ディーア	<Off>						あ、アミちゃん！\nさすがにそれはまずいんじゃ……
+	渡橋あみら	<Off>						へーきへーき♥\n今なら誰も見てないし♪
+	渡橋あみら	<Off>						それにぃ……
+FadeOut	white					.3
+CharacterOff
+	トライアルスチル46804		エフェクト表
+FadeIn	white					.3
+	渡橋あみら	<Off>						その方が、いろいろしやすいでしょ♥
+	ディーア	<Off>						い、いろいろっていうのは……
+	渡橋あみら	<Off>						お薬塗ったりとかぁ、\nその後もぉ、いろいろ♥
+	ディーア	<Off>						な、なるほどな……？
+	渡橋あみら	<Off>						ねぇ、お兄さん……
+	渡橋あみら	<Off>						<size=20>アミ、誰にも言わないよ？</size>
+	ディーア	<Off>						だ、誰にも？
+	渡橋あみら	<Off>						うん、誰にも♥
+	ディーア	<Off>						それなら……
+ZoomCamera	SpriteCamera	1.5				1.4	NoWait
+Wait						1.5
+ZoomCamera	SpriteCamera	1				.2	NoWait
+Wait						.3
+	ディーア	<Off>						いや、やっぱりだめだ!!
+	ディーア	<Off>						ただでさえギリギリなのに、\nアミちゃんまで脱いじゃったら、\nオレは、大変なことに……
+	渡橋あみら	<Off>						え？\n大変なことってどんなこと？\nアミ、知りたいなぁ……♥
+	ディーア	<Off>						た、大変なことっていうのは……
+	キノコリオン	<Off>						ﾉｺｯ!!
+	ディーア	<Off>						そう、ﾉｺｯ!! って感じの……
+CharacterOff
+StopBgm
+	キノコリオン		2_3
+	ディーア	絶望裸2	1_2
+	渡橋あみら	驚き2	2_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	ディーア	MoveBy	x=-100				NoWait
+Tween	渡橋あみら	PunchPosition	y=50				NoWait
+Tween	渡橋あみら	MoveBy	x=100				NoWait
+	二人							ってわああああ!!
+Bgm	コメディ
+CharacterOff
+Param	character_grayout=false
+	キノコリオン	大
+	集中線		エフェクト表
+	二人	<Off>						キノコリオン!?
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコッ!?!?
+Param	character_grayout=true
+CharacterOff
+	渡橋あみら	驚き2	2_2
+	ディーア	絶望裸2	1_2
+StopBgm
+	渡橋あみら	驚き2						もう、いいところだったのに……
+Bgm	バトル
+	渡橋あみら	泣き笑い2						こんなキノコ、\nアミがすぐやっつけちゃうから！
+	ディーア	絶望裸2						お、オレは……\n助かった、のか？
+	ディーア	本気裸2						とにかく、今は\nキノコリオン退治だ！
+FadeOut	white					.7
+If	isdebug==true
+CharacterOff
+Jump	*G_468_02
+EndIf
+EndScenario
+
+# G_468_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	バトル
+Bg	酒場_宿屋
+	キノコリオン
+FadeIn	white					.5
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコノコッ!!
+Se	打1
+FadeOut	white					.1
+CharacterOff						0
+	渡橋あみら	笑い2				0
+FadeIn	white					.1
+Tween	渡橋あみら	MoveBy	x=50				NoWait
+	渡橋あみら	笑い2						ひゃぁん♥		1557-17
+	ディーア	<Off>						よし、よく受け止めた！\nこのまま一気にいくぞ！
+Param	character_grayout=false
+	オーラ桃		エフェクト裏			.3
+Tween	渡橋あみら	PunchPosition	y=50				NoWait
+	渡橋あみら	笑い2				0		てぇぇいっ！
+Se	光3
+FadeOut	white					.7
+CharacterOff						0
+	キノコリオン					0
+StopBgm
+Wait						.5
+FadeIn	white					.2
+Tween	キノコリオン	ShakePosition	x=5				Add
+	キノコリオン							ノコ……
+Tween	キノコリオン	MoveBy	y=-800 time=3				NoWait
+Wait						.2
+Se	倒れる
+Wait						.3
+CharacterOff						.5
+Wait						.7
+Bgm	平和
+Param	character_grayout=true
+CharacterOff
+	渡橋あみら	笑い4
+	渡橋あみら	笑い4						やったぁ♪\nアミ、やっつけたよっ♪
+	渡橋あみら	通常2						おにーさん♥
+	渡橋あみら	笑い2						これでまた、\nふたりっきりだね……？
+	渡橋あみら	驚き2						……って、あれ？
+StopBgm
+CharacterOff
+	ディーア	目閉じ裸2						…………
+CharacterOff
+Bgm	絶望
+	渡橋あみら	驚き2						<size=20>ん？ んんんん？\nなんか、神妙な顔してるんだけど……</size>
+CharacterOff
+	渡橋あみら		画面外_右
+	ディーア	目閉じ裸2	1_2
+Tween	渡橋あみら	MoveTo	x=90 time=1				NoWait
+	渡橋あみら	笑い4						おにーさん♥\nどうしたの?
+	ディーア	目閉じ裸2						……アミちゃん
+	渡橋あみら	笑い4						なぁに？
+	ディーア	目閉じ裸2						さっきのことだけど……
+	ディーア	目閉じ裸2						アミちゃんはまだ子どもだし、\nもっと自分のことを\n大事にした方がいいと思うんだ
+StopBgm
+	渡橋あみら	笑い4						……え？
+Bgm	コメディ
+	ディーア	目閉じ裸2						キミには将来がある\n男の人との付き合い方は、\nもっと気を付けた方がいい
+	渡橋あみら	驚き2						<size=20>こ、この人……\nキノコリオンとのバトルで\nスッキリしちゃってる……!?</size>
+	ディーア	目閉じ裸2						今日のオレには、\n待っててくれる子もいる
+	ディーア	目閉じ裸2						悪いけど、今はさよならだ
+Se	走る
+Tween	ディーア	MoveBy	x=-600				NoWait
+	渡橋あみら	驚き2						おにーさんっ！
+Tween	渡橋あみら	PunchPosition	y=50				NoWait
+	渡橋あみら	驚き2						ちょっ、まって服は!?
+Param	character_grayout=false
+Se	走る
+Tween	ディーア	MoveBy	x=1800 time=2
+Wait						.5
+	ディーア	通常正装2	画面外_右_b
+Param	character_grayout=true
+Tween	ディーア	MoveTo	x=-110
+	ディーア	通常正装2						さよならだ
+Se	走る
+Tween	ディーア	MoveBy	x=-600				NoWait
+Tween	渡橋あみら	PunchPosition	y=50				NoWait
+	渡橋あみら	驚き2						あっ、待っておにーさんっ！\nおにーさんったらぁ！
+StopBgm						1
+FadeOut	black					1
+CharacterOff						0
+Wait						1
+Bg	酒場1F					0
+	レヴァンテイン=ハル	花嫁	1_2_b			0
+	ディーア	通常正装2	2_2			0
+Bgm	都市					.7
+	　　　　　　　　
+FadeIn	black					.5
+Param	character_grayout=false
+	カメラマンさん	<Off>						それじゃあ、撮影しまーす！
+Tween	レヴァンテイン=ハル	MoveBy	x=10				NoWait
+	カメラマンさん	<Off>						ハイ、もちひつじ！
+FadeOut	white					.5
+	ダインスレイフ	花嫁	1_2_b			0
+	ディーア	通常正装2	2_2			0
+	　　　　　　　　
+FadeIn	white					.5
+	カメラマンさん	<Off>						それじゃあ二枚目行きまーす！
+Tween	ダインスレイフ	MoveBy	x=15				NoWait
+	ディーア	笑い正装2
+	カメラマンさん	<Off>						笑って～、もちひつじっ！
+FadeOut	white					.5
+CharacterOff						0
+	リディ	笑い2	2_2			0
+	ディーア	通常正装2	1_2			0
+Wait						.5
+FadeIn	white					.5
+Param	character_grayout=true
+	ディーア	通常正装2						よし、これで撮影も終わりか
+	リディ	笑い2						今日のマスターは\nちゃんとしててカッコイイね♪
+	ディーア	照れ正装2						改めてそう言われると照れるな
+	リディ	照れ2						でも、ほんとにカッコイイよ！
+Tween	リディ	MoveBy	x=5				NoWait
+	リディ	笑い2						ね、アミちゃんもそう思わない？
+	リディ	驚き2						……あれ、アミちゃん？
+	ディーア	絶望正装2						ア、アミちゃんは\n一緒じゃなかったのか？
+	リディ	驚き2						うん、さっきまでは\n隣にいたはずなんだけど……
+	リディ	驚き2						アミちゃん、\nどこいっちゃったんだろ？
+FadeOut	black					.5
+CharacterOff						0
+StopBgm
+Wait						.5
+Bg	夜の宿屋					0
+	　　　　　　　　
+Bgm	平和
+FadeIn	black					.5
+Param	character_grayout=false
+		<Off>						\n　　　<color=blue><dash=2>新郎モデル控え屋<dash=2></color>
+	渡橋あみら	泣き笑い2				0
+	渡橋あみら	泣き笑い2						さっきは逃げられちゃったけど\nタキシード姿のおにーさん\nけっこーよかったなぁ……
+	渡橋あみら	笑い2						寝取ったら終わりって思ってたけど\n本気で欲しくなってきちゃった……♥
+	渡橋あみら	通常2						あ、そろそろこっちに来るかな……？
+Tween	渡橋あみら	MoveBy	y=-100				NoWait
+	渡橋あみら	笑い2						それじゃあ、今度は\nこっちのベッドに隠れてっと……
+	トライアルスチル46805		エフェクト表
+	渡橋あみら	<Off>						はやくおいで、おにーさん♥
+	渡橋あみら	<Off>						アミはまだまだ、\nあきらめないからね……♥
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*G_468_01
+EndIf
+EndScenario

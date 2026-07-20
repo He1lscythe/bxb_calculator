@@ -1,0 +1,661 @@
+# G_464_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	神秘
+Bg	白背景					0
+Param	character_grayout=false
+	ディーア	通常2				0
+	          		2_2
+FadeIn	white					.5
+	プシュケー	<Off>						初めてキミを見たときから、\n私の歯車が動き出した
+	プシュケー	<Off>						運命の女神を魅了するほどに\n複雑で面白い運命の持ち主……
+	プシュケー	<Off>						ねぇ、マスターくん……\nキミは私にとって、\n特別な存在なんだよ？
+	プシュケー	<Off>						だからね<dash=2>
+StopBgm
+FadeOut	white					.2
+Bg	酒場1F					0
+CharacterOff						0
+	集中線		エフェクト表
+	プシュケー	通常拡大	エフェクト裏			0
+FadeIn	white					.2
+	プシュケー	通常拡大						マスターくんよ、神話になーれ♪
+Bgm	緊迫
+FadeOut	black					.1
+Bg	宇宙					0
+CharacterOff						0
+	トライアルスチル46402		エフェクト表			0
+FadeIn	black					.1
+	ディーア	<Off>						…………？？？？？？？？？？？？？\n？？？？？？？？？？？？？？？？？\n？？？？？？？？？？？？？？？？？
+StopBgm
+Param	character_grayout=true
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	絶望2	2_2			0
+	プシュケー	通常	1_2_b			0
+Bgm	平和
+	プシュケー	通常						神話だよ♪ しーんーわー♪\nマスターくん♪\n私と神話になっちゃおうよ♪
+	ディーア	絶望2						神話ってなんだ……？
+	プシュケー	嬉しい						神話は神話だよ♪\n神様になって、\n世界の歴史に永遠に残っちゃうの♪
+	ディーア	汗2						神になるって、そんなこと……
+	プシュケー	通常						大丈夫大丈夫、\nだってキミには資質があるもの♪\n神話になれるポテンシャルが♪
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	嬉しい						プシュケーちゃんには分かるの♪\nキミは私でも見通せない\n面白い運命の持ち主♪
+	プシュケー	通常						キミほどの人間なら\n神話にだってなれる♪\nむしろ、ならなきゃもったいない♪
+Tween	プシュケー	MoveBy	x=30				NoWait
+	プシュケー	嬉しい						だから人間なんてやめちゃって、\n今すぐ神話になーれ♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+Tween	ディーア	MoveBy	x=30				NoWait
+	ディーア	絶望2						人間をやめる!?
+	ディーア	驚き2						ちょ、ちょっと待ってくれ！\nそんないきなり……！
+	プシュケー	通常						あ、今すぐはイヤ？\nだったら明日？\nそれとも明後日？
+	ディーア	驚き2						時間の問題じゃないって！
+	プシュケー	通常						じゃあ、何が問題なの？
+	プシュケー	通常						なんでも言ってよ♪\nキミが神話になるなら、\nなんだってするから♪
+	プシュケー	嬉しい						早く神話になって、\n私の退屈壊してよ♪
+	プシュケー	嬉しい						ほら、神話になーれ♪\n神話になぁれ♪
+	ディーア	汗2						問題とかの前に、\nまだよく分かってないんだって！
+	プシュケー	悲しい						えー！\n分かってないの!?
+	ディーア	汗2						だって、プシュケーは\n出会ったときからずっと<dash=2>
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場の地下					0
+	プシュケー	通常				0
+FadeIn	white					.3
+	プシュケー	通常						ねぇねぇ、そこのキミー？
+	プシュケー	通常						もし暇ならさ、神話にならない？
+	プシュケー	泣き						ちょ、待って待って、\n変な勧誘じゃないって！
+FadeOut	white					.3
+CharacterOff
+	プシュケー	嬉しい				0
+Bg	酒場_カフェ					0
+FadeIn	white					.3
+	プシュケー	嬉しい						マスターくんが♪\n神話になるとこ、見てみたい♪
+	プシュケー	嬉しい						それっ♪ 神話になーれ♪\n神話になーれ♪ 神話になーれ♪
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場1F					0
+	プシュケー	通常	1_2_b			0
+	ディーア	怪しい2	2_2			0
+FadeIn	white					.3
+	ディーア	怪しい2						<dash=2>って\n神話になればっかりで、\n説明もなかっただろ？
+	プシュケー	泣き						いや、でも神話になるだけだよ？\nわかんないかな？\n神話になるの！
+	ディーア	驚き2						ぜんぜん分かんないって！\n具体的に何をしたら\n神話になれるんだ!?
+	プシュケー	通常						そんなの簡単だよ♪\n新世界創造に立ち会うとか
+	ディーア	絶望2						…………新世界？
+	プシュケー	嬉しい						古い神々を倒して、\nキミの時代を作っちゃうとか！\n新世紀だよ！ 新世紀!!
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						やっぱり\nスケールがデカすぎて分からない！
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	泣き						なんで、なんで!?
+	ディーア	汗2						プシュケーの運命を操る力は\n知ってるし、\n運命が見えるのも本当だろうけど
+	ディーア	汗2						さすがに、オレが\n神話や神になれるとも思えないし……
+	プシュケー	本気						そっか、マスターくん\n信じてくれないんだね……
+	ディーア	汗2						ご、ごめんな、\n想像が追いつかなくて……
+	プシュケー	悲しい						でも、キミが神話にならないと\n私は退屈で大変なんだよ!?
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	悲しい						お願いだから、神話になってよー！
+	ディーア	悔しい2						退屈か……\n確かにそれは大きな問題だけど……
+	ディーア	汗2						ちゃんと分からないままだと\n何とも言えないって
+	プシュケー	悲しい						うーん……\n無理やり神話にしても、\nキミの神話として成立しないし……
+	プシュケー	嬉しい						そうだ！\nじゃあじゃあ、\nマスターくんにしつもーん♪
+	プシュケー	通常						もしも神話になれるなら、\nどんな神話になりたい？
+	ディーア	怪しい2						今度はどうしたんだ？
+	プシュケー	嬉しい						まずはちゃんと、\n神話になれるって分かってもらうの♪
+Tween	プシュケー	MoveBy	x=50				NoWait
+	プシュケー	嬉しい						だからキミに、\n体験してもらったほうがいいかな？\nいいよねって♪
+	ディーア	怪しい2						体験って、まさか危険なことじゃ？
+	プシュケー	通常						やだなぁー♪ ただの質問だよ\n変なことはしないから\nキミがやりたいこと気楽に教えて♪
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	嬉しい						ハイ！ マスターくんの～♪\n『お願い』言うとこ見てみたい♪\nそーれ、イッキ♪ イッキ♪
+	ディーア	怪しい2						そ、そこまで言うなら……
+	ディーア	通常2						そうだな……\nもし本当になれるなら、\nカッコいい神話とかがいいよな
+	ディーア	笑い2						いろんな場所を旅したり、\n試練に勝って、\n世界の危機を救ってみせたり
+	プシュケー	通常						ほうほう♪\nでも、旅するだけでいいの？\n戦うだけでいいの？
+	ディーア	にやけ2						あとは<dash=2>
+	ディーア	驚き2						……い、いや、これはさすがに
+Tween	プシュケー	MoveBy	x=10				NoWait
+	プシュケー	嬉しい						おぉ？ マスターくーん？\nエッチな神話とか考えちゃった？\n想像しちゃった？
+	ディーア	驚き2						か、考えてないぞ!?
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	通常						隠さなくていいよー♪\n神話に恋愛はつきものだし♪
+	プシュケー	嬉しい						とびきりの美人にモテたいとか、\n思ってもいいんだよ？
+	ディーア	汗2						ま、まぁ、\nそういうのも羨ましいよな！
+	プシュケー	通常						うんうん、そうだよね♪\n男の子だもん、仕方ないよね♪
+	プシュケー	通常						それじゃあマスターくんを……\nそんな神話にしてあげる♪
+	ディーア	驚き2						…………へ？
+StopBgm
+Param	character_grayout=false
+CharacterOff
+Se	チャージ
+	オーラ青		エフェクト表			1
+	プシュケー	通常拡大	エフェクト裏
+	プシュケー	通常拡大						神話になーれ、神話になーれ\nマスターくんよ、神話になーれ♪		1554-15
+StopBgm
+Param	character_grayout=true
+CharacterOff
+	プシュケー	通常	1_2_b
+	ディーア	驚き2	2_2
+Se	火事
+Shake	BG		x=2 y=2 time=2				NoWait
+	ディーア	驚き2						な、なんだ!?
+	プシュケー	通常						大丈夫♪ 怖いことは起きないよ♪\nちょっとここに<dash=2>
+FadeOut	white					.2
+Param	character_grayout=false
+Bgm	緊迫
+CharacterOff						0
+	ドラゴン		1_4			0
+Tween	ドラゴン	MoveBy	x=100				NoWait
+FadeIn	white					.2
+Shake	BG		x=5 y=5				NoWait
+	土煙		エフェクト表			1
+	ドラゴン							グオオオオオオオ!?
+Param	character_grayout=true
+CharacterOff
+	プシュケー	泣き	1_2_b
+	ディーア	驚き2	2_2
+	ディーア	驚き2						うわぁあああああああ!?
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	泣き						きゃぁあああああああ!?
+Bgm	コメディ
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A					0
+	プシュケー	悲しい	1_2_b			0
+	ディーア	驚き2	2_2			0
+FadeIn	black					.3
+	ディーア	驚き2						なんだ、なんだ!?
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	悲しい						えっ!? なんで、どうして!?\nあんな魔物は呼んでないよ!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						プシュケーがやったんじゃないのか!?
+	プシュケー	泣き						呼んだのはもっと弱い魔物だもん!!\n軽くキミの運命をイジっただけ！
+	プシュケー	泣き						なのに、\n結果がこうなるなんて……
+	プシュケー	本気						まさか！
+	ディーア	驚き2						プシュケー？
+CharacterOff
+	プシュケー	本気						そっか、マスターくんの運命と\n私の干渉力が相補的に結びついて、\n運命を強く塗り替えたんだ
+	プシュケー	本気						マスターくんはそれほどの運命\nつまり……
+CharacterOff
+	ディーア	怪しい2						あの魔物が現れたのは、\nプシュケーが運命を操作したから？\nそれが本当なら……
+	ディーア	怪しい2						プシュケーの力って<dash=2>
+CharacterOff
+	プシュケー	本気						マスターくんのポテンシャルは<dash=2>
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	トライアルスチル46403		エフェクト裏
+	<param=name>＆プシュケー							ヤバい!?\nヤバすぎ♪
+CharacterOff
+Param	character_grayout=true
+	プシュケー	嬉しい	1_2_b			0
+	ディーア	絶望2	2_2			0
+	ディーア	絶望2						あ……！
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	嬉しい						ねぇねぇ！\nマスターくんのすごい運命\nもっと見せてー♪
+Tween	プシュケー	MoveBy	x=30				NoWait
+	プシュケー							こんな運命、\n神話にならなきゃもったいないよ!!
+	ディーア							だ、ダメだ！\nまた大変なことが起こるだろ!?
+	プシュケー							大丈夫大丈夫！\nちゃんと神話にしてあげるから♪\n面白い神話になーれ♪
+	プシュケー							まずは、\nマスターくんの願いを叶えてあげる♪
+Param	character_grayout=false
+CharacterOff
+	プシュケー	通常拡大	エフェクト裏
+Se	チャージ
+	オーラ青		エフェクト表			.5
+	プシュケー	通常拡大						それっ♪\n神話になーれ、神話になーれ♪\nモテモテな神話になっちゃえ♪
+CharacterOff
+	オーラ青		エフェクト表
+	ディーア	驚き2
+	ディーア	驚き2						うわぁ!?
+Se	光1
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff						0
+	ディーア？	真顔F2				0
+Wait						.5
+FadeIn	white					.3
+	ディーア？	真顔F2						なっ……！
+CharacterOff
+	ディーア？	真顔F2	2_2
+	プシュケー	嬉しい	1_2_b
+	プシュケー	嬉しい						キャーっ♪\nやっぱりすごいよ、キミ♪
+	プシュケー	通常						運命弄っただけで、\nこんなイケメンに変身するなんて♪
+	ディーア？	笑いF2						オレが……こんなにイケメンに！\n本当にすごいな！
+	プシュケー	通常						嬉しい？ 楽しいでしょ？\n今なら、女の子にモテモテ♪
+	プシュケー	嬉しい						それにキミの運命なら……♪
+Param	character_grayout=false
+CharacterOff
+	女の子		1_3
+	通りすがりの女性		2_3
+	女勇者		3_3
+	一同							見て、見て！\nすごいイケメンがいるわ!!
+Param	character_grayout=true
+CharacterOff
+	プシュケー	嬉しい						運命に導かれて、\nたくさんの女の子が来たよ♪
+	プシュケー	通常						さあ、マスターくん\nモテモテえっちな神話になーれ♪
+	ディーア	<Off>						おーい！\nプシュケー見てくれ！
+	プシュケー	嬉しい						マスターくん……！\nとうとう神話に……！
+CharacterOff
+	ディーア？	笑いF2						足が長くなったら、\n一度やってみたかったんだ……！
+	ディーア？	笑いF2						反復横跳び!!
+ImageEffect	SpriteCamera	MotionBlur
+Se	走る
+Tween	ディーア？	MoveBy	x=100 time=0.1				NoWait
+Wait						.1
+Tween	ディーア？	MoveBy	x=-200 time=0.2				NoWait
+Wait						.2
+Tween	ディーア？	MoveBy	x=200 time=0.2				NoWait
+Wait						.2
+Tween	ディーア？	MoveBy	x=-200 time=0.2				NoWait
+Wait						.2
+Tween	ディーア？	MoveBy	x=200 time=0.2				NoWait
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Wait						1
+CharacterOff
+	プシュケー	悲しい
+	プシュケー	悲しい						…………え？\nなんで？ なんで反復横跳び？
+CharacterOff
+	ディーア？	笑いF2
+ImageEffect	SpriteCamera	MotionBlur
+Se	走る
+Tween	ディーア？	MoveBy	x=100 time=0.1				NoWait
+Wait						.1
+Tween	ディーア？	MoveBy	x=-200 time=0.2				NoWait
+Wait						.2
+Tween	ディーア？	MoveBy	x=200 time=0.2				NoWait
+Wait						.2
+Tween	ディーア？	MoveBy	x=-200 time=0.2				NoWait
+Wait						.2
+Tween	ディーア？	MoveBy	x=100 time=0.2				NoWait
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+	ディーア？	真顔F2						ふっ！ はっ！ ほっ！\nどうだ！ すごく早いだろ！
+CharacterOff
+	プシュケー	悲しい						なにやってるの!?\nモテモテで\n神話になれるチャンスなのに!!
+	プシュケー	悲しい						せっかく状況も運命も\n整えたのにー！
+CharacterOff
+	ディーア？	真顔F2						……プシュケー\n大事なことを教えるぞ
+CharacterOff
+	プシュケー	悲しい						へ……？
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ディーア？	真顔F2
+	ディーア？	真顔F2						オレは……\nモテるなら自力でモテたい！
+	ディーア？	真顔F2						モテる運命なんて、\n嬉しくないんだー！
+CharacterOff
+	プシュケー	悲しい						えぇえええええええ!?
+	プシュケー	悲しい						そ、そんな答え、\n予想もしてなかったよ……\nびっくりした……！
+	プシュケー	悲しい						でも、私はキミを\n神話にしないといけないの！
+	プシュケー	本気						ちゃんとマスターくんを\nイケメン神話にするの……！
+CharacterOff
+	キノコリオン		画面外_右
+	ディーア？	真顔F2
+	ディーア？	真顔F2						させるか！\nオレは背が伸びたままで……！
+Param	character_grayout=true
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ディーア？	MoveBy	x=150 time=1.5				NoWait
+Tween	キノコリオン	RotateTo	y=180 time=0				NoWait
+Tween	キノコリオン	MoveBy	x=500 time=1.5				NoWait
+	ディーア？	真顔F2						……あ
+	キノコリオン							……ノコ？
+ImageEffectOff	SpriteCamera	MotionBlur
+Se	打2
+FadeOut	white					.1
+CharacterOff	ディーア？					0
+	ディーア	驚き2	3_3			0
+FadeIn	white					.1
+Wait						.3
+Tween	ディーア	PunchPosition	y=600 time=2				NoWait
+Tween	ディーア	MoveBy	x=-1000 time=2				NoWait
+Tween	キノコリオン	PunchPosition	y=300 time=2				NoWait
+Tween	キノコリオン	MoveBy	x=-800 time=3				NoWait
+	ディーア							うわぁあああ!?
+	キノコリオン							ノコー!?
+CharacterOff
+	ディーア	絶望2	画面外_右
+	プシュケー	本気
+	プシュケー	本気						……あれ？
+	ディーア	絶望2						うわぁああああ！
+Tween	ディーア	PunchPosition	y=600 time=2				NoWait
+Tween	ディーア	MoveBy	x=-600 time=2				NoWait
+Wait						.5
+FadeOut	white					.2
+	プシュケー	胸拡大	エフェクト表			0
+FadeIn	white					.2
+Se	ポップイン
+Tween	プシュケー	PunchPosition	y=10				NoWait
+	プシュケー	胸拡大						うひゃぁああああ!?
+Se	ポップイン
+Tween	プシュケー	PunchPosition	y=10				NoWait
+	プシュケー	胸拡大						な、なんで、\n私の胸に飛び込んできたのー!?
+FadeOut	white					.2
+CharacterOff						0
+	プシュケー	悲しい	1_2_b			0
+	ディーア	驚き2	2_2			0
+FadeIn	white					.2
+Tween	ディーア	PunchPosition	y=30				NoWait
+Tween	ディーア	MoveBy	x=30				NoWait
+	ディーア	驚き2						な、なんかそこに\nキノコリオンがいて……！
+	プシュケー	通常						なにそれ!?\nそんな運命、見てないよ！
+	ディーア	にやけ2						でもこれで、プシュケーと\nちょっとエッチな話はできたな！
+	プシュケー	通常						あ、確かに……♪
+	プシュケー	悲しい						じゃないよー！\nさっきのは予定外！\nプシュケーちゃんの計画外！
+	プシュケー	本気						こうなったら次こそ……！
+	プシュケー	本気						マスターくんよ\nカッコいい神話になーれ!!
+Se	チャージ
+FadeOut	white					1.5
+Bg	魔術空間					0
+	          
+Wait						1
+FadeIn	white					.3
+Wait						.5
+	ディーア	驚き2	2_2					うわぁ!?\nこ、ここはどこだ!?
+	プシュケー	通常	1_2_b					ふふふ♪\nキミの運命と私の力が導いた、\nマスターくんが神話になる場所！
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=false
+Bg	宇宙					0
+	          
+FadeIn	white					.2
+	プシュケー	<Off>						マスターくんはこれから、\n次元を超えて、世界を救い\n新しい時代を築くの♪
+FadeOut	white					.2
+CharacterOff						0
+Bg	魔術空間					0
+	プシュケー	通常				0
+FadeIn	white					.2
+StopBgm
+	プシュケー	通常						神話になーれ♪\nし・ん・わ・に・な・ぁ・れ♪
+Se	チャージ
+	オーラ青		エフェクト表			1
+Wait						1.5
+CharacterOff
+	ディーア	驚き2						へ……？
+Se	光1
+FadeOut	white					1
+Bgm	魔王バトル
+CharacterOff						0
+	イベントスチル51608		エフェクト表			0
+Wait						.5
+FadeIn	white					1
+	ディーア	<Off>						ど、どうして翼が？
+CharacterOff
+	プシュケー	嬉しい						うわぁ♪ すごいすごい♪\n神話にふさわしい姿だよ♪
+	プシュケー	嬉しい						さあ、行ってマスターくん！\n誰かのためじゃない、\nキミが神話になるために♪
+	プシュケー	嬉しい						その背中には\n未来を描く羽があるんだから！
+CharacterOff
+	イベントスチル51608		エフェクト表
+	ディーア	<Off>						そうだ、オレはこの翼で、\n神話に……
+Bgm	コメディ
+	ディーア	<Off>						ならない！
+CharacterOff
+	プシュケー	悲しい						えぇえええ!?
+CharacterOff
+	オーラ青		エフェクト表
+	ディーア	にやけ2
+	ディーア	にやけ2						こんな翼があるんだ、\nおもいっきり空を飛んだり\nもっと、えへへへ<dash=2>
+Se	光1
+	ディーア	驚き2						あれ……？
+Se	光2
+Tween	ディーア	MoveBy	x=1000 y=3000 time=3				NoWait
+	ディーア	驚き2						うわぁああああああ!?\nコントロールがー!!
+CharacterOff
+	プシュケー	悲しい						ま、マスターくーん!?\nどこいくのー!?
+	プシュケー	本気						飛んで行っちゃった……\nまた運命が変に働くなんて!!
+	プシュケー	悲しい						どうして神話になってくれないのー！
+	プシュケー	本気						マスターくんが戻ってきたら\n今度こそ神話に……！
+	プシュケー	本気						………………
+	プシュケー	悲しい						…………あれ？
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bgm	絶望
+Param	character_grayout=false
+CharacterOff						0
+Bg	森林A					0
+	黒グラデーション		エフェクト裏			0
+	プシュケー	通常				0
+FadeIn	black					.3
+	プシュケー	通常						ねーえ、マスターくーん！\nどこー？\nそんなに遠くに行ったのー!?
+	プシュケー	本気						大丈夫かな？\nマスターくんの運命、\n感じなくなったし……
+	プシュケー	本気						…………不思議
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	          					0
+FadeIn	black					.3
+	プシュケー	<Off>						誰もが同じ、つまらない、\n代わり映えしない運命を感じるのが\n私の普通だったのに……
+FadeOut	black					.3
+Bg	森林A					0
+	黒グラデーション		エフェクト裏			0
+	プシュケー	本気				0
+FadeIn	black					.3
+	プシュケー	本気						マスターくんは別だった\n面白そうな運命だった……
+	プシュケー	悲しい						だから神話にしてあげるって\n言ったのに\nどうして断ったのかな……？
+	プシュケー	悲しい						マスターくんなら\nすごい神話になれたのに\n私の退屈も壊してくれたのに……
+	プシュケー	悲しい						あんな事しなければ、\n今頃神話になれたのに……
+	プシュケー	悲しい						はぁ……マスターくんいないと\nつまらない、退屈……
+	プシュケー	泣き						ね、ねぇ、マスターくん！\nプシュケーちゃん、退屈だよー！
+	プシュケー	泣き						早く戻ってきてよー\nキミの楽しい運命見せてー！
+	プシュケー	悲しい						こんなに探してもいないの？\nまさか、本当に……
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	泣き						ま、マスターくん？\nマスターくん!? どこ、どこなの!?
+	プシュケー	悲しい						返事をしてよー！\nキミがいないと、私は退屈で……！
+	プシュケー	悲しい						ぐすっ……マスターくん……
+CharacterOff
+	          							ガサガサ
+CharacterOff
+	プシュケー	通常
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	通常						あっ！ マスターくん!?
+Bgm	緊迫
+CharacterOff
+	キノコリオン							ノコノコ!!
+CharacterOff
+	プシュケー	泣き						っ!? 魔物!?
+	プシュケー	泣き						これもマスターくんの影響？\nこんな運命見えなかったのに……！
+CharacterOff
+	集中線		エフェクト表
+	キノコリオン
+Wait						.1
+ZoomCamera	SpriteCamera	1.3	0	0		.2	NoWait
+	キノコリオン							ノコー！
+StopBgm
+CharacterOff
+	プシュケー	泣き						マスターくん……！
+FadeOut	white					.3
+ZoomCamera	SpriteCamera	1	0	0		0	NoWait
+CharacterOff						0
+	キノコリオン		1_2			0
+	ディーア	本気2	画面外_上			0
+Tween	ディーア	MoveBy	x=3000 time=0				NoWait
+FadeIn	white					.3
+Wait						.5
+	ディーア							プシュケー!!
+Tween	ディーア	MoveBy	x=-3000 y=-3350 time=1			NoWait
+Se	光1
+Wait						.5
+FadeOut	white					.1
+Se	斬1
+FadeIn	white					.1
+Tween	キノコリオン	MoveBy	x=-100 time=0.5				NoWait
+	キノコリオン							ノコノコー!?
+Se	倒れる
+CharacterOff	キノコリオン					1
+Wait						1
+CharacterOff
+Param	character_grayout=true
+CharacterOff
+	プシュケー	嬉しい						えぇえええええ!?
+Bgm	神秘
+CharacterOff
+	プシュケー	本気	1_2_b
+	ディーア	怒り2	2_2
+	ディーア	あはは2						い、イタタタ……！
+	ディーア	驚き2						だ、大丈夫か、プシュケー？
+	プシュケー	悲しい						っていうか、\nマスターくんのほうが\n大丈夫そうじゃないよね!?
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	本気						そもそもなんで、\n上から落ちてきたの!?
+	ディーア	通常2						偶然、さっきの翼が消えたら\nここに落ちて\n運が良かったよ
+	プシュケー	嬉しい						うぅ……！\nあは……!!
+	プシュケー	嬉しい						あはははは♪
+	プシュケー	嬉しい						なにそれ、面白い!!\n面白すぎるよ、マスターくん!!
+	プシュケー	嬉しい						女神の予想を覆して、\nちょっとかっこ悪いけど、\nエンタメたっぷり♪
+	プシュケー	嬉しい						こんな面白いこと\nキミが見せてくれるなら、\n退屈なんて……！
+	プシュケー	通常						……あ、そっか
+	ディーア	驚き2						プシュケー？
+	プシュケー	通常						そうだね……\nそうだったね……！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+Bg	戦場跡					0
+	          
+FadeIn	white					.3
+	プシュケー	<Off>						無意味な退屈、変わらない運命\nわかりきった神話\nそんな結末、私はいらなかった……
+	プシュケー	<Off>						本当に欲しかったのは
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	ディーア	通常2				0
+	          		1_2
+FadeIn	white					.3
+	プシュケー	<Off>						予想もできない、面白いこと♪\n退屈を壊してくれるもの♪
+	プシュケー	<Off>						キミが見せてくれる運命！\nキミが神話にいたる道！
+Bg	森林A
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2	2_2
+	プシュケー	本気	1_2_b
+	プシュケー	通常						それを教えるために、\nキミは……！
+	プシュケー	嬉しい						ねえねえ、マスターくん♪\n運命の女神が力を貸してあげる♪\nまずはあの子を倒しちゃお♪
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=30				NoWait
+	キノコリオン							の、ノコ!?
+Bgm	バトル
+CharacterOff
+	プシュケー	通常	1_2_b
+	ディーア	怒り2	2_2
+	ディーア	驚き2						さっきのやつの仲間か!?
+	プシュケー	通常						うん♪\nキミ以外の運命だもん\nちゃんと見えてたよ♪
+	プシュケー	通常						それから約束♪\n私がキミを導いてあげる♪\n面白くて楽しい神話になるように♪
+	ディーア	汗2						えっ!? あ、ああ……
+	ディーア	怒り2						いくぞ、プシュケー！
+	プシュケー	嬉しい						うん♪
+CharacterOff
+	プシュケー	通常拡大	エフェクト表
+	プシュケー	通常拡大						マスターくんよ、神話になーれ♪
+If	isdebug==true
+CharacterOff
+Jump	*G_464_01
+EndIf
+EndScenario
+
+# G_464_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	森林A					0
+	プシュケー	悲しい	1_2_b			0
+	ディーア	笑い2	2_2			0
+FadeIn	white					.5
+	ディーア	笑い2						ふぅ、これで片付いたな
+Tween	プシュケー	MoveBy	x=50				NoWait
+	プシュケー	悲しい						マスターくーん！
+	ディーア	笑い2						うわぁ!?\nぷ、プシュケー!?
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	悲しい						マスターくん、マスターくん、\nマスターくん!!
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	悲しい						大丈夫だった!? 怪我してない!?\n変な運命、拾ってないよね!?
+	ディーア	汗2						だ、大丈夫だって\nほら、ケガもしてない
+Tween	プシュケー	MoveBy	x=20				NoWait
+	プシュケー	嬉しい						そっかぁ、よかったぁ♪
+	ディーア	汗2						こんな心配してくれるなんて、\nどうしたんだ？
+StopBgm
+	プシュケー	通常						私ね、分かったんだ
+	ディーア	驚き2						え……？
+Bgm	凱旋
+	プシュケー	通常						キミはやっぱり特別で、\nプシュケーちゃんは\nキミがいないと生きていけないって
+	プシュケー	通常						キミが教えてくれたんだよ\n決まった結末なんてつまらない
+	プシュケー	嬉しい						キミが見せてくれた\n予想外の出来事が、過程が\n何よりも楽しいって♪
+	ディーア	驚き2						プシュケー……
+	プシュケー	通常						だからもう、\nキミはただの神話にはしないよ♪
+	プシュケー	通常						キミのためなら、\nどんな運命でも作ってあげる♪
+	プシュケー	通常						もっと楽しい運命をあげるから\n予想もつかない神話を見せて♪
+CharacterOff
+	プシュケー	通常拡大	エフェクト表					マスターくん、\n私と一緒に楽しい神話になーれ♪
+StopBgm						0
+CharacterOff
+	ディーア	驚き2						えっ、それはヤダ
+Param	character_grayout=false
+CharacterOff
+	トライアルスチル46404		エフェクト表
+	プシュケー	<Off>						…………？？？？？？？？？？？？？\n？？？？？？？？？？？？？？？？？\n？？？？？？？？？？？？？？？？？
+Bgm	コメディ
+Param	character_grayout=true
+CharacterOff						0
+Bg	森林A					0
+	ディーア	驚き2	2_2			0
+	プシュケー	悲しい	1_2_b			0
+	プシュケー	悲しい						えぇえええええ!?
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	悲しい						ま、マスターくん!?\nさっきまでノリノリだったのに\nなんで断るの!?
+	ディーア	悔しい2						べ、別にノッてないぞ？\nだいたい不可抗力だったし!!
+	ディーア	驚き2						むしろ、変なことばっかり起きて、\n大変だったんだぞ!?
+	プシュケー	嬉しい						それが面白いんじゃない!!
+	ディーア	驚き2						オレが大変なんだって!!
+	プシュケー	悲しい						う、うぅ……\nここで焦らすなんて、予想外だよ\nさすがマスターくん
+	プシュケー	通常						でもでも！\nもうプシュケーちゃん、\n君がいないと満足できないの！
+	プシュケー	嬉しい						キミのためなら、\nどんな運命も用意してあげる♪
+	プシュケー	通常						創造でも滅亡でも\n世界なんてどうなったっていいから\n楽しい神話になーれ♪
+	ディーア	絶望2						め、滅亡……？
+Se	回想
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+	トライアルスチル46401		エフェクト表			0
+	          
+FadeIn	white					.2
+Wait						1.5
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	絶望2				0
+FadeIn	white					.2
+	ディーア	驚き2						そ、それは無理だー！
+Se	走る
+Tween	ディーア	MoveBy	x=800 time=1				NoWait
+Wait						1
+CharacterOff
+	プシュケー	通常						あ、待ってよ！
+Tween	プシュケー	PunchPosition	y=30				NoWait
+	プシュケー	通常						逃げちゃダメ、逃げちゃダメ！
+	プシュケー	通常						マスターくんは、\nプシュケーちゃんを楽しませる
+FadeOut	white					.3
+Param	character_grayout=false
+	オーラ桃		エフェクト裏			0
+	プシュケー	通常拡大	エフェクト表			0
+FadeIn	white					.3
+	プシュケー	通常拡大						素敵な神話になーれ♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_464_01
+EndIf
+EndScenario

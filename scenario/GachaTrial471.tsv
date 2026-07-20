@@ -1,0 +1,581 @@
+# G_471_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋
+	ディーア	通常2	画面外_右
+	エレボス	通常	1_2
+FadeIn	white					.5
+	エレボス	通常						マスター、まだかなぁ……
+Se	ドア開く
+Tween	ディーア	MoveTo	x=140 time=1.2				NoWait
+	ディーア	通常2						さて、今日の討伐は終わりっと
+Tween	エレボス	PunchPosition	y=50				NoWait
+	エレボス	嬉しい						あ、マスター♪
+	ディーア	笑い2						お？\nエレボス、ここにいたのか
+	エレボス	笑い						うん♪\nマスターのこと、\nお部屋で待ってたの！
+	エレボス	通常						ねえマスター、\nエレに何か「お願い」ない？
+	ディーア	驚き2						お願い？
+	エレボス	嬉しい						うんっ♪\nお掃除とか、お手伝いとか……
+	ディーア	照れ2						気持ちはありがたいけど、\n今のところはないかなぁ
+	エレボス	通常						ないの……………？
+	ディーア	笑い2						ああそうだな\n部屋も十分キレイだし……
+	エレボス							それじゃあ……
+StopBgm
+Tween	エレボス	PunchPosition	y=50				NoWait
+	エレボス	照れ						えいっ！
+Se	ガラス割れる
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						うわあああっ!!
+Bgm	コメディ
+	ディーア	絶望2						ど、どうしたんだエレボス、\n急にお皿なんか割って！
+	エレボス	通常						マスター……\nエレ、失敗しちゃった……
+	ディーア	絶望2						いや、失敗っていうか、\nいましっかりお皿振り上げて\n叩きつけてなかったか……？
+	エレボス	照れ						えへ……
+	ディーア	絶望2						えへじゃなくてだな……
+	エレボス	通常						……マスター？
+StopBgm
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏			0
+	トライアルスチル47110		エフェクト表			0
+FadeIn	black					.5
+Bgm	神秘
+	エレボス	<Off>						エレ、わるい子？ 駄メイド？
+	エレボス	<Off>						エレのこと……おしおきする……？ \nどきどき……♥
+FadeOut	white					.5
+CharacterOff
+	ディーア	照れ2	3_4			0
+	エレボス	通常	1_2_b			0
+	　　　　　　　　
+FadeIn	white					.5
+Tween	ディーア	MoveBy	x=10			0	NoWait
+Param	character_grayout=true
+	ディーア	照れ2						ま、まぁ、そうだな……\n誰にでも間違いはあるし……
+	ディーア	怒り2						今度からは、失敗しないように\n気を付けるんだぞ？
+	エレボス	通常						おしおき、しないの……？
+	ディーア	笑い2						ああ、\n一度の失敗は誰にでもあるからな
+StopBgm
+Tween	エレボス	MoveBy	x=-10				NoWait
+	エレボス	通常						じゃあ……\n一度じゃダメなんだ……
+	ディーア	笑い2						ん？ エレボス、いまなんて……
+Tween	エレボス	PunchPosition	y=50				NoWait
+Se	ガラス割れる
+	エレボス	照れ						ばたーん、がしゃーん、どっかーん
+Bgm	コメディ
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						うぉわあああああっ！
+	ディーア	絶望2						エレボス！ 落ち着け！\nどうしたっていうんだ！
+	エレボス	照れ						マスター……\nエレ、また失敗しちゃった……
+Tween	エレボス	MoveBy	x=10				NoWait
+	エレボス	通常						エレ、わるい子？\n"おしおき"する……？ どきどき…♥
+Tween	ディーア	MoveBy	x=10				NoWait
+	ディーア	絶望2						こ、この何かを期待する顔……
+StopBgm
+	ディーア	絶望2						まさか……エレボスは、\nオレにおしおきしてほしいのか……？
+Bgm	緊迫
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						分かった、それじゃあ\nエレボスにはお片付けのおしおきだ！
+	エレボス	通常						え、お片付け……？
+	ディーア	怒り2						ああ、エレボスはお部屋のこっち側で\n割れたお皿を片付けるんだ！
+	ディーア	通常2						向こうの方は\nオレがやっとくから、な？
+	エレボス	泣き						えぇ……\nお掃除は得意だけど……
+StopBgm
+	エレボス	泣き						エレがしてほしい"おしおき"は、\nそういうのじゃなくて……
+Bgm	神秘
+Tween	エレボス	MoveBy	x=10				NoWait
+	エレボス	通常						手錠かけるとか、一枚脱がすとか……
+Tween	エレボス	MoveBy	x=-10				NoWait
+	エレボス	通常						「おしおきが必要だな\n　ｶﾁｬｶﾁｬ………………」とか……
+Tween	エレボス	PunchPosition	y=50				NoWait
+	エレボス	泣き						そういうのがいいの！
+	ディーア	汗2						え、エレボス？\nちょっと、そういうおしおきは……
+Tween	エレボス	MoveBy	x=10				NoWait
+	エレボス	通常						だめ……？
+StopBgm
+Se	ドア開く
+CharacterOff
+	タルタロス	通常高め	画面外_右
+Tween	タルタロス	MoveTo	x=90 time=1.5				Add
+	タルタロス	通常高め						マスター、今日の……あ……
+Bgm	平和
+CharacterOff
+	エレボス	通常	1_2_b
+	エレボス	通常						タルちゃん……?
+CharacterOff
+	タルタロス	通常高め	2_2
+	タルタロス	通常高め						エレ……？
+	タルタロス	通常高め						……なんでエレが\nマスターといっしょにいるの？
+CharacterOff
+	エレボス	通常	1_2_b
+	エレボス							タルちゃんこそ……\nどうして、マスターの部屋に……？
+CharacterOff
+	タルタロス	通常高め	2_2
+Tween	タルタロス	PunchPosition	y=50				NoWait
+	タルタロス	通常高め						タルはマスターと用事があるの！
+CharacterOff
+	エレボス	通常	1_2_b
+Tween	エレボス	PunchPosition	y=50				NoWait
+	エレボス							エレもマスターのお願い聞いてたの！
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	汗2						待て待て二人とも！
+	ディーア	驚き2						エレボスとタルタロスは……\n前から知り合いなのか？
+CharacterOff
+	エレボス	通常	1_2_b
+	エレボス	通常						うん、\n昔近くに住んでた、みたいな……
+CharacterOff
+	ディーア	驚き2
+	ディーア	笑い2						へぇ、そうか\nじゃあ近所の友だちってとこか？
+CharacterOff
+	タルタロス	通常高め	2_2
+	タルタロス	通常高め						別に、友だちとかじゃないし……
+	タルタロス	通常高め						エレはめんどくさいの、\n一人だとすぐさみしがるし……
+CharacterOff
+	エレボス	泣き	1_2_b
+	エレボス	通常						でも、タルちゃんのほうが\nめんどくさいよ……？
+	エレボス	通常						他の子と同じじゃないと、\nすぐいじけるもん……
+CharacterOff
+	ディーア	照れ2
+	ディーア	笑い2						なんだ二人とも、\nお互いのことよく知ってるし\n実は仲良いんじゃないか？
+CharacterOff
+Param	character_grayout=false
+	エレボス	通常	2_4_b
+	タルタロス	通常	3_4
+Tween	エレボス	PunchPosition	y=50				NoWait
+Tween	タルタロス	PunchPosition	y=50				NoWait
+	エレボス＆タルタロス							なかよくないもん！
+Param	character_grayout=true
+CharacterOff
+	ディーア	汗2						<size=20>息はぴったりだけどなぁ……</size>
+	ディーア	驚き2						あ、そうだタルタロス、\nなにか用事があったんだろ？
+CharacterOff
+	タルタロス	通常高め	2_2
+Tween	タルタロス	MoveBy	x=10				NoWait
+	タルタロス	通常高め						あったけど……\nもう今日はなんか帰りたい
+CharacterOff
+	ディーア	汗2	画面外_左_b
+	タルタロス	通常高め	3_4
+Tween	ディーア	MoveTo	x=-90				NoWait
+	ディーア	汗2						待て待て、\n用事があるなら帰っちゃうのは\nまずいんじゃないか？
+	タルタロス	通常高め						でもマスター\n他の子と一緒にいたし……
+	ディーア	汗2						まぁそうだけどさ……\nエレボスがいたからって、用事が\n済ませられないわけじゃないだろ？
+	タルタロス	通常高め						……じゃあマスター\nタルとの約束、覚えてる？
+	ディーア	怪しい2						約束……？
+StopBgm
+	タルタロス	通常高め						覚えてないのね……
+Bgm	コメディ
+Tween	タルタロス	PunchPosition	y=70				NoWait
+	タルタロス	通常高め						もういい、マスターきらい！
+	ディーア	本気2						ま、待てタルタロス！\n思い出すから！
+Tween	タルタロス	PunchPosition	y=50				NoWait
+	タルタロス	通常高め						もうやだ、もう帰る！
+	ディーア	汗2						まぁそう言わず、\nここは冷静に話し合……
+Se	ガラス割れる
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						うぉわあっ！\n今度はなんだ？
+CharacterOff
+	エレボス	通常	1_2
+	エレボス	照れ						マスター……失敗しちゃった……
+CharacterOff
+	ディーア	絶望2	1_2
+	タルタロス	通常高め	2_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						エレボス!?\nお片付けするって言ったろ？
+CharacterOff
+	エレボス	通常	1_2
+	エレボス	泣き						でもマスター、タルちゃんと\nお話してばっかりだから……
+Tween	エレボス	MoveBy	x=10				NoWait
+	エレボス	通常						エレ、駄メイド？\n"おしおき"する……？
+CharacterOff
+	ディーア	汗2	1_2
+	タルタロス	通常高め	2_2
+	ディーア	汗2						お、おしおきはしないけど……
+Se	ガラス割れる
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						うおわっ！
+CharacterOff
+	ディーア	絶望2	画面外_右
+	エレボス	通常	1_2
+Tween	ディーア	MoveTo	x=100				NoWait
+	ディーア	汗2						わかったエレボス、\nそのうちおしおきするから、な！
+	エレボス	通常						ほんとに……？\nそれじゃあエレと\n"おしおき"の約束してくれる……？
+	ディーア	汗2						約束は……
+Se	打1
+	タルタロス	<Off>						タルが先っ!!!!
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						はいっ!!
+CharacterOff
+	タルタロス	通常高め	2_2
+Tween	タルタロス	PunchPosition	y=50				NoWait
+	タルタロス	通常高め						マスターは、\nタルと先に約束したのっ！
+CharacterOff
+	ディーア	汗2	3_4			0
+	エレボス	通常	1_2_b			0
+	ディーア	汗2						た、タルタロス？\n悪いけど、その約束って……
+CharacterOff
+	タルタロス	通常高め	2_2
+Tween	タルタロス	PunchPosition	y=50				NoWait
+	タルタロス	通常高め						マスター、タルに\nドレス着せてくれるって言った！
+CharacterOff
+	ディーア	汗2	3_4			0
+	エレボス	通常	1_2_b			0
+	ディーア	怪しい2						ドレス……？
+StopBgm
+	ディーア	驚き2						あ、そういえば……！
+Se	回想
+FadeOut	white					.5
+CharacterOff						0
+	　　　　　　　　　　　　　　
+Bg	酒場1F
+FadeIn	white					.5
+Bgm	都市
+Param	character_grayout=false
+	　　　　　　　　							\n  　   　　<color=blue><dash=2>数日前<dash=2></color>
+Param	character_grayout=true
+	ディーア	通常正装2	1_2			.3
+	タルタロス	通常高め	画面外_右			0
+	ディーア	あはは正装2						酒場でドレスの撮影なんて\n不安だったけど……
+	ディーア	笑い正装2						みんな無事、\n綺麗に撮れたみたいで良かったな
+Tween	ディーア	MoveBy	x=-10				NoWait
+	ディーア	通常正装2						それじゃあオレもそろそろ着替え……
+Tween	タルタロス	MoveTo	x=500 time=1				NoWait							これディーアたち消さずに出したほうが良いと思います！
+Tween	タルタロス	RotateTo	z=20 time=0				NoWait
+	タルタロス	通常高め						ちらっ、ちらちら？
+	ディーア	あはは正装2						ん、何か見られてる気が……
+	タルタロス	通常高め						……タルは、他の子みたいに\nドレスとか着れないのね
+	タルタロス	通常高め						べつに、着れなくてもいいけど
+	ディーア	驚き正装2						た、タルタロス？\n別に、そういうわけじゃ……
+	タルタロス	通常高め						もういい、もう何もしたくない、\nおやすみ！
+Tween	タルタロス	MoveTo	x=800 time=0.5				NoWait							これディーアたち消さずに出したほうが良いと思います！
+Tween	タルタロス	RotateTo	z=20 time=0				NoWait
+	ディーア	本気正装2						わ、わかった！\n今度機会があったら、\nタルタロスにも用意するから！
+Tween	タルタロス	MoveTo	x=500 time=1				Add							これディーアたち消さずに出したほうが良いと思います！
+Tween	タルタロス	RotateTo	z=20 time=0				Add
+	タルタロス	通常高め						……本当？
+	ディーア	あはは正装2						ああ、約束する！
+	タルタロス	通常高め						……じゃあ、楽しみにしてる
+StopBgm
+Se	回想
+FadeOut	white					.5
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	汗2	3_4			0
+	エレボス	通常	1_2_b			0
+	　　　　　　　　
+FadeIn	white					.5
+Bgm	平和
+	ディーア	汗2						たしかに、約束してたな……
+	エレボス	通常						そうなの……？
+	ディーア	汗2						ああ、\nあの後いろいろあって忘れてたんだ
+CharacterOff
+	タルタロス	通常高め	2_2
+	タルタロス	通常高め						リディちゃんが、\nまた撮影モデルの人探してるって
+CharacterOff
+	ディーア	怪しい2	3_4
+	エレボス	通常	1_2_b
+	ディーア	怪しい2						そういえば、さっきリディも\nそんな話してたっけか……
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						よし、それじゃあこうしよう！
+	ディーア	通常2						エレボス、\nタルタロスのドレスの着替えを\n手伝ってくれないか？
+	エレボス	通常						タルちゃんの、着替え……？
+	ディーア	笑い2						ああ、さっき\n「何かお願いない？」って言ってたろ\nこれがオレのお願いだ
+	エレボス	通常						マスターの、お願い……
+	エレボス	通常						でも……タルちゃんきっと、\n「やだ」とか「帰る」とか言うし……
+CharacterOff
+	タルタロス	通常高め	2_2
+Tween	タルタロス	PunchPosition	y=50				NoWait
+	タルタロス							マスターおそい！\nもうやだ、かえる！
+CharacterOff
+	ディーア	怪しい2	3_4
+	エレボス	通常	1_2_b
+	エレボス	通常						ほら……だから、エレもいや……
+	ディーア	汗2						まいったな……
+	ディーア	目閉じ2						しょうがない、ここはオレが……
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	目閉じ2				0
+FadeIn	black					.5
+	ディーア	目閉じ2						二人とも、仲良くできないなら、\nドレスのモデルは他の子に\nやってもらうしかないかもしれないな
+CharacterOff
+	タルタロス	通常高め	2_2
+	タルタロス							他の子……？
+CharacterOff
+	ディーア	目閉じ2
+	ディーア	目閉じ2						ああ、そうだ\nそのときは……\n二人はここで残ってお片付けかな……
+CharacterOff
+	エレボス	通常	1_2_b
+	エレボス	通常	1_2_b					ここでお片付け……？
+	エレボス	泣き	1_2_b					それじゃあ、マスターと\nはなればなれになっちゃう……
+Tween	エレボス	PunchPosition	y=50				NoWait
+	エレボス	通常						……わかった！\nエレ、おてつだいする！
+CharacterOff
+	タルタロス	通常高め	2_2
+	タルタロス	通常高め						え、じゃあ……
+	タルタロス	通常高め						タルも、エレに着せてもらう……
+CharacterOff
+	ディーア	驚き2						二人とも……
+	ディーア	笑い2						よぉし、それじゃあ\nさっそく着替えよう！
+	ディーア	驚き2						あ、そうだ……
+CharacterOff
+	ディーア	汗2	画面外_右
+	エレボス	通常	1_2_b
+Tween	ディーア	MoveTo	x=100				NoWait
+	ディーア	汗2						エレボス？\n念のためだけど……\n失敗するつもりじゃないよな？
+	エレボス	通常						ふぇ？ エレ失敗しないよ？
+	エレボス	笑い						失敗なんか、したことないもん♪
+StopBgm
+Param	character_grayout=true
+FadeOut	black					1
+CharacterOff
+Bg	酒場1F
+Bgm	都市
+	エレボス	通常
+FadeIn	black					1
+	エレボス	通常						……タルちゃん、これでいい？\n苦しくなぁい？
+	タルタロス	<Off>						うん、大丈夫……
+CharacterOff
+	ディーア	通常正装2	2_4
+	リディ	笑い2	3_4
+	キノコリオン		2_3_b
+	リディ	笑い2						エレちゃん、準備がんばってるねっ♪
+	ディーア	あはは正装2						ああ、はじめは不安だったけど……
+	ディーア	笑い正装2						エレボスって、\n実はしっかりしてるところあるんだな
+CharacterOff
+	エレボス	通常
+	エレボス	通常						あれ……
+	エレボス	泣き						マスター、後ろっ！!
+CharacterOff
+	ディーア	通常正装2	2_4
+	リディ	笑い2	3_4
+	キノコリオン		2_3_b
+StopBgm
+Tween	ディーア	MoveBy	x=-10				NoWait
+Tween	リディ	MoveBy	x=10				NoWait
+	ディーア	驚き正装2						後ろ……？
+CharacterOff
+Param	character_grayout=false
+Bgm	緊迫
+	キノコリオン	大
+	集中線		エフェクト表
+	二人	<Off>						キノコリオン!!
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコッ!?!?
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常正装2	3_4
+	リディ	悲しい2	2_4
+Tween	ディーア	MoveTo	x=-120				NoWait
+Tween	リディ	MoveTo	x=120				NoWait
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	ディーア	絶望正装2						こ、こいつ、\nいつのまに入り込んでたんだ……？
+StopBgm
+	リディ	悲しい2						すごい馴染んじゃってたね……？
+Bgm	バトル
+	ディーア	本気正装2						とにかく、今はこいつを片付けよう！
+Se	走る
+Tween	ディーア	MoveTo	x=600
+CharacterOff
+	ディーア	本気正装2	2_4
+	エレボス	通常	2_2
+	ディーア	本気正装2						エレボス、お願いばっかりで悪いが\nまた手伝ってくれるか？
+Tween	エレボス	PunchPosition	y=50				NoWait
+	エレボス	嬉しい						おっけー♪\nエレはお掃除、得意だもん♪
+FadeOut	white					.7
+If	isdebug==true
+CharacterOff
+Jump	*G_471_02
+EndIf
+EndScenario
+
+# G_471_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+CharacterOff
+FadeOut	black					0
+StopSound
+Bg	酒場1F
+Bgm	バトル
+	キノコリオン
+FadeIn	black					.5
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコノコノコッ!!
+Se	打1
+FadeOut	white					.1
+CharacterOff						0
+	ディーア	悔しい正装2				0
+FadeIn	white					.1
+Tween	ディーア	MoveBy	x=50				NoWait
+	ディーア	悔しい正装2						くっ……
+Se	光1
+FadeOut	white					.3
+CharacterOff
+	エレボス	通常
+Param	character_grayout=false
+	オーラ青		エフェクト表			.2
+FadeIn	white					.2
+Tween	エレボス	PunchPosition	y=50				NoWait
+	エレボス	通常				0		ここはまかせろー！ ばりばりー！		1559-13
+Se	光3
+FadeOut	white					.7
+CharacterOff						0
+	キノコリオン					0
+StopBgm
+Wait						.5
+FadeIn	white					.2
+Tween	キノコリオン	ShakePosition	x=5				Add
+	キノコリオン							ノコぉ……
+Tween	キノコリオン	MoveBy	y=-800 time=3				NoWait
+Wait						.2
+Se	倒れる
+Wait						.3
+CharacterOff						.5
+Wait						.7
+Bgm	平和
+Param	character_grayout=true
+CharacterOff
+	ディーア	笑い正装2	1_2
+	エレボス	通常	2_2
+	ディーア	笑い正装2						ありがとうエレボス、\n助かったよ！
+	エレボス	通常						うん……\nエレがんばった……
+	カメラマンさん	<Off>						失礼しまーす！\nそろそろ撮影入りますねー！
+	ディーア	驚き正装2						あ、ちょうど撮影の人も\n来たみたいだな
+	タルタロス	<Off>						ねえマスター、まだ？
+	ディーア	あはは正装2						ごめんタルタロス、今行くよ！
+	ディーア	笑い正装2						よし、エレボスも一緒に行こう
+	エレボス	通常						わかった、エレもいく……
+StopBgm
+FadeOut	black					.5
+CharacterOff						0
+Wait						1
+Bg	酒場1F					0
+	タルタロス	花嫁				0
+	　　　　　　　　
+Bgm	都市					.7
+FadeIn	black					.5
+Param	character_grayout=false
+	カメラマンさん	<Off>						それじゃあ、花嫁さんオンリーの\nお写真もいただきまーす！
+	カメラマンさん	<Off>						ハイ、もちひつじ！
+FadeOut	white					.2
+CharacterOff						0
+	タルタロス	花嫁				0
+FadeIn	white					.2
+	タルタロス	花嫁						……マスター、ちゃんと見てる？
+CharacterOff
+	ディーア	通常正装2	1_2			0
+	エレボス	通常	2_2			0
+Param	character_grayout=true
+	ディーア	笑い正装2						ああ、もちろん！\nタルタロスのドレス姿、\nすごく綺麗だよ
+	タルタロス	<Off>						……ほんと？
+	エレボス	通常						うん、\nタルちゃんかわいい……
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=false
+	タルタロス	花嫁				0
+FadeIn	white					.2
+	タルタロス	花嫁						エレも……ありがと
+	タルタロス	花嫁						じゃあ、もう少し、撮ってもらう……
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	笑い正装2	1_2			0
+	エレボス	通常	2_2			0
+	　　　　　　　　
+FadeIn	white					1
+	ディーア	笑い正装2						撮影もうまくいったし、\nタルタロスも機嫌直ったみたいだな
+	ディーア	笑い正装2						これもエレボスが\n頑張ってくれたおかげだよ
+	エレボス	通常						はぁ……
+	ディーア	驚き正装2						ど、どうしたエレボス？\nさっきから浮かない顔して……
+	エレボス	通常						エレ、ちゃんとお仕事しちゃった……
+	エレボス	通常						これじゃマスターに\n"おしおき"してもらえない……
+	ディーア	あはは正装2						そ、それで元気なかったのか……
+	ディーア	通常正装2						よし、じゃあ分かった
+	ディーア	笑い正装2						エレボス、こっちにおいで？
+StopBgm
+	エレボス	通常						え……？
+Bgm	神秘
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	トライアルスチル47110		エフェクト表
+FadeIn	white					.5
+	エレボス	<Off>						もしかして……\nついに"おしおき"……？
+	エレボス	<Off>						どきどき……\nどきどき……\nどきどき……♥
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常正装2	1_2
+	エレボス	通常	2_2
+Tween	エレボス	PunchPosition	y=50			.5	NoWait
+	エレボス	泣き						ひゃんっ♥
+	エレボス	通常						ま、マスター、急になに……？
+	ディーア	あはは正装2						あぁごめん、\nこれはおしおきじゃなくて、\nご褒美のなでなでだ
+StopBgm
+	エレボス	通常						なでなで……？
+Bgm	凱旋
+	ディーア	笑い正装2						ああ、\n今日のエレボスは偉かったからな
+	エレボス	通常						ご褒美のなでなで……
+	エレボス	通常						これは……
+FadeOut	white					.5
+CharacterOff
+	オーラ桃		エフェクト裏
+	トライアルスチル47111		エフェクト表
+Param	character_grayout=false
+FadeIn	white					.5
+	エレボス	<Off>						"おしおき"じゃないけど、\nちょっとすき……♥
+StopSound
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff
+	　　　　　　　　
+Bg	酒場_宿屋
+FadeIn	white					1
+Param	character_grayout=false
+Bgm	平和
+	　　　　　　　　							\n  　　  　　<color=blue><dash=2>翌日<dash=2></color>
+	ディーア	通常2	画面外_右			0
+	エレボス	通常	1_2			.3
+Param	character_grayout=true
+	エレボス	通常						マスター、まだかなぁ……
+Se	ドア開く
+Tween	ディーア	MoveTo	x=140 time=1.2				NoWait
+	ディーア	通常2						さて、今日の討伐も終わりっと
+Tween	エレボス	PunchPosition	y=50				NoWait
+	エレボス	嬉しい						あ、マスター♪
+	ディーア	笑い2						お？\nエレボス、今日もここにいたのか
+	エレボス	笑い						うん♪\nマスターのこと、\nお部屋でずっと待ってたの……♥
+	ディーア	笑い2						そうか\nわざわざありがとうな
+	ディーア	照れ2						そうだ、この前は助かったよ\nおかげでいろいろ……
+StopBgm
+Tween	エレボス	PunchPosition	y=50				NoWait
+	エレボス	照れ						えいっ！
+Se	ガラス割れる
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						うわあああっ!!
+Bgm	コメディ
+	ディーア	絶望2						ど、どうしたんだエレボス！
+	エレボス	通常						マスター……
+	エレボス	通常						エレやっぱり、\nご褒美だけじゃだめみたい……
+	ディーア	絶望2						なん……だと……
+	エレボス	通常						……ねえマスター？
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏			0
+	トライアルスチル47110		エフェクト表			0
+FadeIn	black					.5
+	エレボス	<Off>						エレ、わるい子？ 駄メイド？
+	エレボス	<Off>						エレのこと……"おしおき"する……？
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_471_01
+EndIf
+EndScenario

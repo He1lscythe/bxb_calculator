@@ -1,0 +1,1074 @@
+# E_606_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	ガヤA_BGM
+Bg	酒場_カフェ
+Param	character_grayout=false
+FadeIn	white					.5
+	　　　　　　　　　　							\n<color=blue>　　　　　 貿易の街リーマ\n　　カフェ｢サーティーンスターズ｣</color>
+Bgm	都市
+CharacterOff
+	勇者A		1_2
+	勇者D		2_2
+	オーラ桃		エフェクト裏
+Tween	勇者D	MoveBy	x=-10				NoWait
+	勇者D							ねぇ、次はあそこ行こ？\n前から行きたかったの
+Tween	勇者A	MoveBy	x=10				NoWait
+	勇者A							君の行きたいところなら、\nどこへでも連れて行くよ
+	勇者D							ほんと!?\nやったぁ♪
+CharacterOff
+Param	character_grayout=true
+Wait						.2
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア	怪しい2						…………なんだか今日は、\nカップルが多い気がするな
+	リディ	笑い2						あったりまえじゃん！\n今日はバレンタインだもん♪
+	ディーア	驚き2						バレンタイン？\nああ、そういえば今日か
+	リディ	照れ2						そんなこと言っちゃってぇ♪\nほんとはマスター、何日も前から\n楽しみにしてたんでしょ？
+	ディーア	汗2						いや、本当に忘れてたんだよ\n最近はいろいろ忙しかったしな
+	リディ	驚き2						ふぅん……じゃあマスター、今年は\nまだ誰からもチョコもらってないの？
+	ディーア	怪しい2						言われてみると、たしかにそうだな
+CharacterOff
+	リディ	悔しい2						ふぅん、そうなんだ……
+	黒グラデーション		エフェクト裏
+	リディ	照れ2						<size=20>じゃあ、リディのチョコが……</size>
+CharacterOff
+	ディーア	驚き2						ん？\nリディ、どうかしたか？
+Param	character_grayout=false
+	オーラ桃		エフェクト裏			.5
+	リディ	悔しい2						……マスター、あのね！
+	リディ	照れ2						今年はチョコもらってないんでしょ？\nそれなら……<dash=2>
+Param	character_grayout=true
+CharacterOff						0
+StopBgm
+Bg	白背景					0
+CharacterOff	リディ					0
+CharacterOff	オーラ桃					0
+	ユノ	拡大	エフェクト表			0
+	？？？？							<dash=2>それなら、\nあたしがいちばんだね♪
+Bg	酒場_カフェ
+Param	character_grayout=false
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	二人							…………え？
+CharacterOff
+Param	character_grayout=true
+	ユノ	拡大	エフェクト表					こんなところにいるなんて♪\nいっぱい探したんだよ？ 兄さん♥
+CharacterOff
+Bgm	絶望
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	リディ	悔しい2						……マスター、この子誰？
+	ディーア	怪しい2						いや、オレは知らない子だけど……
+CharacterOff
+	ユノ	嬉しい						ユノね、チョコつくってきたんだよ♪\n兄さん昔から、大好きだったでしょ？\nあたし手づくりのお菓子♥
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	怒り2	2_2
+	リディ	怒り2						……マスター？
+	ディーア	汗2						待ってくれリディ、\nこれはきっと……勘違いか何かなんだ
+	ディーア	あはは2						えーと……ユノ、さん？
+CharacterOff
+	ユノ	嬉しい						なぁに、兄さん？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	悔しい2	2_2
+	ディーア	あはは2						いや、その……悪いけど、\nオレは君の兄さんだった\n覚えがないんだ
+	ディーア							たぶん、人違いじゃないかな？
+CharacterOff
+	ユノ	笑い						ふふっ♪\nなにそれ兄さん、ドッキリのつもり？
+	ユノ	通常						間違えるわけないじゃん！\nだって……ユノは兄さんの、\n血のつながった妹だよ？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア							血のつながった妹……
+StopBgm
+Param	character_grayout=false
+	ディーア	驚き2
+	リディ	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人	<Off>						ええっ!?
+Param	character_grayout=true
+Bgm	緊迫
+	リディ	驚き2						マスター妹いたの!?
+	ディーア	驚き2						いや、オレに妹がいるはずが……
+	リディ	悔しい2						でも、この子はマスターの\n「血のつながった妹」だって\n言ってるよ？
+	ディーア	汗2						そう言われてもな……\nオレは一人っ子だから\n姉さんも妹もいるはずないんだよ
+StopBgm
+	黒グラデーション		エフェクト表
+	？？？？							……妹がいるはずない？
+CharacterOff	黒グラデーション
+	ディーア	怪しい2						…………ん？
+CharacterOff
+Bgm	コメディ
+	ライオンハート		1_2_b
+	グラーキの黙示録		2_2
+Tween	グラーキの黙示録	PunchPosition	y=50				NoWait
+	グラーキの黙示録							ひどぉい、お兄ちゃん……\n私にあんな写真送らせといてぇ♥
+Tween	ライオンハート	PunchPosition	y=50				NoWait
+	ライオンハート							えー！ お兄ちゃん、私のこと\n妹だと思ってなかったの!?
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							ま、待て、オレは\nそんなつもりで言ったわけじゃ……
+CharacterOff
+	ハッピーエンド
+	高電圧可変弩							ちょっとお兄ちゃんっ！\n私の単三電池食べたでしょ！
+	ハッピーエンド							あれ？お兄ちゃんどこかいくの？\nまって、私も行くー！
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	照れ2	2_2
+	ディーア							待て待て、電池は食べてないし、\nどこにもいかないから！
+	ディーア							だから今は、ちょっとだけ静かに……
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	ジョーカー							お兄ーちゃん♪\n今日はジョカと2人で遊ぼ？
+CharacterOff
+	デュエル
+Tween	デュエル	PunchPosition	y=50				NoWait
+	デュエル							待ってにぃに！ 今日はわたしと！
+	エリス							やぁん、お兄ちゃん助けてぇ♥\nこの子たちがエリちゃんに\nひどいことするのぉ♥
+CharacterOff
+Param	character_grayout=true
+	ユノ	病み						……妹がいるはずが？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア							これは、その……
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	ひのきのぼう
+Tween	ひのきのぼう	PunchPosition	y=50				NoWait
+	ひのきのぼう							ちょっと兄さま！\nバレンタインなのに\nひのを放っておくなんてひどいわ！
+	ナターシャ							とってもいいお天気ですわ、お兄さま\nこんな日はピクニックをしましょう♪
+	テレプシコーラ							ごきげんよう兄さま\n本日の舞踏会は……あら？
+CharacterOff
+	黒グラデーション		エフェクト表
+	ユノ	病み2						たくさん、妹がいるんだね……？
+CharacterOff
+Param	character_grayout=true
+	ディーア	あはは2	1_2
+	リディ	驚き2	2_2
+	ディーア							いや、この子たちは、妹というか……
+CharacterOff
+	オグン							にいに呼んだ？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	照れ2	2_2
+	ディーア	汗2						……よ、呼んでない
+CharacterOff
+	ユノ	病み2						ねえ兄さん、妹、何人いるの……？
+	ノーネーム	通常						マスターさんは、十二体の魔剣から\n兄扱いされています
+	ユノ	病み2						ふぅん…………
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	照れ2	2_2
+	ディーア							いや、待ってくれ、\nこれには、深い事情が……
+CharacterOff
+	ノーネーム	通常						うち一体には自分から\n"お兄ちゃん"と呼ばせています
+CharacterOff
+	黒グラデーション		エフェクト表
+	ユノ	病み2						…………………………兄さん？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア							は、はい
+CharacterOff
+	ユノ	病み2						どういうこと？\n兄さんの妹は\nユノだけのはずなのに……
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							い、いや……\nオレもよくわからなく\nなってきたな……
+CharacterOff
+	黒グラデーション		エフェクト表
+	ユノ	病み						ふぅん……そうやってごまかすんだ
+	ユノ	笑い						あっそうだ♪\nユノ、いいこと思いついちゃった♪
+CharacterOff
+	ユノ	拡大嬉しい	エフェクト表					本物の妹のあたしが、\n妹を名乗ってる子たちのこと、\nどんな子か確かめちゃおう♪
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	イベントロゴ606		エフェクト表			0
+FadeIn	white					.3
+	ユノ	<Off>						兄さんも……\n手伝って、くれるよね？
+FadeOut	white					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_606_02
+EndIf
+EndScenario
+
+# E_606_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	コメディ
+Bg	酒場の地下
+FadeIn	white					.5
+	ユノ	通常						こっちだよ、兄さん♪
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							この部屋は？
+CharacterOff
+	ユノ	笑い						兄さんを勝手に「お兄ちゃん」って\n呼んでる人たちに集まってもらったの
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	照れ2	2_2
+	リディ							じゃあ、「お兄ちゃん部屋」だね♪
+	ディーア	怪しい2						お兄ちゃん部屋って何だ……？
+CharacterOff
+	ユノ	嬉しい						ほぉら、早く入ろ？
+Se	ドア開く
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+	白背景		エフェクト表
+Bg	酒場_宿屋
+	　　　　　　　　　　
+Wait						.5
+FadeIn	white					.3
+	三人							あ、お兄ちゃん！
+Param	character_grayout=true
+CharacterOff
+	ハッピーエンド							もう遅いよお兄ちゃんっ！\n妹を放ってどこ行ってたの？\n私、ずーーっと待ってたのに！
+	ライオンハート							ねぇお兄ちゃん、こんな作戦\n思いついたんだけど試してみない？\nワンチャンあるとおもうんだけどっ★
+	エリス							それよりお兄ちゃん！\n今日はエリちゃんといっしょに\n人類滅ぼしちゃお♥
+CharacterOff
+	エリス		2_2
+	ハッピーエンド		1_2					ちょっと！ お兄ちゃんはあたしと\n一緒に最強に最高な最後を迎えるの！\n邪魔しないでよ！
+	ハッピーエンド		1_2_b
+	エリス							ざんね～ん、エリちゃんを止めても\n争いは止まらないよ？
+	エリス							むしろもっと酷くなっちゃうかも♥\nあははは♪
+CharacterOff
+	ディーア	あはは2	1_3
+	ライオンハート		3_3
+	ディーア							ハッピーエンドと<ruby=カタストロフ＝エリス>破滅の化身</ruby>を\nおんなじ部屋に入れるなんて、\nなんて無茶をするんだ……
+Tween	ライオンハート	PunchPosition	y=50				NoWait
+	ライオンハート							にははっ、きっとお兄ちゃんなら、\n最強に最高な人類滅亡目指せるよ♪
+	ディーア	汗2						ライオンハート……\nそれ、いちばん目指しちゃ\nダメなやつじゃないか？
+	ライオンハート							だいじょーぶ、わたしを信じて！\nいけるいけるっ！
+	ディーア	怪しい2						だから、いけちゃだめなんだって
+CharacterOff
+	ユノ	切ない						ねえ兄さん？ この子たちは、\nどうして兄さんのこと、\n「お兄ちゃん」って呼んでるの？
+	ライオンハート							んー、見た感じ同じか年上っぽいし、\nなんだか懐かしい感じがしたから♪
+	エリス							どうせ終わる世界なら、\n本能のままに過ごす方が幸せでしょ？
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	通常2	2_2
+	ディーア							……と、いうことだそうだ
+	リディ	照れ2						みんな自由だねー
+CharacterOff
+	ユノ	切ない						じゃあ……\nみんな本当の妹じゃないのに、\nお兄ちゃんって呼んでるってこと？
+	ハッピーエンド							義理の妹でも、妹は妹なんだから、\n甘えたり頼ったりしていいんだよ？
+	ユノ	切ない						で、でも……
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	リディ							ねえ、ずっと気になってたんだけど\nユノちゃんはほんとにマスターの\n血のつながった妹なの？
+	ディーア	汗2						そういえば……
+CharacterOff
+StopBgm						2
+	ユノ	切ない						……ユノは兄さんの、本当の妹だよ？
+	ユノ							だって、血も、\n身体も、みぃんな……<dash=2>
+	　　　　　　　　　　
+CharacterOff
+Se	火事
+Se	光3
+Se	闇2
+Shake	Graphics
+Wait						.3
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+Bgm	緊迫
+	ディーア							何の音だ!?
+	リディ	悔しい2						マスター、窓の外に\n魔物がいっぱいいるよ！
+	ディーア	悔しい2						ほんとだ！\nこんな数、どこから……
+	ディーア	怒り2						とにかく、倒しに行こう！
+CharacterOff
+	エリス		3_3
+	ハッピーエンド		2_3_b
+	ライオンハート		1_3
+Tween	ライオンハート	PunchPosition	y=50				NoWait
+	ライオンハート							にははっ！ 負ける気がしない♪
+	エリス							さぁ聞かせて、\nとても素敵な不協和音♥
+	ハッピーエンド		2_3					全員もれなく、\nハッピーエンドにお連れしまーっす！\n大丈夫、痛くしないから♪
+If	isdebug==true
+CharacterOff
+Jump	*E_606_02
+EndIf
+EndScenario
+
+# E_606_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	市街地A
+Param	character_grayout=false
+	エリス		3_3
+	ディーア	本気2	2_3
+	ライオンハート		1_3
+FadeIn	white					.5
+Se	光1
+	オーラ青		エフェクト表			1
+	ライオンハート							勝ち筋みえたっ！
+	エリス							人生おつおつ♥
+Se	光3
+FadeOut	white					.5
+CharacterOff						0
+	ジェムジェム
+Wait						.2
+FadeIn	white					.3
+Se	打1
+Shake	ジェムジェム		x=5				Add
+	ジェムジェム							キュゥ…………
+Tween	ジェムジェム	MoveBy	y=-800				NoWait
+StopBgm						1
+Wait						.2
+Se	倒れる
+Wait						1
+CharacterOff
+Param	character_grayout=true
+	ディーア	通常2	1_2
+	リディ	通常2	2_2
+Bgm	平和
+	ディーア							これでこのあたりは大丈夫そうだな
+CharacterOff
+	ハッピーエンド							お兄ちゃんと私がいれば\nなーんでもできちゃうねっ！
+	ユノ	悲しい						…………
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	リディ							ユノちゃん、どうしたの？
+CharacterOff
+	ユノ	通常						ううん、なんでもない
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	驚き2	2_2
+	ディーア							よし、じゃあ酒場に戻ろうか
+CharacterOff
+StopBgm						1
+	　　　　　　　　　　
+Wait						1
+	黒グラデーション		エフェクト裏
+	ユノ	悲しい						………………
+	ユノ	悲しい						……私も、兄さんのために<dash=2>
+FadeOut	black					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_606_04
+EndIf
+EndScenario
+
+# E_606_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	コメディ
+Bg	酒場の地下
+CharacterOff
+	ユノ	嬉しい	2_2
+	ディーア	汗2	1_2
+FadeIn	white					.5
+	ディーア							えーと、ユノさん？\n今はどこに向かってるのかな
+	ユノ							お部屋だよ？\n妹を名乗る子たち三人に\n集まってもらってるの♪
+	ディーア	あはは2						オレは……その部屋に\nいたほうが、いいのかな？
+	ユノ							うん♪\n兄さんがその子たちのこと、\nどう思ってるかも聞きたいから♪
+	ディーア	汗2						そ、そうですか……
+	ユノ	嬉しい						じゃあ、部屋に入るよ♪
+Se	ドア開く
+FadeOut	white					.5
+Bg	酒場_商業施設
+CharacterOff						0
+	テレプシコーラ		3_3
+	ひのきのぼう		1_3
+	ナターシャ		2_3
+Wait						.5
+FadeIn	white					.2
+Wait						.3
+	ナターシャ							あらお兄さま、ごきげんよう\nちょうどティータイムでしたの
+	ナターシャ		2_3_b
+	ひのきのぼう							兄さま！\nひのを放っておくなんてひどいわ！
+	ひのきのぼう		1_3_b
+	テレプシコーラ							お会いしたかったわ、兄さま♪
+CharacterOff
+	ユノ		2_2
+	ディーア	驚き2	1_2
+	ユノ	病み2						……この子たちには、\n「兄さま」って呼ばせてるんだね？
+	ディーア	汗2						いや、呼ばせてるというか、\n呼ばれてるというかね
+CharacterOff
+	テレプシコーラ							あら？ そちらはさっきの……？\nよろしければ、改めて\nお名前を教えてくださる？
+CharacterOff
+	ユノ		2_2
+	ディーア	汗2	1_2
+	ユノ	嬉しい						うん♪\nあたしは刻鳴鐘ユノ！\n兄さんの、血のつながった妹だよ？
+CharacterOff
+Param	character_grayout=false
+	テレプシコーラ		3_3
+	ひのきのぼう		1_3
+	ナターシャ		2_3
+	三人							血のつながった……妹!?
+Param	character_grayout=true
+	ナターシャ		2_3_b
+Tween	ひのきのぼう	PunchPosition	y=50				NoWait
+	ひのきのぼう							ちょっと兄さま！\nそんな話、ひの知らないんだけど！
+	ナターシャ		2_3					兄さまにどんな過去があっても、\n私はついていきますわ♪
+	ナターシャ		2_3_b
+	テレプシコーラ							兄さま？\nどういうことか、説明してくださる？
+CharacterOff
+	ユノ		2_2
+	ディーア	汗2	1_2
+	ディーア							えっと、それは……
+	ユノ	通常						ユノは兄さんの本当の妹だから、\n兄さんを勝手に兄扱いしてる\n子たちのこと調べることにしたの！
+	ディーア	怪しい2						……と、いうことらしいんだ
+CharacterOff
+	テレプシコーラ							つまり、兄さまの妹として\n本当にふさわしい魔剣は誰か、\n見定めたいということね？
+CharacterOff
+	ユノ		2_2
+	ディーア	あはは2	1_2
+	ディーア							ま、まぁ、だいたいそんなところだな
+CharacterOff
+	ひのきのぼう							一番ふさわしいのは、ひのじゃない？\nだって、初期装備中の初期装備だし！
+	テレプシコーラ							血のつながりがどうあれ、\n本当の兄妹にふさわしいのは、\n兄さまと私……
+	テレプシコーラ							他の皆様はお引き取りいただける？
+StopBgm
+CharacterOff
+	ユノ	無	2_2
+	ディーア	汗2	1_2
+	ディーア							ちょっと、二人とも落ち着けって……
+CharacterOff
+Se	火事
+Shake	Graphics
+CharacterOff
+	ユノ	驚き	2_2
+	ディーア	悔しい2	1_2
+Bgm	緊迫
+	ディーア							……何だ？
+CharacterOff
+	ナターシャ							……お兄さま、誰かいらしたみたい
+CharacterOff
+Se	ドア開く
+Wait						.3
+Se	走る
+	リディ	悔しい2	画面外_左
+Tween	リディ	MoveTo	x=-20 time=2				NoWait
+Wait						.5
+	リディ							マスター、たいへん！\nお店にお菓子の魔物が\n入ってきちゃってるよ！
+CharacterOff
+	ユノ	驚き	2_2
+	ディーア	悔しい2	1_2
+	ディーア							なんだって！
+CharacterOff
+	テレプシコーラ							兄さま、私と倒しに行きましょう！\n魔物どもは引き立て役として\n隅っこで踊ってくださいませ!
+	ひのきのぼう
+Tween	ひのきのぼう	PunchPosition	y=50				NoWait
+	ひのきのぼう							ひ、ひのだって！\nただの棒じゃないんだから！\n兄さまのこと、守れるんだから！
+	ナターシャ							お兄さまは、私のことだけ\n見ていればいいのですわ
+CharacterOff
+	ユノ	怒り	2_2
+	ディーア	悔しい2	1_2
+	ディーア							ああもう、みんな落ち着けってば！
+	ディーア	本気2						とにかく、まずは魔物退治だ！\nいくぞ、みんな!!
+If	isdebug==true
+CharacterOff
+Jump	*E_606_05
+EndIf
+EndScenario
+
+# E_606_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	酒場_カフェ
+	カプカプ
+FadeIn	white					.5
+Shake	カプカプ		x=5				Add
+	カプカプ							キュゥゥ…………
+Tween	カプカプ	MoveBy	y=-800				NoWait
+StopBgm						1
+Wait						.2
+Se	倒れる
+Wait						1
+CharacterOff
+	ユノ	悲しい	2_2
+	ディーア	通常2	1_2
+Bgm	平和
+	ディーア							よし、なんとか追い払えたな
+CharacterOff
+	ひのきのぼう							軟弱なお嬢様たちかと思ったら、\nなかなか、やるじゃないの
+	テレプシコーラ							兄さまと私がいればそこはフロア！\nこのくらいの結果、当然ですわ
+	ナターシャ							お兄さま、\nあとでご・褒・美、くださいね？
+CharacterOff
+	ユノ	切ない						…………
+CharacterOff
+	ディーア	驚き2						どうかしたか？
+CharacterOff
+	ユノ	悲しい						ううん、なんでもない
+CharacterOff
+	ディーア	あはは2						……そうか\nじゃあ、オレは\nみんなの様子を見てくるよ
+Se	走る
+CharacterOff						.7
+	　　　　　　　　　　
+Wait						2
+StopBgm						1
+Wait						1
+	黒グラデーション		エフェクト表
+	ユノ	悲しい						………………
+	ユノ	切ない						……血はつながってないはずだけど\n兄さんを思う気持ちは……本物みたい
+FadeOut	black					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_606_06
+EndIf
+EndScenario
+
+# E_606_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	ガヤA_BGM
+Bg	酒場_カフェ
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+FadeIn	white					.5
+	リディ	驚き2						あれ？\nマスター、あそこ……
+CharacterOff
+	ユノ							ねえ、どうして兄さんのこと\n「にいに」って呼ぶの？
+	？？？？	<Off>						それは<dash=2>
+Bgm	平和
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	照れ2	2_2
+Tween	ディーア	MoveBy	x=-50 y=-10				NoWait
+	リディ							ユノちゃんだ！\nさっそく調査、始めてるみたいだね♪
+	リディ	驚き2						……って、あれ？ マスター？\nなんで隠れてるの？
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	怪しい2						い、いや、\nなんとなく嫌な予感が……
+CharacterOff
+	デュエル		2_2
+	ジョーカー		1_2_b
+	デュエル							気分よ気分！\nそれに、ジョカお姉が\n先にお兄ちゃんって……
+	ジョーカー		1_2
+Tween	ジョーカー	PunchPosition	y=50				NoWait
+	ジョーカー							ジョカ、ずーっとお兄ちゃんみたいな\nお兄ちゃんがいてくれたらなーって\n思ってたの！
+CharacterOff
+	ユノ	切ない						……それだけ？
+CharacterOff
+	デュエル		2_2
+	ジョーカー		1_2
+	ジョーカー							それだけって、\n十分立派な理由でしょー!?
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							……ちょっと雲行きが怪しいな
+CharacterOff
+	ユノ	切ない						血がつながってる妹だけが、\n本当の妹なんだよ？
+CharacterOff
+	デュエル		2_2
+	ジョーカー		1_2_b
+	デュエル							えー、別にそんなこと……\nあ、にぃに！
+	ジョーカー		1_2
+Tween	ジョーカー	PunchPosition	y=50				NoWait
+	ジョーカー							あれ、ほんとだー♪
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	照れ2	2_2
+	ディーア							や、やあ、みんな……
+CharacterOff
+	デュエル		2_2
+	ジョーカー		1_2
+	ジョーカー							ねえお兄ちゃん？\nお兄ちゃんは、デュエルとジョカ、\nどっちが好き？
+CharacterOff
+	ディーア	照れ2	1_2
+	リディ	驚き2	2_2
+	ディーア							どっちって、\nそんなの選べるわけないだろ
+CharacterOff
+	デュエル		2_2
+	ジョーカー		1_2
+	ジョーカー							正直に教えてくれたら、\nジョカのこと、好きにしていいよ♪
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							あのなぁ、女の子が簡単に\nそんなこと言うもんじゃ……
+StopBgm
+	オグン		画面外_左_b
+Se	走る
+Tween	オグン	MoveTo	x=-150				Add
+	オグン							にいにーーー見てー！
+Se	打1
+Tween	オグン	MoveBy	x=-30				NoWait
+Tween	オグン	PunchPosition	y=20				NoWait
+Tween	ディーア	MoveBy	x=50				NoWait
+Tween	ディーア	PunchPosition	y=50				NoWait
+	リディ	驚き2
+	ディーア	驚き2						うおっ！
+Bgm	コメディ
+	オグン	極	1_3
+	オグン							オグンだよー♪\nにぃに、\n今日もオグンのお面そっくりー♪
+	オグン	極	1_3_b
+	ディーア	あはは2						なんだオグンか……\nいくらなんでも、そのお面が\nオレにそっくりってことはないだろ？
+	オグン	極	1_3					えーそっくりだよー♪\nにしし♪
+CharacterOff
+	ユノ	病み2						兄さん？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア							ど、どうした、ユノさん
+CharacterOff
+	黒グラデーション		エフェクト表
+	ユノ	病み2						あたしがいないうちに、兄さんは\nいろんな子の兄さんになったんだね？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア							待ってくれユノさん、\nこれには深い理由があって……
+CharacterOff
+StopBgm
+	オグン	極						あれぇ？ にいにー、\n向こうに変なお面あるよぉ？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							……変なお面？
+FadeOut	black					.3
+CharacterOff						0
+	ドムドム		3_3
+FadeIn	black					.3
+Tween	ドムドム	MoveBy	x=-90 time=0.7				Add
+Tween	ドムドム	PunchPosition	y=50 time=0.7
+Tween	ドムドム	MoveBy	x=-90 time=0.7				Add
+Tween	ドムドム	PunchPosition	y=50 time=0.7
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+Bgm	緊迫
+	ディーア	悔しい2						いや、あれは……\n魔物じゃないか！
+	リディ	悔しい2						ほんとだ……\nマスター、どうしよう？
+CharacterOff
+	デュエル		2_2
+	ジョーカー		1_2_b
+	デュエル							そうだっ！\nデュエル、いいこと思いついた！
+	ジョーカー		1_2					いいこと？
+	ジョーカー		1_2_b
+	デュエル							魔物を倒した数で勝負するの！\nいちばん魔物を倒した子が、\n今日のにぃにを独り占めできるの！
+CharacterOff
+	オグン	極
+Tween	オグン	PunchPosition	y=50				NoWait
+	オグン							おもしろそー♪\nオグンもやるぅーーー！
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							今はそんな勝負している場合じゃ……
+CharacterOff
+	デュエル		2_2
+	ジョーカー		1_2_b
+	デュエル							じゃあにいに、今すぐ、\n今日誰と遊ぶか決めてくれる？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア							そ、それは……
+CharacterOff
+	デュエル		2_2
+	ジョーカー		1_2_b
+	デュエル							じゃあ決まりね！
+Tween	ジョーカー	PunchPosition	y=50				NoWait
+	ジョーカー		1_2					待ってなさい、お菓子お化けども！
+CharacterOff
+	オグン	極						オグンの斧は、どんなものでも\n斬るよー斬るよー♪
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_606_07
+EndIf
+EndScenario
+
+# E_606_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	酒場_カフェ
+Param	character_grayout=false
+	ディーア	本気2	1_2
+	オグン	極	2_2
+FadeIn	white					.5
+Se	光1
+	オーラ青		エフェクト表			.5
+	オグン							よっっせぇぇいっ！
+Se	打2
+Se	風3
+FadeOut	white					.5
+CharacterOff						0
+Wait						.5
+FadeIn	white					.5
+	ドムドム
+Shake	ドムドム		x=5				Add
+	ドムドム							キュゥゥ…………
+Tween	ドムドム	MoveBy	y=-800				NoWait
+StopBgm						1
+Wait						.2
+Se	倒れる
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	デュエル		2_2
+	ジョーカー		1_2
+Bgm	平和
+	ジョーカー							これでみんな片付いたかしら？
+	ジョーカー		1_2_b
+	デュエル							じゃあ、数は……みんな、同じ!?
+CharacterOff
+	オグン	極						みんないっしょー？\nじゃあ、仲良しだねーー♪
+CharacterOff
+	ディーア	あはは2
+	ディーア							とにかく、\nみんな無事でよかったよ
+Bgm	コメディ
+CharacterOff
+	デュエル		3_3
+	ジョーカー		1_3
+	オグン	極	2_3
+	デュエル							で、にいに、結局今日は誰と遊ぶの？
+	オグン	極	2_3_b
+	ジョーカー							お兄ちゃん？
+	オグン	極	2_3					にいに？
+CharacterOff
+	ユノ	怒り2						兄さん？
+CharacterOff
+	ディーア	汗2						そ、それは……\nまずはいっしょに部屋に戻ろ、な？
+If	isdebug==true
+CharacterOff
+Jump	*E_606_08
+EndIf
+EndScenario
+
+# E_606_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋
+CharacterOff
+	ユノ	通常	2_2
+	ディーア	通常2	1_2
+FadeIn	white					.5
+	ディーア							ふう……やっと少し落ち着いたな
+	ユノ							魔物は落ち着いたけど……\n「妹」の調査は、まだまだだよ？
+	ディーア	絶望2						ま、まだ……
+	ユノ	切ない						だって、ほら
+CharacterOff
+	高電圧可変弩							あ、お兄ちゃんみっけ★\nねえ、受けてみる？\nかへんちゃんの電気マッサージ★
+	グラーキの黙示録							お兄ちゃん♪\nグラーキのタブレット知らない？\n落としちゃったみたいなんだけど♪
+CharacterOff
+	ユノ	切ない	2_2
+	ディーア	汗2	1_2
+	ユノ							……ねえ、兄さん？
+	ディーア							な、なんだ、ユノ？
+	ユノ	切ない						兄さんはどうして、\nこんなにたくさんの子に\n「お兄ちゃん」って呼ばれてるの？
+	ディーア	あはは2						な、なんでだろうな……
+CharacterOff
+StopBgm
+	ノーネーム	通常						私が教えてあげましょうか
+CharacterOff
+	ユノ	驚き	2_2
+	ディーア	驚き2	1_2
+	ユノ							教えてくれるの？
+Bgm	緊迫
+	ディーア	悔しい2						ノーネーム？\nお前、まさか……
+	ディーア	本気2						ま、待て！\n今その話は！
+CharacterOff
+StopBgm
+	ノーネーム	通常						私の場合は、マスターの希望です
+	ノーネーム							マスターは私に対して強制的に\n自分を「お兄ちゃん」と呼ばせ、\n妹ハーレムの一部にしたのです
+CharacterOff
+	ユノ	病み2						ふぅん、妹ハーレム…………？
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ディーア	目閉じ2						南無三……
+Bgm	コメディ
+CharacterOff
+	ユノ	切ない						ノーネーム、さん？\nじゃあ、もう一つだけ教えてくれる？
+	ノーネーム	通常						ええ 私でよろしければ
+	ユノ	切ない						……あなたは、兄さんの\n「本当の妹になりたい」って\n思ったことないの？
+	ノーネーム	通常						私が、ですか？\nそれは<dash=2>
+	　　　　　　　　　　
+StopBgm
+CharacterOff
+Se	火事
+Shake	Graphics
+Bgm	緊迫
+	ディーア	悔しい2						……今度は何だ!?
+CharacterOff
+Se	ドア開く
+Wait						.3
+Se	走る
+	リディ	悔しい2	画面外_左
+Tween	リディ	MoveTo	x=-20 time=2				NoWait
+Wait						.5
+	リディ	悔しい2						たいへんマスター！\n酒場の近くにいたのよりずっと大きい\n魔物が街で暴れてるよ！
+CharacterOff
+	ディーア	悔しい2
+	ディーア							なんだって……!?\nわかった、今行く!!
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A
+Wait						.2
+Bgm	緊迫
+	ショコラゴーレム					0
+Se	火事
+Shake	Graphics		x=1 y=1 time=1.5				NoWait
+FadeIn	black					.5
+	ショコラゴーレム							ゴゴゴゴ……
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							見つけた！\nあいつか……!!
+CharacterOff
+	グラーキの黙示録		2_2
+	高電圧可変弩		1_2_b					お兄ちゃん、いっしょに行こ！\nかへんちゃんは、充電完了だよ★
+	グラーキの黙示録							じゃあ私もぉ、\nお兄ちゃんので充電してもらって、\nいっしょにいっちゃおっかなぁ♥
+CharacterOff
+	ディーア	汗2
+	ディーア							グ、グラーキ！\n変な冗談言ってないで早く行くぞ！
+CharacterOff
+	高電圧可変弩		1_2_b
+	グラーキの黙示録		2_2					うん、いくいくぅ♥
+CharacterOff
+	ユノ	悲しい	2_2
+	ノーネーム	通常	1_2_b					……刻鳴鐘ユノさん、でしたか
+	ユノ	驚き						なぁに、ノーネームさん？
+	ノーネーム							さっきの質問の答え……\nマスターと戦う私たちを見れば、\nわかるかもしれません
+	ユノ	切ない						え……？
+Se	歩く
+Tween	ノーネーム	MoveBy	x=-200 time=2				NoWait
+	ノーネーム							……戦闘開始\nさぁ、蹂躙しましょう
+CharacterOff
+StopSe
+Bgm	バトル
+	ディーア	本気2						よしみんな、敵はあのゴーレムだ！\nついてきてくれ、一気に倒すぞ！
+If	isdebug==true
+CharacterOff
+Jump	*E_606_09
+EndIf
+EndScenario
+
+# E_606_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	特殊バトル
+Bg	市街地A
+	ショコラゴーレム
+FadeIn	white					.5
+Shake	ショコラゴーレム		x=5				Add
+	ショコラゴーレム							ゴ…………
+Tween	ショコラゴーレム	MoveBy	y=-800				NoWait
+StopBgm						1
+Wait						.2
+Se	倒れる
+CharacterOff						.5
+Wait						1
+Bgm	平和
+	グラーキの黙示録							んーおいしー♥\nごちそうさまぁ♥
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	照れ2	2_2
+	ディーア							よし、これでもう\n街に魔物はいないぞ
+CharacterOff
+	高電圧可変弩							ふふん\nお兄ちゃんがいればよゆーね★
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	笑い2	2_2
+	ディーア							いいや、\nみんながいたから勝てたんだよ
+CharacterOff
+ChangeSoundVolume	Bgm	.3
+	　　　　　　　　　　
+Wait						1
+	ユノ	驚き						………………
+	ユノ	切ない						……そっか\n兄さんは……
+CharacterOff
+	ユノ		2_2
+	ノーネーム	通常	1_2_b					疑問は解決しましたか？
+	ユノ	悲しい						うん、少しだけ
+StopBgm
+	ノーネーム	通常						少し、ですか
+ChangeSoundVolume	Bgm	1
+Bgm	凱旋					.2
+	ユノ	切ない						兄さんは……\nどんな魔剣の子にも、優しいんだね
+	ノーネーム	通常						優しい……なるほど\nそういう表現もあるのですね
+	ユノ	切ない						……表現？
+	ノーネーム	通常						ええ
+	ノーネーム							マスターはどんな過去を持つ魔剣も\n等しく仲間として受け容れます\n厄災から生まれた存在ですら、です
+	ノーネーム							魔剣が本当の妹でないからといって\nマスターは態度を変えたりしません
+	ノーネーム							ですから私には、\n本当の妹になりたいと願う必要が\nありませんでした
+	ノーネーム							私は感情表現に詳しくありませんが、\nそうした態度を取る人物を、\nきっと「優しい」というのでしょう
+	ユノ	悲しい						そっか、そうだよね……
+	ノーネーム	通常						疑問は解決しましたか？
+	ユノ	通常						うん……\nありがと、ノーネームさん！
+	ノーネーム	通常						では、さようなら\nできれば、また会いたいですね
+Se	歩く
+Tween	ノーネーム	MoveBy	x=-800 time=2				NoWait
+Wait						.5
+CharacterOff	ノーネーム
+	ユノ	嬉しい						……ふふ、変わった子\nでも……本当に素敵な子
+FadeOut	black					.3
+CharacterOff
+	ユノ	驚き	2_2
+	ディーア	驚き2	1_3
+Wait						.3
+Se	走る
+Tween	ディーア	MoveTo	x=-90				NoWait
+FadeIn	black					.3
+	ディーア							ユノ！\n大丈夫だったか？
+	ユノ	悲しい						うん……兄さん、あのね！
+	ディーア	あはは2						ど、どうした？\nそんなに改まって……
+	ユノ	笑い						あたしね、ノーネームさんから\nいろんな話を聞いたよ♪
+	ディーア	怪しい2						いろんな話って、まさか……
+	ユノ	病み2						まさか？
+	ディーア	汗2						いや、なんでもない
+	ユノ	嬉しい						それでね、「妹」の調査はいったん\n終わりにしようと思うの
+	ディーア	驚き2						えっ？
+	ユノ	切ない						……意外？
+	ディーア	あはは2						あ、ああ\nもっと詳しい「調査」をされるのかと\n思ってたから
+	ユノ	悲しい						そう……でもね、\n代わりに別のお願いがあるの
+	ディーア	驚き2						お、お願い？
+CharacterOff
+	ユノ	拡大切ない	エフェクト表					うん、あのね……
+	ユノ	拡大悲しい						あたしのこと、\n兄さんの魔剣にしてほしい
+CharacterOff
+	ユノ		2_2
+	ディーア	あはは2	1_2
+	ディーア							なんだ、そんなことか
+Tween	ユノ	MoveBy	x=10				NoWait
+Tween	ユノ	PunchPosition	y=10				NoWait
+	ユノ	悲しい						そ、そんなこと……？
+	ディーア	笑い2						もちろん、いいに決まってる
+	ユノ	切ない						……ほんとに？
+	ディーア	あはは2						ああ、本当はオレのほうから\n言い出そうと思ってたんだ
+	ディーア	通常2						まだ、何も思い出せないけど……\nユノがそれだけ言うってことは\nきっと何か事情があると思ったんだ
+	ディーア	通常2						……それに、ユノを見てると\nなんだか懐かしい気がしてくる
+	ディーア	あはは2						一緒にいれば、何か思い出せることも\nあるかもしれないしさ
+	ユノ	嬉しい						じゃあ、ほんとに、いいのね……？
+	ディーア	笑い2						ああ、もちろんだ
+Shake	ユノ		x=3				Add
+	ユノ	泣き						兄さん……ぐすっ……
+	ディーア	驚き2						ユ、ユノ!?
+	ディーア	悔しい2						ど、どうした？ ごめん、\nオレなんか変なこといったか？
+Tween	ユノ	MoveBy	x=-20				NoWait
+	ユノ	泣き						ううん、違うの\n……嬉しすぎただけ
+	ディーア	驚き2						そ、そうか
+	ディーア	あはは2						なんか、ごめんな……これからは、\n泣かせないようにするから
+	ユノ	泣き						兄さんは悪くないの\nあたしが、泣き虫なだけだから
+	ユノ							やっぱり兄さんは、優しいね……
+	ディーア	照れ2						……そんなことないさ
+	ディーア	通常2						さあ、そろそろ戻ろうか\nみんな待ってるしさ
+	ユノ							うん！
+Tween	ディーア	MoveBy	x=800 time=2				NoWait
+Wait						.7
+	　　　　　　　　　　		エフェクト裏2
+CharacterOff	ディーア
+Wait			 			1
+StopBgm						5
+	ユノ	泣き						……ありがとう、兄さん
+	ユノ	悲しい						……兄さん、\nあたし<dash=2>
+CharacterOff
+	ユノ	拡大切ない	エフェクト表					兄さんが思い出すまで、一緒にいるね
+CharacterOff						0
+	　　　　　　　　　　
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	black					0
+CharacterOff						0
+Bg	鍛冶病院					0
+	　　　　　　　　　　
+Wait						1.5
+FadeIn	black					.5
+	　　　　　　　　　　							\n<color=blue> 　　─鍛冶病院アスクレピオス─</color>
+Bgm	絶望
+	鍛冶医クランベリー	驚き2						<dash=2>あら、\nちょうどいいときに来たわね
+	ディーア	悔しい2						クランさん……\nということは、結果が出たんですか？
+	鍛冶医クランベリー	怪しい2						ええ、その通りよ
+	鍛冶医クランベリー							突然、街中にあれほどの数の\n魔物が出現するのは異常なことだもの
+	鍛冶医クランベリー	怒り2						倒された魔物から検出されたものと\n近い魔力の痕跡を調べてみたわ
+	鍛冶医クランベリー							その結果がこれよ
+	ディーア	驚き2						これは……すべての痕跡が、\nある一点からはじまってる……
+	鍛冶医クランベリー	怪しい2						そう、それでね、このあたりには\n魔剣医師と研究者が出入りしてる、\n怪しいアジトがあるらしいの
+	ディーア	悔しい2						それじゃあ、この前の魔物は、\nそのアジトから……？
+	鍛冶医クランベリー	怪しい2						その可能性は高いでしょうね
+	ディーア	怒り2						オレ、ここに行ってきます！\nここを潰さないと、また魔物が\n街に出てくるかもしれない
+	鍛冶医クランベリー	怪しい2						それは止めないけど……\nひとつだけ忠告しておくわ
+	ディーア	驚き2						忠告、ですか
+	鍛冶医クランベリー	怪しい2						ええ、あなたが倒した魔物……\nそれと同じ魔力を持った子が、\nあなたのそばにいる
+	ディーア	怒り2						……それって、まさか
+	鍛冶医クランベリー	怪しい2						ええ、そのまさかよ
+FadeOut	black					.3
+Bg	市街地A					0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	ユノ	拡大切ない	エフェクト表			0
+	　　　　　　　　　　					0
+FadeIn	black					.3
+	鍛冶医クランベリー	<Off>						刻鳴鐘ユノ<dash=2>\nあの子はきっと、何かを隠しているわ
+FadeOut	black					1
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_606_01
+EndIf
+EndScenario

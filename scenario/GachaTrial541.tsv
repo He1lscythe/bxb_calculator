@@ -1,0 +1,591 @@
+# G_541_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	神秘
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	ネロ	拡大通常	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+FadeIn	white					.5
+	ネロ	拡大通常						いーけないんだ、いけないんだ♪\nお兄ちゃんったらいけないんだー♥
+FadeOut	white					.3
+CharacterOff						0
+	ネロ	拡大尻	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+FadeIn	white					.3
+	ネロ	拡大尻						いま、ネロのこと\nえっちな目で見たでしょ？
+	ネロ	拡大尻						にひひ♪ お兄ちゃんのことなんて\nぜんぶわかっちゃうんだから♪
+FadeOut	white					.3
+CharacterOff						0
+	ネロ	拡大通常	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+FadeIn	white					.3
+	ネロ	拡大通常						いけないことした罰として、\nお兄ちゃんはネロ様の下僕になるの\n……永遠に、ね♥
+	          							<color=blue>新魔剣お試しコーナーへ続く</color>
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_541_02
+EndIf
+EndScenario
+
+# G_541_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	ネロ	拡大通常	エフェクト表			0
+FadeIn	white					.5
+	ネロ	拡大通常						いーけないんだ、いけないんだー♪\nお兄ちゃんったら、いけないんだー♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	1_2
+	ネロ	通常	2_2
+	ネロ	通常						にひひ♪\nお兄ちゃん、ネロのスカートを\nじーって見てたでしょ？
+	ディーア	驚き2						い、いや、見てないぞ！\nネロの誤解だって！
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	嬉しい						ウソウソ♪ わかってるよ？
+	ネロ	通常						さっき風がびゅーって吹いた時に\nネロのこと見てたよねー♪
+	ネロ	嬉しい						ネロのスカートがめくれないかって\n気になってるんじゃないのかなー♥
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア							ち、違う！
+Tween	ネロ	MoveBy	x=-20				NoWait
+	ネロ	通常						えーっ？\nじゃあ、今もチラチラ見てるの\nなんでかなー？
+	ネロ	通常						見えそうで見えないココが\n気になってるんじゃないの？
+CharacterOff
+	ネロ	拡大通常	エフェクト表					そんなに気になるなら\n……見せてあげよっか♥
+CharacterOff
+	ネロ	通常	2_2
+	ディーア	絶望2	1_2
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望2						っ……！
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	通常						あーっ！ ビクってしたぁ♪
+	ネロ	通常						やっぱり気になってたんだね！\nもー、わっかりやすいんだからぁ♪
+	ネロ	嬉しい						ネロは罪を暴く天上の名器♪\nお兄ちゃんの罪は全部バレバレなの♪
+Tween	ディーア	MoveBy	x=-10				NoWait
+	ディーア	悔しい2						うっ……！ た、たしかに\nちょっと気になってたけど……！
+	ネロ	通常						にひひ、自白もらいましたぁ♪\nそれじゃあ罰として<dash=2>
+Tween	ネロ	PunchPosition	y=30				NoWait
+Tween	ネロ	MoveBy	x=-30				NoWait
+	ネロ	通常						今日はずーっと\nネロのお世話をすること♥
+	ディーア	驚き2						一日ずっとか!?
+	ネロ	嬉しい						にひひ♪ そうだよ♪\nその間にお兄ちゃんのいけないこと、\nぜんぶ暴いちゃうからね♪
+	ネロ	嬉しい						（そうすれば、\n　お兄ちゃんはずっとネロの<dash=2>）
+StopBgm
+CharacterOff
+	カシウス	通常2						いけないこと？\nネロちゃん、悪いことしてるの？
+CharacterOff
+	ディーア	驚き2	1_2
+	ネロ	照れ	2_2
+	ネロ	照れ						へ……？\nか、カシウス!?
+Bgm	コメディ
+CharacterOff
+	カシウス	通常2						えへへ♪\nネロちゃん、マスターさん\nカシウスにも悪いこと教えて♥
+CharacterOff
+	ディーア	驚き2	1_2
+	ネロ	照れ	2_2
+	ネロ	照れ						ち、違うの！ わたし達\n悪いことしてたわけじゃなくて……！
+CharacterOff
+	ブルタ	慌て	1_2
+	天帝ユリウス	慌て	2_2
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+	天帝ユリウス							あーっ！\nネロがユリウス達に抜け駆けして、\nマスターを独裁してたの！
+Tween	ブルタ	PunchPosition	y=30				NoWait
+	ブルタ							マスターさん、\nネロちゃんを独裁していたんですか？
+CharacterOff
+	ディーア	汗2	1_2
+	ネロ	照れ	2_2
+	ネロ	照れ						ゆ、ユリウスにブルータスまで……！
+	ディーア	汗2						ちょ、ちょっとみんな落ち着け！\nオレはまだなにも……！
+	ブルタ	通常	画面外_左
+Tween	ブルタ	MoveBy	x=450 time=1				NoWait
+Wait						1
+CharacterOff
+	ブルタ	通常拡大	エフェクト表					ロリコンは消毒です！\nぱしゃぱしゃ♪
+CharacterOff
+	カシウス	照れ拡大	エフェクト表					ひゃあっ♪\nお部屋で濡れちゃうなんて\n悪いことだよねぇ♥
+CharacterOff
+	天帝ユリウス	笑い_拡大	エフェクト表					マスターのマスターは\nユリウスがおっきくするのぉ！
+CharacterOff
+	ブルタ	怒り拡大	エフェクト表					二人をえっちな目で見るなら、\nブルタを見て我慢してください!!
+CharacterOff
+Param	character_grayout=false
+	カシウス	通常2	p2b
+	天帝ユリウス	通常	p7b
+	ブルタ	通常	p3b
+	ディーア	絶望2	p5
+Se	ポップイン
+	オーラ桃		エフェクト表			1
+	ディーア	絶望2						う、うわぁああああああ!?
+	ディーア	絶望2						（だ、ダメだ……！\n　あっちこっちやわらかくて\n　あったかくて……！）
+CharacterOff
+	ネロ	照れ
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	照れ						もーっ！\nいけないんだ、いけないんだ!!
+CharacterOff
+	カシウス	通常2	p2b
+	天帝ユリウス	通常	p7b
+	ブルタ	通常	p3b
+	ディーア	絶望2	p5
+	ネロ	照れ	画面外_左
+Se	走る
+Tween	ネロ	MoveTo	x=-100 time=0.5
+	ネロ	照れ						お兄ちゃんはネロだけで管理するの!!\nカシウスたちは離れてー!!
+Se	走る
+Tween	ネロ	MoveBy	x=800				NoWait
+Tween	ディーア	MoveBy	x=800				NoWait
+Wait						.5
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地B					0
+	ネロ	通常				0
+Param	character_grayout=true
+FadeIn	black					.3
+	ネロ	通常						はぁ、ここまで来たら安心だよね♪\nお兄ちゃん、カシウスたちに\nいけないことした罰として<dash=2>
+	ネロ	照れ						<dash=2>って、あれ？\nお兄ちゃんの罪を感じない……？
+StopBgm
+	ネロ	照れ						お兄ちゃん……？
+CharacterOff
+	ディーア	目閉じ2
+	ディーア	目閉じ2						……………………ふぅ
+	ディーア	笑い2						そうか……これが……"真理"
+CharacterOff
+	ネロ	照れ						……へ？
+Bgm	緊迫
+CharacterOff
+	ディーア	拡大笑い2	エフェクト表					これが賢者の世界なんだな……
+CharacterOff
+	ネロ	照れ
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	照れ						えぇえええええ!?
+CharacterOff
+	ディーア	笑い2	1_2
+	ネロ	照れ	画面外_右_b
+Tween	ネロ	MoveBy	x=-600				NoWait
+	ネロ	照れ						いきなりどうしたの、お兄ちゃん!?\nそんな悟ったみたいな顔して！
+	ディーア	目閉じ2						オレはもうえっちに振り回されない\n魔界に吹く風のように……
+	ディーア	笑い2						見ろよ、あの雄大なユグドラシルを\nえっちはなんてちっぽけなんだ
+Shake	ネロ		x=5				NoWait
+	ネロ	驚き						お、お兄ちゃんが、\nおかしくなっちゃった……!!\nこれが噂の賢者モード!?
+	ディーア	笑い2						ネロもありがとう\nもういけないことなんてしないよ
+Se	走る
+Tween	ディーア	MoveBy	x=-700 time=1				NoWait
+Wait						.5
+Tween	ネロ	MoveBy	x=-100				NoWait
+	ネロ	通常						……えっと、お兄ちゃんは\n善人になったってことだよね？\nそれはとっても良いこと<dash=2>
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	照れ						じゃない……!!
+	ネロ	驚き						どうしよう、\nこのままだとネロ様が……!!
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Bg	酒場_宿屋					0
+	ディーア	目閉じ2	1_2			0
+	ネロ	通常	2_2			0
+FadeIn	white					.3
+	ネロ	通常						お兄ちゃん、いけないんだー！\nまた変なこと考えてたでしょ！
+	ディーア	目閉じ2						いや、世界が\n平和になるように祈ってたんだ
+Tween	ディーア	MoveBy	x=100 time=5				NoWait
+	ディーア	笑い2						それを騒ぐなんて悪い子だな\nふふふ♪
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	照れ						お、お兄ちゃん！\nネロにお仕置きなんてダメぇ……！
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	市街地B					0
+	ネロ	照れ				0
+FadeIn	white					.3
+	ネロ	驚き						ネロ様がお兄ちゃんに\n管理されちゃうじゃない！
+	ネロ	驚き						いけないことしない\nお兄ちゃんなんて\nお兄ちゃんじゃないよ!!
+	ネロ	照れ						こうなったらネロ様が\nお兄ちゃんを元に戻してあげる！\nまずは……！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+StopBgm
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A					0
+	ディーア	笑い2				0
+	          		1_2
+Param	character_grayout=false
+FadeIn	black					.3
+	ディーア	笑い2						ああ、なんていい天気……
+	ネロ	<Off>						にひひ♪\nお兄ちゃん、お兄ちゃん♪
+	ディーア	驚き2						……ネロ？\nそ、それは……！
+Bgm	神秘
+FadeOut	white					.3
+CharacterOff						0
+	ネロ	拡大尻	エフェクト表			0
+FadeIn	white					.3
+	ネロ	拡大尻						あれれ？ お兄ちゃんどうしたの？\nネロはお日様に当たってるだけだよ♪
+	ネロ	拡大尻						なのに、\nネロのことえっちな目で見てるの？\nいけないんだー♪
+	ネロ	拡大通常						ちょっと服が透けてるだけなのに♪
+	ネロ	拡大通常						（やっぱりお兄ちゃんなんて\n　すぐえっちなことを……♪）
+FadeOut	white					.3
+CharacterOff						0
+	ネロ	通常	2_2			0
+	ディーア	目閉じ2	1_2			0
+StopBgm
+Param	character_grayout=true
+FadeIn	white					.3
+	ディーア	目閉じ2						いや……
+	ディーア	笑い2						ステキなお洋服だなと思って\nネロ、いつ見てもキレイだよ……
+Bgm	コメディ
+	ネロ	照れ						……へ？\nあ、ありがと……
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	照れ						じゃなくて！\nえっちなこと考えたりとか……!!
+	ディーア	目閉じ2						もう、えっちの輪廻からは\n解き放たれたんだ
+Tween	ディーア	MoveBy	x=-600 time=1				NoWait
+Wait						.3
+Shake	ネロ		x=5				NoWait
+	ネロ							………………もーっ！
+	ネロ							……そうだ！\nこの前買ったアレなら！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	笑い2	画面外_右			0
+	          		1_2
+Param	character_grayout=false
+FadeIn	black					.3
+Tween	ディーア	MoveBy	x=-500 time=1				NoWait
+	ディーア	笑い2						ふう……\nさて気持ちが落ち着いたし、\nキノコリオン大百科でも読んで<dash=2>
+	ネロ	<Off>						お兄ちゃん、ちょっと手伝ってー♪
+	ディーア	笑い2						ネロもこの部屋にいたのか\nいいぞ、なんでも手伝って<dash=2>
+Bgm	神秘
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Param	character_grayout=false
+	ネロ	拡大私服尻	エフェクト表			0
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	ネロ	拡大私服胸	エフェクト表			0
+FadeIn						.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	目閉じ2	2_2			0
+	ネロ	私服	1_2_b			0
+Param	character_grayout=true
+FadeIn	white					.3
+	ネロ	私服						お洋服、上手に着れないの♪\nこのままじゃお外にイケないよぉ♥
+	ディーア	目閉じ2						…………
+	ネロ	私服						あれあれ？\nどうしたのお兄ちゃん？
+	ネロ	私服						お洋服を着せてくれたらいいのに\nどうして固まってるのかなぁ？
+	ネロ	私服						いけないんだー\nネロでえっちなこと考えたんでしょ？
+	ネロ	私服						ネロはおしゃれしてるだけなのに、\nえっちだって考えてるんでしょー♥
+Tween	ディーア	MoveBy	x=-30				NoWait
+	ディーア	目閉じ2						…………
+Tween	ディーア	MoveBy	x=-30				NoWait
+	ネロ	私服照れ						ふぇ!?\nど、どうして無言で近づいてくるの!?\nお兄ちゃん、怖いよ……!?
+Tween	ディーア	MoveBy	x=-30				NoWait
+	ネロ	私服照れ						（だ、だめ、\n　お兄ちゃんの罪がまだわかんない\n　イケナイことされちゃう……！）
+Tween	ディーア	MoveBy	x=-30				NoWait
+	ネロ	私服照れ						ま、待って……！\nそれはまだ早<dash=2>
+StopBgm
+Se	衣擦れ1
+FadeOut	black					.2
+CharacterOff						0
+	ネロ	照れ				0
+	ディーア	目閉じ2				0
+Se	衣擦れ2
+Wait						1
+FadeIn	black					.2
+	ディーア	目閉じ2						…………ふぅ
+	ディーア	笑い2						そんな格好したら、\n大事なお腹が冷えちゃうだろ？\n気をつけないとな
+	ネロ	照れ						…………
+Bgm	緊迫
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	驚き						な、なんなの!?\nネロのお洋服を着替えさせて\nあんな冷静な顔でいられるなんて！
+	ネロ	驚き						コレだけはしたくなかったけど、\n最後の手段だよ……!!
+Se	走る
+Tween	ネロ	MoveBy	x=-600 time=1				NoWait
+Wait						.5
+FadeOut	black					.2
+StopBgm
+CharacterOff						0
+	ディーア	通常2				0
+	          
+FadeIn	black					.2
+Wait						.3
+	ネロ	<Off>	1_2					きゃー!!
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						えっ!?\nどうしたんだ、ネロ!?
+CharacterOff
+	ネロ	拡大照れ	エフェクト表					お、お兄ちゃん、助けてぇ!!
+Param	character_grayout=false
+CharacterOff
+	ネロ	照れ
+	キノコリオン		p4
+	集中線		エフェクト表
+Shake	キノコリオン		x=3 time=10				NoWait
+	ネロ	照れ						おっきなキノコが服の中に\n入ろうとしてるのぉ!!
+Bgm	コメディ
+CharacterOff	集中線
+Param	character_grayout=true
+	ネロ	通常						だめだめぇ♪\nそんなとこに入ってこないでぇ♥\nキノコなんて入らないよぉ♪
+CharacterOff
+	ディーア	目閉じ2						…………
+CharacterOff
+	ネロ	通常
+	キノコリオン		p4
+	黒グラデーション		エフェクト裏
+	ネロ	通常						（これなら、お兄ちゃんの欲望が\n　でてくるはず……！）
+	ネロ	通常						（キノコ君、協力ありがとう♥\n　あとでお仕置きしてあげるから♪）
+Tween	キノコリオン	PunchPosition	y=30				NoWait
+	キノコリオン							ノコォ♪
+CharacterOff	黒グラデーション
+	ネロ	照れ						お兄ちゃん、\n見てないで助けてよぉ♥
+	ネロ	驚き						それとも女の子のピンチを\nもっと見てたいのぉ？
+	ネロ	通常						いけないんだ、いけないんだ♪\nかわいそうな女の子を\nえっちな目で見ちゃうなんて♥
+StopBgm
+	ネロ	通常						（さあ、お兄ちゃんの罪を……！）
+Bgm	緊迫
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ディーア	本気2						……オレのネロになにしてるんだ！
+CharacterOff
+	ネロ	拡大照れ	エフェクト表					ふぇ……!?
+Bgm	キノコリオン
+CharacterOff
+	ディーア	本気2	画面外_右_b
+	ネロ	照れ	1_2
+Tween	ディーア	MoveBy	x=-600 time=1				NoWait
+Param	character_grayout=true
+	ディーア	本気2						大事なネロには手を出させない！\nオレがネロを守ってやる！
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	照れ						う、うん、お願いお兄ちゃん！\nキノコ君をやっつけて！
+CharacterOff
+	キノコリオン							ノ、ノコォ！？！？\n（ご褒美キタノコォ！？！？）
+CharacterOff
+	ディーア	怒り2	2_2
+	ネロ	照れ	1_2
+	ネロ	照れ						（勢いでなにやってるのわたしー!?）
+	ネロ	通常						でもお兄ちゃんかっこよかったし、\nこれはこれで<dash=2>
+	ディーア	本気2						行くぞ、ネロ！
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	通常						にひひ♪ ごめんねキノコ君♪
+CharacterOff
+	ネロ	拡大通常	エフェクト表					ネロ様に触るの、不敬罪だから♪
+If	isdebug==true
+CharacterOff
+Jump	*G_541_03
+EndIf
+EndScenario
+
+# G_541_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	キノコリオン					0
+FadeIn	white					.5
+Se	光1
+Tween	キノコリオン	PunchPosition	y=200				NoWait
+Tween	キノコリオン	MoveBy	x=-700 time=1				NoWait
+	キノコリオン							ノコォ……！
+Param	character_grayout=true
+CharacterOff
+	ディーア	目閉じ2	2_2
+	ネロ	通常	1_2
+	ネロ	通常						あとでちゃんと\nお仕置きしてあげるからね♪
+	ディーア	目閉じ2						…………ふぅ
+Tween	ネロ	MoveBy	x=20				NoWait
+	ネロ	照れ						……ね、ねえお兄ちゃん\nほんとになにも感じなかったの？
+	ネロ	照れ						ネロのお尻にキノコが当たったり、\n戦ってるときも\nスカートチラチラしてたのに
+	ディーア	笑い2						…………フ
+Se	走る
+Tween	ディーア	MoveBy	x=600 time=1				NoWait
+Wait						.5
+Tween	ネロ	MoveBy	x=200
+	ネロ	照れ						な、なんなの\nあの余裕そうな顔……
+	ネロ	照れ						お兄ちゃん、\nほんとにいい人になっちゃったの？
+StopBgm
+	ネロ	驚き						どうしよう、お兄ちゃんが\n分かんなくなっちゃったよぉ……
+	ネロ	驚き						あんなにわかりやすかったのに\nこのままじゃ、お兄ちゃんも<dash=2>
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	神殿A					0
+	ネロ	驚き				0
+Bgm	絶望
+FadeIn	white					.3
+	ネロ	驚き						あなた達もなの!?\nネロを裏切るのが良いことだって\nそう思ってるの!?
+	ネロ	驚き						あんなにネロを頼って、ほめたのに\nみんなのためってネロを裏切るんだ！
+	ネロ	驚き						いけないんだ、いけないんだ！\n人間なんて、いけないんだ!!
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場_宿屋					0
+	ネロ	驚き				0
+FadeIn	white					.3
+	ネロ	驚き						……ぐすっ\nお兄ちゃんはあんな人達みたいに\nなってほしくないのに……
+	ネロ	驚き						わたし、どうしたら……
+CharacterOff
+	カシウス	通常2	1_3
+	ブルタ	通常	2_3_b
+	天帝ユリウス	通常	3_3
+	カシウス	通常2						あれぇ？\nネロちゃん、どうしたの？
+	ブルタ	通常	2_3					まさか\nロリコンさんに嫌なことされて……！
+CharacterOff
+	ネロ	驚き
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	驚き						な、なんでもないっ！\nネロ様は泣いたりしないんだから！
+StopBgm
+	ネロ	照れ						……それより、\nみんなはなにしてるの？
+Bgm	平和
+CharacterOff
+	カシウス	通常2	1_3
+	ブルタ	通常	2_3_b
+	天帝ユリウス	通常	3_3
+	カシウス	通常2						えへへ♪\nマスターさんに会いに行くの
+	天帝ユリウス	通常						今のマスターなら、\nきっと素直に独裁されてくれるの♪
+	ブルタ	通常	2_3					消毒する大チャンスだよ♪
+CharacterOff
+	ネロ	照れ						でも、今のお兄ちゃんは<dash=2>
+StopBgm
+	ネロ	照れ						……あれ？\nもしかしてユリウスたちを\nうまく動かせば……
+Bgm	わくわく
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	通常						っ……！\nこの手があった♪
+	ネロ	嬉しい						にひひ♪ ネロは天上の名器♪\nほしいものはどんな手を使っても♥
+CharacterOff
+	ネロ	拡大通常	エフェクト表					いけないんだ、いけないんだ\nネロにここまでさせるなんて、\nお兄ちゃんはほんとにいけないんだ♪
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	笑い2				0
+Wait						1
+Bgm	平和
+FadeIn	black					.3
+	ディーア							理性が、あふれる……
+CharacterOff
+	カシウス	通常2	1_3
+	ブルタ	通常	2_3_b
+	天帝ユリウス	通常	3_3
+	カシウス	通常2						マスターさん、\nカシウスに悪いこと教えて♪
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+	天帝ユリウス	通常						領土マスター！\n今日こそもっとおっきくするの！\nバキバキになるの！
+	ブルタ	通常	2_3					二度とロリコンさんにならないように\n一緒にパシャパシャしましょう！
+CharacterOff
+	ディーア	笑い2						ハハハ\n落ち着け、みんな
+	ディーア	笑い2						オレはもう\nいけないことなんてしないサ♪
+StopBgm
+CharacterOff
+	ネロ	拡大通常	エフェクト表					あーあ、いけないんだぁ♪
+CharacterOff
+	ディーア	驚き2						……え？
+Bgm	キノコリオン
+CharacterOff
+	ネロ	通常						女の子が一生懸命にお願いしてるのに\nお兄ちゃん、断っちゃうんだぁ♪
+CharacterOff
+	ディーア	驚き2						い、いや、オレは悟ったんだ！\nもう良いことだけして生きてくって！
+CharacterOff
+	ネロ	通常						その良いことが\n「いけない」んだよ♪
+	ネロ	通常						おかげでみーんな、\nもんもんしちゃってるの
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	嬉しい						いけないんだ、いけないんだー♪\n女の子を悲しませるなんて♪
+CharacterOff
+	ディーア	絶望2						お、オレがいけないことをしてる？\nいいことなのに、いけないこと？
+	ディーア	絶望2						いいが、わるくて、\nいけないがよくて……
+Param	character_grayout=false
+Se	チャージ
+FadeOut	black					.1
+Bg	宇宙					0
+CharacterOff						0
+	トライアルスチル46402		エフェクト表			0
+FadeIn	black					.1
+	ディーア	<Off>						？？？？？？？？？？？？？\n？？？？？？？？？？？？？？？\n？？？？？？？？？？？
+	ディーア	<Off>						きゅぅ……
+Se	倒れる
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	カシウス	通常2				0
+Param	character_grayout=true
+FadeIn	black					.3
+	カシウス	通常2						あれ、マスターさん？
+CharacterOff		通常
+	ネロ	通常						にひひ♪ 罪は心が生み出すもの♪\n自分を疑った時にお兄ちゃんは\nもう負けてたの♪
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	驚き2				0
+Wait						1
+FadeIn	black					.3
+Tween	ディーア	PunchPosition	y=30				NoWait
+Bgm	平和
+	ディーア	驚き2						……はっ!?\nお、オレはいったい……！
+	ディーア	汗2						なんだか、\nすごくスッキリしてた気がする
+CharacterOff
+	ネロ	通常						お兄ちゃん、やっと元に戻ったの？\nいけないんだー♪\n罰として<dash=2>
+CharacterOff
+	カシウス	照れ拡大	エフェクト表					今度こそ悪いこと教えて♪\nえへへぇ♪
+CharacterOff
+	カシウス	通常2	p2b
+	天帝ユリウス	通常	p7b
+	ブルタ	通常	p3b
+	ディーア	にやけ2	p5
+Tween	ブルタ	PunchPosition	y=30				NoWait
+	ブルタ	通常	p3					ロリコンさんになったなら、\nマスターさんは消毒しますよ！
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+	天帝ユリウス	通常						マスターはユリウスのものなの！
+	ディーア	にやけ2	p5					うわぁ♪\nあったかいがいっぱい♪
+CharacterOff
+	ネロ	照れ						…………
+CharacterOff
+	カシウス	通常2	p2b
+	天帝ユリウス	通常	p7b
+	ブルタ	通常	p3b
+	ディーア	にやけ2	p5
+	ネロ	照れ	画面外_左
+Se	走る
+Tween	ネロ	MoveTo	x=-100 time=0.5
+	ネロ	通常						えーいっ！
+	ディーア							わぁあああああ!?
+Se	走る
+Tween	ネロ	MoveBy	x=800				NoWait
+Tween	ディーア	MoveBy	x=800				NoWait
+Wait						1
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	驚き2				0
+FadeIn	black					.3
+	ディーア	驚き2						ね、ネロ……？
+CharacterOff
+	ネロ	通常						にひひ、いけないんだぁ♪\nネロの前でデレデレするなんて♪
+	ディーア	汗2						ちょ、ちょっと待て！\nオレはそんなつもりじゃ……
+	ネロ	嬉しい						待たないよ♪\nこんなにいけないお兄ちゃんは<dash=2>
+Param	character_grayout=false
+CharacterOff
+	ネロ	拡大通常	エフェクト裏
+	オーラ桃		エフェクト表
+	ネロ	拡大通常						ネロがずーっと管理してあげる♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_541_01
+EndIf
+EndScenario

@@ -1,0 +1,650 @@
+# G_494_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bg	市街地A
+Bgm	バトル
+Param	character_grayout=false
+Se	銃2
+	キノコリオン					0
+Wait						1
+Shake	キノコリオン		x=5 time=2				NoWait
+FadeIn	white					1
+	キノコリオン							ノコ、ノコ……！
+Se	倒れる
+Tween	キノコリオン	MoveBy	y=-100 time=1				NoWait
+Wait						.4
+CharacterOff	キノコリオン					.5
+Wait						.3
+CharacterOff
+Wait						.3
+StopBgm
+	ディーア	怒り2	p3
+	モル	本気	p7b
+	オーラ青		エフェクト表
+Wait						.5
+CharacterOff	オーラ青					2
+Param	character_grayout=true
+	モル	本気						ふぅ……
+Bgm	平和
+	ディーア	笑い2						よしっ！\n無事に倒せてよかったな！
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	モル	慌て拡大	エフェクト裏
+	モル	慌て拡大						よくないですよぉ……!!
+Param	character_grayout=true
+CharacterOff
+	モル	慌て	p7b
+	ディーア	驚き2	p3
+	ディーア							へ……？
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	慌て						ちゃんと説明しましたよね!?\n私は、違法魔剣だって!!
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔導コロシアム					0
+	モル	本気				0
+FadeIn	white					.3
+	モル	本気						競技用の模造品なのに姉さまたちに\n並ぶ力を持っちゃったから、\n所持するのも禁じられてるんです！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	市街地A					0
+	ディーア	汗2	p3			0
+	モル	悲しい	p7b			0
+FadeIn	white					.3
+	モル	悲しい						だから、持っているのがバレたら\nマスターさんも\n逮捕されちゃうんですよ!?
+	ディーア	汗2						たしかに、そう聞いてたけど……
+	モル	慌て						なのに、こんな目立つところで\n私を使うなんて、\nバレたらどうするんですか……！
+Tween	モル	MoveBy	x=30				NoWait
+	モル	通常						そもそも、戦いになるなんて\n聞いていなかったのに……
+Se	回想
+FadeOut	white					.3
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F					0
+	モル	慌て				0
+FadeIn	white					.3
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	慌て						嫌ですぅ！\n外に出たらバレちゃいますよぉ……！
+CharacterOff
+	ディーア	笑い2						大丈夫、大丈夫！\nちょっと外に出て、\n子どもと交流するだけだから！
+	ディーア	通常2						名前も出さないし、\nぜったいにバレないって！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	市街地A					0
+	ディーア	汗2	p3			0
+	モル	慌て	p7b			0
+FadeIn	white					.3
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	慌て						なんで\nキノコリオンと戦ってるんですか！\nひぃん……！
+	ディーア	汗2						それはいきなり出てきた\nキノコリオンが悪いというか……
+	ディーア	笑い2						でも心配しなくて大丈夫だ！\n周りの人には避難してもらったから\n誰にも見られてない！
+Tween	モル	MoveBy	x=-20				NoWait
+	モル	通常						本当に大丈夫ですかぁ？\nこっそり見られたりしませんか？
+	モル	通常						誰かに見つかってたら\nE.D.E.Nに通報されて、\n捕まっちゃうんですよぉ？
+CharacterOff
+	ニルヴァーナ	制服	画面外_右
+	月影	制服	画面外_右_b
+Se	走る
+Tween	月影	MoveBy	x=-750 time=2				NoWait
+Tween	ニルヴァーナ	MoveBy	x=-550 time=2				NoWait
+Wait						1
+	月影	制服						大丈夫ですよ、モルちゃん♪\nちゃんとみんなは\n遠くに誘導しました♪
+	ニルヴァーナ	制服						うんうん♪\nあるじの煩悩以外わからなかったし、\n他の人はいないよぉ♪
+CharacterOff
+	ディーア	汗2	p3
+	モル	通常	p7b
+	モル	通常						ほっ……！\nな、ならよかったです……
+Se	走る
+	子ども	<Off>						わぁ……！\nわるい魔物、やっつけてくれたんだ！
+	勇者	<Off>						いったい、誰が……？
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	悲しい						ひぃん……！\nと思ったら、\n人が戻ってきましたよ……!?
+	ディーア	驚き2						勇者もようやく来たみたいだな
+	モル	慌て						は、はやく帰りましょう！\n誰かにバレちゃう前に……！
+	モル	悲しい						マスターさん、\n私を外に出すのはこれっきりに\nしてくださいね……！
+	ディーア	汗2						ああ、気をつけるよ
+StopBgm
+Se	走る
+Tween	モル	MoveBy	x=-800 time=1				NoWait
+Tween	ディーア	MoveBy	x=-800 time=1				NoWait
+Wait						.7
+	勇者A	通常	画面外_右			0
+Tween	勇者A	MoveBy	x=-600 time=2				NoWait
+Wait						.8
+	勇者A							今の魔剣、もしかして……
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	          
+Wait						1
+Param	character_grayout=false
+Bgm	都市
+FadeIn	black					.3
+	          							\n  　　  　 　<color=blue><dash=2>翌日<dash=2></color>
+CharacterOff
+	ディーア	笑い2
+	ディーア							モル、今日も任務に行くぞ！
+CharacterOff
+	集中線		エフェクト表
+	モル	慌て拡大	エフェクト裏
+	モル	慌て拡大						やっぱり、\nわかっていないじゃないですかぁ！
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常2	p3
+	モル	慌て	p7b
+	モル	慌て						なんで私を選ぶんですか!?\nバレたら大変なんですよぉ!?
+	ディーア	通常2						いや、モルの力が必要なんだ！
+Tween	ディーア	MoveBy	x=30				NoWait
+	ディーア	笑い2						あんなに扱いやすいのに、強いんだ！\n今日の任務でも助けてくれ！
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	悲しい						ひぃぃん……！\nどうしてマスターさんは\nそんなに怖いもの知らずなんですか!?
+	ディーア	怪しい2						危ない魔剣なら\nもうたくさんいるからな……
+Tween	モル	MoveBy	x=20				NoWait
+	モル	悲しい						うぅ……姉さまの言っていた通り、\n変なマスターさんですぅ……
+	ディーア	通常2						それにほら、\n一日たったけどなにも起きてない\n堂々と外に出ても平気だって
+	モル	通常						でもぉ……
+CharacterOff
+	ティターニア	通常	p7b
+	ネオ	にやけ	p3b
+	ネオ	にやけ						うんうん、\n行ってきたらいいと思うよぉー♪
+CharacterOff
+	モル	通常
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	通常						ね、ネオ姉さまに、\nティタ―ニア姉さま!?
+CharacterOff
+	ネオ	にやけ	p3b
+	ティターニア	通常	p7b
+	ティターニア	通常						マスターに聞いたわよ？\nモルが大活躍だったって
+CharacterOff
+	モル	慌て						姉さまたちに\n褒められることなんて\nできてないですぅ……
+	モル	悲しい						むしろ、お名前に\n泥を塗らないか心配で……
+CharacterOff
+	ティターニア	通常	p7b
+	ネオ	通常	p3
+	ネオ	通常						そんな心配しなくていいのにぃー♪
+	ティターニア	通常						そうよ、私たちも\nあなたのことは認めているもの
+	ネオ	にやけ						だからどんどん、\nネオちゃんの分も活躍しちゃってよ♪
+CharacterOff
+	ディーア	怪しい2						ネオは\n家でニートしてたいだけじゃ……？
+CharacterOff
+	ティターニア	通常	p7b
+	ネオ	にやけ	p3
+	ネオ	にやけ						マスターちゃんの考えすぎだよぉ♪
+CharacterOff
+	モル	通常						姉さまにそう言っていただけるのは\n嬉しいんですけど……
+	モル	悲しい						私が捕まったら\nマスターさんや姉さまにまで\nご迷惑がかかっちゃいますし……
+CharacterOff
+	ディーア	汗2						そんな出かけるだけで\n捕まるなんて、あるわけ<dash=2>
+StopBgm
+Se	ドア開く
+CharacterOff
+	リディ	怒り2	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=0 time=1				NoWait
+	リディ	怒り2						た、大変だよぉ！\nマスター、モルちゃん……！
+CharacterOff
+	ディーア	驚き2						へ…………？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	悔しい2						ど、どうしたんだリディ、\nそんなに慌てて……!?
+CharacterOff
+	リディ	怒り2						い、いま……！\n勇者がこれを配ってるの！
+CharacterOff
+	ディーア	驚き2
+	ディーア	驚き2						なっ……!?\nこ、これは……!!
+FadeOut	white					.3
+CharacterOff						0
+Bg	白背景					0
+	トライアルスチル49401		エフェクト裏
+	集中線		エフェクト表			0
+Param	character_grayout=false
+Bgm	緊迫
+FadeIn	white					.3
+	ディーア	<Off>						モルの……手配書!?
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	絶望2	p3			0
+	モル	慌て	p7b			0
+Shake	モル		x=5 time=2				NoWait
+Param	character_grayout=true
+FadeIn	white					.3
+	モル	慌て						ひぃぃぃん!?\n指名手配ですかぁ……!?
+	ディーア	悔しい2						なんで、こんなことに!?
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	通常						決まっています！\n私がいることがバレたんです……！
+	モル	悲しい						ひぃん……！\nこのままだとマスターさんと\n一緒に捕まって……！
+Se	回想
+FadeOut	black					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	洋館					0
+	モル	悲しい				0
+	鎖エフェクト前		エフェクト表			0
+	鎖エフェクト後ろ		エフェクト裏			0
+	黒グラデーション		エフェクト表2			0
+Se	コインロック
+FadeIn	black					.3
+	モル	悲しい						出してくださいぃ……！\nひぃぃん……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	絶望2	p3			0
+	モル	悲しい	p7b			0
+Param	character_grayout=true
+FadeIn	black					.3
+	モル	悲しい						暗いお部屋に閉じ込められて、\nあんなことやこんなことを……！
+	ディーア	絶望2						ぐっ……まだ信じられないけど、\nたしかに手配書が……！
+	勇者A	通常	画面外_右
+	勇者A							あった、ここだぞ！\nこの宿にいるって話だ……!!
+	ディーア	驚き2						ま、まさかもう居場所が……！
+	モル	慌て						に、逃げましょう！
+Se	走る
+Tween	モル	MoveBy	x=-800 time=1				NoWait
+Wait						.2
+	ディーア	驚き2						ああっ……！\nみんなも行くぞ……！
+Se	走る
+Tween	ディーア	MoveBy	x=-800 time=1				NoWait
+Wait						.5
+Se	ドア開く
+Tween	勇者A	MoveBy	x=-600 time=1				NoWait
+Wait						.5
+	勇者A							あっ……！\nキミ、逃げないでくれ……！
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+Bg	市街地A					0
+	勇者B	通常	1_2			0
+	勇者C	通常	2_2			0
+Wait						1
+Bgm	作戦会議
+FadeIn	black					.3
+	勇者B	通常						いたか……!?
+	勇者C	通常						いや、こっちはダメだ……！
+CharacterOff
+Bg	市街地B
+	モル	通常	p7b
+	ディーア	悔しい2	p3
+	ディーア	悔しい2						こんなに勇者がいるなんて……！
+	モル	通常						ど、どうしましょう……！
+	ディーア	怪しい2						包囲を抜けて、\n街を脱出するしかないな……
+CharacterOff
+	ティターニア	通常	p7b
+	ネオ	通常	p3
+	ティターニア	通常						でも、どうするのよ？\n私たちはともかく\nモルは顔もバレているし……
+CharacterOff
+	モル	通常	p7b
+	ディーア	悔しい2	p3
+	ディーア	悔しい2						もちろん、これしかない……！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A					0
+	モル	怪しい拡大	エフェクト表			0
+Bgm	魔剣の日常
+Wait						1
+FadeIn	black					.3
+	モル	怪しい拡大						そーっと、そーっと……！
+CharacterOff
+	ディーア	怒り2	1_2
+	モル	怪しい	2_2_b
+	ディーア	悔しい2						よし、いいペースだ
+	モル	怪しい						ま、マスターさん……\n本当にこれで大丈夫なんですか……？
+	ディーア	怪しい2						ああ、顔は隠せてる……！\n大丈夫だ！ ……たぶん
+	モル	怪しい						でもぉ……
+CharacterOff
+	街の人							おい、アレなんだ……？
+CharacterOff
+	ディーア	怒り2	1_2
+	モル	怪しい	2_2_b
+Shake	モル		x=5 time=2				NoWait
+	モル	怪しい						ひぃぃん……！\n逆に目立ってる気がします……！
+CharacterOff
+	黒グラデーション		エフェクト裏
+	勇者C	通常
+	勇者C	通常						じーっ……
+CharacterOff
+	ディーア	怒り2	1_2
+	モル	怪しい	2_2
+	モル	怪しい						勇者さんも\n私たちをじっと見てますよ!?
+Param	character_grayout=false
+CharacterOff
+	黒グラデーション		エフェクト裏
+	集中線		エフェクト表
+	勇者C	通常
+	勇者C	通常						じーっ……！
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2	1_2
+	モル	怪しい	2_2
+	モル	怪しい						やっぱり、バレそうですぅ……\nマスターさん、隠してくださいぃ……
+Tween	モル	MoveBy	x=-120				NoWait
+	ディーア	驚き2						も、モル!?
+Shake	モル		x=5 time=2				NoWait
+	モル	怪しい						バレませんように、\nバレませんように……！
+	ディーア	絶望2						そんなところでモゾモゾしたら……！
+CharacterOff
+	勇者C	通常						おい、そこの男……！
+Param	character_grayout=false
+CharacterOff
+	モル	怪しい	p5b
+	ディーア	絶望2	p5
+	ディーア	絶望2						まずい、モルがバレた……！
+StopBgm
+CharacterOff
+	勇者C	通常						お前…………
+Bgm	緊迫
+	集中線		エフェクト表
+	勇者C	通常						事案だな!?
+Bgm	コメディ
+CharacterOff
+	モル	怪しい	p5b
+	ディーア	絶望2	p5
+	ディーア	絶望2						ち、違うぞ……!?
+CharacterOff
+	勇者C	通常
+Tween	勇者C	PunchPosition	y=30				NoWait
+	勇者C	通常						そんな小さい子をもぞもぞさせて\n言い訳が通ると思うな！
+CharacterOff
+	モル	怪しい	p5b
+	ディーア	絶望2	p5
+Shake	ディーア	絶望2	x=5				NoWait
+	ディーア	絶望2						いや、これは……!!
+	モル	怪しい						ひぃぃん……！\nマスターさん、そんなに動いたら……
+Tween	モル	PunchPosition	y=50				NoWait
+Tween	モル	MoveBy	x=100				NoWait
+Wait						.5
+CharacterOff
+	勇者C	通常						あっ、キミは……！
+Tween	勇者C	PunchPosition	y=30				NoWait
+	勇者C	通常						た、対象発見！ みんな、こっちだ！
+Param	character_grayout=true
+CharacterOff
+	モル	怪しい	2_2
+	ディーア	絶望2	1_2
+	ディーア	絶望2						モルまでバレた……！\n逃げるぞ……！
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	慌て						ひぃん……！
+StopBgm
+CharacterOff
+	ネオ	通常						うーん、やっぱり大変かなぁ……？
+CharacterOff
+	モル	通常	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						ネオ……!?
+CharacterOff
+	ネオ	にやけ						疲れたから\nネオちゃんはあっちで休むねー♪
+Tween	ネオ	MoveBy	x=-600 time=1				NoWait
+Wait						.5
+CharacterOff
+	ディーア	驚き2	1_2
+	モル	悲しい	2_2_b
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	悲しい						ネオ姉さま!?
+	ディーア	驚き2						まさか、囮になる気じゃ……？
+CharacterOff
+	ティターニア	通常						私も姉様と一緒に行くわ\n大丈夫よ、逃げ切って合流するから
+CharacterOff
+	モル	悲しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						でも……
+CharacterOff
+	ティターニア	通常						捕まっても人違いなんだから、\nどうにでもできるでしょ？\nそれより、モルを頼むわよ！
+Tween	ティターニア	MoveBy	x=-600 time=1				NoWait
+Wait						.5
+CharacterOff
+	モル	慌て	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						っ……！\nああ、後で必ず会おう！
+	モル	悲しい						そんな、\n姉さまを置いてなんて……！
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+Bg	草原B					0
+	モル	通常	2_2			0
+	ディーア	怒り2	1_2			0
+Wait						1
+Bgm	絶望
+FadeIn	black					.3
+	ディーア	怒り2						はぁ、はぁ……\nようやく街外れに来れたな
+	モル	悲しい						うぅ……\n私なんかのせいで姉さまたちが……
+	ディーア	怒り2						二人ならきっと大丈夫さ……
+	ディーア	驚き2						あっ、勇者がくるぞ！\n隠れろ……！
+FadeOut	black					.3
+CharacterOff						0
+	勇者C	通常	1_2			0
+	勇者B	通常	2_2			0
+FadeIn	black					.3
+	勇者C							どうだ、いたか？
+	勇者B							いや、まだ見つけられない\nけど、手がかりが手に入ったそうだ
+	勇者C							対象の姉妹を見つけて、\nじっくり話を聞いているらしい
+Tween	勇者B	PunchPosition	y=30				NoWait
+	勇者B							そうか、これで見つけられる！\nその時の顔が楽しみだな！
+	勇者C							姉妹ともども、\nたっぷりもてなしてやらないとな！
+FadeOut	black					.2
+CharacterOff						0
+	ディーア	驚き2				0
+FadeIn	black					.2
+	ディーア	驚き2						そんなまさか……\nネオたちが捕まった……？
+CharacterOff
+	モル	通常						…………
+	モル	通常						ネオ、姉さま……\nティターニア姉さま……
+Shake	モル		x=3				NoWait
+	モル	悲しい						うぅ……ぐすっ……！
+CharacterOff
+	ディーア	悔しい2						モル……
+CharacterOff
+	モル	悲しい						どうして……？\nどうしてこんなことになるんですか？
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	魔導コロシアム					0
+	モル	悲しい				0
+FadeIn	white					.3
+	モル	悲しい						模造品として作られて、\n人の勝手で禁じられて……\n姉さまも巻き込んで……！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原B					0
+	モル	悲しい				0
+FadeIn	white					.3
+	モル	悲しい						やっぱり私なんか……\n私なんか、いないほうが……！
+StopBgm
+CharacterOff
+	ディーア	本気2						そんなことない……！
+CharacterOff
+	モル	通常						マスターさん……？
+Bgm	凱旋
+	ディーア	本気2						モルはオレの力になってくれた！\nその力で守ってくれた！
+	ディーア	本気2						周りがなんと言おうと、\nオレはモルにいてほしい！
+CharacterOff
+	モル							でも、私にこんな力がなければ、\n追われることも……
+CharacterOff
+	ディーア	怒り2						いや、それも違う……
+	ディーア	本気2						逃げるのはここまでだ！\nモルの力でネオたちを助けよう！\nモルなら、助けられるんだ！
+CharacterOff
+	モル	通常						私の……力で……？
+	ディーア	怒り2						二人を尊敬しているんだろう？\n助けたいんだろ？
+	ディーア	本気2						だから、戦おう！\nその力が、モルにはあるんだから！
+CharacterOff
+	モル	悲しい						私は、私は……
+Tween	モル	MoveBy	x=-10				NoWait
+	モル	通常						私は持っていたらいけない魔剣で、\n姉さまたちに迷惑をかける模造品……
+Tween	モル	MoveBy	x=10				NoWait
+	モル	通常						でも、そんな私を\n受け入れてくれるなら……
+	モル	本気						姉さまたちを……助けたいです！
+	モル	本気						マスターさん……\n私を、使ってくれますか？
+CharacterOff
+	ディーア	笑い2						ああ、もちろん！\n二人を助けに行こう！
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+Bg	教会前					0
+	モル	本気	2_2			0
+	ディーア	怒り2	1_2_b			0
+Wait						1
+Bgm	勇者バトル
+FadeIn	black					.3
+	ディーア	怒り2						二人がいるのは、ここだな……!!
+	モル	本気						はい……！
+	ディーア	本気2						いくぞ、モル……！
+Se	ドア開く
+FadeOut	black					.3
+CharacterOff						0
+Bg	教会					0
+	勇者A	通常	2_4			0
+	勇者B	通常	1_4			0
+	勇者C	通常	3_4			0
+	勇者D	通常	4_4			0
+Wait						1
+FadeIn	black					.3
+Tween	勇者A	PunchPosition	y=30				NoWait
+	勇者A	通常						おい、あれを見ろ……！
+CharacterOff
+	ディーア	怒り2	1_2_b
+	モル	本気	2_2
+	ディーア	怒り2						待ち構えているのは\n予想通り……！
+Param	character_grayout=false
+	モル	本気						どんなに敵がたくさんでも……\n姉さまのためなら……！
+Se	チャージ
+	オーラ青		エフェクト表			1
+Wait						.7
+Param	character_grayout=true
+CharacterOff
+	勇者A	通常	2_4
+	勇者B	通常	1_4
+	勇者C	通常	3_4
+	勇者D	通常	4_4
+StopBgm
+	勇者A							キミたち……！
+Bgm	緊迫
+Param	character_grayout=false
+	集中線		エフェクト表			0
+	勇者							<size=50>ありがとう！！！！</size>
+StopBgm
+CharacterOff
+	ディーア	怒り2	p3
+	モル	本気	p7b
+	二人							…………………………………………
+	ディーア	絶望2	p3
+	モル	悲しい	p7b
+	二人							…………へ？
+Bgm	コメディ
+Param	character_grayout=true
+CharacterOff
+	勇者B	通常	1_2
+	勇者C	通常	2_2
+	勇者B							キミが子どもたちを救った魔剣だな！\nずっと探していたんだぞ！
+Tween	勇者C	PunchPosition	y=30				NoWait
+	勇者C							正体も明かさずに消えてしまうとは\n素晴らしい謙虚さだ……！
+CharacterOff
+	ディーア	絶望2						こ、これってどういう……？
+CharacterOff
+	ティターニア	通常	p7b
+	ネオ	にやけ	p3
+	ネオ	にやけ						あー、二人とも遅かったねぇー♪
+CharacterOff
+	ディーア	驚き2						ネオ、ティターニア!!\n二人とも大丈夫だったか!?
+CharacterOff
+	ティターニア	通常	p7b
+	ネオ	にやけ	p3
+	ネオ	通常						え？ なにが？
+CharacterOff
+	ディーア	怪しい2						だって、じっくりお話をって……
+CharacterOff
+	ティターニア	通常	p7b
+	ネオ	にやけ	p3
+	ネオ	にやけ						じっくり二人の場所を聞かれたよぉ？\nお菓子と紅茶付きで
+	ティターニア	通常						最高級の紅茶だったわ……♪
+CharacterOff
+	モル	通常						じゃ、じゃあ……\n私が指名手配されたのは……？
+	勇者A	通常	画面外_左			0
+Tween	勇者A	MoveTo	x=-150 time=1				NoWait
+	勇者A	通常						キミ、こっちに来てくれ！
+Wait						.3
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	慌て						ひぃん!?
+Tween	モル	MoveBy	x=-600 time=1				NoWait
+Tween	勇者A	MoveBy	x=-600 time=1				NoWait
+Wait						.5
+FadeOut	white					.3
+CharacterOff						0
+	モル	慌て	p7b			0
+	勇者A	通常	p3			0
+FadeIn	white					.3
+Shake	モル		x=3 time=5				NoWait
+	勇者A	通常						感謝状！\nキミは勇敢にも子どもを守るべく\n魔物と戦った！
+	勇者A	通常						ここにキミの行動を讃える！
+CharacterOff
+	ディーア	怪しい2						…………感謝状を贈るため？
+CharacterOff
+	ティターニア	通常						そういうことみたいね
+CharacterOff
+	勇者B	通常	1_3
+	勇者C	通常	2_3
+	勇者D	通常	3_3
+	勇者C	通常						おめでとう！
+	勇者D	通常						おめでとう！
+	勇者B	通常						キミの勇気は忘れない！
+CharacterOff
+	モル	慌て拡大	エフェクト表					ひぃぃぃん……！\n目立つのダメですぅ……！
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	酒場1F					0
+	          
+Wait						1
+Bgm	平和
+FadeIn	white					1
+	          							\n  　　  　 <color=blue><dash=2>数日後<dash=2></color>
+Param	character_grayout=true
+	モル	慌て	2_2
+	ディーア	笑い2	1_2_b
+	ディーア	笑い2						モル、今日も任務に行くぞ！
+Shake	モル		x=5				NoWait
+	モル	慌て						だめですぅ……！\n今度こそバレちゃいますよぉ！
+	ディーア	汗2						いやいや、\nあの指名手配も誤解だっただろ？
+Tween	モル	MoveBy	x=20				NoWait
+	モル	通常						そ、それはそうですけど\n代わりに……
+CharacterOff
+	街の人							あの子が子どもを助けた魔剣か！
+CharacterOff
+	酒場のおばちゃん							ちいさいのにすごいんだねぇ！
+CharacterOff
+	ディーア	汗2	1_2_b
+	モル	慌て	2_2
+	モル	慌て						みんなが、\nモルのことを見てくるんです……！
+	ディーア	笑い2						よかったじゃないか！
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	本気						よくないですよぉ……！
+	モル	悲しい						きっと、そのうち\nモルを知ってる人に見つかって\n今度こそ捕まっちゃいます……！
+Shake	モル		x=5				NoWait
+	モル	慌て						ひぃん……！\nどうしてこんなことにぃ……！
+	ディーア	通常2						……よし、わかった！
+	モル	通常						わ、わかってくれましたかぁ……？
+	ディーア	笑い2						ああ、\n見つかる前に外へ行くぞ！
+Tween	モル	PunchPosition	y=30				NoWait
+	モル	悲しい						ひぃん！\nわかってないですぅ……！
+	ディーア	笑い2						大丈夫、大丈夫\nバレてもなんとかなるさ！
+	ディーア	通常2						それに\nあの時に言ったじゃないか
+	ディーア	笑い2						モルの力を\nちゃんと役立ててみせるって！
+	モル	照れ						また、そんなこと言って……
+	モル	通常						そ、そこまで言うなら\n外に出てもいいですけど……
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	モル	照れ拡大	エフェクト表
+	モル	照れ拡大						バレないように、\nちゃんと私を隠してくださいね？
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_494_01
+EndIf
+EndScenario

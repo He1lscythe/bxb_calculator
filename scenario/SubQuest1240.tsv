@@ -1,0 +1,1501 @@
+# SQ1240102_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="砂塵の宝石 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	市街地A2
+Bgm	平和
+	リディ	通常	3_3
+	ディーア	通常	2_3					リディ…この前、\n広間で講習会をやっていたのを\n覚えているか？
+	リディ	通常_もち_驚き						それって、あれ？\n人工呼吸のやつ？
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	悔しい						そう、それ！\nその時の人形が来ている服、\n偶然にも…俺と同じだったんだ…
+	リディ	驚き						それは気まずいねー\n不意に街中で、知り合いに会って\n相手は自分の名前を覚えているのに
+	リディ	笑い						自分は相手の名前を\nド忘れちゃった時ぐらい気まずいねー		2001-06
+	ディーア	怪しい						全員の目線が俺に集まった瞬間、\nもうー脱兎の如く逃げ出したね\n…久しぶりの全力疾走だったよ
+	エボリス	通常	画面外_左
+Se	走る
+Tween	エボリス	MoveTo	x=-180 time=1			Add
+Wait						1
+	エボリス		1_3					それは実に気まずい…道端で互いに\n道を譲ろうとして、同じ方向に\n避けてしまった時ぐらい、気まずいな
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	驚き						え？\nえ？\nどちら様ですか？
+Tween	リディ	PunchPosition	y=50
+	リディ	嬉しい_もち						あーエボリスさんだ！\n久しぶりー♪
+	エボリス							やっほーリディちゃん\n約束通り、\n依頼を頼みに来たよー		3003-01
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	驚き						え？\nリディの知り合いなの？		9999-00
+	リディ	笑い_もち_笑い						うん\nこの前、1日10食限定のお菓子で\n最後の1個を取り合った仲だよ♪		2001-06
+	エボリス							あれは壮絶な戦いだった\n例えるなら…\n聖戦と言っても過言ではない		9999-00
+	エボリス							まぁ最終的に勝ったのは\nオレだったんだけど、結構強引な\n手段を使っちゃったからさー
+	エボリス							話を聞いたらー\nリディちゃんのマスターが<color=mk2impo>【優秀な】</color>\n魔剣使いだっていうじゃない？
+Tween	エボリス	PunchPosition	y=50
+	エボリス							今度オレから依頼をするっていう形で\n落ち着いたんだ\nめでたしめでたし♪
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	怪しい						依頼…ですか？\nどんな内容ですか？
+	エボリス							シーズサンク文明に\n<color=mk2impo>「砂塵の宝石」</color>という宝物が\nあるらしいんだ
+	エボリス							そいつを一緒に探してくれないか？\n頼むよーマスター君、な？\nな？		3003-09
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	エボリス
+CharacterOff	wipe
+Bg	草原B
+Bgm	作戦会議
+FadeIn	black					.5
+	ディーア	通常	2_3					それで<color=mk2impo>「砂塵の宝石」</color>というのは、\nどういう形なんですか？
+	リディ	嬉しい_もち_キラン	3_3					宝石っていうぐらいだから、\nキラキラしてるんじゃないかな？
+	エボリス	通常	1_3					うーん、かくいうオレも\n文献に書いてある程度の\n知識しかなくてなー
+	エボリス							まぁ、シーズサンク宮殿跡はとっくに、\n<color=mk2name>EDEN</color>の調査が入ってる…だから、\nなーんにも残っちゃいない
+	エボリス							だから、その宝石が欲しい…\nというわけじゃなく、\n一介の冒険者として…
+	エボリス							見てみたい…一目だけでもいいんだ\nそれだけがオレの依頼だ
+	ディーア	笑い						ふぅー安心しました…もしかして、\n盗賊のような遺跡荒らしの依頼かと\n少し不安になってしまって…
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り_もち						マスター！エボリスさんは\n盗賊とか、荒らしとか、\nそんな事するような人じゃないよ!!		2001-07
+	リディ	嬉しい_もち_誇る						<color=mk2impo>「1キロメガ盛り黄金ポテブレイビー」</color>を\nあんな必死に…手に入れようとする人…\n私、他に見たことないもん!!
+	エボリス							うん、リディちゃん…\nフォローしてくれるのは…その、\n非常にありがたいんだけど…		9999-00
+	エボリス							オレのイメージ的には…\nお菓子の件の詳細は、\n内緒にして欲しかったなぁ
+	ディーア	通常						リディがそこまで信用しているんです\n俺も信じますから、どうか\n安心して下さい
+	エボリス							あ、ありがとう…\n信用してくれて\nそれじゃあ…調査を始めようかー
+Tween	エボリス	ScaleBy	x=-1 time=0.5			Add
+	エボリス							そろそろモンスターたちの\nテリトリーにも入ったしね\nマスター君、頼んだよ！
+	ディーア	笑い						えぇ、戦闘は…\n専門の俺に任せて下さい！
+EndScenario
+
+# SQ1240102_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="砂塵の宝石 2"
+ShowMessageWindow
+Bg	草原B
+Bgm	作戦会議
+	リディ	通常	画面外_左
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+Se	走る
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	驚き						ねーエボリスさーん\nこの柱とか、色々なところにある文字？\nみたいなって何かな？
+Se	回避
+	エボリス	通常	3_3					うーん、\nそれはシーズサンク文明で\n使われていた古代文字だね
+Tween	エボリス	ScaleBy	x=-1 time=0.5
+	エボリス							当時の人たちは、\nそれで会話をしていたみたいだ\n…実に興味深い
+	ディーア	<Off>						はぁーー!!
+Se	斬2
+Wait						.5
+Se	走る
+Tween	エボリス	MoveTo	x=-180 time=1			Add
+Wait						1
+	エボリス		1_3					おっ、こっちの柱に刻まれているのは\n文字じゃなくて、装飾をより良く\n見せる手法として使われていたみたいだ		3003-06
+Tween	エボリス	PunchPosition	y=50
+	エボリス							実に面白い！\n伝達だけではなく、意匠としても\n組み込む技術…これは滾る!!
+	ディーア	<Off>						うぉりゃぁーー!!!!		9999-00
+Se	斬2
+Wait						.5
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+	リディ	嬉しい	3_3					エボリスさーん\nこっちの土台っぽいとこにある\n変な模様も、なんか可愛いよー♪		2001-05
+Tween	リディ	PunchPosition	y=50
+Tween	エボリス	MoveTo	x=0 time=1			Add
+Wait						1
+	エボリス		2_3					どれどれ…\nおぉーこっちも素晴らしい加工だ!!\nいいねー面白い、面白いぞぉ!!		9999-00
+	ディーア	<Off>						どぉーーりゃーーー！
+Se	斬2
+Wait						.1
+Se	斬2
+Wait						.5
+	リディ	驚き_もち_驚き						わわ、これ何の骨かな？\nあ、こっちには石斧みたいなモノもある\n調べるモノがいっぱいだねー		2001-09
+Bgm	コメディ
+	ディーア	通常	画面外_左
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+Se	走る
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア	怪しい						あのさ…\n楽しそうにしてるところ、\n悪いんだけどさ…		9999-00
+	リディ	笑い_もち_誇る						…んう？\nどしたのマスター？\nモンスター全部倒したの？		2001-23
+Tween	ディーア	PunchPosition	y=50
+	ディーア	悔しい						何とか一段落したけど…\nその、何というかさ…ズルイ!!\n俺だって文明調査したい！
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き						え…\nマスターって、\n文明フェチだったの!?		2001-13
+Tween	エボリス	ScaleBy	x=-1 time=0.5			Add
+	エボリス							それはちょっと、イヤ…\nかなり珍しいね…う、うん、\nいいじゃないかな？
+	ディーア	驚き						いやいやいやいや！\nなんでそうなるんですか!?\nリディ、適当な事を言うなよ！		9999-00
+	リディ	嬉しい_もち_笑い						おぉー!?\nエボリスさん、足元に変な\n石版みたいなモノがあったよー		2001-37
+Se	回避
+CharacterOff	リディ
+CharacterOff	エボリス
+	リディ	通常_もち_笑い	2_3
+	エボリス	通常	3_3					何…？\nリディちゃん、\nちょっと見せてくれないかい？
+Se	N取得
+	エボリス							これは…おいおい、冗談じゃないぜー\nでかしたよ、リディちゃん！\nこれこそ、オレが探していたものだ!!		3003-05
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+	リディ	驚き						それじゃあ、これが探していた\n<color=mk2impo>「砂塵の宝石」</color>…なの？		9999-00
+Tween	エボリス	ScaleBy	x=-1 time=0.5			Add
+	エボリス							その<color=mk2impo>「砂塵の宝石」</color>の在り処が\n記されている\n古文書みたいなものさ…
+	エボリス							少し時間をもらってもいいかな？\nこの謎が解ければ…\nすぐにでも！
+Tween	エボリス	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	エボリス	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	エボリス
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+	リディ	笑い_もち_誇る						というわけで、マスター\nエボリスさんの解読が終わるまで、\nモンスターの討伐をお願ーい♪
+Tween	リディ	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	リディ	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	リディ
+	ディーア	悔しい						せ、せめて…\n俺の話を最後まで聞いてくれよ…
+EndScenario
+
+# SQ1240102_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="砂塵の宝石 3"
+ShowMessageWindow
+Bg	草原B
+Bgm	作戦会議
+FadeOut	white					.1
+FadeIn	white					.1
+	エボリス	通常	2_3					分かったー!!!!!!		3003-06
+	リディ	驚き_もち_驚き	3_3					本当、エボリスさん!?\nそれで<color=mk2impo>「砂塵の宝石」</color>はどこにあるの？		9999-00
+	ディーア	通常	画面外_左
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+Se	走る
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア	悔しい						はぁ…はぁ、はぁ…\nな、なんとか全部のモンスターを\n倒した、ぞ…
+Tween	リディ	PunchPosition	y=50
+	リディ	嬉しい_もち_笑い						マスター、いいところに♪\nエボリスさんが<color=mk2impo>「砂塵の宝石」</color>の\n在り処が分かったって		2001-06
+	エボリス							文字を読み解いた結果…\n<color=mk2impo>「砂塵の宝石」</color>とは、\n宮殿を作った特殊な砂の事だった！		9999-00
+	リディ	驚き						つまり…どゆこと？？
+	エボリス							シーズサンク宮殿は、\n太陽や月の光などの光に影響して、\n綺麗に輝く		3003-05
+	エボリス							そのため別名として、\n<color=mk2impo>【黄金の都】</color>とも呼ばれていたんだ\nつまり…
+Tween	エボリス	PunchPosition	y=50
+	エボリス							この足元に広がっている砂こそ、\nオレたちが探していた…\n<color=mk2impo>「砂塵の宝石」</color>だったんだよ!!
+	ディーア	驚き						な…\nなんだってー!?		9999-00
+	リディ	通常_もち_驚き						それじゃあ宝石はないんだ…\nなーんだ、ガッカリー
+	エボリス							いや、そうとも限らないぜリディちゃん\nオレたち探検家が求めるものはロマンだ\n宝を見つけるだけが目的じゃあない!!
+Se	回避
+CharacterOff	エボリス
+	エボリス	<Off>						このひと握りの砂だって…\n立派な<color=mk2impo>「砂塵の宝石」</color>だ
+	エボリス		2_3					見るだけじゃなく、\nこの手に掴む事ができた…\nこれ以上ないくらいの宝物さ
+	リディ	通常_もち_驚き涙						リディは女の子だから、\nロマンとか分からないのです\nでも…
+Tween	リディ	PunchPosition	y=50
+	リディ	嬉しい_もち_驚き涙						エボリスさんが喜んでくれて、\n私も嬉しいよ♪		2001-05
+Bgm	コメディ
+	ディーア	通常						あのさ…\n盛り上がってるとこ悪いんだけど		9999-00
+	リディ	嬉しい_もち						どしたのマスター？\nもしかして、マスターも\nロマンを探しに行きたいの？
+Tween	エボリス	ScaleBy	x=-1 time=0.5			Add
+	エボリス							本気かい、マスター君？\nかなり険しい道になるぜ!?
+	リディ	通常_もち_驚き						マスターが本気なら…\n私、何処までも付いていくよ!!
+	エボリス							冒険家として1つ、\n先輩からのアドバイスだ…		3003-08
+	エボリス							生死に関わることだからな\nいいか、ちゃんと聞いていてくれよ？
+	エボリス							カプメンに粉末スープを入れる時は、\n風向きに気を付けな…しくじったら、\nその日の食事は無しだ！
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_キラン						ま、マスター！\nこれは重要な\n<color=mk2impo>【さばいばるじゅつ】</color>だよ!!		2001-13
+	ディーア	悔しい						た、頼むから…話を聞いてくれ…\nこのままここにいたら、モンスターが\nまた集まってるから、戻ろう…		9999-00
+	エボリス							あぁ、確かにそれは危険だな\nよし、それじゃあ…\nオレは次の場所へ向かうとしよう
+	リディ	通常_もち_笑い						エボリスさん、\n次は何処へ行くの？
+Tween	エボリス	ScaleBy	x=-1 time=0.5			Add
+	エボリス							1キロのポテブレイビーを\n確保できたからな…\n次は霊山アマラの頂上でも目指そうかね
+	ディーア	驚き						あの世界で最も高い巨大な山脈ですか？\n危険な魔力が満ちているとの\n噂もありますよ？
+	エボリス							言ったろ、ロマンだよ\nじゃあな！
+Se	走る
+Tween	エボリス	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	エボリス
+	リディ	通常_もち_笑い涙						行っちゃったね…\nそれじゃあマスター、私たちも…
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	怪しい						ところでリディ…\n<color=mk2impo>「1キロメガ盛り黄金ポテブレイビー」</color>に関して、\n俺は何も知らないんだが…
+	リディ	驚き_もち_驚き						あ、あれれー？\nマスター、知らなかったっけ？
+	ディーア	怒り						あぁ、初耳だ\nどこに消えたか\n正直に話してもらおうか!!
+Tween	ディーア	MoveTo	x=180 time=0.5			Add
+Wait						.5
+	リディ		2_3
+Se	回避
+	ディーア		3_3					あと、それを手に入れるために\n使ったキルに関してもだ!!
+Tween	リディ	MoveTo	x=-180 time=0.5			Add
+Wait						.5
+	リディ	通常_もち_誇る	1_3					私、知らないよ！\nマスターが酒場に隠してた\nキルなんて、知らないからー!!
+Se	走る
+Tween	リディ	MoveTo	x=-600 time=0.5			Add
+Wait						.5
+CharacterOff	リディ
+Tween	ディーア	MoveTo	x=0 time=0.5			Add
+Wait						.5
+	ディーア	怒り	2_3					待てリディー！\nもう、今度という今度は\n絶対に許さないからなー!!
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=0.5			Add
+Wait						.5
+CharacterOff	ディーア
+EndScenario
+
+# SQ1240103_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="受け継がれし印 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	市街地A2
+Bgm	平和
+	ディーア	通常	2_3
+	リディ	通常	3_3					マスター…\n私、前々から\n言いたかった事があるの…		2001-11
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	怪しい						どうしたリディ？\nまさか、また隠れて\nお菓子を買ったのか？		9999-00
+	リディ	通常_もち						それはまた別の話…\n今日はプリンについて…\n言いたい事があるの！
+	リディ							安いのって基本3つが1セットで、\n売ってるじゃない？\nあれ絶対4つを1組にした方がいいよね？
+	ディーア	驚き						3つを4つに…？\nどうして、そう思うんだ？
+	リディ	怒り_もち_驚き						だって、3つだと…私ともちと\nリディちゃんの分で終わっちゃう…\nマスターのが足りなくなっちゃう！
+	ディーア	怒り						はいストップ…さりげなく\nリディが2人分も食べてるだろ！\n3つで十分、足りるだろ？
+	ディーア							しかもサラリと流したけど、\nお菓子も買って食べたんだな!?
+	リディ	笑い_もち_驚き						てへぺろー★\n私は、もっと食ーべーたーいぃー		2001-36
+Tween	リディ	PunchPosition	y=50
+	リディ							具体的に言うと、バケツプリンぐらい？\nお腹いっぱいに！
+	ディーア	驚き						それはいくら何でも\n食いすぎだろ!?		9999-00
+	？？？	<Off>						バケツプリン…いいねぇ\nアレには、まだ知られていない\n歴史のような魅力がある
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	驚き						その声は、あなたが…\n依頼人のヒストさん？
+Se	回避
+	ヒスト	通常	1_3					ええ、ハジメマシテ\n君たちがシーズサンク宮殿跡へ\n行った事があると話を聞いてね
+	ヒスト							そこで是非、依頼を頼みたい\n報酬は彼女が望む…\nバケツプリンでどうだい？
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_驚き						やります♪		2001-06
+	ディーア							即答!?\nちょっと待って下さい、依頼内容を\n聞いてからでもいいですか？
+	ヒスト							いいですとも…僕が調べたいのは、\nシーズサンク王家に伝わる、\n王の印についてだ！
+	ヒスト							今までの調査で、\nシーズサンク王家には王の印たる、\n何かがあるらしい
+	ヒスト							だけど、それが何なのか\nサッパリ分からない…
+	ヒスト							それで直接、宮殿跡を調べたいのだが、\nモンスターが怖くてね…\n護衛を頼めないかな？
+	ヒスト							報酬はさっきも言った通り、\nバケツプリンで♪\nしかも、少し苦いカラメルソース付き!!
+	リディ	嬉しい_もち_キラン						ジュルリ…		9999-00
+	ディーア	悔しい						ダメだ…リディの頭の中は\nバケツプリンの事でいっぱいだ…\n分かりました、依頼を受けます
+	ヒスト							べーねっ♪\nそれでは、霊山アマラブルムの麓で\n待ち合わせしましょう		3003-01
+	ヒスト							僕はちょっと準備をしてくるよ\n色々と用意するものが、あるからさ
+Tween	ヒスト	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	ヒスト	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	ヒスト
+CharacterOff	リディ
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア							よし、じゃあ俺たちも\n準備をするか…って、\nリディがいない!?
+	リディ	<Off>						マスーターぁーーー！\n早くーバケツプリンを食べる\n大きいスプーンを確保しないとー		2001-18
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	怪しい						リディのやつ…\n既に報酬をもらった気でいるな		9999-00
+	ディーア	怒り						とりあえず、\n隠れてお菓子を買った事について、\n小一時間問い詰めてやる！
+EndScenario
+
+# SQ1240103_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="受け継がれし印 2"
+ShowMessageWindow
+Bg	草原B
+Bgm	作戦会議
+	ヒスト	通常	画面外_左
+Se	走る
+Tween	ヒスト	MoveTo	x=0 time=1			Add
+Wait						1
+	ヒスト		2_3					素晴らしい…まさにここは宝の山だ!!\n<color=mk2name>EDEN</color>はもっと真剣に発掘すべきだね！		3003-06
+Tween	ヒスト	MoveTo	x=180 time=1			Add
+Wait						1
+	ヒスト		3_3					風の影響で風化してしまったとこも\nあるが、そんな事は関係ない！\n僕を刺激させるには十分すぎる!!
+Tween	ヒスト	ScaleBy	x=-1 time=0.5
+Tween	ヒスト	MoveTo	x=-180 time=1			Add
+Wait						1
+Tween	ヒスト	PunchPosition	y=50
+	ヒスト							アドレナリンがフルに分泌されて、\nもうラッシュ状態って感じだ！\nあぁー見ているだけで楽しいぃ!!
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	怒り	2_3					ヒストさん早く調査を進めて下さい！\nこうしてる間にも、\nどんどんモンスターが集まって来て…
+Tween	ヒスト	ScaleBy	x=-1 time=0.5
+	ヒスト	通常	1_3					ふーむ…リディちゃん\n君のマスターは怒りっぽいね\nちゃんとカルシウム、摂取してるかい？
+	リディ	驚き_もち_驚き	3_3					言われてみれば\n最近魚を食べていないかも…あ、でも\n牛乳が一番良いってよく聞くよね？
+	ディーア	悔しい						ヒストさん…\n早く調査を…\nリディも邪魔しないで…
+	ディーア	驚き
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	ヒスト	ShakePosition	x=-10 y=-10 time=1			Add
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	モンスターの声	<Off>						<color=mk2wisp>\n　　……ギョオオオオッ!!……</color>
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_驚き						モンスターの声、\nマスター、あそこ、見て!!		2001-11
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	ヒスト
+CharacterOff	wipe
+FadeIn	black					.5
+	カニ型モンスター		2_3					ギョッ！
+Tween	カニ型モンスター	MoveTo	x=180 time=1			Add
+Wait						1
+	カニ型モンスター		3_3					ギョッギョッ!!
+Tween	カニ型モンスター	ScaleBy	x=-1 time=0.5
+Tween	カニ型モンスター	MoveTo	x=-180 time=1			Add
+Wait						1
+Tween	カニ型モンスター	PunchPosition	y=50
+	カニ型モンスター		1_3					ギョギョギョッ!!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	カニ型モンスター
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+	ヒスト	通常	1_3
+	ディーア	怒り	2_3
+	リディ	怒り_もち	3_3					あのモンスター!!\nマスターがカルシウム不足なのを知って、挑発してきてるよ！
+	ヒスト							これは由々しき事態だ\nマスター君、あそこまでやられて\n黙っているのかい？		3003-05
+	ディーア	笑い						ははっ、俺があんなのに\n釣られるわけ…ないじゃないですか？		9999-00
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=0.5			Add
+Wait						.5
+CharacterOff	ディーア
+	ディーア	<Off>						うぉぉぉおおおぉぉぉ!!\nこいつーーー!!!!
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	リディ	笑い_もち_笑い						見事に釣られたね
+	ヒスト							綺麗にハマったって感じだね\nそれじゃあ、僕はあっちにある\n居住区っぽいところを調べてみるよ
+	ヒスト							王族がいそうな、\n大きな部屋を見つけたんだ
+	ヒスト							もしかすると…シーズサンクが\n滅ぶ前に書き記した、\n何かがあるかもしれない！
+Tween	ヒスト	ScaleBy	x=-1 time=0.5			Add
+	ヒスト							あでゅー♪\nリディちゃんは\nマスター君の応援をヨロシクー		3003-10
+Se	走る
+Tween	ヒスト	MoveTo	x=-600 time=0.5			Add
+Wait						.5
+CharacterOff	ヒスト
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	通常	2_3					応援かー\nマスターなら、ここにいるモンスターもおちゃのこさいさいだからなー		9999-00
+Tween	リディ	MoveTo	x=-180 time=1			Add
+Wait						1
+	リディ	嬉しい_もち_驚き	1_3					あ、なんか石碑っぽいの発見♪\n何が書いてあるのかなー
+Tween	リディ	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	リディ
+	リディ	<Off>						んん？\nこれって、なんか人の形っぽい…\n何だろう、何を示してるのかな？
+EndScenario
+
+# SQ1240103_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="受け継がれし印 3"
+ShowMessageWindow
+Bg	草原B
+Bgm	凱旋
+	リディ	驚き_もち_驚き	2_3					これって、もしかして…\nシーズサンク王家の人間には代々…
+	ヒスト	通常	画面外_左
+Se	走る
+Tween	ヒスト	MoveTo	x=-180 time=1			Add
+Wait						1
+	ヒスト		1_3					わかったぞ、リディちゃん！\nマスター君!!
+Se	回避
+	ディーア	怪しい	3_3					お、終わったのですね…\n俺は…ちょっと、疲れたので、\n倒れたまま聞きます
+Se	打1
+CharacterOff	ディーア
+	ヒスト							ありがとう、マスター君\n休みつつ、聞いてくれ！		3003-01
+Tween	ヒスト	PunchPosition	y=50
+	ヒスト							どうやらシーズサンクの王の家系には…\n全員が全員、首元に王家の紋章が\n浮かび上がっていたらしい！
+	ヒスト							はらしょっ！\nまさか…これほどの情報を\n得られるなんて、予想外だよ!!		3003-06
+	ヒスト							くぅー\n他にはどんな人たちが住んでいたのか、どんな文化があったのか…
+	ヒスト							一刻も早く、この内容をまとめたい！\nこの沸き上がる衝動を…\n止められないっ!!
+	リディ	驚き_もち						あ、あのヒストさん…\nちょっと気になった事が…		9999-00
+	ヒスト							リディちゃん、スマナイ！\nバケツプリンは今度会う時にでも、\n用意しておくよ
+Tween	ヒスト	ScaleBy	x=-1 time=0.5			Add
+	ヒスト							マスター君も、いや、ホントに\n助かった！恩に着るよ!!\nばいびー♪		3003-02
+Se	走る
+Tween	ヒスト	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	ヒスト
+Tween	リディ	MoveTo	x=-180 time=1			Add
+Wait						1
+	リディ	驚き_もち_驚き涙	1_3					あーあ、行っちゃった…\nどうしよう伝えた方がいいかな？
+	ディーア	通常	3_3					どうした、リディ？\nヒストさんに何か言いたい事でも\nあったのか？
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+	リディ	通常						さっきそこで石碑を見つけたの\nそこにね…首元に印が付いてた人が\n王様になる事が描かれていたの
+	ディーア	怪しい						首元に…印？
+	リディ	通常_もち_キラン						うん、イラスト付きだったから、\n間違いないよ、その血筋の人間には\n必ず印が付いてるんだって
+	リディ							それでね、その…\nヒストさんにも付いてたの\n印が、首元に…
+	ディーア	驚き						マジか!?\nなるほど…シーズサンク王家の血筋は\n今も受け継がれているようだな
+	ディーア	通常						うーん、だけど、その事は\n別に言わなくても\nいいんじゃないかな？
+	ディーア	通常						ヒストさんなら、\nそういう事って、\n自分の力で知りたいと思うし
+	リディ	笑い_もち_誇る						分かったよ、マスター\nそれじゃあ、せっかくここまで\n来たんだし…		2001-05
+CharacterOff	リディ
+	リディ	<Off>						よいしょっと
+Se	N取得
+	リディ	笑い_もち_誇る	1_3					記念にここの砂を\nちこっとだけ貰って帰ろーっと
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	市街地A2
+Bgm	平和
+FadeIn	black					.5
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	通常	2_3
+	リディ	笑い	3_3					よし、マスター！\n無事に戻って来れたし…\nスプーンを買いに行こう♪		2001-11
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	笑い						早速か？まぁーいっか、\n買いに行こうか、リディ\nというか、俺も正直楽しみなんだ		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き						わぁっ、意外！\nマスターはこういうの\nあんまり好きじゃないかと思ってた		2001-09
+	ディーア	通常						本当は焼きプリンの方が好きだけど、\nバケツプリンはバケツプリンという\n一つのジャンルだからな
+	ディーア	怪しい						プリンを逆さにして皿に盛った時の\n美しさ…カラメルソースが\nのっかった頂上を崩す、その瞬間!!
+Tween	ディーア	PunchPosition	y=50
+	ディーア	笑い						最初の一口を想像しただけで、\nもう胸が高まる！
+	リディ	笑い_もち_笑い						マスター…\nキモイ
+	ディーア	驚き						えぇっ!?\n俺、今なんで引かれたの？
+	リディ	驚き_もち_驚き						自分の胸に聞いてみなよ…\nって、アレ？\nもしかして、ヒストさん？		2001-23
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ヒスト	通常	画面外_左
+Se	走る
+Tween	ヒスト	MoveTo	x=-180 time=1			Add
+Wait						1
+	ヒスト		1_3					はぁはぁ、良かった…\nまた君たちに会えて…		9999-00
+	ディーア	通常						どうかしましたか？\nそんなに慌てて…もしかして、\n何か忘れ物とか？
+	ヒスト							改めて…あの宮殿跡の事を調べてたら、\n砂にも非常に、歴史的な価値あるもの\nだという事が分かってね
+	ヒスト							マスター君たちなら、砂を持って\n帰って来ているかなーと、思ってね\n…でも、さすがにそこまで都合のいい…
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						ありますよ♪\nほら、ここに！\n記念にと思って♪		2001-06
+	ヒスト							おぉー本当だ！\nこの砂を丹念に調べれば\nシーズサンクの歴史がわかる…ゴクリ		9999-00
+	ヒスト							よぉーし、リディちゃん\nそこでものは相談なんだけど…\nその砂、言い値で買おう！		3003-09
+	ディーア	驚き						言い値って!?\nしかも相談になっていない!!
+	リディ	通常_もち_驚き						…………\nヒストさん…\nキモイです
+EndScenario
+
+# SQ1240202_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="命知らずの一撃 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	森林A
+Bgm	作戦会議
+	ディーア	怪しい	3_3					さて、リディ…\n落ち着いたところで、\nそろそろ言ってもいいかな？
+	リディ	通常_もち_驚き涙	2_3					うん…そのゴメン、マスター\n私もそろそろ言うタイミングかなって思ってたところ…
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+	リディ	驚き_もち_驚き涙						ここって…何処かな？\nマディンさんは、\nどこに行ったのかな？？
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア		1_3					よし、ちょっと落ち着こう\nまずはマディンさんの依頼を\n引き受けたとこから思い出して…
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	市街地A2
+Bgm	平和
+FadeIn	black					.5
+	ディーア	通常	2_3
+	リディ	通常	3_3
+	マディン	通常	1_3					仲間の狩人が森の主にヤられちまった…\nオレは復讐を果たさなければならない\n必ず…
+	マディン							それが散っていった友との約束だからだ\nだがオレ一人じゃ力不足だ…\nしかし、同じ轍は踏まない！
+	マディン							力を貸して欲しい…\n凄腕の魔剣使いである、お前に…\n頼むしかないんだ		3007-09
+Tween	マディン	PunchPosition	y=50
+	マディン							もちろん、主とは一対一で戦う\nその間、ヤツの周りにいる、\n取り巻き連中の相手をして欲しい
+	ディーア	驚き						分かりました、協力します\nですが、本当に手助けは\n必要ないんですか？		9999-00
+	マディン							構わん\nオレが負けたのならば、\nその程度の実力だっただけの事だ
+	リディ	嬉しい_もち						じゃあ、アマラ森林へ向かって\nれっつごー♪		2001-38
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	マディン
+CharacterOff	wipe
+Bg	森林A
+Bgm	作戦会議
+FadeIn	black					.5
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	複数のモンスターの声							<color=mk2wisp>ギャア\nギャアー\nギャアァァァ</color>
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+	リディ	驚き_もち_驚き	3_3					わわっ！\n相変わらず、凄い森だね…\n来る度に見た事もない生物がいるね		2001-09
+Se	回避
+	マディン	通常	1_3					入口から既にヤツの領域だ…気をつけろ\n隙あらば背後や大木の影…\nあらゆるところから飛び掛かってくる
+	ディーア	怪しい	2_3					分かりました…\nここからは用心して、慎重に進みます		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	通常						特にリディ…余計な事はするなよ\nいいな、絶対だぞ？		9999-00
+Tween	リディ	PunchPosition	y=50
+Bgm	コメディ
+	リディ	驚き_もち_驚き涙						マスター！\n足元に<color=mk2impo>【G】</color>がーーーー!!!!
+FadeOut	white					.1
+Se	回避
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	マディン
+FadeIn	white					.1
+	ディーア	驚き	3_3
+	リディ	怒り_もち_驚き涙	2_3					フヨフヨってこっちに\n寄ってきたあぁぁぁぁーーーーーー!!!!
+	ディーア							お、おいリディ!?\n押すなー
+Se	走る
+Tween	リディ	MoveTo	x=-600 time=0.5			Add
+Wait						.5
+CharacterOff	リディ
+	リディ	<Off>						マスター!!\n早く、早く倒してーーーー!!!
+Tween	ディーア	MoveTo	x=-180 time=0.5			Add
+Wait						.5
+	ディーア	怒り						このぉー!!
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	ディーア	怒り	1_3
+	リディ	<Off>						ねぇマスター、もう大丈夫？\nホントに大丈夫？\n完全に絶対、大丈夫？		2001-11
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	通常						大丈夫だと思うが…\n念のため周りを見てみる…		9999-00
+Tween	ディーア	MoveTo	x=180 time=1			Add
+Wait						1
+	ディーア	怪しい	3_3					うーん…
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	笑い	2_3					あぁ、大丈夫だ\nもういない
+	リディ	嬉しい_もち_笑い涙	3_3					良かったぁ…
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	作戦会議
+FadeIn	black					.5
+	ディーア	通常	1_3
+	リディ	通常	3_3
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	悔しい						思い出した…リディが驚いて、\nその時にマディンさんと…\n離れちゃったんだ
+	リディ							うん、そのちょっと驚いちゃって…\nと、とにかくマディンさんと\n合流しよう？
+	ディーア	怪しい						そうだな…\nこんな状態で森の主と出会うなんて\n洒落にならにならないからな…
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	笑い_もち_驚き	2_3					でも、もしまたGが出たら…\nその時は\nマスターに全てを任せるよ！
+	ディーア	怪しい						こんな頼られ方って\nどうなんだろう…
+EndScenario
+
+# SQ1240202_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="命知らずの一撃 2"
+ShowMessageWindow
+Bg	森林A
+Bgm	コメディ
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	悔しい	2_3					さて、リディ…\nここまで森を進んできたが…\nマディンさんの姿は一向に見えない
+	リディ	驚き_もち_怒り	3_3					進んでも進んでも目に入るのは…\n森…木…草…\n葉っぱ…
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	通常						緑、翠、碧…\n気が滅入りそうだ…よし、気分転換に\n何か別の話をしようじゃないか！
+Tween	リディ	PunchPosition	y=50
+	リディ	通常_もち_キラン						どんな話ー？
+	ディーア	笑い						この前、買い物に行った時、\n調味料を買ったんだよ\n<color=mk2impo>「辛そうで辛くない少し辛い」</color>やつ
+	リディ	笑い						ちょっと、前にリーマですっごい\n流行ったやつだね♪		2001-05
+	ディーア	笑い						その時に、小さな子が近くにいてさ…\nそれを見て言った一言が\n面白かったんだ
+	ディーア							<color=mk2impo>「つらそうでつらくない、\nすこしつらい調味料が欲しい」</color>\nてね♪
+	リディ	通常_もち_怒り						マスター…今の辛い状態で\nそんな辛い話を聞いても、\n私の心は辛いままだよ？		2001-13
+	ディーア	驚き						うぐぅ…じゃ、\nじゃあ…そう言うリディは\n何か面白い話あるのか？		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						うーんとね、\n面白い話じゃなくて、\n面白かった事ならあるよ
+	ディーア	怪しい						面白かった事？
+	リディ	嬉しい						マスターが何を思って言ったか、\n分かんないけど、この前\nお茶してた時に言ってたやつだよ
+	リディ	嬉しい_もち_笑い						<color=mk2wisp>「常夏は…\nココナッツの仲間じゃないのか？」</color>\nって叫んで…
+	ディーア	驚き						トコナッツ…		9999-00
+	リディ	嬉しい_もち_キラン						それで恥ずかしさを誤魔化すためか、\n立ちくらみがしたフリをして…
+	リディ	笑い_もち_笑い						<color=mk2wisp>「くっ、眼前暗黒感か」</color>って\nカッコつけて言ってたのが\nすっごく面白かった♪		2001-05
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	通常						リディー\nマディンサンガイタヨー		9999-00
+	リディ	怒り_もち_キラン						あー！\nまた誤魔化したー!!
+	ディーア	驚き						違う、本当にいるんだよ！\nホラ、あそこ!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	ボスバトル
+FadeIn	black					.5
+FadeOut	white					.1
+	クマ型モンスター	通常	1_3
+	マディン	通常	3_3
+Tween	マディン	ScaleBy	x=-1 time=0.1			Add
+FadeIn	white					.1
+	クマ型モンスター
+	マディン							……はぁっ！
+Se	走る
+Tween	マディン	MoveTo	x=0 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Wait						.5
+Se	回避
+Tween	マディン	MoveTo	x=180 time=0.1			Add
+	マディン							ちっ、浅かったか…!!
+Wait						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	クマ型モンスター
+CharacterOff	マディン
+CharacterOff	wipe
+FadeIn	black					.5
+	ディーア	通常	3_3
+	リディ	通常_もち	2_3					あ、本当だ\nマディンさんがいたよマスター！\nおぉーい!!
+	ディーア	怪しい						待てリディ、よく見るんだ…\nマディンさんの先にいるのは…\n森の主じゃないか？
+	リディ	驚き_もち_驚き						わわっ、本当だ\nあれが…森の主さん…		2001-09
+	ディーア	怪しい						ということは…マディンさんの近くに\n潜んでいるはずだ、今回の\n依頼対象の取り巻き連中が…		9999-00
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+FadeIn	black					.5
+	妖精型水モンスター	通常	3_3
+	カエル型水モンスター	通常	1_3					ゲウゥゥゥ…
+Wait						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	妖精型水モンスター
+CharacterOff	カエル型水モンスター
+CharacterOff	wipe
+FadeIn	black					.5
+	リディ	通常	2_3
+	ディーア	怪しい	3_3					いたいた\n後ろから襲う気だな…\nそんな事はさせないぞ！
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち						よーし！\nどっかーん、と\nやっちゃって、マスター!!		2001-21
+EndScenario
+
+# SQ1240202_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="命知らずの一撃 3"
+ShowMessageWindow
+Bg	森林A
+Bgm	バトル
+	妖精型水モンスター	通常	2_3
+	ディーア	怒り	3_3					終わりだっ！
+Tween	ディーア	MoveTo	x=0 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Se	敵殺
+CharacterOff	妖精型水モンスター
+	ディーア	通常	2_3					これでマディンさんの邪魔をする\nモンスターはいない
+	リディ	驚き_もち_驚き	3_3					マスター!?\nマディンさんが！		2001-13
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	ボスバトル
+FadeIn	black					.5
+	マディン	通常	2_3					…………
+Tween	マディン	ScaleBy	x=-1 time=0.5
+	マディン							友の命を奪った一撃で…来い！\n森の主よっ!!
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	クマ型モンスター	通常	画面外_左					グオォォオーーー!!
+Se	回避
+Tween	クマ型モンスター	MoveTo	x=-180 time=0.5			Add
+Wait						.5
+FadeOut	red					.1
+Se	斬1
+FadeIn	red					.1
+Tween	マディン	MoveTo	x=180 time=0.5			Add
+Wait						.5
+	マディン							これが友を奪った一撃か\nさすがだな主よ…\nだが、足りない
+	マディン							オレの命を奪うには…\n全然足りない…なっ!!
+Tween	マディン	MoveTo	x=0 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+Se	突2
+FadeIn	white					.1
+Tween	マディン	MoveTo	x=180 time=0.5			Add
+	クマ型モンスター							グルルゥゥゥ…
+	マディン							今度はこちらの番だ…友から授かった\n<color=mk2impo>「命知らずの一撃」</color>で…\n全てを終わらせる！
+	マディン							はああああぁぁぁーーーー!!!!!!
+Tween	マディン	MoveTo	x=-180 time=0.5			Add
+Wait						.5
+FadeOut	yellow					.1
+Se	斬2
+FadeIn	yellow					.1
+	クマ型モンスター							ガルゥゥゥ…
+Se	ボス殺
+CharacterOff	クマ型モンスター
+	マディン	通常	1_3					終わった…\n何もかも…
+Se	打1
+CharacterOff	マディン
+	マディン	<Off>						失ったモノもあったが…\n仇はとったぞ、友よ…
+Bgm	凱旋
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	笑い	2_3					マディンさーん！\nやりましたね！
+	リディ	笑い_もち	3_3					すごいです！\nあんなにデッカイ森の主を\n本当に倒しちゃうなんて！
+Se	回避
+	マディン	通常	1_3					マスター殿！\nリディ殿！\n…こちらこそ礼を言わせてくれ
+	マディン							あんたちが取り巻きを\n倒してくれたから、オレは主と\n一対一で戦うことができた
+	リディ	驚き_もち_驚き						えぇ？\n気づいてたの！？		2001-09
+	マディン							当然だ…狩人として周りの状況には\n常に細心の注意を\n払っていないといけないからな		9999-00
+	ディーア	怪しい						それよりもマディンさん、\nその右腕の怪我…すぐに治療しないと\n手遅れになるかもしれません
+	マディン							気遣いありがとうマスター殿\nだが、既に手遅れだ…\nもうほとんど感覚が無い
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_驚き涙						え？え？\nそれじゃあ、もう武器が持てないよ？\n狩りもできなくなっちゃうよ？
+	マディン							もう狩人として\n活動することは出来ないだろう…\nだが、それでもオレはいいと思ってる
+	マディン							森の主を狩り、復讐を果たしたオレに…もう未練などない\n…もう十分、満足だ
+	ディーア	通常						意思は固いようですね…わかりました\nとにかく、手当てをするために\n街へ戻りましょう
+	マディン							礼を言う…ところで聞いてもいいか？\n先ほど気になる単語があったのだが…\n意味を教えて欲しい
+	リディ	笑い_もち_笑い						気になる単語？\n何なにー？		2001-06
+	マディン							主との戦いで会話の流れが\nよくわからなかったのだが…\n眼前暗黒感、とは何の事だ？？		9999-00
+	ディーア	驚き						うう、\nうわあぁぁぁーーーーー!!!
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	ディーア	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	ディーア
+	マディン							ふむ？\nなぜマスター殿は逃げ出したのだ？
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						マディンさん、ナイスです♪\nそれはマスターの\n黒歴史を表す単語なのです
+	リディ							後で、もっともっと\nいじってやりましょうー♪		2001-05
+EndScenario
+
+# SQ1240203_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クレイジーファング 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	市街地A2
+Bgm	コメディ
+	勇者ギブル	通常	画面外_左
+Se	走る
+Tween	勇者ギブル	MoveTo	x=0 time=0.5			Add
+Wait						.5
+	勇者ギブル		2_3					くっ…なぜこんな…\nどうしよう…困ったなー\n超ー困ったぁー!!		3007-04
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	勇者ギブル
+CharacterOff	wipe
+FadeIn	black					.5
+	リディ	通常	3_3					ねぇマスター、\n勇者さんが何か、\n困ってるみたいだよ？		2001-11
+	ディーア	怪しい	2_3					…今までの経験上、\n勇者と関わって、\n良かった事なんて1回もない!!		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア							故に！\n俺はあえて無視しようと思う\nリディ、気づかれないように離れ…
+	勇者ギブル	通常	画面外_左
+Se	走る
+Tween	勇者ギブル	MoveTo	x=-180 time=1			Add
+Wait						1
+Se	ポップイン
+	勇者ギブル		1_3					おぉー！\nいいところに魔剣使いがー！\n頼む、僕を助けてくれー!!		3007-09
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	驚き						くそ、なぜバレた!?\nくっつくな、離れろ！\n男に抱きつかれて、喜ぶ趣味はない!!		9999-00
+	リディ	笑い_もち_笑い						なんでか、マスターは勇者さんに\n好かれるねー\n色々な意味で♪		2001-05
+	ディーア	怒り						離せ!!\n落ちついたら、話を聞いてやる！\nだから…は、な、せっ!!		9999-00
+FadeOut	white					.1
+Se	打1
+FadeIn	white					.1
+CharacterOff	勇者ギブル
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	作戦会議
+FadeIn	black					.5
+	ディーア	怪しい	2_3
+	リディ	通常	3_3
+	勇者ギブル	通常	1_3					先ほどは、取り乱して申し訳ない\n改めて…今置かれている状況を\n説明させて欲しい
+	ディーア							<color=mk2wisp>（全く…本当、\n　勇者にはロクな奴がいないな\n　面接官を疑うぜ…）</color>
+Tween	勇者ギブル	PunchPosition	y=50
+	勇者ギブル							コホン、僕はアマラ森林の管理を\n任されている勇者ギブルといいます\nつい先日、その森林で事件が起きてね
+	勇者ギブル							…最近の話だがアマラ森林の主が\nいなくなった事は知っているね？
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						もっちろん！\n存じていますともー♪		2001-05
+	勇者ギブル							なら話は早い…そこで、\n次の主を決める戦いが\n始まったみたいでね		9999-00
+	ディーア	通常						…次の王…なるほど、そういう事か\n王が不在の今、森のモンスターたちが\n混乱して、統率がとれていないのですね
+	勇者ギブル							あぁ、そのせいで森の治安が一気に\n悪化してしまった…\nそのせいで、僕は非常に困ってる!!
+Tween	勇者ギブル	PunchPosition	y=50
+	勇者ギブル							それだけなら全然問題ないんだけど、\n興奮したモンスターたちが\n森から出てきたら、大変な事になる！
+	ディーア	怪しい						なるほど…事件が発生する前に\nなんとかしたいけれど、\nどうにも手が回らない、と…
+	勇者ギブル							森林周辺の警備は\n既に済ませているのだが…\n中を調査するのは、ちょっと怖くてね
+	リディ	笑い_もち_誇る						そこで私たちの\n出番ってわけだね、マスター		2001-06
+	ディーア	通常						仕方がない…ここまで聞いて、\n協力しないってのはないな…\n俺たちでよければ協力しますよ		9999-00
+	ディーア							アマラ森林で悪さをしている\nリーダー各のモンスターを倒せば、\n治安が良くなりますかね？
+	勇者ギブル							あ、ありがとー！\n助かるよー!!		3007-02
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_驚き						マスターが進んで\n男の勇者さんを助けるなんて、\n珍しいね		9999-00
+	ディーア	照れ						か、勘違いするなよ！\n無関係な人たちが、傷付くのを黙って\n見過ごすわけにはいかないだけだ！
+	勇者ギブル							それって…無関係な人たちは無償で\n助けるけど、状況を知ってる僕には\n好意があって助けるって事でいいかな？
+Tween	勇者ギブル	PunchPosition	y=50
+	勇者ギブル							カッコイイねー♪\nさすがは魔剣使い！\n惚れてもいいかい？
+	リディ	驚き_もち_怒り						ギブルさんって、\nすっごくポジティブな、\n…勇者さんだね
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	悔しい						くそぉ…\n初めて勇者を心の底から、全力で\n殴りたいと思ってしまった…
+	ディーア							さっき抱きつかれたし…\n殴ってもいいかな、リディ？
+	リディ	笑い_もち_笑い						ダメー\nさぁさぁ、\nアマラ森林へ行くよマスター		2001-38
+EndScenario
+
+# SQ1240203_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クレイジーファング 2"
+ShowMessageWindow
+Bg	森林A
+Bgm	作戦会議
+Se	アラート
+Wait						1
+	勇者ギブル	通常	画面外_左					なるほど、了解した
+Se	走る
+Tween	勇者ギブル	MoveTo	x=-180 time=1			Add
+Wait						1
+	勇者ギブル		1_3					先ほど、部下から連絡が入った…\nどうやら森林から出現したモンスターが\n住人を襲ったらしい…
+	リディ	驚き_もち_驚き	3_3					えぇ!?\n襲われた人は大丈夫だったの？		2001-09
+	勇者ギブル							それは大丈夫たったみたい\n幸いにも軽傷で済んだらしい\nだけど…		9999-00
+	勇者ギブル							これじゃあ、僕が考えていた…\nあの計画は当分、無理かな
+	勇者ギブル							…一刻も早く、森の主問題を\n解決しないといけないね\n<color=mk2impo>【後継者争いの場】</color>へ急がないと…
+	リディ	驚き_もち						こうけいしゃ、あらそいのば？		2001-23
+	勇者ギブル							こんな事もあろうかと、事前に\n後継者として有力なモンスターたちが\n集まる場所を調査していたのです!!		9999-00
+	リディ	驚き_もち_怒り						そこまで進めていたなら、\n勇者さんたちで討伐に行けたんじゃ…
+	勇者ギブル							だって、怖いんだもん♪
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	コウモリ型モンスター	通常	2_3					ギャオーーー!!
+	ディーア	通常	画面外_右					危ないっ！
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Wait						.5
+Se	敵殺
+CharacterOff	コウモリ型モンスター
+	ディーア	怪しい	2_3					だもん、とか言っても\n全然可愛くないので、\n早く縄張り争いの場へ急ぎましょう
+Tween	勇者ギブル	PunchPosition	y=50
+	勇者ギブル							さすが魔剣使い…噂通りの戦闘力だ\n惚れてもいいかい？
+	ディーア	怒り						絶対に止めてください！
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=0.5			Add
+Wait						.5
+CharacterOff	ディーア
+	勇者ギブル							つれないなぁー\nリディちゃん、君のマスターは\nいつもあんな感じなのかな？
+	リディ	通常						うーん…心根は熱くて、\n困ってる人を見かけると\nつい助けちゃうんだけど…
+	リディ							多分、そのぉ…\nギブルさんの事を\nマスターはあんまり…
+	勇者ギブル							おぉーそこまでマスター君の事を\n信頼しているとは！\nいや、分析というのかな？
+Tween	勇者ギブル	PunchPosition	y=50
+	勇者ギブル							とにかく、素敵だ\n惚れてもいいかい？
+	リディ	怒り_もち						絶対に止めてください！		2001-07
+Se	走る
+Tween	リディ	MoveTo	x=-600 time=0.5			Add
+Wait						.5
+CharacterOff	リディ
+Tween	勇者ギブル	ScaleBy	x=-1 time=0.5			Add
+	勇者ギブル							ふぅーむ\n二人してつれないなぁー
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	勇者ギブル
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+	勇者ギブル	通常	1_3					さてさて、あそこに見える一角が\n後継者争いの場というけれど…\nちょっと、深入りし過ぎたみたいだねー
+	ディーア	怪しい	3_3					えぇ、姿は見えませんが…\n周りから殺気を感じますね
+	リディ	驚き_もち_驚き	2_3					え？え？\nどうしたの？\n何かあったの？
+	ディーア							俺たちは今モンスターに囲まれている\n2人を守りながら戦うのは。\nかなり厳しいな
+	勇者ギブル							しょうがない、\nここまで来たら腹をくくるか…
+	勇者ギブル							リディちゃん、\n君はマスター君の事を\nちゃんと見ておくんだよ？
+	リディ	驚き_もち_驚き涙						…ギブルさん？
+	勇者ギブル							マスター君、半分は僕が片付ける\n君はリディちゃんの事に専念しなよ\n僕は…僕のやるべき事をやるさ
+Se	走る
+Tween	勇者ギブル	MoveTo	x=600 time=0.5			Add
+Wait						.5
+CharacterOff	勇者ギブル
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+	ディーア	驚き						え？\nギブルさん!?
+	勇者ギブル	<Off>						滅せよ！\n悪しきモンスターたちよ!!
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Tween	ディーア	PunchPosition	y=50
+	ディーア	怒り						戦えるなら、\n最初から戦ってくれーーー!!
+EndScenario
+
+# SQ1240203_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クレイジーファング 3"
+ShowMessageWindow
+Bg	森林A
+Bgm	バトル
+	勇者ギブル	<Off>						くらえ！
+Se	斬2
+	ディーア	<Off>						はぁっ!!
+Se	斬2
+	リディ	通常	画面外_左
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+	リディ	驚き_もち						マスターもギブルさんも、頑張ってー！\nもう少しだよー!!
+Se	回避
+	カエル型モンスター	通常	1_3					ギギギ…
+	ディーア	<Off>						リディー!?\n危なぁーーーいっ!!
+Tween	カエル型モンスター	MoveTo	x=0 time=1			Add
+Wait						1
+	カエル型モンスター		2_3
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+	リディ	驚き_もち_驚き涙	3_3					え？		2001-23
+	勇者ギブル	通常	画面外_左
+Se	走る
+Tween	勇者ギブル	MoveTo	x=-180 time=1			Add
+Wait						1
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Se	敵殺
+CharacterOff	カエル型モンスター
+Bgm	凱旋
+	勇者ギブル		1_3					全く、油断も隙もないね\nリディちゃん、大丈夫かい？		9999-00
+	リディ	照れ_もち_笑い涙						ギブルさん…\nありがとうございます		2001-04
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	驚き	2_3					助かりました！\nあと少し遅かったら、\n大変な事になっていました		9999-00
+	勇者ギブル							僕、カッコよかったでしょー\n惚れてもいいよ？
+	ディーア	通常						それはない
+	リディ	通常_もち_怒り						絶対にないね
+Tween	勇者ギブル	PunchPosition	y=50
+	勇者ギブル							つれないなぁー\nん…？\nおやおや…
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	勇者ギブル
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+	キノコリオン		1_3
+Wait						1
+	カエル型モンスター		3_3
+Wait						1
+	妖精型モンスター		2_3
+Wait						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	キノコリオン
+CharacterOff	カエル型モンスター
+CharacterOff	妖精型モンスター
+CharacterOff	wipe
+FadeIn	black					.5
+	リディ	驚き_もち_驚き	3_3
+	ディーア	驚き	2_3
+	勇者ギブル		1_3
+	リディ	驚き_もち_驚き涙						ま、マスター…\nなんかモンスターがいっぱい\n集まって来てるよ…		2001-13
+	ディーア	悔しい						まだこんなに残っていたのか…\nギブルさん、まだ体力は\n残っていますか？		9999-00
+	勇者ギブル							待つんだ、マスター君\n何か様子がおかしい
+Bgm	平和
+	ディーア	驚き						なんだろう、これは…\nまるでギブルさんを崇めているような
+	勇者ギブル							これは…モンスターたちの\nテレパシー？\n…え、そんな…バカな!?		3007-06
+	リディ							なになにー\nどうしたのー？
+	勇者ギブル							今の戦いを見て、\nみんなは僕を…森の主に\n推薦したいみたいだ		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	嬉しい_もち_笑い						本当!?\nそれ、いいかも♪		2001-06
+	リディ	嬉しい_もち						ほら、ギブルさんって\nとっても強いし、\n森の秩序も守れる勇者さんだし
+	ディーア	笑い						俺も良いと思います\nまさにギブルさんこそ、\n森の主の中の王にもなれると思います		9999-00
+	勇者ギブル							確かに…\nそれなら僕が抱えていた問題も\n解決できる
+	勇者ギブル							ずっと考えてた、あの計画…\n<color=mk2impo>【侵略もしない、されない中立な森】</color>\nにする事も可能に？
+	勇者ギブル							いや、しかし…仮に僕が、\n森の主になってしまったとしたら\n偉大なる勇者が1人減ってしま…
+	ディーア	通常						すぐに答えを出す必要は\nないんじゃないかな？
+	リディ	笑い_もち_笑い						うん、じっくり考えた方がいいと思う\nそれに素敵だと思う…\n中立な森って！
+	勇者ギブル							おや、それは誤解だよリディちゃん\n仕掛けない、仕掛けられない事を\n信念にするという事は…
+Tween	勇者ギブル	PunchPosition	y=50
+	勇者ギブル							仮に仕掛けられたら\n必ず受けて立つ、\nという事と同義だよ？
+	ディーア	怪しい						そんな逞しい思想があるなら、\nギブルさんは、森の主として\n十分やっていけますよ…
+EndScenario
+
+# SQ1240302_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="山を綺麗に 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	山岳A
+Bgm	平和
+	ディーア	通常	2_3
+	リディ	通常	3_3
+	ピッポ	通常	1_3					突然すまない！\n私は登山家のピッポという\n山をこよなく愛する者だ！
+	ピッポ							君が優秀な魔剣使いだという話を\n私の知人から聞いた\nそこで是非、お願いしたい事がある！		3003-08
+	ディーア	驚き						登山家のピッポさん、でしたっけ？\nそんな人が俺たちに依頼というのは、\nどんな内容でしょうか？		9999-00
+	リディ	通常						最近の依頼は…あんまり\nいい思い出がないから、\n私はちょっとドキドキだよー
+	ピッポ							最近、世界一の霊山アマラブルムへ\n登山挑戦者が急激に増えている\n登山家として、それは大変嬉しいが…
+	ピッポ							それに伴い、ゴミ問題が深刻化し…\n更にはモンスターに襲われる事件も\n多発している…これは許せないよなぁ!?		3003-03
+	ピッポ							山を愛する者の1人として、\n徹底的に掃除をしたい…しかし、\nモンスターが多くて非常に困ってる！
+	ピッポ							難しい依頼かもしれないが…頼む\nどうか、護衛を\nしてくれないだろうか？
+Tween	ディーア	PunchPosition	y=50
+	ディーア	笑い						良かったー護衛ですね\nなんか久しぶりに\nまともな依頼な気がするよ		9999-00
+	リディ	笑い_もち_笑い						良かったね、マスター\n今回の依頼は\n簡単に終わりそうだよ		2001-05
+	リディ	通常_もち_誇る						盗賊まがいの遺跡調査やピクニック…\n食材探しや幽霊の浄化とかも\nやったよねー		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						それらに比べたら、掃除に護衛！\nこれは、久しぶりにやり甲斐のある\n依頼だよー！
+	ピッポ							私は…本当に君たちに\n依頼を頼んでいいか\n少々、不安になってきたよ
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	ピッポ
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	山岳B
+Bgm	作戦会議
+FadeIn	black					.5
+	ピッポ	通常	画面外_左
+Se	走る
+Tween	ピッポ	MoveTo	x=-180 time=1			Add
+Wait						1
+	ピッポ		1_3					着いた！\n世界で最も高い霊山アマラブルム！
+	ディーア	驚き	2_3					これは…想像していたよりも、\n酷い…
+	リディ	驚き_もち_怒り	3_3					うわぁ…\n神聖な山だって聞いたのに…\nすっごくゴミ臭い…		2001-09
+	ピッポ							私の悲しみを分かってもらえて、\n大変嬉しいよ\nそれでは早速だが、ゴミ掃除を行う
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	通常						リディ、ピッポさんを\n手伝って上げるんだ		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り_もち						えぇーどうして、私だけぇ？\nマスターもやってよー！
+	ディーア	悔しい						俺も全力で手伝いたいのだが、\nあそこを見るんだ、リディ\n既にモンスターたちが集まって来てる
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	ピッポ
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	カニ型風モンスター	通常	3_3					キィャァァァ
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	クマ型風モンスター	通常	1_3					グオォォオオオオォォォ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	カニ型風モンスター
+CharacterOff	クマ型風モンスター
+CharacterOff	wipe
+FadeIn	black					.5
+	リディ	通常_もち_驚き	3_3
+	ディーア	怪しい	2_3
+	ピッポ	通常	1_3					この様子だと…\nまだまだ増えそうだね\nマスター君、戦闘は任せたよ！		3003-10
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	笑い						…というわけで、リディ\nピッポさんの手伝いをよろしくー		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	ディーア
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	驚き_もち_驚き	2_3					あ、マスター！\nんもうー逃げられたっ!!		2001-07
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り	2_3					うーーーーー！\n依頼が終わったら<color=mk2impo>「限定品のお菓子」</color>を\n買いに並ばせてやるぅー!!
+	ピッポ							そ、それは…マスター君も\n重労働だね		9999-00
+EndScenario
+
+# SQ1240302_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="山を綺麗に 2"
+ShowMessageWindow
+Bg	山岳B
+Bgm	作戦会議
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	通常_もち	2_3					全くー\nどうやったらこんなにも\n山を汚す事ができるのかなぁ…
+Tween	リディ	ScaleBy	x=-1 time=0.5
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り_もち_驚き	3_3					山が好きだったら綺麗にするのが\n普通じゃないの？\n汚すその神経が信じられないよ		2001-07
+	ピッポ	通常	画面外_左					全く持って、同感ですね
+Se	走る
+Tween	ピッポ	MoveTo	x=-180 time=1			Add
+Wait						1
+	ピッポ		1_3					リディさん…\n山を愛する者として、\nこんなにも悲しい事はありません		9999-00
+	ピッポ							最近は登山ブームらしくて、\n昔に比べて若い人が\n増えたのはいいのですが…
+Tween	ピッポ	PunchPosition	y=50
+	ピッポ							山そのものに対して、\n無知な人が非常に多い!!
+	リディ	驚き_もち_驚き						ピッポさん、落ち着いて\n大きな声を出すと、\nモンスターに気づかれちゃうよ？
+	ピッポ							持ってきたゴミは自分で持ち帰る…\nこんな当たり前の事すら\n出来ない人がいるなんて…
+	ピッポ							私は悲しい!!\nこんな状況、酷すぎるっ!!		3003-04
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	コウモリ型モンスター	通常	2_3					キシャアアァァァ！		9999-00
+	ディーア	通常	画面外_左					ピッポさん！\n頭を下げて!!
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+Se	回避
+CharacterOff	ピッポ
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Se	敵殺
+CharacterOff	コウモリ型モンスター
+	ディーア	通常	2_3					危ないところでした
+	ピッポ	通常	1_3					も、もう大丈夫ですかね？
+	ディーア	怪しい						気をつけてください\nここのモンスターは人がいると、\nすぐに襲ってくるみたいです
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_キラン						あ、マスターいいところに!!\nあそこにある大きなゴミをまとめて\n私じゃ持てなーいー		2001-13
+	ディーア	驚き						おっと、いけない\nあそこにまたモンスターが現れた		9999-00
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=0.5			Add
+Wait						.5
+CharacterOff	ディーア
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り_もち_驚き						もうーまた逃げたー！\nマスターのバカーーー!!		2001-07
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	怒り	2_3					ぐぬぬー\n依頼が終わったら高級アイスを\n買ってもらうんだからー！
+	リディ	怒り						トリプルにして、更に\nトッピングも要求してやるんだから!!
+	ピッポ							限定のお菓子だけじゃなく、\n更にアイスまで!?
+	リディ	通常						仕方ない…\n私1人で持っていこっと
+Se	回避
+CharacterOff	リディ
+	リディ	<Off>						よいしょっと…
+FadeOut	white					.1
+FadeIn	white					.1
+	リディ	<Off>						あーーーーーー!!!!
+Tween	ピッポ	PunchPosition	y=50
+	ピッポ							リディさん!?\nどうしました？\n大きな声を出すと、モンスターが…
+	リディ	驚き_もち_笑い	2_3					荷物が大きくて、\n足元が見えない…
+	ピッポ							そ、そんな事でしたか…\n気をつけてください\nまだゴミはたくさん残っているので
+Tween	ピッポ	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	ピッポ	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	ピッポ
+	リディ	通常						気のせいかな？\nゴミが減ったところ、\nモンスターが来ない気がする？
+	リディ	笑い_もち						うーん、まだ分かんないよね\nもう少し綺麗にして、\n確かめてみよっと
+FadeOut	white					.1
+FadeIn	white					.1
+	リディ	驚き_もち_驚き						あーーーーーー!!!!!
+	ピッポ	通常	画面外_左
+Se	走る
+Tween	ピッポ	MoveTo	x=-180 time=1			Add
+Wait						1
+	ピッポ		1_3					ど、どうしました!?\nモンスターが現れましたか？
+	リディ	照れ_もち_驚き涙						足元が見えないこの状況…\nもしかして…胸が大きい人って、\nいっつもこんな気持ち？		2001-06
+	ピッポ							…まだゴミはたくさん残っているので、\n足元に気をつけて下さいね…		9999-00
+EndScenario
+
+# SQ1240302_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="山を綺麗に 3"
+ShowMessageWindow
+Bg	山岳B
+Bgm	作戦会議
+	リディ	嬉しい_もち	1_3					えーっと…\nお菓子の袋は燃えないゴミっと
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+	リディ							よぉーし、これで大半の\nゴミは片付いたかな？
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	通常_もち_驚き	2_3					…んう？\nさっきまでモンスターが頻繁に\n現れていたのに…急に減った？		2001-23
+	ピッポ	通常	画面外_左
+Se	走る
+Tween	ピッポ	MoveTo	x=-180 time=1			Add
+Wait						1
+	ピッポ		1_3					リディさーん！\nこっちは終わりました\nそちらはどうですか？		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_笑い						あ、ピッポさん♪\nこっちも終わりましたー
+	ピッポ							それはよかった\n結構、時間が掛かってしまいましたが、\nすごく綺麗になりましたね
+	ヒッポ							それではマスター君のところへ\n行きましょうか
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ピッポ
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+	妖精型モンスター	通常	1_3
+	ディーア	通常	3_3					せイヤー!!
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Wait						.5
+Se	敵殺
+CharacterOff	妖精型モンスター
+	ディーア		1_3					これで終わり！\nさぁて、後は残ったゴミを\n片付けるだけ…
+Bgm	平和
+	リディ	笑い_もち	2_3					マスター!!		2001-13
+FadeOut	white					.1
+FadeIn	white					.1
+Tween	ディーア	PunchPosition	y=50
+	ディーア	驚き						ウォッ!?
+Se	回避
+Tween	ディーア	MoveTo	x=180 time=0.5			Add
+Wait						.5
+	ディーア		3_3					び、びっくりしたぁ…\nなんだ、リディか
+	ピッポ		1_3					おや、ここも片付いていますね\nマスター君が、\n綺麗にしたのですか？
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+	リディ	驚き_もち_笑い						あれれー？\nもしかして、マスターも気づいたの？
+	ディーア	通常						も、という事はリディもか？\nさすが、優秀な助手だ
+	ピッポ							ど、どうしたんですか？\n2人だけで話を進めないで下さい！
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+	リディ	通常						あのね、ピッポさん\n掃除しててた時に気づいたんだけど…\nここのモンスターは<color=mk2impo>「綺麗好き」</color>なの♪		2001-05
+	リディ	笑い_もち_誇る						ゴミがなくなって、\n綺麗な場所だとモンスターが\n私たち襲って来なかったのです
+	ディーア	怪しい						恐らく、山のモンスターたちは\nゴミを捨てる人間に\n怒っていたんじゃないかな？		9999-00
+	ピッポ							なるほど…モンスターにも\nそんな想いがあったのですね\n勉強になります		3003-06
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+	リディ	通常_もち						ところでマスターは何で、\n私たちに隠れて掃除してたの？		9999-00
+	ディーア	照れ						べ、別に隠してなんか…
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						モンスターを倒しつつ、\n掃除もして、山を綺麗にする俺…\nカッコイイー♪
+	リディ	通常_もち_誇る						とか全然思わないから、\n正直に話してー？
+	ディーア	悔しい						ぐぬぬぅ…手伝わなかった事を\n根に持っているな、リディ…
+Tween	リディ	ScaleBy	x=-1 time=0.5			Add
+	ピッポ							とにかく、今回の依頼は\n君たちに頼んで正解でした		3003-02
+	ピッポ							1人の山を愛する者として、\n更なる知識も得ました！\n是非とも他の人にも教えたいですね
+	ピッポ							しかし、正直なところ…\n最初は君たちを疑っていたのですが…
+	ピッポ							この依頼で君たちが\n本当に優秀な魔剣使いだと、\n実感しましたよ
+	リディ	笑い_もち_誇る						えへへー♪\nまた何かあったら遠慮なく\n依頼してください！		9999-00
+	ディーア	笑い						こういう依頼なら\nいつでも大歓迎ですから！
+EndScenario
+
+# SQ1240303_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="最後の材料を求めて 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	市街地A2
+Bgm	コメディ
+	ディーア	通常	2_3
+	リディ	嬉しい	3_3					ねぇ、マスター\nこの前、街を歩いていたら、\n変な会話が聞こえたんだけどさぁー		2001-11
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	通常	2_3					変な会話？\nどんなの？		9999-00
+	リディ	通常_もち						ターバンを巻いてたから、\nノイルマレヴの人たちかな？\nその人たちが言ってたんだけど…
+	リディ	通常_もち_キラン						<color=mk2wisp>「石油王ニナリタイ、ボクニモ\n石油王ニナレル可能性ハアリマスカ？\n仮ニアッタラ、ドノグライノ確率？」</color>
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_笑い						石油なんて、\nそう簡単に\n見つかるわけないよねーマスター？
+	ディーア	怪しい						可能性はなきにしもアラブ…
+	リディ	通常_もち_笑い						んう？\nマスター、今何か言った？		2001-23
+	ディーア	照れ						ななな、何でもない!!\n何も言ってないぞ
+FadeOut	white					.1
+FadeIn	white					.1
+	ちび魔女ナル	通常	1_3					アハッ！\nアッハハハハハハハ!!!!
+	リディ	驚き_もち_驚き						ま、マスター\nあそこにいる女の子が突然、\n爆笑し始めたよ…		2001-09
+FadeOut	white					.1
+FadeIn	white					.1
+Tween	ちび魔女ナル	PunchPosition	y=50
+	ちび魔女ナル							か、可能性はなきにしもアラブって…プッ、ククク…アハッ！\nアハハハハハハハ!!!!!		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	驚き						まさか、\nそこまで笑ってもらえるとは\n思っていなかったよ
+Tween	リディ	PunchPosition	y=50
+	リディ	通常_もち_キラン						えーナニナニ？\nマスター、何て言ったの？\nもっかい教えてー
+	ディーア	照れ						は、恥ずかしいから\nその話はやめよう…
+	ちび魔女ナル							ごめんごめん…\nあまりにも面白かったから、つい…\nあら、あなた魔剣使い？
+	ディーア	通常						ええ、そうですが…\n魔剣使いに何か用でも？
+	ちび魔女ナル							えぇ、優秀な魔剣使いに\nある依頼をしたかったの\nその点、あなたなら何も心配ないわね
+	ちび魔女ナル							何せ、いいセンスを\n持っているんだから、\nぷぷぷっ…!!
+	ディーア	怪しい						思い出し笑いなのか、\nバカにされているのか分からないけど…\n依頼内容を聞いてもいいかな？		9999-00
+	ちび魔女ナル							失礼、つい思いちゃって…依頼の話ね\nあなた、アマラブルムの頂上へは\n行った事ある？
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						にしししー♪\nもっちろん、あるよー！		2001-39
+	ちび魔女ナル							それなら、話が早いわ\n頂上付近にしか咲かない花…\n<color=mk2impo>インフェルサム</color>を手に入れて欲しいの
+	リディ	驚き_もち_誇る						あ、その花、聞いた事ある！\n見た目は雑草みたいなんだけど、\n夕方にだけ開花する特殊な花だよね？
+Se	回避
+CharacterOff	ディーア
+CharacterOff	ちび魔女ナル
+	ディーア	驚き	1_3
+	ちび魔女ナル	通常	2_3					あなた、小さいのに\nよく知っているわね♪\nいい子いい子してあげる
+Se	ポップイン
+	リディ	笑い_もち_驚き						わーい♪\n…ってナルちゃん、\nどう見ても私より年下じゃない！		2001-04
+	ちび魔女ナル							あら、失礼\nついいつものクセで…		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	怪しい						いつものクセ？
+Tween	ちび魔女ナル	ScaleBy	x=-1 time=0.5			Add
+	ちび魔女ナル							訳あって、今はこんなナリなんだけど…\n本当の私は…結構すごいのよ？\n自分で言うのも何だけど♪		9999-00
+	ちび魔女ナル							だから元の姿に戻るために、\n最後の材料<color=mk2impo>インフェルサム</color>が必要なの
+	ディーア							本当ですか？\nどのくらい凄いのか詳しく\nくびれとかヤバイ感じですか!?
+	リディ	怒り_もち						マスター!!\nそのぐらいにしないと、勇者さんに\n強制連行してもらうんだから！
+	ディーア	通常						はい、自重します…えーとナルさん、\nまだ半信半疑ですけど、\n依頼を引き受けます
+	ちび魔女ナル							ありがと♪\nそれじゃあ早速、\nアマラブルムへ行きましょうか
+EndScenario
+
+# SQ1240303_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="最後の材料を求めて 2"
+ShowMessageWindow
+Bg	山岳B
+Bgm	コメディ
+	リディ	通常	3_3
+	ディーア	通常	2_3
+	ちび魔女ナル	通常	画面外_左
+Se	走る
+Tween	ちび魔女ナル	MoveTo	x=-180 time=1			Add
+Wait						1
+	ちび魔女ナル		1_3					さーてっと…\nそろそろ頂上付近まで来たけど…<color=mk2impo>インフェルサム</color>はあるかしらー？
+	リディ	笑い_もち_笑い						ねぇマスター、\n今回の依頼が終わったら\n約束してた甘味食べ放題に行こうよー		2001-11
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	怪しい						残念！\n俺たちの財布は今まさに\n極寒の時代となっている		9999-00
+	リディ	驚き_もち_驚き涙						えーそんなぁー\n私だってもう今月のお小遣い…\n使っちゃったよ？		2001-07
+	ディーア	笑い						よし、ジャンケンして\n負けた方の奢り、\nというのはどうだろうか？		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち						ジャンケン♪\nいいよー私、負けないよ！\n結構自信あるんだー
+	ディーア	通常						……待った！\nやっぱ負けたら、マジでヤバイから\nお互い半々で分けよう？
+	リディ	笑い						あははーそう言うと思ったー\nマスターって勝負運、\nあんまりないんもんね♪		2001-05
+	ちび魔女ナル							仲睦まじいわねー\n私だって、元の姿に戻れば\nもうモテモテなんだからー		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	怪しい						本当ですか？\nどのくらいですか！\n胸の大きさもモテモテですか!?
+	リディ	怒り						マスター、街に戻ったら\n勇者さんのとこへ行こうか？
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	驚き						すいません\nごめんなさい\n調子に乗りました…
+	ちび魔女ナル							リディちゃん、私は別に怒ってないから\nその辺にしてあげな…あ、あれ？\nあそこにあるのって…もしかして
+Tween	ちび魔女ナル	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	ちび魔女ナル	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	ちび魔女ナル
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	悔しい						あ、待ってください！\n勝手に行ったら危ないですよ!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	作戦会議
+FadeIn	black					.5
+Se	N取得
+	ちび魔女ナル	通常	1_3					ビックリ…こんなところにあったわ！\nこれよ、これが<color=mk2impo>インフェルサム</color>よ!!		3005-06
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	通常	2_3					これが<color=mk2impo>インフェルサム</color>ですか？\nただの雑草にしか見えませんが…		9999-00
+	リディ	嬉しい_もち_笑い	3_3					フッフッフー\nだからマスターは初心者なんだよー
+	リディ							こんな高い山に、\n雑草が生えてるわけないでしょ？
+	ディーア	悔しい						うぐぅ…\n当たっているだけに、反論できない…
+	ちび魔女ナル							さて、それじゃあ調合を始めるわよ\n開花している時にやらないと、\n意味がないの
+	ちび魔女ナル							場所は…\nうん、あそこがちょうどいいわね
+Se	走る
+Tween	ちび魔女ナル	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	ちび魔女ナル
+	ちび魔女ナル	<Off>						それじゃあ、後はよろしく！\nモンスターが出たら守ってねー♪
+	ディーア	怪しい						それにしてもナルちゃん…\n本当に、元の姿に戻れるのかな？\nアレが本当の姿ってオチはないよね
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	笑い						実は本当の姿って話はフェイクで、\nアレが本当の姿ってオチ、\nないよね？
+	リディ	怒り_もち_キラン						マスターはナルちゃんの\n本当の姿が見たいだけでしょ？\n全く、本当に残念なんだからー
+Bgm	バトル
+	リディ	驚き_もち_驚き涙
+	ディーア	驚き
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	モンスターの声	<Off>				0		<color=mk2wisp>\n　　……グオオオオッ!!……</color>
+	リディ							マスター！\nモンスターさんが来たよ
+	ディーア	通常						あぁ、それじゃあ行ってくる\nリディはナルちゃんの周辺を\n見張っててくれよ？
+EndScenario
+
+# SQ1240303_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="最後の材料を求めて 3"
+ShowMessageWindow
+Bg	山岳B
+Bgm	作戦会議
+	ドラゴン型風モンスター	通常	1_3
+	ディーア	通常	画面外_右					はぁーーーー!!
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Wait						.5
+Se	敵殺
+CharacterOff	ドラゴン型風モンスター
+	ディーア	通常	2_3					さて、結構時間が経ったけど\nナルさんの方は終わったかな？
+	リディ	通常	3_3					どうかな？\nこっちも落ち着いたし、\n見に行って見よっか？
+	ちび魔女ナル	<Off>						できたーーー!!
+	ディーア							噂をすれば、何とやら…\n完成したみたいだぞ、リディ\n行ってみよう
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+FadeIn	black					.5
+	ちび魔女ナル	通常	1_3
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	通常	2_3
+	リディ	通常	3_3
+	ちび魔女ナル							いらっしゃーい♪\nちょうど薬が完成したわ\nこれを飲めば、たちまち元の姿に戻るわ
+	リディ	笑い_もち_笑い						わーい♪\n楽しみだね、マスター		2001-06
+	ちび魔女ナル							何か叫んで飲んだ方が\nソレっぽい雰囲気が出るわよね？\n何て言おうかしら…		9999-00
+	ディーア	驚き						普通に飲んじゃ\nダメなんですか？
+	ちび魔女ナル							うーん、そうね…\nそれじゃあ、普通に一気飲みするわ
+Tween	ディーア	PunchPosition	y=50
+	ディーア							一気飲み!?
+FadeOut	white					.1
+Se	ラブ
+FadeIn	white					.1
+Wait						.5
+FadeOut	white					.1
+Se	キラン
+FadeIn	white					.1
+CharacterOff	ちび魔女ナル
+	セクシー魔女ナル	通常	1_3					ふぅー良かったわー\n無事、元の姿へ戻ったみたいね		3004-02
+	ディーア							一瞬でそんな…\n声まで変わって!?		9999-00
+	リディ	笑い_もち_驚き						すごい!!\nナルさん、すっごい美人さんです！\n全身から女子力がにじみ出ています!!
+	セクシー魔女ナル							ふふふ、ありがとう\nとある筋から、<color=mk2impo>【若返り薬】</color>の\n作り方を教えてもらってね…		3004-10
+	セクシー魔女ナル							作って、いざ実験してみたら\n元に戻れなって、色々大変だったよー
+	セクシー魔女ナル							効果は…大体10才ぐらい、\n若返る感じかしら？\n何はともあれ、実験は成功だわ
+FadeOut	white					.1
+FadeIn	white					.1
+	セクシー魔女ナル							アハッ、アハハハハ!!\n後は生産ラインを確保すれば…\nウフフフ…
+	リディ	驚き_もち_驚き						でもナルちゃん\n…あ、今はナルさんかな？
+	リディ							10才も若返るんだったらさー\nもし仮に10才以下の子が飲んだら、\nどうなっちゃうのかな？
+	セクシー魔女ナル							それは確実に…死ぬわね\nいいえ、消えるのかしら？
+	ディーア	驚き						どっちにしろダメですよ！\nそんな危険な薬、\n販売しちゃいけません、絶対に!!
+	セクシー魔女ナル							残念…手伝ってくれた\nリディちゃんたちに言われちゃダメね\nもっと研究して改善しないとね
+Tween	セクシー魔女ナル	PunchPosition	y=50
+	セクシー魔女ナル							あら、そういえば2人に\nお礼をしなくちゃいけないわよね\n何がいいかしら…
+	セクシー魔女ナル							そうね…頂上付近で話してた、\n甘味食べ放題、それにみんなで\n行くってのはどうかしら？
+	セクシー魔女ナル							もちろん私の奢りよ♪\n遠慮しなくていいわよ
+	ディーア	照れ						行きます
+	リディ	驚き_もち_キラン						私より早く、\n即答しちゃったよ!?
+	セクシー魔女ナル							そのお店は今から行っても\n間に合うのかしら？
+	リディ	嬉しい_もち_笑い						大丈夫ですよ\nまだまだタップリ時間はあります♪
+	セクシー魔女ナル							それじゃあ、瞬間移動の\n術式を使って行きましょうか？
+	リディ	嬉しい_もち_キラン						わーい♪\nお店の細かい位置を言いますねー		2001-05
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	笑い						久しぶりのご飯だな、リディ\n今日はお腹が大きくなるまで、\n全力で食うぞー♪		9999-00
+	リディ	笑い_もち_誇る						うん、私もお腹ペッコペコ\nさっきからお腹がグーグー鳴ってて\n大変だったんだから
+	セクシー魔女ナル							あなたたち…\nそんな危機的状況で\nよく戦う事が出来たわね…
+EndScenario

@@ -1,0 +1,1763 @@
+# E_1041_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	土手B
+	フラウ	通常
+FadeIn	black					.5
+	フラウ	通常						あのね、バロック<dash=2>
+	フラウ							私、貴方に言わなくては\nならないことがあるの
+	バロックフロート	驚き						う、うん<dash=2>
+	フラウ	通常						とっても大事なことだから、\nようく聞いてね
+	フラウ							貴方は私にとって、\n何よりも大事なものだから
+	バロックフロート	怒り						フラウ<dash=2>\nうん、私、聞くよ
+	フラウ	通常						貴方にとって最も重要なのは<dash=2>\n<color=mk2impo>セレメンケロ</color>の心を\n忘れないこと<dash=2>
+StopBgm
+	バロックフロート	驚き						………………は？
+	バロックフロート							えっと……フラウ？\nその、せれ？ めんけろ？\nって何……？
+Bgm	神秘
+	フラウ	通常						そう、セレメンケロの心<dash=2>\n人を慈しみ、\n愛し、尊重する心
+	フラウ							どんなときでもくじけずに、\nまっすぐな瞳で世界を見ること
+	フラウ							そう、<color=mk2impo>ネメステレロン</color>の書にも\n書かれているわ
+	バロックフロート	驚き						ネメステレロンの、書<dash=2>
+	フラウ	通常						貴方はこれから、幾多の<color=mk2impo>マッハ</color>を\n<color=mk2impo>ソロロンロンソ</color>しないといけない
+	バロックフロート	驚き						ソロロン、ロンソ<dash=2>
+	フラウ	通常						だからこそ<color=mk2impo>ノモホ</color><dash=2>
+	フラウ							<color=mk2impo>ソコモソンッフロ\nオッフォ<dash=2>\nオモソロンソ</color>
+	フラウ	笑い						<dash=2>ね？
+	バロックフロート	驚き						フラウ<dash=2>!!
+	フラウ	笑い						ええ<dash=2>!!
+StopBgm						.5
+Param	character_grayout=false
+	白背景		エフェクト表			1
+Wait						1
+	バロックフロート	驚き						（やばい<dash=2>）
+	バロックフロート							（フラウの言ってること、\n　なんにも、分からない<dash=2>）
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_02
+EndIf
+EndScenario
+
+# E_1041_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Param	character_grayout=false
+Bgm	神秘					.5
+Bg	土手A
+	イベントスチル1041A		エフェクト表
+FadeIn	white					.5
+	バロックフロート							<dash=2>ん
+	バロックフロート							あれ、ここ……、\nどこ……？
+	フラウ							おはよう、バロック
+	バロックフロート							ん<dash=2>\nフラウ<dash=2>
+	フラウ							よく眠れたかしら？
+	バロックフロート							わかんない、\nなんかすっごく長い夢を\n見てたような気が<dash=2>
+	フラウ							そっか、\nでももう行かなくちゃ
+	フラウ							そろそろネブリゴッフェが\nサディソモーソする時間だよ
+	バロックフロート							うん、そうだね<dash=2>
+StopBgm						1
+FadeOut	white					1
+CharacterOff						0
+Param	character_grayout=true
+	フラウ	通常	1_2			0
+	バロックフロート	通常	2_2			0
+FadeIn	white					0
+	バロックフロート							<dash=2>ん？
+Bgm	コメディ
+	フラウ							ほらほら、早く！\n急がないと始まってしまうわ！
+	バロックフロート	驚き						ちょ、ちょっと待って\n今、何て<dash=2>？
+	フラウ							だから、急がないと<dash=2>
+	バロックフロート							そこじゃなくて、\nもうちょっと前
+	フラウ							ええっと<dash=2>\nよく眠れたかしら？
+	バロックフロート	怒り						戻りすぎ！\nもうちょっと後！
+	フラウ							ちょっと分からないわ……
+	フラウ	笑い						そんなことより早くしないと！\nソフレッティモソしてしまうわ！
+	バロックフロート	驚き						それ！ それそれ!!\n何なの、その、\nそ、そふれ……？
+	フラウ	笑い						うふふ、ヒミソソソップ！
+	バロックフロート							ひみそ、そそ……？
+	バロックフロート							どうしちゃったの、フラウ……？
+	フラウ	通常						ほら、早く行くわよ！\nブレイズドライ部の\n朝練に！
+	バロックフロート							何よブレイズドライ部って<dash=2>\nわ、わ、ちょっと、\nフラウ<dash=2>！
+	フラウ							走って走ってー♪
+	フラウ							オソナンプサ！　オソナンプサ！
+CharacterOff						1
+	白背景		エフェクト裏			1
+Wait						1
+	イベントスチル1041B		エフェクト表			1.5
+Wait						3
+FadeOut	white					2
+StopBgm						.5
+CharacterOff
+Bg	ブレドラ場
+Param	character_grayout=true
+	バロックフロート	通常
+FadeIn	white					2
+Bgm	穏やか
+	バロックフロート							と、いうわけで<dash=2>
+	バロックフロート							フラウに言われるままに\n「ブレイズドライ部」の「朝練」に\nやってきたわけだけど<dash=2>
+Bgm	火属性バトル
+CharacterOff
+	ブレイズドライ部員A		1_3
+	主将		2_3
+	ブレイズドライ部員B		3_3
+	主将							締まっていくぞ!!\nプレイ・ドラーイブ!!
+Tween	ブレイズドライ部員A	PunchPosition	y=50				Add
+	ブレイズドライ部員A							プレイ・ドラーイブ！
+	主将							小さァーいッッッ!!\nハラから声出せェッッ!!
+	主将							プレイ!!　ドラーイブ!!!!
+Tween	ブレイズドライ部員B	PunchPosition	y=50				Add
+	ブレイズドライ部員B							プレイ!!　ドラァーイブッ!!!!
+	主将							よーっし!!\nまずはティモソ5万回!!
+Tween	ブレイズドライ部員A	PunchPosition	y=50				Add
+	ブレイズドライ部員A							ティモソ5万回!!\nいきまーす!!
+CharacterOff
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+Shake	ブレイズドライ部員A		x=10				NoWait
+	ブレイズドライ部員A							おおおおおおおおお!!\nおおおおおおおおおお!!
+Shake	ブレイズドライ部員B		x=10				NoWait
+	ブレイズドライ部員B							おおおおおおおおお!!\nおおおおおおおおおお!!\nおおおお!!　おおおおおお!!
+StopBgm						1
+Bgm	絶望
+CharacterOff
+	フラウ	通常	1_2
+	バロックフロート	通常	2_2
+	バロックフロート							何よティモソって<dash=2>\nプルプル震えてるだけじゃない<dash=2>
+	バロックフロート							そもそもここ、どこなの……？\n魔界じゃないみたい……
+	バロックフロート							ねえフラウ、説明してよ\nここはどこなの？
+	フラウ							ここはどこ……って、\n私たちの高校でしょう？\nブレイズドライブ高校！
+	バロックフロート							じゃあ、あの変な儀式は……？
+	フラウ	笑い						あれはブレイズドライボール！
+	バロックフロート	驚き						ブレイズ、ドライボール……!?
+Bgm	コメディ
+	フラウ	通常						ええ、セ・ネロネロを\nコッフォオンする\nスポーツよ！
+	バロックフロート	怒り						わっかんないよぉ……！\n何よセ・ネロネロって！
+	バロックフロート	通常						ねえフラウ、\n他にどんな部活があるの？
+	フラウ							そうね、サッカーと、バスケと、\n美術と、軽音と……
+	バロックフロート	驚き						超普通……!!
+	バロックフロート	通常						おかしいのはこの\nブレイズドライ部だけってことね
+	バロックフロート	怒り						ねえフラウ、目を覚まして\n私たちは魔剣だよ!?
+	フラウ	通常						マ、ケン……？
+	バロックフロート							そう！\n魔力で駆動する、\n戦うための兵器で<dash=2>
+	フラウ							どうしたのかしらバロック、\nいきなり変なこと言って……
+	バロックフロート	驚き						えっ……、\n私が、変……？
+	フラウ							ええ<dash=2>\nマケンとかマリョクとか、\nよくわかんないけど……
+	フラウ							もしかしてさっきの夢の話？
+	バロックフロート							夢<dash=2>？\n魔界が<dash=2>？
+	フラウ							きっと変な夢を見たのね
+Bgm	穏やか
+	バロックフロート	通常						そ、そう言われると自信\nなくなってきちゃった
+	バロックフロート							もしかして私、\n寝ぼけてるのかなあ……
+	フラウ							それとも昨日私が\nカフェに付き合わなかったから\n怒ってるのかしら？
+	バロックフロート							え、えーっとぉ……
+	バロックフロート							か、カフェ……\n確かに昨日、行ったような気が……
+CharacterOff
+StopBgm
+CharacterOff
+StopBgm
+Se	台風
+ImageEffect	SpriteCamera	MotionBlur
+	セ・ネロネロ		画面外_左
+Tween	セ・ネロネロ	MoveTo	x=800 time=1.5	linear			NoWait
+	セ・ネロネロ							プレイ・ドラーイブ!!
+CharacterOff
+ImageEffectOff	SpriteCamera	MotionBlur
+	ブレイズドライ部員A							あ、あぶなーい!!\n避けろー!!
+	バロックフロート							きゃっ！
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	ブレドラ場
+Param	character_grayout=true
+CharacterOff
+	バロックフロート	怒り
+	バロックフロート							あっぶないなあもう<dash=2>\n何でキノコリオンが\n飛んでくるのよ!!
+CharacterOff
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+	ブレイズドライ部員A							お、おい嘘だろ……!!
+	ブレイズドライ部員B							まさか、セ・ネロネロを\nソモホティーヌで……？
+	ブレイズドライ部員A							もしかして千年にトポモフンの\n逸材なんじゃ<dash=2>
+CharacterOff
+	バロックフロート	怒り
+Bgm	緊迫
+	バロックフロート							やっぱりわかんないよ！\n千年にひとり、でしょ！\n何よトポモフンって!!
+CharacterOff
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+	ブレイズドライ部員A							おお……\nトポモフン……!!
+	ブレイズドライ部員B							すげえ……\nやっぱり天才だぞ……
+CharacterOff
+	バロックフロート	驚き
+	バロックフロート							えっ……\n何その反応……
+	バロックフロート	通常						…………
+	バロックフロート	怒り						じゃ、じゃあ……\nそもっそ！
+CharacterOff
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+	ブレイズドライ部員A							おお！\nソモッソ!!
+CharacterOff
+	バロックフロート	怒り
+	バロックフロート							こ、ころんほん！
+CharacterOff
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+	ブレイズドライ部員B							おおおおお！\nコロンホン!!
+CharacterOff
+	バロックフロート	怒り
+StopBgm
+	バロックフロート							こ、こぽもはんまん！
+Bgm	コメディ
+	ブレイズドライ部員A							は？\nなんだコポモハンマンって
+	ブレイズドライ部員B							知らねえな\n何いってんだこいつ
+	バロックフロート							何よ!!\nわけわかんないよもう!!
+StopBgm						.5
+Bgm	鉄の街
+CharacterOff
+	主将		1_2
+	バロックフロート	怒り	2_2
+	主将							ククク……
+	主将							見せてもらったぞ、どうやら\n貴様には見込みが有りそうだな
+	主将							入部してもらおうか<dash=2>\n"ブレイズドライ部"に!!
+	バロックフロート	驚き						え、ええ～!!
+	バロックフロート							絶対ムリ！\nちょっと助けてよフラウ～！
+CharacterOff
+	フラウ	通常	1_2
+	バロックフロート	怒り	2_2
+	フラウ							良いんじゃないかしら♪\n入ったらどうかしら、\nブレイズドライ部に！
+	バロックフロート							勘弁してよぉ～!!
+	<param=name>	<Off>						勘弁してくれよ!!
+StopBgm
+	バロックフロート							はっ！\nあの声は<dash=2>
+CharacterOff
+Bgm	平和
+	ディーア	本気制服2						オレを早く元の魔界に返してくれ、\nこんなところで\n油を売っているわけには<dash=2>
+	バロックフロート							よかった、アイツは\nまともなままだ！
+	バロックフロート							ねえ！　助けて！
+CharacterOff
+	ディーア	怒り制服2
+	ディーア							バロックフロートじゃないか！\nお前までグルなのか……!?
+	バロックフロート	通常						ううん、私はまとも！
+	バロックフロート							でも、フラウが……
+Bgm	神秘
+CharacterOff
+	フラウ	通常
+	フラウ							どう、バロック？\nロッソンモッソンする\n心の整理は出来たかしら？
+CharacterOff
+	ディーア	悔しい制服2	1_2
+	バロックフロート	通常	2_2
+	ディーア							うっ……!!
+	ディーア	怒り制服2						だがお前だけでも無事でよかった\n早くここを出よう！
+Bgm	火属性バトル
+CharacterOff
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+	ブレイズドライ部員A							おーっとぉ！\nここは通せねえな！
+CharacterOff
+	ディーア	悔しい制服2	1_2
+	バロックフロート	通常	2_2
+	ディーア							何だお前ら、\nどいてくれ！\n俺たちを魔界へ返してくれ!!
+CharacterOff
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+	ブレイズドライ部員A							そうはいかねえ、ただでさえ\n部員の足りないこのチーム……
+	ブレイズドライ部員B							まして、どうやら天性の\n才能を持っているヤツとくりゃ\n見逃せねえぜ
+CharacterOff
+	ディーア	悔しい制服2
+	バロックフロート	通常
+	バロックフロート							まずい……\nこのままじゃ、帰れない……!!
+CharacterOff
+	主将
+	主将							何だ、お前ら知り合いだったのか\nちょうどよかったじゃないか！
+	主将							お前ら二人で\nバッテリーを組め!!
+CharacterOff
+	ディーア＆バロック	拡大驚き
+Param	character_grayout=false
+	集中線		エフェクト表			0
+	ディーア＆バロック	拡大驚き						え、ええ～!!
+Param	character_grayout=true
+CharacterOff
+	主将		1_3
+	ディーア	驚き制服2	2_3
+	バロックフロート	驚き	3_3
+	ディーア							オレたちで、\nバッテリーを!?
+	バロックフロート							……バッテリーって何……？
+	主将							よーし、早速だが\n練習試合と行こうか！
+	主将							一年！\n相手してやれ！
+Bgm	バトル
+CharacterOff
+	ブレイズドライ部員一年
+	ブレイズドライ部員一年							はいっ！\nアーシャッッサササーッス!!
+CharacterOff
+	主将		1_3
+	ディーア	本気制服2	2_3
+	バロックフロート	通常	3_3
+	主将							さあ、始めろ<dash=2>
+	主将							プレイ・ドラーイブ!!
+	ディーア	怪しい制服2						それを言うなら\nブレイズドライブだろ……
+	バロックフロート							そうよね……
+	ディーア	本気制服2						まあいい、行くぞバロック！\nここを切り抜けるぞ！
+	バロックフロート							う、うん！
+StopBgm						1
+FadeOut	white
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_03
+EndIf
+EndScenario
+
+# E_1041_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	作戦会議
+Bg	ブレドラ場
+	ディーア	怒り制服2
+FadeIn	black					.5
+	ディーア							せいっ！
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	ブレドラ場
+Param	character_grayout=true
+CharacterOff
+	ブレイズドライ部員一年
+	ブレイズドライ部員一年							ぐ、ぐうっ！
+CharacterOff
+	ディーア	怒り制服2
+	ディーア							勝負ありだ！\nここから出してもらうぞ！
+CharacterOff
+	ブレイズドライ部員A		1_3
+	主将		2_3
+	ブレイズドライ部員B		3_3
+	ブレイズドライ部員A							す、すげえ……！\nやっぱり天才か……!!
+	ブレイズドライ部員B							最終マッサマンまで\n全然オソッソしなかったぞ……？
+StopBgm
+	主将							フフフ……、\n見せてもらったぞ
+	主将							やはり我が目に狂いはなかった！\nお前らを選抜選手に任命する！
+Bgm	鉄の街
+	主将							全国ブレイズドライボール!!\n選手権大会のな!!
+CharacterOff
+	ディーア	驚き制服2	1_2
+	バロックフロート	驚き	2_2
+Param	character_grayout=false
+	二人							!?
+Param	character_grayout=true
+	ディーア	驚き制服2						オレたちで、\n選手権大会を!?
+	バロックフロート	照れ						全国大会もあるんだ……
+CharacterOff
+	主将
+	主将							そうと決まったら\nこうしちゃいられねえ!!
+	主将							全力で目指すぞ！\n栄光の<dash=2>
+	主将							魔界甲子園!!
+CharacterOff
+	バロックフロート	驚き
+	バロックフロート							そこはそのまんまなんだ……
+CharacterOff
+	ブレイズドライ部員A		1_3
+	主将		2_3
+	ブレイズドライ部員B		3_3
+	ブレイズドライ部員A							夢にまで見た魔界甲子園……\n俺たちが、本当に……？
+	ブレイズドライ部員B							でもこいつらが居たら\n夢じゃねえかも……
+	主将							ハッハッハ!!\nだが貴様らもまだまだだ!!\n<dash=2>そうだろう、天才？
+CharacterOff
+	ディーア	驚き制服2	1_2
+	バロックフロート	怒り	2_2
+	ディーア							天才、って……
+	バロックフロート							あのね、私たちは魔界から来たの！\nこんなコトしてる場合じゃないの
+	バロックフロート							遊んでるヒマなんてないんだから<dash=2>
+StopBgm
+CharacterOff	ディーア
+	フラウ	無表情	1_2
+	フラウ							バロック
+	バロックフロート	驚き						へ？
+	フラウ							遊びじゃ、ないのよ
+	バロックフロート							<dash=4>！
+Bgm	神秘
+	フラウ	笑い						それに、大丈夫\n貴方なら、やれるわ
+	フラウ							私、貴方を信じてるから
+	バロックフロート	照れ						そ、そんな……\nおおげさな……
+	フラウ	通常						おおげさじゃないわ\nとっても大事なことよ\nもう一度言ったほうがいい？
+	バロックフロート	驚き						わー！　もういい！　大丈夫！\nそんな照れくさいこと\n何回も言わないで！
+Bgm	コメディ
+	フラウ	笑い						よかった！\nやってくれるわね？
+	バロックフロート							え？　そんなこと一言も<dash=2>
+CharacterOff
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+	ブレイズドライ部員A							やったぜ！\n天才の入部だ！
+	ブレイズドライ部員B							とうとう魔界甲子園が\n近づいてくる……\n武者震いがするぜ……!!
+CharacterOff
+	主将		1_2
+	ディーア	怒り制服2	2_2
+	ディーア							おい、勝手に話を進めるな！\nオレたちは魔界に<dash=2>
+StopBgm
+	主将							帰りたい、か？
+	主将							自分には関係ないと思ってるな\n<dash=2>小僧？
+	ディーア	驚き制服2						<dash=2>！
+Bgm	緊迫
+	主将							力を持つものにはそれ相応の\n義務というものがあるだろう
+	主将							己が立場をわきまえろ
+	ディーア							は、はい<dash=2>
+Bgm	鉄の街
+	主将							クハハ!!　良いことだ!!\n素直なのは良いことだぁー!!
+	主将							レッツ!!\nプレイ・ドラーイブ!!
+CharacterOff
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+Tween	ブレイズドライ部員A	PunchPosition	y=50				Add
+	ブレイズドライ部員A							プレイ・ドォラァーイブゥゥゥ!!
+Tween	ブレイズドライ部員B	PunchPosition	y=50				Add
+	ブレイズドライ部員B							プレイ・ドォラァーイブゥゥゥ!!
+CharacterOff
+	ディーア	怪しい制服2
+	ディーア							だからブレイズドライブだって<dash=2>
+	黒グラデーション		エフェクト裏
+	ディーア	怒り制服2						しかし、\nオレの思い過ごしか……？\nあの気配、あの殺気は<dash=2>
+CharacterOff
+	主将
+	主将							なーにボサッとしてやがる!!\nとっととかかれ!!
+	主将							千里の道もホセカルロス!!\n練習あるのみだ!!
+Bgm	コメディ
+	主将							改めてェ!!\nティモソ10万回!!
+CharacterOff
+Param	character_grayout=false
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+Shake	ブレイズドライ部員A		x=10				NoWait
+Shake	ブレイズドライ部員B		x=10				NoWait
+	ブレイズドライ部員							アシェリアセーセセーッス!!
+CharacterOff
+Param	character_grayout=true
+	バロックフロート	怒り
+	バロックフロート							や、やだー!!\nぷるぷるしたくなーいっ!!
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Bgm	ビーチ
+Bg	土手A
+	ディーア	怒り制服2	1_2
+	バロックフロート	怒り	2_2
+Wait						1
+FadeIn	white					1
+	バロックフロート							う、うう……\nなんという屈辱……
+	バロックフロート							もう1ミリもぷるぷるできない……
+	ディーア							大丈夫か、バロック？
+	バロックフロート							うん、ありがとう……\nアンタは平気みたいだけど……
+	ディーア							いや、さすがにオレでもこたえた\n早く抜け出さなきゃな
+	バロックフロート							そう、だけど<dash=2>
+Se	回想
+FadeOut	white					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	ブレドラ場					0
+	フラウ	笑い				0
+FadeIn	white					.5
+	フラウ							それに、大丈夫\n貴方なら、やれるわ
+	フラウ							私、貴方を信じてるから
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	土手A					0
+	ディーア	驚き制服2	1_2			0
+	バロックフロート	通常	2_2			0
+FadeIn	white					.5
+Param	character_grayout=true
+	バロックフロート							もう少し、頑張ってみたい
+	バロックフロート							フラウが何も考えずに\nこんなことやるとは思えないし
+	バロックフロート							全然、ルールも意味も\n分かんないけど……
+	バロックフロート							私、やってみたい\n「ブレイズドライボール」を
+	ディーア	怒り制服2						……そうか、分かった
+	ディーア							ならオレも、もう少し\nこの世界でやってみるよ
+	ディーア	通常制服2						気になることもあるし、な
+	バロックフロート	照れ						あ、ありがとう……
+	バロックフロート							アンタって、その……
+	ディーア							何だ？
+	バロックフロート	怒り						ううん、何でもない！\nまた明日ね！
+	ディーア							お、おう、\nまた明日な
+CharacterOff						.5
+Wait						.5
+	バロックフロート	通常				.5
+	バロックフロート							（あれ、なんだろう、この気持ち）
+	バロックフロート							（もしかして、ちょっと……）
+	バロックフロート							（楽しい……？）
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_04
+EndIf
+EndScenario
+
+# E_1041_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Param	character_grayout=false
+Bgm	闇属性バトル
+Bg	ブレドラ場
+	ディーア	本気制服2	1_1
+	　　　　　　　　　　		エフェクト裏
+FadeIn	black					.5
+	　　　　　　　　　　		エフェクト裏					<dash=2>そしてオレたちの\n熱い戦いが始まったッッ!!
+FadeOut	white					.5
+Param	character_grayout=true
+CharacterOff
+Bg	ブレドラ場
+	主将
+Wait						1
+FadeIn	white					1
+	主将							ステップが甘ぁーい!!
+CharacterOff
+	ブレイズドライ部員A
+Shake	ブレイズドライ部員A		x=10				NoWait
+	ブレイズドライ部員A							甘ぁーい!!
+CharacterOff
+	主将							ソー・スウィート・ステーップ!!
+CharacterOff
+	ブレイズドライ部員B
+Shake	ブレイズドライ部員B		x=10				NoWait
+	ブレイズドライ部員B							ソー・スウィート・ステーップ!!
+CharacterOff
+	主将
+	主将							おいっ!!\nお前らもだー!!
+CharacterOff
+	ディーア	怒り制服2	1_2
+	バロックフロート	怒り	2_2
+Shake	ディーア		x=10				NoWait
+	ディーア							ソー・スウィート・ステーップ!!
+Shake	バロックフロート		x=10				NoWait
+	バロックフロート							ソー・スウィート・ステーップ!!
+CharacterOff
+	主将
+	主将							よーし！\n次はヌチュカッポ30万回!!
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	土手A
+Bgm	ビーチ
+	フラウ	通常	1_2
+	バロックフロート	通常	2_2
+Wait						1
+FadeIn	white					1
+Param	character_grayout=true
+	バロックフロート							もうむり……\n何よヌチュカッポって……
+	フラウ							お疲れ様、バロック♪
+	バロックフロート							うええ……フラウ……\nつかれたよぉ……
+	フラウ							よしよし、えらいえらい♪
+	バロックフロート							ありがとぉ……\nうええ……
+	フラウ							大丈夫？\n辛くない？
+	バロックフロート							大丈夫……\nがんばるぅ……
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Bgm	闇属性バトル
+Bg	ブレドラ場
+	ブレイズドライ部員A		1_3
+	主将		2_3
+	ブレイズドライ部員B		3_3
+Wait						1
+FadeIn	white					1
+	主将							アァシェアリエシッシャース!!
+	ブレイズドライ部員A							アァシェアリエシッシャース!!
+CharacterOff
+	ディーア＆バロック	拡大怒り
+	ディーア＆バロック							アァシェアリエシッシャース!!
+Param	character_grayout=true
+	主将							まだまだぁー!!\nオソナンプサ!!　オソナンプサ!!
+CharacterOff
+	ディーア	怒り制服2	1_2
+	バロックフロート	怒り	2_2
+Shake	ディーア		x=10				NoWait
+	ディーア							う、うおおおおおお!!
+Shake	バロックフロート		x=10				NoWait
+	バロックフロート							う、うわあああああああ!!
+CharacterOff
+	主将
+	主将							ハッハッハー!!\nいいぞ!!　青春!!　飛び散る汗!!\nほとばしるホルポモントフ……
+Shake	主将		x=70				NoWait
+	主将							これぞ、ブレイズドライボール!!\nプレイ・ドラァーイブ!!
+CharacterOff
+	バロックフロート	怒り
+Bgm	コメディ
+	バロックフロート							<size=60>もうやだー!!</size>
+	バロックフロート							やっぱりこんなのムリ!!\nつらい……!!
+	バロックフロート							私を魔界に返して……\n何でもするから……
+Bgm	ビーチ
+CharacterOff
+	フラウ	通常	1_2
+	バロックフロート	怒り	2_2
+	フラウ							バロック、頑張ってる？
+	バロックフロート	驚き						あ、フラウ……
+Tween	フラウ	MoveBy	x=30				NoWait
+	フラウ							はい、差し入れ♪\n少し休憩したらどう？
+	バロックフロート							あ、ありがとう……
+CharacterOff
+	主将
+	主将							おい、そこの女！\nエースを甘やかすな！
+	フラウ	通常						最初なんですから\n少し手加減してあげたら\nどうでしょう？
+	主将							フッ……\n最初、か……
+	主将							情けは無用ッッ!!\n筋肉痛には太陽の光ッッ!!\nそれがブレイズドライ部の掟!!
+	主将							立て、エース！\n稀代の天才！
+Bgm	闇属性バトル
+CharacterOff
+	フラウ	通常	1_2
+	バロックフロート	怒り	2_2
+	バロックフロート							う、うう……
+Tween	フラウ	MoveBy	x=30				NoWait
+	フラウ							大丈夫、バロック？
+	バロックフロート							だ、大丈夫……！\nフラウが応援してくれるんだもん
+	バロックフロート							私、頑張るっ!!
+	バロックフロート							次のキャッサバは何ですか！\n主将！
+CharacterOff
+	主将
+	主将							ほう……？\n言うじゃないか
+	主将							これはもしかしたら\nもしかするかもな
+	主将							ククク……\nクハハハ!!
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	白背景
+	ディーア	本気制服2
+	　　　　　　　　　　		エフェクト裏
+Wait						1
+FadeIn	white					1
+	　　　　　　　　　　		エフェクト裏					そんなオレたちの猛特訓も\nあっという間に３ヶ月！
+	　　　　　　　　　　		エフェクト裏					とうとうこの日がやってきた！
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bgm	作戦会議
+Bg	ブレドラ場
+	主将
+Wait						1
+FadeIn	white					1
+	主将							今日は、まさに\n全国ブレイズドライボール\n選手権大会地区予選当日！
+	主将							者共、鬨の声をあげろ!!
+CharacterOff
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+	ブレイズドライ部員							うおおおおおおおお!!
+CharacterOff
+	ディーア	怒り制服2	1_2
+	バロックフロート	怒り	2_2
+	二人							うおおおおおおおお!!
+Param	character_grayout=true
+CharacterOff
+	主将
+	主将							ときに、エース！　天才！
+	バロックフロート	驚き						っ！
+	主将							悔いのないようにな
+	バロックフロート	怒り						は、はい……
+	主将							よしッ!!\n行って来い!!\n圧倒的優勝だけを持ち帰れ!!
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+	　　　　　　　　　　
+Param	character_grayout=false
+Bg	ブレドラ場
+Wait						1
+FadeIn	white					1
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	ブレドラ場
+Param	character_grayout=true
+CharacterOff
+	ブレイズドライバー							ぐううっ！
+CharacterOff
+	審判							勝負ありッッ！
+	審判							四回戦勝者！\n<param=name>、\nバロックフロート！
+Bgm	作戦会議
+CharacterOff
+	ディーア	笑い制服2	1_2
+	バロックフロート	通常	2_2
+	ディーア	笑い制服2						よしっ！
+	バロックフロート							ふー……
+	ディーア	笑い制服2						次は準決勝だ\nこのまま行けば、優勝できるぞ
+	ディーア							強くなったな、\nバロック！
+	バロックフロート	通常						うん、私\n変われたような気がする
+	バロックフロート							最初は意味分からなくて\n練習も辛かったけど
+	バロックフロート	笑い						強くなることって、\nこんなに楽しいものなんだね
+	ディーア	通常制服2						ああ、頼むぜ\nこのまま勝ち抜くぞ
+	バロックフロート	笑い						アンタもね！
+	ディーア							おう！
+CharacterOff
+	アナウンス							<color=mk2wisp>ブレイズドライボール\n出場者へお知らせです</color>
+	アナウンス							<color=mk2wisp>まもなく準決勝試合の開始です</color>
+	アナウンス							<color=mk2wisp>次のモルペクチャは \nセベルナントへお集まり下さい</color>
+CharacterOff
+	ディーア	笑い制服2	1_2
+	バロックフロート	笑い	2_2
+	バロックフロート							行かなきゃ！
+	バロックフロート	笑い						勝って、フラウに\nお疲れ様って\n言ってもらうんだ♪
+	ディーア							おう、頑張ろうな！
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	ブレドラ場
+Wait						1
+FadeIn	white					1
+	審判							両者、位置へ！
+CharacterOff
+Param	character_grayout=true
+	バロックフロート
+	バロックフロート							<dash=2>！
+CharacterOff
+	フラウ	笑い
+	フラウ							よろしくね、バロック
+CharacterOff
+	フラウ	笑い
+	バロックフロート	驚き
+Bgm	図書館
+	バロックフロート							どうして<dash=2>
+	バロックフロート							どうしてフラウが準決勝に<dash=2>
+	フラウ							うふふ、びっくりした？
+	フラウ	通常						決勝戦の前に、\n私を倒してね♪
+	バロックフロート							い、意味わかんないよ<dash=2>
+	バロックフロート							それに、私、\n何だかすごく嫌な予感がするの
+StopBgm
+	バロックフロート							私<dash=2>\n怖い……！
+	フラウ	笑い						試合、はじまっちゃうよ\nほら、構えて！
+Bgm	キノコリオン
+	バロックフロート							い、いや<dash=2>
+	バロックフロート							試合、したくない<dash=2>！
+Param	character_grayout=false
+	審判							両者、見合って<dash=2>
+	審判							プレイ・ドライブ！
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_05
+EndIf
+EndScenario
+
+# E_1041_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+FadeIn	black					.5
+FadeIn	white					1
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	ブレドラ場
+Param	character_grayout=true
+CharacterOff
+	フラウ	無表情
+	フラウ							<dash=2>！
+	黒グラデーション		エフェクト裏
+	バロックフロート	怒り						フラウ、もうやめようよ<dash=2>\nこんなのおかしいよ！
+CharacterOff
+	フラウ	嬉しい						強くなったわね、バロック
+	フラウ							私よりも、ずっとずっと<dash=2>
+CharacterOff
+	黒グラデーション		エフェクト裏
+	バロックフロート	怒り						何言ってるの……？\n私、怖い<dash=2>！
+CharacterOff
+	フラウ	嬉しい						いいえ、もう何も\n怖がることなんてないわ
+	フラウ							これから先も、きっと
+Bgm	図書館
+	フラウ							今まで、とっても楽しかったわ\n貴方と過ごせて<dash=2>
+	バロックフロート	驚き						どういうこと……？\nそんな、\nお別れみたいなこと言わないでよ
+	バロックフロート	怒り						もう私疲れちゃったよ、\n一緒に帰ろう……？
+StopBgm
+	フラウ	無表情						バロック\nとどめ、刺してくれるかしら？						←3話4回戦にやられたブレイズドライバーを入れました！！
+	バロックフロート	驚き						え…………
+	フラウ	嬉しい						バロックはもう十分強くなった\nすごく頑張ったもの
+	フラウ	無表情						だから、もう大丈夫\n私が居なくても
+	黒グラデーション		エフェクト裏
+	バロックフロート	怒り						何言ってるの、フラウ\n私、意味分かんないよ
+CharacterOff
+	フラウ	嬉しい						この世界<dash=2>
+	フラウ							私が、作ったの
+	バロックフロート	驚き						え<dash=2>？
+Bgm	図書館
+	フラウ							バロックがもっと\n強くなれるように、って
+	バロックフロート	怒り						そんな……\nどうして……
+	フラウ	通常						この世界の外<dash=2>\nつまり魔界で、\n私たちは危機に瀕しているの					←対応漏れっぽいです！
+	フラウ							強くならなければ、\nまるで太刀打ちできない敵に\n立ち向かわないといけない
+	フラウ							そして私は、\n貴方が作り出した魔力結晶体					←対応漏れっぽいです！
+	バロックフロート	驚き						<dash=2>!!
+	フラウ							貴方を守るために\n貴方が作った<dash=2>
+	フラウ	嬉しい						貴方のための、\n貴方を守るお人形なの
+	黒グラデーション		エフェクト裏
+	バロックフロート	怒り						いや、やめて<dash=2>\nフラウはお人形なんかじゃ、\nない<dash=2>！
+CharacterOff
+	フラウ	嬉しい						大丈夫よ、バロック\n大丈夫
+	フラウ							貴方は、私なんていなくても\nもう十分強くなったの
+CharacterOff
+	黒グラデーション		エフェクト裏
+	バロックフロート	怒り						いや！　うそ！\nフラウと一緒じゃなきゃ、\n私……
+CharacterOff	黒グラデーション		エフェクト裏
+	バロックフロート	怒り						一緒に行こう？\nお願い、私と一緒に<dash=2>
+	フラウ	無表情						いいえ、\n貴方だって、\nもう分かっているでしょう？					←対応漏れっぽいです！意図したものの場合は上に同じです！
+	バロックフロート	驚き						<dash=4>
+	フラウ	無表情						この世界は私、\n私はこの世界
+	フラウ	笑い						貴方は今、\n私の中に居るってわけね\nうふふ
+	フラウ							貴方は私の中で、\nとっても強くなった\n本当のことよ
+	フラウ	通常						この世界と私は癒着して、\nほとんど同じものに\nなってしまったの
+	フラウ							あとは、私を壊すだけ\n外の世界の危機に\n立ち向かうためにね
+	フラウ							私が居なければこの世界は壊れ、\nこの世界なしに私は生きられない
+StopBgm
+	フラウ							だから、\n貴方が魔界に帰るには<dash=2>
+Bgm	絶望
+	フラウ							私を消滅させないといけないの
+	黒グラデーション		エフェクト裏
+	バロックフロート	怒り						やめて、もう話さないで<dash=2>
+CharacterOff	黒グラデーション		エフェクト裏
+	フラウ	無表情						でも、バロックはもう\nとても強くなったから
+	フラウ							私なんて、もう必要なくて<dash=2>
+	黒グラデーション		エフェクト裏
+	バロックフロート	怒り
+	バロックフロート	怒り						やめて<dash=2>\nやめてよぉぉぉお!!
+CharacterOff	黒グラデーション		エフェクト裏
+	フラウ	無表情						どうして？\n私は所詮貴方の作り物よ
+	バロックフロート	怒り						あなたが……\nあなたが居ない私なんて……
+	バロックフロート							そんなの、想像したくないっ……!!
+CharacterOff	黒グラデーション		エフェクト裏
+	フラウ	無表情						お願い、バロック\n聞いて、私の話を
+	黒グラデーション		エフェクト裏
+	バロックフロート	絶望						いや<dash=2>\n私<dash=2>
+	バロックフロート							全部、全部
+	バロックフロート							全部、なかったことに、する
+CharacterOff	黒グラデーション		エフェクト裏
+	フラウ							<dash=4>
+	黒グラデーション		エフェクト裏
+	バロックフロート							こんなこと、知りたくなかった\n全部、全部忘れてやるんだ
+	バロックフロート	怒り						フラウが作った世界なんでしょ\nなら私、あなたに命令する!!
+	バロックフロート							全部なかったことにして、\n最初の場所に戻して!!
+CharacterOff	黒グラデーション		エフェクト裏
+	フラウ							バロック……\nそれが、貴方の願い？
+	バロックフロート							そうだよ!!\n全部忘れて、フラウと\nずっと一緒にいるんだもん!!
+	バロックフロート							嘘でも、何でもいいよ\n毎日、これからずっと、\n一緒にいたいよ
+	バロックフロート							カフェに行こう？\n勉強したり、好きな人の話とか、\n下らないことでケンカしよう？
+	黒グラデーション		エフェクト裏
+	バロックフロート							あなたの居ない世界なんて、\n私、要らない!!
+CharacterOff	黒グラデーション		エフェクト裏
+	フラウ							そう<dash=2>\nまた、ここで止まってしまうのね
+	フラウ							それならお望み通り<dash=2>
+	フラウ							貴方の記憶を消去して、\n最初の場所まで全てを戻すわ
+	黒グラデーション		エフェクト裏
+	バロックフロート	照れ						う、う<dash=2>
+CharacterOff
+	フラウ							泣いてるのね\n可哀想なバロック
+	黒グラデーション		エフェクト裏
+	バロックフロート							<dash=2>ね、ねえ、フラウ
+CharacterOff	黒グラデーション		エフェクト裏
+	フラウ							なあに？
+	黒グラデーション		エフェクト裏
+	バロックフロート							あ、あなたに、\n心は、ある？
+	バロックフロート							私がどんな気持ちでいるか、\nあなたには分かる？
+CharacterOff	黒グラデーション		エフェクト裏
+	フラウ							<dash=4>
+	フラウ							さあ、分からないわ\n私はただのお人形だから
+	黒グラデーション		エフェクト裏
+	バロックフロート							……そう、なの\nわ、わかったっ……
+	バロックフロート							じゃあ、ま、またね、\nフラウ
+	バロックフロート							私の大好きな、\nフラウ<dash=2>
+CharacterOff	黒グラデーション		エフェクト裏
+	フラウ							ええ、また<dash=2>
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_06
+EndIf
+EndScenario
+
+# E_1041_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	穏やか
+Bg	土手A
+FadeIn	black					.5
+	バロックフロート							ん<dash=2>
+	バロックフロート							あれ、ここ……、\nどこ……？
+	フラウ							おはよう、バロック
+	バロックフロート							ん<dash=2>\nフラウ<dash=2>
+	フラウ							よく眠れたかしら？
+	バロックフロート							わかんない、\nなんかすっごく長い夢を\n見てたような気が<dash=2>
+	フラウ							そっか、\nでももう行かなくちゃ
+	フラウ							そろそろネブリゴッフェが\nサディソモーソする時間だよ
+StopBgm						.5
+FadeOut	white					.3
+CharacterOff
+Param	character_grayout=false
+Bg	黒背景
+Wait						1
+FadeIn	white					.3
+Param	character_grayout=true
+	フラウ	<Off>						どれほどの世界を\n繰り返してきたのか<dash=2>
+	フラウ	<Off>						バロックが準決勝まで\n勝ち進んだことも\n数え切れないほどあった
+	フラウ	<Off>						でも最後はいつも同じ\nバロックは記憶を消去して\n最初からまたやり直してしまう
+StopBgm						.5
+FadeOut	white					.3
+CharacterOff
+Param	character_grayout=false
+Bg	ブレドラ場
+	フラウ	無表情	1_2
+	バロックフロート	驚き	2_2
+Wait						1
+Bgm	図書館
+FadeIn	white					.3
+Param	character_grayout=true
+	バロックフロート							ねえフラウ、目を覚まして\n私たちは魔剣だよ!?
+	フラウ							マ、ケン……？
+	バロックフロート							そう！\n魔力で駆動する、\n戦うための存在で<dash=2>
+	フラウ							どうしたのバロック、\nいきなり変なこと言って……
+	バロックフロート							えっ……、\n私が、変……？
+	フラウ							ええ<dash=2>\nマケンとかマリョクとか、\nよくわかんないけど……
+	フラウ							もしかしてさっきの夢の話？
+FadeOut	white					.3
+CharacterOff
+Param	character_grayout=false
+Bg	黒背景
+Wait						1
+FadeIn	white					.3
+Param	character_grayout=true
+	フラウ	<Off>						バロックはどうしても\n魔界に戻ろうとしてしまう
+	フラウ	<Off>						でも、私を破壊することも\nできない
+	フラウ	<Off>						優しくて、素敵なバロック
+FadeOut	white					.3
+CharacterOff
+Param	character_grayout=false
+Bg	ブレドラ場
+	フラウ	無表情
+	バロックフロート	怒り
+Wait						1
+FadeIn	white					.3
+Param	character_grayout=true
+	バロックフロート							あのね、私たちは魔界から来たの！\nこんなコトしてる場合じゃないの
+	バロックフロート							遊んでるヒマなんてないんだから<dash=2>
+	フラウ							バロック
+	バロックフロート							へ？
+	フラウ							遊びじゃ、ないのよ
+	バロックフロート							<dash=2>！
+	フラウ							それに、大丈夫\n貴方なら、やれるわ
+	フラウ							私、貴方を信じてるから
+	バロックフロート							そ、そんな……\nおおげさな……
+FadeOut	white					.3
+	　　　　　　　　　　
+CharacterOff
+Param	character_grayout=false
+Bg	黒背景
+Wait						1
+FadeIn	white					.3
+Param	character_grayout=true
+	フラウ	<Off>						これは、彼女が望んだこと
+	フラウ	<Off>						そして私は、彼女のお人形
+	フラウ	<Off>						だから、私は彼女のために\nこの世界を繰り返す
+	フラウ	<Off>						たとえそれが\n永劫続く呪いであったとしても<dash=2>
+FadeOut	white					.3
+CharacterOff
+Param	character_grayout=false
+Bg	土手A
+	フラウ	通常
+	バロックフロート	通常
+Wait						1
+FadeIn	white					.3
+Param	character_grayout=true
+	バロックフロート							うええ……フラウ……\nつかれたよぉ……
+	フラウ							よしよし、えらいえらい♪
+	バロックフロート							ありがとぉ……\nうええ……
+	フラウ							大丈夫？\n辛くない？
+	バロックフロート							大丈夫……\nがんばるぅ……
+FadeOut	white					.5
+	　　　　　　　　　　
+CharacterOff
+Param	character_grayout=false
+Bg	黒背景
+Wait						1
+FadeIn	white					1
+Param	character_grayout=true
+	フラウ	<Off>						私は、繰り返していく
+	フラウ	<Off>						そして、演じていく
+	フラウ	<Off>						バロックが、\nバロックで居られるように
+	フラウ	<Off>						この世界の重さで\n潰されてしまわぬように<dash=2>
+StopBgm						.5
+	フラウ	<Off>						私の命を、演じ続けていく
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	ブレドラ場
+	フラウ	通常
+	バロックフロート	驚き
+Wait						1.5
+Bgm	Xmasバトル
+FadeIn	white					1
+Param	character_grayout=true
+	バロックフロート							どうして<dash=2>
+	バロックフロート							どうしてフラウがここに<dash=2>
+	フラウ							うふふ、びっくりした？
+	フラウ							決勝戦の前に、\n私を倒してね♪
+	バロックフロート							い、意味わかんないよ<dash=2>
+	フラウ							試合、はじまっちゃうよ\nほら、構えて！
+	バロックフロート							い、いや<dash=2>
+	バロックフロート							試合、したくない<dash=2>！
+CharacterOff
+	審判							両者、見合って<dash=2>
+	審判							プレイ・ドライブ！
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_07
+EndIf
+EndScenario
+
+# E_1041_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+FadeIn	black					.5
+FadeIn	white					1
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	ブレドラ場
+Bgm	絶望
+Param	character_grayout=true
+CharacterOff
+	フラウ	無表情	1_2
+	バロックフロート	怒り	2_2
+	フラウ							<dash=2>！
+	バロックフロート							フラウ、もうやめようよ！
+	バロックフロート							私、怖い<dash=2>！
+	フラウ							強くなったわね、バロック
+	フラウ							私よりも、ずっとずっと<dash=2>
+	バロックフロート							ねえ、フラウ、帰ろう\nもう疲れたよ<dash=2>
+	フラウ							バロック\nとどめ、刺してくれるかしら？
+	バロックフロート							え…………
+	フラウ							バロックはもう十分強くなった\nすごく頑張ったもの
+	フラウ							だから、もう大丈夫\n私が居なくても
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	黒背景
+Wait						1
+FadeIn	white					1
+Param	character_grayout=true
+	フラウ	<Off>						そう、これは全く同じ話
+	フラウ	<Off>						永久に続く、笑えない笑い話
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	ブレドラ場
+	フラウ	無表情	1_2
+	バロックフロート	怒り	2_2
+Wait						1
+FadeIn	white					1
+Param	character_grayout=true
+	バロックフロート							あなたの居ない世界なんて、\n私、要らない!!
+	フラウ							<dash=2>そう、\n分かったわ
+	バロックフロート							ねえ、フラウ
+	フラウ							なあに？
+	バロックフロート							あなたに、心はある？
+	バロックフロート							私がどんな気持ちでいるか、\nあなたには分かる？
+	フラウ							<dash=4>
+StopBgm						.5
+FadeOut	black					0
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	フラウ	無表情				0
+Wait						1.5
+FadeIn	black					0
+Param	character_grayout=true
+	フラウ							<dash=2>分からなかった
+	フラウ							貴方は、どうしていつも\nその質問をするの？
+	フラウ							貴方は、どうしていつも\nそんなに優しいの？
+	フラウ							私なんて壊して、\nどこかもっと遠くへ<dash=2>
+	フラウ							私の居ない、\nもっと素敵な世界へ
+	フラウ							貴方なら、歩いていけるのに
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	ブレドラ場
+	フラウ	無表情	1_2
+	バロックフロート	驚き	2_2
+Wait						1
+FadeIn	white					1
+Param	character_grayout=true
+	フラウ							……バロック
+	バロックフロート							<dash=2>！
+	フラウ							このことは、\n貴方が目を覚ましたら\nもう忘れているわ
+	フラウ							だから<dash=2>\nきっと忘れてね\n私がこれから言うこと
+	バロックフロート							フラウ……？
+	フラウ	笑い						あのね、バロック
+Bgm	風属性バトル
+	フラウ							大好きよ
+	フラウ							私も、貴方なしの世界なんて\n想像もつかないの
+	バロックフロート							フラウ、わ、私<dash=2>
+	フラウ							それから、\n本当は私も一緒に<dash=2>
+	フラウ							私も貴方と一緒に、\nあの世界へ帰りたいと思っているわ
+	フラウ	無表情						でもどうしても、出来ないの\n何度も、何度も、試したの
+	フラウ							私ね、本当は<dash=2>\n貴方と生きたい
+	フラウ							こんな私の妄想の世界じゃなくて\nもっと広い、素晴らしい世界で、\n貴方とずっと一緒に居たいの<dash=2>
+	フラウ	嬉しい						見たこともない風景や、花や、\n見知らぬ街を、広い海を、\nずっと広がる森を<dash=2>
+	フラウ							貴方と一緒に旅してみたいの
+	フラウ							それから、貴方が誰かを愛するのを\n貴方が素敵な人に恋をするのを
+	フラウ	通常						私は、見ていたい\n貴方が幸せになるところを
+	フラウ	笑い						<dash=2>うふふ、おかしいわね\n貴方に作られたお人形の私が、\nこんな出過ぎた夢を見るなんて
+	フラウ	嬉しい						それに、このことも\n貴方は忘れてしまうというのに<dash=2>
+	バロックフロート	怒り						<dash=2>フラウ
+	バロックフロート							大丈夫、大丈夫だよ
+	バロックフロート							私、忘れない
+	フラウ	笑い						うふふ、やっぱり\nバロックはそう言うと思ったの
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	白背景
+	フラウ	嬉しい
+Wait						1
+FadeIn	white					1
+Param	character_grayout=true
+	フラウ							優しい、素敵な、\n私の大好きな、バロック
+	フラウ							でも、どうか、幸せになってほしい\n私のこの作り物の<dash=2>\n心からの願いよ
+	フラウ							だから、これは私から貴方への魔法\nとっておきの魔法、かけてあげるわ
+	フラウ							これからまた繰り返す日々の\nどこかで<dash=2>
+	フラウ							私を壊して、\n私のことを忘れて、\n元の世界に帰れるように
+	フラウ							私からの、\n秘密の魔法よ
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	ブレドラ場
+	フラウ	無表情	1_2
+	バロックフロート	驚き	2_2
+Wait						1
+FadeIn	white					1
+Param	character_grayout=true
+	バロックフロート							フラウ<dash=2>
+	バロックフロート							また、ね<dash=2>！
+	フラウ							ええ、また<dash=2>
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_08
+EndIf
+EndScenario
+
+# E_1041_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Param	character_grayout=false
+	イベントスチル1041A		エフェクト表
+FadeIn	black					.5
+	バロックフロート							ん<dash=2>
+	バロックフロート							あれ、ここ……、\nどこ……？
+	フラウ							おはよう、バロック
+	バロックフロート							ん<dash=2>\nフラウ<dash=2>
+	フラウ							よく眠れたかしら？
+	バロックフロート							うん、\nすっごく長い夢を\n見てたんだ<dash=2>
+	フラウ							そっか、\nでももう行かなくちゃ
+	フラウ							そろそろネブリゴッフェが\nサディソモーソする時間よ
+	バロックフロート							うん、そうだね<dash=2>
+Se	台風
+Wait						1
+	フラウ							どうしたの、バロック\n行くわよ
+	バロックフロート							あのね、フラウ
+	バロックフロート							フラウ<dash=2>
+FadeOut	white					2
+Bg	土手B					0
+CharacterOff						0
+	バロックフロート	怒り				0
+FadeIn	white					2
+	バロックフロート							ありがとう<dash=2>！
+	フラウ	無表情						<dash=2>！
+	フラウ							バロック、貴方、どうして<dash=2>
+Bgm	風属性バトル
+	バロックフロート							私、覚えてる、\n全部、覚えてるよ<dash=2>！
+	バロックフロート							フラウ、あなた、\nこの世界を、何度も、何度も<dash=2>
+	バロックフロート							こんな私のために、\n数え切れないくらいに、何度も
+	バロックフロート							私、弱くて、\n何も出来なくて<dash=2>
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	土手B
+	イベントスチル1041C		エフェクト表
+Wait						1
+FadeIn	white					1
+	フラウ	嬉しい						……そう、そうなのね
+	フラウ							<dash=2>うふふ
+	フラウ							バロック、\n本当に優しい、素敵なバロック
+	フラウ	笑い						私の魔法は、\n効かなかったみたいね？
+	バロックフロート							ごめんなさい、フラウ、\nごめんなさい<dash=2>
+	バロックフロート							でも私、決めたの
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	土手B
+	フラウ	通常	1_2
+	バロックフロート	怒り	2_2
+Wait						1
+FadeIn	white					1
+Param	character_grayout=true
+	バロックフロート							フラウ、私、強くなる\nあなたを乗り越えなくちゃいけない
+	バロックフロート							だから、せめて<dash=2>ね
+	バロックフロート							あなたの知っていること、\n全て教えてほしいんだ
+	バロックフロート							この世界で、見たこと、\n聞いたこと、思ったこと
+	バロックフロート							私とあなたの世界に起こったこと\n全て<dash=2>
+	バロックフロート							私が、あなたをきちんと\n乗り越えられるように
+	バロックフロート							全部、覚えてるんだよね？
+	フラウ	無表情						え、ええ<dash=2>\nでも、どれくらいの\n時間がかかるか<dash=2>
+	バロックフロート	笑い						ぜーんぜん、構わないよ♪
+	バロックフロート	ニヤリ						時間なら、無限にある\nそうでしょ？
+	フラウ	通常						そうね<dash=2>
+	フラウ	笑い						うふふ、\nバロック、貴方\n本当に強くなったのね
+	フラウ							私が、想像もつかないくらい、\n本当に、強く<dash=2>
+	バロックフロート	笑い						全部、フラウのおかげだよ！
+	バロックフロート							さあ、話して！\nあなたの見たこと、聞いたこと、\n全て私の中へ<dash=2>
+	バロックフロート							<dash=2>約束、して
+	フラウ							…………
+	フラウ							分かったわ
+	フラウ							何から話しましょうか<dash=2>
+	フラウ							そうね、それじゃあ、\n最初にここに来た時のことから<dash=2>
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	土手B
+	イベントスチル1041D		エフェクト表
+Wait						3
+Bgm	神秘
+FadeIn	white					1
+	　　　　　　　　　　							私とフラウは話した
+	　　　　　　　　　　							途方も無い時間、\n無限にも近い時間の中で
+	　　　　　　　　　　							些細なこと、大きなこと、\nありきたりなこと、\n思いもよらなかったこと
+	　　　　　　　　　　							私たちがまるで、\n宇宙でたった二人しか\n居ないみたいだった
+	　　　　　　　　　　							いつまでも話をしていると、\n不思議な気持ちになった
+	　　　　　　　　　　							もしかして、私たちは\nただこうして冗談を言い合ってる\n普通の女の子なんじゃないかって
+	　　　　　　　　　　							そうだとしたら、\nどんなによかったか<dash=2>
+	　　　　　　　　　　							でも、私は\n強くならなきゃいけなかった
+	　　　　　　　　　　							フラウが居なくても、\nフラウとの記憶をすみまで\nちゃんと思い出せるように
+	　　　　　　　　　　							フラウが居なくても、\n私一人でちゃんと\n「やりきれる」ように
+	　　　　　　　　　　							そして、そのうちに\nフラウが次にどんな話をするのか\n分かるようになってきたころ<dash=2>
+StopBgm						.5
+FadeOut	white					.5
+Param	character_grayout=true
+CharacterOff
+Bg	土手B
+	バロックフロート	通常	2_2
+	フラウ	嬉しい	1_2
+Wait						1
+Bgm	穏やか
+FadeIn	white					1
+	フラウ							これで、おしまい
+	フラウ							これが、私が見てきたことの全てよ
+	バロックフロート							ありがとう、フラウ\n私も全部、覚えたよ
+	フラウ	笑い						何だか、恥ずかしいわね\n貴方の中に、\n私が居るなんて<dash=2>
+	バロックフロート	驚き						ちょ、ちょっと\n変なこといきなり言わないでよ<dash=2>
+	フラウ	通常						バロック<dash=2>
+	フラウ							ちょっと、目を閉じてくれる？
+	バロックフロート							え、どうして……？
+	フラウ							そのまま、\nじっとしていてね……
+Tween	フラウ	MoveBy	x=30				NoWait
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Bg	土手B
+	フラウ	嬉しい	1_2
+	バロックフロート	驚き	2_2
+Wait						1
+Se	キラン
+FadeIn	white					1
+	バロックフロート							<dash=2>!!
+	バロックフロート							あ、ああああ、あ、\nふ、ふ、フラウ<dash=2>！
+	バロックフロート							うそ、うそうそ<dash=2>!!
+Bgm	穏やか
+	フラウ	笑い						あら、今さら何をそんなに\n照れているのかしら
+	フラウ							貴方は私の吹く笛で、\n私は貴方を吹く女の子、でしょ？
+	バロックフロート	照れ						も、もう<dash=2>！
+	フラウ							魔界では、もっと何度も\nすることになるのよ？
+	バロックフロート	照れ						そ、そうだね……
+	フラウ	通常						さあ<dash=2>\n行きましょう！
+	バロックフロート	ニヤリ						うん！
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_09
+EndIf
+EndScenario
+
+# E_1041_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	闇属性バトル
+Bg	ブレドラ場
+	主将
+FadeIn	black					.5
+	主将							今日は、まさに\n全国ブレイズドライボール\n選手権大会地区予選当日！
+	主将							者共、鬨の声をあげろ!!
+CharacterOff
+Param	character_grayout=false
+	ブレイズドライ部員A		1_2
+	ブレイズドライ部員B		2_2
+	ブレイズドライ部員							うおおおおおおおお!!
+CharacterOff
+	ディーア	怒り制服2	1_2
+	バロックフロート	怒り	2_2
+	二人　							うおおおおおおおお!!
+Param	character_grayout=true
+CharacterOff
+	主将
+	主将							ときに、エース！　天才！
+	バロックフロート	怒り						はいっ！
+	主将							<dash=2>悔いのないように、な
+	バロックフロート							ええ、もちろん<dash=2>！
+	主将							良い返事だッ!!
+	主将							よしッ!!\n行って来い!!\n圧倒的優勝だけを持ち帰れ!!
+FadeOut	Black					.3
+Se	走る
+StopBgm						.5
+Wait						1
+FadeIn	Black					.3
+	主将							<dash=2>よし、と
+	主将							これで全ての条件が揃ったか
+	主将							随分長かったものだなあ、魔剣使い？\nだが、退屈はしなかったぞ！
+	主将							……《<ruby=Play Drive>己が命を賭して遊べ</ruby>》\n《<ruby=Played Lives>己が命を演劇せよ</ruby>》<dash=2>か
+	主将							下らぬ遊びに懸命になること、\n装いながらも使命を全うすること\n一言で表すとは<dash=2>
+	主将							あの少女もやるじゃないか、\nくははははははは!!
+	主将							楽しませてもらった、\n礼を言うぞ!!
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Bg	ブレドラ場
+	フラウ	通常	1_2
+	バロックフロート	ニヤリ	2_2
+	　　　　　　　　　　
+Wait						1
+Bgm	キノコリオン
+FadeIn	white					1
+Param	character_grayout=false
+	審判							両者、位置へ！
+Param	character_grayout=true
+	バロックフロート							フラウ、\n全力で来てね
+	フラウ							もちろんよ\n手加減はしないわ
+	バロックフロート							<dash=2>さあ、行くよ
+	フラウ							<dash=2>ええ!!
+CharacterOff
+	審判							両者、見合って<dash=2>
+	審判							プレイ・ドライブ！
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_10
+EndIf
+EndScenario
+
+# E_1041_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+FadeIn	black					.5
+FadeIn	white					1
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.1
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	ブレドラ場
+Param	character_grayout=true
+CharacterOff
+	フラウ	通常
+	フラウ							うふふ
+	フラウ							おめでとう<dash=2>
+Bgm	凱旋
+Param	character_grayout=false
+	オーラ光		エフェクト表			1.5
+	フラウ	笑い						貴方の勝ちよ！
+CharacterOff
+	バロックフロート	怒り						うん、ありがとう\nこれで"お別れ"ね
+	オーラ光		エフェクト表
+	フラウ	通常						ええ<dash=2>\nとっても、長かったわね
+CharacterOff	オーラ光		エフェクト表
+	バロックフロート							ねえ、フラウ\n私、強くなれたかな？
+	オーラ光		エフェクト表
+	フラウ	嬉しい						ええ、とっても\n私が思うよりも、ずっと
+	フラウ	笑い						でもね<dash=2>\nどうしてかしら、うふふ
+	フラウ	泣き						私の方が、だめみたい<dash=2>\n貴方にあれほど強くなってって\nお願いしたのにね
+	フラウ							ねえ、バロック、お願い\n私のこと、覚えていてね
+CharacterOff	オーラ光		エフェクト表
+	バロックフロート	怒り						うん、もちろんだよ\n絶対に、忘れない
+	オーラ光		エフェクト表
+	フラウ	笑い						貴方の見る素敵な風景、\n素敵な人々と、世界に、\nどうか、私も<dash=2>
+	フラウ							私の記憶も、きっと、\nそこに一緒に居させてね
+CharacterOff	オーラ光		エフェクト表
+	バロックフロート	ニヤリ						大丈夫だよ、フラウ\n絶対に、大丈夫だからね
+	オーラ光		エフェクト表
+	フラウ	泣き						ああ、消えてしまう<dash=2>
+	フラウ							行って！\n振り返らずに、まっすぐ<dash=2>
+CharacterOff	オーラ光		エフェクト表
+	バロックフロート	怒り						<dash=2>っ!!
+	バロックフロート							フラウ!!\n私<dash=2>
+	オーラ光		エフェクト表
+	フラウ	笑い						それ以上はだめ\n<dash=2>ね、いい子だから
+	フラウ							振り返らずに、走って
+CharacterOff	オーラ光		エフェクト表
+	バロックフロート	ニヤリ						ありがとう、フラウ
+	バロックフロート	笑い						決勝戦、一緒に頑張ろうね！
+	オーラ光		エフェクト表
+	フラウ							ええ、それじゃあ<dash=2>
+CharacterOff	オーラ光		エフェクト表
+	バロックフロート							<dash=2>
+Tween	バロックフロート	MoveBy	x=800 time=2				NoWait
+Se	走る
+Wait						1
+	フラウ	嬉しい						さようなら、私の愛しい親友
+CharacterOff						3
+	フラウ	<Off>						私の大事な大事な、\n大好きなバロックフロート
+	フラウ	<Off>						さようなら<dash=2>
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=true
+Bg	塩湖
+	バロックフロート	驚き	2_2
+	ディーア	本気2	1_2
+Wait						1
+Bgm	図書館
+FadeIn	white					1
+	ディーア							バロック!!\nバロック!!
+	ディーア	怒り2						よかった、気がついたんだな
+	バロックフロート							あ<dash=2>
+	バロックフロート							ここは<dash=2>
+	ディーア							見ろ
+CharacterOff
+Param	character_grayout=false
+	スモーク		エフェクト表
+	黒グラデーション		エフェクト表2
+	冥獣	Ω級ワンドメイス
+Se	闇1
+Shake	冥獣		x=5				Add
+	冥獣							グウウウウウウウウ……
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	バロックフロート	驚き	2_2
+	ディーア							これが"原因"だ\nお前も長い夢を見たんだろ？
+	バロックフロート	通常						うん、見たよ\nとーっても、長い夢
+	ディーア	目閉じ2						<dash=2>そうだよな\nだが、大丈夫か？\nここから先は「現実」だぞ
+	ディーア	怒り2						お前の選んだ道に、\n後悔はないか<dash=2>？
+	バロックフロート	怒り						大丈夫だよ\n私、強くなったから
+	バロックフロート	ニヤリ						でもね<dash=2>\nひとつだけ、やらなくちゃ
+	バロックフロート							このまま終わらせないよ\n約束したんだもん
+	バロックフロート	怒り						決勝戦、一緒に頑張ろうって！
+	バロックフロート							だから<dash=2>\n絶対に、成功させてみせる<dash=2>！
+	ディーア	通常2						そうか、なら安心したよ\nさあ、やってくれ!!
+	バロックフロート	怒り						できる、私ならできる<dash=2>！
+CharacterOff
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表
+	バロックフロート	怒り						さあ、出てきて、フラウ
+	バロックフロート							お願い<dash=2>
+StopBgm						.5
+FadeOut	white					.5
+Param	character_grayout=true
+	　　　　　　　　　　
+CharacterOff
+Se	光3
+Bg	塩湖
+Wait						2
+Bgm	タイトル
+FadeIn	white					1
+	フラウ	無表情				2
+	フラウ							<dash=2>!?
+CharacterOff
+	フラウ	無表情
+	バロックフロート	怒り
+	バロックフロート							ごめんね、\nありがとう、\nもう大丈夫だよ<dash=2>
+	バロックフロート							私の親友<dash=2>\n大好きな、フラウ
+	フラウ	無表情						……!!\n…………!?
+CharacterOff
+	フラウ	無表情	1_2
+	バロックフロート	ニヤリ	2_2
+	バロックフロート							そう、私だよ\n最後まで黙っていてごめんね
+	フラウ	泣き						……？\n……？
+	バロックフロート							私ね、あなたとの話を\n全部覚えたの
+	バロックフロート							絶対にあなたをもう一度、\nここに呼び寄せるために
+	バロックフロート	笑い						あなたは私、私はあなた\n<dash=2>だから、私は自分を信じた
+	フラウ							……!!\n…………!!
+	バロックフロート	照れ						そんなに泣かないでよ\n私までもらい泣きしちゃうよ
+	バロックフロート	笑い						せっかくあなたの親友が\nこんなに頑張ったんだから\n少しは喜んでほしいな！
+	フラウ							……
+	バロックフロート	通常						そうだよ、だから言ったでしょ\n「決勝戦、一緒に頑張ろう」って
+	フラウ	笑い						……！
+	バロックフロート	驚き						ふぇっ!?\nば、ばか、\nこんな時に何言ってるのよ……!!
+	フラウ	通常						……
+	バロックフロート	通常						うん、大丈夫\n今の私たちなら、きっと
+	バロックフロート	ニヤリ						優勝、できるから
+	フラウ	嬉しい						……
+	バロックフロート	笑い						うん、忘れてないよ\nクフオロモソッソソ、\nしないように、でしょ？
+Param	character_grayout=false
+StopBgm						.5
+CharacterOff
+	スモーク		エフェクト表
+	黒グラデーション		エフェクト表2
+	冥獣	Ω級ワンドメイス
+Se	闇1
+Shake	冥獣		x=5				Add
+	冥獣							グウオオオオオアアアア<dash=2>!!!!
+Param	character_grayout=true
+CharacterOff
+	バロックフロート	通常	1_2
+	フラウ	通常	2_2
+Bgm	特殊バトル
+	バロックフロート	通常						かかってきなさい、負けないわよ
+	バロックフロート							行くよ、フラウ<dash=2>
+	フラウ							……！
+CharacterOff
+	ディーア	本気2
+	ディーア							来るぞ、バロック、フラウ!!\n迎撃するぞ!!
+Param	character_grayout=false
+CharacterOff
+	バロックフロート	通常	1_2
+	フラウ	通常	2_2
+	バロックフロート							ええ<dash=2>
+	バロックフロート							さあ、始めましょう
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+Bg	白背景
+	白背景		エフェクト表
+Wait						1
+FadeIn	white					1
+	バロックフロート							私たちの、プレイ・ドライブ！
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_11
+EndIf
+EndScenario
+
+# E_1041_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	穏やか
+Param	character_grayout=false
+	白背景		エフェクト表
+FadeIn	black					.5
+	バロックフロート							本当に、色んなことがあった\n私とフラウの、二人だけの秘密
+	バロックフロート							これは、あの無限に繰り返す\n記憶を辿った世界で、\n二人で話したこと<dash=2>
+FadeOut	white					.5
+	イベントスチル1041D		エフェクト表			.5
+FadeIn	white					1
+	バロックフロート							ねえ、フラウ\nずっと聞きたかったんだけど
+	フラウ							何かしら？
+	バロックフロート							オソナンプサって、\n結局何なの……？
+	フラウ							それは<dash=2>
+	フラウ							私にも、分からないわ
+	バロックフロート							…………
+	バロックフロート							ええー!!
+	バロックフロート							あんなに意味ありげに\n何回も言ってたのに……
+	フラウ							むしろ、私が聞きたいくらいなの
+	バロックフロート							……どういうこと？
+	フラウ							なぜだか分からないけれど、\nあの言葉たちで貴方は\n本当によく笑ったのよ
+	フラウ							本当に、いつまでも笑ってたわ
+	フラウ							だから、私もそういう言葉を\nひとつひとつかき集めたの\n貴方が笑えるようにね
+	フラウ							あの不思議な響きが\n貴方のセンスによく合ったのかしら
+	バロックフロート							えっ、じゃあ、\n私があの言葉を作った、\nみたいなものなの……？
+	フラウ							そういうことね、\n素敵なセンスだわ
+	バロックフロート							むー……\nどういう意味よ！
+	フラウ							そのままの意味よ、\n本当に、素敵なバロック<dash=2>
+	バロックフロート							なあんか、\nごまかされてる気がするなあ……
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=true
+Bg	塩湖
+	ディーア	通常2	1_2
+	バロックフロート	通常	2_2
+Wait						1
+Bgm	ビーチ
+FadeIn	white					1
+	ディーア							まだ、記憶を回収しているんだな
+	バロックフロート							ええ、思い出すたびに\n強くなれる気がするから<dash=2>
+	バロックフロート							まだ、あともう少し<dash=2>
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_12
+EndIf
+EndScenario
+
+# E_1041_12
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	穏やか
+Param	character_grayout=false
+	白背景		エフェクト表
+FadeIn	black					.5
+	バロックフロート							本当に、色んなことがあった\n私とフラウの、二人だけの秘密
+	バロックフロート							これは、あの無限に繰り返す\n記憶を辿った世界で、\n二人で話したこと<dash=2>
+FadeOut	white					.5
+	イベントスチル1041D		エフェクト表			.5
+FadeIn	white					1
+	フラウ							実はね、一度だけ貴方が\n私から絶対に離れようとしなかった\nことがあったの
+	バロックフロート							ええっ!?\nわ、私が……？
+	フラウ							ええ、それはそれは、\nとーっても、可愛らしかったのよ
+	フラウ							どこに行くにもついてきて、\nお風呂とか、トイレにまで……
+	バロックフロート							わわわわわーっ!!\nストップ!!　そこまでっ
+	フラウ							あら、聞きたくないなら\nそれでも良いのだけれど
+	バロックフロート							う……\nそ、それはまずい……
+	バロックフロート							わ、分かった!!\n続けて!!
+	フラウ							ええ……\nそれでね、貴方はなんと……
+	バロックフロート							う、うそ……そんなこと……
+	フラウ							それから、\n私もこれはびっくりしたのだけれど、\nなんと貴方はその後に……
+	バロックフロート							ふえええええ!!!!\nわ、私、な、なんてこと……!!!!
+	フラウ							とーっても、素敵な体験だったわ♥
+	バロックフロート							は、恥ずかしいよぉ……
+StopBgm						.5
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=true
+Bg	塩湖
+	ディーア	通常2	1_2
+	バロックフロート	通常	2_2
+Wait						1
+Bgm	ビーチ
+FadeIn	white					1
+	ディーア							まだ、記憶を回収しているんだな
+	バロックフロート							ええ、思い出すたびに\n強くなれる気がするから<dash=2>
+	バロックフロート							まだ、あともうひとつだけ<dash=2>
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_13
+EndIf
+EndScenario
+
+# E_1041_13
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	穏やか
+Param	character_grayout=false
+	白背景		エフェクト表
+FadeIn	black					.5
+	バロックフロート							本当に、色んなことがあった\n私とフラウの、二人だけの秘密
+	バロックフロート							これは、あの無限に繰り返す\n記憶を辿った世界で、\n二人で話したこと<dash=2>
+FadeOut	white					.5
+	イベントスチル1041D		エフェクト表			.5
+FadeIn	white					1
+	バロックフロート							ねえ、フラウ\nもし外に一緒に出られたら、\n何がしたい？
+	フラウ							そんなこと、まだ尋ねるのね\nでも、そうね……\nひとつ、あるわ
+	バロックフロート							なになに!?\n教えてほしい！
+	フラウ							貴方の、\n恋の話を聞かせてほしいの
+	バロックフロート							へ？\n恋<dash=2>？
+	フラウ							貴方、まだ分かってないのね\nうふふ
+	バロックフロート							何、どういうこと？\n教えてよフラウ～！
+	フラウ							きっといつか分かるわ\n貴方が貴方らしく生きれば、\nきっと<dash=2>
+	バロックフロート							思わせぶりな言い方だなあ\nちょっとくらい\nヒントをくれてもいいでしょ？
+	フラウ							それならひとつ<dash=2>
+	フラウ							貴方は、\n自分で思っているよりずっと\nやきもち焼きよ
+	フラウ							そのことで大変な思いを\nするかもしれないけど、\n頑張ることね♪
+	バロックフロート							えーなにそれ！\n分かんないよー！
+	フラウ							でも、いつか聞いてみたかったわ\n貴方の恋の話
+	バロックフロート							えへへ\nいつか、出来るといいね
+	フラウ							ええ、いつか<dash=2>
+StopBgm						.5
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1041_01
+EndIf
+EndScenario

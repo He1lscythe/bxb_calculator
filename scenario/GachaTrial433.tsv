@@ -1,0 +1,692 @@
+# G_433_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	黒グラデーション		エフェクト表			0
+	お燐	手_拡大	エフェクト裏			0
+FadeIn	black					1
+	お燐	手_拡大						あかん、あかんてあるじぃ……
+Param	character_grayout=true
+CharacterOff	お燐
+	ディーア	本気2						でも、オレはこうしないと……
+CharacterOff	ディーア
+	お燐	慌て_拡大	エフェクト裏
+	お燐							ひゃうっ!?\nも、もっと欲しいん？
+CharacterOff	お燐
+	お燐	慌て	p3b
+	ディーア	悔しい2	p7
+	ディーア	悔しい2						オレはお燐がいないとダメなんだ……
+	お燐	慌て						そないなこと言われたら、うち……
+StopBgm
+Tween	ディーア	MoveBy	x=-30				NoWait
+	ディーア	怒り2						お燐……
+Tween	お燐	MoveBy	x=30				NoWait
+	お燐	通常						あるじ……
+FadeOut	white					1
+Param	character_grayout=false
+CharacterOff						0
+	集中線		エフェクト表			0
+	お燐	慌て				0
+FadeIn	white					.2
+Bgm	コメディ
+	お燐	慌て						って、やらすなぁ!!
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	慌て						霊水飲ませるだけで、\nなんやこの小芝居!?
+Param	character_grayout=true
+CharacterOff
+	お燐	慌て	p3b
+	ディーア	あはは2	p7
+	ディーア	あはは2						いやぁ……\nお燐もノリノリだったからつい……
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	慌て						つい、やないよ！
+	お燐	慌て						しかも、ちょっと疲れたいうて、\nこないに霊水飲みよってからに！
+	ディーア	笑い2						おかげで元気いっぱいだ！
+Tween	お燐	PunchPosition	y=30				Add
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	慌て						うちの霊水はエナドリやない！\nもうちょっと大事に飲みぃ！
+StopBgm						1
+Tween	お燐	MoveBy	x=-20				NoWait
+	お燐	悔しい						はぁ……\nこのあるじ、大丈夫やろか……？
+Bgm	魔剣の日常
+	ディーア	通常2						けど、冗談抜きで\nお燐がいて本当に助かってるよ
+	ディーア	通常2						お燐が快く\n癒やしの霊水をくれたから、\n疲れがなくなったんだ
+Tween	お燐	MoveBy	x=20				NoWait
+	お燐	悔しい						……ほんまに？\nうち、役に立っとる？
+	ディーア	笑い2						ああ、もちろんだ！
+	お燐	悔しい						………………
+Tween	お燐	MoveBy	x=20				NoWait
+	お燐	悔しい						まぁ、変わりもんでも\nあるじはあるじやし……\n頼られるんも、嫌いやないし……
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	嬉しい						しゃあないなぁ、\n愛想つかさんと、傍におったるわ！
+	お燐	通常						けど、気をつけへんとあかんよ？
+	お燐	通常						うちの霊水は体を癒やすけれど、\n飲みすぎると毒にもなるし、\nなんでも治せるわけでもない
+	お燐	通常						ちゃんと健康には注意して、\n頼りすぎんようにしてや？
+	ディーア	笑い2						心配してくれてありがとう\nお燐は優しいな
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	慌て						うちの霊水で誰かが傷つくんは\nいややってだけやし……
+	お燐	嬉しい						けど、そう言うてくれはるんは\n嬉しいなぁ……
+CharacterOff
+	大典太光世	通常	画面外_右
+Tween	大典太光世	MoveTo	x=0 time=2				NoWait
+	大典太光世	通常						おや、ぬし様にお燐\nこんなところにいたのかえ？
+StopBgm
+CharacterOff
+	大典太光世	通常	p7
+	お燐	通常	p3b
+Tween	お燐	PunchPosition	y=50				NoWait
+	お燐	通常						…………へ!?
+Bgm	コメディ
+CharacterOff
+	お燐	慌て_拡大	エフェクト表
+	お燐							あ、あ、あね様ぁ!?
+CharacterOff
+	大典太光世		p7
+	お燐		p3b
+Shake	お燐		x=3 time=3				NoWait
+	大典太光世	通常						ふふ、どうしたのかや？\nそんなに驚いて♪
+Tween	お燐	PunchPosition	y=10				NoWait
+	お燐	慌て						な、なんでも、ないよぉ！
+	お燐	慌て						それより！\nあね様はなんでここに？
+	大典太光世	通常						ぬし様とお燐の\n楽しそうな声が聞こえんしたから、\nわっちも加えてもらおうかと
+	大典太光世	通常						ぬし様、いいでありんすか？
+CharacterOff
+	ディーア	笑い2						ああ、もちろん！
+	ディーア	驚き2						って、あれ……お燐？
+CharacterOff
+	お燐	悔しい
+Shake	お燐		x=3 time=3				NoWait
+	お燐	悔しい						う、うちがあね様と話を……
+	お燐	慌て						嬉しいけど、ええんやろか？\nなんも準備しとらんし……
+CharacterOff
+	お燐	慌て	p3b
+	大典太光世	通常	p7
+Tween	大典太光世	MoveBy	x=-20				NoWait
+	大典太光世							そんなに緊張しなくとも\nいいんでありんすよ？
+Tween	お燐	PunchPosition	y=50				NoWait
+	お燐							ぴぃ!?\nあ、その……
+	お燐							う、うち、お茶いれてくる！
+Tween	お燐	MoveBy	x=-800 time=2				NoWait
+Se	走る
+Wait						1
+StopBgm
+	大典太光世	通常						……ふふ♪\nなかなか上手くはいきんせんな
+	ディーア	通常2	p3
+	ディーア	通常2						お燐は緊張しちゃってるだけで、\n光世を避けてるわけじゃないさ
+	大典太光世	通常						もちろん、それは分かっていんす♪
+	ディーア	通常2						……光世が追いかけるか？
+	大典太光世	通常						いや、わっちが行っても、\nお燐が緊張するだけでありんしょう
+	大典太光世	通常						ぬし様、わっちの代わりに、\nお燐を見てきてくりゃれ？
+	ディーア	通常2						ああ、分かった
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	酒場1F					0
+CharacterOff						0
+	お燐	悔しい	p3b			0
+	ディーア	通常2	画面外_右			0
+FadeIn	black					.5
+Bgm	平和
+Tween	ディーア	MoveTo	x=90 time=2				NoWait
+	ディーア	通常2						お燐、ここにいたのか
+	お燐	悔しい						うち……またやってもうた……\n……あね様、怒っとった？
+	ディーア	あはは2						大丈夫、\nむしろ、お燐のことを心配してた
+	お燐	悔しい						心配かけるなんて、\nうちはやっぱりだめやなぁ……
+	ディーア	通常2						やっぱり、まだ緊張しちゃうか？
+	お燐	悔しい						……うん
+	ディーア	笑い2						大丈夫、お燐が光世を\nすごく尊敬してることは、\n光世も分かってるさ
+Tween	お燐	MoveBy	x=-20				NoWait
+	お燐	悔しい						…………はぁ
+	お燐	悔しい						せっかくあるじのとこで\nあね様と会えたのに\nまともに話もできひんなんて……
+	ディーア	通常2						いままで\n会ったこともなかったんだから、\n仕方ないさ
+	お燐	悔しい						そうかもしれんけど……\nうち、あんな恥ずいことまで\nしてもうたし……
+Se	回想
+FadeOut	black					.5
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+Bg	酒場の地下					0
+	オーラ青		エフェクト表			0
+	お燐	通常				0
+FadeIn	black					.5
+	お燐	通常						こんこん♪\nわっちをお呼びかや？
+	お燐	通常						さて、久方ぶりの現はこれ如何に\nこの大典太が見てしんしょ……
+CharacterOff
+	ディーア	驚き2	p3
+	大典太光世	通常	p7
+	大典太光世	通常						ほぅ…………
+CharacterOff
+	お燐	慌て						……しょおお？
+Shake	お燐		x=5 time=2				NoWait
+	お燐	慌て						その姿、そのしっぽ……
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	慌て						ままままさか、あね様ぁ!?
+Wait						.3
+FadeOut	black					.5
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	あはは2	p7			0
+	お燐	悔しい	p3b			0
+FadeIn	black					.5
+	お燐	悔しい						うちのことも知らんあね様の前で\nあね様の真似なんて！
+Shake	お燐		x=5 time=2				NoWait
+	お燐	慌て						うぅ……今でも顔が真っ赤なる！
+	ディーア	通常2						光世は気にしていないだろ？
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	慌て						うちは気にすんの！\nあね様にふさわしくないって、\n思うてまうんや……
+	お燐	悔しい						だって……あね様は完璧やろ？
+Param	character_grayout=false
+FadeOut	white					.2
+Bg	神社（昼）					0
+CharacterOff						0
+	オーラ青		エフェクト表			0
+	大典太光世	通常				0
+	　　　　　　　　　　　		1_2			0
+FadeIn	white					.2
+	お燐	<Off>						魔界五名刀の格にふさわしい、\n所作に、振る舞い、強さ
+	お燐	<Off>						本当に完璧で<dash=2>\n神様みたいや
+FadeOut	white					.2
+Param	character_grayout=true
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	通常2	p7			0
+	お燐	悔しい	p3b			0
+FadeIn	white					.2
+	お燐	悔しい						うちもそないなりたいけど……\n実際はこんなやし、\nあね様は……遠すぎるんよ
+	ディーア	通常2						じゃあ……お燐は\nずっと遠くから光世を\n見てるだけでいいのか？
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	慌て						そないなわけないやん！
+	ディーア	笑い2						そっか、よかった
+	お燐	慌て						…………へ？
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	通常2						お燐も光世も、\n二人ともお互いを思ってる\nだったら、すぐに仲良くなれるさ
+	お燐	悔しい						でもほんまに……\nうちみたいなんが……\nあね様の妹になれるんかな？
+	ディーア	笑い2						最初から二人は姉妹だろ？\nだから、あとはきっかけだけだ\nオレも手伝うからさ
+	お燐	通常						あるじ……
+	お燐	悔しい						……せやな、こうして\nあね様と同じ場所にいられるんも\n奇跡みたいなもん……
+	お燐	悔しい						ぐずぐず何もせんのは、\nそれこそ大典太光世に\nふさわしくない……
+	お燐	通常						……あるじ、\nあね様とのこと、\nお願いしてもええ？
+	ディーア	笑い2						ああ、任せておけ!!
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	草原A					0
+CharacterOff						0
+	大典太光世	通常	p7			0
+	お燐	慌て	p3b			0
+FadeIn	black					.5
+Wait						.1
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	慌て						だからって……\nこんなすぐは無茶やー!!
+Bgm	コメディ
+CharacterOff
+	ディーア	通常2						一緒の任務だったら、\n話もしやすいだろ？
+	ディーア	通常2						ちょうど隣町に魔物が出たことだし
+CharacterOff
+	お燐	慌て	p3b
+	大典太光世	通常	p7
+	大典太光世	通常						ふふ♪\nよろしゅうな、お燐♪
+Tween	大典太光世	MoveBy	x=-20				NoWait
+	大典太光世	通常						姉妹水入らずといきんしょう♪
+Shake	お燐		x=5 time=1				NoWait
+	お燐	慌て						ど、どどどどうしようあるじ！
+CharacterOff
+	ディーア	笑い2						大丈夫！\n協力するから！
+CharacterOff
+	大典太光世							……ふふ♪
+CharacterOff
+	ディーア	通常2	p7
+	お燐	悔しい	p3b
+	お燐	悔しい						う、うぅ……\n緊張で胸がくるしゅうなってきた
+	ディーア	通常2						それなら、いい薬があるぞ？\nお燐の手に霊水が
+	お燐	嬉しい						あぁ、そうやった……\nうちの水を飲めば、緊張も<dash=2>
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	お燐	慌て_拡大	エフェクト裏
+	お燐	慌て_拡大						って、なるかぁ!?
+CharacterOff
+Param	character_grayout=true
+	お燐	悔しい						自分の霊水、自分で飲むの変やろ!?　\nうちのことからかっとる!?
+CharacterOff
+	お燐	悔しい	p3b
+	大典太光世	通常	p7
+	大典太光世	通常						ほう……\nそれがお燐の霊水かえ？
+Shake	お燐		x=5 time=2				NoWait
+	お燐	慌て						あね様まで!?
+	大典太光世	通常						癒やしの力とは\nすごいなぁ、お燐は
+	お燐	慌て						そないなこと……\nあね様と比べたら、うちなんて<dash=2>
+CharacterOff
+	ディーア	笑い2						お燐の霊水を飲むと、\n本当に体から疲れが消えるんだ
+	ディーア	通常2						気になるなら\n光世も飲んでみたらどうだ？
+CharacterOff
+	お燐	慌て	p3b
+	大典太光世	通常	p7
+	大典太光世	通常						ふふ、面白そうでありんすな♪
+Tween	大典太光世	MoveBy	x=-50				NoWait
+	大典太光世	通常						さぁさ、お燐♪\nわっちに味見をさせてくりゃれ♪
+	お燐	慌て						あ、あう……あね様……
+	お燐	慌て						（あね様がうちに興味を……）
+StopBgm
+CharacterOff
+	お燐	慌て_拡大	エフェクト表
+	お燐	慌て_拡大						う、うちので良ければ！
+CharacterOff
+	大典太光世	通常						それでは一献……♪
+Bgm	神秘
+FadeOut	white					.2
+CharacterOff						0
+	黒グラデーション		エフェクト表
+	お燐	手_拡大	エフェクト裏			0
+FadeIn	white					.2
+	お燐							は、はわわ……
+	大典太光世	<Off>						ぺろ♪
+CharacterOff
+	お燐	慌て_拡大	エフェクト表
+	お燐	慌て_拡大						ぴゃっ！
+	大典太光世	<Off>						どうしたでありんすか？
+	お燐	慌て_拡大						ちょ、ちょっとだけこそばゆくて……
+	大典太光世	<Off>						なら、もっと優しくな\n……ぺろぺろ♪
+CharacterOff
+	黒グラデーション		エフェクト表
+	お燐	手_拡大	エフェクト裏
+	お燐							はぅ……うぅ……\nあ、あね様、どうやろ？
+Param	character_grayout=true
+StopBgm						1
+FadeOut	white					.2
+CharacterOff						0
+	お燐	慌て	p3b			0
+	大典太光世	通常	p7			0
+FadeIn	white					.2
+	大典太光世	通常						ふふ、不思議な味でありんす♪
+	大典太光世	通常						けれど、確かに癒やしの力……\n別け隔てなく傷を癒やす……
+	大典太光世	通常						素晴らしい力でありんすな♪
+Bgm	平和
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	慌て						へ……？\nうち……あね様に、褒められた？
+CharacterOff
+	ディーア	笑い2						よかったな、お燐
+CharacterOff
+	大典太光世	通常	p7
+	お燐	嬉しい	p3b
+	お燐	嬉しい						ふふ……ふふふ♪\nあ、あね様に褒められると\n照れてまうなぁ♪
+	大典太光世	通常						ぬし様もお燐の水がお気に入りかえ？
+CharacterOff
+	ディーア	通常2						一日一杯、お燐の霊水ってな！
+CharacterOff
+	大典太光世	通常	p7
+	お燐	嬉しい	p3b
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	慌て						それは飲み過ぎ！\n疲れたときだけにしとき！
+	大典太光世	通常						ふふふ♪
+CharacterOff
+	お燐	嬉しい
+	お燐	嬉しい						（あるじのおかげや……\n　あね様と話ができとる\n　認めてもろうとる）
+	お燐	嬉しい						（あとは任務で活躍できれば<dash=2>!!）
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A					0
+	大典太光世	通常	p7			0
+	ディーア	通常2	p3b			0
+FadeIn	black					.5
+	ディーア	通常2						着いたぞ\nこの町の周りに\nキノコリオンの群れがいるらしい
+	大典太光世	通常						群れ、か\nそないに数が多いのかや？
+	ディーア	悔しい2						ああ\nいつ襲ってくるかもわからないから\n町の人も怖がってるって
+	ディーア	悔しい2						町からキノコリオンを追い払うのが、\n今回の任務だ
+CharacterOff
+	お燐	悔しい						……あれ？
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	通常						あるじ、あそこ！
+CharacterOff
+	ディーア	怪しい2						……ん？
+Bgm	バトル
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	MoveBy	y=30 time=0.5				Add
+Shake	キノコリオン		x=5 time=3				NoWait
+	キノコリオン							ノコ、ノコ……
+CharacterOff
+	ディーア	驚き2						小さいけど……\n確かにキノコリオンだ！\nもう町に入り込んでたのか!?
+CharacterOff
+	黒グラデーション		エフェクト裏
+	お燐	通常
+	お燐	悔しい						（けど、あの魔物……\n　元気があらへんような……？\n　それに群れなら、なんで一匹で？）
+	お燐	通常						（せやけど、これはチャンスや！\n　ここで活躍できれば！）
+CharacterOff	黒グラデーション					0
+	お燐	通常						……こほん
+CharacterOff
+	ディーア	驚き2						お燐？
+CharacterOff
+	お燐	通常						あるじ、ここはわっちに\n任せてくりゃれ
+	お燐	通常						わっちも、大典太光世の妹\n魔剣として役に立って見せんしょう
+CharacterOff
+	ディーア	通常2						わかった！\nいくぞ、お燐！
+Param	character_grayout=false
+CharacterOff
+Se	チャージ
+	オーラ青		エフェクト表			.5
+	お燐
+Wait						.5
+	お燐	嬉しい						さて、いっちょ、\n本気を出すとしんしょうか♪
+If	isdebug==true
+CharacterOff
+Jump	*G_433_02
+EndIf
+EndScenario
+
+# G_433_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	市街地A
+	ディーア	怪しい2
+FadeIn	white					.5
+	ディーア	怪しい2						…………おかしいな
+Param	character_grayout=false
+CharacterOff
+	キノコリオン
+Shake	キノコリオン		x=5 time=2				NoWait
+	キノコリオン							の、ノコ……
+Shake	キノコリオン		x=5 time=1				NoWait
+Param	character_grayout=true
+CharacterOff
+	ディーア	怪しい2						あのキノコリオン、\n元から弱ってたみたいだ……
+CharacterOff
+	キノコリオン
+Shake	キノコリオン		x=5 time=3				NoWait
+	キノコリオン							の、こ……
+CharacterOff
+	お燐	悔しい						…………っ
+	黒グラデーション		エフェクト裏
+	お燐	悔しい						（痛いんかな？ 苦しいんかな？）
+	お燐	慌て						（……っ、だめ！ あれは敵！\n　倒さんと認めてもらえへん！）
+CharacterOff	黒グラデーション
+	お燐	悔しい						だから……！\n……終わりでありんす！
+StopBgm
+	黒グラデーション		エフェクト裏
+	お燐	慌て						（……ごめんなっ）
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.4
+FadeOut	white					.1
+CharacterOff						0
+Bg	市街地A					0
+	キノコリオン					0
+	　　　　　　　　　　		1_2
+ImageEffectOff	SpriteCamera	MotionBlur
+FadeIn	white					.1
+Se	チャージ
+	オーラ青		エフェクト表			.5
+Wait						1
+	キノコリオン							…………ノコ？
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	p7
+	お燐	慌て	p3b
+	お燐	慌て						…………え？
+	ディーア	驚き2						…………あれ？
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	RotateTo	y=180 time=0.5
+Tween	キノコリオン	MoveBy	x=800 time=2				NoWait
+Se	走る
+	キノコリオン							ノコ！ ノコー!!
+CharacterOff
+	お燐	慌て	p3b
+	ディーア	本気2	p7
+	ディーア	本気2						キノコリオンが元気に!?
+	ディーア	驚き2						そうか、お燐の癒やしの力……
+	お燐	慌て						そんな……\nうち……！
+CharacterOff
+	黒グラデーション		エフェクト裏
+	お燐	慌て
+	お燐	慌て						（うちは今、なにした!?\n　魔物を癒した？ なんで!?\n　あの魔物に同情したから!?）
+	お燐	慌て						（うちは……\n　なんてことを……！）
+CharacterOff
+	ディーア	驚き2	画面外_左
+	お燐	慌て	p3
+	大典太光世	通常	p7b
+Tween	大典太光世	MoveBy	x=-20				NoWait
+	大典太光世	通常						……お燐？
+	お燐	泣き						う、うちは……っ！
+Se	走る
+Tween	お燐	MoveTo	x=800 time=1.5				NoWait
+Wait						.5
+Tween	ディーア	MoveTo	x=-150 time=1				NoWait
+	ディーア	驚き2						待ってくれ、お燐！
+	大典太光世	通常						ふむ……
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	森林A					0
+Bgm	絶望
+	大典太光世	通常	画面外_右
+	お燐	泣き	1_1			0
+FadeIn	black					.5
+	お燐	泣き						ぐすっ、うっく……\nうち、うちは……
+	お燐	泣き						やってもうた……\nあね様に認められるどころか\n敵を癒やして、逃して……
+	お燐	泣き						やっぱりうちは……\nただのマガイモノなんやね……
+CharacterOff
+	大典太光世	通常	画面外_右
+Se	歩く
+Tween	大典太光世	MoveTo	x=110 time=2				NoWait
+	大典太光世	通常						そんなことないでありんすよ
+StopSe
+CharacterOff
+	お燐	慌て
+Tween	お燐	PunchPosition	y=20				NoWait
+	お燐	慌て						……あね、さま？ あるじも？\n……なんで？
+CharacterOff
+	大典太光世	通常	p7b
+	ディーア	通常2	p3
+	ディーア	通常2						なんでって、\n心配したんだぞ？\nオレも、光世も……
+CharacterOff
+	お燐	泣き						心配してもらう資格なんて……\nうちにはあらへん……！
+CharacterOff
+	ディーア	通常2	p3
+	大典太光世	通常	p7b
+	大典太光世	通常						そうかや？
+CharacterOff
+	お燐	泣き						だって、うちはマガイモンや！
+	お燐	悔しい						あね様の妹として生まれたのに、\nあね様みたいに振る舞えん！\n戦いやって、まともにできへんかった！
+StopBgm						1
+	お燐	泣き						うちはあね様に、ふさわしくない……
+CharacterOff
+	お燐		p3b
+	大典太光世		p9
+Tween	大典太光世	MoveBy	x=-100				NoWait
+	大典太光世	通常						それは残念でありんすな\nわっちは、お燐のこと誇らしく、\nとても誇らしく思ったのに
+Bgm	凱旋
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	悔しい						っ!?\n…………なんで？\nうちのどこが？
+	大典太光世	通常						お燐は、\nわっちができないことを\nできるのでありんすから
+	お燐	慌て						うちの、霊水のこと？
+	大典太光世	通常						ええ……
+	大典太光世	通常						大霊刀と呼ばれても、\nわっちは人を癒すことは、\nお燐の代わりはできんせん
+	大典太光世	通常						ほんとはわっちも……\n誰かを癒やす力が欲しかった
+	大典太光世	通常						だから、お燐と会えたとき、\n優しい妹と会えたときは……\n本当に嬉しかったでありんすよ
+	大典太光世	通常						この子は、わっちの願いを\n叶えてくれる子だと……
+	お燐	悔しい						でも、うちはあの魔物を逃して
+	大典太光世	通常						もちろん、わっちらは魔剣\n倒すべき敵は倒す
+	大典太光世	通常						けれど……わっちらには心もある
+	大典太光世	通常						あそこまで弱りきった命\nそれを可哀想と思ったなら、\n助ける選択があっていい……
+	大典太光世	通常						あやつがまた暴れた時、\n止める責任を負えるなら
+	大典太光世	通常						そして、刃を止めたお燐の優しさは\nその癒やしの力を担うにふさわしい、\nそう、わっちは思ったでありんす
+	大典太光世	通常						ぬし様も、\nそう思うでありんしょう？
+CharacterOff
+	ディーア	笑い2						ああ\nお燐が自分の気持ちに従ったなら、\nオレはそれでいいと思ってる
+	ディーア	通常2						もしもそれで問題が起こったら、\n解決できるよう手伝うさ
+CharacterOff
+	お燐	泣き	p3b
+	大典太光世	通常	p7
+Tween	大典太光世	MoveBy	x=-10				NoWait
+	大典太光世	通常						だから、お燐\nお燐のできることを誇らしく\n思ってくりゃれ
+	お燐	泣き						……うち\nあね様の妹でおって、ええの？
+	大典太光世	通常						もちろん♪\nいてもらわないと困るでありんす♪
+Tween	お燐	MoveTo	x=0 time=1				NoWait
+	お燐	泣き						ぐすっ、えぐっ……\nあねさま、あねさまぁ!!
+	大典太光世	通常						おっと……ふふ♪
+	大典太光世	通常						こんなに抱え込んでたなんて<dash=2>
+	大典太光世	通常						これからはもっと、この姉のことを\n頼ってくりゃれ、お燐♪
+	お燐	泣き						うん……！ うん……!!
+StopBgm						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A					0
+	村人男					0
+FadeIn	black					.5
+	村人男							大変だ！\nキノコリオンの群れが！
+CharacterOff
+	ディーア	驚き2						……なんだ？\n町の人が慌ててる？
+CharacterOff
+	お燐	慌て						（まさか、うちのせいで……）
+CharacterOff
+	村人男							全員、逃げていった！
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						えぇ!?
+FadeOut	white					.5
+CharacterOff						0
+Bg	草原A					0
+	キノコリオン  		2_3			0
+	キノコリオン 		1_3			0
+	キノコリオン		3_3			0
+FadeIn	white					.5
+Bgm	平和
+Tween	キノコリオン	PunchPosition	y=30
+	キノコリオン							ノコー！ ノコー！
+	キノコリオン 							ノコノコ！
+Param	character_grayout=false
+CharacterOff						0
+	キノコリオン  		2_3			0
+	キノコリオン 		1_3			0
+	キノコリオン		3_3			0
+Tween	キノコリオン  	RotateTo	y=180 time=0.5
+Tween	キノコリオン  	MoveBy	x=800 time=2				NoWait
+Tween	キノコリオン 	RotateTo	y=180 time=0.5
+Tween	キノコリオン 	MoveBy	x=800 time=2				NoWait
+Tween	キノコリオン	RotateTo	y=180 time=0.5
+Tween	キノコリオン	MoveBy	x=800 time=2				NoWait
+Se	走る
+Wait						.5
+Param	character_grayout=true
+FadeOut	white					.5
+CharacterOff						0
+	お燐	通常	p3b			0
+	ディーア	驚き2	p7			0
+FadeIn	white					.5
+	ディーア	怪しい2						本当にキノコリオンが\n町から離れていく……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						あ！\nあいつはさっきの……!!
+FadeOut	white					.2
+CharacterOff						0
+	キノコリオン					0
+FadeIn	white					.2
+Tween	キノコリオン	PunchPosition	y=30				NoWait
+	キノコリオン							ノコ！
+CharacterOff
+	お燐	通常						…………！
+Param	character_grayout=false
+CharacterOff
+	キノコリオン
+Wait						.5
+Tween	キノコリオン	RotateTo	y=180 time=0.5
+Tween	キノコリオン	MoveBy	x=800 time=2				NoWait
+Se	走る
+Wait						.5
+Param	character_grayout=true
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	驚き2				0
+	お燐	通常				0
+FadeIn	white					.2
+StopBgm
+	お燐	通常						なんや、\nお礼を言われた気がする
+	お燐	通常						……なんて\nうちの、都合いい考えかな？
+Bgm	凱旋
+	ディーア	笑い2						いや、気のせいじゃない\nお燐にお礼を言ったんだよ
+	ディーア	通常2						もしかしたら、あの群れは、\nはぐれたあいつを\n探しに来てたのかもしれないな
+CharacterOff
+	大典太光世	通常						そして、お燐があやつを癒やし\n仲間と再会させた、と？
+CharacterOff
+	ディーア	通常2						ああ、きっとそうだ
+	ディーア	通常2						これで一件落着だな\nお燐のおかげだよ
+	ディーア	笑い2						ありがとな、お燐
+CharacterOff
+	お燐	通常						ぬし様……あね様……！\n……うちの力、役に立ったんやね！
+	お燐	嬉しい						この癒す力が<dash=2>\nうちに、できることなんやね……
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	酒場1F					0
+Bgm	魔剣の日常
+CharacterOff						0
+	大典太光世	通常	p7b			0
+	お燐	嬉しい	画面外_左			0
+FadeIn	black					.5
+Tween	お燐	MoveTo	x=-100 time=2				NoWait
+	お燐	嬉しい						あね様ー！ あるじー！\n今日もお燐の霊水はいかがや？
+	大典太光世	通常						今は十分でありんすよ♪
+CharacterOff
+	お燐		p7
+	ディーア		p3b
+	ディーア	笑い2						じゃあ、オレはもう少し欲しいな
+Tween	お燐	MoveBy	x=-100				NoWait
+	お燐	嬉しい						はい、どーぞ♪
+	ディーア	通常2						ごくっ
+Tween	お燐	PunchPosition	y=50				NoWait
+	お燐	慌て						うひゃっ！ 頼られるんは嬉しいけど\nやっぱり、こそばいなぁ
+Tween	お燐	MoveBy	x=50				NoWait
+	お燐	悔しい						けど、うちの力は役に立てたいし、\n……そうや！
+	お燐	嬉しい						霊水に浸した手ぬぐいとか\nどないやろ？
+	お燐	嬉しい						飲めへんくても、体を拭くのに\n使ってもろうて！
+CharacterOff
+	大典太光世	通常						それはいいでありんすな\n頼んでもええかえ？
+CharacterOff
+	お燐	嬉しい						まかせて！
+Se	走る
+Tween	お燐	MoveBy	x=-150 time=0.3				NoWait
+StopSe
+Tween	お燐	PunchPosition	y=30				NoWait
+	お燐	慌て						……って、あいた！
+CharacterOff
+	お燐		p3b
+	大典太光世		p9
+Tween	大典太光世	MoveBy	x=-100				NoWait
+	大典太光世	通常						こらこら、そんなに慌てると……
+	お燐	嬉しい						……ふふ♪\nなんや、幸せすぎてこけてもうた♪
+	お燐	通常						あるじ、あね様\nうちはまだまだ未熟やけど……
+	お燐	通常						大典太光世の、あね様の妹として
+CharacterOff
+	オーラ青		エフェクト裏
+	お燐	嬉しい_拡大	エフェクト表
+	お燐	嬉しい_拡大						これからもーっと\nすごい魔剣になるから\n見とってな♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_433_01
+EndIf
+EndScenario

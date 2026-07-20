@@ -1,0 +1,806 @@
+# G_415_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	海岸
+Param	character_grayout=false
+	ディーア	絶望水着2
+FadeIn	white					.5
+	ディーア	絶望水着2						ど、どうして……
+CharacterOff
+	フライパン	水着拡大顔	エフェクト表
+	フライパン							ひゃん！\nもう、ダーリンったら♪
+CharacterOff
+	ディーア	絶望水着2						なんでこんなことに……！
+CharacterOff
+	煌刀ソハヤ	水着拡大照れ	エフェクト表
+	煌刀ソハヤ							うひゃ！\n……ツルツルの私に触りたがるなんて\n変わり者だね旦那様は♪
+CharacterOff
+	ディーア	絶望水着2						抜け出せない……！
+CharacterOff
+	ジエンド=NULL	水着拡大照れ	エフェクト表
+	ジエンド=NULL							ひゅーまん\nこれはぼくにも予想外\nひゃっ……んっ……くすぐったい
+CharacterOff
+	ディーア	悔しい水着2
+	ディーア	悔しい水着2						みんな、ダメだ！\nオレに近づいたら\nまた…………
+StopBgm
+	ディーア	絶望水着2						ラッキースケベが起きる!!
+Bgm	コメディ
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望水着2	1_2
+	煌刀ソハヤ	水着	2_2
+	煌刀ソハヤ	水着						旦那様？\nラッキースケベって\nそんなに嫌なことなの？
+	ディーア	絶望水着2						違う……\nそんなことない……
+CharacterOff
+	ディーア	絶望水着2						でも、オレは……\nオレはもう抜け出したいんだ!!
+FadeOut	White					.3
+CharacterOff						0
+	フライパン	水着拡大胸元	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Wait						1
+FadeOut	White					.3
+CharacterOff						0
+	煌刀ソハヤ	水着拡大胸元	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	White					.3
+Wait						1
+FadeOut	White					.3
+CharacterOff						0
+	ジエンド=NULL	水着拡大胸元	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	White					.3
+Wait						1
+FadeOut	White					.2
+CharacterOff						0
+	ディーア	絶望水着2				0
+FadeIn	White					.3
+	ディーア	絶望水着2						この連続ラッキースケベから!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	海の家
+StopBgm
+Wait						1
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　　　　　<color=blue>～30分前～</color>
+CharacterOff						0
+Bgm	都市
+	カイロス	通常						あっちも美少女
+FadeOut	White					.2
+CharacterOff						0
+Bg	海岸					0
+	パンドラ	水着				0
+FadeIn	White					.2
+	パンドラ	水着						あははは♪
+Tween	パンドラ	MoveBy	x=-100
+Tween	パンドラ	PunchPosition	y=30
+Tween	パンドラ	MoveBy	x=150
+Tween	パンドラ	PunchPosition	y=30				NoWait
+Wait						.5
+CharacterOff
+Bg	海の家
+	カイロス	通常						こっちも美少女
+FadeOut	White					.2
+CharacterOff						0
+Bg	海岸					0
+	オーア=ドラグ	水着				0
+FadeIn	White					.2
+	オーア=ドラグ							くはは！
+Tween	オーア=ドラグ	MoveBy	x=100									時間短く変更
+Tween	オーア=ドラグ	MoveBy	x=-100				NoWait
+Wait						1
+CharacterOff
+Bg	海の家
+	カイロス	通常						やっぱりマスターくんの周り\n美少女が多すぎるよ！
+Tween	カイロス	PunchPosition	y=50				NoWait
+	カイロス	驚き						しかもみんな水着だし！\n元から美少女なのに\nさらにキラキラ輝いてるし！
+	カイロス	悲しい						はー……せっかくのビーチだから				セリフの分割位置と表情変化
+	カイロス	悲しい						エンジョイサマーな雰囲気に\n乗っかっちゃえば\n私もマスターくんと遊べるかなー
+	カイロス	驚き						とかちょっと思ったりしたけど！\nムリムリ！　不可能！
+Tween	カイロス	PunchPosition	y=50				NoWait
+	カイロス	通常						あの子たちに比べたら、\nやっぱり私はモブ山モブ子さんだよ！
+	カイロス	悲しい						マスターくんも\nかわいい子たちに囲まれて\nイチャイチャした方が楽しいだろうし
+	カイロス	通常						カイロスさんはここから\nかわいい女の子とマスターくんを\n見守る方が似合ってる♪
+	カイロス	嬉しい						さてさて、マスターくんは\n攻略対象とどんなラッキースケベを\n起こすのかなー？
+	カイロス	通常						ただ見てるだけだけど、\nこれはこれで楽しいんだよね♪
+CharacterOff
+	ディーア	笑い水着2
+	ディーア							おーい！　カイロス！
+CharacterOff
+	カイロス	驚き
+	カイロス	驚き						……って、あれ？\nマスターくん？
+CharacterOff
+	ディーア	通常水着2	p3
+	カイロス	通常	p7b
+	カイロス	通常						はろはろ！　\nマスターくん、どうしたの？\nかわいい子たちと遊ばなくていいの？
+	ディーア	通常水着2						実はさ<dash=2>
+Tween	ディーア	MoveBy	x=40				NoWait
+	カイロス	驚き						あ！　マスターくん、ストップ！\nそこ、滑りやすいよ……！
+	ディーア	驚き水着2						うわっ!?
+Tween	ディーア	PunchPosition	y=30				Add
+Tween	ディーア	MoveBy	x=20
+Tween	ディーア	PunchPosition	y=60				Add
+Tween	ディーア	MoveBy	x=80
+	カイロス	驚き						うひゃぁあああああ!?　
+Se	倒れる
+StopBgm
+FadeOut	White					.5
+CharacterOff						0
+	カイロス	拡大胸元	エフェクト表			0
+Bgm	コメディ
+Param	character_grayout=false
+FadeIn	White					.3
+Se	ポップイン
+	カイロス							ちょっと、マスターくん！　\nどこに突っ込んでるの!?
+Se	ポップイン
+Tween	カイロス	PunchPosition	y=20
+Tween	カイロス	PunchPosition	y=20				NoWait
+	カイロス							うひゃん！　だからぁ！　\nそこ触っちゃダメだってぇ！\nばかばかばかぁ!!
+	カイロス							早く離れてよぉ!!
+FadeOut	White					.2
+CharacterOff						0
+	ディーア	驚き水着2	p6			0
+	カイロス	驚き	p7b			0
+FadeIn	White					.2
+Wait						.2
+Tween	ディーア	MoveTo	x=-150				NoWait
+Param	character_grayout=true
+	ディーア	驚き水着2						ぷはぁ！\nご、ごめんな！　カイロス！
+	カイロス	驚き						はぁ、はぁ……もー\n前にちゃんと言ったでしょ？
+Tween	カイロス	PunchPosition	y=50				NoWait
+	カイロス	驚き						マスターくんは\nラッキー娘なカイロスさんのせいで\nラッキースケベ体質になったって！
+	カイロス	通常						女の子と出会ったら、\n転んで胸に飛びついたり！
+Tween	カイロス	MoveBy	x=30				NoWait
+	カイロス	通常						攻略対象の着替えに遭遇して\nきゃー！　えっちー！\nとか日常茶飯事!!
+	カイロス	嬉しい						そんなチャンスをものにして\n少女マンガのおとめーな雰囲気で
+Tween	カイロス	MoveBy	x=-30				NoWait
+	カイロス	照れ						『ドキドキ……好きだよ……♪』
+	カイロス	通常						みたいな甘い展開にも\nマスターくんなら\nできるだろうけど！
+	カイロス	驚き						ラッキースケベはラッキースケベ！\n気をつけないと、修羅場一直線だよ？
+	ディーア	にやけ水着2						それはそれで……！
+	カイロス	驚き						うわぁ……マスターくん、エッチー
+	カイロス	通常						まあ、英雄色を好むって言うし\nマスターくんが嫌じゃないなら\n良いんだけどね
+Tween	カイロス	PunchPosition	y=50				NoWait
+	カイロス	通常						けど！　どうせ幸運を使うなら\n私みたいなモブ子さんじゃなくて\nもっとかわいい子相手に使いなよ？
+	ディーア	怪しい水着2						モブ子、ねぇ……
+	カイロス	通常						マスターくん？　\nいったいどこ見てるのかなー？
+	ディーア	怪しい水着2						……いや\nカイロスはすごくかわいいのに\nいったいどこがモブ子なのかなって
+	カイロス	驚き						へっ!?
+	ディーア	怪しい水着2						だって、こんなに……
+FadeOut	White					.7
+CharacterOff						0
+	カイロス	拡大胸元	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	White					.3
+Wait						2
+FadeOut	White					.3
+CharacterOff						0
+	ディーア	怪しい水着2	p3			0
+	カイロス	驚き	p7			0
+FadeIn	White					.3
+	カイロス	驚き						ちょ、ちょっとぉ!!\nやっぱり見てるじゃん！\nほんとマスターくん、エッチ！
+Tween	カイロス	PunchPosition	y=50				NoWait
+StopBgm
+Bgm	都市
+	カイロス	通常						……それで？\nマスターくんは\nカイロスさんに何の用かね？
+	ディーア	通常水着2						実は……
+	カイロス	通常						おお！　真剣な顔……！\nこれは大切な相談と見たよ？
+Tween	カイロス	PunchPosition	y=50				NoWait
+	カイロス	驚き						あ、わかった！\n恋の相談でしょ？
+Tween	カイロス	PunchPosition	y=50				Add
+Tween	カイロス	MoveBy	x=-30				Add
+	カイロス	通常						ラッキースケベを起こして、\n気になるあの子との\n距離を縮めたいんでしょ？　
+	カイロス	通常						海なんてちょうどいい\nシチュエーションだもんね！
+	カイロス	嬉しい						いいよいいよー♪\nモブの私だって、恋のお手伝い\nやっちゃうよぉ♪
+	ディーア	通常水着2						いや、そうじゃないんだ
+Tween	ディーア	MoveBy	x=10				NoWait
+	ディーア	笑い水着2						カイロス、一緒に遊ばないか？
+	カイロス	通常						なるほどー！\nカイロスちゃんと遊びたいんだ！
+Tween	カイロス	PunchPosition	y=50				Add
+	カイロス	通常						カイロスちゃーん!!\nマスターくんが呼んでますよー!!\nひゅーひゅー！　幸せ者ー!!
+	カイロス	驚き						って…………え？
+Tween	カイロス	PunchPosition	y=50				NoWait
+	カイロス	驚き						カイロスって…………私？
+	ディーア	照れ水着2						他にいないだろ？
+	カイロス	驚き						いやいや！\nきっとどこかに違うカイロスさんが\nいるってことだよね!?
+	ディーア	照れ水着2						違うって
+	ディーア	通常水着2						オレは、今ここにいるカイロスと\n遊びたいんだ
+	カイロス	悲しい						あー…………\nな、なるほどー！
+Tween	カイロス	MoveBy	x=30 time=1				NoWait
+	カイロス	通常						わかった！\n美少女に囲まれすぎて、\n私で気分転換したいんでしょ？　
+	カイロス	嬉しい						私はすごいキレイとか\nすごい美人とかじゃないけど、\n仲良しモブ子さんにはなれるし！
+	カイロス	通常						豪華なディナーの後の、\nジャンクなお菓子って感じだね？
+Tween	カイロス	PunchPosition	y=50				NoWait
+	カイロス	驚き						って、それはそれで失礼だな！
+	ディーア	照れ水着2						あはは\nそんな理由じゃないって
+Tween	カイロス	MoveBy	x=-10				NoWait
+	カイロス	驚き						じゃあ、どうして私を？
+	ディーア	照れ水着2						ほら、カイロスが来てから、\nちょっとドタバタしてたけど……
+	カイロス	通常						あー……マスターくんが\n女の子のパンツ被ったり、\nスカートに突っ込んだり
+	ディーア	照れ水着2						あんなにラッキースケベが\n起きるとは思わなかったよ
+	カイロス	悲しい						でしょー？\n私と一緒にいたら、またドタバタ\nラッキースケベが起こっちゃうよ？
+	ディーア	通常水着2						でも、オレは\nカイロスと一緒に遊んで\n思い出を作りたいんだ
+	ディーア	笑い水着2						みんなが集まっている所を避けたら、\nラッキースケベも起こらないだろ？
+	カイロス	照れ						そっか、私と…………\nしかも、二人っきり、かぁ……
+	カイロス	照れ						まあ、攻略対象じゃない\nカイロスさんだけど\nマスターくんがそう言うなら……
+	カイロス	照れ						うん……
+	カイロス	通常						ちょっとくらい夏の思い出が\nあってもいいよね？
+	ディーア	笑い水着2						よかった！\nそれじゃあさっそく行こう！
+	カイロス	通常						でも、私には\nラッキースケベしないように\n注意したまえ♪
+	ディーア	笑い水着2						ああ、気をつけるよ
+Tween	カイロス	PunchPosition	y=50				NoWait
+	カイロス	嬉しい						ふふ♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	照れ水着2	p3			0
+	カイロス	驚き	p7			0
+Bg	海岸
+Wait						1
+FadeIn	black					.5
+	カイロス	驚き						マスターくん\n海で遊ぶってなにするの？
+	カイロス	驚き						ビーチボールとか、砂遊びとか？\nそれとも、思いっきり海で泳いだり？
+	ディーア	照れ水着2						それが、まだ何も……
+Tween	カイロス	PunchPosition	y=50				NoWait
+	カイロス	通常						考えてなかったんかい！
+	ディーア	照れ水着2						あはは\nカイロスを誘うことばっかり\n考えてたから
+	カイロス	照れ						………………
+	カイロス	照れ						…………もー
+	ディーア	笑い水着2						まずはちょっと泳ぎに……
+	？？？？							ひゅーまん、ひゅーまん
+	ディーア	驚き水着2						ん？
+FadeOut	White					.2
+CharacterOff						0
+	ジエンド=NULL	水着拡大胸元	エフェクト表			0
+FadeIn	White					.3
+Wait						1
+FadeOut	White					.3
+CharacterOff						0
+	ジエンド=NULL	水着拡大照れ	エフェクト表			0
+	　　　　　　　　　　					0						名前が出ないように
+FadeIn	White					.3
+Wait						1
+FadeOut	White					.3
+CharacterOff						0
+	カイロス	通常	p7			0
+	ディーア	驚き水着2	p3			0
+FadeIn	White					.3
+	ディーア	驚き水着2						ヌル？
+CharacterOff
+	ジエンド=NULL	水着						うん、ぼくだよ、ひゅーまん\nそれから、君はカイロスだね？
+CharacterOff
+	ディーア	通常水着2	p3
+	カイロス	通常	p7
+	カイロス	通常						よろしく！　ヌルちゃん！
+CharacterOff
+	ジエンド=NULL	水着						よろしく
+CharacterOff
+	カイロス	通常	p7
+	ディーア	笑い水着2	p3
+	ディーア	笑い水着2						ヌルも水着に着替えたんだな\nすごくかわいいよ
+CharacterOff
+	ジエンド=NULL	水着照れ						ありがとう\nひゅーまんがそう言ってくれるのは\n計算済み
+	ジエンド=NULL	水着						だけど、不思議だね\nお腹がポカポカする
+CharacterOff
+	ディーア	照れ水着2	p3
+	カイロス	通常	p7
+	カイロス	通常						さっすがマスターくん！\n息を吸うみたいに女の子を\n褒めちゃうんだね♪
+	ディーア	照れ水着2						あはは……\nそれで、ヌルはどうしたんだ？
+CharacterOff
+	ジエンド=NULL	水着						ひゅーまんを誘いに来たんだけど\n……今は忙しいみたいだね？
+CharacterOff
+	ディーア	照れ水着2	p3
+	カイロス	通常	p7
+	ディーア	通常水着2						ああ、今はカイロスと<dash=2>
+	ディーア	驚き水着2						<dash=2>って!?\nヌル、足元!!
+CharacterOff
+	ジエンド=NULL	水着						え……？\nひゃっ！
+Tween	ジエンド=NULL	PunchPosition	y=60				NoWait
+Wait						.3
+CharacterOff
+	ディーア	本気水着2						ヌル!!
+FadeOut	White					.3
+CharacterOff						0
+	ディーア	本気水着2	画面外_右			0
+	ジエンド=NULL	水着	p5b			0
+	　　　　　　　　　　
+StopBgm
+FadeIn	White					.3
+Se	走る
+Tween	ディーア	MoveTo	x=50				NoWait
+Wait						1.5
+Se	倒れる
+FadeOut	White					1.5
+Param	character_grayout=false
+CharacterOff						0
+	ジエンド=NULL	水着拡大照れ	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	White					1.5
+	ジエンド=NULL							……くすぐったいよ、ひゅーまん
+Bgm	雪の街
+	ジエンド=NULL							ふふ、でも\nぼくがコケちゃうなんて予想外
+	ジエンド=NULL							それに、ひゅーまんが\nおへそに顔を押しつけてくるなんて
+FadeOut	White					.3
+CharacterOff						0
+	ジエンド=NULL	水着拡大お腹	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	White					.3
+Tween	ジエンド=NULL	PunchPosition	y=10				NoWait
+	ジエンド=NULL							……どう、ひゅーまん？　\nぼくのお腹、気持ちいい？
+	ジエンド=NULL							今、胸のところがドキドキしてる\nこんなに近いと、\nひゅーまんにも聞こえちゃいそうだね				ディーアセリフカット
+CharacterOff
+StopBgm
+Param	character_grayout=true
+	カイロス	通常						うひゃー！\nマスターくんってば！　かっこよく\nヌルちゃん助けたと思ったら……
+	カイロス	通常						ラッキースケベもこなすなんて！\nさすが抜け目ないね！
+CharacterOff
+	ディーア	驚き水着2
+Bgm	コメディ
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き水着2						感心してる場合じゃないって！
+	ディーア	悔しい水着2						ごめん、ヌル！\nオレにはやることがあるんだ！\nだから、遊ぶのはまた後で……!!
+CharacterOff
+	ディーア	悔しい水着2	p3
+	カイロス	驚き	p7
+	カイロス	通常						マスターくん、\nなに慌ててるの？
+	ディーア	悔しい水着2						いや、カイロスなら分かるだろ!?\nこれ以上魔剣たちが集まったら、\nもっと大変なことになる！
+	ディーア	悔しい水着2						またラッキースケベが起こる前に\n早くここから……
+	カイロス	悲しい						あー……\nでも、もう手遅れかも……
+	カイロス	悲しい						マスターくん\nあっち見て、あっち
+	ディーア	驚き水着2						…………え？
+	ディーア	絶望水着2						えええええ!?
+CharacterOff
+	煌刀ソハヤ	水着	画面外_左
+	煌刀ソハヤ							にゃははー！　旦那様ー！　
+Se	走る
+Tween	煌刀ソハヤ	MoveTo	x=0 time=1.5				NoWait
+Wait						1.5
+	煌刀ソハヤ	水着						見て見て！\nタコとれたよ！　たーこー！
+Tween	煌刀ソハヤ	PunchPosition	y=60				NoWait
+	煌刀ソハヤ	水着						やっぱり海でも\nソハヤちゃんはサイキョー♪
+CharacterOff
+	ディーア	驚き水着2						ソハヤ!?
+FadeOut	White					.5
+CharacterOff						0
+	煌刀ソハヤ	水着拡大胸元	エフェクト表			0
+FadeIn	White					.3
+Wait						1
+CharacterOff
+	ディーア	驚き水着2						ま、また水着も着ないで……!!
+CharacterOff
+	煌刀ソハヤ	水着
+Tween	煌刀ソハヤ	PunchPosition	y=50				NoWait
+	煌刀ソハヤ	水着						水着？　だいじょーぶ！\n謎の光が守ってくれるから！
+CharacterOff
+	ディーア	悔しい水着2						いや、そうなんだけど……!!\nそれに、そんなに走ると！
+	ディーア	絶望水着2						……あ
+Param	character_grayout=false
+CharacterOff
+	ディーア	絶望水着2	1_2_b
+	煌刀ソハヤ	水着	3_3
+Se	走る
+Tween	煌刀ソハヤ	MoveTo	x=0
+Tween	煌刀ソハヤ	MoveBy	x=-50				Add
+Tween	煌刀ソハヤ	PunchPosition	y=50
+Wait						.5
+Se	倒れる
+	煌刀ソハヤ	水着照れ						うひゃ!?
+Se	ポップイン
+FadeOut	White					.3
+CharacterOff						0
+	煌刀ソハヤ	水着拡大照れ	エフェクト表			0
+FadeIn	White					.3
+	煌刀ソハヤ							う、うひゃあああ!?　\n旦那様どこ握ってるの!?\nそこ、ソハヤの角だよ!?　えっちー!!
+	煌刀ソハヤ							裸は触ってもいいけど！\n角は触ったらだめぇー!!
+Se	光2
+FadeOut	White					1
+CharacterOff						0
+	　　　　　　　　　　					0						ソハヤの名前を消す
+Bg	白背景					0
+FadeIn	White					1
+Wait						1						ソハヤの名前を消す
+	ディーア	<Off>						うわっ！\n謎の光がっ……!?
+	カイロス	<Off>						わぁっ!?\nなにこれ、眩しい!?
+	ディーア	<Off>						これじゃあ、何も見えない!!
+Se	ポップイン
+CharacterOff
+	ディーア	驚き水着2
+Tween	ディーア	PunchPosition	y=30				Add
+	ディーア	驚き水着2						な、なんだっ!?\nこの柔らかいのは!?
+CharacterOff
+	ジエンド=NULL	水着照れ						ひゃん！\nひゅーまん、どこ触ってるの？
+Se	ポップイン
+CharacterOff
+	煌刀ソハヤ	水着照れ
+Tween	煌刀ソハヤ	PunchPosition	y=30				NoWait
+	煌刀ソハヤ	水着照れ						旦那様！\nそんなとこくすぐったいよぉ！
+CharacterOff
+	ディーア	絶望水着2						触っちゃ駄目なところ、\n触ってる気がする!!
+CharacterOff
+	カイロス	驚き						あ、あはは\nさすがにこのラッキースケベは\nスゴすぎな気も……
+FadeOut						.3
+CharacterOff						0
+	フライパン	水着	p3b			0
+	ディーア	悔しい水着2	画面外_右			0
+Bg	海岸					0
+Param	character_grayout=true
+FadeIn						.3
+Tween	ディーア	MoveTo	x=-60 time=2				NoWait					走る位置を調整
+Se	走る											Se
+	ディーア	悔しい水着2						よし！\nようやく見えるように……\nって<dash=2>
+Se	ポップイン
+	ディーア	驚き水着2						<dash=2>え？
+FadeOut	White					.3
+CharacterOff						0
+	フライパン	水着拡大胸元	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	White					.3
+Wait						1
+CharacterOff
+	ディーア	驚き水着2						この、柔らかい感触は……？
+CharacterOff
+	フライパン	水着						うひゃん♪　大胆♪\n飛び込んでくるなんて\nあまえんぼさんね♪
+Tween	フライパン	PunchPosition	y=30				NoWait
+CharacterOff
+	フライパン	水着	1_2_b
+	ディーア	驚き水着2	2_2
+	ディーア	驚き水着2						ふ、フーラ!?
+	フライパン	水着						うん♪\nフーラ、ダーリンに水着見せたくて\nずっと探してたの♪
+	フライパン							でも……
+StopBgm
+FadeOut	White					.2
+CharacterOff						0
+	フライパン	水着拡大顔	エフェクト表			0
+	黒グラデーション		エフェクト裏			0
+FadeIn	White					.2
+	フライパン							ふふふふ♪\nダーリンは他の魔剣と\n浮気してたなんて♪
+CharacterOff
+	フライパン	水着嬉しい	1_2_b
+	ディーア	絶望水着2	2_2
+Bgm	絶望
+	ディーア	絶望水着2						あ……
+	フライパン	水着嬉しい						心配しないで、ダーリン？\nフーラ、怒ってないから♪
+Tween	フライパン	MoveBy	x=10				NoWait
+	フライパン	水着嬉しい						そのかわり……\n今から二人でたっくさん\n思い出を作ろう？
+Tween	フライパン	MoveBy	x=10				NoWait
+	フライパン	水着嬉しい						まずは、二人で……\nス、イ、カ、わ、り♪
+FadeOut	White					.2						脳裏をよぎったような演出にしたかったので、
+CharacterOff						0						ちょっと時間調整をかけました
+	フライパン	スイカ	エフェクト表			0
+FadeIn	White					.2
+Wait						1
+CharacterOff
+	フライパン	水着嬉しい	1_3_b
+	ジエンド=NULL	水着	3_3_b
+	ディーア	絶望水着2	2_3
+	ディーア	絶望水着2						スイカ、割り……！
+Bgm	コメディ
+Tween	フライパン	MoveBy	x=30				NoWait
+	フライパン	水着						ダーリン、目隠ししてあげるから\n動かないで？
+	ディーア	絶望水着2						うわー!?
+Tween	ジエンド=NULL	MoveBy	x=-30				NoWait					Tween位置変更
+	ジエンド=NULL	水着						ひゅーまん、行っちゃだめ\n計算だとひゅーまんが\n大変なことになるから
+	ディーア	驚き水着2						ヌル!?
+CharacterOff
+	ディーア	驚き水着2	1_2
+	煌刀ソハヤ	水着	2_2_b
+Tween	煌刀ソハヤ	MoveBy	x=-30				NoWait
+Tween	煌刀ソハヤ	PunchPosition	y=50				NoWait
+	煌刀ソハヤ	水着照れ						だめ！\n旦那様は私の角触ったんだから！\n責任とって私と遊ぶの!!
+	ディーア	驚き水着2						ソハヤ!?
+FadeOut	White					.3
+CharacterOff						0
+	フライパン	水着拡大胸元	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Wait						1
+FadeOut	White					.3
+CharacterOff						0
+	煌刀ソハヤ	水着拡大胸元	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	White					.3
+Wait						1
+FadeOut	White					.3
+CharacterOff						0
+	ジエンド=NULL	水着拡大胸元	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	White					.3
+Wait						1
+CharacterOff						0
+FadeOut	White					.3
+Param	character_grayout=false
+CharacterOff						0						立ち位置の調整
+	フライパン	水着嬉しい	p2b			0
+	ジエンド=NULL	水着照れ	p5			0
+	煌刀ソハヤ	水着照れ	p7b			0
+	　　　　　　　　　　											ソハヤの名前消去
+FadeIn	White					.3
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望水着2						どうしてこうなったんだー!!
+CharacterOff
+	カイロス	驚き						あ、あはは……\nこんなにラッキースケベが続くなんて
+	カイロス	悲しい						……うん
+	カイロス	悲しい						きっと、原因の私がいなくなれば\n落ち着くよね…………
+	カイロス	通常						マスターくん！\n私はあっち行ってるから！\nみんなと遊んであげて！
+Se	走る
+Tween	カイロス	MoveTo	x=-800 time=3				NoWait
+Wait						1.5
+CharacterOff
+	ディーア	悔しい水着2						か、カイロス……！\n待ってくれ！
+CharacterOff
+	パンドラ	水着						あら？\nマスター、なにをやっているの？
+CharacterOff
+	パンドラ=エラー	水着						マスター、顔真っ赤でかわいい♪
+CharacterOff
+	オーア=ドラグ	水着						くはは！　主よ！\n皆を侍らせ楽しむとは\n偉くなったものだな！
+CharacterOff
+	ジエンド=NULL	水着	1_3
+	煌刀ソハヤ	水着照れ	3_3
+	ディーア	驚き水着2	2_3
+	ディーア	驚き水着2						み、みんなまで!?
+	ジエンド=NULL	水着						ひゅーまんの\nらっきー、すけべ？\nまだ止まらないみたいだね
+Tween	煌刀ソハヤ	PunchPosition	y=50				NoWait
+	煌刀ソハヤ	水着照れ						ねえねえ！　旦那様！\nまた一人来たよ？
+	ディーア	絶望水着2						え？
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコッ！
+CharacterOff
+	ディーア	驚き水着2
+	フライパン	水着嬉しい
+	ディーア	驚き水着2						なんで、キノコリオンまで!?
+	フライパン	水着嬉しい						もぉっ！\nダーリンにくっつかないで！
+CharacterOff
+	キノコリオン
+Se	打2
+Wait						.3
+Tween	キノコリオン	PunchPosition	y=600 time=2				NoWait
+Tween	キノコリオン	MoveBy	x=-800 time=2				NoWait
+	キノコリオン							ノコー!?
+CharacterOff
+	ディーア	悔しい水着2						あ……！\nたしか、あっちにはカイロスが！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	カイロス	悲しい
+FadeIn	black					.5
+	カイロス	悲しい						はぁ……
+	カイロス	悲しい						やっぱり、みんなはすごいなー\nあんなに美人さんで\nマスターくんにも積極的で
+	カイロス	悲しい						それに比べて、私はやっぱり\nモブ山のモブ子さん\n攻略対象にはなれないよねー
+	カイロス	悲しい						マスターくんに誘われたときは\nもしかしてワンチャンあるかなーとか\n期待しちゃったけど……
+	カイロス	悲しい						結果はうまくいかなかったし……\nはぁ……\nもう考えてもしょうがないかぁ
+Tween	カイロス	MoveBy	x=-20				NoWait
+	カイロス							……あれ？
+CharacterOff
+Se	風1
+	キノコリオン		画面外_右
+Tween	キノコリオン	PunchPosition	y=700 time=1.5				NoWait
+Tween	キノコリオン	MoveBy	x=-700 time=1.5				NoWait
+	キノコリオン							ノコー!!!!!!
+Bgm	緊迫
+CharacterOff
+	カイロス	驚き						なんで、キノコリオンが!?
+	カイロス	驚き						マスターくん……！
+	カイロス	悲しい						って、あ……
+Se	回想
+FadeOut	White					.3
+CharacterOff						0
+	フライパン	水着嬉しい	1_3_b			0
+	ジエンド=NULL	水着	3_3_b			0
+	ディーア	絶望水着2	2_3			0
+	　　　　　　　　　　											名前が表示されないように
+ImageEffect	SpriteCamera	Sepia
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0						向き合うように
+	キノコリオン		p2
+	カイロス	悲しい	p7b
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	white					.3
+	カイロス							（マスターくんは、今……）
+	キノコリオン							ノコ！　ノコー!!
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+Tween	キノコリオン	MoveTo	x=-10 time=0.5				NoWait
+Wait						.5
+	カイロス	悲しい						きゃあー!!
+FadeOut	White					.3
+CharacterOff						0
+	ディーア	本気水着2				0
+FadeIn	White					.3
+	ディーア	本気水着2				0		カイロスー!!
+CharacterOff
+	カイロス	驚き						……ぇ？
+StopBgm
+CharacterOff
+Param	character_grayout=false
+	ディーア	怒り水着2	画面外_右
+	カイロス	驚き	1_1
+ImageEffect	SpriteCamera	MotionBlur
+Se	走る
+Tween	ディーア	MoveTo	x=20 time=2				NoWait
+Wait						1.5
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	MotionBlur
+Tween	カイロス	PunchPosition	y=50				NoWait
+Tween	カイロス	MoveBy	x=20				NoWait
+Wait						1
+FadeOut	White					1.5
+CharacterOff						0
+	ディーア	通常水着2	1_2_b			0
+	カイロス	驚き	2_2			0
+Bgm	雪の街
+FadeIn	White					1.5
+	カイロス	驚き						ます、たー、くん？
+	ディーア	通常水着2						大丈夫か、カイロス？
+	カイロス	驚き						マスターくん、どうして？
+	ディーア	笑い水着2						どうしてって……
+	ディーア	笑い水着2						オレはカイロスのマスターだから\nカイロスを護るためなら\n何だってやるさ
+	カイロス	驚き						………………やば
+FadeOut	White					.3
+CharacterOff						0
+	カイロス	拡大照れ顔	エフェクト表			0
+FadeIn	White					.3
+	カイロス							こんなときにずるいよ
+FadeOut	White					.3
+CharacterOff						0
+	カイロス	通常	2_2			0
+	ディーア	通常水着2	1_2_b			0
+FadeIn	White					.3
+	ディーア	悔しい水着2						カイロス？\nやっぱりどこか怪我を？
+	カイロス	通常						ううん！　\nぐっと来たなーって、それだけ！
+StopBgm
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコ！　ノコ！
+Bgm	バトル
+CharacterOff
+	カイロス	通常	2_2
+	ディーア	笑い水着2	1_2_b
+	ディーア	笑い水着2						カイロス、戦えるか？
+	カイロス	通常						もちろん！
+	カイロス	通常						助けてくれたお礼に\nマスターくんには、\n幸運をプレゼントしてあげる♪
+CharacterOff
+	カイロス	拡大顔	エフェクト表
+	カイロス	拡大顔						そこのキノコくん？\n君の幸運をもらっちゃうよ、\nハイ、チーズ!!
+If	isdebug==true
+CharacterOff
+Jump	*G_415_02
+EndIf
+EndScenario
+
+# G_415_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	海岸
+Bg	海岸
+	ディーア	照れ水着2	1_2
+	カイロス	通常	p7
+FadeIn	white					.5
+	カイロス	通常						それで？\nあの後、修羅場は大丈夫だったの？
+	ディーア	照れ水着2						ああ\nなんとか落ち着いたよ
+Tween	カイロス	PunchPosition	y=50				NoWait
+	カイロス	嬉しい						よかった、よかった！\nじゃあ、マスターくんも\n大変な目にあったことだし
+	カイロス	通常						今日はもう帰って<dash=2>
+	ディーア	通常水着2						いや、まだ帰らないよ
+	カイロス	驚き						え？
+	ディーア	通常水着2						だってまだ、\nカイロスと遊べてないだろ？
+	カイロス	驚き						いやいや！\nだって、マスターくん\nラッキースケベで大変だったでしょ？
+	ディーア	照れ水着2						ああ
+	カイロス	驚き						キノコリオンとも戦ったし！
+	ディーア	笑い水着2						ああ、だけどオレは……
+Tween	カイロス	PunchPosition	y=50				Add
+StopBgm
+	カイロス	通常						あっ！　遊び足りないの？\nそれなら、こんなモブ子さんより、\n他の攻略対象で美人な子のほうが……
+	ディーア	通常水着2						オレはカイロスと\n思い出を作りたいんだ
+Bgm	凱旋
+	カイロス	悲しい						……どうして？\n私はただのモブ子なのに……
+	ディーア	通常水着2						関係ないよ
+	ディーア	笑い水着2						モブ子とか攻略対象の前に\nカイロスはカイロスだろ？　
+	カイロス	驚き						…………え？
+	ディーア	通常水着2						他のみんなと同じ、\n大切な、かけがえのない仲間だ
+	ディーア	笑い水着2						だから、オレは夏の思い出を\nカイロスとも一緒に作りたいんだよ
+	カイロス	照れ						マスター、くん……！
+Tween	カイロス	MoveBy	x=-15				NoWait
+	カイロス	照れ						……ほんと\nだめだよ……こんなの
+Tween	カイロス	MoveBy	x=-15				NoWait
+	カイロス	照れ						あんなに\n魅力的な子たちがいるのに……\nモブ子に勝ち目ないのに……				告白シーンみたいに演出したい
+	カイロス	照れ						でも<speed=0.5>　　</speed>\nモブ子で良いって\n言ってくれるなら……
+Param	character_grayout=false
+FadeOut	White					1
+StopBgm
+CharacterOff						0
+	カイロス	拡大照れ顔	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					1
+	カイロス							マスターくん<speed=0.5>　　</speed>\n私……マスターくんのことが……
+Param	character_grayout=true
+FadeOut	White					.7
+CharacterOff						0
+	ディーア	驚き水着2	1_2			0
+	カイロス	驚き	p7			0
+FadeIn	White					.3
+Wait						1
+Tween	カイロス	PunchPosition	y=50				NoWait
+Wait						.2
+Tween	カイロス	PunchPosition	y=60				Add
+Tween	カイロス	MoveBy	x=-60				Add
+	カイロス	驚き						って!?\nうひゃぁ!?
+	ディーア	驚き水着2						うわぁ!?
+Se	倒れる
+Bgm	コメディ
+FadeOut	White					.3
+CharacterOff						0
+	カイロス	拡大胸元	エフェクト表			0
+Param	character_grayout=false
+FadeIn	White					.3
+	カイロス							うひゃあ！　なんで私までコケるの!?\nひゃん！　そこ触っちゃダメー!!\nえっちー！
+Se	ポップイン
+Tween	カイロス	PunchPosition	y=30				NoWait
+	ディーア	<Off>						か、カイロス、あんまり動くと！
+FadeOut	White					.3
+CharacterOff						0
+	カイロス	拡大腰回り	エフェクト表			0
+FadeIn	White					.3
+Se	ポップイン
+	カイロス							こんどはそっち!?\nダメだって！　こらぁー!!
+FadeOut	white					1
+StopBgm
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	驚き水着2	1_2			0
+	カイロス	驚き	p7			0
+FadeIn	White					.3
+	カイロス	驚き						はぁはぁ、もう……
+	カイロス	嬉しい						ふ、ふふふ……
+	ディーア	笑い水着2						は、あはは……
+	カイロス	嬉しい						あははははは！
+Bgm	凱旋
+	カイロス	嬉しい						あー、もうー!\n我ながら恐ろしい\nラッキースケベというか
+Tween	カイロス	PunchPosition	y=50				NoWait
+	カイロス	通常						あんなに連発するなんて\nマスターくんもすごいよね！
+	ディーア	照れ水着2						いやいや！\nラッキースケベは\nカイロスの力だろ？
+	カイロス	通常						でも、私が来る前から、\nあんなにかわいい子たちに\n囲まれてたんでしょー？
+Tween	カイロス	PunchPosition	y=50				Add
+	カイロス	嬉しい						これはきっと、マスターくんにも\n原因がある！
+Tween	カイロス	MoveBy	x=-10				NoWait
+	カイロス	通常						元からラッキースケベ体質だったり？
+	ディーア	笑い水着2						ないって！
+	ディーア	怪しい水着2						…………たぶん
+Tween	カイロス	MoveBy	x=-20				Add
+	カイロス	通常						あはは！\nまあ、どっちにしても
+	カイロス	照れ						これからマスターくんは\nずーっとラッキースケベ体質なので
+Tween	カイロス	PunchPosition	y=50				Add
+	カイロス	嬉しい						そこのとこ、よろしくー♪
+	ディーア	怪しい水着2						今日みたいな\nラッキースケベ連発事件が\n続くのか…………
+	ディーア	きらーん水着2						望むところだ!!
+	カイロス	驚き						いい顔で言わないの!!\nちょっとは気をつけないと、\nほんとに修羅場になるからね！
+	ディーア	にやけ水着2						いやー、でもなー\nあんなラッキースケベも、あり……
+	カイロス	通常						はいはい！\nまったく、男の子は\nしょうがないなー！
+	カイロス	通常						それじゃあ、マスターくん？\n早く行かないと、日が暮れちゃうよ？
+	ディーア	笑い水着2						……ああ！\n遊びに行こう、カイロス！
+CharacterOff
+	カイロス	拡大顔	エフェクト表
+	カイロス							うん！\nマスターくんとの幸せな思い出\nバッチリ捕まえちゃうんだから！
+FadeOut	White					1.5
+If	isdebug==true
+CharacterOff
+Jump	*G_415_01
+EndIf
+EndScenario

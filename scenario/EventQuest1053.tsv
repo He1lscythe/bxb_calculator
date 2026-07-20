@@ -1,0 +1,1362 @@
+# E_1053_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔獣バトル
+Bg	黒背景					0
+Param	character_grayout=false
+	オーラ紫		エフェクト表2			0
+	せし子	拡大通常	エフェクト表			0
+	イベントスチル10531A		エフェクト裏			0
+FadeIn	black					.5
+	せし子	拡大通常						へぇ……面白くなってきた♪				酒場再生の超短い予告シナリオ
+	せし子	拡大通常						<ruby=かくりよ>幽世</ruby>から来る黒き<ruby=さいだん>祭壇</ruby>、\n<ruby=よこしま>邪</ruby>なる堕天せし者より\n<ruby=しんえん>深淵</ruby>のソピアを求めようとは
+	せし子	拡大通常						だが、わかっているのか？\nそれは禁忌の選択にして\n宿命に背く反逆の証……！
+	せし子	拡大通常						この封印されし\nスティグマの<ruby=ひおう>秘奥</ruby>も恐れないか
+	せし子	拡大通常						くく、ならば混沌の<ruby=けんぞく>眷属</ruby>と共に\n世界を満たしてくれる！
+CharacterOff
+	イベントスチル10533		エフェクト表
+	せし子	<Off>						待っていろ！\n生徒会四天王……！
+FadeOut	black					1
+CharacterOff						0
+	イベントスチル10531A		エフェクト裏			0
+	イベントロゴ1053		エフェクト表			0
+FadeIn	black					1
+Wait						2.5
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1053_02
+EndIf
+EndScenario
+
+# E_1053_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	酒場1F
+Param	character_grayout=false
+	オーラ紫		エフェクト表			0
+	せし子	通常				0
+FadeIn	white					.5
+	せし子	通常						魔界に住む全ての人間、\n魔剣、あらゆる種族に告げる！
+	せし子	怪しい						我こそは<ruby=かくりよ>幽世</ruby>より来たりし\n<ruby=よこしま>邪</ruby>なる堕天せし者！
+	せし子	通常						我が<ruby=しんえん>深淵</ruby>の<ruby=ちえ>智慧</ruby>を得たいならば\n永遠の<ruby=れいぞく>隷属</ruby>を誓うが良い！
+	せし子	嬉しい						はーはっはっは!!
+StopBgm
+Param	character_grayout=true
+CharacterOff
+	マンイーター	通常	p3
+	バハムート	通常	p7b
+	バハムート	通常						お、おー！\nすごい、すごい……
+	マンイーター	通常						私に負けない妄想の持ち主……！\nやるわね……！
+Bgm	コメディ
+CharacterOff
+	せし子	怒り						って、どうして二人しかいない！\nもっと配下に集え!!
+CharacterOff
+	マンイーター	通常	p3
+	バハムート	通常	p7b
+	バハムート	通常						いや、バハムートちゃんは\n通りがかっただけだし
+	マンイーター	通常						私も別に配下じゃないし
+CharacterOff
+	せし子	慌て						むむむむ！
+CharacterOff
+	ディーア	笑い2	画面外_右
+Tween	ディーア	MoveBy	x=-600 time=1.3				NoWait
+Wait						1
+	ディーア							ただいまー！
+CharacterOff
+	せし子	通常
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	通常						契約者！\n貴様ならば我が言の葉を……！
+CharacterOff
+	ディーア	通常2						お、せし子！ \nスピーチの練習か？
+CharacterOff
+	せし子	慌て
+Shake	せし子		x=2 time=3				NoWait
+	せし子	慌て						…………
+CharacterOff
+	ディーア	驚き2						あれ、どうしたんだせし子？
+CharacterOff
+	せし子	慌て
+Shake	せし子		x=2 time=3				NoWait
+	せし子	慌て						せ、せ……！
+CharacterOff
+	ディーア	怪しい2						せ……？
+Param	character_grayout=false
+CharacterOff
+	せし子	拡大怒り	エフェクト裏
+	集中線		エフェクト表
+	せし子	拡大怒り						せし子って言うなー!!
+Param	character_grayout=true
+CharacterOff
+	せし子	怒り	p3b
+	ディーア	驚き2	p7b
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						うわぁ!?
+Tween	せし子	MoveBy	x=20				NoWait
+	せし子	怒り						何度でも言うぞ、契約者！
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	怒り						我が真名はよ・こ・し・ま・な・る！\nだ・て・ん・せ・し・も・の！
+CharacterOff
+	せし子	拡大怒り	エフェクト表					断じて\nせし子などではなーい！
+CharacterOff
+	せし子	怒り	p3b
+	ディーア	汗2	p7
+	せし子	怪しい						我は異なる世より約束を果たす者！\n軽々しい仇名がつく存在では<dash=2>
+	ディーア	汗2						わかった\n気をつけるよ、せし子
+	ディーア	驚き2						あっ……
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	怒り						だから、\nそのせし子をやめろー！
+Se	走る
+Tween	せし子	MoveBy	x=1000 time=2				NoWait
+Wait						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	市街地A					0
+	せし子	慌て				0
+Wait						1
+Bgm	平和
+FadeIn	black					.3
+	せし子	慌て						まったく、\nなんなのだあの契約者は……！
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	悲しい						いや、契約者どころか\nこの魔界は我への畏敬が足りない！
+	せし子	怪しい						邪なる堕天せし者は\n禁断の傷痕と深淵の智慧をもつ柩
+Tween	せし子	MoveBy	x=-20				NoWait
+	せし子	怒り						もっとこう、\n祀り上げ、崇拝すべき存在なのに！
+Shake	せし子		x=2				NoWait
+	せし子	慌て						『せし子』ではまるで、\nまるで……！
+FadeOut	white					.3
+CharacterOff						0
+Bg	白背景					0
+	せし子	その他				0
+FadeIn	white					.3
+	せし子	その他						ヘェ、オモシロクナッテキタ！
+FadeOut	white					.3
+CharacterOff						0
+Bg	市街地A					0
+	せし子	悲しい				0
+Param	character_grayout=true
+FadeIn	white					.3
+	せし子	悲しい						ミョンミョンしてそうな\n名前ではないか！
+	せし子	通常						くっ、待っていろ！\n必ず我の凄さを認めさせて……！
+	せし子	慌て						って、あれ？\nなにか魔力の渦を感じる？
+FadeOut	black					.3
+CharacterOff						0
+	イベントアイテム1053					0
+	オーラ紫		エフェクト裏			0
+FadeIn	black					.3
+Se	フォーン
+Wait						2
+FadeOut	black					.3
+CharacterOff						0
+	せし子	通常				0
+FadeIn	black					.3
+	せし子	通常						想いを溜めし、黒き釦……？
+	せし子	通常						これは、まさか……
+	せし子	怪しい						へぇ、面白くなってきた♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	通常2	p3			0
+	せし子	通常	画面外_右_b			0
+Wait						1
+Bgm	穏やか
+Tween	せし子	MoveBy	x=-600 time=2				NoWait
+FadeIn	black					.3
+Param	character_grayout=true
+	せし子	通常						ふふふ、この遺物を使えば、\n我が威光を魔界に伝えることも……！
+	ディーア	通常2						おかえり、どこに行っていたんだ？\nせし子
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	怒り						だーかーらー！\nせし子って言うなー！
+CharacterOff
+	せし子	拡大怒り	エフェクト表					もっと我を尊敬しろー！
+StopBgm
+	？？？？							それが、あなたののぞみ？
+Param	character_grayout=false
+CharacterOff
+	せし子	慌て	p7b
+	ディーア	驚き2	p3
+	二人							え……？
+Bgm	緊迫
+CharacterOff
+	イベントアイテム1053
+	オーラ紫		エフェクト裏
+	？？？？		1_2					かなえてあげる
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						.3
+Se	チャージ
+FadeOut	white					.5
+CharacterOff						0
+	せし子	幻想体				0
+	          		1_2
+FadeIn	white					.5
+Wait						1
+Bgm	バトル
+Param	character_grayout=true
+CharacterOff
+	せし子	怪しい	p7b
+	ディーア	驚き2	p3
+	ディーア	驚き2						こいつは、せし子の幻想体!?
+	せし子	怪しい						ふっ！\nこの邪なる堕天せし者を模倣するか！
+	ディーア	怪しい2						せし子に反応して現れたのか？
+	せし子	怪しい						理由など不要……！\n魔界に我はただ一人でいい……！
+	ディーア	怒り2						わかった！\nいくぞ、せし子！
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	怒り						だからせし子じゃなーい！
+If	isdebug==true
+CharacterOff
+Jump	*E_1053_03
+EndIf
+EndScenario
+
+# E_1053_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	酒場_宿屋					0
+	せし子	怒り	p7b			0
+	ディーア	通常2	p3			0
+FadeIn	white					.5
+	ディーア	通常2						いいぞ、せし子！
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	怒り						貴様はどうして何度も何度も！
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	汗2						わ、悪かったって！\nこっちのほうが呼びやすいから！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						それよりほら、前！\n幻想体がなにか……！
+CharacterOff
+	せし子	幻想体						あなたの望み、伝わってくる……\n全てが思い通りになる世界……
+CharacterOff
+	ディーア	驚き2	p3
+	せし子	慌て	p7b
+	せし子	慌て						邪なる堕天せし者の……？
+Param	character_grayout=false
+CharacterOff
+	せし子	幻想体						夢の世界へいらっしゃい
+Se	チャージ
+	オーラ紫		エフェクト表			1
+Wait						1.5
+CharacterOff
+	せし子	悲しい	p7b
+	ディーア	絶望2	p3
+	オーラ紫		エフェクト表
+	ディーア	絶望2						うわぁあああああ!?
+	せし子	悲しい						や、闇の坩堝にー!?
+Se	光3
+FadeOut	white					1
+StopBgm
+Wait						3
+CharacterOff						0
+Bg	教室A					0
+	ディーア	絶望制服2				0
+	黒グラデーション		エフェクト裏			0
+Bgm	絶望
+FadeIn	white					1
+	ディーア	絶望制服2						うっ、うぅ……？
+Tween	ディーア	PunchPosition	y=30				NoWait
+CharacterOff	黒グラデーション					0
+	ディーア	驚き制服2						はっ……!!\nい、いったいなにが……？
+Param	character_grayout=true
+CharacterOff
+	マンイーター	通常	p3
+	バハムート	通常	p7b
+	バハムート	通常						よかった、マスターさん！\nやっと目が覚めたんですね!!
+	マンイーター	通常						うふふ、ご主人様の目覚めに\n私がお顔をペロペロ……♪
+CharacterOff
+	ディーア	驚き制服2						バハムート、\nそれにマンイーターも……？
+	ディーア	怪しい制服2						ここはいったい？
+CharacterOff
+	せし子	怪しい						くっくっく……！\nようやく目覚めたか、契約者よ！
+CharacterOff
+	ディーア	驚き制服2						せ、せし子？
+CharacterOff
+	せし子	怪しい						その名も今となっては懐かしい……\nもはや呼ばれることはないからな
+CharacterOff
+	ディーア	驚き制服2						……え？
+Bgm	緊迫
+CharacterOff
+	せし子	通常						今の我は、裏･生徒会長！
+CharacterOff
+	集中線		エフェクト表
+	せし子	拡大通常	エフェクト裏
+	せし子	拡大通常	エフェクト表					そして、ようこそ契約者\n我らが裏･生徒会へ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1053_04
+EndIf
+EndScenario
+
+# E_1053_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	教室A					0
+Param	character_grayout=true
+	せし子	怪しい	p3b			0
+	ディーア	怪しい制服2	p7			0
+FadeIn	white					.5
+	ディーア	怪しい制服2						裏･生徒会……？
+	せし子	怪しい						ふふ、それもまた仮の名！
+CharacterOff
+	せし子	拡大通常	エフェクト表					真なる名は\n静謐なる深淵の交叉路を歩む\n邪なる堕天せし者の会、だ……！
+CharacterOff
+	せし子	通常	p3b
+	ディーア	怪しい制服2	p7
+	ディーア	汗制服2						略してせし子会だな
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	怒り						<size=50>違うわ！</size>
+	ディーア	怪しい制服2						せし子はともかく、\nバハムートとマンイーターまで\nどうして？
+CharacterOff
+	マンイーター	通常	p3
+	バハムート	通常	p7b
+	バハムート	通常						この世界だと\nそういう役割になってるんですよ
+	バハムート	通常						バハムートちゃんは書記で<dash=2>
+	マンイーター	通常						私は会計です
+	マンイーター	通常						せし子ちゃんの妄想、\n聞いてあげたからかもしれませんね
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	せし子	嬉しい
+	せし子	嬉しい						そして契約者！\n貴様こそが副会長だ！
+CharacterOff	集中線
+	せし子	怪しい						邪なる堕天せし者の側仕えとなれる\n光栄に咽び泣くがいい……！
+CharacterOff
+	ディーア	驚き制服2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き制服2						いやいや、\nなんで生徒会とか副会長とか!?
+Param	character_grayout=true
+CharacterOff
+	マンイーター	通常	p3
+	バハムート	通常	p7b
+	バハムート							ここはせし子ちゃんの\n創造した世界なんですって
+CharacterOff
+	ディーア	怪しい制服2	p7
+	せし子	怪しい	p3b
+	せし子	怪しい						我が傷痕が疼き、\n天啓をもたらしたのだ……！
+	せし子	怪しい						黒き祭壇に満たされしソピアが\n長き刻に姿を成し……！
+	ディーア	怪しい制服2						ああ……\nいつも妄想してたんだな
+	せし子	通常						そして写し身の放つ魔導が\n虚像を結び、我を主に選んだのだ！
+	ディーア	怪しい制服2						つまり、\n幻想体の影響で魔術空間ができたと
+Tween	ディーア	MoveBy	x=30				NoWait
+	ディーア	通常制服2						じゃあ、\n早く外に出る方法を探そう！
+Shake	せし子		x=5				NoWait
+	せし子	慌て						なななな!?\n契約者、それは……!!
+	ディーア	怪しい制服2						今はなんともないとはいえ、\n幻想体が作った場所だ\n油断なんてできる状況じゃない
+	ディーア	通常制服2						それにせし子だって、\n魔界に約束があるんだろ？
+Tween	せし子	MoveBy	x=-10				NoWait
+	せし子	悲しい						た、確かに\n我も魔界で果たすべき宿命が……
+CharacterOff
+	マンイーター	通常	p3
+	バハムート	通常	p7b
+	バハムート	通常						でも、マスターさん\nどうやって出ていくんですか？
+CharacterOff
+	せし子	通常	p3b
+	ディーア	怒り制服2	p7
+	ディーア	怒り制服2						幻想体はせし子の\n望みを叶えるって言ってたな\nそれが達成されたら……
+	ディーア	怪しい制服2						そのせし子の望みって\nなんだったんだ？
+	せし子	怪しい						我が望みは唯一つ！
+	せし子	嬉しい						邪なる堕天せし者が頂点に立ち、\n全ての魔の者が崇拝し、\n敬愛を抱く存在となること！
+CharacterOff
+	マンイーター	通常	p3
+	バハムート	通常	p7b
+Tween	バハムート	PunchPosition	y=30				NoWait
+	バハムート							あ、だからですね！
+	バハムート							せし子ちゃんが\n一番偉い人じゃないから……
+CharacterOff
+	ディーア	驚き制服2	p7
+	せし子	慌て	p3b
+	せし子	慌て						な……!?\nそ、そうなのか……!?
+CharacterOff
+	バハムート	通常	p7b
+	マンイーター	通常	p3
+	マンイーター	通常						だって、\nこの学校には<dash=2>
+StopBgm
+	マンイーター	通常						生徒会四天王がいますから!!
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景
+	イベントスチル10533		エフェクト表			0
+Param	character_grayout=false
+Bgm	緊迫
+FadeIn	black					.3
+	バハムート	<Off>						学園のトップに君臨する\n正当な生徒会四天王
+	バハムート	<Off>						絶対の生徒会長\nぎんいろ=ロストちゃんを中心に
+	バハムート	<Off>						学園の秩序を護り、\n全生徒の尊敬を集める存在です
+FadeOut	black					.3
+CharacterOff						0
+Bg	教室A					0
+	ディーア	汗制服2				0
+FadeIn	black					.3
+	ディーア	汗制服2						なんでロスト魔剣のみんなが\n生徒会に？
+	ディーア	驚き制服2						いや、それより\nオレ達はどうしたらいいんだ？
+CharacterOff
+	せし子	拡大通常	エフェクト表					へぇ、面白くなってきた……♪
+Param	character_grayout=true
+CharacterOff
+	せし子	怪しい	p3b
+	ディーア	驚き制服2	p7
+	ディーア	驚き制服2						せし子？
+	せし子	怪しい						いずれロスト魔剣とは\n覇を競わねばと思っていた！
+	せし子	嬉しい						今こそ、\n生徒会を崩し、我が頂点に……！
+	せし子	慌て						って、あれ？
+StopBgm						0
+Se	光1
+FadeOut	white					.2
+FadeIn	white					.2
+Param	character_grayout=false
+Shake	Graphics		x=5 y=5				NoWait
+	土煙		エフェクト表			1
+	せし子	悲しい						ぬわぁああああ!?
+CharacterOff
+	？？？？							あれあれぇ♪\nミラちゃんたちをどうこうって\n聞こえた気がするけどぉ♥
+CharacterOff
+	ディーア	驚き制服2						そ、その声は……！
+Bgm	バトル
+CharacterOff
+	ミラロスト	ニヤリ2						そう、生徒会四天王の一人にして\n聖竜の書記♪
+	ミラロスト	笑い2						最強の\nバハムート=ミラ=ロストちゃんだよ♥
+Se	シャキーン
+	イベントスチル10534		エフェクト表
+Wait						2
+CharacterOff
+	ディーア	怪しい制服2						すっごくノリノリだな
+CharacterOff
+	ミラロスト	笑い2
+Tween	ミラロスト	PunchPosition	y=30				NoWait
+	ミラロスト	笑い2						ここは戦うのも自由だし、\n面白いことには乗っからないと♪
+	ミラロスト	ニヤリ2						でも、やっと見つけた♪\nマスターさん、ここにいたんだ♪
+	ミラロスト	ニヤリ2						ねぇねぇ♥\nミラちゃんの下僕にならない？
+	ミラロスト	笑い2						生徒会の一員になったら、\nミラちゃんがたくさん使ってあげる♥
+CharacterOff
+	せし子	慌て
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	慌て						そ、それは認めぬ……！\n契約者は副会長になる運命！
+CharacterOff
+	ミラロスト	ニヤリ2						へぇ、必死になっちゃって\nかーわいい♪
+Se	チャージ
+	オーラ赤		エフェクト表			.5
+	ミラロスト	通常2						じゃあ、ミラちゃんを止めてみなよ！\n裏･生徒会長！
+CharacterOff
+	せし子	怪しい						まったく、\n世界は待つことを知らないな！
+	せし子	通常						全ては\nこの戦いに委ねられる……！
+CharacterOff
+	バハムート	通常
+Tween	バハムート	PunchPosition	y=30				NoWait
+	バハムート	通常						せし子ちゃん、\nバハムートちゃんも協力するよ！
+	バハムート	通常						今度こそミラ=ロストちゃんに\nマスターさんへのちょっかいを\nやめさせるの！
+CharacterOff
+	せし子	嬉しい						よかろう！\nさあ契約者、戦いの儀だ！
+CharacterOff
+	ディーア	絶望制服2						やっぱり\nオレ、こっち側なのか……!?
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	せし子	拡大通常	エフェクト裏					それが世界の選択だ……！
+If	isdebug==true
+CharacterOff
+Jump	*E_1050_05
+EndIf
+EndScenario
+
+# E_1053_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	教室A					0
+	ミラロスト	悔しい2				0
+	          
+FadeIn	white					.5
+Tween	ミラロスト	PunchPosition	y=30				NoWait
+	ミラロスト	悔しい2						無理、無理だからぁ！\nマスターさんまでそっちなんて\nずるいよぉ！
+CharacterOff
+	せし子	嬉しい	p3b
+	バハムート	通常	p7
+	バハムート	通常						マスターさんを護るのは\nバハムートちゃんの役目なの♪
+	せし子	嬉しい						これがアカシックレコードの変遷\n世界の運命が交わる時……！
+CharacterOff
+	ミラロスト	悔しい2
+Shake	ミラロスト		x=3				NoWait
+	ミラロスト	悔しい2						くぅ！\nここでミラちゃんがやられても、\n第二のミラちゃんが必ず……！
+Se	倒れる
+Tween	ミラロスト	MoveBy	y=-100				NoWait
+CharacterOff						1
+Wait						1.5
+CharacterOff
+	せし子	嬉しい						その前に、\n生徒会との雌雄を決するとしよう
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	通常						いくぞ、契約者！
+Se	走る
+Tween	せし子	MoveBy	x=1000 time=2				NoWait
+Wait						1
+CharacterOff
+	ディーア	汗制服2						あ、ああ！
+CharacterOff
+	ミラロスト	通常2
+Tween	ミラロスト	PunchPosition	y=30				NoWait
+	ミラロスト	通常2						ん？\nもうあの子たち、いっちゃった？
+	ミラロスト	笑い2						んー、楽しかったぁ♪\nこういうのもたまには良いね♥
+	ミラロスト	笑い2						抑止とか役目とか\n関係なしにいられるのって♪
+CharacterOff
+	ディーア	通常制服2						……そうだな
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	研究所A					0
+	せし子	通常				0
+Wait						1
+Bgm	バトル
+FadeIn	black					.3
+	せし子	通常						目指すは白銀の生徒会室！
+	せし子	怪しい						ふっ、面白くなってきた……！
+CharacterOff
+	ディーア	汗制服2						ちょっと待てって……！
+	グレイプニル=ロスト	通常	画面外_右
+Tween	グレイプニル=ロスト	MoveBy	x=-600 time=0.5				NoWait
+	ディーア	驚き制服2						うわぁ!?
+Se	倒れる
+Tween	グレイプニル=ロスト	MoveBy	x=-1000 time=1				NoWait
+Tween	ディーア	MoveBy	x=-1000 time=1				NoWait
+Wait						1
+Param	character_grayout=true
+	せし子	慌て	p3b
+	マンイーター	通常	p7
+Tween	マンイーター	PunchPosition	y=30				NoWait
+	マンイーター	通常						ご、ご主人様!?
+	せし子	慌て						ヤツラの襲撃か!?
+StopBgm
+CharacterOff
+	ディーア	驚き制服2						いや、これは……
+CharacterOff
+	グレイプニル=ロスト	嬉しい
+Shake	グレイプニル=ロスト		x=2				NoWait
+Bgm	神秘
+	グレイプニル=ロスト	嬉しい						あるじあるじ、あるじぃ！\nくぅーん、やっとあるじにあえたぁ！
+CharacterOff
+	ディーア	通常制服2						グレ=ロスト……！
+CharacterOff
+	グレイプニル=ロスト	喜び						うん、そうだよぉ……\n制服のあるじも尊い……はぁぁぁぁ♪
+	グレイプニル=ロスト	通常						グレ、会計とか別にいいけど、\nあるじは守ってあげるからね……
+CharacterOff
+	せし子	慌て	p3b
+	マンイーター	通常	p7
+Tween	マンイーター	PunchPosition	y=30				NoWait
+	マンイーター							ちょ、ちょっと！\nご主人様をペロペロするのは\n私なんだからね!?
+CharacterOff
+	グレイプニル=ロスト	驚き						ぺ、ぺろぺろはしないよ……？\nグレなんかが\nそんなこと許されないし……
+StopBgm
+	グレイプニル=ロスト	怒り						でも……あるじを連れていったら\nイヤだから……
+Bgm	魔剣バトル
+	グレイプニル=ロスト	怒り						グレ、いくよ……！
+Param	character_grayout=false
+Se	チャージ
+	イベントスチル10535		エフェクト表			.5
+Wait						2
+Param	character_grayout=true
+CharacterOff
+	せし子	慌て	p3b
+	マンイーター	通常	p7
+	せし子	慌て						くっ……！ この圧力！\n我がスティグマを解かなければ!?
+Tween	マンイーター	PunchPosition	y=30				NoWait
+	マンイーター	通常						ちょ―っと待った！\nここは私が助っ人するよ！
+	マンイーター	通常						妄想とご主人様の\nペロペロなら負けないんだからね！
+Tween	マンイーター	MoveBy	x=-20				NoWait
+	マンイーター	通常						せし子ちゃん！\nもっと気持ちを強く持つの！\nそうすれば勝てるよ！
+	せし子	慌て						そ、そうか……\n此処は世界から分かたれし陽炎
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	通常						力となるのは、\n我が禁忌の智慧……！
+	せし子	通常						感謝するぞ、裏･会計……！
+	せし子	怪しい						邪なる堕天せし者は\nこの世界の創造主……！
+CharacterOff
+	せし子	拡大通常	エフェクト表					負ける筈がない！
+If	isdebug==true
+CharacterOff
+Jump	*E_1053_06
+EndIf
+EndScenario
+
+# E_1053_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	研究所A					0
+Param	character_grayout=true
+	ディーア	汗制服2	1_2			0
+	グレイプニル=ロスト	泣き	2_2			0
+FadeIn	white					.3
+Tween	グレイプニル=ロスト	MoveBy	x=-20				NoWait
+	グレイプニル=ロスト	泣き						きゅーん、\nあるじぃ、まけちゃったぁ……
+	ディーア	汗制服2						よしよし、よくがんばったな
+Shake	グレイプニル=ロスト		x=2				NoWait
+	グレイプニル=ロスト	恍惚						はぁああああ……♪\n勝ち負けはどうでもいい、\nあるじさえいればいい……♪
+	ディーア	怪しい制服2						にしても、\nやっぱり妄想の世界なんだな
+	ディーア	怪しい制服2						思いを込めただけ、\nせし子の力が上がるなんて
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	せし子	嬉しい						はーはっはっは！\n世界が味方する邪なる堕天せし者に\n敗北などない……！
+CharacterOff	集中線
+	せし子	通常						祝え！\n新たな混沌の誕生を！
+	せし子	怪しい						ふっ、眷属も嬉しいか\nすこしビタビタし過ぎだぞ……
+CharacterOff
+	バハムート	通常						触手が暴れまわってますね
+CharacterOff
+	ディーア	汗制服2						このまませし子が満足して\n元の世界に戻れればいいけど
+StopBgm
+	ディーア	驚き制服2						って、あれ？\nなんだか、汗が……？
+Bgm	緊迫
+CharacterOff
+	マンイーター	通常						ご、ご主人様！\n周りの温度が急に……！
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							あなた達が暴れている生徒？
+CharacterOff
+	ディーア	驚き制服2						お、お前は……！
+CharacterOff
+	レヴァロスト	通常真				1		私は風紀委員長にして\n副生徒会長、レヴァンテイン=ロスト
+	レヴァロスト	通常真						お姉ちゃんの炎で、罰してあげるわ
+Se	和太鼓
+	イベントスチル10536		エフェクト表			.5
+Wait						2
+CharacterOff
+	ディーア	驚き制服2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き制服2						れ、レヴァ=ロスト!?
+CharacterOff
+	レヴァロスト	通常真						あら、マイマスター？\nどうしてそんなに驚いているの？
+CharacterOff
+	ディーア	汗制服2						いや、レヴァ=ロストが\nこういうのに乗っかるのは\n珍しいなって
+CharacterOff
+	レヴァロスト	通常真						そうね……\nでも、ここなら全ては関係ないもの
+	レヴァロスト	笑い真						この身体も、\n今は少し楽に感じる……
+	レヴァロスト	通常真						その点では、邪なる堕天せし者\nあなたに感謝するわ
+CharacterOff
+	せし子	怒り						ならば、\n我とともに混沌を歩め！
+CharacterOff
+	レヴァロスト	通常真						それはだめ\nだってこの役目を与えたのはあなた
+	レヴァロスト	通常真						本当はわかっているんでしょう？
+	レヴァロスト	通常真						あなたは\nただ頂点に立ちたいんじゃない
+	レヴァロスト	通常真						強い魔剣と戦って、\n自分の存在を示したいの
+CharacterOff
+	せし子	通常
+Tween	せし子	PunchPosition	y=10				NoWait
+	せし子	通常						…………っ
+CharacterOff
+	レヴァロスト	通常真						だから私も、\nこの役目を全うしてあげるわ
+StopBgm
+	レヴァロスト	通常真						さあ、来なさい！\n生徒会の名において、\nあなた達を罰してあげる……！
+Se	チャージ
+	オーラ赤		エフェクト表			1
+Wait						1.5
+CharacterOff
+Bgm	ボスバトル
+	せし子	嬉しい						ここに来て、\n理解者が現れるとはな……
+	せし子	通常						そして我を\nせし子と呼ばない者も……！
+	せし子	嬉しい						……面白くなってきた!!
+	集中線		エフェクト表
+	せし子	通常						契約者よ！\nそして我が友バハムート、\nマンイーター！
+	せし子	怪しい						彼奴を倒せば、\n生徒会の掌握までもうすぐ！
+CharacterOff
+	マンイーター	通常	1_3
+	バハムート	通常	3_3
+	ディーア	通常制服2	2_3
+	ディーア	通常制服2						ああ、頑張ろう！
+CharacterOff
+	せし子	怪しい						さあ、\n闇の帷よ我らを包め……！
+If	isdebug==true
+CharacterOff
+Jump	*E_1053_07
+EndIf
+EndScenario
+
+# E_1053_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	穏やか
+Bg	研究所A					0
+Param	character_grayout=false
+	レヴァロスト	笑い真
+FadeIn	white					.3
+	レヴァロスト	笑い真						ふぅ……\n私の炎をしのぎ切るなんてね
+	レヴァロスト	笑い真						確かにあなたの想いを認めるわ\nこの先に進みなさい
+CharacterOff
+	ディーア	笑い制服2						レヴァ=ロストも満足できたか？
+CharacterOff
+	レヴァロスト	通常真						そうね、満足とは違うけれど……\nこれが楽しいという気持ちなのかしら
+CharacterOff
+	せし子	通常						レヴァンテイン=ロスト、\n我が理解者にして好敵手よ！
+	せし子	嬉しい						決着はいずれまた、\n新たな約束の時に……！
+CharacterOff
+	レヴァロスト	通常真						それはイヤ\nこれはこの世界でだけよ
+CharacterOff
+	せし子	悲しい						むぅ……！
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+	せし子	通常				0
+	ディーア	通常制服2				0
+Wait						1
+FadeIn	black					.3
+	ディーア	通常制服2						でも、\nこれで残るは……！
+Bgm	魔獣バトル
+Se	火事
+	黒グラデーション		エフェクト裏			1
+Shake	Graphics		x=5 y=5				NoWait
+	ディーア	驚き制服2						なっ……!?
+CharacterOff
+	せし子	慌て						魔力が暴れている……
+	せし子	通常						これが生徒会長の力か……！
+	せし子	怪しい						邪なる堕天せし者の敵として、\n不足なし……！
+	せし子	通常						行くぞ……！
+Se	ドア開く
+FadeOut	white					1
+CharacterOff						0
+Bg	カジノ					0
+	ぎんいろ=ロスト	通常				0
+FadeIn	white					1
+	ぎんいろ=ロスト	通常						そう……\nあなた、裏･生徒会長……？
+CharacterOff
+	せし子	通常						生徒会四天王、最後の一人\n生徒会長、ぎんいろ=ロスト……！
+CharacterOff
+	ぎんいろ=ロスト	通常						違うわ
+	ぎんいろ=ロスト	通常						今の私は……美人、生徒会長
+CharacterOff
+	ディーア	汗制服2						…………あれ？
+CharacterOff
+	ぎんいろ=ロスト	通常						そして、\n旦那さんのお嫁さん……
+CharacterOff
+	せし子	慌て
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	慌て						学生結婚だと……!?
+CharacterOff
+	ぎんいろ=ロスト	通常						ぽっ……
+	ぎんいろ=ロスト	通常						すこし、\n頬が熱くなったわ不思議
+CharacterOff
+	せし子	怒り						くっ、面妖な……！\n契約者の嫁を気取るなど……！
+CharacterOff
+	ぎんいろ=ロスト	通常						…………？\nでも、事実よ？
+CharacterOff
+	ディーア	驚き制服2						いやいやいやいや……！
+CharacterOff
+	ぎんいろ=ロスト	通常						生徒会長、不思議な響き……
+	ぎんいろ=ロスト	通常						学園世界のヒロイン\n規則を守って、あなたを手にする\n大正義……
+	ぎんいろ=ロスト	通常						ええ、悪くはない\nこれが好きかもしれない
+	ぎんいろ=ロスト	本気						だから、邪魔するのなら\n生徒会の名において殲滅するわ
+	ぎんいろ=ロスト	本気						私はぎんいろ=ロスト
+Se	シャキーン
+	イベントスチル10537		エフェクト表			.5
+	ぎんいろ=ロスト							全ては、\nあなたとの新婚生活のために……
+Param	character_grayout=true
+CharacterOff
+	せし子	慌て	p3b
+	ディーア	本気制服2	p7
+	せし子							こ、この力……！\nくるぞ、契約者よ！
+	ディーア							ああ……！
+If	isdebug==true
+CharacterOff
+Jump	*E_1053_08
+EndIf
+EndScenario
+
+# E_1053_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔獣バトル
+Bg	カジノ					0
+Param	character_grayout=false
+	ぎんいろ=ロスト	本気
+FadeIn	white					.3
+	ぎんいろ=ロスト	本気						くらいなさい……
+FadeOut	white					.2
+CharacterOff						0
+Bg	白背景					0
+	ぎんいろ=ロスト	縮小本気	1053A0			0
+	イベントスチル10532A		1053A			0
+FadeIn	white					.2
+	ぎんいろ=ロスト	縮小本気						殲滅領域《白銀絶華》
+Se	光1
+	イベントスチル10532B		1053B			0
+Tween	イベントスチル10532B	ScaleBy	x=0.1 y=0.1 time=0.1
+Shake	Graphics		x=1 y=1 time=0.1				NoWait
+Wait						0
+Se	光1
+	イベントスチル10532C		1053C			0
+Tween	イベントスチル10532C	ScaleBy	x=0.1 y=0.1 time=0.1
+Shake	Graphics		x=1 y=1 time=0.1				NoWait
+Wait						0
+Se	光1
+	イベントスチル10532D		1053D			0
+Tween	イベントスチル10532D	ScaleBy	x=0.1 y=0.1 time=0.1
+Shake	Graphics		x=1 y=1 time=0.1				NoWait
+Wait						0
+Se	光1
+	イベントスチル10532E		1053E			0
+Tween	イベントスチル10532E	ScaleBy	x=0.1 y=0.1 time=0.1
+Shake	Graphics		x=1 y=1 time=0.1				NoWait
+Wait						0
+Se	光2
+	イベントスチル10532F		1053F			0
+Tween	イベントスチル10532F	ScaleBy	x=0.1 y=0.1 time=0.3
+Shake	Graphics		x=2 y=2 time=0.1				NoWait
+Wait						0
+Se	光2
+	イベントスチル10532G		1053G			0
+Tween	イベントスチル10532G	ScaleBy	x=0.1 y=0.1 time=0.3
+Shake	Graphics		x=2 y=2 time=0.1				NoWait
+Wait						0
+Se	光2
+	イベントスチル10532H		1053H			0
+Tween	イベントスチル10532H	ScaleBy	x=0.1 y=0.1 time=0.3
+Shake	Graphics		x=2 y=2 time=0.1				NoWait
+Wait						0
+Se	光2
+	イベントスチル10532I		1053I			0
+Tween	イベントスチル10532I	ScaleBy	x=0.1 y=0.1 time=0.3
+Shake	Graphics		x=2 y=2 time=0.1				NoWait
+Wait						1
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+Bg	カジノ					0
+	せし子	悲しい				0
+Shake	Graphics		x=5 y=5				NoWait
+FadeIn	white					.3
+	せし子	悲しい						ぐっ……\n我が混沌が押される……!?
+CharacterOff
+	ぎんいろ=ロスト	本気						そろそろ終わりね
+	ぎんいろ=ロスト	通常						あなた、お風呂にする？\nお食事にする？ それとも、私？\n戦いが終わったら選ばせてあげる
+Param	character_grayout=true
+CharacterOff
+	せし子	怒り	p3b
+	ディーア	にやけ制服2	p7
+	ディーア	にやけ制服2						え、えへへへ！\nどれがいいかな……！
+	せし子	怒り						け、契約者ー!?
+CharacterOff
+	ぎんいろ=ロスト	本気						あなたはどうするの？\n立ちはだかる理由はなに？
+	ぎんいろ=ロスト	本気						なんのために、戦うの？
+CharacterOff
+	せし子	慌て						そ、それは……
+CharacterOff
+	ぎんいろ=ロスト	本気						自分だけのためなら\nあなたは勝てないわ……
+	ぎんいろ=ロスト	本気						ぎんいろ=ロストは旦那さんのために\nなら、あなたは……？
+CharacterOff
+	せし子	慌て						わ、我の望みは……
+Se	回想
+FadeOut	white					.3
+StopBgm
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場_宿屋					0
+	せし子	拡大怒り	エフェクト表			0
+FadeIn	white					.3
+	せし子	拡大怒り						もっと我を尊敬しろー！
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	カジノ					0
+	せし子	通常				0
+FadeIn	white					.3
+Bgm	勇者バトル
+	せし子	通常						だが、今は！
+CharacterOff
+	マンイーター	通常	p3
+	バハムート	通常	p7b
+	バハムート	通常						せし子ちゃん……！
+	マンイーター	通常						がんばって……！
+Param	character_grayout=false
+CharacterOff
+	せし子	通常						邪なる堕天せし者を\n助ける者たちがいる……！
+	せし子	怪しい						ロスト魔剣でも、生徒会でも、\n敗北を刻ませるものか……！
+CharacterOff
+	ぎんいろ=ロスト	本気						そう……\nなら、決着をつけましょう……
+CharacterOff
+	せし子	通常						貴様にも\n我が存在を認めさせる……！
+Se	チャージ
+	オーラ紫		エフェクト表			.5
+	せし子	怪しい						黒壇の柩、白銀の叡智……！\n真なる混沌よりその身を顕せ！
+	せし子	怪しい						受けよ、\n邪なる堕天せし者の一撃を!!
+FadeOut	white					.2
+CharacterOff						0
+Bg	白背景					0
+	せし子	縮小	1053A0			0
+	イベントスチル10531A		1053A			0
+FadeIn	white					.2
+	せし子	縮小						闇と光の混沌魔極【カオスルーラー】
+Se	闇1
+	イベントスチル10531B		1053B			0
+Tween	イベントスチル10531B	ScaleBy	x=0.1 y=0.1 time=0.3
+Shake	Graphics		x=2 y=2 time=0.1				NoWait
+Wait						0
+Se	闇1
+	イベントスチル10531C		1053C			0
+Tween	イベントスチル10531C	ScaleBy	x=0.1 y=0.1 time=0.3
+Shake	Graphics		x=2 y=2 time=0.1				NoWait
+Wait						0
+Se	闇1
+	イベントスチル10531D		1053D			0
+Tween	イベントスチル10531D	ScaleBy	x=0.1 y=0.1 time=0.3
+Shake	Graphics		x=2 y=2 time=0.1				NoWait
+Wait						0
+Se	闇1
+	イベントスチル10531E		1053E			0
+Tween	イベントスチル10531E	ScaleBy	x=0.1 y=0.1 time=0.3
+Shake	Graphics		x=2 y=2 time=0.1				NoWait
+Wait						0
+Se	闇2
+	イベントスチル10531F		1053F			0
+Tween	イベントスチル10531F	ScaleBy	x=0.1 y=0.1 time=0.1
+Shake	Graphics		x=1 y=1 time=0.1				NoWait
+Wait						0
+Se	闇2
+	イベントスチル10531G		1053G			0
+Tween	イベントスチル10531G	ScaleBy	x=0.1 y=0.1 time=0.1
+Shake	Graphics		x=1 y=1 time=0.1				NoWait
+Wait						0
+Se	闇2
+	イベントスチル10531H		1053H			0
+Tween	イベントスチル10531H	ScaleBy	x=0.1 y=0.1 time=0.1
+Shake	Graphics		x=1 y=1 time=0.1				NoWait
+Wait						0
+Se	闇2
+	イベントスチル10531I		1053I			0
+Tween	イベントスチル10531I	ScaleBy	x=0.1 y=0.1 time=0.1
+Shake	Graphics		x=1 y=1 time=0.1				NoWait
+Wait						1
+Se	闇3
+Se	光3
+Se	火事
+FadeOut	white					1
+CharacterOff						0
+Bg	カジノ					0
+	せし子	慌て				0
+StopBgm
+Wait						2
+FadeIn	white					1
+	せし子	慌て						はぁ、はぁ……！\nこれが、限界……！
+	せし子	通常						見たか、我が秘めし力は……！
+CharacterOff
+	ぎんいろ=ロスト	通常						…………
+CharacterOff
+	せし子	慌て						なっ……！\n無傷、だと……!?
+CharacterOff
+	ぎんいろ=ロスト	通常						でも、これは\n倒すかどうかの戦いじゃない
+	ぎんいろ=ロスト	通常						ええ、認めてあげる……\n裏･生徒会長　
+Bgm	凱旋
+CharacterOff
+	せし子	通常
+Tween	せし子	PunchPosition	y=10				NoWait
+	せし子							…………っ！
+CharacterOff
+	ぎんいろ=ロスト	通常						これで私は純粋な、\n旦那さんの奥さん……
+	ぎんいろ=ロスト	通常						それもいいわね……
+CharacterOff
+	ミラロスト	通常2						あーあ、\nけっきょくぎんいろ=ロストちゃんも\n突破されちゃったぁ……
+CharacterOff
+	グレイプニル=ロスト	嬉しい						えへへへ、\nおめでと、あるじ
+CharacterOff
+	レヴァロスト	通常真						マイマスターじゃなくて、\nあの子の勝利だけどね
+CharacterOff
+	せし子	嬉しい						お前たち……！\n祝うために戻ってきたか……！
+CharacterOff
+	ディーア	笑い制服2						ああ、おめでとう……！
+CharacterOff
+	せし子	嬉しい						皆が\n我が存在を認めている……！
+	せし子	嬉しい						もはや\nただの侮られる存在ではない
+	せし子	通常						いまはただ感謝しよう、\n我が好敵手、そして仲間よ……！
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	嬉しい						これで我が悲願は成就した……！\nさあ、共に懐かしき魔界へと……！
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト裏
+	せし子	幻想体	1_2					そんなの、ダメよ
+CharacterOff
+	せし子	慌て						えっ……？
+Bgm	絶望
+CharacterOff
+	せし子	幻想体	1_2					だって、戻っても、\nあなたに居場所なんてないんだから
+If	isdebug==true
+CharacterOff
+Jump	*E_1053_09
+EndIf
+EndScenario
+
+# E_1053_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	カジノ					0
+	せし子	慌て	p3b			0
+	ディーア	悔しい制服2	p7			0
+FadeIn	white					.3
+	ディーア	悔しい制服2						お前は、\nあの時の幻想体！
+	せし子	慌て						なんで、今になって……
+CharacterOff
+	せし子	幻想体						あなた、出ていくつもりなの？\nこの暖かな場所を捨てるつもりなの？
+CharacterOff
+	せし子	慌て	p3b
+	ディーア	悔しい制服2	p7
+	せし子	慌て						そ、そのとおりだが……？
+CharacterOff
+	せし子	幻想体						ここでうまくいったから、\n外でもやっていける？
+CharacterOff
+	ディーア	悔しい制服2	p7
+	せし子	怒り	p3b
+	せし子	怒り						当然だ……！\n邪なる堕天せし者なら……！
+StopBgm
+CharacterOff
+	せし子	幻想体						バカね……
+Bgm	絶望
+	せし子	幻想体						現実を見なさいよ
+	せし子	幻想体						あなたの空想も智慧も能力も\n外の世界は認めたりしない
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale				0
+Bg	市街地A					0
+	          					0
+FadeIn	white					.3
+	幻想体 	<Off>						ここ以外で\nうまくいったことがあった？
+Bg	酒場1F
+	幻想体 	<Off>						あなたがどんなことを訴えても、\n異物としか受け入れられない
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	カジノ					0
+	せし子	悲しい				0
+FadeIn	white					.3
+	せし子	悲しい						…………っ
+CharacterOff
+	せし子	幻想体	1_2					その男のように\n愛称で呼ばれることさえない
+	せし子	幻想体						奇異と好奇の目で見られるだけ\nずっと一人……
+CharacterOff
+	せし子	悲しい						そ、それは……
+CharacterOff
+	せし子	幻想体	1_2					わかっているでしょ？
+	せし子	幻想体						なにかできるなんて、\n夢を見るのはやめなさい
+	せし子	幻想体						あなたには\nこの空想だけでいいの
+	せし子	幻想体						もうずーっとここに<dash=2>
+StopBgm
+CharacterOff
+	ディーア	通常制服2						それは違うぞ
+CharacterOff
+	せし子	慌て						契約者……
+Bgm	凱旋
+CharacterOff
+	ディーア	通常制服2						一人っていうのも、\n誰もお前を認めないっていうのも
+	ディーア	通常制服2						全て、間違ってる
+	ディーア	怒り制服2						もうせし子も気づいているだろう？\nロストたちもお前と同じだって
+	ディーア	本気制服2						あれだけ戦ったんだから\nわかるはずだ
+CharacterOff
+	せし子	慌て						…………っ！
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル393G		エフェクト表			0
+Param	character_grayout=false
+FadeIn	white					.3
+	ディーア	<Off>						傷ついたり、理解されなかったり\n望まぬことを強いられて
+FadeOut	black					.2
+CharacterOff						0
+	イベントスチル460BG		エフェクト表			0
+FadeIn	black					.2
+	ディーア	<Off>						それでも\n今は全てを背負って生きている
+FadeOut	black					.2
+CharacterOff						0
+	イベントスチル59205		エフェクト表			0
+Tween	イベントスチル59205	MoveBy	y=-700 time=0
+FadeIn	black					.2
+	ディーア	<Off>						お前と同じ、\n苦しいものを抱えている
+FadeOut	black					.2
+CharacterOff						0
+	イベントスチル59301		エフェクト表			0
+FadeIn	black					.2
+	ディーア	<Off>						他の魔剣だって同じだ\nお前を認めないなんてことない！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	カジノ					0
+	ディーア	笑い制服2				0
+Param	character_grayout=true
+FadeIn	white					.3
+	ディーア	笑い制服2						それになにより、\nお前はすごい才能を持っている！
+CharacterOff
+	せし子	悲しい						我の、才能……？
+CharacterOff
+	マンイーター	通常	p3
+	バハムート	通常	p7b
+	バハムート	通常						そうだよ、せし子ちゃん！
+Tween	マンイーター	PunchPosition	y=30				NoWait
+	マンイーター	通常						この妄想、すごかったよ！
+CharacterOff
+	ぎんいろ=ロスト	通常						ええ……\nこんなにたのしい夢は初めて……
+CharacterOff
+	ミラロスト	笑い2						ちょーっと\n設定は多すぎだけどねぇ♪
+CharacterOff
+	せし子	悲しい						この、我の空想が……？
+CharacterOff
+	ディーア	笑い制服2						ああ、素敵な知識を持って、\nこんな不思議で楽しい世界を作れる
+	ディーア	通常制服2						それはお前の、\nかけがえのない才能だ！
+CharacterOff
+	せし子	幻想体						そんなもの、\n認められなかったら意味も……！
+CharacterOff
+	ディーア	本気制服2						オレが認める！
+	ディーア	怒り制服2						認めて、そしてマスターとして\n背中を押す！
+	ディーア	笑い制服2						だから自分の力で、\n現実だって変えていこう！
+CharacterOff
+	せし子	悲しい						契約者……
+	せし子	怪しい						フッ……\n我が宿命は我だけのモノ……
+CharacterOff
+	せし子	拡大通常	エフェクト表					こんな安寧に\n身を任せるわけにはいかないな！
+CharacterOff
+	ディーア	笑い制服2						よし、一緒に\nここから出ていこう！
+	ディーア	怪しい制服2						でも、せし子が決意したのに\n空間が崩れないな
+	ディーア	怒り制服2						まだなにか足りないのか？
+CharacterOff
+	バハムート	通常
+Tween	バハムート	PunchPosition	y=30				NoWait
+	バハムート	通常						それって、\n卒業式じゃないですか!?
+CharacterOff
+	ディーア	驚き制服2						卒業式……？
+CharacterOff
+	マンイーター	通常	p3
+	バハムート	通常	p7b
+	マンイーター	通常						学校を出ていくなら\n卒業式ですよ！
+	バハムート	通常						そこで言っちゃおう！\nせし子ちゃんは外でも大丈夫だって!!
+	マンイーター	通常						世界だって、\n変えていくって叫ぼうよ！
+CharacterOff
+	せし子	通常						くくく……！\n反逆の宣誓とは気に入った……！
+StopBgm
+CharacterOff
+	せし子	幻想体	1_2					ま、待ちなさい……！
+Bgm	風属性バトル
+Param	character_grayout=false
+CharacterOff
+	バハムート	通常	p8b
+	マンイーター	通常	p2b
+	ディーア	怒り制服2	2_3
+	ディーア	怒り制服2						お前の相手はオレたちがする！
+	ディーア	笑い制服2						生徒会長、\n卒業式は任せたぞ
+CharacterOff
+	ぎんいろ=ロスト	通常						ええ……\nこれが夫婦の共同作業、ね
+CharacterOff
+	ディーア	笑い制服2						ロストのみんなと\nせし子でゆっくり卒業式をしてこい
+CharacterOff
+	せし子	嬉しい						よい心がけだ、契約者よ！
+	集中線		エフェクト表
+	せし子	怒り						って、さっきから\n気安くせし子って呼ぶなー！\nお前たちもだ！
+CharacterOff
+	バハムート	通常	p8b
+	マンイーター	通常	p2b
+	ディーア	怒り制服2	2_3
+	バハムート	通常						だって、\nみんな仲間で友達でしょ？
+CharacterOff
+	せし子	慌て						っ……！
+	せし子	通常						まさか\n契約者はそのつもりで……？
+	せし子	怪しい						ふっ……！\nいまだけは許可してやろう！
+CharacterOff
+	せし子	幻想体	1_2					だ、だめ……！\n出て行かせたりしないわ！
+CharacterOff
+	ディーア	通常制服2						なに言ってるんだ\n学校は巣立つ場所だろ？
+	ディーア	本気制服2						いくぞ幻想体！\nこれがオレたちの卒業式だ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1053_10
+EndIf
+EndScenario
+
+# E_1053_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	風属性バトル
+Bg	カジノ					0
+Param	character_grayout=false
+	せし子	幻想体				0
+FadeIn	white					.3
+	せし子	幻想体						は、はやく止めないと……！
+CharacterOff
+	ディーア	本気制服2						行かせるか！
+CharacterOff
+	せし子	幻想体
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	幻想体						っ……！
+	せし子	幻想体						ああ、また消えていく……！
+	せし子	幻想体						あの輝く思い出が逃げていく……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	大灯台B					0
+Wait						.5
+	ぎんいろ=ロスト	通常				1
+FadeIn	black					.3
+	ぎんいろ=ロスト	通常						卒業証書、授与
+	ぎんいろ=ロスト	通常						卒業生、卒業の言葉を
+CharacterOff
+	せし子	怪しい						ふっ……♪\nこれは卒業にして卒業にあらず！
+	せし子	通常						我が抜け出すは\n迷いと安寧の檻……！
+	せし子	嬉しい						今こそ魔界に戻り、\n我が混沌で世界を埋め尽くす時！
+	集中線		エフェクト表
+	せし子	通常						ロストたちよ……！\n汝らも誓いを述べよ……！
+CharacterOff
+	ミラロスト	笑い2						ミラちゃんは、\nもっともーっとかわいく\n自由にやりたいな♪
+CharacterOff
+	グレイプニル=ロスト	恍惚						グレは……\nどこでもあるじといっしょ♪
+CharacterOff
+	レヴァロスト	通常真						私はもっと、\nお姉ちゃんと話をしようかしら
+CharacterOff
+	ぎんいろ=ロスト	通常						わたしは……\nもっと旦那さんに相応しい\nお嫁さんになる
+CharacterOff
+	せし子	拡大通常	エフェクト表
+	せし子	拡大通常	エフェクト表					そう、我らは何者にも\n嫉妬も羨望もしない……！
+	せし子	拡大通常						世界よ、\nお前が邪なる堕天せし者に跪け！
+FadeOut	white					.3
+CharacterOff						0
+Bg	カジノ					0
+	せし子	幻想体				0
+	オーラ青		エフェクト表			0
+Wait						.5
+FadeIn	white					.3
+Se	チャージ
+	せし子	幻想体						うぅ……！\nうわあああああ
+Param	character_grayout=true
+CharacterOff
+	バハムート	通常	p7b
+	マンイーター	通常	p3
+	マンイーター	通常						これって！
+	バハムート	通常						マスターさん！
+CharacterOff
+	ディーア	通常制服2						どうやら\nうまくいったみたいだな
+	ディーア	通常制服2						なにかを諦めることが\n卒業じゃない
+	ディーア	笑い制服2						縛られることなく自由になるのが\n本当の卒業なんだ
+	ディーア	笑い制服2						卒業、おめでとう……！
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+StopBgm
+Bg	酒場1F					0
+	          
+Wait						1
+FadeIn	white					1
+								\n  　　  　  <color=blue><dash=2>数日後<dash=2></color>
+Bgm	平和
+	せし子	通常						ふっ……！\nよく聞くがいい、魔剣たちよ！
+	せし子	怪しい						我が名は邪なる堕天せし者！
+	せし子	怪しい						今宵は我が帰還を祝い、\n友誼を交わすため
+	せし子	慌て						混沌の宴を……いや、\nそんな仰々しくなくて……
+	せし子	慌て						そ、その……\nパーティーとか、どうだ？
+Param	character_grayout=false
+CharacterOff
+	バハムート	通常	p7b
+	マンイーター	通常	p3
+	一同							…………
+Param	character_grayout=true
+Tween	バハムート	PunchPosition	y=30				NoWait
+	バハムート	通常						うん、いいよ♪\nお菓子もっていくねせし子ちゃん！
+	マンイーター	通常						私と妄想の話もしよ……♪
+CharacterOff
+	ぎんいろ=ロスト	通常						せし子、\n飾り付けなら、生徒会の仕事……\n元生徒会で、がんばる……
+CharacterOff
+	せし子	嬉しい						み、みんな……！
+CharacterOff
+	せし子	拡大怒り	エフェクト表					って、\nせし子って言うなー！
+CharacterOff
+	せし子	怒り						友と呼ぶなら、\nもっと我を威厳と崇敬の念で……！
+CharacterOff
+	バハムート	通常	p7b
+	マンイーター	通常	p3
+	バハムート	通常						でもせし子ちゃんってあだ名、\n呼びやすいし♪
+Tween	バハムート	PunchPosition	y=30				NoWait
+	バハムート	通常						せし子ちゃん！ せし子ちゃん！\nあの目を光らせて遊ぶやつやろうよ！
+	マンイーター	通常						みんなでまた\n卒業式ごっこするのもどう？
+	バハムート	通常						あー、それいいね！\nバハムートちゃんは\n卒業式できなかったし！
+	マンイーター	通常						じゃあ、\n他のみんなも誘ってこよ！\nいいよね、せし子ちゃん!!
+CharacterOff
+	せし子	慌て						だから、せし子じゃ……
+Shake	せし子		x=10				NoWait
+	せし子	怒り						があああ!?\n眷属よ、どうしてこうなった……！
+CharacterOff
+	ディーア	笑い2						あ、いたいた！\nおーい、せし子ー！
+CharacterOff
+	せし子	慌て						そ、そうだ、元々は……！
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	怒り						契約者よ、なんとかしろ！\n皆が我をせし子と呼ぶ……！
+CharacterOff
+	ディーア	笑い2						よかった\n仲良くなれたじゃないか
+CharacterOff
+	せし子	怒り						仲良くなりすぎだ―！
+Shake	せし子		x=2				NoWait
+	せし子	慌て						もっとこう、\n尊敬の気持ちが……！
+CharacterOff
+	ディーア	通常2						うーん、それなら\nこういうのはどうだ？
+	ディーア	笑い2						この間の\n幻想体の影響が残ってるみたいなんだ
+StopBgm
+	ディーア	通常2						それを倒して強い姿を見せたら<dash=2>
+Bgm	キノコリオン
+CharacterOff
+	せし子	通常
+Tween	せし子	PunchPosition	y=30				NoWait
+	せし子	通常						…………！
+	せし子	怪しい						へぇ、面白くなってきた……！
+	せし子	怪しい						これは好機……！\n我が混沌を再び知らしめる時……！
+	せし子	嬉しい						契約者よ、\n宴の前に決着をつけるぞ！
+CharacterOff
+	ディーア	笑い2						ああ、せし子！
+CharacterOff
+	せし子	拡大怒り	エフェクト表					だから、せし子って言うなー！
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	夏空					0
+	          
+Wait						.5
+Param	character_grayout=false
+FadeIn	white					1
+Bgm	凱旋
+	          							中二病、\nそれは夢をみる才能……
+	          							背中を押してくれる\n誰かが、なにかがあれば
+	          							その才能は\n世界さえ変えることができる
+	          							魔剣機関は魔界の発展のため、\nいつまでも中二病を肯定し続けよう\n<dash=4>魔剣機関職員心得
+	イベントロゴ1053		エフェクト表			1
+								<color=blue>\n　  『†堕天と禁忌の学園黙示録†』\n　　　　　　　　　　　　　<dash=2>完</color>
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1053_01
+EndIf
+EndScenario

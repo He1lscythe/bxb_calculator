@@ -1,0 +1,3030 @@
+# E_593_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	黒背景
+Param	character_grayout=false
+FadeIn	black					1
+	■■■■							<dash=2>色、物、人\n世界の、全部				一人称視点でぼんやりしている感じ、不思議さ
+	■■■■							全部……同じ				ぎんいろロストの立ち絵を見せず、画面を揺らすなどで存在を表現
+	■■■■							私はいるけれど、\nどこにもいない……				ぎんいろロストの名前は■■■■と表記
+	■■■■							……そうなったのは、いつから？
+Bgm	絶望
+Se	光1												転送エフェクト
+	イベントスチル459H1		effect_a			1
+	イベントスチル459H2		effect_b			1
+Tween	イベントスチル459H1	RotateBy	z=5 time=100				NoWait
+Tween	イベントスチル459H2	RotateBy	z=-5 time=100				NoWait
+Wait						1.5
+FadeOut	black					1							またたきをさせて
+CharacterOff						0
+Bg	市街地D					0
+	黒背景		エフェクト表			0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+	一人称		エフェクト表2			0							またたき二回
+Wait						3
+FadeIn	black					.5
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						.5
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.3
+Wait						.1
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						.5
+	■■■■							指定座標、到着
+	■■■■							状況、確認……\n厄竜兵装、\n1番から13番、異常なし
+	■■■■							水銀骨格、駆動\n予備行動に移行
+ZoomCamera	SpriteCamera	1.4	-300	250		1						1.5だと一人称フィルタの範囲外に行ってしまう
+Wait						1
+ZoomCamera	SpriteCamera	1.4	300	250		1.5
+Wait						1
+	■■■■							……記録、開始
+FadeOut	black					.2
+ZoomCamera	SpriteCamera	1	0	0		0
+CharacterOff						0
+Bg	市街地D					0
+	黒背景		エフェクト表			0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+	市場のおばちゃん					0
+	一人称		エフェクト表2			0
+Wait						1
+FadeIn	black					.5
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Se	ガヤA
+Wait						.5
+	市場のおばちゃん							それでね、\nうちの旦那が……
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+CharacterOff	市場のおばちゃん					0
+	一人称		エフェクト表2			0
+	勇者A					0
+Wait						.1
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+	勇者A							まったく、\n今日も隊長が怒っていて……
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+CharacterOff	勇者A					0
+	一人称		エフェクト表2			0
+Wait						.1
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+	■■■■							光学迷彩\n『擬似絶対抹消』機能確認\n周囲からの感知、なし					ドラドラ設定より
+	■■■■							対象捜索開始\n魔力波動……検知
+	■■■■							対象との照合中、\n周辺の記録を続行……
+	■■■■							…………
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+Bg	夏空					0
+	一人称		エフェクト表2			0
+Wait						.1
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+	■■■■							空……\n色は……■？
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+ImageEffect	SpriteCamera	GrayScale
+	一人称		エフェクト表2			0
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+	■■■■							いいえ……黒\n違う、あれは……
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+ImageEffectOff	SpriteCamera	GrayScale
+	一人称		エフェクト表2			0
+Wait						.1
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+	■■■■							<dash=2>そう、青\n青い、空
+	■■■■							……鳥
+	■■■■							白い<dash=2>雲
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+Bg	白背景					0
+	一人称		エフェクト表2			0
+Wait						.5
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+	■■■■							あの色は……白
+	■■■■							白い……お花
+	■■■■							白い……お洋服
+	■■■■							真っ白で、綺麗……
+	■■■■							綺麗って……なに？
+FadeOut	white					.2
+Param	character_grayout=true
+Bg	市街地D					0
+CharacterOff						0
+	一人称		エフェクト表2			0
+FadeIn	white					.2
+	街の人							おめでとー！\n幸せになー!!
+	■■■■							幸せ……
+	■■■■							感情の……名前
+	■■■■							名前…………
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+Wait						1
+	一人称		エフェクト表2			0
+CharacterOff	街の人					0
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+	女の子	<Off>						ママ！\n早く早く！
+	女の子	<Off>						……っ、きゃっ!?
+Se	倒れる
+Tween	Graphics	MoveBy	y=9				NoWait
+Wait						.1
+Tween	Graphics	MoveBy	y=-9 time=0.5				NoWait
+Wait						.5
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+Wait						1
+	女の子					0
+	母親		画面外_左			0
+	一人称		エフェクト表2			0
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+Param	character_grayout=true
+	■■■■							……衝突
+	■■■■							……人間の少女、推定五歳\n魔力検知<dash=2>脅威なし
+	女の子							……あれ？
+Tween	母親	MoveTo	x=-200 time=1				NoWait
+	母親							もう！\n前を見ないとダメでしょ、■■■
+	母親							あら？\nでも、何もないわね……
+Tween	女の子	PunchPosition	y=50				NoWait
+	女の子							けど、あったの！\nなにかここにあったの！
+	母親							そんなことより、\n急がないとブーケトスに\n遅れちゃうわよ？
+Tween	女の子	PunchPosition	y=30				NoWait
+	女の子							あ、そうだった！
+	女の子							ママ、あたしね、\n■■■くんのお嫁さんになるの！
+	母親							はいはい、頑張りなさいね
+FadeOut	white					.5
+CharacterOff						0
+	一人称		エフェクト表2			0
+Bg	白背景					0
+FadeIn	white					.5
+	■■■■							…………
+	■■■■							……お嫁さん？
+	■■■■							…………分からないもの
+	■■■■							白い<dash=2>
+CharacterOff
+	一人称		エフェクト表2			0
+Bg	黒背景					0
+StopBgm
+	ドロシー	<Off>						<dash=2>いったい何をしている
+	ドロシー	怒り/フード				1
+	■■■■							…………
+	ドロシー	怒り/フード						いつまで呆けているつもりだ？
+	■■■■							何も問題ない……
+	■■■■							……対象、発見\n速やかに続行、可能
+	ドロシー	怒り/フード						ならばさっさと済ませろ
+	ドロシー	怒り/フード						対象の蹂躙と殲滅\nその命令通りに<dash=2>
+CharacterOff
+	ドロシー	ニヤリ拡大	エフェクト表
+	ドロシー							<dash=2>やれ
+CharacterOff
+	■■■■							…………
+	ぎんいろ=ロスト	本気_無し				1.5		はい					ここでぎんいろロストの姿がぬうっと出る
+Wait						1.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+Wait						.5
+	■■■■							絶望色の災厄<dash=2>起動
+StopBgm
+Wait						.5
+	イベントロゴ593		エフェクト表			3
+Wait						5
+FadeOut	black					1
+Param	character_grayout=true
+Bg	市街地D					0
+CharacterOff						0
+	ぎんいろ	通常2	1_2			0
+	ディーア	笑い2	2_2_b			0
+FadeIn	black					1
+Bgm	平和
+	ディーア	笑い2						今日の任務も無事に終わったな\nありがとう、ぎんいろ
+	ぎんいろ	通常2						マスターの命令だから
+	ぎんいろ	通常2						それに、\nマスターとお出かけできて\n私も嬉しい……
+	ディーア	通常2						ぎんいろ……
+	ディーア	笑い2						ぎんいろも変わったな
+	ぎんいろ	驚き						……そう？
+	ディーア	通常2						ああ、出会った頃は<dash=2>
+Se	回想
+FadeOut	black					.2
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F					0
+	ディーア	汗2	2_2_b			0
+	ぎんいろ	驚き	1_2			0
+FadeIn	black					.2
+	ぎんいろ	驚き						……話？\nそれが、命令なら……
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地D					0
+	ぎんいろ	通常2	1_2			0
+	ディーア	笑い2	2_2_b			0
+FadeIn	black					.2
+	ディーア	笑い2						話をするの、\n得意じゃなかっただろ？
+	ディーア	通常2						けれど最近は\n色々と喋ってくれるようになった
+	ぎんいろ	驚き						……そう、かもしれない
+	ぎんいろ	通常2						……マスターのおかげで\n私は変わってきている
+	ぎんいろ	通常2						……これからもきっと、\nマスターと一緒なら\n私は……変われる
+	ディーア	笑い2						ああ、きっと……
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	笑い2						なあ、ぎんいろ\n少し買い物していかないか？
+	ディーア	通常2						任務の報酬も貰ったし、\nぎんいろが欲しい物とか
+	ぎんいろ	驚き						欲しい物……？\n……それなら、お野菜
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						え!?\n野菜でいいのか？
+	ぎんいろ	通常2						……帰ったらお料理\nマスターに作ってあげたいから
+	ディーア	笑い2						わかった
+	ディーア	通常2						じゃあ、野菜と一緒に\nぎんいろに似合うエプロンも買おう
+	ディーア	笑い2						それで、一緒に料理しようか
+	ぎんいろ	通常2						……楽しみ
+	ディーア	通常2						それじゃあ、\nさっそくお店を<dash=2>
+StopBgm
+Wait						.7
+Se	心拍
+	ディーア	怪しい2						…………？
+	ディーア	驚き2						これは……魔力？
+StopSe
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ぎんいろ	MoveTo	x=0 time=1				NoWait
+ImageEffectOff	SpriteCamera	MotionBlur
+	ぎんいろ	驚き						マスター……!!
+ImageEffectOff	SpriteCamera	MotionBlur
+	ディーア	驚き2						……!?
+FadeOut	white					.2
+CharacterOff						0
+FadeIn	white					.2
+Se	闇3											破壊音
+Se	光3
+Se	火事
+Shake	Graphics	ShakePosition	time=1.5	easeInQuart			NoWait					背景揺らす
+Wait						.5
+	ディーア	<Off>						ぐっ、あぁあああああ!!
+FadeOut	white					1
+Param	character_grayout=false
+Bg	黒背景					0
+CharacterOff						0
+	土煙		エフェクト表			0
+	ディーア	悔しい2	2_2_b			0
+	ぎんいろ	通常2	1_2			0
+Wait						1
+FadeIn						1
+CharacterOff	土煙					1
+Wait						.5
+Param	character_grayout=true
+	ディーア	悔しい2						……ぎんいろ、無事か？
+	ぎんいろ	通常2						……私は、平気\n……マスターは？
+	ディーア	悔しい2						ああ、オレも怪我はない\nぎんいろのおかげだ
+	ディーア	怪しい2						それにしても、いったい……
+	ディーア	驚き2						……っ!?\nこれ、は……!?
+FadeOut	white					.2
+CharacterOff						0
+	                    
+Bg	市街地D(水銀)					0
+FadeIn	white					1
+Bgm	絶望
+	住人	<Off>						ぐっ、うぅぅ……\nからだが、うごかない……
+	女の子	<Off>						いたい、いたいよぉ……!!\nママぁ！ ママぁ!!
+	母親	<Off>						どこ!?\nどこにいるの!! ママはここよ!!
+	住人	<Off>						ごほっごほっ\n息が、いき、が……
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	驚き2				0
+FadeIn	white					.2
+	ディーア	驚き2						これは、水銀に街が飲まれて……？\n水銀、ぎんいろ達と、同じ……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	悔しい2						っ、ぎんいろ！
+	ディーア	本気2						すぐに街の人を助けよう！\n下敷きにされて<dash=2>
+CharacterOff
+StopBgm
+	ぎんいろ	通常2						<dash=2>だめ
+Param	character_grayout=true
+CharacterOff
+	ぎんいろ	驚き	1_2
+	ディーア	通常	2_2_b
+	ディーア	驚き2						……ぎんいろ？
+	ぎんいろ	通常2						今はだめ、マスター<speed=0.5>　　</speed>\n……来る
+StopBgm
+	ディーア	悔しい2						っ!?
+	ディーア	驚き2						この反応は……!!
+	ぎんいろ	通常2						そう\n<dash=2>災厄が、来る
+Se	光3
+FadeOut	white					1.5
+Bgm	魔王バトル
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル59305		エフェクト表			0
+Wait						.5						ちょっと間を開けたい
+FadeIn	white					1.5
+	■■■■							<dash=2>対象補足
+	■■■■							殲銀粒子……散布開始\n厄竜兵装……5番まで<ruby=オープン>開放</ruby>
+	ディーア	<Off>						これが……\n災、厄……？
+	■■■■							<dash=2>殲滅、開始
+Param	character_grayout=true
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	悔しい2	2_2_b
+	ディーア	悔しい2						オレたちを狙っているのか!!
+	ディーア	本気2						迎え撃つぞ、ぎんいろ!!
+	ぎんいろ	通常2						任せて……\nマスターは私が守る
+If	isdebug==true
+CharacterOff
+Jump	*E_593_02
+EndIf
+EndScenario
+
+# E_593_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	市街地D(水銀)
+FadeIn	White					.5
+Wait						.5
+CharacterOff						0							攻撃エフェクトを派手なやつにして、強キャラ感
+Param	character_grayout=false
+Se	スローモーションエンド
+Se	光1
+Se	剣閃
+	斬撃(銀)01		lost1
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(銀)02		lost2
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(銀)03		lost3
+Wait						.15
+Se	光1
+Se	剣閃
+FadeOut						1	NoWait
+	斬撃(銀)04		lost4
+Wait						.15
+Se	光2
+Se	剣閃
+	斬撃(銀)05		lost5
+Wait						.15
+Se	光3
+Se	剣閃
+	斬撃(銀)06		lost6
+Wait						2
+CharacterOff						0
+Param	character_grayout=true
+Bg	市街地D(水銀)					0
+	ぎんいろ	悲しい	1_2			0
+	ディーア	悔しい3	2_2_b			0
+Shake	Graphics	ShakePosition	time=1.5	easeInQuart			NoWait
+FadeIn	white					1
+Wait						1
+	一人称		エフェクト表2
+	ディーア	悔しい3						ぐぅっ……!?
+Shake	ぎんいろ		x=5 time=0.5				NoWait
+	ぎんいろ	悲しい						……っ
+	■■■■							対象の被害、推定7割\n状況有利
+	ディーア	悔しい3						ぐっ、うぅ……
+	ぎんいろ	通常2						……マスター
+	ディーア	本気3						■■、■■……！
+	■■■■							魔剣使い、再起動\n脅威除去
+CharacterOff						0							もっと強敵感を強める
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(銀)		エフェクト裏			0
+Se	剣閃
+	銀_花びら		エフェクト裏2			.5
+Tween	黒背景	MoveBy	y=-3000 time=0.8
+Wait						.3
+Bg	市街地D(水銀)
+ImageEffectOff	SpriteCamera	MotionBlur
+ImageEffectOff	SpriteCamera	Bloom
+Param	character_grayout=true
+CharacterOff						0
+	一人称		エフェクト表2			0
+	ディーア	絶望3						…………っ
+Tween	ディーア	MoveBy	y=-200				NoWait
+Se	倒れる
+Wait						.5
+CharacterOff						.5
+Wait						.3
+	■■■■							魔剣■■■■\n魔剣使い\n共に無力化
+CharacterOff													プルプルさせたい
+	一人称		エフェクト表2
+	ぎんいろ	悲しい	1_2
+	ディーア	悔しい3	2_2_b
+	ディーア	悔しい3						くっ…………!!
+Tween	ぎんいろ	MoveTo	x=0 time=1				NoWait
+	ぎんいろ	悲しい						ます、たー……
+	■■■■							対象の生命反応、微弱\n魔核、損傷
+	■■■■							これより殲滅を<dash=2>
+	ディーア	悔しい3						ぐっ……\nいったい、こいつは？
+	■■■■							<dash=4>訂正
+	■■■■							脅威判定、上昇\n対象二体<dash=4>
+	■■■■							<dash=2>こちらを、視認？
+	■■■■							『擬似絶対抹消』異常<dash=2>無し\n対象からの攻撃<dash=2>無し\n予期せぬ事態
+	■■■■							<dash=4>確実な対処が必要
+	■■■■							<ruby=エンゲージ>接敵</ruby>、開始
+ZoomCamera	SpriteCamera	1.05	0	0		0							一歩前へ
+	ディーア	驚き3						…………え!?
+	■■■■							対象まで5メートル
+	ディーア	驚き3						まさか……
+ZoomCamera	SpriteCamera	1.1	0	0		0							一歩前へ
+	■■■■							3メートル
+	ぎんいろ	通常2						……させない
+ZoomCamera	SpriteCamera	1.15	0	0		0							一歩前へ
+	■■■■							1メートル
+	ディーア	驚き3						お前は<dash=4>
+	ディーア	驚き3						<dash=2>ぎんいろ？
+StopBgm
+ZoomCamera	SpriteCamera	1	0	0		.1
+	■■■■							<dash=4>え
+Bgm	絶望
+Shake	Graphics		x=5 time=0.5				NoWait						動揺で画面を揺らす
+	■■■■							…………ぎん、い、ろ？
+	■■■■							ぎんいろ……
+	■■■■							<dash=4>名前
+	■■■■							誰の？
+	■■■■							……私の？
+	■■■■							……私が、ぎん……いろ……？
+Se	回想
+FadeOut	white					.2
+ZoomCamera	SpriteCamera	1				0							一歩前へ
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場の地下					0
+	ぎんいろ	通常_無し				0
+FadeIn	white					.6
+	ぎんいろ	通常_無し						銀色だから■■■■
+	ぎんいろ	通常_無し						……ありがとう
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+Bg	黒背景					0
+CharacterOff						0
+	                   
+FadeIn	black					.2
+	■■■■							わからない……
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+Bg	荒野					0
+CharacterOff						0
+	ぎんいろ	通常_無し				0
+FadeIn	black					.2
+	ぎんいろ	通常_無し						あなたを守る
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+Bg	黒背景					0
+CharacterOff						0
+	                   
+FadeIn	black					.2
+	■■■■							わからない、わからない……
+FadeOut	black					.5
+ImageEffect	SpriteCamera	Sepia
+Bg	研究所C					0
+CharacterOff						0
+	ぎんいろ	悲しい_無し				0
+FadeIn	black					.5
+	ぎんいろ	悲しい_無し						やめて、奪わないで……
+CharacterOff						0							フィードバック
+	　　　　　　　　　　												ぎんいろ用に背景を調整
+ImageEffectOff	SpriteCamera	GrayScale											キャラクターを乗せる？
+Bg	研究所A_過去
+Wait						.1
+Bg	酒場の地下_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	研究所B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	研究所C_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	廃墟A_過去
+Wait						.1
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	市街地B2_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	戦場跡
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	black					.1
+Bg	水銀の大地
+ImageEffect	SpriteCamera	Sepia
+Wait						1
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	Sepia
+Bg	黒背景
+CharacterOff						0
+	                    
+FadeIn	white					.6
+	■■■■							っ…………!!
+	■■■■							わたし、わたし<dash=4>
+StopBgm
+	■■■■							わたし…………ぎんいろ？
+Se	倒れる
+FadeOut	white					.2
+CharacterOff						0
+	ぎんいろ	通常2	1_2			0
+	ディーア	驚き3	2_2_b			0
+Bg	市街地D(水銀)					0
+FadeIn	white					1
+	ディーア	驚き3						あっ……！
+	ディーア	悔しい3						止まった、のか……？
+	ディーア	驚き3						どう、して……\n名前を、呼んだから？
+	ディーア	本気3						ぎん、いろ……\n大丈夫、か？
+	ぎんいろ	通常2						……損傷甚大\n……これ以上の戦闘継続は不可能
+	ぎんいろ	通常2						でも、魔力結晶体の維持は可能
+	ディーア	怒り3						そうか……危なかったな
+	ぎんいろ	通常2						……マスター、どうする？
+	ディーア	怪しい3						…………
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し						…………うっ
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	悔しい3	2_2_b
+	ディーア	悔しい3						間違いなく、\n倒すチャンスではある……
+	ぎんいろ	通常2						……ええ
+	ディーア	怪しい3						あの力だ\nこの子が目を覚まして\nオレたちが勝てるか……
+	ぎんいろ	通常2						…………
+	ディーア	怒り3						けれど……\n連れて帰ろう
+	ぎんいろ	通常2						……それでいいの？
+	ディーア	怒り3						ああ\n……さっき、この子は
+Se	回想
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ぎんいろ=ロスト	悲しい_無し				0
+FadeIn	black					.2
+	ぎんいろ=ロスト	悲しい_無し						わたし…………ぎんいろ？
+FadeOut	black					.2
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	ぎんいろ	通常2	1_2			0
+	ディーア	怒り3	2_2_b			0
+FadeIn	black					.2
+	ディーア	怒り3						とても、\n悲しそうな顔をしていた
+	ディーア	悔しい3						まだ何もわからないけど\n倒すだけで、\nそれだけで解決するとは思えないんだ
+	ディーア	怒り3						それに、この街も<dash=2>
+FadeOut	white					.5
+CharacterOff						0
+	                    
+FadeIn	white					.5
+Wait						1
+FadeOut	white					.2
+CharacterOff						0
+	ぎんいろ	通常2	1_2			0
+	ディーア	怪しい3	2_2_b			0
+FadeIn	white					.6
+	ディーア	怪しい3						この子を説得したら、\n元に戻せるかもしれない
+	ディーア	怒り3						……だから、\nこの子が目を覚ますのを待とう
+	ぎんいろ	通常2						……ありがとう
+	ディーア	驚き3						えっ……？\nぎんいろがどうして……？
+	ぎんいろ	驚き						……私も、よくわからない
+	ぎんいろ	通常2						けれど……
+	ぎんいろ	通常2						きっと、この子は私だから
+	ぎんいろ	通常2						この子も、ぎんいろ\n……変わってしまった、ぎんいろ
+	ディーア	怒り3						……ああ、そうか
+Se	回想
+FadeOut	black					.2
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ぎんいろ=ロスト	絶望_無し				0
+FadeIn	black					.2
+Wait						1
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ぎんいろ=ロスト	悲しい_拡大_無し	エフェクト表			0
+	                    
+FadeIn	black					.6
+	ディーア	<Off>						この子は本当に\nぎんいろの、ロストなんだな……
+If	isdebug==true
+CharacterOff
+Jump	*E_593_03
+EndIf
+EndScenario
+
+# E_593_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	研究所B_過去
+Param	character_grayout=false
+FadeIn	white					.5
+	■■■■							虚無
+Bg	雪原					0
+	■■■■							空白
+Bg	荒野(雨)					0
+	■■■■							曖昧
+Bg	黒背景					0
+	■■■■							それが、私
+	■■■■							それが、あの人達の望み
+Bg	戦場跡					0
+	■■■■							殲滅
+Bg	廃墟A					0
+	■■■■							蹂躙
+Bg	水銀の大地					0
+	■■■■							災厄
+Bg	黒背景
+	イベントスチル59314		エフェクト表			1
+	■■■■							それが、役目
+	■■■■							それが、あの人達の命令
+FadeOut	black					.2
+CharacterOff						0
+	ぎんいろ=ロスト	本気_無し				0
+Bg	黒背景					0
+FadeIn	black					.2
+	ぎんいろ=ロスト	本気_無し						私は、兵器
+	ぎんいろ=ロスト	本気_無し						感情を切り捨てた兵器……
+	ぎんいろ=ロスト	本気_無し						……けれど、これは
+StopBgm						1
+FadeOut	white					1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	一人称		エフェクト表2			0
+Wait						1
+FadeIn	white					1
+Bgm	穏やか
+	■■■■							明るい……\n温かい……
+	■■■■							柔らかい……\n……これは、毛布？
+	■■■■							どうして？
+	■■■■							状態判断……\n駆動器官に異常\n兵装起動せず
+	■■■■							継戦不能\n原因は不明\n自動修復に<ruby=リソース>魔力</ruby>集中
+ZoomCamera	SpriteCamera	1.5	-350	250		1							周囲を見渡す
+Wait						1							Fadeを入れずに、そのまま視点が奥にいくようなイメージ
+ZoomCamera	SpriteCamera	1.5	350	250		1.5
+Wait						1
+	■■■■							………状況確認
+	■■■■							……ここは？
+FadeOut	black					.2							またたきをさせて
+ZoomCamera	SpriteCamera	1	0	0		0
+CharacterOff						0
+Bg	酒場_宿屋					0
+	黒背景		エフェクト表			0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+	ぎんいろ	通常2				0
+	一人称		エフェクト表2			0
+Wait						1
+FadeIn	black					.5
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						.5
+	ぎんいろ	通常2						……ここは、マスターのいるところ
+	■■■■							…………
+	■■■■							魔剣■■■■
+	■■■■							破壊、対象
+	ぎんいろ	通常2						……私は■■■■
+	■■■■							え？
+	ぎんいろ	通常2						銀色だから、■■■■
+	ぎんいろ	通常2						挨拶は大事だから……\n名前、教えたの
+	■■■■							名前……
+	■■■■							聞こえたのに、聞こえない……
+	■■■■							■■■■……？
+	ぎんいろ	通常2						……違う\n私は■■<dash=2>
+	ぎんいろ	通常2						そう……そうなのね
+	ぎんいろ	通常2						……マスターを呼んでくる\n少し、待っていて……
+Se	走る
+Tween	ぎんいろ	MoveTo	x=800 time=2				NoWait
+Wait						1.5
+	■■■■							■■■■……\n……■■、■、■
+	■■■■							あの子の、名前……
+Param	character_grayout=false
+FadeOut	white					.2
+Bg	白背景					0
+CharacterOff						0
+	ぎんいろ	通常2				0
+	                    
+FadeIn	white					.2
+	■■■■							長い、綺麗……\n銀色の髪……
+	■■■■							銀の、お花……
+	■■■■							白銀の、服……
+StopBgm
+FadeOut	black					.2
+Bg	黒背景					0
+CharacterOff						0
+	                    
+FadeIn	black					.2
+	■■■■							…………私と……ちがう
+FadeOut	black					1
+Param	character_grayout=true
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	black					1
+Bgm	絶望
+	ディーア	悔しい2						……それじゃあ、やっぱり
+CharacterOff
+	ノーネーム	通常	p7b
+	アルギュロス=ぎんいろ	通常	p3
+	アルギュロス=ぎんいろ	通常						ええ、マスターが想像したとおり\nあの子は私でもノーネームでもない
+	ノーネーム	通常						ぎんいろを改造した\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>です
+	アルギュロス=ぎんいろ	通常						あなたに『ぎんいろ』と\n名付けられた魔剣をね……
+CharacterOff
+	ディーア	怒り2						……そうか
+	ディーア	通常2						ありがとうな、\nあの子を診てくれて\nそれに街のことも……
+	ディーア	通常2						まだ水銀に覆われてるけど、\n生き残っていた人は救出できた
+CharacterOff
+	ディーア	通常2	2_2
+	アルギュロス=ぎんいろ	通常	1_2_b
+	アルギュロス=ぎんいろ	通常						でも、問題はここからよ……
+	ディーア	怪しい2						ああ……\nあの子をどうするか\n考えないとな……
+CharacterOff
+	ノーネーム	通常						でしたら……マスターさん、\n端的にあの子の状況を伝えます
+	ノーネーム	通常						あのロストは、長くありません
+CharacterOff
+	ディーア	悔しい2						…………っ
+CharacterOff
+	ノーネーム	通常	p7b
+	アルギュロス=ぎんいろ	通常	p3
+	アルギュロス=ぎんいろ	通常						既に体も精神も崩れかけている\nむしろ、よく維持できている\nと言ったところね
+	ノーネーム	通常						改造だけじゃなく\n長期に渡って酷使された影響でしょう
+FadeOut	black					.2
+Param	character_grayout=false
+Bg	黒背景					0
+CharacterOff						0
+	ぎんいろ=ロスト	悲しい_無し				0
+	                    		1_2
+FadeIn	black					.2
+	アルギュロス=ぎんいろ	<Off>						あと数日も待たずに、\n自壊してもおかしくはないわ
+FadeOut	black					.2
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	驚き2				0
+FadeIn	black					.2
+	ディーア	驚き2						そんな……\nあの子はそれを知っているのか？
+	ディーア	悔しい2						すぐに伝えに……
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2	1_2
+	ノーネーム	通常	2_2
+	ノーネーム	通常						待ってください
+	ディーア	驚き2						まだ、なにかあるのか？
+	ノーネーム	通常						……あの子の発声器官は、\n著しく衰えていました
+	ディーア	悔しい2						なっ！\nそれって……
+	ノーネーム	通常						はい\n長い期間、誰かと話すことも、\nなかったのでしょう
+	ノーネーム	通常						マスターさんが会いに行っても、\n話もできない可能性があります……
+	ディーア	怒り2						<ruby=アネセサリ>魔人機関</ruby>はなんで、\nなんで、そんなことを……っ!!
+CharacterOff
+	アルギュロス=ぎんいろ	通常						これは推測だけれど……
+	アルギュロス=ぎんいろ	通常						私達が兵器だから
+CharacterOff
+	ノーネーム	通常	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						それは、違う……\nみんなは、魔剣はただの兵器じゃない
+	ノーネーム	通常						はい\n心も、名前もある
+	ノーネーム	通常						けれど、魔剣は兵器というのも\nまた真実です
+FadeOut	white					.2
+Bg	黒背景					0
+CharacterOff						0
+	ノーネーム	通常	p7b			0
+	アルギュロス=ぎんいろ	通常	p3			0
+FadeIn	white					.2
+	アルギュロス=ぎんいろ	通常						私の根本には災厄の魔竜
+	ノーネーム	通常						そして、私の本質は名無しの災厄
+	アルギュロス=ぎんいろ	通常						その力だけを用いるなら\n心も、感情も不要
+FadeOut	white					.2
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	white					.2
+	ディーア	悔しい2						じゃああの子は、\nあのぎんいろは……
+CharacterOff
+	ノーネーム	通常						必要のない心を、感情を\n削ぎ落とされた兵器
+	ノーネーム	通常						それが、あの子です
+CharacterOff
+	ディーア	悔しい2						っ……!!
+Se	回想
+FadeOut	black					.2
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A
+CharacterOff						0
+	ディーア	笑い2	2_2_b			0
+	ぎんいろ	通常2	1_2			0
+	                    		1_3
+FadeIn	black					.2
+Wait						1
+FadeOut	black					.2
+Param	character_grayout=true
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	悔しい2				0
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	black					.2
+	ディーア	悔しい2						ぎんいろだったんだろ……？\nあの子も、ぎんいろだったんだ……
+	ディーア	怒り2						オレは知ってる……\nぎんいろが名前を呼ばれる時に\n嬉しそうにしてくれたのを！
+	ディーア	怒り2						少しずつ心を開いて\nオレを信頼してくれたのを!!
+	ディーア	悔しい2						きっと、\nあの子だって同じだ……！
+	ディーア	怒り2						あの子のマスターと……\n別のオレと、\nそうやって仲間になったんだ！
+	ディーア	悔しい2						なのに、\nそれを全部……奪うなんて
+CharacterOff
+	ノーネーム	通常	p7b
+	アルギュロス=ぎんいろ	通常	p3
+	アルギュロス=ぎんいろ	通常						残酷なこと\nでも、憤るだけでは解決しないわ
+	ノーネーム	通常						もう元には戻らないかもしれません\n目覚めれば暴走の可能性も高い
+	アルギュロス=ぎんいろ	通常						マスターはどうしたいの？
+CharacterOff
+	ディーア	悔しい2						でも……
+	ディーア	本気2						そんな話を聞いて、\nこのまま見過ごしていられない！
+	ディーア	怒り2						ぎんいろのマスターとして\nオレは、あの子を助けたい……！
+CharacterOff
+	ノーネーム	通常	p7b
+	アルギュロス=ぎんいろ	通常	p3
+	アルギュロス=ぎんいろ	通常						可能性は低いけれど……
+	アルギュロス=ぎんいろ	通常						マスターなら\nあの子を救えるかもしれないわね
+	アルギュロス=ぎんいろ	通常						あの子にぎんいろと名付けた、\nあなたなら
+	アルギュロス=ぎんいろ	通常						……一つ、忘れないで
+	ノーネーム	通常						あの子と会う時は、\nぎんいろを傍に置いてください
+	ノーネーム	通常						ロストのぎんいろが暴走した時、\n止められるのは……
+	アルギュロス=ぎんいろ	通常						きっと、ぎんいろだけ
+	ノーネーム	通常						ぎんいろは、\n私達の誰よりも強い子ですから
+StopBgm
+CharacterOff
+	ディーア	驚き2						えっ!?\nそれは、どういう……
+CharacterOff
+	ぎんいろ	通常2	画面外_左
+Se	走る
+Tween	ぎんいろ	MoveTo	x=0 time=2				NoWait
+Wait						1
+	ぎんいろ	通常2						……マスター
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	通常2	2_2_b
+	ディーア	通常2						あ、ぎんいろ！\n……あの子の様子は？
+	ぎんいろ	通常2						……目を覚ました\nだから、呼びに来たの
+	ディーア	通常2						そうか、ありがとう
+CharacterOff
+	ノーネーム	通常	p7b
+	アルギュロス=ぎんいろ	通常	p3
+	アルギュロス=ぎんいろ	通常						行ってきなさい\n……でも、油断はしないようにね
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	怒り2	2_2_b
+	ディーア	怒り2						……ああ、わかった
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.2
+Bg	酒場_宿屋					0
+CharacterOff						0
+	ぎんいろ=ロスト	悲しい_無し	p7b			0
+	ディーア	通常2	p3			0
+Wait						.2
+FadeIn	black					.3
+Bgm	穏やか
+	ディーア	通常2						目が覚めて良かった……\n調子はどうだ？
+	ぎんいろ=ロスト	悲しい_無し						……不調\n四肢、反応、に異常
+	ディーア	悔しい2						……っ
+	ディーア	悔しい2						（やっぱり、言葉が……）
+	ディーア	通常2						……大丈夫、ゆっくり休んでくれ\nオレたちは\n君に攻撃するつもりはないから
+	ぎんいろ=ロスト	本気_無し						…………な、ぜ？
+	ぎんいろ=ロスト	本気_無し						私……命令\n■■■■の破、壊……
+	ディーア	通常2						……そうかもしれないけど、\nオレは君と戦いたくないんだ
+	ぎんいろ=ロスト	本気_無し						……理解……不能
+	ディーア	通常2						今はそれでもいい\nオレが戦いを望んでいないって\n分かってくれれば
+	ぎんいろ=ロスト	本気_無し						…………そ、う
+	ぎんいろ=ロスト	悲しい_無し						修復……優先……する
+	ディーア	怒り2						ああ…………
+Tween	ディーア	MoveBy	x=10				NoWait
+	ディーア	通常2						オレは<param=name>\n君の名前は？\n……なんて呼べばいい？
+	ぎんいろ=ロスト	驚き_無し						……名、前？
+	ディーア	通常2						そう、君の名前だ
+	ぎんいろ=ロスト	本気_無し						名前…………ない
+	ディーア	驚き2						……え？
+	ぎんいろ=ロスト	悲しい_無し						誰も、呼ばない
+	ディーア	驚き2						いや、そんなこと……！\n……誰かに、\n名前を呼ばれるくらいあるだろ？
+	ぎんいろ=ロスト	悲しい_無し						誰も、私を、認識しない
+	ディーア	悔しい2						けど……
+	ぎんいろ=ロスト	驚き_無し						……あっ
+	ぎんいろ=ロスト	本気_無し						少し、ある\n呼ばれたこと……
+	ディーア	驚き2						……っ!!
+Tween	ディーア	MoveBy	x=30				NoWait
+	ディーア	通常2						それって、ぎん<dash=2>
+StopBgm
+CharacterOff
+	ぎんいろ=ロスト	本気_無し						絶望色の、災厄
+Bgm	絶望
+CharacterOff
+	ディーア	悔しい2						……っ
+CharacterOff
+	ぎんいろ=ロスト	本気_無し						……兵器\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>
+	ぎんいろ=ロスト	本気_無し						……それから<ruby=LS_No.13179>管理番号</ruby>\nあと、は……化け物<dash=2>
+CharacterOff
+	ぎんいろ=ロスト	本気_無し	p7b
+	ディーア	怒り2	p3
+	ディーア	本気2						……違うっ！
+	ぎんいろ=ロスト	驚き_無し						なに、が……？
+	ディーア	怒り2						……それは、\n君の名前じゃない\nただ、そう呼ばれただけだ
+	ぎんいろ=ロスト	悲しい_無し						……知らない\n私、名前、わから、ない
+	ディーア	悔しい2						……君には\nちゃんと名前があるんだ
+	ディーア	悔しい2						オレが、君のマスターが\nつけた名前が……
+CharacterOff
+	ぎんいろ	驚き						マスター、待って……
+CharacterOff
+	ディーア	本気2						君は、君の名前は<dash=2>
+CharacterOff
+	ぎんいろ	驚き						それは、ダメ……！
+CharacterOff
+	ぎんいろ=ロスト
+	ディーア
+	ディーア	悔しい2						<dash=2>『ぎんいろ』
+StopBgm
+CharacterOff
+	ぎんいろ=ロスト	絶望_無し
+Shake	ぎんいろ=ロスト		x=1 time=0.5				NoWait
+	ぎんいろ=ロスト	絶望_無し						っ……!!
+CharacterOff						0							攻撃エフェクト
+Param	character_grayout=false
+FadeOut						2	NoWait
+Se	スローモーションエンド
+Se	光1
+Se	剣閃
+	斬撃(銀)01		lost1
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(銀)02		lost2
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(銀)03		lost3
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(銀)04		lost4
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(銀)05		lost5
+Wait						.15
+Se	光2
+Se	剣閃
+	斬撃(銀)06		lost6
+Se	光3
+Wait						2
+CharacterOff						0
+Bg	市街地D					0
+	ぎんいろ	通常2	画面外_右			0
+	ディーア	悔しい2	画面外_右_b			0
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ディーア	MoveTo	x=90 time=2				NoWait
+Tween	ぎんいろ	MoveTo	x=-20 time=2				NoWait
+Se	火事
+FadeIn	white					.5
+	土煙		エフェクト表			1
+Wait						.8
+CharacterOff	土煙		エフェクト表			.5
+Wait						.8
+Param	character_grayout=true
+StopSe
+	ディーア	悔しい2						…………ぐっ!?
+	ぎんいろ	通常2						マスター、気をつけて
+	ディーア	悔しい2						ぎんいろ……!?\n今、外にはじき出されて……
+	ディーア	驚き2						っ、あの子は!?
+	ぎんいろ	通常2						もうダメなの……
+	ぎんいろ	通常2						あの子をもう……\nぎんいろと呼んではダメ
+Bgm	緊迫
+ImageEffectOff	SpriteCamera	MotionBlur
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+	ぎんいろ=ロスト	悲しい_無し				0
+FadeIn	white					.2
+	ぎんいろ=ロスト	悲しい_無し						うぅ……あぁ……
+	ぎんいろ=ロスト	悲しい_無し						あぁああ……
+	ぎんいろ=ロスト	絶望_無し						あぁあああああああああああああ!!
+Se	闇3
+	オーラ青		エフェクト表			1
+Wait						1.5
+Param	character_grayout=true
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	驚き2	2_2_b
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						っ……!?\nあの時も、名前呼んでから……
+	ディーア	悔しい2						なんで、それだけで……
+	ぎんいろ	悲しい						……失くしてしまったから
+	ぎんいろ	悲しい						……きっと、あの子は失くした\nマスターがくれた大切なもの
+	ぎんいろ	悲しい						名前を
+	ぎんいろ	悲しい						『ぎんいろ』を
+	ディーア	絶望2						……そんな\nなんで……そこまでっ!!
+Param	character_grayout=false
+CharacterOff
+	オーラ青		エフェクト表
+	ぎんいろ=ロスト	絶望_無し
+	ぎんいろ=ロスト	絶望_無し						アァアアアア……!！
+Param	character_grayout=true
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	悔しい2	2_2_b
+	ディーア	悔しい2						くっ……!!
+CharacterOff
+	アルギュロス=ぎんいろ	通常	画面外_右_b
+	ノーネーム	通常	画面外_右
+Tween	アルギュロス=ぎんいろ	MoveTo	x=-150 time=2				NoWait
+Tween	ノーネーム	MoveTo	x=150 time=1				NoWait
+Wait						.5
+	ノーネーム							マスターさん……！
+	アルギュロス=ぎんいろ							大丈夫？
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	悔しい2	2_2_b
+	ディーア	悔しい2						……ああ、大丈夫だ
+CharacterOff
+	ノーネーム	通常	p7b
+	アルギュロス=ぎんいろ	通常	p3
+	アルギュロス=ぎんいろ	通常						暴走してしまったのね……\nマスター、どうするの？
+CharacterOff
+	ディーア	怒り2	2_2_b
+	ぎんいろ	通常2	1_2
+	ディーア	怒り2						……やることはもう決めている
+	ディーア	悔しい2						みんな頼む、協力してくれ\nあの子を助けるために
+	ディーア	本気2						まずは、暴走を止めるんだ！
+	ぎんいろ	通常2						了解……\n鎮圧、開始……
+If	isdebug==true
+CharacterOff
+Jump	*E_593_04
+EndIf
+EndScenario
+
+# E_593_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+Param	character_grayout=false
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	水銀の大地
+	ぎんいろ=ロスト	絶望_無し
+FadeIn	White					.5
+	ぎんいろ=ロスト	絶望_無し						……■■■■
+	ぎんいろ=ロスト	絶望_無し						ぎ■い■
+Bg	黒背景
+CharacterOff
+	■■■■							それが、私の名前？
+	■■■■							私を、確かにするもの
+FadeOut	black					.2
+	ぎんいろ	通常2				0
+	                    		2_2
+FadeIn	black					.2
+	■■■■							形をくれる、もの
+FadeOut	black					.2
+CharacterOff						0
+FadeIn	black					.2
+	■■■■							だったら\nどうして、こんなに苦しいの？
+	■■■■							どうして、こんなに怖いの？
+	■■■■							私は、名前が……
+	■■■■							■■■■が怖いの？
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場の地下					0
+	ぎんいろ	通常_無し				0
+FadeIn	black					.2
+	ぎんいろ	通常_無し						銀色だから■■■■
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia				0
+Bg	黒背景					0
+CharacterOff						0
+	ぎんいろ=ロスト	絶望_無し				0
+FadeIn	black					.2
+	ぎんいろ=ロスト	絶望_無し						……あんなに■せだったのに
+FadeOut	white					1
+Bg	市街地D					0
+CharacterOff						0
+	オーラ青		エフェクト表			0
+	ぎんいろ=ロスト	悲しい_無し				0
+Wait						1
+FadeIn	white					1
+CharacterOff	オーラ青					.5
+Wait						.5
+Tween	ぎんいろ=ロスト	MoveBy	y=-200				NoWait
+Se	倒れる
+Wait						.5
+CharacterOff						.5
+Wait						.3
+Param	character_grayout=true
+CharacterOff
+	アルギュロス=ぎんいろ	通常	1_2_b
+	ディーア	悔しい2	2_2
+	ディーア	悔しい2						はぁ、はぁ……っ\nようやく、落ち着いてくれたな
+	アルギュロス=ぎんいろ	通常						運が良かったわね\n前の暴走で弱っていたから\nこの程度で済んだ
+	アルギュロス=ぎんいろ	通常						でも、気をつけて\nこんな暴走が続いたら、\nすぐに体が崩壊する
+	ディーア	怒り2						すまない
+	ディーア	悔しい2						名前を思い出したら……\nぎんいろだったことも\n思い出してくれると思って……
+CharacterOff
+	ノーネーム	通常						けれど、\n上手くいかなかったんですね
+Param	character_grayout=false
+CharacterOff
+	ディーア	悔しい2						ああ……\n何か方法を考えないと……
+	黒グラデーション		エフェクト裏
+	ディーア	怒り2						（……だが、どうすればいい？）
+	ディーア	怒り2						（この子は何も覚えていない\n　マスターのことも、名前さえ）
+	ディーア	悔しい2						（次に暴走したら、\n　被害はこれだけじゃ\n　済まないかもかもしれない）
+	ディーア	悔しい2						（でも、それでもオレは……）
+StopBgm
+CharacterOff
+	ぎんいろ	通常2						……マスター
+CharacterOff
+	ディーア	驚き2						……ぎんいろ？
+Bgm	神秘
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	2_2_b
+	ぎんいろ	通常2	1_2
+	ぎんいろ	通常2						……お願い\nこの子を助けて
+	ディーア	驚き2						ぎんいろ……
+	ぎんいろ	悲しい						この子は、\n悲しんでいた\n苦しんでいた……
+	ぎんいろ	悲しい						大切なものを失くして……
+	ぎんいろ	通常2						苦しみ……私にも分かる
+	ぎんいろ	通常2						マスターがくれた贈り物
+	ぎんいろ	通常2						『ぎんいろ』な私を\n失くしたくないから……
+	ぎんいろ	通常2						だから……
+	ディーア	怒り2						……ああ、そうだな
+	ディーア	通常2						ぎんいろがそこまで\n想っているなら、\n諦めたらダメだよな……
+	ディーア	通常2						マスターとして、約束する\nぎんいろ、一緒にこの子を助けよう
+	ぎんいろ	通常2						うん、約束……
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Wait						1
+Bg	市街地D					0
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+FadeIn	black					.3
+	ドロシー	<Off>						………………
+	ドロシー	<Off>						……ふん、茶番だな
+If	isdebug==true
+CharacterOff
+Jump	*E_593_05
+EndIf
+EndScenario
+
+# E_593_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	酒場_宿屋
+	黒背景					0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+	一人称		エフェクト表2			0
+	ディーア	笑い2				0
+FadeIn	black					.5
+CharacterOff	黒背景					3
+Tween	瞬きA	MoveTo	y=1500 time=12	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=12	easeOutCirc			NoWait
+Wait						1
+	ディーア	笑い2						おはよう
+	ディーア	笑い2						いい天気だから、窓を開けておくよ\n風が気持ちいいんだ
+	■■■■							行動停止から、数日
+	■■■■							人、魔剣使い、攻撃対象\n……マスター
+	■■■■							毎日、魔剣と一緒に来て\n私に笑顔を見せる\n……優しく声をかける
+	■■■■							……他の人が、しないことを\nこの人は、する
+	■■■■							この笑顔……どこかで、見た？
+	■■■■							記録、検索開始\n<dash=2>該当、なし
+	■■■■							でも…………知っている
+	瞬きA		blink_a2			0							瞬きをしている間に、GrayScaleで背景を白黒に
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+	ディーア	通常2	2_2_b			0
+	ぎんいろ	通常2	1_2			0
+	一人称		エフェクト表2			0
+Wait						.2
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+Param	character_grayout=true
+	ぎんいろ	通常2						これ、サンドイッチ\n作ってみた……
+	ディーア	笑い2						すごいな、■■■■！\n……うん、美味しいよ！
+	ぎんいろ	通常2						……ありがとう
+	ぎんいろ	通常2						……あなたも、食べて
+	■■■■							"食べる"<dash=2>栄養物の摂取\n修復に必要
+	■■■■							味覚に刺激\nこれは、おい、しい？
+	■■■■							……お料理\n食材を調理すること
+	■■■■							私は……知ってる気がする
+	ディーア	通常2						……君もやってみないか？\n簡単に作れるものもあるんだ\nおにぎりとか！
+	■■■■							おに、ぎり……？\nできる、の？
+	ぎんいろ	通常2						あなたにも、できる
+	ぎんいろ	通常2						でも、これだけは覚えておいて\n……おにぎりは、塩加減が大事
+	■■■■							しお、かげん？\n……それはわからない
+	瞬きA		blink_a2			0							瞬きをしている間に、GrayScaleで背景を白黒に
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+Bg	酒場_宿屋					0
+	ディーア	笑い2	2_2_b			0
+	ぎんいろ	通常2	1_2			0
+	一人称		エフェクト表2			0
+Wait						.2
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+	ディーア	笑い2						今日は花を持ってきたんだ\nここに飾っておくよ
+	■■■■							……白い、花
+Se	回想
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地D					0
+	一人称		エフェクト表2			0
+FadeIn	black					.2
+	■■■■							街で見た、きれいなもの
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場_宿屋					0
+	ディーア	笑い2	2_2_b			0
+	ぎんいろ	通常2	1_2			0
+	一人称		エフェクト表2			0
+FadeIn	black					.2
+	■■■■							あれは、そう\n白いお洋服……
+	ぎんいろ	通常2						お花、私は好き……\nあなたは？
+	■■■■							わから、ない\nけれど……
+FadeOut	black					.2
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	                    
+FadeIn	black					.2
+	■■■■							目は離せない
+CharacterOff
+	ディーア	笑い2	2_2_b			1
+	ぎんいろ	通常2	1_2			1
+	■■■■	通常_無し						あの日から、\n彼らが私にすること
+	■■■■	通常_無し						誰も認識しなかった私に……\n絶望色の災厄に……
+	■■■■	通常_無し						彼らは笑顔をくれる\n触れてくれる
+	■■■■	通常_無し						胸に熱がともる
+CharacterOff
+	ぎんいろ=ロスト	本気_無し						私はどこにもいない\n……誰でもない
+	ぎんいろ=ロスト	本気_無し						名前のない災厄だから……
+	ぎんいろ=ロスト	本気_無し						名前を失くした絶望だから……
+	ぎんいろ=ロスト	本気_無し						そのはずなのに……
+StopBgm						1
+FadeOut	black					1
+Bg	市街地D					0
+CharacterOff						0
+	ぎんいろ=ロスト	本気_無し	p7b			0
+	ディーア	通常2	p3			0
+Wait						1
+Param	character_grayout=true
+FadeIn	black					1
+Bgm	穏やか
+	ディーア	通常2						ここにいたのか！\n急にいなくなったから探したんだ
+	ぎんいろ=ロスト	本気_無し						……私を？
+	ディーア	笑い2						でも、安心した\n歩けるようになったんだな
+	ぎんいろ=ロスト	本気_無し						歩行、可能\n任務にも戻れる……
+	ディーア	通常2						そうか……
+	ぎんいろ=ロスト	本気_無し						あの魔剣を破壊することが、命令\n邪魔するなら、あなたも対象……
+	ぎんいろ=ロスト	悲しい_無し						……でも\n……マスター
+	ディーア	驚き2						っ!?\n今、オレのこと……
+	ぎんいろ=ロスト	悲しい_無し						そう、マスター……\nあの子が、呼んでいた名前
+CharacterOff
+	ぎんいろ=ロスト	本気_無し						でも、それだけ、じゃない
+	ぎんいろ=ロスト	本気_無し						"マスター"
+	ぎんいろ=ロスト	通常_無し						不思議……
+	ぎんいろ=ロスト	通常_無し						発声すると\nここが……胸部が熱くなる
+	ぎんいろ=ロスト	通常_無し						きっと、私は\nこの響きを知っている……
+	ぎんいろ=ロスト	悲しい_無し						状態の異常、兵器として欠陥……
+	ぎんいろ=ロスト	悲しい_無し						修正が必要なのに、\n修正、したくない……
+	ぎんいろ=ロスト	悲しい_無し						どうして？
+StopBgm
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し	p7b
+	ディーア	通常2	p3
+	ディーア	通常2						……それは
+Bgm	凱旋
+	ディーア	通常2						……おかしなことじゃない\n君も、きっと知っているんだ
+	ディーア	通常2						まだ思い出せなくても、\nきっと取り戻したがっているんだ
+	ぎんいろ=ロスト	悲しい_無し						……昔の、私を？
+	ディーア	笑い2						ああ、\nオレは、君と似た子を知ってる
+Se	回想
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F					0
+CharacterOff						0
+	ぎんいろ	通常2				0
+FadeIn	black					.2
+	ぎんいろ	通常2						マスターの、言うとおりに……
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+Bg	市街地D					0
+CharacterOff						0
+	ぎんいろ=ロスト	悲しい_無し	p7b			0
+	ディーア	笑い2	p3			0
+FadeIn	black					.2
+	ディーア	通常2						最初は、話をするのも苦手で、\n知らないことだらけで
+	ディーア	通常2						けど、名前を大切にしてくれて\nだんだん、変わっていった
+	ディーア	笑い2						今は仲間と、大切なものに囲まれて\n幸せそうに日々を送っている
+	ぎんいろ=ロスト	本気_無し						……その子は変われた\nそういう、こと？
+	ぎんいろ=ロスト	本気_無し						私にもそれができる、と？
+	ディーア	通常2						ああ、きっと
+	ぎんいろ=ロスト	本気_無し						……名前、大切な、もの
+	ぎんいろ=ロスト	本気_無し						それが本当なら……
+	ぎんいろ=ロスト	通常_無し						……少し、覚えている\nマスターを見ると、思い出すこと
+	ぎんいろ=ロスト	通常_無し						この温かさも……？
+	ディーア	笑い2						大丈夫、きっとまた\n昔のように<dash=2>
+StopBgm
+Param	character_grayout=false
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+	ドロシー	<Off>						<dash=2>戻れるわけがないだろう
+Bgm	絶望
+Param	character_grayout=true
+CharacterOff
+Param	character_grayout=true
+	ぎんいろ=ロスト	驚き_無し	p7b
+	ディーア	驚き2	p3
+	ディーア							っ!? ……お前は
+	ぎんいろ=ロスト							あな、た…………
+CharacterOff
+	ドロシー	ニヤリ拡大	エフェクト表					仕事の時間だ『LS_No.13179』
+If	isdebug==true
+CharacterOff
+Jump	*E_593_06
+EndIf
+EndScenario
+
+# E_593_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	市街地D
+	ぎんいろ=ロスト	驚き_無し	p7b
+	ディーア	悔しい2	p3
+FadeIn	black					.5
+	ディーア	悔しい2						なぜ、ここへ……！
+CharacterOff
+	ドロシー	通常						以前と同じだ\nそこの兵器の監視役\nそして、面白くもない後始末だよ
+CharacterOff
+	ディーア	悔しい2	p3
+	ぎんいろ=ロスト	悲しい_無し	p7b
+	ぎんいろ=ロスト	悲しい_無し						ぅう……
+CharacterOff
+	ドロシー	通常						感情も見せず、\n余計な口一つも開かず、\n命じれば目標を確実に殲滅し尽くす
+	ドロシー	通常						そのような\n理想の兵器になったと、\n聞いていたのだがな……
+	ドロシー	ニヤリ						蓋を開ければ、\n目標は仕留め損ね、情けを受け\n挙げ句、元に戻りたい？
+	ドロシー	ニヤリ						……上の評価も当てにならないな
+	ドロシー	怒り						見世物にしても\n出来が悪すぎてな、\n我慢できずに飛び出してしまったよ
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し	p7b
+	ディーア	本気2	p3
+	ディーア	本気2						ふざけるなよ！\nお前らは奪っただけだ！
+	ディーア	本気2						この子から心を感情を、名前さえ！\nそうして、この子を苦しめた！
+CharacterOff
+	ドロシー	ニヤリ						笑わせる\n元々その名は\n伝承に由来するものでもない
+	ドロシー	ニヤリ						ペットのように、\n勝手にお前達がつけた無意味なものだ
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し	p7b
+	ディーア	本気2	p3
+	ディーア	本気2						違う！
+CharacterOff
+	ドロシー	通常						違わないさ\nそして災厄の力に\n心を芽生えさせた					ぎんいろとロストらを含めた言い回し
+	ドロシー	ニヤリ						その結果はどうなると思う？
+CharacterOff						0							攻撃エフェクト
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+CharacterOff						0							迎撃エフェクト
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(銀)		エフェクト裏			0
+Se	剣閃
+Se	ジャストガード
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	MotionBlur
+ImageEffectOff	SpriteCamera	Bloom
+Bg	市街地D					0
+CharacterOff						0
+	土煙		エフェクト表			0
+	ディーア	怒り2	2_2_b			0
+	ぎんいろ	通常2	1_1			0
+FadeIn	black					.2
+CharacterOff	土煙					1.5
+Wait						1
+Param	character_grayout=true
+	ぎんいろ	通常2						……敵性反応\nマスター、大丈夫？
+	ディーア	怒り2						ありがとう、ぎんいろ
+	ぎんいろ	通常2						……あの人は？
+	ディーア	怒り2						ドロシー\nあの子を改造した一員だ……
+CharacterOff
+	ドロシー	ニヤリ						マスターを助けるために、か
+	ドロシー	通常						おい、魔剣ぎんいろ\nなぜお前は命令もなしに飛び出した？
+CharacterOff
+	ディーア	怒り2	2_2_b
+	ぎんいろ	通常2	1_2
+	ぎんいろ	通常2						……あたりまえ\nマスターを守るためだから
+CharacterOff
+	ドロシー	ニヤリ						くくく……
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	怒り2	2_2_b
+	ディーア							なにがおかしい……
+CharacterOff
+	ドロシー	通常						世界すら破壊しうる力が、\n自分の心で動いているんだぞ？
+	ドロシー	ニヤリ						お前こそ、\nそれに何の危機感も抱かないのか？
+	ドロシー	通常						<dash=2>兵器に感情など必要ない
+	ドロシー	通常						使い手の意に反して\n動く兵器など、ただの欠陥品だ
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	怒り2	2_2_b
+	ディーア	本気2						そんなことはない！\n魔剣に心があるから、\nただの兵器でないから！					議論を修正する必要あり
+	ディーア	本気2						だからこそ、理解できる！\n信頼できる！ 強くなれる！
+	ディーア	怒り2						お前はただ、身勝手に\n力を振るいたいだけだ……
+CharacterOff
+	ドロシー	通常						ならば、お前は魔剣を\n完全に制御できるとでも？
+	ドロシー	ニヤリ						それなら、\nこの兵器については\nどう説明するつもりだ？
+	ドロシー	通常						<ruby=ぎんいろ>絶望色の災厄</ruby>が、\n一体誰の魔剣だったのか\n……それを知らない貴様ではあるまい
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	怒り2	2_2_b
+	ディーア	悔しい2						……それは
+CharacterOff
+	ドロシー	通常						理解しただろう\nこれは貴様の自惚れが招いた結果だ
+StopBgm
+	ドロシー	通常						さあ、絶望色の災厄\n……命令を果たせ
+Bgm	緊迫
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し
+Tween	ぎんいろ=ロスト	PunchPosition	y=10				NoWait
+	ぎんいろ=ロスト	悲しい_無し						…………っ！
+	ぎんいろ=ロスト	悲しい_無し						めい、れい……\nこの人を、魔剣を、こわ、す……
+CharacterOff
+	ドロシー	ニヤリ						どうした、命令だ
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し
+Shake	ぎんいろ=ロスト		x=1 time=2				NoWait
+	ぎんいろ=ロスト	悲しい_無し						う、うぅ……
+CharacterOff
+	ディーア	悔しい2	2_2_b
+	ぎんいろ	通常2	1_2
+	ぎんいろ	通常2						…………
+	ディーア	悔しい2						ダメだ！\nそんな命令、聞かなくていい！
+	ディーア	本気2						思い出したんだろ？\n昔のことを！\nマスターといた時のことを！
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し						……ます、たー
+CharacterOff
+	ディーア	本気2						きっと、今から取り戻せる！\n思い出も、名前も！ 全部!!
+	ディーア	本気2						だから、オレと……！
+StopBgm
+CharacterOff
+	ドロシー	通常						なんだ、\n名前を取り戻したいのか？
+	ドロシー	ニヤリ						だったら返してやろう
+CharacterOff
+	ぎんいろ	驚き	1_2
+	ディーア	驚き2	2_2_b
+	ディーア	驚き2						え……？
+CharacterOff
+	ドロシー	ニヤリ						命令だ\n思い出せ『LS_No.13179』
+CharacterOff
+Param	character_grayout=false
+	ぎんいろ=ロスト	悲しい_無し						……うぅっ!?
+Bgm	絶望
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ぎんいろ=ロスト	絶望_無し						いや、いやあぁあああああああ!?
+Param	character_grayout=true
+CharacterOff
+	ぎんいろ	驚き	1_2
+	ディーア	悔しい2	2_2_b
+	ディーア	悔しい2						お前、いったい何を……!!
+CharacterOff
+	ドロシー	ニヤリ						お前の望み通りにしただけだ
+	ドロシー	ニヤリ						まさか、記憶が戻った程度で\n解決するとでも思っていたのか？
+CharacterOff
+	ディーア	悔しい2	2_2_b
+	ぎんいろ	通常2	1_2
+	ぎんいろ	通常2						……そういう、ことなのね
+	ディーア	驚き2						ぎんいろ？
+	ぎんいろ	通常2						……名前がなくなれば、\n私達は純粋な災厄に戻っていく
+	ぎんいろ	通常2						けれど……あの子は\n過去の記憶を思い出そうとしていた
+	ぎんいろ	通常2						……失くしたけれど\n奪われていない
+CharacterOff
+	ドロシー	ニヤリ						その魔剣の言う通り、\n私達はこいつの名を奪っていない
+	ドロシー	ニヤリ						こいつはその名を自分で封じた\nもっとも、\nそうするようには仕向けたが……
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	悔しい2	2_2_b
+	ディーア	悔しい2						仕向ける、だと……!?
+CharacterOff
+	ドロシー	ニヤリ						なあ『LS_No.13179』\n全て思い出せ
+	ドロシー	ニヤリ						苦しかっただろう？\n誰にも名前を呼ばれないのは
+Param	character_grayout=false
+CharacterOff
+	オーラ青		エフェクト表
+	ぎんいろ=ロスト	絶望_無し
+	ぎんいろ=ロスト	絶望_無し						あ、ぁああ……
+Se	回想
+FadeOut	white					.2
+Param	character_grayout=true
+Bg	研究所B					0
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ぎんいろ=ロスト	絶望_無し	3_3_b			0
+	ドロシー	通常	1_3			0
+FadeIn	white					.6
+	ドロシー	通常						立て『LS_No.13179』
+	ぎんいろ=ロスト	絶望_無し						ちがう……私は、ぎんいろ
+FadeOut	black					.2
+CharacterOff						0
+	ぎんいろ=ロスト	悲しい_無し	3_3_b			0
+	研究員		1_3			0
+FadeIn	black					.2
+	研究員							被検体、反応良好
+	ぎんいろ=ロスト	悲しい_無し						私、そんな名前じゃ、ない……
+FadeOut	black					.2
+CharacterOff						0
+	ぎんいろ=ロスト	絶望_無し	3_3_b			0
+	ドロシー	通常	1_3			0
+FadeIn	black					.2
+	ドロシー	通常						絶望色の災厄、か
+	ドロシー	ニヤリ						いい名前じゃないか\n全てを絶望に染め上げる兵器として
+	ぎんいろ=ロスト	絶望_無し						ぎんいろ……\nそれがマスターのくれた名前……
+	ドロシー	ニヤリ						そのマスターは、どこにいる？
+	ドロシー	ニヤリ						誰がお前の名前を呼ぶ？
+FadeOut	black					.2
+Bg	研究所C					0
+CharacterOff						0
+	ドロシー	通常	1_3			0
+	ぎんいろ=ロスト	絶望_無し	3_3_b			0
+FadeIn	black					.2
+	ぎんいろ=ロスト	絶望_無し						ぎんいろ……ぎんいろ\n……ぎんいろ……ぎんいろ
+	ぎんいろ=ロスト	絶望_無し						ぎんいろ、ぎんいろ、\nぎんいろ……ぎん、いろ……
+	ドロシー	ニヤリ						いつまでもブツブツと……
+	ぎんいろ=ロスト	悲しい_無し						どうして……\n誰も……呼んでくれないの？
+	ドロシー	ニヤリ						呼ぶわけがない
+	ドロシー	ニヤリ						お前はロストになった\nかつてのお前は\nもう、どこにもいない
+FadeOut	white					1
+Param	character_grayout=false
+ImageEffectOff	SpriteCamera	Sepia
+Bg	白背景					0
+CharacterOff						0
+	イベントスチル59307		エフェクト表			0
+FadeIn	white					.5
+	■■■■							マスターが褒めてくれたのに
+CharacterOff
+Se	ガラス割れる
+	イベントスチル59308		エフェクト表
+	■■■■							髪の毛、短くなった
+CharacterOff
+	イベントスチル59311		エフェクト表
+	■■■■							マスターが綺麗と言ってくれたのに
+CharacterOff
+Se	ガラス割れる
+	イベントスチル59312		エフェクト表
+	■■■■							白い服、黒くなった
+CharacterOff
+	イベントスチル59309		エフェクト表
+	■■■■							マスターがくれた宝物なのに
+CharacterOff
+Se	ガラス割れる
+	イベントスチル59310		エフェクト表
+	■■■■							お花、枯れてしまった
+FadeOut	black					.5
+Bg	水銀の大地					0
+CharacterOff						0
+	ぎんいろ=ロスト	悲しい_拡大_無し	エフェクト表			0
+FadeIn	black					.5
+	ぎんいろ=ロスト	悲しい_拡大_無し						もう、なにも残っていない……
+	ぎんいろ=ロスト	絶望_拡大_無し						私は、ぎんいろ\n……ぎんいろだったのに
+	ぎんいろ=ロスト	絶望_拡大_無し						もう、ぎんいろじゃ、ないの？
+	ぎんいろ=ロスト	絶望_拡大_無し						これ以上、失くしたくない……
+	ぎんいろ=ロスト	悲しい_拡大_無し						お願い、マスター\n名前を呼んで……
+	ぎんいろ=ロスト	絶望_拡大_無し						お願い、私の名前を……
+FadeOut	white					1
+CharacterOff						0
+Bg	市街地D					0
+	オーラ青		エフェクト表			0
+	ぎんいろ=ロスト	絶望_無し				0
+FadeIn	white					.6
+Bgm	緊迫
+	ぎんいろ=ロスト	絶望_無し						いや、いや……\nいやぁあああああああ!!
+Param	character_grayout=true
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	本気2	2_2_b
+	ディーア	本気2						ぎん……！
+	ディーア	悔しい2						くっ……
+CharacterOff
+	ドロシー	ニヤリ						お前がそう呼びたいなら\nそうすればいいさ\nだが、その名はもはや苦痛の象徴だ
+	ドロシー	ニヤリ						兵器に名前など……\n心など与えるからこうなる
+	ドロシー	ニヤリ						健気なものだったぞ？\nせめて名前で呼ばれようと、\nこいつは兵器として振る舞った
+	ドロシー	ニヤリ						だが、数多の命を奪い、\n魔剣を殲滅した結果
+	ドロシー	ニヤリ						その姿は、\nどこぞの魔剣使いが可愛がった\nぎんいろとかけ離れていった
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+Bg	戦場跡					0
+	ぎんいろ=ロスト	絶望_無し				0
+	                    		1_2
+FadeIn	white					.2
+	ドロシー	<Off>						破壊に染まった自分はもう、\n綺麗なぎんいろではないと
+Param	character_grayout=true
+Bg	市街地D
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff
+	ドロシー	通常						他ならぬそいつが認め、\n記憶を封じ込めた
+	ドロシー	ニヤリ						まったく、\n笑い話にしても傑作だ
+CharacterOff
+	ぎんいろ	通常2
+	ディーア	絶望2
+	ディーア	絶望2						……そんな
+CharacterOff
+	ぎんいろ=ロスト	絶望_無し	p7b
+	ドロシー	通常	p3
+Tween	ドロシー	MoveBy	x=20				NoWait
+	ドロシー	通常						もう一度聞くぞ
+	ドロシー	ニヤリ						お前は、誰だ？
+	ぎんいろ=ロスト	絶望_無し						あぁ……
+	ドロシー							もうお前は戻れない
+	ドロシー							主に名前を呼ばれることすら\n苦痛となった……\nそんなお前に帰る場所はない
+	ドロシー							……兵器として\n壊れるまで、殲滅しつくせ
+	ドロシー							さぁ……<speed=0.5>　　</speed>\nお前の名前は、なんだ？
+CharacterOff
+	ぎんいろ=ロスト	絶望_無し						…………わた、し
+CharacterOff
+	ディーア	悔しい2	2_2_b
+	ぎんいろ	通常2	1_2
+	ぎんいろ	通常2						……それで、いいの？
+	ディーア	本気2						ダメだ！\n……っ、ぎんいろ!!
+StopBgm
+CharacterOff
+	ぎんいろ=ロスト	絶望_無し						…………っ
+	ぎんいろ=ロスト	絶望_無し						……ごめん、なさい
+	ぎんいろ=ロスト	絶望_無し						私は対魔剣殲滅魔導兵器\n『LS_No.13179』
+Param	character_grayout=false
+Se	光2
+FadeOut	black					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景					0
+	ぎんいろロストロゴ		effect_c			1
+FadeIn	black					.3
+Wait						.3
+Tween	ぎんいろロストロゴ	ScaleBy	x=1.5 y=1.5 time=1.5				Add
+	■■■■							もう、ぎんいろじゃ、ない……
+Wait						.2
+Bgm	絶望
+Se	ガラス割れる
+Tween	ぎんいろロストロゴ	ScaleBy	x=1.5 y=1.5				NoWait
+FadeOut	white					.5
+Param	character_grayout=false
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+	イベントスチル59304		エフェクト表			0
+FadeIn	white					.5
+	■■■■							絶望色の災厄、起動
+FadeOut	white					.2
+Se	光3
+CharacterOff						0
+	イベントスチル59305		エフェクト表			0
+FadeIn	white					.7
+	■■■■							<ruby=アルギュロス＝シルバー>殲滅</ruby>、開始
+Bg	市街地D(水銀)												水銀背景へ移行
+Param	character_grayout=true
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	絶望2	2_2_b
+	ディーア	絶望2						そんな……
+	ディーア	悔しい2						……オレは、間違えたのか？
+StopBgm							1
+Tween	ぎんいろ	MoveBy	x=20				NoWait
+	ぎんいろ	通常2						大丈夫
+	ディーア	驚き2						……ぎんいろ
+	ぎんいろ	通常2						マスターは、間違っていない……
+	ぎんいろ	通常2						あの子は、名前を思い出した
+	ディーア	悔しい2						けど、その結果が……
+	ぎんいろ	通常2						そう……\nだから、あとは記憶を紡ぐの
+	ぎんいろ	通常2						私達が貰ったのは、\n名前だけじゃないことを……
+	ぎんいろ	通常2						だから<dash=2>
+FadeOut	white					1
+Bgm	決戦
+CharacterOff						0
+	ぎんいろ	通常_拡大	エフェクト表			0
+FadeIn	white					1
+	ぎんいろ	通常_拡大						あの子はまだ戻れる\nマスター、命令を
+	ぎんいろ	通常_拡大						……殲滅ではなく\nあの子を止めろと、助けろと
+	ぎんいろ	通常_拡大						……私に命令して\n必ず、あなたの望みを叶えるから
+	ぎんいろ	通常_拡大						あなたのぎんいろを、信じて
+CharacterOff
+	ディーア	本気2						っ！ ……ああ!!
+	ディーア	怒り2						約束したからな、\nあの子を助けようって……
+CharacterOff
+	ドロシー	ニヤリ						正気か？\nその魔剣でロストの相手をする？
+	ドロシー	通常						『LS_No.13179』は\n推定SSランクの災害指定\nその魔剣の性能を遥かに凌ぐ
+	ドロシー	ニヤリ						まして、ランクS魔剣が<dash=2>\n『LS_No.13179』の素体が\nロストに勝てる見込みなど……
+CharacterOff
+	ぎんいろ	通常_拡大	エフェクト表
+	ぎんいろ	通常_拡大						いいえ、負けない……
+CharacterOff
+	ドロシー	怒り						……なに？
+CharacterOff
+	ぎんいろ	通常2	1_2
+	ディーア	怒り2	2_2_b
+	ぎんいろ	通常2						私はひとりじゃない、\nマスターが一緒にいるから
+	ディーア	怒り2						ああ、そのとおりだ
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地D
+CharacterOff						0
+	ぎんいろ=ロスト	悲しい_無し				0
+FadeIn	black					.2
+	ぎんいろ=ロスト	悲しい_無し						……ごめん、なさい
+FadeOut	black					.2
+Bg	市街地D(水銀)					0							水銀背景へ移行
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ぎんいろ	通常2	1_2			0
+	ディーア	怒り2	2_2_b			0
+FadeIn	black					.2
+	ディーア	本気2						必ず救い出す！\nあんな悲しい顔のまま、\n兵器になんてさせない！
+	ディーア	本気2						いくぞ、ぎんいろ！
+	ぎんいろ	通常2						戦闘、開始……
+Se	光3
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_593_07
+EndIf
+EndScenario
+
+# E_593_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	研究所C
+Param	character_grayout=false
+Se	回想
+ImageEffect	SpriteCamera	GrayScale
+FadeIn	white					.5
+	■■■■							思い出した……
+	■■■■							苦しかったこと
+	■■■■							悲しかったこと
+	■■■■							誰も私を呼んでくれない
+	■■■■							ぎんいろと呼んでくれない
+Bg	酒場1F
+	ディーア	笑い2
+	■■■■							マスターにもらった\n素敵な名前なのに……
+	■■■■							マスター
+	■■■■							私のマスター
+CharacterOff	ディーア					1.5
+	■■■■							私の大切な人は
+	■■■■							もう、いない……
+	■■■■							だから、\n私は兵器になった
+	■■■■							役目を果たしたら\n誰かが、マスターが\n呼んでくれると思った
+	■■■■							けれど<dash=2>
+Bg	水銀の大地
+	ぎんいろ=ロスト	本気_無し
+	ぎんいろ=ロスト	本気_無し						侵攻
+	ぎんいろ=ロスト	本気_無し						蹂躙
+	ぎんいろ=ロスト	本気_無し						殲滅
+	ぎんいろ=ロスト	本気_無し						私に誰も気づかない
+	ぎんいろ=ロスト	本気_無し						不可視の災厄
+	ぎんいろ=ロスト	絶望_無し						それは……ぎんいろじゃない
+CharacterOff
+	■■■■							マスターの魔剣であった私じゃない
+	■■■■							マスターはあんな私をみたら\n悲しむから……
+	■■■■							私はもう、\nぎんいろでいられなかった
+	瞬きA		blink_a2			0							目を閉じる
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.5	easeOutCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.5	easeOutCirc
+	黒背景		エフェクト表			.5
+Se	光3
+Se	闇3
+Se	火事
+Wait						3.5
+FadeOut	black					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	市街地D(水銀)					0
+	ぎんいろ=ロスト	絶望_無し				0
+FadeIn	black					1
+	ぎんいろ=ロスト	絶望_無し						…………
+	ぎんいろ=ロスト	絶望_無し						殲滅、完了……
+CharacterOff
+	ドロシー	通常						予想通りの結果ほど、\nつまらないものはないな……
+	ドロシー	ニヤリ						さぁ、戻るぞ\nお前には使えるうちに\n働いてもらわなければ<dash=2>
+StopBgm
+	ドロシー	怒り						…………なに？
+CharacterOff
+	ぎんいろ=ロスト	驚き_無し						……っ
+Param	character_grayout=false
+Bgm	決戦
+CharacterOff
+	土埃		エフェクト表
+	ぎんいろ	破損
+CharacterOff	土埃					.5
+Shake	ぎんいろ		x=3 time=1				NoWait
+	ぎんいろ	破損						わたし、は……負けない……
+	ぎんいろ	破損						<ruby=ぎんいろ>私</ruby>でなくなった<ruby=ロスト>私</ruby>に……\nあなたに、負けるはずがない
+Param	character_grayout=true
+CharacterOff
+	ドロシー	通常	p3
+	ぎんいろ=ロスト	驚き_無し	p7b
+	ぎんいろ=ロスト	驚き_無し						……そんな
+	ドロシー	通常						何を戸惑っている？\n奴は虫の息だ、やれ
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し						…………っ					攻撃エフェクト
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(銀)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3							迎撃エフェクト
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393D)		エフェクト裏			0
+Se	剣閃
+Se	ジャストガード
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+Bg	市街地D(水銀)
+CharacterOff
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	ぎんいろ	通常2	1_2_b
+	ディーア	悔しい3	2_2
+Tween	ディーア	MoveTo	x=0 time=1				NoWait
+	ディーア	怒り3						オレも、\nまだ負けていないぞ……
+CharacterOff
+	ドロシー	怒り	p3
+	ぎんいろ=ロスト	驚き_無し	p7b
+	ぎんいろ=ロスト	驚き_無し						防が、れた……？
+	ドロシー	怒り						何をしている？
+CharacterOff
+	ぎんいろ=ロスト	驚き_無し						っ……！					攻撃エフェクト
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(銀)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	市街地D(水銀)
+CharacterOff
+	ぎんいろ	破損						……無駄
+	ぎんいろ	破損						私には……\n私達には効かない
+CharacterOff
+	ドロシー	通常						……………………
+CharacterOff
+	ぎんいろ=ロスト	驚き_無し						そんなはずない……\n攻撃を避け切れもしていない……
+	ぎんいろ=ロスト	驚き_無し						なのに、どうして……？\nどうして、破壊されないの？
+	ぎんいろ=ロスト	驚き_無し						どうして
+CharacterOff
+	ぎんいろ	破損
+	ぎんいろ	破損						……あなたなら、分かるはず
+CharacterOff
+	ぎんいろ=ロスト	驚き_無し						……っ、わからない
+CharacterOff
+	ぎんいろ	破損						……なら、思い出して\n苦しみに隠れた、大切なことを
+CharacterOff
+	ぎんいろ=ロスト	本気_無し						殲滅、再開……っ！					攻撃エフェクト
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(銀)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	市街地D(水銀)
+CharacterOff
+	ぎんいろ	破損
+Shake	ぎんいろ		x=5 time=1				NoWait
+	ぎんいろ	破損						…………っ
+	ぎんいろ	破損						私が、戦えるのは……\nマスターが、いてくれるから……
+	ぎんいろ	破損						マスターに、もらった……\n感情が、心が、あるから……！
+CharacterOff
+	ドロシー	怒り						惑わされるな\n『LS_No.13179』					攻撃エフェクト
+CharacterOff						0
+	ぎんいろ=ロスト	驚き_無し						…………っ
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(銀)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	市街地D(水銀)
+CharacterOff
+	ぎんいろ	破損						マスターが私を支えてくれる
+	ぎんいろ	破損						だから、倒れたりしない
+CharacterOff
+	ぎんいろ=ロスト	驚き_無し						止まら、ない……
+	ぎんいろ=ロスト	絶望_無し						殲滅……できない？
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0							仮
+	ぎんいろ	通常_拡大	エフェクト表			0
+FadeIn	white					.6
+	ぎんいろ	通常_拡大						私は、ぎんいろは\nマスターと一緒なら\nマスターのためなら、何でもできる
+	ぎんいろ	通常_拡大						これが私の意思……
+	ぎんいろ	通常_拡大						マスターを守り抜くと、決めたから
+FadeOut	white					.2
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	驚き3				0
+FadeIn	white					.2
+	ディーア							……ぎんいろ
+Se	回想
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+	アルギュロス=ぎんいろ	通常	p3			0
+	ノーネーム	通常	p7b			0
+FadeIn	black					.2
+	ノーネーム	通常						ぎんいろは、\n私達の誰よりも強いですから
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+Bg	市街地D(水銀)					0
+CharacterOff						0
+	ディーア	通常3				0
+FadeIn	black					.2
+	ディーア	通常3						ああ、そういうことか……
+CharacterOff
+	ぎんいろ=ロスト	絶望_無し						なん、で……？
+FadeOut	white					1
+Bgm	風属性バトル
+Param	character_grayout=false
+CharacterOff						0							仮
+	イベントスチル59303		エフェクト表			0
+FadeIn	white					1
+	ぎんいろ	<Off>						私は、ぎんいろ……
+	ぎんいろ	<Off>						マスターが信じてくれる、\nマスターを信じている\n<dash=2>ぎんいろ
+	ぎんいろ	<Off>						マスターがいないあなたに、\n負けるはずがない
+If	isdebug==true
+CharacterOff
+Jump	*E_593_08
+EndIf
+EndScenario
+
+# E_593_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	市街地D(水銀)
+Param	character_grayout=false
+	黒背景					0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+	ぎんいろ極弐	通常				0
+	一人称		エフェクト表2			0
+FadeIn	black					.5
+CharacterOff	黒背景					3
+Tween	瞬きA	MoveTo	y=1500 time=12	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=12	easeOutCirc			NoWait
+Wait						2
+Param	character_grayout=true
+	■■■■							ぎんいろが、立っている
+	■■■■							傷だらけ\n破損\n停止寸前だったのに……
+	■■■■							……それでも、立っている
+	■■■■							どうして……？
+	■■■■							兵器としての性能は、私が上\n……私は、ぎんいろを壊すために\n作られたもの
+	■■■■							なのに、\nどうして<dash=4>
+	ぎんいろ極弐	通常						あなたなら、分かるはず
+	■■■■							…………
+	■■■■							…………知って、いる
+Se	回想
+	瞬きA		blink_a2			0							瞬き
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+ImageEffect	SpriteCamera	Sepia
+CharacterOff	ぎんいろ極弐					0
+Param	character_grayout=false
+Bg	戦場跡					0
+	ディーア	怒り2	2_2_b			0
+	ぎんいろ	通常	1_1			0
+	                    
+Wait						.5
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+	■■■■							ぎんいろの、マスターの姿
+	■■■■							昔の私
+	■■■■							名前のあった私
+	■■■■							ぎんいろ
+	■■■■							……そうだ、ぎんいろは
+	瞬きA		blink_a2			0							瞬き
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff	ディーア					0
+CharacterOff	ぎんいろ					0
+Param	character_grayout=true
+Bg	市街地D(水銀)					0
+Wait						.5
+	ぎんいろ極弐	通常				0
+	                    		2_2
+CharacterOff	黒背景					.3
+Tween	瞬きA	MoveTo	y=1500 time=1	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=1	easeOutCirc			NoWait
+Wait						1
+	ぎんいろ極弐	通常						私はもう\nただの兵器じゃない……
+	ぎんいろ極弐	通常						私はマスターの魔剣だから
+	ぎんいろ極弐	通常						ただの兵器よりも、私が強い
+	■■■■							知っている
+	■■■■							知っていた
+	■■■■							私も、きっとそうだったから……
+	■■■■							でも……もう私には……
+	ぎんいろ極弐	通常						いいえ……まだ戻れる
+	ぎんいろ極弐	通常						だって、私達は\n戻れることを知っている
+	ぎんいろ極弐	通常						……あなたであるかぎり
+	ぎんいろ極弐	通常						あなたのマスターから\n受け取ったもの、消えたりしない
+	ぎんいろ極弐	通常						思い出して……
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=false
+	ぎんいろ=ロスト	悲しい_無し	p7b			0
+	ぎんいろ極弐	通常	p3			0
+Tween	ぎんいろ極弐	MoveBy	x=20 time=2				NoWait
+FadeIn	white					.2
+	ぎんいろ極弐							……あなたとマスターが出会った時を
+ImageEffectOff	SpriteCamera	MotionBlur
+Se	チャージ
+	オーラ青		エフェクト表			1
+Wait						1.5
+FadeOut	white					1
+Bg	白背景					0
+CharacterOff						0
+	ぎんいろ					0
+	                    		1_2
+FadeIn	white					1.5
+	■■■■							ぎんいろの、記録……\n私が、失くした記憶……
+FadeOut	black					.2
+CharacterOff						0
+Bg	黒背景					0
+FadeIn	black					.2
+	■■■■							私は名前のない、力の塊\n厄竜の力
+	■■■■							形なく漂った、\n世界から忌まれる力
+Bg	戦場跡
+	■■■■							それは……\n兵器となった今と変わらない
+	■■■■							誰でもない私\n形のない私
+	■■■■							けれど、あなたと出会って\n全てが変わった
+FadeOut	white					.2
+Param	character_grayout=true
+Bg	酒場の地下
+CharacterOff						0
+	ぎんいろ	通常2	1_2			0
+	ディーア	笑い2	2_2_b			0
+FadeIn	white					1
+	ディーア	笑い2						<dash=2>なら、"ぎんいろ"はどうだ？
+	ぎんいろ	通常2						ぎんいろ？
+	ディーア	通常2						ほら、綺麗な銀色だからさ
+	ぎんいろ	通常2						ぎんいろ……
+	ぎんいろ	通常2						銀色だから、ぎんいろ……
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	ディーア	通常2	2_2_b			0
+	ぎんいろ	通常2	1_1			0
+	          		1_2
+FadeIn	white					.2
+	■■■■							その時、私が生まれた
+	■■■■							ただの力が、災厄が\nぎんいろになれた……
+	■■■■							あなたが出会ってくれたから\n私がいる
+FadeOut	white					.2
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	笑い2				0
+	          		2_2
+FadeIn	white					.2
+	■■■■							あなたがくれたの
+	■■■■							喜びも、幸せも\n愛おしささえ
+	■■■■							あなたが\n私の世界の全て
+	■■■■							それを\n私も、覚えていた
+	■■■■							……そうだ
+	■■■■							私は守りたかった……
+	■■■■							この記録は、思い出だけは……\n全てを失っても、この体が壊れても
+	■■■■							心の奥にしまって、\n守っていたかった……
+	■■■■							ぎんいろだから……
+	■■■■							どんなに変わっても、\nあなたのぎんいろで、\nいたかったから……
+FadeOut	white					.2
+Bg	市街地D(水銀)					0
+CharacterOff						0
+	オーラ青		エフェクト表			0
+	ぎんいろ=ロスト	驚き_無し				0
+	ぎんいろ極弐	破損				0
+FadeIn	white					1.5
+CharacterOff	オーラ青					1
+Wait						.5
+Param	character_grayout=true
+	ぎんいろ極弐	破損						もう、大丈夫……
+	ぎんいろ=ロスト	驚き_無し						ぎん、いろ……？
+	ぎんいろ極弐	破損						っ…………
+Tween	ぎんいろ極弐	MoveBy	y=-200				NoWait
+Se	倒れる
+Wait						.5
+CharacterOff						.5
+Wait						.3
+FadeOut	white					.2
+	ぎんいろ極弐	破損	1_2			0
+	ディーア	驚き3	p9b			0
+FadeIn	white					.2
+Tween	ディーア	MoveTo	x=60 time=2				NoWait
+	ディーア	驚き3						ぎんいろ、大丈夫か!?
+	ぎんいろ極弐	破損						大丈夫……少し、休むだけ
+	ディーア	通常3						よかった、それに……
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し						マスター……？
+CharacterOff
+	ディーア	笑い3						止まってくれて、本当に良かった……
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し						マスター……私は……
+StopBgm
+CharacterOff
+	ドロシー	怒り						……ここまでだな
+CharacterOff						0							攻撃エフェクト
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	市街地D(水銀)
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し
+Se	打2											打撃音
+	ぎんいろ=ロスト	悲しい_無し						あっ…………!?				リーナロスト下がる
+Tween	ぎんいろ=ロスト	MoveBy	y=-200				NoWait
+Se	倒れる
+Wait						.5
+CharacterOff						.5
+Wait						.3
+	ディーア	驚き3						なっ……\nドロシー!!
+CharacterOff
+	ドロシー	怒り						とんだ茶番だな……\nまさかSランクに敗れるとは……
+	ドロシー	ニヤリ						だが、おかげで\n興味深い個体が発見できた
+	ドロシー	ニヤリ						特異体……\nいや、真のぎんいろというべきか？\nどちらにせよ被検体に丁度いい
+CharacterOff
+	ディーア	悔しい3						なに、を……？
+	ディーア	驚き3						まさか……！\nドロシー……!!
+CharacterOff
+Param	character_grayout=false
+Bgm	絶望
+	ドロシー	ニヤリ拡大	エフェクト表					ああそうだ、少年
+	ドロシー	ニヤリ拡大						その『ぎんいろ』を\n私によこせ
+If	isdebug==true
+CharacterOff
+Jump	*E_593_09
+EndIf
+EndScenario
+
+# E_593_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	市街地D(水銀)
+	ディーア	悔しい3
+FadeIn	black					.5
+	ディーア	悔しい3						ドロシー、\nお前……っ!!
+CharacterOff
+	ドロシー	ニヤリ						お前のぎんいろは特別な個体だ
+	ドロシー	ニヤリ						多種多様な並行世界にあって、\n同一種が存在する魔剣
+	ドロシー	ニヤリ						その中には\n特異個体もいれば、\n欠陥品もいる……
+Param	character_grayout=false
+CharacterOff
+	ぎんいろ極弐	破損
+	ドロシー	<Off>						お前のぎんいろと
+CharacterOff
+	ぎんいろ=ロスト	悲しい_無し
+	ドロシー	<Off>						あの欠陥兵器のようにな
+Param	character_grayout=true
+CharacterOff
+	ドロシー	ニヤリ						機関の定めたランクの壁を超えて\n性能を引き出すことに成功した特異体\n……"真の"ぎんいろ
+	ドロシー	ニヤリ						お前の魔剣は\nより完全なロストとなるだろう
+CharacterOff
+	ディーア	悔しい3						……無駄だ\n魔剣の力は\n性能だけじゃ決まらない
+	ディーア	悔しい3						まして、お前のような奴に……！
+	ディーア	悔しい3						魔剣を兵器としてしか\n見れない奴に……\n魔剣は、使いこなせない……!!
+CharacterOff
+	ドロシー	通常						同じ理屈を聞く気はない\nそして、お前の意見は聞いていない
+	ドロシー	通常						重要なのは有用かどうか、\nそれだけだ
+CharacterOff
+	ディーア	本気3						お前に!!\nぎんいろを渡すわけが……!!
+CharacterOff
+	ドロシー	ニヤリ						ふん、死に損ないが
+CharacterOff
+	ディーア	悔しい3
+Se	打2
+FadeOut	white					.2
+FadeIn	white					.2
+	ディーア	悔しい3						がぁっ!?
+Tween	ディーア	MoveBy	y=-200				NoWait
+Se	倒れる
+Wait						.5
+CharacterOff						.5
+Wait						.3
+	ドロシー	ニヤリ						そして……
+CharacterOff
+	ぎんいろ極弐	破損						ます、たー……
+CharacterOff
+	ドロシー	通常						お前も、抵抗するようだな
+	ドロシー	通常						仕方ない……
+	ドロシー	ニヤリ						カルバノグ、見ているんだろう？\n出てこい
+CharacterOff
+	カルバノグ	通常						いきなり呼びつけたと思ったら、\n人使いが荒いですねえ
+CharacterOff
+	ディーア	驚き3						なっ、カルバノグまで……!!
+CharacterOff
+	カルバノグ	通常	1_2_b
+	ドロシー	通常	2_2
+	ドロシー	通常						いいからさっさと力を貸せ
+	カルバノグ	通常						しょうがないですねえ
+	カルバノグ	通常						でも、ドロシーは\nカルバのマスターでは\nないですからあ……
+	カルバノグ	通常						代わりに後でえ\nお願いを一つ聞いてくださいねえ
+	ドロシー	ニヤリ						いいだろう
+CharacterOff
+	ディーア	本気3
+Shake	ディーア		x=5 time=1				NoWait
+	ディーア	本気3						やめ、ろ……！
+CharacterOff
+	ドロシー							言っただろう？\nお前の意見など求めていない
+CharacterOff						0							攻撃エフェクト
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+Bg	市街地D(水銀)
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	ディーア	悔しい3
+FadeOut	white					.2
+FadeIn	white					.2
+	ディーア	悔しい3						ぐっあああああ!?
+CharacterOff
+	ぎんいろ極弐	破損
+Shake	ぎんいろ極弐		x=5 time=1				NoWait
+	ぎんいろ極弐	破損						くっ、ます、たー……
+CharacterOff
+	ドロシー	ニヤリ						お前も、おとなしくしていろ\n貴重なサンプルだからな
+CharacterOff
+	ぎんいろ極弐	破損
+FadeOut	white					.2
+FadeIn	white					.2
+Se	打1
+Wait						.5
+Shake	ぎんいろ極弐		x=2 time=0.5				NoWait
+	ぎんいろ極弐	破損						うぅ……!!
+	ぎんいろ極弐	破損						……私のマスターはマスターだけ
+CharacterOff
+	ドロシー	通常						だろうな\nだから、今度は徹底的に改造しよう
+	ドロシー	ニヤリ						名前も、人格も、記憶も\nかつての自分など\n一欠片も思い出せないようにな
+CharacterOff
+	ディーア	絶望3						や、やめろぉおおおおお!!
+CharacterOff
+	ドロシー	通常						カルバノグ、撤収を<dash=2>
+	ドロシー	怒り						……っ!?
+CharacterOff						0							攻撃エフェクト
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(銀)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	市街地D(水銀)
+CharacterOff
+	ドロシー							……どういうつもりだ
+CharacterOff
+	ぎんいろ=ロスト	破損						はぁ、はぁ……
+	ぎんいろ=ロスト	破損						させ、ない……
+	ぎんいろ=ロスト	破損						ぎんいろは、わたさ、ない
+CharacterOff
+	ドロシー	怒り						質問に答えろ、欠陥品\n自分が何をしているのか\nわかっているのか？
+CharacterOff
+	ぎんいろ=ロスト	破損						ぎん、いろを……\nまも、る……
+CharacterOff
+	ドロシー	怒り						ふん……\nまさか、くだらん幻想でも抱いたか？\nこいつらを助ければ元に戻れると
+CharacterOff
+	ぎんいろ=ロスト	破損						……ちが、う
+CharacterOff
+	ドロシー	ニヤリ						そうだ\nお前にはマスターもいない\nぎんいろとしての自分も擦り切れた
+	ドロシー	ニヤリ						破壊を待つだけの\n何者にもなれないお前が
+	ドロシー	怒り						……こいつをかばってどうする
+CharacterOff
+	ぎんいろ=ロスト	破損						……そう
+	ぎんいろ=ロスト	破損						あなたの、言う通り……\nもう、私は戻れない……
+	ぎんいろ=ロスト	破損						戻りたいけれど、戻れない……
+	ぎんいろ=ロスト	破損						もう、私は\nぎんいろ、じゃ、ない……
+Se	回想
+FadeOut	black					.2
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場の地下
+CharacterOff						0
+	ぎんいろ	通常2	1_2			0
+	ディーア	笑い2	2_2_b			0
+	          		1_3
+FadeIn	black					.2
+Wait						.3
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+CharacterOff						0
+	ぎんいろ=ロスト	破損				0
+Bg	市街地D(水銀)					0
+FadeIn	black					.2
+	ぎんいろ=ロスト	破損						でも……
+	ぎんいろ=ロスト	破損						大切なこと、思い出したの
+	ぎんいろ=ロスト	破損						マスターから、\n私は全部をもらった
+	ぎんいろ=ロスト	破損						幸せに、してもらった
+	ぎんいろ=ロスト	破損						その記憶を、\n返してもらったから……
+	ぎんいろ=ロスト	破損						だから……\nこの、ぎんいろと、マスターに\n幸せでいてほしい
+	ぎんいろ=ロスト	破損						あんな思い、\nさせたくない……
+CharacterOff
+	ドロシー	怒り						どいつもこいつも\nこの世界に来ると\n思考が汚染されるようだ……
+	ドロシー	怒り						あの魔剣すら破壊できない分際で\n私を止める？\n自惚れるなよ、欠陥兵器
+CharacterOff						0							攻撃エフェクト
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393C)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+ImageEffectOff	SpriteCamera	MotionBlur
+Wait						.3
+Bg	市街地D(水銀)
+CharacterOff
+	ぎんいろ=ロスト	破損						あぐっ……！
+CharacterOff
+	ドロシー	通常						もはや、お前は魔剣ではない
+CharacterOff						0							攻撃エフェクト
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+ImageEffectOff	SpriteCamera	MotionBlur
+Wait						.3
+Bg	市街地D(水銀)
+CharacterOff
+	ぎんいろ=ロスト	破損						ぐっ……！
+CharacterOff
+	ドロシー	怒り						あとは崩れるだけのお前に、\n手を出すだけ無駄というものだが
+CharacterOff						0							攻撃エフェクト
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+ImageEffectOff	SpriteCamera	MotionBlur
+Wait						.3
+Bg	市街地D(水銀)
+CharacterOff
+	ぎんいろ=ロスト	破損						うっ……！
+CharacterOff
+	ドロシー	怒り						廃棄だけはしてやろう
+CharacterOff
+	ぎんいろ=ロスト	破損						……逃げて
+	ぎんいろ=ロスト	破損						おね、が、い……\nマスター、逃げて……
+	ぎんいろ=ロスト	破損						ここで、止めるから……
+	ぎんいろ=ロスト	破損						このぎんいろだけは\n……たすけ、て
+StopBgm
+CharacterOff
+	ディーア	<Off>						それはできない
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り3	1_2
+	ぎんいろ=ロスト	破損	2_2_b
+	ぎんいろ=ロスト	破損						……ます、たー？
+	ディーア	怒り3						助けるなら、二人一緒だ
+	ディーア	怒り3						ぎんいろと約束したんだ\nお前を助けるって
+	ディーア	怒り3						自分で決めたんだ\n兵器になんてさせないって
+	ディーア	通常3						だから、\nお前のことも助けてみせる
+CharacterOff
+	ドロシー	怒り						おい、魔剣使い……\nお前のぎんいろはもう戦えない
+	ドロシー	ニヤリ						魔剣のないお前に勝ち目など<dash=2>
+CharacterOff
+	ぎんいろ極弐	破損						……勝ち目なら、ある
+CharacterOff
+	ディーア	怒り3						ああ、そうだな
+	ディーア	怒り3						だってオレには、もうひとり\n"ぎんいろ"が\n付いていてくれるから
+	ディーア	通常3						……そうだろう、"ぎんいろ"
+Bgm	神秘
+CharacterOff
+	ディーア	怒り3	1_2
+	ぎんいろ=ロスト	破損	2_2_b
+	ぎんいろ=ロスト	破損						<dash=2>え
+	ディーア	怒り3						頼む、オレに力を貸してくれ
+	ぎんいろ=ロスト	破損						でき、ない……
+	ぎんいろ=ロスト	破損						私はもう、ぎんいろじゃない\n元に、もどれ、ないから……
+	ぎんいろ=ロスト	破損						たくさん、壊した
+	ぎんいろ=ロスト	破損						たくさん、奪った
+	ぎんいろ=ロスト	破損						わたしは、もう……
+CharacterOff
+	ぎんいろ極弐	破損
+	ぎんいろ極弐	破損						ううん\nあなたは、戻れる
+CharacterOff
+	ぎんいろ=ロスト	破損	2_2_b
+	ディーア	怒り3	1_2
+	ぎんいろ=ロスト	破損						……え？
+CharacterOff
+	ぎんいろ極弐	破損						……だって私も同じ\n私達は元々、兵器で災厄……
+	ぎんいろ極弐	破損						……けれどマスターのおかげで、\n魔剣になれた
+	ぎんいろ極弐	破損						だから
+	ぎんいろ極弐	破損						あなたも願えば、変われる……\nなんにでも、なれる……
+CharacterOff
+	ディーア	怒り3						……そうだな
+	ディーア	怒り3						オレも、ずっと考えていたんだ\nお前を助ける方法を
+	ディーア	怒り3						最初は昔に戻ればいいって思った\nぎんいろだったころに戻れば\n解決するって
+	ディーア	怒り3						でも、違った\nお前はぎんいろではなくなって\nたくさんの辛い思いをしていた
+	ディーア	怒り3						その過去を\nなかったことにはできないなら
+	ディーア	通常3						もう一度、始めよう
+	ディーア	通常3						その過去ごと、進もう
+	ディーア	通常3						だから……\nオレにもう一度、\n名前をつけさせてくれないか？
+CharacterOff
+	ディーア	通常3	1_2
+	ぎんいろ=ロスト	破損	2_2_b
+	ぎんいろ=ロスト	破損						新しい、名前……？
+	ディーア	通常3						ああ、知ってるか？
+	ディーア	笑い3						オレたちも、人も\n名前を変える時があるんだ
+	ディーア	笑い3						大切な、とても大切な人と\n一緒に生きていこうと決める時に
+	ディーア	怒り3						オレは、\nお前の元のマスターじゃない
+	ディーア	通常3						でも、そのマスターの思い出も\n過去の悲劇も全部を背負って、\nお前のマスターになりたい
+StopBgm						1
+	ディーア	通常3						だから<dash=2>
+FadeOut	white					1
+StopBgm
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル59301		エフェクト表			0
+Wait						1
+Bgm	結婚
+FadeIn	white					1
+	ディーア	<Off>						ぎんいろ=ロスト\nオレの魔剣になってくれ
+	ぎんいろ=ロスト	<Off>						あ、あぁ……
+	ぎんいろ=ロスト	<Off>						……マスター
+	ぎんいろ=ロスト	<Off>						私に、名前をくれるの？
+	ぎんいろ=ロスト	<Off>						こんなに、なっても\n名前をくれるの？
+	ぎんいろ=ロスト	<Off>						また、\nぎんいろになっても、いいの？
+	ディーア	<Off>						もちろん、元のマスターも\nきっとそれを望んでいる
+	ディーア	<Off>						同じ、ぎんいろの名前をつけた\nもうひとりのオレだから……
+	ぎんいろ=ロスト	<Off>						私の名前……
+	ぎんいろ=ロスト	<Off>						大切な、宝物……
+	ぎんいろ=ロスト	<Off>						……ぎんいろ
+	ぎんいろ=ロスト	<Off>						……ぎんいろ=ロスト
+	ぎんいろ=ロスト	<Off>						銀色だから、ぎんいろ\n失って……戻ってきたから、ロスト
+	ぎんいろ=ロスト	<Off>						ぎんいろ=ロスト
+	ぎんいろ=ロスト	<Off>						それが私の、名前……
+	ぎんいろ=ロスト	<Off>						……ありがとう
+StopBgm						1
+CharacterOff
+	ドロシー	ニヤリ						……ふん\n何を言うかと思えば
+	ドロシー	ニヤリ						今更兵器に名付けたところで、\n一度壊れた物は戻らない
+	ドロシー	怒り						……それに、わかっているのか？
+	ドロシー	怒り						"<ruby=ぎんいろ＝ロスト>それ</ruby>"は\n兵器としての名だ
+CharacterOff
+	ディーア	本気3						今日からは違う！
+Param	character_grayout=false
+FadeOut	white					1
+Bgm	風属性バトル
+CharacterOff						0
+	イベントスチル59302		エフェクト表			0							仮
+FadeIn	white					.5
+	ディーア	本気3						ロストになっても生き抜いた\nオレたちを守ろうとしてくれた！\nこの子の全部を背負った名前だ!!
+	ディーア	怒り3						オレも全部、一緒に背負う！\nぎんいろ=ロストの過去も\nこの先の未来も！
+	ディーア	本気3						だから……!!
+	ディーア	<Off>						ドロシー、お前は間違っている！\nこの強さは性能でも、\n個体差でもない……！
+	ディーア	<Off>						魔剣はマスターとともに\nどこまでも強くなれる……!!
+	ディーア	<Off>						いくぞ、\nぎんいろ=ロスト!!
+	ぎんいろ=ロスト	<Off>						……あなたのためなら\n私のマスター
+	ぎんいろ=ロスト	<Off>						魔剣ぎんいろ=ロスト\nアンロック				設定的に魔剣のアンロック文章読ませて良いかな？
+	ぎんいろ=ロスト	<Off>						殲滅、開始……！
+If	isdebug==true
+CharacterOff
+Jump	*E_593_10
+EndIf
+EndScenario
+
+# E_593_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	決戦
+Bg	市街地D(水銀)
+ImageEffect	SpriteCamera	Sepia
+	ぎんいろ	通常2
+FadeIn	white					.5
+	ぎんいろ	通常2						私達は何にでもなれる
+	ぎんいろ=ロスト	<Off>						あの子は、そういった……
+	ぎんいろ=ロスト	<Off>						そして、\n今なら、それが分かる……
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.9	easeOutCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.9	easeOutCirc
+	黒背景		エフェクト表			.5
+Wait						2
+ImageEffectOff	SpriteCamera	Sepia
+	一人称		エフェクト表2			0
+	ドロシー	怒り				0
+CharacterOff	黒背景					.5
+Tween	瞬きA	MoveTo	y=1500 time=3	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=3	easeOutCirc			NoWait
+Wait						1
+	ドロシー	怒り						ふざけるなよ、\nあれは魔剣ではない……！
+	ドロシー	怒り						崩れかけの兵器を使っているだけ、\nただの苦し紛れだ……!!
+	ドロシー	怒り						……だというのに、\nこの出力はなんだ……!?
+	ドロシー	怒り						押される、だと!?
+	ぎんいろ=ロスト	<Off>						……あなたには、\nそうとしか見えない
+	ぎんいろ=ロスト	<Off>						私達を兵器としてしか見ない\nあなたには
+	ぎんいろ=ロスト	<Off>						あなたは正しくて、\nでも、大きく間違えている
+	ぎんいろ=ロスト	<Off>						<dash=2>私達は、兵器
+	ぎんいろ=ロスト	<Off>						でも、魔剣の私には\nマスターがいる
+	ぎんいろ=ロスト	<Off>						マスターが\nこの世界に私を存在させてくれる
+	ぎんいろ=ロスト	<Off>						大切な人がいるから、\n私は私でいられる
+	ぎんいろ=ロスト	<Off>						それがどれだけの幸福か\n私達は知っている
+Param	character_grayout=false
+FadeOut	white					.2
+CharacterOff						0
+	イベントスチル59302		エフェクト表			0
+FadeIn	white					.2
+	ぎんいろ=ロスト	<Off>						魔剣は兵器
+	ぎんいろ=ロスト	<Off>						私達は災厄
+	ぎんいろ=ロスト	<Off>						でも、\nもう、ひとりじゃない
+	ぎんいろ=ロスト	<Off>						私はマスターと一緒
+	ぎんいろ=ロスト	<Off>						……ぎんいろと同じ
+	ぎんいろ=ロスト	<Off>						あなたに……\n負けるはずがない
+CharacterOff						0							攻撃エフェクト
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(銀)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+ImageEffectOff	SpriteCamera	MotionBlur
+ImageEffectOff	SpriteCamera	Bloom
+Bg	市街地D(水銀)
+CharacterOff
+	ドロシー	怒り						くっ……!!\n貴様っ……!!
+Param	character_grayout=false
+FadeOut	white					.2
+CharacterOff						0
+	イベントスチル59302		エフェクト表			0
+FadeIn	white					.2
+	ディーア	<Off>						いくぞ、ぎんいろ=ロスト!!
+	ぎんいろ=ロスト	<Off>						……さようなら
+	ぎんいろ=ロスト	<Off>						……ブレイズ、ドライブ
+Wait						.5
+CharacterOff						0							攻撃エフェクトを派手なやつにして、強キャラ感
+Param	character_grayout=false
+FadeOut						2.5	NoWait
+Se	スローモーションエンド
+Se	光1
+Se	剣閃
+	斬撃(銀)01		lost1			0
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(銀)02		lost2			0
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(銀)03		lost3			0
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(銀)04		lost4			0
+Wait						.15
+Se	光2
+Se	剣閃
+	斬撃(銀)05		lost5			0
+Wait						.15
+Se	光3
+Se	剣閃
+	斬撃(銀)06		lost6			0
+Wait						.15
+	銀_花びら		エフェクト裏2			.5
+Wait						2
+CharacterOff						0
+Bg	市街地D(水銀)					0
+	ぎんいろ=ロスト	本気	2_2_b			0
+	ディーア	悔しい3	1_2			0
+Param	character_grayout=true
+FadeIn	white					1
+	ディーア	悔しい3						……はぁ、はぁ
+	ディーア	本気3						お前の負けだ、ドロシー……！
+	ぎんいろ=ロスト	本気						……マスター、待って
+	ディーア	驚き3						ぎんいろ=ロスト？
+	ぎんいろ=ロスト	本気						まだ……終わっていない
+Bgm	絶望
+Param	character_grayout=false
+CharacterOff
+	土煙		エフェクト表
+	ドロシー	通常
+	ドロシー	通常						……ああ\n少しは認めてやろう
+CharacterOff	土煙					1
+	ドロシー	怒り						確かに、愚策だった\n少々、欲をかき過ぎたようだ
+	ドロシー	怒り						性能差を覆すイレギュラー\nその時点で、処分するべきだった
+	ドロシー	怒り						<dash=2>この、世界ごと
+	ドロシー	ニヤリ						……力を貸せ、カルバノグ
+Se	チャージ
+	オーラ青		エフェクト表			.8
+Wait						1.5
+CharacterOff
+	ディーア	驚き3						……なっ!?
+CharacterOff
+	オーラ青		エフェクト表
+	ドロシー	怒り
+	ドロシー	怒り						単純な破壊だけならば、\nこんな姿は晒さなかった……
+	ドロシー	ニヤリ						さよならだ少年\nこれで<dash=4>
+Param	character_grayout=false
+StopBgm
+CharacterOff
+	カルバノグ	通常						ダメですよう、ドロシー♪
+CharacterOff
+	ディーア	驚き3						カルバ、ノグ……？
+CharacterOff
+	オーラ青		エフェクト表
+	ドロシー	怒り
+	ドロシー	怒り						……貴様、どういうつもりだ？					今後への伏線を
+CharacterOff
+	カルバノグ	通常						それを使ったらあ、\nこの世界が壊れちゃう\nじゃないですかあ
+	カルバノグ	通常						ですからあ、\n今回はここでおしまいですよう
+CharacterOff
+	オーラ青		エフェクト表
+	ドロシー	怒り
+	ドロシー							貴様の指示など……
+CharacterOff
+	カルバノグ	通常						だからあ、お約束ですよう\nさっき、一回、お願い聞くって\n言ったじゃないですかあ
+	カルバノグ	通常						それにい、\nこのままこの世界を壊したら
+	カルバノグ	通常						ドロシーだって\n困るんじゃないですかあ？
+CharacterOff
+	オーラ青		エフェクト表
+	ドロシー	怒り
+	ドロシー							…………
+CharacterOff	オーラ青					1
+	ドロシー	ニヤリ						…………ふん
+	ドロシー	ニヤリ						命拾いしたな少年
+Se	光1											転送エフェクト
+CharacterOff	ドロシー					1.5						エフェクト回転の裏でドロシーたちが消える
+	イベントスチル459H1		effect_a			1
+	イベントスチル459H2		effect_b			1
+Tween	イベントスチル459H1	RotateBy	z=5 time=100				NoWait
+Tween	イベントスチル459H2	RotateBy	z=-5 time=100				NoWait
+Wait						2
+Param	character_grayout=true
+CharacterOff						1
+Wait						1.5
+	ぎんいろ=ロスト	本気	2_2_b
+	ディーア	驚き3	1_2
+	ディーア	驚き3						……終わった、のか？
+StopBgm
+	ぎんいろ=ロスト	本気						ドロシー、カルバノグ\n撤退を確認……
+	ぎんいろ=ロスト	通常						もう、安全よ\nマスター
+	ディーア	笑い3						……ありがとう、ぎんいろ=ロスト
+	ディーア	通常3						オレを信じてくれて、\nそして、一緒に戦ってくれて
+CharacterOff
+	ぎんいろ極弐	破損						……私からも、ありがとう
+CharacterOff
+	ディーア	笑い3	1_2
+	ぎんいろ=ロスト	本気	2_2_b
+	ぎんいろ=ロスト	通常						ありがとう……\nその言葉は、私から<dash=2>
+	ぎんいろ=ロスト	悲しい						……っ!?
+Tween	ぎんいろ=ロスト	MoveBy	y=-200				NoWait
+Se	倒れる
+Wait						.5
+CharacterOff	ぎんいろ=ロスト					.5
+Wait						.3
+Se	心拍	TRUE
+	ディーア	驚き3						ぎんいろ=ロスト……!?
+	ディーア	本気3						しっかりしろ！\nぎんいろ=ロスト!!
+If	isdebug==true
+CharacterOff
+Jump	*E_593_10
+EndIf
+EndScenario
+
+# E_593_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	穏やか
+Bg	白背景
+Param	character_grayout=false
+	イベントスチル59313		エフェクト裏			0
+	黒背景		エフェクト表			0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+FadeIn	black					.5
+CharacterOff	黒背景					3
+Tween	瞬きA	MoveTo	y=1500 time=12	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=12	easeOutCirc			NoWait
+Wait						1.5
+	ぎんいろ=ロスト	<Off>						……空
+	ぎんいろ=ロスト	<Off>						そう、あれは青い空
+	ぎんいろ=ロスト	<Off>						白い雲
+	ぎんいろ=ロスト	<Off>						白い鳥、黒い鳥\nたくさん、空を飛んでいる
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+CharacterOff	イベントスチル59313					0
+Bg	市街地D					0
+	          
+Wait						1
+CharacterOff	黒背景					.5
+Tween	瞬きA	MoveTo	y=1500 time=3	easeOutCirc			NoWait
+Tween	瞬きB	MoveTo	y=-1500 time=3	easeOutCirc			NoWait
+Wait						2
+	ぎんいろ=ロスト	<Off>						街には人がいる\n女の子、男の子、お母さん、お父さん
+	ぎんいろ=ロスト	<Off>						あの顔は、きっと幸せ\n胸の奥が温かい気持ち……
+	ぎんいろ=ロスト	<Off>						私が感じる、この気持ち……
+StopBgm
+CharacterOff						0
+	瞬きA		blink_a2			0
+	瞬きB		blink_b2			0
+Tween	瞬きA	MoveTo	y=-60 time=0.2	easeInCirc			Add
+Tween	瞬きB	MoveTo	y=-60 time=0.2	easeInCirc
+	黒背景		エフェクト表			.5
+FadeOut	black					1
+Bg	酒場_宿屋					0
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	通常2	1_2			0
+	ぎんいろ=ロスト	通常	2_2_b			0
+FadeIn	black					.2
+	ぎんいろ=ロスト	通常						マスター
+	ディーア	通常2						どうしたんだ？
+	ぎんいろ=ロスト	通常						この世界はとても綺麗ね……
+Param	character_grayout=false
+FadeOut	white					.6
+Bgm	神秘
+CharacterOff						0
+	イベントスチル59313		エフェクト表			0
+FadeIn	white					.2
+	ぎんいろ=ロスト	<Off>						綺麗で、時に残酷で\nでも、幸せが満ちる場所……
+	ぎんいろ=ロスト	<Off>						私は、私達は……\n名前をもらって、\nそんな世界に立っている
+	ぎんいろ=ロスト	<Off>						あなたが名前をくれたから\nこの世界が、綺麗に見えるの
+	ぎんいろ=ロスト	<Off>						だから……
+FadeOut	white					.6
+Bg	酒場_宿屋
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	通常2	1_2			0
+	ぎんいろ=ロスト	通常	2_2_b			0
+FadeIn	white					.2
+	ぎんいろ=ロスト	通常						ありがとう、マスター
+	ぎんいろ=ロスト	通常						私を、助けてくれて\n大切にしてくれて……
+	ぎんいろ=ロスト	通常						名前を、もう一度\nつけてくれて……
+	ぎんいろ=ロスト	通常						きっと、私は求めていたの
+	ぎんいろ=ロスト	通常						また、マスターと会えたら\nもう一度、\nマスターのところに帰りたいと
+FadeOut	black					.2
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia				0
+CharacterOff						0
+	イベントスチル59304		エフェクト表			0
+FadeIn	black					.2
+	ぎんいろ=ロスト	<Off>						だから、あの時、\nあなたとぎんいろに\n気づいてもらいたかった
+FadeOut	black					.2
+CharacterOff						0
+	イベントスチル59301		エフェクト表			0
+FadeIn	black					.2
+	ぎんいろ=ロスト	<Off>						そして、私がそこにいるって\n気づいてくれた……
+	ぎんいろ=ロスト	<Off>						あなたの魔剣にしてくれた
+	ぎんいろ=ロスト	<Off>						ありがとう
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia				0
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	通常2	1_2			0
+	ぎんいろ=ロスト	通常	2_2_b			0
+Bg	酒場_宿屋					0
+FadeIn	black					.2
+	ぎんいろ=ロスト	通常						何度繰り返しても\n消えない気持ち……私の、心
+	ぎんいろ=ロスト	通常						私はもうここまでだから\n最後に<dash=2>
+	ディーア	通常2						じゃあ、ぎんいろ=ロスト
+Tween	ディーア	MoveBy	x=30				NoWait
+StopBgm						1
+	ディーア	通常2						ぎんいろ=ロストは\n次は何をしたい？\n何になりたい？
+	ぎんいろ=ロスト	驚き						つ、ぎ……？
+Bgm	結婚
+	ディーア	笑い2						ああ、\n魔剣に戻りたいっていう\n夢はかなったんだ
+	ディーア	通常2						だから、次は何になりたい？
+	ディーア	通常2						ぎんいろが言ってたとおり、\nお前は望めば何にでもなれる\nどんな事もできる
+	ディーア	笑い2						これからの未来で\n何になりたいか、教えてくれ
+	ぎんいろ=ロスト	驚き						それなら……
+	ぎんいろ=ロスト	通常						また、マスターの魔剣になりたい
+	ディーア	笑い2						もう、オレの魔剣だ\nきっと、また出会える\n一緒にいられる
+	ぎんいろ=ロスト	通常						もっと、マスターの役に立ちたい
+	ディーア	通常2						オレの方こそ、\nぎんいろ=ロストに頼らせてくれ
+	ぎんいろ=ロスト	通常						お料理、勉強したい
+	ディーア	笑い2						ぎんいろと一緒にできるさ
+	ぎんいろ=ロスト	通常						もっと、他にも……
+	ぎんいろ=ロスト	通常						そう、私が魔剣に戻れたなら\n何にでも、なれるなら……
+FadeOut	white					1
+Bg	白背景					0
+CharacterOff						0
+	                    
+FadeIn	white					.6
+	ぎんいろ=ロスト	<Off>						あの時、見たもの……\n今なら分かるもの
+	ぎんいろ=ロスト	<Off>						白くて、綺麗な\n幸せな形……
+FadeOut	white					1
+Bg	酒場_宿屋					0
+CharacterOff						0
+	ディーア	通常2	1_2			0
+	ぎんいろ=ロスト	通常	2_2_b			0
+FadeIn	white					.6
+	ぎんいろ=ロスト	通常						私でも<speed=0.5>　　</speed>\nお嫁さんになれる？
+	ディーア	笑い2						もちろん、\nぎんいろ=ロストが望むなら
+	ディーア	通常2						オレも協力する
+	ぎんいろ=ロスト	通常						……ありがとう、マスター
+Param	character_grayout=false
+FadeOut	white					1
+CharacterOff						0
+	イベントスチル59306		エフェクト表			0
+Wait						1
+FadeIn	white					1
+	ぎんいろ=ロスト	<Off>						名前も、この心も
+	ぎんいろ=ロスト	<Off>						未来も……
+	ぎんいろ=ロスト	<Off>						あなたは全部を私にくれた……
+	ぎんいろ=ロスト	<Off>						あなたは私の全てだから\nそう、きっとまた会える……
+	ぎんいろ=ロスト	<Off>						銀色だから、ぎんいろ\n失ってもまた会えるから\nぎんいろ=ロスト
+	ぎんいろ=ロスト	<Off>						ぎんいろ=ロスト\nそれが、私の名前……
+	ぎんいろ=ロスト	<Off>						マスターがくれた\n幸せの名前
+FadeOut	white					1
+Bg	白背景					0
+CharacterOff						0
+	イベントロゴ593		エフェクト表			0
+Wait						2
+FadeIn	white					1
+								<color=blue>\n　　ロストレコードリコレクションズ\n　　　　　　　　　　　　　　<dash=2>完</color>
+FadeOut	white					2
+Wait						2
+If	isdebug==true
+CharacterOff
+Jump	*E_593_01
+EndIf
+EndScenario

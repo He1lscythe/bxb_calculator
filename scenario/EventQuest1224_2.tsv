@@ -1,0 +1,665 @@
+# E_1224_ex01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔剣の日常
+Bg	酒場1F					0
+Param	character_grayout=false
+	リディ=ダークネス	魔王
+FadeIn	black					1
+	リディ=ダークネス	魔王						ハロウィン、ハロウィーン♪\nもうすぐハロウィーン♪
+CharacterOff
+	マナ	ハロウィン						楽しそうですね、\nリディ=ダークネスさん♪
+	マナ	ハロウィン						もうお悩みは解決しましたか？
+CharacterOff
+	リディ=ダークネス	魔王						うん、ばっちり！
+	リディ=ダークネス	魔王						ちょっと戦いは大変だったけど、\n私らしい私に戻れたよ♪
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	魔王						マナちゃんも、\n吸血鬼のコスチュームにしたんだね\nかわいいっ♪
+CharacterOff
+	マナ	ハロウィン						ありがとうございます！\nでも他の魔剣のみなさんも<dash=2>
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff						0
+	レビュウ	ハロウィン				0
+FadeIn	black					.3
+	レビュウ	ハロウィン						えっちすぎる衣装はリジェクト！\n健全で安全なハロウィンにしましょう
+	魔剣の声	<Off>						えーっ？\nレビュウちゃんの衣装こそえっちだよ
+Tween	レビュウ	PunchPosition	y=30				NoWait
+	レビュウ	ハロウィン						そ、そんなことありません！\nこれはえっちな気持ちを治療する\n吸血ナースさんですから！
+FadeOut	black					.3
+CharacterOff						0
+	マナ	ハロウィン				0
+Param	character_grayout=false
+FadeIn	black					.3
+	マナ	ハロウィン						みなさん、とってもかわいいです♪
+	マナ	ハロウィン						でもマナも負けません!!\n旦那様に褒めてもらえるように\nマナはもっとがんばりますっ！
+Se	ピューン
+Tween	マナ	MoveBy	x=700 time=1				NoWait
+Wait						1
+CharacterOff
+	リディ=ダークネス	魔王怒り						むむっ……！\nこれは強敵出現の予感……！
+	リディ=ダークネス	魔王						でもそうだよね、\nかわいい衣装でアピールできる\nハロウィンは乙女の戦場
+	リディ=ダークネス	魔王						リディも他の子たちに負けないように\nマスターを誘惑しないと！
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	魔王						よぉーし、絶対負けないぞー！
+CharacterOff
+	オメガB	拡大笑い	エフェクト表					負けない？\nそれならオメガちゃんと勝負しよ！
+CharacterOff
+	リディ=ダークネス	魔王怒り
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	魔王怒り						ひゃあっ！\nお、オメガ:Blazeちゃん!?\nびっくりしたぁ……！
+	リディ=ダークネス	魔王怒り						でも勝負って言っても、\nオメガ:Blazeちゃんが想像した\n勝負じゃないと思うよ？
+CharacterOff
+	オメガB	通常						そうかな？\nマスターちゃんを巡るハロウィンの\n大勝負なんでしょう？
+	オメガB	通常						それならオメガちゃんも、\nちゃーんと参加して勝つつもりだし！
+Se	フォーン
+FadeOut	white					.5
+	オメガB	ハロウィン				0
+FadeIn	white					.5
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	ハロウィン						ほら♪\nハロウィンの勝負服も用意したの！
+CharacterOff
+	リディ=ダークネス	魔王						わぁ、かわいいっ！
+CharacterOff
+	オメガB	ハロウィン						勝負服っていうくらいだし！\n愛のバトルには服も大事だからね♪
+CharacterOff
+	リディ=ダークネス	魔王怒り						オメガ:Blazeちゃんから、\n本気で勝つって気迫を感じる……！
+	リディ=ダークネス	魔王怒り						ち、ちなみに、\nどうやって勝負に勝つつもりなの？
+CharacterOff
+	オメガB	ハロウィン						もちろん！\n正々堂々、最速で最短でまっすぐに\n一直線にっ！
+Se	火3
+	オーラ炎		エフェクト表			1
+	オメガB	ハロウィン						想いを全身に込めて\nダイレクトアタックだよ……!!
+CharacterOff
+	リディ=ダークネス	魔王怒り						オメガ:Blazeちゃんが燃えてる!?
+CharacterOff
+	オーラ炎		エフェクト表
+	オメガB	ハロウィン						リディ=ダークネスちゃん、\nオメガちゃんは戦いが好きなの！
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	ハロウィン						戦闘が好きなの
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	ハロウィン						戦闘が大好きなの♪
+	オメガB	ハロウィン						戦場で、日常で、お部屋で！\nありとあらゆる場所で起こる戦いに\n愛を感じるの♪
+	オメガB	ハロウィン						バンバンいきおいよく\n魂と体をぶつけ合った後に\nマスターちゃんと倒れこむのが好き！
+	オメガB	ハロウィン						お互いがなにしているのかさえ\n分からなくなって、\n痛みと快感だけ感じる瞬間が好き！
+	オメガB	ハロウィン						思わず強くしすぎちゃって、\n血が滲んじゃってもマスターちゃんが\n受け入れてくれた時は感動を覚える
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	ハロウィン						ハロウィンでも愛の戦闘を！\n燃えるような戦闘をしてみせるよ！
+	オメガB	ハロウィン						このヴァンパイアな衣装があれば、\n血湧き肉躍る戦いができる！
+CharacterOff
+	リディ=ダークネス	魔王怒り						むむむっ……！\nそういう意味じゃないって分かるのに\nドキドキしちゃう……！
+CharacterOff
+	オメガB	ハロウィン						リディ=ダークネスちゃん、\nあなたはいったいなにを望んでるの？
+CharacterOff
+	リディ=ダークネス	魔王怒り						もちろん！\nリディが望むのはただ一つ……！
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	魔王怒り						マスターの心は渡さないよ！
+CharacterOff
+	オメガB	ハロウィン						よろしい、ならば愛のバトル！
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	ハロウィン						オメガちゃんも、\n一心不乱に真っ向勝負を挑むから！\n愛し愛される戦いをしよう！
+	オメガB	ハロウィン						これがオメガちゃんの愛ー！
+Se	ピューン
+Tween	オメガB	MoveBy	x=800 time=1				NoWait
+Wait						1
+CharacterOff
+	リディ=ダークネス	魔王						オメガ:Blazeちゃん、わかったよ
+	リディ=ダークネス	魔王						あなたの愛と戦いへの想いはすごい\n気合は上かもしれない
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	魔王						でもマスターへの気持ちなら、\n本物のリディちゃんにも負けない！
+	リディ=ダークネス	魔王						だから悪堕ちリディらしい\n愛の戦いを見せてあげる……！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	オメガB	ハロウィン	p5b			0
+	レビュウ	ハロウィン	p8			0
+	マナ	ハロウィン	p2			0
+	          	<Off>	1_2			0
+Wait						2
+FadeIn	black					.3
+Bgm	都市
+	魔剣たち	<Off>	1_2					ハッピーハロウィーン！
+CharacterOff
+	ディーア	笑い4						ああ、ハッピーハロウィン！
+	ディーア	笑い4						今年はヴァンパイアの格好が\nブームなんだな♪
+CharacterOff
+	マナ	ハロウィン						そうなんです！\nヴァンパイアなマナも\nおとくいさまになれますかぁ？
+CharacterOff
+	ディーア	笑い4						もちろん！\nお菓子をたくさんあげるからな！
+CharacterOff
+	マナ	ハロウィン
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	ハロウィン						わぁーい！
+CharacterOff
+	クリーフォート	本気						…………
+CharacterOff
+	ディーア	通常4						クリーフォートも、\nもっと近くに来て参加していいぞ！
+	ディーア	通常4						今日はせっかくの、\nハロウィンパーティーなんだから
+CharacterOff
+	クリーフォート	笑い						えっ、ええ……
+	クリーフォート	悲しい						ですが、その……\nこういうお祝いの場の経験がなくて\nどうすればいいのかと……
+CharacterOff
+	ディーア	笑い4						テーブルのお菓子や料理を食べたり、\n他の子と話せば良いんだよ
+CharacterOff
+	クリーフォート	慌て						えっと……\nですがそういう選択をするのは、\n昔から苦手なんです……
+	クリーフォート	慌て						ですから、マスターから<dash=2>
+CharacterOff
+	ディーア	驚き4						あれ？\n呼び方また戻っているぞ？\nさっきはちゃんと<dash=2>
+CharacterOff
+	クリーフォート	慌て
+Tween	クリーフォート	PunchPosition	y=30				NoWait
+	クリーフォート	慌て						そ、それはっ！\n二人きりの時だけという約束です！
+	クリーフォート	照れ						皆の前では……恥ずかしいですから
+CharacterOff
+	ディーア	通常4						そっか、\nでも慣れていないことに挑戦するのも\nそれはそれで面白いと思うぞ？
+	ディーア	通常4						あっちにラグナロクたちもいたし、\n久しぶりに話をしてくるのはどうだ？
+CharacterOff
+	クリーフォート	笑い						そ、そうですね、\n貴方がそういうならそうしてみます
+Se	走る
+Tween	クリーフォート	MoveBy	x=700 time=1				NoWait
+Wait						.5
+CharacterOff
+	ディーア	汗4						うーん、\nまだまだ時間はかかりそうかな？
+	ディーア	汗4						もう少し、\n素の顔も見せてくれるといいけれど
+	ディーア	通常4						でも急ぐのもダメだし、\n今日はオレもパーティーを楽しもう
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い4						あっ！
+	ディーア	笑い4						おーい、リディ=ダークネス！\nハッピーハロウィン！
+FadeOut	black					.2
+CharacterOff						0
+	リディ=ダークネス	魔王怒り				.5
+FadeIn	black					.2
+	リディ=ダークネス	魔王怒り						…………
+	リディ=ダークネス	魔王怒り						すーん
+Se	ピューン
+Tween	リディ=ダークネス	MoveBy	x=800 time=0.5				NoWait
+Wait						1
+FadeOut	black					.2
+CharacterOff						0
+	ディーア	驚き4				0
+FadeIn	black					.2
+	ディーア	驚き4						えっ!?
+	ディーア	驚き4						ど、どうしたんだ!?\nあんな不機嫌そうな顔をして、\nどっか行っちゃうなんて……
+	ディーア	絶望4						なにか怒らせるようなことした\n記憶はないし……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	汗4						そ、そうだよ！\nきっと声が聞こえなかったとかで\nただの気の所為に違いない！
+StopBgm
+FadeOut	black					.2
+CharacterOff						0
+	ディーア	絶望4				0
+	黒グラデーション		エフェクト表			0
+FadeIn	black					.2
+	ディーア	絶望4						……と、思ってたのに
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	通常4				0
+FadeIn	black					.2
+Bgm	絶望
+	ディーア	通常4						あ、リディ=ダークネス！\nやっぱりその魔装、似合って<dash=2>
+CharacterOff
+	リディ=ダークネス	魔王怒り						ふーん……
+Tween	リディ=ダークネス	MoveBy	x=800 time=0.5				NoWait
+Wait						1
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	汗4				0
+FadeIn	black					.3
+	ディーア	汗4						リディ=ダークネス！\n美味しいパンプキンパイがあるぞ！
+CharacterOff
+	リディ=ダークネス	魔王怒り						今はいらなーい
+Tween	リディ=ダークネス	MoveBy	x=800 time=0.5				NoWait
+Wait						1
+CharacterOff
+	ディーア	絶望4						えっ……？
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Wait						1
+	ディーア	絶望4				0
+FadeIn	black					.3
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						めちゃくちゃ怒ってる!?
+	ディーア	絶望4						ま、まずいぞ？\nオレはいったいなにをしたんだ？
+	ディーア	絶望4						思いつかないことがないわけじゃ\nないんだけど……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	悔しい4						とにかく！\nリディ=ダークネスが怒っているのは\n間違いないんだ！
+	ディーア	悔しい4						謝らないと……!!
+	ディーア	悔しい4						確かリディ=ダークネスは、\nさっき二階に上がっていったよな
+	ディーア	本気4						今なら……！
+StopBgm
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	リディ=ダークネス	魔王怒り				0
+	ディーア	悔しい4	画面外_右			0
+Wait						1
+Param	character_grayout=true
+FadeIn	black					.3
+Bgm	雪の街
+Tween	ディーア	MoveBy	x=-550 time=1				NoWait
+	ディーア	悔しい4						リディ=ダークネス！
+Tween	リディ=ダークネス	MoveBy	x=-150				NoWait
+	リディ=ダークネス	魔王怒り						……マスター？
+Shake	ディーア		x=2				NoWait
+	ディーア	悔しい4						っ……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						ごめん！
+	ディーア	絶望4						こんな楽しい日なのに、\n怒らせるようなことをしたんだろう？
+	ディーア	絶望4						本当にごめんっ！
+	ディーア	絶望4						そ、その……\nお前が大事にとっておいたプリン、\n食べちゃったりして……
+	ディーア	絶望4						任務帰りで小腹が空いていたから、\nつい……！
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	魔王怒り						えぇ!?\nあれ食べちゃったのマスターなの!?
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	魔王怒り						リディ、楽しみにしてたのに!!
+	ディーア	驚き4						本当にごめ……あれ？
+	ディーア	驚き4						オレの仕業だって知らないなら、\nプリン食べられたから\n怒っていたわけじゃないのか？
+StopBgm
+Shake	リディ=ダークネス		x=2				NoWait
+	リディ=ダークネス	魔王怒り						あっ……しまった……！
+	リディ=ダークネス	魔王						でも作戦は成功だし、\nもう怒ったふりはやーめた♪
+Bgm	コメディ
+CharacterOff
+	リディ=ダークネス	拡大魔王	エフェクト表					やーっと二人っきりになれたね、\nマスター♪
+CharacterOff
+	リディ=ダークネス	魔王	p3b
+	ディーア	驚き4	p7
+	ディーア	驚き4						さ、作戦!?
+	リディ=ダークネス	魔王						そうだよ♪\n悪堕ちリディって分かってるのに、\n簡単に罠にハマっちゃったね♪
+	リディ=ダークネス	魔王						リディね、考えたの
+	リディ=ダークネス	魔王						ハロウィンっていう、\nみんなが大勝負を仕掛ける時に、\nマスターを独占する方法を♪
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	魔王						押してダメなら、引いてみる♪
+	リディ=ダークネス	魔王						私がいつもと違うから、\nマスターはまんまと着いてきちゃった
+	リディ=ダークネス	魔王						だーれもいないお部屋で、\n今からイタズラし放題だよぉ♪
+	ディーア	汗4						そ、そっか……！\nじゃあ怒っていないならこれで……
+	リディ=ダークネス	魔王怒り						プリン食べたのは怒ってるよ？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						ぎくっ！
+	リディ=ダークネス	魔王						ということでマスターには、\nリディとハロウィンしてもらうね♪
+	リディ=ダークネス	魔王						ふふふ♪\nそれに本当はマスターも……\n私の魔王装気になってたでしょ？
+	リディ=ダークネス	魔王						例えば……
+Param	character_grayout=false
+FadeOut	white					.3
+CharacterOff						0
+	リディ=ダークネス	拡大魔王足	エフェクト表			0
+FadeIn	white					.3
+	リディ=ダークネス 	<Off>						この履いているの、\nパンツなのかな、ズボンなのかなぁ？
+FadeOut	white					.3
+CharacterOff						0
+	リディ=ダークネス	拡大魔王胸	エフェクト表			0
+FadeIn	white					.3
+	リディ=ダークネス 	<Off>						ピチピチの上着の下は、\n何かつけてるのかな、ないのかなぁ？
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	にやけ4	p7			0
+	リディ=ダークネス	魔王	p3b			0
+Param	character_grayout=true
+FadeIn	white					.3
+	リディ=ダークネス	魔王						今ならそんな欲望でも\nたーっぷり解放することができるよ？
+	ディーア	にやけ4						そ、それは確かに気にな<dash=2>
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						はっ……！
+	ディーア	汗4						い、いやいや！\nまだ下ではみんなパーティー中だし！
+	リディ=ダークネス	魔王						取り繕わなくていいの、\n理性で欲望を蓋しなくてもいいの♪
+	リディ=ダークネス	魔王						だってリディ=ダークネスは、\nリディちゃんの欲望から生まれた魔剣
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	魔王						マスターが本当にしたいこと、\nなんでも受け入れてあげられるのが\n私の喜びで悦び♪
+	リディ=ダークネス	魔王						マスター、ハッピーハロウィン♪
+CharacterOff
+	リディ=ダークネス	拡大魔王	エフェクト表					<ruby=トリック>イタズラしちゃう？</ruby>\n<ruby=オア>それとも</ruby>\n<ruby=トリート>イタズラされたい？</ruby>
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1224_ex02
+EndIf
+EndScenario
+
+# E_1224_ex02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	都市
+Bg	酒場1F					0
+	クリーフォート	悲しい				0
+	          	<Off>	1_2			0
+Se	ガヤA	TRUE
+FadeIn	black					1
+	魔剣の声	<Off>	1_2					ハッピーハロウィーン！
+	魔剣の声	<Off>	1_2					マスター、お菓子ちょうだい！
+	クリーフォート	悲しい						はぁ……\nここは本当に賑やかな場所ですね
+Param	character_grayout=false
+StopSe
+CharacterOff
+	覇王剣ラグナロク	真解放通常						そういうあなたは、\nなにやら思い悩んでいるようね
+CharacterOff
+	クリーフォート	驚き						ラグナロク……
+CharacterOff
+	覇王剣ラグナロク	真解放通常						ふふ♪\nあなたとは幾度となく戦ったけれど\nそんな顔を見るのは初めて
+	覇王剣ラグナロク	真解放通常						でもなんだか、\n肩の荷を下ろしたようにも見えるわ
+	覇王剣ラグナロク	真解放通常						新たな主の魔剣となって、\n心境に変化はあったのかしら？
+CharacterOff
+	クリーフォート	本気						……どうでしょう
+Shake	クリーフォート		x=3				NoWait
+	クリーフォート	本気						私は元々、\n自分のことが自分でよくわからない\n臆病な小心者でしたから
+	クリーフォート	本気						ですが確かに、\nおに……マスターの魔剣となってから\n昔と違う気持ちにはなっています
+	クリーフォート	本気						この環境の変化に、\n戸惑うことの方が多いですけどね
+CharacterOff
+	覇王剣ラグナロク	真解放通常						マスターの下にいると、\n戦場とは違う魔剣たちの姿を見るから\n私も最初は驚いたわ
+	覇王剣ラグナロク	真解放通常						ほら、あそこなんて
+FadeOut	black					.3
+CharacterOff						0
+	焔華剣テュフォーン	真解放通常				0
+FadeIn	black					.3
+	焔華剣テュフォーン	真解放通常						アポカリプス……！
+Tween	焔華剣テュフォーン	PunchPosition	y=30				NoWait
+	焔華剣テュフォーン	真解放通常						貴様はまた、\nワシの弟子をたぶらかしおって！
+CharacterOff
+	アポカリプス	通常						先に私のペットくんを連れ出して\n怪我させたのはキミでしょ？
+	アポカリプス	通常						私が飼っている限り、\nペットくんに修行なんていらないの♪
+	アポカリプス	笑い						そもそも被造物が、\n神である私に文句を言うだなんて、\n身の程を知りなよー♪
+CharacterOff
+	焔華剣テュフォーン	真解放通常						ほぉう……！\n燃えカスになって終わりたいならば\n最初からそう言うんじゃな！
+FadeOut	black					.3
+CharacterOff						0
+	覇王剣ラグナロク	真解放通常				0
+FadeIn	black					.3
+	覇王剣ラグナロク	真解放通常						マスターを巡って口喧嘩だなんて、\nまるで普通の少女のよう
+	覇王剣ラグナロク	真解放通常						世界を簡単に滅ぼしうる兵器とは\nとても思えないわね
+CharacterOff
+	クリーフォート	驚き						もう原初六魔剣のうち、\n五魔剣を手中に収めているのですね
+CharacterOff
+	覇王剣ラグナロク	真解放通常						もしかしたら、\n失われた聖征剣エクスカリバーさえ\n見つけ出すかもしれない
+	覇王剣ラグナロク	真解放通常						彼が未来で、\nどれほどの王になるか想像できない
+	覇王剣ラグナロク	真解放通常						でもそれでこそ覇道を継ぎ、\n魔界の未来を切り開く魔王として\n相応しいと思うのよ
+CharacterOff
+	クリーフォート	本気						おに……\nマスターが本当に魔王にも……
+	クリーフォート	笑い						確かにその未来は、\n私も見届けてみたいですね……
+CharacterOff
+	覇王剣ラグナロク	真解放通常						ところでクリーフォート？
+	覇王剣ラグナロク	真解放通常						先程からマスターを呼ぶ時に、\nなにやら「おに」とかなんとか\n聞こえる気がするのだけど
+CharacterOff
+	クリーフォート	慌て
+Tween	クリーフォート	PunchPosition	y=30				NoWait
+	クリーフォート	慌て						っ……!!
+Shake	クリーフォート		x=2				NoWait
+	クリーフォート	慌て						い、いえ、その、これは……!?
+CharacterOff
+	覇王剣ラグナロク	真解放通常						……？\nそんなに狼狽えてどうしたの？
+CharacterOff
+	クリーフォート	慌て						な、なんでもありません……！\nその、呼び方に慣れよう慣れようと\nしていたらつい出ただけで……
+	クリーフォート	本気						貴女こそ、\nあのように業の深すぎるマスターに\nどのように慣れたのですか？
+CharacterOff
+	覇王剣ラグナロク	真解放通常						業が深い……？
+CharacterOff
+	クリーフォート	本気						誤魔化す必要はありません
+	クリーフォート	本気						このような姿をした私に、\nあのような要求をするマスターです
+	クリーフォート	本気						背格好が似ているラグナロクにも、\n同じこだわりを見せているのでしょう
+	クリーフォート	照れ						その、妹とか、義理とか……
+CharacterOff
+	覇王剣ラグナロク	真解放通常						ええと、なんのことかしら？
+	覇王剣ラグナロク	真解放通常						ごめんなさい、\n本当になにも見当がつかないわ
+CharacterOff
+	クリーフォート	拡大慌て	エフェクト表					えっ!?
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	クリーフォート	悲しい				0
+Wait						2
+FadeIn	black					.3
+Bgm	平和
+	クリーフォート	悲しい						なんということでしょう……
+	クリーフォート	悲しい						てっきり、\nラグナロクにも義妹になってくれと\n言っているかと思ったのに
+Shake	クリーフォート		x=3				NoWait
+	クリーフォート	悲しい						では、なぜ私だけを妹に……？
+	クリーフォート	悲しい						それにやはり、\n私は妹にはふさわしくない気が……
+CharacterOff
+	ライオンハート	通常				.5
+Tween	ライオンハート	PunchPosition	y=30				NoWait
+	ライオンハート	通常						妹仲間の悩む声がするっ！
+CharacterOff
+	クリーフォート	慌て						えっ!?
+	クリーフォート	慌て						あ、貴女はライオンハート？
+CharacterOff
+	ライオンハート	通常						にははー、そうだよ！
+	ライオンハート	通常						クリーフォートちゃん、\nお兄ちゃんのことで悩んでいるの？
+CharacterOff
+	ネロ	通常						お兄ちゃんがいけないことしたの？\nにひひー♪
+CharacterOff
+	ナターシャ	極弐						でしたら我々！\n妹魔剣シスターズの出番ですわね♪
+CharacterOff
+	ジョーカー	通常						お兄ちゃんの妹魔剣は\n十三魔剣を超えてもっと拡大中♪\n新入りも大歓迎っ！
+Tween	ジョーカー	PunchPosition	y=30				NoWait
+	ジョーカー	通常						クリーフォートちゃん♪\nジョカになんでも相談していいよ！
+CharacterOff
+	クリーフォート	慌て						ま、待ってください！\nみなさんの気持ちは嬉しいですが\n私は妹だなんて一言も……！
+CharacterOff
+	ノーネーム	通常						真の妹は魂で分かる……
+	ノーネーム	通常						マスターさんに言わせれば、\nそうらしいですよ
+	ノーネーム	通常						あなたも此方側なんですね
+CharacterOff
+	クリーフォート	驚き						ノーネーム……
+	クリーフォート	驚き						この不思議な親近感、まさか貴女も？
+CharacterOff
+	ノーネーム	通常						そう、\n私たちはいきなり妹認定された同志
+CharacterOff
+	クリーフォート	悲しい						妹になった魔剣が私だけではない、\nそれは心強い事実です
+	クリーフォート	悲しい						ですが、\nやはり私は妹らしくありません
+	クリーフォート	悲しい						だってみなさんは、\nまさに妹という幼くスレンダーな\n可愛らしい体型ですけど
+	クリーフォート	悲しい						私はこのとおり<dash=2>
+Se	ポップイン
+FadeOut	white					.3
+CharacterOff						0
+	クリーフォート	拡大胸	エフェクト表			0
+FadeIn	white					.3
+	天業剣クリーフォート	<Off>						その……大きすぎますし……
+FadeOut	white					.3
+CharacterOff						0
+	クリーフォート	悲しい				0
+FadeIn	white					.3
+	クリーフォート	悲しい						背も高いので、\nマスターの妹とは言えないかと
+CharacterOff
+	ライオンハート	通常						ちがうよ、クリーフォートちゃん！
+CharacterOff
+	ナターシャ	極弐						お兄さまは言ってましたわ
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F					0
+	ディーア	目閉じ2				0
+FadeIn	white					.3
+	ディーア	目閉じ2						オレの特性の影響なんだ、\n血の繋がらない妹たちの存在でも、\nどんなに遠くにいようと感じ取れる
+	ディーア	本気2						来いっ！\nオレはお兄ちゃんだぞっ！
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場_宿屋					0
+	ナターシャ	極弐				0
+FadeIn	white					.3
+	ナターシャ	極弐						妹は絆の形なのです
+Tween	ナターシャ	PunchPosition	y=30				NoWait
+	ナターシャ	極弐						そう言って、\nぎゅーってしてくれましたわ♪
+CharacterOff
+	ネロ	通常						それにぃ♪\n妹だからこそできることもあるよ♪
+	ネロ	通常						にひひ♪\n妹ならお兄ちゃんのお風呂にだって\n入り放題なんだから♪
+CharacterOff
+	クリーフォート	慌て						なっ……!?\nい、妹とお風呂にはいるなんて！\n許されて良いのですか？
+CharacterOff
+	ノーネーム	通常						魔界だと合法です\n実際に私も一緒にお風呂入りました
+CharacterOff
+	ライオンハート	通常						他にも！\n寝ているお兄ちゃんにどーんって\nダイブしても怒られないよ♪
+Tween	ライオンハート	PunchPosition	y=30				NoWait
+	ライオンハート	通常						だからクリーフォートちゃんも！\nお兄ちゃんの妹でオーケー！
+CharacterOff
+	クリーフォート	慌て						それが、\nお兄様の言う妹の在り方……？
+Shake	クリーフォート		x=3				NoWait
+	クリーフォート	照れ						妹扱いを求められた以上は、\n私も一緒にお風呂にはいらないと\nいけないのでは……？
+	クリーフォート	照れ						は、恥ずかしいですが、\nそれが、お兄様の望みならば……
+Tween	クリーフォート	PunchPosition	y=30				NoWait
+	クリーフォート	慌て						って、そうではなく！
+	クリーフォート	慌て						やはりそういう役目が妹なら、\n大きすぎる私は妹に不適格ですっ！
+Tween	クリーフォート	PunchPosition	y=30				NoWait
+	クリーフォート	慌て						むしろ姉！\n私はお姉ちゃんであるべきでしょう？
+	クリーフォート	慌て						みなさんもそう思いますよね？
+CharacterOff
+	ライオンハート	通常						うーん、そうかなぁ？
+CharacterOff
+	クリーフォート	本気						そうなんです……！
+	クリーフォート	本気						だから私は……！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	怪しい4	p3			0
+	クリーフォート	本気	p7b			0
+Param	character_grayout=true
+FadeIn	black					.3
+Bgm	穏やか
+	クリーフォート	本気						ということでマスターには、\n私がお姉ちゃんと認めてもらいます
+	クリーフォート	本気						そうすれば妹っぽいという誤解も\nなくなるはずですから！
+	ディーア	怪しい4						ちなみにどうやって？
+Tween	クリーフォート	MoveBy	x=-10				NoWait
+	クリーフォート	本気						甘やかします……！
+	クリーフォート	本気						姉とは弟を甘やかし癒やす存在だと\n教本にありました
+	ディーア	汗4						どんな本なのかは気になるけど……
+	ディーア	怪しい4						そもそもクリーフォートこそ、\n甘えるのが苦手だろ？
+Shake	クリーフォート		x=3				NoWait
+	クリーフォート	照れ						そ、それはそうですけど……\nまずはやってみないとわかりません
+	クリーフォート	照れ						例えば添い寝というものは\n姉が弟にする愛情表現と言いますし\n私も、やって、みよう、かと……
+	クリーフォート	照れ						なので、マスターには、\nすこしだけお付き合いいただけると
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	にやけ4						照れてるオレの妹が可愛いっ！
+Tween	クリーフォート	PunchPosition	y=30				NoWait
+	クリーフォート	慌て						ですから妹ではありません！
+	クリーフォート	照れ						さ、さあっ！\nお姉ちゃんらしさを見せてあげます
+StopBgm
+CharacterOff
+	クリーフォート	拡大照れ	エフェクト表					ぎゅーっ……！
+Se	フォーン
+FadeOut	white					1
+Param	character_grayout=false
+CharacterOff						0
+	クリーフォート	拡大胸	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+Bg	白背景					0
+FadeIn	white					1
+Bgm	神秘
+	天業剣クリーフォート	<Off>						おにい……マスターが胸の中に
+	天業剣クリーフォート	<Off>						ではこのままぎゅっとして……\nいいこ、いいこ……♪
+	ディーア	<Off>						ふわぁああああ……
+	天業剣クリーフォート	<Off>						これで、いかがですか？
+	ディーア	<Off>						ああ、気持ちいい……
+	ディーア	<Off>						慣れない手つきで\n一生懸命に癒やしてくれるのが\nたまらない……♪
+FadeOut	white					1
+StopBgm
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	にやけ4	p3			0
+	クリーフォート	笑い	p7b			0
+Bg	酒場_宿屋					0
+FadeIn	white					1
+	クリーフォート	笑い						どうですか？\nこれで私は妹でなく姉だと<dash=2>
+Bgm	キノコリオン
+	ディーア	目閉じ4						いいや、違うな
+Tween	クリーフォート	PunchPosition	y=30				NoWait
+	クリーフォート	慌て						えっ……！
+	ディーア	目閉じ4						確かに密着した心の触れ合いは\nオレの疲れを癒やした
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気4						だがそれは！\nお姉ちゃんぶりたい時にする！\n可愛らしい妹のわがまま！
+	ディーア	本気4						そんな妹らしさに満ちた\n仲良し兄妹だからこその良さだ！
+	ディーア	本気4						オレには分かる！\nお前の魂の本質は妹属性だと！
+	ディーア	本気4						ということで！\n今度は攻守逆転だ、我が妹よ!!
+CharacterOff
+	クリーフォート	拡大慌て	エフェクト表					ま、まって……!?\nそんな、ことまでされたら……！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+	ノーネーム	通常				0
+Param	character_grayout=true
+FadeIn	black					.3
+Bgm	平和
+	ノーネーム	通常						そうしてやはり妹にされたと
+CharacterOff
+	ディーア	笑い4	p3
+	クリーフォート	悲しい	p7b
+	クリーフォート	悲しい						うぅ……\nマスターに甘やかされて、\nたくましい胸にぎゅっとされて
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い4						朝までぐっすりだったな！
+	クリーフォート	悲しい						私は甘かった……\nあれほどの安心感を与えられるとは\n兄としての格の違いを知りました
+Tween	クリーフォート	PunchPosition	y=30				NoWait
+	クリーフォート	悲しい						私は、姉にはなれない……!!
+	クリーフォート	悲しい						でもやはり、\n私は妹でいるのも不適格なのでは？
+	クリーフォート	悲しい						素直に甘えることも出来ないですし\n甘やかせる妹が欲しいならば、\n私よりも妹らしい他の魔剣が<dash=2>
+StopBgm
+	ディーア	怒り4						それは違うぞ、クリーフォート
+	クリーフォート	驚き						えっ……？
+Bgm	凱旋
+	ディーア	本気4						家族になるのに理由はいらない！
+	ディーア	通常4						うまくやろうとか、\n役に立とうなんて考えすぎなんだ
+	ディーア	通常4						オレはお前が妹っぽいと思って、\n支えたいから兄になるって決めたんだ
+	ディーア	笑い4						不安なときも失敗したときも、\n支えあえるのが家族で兄妹だろう？
+	ディーア	通常4						そんな遠慮のない関係だからこそ\n厳しい戦いも乗り越えられる
+	ディーア	笑い4						オレはそう信じているんだよ
+Shake	クリーフォート		x=2				NoWait
+	クリーフォート	驚き						マスター……
+	クリーフォート	通常						いいえ、お兄様
+	クリーフォート	笑い						私はまだ貴方の大きさを、\n見誤っていたのかもしれませんね
+	クリーフォート	笑い						魔剣を兵器だけではなく人として、\n仲間としても受け入れる
+	クリーフォート	笑い						そしてそれは、\n魔剣王としての力にも繋がる
+	クリーフォート	笑い						私を妹にしたのにも、\nそんな深い考えがあったとは……
+	クリーフォート	笑い						わかりました、\n私も妹としての役割を全うしましょう
+CharacterOff
+	クリーフォート	拡大笑い	エフェクト表					よろしくお願いします、\nおにいさ<dash=2>
+StopBgm
+CharacterOff
+	ノーネーム	通常						本音はなんですか？
+Bgm	コメディ
+CharacterOff
+	ディーア	にやけ4						おっきい妹に甘えられたい!!
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	にやけ4						それがなんとも背徳的で……!!
+CharacterOff
+	ネロ	通常						お兄ちゃん、さすがにサイテー
+CharacterOff
+	ディーア	にやけ4						もちろん！\n小さい妹なみんなも大好きだ!!
+CharacterOff
+	ネロ	通常
+Tween	ネロ	PunchPosition	y=30				NoWait
+	ネロ	通常						もっとサイテー!!
+CharacterOff
+	クリーフォート	本気						…………
+	クリーフォート	本気						では私も、\n妹になるという話はなかったことに
+CharacterOff
+	ディーア	絶望4						く、クリーフォートまで!?
+	ディーア	絶望4						待ってくれ！\nオレは本気なんだ……！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						本気の本気で\nお兄ちゃんになりたいんだー！
+CharacterOff
+	クリーフォート	笑い						はぁ……\n本当に業が深すぎる主ですね……
+	クリーフォート	笑い						私を妹にするのなら\nもう少ししっかりしてください
+CharacterOff
+	クリーフォート	拡大笑い	エフェクト表					……お兄様
+FadeOut	white					5
+If	isdebug==true
+CharacterOff
+Jump	*E_1224_ex01
+EndIf
+EndScenario

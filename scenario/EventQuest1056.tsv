@@ -1,0 +1,1812 @@
+# E_1056_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+StopSound
+Se	大雨2	TRUE				.5
+Bg	黒背景
+FadeIn	black					.5
+Param	character_grayout=false
+	？？？？	<Off>						あそこにいるのは…………
+	？？？？	<Off>						マスター、くん……？
+	？？？？	<Off>						よかった……\nやっと……やっと見つけた……
+	？？？？	<Off>						マスター、くん……
+	？？？？	<Off>						もう、神様には頼らない……
+StopSe
+	？？？？	<Off>						今度は必ず、私が守るからね…………
+FadeOut	black					.5
+Wait						.5
+CharacterOff
+	イベントロゴ1056A		エフェクト表			4
+FadeIn	black					.5
+		<Off>						           LOST CHILD\n              /FUTURE  
+CharacterOff	black					.5
+Wait						3
+Param	character_grayout=true
+CharacterOff						0
+Bg	市街地A(夜)					0
+CharacterOff
+Wait						2
+	 	<Off>						＜<ruby=ライブラリレコード>全能中枢記録 </ruby>魔界歴1507年\n　研究対象者"本来の襲来日" >
+	ディーア	汗2	1_2			1
+	リディ	笑い2	2_2			1
+Bgm	平和
+	リディ	笑い2						おっかいものー♪\nマスターと一緒におっかいものー♪
+	ディーア	汗2						こらこらリディ、\nそんなにはしゃぐなって
+	リディ	通常2						だって、マスターと二人で\nお買い物なんて、久しぶりでしょ♪
+	ディーア	汗2						それはまぁ、そうだけど\nもう夜も遅いんだから……
+	ディーア	驚き2						…………ん？
+	リディ	驚き2						どうしたの、マスター？
+FadeOut	black					.5
+CharacterOff
+	ルークスリア	本気町娘	3_3
+	勇者C	ゲス	1_1
+	勇者A	不埒	1_3
+FadeIn	black					.5
+	勇者A	不埒						お嬢さん、ちょっといいかな？\nボクら、臨時の検問をやってんだよね
+	ルークスリア	本気町娘						……検問？
+	勇者C	ゲス						そうそう、勇者学校も、\n世界図書館まで襲撃されて\n最近、世の中物騒でしょ？
+	勇者A	不埒						だからボクらが臨時の検問やって\n町の治安を守ってんだよね～
+	ルークスリア	通常町娘						……アタシ、急いでるんで
+	勇者C	ゲス						大丈夫大丈夫、ちょっと\nカラダ調べさせてもらうだけだからさ
+	勇者A	不埒嘲笑						……あれぇ？\nよく見たら、ずいぶん\n物騒なもの持ってんじゃないの？
+	ルークスリア	照れ町娘						ぇ、ナニ言って……
+	勇者C	ゲス嘲笑						これは持ち物検査が必要みたいだねェ
+CharacterOff
+StopBgm
+	ディーア	怒り2						おい、やめろよ
+CharacterOff
+	勇者A	不埒嘲笑	1_2
+	勇者C	ゲス嘲笑	2_2
+Bgm	緊迫
+	勇者A	不埒嘲笑						……あ？
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	怒り2	2_2
+	ディーア	本気2						やめろって言ったんだ\nその子、嫌がってるだろ
+CharacterOff
+	ルークスリア	照れ町娘
+	ルークスリア	照れ町娘						……ぁ……れ…………？
+CharacterOff
+	勇者C	ゲス嘲笑	1_2
+	勇者A	不埒嘲笑	2_2
+	勇者C	ゲス嘲笑						なんだァ、正義の味方気取りか？
+CharacterOff
+	ディーア	目閉じ2	1_2
+	リディ	怒り2	2_2
+	ディーア	目閉じ2						なんとでも言えよ
+	ディーア	怒り2						オレは、\nお前らみたいな偉そうな勇者が\nキノコリオンの１００倍嫌いなんだ
+CharacterOff
+	勇者C	ゲス嘲笑	1_2
+	勇者A	不埒嘲笑	2_2
+StopBgm
+	勇者C	ゲス嘲笑						……おい、口の利き方には気をつけろ
+Bgm	バトル
+	勇者C	ゲス嘲笑						この町じゃ……\nオレたち勇者が正義なんだからな！
+	勇者A	不埒嘲笑						魔剣使い、\nE.D.E.N.に逆らった罪だ！\nその女とまとめて処罰してやる！
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+	ディーア	怒り2						……まったく、\nとんだ「勇者」もいたもんだな
+	リディ	怒り2						マスター！\nこんなサイテーな人たち、\nやっつけちゃって！
+	ディーア	本気2						ああ、いくぞ……\n<ruby=アンロック>魔剣解放</ruby>!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1056_02
+EndIf
+EndScenario
+
+# E_1056_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	市街地A(夜)
+	ディーア	本気2	2_2
+	リディ	驚き2	1_2
+FadeIn	white					1
+	ディーア	本気2						はぁッ!!
+Se	斬2
+FadeOut	white					.2
+FadeIn	white					.2
+Se	ガード
+CharacterOff
+	勇者A	不埒	1_2
+	勇者C	ゲス	2_2
+Tween	勇者A	ShakePosition	x=5				NoWait
+	勇者A	不埒						なんだ、こいつ……異常に強え……
+Tween	勇者C	ShakePosition	x=5				NoWait
+	勇者C	ゲス						ちっ……今日の検問は終わりだっ！\n二度と町に出てくんなよ！
+Se	走る
+Tween	勇者A	MoveTo	x=-600				NoWait
+Tween	勇者C	MoveTo	x=-600				NoWait
+CharacterOff
+Wait						1
+	ディーア	目閉じ2	1_2
+	リディ	驚き2	2_2
+StopBgm
+	リディ							いっちゃった……
+Bgm	都市
+	ディーア	目閉じ2						まったく……\n「二度と出てくんなよ」\nはこっちの台詞だよ
+	？？？？？？	<Off>						…………ぁの……
+CharacterOff
+	ディーア	驚き2	2_2
+	ルークスリア	照れ町娘	1_2
+	ディーア	驚き2						あぁ、キミは……
+	ルークスリア	照れ町娘						……ぁりがと
+	ディーア	笑い2						気にしなくていいよ\nオレは当然のことをしたまでで……
+	ルークスリア	照れ2町娘						…………ぁたし、ルゥ
+	ルークスリア	照れ2町娘						……キミの、名前は？
+	ディーア	通常2						オレは、<param=name>だ
+	ルークスリア	照れ2町娘						<param=name>……
+	ディーア	笑い2						夜に一人で出歩くのは危ないよ\n特に、君みたいな……
+	ルークスリア	照れ2町娘						……ょ、用事があるから\nじゃぁねっ！
+StopBgm
+Se	走る						NoWait
+Tween	ルークスリア	MoveTo	x=-600				NoWait
+	ディーア	驚き2						あっ…………
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+Bgm	平和
+	リディ	驚き2						いっちゃった……
+	ディーア	怒り2						………………
+	ディーア	怒り2						いい香りだったな……
+	リディ	怒り2						…………ますたあ？
+	ディーア	汗2						いや……違うんだリディ、\n本当にいい香りだと思っただけで、\n変な気持ちは全然……
+	リディ	怒り2						……そんなこと言ってると、リディも\nマスターのこと、あのサイテー勇者と\nおんなじ目で見るからね！
+	ディーア	汗2						そ、それは流石に勘弁してくれ
+	リディ	怒り2						<size=20>……マスター、\n戦ってるときはカッコイイんだけどなぁ……</size>
+	ディーア	驚き2						ん、なんて？
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						なんでもないっ！
+	ディーア	汗2						なんだよ、もう……
+	リディ	驚き2						……でも、マスター？\n勇者の人って、昔からあんなに\nひどいことする人たちだった？
+FadeOut	black					.5
+CharacterOff
+ImageEffect	SpriteCamera	GrayScale
+	7章スチル2		エフェクト表
+FadeIn	black					.5
+Param	character_grayout=false
+	ディーア	<Off>						そうだな……\n勇者王シドウが欠けてから、魔界も\n少しおかしくなってるかもしれない
+	ディーア	<Off>						王が不在となると、たとえ勇者でも\nおかしなことを企むやつは出てくる\n特にE.D.E.N.は大所帯だからな……
+FadeOut	black					.5
+CharacterOff
+ImageEffectOff	SpriteCamera	GrayScale
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+Param	character_grayout=true
+FadeIn	black					.5
+	リディ	驚き2						人がいっぱいいるから\nみんなの様子を見きれないってこと？
+	ディーア	怒り2						……そんなところだな\n持ってる力を正しく使うのは、\n思ってるよりずっと難しいんだよ
+	ディーア	目閉じ2						最近じゃ、E.D.E.N.の勇者が\n信用できないから、自分で用心棒を\n雇う酒屋も増えてるらしい
+	リディ	驚き2						そうなんだ……
+	リディ	驚き2						リディたちが泊まってる酒場にも、\nよーじんぼーさんいるのかな？
+	ディーア	笑い2						どうだろうな\n昨日泊まったときには、\n別にいなかった気がするけど……
+StopBgm
+	？？？？	<Off>						<size=15>あ、あのぉ……</size>
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア	驚き2						……ん？\nリディ、なんか言ったか？
+	リディ	驚き2						え？ リディは\nなんにも言ってないよ？
+	？？？？	<Off>						<size=35>あ、あの～～～</size>
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア	悔しい2						まただ、こっちの方から……
+CharacterOff
+Param	character_grayout=false
+	じらいちゃん	通常
+	？？？？		2_2					<size=20>あ、やっとこっち見てくれた……</size>
+	じらいちゃん	泣き2
+	？？？？							<size=20>よかった、元気そう……\n生きてて、動いてて、息してる……\n</size>
+	じらいちゃん	泣き
+	？？？？							<size=20>尊い……生きてるだけで供給過多……</size>
+CharacterOff
+Param	character_grayout=true
+	ディーア	汗2	1_2
+	リディ	悲しい2	2_2
+Bgm	緊迫
+	リディ	悲しい2						マスター……あの子、\nずっとひとりでしゃべってるよ……？\nしかも……な、泣いてる……？
+	ディーア	汗2						そう、みたいだな……ちょっと、\n刺激しないように話してみよう
+CharacterOff
+	じらいちゃん	泣き
+	ディーア	<Off>						えーっと……\nオレに、何かご用かな？
+CharacterOff
+Param	character_grayout=false
+	じらいちゃん	本気
+Tween	じらいちゃん	PunchPosition	y=50				NoWait
+	？？？？	<Off>						<size=30>はっ、はい！！</size>
+	？？？？	<Off>						<ruby=じげんりゅう>爾限流</ruby>･未来ヲ斬跋スル刃と言います\nあなたの用心棒になります！！
+Param	character_grayout=true
+StopBgm
+	ディーア	<Off>						…………えっ？
+Param	character_grayout=false
+	じらいちゃん	通常						爾限流は、\nただ一人を守るための流派……
+Bgm	コメディ
+	じらいちゃん	本気						<size=35>「<ruby=なんじ>爾</ruby>限定・同担拒否」が\n流儀です！</size>
+	リディ	悲しい2						どうたん、きょひ……？
+	じらいちゃん	笑い拡大2						私のことは……\n「じらいちゃん」って\n呼んでください…………
+	じらいちゃん	笑い拡大						…………ﾍﾍ
+If	isdebug==true
+CharacterOff
+Jump	*E_1056_03
+EndIf
+EndScenario
+
+# E_1056_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	都市					.5
+Bg	市街地A(夜)
+	じらいちゃん	笑い口閉じ
+FadeIn	black					.5
+	ディーア	<Off>						じらい、ちゃん……？
+	じらいちゃん	笑い口閉じ						<size=18>どうしよう、思い出よりイケメン……とぅんく……</size>
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悲しい2	2_2
+	リディ	悲しい2						ねえ、マスター……\nあのコ、だいぶヘンだよ……？
+	リディ	悲しい2						ずっとひとりごと言ってるし、\n服も、あんまり着てないし……
+	ディーア	怒り2						あ、ああ……でも、\nさっきこの子が名乗った名前……
+CharacterOff
+Param	character_grayout=false
+	じらいちゃん
+	じらいちゃん	笑い口閉じ						<size=18>あ、マスターくんがこっち見てる……\nどうしよう、すっごく見てる……</size>
+	じらいちゃん	笑い口閉じ2						<size=18>今日の服、変じゃないかな……\nじらいに話しかけられるの、嫌じゃなかったかな……</size>
+	ディーア	<Off>						二本の角に、黄色いリボン……
+	ディーア	<Off>						黄色と青の、オッドアイ……
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+	ディーア	怒り2						…………やっぱり
+	リディ	驚き2						どうしたの、マスター？
+	ディーア	怒り2						少し、確かめたいことがあってな……
+	ディーア	本気2						魔力結晶体構築<dash=2>\n<ruby=アンロック>魔剣解放</ruby>!!
+CharacterOff
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表
+Se	光2
+FadeOut	white					1
+Param	character_grayout=true
+Wait						1
+CharacterOff
+	ディーア	怒り2	1_2			0
+	みらい	通常斬跋	2_2			0
+FadeIn	white					1
+Tween	みらい	PunchPosition	y=50				NoWait
+	みらい	通常斬跋						ひぁあっ！\nマ、マスターくん？\nどうしよ、実物がこんな近くに……
+	ディーア	汗2						みらいちゃん、\n急に呼び出して悪い
+	ディーア	通常2						ちょっと、\n聞きたいことがあってさ
+	みらい	通常斬跋						聞きたいこと、ですか……？
+	ディーア	汗2						ああ、あの子のことなんだけど……
+CharacterOff
+Param	character_grayout=false
+	じらいちゃん	笑い口閉じ
+Tween	じらいちゃん	MoveBy	x=10				NoWait
+	ディーア	<Off>						あの子は……\nみらいちゃんの知り合いか？
+Tween	じらいちゃん	MoveBy	x=-20				NoWait
+	未来ヲ斬跋スル刃	<Off>						…………し、知り合いではないです
+Tween	じらいちゃん	MoveBy	x=10				NoWait
+	未来ヲ斬跋スル刃	<Off>						魔力の性質は、\n私にすごく近いみたいですけど、\nでも…………
+StopBgm
+	ディーア	<Off>						…………でも？
+Bgm	コメディ
+	未来ヲ斬跋スル刃	<Off>						私は……あんなに\nえっちな格好しないです！！
+FadeOut	black					.5
+Param	character_grayout=false
+	イベントスチル1056D		エフェクト表			0
+FadeIn	black					.5
+	ディーア	<Off>						……たしかに、よく見ると\n大変な格好をしているな……
+StopBgm
+	未来ヲ斬跋スル刃	<Off>						それに……マスターくん、\n見てください……\nあの子の腰のところ……!!
+FadeOut	black					.5
+CharacterOff						0
+	イベントスチル1056E		エフェクト表			0
+FadeIn	black					.5
+	爾限流･未来ヲ斬跋スル刃	<Off>						<size=18>はぁ、良かった……\n今日の推しは、元気そう……</size>
+	未来ヲ斬跋スル刃	<Off>						少し、消えちゃってるけど……\nあれって……
+	ディーア	<Off>						<ruby=アネセサリ>魔人機関</ruby>の紋章……!!
+CharacterOff
+Bgm	絶望
+Param	character_grayout=true
+	ディーア		1_2
+	みらい	通常斬跋	2_2
+	ディーア	怒り2						まさか、あの子は……
+	ディーア	悔しい2						みらいちゃんを壊しに来た\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>……？
+	みらい	通常斬跋						わかりません……でも……\n私たちの「未来の可能性」は……\n今日ここで、いくつも、途絶えてます
+	ディーア	絶望2						……なん、だって……
+	ディーア	怒り2						…………爾限流、\n未来ヲ斬跋スル刃、だったか……
+CharacterOff
+	じらいちゃん	本気
+Tween	じらいちゃん	PunchPosition	y=50				NoWait
+	じらいちゃん	通常						<size=30>……は、はいっ!!</size>
+	じらいちゃん	笑い口閉じ						<size=18>推しが私の名前呼んでくれた、嬉しい……でもフルネームじゃなくて「じらいちゃん」でいいのに……あだ名は早かったかな……恥ずかしがり屋さんなのかな……休みは何してるのかな……闇属性太刀魔剣は嫌いじゃないかな……</size>
+CharacterOff
+	ディーア	目閉じ2	1_2
+	みらい	通常斬跋	2_2
+	ディーア	目閉じ2						……申し出はありがたいけど、\n用心棒は遠慮するよ
+CharacterOff
+	じらいちゃん	通常						……………………え？
+CharacterOff
+	ディーア		1_2
+	みらい	通常斬跋	2_2
+	ディーア	目閉じ2						オレの魔剣を壊すつもりなら……\n看過するわけにはいかない
+	ディーア	怒り2						ましてや……君が、\nアネセサリから送られてきた、\nロスト魔剣ならな……
+CharacterOff
+StopBgm
+	じらいちゃん	通常						……………アネ、セサ……リ………？
+	じらいちゃん	泣き						…………そん…………な………………
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+Se	火事
+Shake	Graphics		x=5 y=2 time=3				NoWait
+	ディーア	驚き2						……なんだ、揺れが……
+CharacterOff
+	じらいちゃん	エネミー2
+	じらいちゃん	エネミー2						…………………どうして………………
+Shake	Graphics		x=5 y=2 time=3				NoWait
+	じらいちゃん	エネミー2						……そんな、ひどいこと…………\n言うんですか…………………………？
+FadeOut	black					.5
+Se	闇3
+	じらいちゃん	エネミー
+Shake	Graphics		x=5 y=2 time=3				NoWait
+FadeIn	black					.5
+Bgm	魔王バトル
+	じらいちゃん	エネミー						じらいは………マスターくんを………\n……守りたい、だけなのに……………
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	リディ	悲しい2						マスター、気をつけて！
+	ディーア	怒り2						ああ……リディは下がってろよ……
+	ディーア	怒り2						あの構え、この魔力振……\n並大抵の魔剣じゃない……
+	ディーア	悔しい2						雰囲気は今までと随分違うが……\n彼女も、本物の<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>\nなのか……？
+CharacterOff								 
+	じらいちゃん	エネミー
+	じらいちゃん	エネミー						マスターくんが、じらいの話を\n聞いてくれないなら…………
+	じらいちゃん	エネミー						……マスターくんの魔剣…………\n…………みんな、倒して………………\nじらいが用心棒になります…………
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	怒り2	2_2
+	ディーア	悔しい2						手加減すれば、オレがやられる\n …………やるしかない
+	ディーア	本気2						魔力結晶体構築<dash=2>\n<ruby=アンロック>魔剣解放</ruby>!!
+Se	光1
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1056_04
+EndIf
+EndScenario
+
+# E_1056_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	バトル					.5
+Bg	市街地A(夜)
+	じらいちゃん	エネミー
+FadeIn	black					.5
+	じらいちゃん	エネミー						マスターくん……\nどうして…………
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	怒り2	2_2
+	ディーア	悔しい2						くッ……\nあれだけ打ち込んだのに、\n傷ひとつ付いてない……
+	リディ	怒り2						どうしよう、マスター……\nこのじらいちゃんって子、\nヘンだけど、すっごく強いよ……？
+	ディーア	悔しい2						……ああ\nこのまま戦っても埒があかない\nここは……
+	ディーア	本気2						おい、聞いてくれ！
+CharacterOff
+StopBgm
+	じらいちゃん	エネミー
+	じらいちゃん	エネミー						…………………………
+	じらいちゃん	エネミー						…………なんですか…………？
+CharacterOff
+Bgm	絶望
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	リディ	悲しい2						こわい……
+	ディーア	悔しい2						……じらいちゃん、だったよな？
+CharacterOff
+	じらいちゃん	エネミー
+	じらいちゃん	エネミー						…………………………
+	じらいちゃん	エネミー						……いま………………
+	じらいちゃん	エネミー						じらいちゃんって言いました……？
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悔しい2	2_2
+	ディーア	本気2						……あ、ああ、言った！
+CharacterOff
+	じらいちゃん	エネミー
+	じらいちゃん	エネミー						……………………
+StopBgm
+	じらいちゃん	エネミー2						………………
+	じらいちゃん	エネミー笑い						…………ｴﾍﾍ
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア	悔しい2						魔力振が……収まった……
+CharacterOff
+Bgm	平和
+	じらいちゃん	笑い口閉じ
+	じらいちゃん	笑い口閉じ						<size=18>……マスターくんが、\nじらいちゃんって呼んでくれた……</size>
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	リディ	驚き2						なんだかわかんないけど……\n助かったみたいだね、マスター……？
+	ディーア	怒り2						…………それは、どうだろうな……
+	ディーア	怒り2						……なぁ、じらいちゃん
+CharacterOff
+	じらいちゃん	笑い口閉じ2
+	じらいちゃん	笑い口閉じ2						<size=18>あ、また……\nでも、じらいは用心棒だから……\nもっと真面目な顔しなくちゃ……</size>
+	じらいちゃん	本気						……なんですか、マスターくん？
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悲しい2	2_2
+	ディーア	怒り2						どうして、じらいちゃんは……\nオレの用心棒になりたいんだ？
+CharacterOff
+	じらいちゃん	通常
+StopBgm
+	じらいちゃん	通常						……………………
+	じらいちゃん	本気						……マスターくんの、\n「今」を守るためです
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+	ディーア	怒り2						オレの、今……？
+Bgm	絶望
+CharacterOff
+	じらいちゃん
+	じらいちゃん	通常						このままじゃ……マスターくんには、
+	じらいちゃん	通常						……すごく痛くて、苦しい\n「未来」が待ってるんです……
+	じらいちゃん	通常						だからじらいは、\nマスターくんのこと……
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	怒り2	2_2
+	リディ	怒り2						ちょ、ちょっと待って！
+	リディ	怒り2						じらいちゃん、だっけ？
+CharacterOff
+	じらいちゃん	通常
+	じらいちゃん	通常						<size=18>……この子が……</size>
+	じらいちゃん	本気						…………はい、じらいで結構です
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+	リディ	怒り2						じらいちゃんは…………\nマスターの、何を知ってるの？
+CharacterOff
+	じらいちゃん	通常
+	じらいちゃん	通常						マスターくんの、なに……？
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悲しい2	2_2
+	リディ	悲しい2						だって、じらいちゃんは……
+	リディ	悲しい2						マスターが未来で不幸な目に遭うの、\n見てきたみたいな言い方だったけど……
+	リディ	怒り2						未来がどうなるかなんて、\n誰にもわかんないでしょ？
+	ディーア	怒り2						…………！
+	リディ	怒り2						マスターだって、\nちょっとだめなところもあるけど、\n毎日、一生懸命がんばってるのに……
+	リディ	怒り2						それなのに、なんだか\n決めつけるみたいな言い方して……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						そういうの、\nリディはおかしいと思う！
+	ディーア	驚き2						リディ……
+CharacterOff
+	じらいちゃん	通常
+	じらいちゃん	通常						…………………………
+	じらいちゃん	本気						…………詳しいお話は、できません
+	じらいちゃん	本気						でも……このままじゃ…………\nマスターくんは、命を落とすより\n苦しい目に遭うんです
+	じらいちゃん	泣き						私はもう……マスターくんの、\nあんなつらそうな顔、\n見たくないんです！！
+	じらいちゃん	本気						だから、私は……\n思い出だけを、たよりに
+	じらいちゃん	本気						……ずっと一人で\nマスターくんのこと、探してたんです
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悲しい2	2_2
+	リディ	悲しい2						……どういう、こと…………？\nリディ、難しくてわかんないよ……
+	ディーア	怒り2						…………なあ、じらいちゃん
+CharacterOff
+	じらいちゃん	本気
+Tween	じらいちゃん	PunchPosition	y=50				NoWait
+	じらいちゃん	本気						は、はいっ!!\nどうしました、マスターくん？
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+	ディーア	怒り2						……一つ、気になってたことがある\nもし話せるなら、教えてくれ
+CharacterOff
+	イベントスチル1056E		エフェクト表
+Param	character_grayout=false
+	ディーア	<Off>						……君の腰には、たしかに\n<ruby=アネセサリ>魔人機関</ruby>の紋章がある
+	爾限流･未来ヲ斬跋スル刃	<Off>						…………うっ…………
+	ディーア	<Off>						でも……その紋章は、\n何故か薄くなってかすれてる
+	ディーア	<Off>						今まで、\nそんな<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>は\n一人もいなかった
+	ディーア	<Off>						はじめは、<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>\nであることを隠すための作戦なのかと\n思ったけど……
+	ディーア	<Off>						……もしかして君は、\n<ruby=アネセサリ>魔人機関</ruby>から\n命令を受けていないんじゃないか？
+	じらいちゃん	<Off>						…………！
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+	リディ	驚き2						マスター、どういうこと？
+	ディーア	怒り2						これは、推測なんだが……\nこの子は、<ruby=アネセサリ>魔人機関</ruby>所属じゃない\nむしろ……追われてる可能性すらある
+CharacterOff
+	じらいちゃん	本気
+	ディーア	<Off>						……そうだろ、じらいちゃん
+	じらいちゃん	本気						……………………
+	じらいちゃん	泣き						……ぁ……アネセサリの話は、\n私には、ほんとに地雷なんです……
+	じらいちゃん	泣き						名前を見ただけで、苦しくて……\nとてもつらい気持ちになるんです……
+	じらいちゃん	本気						でも……他でもない、\nマスターくんのためなら……少しだけ
+FadeOut	black					.5
+CharacterOff						0
+Bg	黒背景
+Param	character_grayout=false
+FadeIn	black					.5
+	爾限流･未来ヲ斬跋スル刃	<Off>						私は…………
+StopBgm
+	アネセサリロゴ	赤3	エフェクト表			1	NoWait
+	爾限流･未来ヲ斬跋スル刃	<Off>						<ruby=アネセサリ>魔人機関</ruby>から、\n追放された<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>です
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1056_05
+EndIf
+EndScenario
+
+# E_1056_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望					.5
+Bg	森林A(夜)
+FadeIn	black					.5
+		<Off>						<dash=4>ある未来
+	爾限流･未来ヲ斬跋スル刃	<Off>						……ハァ……ハァ……
+	爾限流･未来ヲ斬跋スル刃	<Off>						………うっ………うぐっ…………
+	？？？？？	<Off>						貴様にしては粘ったほうだな……
+CharacterOff
+	じらいちゃん	破損泣き						………まさか……あなたまで…………
+	？？？？？	<Off>						……こうなることは、\n貴様には察しがついていただろう？\nその<ruby=・・>能力</ruby>でな
+	？？？？？？？？	<Off>						まったく……幼稚な反乱ね\n反乱と呼ぶまでもない……\n貴方の行いは、「子どもの駄々」よ
+	じらいちゃん	破損泣き						でも…………\nこのままじゃ……
+	？？？？？	<Off>						このままじゃ、何だ？
+	じらいちゃん	破損泣き						このままじゃ……\nマスターくんが、可哀相ですっ！！！
+	じらいちゃん	破損泣き						私には……あんなに\nつらそうなマスターくんを……
+	じらいちゃん	破損泣き						これ以上……\n見て、いられません……
+	？？？？？	<Off>						……フン、何を言うかと思えば
+	？？？？？	<Off>						貴様の方が、奴を\n侮辱しているようなものだ
+	じらいちゃん	破損泣き						………え……？
+	？？？？？？？？	<Off>						彼は自ら望んで\n「今の状態」を選んだのよ
+	？？？？？？？？	<Off>						その姿を「可哀相」だとか、ましてや\n選択自体を「否定」するなんて、\n彼の人格を否定するに等しいわ
+	じらいちゃん	破損泣き						でも…………マスターくんは…………
+	じらいちゃん	破損泣き						本当に……この「未来」を、\n望んでたんですか……？
+	？？？？？？？？	<Off>						……なんですって？
+	じらいちゃん	破損泣き						私なら……私の能力なら……\nマスターくんに、別の「未来」を……
+	黒グラデーション		エフェクト裏
+ImageEffect	SpriteCamera	Bloom
+Se	光1
+	NPじらいちゃん		エフェクト表			1		　
+	NPじらいちゃん							マスターくんが、\nまた、笑える未来を……
+	？？？？？	<Off>						……離れろッ!!
+	NPじらいちゃん							未来ヲ斬跋スル刃ッ!!
+Se	光3
+FadeOut	white					1
+Wait						4
+Bg	黒背景					0
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	black					.5
+	？？？？？？？	<Off>						あの二人相手に\nあの技をぶっ放すなんて、\nとんでもない無茶をしますねえ？
+	？？？？？？？	<Off>						……でも、そういう無茶な人\n嫌いじゃないですよう
+	？？？？？？？	<Off>						……あなたも、そうでしょう？
+	？？？？？？							…………
+FadeOut	black					.5
+	　　　　　　　　　　
+Se	走る
+FadeIn	black					.5
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff
+	じらいちゃん
+	じらいちゃん	破損泣き						待ってて、マスターくん……\n今度は……
+Bg	黒背景					1
+CharacterOff
+	爾限流･未来ヲ斬跋スル刃	破損泣き						今度は私が……\nマスターくんを……
+FadeOut	black					.5
+StopBgm
+Wait						3
+Param	character_grayout=true
+CharacterOff						0
+Bg	市街地A(夜)					0
+Bgm	台風_BGM
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悲しい2	2_2
+FadeIn	black					.5
+	リディ	悲しい2						アネセサリを、ついほう……？
+	ディーア	怒り2						それじゃあ、君は……\nアネセサリの意志に反して、\nオレのところに来たってことか
+CharacterOff
+	じらいちゃん	通常
+	じらいちゃん	通常						…………そうです
+	じらいちゃん	通常						じらいは……マスターくんのために、\nここにひとりで、来たんです
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+	ディーア	怒り2						でも……\nどうして、「今」だったんだ？
+	ディーア	目閉じ2						勘違いしたオレたちも\n悪かったけど……
+	ディーア	怒り2						夜道で急に知らない相手に\n話しかけられたら、\n誰だって警戒するよ
+	リディ	驚き2						そうそう、リディたちのいる酒場で\n「お話聞いて？」って言ってくれれば\nもっと早く仲良くできたのに！
+CharacterOff
+	じらいちゃん	本気
+	じらいちゃん	本気						それは…………
+	じらいちゃん	本気						……見えたからです
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+	ディーア	怒り2						……え？
+	リディ	驚き2						見えたって、何が？
+CharacterOff
+	イベントスチル1056A		エフェクト表
+Param	character_grayout=false
+	爾限流･未来ヲ斬跋スル刃	<Off>						私には……相手の\n「未来の可能性」が、木の枝みたいに\n分岐して見えるんです……
+	ディーア	<Off>						……ああ、みらいちゃんの力だな
+	爾限流･未来ヲ斬跋スル刃	<Off>						はい、そうです……\nじらいにも、同じ能力があります……
+	爾限流･未来ヲ斬跋スル刃	<Off>						ただ、問題は……\nその、「未来の可能性」が……
+	爾限流･未来ヲ斬跋スル刃	<Off>						マスターくんの、\n「可能性」のほとんどが……
+StopBgm
+CharacterOff
+	イベントスチル1056B		エフェクト表
+	爾限流･未来ヲ斬跋スル刃	<Off>						この場所、この時間に\n…………切れるんです
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア	悔しい2						…………!!
+CharacterOff
+	じらいちゃん							……そんな、もう…………
+	じらいちゃん							マスターくん、伏せてッ!!
+Se	光3
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+	　　　　　　　　　　
+Bg	市街地A(夜)
+Wait						3
+FadeIn	white					.5
+CharacterOff
+	アセーディア	通常？
+Bgm	緊迫
+	アセーディア	通常？						ククク……
+	アセーディア	通常？						俺様、無類の蹂躙者
+	アセーディア	通常？						久々の魔界は………\n壊しがいがありそうだ
+CharacterOff
+	ディーア	悔しい3	1_2
+	リディ	悲しい2	2_2
+	リディ	悲しい2						マスター、大丈夫っ!?
+	ディーア	悔しい3						ぐっ……なんだ、あいつは……
+CharacterOff
+	アセーディア	通常？
+	アセーディア	通常？						さぁて、\n楽な連中から片づけるとするか
+	アセーディア	通常？						こいつらで、な……？
+CharacterOff
+Se	闇1
+	熊王の下僕A	通常				1
+	熊王の下僕A							ウゥゥゥゥゥ……\nガアアアアアア!!!!
+CharacterOff
+	ディーア	怒り3	1_2
+	じらいちゃん		2_2
+	ディーア	怒り3						あの紋章……\n大罪紋……？
+	じらいちゃん	本気						マスターくんは、私が守ります！
+	ディーア	悔しい3						安心しろ、オレは大丈夫だ\nただ……
+	ディーア	悔しい3						こいつら、どんどん出てくる……
+	ディーア	本気3						じらいちゃん、手分けして倒すぞ！
+	じらいちゃん	本気						はいっ！
+	じらいちゃん	本気						爾限流･未来ヲ斬跋スル刃……\n推して参る!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1056_06
+EndIf
+EndScenario
+
+# E_1056_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	市街地A(夜)
+	熊王の下僕A		1_3_b
+FadeIn	white					.5
+	熊王の下僕A		1_3_b					ガァァァァァッ!!!!
+CharacterOff
+	リディ	悲しい2	2_2
+Tween	リディ	MoveBy	x=30				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	悲しい2						きゃっ……
+CharacterOff
+	ディーア	本気3	1_2
+	じらいちゃん		2_2
+	ディーア	本気3						リディっ!!
+	じらいちゃん							切り、刻むっ!!
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+Bg	市街地A(夜)
+CharacterOff
+	熊王の下僕A		1_3_b
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Shake	熊王の下僕A		x=5				Add
+StopBgm
+	熊王の下僕A							………グァ……
+Tween	熊王の下僕A	MoveBy	y=-300 time=2				NoWait
+Wait						.5
+Se	倒れる
+CharacterOff	熊王の下僕A					1
+Wait						1
+	ディーア	悔しい3	1_2
+	じらいちゃん	通常	2_2
+	ディーア	本気2						大丈夫かリディ！
+CharacterOff
+	リディ	笑い2	2_2
+	リディ							うん、ありがとう！\nマスター、じらいちゃんっ!
+CharacterOff						0
+	ディーア	悔しい3	1_2
+	じらいちゃん	通常	2_2
+	ディーア	本気3						よし、これでなんとか……
+	じらいちゃん	本気						でもマスターくん、あれ……！
+CharacterOff
+Se	闇1
+	熊王の下僕C	通常	2_3_b					…………グゥルルルル……
+Se	闇1
+Param	character_grayout=false
+	熊王の下僕D	通常	1_3					………ガルルル………
+CharacterOff
+Param	character_grayout=true
+Bgm	絶望
+	ディーア	悔しい3	1_2
+	じらいちゃん	通常	2_2
+	じらいちゃん	通常						……そう簡単には、\n倒れてくれないみたいですね……
+	ディーア	悔しい3						ああ……人形と戦ってるような、\n妙な感覚だ……
+	ディーア	悔しい3						それと、おそらく……
+CharacterOff
+	アセーディア	通常？
+	ディーア	<Off>						奴の狙いは、オレじゃない…………
+	アセーディア	通常？						あそこで俺様の紋を破ってやがるのは\n……天使野郎か？\nハッ……天魔戦争を思い出すぜ……
+	アセーディア	通常？						この俺様、無類の天界嫌い……\n怠惰なりに、働いてやるか……なっ！
+CharacterOff
+Se	闇1
+	熊王の下僕A		2_3_b			2	NoWait
+	熊王の下僕A							グゥルルルル……
+Se	闇1
+	熊王の下僕B		1_2			2	NoWait
+	熊王の下僕B							ウゥゥゥゥゥ……
+CharacterOff
+	ディーア	悔しい2	1_2
+	じらいちゃん	通常	2_2
+	ディーア	悔しい2						くっ……\n大罪紋を背負った熊が、\n無尽蔵に、増えて……
+	未来ヲ斬跋スル刃	<Off>						マスターくんっ！
+FadeOut	black					.5
+CharacterOff
+Bg	大橋（夜）
+	　　　　　　　　　　　
+	みらい	通常斬跋
+Param	character_grayout=false
+FadeIn	black					.5
+	ディーア	<Off>						……みらいちゃん！
+	みらい	通常斬跋						マスターくん、早くこっちに！\n「今」はあの人を倒せませんっ！
+FadeOut	black					.5
+CharacterOff
+Bg	市街地A(夜)
+	じらいちゃん	通常	2_2
+	ディーア	悔しい3	1_2
+Param	character_grayout=true
+FadeIn	black					.5
+	ディーア	悔しい3						いま、は……？
+	じらいちゃん	通常						…………みらいの言う通りです
+	じらいちゃん	通常						マスターくん、\n今はあの橋を渡って逃げましょう
+	じらいちゃん	本気						……あの子を、必ず連れて
+	ディーア	怒り3						…………わかった
+CharacterOff
+	熊王の下僕A		画面外_左
+	リディ	驚き2	2_2
+	ディーア	<Off>						リディ、一緒に逃げるぞ！\n橋の向こうで迎え撃つんだ！
+	リディ	驚き2						マスター……\nわかった、リディも……
+Se	闇1
+Tween	熊王の下僕A	MoveTo	x=-350 time=0.2				NoWait
+	熊王の下僕A							グァァァァッ！
+Tween	リディ	PunchPosition	y=50				NoWait
+Tween	リディ	MoveBy	x=10				NoWait
+	リディ	悲しい2						きゃあっ！
+CharacterOff
+	じらいちゃん	通常						……ッ!!
+	じらいちゃん	本気						未来ヲ……斬跋スル刃ッ!!
+CharacterOff
+Se	光3
+Bg	白背景
+FadeOut	white					.5
+Bg	市街地A(夜)
+CharacterOff						0
+	ディーア	本気3	画面外_左
+	リディ	驚き2	2_2
+FadeIn	white					.5
+Tween	ディーア	MoveTo	x=-90
+	ディーア	本気3						リディ、大丈夫か!?
+	リディ	悲しい2						うん、じらいちゃんが、\nみんなやっつけてくれて……
+	ディーア	通常3						ああ、よかった
+	ディーア	怒り3						でも、これ……\n何が起きたんだ……？
+	ディーア	驚き3						あんなにいた敵が、一瞬で……
+	リディ	驚き2						うん……
+FadeOut	black					.5
+CharacterOff						0
+FadeIn	black					.5
+	リディ	<Off>						<ruby=・・・・・・・>なにもなかった</ruby>みたいに、\n消えちゃった……
+CharacterOff
+	じらいちゃん	本気
+	じらいちゃん	本気						…………
+	じらいちゃん	通常						……さぁ\n行きましょう、マスターくん！
+CharacterOff
+	ディーア	驚き3	1_2
+	リディ	驚き2	2_2
+	ディーア	驚き3						あ、あぁ！
+	ディーア	怒り3						今のうちに……\n急いでここを離れよう
+StopBgm
+FadeOut	black					.5
+CharacterOff
+Wait						3
+Bg	森林A(夜)
+Bgm	図書館
+	ディーア	悔しい3	1_2
+	リディ	通常2	2_2
+FadeIn	black					.5
+	ディーア	悔しい3						よし……\nここまで来れば、少しは……
+	リディ	通常2						あのクマさんたち、\n足は遅くてよかったね！
+	ディーア	怒り3						ああ……おそらく、\nあの紋が影響してるんだ
+	ディーア	怒り3						力は引き出されるが動きは遅い……\nあれは、そういう紋だからな
+	ディーア	怒り3						……みらいちゃんは、\nそこまでわかってて\nここに誘導してくれたのか？
+CharacterOff
+	みらい	通常斬跋
+	みらい	通常斬跋						…………
+	みらい	通常斬跋						……私には、\n「未来の可能性」しか見えません
+CharacterOff	イベントスチル1056A
+Param	character_grayout=false
+	未来ヲ斬跋スル刃	<Off>						だから……あの骸骨を持った人の\n「未来の可能性」が……
+	未来ヲ斬跋スル刃	<Off>						「あそこで終わらない」こと\nだけはわかったんです…………
+	未来ヲ斬跋スル刃	<Off>						それから…………
+CharacterOff
+Bg	黒背景
+	アセーディア	通常？
+	未来ヲ斬跋スル刃	<Off>						……あの人に近づくたびに、\nすべての命の「可能性」が\n消えていくことも……
+	未来ヲ斬跋スル刃	<Off>						……マスターくん\nあの人は、何者なんでしょうか……？
+CharacterOff
+Bg	森林A(夜)
+Param	character_grayout=true
+	ディーア	怒り3	1_2
+	リディ	悲しい2	2_2
+	ディーア	怒り3						当たってほしくはないが……\n思い当たることが、ひとつある
+	リディ	驚き2						……思い当たること？
+	ディーア	怒り3						ああ……
+CharacterOff
+Bg	黒背景
+Param	character_grayout=false
+	熊王の下僕A
+	ディーア	<Off>						あの凶暴な熊たちに付けられた\n紋章があるだろ……
+	ディーア	<Off>						あの形に、見覚えはないか？
+	未来ヲ斬跋スル刃	<Off>						……ごめんなさい、\n私はわからないです……！
+	ディーア	<Off>						ああ、謝ることはないよ\nあの紋には、<ruby=・・・・・>適性がある</ruby>子と\nそうじゃない子がいたからな……
+CharacterOff
+Bg	黒背景
+	怠惰の大罪紋		エフェクト表
+	ディーア	<Off>						あれは……「怠惰」の大罪紋だ
+	ディーア	<Off>						大罪紋は……\nロールお嬢様が、ある「王」の研究を\n続ける中で得た成果だと言っていた
+	未来ヲ斬跋スル刃	<Off>						ある「王」……？
+	ディーア	<Off>						七つの大罪を冠する、\n伝説上の王たちのことだ
+	ディーア	<Off>						魔界には、ほとんど記録が残ってない
+	ディーア	<Off>						あの男は、ロールお嬢様でも生成に\n時間がかかる「怠惰」の大罪紋を……\nいとも簡単に生み出してる
+	ディーア	<Off>						そんな芸当ができるのは、\nあの「大罪」を生み出した\n「<ruby=・・・・・>オリジナル</ruby>」くらいだ
+StopBgm
+	未来ヲ斬跋スル刃	<Off>						…………まさか
+Bgm	ライズ
+	ディーア	<Off>						ああ……\nおそらく、あいつは……
+	ディーア	<Off>						……よみがえった七罪王、\n<color=red>『怠惰のアセーディア』</color>だ
+If	isdebug==true
+CharacterOff
+Jump	*E_1056_07
+EndIf
+EndScenario
+
+# E_1056_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	黒背景
+CharacterOff
+	ディーア	怒り3	1_2
+	リディ	悲しい2	2_2
+Bg	森林A(夜)
+Bgm	絶望
+FadeIn	black					.5
+	リディ	悲しい2						……なな……つみおう……？\nそれって、ご本とかに出てくる\n七人の悪い王様のこと……？
+	ディーア	怒り3						……ああ
+CharacterOff
+Param	character_grayout=false
+	イベントスチル1048X		エフェクト表
+	ディーア	<Off>						「幻想王ノア」は、\n「七罪王の復活」を魔界全土に\n宣言していた……
+	ディーア	<Off>						暫く音沙汰がなかったから、\n奴お得意のブラフだろうと\n思ってたけど……
+	ディーア	<Off>						おそらく、\nあの「復活宣言」は本当だったんだ
+	リディ	<Off>						それじゃ……あの怖い人は、\n本物の、ななつみおう……？
+	ディーア	<Off>						ああ……
+CharacterOff
+Param	character_grayout=false
+	じらいちゃん	本気
+	ディーア	<Off>						そうだろ、じらいちゃん
+	リディ	<Off>						……え？
+Param	character_grayout=true
+	じらいちゃん	通常						……現れない「可能性」も、\nたしかにあったんです
+	じらいちゃん	通常						でも……今回も、現れてしまった
+CharacterOff
+	ディーア	怒り3	1_2
+	リディ	悲しい2	2_2
+	ディーア	怒り3						君が見た「未来」にも、現れたんだな
+CharacterOff
+	じらいちゃん	通常
+	じらいちゃん	通常						…………はい
+	じらいちゃん	通常						マスターくんが、あの「路線変更」を\nしなくちゃいけなくなったのは……
+	じらいちゃん	本気						この日のことが、あったからです
+CharacterOff
+	ディーア	怒り3	1_2
+	リディ	悲しい2	2_2
+	ディーア	怒り3						つまり……オレが、君の言う\n「未来」を迎えないためには……
+	ディーア	悔しい3						あいつを倒さなきゃいけない\n……そういうことか？
+CharacterOff
+	じらいちゃん	本気
+	じらいちゃん	本気						ただ、倒すだけじゃダメです
+	じらいちゃん	泣き						……「私たち」だけで、勝たなくちゃ
+CharacterOff
+	ディーア	怒り3	1_2
+	リディ	悲しい2	2_2
+	ディーア	怒り3						……教えてくれ、じらいちゃん
+	ディーア	怒り3						その、「私たち」って言うのは\n……具体的に、誰のことだ
+	ディーア	悔しい3						オレたちに……\n勝つ方法はあるのか？
+CharacterOff
+	じらいちゃん	泣き
+	じらいちゃん	泣き						…………方法は
+StopBgm
+Se	火事
+Shake	Graphics		x=20 y=10 time=2
+CharacterOff
+	ディーア	悔しい3	1_2
+	リディ	悲しい2	2_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	悲しい2						きゃあっ！\nマスター、地震!?
+	ディーア	悔しい2						……いや、この魔力振は……
+CharacterOff
+	アセーディア	通常
+Bgm	緊迫
+	ディーア	<Off>						七罪王、アセーディア……
+	アセーディア	通常						……俺様、無類の怠け者\n逃げる連中は嫌いだぜ
+	アセーディア	通常						わざわざ追っかけて、\n消してやるのが面倒だからな……
+	アセーディア	通常						お前らは………袋の鼠にしてやろう
+CharacterOff
+Se	闇1
+Se	闇1
+	熊王の忠僕A		1_3_a
+	熊王の忠僕B		2_3
+	熊王の忠僕C		2_2
+	熊王の忠僕A							ウゥゥゥゥゥ……
+	熊王の忠僕B							グゥルルルル……
+	熊王の忠僕C							………グァァァァ!!!
+CharacterOff
+	ディーア	悔しい3	1_2
+	じらいちゃん	本気	2_2
+	ディーア	悔しい3						なんて、数だ……
+	じらいちゃん	通常						マスターくんは……\n私のそばにいてください……
+	じらいちゃん	本気						こっちの敵は……\n全部じらいが、なんとかします
+	ディーア	悔しい3						じらいちゃん……\nでも、ひとりでそんなこと……
+	じらいちゃん	通常						……できます
+	じらいちゃん	本気						私、マスターくんを守るためなら……\nどんなことだって、できますから
+	ディーア	怒り3						……無理は、しないでくれよ
+	じらいちゃん	通常						じらいには……\nその言葉だけで、十分です
+	ディーア	本気3						……それじゃあ、いくぞ……\n魔力結晶体構築<dash=2>\n<ruby=アンロック>魔剣解放</ruby>!!
+Se	光1
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1056_08
+EndIf
+EndScenario
+
+# E_1056_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	バトル					.5
+Bg	森林A(夜)
+	ディーア
+	みらい	通常斬跋
+FadeIn	black					.5
+Tween	みらい	PunchPosition	y=50				NoWait
+	みらい	通常斬跋						ごめんなさい\nごめんなさいごめんなさいっ！
+StopBgm
+Se	魔1
+Se	魔2
+Se	闇2
+Se	闇3
+FadeOut	white					1.5
+CharacterOff
+Param	character_grayout=false
+	オーラ青		エフェクト表
+Wait						1
+FadeIn	white					1
+CharacterOff	オーラ青
+	熊王の忠僕A
+Shake	熊王の忠僕A		x=3
+	熊王の忠僕A							グゥアア…………
+CharacterOff	熊王の忠僕A					1
+Se	倒れる
+Wait						1.5
+CharacterOff
+Param	character_grayout=true
+	ディーア		1_2
+	みらい	通常斬跋	2_2
+	ディーア	悔しい3						よくやったみらいちゃん！
+	ディーア	悔しい3						……これで、なんとかこっちは\n片付いたな……
+	ディーア	驚き3						そうだ……向こうは……
+	ディーア	本気3						じらいちゃん、大丈夫か！
+CharacterOff
+	じらいちゃん	破損
+	じらいちゃん	破損						……マスター、くん\nじらいは、大丈夫です……！
+	ディーア	<Off>						じらいちゃん……\n君が……ひとりで、\n全員倒したのか……
+	ディーア	<Off>						そんなに、傷つきながら……
+	じらいちゃん	破損						私のことは、\n気にしないでください……
+	じらいちゃん	破損本気						それに……
+CharacterOff
+	アセーディア	通常
+	じらいちゃん	<Off>						まだ全員じゃ、ありません……
+Bgm	魔王バトル
+	アセーディア	通常
+	アセーディア							ククク…………\n俺様、無類の飽き性でね……
+Bg	黒背景
+	アセーディア	<Off>						駒ばかり見ていても面白くない
+FadeOut	black					.5
+	イベントスチル1056F		エフェクト表
+FadeIn	black					.5
+Param	character_grayout=false
+	アセーディア	<Off>						暴れてやるか……怠惰なりに
+If	isdebug==true
+CharacterOff
+Jump	*E_1056_09
+EndIf
+EndScenario
+
+# E_1056_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔王バトル					.5
+Bg	森林A(夜)
+	アセーディア					0
+Param	character_grayout=false
+FadeIn	black					.5
+	アセーディア							この俺様、無類の道楽者でね
+	アセーディア							退屈させた連中には、\nもれなく罰を与えてやる
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル1056F		エフェクト表			0
+FadeIn	black					.3
+	アセーディア	<Off>						罪には……罰が付きものだろ？
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=true
+	　　　　　　　　　　
+	じらいちゃん	破損	2_2			0
+	ディーア	悔しい3	1_2			0
+FadeIn	black					.5
+	ディーア	悔しい3						……七、罪王……
+CharacterOff
+	アセーディア
+	アセーディア							ほう、俺様を知ってるのか？\nてっきり、魔界の記録からは\n抹消されたものと思っていたが……
+CharacterOff
+	ディーア	悔しい3	1_2
+	じらいちゃん	破損	2_2
+	ディーア							お前は……【怠惰】の七罪王\n……アセーディアだな
+CharacterOff
+	アセーディア
+	アセーディア							察しが良くて助かるぜ\n説明なんざ、一番面倒だからな
+	アセーディア							そんだけの頭があれば……\n俺様の狙いも、察しはついてんだろ？
+CharacterOff
+	ディーア	悔しい3	1_2
+	じらいちゃん	破損	2_2
+	ディーア	悔しい3						……どうして、リディを狙うんだ
+	じらいちゃん	破損本気						マスターくんっ！ その話は……
+CharacterOff
+	アセーディア							ハッ！ おかしな野郎だな\nそれだけ頭に入ってる癖に……
+StopBgm
+	アセーディア							自分の後ろにいるお嬢ちゃんが\nどんだけのバケモンかだけは\n都合よく「覚えてねえ」ってのか？
+FadeOut	black					.3
+CharacterOff						0
+	みらい	通常斬跋	2_2			0
+	リディ	悲しい2	1_2			0
+FadeIn	black					.3
+	リディ	悲しい2						リディが……ばけ、もの……？
+	みらい	通常斬跋						………ぁっ…………
+CharacterOff
+	ディーア	悔しい3	1_2
+	じらいちゃん	破損泣き	2_2
+Bgm	絶望
+	じらいちゃん	破損泣き						マスターくんっ！\nこれ以上あの人と話しちゃだめッ!!
+	じらいちゃん	破損泣き						<size=18>このままじゃ、あの時と同じ……っ</size>
+	ディーア	怒り3						……じらいちゃん
+	じらいちゃん	破損泣き笑い						…………えっ？
+	ディーア	怒り3						オレは……リディのために、\nこいつと戦いたい
+	ディーア	悔しい3						戦い抜いて……リディを守りたい
+	ディーア	悔しい3						この「未来」に、可能性はあるか？
+StopBgm
+	じらいちゃん	破損泣き笑い						………マスター、くん？
+	じらいちゃん	破損泣き笑い						（………これは…………\n　私が、経験しなかった…………）
+CharacterOff						0
+	イベントスチル1056B		エフェクト表			0
+Se	吹雪
+Wait						1.5
+CharacterOff						0
+StopSe
+	じらいちゃん	破損泣き						……あ<dash=4>
+Param	character_grayout=false
+CharacterOff						0
+Shake	Graphics		x=15 y=15 time=3.2				NoWait
+Se	雨
+Bg	遺跡A					0
+Wait						.02
+Bg	研究所B					0
+Wait						.02
+Bg	洞窟A					0
+Wait						.02
+Bg	断層A					0
+Wait						.02
+Bg	市街地A(夜)					0
+Wait						.02
+Bg	宝石鉱山					0
+Wait						.02
+Bg	廃病院					0
+Wait						.02
+Bg	洞窟C					0
+Wait						.02
+Bg	草原C					0
+Wait						.02
+Bg	森林A(夜)					0
+Wait						.02
+Bg	魔術空間					0
+Wait						.02
+Bg	研究所A					0
+Wait						.02
+Bg	山岳A					0
+Wait						.02
+Bg	断層A					0
+Wait						.02
+Bg	市街地A					0
+Wait						.02
+Bg	研究所B					0
+Wait						.02
+Bg	洞窟A					0
+Wait						.02
+Bg	断層A					0
+Wait						.02
+Bg	市街地A(夜)					0
+Wait						.02
+Bg	宝石鉱山					0
+Wait						.02
+	イベントスチル1056A1		エフェクト表			0						一瞬すぎたのでめっちゃ増やした
+Wait						.02
+	イベントスチル1056A2		エフェクト表			0
+Wait						.02
+	イベントスチル1056A3		エフェクト表			0
+Wait						.02
+	イベントスチル1056A1		エフェクト表			0
+Wait						.02
+	イベントスチル1056A3		エフェクト表			0
+Wait						.02
+	イベントスチル1056A1		エフェクト表			0
+Wait						.02
+	イベントスチル1056A2		エフェクト表			0
+Wait						.02
+	イベントスチル1056A3		エフェクト表			0
+Wait						.02
+	イベントスチル1056A1		エフェクト表			0
+Wait						.02
+	イベントスチル1056A2		エフェクト表			0
+Wait						.02
+	イベントスチル1056A3		エフェクト表			0
+Wait						.02
+	イベントスチル1056A2		エフェクト表			0
+Wait						.02
+	イベントスチル1056A1		エフェクト表			0
+Wait						.02
+	イベントスチル1056A3		エフェクト表			0
+Wait						.02
+	イベントスチル1056A1		エフェクト表			0
+Wait						.02
+	イベントスチル1056A3		エフェクト表			0
+Wait						.02
+	イベントスチル1056A4		エフェクト表			0
+Wait						.02
+	イベントスチル1056A5		エフェクト表			0
+Wait						.02
+	イベントスチル1056A6		エフェクト表			0
+Wait						.02
+	イベントスチル1056A4		エフェクト表			0
+Wait						.02
+	イベントスチル1056A5		エフェクト表			0
+Wait						.02
+	イベントスチル1056A4		エフェクト表			0
+Wait						.02
+	イベントスチル1056A2		エフェクト表			0
+Wait						.02
+	イベントスチル1056A3		エフェクト表			0
+Wait						.02
+	イベントスチル1056A4		エフェクト表			0
+Wait						.02
+	イベントスチル1056A5		エフェクト表			0
+Wait						.02
+	イベントスチル1056A6		エフェクト表			0
+Wait						.02
+	イベントスチル1056A4		エフェクト表			0
+Wait						.02
+	イベントスチル1056A5		エフェクト表			0
+Wait						.02
+	イベントスチル1056A4		エフェクト表			0
+Wait						.02
+	イベントスチル1056A3		エフェクト表			0
+Wait						.02
+	イベントスチル1056A2		エフェクト表			0
+Wait						.02
+	イベントスチル1056A1		エフェクト表			0
+Wait						.02
+	イベントスチル1056B1		エフェクト表			0
+Wait						.02
+	イベントスチル1056B2		エフェクト表			0
+Wait						.02
+	イベントスチル1056B3		エフェクト表			0
+Wait						.02
+	イベントスチル1056B1		エフェクト表			0
+Wait						.02
+	イベントスチル1056B2		エフェクト表			0
+Wait						.02
+	イベントスチル1056B3		エフェクト表			0
+Wait						.02
+	イベントスチル1056B1		エフェクト表			0
+Wait						.02
+	イベントスチル1056B2		エフェクト表			0
+Wait						.02
+	イベントスチル1056B3		エフェクト表			0
+Wait						.02
+	イベントスチル1056B1		エフェクト表			0
+Wait						.02
+	イベントスチル1056B3		エフェクト表			0
+Wait						.02
+	イベントスチル1056B2		エフェクト表			0
+Wait						.02
+	イベントスチル1056B1		エフェクト表			0
+Wait						.02
+	イベントスチル1056B3		エフェクト表			0
+Wait						.02
+	イベントスチル1056B2		エフェクト表			0
+Wait						.02
+	イベントスチル1056B3		エフェクト表			0
+Wait						.02
+	イベントスチル1056B4		エフェクト表			0
+Wait						.02
+	イベントスチル1056B5		エフェクト表			0
+Wait						.02
+	イベントスチル1056B6		エフェクト表			0
+Wait						.02
+	イベントスチル1056B4		エフェクト表			0
+Wait						.02
+	イベントスチル1056B5		エフェクト表			0
+Wait						.02
+	イベントスチル1056B4		エフェクト表			0
+Wait						.02
+	イベントスチル1056B2		エフェクト表			0
+Wait						.02
+	イベントスチル1056B3		エフェクト表			0
+Wait						.02
+	イベントスチル1056B4		エフェクト表			0
+Wait						.02
+	イベントスチル1056B5		エフェクト表			0
+Wait						.02
+	イベントスチル1056B6		エフェクト表			0
+Wait						.02
+	イベントスチル1056B4		エフェクト表			0
+Wait						.02
+	イベントスチル1056B5		エフェクト表			0
+Wait						.02
+	イベントスチル1056B4		エフェクト表			0
+Wait						.02
+	イベントスチル1056B3		エフェクト表			0
+Wait						.02
+	イベントスチル1056B2		エフェクト表			0
+Wait						.02
+	イベントスチル1056B1		エフェクト表			0
+Wait						.02
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff						0
+Param	character_grayout=true
+	黒背景		エフェクト表			0
+Wait						1						余韻を残すためのWait
+	じらいちゃん	<Off>						………あぁ………
+	じらいちゃん	<Off>						……ある…………
+	じらいちゃん	<Off>						マスターくんが……\nあの子を守って……\n……幸せになれる「可能性」
+StopSe
+FadeOut	black					.5
+Bg	森林A(夜)					0
+CharacterOff						0
+	ディーア	悔しい3	1_2			0
+	じらいちゃん	破損泣き	2_2			0
+FadeIn	black					.5
+	じらいちゃん							……たった、ひとつだけ
+	ディーア	悔しい3						ひとつ、しかないのか……？
+	じらいちゃん	破損泣き						………………はい
+	じらいちゃん	破損泣き笑い						でも……ひとつなら、あるんです
+	ディーア	怒り3						…………わかった
+	ディーア	怒り3						それなら……オレは、七罪王と戦う
+	ディーア	悔しい3						リディと、魔界を守るために
+	じらいちゃん	破損泣き						……………………
+	ディーア	怒り3						じらいちゃんも……\n力を、貸してくれるか
+FadeOut	black					0
+CharacterOff						0
+Bg	黒背景					0
+	爾限流･未来ヲ斬跋スル刃					0
+Param	character_grayout=false
+Wait						0
+FadeIn	black					0
+	爾限流･未来ヲ斬跋スル刃	<Off>						…………はい
+	イベントスチル1056H	H1	エフェクト表			.5
+Bgm	Xmasボス
+	爾限流･未来ヲ斬跋スル刃	<Off>						……………………
+	爾限流･未来ヲ斬跋スル刃	<Off>						…………マスターくんは、\n生きてるだけで尊いんです
+	爾限流･未来ヲ斬跋スル刃	<Off>						本当は、どこにもいかなくても\n何もしなくても、いいくらいなんです
+	爾限流･未来ヲ斬跋スル刃	<Off>						それでも、戦わなきゃいけないなら……
+Bg	森林A(夜)					0
+Se	光2
+	イベントスチル1056H	H2	エフェクト表			1
+	じらいちゃん	破損				0
+	　　　　　　　　　　		1_2
+Tween	　　　　　　　　　　	MoveBy	x=5				Add
+	じらいちゃん	<Off>						<dash=2>敵はじらいがなんとかします
+CharacterOff
+Param	character_grayout=true
+	アセーディア
+	アセーディア							くぁー、\nあくまで「この子は守る」って訳か\n泣かせるねぇ
+	アセーディア							ルークスリアには悪いが、\nターゲットだけ消すなんて面倒だ
+Se	闇1
+CharacterOff
+Param	character_grayout=false
+	イベントスチル1056F		エフェクト表
+	アセーディア	<Off>						<dash=2>まとめて全員葬ってやろう
+CharacterOff
+Param	character_grayout=false
+	ディーア	悔しい3	1_2
+	じらいちゃん	破損	2_2
+	ディーア	本気3						七罪王……\n相手にとって不足はない
+Se	強風	TRUE
+Se	光1
+Param	character_grayout=false
+	オーラ青		エフェクト表2			1
+	ディーア							《<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>》\n《<ruby=ワールドイズマイン>愚かなる卑怯者の鍵</ruby>》<dash=2>!!
+Se	光3
+FadeOut	white					.5
+CharacterOff						0
+	ディーア	悔しい天使2	1_2			0
+	じらいちゃん	破損本気	2_2			0
+Wait						.5
+FadeIn	white					.5
+Param	character_grayout=true
+	ディーア	悔しい天使2						ぐっ…………
+	じらいちゃん	破損本気						マスターくん！\n無理はしないで、ここはじらいが……
+	ディーア	悔しい天使2						……大丈夫だ、一人にはしない
+	ディーア	悔しい天使2						全力でいくぞ……七罪王!!
+Se	光3
+FadeOut	white					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1056_10
+EndIf
+EndScenario
+
+# E_1056_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Se	強風	TRUE				.5
+Bg	森林A(夜)
+Param	character_grayout=false
+	アセーディア					0
+FadeIn	black					.5
+	アセーディア							くぉー、いいねぇー\nそうそう､こんな感じ\n思い出してきたわ
+CharacterOff
+Param	character_grayout=true
+Bgm	絶望
+	ディーア	悔しい天使2	1_2
+	じらいちゃん	破損	2_2
+	ディーア	悔しい天使2						……ぐっ……くそっ……
+Se	光1
+FadeOut	black					.5
+	じらいちゃん	破損	2_2			0
+	ディーア	悔しい3	1_2			0
+FadeIn	black					.5
+	ディーア	悔しい3						…………力が、保てない……
+Tween	じらいちゃん	PunchPosition	y=50				NoWait
+	じらいちゃん	破損						マスターくんっ！
+Tween	じらいちゃん	MoveBy	x=-10				NoWait
+	じらいちゃん	破損本気						無理はしないでください……\nマスターくんのことは、\nじらいが守りますから……！
+	ディーア	悔しい3						……すまない、じらいちゃん
+CharacterOff
+StopSe
+	アセーディア
+	アセーディア							おやおや、おアツいねぇ
+	アセーディア							この俺様､無類の戦闘好き\nまだいくらでも遊べるぜ？
+CharacterOff
+	ディーア	悔しい3	1_2
+	じらいちゃん	破損	2_2
+	ディーア	悔しい3						くっ……
+	ディーア	悔しい3						手応えはあったはずなんだ\nなのに……
+CharacterOff
+Param	character_grayout=false
+	イベントスチル1056F		エフェクト表
+	ディーア	<Off>						どうしてあいつは、\n傷ひとつ、ついてないんだ……
+	じらいちゃん	<Off>						……あの人は、\n傷つけられない訳じゃないんです
+	ディーア	<Off>						え……？
+	じらいちゃん	<Off>						……私にも、\nたしかに手応えがありました
+	じらいちゃん	<Off>						でも……与えた傷が、\nたちまちふさがってしまう
+	じらいちゃん	<Off>						魔剣でいくら傷つけても、\n必ず立ち上がってくる
+	じらいちゃん	<Off>						努力をせずとも、\n戦場では勝ち続けてしまう
+	じらいちゃん	<Off>						それが……怠惰の七罪王\nアセーディアなんです
+	ディーア	<Off>						……そん……な…………
+CharacterOff
+Param	character_grayout=true
+	ディーア	絶望3	1_2
+	じらいちゃん	破損	2_2
+	ディーア	絶望3						そんな相手に……どうやって、\n勝てっていうんだよ…………
+	じらいちゃん	破損泣き						…………うっ……くっ……
+	ディーア	悔しい3						……じらい……？
+	じらいちゃん	破損泣き						……ごめんなさい、\n思い出して、しまって……
+	じらいちゃん	破損泣き						私が知ってるマスターくんも……\nそうやって、苦しそうな顔を\nしました……
+	じらいちゃん	破損泣き						それから…………\n"あの子"を、使うしかないって……
+	じらいちゃん	破損泣き						それで……\n<ruby=・・・・>すべてが</ruby><ruby=・・・・・・・>壊れてしまった</ruby>んです……
+	ディーア	絶望3						…………待ってくれ、まさか……
+StopBgm
+	？？？	<Off>						マスター！
+CharacterOff
+	リディ	泣き2	1_2
+Param	character_grayout=false
+	みらい	通常斬跋	2_2
+	ディーア	<Off>						みらいちゃん……それに……
+Bgm	緊迫
+	ディーア	<Off>						リディ…………！
+	ディーア	<Off>						だめだリディ、来るな！\nこれ以上近づいたら……
+Param	character_grayout=true
+	リディ	泣き2						……やだっ!!
+	ディーア	<Off>						やだって、お前……！
+	リディ	泣き2						だって、このままじゃ……\nマスターが壊れちゃう!!
+	リディ	泣き2						だから、リディが……
+FadeOut	white					.5
+Se	光3
+Se	ジャストガード
+	じらいちゃん	破損本気	1_1			0
+	リディ	悲しい2	1_2			0
+	みらい	通常斬跋	2_2			0
+	　　　　　　　　　　		4_4
+Tween	じらいちゃん	MoveBy	x=10				NoWait
+FadeIn	white					.5
+	じらいちゃん							…………ッ
+	リディ	悲しい2						じらい、ちゃん……？
+CharacterOff
+	アセーディア
+	アセーディア							ほぉ……\n一撃で仕留めるつもりで\n撃ったんだが……
+	アセーディア							あぁ……\nお前も、強いな？
+CharacterOff
+	じらいちゃん	破損泣き
+	じらいちゃん	破損泣き						……うっ………くっ……
+	じらいちゃん	破損泣き						…………みらいっ!!\nマスターくんとその子を連れて、\n早く逃げて!!
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい3	1_2
+	みらい	通常斬跋	2_2
+	ディーア	悔しい3						そんなこと、できるわけ……
+StopBgm
+	みらい	通常斬跋						…………………
+	みらい	通常斬跋						…………わかった……\nわかったよ、じらいちゃん……!!
+	みらい	通常斬跋						マスターくん、こっちです!! \nリディちゃんも!! はやくっ!!
+	ディーア	本気3						ダメだッ！\n誰も置いていく訳には……
+Tween	みらい	PunchPosition	y=50				NoWait
+	みらい	通常斬跋						じらいちゃんは、\n置いて行ってほしいんです！
+CharacterOff
+Param	character_grayout=false
+	じらいちゃん	破損
+	未来ヲ斬跋スル刃	<Off>						あなたを……\nマスターくんを、守るために！！
+	ディーア	<Off>						なっ……
+Bgm	ロルリアンレット
+	未来ヲ斬跋スル刃	<Off>						私……見たんです\nじらいちゃんと、\nマスターくんのこと
+	ディーア	<Off>						見たって……まさか、\nみらいちゃんの、能力で……？
+CharacterOff
+Param	character_grayout=false
+	イベントスチル1056B		エフェクト表
+	未来ヲ斬跋スル刃	<Off>						…………マスターくんには、\nここから生きて帰って……
+	未来ヲ斬跋スル刃	<Off>						リディちゃんと幸せになれる\n「可能性」が……\nすごく細いけど、あるんです……
+	未来ヲ斬跋スル刃	<Off>						でも、じらいちゃんは…………
+CharacterOff
+	イベントスチル1056C		エフェクト表
+	未来ヲ斬跋スル刃	<Off>						じらいちゃんの「可能性」は、\n今日、ここで、ぜんぶ…………
+	ディーア	<Off>						……そん、な…………
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=true
+	アセーディア					0
+FadeIn	black					.5
+	アセーディア							たいした根性だな\n俺様相手に、\nたった一人で残るとは
+CharacterOff
+	じらいちゃん	破損						……根性なんか、ありません
+	じらいちゃん	破損本気						私は、流派を守ってるだけです
+CharacterOff
+	アセーディア							……ほぉ、流派？
+CharacterOff
+	じらいちゃん	破損
+StopBgm
+	じらいちゃん	破損						<ruby=じげんりゅう>爾限流</ruby>は……
+Bgm	風属性バトル
+	じらいちゃん	破損						たった一人を、\n守るための流派です
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=true
+	ディーア	悔しい3	1_2			0
+	みらい	通常斬跋	2_2			0
+FadeIn	black					.5
+	みらい	通常斬跋						マスターくん……\nじらいちゃんの言うこと、\n聞いてあげてください
+	みらい	通常斬跋						じらいちゃんは、きっと……\nマスターくんの、すごく細い、\n「可能性」のために…………
+	みらい	通常斬跋						その可能性を叶えるために、\nたったひとりで\nここまで来たんです
+	みらい	通常斬跋						だから…………
+FadeOut	black					.5
+CharacterOff						0
+	アセーディア					0
+FadeIn	black					.5
+	アセーディア							くぉー、いいねぇー\nこの俺様、無類の酔狂好き\nなかなかキマった流派じゃねえか
+	アセーディア							今度俺様にも指南してくれよ\n自慢じゃないが、覚えは早いぜ？
+CharacterOff
+	じらいちゃん	破損
+	じらいちゃん	破損						…………今度なんか、ありません
+	アセーディア							ん？ なんて言った、お嬢さん
+CharacterOff
+	じらいちゃん	破損
+	じらいちゃん	破損						今度はない、と言ったんです
+	じらいちゃん	破損						あなたの未来は……
+	じらいちゃん	破損本気						ここで私が、斬跋しますから
+CharacterOff
+	アセーディア
+	アセーディア							ほぉ…………\nやってみろよ、お嬢さん
+	アセーディア							この俺様を、\n倒す方法なんてものがあるならな？
+	じらいちゃん	破損						この瞬間のためだけに……私は、\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>になったんです
+	じらいちゃん	破損						だから…………
+CharacterOff
+Param	character_grayout=false
+	イベントスチル1056H	H2	エフェクト表
+	じらいちゃん	<Off>						消えてください
+Se	光2
+Se	闇2
+FadeOut	white					.5
+CharacterOff						0
+	イベントスチル1056G		エフェクト表			0
+FadeIn	white					.5
+	爾限流･未来ヲ斬跋スル刃	<Off>						私の愛する、推しのために
+	アセーディア	<Off>						……こいつ、まさか……
+	爾限流･未来ヲ斬跋スル刃	<Off>						爾限流…………
+	爾限流･未来ヲ斬跋スル刃	<Off>						未来ヲ斬跋スル刃ッ!!
+Se	光3
+FadeOut	white					.5
+StopBgm						2
+Wait						2
+Wait						2
+CharacterOff						0
+Bg	森林A(夜)					0
+Param	character_grayout=true
+	ディーア	悔しい3	1_2			0
+	みらい	通常斬跋	画面外_右_b			0
+Tween	みらい	MoveTo	x=90				NoWait
+Se	強風	TRUE
+FadeIn	white					.5
+Se	走る
+	みらい	通常斬跋						待ってくださいマスターくんっ！\nまだどんな危険があるか……
+	ディーア	悔しい3						……さっきの光
+	ディーア	悔しい3						今まで、魔界で見たことがない\nくらいの眩い閃光だった
+	ディーア	悔しい3						どんな結果にせよ\n……勝負はついてるはずだ
+	みらい	通常斬跋						…………
+	ディーア	悔しい3						もし、じらいちゃんが勝てなかったら\nオレが必ず、アイツを……
+Tween	みらい	PunchPosition	y=50				NoWait
+	みらい	通常斬跋						……あっ、マスターくん!!\nあの木の根元っ！ あの角は……！
+	ディーア	本気3						じらいちゃんっ!!
+FadeOut	black					.5
+StopSe
+CharacterOff
+Param	character_grayout=false
+	ブレイドグラフ1056		エフェクト表
+FadeIn	black					.5
+Bgm	ロルリアンレットB
+ImageEffectOff	SpriteCamera	Blur
+Wait						1
+Tween	ブレイドグラフ1056	MoveBy	y=-590 time=10	linear			NoWait
+	ディーア	<Off>						じらい、ちゃん…………
+	ディーア	<Off>						その、傷……\n早くクランさんのところに!!
+	爾限流･未来ヲ残跋スル刃	<Off>						あ、マスターくん…………
+	爾限流･未来ヲ残跋スル刃							マスターくん、の手だ…………
+	未来ヲ残跋スル刃	<Off>						……じらい、ちゃん…………
+	ディーア	<Off>						…………ここで、\n何があったんだ……？
+	ディーア	<Off>						どうして……\nじらいが、こんなに……
+	ディーア	<Off>						……アセーディア……\nあいつは、どこに消えたんだ……？
+	爾限流･未来ヲ残跋スル刃	<Off>						じらいには……\nマスターくんのために、\n改造で付けた力があるんです
+	爾限流･未来ヲ残跋スル刃	<Off>						爾限流･未来ヲ斬跋スル刃……
+	爾限流･未来ヲ残跋スル刃	<Off>						魔核の、損傷と……引き換えに……
+	爾限流･未来ヲ残跋スル刃	<Off>						斬った、相手のことを…………\n「未来の可能性」ごと、抹消する……
+	爾限流･未来ヲ残跋スル刃	<Off>						とっても怖い、力です…………
+	ディーア	<Off>						可能性、ごと……
+	爾限流･未来ヲ残跋スル刃	<Off>						私、マスターくんと、\n「あの日」のこと……\nずっとずっと、考えて……
+	爾限流･未来ヲ残跋スル刃	<Off>						あの人から、\nマスターくんを守るためには……\nこれしかないって、思ったんです……
+	ディーア	<Off>						……そう、だったのか…………
+	ディーア	<Off>						それじゃあ、アセーディアは……
+	爾限流･未来ヲ残跋スル刃	<Off>						……「未来の可能性」ごと、\nこの世界から、消しました
+	爾限流･未来ヲ残跋スル刃	<Off>						でも、ごめんなさい……
+	爾限流･未来ヲ残跋スル刃	<Off>						じらいの、このやり方は……\nすっごく乱暴で……
+	爾限流･未来ヲ残跋スル刃	<Off>						あの人も……\n信じられないくらい、強いから……
+	爾限流･未来ヲ残跋スル刃	<Off>						きっと、この世界には……\nあの人と……じらいの何かが、\n残るはずです……
+	爾限流･未来ヲ残跋スル刃	<Off>						でも、大丈夫…………
+	爾限流･未来ヲ残跋スル刃	<Off>						マスターくんなら、\n必ず、勝てます……
+	爾限流･未来ヲ残跋スル刃	<Off>						じらいには、いま、\nその、一筋の光が……\nちゃんと、見えてますから……
+	爾限流･未来ヲ残跋スル刃	<Off>						でも、私の…………
+	爾限流･未来ヲ残跋スル刃	<Off>						じらいの、未来は……\nここで……おわり…………
+	ディーア	<Off>						じらい……そんなこと言うな！
+	ディーア	<Off>						急いでクランさんのところに行くぞ！\nオレが抱えて連れていく！\nだから……
+	爾限流･未来ヲ残跋スル刃	<Off>						…………だいじょうぶ、です
+	爾限流･未来ヲ残跋スル刃	<Off>						じらいは、ここで…………
+	爾限流･未来ヲ残跋スル刃	<Off>						じらいの、からだのことは……\nじらいがいちばん、わかるから……
+	爾限流･未来ヲ残跋スル刃	<Off>						だから、マスターくん……\nこの手は……
+	爾限流･未来ヲ残跋スル刃	<Off>						この手だけは……\n離さないで…………
+	ディーア	<Off>						…………くっ………………
+	ディーア	<Off>						……わかった……離さない……\n絶対に、離さないからな…………
+	爾限流･未来ヲ残跋スル刃	<Off>						……ふふ…………
+	爾限流･未来ヲ残跋スル刃	<Off>						……剥がし無しの……\n接近イベ、ですね…………
+	爾限流･未来ヲ残跋スル刃	<Off>						じらいも……\nぜったい、離しません……
+	爾限流･未来ヲ残跋スル刃	<Off>						だって、じらいには……\nこのイベントが、さいごだから……
+	爾限流･未来ヲ残跋スル刃	<Off>
+	ディーア	<Off>						……じ、らい……………
+	爾限流･未来ヲ残跋スル刃	<Off>						ねえ、マスターくん……
+	爾限流･未来ヲ残跋スル刃	<Off>						もし……じらいが、\n生まれ、変われたら……
+	ブレイドグラフ1056	B				3
+	爾限流･未来ヲ残跋スル刃	<Off>						そのときは……\nマスター、くんと……
+StopBgm
+	爾限流･未来ヲ残跋スル刃	<Off>						いっしょに、笑える……\n未来が……いい……な…………
+Wait						.5
+FadeOut	black					.5
+CharacterOff
+	　　　　　　　　　　
+Wait						5
+Bg	黒背景					0
+FadeOut	black					.5
+FadeIn	black					.5
+		<Off>						＜<ruby=ライブラリレコード>全能中枢記録 </ruby>＞
+		<Off>						＜<dash=2>研究対象者\n"本来の襲来"翌日＞
+FadeOut	black					.5
+Bg	研究所A
+Wait						.5
+FadeIn	black					.5
+Bgm	図書館
+	司書王ロルリアンレット	通常H
+	司書王ロルリアンレット	通常H						よく来たわ、魔剣使い\n……あの襲撃以来ね
+CharacterOff
+	ディーア	怒り2
+	ディーア	怒り2						…………そう、ですね
+CharacterOff
+	司書王ロルリアンレット	ニヤリH
+	司書王ロルリアンレット							ずいぶん浮かない顔してるじゃない\nこの司書王が歓迎しているというのに
+CharacterOff
+	ディーア	怒り2						……あなたには、きっと理由も\nわかってるんじゃないですか
+CharacterOff
+	司書王ロルリアンレット	悪い顔H						どうでしょうね\n理由なんて知らないけれど……\nあなたにひとつ、報せがあるわ
+	司書王ロルリアンレット	怒りH						先日、宗教国家E.D.E.N.の\n郊外で発生した未確認の閃光……
+	司書王ロルリアンレット	怒りH						あの閃光が観測された後、\n魔界の一部に"<ruby=カオス>混沌</ruby>"が発生しているの
+CharacterOff
+	ディーア	怒り2
+	ディーア	怒り2						<ruby=カオス>混沌</ruby>……？
+CharacterOff
+	司書王ロルリアンレット	通常H
+	司書王ロルリアンレット	通常H						簡単に言えば、\n"本来この世界にあるはずのない存在"
+	司書王ロルリアンレット	ニヤリH						別の言い方をすれば……\n"「未来の可能性」の残影"
+CharacterOff
+	ディーア	驚き2
+	ディーア	驚き2						…………!!
+CharacterOff
+	司書王ロルリアンレット	通常H						魔剣使い、\n貴方には説明せずともわかるわね
+	司書王ロルリアンレット	悪い顔H						だって貴方は<dash=2>\nあの場にいたのだから
+CharacterOff
+	ディーア	悔しい2
+	ディーア	悔しい2						…………どうして、それを
+CharacterOff
+	司書王ロルリアンレット	通常H
+	司書王ロルリアンレット	通常H						貴方が見たあの閃光は……\n存在を「可能性」ごと消す技
+	司書王ロルリアンレット	怪しいH						爾限流･未来ヲ斬跋スル刃
+	司書王ロルリアンレット	通常H						彼女のおかげで、\n魔界は一時的にその崩壊を免れた
+	司書王ロルリアンレット	怪しいH						ただし、その手段はあまりに\n<ruby=イレギュラー>異業</ruby>だったために……
+	司書王ロルリアンレット	悪い顔H						"かの王"は、再びよみがえり\n魔界を震撼させる時を窺っている
+	司書王ロルリアンレット	通常H						魔剣使い、あなたは……
+	司書王ロルリアンレット	ニヤリH						もし"彼"がよみがえったとしたら\n立ち向かう勇気はある？
+CharacterOff
+	ディーア	怒り2
+	ディーア							…………………
+	司書王ロルリアンレット	ニヤリH
+	司書王ロルリアンレット							彼らとの戦いは……\nつらく険しい道になるわ\nそれでも、立ち向かうと約束できる？
+CharacterOff
+	ディーア	怒り2						…………はい
+	ディーア	怒り2						……それでも、立ち向かいます
+FadeOut	black					.5
+CharacterOff						0
+Bg	黒背景					0
+FadeIn	black					.5
+	ディーア	<Off>						この道は……
+StopBgm
+	ディーア	<Off>						あの子が\n斬り拓いてくれた「未来」ですから
+	　　　　　　　　　　
+Wait						2
+	イベントロゴ1056A		エフェクト表			3
+FadeIn	black					.5
+	 	<Off>						　　　　　LOST CHILD\n　　　　 SLASH FUTURE
+FadeOut	black					1.5
+CharacterOff						0
+Bg	黒背景					0
+Wait						3
+Se	強風	TRUE
+FadeIn	black					.5
+	？？？	<Off>						……アセーディアが……消えた？
+	？？？？？？？	<Off>						あらら？ 不思議ね、\n魔力も消えてるわ
+	？？？？？？？	<Off>						…………ありえないわっ!!\n兄さんが、私を置いて\n消えるわけ……
+	？？？	<Off>						……ああ\n天才ゆえに怠惰\nその彼が、簡単に消滅するとは思えん
+	？？？	<Off>						可能性があるとすれば……
+	ルークスリア	<Off>						<dash=2><param=name>
+	？？？	<Off>						……なんだ、その名は
+	ルークスリア	<Off>						……今、「アレ」を連れてる\n魔剣使いの名前
+	ルークスリア	<Off>						アセーディアは……\nその人と会った後に、\n突然「存在ごと」消ぇちゃってる
+	？？？	<Off>						存在、ごと……？
+	ルークスリア	<Off>						……でも、\n完全に消ぇちゃったワケじゃない
+	ルークスリア	<Off>						インウィディアには、わかるでしょ？
+	？？？？？？？	<Off>						………………あぁ!!\n感じる……感じるわ……\n見えなくても、兄さんの気配を……!!
+	ルークスリア	<Off>						何が起きたかは知らなぃケド……\n今度のことも、きっと\n「アレ」が関わってる
+	ルークスリア	<Off>						今度こそ……\n「復讐」の邪魔はさせないょ……？
+FadeOut	black					.5
+Bg	洞窟A
+	ルークスリア	通常
+FadeIn	black					.5
+	ルークスリア							<dash=2>ブリジット
+StopSe
+If	isdebug==true
+CharacterOff
+Jump	*E_1056_01
+EndIf
+EndScenario

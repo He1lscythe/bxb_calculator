@@ -1,0 +1,694 @@
+# G_449_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	市街地A					0
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏2			0
+	オーラ桃		エフェクト裏			0
+	グラーキの黙示録	にやけ_拡大	エフェクト表			0
+FadeIn	black					0
+	グラーキの黙示録	にやけ_拡大						えへへ♪\n二人っきりだね、お兄ちゃん♪
+	グラーキの黙示録	笑い_拡大						今ならこっそり、\nグラーキにしたいこと……\nなんでもしていいんだよぉ？
+	グラーキの黙示録	にやけ_拡大						さあ……\nお兄ちゃんはなにをしたいの……♪
+Param	character_grayout=true
+	ディーア	<Off>						オレがグラーキにしたいこと……
+	ディーア	<Off>						グラーキ、頼む\nお願いだ……！
+Param	character_grayout=false
+StopBgm						1
+	グラーキの黙示録	笑い_拡大						うん……♪
+Param	character_grayout=true
+	ディーア	<Off>						今は<dash=2>
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ディーア	拡大本気2	エフェクト裏
+	ディーア	拡大本気2						離れてくれー！
+CharacterOff
+Bg	市街地A
+	ディーア	絶望2	1_2_b
+	グラーキの黙示録	通常	2_2
+Bgm	コメディ
+Se	ポップイン
+Tween	グラーキの黙示録	PunchPosition	y=40				NoWait
+Tween	グラーキの黙示録	MoveBy	x=30				NoWait
+	グラーキの黙示録	通常						ひゃん♪
+Param	character_grayout=true
+CharacterOff
+Se	ガヤA
+	母親		1_2_b
+	女の子		2_2
+Wait						.3
+Tween	女の子	RotateTo	y=180 time=0.8
+Tween	女の子	PunchPosition	y=30				NoWait
+Wait						.3
+	女の子							ママー！\nあのおにいちゃんたち、\nなにしてるの？
+	母親							しっ！\n見ちゃいけません！
+StopSe
+CharacterOff
+	ディーア	悔しい2	1_2_b
+	グラーキの黙示録	通常	2_2
+	グラーキの黙示録	通常						もう♪\nせっかく他の<ruby=おばさん>魔剣</ruby>もいなくて\n二人っきりなんだよ？					上のパートから移動
+Tween	グラーキの黙示録	MoveBy	x=-30				NoWait
+Se	ポップイン
+	グラーキの黙示録	笑い						若くて最新魔剣なグラーキのこと、\n好きにしていいのに♪\nもったいないよ、お兄ちゃん♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						ダメに決まってるだろ!?\nそんなことしたら、\n事案だ、事案！
+	ディーア	絶望2						それに、\nぜんぜん二人っきりじゃない!!\n街の人がたくさんいる！
+	グラーキの黙示録	通常						大丈夫だよぉ♪\nあの人達は他人だし♪\n見られる方がドキドキするでしょ♪
+	ディーア	本気2						そのドキドキは\n恐怖のドキドキだからな!?
+Tween	グラーキの黙示録	MoveBy	x=-30				NoWait
+	グラーキの黙示録	通常						むぅ、お兄ちゃんは\n常識に囚われすぎだよ♪
+	グラーキの黙示録	笑い						でも、お兄ちゃんが嫌がるなら……\n一緒に写真撮るのはいい？
+	ディーア	汗2						ああ、\nそれくらいならいいけど……
+	グラーキの黙示録	笑い						やったぁ♪
+	グラーキの黙示録	笑い						お兄ちゃんのかっこいいとこ、\n写真に撮っとこ♪\n後で送ってあげるね♪		1545-10		ボイス
+	グラーキの黙示録	にやけ						このグラーキのタブレットで♪
+	ディーア	驚き2						待て……！\nグラーキのタブレットは\n服が透け<dash=2>
+Tween	グラーキの黙示録	MoveBy	x=-20				NoWait
+Se	ポップイン
+	グラーキの黙示録	笑い						街の真ん中で\n生まれたてのグラーキと\nツーショットだねぇ♪
+	ディーア	驚き2						ダメだ！\nそんなに近づいたら、\nまた<dash=2>
+CharacterOff
+	勇者A		画面外_右
+Se	走る
+Tween	勇者A	MoveTo	x=0 time=2				NoWait
+	勇者A							おい、お前たち\nこんな所でなにをしている！
+CharacterOff
+	グラーキの黙示録	にやけ	2_2
+	ディーア	汗2	1_2_b
+	ディーア	汗2						な、なにも！\nただの自撮り<dash=2>
+Tween	グラーキの黙示録	MoveBy	x=-40				NoWait
+	グラーキの黙示録	にやけ						お兄ちゃんと愛しあってる\n写真を撮ってたの♪
+	ディーア	絶望2						うわぁああああ!!
+	グラーキの黙示録	泣き						きゃっ♪
+Se	走る
+Tween	ディーア	MoveBy	x=-800 time=2				NoWait
+Tween	グラーキの黙示録	MoveBy	x=-800 time=2				NoWait
+Wait						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+Bg	森林A					0
+CharacterOff						0
+	グラーキの黙示録	にやけ	2_2			0
+	ディーア	悔しい2	1_2_b			0
+FadeIn	black					.3
+	ディーア	悔しい2						はぁ、はぁ……危なかった
+	ディーア	絶望2						ぐ、グラーキ……\n街中でああいうことはやめてくれ
+	グラーキの黙示録	にやけ						あーあ♪\nマカインスタでバズる\nチャンスだったのにぃ♪
+	ディーア	絶望2						ま、まさかマカインスタに\n投稿するつもりだったのか!?
+	ディーア	悔しい2						あと少しでオレの事案が\n魔界中に広がるところだった……
+	グラーキの黙示録	にやけ						そんなの心配しすぎだよぉ♪
+	グラーキの黙示録	笑い						だいたい、\nお兄ちゃんは常識に囚われすぎ♪
+	ディーア	悔しい2						そんなこと言ったって……
+Bgm	神秘
+Tween	グラーキの黙示録	MoveBy	x=-20				NoWait
+	グラーキの黙示録	通常						ねぇ……\nお兄ちゃんはなんで嫌がるの？\nグラーキのこと、嫌い？
+	ディーア	悔しい2						そんなわけない\n……けど<dash=2>
+	グラーキの黙示録	泣き						グラーキが小さいから？
+	ディーア	悔しい2						まあ……そうだな
+	グラーキの黙示録	泣き						ふーんそっかぁ\n確かに、小さい子に手を出したら\nいけないよね……
+	ディーア	汗2						だから、あんまり過激なことは
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	グラーキの黙示録	にやけ_拡大	エフェクト表
+	グラーキの黙示録	にやけ_拡大						でも……\nいけないコトだから、\nドキドキしたんでしょ？
+CharacterOff
+	ディーア	驚き2						そ、それは……！
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	1_2_b
+	グラーキの黙示録	にやけ	2_2
+Tween	グラーキの黙示録	MoveBy	x=-10				NoWait
+	グラーキの黙示録	にやけ						にひひ♪\nお兄ちゃん、いいんだよ？\nドキドキしても♪
+Tween	グラーキの黙示録	MoveBy	x=-10				NoWait
+	グラーキの黙示録	通常						こんなにかわいいグラーキと\n一緒にいたんだから\nそれがふつー♪
+Tween	グラーキの黙示録	MoveBy	x=-10				NoWait
+Se	ポップイン
+	グラーキの黙示録	にやけ						それにお兄ちゃんも\n期待してるんじゃないの？
+	グラーキの黙示録	笑い						こんな森の中に\nグラーキの手を掴んで\n無理やり連れてきちゃって♪
+	ディーア	驚き2						違う！\nこれはあの場から離れるために……！
+	グラーキの黙示録	にやけ						にひひ♪ \n素直になりなよ、お兄ちゃん……♪
+	グラーキの黙示録	笑い						今度こそ二人っきり……\nなにをしてもバレないなら\nいいよね？
+	ディーア	絶望2						う、うぅ……
+StopBgm
+CharacterOff
+	キノコリオン		画面外_左
+Tween	キノコリオン	MoveTo	x=0 time=4				NoWait
+	キノコリオン							ノコノコノコ……
+CharacterOff
+	ディーア	驚き2						…………あ
+	ディーア	嬉しい2						…………
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=30				NoWait
+	キノコリオン							ノコォッ!?!?
+Tween	キノコリオン	RotateTo	y=180 time=0.5
+Tween	キノコリオン	MoveBy	x=800 time=1.5				NoWait
+Se	走る
+Wait						.5
+Bgm	バトル
+CharacterOff
+	グラーキの黙示録	通常	2_2
+	ディーア	驚き2	1_2_b
+	ディーア	驚き2						あー！\nあんなところに\nキノコリオンがー!!
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						追うぞグラーキ!!
+	グラーキの黙示録	泣き						えー……\n放っておいてもいいんじゃない？
+	ディーア	悔しい2						ダメだ！\nこのまま放っておいたら<dash=2>
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ディーア	拡大本気2	エフェクト裏
+	ディーア	拡大本気2						キノコリオンの胞子が\n魔界中を覆って、\n魔界が滅んでしまうことになる!!
+Param	character_grayout=true
+CharacterOff
+	グラーキの黙示録	通常	2_2
+	ディーア	本気2	1_2_b
+	グラーキの黙示録	通常						ならないでしょ
+	ディーア	絶望2						なるかもしれないだろ!?
+	グラーキの黙示録	泣き						…………もぅぅ、\n仕方ないなぁ\nあと少しだったのに
+	グラーキの黙示録	笑い						……でも、いいよ♪
+Tween	グラーキの黙示録	MoveBy	x=-30				NoWait
+	グラーキの黙示録	笑い						ねぇ、お兄ちゃん♪\nグラーキがんばるから\nあとでご褒美ちょうだいね♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						えっ!?
+CharacterOff
+	グラーキの黙示録	笑い_拡大	エフェクト表
+	グラーキの黙示録	笑い_拡大						それじゃあ、\nさっそく倒しちゃうよ♪\nがぶがぶぅー♪
+If	isdebug==true
+CharacterOff
+Jump	*G_449_02
+EndIf
+EndScenario
+
+# G_449_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	森林A
+	ディーア	通常2	1_2_b			0
+	グラーキの黙示録	笑い	2_2			0
+FadeIn	white					.5
+Tween	グラーキの黙示録	PunchPosition	y=20				NoWait
+	グラーキの黙示録	笑い						んー、おいしかったぁ！\nごちそうさま!!
+	ディーア	通常2						お疲れさま、グラーキ
+	ディーア	笑い2						キノコリオンを倒したし\nこれで<dash=2>
+	グラーキの黙示録	笑い						うん、グラーキがんばったよぉ♪
+StopBgm
+Tween	グラーキの黙示録	MoveBy	x=-20				NoWait
+	グラーキの黙示録	にやけ						だ、か、ら……♪
+	ディーア	絶望2						……あ
+Bgm	コメディ
+	ディーア	汗2						は、早く帰らないと\nリディが心配しちゃうなー
+	グラーキの黙示録	にやけ						その前に、約束でしょぉ？
+CharacterOff
+	グラーキの黙示録	にやけ_拡大	エフェクト表
+	グラーキの黙示録	にやけ_拡大						お兄ちゃん、ご褒美ちょうだい♪
+CharacterOff
+	グラーキの黙示録	にやけ	2_2
+	ディーア	汗2	1_2_b
+	ディーア	汗2						そ、そうだな\nじゃあ、帰りにお菓子でも……
+	グラーキの黙示録	泣き						それじゃ足りないよぉ♪\n他の<ruby=おばさん>魔剣</ruby>達と一緒じゃやだぁ♪\nもっといけないコトしようよ♪
+	ディーア	汗2						いけないコトって……
+StopBgm
+	グラーキの黙示録	にやけ						ねぇ、\n今"なに"想像したの♪
+Bgm	神秘
+	グラーキの黙示録	笑い						……それ、しようよ♪
+	ディーア	絶望2						違う、誤解だ！\nオレはなにも考えて<dash=2>
+	グラーキの黙示録	笑い						ご・ほ・う・び、だよ♪\nねぇ、はやく……♪
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	グラーキの黙示録	笑い_拡大	エフェクト表
+	グラーキの黙示録	笑い_拡大						誰もいない、静かな森の中♪\n二人っきり♪
+	グラーキの黙示録	にやけ_拡大						にひひ♪\n背徳的だよね？\nドキドキするよね♪
+	グラーキの黙示録	笑い_拡大						そのドキドキを、\nグラーキに食べさせて……♪
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ディーア	絶望2
+	ディーア	絶望2						（だ、ダメだ!!\n　このままじゃ……!!）
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望2	1_2_b
+	グラーキの黙示録	笑い	2_2
+Tween	グラーキの黙示録	MoveBy	x=-20				NoWait
+	グラーキの黙示録	通常						さぁ……♪
+FadeOut	white					1
+StopBgm
+FadeIn	white					.1
+Tween	グラーキの黙示録	PunchPosition	y=20				NoWait
+Tween	グラーキの黙示録	MoveBy	x=20				NoWait
+	ディーア	悔しい2						<size=40>はっくしょん!!</size>
+Bgm	コメディ
+	ディーア	驚き2						そ、そうだ！!\nさっきキノコリオンの胞子を\nあびたんだったー!!
+	グラーキの黙示録	通常						え……？\nそんなことなかったよねぇ？
+	ディーア	驚き2						いや、そうなんだ！\nこのままだと大変だ!!\nだから、グラーキも早く帰ろう!!
+Se	走る
+Tween	ディーア	MoveBy	x=-800 time=2				NoWait
+Wait						1.5
+StopBgm							1
+	グラーキの黙示録	通常						…………へぇー
+Bgm	絶望
+	グラーキの黙示録	にやけ						お兄ちゃん、\nそんなに抵抗するんだぁ……♪
+Param	character_grayout=false
+CharacterOff
+	黒グラデーション		エフェクト裏
+	グラーキの黙示録	にやけ_拡大	エフェクト表
+	グラーキの黙示録	にやけ_拡大						なら、いいよ♪
+	グラーキの黙示録	にやけ_拡大						グラーキは最新の魔剣<dash=2>\n古い魔剣とひと味違うとこ、\n見せてあげるから♪ にひひ♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Param	character_grayout=true
+Bg	酒場_宿屋(夜)					0
+Bgm	穏やか
+CharacterOff						0
+	ディーア	通常2				0
+FadeIn	black					.3
+	ディーア	通常2						はぁ、\nようやく一息つけたな
+	ディーア	汗2						リディには\n心配かけちゃったけど……
+Se	回想
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	汗2	1_3			0
+	リディ	驚き2	3_3			0
+FadeIn	black					.3
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	驚き2						えっ!?\nマスター、キノコリオンの胞子を\nあびちゃったの？
+	ディーア	汗2						しかも変なキノコリオンだったんだ\n気になるから、\nしばらく一人で部屋にいるよ
+	リディ	悲しい2						大丈夫なの？
+	ディーア	笑い2						少し休めば平気だって
+	リディ	怒り2						じゃあ、\nなにかあったらすぐに呼んでね\n<ruby=タブレット>魔装具</ruby>持ってるでしょ？
+	ディーア	笑い2						ああ、ありがとう
+FadeOut	black					.5
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	汗2				0
+FadeIn	black					.3
+	ディーア	汗2						とはいえ、\n本当は仮病だしヒマだな……
+	ディーア	通常2						マカインスタを見て時間を……
+Se	ラブ
+								ピロン				Se＋文字で
+	ディーア	驚き2						……あれ？
+	ディーア	驚き2						メッセージ？\nグラーキからだ……
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル44903		エフェクト表			0							後で差し替え
+FadeIn	white					.2
+	グラーキの黙示録	<Off>						<speed=0.1>＞お兄ちゃん大丈夫？</speed><speed=0>				全部テキストメッセージだと音が入らないのでやめておく
+	グラーキの黙示録	<Off>						<speed=0.1>＞これ見て元気出してね♪</speed><speed=0>
+	グラーキの黙示録	<Off>						<speed=0.1>＞とってもきれいな写真だよ♪</speed><speed=0>
+FadeOut	white					.2
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	通常2				0
+FadeIn	white					.2
+	ディーア	通常2						きれいな写真……\nそういえば、景色の写真も\nたくさん撮っていたな
+	ディーア	笑い2						オレのこと、\nこんなに心配してくれるなんて
+	ディーア	通常2						どれどれ…………
+FadeOut	white					.5
+StopBgm
+CharacterOff						0
+Param	character_grayout=false
+Bg	白背景					0
+	イベントスチル44901		エフェクト表			0
+	グラーキの黙示録	腹_拡大	エフェクト裏			0
+	          
+FadeIn	white					.5
+Se	ラブ
+Bgm	コメディ
+	ディーア	<Off>						<dash=2>って、えぇ!?
+	ディーア	<Off>						なんだこの写真は!?
+FadeOut	white					.5
+Param	character_grayout=true
+Bg	酒場_宿屋(夜)					0
+CharacterOff						0
+	ディーア	驚き2				0
+FadeIn	white					.5
+	ディーア	驚き2						もしもし、グラーキ!?\nさっき送ってきた写真は一体!?
+	グラーキの黙示録	<Off>						<color=mk2wisp>『あ、お兄ちゃん♪\n　きれいでしょ、\n　グラーキのお・な・か♪』</color>
+	グラーキの黙示録	<Off>						<color=mk2wisp>『一人で寂しそうな\n　お兄ちゃんにプレゼントだよぉ♪』</color>
+	ディーア	絶望2						いや、あんな写真あったら……
+FadeOut	black					.2
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	イベントスチル44901		エフェクト表			0
+	グラーキの黙示録	腹_拡大	エフェクト裏			0
+FadeIn	black					.2
+	グラーキの黙示録	腹_拡大						<color=mk2wisp>『にひひ、ドキドキしちゃう？』</color>
+	グラーキの黙示録	腹_拡大						<color=mk2wisp>『グラーキね、わかったの♪\n　お兄ちゃんはグラーキが小さいから\n　触ってくれない……』</color>
+	グラーキの黙示録	腹_拡大						<color=mk2wisp>『だったら、触らなければオッケー♪\n　写真なら好きなこと\n　できるでしょ♪』</color>
+Param	character_grayout=true
+Bg	酒場_宿屋(夜)
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						そういう意味じゃない!!
+	グラーキの黙示録	<Off>						<color=mk2wisp>『もう、我慢しなくていいのに♪\n　どんどん送るから♪』</color>
+	グラーキの黙示録	<Off>						<color=mk2wisp>『うん、しょ♪\n　パシャ♪\n　そうしーん♪』</color>
+CharacterOff						0
+Se	ラブ
+	          							ピロン
+FadeOut	white					.5
+Param	character_grayout=false
+Bg	白背景					0
+CharacterOff						0
+	イベントスチル44901		エフェクト表			0
+	グラーキの黙示録	肩_拡大	エフェクト裏			0
+	          		1_2
+FadeIn	white					.5
+Wait						2
+FadeOut	white					.2
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	絶望2				0
+FadeIn	white					.5
+	ディーア	絶望2						こ、これは……!?
+	グラーキの黙示録	<Off>						<color=mk2wisp>『えへへ、かわいいでしょ♪\n　今ちょうど、撮ったんだよ♪』</color>
+	ディーア	絶望2						ぐ、グラーキ……\nなにをしているんだ……!?
+Param	character_grayout=false
+CharacterOff
+Bg	黒背景
+	イベントスチル44901		エフェクト表
+	グラーキの黙示録	肩_拡大	エフェクト裏
+	グラーキの黙示録	肩_拡大						<color=mk2wisp>『なんだろうねぇ？\n　お兄ちゃんは\n　なにを想像してるの？』</color>
+CharacterOff
+Bg	酒場_宿屋(夜)
+	ディーア	悔しい2						な、なにも想像してない!!
+CharacterOff
+Bg	黒背景
+	イベントスチル44901		エフェクト表
+	グラーキの黙示録	肩_拡大	エフェクト裏
+	グラーキの黙示録	肩_拡大						<color=mk2wisp>『ホントかなぁ♪\n　にひひ、グラーキもね、\n　さっきキノコのあびちゃったの』</color>
+	グラーキの黙示録	肩_拡大						<color=mk2wisp>『だから、体がムズムズしてて……♪\n　おかしなところないかなって♪\n　うんしょ、うんしょ……』</color>
+CharacterOff						0
+	グラーキの黙示録	<Off>						<color=mk2wisp>『パサリ♪』</color>
+CharacterOff
+Param	character_grayout=true
+Bg	酒場_宿屋(夜)
+	ディーア	絶望2						この音は……！
+	グラーキの黙示録	<Off>						<color=mk2wisp>『ここも大丈夫そう♪\n　もっと下の方かなぁ？』</color>
+	ディーア	汗2						グラーキ！\nなにもないならオレはこれで……!!
+	グラーキの黙示録	<Off>						<color=mk2wisp>『待ってよぉ♪\n　グラーキ一人だとおかしくないか、\n　よく見えないの♪』</color>
+CharacterOff
+Param	character_grayout=false
+Bg	黒背景
+	オーラ桃		エフェクト表
+	グラーキの黙示録	笑い_拡大	エフェクト裏
+	グラーキの黙示録	笑い_拡大						お兄ちゃん、確かめて……♪
+Se	ラブ
+CharacterOff						0
+	          							ピロン
+Bg	酒場_宿屋(夜)
+CharacterOff
+	ディーア	驚き2						こ、今度は……え!?
+FadeOut	white					.5
+CharacterOff						0
+Bg	白背景					0
+	オーラ桃		エフェクト表			0
+FadeIn						.5
+	ディーア	<Off>						この、白いのは……
+	グラーキの黙示録	<Off>						<color=mk2wisp>『あ、間違えちゃったぁ♪\n　それね、いま脱いじゃった下着♪』</color>
+Bg	酒場_宿屋(夜)
+CharacterOff
+	ディーア	絶望2						ま、まさか、グラーキは今……
+Se	回想
+FadeOut	white					.3
+Bgm	雪の街
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	オーラ桃		エフェクト表			0
+	グラーキの黙示録	にやけ_拡大	エフェクト裏			0
+FadeIn	white					1
+	グラーキの黙示録	にやけ_拡大						お兄ちゃん、スースーするよぉ……
+FadeOut	white					1
+CharacterOff						0
+	ディーア	絶望2				0
+StopBgm
+FadeIn	white					.5
+	ディーア	絶望2						ダメだ！\nなにを考えているんだオレは！
+Bgm	絶望
+	ディーア	悔しい2						グラーキはここにいない、\n着替えるのだって、\nみんな毎日やってることだ！
+	ディーア	悔しい2						このくらいで揺らいだら、\nダメなんだ！
+Bg	黒背景
+CharacterOff
+	グラーキの黙示録	にやけ						分かるよ、\nお兄ちゃんの考えていること♪
+	グラーキの黙示録	笑い						にひひ♪\n想像の中でも、\nグラーキはかわいいでしょ？
+	グラーキの黙示録	笑い						それにグラーキもね、\nお兄ちゃんのこと、\nここからでもわかるんだよ？
+	グラーキの黙示録	にやけ						真っ赤になって、\n写真から目が離せないんだよね♪
+Bg	酒場_宿屋(夜)
+CharacterOff
+	ディーア	悔しい2						そ、そんなことないぞ！\n写真も保存しないで<dash=2>
+Bg	黒背景
+CharacterOff
+StopBgm						1
+	グラーキの黙示録	笑い						ごまかしちゃって\nお兄ちゃん、かわいいー♪
+Bgm	雪の街					5
+	グラーキの黙示録	笑い						そんなコトしなくていいのに♪
+	グラーキの黙示録	にやけ						まだいけないコトだと思ってる？\n常識に縛られてる？\n事案だと思ってる？
+CharacterOff
+	グラーキの黙示録	笑い_拡大	エフェクト表
+	グラーキの黙示録	笑い_拡大						……いいんだよ？
+CharacterOff
+Bg	酒場_宿屋(夜)
+	ディーア	絶望2						ダメだ……！\n小さい子にタッチするなんて\n許されない……！
+CharacterOff
+Bg	黒背景
+	グラーキの黙示録	にやけ						Noタッチ？\n……お兄ちゃんはタッチしないよ？\n写真を見るだけ♪
+	グラーキの黙示録	笑い						ただの写真♪\n好きなところを拡大しても、\n保存して大切にしても大丈夫♪
+Bg	酒場_宿屋(夜)
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2						でも……\nこんな写真を持っていることが\nバレたら……
+	グラーキの黙示録	<Off>						<color=mk2wisp>『お兄ちゃんも、\n　バレなきゃイイって\n　思ってるんだ♪』</color>
+	グラーキの黙示録	<Off>						<color=mk2wisp>『だいじょーぶ、バレないよぉ♪\n　……お兄ちゃんと私のヒミツだもん\n　リディちゃんにもバレないよ♪』</color>
+	ディーア	絶望2						う、うぅ……
+	グラーキの黙示録	<Off>						<color=mk2wisp>『それでも常識を捨てられないなら、\n　理由、あげちゃお♪』</color>
+	ディーア	驚き2						……え？
+Bg	黒背景
+CharacterOff
+	グラーキの黙示録	通常
+	グラーキの黙示録	通常						あーあ♪\nグラーキのお気に入りの写真、\nいらないんだぁ♪
+Bg	酒場_宿屋(夜)
+CharacterOff
+	ディーア	驚き2						……グラーキ、なにを？
+CharacterOff
+Bg	黒背景
+	グラーキの黙示録	通常
+	グラーキの黙示録	泣き						グラーキ、そんなに魅力ないんだ♪\nひどいよぉ、ぴえん♪
+	グラーキの黙示録	泣き						こうなったら、\nマカインスタに投稿して聞こっと♪\nグラーキは魅力的？ って♪
+FadeOut	white					1
+Param	character_grayout=false
+Bg	白背景					0
+CharacterOff						0
+	イベントスチル44902		エフェクト表			0
+	グラーキの黙示録	腹_拡大	エフェクト裏			0
+FadeIn	white					.3
+	グラーキの黙示録	腹_拡大						<color=mk2wisp>『でもぉ、この写真\n　みんなに見せてもいいのかなぁ？』</color>
+	グラーキの黙示録	腹_拡大						<color=mk2wisp>『危ない人も\n　いるかもしれないのにぃ♪』</color>
+FadeOut	white					.3
+Bg	白背景					0
+CharacterOff						0
+	イベントスチル44902		エフェクト表			0
+	グラーキの黙示録	肩_拡大	エフェクト裏			0
+FadeIn	white					.3
+	グラーキの黙示録	肩_拡大						<color=mk2wisp>『どこかにグラーキを心配して\n　写真を管理してくれる\n　優しいお兄ちゃんはいないかな？』</color>
+	グラーキの黙示録	肩_拡大						<color=mk2wisp>『グラーキを守ってくれる\n　かっこいいお兄ちゃんは\n　いないのかなぁ♪』</color>
+FadeOut	white					.3
+Bg	酒場_宿屋(夜)					0
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	white					1
+	ディーア	悔しい2						このままだと\nグラーキのこの写真が魔界中に……
+	ディーア	絶望2						そ、そうだ……\n写真を管理するのは、\nグラーキを守るため……
+CharacterOff
+Bg	黒背景
+	黒グラデーション		エフェクト裏
+	グラーキの黙示録	にやけ_拡大	エフェクト表
+	グラーキの黙示録	にやけ_拡大						そう、グラーキを守るため♪\n今なら誰も見ていないし、\nタッチするわけでもないよ？
+	グラーキの黙示録	にやけ_拡大						お兄ちゃんが断る理由、\nなくなっちゃったね♪ 
+	グラーキの黙示録	笑い_拡大						さあ、\n新しい価値観に身を任せようよ\n古い考えなんて捨てちゃってさ♪
+CharacterOff
+Bg	酒場_宿屋(夜)
+	黒グラデーション		エフェクト裏
+	ディーア	絶望2
+	ディーア	絶望2						オレは……この写真を……
+CharacterOff
+Bg	黒背景
+	グラーキの黙示録	笑い_拡大	エフェクト表
+	グラーキの黙示録	笑い_拡大						にひひ……♪
+StopBgm
+FadeOut	white					.7
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	          
+FadeIn	white					.2
+Se	ノック
+Wait						1
+	リディ	通常2						マスター？
+CharacterOff
+Param	character_grayout=true
+	リディ	通常2	2_2
+	ディーア	驚き2	1_2_b
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						…………っ!?
+	ディーア	悔しい2						……り、リディ!?
+	リディ	笑い2						マスター大丈夫？\nキノコが生えたりしてないよね？
+	ディーア	汗2						あ、ああ……大丈夫だ……
+	リディ	笑い2						よかったぁ！\nでも、心配だから\n今日はゆっくり休んでね！
+	ディーア	驚き2						リディ……
+	リディ	通常2						それじゃあ、お大事に！
+Se	走る
+Tween	リディ	MoveBy	x=800 time=2				NoWait
+Wait						.3
+	ディーア	笑い2						ああ……
+	ディーア	怪しい2						…………
+Bgm	絶望
+	ディーア	悔しい2						危なかった……\nオレにはリディも、\n守りたい生活もあるんだ
+	ディーア	悔しい2						あのまま、\n欲望に任せていたら……
+Se	回想
+FadeOut	white					.5
+ImageEffect	SpriteCamera	GrayScale
+Bg	酒場1F					0
+CharacterOff						0
+	勇者A					0
+FadeIn	white					.5
+	勇者A							事案だ事案！\n逮捕する!!
+CharacterOff
+	リディ	絶望2						あのマスターなら\nいつかやると思ってました……
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	酒場_宿屋(夜)					0
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	white					.5
+	ディーア	悔しい2						なんてことに……
+StopBgm
+	グラーキの黙示録	<Off>						<color=mk2wisp>『……もしもし、お兄ちゃん？』</color>
+	ディーア	通常2						ふぅ……
+Bgm	凱旋
+	ディーア	笑い2						こら、グラーキ！\nかわいい写真だけど、\nこんな風に送ったらダメだろ？
+	ディーア	笑い2						今度から気をつけるんだぞ
+Bg	黒背景
+CharacterOff
+	グラーキの黙示録	泣き						むぅぅ……\nそれはないよ、お兄ちゃん\nいきなり大人の対応とかずるいー!!
+CharacterOff
+Bg	酒場_宿屋(夜)
+	ディーア	汗2						あはは……\nまた後でな、グラーキ
+	ディーア	通常2						これで大丈夫だ\nグラーキもしばらく待てば\n落ち着いてくれるだろ
+	ディーア	笑い2						オレも、\nもう迷うことはないからな！
+	？？？？							本当に大丈夫なのぉ？
+	ディーア	笑い2						ああ、もちろん
+	ディーア	汗2						あと、みんなにも\n仮病のこと謝らないとな！\n嘘をついてしまったわけだし
+	？？？？							へぇー……\nやっぱり仮病だったんだ
+	ディーア	笑い2						そうなんだ、ごめんな
+StopBgm
+	ディーア	怪しい2						…………ん？
+CharacterOff						0
+Se	ラブ
+								ピロン
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル44903		エフェクト表			0							後で差し替え
+FadeIn	white					.2
+	グラーキの黙示録	<Off>						<speed=0.1>お兄ちゃん</speed><speed=0.3>、後ろだよ♪</speed>
+FadeOut	white					.2
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	絶望2				0
+FadeIn	white					.2
+	ディーア	絶望2						ま、まさか…………
+CharacterOff
+Bgm	緊迫
+	グラーキの黙示録	笑い						にひひ♪\nいけないんだー、お兄ちゃん♪
+CharacterOff
+Param	character_grayout=true
+	グラーキの黙示録	笑い	3_3
+	ディーア	驚き2	1_3_b
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						ぐ、グラーキ!？\nいつの間にこの部屋に!?
+	ディーア	絶望2						いや、もしかして……!?
+	グラーキの黙示録	笑い						せいかーい♪\nグラーキ、クローゼットの中に\nずーっと隠れてたの♪
+	グラーキの黙示録	にやけ						写真に夢中で気づかなかった？
+	ディーア	絶望2						そ、それじゃあ、\nあのクローゼットの中で……
+FadeOut	white					.5
+Param	character_grayout=false
+Bg	白背景					0
+CharacterOff						0
+	オーラ桃		エフェクト裏			0
+	グラーキの黙示録	肩_拡大	エフェクト表			0
+FadeIn	white					.5
+	グラーキの黙示録	肩_拡大						うんしょ、うんしょ……
+FadeOut	white					.5
+Param	character_grayout=true
+Bg	酒場_宿屋(夜)					0
+CharacterOff						0
+	ディーア	絶望2	1_3_b			0
+	グラーキの黙示録	にやけ	3_3			0
+FadeIn	white					.5
+	グラーキの黙示録	にやけ						あれれー♪\nお兄ちゃん、なにを想像してるの？
+	ディーア	絶望2						うぐっ……！
+Tween	グラーキの黙示録	MoveBy	x=-20				NoWait
+	グラーキの黙示録	にやけ						いいよ、好きに想像して♪
+Tween	グラーキの黙示録	MoveBy	x=-20				NoWait
+	グラーキの黙示録	通常						お兄ちゃんの近くで\nお洋服を脱いじゃった、\nグラーキのことを♪
+Tween	グラーキの黙示録	MoveBy	x=-20				NoWait
+	グラーキの黙示録	笑い						お兄ちゃんが恋しくて、\n少しでも近くにいたかったの♪
+Tween	グラーキの黙示録	MoveBy	x=-20				NoWait
+	グラーキの黙示録	笑い						でも、もういいんだよね？\nお兄ちゃん仮病だったんだから♪
+CharacterOff
+	グラーキの黙示録	にやけ_拡大	エフェクト表
+	グラーキの黙示録	にやけ_拡大						いっぱい\nタッチしてもいいよね♪
+CharacterOff
+	グラーキの黙示録	にやけ	1_1
+	ディーア	絶望2	1_3_b
+Tween	グラーキの黙示録	PunchPosition	y=40				NoWait
+Tween	グラーキの黙示録	MoveBy	x=-60				NoWait
+	グラーキの黙示録	笑い						えーいっ♪
+	ディーア	絶望2						うわぁあああ!?
+Bgm	コメディ
+FadeOut	black					.2
+CharacterOff						0
+Bg	黒背景					0
+	          
+FadeIn	black					.2
+	グラーキの黙示録	<Off>						待て待てお兄ちゃん♪\nがぶがぶー♪\nお手々とお口で食べちゃうぞー♪
+Se	ポップイン
+	ディーア	<Off>						ぐ、グラーキ！\nそこはダメだって!?
+	グラーキの黙示録	<Off>						どこのことかなぁ♪
+Se	ポップイン
+	グラーキの黙示録	<Off>						ほら、常識もモラルも無視して\nドキドキの背徳に身を任せちゃえ♪
+CharacterOff
+Bg	酒場_宿屋(夜)
+Param	character_grayout=false
+	集中線		エフェクト表
+	ディーア	拡大本気2	エフェクト裏
+	ディーア	拡大本気2						リディ!?\nみんなー!! 助けてくれー!!
+CharacterOff
+	グラーキの黙示録	にやけ_拡大	エフェクト表
+	グラーキの黙示録	にやけ_拡大						さあ、二人で\nインモラルな時間を楽しもうね♪\nにひひ……♪
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*G_449_01
+EndIf
+EndScenario

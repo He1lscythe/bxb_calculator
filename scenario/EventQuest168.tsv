@@ -1,0 +1,395 @@
+# E_168_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="すべてを消し去る光を前にさぁ、滅ぶがよい"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+FadeIn	black					.1
+Se	ルビードロップ						NoWait
+	※※※※							<speed=0>08:32:03</speed><speed=1>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	※※※※							<speed=0>08:32:02</speed><speed=1>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	※※※※							<speed=0>08:32:01</speed><speed=1>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	※※※※							<speed=0>08:32:00</speed><speed=1>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	※※※※							<speed=0>08:31:59</speed><speed=1>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	※※※※							<speed=0>08:31:58</speed><speed=0.7>  </speed>	BrPage
+FadeOut	black					.5
+StopSound
+Bgm	ガヤB_BGM
+Bg	市街地A
+FadeIn	black					.5
+	※※※※							<color=blue>─中央大陸ダフィート\n　オルクタムの村</color>
+CharacterOff
+	村人爺	通常	2_2
+Tween	村人爺	RotateTo	y=180 time=0.1
+	村人女	通常	1_2_b
+	村人爺							村の近くに魔物が出たって？
+	村人女		1_2					勘違いらしいわよ\n鳥の群れだって
+	村人女		1_2_b
+	村人爺							だよなあ、そうだと思ったぜ
+	村人男	<Off>						おい、大変だ!!
+CharacterOff
+	村人爺		2_3
+	村人女		1_3
+	村人男		画面外_右
+Tween	村人男	RotateTo	y=180
+Tween	村人男	MoveTo	x=180 y=-350 z=150
+	村人爺							おいおい、今度はなんだ？
+	村人男							魔剣が…！\n魔剣が光り始めて…！
+	村人爺		2_3_b
+	村人女							魔剣？なんの話よ？
+	村人爺		2_3					魔剣…村の遺跡にあるアレか？
+	村人爺		2_3_b
+	村人女							ああ、あのずっと放置されてる\nやつのこと？\nそれが一体どうしたのよ
+	村人男							それがすごい量の魔力を\n集め始めてて…！
+	村人女							はぁ？魔力？\nどうせまた勘違いじゃ…
+Shake	Graphics		time=10 x=10 y=10				NoWait
+Se	火事	TRUE					NoWait
+Wait						1
+ImageEffect	SpriteCamera	Bloom				10	NoWait
+Param	character_grayout=false
+	村人女							な、何!?
+	村人爺		2_3					…地震か？
+	村人男							なんだ、この揺れと光…？
+ImageEffect	SpriteCamera	NegaPosi				2	NoWait
+Se	闇3						NoWait
+Se	火1						NoWait
+Se	火3						NoWait
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffectOff	SpriteCamera	NegaPosi
+ImageEffect	SpriteCamera	GrayScale
+Se	火3
+Bg	灰の大地
+Wait						1
+	　　　　　　　　　　		1_1
+Wait						3
+Se	火事	TRUE	.3				NoWait
+FadeIn	white					1
+Wait						2
+StopSe						2
+FadeOut	black					3
+ImageEffectOff	SpriteCamera	GrayScale
+Bgm	絶望		1					　
+Bg	凍りついた神殿城
+Wait						2
+FadeIn	black					.1
+	？？？？							人類には扱うことができず\nやむなく封じられた魔剣は\n数多く存在する
+	？？？？							だが、その殆どにおいて\n理由は明確だ
+	？？？？							使用する魔力の総量が\n甚大であったり
+	？？？？							人類に扱える大きさでは\nなかったり
+	？？？？							性能を発揮するための\n代償が大きすぎたり
+	？？？？							そういう、つまらない魔剣が\n大半を占めている
+	？？？？							だが、極稀に\n「理由なく使えない魔剣」\nが存在する
+	？？？？							否、「使えないことに\nされている魔剣」というべきか
+	？？？？							そう、例えば「顕現するだけで\n村を一つ滅ぼす」ような…
+CharacterOff
+	アリス	通常2	2_3
+	アリス							くはは！\n非常に興味深いだろう？
+	アリス							それが一体どんな魔剣なのか\n探究心が踊るだろう？
+	アリス							だから貴様らにそれを\n見せてやろうと思ってな
+	アリス	笑い						なぁ、アルマゲスト
+CharacterOff
+	アルマゲスト		ss_2_3
+	アルマゲスト							ふふふ、あはははは！
+	アルマゲスト							さぁ見よ！\nこれがボク様の偉大なる光だ！\n高貴にして尊き新世界の光だ！
+Shake	Graphics		time=5 x=10 y=10				NoWait
+FadeOut	white					.1	NoWait
+Se	闇3
+FadeIn	white					.1	NoWait
+FadeOut	white					.1	NoWait
+FadeIn	white					.1	NoWait
+Se	超強化						NoWait
+ImageEffect	SpriteCamera	Bloom				1
+Se	闇3						NoWait
+Se	光3						NoWait
+Se	火3						NoWait
+Wait						.5
+ImageEffect	SpriteCamera	NegaPosi
+Wait						.5
+Se	火3
+Se	火事	TRUE
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffectOff	SpriteCamera	NegaPosi
+Wait						1.5
+StopSe						1
+FadeIn	white					.5
+	アルマゲスト							あーっはっは！どうだ？\nすごいであろう？\n魔帝アリス！
+CharacterOff
+	アリス	笑い	2_3
+	アリス	笑い						……というわけだ魔剣使い、\nいや魔界全土の諸君
+	アリス	通常2						この光を前に君たちは\nどうやら滅ぶらしい
+CharacterOff
+	アルマゲスト		ss_2_3
+	アルマゲスト							らしい？曖昧なことを\n言うものではないぞアリス！
+	アルマゲスト							このボク様が目覚めたのだ、\nこの世界の終焉は絶対だ
+CharacterOff
+	アリス	蔑み	2_3
+	アリス							……だそうだ
+	アリス	笑い						さて\n拝啓、魔界の愚民ども
+	アリス	通常2						六大異変エイビシュタット城主\nにして《すべてを知るもの》。\nあるいは、
+	アリス							原初六魔剣が一振り、終焉の\n魔剣アポカリプスのマスター\nにして、元・六大魔王が1人
+	アリス							この魔帝アリスが宣言しよう
+	アリス							魔界の運命はこの魔帝アリスが\n決定した
+	アリス							アルマゲストの光を以て\nこの世界に終焉を<ruby=もたら>齎</ruby>そう
+	アリス							滅びの時をどう迎えようと\n諸君らの自由だ
+	アリス							嘆き悲しむも良い\n怒り狂うも良い
+	アリス	通常						だが、もし我が決定に異を唱え\n武を以て抗うのであれば
+	アリス							茶番も余興も不要だ\nただ純粋な殺意だけを\n持って来い
+	アリス							その時は、この魔帝アリスも\nそのつもりで迎え撃つとしよう
+	アリス	笑い						さあ、諸君『戦争』の時間だ
+CharacterOff
+	アルマゲスト		ss_2_3
+	アルマゲスト							あーっはっはっは！\nいきなり世界に宣戦布告とは！
+	アルマゲスト							なかなかどうして程よく\n狂っていてよろしいぞ！
+	アルマゲスト							全てを滅ぼす光の世界、\nあるいは新時代の幕開け！
+	アルマゲスト							アルマゲストが貴様らを\n新時代へと誘うぞ！\nふふふ、あはははは!!
+FadeOut	white					.5
+BgOff
+StopSound
+CharacterOff
+	魔界が滅びるまで		1_1
+Wait						.5
+FadeIn	white					.5
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<speed=0>02:00:02</speed><speed=1>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<speed=0>02:00:01</speed><speed=1>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<speed=0>02:00:00</speed><speed=1>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<speed=0>01:59:59</speed><speed=1>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<speed=0>01:59:58</speed><speed=0.6>  </speed>	BrPage
+FadeOut	black					.1
+Bgm	絶望
+Bg	凍りついた神殿城
+CharacterOff
+	※※※※		1_1
+FadeIn	black					.5
+	※※※※							<color=blue>─乾いた大地エトロサーバ\n　『六大異変』\n　　氷城エイビシュタット</color>
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悲しい2	2_2
+	リディ							ねえ、アリス様\nどうしちゃったのかな？
+	ディーア							さあな…何か隠している\nような気がする…
+	ディーア	悔しい2						だが、今はそんなこと\n気にしてる場合じゃない
+	リディ	悔しい2
+	ディーア							文字通り世界を滅ぼしかねない\nほどの魔力がエイビシュタット\nに集まってる
+	ディーア							あの宣戦布告はいつもの\n余興なんかじゃない
+	リディ	悲しい2						勝てるの…？
+	ディーア	怒り2						正直、わからない…\nでもやるしかないんだ
+	ディーア							リディ、絶対にそばを\n離れるなよ
+	リディ							うん……
+FadeOut	black					.1
+StopSound
+CharacterOff
+	魔界が滅びるまで		1_1
+BgOff
+Wait						.5
+FadeIn	black					.1
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<speed=0>00:10:48</speed><speed=1>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<speed=0>00:10:47</speed><speed=1>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<speed=0>00:10:46</speed><speed=0.5>  </speed>	BrPage
+FadeOut	black					.1
+Bgm	絶望
+Bg	凍りついた神殿城
+Wait						.5
+FadeIn	black					.5
+CharacterOff
+	アリス	通常2	2_3
+	アリス							遅かったじゃないか、魔剣使い
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							アリス…！
+CharacterOff
+	アリス	通常	2_3
+	アリス							ここに来たということは、\n貴様は滅びの運命に逆らう\nというわけか
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							もちろんだ！
+	リディ	悲しい2						アリス様、本気なの…？
+CharacterOff
+	アリス	蔑み	2_3
+	アリス							愚問だな\n魔剣機関からの通達に\n目は通しただろう？
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悲しい2	2_2
+	ディーア							オルクタムの村と、無辜の民を\nまるごと消し去った…
+	リディ							本当だったんだ…
+CharacterOff
+	アルマゲスト		ss_2_3
+	アルマゲスト							あっはっは！村なんか\nどうだっていいだろ？ボク様は\n世界を滅ぼすのだから！
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悔しい2	2_2
+	ディーア							アルマゲスト…！\nなんでそんなことを…！
+CharacterOff
+	アルマゲスト		ss_2_3
+	アルマゲスト							ボク様の偉大なる新世界の光に\nあの村は相応しくなかった\nだけのことだ！
+	アルマゲスト							ついでにこの魔界もな！
+CharacterOff
+	アリス	通常	2_3
+	アリス							…強者が弱者を挫いて上に立つ\n弱き者の居場所などない
+	アリス							それがこの世界の真理であり、\n不変の摂理だ
+	アリス	笑い						魔界の常識を忘れたか、\n魔剣使い？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア							なら、オルクタムの村の人々は\nただ弱かったから死んだと\n言いたいのか…？
+CharacterOff
+	アリス	蔑み	2_3
+	アリス							自らを守る術を持たないのは\n弱者である証だ
+	アリス	笑い						そしてこのアルマゲストの前に\nおいて、ヒトは等しく\n弱者に過ぎない
+CharacterOff
+	アルマゲスト		ss_2_3
+	アルマゲスト							ふふふ、あはは！\nお前も食われる側ってことだ！
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悔しい2	2_2
+	ディーア							それでも、俺は…！
+CharacterOff
+	アリス		2_3
+	アリス	笑い						ふん、それでもヒトは\n弱者ではないと吼えるなら、
+	アリス	通常2						…貴様自身が証明してみせろ
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							……!!
+	ディーア							ああ…なるほど、\nそういうことか…!!
+	リディ	驚き2						マスター？
+	ディーア	通常2						リディ、大丈夫だ\nきっとアリスが援護してくれる
+	リディ							アリス様が？でも…
+	ディーア	怒り2						ずっと引っかかってたんだ
+	ディーア							何故わざわざ宣戦布告をしたり\nここに呼び出すような真似を\nしたのか
+	ディーア							世界を滅ぼしたいだけなら、\nそんなことする必要は\nないはずなんだ
+	リディ	笑い2						そっか…！\nじゃあアリス様は…！
+	ディーア							ああ、それにどうやらあの\nアルマゲストは暴走してる!\nアリスの制御下にはない！
+	ディーア	汗2						あれはアリスなりの\n緊急事態宣言だったんだ…！
+CharacterOff
+	アルマゲスト		ss_2_3
+	アルマゲスト							おーい、なにコソコソ\n喋ってるんだ！\nボク様の前で失礼だろ！
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	怒り2	2_2
+	ディーア							…覚悟を決めたのさ
+CharacterOff
+	アルマゲスト		ss_2_3
+	アルマゲスト							あはは！よろしいぞ！\n世界と共に滅ぶ覚悟が\nできたのだな！
+CharacterOff
+	ディーア	通常2	2_3
+StopSound
+	ディーア							いいや\n滅ぶなんてとんでもない
+	ディーア	怒り2						世界の真理とか、\n不変の摂理とか、\nそんなのも知ったことじゃない
+	ディーア	悔しい2						世界が滅びを否定しないなら、\nオレが否定してやる！
+Bgm	魔王バトル
+FadeOut	white					.1
+Se	魔剣入る
+Se	光1
+FadeIn	white					.3
+	ディーア	本気2						魔剣、解放!!		9000-24
+	ディーア	本気2						さあアルマゲスト、\n『戦争』の時間だ！
+	ディーア							滅びの運命は、\n俺が止めてみせる！
+ChangeSoundVolume	Voice	.5
+CharacterOff
+	アルマゲスト		ss_2_3
+	アルマゲスト							ふふふ、あはははは！\n一人でボク様に\n立ち向かうとは！
+	アルマゲスト							よろしいぞ！\n貴様もアリスに負けず劣らず\n狂っているな！
+	アルマゲスト							アリス、もういいだろう？\n世界を滅ぼす光を集め、\n新世界へ旅立とうじゃないか！
+CharacterOff
+	アリス	通常2	2_3
+	アリス							クク、いいとも！\n存分にやれ、アルマゲスト
+Se	光3
+FadeOut	white					.5
+Bg	神界改
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+FadeIn	white					1
+ChangeSoundVolume	Voice	1
+	ディーア							結界…！
+	リディ	悔しい2						魔力を一箇所に集めてる…？
+	ディーア	怒り2						そうはさせない…!!
+CharacterOff
+	アルマゲスト		ss_2_3
+	アルマゲスト							足止めは任せたぞ、\n魔帝アリス！
+CharacterOff
+	アリス	笑い	2_3
+	アリス							ふん、このアリスが直接手を\n下すまでもない
+Se	光3
+FadeOut	white					.5
+CharacterOff
+	エヴァンスミラージュ		ss_1_2_b
+	アルストロメリアミラージュ		ss_2_2
+	ミラージュエネミー		1_1
+FadeIn	white					1
+Wait						2
+Se	光3
+FadeOut	white					.5
+CharacterOff
+	パラノイアミラージュ		ss_1_2
+	エルフェリアミラージュ		ss_2_2
+	ミラージュエネミー		1_1
+FadeIn	white					1
+Wait						2
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	リディ							魔剣…!?
+	ディーア							いや、あれはあの光から\n作られた<ruby=ミラージュ>偽物</ruby>…！
+	リディ	怒り2						もう！邪魔しないでよ！
+CharacterOff
+	アリス	笑い	2_3
+	アリス							くはは！貴様の覚悟を\nこの魔帝アリスに示してみろ、\n魔剣使い！
+CharacterOff
+	アルマゲスト		ss_2_3
+	アルマゲスト							さあ、新時代の幕開けだ！\n貴様にも見せてやろう、\nボク様の偉大なる光を！
+FadeOut	black					.1
+CharacterOff
+	　　　　　　　　　　		1_1
+Bg	イベントスチル16801
+Wait						.3
+FadeIn	black					.5
+	アルマゲスト	<Off>						ふふふ、あはははは!!\nすべてを消し去る光を前に、\nさぁ滅ぶが良い!!
+FadeOut	black					.5
+StopSound
+StopVoice
+BgOff
+Wait						.2
+FadeIn	black					.1
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<speed=0>00:05:02</speed><speed=0.9>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<speed=0>00:05:01</speed><speed=0.9>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<speed=0>00:05:00</speed><speed=0.9>  </speed>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<color=red><speed=0>00:04:59</speed><speed=0.9>  </speed></color>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<color=red><speed=0>00:04:58</speed><speed=0.9>  </speed></color>	BrPage
+FadeOut	black					3	NoWait
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<color=red><speed=0>00:04:57</speed><speed=0.9>  </speed></color>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<color=red><speed=0>00:04:56</speed><speed=0.9>  </speed></color>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<color=red><speed=0>00:04:55</speed><speed=0.9>  </speed></color>	BrPage
+Se	ルビードロップ						NoWait
+	魔界が滅びるまで							<color=red><speed=0>00:04:54</speed><speed=0.4>  </speed></color>	BrPage
+If	isdebug==true
+CharacterOff
+Jump	*E_168_01
+EndIf
+EndScenario

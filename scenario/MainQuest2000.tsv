@@ -1,0 +1,1254 @@
+# Q2000_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	黒背景
+Bgm	絶望					0
+Se	走る	TRUE				0
+Param	character_grayout=false
+	          
+FadeIn	black					1
+	？？？？	<Off>						はぁ、はぁ、はぁ、はぁ……！<interval=1>　	BrPage
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	序章タイトルスチル01		エフェクト表			0
+FadeIn	black					.3
+Wait						2
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	          
+FadeIn	black					.3
+	？？？？	<Off>						なんで、どうして……？<interval=1>　	BrPage
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	序章タイトルスチル02		エフェクト表			0
+FadeIn	black					.3
+Wait						2
+FadeOut	black					.3
+CharacterOff						0
+Bg	洋館					0
+	全能殺しリディ	絶望				3
+FadeIn	black					.3
+Wait						2
+StopSe
+	全能殺しリディ	絶望						マスター……！<interval=1>　	BrPage
+Wait						.5
+Se	ぐちゃ
+	血痕A		エフェクト表			0
+Shake	全能殺しリディ		x=3				NoWait
+	全能殺しリディ	絶望						ぁ…………っ
+Se	倒れる
+CharacterOff	全能殺しリディ					1
+Wait						1
+CharacterOff
+	裏ディーア	通常				1
+Wait						1
+	裏ディーア	通常						………………
+	裏ディーア	通常						…………行くぞ
+FadeOut	black					1
+CharacterOff						0
+Bg	黒背景					0
+	序章タイトルスチル03		エフェクト表			2
+FadeIn	black					1
+Wait						3
+FadeOut	black					1
+StopBgm
+CharacterOff						0
+Bg	王政執務室					0
+Wait						1
+	地名背景		地名背景			0
+	地名ロゴ	スイルノーム	地名ロゴ			0
+	左縦線		左縦線			0
+	左横線		左横線			0
+	右縦線		右縦線			0
+	右横線		右横線			0
+FadeIn	black					1
+CharacterOff	黒背景					1
+Wait						1
+Tween	左縦線	MoveBy	y=-800 time=1.5	easeOutQuart			NoWait
+Tween	左横線	MoveBy	x=-800 time=1.5	easeOutQuart			NoWait
+Tween	右縦線	MoveBy	y=800 time=1.5	easeOutQuart			NoWait
+Tween	右横線	MoveBy	x=800 time=1.5	easeOutQuart			NoWait
+Wait						1.3
+	場所ロゴ	宗教国家エデン　王政執務室	場所ロゴ			1
+Wait						1
+	　　　　　　　　　　							　
+Tween	左縦線	MoveBy	y=-100 time=6				NoWait
+Tween	左横線	MoveBy	x=-100 time=6				NoWait
+Tween	右縦線	MoveBy	y=100 time=6				NoWait
+Tween	右横線	MoveBy	x=100 time=6				NoWait
+CharacterOff	地名ロゴ					.5
+CharacterOff	場所ロゴ					.5
+CharacterOff	左縦線					.3
+CharacterOff	左横線					.3
+CharacterOff	右縦線					.3
+CharacterOff	右横線					.3
+Wait						1.5
+CharacterOff	地名背景					1
+Wait						1.5
+Bgm	図書館
+	勇者レド	驚き						……それは、本当ですか？
+CharacterOff
+	魔導王ユウ	怒り						うちの観測班からの情報だ\n彼の魔力反応に間違いないよ
+CharacterOff
+	勇者レド	悔しい						ありえません……！\nだって、彼は<dash=2>
+CharacterOff
+	魔導王ユウ	怒り						そう思いたいレドちゃんの気持ちは\nオレにも痛いほどわかる
+	魔導王ユウ	怒り						ただでさえ、\n情勢不安なエデンの政務を担う\nキミの重責は計り知れない
+	魔導王ユウ	怒り						だがオレは魔導王であり\nキミも王でなくとも一国を支える身
+	魔導王ユウ	怒り						その『ありえない』が現実になれば\n魔界がどれだけのリスクを背負うか、\n考えなくてはいけないんだ
+CharacterOff
+	勇者レド	本気						…………
+	勇者レド	本気						わかり、ました……
+	勇者レド	悔しい						対応は彼が発案したプランで\nよろしいですか？
+CharacterOff
+	魔導王ユウ	悔しい						それで頼む\n……皮肉なものだけどね
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+Wait						3
+Bg	酒場1F					0
+	旅人	通常	画面外_左			0
+FadeIn	black					1
+Bgm	平和
+Se	ドア開く
+Tween	旅人	MoveBy	x=550 time=1				NoWait
+	旅人	通常						こんにちはー！\n今日も来ちゃったよー！
+Param	character_grayout=true
+	？？？？	<Off>						はーい♪
+Se	走る
+	レヴァ	笑い	2_2			1		酒場のアイドル！\nレヴァンテインがお出迎えするよ♪
+	旅人	通常						レヴァちゃんに会うと、\n元気が出てくるんだよね！
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	通常						ありがとっ♪\nそれでご注文はどうするの？
+CharacterOff
+	魔劍グラム=オルタ	通常2	2_2
+	ディーア	通常4	1_2
+	ディーア	通常4						レヴァの接客も\nだんだん板についてきたな……
+	魔劍グラム=オルタ	通常2						レヴァちゃん、すごいなぁ……
+	魔劍グラム=オルタ	通常2						それに比べて\n私はドジばっかりしちゃって
+	ディーア	驚き4						いやいや！\nオルタのドジっ子給仕も\n人気あるんだぞ？
+CharacterOff
+	レヴァ	通常						そうそう、適材適所ってやつ♪\n元気だしなって！
+	レヴァ	通常						私だって……\nあの子みたいには上手くできないし
+CharacterOff
+	魔劍グラム=オルタ	通常2						…………そう、だよね
+CharacterOff
+	ディーア	目閉じ4						…………
+	ディーア	笑い4						ほら、しんみりしていたら\nお客さんに伝わっちゃうぞ？
+	ディーア	通常4						生活のためにまずはアルバイト！\n早く次の<dash=2>
+StopBgm
+	？？？？	<Off>	1_2					突入っ……!!
+Se	光2
+Se	闇3
+FadeOut	white					.2
+Param	character_grayout=false
+FadeIn	white					.2
+Bgm	緊迫
+	土煙		エフェクト表			2
+	ディーア	悔しい4						っ……!!
+CharacterOff
+Se	走る
+	勇者A	通常	2_3			1
+	勇者C	通常	1_3			1
+	勇者D	通常	3_3			1
+	勇者A	通常						目標確認！ 目標確認!!
+	勇者A	通常						間違いない、魔剣王だ！\n化けて出てきやがった……！
+CharacterOff
+	エキドナ兵	通常						総員!!\n防御陣形で待機!!
+CharacterOff
+	ディーア	悔しい4						勇者に、兵士も……？
+CharacterOff
+	レヴァ	本気						ちょっと！\n酒場がめちゃくちゃじゃない!!
+CharacterOff
+	旅人	黒
+Shake	旅人		x=2				NoWait
+	旅人	黒						ぐぁああ……\nお、俺の腕が……
+CharacterOff
+	魔劍グラム=オルタ	本気2						だいじょうぶですか？\nあっちに早く避難を……！
+CharacterOff
+	ディーア	怒り4						どういうつもりだ？\nいったい何のために襲撃を？
+CharacterOff
+	勇者A	通常						なんのため、だと……
+StopBgm
+	勇者A	通常						ふざけるなっ！\n魔界を滅ぼした大罪人が!!
+Bgm	絶望
+CharacterOff
+	ディーア	驚き4						魔界を、滅ぼした？
+CharacterOff
+	勇者A	通常						俺の両親は、\nお前のせいで命を落とした!!
+CharacterOff
+	勇者C	通常						俺の恋人も！
+CharacterOff
+	エキドナ兵	通常						俺の子どももだ!!
+CharacterOff
+	勇者A	通常						魔界の平和と安定のため！\n魔剣王！ 貴様はここで討つ!!
+CharacterOff
+	ディーア	悔しい4						ちょっと待ってくれ!!\nいったい何の話を<dash=4>
+Param	character_grayout=true
+CharacterOff
+	勇者レド	本気	p7				1	しらばっくれるつもりか？
+	魔導王ユウ	通常	p3b				1	やあ、\n<param=name>ちゃん
+CharacterOff
+	ディーア	驚き4						魔導王に、レド……！
+CharacterOff
+	魔導王ユウ	ニヤリ						この勇者と兵士たちは\n緊急時即応部隊……通称A.R.G.O.
+	魔導王ユウ	通常						魔王クラスの危険因子が現れ、\n世界が滅亡の危機に瀕した時に備え
+	魔導王ユウ	通常						魔剣機関と世界図書館の仲介の下、\n三国合同で設立された部隊だ
+CharacterOff
+	ディーア	怪しい4						エキドナ、メルトナ、エデンが\n協力して……
+CharacterOff
+	勇者レド	本気						魔界の危機がこうも続いている中で\n無策でいるほど、\n僕らは馬鹿じゃないんだ
+CharacterOff
+	魔導王ユウ	怒り						まさか討滅対象第一号が\n発案者であるキミ自身になるとは\n思わなかったけどね
+CharacterOff
+	ディーア	本気4						だから、待ってくれ！\nオレは魔界を滅ぼしてなんて<dash=2>
+CharacterOff
+	勇者レド	本気						とぼけるな……！
+	勇者レド	本気						魔帝アリス様と、\nアリスファミリーの尽力がなければ\n僕らはここにいない!!
+	勇者レド	本気						なのにどうして、\nあれだけの凶行に及んだ貴方が\n呑気な顔で魔界にいられるんだ!?
+CharacterOff
+	魔導王ユウ	怒り						他ならぬキミ相手に、\nオレだってこんなことはしたくない\n大人しくしてくれないか？
+CharacterOff
+	メルトナ兵	通常						恐れながら、魔導王様！\nこの男に情けをかけるべきでは\nありません！
+	メルトナ兵	通常						もう二度と、\nあのような悲劇は起こさせない！\n我らの願いはそれだけです!!
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	ディーア	怒り4						話し合いは、無駄みたいだな
+Bgm	バトル
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ディーア	本気4						<dash=2><ruby=アンロック>魔剣解放</ruby>！\n魔剣CODE:THISWAY!!
+Se	フォーン
+FadeOut	white					.3
+CharacterOff						0
+	オーラ青		エフェクト表			0
+	ディスウェイ					1
+FadeIn	white					.3
+Tween	ディスウェイ	PunchPosition	y=30				NoWait
+	ディスウェイ	通常						ディスウェイ♪
+CharacterOff
+	魔導王ユウ	怒り						魔剣機関に\n登録されていない魔剣だと？
+CharacterOff
+	ディーア	本気4						ディスウェイ！\nこの人たちを傷つけずに<dash=2>
+CharacterOff
+	ディスウェイ	通常
+Tween	ディスウェイ	MoveBy	x=100				NoWait
+	ディスウェイ	通常						アッチ？
+Tween	ディスウェイ	MoveBy	x=-200				NoWait
+	ディスウェイ	通常						コッチ？
+Tween	ディスウェイ	MoveBy	x=100				NoWait
+Wait						.5
+Tween	ディスウェイ	PunchPosition	y=30				NoWait
+	ディスウェイ	通常						ディスウェイ♪
+CharacterOff
+	ディーア	汗4						…………\n言葉、通じているのかな？
+CharacterOff
+	勇者A	通常						馬鹿め！\n戦力にならん魔剣をアンロックとは！
+	勇者A	通常						魔導王様！\n攻撃の許可を!!
+CharacterOff
+	魔導王ユウ	怒り						抵抗するなら仕方がない
+	魔導王ユウ	怒り						現時点をもって\n魔剣王をSSランクの災害指定とする
+	魔導王ユウ	本気						総員、戦闘開始
+CharacterOff
+	ディーア	怒り4						迎撃する！\n頼むぞ、みんな！
+If	isdebug==true
+CharacterOff
+Jump	*Q2000_02
+EndIf
+EndScenario
+
+# Q2000_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	バトル
+Bg	酒場1F					0
+Param	character_grayout=false
+	勇者A	通常				0
+FadeIn	black					1
+	勇者A	通常						これが魔剣王……！
+	勇者A	通常						希望王と原罪王を止め、\n最も魔王に近いとされた男……
+	勇者A	通常						なのに、\nなんであんなことを<dash=2>
+CharacterOff
+	ディーア	怒り4						何度も言うが、\nオレは魔界を滅ぼしたりしていない
+	ディーア	怒り4						これ以上の戦いは無益だよ\n早く撤退してくれ
+CharacterOff
+	勇者A	通常						そんな妄言を誰が<dash=4>
+StopBgm						0
+Se	ドア開く
+CharacterOff
+	リディ	通常2	画面外_右
+Tween	リディ	MoveBy	x=-600 time=2				NoWait
+Wait						1
+	リディ	通常2						ただいまー♪\n買い出しの荷物が多くて、\n遅くなっちゃったよ
+	リディ	笑い2						みんな、\nリディの代わりをしてくれて\nありが<dash=2>
+	リディ	驚き2						あれ？\n魔導王ユウさんに、レドくん？\n怖い顔してどうしたの？
+Bgm	絶望
+CharacterOff
+	勇者A	通常
+Shake	勇者A		x=2				NoWait
+	勇者A	通常						魔剣王の持つ最強の魔剣、\n全能殺し、リディ……!!
+CharacterOff
+	勇者レド	本気						待て……!!\nその子に手を出す<dash=2>
+CharacterOff
+	勇者A	通常						うわぁああああああ!!
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	ザシュ
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393C)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	酒場1F					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	リディ	絶望2
+Wait						.5
+Se	ぐちゃ
+	血痕A		エフェクト表			0
+	リディ	絶望2						…………ぁ
+Shake	リディ		x=2				NoWait
+	リディ	絶望2						ます、たー……
+CharacterOff						1
+Wait						.5
+Se	パリン
+FadeOut	white					.3
+CharacterOff						0
+	オーラ青		エフェクト表			1
+FadeIn	white					.3
+Wait						2
+CharacterOff
+	魔導王ユウ	驚き						なんだ……？
+	魔導王ユウ	悔しい						今の消失反応は\n通常の魔剣少女のものと違っていた
+	魔導王ユウ	悔しい						それに、彼がリディちゃんへの攻撃を\n防ごうともしないなんて<dash=2>
+CharacterOff
+	ディーア	怒り4						……………………
+Bgm	緊迫
+CharacterOff
+Se	ドア開く
+	リディ	驚き2	画面外_右
+Tween	リディ	MoveBy	x=-600 time=2				NoWait
+Wait						1
+	リディ	驚き2				1		あれ？\n怖い顔してどうしたの、マスター？
+Wait						.5
+CharacterOff
+	勇者A	通常						なにっ……！
+	勇者A	通常						どういうことだ!?\n俺は確かにあの魔剣少女を斬った！\nなんでまた現れる!?
+CharacterOff
+	魔導王ユウ	悔しい						幻覚、イミティション、\nあるいは汎用型エクスカリバーのような\n量産化された個体……
+	魔導王ユウ	怒り						いや、違うな
+	魔導王ユウ	怒り						汎用型エクスカリバーであっても、\n固有魔力波動には微弱な違いが生じる
+	魔導王ユウ	怒り						…………\nレドちゃんはどう感じた？
+CharacterOff
+	勇者レド	本気						まったく同一でした
+	勇者レド	本気						消えた方も、眼の前のも\nどちらも全能殺しリディのもので\n間違いありません
+	勇者レド	悔しい						たとえ微弱な違いであっても、\n貴方と僕にわからないはずがないのに
+CharacterOff
+	魔導王ユウ	悔しい						ということは、\nオレたちの知らないなにかがある
+	魔導王ユウ	悔しい						ありえるとすれば、\nまさか、あの魔剣が<dash=2>
+CharacterOff
+	ディーア	目閉じ4						そろそろ頃合いだな……
+	ディーア	怒り4						CODE:THISWAY、<ruby=メモライズ>伝承付記</ruby>
+Se	チャージ
+CharacterOff
+	ディスウェイ	通常
+	オーラ青		エフェクト表			1
+Tween	ディスウェイ	PunchPosition	y=30				NoWait
+	ディスウェイ	通常						ディスウェイ♪
+CharacterOff	ディスウェイ
+	リディ	驚き2						あ、あ■？ マ■ター■\n■■■■？
+CharacterOff	リディ					1
+Wait						1
+CharacterOff
+	ディーア	怒り4	1_2
+	ディスウェイ	通常	2_2
+	オーラ青		エフェクト表
+	ディーア	怒り4						使うぞ、リディ
+StopBgm
+CharacterOff
+	魔導王ユウ	悔しい						この力は、まさか魔剣殺しの……？
+	魔導王ユウ	怒り						ここは市街地の真ん中だぞ!?\nキミは自分が守った魔界を<dash=2>
+CharacterOff
+	ディーア	怒り4	1_2
+	ディスウェイ	通常	2_2
+	オーラ青		エフェクト表
+	ディーア	怒り4						頼む、ディスウェイ
+StopBgm
+FadeOut	white					1
+Se	火3
+Se	闇3
+Se	光3
+CharacterOff						0
+Bg	市街地C(火事)					0
+Wait						3
+	ディーア	怒り4				0
+FadeIn	white					1
+Bgm	絶望
+	ディーア	怒り4						あなたたちは\nずっとリディを警戒していたけど
+	ディーア	怒り4						ディスウェイを介して、\n魔剣殺しの力を使えるとは\n思わなかった
+	ディーア	目閉じ4						それは致命的な\n隙になるはずだったのに……
+	ディーア	怒り4						さすがですね、魔導王\nあなたのおかげで\n他の兵達の魔剣は無事だ
+CharacterOff
+	魔導王ユウ	黒
+Shake	魔導王ユウ		x=2				NoWait
+	魔導王ユウ	黒						わからないな……\nなにがキミをそこまで変えた……？
+	魔導王ユウ	黒						あの頃の、キミなら<dash=2>
+Se	倒れる
+CharacterOff	魔導王ユウ					1
+Wait						.5
+CharacterOff
+	ディーア	目閉じ4						…………
+CharacterOff
+	勇者レド	悔しい						まだだ、魔剣王……！
+CharacterOff
+	ディーア	怒り4						お前も止すんだ、レド
+	ディーア	怒り4						これ以上は戦っても<dash=2>
+CharacterOff
+	勇者レド	悔しい						無駄だと言うのか？\nだったら最初に自分の努力を\n無駄にしたのは誰だ!!
+	勇者レド	本気						ルル様を倒し、\n魔界を守ろうとした貴方が!!\nなぜあんな非道を!?
+	勇者レド	本気						答えないなら！\n無理矢理にでも答えさせてやる!!\nヴァルト、力を貸してくれ!!
+CharacterOff
+	ディーア	目閉じ4						みんな……
+	ディーア	怒り4						レドと残存兵を制圧する、\n力を貸してくれ
+If	isdebug==true
+CharacterOff
+Jump	*Q2000_03
+EndIf
+EndScenario
+
+# Q2000_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	市街地C(火事)					0
+Param	character_grayout=false
+	勇者レド	絶望				0
+FadeIn	black					1
+	勇者レド	絶望						魔剣、王……\nどう、し、て……
+Se	倒れる
+CharacterOff	勇者レド					1
+Wait						.5
+CharacterOff
+	ディーア	目閉じ4						………………制圧完了だ\nこれで<dash=2>
+StopBgm
+Se	マイクノイズ	TRUE
+CharacterOff						0
+Bg	黒背景					0
+	■■■■	<Off>						<size=40><color=red>魔剣殺し</color></size>
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地C(火事)					0
+	尖兵		エフェクト裏			3
+	ディーア	悔しい4				0
+FadeIn	black					.1
+Se	闇1
+Bgm	緊迫
+	ディーア	悔しい4						っ……!!
+	ディーア	悔しい4						くそっ！\n想定よりも感知が早すぎる!!
+	■■■■	<Off>	1_2					<color=red>魔剣殺しの<ruby=レムナント>伝承残滓</ruby>を確認</color>
+StopSe
+Se	チャージ
+	オーラ紫		エフェクト表2			1
+	■■■■	<Off>						<color=red>修正プロセスを起動</color>
+Se	フォーン
+CharacterOff
+	ププッピマリー	通常通信2						<param=name>様
+CharacterOff
+	尖兵		エフェクト裏
+	オーラ紫		エフェクト表2
+	ディーア	本気4						マリーさん！\n撤退をお願いします!!
+StopBgm						1
+Se	光1
+FadeOut	white					1
+CharacterOff						0
+Bg	旧図書館					0
+	ディーア	悔しい4				0
+Wait						3
+FadeIn	white					1
+	ディーア	悔しい4						はぁ、はぁ……
+Bgm	作戦会議
+CharacterOff
+	ププッピマリー	通常						危ないところでございましたね\n<param=name>様
+	ププッピマリー	佇む						あのまま捕まれば、\n残る伝承も失われていました
+CharacterOff
+	ディーア	悔しい4						まさか世界意思の感知が\nあそこまで早いなんて
+CharacterOff
+	ププッピマリー	佇む						魔剣殺しの力を\n自動検知するものと推察できます
+	ププッピマリー	佇む						CODE:THISWAYを介したとはいえ、\nやはり魔剣殺しの力を使うべきでは\nありませんでした
+	ププッピマリー	通常						ですが……\nそのリスクを犯した価値は\nあったようですね？
+CharacterOff
+	ディーア	通常4						はい、\n突破口を見つけましたよ
+	ディーア	通常4						予想していた通り、\nオレの敵……世界意思と絶望王は\n万能なんかじゃない
+	ディーア	目閉じ4						魔導王たちは\nあのリディを"リディ"として\n認識できていたし
+	ディーア	怒り4						力を行使しないかぎりは\n外を出歩けていた
+CharacterOff
+	ププッピマリー	佇む						そして、\n《パノプテスの瞳》に\n見つかったとしても
+	ププッピマリー	佇む						異界化された空間に逃れれば\n修正を受けることはない
+	ププッピマリー	佇む						<ruby=スペアキー>忘れ去られた鍵師</ruby>が\n遺した記述通りでしたね
+	ププッピマリー	佇む
+CharacterOff
+	ディーア	通常4						魔導王まで来るのは\n想定外でしたけど\nこれだけ分かれば十分ですよ
+	ディーア	通常4						だから次は<dash=2>
+Se	ガラス割れる
+	オーラ誘惑		エフェクト表			.5
+	ディーア	悔しい4						うっ……！
+Shake	ディーア		x=2				NoWait
+	ディーア	悔しい4						っ……ぐっ……
+CharacterOff	オーラ誘惑					.5
+	ディーア	悔しい4						はぁ……はぁ……
+CharacterOff
+	ププッピマリー	佇む						右腕、ですか……
+	ププッピマリー	佇む						やはりまだ動かれるべきでは<dash=2>
+CharacterOff
+	ディーア	悔しい4						大丈夫です
+	ディーア	怒り4						むしろ、\nこれくらいで済んでいるんだから\nマリーさんに感謝しないと
+CharacterOff
+	ププッピマリー	佇む						いいえ、そこまで操れるのは\nあなたの資質があってこそ
+	ププッピマリー	佇む						そしてやはり、\nかの世界の技術は恐ろしいものです
+	ププッピマリー	通常						皮肉ですね、\nあれだけ苦労し戦った相手が\n今は力になってくれるとは
+CharacterOff
+	ディーア	怪しい4						そういえば、\nこのことはロールお嬢様には？
+CharacterOff
+	ププッピマリー	通常						この件については、\n私以外に知る者のいない\n極秘事項としております
+CharacterOff
+	ディーア	汗4						もしお嬢様にバレて怒られたら、\n一緒に謝りますね
+	ディーア	通常4						本当に……\n助けてくれてありがとうございます
+CharacterOff
+	ププッピマリー	通常						いえ、こちらこそ
+	ププッピマリー	通常						それに、\nあなたは必要とされています
+	ププッピマリー	通常						この魔界を救うためにも
+CharacterOff
+	ディーア	怒り4						……リディのためにも
+CharacterOff
+	ププッピマリー	通常						そろそろ\n私は行かなくてはなりません
+	ププッピマリー	通常						お嬢様が\n私を探しておられるでしょうから
+	ププッピマリー	通常						隠し通路を用意しておりますので、\nお帰りはそちらから
+StopBgm
+FadeOut	black					2
+CharacterOff						0
+Bg	研究所A					0
+	司書王ロルリアンレット	通常H				0
+Wait						1
+FadeIn	black					1
+	司書王ロルリアンレット	通常H						マリー？\nマリーはどこかしら？
+CharacterOff
+	ププッピマリー	通常						ここに、ロールお嬢様
+Bgm	図書館
+CharacterOff
+	司書王ロルリアンレット	通常H						随分と姿が見えなかったけど\nどこへ行っていたの？
+CharacterOff
+	ププッピマリー	通常						旧図書館区画へ\n先程の争乱で禁書に影響がないかを\n確認しておりました
+CharacterOff
+	司書王ロルリアンレット	通常H						では、おかしなことは\nなにもなかったのね？
+CharacterOff
+	ププッピマリー	通常						はい\n<ruby=・・・・・・・・・>なにもございません</ruby>
+CharacterOff
+	司書王ロルリアンレット	ドヤ顔H						わかったわ\nでは客人を呼ぶとしましょう
+	司書王ロルリアンレット	通常H						待たせてしまってごめんなさい
+	司書王ロルリアンレット	通常H						でもまさか、\nこうして再び会えるだなんて\n思ってもみなかった
+	司書王ロルリアンレット	通常H						だから、\nこの言葉であなたを歓迎するわ\nおかえりなさい<dash=2>
+CharacterOff
+	裏ディーア	通常				2
+	司書王ロルリアンレット	<Off>	1_2					魔剣王\n<param=name>
+	裏ディーア	通常						……………………
+Wait						1
+FadeOut	black					2
+StopBgm
+CharacterOff						0
+Bg	酒場_宿屋					0
+	魔剣グラム	通常				0
+FadeIn	black					2
+Bgm	都市
+	魔剣グラム	通常						おかえりなさい
+CharacterOff
+	ディーア	通常4				1		ただいま、グラム
+CharacterOff
+	魔剣グラム	通常						向こうの酒場では、\n大変だったみたいね？
+CharacterOff
+	ディーア	笑い4						ああ、\nでもオルタたちが助けてくれたんだ
+CharacterOff
+	魔劍グラム=オルタ	慌て2						い、いえ……！\nマスターさんがすごかっただけで\n私はそんなに
+	魔剣グラム	通常						謙遜することはないわ、オルタ
+	魔剣グラム	通常						このグラムの妹であり、\nマスターの剣の一振りであることを\n誇りに思えばいいの
+	魔剣グラム	通常						よくがんばったわね
+	魔劍グラム=オルタ	照れ2						う、うん……♪
+CharacterOff
+	ディーア	怪しい4						それで、グラム\nクランさんはどこに？
+CharacterOff
+	魔剣グラム	通常						鍛冶医師なら、\n地下にあの子と一緒にいるわ
+CharacterOff
+	ディーア	通常4						わかった、オレも行ってくる
+Se	走る
+FadeOut	white					2
+StopBgm
+CharacterOff
+Bg	白背景					0
+ImageEffect	SpriteCamera	Blur
+	ドア左		エフェクト表			0
+	ドア右		エフェクト表2			0
+Wait						3
+FadeIn	white					.5
+Se	ドア開く
+Tween	ドア左	MoveBy	x=-320 time=1.5	easeInCubic			NoWait
+Tween	ドア右	MoveBy	x=320 time=1.5	easeInCubic			NoWait
+Wait						2
+ImageEffectOff	SpriteCamera	Blur
+FadeOut	white					.3
+CharacterOff						0
+	リディ笑顔スチル		エフェクト表			0
+Wait						2
+Bgm	結婚
+FadeIn	white					.3
+	リディ	<Off>						マスター、おかえりー！
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	笑い4				0
+FadeIn	black					.3
+	ディーア	笑い4						ただいま、リディ
+	ディーア	笑い4						聞いてくれよ、\n今日もたくさんのことがあったんだ
+	ディーア	笑い4						バイト先で\nレヴァがアイドルに勧誘されたり
+	ディーア	汗4						オルタのドジっ子属性が広まって\nたくさんの客が来たり
+	リディ	<Off>	1_2					………………
+	ディーア	笑い4						でもやっぱり\nアルバイトが一番上手なのは\nリディだな♪
+	リディ	<Off>	1_2					………………
+	ディーア	笑い4						リディがいない酒場は\nなんだか静かで<dash=2>
+	リディ	<Off>	1_2					………………
+	ディーア	通常4						たくさん、話したいことがあるんだ
+StopBgm						2
+	ディーア	悔しい4						だから……聞いてくれ……
+	ディーア	絶望4						聞いてくれよ、リディ……！\nリディ……!!
+	ディーア	目閉じ4						……………………っ
+Bgm	絶望
+FadeOut	black					.2
+CharacterOff						0
+Bg	白背景					0
+	リディ笑顔スチル		エフェクト表			0
+FadeIn	black					.2
+Wait						.5
+Bg	黒背景					1
+CharacterOff	リディ笑顔スチル					3
+	リディ絶望スチル		エフェクト表2			3
+Wait						3
+	ディーア	<Off>						ただいま、リディ……
+If	isdebug==true
+CharacterOff
+Jump	*Q2000_04
+EndIf
+EndScenario
+
+# Q2000_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	酒場の地下					0
+Param	character_grayout=false
+	鍛冶医クランベリー	通常2				0
+FadeIn	black					1
+	鍛冶医クランベリー	通常2						おかえりなさい、\nマリーから状況は聞いているわ
+	鍛冶医クランベリー	怒り2						そしてリディちゃんの容態だけど、\n見ての通り、変化はない
+	鍛冶医クランベリー	悔しい2						むしろ変化がないということすら\n奇跡的と言えるわね
+CharacterOff
+	ディーア	怒り4						やっぱり、\nこのままでは厳しいですか？
+CharacterOff
+	鍛冶医クランベリー	悔しい2						ええ、今できているのは、\nあくまで延命措置のようなもの
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	リディ絶望スチル		エフェクト表			0
+FadeIn	black					.3
+	鍛冶医クランベリー	<Off>						リディちゃんは\n魔剣の根幹、あるいは全てといえる\n伝承を根こそぎ抹消されてしまった
+	鍛冶医クランベリー	<Off>						人間で例えると、皮だけを残して\n中身が全て消えちゃったようなもの
+	鍛冶医クランベリー	<Off>						魔核機関が動かせるはずもなく\n自力での回復は不可能だった
+	鍛冶医クランベリー	<Off>						不幸中の幸いだったのは、\nリディちゃんが蓄えた\n他の魔剣の伝承が無事で
+	鍛冶医クランベリー	<Off>						生命を維持できるだけの、\nほんの僅かな伝承が残っていたこと
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	悔しい4				0
+FadeIn	black					.3
+	ディーア	悔しい4						でも、\nそれだけじゃリディは消えるのを\n待つだけだ
+CharacterOff
+	鍛冶医クランベリー	怒り2						ええ、だからこそ<dash=2>
+CharacterOff
+	ディスウェイ	通常
+Tween	ディスウェイ	PunchPosition	y=30				NoWait
+	ディスウェイ	通常						ディースウェイ！
+CharacterOff
+	鍛冶医クランベリー	通常2						このCODE:THISWAYの特性と
+CharacterOff
+	ディーア	怒り4						巨大記憶結晶W.U.R.Z.E.L.ですね
+CharacterOff
+	鍛冶医クランベリー	通常2						そのおかげで\nなんとか状態の維持はできているわ
+	鍛冶医クランベリー	怒り2						……七罪王にも\n感謝しないといけないわね
+CharacterOff
+	ディーア	悔しい4						リディは、\n苦しくはないんでしょうか？
+CharacterOff
+	鍛冶医クランベリー	悔しい2						………………
+	鍛冶医クランベリー	悔しい2						大丈夫
+	鍛冶医クランベリー	通常2						きっと夢を見ているだけよ
+CharacterOff
+	ディーア	通常4						なら、幸せな夢を……\n見れているといいな……
+CharacterOff
+	鍛冶医クランベリー	怒り2						私にできるのは、今はここまで
+	鍛冶医クランベリー	怒り2						医者としては歯がゆいけど、\nさらなる悪化は防いでみせるわ
+	鍛冶医クランベリー	怒り2						でもこれ以上を求めるなら\nあの"リディちゃんたち"が重要になる
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場1F					0
+	リディ	通常2				0
+	          		1_2
+FadeIn	white					.3
+	鍛冶医クランベリー	<Off>	1_2					リディちゃんを\n模したナニカだとしても
+	鍛冶医クランベリー	<Off>						<ruby=イコールズ>あの子たち</ruby>が\nリディちゃんを助ける最後の希望
+	鍛冶医クランベリー	<Off>						ブリジットレコードの存在<dash=2>\nそれとマイナス起源仮説からも\nこの手しかないと断言するわ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場の地下					0
+	鍛冶医クランベリー	通常2				0
+FadeIn	white					.3
+	鍛冶医クランベリー	怒り2						それで早く……\n覚めない夢から解放してあげないとね
+CharacterOff
+	ディーア	目閉じ4						…………
+CharacterOff
+	鍛冶医クランベリー	笑い2						大丈夫よ！\nあなたたちはこれまでも\n奇跡を起こしてみせた！
+Tween	鍛冶医クランベリー	PunchPosition	y=30				NoWait
+	鍛冶医クランベリー	笑い2						きっと今回だって、\nハッピーエンドにたどり着けるわ！
+	鍛冶医クランベリー	笑い2						お姉さんは二人の味方だから\n必要なときはいつでも呼んでね！
+CharacterOff
+	ディーア	笑い4						ありがとうございます、クランさん
+StopBgm
+FadeOut	black					1
+Wait						1
+FadeIn	black					1
+	ディーア	通常4						…………
+Bgm	絶望
+	ディーア	通常4						なあ、リディ……\nさっき、魔導王とレドに会ったんだ
+	ディーア	汗4						魔導王は変わらなかったけど\nレドは苦労してるみたいだった
+	ディーア	汗4						それでみんな、\nオレが一度魔界を滅ぼしたって\n言うんだよ
+	ディーア	汗4						まいったな……
+	ディーア	目閉じ4						…………
+Shake	ディーア		x=2				NoWait
+	ディーア	悔しい4						ごめん、ごめんな……
+	ディーア	悔しい4						あの時、オレはまた間違えた……
+	ディーア	悔しい4						あんなに苦労して、\nリディのこともたくさん傷つけて\nやっと手にした未来なのに
+Bg	黒背景					0
+CharacterOff						0
+	ディーア	<Off>						オレは、守れなかった……!!
+Se	回想
+StopBgm
+FadeOut	white					1
+ImageEffect	SpriteCamera	Sepia				0
+Bg	魔術空間					0
+	世界意思					0
+FadeIn	white					1
+ImageEffectOff	SpriteCamera	Sepia				3
+Bgm	神社
+	世界意思							希望王による聖剣計画は、\nこの惑星が始まって以来、\n幾度とない明確な滅亡の危機だった
+	世界意思							<dash=2>世界意思とは、\n星の滅亡を回避するべく生まれた\n概念生命である
+	世界意思							であればこそ、それを退けるのは\n<ruby=わたし>世界意思</ruby>でなければならなかった
+	世界意思							だが、世界意思の干渉力を\nもってしても、\n魔王剣を止めることは不可能であった
+	世界意思							それは世界の意思と、\n人類の意思が衝突し合った結果とも\n言えるだろう
+	世界意思							原初のチカラを得て覚醒した\n人類の意思は、今や星の意思にさえ\n抗うことができるようになった
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	全能殺しリディ		2_2
+	ディーア							…………
+CharacterOff
+	世界意思							そんな状況を、\nあなたたちは救ってくれた
+	世界意思							それは紛れもなく、この星を、\n魔界を救ったということに他ならない
+	世界意思							<param=name>、\nそして全能殺しリディ\n改めて、礼を言おう
+CharacterOff
+	ディーア	目閉じ2	1_2
+	全能殺しリディ		2_2
+	全能殺しリディ							えへへ、いえいえ！
+CharacterOff
+	世界意思							魔界の危機は過ぎ去った\nもう、その権能はあなたたちには\n必要ない
+	世界意思							普通の魔剣に戻り、\nそして穏やかに日々を過ごすが良い
+	世界意思							<param=name>\nそして全能殺しリディ
+	世界意思							改めて、あなたたちに要求する
+	世界意思							人類史を管理する権限の返還を\nそして、全能殺しの権能の返還を
+StopBgm
+Selection	*Q2000_04_01							返還しない
+*Q2000_04_01
+CharacterOff
+	ディーア	怒り2	1_2
+	全能殺しリディ	驚き	2_2
+Bgm	Xmasボス
+	ディーア	怒り2						全能殺しの権限は返還しない
+	全能殺しリディ	驚き						マスター？\nなんで……
+	ディーア	怒り2						世界意思の干渉力で、聖剣……\nつまり魔王剣を止めることが\nできないのは当然だ
+	ディーア	怒り2						いいや、そもそも\n止める気さえないだろう
+	ディーア	怒り2						だって、魔王剣を作り出したのは\n世界意思自身なんだから
+	全能殺しリディ	悔しい						どういう……こと？
+	ディーア	怒り2						世界意思は、星の滅亡を\n止めるための概念生命だと言ったな
+	ディーア	怒り2						だが、今の世界意思に人類を\n止める力はない
+	ディーア	怒り2						人類が魔剣を手にし、\n原初のチカラを\n使いこなすようになったからだ
+	ディーア	怒り2						だから世界意思はルルを利用して\n魔剣を、そして人類を滅ぼそうとした
+	ディーア	怒り2						制御できないのであれば、\n滅ぼしてしまえばいいという、\nいかにも世界意思らしい発想だ
+	ディーア	怒り2						……まあ、ルルと利害が一致したのは\n偶然だったかもしれないけれどな
+CharacterOff
+	世界意思							……驕るではないか、人類\n世界意思とは、星の意思だ\n人類ごときがそれを超越したとでも？
+CharacterOff
+	ディーア	怒り2	1_2
+	全能殺しリディ	悔しい	2_2
+	ディーア	怒り2						オレがルルに勝ったのがその証拠だ\n絶対の世界意思の力を、\n<ruby=オレたち>人類</ruby>は既に乗り越えた
+	ディーア	悔しい2						世界意思が望んでいるのは\n魔剣の滅亡だ
+	ディーア	悔しい2						だから、魔剣殺しの力の返還と、\n《魔剣伝承》の返還を\n求めているんだろう
+	ディーア	悔しい2						オレは、それを認めることはできない
+	ディーア	怒り2						全能殺しの力は渡さない\nお前の救済も認めない\n<dash=2>魔剣は、オレが救う
+CharacterOff
+StopBgm
+	世界意思							<dash=4>ハ
+ImageEffect	SpriteCamera	NegaPosi
+Se	雨
+Wait						.2
+StopSe
+Bg	魔術空間(赤)					0
+ImageEffectOff	SpriteCamera	NegaPosi
+	世界意思							ハハ、アハハハハハハハハハハ!!!!
+	世界意思							それがお前の選択か、\n<param=name>!!
+CharacterOff
+	ディーア	怒り2	1_2
+	全能殺しリディ	怒り	2_2
+	ディーア							ああ、そうだ\nようやく現れたな、世界意思
+	ディーア	本気2						<dash=2>いや、絶望王ヘヴン!!
+StopBgm
+FadeOut	white					2
+Se	光3
+CharacterOff						0
+	全能殺しリディ	悔しい	2_2			0
+	ディーア	悔しい3	1_2			0
+Wait						5
+FadeIn	white					2
+Bgm	魔王バトル
+Shake	ディーア		x=2				NoWait
+	ディーア	悔しい3						っ…………！
+	全能殺しリディ	悔しい						マスター……！
+CharacterOff
+	世界意思							確かにその身が成したのは、\n魔界を救うという偉業であり
+	世界意思							その手に握りしめたのは、\n魔剣という兵器の全てである
+	世界意思							だがいかに兵器が進化し、\n世界意思に干渉する力を得たとしても
+	世界意思							世界という尺度において、\n人間はあまりにも脆弱な存在だ
+CharacterOff
+	ディーア	悔しい3						だけど……！\n世界意思だって万能じゃない!!
+	ディーア	悔しい3						今も絶望王ヘヴンという、\n代行者を立てなければ、\nオレに干渉もできないだろう！
+	ディーア	本気3						ルルを利用しようとしたようにな！
+	ディーア	悔しい3						その絶望王だって\n原初十三魔剣を使う\n魔剣使いに変わりはない！
+	ディーア	悔しい3						敵が魔剣使いなら、\nオレたちにも勝機はある！
+CharacterOff
+	世界意思							あァ、だからだよ
+	世界意思							魔剣の王だからこそ、\n<ruby=わたし>絶望</ruby>には勝てない
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	世界意思	<Off>						<dash=2><ruby=トゥルーエンド>真解放</ruby>
+	世界意思	<Off>						《運命殺し》ワールドエンド
+Se	火3
+Se	光3
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*Q2000_05
+EndIf
+EndScenario
+
+# Q2000_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	魔術空間(赤)					0
+Param	character_grayout=false
+	ディーア	絶望3				0
+FadeIn	black					1
+	ディーア	絶望3						なにが、起こった……？
+CharacterOff
+	全能殺しリディ	絶望						ます、たー……
+CharacterOff
+	ディーア	絶望3						リディの力が……\n全能殺しの力が、消失した……
+CharacterOff
+	世界意思							絶望しているか、魔剣王？
+	世界意思							わかっただろう？\n世界意思には、\n絶望王には勝てないと
+CharacterOff
+	ディーア	悔しい3						っ…………！
+CharacterOff
+	世界意思							まだ希望があると、\n信じている目をしているな
+	世界意思							流石は血と絶望の旅路を歩み抜いた\n魔王候補だ
+	世界意思							たとえ四肢をもいだとしても\n絶望に沈めることはできないだろう
+StopBgm
+	世界意思							だから<dash=2>\n世界意思が甘い希望を与えよう
+Bgm	緊迫
+	世界意思							選べ
+	世界意思							修正されるのは、\n魔剣王か？ 全能殺しか？
+CharacterOff
+	ディーア	悔しい3						なっ……！
+CharacterOff
+	世界意思							自らの意思で、\n未来を掴み取るといい、魔剣王
+	世界意思							これこそが\n《最終到達選択肢》
+	世界意思							選ばないというのなら<dash=2>
+Se	光2
+	12章スチルS1		effect_c			.5
+Tween	12章スチルS1	ScaleBy	x=5 y=5				NoWait
+Wait						.5
+Se	光2
+	12章スチルS2		effect_b			.5
+Tween	12章スチルS2	ScaleBy	x=6 y=6				NoWait
+Wait						.5
+Se	光2
+	12章スチルS3		effect_a			.5
+Tween	12章スチルS3	ScaleBy	x=7 y=7				NoWait
+Wait						.5
+Se	光3
+Se	火3
+Se	闇3
+FadeOut	white					1
+CharacterOff						0
+	ディーア	絶望3				0
+	土煙		エフェクト表			1
+FadeIn	white					.5
+Shake	ディーア		x=3 time=3				NoWait
+	ディーア	絶望3						っ…………
+CharacterOff
+	世界意思							二人ともに\n魔界の歴史から修正するしかない
+	世界意思							さあ、どちらを選ぶ？
+CharacterOff
+	全能殺しリディ	悲しい						マスター!!
+CharacterOff
+	ディーア	悔しい3						大丈夫……！\nリディ、大丈夫だ……!!
+	ディーア	怒り3						オレがなんとかする！\n絶対になんとかしてみせる！
+	ディーア	怒り3						オレたちはどんな絶望だって、\n乗り越えてきただろう!?
+StopBgm
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ディーア	悔しい3						だから<dash=2>
+Bgm	タイトル
+	ディーア	怒り3						<dash=2>《<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>》
+	ディーア	怒り3						《<ruby=ブレイブソード×ブレイズソウル>勇敢なる刃と燃え盛る魂の鍵</ruby>》!!
+	ディーア	本気3						また絶望の旅路だとしても……!!\nいつか必ず……!!
+StopBgm
+CharacterOff
+	世界意思							遅い
+CharacterOff
+	全能殺しリディ	絶望
+Wait						1
+ImageEffect	SpriteCamera	NegaPosi
+Se	ぐちゃ
+Wait						1
+StopSe
+ImageEffectOff	SpriteCamera	NegaPosi
+	ディーア	驚き3						え……？
+CharacterOff
+	全能殺しリディ	絶望						マスター……
+Se	倒れる
+CharacterOff	全能殺しリディ					1
+Wait	white					1
+Bgm	絶望
+CharacterOff
+	ディーア	絶望3						リディ……？
+	ディーア	絶望3						いま、なにが……\nオレはたしかに世界を分岐させて……
+CharacterOff
+	世界意思							愚かな
+	世界意思							確かにその鍵は、\n未来を無限に等しく分岐させるが
+	世界意思							分岐前の過去まで\n改変することはできない
+	世界意思							故に世界意思は\n全能殺しの過去を抹消した
+	世界意思							生まれてからの軌跡、\n真魔王、魔剣王と共に歩んだ伝承、\nその全てを殺した
+	世界意思							ここから先、\n幾千、幾億の全ての選択肢において\n全能殺しに未来はない
+CharacterOff
+	ディーア	絶望3						そんな、リディ……\nどうして……\nオレはまだ……
+	ディーア	驚き3						悪魔の鍵……！\nそうだ、きっと他にも選択肢が！
+	ディーア	悔しい3						おい、どこの世界でもいい！\n教えてくれ!!
+	ディーア	悔しい3						ちがうだろ!?\nこんなのが結末だなんて!!
+Shake	ディーア		x=2				NoWait
+	ディーア	絶望3						うあっ……\nあぁあああ……
+CharacterOff
+	世界意思							ハハハハハ！\n勇敢なる刃と燃え盛る魂の鍵？
+	世界意思							お前が強く在れたのは、\n鍵の力で未来を知っていたからだ
+	世界意思							犠牲を積み重ね、\n正解を知らなければ歩けない愚か者
+	世界意思							所詮は偽物の勇気
+	世界意思							だから誰よりも\n絶望に負けやすいのだよ
+CharacterOff
+	ディーア	絶望3						でも、オレはそれしか……
+CharacterOff
+	世界意思							本来なら世界意思に逆らうという\n愚かな選択の前に\n鍵を使うべきであったのに
+	世界意思							ためらったのは、\nあの旅路を繰り返す恐怖からだろう？
+	世界意思							その時点で、結末は決まっていた
+	世界意思							だが……\n流石は《勇敢の世界意思》
+	世界意思							主と違い、彼女は選択できたぞ？\nマスターを助けると
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	斬1
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393C)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	魔術空間(赤)					0
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+	全能殺しリディ	絶望	画面外_左
+	ディーア	絶望3
+Tween	全能殺しリディ	MoveBy	x=500 time=1				NoWait
+	全能殺しリディ	絶望						ますたー……!!
+Se	ぐちゃ
+FadeOut	red					.2
+CharacterOff						0
+	全能殺しリディ	絶望				0
+	血痕B		エフェクト表			0
+FadeIn	red					.2
+Shake	全能殺しリディ		x=2				NoWait
+	全能殺しリディ	絶望						っ…………
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	世界意思							抜け殻に等しい体で\n最後まで主を守りきるとは！
+	世界意思							見ろ、魔剣王！\nこれぞ本当の勇気というものだ！
+	世界意思							ハハハ……!!\nアハハハハハハハ!!
+CharacterOff
+	ディーア	絶望3						なんで、オレを……
+CharacterOff
+	オーラ赤		エフェクト表
+	全能殺しリディ	通常						だって、\nリディは信じているもん……
+	全能殺しリディ	照れ						リディはマスターと一緒にいたい\nずっと一緒がいい……
+	全能殺しリディ	笑い						マスターなら、\nぜったいに……みらい、を……
+Se	パリン
+FadeOut	white					.2
+CharacterOff	全能殺しリディ					0
+FadeIn	white					.2
+Wait						2
+CharacterOff
+	ディーア	絶望3						リディ……！
+	黒グラデーション		エフェクト表			2
+	ディーア	絶望3						あぁ…………！
+	ディーア	絶望3						あぁあああああああああ!!
+CharacterOff
+	世界意思							あァ、いい絶望だ
+	世界意思							どんな絶望でも乗り越えた？
+	世界意思							ただ、\n本当の絶望を知らなかっただけだ
+Bg	黒背景					0
+Se	マイクノイズ	TRUE
+CharacterOff						0
+	世界意思	<Off>						ようこそ、旅の終着点へ
+	世界意思	<Off>						君たちの伝承は失われた
+	世界意思	<Off>						絶望して果てろ
+Se	回想
+FadeOut	white					1
+StopSe
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	目閉じ4				0
+Wait						1
+FadeIn	white					1
+	ディーア	目閉じ4						オレはリディを守れずに\nおめおめと生き残って<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地C(火事)					0
+	ディーア	悔しい天使2				0
+FadeIn	white					.3
+Bgm	絶望
+	ディーア	悔しい天使2						■■■■■■■■!!
+FadeOut	black					.3
+CharacterOff
+	アリス	通常魔帝				0
+FadeIn	black					.3
+	アリス	通常魔帝						王としての矜持も誇りも失い、\n守るべき魔界に刃を向けるとはな
+	アリス	通常魔帝						この愚かなる卑怯者が
+	アリス	通常魔帝						カルバノグ、\n亡骸を捨ててこい
+	アリス	通常魔帝						《デッドエンド》で朽ちるがいい\n魔剣使い
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	怒り4				0
+Wait						1
+FadeIn	white					1
+Bgm	BlazeB
+	ディーア	怒り4						っ…………！
+	ディーア	目閉じ4						いろいろなものを無くした
+	ディーア	目閉じ4						右腕も、鍵も、\nリディとの伝承の全ても
+	ディーア							ああ、魔帝アリス……
+	ディーア							確かにどうしようもなく\n<ruby=デッドエンド>行き止まり</ruby>だよ
+	ディーア							だけど<dash=2>
+StopBgm
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	魔術空間(赤)					0
+	全能殺しリディ	笑い				0
+	オーラ赤		エフェクト表			0
+Param	character_grayout=false
+FadeIn	white					.3
+	全能殺しリディ	笑い						マスターなら、\nぜったいに……みらい、を……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	怒り4				0
+FadeIn	white					.3
+Bgm	凱旋
+	ディーア	怒り4						オレは諦めない
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	荒野					0
+	アーダ	通常				0
+FadeIn	white					.3
+	アーダ	通常						それはヒトを超えた業だ\n叶えるなら代償がいる
+FadeOut	white					.3
+CharacterOff						0
+Bg	魔術空間					0
+	モモ	通常R				0
+FadeIn	white					.3
+	モモ	通常R						数多の虚構……\nああ、なんてきれいなんだ\nまるで流れ星のようだね
+FadeOut	white					.3
+CharacterOff						0
+Bg	大灯台					0
+	アーベントロート	笑い				0
+FadeIn	white					.3
+	アーベントロート	笑い						パズルって\n完成するよりも壊すほうが\nワクワクしません？
+FadeOut	white					.3
+CharacterOff						0
+Bg	戦場跡					0
+	？？？？	<Off>
+FadeIn	white					.3
+	？？？？	<Off>						世界は<ruby=ビースト>獣</ruby>を欲している
+FadeOut	white					.3
+CharacterOff						0
+Bg	神界改					0
+	魔人ディーア	ニヤリ				0
+FadeIn	white					.3
+	魔人ディーア	ニヤリ						悪となり、悪をなせ
+FadeOut	white					.3
+CharacterOff						0
+Bg	旧図書館					0
+	ププッピマリー	佇む				0
+FadeIn	white					.3
+	ププッピマリー	佇む						破壊するのです、全ての虚構を
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	怒り4				0
+FadeIn	white					1
+	ディーア	怒り4						待ってろ、リディ\n必ずオレがお前を助け出す
+	ディーア	怒り4						どんなことをしても……!!
+Bgm	魔獣バトル
+CharacterOff
+	アリスリディ	通常				1		わぁー♪\nすっごーい、マスター！
+	アリスリディ	笑い						こんな壊れちゃった世界で、\nまだジタバタするつもりなんだー！
+CharacterOff
+	ディーア	悔しい4						なっ……！\nリディ……!?
+CharacterOff
+	アリスリディ	通常						でもね？\nリディはムダだと思うよ？
+	アリスリディ	通常						もう全部あきらめて、\n楽になる方が世界平和のため
+	アリスリディ	笑い						お茶会でもして楽しめばいいの♪
+CharacterOff
+	ディーア	悔しい4						その姿……
+	ディーア	本気4						魔帝アリス……そういうことか！
+FadeOut	black					.3
+CharacterOff						0
+Bg	王政執務室					0
+	勇者A	通常				0
+Wait						1
+FadeIn	black					.3
+	勇者A	通常						大変です！ レド様!!
+CharacterOff
+	勇者レド	本気						魔剣王の行方が掴めたのか？
+CharacterOff
+	勇者A	通常						そちらはまだですが……!!
+	勇者A	通常						城門の前に!!\nエデンの王位継承権をもつと\n主張する者が!!
+FadeOut	black					.3
+CharacterOff						0
+Bg	大灯台					0
+	水天のアクア	怒り				0
+Wait						1
+FadeIn	black					.3
+	水天のアクア	怒り						それで？\nあなたが太陽王の名を騙っている\n不届き者な説ある？
+	水天のアクア	怒り						太陽聖域を裏切った立場だけど、\nアークの名誉を汚すなら<dash=2>
+	水天のアクア	驚き						……待って？\nあなた、もしかしてアークの<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A(夜)					0
+	全能殺しリディ	絶望				0
+FadeIn	black					.3
+Wait						.3
+Se	ザシュ
+FadeOut	red					.2
+FadeIn	red					.2
+Shake	全能殺しリディ		x=2
+	全能殺しリディ	絶望						ます、たー……どうして？
+CharacterOff	全能殺しリディ					.5
+Wait						.5
+CharacterOff
+	裏ディーア	通常						何度も何度も、\n同じことしか言わない奴らだ
+	？？？？	<Off>	1_2					それをためらいなく斬り捨てる、\nあなたもどうかと思いますけれど？
+FadeOut	white					2
+CharacterOff						0
+Bg	白背景					0
+	ルカと裏ディーアスチル		エフェクト表			0
+Tween	ルカと裏ディーアスチル	MoveBy	y=-500 time=40				NoWait
+Param	character_grayout=false
+FadeIn	white					1.5
+	ディーア	<Off>						そのために使われているのが\nキミだろう、聖剣ルカ？
+	聖剣ルカ	<Off>						だからといって、\nあなたのやり方を認めたわけでは\nありません
+	聖剣ルカ	<Off>						そして赦した覚えもありません
+	聖剣ルカ	<Off>						なんで、お兄ちゃんがいないのに\nこんな人が<dash=2>
+	ディーア	<Off>						…………
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A(夜)					0
+	裏ディーア	通常				0
+FadeIn	black					.3
+	裏ディーア	通常						リディを否定するものは、\n一人たりとも生かしてはおけない
+	裏ディーア	通常						必ず全てを抹消する
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	ディーア	<Off>						魂を燃やして、な
+FadeOut	black					0
+CharacterOff						0
+	　　　　　　　　　　
+Bg	黒背景
+Wait						5
+Bgm	タイトル
+FadeIn	black					0
+	もちアマリ	通常				2
+	？？？？	<Off>	1_2					ぴっぴー、アウトー
+	？？？？	<Off>						残念だけど、\nここから先はまだ見せられないわ
+	？？？？	<Off>						分岐したての世界線の観測は\n実に複雑怪奇で摩訶不思議
+	？？？？	<Off>						観測者である\nこのリコさまちゃんでさえも\n先は見通せていないのだから
+	？？？？	<Off>						あなた達を案内するまで\nもう少しだけ時間をちょうだい
+	？？？？	<Off>						大丈夫、世界は逃げたりしない
+	？？？？	<Off>						新しいページが記されるまで\n魔界の喧騒を楽しみながら\n一息をつきましょう
+	？？？？	<Off>						それではまたね♪
+If	isdebug==true
+CharacterOff
+Jump	*Q2000_01
+EndIf
+EndScenario

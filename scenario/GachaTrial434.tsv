@@ -1,0 +1,654 @@
+# G_434_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	黒背景					0
+Param	character_grayout=false
+	イベントスチル43401		エフェクト表									Voをスチルと一緒に。
+FadeIn	black					0
+Wait						.3
+	イベントスチル43402		エフェクト表			0		 	Next	1536-10
+Wait						.3
+	イベントスチル43403		エフェクト表			0
+Wait						.3
+	イベントスチル43401		エフェクト表			0
+Wait						.3
+	イベントスチル43402		エフェクト表			0
+Wait						.3
+	イベントスチル43403		エフェクト表			0
+Wait						.3
+	イベントスチル43401		エフェクト表			0
+Wait						.3
+	イベントスチル43402		エフェクト表			0
+Wait						.3
+	イベントスチル43403		エフェクト表			0		　
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=true
+Bg	草原A					0
+	斬鉄剣	冒険				0
+FadeIn	white					.5
+Bgm	緊迫
+Tween	斬鉄剣	PunchPosition	y=30				NoWait
+Se	斬1
+	斬鉄剣	冒険						一刀両断！
+Param	character_grayout=false
+CharacterOff						0
+	アルマース	冒険				0
+Se	風3
+	オーラ青		エフェクト表			.5
+	アルマース	冒険						キンキンに冷えちゃってください
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	本気2	1_2			0
+	騎典姫ドルシネア	通常	2_2			0
+	騎典姫ドルシネア	通常						騎士さま、そこです♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						これで終わりだ!!
+Wait						.2
+CharacterOff
+	カエル型モンスター											エフェクトを一つに減らす
+Se	突1
+FadeOut	white					.2
+FadeIn	white					.2
+	カエル型モンスター							グォオオオ……!!
+Se	倒れる
+StopBgm
+CharacterOff						.5
+Wait						.6
+Bgm	魔剣の日常
+	ディーア	通常2						ふぅ……\nこれで、一安心だな！
+CharacterOff
+	ディーア	通常2	1_2
+	騎典姫ドルシネア	通常	2_2
+Tween	騎典姫ドルシネア	PunchPosition	y=30				NoWait
+	騎典姫ドルシネア	嬉しい						さすが騎士さま♪\nなんと素晴らしい戦いぶりでしょう!!
+Tween	騎典姫ドルシネア	MoveBy	x=-30				NoWait
+	騎典姫ドルシネア	照れ						この見事な活躍はぜひ、\n騎士さまの英雄譚へ刻まなくては♪
+	ディーア	照れ2						そ、それほどでもないさ
+Tween	騎典姫ドルシネア	PunchPosition	y=30				NoWait
+	騎典姫ドルシネア	照れ						ご謙遜なさらずとも！\n騎士さまは知勇に優れた\n素晴らしいお方です♪
+	騎典姫ドルシネア	嬉しい						騎士さまの歩まれる一歩一歩が、\n伝説の一ページとなるに\n違いありません！
+	ディーア	にやけ2						え、えへへ……
+	ディーア	驚き2						はっ!!
+	ディーア	悔しい2						ダメだ！\n試練は始まったばかり\nここで気を緩めるわけにはいかない！
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ディーア	悔しい2
+	ディーア	悔しい2						（ドルシネアのマスター\n　であるために<dash=2>）
+	ディーア	悔しい2						（オレは立派にならないと\n　いけないんだから！）
+Param	character_grayout=false
+FadeOut	black					.5
+CharacterOff						0
+	　　　　　　　　　　					0
+Bg	酒場1F					0
+StopBgm
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　　　　 <color=blue><dash=2>1日前<dash=2></color>
+CharacterOff						0
+Param	character_grayout=true
+Bgm	平和
+	騎典姫ドルシネア	通常	画面外_右			0
+	ディーア	怪しい2	画面外_左			0
+Tween	ディーア	MoveTo	x=-90 time=2				NoWait
+	ディーア	怪しい2						ふわぁ……\n今日も寝坊してしまった
+	ディーア	にやけ2						外が寒くなったから、\nベッドから出るのも一苦労だ
+Tween	騎典姫ドルシネア	MoveTo	x=90 time=2				NoWait
+	騎典姫ドルシネア	通常						おはようございます、騎士さま♪
+	ディーア	通常2						おはよう、ドルシネア
+	騎典姫ドルシネア	嬉しい						そろそろお目覚めかと思い、\n騎士さまをお待ちしておりました！
+	騎典姫ドルシネア	照れ						今日も騎士さまの凛々しいお顔を\n見れて嬉しいです♪\nそれに<dash=2>
+	ディーア	驚き2						それに？
+	騎典姫ドルシネア	嬉しい						騎士さま、\nまた成長を遂げられましたね♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						え!?\nなんのことだ？
+	騎典姫ドルシネア	通常						昨日より五分も早く\n起きてこられました♪
+	騎典姫ドルシネア	嬉しい						この調子でしたら、きっとすぐ\n朝早く起きられるようになれます！\n間違いありません♪
+	騎典姫ドルシネア	通常						規則正しい生活は騎士の資質！\nその道をしっかり\n歩まれておいでです♪
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ディーア	悔しい2
+	ディーア	悔しい2						（うっ!?\n　五分早いとはいっても、\n　結局、寝坊してるんだよな……！）
+	ディーア	怒り2						（けど、ドルシネアはそんなオレを\n　『立派な騎士』だと言って、\n　信じてくれてる……）
+Se	回想
+Param	character_grayout=false
+FadeOut	black					.3
+Bg	白背景					0
+CharacterOff						0
+	騎典姫ドルシネア	通常				0
+FadeIn	black					.3
+	ディーア	<Off>						<dash=2>騎典姫ドルシネア
+	ディーア	<Off>						古今東西の英雄譚を内包し、\nその再現によって\n使い手に勝利をもたらす魔典
+	ディーア	<Off>						それを使いこなせるのは、\n騎士の資質をもった者とされる
+	ディーア	<Off>						だから、ドルシネアは\nオレが立派な騎士で、\nもっと偉大になれると信じてくれる
+Param	character_grayout=true
+FadeOut	black					.3
+CharacterOff						0
+	黒グラデーション		エフェクト裏			0
+	ディーア	怪しい2				0
+Bg	酒場1F					0
+FadeIn	black					.3
+	ディーア	怪しい2						（けど、オレは……\n　そんなドルシネアに\n　応えられているのだろうか？）
+CharacterOff
+	騎典姫ドルシネア	照れ						やはり、私の騎士さまは\n素晴らしいお方です……
+	騎典姫ドルシネア	嬉しい						毎日、魔剣の皆さまの\nお体を心配して、\nスキンシップを図られたり<dash=2>
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ディーア	悔しい2
+	ディーア	悔しい2						（それはただイチャイチャ\n　したかっただけで……！）
+CharacterOff
+	騎典姫ドルシネア	通常						世間知らずな私にも、\n世の中がどういうものか、\n親切に教えてくださいます♪
+	騎典姫ドルシネア	嬉しい						お洗濯前の肌着は特別な力が宿る\nということや<dash=2>
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ディーア	汗2
+	ディーア	汗2						（それは\n　洗濯物を放置した言い訳で……！）
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	騎典姫ドルシネア	嬉しい_拡大	エフェクト表
+	騎典姫ドルシネア	嬉しい_拡大						魔力補給の時は\nネコさんのマネをするのが\nマナーだということも!!
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ディーア	本気2
+	ディーア	本気2						（それは可愛いドルシネアを\n　見たかっただけなんだ!!）
+	集中線		エフェクト表									拡大を無しにして、集中線だけ追加
+	ディーア	本気2						（ダメだ!!\n　まったく応えられてないぞ！）
+CharacterOff	集中線
+Param	character_grayout=true
+	ディーア	悔しい2						（今は大丈夫でも、\n　いつまでもこんな自堕落な生活を\n　続けていたら……）
+FadeOut	white					.3
+Bg	黒背景					0
+CharacterOff						0
+	騎典姫ドルシネア	通常	2_2			0
+	ディーア	にやけ2	1_2			0
+FadeIn	white					.3
+	ディーア	にやけ2						今日も一日、騎士らしく\nのんびり食っちゃ寝するぞー				イメージ図	どうしようかな
+	騎典姫ドルシネア	通常						騎士さま、今日も素敵<dash=2>
+	騎典姫ドルシネア	怪しい						<dash=2>では、ないような……
+FadeOut	white					.3
+Bg	酒場1F					0
+CharacterOff						0
+	黒グラデーション		エフェクト裏			0
+	ディーア	本気2				0
+FadeIn	white					.3
+	ディーア	本気2						（そんなのダメだ!!）
+	ディーア	悔しい2						（このままの生活じゃいけない！\n　もっとしっかりしないと……）
+CharacterOff	黒グラデーション					0
+	ディーア	通常2						……よしっ！
+CharacterOff
+	騎典姫ドルシネア	通常	2_2
+	ディーア	通常2	1_2
+	ディーア	通常2						ドルシネア！
+	騎典姫ドルシネア	通常						はい♪
+	ディーア	怒り2						冒険に出よう！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						ドルシネアにふさわしいマスター\nであるために、\nオレには試練が必要だ!!
+	騎典姫ドルシネア	怪しい						冒険に……試練、ですか？
+CharacterOff
+	騎典姫ドルシネア	嬉しい_拡大	エフェクト表
+	騎典姫ドルシネア							ああ！ なんと素晴らしい!!
+CharacterOff
+	ディーア	怒り2	1_2
+	騎典姫ドルシネア	嬉しい	2_2
+Tween	騎典姫ドルシネア	MoveBy	x=-30
+Tween	騎典姫ドルシネア	PunchPosition	y=30				NoWait
+	騎典姫ドルシネア	嬉しい						いったい、\nどこへ向かわれるのですか♪\n出発はいつでしょう!?
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	汗2						そ、それは、まだ……
+CharacterOff
+	斬鉄剣	通常						お出かけするなら、\n温泉なんてどうですか？
+CharacterOff
+	騎典姫ドルシネア	驚き	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						え……斬鉄剣？
+CharacterOff
+	アルマース	通常						涼しい秋に上機嫌な\nアルマースもいますよ
+CharacterOff
+	騎典姫ドルシネア	驚き	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						二人とも\n温泉ってどういうことなんだ？
+CharacterOff
+	アルマース	通常	p7
+	斬鉄剣	通常	p3b
+	斬鉄剣	通常						最近話題なんですよ！\n秘境で見つかった温泉が!!
+Tween	斬鉄剣	PunchPosition	y=30				NoWait
+	斬鉄剣	通常						効能がすごいらしくて、\nマンガのネタ集めとしても\n行ってみたかったんです♪
+	アルマース	通常						私は暑いのは苦手ですが\n成長に効く水風呂もあると聞いて
+	アルマース	通常						目指せ、\nむちむちぼでぃ復活
+	斬鉄剣	通常						ただ、魔物も出る\n危険地帯の中なので、\n行くのはかなり大変そうなんです
+CharacterOff
+	ディーア	怒り2						秘境に隠された温泉か……
+Param	character_grayout=false
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+	　　　　　　　　　　					0
+Bg	温泉B					0
+FadeIn	white					.3						立ち絵を消去
+Wait						1.5
+FadeOut	white					.3
+Bg	酒場1F					0
+CharacterOff						0
+	騎典姫ドルシネア	通常	2_2			0
+	ディーア	笑い2	1_2			0
+FadeIn	white					.3
+Param	character_grayout=true
+	ディーア	笑い2						いいな！
+	ディーア	通常2						秘境に着くまでが試練になるし、\n温泉で皆も休める！
+	騎典姫ドルシネア	嬉しい						騎士さまはご自身の栄光だけでなく\n私達にもお心遣いを\n示してくださるのですね♪
+Tween	騎典姫ドルシネア	PunchPosition	y=30				NoWait
+	騎典姫ドルシネア	照れ						ふふ♪ この冒険がきっと、\n騎士さまを代表する物語と\nなるでしょう♪
+	ディーア	笑い2						それじゃあ、いざ冒険へ<dash=2>\n出発だ!!
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+	騎典姫ドルシネア	照れ	2_2			0
+	ディーア	通常2	1_2			0
+Bg	草原A					0
+Bgm	都市
+FadeIn	black					1
+	ディーア	通常2						この試練を乗り越えれば\nきっと、成長できるはずだ！
+	騎典姫ドルシネア	嬉しい						がんばってくださいませっ♪		1536-11		Voあり
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	通りすがりの旅人					0
+Bg	草原C					0
+Wait						1
+FadeIn	black					.5
+	通りすがりの旅人							うわぁ!?\n魔物が、魔物が出たぞー!!
+CharacterOff
+	騎典姫ドルシネア	通常	2_2
+	ディーア	本気2	1_2
+	ディーア	本気2						大丈夫！\nオレにまかせてくれ！
+	騎典姫ドルシネア	照れ						困っている方を見捨てない優しさ……\nあぁ、素敵です♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	怒り2	1_2			0
+	騎典姫ドルシネア	驚き	2_2			0
+Bg	洞窟A					0
+Wait						1
+FadeIn	black					.5
+	騎典姫ドルシネア	驚き						あちらに魔物が待ち伏せています！
+	ディーア	本気2						これくらい、突破してやる!!
+	騎典姫ドルシネア	嬉しい						さすが騎士さま♪\nなんて勇敢なお姿でしょう♪
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	怒り2	1_2			0
+	騎典姫ドルシネア	通常	2_2			0
+Bg	森林A					0
+Wait						1
+FadeIn	black					.5
+	騎典姫ドルシネア	通常						いよいよ、\nここを抜ければ目的地ですね！
+	騎典姫ドルシネア	怪しい						ですが……\n騎士さま、お体は大丈夫ですか？
+	ディーア	汗2						え……\nも、もちろん！
+CharacterOff
+	アルマース	冒険						本当ですか？\nマスターさん、\nずっと休んでませんよ？
+CharacterOff
+	斬鉄剣	冒険
+Tween	斬鉄剣	PunchPosition	y=30				NoWait
+	斬鉄剣	冒険						そうそう！\n私達ばかり休ませて、\nお師匠様は見張りしてましたよね！
+CharacterOff
+	騎典姫ドルシネア	怪しい	2_2
+	ディーア	汗2	1_2
+	ディーア	汗2						大丈夫だって！\nまだまだいけるさ!!
+Shake	Graphics		x=5				PageWait
+	ディーア	驚き2						……あれ
+StopBgm
+Shake	Graphics		x=5				PageWait
+Bgm	緊迫
+	ディーア	驚き2						な、なんだ……？
+	騎典姫ドルシネア	驚き						あっ！ \n騎士さま！ あちらを！
+StopBgm
+Param	character_grayout=false
+CharacterOff						0
+Se	魔剣出る
+	キノコリオン  		2_3			.5
+Wait						.3
+	キノコリオン 		1_3			.5
+Wait						.3
+	キノコリオン		3_3			.5
+Wait						.3
+Tween	キノコリオン  	PunchPosition	y=100				Add
+Tween	キノコリオン 	PunchPosition	y=100				Add
+Tween	キノコリオン	PunchPosition	y=100				NoWait
+	キノコリオン							ノコー！ ノコー!!
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2						こんなに魔物が……!!
+	黒グラデーション		エフェクト裏
+	ディーア	悔しい2						（どうする？ みんなの言う通り、\n　確かに体力は消耗してる……）
+Bgm	バトル
+CharacterOff	黒グラデーション
+	ディーア	怒り2						いや……\nここで弱気になったらダメだ
+	ディーア	怒り2						困難を乗り越えないと、\nオレは立派になったとはいえない!!
+	ディーア	本気2						魔物を倒して先に進もう！
+	ディーア	本気2						みんな、ドルシネア！\n一緒に戦ってくれ!!
+	騎典姫ドルシネア	通常						はい！
+CharacterOff
+	騎典姫ドルシネア	嬉しい_拡大	エフェクト表
+	騎典姫ドルシネア	嬉しい_拡大						ドルシネアはいつでも\n騎士さまの隣に♪		1536-15		（Vo）
+CharacterOff
+	ディーア	本気2						いくぞ！
+If	isdebug==true
+CharacterOff
+Jump	*G_434_02
+EndIf
+EndScenario
+
+# G_434_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	森林A
+	キノコリオン
+FadeIn	white					.5
+Se	光1
+Tween	キノコリオン	PunchPosition	y=600 time=2				NoWait
+Tween	キノコリオン	MoveBy	x=-800 time=2				NoWait
+	キノコリオン							ノコー!?
+CharacterOff
+	騎典姫ドルシネア	通常	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						よしっ！
+	騎典姫ドルシネア	嬉しい						騎士さま！ お見事でした♪
+	ディーア	通常2						ああ！\nドルシネアもありがとうな
+CharacterOff
+	アルマース	冒険						油断しちゃダメですよ、マスターさん\n次から次に敵は来てますから
+CharacterOff
+	騎典姫ドルシネア	通常	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						確かに多いけど、\nそれでこそ乗り越える意味がある！
+	ディーア	本気2						どんどん先へいくぞ！
+Param	character_grayout=false
+FadeOut	white					.3
+CharacterOff						0
+	斬鉄剣	冒険				0
+FadeIn	white					.3
+Tween	斬鉄剣	PunchPosition	y=30				NoWait
+Se	斬1
+	斬鉄剣	冒険						ずばんっ！
+CharacterOff
+	カエル型モンスター
+Wait						.2
+FadeOut	white					.2
+FadeIn	white					.2
+Se	光1
+Tween	カエル型モンスター	PunchPosition	y=600 time=2				NoWait
+Tween	カエル型モンスター	MoveBy	x=-800 time=2				NoWait
+Wait						1
+Param	character_grayout=false
+CharacterOff
+	アルマース	冒険
+Se	風3
+	オーラ青		エフェクト表			.2
+	アルマース	冒険						かっきーん！
+CharacterOff
+	カエル型モンスター
+Wait						.2
+FadeOut	white					.2
+FadeIn	white					.2
+Se	光1
+Tween	カエル型モンスター	PunchPosition	y=600 time=2				NoWait
+Tween	カエル型モンスター	MoveBy	x=-800 time=2				NoWait
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	騎典姫ドルシネア	通常	2_2
+	ディーア	怒り2	1_2
+Param	character_grayout=true
+	騎典姫ドルシネア	通常						そう！ そこです！		1536-12
+	ディーア	本気2						はぁああ!!
+CharacterOff
+Param	character_grayout=false
+	キノコリオン	大
+Wait						.2
+Se	風1
+FadeOut	white					.2
+FadeIn	white					.2
+	キノコリオン	大						ノコォオオオオ!!				でかいキノコリオンに
+Se	倒れる
+CharacterOff						.5
+Wait						1
+	騎典姫ドルシネア							はぁぁ♪\nさすがでございますっ！		1536-13
+CharacterOff
+	キノコリオン		画面外_左
+Se	走る
+Tween	キノコリオン	MoveTo	x=0 time=1
+Tween	キノコリオン	PunchPosition	y=60				NoWait
+	キノコリオン							ノコっ!!
+Wait						.2
+CharacterOff
+	ディーア	驚き2						まだ来るのか!?
+	集中線		エフェクト表
+	ディーア	本気2						はぁっ!!
+CharacterOff
+	キノコリオン
+Wait						.1
+Se	突1
+Tween	キノコリオン	PunchPosition	y=600 time=2				NoWait
+Tween	キノコリオン	MoveBy	x=-800 time=2				NoWait
+	キノコリオン							ノコーっ!!
+CharacterOff
+Param	character_grayout=true
+	アルマース	冒険						キリがないですね……\nどうします？\n別の道を探す方法もありますが
+CharacterOff
+	騎典姫ドルシネア	怪しい						騎士さま……
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ディーア	悔しい2
+	ディーア	悔しい2						（くっ……\n　厳しくなってきたけど……）
+	ディーア	悔しい2						（一度、やると決めたんだ……\n　みんなも力を貸してくれた\n　だから……）
+CharacterOff	黒グラデーション
+	ディーア	本気2						もう少し<dash=2>
+CharacterOff
+	騎典姫ドルシネア	驚き_拡大	エフェクト表
+	騎典姫ドルシネア	驚き_拡大						騎士さま!! 足元が!!
+CharacterOff
+	ディーア	驚き2						え…………
+	ディーア	悔しい2						うわっ!?
+StopBgm
+Se	倒れる
+Tween	ディーア	MoveBy	y=-200				NoWait
+Wait						.3
+CharacterOff						.5
+Bgm	絶望
+FadeOut	black					.3
+	ディーア	悔しい2	1_2			0
+	騎典姫ドルシネア	驚き	画面外_右_b			0
+FadeIn	black					.3
+Tween	騎典姫ドルシネア	MoveTo	x=70 time=2				NoWait
+	騎典姫ドルシネア	驚き						あぁ、騎士さま！\nお怪我はございませんか!?
+	ディーア	悔しい2						だ、大丈夫！\n足をひっかけただけ……ぐぅ!?
+Tween	ディーア	PunchPosition	y=10				Add
+Tween	ディーア	MoveBy	y=-30				NoWait
+	ディーア	絶望2						ま、まずい、立てない……\n足を……ひねったのか？
+Tween	ディーア	MoveBy	y=20 time=2				Add
+	ディーア	悔しい2						くっ……！\nでも、このまま止まるわけには……
+Tween	ディーア	MoveBy	y=-20 time=0.5				NoWait
+	ディーア	悔しい2						ぐぁっ!!
+	騎典姫ドルシネア	怪しい						……騎士さま、失礼いたします
+Tween	騎典姫ドルシネア	MoveBy	x=-50				NoWait
+	ディーア	驚き2						ど、ドルシネア？
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	騎典姫ドルシネア	怪しい	p5b			0
+	ディーア	悔しい2	p4
+Tween	ディーア	MoveBy	y=-20 time=0			NoWait
+Tween	騎典姫ドルシネア	MoveBy	x=20 time=0			NoWait
+Wait						1
+FadeIn	black					.5
+Tween	騎典姫ドルシネア	MoveBy	x=20 time=0.5				Add
+Tween	ディーア	MoveBy	x=20 time=0.5				NoWait
+	騎典姫ドルシネア	怪しい						よい、しょっ……\nうん、しょ……
+	ディーア	悔しい2						……ごめんな、ドルシネア\n重いだろ？
+	騎典姫ドルシネア	嬉しい						だ、大丈夫です！\n肩をお貸しするくらい！
+	騎典姫ドルシネア	嬉しい						騎士さまをお支えすることが、\n私の役目ですから！
+Tween	騎典姫ドルシネア	MoveBy	x=20 time=0.5				Add
+Tween	ディーア	MoveBy	x=20 time=0.5				NoWait
+	騎典姫ドルシネア	怪しい						うん、しょ……\nあと、すこ、し……
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	悔しい2	1_2			0
+	騎典姫ドルシネア	通常	2_2			0
+Wait						1
+FadeIn	black					.5
+	騎典姫ドルシネア	通常						ふぅ……\nここならお休みできるはずです♪
+	騎典姫ドルシネア	通常						斬鉄剣さんとアルマースさんが\n見張ってくださっていますから、\nゆっくり<dash=2>
+	ディーア	悔しい2						……ごめんな
+	騎典姫ドルシネア	驚き						……え？
+	ディーア	悔しい2						オレは……\nドルシネアのマスターとして失格だ
+	ディーア	悔しい2						もっと、ドルシネアにふさわしい\nしっかりしたマスターに\nなりたかったのに……
+StopBgm
+	ディーア	悔しい2						こんなに迷惑をかけて
+	ディーア	悔しい2						オレはダメだな……
+	騎典姫ドルシネア	驚き						…………
+CharacterOff
+	騎典姫ドルシネア		エフェクト表
+	騎典姫ドルシネア	嬉しい_拡大						さすがです、騎士さま				顔拡大
+CharacterOff
+	ディーア	驚き2						…………え？
+Bgm	凱旋
+CharacterOff
+	騎典姫ドルシネア	嬉しい						やはり、私の見込んだ通りのお方\nあなたは英雄譚に名前を残すべき、\n偉大な騎士さまです♪
+CharacterOff
+	ディーア	悔しい2						でも、オレは……失敗した\nこんなに情けないところも見せて……\nとても、立派な騎士じゃ……
+CharacterOff
+	騎典姫ドルシネア	通常						試練を乗り越えようと、\n必死に努力されたじゃないですか♪
+	騎典姫ドルシネア	照れ						騎士さまはご自身の決めたことを\n途中で投げ出されなかった……
+	騎典姫ドルシネア	通常						それだけでも\n素晴らしいことですのに<dash=2>
+	騎典姫ドルシネア	嬉しい						今、己を省みることで、\n成長へのさらなる一歩を\n踏み出されています！
+	騎典姫ドルシネア	通常						……ご存知ですか？\n一度も後悔しない騎士などいません
+	騎典姫ドルシネア	通常						私の中に収められた数多の物語\nどれもが素晴らしい騎士の英雄譚
+	騎典姫ドルシネア	通常						けれど、誰一人として\n無欠な者はおりませんでした
+CharacterOff
+	ディーア	驚き2						……ドルシネア
+CharacterOff
+	騎典姫ドルシネア	通常						挫けたとしても、倒れたとしても、\n再び立ち上がって前に進める
+	騎典姫ドルシネア	通常						失敗を糧にして、\n理想の自分を目指せる方こそが\n真の英雄となれるのです
+	騎典姫ドルシネア	嬉しい						……騎士さまのような方が、\n英雄譚を紡がれるのです
+	騎典姫ドルシネア	照れ						ですから、\nどうか恥じないでください
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	騎典姫ドルシネア	照れ_拡大	エフェクト表
+	騎典姫ドルシネア							成長しようと努力されたこと\nご自身を省みられたこと
+	騎典姫ドルシネア	嬉しい_拡大	エフェクト表					そのどれもが、\n立派な騎士の資質ですよ
+CharacterOff
+	ディーア	驚き2						…………
+	ディーア	通常2						……ありがとう、ドルシネア
+	ディーア	怒り2						そっか、そうだな……
+	ディーア	通常2						これが、今このときが\n立派になるための試練……
+	ディーア	通常2						だったら、一つや二つの失敗で\n挫けたらダメだよな
+CharacterOff
+	オーラ桃		エフェクト裏
+	騎典姫ドルシネア	嬉しい
+	騎典姫ドルシネア	嬉しい						はい♪
+Param	character_grayout=true
+CharacterOff
+	斬鉄剣	冒険	画面外_右_b
+	アルマース	冒険	画面外_右
+Se	走る
+Tween	斬鉄剣	MoveTo	x=-180 time=2				NoWait
+Tween	アルマース	MoveTo	x=180 time=2				NoWait
+Wait						1
+	アルマース	冒険						マスターさん、\nこのあたりは安全そうですよ
+	斬鉄剣	冒険						あと、あっちの方に、\n敵が少ない道を見つけました!!
+CharacterOff
+	騎典姫ドルシネア	驚き	2_2
+	ディーア	驚き2	1_2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						本当か!?
+	ディーア	照れ2						だったら……
+	騎典姫ドルシネア	驚き						騎士さま、もうよろしいのですか？
+	ディーア	通常2						大丈夫\n休んだおかげで\n歩けるようにはなったよ
+	ディーア	笑い2						心配かけてゴメンな
+	ディーア	通常2						ここからは無理せずにいこう\nみんな、力を貸してくれないか？
+	騎典姫ドルシネア	嬉しい						ふふっ♪\nもちろんです、騎士さま♪
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	温泉B
+CharacterOff						0
+	騎典姫ドルシネア	嬉しい	画面外_左_b			0
+	ディーア	笑い2	画面外_左			0
+Wait						1
+FadeIn	black					.5
+Bgm	平和
+Tween	ディーア	MoveTo	x=-90 time=2				Add
+Tween	騎典姫ドルシネア	MoveTo	x=90 time=2				NoWait
+	ディーア	笑い2						ふぅ……ようやく着いた!!\nここが温泉か
+	騎典姫ドルシネア	嬉しい						素敵な場所ですね♪
+CharacterOff
+	斬鉄剣	冒険						あー！ もうへとへとですよー\nということで、ひと足お先に！
+Se	走る
+Tween	斬鉄剣	MoveBy	x=800 time=2				NoWait
+Wait						.5
+CharacterOff
+	アルマース	冒険						私も暑くて溶けそうです……
+	アルマース	冒険						はやく水風呂で\nむちむちぼでぃを目指さなくては
+Se	走る
+Tween	アルマース	MoveBy	x=800 time=2				NoWait
+Wait						.5
+CharacterOff
+	ディーア	通常2	1_2
+	騎典姫ドルシネア	通常	2_2
+	騎典姫ドルシネア	嬉しい						さあ、騎士さま♪\n私たちも参りましょう♪
+	騎典姫ドルシネア	通常						今日、ここで体を休めたことも\n騎士さまの偉大な足跡として\n記録されるでしょう♪
+	ディーア	通常2						その前に、\n……ドルシネア
+	騎典姫ドルシネア	驚き						騎士さま？\nどうされました？
+StopBgm						1						Fade1秒を入れた
+	ディーア	通常2						ありがとうな
+	騎典姫ドルシネア	驚き						いえ、\n騎士さまの姫として当然の<dash=2>
+	ディーア	照れ2						いや、ドルシネアが\n励ましてくれなかったら\nオレはここまで来られなかった
+Bgm	凱旋
+	ディーア	笑い2						だから、ありがとう\nドルシネア\nオレを支えてくれて
+	騎典姫ドルシネア	照れ						そんな……\nこんなに私のことを\n想ってくださって……
+CharacterOff
+	騎典姫ドルシネア	照れ_拡大	エフェクト表
+	騎典姫ドルシネア	照れ_拡大						ドルシネアは\n胸がいっぱいです♪
+CharacterOff
+	騎典姫ドルシネア	嬉しい						お優しく、素敵な騎士さま\nきっと、あなたは永遠に語られる\n英雄譚の主人公となられるでしょう♪
+	騎典姫ドルシネア	通常						あらゆる苦難から人々を救い、\nその知恵と勇気を誰もが目指す！
+	騎典姫ドルシネア	嬉しい						そのような偉大な騎士に♪
+	ディーア	にやけ2						え、えへへ……\nそんな大げさな……
+	ディーア	通常2						そこまでの騎士に\nなれるかは分からないけど……
+	ディーア	笑い2						いつかドルシネアにふさわしい、\n立派なマスターになるよ
+CharacterOff
+	騎典姫ドルシネア	嬉しい_拡大	エフェクト表
+	騎典姫ドルシネア	嬉しい_拡大						はい♪\n信じております、私の騎士さま♪
+CharacterOff
+	騎典姫ドルシネア	通常						それではまずは温泉で\n体を休めましょう♪
+Tween	騎典姫ドルシネア	PunchPosition	y=30				NoWait
+	騎典姫ドルシネア	嬉しい						そして、怪我が治りましたら\n新たな冒険へ！
+CharacterOff
+	ディーア	笑い2						はは、気が早いな！
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	騎典姫ドルシネア	嬉しい_拡大	エフェクト表
+	騎典姫ドルシネア	嬉しい_拡大						さあ、早く参りましょう！\n次の物語を紡ぐために♪
+	騎典姫ドルシネア	嬉しい_拡大						どんな冒険でも、\nドルシネアはずっと\n騎士さまのお傍にいます♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_434_01
+EndIf
+EndScenario

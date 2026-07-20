@@ -1,0 +1,456 @@
+# E_1038_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	和室（夜）
+	黒グラデーション		エフェクト表			0
+	煌刀ソハヤ	通常				2
+FadeIn	black					.5
+	煌刀ソハヤ	通常						なんなの？ ここは……				パワハラ会議パロ
+CharacterOff	煌刀ソハヤ	通常
+	三日月宗近	通常	p7
+	モノホシザオ	通常	p3
+Shake	モノホシザオ		x=10				NoWait
+	モノホシザオ	通常						ぴぇええ、\nなんなんですかぁ……？
+CharacterOff	モノホシザオ
+CharacterOff	三日月宗近
+	煌刀ソハヤ	通常						モノちゃん……、宗近ちゃん……
+	煌刀ソハヤ	通常						旦那様の魔剣のうち、\n太刀魔剣ばかり集められてる\nこんなことは初めてだよ……？
+Param	character_grayout=false
+CharacterOff	煌刀ソハヤ
+Se	ドーン
+	鬼丸	敵				1
+Wait						2
+	鬼丸	敵						頭を垂れて蹲え、平伏せよ……
+Param	character_grayout=true
+CharacterOff	鬼丸
+	モノホシザオ	通常	p2b
+	三日月宗近	通常	p8b
+	煌刀ソハヤ	通常	p5
+Wait						.5
+Tween	モノホシザオ	MoveBy	y=-30 time=0.1				NoWait
+Tween	三日月宗近	MoveBy	y=-30 time=0.1				NoWait
+Tween	煌刀ソハヤ	MoveBy	y=-30 time=0.1				NoWait
+	煌刀ソハヤ	通常						（お、鬼丸さんの声……\n　鬼丸さんの声だ……！\n　わからなかった）
+	煌刀ソハヤ	通常						（姿も気配も以前と違う、\n　凄まじい精度の強化……！）
+	三日月宗近	通常	p8					ご、ごめんなさい……\n姿も気配も違っていたから……
+CharacterOff
+	黒グラデーション		エフェクト表
+	鬼丸	敵
+	鬼丸	敵						誰が喋って良いと言った？
+CharacterOff	鬼丸
+	煌刀ソハヤ	通常
+Shake	煌刀ソハヤ		x=10				NoWait
+	煌刀ソハヤ	通常						（ガタガタ……！）
+CharacterOff	煌刀ソハヤ
+	鬼丸	敵						貴様共のくだらぬ意志で物を言うな\n俺に聞かれたことにのみ答えよ
+	鬼丸	敵						俺が問いたいのは一つのみ
+	鬼丸	敵						『何故にキノコリオンは\n　それ程までに弱いのか』
+Param	character_grayout=false
+CharacterOff	鬼丸
+	モノホシザオ	通常	p2b
+	三日月宗近	通常	p8b
+	煌刀ソハヤ	通常	p5
+	全員							（なんでキノコリオン……？）
+CharacterOff	モノホシザオ
+CharacterOff	三日月宗近
+CharacterOff	煌刀ソハヤ
+	鬼丸	敵						チョコに、ドーピングに、超大型に\n強化されたからと言って\n終わりではない、そこから始まりだ
+	鬼丸	敵						より多くノコと叫び、\nよりノコノコし、\n魔剣と戦うための始まり
+	鬼丸	敵						しかし実際はどうか？\n何度倒された？
+CharacterOff	鬼丸
+	煌刀ソハヤ	通常						（そんなことを\n　私達に言われても……）
+CharacterOff	煌刀ソハヤ
+	鬼丸	敵						"そんなことを私達に言われても"\n何だ？ 言ってみろ
+CharacterOff	煌刀ソハヤ
+	煌刀ソハヤ	通常						（思考が……読めるの？\n　まずい……）
+Bgm	魔王バトル
+CharacterOff	煌刀ソハヤ
+	鬼丸	敵						何がまずい？ 言ってみろ？
+	鬼丸	敵						もはや魔物は\nタケノコリオンのみで良いと\n思っている
+	鬼丸	敵						キノコリオンは解体する
+StopBgm
+CharacterOff						0
+Bg	白背景					0
+	ディーア	本気2				0
+	ディーア	本気2						ちょっと待ったー!!!!
+Bg	酒場_宿屋					1
+Wait						1.3
+CharacterOff
+	煌刀ソハヤ	通常						へ……？ 旦那様？
+Bgm	コメディ
+CharacterOff
+	ディーア	本気2						一体どうしたんだ、鬼丸！\nいつもは優しいのに、\nいきなり怖いことを言って！
+	ディーア	絶望2						キノコリオンだって生きてる！ \nさすがに絶滅させたらかわいそう<dash=2>
+	ディーア	汗2						<dash=2>って、あれ……？
+Param	character_grayout=false
+CharacterOff
+	モノホシザオ	通常	p2b
+	三日月宗近	通常	p8b
+	煌刀ソハヤ	通常	p5
+	全員							じーーーーっ
+CharacterOff
+	ディーア	汗2						み、みんな……？
+CharacterOff
+	煌刀ソハヤ	通常						許せない旦那様だ、\n人の遊びに踏み込んだ				無限列車編炭治郎のモノローグ
+CharacterOff
+	三日月宗近	通常						腹を切って\nお詫びしてもらわないと……				柱合会議、ハラキリ
+CharacterOff
+	ディーア	絶望2						ちょっ!?\nそんなに悪い事したか……!?
+CharacterOff
+	斬鉄剣	通常	画面外_右
+Tween	斬鉄剣	MoveBy	x=-600 time=1				Add
+	斬鉄剣	通常						はぁ……ダメですよお師匠様\n飛び入り参加するなら\n『猪突猛進』くらい言ってくれないと				伊之助の口癖
+CharacterOff
+	ディーア	汗2						猪突……？\nえーっと……なんのことだ？
+CharacterOff
+	モノホシザオ	通常	p2b
+	三日月宗近	通常	p8b
+	煌刀ソハヤ	通常	p5
+	全員							………………
+Param	character_grayout=true
+Tween	煌刀ソハヤ	PunchPosition	y=30				NoWait
+	煌刀ソハヤ	通常						えぇっ!? ほんとにわからないの!?
+	煌刀ソハヤ	通常						旦那様、『魔剣の刃』だよ!?\n『魔剣の刃』!!
+CharacterOff
+	ディーア	汗2						まけんの……なに……？
+CharacterOff
+	三日月宗近	拡大	エフェクト表					はあ゛ーーーーーーーん!?!?!?				伊之助の叫び
+CharacterOff
+	三日月宗近	通常
+Tween	三日月宗近	PunchPosition	y=30				NoWait
+	三日月宗近	通常						なんてこと!?\nあるじが知らないなんて!!
+CharacterOff
+	モノホシザオ	通常						ぴぇえええええ！
+CharacterOff
+	鬼丸	通常						主、正座だ、正座ァ!!				善逸の怒り
+CharacterOff
+	ディーア	絶望2
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望2						はいぃ!?
+CharacterOff
+	三日月宗近	通常	p3
+	斬鉄剣	通常	p7
+	斬鉄剣	通常						いいですかぁ！\n魔剣の刃といえば大人気アニメ！
+	三日月宗近	通常						原作漫画もベストセラー！\n映画も空前絶後の大ヒット！
+CharacterOff
+	煌刀ソハヤ	通常						知らない子はいない名作なんだよ！
+CharacterOff
+	ディーア	汗2						アニメの話……?\nじゃあさっきのは、\n言い争いじゃなくて……？
+CharacterOff
+	鬼丸	通常						おう！\n俺が鬼役となって、\n芝居をしていただけだ
+CharacterOff
+	ディーア	汗2	p3
+	煌刀ソハヤ	通常	p7
+Tween	煌刀ソハヤ	MoveBy	x=-50				NoWait
+	煌刀ソハヤ	通常						旦那様、\nほんとに知らないの？
+	ディーア	汗2						ご、ごめんな！\n最近は忙しくて、暇がなかったし
+CharacterOff
+	三日月宗近	通常						でも、このままじゃまずいわよ？\n魔界の流行に取り残されたら、\n魔王になるのも夢のまた夢……
+CharacterOff
+	ディーア	絶望2						そんなに……？
+CharacterOff
+	斬鉄剣	通常						優れた作品は\n世界を変えますからね♪
+CharacterOff
+	ディーア	怒り2						確かに、そんなに有名なら、\n知っておいたほうがいいよな……
+CharacterOff
+	煌刀ソハヤ	通常
+Tween	煌刀ソハヤ	PunchPosition	y=30				NoWait
+	煌刀ソハヤ	通常						じゃあ、\nソハヤちゃんにまかせてよっ！
+	煌刀ソハヤ	通常						旦那様に『魔剣の刃』の\nサイキョーに面白いところ、\n教えてあげるからっ♪
+CharacterOff
+	ディーア	笑い2						ありがとうな！\nじゃあ、よろしく頼む！
+StopBgm
+CharacterOff
+	煌刀ソハヤ	通常						うん♪ 
+Bgm	都市
+	煌刀ソハヤ	通常						魔剣の刃はね、\nすっごく技がかっこいいのっ♪
+FadeOut	white					.3
+CharacterOff						0
+Bg	森林A					0
+	煌刀ソハヤ	通常				0
+FadeIn	white					.3
+	煌刀ソハヤ	通常						『ソハヤの呼吸 一の型……』
+CharacterOff
+	煌刀ソハヤ	通常_拡大	エフェクト表					『全てを過去にする\n　最強オブ最強の煌めき』
+Se	チャージ
+FadeOut	white					2
+CharacterOff						0
+Bg	酒場_宿屋					0
+	煌刀ソハヤ	通常				0
+Wait						1
+FadeIn	white					.3
+Tween	煌刀ソハヤ	PunchPosition	y=30				NoWait
+	煌刀ソハヤ	通常						名前を叫んで、\nずばーん、ばばーん、\nメラメラーって！
+	煌刀ソハヤ	通常						謎の炎とか、水とかでるんだよっ！
+	煌刀ソハヤ	通常						それに、鬼は太陽の光が弱点で、\n太陽の技もあるの♪
+	煌刀ソハヤ	通常						光といえばソハヤちゃん！\n私もあの太陽みたいに\nみんなを助ける魔剣になりたいんだ♪
+Tween	煌刀ソハヤ	PunchPosition	y=30				NoWait
+	煌刀ソハヤ	通常						旦那様、わかった？
+CharacterOff
+	ディーア	笑い2						ああ、\nすごく派手でかっこいいのは、\nわかったよ
+CharacterOff
+	斬鉄剣	通常						かっこいいのはもちろんだけど、\n他にも推しポイントはありますよっ♪
+CharacterOff
+	ディーア	驚き2						斬鉄剣も？
+CharacterOff
+	斬鉄剣	通常
+Tween	斬鉄剣	PunchPosition	y=30				NoWait
+	斬鉄剣	通常						はい！ 一創作者として\n私のイチオシは、\nズバリ、物語の美しさ！
+FadeOut	white					.3
+CharacterOff						0
+Bg	塩湖					0
+	          
+FadeIn	white					.3
+	斬鉄剣	<Off>						断ち切れない兄妹の絆……\n仲間との出会い、先達に憧れ\n戦い成長していく……
+FadeOut	white					.3
+CharacterOff						0
+Bg	日の出					0
+	          
+FadeIn	white					.3
+	斬鉄剣	<Off>						そんな物語を紡ぐセリフや表現は\n独特だけど綺麗でたまらないんです♪
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場_宿屋					0
+	モノホシザオ	通常				0
+FadeIn	white					.3
+	モノホシザオ	通常						も、モノさんもいいですかぁ……？
+	モノホシザオ	通常						お、お話の中に、\nモノさんみたいな怖がりの人が\nいるんですけど
+Tween	モノホシザオ	PunchPosition	y=10				NoWait
+	モノホシザオ	通常						その人、いざというときは凄くてぇ\nシャキーンってかっこよく\n敵と戦ったりするんですぅ……！
+FadeOut	white					.3
+CharacterOff						0
+Bg	森林A					0
+	モノホシザオ	通常				0
+FadeIn	white					.3
+Shake	モノホシザオ		x=20 time=1				NoWait
+	モノホシザオ	通常						ぴぇええええええ！
+Wait						1
+	モノホシザオ	通常						（すぅ……）
+Se	抜刀
+Wait						.2
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景					0
+	黒背景		エフェクト表
+	斬撃(39205A)		エフェクト裏
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.5				NoWait
+Wait						1.2
+Se	斬2
+	斬撃(39205B)		lost1
+CharacterOff	黒背景
+Wait						.2
+Se	斬2
+	斬撃(39205C)		lost2
+Wait						.2
+Se	斬2
+	斬撃(39205D)		lost3
+Wait						.3
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Bloom
+	黒背景		エフェクト表			0
+FadeOut	white					.3
+CharacterOff						0
+Wait						1
+Bg	酒場_宿屋					0
+	モノホシザオ	通常				0
+FadeIn	white					.3
+	モノホシザオ	通常						モノさんも……ああいう風に……\n暴走しないで戦えたらって……
+CharacterOff
+	鬼丸	通常
+Tween	鬼丸	PunchPosition	y=30				NoWait
+	鬼丸	通常						みんな、いい理由だな！
+	鬼丸	通常						だが、俺は単純な熱い戦いが好みだ\n血湧き肉躍る戦いで鬼を両断する！
+	鬼丸	通常						剣士だけでなく、\n動物まで戦いに参加するのも面白い\n奇妙だが、あの筋肉はなかなかだ				ムキムキネズミ
+CharacterOff
+	ディーア	怪しい2						ムキムキな動物……？
+CharacterOff						0
+Bg	黒背景					0
+	ドーピングキノコリオン	通常				0
+Tween	ドーピングキノコリオン	PunchPosition	y=30				NoWait
+	ドーピングキノコリオン	通常						ノゴッ!!
+CharacterOff						0
+Bg	酒場_宿屋					0
+	三日月宗近	通常				0
+Tween	三日月宗近	PunchPosition	y=30				NoWait
+Wait						.2
+Tween	三日月宗近	PunchPosition	y=30				NoWait
+	三日月宗近	通常						はい！ はい！ はい！ あるじ！\n私の推しポイントも聞いて！
+	三日月宗近	通常						私の推しは<dash=4>
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	三日月宗近	拡大	エフェクト裏					<size=60>もちろん胸よ!!</size>
+CharacterOff
+	ディーア	汗2						やっぱり……
+CharacterOff
+	三日月宗近	通常						厚い胸板をさらけ出した野生児に\n零れ出そうな胸のカワイイ女の子！\n私も負けてられないわ！
+	三日月宗近	通常						でも、ただ胸が大きいだけじゃないの\nその魅力を保ったまま戦う姿……！
+Tween	三日月宗近	PunchPosition	y=30				NoWait
+	三日月宗近	通常						それこそ、\n美しい魔剣たる私が目指す姿よ！
+CharacterOff
+	ディーア	通常2						……なるほどな
+CharacterOff
+	煌刀ソハヤ	通常						旦那様、これでわかった？
+CharacterOff
+	ディーア	笑い2						ああ……！\n完全に理解したよ！
+Param	character_grayout=true
+CharacterOff
+	煌刀ソハヤ	通常
+Tween	煌刀ソハヤ	PunchPosition	y=30				NoWait
+	煌刀ソハヤ	通常						ほんと!?
+CharacterOff
+	鬼丸	通常	p3b
+	斬鉄剣	通常	p7
+	斬鉄剣	通常						これでお師匠様とも\n魔剣の刃トークができますね！				蝶屋敷で刀を受け取るところ
+	鬼丸	通常						急げ、急げ！
+CharacterOff
+	煌刀ソハヤ	通常
+Tween	煌刀ソハヤ	PunchPosition	y=150				NoWait
+	煌刀ソハヤ	通常						ヤッフー！
+CharacterOff
+	ディーア	笑い2						つまりこの作品は…………
+StopBgm
+	ディーア	怪しい2						えっと、ムキムキで、筋肉で……
+	ディーア	怪しい2						…………文学？
+CharacterOff
+	モノホシザオ	通常	p3
+	三日月宗近	通常	p7b
+	三日月宗近	通常						あ、あるじ？\nちゃんと分かってる……？
+CharacterOff
+	ディーア	本気2						ああ、もちろん！\nこの作品は<dash=2>
+CharacterOff
+Bgm	緊迫
+	ディーア	拡大本気2	エフェクト表					ド派手なムキムキ動物の胸板が\nシャキーンと戦う美しい物語なんだ!!
+Param	character_grayout=false
+CharacterOff
+	斬鉄剣	通常	p8b
+	鬼丸	通常	p2b
+	煌刀ソハヤ	通常	p5
+	全員							…………
+StopBgm
+CharacterOff
+	ディーア	汗2						あれ……？
+Bgm	コメディ
+CharacterOff
+	三日月宗近	通常
+Shake	三日月宗近		x=30 y=30 time=5				NoWait
+	三日月宗近	通常						アァアアア！
+	三日月宗近	通常						認識がァ!! 認識が違っている!!				年号鬼
+CharacterOff
+	ディーア	汗2						いや、みんなの説明だとそうなる<dash=2>
+CharacterOff
+	斬鉄剣	通常
+Tween	斬鉄剣	PunchPosition	y=30				NoWait
+	斬鉄剣	通常						はい！\nちょっと静かにしてください！				鼓屋敷、炭治郎のモノローグ
+Param	character_grayout=true
+CharacterOff
+	モノホシザオ	通常	p7
+	三日月宗近	通常	p3b
+	モノホシザオ	通常						ど、どうしましょう……！
+	三日月宗近	通常						まさかあるじが\nこんなに察しが悪いなんて……!!
+	三日月宗近	通常						こうなったら……！
+CharacterOff
+	三日月宗近	拡大	エフェクト表					あるじ！\nもっと胸の話をするわよ！
+CharacterOff
+	斬鉄剣	通常_拡大	エフェクト表					あの独特なセリフを……！
+CharacterOff
+	モノホシザオ	拡大	エフェクト表					モノさんも\n物干一閃とかしたいですぅ！
+CharacterOff
+	鬼丸	通常_拡大	エフェクト表					俺と戦いを語り合うぞ！\n安心しろ、ネタバレは配慮する！
+CharacterOff
+	ディーア	絶望2						ちょ、みんな、落ち着いて……！
+StopBgm
+CharacterOff
+	煌刀ソハヤ	通常_拡大	エフェクト表					みんな、ダメだよぉ……！
+CharacterOff
+	モノホシザオ	通常						ソハヤちゃん？
+CharacterOff
+	煌刀ソハヤ	通常
+Tween	煌刀ソハヤ	PunchPosition	y=30				NoWait
+	煌刀ソハヤ	通常						そんなに急いだらダメっ！\nだって……！
+Bgm	凱旋
+	煌刀ソハヤ	通常						だって、魔剣の刃なら……\nあのお話ならそんなことしないっ！
+	煌刀ソハヤ	通常						私、教わったんだからっ！\n人にやさしくしないとダメだって！
+CharacterOff
+	モノホシザオ	通常						……そう、ですね
+CharacterOff
+	斬鉄剣	通常						物語で描かれたのは、\n優しさと思いの強さ……
+CharacterOff
+	三日月宗近	通常						困っている人に手を差し伸べる、\nそんな単純な優しさがないと\n物語は始まらなかったわよね……				三郎おじさん
+CharacterOff
+	鬼丸	通常						敵対する者であっても、\n理解を示すのも大事なことだ
+CharacterOff
+	ディーア	怒り2						…………そうか
+CharacterOff
+	煌刀ソハヤ	通常						旦那様？
+CharacterOff
+	ディーア	笑い2						今のでオレも\nその作品の良さがわかったよ
+	ディーア	通常2						みんながすごく作品を愛していて、\nこんなに熱心に語ってくれたんだ
+	ディーア	通常2						読んだだけで優しい気持ちになれる\n強くなれる物語
+	ディーア	笑い2						みんなの道標になってくれるなんて\nすごく素敵な作品なんだろうって
+CharacterOff
+	煌刀ソハヤ	通常						旦那様……！
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	ディーア	通常2						いい作品だな、その<dash=2>
+Bgm	緊迫
+	集中線		エフェクト表
+	ディーア	笑い2						\n<size=60>『魔剣の<ruby=カタナ>刀</ruby>』!!</size>
+StopBgm
+CharacterOff
+	モノホシザオ	通常	p7
+	煌刀ソハヤ	通常	p3
+	黒グラデーション		エフェクト表			1
+	全員							……………………………
+CharacterOff
+	ディーア	汗2						あ、あれ……？
+Bgm	コメディ
+CharacterOff
+	煌刀ソハヤ	通常
+	黒グラデーション		エフェクト表
+	煌刀ソハヤ	通常						旦那様……
+CharacterOff
+	斬鉄剣	通常	p8b
+	三日月宗近	通常	p5
+	鬼丸	通常	p2b
+	黒グラデーション		エフェクト表			0
+	全員							頭を垂れて蹲え、平伏せよ……				もう一回、パワハラ会議
+CharacterOff
+	ディーア	絶望2
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望2						はい……！
+Param	character_grayout=true
+CharacterOff
+	斬鉄剣	通常	p8b
+	三日月宗近	通常	p5
+	鬼丸	通常	p2b
+	三日月宗近	通常						私達が問いたいのは一つのみ、\n何故にあるじはそれ程までに\n話を聞いてくれないのか
+	三日月宗近	通常	p5b
+	斬鉄剣	通常						タイトルを間違えるなんて……
+	鬼丸	通常	p2					こうなったら……！
+CharacterOff
+	煌刀ソハヤ	通常						旦那様！
+Param	character_grayout=false
+CharacterOff						0
+Bg	市街地A					0
+	集中線		エフェクト表			0
+	全員							<size=60>今すぐアニメを\n見なさーい!!</size>
+FadeOut	white					1
+CharacterOff						0
+Bg	黒背景					0
+	イベントスチル103801		エフェクト表			0
+FadeIn	white					.3
+Wait						1
+	          							 
+If	isdebug==true
+CharacterOff
+Jump	*E_1038_01
+EndIf
+EndScenario

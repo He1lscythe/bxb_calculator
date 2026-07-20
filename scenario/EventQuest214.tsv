@@ -1,0 +1,936 @@
+# E_214_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="ロールとアリスのショコラ大探検"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	酒場1F
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	二人
+Param	character_grayout=false
+FadeIn	white					.1
+	二人							<size=40>ロール様が病気<dash=2>!!?</size>
+Param	character_grayout=true
+CharacterOff
+	名刀・大包平		b2					だ、大丈夫なんですか!?
+CharacterOff
+	ププッピマリー		2_3					数日前から体調を\n崩されたのですが、
+	ププッピマリー							現在は部屋から出るのも\n困難な状況でして…
+CharacterOff
+	リディ	怒り2	2_2
+	ディーア	悔しい2	1_2
+	リディ							マスター、お見舞いに\n行かないと！
+	ディーア							ああ……！\nそうと決まればすぐに！
+CharacterOff
+	ププッピマリー		2_3					申し訳ありませんが、\n面会謝絶となっております
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2
+	リディ							面会謝絶……!?
+CharacterOff
+	名刀・大包平		b2					そんなに悪いんですか？
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	怪しい2	1_2
+	ディーア							もしかして、また何か魔導書でも\n暴走させたとか？
+CharacterOff
+	ププッピマリー		2_3					それが、原因は不明でして……
+CharacterOff
+	名刀・大包平		b2					お医者さんとか、呼んだほうが\n良いんじゃないかな？
+CharacterOff
+	リディ	悲しい2	2_2
+	ディーア	悔しい2	1_2
+	ディーア							あのロール様が面会謝絶の病気\nなんて、よっぽどだろうし…
+	リディ							お医者さんでも治せないかも…？
+CharacterOff
+	ププッピマリー		2_3					いえ、一つ……ロールお嬢様を\n治せる薬に心当たりが
+CharacterOff
+Param	character_grayout=false
+	リディ	驚き2	3_3
+	名刀・大包平		a1
+	ディーア	驚き2	2_3
+	三人							心当たり？
+FadeOut	black					.1
+Param	character_grayout=true
+CharacterOff
+	アリス	蔑み	2_3
+Bg	アリス庭園
+Wait						1
+Bgm	作戦会議
+FadeIn	black					.1
+	アリス		2_3					──それで、ここに来たと\nいうわけか
+CharacterOff
+	リディ	悲しい2	2_2
+	ディーア	悔しい2	1_2
+	ディーア							はい……
+CharacterOff
+	名刀・大包平		b2					私、お留守番でも\n良かったような……
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2
+	リディ							ロールお嬢様の謎の病気を治せる\nお薬、本当に持ってるんですか？
+CharacterOff
+	アリス	笑い	2_3					もちろん、ここにある\n万病を治せる至高の薬だ
+	アリス	通常						貴様がどうしてもと言うなら、\nくれてやるぞ？
+CharacterOff
+	リディ	笑い2	2_2
+	ディーア	怪しい2	1_2
+	リディ							やったぁ！\nマスター、はやく持っていこ♪
+	ディーア							いや、あのアリス様のことだ\nそんな薬を、タダでくれる\nはずがない……！
+	リディ	驚き2						ふぇ？
+CharacterOff
+	名刀・大包平		b2					もらえないの……？
+CharacterOff
+	アリス	笑い	2_3					クク…あははは！面白い！\n弁えてきたじゃないか、\n魔剣使い！
+	アリス	通常2						何事にも対価は必要だ\n当然、この薬にもな
+CharacterOff
+	名刀・大包平		b2					だから私も呼ばれたんですか…
+CharacterOff
+	ディーア	悔しい2	2_3					……何が望みなんです？
+CharacterOff
+	アリス	通常2	2_3					なに簡単なことだ、魔剣使い\n「あるもの」を探していてね
+CharacterOff
+	ディーア	汗2	2_3					簡単だった試しが\nないんだけど……
+CharacterOff
+	アリス	通常2	2_3					エイビシュタットの郊外に\nとある廃工場があってな
+	アリス							貴様らにはそこの様子を\n見てきてもらいたい
+CharacterOff
+	リディ		2_2
+	ディーア		1_2
+	ディーア	怪しい2						廃工場？
+	リディ	驚き2						エイビシュタットの廃工場って\nもしかして…!!
+	ディーア	驚き2						リディ、知ってるのか？
+	リディ	怒り2						もちろんだよ！\nていうかマスターなんで\n知らないの？
+	リディ	照れ2						魔界で一番大きなお菓子工場だよ!!
+	ディーア	怪しい2						……お菓子工場？
+	リディ	照れ2						昔は魔界のお菓子はみんなそこで\n作られてたんだって！リーマの\nお菓子屋さんが言ってた！
+	ディーア	怪しい2						そんな工場が、なんで廃工場に？
+	リディ	通常2						んー…けーえーふしん？
+CharacterOff
+	アリス	蔑み	2_3					まあそんなところだ
+CharacterOff
+	リディ	通常2	2_2
+	ディーア	怪しい2	1_2
+	ディーア							絶対適当に誤魔化したな、今
+CharacterOff
+	アリス	通常2	2_3					心配しなくても、ただの古びた\nチョコレート工場だ
+CharacterOff
+	リディ	笑い2	2_2
+	ディーア	怪しい2	1_2
+	ディーア							本当かなあ……
+CharacterOff
+	アリス	通常2	2_3					そこの工場の主力商品でな、\n魔力を高濃度に凝縮した\nチョコがある
+CharacterOff
+	リディ	驚き2	2_3
+	リディ							魔力を凝縮したチョコ？
+CharacterOff
+	アリス	蔑み	2_3					そうだ、放っておくと少々\n厄介な代物でな
+	アリス	通常2						いい機会だから全部\n回収してきてくれ
+CharacterOff
+	リディ		2_3
+	リディ	笑い2						チョコをたくさん持ってくれば\nいいの!?\nわかった!!
+CharacterOff
+	アリス	笑い	2_3					相棒は物分りがいいようだぞ\nどうする？
+CharacterOff
+	ディーア	怪しい2	2_3
+	ディーア							うーん……\nなんか裏があるような……
+CharacterOff
+	アリス	笑い	2_3					薬が欲しくないのか、魔剣使い？
+CharacterOff
+	ディーア	悔しい2	2_3
+	ディーア							くっ……行くしかないか……
+CharacterOff
+	アリス	笑い	2_3					騙されたと思って行って来い\n案外楽しいかもしれんぞ？
+FadeOut	black					.1
+CharacterOff
+	ディーア	汗2	2_3
+Wait						1.5
+Bgm	バトル
+Bg	スイーツ化図書館
+Se	走る
+Wait						.1
+Se	走る
+Wait						.5
+FadeIn	black					.1
+	ディーア	怒り2	2_3					騙された!!!!
+	アリス	通信	エフェクト表					<color=blue>あっはっはっはっはっは!!!!</color>
+CharacterOff
+	リディ	悔しい2	2_3					なにあれ!!\nお菓子のくせにすっごい\n動いてたんだけど!!
+CharacterOff
+	名刀・大包平		b2					魔力を凝縮したチョコって\nあれのことなの…？
+CharacterOff
+	ディーア	悔しい2	2_3					こうなる気がしてたんだ…!!\n最初からこのつもり\nだったんだな!!
+CharacterOff
+	名刀・大包平		b2					もしかしなくても、\nこれを全部倒せってこと……？
+	アリス	通信	エフェクト表					<color=blue>察しがいいじゃないか、\nそういうことだ</color>
+CharacterOff
+	リディ	怒り2	2_3					おにー！あくまー！
+CharacterOff
+	ディーア	悔しい2	2_3					嘘つき！騙したな！
+	アリス	通信	エフェクト表					<color=blue>騙したなんて人聞きが悪い</color>
+	アリス	通信	エフェクト表					<color=blue>勝手に騙されたお前が悪いんだ</color>
+	ディーア	汗2	2_3					なんて暴論！
+	アリス	通信	エフェクト表					<color=blue>くはは！図書館のお嬢様のためだ\n頑張ってくれたまえよ、魔剣使い</color>
+	アリス	通信	エフェクト表					<color=blue>ああ、それからいくつか華やかな\n区画もあるが……</color>
+CharacterOff
+	リディ	照れ2	2_3
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							あ！あっちに美味しそうな\nお菓子のお城がある!!
+CharacterOff
+	名刀・大包平		b2
+Tween	名刀・大包平	PunchPosition	y=50				NoWait
+	名刀・大包平							本当だ！チョコレートの\nお庭もある…!!
+CharacterOff
+	ディーア	怒り2	2_3					危ない!!
+CharacterOff
+Param	character_grayout=false
+	リディ	驚き2	2_2
+	名刀・大包平		a1 2
+FadeOut	white					.1
+Se	光2
+FadeIn	white					.1
+Wait						.1
+FadeOut	white					.1
+Se	光2
+FadeIn	white					.1
+Tween	リディ	PunchPosition	y=50				NoWait
+Tween	名刀・大包平	PunchPosition	y=50				NoWait
+	二人							うわぁ！
+Param	character_grayout=true
+	アリス	通信	エフェクト表					<color=blue>……そういう箇所は魔力が凝縮\nされていて危険だから\n気をつけるといい</color>
+	リディ	悔しい2						もう！もっと早く言ってよ！
+	名刀・大包平							もう何も信じられない……
+	？？？？	<Off>						<dash=6>…
+StopBgm						2
+Bgm	絶望					2
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	汗2	1_2
+	リディ							ん？ねえ、マスター、これ……
+	ディーア	驚き2						……歌、か？
+	？？？？	<Off>						<dash=6>…
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	怪しい2	1_2
+	リディ							あっちの方から聞こえてくる！
+CharacterOff
+	名刀・大包平		b2					嫌な予感がするぅ…
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	怒り2	1_2
+	ディーア							なにかあるなら放っておく\nわけにもいかない\n行ってみよう！
+	アリス	通信	エフェクト表					<color=blue>…………</color>
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+Param	character_grayout=false
+	マカブイン×ミサ		b1
+	　　　　　　　　　　
+FadeIn	black					.5
+	？？？？							るぅぅーーーらぁぁーー♪
+	？？？？							ぁあぁーーーーー♪
+	？？？？							ふふ♪
+CharacterOff
+Param	character_grayout=true
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2
+	ディーア							な、なんだ……？
+	リディ							こんなところに、女の子が…？
+CharacterOff
+	名刀・大包平		b2					だ、だんな様……あの子ちょっと\n様子がおかしいような…？
+StopBgm						3
+Bgm	緊迫					3
+CharacterOff
+Param	character_grayout=false
+	マカブイン×ミサ		b1
+	？？？？							あら、まさか異界の果てから\nこんなところまで歌声が\n届くなんて♪
+CharacterOff
+Param	character_grayout=true
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2
+	リディ							異界…？
+	ディーア	怪しい2						この異様な雰囲気…まさか\nこの工場、異界と繋がって\nいるのか…？
+CharacterOff
+Param	character_grayout=false
+	マカブイン×ミサ		b1
+	？？？？							本当に迎えに来てくれたのね、\nマスター様♪
+CharacterOff
+Param	character_grayout=true
+	ディーア	怪しい2	2_3					君は…？
+CharacterOff
+	獄刀大包平	武器状態	画面外_下
+	マカブイン×ミサ		b1
+	マカブイン×ミサ							ふふ、私はマカブイン×ミサ\nというの♪
+CharacterOff
+	ディーア	驚き2	2_3					マカブイン…!?
+CharacterOff
+	獄刀大包平	武器状態	画面外_下
+	マカブイン×ミサ		b1
+Tween	獄刀大包平	MoveTo	y=-200 time=3	easeOutCirc			NoWait
+	マカブイン×ミサ							あ、大丈夫よ♪\nあなたのことは何でも知って\nいるから♪
+StopBgm						1
+	マカブイン×ミサ							私、ずっとこの日を待ってたの♪
+Param	character_grayout=false
+Se	火1
+	マカブイン×ミサ							るぅぅ…らぁー…♪
+CharacterOff
+	リディ	悔しい2	3_3
+	ディーア	本気2	2_3
+	ディーア							マズい、リディ下がれ！<speed=1>  </speed>	BrPage
+Tween	リディ	MoveTo	x=0 time=0.5
+Wait						.2
+CharacterOff
+	マカブイン×ミサ		b1					<size=40>あぁぁぁーーーーー♪</size><speed=0.8>  </speed>	BrPage
+FadeOut	white					.1
+Bgm	魔王バトル
+FadeIn	white					.1
+Param	character_grayout=false
+CharacterOff	マカブイン×ミサ					2	NoWait
+Se	火3
+	マカブイン×ミサ	幻想魔剣体	b2			1
+Wait						3
+Se	火1
+	マカブイン×ミサ幻想体		a1			1
+Wait						.5
+Se	火1
+	マカブイン×ミサ幻想体　		c1			1
+Wait						2
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	2_3					暴走した…!?
+CharacterOff
+	名刀・大包平		b2					幻想体まで…
+CharacterOff
+	リディ	驚き2	2_3					ねえマスター、もしかして\nあの後ろの剣が本体じゃない？
+FadeOut	black					.1
+CharacterOff
+	獄刀大包平		b1
+	　　　　　　　　　　
+FadeIn	black					.1
+Se	火1
+Wait						1
+FadeOut						.1
+CharacterOff
+	ディーア	怪しい2	2_3
+FadeIn	black					.1
+	ディーア							……いや、違うな\n魔力の波長が違う気がする
+	ディーア	悔しい2						多分暴走した原因は後ろの\n魔剣だけど、この子とは別だ
+	ディーア	驚き2						むしろ、あの刀の波長は…\n大包平に似てる…？
+CharacterOff
+	名刀・大包平		b2					ふぇ？わ、わたしですか!?
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2
+	リディ							もう1本の包平ちゃん!?
+	ディーア							何か知らないか？
+CharacterOff
+	名刀・大包平		b2					そ、そんなこと言われても…\n知らないですし…\n私じゃないですし…
+	名刀・大包平							<size=20>心当たりは…ちょっとだけ\nありますけど…</size>
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	悔しい2	1_2
+	ディーア							それにしても、暴走魔剣が2つと\nあの暴走チョコを同時に相手に\nするのは流石に難しい…
+	リディ	驚き2						魔剣機関に連絡する？
+	ディーア	悔しい2						ああ、そうしよう
+	ディーア	通常2						あの魔剣達は魔剣機関に任せて\nオレたちは幻想体の撃破と\nチョコ集めだ
+	リディ	照れ2						やったぁ♪チョコ集めだぁ♪
+	ディーア	通常2						早く終わらせよう、\nロール様が待ってるしな
+	リディ	笑い2						うんっ！
+CharacterOff
+	名刀・大包平		b2					お、お手柔らかにお願いします…！
+CharacterOff
+	リディ		2_2
+	ディーア	通常2	1_2
+	リディ	照れ2						チョコ集め♪チョコ集め♪
+	ディーア	怪しい2						リディ、もしかしてチョコ\n食べたいだけなんじゃ…？
+	リディ	悔しい2						ち、ちがうもん
+CharacterOff
+	マカブイン×ミサ		b1					るぅぅーーーー♪
+	マカブイン×ミサ							らぁぁぁぁーーーーーー♪
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	怒り2	1_2
+	ディーア							幻想体だ！\n来るぞ、リディは下がってろ！
+	リディ	笑い2						頑張ってね、マスター！
+CharacterOff
+	名刀・大包平		a1 2
+	ディーア	怒り2	2_2
+	ディーア							行くぞ、包平！
+	名刀・大包平		a1 2					は、はい！
+	名刀・大包平							<size=20>名刀…大…</size>
+	名刀・大包平							<size=32>包平がお相手しますっ！</size>
+FadeOut	white					.5
+CharacterOff
+BgOff
+	イベントロゴ21401		BG_c
+	　　　　　　　　　　
+FadeIn	white					.5
+Param	character_grayout=false
+	　　　　　　　　　　							<dash=2>ロールとアリスの\n　　　　　ショコラ大探検<speed=3>　　</speed>	BrPage
+StopBgm						2
+FadeOut	black					2
+CharacterOff
+	アリス		2_3
+Bg	アリス庭園
+Wait						2
+Param	character_grayout=true
+Bgm	絶望
+FadeIn	black					2
+	アリス							…………
+	オーラ青		エフェクト表
+	ディーア	<Off>						<color=blue>…行くぞ…包平…！</color>
+	名刀・大包平	<Off>						<color=blue>……包平が…\nお相手します…！……</color>
+	ディーア	<Off>						<color=blue>…………！</color>
+CharacterOff
+	アリス		2_3					……ふ
+	謎の女性の声	<Off>						ここまで完全に想定通り…\n流石でございます
+	アリス							ふん、この程度は造作もない
+	アリス	笑い						……さぁ、<ruby=パーティ>お茶会</ruby>を始めよう\nじゃないか
+FadeOut	black					2
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_214_01
+EndIf
+EndScenario
+
+# E_214_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="ロールとアリスのショコラ大探検"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+FadeIn	black					.5
+	　　　　　　　　　　							<dash=2>前回のあらすじ
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F
+	　　　　　　　　　　							バレンタインを数日後に控えたある日\n<param=name>の元に\nある知らせが届いた
+	　　　　　　　　　　							それは、司書王ロルリアンレットが\n謎の病気に罹ってしまったという\nものだった
+Bg	アリス庭園
+	　　　　　　　　　　							<param=name>は病気を\n治せる薬を求めププッピマリーの\n指示でアリスの元を訪ねたが
+	　　　　　　　　　　							そこでアリスから薬の対価として\n廃工場での超高濃度魔力チョコ\n集めを命じられてしまう
+Bg	スイーツ化図書館
+	　　　　　　　　　　							ロールの病気を治すため、\n仕方なくチョコレート集めを始めた\n<param=name>だったが…
+FadeOut	black					2
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff
+Param	character_grayout=false
+BgOff
+	イベントロゴ21401		BG_c
+	　　　　　　　　　　
+Wait						.5
+FadeIn	black					2
+Wait						3
+FadeOut	black					2
+CharacterOff
+Bg	廃病院
+Bgm	絶望
+ZoomCamera	SpriteCamera	1.5	-350	250		.1
+FadeIn	black					.3
+Wait						1
+ZoomCamera	SpriteCamera	1.5	350	250		1.5
+Wait						1
+FadeOut	black					.3
+ZoomCamera	SpriteCamera	1				.1
+FadeIn	black					.3
+	獄刀大包平	エネミー	b2					………………
+CharacterOff						2
+	獄刀大包平	暴走	b1			2
+	獄刀大包平	暴走	b2					……あれ？
+	獄刀大包平							……わたし、どうしちゃったんだろ
+	獄刀大包平							えっと、おねえちゃんをみつけて…\n魔剣使いさんと、歌の上手な\n魔剣さんをみつけて……
+	獄刀大包平							それから、それから、
+	獄刀大包平							たくさんの人がおそってきて……\nそれで……
+	獄刀大包平							……………
+	獄刀大包平							おぼえて、ないや……
+	獄刀大包平							わたし、また\n失敗しちゃったのかな……
+	獄刀大包平							わたし、おねえちゃんみたいに\nうまくできないや……
+	獄刀大包平							おねえちゃん……
+CharacterOff						3
+	獄刀大包平	エネミー	b1			3		……さみしくないもん
+	獄刀大包平							さみしく、ないもん……
+FadeOut	black					2
+StopBgm						2
+Wait						.1
+Se	闇2
+Se	闇3
+StopSe						1.5
+CharacterOff
+	ロルリアンレット	ドヤ顔H	2_3
+Bg	研究所A
+Wait						3
+FadeIn	black					.5
+	ロルリアンレット							<dash=2>待っていたわ\nよく来たわね、魔剣使い！
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	悔しい2	2_2
+Bgm	コメディ
+	ディーア							えぇ……？
+	リディ							元気じゃん……
+CharacterOff
+	ロルリアンレット	怪しいH	2_3					……何かしら、その微妙な反応は
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア	汗2						いえいえ！別に何も…
+	ディーア	怪しい2						<size=20>どうなってるんだ……？\nまだ薬はもらっていないはず……</size>
+	リディ	驚き2						<size=20>どういうこと、マスター？</size>
+	ディーア	怪しい2						<size=20>わからない……</size>
+	ディーア	汗2						それでロール様、オレに用事って……？
+CharacterOff
+	ロルリアンレット	ニヤリH	2_3					あら、今日が何の日か忘れたの？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							何の日？
+	リディ							ま、まさか…！
+	ディーア							リディ？
+	リディ	悔しい2						今日だよ！今日という日だよ！\nそんな日に呼び出しだよ！
+	ディーア	悔しい2						この時期…世界図書館…ま、まさか…！
+	リディ							そのまさかだよマスター！
+	ディーア	本気2						禁書イオが、また……!?
+	リディ	怒り2						違うでしょ！
+	リディ	怒り2						今日は……！
+CharacterOff
+	ロルリアンレット	通常H	2_3					魔導儀式、バレンタインね
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	悔しい2	2_2
+	リディ							そうだよ！バレンタインだよ！\n女の子のお祭りだよ!!
+	ディーア							ああ、バレンタイン……\nってえええ!?
+CharacterOff
+	ロルリアンレット	怪しいH	2_3					……何をそんなに驚いているの？
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							いや、実は別の魔導書が暴走\nしただけとか……？
+CharacterOff
+	ロルリアンレット	驚きH	2_3					は？
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							もしくは、なにか事件が……\nいや、霊獣級指定災害……？
+CharacterOff
+	ロルリアンレット	驚きH	2_3					普通にチョコレートを\n渡そうと思っただけよ
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+Param	character_grayout=false
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人
+	二人							えええええええええ!!?
+Param	character_grayout=true
+CharacterOff
+	ロルリアンレット	悪い顔H	2_3					どうせ貰えるアテなんて\nないんでしょう？
+	ロルリアンレット	悪い顔H	2_3					その子も何も用意してない\nみたいだし
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	悔しい2	2_2
+	リディ	怒り2						し、してるもん！\nあとで渡すんだもん！
+CharacterOff
+	ロルリアンレット	驚きH	2_3					あらそう？\nじゃあこれはいらないかしら
+CharacterOff
+	ディーア	きらーん2	1_2
+	リディ	悔しい2	2_2
+	ディーア							いります!!!!
+	リディ	驚き2	2_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							うわぁ！
+CharacterOff
+	ロルリアンレット	通常H	2_3					そんなに言われちゃ仕方ないわね\nこのチョコを食べる\n権利をあげるわ
+	ロルリアンレット	ドヤ顔H						光栄に思いなさい、魔剣使い\nこのロルリアンレットの手作り\nチョコを味わえるのだから
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							て、手作り!?
+	リディ							まままままマスター、\nまさかそれ、本命……!?
+CharacterOff
+	ロルリアンレット	慌てH	2_3					義理よ
+CharacterOff
+	ディーア	絶望2	1_2
+	リディ	照れ2	2_2
+	ディーア							ですよね
+	リディ							だよねー…
+	ディーア							知ってました…\n味見か毒味かなにかですよねこれ…
+CharacterOff
+	ロルリアンレット	怪しいH	2_3					いいからさっさと食べなさい
+CharacterOff
+	ディーア	絶望2	1_2
+	リディ	驚き2	2_2
+	リディ							わぁ、ほんとに手作りだ…
+	ディーア	通常2						いただきまーす…んぐ
+FadeOut	white					.1
+Se	チャージ
+FadeIn	white					.5
+	ディーア	驚き2						おぉ…！魔力がみなぎってきた…！
+CharacterOff
+	ロルリアンレット	通常H	2_3					ふん、どうかしら\n上手くできているでしょう？
+	ロルリアンレット	ドヤ顔H						伝説のチョコレート工場に\n残された秘宝で作った\n自慢の一品よ
+	ロルリアンレット							ちゃんと味わって食べなさい
+StopBgm						5
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							……伝説のチョコレート工場？
+CharacterOff
+	ロルリアンレット	驚きH						ええ、それがどうかしたの？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							いや、ちょうどこの間チョコ\nを作っていた廃工場に行ったもので
+CharacterOff
+	ロルリアンレット	怪しいH	2_3					……廃工場？
+StopBgm						5
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	笑い2	2_2
+	リディ							昔すっごい有名だった工場だよ！
+CharacterOff
+	ロルリアンレット	驚きH	2_3					……それは、任務かしら？
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	通常2	2_2
+	ディーア							いや、アリス様からロール様の\n病気を治す薬をもらうために…
+CharacterOff
+	ロルリアンレット	怪しいH	2_3					……どういうことかしら\n私、病気になんて罹っていないわ
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							え？
+	リディ							でも、マリーさんが……
+CharacterOff
+	ロルリアンレット	慌てH	2_3					……まって、待ちなさい魔剣使い\n廃工場っていうのは…\nエイビシュタットのあの廃工場ね？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア							ええ、そうですけど…
+CharacterOff
+	ロルリアンレット	驚きH	2_3					エイビシュタット……アリスの\nチョコ工場…マリーの持ってきた\n高濃度魔力チョコレート…？
+	ロルリアンレット	驚きH						まさか……
+	ロルリアンレット	悪い顔H						ねえ、魔剣使い\nひとつ、質問があるのだけれど
+Bgm	絶望
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	悔しい2	2_2
+	ディーア							ロールお嬢様、すごい怒ってる…？
+	リディ							に、逃げたほうが\nいいんじゃない…？
+	ディーア							だ、大丈夫、\n悪いことはしてないはずだ…
+CharacterOff
+	ロルリアンレット	悪い顔H						ちなみに返答次第では魔界から\n消えてもらうことになるわね
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悔しい2	2_2
+	ディーア							前言撤回だ、逃げよう\n今すぐ逃げよう！
+CharacterOff
+	ロルリアンレット	悪い顔H	2_3					逃げられると思って？\nここは世界図書館…\n余すところなく私の支配下よ？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	リディ							扉が…！
+CharacterOff
+	ロルリアンレット	ニヤリH	2_3					さて、平穏に穏便に\n話をしましょう、魔剣使い？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	悔しい2	2_2
+	ディーア							穏便に話す人の顔じゃない！
+CharacterOff
+	ロルリアンレット	悪い顔H	2_3					まさか、アリスに命じられて\nチョコを大量に集めていた……\nなんてことはないわよね？
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	笑い2	2_2
+	ディーア							えっと、いや…
+CharacterOff
+	ロルリアンレット	悪い顔H						ないわよね？
+CharacterOff
+	ディーア	絶望2	1_2
+	リディ	絶望2	2_2
+	ディーア							アリス様の命令で……\n集めていました……
+CharacterOff
+	ロルリアンレット	驚きH	2_3					……そう、そういうことね\nよりにもよって、<ruby=アリス>あの引きニート</ruby>に…
+	ロルリアンレット	悪い顔H						マリー、一体どういうつもりかしら
+CharacterOff
+	ププッピマリー		2_3					……全てはお嬢様のためで\nございます
+StopBgm						2
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+Bgm	凱旋					2
+	ディーア							……あ、そういうことだったのか！
+	リディ							ふぇ？どういうこと…？
+	ディーア	通常2						オレの予想だけど…
+	ディーア	通常2						ロール様はチョコが欲しかったんだ\n普通のじゃない、超高濃度魔力のね
+	リディ	驚き2						あ、そっか！超高濃度魔力\nチョコレートはアリス様の所有物！
+	ディーア	怪しい2						ロール様とアリス様の関係を\n考えれば、チョコください、\nなんて言えないよな…
+	リディ	悔しい2						むしろ何を要求されるか\nわかんない…！
+	ディーア	通常2						だからマリーさんに手配させたんだ\n秘密裏に手に入るように…！
+	リディ	驚き2						え、もしかして…
+	ディーア	怪しい2						マリーさんは超高濃度魔力\nチョコレートの獲得に\nオレたちを使った
+CharacterOff
+	ププッピマリー		2_3					…………
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	リディ							じゃあ、ロール様の病気は\nマリーさんの嘘だったの!?
+	ディーア							そういうことになるな
+	リディ	怒り2						ひどいよマリーさん！\n本気で心配したのに！
+CharacterOff
+	ププッピマリー		2_3					…………
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	怒り2	2_2
+	ディーア							問題はそれだけじゃないんだ
+	リディ	驚き2						ふぇ？
+	ディーア	怪しい2						最終的にロール様は超高濃度魔力\nチョコレートを手にしていた
+CharacterOff
+	ププッピマリー		2_3					…………
+CharacterOff
+	ディーア	嬉しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							つまり、オレたちが集めていたのは\nロール様のためのチョコだったんだ！
+	リディ	笑い2						なるほど！
+Bgm	コメディ
+CharacterOff
+	ロルリアンレット	慌てH	2_3					うるさいわね！\n全部バラすんじゃないわよ！
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	驚き2	2_2
+	リディ	驚き2						じゃあ、さっき食べたチョコも…
+	ディーア	通常2						ああ、きっとあの工場でオレたちが\n集めてきたやつだな
+CharacterOff
+	ロルリアンレット	照れるH	2_3					～～～～～ッ！
+	ロルリアンレット	悪い顔H						嵌めたわね……\n全員で、この私を……！！
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	驚き2	2_2
+	ディーア	驚き2						えぇ！？
+	リディ	悔しい2						わわ、リディたちは違うよ！！
+CharacterOff
+	ロルリアンレット	照れるH	2_3					黙りなさい！
+	ロルリアンレット	慌てH						ああ、よりにもよって、\n渡した相手が\n集めた本人だったなんて…！
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	リディ							……！！
+CharacterOff
+	ロルリアンレット	照れるH	2_3					……黙りなさい、\n黙りなさい黙りなさい！
+	ロルリアンレット	悪い顔H						……そうまでして私を\n虚仮にしたいのね……わかったわ
+CharacterOff
+	ディーア	汗2						いや、そういうわけじゃ…
+CharacterOff
+	ロルリアンレット	悪い顔H	2_3					今後一切、金輪際、今より永遠に\n魔剣機関の支援を終了するわ\n共闘も協業も全て白紙ね
+CharacterOff
+	ディーア	怒り2						ッ!?
+CharacterOff
+	ロルリアンレット	悪い顔H	2_3					貸しも借りも全て精算して、\n魔剣機関と縁を切りましょう
+CharacterOff
+	ディーア	悔しい2						そ、そんなことをしたら\n魔界の秩序と安定が…！
+CharacterOff
+	ロルリアンレット	悪い顔H	2_3					マリー、手紙を出しなさい\n宛先は魔剣機関よ
+CharacterOff
+	ププッピマリー		2_3					すでに用意しております
+CharacterOff
+	ディーア	悔しい2						ロール様！
+CharacterOff
+	ロルリアンレット	悪い顔H	2_3					…………
+CharacterOff
+	ディーア	悔しい2	1_2
+	ププッピマリー		2_2
+	ディーア							…ああもう、マリーさんもなんとか！
+	ププッピマリー							…………<param=name>様
+	ディーア	怒り2						なんですか！
+	ププッピマリー							<size=20>こうなったらもう止める手段は一つのみ…</size>
+	ディーア	驚き2						<size=20>手段……!?</size>
+	ププッピマリー							<size=20>チョコを、集めてくる他ないかと</size>
+	ディーア	悔しい2						<size=20><dash=6>ッ!!</size>
+	ディーア	怒り2						<size=20>本気ですか？</size>
+	ププッピマリー							<size=20>ちょうど今日はバレンタインです\nロール様のご機嫌を取るには、これしかないかと</size>
+	ロルリアンレット	<Off>						何をコソコソやっているのかしら？
+	ププッピマリー							手土産のケーキを焼いております
+	ロルリアンレット	<Off>						さすがね、でも不要よ
+	ププッピマリー							申し訳ございません
+	ププッピマリー							……では、<param=name>様
+	ディーア	怪しい2						でも、それ逆効果かもしれない\nですよ
+	ププッピマリー							そうでしょうか
+	ディーア	怒り2						だって<dash=2>
+	ププッピマリー							他に案があればお聞きします
+	ディーア	悔しい2						……勝算は、どのくらいですか
+	ププッピマリー							お嬢様と最も長い時間を過ごして\nきたのはこのププッピマリーで\nございます
+	ププッピマリー							……というのではいかがです？
+	ディーア	汗2						それを信じた結果が今の状況\nなんですが…
+	ププッピマリー							だからこそ、ですよ
+	ディーア	怒り2						<dash=2>まさか、この状況を\n意図して……！
+	ププッピマリー							それでは、転移魔術で工場まで\nお送り致します
+	オーラ青		エフェクト表			.5
+	ププッピマリー							頑張ってくださいませ、\n<param=name>様
+	ディーア	驚き2						ちょ、何を──
+	ププッピマリー							舌を噛みませんよう、\nお気をつけください
+FadeOut	white					.5
+StopBgm						3
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	オーラ青		エフェクト表			.5
+FadeIn	white					.5
+Wait						.7
+FadeOut	white					1	NoWait
+StopBgm						1.5
+Wait						.5
+Se	光3
+CharacterOff	ディーア					.5
+CharacterOff	リディ
+Wait						1
+FadeIn						.5
+CharacterOff	オーラ青					.5
+Wait						1
+FadeOut	black					1
+Bg	廃病院
+Bgm	絶望
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+Wait						1
+Bgm	絶望
+FadeIn	black					1
+	ディーア							いったたた……
+	リディ							ここは……？
+	ディーア	怪しい2						工場……だよな
+	ププッピマリー	通信	エフェクト表					廃工場別館、そこに設置された\n結界の内部でございます。
+CharacterOff	ププッピマリー
+	リディ	驚き2						マリーさん!?
+	ディーア	驚き2						結界の内部って…ええ？
+	リディ	驚き2						マスター？どうしたの？
+	ディーア	怪しい2						外から介入できて\n通信も繋がる結界って…
+	ププッピマリー	通信	エフェクト表					既にその結界は結界として\nほとんど機能していません
+	ププッピマリー	通信	エフェクト表					物理障壁程度の効果しか\n残っていないでしょう
+CharacterOff	ププッピマリー
+	リディ	悔しい2						マスター、あれ…！
+	ディーア	怒り2						……ッ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	wipe
+FadeIn	black					.5
+	ディーア	怒り2						壊れた魔剣の跡……\n間違いない、魔剣機関だ
+	リディ	悔しい2						てことは、もしかして…！
+	ディーア	悔しい2						何者かに襲われて全滅、\nってとこかな
+	リディ	驚き2						あのミサちゃんって子？
+	ディーア	悔しい2						……いや、多分その後ろにいた\n魔剣の方だな\nこの破壊跡は音撃のそれじゃない
+	ディーア	怒り2						……<ruby=アンロック>魔剣開放</ruby>
+FadeOut	white					.5
+CharacterOff
+Se	魔剣出る
+	名刀・大包平		b1
+FadeIn	white					.5
+	名刀・大包平							ふぇ？だんな様？\nチョコ集めは終わったんじゃ……
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	笑い2	2_2
+	ディーア							ちょっと急用でね……
+FadeOut	white					.1
+Se	キラン
+FadeIn	white					.1
+	ディーア	驚き2						……！
+	ディーア	本気2						あっちだ、行こう！
+	リディ	驚き2						ちょ、マスター!?
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+	ディーア	怒り2	2_3
+Bg	魔術空間
+Bgm	魔王バトル
+FadeIn	black					.5
+	ディーア							あれは……！
+CharacterOff
+	獄刀大包平	エネミー	b1					ハァ……ハァ…………
+	獄刀大包平							<dash=4>ッ!!!!
+CharacterOff
+	名刀・大包平		b1					やっぱり…\nやっぱり、獄刀ちゃんなの…？
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2
+	リディ							ごくとうちゃん？
+	ディーア							知ってるのか？
+CharacterOff
+	名刀・大包平		b1					はい……たぶん、\nあれは禁式・獄刀大包平です……
+	名刀・大包平							私の、妹です……
+CharacterOff
+	ディーア	怪しい2						包平の妹…
+CharacterOff
+	獄刀大包平	暴走	b1					おねえ……ちゃん……？
+CharacterOff
+	名刀・大包平		b1					獄刀ちゃん…!?
+CharacterOff
+	獄刀大包平	暴走	b1					よかったぁ…元気…そうで……
+	獄刀大包平	エネミー	b1			.5		<dash=6>……！
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア	悔しい2						…くっ、なんだこの魔力、\n包平と同等かそれ以上…！
+	リディ	悲しい2						なんだか苦しそう…
+	ディーア							この工場にあふれる魔力は\n地獄の魔力が集約されているのか…？
+CharacterOff
+	名刀・大包平		b1					……そんな、こんなの無理ですよ…
+CharacterOff
+	獄刀大包平	暴走	b1					あ、ああ……さむい…さみしい…
+CharacterOff
+	名刀・大包平		b1					<dash=2>!!
+CharacterOff
+	リディ	悔しい2	2_3					マスター！
+CharacterOff
+	ディーア	悔しい2	2_3					地獄からの魔力が逆流してるんだ…！\nくっ、魔力が膨大すぎる…！
+CharacterOff
+	獄刀大包平	エネミー	b1					おねえ…ちゃん……おねえ…ちゃ……
+CharacterOff
+	名刀・大包平		b1					だ、だんなさま…！
+CharacterOff
+	ディーア	怪しい2	2_3					………
+CharacterOff
+	リディ	悲しい2	2_3					どうしたのマスター！\nいつもみたいにあの子を\n助けてあげようよ！
+CharacterOff
+	ディーア	悔しい2	2_3					……妙だ……都合がよすぎる…
+CharacterOff
+	リディ	驚き2	2_3					…え？
+CharacterOff
+	ディーア	悔しい2	2_3					まるでここに暴走した獄刀がいること\nがわかっているかのように、\nオレたちはここに転送された
+CharacterOff
+	リディ	悔しい2	2_3					偶然だよ！チョコレートあつめないと\nいけないんだから、\nいつか工場の中で<dash=2>
+CharacterOff
+	ディーア	悔しい2	2_3					……全部、仕組まれてたってことか
+CharacterOff
+	リディ	驚き2	2_3					？？
+CharacterOff
+	ディーア	通常2	2_3					マリーさん…さすがは\n世界図書館のメイド長ですね…
+CharacterOff
+	リディ	悔しい2	2_3					よくわかんないけど、\nどうするのマスター！
+CharacterOff
+	名刀・大包平		b1					…だんな様！
+CharacterOff
+	ディーア	怒り2	2_3					<dash=2>利用されるなら、とことん\n最後まで利用されてやる！
+	ディーア							アリス様とロール様を利用してまで\nマリーさんはオレたちを\nここに運びたかったんだ
+	ディーア	本気2						それは、オレたちにしか\n出来ないことがあるから…！
+CharacterOff
+	リディ	笑い2	2_3					マスター…！
+CharacterOff
+	ディーア	怒り2	2_3					ロールお嬢様の機嫌をなおし、\n魔界の秩序を守り、\nさらに禁式魔剣を救い出す
+	ディーア							それを同時にやれるのは、\nオレたちしかいない！
+CharacterOff
+	名刀・大包平		b1					だんな様…！
+CharacterOff
+	ディーア	笑い2	2_3					それに、今日はバレンタイン……\n"女の子たちのお祭り"、なんだろ？
+CharacterOff
+	リディ	照れ2	2_3					マスター♪\nうん！そう！そうだよ！
+CharacterOff
+	ディーア	通常2	2_3					だったら、リディも包平も、\nもちろん獄刀もロールお嬢様も\nみんな笑顔になってもらわなきゃな！
+	ディーア							女の子の笑顔を守るのが\nオレの役割だ！
+	ディーア	怒り2						だから……
+	ディーア	本気2						世界を救うついでに一緒に救ってやる\n禁式･獄刀大包平ッ!!!
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_214_01
+EndIf
+EndScenario

@@ -1,0 +1,318 @@
+# E_1220_ex01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	白背景					0
+Param	character_grayout=false
+	イズB	通常
+FadeIn	black					.3
+	イズB	通常						私は純潔のイゾルデ=ビースト\n純愛を守る聖なる使命を帯びた魔剣
+	イズB	本気						かつて純潔の聖女として、\n純愛だけが成立する魔界を創るという\n過ちを犯してしまいましたが
+	イズB	通常						騎士様に正してもらい、\n共に良い未来を誓ったのです……
+	イズB	通常						誠実な騎士様に魂を捧げ、\n"純潔"改め"純愛の聖女"として、\nイズは純愛を守り続けます
+	イズB	本気						そう思っていましたのに<dash=2>
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+Bg	市街地A					0
+	ワイバーン	野生	p7b			0
+	煉獄剣ヴェルガトゥリオ	野生	p3b			0
+	ディーア	にやけ4				0
+FadeIn	black					.3
+Bgm	緊迫
+Shake	ディーア		x=3				NoWait
+	ディーア	にやけ4						えへへへへ♪\nオレの体は一つしかないんだぞ？\n取り合わないでくれ♪
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+Bg	酒場の地下					0
+	イズB	慌て				0
+FadeIn	black					.3
+Bgm	コメディ
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	慌て						騎士様が爛れておりますっ！
+	イズB	慌て						イズを救ってくださった時は、\n胸がドキドキするほど\nとってもカッコよかったのに！
+CharacterOff
+	イゾルデ	通常2						どこかの聖女さまが、\nハーレム禁止にしてしまった\n反動じゃないかしら？
+	イゾルデ	通常2						他の魔剣の皆さまも、\n騎士さまが恋しかったようですし♪
+CharacterOff
+	イズB	悲しい						そ、それはそうかもしれません
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	本気						ですがあのように、\n不誠実に過ごせば堕落する一方！
+Shake	イズB		x=3				NoWait
+	イズB	本気						もし騎士様がこのまま、\n乙女の想いを弄ぶ最低の殿方になれば\n大変なことになります……！
+	イズB	悲しい						屋根裏に\nゴミのように打ち捨てられたり
+	イズB	悲しい						ボートに乗せられて、\n悲しみの向こう側に連れ去られたり
+	イズB	悲しい						百人もの美少女とハーレムを作れば\n人間の形ではいられないとも！
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	悲しい						そのような悲惨な末路になると、\nイズは聞きました！
+CharacterOff
+	イゾルデ	通常2						あら、\nそれではどうするのかしら？
+CharacterOff
+	イズB	本気						決まっております！\n私が騎士様に純愛の素晴らしさを\n教えるのです！
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	通常4	p3			0
+	イズB	通常	p7b			0
+Wait						1
+Param	character_grayout=true
+FadeIn	black					.3
+Bgm	平和
+	イズB	通常						ということで騎士様、\nあの時のように純愛の練習です♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	にやけ4						またイズ=ビーストと、\nイチャイチャしていいのか!?
+Shake	イズB	慌て	x=3				NoWait
+	イズB	慌て						ち、違います！\n騎士様が本命の方と結ばれるよう、\n愛の在り方を教えるだけ！
+	イズB	照れ						ですから騎士様も真面目に、\nイズを動揺させるようなことは\nおよしになって？
+Tween	ディーア	MoveBy	x=100				NoWait
+	ディーア	笑い4						それって急に顔を近づけたり？
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	慌て						はぅううううううっ！
+	イズB	慌て						そ、そういうことです！
+	イズB	慌て						こ、今回は、\n純愛のレッスン中級編をします！
+Tween	ディーア	MoveBy	x=-100				NoWait
+	ディーア	怪しい4						中級編？
+	イズB	通常						前回は初デートを体験しましたが\n恋の熱情はいずれ冷めるもの
+	イズB	笑い						そんな時に改めて、\n二人でいる尊さを理解することは\n愛を永遠にするため必要なことです
+	イズB	照れ						た、例えば……
+	イズB	照れ						時に強く抱き合い、\n時に情熱的に口づけを交わし合って\n結ばれた運命の二人がいたとして
+	イズB	悲しい						日々を過ごす内に、\nあの頃の情熱と愛は落ち着いて、\nまさに倦怠期突入……！
+	イズB	笑い						ですがこの愛を失いたくないと、\n互いに休みをとって、\n二人だけの大切な一日をつくる
+	イズB	通常						今日はお部屋で\n二人で静かに過ごす時間にしようと\nそう誓い合って……♪
+	イズB	照れ						そ、そんな設定で、\n純愛ごっこをするのはどうでしょう？
+	ディーア	汗4						や、やけに具体的だな
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	照れ						と、当然です！\n純愛の素晴らしさを理解するには\nリアリティが大事ですから！
+	イズB	照れ						け、決してイズが……\n何度も夢に見ていたわけではなく……
+	ディーア	通常4						わかった！\n今回はお部屋デートを楽しもう！
+Shake	イズB		x=3				NoWait
+	イズB	照れ						お部屋デート……！\nああ、なんて甘美な響き……♪
+	イズB	本気						ではなくっ！
+	イズB	通常						良いレッスンにしましょう、騎士様
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	通常4	p3			0
+	イズB	通常	p7b			0
+Wait						1
+FadeIn	black					.3
+	イズB	通常						こちらが予約したお部屋♪\nイズと騎士様で二人きりですよ
+	ディーア	通常4						いい雰囲気の部屋だ\n準備してくれてありがとうな！
+	イズB	笑い						騎士様に純愛を理解してもらうため\n努力は惜しみません♪
+	イズB	通常						それでは、\nレッスンスタートなのですが……
+Shake	イズB		x=3				NoWait
+	イズB	照れ						うぅ……\n改めて二人きりだと意識してしまい\n胸がドキドキしますわ……！
+	ディーア	驚き4						イズ=ビースト？
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	慌て						ひゃいっ!?
+	ディーア	通常4						お部屋デートで仲を深めるって、\nどうすればいいんだ？
+	イズB	通常						こほん、そ、そうですね……
+	イズB	通常						例えば強い信頼関係があると、\n互いが別のことをしても安心を感じる\nと聞いたことがあります
+	イズB	通常						ですので、\n二人で静かに好きなことをしながら\n過ごしてみましょう♪
+	イズB	笑い						私は好きな詩集を読むことにします
+	ディーア	通常4						へえ、詩が好きなんだな
+	イズB	笑い						愛の言葉が紡がれた美しい詩は、\n素晴らしいですから♪
+	ディーア	通常4						じゃあオレは、\n<ruby=タブレット>魔装具</ruby>で本とかを読もうかな
+FadeOut	black					.3
+CharacterOff						0
+	イズB	笑い				0
+Wait						2
+FadeIn	black					.3
+	イズB	笑い						読み終わりました……\nなんて素晴らしい本なのでしょう\n心が満たされます♪
+	イズB	通常						騎士様はまだ<dash=2>
+CharacterOff
+	ディーア	怒り4						ふむふむ……
+CharacterOff
+	イズB	照れ
+Shake	イズB		x=3				NoWait
+	イズB	照れ						かっこいい真剣な目……
+	イズB	照れ						それにこうも静かだと、\n騎士様の息遣いが間近に聞こえて……
+CharacterOff
+	ディーア	目閉じ4						まさか、\nもちひつじ大量絶滅の裏には\nあんな真実があるなんて
+	ディーア	驚き4						あれ、どうしたんだ？\n顔が真っ赤になっているぞ？
+CharacterOff
+	イズB	慌て
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	慌て						な、なんでもございません！
+	イズB	慌て						お部屋デートとは、\nとても大変なものなのですね……
+CharacterOff
+	ディーア	驚き4						そうなのかな？
+CharacterOff
+	イズB	慌て						そうなんですっ……
+CharacterOff
+	ディーア	通常4						よくわからないけど疲れたなら、\n次は気楽におしゃべりをしないか？
+CharacterOff
+	イズB	通常						おしゃべり、ですか？
+CharacterOff
+	ディーア	通常4						オレたちは出会ったばかりだし、\nお互いを知るのは大事だろ？
+CharacterOff
+	イズB	通常						それは素敵な提案ですね！\nイズも騎士様のことを知りたいです
+CharacterOff
+	ディーア	笑い4						よかった！\nじゃあまずはオレの話から<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	通常4	p3			0
+	イズB	通常	p7b			0
+Wait						2
+FadeIn	black					.3
+	イズB	通常						お空の月までお出かけだなんて、\n大変な戦いだったのですね？
+	ディーア	通常4						だけどみんなのおかげで、\nオレは今の生活に戻ることができた
+	ディーア	通常4						仲間のみんなには、\n感謝してもしたりない気持ちだよ
+	イズB	通常						やはり騎士様と魔剣の皆様は、\n不誠実なハーレムではなく、\n特別な絆で結ばれた関係ですね
+	イズB	悲しい						イズも同じように\n騎士様の力になれるといいのですが
+	ディーア	笑い4						大丈夫！\nもう力になってくれてるし、\nこれからもそうだろ？
+	イズB	通常						騎士様……♪
+	イズB	笑い						はい、もちろんです！
+	イズB	通常						不思議ですね、\nただ二人でお話をしていただけで\n心の距離が近づいたように思います
+	イズB	照れ						このまま、騎士様と……
+	イズB	通常						ではなく、\n騎士様に純愛の素晴らしさを\nお伝えするチャンスです
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	通常						騎士様、\n今度はイズから提案がございます！\n映画を見ませんか？
+	ディーア	驚き4						映画？
+	イズB	笑い						とても感動的な、\n純愛映画をお借りしてきたのです♪\n恋人同士にオススメだと！
+	ディーア	笑い4						それはいいな！\n二人で隣りに座って見てみよう！
+	イズB	笑い						はい！ 楽しみですね♪
+FadeOut	black					1
+StopBgm
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	汗4	p3			0
+	イズB	照れ	p7b			0
+Wait						2
+FadeIn	black					1
+	イズB	照れ						………………
+	ディーア	汗4						………………
+	ディーア	汗4						その、イズ=ビースト……
+	イズB	照れ						うぅ……
+	ディーア	汗4						すごく、大人な映画だったな……
+Bgm	コメディ
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	慌て						ち、ちがうのですっ！\nイズはそういうことは知らなくて！
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	慌て						決して騎士様と、\nそういう場面を見たかったわけでは！\n信じてください！
+	ディーア	汗4						お、落ち着いてくれ！\nちゃんと感動的な恋愛映画だったし\n意図的じゃないと分かっているよ
+	イズB	慌て						そ、そうです……\nとても情熱的な愛の行為でした……
+StopBgm
+	イズB	照れ						………………
+Bgm	神秘
+Tween	イズB	MoveBy	x=-10				NoWait
+	イズB	照れ						騎士様も、\nあのような愛の形に興味ありますか？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						えっ……!?
+	ディーア	汗4						そ、それは……\n興味がないと言えば嘘だけど……
+	ディーア	汗4						これはあくまで演技！\n純愛を伝えるレッスンだろ？
+	イズB	照れ						そ、そのとおりです
+Tween	イズB	MoveBy	x=-20				NoWait
+	イズB	照れ						ですが練習とは、\n本番を想定しなければいけないもの
+Tween	イズB	MoveBy	x=-20				NoWait
+	イズB	照れ						騎士様と契約を結んだ私なら、\n愛の練習相手となっても\n純潔の名を穢すことにはなりません
+FadeOut	black					.2
+CharacterOff						0
+	イズB	拡大照れ	エフェクト表			0
+FadeIn	black					.2
+	イズB	拡大照れ						だからもし、\n騎士様が最後まで練習したいなら
+FadeOut	black					.2
+CharacterOff						0
+Param	character_grayout=false
+	イズB	拡大足	エフェクト表			0
+	純潔のイゾルデ=ビースト	<Off>
+FadeIn	black					.2
+	純潔のイゾルデ=ビースト	<Off>						イズは我が身を捧げても……
+FadeOut	black					.2
+CharacterOff						0
+	黒グラデーション		エフェクト表			1
+	ディーア	絶望4				0
+Param	character_grayout=true
+FadeIn	black					.2
+	ディーア	絶望4						ま、まずい……
+	ディーア	絶望4						なんだか、\nいけない雰囲気になってきた！
+	ディーア	悔しい4						オレの魔剣になったあとも、\nイズ=ビーストが緊張していたから\nリラックスさせたかったのに
+	ディーア	にやけ4						このままじゃ嬉し<dash=2>
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						じゃなくて、\n流されて大問題を起こしてしまう！\nなんとか雰囲気を変えないと！
+CharacterOff	黒グラデーション					.5
+	ディーア	汗4						そ、そうだ！\n宿に来たあと何も食べてない！\n食事休憩をしよう！
+CharacterOff
+	イズB	照れ						ふえっ？
+CharacterOff
+	ディーア	汗4
+Tween	ディーア	MoveBy	x=-250				NoWait
+	ディーア	汗4						さあ、食事に行くぞー！
+	ディーア	絶望4						って、あれ!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						どうしてドアが開かないんだ!?
+	イズB	本気	画面外_右_b
+Tween	イズB	MoveBy	x=-550 time=1				NoWait
+	イズB	本気						ど、どういうことですか？
+Tween	ディーア	MoveBy	x=50				NoWait
+	ディーア	絶望4						押しても引いてもびくともしない！\nこうなったら魔剣で<dash=2>
+	イズB	本気						いいえ、それはダメです……！
+	イズB	本気						宿の方にご迷惑になりますし、\n純愛に波乱はつきもの……
+	イズB	照れ						それに……\nイズははしたない女かもしれません
+Tween	イズB	MoveBy	x=-50				NoWait
+	イズB	照れ						騎士様と閉じ込められて、\n誰にも邪魔されず練習相手になれる
+Tween	イズB	MoveBy	x=-50				NoWait
+	イズB	照れ						そんな状況に、\n聖女としてイズとして喜んでいるから
+	ディーア	悔しい4						い、イズ=ビースト……
+	イズB	照れ						危機の中で\n男女は真の愛に気づいて結ばれる\n先程の映画のように……
+Tween	イズB	MoveBy	x=-50				NoWait
+	イズB	慌て						騎士様となら、\nイズは純潔の鍵を解き放って、\n苦難の道に飛び出しても……！
+StopBgm
+	ディーア	怪しい4						道に飛び出す？
+	ディーア	驚き4						あっ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A(夜)					0
+	ディーア	汗4	p3			0
+	イズB	慌て	p7b			0
+FadeIn	black					.3
+Bgm	平和
+	イズB	慌て						…………
+	ディーア	汗4						窓が開いて良かったな
+	イズB	慌て						あんな空気に流されて、\nイズは、イズはなんてことを！
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	慌て						イズの恥ずかしい姿を、\nどうかお忘れくださいませぇー！
+CharacterOff
+	イゾルデ	通常2						あら？\n随分とお早いお帰りでしたわね？
+CharacterOff
+	ディーア	驚き4	p3
+	イズB	慌て	p7b
+	ディーア	驚き4						イズ？
+CharacterOff
+	イゾルデ	通常2						ふふふ♪ ねえ、聖女さま？
+	イゾルデ	通常2						今夜はお楽しみでしたか？
+CharacterOff
+	ディーア	汗4	p3
+	イズB	慌て	p7b
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	慌て						なっ……！\nまさか先程のはイゾルデ様が!?
+CharacterOff
+	イゾルデ	通常2						さあどうでしょう？
+	イゾルデ	通常2						素直に蜜月を過ごせば良いのに\n聖女さまは潔癖で面白いですわね♪
+	イゾルデ	通常2						恥ずかしい所も見せて、\nそろそろ肩の力も抜けたのでは？
+CharacterOff
+	ディーア	汗4	p3
+	イズB	本気	p7b
+	イズB	本気						余計なお世話ですっ！
+Shake	イズB		x=3				NoWait
+	イズB	本気						うぅ……！\nやはり騎士様の周囲は誘惑が多く、\n危険極まりありません！
+Tween	イズB	PunchPosition	y=30				NoWait
+	イズB	本気						純愛の聖女の名にかけて、\n騎士様を純愛の道に戻してみせます！
+	イズB	本気						だから騎士様、\nまた今度も純愛ごっこをしましょう
+CharacterOff
+	イズB	拡大照れ	エフェクト表					次はもっと……\nステップアップをしたやり方で♪
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1220_ex01
+EndIf
+EndScenario

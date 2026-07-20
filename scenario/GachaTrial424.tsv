@@ -1,0 +1,1138 @@
+# G_424_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	夏空
+	　　　　　　　　　　
+FadeIn	white					.5
+	　　　　　　　　　　							晴れ渡る青い空\nそれを彩る白い雲<dash=2>
+	　　　　　　　　　　							穏やかな風が\nふわりと草木を揺らす
+StopBgm
+	　　　　　　　　　　							魔界では今日もまた\nいつもと変わらない日常が<dash=2>
+Se	火事					.5
+Shake	Graphics	ShakePosition	time=3	easeInQuart			NoWait
+Wait						2.7
+StopSe
+CharacterOff						0
+Bg	市街地A					0
+Param	character_grayout=false
+	集中線		エフェクト表			0
+	ディーア	拡大本気2	エフェクト裏			0		待てーーーーーーーーっ!!\nリディを返せーーーー!!
+Bgm	コメディ
+CharacterOff
+	ちも	通常？	画面外_左_b
+	リディ	驚き2	画面外_左
+Se	走る
+Tween	ちも	MoveTo	x=90 time=1				NoWait
+Tween	リディ	MoveTo	x=-90 time=1				NoWait
+	リディ	驚き2
+	ちも	通常？						ちもちもーっ♪
+Se	走る
+Tween	ちも	MoveTo	x=800 time=2				NoWait
+Tween	リディ	MoveTo	x=800 time=2				NoWait
+Wait						.3
+	リディ	驚き2						マ、マスター!!\n助けてー!!
+CharacterOff
+	ディーア	本気2	画面外_左
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1.5				NoWait
+	ディーア							リディを返せーーーー!!
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=1.5				NoWait
+CharacterOff
+	　　　　　　　　　　							いつもと変わらない\n平和な日常が<dash=2>
+CharacterOff
+	モティ	通常？	画面外_左
+Se	走る
+Tween	モティ	MoveTo	x=0 time=2				NoWait
+	モティ	通常？						ねぇねぇ!! ケッコン！\n早くケッコンするもちー☆
+CharacterOff
+	アリス							まったくどこに行くつもりだ？\n戻って来いと何度言えば……
+CharacterOff
+	モティ	怒り？
+Tween	モティ	PunchPosition	y=50				NoWait
+	モティ	怒り？						うるさいもちっ！\nモティはケッコンするから\n忙しいのっ！
+	モティ	怒り？						そんなことも分からないもち？\nアリスのばーーーーか!!!!
+Se	走る
+Tween	モティ	MoveTo	x=800 time=2				NoWait
+CharacterOff
+	　　　　　　　　　　							……平和ではなかった
+								一体なぜ\nこんなことになってしまったのか\n全ては6時間前にさかのぼる<dash=2>
+FadeOut	black					.7
+CharacterOff
+Bg	酒場1F
+Bgm	穏やか
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　　　　　<color=blue>―6時間前―</color>
+CharacterOff
+	リディ	怒り2						はぁ……\nマスター帰ってこないねー、もち？
+CharacterOff
+	リディのもち		エフェクト表					もちもちー♪
+CharacterOff
+	リディ	怒り2						今日は任務早く終わるからって\n言ってたから、バイトも\n早めに終わらせたのになぁ
+	リディ	悲しい2						はぁ……暇だなぁー
+CharacterOff
+	リディのもち		エフェクト表					もちぃ
+CharacterOff
+	リディ	悲しい2						あーあ、もちが可愛い女の子になって\nリディの話し相手に\nなってくれたらいいのにな……
+FadeOut	white					.3
+Se	シャキーン
+Wait						.5
+FadeIn	white					.3
+	リディ	悲しい2						………………
+	リディ	驚き2						…………？
+FadeOut	black					.7
+CharacterOff						0
+Bg	草原A
+Bgm	平和
+	ディーア	悔しい2				0
+Wait						1
+FadeIn	black					.5
+	ディーア							はぁ、やっと終わった\n早く酒場に帰らないと……
+CharacterOff
+Param	character_grayout=false
+	　　　　　　　　　
+	？？？？	<Off>						……助けてー！
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2						うん？
+	モティ	通常？	画面外_右
+Se	走る
+	？？？？	<Off>						助けてもちぃぃー!!
+CharacterOff	？？？？					0
+Param	character_grayout=false
+Se	走る
+Tween	モティ	MoveTo	x=45 time=1
+Se	打1
+Tween	モティ	PunchPosition	y=50				NoWait
+Tween	モティ	MoveBy	x=90				NoWait
+Tween	ディーア	MoveBy	x=-90				NoWait
+	ディーア							うわぁっ!?
+Param	character_grayout=true
+	ディーア	悔しい2						いてて……\nだ、大丈夫か!?
+CharacterOff
+	モティ	驚き？						…………うーん……はっ！\nき、気を付けて欲しいもちっ！
+	モティ	怒り？						こんなかわいい女の子に\n思いっきりぶつかるなん、て……
+CharacterOff
+Param	character_grayout=false
+StopBgm
+	オーラ桃		エフェクト裏
+Se	ラブ
+	ディーア	通常2						ごめんな……怪我はないか？
+Param	character_grayout=true
+CharacterOff
+	モティ	驚き？						……はっ!! 
+Tween	モティ	ShakePosition	x=5				NoWait
+	モティ	驚き？						う、うわああぁぁー！\nい、い、イケメンもちっ!!
+CharacterOff
+	ディーア	驚き2						え……？
+CharacterOff
+Bgm	コメディ
+	モティ	拡大嬉しい？	エフェクト表					最高の相手を見つけちゃったーっ！\nケッコンもちー！ 今すぐ\nケッコンするしかない！ もちっ☆
+CharacterOff						0
+	ディーア	驚き2						ええっ!? ケッコン!?
+	ディーア	悔しい2						……って、あれ？\nこの流れ……
+FadeOut	black					.3
+CharacterOff						0
+Se	回想
+ImageEffect	SpriteCamera	Sepia
+FadeIn	black					.3
+	キノコリオンヌ							あ、あ……！
+CharacterOff
+	キノコリオンヌ	拡大	エフェクト表					あーっ！　素敵な人はっけんーー！\n決めたわ！　あなた、\nこの王女キノコリオンヌと結婚ねっ！
+	キノコリオンヌ	拡大嬉しい	エフェクト表					嬉しいでしょ？　えへへー♪\nこれで今日からあなたはキノコたちの\n王子さまっ♪
+FadeOut	black					.5
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	ディーア	怪しい2				0
+FadeIn	black					.3
+	ディーア	怪しい2						前にもあったような……？
+	ディーア	本気2						……いやそれよりも、\nさっき助けてって言ってなかったか？
+CharacterOff
+	モティ	怒り？						はっ!! そういえば！\nモティ、追われてるの！\n助けて欲しいもち!!
+CharacterOff
+	ディーア	悔しい2						誰に追われてるんだ？
+CharacterOff
+	モティ	怒り？						これから来る奴に……！\nとにかく、かくまって欲しいもちっ！
+	モティ	きらーん？						適当に誤魔化してくれれば大丈夫！\nあいつアホだから☆
+	モティ	嬉しい？						じゃ、お願いするもちーっ☆
+Se	走る
+Tween	モティ	MoveTo	x=-800 time=1.5
+StopBgm
+CharacterOff
+	ディーア	怪しい2						な、なんだったんだ……？
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	？？？？							……邪魔だ
+CharacterOff
+	ディーア	怪しい2
+Tween	ディーア	MoveBy	x=-10				NoWait
+	ディーア							あっ、すみませ……
+	ディーア	驚き2						……って、ええ!?
+CharacterOff
+Bgm	緊迫
+	アリス	通常						おや、\n誰かと思えば魔剣使いじゃないか？\n道端で何を呆けているんだ
+CharacterOff
+	ディーア	驚き2						ア、アリス様っ!?
+	ディーア	本気2						<size=20>ま、まさか……あいつが言ってた\nアホってアリス様のこと……!?</size>
+CharacterOff
+	アリス	蔑み						……貴様、この魔帝アリスに\nアホと言ったか？
+CharacterOff
+	ディーア	本気2						いいえ言ってません!!!!
+CharacterOff
+	アリス							ふん、まあいい\nそれで、貴様はここで\n何をしているんだ？
+CharacterOff
+	ディーア	汗2						任務が終わったので\nこれから酒場に戻るところですけど
+CharacterOff
+	アリス							随分と呑気なことだ\n<dash=2>街がどうなっているかも知らずに
+CharacterOff
+	ディーア	驚き2						え、街がどうかしたんですか？
+CharacterOff
+	アリス							いや？\nところで、貴様\n『もちひつじ』を見かけなかったか
+CharacterOff
+	ディーア	驚き2						もちひつじ……ですか？\n……もちなら、\n酒場でリディと一緒にいますけど
+CharacterOff
+	アリス							そいつじゃない
+CharacterOff
+	ディーア	驚き2						じゃあ、ゲデヒトニスですか？
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+Bg	研究所A					0
+	ロルリアンレット	通常G大
+FadeIn	black					.3
+	ディーア	<Off>						それならロール様のところに……
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=true
+	　　　　　　　　　　
+Bg	草原A
+ImageEffectOff	SpriteCamera	GrayScale
+FadeIn	black					.3
+	アリス	蔑み						はぁ？ なぜ私があの<ruby=ロルリアンレット>世間知らず</ruby>の\nもちひつじなど気にするんだ
+CharacterOff
+	ディーア	怪しい2						じゃあ野生の、ですか……？\nでも、もちひつじって\n絶滅危惧種ですよ？
+	ディーア							昔、乱獲されたせいで\n数が激減してますし\nそうそう見かけることは……
+CharacterOff
+	アリス							そうか、ならかまわん\nもう貴様に用はない
+Tween	アリス	MoveTo	x=800 time=3				NoWait
+Wait						.7
+StopBgm						.5
+CharacterOff
+	ディーア	驚き2						えっ、ちょ、アリス様!?
+	ディーア	怪しい2						……どうなってるんだ？
+CharacterOff
+Bgm	平和
+	モティ	きらーん？	1_3
+Tween	モティ	PunchPosition	y=50 time=1				NoWait
+Tween	モティ	MoveBy	x=50 time=1				NoWait
+Wait						.5
+Tween	モティ	PunchPosition	y=50 time=1				NoWait
+Tween	モティ	MoveBy	x=50 time=1				NoWait
+	モティ	きらーん？						えへへー！ ほーらねっ☆\nアリスはあの通り、アホもちっ☆
+CharacterOff
+	ディーア	悔しい2
+	ディーア	悔しい2						ちょっ!?\nなんてこと言うんだ!!\n相手は"あの"アリス様だぞ！
+	ディーア							聞こえたらどうするんだよ！
+CharacterOff
+	モティ	きらーん？						聞こえないよー！\nだってアリス、アホだもーん☆
+CharacterOff
+	ディーア	汗2						命知らずにも程がある……\nまったく……あれ？
+CharacterOff
+StopBgm
+Param	character_grayout=false
+	トライアルスチル42403		エフェクト表
+	？？？？	<Off>						もち……？
+	？？？？	<Off>						どこ見てるもちっ？
+Tween	トライアルスチル42403	MoveBy	x=302 y=100				NoWait
+	？？？？	<Off>						あー！\nさてはこのかわいいモティに\n見惚れてるなー？ もちっ☆
+Param	character_grayout=true
+CharacterOff
+	ディーア	怪しい2						その見た目と語尾……\nもしかして、アリス様が探してた\n『もちひつじ』ってキミのこと……？
+CharacterOff
+	モティ	通常？						そうもちー☆
+CharacterOff
+	ディーア	怪しい2						……いや、でもどうみても\n『もちひつじ』じゃないよな……\nやっぱり気のせいか……
+CharacterOff
+	モティ	嬉しい？						もちひつじもち
+CharacterOff
+Bgm	コメディ
+	ディーア	驚き2						もちひつじなの!?
+CharacterOff
+	モティ	きらーん？						色々あって変身したもち
+CharacterOff
+	ディーア	本気2						そんな雑な感じで……？
+CharacterOff
+	モティ	通常？						そんなことよりー\nケッコンもち☆\n今すぐケッコンするもちーっ☆
+CharacterOff
+	ディーア	怪しい2						いや、そもそも\nもちひつじって結婚とか\nできるのか……？
+	モティ	通常？						心配いらないよっ！\n今のモティはどうみても\nかわいい女の子でしょっ！
+	モティ	嬉しい？						だからケッコンもできる！ もちっ☆
+	ディーア	悔しい2						いや待て、結婚も何も、\nまだ名前も聞いてないだろ？\nキミは一体誰なんだ？
+CharacterOff
+	モティ	驚き？						はっ！ そうだった！
+CharacterOff
+	モティ	拡大嬉しい	エフェクト表					はーい！ じゃあ自己紹介しまーす！\nモティの名前は\nモティヒツディンヌ!!
+CharacterOff
+	ディーア	怪しい2						モティヒツディンヌ……？
+FadeOut	black					.3
+CharacterOff						0
+Se	回想
+ImageEffect	SpriteCamera	Sepia
+	キノコリオンヌ	拡大嬉しい	エフェクト表			0
+FadeIn	black					.3
+	キノコリオンヌ	拡大嬉しい	エフェクト表					決めたわ！　あなた、\nこの王女キノコリオンヌと結婚ねっ！
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	モティ	嬉しい	2_2			0
+	ディーア	怪しい2	1_2			0
+FadeIn	black					.3
+	ディーア	怪しい2						なんか聞いたことあるような……？
+	モティ	嬉しい						……お願いされると聞いちゃう\n健気なところが\nチャームポイントもちっ☆
+	モティ	きらーん
+Tween	モティ	PunchPosition	y=50				NoWait
+	モティ	きらーん						夢は世界征服もちっ！
+	ディーア	怪しい2						さらっとすごい夢持ってるな……
+	モティ	嬉しい						ほらほらっ☆\nモティは名乗ったもちっ☆\n次はイケメンの名前を教えるもちっ！
+	ディーア	驚き2						ああ、オレは\n<param=name>
+Tween	モティ	MoveBy	x=-10				NoWait
+Bgm	凱旋
+	モティ	にやけ						<param=name>……\n汝、病める時も健やかなる時も……
+StopBgm
+	ディーア	本気2						まてまて勝手に結婚式を始めるな!!\nまだモティには\n聞きたいことがあるんだよ！
+Bgm	コメディ
+	モティ	嬉しい						えっなになに？\nなんでも明るく答えちゃうもちっ☆
+	ディーア	驚き2						アリス様とはどういう関係なんだ？
+	モティ	本気
+Tween	モティ	MoveBy	x=10				NoWait
+	モティ	本気						……ああ、アリス……\nアリスね…………\n……前の主……もち……
+	ディーア	汗2						全然明るくないな……
+	ディーア	驚き2						主ってことは、もちひつじとして\n飼われてたってことか……？
+	ディーア	怒り2						どうしてアリス様から\n逃げてきたんだ？
+	モティ	驚き						それは……！
+	モティ	泣き
+Tween	モティ	PunchPosition	y=50				NoWait
+	モティ	泣き						それは……もちひつじの絶滅を\n食い止めるためもちっ！
+	ディーア	驚き2						絶滅を……？
+	モティ	泣き						そうもちっ！\nでもそのためには\n子どもを作る必要があって……
+	モティ	嬉しい						だからイケメンを見つけて\n適当にケッコンすることにしたもち☆
+	ディーア	本気2						適当にケッコンするな！
+	モティ	怒り						だけどアリスはモティと離れるのが\n寂しいって泣くんだもち
+	モティ	泣き
+Tween	モティ	PunchPosition	y=50				NoWait
+	モティ	泣き						『行かないでぇ！\n　モティヒツディンヌーー!!』\nってしつこいもち
+	ディーア	怪しい2						絶対嘘だろ……
+	モティ	嬉しい						だからアリスに黙って\n家出してきたもちーっ☆
+Tween	ディーア	MoveBy	x=30				NoWait
+	ディーア							よし、アリス様に知らせよう\nすみませーん！ アリス様ー……
+	モティ	怒り
+Tween	モティ	MoveBy	x=30				Add
+Tween	モティ	PunchPosition	y=50				Add
+	モティ	怒り						もちぃーーーーっ!?\n待ってもちっ！
+Tween	モティ	MoveBy	x=-10				NoWait
+	モティ							お願いもちっ！\n絶滅を止めたいのは本当もちっ！\n協力して欲しいもちーー！
+Tween	モティ	ShakePosition	x=5				NoWait
+	モティ	泣き						アリスに引き渡されたら\nもちひつじはもう、\n絶滅するしかぁ……！
+CharacterOff
+	モティ	拡大泣き	エフェクト表					お願い……助けて！ もちっ！
+CharacterOff
+	モティ	泣き	2_2
+	ディーア	怪しい2	1_2					……はぁ、分かった\nすぐ引き渡すようなことはしない\nしばらくは一緒に居るのも構わない
+	ディーア	怒り2						だけど、アリス様に戻って来いって\n言われたらちゃんと戻るんだぞ？
+	モティ	にやけ						分かったもちー!!\nじゃ、式の準備を始めるもちっ!!
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						全然分かってないよな!?
+FadeOut	black					.5
+CharacterOff
+Bg	市街地A
+Bgm	都市
+	ディーア	汗2	画面外_右
+FadeIn	black					.5
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1.5				NoWait
+	ディーア	汗2						はぁ……バタバタしたけど\nこれでようやく酒場に……
+CharacterOff
+	メダルもち		画面外_右
+Se	風1
+Tween	メダルもち	MoveTo	x=-800 time=5				NoWait
+	メダルもち							もちもちーっ！
+CharacterOff
+	ディーア	驚き2						…………えっ!? もち!?
+CharacterOff
+	ダイヤもち		2_2
+	エメもち		画面外_左
+Tween	エメもち	MoveTo	x=-90 time=2				NoWait
+	エメもち							もちもちー！
+	ダイヤもち
+Tween	ダイヤもち	PunchPosition	y=50				NoWait
+	ダイヤもち							もちもち、もちっ？
+CharacterOff
+	ディーア	悔しい2						な……な、なんだこれ……!?
+CharacterOff
+	錬金もち		画面外_左
+Se	風1
+Tween	錬金もち	MoveTo	x=800 time=4.5				NoWait
+	錬金もち							もっちもっちもー！
+CharacterOff
+	ディーア	驚き2						も、もちひつじが、増えてる!?
+	ディーア	悔しい2						な、なんで!?\n絶滅危惧種がこんなにたくさん\n集まるはずが……!?
+CharacterOff
+	旅人							なんだ？\n君はまだ知らないのか？
+CharacterOff
+	ディーア	驚き2						……えっ？
+CharacterOff
+	旅人							奇跡だ、奇跡が起きたんだよ！\nちも様の御業だ！
+	旅人							さぁ、ちも様を崇めろー!!
+CharacterOff
+	通りすがりの女性							ああ、女神ちも様ー!!\nどうか、私たちの祈りを\n聞き届けてください！
+CharacterOff
+	フェニックスもち
+Tween	フェニックスもち	PunchPosition	y=50				NoWait
+	フェニックスもち							もちもちもー！
+CharacterOff
+	モティ	嬉しい	2_2
+	ディーア	悔しい2	1_2					『女神ちも様』って、誰……？
+	モティ							なんか、お祭りみたいもちーっ☆
+CharacterOff
+	通りすがりの女性							そう、今日はお祭りよ！\n記念すべき日をお祝いしましょう！
+CharacterOff
+	ディーア	汗2						ええ……？
+CharacterOff
+	旅人							もちひつじの、いや我々の神\n『女神ちも様』が降臨された\n記念すべき日だ
+CharacterOff
+	通りすがりの女性							もっと崇め奉り、\n信仰心を示さなければ……！
+CharacterOff
+	ディーア	汗2						どうなってるんだ……？
+FadeOut	black					.7
+CharacterOff						0
+Bgm	穏やか
+Bg	酒場1F
+	リディ	悲しい2
+Wait						1
+FadeIn	black					.5
+	リディ	悲しい2						マスター遅いなぁ……
+	リディ	怒り2						よーし、決めた！\nもう迎えに行っちゃおう！
+	リディ	笑い2						そろそろ\n街に戻ってるかもしれないし！
+Se	走る
+Tween	リディ	MoveTo	x=-700 time=2	easeOutSide			NoWait
+Wait						.5
+FadeOut	black					.5
+CharacterOff						0
+Bg	市街地A
+Bgm	都市
+	リディ	驚き2				0
+FadeIn	black					.5
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	驚き2						わっ!?\nなにこれ……！
+CharacterOff
+	旅人							ちも様万歳ー!!
+Tween	リディ	PunchPosition	y=50				NoWait
+CharacterOff
+	ダイヤもち		画面外_右
+	通りすがりの女性							ちも様ー!!\n私のお祈りも叶えてくださいー！
+	旅人							女神ちも様ー!!
+Se	風1
+Tween	ダイヤもち	MoveTo	x=-800 time=4				NoWait
+	ダイヤもち							もちもちー！
+CharacterOff
+	リディ	驚き2						えっ、なになに!?\nお祭りでも始まったの!?
+CharacterOff
+	ちも	悲しい？						ちもちもー……
+CharacterOff
+	旅人							ちも様、どうか聞いてください
+	旅人							えーー、ここで一句……\nちもちもち　もちもちもちも\nちもちもち
+	旅人							さあどうか、\n私の祈りを叶えてください！
+CharacterOff
+	研究員							なんだそのふざけた句は！\nちもちもしか言ってないじゃないか！
+CharacterOff
+	旅人							なんだと！\nこの奥ゆかしさが分からないのか！
+CharacterOff
+	研究員							ちも様ー！ こいつより先に\nどうか僕の祈りを\n聞いてください！
+Tween	研究員	PunchPosition	y=50				NoWait
+	研究員							あなたともちひつじたちとの\n明るい未来を描いた漫画を\nカラーで100ページ描きました!!
+CharacterOff
+	旅人
+Tween	旅人	ShakePosition	x=5				NoWait
+	旅人							横入りするな貴様ー!!
+CharacterOff
+	研究員							どっちが横入りだー！
+CharacterOff
+	ちも	悲しい？
+Tween	ちも	ShakePosition	x=5				NoWait
+	ちも	悲しい？						ち、ちもちも……
+CharacterOff
+	リディ	驚き2						大変だ！\nあの囲まれてる子、震えてる……！
+	リディ	怒り2						周りのみんなは喧嘩してるし\n今の内に……！
+CharacterOff
+	リディ	怒り2	画面外_右
+	ちも	悲しい？						ちも…………
+Tween	リディ	MoveTo	x=120 time=1.5				NoWait
+	リディ	怒り2						こっちにおいで……！
+	ちも
+Tween	ちも	PunchPosition	y=50				NoWait
+	ちも	嬉しい？						……ちもちもっ！
+Tween	ちも	MoveBy	x=10
+Se	走る
+Tween	リディ	MoveTo	x=800				Add
+Tween	ちも	MoveTo	x=800				NoWait
+Wait						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+Bgm	マイページ
+	リディ	通常2
+FadeIn	black					.5
+	リディ							とりあえず、ここまでくれば\n街の人には見つからないよ！
+	リディ	笑い2						大丈夫だった？\nえーと、お名前は……
+CharacterOff
+	ちも	拡大きらーん	エフェクト表					ちもちもっ♪\n（初めまして、リディさん\n　私は神獣ちも、といいます）
+CharacterOff
+	リディ	驚き2	1_2
+	ちも	にやけ	2_2					（尊いあなたにお会いできて光栄です\n　まさかリディさんに助けて\n　もらえるなんて、なんという幸福）
+	ちも							（はぁ……ずっと、ずっと\n　お会いしたかったです\n　はぁ、リディさん……）
+	リディ	驚き2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	驚き2						え、あれっ!?\nいま『ちもちも』しか\n言ってなかったよね？
+	リディ	怒り2						なんで言ってること分かるんだろう？
+	ちも	通常						もちもちもー！もちっ！\n（この私、神獣ちもだけに\n　備わった能力を使って、）
+	ちも							（あなたの頭に直接語りかけています\n　そして突然ですが、リディさん！）
+	ちも	にやけ						（私は、推しであるあなたを\n　前にして、テンションが\n　ハイパー高まりマウンテン、です）
+	ちも	きらーん						（どうか、これからずっと永遠に\n　私の側にいていただけませんか？）
+	リディ
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							えっ？\n永遠にって……ええっ!?
+CharacterOff
+	ディーア	驚き2	画面外_左
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1				NoWait
+	ディーア							リディ!?
+CharacterOff
+	ちも	驚き	2_2
+	リディ	驚き2	1_2					ま、マスター!?
+	ちも
+Tween	ちも	PunchPosition	y=50				NoWait
+	ちも	驚き						ちもっ？
+CharacterOff
+	モティ	通常	2_2
+	ディーア	驚き2	1_2					側にいるのはまさか……\n噂の女神ちも!?
+	モティ	きらーん						そうもちっ！\nモティが言うんだから間違いないっ！
+CharacterOff
+	リディ	怒り2						ちょっとマスター!?\nまた知らない女の子連れてるの!?
+CharacterOff
+	モティ	嬉しい	2_2
+	ディーア	汗2	1_2					あっ……\nいや、リディ……これには訳が……
+CharacterOff
+	ちも	怒り						ちもっ！\n（見つかってしまいました\n　もう逃げるしかありません）
+CharacterOff
+	ディーア	驚き2						えっ!?\n今『ちもっ！』しか言って\nなかったよな!?
+CharacterOff
+	リディ	驚き2						なんかね、頭に直接\n翻訳して語りかけてるんだって
+CharacterOff
+	モティ							テレパシーみたいな？
+CharacterOff
+	ちも							ちも！\n（仕方ないです、\n　今一度名乗りましょう）
+CharacterOff
+	ちも	拡大通常	エフェクト表					（立てばもちもち、座ればふにふに、\n　歩く姿はぷにぷにもちもち\n　我が名は神獣ちも、と申します）
+CharacterOff
+	ちも	嬉しい						（これより尊敬してやまない\n　私の最推し、リディさんを連れて\n　逃げます、おわかり？）
+	ちも	怒り						（だから邪魔をしないでください）
+CharacterOff
+	ディーア	怪しい2						どう考えても『ちも』に含まれる\n文章量じゃない……
+	ディーア	本気2						ってちょっと待て！\n勝手にリディを連れて行くな！
+CharacterOff
+	リディ	驚き2	1_2
+	ちも		2_2					ちもっ！
+Tween	ちも	MoveTo	x=800 time=2				NoWait
+Se	走る
+Tween	リディ	MoveTo	x=800 time=2				NoWait
+	リディ	驚き2						あっ、ちょっと待って、\n引っ張らないでー！
+CharacterOff
+	ディーア	本気2						待て!!\nリディを返せー！
+Se	走る
+Tween	ディーア	MoveTo	x=800
+CharacterOff
+	モティ	驚き
+Tween	モティ	PunchPosition	y=50				NoWait
+	モティ							あっ、まってもちーっ☆
+CharacterOff
+Bgm	バトル
+	モティ	拡大通常	エフェクト表					よーし、二人の愛の大冒険っ！\nはじまりはじまりー！ もちっ☆
+FadeOut	black					.5
+CharacterOff						0
+Bg	草原A
+	リディ	驚き2	1_2			0
+	ちも	怒り	2_2
+StopBgm
+Wait						2
+FadeIn	black					0
+	リディ	驚き2						あっ……
+CharacterOff
+	ディーア	怪しい2						……えっ？ 近っ……
+CharacterOff
+	ちも	怒り	2_2
+	リディ	驚き2	1_2					ここ、まだ街外れだよね……？
+	ちも	怒り						もちもーち♪\n（くっ……！）
+	ちも							（ここまでくれば\n　誰も来ないと思っていたのに\n　意外とやりますね）
+CharacterOff
+	ディーア	汗2						え、ああ、どうも……？
+CharacterOff
+	モティ	嬉しい	画面外_右
+Se	走る
+Tween	モティ	MoveTo	x=0 time=1				NoWait
+Bgm	作戦会議
+	モティ							追いついたー♪ もちっ☆\nふぅ！ これ以上ないほど熱くて\n最高の冒険だったぁ……！
+CharacterOff
+	ディーア	怪しい2						モティ？ オレたち\n大して移動してないぞ？
+CharacterOff
+	モティ	にやけ						ああ、キミがモティのピンチに\n駆けつけてくれた時の言葉は\nシビれたもち……
+Tween	モティ	PunchPosition	y=50				NoWait
+	モティ							『オレが来たからにはもう安心だぜっ\n　こんな魔物ひとひねりさ☆』って！\nきゃー！ かっこいい！
+CharacterOff
+	ディーア	汗2						いや魔物いなかっただろ
+CharacterOff
+	モティ	にやけ						モティが怪我をして動けない時も……
+	モティ							『目を開けてくれ！ オレには……\n　オレにはお前が必要なんだ！』って\nきゃー！ かっこいい!!
+CharacterOff
+	ディーア	怪しい2						いや怪我もしてないだろ
+CharacterOff
+	モティ	にやけ						それでも襲い来る敵からモティを\n守り続ける姿を見てモティは\n決意を新たに……
+CharacterOff
+	ディーア	怪しい2						妄想から戻ってこなさそうだな……\n……まあいいか
+	ディーア	本気2						さあ、ちも！\nリディは返してもらうぞ！
+CharacterOff
+	リディ	驚き2	1_2
+	ちも	怒り	2_2					ちも！ もちもち、ちもも♪\n（リディさんは返しません）
+	ちも	通常						（なぜなら私の方がリディさんを\n　大切にするからです）
+	ちも	怒り						（女神である私は\n　あなたのリディさんへの仕打ちなど\n　全部お見通しなのです）
+	ちも							（こんなに可愛らしくて優しくて\n　尊いリディさんを放っておくなんて\n　あなたはダメな人です、はい論破）
+CharacterOff
+	ディーア	悔しい2						ぐっ……確かにいつも一人で\n待たせて申し訳ないと思ってるけど！
+	ディーア	本気2						リディがいないと困るんだ\nちも、リディを返してくれ！
+CharacterOff
+	リディ	照れ2	1_2
+	ちも		2_2					もーちもちっ♪\n（何を言っても無駄です）
+	ちも							（私は大好きなリディさんと\n　離れる気はありません）
+CharacterOff
+	モティ	怒り
+Tween	モティ	PunchPosition	y=50				NoWait
+	モティ	怒り						ねーねー、ケッコンはー？
+CharacterOff
+	ディーア	悔しい2						ごめんモティ、\n今それどころじゃないんだ
+CharacterOff
+	モティ	拡大泣き	エフェクト表					もちーーーーっ!?
+CharacterOff
+Bgm	絶望
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏
+	モティ	怒り						…………神獣ちも\n絶対、許さない……もちっ
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2						えっ、モティ？
+CharacterOff
+	モティ	怒り						……リディさんを返してくれないと\nモティがケッコンできないじゃんっ!!
+CharacterOff
+	ディーア	汗2						いや、そこはあまり関係ないかも……
+CharacterOff
+	モティ	怒り						リディさんを返すもちーっ！
+CharacterOff
+	ちも	怒り						ちもっ！\n（ダメに決まっています）
+CharacterOff
+	モティ	泣き						どうしてもダメっ？\nどうしてもリディさん\n返してくれないの？
+CharacterOff
+	ちも	嬉しい						もち♪
+CharacterOff
+	ディーア	怪しい2						意味が分かる二文字だ……
+CharacterOff
+	リディ	驚き2						確かに……
+CharacterOff
+	モティ	怒り						こうなったら……モティも\n本気を出すしかない……!!
+	モティ	怒り						モティの恋路を邪魔する者は\nもちひつじの角に刺されるもちっ!!
+CharacterOff
+	ディーア	驚き2						ま、まさかモティ、\nここでちもと戦闘を……!?
+	ディーア	悔しい2						ちょっと待て！\nもう少し話し合ってから……!!
+CharacterOff
+StopBgm
+Param	character_grayout=false
+	集中線		エフェクト表
+	モティ	拡大通常	エフェクト裏					『推し変』の時間もちーっ!!
+Param	character_grayout=true
+CharacterOff
+	モティ	きらーん	2_2
+	ディーア	怪しい2	1_2					…………えっ？
+Bgm	コメディ
+	モティ
+Tween	モティ	PunchPosition	y=50				NoWait
+	モティ							ちもを『推し変』させるもちっ☆
+	ディーア	汗2						推し……なんて？
+	モティ	嬉しい						ちもの『推し』が\nリディさんなら、\nその推しを変えさせれば解決もちっ☆
+	ディーア	怪しい2						……そんなことできるのか？
+	モティ	きらーん						ふふーん♪ 簡単もちっ☆
+	モティ							モティはモティの推しである\nキミの素晴らしさを\n布教すればいいだけもちっ☆
+	ディーア	驚き2						え、オレ!?
+	モティ	嬉しい						そうすれば、ちもはキミに\nメロメロになって、リディさんを\n返す気になるもちっ☆
+	モティ	きらーん						ふっふっふ♪\nモティのライバルが増えちゃうけど\n問題ないもち！
+	モティ							ライバルは多ければ多いほど\n燃えるもちっ☆
+	モティ	にやけ						だから、成功して全部解決したら\nケッコンしてね！ もちっ☆
+CharacterOff
+	ちも	悲しい						ちもっ！ もちもーち！\n（ひどいです）
+	ちも	怒り						（私の愛を試そうなんて\n　いかがなものかと思うのですが）
+	ちも							（そんな乱暴なことを言われたら\n　ますますリディさんは渡せませんね\n　あなたたちのせいです、あーあ）
+CharacterOff
+	ディーア	悔しい2	1_2
+	モティ	きらーん	2_2					受けて立つ、って言ってるもちっ☆
+	ディーア	汗2						言ってないだろ!?
+CharacterOff
+Bgm	バトル
+	モティ	きらーん						よーし、作戦開始☆ もちっ☆
+	モティ	嬉しい						あーあ、この人の魅力をまだ知らない\nなんて、もったいないなぁー☆
+CharacterOff
+	ディーア	本気2						本当にやるの!?
+CharacterOff
+	モティ		2_2
+	ちも	怒り	1_2					もちっ？ もちもち？\n（知りませんし、知らなくていいです\n　喜怒哀楽で言うと無、よりです）
+	モティ	にやけ						いやいや、まず顔がいいでしょっ？\nそんなの一目瞭然じゃーん！
+	ちも	きらーん						ちーもー！ ちもー!!\n（それを言うなら、リディさんの\n　美しさの方が明らかに上です）
+	ちも	にやけ						（360度どこから見てもかわいい\n　とぅんく、好き）
+CharacterOff
+	リディ	照れ2						え、えへへー？\n照れるなぁ……！
+CharacterOff
+	ちも	怒り	1_2
+	モティ	怒り	2_2					困ってる人がいたら絶対助けるし！\n誰も見捨てない強さがあるし！
+CharacterOff
+	ディーア	汗2						いや、モティ？ オレたち\nまだ会ったばっかり……
+CharacterOff
+	モティ	怒り	2_2
+	ちも		1_2					もちもちっ！ もちー♪\n（リディさんは私を助けてくれた\n　優しさの塊のようなお方です）
+	ちも							（もはや聖なる輝きそのものです）
+	モティ	怒り						ふーん？\nでもでもっ、こっちの推しには\n筋肉もあるもち！
+	モティ	にやけ						今魔界でモテまくると噂の\n着やせする細マッチョもちっ☆
+	モティ	嬉しい						どうもち？\n今ならお買い得もちっ！
+CharacterOff
+	ディーア	怪しい2						セールスみたいになってる……
+CharacterOff
+	ちも							もちー？\n（リディさんは存在するだけで\n　完璧なのです）
+	ちも							（筋肉は必須ではない）
+CharacterOff
+StopBgm						3
+	ディーア	怪しい2	1_2
+	リディ	通常2	2_2					……すごい白熱してるねぇ
+	ディーア	驚き2						そうだなー
+	ディーア	あはは2						……白熱しすぎて\nもはやリディが解放されてるな
+	リディ	照れ2						……えへへ\nただいま、マスター♪
+	ディーア	あはは2						ああ、おかえり
+CharacterOff
+Bgm	バトル					2
+	ちも	怒り	1_2
+	モティ	怒り	2_2					もーー！\nどうしてこの良さが\n分からないもちーっ!?
+	ちも	怒り						もちもちもっ！\n（それはこちらのセリフです）
+	ちも							（リディさんの魅力に気づくのです\n　気づくのですぅ！）
+CharacterOff
+StopBgm						1
+	リディ	通常2	2_2
+	ディーア	汗2	1_2					モティ、やっぱり会ったばかりの\nオレをプレゼンしても\n説得力ないって……
+Bgm	神秘					1
+	リディ	驚き2						えっ、でも、間違ってないよ？
+	ディーア	驚き2						え、そうか……？
+	リディ	笑い2						マスターは優しいし、強いよ！\nそれは本当のことだもん
+	ディーア	あはは2						そっ、それを言うなら、リディだって\nちもの言う通り、かわいいし\n人一倍優しいよ
+	リディ	照れ2						えーそうかなあ\nえへへ♪
+StopBgm
+CharacterOff
+	モティ	拡大驚き	エフェクト表					もっ!?
+CharacterOff
+	ちも	拡大驚き	エフェクト表					ちっ!?
+CharacterOff
+Bgm	神秘
+	リディ	照れ2	2_2
+	ディーア	あはは2	1_2					……あんまり褒めるなよリディ\n照れるだろー
+	リディ	照れ2						もう、マスターこそやめてよー♪
+CharacterOff
+	ちも	驚き	1_2
+	モティ	怒り	2_2					キャッキャウフフしてる……
+Tween	ちも	ShakePosition	x=5				NoWait
+	ちも	驚き						もっちもちも……\n（キャッキャウフフ……）
+CharacterOff
+Param	character_grayout=false
+Se	ラブ
+	オーラ桃		エフェクト裏
+	リディ	照れ2						えへへ、ほめ過ぎだって、もう♪\nマスターったら
+Param	character_grayout=true
+CharacterOff
+	ちも	にやけ						も……もちーーーーっ!!\n（今まで見たこともない笑顔……\n　ああ、リディさん、幸せそう……）
+	ちも	きらーん						（推しが幸せな日々、すなわち幸せ\n　幸せな推しはこれすなわち正しさ\n　よってこれがちもの最推し……）
+	ちも	にやけ						（ああ……\n　マスターと接してる時のリディさん\n　尊みが深いまじ無理しんどい……）
+FadeOut	white					2
+Wait						1
+StopBgm
+CharacterOff						0
+	ディーア	笑い2	1_2			0
+	リディ	笑い2	2_2			0
+Bgm	平和
+FadeIn	black					1
+	ディーア							いやぁ、何だかよく分からないけど\n無事解決して良かったな！
+	リディ							これでやっと酒場に帰れるね！\nちもちゃん、モティちゃん\nこれからよろしくね♪
+CharacterOff
+	ちも	にやけ						ちもっ!!\n（もちろんですリディさん）
+	ちも	嬉しい						（私も同じ場所に帰れるなんて……\n　嬉しさの極みです\n　やはりリディさんは天才）
+CharacterOff
+	ディーア	汗2	1_2
+	モティ	嬉しい	2_2					えへへ、モティの大活躍っぷり\nすごかったでしょっ！
+	ディーア	汗2						モティが大活躍というより、\nちもが何かを悟ったっぽいけど
+CharacterOff
+	ちも							ちーもっ！ もっちもち！\n（その通りです）
+	ちも							（私はマスターと一緒にいる\n　リディさんが尊いと気づきました）
+	ちも	にやけ						（あの笑顔……思い出しただけで\n　涙腺が崩壊します\n　ぴえぇぇぇん）
+CharacterOff
+	ディーア	汗2	1_2
+	モティ	きらーん	2_2					ほら、モティの凄さに号泣してるもち
+	ディーア	怪しい2						絶対違うから
+CharacterOff
+	リディ	驚き2						あっ、そういえば\n街はどうなったのかな？\nお祭りみたいになってたけど
+CharacterOff
+	ディーア	驚き2						ああ……まあ、\nちもはこの通り落ち着いてるし、\nきっと街の人たちも正気に戻って……
+FadeOut	black					.5
+CharacterOff
+Bg	市街地A
+Bgm	コメディ
+	旅人
+	メダルもち		画面外_右
+FadeIn	black					.5
+Se	風1
+Tween	メダルもち	MoveTo	x=-800 time=4				NoWait
+	メダルもち							もちもちーっ！
+	旅人
+Tween	旅人	PunchPosition	y=50				NoWait
+	旅人							ちも様ー!!\nちも様はどこにーーーー！
+CharacterOff
+	本もち		画面外_左
+	市場のおばちゃん
+Tween	市場のおばちゃん	ShakePosition	x=5				NoWait
+	市場のおばちゃん							女神ちも様ぁー！\n私の書いたもちひつじ小説を\nどうか読んでくださいー！
+Tween	本もち	MoveTo	x=-180				NoWait
+	本もち							もーちもちっ！ もっちもー！
+CharacterOff
+StopBgm
+	ディーア	驚き2						………………
+CharacterOff
+	リディ	驚き2						………………
+CharacterOff
+Param	character_grayout=false
+	モティ	驚き	2_2
+	ちも	驚き	1_2
+Tween	モティ	PunchPosition	y=50				NoWait
+Tween	ちも	PunchPosition	y=50				NoWait
+	ちも&モティ							…………もちっ
+CharacterOff
+Se	打1
+	ディーア	本気2						全っ然解決してない!!!!
+CharacterOff
+Bgm	緊迫
+	アリス	笑い						ふははは！\n無様だなぁ魔剣使い
+CharacterOff
+	ディーア	驚き2						アリス様っ!?
+CharacterOff
+	モティ	怒り
+Tween	モティ	PunchPosition	y=50				NoWait
+	モティ	怒り						うわっ！ アリスーー!?
+CharacterOff
+	アリス							この魔帝アリスが、親切に街の異変を\n知らせてやったというのに
+	アリス							貴様は呑気にもちひつじと\n戯れただけで\n全て解決した気になっていたのか？
+CharacterOff
+	ディーア	驚き2						いや、でも、街の異変の原因は……！\n……あれ？
+	ディーア	怪しい2						……そういえば、異変の原因\n分かってないな……？
+	ディーア	驚き2						ちも、お前じゃないのか？
+CharacterOff
+	ちも							もちも？ ちもちもちーっ！\n（私ではありません）
+	ちも							（強いて言えば\n　魅了の力があるくらいです）
+CharacterOff
+	フェニックスもち		画面外_左
+	ディーア	怪しい2						じゃあ、街の人がおかしいのは\nちもに魅了されてるせい、か
+Tween	フェニックスもち	MoveTo	x=800 time=4				NoWait
+	フェニックスもち							もちもちーっ！
+CharacterOff
+	リディ	驚き2						あれ、じゃあ\nあのもちひつじちゃんたちは？
+CharacterOff
+	ディーア	怪しい2						それも、ちもの力じゃないのか？
+CharacterOff
+	ちも	怒り						もちもちー？ もちっ！\nもちもちもーち！ もっちもちー♪\n（違います）
+CharacterOff
+	ディーア	驚き2						えっ？ 違うのか？\nじゃあ、他に原因が……？
+CharacterOff
+	女の子
+Tween	女の子	PunchPosition	y=50				NoWait
+	女の子							あーっ！ 女神ちも様！\nお願いです、私にもかわいい\nもちひつじを恵んでくださいー！
+CharacterOff
+	モティ		2_3_b					……もちっ☆
+FadeOut	white					.3
+Wait						.3
+StopBgm
+Se	光1
+	ダイヤもち		2_2
+FadeIn	white					.3
+Tween	ダイヤもち	PunchPosition	y=50				NoWait
+Tween	ダイヤもち	MoveBy	x=50
+	ダイヤもち							もちーっ♪
+CharacterOff
+	ディーア	驚き2						……え？
+	ディーア	本気2						ええええええっ!?
+CharacterOff
+Bgm	緊迫
+	アリス	蔑み						はぁ……\nこれで貴様も理解しただろう
+	アリス	通常						街に居るもちひつじは\n全てこいつが生み出した、\nただの幻だ
+CharacterOff
+	モティ	嬉しい						えへへー☆
+CharacterOff
+	リディ	驚き2						モティちゃんが!?
+CharacterOff
+	モティ	嬉しい						あれ、言ってなかったっけ？\nモティには祈りを叶える\n力があってねー？
+	モティ	きらーん						そこにいるちもだって、\nモティが作ったんだもちっ☆
+CharacterOff
+	ディーア	本気2						ええっ!?\nちもを、モティが!?
+CharacterOff
+	ちも							ちももー……\n（ええ、その通りです）
+	ちも	嬉しい						（何を隠そう、私は他ならぬ\n　聖人リディ様の祈りを元にして）
+	ちも	通常						（モティヒツディンヌによって\n　生み出されたのです）
+CharacterOff
+	リディ	驚き2						えっ!? リディの祈り？
+	リディ							……あっ、そういえば\nもちが喋ったらいいなーみたいなこと\n願ったかもしれない
+CharacterOff
+	ディーア	怪しい2						モティがそれを叶えて\n『女神ちも』が生まれたのか……
+	リディ	怒り2						もうっ！ 元々は、マスターが\n全然帰ってこないのが\n悪いんじゃん！
+	ディーア	汗2						ご、ごめん……
+CharacterOff
+	アリス							これはこれは傑作だな\n結局は全て貴様のせいということだ
+CharacterOff
+	モティ	怒り
+Se	打1
+Tween	モティ	PunchPosition	y=50				NoWait
+	モティ							それは違うもちー!!\n元はといえば全部アリスのせいもち
+CharacterOff
+	アリス	蔑み						……あ？
+CharacterOff
+	モティ	怒り						アリスがモティを飼ってた時\nモティに祈ったじゃんっ！
+	モティ	にやけ						『はぁ、貴様はもっと\n　可愛げというものが必要だぞ\n　魔剣少女のように、な』
+	モティ	怒り						とかなんとか言って！\nモティはその祈りを喰って\nこの姿になったんだもんっ！
+	モティ	通常						それで他の人の祈りも叶えられる\nようになったんだもんっ！
+	モティ	きらーん						だから、こうなったのはぜーんぶ\nアリスのせいー☆
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏
+	アリス							………………ほう
+Param	character_grayout=true
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2
+Tween	ディーア	ShakePosition	x=5				NoWait
+	ディーア	悔しい2						す、すごい事実が暴露されている……
+	リディ	怒り2						マスター、リディたち\nこれ聞いちゃってていいのかな……
+	ディーア	絶望2						いや、ダメかも……
+CharacterOff
+	モティ	嬉しい						そんなことも分からないなんて\nアリスは本当にアホだなー！
+	モティ	きらーん						ほらアリス！\nみんなに謝るもちー☆
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2					ちょっ……!?
+	リディ	驚き2						アリス様に、アホって言った……！
+CharacterOff
+	アリス							……いいだろう\nちょうど特別な茶会を開こうと\n考えていたところだ
+	アリス							この場の全員を招待して、\nジンギスカンパーティといこう
+CharacterOff
+	ディーア	絶望2						えっ……
+CharacterOff
+	モティ	嬉しい						やったー！\nパーティ大好きもちーっ！\nモティも行くもちっ☆
+	アリス							ああ、お前にはもちろん\n来てもらわないとなぁ
+	モティ							えへへー☆\nもちろん最上級のお客として……
+	アリス							<size=40>材料として、な</size>
+CharacterOff
+	モティ	拡大泣き	エフェクト表
+Tween	モティ	ShakePosition	x=5				NoWait
+	モティ							もちーーーーーーっ!?
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	怒り2	1_2					……あの、アリス様？
+	ディーア	悔しい2						モティがこのまま祈りを喰らって\n実現し続けるとしたら\n放っておくのはまずいんじゃ？
+CharacterOff
+	アリス							今のこいつは私の祈りを勝手に食って\nこの姿を得ているに過ぎない
+	アリス							その時に喰らった魔力が多少\n大きかっただけのことだ
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	怒り2	1_2					だったら、その魔力が尽きたら\n全部元通りになるってことか……
+	リディ	悲しい2						えっ、じゃあ\nちもちゃんとモティちゃんは\n時間が経ったら消えちゃうの？
+	ディーア	悔しい2						それは……
+CharacterOff
+	キノコリオンヌ		画面外_右_b
+Tween	キノコリオンヌ	MoveTo	x=250 time=1.5				NoWait
+Bgm	穏やか
+	モティ							全然心配することないもちっ！\nきっとまた会えるチャンスは\nあるもちっ☆
+Tween	キノコリオンヌ	MoveTo	x=800 time=1.5				NoWait
+CharacterOff
+	キノコリオンヌ		画面外_右_b
+	ちも							もーちもちっ♪\n（この限りない推しへの想いがあれば\n　きっとまた会えるはずです）
+Tween	キノコリオンヌ	MoveTo	x=250 time=1.5				NoWait
+	ちも	嬉しい						（なんといっても\n　私は女神ですので）
+Tween	キノコリオンヌ	MoveTo	x=800 time=1.5				NoWait
+	ちも	きらーん						（何なら今すぐに力を見せても\n　良いですよ、だからリディさん\n　私に、圧かけて？）
+CharacterOff
+	キノコリオンヌ		画面外_右
+Tween	キノコリオンヌ	MoveTo	x=0 time=3				NoWait
+	キノコリオンヌ							あ、あのー……
+CharacterOff
+	ディーア	驚き2						え……!?
+CharacterOff
+	キノコリオンヌ							失礼するノコー……
+CharacterOff
+	ディーア	驚き2						キノコリオンヌ!?\nエイプリルフールなら終わったけど？
+CharacterOff
+	キノコリオン		画面外_左
+	キノコリオンヌ		3_3
+Tween	キノコリオンヌ	PunchPosition	y=50				NoWait
+	キノコリオンヌ	泣き						そうじゃないの!!
+	キノコリオンヌ	通常						お取込み中のところ申し訳ないノコ\nでもこの子がね、伝えたいことが\nあるみたいで……
+Tween	キノコリオン	MoveTo	x=-180 time=1.5				NoWait
+	キノコリオン							ノコノコ……
+	キノコリオンヌ	泣き						この子ったら、\nここで6時間も出番を待ってて……
+CharacterOff
+	ディーア	驚き2						で、出番って？
+CharacterOff
+	キノコリオン							……ノコ
+Tween	キノコリオン	ShakePosition	x=5				NoWait
+	キノコリオン							ノコノコノコーッ！\n（大変申し上げにくいのですが\n　お試しのバトルを……！）
+CharacterOff
+	ディーア	驚き2						……え、お、お試し……？\nあっ……!?
+Bgm	バトル
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコノコーッ！\n（お試しバトル、しませんかー!!!!）
+	ディーア	本気2						完全に忘れてたー!!!!
+If	isdebug==true
+CharacterOff
+Jump	*G_424_02
+EndIf
+EndScenario
+
+# G_424_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	市街地A
+	キノコリオン		1_3
+	キノコリオンヌ		3_3
+FadeIn	white					.5
+	キノコリオンヌ	嬉しい						グッジョブよ！ さぁ、\nキノコリオンの森へお帰り！
+	キノコリオン							ノコノコッ！
+Se	風1
+Tween	キノコリオン	MoveTo	x=800 time=4				NoWait
+Wait						1.5
+CharacterOff
+	モティ	泣き						長すぎるお試しクエスト\nだったもち……
+	ディーア	怪しい2						誰のせいだよ……
+	モティ	嬉しい						アリスのせいー☆
+CharacterOff
+	アリス							ほう？\nよほどジンギスカンに\nされたいらしいな
+CharacterOff
+	モティ	泣き
+Tween	モティ	ShakePosition	x=5				NoWait
+	モティ	泣き						いやあぁぁ!!\nもちひつじ虐待はんたーい！
+CharacterOff
+	リディ	笑い2						はぁ、色々ありすぎて疲れたけど\n楽しかったよね！
+	リディ							もうすぐ終わりなのが\nちょっと寂しいくらいだよ\nね？ ちもちゃん
+	ちも	驚き						ちもっ!?\n（リ、リディさんが\n　私との別れを悲しんでいる……!?）
+Tween	ちも	ShakePosition	x=5				NoWait
+	ちも	悲しい						（…………だめです\n　そんな、私のせいで……）
+	ちも							（私は……\n　推しが悲しむところなんて\n　悲しむところなんてっ……!!）
+	リディ	驚き2						えっ、あれ、ちもちゃん？
+	ちも	嬉しい						ちーもちもっ♪\n（さあ行きましょうリディさん）
+CharacterOff
+Se	ラブ
+	ちも	拡大嬉しい	エフェクト表					（やはり私は\n　あなたと離れられない運命でした\n　この手を取ってくれますよね？）
+FadeOut	white					.7
+CharacterOff						0
+Param	character_grayout=false
+	トライアルスチル42401		エフェクト表
+FadeIn	white					.5
+	リディ	<Off>						ちもちゃんったら、\n今度はどこに行くの？
+	ちも	<Off>						ちーもちもっ♪
+FadeOut	black					.3
+CharacterOff						0
+	トライアルスチル42402		エフェクト表
+FadeIn	black					.3
+	ディーア	<Off>						ちょっ、ちも!?\nリディを連れて行くなー！
+	モティ	<Off>						逃がさないよー！ もちっ☆
+	ディーア	<Off>						モティ！ ちょっ、抱き着くなって！
+	モティ	<Off>						モティは絶対諦めないもんっ！\nぜったいぜったい、\nケッコンしてもらうもちーっ☆
+FadeOut	white					.7
+CharacterOff						0
+Bg	夏空
+	　　　　　　　　　　
+FadeIn	white					.5
+	　　　　　　　　　　							こうして、\n魔界は無事平和に<dash=2>
+Se	火事					.5
+Shake	Graphics	ShakePosition	time=3	easeInQuart			NoWait
+Wait						2.7
+StopSe
+CharacterOff						0
+Bg	市街地A					0
+Param	character_grayout=false
+	集中線		エフェクト表			0
+	ディーア	拡大本気2	エフェクト裏					待てーーーーーーーーっ!!\nリディを返せーーーー!!
+CharacterOff
+	ちも	通常	画面外_左_b
+	リディ	驚き2	画面外_左
+Se	走る
+Tween	ちも	MoveTo	x=90 time=1				NoWait
+Tween	リディ	MoveTo	x=-90 time=1				NoWait
+	リディ	驚き2
+	ちも	通常						ちもちもーっ♪
+Se	走る
+Tween	ちも	MoveTo	x=800 time=2				NoWait
+Tween	リディ	MoveTo	x=800 time=2				NoWait
+Wait						.3
+	リディ	驚き2						マ、マスター!!
+CharacterOff
+	ディーア	本気2	画面外_左
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1.5				NoWait
+	ディーア							リディを返せーーーー!!
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=1.5				NoWait
+CharacterOff
+	モティ	通常	画面外_左
+Se	走る
+Tween	モティ	MoveTo	x=0 time=2				NoWait
+	モティ	通常						ねぇねぇ!! ケッコン！\n早くケッコンするもちー☆
+CharacterOff
+	アリス							まったくどこに行くつもりだ？\n戻って来いと何度言えば……
+CharacterOff
+	モティ	怒り
+Tween	モティ	PunchPosition	y=50				NoWait
+	モティ	怒り						うるさいもちっ！\nモティはケッコンするから\n忙しいのっ！
+	モティ	怒り						そんなことも分からないもち？\nアリスのばーーーーか!!!!
+CharacterOff
+	キノコリオンヌ	嬉しい						ちょっと待ってよ王子ぃっ！\n王子は私とケッコンでしょー!?
+CharacterOff
+	モティ	怒り						なに言ってるもちっ!?\nキノコは寄るなもちー！
+CharacterOff
+	ディーア
+Tween	ディーア	ShakePosition	x=10				NoWait
+	ディーア	本気2						待ってくれ、リディーー!!
+CharacterOff
+	　　　　　　　　　　							……平和にならなかったのでした
+CharacterOff
+	リディのもち		エフェクト表					もちもち？\n（めでたしめでたし……もち？）
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*G_424_01
+EndIf
+EndScenario

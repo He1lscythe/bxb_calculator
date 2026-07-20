@@ -1,0 +1,656 @@
+# G_533_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	わくわく
+Bg	夏空					0
+Param	character_grayout=false
+FadeIn	white					.5
+	          							待ちに待った\nサマーシーズン、到来！
+CharacterOff
+Bg	海岸
+	          							海水浴！ キャンプ！\nバーベキュー!!
+Bg	酒場_海辺
+	          							激アツの夏を楽しんじゃえ！
+StopBgm
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A					0
+	オーラ赤		エフェクト裏2			0
+	ディーア	拡大本気2	エフェクト裏			0
+	集中線		エフェクト表			0
+FadeIn	black					.1
+Bgm	緊迫
+	ディーア	拡大本気2						いや暑すぎるだろ!?
+CharacterOff	集中線
+	ディーア	絶望2	2_3					なんなんだ、この猛暑は!?
+	ディーア	本気2						もっと……！\nもっと涼しい夏にしてくれ！
+StopBgm
+	？？？？	<Off>	1_2					あれあれ？\nマスターくん、お願いがあるのー？
+	ディーア	驚き2						……え？
+FadeOut	white					.3
+CharacterOff						0
+	ルナサ	拡大通常	エフェクト表			0
+Bgm	雪の街
+FadeIn	white					.3
+	ルナサ	拡大通常						こんちゃー豊饒の女神\nルナサでーす\nおそなえものありますかー？		1598-16
+	ルナサ	拡大通常						ルナサがキミのお願い、\n叶えてあげるよー♪
+	          							<color=blue>新魔剣お試しコーナーへ続く</color>
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_533_01
+EndIf
+EndScenario
+
+# G_533_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	市街地A					0
+Param	character_grayout=false
+	オーラ赤		エフェクト裏
+	ディーア	絶望2				0
+FadeIn	white					.5
+	ディーア	絶望2						はぁ……\nあつい、あつすぎる……
+	ディーア	絶望2						こんな日も任務なんて、\n魔剣機関はどうなってるんだ……
+	ディーア	怒り2						でも、やっと任務も片付いた、\nようやく休めるぞ
+FadeOut	white					.3
+CharacterOff						0
+Bg	海岸					0
+	ナナツサヤ	水着	2_3			0
+	ウル	通常	1_3			0
+	ノートゥング	水着	3_3			0
+	          
+FadeIn	white					.3
+	ディーア	<Off>						みんなと水着で\nキャッキャウフフな夏を\n過ごすんだ……
+FadeOut	white					.3
+CharacterOff						0
+Bg	市街地A					0
+	ディーア	にやけ2				0
+FadeIn	white					.3
+	ディーア	にやけ2						えへへへへ……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						っと、その前に\nキンッキンに冷えた部屋で休もう！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	笑い2	画面外_右			0
+Tween	ディーア	MoveBy	x=-600 time=2				NoWait
+FadeIn	black					.3
+	ディーア	笑い2						ただいまー
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						あっつ!? なんだこの温度!?\nまさかエアコンが壊れて<dash=2>
+StopBgm
+	ディーア	驚き2						<dash=2>って、えぇ……!?
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	トライアルスチル5331		エフェクト表			0
+Tween	トライアルスチル5331	MoveBy	y=-480 time=15				NoWait
+FadeIn	white					.3
+Bgm	神秘
+	ルナサの祭壇	<Off>						えへへー\nマスターくん、おかえりー
+	ルナサの祭壇	<Off>						あついねー、あつすぎるねー\nこれじゃ溶けちゃいそうだねー
+	ディーア	<Off>						る、ルナサ!?
+	ルナサの祭壇	<Off>						そうだよー、\n豊饒の女神なルナサだよー
+	ルナサの祭壇	<Off>						なんでマスターくんは\nそんなに驚いてるのかなー？
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						驚くって！ オレのベッドだし、\nそんな恰好だし！
+CharacterOff
+	トライアルスチル5332		エフェクト表
+	ルナサの祭壇	<Off>						減るもんじゃないからいいよー\nエアコンも効かないしー
+CharacterOff
+	ディーア	絶望2						よくないって!?\nこんなとこ見られたら事案だ、事案！
+CharacterOff
+	トライアルスチル5333		エフェクト表
+	ルナサの祭壇	<Off>						と、言いながら\nココから目を離せない\nマスターくんであったー
+	ディーア	<Off>						ぎくっ……！
+	ルナサの祭壇	<Off>						まあいっかー\n服を着るから待ってねー\nうんしょ♪
+FadeOut	black					.3
+CharacterOff
+Bg	酒場_宿屋					0
+	ディーア	汗2	p7b			0
+	ルナサ	通常	p3			0
+Param	character_grayout=true
+FadeIn	black					.3
+	ルナサ	通常						これでいいでしょー？
+	ディーア	笑い2						ああ、よかった……
+	ルナサ	通常						マスターくんは真面目だねー
+Tween	ルナサ	MoveBy	x=10				NoWait
+	ルナサ	通常						あっ、せっかくなら\nこれをお願いにしてもらえば\nよかったかなー？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						えっ？\nお、お願い……？
+Tween	ルナサ	MoveBy	x=20				NoWait
+	ルナサ	通常						うんうん、お願い\n今からでもお願いなーい？
+	ルナサ	通常						例えば……\n夏を涼しくしたいとかー
+	ルナサ	通常						おそなえくれたら、\n叶えてあげるよー？
+	ディーア	本気2						本当か!?\nじゃあ、今すぐ<dash=2>
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						はっ!?
+	黒グラデーション		エフェクト裏
+	ディーア	悔しい2						駄目だ！ ルナサにお願いしたら\n大変なことに<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	鍛冶病院					0
+	鍛冶医クランベリー	怒り2				0
+FadeIn	white					.3
+Bgm	絶望
+	鍛冶医クランベリー	怒り2						ルナサの祭壇
+FadeOut	black					.3
+CharacterOff						0
+Bg	神殿A					0
+	ルナサ	通常				0
+	          
+FadeIn	black					.3
+	鍛冶医クランベリー	<Off>						とある地方の豊饒神の伝承が\n元になった魔剣よ
+	鍛冶医クランベリー	<Off>						祭壇に生命力のあるものを捧げれば、\n豊かな実りを約束するとされるわ
+	鍛冶医クランベリー	<Off>						だけど……
+FadeOut	black					.3
+CharacterOff						0
+Bg	灰の大地					0
+	          					0
+FadeIn	black					.3
+	ディーア	<Off>						ルナサにお願いした者は\nその後、滅びを迎えた
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	悔しい2				0
+	黒グラデーション		エフェクト裏			0
+FadeIn	white					.3
+	ディーア	悔しい2						強力な魔剣ではあるけど、\n安易にお願いをしてはまずいんだ
+StopBgm
+CharacterOff
+	ルナサ	拡大通常	エフェクト表					ほらほら、マスターくん\nお願いどうぞ～
+Param	character_grayout=true
+CharacterOff
+	ルナサ	通常	p3
+	ディーア	汗2	p7b
+	ディーア	汗2						い、今は大丈夫だから！
+Tween	ルナサ	MoveBy	x=-10				NoWait
+	ルナサ	通常						ちぇー、\nつまんなーい
+Bgm	魔剣の日常
+	ディーア	笑い2						それより、ルナサ\n海水浴に行くのはどうだ？\n海ならきっと涼しいぞ！
+	ルナサ	通常						ちょうど水着だもんねー\nそれに海ならおそなえものも、\nたくさんもらえそうだねー
+Tween	ルナサ	MoveBy	x=20				NoWait
+	ルナサ	通常						いいよー\n海でのんびりしよっかー
+	ディーア	通常2						それじゃあ、さっそく出発だ！\nこれできっと\n楽しい夏休みが<dash=2>
+StopBgm
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+Bg	市街地A					0
+	ディーア	拡大絶望2	エフェクト表			0
+	オーラ炎		エフェクト裏			0
+FadeIn	white					.2
+Bgm	緊迫
+	ディーア	拡大絶望2						<size=60>あっつー!!!!!!</size>
+Se	走る
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ルナサ	通常	p3			0
+	ディーア	絶望2	p7b			0
+Param	character_grayout=true
+FadeIn	white					.3
+Bgm	コメディ
+	ディーア	絶望2						はぁ、はぁ……！\nもっと、もっと水を……！
+	ルナサ	通常						うえー、体がヒリヒリするぅ……\nルナサがこげちゃうぅ……
+	ディーア	本気2						なんで\nさっきより暑くなってるんだ……
+CharacterOff
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						マスター、大変!!\n魔界中が異常気象なんだって！
+FadeOut	black					.2
+CharacterOff						0
+Bg	海岸					0
+	オーラ炎		エフェクト裏			0
+Param	character_grayout=false
+FadeIn	black					.2
+	リポーター	<Off>						大変な熱気です！\n先日海開きしたドゥルガー海岸でも\n気温が40度を超えました！
+CharacterOff
+	クマ型モンスター		p3
+	魔物	<Off>						本当に暑いよ魔界、\n火山より暑いですよ
+CharacterOff
+	チョコキノコリオン
+	魔物	<Off>	1_2					もう溶けちゃいそうです
+CharacterOff
+	おばけ1		2_3_m
+	魔物	<Off>	1_2					日焼けしちゃうよ……
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	絶望2	p7b			0
+	ルナサ	通常	p3			0
+Param	character_grayout=true
+FadeIn	black					.3
+	ルナサ	通常						あららー、暑すぎて\nどこの観光地も閉鎖されたってー
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						もしかして……\nずっとこんな夏なのか!?
+Shake	ディーア		x=10				NoWait
+	ディーア	絶望2						せっかくの夏が……！\nキャッキャウフフに過ごす夏が!!
+Tween	ルナサ	MoveBy	x=50				NoWait
+	ルナサ	通常						えへへー♪
+	ディーア	驚き2						…………はっ!?
+Param	character_grayout=false
+CharacterOff
+	ルナサ	拡大通常	エフェクト裏
+	オーラ桃		エフェクト表
+	ルナサ	拡大通常						マスターくん、マスターくん\n豊饒の女神がここにいますよー？
+	ルナサ	拡大通常						おいしいおそなえものとお願い、\n待ってるよー？
+CharacterOff
+	ディーア	絶望2						た、たしかにお願いをしたら\n楽しい夏が戻ってくる……
+CharacterOff
+	ルナサ	拡大通常	エフェクト表					ほらほら、\nマスターくんの業を見せてよー♪
+CharacterOff
+	ディーア	絶望2						オレの願い……\n快適な夏休み、いちゃいちゃ……！
+CharacterOff
+	集中線		エフェクト表
+	理性くん	拡大	エフェクト裏
+	理性くん							ダメだー！
+Param	character_grayout=true
+CharacterOff
+	理性くん	理性	3_3
+	ディーア	驚き2	2_3
+	ディーア							お、お前はオレの中の理性！\n久しぶりだな……！
+	欲望くん	欲望	1_3			1
+	欲望くん							まったく、\nあと少しですっきりしたのに！
+	ディーア	悔しい2						お前はオレの中の欲望！
+Tween	理性くん	PunchPosition	y=30				NoWait
+	理性くん	理性						なにを言ってるんだ！\n欲望に振り回されたら身の破滅だぞ！\nここは我慢だ、我慢！
+	ディーア	汗2						そ、そうだな……！\n夏の暑さも耐えきってみせる！\nオレはお願いに頼らない！
+CharacterOff
+	ルナサ	通常						がんばってるねー\nとっても真面目なんだねー
+	ルナサ	通常						でも、真面目な人ほど、\n業は溜まってるものだよねー？
+CharacterOff
+	理性くん	理性	3_3
+	欲望くん	欲望	1_3
+	ディーア	驚き2	2_3
+	ディーア	驚き2						な、なんだって……！
+CharacterOff
+	ルナサ	通常						だって、マスターくんがほしいのは\nただの夏じゃないでしょー？
+CharacterOff
+	ルナサ	拡大通常	エフェクト表					例えば<dash=2>\nみんなの、み・ず・ぎ……♪
+CharacterOff
+	ディーア	にやけ2
+Shake	ディーア		x=10 time=3				NoWait
+	ディーア	にやけ2						はぅ……！
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	海岸					0
+	イミティション=ロール	通常水着	1_3			0
+	リディ	水着照れ2	2_3			0
+	イミティション=アリス	水着	3_3			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	ルナサの祭壇	<Off>						みんなが水着になって、\n海辺であんなことやこんなことー♪
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場_宿屋					0
+	理性くん	理性	3_3			0
+	欲望くん	欲望	1_3			0
+	ディーア	悔しい2	2_3			0
+FadeIn	white					.3
+	ディーア	悔しい2						くぅ……！
+	理性くん	理性						なんて的確な攻撃だ……！
+	欲望くん	欲望						お前らの防御弱いな
+	ディーア	本気2						ま、まだだ……！\n水着なら、家でも着れる……!!
+CharacterOff
+	ルナサ	通常						早くあきらめればいいのにー\nそのほうが楽になれるのになー
+	ルナサ	通常						でも、家で水着なんて\nマニアックだねー、業が深いねー
+	ルナサ	通常						そういうマスターくんは、\nこっちのほうがお好きだよね～
+CharacterOff
+	ルナサ	拡大通常	エフェクト表					チ・ラ・リ・ズ・ム♪
+CharacterOff
+	理性くん	理性	3_3
+	欲望くん	欲望	1_3
+	ディーア	悔しい2	2_3
+Se	光1
+Shake	ディーア		x=10 y=10 time=3				NoWait
+	ディーア	絶望2						ぐぁああああ!?
+CharacterOff	理性くん					1
+	欲望くん							消滅した!?\n理性弱すぎだろ!?
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	海岸					0
+	雷切丸	水着	1_3			0
+	ミル	水着	2_3			0
+	ルコ	水着	3_3			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	ルナサの祭壇	<Off>						白いワンピに、\nミニスカート、短パンもあるよー？
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	絶望2	p7b			0
+	ルナサ	通常	p3			0
+FadeIn	white					.3
+	ルナサ	通常						いつもは見えないあんなところも、\n遊び中なら見えちゃうかもねー？\nこれは部屋の中じゃ無理だよねー♪
+Tween	ルナサ	MoveBy	x=20				NoWait
+	ルナサ	通常						だから、\nほどほどに暑い夏がほしいでしょー？
+	ディーア	絶望2						くっ……\nで、でもオレは……！
+Tween	ルナサ	MoveBy	x=20				NoWait
+	ルナサ							マスターくん、あきらめて\nルナサと新しい扉、あけようよ♥
+	ディーア	絶望2						あ、新しい扉……？
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	ルナサ	拡大足	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+Bgm	神秘
+FadeIn	white					.3
+	ルナサ	拡大足						そーそー、\n大きくて立派なおそなえものして\n汗だくな扉をあけて
+FadeOut	white					.3
+CharacterOff						0
+	ルナサ	拡大胸	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	ルナサ	拡大胸						ルナサでお願い叶えちゃおうよー♥
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	絶望2				0
+FadeIn	white					.3
+	ディーア	絶望2						くぅ……\nうぅ、うぅ……！
+	集中線		エフェクト表
+	ディーア	本気2						だ、ダメだー！
+Bgm	コメディ
+Tween	ディーア	MoveBy	x=600 time=1				NoWait
+CharacterOff
+	ルナサ							おぉ……!?
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A					0
+	オーラ炎		エフェクト裏			0
+	ディーア	本気2				0
+FadeIn	black					.3
+	ディーア	本気2						こんなの暑くない、\nおそなえものもしない！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						はははは……！\n暑くない、暑くないぞー！\nこたつで鍋も食べれるぞ！
+	ディーア	絶望2						心頭滅却すれば火もまた涼し！\nそう、これが真理<dash=2>はうっ!?
+Shake	ディーア		x=5				NoWait
+Wait						.2
+CharacterOff
+	ルナサ	通常						まだまだ\n気温が上がってるもんねー\nさすがにむりだよー
+CharacterOff
+StopBgm
+	ディーア	絶望2						燃え尽きちまったぜ……\nまっしろにな……
+Tween	ディーア	MoveBy	y=-100				NoWait
+CharacterOff						.5
+Se	倒れる
+Wait						2
+FadeOut	black					.3
+CharacterOff						0
+Bg	草原A(火事)					0
+	          
+FadeIn	black					.3
+Bgm	絶望
+	リポーター	<Off>						見てください、\n魔界が、魔界の夏が燃えています！
+CharacterOff
+	キノコ型火モンスター
+Tween	キノコ型火モンスター	PunchPosition	y=30				NoWait
+	キノコリオン	<Off>	1_2					（あーちーち、あーちー！）
+	キノコリオン	<Off>						（焼キノコリオンに\n　なっちゃうノコー!?）
+CharacterOff
+	リポーター	<Off>						本当に普通の夏なのでしょうか？\nまさかこれは異変<dash=2>
+FadeOut	black					1
+CharacterOff						0
+Bg	宇宙					0
+	オーラ炎		エフェクト表			0
+FadeIn	black					1
+	          							こうして、魔界の夏は燃え盛る
+	          							星の温度は上がり続け、\nやがて魔界は新たな太陽に<dash=2>
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	酒場1F					0
+	ルナサ	拡大通常	エフェクト表			0
+Wait						2
+FadeIn	white					.2
+Se	ポップイン
+	ルナサ	拡大通常						ぴとっ♥
+Param	character_grayout=true
+CharacterOff
+	ルナサ	通常	p3
+	ディーア	驚き2	p7b
+Tween	ディーア	PunchPosition	y=100				NoWait
+Bgm	神秘
+	ディーア	驚き2						ふぉおおお!?\nぴとっとした、ピトッとした!?
+	ルナサ	通常						はい、マスターくん\nドリンクどーぞー\n熱中症にはご注意だよー？
+	ディーア	にやけ2						ごく、ごくっ……！\nはぁああ、生き返った……！
+Tween	ルナサ	MoveBy	x=-20				NoWait
+	ルナサ	通常						まったく、ここまで\n強情な人間は見たことがないよ
+	ルナサ	通常						でもさ、どうして\nそんなにお願いがいやなの？
+	ルナサ	通常						伝承とかで色々言われてるけど、\n魂までとったりしないしー
+Tween	ルナサ	MoveBy	x=20				NoWait
+	ルナサ	通常						諦めてお願いしたほうが\n楽じゃないのー？
+	ディーア	目閉じ2						確かに、そうかもしれないな……
+	ルナサ	通常						でしょー？\nだったら<dash=2>
+	ディーア	怒り2						……でも、\nお願いに頼るのは違うと思うんだ
+	ディーア	通常2						オレたちの旅は安全なものじゃない\n苦しいことも乗り越えていけないこと\nもたくさんある
+	ディーア	目閉じ2						願いを叶えてくれるのは嬉しいけど、\n頼り過ぎたら、いざという時に、\n自分を信じられなくなる
+	ディーア	通常2						それにルナサのことも
+	ルナサ	通常						え……？
+	ディーア	汗2						ルナサを自分だけの都合で使ったら\nいつかルナサを悲しませると思うから
+Tween	ルナサ	MoveBy	x=20				NoWait
+	ルナサ	通常						…………\nえへへー、そっかー
+	ルナサ	通常						やせがまんだねー\n汗だくでかっこよくはないねー
+	ルナサ	通常						でもそういうの、嫌いじゃないなー
+Tween	ルナサ	PunchPosition	y=30				NoWait
+StopBgm
+	ルナサ	通常						じゃあ\nそんなマスターくんに特別サービス\n女神様がヒントをあげよう
+	ディーア	驚き2						ヒント……？
+	ルナサ	通常						こんなに異常な暑さが\n本当に普通の夏だと思う？
+Bgm	キノコリオン
+	ディーア	悔しい2						まさか、どこかに元凶が？
+	ルナサ	通常						マスターくんはどうする？\n暑い外に飛び出して魔界を救うか、\n誰かが助けてくれるのを待つか
+	ディーア	本気2						もちろん、\nオレが選ぶのは……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	固まった溶岩の大地					0
+	ドラゴン型火モンスター		p3			0
+	          
+Param	character_grayout=false
+Wait						1
+FadeIn	black					.3
+Tween	ドラゴン型火モンスター	PunchPosition	y=30				NoWait
+	モエヨドラゴン	<Off>						もっとだ、\nもっと熱くなれよ!!!!
+	モエヨドラゴン	<Off>						これでベストなのか!?\n大丈夫、俺ならできる!!!!
+	集中線		エフェクト表
+	モエヨドラゴン							諦めんなよ!!!!
+CharacterOff	ドラゴン型火モンスター					0
+	ディーア	拡大本気2	エフェクト表			0
+	ディーア	拡大本気2						諦めろ!!!!
+Param	character_grayout=true
+CharacterOff
+	ルナサ	通常	p3
+	ディーア	悔しい2	p7b
+	ディーア	悔しい2						なんでこんなに熱くなってんだよ、\nこの魔物は!?
+	ルナサ	通常						うへー、はやく倒しちゃおー\nルナサがあきらめちゃいそうだよー
+	ディーア	怒り2						ああ、行くぞルナサ！
+CharacterOff
+	ルナサ	拡大通常	エフェクト表					こんちゃー\n豊饒の女神ルナサでーす♪
+If	isdebug==true
+CharacterOff
+Jump	*G_533_03
+EndIf
+EndScenario
+
+# G_533_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	海岸					0
+Param	character_grayout=false
+	ディーア	汗水着2				0
+FadeIn	white					.5
+	ディーア	汗水着2						まさかあの魔物の目的が……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	固まった溶岩の大地					0
+	ドラゴン型火モンスター		p3			0
+	          
+Param	character_grayout=false
+FadeIn	white					.3
+	モエヨドラゴン	<Off>						自分の限界を確かめたかったんだ!!
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	海岸					0
+	ディーア	怪しい水着2				0
+FadeIn	white					.3
+	ディーア	怪しい水着2						なんてはた迷惑な……\n危うく夏休みが燃えるとこだったぞ
+	ディーア	笑い水着2						でも、これでようやく<dash=2>
+FadeOut	white					.3
+CharacterOff						0
+	ミョルニル	水着	p3			0
+	マグロス	水着	p7b			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Tween	ミョルニル	PunchPosition	y=30				NoWait
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	バルムンク	水着	p3			0
+	リナ	水着	p7b			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Wait						1
+Param	character_grayout=true
+CharacterOff	オーラ桃
+	リナ	水着						ますぶーん！ 見てみてー！\nこぶんたちとスイカ割りするぞー!!
+	バルムンク	水着						よーし、バルがいっぱつで\nばーんってわってやるからなー！
+Tween	リナ	PunchPosition	y=30				NoWait
+	リナ	水着						ちょっとバルムンクちゃん\nそれはおやぶんがやるのー！
+Tween	バルムンク	PunchPosition	y=30				NoWait
+	バルムンク	水着						えー、でも、\nどかーんてバルもしたい！
+	リナ	水着						おやぶんは、\nスパって切りたいのー！
+Param	character_grayout=false
+	二人							むむむ……！
+Param	character_grayout=true
+	リナ	水着						じゃあ、鬼ごっこで決めよ♪
+Tween	バルムンク	PunchPosition	y=30				NoWait
+	バルムンク	水着						勝った方が先に挑戦ね！
+Tween	リナ	MoveBy	x=-900 time=1				NoWait
+	リナ							えーいっ！
+Tween	バルムンク	MoveBy	x=-600 time=1				NoWait
+	バルムンク							あはははー！
+Tween	リナ	MoveBy	x=600				NoWait
+	リナ							ますぶんも\nはやくおいでよー！
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	笑い水着2	p7b			0
+FadeIn	black					.3
+	ディーア	笑い水着2						やっぱり、\n夏はこうでなくっちゃな
+	ルナサ	通常	p3			1		でも暑いのはそんなに変わんないね\nはぁー、ぐだぐだしたーい
+	ディーア	通常水着2						ルナサ！
+Tween	ルナサ	MoveBy	x=10				NoWait
+	ルナサ	通常						マスターくんはどうだい？\nお望み通りの楽しい夏だよー？
+	ディーア	笑い水着2						ああ、楽しんでるよ\n願いを叶えてくれてありがとうな
+	ルナサ	通常						えー？\nルナサは力をつかってないよー？
+	ディーア	通常水着2						力を使わない方法で、\n願いを叶えてくれただろ？
+	ルナサ	通常						動いてたのは、君だけどねー
+	ディーア	通常水着2						努力させてくれたのも、\nルナサのおかげだよ
+	ルナサ	通常						…………そうかな？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い水着2						ああ！\nだからほら、一緒に海で遊ぼう！
+StopBgm
+	ルナサ	通常						……えへへー♪
+Bgm	神秘
+Tween	ルナサ	MoveBy	x=20				NoWait
+	ルナサ	通常						ねえねえ、それってお願い？\n海でルナサになにしたいのー？
+Tween	ディーア	MoveBy	y=10				NoWait
+	ディーア	驚き水着2						え!? あ、いや、\n今のはそういうのじゃなくて……！
+	ルナサ	通常						えー、ほんとにー？
+FadeOut	white					.3
+CharacterOff						0
+	ルナサ	拡大胸	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	ルナサ	拡大胸						マスターくん男の子だからねー\n真面目で業が深いからねー
+	ルナサ	拡大胸						ルナサをビチャビチャにして\n扉をあけたいとか思ってるでしょー
+	ディーア	<Off>						そ、そんなことないから……！
+	ルナサ	拡大胸						照れなくていいじゃん\nせっかくの夏だし欲望を開放しよー？
+FadeOut	white					.3
+CharacterOff						0
+	ルナサ	拡大足	エフェクト表			0
+FadeIn	white					.3
+	ルナサ	拡大足						ルナサもお願い叶えられなくて、\nよっきゅーふまんなのー
+	ルナサ	拡大足						だからほら、\nルナサの扉あけちゃおうよー♥
+FadeOut	white					.3
+CharacterOff						0
+	ルナサ	通常	p3			0
+	ディーア	怪しい水着2	p7b			0
+FadeIn	white					.3
+	ディーア	怪しい水着2						…………これは\n大事なお願いじゃないもんな
+	ディーア	にやけ水着2						誰も見てないし、\n少しだけ扉を……
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	にやけ水着2						えへへー、\n夏の開放感さいこー
+StopBgm
+CharacterOff
+	リディ	水着悔しい2						まーすーたーぁー!?
+Bgm	コメディ
+CharacterOff
+	ルナサ	通常	p3
+	ディーア	驚き水着2	p7b
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き水着2						り、リディ!?
+	ルナサ	通常						ありゃー
+CharacterOff
+	リディ	水着悔しい2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	水着悔しい2						ルナサちゃんに\nなにしようとしてたの!?
+CharacterOff
+	ルナサ	通常	p3
+	ディーア	汗水着2	p7b
+	ディーア							いや、これは扉を\nあけようとしてただけで……！
+CharacterOff
+	リディ	水着悔しい2						なんの扉をあける気なの！\nこのえっちー！
+Se	走る
+Tween	リディ	MoveBy	x=-600 time=1				NoWait
+Wait						1
+CharacterOff
+	ルナサ	通常	p3
+	ディーア	汗水着2	p7b
+Wait						.5
+Se	走る
+Tween	ディーア	MoveBy	x=-600 time=1				NoWait
+	ディーア							わぁああああ！\nる、ルナサ！ 助けてくれー！
+Tween	ルナサ	MoveBy	x=60				NoWait
+	ルナサ							それもお願いかなー？\n叶えてあげるけど<dash=2>
+FadeOut	white					.3
+CharacterOff						0
+	ルナサ	拡大通常	エフェクト表			0
+FadeIn	white					.3
+	ルナサ	拡大通常						おそなえものもちょーだいね♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_533_01
+EndIf
+EndScenario

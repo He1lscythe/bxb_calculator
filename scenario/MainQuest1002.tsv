@@ -1,0 +1,2170 @@
+# Q100201_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="勇者の意地"
+JumpSubroutine	*メインシナリオタイトル
+Bg	酒場1F
+Bgm	都市
+Se	ガヤA
+	ディーア	驚き	2_3					こ、ここは…どこだ!?
+	リディ	笑い_もち_笑い涙	画面外_右					マスター！\nやっと起きたーーーーー!!		2001-22
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1	easeInSine		Add
+Wait						1
+	リディ	笑い_もち_笑い涙	3_3					もう、身体の方は大丈夫？
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	通常						リディ…もう、大丈夫だ\nそれよりも、ここは…？		9999-00
+	勇者ヌイ	驚き	1_3					魔剣使い!?\n気づいたのですね\n良かった…
+	勇者ヌイ	通常						ここは魔鍵都市ユグドラシルの酒場…\n<color=mk2name>【世界樹のしずく】</color>です
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	通常						ユグドラシル…\nそうですか、良かった…\n無事に脱出、出来たみたいですね
+	ディーア	怪しい						俺はもう大丈夫です\nこれからどうするか、決めましょう
+Se	回避
+CharacterOff	リディ
+	ディーア	通常	3_3
+	勇者ヌイ	通常	2_3
+	勇者ルル	通常	1_3					今まさに、その相談をしていたんだ\n魔剣使いよ…
+	ディーア	笑い						良かった、ルル\nお前も無事だったみたいだな
+	勇者ルル	悔しい						…ヌイ、僕はマーガレットさんが\nあいつらに…ミコトとアクアに\n騙されているんじゃないかと思ってる
+Tween	勇者ヌイ	ScaleBy	x=-1 time=0.75
+	勇者ヌイ	驚き						正直…私もまだ信じられません\nですが、マーガレットさんのあの目…\n本気でした…本気で私たちを…
+	ディーア	怪しい						マーガレットさんに関しては…\n正直、もう一度会ってみないと\n分からない…
+	ディーア							こうなったら、もう…直接会って、\n詳しい話を聞くしかないだろう？
+	リディ	<Off>						マスター…
+	ディーア	笑い						確かに…あいつらの力は\n化物じみているかもしれない…だけど、\n万全の状態で戦えば、なんとか…
+Se	打1
+Tween	勇者ルル	ScaleBy	x=-1 time=0.75
+	勇者ルル	怒り						…そうか、勝手にしてくれ
+	ディーア	驚き
+	勇者ヌイ							ルル？\n一体どうしたのですか!?
+	勇者ルル							お前のあの力…\n僕にはお前がマーガレットさんを攫った\nアイツらと同じに見える
+	ディーア	怪しい
+	リディ	<Off>						…………
+	勇者ルル							もしあの2人が化物だとしたら、\n僕にとってお前も…化物だ
+	勇者ヌイ	通常						ルル、その言い方は許せません！\n魔剣使いは私たちを、あの窮地から\n助けてくれたのですよ!!		2008-07
+Tween	勇者ルル	PunchPosition	y=50
+Se	打1
+	勇者ルル							あんなの…僕1人でも何とかなった！\n僕だって、勇者なんだ！\n僕だって…!!		9999-00
+Se	走る
+Tween	勇者ルル	MoveTo	x=-600 time=1	easeInSine		Add
+Wait						1
+CharacterOff	勇者ルル
+Tween	勇者ヌイ	PunchPosition	y=50
+	勇者ヌイ	呆れ						ルル、待って下さい!!\nまだ話は終わっていません！		2008-12
+Se	走る
+Tween	勇者ヌイ	MoveTo	x=-600 time=1	easeInSine		Add
+Wait						1
+CharacterOff	勇者ヌイ
+	リディ	驚き	2_3					行っちゃったね…マスター\nどうしよっか？		9999-00
+	酒場のおばちゃん	通常	1_3					ちょっと、聞いておくれよ\n白い服の2人はもういないのかい？		3001-08
+	ディーア	笑い						今さっき、\n飛び出して行っちゃいました…はは
+	酒場のおばちゃん							そう？\nさっき<color=mk2name>【オティナ=ミナ草原】</color>で、\n似たような人を見たから…		9999-00
+	ディーア	驚き
+	酒場のおばちゃん							てっきり、仲間なのかと\n思ったんだけどねぇー\nでもね…
+	酒場のおばちゃん							その人、怪我をしてたみたいだからさ\nもうーおばちゃん心配でねー
+Tween	リディ	PunchPosition	y=50
+Tween	リディ	ScaleBy	x=-1 time=0.75
+	リディ	照れ_もち						ねぇ、マスター♪\nそれって、もしかして…		2001-11
+	ディーア							あぁ、間違いないだろう
+	酒場のおばちゃん							あの辺りは、危険なモンスターが\nいっぱい出るから危なくってねぇー\nつい、この間も近所のボンさんがねー		9999-00
+	酒場のおばちゃん							あら、違ったわ…ボンさんの下の方の\n息子さんが襲われたって言うじゃない？\n危ないわよねぇー
+	酒場のおばちゃん							そうそう！その息子さんがね\n結構なイケメンなのよー♪\n凄くイイ匂いがするの
+	酒場のおばちゃん							イケメンって、それだけで得よねー！あ、お得といえば！\n今日この酒場でタイムセールが…
+Tween	リディ	PunchPosition	y=50
+Tween	リディ	ScaleBy	x=-1 time=0.75
+	リディ	笑い						おばちゃん、ありがとうっ♪		2001-04
+	ディーア	悔しい						リディ、逃げるぞ!!
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=1	easeInSine		Add
+CharacterOff	ディーア
+CharacterOff	リディ
+	酒場のおばちゃん							ちょっと！\nまだ話は終わって…行っちゃったわ\n大事な事をまだ言ってなかったのに…		9999-00
+	酒場のおばちゃん							あの草原って、\n今<color=mk2impo>【キノコの大繁殖期】</color>だから、\n特に危ないわよ…って…
+Se	ランクアップ
+Tween	酒場のおばちゃん	PunchPosition	y=50
+	酒場のおばちゃん							あ、タイムセールが始まったわ!!\nよぉーし、今日はトコトン飲むわよー♪
+EndScenario
+
+# Q100201_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="誤解と強襲"
+JumpSubroutine	*メインシナリオタイトル
+Bg	草原B
+Bgm	作戦会議
+	勇者ルル	通常	画面外_右
+Tween	勇者ルル	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	勇者ルル	MoveTo	x=-180 time=1	easeInSine		Add
+Wait						1
+	勇者ルル	怒り						くそっ…自分の弱さに腹が立つ\nどうして、僕は…\nこんなにも無力なんだ
+	勇者ルル							結局、何も…\n誰も救えていないじゃないか…\n何が未来の大勇者だ！
+Se	打1
+	勇者ルル		1_3					あいつの方が…\nどうにかしようと抗っているのに…\n僕は…何をしていた？
+	勇者ヌイ	通常	画面外_右
+Tween	勇者ヌイ	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	勇者ヌイ	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	勇者ヌイ	驚き						ルル！\nこんなところにいたのですね\n今、バラバラになっては危険です		2008-12
+	勇者ヌイ	呆れ						マーガレットさんが不在の今こそ…\n魔剣使いたちと\n協力しないといけません
+	勇者ルル	通常						ヌイ…分かってる\n僕も分かってるんだ…\nこれは…ただの八つ当たりだって		9999-00
+	勇者ルル	悔しい						あいつは…マーガレットさんと戦って、\n勝って…過ちを止めようとしていた\nそれを…!!
+	勇者ルル							僕は、ただただ…\n指をくわえて見てるだけしか、\n出来なかった…
+	勇者ヌイ	通常						ルル、自暴自棄になってはいけません\nあなたは、自分なりの方法で\n強くなっていけばいいのです
+	勇者ヌイ							代々…<color=mk2name>EDEN</color>の勇者の王に仕えし、\n聖なる魔剣エクスカリバーは、\nルルにこそ相応しい…
+	勇者ヌイ							あなたには…\nあなたなりの強さがあるのですから\n気を落とさないで下さい
+	勇者ルル	通常						…………
+	勇者ヌイ	驚き						えっと…そもそも、なぜ<color=mk2name>EDEN</color>の勇者が\nみなエクスカリバーの\nクローン魔剣を使っているのか…
+	勇者ヌイ	通常						<color=mk2impo>EDEN勇者規範</color>第4章5条によると…
+	勇者ルル	通常						あぁ、分かっているよ、ヌイ！\n僕は勇者王になる男だった!!
+	勇者ルル	照れ						く、そ…その…\nあ、ありが…と…		2004-04
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	勇者ルル	驚き	1_3
+	勇者ヌイ	驚き	2_3
+	キノコリオン	通常	3_3					キーーーーーーー！		9999-00
+	勇者ルル							なっ!?\nキノコ型のモンスター!?
+Se	走る
+Tween	キノコリオン	MoveTo	x=-600 time=1	easeInSine		Add
+CharacterOff	勇者ヌイ
+CharacterOff	キノコリオン
+	ヌイの声	<Off>				1		ルルー\nタスケテー
+Tween	勇者ルル	ScaleBy	x=-1 time=0.5
+	勇者ルル	驚き						な、なんて…\nすばしっこいモンスターだ\nもうあんなに遠くに…
+FadeOut	white					.1
+Se	魔剣出る
+FadeIn	white					.1
+	ノイズ	怒り	2_3					おい、ルル！\n何をやっているの!?\n早くヌイちゃんを追いかけないと！		2005-11
+	勇者ルル	怒り						僕の目の前で誘拐するなんて…\nいい度胸じゃないか\n例えモンスターでも許さないぞ!!		9999-00
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ノイズ
+CharacterOff	勇者ルル
+CharacterOff	wipe
+Bgm	コメディ
+FadeIn	black					.5
+	ディーア	通常	2_3					さてさて…\nマーガレットさんの目撃情報が\nあったというが…
+	リディ	驚き_もち	3_3					広い…\n余りにも広すぎるよマスタぁー\n心が折れるよー		2001-13
+	リディ	笑い						…あ、でも地平線が見えるから、\n何かあったら、\n逆に見つけやすいかな？
+	ディーア							しかし、遮るモノがないんだから、\n人がいたらさすがに分か…\nん？		9999-00
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア	驚き	1_3					あそこに誰かいるぞ…\n白い制服…勇者さんだな\nモンスターと一緒にいる…のか？
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_驚き						もしかして、マーガレットさんかな？\n行ってみようよ、マスター！		2001-05
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+FadeIn	black					.5
+	キノコリオン	通常	画面外_右
+Tween	キノコリオン	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	キノコリオン	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	勇者ヌイ	呆れ	1_3
+	キノコリオン	通常	2_3					キーーーー!!!
+	勇者ヌイ	呆れ						<color=mk2wisp>（つい攫われてしまいましたが…\n　この程度のモンスター相手に\n　慌てる必要はありませんね）</color>
+	勇者ヌイ	通常						<color=mk2wisp>（私と姫鶴なら…すぐに倒せますが\n　ルルに討伐させて…自信を\n　回復させた方が良さそうですね）</color>
+	？？？	<Off>						ヌイさーーーん！\n大丈夫ですかーーー!\nマスターに任せてくださーい		2001-40
+	勇者ヌイ	驚き						<color=mk2wisp>（え？\n　この声はリディちゃん!?\n　助けるって…まさか…!!）</color>
+	ディーア	怒り	画面外_右					ヌイさんを離せーーー		9999-00
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	キノコリオン							キーーー!?
+Se	敵殺
+	ディーア	笑い	2_3					ヌイさん、大丈夫でした？
+	勇者ヌイ	通常						あ、ありがとうございます\nですが、あの、魔剣使い…		2008-11
+	勇者ルル	怒り	画面外_右					ヌイーーー!!\n無事かーーーー!?		9999-00
+Tween	勇者ルル	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	勇者ルル	MoveTo	x=180 time=1	easeInSine		Add
+Wait						1
+	勇者ルル	怒り						…魔剣使いよっ！\nまさか、今のモンスターは\nお前が仕向けたのか!?		2004-11
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						ん？\nルル、お前…\n何を言って…		9999-00
+	勇者ルル							大方、さっきの力を使って\nモンスターを操っていたんだな\nぐっ…許さないぞっ!!		2004-07
+	ディーア	驚き						おいおい、落ち着けルル\nお前、何か勘違いをして…
+	リディの声	<Off>						ねぇマスター!!\nさっきのキノコ型モンスターが\n集団でやって来たよ!!		2001-11
+Tween	ディーア	PunchPosition	y=50
+	ディーア	怒り						くそっ、メンドウな事に\n巻き込まれちまったーーー！		9999-00
+EndScenario
+
+# Q100201_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="届かない力"
+JumpSubroutine	*メインシナリオタイトル
+Bg	草原B
+Bgm	勇者バトル
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	ディーア	悔しい	3_3
+	勇者ルル	驚き	1_3					んぐっ!?		2004-10
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	通常	2_3					大丈夫か、ルル？		9999-00
+Bgm	凱旋
+	勇者ルル	悔しい						こ…これほどの力を持っていても、\nマーガレットさんを…\n救えなかったのか
+	勇者ルル							まだだ、この程度の力じゃ…\nお前にすら遠く及ばない…\n僕は…まだ弱い
+Tween	勇者ルル	ScaleBy	x=-1 time=0.75
+	勇者ルル	怒り						自分が尊敬する…\n大切な人を救えないで、\n何が未来の大勇者だ!!
+Se	走る
+Tween	勇者ルル	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	勇者ルル
+	勇者ヌイ	通常	画面外_右
+Tween	勇者ヌイ	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	勇者ヌイ	MoveTo	x=180 time=1	easeInSine		Add
+Wait						1
+	勇者ヌイ	驚き						ルル！\n待って下さい！\n今1人になるのは危険だと…		2008-12
+Se	走る
+Tween	勇者ヌイ	MoveTo	x=-600 time=1	easeInSine		Add
+Wait						1
+CharacterOff	勇者ヌイ
+	リディ	驚き_もち_驚き	3_3					マスタぁ…\nルル君、またどっか行っちゃったよ？		2001-13
+	ディーア	通常						ルル…\n目に映ったものだけが\n真実とは限らないんだぞ…		9999-00
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	作戦会議
+FadeIn	black					.5
+	月天のミコト	通常	2_2
+Se	回避
+	水天のアクア	通常	1_2					ミコトーあいつらを発見しちゃった説、\n出てるんだけど、上からは\n止められてるんだよねー
+Tween	月天のミコト	ScaleBy	x=-1 time=0.75
+	月天のミコト	悔しい						そうよ、悔しいけれど…\n今は<color=mk2impo>「見」</color>る時よ
+	水天のアクア	笑い						うーん、それは分かってる説、\n出てるんだけどさー\nこっそり襲っちゃう説、出てない？
+	月天のミコト	怒り						アクアさん…それは、\nアークを裏切る事になるわよ？
+Tween	水天のアクア	PunchPosition	y=50
+	水天のアクア	驚き						正直…歯痒い説、出てるんだけどなー\nアクア様としては、もっとこう…
+	月天のミコト	通常						同感よ、アクアさん\nミコトもこういうやり方、\n好きじゃないわ…
+	月天のミコト							でも今はツヴァイクさんたちが別行動中\nそれに、彼ら程度なら…\n焦る必要もないと思うけど？
+Tween	水天のアクア	PunchPosition	y=50
+	水天のアクア	通常						了ー解ー\n他にやる事も、たくさんあるしねー
+	水天のアクア	笑い						でもーこのまま立ち去る説は、\n出てないよねー\nへへ、えへへー♪		2012-06
+	月天のミコト							あはは♪\nアクアさん…相変わらず、\nいい性格してるわね		2010-05
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	水天のアクア
+CharacterOff	月天のミコト
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	カニ型光モンスター	通常	3_3
+	クマ型光モンスター	通常	1_3					ガァァアアアアアアァァァ!!!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	カニ型光モンスター
+CharacterOff	クマ型光モンスター
+CharacterOff	wipe
+FadeIn	black					.5
+	勇者ルル	怒り	1_3
+	ディーア	怒り	2_3
+	勇者ヌイ	呆れ	3_3					やっとルルを捕まえたと思ったら…\n本当に…しつこいモンスターたちですね\n…消えてもらいます
+Se	走る
+Tween	勇者ヌイ	MoveTo	x=600 time=1	easeInSine		Add
+Wait						1
+	勇者ヌイ	<Off>						たぁぁ!!		2008-16
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+CharacterOff	勇者ヌイ
+	ディーア							おい、ルル…\nどうやら囲まれているみたいだな\nどうする？		9999-00
+	リディ	怒り_もち	3_3					さっき大暴れしたから、\n周辺のモンスターが怒ってるのかなぁ？
+	勇者ルル							無駄口を叩く暇があったら、\n1匹でも多くのモンスターを\n倒したらどうだ、魔剣使いよ！		2004-11
+Se	走る
+Tween	勇者ルル	MoveTo	x=600 time=1	easeInSine		Add
+Wait						1
+	勇者ルル	<Off>						たぁっ！		2004-16
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+CharacterOff	勇者ルル
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	怪しい						それじゃあ、もうひと踏ん張り…\nしてみますかっ！		9999-00
+EndScenario
+
+# Q100201_d
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="名を継ぐ者"
+JumpSubroutine	*メインシナリオタイトル
+Bg	草原B
+Bgm	凱旋
+	勇者ルル	怒り	1_3
+	ディーア	通常	2_3
+	勇者ヌイ	通常	3_3
+	ディーア							ふぅ、なんとかなったか…
+	勇者ルル							…………
+Tween	勇者ルル	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	勇者ルル	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	勇者ルル
+Tween	勇者ヌイ	ScaleBy	x=-1 time=0.5
+Tween	勇者ヌイ	MoveTo	x=-180 time=1			Add
+	勇者ヌイ	驚き						ルル…\nなぜ、こんな事…		2008-08
+	ディーア	怪しい						それにしても、\nあいつは全く困った奴だなー\n子供か？		9999-00
+	勇者ヌイ	通常	1_3
+	リディ	驚き_もち_驚き	3_3					あ、ちょっ…\nちょっと、マスター！		2001-13
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	笑い						んー\nなんだよ、リディ\n俺は疲れて……		9999-00
+Tween	勇者ヌイ	PunchPosition	y=50
+	リディ	驚き_もち_驚き涙	3_3					はわわわ…
+	勇者ヌイ	呆れ						ねぇ、魔剣使い？
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						あ、え？\nあ、あれ？ヌイさん、\nもしかして、怒って…ますか？
+	勇者ヌイ	驚き						ふふふ…\nそんな、私が怒るわけ\nないじゃないですか？		2008-05
+	リディ							うぅ…\n絶対、怒ってるよぉ…		9999-00
+	勇者ヌイ	通常						だから、怒ってないって\n言ってるじゃないですかっ!!
+Bgm	勇者バトル
+	ディーア	驚き
+FadeOut	white					.1
+Se	スキルマックス
+FadeIn	white					.1
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+	ディーア							な、なんだ…\nこのチカラは!?
+	勇者ヌイ	呆れ						全く、あなたたちが邪魔をするから、\nルルを…\n見失ってしまったじゃないですかっ!!
+	勇者ヌイ	通常						せっかくルルに\n自信をつけてもらおうとしたのに！\n…許せません		2008-07
+Tween	勇者ヌイ	PunchPosition	y=50
+	勇者ヌイ							キノコたちは倒しちゃうし、\nルルまで倒しちゃうし、\n更にモンスターにも襲われるし！		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	通常_もち_驚き						あれ、もしかして…
+	ディーア	怪しい						やっぱり…\nキノコリオンに攫われたのは、\n演技だったのですね？
+	勇者ヌイ	通常						バレてしまっては仕方ありませんね\n…そうです、演技でした\nルルのために一芝居打ちました
+Tween	勇者ヌイ	ScaleBy	x=-1 time=0.5
+	勇者ヌイ	驚き						もし、ルルが…\nもしこのまま、\n引きこもったりでもしたら…
+	勇者ヌイ							きっとそのままニートになって…\n毎日食っちゃ寝の繰り返し…
+	勇者ヌイ							ぷくぷく太って、\n外にも出にくくなって、\n気がつけばもう3年…
+	勇者ヌイ							妹も相手にしてくれず…\n壁にある勇者ポスターを破り捨て、\nやがて全てに絶望するように…
+Tween	勇者ヌイ	ScaleBy	x=-1 time=0.75
+Tween	勇者ヌイ	PunchPosition	y=50
+	勇者ヌイ	通常						もしそうなったら、\nどうしてくれるんですか！\n責任、取れますか!?
+	勇者ヌイ	呆れ						ルルは将来、\n勇者王になるかもしれない…\n男の子なんです
+	勇者ヌイ	通常						その芽を摘む権利が\nあなたにあるのですか!?
+	リディ	通常_もち_驚き						え、え、えーーーーーー
+	ディーア	驚き						お、落ち着け、リディ…\n俺も同じ気持ちだ
+	勇者ヌイ	呆れ						私はこれからルルを\n慰めにいかなくてはなりません\nでも、その前に…
+FadeOut	white					.1
+Se	リザルト
+FadeIn	white					.1
+	ディーア	怪しい						…空気が、変わった!?
+	リディ	通常						このマスター、\nノリノリである…
+	勇者ヌイ	驚き						私がルルに自信をつけるために\n演技をしていた事…
+	勇者ヌイ	通常						その秘密を知ったものを\n生かしてはおけません！
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り						勇者のクセに横暴だー!!
+	勇者ヌイ							私はルルのためなら、\n地位も名誉もいらない、\n勇者である事すら捨てられる
+	ディーア	驚き						どうして、そこまで…？
+	勇者ヌイ							知らなくてよい事です…\n今ここで、息絶えるあなたたちにはね！
+Tween	リディ	PunchPosition	y=50
+	リディ	通常						ヌイさん…\nなんか、今までで1番ボスっぽい!!
+	勇者ヌイ							どうしてC級勇者である私が…\nエクスカリバー系の魔剣を\n使っていないか、分かりますか？
+	勇者ヌイ							本来、魔剣の自由帯剣が許されるのは\nA級以上…\nですが私の姫鶴は…
+	？？？	<Off>						<color=mk2wisp>《もちろん、\nエクスカリバークローンでは\nないのじゃ♪》</color>
+FadeOut	white					.1
+Se	魔剣出る
+CharacterOff	リディ
+	ディーア	驚き	3_3
+	勇者ヌイ	通常	2_3
+FadeIn	white					.1
+	姫鶴	通常	1_3					姫鶴…推参じゃ！
+	勇者ヌイ	呆れ						ちょっと、姫鶴!?\n急に何を…
+	姫鶴							何を畏まっておるのじゃヌイよ！\n時に乙女はガツンと…\nおや、お初お目にかかりますのじゃ		2009-03
+	姫鶴							鶴はヌイを主と慕う\n魔剣・姫鶴じゃ、\n以降よろしくの！
+	ディーア							よ、よろしく
+Tween	姫鶴	PunchPosition	y=50
+	姫鶴							そんな事よりヌイよ\n戦闘前に色々語るのは、\n負けフラグじゃぞ？		9999-00
+	姫鶴							有無を言わさず、\n斬りつければ、良いではないか？
+	勇者ヌイ	驚き						…そうですね、\n私とした事が…どうかしていました
+	姫鶴							そうじゃ、語るべき事と、\nやらねばならぬ事…\n分かっておろう？
+	勇者ヌイ	通常						ありがとう姫鶴、\nチカラを借ります！
+	姫鶴							鶴はヌイの魔剣じゃからな、\n当然じゃ！
+	リディ	<Off>						ねぇ、マスター…\nヌイさんの魔力、すごい…!!		2001-11
+Tween	勇者ヌイ	PunchPosition	y=50
+	勇者ヌイ							<color=mk2name>EDEN</color>が一振り、C級勇者・猪能鵺衣\n<color=mk2impo>【鵺】</color>の名を継ぐ者のチカラ、\nご覧に入れましょう!!		9999-00
+	ディーア							…こりゃ、本気で戦わないと\n危ないな…何だかよく分からないけど、\n来いっ!!
+	勇者ヌイ	呆れ						お覚悟はよろしくて？
+EndScenario
+
+# Q100201_e
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="エピローグ5"
+ShowMessageWindow
+Bg	草原B
+Bgm	勇者バトル
+	姫鶴	通常	1_3
+	勇者ヌイ	通常	2_3
+	ディーア	怒り	3_3
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	姫鶴							お見事じゃ！\nヌイよー、負けてしまったのう		2009-11
+	勇者ヌイ	驚き						ええ、完敗…ですね\nさすがは<color=mk2impo>【噂の魔剣使い】</color>…\nマーガレットさんに勝った事はあります		9999-00
+Bgm	凱旋
+	ディーア	怪しい						ふぅ…ヌイさん、約束します\n俺はマーガレットさんを必ず助ける…\nだから、そこを通して下さい
+	勇者ヌイ	呆れ						ここを通って、\n何処へ行くつもりですか？
+Se	回避
+CharacterOff	姫鶴
+	勇者ヌイ	通常	1_3
+	ディーア	通常	2_3
+	リディ	驚き_もち_驚き	3_3					…あれ？\nそういえば何で、オティナ＝ミナ草原へ\n来たんだっけ？
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						おいおい、忘れたのか、\nリディ？
+	ディーア	通常						酒場でおばちゃんが、この辺りで…\nマーガレットさんらしき勇者を\n見かけたって話だ
+	勇者ヌイ	呆れ						あの、魔剣使い…\nもうここにマーガレットさんは\nいませんよ？		2008-11
+	勇者ヌイ	通常						先ほど入った、\n<color=mk2name>EDEN</color>からの確かな情報です\n間違いはないと思います
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	悔しい	2_3					そ、そんな…\nそれじゃあ、もう手がかりは…		9999-00
+	勇者ヌイ							いえ、まだ潰えたわけではありません\n彼女たちは、すぐ近くの廃遺跡…\n<color=mk2name>【ユグリマ関所跡】</color>へ向かったようです
+Tween	ディーア	PunchPosition	y=50
+	ディーア	驚き						そこにマーガレットさんが\nいるのですね!?
+	リディ	笑い_もち						マスター！\n急がなくっちゃ!!		2001-13
+	姫鶴	<Off>						<color=mk2wisp>（ヌイよー）</color>
+Se	回避
+CharacterOff	ディーア
+CharacterOff	リディ
+	姫鶴	通常	2_3
+	勇者ヌイ	通常	3_3
+Tween	勇者ヌイ	ScaleBy	x=-1 time=0.5
+	勇者ヌイ	驚き						<color=mk2wisp>（どうしたの、姫鶴？）</color>		9999-00
+	姫鶴							<color=mk2wisp>（そこまでの機密情報…\n　教えてしまって良いのか？）</color>
+	勇者ヌイ	通常						<color=mk2wisp>（彼なら…本当に、\n　出来るかもしれません）</color>
+	勇者ヌイ							<color=mk2wisp>（本当に…なんとか\n　してくれる気がする\n　そう思ったのです）</color>
+Tween	姫鶴	PunchPosition	y=50
+	姫鶴							<color=mk2wisp>（ふふ、ヌイよー\n　とても良い顔をしておるのじゃ）</color>
+	勇者ヌイ							<color=mk2wisp>（ええ…\n　気持ちいいくらい、\n　完敗だったものだったから）</color>
+	リディ	<Off>						…んう？\nヌイさん、どうかしましたか？		2001-23
+Se	回避
+CharacterOff	姫鶴
+CharacterOff	勇者ヌイ
+	ディーア	通常	2_3
+	リディ	通常	3_3
+	勇者ヌイ	通常	1_3					いえ、何でもありません\n個人的にとあなたと一度、本気で\n戦ってみたいと思っていましたので…		9999-00
+	勇者ヌイ							それが叶って、\n嬉しかっただけですよ
+	ディーア	怪しい						本気…ねぇ？\n女の子は平気で嘘を付くからなー
+	勇者ヌイ	呆れ						あら、私があなたに嘘を付いた事、\nありましたっけ？
+	ディーア							ルルの邪魔をしたって話ですよ\nあと、ルルのためならってやつ…\nあれも、嘘ですよね？
+	勇者ヌイ	通常						ふふっ♪\nどうでしょうか？		2008-05
+	勇者ヌイ							…とにかく私は、\nあのワガママボーイを探して、\n<color=mk2name>EDEN</color>に連れて帰ります		9999-00
+	勇者ヌイ	呆れ						勝手な行動ばかりして…\n本当に迷惑ですから、\n困りますよね
+	ディーア	笑い						もし俺が見つけたら、\nぶん殴ってでも<color=mk2name>EDEN</color>へ行くよう、\n言っておきますよ！
+	勇者ヌイ	通常						は？\nもしルルに傷をつけたら、\n殺しますよ？
+	ディーア	驚き
+	勇者ヌイ							それでは、ご機嫌よう…
+Tween	勇者ヌイ	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	勇者ヌイ	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	勇者ヌイ
+	ディーア	驚き						女の子って難しい…
+	リディ	驚き_もち_怒り						え、マスター…\n分かんないの？
+Tween	ディーア	PunchPosition	y=50
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア							え？\nリディ、分かんの!?
+	リディ	笑い						ふふんー当たり前だよー♪\n本当にマスターは、お子様だね！		2001-05
+Se	走る
+Tween	リディ	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	リディ
+	ディーア	悔しい						…女の子って、難しい!!		9999-00
+EndScenario
+
+# Q100202_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="邂逅する記憶"
+JumpSubroutine	*メインシナリオタイトル
+Bg	廃墟A
+Bgm	作戦会議
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1	easeInSIne		Add
+Wait						1
+	ディーア	通常	2_3					ふぅーこれで五番目の関所跡だな\n今のところマーガレットさんは\n見当たらないな…リディ？
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	怪しい						おーい、リディー大丈夫かー？\nここに来てから調子悪そうだけど、\n少し休憩するか？
+	リディ	通常_もち_驚き	3_3					ねぇ、マスター…\n私…前にもここへ\n来たことあるかも…		2001-11
+	ディーア	笑い						ははっ、\nここに来るのは初めてだぞ、リディ\nだからお前も初めてのは、ず…		9999-00
+Tween	ディーア	PunchPosition	y=50
+	ディーア	驚き						まっ、まさか…リディ\n記憶が戻ったのか？
+	リディ	通常_もち_驚き涙						うん、少しだけ…ぼんやりと…\nでも…なんだろう…これ\n嬉しいような悲しいような
+	ディーア	通常						無理に思い出そうとするな\n少しずつでいい\nゆっくりと焦らずに、な？
+	リディ	通常_もち_怒り						なんだろう…この光景…？\n私？が、いっぱい魔剣を壊してる？\nそばにいる女の人は…誰？		2001-10
+	ディーア	悔しい						と、とりあえず…ここから離れて\n休憩できる安全な場所まで移動するぞ\nここだと…モンスターに襲われてしまう		9999-00
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	コメディ
+FadeIn	black					.5
+FadeOut	white					.1
+Se	打1
+FadeIn	white					.1
+	月天のミコト	通常	3_3
+	水天のアクア	笑い	1_3					元関所だか何だか知らないけど、\nアクア様からしたら、ただの塵芥説\n出ちゃってるんですけどー！
+FadeOut	white					.1
+Se	打1
+FadeIn	white					.1
+Tween	月天のミコト	ScaleBy	x=-1 time=0.75
+	月天のミコト	怒り						ちょっと、アクアさん！\n作戦その1が成功したからって、\n遊ばないで頂戴！
+	水天のアクア	通常						作戦その1…？\nあーあー魔力負荷がかかるように貼った\n結界が上手くいった説ね♪
+	月天のミコト	悔しい						そうよ、まだ気を抜くには早いんだから\n…全く、こういう回りくどいやり方…\nミコトは好きじゃないんだけどなー
+	月天のミコト							こういう事はツヴァイクさんの方が\n適任だと思うんだけど…
+Tween	水天のアクア	PunchPosition	y=50
+	水天のアクア	驚き						えぇ、ツヴァイクって…\nこういう任務も出来る説、\n出てるっけ!?
+	水天のアクア							<color=mk2wisp>「メンドクセー」</color>\nとか言って、逆に逃げる説…\n出ちゃってるんですけど
+	月天のミコト	通常						確かにそう言うわね…\nでも、ジュビィちゃんに\nお願いされれば、一発だと思うの
+	月天のミコト							口では嫌がってても、\nちゃんとやってくれる！\nツヴァイクさんはそういう男よ!!
+	水天のアクア	通常						でも、ここまでアクア様たちが\n来ちゃったからには…もう最後まで\nやるしかない説、出てるわよね？
+	月天のミコト	悔しい						…そうなのよね…\n失敗したわ…
+	水天のアクア	笑い						まぁーどっちにしろ、\nキッチリ任務をこなせば、アーク様も\n喜んでくれる説、出てるわよね？
+	月天のミコト	通常						そうね、こんなところで\nヘタレてる場合じゃないわよね！\nアークが見てるかもしれないし!!
+	月天のミコト							アクアさん…\n作戦その2のために、\n地下道へ向かうわよ!!
+Se	走る
+Tween	月天のミコト	MoveTo	x=-600 time=1	easeInSIne		Add
+Wait						1
+CharacterOff	月天のミコト
+	水天のアクア							はいはーい♪\n<color=mk2name>【ユグドラシル研究所】</color>へ向かう説、\n出てるもんねー
+EndScenario
+
+# Q100202_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="静寂を探し"
+JumpSubroutine	*メインシナリオタイトル
+Bg	廃墟A
+Bgm	バトル
+	コウモリ型火モンスター		2_3					フシュルルルル
+	ディーア	怒り	3_3					邪魔だー！\nリディが休憩、\n出来ないだろうがーー!!
+Tween	ディーア	MoveTo	x=-0 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Wait						.5
+Se	敵殺
+CharacterOff	コウモリ型火モンスター
+	ディーア		2_3					くそっ、\n安全に休めるところ…\nどこかにないか…
+	リディ	<Off>						ごめんね、マスター\n私のために…		2001-24
+	リディ	<Off>						ぐ…く…くるし…\nううっ、あああ！\nあたまがっ!!		2001-10
+	ディーア	悔しい						お、おい、リディ？\n大丈夫か!!\nリディーー！		9999-00
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	wipe
+Bgm	作戦会議
+FadeIn	black					.5
+	勇者ルル	通常	画面外_左
+Se	走る
+Tween	勇者ルル	MoveTo	x=0 time=1			Add
+Wait						1
+	勇者ルル	悔しい	2_3					はぁ、ヌイには悪い事をしたな…\nちゃんと謝らないと…
+	勇者ルル	怒り						いや、悪いのは全部あの魔剣使い…！\n…いや、そうじゃない、\n悪いのは、弱い僕自身だ…
+FadeOut	white					.1
+Se	魔剣出る
+FadeIn	white					.1
+	ノイズ	怒り	1_3					はぁー\nいつまでそうやってグダグダしてる気？\nヘタレマスター
+FadeOut	white					.1
+Se	魔剣出る
+FadeIn	white					.1
+	アマノハバキリ	通常	3_3					まぁまぁ、落ち着いてノイズちゃん\nルル様もお疲れなので、\n今は少し休みましょう
+	勇者ルル	笑い						ありがとう、あーちゃん\nそれじゃあ、少しだけど、\n休憩してるよ
+Se	走る
+Tween	勇者ルル	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	勇者ルル
+Tween	ノイズ	PunchPosition	y=50
+	ノイズ							…もうっ！\nあーちゃんはアイツに対して、\n甘やかし過ぎ！
+	アマノハバキリ	笑い						うふふ♪\n相変わらず、ノイズちゃんは\n心配症なんだから		2007-05
+	ノイズ	照れ						べ、別にあいつの事なんか、\n全っ然、心配してないんだからっ!!		9999-00
+FadeOut	white					.1
+Se	魔剣出る
+FadeIn	white					.1
+	ゲオルギウス	通常	2_3					…見て、ノイズお姉、アマノお姉\nあそこにいるのって…\n東ナーガ洞窟で見た2人じゃない？
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ゲオルギウス
+CharacterOff	アマノハバキリ
+CharacterOff	ノイズ
+CharacterOff	wipe
+FadeIn	black					.5
+	月天のミコト	通常	1_3
+	水天のアクア	通常	2_3					えぇーっと確か、\nここの柱付近にあった説…
+Se	武器修理3
+Tween	水天のアクア	MoveTo	x=180 time=1			Add
+Wait						1
+Tween	月天のミコト	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	水天のアクア	ShakePosition	x=-10 y=-10 time=1			Add
+FadeOut	white					.1
+Se	キラン
+FadeIn	white					.1
+	水天のアクア	笑い	3_3					はっけーんっ♪
+Tween	月天のミコト	MoveTo	x=0 time=1			Add
+Wait						1
+	月天のミコト							それじゃあ、アクアさん\n行きましょうか
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	水天のアクア
+CharacterOff	月天のミコト
+CharacterOff	wipe
+FadeIn	black					.5
+	ゲオルギウス	驚き	2_3
+	ノイズ	驚き	1_3
+	アマノハバキリ	笑い	3_3					あら、\n偶然って本当にあるものね		2007-09
+Tween	ノイズ	PunchPosition	y=50
+	ノイズ	怒り						おいルル、起きて\n例の2人がいたわよ\n…どうするの？		2005-11
+CharacterOff	ゲオルギウス
+	勇者ルル	驚き	2_3					え？\nえ？\nど、どうするって…？		9999-00
+	ノイズ							何を言っているの!?\nだから、追うの？\n追わないの？
+Tween	勇者ルル	ScaleBy	x=-1 time=0.75
+	勇者ルル	通常						え、でも、僕は…
+	ノイズ							もう！\nあんたは誰なの!!\n<color=mk2name>EDEN</color>の勇者じゃないの!?
+	勇者ルル	驚き						…っ!!
+	ゲオルギウス	<Off>						ルル様…！\nあの2人、地下道に入っていくよ！		2006-11
+	勇者ルル	怒り						…ノイズ、あーちゃん、ゲオル！\n僕は決めた…\nあいつらを追う、勇者として！		9999-00
+	勇者ルル							いや、1人の男として！\n負けたままではいられないんだ！
+	アマノハバキリ	笑い						うふふ♪\nさすが、ルル様		2007-05
+	ノイズ	笑い						分かったわよ、マイマスター様\n激しい戦いになる事が予想されるわ\n…覚悟は出来てるだろうな？		2005-07
+	勇者ルル							あぁ、僕はもう迷わない…\n行ぃくぞっ!!		2004-17
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	アマノハバキリ
+CharacterOff	ノイズ
+CharacterOff	勇者ルル
+CharacterOff	wipe
+Bgm	絶望
+FadeIn	black					.5
+	ディーア	驚き	2_3
+	リディ	怒り_もち_驚き涙	3_3
+FadeOut	white					.1
+Se	闇1
+FadeIn	white					.1
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	悔しい						リディ、大丈夫か！\nおい！\nしっかりしろっ!!
+	リディ							…いや、いやぁ！やめて!!\n私は悪くない、私は悪くないの…\n私を見ないで、私は…私は…
+	ディーア	驚き						ど、どうしたんだ、リディ!?
+	リディ	通常_もち_驚き涙						違うの…違うの…\nそんな、こんな事になるなんて…
+	ディーア	悔しい						っ…!!\nす、すごい熱だ！\n落ち着け、リディ!!
+	リディ	怒り_もち_驚き涙						いや！触らないで、嫌っ!!\nもう戦いはイヤなの！\nやめて、ヘルメリア!!
+	ディーア							ヘ、ヘル…？\nお、おい、とにかく休むぞ!!
+Bgm	バトル
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	カエル型水モンスター	通常	1_3					グオオオオオーーーー!!
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	怒り						くっ、モンスターか…\nリディ、ここにいろよ！
+EndScenario
+
+# Q100202_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="変わらない優しさ"
+JumpSubroutine	*メインシナリオタイトル
+Bg	廃墟A
+Bgm	凱旋
+	リディ	通常_もち_驚き	2_2
+	ディーア	怒り	1_2
+Wait						1
+Se	打1
+CharacterOff	リディ
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						ふぅ、眠ったみたいだ\nいったい、何だったんだろう？\nまるで何かに反応したみたいに…
+	ディーア	悔しい						ともかく、マーガレットさんを\n探さないとな
+	ディーア							あいつ等が、\nこの辺りに居たって事は…\n何か目的があるはずだ
+	リディ	<Off>						うぅ…
+	ディーア	驚き						リディ!?\nまだ横になってろ、無理はするな
+	リディ	<Off>						…マ、マスター、\nあれを、見て\nあれ…マーガ…
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	作戦会議
+FadeIn	black					.5
+	勇者マーガレット	無心	画面外_右
+Tween	勇者マーガレット	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	勇者マーガレット	MoveTo	x=-600 time=1			Add
+Wait						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	勇者マーガレット
+CharacterOff	wipe
+FadeIn	black					.5
+	ディーア	驚き	2_3
+	リディ	<Off>						ますたぁ？\nいこっ？\n私は…だいじょう、ぶ…だから		2001-13
+	ディーア	怪しい	2_3					でも…		9999-00
+	リディ	<Off>						マスター、\nやるべきことを、ちゃんと…\nや、やらないと…ねっ？
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	通常						…分かった、\nでも危なくなったら、\nすぐ休むからな！
+	リディ	<Off>						うんっ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	wipe
+Bg	宝石鉱山
+FadeIn	black					.5
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	通常_もち_驚き	3_3
+	ディーア	通常	2_3					この地下道…\n思ったよりも、薄暗いな
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア							…足元、大丈夫か\nリディ？
+	リディ	照れ_もち_キラン						うん♪\nへーきっ！		2001-06
+	ディーア	怪しい						…なんだか、ご機嫌だな？		9999-00
+	リディ							んう？\nんー、マスターがいつもより、\n優しくしてくれるからかなー♪		2001-23
+	ディーア	驚き						…？\nいつもと一緒だろ？		9999-00
+	リディ	笑い						んーん、優しいよー♪\nこんな事なら、\nずっと頭痛くてもいいのに…
+Tween	ディーア	PunchPosition	y=50
+	ディーア	怪しい						冗談言うな…って、\n頭、ずっと痛いのか!?
+	リディ	驚き_もち_怒り						あ…\nう、うん、ちょっと…ね
+Se	ポップアウト
+	ディーア	通常						無理はするなよな\nつらくなったら、ちゃんと言うんだぞ？
+	リディ	照れ						うん、やくそく
+	ディーア	笑い						もしまたつらくなったら、\nいつも通り<color=mk2impo>『つらいおん、がおがお！』</color>\nって…
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り						そんな事、言わないし!!
+	ディーア	怪しい						つらいー？
+	リディ	笑い						おん！がおがお♪
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り						…って、やった事ないし！
+	リディ	驚き_もち_驚き
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	コウモリ型モンスター	通常	1_3					ガァァァ!!
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	通常						おっと、リディ\nふざけるのも、ここまでだな
+	リディ	怒り_もち						もう、私じゃないもん！\nマスターだもん!!		2001-07
+	ディーア	笑い						それだけ元気なら大丈夫だ！\nリディ、モンスターが来るぞ！		9999-00
+	リディ	通常_もち_驚き						マスター！\n頑張ってね!!
+EndScenario
+
+# Q100202_d
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="太陽聖域"
+JumpSubroutine	*メインシナリオタイトル
+Bg	宝石鉱山
+Bgm	作戦会議
+	ディーア	怪しい	2_3
+	リディ	驚き_もち	3_3
+Se	斬2
+Wait						.5
+Se	打1
+Wait						.5
+Se	水1
+	リディ							ねぇ、マスター\nこれって、誰かが戦ってる？		2001-11
+	ディーア							あれは…ルル!?		9999-00
+	勇者ルル	<Off>						ぐぅっ…お前たち…\nこっちへ来るなっ!!		2004-18
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	ボスバトル
+FadeIn	black					.5
+	勇者ルル	怒り	3_3
+	月天のミコト	通常	1_3
+	水天のアクア	笑い	2_3					てぇいっ！		2012-16
+Tween	水天のアクア	MoveTo	x=180 time=1			Add
+Wait						1
+FadeOut	white					.1
+Se	打1
+FadeIn	white					.1
+CharacterOff	勇者ルル
+	勇者ルル	<Off>						っぐ…!!		2004-10
+	ディーア	怒り	画面外_右					ルルー！		9999-00
+Se	走る
+Tween	ディーア	MoveTo	x=180 time=1			Add
+Wait						1
+FadeOut	white					.1
+Se	斬2
+CharacterOff	水天のアクア
+FadeIn	white					.1
+Wait						.5
+Se	回避
+	ディーア	怒り	3_3
+	水天のアクア	通常	2_3					あれぇ？\nやっと来た説、出てる？
+	月天のミコト	悔しい						むしろ、予想より\n少し早いくらいじゃない？
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	悔しい						ルル、大丈夫か!?
+	勇者ルル	<Off>						まだ、まだだ！\n僕は…僕は負けていない!!
+	水天のアクア	驚き						まだやるのザコ勇者君？\nキミじゃーこのアクア様には、\n勝てない説、出ちゃってるんだけど？
+	月天のミコト	通常						あはは♪\nそれじゃあ、勇者君の相手は…\nアクアさんに任せるわ		2010-05
+Tween	水天のアクア	ScaleBy	x=-1 time=0.75
+	水天のアクア							えーミコト、\nズルい説、出てない？\nアクア様も魔剣使いが良かったなー		9999-00
+Se	回避
+CharacterOff	水天のアクア
+	水天のアクア	<Off>						こんな事なら、\n勇者の相手をミコトに\n任せれば良かった…
+Tween	月天のミコト	PunchPosition	y=50
+	月天のミコト							ねぇ、魔剣使い\nミコトたちも始めましょうか？		2010-11
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	怒り	3_3					…罠だったのか		9999-00
+	月天のミコト							ええ、マーガレットさんは\nもうここには居ないわよ
+	ディーア	怪しい						だと思ったけどな\nそれで、やっぱり…\nリディを連れて行く気か？
+	月天のミコト	悔しい						その子を連れて行く気はないわ…\n上からの命令ではね
+Tween	月天のミコト	MoveTo	x=0 time=1			Add
+Wait						1
+	月天のミコト	通常	2_3					でも、ミコトは…\nそういう周りくどいの、\n好きじゃないのよね
+	月天のミコト	怒り						だから…手っ取り早く、\n終わらせちゃおうと\n思うんだけどね！
+FadeOut	white					.1
+Se	魔剣出る
+FadeIn	white					.1
+	ディーア	驚き
+	魔刀ルナ	通常	1_3					あらあらミコトちゃん、\nちょっとそれじゃあ、\n無作法じゃない？		2011-03
+	魔刀ルナ							あまり無茶苦茶言うと、\nアークにも嫌われちゃうわよー
+	魔刀ルナ							あ、私は月天の魔刀ルナ、\n<color=orange>太陽聖域</color>七天の一振りを\n任されておりますわ♪
+	ディーア							ヘ、ヘリオ…スフィア？		9999-00
+Tween	月天のミコト	PunchPosition	y=50
+	月天のミコト	通常						そう、我らがアーク様に仕えし、\n7人の魔剣使いを中心とする組織\n<color=mk2impo>『太陽聖域』</color>！
+FadeOut	yellow					.1
+Se	光1
+FadeIn	yellow					.1
+	リディ	<Off>						マ、マスタぁ…\nすごい魔力の胎動！\nこの人…この魔剣…強いよ!!		2001-13
+	月天のミコト							ふふ…私はミコト、<color=mk2impo>太陽聖域</color>幹部、\n七天が一振り魔剣ルナのマスター\n月天のミコトっ！		2010-03
+	月天のミコト	怒り						アークのために、\nちょっと大人しくしててよねっ！
+	ディーア	怒り						アークだかなんだか知らないが！\n大事なリディは渡さない…いくぞ!!
+	ディーア							<color=mk2impo>「愚かなる卑怯者の鍵」\n(ワールドイズマイン)</color>\n魔力結晶体構築…魔剣・開放!!		9999-00
+EndScenario
+
+# Q100202_e
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="エピローグ6"
+ShowMessageWindow
+Bg	宝石鉱山
+Bgm	ボスバトル
+	魔刀ルナ	通常	1_3
+	月天のミコト	悔しい	2_3
+	ディーア	怒り	画面外_右					てやぁぁぁあああぁぁぁ!!!!
+Se	走る
+Tween	ディーア	MoveTo	x=180 time=0.5	easeInSine		Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Wait						.5
+	ディーア	怒り	3_3
+	月天のミコト	通常						ふふ、流石ね…\nアークが注目するだけの事はあるわ\nでも…思っていた程じゃないわね
+Se	回避
+CharacterOff	魔刀ルナ
+	水天のアクア	笑い	1_3					でも、ヤられちゃった説…\n出てない？
+	月天のミコト	怒り						う、うるさいわね！\nちょっと油断しただけよ
+	水天のアクア	驚き						えーでもボロボロだしー
+	魔刀ルナ	<Off>						アクアさーん、\nあんまりうちのミコトちゃんを\nイジめないでくださる？		2011-15
+	水天のアクア	笑い						てへぺろー♪\nでもでも、こっちは圧勝だった説、\n出ちゃってるんだよねー		9999-00
+Tween	ディーア	PunchPosition	y=50
+	ディーア	驚き						…ルル!?
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	勇者ルル	<Off>						ぐぅっ…\nく、そぉ…		2004-18
+	ディーア	通常						良かった、息はあるみたいだな		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	怒り	3_3					それじゃあ、アクアも交えて…\n第2ラウンドでも始めるか？
+	月天のミコト	通常						ふふん、悪いけど…\nそんな暇…ミコトたちにはないの
+	月天のミコト							あなたたちの目的って、\nマーガレットさんを助ける事でしょ？
+Tween	水天のアクア	PunchPosition	y=50
+	水天のアクア							大事な大事なマーガレットさんなら\nこの地下道の先にいる説、\n出てるだけどー？
+	月天のミコト							あはは♪\nどう？追ってくる？\nそれとも、逃げる？		2010-05
+	ディーア	怪しい						ははっ！\nそんなの選択肢にもなら…		9999-00
+	リディ	<Off>						ま、ますた…\nぐ…く…くるし…		2001-10
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	驚き						リディ!?\nまだ、頭が痛いのか!?		9999-00
+Tween	月天のミコト	PunchPosition	y=50
+	月天のミコト		2_3					ふふふ…その子の秘密、\n知りたくないの、魔剣使い？
+	月天のミコト							知りたければ…\n追ってくるのね
+	水天のアクア							マーガレットさん…\n生きてるかなー\n…なんちゃって♪
+Se	回避
+CharacterOff	水天のアクア
+CharacterOff	ディーア
+	月天のミコト	通常	1_3
+	リディ	通常_もち	3_3
+	ディーア	悔しい	2_3					おい、お前ら…
+	リディ							マスター、行こっ
+	月天のミコト	悔しい
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	驚き						リディ？
+	リディ	照れ						大丈夫…私はへいき\nマスターがついてるもん…それに、\nいざとなれば助けてくれるでしょ？
+	ディーア	通常						あぁ、約束だ\n必ず助ける！
+	月天のミコト							はぁー、アツイアツイ
+Se	回避
+CharacterOff	月天のミコト
+	魔刀ルナ	通常	1_3					あれ、ミコトちゃん…\nもしかして、羨ましいの？
+	月天のミコト	<Off>						は、はぁ？\nな、何言ってるのよ、ルナ！\nほら…いいから、行くわよ!!
+Se	魔剣入る
+	水天のアクア	通常	1_3
+	魔刀ルナ	<Off>						<color=mk2wisp>《あら、しくしく…\nざーんねん》</color>		2011-08
+Tween	水天のアクア	PunchPosition	y=50
+	水天のアクア	笑い						それじゃあ、アクア様は…\n行く前にトドメっと		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	怒り						そうはさせ…
+	月天のミコト	<Off>						アクアさーん、そんなザコ勇者、\n放っておきましょう\nどうせ、何も出来ないんだから
+	勇者ルル	<Off>						……っ!!
+	水天のアクア	笑い						そう言われれば、確かにそうねー\nふふ、ミコト、正しい説\n出まくりだね♪
+Se	回避
+CharacterOff	水天のアクア
+CharacterOff	ディーア
+	勇者ルル	悔しい	3_3
+	リディ	通常_もち	2_3
+	ディーア	悔しい	1_3					ま、待て!!
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	怒り						ここまで来て、逃がすものが…\nルル、お前はここで休んでろ！\nその後で<color=mk2name>EDEN</color>に戻るんだぞ
+	ディーア	通常						ヌイさんも…心配してたぞ\n…リディ、行けるか？
+	リディ							うん、へーき
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	怒り						よし、行くぞ!!
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=1	easeInSine		Add
+CharacterOff	ディーア
+CharacterOff	リディ
+	勇者ルル	悔しい						僕は…相手にすらされていない…
+FadeOut	white					.1
+Se	魔剣出る
+FadeIn	white					.1
+	ノイズ	通常	2_3					…ルル…
+Tween	勇者ルル	ScaleBy	x=-1 time=0.75
+	勇者ルル	笑い						はっはは…ふふふ\nはははははっ!!		2004-05
+	ノイズ	驚き						ど、どうしたのルル!?\nついに、おかしくなっちゃったの？		9999-00
+Tween	勇者ルル	PunchPosition	y=50
+	勇者ルル							僕がただヤられるだけだと思うなよ…！\n僕は…今までの僕じゃない!!
+FadeOut	yellow					.1
+Se	キラン
+FadeIn	yellow					.1
+	ノイズ	通常						何…これ？
+FadeOut	white					.1
+Se	魔剣出る
+FadeIn	white					.1
+	ノイズ	驚き	1_3
+	ゲオルギウス	驚き	2_3					見た事がない装飾品ですねー\n…どっかの民族衣裳…？
+FadeOut	white					.1
+Se	魔剣出る
+FadeIn	white					.1
+CharacterOff	ノイズ
+	ゲオルギウス	驚き	1_3
+	アマノハバキリ	通常	2_3					私、これ…\nどこかで見た事が…
+	勇者ルル							もちろん、みんな見た事あるはずだよ！\nこれは<color=mk2name>【霊山アマラブルム】</color>の\n周辺でしか、作られていない名産品さ
+	勇者ルル							以前、妹のために\n買いに行った事があるから、\n間違いない！
+CharacterOff	ゲオルギウス
+	ノイズ	驚き	1_3					…また妹…
+Tween	勇者ルル	PunchPosition	y=50
+	勇者ルル	通常						手がかりは手に入れたぞ！\n…僕は、僕のやり方で、\nマーガレットさんを救い出してみせる!!
+EndScenario
+
+# Q100203_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="禁止区域へ"
+JumpSubroutine	*メインシナリオタイトル
+Bg	研究所A
+Bgm	作戦会議
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	ディーア	怪しい	2_3					ここは…
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1	easeInSine		Add
+Wait						1
+	リディ	驚き_もち	3_3					あ、プレートがあるよ、マスター\nえっとぉ…<color=mk2name>【ユグドラシル研究所】</color>？		2001-13
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア							…ユグドラシル研究所…\n数ある魔剣研究所の中で、\n一番巨大な施設だ		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア							…て事は、ここは…\n研究所の地下なのか？
+Tween	リディ	PunchPosition	y=50
+	リディ	通常						まけんけんきゅう？
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	通常						リディも魔剣が持つ、\n<color=mk2impo>【三大研究】</color>は知ってるだろ？\n原理、生産、強化…
+	ディーア							どうやって動いているのか、\nどうやって生まれるのか、\nどうやって成長するのか…
+	リディ	驚き						それを、調べるのが\nユグドラシル研究所なの？
+	ディーア	怪しい						いや、むしろ博物館というか…\n研究成果の保管場所に\nなってるというか…
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						すごい！\nマスター、物知り!!		2001-06
+	ディーア	通常						…あぁ、そうだな		9999-00
+	リディ	通常						…？？		2001-23
+	ディーア	笑い						あ、いや…\nそれほどでもないさ、ははは		9999-00
+	研究員	通常	画面外_左
+Se	走る
+Tween	研究員	MoveTo	x=-180 time=1	easeInSine		Add
+Wait						1
+	研究員		1_3					おい！\nお前たちどこから来た？\nここは関係者以外立ち入り禁止だぞ!!
+	リディ	驚き_もち						え？\n…え？
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	怪しい						この波動…\nこいつ、魔剣使いだ
+	研究員							ちぃっ！\n侵入者がいるなんてバレたら…\n俺の評価が下がっちまう！
+	研究員							…悪いが、\nいなかった事に、させてもらう!!
+FadeOut	red					.1
+FadeIn	red					.1
+	リディ	怒り_もち						殺気!!\nマスター！
+	ディーア	通常						分かってるさ、リディ\n…ここは危ないから、下がってろ
+Tween	リディ	ScaleBy	x=-1 time=0.75
+Se	走る
+Tween	リディ	MoveTo	x=600 time=1	easeInSine		Add
+Wait						1
+CharacterOff	リディ
+	研究員							お前も魔剣使いか…\nならば容赦はいらんな！\n実験モンスター、カモン！
+Bgm	バトル
+Se	回避
+	ディーア	驚き	3_3
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	カニ型モンスター	通常	2_3					グォオオオオオ!!
+	研究員							お前たちのような…\n侵入者はいなかった！\n始めからなっ!!
+EndScenario
+
+# Q100203_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="神聖なる研究"
+JumpSubroutine	*メインシナリオタイトル
+Bg	研究所A
+Bgm	作戦会議
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	リディ	怒り_もち	2_3					はぁ、はぁ…\nもう、なんなの、あいつは！		2001-07
+	ディーア	怪しい	3_3					さっきの研究員…\n見た目こそ研究者だが、\n用心棒の訓練を受けていた…		9999-00
+	ディーア							ガードマン、みたいな感じか\nしかし、一体…どうして？
+Tween	リディ	MoveTo	x=-180 time=1	easeInSine		Add
+Wait						1
+	リディ	通常_もち	1_3					むぅー、\nなんか変な匂いがする…\nマスター、あの部屋なんだろう？
+Tween	ディーア	PunchPosition	y=50
+	ディーア	驚き						…この匂い、この感じ…\nそれにガードマンが必要な部屋…！\n待て、リディ!!
+	リディ	笑い_もち
+Se	カギ開ける
+Bgm	絶望
+FadeOut	red					.1
+	リディ	驚き_もち_驚き涙	2_3
+FadeIn	red					.1
+	リディ							…えっ!?
+	ディーア	悔しい						くっ…これは…!?\n酷い…酷すぎる…
+	リディ							え、え…\nマ、マスター…これ…
+Se	回避
+	リディ	驚き_もち_驚き涙	3_3
+	ディーア	悔しい	2_3					あまり見るな…\n傷になる
+	リディ							…え、なに…これ…\nいや、イヤ…\nどうして、こんな…		2001-28
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア							……
+	リディ	通常_もち_驚き涙						あれ、魔剣少女、だよね…\nなんで、なんで…\nバラバラ…		9999-00
+	ディーア	怒り						……
+	リディ	驚き_もち_驚き涙						だって、あんな、あんな事したら…\n痛い…痛いよ、ねぇマスター…\nどうして…こんな…マスター!!		2001-08
+	ディーア							…………
+	リディ	通常_もち_驚き涙						分かった…あれ、みんなニセモノ\nお人形さん、なんでしょ？\nうん、そうだよね？		9999-00
+	ディーア							…………
+	リディ							…ねぇマスター、\nなんで黙ってるの\nなんで、何も…うぇっ、うぇえぇっ		2001-26
+	ディーア	悔しい						…ゴメンな
+	リディ	驚き_もち_驚き涙						なんで、マスターが…\n謝る…の？		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+Tween	ディーア	MoveTo	x=-180 time=1	easeInSine		Add
+Wait						1
+Se	強化魔石
+	ディーア	怪しい	1_3					耐久性試験に、\n精神汚染実験、こっちは…\n魔剣使いとの強制感応の記録…
+	ディーア	怒り						酷いレポートだ\nそれも、こんなに…
+Se	回避
+	ディーア	驚き	2_3
+	主任研究員ドレッグ	通常	1_3					誰だ、お前たちは!?
+	ディーア	怪しい						お前が…これを？
+	主任研究員ドレッグ							…ふむ、君は\nそのレポートを読めるのか？\n…そうか、君が新任の研究者だな！
+	ディーア	怒り						…お前がコレをやったのかと、\n聞いている
+	主任研究員ドレッグ							ふふふ、素晴らしいだろう！\nこの研究成果!!
+	リディ	怒り_もち
+	主任研究員ドレッグ							例えばこれだ！\n灼熱環境における魔剣少女の耐久試験！
+Tween	主任研究員ドレッグ	PunchPosition	y=50
+	主任研究員ドレッグ							高濃度エメラルド水溶液に、\n適用した魔核を持つ魔剣は…\n驚くべき事に！
+	主任研究員ドレッグ							灰になっても、\n魔剣少女として活動可能なのだよ！
+	主任研究員ドレッグ							逆も凄いぞ、\n氷雪系魔剣の過冷却実験だ!!
+Tween	主任研究員ドレッグ	PunchPosition	y=50
+	主任研究員ドレッグ							耐久を超えた魔核からの\nルビー錬金なんて、ほら！\nこんなにも素晴らしい数値が!!
+	ディーア							…その魔剣は、\n実験に使われた魔剣たちは、\nどうなった？
+	主任研究員ドレッグ							魔剣？\nあぁ、ランクB程度の…\n魔剣たちの事か
+	主任研究員ドレッグ							正式には魔剣としても\n認められない…ただの廃棄物だからな
+	主任研究員ドレッグ							その名の通り、廃棄されたよ\nふふふ、あはは！
+Tween	主任研究員ドレッグ	PunchPosition	y=50
+	主任研究員ドレッグ							そんな廃棄物の事よりも、\n僕の素晴らしい話だけでも、\n聞いてみないかい？		3006-09
+	主任研究員ドレッグ							その廃棄システムに、\n僕の魔核ルビー抽出技術が\nついに採用される事が決まってね！		9999-00
+	ディーア							…………
+	主任研究員ドレッグ							あはは、助かったよ、本当に！\n君たちが誰だか知らないが…\nここにはバカばっかりで困るよ		3006-01
+	主任研究員ドレッグ							僕の神聖なる研究を、\n<color=mk2impo>【ユグドラシルレポート】</color>の一端を…		9999-00
+	主任研究員ドレッグ							理解、出来る者が現れて嬉しいよ！\n本当に嬉しい!!
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+	主任研究員ドレッグ							どうした、さっきから黙って？\nそうだ、魔核からルビーを抽出した時の\n魔剣少女の実験映像を見るかい？
+	主任研究員ドレッグ							肉体が硬化し、少しずつルビーが\n生み出されていく様は\n本当に興味深いんだ
+	主任研究員ドレッグ							少し叫び声がうるさいんだが…\nそこは我慢してもらうよ？
+Tween	主任研究員ドレッグ	PunchPosition	y=50
+	主任研究員ドレッグ							ふふ、僕はね…魔剣少女解放後の方が\n抽出量が多い事に着目していてね、\n君とは深く議論を…
+FadeOut	white					.1
+Se	打1
+CharacterOff	主任研究員ドレッグ
+FadeIn	white					.1
+	ディーア							もういい、黙れ
+	主任研究員ドレッグ	通常	1_3					…へ？
+	ディーア							黙れと言ったんだ、クズ
+Bgm	バトル
+	主任研究員ドレッグ							くくく…ク、クズだとぉ!?
+Tween	主任研究員ドレッグ	PunchPosition	y=50
+	主任研究員ドレッグ							僕に言ってはいけない言葉ランキング、\n4年連続1位がクズだって\n知っているのか!!
+	ディーア							知らない\n知りたくもない\nそして、お前の顔は…もう見たくない
+	主任研究員ドレッグ							この波動…お前、魔剣使いか\nくくく…何が目的かは知らないが\n魔剣使いよ!!
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	通常						リディ、もう少し下がってろ\n手加減が出来ないかもしれない…
+Tween	リディ	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	リディ	MoveTo	x=600 time=1	easeInSine		Add
+Wait						1
+CharacterOff	リディ
+	主任研究員ドレッグ							我々の研究あってこその\n魔剣使いである事…それを、\n断じて忘れるなっ!!
+FadeOut	white					.1
+CharacterOff	ディーア
+Se	アラート
+FadeIn	white					.1
+	ディーア	怒り	3_3
+	主任研究員ドレッグ							カモン…！\n実験モンスターズっ!!
+FadeOut	white					.1
+Se	火1
+CharacterOff	主任研究員ドレッグ
+	クマ型モンスター	通常	1_3
+FadeIn	white					.1
+	クマ型モンスター							グォオオオオオ!!
+	主任研究員ドレッグ	<Off>						お前も実験材料にしてやる!!\n喜べ、神聖なるレポートの\n一部になれる事を!!
+EndScenario
+
+# Q100203_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="戦うための道具"
+JumpSubroutine	*メインシナリオタイトル
+Bg	研究所A
+Bgm	絶望
+	主任研究員ドレッグ	通常	1_3
+	ディーア	怒り	2_3
+FadeOut	white					.1
+Se	打1
+FadeIn	white					.1
+CharacterOff	主任研究員ドレッグ
+	主任研究員ドレッグ	<Off>						う…ぐっ…あぁ…		3006-07
+	リディ	通常_もち	3_3
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	怪しい						さっさとこんなところ抜けて、\nミコトたちを追うぞ、リディ！
+Tween	リディ	PunchPosition	y=50
+	リディ							…うん！
+	？？？	<Off>						コンコーン♪\nお取り込み中のところ、\nちょっといいかしら？
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	怒り						その声は、月天のミコト!?
+Se	回避
+	月天のミコト	通常	1_3					アッタリー♪\n全然追って来ないから、\nどこで油を売ってるのかと思いきや…
+	月天のミコト	怒り						なぁに、この部屋…\n趣味、悪っ
+	ディーア	怪しい						お前…逃げていたのに…\n一体、何が目的だ!?
+	月天のミコト	通常						あはは、それが知りたかったら、\n追って来なさい？\nもしかしたら…		2010-05
+Tween	月天のミコト	PunchPosition	y=50
+	月天のミコト							マーガレットさんも、\nこんなふうに実験されてたりしてー？		9999-00
+	リディ	驚き_もち_驚き涙						…っ!?
+	月天のミコト							大勇者様が研究対象なんて…\nそうそうない事だしねー\n今頃、きっと…
+	ディーア	怒り						…貴様っ!!
+Tween	ディーア	MoveTo	x=-180 time=1	easeInSine		Add
+Wait						1
+Se	回避
+CharacterOff	月天のミコト
+	ディーア		1_3					逃がすものかっ!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	作戦会議
+FadeIn	black					.5
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	ディーア	怒り	2_3					くそっ、ミコトの奴…\nどこに!?
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1	easeInSine		Add
+Wait						1
+	リディ	驚き_もち	3_3					マスター、\nこの部屋も、あの部屋も…酷い\nさっきよりも、もっと…ずっと…
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	悔しい						リディ、見るな\n今は…俺を信じて、\nついて来て来るんだ
+	リディ	照れ_もち						マスター…\nうん、分かった
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+	月天のミコト	通常	1_3
+	ディーア	怒り	画面外_右					いたぞ！\nあそこだ!!
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	リディ	怒り_もち	3_3
+	ディーア		2_3					お前たちも、\nこの研究に手を貸しているのか!?
+	月天のミコト							…だとしたら？\nどうするのかしら？
+	ディーア	悔しい						どうして、こんな酷い事を！\nここを見て、\n何とも思わないのか!!
+	月天のミコト							酷い？\nどこが？
+	ディーア	怒り						なん…だと…!!
+Tween	月天のミコト	PunchPosition	y=50
+	月天のミコト	怒り						魔剣は兵器、\n人間が戦うための道具
+	月天のミコト	通常						それを…より使いやすくするために、\n様々な視点から研究をする\n…それのどこがいけないの？
+	ディーア	怪しい						だからと言って…\nやっていい事と、悪い事が！
+	月天のミコト	怒り						だから、何が悪いの？\n魔剣よ？武器よ？\n人殺しの道具なのよ？
+	リディ	通常_もち_驚き涙
+	ディーア	悔しい						違う！\n魔剣は…魔剣は…！
+	月天のミコト	通常						ねぇ、魔剣使い…ひょっとして\n人間の姿をしているから、\n人間として扱え、そう言いたいの？		2010-11
+	ディーア							……
+Tween	月天のミコト	PunchPosition	y=50
+	月天のミコト	怒り						いい、魔剣は兵器、\n人間が人間を殺すため、\n人間がモンスターを殺すため…		9999-00
+	月天のミコト	通常						人間が《冥獣》を殺すため、\n何かを毀すために造られ、\n使われるのが魔剣という兵器なの
+	ディーア							違う、違う…
+	月天のミコト	怒り						はぁ…私はね、アンタみたいな軟弱で、\n真実を正面から見れない奴が…\n大っ嫌いなの！
+	月天のミコト	通常						本当はアンタたちを、この奥に\n連れて行く計画だったんだけど、\nもういい…殺すわ
+	ディーア	怒り						例え、お前の言う事が正しくても…\n俺は、俺の正しいと思う道を\n進むだけだ!!
+	ディーア	通常						…リディ、下がってるんだ
+	リディ	通常_もち						うん、\nマスターも気をつけてね
+Tween	リディ	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	リディ	MoveTo	x=600 time=1	easeInSine		Add
+Wait						1
+CharacterOff	リディ
+	月天のミコト	怒り						本っ当ーに、そういうところ…\n見てると、イライラするわね\n…ルナ、アンロック
+FadeOut	white					.1
+Se	魔剣出る
+CharacterOff	ディーア
+CharacterOff	月天のミコト
+	ディーア	怒り	3_3
+	月天のミコト	怒り	2_3
+FadeIn	white					.1
+	魔刀ルナ	通常	1_3					…仰せのままに
+	月天のミコト	通常						魔剣使いとして、命じるわ…\n彼を…殺すわよ
+	魔刀ルナ							御意
+EndScenario
+
+# Q100203_d
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="魔剣の墓場"
+JumpSubroutine	*メインシナリオタイトル
+Bg	研究所A
+Bgm	バトル
+	ディーア	怒り	3_3
+	月天のミコト	怒り	1_3					せやあっ!!		2010-16
+FadeOut	white					.1
+Se	斬2
+	ディーア		1_3
+	月天のミコト		3_3
+FadeIn	white					.1
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア							はぁっ！
+FadeOut	white					.1
+Se	斬2
+	ディーア		3_3
+	月天のミコト		2_3
+FadeIn	white					.1
+	月天のミコト	やられ						くぅっ…!!		2010-18
+Se	回避
+	水天のアクア	笑い	1_3					あれあれー？\nミコトったら、また負けちゃった説\n出てる感じ？		9999-00
+Tween	月天のミコト	ScaleBy	x=-1 time=0.5			Add
+	月天のミコト	怒り						アクアさん…\nバ、バカにしないで、遊びは…\n勝負に含まれないわ
+	水天のアクア	通常						ふぅーん…遊び、ねぇ？\nでも、向こうは結構、\n本気だった説、出てるみたいだけど？
+	ディーア	悔しい						はぁ、はぁ…
+Tween	水天のアクア	PunchPosition	y=50
+	水天のアクア	驚き						うわっ、そんなハァハァしちゃって、\n興奮しすぎだしっ
+	月天のミコト	悔しい						だから言ったでしょ、遊びだって…\nそれよりもアクアさん、\n準備は出来たのかしら？
+	水天のアクア	笑い						えへへー\n当然…出来てる説、出まくり！\n…というわけで、サービスはここまでー
+	ディーア	怒り						はぁはぁ、くそ！\n…ま、待てっ!!
+Tween	月天のミコト	ScaleBy	x=-1 time=0.5			Add
+	月天のミコト	通常						悔しかったら…\n追いかけて来なさい、魔剣使い
+	水天のアクア							アーッハッハッハ♪		2012-05
+Se	回避
+CharacterOff	月天のミコト
+CharacterOff	水天のアクア
+	ディーア	悔しい						あっ…くそっ!!\n必ず、捕まえてみせる！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	wipe
+Bgm	作戦会議
+FadeIn	black					.5
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	ディーア	悔しい	2_3
+	リディ	驚き	画面外_右					ま、待って！\n待ってよ、マスター!!
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1	easeInSine		Add
+Wait						1
+	リディ	驚き_もち	3_3
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	通常						どうした、リディ？\nこの先にあいつらが…
+	リディ	通常_もち						この先の部屋…なんとなくだけど、\n嫌な予感がする
+	ディーア	怪しい						嫌な、予感…？
+	リディ							すごく、いやな、かなしい…\nつめたいかんじ…\nあぁ、あたま、が…!!
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+	ディーア	驚き						お、おい！\nリディ!?\nしっかりするんだ！
+	リディ	驚き_もち_驚き涙						私は…だい、じょぶ…から\n気を、つけて…マスタぁ…
+	ディーア	悔しい						くっ…!!\n分かった…行くぞ、リディ\n俺が背負うから、しっかり捕まってろよ
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	研究所C
+Bgm	絶望
+FadeIn	black					.5
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=-90 time=1	easeInSine		Add
+Wait						1
+	ディーア	驚き	1_2					…なんだ、ここは!?\nこれ、全部…壊れた、魔剣…？
+	ディーア	怪しい						これじゃまるで、\n魔剣の墓場じゃないか…
+FadeOut	purple					.1
+Se	闇1
+FadeIn	purple					.1
+	リディ	<Off>						ぐ…く…くるし…		2001-10
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	悔しい						はっ…！\nリ、リディ!?
+FadeOut	purple					.1
+Se	闇2
+FadeIn	purple					.1
+	リディ	<Off>						はぁ…はぁっ…\nいや、いやあああああああ!!!!!		2001-29
+	ディーア	驚き						リ…ディ？
+Se	回避
+	リディ？	血まみれ	2_2					あら、今更神様に命乞い？\nいい気なものね、元はといえば\nあなたが原因の事なのよ？		2001-55
+	ディーア							え…？\nリディ、なのか？
+	リディ？							別に構わないわ、ユグドラシル…		9999-00
+	ディーア	悔しい						お、おい！\nリディ!!
+	リディ？							…さようなら、ハクビ\nもう二度と……
+Tween	リディ？	ShakePosition	x=-10 y=-10 time=1			Add
+	ディーア							おい！リディ!!\nしっかりしろ、リディ!!!!
+Se	回避
+CharacterOff	リディ？
+	リディ	通常_もち_驚き	2_2					え…あ、あ…\nマス…
+FadeOut	red					.1
+Se	アラート
+FadeIn	red					.1
+Wait						1
+Se	打1
+CharacterOff	リディ
+	ディーア	怒り						くそっ、リディ!?\n一体何がどうなって…っ!？\n人の叫び声？
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	wipe
+FadeIn	black					.5
+	研究員	通常	画面外_左
+Se	走る
+Tween	研究員	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	研究員		2_3					何だ、今のは!?\nすぐに調…
+FadeOut	red					.1
+Se	闇3
+CharacterOff	研究員
+FadeIn	red					.1
+	研究員	<Off>						う…ぐ…ああぁ…		3006-07
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	wipe
+Bgm	ボスバトル
+FadeIn	black					.5
+	ディーア	怪しい	2_3					何だ!?\n何が起きているんだ!?
+	研究員の声	<Off>						そ、そんな馬鹿な…\n《冥獣》だ…!!\n《冥獣》が現れたーーーーー!!!!!		3006-04
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	驚き						な、何だって…!?\nこんなところに、《冥獣》だと!?
+	研究員の声	<Off>						ぐあぁぁぁぁぁ!!
+	研究員の声	<Off>						うう…酷い…ううぅ…\n誰か…た、助けて、くれぇ…		3006-05
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	怒り						周囲から声が聴こえる!?\n一体、何体の《冥獣》がいるんだよ!!
+	アロウ型冥獣	通常	画面外_左					オオオオ…アアアァ…		3010-01
+Tween	アロウ型冥獣	MoveTo	x=-180 time=1	easeInSine		Add
+Wait						1
+	ディーア	悔しい						くっ、こっちにまで来たか!!\nリディ、しっかりしろ、リディ!!
+	リディ	<Off>						…………
+FadeOut	white					.1
+FadeIn	white					.1
+	アロウ型冥獣	通常	1_3					グアアアッ!!		3010-02
+	ディーア	怒り						くそっ、やるしかない！
+EndScenario
+
+# Q100203_e
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="エピローグ7"
+ShowMessageWindow
+Bg	研究所C
+Bgm	絶望
+	水天のアクア	通常	2_3
+	月天のミコト	通常	1_3					アクアさん…\n<color=mk2impo>【500年前の再現】</color>、本当にやるの？
+	水天のアクア							やるしかない説、出てるでしょ…\nアーク様が言うんだから、\nきっと正しいわ
+FadeOut	purple					.1
+Se	闇1
+FadeIn	purple					.1
+Wait						1
+	水天のアクア	驚き
+	月天のミコト	怒り
+FadeOut	yellow					.1
+Se	敵スキル発動
+FadeIn	yellow					.1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	水天のアクア
+CharacterOff	月天のミコト
+CharacterOff	wipe
+Bg	研究所A
+FadeIn	black					.5
+	研究員	通常	画面外_左
+Se	走る
+Tween	研究員	MoveTo	x=0 time=1	easeInSIne		Add
+Wait						1
+	研究員	通常	2_3					はぁ、はっ…\nここまで来れば大丈…
+	クレイモア型冥獣	通常	1_3
+FadeOut	red					.1
+Se	斬1
+FadeIn	red					.1
+	研究員							う…ぐ…ああ\nそん、な…		3006-07
+Se	打1
+CharacterOff	研究員
+Wait						1
+FadeOut	yellow					.1
+Se	敵スキル発動
+FadeIn	yellow					.1
+	グレイヴ型冥獣	通常	3_3
+Wait						1
+FadeOut	yellow					.1
+Se	敵スキル発動
+FadeIn	yellow					.1
+Se	火1
+	ワンドメイス型冥獣	通常	2_3					スベテ…ハカイ…\nハカイイィィィ!!!		3010-03
+Wait						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	クレイモア型冥獣
+CharacterOff	グレイヴ型冥獣
+CharacterOff	ワンドメイス型冥獣
+CharacterOff	wipe
+Bg	研究所C
+Bgm	バトル
+FadeIn	black					.5
+	アロウ型冥獣	通常	1_3
+	ディーア	怒り	3_3					はっ!!
+Tween	ディーア	MoveTo	x=0 time=0.5	easeInSIne		Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	ディーア	通常	2_3
+CharacterOff	アロウ型冥獣
+Se	敵殺
+Wait						1
+	ディーア	悔しい						ダメだ…全然、数が減らない!!\n倒しても倒しても、次々に出てくる
+	ディーア	悔しい						もしかして、研究所にある\n全ての魔剣が《冥獣》化しているのか!?
+	リディ	通常_もち_驚き涙	3_3
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	怒り						くそっ、最悪の連鎖だ…\nリディ、しっかりするんだ！\nリディ!!
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+	リディ							…………
+FadeOut	yellow					.1
+Se	敵スキル発動
+FadeIn	yellow					.1
+Se	回避
+Tween	ディーア	MoveTo	x=180 time=0.5	easeInSIne		Add
+Wait						.5
+CharacterOff	リディ
+	ディーア	悔しい	3_3					何が原因か分からないが、\nこの《冥獣》化事件…\nリディが関連してる
+	ディーア							ここっから一旦離れて…\nリディが安全に休めるところを探そう\nそれに現れた《冥獣》も助けなくちゃ…
+	月天のミコト	通常	2_3					あはは♪\n自業自得ね、魔剣使い！		2010-05
+	水天のアクア	笑い	1_3					アーッハッハッハ！\n面白すぎて、冷静沈着なアクア様でも\n爆笑説、出ちゃったんですけどー？		2012-05
+	ディーア	怒り						<color=mk2name>太陽聖域</color>!!\nこれは…お前たちの仕業か！		9999-00
+Tween	水天のアクア	PunchPosition	y=50
+	水天のアクア							ざーんねん、ハッズレー♪\n正解はーアクア様が<color=mk2impo>【地下研究所】</color>で\nちょーっと細工した説でしたー！
+	ディーア	驚き						地下研究所で細工？
+	月天のミコト							扉の前まで案内したのは、\nミコトたちだけど…\n鍵を開けたのはその子、自身…
+	水天のアクア							…というか、リディちゃん説、\n出ちゃってるから♪
+	ディーア	驚き						リディが…鍵を開けた？
+FadeOut	yellow					.1
+Se	敵スキル発動
+FadeIn	yellow					.1
+	リディ	<Off>						ぐ…く…くるし…		2001-10
+	月天のミコト							もう分かってると思うけど、\n出現した《冥獣》たちを止めても、\n意味はないわよ？
+	水天のアクア	通常						全てを止めるには、\n地下研究所へ行くしかない説、\n出ちゃってるんだからー		9999-00
+	月天のミコト	怒り						ねぇ…魔剣使い\n一度だけ慈悲をかけて上げるわ		2010-11
+	ディーア	怪しい						慈悲…だと？		9999-00
+	月天のミコト	通常						そう、今回の事件とお前は\n何も関係ない…リディちゃんを置いて、\n1人で逃げてもいいのよ？
+	ディーア	怒り						何の冗談だ、それは!?\nリディが起こしたのなら、\nマスターである俺が責任をとる！
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	通常						行こう、リディ\n原因を突き止めて、俺がお前も\n《冥獣》も…全員助けてやる!!
+Se	走る
+Tween	ディーア	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	ディーア
+Bgm	作戦会議
+Tween	月天のミコト	ScaleBy	x=-1 time=0.75
+	月天のミコト	通常						ふふっ、\nここまではアークの読み通りね
+	月天のミコト							後はリディちゃんたちが、\nハクビと接触して…<color=mk2impo>【例の状態】</color>に\nなるか、見守りましょう
+	水天のアクア	通常						欲を言うと、\n魔剣使いとハクビが共倒れしてー
+	水天のアクア	笑い						リディちゃんをラクに\nGET出来るのが理想説だけど…\nどうかなー？
+	月天のミコト	悔しい						ハクビがそう簡単に倒されるとは\n思えない…むしろ怒ったハクビが\nリディちゃんを傷つけないか心配だわ
+Tween	水天のアクア	ScaleBy	x=-1 time=0.75
+	水天のアクア							そっかーそれじゃあミコト、\nここでの最後の仕事…張り切って\nやる説、出てるからねー♪
+Se	走る
+Tween	水天のアクア	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	水天のアクア
+Tween	月天のミコト	ScaleBy	x=-1 time=0.75
+	月天のミコト	通常	2_3					ソエル…あなた、\nこれを起こして、\n何を企んでいるの…
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	月天のミコト
+CharacterOff	wipe
+Bg	市街地A
+Bgm	バトル
+FadeIn	black					.5
+	勇者ヌイ	通常	2_3
+	姫鶴	通常	1_3
+Se	アラート
+	勇者ベルメ	通常	画面外_右
+Tween	勇者ベルメ	ScaleBy	x=-1 time=0.75
+Se	走る
+Tween	勇者ベルメ	MoveTo	x=180 time=1	easeInSIne		Add
+Wait						1
+	勇者ベルメ							勇者ヌイ、緊急事態が発生した…\nすぐにユグドラシルへ向かってくれ！
+	勇者ヌイ	驚き						ユグドラシルに、ですか？\n一体何が…
+	勇者ベルメ							どうやら突如大量に《冥獣》が\n出現したらしい\n詳しい事はまだ分かっていない…
+	勇者ベルメ							とにかく今すぐに現場へ向かってくれ！\n現地の勇者では\n捌き切れない程の数らしい!!
+	勇者ヌイ	通常						…分かりました\n現場へ向かう途中で、\nすれ違った勇者にも声をかけます
+	勇者ベルメ							察しが良くて助かる…\nすぐに<color=mk2impo>『A級（シングル）』</color>クラスの\n勇者も向かう
+	勇者ベルメ							おっと、心配する必要はない\n私たち<color=mk2name>EDEN</color>の勇者には《冥獣》との\n戦闘経験がある者も大勢いる
+	勇者ベルメ							その間、少しでも多く人を\n助けて欲しい
+	勇者ベルメ							私も大勇者への連絡が済んだら\nすぐに現場へ向かうから…\nよろしく、頼んだぞ		3008-10
+Se	走る
+Tween	勇者ベルメ	MoveTo	x=-600 time=1	easeInSIne		Add
+Wait						1
+CharacterOff	勇者ベルメ
+	姫鶴							ヌイよ、この一件…邪な意思を感じるぞ\nもしや、あの魔剣使いたちに\n何かあったのかもしれん		2009-11
+Tween	勇者ヌイ	ScaleBy	x=-1 time=0.75
+	勇者ヌイ	驚き						姫鶴…すぐにユグドラシルへ\n向かいましょう\nすごく…嫌な予感がするわ…		9999-00
+EndScenario
+
+# Q100204_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="奮起から応戦"
+JumpSubroutine	*メインシナリオタイトル
+Bg	研究所C
+Bgm	作戦会議
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	ディーア	怪しい	2_3					ここがユグドラシルの地下か…
+	リディ	驚き_もち_驚き	3_3					こんなところがあったなんて…\n私、知らなかったよ!?
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	笑い						普段は1Fから3Fまでしか、\n解放されていないしな\nそれに、13Fより下は未開地域だ
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	驚き						地下に至っては、入口すら\n見つかっていないって\n話だったのに…
+	ディーア	怪しい						こんな技術が、\nこの世界にあったのか…
+	リディ							マスター？		2001-13
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	照れ						あ、いや…なんでもない		9999-00
+Bgm	バトル
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	カニ型光モンスター	通常	1_3			0		カアアアアッ!!
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	怪しい						早速モンスターの登場か\n行くぞ、リディ!!
+	謎の声	<Off>						そこまでだ！\n悪のモンスターよ!!
+	勇者ニテ	通常	画面外_左
+Se	走る
+Tween	勇者ニテ	MoveTo	x=-180 time=0.5	easeInSine		Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Se	敵殺
+CharacterOff	カニ型光モンスター
+Bgm	凱旋
+	勇者ニテ		1_3					勇者ニテ様、参上!!\n俺が来たからには、もう安心だ！
+	リディ	笑い_もち_驚き						わー、勇者さんだー♪\nカッコイイー		2001-06
+	ディーア	驚き						<color=mk2name>EDEN</color>の勇者!?\nこの地下は未開地域のはず…\n一体どこから…？		9999-00
+Tween	勇者ニテ	PunchPosition	y=50
+	勇者ニテ							くくく！\nこんな事もあろうかと、我々は密かに\n転送魔法陣を準備していたのさ!!
+	勇者ニテ							お、お前が<color=mk2impo>【噂の魔剣使い】</color>だな？\n勇者ヌイから伝言がある\n手短に伝えるぞ
+	ディーア							ヌイさんからの伝言!?
+	勇者ニテ							<color=mk2impo>「すぐに応援へ駆けつけますので、\nくれぐれも無茶だけはしないように…」</color>
+	ディーア	通常						ヌイさん…\nわざわざ俺たちを心配して…
+	リディ	笑い						あはっ、マスター♪\n無茶する事が当たり前のような\n感じになってるね？		2001-05
+	ディーア	照れ						うぐっ、それは…ちょっと、\n守れそうにないなぁ		9999-00
+	勇者ニテ							全く、デレデレしやがって\nヌイさんはこんな奴のどこがイイんだ\n俺だってまだ直接会った事がないのに…
+	ディーア	驚き
+	リディ	驚き_もち_驚き
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	勇者ニテ	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+Bgm	バトル
+	冥獣の声	<Off>				0		<color=mk2wisp>\n　　……グアアアアッ!!……</color>		3010-02
+Tween	勇者ニテ	ScaleBy	x=-1 time=0.75			Add
+	勇者ニテ							…と、そんな話をしている場合じゃ\nなさそうだ！
+	勇者ニテ							だがな、コレだけは言っておくぜ\n魔剣使い！		9999-00
+	勇者ニテ							<color=mk2name>EDEN</color>の中にはお前の事を\n良く思っていない勇者も多い…\nまっ、俺もその内の1人だけどな
+	勇者ニテ							だけど、あのヌイさんが信じて\nだから俺もお前を信じてみようと思う…\nこれからも…よろしくなっ！
+Se	走る
+Tween	勇者ニテ	MoveTo	x=-600 time=1	easeInSine		Add
+Wait						1
+CharacterOff	勇者ニテ
+	勇者ニテ	<Off>						<color=mk2name>EDEN</color>の勇者を甘く見るなよっ！
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	リディ	通常_もち						なんだか、忙しない勇者さんだったね
+	ディーア	通常						そうだな…よし、リディ\n俺たちも行くぞ
+	ディーア	笑い						勇者だけに、全てを任せるのは…\nなんだか癪だしな！
+EndScenario
+
+# Q100204_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="過る不安"
+JumpSubroutine	*メインシナリオタイトル
+Bg	研究所C
+Bgm	バトル
+	カタナ型冥獣	通常	monster
+	ディーア	怒り	player					そこだっ!!
+Tween	ディーア	MoveTo	x=0 time=0.5	easeInSine		Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Wait						.5
+Se	敵殺
+CharacterOff	カタナ型冥獣
+CharacterOff	ディーア
+Bgm	凱旋
+	リディ	笑い_もち	3_3
+	ディーア	通常	2_3					ふぅーさすがに強いな、\n《冥獣》は…\n勇者たちは大丈…ッ
+FadeOut	red					.1
+	勇者ニテ	通常	1_3
+FadeIn	red					.1
+	勇者ニテ							あぁ、なんとかな…
+	リディ	驚き_もち						酷い怪我…\n動かないで、助けを待った方がいいよ！
+	勇者ニテ							悔しいが…その様だな\nだけど、俺は自分の責務を果たす
+	勇者ニテ							ここで救援を呼ぶ\nお前たちは更に地下へ行くのだろう？\n…早く行った方がいい
+	リディ							で、でも…\nその傷…
+	ディーア	通常						…………\nあぁ、分かったぜ\n武運を祈る！
+	勇者ニテ							お互いにな!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	勇者ニテ
+CharacterOff	wipe
+Bgm	作戦会議
+FadeIn	black					.5
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	ディーア	通常	2_3
+	リディ	笑い	3_3					ねぇ、マスター\nあの勇者さん…\n珍しく、いい人だったよね？		2001-11
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	笑い						そうだな…勇者といっても、\nルルみたいな奴ばっかりじゃ\nないんだな
+	ディーア	通常						なんか、ヌイさんに憧れてたっぽいし…\nこの戦いが終わったら、\n紹介してあげよう？
+	リディ	照れ_もち						にしししー♪\nあの勇者さん\n泣いて喜ぶと思うよ♪		2001-39
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	勇者ニテ
+CharacterOff	wipe
+Bgm	絶望
+FadeIn	black					.5
+	勇者ニテ	通常	3_3					よし、後は合図を出せば…\n俺の責務も完了だ！
+	？？？	<Off>						はぁ…\nこんなところに転送魔法陣なんて、\nほんと見落としてたわ…
+Tween	勇者ニテ	ScaleBy	x=-1 time=0.75
+	勇者ニテ							だ、誰だ!?
+FadeOut	red					.1
+Se	斬2
+	月天のミコト	怒り	2_3
+	魔刀ルナ	通常	1_3
+FadeIn	red					.1
+	勇者ニテ							くっ…\nなぜ、こんな…!?		3007-04
+	月天のミコト	通常						悪いけど…救援を\n呼んでもらったら困るのよ
+	勇者ニテ							ぐ…あ…き、貴様…ぁぁ…\nな、何を…		3007-07
+FadeOut	purple					.1
+Se	闇1
+FadeIn	purple					.1
+	勇者ニテ							ぐ、ま…魔法陣が…\nお、おのれぇ…
+	月天のミコト	無心						しつこい
+FadeOut	red					.1
+Se	斬2
+FadeIn	red					.1
+Wait						.5
+Se	打1
+CharacterOff	勇者ニテ
+	勇者ニテ	<Off>						ぐふっ…
+	月天のミコト	通常						はぁーこれって、\n他にも魔法陣がありそうね
+	勇者ニテ	<Off>						…お、ま…許、な…
+	月天のミコト	無心						…………
+FadeOut	red					.1
+Se	斬1
+FadeIn	red					.1
+	月天のミコト							邪魔者は全員、\n始末しないと…
+	魔刀ルナ							…ミコトちゃん、大丈夫？
+Tween	月天のミコト	ScaleBy	x=-1 time=0.75			Add
+	月天のミコト							…別に
+	魔刀ルナ							そう…？
+BgOff
+CharacterOff	月天のミコト
+CharacterOff	魔刀ルナ
+	魔刀ルナ	<Off>						…なんだか、\n楽しそうだもの♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	研究所C
+CharacterOff	wipe
+FadeIn	black					.5
+	ディーア	怪しい	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	ディーア		2_3					おかしい…
+	リディ	驚き_もち_驚き	3_3					どうしたの、マスター？		2001-13
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア							さっきの勇者が、救援を\n呼んだとしたら、もうここは…\n勇者たちで溢れてもおかしくない
+	リディ	通常_もち						そうだねー確かに、\nちょっと遅いかも…\n…ま、まさか…
+	ディーア	悔しい						<color=mk2name>太陽聖域</color>に!?\nアイツ等なら…あり得る
+FadeOut	white					.1
+	リディ	驚き_もち_驚き涙
+	ディーア	驚き
+FadeIn	white					.1
+	？？？	<Off>						ぐああああぁぁぁぁ!!
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア							…叫び声だっ!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	リディ
+CharacterOff	ディーア
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+	ワンドメイス型冥獣	通常	1_3
+	研究員	通常	2_3					こ、この…この資料だけは…
+FadeOut	red					.1
+Se	斬1
+FadeIn	red					.1
+Wait						.5
+Se	打1
+CharacterOff	研究員
+	研究員	<Off>						うっ…\nぐ、あぁ…		3006-07
+	ディーア	怒り	画面外_右					止めろ!!
+Se	走る
+Tween	ディーア	MoveTo	x=180 time=1	easeInSine		Add
+Wait						1
+	ディーア		3_3					これ以上、人を襲うな!!
+	ワンドメイス型冥獣	通常						グアアアアァァァ!!		3010-02
+	ディーア	悔しい						く、戦うしかないのか…
+EndScenario
+
+# Q100204_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="魔剣研究レポート"
+JumpSubroutine	*メインシナリオタイトル
+Bg	研究所C
+Bgm	作戦会議
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	研究員	<Off>						…………
+	ディーア	悔しい	2_3					ダメだ…\nもう息はない
+	リディ	通常_もち_驚き涙	3_3					マスタぁ？\nこれ…何かな\n手に何か持ってるよ？		2001-13
+Se	N取得
+	ディーア	怪しい						これは…レポート？\n<color=mk2impo>【禁忌魔剣研究レポート\n9Bプロジェクト：ハクビ】</color>		9999-00
+	ディーア							なんだ…コレ…？\nどういう、意味なん…
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	グレイヴ型冥獣	通常	1_3					グオオオオッ！\nハカイィィー!!		3010-02
+	ディーア	驚き						な、まだ《冥獣》が!?
+	水天のアクア	笑い	画面外_左					てぇいっ！		2012-16
+Se	走る
+Tween	水天のアクア	MoveTo	x=-180 time=1	easeInSine		Add
+Wait						1
+FadeOut	white					.1
+Se	突2
+FadeIn	white					.1
+Se	ボス殺
+CharacterOff	グレイヴ型冥獣
+	グレイヴ型冥獣	<Off>						ギャァゥッ!!		3010-04
+	水天のアクア		1_3					まだこんなところにいたんだー\nゆっくりする説でも、出てたの？
+Se	回避
+CharacterOff	リディ
+	ディーア	怒り	3_3					やはり、来たな…\n<color=mk2impo>太陽聖域</color>…！		9999-00
+	月天のミコト	通常	2_3					あれー？\nこんなところに魔剣が落ちてるー
+Se	回避
+CharacterOff	水天のアクア
+	サタニア	通常	2_3
+	月天のミコト	通常	1_3					サタニアだー♪
+	ディーア	驚き						<color=mk2wisp>（サタニア!?\n　なるほど…それで、さっきのも…\n　合点がいった）</color>
+	ディーア	怪しい						…嘘だな
+	月天のミコト	怒り						…何!?
+	ディーア	通常						おかしいと思っていたんだ\nこれだけの《冥獣》災害…お前たちは\n意図的に起こしているような口ぶりだ
+	ディーア	怪しい						それなのに…\nお前たちは《冥獣》を上手く\n扱えていない
+	ディーア	怒り						さっき、倒したのが、その証拠だ\nむしろ、ここに来るまでの間、\n襲われていたんだろう？
+	ディーア	通常						つまり…魔剣も無しに、\nこの場を乗り切るなんて事は\n絶対に出来ない！
+	ディーア	怪しい						仮にそれが…人質であってもな！\nお前たちは今、マーガレットさんを\n連れていない!!
+	ディーア	怒り						何処へ連れて行ったのか、\n話してもらうぞ…!!
+Se	回避
+CharacterOff	サタニア
+	水天のアクア	笑い						あーあ、バレちゃったかー
+Tween	水天のアクア	ScaleBy	x=-1 time=0.75
+	水天のアクア							もうー、ミコトの演技が\n下手くそだから…バレた説、\n出ちゃったじゃなーい!!
+Tween	月天のミコト	PunchPosition	y=50
+	月天のミコト							台本を書いたのはアクアさんじゃない！\n私はそれに従っただけよ!!
+	水天のアクア	驚き						だって、そうでもしないと！\nハクビとリディちゃんを\n邂逅させらな…
+	月天のミコト	悔しい						…っ!!\nアクアさんっ!!
+	水天のアクア	通常						あ…
+Tween	水天のアクア	PunchPosition	y=50
+	水天のアクア	笑い						逃っげろー♪
+	ディーア							逃がすか!!
+Se	回避
+CharacterOff	水天のアクア
+CharacterOff	月天のミコト
+	ディーア	怒り	2_3					くそ、早い…\nでも、すぐに追えばまだ間に合うな
+	ディーア	怪しい						<color=mk2wisp>（ハクビとリディを…合わせる？\n　さっきのレポートにも書いてあった…\n　何か意味があるのか？）</color>
+	リディ	驚き_もち_驚き涙	3_3					ねぇ、マ、マスター…\nまた敵が…		2001-11
+FadeOut	yellow					.1
+Se	敵スキル発動
+FadeIn	yellow					.1
+	ドラゴン型火モンスター	通常	1_3					グアアアッ!!
+	ディーア	悔しい						悪いが、俺たちは急ぐんだ\nお前に罪はないが…倒させてもらう!!
+EndScenario
+
+# Q100204_d
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="神狐艶天の白眉"
+JumpSubroutine	*メインシナリオタイトル
+Bg	研究所C
+Bgm	作戦会議
+	水天のアクア	笑い	1_2
+	月天のミコト	無心	2_2					…はい、彼らは<color=mk2impo>【禁忌宝物庫】</color>に\n接触しました\n…はい、手筈通りに…
+Se	消費
+	水天のアクア	通常						ちょっと失敗したところもあったけど、\nついにご対面かぁー
+	水天のアクア	驚き						これはもしかして…\n世界の終焉説、出ちゃった系？
+Tween	月天のミコト	ScaleBy	x=-1 time=0.75			Add
+	月天のミコト	悔しい						アクアさん、縁起でもないわよ…\nでもまぁ…まずは私たちも\n生きて脱出しないとね
+	魔刀ルナの声	<Off>						<color=mk2wisp>《ミコトちゃん\nこの任務が終わったら、どこか\n別のところへ行きたいわねー》</color>		2011-11
+Tween	月天のミコト	ScaleBy	x=-1 time=0.75			Add
+	月天のミコト	通常						それもいいわね、ルナ…\n考えておくわ		9999-00
+Tween	水天のアクア	PunchPosition	y=50
+	水天のアクア	通常						はぁ…損な役回り\nこんなのツヴァイクとかが\nやればいいのに…
+	？？？	<Off>						<color=mk2wisp>《あらあら困ったわ…せっかく、\nアクアと一緒に戦えるのに…\n悲しいわぁ》</color>		2013-07
+Tween	水天のアクア	ScaleBy	x=-1 time=0.75			Add
+	水天のアクア							はいはい、マーキュリー\nとりあえず《冥獣》ちゃんたちには\n眠ってもらう説、出ちゃってるから		9999-00
+Tween	水天のアクア	PunchPosition	y=50
+	水天のアクア	笑い						魔剣七天の力、\n存分に見せちゃってー♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	水天のアクア
+CharacterOff	月天のミコト
+CharacterOff	wipe
+Bg	遺跡C
+Bgm	ボスバトル
+FadeIn	black					.5
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	ディーア	怪しい	2_3					ここがレポートに書いてあった\n最奥部…禁忌宝物庫!!
+	リディ	通常_もち_驚き涙	3_3					ねぇ、マスター\nレポートには何が書いてあったの？
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	通常						レポートの一部分だけだから、\n詳細は分からないが…どうやら、\nハクビっていう魔剣を使った実験らしい
+	リディ	驚き_もち_怒り						魔剣を使った…実験？
+	ディーア	怪しい						この《冥獣》連鎖事件…\nどうやらハクビってのが、核みたいだ
+	リディ							で、でも…<color=mk2name>太陽聖域</color>は…私と\nそのハクビを合わせるのが目的だって…
+	ディーア	通常						大丈夫だ、リディ\n例え罠だと分かっていても、\n進まないといけない時がある
+	ディーア							今がそれだ\n俺たちは自分の信じる…
+FadeOut	yellow					.1
+Se	敵スキル発動
+FadeIn	yellow					.1
+	謎の声	<Off>						何やら騒がしいかと思えば…\n随分と懐かしい反面、可愛らしく…\n憎らしくもある顔じゃのう
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	リディ	驚き_もち_怒り						え？\nあなた…誰？
+	謎の声	<Off>						よもや…童を忘れたとは言わせんぞ\n…のう？
+FadeOut	purple					.1
+Se	闇1
+	ディーア	驚き	player
+CharacterOff	リディ
+FadeIn	purple					.1
+	ハクビ	通常	monster					ブリジットよ
+	リディ	<Off>						…え…ブリジット…？\n…え、なに…これ…		2001-28
+FadeOut	white					.1
+Se	打1
+FadeIn	white					.1
+	リディ	<Off>						あ、あたまが…！\nい、痛いぃ…!!		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	悔しい						リ、リディ!?
+	ハクビ							おやおや、そうかそうか\nそのような姿になっても…なお、\nくくく、愉快愉快
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	怒り						お、お前っ!!\nリディに何をしたーーー!!!
+	ハクビ							妾は<color=mk2impo>【神刀白眉】</color>\n由緒正しき、神に仕えし魔剣よ
+	ハクビ							妾は何もしておらぬぞ…むしろ、\n先に仕掛けてきたのは、\nそちらではないか、魔剣使いよ？
+	ハクビ							いや、正確には…\nブリジットの方かえ？
+	ディーア	悔しい						リディが何をしたって…
+	ハクビ							何を…じゃと？\n笑止!!
+	ハクビ							貴殿は何も知らずに<color=mk2impo>「それ」</color>と\n一緒におるのか？\nそれこそ笑いが止まらぬわ
+	ハクビ							妾を眠りより呼び起こしたのは、\nブリジット…其方ではないか!!
+	ハクビ							そして…妾を眠らせたのも、\nまた、其方…だが、なぁ？
+	リディ	<Off>						頭がああぁぁーーー\n私の、せいでこんな…\nイヤ、いやあああああああ!!!!!		2001-29
+FadeOut	yellow					.1
+Se	敵スキル発動
+FadeIn	yellow					.1
+	ハクビ							ほう、いい声で鳴きおるわ\n共鳴して冥獣共が騒いでおるのか…
+	ハクビ							クックックッ、あの出来損ない共の\n雄叫びも妾には…赤子の鳴き声の如く、\n愛おしく、心地良いわ
+	ディーア	怒り						こいつ…この言動…魔力…\n《冥獣》とも違う\n魔剣少女でもない、一体…？		9999-00
+	ハクビ							《冥獣》なぞと下等な魔剣と\n一緒にするでない…\n妾は<color=mk2impo>【霊獣】</color>じゃ…ククク…
+	ディーア	驚き						れ、霊獣…？
+	ハクビ							ただの戯言じゃが、\n我が主の名を名乗ろう\n妾をこう呼ぶがよい…
+CharacterOff	ハクビ
+	霊獣姫タマモノマエ	通常	monster					霊獣姫タマモノマエ
+FadeOut	purple					.1
+Se	闇2
+FadeIn	purple					.1
+	ディーア	怒り						くっ、なんて魔力だ…\nだが、そんな事で…\n俺が諦めるとでも思ったか！
+	霊獣姫タマモノマエ							くくく、見えるぞ貴殿の殺気が…\n魔力の鋭さが、面白い…\n妾を止めようというのかえ？
+	ディーア	怪しい						あぁ、ここでやられたら…\n太陽聖域の思惑通りになっちまう\nだけどな、そうはさせない!!
+	ディーア	通常						《冥獣》も全員助ける！\n俺は…俺の信じた道を行く!!\nそれに…
+	ディーア	怒り						リディはリディだ…\nブリジットって、名前じゃない！\nこれ以上リディを傷付けさせるものか!!
+	霊獣姫タマモノマエ							くくく！\n<color=mk2impo>「それ」</color>を守ったところで\n貴殿に得があるわけでもなかろう？
+	霊獣姫タマモノマエ							だが、その瞳が気に食わん\n実に不愉快、不愉快、不愉快!!!
+FadeOut	purple					.1
+Se	闇3
+	ディーア	悔しい	player
+FadeIn	purple					.1
+	ディーア							ぐぅっ…今まで出会った、\nどの敵よりも凄まじい魔力だ…\nだが、負けるわけには…いかないっ!!
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	通常						リディ…辛いかもしれないが…\n力を貸してくれ\n俺は…絶対に勝つ！
+	リディ	<Off>						……うん\nマスタぁ…しんじ…て、る…
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	怒り						<color=mk2impo>「愚かなる卑怯者の鍵」\n(ワールドイズマイン)</color>\n魔力結晶体構築…魔剣・開放!!
+FadeOut	black					.1
+Se	魔剣出る
+FadeIn	black					.1
+	霊獣姫タマモノマエ							その《力》!!\nこの時代においても、\nそれを見る事になるとはな！
+	霊獣姫タマモノマエ							<color=mk2impo>【悪魔の鍵の能力】\n（エンスージアクレイス）</color>\n…見せてもらおうか！
+	霊獣姫タマモノマエ							《神狐艶天に栄えし白眉》\n《白き魔魅たる一閃の闇》\n《数え九つ白暝の神刀》
+	霊獣姫タマモノマエ							神刀白眉、玉藻前…\n貴殿の相手になろうぞ！\n<color=mk2impo>【魔鍵使い】</color>!!
+EndScenario
+
+# Q100204_e
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="エピローグ8"
+ShowMessageWindow
+Bg	遺跡C
+Bgm	凱旋
+	霊獣姫タマモノマエ	通常	monster
+	ディーア	悔しい	player					はぁ…はっ、はぁ…\nか、勝った…!!
+	霊獣姫タマモノマエ							くくく、妾を追い詰めるとは…\n流石は<color=mk2impo>【魔鍵使い】</color>よ\nくはははは…
+	ディーア	驚き						体が、崩れ落ちて…
+	霊獣姫タマモノマエ							ふふ、霊獣とはいえ、\n最後はこのようなものよ\nまた…あの昏い眠りへ落ちるかのう
+	リディ	通常	画面外_右					ま、待ってハクビ！
+Se	走る
+Tween	リディ	MoveTo	x=240 time=1	easeInSine		Add
+Wait						1
+CharacterOff	ディーア
+	リディ	驚き_もち_驚き	player					最後に教えて…\n私は…私は誰なの!?
+	霊獣姫タマモノマエ							ブリジットよ…\nそうか、本当に記憶が…\nくくく、ははは!!
+	霊獣姫タマモノマエ							今の妾には、それを語る資格も…\nそのような時間も\n持ちあわせておらぬ
+	霊獣姫タマモノマエ							…もしやの話、\nより<color=mk2impo>【多くの魔剣】</color>が\n眠る場所であれば…
+	霊獣姫タマモノマエ							そう、より大きな魔剣研究所であれば、\n其方の過去を知るもの、それを\n語る資格を持つ者が、おるやもしれん
+	リディ	通常_もち_驚き涙						…ハクビ…
+CharacterOff	リディ
+	ディーア	悔しい	player					リディ、まだ出現した《冥獣》を\n助けなくちゃならない…\nこれ以上、ここにいるのは…
+	霊獣姫タマモノマエ							ふふ、安心せい\n妾が眠れば、冥獣たちも眠りにつく…
+	ディーア	通常
+	霊獣姫タマモノマエ							フフフ…もがき苦しめ…\nそれが…お前の…\n選んだ道…
+CharacterOff	ディーア
+	リディ	驚き_もち_驚き	player					私が、選んだ…道？\n私…私…
+	霊獣姫タマモノマエ							さらばじゃ、魔鍵…
+FadeOut	white					.1
+Se	ボス殺
+CharacterOff	霊獣姫タマモノマエ
+CharacterOff	リディ
+CharacterOff	ディーア
+	リディ	驚き_もち_驚き	3_3
+	ディーア	悔しい	2_3
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+FadeIn	white					.1
+Wait						1
+	ディーア							リディ…
+	勇者ヌイ	驚き	画面外_左					大丈夫ですか、魔剣使い!?
+Se	走る
+Tween	勇者ヌイ	MoveTo	x=-180 time=1	easeInSine		Add
+Wait						1
+	勇者ヌイ	通常	1_3					良かった…\n無事だったようですね
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	驚き						ヌイさん!?\nどうしてここへ？
+	勇者ヌイ	呆れ						緊急招集で…すぐにここへ来たのですが\nなぜか、全ての《冥獣》が\n突然、真っ白な灰になって…
+	ディーア	通常						そうか…\n本当にタマモノマエが…
+	リディ							…………
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	悔しい						…っ!!\nリディ…
+	リディ							…………っ		2001-26
+Tween	勇者ヌイ	PunchPosition	y=50
+	勇者ヌイ	驚き						まさか、あなたたちが…？		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	通常						…はい
+	勇者ヌイ	通常						感謝申し上げます!\n2度も助けてもらったなんて…\n他のみんなも喜ぶと思いますよ		2008-04
+	ディーア	怪しい						…………		9999-00
+	勇者ヌイ							どうしたのですか？\nそんな暗い顔して…とにかく、今は\n地上へ戻りましょう
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	勇者ヌイ
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	市街地B
+Bgm	都市
+FadeIn	black					.5
+Se	ガヤB
+	ディーア	通常	3_3
+Wait						1
+Se	レベルアップ
+	住人	<Off>						助かったぞー！\nやったーーー!!\n勇者様、ありがとーーー!!!!
+	研究員	<Off>						俺たちは生きているっ!!\n魔界の神々に感謝をーーーー
+	勇者ヌイ	通常	画面外_右
+Tween	勇者ヌイ	ScaleBy	x=-1 time=0.75			Add
+Se	走る
+Tween	勇者ヌイ	MoveTo	x=0 time=1	easeInSine		Add
+Wait						1
+	勇者ヌイ							…あの人たちは…\nユグドラシル研究所の…良かった\n生き延びれたようですね
+	勇者ヌイ							私にも、誰かを救う事が…\n出来たみたいですね…
+	勇者ベルメ	通常	画面外_左					勇者ヌイ！\n無事だったのか!!
+Se	走る
+Tween	勇者ベルメ	MoveTo	x=-180 time=1	easeInSine		Add
+Wait						1
+	勇者ベルメ		1_3					良かった、\nあなたも生き延びれたみたいだな
+	勇者ヌイ							あなたも…無事で良かったです
+	勇者ベルメ							丁度いい…では、被害状況を\n共有しておこう\n現時点で分かっている範囲だが…
+	勇者ベルメ							死傷者、合わせて1412名、\n家屋崩壊326棟…
+	勇者ベルメ							あそこまで…《冥獣》が\n現れたにしては、被害は非常に少ない\n歴史上、最小限かもしれんな？
+	勇者ベルメ							ある程度は落ち着いたが…\nだが、まだ怪我人や要救助者が多い\n引き続き、私は救出を続ける
+Tween	勇者ベルメ	ScaleBy	x=-1 time=0.75			Add
+	勇者ベルメ							勇者ヌイも一休みが終わったら、\n救出を手伝って欲しい\n…では、また
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	勇者ヌイ
+CharacterOff	勇者ベルメ
+CharacterOff	wipe
+Bgm	作戦会議
+FadeIn	black					.5
+	新人研究員	通常	1_3					あんなにも…\n《冥獣》が溢れるなんて…\nくっ…
+	研究員	通常	画面外_右
+Tween	研究員	ScaleBy	x=-1 time=0.75			Add
+Se	走る
+Tween	研究員	MoveTo	x=180 time=1	easeInSine		Add
+Wait						1
+	研究員							《冥獣》が危険なものである、\n覚悟の上だったが…\nさすがにこれだけの災害は想定外だな
+	新人研究員							あぁ…\nこれじゃあ、命がいくつあっても\n全然足りない…
+Tween	新人研究員	ShakePosition	x=-10 y=-10 time=1			Add
+	新人研究員							もし、これが<color=mk2name>【研究市街ジーヴォ】</color>で\n起きたらと思うと…\nうぅ、考えたくもない…
+Tween	研究員	PunchPosition	y=50
+	研究員							しっ！\n誰かに聞かれる…これが知れたら…\nまた面倒な事になる
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	研究員
+CharacterOff	新人研究員
+CharacterOff	wipe
+FadeIn	black					.5
+	ディーア	怪しい	3_3					ヌイさん…今の話…
+Se	回避
+	勇者ヌイ	通常	2_3					ジーヴォ…\n魔剣研究の最先端、研究都市ジーヴォ…
+FadeOut	white					.1
+Se	魔剣出る
+FadeIn	white					.1
+	姫鶴	通常	1_3					大量の魔剣…\nという名の武器の残骸が\n集められておる…
+	姫鶴							鶴たち…魔剣にとっては\n気色が悪いだけの場所じゃがのう
+	勇者ヌイ	驚き						ジーヴォで…
+	ディーア	驚き						ヌイさん？\nどうかしましたか？
+	勇者ヌイ	通常						……あなたになら、\n話しても…うん
+	勇者ヌイ	呆れ						先ほど連絡があって…その、\nマーガレットさんが、ジーヴォ付近で\n目撃されたらしいのです…ただ…
+	姫鶴							…偶然にしては、\n少々…出来すぎじゃのー
+	ディーア	怪しい						太陽聖域か…何を考えているんだ…\nだけど、それ以前に…\nハクビの言葉も気にる
+	勇者ヌイ	驚き						…ハクビ？\n言葉？
+	ディーア	通常						ヌイさん、すまない\n俺たちはジーヴォに向かうよ
+	ディーア	悔しい						ここで立ち止まるわけにはいかないし…\n何より、前に進まないと…\n何も始まらない…行こう、リディ
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=1	easeInSine		Add
+Wait						1
+CharacterOff	ディーア
+Tween	勇者ヌイ	ScaleBy	x=-1 time=0.75			Add
+	勇者ヌイ	呆れ						前に進まないと、\n何も始まらない…ですか
+	姫鶴							ヌイよ、どうかしたのか？		2009-11
+	勇者ヌイ	通常						ルル…あなたは今、正しい道で\n前に進んでいるのですか？		2008-12
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	姫鶴
+CharacterOff	勇者ヌイ
+CharacterOff	wipe
+Bg	草原A
+Bgm	平和
+FadeIn	black					.5
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=-90 time=1	easeInSine		Add
+Wait						1
+	リディ	通常	2_2
+	ディーア	通常	1_2					………
+Tween	ディーア	ScaleBy	x=-1 time=0.75			Add
+	ディーア	怪しい						リディ、大丈夫か？\nほら、お菓子もあるぞ
+	リディ							…うん、ありがとう、マスター\nでも、後でいい
+	ディーア	悔しい						リディ…
+	ディーア	通常						リディ！\n前にも約束したが…もう一度、\n改めて誓わせてくれないか？
+	リディ	驚き_もち_驚き						…んう？		2001-23
+	ディーア	通常						どんな事があってもリディは、\nマスターである俺が守る\n必ず…約束だ		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	照れ						マスター…\nうん、約束だからね♪
+EndScenario

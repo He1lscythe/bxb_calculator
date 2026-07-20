@@ -1,0 +1,909 @@
+# E_372_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	市街地A
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	ディーア	悔しい2
+FadeIn	black					1
+	ディーア	悔しい2						な、なんでだよ……
+	ディーア	悔しい2						そんな……
+CharacterOff	ディーア
+	旅人
+Tween	旅人	ShakePosition	x=20 time=1				NoWait
+	旅人							うああああああああああああ!!
+CharacterOff	旅人
+	酒場のおばちゃん
+Tween	酒場のおばちゃん	ShakePosition	x=20 time=1				NoWait
+	酒場のおばちゃん							わああああああああああああ!!!!
+CharacterOff	酒場のおばちゃん
+	ディーア	悔しい2						どうして……
+FadeOut	black					.5
+CharacterOff
+Bgm	コメディ
+	旅人（ばぶ）
+Param	character_grayout=true
+FadeIn	black					.5
+	旅人（ばぶ）
+Tween	旅人（ばぶ）	ShakePosition	x=20 time=1				NoWait
+	旅人（ばぶ）							マッマーーーーーー!!!!
+CharacterOff
+	おばちゃん（ばぶ）
+Tween	おばちゃん（ばぶ）	PunchPosition	y=50 		loop=2		NoWait
+	おばちゃん（ばぶ）							おぎゃーーーーーー!!
+CharacterOff
+	ばぶじい	ばぶ
+Tween	ばぶじい	ShakePosition	x=20 time=1				NoWait
+Tween	ばぶじい	PunchPosition	y=100				Add
+	ばぶじい	ばぶ						ばぶばぶーーーーーーー!!
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	ShakePosition	x=20 time=1				NoWait
+	ディーア	絶望2						どうしてこうなったーー!?!?
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	草原B
+StopBgm
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　　　<color=blue><dash=2>約1時間前<dash=2></color>
+	魔物		2_3_m
+Bgm	バトル
+Wait						1
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.3
+Tween	魔物	ShakePosition	x=20				NoWait
+Wait						.5
+Se	敵殺
+Tween	魔物	MoveTo	y=-800 time=1.5
+FadeOut	black					.5
+CharacterOff
+	ディーア	悔しい2	1_2
+	ルイゼット		2_2
+Bgm	平和
+FadeIn	black					.5
+	ディーア	悔しい2						はぁ……はぁ……\nちょっと……休憩するか……
+	ルイゼット	悲しい						あら大変だわ！\n疲れているのね
+	ルイゼット	嬉しい						さあおいで、マスターくん♪
+	ディーア	汗2						え、いや、オレはまだ元気……
+	ルイゼット	通常						我慢しちゃいけません♪\n私が全部受け止めますから
+Tween	ルイゼット	MoveBy	x=-10				NoWait
+	ルイゼット	嬉しい						さあ、ルイゼットママに\nたっぷり甘えていいのよ♪
+	ディーア	にやけ2						………………
+	ディーア	驚き2						はっ!!　……いや!!\n魅力的だけど、今は任務中だし\nやめておくよ
+Tween	ルイゼット	MoveBy	x=10				NoWait
+	ルイゼット	嬉しい						そう？\nふふ、マスターくんはいつも\n頑張っていて偉いわね♪
+	ルイゼット	通常
+	ディーア	悔しい2						上手くこなせてはいないけどな……\nさっきだって、近くの\n住人の家を壊して怒られたし……
+	ルイゼット							マスターくんは精一杯戦ったわ\n被害も最低限だったし……
+	ディーア	怒り2						ありがとう\nでも、被害を出したのは事実だし……\n次はもっと上手くやらないとな！
+	ディーア	通常2						ルイゼットの方こそ、\nもう任務には慣れてきたか？
+	ルイゼット							もちろんです♪\n優しいマスターくんのおかげで！\nああ、でも……
+	ディーア	通常2						……？\n何か心配事があるのか？
+	ルイゼット	悲しい						ええ、まだ不慣れな部分もあるから\nみんなに安らかな終わりを\n与えられているか、少し心配で……
+	ルイゼット							全ての人……いいえ、全ての生き物の\n苦しみを受け止めてあげることが\n私の使命ですから……
+	ディーア	怒り2						ルイゼット\nあまり気負いすぎるのはよくな……
+	ルイゼット	通常						いいえ、マスターくんみたいに\nママももっと頑張らないと……！
+Tween	ルイゼット	PunchPosition	y=50				NoWait
+	ルイゼット							あっ！\nマスターくん、あれを！
+FadeOut	black					.2
+CharacterOff
+Bgm	緊迫
+	魔物		2_3_m
+Wait						.2
+FadeIn	black					.2
+	魔物		2_3_m					………………
+CharacterOff
+	ディーア	悔しい2
+	ディーア	悔しい2						……!!\nきっとこいつが最後の……！
+CharacterOff
+	魔物		2_3_m
+Tween	魔物	ShakePosition	x=20 time=1.5			.5	NoWait
+	魔物		2_3_m					……ウウウウ……
+CharacterOff
+	ルイゼット	悲しい						……!!\n大変だわ、あの子なんだか\n苦しそう……
+CharacterOff
+	ルイゼット		画面外_右
+	魔物		1_3_m
+Tween	ルイゼット	MoveTo	x=90 time=1				NoWait
+	ルイゼット	通常	2_2					あなたもたくさん辛い思いをしたのね\nさあ、おいで？\nママがその苦しみを受け止めて……
+CharacterOff
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						ルイゼット！\nそんなに近づいたら危な……!!
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+	魔物		1_3_m
+	ルイゼット		2_2
+FadeIn	black					.1
+	ルイゼット		2_2
+Tween	ルイゼット	MoveTo	x=45 time=1.5
+FadeOut	white					.1
+Se	魔1
+FadeIn	white					.1
+Tween	魔物	ShakePosition	x=10 time=0.5
+Tween	ルイゼット	MoveTo	x=180 time=0.5				NoWait
+Wait						.4
+	ルイゼット	悲しい						……！\n今、魔力を……？
+CharacterOff	魔物		1_3_m			1.5	NoWait
+Wait						.5
+Se	闇2
+	幻想体ルイゼット		1_3			1.5		……ふふっ
+CharacterOff
+Bgm	緊迫
+	ディーア
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	悔しい2						なっ！\nルイゼットの姿に……！？
+CharacterOff
+	幻想体ルイゼット							ふふっ、ふふふ♪
+	幻想体ルイゼット							みーんな\nママが甘やかしてあげる……！
+Se	走る
+Tween	幻想体ルイゼット	MoveTo	x=800 time=1.5
+CharacterOff
+	ディーア	本気2						待て!!
+CharacterOff
+	魔物		2_3_m			.5		………………!!
+CharacterOff
+	ルイゼット	悲しい	2_2
+Bgm	絶望
+	ディーア	悔しい2	1_2					くっ……！
+	ルイゼット	悲しい						ま、マスターくん、ごめんなさい！\n私のせいで……
+	ディーア	通常2						大丈夫だ、戦ってからでも\n間に合うさ！
+	ルイゼット	通常						……！\nええ……！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	草原A
+Bgm	緊迫
+	ディーア	悔しい2	1_2
+	ルイゼット		2_2
+FadeIn	black					.5
+	ルイゼット	悲しい
+	ディーア	悔しい2						確かこっちの方に……
+	リディ	<Off>						あっ、マスター！
+CharacterOff
+	リディ	怒り2	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=0 time=1.5				NoWait
+Wait						.5
+	リディ	驚き2						ルイゼットちゃんも！\nやっと見つけたー！
+CharacterOff
+	ディーア	驚き2						り、リディ!?\nなんでこんな所に……？
+CharacterOff
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						ま、街が今大変なの！\nだから急いでマスターのこと\n探しに来たんだよ！
+	リディ							早く酒場に戻ってきて！
+CharacterOff
+	ディーア	怒り2	1_2
+	ルイゼット	悲しい	2_2					や、やっぱり、\n私の姿をしたあの子が何か……
+CharacterOff
+	リディ	悔しい2						やっぱり知ってるんだね!!
+	リディ	怒り2						そうなの！\nルイゼットちゃんの幻想体が\n街ですごい勢いで増えちゃってるの！
+CharacterOff
+	ルイゼット	悲しい	2_2
+	ディーア	怒り2	1_2					なっ、あいつ増殖してるのか……!?
+CharacterOff
+	リディ	悔しい2						魔剣機関から緊急指令も出てるから\n早くマスターに伝えなきゃと思って！
+CharacterOff
+	ルイゼット	悲しい	2_2
+	ディーア	悔しい2	1_2					そんなに急を要するのか……!?\n魔剣機関はなんて？
+CharacterOff
+	リディ	怒り2						えっとね……
+	リディ	悔しい2						『魔力を養分とする植物が、\n　強い魔力に接触して暴走し、\n　増殖を続けている。
+StopBgm
+	リディ							　至急これを排除し、\n　魔力を含む種子を浄化……\n　お、おぎゃーー!!　ママーー!!』
+	リディ	怒り2						……だって
+CharacterOff
+	ルイゼット	悲しい	2_2
+	ディーア	絶望2	1_2					魔剣機関……大丈夫か？
+Bgm	緊迫
+	ディーア	怒り2						それはさておき、\n魔力を吸い取る植物か……厄介だな
+CharacterOff
+	リディ	怒り2						そう！　それでね、\n魔力を吸い取った相手の姿に\n変身できるらしいよ？
+CharacterOff
+	ルイゼット	悲しい	2_2
+	ディーア	怪しい2	1_2					なるほど、最初に魔物の姿を\nしていたのも、擬態のせいか……
+	ルイゼット	悲しい						ごめんなさい、マスターくん……\nやっぱり私のせいだわ……
+	ディーア	通常2						ルイゼットのせいじゃないよ\n安易に近づけさせたオレが悪いんだ
+	ルイゼット	悲しい						マスターくん……
+	ディーア	笑い2						それに、増えた幻想体を倒せば\nいいんだろ？
+	ディーア							そのくらいならいつもの事件と\n同じだし……
+CharacterOff
+	リディ	悔しい2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	悔しい2						問題はそれだけじゃないの！\nとにかく！　酒場の方に戻って！
+CharacterOff
+	ルイゼット		2_2
+	ディーア	驚き2	1_2					リディ？\nなんでそんなに急かすんだ!?
+CharacterOff
+	リディ	悔しい2						見れば分かるからー！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	市街地A
+StopBgm
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　<color=blue><dash=2>そして現在に至る<dash=2></color>
+CharacterOff
+Se	コメディ
+	おばちゃん（ばぶ）
+Tween	おばちゃん（ばぶ）	ShakePosition	x=20 time=1				NoWait
+	おばちゃん（ばぶ）							おぎゃああああああああああああ!!
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						どうしてこうなったーーーー!?
+CharacterOff
+	旅人（ばぶ）
+Tween	旅人（ばぶ）	PunchPosition	y=100				NoWait
+	旅人（ばぶ）							ママーーーー!!\nママどこおおお!?
+CharacterOff
+	幻想体ルイゼット2							よしよし、ママはここよ♪
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2					見ての通りだよ！\nルイゼットちゃんの幻想体が\nみんなを甘やかしちゃってるの！
+	ディーア	怒り2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						甘やかしてるーー!?
+	リディ	怒り2						ほら！
+CharacterOff
+	おばちゃん（ばぶ）		1_3
+	幻想体ルイゼット		3_3					ふふ、ママのところにおいで♪
+	おばちゃん（ばぶ）							ばぶーーーーーー!!
+FadeOut	black					.5
+CharacterOff
+	旅人		1_3
+	幻想体ルイゼット2		3_3
+FadeIn	black					.5
+	幻想体ルイゼット2							何もしなくていいわ\nただママに甘えればいいのよ♪
+	旅人							いや、俺は……俺は……！
+Tween	旅人	PunchPosition	y=50				NoWait
+	旅人							オギャっていいすか!!
+	幻想体ルイゼット2							もちろんよ♪
+	旅人（ばぶ）		1_3
+Tween	旅人（ばぶ）	ShakePosition	x=20 time=1				NoWait
+	旅人（ばぶ）		1_3					おぎゃーーーーーーーー!!
+CharacterOff
+	リディ	怒り2	1_3
+	ルイゼット	通常	3_3
+	ディーア	絶望2	2_3					うわーー!!\nひ、人がダメになってるーー！
+	ルイゼット	嬉しい						ああ、みんなすごく幸せそう……！
+	ディーア	悔しい2						感動してる場合じゃないぞ！\nな、何なんだこの状況ー!?
+	リディ	悔しい2						あのルイゼットちゃんの幻に\n声をかけられると、みんな\n赤ちゃんみたいになっちゃうの……
+CharacterOff
+	おばちゃん（ばぶ）		画面外_左
+	ルイゼット		3_3
+Tween	おばちゃん（ばぶ）	PunchPosition	y=50 time=1.5				NoWait
+Tween	おばちゃん（ばぶ）	MoveBy	x=600 time=1.5				NoWait
+	おばちゃん（ばぶ）							ばぶばぶ……ばぶばぶ……
+	ルイゼット	嬉しい						よしよし、さあおいでー♪
+CharacterOff
+	ディーア	汗2						いや甘やかしちゃダメだって!!
+FadeOut	black					.5
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+Bgm	緊迫
+FadeIn	black					.5
+	ディーア	絶望2	1_2					はぁ……カオスすぎて\n思わず逃げてきてしまった……
+	リディ	絶望2						ちょっと夢に出そうだよね……
+CharacterOff
+	ルイゼット	嬉しい						よしよし、二人とも\nよく頑張りました\nここで少し休憩しましょうね
+CharacterOff
+	リディ	通常2	2_2
+	ディーア	汗2	1_2					そうだな……\n精神的に疲れた……
+	リディ	悔しい2						でも、急がないと\nもっと大変なことになっちゃうよー！
+	リディ	怒り2						リディがあんな感じになったら\nマスターいやでしょ？
+	ディーア	驚き2						赤ちゃんみたいになるリディ、か……
+	ディーア	きらーん2						いや、それはむしろアリ……？
+	ディーア	汗2
+	リディ	悔しい2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	悔しい2						なしに決まってるでしょ!!
+	ディーア	怒り2						まあでも確かに\nこのまま放っておくわけには\nいかないな……
+	ディーア	驚き2						なぁ、ルイゼット\nルイゼット自身には、こんなに人を\n変化させる能力はないはずだよな？
+CharacterOff
+	ルイゼット	本気						ええ……\n人々が幼児のようになるのは、\nあの子自身の力じゃないかしら？
+CharacterOff
+	ディーア	怒り2						そうだよな……\n魔力を吸い取られすぎていることも\n原因の一つかもしれないな……
+CharacterOff
+	ばぶじい	ばぶ	画面外_左
+Tween	ばぶじい	MoveTo	x=0 time=2				NoWait
+Se	走る
+	ばぶじい	ばぶ						ばぶーーーーー!!
+Se	走る
+Tween	ばぶじい	MoveTo	x=800 time=2
+Wait						.5
+CharacterOff
+	ルイゼット		3_3
+	リディ	怒り2	1_3
+	ディーア	絶望2	2_3					いやそれにしても\nこの状況……頭が痛い……
+	ルイゼット		3_3					ママとしては、マスターくんも\nあのぐらい甘えてもいいと\n思っているけれど……
+	ディーア	笑い2						うーん……いっそのこと\nそうしたい……
+	ルイゼット	嬉しい						ふふ、いつでも大丈夫よ♪
+	ディーア	にやけ2						ふわぁ……！　
+	ディーア	怒り2						……あ、いやいや\n状況が悪化すれば、\n街の機能は完全に停止するからな
+	リディ	驚き2				.5
+	ディーア	怒り2						あのまま増え続けたら、\nこの街どころか\n魔界全体も危ない
+	ディーア	本気2						とにかく幻想体を倒して\n被害の拡大を防ぐぞ
+	リディ	絶望2				1
+	ルイゼット	通常						はい、マスターくん♪
+	ディーア	怒り2						……ルイゼットは大丈夫か？
+	ルイゼット							なにがですか？
+	ディーア	怒り2						幻想体とはいえ、自分自身の姿をした\n相手を倒すことになる……\nもし辛かったら酒場にいても……
+	ルイゼット	本気						………………
+	リディ	悲しい2
+	ルイゼット	嬉しい						マスターくんは優しいのね♪\nママは大丈夫ですから\n安心して♪
+	ディーア	通常2						そっか……ならいいんだ
+CharacterOff
+	リディ	悲しい2	2_2
+	ディーア	驚き2	1_2					あれ、リディ？\nどうかしたのか？
+	リディ	悲しい2						ふぇぇ……ますたー……
+	ディーア	通常2						うん？
+	リディ	笑い2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	笑い2						ますたー……ままー！　ままー!!
+	ディーア	本気2						ええーーっ!?\nダメになってるー!!
+CharacterOff
+	リディ	笑い2	1_3
+	幻想体ルイゼット2		3_3
+	幻想体ルイゼット2							……ふふふ♪
+Tween	幻想体ルイゼット2	MoveTo	x=800 time=1.5				NoWait
+Wait						1
+CharacterOff
+	ディーア	悔しい2						くっ……！\nいつの間に近くに……！
+CharacterOff
+Bgm	平和
+	リディ	笑い2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	笑い2						ママー！ ママー！
+CharacterOff
+	ルイゼット							はぁい、ママですよー♪
+CharacterOff
+	リディ	笑い2	2_2
+	ディーア	汗2	1_2					いや甘やかしちゃダメだって！\n……リディ、オレのこと分かるか？
+	リディ	笑い2						ますたー！　ますたーでしょ！
+	ディーア	にやけ2						よくできましたぁ！
+	リディ	照れ2						えへへ、あのねっ♪\nりでぃ、おっきくなったらぁー……\nマスターのおよめさんになるのっ♪
+Tween	ディーア	MoveTo	y=-500 time=0.5				NoWait
+	ディーア	本気2						ぐっはぁ!!
+CharacterOff
+	ルイゼット							マスターくんっ!?
+CharacterOff
+	リディ	笑い2	2_2
+	ディーア	にやけ2	1_2
+Tween	ディーア	MoveFrom	y=-500 time=1.5				NoWait
+	ディーア	にやけ2						り、リディがかわいくて……
+	リディ	照れ2						ますたぁ♪
+	ディーア	にやけ2						なぁにー？　へへへ……
+	ディーア	本気2						あ、あれ……もしかして\nこのままでもいいのでは……!?
+CharacterOff
+	ルイゼット							マスターくん、魔界は……
+CharacterOff
+	リディ	笑い2	2_2
+	ディーア	悔しい2	1_2					ですよねダメですよね…………くっ!!
+	リディ	笑い2						ますたぁ、がんばえ♪
+	ディーア	にやけ2						がんばるーー♪\nよぉしリディちゃん、危ないから\n酒場まで一緒に行こうなー♪
+	リディ	笑い2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	笑い2						わぁい！
+	ディーア	にやけ2						いい子でお留守番できるかな？
+	リディ	照れ2						できるぅ！
+CharacterOff
+	ルイゼット							ふふ、二人ともとっても\n可愛らしいですね
+CharacterOff
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						はっ!!
+CharacterOff
+	リディ	照れ2	2_2
+	ディーア	汗2	1_2					……よ、よし、ルイゼット\nまた幻想体に近付かれたら厄介だ\nリディを安全な酒場まで送ろう
+CharacterOff
+	ルイゼット							取り繕わなくていいんですよ♪\nさあ二人とも！　ママと手を繋いで\n酒場に行きましょうね♪
+CharacterOff
+	ディーア	汗2						お、オレまで甘やかさなくて\nいいから！
+CharacterOff
+	ルイゼット	嬉しい						ふふ、いいからいいから♪
+CharacterOff
+FadeOut	black					.1
+CharacterOff
+	幻想体ルイゼット2		3_3
+	旅人（ばぶ）		1_3
+Bgm	緊迫
+FadeIn	black					.5
+	旅人（ばぶ）		1_3
+Tween	旅人（ばぶ）	ShakePosition	x=20 time=1				NoWait
+	旅人（ばぶ）		1_3					ママーーーー！\nおぎゃーーーーー!!
+	幻想体ルイゼット2		3_3					さぁ、なでなでしてあげましょうね♪
+CharacterOff
+	ルイゼット		2_2
+	ディーア	汗2	1_2					はぁ、これは骨が折れそうだけど……\nやるしかないか……！
+	ディーア	本気2						とにかく、元凶を探しつつ幻想体を\n倒していこう
+	ルイゼット							はい、マスターくん♪
+If	isdebug==true
+CharacterOff
+Jump	*E_372_02
+EndIf
+EndScenario
+
+# E_372_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	市街地A
+	幻想体ルイゼット2
+FadeIn	white					.5
+FadeOut	white					.2
+Se	斬2
+FadeIn	white					.2
+Se	敵殺
+	幻想体ルイゼット2
+Tween	幻想体ルイゼット2	ShakePosition	x=20
+Se	倒れる
+Tween	幻想体ルイゼット2	MoveTo	y=-1000 time=2				NoWait
+Wait						1.5
+FadeOut	black					.5
+CharacterOff
+FadeIn	black					.5
+CharacterOff
+Bgm	コメディ
+	旅人（ばぶ）
+Tween	旅人（ばぶ）	ShakePosition	x=10 time=1				NoWait
+	旅人（ばぶ）							ママーーーー!!\nオギャーーーーーーー!!
+CharacterOff
+	ディーア	怒り2	3_3
+	おばちゃん（ばぶ）		1_3
+Tween	おばちゃん（ばぶ）	MoveTo	x=45 time=1
+Se	打1
+Tween	おばちゃん（ばぶ）	ShakePosition	x=10 time=1				NoWait
+	おばちゃん（ばぶ）							ばぶーーーー!!　ばぶばぶーーーー!!
+	ディーア	汗2						い、いててて……あはは\nちょ、たたかないで……！
+FadeOut	black					.5
+CharacterOff
+Bgm	バトル
+	幻想体ルイゼット2
+FadeIn	black					.5
+	幻想体ルイゼット2							…………ふふふ
+CharacterOff
+	ディーア	本気2						はぁっ!!
+FadeOut	white					.1
+CharacterOff
+Se	斬2
+FadeIn	white					.1
+Se	敵殺
+	幻想体ルイゼット2
+Tween	幻想体ルイゼット2	ShakePosition	x=20
+Se	倒れる
+Tween	幻想体ルイゼット2	MoveTo	y=-1000 time=2				NoWait
+Wait						1.5
+FadeOut	black					.5
+CharacterOff
+	ディーア	悔しい2
+Bgm	絶望
+FadeIn	black					.5
+	ディーア	悔しい2						はぁ……はぁ……\n数が多い……っ！
+CharacterOff
+	幻想体ルイゼット2		1_3					ふふ……
+Se	闇1
+	幻想体ルイゼット3		3_3			.3		さあ、おいで……？
+CharacterOff
+	ディーア	悔しい2						くっ！
+FadeOut	white					.1
+CharacterOff
+	幻想体ルイゼット2		1_3
+	幻想体ルイゼット3		3_3
+Se	斬2
+Wait						.3
+Se	斬2
+FadeIn	white					.1
+	幻想体ルイゼット2		1_3
+Tween	幻想体ルイゼット2	ShakePosition	x=20				NoWait
+Wait						.3
+Tween	幻想体ルイゼット3	ShakePosition	x=20				NoWait
+Wait						.7
+Se	倒れる
+Tween	幻想体ルイゼット2	MoveTo	y=-1000 time=2				NoWait
+Wait						.3
+Se	倒れる
+Tween	幻想体ルイゼット3	MoveTo	y=-1000 time=2				NoWait
+Wait						1
+FadeOut	black					.5
+CharacterOff
+FadeIn	black					.5
+	ルイゼット	悲しい						……マスターくん、\n少し休んだ方がいいわ……\nもう体力も限界でしょう？
+	ディーア	悔しい2						……いや、平気だよ……\nルイゼットこそ、大丈夫か？
+	ルイゼット	悲しい						私より、マスターくんが……
+CharacterOff
+	ディーア	悔しい2	3_3
+	女の子		1_3
+Tween	女の子	ShakePosition	x=10 time=1				NoWait
+	女の子							うえーーん、ママーー!!\nママどこーーー！
+	ディーア	怒り2						ごめんな……皆のためだから……
+	女の子
+Tween	女の子	MoveTo	x=45 time=1				NoWait
+	女の子							ママを返して！　返してよおおお！
+Tween	女の子	ShakePosition	x=10 time=1				NoWait
+	女の子							うわああああああ!!
+	ディーア	悔しい2						………………
+FadeOut	black					.5
+CharacterOff
+	幻想体ルイゼット2
+FadeIn	black					.5
+FadeOut	white					.1
+CharacterOff
+Se	斬2
+FadeIn	white					.1
+Se	敵殺
+	幻想体ルイゼット2
+Tween	幻想体ルイゼット2	ShakePosition	x=20
+Se	倒れる
+Tween	幻想体ルイゼット2	MoveTo	y=-1000 time=1.5				NoWait
+Wait						1.5
+FadeOut	black					.5
+CharacterOff
+FadeIn	black					.5
+	　　　　　　　　　　							うわああん、うわあああん……				セリフのみ
+	　　　　　　　　　　							ママ、どこ……ママあああああ……				セリフのみ
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	悔しい2						くっ…………
+FadeOut	black					.2
+CharacterOff						0
+Bg	黒背景					0
+	？？？？
+FadeIn	black					.2
+	？？？？							……マ…………くん……！
+FadeOut	black					.2
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	怒り2
+Bg	市街地A
+FadeIn	black					.2
+	ディーア	怒り2						元凶は……どこに……
+FadeOut	black					.5
+CharacterOff	ディーア
+	幻想体ルイゼット
+FadeIn	black					.5
+	幻想体ルイゼット							ふふ……もっと魔力を集めないと……
+CharacterOff	幻想体ルイゼット
+	ディーア	怒り2						……！\n……あいつか……？
+FadeOut	black					.5
+CharacterOff	ディーア
+FadeIn	black					.5
+Se	闇1
+	幻想体ルイゼット2		1_3			.3		……ふふ
+Se	闇1
+	幻想体ルイゼット3		3_3			.3		ふふふ♪
+CharacterOff	幻想体ルイゼット3
+CharacterOff	幻想体ルイゼット2
+	ディーア	本気2						なっ……！
+	黒背景		エフェクト裏2			7
+	ディーア	悔しい2						こ、これ以上……\nこれ以上増えたら……！
+CharacterOff	ディーア
+	女の子
+Tween	女の子	ShakePosition	x=20 time=1				NoWait
+	女の子							まま……ひっく……\nどこにいるのぉ……ままぁ……
+CharacterOff	女の子
+	ディーア	悔しい2						くっ……！
+	ディーア	黒2						早く、早く倒さないと……\n今すぐに……!!
+FadeOut	black					.3
+StopBgm
+CharacterOff
+BgOff
+Bg	黒背景
+	ディーア	<Off>
+Se	ポップイン
+Wait						1
+FadeIn	black					.5
+	ディーア	<Off>						………………？
+FadeOut	black					.5
+CharacterOff
+Bg	市街地A
+	オーラ桃		エフェクト裏
+	ルイゼット	拡大	エフェクト表
+Param	character_grayout=false
+Wait						.5
+FadeIn	black					1
+	ディーア	<Off>						………………!!
+	ディーア	<Off>						……ルイ、ゼット？\nどうしたんだ……急に抱きついて……
+	ルイゼット	拡大	エフェクト表					よかった……やっと……\n気づいてくれましたね……
+	ルイゼット	拡大嬉しい	エフェクト表					ずっと呼んでたんですよ……？
+FadeOut	white					.5
+Param	character_grayout=true
+CharacterOff						0
+	ルイゼット		2_2			0
+	ディーア	驚き2	1_2			0
+FadeIn	white					.2
+Bgm	凱旋
+	ディーア	驚き2						………………！
+	ディーア	怒り2						そっか……ごめんな……\nオレ、全然気づけなかった
+	ルイゼット							マスターくん、\nやっぱり休憩しましょう？
+	ルイゼット							あの子は逃げ出す様子もないし\nここからなら気づかれません
+	ルイゼット	本気						……あなたは今、\n背負いすぎだと思うの
+CharacterOff
+	ディーア	驚き2						……え？
+CharacterOff
+	ルイゼット							さあ、ママの隣に座って？
+CharacterOff
+	ディーア	悔しい2						だけど今は……！
+	ルイゼット							少しだけでいいから\n私の話を聞いて欲しいの
+CharacterOff
+	ルイゼット		2_2
+	ディーア	怒り2	1_2					………………\n…………わかった
+	ルイゼット	嬉しい						ありがとう、マスターくん
+CharacterOff
+	ルイゼット							……私は、人々を苦しみから解放し\n安らかな終わりを与える魔剣です
+	ルイゼット							誰にでも平等に、名誉ある終わりを\nもたらすために生まれてきたのです
+	ルイゼット							私は、誰にでも平等に\n優しくあろうとしました
+	ルイゼット	本気						だけど、本当にそれができているのか\n不安になる時もあって……
+	ルイゼット	本気						けれど安らぎを与える側が\n不安になってはいけない\n弱さを見せてはいけないと
+	ルイゼット	本気						そう自分に\n言い聞かせてきたのです
+CharacterOff
+	ルイゼット		2_2
+	ディーア	怒り2	1_2					ルイゼット……
+	ルイゼット							マスターくんは私と同じです
+	ディーア	怒り2						同じって？
+	ルイゼット							守るべき人たちに、負った傷を\n見せまいとしているんです
+	ディーア	驚き2						………………!!
+	ルイゼット							いつだって\n本当の気持ちをしまいこんで\n私たちに接していますよね
+	ディーア	悔しい2						………………そんなことは
+	ルイゼット							ないと言いきれますか？
+	ディーア	怒り2						………………
+	ルイゼット	本気						あの時も……
+FadeOut	black					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+FadeIn	black					.5
+	幻想体ルイゼット2
+Tween	幻想体ルイゼット2	ShakePosition	x=20
+Se	倒れる
+Tween	幻想体ルイゼット2	MoveTo	y=-1000 time=1.5				NoWait
+Wait						1.5
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	悔しい2
+FadeIn	black					.5
+	ディーア	悔しい2						くっ…………
+FadeOut	black					.5
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ルイゼット
+FadeIn	black					.5
+	ルイゼット							幻想体と分かっていても\n少女の姿をしたものを斬ることに\nあなたは心を痛めていました
+	ルイゼット							ママを気遣ってくれるのが\n良い証拠です
+CharacterOff
+	ルイゼット		2_2
+	ディーア	悔しい2	1_2					それは……
+	ルイゼット							そしてあの時も……
+FadeOut	black					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+FadeIn	black					.5
+	ディーア	悔しい2	3_3
+	女の子		1_3
+Tween	女の子	MoveTo	x=45 time=1				NoWait
+	女の子							ママを返して！　返してよおおお！
+Tween	女の子	ShakePosition	x=10 time=1				NoWait
+	女の子							うわああああああ!!
+	ディーア	悔しい2						………………
+FadeOut	black					.5
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff
+	ルイゼット
+FadeIn	black					.5
+	ルイゼット							あなたは街を救おうとしているのに\n街の人たちに感謝されることは少ない
+	ルイゼット							たとえそうであっても、\nあなたは自分の選んだ道が\nみんなの救いになると信じて、
+	ルイゼット							街の人たちや魔剣たちと\n向き合っていますよね
+FadeOut	black					.5
+CharacterOff
+	ディーア	悔しい2	1_2
+	ルイゼット	本気	2_2
+FadeIn	black					.5
+	ディーア	悔しい2
+	ルイゼット	本気						……抱えた傷を隠したまま
+	ディーア	悔しい2						………………
+	ルイゼット	通常						命懸けの任務をこなして、どんなに\n心がすり減っていても、
+	ルイゼット							酒場に帰れば必ず「ただいま」と\n笑ってみせる
+	ルイゼット							そんなマスターくんのことが\nみんな大好きなんでしょうね……
+	ルイゼット							マスターくんもそれをわかって\nいるから、辛そうな顔なんて\n絶対に見せない
+CharacterOff
+	ルイゼット	本気						だけど、その傷を\n全部一人で抱え込む必要はないの
+	ルイゼット	通常						きっとあなたが助けを求めれば、\nみんな喜んで応じてくれるわ
+	ルイゼット	嬉しい						だって、みんな\nあなたが思ってるのと同じくらい\nあなたのことが大好きなんですもの
+	ルイゼット	嬉しい						だから……\nおいで、マスターくん
+CharacterOff
+	ディーア	驚き2						ルイゼット……
+CharacterOff
+	ルイゼット	拡大嬉しい	エフェクト表					甘えたっていいのよ\n今まで、よく頑張ってきたね
+	ルイゼット	拡大嬉しい						ママは全部、分かっているから
+CharacterOff
+	ルイゼット		2_2
+	ディーア	通常2	1_2					…………そっか、そうだよな\n……甘えたって、いいのか
+	ルイゼット							落ち着いた？
+	ディーア	通常2						ああ、ありがとう
+	ルイゼット							あなたは優しいから、魔剣たちを\n守るべきものと思っているでしょう？
+	ルイゼット	嬉しい						だけど忘れないで、\n一緒に戦う仲間でもあるってこと
+	ディーア	笑い2						……!!\nああ、そうだよな
+	ルイゼット	嬉しい						それに……\n今すぐママに甘えてもいいのよ？
+	ディーア	汗2						うっ……それはすごーく\n魅力的な提案なんだけども……！
+	ディーア	通常2						今は街を……魔界を救うことが先だ
+	ディーア							でも、全部解決したら……その時は\n少し甘えてもいいか……？
+	ルイゼット							もちろん♪\nママはいつでも、ここにいるわ♪
+	ディーア	笑い2						ありがとな\nじゃあ、行こうかルイゼット
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bgm	緊迫
+	幻想体ルイゼット
+FadeIn	black					.5
+	幻想体ルイゼット							ふふっ♪\nさあ、ママのところにおいで……？
+FadeOut	black					.5
+CharacterOff
+	ルイゼット		2_2
+	ディーア	怒り2	1_2
+FadeIn	black					.5
+	ルイゼット							あの子が、ママが最初に触れた子ね？
+	ディーア	悔しい2						ああ、一際魔力が強いからな……\n綿毛に魔力を吹き込んでばら撒き、\n幻想体を増やしてるみたいだ
+Bgm	勇者バトル
+	ディーア	本気2						きっとあいつさえ倒せば、\nこれ以上幻想体は増えない
+	ルイゼット							街の人も、\n元に戻るかもしれないですね
+	ディーア	笑い2						ああ、そうだな！
+	ディーア	本気2						よし、ルイゼット\n一緒に魔界を救ってくれ！
+If	isdebug==true
+CharacterOff
+Jump	*E_372_03
+EndIf
+EndScenario
+
+# E_372_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	勇者バトル
+Bg	市街地A
+	幻想体ルイゼット
+FadeIn	white					.5
+Tween	幻想体ルイゼット	ShakePosition	x=20 time=1				NoWait
+	幻想体ルイゼット							そんな……私は……
+Se	ボス殺
+CharacterOff	幻想体ルイゼット					1
+Wait						1
+FadeOut	black					.5
+StopBgm
+CharacterOff
+	幻想体ルイゼット2		1_3
+	幻想体ルイゼット3		3_3
+FadeIn	black					.5
+Tween	幻想体ルイゼット2	PunchPosition	y=50				NoWait
+	幻想体ルイゼット2							………………!!
+Se	走る
+Tween	幻想体ルイゼット3	MoveTo	x=800 time=2				NoWait
+Wait						.3
+Se	走る
+Tween	幻想体ルイゼット2	MoveTo	x=800 time=2				NoWait
+Wait						.3
+FadeOut	black					.5
+CharacterOff
+	ディーア	怒り2	1_2
+	ルイゼット		2_2
+FadeIn	black					.5
+	ディーア	怒り2
+	ルイゼット							あっ！\n逃げていくわ……！
+	ディーア	悔しい2						ああ、でも元凶は倒した！\n街の人から離れさえすれば……！
+CharacterOff
+Bgm	コメディ
+	旅人（ばぶ）					0		おぎゃあああ!!　おぎゃあああ!!\nおぎゃ……あ、あれ？
+CharacterOff						0
+	旅人					0		オレ、今まで何を……？
+CharacterOff
+	ばぶじい	ばぶ						ばぶばぶ……んにゃ……\nはっ！　ど、どうしたんじゃお前……\nおむつなんて履いて、みっともない
+CharacterOff
+	旅人							えっ!?　あ、あんたこそ、\n何でおしゃぶりくわえてるんだ！
+CharacterOff
+	ばぶじい	ばぶ						うん？　おしゃぶりなんてこの年で\nするわけな……
+Tween	ばぶじい	PunchPosition	y=50				NoWait
+	ばぶじい	通常						あっれーーーー!?!?
+FadeOut	black					.5
+CharacterOff
+Bgm	平和
+	ディーア	汗2	1_2
+	ルイゼット		2_2
+FadeIn	black					.5
+	ルイゼット							よかった……\nみんな元に戻ったようですね
+	ディーア	汗2						あ、あはは……\n元通りはいいけど……\nしばらく混乱しそうだな
+	ルイゼット	悲しい						マスターくん\n私のせいで、ごめんなさいね……
+	ディーア	通常2						前にも言っただろ？\nルイゼットのせいじゃないよ\nむしろオレの方が助けられ……
+CharacterOff
+	リディ	驚き2	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=0 time=1				Add
+	リディ	驚き2						ま、マスター！
+CharacterOff
+	ディーア	驚き2						リディ！
+CharacterOff
+	リディ	笑い2						良かったぁ！\n解決したんだね！
+CharacterOff
+	ディーア	通常2						ああ、まだ逃げたやつが\nいるけどな
+CharacterOff
+	リディ	怒り2						むぅ……\nリディもさっきまで夢を見てた\nような感じで……
+	リディ	驚き2						ま、まさかマスターに変なこと\n言ってないよね！？
+CharacterOff
+	ディーア	笑い2						そりゃあもう、全然言ってないぞ？
+CharacterOff
+	リディ	悔しい2
+Tween	リディ	ShakePosition	x=10 time=0.5				NoWait
+	リディ	悔しい2						う、嘘だぁ!!\nリディ何て言ってたの!?
+CharacterOff
+	ディーア	にやけ2						へへへ……内緒……♪
+CharacterOff
+	リディ	怒り2						もう！　教えてよマスター!!
+CharacterOff
+	ディーア	笑い2						あー残りの幻想体倒すの大変だなー
+CharacterOff
+	リディ	悔しい2						ごまかさないでよー!!
+CharacterOff
+	ディーア	笑い2	1_2
+	ルイゼット		2_2					ふふ、マスターくんが楽しそうで\nママは嬉しいわ♪
+	ディーア	通常2						……ルイゼットが\nオレのこと見ててくれたおかげだよ
+FadeOut	white					.3
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+	ルイゼット
+FadeIn	white					.5
+	ルイゼット	本気						だけど、その傷を\n全部一人で抱え込む必要はないの
+	ルイゼット	通常						きっとあなたが助けを求めれば、\nみんな喜んで応じてくれるわ
+	ルイゼット	嬉しい						だって、みんな\nあなたが思ってるのと同じくらい\nあなたのことが大好きなんですもの
+FadeOut	white					.5
+CharacterOff
+ImageEffectOff	SpriteCamera	Sepia
+	ディーア	通常2	1_2
+	ルイゼット		2_2
+FadeIn	white					.3
+	ディーア	通常2						あれは、言われなければ\n気づかなかったことだから
+	ルイゼット							マスターくんの\n助けになったなら嬉しいわ
+CharacterOff
+	ルイゼット	拡大嬉しい	エフェクト表					だけど、\n本当にがんばったのはあなたなのよ\nよしよし、よくがんばりました♪
+CharacterOff
+	ルイゼット		2_2
+	ディーア	あはは2	1_2					な、なんか照れくさいな……
+	ルイゼット							ふふ、さあマスターくん、\nもうひと踏ん張りよ♪
+	ディーア	通常2						そうだな、あとは残りの幻想体を\n倒して、種子を浄化するだけだ
+	ルイゼット							ママが見ていてあげますから\nがんばりましょうね♪
+	ディーア	笑い2						うん……\n色々とありがとうな
+	ルイゼット	嬉しい						いいんですよ♪\nこれからも、辛いことや苦しいことが\nあったら、全部ママに教えてね♪
+	ディーア	通常2						ああ、改めてよろしくな\nルイゼット！
+	ルイゼット							ええ、ママはいつでも\nマスターくんの味方よ♪
+	ルイゼット							これが終わったら、うんと\n甘やかしてあげるわね♪
+	ルイゼット	嬉しい						だからマスターくん、がんばって♪
+	ディーア	きらーん2						……!!
+	ディーア	にやけ2						……やっぱり……！\n今、甘えていいすか!!\nルイゼット！
+	ルイゼット							ええ、もちろんよ♪
+CharacterOff
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						こらマスターー!!\n任務終わってからでしょー!!
+FadeOut	black					.5
+CharacterOff
+FadeIn	black					.5
+	イベントロゴ372		エフェクト表					　　<color=blue>甘えていいすか！　ルイゼット！\n　　　～ママになってくれますか～\n　　　　　　　　　　　　<dash=2>完<dash=2></color>
+If	isdebug==true
+CharacterOff
+Jump	*E_372_01
+EndIf
+EndScenario

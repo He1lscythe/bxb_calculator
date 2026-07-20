@@ -1,0 +1,519 @@
+# E_1083_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔剣の日常
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	ハデス	通常2				0
+FadeIn	black					.5
+	ハデス	通常2						逆ASMRですか……？
+CharacterOff
+	ディーア	笑い2						ああ！
+	ディーア	通常2						魔剣機関が新開発した\n魔装具が届いたんだけど
+	ディーア	通常2						それをつけて\n魔剣に囁きながら魔力補給すると、\n良いことが起きるらしいんだ
+	ディーア	笑い2						戦いの役に立つかもしれないし、\nちょっと試してみないか？
+CharacterOff
+	ハデス	通常2						ですが、逆ASMRと言われましても、\nそもそものASMRのことも\nハデスは詳しくありませんし……
+CharacterOff
+	ディーア	笑い2						大丈夫、危ないことはないさ
+	ディーア	通常2						簡単に言うと、ASMRって\n聞くだけで気持ちよくなったり、\nゾクゾクする音なんだ
+	ディーア	通常2						ささやき声だったり、\n自然の音だったり、耳かきとか\nいろいろな種類があるんだよ
+CharacterOff
+	ハデス	通常2						なるほど……\n変なことはなさそうですね
+	ハデス	通常2						わかりました\nマスターさんがどうしてもと言うなら\nハデスで試してみてください
+	ハデス	通常2						でも、ハデスには感情がありません\nマスターさんが期待するような\n反応はないと思いますよ？
+CharacterOff
+	ディーア	怪しい2						本当に？
+CharacterOff
+	ハデス	通常2						ハデスは神々がつくりし\n天冥の魔杖ですよ？
+StopBgm
+	ハデス	通常2拡大	エフェクト表					逆ASMRなんて、\n効くわけないじゃないですか
+FadeOut	white					1
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル10831		エフェクト裏			0
+Wait						.2
+Bgm	神秘
+FadeIn	white					.2
+	ハデス	<Off>						<size=45>ひぅうううう……！</size>
+	ディーア	<Off>						『いつもがんばってくれて\n　ありがとう……』
+	ディーア	<Off>						『魔力補給、\n　もっとしてあげようか？』
+	ディーア	<Off>						『ハデスはほしがりさんだな……』
+	ハデス	<Off>						マスターさんの声が、\nとっても近くで聞こえます……！
+	ハデス	<Off>						お耳の奥が、体がふわふわして、\nドキドキして……
+	ハデス	<Off>						ダメです、反則です……\nこんなに圧かけられたら、\nハデスは……
+	ディーア	<Off>						『ふぅー……♪』
+	オーラ桃		エフェクト表
+	ハデス	<Off>						ひゃああ……！
+StopBgm
+FadeOut	white					1
+CharacterOff						0
+	ディーア	怪しい2				0
+Wait						1
+FadeIn	white					1
+Bgm	コメディ
+	ディーア	怪しい2						あのハデスがこんな顔になるなんて\n逆ASMR恐るべし、だな
+CharacterOff
+	ハデス	通常2
+Shake	ハデス		x=2 time=5				NoWait
+	ハデス	通常2						はぁ、はぁ……\nこの逆ASMRは強すぎです……\nとてもゾワゾワしてしまいます
+CharacterOff
+	ディーア	怪しい2						でも、ハデスにこれだけ効くなら、\n他の魔剣にはもっと効くはずだよな
+	ディーア	怪しい2						声だけでこうなるなんて、\nまさかオレには\nASMRの才能があるのか？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	怒り2						そうだ……！\n最近の魔界はみんながASMRを配信する\n大ASMR時代！
+	ディーア	怪しい2						あの有名人たちも\nASMRを広めているらしいし……！
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	王政執務室					0
+	勇者王シドウ	通常				0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	勇者王シドウ	通常						お前なら……来れるかも知れない\n王の座までな
+	          		1_2					<color=blue>『勇者王シドウから\n　耳元でいっぱい煽られて\n　王様にされるASMR』</color>
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	怪しい2				0
+FadeIn	white					.3
+	ディーア	怪しい2						彼らは優れたASMRを\n人心の掌握に使っている
+	ディーア	嬉しい2						ってことは、\nオレも声で魔界を統一できるかも！\nそうと決まれば<dash=2>
+StopBgm
+CharacterOff
+	ペルセポネ	嬉しい2
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	嬉しい2						もっと、\nはーちゃんをメロメロのトロトロに\nしちゃうんですね♪
+Bgm	わくわく
+CharacterOff
+	ディーア	驚き2						って、ペルセポネ!?
+CharacterOff
+	ハデス	通常2						お姉ちゃん……\nいったい、いつのまに……
+CharacterOff
+	ペルセポネ	嬉しい2						えへへ♪\nはーちゃんがとーっても\n気持ちよさそうだったので♪
+	ペルセポネ	通常2						でも、マスターさん？\nはーちゃんはまだメロメロレベル1♪
+	ペルセポネ	目閉じ2						セポネさんのナデナデには\nおよびません♪\nおよびでありません♪
+	ペルセポネ	通常2						もっともっと声で\nメロメロにできないと\n王様にはなれませんよ？
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	嬉しい2						ということで♪\nマスターさんよりすごいかもな\nASMR三銃士を連れてきました♪
+CharacterOff
+	ディーア	驚き2						ASMR三銃士!?
+CharacterOff
+	アスモデウス=サラ	通常	p5b
+	ペルセポネ	<Off>						耳かきのサラちゃん♪
+	アスモデウス=サラ	通常						サラが気持ちよくしてあげます\n（わくわく）♪
+	プリム	通常	p2
+	ペルセポネ	<Off>						歯磨きのプリムちゃん♪
+	プリム	通常						お口を\nくちゅくちゅしてあげます！
+	ペルセポネ	<Off>						そして……！
+	マネ	通常	p8
+	ペルセポネ	<Off>						ナイアガラのマネちゃん♪
+Tween	マネ	PunchPosition	y=30				NoWait
+	マネ	怒り						なんでナイアガラですの!?\nまだ暴落してませんわ!?
+CharacterOff
+	ディーア	驚き2						そうか！\nサラたち悪魔魔剣は……！
+CharacterOff
+Param	character_grayout=true
+	プリム	通常	p2b
+	アスモデウス=サラ	通常	p5
+	マネ	通常	p8b
+	アスモデウス=サラ	通常	p5					はい♪\nサラたちは先輩を気持ちよーくする\n魔剣です（自信満々）！
+	プリム	通常	p2u					お口をキレイにして、\n耳も幸せにしてあげます！
+Tween	マネ	PunchPosition	y=30				NoWait
+	マネ	通常	p8u					くふふっ♪ 先輩をワルの響きで\n堕落させてあげますわ♪
+Param	character_grayout=false
+	アスモデウス=サラ	通常
+	集中線		エフェクト表
+	三人							そして先輩の魂をゲット！
+CharacterOff
+	ディーア	怪しい2						……それ、言っていいやつだっけ？
+CharacterOff
+	ペルセポネ	通常2						どうですかマスターさん♪\n悪魔なみんなに勝てますか？
+CharacterOff
+	ディーア	目閉じ2						ふっ……\n当たり前だろう？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	怒り2						魔界のASMR王になるなら、\n悪魔魔剣にも勝てて当然！
+	ディーア	本気2						最強のASMRの座をかけて勝負だ！
+CharacterOff
+	ハデス	通常2						変なことになってきましたね……
+Tween	ハデス	MoveBy	x=200 time=10				NoWait
+	ハデス	通常2						ザクロ、ミント、\nハデスたちはあっちで静かに<dash=2>
+CharacterOff
+	ペルセポネ	嬉しい2拡大	エフェクト表					それじゃあ\n審査員ははーちゃんね♪
+CharacterOff
+	ハデス	通常2拡大	エフェクト表					………………………………え？
+If	isdebug==true
+CharacterOff
+Jump	*E_1083_02
+EndIf
+EndScenario
+
+# E_1083_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔剣の日常
+Bg	酒場_宿屋					0
+Param	character_grayout=true
+	ハデスロスト	通常	3_3			0
+	ペルセポネ	嬉しい2	1_3			0
+FadeIn	black					.5
+	ペルセポネ	通常2						はじまりました、\nえーえすえむあーる選手権♪
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	通常2						司会進行はペルセポネがお送りします\nそして、解説はろーちゃん！
+	ペルセポネ	嬉しい2						よくわからないけど、\nかわいいはーちゃんがたくさん\n見れるといいですね♪
+	ハデスロスト	通常						あの、お姉ちゃん……？\nどうしてハデスもここに……？
+	ペルセポネ	嬉しい2						えへへ♪ たのしそうだから♪\n一緒にいようね、ろーちゃん♪
+	ハデスロスト	通常						う、うん……
+CharacterOff
+	ハデス	通常2						ふぅ……\nお姉ちゃんの気まぐれにも\n困ったものですね
+	ハデス	通常2						ですが、ハデスは天冥の魔杖
+	ハデス	通常2						さっきは不覚を取りましたが、 \nASMRなんてよゆーです、\nへっちゃらです
+CharacterOff
+	ディーア	本気2						それはどうかな！\nオレたちが用意した\n選りすぐりのASMRを聞かせてやる！
+Param	character_grayout=false
+CharacterOff
+	アスモデウス=サラ	通常						よーし、\nまずはサラから♪（がんばる！）
+Tween	アスモデウス=サラ	PunchPosition	y=10				NoWait
+	アスモデウス=サラ	通常						これをつけて……よしっ♪\n（わくわく♪）
+Se	和太鼓
+	          		1_2					<color=blue>『サラのしあわせ耳かき♪\n　～気持ちいいとこどこですか？～』</color>
+StopBgm
+	アスモデウス=サラ	通常						いきますよぉ……！\n（きたい♪）
+Bgm	神秘
+CharacterOff
+	イベントスチル10832s		エフェクト表
+	オーラ桃		エフェクト裏
+	アスモデウス=サラ	<Off>						こしょ、こしょっ……♪
+CharacterOff
+	イベントスチル10832h		エフェクト裏
+	ハデス	<Off>						っ…………!!
+CharacterOff
+	イベントスチル10832s		エフェクト表
+	オーラ桃		エフェクト裏
+	アスモデウス=サラ	<Off>						すりすりっ……♥
+CharacterOff
+	イベントスチル10832h		エフェクト裏
+	ハデス	<Off>						（お、お耳の中が、\n　やさしくすりすりされて……！）
+	ハデス	<Off>						（本当は耳かきされていないのに、\n　耳の奥までいじられてる気が……）
+CharacterOff
+	ディーア	目閉じ2						いつ聞いてもすごい威力だな\n絶妙な力加減で敏感なところが\n刺激されて
+	ディーア	本気2						少しだけ怖いのに\nもっともっとと求めてしまう背徳感！
+CharacterOff
+	アスモデウス=サラ	通常						最後に……♪（とっておき♪）
+CharacterOff
+	イベントスチル10832s		エフェクト表
+	オーラ桃		エフェクト裏
+	アスモデウス=サラ	<Off>						こしょこしょ♪\nふぅーーー♥		1531-13
+StopBgm
+CharacterOff
+	オーラ桃		エフェクト裏
+	ハデス	通常
+Shake	ハデス		x=2 y=3 time=10				NoWait
+	ハデス	通常						ふわぁ……！
+Bgm	平和
+Param	character_grayout=true
+CharacterOff
+	プリム	通常	p3
+	マネ	通常	p7
+	プリム	通常						は、ハデスちゃんが！
+	マネ	通常						顔に出てないけど、\nピクピクしてますわっ！
+CharacterOff
+	ハデスロスト	通常	3_3
+	ペルセポネ	嬉しい2	1_3
+	ペルセポネ	嬉しい2						すごいですね♪\n結果は50はーちゃんです♪
+	ハデスロスト	通常						選考基準は……？
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	嬉しい2						なんとなく♪
+CharacterOff
+	ハデス	通常						なかなかですが、\nまだハデスはやられません……
+Param	character_grayout=false
+CharacterOff
+	プリム	通常						じゃあ次は私ですっ♪\nいきますよ、ハデスさん……！
+Se	和太鼓
+	          		1_2					<color=blue>『プリムのお口キレイキレイ！\n　～奥までプリムに\n　　　　　　　みせてください♪～』</color>
+CharacterOff
+	イベントスチル10832p		エフェクト表
+	オーラ桃		エフェクト裏
+	プリム	<Off>						シャカシャカ♪
+CharacterOff
+	イベントスチル10832h		エフェクト表
+	オーラ桃		エフェクト裏
+	ハデス	<Off>						はぅ……っ！
+CharacterOff
+	イベントスチル10832p		エフェクト表
+	オーラ桃		エフェクト裏
+	プリム	<Off>						キレイな歯ですね♪\nでも、もっと奥を……シュコシュコ♪
+CharacterOff
+	イベントスチル10832h		エフェクト表
+	オーラ桃		エフェクト裏
+	ハデス	<Off>						（お口のやわらかいところを……！）
+CharacterOff
+	イベントスチル10832p		エフェクト表
+	オーラ桃		エフェクト裏
+	プリム	<Off>						気持ちいいですかぁ？\nここ、もっと磨きますねぇ♪
+CharacterOff
+	イベントスチル10832h		エフェクト表
+	オーラ桃		エフェクト裏
+	ハデス	<Off>						んむっ……んむっ……！
+CharacterOff
+	イベントスチル10832p		エフェクト表
+	オーラ桃		エフェクト裏
+	プリム	<Off>						あーんして！		1555-11
+	プリム	<Off>						くちゅくちゅします！		1555-12
+CharacterOff
+	オーラ桃		エフェクト裏
+	ハデス	通常
+Shake	ハデス		x=2 y=3 time=10				NoWait
+	ハデス	通常						音だけで頭がくちゅくちゅぅ……！
+	ハデス	通常						で、でも負けません……！
+Param	character_grayout=true
+CharacterOff
+	ハデスロスト	通常	3_3
+	ペルセポネ	嬉しい2	1_3
+	ペルセポネ	嬉しい2						うーん、これもおしいですね！\n60はーちゃんです♪
+Param	character_grayout=false
+CharacterOff
+	マネ	通常						Genau！\nでは私の番ですわね♪
+Tween	マネ	PunchPosition	y=30				NoWait
+	マネ	通常						ハデスちゃんを\nワルにしてあげますわ♪
+Se	和太鼓
+	          		1_2					<color=blue>『マネの欲望と誘惑……♪\n　～さあワルに\n　　　　　なっちゃいましょう～♪』</color>
+CharacterOff
+	イベントスチル10832m		エフェクト表
+	オーラ桃		エフェクト裏
+	マネ	<Off>						ほら、見てくださいまし、\nこのマカイーサリアム♪
+	マネ	<Off>						取引開始で……ポチリ♪
+	マネ	<Off>						いけませんわねぇ…くひひっ♪		1591-12
+	マネ	<Off>						ほぉら♪\nこぉんなに、わっるぅ…い♥		1591-13
+CharacterOff
+	ハデス	通常						…………
+CharacterOff
+	マネ	驚き						な、なんで\nビクンビクンしないんですの!?
+CharacterOff
+	ハデス	通常						ハデスはマカイーサリアムを\nよく知りませんので……
+CharacterOff
+	ディーア	目閉じ2						オレだったら\nきっと夢中になってただろうけどな
+CharacterOff
+	マネ	泣き
+Tween	マネ	PunchPosition	y=30				NoWait
+	マネ	泣き						作戦負けですのーっ!?
+CharacterOff
+	ペルセポネ	通常2						残念でした、0はーちゃんです♪
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	嬉しい2						それでは、最後に♪\nパンパカパーン、マスターさんです♪
+CharacterOff
+	ハデス	通常2						ですが、\nマスターさんの声にはもう慣れました\n今度こそハデスが負けるはずないです
+CharacterOff
+	ディーア	目閉じ2						ふっ、それはどうかな……？
+StopBgm
+	ディーア	本気2						聞かせてやる、\nオレの本気の逆ASMR……！
+Se	チャージ
+FadeOut	white					1
+CharacterOff						0
+	イベントスチル10831		エフェクト表			0
+FadeIn	white					1
+Bgm	神秘
+	ディーア	<Off>						<color=blue>※ ハデスへの愛をささやく</color>
+	ハデス	<Off>						ひぅ……！
+	ディーア	<Off>						<color=blue>※ ハデスへの愛をもっとささやく</color>
+	ハデス	<Off>						ふやぁああ……！
+	ディーア	<Off>						<color=blue>※ ハデスへ愛の圧をかける</color>
+	ハデス	<Off>						こ、こんなの耐えられません……！\nマスターさんの声が耳にぃ……
+CharacterOff
+	ペルセポネ	通常2	3_3
+	ハデス	通常2	2_3
+	ハデスロスト	通常	1_3
+Shake	ハデス		x=3 time=15				NoWait
+	ペルセポネ	通常2						わぁお♪\nはーちゃんがすごくプルプルしてます\n100はーちゃんですね♪
+Tween	ペルセポネ	MoveBy	x=-30				NoWait
+	ペルセポネ	嬉しい2						それではセポネも……♪\nふぅー♪
+	ハデス	通常2						うひゃあああ……！\nなんでぇ……？
+	ペルセポネ	通常2						ろーちゃんもはやくぅ♪
+	ハデスロスト	通常						え、えっと……！
+Tween	ハデスロスト	MoveBy	x=30				NoWait
+	ハデスロスト	通常						お皿が一枚……お皿が二枚……！\nうらめしやぁー……！
+CharacterOff
+	ディーア	絶望2						ひぃいいいい!?\nASMR怪談……！
+CharacterOff
+	アスモデウス=サラ	通常						サラたちもまだ負けませんよ！
+CharacterOff
+	イベントスチル10832s		エフェクト表
+	アスモデウス=サラ	<Off>						こしょこしょ♪
+CharacterOff
+	イベントスチル10832p		エフェクト表
+	プリム	<Off>						シャカシャカ♪
+CharacterOff
+	イベントスチル10832m		エフェクト表
+	マネ	<Off>						ジャラジャラ♪
+CharacterOff
+	ディーア	にやけ2
+	オーラ桃		エフェクト表
+	ディーア	にやけ2						こ、これは……！\nみんなのASMRが重なって……！\n脳が溶かされて……！
+	ディーア	にやけ2						世界がASMRに染ま<dash=2>
+StopBgm
+CharacterOff
+	ASMR好きなドラゴン		1_3					やめろー！！！！
+Bgm	バトル
+CharacterOff
+	ディーア	驚き2						え……!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						ま、魔物!?\nなんでここに!?
+CharacterOff
+	ASMR好きなカエル							せっかく耳かきを楽しんでいたのに！
+CharacterOff
+	ASMR好きなうさぎ							歯磨き音にふらふらしてたのに！
+CharacterOff
+	ASMR好きなグリズリー							お金儲けの妄想してたのに！
+CharacterOff
+	ASMR好きなドラゴン		1_3					ぜんぶ混ざったら集中できないぞー！
+CharacterOff
+	ディーア	怪しい2						…………\nこだわりあるASMR大好き魔物が\nこんなにいるんだな
+	ディーア	本気2						あいつらの気持ちも分かるけど、\nまずは落ち着かせるぞ！
+FadeOut	white
+If	isdebug==true
+CharacterOff
+Jump	*E_1083_03
+EndIf
+EndScenario
+
+# E_1083_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔剣の日常
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	ディーア	目閉じ2				0
+FadeIn	black					.5
+	ディーア	目閉じ2						ほら、今度こそ\nお望みのASMRをゆっくり聞いてくれ
+CharacterOff
+	ASMR好きなカエル							はぁ……♪ 至福の耳かきだ♪\nこれでゆっくり眠れる……
+CharacterOff
+	ASMR好きなうさぎ							歯磨き……
+CharacterOff
+	ASMR好きなグリズリー							ジャラジャラ……
+CharacterOff
+	ASMR好きなドラゴン		1_3					セポネたんのささやき……♪
+CharacterOff
+	ディーア	怪しい2						ようやく魔物も落ちついたか……
+	ディーア	通常2						でも、みんなのASMRが\n魔物をあんなに虜にするなんてな
+CharacterOff
+	ハデス	通常2						でも、ハデスにもわかる気がします
+	ハデス	通常2						みなさんのASMRは\n感情のないハデスの魂を\nふるわせてくれました
+	ハデス	通常2						それはどれも不思議な音で
+	ハデス	通常2						勝負ではありましたけど、\n勝ち負けをつけることなんて\nハデスにはできません
+CharacterOff
+	ディーア	通常2						ああ、好みは人それぞれだもんな
+	ディーア	汗2						オレも一番になろうとか欲張らずに\nみんなのASMRを広めたくなったよ
+CharacterOff
+	ププッピマリー	通常通信2						それは素晴らしい結論ですね\n<param=name>様
+CharacterOff
+	ディーア	驚き2						ま、マリーさん!?
+CharacterOff
+	ププッピマリー	通常通信2						ご無沙汰しております
+	ププッピマリー	通常通信2						実は、件のASMRについて\n魔剣機関より通知がございました
+	ププッピマリー	通常通信2						配布された魔装具に\n声を広範囲に拡散してしまう不具合が\n見つかり、回収となるそうです
+CharacterOff
+	ディーア	絶望2						そ、そんな……
+CharacterOff
+	ププッピマリー	通常通信2						ですが<dash=2>
+	ププッピマリー	通常通信2						ASMRが魔剣や魔界に及ぼす効果が\n確かに認められたため
+	ププッピマリー	通常通信2						改めて魔剣機関による\nASMRについての調査が行われること\nになりました
+CharacterOff
+	ディーア	驚き2						ということは、\nその結果によってASMRを使った\n新展開もあるかもしれないですよね？
+CharacterOff
+	ププッピマリー	通常通信2						はい、そのとおりでございます
+	ププッピマリー	通常通信2						<param=name>様にも\n調査依頼が来ましたら\nぜひご協力を
+	ププッピマリー	微笑む通信2						お嬢様もASMRを\n大層お気に召したようですので\n世界図書館も期待しております
+	ロルリアンレット	<Off>	1_2					ちょっとマリー！\n余計なことを言うんじゃないわよ！
+	ププッピマリー	通常通信2						それでは、\n失礼いたします
+CharacterOff	ププッピマリー					.5
+Wait						1
+CharacterOff
+	ディーア	笑い2						そっか、よかった……\nうまく行けば\nみんなのASMRが広められるかもな
+CharacterOff
+	ハデス	通常2						でも、\n次に試す時はハデス以外の方に\nお願いしますね？
+	ハデス	通常2						聞きすぎると、\n大変なことになってしまいます
+CharacterOff
+	ディーア	怪しい2						そういえば……\nハデスも一回、試してみないか？\nASMR
+CharacterOff
+	ハデス	通常2						ハデスが、ですか？
+CharacterOff
+	ディーア	笑い2						ああ、\nハデスもとってもいい声だし\nどんなASMRになるか気になるんだ
+	ディーア	笑い2						魔装具が回収される前に、な？
+CharacterOff
+	ペルセポネ	嬉しい2						わぁ♪\nはーちゃん、やってみようよ！
+CharacterOff
+	ハデス	通常2						お姉ちゃんも言うなら……
+Tween	ハデス	PunchPosition	y=10				NoWait
+	ハデス	通常2						えっと、これをつけて\nお話をすれば良いんですよね……
+StopBgm
+	ハデス	通常2						それではマスターさん<dash=2>
+Bgm	神秘
+CharacterOff
+	オーラ桃		エフェクト裏
+	イベントスチル10832h		エフェクト表
+	ハデス	<Off>						もっとマスターさんの\n役に立ちたいので\nいっぱい圧かけてくれていいですよ		1493-27
+	ハデス	<Off>						もっともっと、\nいっぱい、圧、かけて
+StopBgm
+CharacterOff
+	アスモデウス=サラ	通常	1_3_b
+	ディーア	にやけ2	2_3
+	ペルセポネ	目閉じ2	3_3_b
+	三人							…………!!!!
+Bgm	わくわく
+Param	character_grayout=true
+	ディーア	驚き2						はっ……、いけない！\n気持ち良すぎて気絶してたっ！
+	ペルセポネ	嬉しい2						はーちゃんのお声で、\nじんじんしちゃいます～
+	アスモデウス=サラ	通常						魂が抜けちゃうかと思いましたぁ～\n（メロメロ～）
+	ディーア	目閉じ2						ハデス……！
+	ディーア	本気2						このASMR、魔界に広めるぞっ！
+CharacterOff
+	ハデス	通常2						え……
+CharacterOff
+	ディーア	本気2	1_2
+	ペルセポネ	通常2	2_2
+	ディーア	本気2						オレたちだけしか聞けないなんて、\nもったいないっ！\nすぐに魔剣機関に依頼するぞっ！
+Se	走る
+Tween	ディーア	MoveBy	x=-700 time=1				NoWait
+	ペルセポネ							セポネもお願いにいきますよぉ♪
+Se	ピューン
+Tween	ペルセポネ	MoveBy	x=-700 time=1				NoWait
+Wait						.5
+CharacterOff
+	ハデス	通常2
+Tween	ハデス	PunchPosition	y=30				NoWait
+	ハデス	通常2						ま、まってください\nマスターさん、お姉ちゃん……！
+Param	character_grayout=false
+FadeOut	white					1
+CharacterOff						0
+	イベントスチル10831		エフェクト裏			0
+FadeIn	white					1
+	ディーア	<Off>						はやく届けよう！\nハデスのASMR……!!
+StopBgm
+FadeOut	white					1
+CharacterOff						0
+Bg	黒背景					0
+	黒グラデーション		エフェクト表			0
+	イベントスチル10833		エフェクト裏			0
+Wait						1
+FadeIn	white					.3
+Bgm	絶望
+	？？？？	<Off>						ふふ♪\n先輩、楽しそうですね……
+	？？？？	<Off>						でも、私のほうが\nもーっと先輩を幸せにしてあげます♥
+	？？？？	<Off>						そう<dash=2>
+	？？？？	<Off>						私以外に、\n誰が先輩を幸せにできるんですか？\nそうでしょう？ せーんぱい♪		1651-22
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_1083_01
+EndIf
+EndScenario

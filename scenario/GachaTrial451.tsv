@@ -1,0 +1,638 @@
+# G_451_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔王バトル
+Bg	酒場1F					0
+Param	character_grayout=false
+	集中線		エフェクト表			0
+	天帝ユリウス	笑い_拡大	エフェクト裏			0
+FadeIn	white					1
+	天帝ユリウス	笑い_拡大						宣言するの！
+	天帝ユリウス	笑い_拡大						領土マスターは\n独裁者ユリウスが支配したの♪
+Param	character_grayout=true
+CharacterOff
+	天帝ユリウス	笑い	1_2_b
+	ディーア	驚き2	2_2
+	ディーア	驚き2						ゆ、ユリウス!?\nいや、支配は\nかなり大げさじゃないか？
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+	天帝ユリウス	通常						ぜんぜん大げさじゃないの！
+	天帝ユリウス	通常						マスターは\nしょうらいゆーぼーな\nすごい領土！
+	天帝ユリウス	笑い						だけど、もっともっと\nおっきくなるには、\nユリウスの助けが必要なの！
+	天帝ユリウス	笑い						なぜなら、ユリウスは\nすごい独裁者なの！
+	天帝ユリウス	通常						ユリウスが\n独裁国家マスターのお世話をすれば\nマスターの領土はおっきくなるの！
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	天帝ユリウス	笑い_拡大	エフェクト表
+	天帝ユリウス	笑い_拡大						だから……♪
+Bgm	平和
+Param	character_grayout=true
+CharacterOff
+	天帝ユリウス	笑い	1_2_b
+	ディーア	驚き2	2_2
+Tween	天帝ユリウス	MoveBy	x=30				NoWait
+Se	ポップイン
+	ディーア	驚き2						えっ!?
+	天帝ユリウス	笑い						ふふふ、\n今日も領土マスターは\nユリウスと一緒にいるの♪
+	天帝ユリウス	通常						すりすりーって\nユリウスのにおいもつけちゃうの♪
+	ディーア	あはは2						あはは、\nくすぐったいって！
+	天帝ユリウス	通常						これがユリウスによる支配なの♪
+	天帝ユリウス							でも、これだけじゃないの！\n領土マスターをおっきくするために、\n遠征も大切なの♪
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+	天帝ユリウス	笑い						だから、早くお外に行くの！\nお店で美味しいお菓子を\n征服しようなの！
+	ディーア	通常2						わかった\nじゃあ、他のみんなも呼んで<dash=2>
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+	天帝ユリウス	慌て						だ、ダメなの！\nそうしたら、領土マスターは\n独裁じゃなくなるの……！
+	天帝ユリウス	泣き						マスター、浮気しちゃうの？\nユリウス裏切られちゃうの？
+	ディーア	驚き2						そ、そんなことしないさ！
+	天帝ユリウス	通常						えへへ、よかったの！
+	ディーア	あはは2						でも、ずっとこの調子だと\nみんなにも悪いんだけどな……
+CharacterOff
+	カシウス	通常2						悪い？\nユリウスちゃん、\n悪いことしてるの？
+CharacterOff
+	カシウス	通常2	2_2
+	天帝ユリウス	慌て	2_3_b
+Se	ポップイン
+	天帝ユリウス	慌て						ぴゃあああん！
+Tween	天帝ユリウス	PunchPosition	y=50				NoWait
+Tween	天帝ユリウス	MoveBy	x=-120				NoWait
+	天帝ユリウス	慌て						か、カシウス!?\nいきなりどこを触っているの!?
+	カシウス	通常2						悪いことしてそうだから\n気になっちゃったの♪
+Tween	カシウス	MoveBy	x=-20				NoWait
+	天帝ユリウス	慌て						くすぐったいのぉ！\n早く離してなのぉ！
+CharacterOff
+	ディーア	あはは2						今はカシウスのほうが\n悪いことしてるかもな……
+CharacterOff
+	カシウス	通常2	2_2
+	天帝ユリウス	慌て	p4b
+Shake	天帝ユリウス		x=5				NoWait
+	カシウス	通常2						えへへ♪\nカシウス悪いことしちゃった♪
+Tween	天帝ユリウス	MoveBy	x=-100				NoWait
+	天帝ユリウス	慌て						むぅー！ カシウス！\nユリウスの独裁の\n邪魔しちゃイヤなの！
+	カシウス	通常2						独裁してるの？\nマスターさんを？
+CharacterOff
+	天帝ユリウス	笑い_拡大	エフェクト表
+	天帝ユリウス	笑い_拡大						そう！\nマスターはユリウスの領土なの♪
+CharacterOff
+	ディーア	驚き2	2_2
+	天帝ユリウス	通常	1_2_b
+Tween	天帝ユリウス	MoveBy	x=20				NoWait
+Se	ポップイン
+	天帝ユリウス	通常						だから、こうやって\nぎゅーってして……♪
+	ディーア	驚き2						ゆ、ユリウス？
+	天帝ユリウス	笑い						ユリウスのものだって\nみんなに見せちゃうの！
+CharacterOff
+	天帝ユリウス	笑い	1_3_b
+	ディーア	あはは2	2_3
+	カシウス	通常2	3_3_b
+	カシウス	通常2						うわぁ♪\n独裁ってドキドキするね♪\nカシウスもしていい？
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+	天帝ユリウス	慌て						か、カシウスといえどダメなの！\nユリウスだけなの！
+Tween	カシウス	MoveBy	x=-10				NoWait
+	カシウス	通常2						でも……カシウス、\n悪いことしたいなぁ♪
+Se	ポップイン
+Tween	天帝ユリウス	MoveBy	x=20				NoWait
+	天帝ユリウス	慌て						カシウス、やめるの！\n侵略したらダメなのぉ……！
+	ディーア	あはは2						あの、二人とも\nオレの意思は……？
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+	天帝ユリウス	慌て						マスター、早く行こうなの！\n今日も一日ずーっと遠征するの!!
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	？？？？							そのデート、\nちょーっと待ったぁ！
+Param	character_grayout=true
+CharacterOff
+	天帝ユリウス	通常						むむ！\nいったい誰なの！
+Bgm	緊迫
+CharacterOff
+	バールのようなもの	通常3	1_3_b
+	ザッハトルテ	通常	3_3_b
+	リディ	怒り2	2_3
+	リディ	怒り2						<size=40>マスターの</size>
+	バールのようなもの	通常3						<size=40>独裁には</size>
+	ザッハトルテ	通常						<size=40>反対ですわ！</size>
+CharacterOff
+	ディーア	驚き2						リディにばよの、トルテも\n一体どうしたんだ？
+CharacterOff
+	バールのようなもの	通常3	1_3_b
+	ザッハトルテ	通常	3_3_b
+	リディ	怒り2	2_3
+Tween	リディ	PunchPosition	y=30				NoWait
+Wait						.1
+	リディ	怒り2						どうしたもこうしたもないよ、\nマスター！
+	ザッハトルテ	通常						ここしばらく\nパティシエはユリウスに\nつきっきりですわ！
+	リディ	怒り2						そうだよ！\nマスターはリディ……\nじゃなくてみんなのもの！
+Param	character_grayout=false
+	集中線		エフェクト表
+	リディ	怒り2						リディたちは\n独裁国家マスターの解体と\n共和政マスターを求めるよ！
+Param	character_grayout=true
+CharacterOff	集中線
+	バールのようなもの	通常3						そうだー！\nきょーわせいだー！
+StopBgm
+CharacterOff
+	天帝ユリウス	慌て_拡大	エフェクト表
+	天帝ユリウス							きょ、共和政だと!? なの！
+CharacterOff
+	天帝ユリウス	慌て
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+Bgm	コメディ
+	天帝ユリウス	慌て						ま、マスター！\n大変なの！ クーデターなの！
+CharacterOff
+	ディーア	あはは2	2_2
+	カシウス	通常2	1_2_b
+	カシウス							共和政？ クーデター？\nそれって悪いこと？
+	ディーア							うーんどっちが悪いとかは\nオレからは……
+CharacterOff
+	天帝ユリウス	慌て
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+	天帝ユリウス	慌て						確かに領土マスターは\n素敵な領土、\nみんなが欲しがるのも分かるの！
+	天帝ユリウス	通常						でも、ユリウスは負けないの！\nマスターをおっきくするまで\n倒れられないの！
+CharacterOff
+	天帝ユリウス	通常	1_2_b
+	リディ	怒り2	2_2
+	リディ	怒り2						ユリウスちゃんは\n引かないんだね……！
+	天帝ユリウス	笑い						ふふふ！\nユリウスは逃げも隠れもしない！\nこうして丸腰でも平気なの！
+CharacterOff
+	ザッハトルテ	通常	2_2
+	バールのようなもの	通常3	1_2
+	バールのようなもの	通常3						だったら、\nばよのたちも手段は選ばないよ！
+	ザッハトルテ	通常						満腹で眠くなっちゃうくらい\nお菓子をあげますわ！
+	バールのようなもの	通常3						その柔らかいお腹！\nいっぱいくすぐってあげる！
+CharacterOff
+	カシウス	通常2	2_2
+	天帝ユリウス	笑い	1_2_b
+	天帝ユリウス	笑い						ユリウスこそ、\nみんなにいたずらしてやるの♪\nこちょこちょなの！
+	カシウス	通常2						カシウスはえっと……\nユリウスちゃんの\n味方になろうかなぁ♪ 
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+	天帝ユリウス	通常						カシウス……！\nこれでユリウス・カシウス連合が\n結ばれたのー！
+CharacterOff
+	天帝ユリウス	笑い
+	リディ	悔しい2
+	リディ	悔しい2						むむむ……
+	天帝ユリウス	笑い						ふふふ……
+CharacterOff
+	ディーア	驚き2						ちょっと待ってくれ！\nここで暴れたら店の中が大騒ぎだ！
+CharacterOff
+	ディーア	驚き2	2_3
+	天帝ユリウス	悔しい	1_3_b
+	リディ	驚き2	3_3
+	リディ	照れ2						あ、たしかに……
+	天帝ユリウス	悔しい						お店に迷惑かけちゃダメなの……
+	ディーア	あはは2						ここはなんとか穏便に、な！
+CharacterOff
+	ザッハトルテ	通常	2_2
+	バールのようなもの	通常3	1_2
+	バールのようなもの	通常3						でも、ばよの達もマスターと\n一日デートしたいし……
+CharacterOff
+	リディ	驚き2						……そうだ！\n選挙をしようよユリウスちゃん！
+	リディ	笑い2						選挙で勝ったほうがマスターを\n一日独占するの！
+CharacterOff
+	ディーア	笑い2						ああ、そうすれば穏便に<dash=2>
+	ディーア	驚き2						……あれ？\nそういえばオレの自由は!?
+CharacterOff
+	ディーア	驚き2	2_2
+	天帝ユリウス	通常	1_2_b
+	天帝ユリウス	通常						確かに誰も困らないの……！
+	ディーア	あはは2						いや、オレの自由は？
+	天帝ユリウス	笑い						分かったの！\nユリウスは選挙に勝って\n独裁国家マスターを盤石にするの！
+	ディーア	絶望2						オレの自由……
+	天帝ユリウス	通常						サイは投げられてしまったの！\nもうマスターは後戻り\nできないの！		1546-10
+CharacterOff
+	リディ	笑い2						それじゃあ、\n一日デートをかけて選挙スタート！
+Param	character_grayout=false
+CharacterOff
+	バールのようなもの	通常3	1_3
+	ザッハトルテ	通常	3_3
+	天帝ユリウス	笑い	2_3_b
+	一同							おー！
+FadeOut	black					.1
+Param	character_grayout=true
+CharacterOff						0
+	黒グラデーション		エフェクト裏			0
+	ザッハトルテ	通常	3_3_b			0
+	リディ	通常2	2_3			0
+	バールのようなもの	通常3	1_3_b			0
+FadeIn	black					.5
+	バールのようなもの	通常3						……うまくいったね！\nリディちゃん、トルテちゃん……！
+	リディ	通常2						マスターには投票権がないし\nカシウスちゃんがユリウスちゃんに\n投票しても、リディたちは三人！
+	バールのようなもの	通常3						選挙は数が多いほうが勝つ……！\n完璧な作戦だよ！
+	リディ	通常2						これでマスターと……！
+Param	character_grayout=false
+	三人							ふふふふ……
+Param	character_grayout=true
+CharacterOff
+	天帝ユリウス	通常	1_2_b
+	カシウス	通常2	2_2
+	カシウス	通常2						選挙はよく分からないけど\nがんばってね、ユリウスちゃん♪
+	天帝ユリウス	通常						応援ありがとうなの！\nカシウスが味方なら、\nユリウスの勝ちは決まったの！ 
+FadeOut	white					.5
+CharacterOff						0
+Bg	白背景					0
+Param	character_grayout=false
+	トライアルスチル45101		エフェクト表			0
+	          
+FadeIn	white					.5
+	天帝ユリウス	<Off>						領土マスターはぜったいに\n共和派には渡さないの！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Param	character_grayout=true
+Bg	市街地A					0
+Bgm	緊迫
+CharacterOff						0
+	リディ	悔しい2				0
+FadeIn	black					.3
+	リディ	悔しい2						では、これより両陣営による\n演説を始めます
+	リディ	通常2						まずは、独裁制代表\nユリウスちゃん！
+CharacterOff
+	天帝ユリウス	通常						えへんなの♪
+	天帝ユリウス	笑い						ユリウスはここに宣言するの！
+	天帝ユリウス	笑い						領土マスターはずーっと\n独裁国家マスターなの！
+	天帝ユリウス	通常						独裁国家マスターは\nユリウスの建国以来\nユリウスの領土！
+Param	character_grayout=false
+StopBgm
+CharacterOff
+	集中線		エフェクト表
+	天帝ユリウス	笑い_拡大	エフェクト裏
+	天帝ユリウス							なにより……！\nユリウスが独裁する方が\n領土マスターも幸せなの！
+Bgm	コメディ
+CharacterOff
+	天帝ユリウス	笑い						ユリウスは\n領土マスターを\nたくさんお世話してあげるの！
+	天帝ユリウス	通常						一緒にお風呂入ったり……！\n夜も添い寝してあげたり！
+CharacterOff
+	天帝ユリウス	腹_拡大	エフェクト表
+	天帝ユリウス	腹_拡大	エフェクト表					ジュニューだってしてあげるの！
+CharacterOff
+	天帝ユリウス	笑い						それで領土マスターは\nぐんぐんおっきくなるの！
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望2	画面外_右
+	天帝ユリウス	笑い	1_1
+Se	走る
+Tween	ディーア	MoveTo	x=90 time=1.5				NoWait
+	ディーア	絶望2						うわぁあああああ!?
+	ディーア	悔しい2						ユリウス……！\nストップ、ストップ！
+Tween	天帝ユリウス	PunchPosition	y=30				Add
+	天帝ユリウス	慌て						なにをするのー！\nげんろんの自由を決めるのは\nユリウスなのー！
+	ディーア	絶望2						その前にオレの自由がなくなる!!
+Se	走る
+Tween	ディーア	MoveBy	x=800 time=1.2				NoWait
+Tween	天帝ユリウス	MoveBy	x=800 time=1.2				NoWait
+Wait						1
+CharacterOff
+	リディ	絶望2	1_2
+	カシウス	通常2	2_2
+	カシウス	通常2						ユリウスちゃん、\nマスターと悪いことしてるんだねぇ♪
+	リディ	絶望2						…………
+FadeOut	black					.5
+CharacterOff						0
+	天帝ユリウス		1_2_b
+	ディーア	絶望2	2_2			0
+FadeIn	black					.5
+	ディーア	絶望2						そ、それでは……\n次はリディ達、共和派の演説だ……
+	天帝ユリウス	通常						かかってこいなの！\nどんな演説でも、\nユリウスは負けないの♪
+CharacterOff
+Bgm	緊迫
+	ザッハトルテ	通常	1_2
+	リディ	悔しい2	2_2
+	リディ	悔しい2						トルテちゃんお願い！
+	ザッハトルテ	通常						任せて下さいませ♪
+CharacterOff
+	ザッハトルテ	通常						トルテ達、共和派は\nここに宣言しますわ……！
+	ザッハトルテ	通常						トルテ達が勝利した暁には\n独裁国家マスターは即時解体
+	ザッハトルテ	通常						自由となったパティシエは……
+Param	character_grayout=false
+StopBgm
+	集中線		エフェクト表
+	ザッハトルテ	通常						お菓子の国\n専属パティシエとして\nずーっと働いてもらいますわ!!
+CharacterOff
+	集中線		エフェクト表
+	天帝ユリウス	慌て
+	天帝ユリウス	慌て						なんだと、なのー!?					ユリウスも驚かしてアホ可愛く
+CharacterOff
+	バールのようなもの	通常3	1_2
+	リディ	驚き2	2_2
+	二人							ちょっと待って!?
+Bgm	コメディ
+Param	character_grayout=true
+CharacterOff
+	バールのようなもの	通常3	1_3
+	リディ	悔しい2	2_3
+	ザッハトルテ	通常	3_3
+	ザッハトルテ	通常						なんですの？
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	悔しい2						話が違うよ!?\nそれじゃあ今と変わらないって！
+	ザッハトルテ	通常						変わりますわ！\nお菓子の国ですもの！
+	バールのようなもの	通常3						名前変えただけじゃん！
+CharacterOff
+	天帝ユリウス	通常	1_2_b
+	ディーア	驚き2	2_2
+	ディーア	驚き2						……トルテたち、\n一体どうしたんだ？
+	天帝ユリウス	通常						ふっふっふ♪\nこうなると思ってたの♪\nユリウスのよそーどーりなの♪
+CharacterOff
+CharacterOff
+	リディ	悔しい2	2_3
+	ザッハトルテ	通常	3_3
+	バールのようなもの	通常3	1_3
+	バールのようなもの	通常3						トルテちゃんが\n独占なんて許されないよ！\nばよのに交代して！
+CharacterOff
+	バールのようなもの	通常3	画面外_左
+Se	走る
+Tween	バールのようなもの	MoveTo	x=0 time=1.5				NoWait
+Wait						1
+	バールのようなもの	通常3						こほん!\nばよのたちが選挙に勝ったら……
+Param	character_grayout=false
+	集中線		エフェクト表
+	バールのようなもの	通常3						ばよのがマスターを独占するの！
+Param	character_grayout=true
+CharacterOff
+	バールのようなもの	通常3	1_2_b
+	リディ	悔しい2	2_2
+	リディ	悔しい2						ばよのちゃん!?
+Tween	バールのようなもの	PunchPosition	y=30				NoWait
+	バールのようなもの	通常3						あ、しまったー！\nばよのの計画がー！
+Tween	リディ	MoveBy	x=-20				NoWait
+	リディ	悔しい2						みんなでマスターを分ける話は\nどうなったの!?
+	バールのようなもの	通常3						で、でも！\nリディちゃんだって\nマスターを独占したいでしょ？
+	リディ	照れ2						そ、そんなことないよ！\nリディはちゃーんとみんなと……
+Tween	バールのようなもの	MoveBy	x=10				NoWait
+	バールのようなもの	通常3						ほんとに？
+	リディ	悔しい2						うぐ……リディは……\n最後の共和派なんだよ……！
+Tween	バールのようなもの	MoveBy	x=10				NoWait
+	バールのようなもの	通常3						ほんとのほんとに?
+	バールのようなもの	通常3						マスターを独占できるなら\nリディちゃんは……
+	リディ	怒り2						そんなの、リディだって……
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	リディ	怒り2						マスターを独占したいよ！
+Param	character_grayout=true
+CharacterOff
+	ディーア	あはは2	2_2
+	天帝ユリウス	通常	1_2_b
+	天帝ユリウス	通常						こうして共和政は\n仲間割れで崩壊するの……
+CharacterOff
+	天帝ユリウス	笑い_拡大	エフェクト表
+	天帝ユリウス	笑い_拡大						やっぱり、\n独裁国家が最強なの！
+CharacterOff
+	天帝ユリウス	通常	1_2_b
+	ディーア	あはは2	2_2
+	ディーア	あはは2						そういうことじゃないと思うぞ？
+	ディーア	怪しい2						でも、このままじゃ\n収集がつかないな……
+	天帝ユリウス	笑い						ふっふっふっ！\n大丈夫なの！
+	天帝ユリウス	通常						あれを見るの！
+	ディーア	驚き2						あれは……！
+Bgm	バトル
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	キノコリオン
+	キノコリオン							……ノコ？
+Param	character_grayout=true
+CharacterOff
+	天帝ユリウス	笑い	1_2
+	ディーア	驚き2	2_2
+	ディーア	驚き2						キノコリオン……!?
+	天帝ユリウス	笑い						そうなの！
+	天帝ユリウス	笑い						共和派が仲間割れのすきに、\n独裁者ユリウスが華麗な活躍！\nそして領土マスターを平定するの！
+	天帝ユリウス	通常						そうすれば、\n誰もユリウスの独裁に\n文句は言わせないの♪
+	天帝ユリウス	笑い						さぁ、行くの領土マスター！\nユリウスの力を見せつけてやるの♪
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコノコ!?
+If	isdebug==true
+CharacterOff
+Jump	*G_451_02
+EndIf
+EndScenario
+
+# G_451_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場1F
+	ディーア	あはは2
+FadeIn	white					.5
+	ディーア	あはは2						えーっと、演説も終わって\nキノコリオンも退治して\nこれから投票だが……
+CharacterOff
+	バールのようなもの	通常3	1_3_b
+	ザッハトルテ	通常	3_3_b
+	リディ	通常2	2_3
+	リディ	通常2						元共和派のリディです
+	バールのようなもの	通常3						元共和派のばよのだよ
+	ザッハトルテ	通常						お菓子の国\n神菓王ザッハトルテですわ♪
+CharacterOff
+	ディーア	あはは2						ばらばらになったんだな……
+	ディーア	通常2						それで\nみんな自分に一票を入れたから……
+CharacterOff
+	天帝ユリウス	笑い						残りはカシウスなの！
+CharacterOff
+	カシウス	通常2						えへへ\n初めての投票だぁ♪
+CharacterOff
+	天帝ユリウス	笑い	1_2_b
+	リディ	悔しい2	2_2
+	リディ	悔しい2						でも、カシウスちゃんは……
+Tween	天帝ユリウス	PunchPosition	y=30				NoWait
+	天帝ユリウス	笑い						カシウスはユリウスの友達！\nユリウスに賛成してくれるの♪
+	リディ	悔しい2						うぅ……
+	天帝ユリウス	通常						これで領土マスターは\nユリウスの独裁のまま……！
+	天帝ユリウス	笑い						さあカシウス投票を！ なの♪
+CharacterOff
+	天帝ユリウス	笑い	1_3_b
+	カシウス	通常2	3_3
+	カシウス	通常2						うん♪\nユリウスちゃんに投票するねぇ♪
+Tween	カシウス	MoveBy	x=-200 time=3				NoWait
+Wait						.5
+CharacterOff
+	リディ	驚き2						はっ!? そうだ！
+	リディ	悔しい2						カシウスちゃん!!
+CharacterOff
+	天帝ユリウス	笑い	1_3_b
+	カシウス	通常2	p5
+	カシウス	通常2						なぁに？
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	リディ	悔しい2						ここで寝返ったら\nすっごく悪いことだよ！
+StopBgm
+Param	character_grayout=true
+CharacterOff
+	天帝ユリウス	笑い	1_3
+	カシウス	通常2	p5
+	カシウス	通常2						ほんと!?\nじゃあカシウス、悪いことするぅ♪
+Tween	カシウス	RotateTo	y=180 time=0.5
+Tween	カシウス	MoveBy	x=-800 time=1.5				NoWait
+Se	走る
+	天帝ユリウス	慌て						…………へ？
+Bgm	緊迫
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	天帝ユリウス	慌て_拡大	エフェクト裏
+	天帝ユリウス	慌て_拡大						か、カシウスー!?\nお前もか、なのー!?
+StopBgm
+FadeOut	black					.1
+Param	character_grayout=true
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	あはは2				0
+Wait						.5
+FadeIn	black					.5
+	ディーア	あはは2						ということで、\n投票はリディの勝ちだな
+Bgm	絶望
+	天帝ユリウス	悔しい						……うぅ\nユリウス、負けちゃったの？
+	天帝ユリウス	悔しい						領土マスターが……\nユリウスの独裁国家が……
+	天帝ユリウス	泣き						うわーん！ なのー！
+Se	走る
+Tween	天帝ユリウス	MoveBy	x=-800 time=1.5				NoWait
+Wait						1
+CharacterOff
+	ディーア	驚き2						あ、ユリウス！
+	カシウス	通常2						……ユリウスちゃん？
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Param	character_grayout=true
+Bg	市街地A					0
+CharacterOff						0
+	天帝ユリウス	悔しい				0
+FadeIn	black					.3
+	天帝ユリウス	悔しい						ぐすん……\nやっぱり独裁者に\n裏切りはつきものなの……？
+	天帝ユリウス	泣き						ユリウスの\n独裁は、間違っていたの……？
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	戦場跡					0
+	          
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	市街地A					0
+	天帝ユリウス	泣き				0
+FadeIn	white					.3
+	天帝ユリウス	泣き						また……裏切られちゃうの？
+CharacterOff
+	ディーア	通常2						ユリウス？
+CharacterOff
+	ディーア	通常2
+	天帝ユリウス	泣き
+	天帝ユリウス	泣き						領土マスター……？
+	天帝ユリウス	悔しい						こっち来たらダメなの\nここにいるのは国を失くした\n独裁者なの……
+	天帝ユリウス	泣き						ユリウスは\n領土マスターを<dash=2>
+StopBgm
+	ディーア	通常2						それじゃあ、\n明日はユリウスとの\nデートだな
+	天帝ユリウス	慌て						……え？
+Bgm	凱旋
+	ディーア	笑い2						ほら、さっきの選挙で決めたのは\n今日のデートの分だろ？
+	ディーア	笑い2						だから、明日は\nユリウスとデートしよう
+	天帝ユリウス	慌て						ユリウス、\nマスターと一緒でいいの？
+	ディーア	笑い2						もちろんさ、\nオレはなにがあっても\nユリウスのマスターでいる
+	ディーア	あはは2						ずっとユリウスだけに\n独占されるのは難しいけどな
+	ディーア	通常2						たとえ独裁されなくても\nオレたちはユリウスから離れないよ
+	ディーア	通常2						それに、カシウスも
+CharacterOff
+	天帝ユリウス	慌て						カシウス……？
+CharacterOff
+	カシウス	通常2						あのね、ユリウスちゃん……\nさっきはごめんね？
+	カシウス	通常2						カシウス知らないことが多いから\n悪いことしたいけど……
+	カシウス	通常2						さっき、ユリウスちゃんが\n泣いちゃって、\nそれはイヤだったの
+	カシウス	通常2						だから、ごめんね
+CharacterOff
+	カシウス	通常2	2_2
+	天帝ユリウス	悔しい	1_2_b
+	天帝ユリウス	悔しい						カシウス……
+	カシウス	通常2						ユリウスちゃん、\nカシウスのこと許してくれる？
+	天帝ユリウス	通常						うん、許すの……♪\nカシウスはユリウスの友達なの♪
+CharacterOff
+	天帝ユリウス	通常
+	天帝ユリウス	笑い						えへへ、よかったの……♪
+	天帝ユリウス	笑い						裏切られてなかったの
+	天帝ユリウス	通常						勝負に負けても、\nマスターは領土マスターで\nカシウスは友達のままなの！
+CharacterOff
+	天帝ユリウス	通常	1_2_b
+	ディーア	笑い2	2_2
+	ディーア	笑い2						ああ、もちろんだ
+	天帝ユリウス	笑い						そうと決まれば、なの！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Param	character_grayout=true
+Bg	酒場1F					0
+CharacterOff						0
+	リディ	驚き2	2_2			0
+	天帝ユリウス	笑い	画面外_左_b			0
+FadeIn	black					.3
+Se	走る
+Tween	天帝ユリウス	MoveTo	x=-90 time=2				NoWait
+Wait						.5
+	天帝ユリウス	笑い						ただいまなのー♪
+	リディ	驚き2						あ、ユリウスちゃん！\nさっきは、その……
+	天帝ユリウス	笑い						共和派達に宣言するの！
+	リディ	驚き2						え……？
+Bgm	緊迫
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	天帝ユリウス	笑い_拡大	エフェクト裏
+	天帝ユリウス	笑い_拡大						ユリウスはここに、\n独裁国家マスターの健在を\n宣言するの！
+StopBgm
+CharacterOff
+	集中線		エフェクト表
+	バールのようなもの	通常3	1_3_b
+	ザッハトルテ	通常	3_3_b
+	リディ	驚き2	2_3
+	三人							えー!?!?
+Bgm	コメディ
+Param	character_grayout=true
+CharacterOff	集中線
+	リディ	悔しい2						ず、ずるーい！\nリディ勝ったのにー！
+CharacterOff
+	ディーア	あはは2	2_2
+	天帝ユリウス	笑い	1_2_b
+	天帝ユリウス	笑い						独裁国家マスターの前に\n反論は無意味なのー♪
+	天帝ユリウス	通常						ということで、\nマスター行くの！
+Tween	天帝ユリウス	MoveBy	x=60				NoWait
+	天帝ユリウス	通常						カシウスも今日は特別に\nマスターを共同統治するの！
+Se	走る
+Tween	天帝ユリウス	MoveBy	x=800 time=2.5				NoWait
+Tween	ディーア	MoveBy	x=800 time=2.5				NoWait
+Wait						1
+CharacterOff
+	リディ	驚き2						ま、待ってよ\nユリウスちゃーん！
+	天帝ユリウス	<Off>						待たないのー♪
+FadeOut	white					.3
+CharacterOff						0
+Bg	市街地A					0
+	天帝ユリウス	笑い	1_2_b			0
+	カシウス	通常2	2_2			0
+FadeIn	white					.3
+	カシウス	通常2						えへへー♪\n悪いことしちゃってるね♪
+	天帝ユリウス	笑い						独裁者は\n悪に染まるときもあるのー♪
+CharacterOff
+	天帝ユリウス	笑い	1_2_b
+	ディーア	笑い2	2_2
+	ディーア	笑い2						ははは……\n元気が出たみたいで\nよかったよ
+	天帝ユリウス	笑い						マスター！\nありがとうなの！
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	天帝ユリウス	笑い_拡大	エフェクト表
+	天帝ユリウス	笑い_拡大						領土マスターはこれからも、\nユリウスの領土！
+	天帝ユリウス	笑い_拡大						たっくさんお世話して、\nおっきくしてあげるのー♪
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*G_451_01
+EndIf
+EndScenario

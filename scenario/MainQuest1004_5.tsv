@@ -1,0 +1,411 @@
+# Q1004_5_01a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	黒背景
+Param	character_grayout=false
+FadeIn	black					.5
+Se	ドア開く
+	　　　　　　　　　　							勇者マーガレット討伐から<dash=2>
+	4.5スチル01		エフェクト表			.5
+Se	歩く
+Tween	4.5スチル01	MoveBy	x=-500 time=3	easeInOutSine
+StopSe
+Wait						.5
+CharacterOff						0
+	黒背景		エフェクト表2			0
+Bg	王政執務室
+	　　　　　　　　　　							<dash=2>数カ月後
+Se	ドア閉まる
+Wait						3
+	地名背景		地名背景			0
+	地名ロゴ	スイルノーム	地名ロゴ			0
+	左縦線		左縦線			0
+	左横線		左横線			0
+	右縦線		右縦線			0
+	右横線		右横線			0
+CharacterOff	黒背景					1
+Wait						1
+Tween	左縦線	MoveBy	y=-800 time=1.5	easeOutQuart			NoWait
+Tween	左横線	MoveBy	x=-800 time=1.5	easeOutQuart			NoWait
+Tween	右縦線	MoveBy	y=800 time=1.5	easeOutQuart			NoWait
+Tween	右横線	MoveBy	x=800 time=1.5	easeOutQuart			NoWait
+Wait						1.3
+	場所ロゴ	宗教国家エデン　王政執務室	場所ロゴ			1
+Wait						1
+	　　　　　　　　　　							　
+Tween	左縦線	MoveBy	y=-100 time=6				NoWait
+Tween	左横線	MoveBy	x=-100 time=6				NoWait
+Tween	右縦線	MoveBy	y=100 time=6				NoWait
+Tween	右横線	MoveBy	x=100 time=6				NoWait
+CharacterOff	地名ロゴ					.5
+CharacterOff	場所ロゴ					.5
+CharacterOff	左縦線					.3
+CharacterOff	左横線					.3
+CharacterOff	右縦線					.3
+CharacterOff	右横線					.3
+Wait						1.5
+CharacterOff	地名背景					1
+Wait						1.5
+	勇者王シドウ							ほう、正面から此処へ来るとは
+FadeOut	black					.3
+CharacterOff						0
+	4.5スチル02		エフェクト表			0
+FadeIn	black					.3
+Bgm	図書館
+	　　　　　　　　　　							<dash=2>冷たい眼光の男は、\n静かに作業を続けながら\n突然の来訪者に声をかけた
+	　　　　　　　　　　							その男のために作られたこの部屋は、\nエデン国政に関わる諸事務から\n勇者組織E.D.E.N.の最高意思決定まで
+	　　　　　　　　　　							多岐に渡りながらも、最重要な要件で\n満たされた、まさにエデンの心臓とも\n言える場所であった
+	黒背景		エフェクト表			0
+	　　　　　　　　　　							<dash=2>言わずもがな
+	4.5スチル03		エフェクト裏			0
+CharacterOff	黒背景					.5
+	　　　　　　　　　　							そのセキュリティはエデン国内でも\n随一の堅牢さを誇る
+	　　　　　　　　　　							万が一にも此処を落とされれば\n国が滅びかねない上<dash=2>
+	　　　　　　　　　　							それが魔界三国の一角ともなれば\nその影響は魔界全土へと及ぶ
+	　　　　　　　　　　							それほどまでの要所と言えば\nどれほどの防御策が取られているかは\n想像に難くない
+	黒背景		エフェクト表			.5
+Wait						.5
+	4.5スチル04		エフェクト裏			0
+Wait						.1
+CharacterOff	黒背景					.5
+Wait						.5
+	　　　　　　　　　　							<dash=2>しかし、そこに現れた来訪者は
+	　　　　　　　　　　							おそらくは律儀にアポイントを\n取っているようには見えず<dash=2>
+	　　　　　　　　　　							一方で暴力的な方法で無理矢理に\n侵入したようにも見えなかった
+	　　　　　　　　　　							だが、この部屋を訪れる予定外の\n来訪者が、一切の悪意を持たずに\n現れることもまた<dash=2>
+	　　　　　　　　　　							<dash=2>この部屋の意味と、\nその男の立場を考えれば尚の事、\n有り得なかった
+CharacterOff						0
+	黒背景		エフェクト表			0
+	　　　　　　　　　　							<dash=2>暗殺、謀略、叛逆
+	　　　　　　　　　　							あらゆる可能性が考えられるも、\nそのどれもが決して\n良いことばかりではない
+	4.5スチル02		エフェクト裏			0
+CharacterOff	黒背景					.5
+	　　　　　　　　　　							にも関わらず、\n部屋の主たるその男には、\n一切の気の乱れはなく
+	　　　　　　　　　　							むしろ気品すら感じさせる\n所作をもって、\n書類にサインを書き上げ続けていた
+FadeOut	black					.3
+CharacterOff						0
+Bg	王政執務室					0
+	勇者王シドウ	通常				0
+Wait						.5
+FadeIn	black					.3
+	勇者王シドウ							……どうした
+	勇者王シドウ							何か言いたいことがあって\nここまで来たのではないのか
+	勇者王シドウ	冷徹						<dash=2>勇者ルルよ
+FadeOut	black					.1
+CharacterOff						0
+	4.5スチル05		エフェクト表
+Wait						.5
+FadeIn	black					1
+Wait						.5
+	　　　　　　　　　　							<dash=4>闇
+	　　　　　　　　　　							あるいは混沌\n底が見えないまるで泥沼のような瞳
+	　　　　　　　　　　							その男に相対する少年の眼光は濁り\n漠然と立ち尽くしていた
+	勇者ルル	<Off>						…………勇者王、シドウ
+FadeOut	black					.2
+CharacterOff						0
+	4.5スチル02		エフェクト表			0
+FadeIn	black					.2
+	　　　　　　　　　　							エデンの現国王にして\nE.D.E.N.の最高責任者、勇者第一席
+	　　　　　　　　　　							そして六大魔王を継ぐ者である\n【勇者王シドウ】<dash=2>
+	　　　　　　　　　　							命を狙われることが多い彼にとって、\n果たして"突然の来訪者"がどの程度の\n力量であったとして<dash=2>
+	　　　　　　　　　　							想定の範囲内であったことは\n凡そ推し量れよう
+FadeOut	black					.2
+CharacterOff						0
+	4.5スチル05		エフェクト表			0
+FadeIn	black					.2
+	　　　　　　　　　　							だが驚嘆すべきは、王の執務室へ、\nおそらく一切の検知をされず、\n音も立てず、姿も見せず<dash=2>
+	　　　　　　　　　　							さらには入室を許してしまった相手が\nあの【勇者ルル】であったことだった
+StopBgm
+FadeOut	black					.1
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔導コロシアム
+Param	character_grayout=false
+	　　　　　　　　　　
+	勇者A	黒	2_3			0
+	勇者B	黒	1_3			0
+	勇者C	黒	3_3			0
+	　　　　　　　　　　
+Wait						2
+Bgm	絶望
+FadeIn	black					.5
+	　　　　　　　　　　							数多くいる勇者のほとんどは\n魔剣使いであるが、その能力差による\nヒエラルキーは依然として存在する
+	　　　　　　　　　　							E.D.E.N.の組織内部では\n能力が優れたものと同様に、\n劣ったものの名も広く知れ渡りやすい
+	勇者A	黒	2_3_b			0
+	勇者ルル	通常2	2_3
+	　　　　　　　　　　							ルルは残念ながら\n後者の知名度が高い男であった
+	　　　　　　　　　　							貴族血筋の良家の出身であり、\n入隊時の期待値は\n非常に高かったが<dash=2>
+CharacterOff	勇者ルル					.5
+Wait						.5
+	勇者A	黒	2_3			0
+	勇者B	嘲笑				.2
+	勇者C	嘲笑				.2
+	勇者A	嘲笑				.2
+	　　　　　　　　　　
+	　　　　　　　　　　							それ故に彼の醜態は誹謗中傷の\n格好の的となった
+	　　　　　　　　　　							あろうことか魔剣の<ruby=アンロック>解放</ruby>が苦手で、\n試験用に改造された汎用型さえ\n<ruby=アンロック>解放</ruby>できない底辺勇者<dash=2>
+	　　　　　　　　　　							<dash=2>そんなレッテルが、\n彼に与えられた勇者としての\n第一歩だった
+	黒背景		エフェクト表			2
+Wait						2
+	　　　　　　　　　　							彼が勇者として次の一歩を踏み出した\nという話をシドウが耳にしたのは\nもうしばらく後<dash=2>
+	　　　　　　　　　　							ルルがマーガレット隊へと\n配属された頃であった
+FadeOut	black					2
+StopBgm
+CharacterOff
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	王政執務室
+	勇者ルル	闇落ち2
+Wait						.5
+Bgm	図書館
+FadeIn	black					1
+	勇者ルル							<dash=2>突然の訪問をお許しください
+	勇者王シドウ	通常						構わない\nセキュリティレベルを上げる\n良い口実になった
+	勇者王シドウ	冷徹						それにしても<dash=2>
+CharacterOff
+Param	character_grayout=false
+	勇者ルル	闇落ち2
+	　　　　　　　　　　		エフェクト裏
+Wait						.5
+Se	魔剣入る
+	オーラ青		エフェクト表2			1
+Wait						1
+Se	光1
+FadeOut	white					.5
+CharacterOff	勇者ルル					0
+	ノイズ		2_3			0
+	アマノハバキリ		3_3			0
+	ゲオルギウス		1_3			0
+	　　　　　　　　　　					0
+FadeIn	white					.2
+CharacterOff	オーラ青					1
+Wait						2
+CharacterOff
+	勇者王シドウ	冷徹						<dash=2>随分と物騒だな
+	勇者ルル	闇落ち2						質問に答えていただきたい\nそうすれば手荒なことは\nなにもしない
+	勇者王シドウ	通常						<dash=2>ほう
+FadeOut	black					.2
+CharacterOff						0
+	ゲオルギウス					0
+FadeIn	black					.2
+Wait						.5
+FadeOut	black					.2
+CharacterOff						0
+	アマノハバキリ					0
+FadeIn	black					.2
+Wait						.5
+FadeOut	black					.2
+CharacterOff						0
+	ノイズ					0
+FadeIn	black					.2
+Wait						1
+CharacterOff
+	勇者王シドウ	冷徹						神話級魔剣の平行開錠\n……それも三本同時、か
+	勇者王シドウ							一本が<ruby=モデュレイテッド>失敗作</ruby>であるとはいえ\n槍と刀はなかなかのモノだ
+	勇者王シドウ							例の魔剣機関の少年と同じく、\nワイルド系の<ruby=キーホルダー>魔鍵保持者</ruby>というのは\n<dash=2>どうやら本当のようだな
+CharacterOff
+	勇者ルル	闇落ち2						質問にだけ答えてください\n今の僕なら、貴方がソレを<ruby=アンロック>解放</ruby>する\n前に、その腕を吹き飛ばせる
+CharacterOff
+	勇者王シドウ							それは困るな\n……まだサインしなければいけない\n書類が残っている
+StopBgm
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+Bg	黒背景					0
+	斬撃(39210F)		エフェクト裏			0
+	黒背景		エフェクト表			0
+Se	剣閃
+Tween	黒背景	MoveTo	x=2000
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	王政執務室					0
+	土煙		エフェクト表			0
+	勇者王シドウ					0
+	黒背景		エフェクト表2			0
+Se	火事
+Wait						.1
+CharacterOff	土煙					1.5
+CharacterOff	黒背景					.3
+Wait						1
+StopSe						1.5
+Wait						1
+	勇者王シドウ							………………
+CharacterOff
+Param	character_grayout=false
+Bgm	緊迫
+	ゲオルギウス		1_2_b
+	勇者ルル	本気闇落ち2	2_2					次は当てます
+	勇者ルル	闇落ち2						<dash=2>聞きたいことは2つ\n<color=mk2impo>《ゼロシステム》</color>と<color=mk2impo>《マスターキー》</color>
+CharacterOff
+	勇者王シドウ	冷徹						…………!!
+	勇者ルル	闇落ち2						<color=mk2impo>《ゼロシステム》</color>と<color=mk2impo>《マスターキー》</color>\nについて、知っていることを\n教えて下さい
+	勇者王シドウ	冷徹						……そうか\nたった数ヶ月でそこに辿り着くとは\n実に大したものだ
+CharacterOff
+	勇者ルル	本気闇落ち2						やはり何か知って<dash=2>
+CharacterOff
+	勇者王シドウ	通常						<dash=2>では
+StopBgm
+FadeOut	black					.2
+CharacterOff						0
+	4.5スチル02		エフェクト表			0
+FadeIn	black					.2
+	勇者王シドウ	<Off>						私に勝てれば教えよう
+Bgm	魔王バトル
+CharacterOff						0
+Param	character_grayout=true
+	4.5スチル06		エフェクト表			0
+	4.5スチル10		エフェクト裏			0
+	　　　　　　　　　　					0		　	BrPage
+ImageEffect	SpriteCamera	Bloom
+Wait						.2
+Se	光2
+	黒背景		エフェクト裏2			.5
+	4.5スチル07		エフェクト表			.5
+	オーラ青		エフェクト表2			1.5
+Wait						1.5
+FadeOut	white					.1
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+	カバー上部		カバー上部			0
+	勇者王シドウ					0
+	4.5スチル08		effect_a			0		　	BrPage
+Tween	勇者王シドウ	ScaleBy	x=0.6 y=0.6 time=0
+Tween	勇者王シドウ	MoveBy	y=160 time=0
+Tween	4.5スチル08	RotateBy	z=-1 time=0
+Wait						.1
+Se	光3
+FadeIn						.1
+Tween	4.5スチル08	RotateBy	z=1 time=1.8	easeOutQuart			NoWait
+Tween	4.5スチル08	ScaleBy	x=0.1 y=0.1 time=2	easeOutQuart			NoWait
+Wait						1.6
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+	4.5スチル14		エフェクト表			0
+StopSe
+Se	光3
+FadeOut	white					2
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff						0
+StopSe
+StopBgm						.5
+	黒グラデーション		エフェクト表
+	勇者ルル	驚き闇落ち2
+Wait						3
+FadeIn	black					.5
+	勇者ルル							…………なん、だと……
+CharacterOff
+Param	character_grayout=false
+	ノイズ		2_3
+	アマノハバキリ		3_3
+	ゲオルギウス		1_3
+	三人							…………っ!?
+CharacterOff
+	勇者王シドウ	冷徹						 
+CharacterOff
+	勇者ルル	怒り闇落ち2						(……手応えはなかった\n 傷も、外装の乱れさえも<dash=2>)
+FadeOut	black					.1
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+	カバー上部		カバー上部			0
+	4.5スチル09	くっきり	エフェクト表			0
+FadeIn	black					.1
+Wait						.2
+Tween	4.5スチル09	MoveBy	x=-200 time=0.3
+Wait						.2
+Tween	4.5スチル09	MoveBy	x=400 time=0.3
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff						0
+	勇者ルル	怒り闇落ち2				0
+FadeIn	black					.2
+	勇者ルル							(<dash=2>周囲に魔剣の姿はない)
+	勇者ルル							(今の攻撃を、<ruby=アンロックせず>魔剣の力を借りず</ruby>に……？)
+CharacterOff
+Param	character_grayout=false
+	勇者王シドウ		2_2					起きろ、エクスカリバー
+Se	光1
+	オーラ青		エフェクト表			1
+	聖征剣エクスカリバー	<Off>						<color=mk2wisp>『<dash=2>はい』</color>
+Wait						.5
+Se	光2
+FadeOut	white					.3
+	聖征剣エクスカリバー		1_2			0
+FadeIn	white					.3
+CharacterOff	オーラ青					1.5
+Wait						1.5
+CharacterOff
+	勇者ルル	驚き闇落ち2						<dash=4>ッ!!
+CharacterOff
+	聖征剣エクスカリバー		1_2
+	勇者王シドウ		2_2					……力の使い方を教えてやれ
+	聖征剣エクスカリバー							<dash=2>御意
+Se	スローモーションエンド
+Wait						1.8
+FadeOut	black					0
+CharacterOff						0
+	4.5スチル12		エフェクト表			0
+Wait						3
+Se	倒れる
+Wait						1
+Bgm	絶望
+FadeIn	black					1
+Wait						1
+CharacterOff
+	勇者ルル	悔しい闇堕ち2
+Shake	勇者ルル	悔しい闇堕ち2	x=5				NoWait
+	勇者ルル							ぐ…あ……ああ!!
+CharacterOff
+	勇者王シドウ							<dash=2>いい目だ
+CharacterOff
+	勇者ルル	悔しい闇堕ち2
+Shake	勇者ルル		x=5				NoWait
+	勇者ルル							勇者王……シドウ……ッ!!
+CharacterOff
+	勇者王シドウ							……その目は、勇者に相応しい
+CharacterOff
+	黒グラデーション		エフェクト表
+	4.5スチル11		エフェクト裏
+	勇者王シドウ	<Off>						この魔界において\n自ら勇者たらんとするその瞳は\n我がE.D.E.N.の誇りだ
+	勇者王シドウ	<Off>						…………そして
+	勇者王シドウ	<Off>						その目は、\n地面に這う者のそれではない
+CharacterOff
+	勇者王シドウ
+	勇者王シドウ	通常						ここまで来い、勇者ルル\n私の隣に立て
+	勇者ルル	驚き闇落ち2						…………は……？
+	勇者王シドウ	冷徹						……その時、《勇者》の本当の意味を\n教えてやろう
+	勇者ルル	怒り闇落ち2						……僕は、僕は……ッ!!
+	勇者王シドウ	通常						<dash=2>さて
+	勇者王シドウ							そろそろ会議の時間のようだ\n私は失礼する
+Se	歩く
+CharacterOff	勇者王シドウ					1.5
+Wait						2
+Se	ドア開く
+	勇者ルル	悔しい闇堕ち2						勇者王、シドウ……!!
+CharacterOff
+StopBgm						5
+	勇者王シドウ	<Off>						<dash=2>おっと
+CharacterOff
+	4.5スチル13		エフェクト表
+	勇者王シドウ	<Off>						これを忘れていた\n先程サインをしたばかりだが
+	勇者王シドウ	<Off>						昇格おめでとう\n勇者ルシフル……いや、ルル
+CharacterOff
+Se	歩く
+Wait						1
+	勇者ルル	驚き闇落ち2						………………は……？
+Se	ドア閉まる
+Wait						1.4
+StopSe	歩く
+	黒背景		エフェクト表			0
+Wait						4
+	　　　　　　　　　　							<dash=2>その後
+	　　　　　　　　　　							ルルは異例の速さで特AAA級に昇進\n後に"ルル派"と呼ばれる隊と\n共に出撃する
+	　　　　　　　　　　							<dash=2>聖鍵セフィロト\nこれが彼が最後に\n目撃された場所である
+FadeOut	black					2
+Wait						2
+If	isdebug==true
+CharacterOff
+Jump	*Q1004_5_01a
+EndIf
+EndScenario

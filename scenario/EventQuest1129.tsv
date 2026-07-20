@@ -1,0 +1,1622 @@
+# E_1129_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	キノコリオン
+Bg	カジノ					0
+Param	character_grayout=false
+	ばびの	通常				0
+FadeIn	black					1
+	ばびの	通常						孤立無援のクローズドサークル、\n密室の謎、アリバイ工作\n起きた凄惨な事件の数々！
+	ばびの	嬉しい						だけど安心して！\nこの館で起きた謎はぜんぶ解けたよ！
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	通常						そして事件の犯人は\nこの中にいる！
+Se	和太鼓
+FadeOut	black					.3
+CharacterOff						0
+	暇な研究者	通常				0
+	集中線		エフェクト表
+FadeIn	black					.3
+Wait						1
+Se	和太鼓
+FadeOut	black					.3
+CharacterOff						0
+	勇者B	通常				0
+	集中線		エフェクト表
+FadeIn	black					.3
+Wait						1
+Se	和太鼓
+FadeOut	black					.3
+CharacterOff						0
+	バールのようなもの神殺	通常2				0
+	集中線		エフェクト表
+FadeIn	black					.3
+Wait						1
+Se	和太鼓
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	悔しい2				0
+	集中線		エフェクト表
+FadeIn	black					.3
+Wait						1
+CharacterOff
+	ばびの	にやけ						体はJK！ 頭脳はビースト♪\nこの名探偵ばびのが\n犯人をガツンと推理してみせる！
+	ばびの	通常						バールのようなもの！\nの名にかけて！
+CharacterOff
+	ばびの	拡大通常	エフェクト表					真実は！\nたぶん一つのようなもの♪
+CharacterOff
+	集中線		エフェクト表
+	バールのようなもの	通常4						もーっ！ ばびのっ！\nばよのはちゃんとここにいるよ！
+FadeOut	white					1
+CharacterOff						0
+	イベントロゴ1129		エフェクト表
+FadeIn	white					1
+Wait						3
+StopBgm
+FadeOut	white					2
+CharacterOff						0
+FadeIn	white					2
+Bgm	平和
+	          							<color=blue>　　　　　　 数時間前</color>
+Param	character_grayout=true
+CharacterOff
+Se	走る
+	ディーア	通常2	2_2			1		リディ、\nパーティーの準備は大丈夫か？
+Wait						.5
+Se	走る
+	リディ	笑い2	1_2			1		うん♪\nお料理とお菓子の準備もバッチリ！\nあとはゲストのみんなを待つだけ！
+	リディ	通常2						年に一度の、\nみんなにお礼を言うパーティー\n楽しもうね、マスター♪
+	ディーア	笑い2						ああ♪\n今年は特に特別だもんな！
+	ディーア	怪しい2						ただ……\n連絡がつかない子もいるけど
+	リディ	悲しい2						それって\nバールのようなもの=ビーストちゃん\nのことだよね？
+	ディーア	怒り2						そうなんだ
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地C(火事)					0
+	ばびの	本気				0
+FadeIn	white					.3
+	ばびの	本気						まだ、ばびのは\nみんなと一緒には行けないの
+	ばびの	本気						魔界をおかしくした時に、\n危ないところも弄っちゃったから\nそれを直さないといけない
+	ばびの	本気						だから行ってくるね！
+	ばびの	笑い						コードちゃんとマスターと\n会えて本当によかった！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	カジノ					0
+	リディ	通常2	1_2			0
+	ディーア	怒り2	2_2			0
+Param	character_grayout=true
+FadeIn	white					.3
+	ディーア	目閉じ2						そう言って、消えたきり
+	ディーア	怒り2						今もコードが調べているけど\n掴めた行方は断片的でしかない
+	ディーア	怒り2						炭鉱の奥とか、\nユグドラシルの一区画だとか\n六大異変とか
+	ディーア	怒り2						今も乙女ゲー異変の\n後始末をしているんだろうな
+	リディ	悲しい2						心配だよね
+	ディーア	通常2						でも大丈夫だよ\nあいつとはきっとまた会える
+	ディーア	笑い2						今日は来てくれた人のために\nがんばるとしよう
+Tween	ディーア	MoveBy	x=30				NoWait
+	ディーア	怪しい2						……………………あれ？
+	リディ	驚き2						マスター、どうしたの？
+	ディーア	怪しい2						あっちに誰かがいたような……
+	ディーア	怒り2						ちょっと見てくる！
+Se	走る
+Tween	ディーア	MoveBy	x=600 time=2				NoWait
+	リディ	通常2						早く戻ってきてね？
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+Bg	洋館					0
+	ディーア	怪しい2				0
+FadeIn	black					1
+Bgm	絶望
+	ディーア	怪しい2						確かこっちに<dash=2>
+Param	character_grayout=false
+	ディーア	悔しい2						………………あれ？
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	ディーア	絶望2						なんだか、\n意識が朦朧として<dash=2>
+FadeOut	black					1
+CharacterOff						0
+Bg	黒背景					0
+	          
+FadeIn	black					1
+	ディーア	<Off>						…………ぐぅ
+FadeOut	black					1
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	          
+Wait						2
+FadeIn	black					1
+	勇ましい男の声	<Off>						おい、この状況で\n呑気に寝ているやつがいるぞ
+	渋い男の声	<Off>						きっと死ぬほど疲れているんだ、\n寝かせておいてやろう
+FadeOut	black					.3
+CharacterOff						0
+Bg	カジノ					0
+	ディーア	怪しい2				1
+FadeIn	black					.3
+	ディーア	怪しい2						うぅーん、\nなんだか騒がしいような<dash=2>
+Bgm	神秘
+Param	character_grayout=true
+CharacterOff
+	バールのようなもの	通常4	p7
+	バールのようなもの神殺	通常2	p3
+Tween	バールのようなもの	PunchPosition	y=30				NoWait
+	バールのようなもの	通常4						あっ！\nマスター！ 目が覚めた!?
+	バールのようなもの神殺	通常2						ふふふ♪\nご気分は大丈夫ですか、\nマスターさん？
+StopBgm
+CharacterOff
+	ディーア	驚き2						ばよのに、かよの……？\nそれに<dash=2>
+Bgm	カジノ
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ばびの	拡大嬉しい	エフェクト裏
+	ばびの	拡大嬉しい						<size=40>まーすーたぁー！</size>
+CharacterOff
+	ばびの	通常	画面外_左_b
+	ディーア	驚き2	p7
+Tween	ばびの	MoveBy	x=600 time=1				NoWait
+	ばびの	通常						ひさしぶりぃー♪
+Param	character_grayout=true
+	ディーア	驚き2						ば、ばびの!?
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	嬉しい						わぁ♪\nすごく驚いてくれた！ うれしー♪
+	ディーア	本気2						驚くに決まっているだろ!?\nコードもオレも随分探したんだぞ!?
+	ディーア	本気2						今まで\nいったいどこにいたんだ!?
+Tween	ばびの	MoveBy	x=-50				NoWait
+	ばびの	悲しい						うぅ……ごめんなさい……\n後始末がぜんぜん終わんなくて
+	ばびの	悲しい						異変をなかったことにって\n直そうとしていたんだけど……
+	ばびの	悲しい						心配かけて、ごめんなさい……
+	ディーア	通常2						………………\n……オレも声を荒げてごめん
+	ディーア	通常2						ばびのもオレたちから離れて\n一人で頑張っていたんだよな？
+	ディーア	笑い2						オレだって、\nばびのとまた会えて嬉しいよ
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	笑い						マスター……!!
+CharacterOff
+	バールのようなもの	通常4						むむむ……！\nあの子がばよののビースト……！\nでも、なんか<dash=2>
+CharacterOff
+	バールのようなもの神殺	通常2						うふふ♪ 大きさはばよのよりも\n私に近いみたいねぇ♪
+	黒グラデーション		エフェクト表			1
+	バールのようなもの神殺	通常2						それになんだか、\nマスターさんとも仲が良さそう♪\nうふふふふふ♪
+CharacterOff
+	ばびの	通常	画面外_左_b
+	バールのようなもの	通常4						むむむむむ……！\nまた強力なライバルが出現……！
+Tween	ばびの	MoveBy	x=450 time=1				NoWait
+	ばびの	通常						あっ！ そうだそうだっ！\nそこにいるのがばよのちゃんでしょ!?
+Tween	バールのようなもの	MoveBy	x=200				NoWait
+	バールのようなもの	通常4						うぇっ!?
+	ばびの	通常						はじめましてー♪\nばびのだよ、よろしくっ♪
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	笑い						へぇー、へぇー♪
+	バールのようなもの	通常4						ば、ばよのに、なにか!?
+Tween	ばびの	MoveBy	x=40				NoWait
+	ばびの	にやけ						すごいすごい！\nラジオで聞いてるのと同じ声だぁ♪
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	にやけ						こんなにすごい子が\nばびののオリジナルなんてすごい♪
+	バールのようなもの	通常4						えっ？\nすごいってばよののこと？
+	ばびの	笑い						もちろんだよぉー！\n魔界のパーソナリティって言ったら\nばよのちゃんのことだもん！
+	バールのようなもの	通常4						えへ、えへへへ……！
+Tween	バールのようなもの	PunchPosition	y=30				NoWait
+	バールのようなもの	通常4						まあねー！\nばよのは名パーソナリティだもん！
+	バールのようなもの	通常4						ばびのちゃんだっけ？\nなにか困ったことがあるときは\nこの！ ばよのを頼っていいよ！
+	ばびの	嬉しい						うれしい♪\nそーだ！ ばよのって呼んでオケ？\nたぶんカゾクのようなものだし！
+	バールのようなもの	通常4						いいよ！\nばよのもばびのって呼んじゃうから！
+Tween	ばびの	PunchPosition	y=50				NoWait
+	ばびの	笑い						いぇーい♪\n新旧バールのようなものコンビ！\n誕生だねっ！
+StopBgm
+Shake	バールのようなもの		x=4				NoWait
+	バールのようなもの	通常4						え……、ばよのが旧……？
+Bgm	平和
+CharacterOff
+	ディーア	笑い2	p3
+	バールのようなもの神殺	通常2	p7b
+	ディーア	笑い2						よかった、仲良くやれそうで\nコードにも早く会わせてあげたいな
+	バールのようなもの神殺	通常2						うふふ♪ その前にマスターさん？\n状況確認はしなくて良いんですかー？
+	ディーア	驚き2						あっ……！\nたしかにそうだな、えーっと
+CharacterOff
+	勇者A	通常						おいっ！\nお前たち、さっきから騒がしいぞ!!
+CharacterOff
+	ディーア	怪しい2						勇者……？\nどうして勇者がこんなところに？
+CharacterOff
+	勇者A	通常						それは俺のセリフだ！\nどうして俺がこんなところに\n閉じ込められないといけない！
+StopBgm
+CharacterOff
+	ディーア	驚き2						閉じ込められて……？
+Bgm	絶望
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+	暇な研究者	通常	p2			0
+	酒場のおばちゃん		p5b			0
+	勇者B		p8			0
+	          
+FadeIn	black					.3
+	ディーア	<Off>						本当だ……たしかにここは\nオレたちが準備していた会場じゃない
+	ディーア	<Off>						あんなにたくさんの人も\n呼んでいない
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	怪しい2				0
+FadeIn	black					.3
+	ディーア	怪しい2						それに<dash=4>
+FadeOut	black					.3
+CharacterOff						0
+	キノコリオン	通常				0
+Tween	キノコリオン	RotateTo	z=40 time=0				NoWait
+Tween	キノコリオン	MoveBy	x=200 y=-100 time=0				NoWait
+	集中線		エフェクト表			0
+FadeIn	black					.3
+Bgm	緊迫
+	ディーア	<Off>						なんか\nキノコリオンが倒れてる!?
+CharacterOff
+	ディーア	本気2						どうなっているんだ!?
+CharacterOff
+	勇者A	通常
+Tween	勇者A	PunchPosition	y=30				NoWait
+	勇者A	通常						俺にだってわからないさ！\n気がついたらここにいて、\n真ん中にはキノコリオンがいた！
+CharacterOff
+	ディーア	絶望2						あのキノコリオンは\nまさか、死<dash=2>
+CharacterOff
+	勇者A	通常						さあな、\nキノコリオンの脈の測り方なんて\n知らないが、ピクリともしない
+	勇者A	通常						たしかなのは\n転移の魔術を使っても\n外に出られないってことだ
+	勇者A	通常						そもそも窓の外は\nすごい吹雪で歩けそうにもないが
+CharacterOff
+	バールのようなもの神殺	通常2						なるほどー\n外との交流が絶たれた館
+	バールのようなもの神殺	通常2						いわゆるクローズドサークルなんて\nすごくミステリーな気配ですねー
+CharacterOff
+	ディーア	汗2						いやいやっ！\nいきなりミステリーなんて\n始まるわけ<dash=2>
+StopBgm
+Param	character_grayout=false
+	？？？？	<Off>	1_2					<color=red>哀れなる子羊たちよ\n我が名は混沌の狂言師……</color>
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						なんかはじまったー!?
+	バールのようなもの神殺	通常2						あっちのモニターからですねー？
+FadeOut	white					.3
+CharacterOff						0
+Bg	魔術空間					0
+	黒い影					0
+FadeIn	white					.3
+Bgm	図書館
+Se	マイクノイズ	TRUE
+	黒い影							諸君にはこれから\n最後の一人になるまでツブシアイを\nしてもらおう
+	黒い影							他の全ての者が脱落するまで\n我が館の門は開かれることはない
+	黒い影							そして、諸君の中にはすでに、\n悲しきキノコリオンに\n手をかけたものが存在するのだ
+	黒い影							くくくく♪\nお互いに疑いあい、争うが良い！\nそして愉悦をもたらすのだ！
+	黒い影							ハーッハッハッハ!!
+StopBgm
+StopSe
+FadeOut	white					.3
+CharacterOff						0
+Bg	カジノ					0
+	ディーア	絶望2
+FadeIn	white					.3
+	ディーア	絶望2						まさか、これって……？
+Bgm	コメディ
+CharacterOff
+	バールのようなもの	通常4						集められた被害者候補っ！
+CharacterOff
+	バールのようなもの神殺	通常2						外に出られない館の中でー♪
+CharacterOff
+	ばびの	にやけ						現れた謎の怪人……ううん、犯人！
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	笑い						これって事件でしょー♪
+	ばびの	笑い						ばびの、知ってる！\n脱出ゲームのようなものとか♪
+CharacterOff
+	バールのようなもの	通常4						バールのようなものの\n出番っぽくなってきたー！
+CharacterOff
+	バールのようなもの神殺	通常2						うふふふー♪\nなんだか血が騒いできましたー♪
+CharacterOff
+	ディーア	絶望2						凶器だもんな……
+	ディーア	悔しい2						でも、今は騒ぐべきじゃないぞ！\nこういう時に最初に犠牲になるのは\n<dash=4>
+CharacterOff
+	勇者A	通常						ツブシアイなんて冗談じゃない！
+	勇者A	通常						こんなところにいられるか！\n俺は一人にさせてもらう！
+Se	走る
+Tween	勇者A	MoveBy	x=-700 time=1				NoWait
+Wait						1
+CharacterOff
+	ディーア	絶望2						ああいうやつだから……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						って、待て！\n不用意に動くな……!!
+Se	フォーン
+FadeOut	black					.2
+CharacterOff						0
+Bg	黒背景					0
+FadeIn	black					.2
+	ディーア	<Off>						な、なんだ!? 停電!?
+	バールのようなもの	<Off>						なんにも見えないよー!?
+	バールのようなもの神殺	<Off>						みんな、マスターさんの近くにー
+Se	ポップイン
+	ディーア	<Off>						うわぁ！\nなんか柔らかいの触った!!
+	ばびの	<Off>						ひゃあっ！\nもーっ、そんなとこ掴まないでー！
+	バールのようなもの	<Off>						えーっ!?\nばびのずるいよーっ!!
+	？？？？	<Off>						ぎゃーーーー!?
+	ディーア	<Off>						っ……!!
+FadeOut	white					.2
+CharacterOff						0
+Bg	カジノ					0
+	ばびの	怒り				0
+FadeIn	white					.2
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	怒り						電気がついたっ！\nけど、今のは……？
+CharacterOff
+	ディーア	驚き2						あの勇者の声だ!!\nいったいなにが<dash=2>
+StopBgm
+Se	チャージ
+CharacterOff
+	勇者A	通常
+	オーラ紫		エフェクト表			1
+Shake	勇者A		x=2				NoWait
+	勇者A	通常						うっ……うぅ……
+Se	光1
+FadeOut	white					.2
+CharacterOff						0
+	キノコリオン	通常				0
+	オーラ紫		エフェクト表			0
+FadeIn	white					.2
+Bgm	バトル
+	キノコリオン	通常						ノコォオオオオ!!
+CharacterOff
+	ディーア	驚き2						キノコリオンになった!?
+CharacterOff
+	ばびの	通常						すっごーい！\nミステリーってキノコリオンに\nなっちゃう系なの？
+CharacterOff
+	ディーア	絶望2						それはホラーだろ！\n余計に怖くなってきたぞ!?
+CharacterOff
+	キノコリオン	通常						ノコォ！\nノコノコノコォオオオ!!
+CharacterOff
+	ディーア	怒り2						とにかく！\nこのキノコリオンを止めよう！
+If	isdebug==true
+CharacterOff
+Jump	*E_1129_02
+EndIf
+EndScenario
+
+# E_1129_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	作戦会議
+Bg	カジノ					0
+Param	character_grayout=true
+	ばびの	悲しい
+	ディーア	悔しい2				0
+FadeIn	black					1
+	ディーア	悔しい2						ふぅ……\nあのキノコリオンになった勇者は\n気絶させて部屋に縛ってきたけど
+	ばびの	悲しい						勇者さん、元に戻せるのかな？
+	ディーア	目閉じ2						どうやって\nキノコリオンに変わったのか次第だな
+	ディーア	怒り2						これが怪人の言ってた\nツブシアイってやつなのか？
+CharacterOff
+	バールのようなもの	通常4						じゃあ、会場に倒れていた\nキノコリオンも元は人だったの？
+CharacterOff
+	バールのようなもの神殺	通常2						怪人の口ぶりですと\nキノコリオンに変えてしまった\n犯人がいるようですねー？
+CharacterOff
+	ばびの	にやけ						わぁ……！\nこういうのをたしか……
+	ばびの	にやけ						そうそう！\nホンカクミステリーとか\n言うんでしょ？
+CharacterOff
+	ディーア	怪しい2						小説やドラマみたいに\n殺人事件にならなかったのは\nよかったけど
+	ディーア	怪しい2						キノコリオンにされるのは\nかなりの恐怖だぞ？
+CharacterOff
+	ばびの	悲しい						た、たしかに！\nキノコリオンにはなりたくないよ！
+CharacterOff
+	ディーア	怪しい2						それにもっと危ないのは<dash=2>
+Bgm	緊迫
+CharacterOff
+	旅人	通常						そんな……\n勇者がキノコリオンに……！
+CharacterOff
+	酒場のおばちゃん
+Tween	酒場のおばちゃん	PunchPosition	y=30				NoWait
+	酒場のおばちゃん	通常						私たちも\nああなっちゃうんじゃ……!!
+CharacterOff
+	研究員	通常
+Shake	研究員		x=3				NoWait
+	研究員	通常						く、来るなぁ！\n俺は家に帰る！ 帰るんだぁ!!
+CharacterOff
+	ディーア	本気2						落ち着くんだ、みんな！\nパニックになったら犯人の思う壺だ！
+CharacterOff
+	研究員	通常						だ、だけど！\nこんな状況でどうしろってんだ！
+Tween	研究員	PunchPosition	y=30				NoWait
+	研究員	通常						E.D.E.N.の勇者も\nあっさりキノコリオンになったんだぞ\nこのままじゃ<dash=2>
+StopBgm
+CharacterOff
+	ばびの	通常
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	通常						だいじょうぶだよ！\nマスターがいるもんっ！
+CharacterOff
+	ディーア	驚き2						ばびの……？
+Bgm	凱旋
+CharacterOff
+	バールのようなもの	通常4						ばびのの言うとおりだよっ！
+	バールのようなもの	通常4						ばよのたちのマスターは、\n何度も魔界を助けたすごいマスター！\nこの事件だって解決できるよ！
+CharacterOff
+	バールのようなもの神殺	通常2						うふふ♪ ばよのの言う通り♪\n<param=name>\nという名は聞いたことあるでしょ？
+CharacterOff
+	旅人	通常						た、たしかに……！\nその名前は何度も聞いたことがある
+	旅人	通常						<param=name>\nがいるなら安心できる！
+CharacterOff
+	研究員	通常						頼みます！\n<param=name>\nさん!!
+CharacterOff
+	ディーア	通常2						かよのたちまで……\nこれは腹を括らないといけないな
+	ディーア	笑い2						みんな安心してくれ、\nこの事件はオレたちで解決してみせる
+	ディーア	本気2						だから犯人を見つけるまで\nオレたちの指示に従って\n捜査に協力してくれ、頼む！
+CharacterOff
+	酒場のおばちゃん	通常						お願いするよっ！
+Param	character_grayout=true
+CharacterOff
+	ばびの	笑い	p7b
+	ディーア	汗2	p3
+	ディーア	汗2						これでひとまず、\nパニックは抑えられたな
+	ばびの	笑い						うん！\nマスター、かっこよかったよ！
+	ディーア	通常2						ばびの、ありがとう\nお前がオレを信じてくれたから\nオレも勇気を出せたよ
+	ばびの	照れ						マスター……
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	笑い						役に立てたなら、うれしいな♪
+	ばびの	通常						この前は\nコードちゃんとマスターに\nすごい迷惑かけちゃったけど
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	嬉しい						決めてたの！\n後始末が終わって、また会えたら\n今度こそマスターの役に立つって
+Se	走る
+Tween	ばびの	MoveBy	x=700 time=1				NoWait
+	ばびの	通常						だからばびの、すっごくがんばる！\n今日は探偵のようなものー！
+Tween	ディーア	MoveBy	x=150 time=1				NoWait
+	ディーア	通常2						それにしても……\nこの間は乙女ゲームで、
+	ディーア	怪しい2						今度は脱出ゲーム……\nいや、推理とミステリーか……
+	ディーア	怪しい2						共通点を感じるのは\nオレの気のせいなんだろうか？
+CharacterOff
+	バールのようなもの	通常4						捜査の基本は聞き込みだ……\nそうだろ、かよさん……
+	バールのようなもの神殺	通常2						うふふふ♪\nマスターさんを守ることも\n忘れちゃだめよー？
+CharacterOff
+	ばびの	にやけ						ばよのー、かよのー！\nばびのとトリオ組もうよっ！\n相棒のようなものー！
+CharacterOff
+	バールのようなもの	通常4						相棒って二人だよね!?
+CharacterOff
+	ディーア	通常2						…………いや、違うな
+	ディーア	通常2						たしかに\nばびのは事件を起こしたけど\n悪意があったわけじゃない
+	ディーア	通常2						生まれたばかりで、\nやり方を間違えてしまっただけだ
+	ディーア	目閉じ2						もう自分から\n異変を起こすことはないって\nオレは信じられる
+	ディーア	通常2						だから\nこの館には別の犯人が<dash=2>
+StopBgm
+CharacterOff
+	ベルゼ	シルエット				1		…………
+Wait						.5
+CharacterOff
+	ディーア	本気2						っ！\nそこにいるのは誰だ!?
+Bgm	絶望
+CharacterOff
+	ばびの	悲しい
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	悲しい						マスター!?\n大丈夫？ なにかあった？
+CharacterOff
+	ディーア	驚き2						あ、ああ……\n今あそこに誰かいたような……
+CharacterOff
+	バールのようなもの	通常4						ばよのたちには\nなんにも見えなかったけど？
+CharacterOff
+	ディーア	悔しい2						でも、\n絶対に気のせいじゃなかった
+	ディーア	悔しい2						みんな、\nまずは自分の安全を優先してくれ\nこの館は危険だ
+	ディーア	怒り2						そして犯人を見つけ出し、\n必ず脱出するぞ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1129_03
+EndIf
+EndScenario
+
+# E_1129_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	洋館					0
+Param	character_grayout=false
+	ディーア	怪しい2				0
+FadeIn	black					1
+	ディーア	怪しい2						うーん……
+	ディーア	怪しい2						勇者が言っていたように\n玄関はピクリとも動かないな
+CharacterOff
+	バールのようなもの	通常4						ばよのでガツーンって\nやってもらっても開かないね
+CharacterOff
+	バールのようなもの神殺	通常2						かよので\nコロってやってみてもですねー
+CharacterOff
+	ばびの	通常						なにやっても\nドアが開かないなんてフシギー！
+CharacterOff
+	ディーア	怪しい2						魔術的な封印なんかが\n施されているのかもしれないな
+	ディーア	怒り2						混沌の狂言師……\nいったい何者なんだ？
+	ディーア	怒り2						次は広間に戻って、\n勇者キノコリオン事件の捜査を\n始めよう
+CharacterOff
+	バールのようなもの	通常4						待ってました♪\nついにばよのが名探偵デビュー！
+CharacterOff
+	ディーア	驚き2						ばよのは推理に自信があるのか？
+CharacterOff
+	バールのようなもの	通常4						ふふーん♪\nだってラジオではたーくさん\nゲームしてきたもん！
+	バールのようなもの	通常4						こういうのは得意だよ♪
+CharacterOff
+	ばびの	通常						ばびのだって！\n魔界のことベンキョーしてた時に\n謎解きの本を読んでたよ！
+	ばびの	本気						えーっと、なんだっけ？\n初歩的なことだよ、ばよの君？
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	笑い						そんな感じなの！
+CharacterOff
+	バールのようなもの	通常4
+Tween	バールのようなもの	PunchPosition	y=30				NoWait
+	バールのようなもの	通常4						それじゃあ、\nばよのがばびのの助手みたいじゃん！\nばよのが名探偵なのっ！
+CharacterOff
+	ばびの	嬉しい						盛り上がってきたね♪\n助手のばよの君、ついてきたまえ♪
+Se	走る
+Tween	ばびの	MoveBy	x=750 time=1				NoWait
+Wait						.5
+CharacterOff
+	バールのようなもの	通常4						ばびのには負けないよー！
+Se	走る
+Tween	バールのようなもの	MoveBy	x=750 time=1				NoWait
+Wait						.5
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常2	p3
+	バールのようなもの神殺	通常2	p7b
+	バールのようなもの神殺	通常2						二人ともー\n勝手に動いたらダメよー？
+	ディーア	通常2						オレたちも行くとしよう
+Tween	バールのようなもの神殺	MoveBy	x=-50				NoWait
+	バールのようなもの神殺	通常2						はいー♪\n怪しい洋館に二人っきりですねー♪
+	ディーア	絶望2						…………首筋に寒気が
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	カジノ					0
+	酒場のおばちゃん	通常				0
+FadeIn	black					.3
+Bgm	作戦会議
+Param	character_grayout=false
+	酒場のおばちゃん	通常						あっ！\n戻ってきたね、魔剣使いさん！
+CharacterOff
+	勇者B	通常						指示通りに、\n誰も現場には入れていないぞ？
+CharacterOff
+	ディーア	通常2						ああ、助かるよ
+	ディーア	怒り2						それじゃあ\n現場を調べていこう
+	ディーア	怒り2						勇者キノコリオン事件には\n謎が多い
+StopBgm
+	ディーア	怒り2						キノコリオンに変えた方法も不明だ\nその手がかりを<dash=2>
+Bgm	コメディ
+CharacterOff
+	バールのようなもの	通常4						どっちが先に証拠を探せるか！\nばびの、競争だよ!!
+CharacterOff
+	ばびの	笑い
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	笑い						まっかせてー！\n触手ちゃんたちも総動員♪
+Se	闇1
+FadeOut	white					.2
+FadeIn	white					.2
+	土煙		エフェクト表			1
+Wait						1
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						ああああーっ！\nそんなに荒らしたら証拠がぁああ!!
+CharacterOff
+	バールのようなもの	通常4
+Tween	バールのようなもの	PunchPosition	y=30				NoWait
+	バールのようなもの	通常4						あーっ！\nすごい重要な証拠を発見したよ！
+CharacterOff
+	ディーア	驚き2						なにっ!?\nこ、これは……!?
+CharacterOff
+	ばび靴下		エフェクト裏
+	集中線		エフェクト表
+	ディーア	<Off>						靴下!?
+CharacterOff
+	ディーア	怪しい2						しかもこの柄って
+CharacterOff
+	ばびの	悲しい
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	悲しい						ばびののー!?\nなんで、なんで、なんでー!?\nなんでこんなとこに!?
+CharacterOff
+	バールのようなもの	通常4						ばびのの服……！\nこれはきっと重要な証拠!!
+CharacterOff
+	ばびの	悲しい						ちがうよー!!
+CharacterOff
+	バールのようなもの神殺	通常2						マスターさん、\nこっちにも別の証拠がありますー
+CharacterOff
+	ばびシャツ		エフェクト裏
+	集中線		エフェクト表
+	バールのようなもの神殺	<Off>						ばびののシャツです♪
+CharacterOff
+	ばびの	悲しい
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	悲しい						だからなんでー!?
+CharacterOff
+	ディーア	怪しい2						妙だな……\nこれがばびのの服だというなら\nばびのが着ている服は？
+	ディーア	怪しい2						まさか今のばびのの服は、\nペイント<dash=2>
+CharacterOff
+	ばびの	悲しい						真剣な顔で\n変な想像するのやーだー!!
+	ばびの	悲しい						もうっ！\nばよのたちは真面目にやってよ！\nきっと他に証拠が<dash=2>
+CharacterOff
+Se	ポップイン
+	ばびパンツ		エフェクト裏
+	集中線		エフェクト表
+Wait						2
+CharacterOff
+	ばびの	悲しい
+Shake	ばびの		x=3				NoWait
+	ばびの	悲しい						はわわわ……！\nこ、このピンク色のは……!!
+CharacterOff
+	ディーア	怪しい2						実に興味深い\n今すぐ仮説を立てて検証しなければ
+	ディーア	本気2						さあ、ばびの！\n今すぐスカートの中を調べるんだ！\nもしかしたらノーパ<dash=2>
+CharacterOff
+	ばびの	悲しい						履いてるってばー!!
+CharacterOff
+	バールのようなもの神殺	通常2						もしかして、\nばらばらになったパーツを集めたら\n封印されし力がー♪
+CharacterOff
+	ばびの	悲しい						ないよっ!?
+CharacterOff
+	ディーア	怪しい2						でも、妙なのは本当だぞ？
+	ディーア	怒り2						被害者の近くに\nばびのの服がばらばらになって\n落ちていたんだから
+CharacterOff
+	勇者B	通常						ってことは！\nその魔剣が犯人じゃないのか？
+CharacterOff
+	ディーア	怒り2						いや、それは違う
+	ディーア	目閉じ2						最初の事件で停電になった時、\nオレはばびのに触れていた
+	ディーア	目閉じ2						あの沈み込むような柔らかさは\n偽物なんかじゃない
+	ディーア	本気2						ばびのに犯行が不可能だったことは\nオレが保証する！
+CharacterOff
+	ばびの	通常						マスター……！
+CharacterOff
+	バールのようなもの	通常4						ばびのが乙女の顔してる……！
+CharacterOff
+	バールのようなもの神殺	通常2
+	黒グラデーション		エフェクト表
+	バールのようなもの神殺	通常2						無実の証拠は\nそれでいいんでしょうかー♪\nうふふー♪
+CharacterOff
+	ディーア	怪しい2						とはいえ事件の重要な証拠だ\nオレが責任をもって\nばびのの衣服を分析する！
+CharacterOff
+	ばびの	本気						マスター……
+CharacterOff
+	バールのようなもの	通常4						ばびのの\n好感度が下がる音がした
+StopBgm
+	暇な研究者	通常				.5		よう、ヒマか？
+Bgm	作戦会議
+CharacterOff
+	ディーア	怪しい2						あなたは？\nそれにヒマしているように見えるか？
+CharacterOff
+	暇な研究者	通常						魔剣たちと\nイチャイチャしているだけに\n見えたもんでな？
+	暇な研究者	通常						まあ、それはいい
+	暇な研究者	通常						アンタの指示通りに\n他の人間は個室に案内して\n中から鍵をかけさせたぞ
+	暇な研究者	通常						ついでに、\n事件に関する証言も集めておいた
+CharacterOff
+	ディーア	驚き2						驚いた……\n随分と手際が良いんだな
+CharacterOff
+	暇な研究者	通常						今はくたびれたオッサンだが\nこれでも勇者だったことがあるんだ\n昔取った杵柄ってやつさ
+	暇な研究者	通常						ここ辺りの証言は気になるな\nほら見てみろ
+CharacterOff
+	ディーア	怒り2						……なるほど、これは厄介だな
+CharacterOff
+	ばびの	驚き						マスター、どうしたの？
+CharacterOff
+	ディーア	怒り2						暗がりの中で\nあの勇者は周りの人を押しのけて\n走ったって証言が多くあるんだ
+CharacterOff
+	バールのようなもの神殺	通常2						なるほどー
+CharacterOff
+	バールのようなもの	通常4						お姉ちゃん、マスター\nそれがなにか意味あるの？
+CharacterOff
+	バールのようなもの神殺	通常2						勇者さんの周りには\nたくさんの人がいたということ
+	バールのようなもの神殺	通常2						そんなところで\n後ろからガツンなんてできるー？
+CharacterOff
+	ディーア	目閉じ2						犯人が群衆の中にいたとしたら、\n勇者が走ってくる方向を誘導する\n必要があるし
+	ディーア	怒り2						犯人から勇者に近づこうとしても\n周りの人に気づかれてしまう
+	ディーア	怒り2						人が密集していたからこそ\n犯行は難しいということだな
+CharacterOff
+	暇な研究者	通常						へえ、\n探偵気取りの素人かと思ったが\nなかなか頭はキレるらしい
+	暇な研究者	通常						そう、\n犯人がどうやって被害者に\n近づけたのかが問題だ
+	暇な研究者	通常						キノコリオンにした方法は\nひとまず関係はない
+	暇な研究者	通常						やつの背中を襲った方法が\nわからなければ\n事件は解決とはならないだろうさ
+Se	歩く
+	暇な研究者	通常						それじゃあ俺は行く\n事件解決して暇になったら\nコーヒーでも飲もうぜ
+CharacterOff	暇な研究者					1
+Wait						1
+StopSe
+CharacterOff
+	ディーア	怪しい2						…………事件解決、か
+	ディーア	目閉じ2						ただ、この犯人が、\nオレたちをここに閉じ込めたやつとも\n限らないけどな
+	ディーア	怒り2						前途は多難か
+CharacterOff
+	ばびの	通常						うーん？\nこれって迷宮入りのようなもの？
+	ばびの	本気						でも近づく方法かぁ……\nばびのだったら<dash=2>
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	？？？？	<Off>						きゃあああああ!?
+Bgm	緊迫
+CharacterOff
+Bg	カジノ
+	ディーア	驚き2						この声は！
+	ディーア	怒り2						上の方から聞こえたぞ！\n客室だ!!
+Se	走る
+FadeOut	black					1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	           
+Wait						2
+Se	光1
+FadeIn	white					1
+	土煙		エフェクト表			1
+Wait						.5
+	ディーア	悔しい2				1		くっ……！\nこの部屋の人も\nちゃんと鍵をかけていたのに！
+Wait						.5
+CharacterOff
+	キノコリオン	通常						ノコノコノコ!!
+CharacterOff
+	ディーア	悔しい2						やっぱりキノコリオンに……！
+	ディーア	本気2						第二の被害者だ！\n安全に確保するぞ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1129_04
+EndIf
+EndScenario
+
+# E_1129_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	ディーア	悔しい2				0
+FadeIn	black					1
+	ディーア	悔しい2						はぁ、はぁ……\nやっと抑え込めた……
+	ディーア	悔しい2						だけど困ったな\nこの部屋は中から鍵がかかった\nいわゆる密室だった
+	ディーア	怪しい2						他に人影は見えないし、\nどうやって犯人はこの中に入って\n犯行後に外に出たんだ？
+CharacterOff
+	バールのようなもの神殺	通常2						逆に犯人がいないっていう\n可能性も考えられますよー？
+CharacterOff
+	バールのようなもの	通常4						このお部屋の人が\n自分からキノコリオンになった\nっていうこと？
+CharacterOff
+	ディーア	怒り2						部屋にいたのは\n女の勇者だったっていうし
+	ディーア	怒り2						自分から\nキノコリオンになったとは\n考えづらいな
+	ディーア	怪しい2						でも二人目の犠牲者も勇者なら\n動機は勇者に対する恨みか？
+CharacterOff
+	ばびの	怒り						むむむむ……！
+CharacterOff
+	ディーア	驚き2						ばびの？\nなにかに気づいたの<dash=2>
+StopBgm
+CharacterOff
+	ベルゼ	シルエット						……
+Bgm	緊迫
+CharacterOff
+	ディーア	悔しい2						っ……!!
+Tween	ディーア	MoveBy	x=-700 time=2				NoWait
+	ディーア	本気2						待てっ!!
+CharacterOff
+	バールのようなもの	通常4
+Tween	バールのようなもの	PunchPosition	y=30				NoWait
+	バールのようなもの	通常4						マスター!?
+FadeOut	black					1
+CharacterOff						0
+Bg	洋館					0
+	ディーア	悔しい2				0
+Wait						1
+FadeIn	black					1
+	ディーア	悔しい2						やっぱり気のせいじゃない!!
+	ディーア	本気2						どこに隠れた！ 出てこい!!\nお前がこの事件の犯人<dash=2>
+StopBgm
+Bg	黒背景					0
+CharacterOff						0
+	？？？？	<Off>						しーっ
+Bgm	神秘
+CharacterOff
+Bg	洋館
+	ベルゼ	拡大通常不明	エフェクト表					お口、チャック……です
+CharacterOff
+	ディーア	驚き2						お前は……魔剣？
+CharacterOff
+	ベルゼ	慌て不明						はあ……\nまさか気づかれるとは計算外でした\nわたしとしたことが不覚です
+	ベルゼ	通常不明						抜けているようで\n実はしっかり者なんですね、\nせんぱい？
+CharacterOff
+	ディーア	怪しい2						先輩？\nそれにその姿はもしかして<dash=2>
+CharacterOff
+	ベルゼ	通常不明						だから、\nしーっ、です
+	ベルゼ	通常不明						そんなに大声を出されたら\nあのお方に気づかれてしまいます
+	ベルゼ	通常不明						そうしたら見守り任務も大失敗\nリリス先輩にも怒られてしまいます
+	ベルゼ	慌て不明						ただでさえ、\nみんな、わたしのいうこと\n聞いてくれないのに……
+CharacterOff
+	ディーア	怒り2						……君は、\nこの事件の犯人じゃないのか？
+CharacterOff
+	ベルゼ	通常不明						答えはイエス、です
+	ベルゼ	通常不明						でも事件に関することは\nわたしは口が裂けても言えません
+CharacterOff
+	ディーア	驚き2						どうして？
+CharacterOff
+	ベルゼ	通常不明						それはわたしの役目じゃないからです\nそして役者でもないからです
+	ベルゼ	通常不明						物語において、\n事件を解決するのが探偵さんなら\n異変を解決するのはせんぱい
+	ベルゼ	通常不明						わたしの仕事は\nあなたとあの方の関係を見守ること
+CharacterOff
+	ディーア	怒り2						…………
+CharacterOff
+	ベルゼ	通常不明						だから……\nわたしを見破ったせんぱいに\nあげられるのはヒントだけ
+	ベルゼ	通常不明						どうか呑まれないで\nこれは事件なんかじゃありません
+	ベルゼ	通常不明						そして考えてください\nなぜ罪は暴かれないといけないのか
+CharacterOff
+	ディーア	怪しい2						事件じゃ、ない……？
+CharacterOff
+	ベルゼ	通常不明						それでは\nまだどこかで<dash=2>
+Se	チャージ
+CharacterOff	ベルゼ					1
+Wait						1
+CharacterOff
+	ディーア	驚き2						お、おいっ！
+StopBgm
+	ディーア	怒り2						消えた……\nやっぱりあの子は……
+Bgm	平和
+CharacterOff
+	バールのようなもの	通常4	画面外_左
+Se	走る
+Tween	バールのようなもの	MoveBy	x=700 time=2				NoWait
+	バールのようなもの	通常4						まけんきかんのま～す～たぁ～！
+CharacterOff
+	ディーア	怪しい2						どうしたんだ、ばよの？\n変な呼び方して
+CharacterOff
+	バールのようなもの	通常4						あのね！\n急いで広間に戻ってきて!!
+Tween	バールのようなもの	PunchPosition	y=30				NoWait
+	バールのようなもの	通常4						ばびのが、\n犯人を見つけたっていうの！
+CharacterOff
+	ディーア	驚き2						なんだって!?
+If	isdebug==true
+CharacterOff
+Jump	*E_1129_05
+EndIf
+EndScenario
+
+# E_1129_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	キノコリオン
+Bg	カジノ					0
+Param	character_grayout=false
+	ばびの	通常				0
+FadeIn	black					1
+	ばびの	通常						孤立無援のクローズドサークル、\n密室の謎、アリバイ工作\n起きた凄惨な事件の数々！
+	ばびの	嬉しい						だけど安心して！\nこの館で起きた謎はぜんぶ解けたよ！
+	ばびの	通常						そして事件の犯人は\nこの中にいる！
+	ばびの	にやけ						体はJK！ 頭脳はビースト♪\nこの名探偵ばびのが\n犯人をガツンと推理してみせる！
+	ばびの	通常						バールのようなもの！\nの名にかけて！
+CharacterOff
+	ばびの	拡大通常	エフェクト表					真実は！\nたぶん一つのようなもの♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	汗2	p3
+	ばびの	通常	p7b
+	ばびの	通常						って、こんな感じでオッケー？
+	ばびの	通常						ばびの、ちゃーんと\n探偵さんのようなものになれてる？
+	ディーア	汗2						た、確かにそれっぽいけど……
+	ばびの	笑い						やったー！\nじゃあマスターのために\nばびのが事件を解決しちゃうね♪
+	ばびの	笑い						これで汚名挽回のようなものー！
+	ディーア	汗2						アリバイ工作とか\n関係なさそうなことも言ってたけど\n大丈夫かな？
+CharacterOff
+	バールのようなもの神殺	通常2						どうでしょー？
+CharacterOff
+	バールのようなもの	通常4						名探偵はばよのがやりたかったー！
+CharacterOff
+	暇な研究者	通常						まったく\n一人でヒマを満喫してたのに\nいきなり呼び出しとはな
+CharacterOff
+	酒場のおばちゃん	通常						魔剣のお嬢ちゃん？\nこんなに人を集めたんだから\nしっかりしてもらわないと困るよ？
+CharacterOff
+	勇者B	通常						しかも容疑者扱いまでされたら\nおふざけだったじゃすまない
+	勇者B	通常						その魔剣使いの\n名誉にも関わるからな？
+CharacterOff
+	ディーア	怒り2	p3
+	ばびの	通常	p7b
+	ばびの	嬉しい						もっちろん♪\nばびのはふざけてなんていないよ！
+	ばびの	通常						さっきの密室トリックも！\n最初のキノコリオン事件も！
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	嬉しい						ぜーんぶわかったもん！
+	ばびの	通常						この事件の犯人は……
+StopBgm
+	ディーア	怒り2						ごくっ……
+Bgm	コメディ
+	ばびの	笑い						ずばり！\nキノコリオンだよ♪
+	ディーア	絶望2						えぇええええええ!?
+CharacterOff
+	勇者B	通常						はいはい、解散
+CharacterOff
+	暇な研究者	通常						こいつは面白い推理だな！\nお嬢ちゃん！
+	暇な研究者	通常						だがキノコリオンが犯人とは！\n冗談にもほどがある！
+CharacterOff
+	ばびの	通常	p7b
+	ディーア	汗2	p3
+	ディーア	汗2						そうだぞ？\nキノコリオンに変えられた事件の\n犯人がキノコリオンっていうのは
+StopBgm
+	ばびの	通常						そうかなぁ？\nばびの、ニンゲンのルールとか\nよくわかんないけど
+Bgm	キノコリオン
+	ばびの	通常						マスターたちが困っていたのは\n人混みの中で勇者さんを襲った方法と\nミッシツの謎なんでしょ？
+	ばびの	通常						どっちも\n犯人がキノコリオンなら解決できる♪
+	ばびの	通常						小さいキノコリオンだったら\nみんなの足元をするする動いて\n勇者さんに近づけるし
+	ばびの	通常						ミッシツも部屋の中から鍵をかけて、\n隙間に隠れればいいもん♪
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	にやけ						マスターは\nニンゲンしか探していなかったし！\nバレないよ！
+	ディーア	驚き2						あっ……！
+	ばびの	本気						ケモノはね？\nどうやって相手を狩れるかしか\n考えない
+	ばびの	にやけ						ばびのも考えるのは苦手♪\nだからわかったの！
+	ばびの	通常						大きかったらみんなとぶつかって、\n大きかったらすぐ見つかるなら
+	ばびの	通常						小さくなればいいじゃん♪
+CharacterOff
+	暇な研究者	通常						いやいや、だからって<dash=2>
+CharacterOff
+	ばびの	通常	p7b
+	ディーア	怒り2	p3
+	ディーア	怒り2						確かに信じがたいけど\nばびのの言うとおりだと思う
+	ディーア	目閉じ2						そもそも犯人は\n被害者をキノコリオンに変える\n手段をもっているんだ
+	ディーア	怒り2						自分をキノコリオンに変えられても\nおかしくないだろう？
+CharacterOff
+	バールのようなもの神殺	通常2						すべての不可能を除外して、\n最後に残ったものが\nどんなに奇妙な事であっても
+	バールのようなもの神殺	通常2						それが真実となる、ですねー♪
+CharacterOff
+	バールのようなもの	通常4						でもぉ、\n犯人がキノコリオンってありなの？
+CharacterOff
+	バールのようなもの神殺	通常2						古いミステリーには\n動物が犯人だったっていう\n物語もあるらしいよ？
+CharacterOff
+	ばびの	通常	p7b
+	ディーア	通常2	p3
+	ディーア	通常2						魔界の事件なんだから\nなにが起こっても不思議じゃないさ
+	ディーア	怒り2						この推理が正しいなら\n犯人はキノコリオンになるための\n方法を手放していないことになる
+	ディーア	怒り2						つまり……！
+	ばびの	笑い						手荷物検査のようなものー♪
+CharacterOff
+	暇な研究者	通常						っ……！
+CharacterOff
+	ばびの	通常	p7b
+	ディーア	笑い2	p3
+	ディーア	笑い2						ああ、そうそう！\nあと一つだけ、良いかな？
+	ディーア	怪しい2						アンタ……\nさっきこんなこと言ってたよな？
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	暇な研究者	通常				0
+FadeIn	white					.3
+	暇な研究者	通常						やつの背中を襲った方法が\nわからなければ\n事件は解決とはならないだろうさ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ばびの	通常	p7b			0
+	ディーア	怪しい2	p3			0
+FadeIn	white					.3
+	ディーア	怪しい2						どうして\nあの勇者が背中から襲われたって\n知っていたんだ？
+CharacterOff
+	暇な研究者	通常						うっ……!!
+CharacterOff
+	バールのようなもの	通常4						たしかに！\n暗くてばよのたちには見えなかった！
+CharacterOff
+	バールのようなもの神殺	通常2						それがわかる人はー？
+CharacterOff
+	ばびの	通常	p7b
+	ディーア	怪しい2	p3
+	ばびの	通常						犯人しかいないってこと♪\nさっすがマスター！
+	ディーア	怪しい2						あの時に\nキノコリオンにする方法よりも\nトリックが重要って言ったのも
+	ディーア	怪しい2						オレたちの思考を\nキノコリオン化から離すのが\n目的だったんだろ？
+	ディーア	怒り2						証拠が必要なら\n今すぐ手荷物を見せてもらおう\n怪しい物が見つかるはずだ
+CharacterOff
+	暇な研究者	通常						くそぉ！\nただの魔剣使いだと思っていたら！
+	暇な研究者	通常						アイツらが悪いんだ！\n俺をE.D.E.N.から追い出すなんて！
+Tween	暇な研究者	PunchPosition	y=30				NoWait
+	暇な研究者	通常						ちょっと仕事をサボって\n高級コーヒーを経費で買い占めた\nだけじゃないか！
+CharacterOff
+	ディーア	汗2						それは\n追い出されて当然だと思うぞ？
+Param	character_grayout=false
+CharacterOff
+	暇な研究者	通常						だが！\nお前たちは俺を捕まえることは\nできない！
+	オーラ紫		エフェクト表			1
+	暇な研究者	通常						混沌の狂言師が授けた\nキノコリオン化の薬、KNK0505で！
+CharacterOff
+	ディーア	本気2						抵抗はムダだ！
+	ディーア	怒り2						今更\nキノコリオンになったところで……
+CharacterOff
+	暇な研究者	通常
+	オーラ紫		エフェクト表
+	暇な研究者	通常						ふふふふ♪\nただのキノコリオンじゃない
+Se	闇1
+FadeOut	white					.2
+CharacterOff						0
+	ドーピングキノコリオン	通常大				0
+	          		2_2
+FadeIn	white					.2
+	暇な研究者	<Off>	1_2					ドーピングキノコリオンだ
+StopBgm
+CharacterOff
+	ディーア	絶望2						…………
+Bgm	バトル
+CharacterOff
+	ドーピングキノコリオン	通常大
+	暇な研究者	<Off>	1_2					さあ、魔剣諸君！\n俺を捕まえられるかな？
+CharacterOff
+	ディーア	悔しい2						い、いくぞ！\nとにかく逃がしちゃダメだ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1129_06
+EndIf
+EndScenario
+
+# E_1129_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	カジノ					0
+Param	character_grayout=false
+	暇な研究者	通常				0
+	土煙		エフェクト表			0
+FadeIn	black					1
+	暇な研究者	通常						キノコの力が……
+CharacterOff
+	ディーア	怒り2						さて、犯人を確保だ
+	ディーア	本気2						そして吐いてもらうぞ、\nこの事件の黒幕のことを！
+StopBgm
+CharacterOff
+	暇な研究者	通常						うぅっ……！
+Bgm	絶望
+Shake	暇な研究者		x=3 time=3				NoWait
+	オーラ赤		エフェクト表			1
+	暇な研究者	通常						か、体が燃えるように熱い……!!
+	暇な研究者	通常						うぅ、うわぁああああああ!!
+Se	闇1
+FadeOut	red					.2
+CharacterOff						0
+	ばびの幻想体1	通常				0
+FadeIn	red					.2
+CharacterOff	ばびの幻想体1					.5
+Wait						.5
+Param	character_grayout=true
+CharacterOff
+	ばびの	驚き	p7b
+	ディーア	怪しい2	p3
+	ばびの	驚き						…………え？
+	ディーア	怪しい2						消えた？\n薬の使い方を間違えたのか？
+	ばびの	悲しい						ま、マスター？\n今の人が消える時、なにか見えた？
+	ディーア	驚き2						いや……？\nなにも見えなかったと思うけど
+	ばびの	悲しい						そ、そう……？
+Bgm	平和
+	ディーア	笑い2						それよりも！\nすごい推理だったぞ、ばびの！\nビーストな考えの勝利だな！
+	ばびの	笑い						うっ、うん！\nばびの、がんばったでしょー♪
+	ばびの	笑い						ゆーげんじっこー！\n今度こそマスターの役に\n立ちたかったんだもん！
+	ばびの	悲しい						ばびのも、\nちゃんとした魔剣みたいに……
+	ディーア	笑い2						この調子で\n早く黒幕の混沌の狂言師ってやつを\n見つけ出そう！
+	？？？？	<Off>	3_3					きゃああああああ!?
+	ディーア	怒り2						ほら、また悲鳴が聞こえたぞ！
+CharacterOff
+	バールのようなもの神殺	通常2						事件の予感ですねー
+CharacterOff
+	バールのようなもの	通常4						推理スタート♪
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	驚き2				0
+Bgm	コメディ
+FadeIn	white					1
+	ディーア	驚き2						なに!?\nたこ焼きに囲まれたキノコリオン!?
+CharacterOff
+	バールのようなもの	通常4						ばよの、わかった！\n事件の凶器は冷凍したタコだよ
+	バールのようなもの	通常4						犯人は凶器を料理したの♪
+CharacterOff
+	酒場のおばちゃん	通常						くぅ……！\nあいつが、わるかったのよぉー！
+FadeOut	white					.5
+CharacterOff						0
+Bg	洋館					0
+	ディーア	絶望2				0
+FadeIn	white					.5
+	ディーア	絶望2						くっ……！\nこんなにキノコリオンに囲まれたら\n逃げることなんて
+CharacterOff
+	バールのようなもの神殺	通常2						マスターさん？\nどうしてベストを\n尽くさないんですかー？
+CharacterOff
+	ディーア	絶望2						なぜ、ベストを……
+	ディーア	本気2						うぉおおおお！\nベストぉおおおお!!
+FadeOut	white					.5
+CharacterOff						0
+Bg	カジノ					0
+	ディーア	本気2				0
+FadeIn	white					.5
+	ディーア	本気2						この事件の謎は、全て解けた!!
+	ディーア	本気2						犯人はお前だ！
+FadeOut	white					.5
+CharacterOff						0
+	バールのようなもの神殺	通常2				0
+FadeIn	white					.5
+	バールのようなもの神殺	通常2						犯人はあなたー
+FadeOut	white					.5
+CharacterOff						0
+	バールのようなもの	通常4				0
+FadeIn	white					.5
+	バールのようなもの	通常4						犯人はおまえだっ！
+StopBgm
+FadeOut	white					1
+CharacterOff						0
+	ディーア	悔しい2				0
+Wait						2
+FadeIn	white					1
+Bgm	平和
+	ディーア	悔しい2						あれ……？
+	ディーア	怪しい2						オレたち、\n何回、犯人を捕まえたっけ？
+CharacterOff
+	バールのようなもの	通常4						でも次々に事件が起きるから、\nしかたないよ！
+CharacterOff
+	ディーア	笑い2						そうだな！\n脱出するまで事件は終わらない！\n犯人はまだいるんだ!!
+	ディーア	通常2						そして\nオレは新しい犯人を見つけた！
+CharacterOff
+	ばびの	悲しい						…………
+CharacterOff
+	ディーア	本気2						最初から倒れているキノコリオン！\nお前がすべてを<dash=2>
+StopBgm
+CharacterOff
+	ばびの	悲しい						ま、マスター！\nこれやっぱりおか<dash=2>
+CharacterOff						0
+Bg	黒背景					0
+	？？？？	<Off>						くだらん
+Se	パリン
+FadeOut	white					.3
+CharacterOff						0
+Bg	カジノ					0
+	アリス	通常魔帝				1
+FadeIn	white					.3
+Bgm	図書館
+	アリス	通常魔帝				1		この茶番劇にも、もう飽きた
+CharacterOff
+	ディーア	驚き2						ありす、様……？
+CharacterOff
+	アリス	蔑み魔帝						こうも粗末に物語が進むとなれば、\n私の忍耐にも限界がある
+	アリス	通常魔帝						舞台の幕引きに\nふさわしいセリフとともに
+	アリス	通常魔帝						魔帝アリスが\n歪んだ推理劇を終わらせてやろう
+CharacterOff
+	ばびの	悲しい						っ……！
+StopBgm
+CharacterOff
+	アリス	通常魔帝						犯人は貴様だ、\nバールのようなもの=ビースト
+If	isdebug==true
+CharacterOff
+Jump	*E_1129_07
+EndIf
+EndScenario
+
+# E_1129_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	カジノ					0
+Param	character_grayout=false
+	ディーア	悔しい2				0
+FadeIn	black					1
+	ディーア	悔しい2						アリス様!?\nなにを言っているんですか!?
+	ディーア	悔しい2						ばびのはオレたちとずっといたし\n犯人だって何人も見つけた
+	ディーア	悔しい2						ばびのが犯人なわけ<dash=2>
+CharacterOff
+	アリス	蔑み魔帝						ああ、そうだろうとも\nその歪な魔剣は手を下していない
+	アリス	蔑み魔帝						だがこの舞台を整え、\n物語を拵えた黒幕はその魔剣だ
+	アリス	通常魔帝						無限に事件が起き、\n無限に犯人が生まれていく\n永劫に終わらぬ推理劇
+	アリス	通常魔帝						薄々と気づいていただろう？\nあのくだらん遊戯の異変と\n同種の異変だと
+	アリス	笑い魔帝						貴様ともあろう者が見逃すとは、\nよほど情が湧いたか？
+CharacterOff
+	ディーア	悔しい2						で、でも……！
+CharacterOff
+	ばびの	悲しい						ち、違うよっ！\nばびの、そんなことしてない！
+	ばびの	悲しい						ばびのは、\nもうマスターに迷惑なんて<dash=2>
+CharacterOff
+	アリス	通常魔帝						ククク！\n無知である者は自覚的であるより\nなおタチが悪いな♪
+	アリス	通常魔帝						貴様のその願いがコトの原因だ\n無自覚にこの異変を起こした
+	アリス	通常魔帝						望んだのだろう？
+	アリス	通常魔帝						『間違いをなかったことにしたい』
+	アリス	通常魔帝						自らが起こした異変と爪痕の\n完全なる抹消を
+CharacterOff
+	ばびの	悲しい						そ、それは……
+	ばびの	悲しい						だって、\nばびのが悪いことしたんだし……
+CharacterOff
+	ディーア	怒り2						ばびのは罪を償おうとしていた\nそれの何が悪いんですか？
+CharacterOff
+	アリス	通常魔帝						では聞くが、魔剣使い\n過ちを完全になかったことになど\nできると思うか？
+FadeOut	black					.3
+ImageEffect	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	戦場跡					0
+	          
+FadeIn	black					.3
+	魔帝アリス	<Off>						ある魔剣が暴走し、\n傷ついた人々がいるならば
+	魔帝アリス	<Off>						原因の魔剣を\n『なかったこと』にした場合、\n傷ついた者は蘇るか？
+	魔帝アリス	<Off>						答えは否
+FadeOut	black					.3
+CharacterOff						0
+Bg	廃墟A					0
+	          
+FadeIn	black					.3
+	魔帝アリス	<Off>						起点となる事象が抹消されても、\nそれが魔界に残した爪痕までは\n消え去りはしない
+	魔帝アリス	<Off>						失われた者は還ることがない\n原因の消失という歪んだ事実が\n残されるだけだ
+	魔帝アリス	<Off>						だから\n人々は辻褄を合わせるために\nありもしない原因を見出す
+	魔帝アリス	<Off>						そして人々が共通で認識した原因は\nある種の伝承として形を成す
+	魔帝アリス	<Off>						人々は魔剣ではなく、\n天変により失われたといった具合にな
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	カジノ					0
+	アリス	通常魔帝				0
+FadeIn	white					.3
+	アリス	通常魔帝						魔界という世界を維持するための\n応急処置のようなものだ
+CharacterOff
+	ディーア	怒り2						まさか……
+CharacterOff
+	アリス	通常魔帝						理解したか？\nこの魔剣も同じことをした
+	アリス	通常魔帝						自身の起こした過去の異変を\n根本から抹消したいと願ったのだ
+	アリス	通常魔帝						「自分は犯人じゃなかった」\nそうやって事実を歪ませようとし、\n結果がこの始末だ
+	アリス	通常魔帝						異変を起こした犯人が別にいるという\n歪みに歪んだ推理ショー
+	アリス	通常魔帝						本来ならば、魔剣の願い程度で\nこのようなことは起こせないが……
+CharacterOff
+	ばびの	悲しい
+	魔帝アリス	<Off>	1_2					貴様は一度、\n魔界を改変してしまった魔剣だからな
+	魔帝アリス	<Off>						無意識に同じことをし、\n周囲を狂気で満たす性能と合わせて\n不幸にも異変が成立した
+	ばびの	悲しい						そ、そんなの……
+CharacterOff
+	アリス	蔑み魔帝						認められないか？
+	アリス	蔑み魔帝						証拠なら、\nこの会場のニンゲンたちだ
+	アリス	蔑み魔帝						巧妙に偽装したが、\n全て貴様の幻想体でしかない
+	アリス	通常魔帝						本物の人間を巻き込まないのは\n無意識のブレーキだっただろうが\n長くは保たない
+	アリス	通常魔帝						止めどなく生み出され、\n異変を拡張させようとする奴らを\nちまちま潰すのは面倒だったぞ？
+CharacterOff
+	ディーア	悔しい2						あの現場に残されていた\n服の断片は……！
+CharacterOff
+	アリス	通常魔帝						そう言うことだ\n理解したならば魔剣を差し出せ
+	アリス	通常魔帝						まだ我々は\nバールのようなもの=ビーストが\n異変を起こした事実を認識している
+	アリス	通常魔帝						その事実がかき消されるまで、\nこの異変は無限に拡張を続けるだろう
+	アリス	通常魔帝						其奴を残しておけば\n魔界の安定に致命的な影響を及ぼす
+	アリス	通常魔帝						自覚があろうとなかろうと\nその身は魔界を歪ませる災厄だ
+	アリス	通常魔帝						バールのようなもの=ビースト\nという魔界の脅威は\n排除されなければいけない
+CharacterOff
+	ばびの	悲しい						ば、ばびのが迷惑なら……
+StopBgm
+CharacterOff
+	ディーア	怒り2						させません
+CharacterOff
+	ばびの	驚き						っ……!?\nますたー、どうして……？
+Bgm	魔獣バトル
+CharacterOff
+	アリス	通常魔帝						どういうつもりだ、魔剣使い？
+	アリス	通常魔帝						既に十分以上に\n説明はしてやったと思うが？
+CharacterOff
+	ディーア	怒り2						ばびのは\n確かに一度罪を犯しました
+	ディーア	本気2						だけど今回は違う！\n本人に自覚なんてなかった！
+CharacterOff
+	アリス	通常魔帝						だからどうした？\n在るだけで世界を歪ませ、汚染する\nそんな獣を許容しろと？
+	アリス	通常魔帝						貴様も異変の主を何度も屠り、\n魔界を救ってきたはずだ
+	アリス	通常魔帝						その倒した敵と何が違う？
+CharacterOff
+	ディーア	怒り2						魔剣使いとして\n悪意をもって魔界に害を成すのなら\n何度だって戦って、阻止します
+	ディーア	怒り2						けど、ばびのは違う！\n自分の過ちをやり直したかっただけだ
+	ディーア	怒り2						誰だって同じでしょう！\nひどい間違いを犯したら後悔して、\n過去を消したくなる！
+	ディーア	本気2						それが悪影響を及ぼしたというだけで\n何が悪いんですか!?
+CharacterOff
+	アリス	蔑み魔帝						話にならんな
+	アリス	蔑み魔帝						貴様は魔剣に寄り過ぎる\n魔界を治める王候補として不適格だ
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	アリス	通常魔帝						そして……\nこのアリスの結論は変わらない
+Se	光3
+Se	闇3
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	悔しい3				0
+FadeIn	white					.3
+Shake	ディーア		x=3				NoWait
+	ディーア	悔しい3						ぐぅ……！
+CharacterOff
+	バールのようなもの	通常4
+Tween	バールのようなもの	PunchPosition	y=30				NoWait
+	バールのようなもの	通常4						マスター！
+CharacterOff
+	ディーア	悔しい3						まだ、まだ……！
+CharacterOff
+	ばびの	悲しい						やめて、マスター!!
+CharacterOff
+	ディーア	驚き3						ばびの……？
+CharacterOff
+	ばびの	悲しい						もう、いいよ……！\nぜんぶばびのが悪かったの!!
+	ばびの	悲しい						コードちゃんにも迷惑かけて\nたくさんの人のことを巻き込んで!!
+	ばびの	悲しい						それでまた、\nこんなことを起こしちゃってる!!
+CharacterOff
+	ディーア	悔しい3						だけど、\nお前の意思じゃ<dash=2>
+CharacterOff
+	ばびの	悲しい						でも、ばびのもう怖いよ!!\n一度失敗して、またやっちゃって!!
+	ばびの	悲しい						三回目は、四回目は？\n迷惑かけられない、かけたくない!!
+	ばびの	悲しい						ばびのは\nもうここにいるのが怖いよぉ……!!
+StopBgm
+CharacterOff
+	ディーア	怒り3						…………
+Bgm	凱旋
+	ディーア	本気3						だったら！\n『助けて』って言えよ!!
+CharacterOff
+	ばびの	悲しい						…………え？
+CharacterOff
+	ディーア	本気3						一人で背負うのが怖いなら、\nちゃんと相談しろ、弱音を吐け！
+	ディーア	怒り3						オレはお前のマスターになって、\nその重荷も背負う！
+	ディーア	怒り3						もう間違いが起きないように、\n隣でお前を支える！
+	ディーア	本気3						少し危険なくらいで、\nオレがお前を諦めると思うな!!
+CharacterOff
+	ばびの	悲しい						マスター……
+CharacterOff
+	ディーア	怒り3						アリス様、魔王候補として\nオレは意見を変えません
+	ディーア	怒り3						オレはこの子を見捨てない！\n在るだけで危険だからと排除するなら
+	ディーア	怒り3						リディや他の魔剣を\n見捨てるのと同じことです!!
+	ディーア	悔しい3						力も、武器も、人も、夢も、\nいろんなものがあるから魔界なんだ
+	ディーア	本気3						オレは魔王候補として、\n魔界の在り方を愛する者として\n貴女の決定に否と言う!!
+CharacterOff
+	バールのようなもの	通常4						そ、そうだぁ……！\nアリス様、もっと大目に見てよぉ！
+CharacterOff
+	バールのようなもの神殺	通常2						うふふー♪\n神様と王様だったらどっちが\nやりやすいんでしょー♪
+CharacterOff
+	アリス	通常魔帝						ほう、バールまでも……\nこの私に、言うようになったな？
+StopBgm
+CharacterOff
+	バールのようなもの	通常4						ひぃっ……！
+Bgm	魔王バトル
+CharacterOff
+	アリス	通常魔帝						いいだろう、ならば闘争だ
+	ばびの幻想体1	通常	p2b			1
+	アリス	通常魔帝						異変を抑止するついでに、\n封印していた幻想体は山程いる
+	ばびの幻想体2	通常	p8b			1
+	アリス	通常魔帝						自らの意志を押し通すと言うなら、\nこいつらを排除してみせろ
+CharacterOff
+	ディーア	怒り3						ばびの、\nさっきある子に言われたんだ
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洋館					0
+	ベルゼ	通常不明				0
+FadeIn	white					.3
+	ベルゼ	通常不明						そして考えてください\nなぜ罪は暴かれないといけないのか
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	カジノ					0
+	ディーア	怒り3				0
+FadeIn	white					.3
+	ディーア	怒り3						ミステリーは\n罪を暴いて終わる物語だけど
+	ディーア	怒り3						これは違う！
+	ディーア	怒り3						罪を暴くのは、\n過ちを正して、やり直すためだ！\nもう一度進むためだ!!
+	ディーア	本気3						オレと一緒に、\nオレの魔剣としてやり直そう！\nバールのようなもの=ビースト!!
+CharacterOff
+	ばびの	悲しい						っ……！ うんっ！
+	ばびの	悲しい						マスター、お願い！\nばびの、ちゃんとやり直したい！
+	ばびの	悲しい						マスターとみんなと、\n一緒にいれる魔剣になりたい！
+	ばびの	悲しい						だからおねがい……！
+	ばびの	悲しい						ばびのを、助けて……！
+CharacterOff
+	ディーア	笑い3						もちろん！
+CharacterOff
+	バールのようなもの	通常4						アリス様が怖くっても、\nばよのだって負けないよ！
+CharacterOff
+	バールのようなもの神殺	通常2						罪深さで言ったら、\nかよのも同じようなものですしー
+CharacterOff
+	ディーア	怒り3						アリス様を止めるぞ！\nオレたちはばびのを見捨てない!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1129_08
+EndIf
+EndScenario
+
+# E_1129_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔王バトル
+Bg	カジノ					0
+Param	character_grayout=false
+	ディーア	悔しい3				0
+FadeIn	black					1
+	ディーア	悔しい3						はあ、はあ……！
+CharacterOff
+	アリス	通常魔帝						ククク！\n耐えるじゃないか、魔剣使い？
+	アリス	通常魔帝						だがどうする？\nこれでは根本的な解決にはならんぞ？
+	アリス	笑い魔帝						この私を斬り伏せてみせるか？
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	悔しい3
+	ディーア	悔しい3						ちがう……！\nアリス様だって敵じゃないんだ\n同じように魔界を守りたいだけ
+	ディーア	悔しい3						なにか、\nアリス様も納得させられる方法<dash=2>
+StopBgm
+FadeOut	black					.5
+CharacterOff						0
+Bg	洋館					0
+	ベルゼ	通常不明				0
+FadeIn	black					.5
+Bgm	勇者バトル					0
+	ベルゼ	通常不明						それなら、\n少しだけ手伝ってあげます
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ベルゼ	通常不明						せんぱいとアリス様を決裂させない\nそれがわたしの仕事ですから
+FadeOut	black					.5
+Bg	カジノ					0
+	ディーア	驚き3				0
+FadeIn	black					.5
+	オーラ青		エフェクト表			1
+	ディーア	驚き3						この魔力は……!?
+	？？？？		1_2					<color=blue>あーあー？\n聞こえますか、マスターさん？\nばびのちゃん？</color>
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き3						コード!?
+FadeOut	white					.3
+CharacterOff	white					0
+Bg	酒場1F					0
+	コード	通常				0
+	オーラ青		エフェクト表			0
+FadeIn	white					.3
+	コード	通常						ワニな使い魔がいきなり来て、\nそっちと話ができるように\n接続してくれたんですよ！
+	コード	通常						ばびのちゃんも\n困ったなら言ってくれればいいのに！
+	コード	通常						こうなったら！\nコードちゃんがありがたい\nゲーム知識を授けてあげます！
+	コード	通常						ミステリーだったら\n得意ジャンルじゃないんですけど
+	コード	通常						思いがきっかけに\nループな不思議空間ができるなんて\nいかにもゲームな設定！
+	コード	通常						だったら方法は一つです！
+	コード	通常						その舞台ごとぶっ壊しましょう!!\nそれでぶっ壊したら<dash=2>
+FadeOut	white					.3
+CharacterOff	white					0
+Bg	カジノ					0
+	ばびの	通常				0
+	オーラ青		エフェクト表			0
+FadeIn	white					.3
+	コード	<Off>	1_2					<color=blue>ぜったい戻ってきてね、\nばびのちゃん！</color>
+	ばびの	通常						コードちゃん……
+CharacterOff
+	ディーア	笑い3						そういうことか……！
+	ディーア	通常3						ばびの、\nこの舞台はお前が無意識に望んだもの
+	ディーア	通常3						犯してしまった罪をなくしたい\nそう願った結果だ
+	ディーア	本気3						だから……!!
+CharacterOff
+	ばびの	本気						ばびのが壊すのは、\nこの舞台！ 犯人だらけの館!!
+	ばびの	本気						ばびのの弱いキモチ!!
+	ばびの	本気						ばびのは自分のやったことを\nちゃんと受け入れる！\nなかったことになんてしない！
+	ばびの	本気						マスターとみんなが、\nばびのを支えてくれるから!!
+CharacterOff
+	アリス	通常魔帝						フフ♪\nあの悪魔め、余計な手助けを♪
+CharacterOff
+	ばびの	拡大通常	エフェクト表					ぶれいずぅー！ どらーいぶ♪
+StopBgm
+Se	光3
+Se	光2
+Se	闇3
+FadeOut	white					2
+CharacterOff						0
+Bg	魔術空間					0
+	アリス	通常魔帝				0
+Wait						1
+FadeIn	white					1
+Bgm	凱旋
+	アリス	通常魔帝						正解だ、魔剣使い
+	アリス	通常魔帝						異変の元凶、\n具現化した象徴を破壊する
+	アリス	通常魔帝						そうすることで、\n歪んだ魔界は正されことになる
+	アリス	通常魔帝						獣のバール、\n貴様がなくそうとした負の歴史も\n元に戻ってしまうがな
+Param	character_grayout=true
+CharacterOff
+	ばびの	通常	p7b
+	ディーア	怒り3	p3
+	ばびの	通常						うん……！\nでも、だいじょうぶ！
+	ばびの	通常						ばびのは一人じゃないから！
+	ディーア	怒り3						アリス様……\nもしかして最初からそのつもりで？
+CharacterOff
+	アリス	蔑み魔帝						何を甘い妄想に浸っている？
+	アリス	通常魔帝						もう貴様も気づいているだろう\n我がファミリーの在り方を
+	アリス	通常魔帝						私が求めるのは魔界の安定だ
+	アリス	通常魔帝						それを脅かす者は、\n誰であろうと魔帝アリスの敵
+	アリス	通常魔帝						魔剣使い、貴様であってもだ
+CharacterOff
+	ばびの	通常	p7b
+	ディーア	怒り3	p3
+	ディーア	怒り3						…………
+CharacterOff
+	アリス	通常魔帝						貴様は危うい
+	アリス	通常魔帝						魔剣を愛するあまりに\nその刃を世界にすら向けようとする
+	アリス	通常魔帝						だが、忘れるな
+	アリス	通常魔帝						貴様が魔界の敵となれば、\n立ちはだかるのはこのアリスだと
+CharacterOff	アリス					1
+Wait						1
+CharacterOff
+	ディーア	怒り3						……アリス様
+CharacterOff
+	バールのようなもの	通常4						はぁー、こわかったぁ！
+CharacterOff
+	バールのようなもの神殺	通常2						もうちょっと\nかよのはやりたかったなー♪
+CharacterOff
+	ばびの	通常	p7b
+	ディーア	通常3	p3
+	ディーア	通常3						でも、これで！
+	ばびの	通常						うん♪\nマスター、帰ろっ♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	カジノ					0
+	          
+Wait						2
+FadeIn	black					.3
+Bgm	都市
+CharacterOff
+	リディ	怒り2				1		もーっ！\nマスターったらおそいー！
+	リディ	怒り2						どこまで行ってたの？
+CharacterOff
+	ディーア	汗2						悪い悪い！\nでも、おかげで<dash=2>
+CharacterOff
+	ばびの	嬉しい
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	嬉しい						はっじめましてー♪\nばびのだよ、ばーびーのー♪
+CharacterOff
+	リディ	笑い2						わぁ！\nはじめまして、リディだよ♪
+CharacterOff
+	ディーア	笑い2						こうやってばびのを\n仲間に迎えることができたんだ
+	ディーア	笑い2						これで心置きなく\nお祝いが始められるな！
+CharacterOff
+	リディ	笑い2						うんっ♪
+CharacterOff
+	ばびの	嬉しい						カレシとカノジョの、\n始めてのパーティーだね♪
+	ばびの	嬉しい						あげてこー!!
+StopBgm
+CharacterOff
+	リディ	絶望2						……え？
+CharacterOff
+	ディーア	絶望2						……あれ？
+Bgm	コメディ
+	ディーア	驚き2						ちょ、ちょっと待て！\nばびの、カノジョとかカレシって？
+CharacterOff
+	ばびの	嬉しい						もちろんカレシは\nマスターに決まってるじゃん♪
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	嬉しい						だってだって！\nアリス様に言ってくれたでしょ？
+	ばびの	笑い						ばびのを支えて、\nずーっと一緒にいてくれるって♪
+	ばびの	通常						ばびのでも\nオトメなゲームで知ってるよ！
+	ばびの	通常						永遠を誓うのが、\nニンゲンの愛の告白ってやつ♪
+CharacterOff							NoWait
+	ばびの	拡大嬉しい	エフェクト表					だから今日から、\nばびのはマスターのカノジョ♪
+CharacterOff
+	ばびの	笑い						ビーストなラブしようね、ちゅっ♪
+CharacterOff
+	コード	通常						ばびのちゃんに会おうと\n外に出てきたら……
+	コード	通常						さっそくハーレム展開とか\nマスターさんも大変ですねぇー
+CharacterOff
+	バールのようなもの	通常4						ちょちょちょ！\nちょっと待ってばびのー？
+Tween	バールのようなもの	PunchPosition	y=30				NoWait
+	バールのようなもの	通常4						マスターの彼女は！\nこのばよのがなるのっ！
+CharacterOff
+	ばびの	にやけ						じゃあ、\nみんなカノジョでさかってこ♪
+	ばびの	にやけ						一緒にラブラブって盛り上がるの、\n楽しそーだし♪
+CharacterOff
+	リディ	絶望2	1_2
+	ディーア	絶望2	2_2
+	リディ	絶望2						マスター……\nちょっとリディとお話しようか
+	ディーア	絶望2						うぅ……\nサスペンスの予感……
+	ディーア	絶望2						それに<dash=4>
+CharacterOff
+	ばびの幻想体1	通常	p2b
+	ばびの幻想体2	通常	p8b
+	ばびの幻想体1	通常						わーい、ぱーりー♪
+	ばびの幻想体2	通常						あげあげー♪
+CharacterOff
+	ディーア	絶望2						なんか\n封印されてた幻想体までいるー!?
+CharacterOff
+	ばびの	にやけ						アリス様が\n置いてっちゃったのかも？
+CharacterOff
+	ディーア	絶望2						マズイぞ！\nもうすぐお嬢様たちも来るんだ!!
+	ディーア	絶望2						それまでに\n会場を落ち着かせないと!!
+	ディーア	悔しい2						くぅ……！\nみんな、力を貸してくれ!!
+	ディーア	本気2						お祝い前にひと仕事だ！
+CharacterOff
+	ばびの	拡大通常	エフェクト表					うん♪\n一緒にアゲてこっ、マスター♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1129_01
+EndIf
+EndScenario

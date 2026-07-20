@@ -1,0 +1,1219 @@
+# E_1203_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	市街地A(夜)					0
+	リヴィア	ハテナ				2
+FadeIn	black					1
+	リヴィア	ハテナ						草木も眠る丑三つ時\n他のリリスファミリーも魔剣も\nぐっすりと夢の中……♪
+	リヴィア	ハテナ						そして先輩は大事な任務のために、\nとっくにおやすみ中ー♪
+StopBgm
+	リヴィア	ハテナ						つまり<dash=2>
+Bgm	都市
+CharacterOff
+	リヴィア	拡大通常	エフェクト表					このリヴィア=リタンが\n先輩を好きにする時が来たよぉ♪
+CharacterOff
+	リヴィア	笑い						にひひ♪\nじっくり待っていた甲斐があったね
+	リヴィア	通常						リリスちゃんたち全員が狙うくらいに\n先輩は素敵な人間だから
+	リヴィア	通常						他の子に取られないように、\n本当はもっともっと早く\n私だけの先輩にする予定だったけど
+	リヴィア	通常						先輩ったら、\n他の魔剣ちゃんと毎晩一緒なんだもん\nずっと焦らされちゃって困ったよ
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	通常						まあでも、\n私は元々獲物は待つ主義だったしね
+	リヴィア	通常						それに待っていた分、\n私の欲望はぐつぐつに温まってる
+	リヴィア	通常						今から先輩のベッドに行って<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	リヴィア	笑い	p7b			0
+	ディーア	目閉じ4	p3			0
+FadeIn	white					.3
+	ディーア	目閉じ4						すーすー……
+Tween	リヴィア	MoveBy	x=-20				NoWait
+	リヴィア	笑い						この魂も身体も、\nぜーんぶリタンのものにするねー♪
+Tween	リヴィア	MoveBy	x=-20				NoWait
+	リヴィア	笑い						包み込んでぬくぬく～♪
+Param	character_grayout=false
+	オーラ桃		エフェクト表			1
+	ディーア	にやけ4						あったかぁい……\nここは楽園なのかぁ……？
+	リヴィア	笑い						そうだよぉ、\n先輩も私もぬくぬくで気持ちよく\n蕩けさせてあげるからねぇー♪
+	リヴィア	笑い						じゃあ先輩が夢を見てる隙に、\n服も脱がしてぇ……♪
+Shake	リヴィア		x=3				NoWait
+	リヴィア	笑い						魂をぬくぬく～♪
+Se	ポップイン
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	市街地A(夜)					0
+	リヴィア	笑い				0
+	黒グラデーション		エフェクト表			0
+FadeIn	white					.3
+Shake	リヴィア		x=3				NoWait
+	リヴィア	笑い						にひひひひひひひ♪
+	リヴィア	笑い						想像した通りの素敵なカラダぁ♪
+	リヴィア	笑い						このまま、\nあんなこともこんなことも～♪
+CharacterOff	黒グラデーション					.3
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	通常						って、だめだめ\nこんなところで妄想してたら\nもったいないよねぇ♪
+	リヴィア	笑い						でも想像するだけで\nニヤニヤしちゃうよぉー♪
+	リヴィア	笑い						待っててね、先輩ー\n先輩をぬくぬくしてあげるからぁー
+	リヴィア	笑い						私が行くまで、\nぐっすり眠ったままで<dash=2>
+StopBgm
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	拡大絶望4	エフェクト表			0
+FadeIn	black					.1
+Bgm	緊迫
+	ディーア	拡大絶望4	エフェクト表					<size=50>眠れないんだが!?</size>
+StopBgm
+CharacterOff
+	リヴィア	拡大慌て	エフェクト表					うっひゃああああ!?
+Bgm	コメディ
+CharacterOff
+	リヴィア	慌て	p7b
+	ディーア	絶望4	p3
+Param	character_grayout=true
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	慌て						び、びっくりしたよぉ……！
+	ディーア	驚き4						り、リタン？\nこんな夜中にどうしたんだ？
+	リヴィア	慌て						それは私のセリフだよぉ！
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	慌て						もう深夜になってるよ!?\nとっくに寝ているはずでしょ！
+	リヴィア	慌て						明日は大事な任務だったんでしょ!?\n早く寝るって言ってたじゃない！
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						そうなんだよ……\n明日はロール様に直々に依頼された\n大事な任務があるんだ……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+Param	character_grayout=false
+CharacterOff						0
+Bg	洞窟A					0
+	ガイアクワール		p5			0
+	ワルイーゾ		p1b			0
+	ワルイーゾ2		p9b			0
+	          	<Off>	1_2			0
+FadeIn	white					.3
+	ディーア	<Off>	1_2					恐ろしい魔物が徒党を組んで、\n魔界転覆を企んでいるというから\n討伐しに行かないといけない
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	リヴィア	通常	p7b			0
+	ディーア	絶望4	p3			0
+Param	character_grayout=true
+FadeIn	white					.3
+	ディーア	絶望4						万全の体調で臨む必要があるし\n寝不足なんて以ての外だ
+	ディーア	絶望4						だからすぐに眠れるように、\n早くベッドに入っていたのに……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						目を閉じてじっとしてても\n眠れる気配がまるでしないんだ!!
+	ディーア	絶望4						眠ろう眠ろうって思っているうちに\n一時間も二時間も経ってるんだ！
+	リヴィア	通常						あー……\nたまにあるよねー……
+	リヴィア	通常						焦ってるうちに、\nどんどん目がさえてきちゃうの
+	リヴィア	通常						なのに明け方になったら\nいつの間にか寝落ちしちゃってて、\nそのまま遅刻とかー
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き4						ち、遅刻っ!?
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						そんなことになったら、\nお嬢様にどんな目に遭わされるか！
+	ディーア	絶望4						どうすれば眠れるんだ!?\nいっそのこと意識を物理的に<dash=2>
+StopBgm
+	リヴィア	通常						…………
+Se	ポップイン
+Tween	リヴィア	MoveBy	x=-70				NoWait
+	リヴィア	笑い						ぎゅー♪
+Param	character_grayout=false
+Bgm	神秘
+	オーラ桃		エフェクト表			1
+	ディーア	にやけ4						ふわぁああああ……\nあったかくてぬくぬくするぅ……
+CharacterOff	オーラ桃					.5
+Param	character_grayout=true
+	リヴィア	笑い						よしよーし♪\n大丈夫だから落ち着いて？ ね？
+	リヴィア	通常						先輩がそんなに眠りたいなら、\nこのリタンにお任せー♪
+	リヴィア	通常						リリスファミリーのお休み担当が\n先輩の快眠を約束するよ♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い4						ほんとうか!?
+	リヴィア	通常						もちろん♪
+Tween	リヴィア	MoveBy	x=40				NoWait
+	黒グラデーション		エフェクト裏			1
+	リヴィア	通常						先輩が起きてた時は\nどうしたものかって思ったけど
+	リヴィア	通常						先輩は眠れなすぎて、\n悪魔な私への警戒心もなくなってる
+	リヴィア	笑い						今ならもっとふかーく、\n先輩をぬくぬくにできるかもぉ♪
+CharacterOff	黒グラデーション					1
+	ディーア	怪しい4						あれ？\nなにかひとりごと言ってるのか？
+Tween	リヴィア	MoveBy	x=-40				NoWait
+	リヴィア	笑い						気のせいだよぉー♪
+	リヴィア	笑い						じゃあ先輩、\n目を閉じてベッドにごろんしてー？
+	ディーア	目閉じ4						あ、ああ……
+Tween	リヴィア	MoveBy	x=-40				NoWait
+	リヴィア	笑い						そこに私が添い寝して、\n先輩が私をぎゅーってすれば……
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	白背景					0
+	リヴィア	拡大胸	エフェクト表			0
+Param	character_grayout=false
+FadeIn	white					.3
+Se	ポップイン
+	リヴィア	拡大胸						ねえ、あったかいでしょう？\nリタンは最高の抱き枕だよねぇー？
+	ディーア	<Off>	1_2					なんて……\nポカポカぬくぬくなんだ……
+	リヴィア	拡大胸						うんうん、\nあったかくてやわらかい私で感じて、\nぬくぬくしようよー♪
+	ディーア	<Off>						むちむちのお肌と華やかな香り……\n奥から感じる温かな体温……
+	リヴィア	拡大胸						にひひ♪\n誰も私のぬくぬくから逃げられない♪\nすぐに眠れちゃうよ♪
+	ディーア	<Off>						ああ……落ち、着く…………\nようやくねむ、れ……
+	リヴィア	拡大胸						うんうん、おやすみぃー♪
+CharacterOff						0
+Bg	黒背景					0
+	ディーア	<Off>						おやすみ……
+StopBgm
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	怪しい4	p3			.5
+Tween	ディーア	PunchPosition	y=30				NoWait
+Param	character_grayout=true
+FadeIn	black					.1
+Bgm	コメディ
+	ディーア	怪しい4						あ、新しい投稿
+	リヴィア	慌て	p7b			.5
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	慌て						ちょっとちょっと、ちょっとぉ!?
+	リヴィア	慌て						なんでマイッター見てるの!?\n今から寝る雰囲気だったじゃない!?
+	ディーア	汗4						ご、ごめんごめん！
+	ディーア	汗4						つい開いちゃって
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	慌て						つい、じゃないよぉ！\n完全にマイッター中毒だよぉ！
+	ディーア	怪しい4						それよりさっき、\n今度こそとか聞こえた気が……？
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	慌て						ぎくぎくっ！
+	リヴィア	慌て						き、気のせいじゃないかなー？
+	リヴィア	通常						そんなことより、\nもうチェックは終わったでしょ？
+	リヴィア	通常						早くベッドに戻って？\nぬくぬくの続きしようよぉー？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き4						そ、そうだった！\n早く寝ないといけないんだった！
+	リヴィア	悲しい						はぁ……\nまったく先輩ったら……
+	リヴィア	通常						でも今度こそ、\n先輩がなにも考えられないくらいに\nぬくぬくにしてあげるよ
+	リヴィア	笑い						足で先輩をホールドしながら……
+StopBgm
+Se	ポップイン
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	白背景					0
+	リヴィア	拡大足	エフェクト表			0
+Param	character_grayout=false
+FadeIn	white					.3
+Bgm	神秘
+	リヴィア	拡大足						むぎゅー、ぬくぬくー♪
+	ディーア	<Off>	1_2					はぁああああ……♪\n全身あますところなくほかほかして\n気持ちよすぎるぅ……♪
+	ディーア	<Off>						でも気持ち良すぎて、\nなんだかちょっと怖いような……
+	リヴィア	拡大足						だいじょーぶだよ、怖くない怖くない
+	リヴィア	拡大足						朝までずーっと、\nぎゅってしてぬくぬくしてあげる♪
+	リヴィア	拡大足						先輩はなんにも考えないで、\n気持ちよくなってぇ♪
+	ディーア	<Off>						そっか、なにも考えなくて……
+	リヴィア	拡大足						今度こそ計画通り\n寝ちゃった先輩の魂と体を\n好き放題するの……♪
+	ディーア	<Off>						ふあぁぁぁ……おやす……
+StopBgm
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	怪しい4	p3			.5
+Tween	ディーア	PunchPosition	y=30				NoWait
+Param	character_grayout=true
+FadeIn	black					.1
+Bgm	コメディ
+	ディーア	怪しい4						あ、この画像バズってる
+	リヴィア	慌て	p7b			.5
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	慌て	p7b			.5		だからさぁー！
+	リヴィア	慌て						なんでマカインスタ見てるの!?\n今じゃなくていいでしょ!?\n寝るのが優先でしょ!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	汗4						ご、ごめん！\n気づいたら開いちゃってた！
+	リヴィア	通常						むむむ……\n睡眠欲からは誰も逃げられないのに\nこんなに耐えるなんておかしい
+	リヴィア	通常						ねえ先輩？\nお昼はいったいなにしていたの？
+	ディーア	怪しい4						変なことはしていないぞ？\n明日が任務だから体力温存に努めて
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場の地下					0
+	ネオ	にやけ	p3			0
+	ディーア	にやけ4	p7b			0
+Param	character_grayout=false
+FadeIn	white					.3
+	ディーア	にやけ4						無駄に体力を消費しないように、\nネオとゴロゴロしたり
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場_カフェ					0
+	ナナツサヤ	通常2	p3b			0
+	マナ	嬉しい	p7b			0
+	ディーア	にやけ4	p5			0
+Param	character_grayout=false
+FadeIn	white					.3
+	ディーア	にやけ4						ケモっ子魔剣たちともふもふして、\nたくさん癒やされたり
+FadeOut	white					.3
+CharacterOff						0
+Bg	草原A					0
+	フォリヴォラ	通常	p3b			0
+	ディーア	にやけ4	p7			0
+Param	character_grayout=false
+FadeIn	white					.3
+	ディーア	にやけ4						あとフォリヴォラと、\n空を見上げていたらいつの間にか\n昼から夕方に<dash=2>
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場_宿屋(夜)					0
+	ディーア	怪しい4	p3			0
+	リヴィア	慌て	p7b			0
+Param	character_grayout=true
+FadeIn	white					.3
+	リヴィア	慌て						それが原因だよぉー！\n完全に寝落ちしてるじゃない！
+	ディーア	悔しい4						くっ……！\n久しぶりの休みだったからつい……
+	リヴィア	悲しい						それに他の子と、\nダラダライチャイチャしてたなんて
+	リヴィア	悲しい						先輩に会えて、\nやっと私も火がついてきたのに……
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	悲しい						他の子に渡したくないよぉ……
+	リヴィア	通常						こうなったら……！\nすごく久しぶりに本気だす……！
+ImageEffectOff	SpriteCamera	MotionBlur
+Tween	リヴィア	MoveBy	x=-100 time=1				NoWait
+	リヴィア	通常						むぎゅぅううう♪\nリタンのこと抱き枕にして……♪
+Se	ポップイン
+StopBgm
+FadeOut	black					1
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	黒背景					0
+	リヴィア	拡大胸	エフェクト表			0
+Param	character_grayout=false
+FadeIn	black					.3
+Bgm	雪の街
+	リヴィア	拡大胸						ふふふ……♪\n先輩と身も心も一つになっちゃえ♪
+	リヴィア	拡大胸						さあ目を閉じて、\n頭の中に草原を思い描いて……
+FadeOut	white					1
+CharacterOff						0
+Bg	草原A					0
+	もち柵	通常				0
+FadeIn	white					1
+	イマジナリーもちA	通常	p6
+	リヴィア	<Off>	1_2					もちひつじが一匹
+Tween	イマジナリーもちA	PunchPosition	y=200 time=1				NoWait
+Tween	イマジナリーもちA	MoveBy	x=-250 time=1				NoWait
+Wait						.5
+CharacterOff	イマジナリーもちA					.5
+	イマジナリーもちB	通常	p6
+	リヴィア	<Off>	1_2					もちひつじが二匹
+Tween	イマジナリーもちB	PunchPosition	y=200 time=1				NoWait
+Tween	イマジナリーもちB	MoveBy	x=-250 time=1				NoWait
+Wait						.5
+CharacterOff	イマジナリーもちB					.5
+	イマジナリーもちC	通常	p6
+	リヴィア	<Off>	1_2					もちひつじが三匹……♪
+Tween	イマジナリーもちC	PunchPosition	y=200 time=1				NoWait
+Tween	イマジナリーもちC	MoveBy	x=-250 time=1				NoWait
+Wait						.5
+CharacterOff	イマジナリーもちC					.5
+	ディーア	<Off>	1_2					かわいいもちとリタンのぬくぬくで\nだんだん眠気が……
+	キノコリオン	通常	p6
+Tween	キノコリオン	MoveBy	x=100 time=0				Add
+Tween	キノコリオン	RotateTo	y=180 time=0				Add
+	リヴィア	<Off>						もちひつじが……
+	？？？？	<Off>	1_2					ノコノコノっ！
+Tween	キノコリオン	PunchPosition	y=200 time=1				NoWait
+Tween	キノコリオン	MoveBy	x=250 time=1				NoWait
+Wait						.5
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	怪しい4				0
+FadeIn	black					.3
+StopBgm						0
+	ディーア	怪しい4						あれ？\nもちはもちもちって鳴くはず<dash=2>
+Bgm	バトル
+CharacterOff
+	キノコリオン	通常
+Tween	キノコリオン	PunchPosition	y=30				NoWait
+	キノコリオン	通常						ノコノコっ！
+CharacterOff
+	ディーア	絶望4						なんで部屋にキノコリオンが!?
+CharacterOff
+	リヴィア	慌て						どうしてこんなに邪魔が入るの!?
+Shake	リヴィア		x=3				NoWait
+	リヴィア	慌て						せっかく\nうまくいきそうだったのにぃ……！
+	リヴィア	慌て						ぜったいにゆるせない
+CharacterOff
+	リヴィア	拡大慌て	エフェクト表					あなたの魂から、ぬくぬくするよ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1203_02
+EndIf
+EndScenario
+
+# E_1203_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	市街地A(夜)					0
+	キノコリオン	通常				0
+FadeIn	black					1
+	キノコリオン	通常						ノコノコぉー！\n（魂抜かれちゃうノコー！）
+Se	ピューン
+Tween	キノコリオン	MoveBy	x=700 time=1				NoWait
+Wait						.5
+CharacterOff
+	リヴィア	通常	p7b
+	ディーア	怪しい4	p3
+	ディーア	怪しい4						あのキノコリオンは、\nいったいなんだったんだろう？
+	リヴィア	通常						でもようやく、\n睡眠のおじゃま虫は消えたしー？
+	ディーア	通常4						ああ、部屋に戻ってゆっくり<dash=2>
+StopBgm
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	拡大絶望4	エフェクト裏			0
+	集中線		エフェクト表			0
+Param	character_grayout=false
+FadeIn	black					.1
+Bgm	緊迫					0
+	ディーア	拡大絶望4						寝れるかーっ!?
+Bgm	コメディ					0
+Param	character_grayout=true
+CharacterOff
+	リヴィア	悲しい	p7b
+	ディーア	絶望4	p3
+	リヴィア	悲しい						えーっ！\nそろそろ寝ないと大変だよぉ？
+	ディーア	絶望4						わかってる！\n本当に寝ないと明日が危ない！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						でもさっきの戦いで\n完全に目が冴えちゃったんだ！\n眠気なんて一欠片もない！
+	リヴィア	悲しい						うっ……\n確かに今の先輩はぬくぬくどころか\nグツグツしてる……
+	リヴィア	悲しい						でもなんとか先輩を寝させないと、\n私のものにできなくなっちゃう
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	通常						そ、そうだっ！
+	リヴィア	通常						もっと運動をしてヘロヘロになれば！\n体が疲れて眠れるかも！
+	ディーア	驚き4						なるほど、逆転の発想だな！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い4						たくさん息を切らして汗をかいて、\nベッドに倒れ込めば！
+	リヴィア	笑い						先輩はゆったり夢の中へー♪
+	ディーア	怪しい4						でも流石に夜中だから、\n外に出て運動するのは危ないし
+	ディーア	怪しい4						部屋の中でできて、\nたくさん汗をかいて疲れること……
+StopBgm
+Tween	ディーア	MoveBy	x=30				NoWait
+	ディーア	怪しい4						…………
+Bgm	神秘
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	慌て						ふぇっ……!?
+Shake	リヴィア		x=3				NoWait
+	リヴィア	慌て						せ、先輩!?\nそれってもしかして!?
+	ディーア	目閉じ4						ああ、お前が考えたとおりだ
+	リヴィア	慌て						ま、待ってぇ……！\n起きてる先輩といきなりなんて\n心の準備が……！
+	ディーア	怒り4						大丈夫だ\nこの部屋はいつもどおりに防音だし\nちょっと激しくしても構わない
+CharacterOff
+	ディーア	拡大本気4	エフェクト表					夜の運動会をするぞ!!
+CharacterOff
+	リヴィア	拡大慌て	エフェクト表					せ、せめてやさしくぅ……！
+FadeOut	black					1
+CharacterOff						0
+Bg	黒背景					0
+	オーラ桃		エフェクト表			0
+Param	character_grayout=false
+FadeIn	black					.5
+	ディーア	<Off>						はぁ、はぁ……
+	ディーア	<Off>						まだだ、もっと……！
+	リヴィア	<Off>						ひゃぅう……
+FadeOut	black					.1
+StopBgm						0
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	本気4				0
+FadeIn	black					.1
+Bgm	クエスト勝利_BGM
+ImageEffect	SpriteCamera	MotionBlur
+Se	走る
+Tween	ディーア	MoveBy	x=100 time=0.1				NoWait
+Wait						.1
+Tween	ディーア	MoveBy	x=-200 time=0.2				NoWait
+Wait						.2
+Tween	ディーア	MoveBy	x=200 time=0.2				NoWait
+Wait						.2
+Tween	ディーア	MoveBy	x=-200 time=0.2				NoWait
+Wait						.2
+Tween	ディーア	MoveBy	x=200 time=0.2				NoWait
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Wait						1
+	ディーア	きらーん4						やったぞ！\n反復横跳びの自己新記録だ!!
+StopBgm
+CharacterOff
+	リヴィア	拡大慌て	エフェクト表					なんで本当に運動会してるの!?
+Bgm	コメディ
+CharacterOff
+	ディーア	怪しい4						だからさっき、\n運動会をするって言ったじゃないか
+CharacterOff
+	リヴィア	悲しい						たしかにそうだけどさぁ！
+	リヴィア	悲しい						しかも部屋の中なのに、\n運動量すごっ……
+Shake	リヴィア		x=3				NoWait
+	リヴィア	悲しい						インドア派な私にはキツすぎ……
+CharacterOff
+	ディーア	本気4						諦めるなリタン！
+	ディーア	本気4						できるできるやればできる！\nもっとやれんだろ、諦めんなよ！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気4						ネバーギブアップ!!
+	ディーア	笑い4						さあ次は！\n部屋の中を百周リレー<dash=2>
+CharacterOff
+	リヴィア	拡大慌て	エフェクト表					ストップ、ストップぅー!!
+Param	character_grayout=true
+CharacterOff
+	リヴィア	慌て	p7b
+	ディーア	絶望4	p3
+	リヴィア	慌て						完全に目的を見失ってるよぉ！\nこのままじゃぐっすり寝るどころか\n徹夜で運動会になるよぉ！
+	ディーア	絶望4						し、しまった！\nついテンションがあがって……！
+	ディーア	絶望4						しかも適度に運動したせいで、\n体力も気力も目もギンギンになってる
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						まるで寝れる気がしない!!
+	リヴィア	悲しい						あたりまえだよぉ……
+	リヴィア	悲しい						それに……うぅ、\nさっきから私の提案もことごとく\n裏目に出ちゃってる……
+	リヴィア	悲しい						このまま、\n先輩を寝かせられないとか\n悪魔魔剣失格……
+	リヴィア	悲しい						先輩のことはみんなが狙ってるし\nこのチャンスを逃したら……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	ルキフェル	嬉しい	p7b			0
+	アスモデウス=サラ	照れ	p3b			0
+	ディーア	にやけ4				0
+FadeIn	white					.3
+	ディーア	にやけ4						オレの心も魂も、\nリリスたちのものだー♪
+	ルキフェル	嬉しい						離しませんからね、せーんぱい♪
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+	リヴィア	悲しい				0
+FadeIn	white					.3
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	悲しい						みたいなことになっちゃう！
+	リヴィア	悲しい						こんな手段はいつもの私と違うけど、\n先輩をとられるくらいなら……！
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	通常						先輩、一緒に来て……！
+	ディーア	驚き4						ど、どこに？
+StopBgm
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	カジノ					0
+	リヴィア	通常	p7b			0
+	ディーア	驚き4	p3			0
+FadeIn	black					.3
+Bgm	わくわく
+	ディーア	驚き4						ここはカジノ……？
+	リヴィア	通常						そうだよー\nアリスファミリーの直営で\n魔界で一二を争う豪華カジノ
+	リヴィア	通常						私の天敵な、\n眠らない眠れない欲望のお城なの
+	ディーア	怪しい4						どうして、\nわざわざ苦手な場所に？
+	ディーア	怪しい4						しかもここは<dash=2>
+CharacterOff
+	旅人	通常
+Tween	旅人	PunchPosition	y=30				NoWait
+	旅人	通常						やったぁ！\nこれで一生遊んで暮らせるぞ！
+CharacterOff
+	研究員	通常
+Shake	研究員		x=3				NoWait
+	研究員	通常						そんな……\n元手があっという間に……
+CharacterOff
+	リヴィア	通常	p7b
+	ディーア	絶望4	p3
+	ディーア	絶望4						ずいぶんと高レートみたいだ
+	ディーア	絶望4						夢破れた屍が、\nあちこちに転がっているんだけど
+	リヴィア	通常						ガラガラナイアガラを体験した\nマネちゃんみたいだねー
+	リヴィア	通常						でも、それが狙い♪
+	リヴィア	通常						今の先輩は運動したせいで\n気が高ぶっちゃって眠れないでしょ
+	リヴィア	通常						だけどギャンブルで大負けしたら？
+	ディーア	笑い4						そうか！\n気分もテンションも沈み込んで\n眼の前が真っ暗になる！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い4						戦闘に負けたときみたいに\n気がついたら宿屋だ！
+	ディーア	笑い4						精神的な敗北を迎えて強制的に寝る！\n天才的なアイデアだな！
+	リヴィア	笑い						にひひ♪\nそれほどでもないよぉ♪
+	リヴィア	通常						人生が終わっちゃわないように\nリタンがちゃんと見ていてあげるし
+	リヴィア	笑い						落ち込んだ後は\n私が夜通し先輩をぬくぬくにして、\n元気にしてあげるから安心♪
+	リヴィア	通常						唯一の懸念だった『支配人』が\n外出中なのは把握済みだし
+	ディーア	笑い4						完璧な作戦だな！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気4						よぉーし！\nカジノで大負けして安眠するぞ！
+StopBgm
+Param	character_grayout=false
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	リヴィア	悲しい
+	ディーア	驚き4
+	二人	<Off>						あ、あれ……？
+Bgm	絶望
+CharacterOff
+	旅人	通常
+	オーラ紫		エフェクト表
+Shake	旅人		x=3				NoWait
+	旅人	通常						な、なんだこれ？\n大勝ちしていたはずなのに\nまるで勝てなくなったぞ……！
+Param	character_grayout=true
+CharacterOff
+	リヴィア	悲しい	p7b
+	ディーア	悔しい4	p3
+	カジノ客	<Off>	1_2					うわぁああああ！\nもうこれ以上負けたら……！
+	カジノ客	<Off>						ど、どうなっているのよぉ……！
+	ディーア	悔しい4						これは……？
+	リヴィア	悲しい						フロアが阿鼻叫喚になってる……
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	悲しい						ま、まさか……！
+StopBgm
+	？？？？	<Off>	1_2					大負けしたい、だなんて
+	？？？？	<Off>						ふふふー♪\n面白いこと言うお客さまだねぇー♪
+FadeOut	white					.5
+Bgm	カルバノグA
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	ラスリゾAスチル		エフェクト表			0
+Tween	ラスリゾAスチル	MoveBy	y=-363 time=5	linear			NoWait
+FadeIn	white					.5
+	？？？？	<Off>	1_2					カジノ【ナイトレス】へ\nようこそぉー♪
+FadeOut	black					.3
+CharacterOff						0
+Bg	カジノ					0
+	ラスリゾA	マッド				0
+FadeIn	black					.3
+	ラスリゾA	マッド						支配人の"マッドハッター"だよぉ♪
+Param	character_grayout=true
+CharacterOff
+	リヴィア	慌て	p7b
+	ディーア	驚き4	p3
+	ディーア	驚き4						"マッドハッター"!?\nそれにお前のその姿は……！
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	慌て						な、なんで!?\nあなたは今はいないはずじゃ!?
+CharacterOff
+	ラスリゾA	マッド						だってぇ、\n私って運が良いんだもーん♪
+	ラスリゾA	マッド						お店に戻ろっかなって思ったら、\nこんなことになってるなんてねぇ♪
+	ラスリゾA	マッド						それでぇ<dash=2>
+	ラスリゾA	マッド						そっかぁ♪\nあなたがマスターさま（仮）\nなんだねぇ？
+	ラスリゾA	マッド						ふーん……へぇー……♪
+CharacterOff
+	リヴィア	通常	p7
+	ディーア	汗4	p3b
+Tween	リヴィア	MoveBy	x=-50				NoWait
+	リヴィア	悲しい						むぅ……！
+	ディーア	汗4						どうしてそんなジロジロ見るんだ？\nラストリ<dash=2>
+CharacterOff
+	ラスリゾA	マッド						だめぇー♪\n今はその名前を呼ぶのはだーめ♪
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	マッド						だって偶然、\n憧れの"マスターさま"に会えるなんて\n運良すぎてつまんないもん♪
+	ラスリゾA	マッド						せっかくならもっと、\n不幸で不幸せで不合理で不本意な\n出会いにしたいじゃない♪
+	ラスリゾA	マッド						お楽しみはその後で……ってねぇ♪
+StopBgm
+CharacterOff
+	リヴィア	通常	p7b
+	ディーア	驚き4	p3
+	ディーア	驚き4						なにを言って？
+CharacterOff
+	ラスリゾA	マッド						んーん、こっちのはなしぃー♪
+Bgm	バトル
+	ラスリゾA	マッド						でもせっかくマスターさま（仮）が\nお客さまになったし、\n面白いことを言ってるしぃ……
+	ラスリゾA	マッド						そうだぁ♪\nお店でいーちばんすごいマシンで\nお相手してあげるねぇー♪
+	ラスリゾA	マッド						ちょうど今日、入荷したのぉー♪
+	ラスリゾA	マッド						これで遊んだら、\nマスターさま（仮）は\nどうなるかなぁ？
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	マッド						ステキなところ見せてくれたら、\nちゃんと、\nマスターさまって呼んであげる♪
+CharacterOff
+	リヴィア	通常	p7b
+	ディーア	驚き4	p3
+	リヴィア	通常						どうする先輩？\nアリスファミリーまで出てきたら、\nただの負けじゃすまなくなるかも
+	ディーア	目閉じ4						いや、むしろ好都合\n今の元気いっぱいなオレに必要なのは\nそんな心の底からの敗北なんだ
+	ディーア	本気4						どんなギャンブルでもかかってこい！\nオレは絶対に負けて寝るぞー！
+If	isdebug==true
+CharacterOff
+Jump	*E_1203_03
+EndIf
+EndScenario
+
+# E_1203_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	カジノ					0
+Param	character_grayout=false
+	黒グラデーション		エフェクト表			0
+	ディーア	絶望4				0
+FadeIn	black					1
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						ま、まさか……\nまさかこんなことになるなんて……
+CharacterOff	ディーア
+	リヴィア	悲しい						そんな、先輩が……！
+CharacterOff	リヴィア
+	ディーア	絶望4						これは<dash=2>
+StopBgm						0
+FadeOut	white					.2
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル102801		エフェクト裏			0
+	ディーア	きらーん4				0
+FadeIn	white					.2
+Bgm	カジノ
+	ディーア	きらーん4						キラキラだぁー!!
+	ディーア	きらーん4						こんな大勝利、経験したことない！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	きらーん4						レイバー見ているか!?\nお前の負債も全部返せるぞ!!!!
+Bg	カジノ
+CharacterOff
+	ラスリゾA	マッド						あははー♪\nお店が始まってから一番の大当たり♪
+	ラスリゾA	マッド						マスターさま（仮）って\nすごいんだねぇ♪
+CharacterOff
+	リヴィア	悲しい
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	悲しい						ちょっと待ってよ先輩！\n先輩は負けて寝るのが目的でしょ、\n勝ったらもっと眠れなくなるよ!!
+CharacterOff
+	ディーア	にやけ4						ここはオレの理想郷！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	にやけ4						どっきりするほどアルカディア！\nどっきりするほどアルカディア！！
+CharacterOff
+	リヴィア	悲しい						ダメだこの先輩、\n早くなんとかしないと……
+	リヴィア	悲しい						カジノで勝ったのと\n深夜テンションが合わさって\n無敵になってる
+CharacterOff
+	ディーア	にやけ4						あはははー！\nこんなマシンじゃ満足できない！
+	ディーア	怪しい4						むっ！\nあっちの気配の方が強そうだ!!
+	ディーア	にやけ4						飛び出していけ、夜の彼方！
+Se	ピューン
+Tween	ディーア	MoveBy	x=-700 time=1				NoWait
+	ディーア	にやけ4						オレは自由だぁああああ!!
+CharacterOff
+	リヴィア	悲しい						先輩、待ってぇー！
+Se	ピューン
+Tween	リヴィア	MoveBy	x=-700 time=1				NoWait
+	リヴィア	悲しい						こんなはずじゃなかったのにぃー！
+CharacterOff
+	ラスリゾA	マッド						ありがとうございましたぁ♪\nまたのご来店をー♪
+StopBgm
+	ラスリゾA	マッド						でもそっかぁ……
+Bgm	図書館
+	黒グラデーション		エフェクト裏			1
+	ラスリゾA	マッド						やっぱりあなたでも、\nみんなと同じで不幸になるんだねぇ
+	ラスリゾA	マッド						アリスさまぁ？\n本当にあの人が\n私を助けてくれるのぉ？
+	ラスリゾA	マッド						もしそうなら、早く<dash=2>
+StopBgm						0
+CharacterOff						0
+Bg	黒背景					0
+	"マッドハッター"	<Off>						私を不幸にしてほしいなぁー♪
+FadeOut	black					1
+CharacterOff						0
+Bg	洞窟A					0
+	ガイアクワール					0
+Wait						3
+FadeIn	black					1
+Bgm	絶望
+	ガイアクワール							ふっふっふっふ……！\nみなのもの、準備はいいか！
+	ガイアクワール							斥候に出したキノコリオンの情報で\nあの魔剣王が我らを討伐するために\n来ることがわかった！
+CharacterOff
+	ワルイーゾ		p3
+	ワルイーゾ2		p7b
+	ワルイーゾ							ナンダッテー！
+	ワルイーゾ2							ドウスルンダー！
+CharacterOff
+	ガイアクワール
+Tween	ガイアクワール	PunchPosition	y=30				NoWait
+	ガイアクワール							慌てるな！\nノコノコとやってきた魔剣王を\n返り討ちにすればいい！
+	ガイアクワール							待っていろ魔剣王！\n夜なべしてたくさんの罠を<dash=2>
+StopBgm
+Se	火3
+Se	光3
+Se	闇3
+FadeOut	white					.3
+	土煙		エフェクト表			0
+FadeIn	white					.3
+Shake	ガイアクワール		x=3				NoWait
+	ガイアクワール							ぐぁあああああああ!?
+	ガイアクワール							な、なんだこれは!?
+Bgm	キノコリオン
+CharacterOff
+	ディーア	拡大本気4	エフェクト表					うぉおおおおおお！\n最高にハイってやつだぁあああ！
+CharacterOff
+	リヴィア	悲しい						もう計画もぬくぬくも\nめちゃくちゃになっちゃったよぉー！
+CharacterOff
+	ガイアクワール							なにぃ、魔剣王!?
+	ガイアクワール							総員反撃だ！\n魔剣王の奇襲をはねのけろ！
+CharacterOff
+	ディーア	怪しい4						なんだか\n見覚えのある魔物がいるけど……
+	ディーア	きらーん4						今のオレは負ける気がしない!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1203_04
+EndIf
+EndScenario
+
+# E_1203_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	洞窟A					0
+Param	character_grayout=false
+	ディーア	汗4				0
+FadeIn	black					1
+	ディーア	汗4						なんか変なテンションのままで\n突っ走っちゃったけど……
+CharacterOff
+	ガイアクワール							我らの待ち伏せを防ぐために\n突撃してくるとは……
+	ガイアクワール							さすがは、魔剣王だな……
+Se	倒れる
+Tween	ガイアクワール	MoveBy	y=-100 time=2				NoWait
+CharacterOff	ガイアクワール					.5
+Wait						.5
+CharacterOff
+	ディーア	怪しい4						今の魔物ってたしか、\nロール様からの依頼にあった？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き4						そ、そうだ！\n明日は大事な任務があったんだ！
+	ディーア	驚き4						こんなことしていないで、\n家に帰って寝ない……と……？
+	ディーア	怪しい4						あれ？\nなんかターゲットは討伐しちゃったし\n任務も完了したんじゃないか？
+	ディーア	怪しい4						つまりもう寝なくてもいい？
+CharacterOff
+	リヴィア	悲しい						そう、だねぇ……
+	黒グラデーション		エフェクト表			1
+	リヴィア	悲しい						はぁ……\n私が先輩をぬくぬくにするどころか\n最後まで振り回されて……
+CharacterOff
+	ディーア	驚き4						リタン……
+	ディーア	汗4						ご、ごめんな？\n一生懸命に努力してくれたのに\nこういう結果になって
+CharacterOff
+	黒グラデーション		エフェクト表
+	リヴィア	悲しい						慰めなんていいよぉ……\nリタンはインドア派らしく\n一人で寝転がってるからさぁ……
+	リヴィア	悲しい						ぐすっ……
+	リヴィア	悲しい						やっぱり、\n私がやる気を出したって<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Bg	神殿B
+CharacterOff						0
+	リヴィア	悲しい				0
+FadeIn	white					.3
+Shake	リヴィア		x=2				NoWait
+	リヴィア	悲しい						うぅ……！
+CharacterOff
+	アリス	通常魔帝						随分と魂を食い荒らしたようだが\n目立ちすぎたな
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	洞窟A
+CharacterOff						0
+	リヴィア	悲しい				0
+	黒グラデーション		エフェクト表			0
+FadeIn	white					.3
+	リヴィア	悲しい						あの時とおんなじ
+	リヴィア	悲しい						がんばりすぎても、\n結局はぜんぶ無駄になっちゃう
+	リヴィア	悲しい						やっと本気になれる人に会えたのに\n私はダメな悪魔魔剣だよぉ……
+CharacterOff
+	ディーア	怒り4						…………
+StopBgm
+	ディーア	通常4						なあ、リタン？\nお願いがあるんだけど<dash=2>
+FadeOut	black					1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	通常4	p3			0
+	リヴィア	通常	p7b			0
+Wait						2
+Param	character_grayout=true
+FadeIn	black					1
+Bgm	雪の街
+	リヴィア	通常						そうしたら、\nシエルちゃんがひっくりかえって\n私もびっくりしちゃったの
+	ディーア	笑い4						あははは！\nそんなことがあったんだな！
+	ディーア	通常4						でもリタンも\n最後は手伝ってあげたんだろ？
+	リヴィア	通常						これでもみんなの中では年上だもん\nシエルちゃんはかわいいしね
+	リヴィア	通常						……って、\n本当にお話してるだけでいいの？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い4						ああ、もちろん！
+	ディーア	通常4						急いで寝る必要はなくなったけど、\n夜はまだまだ長いからな
+	ディーア	笑い4						リタンが良いなら、\n夜が明けるまで話相手になってくれ
+	リヴィア	通常						……えへへ♪
+	リヴィア	笑い						なんだか不思議……\nさっきまですごく悔しかったのに\n今は安心して心がぽかぽかしてる
+	ディーア	通常4						オレも「寝よう寝よう」って\nそればっかりになっていた時は\n大変だったのに
+	ディーア	笑い4						今はお前とのこの穏やかな時間に\nほっとしてる
+	ディーア	笑い4						お前はダメな魔剣なんかじゃないよ
+	ディーア	通常4						眠れなくて苦しんでいたオレを\n包み込んでくれたみたいに
+	ディーア	通常4						本当のお前は、\nすごく安心できる温かい魔剣だ
+	リヴィア	通常						…………
+	リヴィア	笑い						えへへ♪\nそれ、すっごくうれしい……♪
+	リヴィア	通常						でも、そっかぁ……
+	リヴィア	通常						私も悔しくて焦って、\nそればっかり考えてたから\n失敗しちゃったのかな
+	ディーア	笑い4						リタンはそんなに\nオレのことを眠らせたかったのか？
+	リヴィア	通常						もちろんだよぉー
+	リヴィア	通常						だって先輩は、\nファミリーのみんなが夢中になってて
+	リヴィア	通常						私だって<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	神殿A					0
+	リヴィア	通常				1
+FadeIn	white					.3
+	リヴィア	通常						むぅ……だぁれぇ……？\nもう普通の魂になんて興味な<dash=2>
+CharacterOff
+	ディーア	笑い4						おはよう、リヴィア
+	ディーア	通常4						サラやリリスたちのように\nお前にも力を貸してほしいんだ！
+CharacterOff
+	リヴィア	通常
+Shake	リヴィア		x=2				NoWait
+	リヴィア	通常						ふわぁ……♪\nこんな素敵な魂、見たことない
+	リヴィア	通常						胸の奥がくつくつして熱くなって\n魂も体もほしくてたまらない
+	リヴィア	通常						こんなの、はじめて……
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	笑い						あなたが、\nみんなが教えてくれた先輩なの？
+	リヴィア	笑い						だったら私のこともみんなみたいに、\nリタンって呼んでほしいなぁー♪
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場_宿屋(夜)					0
+	ディーア	目閉じ4	p3			0
+	リヴィア	笑い	p7b			0
+FadeIn	white					.3
+	リヴィア	笑い						きっと一目惚れって、\nああいうことを言うんだよね……
+	リヴィア	笑い						だから先輩のことを\n魂も体も全てを手に入れたくて……
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	慌て						はっ……！\nつい本当のこと言っちゃった！
+	リヴィア	通常						って、あれ？
+	ディーア	目閉じ4						スー……スー……
+	リヴィア	通常						寝てる？
+Shake	リヴィア		x=3				NoWait
+	リヴィア	悲しい						はぁああああ……\nさっきまであんなに苦労してたのに\n気を抜いた途端にこれぇ？
+	リヴィア	通常						でも……そうだよね、\nぐっすり眠れるのは安心してる時
+	リヴィア	通常						私は温もりをあげる悪魔として\n最初から先輩を安心させてあげれば\n良かったんだね
+	リヴィア	通常						久しぶりすぎて、\nから回っちゃったみたい……
+	リヴィア	通常						だけどようやく<dash=2>
+Tween	リヴィア	MoveBy	x=-100				NoWait
+	リヴィア	通常						つんつん……
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	笑い						起きない♪
+	リヴィア	笑い						わはぁ……♪\nそれじゃあ先輩を起こさないように\nまずはそのカラダを……
+Shake	リヴィア		x=3				NoWait
+	リヴィア	通常						ふわぁああ……
+	リヴィア	通常						うぅ……\n私もつかれて、ふらふらしてる？
+	リヴィア	通常						じゃあちょっとだけ寝てから、\nせんぱい、を……
+	リヴィア	通常						くぅ……♪
+Tween	リヴィア	MoveBy	y=-100 time=2				NoWait
+CharacterOff	リヴィア					.5
+Wait						.5
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+Bg	酒場_宿屋					0
+Wait						2
+	ロサ	通常				2
+FadeIn	black					1
+Bgm	都市
+	ロサ	通常						いつまで寝てるんですか！\n早く起きてください、ご主人様！
+CharacterOff
+	ディーア	にやけ4				1		うぅーん、ろさぁ……？
+	ディーア	にやけ4						どうしたんだ？\n今日の任務はもう完了したはずじゃ？
+CharacterOff
+	ロサ	驚き						あれ？\nその情報はもう入っていたんですね
+	ロサ	通常						昨夜突然、魔物の一団が瓦解して\nお嬢様からの任務は中止となりました
+	ロサ	通常						しかしその残党は、\n今も混乱して暴れているそうなんです
+CharacterOff
+	ディーア	通常4						それじゃあ、\nその残党も退治しないといけないか
+CharacterOff
+	ロサ	嬉しい						その通りです♪
+	ロサ	ニヤリ						なによりもうお昼近くです\nこんなに寝たら\n健康によくないですよ？
+CharacterOff
+	ディーア	笑い4						たしかにそうだな、\nまたのんびりとしすぎて、\n今夜も眠れなくなったら大変だ
+	ディーア	笑い4						リタンもおきろー？
+CharacterOff
+	リヴィア	通常				1		むにゃあ……あれぇ？
+	リヴィア	通常						いつの間にか朝に<dash=2>
+StopBgm
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	通常						っ!!
+Bgm	コメディ
+CharacterOff
+	リヴィア	拡大慌て	エフェクト表					ちょ、ちょっと待って!?\n私もいつの間にか寝ちゃってたの!?
+CharacterOff
+	リヴィア	慌て	p7b
+	ディーア	通常4	p3
+	リヴィア	慌て						せっかくのチャンスだったのに\nなんにもしないで!?
+	ディーア	通常4						ああ、隣でぐっすり寝てたぞ
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	悲しい						そ、そんなぁ……！
+Tween	リヴィア	MoveBy	x=-20				NoWait
+	リヴィア	悲しい						せ、せんぱい、おねがいっ！
+	リヴィア	悲しい						二度寝しよっ！\nこのまま一緒のお布団でぬくぬく！
+	ディーア	汗4						さ、さすがにもう眠れないって！
+Tween	リヴィア	MoveBy	x=20				NoWait
+	リヴィア	悲しい						うぅ……！\nじゃあまた無理やりにでも<dash=2>
+	リヴィア	通常						ううん待って……！\nこんなときこそ落ち着かないと……
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	通常						じゃあむしろ早く！\nその魔物たち頑張って退治しよっ♪
+	リヴィア	通常						それで一緒に汗をかいたら<dash=2>
+CharacterOff
+	リヴィア	拡大通常	エフェクト表					今夜こそ、\n一緒にぬくぬくしようよぉー♪
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1203_04
+EndIf
+EndScenario
+
+# E_1203_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	市街地A(夜)					0
+Param	character_grayout=false
+	リヴィア	通常				0
+FadeIn	black					1
+	リヴィア	通常						にひひひ♪\n今日も先輩はぐっすりお休み中♪
+	リヴィア	通常						この間の眠れない夜から、\n先輩は睡眠を大事にするように\nなったんだよねー
+	リヴィア	通常						先輩に毎日毎日、\nちゃんと寝たほうがいいよーって\nすり込んだかいがあったよ
+	リヴィア	笑い						計画通り♪\nここからはリタンの独壇場♪
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	笑い						毎晩先輩のベッドにもぐりこんで、\nぬくぬくしてあげるねぇー♪
+	リヴィア	笑い						これで先輩の魂と身体は\n私だけのもの♪
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	リヴィア	通常				0
+	黒グラデーション		エフェクト表			0
+FadeIn	black					.1
+StopBgm						0
+	リヴィア	通常						って思ってたのに
+Bgm	コメディ
+FadeOut	black					.1
+CharacterOff						0
+	ネオ	にやけ	p7b			0
+	ナナツサヤ	通常2	p3b			0
+	ディーア	にやけ4				0
+	集中線		エフェクト表			0
+FadeIn	black					.3
+	リヴィア	<Off>	1_2					なんで！\nこんなに魔剣ちゃんがいるのー!!
+	ディーア	にやけ4						うへへへぇ……♪\nそんなにオレを取り合うなよぉ……
+	ディーア	にやけ4						みんな、なかよ……ぐぅ……♪
+CharacterOff
+	リヴィア	悲しい
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	悲しい						先輩もすし詰めになったベッドで\nどうして眠れるの!?
+	リヴィア	悲しい						このままじゃ、\nまた先輩を好き放題する計画が\n台無しになっちゃうよぉ！
+Param	character_grayout=true
+	？？？？	<Off>	1_2					ふっふっふ♪\nお困りのようだね、リタンちゃん！\n（たいへん！）
+StopBgm
+	リヴィア	通常						そ、その声は……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場の地下					0
+	アスモデウス=サラ	通常				0
+FadeIn	black					.3
+Bgm	わくわく
+	アスモデウス=サラ	通常						仲間のピンチに！\nリリスファミリー大集合だよぉ♪\n（満を持して！）
+CharacterOff
+	プリム	通常						困った時はおたがい様♪
+CharacterOff
+	マネ	通常
+Tween	マネ	PunchPosition	y=30				NoWait
+	マネ	通常						Alles klar♪\nみんなのチカラを合わせれば！\n怖いものなしですわ♪
+CharacterOff
+	ベルゼ	通常						いつもおサボりなりタン先輩が\nこんなにやる気を出しているんです\n完璧な計画ならお任せを！
+CharacterOff
+	ルキフェル	嬉しい						ふふふふ♪\n"私の"先輩を幸せにしましょうね♪
+CharacterOff
+	リヴィア	通常						ファミリーのみんな……！\n本当に力を貸してくれるの？
+CharacterOff
+	プリム	通常	p2
+	マネ	通常	p5b
+	アスモデウス=サラ	通常	p8
+	マネ	通常						もちろんですわっ！
+	プリム	通常						みんなで協力して
+	アスモデウス=サラ	通常						先輩をサラたちで独占♪\n（わくわく）
+Param	character_grayout=false
+	黒グラデーション		エフェクト表			1
+	三人	<Off>	1_2					（その後みんなを出し抜いて\n　私だけの先輩に♪）
+CharacterOff
+	黒グラデーション		エフェクト表			0
+	リヴィア	通常
+	リヴィア	通常						（なーんて考えてるんだろうなぁ）
+CharacterOff
+	プリム	通常	p2
+	マネ	通常	p5b
+	アスモデウス=サラ	通常	p8
+	黒グラデーション		エフェクト表			0
+	三人	<Off>	1_2					フフフフフフ♪
+CharacterOff
+	ベルゼ	慌て						あ、あれ？ どうしてでしょう？\n何やら空気が不穏に……？
+Tween	ベルゼ	PunchPosition	y=30				NoWait
+	ベルゼ	慌て						み、みなさん！\nちゃんと共同作戦をしますよね？\n変なこと企んでないですよね!?
+Param	character_grayout=true
+CharacterOff
+	アスモデウス=サラ	通常						も、もちろんだよー！（ウソ！）
+Tween	アスモデウス=サラ	PunchPosition	y=30				NoWait
+	アスモデウス=サラ	驚き						じゃなくてホントのホント！\n（それもウソ！）
+CharacterOff
+	プリム	通常
+Shake	プリム		x=2				NoWait
+	プリム	通常						いくら先輩を独占できるチャンスでも\nぬ、抜け駆けなんて……！
+CharacterOff
+	マネ	通常
+Tween	マネ	PunchPosition	y=30				NoWait
+	マネ	通常						新規魔界仮想通貨と同じくらい\n信用していいですわ♪
+CharacterOff
+	ルキフェル	通常						そもそも、\n先輩を幸せにできるのが誰かなんて\n最初から明白ですから♪
+CharacterOff
+	ベルゼ	慌て						本当に大丈夫なんですか!?\nまったく安心できないんですけど！
+	リヴィア	通常	画面外_右
+Tween	リヴィア	MoveBy	x=-400 time=1				NoWait
+	リヴィア	通常						大丈夫だよぉー\nみんなで先輩を気持ちよくしよー♪
+Se	ポップイン
+Tween	ベルゼ	PunchPosition	y=30				NoWait
+	ベルゼ	慌て						うひゃあっ！\n先輩、くすぐらないでぇー！
+	リヴィア	通常						シエルちゃんは真面目だなぁ\nもっと肩の力をぬいていいよー？
+	リヴィア	通常						にひひ♪\nそれじゃあ計画を教えて？
+	ベルゼ	慌て						で、では計画は、\nカクカクシカジカで……！
+Tween	ベルゼ	PunchPosition	y=30				NoWait
+	ベルゼ	通常						みなさん、抜かりなく！
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	リヴィア	通常				0
+Wait						2
+FadeIn	black					1
+Bgm	作戦会議
+	リヴィア	通常						先輩のお部屋に侵入成功……♪
+	リヴィア	通常						本当にだれもいないね♪\nここまではシエルちゃんの計画通り♪
+CharacterOff
+	マネ	通常						さすがリリスファミリーの参謀♪\nあんな極悪非道な策を考えるなんて\nマネと同じくらいのワルですわ！
+	マネ	通常						あんなに濃いコーヒーや\nチョコミルクを飲んでしまったら\n眠れなくなりますもの♪
+CharacterOff
+	アスモデウス=サラ	通常						サラたちの差し入れ、\n喜んでくれてよかったね♪\n（まんぞく！）
+CharacterOff
+	プリム	通常						甘いものを食べた後は、\n寝る前のクチュクチュも、\nたくさんしないとダメだから♪
+CharacterOff
+	ベルゼ	嬉しい	p3b
+	リヴィア	通常	p7
+	ベルゼ	嬉しい						これでしばらくの間、\nみなさんがお部屋に来ることは\nありません
+Tween	リヴィア	MoveBy	x=500 time=2				NoWait
+CharacterOff	リヴィア					1
+	ベルゼ	嬉しい						その間にせんぱいを完全にオトす！\n完全完ぺきパーフェクトな計画です♪
+StopBgm
+	ベルゼ	嬉しい						では計画の総仕上げとして<dash=2>
+Bgm	コメディ
+CharacterOff
+	ディーア	にやけ4	p3
+	ルキフェル	通常	p7b
+Tween	ルキフェル	MoveBy	x=-20				NoWait
+	ルキフェル	通常						先輩を私だけのものに♪
+CharacterOff
+	ベルゼ	拡大照れ	エフェクト表					ちょっとちょっとちょっと！
+CharacterOff
+	ベルゼ	照れ
+Tween	ベルゼ	PunchPosition	y=30				NoWait
+	ベルゼ	照れ						なんでいきなり\n抜け駆けしているんですか!?
+CharacterOff
+	ルキフェル	通常						あら？\n元々そういう計画でしたよね？
+	ルキフェル	通常						"私が"先輩を独占するって♪
+CharacterOff
+	ベルゼ	照れ
+Tween	ベルゼ	PunchPosition	y=30				NoWait
+	ベルゼ	照れ						"たち"はどこに消えたんですか!?
+	ベルゼ	照れ						まったく会長はいつも……！
+	ベルゼ	照れ						サラ先輩たちもなにか言って<dash=2>
+FadeOut	black					.1
+CharacterOff						0
+	プリム	通常	p2			0
+	マネ	通常	p8			0
+	アスモデウス=サラ	通常	p5b			0
+	ディーア	にやけ4				0
+Tween	アスモデウス=サラ	MoveBy	y=100 time=0				NoWait
+Tween	ディーア	MoveBy	y=-100 time=0				NoWait
+FadeIn	black					.3
+	ディーア	にやけ4						ふにゃああ……♪
+	アスモデウス=サラ	通常						せんぱーい、\nお耳をふわふわで気持ちよくして\nあげますからねー♪（嬉しい）
+	アスモデウス=サラ	通常						耳かきのリアルASMRですよぉ！\n（お待ちかね♪）
+	プリム	通常						まったく先輩ったら、\nまたみがき残しがありますね
+	プリム	通常						プリムがクチュクチュしないと♪
+Param	character_grayout=false
+	怪しい動画の声	<Off>	1_2					『この新規マカイーサリアムは\n　なんと年率100%！』
+	怪しい動画の声	<Off>						『乗るしかない、\n　この魔界ビッグウェーブに！』
+Param	character_grayout=true
+	マネ	通常						くふふっ♪\n投資セミナー動画を聞かせ続けて\n先輩を堕落させますわ♪
+CharacterOff
+	集中線		エフェクト表
+	ベルゼ	拡大照れ	エフェクト裏					なにやっているんですかぁー！
+CharacterOff
+	ベルゼ	照れ						やっぱりこういう展開に……！
+	ベルゼ	照れ						そんなことするなら、\n私だってご飯で骨抜きに……
+Tween	ベルゼ	PunchPosition	y=30				NoWait
+	ベルゼ	照れ						寝てるから出来ないっ!?
+Shake	ベルゼ		x=2				NoWait
+	ベルゼ	照れ						こんなの想定外ですっ！
+CharacterOff
+	ルキフェル	通常						ふふふ♪\n私を差し置いて先輩を独占なんて\nありえませんよ？
+CharacterOff
+	アスモデウス=サラ	通常	p3b
+	ディーア	目閉じ4	p7
+	アスモデウス=サラ	通常						むむむ！\nいくらかいちょー相手でも先輩は！\n（てっていこーせん！）
+	ディーア	怪しい4						オレをどうするって？
+Tween	アスモデウス=サラ	PunchPosition	y=30				NoWait
+	アスモデウス=サラ	通常						もちろん！\n先輩の魂を<dash=4>
+Tween	アスモデウス=サラ	MoveBy	x=-30				NoWait
+	アスモデウス=サラ	驚き						あれ？
+Tween	アスモデウス=サラ	PunchPosition	y=30				NoWait
+	アスモデウス=サラ	驚き						せ、先輩!?\nいつの間に起きて!?
+	ディーア	汗4						耳元でこんなに騒がれたら、\n起きるよ
+StopBgm
+	ディーア	怪しい4						ということで<dash=2>
+Param	character_grayout=false
+FadeOut	black					.3
+CharacterOff						0
+Bg	夜空					0
+	ディーア	<Off>				0
+FadeIn	black					.3
+	ディーア	<Off>						みんなも静かに寝ろーっ！
+	サラたち	<Off>						そんなぁああああああ！
+FadeOut	black					1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	汗4				0
+Wait						1
+FadeIn	black					1
+Bgm	平和
+	ディーア	汗4						はぁ……\nリリスファミリーのみんなにも\n困ったもんだなぁ
+	ディーア	汗4						根はいい子だから、\n悪戯もかわいいものだけど
+	ディーア	通常4						じゃあ改めて静かになったし、\nオレもまた寝て<dash=2>
+	ディーア	怪しい4						あれ？\nなんで布団がふくらんで……？
+	ディーア	怪しい4						それにすごくホカホカ<dash=2>
+CharacterOff
+	リヴィア	拡大通常	エフェクト裏
+	オーラ桃		エフェクト表
+	リヴィア	拡大通常						せーんぱい♪
+Param	character_grayout=true
+CharacterOff
+	リヴィア	通常	p7b
+	ディーア	驚き4	p3
+	ディーア	驚き4						り、リタン？
+	ディーア	驚き4						みんなと一緒に帰ったんじゃ!?
+	リヴィア	通常						きっとこうなると思って、\nこっそりお布団に潜りこんでたんだ♪
+	ディーア	怪しい4						そういえば、\nリタンの姿だけ見えなかった気も？
+	リヴィア	通常						これでもファミリーの中だと\n先輩な方だからね
+	リヴィア	通常						シエルちゃんほどじゃないけど\n私もチャンスは逃さない♪
+Tween	リヴィア	PunchPosition	y=30				NoWait
+	リヴィア	笑い						先輩を独占したい気持ちは\n負けてないよ♪
+	リヴィア	笑い						にひひ♪\nせーんぱい、二人っきりだね♪
+	リヴィア	笑い						このままベッドで一緒にごろんして
+CharacterOff
+	リヴィア	拡大通常	エフェクト裏
+	リヴィア	拡大通常						リタンとぬくぬくしよっ♪
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1203_01
+EndIf
+EndScenario

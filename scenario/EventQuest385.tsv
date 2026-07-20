@@ -1,0 +1,666 @@
+# E_385_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	酒場1F
+	ディーア	通常2	1_2
+FadeIn	white					.5
+Se	走る
+	ファフニル		2_2_b
+Tween	ファフニル	MoveFrom	x=800 time=1				NoWait
+	ファフニル		2_2_b					えへへぇ♪　マスター！\nファフニーの活躍、みたみた？\nファフニーが一番だっておわかった？
+	ディーア	通常2						ああ、急な任務に付き合ってくれて\nありがとな、ファフニル！
+	ファフニル							グラム本家と魔竜一族が両方そなわる\nこのファフニーが最強なのは\n確定的に明らかだもんっ♪
+	ファフニル							おわかったかなぁー？
+	ディーア	あはは2						ああ、よく分かった！\nでも、今は急いで支度しないと！
+	ファフニル
+Tween	ファフニル	PunchPosition	y=50				NoWait
+	ファフニル							ねぇねぇ、\nファフニーえらいでしょー？\nすごいでしょー？
+CharacterOff
+	ファフニル	拡大通常	エフェクト表					ねぇマスター！\nなでて＆なでて＆なーでーてっ♪
+CharacterOff
+	ファフニル	通常	2_2
+	ディーア	汗2	1_2					ごめんなファフニル\nあとでちゃんと褒めるから！
+	ファフニル	悔しい
+Tween	ファフニル	ShakePosition	x=10 time=1				NoWait
+	ファフニル	悔しい						ふぁふぅ……
+	ファフニル	真顔						えっと、マスター？\nなんでそんなに急いでるの？
+	ディーア	通常2						なんでって……\nファフニルにも昨日話しただろ？
+	ディーア							このあと、みんなでパーティするって
+	ファフニル
+Tween	ファフニル	PunchPosition	y=50				NoWait
+	ファフニル	通常						ふぁふっ!?\nそ、そうだったー!!　やったぁー!!
+Tween	ファフニル	PunchPosition	y=50 time=1				NoWait
+Tween	ファフニル	MoveBy	x=50 time=1				NoWait
+	ファフニル							パーティ！　パーティ！
+Tween	ファフニル	PunchPosition	y=50 time=1				NoWait
+Tween	ファフニル	MoveBy	x=-50 time=1				NoWait
+	ファフニル							みんなでパーティ！
+CharacterOff
+Se	ラブ
+	ファフニル	拡大通常	エフェクト表					パーティだー!!　やったぁー!!
+FadeOut	white					.7
+CharacterOff						0
+StopBgm
+Bg	カジノ					0
+	イベントロゴ385		エフェクト表			1
+Se	シナリオスタート
+FadeIn	white					.5
+	イベントロゴ385							　　　 <color=blue>ディア・リトル・レディー\n　～ファフっとびっくりサプライズ!?～</color>
+FadeOut	black					.5
+CharacterOff						0
+StopSe
+Bg	酒場1F					0
+	ファフニル					0
+Bgm	都市
+FadeIn	black					.5
+	ファフニル
+Tween	ファフニル	PunchPosition	y=50				NoWait
+	ファフニル							パーティ！　パーティ！\nふぁふぅー!!
+	ファフニル	笑い						ファフニーが華麗に参上したら\nすっごく楽しいパーティになるよね！
+	ファフニル	通常						それにもし、グラムお姉さんたちと\n一緒にパーティに行けたら……！\nえへへぇ♪
+Tween	ファフニル	PunchPosition	y=50				NoWait
+	ファフニル							あっ、グラムお姉さんたちだ……！
+CharacterOff
+	オルタ		1_3
+	グラム		3_3					オルタ、\n支度ができたら行くわよ
+	オルタ							わぁ……！\nお姉ちゃん、とっても綺麗……
+	グラム							当然よ、私こそ\n魔剣の中の魔剣であり、\n完成品なのだから
+	オルタ							……うん！
+	グラム							オルタもよく似合っているわよ
+	オルタ							あ、ありがとう……お姉ちゃん\nあれ、そういえば、\nマスターさんは？
+	グラム							マスターなら、先に会場に\n向かったわよ
+	グラム							はぁ、やはりドレスを\n魔力で編むのは手間がかかるわね
+	オルタ							でも、マスターさんが……
+FadeOut	black					.5
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+	ディーア	笑い2
+Wait						.2
+FadeIn	black					.5
+	ディーア	笑い2						みんなに日頃の感謝を込めて\nパーティ開くことにしたから!!
+FadeOut	black					.5
+CharacterOff
+ImageEffectOff	SpriteCamera	Sepia
+	グラム		3_3
+	オルタ		1_3
+Wait						.2
+FadeIn	black					.5
+	オルタ							……って言ってたから……
+	グラム							まあ、そうね\nマスターにしては、随分豪華な\nパーティよね
+	オルタ							でも、お姉ちゃんも\n楽しみにしてたよね……？
+	グラム	破損正装						そ、そんなことないわよ……！\nそれより、オルタ\nあれの準備はできたかしら？
+	オルタ							う、うん、ばっちりだよお姉ちゃん
+CharacterOff
+	ファフニル							すごぉーい！\nきれーなドレスだな……！\nかわいいなぁー！
+StopBgm
+	ファフニル	真顔						えっと、あれ……？\nファフニーは、ドレス、ない……？
+Bgm	緊迫
+CharacterOff
+	ファフニル	拡大怒り	エフェクト表					はっ、どうしよう!!\nファフニー、ドレス持ってない!!
+CharacterOff
+	ファフニル	悲しい						マスターからも貰ってないし……\nどうしよう、どうしよう！
+	ファフニル	悲しい						パーティにはドレスが必要で、\nでもファフニーはドレスない……
+	ファフニル	怒り						ということは……ファフニー、\nパーティ、行けない……!?
+CharacterOff
+	ファフニル	拡大悲しい	エフェクト表					ガーーーーーーーン!!!!
+FadeOut	black					.5
+CharacterOff
+Bgm	都市
+	グラム		3_3
+	オルタ		1_3
+FadeIn	black					.5
+	グラム							さあ、会場に行くわよ\nオルタ
+	オルタ							うん、お姉ちゃん♪
+Se	走る
+Tween	グラム	MoveTo	x=-1000 time=3				NoWait
+Wait						.5
+Se	走る
+Tween	オルタ	MoveTo	x=-1000 time=3				NoWait
+Wait						1
+FadeOut	black					.5
+CharacterOff
+	ファフニル	怒り2
+FadeIn	black					.5
+Wait						.3
+	ファフニル	怒り2
+Tween	ファフニル	PunchPosition	y=50				NoWait
+	ファフニル							あっ……！
+	ファフニル	ため息						行っちゃった…………
+Bgm	絶望
+Tween	ファフニル	ShakePosition	x=20 time=1				NoWait
+	ファフニル	悲しい						ううっ……このままじゃ\nパーティ行けないよぉ……
+	ファフニル	怒り						そうだっ！\n魔力を使ってドレスを……！
+	ファフニル	怒り						えいっ!!
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff
+	ファフニル	怒り
+Se	光1
+FadeIn	white					.5
+Wait						.5
+	ファフニル	悔しい						ふぁふぅ……ぜんぜんできない……
+	ファフニル	ため息						やっぱり、ファフニーは\n中途半端だから……
+	ファフニル							このまま……\n仲間に入れてもらえないのかなぁ……
+FadeOut	black					.3
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏
+	ファフニル	悲しい
+FadeIn	black					.3
+Tween	ファフニル	ShakePosition	x=10 time=1				NoWait
+	ファフニル							ううっ、ぐすっ……\nパーティ……行きたいよぉ……
+FadeOut	black					.5
+CharacterOff
+	黒グラデーション		エフェクト表
+	モッド
+StopBgm
+FadeIn	black					.5
+	モッド							……おやおや？　お困りかな、\nお嬢さま♪
+	モッド							そんなに泣いてちゃ\nかわいいお顔が台なしだよっ♪
+CharacterOff
+	ファフニル	通常						モッドさん……？
+Bgm	平和
+	モッド							はあい、モッド姉さんですよ♪\nグラム=ファフニルちゃん♪
+	モッド							良かったら、\nどうして泣いているのか\n私に教えてくれないかな？
+	ファフニル	ため息						うん……えっと、あのね……\nファフニー、ドレス持ってなくて\nだから、パーティに行けないの……
+	モッド							なぁるほど♪\nそれがファフニルちゃんの悩みかぁ♪
+	モッド							これは面白い……じゃなかった、\nとっても深刻な悩みだ……！
+	モッド							でも、パーティのことなら\nこのモッド姉さんにまかせて！\n全然心配しなくて大丈夫♪
+	ファフニル	真顔						え？　どうして……？
+	モッド							何を隠そう、この私は……
+	モッド							ファフニルちゃんを\nパーティ会場に案内するために\nやってきたんだからねぇ♪
+	ファフニル	通常						え……？\nほ、本当に……!?
+	モッド							本当さ♪\n私が嘘をついたことがあるかな？
+	ファフニル	通常						わかんない！
+	モッド							あっ、キミは最近アンロックされた\nばかりだったね？\n知らないのも仕方ないか♪
+	モッド							でも安心してくれていいから！\nとにかく、私に任せて♪\nちゃんと会場へエスコートするよ
+	モッド							さあ、おいで？
+	ファフニル	通常						……うん！
+FadeOut	black					.5
+Param	character_grayout=true
+CharacterOff
+Bg	草原A
+Bgm	平和
+	ファフニル		画面外_右
+	モッド		1_3
+FadeIn	black					.5
+Se	走る
+Tween	ファフニル	MoveTo	x=180 time=1.5				NoWait
+	ファフニル	悔しい						うー……
+	モッド							うん？\nまだ心配なことがあるのかな？
+	ファフニル	悲しい						やっぱり、ドレスがないと……\nファフニー……仲間外れだよね……
+	ファフニル	悲しい						グラムさんたちは\nとってもきれいなドレス着てたし……
+	モッド							ああ、かわいそうに……！\n会場に着いてもファフニルちゃんの\n悩みは解消されないのか……
+	ファフニル	ため息						はぁ……
+	モッド							よーし！\nそんなキミには、これをあげよう！
+Tween	モッド	MoveTo	x=-90 time=1
+Se	ラブ
+Tween	モッド	MoveTo	x=-180 time=1				NoWait
+Wait						.5
+	ファフニル	真顔						ふぁふ……？\nこの瓶、なぁに？
+	モッド							元気の出る魔法の粉、だよ♪\n私のとっておきさ♪
+	ファフニル	通常						魔法……？\nも、もしかして、すごい力が沸いて\nすごいドレスを作れるとか……？
+	モッド							にははっ！\nそうそう、そんな感じで願いをこめて\n粉を自分に振りかけてごらん？
+	モッド							そしたらもっとグラムの\n研究が進んで……
+	ファフニル
+Tween	ファフニル	PunchPosition	y=50				NoWait
+	ファフニル							やったぁー!!\nありがとう、モッドさん！
+	ファフニル							これで、ファフニーもパーティに!!\nよし！
+FadeOut	white					.3
+CharacterOff
+StopBgm
+Se	光1
+	黒グラデーション		エフェクト表
+FadeIn	white					.3
+Se	闇1
+	幻想体		1_3_b			1	NoWait
+Wait						.5
+Se	闇1
+	幻想体2		3_3			1	NoWait
+Wait						1
+FadeOut	black					.5
+Bgm	コメディ
+CharacterOff
+	モッド		1_3
+	ファフニル		3_3
+FadeIn	black					.5
+	ファフニル	怒り2						ふぁふ……？？
+	モッド							あららー？\nもしかして、調合の仕方を\n間違えたかなぁ？
+	モッド							……てへっ♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	カジノ
+Bgm	都市
+FadeIn	black					.5
+	ディーア	驚き正装2						グラム\nファフニルは来たか？
+	グラム							そろそろモッドが連れてくるはずよ
+	ディーア	怪しい正装2						えっ……\nモッドに任せて大丈夫なのか？
+	グラム							大丈夫よ、たぶん…………\nマスター、少し落ち着きなさい\nそわそわし過ぎよ
+	ディーア	あはは正装2						そういうグラムだって\nさっきから尻尾が揺れてるぞ？
+	グラム							なっ、そんなことないわ！\nいつも通りよ
+	オルタ							ファフニルちゃん\n喜んでくれるかな……
+	ディーア	笑い正装2						大丈夫だって、きっと……
+FadeOut	black					.5
+CharacterOff
+	リディ	驚き正装2	画面外_右
+	ディーア	通常正装2	1_2
+FadeIn	black					.5
+Se	走る
+Tween	リディ	MoveTo	x=90 time=1				NoWait
+	リディ	驚き正装2						マスター！\nファフニルちゃんが来たー！\n……んだけど……!!
+	ディーア	笑い正装2						おっ！\nやっと来たか！
+	リディ	怒り正装2						でもなんか！　おかしいの！
+	ディーア	驚き正装2						……おかしいって？
+StopBgm
+	リディ	悔しい正装2						ファフニルちゃん……\n……いっぱい来た!!
+CharacterOff
+Param	character_grayout=false
+	グラム		3_3
+	オルタ		1_3
+	グラム＆オルタ							……いっぱい？？
+Param	character_grayout=true
+CharacterOff
+	ディーア	怪しい正装2						え……なんて……？
+FadeOut	black					.5
+CharacterOff
+Bgm	緊迫
+	幻想体		画面外_右
+Wait						.2
+FadeIn	black					.5
+Tween	幻想体	MoveTo	x=0 time=1				NoWait
+	幻想体							ふぁふぅー！
+CharacterOff
+	ディーア	本気正装2						ええええっ!?
+	オルタ	破損正装						ファフニルちゃんの幻想体!?
+FadeOut	black					.5
+CharacterOff
+	幻想体		1_3_b
+	幻想体2		画面外_右
+Wait						.2
+FadeIn	black					.5
+Tween	幻想体	PunchPosition	y=50				NoWait
+	幻想体							パーティだー!!　わーい!!
+Tween	幻想体2	MoveTo	x=180 time=1				NoWait
+	幻想体2							仲間にいーれーてっ♪
+CharacterOff
+	ディーア	悔しい正装2						な、なにがどうなって……!?
+CharacterOff
+	ファフニル	悔しい	画面外_右
+Se	走る
+Tween	ファフニル	MoveTo	x=0 time=1				NoWait
+	ファフニル	悔しい						ふぁふぅー！
+CharacterOff
+	オルタ							あっ！\nファフニルちゃん！
+CharacterOff
+	ファフニル	悲しい						ま、マスター!!　みんな!!\nあの、その……なんでだか急に\nファフニーが増えちゃって……
+FadeOut	black					.5
+CharacterOff
+	幻想体		1_3_b
+	幻想体2		3_3
+FadeIn	black					.5
+	幻想体							パーティって何するのー？
+Tween	幻想体2	PunchPosition	y=100				NoWait
+	幻想体2							ごはん食べたーい!!
+FadeOut	black					.5
+CharacterOff
+	ファフニル	怒り2
+FadeIn	black					.5
+	ファフニル	怒り2						…………！
+FadeOut	black					.5
+CharacterOff
+	幻想体
+	幻想体2		画面外_右
+FadeIn	black					.5
+	幻想体							一緒にダンスしよー！
+Tween	幻想体2	MoveTo	x=-800 time=4				NoWait
+Tween	幻想体2	MoveAdd	y=100 time=6				NoWait
+	幻想体2							わーいわーい!!　楽しいなぁー!!
+Wait						.5
+FadeOut	black					.5
+CharacterOff
+	ファフニル	怒り2
+FadeIn	black					.5
+Tween	ファフニル	ShakePosition	x=10 time=1				NoWait
+	ファフニル	怒り2						ふ、ふ…………
+CharacterOff
+	ディーア	驚き正装2						ファフニル……？
+CharacterOff
+	ファフニル	拡大怒り	エフェクト表					ふぁふーーーー!!\nファフニーもパーティするー!!
+CharacterOff
+Se	水2
+	ファフニル	怒り
+Tween	ファフニル	PunchPosition	y=100				NoWait
+	ファフニル	怒り						えーーーーいっ!!
+CharacterOff
+	ディーア	本気正装2						ちょぉっ!?\nファフニルまで暴れるなー！
+	グラム	破損正装						こら、ファフニル!!
+	オルタ	破損正装						ファフニルちゃん、やめて……！
+FadeOut	black					.5
+CharacterOff
+	モッド		1_3_b
+FadeIn	black					.5
+Tween	モッド	MoveTo	x=180 time=3				NoWait
+	モッド							そーっ……
+Se	打1
+	グラム		1_3
+Tween	グラム	PunchPosition	x=10				NoWait
+	グラム							……待ちなさい
+	モッド
+Tween	モッド	PunchPosition	y=50				NoWait
+	モッド							にゃはーっ！　見つかったか♪
+	グラム							原因はあなたね、モッド？
+CharacterOff
+	ディーア	怪しい正装2						……やっぱりか……
+CharacterOff
+	グラム		1_3_b
+	モッド		3_3					いやぁ、私はファフニルちゃんを\n元気づけようとしただけだよ♪
+	モッド							まさかこんな作用になるとは、\nいやはや興味深い!!
+	グラム							貴女にファフニルの迎えを頼んだのが\n間違いだったわ……
+	モッド							にははっ♪　\n研究がはかどりそうだよね♪
+	グラム	破損正装						反省しなさい!!
+CharacterOff
+	ディーア	怒り正装2						それで、こいつらは何体いるんだ？
+CharacterOff
+	グラム		1_3_b
+	モッド		3_3					うん、ファフニルちゃんは\n私の粉をぜーんぶかけたから\n一応これで全部だよ
+	グラム							一応？\nまさか増えたりしないでしょうね？
+	モッド							たぶんね
+Tween	グラム	MoveBy	x=30				NoWait
+	グラム							<size=40>た・ぶ・ん？</size>
+	モッド
+Tween	モッド	PunchPosition	y=50				NoWait
+	モッド							いや絶対増えない！
+CharacterOff
+	ディーア	本気正装2						よし、ならとりあえず入口を封鎖だ！
+FadeOut	black					.5
+CharacterOff
+	ディーア	怪しい正装2
+FadeIn	black					.5
+	ディーア	怪しい正装2						よし、何体か外に逃げたが\n大半はここに閉じ込めたはずだ\nあとは……
+	ディーア	本気正装2						グラム、オルタ！
+	グラム							ええ、分かっているわマスター
+	オルタ							幻想体が暴れるのを\n止めるんですね……！
+	ファフニル	笑い						え……？
+FadeOut	black					.5
+Bgm	絶望
+CharacterOff
+	幻想体		1_3_b
+	幻想体2		3_3
+Wait						.2
+FadeIn	black					.5
+Wait						1
+Se	斬1
+FadeOut	white					.1
+FadeIn	white					.3
+Tween	幻想体	ShakePosition	x=20 time=1				NoWait
+Wait						.5
+Tween	幻想体2	ShakePosition	x=20 time=1				NoWait
+Wait						.5
+Se	敵殺
+Tween	幻想体	MoveTo	y=-800 time=1.5				NoWait
+Wait						.5
+Se	敵殺
+Tween	幻想体2	MoveTo	y=-800 time=1.5				NoWait
+Wait						.3
+FadeOut	black					.5
+CharacterOff
+	ファフニル	悲しい
+FadeIn	black					.5
+Tween	ファフニル	ShakePosition	x=10 time=1				NoWait
+	ファフニル	悲しい						あ、ああ……！
+Se	水2
+CharacterOff
+	ファフニル	拡大怒り	エフェクト表
+Tween	ファフニル	PunchPosition	y=10				NoWait
+	ファフニル	拡大怒り						ふぁふーーーー！！
+CharacterOff
+	オルタ	破損正装						や、やめてファフニルちゃん
+	グラム	破損正装						これ以上暴れるのは許されないわよ！
+	ファフニル	怒り						やだやだーーっ！\nどうして？　なんでファフニーを\n仲間外れにするの!?
+	オルタ	破損正装						仲間外れ……？
+	ファフニル	怒り						ファフニーが中途半端だから!?
+	ディーア	悔しい正装2						…………!?
+	ファフニル	怒り						グラムの仲間でもない\n魔竜にもなりきれない……
+	ファフニル	悲しい						ドレスも、うまく、作れない……！
+	黒グラデーション		エフェクト表
+	ファフニル	悲しい						だから、だから……\nパーティにも参加できない……！
+CharacterOff
+	オルタ	破損正装
+Tween	オルタ	PunchPosition	y=50				NoWait
+	オルタ	破損正装						……!!
+Se	走る
+Tween	オルタ	MoveTo	x=-800 time=1.5
+Wait						.5
+CharacterOff
+	ファフニル	悲しい
+	黒グラデーション		エフェクト表
+	ファフニル	悲しい						ファフニーは……ファフニーは……
+CharacterOff	黒グラデーション
+	ファフニル	悲しい						いらない子なんだーー!!
+CharacterOff
+	ディーア	本気正装2						違う、そうじゃなくて……！\nファフニル！
+CharacterOff
+	ファフニル	怒り
+Tween	ファフニル	ShakePosition	x=20 time=1				NoWait
+	ファフニル	怒り						ふぁふぅーーーー！！
+FadeOut	white					.3
+Se	水2
+FadeIn	white					.3
+	ファフニル	怒り						こんな……こんなパーティ……
+Bgm	Xmasボス
+CharacterOff
+	ファフニル	拡大怒り	エフェクト表					もう、めちゃくちゃに\nなっちゃえええええええええ!!!!
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_385_02
+EndIf
+EndScenario
+
+# E_385_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	Xmasボス
+Bg	カジノ
+	ファフニル	拡大怒り	エフェクト表
+FadeIn	white					.5
+Tween	ファフニル	PunchPosition	y=10				NoWait
+	ファフニル							ふぁふぅーーーーっ!!!!
+CharacterOff
+	グラム							ファフニル、話を聞きなさい！
+	ファフニル	悲しい
+Tween	ファフニル	ShakePosition	x=10				NoWait
+	ファフニル	悲しい						やだあああああ!!
+FadeOut	black					.5
+CharacterOff
+	オルタ		画面外_左
+FadeIn	black					.5
+Se	走る
+Tween	オルタ	MoveTo	x=0 time=1.5				NoWait
+StopBgm
+	オルタ							ファフニルちゃん！
+CharacterOff
+	ファフニル	悲しい						………………!?
+	オルタ							ほら、これ……見て？
+	ファフニル	悲しい						……それ……それって……！
+	オルタ							うん、ファフニルちゃんの\nドレスだよ
+Bgm	凱旋
+	ファフニル	悲しい						ファフニーの、ドレス……？
+	グラム							私たちで準備したの\nあなたの為にね
+	ディーア	通常正装2						グラムもオルタも、\nファフニルを喜ばせるために\n内緒にしてたんだ
+	ファフニル	笑い						そう、なんだ…………！
+	グラム							まあ、それが\n裏目に出てしまったわけだけど
+	オルタ							不安にさせちゃって、\nごめんね、ファフニルちゃん
+	ファフニル	悲しい						ううん……ちがう……勘違いした\nファフニーが悪いの
+	ファフニル	悲しい						あばれちゃって……\n……ごめんなさい
+FadeOut	black					.5
+CharacterOff
+	幻想体
+FadeIn	black					.5
+	幻想体
+Tween	幻想体	PunchPosition	y=50				NoWait
+	幻想体							パーティ楽しいな……！
+Tween	幻想体	MoveTo	x=800 time=4				NoWait
+Wait						2
+CharacterOff
+	ディーア	通常正装2						ファフニル\nまだ幻想体が残ってるから\nこのままじゃパーティに戻れないんだ
+	ディーア	笑い正装2						少し協力してくれないか？
+	ファフニル	悲しい						…………でも\nファフニー、\nあばれちゃったよ……？
+	ディーア	通常正装2						気にするなよ\nみんな、ちゃんとファフニルの\n気持ちはわかったから
+FadeOut	black					.5
+CharacterOff
+	幻想体
+FadeIn	black					.5
+	幻想体							うう……うううう……
+FadeOut	black					.5
+CharacterOff
+	ディーア	笑い正装2	1_2
+	ファフニル		2_2_b
+FadeIn	black					.5
+	ディーア	笑い正装2						一緒にパーティしよう、な？
+	ファフニル	通常						…………うん！
+	ディーア	本気正装2						よしいくぞ、ファフニル
+	ファフニル	怒り						ふぁふっ！
+FadeOut	black					.5
+CharacterOff
+	幻想体
+FadeIn	black					.5
+	幻想体							パーティ……パーティ……
+Se	斬1
+FadeOut	white					.1
+FadeIn	white					.3
+Tween	幻想体	ShakePosition	x=20				NoWait
+Wait						.3
+Se	敵殺
+Tween	幻想体	MoveTo	y=-800 time=1.5
+FadeOut	black					.5
+CharacterOff
+Bgm	平和
+	ディーア	驚き正装2
+FadeIn	black
+	ディーア	驚き正装2						よし、これで最後だな……
+	ファフニル	通常						よかったぁ……！\nねっ、マスター見た!?\nファフニーのすごいとこ見たぁ!?
+CharacterOff
+	ファフニル	拡大通常	エフェクト表					やっぱりファフニーが一番でしょ？\nおわかったかなぁー？
+CharacterOff
+	ファフニル		3_3
+	グラム	破損正装	1_3_b					調子に乗らないの！
+Se	打1
+Tween	グラム	PunchPosition	x=10				NoWait
+Wait						.5
+	ファフニル	怒り
+Tween	ファフニル	PunchPosition	y=50				NoWait
+	ファフニル	怒り						ふぁふっ！
+Tween	ファフニル	MoveBy	y=-10				NoWait
+	ファフニル	悔しい						ふぁふぅ…………
+CharacterOff
+	オルタ							とにかく\nこれでパーティができるよ、\n良かったね、ファフニルちゃん
+	オルタ							はい、これどうぞ
+	ファフニル							ふぁふぅー！\nこれが、ファフニルのドレス!!\nやったーっ!!
+	オルタ							ふふっ、喜んでもらえて良かった
+	ファフニル	怒り						あっ！\nあの、でも……
+	グラム							どうかしたの？
+	ファフニル	悲しい						あの、ね\nあばれちゃって、ごめんなさい……
+	グラム							……もういいのよ\n貴女がいつまでも暗い顔してたら\nパーティが盛り上がらないじゃない？
+	ファフニル	悲しい						グラムお姉さん……もう怒ってない？
+	グラム							ええ\nただし、暴れるのは良くないわよ
+Bgm	凱旋
+	オルタ	通常正装						……ファフニルちゃんは、ただ\n寂しかったんだよね？
+	ファフニル	悲しい						…………うん
+	ファフニル	悲しい						ファフニーは、グラムでも魔竜でも\nなくて、中途半端な存在で……だから\n仲間外れにされたんだと思って……
+	オルタ							……仲間外れなんかじゃないよ
+	ディーア	通常正装2						……ファフニル\nみんなファフニルが\nグラムかどうかなんて気にしてないよ
+	ディーア	笑い正装2						ファフニル自身がどうしたいか\nそれが一番大事なんだ
+	ファフニル	悲しい						ふぁふ…………!!
+	ファフニル	悲しい						じゃあ、ファフニーは\nパーティに参加して、いいの？
+	ディーア	笑い正装2						もちろん\nなんといっても、今日はファフニルの\n歓迎会でもあるからな！
+	ディーア	あはは正装2						だから、今日の主役はファフニルさ
+	ファフニル	通常						ふぁふぅ……！
+	グラム							ふーん、マスターは\nグラムであるかどうかなんて\nどうでもいいのね？
+	ディーア	あはは正装2						え？　い、いや……\n本物がダメってことじゃなくてな？
+	オルタ							そうですよね、\nやっぱり本物が良いですよね……！
+	ディーア	あはは正装2						いや偽物がダメって話でもなくてな？
+	オルタ							……ふふ\nさあおいで、ファフニルちゃん
+	ファフニル	笑い						ふぁふ？
+	グラム							どうせ一人じゃ着られないでしょう？
+	オルタ							私たちがドレスを着せてあげるから
+	ファフニル	通常
+Tween	ファフニル	PunchPosition	y=50				NoWait
+	ファフニル							………………!!\nふぁ、ふぁいっ!!
+FadeOut	white					1
+CharacterOff
+Param	character_grayout=false
+	イベントスチル385
+Bgm	凱旋
+FadeIn	white					1
+	ファフニル	<Off>						んへへぇ♪\nあれもこれも、みんなおいしいー♪
+Tween	イベントスチル385	MoveBy	y=-270 time=3				NoWait
+	オルタ	<Off>						そんなに慌てて食べたらだめよ……！
+Wait						.5
+	グラム	<Off>						ファフニル……\n仮にもグラムの名を冠するのだから\nきちんと行儀良く食べなさい？
+	ファフニル	<Off>						はーいっ！\nうーんと……えっと、こう？
+	グラム	<Off>						ふふっ、ちゃんと出来るじゃない
+	ファフニル	<Off>						やったぁ！\nファフニルえらい？　えらい？
+	ファフニル	<Off>						グラムお姉さん、\nなでて、なでてっ♪
+	グラム	<Off>						……仕方ないわね。今日は特別よ
+	ファフニル	<Off>						ふぁふぅー♪
+	オルタ	<Off>						口元にご飯がついてるわ……\n少しじっとしてね？
+	ファフニル	<Off>						んー、おいひぃー!!\nえへへ、幸せ♪
+FadeOut	white					2
+CharacterOff
+Param	character_grayout=true
+	ディーア	通常2	1_2
+Bg	教会前
+Bgm	平和
+Wait						2
+FadeIn	white					1
+	ディーア	通常2						さて、パーティもひと段落したし、\nあとは……
+Se	走る
+	ファフニル		2_2_b
+Tween	ファフニル	MoveFrom	x=800 time=1				NoWait
+	ファフニル							マスター、待ってー！
+	ディーア	驚き2						ファフニル！\n抜け出して来たのか？
+	ファフニル
+Tween	ファフニル	PunchPosition	y=50				NoWait
+	ファフニル							うん！　あのね、\nいっぱいグラムお姉さんたちと\nおしゃべりできたのっ♪
+	ファフニル							えへへ♪　すっごくたのしかった！
+	ディーア	笑い2						そっか、ファフニルが楽しめたなら\n何よりだよ
+	ファフニル							マスター、\nこれからお片付けに行くんでしょ？
+	ディーア	驚き2						お片付け？\nああ、外に出た幻想体を\n倒しに行くけど……
+	ファフニル	笑い						ファフニーもお手伝いする！\nちゃんとお片付けする！
+	ディーア	驚き2						いや、パーティが終わるまでは\n遊んでていいんだぞ？
+	ファフニル	怒り						でも！　パーティを\n台無しにしかけたのは\nファフニーだもん
+Tween	ファフニル	PunchPosition	y=50				NoWait
+	ファフニル	怒り						だから、ちゃんとお片付けまで\nさせて欲しいの！\nお願い！
+	ディーア	通常2						……ああ、じゃあ頼むよ
+	ファフニル	通常						任せてー！　ファフニーの力、\nおわからせてあげる！
+	ディーア	笑い2						ありがとな、ファフニル
+	ファフニル	通常						えへへぇ♪\nえらいでしょ、えらいでしょ！\nもっといっぱい褒めて、なでてーっ！
+	ディーア	あはは2	1_2
+Tween	ディーア	MoveTo	x=-45 time=1				NoWait
+	ディーア							よしよし、えらいぞ！
+	ファフニル	笑い						ふぁふぅーーーー♪
+CharacterOff
+	ファフニル	拡大通常	エフェクト表					ファフニーのこと\nちゃんと見ててね、マスター♪
+	ファフニル	拡大怒り	エフェクト表					お・か・わ・り？ ……あ違った！
+	ファフニル	拡大通常	エフェクト表					おわかりっ？ えへへ♪
+FadeOut	white					.5
+CharacterOff						0
+	イベントロゴ385		エフェクト表			1
+FadeIn	white					.5
+	イベントロゴ385							　　　 <color=blue>ディア・リトル・レディー\n　～ファフっとびっくりサプライズ!?～\n　　　　　　　　　　　　<dash=2>完<dash=2></color>
+FadeOut	white					.7
+If	isdebug==true
+CharacterOff
+Jump	*E_385_01
+EndIf
+EndScenario

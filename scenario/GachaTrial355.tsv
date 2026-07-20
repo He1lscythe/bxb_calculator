@@ -1,0 +1,349 @@
+# G_355_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	酒場1F
+CharacterOff
+	三日月宗近
+FadeIn	white					.5
+	三日月宗近							うーん……じゃあ……\n膝まくら!!
+CharacterOff
+	バールのようなもの	大きめ
+Tween	バールのようなもの	PunchPosition	y=50				NoWait
+	バールのようなもの	大きめ						ううっ……!!\n確かに膝まくらも捨てがたい!!\nやるねムネムネちゃん……!!
+	バールのようなもの	大きめ						次はばよのの番だね!!\nう～ん……\nお姫様抱っこならどう!?
+CharacterOff
+Param	character_grayout=false
+	三日月宗近							あるじにお姫様抱っこ……？\nベタだけど女の子なら一度は\n憧れるあの……
+	オーラ桃		エフェクト裏			.5
+	三日月宗近							あるじと密着して\nひょいっと持ち上げられて……\nふふ……
+CharacterOff
+Param	character_grayout=true
+	バールのようなもの	大きめ						はい照れた！今照れた！\nばよのの勝ちー!!
+CharacterOff
+	フレスベルグ							……何をしているのかしら？
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						あっフレスちゃん！\n見ての通りだよ！
+CharacterOff
+	フレスベルグ							……見てもわからないから\n聞いているのだけれど
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							◯◯されたいゲームよ♪
+CharacterOff
+	フレスベルグ							◯◯されたいゲーム？
+CharacterOff
+Bgm	コメディ
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						マスターにされたいことを\n言い合うゲームだよ！
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							ちなみに照れたら負けねー♪
+	バールのようなもの	大きめ	1_2					だからさっきのはばよのの勝ち！
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							うぅ……\nまさかそんな王道で\n攻めてくるなんて……
+CharacterOff
+	フレスベルグ		2_3
+Tween	フレスベルグ	MoveTo	x=90 time=2				NoWait
+	フレスベルグ							へ、へぇ……\nた、楽しそうねー……
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						楽しいよ！\nフレスちゃんもやる？
+CharacterOff
+	フレスベルグ		2_2
+Tween	フレスベルグ	PunchPosition	y=50				NoWait
+	フレスベルグ							えっ!?\nい、いえ、私は遠慮しておくわ
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							そんなこと言わないで！\nほら、ここ座って！
+CharacterOff
+	フレスベルグ							ちょ、そんな無理矢理……
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						あ、そーか\nひょっとして、趣味が\nバレるのが怖いんだ
+CharacterOff
+	フレスベルグ
+Tween	フレスベルグ	PunchPosition	y=50				NoWait
+	フレスベルグ							そ、そんなわけないでしょう!?
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							なら大丈夫ね♪\nさあさあ、不沈の魔剣の\nお手並み拝見といきましょう♪
+CharacterOff
+	フレスベルグ							いいわ、そこまで言うのなら\n受けて立ちましょう！
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						じゃあばよのから！
+	バールのようなもの	大きめ						怪我した時、病院まで\n迎えに来てくれるマスター!!
+CharacterOff
+	フレスベルグ							お迎え……
+Se	シナリオスタート
+FadeOut	white					2
+CharacterOff
+Bgm	平和
+Bg	鍛冶病院
+	鍛冶医クランベリー	通常2	2_3
+Wait						.5
+FadeIn	white					.5
+	鍛冶医クランベリー							よし、修理完了よ!!\n……あら？
+CharacterOff
+	ディーア	通常2	1_2_b
+	フレスベルグ		2_2
+	フレスベルグ							あら、迎えに来たのね
+	ディーア	通常2	1_2					ああ、フレスが心配でさ\n大丈夫か？\nもう痛いところとかないか？
+	ディーア	通常2	1_2_b
+	フレスベルグ							怪我はもう大丈夫よ\nまったく、あなたが私を\n雑に扱うからだわ！
+	ディーア	あはは2	1_2					ごめんごめん\nみんなを守るのに必死でさ……
+	ディーア	あはは2	1_2_b
+	フレスベルグ							……まあ、別にいいわ\nほら来なさい、早く帰るわよ
+	ディーア	通常2	1_2					ああ、待ってフレス
+	ディーア	通常2	1_2_b
+	フレスベルグ							……何かしら？\nもうここに用は<dash=2>
+Bgm	凱旋
+	ディーア	通常2	1_2
+Tween	ディーア	MoveTo	x=0				NoWait
+Wait						.7
+Tween	フレスベルグ	PunchPosition	y=50				NoWait
+	ディーア	笑い2	2_3_b
+	フレスベルグ							ひゃっ……な、何よ？
+	ディーア	笑い2	2_3					エメラルド、髪についてたよ
+Se	ラブ
+FadeOut	pink					.1
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏			.5
+	フレスベルグ
+FadeIn	pink					.1
+	フレスベルグ							きゃっ……!!
+FadeOut	white					2
+Bgm	コメディ
+Bg	酒場1F
+Param	character_grayout=true
+CharacterOff
+	フレスベルグ		2_3
+Wait						.5
+FadeIn	white					.1
+	フレスベルグ							…………セーフね
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						え？\nどこが？
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							だいぶ照れてたわよね、今？
+CharacterOff
+	フレスベルグ
+Tween	フレスベルグ	PunchPosition	y=50				NoWait
+	フレスベルグ							て、照れてないわ！\n別にこれくらい余裕よ！
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						その割には随分と長く\n考え込んでたよね
+CharacterOff
+	フレスベルグ							そ、それは気のせいだわ！
+	フレスベルグ							む、むしろそれくらいで\n落ちるなんて、魔剣として\n失格ね！ふん！
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						んー、やっぱりちょっと\n弱かったかなあ……
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							じゃあ次は私の番ね♪\nそれなら王道で……
+	三日月宗近							あるじ様に急接近されて……\n壁ドンとか!!
+CharacterOff
+	フレスベルグ							壁ドン……
+Se	シナリオスタート
+FadeOut	white					2
+CharacterOff
+Bgm	平和
+Bg	市街地B
+	ディーア	通常2	1_2
+	フレスベルグ		2_2
+Wait						.5
+FadeIn	white					.5
+	ディーア							お待たせ、フレス
+	ディーア	通常2	1_2_b
+	フレスベルグ							遅いわ！\nどれだけ待たせる\nつもりなのかしら！
+	ディーア	汗2	1_2					ごめん、ちょっと用事が\n長引いてさ
+	ディーア	汗2	1_2_b
+	フレスベルグ							ふん、どうせ他の女の子と\n遊んでたんでしょう？
+	ディーア	驚き2	1_2					ひょっとして嫉妬してるのか？
+	ディーア	驚き2	1_2_b
+	フレスベルグ							そ、そんなわけないでしょう！\n茶化さないでくれるかしら!?
+	ディーア	怒り2	1_2
+Tween	ディーア	MoveTo	x=0
+	ディーア	怒り2						…………フレス
+Bgm	凱旋
+	フレスベルグ							ひゃっ……な、なによ
+	ディーア	通常2						大丈夫、オレは\nお前以外に興味なんてないよ
+	フレスベルグ							ひゃぅ……\nき、気安くお前なんて……
+	ディーア	通常2
+Tween	ディーア	MoveTo	x=10
+Se	ラブ
+	ディーア	通常2						……フレス
+	フレスベルグ							きゃっ……マスター……
+FadeOut	white					2
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+Bgm	コメディ
+Bg	酒場1F
+Wait						.5
+FadeIn	white					.1
+Tween	バールのようなもの	PunchPosition	y=50				NoWait
+	バールのようなもの	大きめ						あーー今照れてたーー!!!!
+CharacterOff
+	フレスベルグ							そそ、そんなわけないでしょう!?
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							ふふん、今度は私の勝ちね♪
+CharacterOff
+	フレスベルグ
+Tween	フレスベルグ	PunchPosition	y=50				NoWait
+	フレスベルグ							照れてないったら！
+	フレスベルグ							このフレスが壁ドンくらいで\n落ちるわけないでしょう!?
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						え～～ほんと～～？
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							絶対に～～？
+CharacterOff
+	フレスベルグ
+Tween	フレスベルグ	PunchPosition	y=50				NoWait
+	フレスベルグ							な、何よその顔は！\nそれくらい余裕だわ！
+	フレスベルグ							私は不沈の魔剣よ？\nあんな凡百の魔剣使いに\n落とされるわけ……
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						じゃあーー実際に\nやってもらいましょー!!\nマスターの登場です!!
+FadeOut	black					.5
+CharacterOff
+Bgm	魔王バトル
+	ディーア	あはは2
+FadeIn	black					1.5
+Wait						2
+CharacterOff
+	フレスベルグ							…………へ？
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							ええっ、あるじ!?\nいたの!?
+	バールのようなもの	大きめ	1_2					それじゃあマスター、\nよろしくおねがいしまーすっ！
+CharacterOff
+StopBgm						1
+	フレスベルグ							え、ちょ、待っ……
+FadeOut	black					1	NoWait
+ZoomCamera	SpriteCamera	2	0	350		1.5
+CharacterOff
+Wait						.1
+Se	ラブ
+ZoomCamera	SpriteCamera	1				0
+Bg	黒背景
+	　　　　　　　　　　
+Wait						.5
+FadeIn	black					.5
+	フレスベルグ	<Off>						ひゃっ……
+Bg	イベントスチル35501G					1
+	フレスベルグ	<Off>						ふぇっ……？\nひゃ、ひゃああ……
+	フレスベルグ	<Off>						顔が、ち、近……
+CharacterOff
+Bg	酒場1F
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						うーん……\n焚き付けたはいいけど、\n普通に羨ましいよねあれ
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							ちょ、あるじ！\n次私！私ね!!
+CharacterOff
+Bg	イベントスチル35501G
+	フレスベルグ	<Off>						なに楽しんでんのよ!!
+	フレスベルグ	<Off>						ちょちょちょ、待って……\n急にこんなの……
+	フレスベルグ	<Off>						お願い、待って……\nやぁ、なんか変……!!
+	ディーア	<Off>						なあ、フレスベルグ……
+	フレスベルグ	<Off>						ひゃぁ……!!\nみ、耳元で話さないで……\n息が……
+	ディーア	<Off>						オレ……
+	フレスベルグ	<Off>						<size=20>ひゃぅぅ……</size>
+	フレスベルグ	<Off>						うぅ……ん？あれ？\nちょっと待って？あれは……
+FadeOut	black					.5
+CharacterOff
+Bg	酒場1F
+Bgm	コメディ
+	キノコリオン		画面外_左
+FadeIn	black					.5
+Tween	キノコリオン	MoveTo	x=400 time=2.5	easeInOutSine
+FadeOut	black					.1
+CharacterOff
+Bg	酒場1F
+	フレスベルグ	拡大	エフェクトBG
+FadeIn	black					.1
+Bgm	キノコリオン
+	フレスベルグ							<size=40>話の途中だけど\nキノコリオンよマスター!!</size>
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						ええええええええ!?
+CharacterOff
+	フレスベルグ							ああ、外に出ていっちゃった!!\n大変だわ……!!追いかけないと!!
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						ちょ、いいとこだったのに！
+	バールのようなもの	大きめ	1_2_b
+	三日月宗近							あぁ、もったいない!!
+CharacterOff
+	フレスベルグ							<size=20>ナイスタイミングよ\nキノコリオン!!</size>
+	フレスベルグ							マスター!!早くしなさい!!\nあれを放置しておいたら、\nいずれ村を襲い畑を荒らし……!!
+CharacterOff
+	三日月宗近		2_2
+	バールのようなもの	大きめ	1_2
+	バールのようなもの	大きめ						随分と庶民的な例えをするよね
+CharacterOff
+	ディーア	あはは2	1_2_b
+	フレスベルグ		2_2					うるっさいわね!!\nほらマスター、\nもう一刻の猶予もないわ!!
+	フレスベルグ							さあ、ついてきなさい！\n不沈の魔剣たる私の力を\n証明してみせるわ！！
+	ディーア	怪しい2	1_2					いや、さっき既に\nだいぶ怪しかったような
+	ディーア	怪しい2	1_2_b
+	フレスベルグ							怪しくなんてないわ!!
+	ディーア	怪しい2	1_2					だってほら……
+Tween	ディーア	MoveTo	x=10 time=1				NoWait
+FadeOut	black					1
+CharacterOff
+Bg	イベントスチル35501G
+Se	ラブ
+	　　　　　　　　　　
+Wait						.5
+FadeIn	black					.1
+	フレスベルグ	<Off>						ひゃあああ!!\nび、びっくりしたぁ!!
+	フレスベルグ	<Off>						あ、遊んでる場合\nじゃないでしょう!!\nほら、さっさと行くわよ!!!!
+CharacterOff
+Bg	酒場1F
+	ディーア	あはは2						まあ、そこまで言うなら……\n確かに放っておくのは危険だしな
+	ディーア							仕方ない、ここで倒しておくか
+Se	走る
+Tween	ディーア	MoveTo	x=-300 time=3				NoWait
+Wait						1
+FadeOut	black					.5
+CharacterOff
+	フレスベルグ
+FadeIn	black					.5
+	フレスベルグ							<size=20>はぁぁぁー……まったくもう……\n危なかった……</size>
+	ディーア	<Off>						フレス？\n早く行くぞー？
+	フレスベルグ
+Tween	フレスベルグ	PunchPosition	y=50				NoWait
+	フレスベルグ							わ、わかってるわよ!!
+Se	走る
+Tween	フレスベルグ	MoveTo	x=-300 time=3				NoWait
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*G_355_01
+EndIf
+EndScenario

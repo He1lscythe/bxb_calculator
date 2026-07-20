@@ -1,0 +1,1211 @@
+# E_1172_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	酒場_宿屋(夜)					0
+Param	character_grayout=false
+	ヤト	拡大笑い	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	black					1
+	ヤト	拡大笑い	エフェクト表					ふふふ♪\n緊張しているのかい、少年？
+CharacterOff	ヤト
+	ディーア	拡大悔しい2	エフェクト表					や、ヤト……\nこんなことをしたってバレたら、\nリディに怒られるって……
+CharacterOff	ディーア
+	ヤト	拡大通常	エフェクト表					ヤト姉さん、だよ♪
+	ヤト	拡大通常						大丈夫、安心して？\n蛇のお姉さんはキミの味方なんだ
+	ヤト	拡大通常						ひと皮むけたキミになれるように\n悪いことを教えてあげる♪
+	ヤト	拡大笑い						さあ、我慢しないで♪
+CharacterOff	ヤト
+	ディーア	拡大悔しい2	エフェクト表					ヤト姉……！\nほんとに、ほんとにいいんだな？
+StopBgm
+CharacterOff	ディーア
+	ヤト	拡大笑い	エフェクト表					ふふ、これでキミも悪い子だ♪\nさあ一緒に<dash=2>
+Bgm	カジノ
+Param	character_grayout=true
+CharacterOff
+	ディーア	きらーん2	p3
+	ヤト	笑い	p7b
+	ヤト	笑い						炭酸ジュースに\n破壊タブレットを投入しようっ！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	きらーん2						うぉおおおおお！\n一度実験してみたかったんだ!!
+	ディーア	きらーん2						誰かがつきあってくれないと、\nこんなちょっと悪いことできないし！
+	ディーア	きらーん2						ヤト姉、ありがとうな！
+	ヤト	笑い						気にすることはないさ♪\n子どものうちは遊ぶのも仕事だし、\nせっかくの正月休み♪
+	ヤト	笑い						ちょっと悪いことでも、\nお姉さんはつきあってあげるよ！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						ヤトが悪いお姉さんで\n本当に良かった！
+	ヤト	通常						ふふふふ♪\nよかったのはお姉さんの方だよ♪
+Shake	ヤト		x=3				NoWait
+	ヤト	にやけ						まさかマスターが、\nこんなに好みな少年だとは\n思わなかったなぁ♪
+	ヤト	にやけ						ヒメちゃんや小さい女の子たちも\nたくさんの楽園だ♪
+	ディーア	笑い2						じゃあヤト姉、\n実験の後は夜通しゲームもしよう！\n積んでたのがあるんだ!!
+	ヤト	通常						おっと、良いのかな？\nそのゲームなら大得意なんだ
+	ヤト	通常						なぜなら、\nそのゲームには必勝法があるからね♪
+Shake	ディーア		x=3				NoWait
+	ディーア	悔しい2						必勝法、だと……？
+	ヤト	通常						経験豊富なオトナだからこその、\n勝ち方というものさ♪
+	ヤト	笑い						あとでたーっぷり教えてあげよう♪
+Param	character_grayout=false
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	リディ	驚き2				0
+Wait						1
+FadeIn	black					.3
+Bgm	平和
+	リディ	驚き2						マスター、まだ起きないのー？\nお昼になっちゃったよー？
+Param	character_grayout=true
+CharacterOff
+	ディーア	にやけ2	p3
+	ヤト	にやけ	p7b
+	ディーア	にやけ2						むにゃむにゃ……えへへへ♪
+	ヤト	にやけ						ふふふふ♪\n少年がお姉さんの腕の中で……♪
+CharacterOff
+	リディ	驚き2						もう、\nまたヤトちゃんと夜ふかししてたの？
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	悔しい2						早く起きてー！
+CharacterOff
+	ディーア	にやけ2	p3
+	ヤト	通常	p7b
+	ディーア	にやけ2						うぅ……リディ……？\n太陽の光がまぶしいな……
+CharacterOff
+	リディ	悔しい2						もうお昼過ぎだもん……
+	リディ	通常2						ヤトちゃんもマスターも、\nもう少し早起きしないとダメだよ？
+CharacterOff
+	ディーア	怪しい2	p3
+	ヤト	通常	p7b
+	ディーア	怪しい2						でもなぁ……\nいつもの年末年始は異変や事件で\n休日返上で働き通し
+	ディーア	怪しい2						のんびりできるお休みは久しぶりだし\n休める時は休まないと……
+	ヤト	通常						そうそう！\n少年は魔剣王とはいえまだ幼いんだ\n休むのも仕事のうちだよ♪
+	ヤト	通常						それにウチもガラじゃないとはいえ、\n来年は十二支魔剣の当番の年だし、\nのんびりできるのは今のうち
+	ヤト	通常						もう少し、\nのんびりさせてくれよ……
+CharacterOff
+	リディ	悔しい2						うーん……\n確かにマスターたちの言う通りかも
+	リディ	通常2						マスターにとっては、\n本当に久しぶりのお休みだもんね
+	リディ	通常2						リディもせっかくの年末のお休みに\nガミガミ言いたくないし
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	通常2						ちょっとくらいの\nのんびりはリディも許してあげる！
+CharacterOff
+	ディーア	笑い2	p3
+	ヤト	笑い	p7b
+	ディーア	笑い2						本当か!?
+	ヤト	笑い						さすがリディちゃん、話が分かる！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						そうと決まれば、\nさっそく遊びまくるぞー！
+CharacterOff
+	ヒメ	嬉しい						お師匠様！\nそして我が従者の巳王よ！
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	嬉しい						時間があるならわらわと共に、\n年末の修行をしようぞ！
+CharacterOff
+	ディーア	笑い2	p3
+	ヤト	笑い	p7b
+	ディーア	笑い2						お、ヒメ良いところに！
+	ヤト	笑い						おやおや、ヒメちゃ……じゃなくて\nヒメミズチ様♪\nだったら良い修行方法がありますよ？
+	ヤト	にやけ						押しくら饅頭で、\n小さい体を押し合いへし合い……♪
+StopBgm
+CharacterOff
+	リディ	通常2						まったく、しょうがないなぁ……
+FadeOut	black					.3
+CharacterOff						0
+	リディ	絶望2				0
+Wait						1
+FadeIn	black					.3
+	リディ	絶望2						そんな風に許しちゃったリディが\n間違ってたよ
+Bgm	コメディ
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ヤト	笑い	p7b			0
+	ディーア	にやけ2	p3			0
+FadeIn	black					.3
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	にやけ2						今日は真夜中にラーメンを食べて\nいいのかっ！
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	笑い						ああ、どんどん食べよう!!
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A(夜)					0
+	ディーア	きらーん2	p3			0
+	ヤト	怪しい	p7b			0
+FadeIn	black					.3
+	ヤト	怪しい						丑三つ時に外へ出て、\n缶コーヒーを飲んでしまう……
+	ヤト	怪しい						そんな悪い経験が\n少年をオトナに変えていくんだ
+	ディーア	きらーん2						ヤト姉、かっこいい……!!
+FadeOut	black					.3
+CharacterOff						0
+Bg	草原A					0
+	ディーア	通常2	p3			0
+	ヤト	怪しい	p7b			0
+FadeIn	black					.3
+	ヤト	怪しい						キミは知っているかな？\n磨き抜かれた泥団子の輝きを……！
+	ヤト	笑い						これこそが！\nムダに手間を掛けたムダのない\nムダな趣味の時間……!!
+	ディーア	本気2						うぉおおおおおお！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	酒場_宿屋					0
+CharacterOff						0
+	リディ	怒り2				0
+Wait						2
+FadeIn	black					.3
+	リディ	怒り2						いつまで遊んでるの、二人とも!!
+CharacterOff
+	ディーア	にやけ2	p3
+	ヤト	にやけ	p7b
+	ディーア	にやけ2						ふにゃあ♪
+	ヤト	にやけ						あぁ、リディちゃん……♪
+CharacterOff
+	リディ	怒り2						完全にだらけきってるじゃない！\nネオちゃんもびっくりだよ！
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						二人とももうすぐ年越しなのに、\nなんの準備もしてないよ！
+	リディ	怒り2						大掃除に初詣に、\n魔剣王としての挨拶回りも！\nやることたくさんなの！
+CharacterOff
+	ディーア	本気2						やりたくないでござる！\nぜったいにやりたくないでござる!!
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						魔剣王でもだらけたいんだ!!
+CharacterOff
+	リディ	絶望2						完全に腑抜けきってる……！
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						や、ヤトちゃんも！\nお姉さんならマスターにビシッと\n言ってあげて!!
+CharacterOff
+	ヤト	にやけ						ふふふ♪\n悪いお姉さんは悪い男の子の\n味方なんだよ♪
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	通常						そしてお姉さんも働きたくない!!
+	ヤト	通常						十二支魔剣とか放っておいて、\n少年を愛でて年越しをしたい……!!
+	ヤト	通常						それに<dash=2>
+	ヤト	笑い						お姉さんが甘やかしたいのは\nキミもだよ？\n真面目でかわいいリディちゃん♪
+CharacterOff
+	リディ	悔しい2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	悔しい2						ふぇっ!?
+CharacterOff
+	ヤト	笑い						寒い中で頑張ってきたんだろう？\nこたつに入って、\nぬくぬく寝落ちしようじゃないか♪
+	ヤト	笑い						ちょっと悪いことをしても、\nお姉さん以外、誰も見ていないさ♪
+	ヤト	笑い						こたつの引力には誰も叶わない\nほらお姉さんと一緒に……
+StopBgm
+CharacterOff
+	リディ	絶望2						…………
+	リディ	絶望2						ダメだこの二人、\n早くなんとかしないと……
+	リディ	絶望2						こうなったら最後の手段<dash=2>
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						みなさん、お願いします！
+Bgm	緊迫
+Param	character_grayout=true
+CharacterOff
+	ディーア	にやけ2	1_2
+	ヤト	笑い	2_2_b
+Se	走る
+	兵士	通常	p2u			1
+	兵士 	通常	p8u			1
+Wait						1
+Param	character_grayout=false
+	兵士 	通常						押忍！
+	ディーア	驚き2						……え？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						な、なんだこの兵<dash=2>
+	兵士	通常						失礼します！
+	ヤト	慌て						うわぁああああああ!?
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	神社（昼）					0
+	ディーア	絶望2	p3			0
+	ヤト	慌て	p7b			0
+Wait						1
+Param	character_grayout=true
+FadeIn	black					.3
+	ディーア	絶望2						り、リディ？ ここはいったい？
+	ヤト	慌て						うぅ、寒い……\n蛇のお姉さんには凍える寒さだ……
+CharacterOff
+	リディ	怒り2						二人とも、よく来たね！
+CharacterOff
+	ディーア	怪しい2	p3
+	ヤト	慌て	p7b
+	ディーア	怪しい2						いや、連れてこられたんだけど
+Param	character_grayout=false
+CharacterOff
+	リディ	怒り2						ここは、\nガーミー十三光寺……
+	リディ	怒り2						かつて"剣閃"と呼ばれた人が、\n心を清めるために入門したという\n由緒正しい場所なんだよ
+StopBgm
+	リディ	怒り2						そして、\n今から二人にはここで<dash=2>
+Bgm	コメディ
+	集中線		エフェクト表
+	リディ	怒り2						絶対に\n<ruby=ブレイズドライブ>欲望解放</ruby>してはいけない\n禁欲生活を送ってもらう！
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望2	p3
+	ヤト	慌て	p7b
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						禁欲生活!?
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	慌て						せっかくの年末休みに!?
+CharacterOff
+	リディ	怒り2						そのとおりだよ！
+	リディ	怒り2						マスター、ヤトちゃん……\nこれでもリディは我慢してたの
+	リディ	怒り2						二人なら\nリディがガミガミ怒らなくても、\n自分で立ち直ってくれるって
+	リディ	怒り2						でも毎日毎晩、\n夜ふかししてはお昼に起きて、\n起きたら起きたでコタツムリ
+	リディ	怒り2						だからリディは心を鬼にして、\n二人の性根を叩き直すことにしたの！
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	笑い2						お願いします！ 禁欲老師!!
+CharacterOff
+	禁欲老師	通常						ほっほっほっほ！\nとても煩悩に塗れた顔をしておるな！
+	禁欲老師	通常						その煩悩、\nワシが叩き出してしんぜよう！
+CharacterOff
+	ディーア	絶望2						ちょっと待て！\nオレたちはそんなこと頼んでないぞ！
+CharacterOff
+	禁欲老師	通常						ほう？\nでは他にしたいことがあるのか？
+CharacterOff
+	ディーア	にやけ2						それはもちろん！\n正月明けるまで惰眠を貪ること！
+Se	レベルアップ
+	リディ	<Off>	1_2					魔剣王、アウトー！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						あ、アウトってなんだ!?
+CharacterOff
+	リディ	笑い2						<ruby=ブレイズドライブ>欲望解放</ruby>したマスターには\n罰として<dash=2>
+	リディ	笑い2						ハイキック！
+CharacterOff
+	ジャガーノート	通常						ふふふー♪\nマスターさんは救えませんねー
+Tween	ジャガーノート	PunchPosition	y=30				NoWait
+	ジャガーノート	通常						えいっ♪
+Se	ポップイン
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	絶望2				0
+FadeIn	white					.2
+Shake	ディーア		x=1				NoWait
+	ディーア	絶望2						見えっ!?
+CharacterOff
+	ジャガーノート	通常						修行がんばってくださーい♪
+Se	走る
+CharacterOff	ジャガーノート					1
+Wait						1
+Param	character_grayout=false
+CharacterOff
+	ディーア	にやけ2						あんまり痛くなかったし\nなんならちょっと眼福だった……
+	ディーア	怪しい2						でもこれくらいで\n煩悩が消失するわけが<dash=2>
+StopBgm
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ディーア	怪しい2						って、あれ？
+Bgm	バトル
+Se	闇1
+CharacterOff
+	煩悩A	通常	2_3_m			.3		シュチニクリーン！
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						なんか出てきた!?
+CharacterOff
+	禁欲老師	通常						それは我らが聖なる鐘の音で\n具現化された煩悩……
+	禁欲老師	通常						さあ魔剣王よ！\n自分の煩悩を自分で叩き直すのじゃ!!
+CharacterOff
+	ディーア	絶望2	p3
+	ヤト	慌て	p7b
+	二人	<Off>						なんだって!?
+If	isdebug==true
+CharacterOff
+Jump	*E_1172_02
+EndIf
+EndScenario
+
+# E_1172_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	神社（昼）					0
+Param	character_grayout=false
+	煩悩A	通常	2_3_m			0
+FadeIn	black					1
+	煩悩A	通常						ノン、ビリ……
+Se	フォーン
+CharacterOff	煩悩A					1
+Wait						1
+CharacterOff
+	ディーア	目閉じ2						煩悩は去った……
+	ディーア	怪しい2						痛くはないけどなんだろう、\n心がぽっかりとした気がするな
+	ディーア	目閉じ2						むしろ、\n殴らせてくれてありがとうって\n感謝の気持ちすら湧いてくる
+CharacterOff
+	ヤト	慌て						しっかりするんだ、少年!!
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	慌て						スッキリしすぎて、\nいい子に戻ろうとしているぞ!?
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						はっ……！\nお、オレとしたことが……！
+CharacterOff
+	禁欲老師	通常						ほっほっほっ！\nこれぞ我がガーミー十三光寺に\n伝わる伝統のハイキック！
+	禁欲老師	通常						鋭角なハイキックが\n堕落した魂を震わし、\n鐘の音が煩悩を具現化するのじゃ
+	禁欲老師	通常						文字通り、\n魂までスッキリした心地じゃろう？
+CharacterOff
+	ディーア	悔しい2						これが\n<ruby=ブレイズドライブ>欲望解放</ruby>してはいけない\n禁欲生活の恐ろしさか！
+	ディーア	悔しい2						このまま煩悩を殴り続けたら、\n老師を超えて賢者に至ってしまうぞ
+CharacterOff
+	リディ	怒り2						でもマスターはそのくらい、\nちゃんと修行したほうがいいと思う！
+	リディ	怒り2						<size=10>ずっとリディ以外の子と遊んでたし</ruby>
+CharacterOff
+	ディーア	怪しい2						今、なにか言ったか？
+CharacterOff
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						な、なんでもない！
+	リディ	通常2						ということで、わかったでしょ？
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	通常2						禁欲老師が良いっていうまで、\nマスターとヤトちゃんは山ごもり！
+	リディ	通常2						自分の煩悩くらい、\nコントロールできるようになってね！
+	リディ	通常2						二人が早く社会復帰できるように、\nリディや魔剣のみんなも協力するから
+CharacterOff
+	ディーア	怪しい2						それっていつくらいまで？
+CharacterOff
+	禁欲老師	通常						そうじゃのう……\n修行の進捗にも依るじゃろうが……
+	禁欲老師	通常						新年の三が日が終わる頃には、\n下山できると思うぞ
+CharacterOff
+	ヤト	慌て
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	慌て						お休みが終わるじゃないかっ!!
+CharacterOff
+	リディ	怒り2						でもダメダメな魔剣王と、\nダラダラな十二支で年越しするより\nぜんぜん良いと思う
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2	p3
+	ヤト	慌て	p7b
+Shake	ディーア		x=2				NoWait
+	ディーア	悔しい2						せ、正論すぎる……!!
+	ディーア	悔しい2						遊びたいだけなのは本音だから\n反論できない……!!
+	ディーア	本気2						でも、それでも……！
+	ヤト	慌て						お姉さんたちは遊びたい……!!
+	ヤト	慌て						悪いことしたいのに……!!
+Se	レベルアップ
+	リディ	<Off>	1_2					魔剣王、巳王、アウトー！
+Param	character_grayout=false
+	二人	<Off>						えっ……!?
+CharacterOff
+	リディ	怒り2						だから\n<ruby=ブレイズドライブ>欲望解放</ruby>はダメって言ったじゃん
+	リディ	怒り2						じゃあ次は\nリディからハイキックいくよー？
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望2	p3
+	ヤト	慌て	p7b
+	ディーア	絶望2						ちょ、ちょっと待て！
+CharacterOff
+	リディ	笑い2						待ちません！
+	リディ	笑い2						えいっ！
+Param	character_grayout=false
+Se	ポップイン
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	絶望2	p3			0
+	ヤト	慌て	p7b			0
+FadeIn	white					.2
+Param	character_grayout=true
+Shake	ヤト		x=1				NoWait
+	ヤト	慌て						あうっ!?
+	ディーア	絶望2						今度はけっこう痛いっ!?
+CharacterOff
+	禁欲老師	通常						こまったのぅ、\nこれでは先は長そうじゃ……
+CharacterOff
+	ディーア	悔しい2	p3
+	ヤト	怪しい	p7b
+	ディーア	悔しい2						くっ……！
+	ディーア	悔しい2						ヤト姉……
+	ヤト	怪しい						お姉さんも同じ気持ちだよ、\n少年……
+	ディーア	悔しい2						こんなところにいられるか
+	ヤト	怪しい						お姉さんたちは、\n必ず脱出してみせる……!!
+	ディーア	悔しい2						そしてのんびり年末を<dash=2>
+Se	レベルアップ
+	リディ	<Off>	1_2					魔剣王、巳王!! またアウトー！
+Param	character_grayout=false
+	ディーア	絶望2
+	二人	<Off>						またかーっ!?
+FadeOut	white					2
+CharacterOff						0
+Bg	神社（昼）					0
+	イベントロゴ1172		エフェクト表			3
+FadeIn	white					1
+Wait						3
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1172_03
+EndIf
+EndScenario
+
+# E_1172_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	神社（昼）					0
+	リディ	通常2				0
+FadeIn	black					1
+	リディ	通常2						それじゃあ、\nここからが修行の本番だよ？
+	リディ	通常2						お寺での禁欲生活には、\n欲望を解放するようなトラップが\nたくさん用意されています
+	リディ	笑い2						二人はどんなトラップがあっても、\n欲望を解放しないで過ごすこと
+	リディ	通常2						そうすればどんな煩悩にも負けない\n精神が手に入るはず！
+CharacterOff
+	ディーア	悔しい2						はーい……
+CharacterOff
+	兵士	通常						まずお二人には、\nここで精神統一をしていただきます！
+	兵士	通常						修行といえば定番ですね！
+CharacterOff
+	リディ	笑い2						もちろん、\n精神を乱すための仕掛けをしてるから\n我慢するように！
+CharacterOff
+	ディーア	悔しい2	p3
+	ヤト	怪しい	p7b
+	ディーア	悔しい2						はーい……
+	ディーア	悔しい2						まったく気乗りがしない……\n年末のご馳走が、お休みが修行に……
+	ヤト	通常						わかるよ、少年……
+	ヤト	通常						だが、だからこそ！\n今は真面目に過ごすべきだと思うんだ
+	ディーア	驚き2						ヤト姉……？
+	ヤト	通常						リディちゃんやあのおじいさんに、\nお姉さんたちが真面目になったんだと\n認めてもらえば目標達成
+	ヤト	通常						晴れて自由の身なんだ
+	ヤト	怪しい						だから未来の自由のために、\n今を耐え忍ぶ
+	ヤト	怪しい						少年、帰ったら一緒に……\nホットプレートいっぱいの\n焼きそばを作ろう♪
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	笑い						それから夜通しカード大会だ
+	ディーア	通常2						ヤト姉……！\nさすが少年の心をわかってる……！
+	ディーア	笑い2						よし、オレも決めたぞ！\n少しの我慢と引き換えに自由になる！
+	ディーア	目閉じ2						だからこそ、精神統一……!!
+Tween	ディーア	MoveBy	y=-50				NoWait
+	ディーア	目閉じ2						ふぅ……
+Param	character_grayout=false
+Tween	ヤト	MoveBy	y=-50				NoWait
+	ヤト	目閉じ						……………………
+StopBgm						2
+Bg	黒背景					1
+Wait						2
+	ディーア	目閉じ2						よし……\nだんだん集中できてきた……
+CharacterOff	ヤト					1
+Wait						2
+	ディーア	目閉じ2						なにも考えるな……無心に……
+	オーラ桃		エフェクト表			1
+	ディーア	目閉じ2						っ……！
+	ディーア	悔しい2						なんだ、\nこの華やかな良い香りは……？
+Se	回想
+FadeOut	black					.3
+CharacterOff						0
+	ヤト	拡大目閉じ	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	black					.3
+Bgm	神秘
+	ヤト	拡大目閉じ						ふぅ……ふぅ……
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	ディーア	悔しい2				0
+FadeIn	black					.3
+	ディーア	悔しい2						や、ヤト姉……!?\nこれはヤト姉の香りなのか？
+	ディーア	悔しい2						いつも一緒にはしゃいでるから\n気づけなかったけど
+	ディーア	にやけ2						ヤトにも、\nこんなに女の子らしい一面が\nあったなんて……
+Shake	ディーア		x=2				NoWait
+	ディーア	悔しい2						いや、だめだ……!!
+	ディーア	目閉じ2						ヤトのことばかり考えていたら、\nまた<ruby=ブレイズドライブ>欲望解放</ruby>してしまう！
+	ディーア	怪しい2						…………ちらっ
+FadeOut	white					.3
+CharacterOff						0
+	ヤト	拡大目閉じ	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	ヤト	拡大目閉じ	エフェクト表					はぁ、はぁ……
+CharacterOff
+	ディーア	怪しい2						改めて見ると、\nこんなお姉さんにくっつかれていて\nよく理性が保てたな……！
+	ディーア	怪しい2						気づいたら、\nもう無視できない……！
+FadeOut	white					2
+Bg	白背景					0
+CharacterOff						0
+	ヤト	拡大胸	エフェクト表			0
+	          
+FadeIn	white					1
+	ディーア	<Off>						この大きいのも、
+FadeOut	white					1
+Bg	白背景					0
+CharacterOff						0
+	ヤト	拡大足	エフェクト表			0
+	          
+FadeIn	white					1
+	ディーア	<Off>						この大胆なスリットも、
+FadeOut	white					1
+Bg	神社（昼）					0
+CharacterOff						0
+	ディーア	にやけ2				0
+FadeIn	white					2
+Tween	ディーア	PunchPosition	y=30				NoWait
+StopBgm
+	ディーア	にやけ2						すぐ傍にこんな格好で座られて、\n集中できるかーっ!!
+Bgm	コメディ
+Se	レベルアップ
+Param	character_grayout=true
+	リディ	<Off>	1_2					魔剣王、アウトー！
+CharacterOff
+	ラーゼ	通常						な、なんでラーゼがぁ……！
+Tween	ラーゼ	PunchPosition	y=30				NoWait
+	ラーゼ	通常						えっと、えっと、ハイキック……\nえ、えいっ……！
+CharacterOff
+	ディーア	絶望2						するどい一撃っ……！
+Param	character_grayout=false
+Se	ポップイン
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	目閉じ2				0
+FadeIn	white					.2
+Param	character_grayout=true
+Shake	ディーア		x=1				NoWait
+	ディーア	目閉じ2						ふぅ……\n恐ろしい罠だった……
+CharacterOff
+	リディ	絶望2						リディたち、\nなんにもしてないんだけど
+	リディ	絶望2						蒲焼のいい匂いとか、\n流そうと準備していたのに……
+CharacterOff
+	禁欲老師	通常						げに恐ろしきは、\n魔剣王の煩悩なのか……
+CharacterOff
+	ディーア	本気2						仕方ないだろ！\n隣でヤト姉があんなに息を荒げたら\n気になるに決まってるじゃないか！
+CharacterOff
+	ヤト	慌て						すまない少年……\nずっとだらけた座り方してたから\n正座に耐性がないんだ……
+	ヤト	にやけ						でも少年が\nそんなにお姉さんのことを\n気にしてくれるなんて♪
+Shake	ヤト		x=2				NoWait
+	ヤト	にやけ						ああ、もう……悪い子だなぁ♪
+Se	レベルアップ
+Param	character_grayout=true
+	リディ	<Off>	1_2					巳王、アウトー！
+CharacterOff
+	ラーゼ	通常						え、えいっ……♪
+Param	character_grayout=false
+Se	ポップイン
+FadeOut	white					.2
+CharacterOff						0
+	ヤト	にやけ				0
+FadeIn	white					.2
+Param	character_grayout=true
+Shake	ヤト		x=1				NoWait
+	ヤト	にやけ						ふっ……悔いはない！
+CharacterOff
+	リディ
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						二人とも反省しなさい!!
+CharacterOff
+	禁欲老師	通常						では罰として、\n再び煩悩と戦ってもらおう！
+StopBgm
+	禁欲老師	通常						煩悩を爆発させて、\nスッキリするんじゃ……!!
+Bgm	バトル
+CharacterOff
+Se	闇1
+	煩悩A	通常	2_5_m			.3		チッチャイコ!!
+Se	闇1
+	煩悩B	通常	4_5_m			.3		デッカイ！ スリット!!
+CharacterOff
+	ディーア	悔しい2						くぅうううう！
+	ディーア	本気2						煩悩退散!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1172_04
+EndIf
+EndScenario
+
+# E_1172_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋					0
+	ヤト	怪しい	p7b			0
+	ディーア	悔しい2	p3			0
+FadeIn	black					1
+	ディーア	悔しい2						やっと、\n今日の修行が終わったけど
+	ディーア	悔しい2						こう何回も煩悩が解放されたら、\nさすがに疲れてくるな……
+	ディーア	怪しい2						しかも鐘の音の力だっけ？\nかなり判定が厳しいみたいだし
+	ヤト	怪しい						それだけ\n相手が本気ということだろうねえ
+	ディーア	怪しい2						このままだと本当に、\n正月明けまで禁欲生活に……？
+	ヤト	怪しい						ふむふむ……
+	ヤト	怪しい						少年、\nお姉さんに悪い考えがある
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						本当か!?
+	ヤト	通常						逆に考えるんだ、\nここにいて良いって考えるんだ
+	ディーア	怪しい2						ここに、いる……？
+	ディーア	驚き2						いやいや！\nでもこんな場所じゃ楽しくなんて
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	怪しい						いいや、\nそれは間違っているよ少年!!
+	ヤト	笑い						不自由な中でも自由に遊ぶ！\nそれこそオトナの遊び方というもの♪
+	ヤト	通常						例えば……知ってるかな、少年？
+	ヤト	通常						食べられるドングリと、\nそうじゃないドングリの見分け方を
+	ヤト	通常						あるいは、\n寒空の下で楽しむ焚き火の温かさを
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	笑い						またあるいは、\nこの建物中のドリンクを混ぜ合わせて\n新たな味覚を楽しむでも良い!!
+	ヤト	笑い						遊ばない時も、\n眠くなるまで布団に隠れて\nお話をしようじゃないか
+Shake	ディーア		x=2				NoWait
+	ディーア	驚き2						そ、そんな楽しみ方が……!!
+	ヤト	怪しい						ダメなのは欲望を解放することで、\nほどよく遊ぶことは禁じられていない
+	ヤト	怪しい						それに悪いことは、\nルールの隙間を縫ってこそだからね
+	ヤト	笑い						なにより、\nキミと一緒ならどこでも楽園さ♪
+	ディーア	笑い2						それはいいアイデアだな！
+	ディーア	笑い2						リディだって、\n正月明けまでオレたちが粘れば\n根負けしてくれるはず！
+	ディーア	笑い2						<ruby=ブレイズドライブ>欲望解放</ruby>しないよう\n工夫して楽しむんだな！
+	ヤト	笑い						その通り♪\nキミは見込みのある悪い子だねえ♪
+	ヤト	笑い						この試練を経て、\nさらにひと皮むけちゃいそうだ♪
+	ヤト	怪しい						さてそうと決まれば、\nなにか楽しいものでも見つけようか
+	ヤト	怪しい						机の引き出しには……
+StopBgm
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	慌て						こ、これは<dash=2>
+Bgm	コメディ
+Param	character_grayout=false
+FadeOut	white					.2
+CharacterOff						0
+	鍛冶医クランベリー	パンツ				0
+	          	<Off>	1_2			0
+Param	character_grayout=false
+FadeIn	white					.2
+	ヤト	<Off>	1_2					パ、パンツ!?
+CharacterOff
+	ディーア	怪しい2						へぇー\n意外と大胆なの履いて<dash=2>
+CharacterOff
+	ヤト	慌て
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	慌て						お、お姉さんのじゃないぞ!?
+	ヤト	慌て						これ履いたら、\nスリットから見え……じゃなくて！
+	ヤト	慌て						きっと煩悩を\n解放させようとする仕込みだ！
+CharacterOff
+	ディーア	目閉じ2						ふっ……\nだったらリディも甘いな……！
+	ディーア	本気2						これくらい見慣れたもの！\nオレの煩悩はこの程度で<dash=2>
+	集中線		エフェクト表
+	ディーア	にやけ2						あふれるぞっ!!
+Se	レベルアップ
+Param	character_grayout=true
+	リディ	<Off>	1_2					魔剣王、アウトー！
+CharacterOff
+	フレイムタン	通常2						ふれれがハイキックだよー！
+Tween	フレイムタン	PunchPosition	y=30				NoWait
+	フレイムタン	通常2						えいっ★
+Param	character_grayout=false
+Se	ポップイン
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	にやけ2				0
+FadeIn	white					.2
+Param	character_grayout=true
+Shake	ディーア		x=1				NoWait
+	ディーア	にやけ2						カワイイっ!!
+Se	レベルアップ
+Param	character_grayout=true
+	リディ	<Off>	1_2					魔剣王、アウトー！
+	ディーア	絶望2						えっ……!?
+CharacterOff
+	フレイムタン	通常2						もーいっかいっ★
+Param	character_grayout=false
+Se	ポップイン
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	絶望2				0
+FadeIn	white					.2
+Param	character_grayout=true
+Shake	ディーア		x=1				NoWait
+	ディーア	絶望2						無限ループっ!!
+CharacterOff
+	フレイムタン	通常2						またねー★
+CharacterOff
+	ディーア	怪しい2						そういえば、\nまだ煩悩が表に出てこないな……
+CharacterOff
+	ヤト	目閉じ						アウトの数が多いから、\nまとめて出すんじゃないかな？
+	ヤト	目閉じ						ところで、\nキミの方の机も調べたほうがいい\n仕込まれているかもしれない
+CharacterOff
+	ディーア	怪しい2						それもそうだな\nえっと……
+	ディーア	驚き2						こ、これは……！
+Se	ポップイン
+FadeOut	white					.2
+CharacterOff						0
+	哺乳瓶アイテム	通常	エフェクト表			0
+Param	character_grayout=false
+FadeIn	white					.2
+	ディーア	<Off>	1_2					魔力たっぷりミルク!!
+CharacterOff
+	ヤト	通常						ミルク？\nそれくらいで<ruby=ブレイズドライブ>欲望解放</ruby>は
+CharacterOff
+	ディーア	本気2
+	集中線		エフェクト表
+	ディーア	本気2						ブレイズドライブゥウウウウ!!!!
+Se	レベルアップ
+Param	character_grayout=true
+	リディ	<Off>	1_2					魔剣王、アウトー！
+CharacterOff
+	ヤト	慌て
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	慌て						ええっ!?
+Se	走る
+CharacterOff
+	グラセ	通常				1		ぐらせだよぉー★
+Tween	グラセ	PunchPosition	y=30				NoWait
+	グラセ	通常						えいっ★
+Param	character_grayout=false
+Se	ポップイン
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	絶望2				0
+FadeIn	white					.2
+Param	character_grayout=true
+Shake	ディーア		x=1				NoWait
+	ディーア	絶望2						ミルキィっ!?
+	ディーア	悔しい2						哺乳瓶を見た瞬間に\n<ruby=ブレイズドライブ>欲望解放</ruby>ってしまった!!
+	ディーア	悔しい2						だけど\nこの完璧なフォルムを見ると、\n魂が叫んでしまうんだ
+	ディーア	悔しい2						ママがほしいと……
+CharacterOff
+	ヤト	目閉じ						そ、それは業が深いね……
+	ヤト	にやけ						でもキミがそういうのを望むなら、\nお姉さんが付き合うのも<dash=2>
+Se	レベルアップ
+Param	character_grayout=true
+	リディ	<Off>	1_2					巳王、アウトー！
+Se	走る
+CharacterOff
+	アイスブランド	通常				1		このボクが蹴ってあげるよ！
+Tween	アイスブランド	PunchPosition	y=30				NoWait
+	アイスブランド	通常						えいっ★
+Param	character_grayout=false
+Se	ポップイン
+FadeOut	white					.2
+CharacterOff						0
+	ヤト	にやけ				0
+FadeIn	white					.2
+Param	character_grayout=true
+Shake	ヤト		x=1				NoWait
+	ヤト	にやけ						かわいーっ！
+CharacterOff
+	アイスブランド	通常						またねっ♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	目閉じ2	p3
+	ヤト	怪しい	p7b
+	ディーア	目閉じ2						このミルクは、\n後のために取っておくとしよう
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	怪しい2						えっと、他には……
+	ディーア	悔しい2						…………っ！
+Tween	ヤト	MoveBy	x=-50				NoWait
+	ヤト	通常						どうしたんだい、少ね<dash=2>
+	ディーア	悔しい2						だ、ダメだ……！\nヤト姉に見せたら……！
+Tween	ヤト	MoveBy	x=-100				NoWait
+	ヤト	通常						なにを隠すことがあるんだい？\nお姉さんにも見せなよ♪
+StopBgm
+	ディーア	汗2						っ!!
+Param	character_grayout=false
+FadeOut	white					2
+CharacterOff						0
+	ヤト	拡大胸	エフェクト表			0
+	          
+FadeIn	white					1
+Se	ポップイン
+Bgm	神秘
+	ディーア	<Off>						ヤト姉が無邪気にくっついてきて\n背中に柔らかい感触が……！
+	ディーア	<Off>						しかもオレの手には、\nお姉さんのウ＝ス異本が……！
+	ディーア	<Off>						こんなの我慢しても
+	ディーア	<Off>						オレは、オレは……!!
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	にやけ2				0
+StopBgm
+FadeIn	white					.3
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	にやけ2						お姉さんと悪いことしたくなる!!
+Se	レベルアップ
+Param	character_grayout=true
+	リディ	<Off>	1_2					魔剣王、アウトー！
+Bgm	コメディ
+CharacterOff
+	ヒメ	通常						お師匠様、いっくよー！
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	通常						ちぇいやー♪
+Param	character_grayout=false
+Se	ポップイン
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	絶望2				0
+FadeIn	white					.2
+Param	character_grayout=true
+Shake	ディーア		x=1				NoWait
+	ディーア	絶望2						ムッ!!
+CharacterOff
+	禁欲老師	通常						いくらなんでも、\n欲望に弱すぎるぞ、魔剣王!!
+	禁欲老師	通常						ぜんぜん禁欲できてないなんて、\n喝じゃっ!!
+	禁欲老師	通常						溜まりに溜まった煩悩は、\n自分で退治せいっ！
+CharacterOff
+	ディーア	悔しい2						またかーっ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1172_05
+EndIf
+EndScenario
+
+# E_1172_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	神社（昼）					0
+	リディ	怒り2				0
+FadeIn	black					1
+	リディ	怒り2						その後も、\nマスターとヤトちゃんは……
+FadeOut	black					.3
+CharacterOff						0
+Bg	川A					0
+	禁欲老師	通常				0
+Wait						1
+FadeIn	black					.3
+	禁欲老師	通常						滝行で煩悩を排除するんじゃ!!
+CharacterOff
+	ディーア	にやけ2	p3
+	ヤト	にやけ	p7b
+	ディーア	にやけ2						濡れ透けのお姉さん♪
+	ヤト	にやけ						濡れ透けの少年♪
+Se	レベルアップ
+	リディ	<Off>	1_2					二人とも、アウトー!!
+FadeOut	black					.3
+CharacterOff						0
+Bg	洞窟B					0
+	禁欲老師	通常				0
+Wait						1
+FadeIn	black					.3
+	禁欲老師	通常						今度は火の近くで精神統一じゃ!!
+CharacterOff
+	ディーア	にやけ2	p3
+	ヤト	にやけ	p7b
+	ディーア	にやけ2						汗が深い谷の底に……！
+	ヤト	にやけ						汗まみれでかっこいい少年も格別♪
+Se	レベルアップ
+	リディ	<Off>	1_2					二人とも、アウトー!!
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	怒り2				0
+Wait						1
+FadeIn	black					.3
+	ディーア	怒り2						そろそろ\nハイキックにも耐性がついたぞ!!
+	ディーア	本気2						さあ！ どんと来い!!
+Se	レベルアップ
+	リディ	<Off>	1_2					魔剣王、超メガキャノンー!!
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						なにそれっ!?
+CharacterOff
+	妖刀國紅	極弐						今日はこっち系でござるよー
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						ちょっと待って!?
+FadeOut	black					.3
+CharacterOff						0
+Bg	神社（昼）					0
+	リディ	怒り2				0
+Wait						1
+FadeIn	black					.3
+	リディ	怒り2						語るも涙の修行を<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+Bg	カジノ					0
+	鬼丸	通常				0
+Wait						1
+FadeIn	black					.3
+	鬼丸	通常						おいっ！\n冷蔵庫のケーキを食べたのは誰だ!!
+Tween	鬼丸	PunchPosition	y=30				NoWait
+	鬼丸	通常						お前かっ、主!!
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						オレじゃないですっ！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						ぜったいにオレじゃないです!!
+CharacterOff
+	鬼丸	通常						だが、\n主がやったと見ていた者がいる!!
+	鬼丸	通常						証人、出てこい!!
+CharacterOff
+	キノコリオン	通常
+Tween	キノコリオン	PunchPosition	y=30				NoWait
+	キノコリオン	通常						ノコノコノ!!
+CharacterOff
+	ディーア	絶望2						ノコしか喋れないじゃないかっ!?
+CharacterOff
+	鬼丸	通常						ふむふむ！\nノコノコノ……つまりマケンオウだ!!
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						そんなぁ!?
+FadeOut	black					.3
+CharacterOff						0
+Bg	神社（昼）					0
+	リディ	絶望2				0
+Wait						1
+FadeIn	black					.3
+	リディ	絶望2						ぜんぜん禁欲は進まなかったとさ
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	神社（昼）					0
+	ディーア	絶望2				0
+Wait						1
+FadeIn	black					.3
+Bgm	絶望
+	ディーア	絶望2						はぁ、はぁ……\nなんて大変な年末年始なんだ……
+	ディーア	絶望2						このままじゃ、\n本当になにもしないで年が終わるぞ
+	ディーア	絶望2						ヤト姉とも悪いことしたいのに
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+	ヤト	笑い				0
+FadeIn	white					.3
+	ヤト	笑い						こっそり、\n夜中におやつを食べに行こう<dash=2>
+CharacterOff
+	カシウス	通常						二人とも、\n悪いことしちゃってるの？
+	カシウス	通常						カシウスにも、\n悪いこと教えてー？
+CharacterOff
+	ヤト	にやけ
+Tween	ヤト	PunchPosition	y=30				NoWait
+	ヤト	にやけ						教えちゃうーっ!!
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	神社（昼）					0
+	ディーア	絶望2				0
+FadeIn	white					.3
+	ディーア	絶望2						とか、\nいいところで妨害が入って……
+	ディーア	絶望2						もう疲れて、疲れて……
+	欲望くん	通常	1_3			1
+	欲望くん	通常						オイオイ、しっかりしろよ！\nもう修行なんてやめちゃえばいい!!
+	ディーア	驚き2						お前は、オレの中の欲望！
+	理性くん	通常	3_3			1
+	理性くん	通常						そんなことを言うなよ！\nせっかく真人間になれるチャンスだ!!
+	ディーア	驚き2						オレの中の理性！\nお前はなんか久しぶりだな!?
+	欲望くん	通常						なあ、もう禁欲なんていいだろ？
+	欲望くん	通常						ヤト姉とこっそり宿を脱出して、\n二人で悪いことをしよう！
+	理性くん	通常						そんなことをしたら、\n年が明けても\nリディに許してもらえない!!
+	理性くん	通常						それにリディが、\n君の為を思って言っていることは\n十分わかっているはずだ！
+	ディーア	目閉じ2						そうだ……\nオレは休みの間に遊びたい……
+	ディーア	目閉じ2						でも魔剣王として、\nだらしない自分でいてもダメ……
+Tween	欲望くん	PunchPosition	y=30				NoWait
+	欲望くん	通常						遊び放題の年末年始!!
+Tween	理性くん	PunchPosition	y=30				NoWait
+	理性くん	通常						真面目にまともに年越し!!
+StopBgm
+Shake	ディーア		x=2				NoWait
+	ディーア	絶望2						お、オレはどうすれば……!!
+Bgm	凱旋
+CharacterOff
+	ヤト	笑い						そんなの、\nやりたいようにやればいいのさ♪
+CharacterOff
+	ディーア	驚き2						え……？
+CharacterOff
+	ヤト	通常						王だなんだと言っても、\nキミはまだまだ子どもなんだよ
+	ヤト	通常						周りの声を聞くことも大事だけど、\n自分の心に素直にならなきゃ
+	ヤト	通常						遊びたいならその分遊び
+	ヤト	通常						真面目にやりたくなったら、\n遊んだ分真面目になればいいの
+	ヤト	通常						どっちかだけを\nしなければならないなんてルール、\nこの魔界にはないんだから♪
+	ヤト	笑い						オトナなのに、\nこんな自由にしてる悪いお姉さんも\nここにいるんだからね♪
+	ヤト	通常						それで失敗しちゃっても
+	ヤト	笑い						少なくともお姉さんは、\n悪い子なキミの味方でいるよ
+CharacterOff
+	ディーア	通常2						……そうだな
+	ディーア	通常2						オレはたくさん休んで遊びたくて
+	ディーア	通常2						同じくらいに、\nみんなの王としてもちゃんとしたい
+	ディーア	通常2						正反対な気持ちだけど、\nどっちもオレの本当の心なんだ
+	ディーア	怒り2						そして\n我慢してきたオレが今選ぶのは……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						遊びたいっ!!
+Param	character_grayout=false
+StopBgm
+Se	チャージ
+	オーラ青		エフェクト表
+	ディーア	汗2						…………あれ？
+Bgm	コメディ
+Se	闇1
+CharacterOff	ディーア
+	煩悩A	通常	2_5_m					アソベアソベ！
+Se	闇1
+	煩悩B	通常	3_5_m					イチャイチャ！
+Se	闇1
+	煩悩C	通常	4_5_m					デッカイ！ チッサイ！ ミンナイイ!!
+CharacterOff	煩悩A
+CharacterOff	煩悩B
+CharacterOff	煩悩C
+	ディーア	驚き2						煩悩がいっぱい出てきた!?
+CharacterOff	ディーア
+	ヤト	笑い						ずっと抑え込まれていた煩悩が\n溢れちゃったんだねぇ
+CharacterOff	ディーア
+	禁欲老師	通常						こ、こらーっ！\n禁欲生活はまだまだ続<dash=2>
+Tween	禁欲老師	PunchPosition	y=30				NoWait
+	禁欲老師	通常						ワシも！\nたまにはステーキ食べたい!!
+	禁欲老師	通常						孫と遊びたいっ!!
+	禁欲老師	通常						朝から酒を飲んで、\n酔っ払ってもいいじゃないかっ!!
+CharacterOff	禁欲老師
+	ディーア	驚き2						しかも老師たちにも影響してる!?
+CharacterOff	ディーア
+	ヤト	笑い						はははは！\nそりゃあ人間だから欲もあるよ！
+	ヤト	笑い						堕落のしすぎもよくないが\n我慢のしすぎもよいはずがない……
+	ヤト	怪しい						適度に遊び、適度に真面目になるのが\n健康的な生活というものさ！
+	ヤト	怪しい						悪いことも含めてね♪
+Se	ポップイン
+	煩悩A	通常	1_5_m
+Wait						1
+Se	ポップイン
+	煩悩B	通常	5_5_m
+Wait						1
+CharacterOff
+	リディ	怒り2						って、言ってる傍から\nヤトちゃんからも煩悩出てるっ！
+	リディ	怒り2						良いことを\n言ったつもりにならないで!!
+StopBgm
+CharacterOff
+	ディーア	汗2						オレは逆に煩悩が抜けたから、\nすごくスッキリしちゃったんだけど
+CharacterOff
+	ヤト	通常						それで悪い子は、\nいったいどうするつもりなんだい？
+Bgm	勇者バトル
+CharacterOff
+	ディーア	通常2						もちろん煩悩を退治する！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						このまま煩悩が増え続けたら、\n魔界全体が寝正月だ！
+	ディーア	笑い2						凧揚げ大会もおせち料理も、\n新年の初売りもぜんぶ中止になるのは\n誰も望んでいない！
+	ディーア	笑い2						王として、\n正月を楽しみたい魔剣使いとして\n役目を果たすさ！
+CharacterOff
+	ヤト	笑い						悪い子なのに良い子でも居たいなんて\n本当に悪い子だね♪
+	ヤト	通常						じゃあ悪いお姉さんも、\nキミの味方になってあげるよ、\nマスター♪
+CharacterOff
+	リディ	通常2						もー、仕方ないなぁ
+	リディ	笑い2						でも、マスターらしい！
+CharacterOff
+	ディーア	通常2						煩悩を倒して、\n無事に新年を迎えるぞっ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1172_06
+EndIf
+EndScenario
+
+# E_1172_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	神社（昼）					0
+	ディーア	笑い2				0
+FadeIn	black					1
+	ディーア	笑い2						寺の中の煩悩は、\nあらかた倒せたはずだな
+	ディーア	通常2						これで禁欲老師たちも<dash=2>
+CharacterOff
+	禁欲老師	通常						ま、魔剣王……!!
+CharacterOff
+	ディーア	絶望2						まずい、\nこのままだともっと大変な修行が!?
+CharacterOff
+	禁欲老師	通常						おみそれいたしましたーっ!!
+CharacterOff
+	ディーア	驚き2						えっ!?
+CharacterOff
+	禁欲老師	通常						ワシは修行が足りない!!
+	禁欲老師	通常						心に眠っている煩悩に、\nあなたのおかげで気づかされました！
+	禁欲老師	通常						そして煩悩があってこその人だと\n気づきました!!
+	禁欲老師	通常						さすがは魔剣王様！\nそして十二支魔剣の巳王様っ!!
+	禁欲老師	通常						今年も安泰じゃ！ 安泰じゃ!!
+CharacterOff
+	ディーア	きらーん2						それじゃあ禁欲生活も！
+CharacterOff
+	ヤト	笑い						おしまいだね♪
+CharacterOff
+	ディーア	笑い2						これで好きなように\nだらだらとお正月を過ごせ<dash=2>
+CharacterOff
+	禁欲老師	通常						そんな魔剣王様なら、\n人々の煩悩も退治してくれるはず！
+CharacterOff
+	ディーア	絶望2						えっ……!?
+CharacterOff
+	禁欲老師	通常						先程のように、\n年末には煩悩があふれ出して\n悪さをするのですっ！
+	禁欲老師	通常						鐘を鳴らしながら、\nそやつらを退治してくださいませ！
+	禁欲老師	通常						おねがいしますっ！
+CharacterOff
+	ディーア	汗2						けどなぁ……\nオレもたくさん修行した後だし……
+	ディーア	絶望2						でももう断りづらい空気だ……
+CharacterOff
+	リディ	通常2						マスター？
+	リディ	笑い2						遊ぶのも、お仕事も、\nマスターには大切なんでしょ？
+	リディ	笑い2						だったら\nダラダラしすぎないようにお仕事も\nちゃんとやらないと♪
+CharacterOff
+	ディーア	悔しい2						こうなったら……!!
+	ディーア	本気2						たくさん鐘を鳴らしてやるっ！\n煩悩退散っ!!
+CharacterOff
+	ヤト	笑い						ふふ♪\nまったく詰めが甘い少年だね♪
+	ヤト	笑い						悪いことを\n教えるかいがありそうだ♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1172_07
+EndIf
+EndScenario
+
+# E_1172_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	和の国の町
+Bg	神社（昼）					0
+	ヤト	通常				2
+FadeIn	black					1
+	ヤト	通常						ふわぁ……
+CharacterOff
+	ディーア	通常2						あけましておめでとう、ヤト姉
+CharacterOff
+	ヤト	怪しい						あけましておめでとう、少年\n悪いお姉さんには、\nこういう朝の初詣はキツイなぁ
+CharacterOff
+	ディーア	汗2						そんなこと言って、\n年越しカウントダウンをした後も\nみんなで遊んでたからだろう？
+CharacterOff
+	ヤト	通常						ふふ♪\n起きれる時に起きておくことが\n悪いお姉さんのやり方なのさ♪
+	ヤト	通常						寝落ちしたキミのことも、\nたーくさん愛でてあげられたし♪
+CharacterOff
+	ディーア	驚き2						あ、あれは……！
+	ディーア	怪しい2						オレだって、\n普段はそんなに寝落ちしないんだぞ？
+CharacterOff
+	ヤト	通常						ならお姉さんのお膝の上で、\n安心してくれたっていう証明かな？
+	ヤト	笑い						意地を張るところもカワイイよ♪
+	ヤト	笑い						食べちゃいたいくらい！
+StopBgm
+CharacterOff
+	ディーア	怪しい2						ふーん……意地を張るとこ、ね
+Bgm	凱旋
+	ディーア	怪しい2						そういうヤトだって、\nオレ、実は知っているんだぞ？
+	ディーア	通常2						お前が夜な夜な外に出て、\n悪い邪気を追い払っていたことを
+CharacterOff
+	ヤト	通常						おや、なんのことかな？
+CharacterOff
+	ディーア	通常2						起きた時に傍にいなかったから、\n魔力を探ってみたんだ
+	ディーア	通常2						オレは魔剣王、\n仲間の魔剣が何をしているかはわかる
+	ディーア	通常2						やたら昼間に眠そうにしていたのも、\nその夜間警備が原因だろ？
+	ディーア	笑い2						ガラじゃないとか言ってても、\nちゃんとした十二支魔剣なんだな
+CharacterOff
+	ヤト	通常						さあて、どうかな？
+	ヤト	通常						ウチは悪いお姉さんだからね、\nふらりと夜の散歩をしたかっただけ
+	ヤト	通常						その途中でもっと悪いのを見たから\n排除しただけだよ
+	ヤト	通常						年の瀬はいろいろなモノが出るからね
+	ヤト	笑い						それに少年、\nそういうことは言わぬが花だよ？
+	ヤト	笑い						間違ってもウチが、\nいいお姉さんだって思われたら、\n健全な小さい子たちが大変だ♪
+CharacterOff
+	ディーア	笑い2						なら悪い子なオレとの秘密だな！
+	ディーア	笑い2						普段はオレのお姉さんでも、\nお前はオレの仲間で魔剣なんだから
+	ディーア	笑い2						これからも悪いことを一緒にしよう
+CharacterOff
+	ヤト	通常						キミは思ったよりも、\nずーっと悪い子だったみたいだね♪
+	ヤト	笑い						良いとも！\n二人でもーっと悪いことしよう♪
+CharacterOff
+	ヤト	拡大笑い	エフェクト表					とりあえず、\nもらったお年玉で豪遊しちゃおうか♪
+	ヤト	拡大笑い						大丈夫、\n子どもは悪いことをするのも仕事さ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1172_01
+EndIf
+EndScenario

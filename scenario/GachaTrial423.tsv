@@ -1,0 +1,645 @@
+# G_423_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	酒場_宿屋(夜)
+CharacterOff
+	月影	照れ
+	黒グラデーション		エフェクト表
+FadeIn	white					.5
+	月影							旦那さま
+CharacterOff
+	ディーア	驚き2						はい
+	月影	照れ
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							月影は怒っています\nおこです！\n激おこです！
+	ディーア	怪しい2						…………なんで？
+	月影	照れ
+Tween	月影	PunchPosition	y=50				NoWait
+	月影	照れ						なんでじゃないですよ！\nもう！
+	月影							月影があんなにロリの魅力を\nアピールしたのに……\n全部スルーしたじゃないですかぁ！
+Se	回想
+FadeOut	black					.3
+StopBgm
+CharacterOff
+	　　　　　　　　　　
+Bg	草原A
+Wait						.5
+FadeIn	black					.3
+	　　　　　　　　　　							\n　　　　　<color=blue><dash=2>数時間前<dash=2></color>
+CharacterOff
+Bgm	都市
+	月影		2_2
+	ディーア	通常2	1_2
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							もう♪\n月影と二人きりで\nお出かけしたいだなんて……♪
+	月影							もしかして、旦那さまも\nロリの魅力に気付いちゃいました？\nしょうがない旦那さまですね♪
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							いいですよ\nせっかく二人きりですから\n月影に何をしても<dash=2>
+StopBgm
+	ディーア	怪しい2						あ、じゃあこの辺で待ってて
+	月影	照れ						あ、はい\n…………え？
+	ディーア	通常2						このあたりにキノコリオンの\n群生地があるはずなんだ\nちょっと探してくる
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=3				NoWait
+Wait						1.5
+	月影							あ、行ってらっしゃーい……
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							って違います!!\n月影も行きますーっ!!
+Se	走る
+Tween	月影	MoveTo	x=800 time=3				NoWait
+Wait						1.5
+FadeOut	black					.5
+Bg	草原B					0
+CharacterOff
+	　　　　　　　　　　
+Wait						.5
+Bgm	バトル
+FadeIn	black					.5
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=100				NoWait
+	キノコリオン							ノコノコーーーーッ!!
+CharacterOff
+Param	character_grayout=false
+	月影	照れ	2_2
+	ディーア	怒り2	1_2
+Tween	月影	MoveBy	x=-30				NoWait
+	月影							ひゃああっ!?
+Se	斬2
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						.3
+Param	character_grayout=true
+CharacterOff
+	キノコリオン							ノコ……
+Se	倒れる
+Tween	キノコリオン	MoveBy	y=-300 time=1.5				NoWait
+Wait						.7
+CharacterOff						.5
+Bgm	都市
+Wait						.8
+	月影	照れ	2_2
+	ディーア	怒り2	1_2
+	ディーア							大丈夫か、月影
+	月影							だ、大丈夫です……
+Tween	月影	PunchPosition	y=50				NoWait
+	月影	通常						……はっ!!
+	黒グラデーション		エフェクト裏
+	月影							(一歩踏み出せば旦那さまと\n 密着できる距離!!)
+	月影							(ロリの魅力を伝える\n 絶好のチャンス!\n この機を逃す月影ではありません！)
+CharacterOff	黒グラデーション
+	月影							えーいっ♪
+Tween	月影	MoveBy	x=-180				NoWait
+Tween	月影	PunchPosition	y=70				NoWait
+Tween	ディーア	MoveTo	x=90				NoWait
+StopBgm
+	ディーア	驚き2						おっと
+Se	斬2
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						.3
+CharacterOff
+	キノコリオン							ノコ…………!?
+Se	倒れる
+Tween	キノコリオン	MoveBy	y=-300 time=1.5				NoWait
+Wait						.7
+CharacterOff						.5
+Wait						.8
+CharacterOff
+	月影	照れ	1_2_b
+	ディーア	通常2	2_2
+	月影							……………………
+Bgm	コメディ
+	ディーア	驚き2						ん？\nどうした、月影？
+	月影							…………いま、なんで避けたんですか
+	ディーア							え？\nいや、キノコリオンがいたから……
+	月影	通常						ぐぬぬ……\nならもう一回……えーいっ!!
+Tween	月影	PunchPosition	y=50				NoWait
+Tween	月影	MoveBy	x=180				NoWait
+Wait						.2
+Tween	ディーア	MoveTo	x=-90				Add
+	ディーア	通常2						お、魔石じゃないか
+	月影	照れ						………………
+	ディーア	驚き2						……って、おい月影？\nどうした？？
+Tween	月影	PunchPosition	y=50				NoWait
+	月影	照れ						ねえーーーー!!\nいま絶対避けましたよね!?
+	ディーア	怪しい2						いや、魔石を拾おうとして……
+	月影							むぅぅ……\n……まあ、旦那さまが\nそう言うならいいですっ
+Tween	月影	PunchPosition	y=50				NoWait
+Tween	月影	MoveBy	x=-20				NoWait
+	月影	通常						それより♪\n次はどこに行きますかっ？
+	ディーア	驚き2						ん、次？
+	月影							せっかく二人きりですし、\nその、デートみたいですし……♪
+Tween	月影	MoveBy	x=-10
+	月影							ほら、ロリと二人きりで\nデートですよ？
+Se	歩く
+	ディーア	通常2
+Tween	ディーア	MoveTo	x=-180 time=3				NoWait
+	月影							旦那さまも\nちょっとは期待してたり……
+StopSe
+Tween	月影	MoveBy	x=-90				NoWait
+Tween	月影	PunchPosition	y=50				NoWait
+	月影	照れ						……って旦那さま!?\nどこいくんですか!?
+	ディーア	通常2						いや、任務はもう終わったからな\n帰るぞ、月影
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							デートは!?
+	ディーア	怪しい2						……何言ってるんだ？\nほら、早く行くぞ
+Se	歩く
+Tween	ディーア	MoveTo	x=-800 time=3				NoWait
+Wait						1.5
+	月影							あ、あれぇ……？
+StopSe
+FadeOut	black					.5
+StopBgm
+Bg	酒場_宿屋(夜)
+CharacterOff
+	ディーア	怪しい2	1_2
+	月影	照れ	2_2
+Wait						.5
+FadeIn	black					.5
+	月影	照れ						ほらぁ……\nたくさんアピールしてた\nじゃないですかぁ……
+	ディーア	驚き2						…………どれのことだ？
+Bgm	コメディ
+CharacterOff
+	月影	照れ拡大	エフェクト表
+Tween	月影	PunchPosition	y=5				NoWait
+	月影							<size=40>全部ですよ!!\nぜんぶ!!</size>
+CharacterOff
+	月影		2_2
+	ディーア	驚き2	1_2
+	月影							なんですかその\n「アピールなんてされたっけな……」\nみたいな顔!!
+	ディーア	怪しい2						アピールなんてされたっけな……
+Tween	月影	PunchPosition	y=50				Add
+	月影	照れ						図星なんですかぁ!?\nよりにもよって!?
+Shake	月影		x=5				NoWait
+	月影							ぐぬぬぬ……今頃旦那さまは\nロリの魅力に気付いて月影の虜に\nなっているはずだったのに……!!
+	月影							やっぱり旦那さまはロリには\n興味ないのですか……？
+	ディーア	汗2						いや、別にそういうわけじゃ<dash=2>
+StopBgm
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Bloom
+CharacterOff						0
+Bg	白背景					0
+	トライアルスチル42303		エフェクト表			0
+	　　　　　　　　　　							　	BrPage
+Wait						.2
+FadeIn	white					.2
+	三日月宗近	<Off>						そのとおりだよ、"お姉ちゃん"!!
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+	ディーア	驚き2	1_2			0
+	月影		2_2			0
+Bg	酒場_宿屋(夜)					0
+FadeIn	white					.2
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							その声は……\n月光……じゃなくて、宗近ちゃん!?
+Bgm	コメディ
+CharacterOff
+	三日月宗近							あるじはそんな小さな<ruby=モノ>胸</ruby>\n興味ないのよ！
+CharacterOff						0
+	三日月宗近	拡大	エフェクト表			0		だってあるじは、\n谷間が大好きなんだから!!
+CharacterOff
+	ディーア	怪しい2						別にそんなことないけど
+CharacterOff
+	月影		1_2_b
+	三日月宗近		2_2					あるじだって男の子だもん！\n男の子はみんな谷間が好きなのよ!!
+CharacterOff
+	ディーア	怪しい2						いや聞けよ
+CharacterOff
+	三日月宗近		2_2
+	月影		1_2
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							そ、そんなことないですっ!!\nロリにはロリの魅力があるんですっ!!
+	月影							小柄でお手軽サイズですしっ、\nちっちゃくてぷにぷにですしっ!!
+	月影		1_2_b
+	三日月宗近							でも谷間ないじゃん？
+	月影	照れ	1_2
+Tween	月影	MoveBy	x=-10				NoWait
+	月影							うっ
+	月影		1_2_b
+Tween	三日月宗近	PunchPosition	y=50				NoWait
+	三日月宗近							ほらぁ、やっぱり\n胸がすべてなんだって♪
+CharacterOff
+	ディーア	怪しい2						誰もそんなこと言ってないだろ……
+CharacterOff
+	三日月宗近	驚き	2_2
+	月影		1_2
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							ほらぁ！　ですよね!!\nやっぱりロリですよね!!
+CharacterOff
+	ディーア	汗2						いや、ロリもそれはそれで\nマズいというか……
+CharacterOff
+	三日月宗近		2_2
+	月影	照れ	1_2_b
+Tween	三日月宗近	PunchPosition	y=50				NoWait
+	三日月宗近							ほらぁ!!　あるじ！\n私ならセーフ！\n事案にならないわよ!?　どう!?
+CharacterOff
+	ディーア	怪しい2						どうと言われてもな……
+CharacterOff
+	三日月宗近		2_2
+	月影	照れ	1_2
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							宗近ちゃんでも事案になりますー!!
+	月影	照れ	1_2_b
+Tween	三日月宗近	PunchPosition	y=50				NoWait
+Tween	三日月宗近	MoveBy	x=-10				NoWait
+	三日月宗近							合意があるからセーフだもんね！\nね、あるじ♪
+	月影	照れ	1_2
+Tween	月影	MoveBy	x=10				NoWait
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							そ、それなら月影だって\n合意の元ですしっ!!
+Param	character_grayout=false
+	月影
+	三日月宗近
+	二人							むぅぅぅぅ……!!
+Param	character_grayout=true
+CharacterOff
+	ディーア	汗2						おいおい……\n二人とも喧嘩するなって
+Param	character_grayout=false
+CharacterOff
+	三日月宗近	驚き	2_2
+	月影	照れ	1_2
+	二人							旦那さまはどっちが好きなんですか!?\nあるじはどっちが好きなの!?
+CharacterOff
+StopBgm
+Se	歩く
+	ディーア	笑い2
+Tween	ディーア	MoveTo	x=180	linear			NoWait
+	ディーア							おっと……\nさて、そういえば\nリディに呼ばれてたんだったな
+StopSe
+CharacterOff
+Param	character_grayout=false
+Bgm	コメディ
+	集中線		エフェクト表
+	三日月宗近	驚き拡大	エフェクト裏
+	三日月宗近							逃げるなあああ!!
+CharacterOff
+Param	character_grayout=true
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							うわっ!!
+CharacterOff
+	三日月宗近	拡大	エフェクト表
+Tween	三日月宗近	PunchPosition	y=5				NoWait
+	三日月宗近							ほら!!　谷間よ!!\nあるじ大好きでしょ、谷間!!
+	三日月宗近							ふふん♪　ほらほらぁ♪\n恥ずかしがらずに触ってもいいのよ？\nおさわりおっけーよ？
+CharacterOff
+	ディーア	怪しい2						………………
+CharacterOff
+	月影							やめてください宗近ちゃん！\n旦那さまも困ってますっ！
+StopBgm
+	ディーア	笑い2						……まあ、そんなに言うなら\nせっかくだし触らせてもらおうかな
+	月影	照れ						あっれぇ？\nだ、旦那さま？？？？
+CharacterOff
+Bgm	凱旋
+	ディーア	怪しい2						……ほんとに触ってもいいのか？
+CharacterOff
+	三日月宗近
+Tween	三日月宗近	PunchPosition	y=50				NoWait
+	三日月宗近							もちろぉん♪
+	三日月宗近							ほら見た？　やっぱりあるじは\nおっきい方が好きなのよ♪
+CharacterOff
+	月影	照れ
+Shake	月影		x=5				NoWait
+	月影							そ、そんな……!!
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	三日月宗近							やぁん、ついにあるじに\n手出されちゃうー♪
+CharacterOff
+Param	character_grayout=true
+	ディーア	笑い2						いや、一度触ってみたかったんだよな
+CharacterOff
+Param	character_grayout=false
+	トライアルスチル42301		エフェクト表
+ImageEffect	SpriteCamera	MotionBlur
+StopBgm						0
+	ディーア	<Off>						<dash=2>この蛇
+Bgm	コメディ
+Tween	トライアルスチル42301	MoveBy	x=-730 time=0.3				Add
+	三日月宗近	<Off>						ちがーう!!\n蛇じゃない!!\nこっちを見て!!
+ImageEffectOff	SpriteCamera	MotionBlur
+Tween	トライアルスチル42301	MoveBy	x=730				Add
+	ディーア	<Off>						ああ……\nやっぱりかわいいな、この蛇
+CharacterOff						0
+	トライアルスチル42302		エフェクト表			0
+ImageEffect	SpriteCamera	MotionBlur
+Tween	トライアルスチル42302	MoveBy	x=-730 time=0.3				Add
+	三日月宗近	<Off>						こっちだってば!!
+	集中線		エフェクト表2			.5
+Tween	トライアルスチル42302	MoveBy	y=375 time=0.5				Add
+	三日月宗近	<Off>						ほら谷間!!　たにま!!\n蛇よりこっちの方がよくない!?
+FadeOut	black					.2
+CharacterOff						0
+Param	character_grayout=true
+	ディーア	絶望2				0
+ImageEffectOff	SpriteCamera	MotionBlur
+FadeIn	black					.2
+	ディーア							………………
+	三日月宗近	驚き						なに!?\nその「せっかく楽しんでたのに」\nみたいな顔!!
+	ディーア	絶望2						せっかく楽しんでたのに……
+	三日月宗近	驚き
+Tween	三日月宗近	PunchPosition	y=50				NoWait
+	三日月宗近							図星じゃん!!\nやだ！　私のことも見て!!\nほら、好きにしていいんだよ!?
+	ディーア	怪しい2						いや、今そういうのいいから
+	三日月宗近	驚き
+Shake	三日月宗近		x=3				NoWait
+	三日月宗近							そ、そんなぁ……
+CharacterOff
+	月影		2_2
+	ディーア	怪しい2	1_2
+Tween	月影	PunchPosition	y=50				NoWait
+Tween	月影	MoveBy	x=-10				NoWait
+	月影							ほら、やっぱり胸じゃないんですよ！\n時代はロリなんです！\nロリの魅力に勝るものなしですっ！
+	月影							見ててください！\n今に旦那さまを立派な\nロリコンにしてみせますっ!!
+	ディーア	汗2						立派なロリコンってなんだ……？
+	月影							それはもう！\n月影のことしか考えられない\n状態ってことですよ♪
+StopBgm
+Tween	月影	PunchPosition	y=75 time=1.5				NoWait
+Tween	月影	MoveBy	x=-40				NoWait
+Wait						.5
+CharacterOff
+	月影	拡大	エフェクト表
+Tween	月影	MoveBy	y=-10 time=0.3	easeInQuart
+Tween	月影	MoveBy	y=10 time=0.3	easeOutQuart			Add
+Bgm	穏やか
+	月影							んーしょっと♪
+	月影							ほら、こうやってお膝に乗せて\nちょうどいいくらいの重さです！
+	ネームプレート	ディーア						ああ、そうだな
+	月影							どうですか？\n体温高くてあったかですよ？\nぬくぬくですよっ♪
+	ネームプレート	ディーア						ああ、そうだな
+FadeOut	black					.2
+CharacterOff						0
+	ディーア	目閉じ2	1_2			0
+	月影	照れ	2_2			0
+StopBgm
+FadeIn	black					.2
+	月影							…………あの、旦那さま？\nなんで目閉じてるんですか？
+	ディーア							ああ……そうだな
+Bgm	コメディ
+Tween	月影	MoveBy	x=-20				NoWait
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							ほらぁ！ 見て！　ロリですよ！\nちっちゃい女の子ですよ！\n膝の上に乗ってるんですよぉー!?
+	ディーア							……ああ、そうだな
+	月影							ねえ見て！ 目を開けて!!\n月影を見てくださいぃー！
+	ディーア	怪しい2						わ、わかった、わかったから……
+	月影	通常						まったくもう……って、あれぇ？\n旦那さま、もしかして\nちょっと照れてます？
+Tween	ディーア	MoveBy	x=-50				NoWait
+	ディーア	笑い2						あ、そういえば魔剣機関から\n追加の任務が来てたな
+Tween	月影	MoveBy	x=-50				Add
+Tween	月影	PunchPosition	y=50				Add
+	月影							ちょっとぉ!?\nさっきと言ってること違いません？\nはぐらかさないでくださいよっ♪
+Tween	月影	PunchPosition	y=50				Add
+	月影							ね、旦那さまっ♪\nいま照れてましたよねっ♪
+	ディーア	汗2						ちょ、離れろってば……
+FadeOut	black					.3
+CharacterOff						0
+	三日月宗近	驚き				0
+StopBgm
+FadeIn	black					.3
+Shake	三日月宗近		x=5				NoWait
+	三日月宗近							くぅっ……私のときは\nあんなリアクション\nしなかったのに……!!
+	三日月宗近							このままじゃあるじが\nロリの虜になっちゃう……!!
+Tween	三日月宗近	PunchPosition	y=50				NoWait
+	三日月宗近	通常						そうだ！　こうなったらぁ……\n三日月宗近の本気、\n見せちゃおうかなぁ♪
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	通常2	1_2			0
+	三日月宗近		2_2			0
+Bgm	都市
+FadeIn	black					.3
+	三日月宗近							あーるじっ♪
+	ディーア							ん？
+Tween	三日月宗近	PunchPosition	y=50				NoWait
+Tween	三日月宗近	MoveBy	x=-100				NoWait
+	三日月宗近							えーいっ♪
+	ディーア	驚き2						うわっ!?
+Tween	ディーア	MoveBy	x=-20				NoWait
+Se	倒れる
+StopBgm
+FadeOut	white					.5
+CharacterOff						0
+	三日月宗近	拡大	エフェクト表
+Wait						.5
+FadeIn	white					.5
+Bgm	凱旋
+	三日月宗近							ふふ♪\n押し倒しちゃった♪
+	ネームプレート	ディーア						っとと……宗近、急に何を<dash=2>
+Tween	三日月宗近	PunchPosition	y=5				NoWait
+	三日月宗近							ひゃあんっ♪\nあるじに胸触られちゃった……♪\nもう、せっかちなんだからぁ♪
+	ネームプレート	ディーア						いや、今のは宗近が\n勝手に押し付けて……
+CharacterOff
+	月影							<size=35>ああっ!!\nずるいですっ！</size>
+	ネームプレート	ディーア	2_3_b					なにがずるいんだ……
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							ていうか、\nなんで避けなかったんですかぁ!?\n月影のときは避けたのにぃ……
+	ネームプレート	ディーア						いや、今のは普通に\n不意打ちだったというか……
+CharacterOff
+	三日月宗近	拡大	エフェクト表					ふふ♪\nそんなこといっちゃって♪\n本当はあるじも期待してたんだよね♪
+CharacterOff
+	月影	照れ
+Shake	月影		x=5				Add
+	月影							むぅぅぅ……！
+	ディーア	怪しい2						はぁ…………
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	三日月宗近	拡大	エフェクト表					大丈夫よ、あるじ♪\nまだまだ夜はこれからだから♪
+Param	character_grayout=true
+CharacterOff
+Bgm	絶望
+	月影	照れ
+Shake	月影		x=5				NoWait
+	月影							うぅ……やっぱり谷間ですかぁ……？\n谷間がないから\nダメなんですかぁ……？
+	月影	通常						ううん、弱気になっちゃダメですっ!!\nロリの魅力は充分に伝えたはず……\n自分を信じるのです、月影!!
+StopBgm
+	月影							きっと旦那さまは\nロリを選んでくれるはず……！
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							そうです！　あの旦那さまが\n宗近ちゃんの巨乳アピールに\n落とされるはずがないのですっ!!
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	三日月宗近		1_2_b
+	ディーア	笑い2	2_2					ああ、巨乳が一番だな……\nオレが間違ってたよ\nやっぱりオレには宗近しかいないな
+Tween	三日月宗近	PunchPosition	y=50				NoWait
+	三日月宗近							ほんとっ!?\nあるじ……っ♪
+FadeOut	white					.2
+CharacterOff						0
+	月影	照れ拡大	エフェクト裏			0
+	集中線		エフェクト表			0
+FadeIn	white					.2
+Bgm	コメディ
+	月影							<size=35>落とされてますーーーーっ!?!?</size>
+CharacterOff
+Param	character_grayout=false
+	三日月宗近		1_2
+	ディーア	怪しい2	2_2
+	三日月宗近							やっぱりあるじも男の子だなぁ♪
+	三日月宗近							うふふふ♪\nやっぱりあるじと私は\n相思相愛だったのね♪
+Tween	三日月宗近	PunchPosition	y=50				NoWait
+	三日月宗近							さあ、まだ夜は長いし♪\n今日は良い思い出\nたくさん作りましょ♪
+Se	歩く
+Tween	ディーア	MoveTo	x=500 time=5				NoWait
+	オーラ桃		エフェクト裏
+	三日月宗近							それでそれでぇ、朝になったら\n魔剣機関に行って、\n結婚の手続きまでしちゃったり♪
+	三日月宗近							ほら、善は急げっていうしね♪\nうふふふふ♪
+StopSe
+Param	character_grayout=true
+CharacterOff
+	黒グラデーション		エフェクト表
+Bgm	絶望
+	月影	照れ						そ、そんなぁ……\nやっぱり月影は\n選ばれないのですね……
+	月影							やっぱりお肉足りないのかなぁ……\nロリじゃない方がいいの……？\nぐすん……
+CharacterOff
+StopBgm
+	ディーア	怪しい2						まったく……\nなにか勘違いしてないか？
+CharacterOff
+	月影	照れ	2_2
+	ディーア	怪しい2	1_2
+	月影							ふぇ……？\nあ、あれ？　旦那さま？
+Tween	ディーア	MoveBy	x=20
+	ディーア							ほら、行くぞ月影
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							え、え？\n行くってどこに……\nあの、でも、宗近ちゃんは……
+Tween	ディーア	MoveBy	x=10				NoWait
+	ディーア							いいから、早く
+	月影							で、でも……
+Param	character_grayout=false
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=3				NoWait
+Tween	月影	MoveTo	x=-800 time=3				NoWait
+Wait						2
+CharacterOff
+FadeOut	black					.3
+	三日月宗近					0
+	オーラ桃		エフェクト裏			0
+Bgm	コメディ
+FadeIn	black					.3
+	三日月宗近							それでそれでぇー、\nゆくゆくは大家族に\nなっちゃったりしてぇー♪
+	三日月宗近							ね、あるじ♪
+StopBgm
+CharacterOff	オーラ桃
+	三日月宗近	驚き						…………ってあれ？\nあるじ？　どこ行ったの？
+Tween	三日月宗近	MoveBy	x=30 time=0.5
+Wait						.3
+Tween	三日月宗近	MoveBy	x=-60
+Wait						.3
+Tween	三日月宗近	MoveBy	x=30 time=0.5
+	三日月宗近							……………あれぇ～？
+FadeOut	black					.5
+CharacterOff
+Param	character_grayout=true
+	月影	照れ	2_2
+	ディーア	通常2	1_2
+Bg	酒場の地下
+Wait						1
+Bgm	穏やか
+FadeIn	black					.5
+	ディーア	通常2						……ここなら大丈夫だな
+	月影	照れ						あの、もしかして旦那さま、\nわざと宗近ちゃんを……？
+	ディーア	あはは2						あのままだと、\n落ち着いて話すこともできないだろ
+	月影	照れ						……気を、遣ってくれたんですね
+	ディーア	驚き2						ん？
+Tween	月影	MoveBy	x=10				NoWait
+	月影							でも大丈夫です、\n旦那さまがロリを好きではないことは\nよくわかりましたし……
+	月影							月影を避けようとするのも、\nやっぱり……
+	ディーア	怪しい2						だから、別にそういう話じゃないって\n最初から言ってるだろ？
+	月影							ふぇ？
+	ディーア	あはは2						ロリだからとか、\nそんな理由で避けたりするわけ\nないじゃないか
+Tween	月影	MoveBy	x=10				NoWait
+	月影							……じゃあ、なんで任務のときに\n月影のこと避けたんですか？
+	ディーア	怪しい2						あのなあ……
+	ディーア	あはは2						……そんな格好で詰め寄られたら、\n誰だって目のやりどころに困るだろ
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							ふぇっ!?\nそ、それって……？
+	ディーア	通常2						それと、あんまり肌を晒すな\n……外だと人目もあるしな
+	月影							……もしかして、\n任務が終わったらすぐに帰ろうと\nしたのも、そういう……
+	ディーア	あはは2						まあ、そういうことだ
+	月影	通常
+StopBgm
+Tween	月影	MoveBy	x=-10
+Bgm	凱旋
+	月影							…………それってつまり、\n月影のこと、独り占めしたい……\nって、ことですか……？
+Tween	ディーア	MoveBy	x=-10
+	ディーア	怪しい2						……さあ？
+Tween	月影	MoveBy	x=-10				NoWait
+	月影							ちょ、なんではぐらかすんですか!?
+	月影							……あれえ？　旦那さま？\nなんか顔ちょっと赤くないですか!?
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							もしかして、月影の魅力、\n気付いちゃいましたかぁーー!?
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	怪しい2						……何の話だか全然わからないな
+Tween	月影	PunchPosition	y=50				Add
+Tween	月影	MoveBy	x=-30				Add
+	月影							ちょっとぉ！\nいま照れてましたよね？\n絶対照れてましたよね!?
+Tween	月影	MoveBy	x=-30				NoWait
+Wait						.5
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	月影	拡大	エフェクト表					なんで顔そらすんです？\nねえ、こっち見てくださいよっ！\nねぇーーーー♪
+CharacterOff
+Param	character_grayout=true
+	月影		2_2
+	ディーア	笑い2	1_2
+Se	歩く
+Tween	ディーア	MoveBy	x=-90 time=3				NoWait
+	ディーア							さて、誤解も解けたことだし戻るか
+Tween	月影	PunchPosition	y=50				NoWait
+Tween	月影	MoveBy	x=-50				NoWait
+	月影	照れ						ああっ、旦那さまっ！\n月影の質問に<dash=2>
+StopBgm
+FadeOut	black					.1
+Param	character_grayout=false
+CharacterOff						0
+	集中線		エフェクト表			0
+	三日月宗近	驚き拡大	エフェクト裏			0
+FadeIn	black					.1
+	三日月宗近							<size=40>あ～～る～～じ～～!!!!</size>
+CharacterOff
+Param	character_grayout=true
+Bgm	コメディ
+	月影	照れ	2_2
+	ディーア	驚き2	1_2
+	ディーア							うわ
+CharacterOff
+	三日月宗近	驚き
+Tween	三日月宗近	PunchPosition	y=50				NoWait
+	三日月宗近							うわって言った!?\nねえ今うわって言った!?\nねえ!!　どういうこと!?
+	ディーア	怪しい2						はいはい、わかったから
+	三日月宗近							何をわかったの!?\nねえ！
+CharacterOff
+	三日月宗近	驚き	2_2
+	月影		1_2
+Tween	月影	MoveBy	x=10				NoWait
+	月影							ダメです宗近ちゃん！\n旦那さまは月影派なんですから！
+	月影		1_2_b
+Tween	三日月宗近	MoveBy	x=-10				NoWait
+	三日月宗近							ちがうよね!?\nあるじ、私のこと好きだって\n言ったもんね!?
+	月影		1_2
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							言ってないですぅー！\n宗近ちゃんの妄想ですー！
+CharacterOff
+	ディーア	怪しい2						あ、そういえば\nクランさんに呼び出されてるんだった
+	ディーア	笑い2						じゃあな、二人とも
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=3				NoWait
+Wait						1.5
+CharacterOff
+	三日月宗近	驚き	2_2
+	月影	照れ	1_2_b
+	三日月宗近							あっ逃げた！
+	月影	照れ	1_2
+Tween	月影	PunchPosition	y=50				NoWait
+	月影							あ、ちょっとぉ！\nまだ答え聞いてないですよっ！\n旦那さまぁー！
+FadeOut	black					.5
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*G_423_01
+EndIf
+EndScenario

@@ -1,0 +1,1299 @@
+# E_353_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	遺跡A
+FadeIn	white					.5
+CharacterOff
+	ザッハトルテ							<dash=2>ついに、この日が来ましたわ
+	ザッハトルテ							プディン、マカロ、エクレ！\n誓いのおかしを！
+CharacterOff
+	マカロンヌ		2_3
+	エクレアンヌ		1_3
+	プディングンヌ		3_3					はい、ここに♪
+	マカロンヌ							とーっても美味しく出来たんですよ♪
+	エクレアンヌ							ボクもです！\n自信作なんですから！
+CharacterOff
+	ザッハトルテ		2_3					それはこのトルテが\n一番よく分かっていますわ！
+	ザッハトルテ							さぁ、エクレアンヌ\nそのおかしを祭壇に置きなさい
+CharacterOff
+	エクレアンヌ							はい、トルテ王♪
+CharacterOff
+	ザッハトルテ							<dash=2>誓いましょう\n神菓王ザッハトルテの名のもとに\nおかしの国の再建を<dash=2>！
+CharacterOff
+Param	character_grayout=false
+	マカロンヌ		2_3
+	エクレアンヌ		1_3
+	プディングンヌ		3_3
+	神菓魔剣							おかしの国の再建を<dash=2>！
+Param	character_grayout=true
+FadeOut	black					1
+CharacterOff
+StopBgm
+	おかしな魔物		2_3_b
+	おかしの兵器
+	黒グラデーション		エフェクト表
+	　　　　　　　　　　		2_3
+Wait						.5
+Se	火事
+Tween	おかしな魔物	ShakePosition	y=-10 x=-10 time=1.7				NoWait
+Tween	おかしの兵器	ShakePosition	y=-10 x=-10 time=1.7				NoWait
+FadeIn	black					.1
+Wait						1.5
+FadeOut	black					.1
+StopSe
+CharacterOff
+	ザッハトルテ
+Wait						.1
+FadeIn	black					.1
+Bgm	都市					2
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							…………!?
+CharacterOff
+	エクレアンヌ							どうかしましたか？\nトルテ王
+CharacterOff
+	ザッハトルテ							…………いえ\n気のせいかしら
+	ザッハトルテ							それではパティシエのところに\n戻りましょうか
+StopBgm						1
+FadeOut	black					.5
+CharacterOff
+	　　　　　　　　　　
+Bg	酒場_カフェ
+Wait						2
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　　　　<color=blue><dash=2>数日後<dash=2></color>
+Bgm	平和
+	マカロンヌ							トルテ王♪\nマカロンがいっぱい\nできましたよぉ！
+CharacterOff
+	ザッハトルテ							感謝しますわ！
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	ザッハトルテ							はぁ、とってもおいしそう……！\nきっと口に入れたらおいしくて\nほっぺが……！
+CharacterOff	オーラ桃					0
+Param	character_grayout=true
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							…………はっ!! いけませんわ！\n王たるもの、もっとしっかり\nしなくては……！
+	マカロンヌ							トルテ王、何か言いましたぁ？
+	ザッハトルテ
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							なな、何も言っていません！\nまだおかしの数が足りませんわよ！
+	ザッハトルテ							もっと、もっとたくさんの\n美味しいマカロンを\n用意するのですわ！
+CharacterOff
+	マカロンヌ							分かってますよぉ♪\n私に任せてください！
+CharacterOff
+	エクレアンヌ		1_2
+	プディングンヌ		2_2					こちらも出来ましたよ♪\nなめらかでとろける\n黄金のプディングです♪
+Tween	エクレアンヌ	PunchPosition	y=50				NoWait
+	エクレアンヌ							トルテ王、ボクが作った\nふわっふわであまーいエクレアも\n味見して欲しいですー！
+CharacterOff
+	ザッハトルテ							ふふ、トルテの評価は厳しくてよ？
+Param	character_grayout=false
+	オーラ桃		エフェクト裏			.5
+	ザッハトルテ							あむっ……ふわぁぁ♪ \nどのおかしも、とーってもおいし♪\nあむあむ……
+CharacterOff	オーラ桃					0
+Param	character_grayout=true
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							…………はっ!!
+StopBgm
+CharacterOff
+	エクレアンヌ		1_2
+	プディングンヌ		2_2					………………
+	エクレアンヌ							………………
+CharacterOff
+Bgm	平和
+	ザッハトルテ							………………合格ですわよ！
+CharacterOff
+	プディングンヌ		2_2
+	エクレアンヌ		1_2					良かったぁ！\nじゃあボク、もっと作ってきますね！
+Se	走る
+Tween	エクレアンヌ	MoveTo	x=800 time=3				NoWait
+Wait						1.5
+CharacterOff
+	マカロンヌ							あれ、トルテ王は何か作ったり\nしないんですかぁ？
+CharacterOff
+Param	character_grayout=false
+	ザッハトルテ							もちろん作りますわ！\nこうやって魔力を……！
+Se	光1
+	オーラ青		エフェクト表			1
+Wait						1.5
+Se	光3
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff						0
+	チョコレートケーキ					0
+FadeIn	white					.5
+Wait						1.5
+CharacterOff
+	ザッハトルテ							カンペキですわね！\nあとでパティシエに味を見て\nもらうのが楽しみですわ♪
+CharacterOff
+	プディングンヌ		2_2
+	マカロンヌ		1_2					さすがトルテ王！ 同じように\n手作りでも作れるといいですねぇ！
+	プディングンヌ							こら、マカロンヌ！\nそれは言っては……！
+	マカロンヌ							はっ!!
+CharacterOff
+	ザッハトルテ							何か言ったかしら!?
+CharacterOff
+	ディーア	あはは2	画面外_右_b
+	リディ	照れ2	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=90 time=2				NoWait
+Wait						.2
+Se	走る
+Tween	ディーア	MoveTo	x=-90 time=2				NoWait
+	リディ	通常2						トルテちゃーん！\nこっちもクッキー出来たよー！
+	ディーア	あはは2						もう作り過ぎて\n何枚か分からないけどな……！
+CharacterOff
+	ザッハトルテ							感謝しますわ\nでは一枚味見を……んーー！\n素晴らしい！
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							さすがですわ！\nトルテが見込んだだけのことは\nありますわね♪
+	ザッハトルテ							では、次のクッキーに\n取り掛かるのです！
+CharacterOff
+	リディ	通常2	2_2
+	ディーア	驚き2	1_2					えっ!?　まだ足りないのか!?
+	リディ	笑い2						よーし、酒場がおかしで溢れるまで\n作りまくっちゃうよー！
+Se	走る
+Tween	リディ	MoveTo	x=800 time=3				NoWait
+Wait						1.5
+CharacterOff	リディ
+	ディーア	汗2
+	ザッハトルテ		2_2					何をしていますの？ パティシエ\nあなたも行きなさい！
+	ディーア	汗2						トルテ……\nもう朝からずっとだけど……\nこんなにたくさんのおかし、必要か？
+	ザッハトルテ							絶対に必要ですわ！
+	ディーア	怪しい2						えーと、\nそもそも何のために作ってるのか\n覚えてる？
+	ザッハトルテ							もちろん\nおかしの国の再建のためですわ！
+	ディーア	汗2						いやトルテの\n歓迎会をするためだよ!!
+	ザッハトルテ							あら、おかしが必要という点では\n何の違いもないでしょう？
+	ディーア	汗2						まあ、そう言われればそうだけど……
+	ザッハトルテ							トルテは必ず成し遂げなければ\nいけませんの！\nおかしの国の再建を！
+	ディーア	通常2
+	ザッハトルテ							それがトルテの、\n神菓魔剣たちみんなの\n『夢』ですもの……
+	ザッハトルテ							だから、おかしがたくさん\n必要なのですわ！\n理解できまして？　パティシエ！
+	ディーア	通常2						分かった\nトルテの歓迎会だしな\nよし、オレも頑張るか！
+CharacterOff
+	リディ	怒り2	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=90 time=1.5
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							もう、マスター！\nまだここにいたの？\nクッキーの盛り付け手伝ってー！
+CharacterOff
+	ディーア	笑い2						ああ、任せろ！
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=3				NoWait
+Wait						1.5
+FadeOut	black					.5
+CharacterOff
+Bg	酒場1F
+	ディーア	笑い2	1_2
+	マカロンヌ		2_2
+Wait						1.5
+FadeIn	black					.5
+	マカロンヌ							今日はおかしたくさんで\nしあわせー♪
+CharacterOff
+	プディングンヌ		2_2
+	リディ	笑い2	1_2					えへへ、マカロンヌちゃんすっごく\n楽しそうだねぇ♪
+	プディングンヌ		2_2					マカロンヌもエクレアンヌも\nトルテ王が来てくださって\n嬉しいんですよ
+	リディ	照れ2						プディングンヌさんも\n何だかいつもより嬉しそう！\nずっと待ってた王さまだもんねぇ
+	プディングンヌ							私たち神菓魔剣にとって、トルテ王は\n特別ですから♪
+	リディ	驚き2						特別？
+	プディングンヌ							ええ、トルテ王がいてこその\n神菓魔剣なんです
+	プディングンヌ							ですから私たちも、トルテ王のために\nできることは何でもやるんです♪
+	リディ	照れ2						うん！ そうだねっ、リディも\n頑張らなきゃ！
+	リディ	驚き2						あ、でも……最近変な噂、あるよね
+StopBgm						3
+CharacterOff
+	ディーア	驚き2						噂？
+CharacterOff
+	マカロンヌ							噂ってぇ？
+CharacterOff
+Bgm	絶望
+	リディ	怒り2						魔界の色んな所で\n『おかしが突然消えちゃう』\nっていう……噂なんだけど
+CharacterOff
+	ザッハトルテ							おかしが!?
+CharacterOff
+	プディングンヌ							消える……？
+CharacterOff
+Shake	Graphics		x=10 y=10				Add
+	エクレアンヌ	<Off>						きゃあああああ!!
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2					悲鳴……!?
+	リディ	悔しい2						あっちの方からだよ、マスター！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	酒場の地下
+Se	走る
+	ディーア	本気2	画面外_左
+FadeIn	black					.5
+Bgm	緊迫
+Tween	ディーア	MoveTo	x=0
+	ディーア	本気2						どうした!? 大丈夫か!?
+CharacterOff
+	ザッハトルテ							なにがありましたの!?
+CharacterOff
+	エクレアンヌ							マスターくんー！ みんなぁー！\nエクレア作ってたら……\nま、魔物がぁ……!!
+CharacterOff
+	ディーア	本気2						魔物!?
+CharacterOff
+	プディングンヌ							エクレアンヌ、無事なの……!?
+CharacterOff
+StopBgm						3
+	エクレアンヌ							う、うん\nボクは大丈夫だけど……
+CharacterOff
+	ザッハトルテ							よ、よかったぁ……\nエクレがケガしてないなら……
+CharacterOff
+	マカロンヌ							でも、マカロン\n全部消えちゃってるよぉ……
+CharacterOff
+Bgm	絶望
+	ザッハトルテ							え？
+CharacterOff
+	エクレアンヌ							ボクのエクレアも……
+CharacterOff
+	プディングンヌ							私のプディングも無いですね……
+CharacterOff
+	リディ	怒り2						そういえばクッキーもない!!
+CharacterOff
+	ディーア	驚き2						あ、あんなにあったのに!?
+CharacterOff
+	ザッハトルテ							そそ、そんなぁ……!!
+CharacterOff
+	リディ	驚き2						あっ!!\n酒場の方に置いてたやつは!?
+CharacterOff
+	ザッハトルテ							そ、そうですわ！\nそれならついさっきまで見て……
+FadeOut	black					.5
+CharacterOff
+Bg	酒場_カフェ
+	ザッハトルテ
+FadeIn	black					.5
+Tween	ザッハトルテ	MoveTo	x=90 time=1				NoWait
+Wait						1
+	ザッハトルテ							ない！
+Tween	ザッハトルテ	MoveTo	x=-90 time=1.5				NoWait
+Wait						.5
+	ザッハトルテ							ない！
+Tween	ザッハトルテ	MoveTo	x=0 time=1.5
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							おかしが一つも……ない！
+CharacterOff
+	プディングンヌ							トルテ王、少し落ち着いてください
+CharacterOff
+	ザッハトルテ
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							落ち着いていられませんわ！\nプディン、おかしが無ければ\nおかしの国の再建は……！
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2					おかしが消えちゃう噂って\n本当だったんだね……！
+	ディーア	怒り2	1_2					まあ犯人は十中八九、キッチンに\n出たっていう魔物だろうけどな……
+	リディ	怒り2						おかしだけ\n持って行く魔物……？
+CharacterOff
+	ザッハトルテ							呑気なことを言っている場合では\nありませんわよ！\n早くおかしを……！
+StopBgm
+	ドムドム		2_2
+Tween	ドムドム	MoveBy	x=-70 time=1	easeOutCubic			NoWait
+Wait						1.5
+Tween	ドムドム	MoveBy	x=-70 time=1	easeOutCubic			NoWait
+Wait						1.5
+Tween	ドムドム	MoveBy	x=-70 time=1	easeOutCubic			NoWait
+Wait						1.5
+CharacterOff
+	リディ	驚き2
+Tween	リディ	PunchPosition	y=50				NoWait
+Bgm	緊迫
+	リディ	驚き2						あー!!\nトルテちゃん後ろー!!
+CharacterOff
+	エクレアンヌ							あ、あの子！\nボクのエクレア持ってる！
+CharacterOff
+	ドムドム
+Tween	ドムドム	PunchPosition	y=50				NoWait
+	ドムドム							………………!!
+Tween	ドムドム	MoveTo	x=800 time=1
+CharacterOff
+	ザッハトルテ
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							………………!!
+	ザッハトルテ							プディン、マカロ、エクレ！\nトルテについていらっしゃい！\nあの魔物を追いかけますわよ！
+	ザッハトルテ							パティシエもですわ！\n行きますわよ！
+Tween	ザッハトルテ	MoveTo	x=800 time=2				NoWait
+FadeOut	black					.5
+CharacterOff
+	リディ	怒り2	2_2
+	ディーア	驚き2	1_2
+FadeIn	black					.5
+	ディーア	驚き2						ちょ、トルテ!?\nリディ、悪いけど留守番たのむ！
+	リディ	怒り2						うん、分かったよマスター！\nクッキー、取り返してきてね!!
+CharacterOff
+	マカロンヌ							まっ、まってくださいよぉ！\nトルテ王ー！
+FadeOut	black					.5
+StopBgm
+CharacterOff
+	ザッハトルテ
+Bg	市街地A
+Wait						.5
+Bgm	バトル
+FadeIn	black					.5
+	ザッハトルテ							おかしの国の再建はトルテの使命……\n絶対におかしを取り返しますわよ！
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							いましたわ!!\nパティシエ、魔物はそこですわ!!
+Tween	ザッハトルテ	MoveTo	x=800 time=2				NoWait
+FadeOut	black					.5
+Bg	酒場_カフェ
+	　　　　　　　　　　
+FadeIn	black					.5
+	　　　　　　　　　　							<color=blue><speed=0><dash=2>これは</speed></color>
+	　　　　　　　　　　							<color=blue><speed=0>とあるおかしな魔剣と</speed></color>
+	　　　　　　　　　　							<color=blue><speed=0>とあるおかしな魔剣と\nおかしな国の王さまの</speed></color>
+CharacterOff
+Param	character_grayout=false
+	イベントロゴ353		エフェクト表			.5
+	　　　　　　　　　　							<color=blue><speed=0>とあるおかしな魔剣と\nおかしな国の王さまの\n長い長い一日のお話<dash=2></speed></color>
+FadeOut	white					1
+Param	character_grayout=true
+If	isdebug==true
+CharacterOff
+Jump	*E_353_02
+EndIf
+EndScenario
+
+# E_353_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	遺跡A
+	ザッハトルテ		画面外_右
+FadeIn	white					.5
+Tween	ザッハトルテ	MoveTo	x=0 time=3
+	ザッハトルテ							急いでパティシエ！\n魔物が逃げ込んだのはここですわ！
+CharacterOff
+	ディーア	悔しい2	画面外_右
+Tween	ディーア	MoveTo	x=0 time=3				NoWait
+Wait						1.5
+	ディーア	悔しい2						はぁ、はぁ……\nこんなところにおかしを運んで\n一体何を……？
+CharacterOff
+	ザッハトルテ							あ、あれは!?
+CharacterOff
+	ディーア	驚き2						なんだ、あれ……？
+CharacterOff
+	おかしの兵器		2_3_b
+FadeOut	white					.5
+Se	闇1
+	ドムドム		1_3
+FadeIn	white					.5
+Wait						.5
+FadeOut	white					.5
+Se	闇1
+	ジェムジェム		3_3
+FadeIn	white					.5
+FadeOut	white					.5
+Se	闇1
+	カプカプ		2_2
+FadeIn	white					.5
+Tween	ドムドム	PunchPosition	y=50				NoWait
+Tween	ジェムジェム	PunchPosition	y=50				NoWait
+Tween	カプカプ	PunchPosition	y=50				NoWait
+Wait						1
+FadeOut	black					.5
+CharacterOff
+	マカロンヌ		2_2
+	エクレアンヌ		1_2
+FadeIn	black					.5
+	エクレアンヌ							なんか、おかしで……\nおかしの魔物を作ってる……けど
+	マカロンヌ							トルテ王に、そっくり……？
+CharacterOff
+	ザッハトルテ
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							なっ！\nトルテではありませんわよ！
+CharacterOff
+	エクレアンヌ							でも、本当に似てるよ……？
+CharacterOff
+	ディーア	怪しい2						いや、あれはトルテじゃない
+	ディーア	悔しい2						確かに見かけは似てるけど、\n魔力の波動が全然違う
+CharacterOff
+	ザッハトルテ							そうですわ!!\nそれにトルテはもっと\nきらきらしていておいしそうで……！
+CharacterOff
+	プディングンヌ							トルテ王、しかしこの場所は……
+CharacterOff
+	ザッハトルテ							ええ、分かっていますわ\nここはトルテたちが……
+CharacterOff
+	ディーア	怒り2						なにか心当たりがあるのか？
+CharacterOff
+	プディングンヌ							ええ、以前みんなでここに来たことが\nあるのですが……\nたしかあれは無かったような……
+CharacterOff
+	ザッハトルテ							確かにありませんでしたわ……\nですが、今はそれどころでは\nありません！
+	ザッハトルテ							一刻も早くおかしを取り戻すことが\n先決ですわ！
+CharacterOff
+	マカロンヌ		2_2
+	エクレアンヌ		1_2					たしかに！\nおかしがどんどん無くなっちゃうよ！
+	マカロンヌ							私たちのおかしは見当たらない？\n魔物になっちゃったのかなぁ
+CharacterOff
+	プディングンヌ							あれほどの魔物に囲まれていては……\n迂闊に近づけませんね
+CharacterOff
+	ディーア	悔しい2						これはまずいな……
+CharacterOff
+	プディングンヌ							マスター様？
+CharacterOff
+	ディーア	怒り2						あのペースで魔物が\n増えていくとしたら……
+	ディーア							魔界全域が埋め尽くされるのは\n時間の問題だろうな
+CharacterOff
+	エクレアンヌ							あ、あの魔物でいっぱいに……？
+CharacterOff
+	ディーア	怪しい2						ああ、たとえ魔剣機関やEDENの勇者を\n総動員して対処したとしても、\n食い止めきれるかどうか……
+	ディーア	悔しい2						もって48時間……\nいや、これ以上ペースが上がると\nしたら、30時間もたないかもな……
+CharacterOff
+	マカロンヌ
+Tween	マカロンヌ	PunchPosition	y=50				NoWait
+	マカロンヌ							それって、大ピンチなんじゃ！
+CharacterOff
+	ディーア	悔しい2						ああ、今どうするか考えて……
+CharacterOff
+	ザッハトルテ							おかしの国は!?\n国の再建は一体\nどうするんですの!?
+CharacterOff
+	ディーア	怒り2						トルテ、まずは落ち着こう
+	ディーア	怒り2						とにかく、オレたちが魔物の波に\n飲み込まれたら元も子もない
+	ディーア							今は周囲の魔物を倒しながら\n対策を考えないと……
+CharacterOff
+	ザッハトルテ							悠長なことを言っている場合じゃ\nありませんわ！
+	ザッハトルテ							トルテによく似たあれを壊せば\n解決に決まってるでしょう!?
+	ザッハトルテ							パティシエがすぐに行かないのなら\nトルテが行きますわよ！
+FadeOut	black					.5
+CharacterOff
+	ザッハトルテ		3_3
+	おかしの兵器		1_3
+FadeIn	black					.5
+Tween	ザッハトルテ	MoveTo	x=45 time=4				NoWait
+Wait						1.5
+CharacterOff
+	プディングンヌ							トルテ王、不用意に近づいては……！
+Se	闇3
+FadeOut	black					.5
+CharacterOff
+Bgm	絶望
+	ザッハトルテ		2_2
+	幻想体ザッハトルテ		1_3_b			1.5
+FadeIn	black					.5
+	幻想体ザッハトルテ							………………
+Tween	ザッハトルテ	MoveBy	x=90				NoWait
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							きゃあっ!?
+CharacterOff
+	ディーア	怒り2						なんだ……!?
+CharacterOff
+	ザッハトルテ		3_3
+	幻想体ザッハトルテ		1_3					……汚い手で触らないで
+	幻想体ザッハトルテ		1_3_b
+Tween	ザッハトルテ	MoveBy	x=-30				NoWait
+	ザッハトルテ							なっ！ あ、あなた誰ですの!?
+CharacterOff
+	エクレアンヌ		1_2
+	マカロンヌ		2_2					あわわ……トルテ王が……！
+	エクレアンヌ							トルテ王がもう一人……！
+CharacterOff
+	ディーア	怒り2	2_3_b					ザッハトルテの、幻想体……!?
+Param	character_grayout=false
+FadeOut	black					.5
+	ジェムジェム		1_3
+	カプカプ		3_3
+FadeIn	black					.5
+Tween	ジェムジェム	PunchPosition	y=50				NoWait
+Tween	カプカプ	PunchPosition	y=50				NoWait
+Tween	ジェムジェム	MoveBy	x=90				NoWait
+Tween	カプカプ	MoveBy	x=-90				NoWait
+	カプカプ							…………!!\n………………!!
+Tween	ディーア	ShakePosition	x=10				NoWait
+	ディーア	怒り2						くっ……！\nこれじゃ、近づけない！
+Param	character_grayout=true
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+	幻想体ザッハトルテ		1_2
+FadeIn	black					.5
+	幻想体ザッハトルテ							……私は、\n"おかしの国を再建する者"
+CharacterOff
+	ザッハトルテ		2_2					な、何を言うかと思ったら……！\nあなたはトルテの偽者じゃ\nありませんこと!?
+	ザッハトルテ							このトルテが\n神菓王ザッハトルテだと分かって\n言っていますの？
+CharacterOff
+	幻想体ザッハトルテ		1_2					……『神菓王』？\n随分と冗談がお上手ですわね\nトルテ"お嬢さま"？
+CharacterOff
+	ザッハトルテ		2_2					な、なんですって！\nトルテはお嬢さまではありませんわ！
+CharacterOff
+	幻想体ザッハトルテ		1_2					あら、本当にそうかしら？
+CharacterOff
+	ザッハトルテ		2_2					そうですわよ！\nだいたい、あなたのような偽者に\nそんなことを言われる筋合いは……!!
+CharacterOff
+	幻想体ザッハトルテ		1_2					焦って一人で飛び込んで……\nとても王の振る舞いとは\n思えませんけれど？
+CharacterOff
+	ザッハトルテ		2_2					あ、焦ってなんていませんわ！\nあなたがなんと言おうと、トルテは\nおかしの国の王ですわ！
+	ザッハトルテ							だってトルテは、おかしの国を\n再建するという使命のために\nここにいるのですから！
+CharacterOff
+	幻想体ザッハトルテ		1_2					あら、本気ですの？
+CharacterOff
+	ザッハトルテ		2_2					もちろん本気ですわ！\n神菓たちを集め、おかしを作るのは\nすべて建国のためですのよ！
+CharacterOff
+	幻想体ザッハトルテ		1_2					いまさら？
+CharacterOff
+	ザッハトルテ		2_2					と、トルテと神菓たちが揃った\n今こそ、ですわ！ 今だからこそ\nおかしの国が作れるのです！
+CharacterOff
+	幻想体ザッハトルテ		1_2					だったらなぜ行動しないのかしら？
+CharacterOff
+	ザッハトルテ		2_2					とっくに動いていますわ！\nあの魔物におかしを取られなければ\n今頃はもっと進んで……！
+CharacterOff
+	幻想体ザッハトルテ		1_2					酒場で楽しそうに過ごしながら？
+	幻想体ザッハトルテ							王を名乗る者がとる行動とは\nとても思えませんわね
+	幻想体ザッハトルテ							『そのうち、あわよくば、\n　建国できたら』
+	幻想体ザッハトルテ							そんな甘いことを考えているんじゃ\nないかしら
+CharacterOff
+	ザッハトルテ		2_2					そんなこと……
+CharacterOff
+	幻想体ザッハトルテ		1_2					なら聞きますわ\n建国にあと何個のマカロンが必要？\n何個のエクレアが必要ですの？
+CharacterOff
+	ザッハトルテ		2_2
+Tween	ザッハトルテ	ShakePosition	x=10				Add
+	ザッハトルテ							う…………
+CharacterOff
+	幻想体ザッハトルテ		1_2					あと何個おかしを用意すれば\nあとどれくらい待てば\nおかしの国ができるのかしら？
+	幻想体ザッハトルテ							あなたはただ、建国という名目で\nおかしを食べたいだけ
+	幻想体ザッハトルテ							周りからちやほやされたい\nだけですわ
+CharacterOff
+	ザッハトルテ		2_2
+Tween	ザッハトルテ	MoveBy	x=10				NoWait
+	ザッハトルテ							と、トルテはお菓子の国を\n再建するために……生まれて……
+CharacterOff
+	幻想体ザッハトルテ		1_2					それをお嬢様と呼ばずして\n何と呼ぶのかしら？
+CharacterOff
+	ザッハトルテ		2_2					そ、それは……
+CharacterOff
+	幻想体ザッハトルテ		1_2					私は必ず\nおかしの国を再建させる
+	幻想体ザッハトルテ							お嬢様が邪魔さえしなければ、ね？
+CharacterOff
+	ザッハトルテ		2_2					それじゃあ、魔界が……!!
+CharacterOff
+	幻想体ザッハトルテ		1_2					あら、国の再建は二の次かしら？
+	幻想体ザッハトルテ							『おかしの国の再建』のためなら\n全てを捨ててでも確実な手段をとる
+	幻想体ザッハトルテ							それが王たるものの務めではなくて？
+CharacterOff
+	ザッハトルテ		2_2					…………っ！
+CharacterOff
+	幻想体ザッハトルテ		1_2					あなたには覚悟が足りませんわ
+CharacterOff
+	ザッハトルテ		2_2
+Tween	ザッハトルテ	ShakePosition	x=10				Add
+	ザッハトルテ							トルテには……\n覚悟が、足りない……？
+CharacterOff
+	幻想体ザッハトルテ		1_2					ええ、その通り\n………………ですが
+	幻想体ザッハトルテ							あなたが望むのなら、それを\n変えることもできますわ
+CharacterOff
+	ザッハトルテ		2_2					…………え？
+CharacterOff
+	幻想体ザッハトルテ		1_2					今なお王と名乗るだけの器があるなら\nこの私を、あなたが使うことも\nできますわ
+CharacterOff
+	ザッハトルテ		2_2
+Tween	ザッハトルテ	MoveBy	x=-10				NoWait
+	ザッハトルテ							…………!?
+CharacterOff
+	ディーア	怒り2						トルテ！ ダメだ、聞くな！\n幻想体はトルテを利用しようと……
+CharacterOff
+	幻想体ザッハトルテ		1_2					私を使って兵を揃え\n労働力を持っておかしを作る\nやることは簡単ですのよ
+	幻想体ザッハトルテ							さぁ、覚悟はできて？
+	幻想体ザッハトルテ							おかしの国の再建のため\nこの手を取りなさい
+	幻想体ザッハトルテ							どうすればいいか分かるでしょう？\nねぇ、『神菓王ザッハトルテ』
+CharacterOff
+	プディングンヌ							いけません、トルテ王！
+CharacterOff
+	ザッハトルテ		2_2					プディン……\nトルテは、彼女の言うことも……\n一理あると思いますの……
+CharacterOff
+	マカロンヌ		2_2
+	エクレアンヌ		1_2					トルテ王!!
+	マカロンヌ							そんな言葉聞いちゃダメぇ！
+CharacterOff
+	ザッハトルテ		3_3
+	幻想体ザッハトルテ		1_2_b					ふふふ、やっとわかったのですね\nさあ、私と一緒に……
+	ザッハトルテ		3_3					おかしの国の、再建を……
+Tween	ザッハトルテ	MoveTo	x=45 time=4				NoWait
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	本気2	2_3_b
+Param	character_grayout=false
+	カプカプ		1_2
+	ドムドム		2_2
+Wait						.1
+FadeIn	black					.1
+	ディーア	本気2						トルテ！
+Tween	カプカプ	PunchPosition	y=50				Add
+Tween	ドムドム	PunchPosition	y=60				Add
+	ドムドム							………………!!
+Tween	ディーア	ShakePosition	x=10				Add
+	ディーア	悔しい2						く、そ……！\n魔物が多くて、届かない……！
+Param	character_grayout=true
+CharacterOff
+	プディングンヌ
+Tween	プディングンヌ	PunchPosition	y=50				NoWait
+	プディングンヌ							トルテ王……！
+Se	走る
+Tween	プディングンヌ	MoveTo	x=-800 time=3				NoWait
+FadeOut	black					.5
+	幻想体ザッハトルテ		1_3_b
+	ザッハトルテ		2_2
+	プディングンヌ		画面外_右
+FadeIn	black					.5
+Se	走る
+Tween	プディングンヌ	MoveTo	x=90 time=3				NoWait
+Wait						1.5
+	プディングンヌ							…………危ない！
+	プディングンヌ		2_2_b
+	ザッハトルテ		2_2					プディン……!?
+Tween	ザッハトルテ	MoveBy	x=100				NoWait
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+CharacterOff	ザッハトルテ					.5
+Wait						1
+	幻想体ザッハトルテ							……邪魔ですわよ
+FadeOut	white					.1
+	プディングンヌ	破損	2_2
+Se	斬2
+FadeIn	white					.1
+	プディングンヌ	黒						…………っ!!
+Tween	プディングンヌ	ShakePosition	x=20 time=1
+Se	倒れる
+Tween	プディングンヌ	MoveTo	y=-1000 time=3				NoWait
+Wait						1.5
+CharacterOff
+	ザッハトルテ
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							プディン!!
+CharacterOff
+Param	character_grayout=false
+	エクレアンヌ		1_2
+	マカロンヌ		2_2
+	マカロ＆エクレ							プディ姉！\nプディングンヌ姉さん！
+CharacterOff
+	ザッハトルテ		2_3_b
+	プディングンヌ	黒	2_2_y
+Tween	ザッハトルテ	ShakePosition	x=20 time=2				NoWait
+	ザッハトルテ							いや、プディン、プディン……！\nしっかりして……！
+CharacterOff
+	幻想体ザッハトルテ							何をそんなに動揺しているのかしら\nたかが『おかし』でしょう
+CharacterOff
+	ザッハトルテ		2_3_b
+	プディングンヌ	黒	2_2_y
+	ザッハトルテ							トルテは……わたしは…………\nああ、ああああ……!!
+CharacterOff
+	幻想体ザッハトルテ							今あなたが抱いているそれは\nただの兵の一つに過ぎませんわ
+CharacterOff
+	ザッハトルテ		2_3_b
+	プディングンヌ	黒	2_2_y
+	ザッハトルテ							…………!!
+StopBgm
+Param	character_grayout=true
+CharacterOff
+	マカロンヌ							よくもプディ姉を……っ!!
+	マカロンヌ							たあああっ!!
+FadeOut	lime					.1
+Bgm	魔獣バトル
+Se	風1
+FadeIn	lime					.1
+Wait						.5
+CharacterOff
+	エクレアンヌ							ええい!!
+FadeOut	aqua					.1
+Se	水1
+FadeIn	aqua					.5
+Wait						.1
+CharacterOff
+	幻想体ザッハトルテ
+Tween	幻想体ザッハトルテ	PunchPosition	x=50				NoWait
+	幻想体ザッハトルテ							……っ!?
+CharacterOff
+	ディーア	本気2						敵が怯んだ！\n今がチャンスだ！ 撤退するぞ！
+CharacterOff
+	ザッハトルテ							プディン……
+CharacterOff
+	ディーア	怒り2						トルテしっかりしろ！\nお前はプディンの王さまなんだろ!!
+CharacterOff
+	ザッハトルテ							…………!!
+CharacterOff
+	ディーア	本気2						マカロンヌ、エクレアンヌ！\n迎撃するぞ！
+CharacterOff
+	エクレアンヌ		1_2
+	マカロンヌ		2_2					わかったわ、マスターさん！
+	エクレアンヌ							ボクたちに任せて！
+If	isdebug==true
+CharacterOff
+Jump	*E_353_03
+EndIf
+EndScenario
+
+# E_353_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	遺跡B
+FadeIn	white					.5
+	ディーア	悔しい2						はぁ、はぁ……\nな、なんとか逃げ切れたか……\nここなら、しばらくは安全なはずだ
+CharacterOff
+	プディングンヌ	黒
+Wait						1.5
+CharacterOff
+	ザッハトルテ							プディン……ひっく……\nどうしよう、プディンが……！
+	ザッハトルテ							どうしよう、どうしよう……
+CharacterOff
+	エクレアンヌ		1_2
+	マカロンヌ		2_2
+	エクレアンヌ							トルテ王、\n落ち着いてください……！
+CharacterOff
+	ザッハトルテ		2_2
+	ディーア	悔しい2	1_2
+	ザッハトルテ							でも、でも、プディンが……\nトルテのせいで……！
+	ディーア	悔しい2						大丈夫……\n大丈夫だよ、トルテ
+	ザッハトルテ							パティシエ……\nトルテは、迷ってしまって……\n判断を……だから……ひっく……
+	ディーア	笑い2						トルテは間違ってない\nちゃんと踏みとどまっただろ？\n今ここに居るんだから
+	ザッハトルテ							…………！
+Tween	ディーア	MoveBy	x=30				NoWait
+	ディーア	通常2						それにな、トルテ……
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			.5
+Wait						.6
+CharacterOff	オーラ青					1
+Wait						1
+Param	character_grayout=true
+	ザッハトルテ							……！\nパティシエの魔力が……！
+Tween	ディーア	MoveBy	x=-30				NoWait
+	ディーア	通常2						トルテの力を使えばまだ……\n何とかなるんじゃないか？
+Tween	ディーア	MoveBy	x=-50 time=2
+CharacterOff	ディーア					1
+Tween	ザッハトルテ	MoveTo	x=0			2	Add
+	ザッハトルテ							そう……そうですわ……\nトルテが、プディンを……
+CharacterOff
+	エクレアンヌ		1_2
+	マカロンヌ		2_2
+	マカロンヌ							トルテ王、一回深呼吸しましょ？\nすってー、はいてー！
+CharacterOff
+Param	character_grayout=false
+	ザッハトルテ							はぁー……
+Se	光2
+	オーラ青		エフェクト表			1
+	ザッハトルテ							………………!!
+FadeOut	white					.5
+CharacterOff
+	オーラ青		エフェクト表
+	プディングンヌ	黒
+Wait						1
+FadeIn	white					1
+	プディングンヌ	破損				1.5
+Wait						1.5
+	プディングンヌ							<dash=2>……トルテ王……
+CharacterOff	プディングンヌ
+	ザッハトルテ							プディン、喋っちゃだめ……
+CharacterOff	ザッハトルテ
+CharacterOff	オーラ青					1
+	プディングンヌ	破損						トルテ王、ありがとうございます
+CharacterOff	プディングンヌ
+	ザッハトルテ							いいえ……むしろトルテが……\nトルテがいけないの……だから\nプディンが……
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2						トルテ……
+CharacterOff
+	ザッハトルテ		2_2
+	ディーア	悔しい2	1_2
+	ザッハトルテ
+Tween	ザッハトルテ	ShakePosition	x=10 y=0 z=0 time=0.5				NoWait
+	ザッハトルテ							パティシエ、トルテは……トルテは\nどうしたらいいの……？
+	ザッハトルテ							トルテは、王として\n何をしたら……！
+	ディーア							トルテ……王ってなんだと思う？
+	ザッハトルテ							王……王さまは……\n国のために全てを捨てて……！
+	ディーア	怒り2						それは幻想体の思う王さまだっただろ？\nトルテもあいつと同じように\n思ってるのか？
+StopBgm						1
+	ディーア	通常2						オレは、トルテの意見が聞きたい
+	ザッハトルテ							………………
+	ディーア	怪しい2						<dash=2>オレが知ってる\nある王さまは
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	イベントスチル35301		エフェクト裏
+Wait						.2
+FadeIn	black					.3
+Bgm	凱旋					1
+	ディーア	<Off>						傍若無人で命令しまくるし\n足で頭を撫でてくるし
+	ディーア	<Off>						下手な物を渡すとひねくれたりもする
+	ディーア	<Off>						そんな、ちょっと変わった王さま\nなんだけど
+FadeOut	black					.5
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff
+Param	character_grayout=true
+	ディーア	あはは2	1_2
+	ザッハトルテ		2_2
+FadeIn	black					.5
+	ディーア	あはは2						みんなから慕われているし\nぶれない信念を持ってる
+	ディーア	通常2						きっと彼女が王さまなのは\nそういうところがあるからだと思う
+	ディーア	通常2						<dash=2>だからこそ、民を導くことが\nできるんだ
+	ディーア	通常2						オレはそんなあの王さまのこと\n本当に尊敬してる
+	ザッハトルテ							民を……
+FadeOut	white					1
+CharacterOff
+Bg	スイーツ化図書館
+ImageEffect	SpriteCamera	Sepia
+Wait						1
+FadeIn	white					.5
+	ザッハトルテ	<Off>						<color=blue>最初は分からなかった……</color>
+	ザッハトルテ	<Off>						<color=blue>王とは何か、どうあるべきか、\nそして国を為すには何が必要か</color>
+	ザッハトルテ	<Off>						<color=blue>あの言葉を聞くまでは……
+FadeOut	black					1
+	ザッハトルテ
+FadeIn	black					.5
+	ザッハトルテ							どうしておかしの国を作るの？
+	遠い記憶の誰か	<Off>						それは、子どもたちを幸せにする\nためだよ
+	ザッハトルテ							おかしで……幸せになるの？
+	遠い記憶の誰か	<Off>						おかしがあると、みんなが笑顔になる\n飢えることなく幸せに暮らせる\nほら、食べてごらん？
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							ふわぁぁ♪　おいしー♪
+	遠い記憶の誰か	<Off>						ほらね、笑顔になっただろう？\nおかしの国の王さまは\nおかしでみんなを幸せにするんだ
+	ザッハトルテ							それが王さまのやるべきことなの？
+	遠い記憶の誰か	<Off>						そう\nでもこれは王一人では決して\n為せない……だからキミは……
+FadeOut	black					.5
+ImageEffectOff	SpriteCamera	Sepia
+Bg	遺跡B
+CharacterOff
+	黒グラデーション		エフェクト表
+	ザッハトルテ		2_2
+	ディーア	通常2	1_2
+FadeIn	black					.5
+	ザッハトルテ							……子どもたちを幸せにするために\n人々を笑顔にするために
+	ザッハトルテ							おかしの王はその信念を持って\nそして何より大切にすべきなのは……
+CharacterOff	黒グラデーション
+	ザッハトルテ							そう、トルテは……\nトルテはあの夢を\n実現するために……
+	ザッハトルテ							そうですわ\nむしろ最初から答えは見えていて……
+	ザッハトルテ							だからこそ分からなくなって\nいたのかもしれません……
+CharacterOff
+	プディングンヌ							トルテ王……
+CharacterOff
+	ザッハトルテ		2_2
+	ディーア	通常2	1_2
+	ザッハトルテ							プディン、\nケガはもう……大丈夫ですわね？
+CharacterOff
+	プディングンヌ							ええ\nトルテ王のおかげで、すっかり
+CharacterOff
+	ザッハトルテ		2_2
+	ディーア	通常2	1_2
+	ディーア							答えは出たのか、トルテ
+	ザッハトルテ							ええ、パティシエ\nトルテはもう迷いませんわ
+	ザッハトルテ							プディン、マカロ、エクレ！\nそしてパティシエ\n準備はいいかしら？
+CharacterOff
+	マカロンヌ		2_3
+	エクレアンヌ		1_3
+	プディングンヌ		3_3
+	プディングンヌ							はい！
+	エクレアンヌ							大丈夫！
+Tween	マカロンヌ	PunchPosition	y=50				NoWait
+	マカロンヌ							まかせてぇ♪
+CharacterOff
+	ザッハトルテ		2_2
+	ディーア	笑い2	1_2
+	ディーア							もう大丈夫そうだな
+	ザッハトルテ							ええ、カンペキですわ！\nさぁ、魔界を救いますわよ！
+CharacterOff
+Param	character_grayout=false
+	マカロンヌ		2_3
+	エクレアンヌ		1_3
+	プディングンヌ		3_3
+	全員							おー!!
+Wait						.5
+StopBgm
+CharacterOff
+Param	character_grayout=true
+Se	火事
+Shake	Graphics		time=2				NoWait
+Wait						.5
+CharacterOff
+	ザッハトルテ		2_2
+	ディーア	悔しい2	1_2
+Bgm	緊迫
+	ディーア							な、なんだ……!?
+Se	闇3
+Se	光3
+FadeOut	white					1
+Bg	遺跡A
+CharacterOff
+	エクレアンヌ		1_2
+	マカロンヌ		2_2
+Wait						.5
+FadeIn	white					.5
+Tween	マカロンヌ	PunchPosition	y=50				NoWait
+	マカロンヌ							きゃあっ！\n遺跡が吹っ飛んじゃったぁ！
+CharacterOff
+	ザッハトルテ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							この魔力は……！
+CharacterOff
+Se	闇3
+	幻想体ザッハトルテ					2
+Wait						1.5
+	幻想体ザッハトルテ							……見つけましたわ
+CharacterOff
+	ザッハトルテ		2_2
+	ディーア	悔しい2	1_2_b
+Wait						.1
+Tween	ディーア	MoveBy	x=-20				NoWait
+CharacterOff	ディーア					1
+Bgm	Xmasボス
+Tween	ザッハトルテ	MoveTo	x=0				Add
+	ザッハトルテ							あら、手間が省けましたわね\nちょうど今あなたに会いにいこうと\n思っていたところですわ！
+CharacterOff
+	幻想体ザッハトルテ		1_2					……強がりではないようですわね
+CharacterOff
+	ザッハトルテ							さっきまでのトルテは\n良くない王さまの真似をしていた\nだけですわよ？
+CharacterOff
+	幻想体ザッハトルテ		1_2					……今は違うのかしら？
+CharacterOff
+	ザッハトルテ							ええその通り！\n今のトルテこそ\n本当のトルテですわ！
+	ザッハトルテ							もう決めましたの\nあなたの手は取りませんわ！
+CharacterOff
+	幻想体ザッハトルテ		1_2					…………どうしてかしら？
+CharacterOff
+	ザッハトルテ							分かり切ったことですわ\n魔界を守るためです
+CharacterOff
+	幻想体ザッハトルテ		1_2					まだそんなことを言っているの？\nおかしの国は、私じゃなければ……
+CharacterOff
+	ザッハトルテ							その考え方こそ\n間違っているということですわ
+	ザッハトルテ							あなたは魔界からおかしを奪った……\nそれは、皆から幸せを奪ったのと\n同じですのよ？
+CharacterOff
+	幻想体ザッハトルテ		1_2					……でも、少しでも早くおかしの国を\n作りたいでしょう？
+CharacterOff
+	ザッハトルテ							いいえ！ 人々の幸せを奪って\n作る国なんて、トルテが作りたい\nおかしの国ではありませんわ！
+	ザッハトルテ							あなたの作る国に民はいない\n民のいない国なんて\n到底国とは言えませんわ
+	ザッハトルテ							そんなことも分からないなんて\nあなた、王として失格ですわよ！
+CharacterOff
+	幻想体ザッハトルテ		1_2					……じゃあ、夢を諦めるの？
+CharacterOff
+	ザッハトルテ							諦めませんわ！
+FadeOut	white					1
+CharacterOff						0
+	ザッハトルテ	拡大	エフェクト表			0
+FadeIn	white					.2
+	ザッハトルテ							おかしによって誰もが笑顔に……\nそして誰もが幸福に
+	ザッハトルテ							何より大切な子どもたちが、\n幸せに暮らせるおかしの国を作る
+	ザッハトルテ							たとえどれほど時間がかかっても\nトルテは必ず成し遂げてみせますわ！
+	ザッハトルテ							プディン、マカロ、エクレ……
+	ザッハトルテ							そしてパティシエ
+	ザッハトルテ							大切なみんなと一緒に、必ず！
+	ザッハトルテ	拡大2						それこそが\n神菓王ザッハトルテの<dash=2>
+	ザッハトルテ							大事な夢なのですから！
+	ザッハトルテ							トルテとあなたとの違い\nそれは<dash=2>
+	ザッハトルテ							大切な臣下、そして\nパティシエという国民が\nいることですわ！
+CharacterOff
+	ディーア	あはは2						あはは……\nオレも国民になっていいのか？
+CharacterOff
+	ザッハトルテ							ふふ、嫌とは言わせませんわよ？\nパティシエも私の国の建国に必要\nなんですもの！
+Tween	ザッハトルテ	MoveTo	x=90				Add
+	ザッハトルテ							さぁパティシエ、ついてきなさい！\nトルテの夢を、あなたにも\n見せて差し上げますわ！
+	ディーア	通常2	1_2_b			.5
+	ディーア	通常2						仰せのままに\nどこまでもついていきますよ
+	ディーア	笑い2						<dash=2>おかしの国の、夢みる王さま！
+If	isdebug==true
+CharacterOff
+Jump	*E_353_04
+EndIf
+EndScenario
+
+# E_353_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	遺跡A
+Se	剣閃
+Wait						2
+CharacterOff
+	幻想体ザッハトルテ		2_3
+FadeIn	white					.1
+Tween	幻想体ザッハトルテ	ShakePosition	x=20 time=1
+Se	魔剣出る
+Tween	幻想体ザッハトルテ	MoveTo	y=-400 time=3				NoWait
+Wait						1
+Tween	幻想体ザッハトルテ	ShakePosition	x=20 time=2
+	幻想体ザッハトルテ							まだよ……まだ……\nおかしの国は、まだ……！
+Se	闇1
+CharacterOff						1
+Wait						3
+StopBgm
+	ディーア	悔しい2						…………終わったか
+CharacterOff
+	プディングンヌ		3_3
+	マカロンヌ		2_3
+Bgm	凱旋
+	エクレアンヌ		1_3					や、やったー！\n危なかったぁ……！
+Tween	マカロンヌ	PunchPosition	y=50				NoWait
+	マカロンヌ							やったー♪　プディ姉、エクレ！\nやったねぇ♪
+	プディングンヌ							ご立派でした、トルテ王！
+	マカロンヌ							あんなにいた魔物も、今ので倒れたか\n逃げちゃったみたいだねぇ？
+CharacterOff
+	ザッハトルテ							<dash=2>いえ、終わっていませんわ
+CharacterOff
+	ディーア	怒り2						……！\nまだ動いてるのか……!?
+CharacterOff
+	プディングンヌ		3_3
+	エクレアンヌ		1_3
+	マカロンヌ		2_3
+	エクレアンヌ							ちょっと静かになったけど……\nもう暴走してないのかな？
+CharacterOff
+	ジェムジェム
+Tween	ジェムジェム	PunchPosition	y=50				NoWait
+	ジェムジェム							…………!!
+CharacterOff
+	マカロンヌ
+Tween	マカロンヌ	PunchPosition	y=50				NoWait
+	マカロンヌ							きゃあっ！
+CharacterOff
+	ザッハトルテ		2_2
+	ディーア	怒り2	1_2
+	ディーア							まだ魔物が残ってるってことは\n幻想体の使い魔ってわけじゃ\nないみたいだな
+Tween	ザッハトルテ	MoveTo	x=-800 time=6				NoWait
+	ディーア	驚き2						……トルテ？
+CharacterOff
+Param	character_grayout=false
+	ザッハトルテ		画面外_右
+	おかしの兵器
+Tween	ザッハトルテ	MoveTo	x=180 time=2
+	ザッハトルテ							……これは、破壊しますわ
+CharacterOff
+	ディーア	怒り2						……本当にいいのか？
+CharacterOff
+	おかしの兵器		2_3_b
+	ザッハトルテ		3_3					パティシエ\n大事なのは、迅速な建国では\nありませんのよ？
+Se	光3
+	オーラ青		エフェクト表			1
+Wait						1
+FadeOut	white					.1
+Wait						.2
+FadeIn	white					.3
+Se	ガードブレイク
+CharacterOff	おかしの兵器					1.5	NoWait
+CharacterOff	オーラ青					2
+Tween	ザッハトルテ	MoveTo	x=90 time=2
+	ザッハトルテ							誰も悲しまずに済む国……
+	ザッハトルテ							誰もが幸せになれる国を作ること\nそれが重要なのですわ
+CharacterOff
+	ディーア	通常2						そっか
+CharacterOff
+	ザッハトルテ		2_2					それに……！
+Se	走る
+Tween	ザッハトルテ	MoveTo	x=800 time=3				NoWait
+Wait						1
+FadeOut	white					.2
+CharacterOff
+	ザッハトルテ		1_2
+	プディングンヌ		2_2
+FadeIn	white					.2
+Tween	プディングンヌ	PunchPosition	y=50				NoWait
+	プディングンヌ							わっ！\nな、なんですか、トルテ王？
+FadeOut	white					.2
+CharacterOff
+	ザッハトルテ		1_4
+	プディングンヌ		2_4
+	マカロンヌ		4_4
+FadeIn	white					.2
+Tween	マカロンヌ	PunchPosition	y=50				NoWait
+Tween	マカロンヌ	MoveBy	x=-200				NoWait
+	マカロンヌ							手を繋ぐんですかぁ？\n楽しそう♪　えい！
+FadeOut	white					.2
+CharacterOff
+	プディングンヌ		1_4
+	マカロンヌ		2_4
+	エクレアンヌ		4_4
+FadeIn	white					.2
+Tween	エクレアンヌ	PunchPosition	y=50				NoWait
+Tween	エクレアンヌ	MoveBy	x=-200
+	エクレアンヌ							ボクもボクも！　えへへ♪\nほら、マスターくんも！
+FadeOut	white					.2
+CharacterOff
+	エクレアンヌ		1_4
+	ディーア	驚き2	2_4
+	ザッハトルテ		3_4_b
+	プディングンヌ		4_4_b
+FadeIn	white					.2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						え、オレも繋ぐのか？
+	ザッハトルテ							えへへ、さきほども\n言ったでしょう？
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							みんなと一緒に！\nおかしの国を作るのが、\nトルテの夢なんだもん！
+FadeOut	white					2
+StopBgm
+CharacterOff
+Param	character_grayout=true
+Bg	酒場_カフェ
+	プディングンヌ
+Wait						3
+Bgm	平和
+FadeIn	white					1
+	プディングンヌ							プディングが出来上がりました♪
+CharacterOff
+	プディングンヌ		2_2
+	ザッハトルテ		1_2					さすがの手際ね、プディン！\nさっそくトルテが味を見て……\nあむっ……！
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							んーーーー！ すっごくおいしい！\nあまくって、なめらかで、\nほっぺた落ちちゃう……！
+	ザッハトルテ							おいしおいしー！\nさすがはプディンね、だいすきぃ！
+	プディングンヌ							あらあら、そんなに喜んで\nもらえるなんて光栄ですね♪\nまだまだ作ってきますよ、トルテ王♪
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+	ザッハトルテ							わぁい♪
+CharacterOff
+StopBgm
+	ディーア	あはは2						………………
+CharacterOff
+	プディングンヌ		2_2
+	ザッハトルテ		1_2					………………
+Tween	ザッハトルテ	PunchPosition	y=50				NoWait
+Bgm	コメディ
+	ザッハトルテ							ふわぁぁ!? ぱ、パティシエ！\nいいい今のは別に……\nなんでもありませんわ！
+CharacterOff
+	ザッハトルテ		2_2
+	ディーア	あはは2	1_2
+	ディーア	あはは2						いや、別に恥ずかしがること\nないだろ？
+	ディーア	通常2						やっと開けた歓迎会なんだし\nトルテが幸せなら大成功だよ
+	ザッハトルテ							ま、まぁ、そうと言えなくも\nありませんわね
+Bgm	平和					1
+	ザッハトルテ							ところでパティシエ\n出来上がったおかしを街の人にも\n配ってもらえないかしら
+	ディーア	驚き2						ん、街の人？
+	ザッハトルテ							……あの場から回収できた\nおかしはほんの少しでしたから
+	ザッハトルテ							みんなから奪ってしまった幸せを\n少しでも戻して差し上げたいのです
+	ディーア	驚き2						でも、別にトルテが\n奪ったわけじゃないだろ？
+	ザッハトルテ							あれには心当たりがありますの\nたぶん、あれはトルテの気持ちに\n反応して、動き出したのですわ
+	ディーア	驚き2						あれは、おかしの国にあったもの\nってことか？
+	ディーア	怪しい2						じゃあ、あの場所は\nおかしの国の跡地……？
+CharacterOff
+	エクレアンヌ		1_2
+	マカロンヌ		2_2
+	エクレアンヌ							おかしの国だって言われる\n場所は、魔界の各地にあるんだよ
+	マカロンヌ							だから本当はどこにあったのか\n分からないんだよねぇ♪
+CharacterOff
+	ザッハトルテ		2_2
+	ディーア	怒り2	1_2
+	ザッハトルテ							どちらでもかまいません
+	ディーア	驚き2						え？
+	ザッハトルテ							確かなのは、神菓王ザッハトルテは\nおかしでみんなを幸せにする\n王ということですのよ！
+	ディーア	通常2						……そうだな\nさすがは、おかしの王さま
+	ザッハトルテ							ふふん♪
+CharacterOff
+	エクレアンヌ		1_2_b
+	マカロンヌ		2_2
+	マカロンヌ							マカロン、できましたぁ♪
+Tween	エクレアンヌ	MoveTo	x=-180				Add
+Tween	マカロンヌ	MoveTo	x=180
+	ザッハトルテ		2_3					さっそく味を見ますわ！\n今日のトルテは特別厳しいふわぁぁ♪　\nさくふわでおいしー♪
+Tween	エクレアンヌ	PunchPosition	y=50				NoWait
+	エクレアンヌ							いいなぁ、マカロンヌ姉さん\nトルテ王、ボクのエクレアも！
+	ザッハトルテ							あぁ、きらきらしてておいしそぅ♪\nあーんむっ！ おいし、おいしぃ♪
+CharacterOff
+	プディングンヌ							トルテ王、あまりつまみ食い\nしすぎないようにしてくださいね？
+CharacterOff
+	ザッハトルテ		2_3					…………はっ!!\nつ、つまみ食いではありませんわ！\n味見はトルテの大切なお仕事ですのよ
+	ザッハトルテ							んーー！ このエクレアも\nとってもおいしぃわ……♪
+CharacterOff
+	エクレアンヌ		1_2
+	マカロンヌ		2_2
+Tween	エクレアンヌ	PunchPosition	y=50				NoWait
+	エクレアンヌ							えへへ、やったぁ！
+CharacterOff
+	ザッハトルテ							それはそうと、パティシエ！\n出来上がったおかしを、\n街の人へ届けるのですわ！
+CharacterOff
+	ディーア	あはは2						分かりましたよ、わが王さま\nいってきます
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	white					.3
+	　　　　　　　　　　							<color=blue><dash=2>こうして、魔界を巻き込んだ\nおかしの国の王さまの物語は\n幕を閉じた</color>
+	　　　　　　　　　　							<color=blue>だがこれは序章に過ぎない</color>
+	　　　　　　　　　　							<color=blue>おかしの国の再建を目指す\n彼女たちの奮闘の日々は\nここから始まるのだ<dash=2></color>
+FadeOut	white					.5
+Param	character_grayout=false
+CharacterOff
+	イベントロゴ353		エフェクト裏
+FadeIn	white					.5
+	イベントロゴ353					1		<color=blue>おかしの国の夢見る王さま\n\n　　　　　　　　　　　　　　<dash=2>完</color>
+Wait						.5
+StopBgm
+Wait						1
+	リディ	驚き2	画面外_下
+Tween	リディ	MoveTo	y=-350				Add
+	リディ							あっマスター！ ちょっと待って！
+Bgm	コメディ
+Tween	リディ	PunchPosition	y=50				NoWait
+Tween	イベントロゴ353	PunchPosition	y=800 time=3				NoWait
+Tween	イベントロゴ353	MoveBy	x=-1600 time=3				NoWait
+	リディ							よいしょっと！
+CharacterOff
+Param	character_grayout=true
+	ディーア	驚き2						ん？\nどうした、リディ？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ		2_2
+	リディ	通常2						魔剣機関から指令書が来てるよ
+	ディーア	怪しい2						………………
+	リディ	驚き2						えーっとね、街を荒らしている\nおかしの形をした魔物を\n至急排除して、だって
+	ディーア	怪しい2						……ですよね
+CharacterOff
+	ザッハトルテ							たしかあの時逃げた魔物もいたわね
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	通常2	2_2
+	ディーア	汗2						…………ですよね
+	リディ	通常2						まだまだ野放しってことだね！
+	ディーア	本気2						…………ですよね!!!!
+	リディ	笑い2						良かったね、マスター！\nこれでおかしの材料代も心配ないよ！
+CharacterOff
+	ザッハトルテ							それなら、もっとおかしが\n作れますわね！
+CharacterOff
+	ディーア	悔しい2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							まってまって！\n外の対応担当オレ!? オレ一人!?
+CharacterOff
+	リディ	照れ2	2_2
+	ザッハトルテ		1_2					プディン、マカロ、エクレ！\nどんどんおかしを作りますわよ！
+CharacterOff
+Param	character_grayout=false
+	エクレアンヌ		1_3
+	マカロンヌ		2_3
+	プディングンヌ		3_3
+	三人							はーい♪
+CharacterOff
+Param	character_grayout=true
+	ディーア	汗2						ちょ、ちょっと!!
+CharacterOff
+	リディ	照れ2	2_2
+	ザッハトルテ		1_2					さぁ、パティシエも\n存分に働くのですわ！
+	ザッハトルテ							全てはおかしの国の再建のために！
+CharacterOff
+Param	character_grayout=false
+	エクレアンヌ		1_3
+	マカロンヌ		2_3
+	プディングンヌ		3_3
+Tween	エクレアンヌ	PunchPosition	y=50				NoWait
+Tween	マカロンヌ	PunchPosition	y=50				NoWait
+Tween	プディングンヌ	PunchPosition	y=50				NoWait
+	三人							再建のためにー！
+CharacterOff
+Param	character_grayout=true
+	ザッハトルテ		1_2
+	リディ	照れ2	2_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	笑い2						ためにー！
+CharacterOff
+	ディーア	汗2						オレだけ大変すぎじゃない!?
+CharacterOff
+	　　　　　　　　　　							<color=blue>おかしの国の夢見る王さま\n\n　　　　　　　　　　　　　　<dash=2>完</color>
+If	isdebug==true
+CharacterOff
+Jump	*E_353_01
+EndIf
+EndScenario

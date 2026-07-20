@@ -1,0 +1,667 @@
+# G_491_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	草原B
+	黒背景		エフェクト表2			0
+	土煙		エフェクト裏			0
+	ディーア	絶望裸2				0
+Param	character_grayout=false
+FadeIn	black					.5
+	ディーア	絶望裸2						魔剣がどんな力を持っていても\n信じて使いこなすのが、\n魔剣使いのあるべき姿……
+	ディーア	絶望裸2						だから白櫃を\n使いこなしたかっただけなのに
+CharacterOff	黒背景
+	ディーア	絶望裸2						まさか、\nこんなことになるなんて……！
+Se	回想
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	酒場の地下					0
+	白櫃	通常拡大	エフェクト裏			0
+	集中線		エフェクト表			0
+Wait						1
+FadeIn	white					.3
+Bgm	緊迫
+	白櫃	通常拡大						こんにちは！\nただの箱です!!
+StopBgm
+CharacterOff
+	ディーア	絶望2						は、はこ……？
+Bgm	コメディ
+CharacterOff
+	白櫃	通常
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	通常						うわぁ♪\n誰が触ってもダメだったのに、\n私をアンロックできるなんて♪
+	集中線		エフェクト表			0
+	白櫃	嬉しい						マスターさんはすごい変態ですね！
+CharacterOff
+	ディーア	拡大本気2	エフェクト表					ちょっと待て!?
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	p3
+	白櫃	驚き	p7b
+	白櫃	驚き						ふぇ……？\n私、変なこと言ってますか？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						オレは変態じゃない!!\n極めて常識的なマスターだ！
+Tween	白櫃	MoveBy	x=-30				NoWait
+	白櫃	嬉しい						もー♪\n謙遜しなくていいですよ♪
+	ディーア	絶望2						いや、謙遜じゃなくてな……？
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	通常						黒櫃ちゃんが言っていました♪
+	白櫃	通常						『変態』は常識にとらわれず\n発想を行動に移せる、\nすごい才能を持った存在だって♪
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	嬉しい						だから、\n私をアンロックできたマスターさんは\nとんでもない『変態』です♪
+	ディーア	怪しい2						それって、\n『天才』の間違いじゃ……？
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	きらーん						違いますよぉ\nそんなハレンチな呼び方しません♪
+	ディーア	驚き2						いや、\n『変態』の方がハレンチだって！
+	白櫃	驚き						あれぇ……？\n『変態』がハレンチなら……\n『天才』が『変態』で<dash=2>
+Tween	白櫃	MoveBy	x=30				NoWait
+	白櫃	驚き						だから\n『天才』が『変態』と同じで……\n…………『ヘンサイ』？
+	ディーア	絶望2						…………
+	ディーア	絶望2						い、今は\nすごい人が『変態』でいいよ……
+	白櫃	嬉しい						わかりましたぁ♪\nその切り替えの早さ！\nやっぱりすごい変態ですね♪
+	ディーア	汗2						は、はは……
+	白櫃	嬉しい						私のマスターさんが、\n変態ですごく嬉しいですっ♪
+	白櫃	通常						でも、アンロックしてもらったのに\n申し訳ないんですけど、\n私、最弱の魔剣なんですよね
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	魔術空間					0
+	白櫃武器	拡大	エフェクト表			0
+Param	character_grayout=false
+FadeIn	white					.3
+	白櫃	<Off>						誰も使い方を知らない\nピカピカ光るただの箱ですし\n魔剣なのも間違いだと思うんです
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	通常2	p3
+	白櫃	通常	p7b			0
+Param	character_grayout=true
+FadeIn	white					.3
+	白櫃	通常						だから、マスターさんの\nお役には立てないかも……
+StopBgm
+	ディーア	通常2						そんなことないさ、白櫃
+Bgm	わくわく
+	白櫃	驚き						マスターさん？
+	ディーア	笑い2						どんな魔剣でも\n使いこなすのがマスターの役目だ！\n白櫃もちゃんと使ってみせる！
+	白櫃	通常						マスターさん……！
+	白櫃	通常						じゃ、じゃあ、さっそくですけど、\n試しに使ってみます？
+	ディーア	笑い2						ああ、任せてくれ！
+FadeOut	black					.5
+Param	character_grayout=false
+CharacterOff						0
+	ディーア	怒り2	p5b			0
+	          
+FadeIn	black					.5
+Wait						.3
+Se	魔剣入る
+	白櫃武器	通常	p5			1
+Wait						1
+	ディーア	本気2						よし、\nこの白櫃の箱を使って……！
+CharacterOff
+	白櫃	通常						ドキドキ……♪
+CharacterOff
+	白櫃武器	通常	p5
+	ディーア	悔しい2	p5b
+	ディーア	悔しい2						つか、って……
+CharacterOff
+	白櫃	驚き						ど、どうなるのかなぁ……！
+StopBgm
+CharacterOff
+	白櫃武器	通常	p5
+	ディーア	悔しい2	p5b
+	黒グラデーション		エフェクト裏			1
+	ディーア	絶望2						…………………………………あれ？
+Bgm	緊迫
+CharacterOff	黒グラデーション					0
+	集中線		エフェクト表			0
+	ディーア	絶望2						これ、\nどうやって使うんだ!?
+CharacterOff
+Bgm	コメディ
+	白櫃	驚き						や、やっぱり\nわからないんですか～!?
+CharacterOff
+	ディーア	絶望2						い、いつもは\nみんなに使い方を教えてもらったり、\n魔剣機関の資料を見てたけど……
+CharacterOff	黒グラデーション
+	ディーア	汗2						し、白櫃……？\nお前はどんな武器なんだ？
+CharacterOff
+	白櫃	嬉しい
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	嬉しい						ピカピカします♪
+CharacterOff
+	白櫃武器	通常	p5
+	ディーア	本気2	p5b
+	ディーア	本気2						他には……!?
+CharacterOff
+	白櫃	嬉しい						ありません♪
+CharacterOff
+	集中線		エフェクト表
+	ディーア	拡大本気2	エフェクト裏
+	ディーア	拡大本気2						なるほど、わからん!!
+CharacterOff
+	白櫃	驚き						えぇえええ!?
+Shake	白櫃		x=5				NoWait
+	白櫃	悲しい						マスターさんほどの大変態でも\n変態的な使い方がないなんて……\nやっぱりただの箱は<dash=2>
+CharacterOff
+	ディーア	拡大本気2	エフェクト表
+	ディーア	拡大本気2						だけど、まだ諦めるのは早い！
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2	p3
+	白櫃	驚き	p7b
+	白櫃	驚き						ふぇ……？
+	ディーア	本気2						オレはマスターとして\n白櫃の使い方を必ず見つけてみせる！
+	白櫃	通常						マスターさん……！
+	ディーア	怒り2						そのために<dash=2>
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	通常2	画面外_右			0
+Tween	ディーア	MoveBy	x=-600 time=1.5				NoWait
+Bgm	平和
+FadeIn	black					.3
+Se	走る
+Wait						.3
+	ディーア	通常2						黒櫃ー！ 黒櫃はいるかー！
+CharacterOff
+	黒櫃	嬉しい
+Tween	黒櫃	PunchPosition	y=30				NoWait
+	黒櫃	嬉しい						マァスター!!\n天才のボクを呼んだかい!!
+	黒櫃	通常						ボクを求めるなんて、\nさぞ難問なのだろうね！
+	黒櫃	通常						だが、安心したまえ！\nこの天才の天才的頭脳があれば、\n解けない問いはないさ!!
+CharacterOff
+	ディーア	笑い2						ありがとう黒櫃！\nじゃあ、さっそく<dash=2>
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	白櫃	通常
+	集中線		エフェクト表
+	ディーア	<Off>						白櫃の使い方を教えてくれ！
+CharacterOff
+	黒櫃	通常						……………………
+Bgm	コメディ
+Tween	黒櫃	PunchPosition	y=80				NoWait
+	黒櫃	慌て						し、白櫃ぅ……!?\nどうしてここに……!?
+CharacterOff
+	白櫃	嬉しい						わぁ、黒櫃ちゃんだぁ♪
+CharacterOff
+	ディーア	笑い2						白櫃は黒櫃の妹なんだろ？\nだったら使い方も分かると思って！
+Param	character_grayout=true
+CharacterOff
+	白櫃	嬉しい	p7
+	黒櫃	悔しい	p3b
+Tween	黒櫃	MoveBy	x=-10				NoWait
+	黒櫃	悔しい						た、たしかに白櫃は\nボクのかわいい妹だが……！
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	通常						マスターさんは\n黒櫃ちゃんのマスターさんでも\nあったんですね♪
+	白櫃	嬉しい						黒櫃ちゃんとマスターさんで\n変態のにじょーです♪
+Tween	黒櫃	MoveBy	x=30				NoWait
+	黒櫃	悔しい						ちょっと待て!?\nまだ勘違いをしてるのか？\nボクは変態じゃなくて天才だ！
+	白櫃	驚き						てん、さい……？ でも、 \n『変態は行動しなければただの天才』\nって教えてくれたのは……？
+Tween	黒櫃	PunchPosition	y=30				NoWait
+	黒櫃	慌て						逆だ、逆！\nなんで逆で覚える!?
+CharacterOff
+	ディーア	怪しい2						やっぱり……
+CharacterOff
+	黒櫃	悔しい	p3b
+	白櫃	驚き	p7
+	白櫃	驚き						変態が天才で……？\n『テンタイ』……？ あれ……？
+CharacterOff
+	黒櫃	慌て拡大	エフェクト表
+	黒櫃	慌て拡大						合体してる！\nいったい何語だ!?
+CharacterOff
+	黒櫃	慌て	p3b
+	ディーア	汗2	p7
+	ディーア	汗2						大変なんだな、黒櫃も……
+Tween	黒櫃	MoveBy	x=20				NoWait
+	黒櫃	悔しい						はぁ……それで？\n白櫃の使い方を知りたいのかい？
+	ディーア	笑い2						ああ、\n白櫃を使いこなしてあげたくて
+Tween	黒櫃	MoveBy	x=-20				NoWait
+	黒櫃	悔しい						ボクも協力したいが……\nあいにくとこの天才にも\nわからないことはあるのさ……
+	ディーア	驚き2						そうなのか？
+	黒櫃	悔しい						ボクは自分の天才的な使い方が……\n中の魔神を制御する方法が分かる
+	黒櫃	悔しい						だが白櫃、\nキミの中にいるのは何者だい？
+CharacterOff
+	白櫃	きらーん						えーっとぉ、よくわからない\n『イキタマ人』がいるらしいです♪
+CharacterOff
+	黒櫃	悔しい	p3b
+	ディーア	絶望2	p7
+	ディーア	絶望2						イキタマ……なに？
+	黒櫃	悔しい						この通り、\n自分のことも不確かな子だ\n明確な答えは生まれないよ……
+	ディーア	汗2						な、なるほど……
+StopBgm
+	黒櫃	通常						それでも使い道を探るなら、\n地道に検証を重ねしかないだろうね
+	黒櫃	嬉しい						それじゃあ、ボクはこれで\n白櫃……また会えて嬉しいよ
+Tween	黒櫃	MoveBy	x=-600 time=1.5				NoWait
+Wait						.5
+CharacterOff
+	白櫃	嬉しい						うん♪
+Bgm	平和
+CharacterOff
+	ディーア	怪しい2						なるほど、検証か……
+CharacterOff
+	白櫃	驚き						マスターさん、\nなにか思いつきましたかぁ？
+CharacterOff
+	ディーア	目閉じ2						黒櫃の言う通り、\nわからないことがあるなら\nなんでも試してみるのが一番だ
+CharacterOff
+	白櫃	驚き
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	驚き						た、たしかにそうかも……！
+CharacterOff
+	ディーア	笑い2						よしっ！\n白櫃の使い方を検証するぞ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	草原B					0
+	白櫃	通常	p7b			0
+	ディーア	通常2	p3			0
+Bgm	わくわく
+FadeIn	black					.3
+	ディーア	通常2						ここなら、周りも安全だな
+	ディーア	通常2						まずは地道に検証する！\nその中で力の兆候を探そう！
+	白櫃	驚き						ちょーこーですか？
+	ディーア	笑い2						魔力が高まったり、\nいつもと違うことが起こることだな！
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	嬉しい						なるほどぉ♪\nそのちょーこーが見つかったら、\n使い方がわかるかも……！
+	ディーア	笑い2						そういうことだ！
+	ディーア	本気2						地道な検証といえば観察！\nまずは白櫃の箱をよく見せてくれ！
+Param	character_grayout=false
+	白櫃	嬉しい						わかりましたぁ♪\nはい、どうぞ♪
+Se	魔剣入る
+	白櫃武器	通常	p3u			.5
+Wait						.5
+	ディーア	怪しい2						えーっと……\nさわり心地はすべすべしてるな
+Se	ポップイン
+Shake	白櫃		x=3				NoWait
+	白櫃	照れ						ぅ……！
+	ディーア	怪しい2						けれど冷たくないし、\n指から離れないぴったり感が……！
+Se	ポップイン
+CharacterOff
+	白櫃	照れ拡大	エフェクト表
+Tween	白櫃	PunchPosition	y=5				NoWait
+	白櫃	照れ拡大						うひゃぁん……！
+CharacterOff
+	白櫃武器	通常	p5u
+	ディーア	驚き2	p5
+	ディーア	驚き2						ど、どうしたんだ？\nいきなり変な声を出して？
+CharacterOff
+	白櫃	照れ
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	照れ						マスターさん、\n今、変なところを触りましたぁ！\nえっち、天才！
+CharacterOff
+	白櫃武器	通常	p5u
+	ディーア	驚き2	p5
+	ディーア	驚き2						ご、ごめん……！\nでも、白櫃は箱だから……
+CharacterOff
+	白櫃	照れ						あ、どこ触っているか\nわからないですよね……！
+StopBgm
+Tween	白櫃	MoveBy	x=50				NoWait
+	白櫃	照れ						わ、私……我慢します……！\nもっと触って、使ってみてください
+CharacterOff
+	白櫃武器	通常	p5u
+	ディーア	笑い2	p5
+	ディーア	笑い2						よし……！
+Bgm	神秘
+	ディーア	怪しい2						この掘られている溝はなんだ？
+CharacterOff
+	白櫃	照れ拡大	エフェクト表
+	白櫃	照れ拡大						そ、そこは……！
+CharacterOff
+	白櫃武器	通常	p5u
+	ディーア	怪しい2	p5
+	ディーア	怪しい2						なにか使い道が……？
+FadeOut	white					.3
+CharacterOff						0
+	白櫃	照れ拡大尻	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Tween	白櫃	PunchPosition	y=5				NoWait
+Se	ポップイン
+	白櫃	照れ拡大尻						っ～～～～！\nだ、だめぇ……！
+CharacterOff
+	白櫃武器	通常	p5u
+	ディーア	怪しい2	p5
+	ディーア	怪しい2						あと、鈍器のように使うとしたら、\n角の鋭さが……？
+FadeOut	white					.3
+CharacterOff						0
+	白櫃	照れ拡大胸	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Se	ポップイン
+Wait						.1
+Se	ポップイン
+Shake	白櫃		x=5				NoWait
+	白櫃	照れ拡大胸						そ、そんなとこ、\nツンツンしたらぁ……！
+CharacterOff
+	白櫃武器	通常	p5u
+	ディーア	怪しい2	p5
+	ディーア	怪しい2						もしかしたら、\n舐めたらなにか出るかも……？
+StopBgm
+Tween	ディーア	MoveBy	y=-50 time=1				NoWait
+Wait						.3
+CharacterOff
+	白櫃	照れ拡大	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+Tween	白櫃	PunchPosition	y=10				NoWait
+	白櫃	照れ拡大						<size=50>うひゃあああああん!!</size>
+Param	character_grayout=true
+CharacterOff
+	白櫃	照れ	p7b
+	ディーア	驚き2	p3
+Bgm	コメディ
+	ディーア	驚き2						し、白櫃!?\n本当に大丈夫か!?
+Shake	白櫃		x=10				NoWait
+	白櫃	照れ						も、もうダメですぅ……\nそんな使われ方したら、\n私、壊れちゃいそうですぅ……！
+	ディーア	怪しい2						デリケートに扱わないと\nいけないんだな……！
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	照れ						で、でも、天才なことをしてくれて\n気づいたことがあります！
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表			0
+	白櫃	照れ拡大	エフェクト裏			0
+	白櫃	照れ拡大						触られてたら、だんだん、\nお腹の下が熱くなってきたんです！
+Param	character_grayout=true
+CharacterOff
+	白櫃	驚き	p7b
+	ディーア	驚き2	p3
+	ディーア	驚き2						それが力の出る兆候かも！\nもっと熱くなれば使えるように……！
+	ディーア	怪しい2						体が熱くなるには……
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	嬉しい						マスターさん！\n私、SUMOUがいいって聞きました！
+	ディーア	本気2						あと、大声で叫ぶと、\n体の奥が温まるらしいぞ！
+Tween	白櫃	MoveBy	x=-30				NoWait
+	白櫃	嬉しい						じゃあ、体をぶつけあって、\n大声を出せばいいんですね♪\nさすが変態です♪
+	ディーア	悔しい2						でも、\n白櫃のデリケートな体には\n負担になるかも……
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	嬉しい						マスターさんの\n変態テクニックなら大丈夫です♪
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	白櫃	照れ拡大	エフェクト表
+	白櫃	照れ拡大						お腹の下が熱くて\n変になっちゃうくらい、\n変態なことしてください♪
+Param	character_grayout=true
+CharacterOff
+	白櫃	驚き	p7b
+	ディーア	驚き2	p3
+	ディーア	本気2						よし、任せろ……！
+Param	character_grayout=false
+CharacterOff
+Bg	夏空
+	ディーア	<Off>						<size=50>うぉおおおおお!!</size>
+FadeOut	black					1
+StopBgm
+CharacterOff						0
+Bg	草原B					0
+	ディーア	絶望2	p3			0
+	白櫃	照れ	p7b			0
+Wait						1
+Bgm	平和
+Param	character_grayout=true
+FadeIn	black					1
+	白櫃	照れ						ハァ……ハァ……\nふぅ……
+	白櫃	照れ						なんだか、いろいろ試して\nとってもポカポカしましたけどぉ\nダメですね……
+	ディーア	絶望2						はぁ、はぁ……\nなにかもっと別の……！
+Tween	白櫃	MoveBy	x=-20				NoWait
+	白櫃	悲しい						マスターさん……\nもう、大丈夫ですよ
+	白櫃	嬉しい						ありがとうございます♪\n私みたいなただの箱を\n使おうとしてくれて
+	白櫃	悲しい						でも、\n最弱なのはわかっていましたし、\n使えないのもはっきりしました！
+	白櫃	悲しい						私はこのまま漬物石にでも……！
+StopBgm
+Tween	ディーア	MoveBy	x=20				NoWait
+	ディーア	悔しい2						いや、そんなのダメだ！\nなにか、なにか方法が……！
+Bgm	緊迫
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表			0
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=100				NoWait
+	キノコリオン							ノコ……!!
+Bgm	バトル
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	p3
+	白櫃	驚き	p7b
+	白櫃	驚き						ふぇ……？
+	ディーア	悔しい2						き、キノコリオン!?\nこんなときに……！
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	悲しい						ど、どうしましょう！\n今は最弱の私しかいないですよぉ！
+	ディーア	驚き2						はっ……！
+	ディーア	悔しい2						いや、白櫃……！\nこれこそチャンスだ！
+Tween	白櫃	MoveBy	x=-30				NoWait
+	白櫃	驚き						まさか、マスターさん……！\n変態的なひらめきが……!?
+	ディーア	本気2						ああ、思いついた！\n頭で使い方を考えてもダメ！\n使ってしまえばいいんだ！
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	嬉しい						す、すごぉい！\nすごく変態なアイデアですぅ!!
+	ディーア	本気2						白櫃、オレを信じろ！\nオレが変態マスターとして、\nなんとかしてみせる！
+CharacterOff
+	ディーア	拡大本気2	エフェクト表					いくぞ、白櫃……！
+CharacterOff
+	白櫃	通常拡大	エフェクト表					はい!!\nお願いします、マスターさん!!
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_491_02
+EndIf
+EndScenario
+
+# G_491_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	キノコリオン
+Bg	草原B
+	白櫃	嬉しい	p7b			0
+	ディーア	驚き2	p3			0
+FadeIn	white					.5
+	ディーア	驚き2						ほんとになんとかなった!?
+	白櫃	嬉しい						うわぁ♪ すごいです♪\nよくわからないけれど、\nなんだかキラキラしてます♪
+	ディーア	怒り2						だがまだまだ……！\nもっと白櫃を使いこなしてみせる！
+Param	character_grayout=false
+	白櫃	照れ						あれあれぇ？\nなんだかお腹の下の方が熱くて……！
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ディーア	怒り2						もっともっと力を……！
+	白櫃	照れ						ま、マスターさん……\n私……ヘンになっちゃいそうで……
+CharacterOff
+	キノコリオン
+Shake	キノコリオン		x=10				NoWait
+	キノコリオン							ノ、ノコぉ……!?
+CharacterOff
+	白櫃	照れ	p7b
+	ディーア	本気2	p3
+	オーラ青		エフェクト表
+	ディーア	本気2						大丈夫だ、いくぞ……！
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	照れ						だ、だめぇええ……！
+StopBgm
+CharacterOff
+	ディーア	拡大本気2	エフェクト表					ブレイズドライブ……!!
+Se	光2
+FadeOut	white					1
+CharacterOff						0
+Bg	白背景					0
+	トライアルスチル49101		エフェクト表			0
+FadeIn	white					.1
+CharacterOff	トライアルスチル49101					1
+Wait						.5
+FadeOut	white					.2
+CharacterOff						0
+	トライアルスチル49102		エフェクト表			0
+FadeIn	white					.1
+CharacterOff	トライアルスチル49102					1
+Wait						1.2
+Se	光2
+Se	光3
+Wait						2
+StopSe
+FadeOut	white					.3
+CharacterOff						0
+Bg	草原B					0
+	白櫃	きらーん	p7b			0
+	ディーア	絶望裸2	p3			0
+	土煙		エフェクト表			0
+FadeIn	white					.3
+CharacterOff	土煙					1
+Se	大雨
+Wait						1.5
+	煙		エフェクト裏			1
+Wait						1.5
+	ディーア							………………
+	白櫃							ふぇ……？\nこの温かい雨、なんですかぁ？
+FadeOut	white					1
+StopSe
+CharacterOff						0
+Bg	温泉A					0
+	          
+Wait						1
+Bgm	平和
+FadeIn	white					1
+	          							\n  　　  　 <color=blue><dash=2>数日後<dash=2></color>
+	？？？？	<Off>						んふふー♪\nおふろー、おふろー♪
+Se	ポップイン
+	？？？？	<Off>						って、ひゃああ!?
+FadeOut	white					.3
+CharacterOff						0
+	お燐	温泉拡大脚	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					0
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	お燐	温泉拡大	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	お燐	温泉	p4			0
+FadeIn	white					.3
+Tween	お燐	PunchPosition	y=60				NoWait
+	お燐	温泉						ちょっと熱すぎやぁ……！
+Tween	お燐	MoveBy	x=50 time=1				NoWait
+	お燐	温泉						うぅ……！\nそ、そーっとぉ……
+CharacterOff
+	魔劍グラム=オルタ	温泉	p7
+	魔剣グラム	温泉	p3
+	魔剣グラム	温泉						はぁ……♪\nいいお湯ね……♪
+FadeOut	black					.3
+CharacterOff						0
+Bg	和室（夜）					0
+	ディーア	絶望2				0
+FadeIn	black					.3
+	ディーア	絶望2						まさか白櫃のブレイズドライブが\nあんなとんでもない\n威力だったなんてな……
+	ディーア	絶望2						そのせいで\n地形が変わって温泉も湧き出すし
+CharacterOff
+	？？？？	<Off>						ハーハッハッ♪
+FadeOut	white					.3
+CharacterOff						0
+	黒櫃	温泉拡大胸	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	黒櫃	温泉				0
+FadeIn	white					.3
+	黒櫃	温泉						さすがはマスター！\n斜め上の天才の所業だね♪
+Tween	黒櫃	MoveBy	x=80				NoWait
+	黒櫃	温泉						それっ！
+Se	卓球
+Wait						.5
+CharacterOff
+	ディーア	汗2						で、でもなぁ……
+CharacterOff
+	黒櫃	温泉						予想外の結果でも、\n旅館も建って、感謝されたのだから\n結果オーライさ♪
+CharacterOff
+	白櫃	温泉	2_2
+Tween	白櫃	MoveBy	x=-80				NoWait
+	白櫃	温泉						えいっ……！
+Se	卓球
+Wait						.5
+	白櫃	温泉						あのぉ、本当にそれ\n私がやったんですかぁ？
+CharacterOff
+	ディーア	汗2						やっぱり\nあの時のこと覚えてないのか？
+CharacterOff
+	白櫃	温泉嬉しい						すごくキラキラしたことは\n覚えています♪
+CharacterOff
+	ディーア	絶望2						……今度、白櫃を使うときは\n注意しないと
+CharacterOff
+	黒櫃	温泉
+Tween	黒櫃	MoveBy	x=80				NoWait
+Wait						.1
+Se	卓球
+	黒櫃	温泉						そうするといいさ♪\n白櫃は天才でも御せない未知だ\n取り扱いは慎重にね♪
+CharacterOff
+	白櫃	温泉
+Tween	白櫃	MoveBy	x=-80				NoWait
+	白櫃	温泉						えーっと、\nなんのことですぅ……？
+Se	卓球
+Wait						.3
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	温泉慌て						って、あぁ……！\nマスターさん、そっちに玉が……！
+CharacterOff
+	ディーア	笑い2						おっと……！
+Tween	ディーア	MoveBy	x=50				NoWait
+Wait						.1
+Se	卓球
+Wait						.5
+CharacterOff
+	白櫃	温泉						スリッパで打ち返した……！
+CharacterOff
+	黒櫃	温泉						おぉ、さすが天才♪
+Param	character_grayout=true
+CharacterOff
+	白櫃	温泉	p7b
+	ディーア	笑い2	p3
+	ディーア	笑い2						実はこういうのは得意なんだ！
+Shake	白櫃		x=2				NoWait
+	白櫃	温泉						…………っ！
+	ディーア	驚き2						どうしたんだ白櫃？
+Tween	白櫃	MoveBy	x=-50				NoWait
+	白櫃	温泉嬉しい						す……すごいです！\nそんな発想もできるんですね!!
+CharacterOff
+	白櫃	温泉拡大嬉しい	エフェクト表					やっぱり、\nマスターさんしかいません♪\n私を変態的に使ってください♪
+CharacterOff
+	白櫃	温泉嬉しい	p7b
+	ディーア	驚き2	p3
+	ディーア	驚き2						し、白櫃……!?
+	白櫃	温泉嬉しい						私の体が覚えているんです♪
+Param	character_grayout=false
+CharacterOff
+	白櫃	温泉拡大胸	エフェクト表
+	オーラ桃		エフェクト裏
+	白櫃	温泉拡大胸						マスターさんにたくさん使われて\nお腹の下がポカポカしたこと♪
+StopBgm
+CharacterOff
+	黒櫃	温泉
+	黒グラデーション		エフェクト裏
+	黒櫃	温泉						マスター……\n妹になにをした……？
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=30				NoWait
+Bgm	コメディ
+	ディーア	絶望2						へ、変なことはしていない！
+CharacterOff
+	白櫃	温泉嬉しい						いいえ！\n変態な使い方してくれました♪
+	白櫃	温泉						マスターさん、\n私は最弱でただの箱ですけど
+	白櫃	温泉						マスターさんなら\n私の使い方を見つけてくれますよね？
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	白櫃	温泉拡大嬉しい	エフェクト表
+	白櫃	温泉拡大嬉しい						だから、\nもっともーっと変態なことをして、\n私を使ってください♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_491_01
+EndIf
+EndScenario

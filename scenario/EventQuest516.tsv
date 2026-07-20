@@ -1,0 +1,2478 @@
+# E_516_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	神秘
+Bg	塩湖
+	　　　　　　　　　　
+FadeIn	white					.7
+												プロローグクエスト　バトル前
+	　　　　　　　　　　							<dash=2>魔法少女
+	　　　　　　　　　　							それは、颯爽と現れて\nみんなのために戦う正義の味方
+	　　　　　　　　　　							キラキラしてて、かわいくて\nそして<dash=2>すごく強い
+	　　　　　　　　　　							どんな悪にも勇気をもって\n立ち向かい、人々に夢と希望を与える\nみんなが憧れる、素敵な存在
+	　　　　　　　　　　							ああ、\nわたしもいつかあんな風に<dash=2>
+StopBgm						.5
+FadeOut	white					1
+Se	シナリオスタート
+	イベントロゴ516		エフェクト表			0
+FadeIn	white					.7
+	イベントロゴ516		エフェクト表					\n　　まじかるシャイン☆ファンタジア
+FadeOut	white					.7
+StopSe
+CharacterOff						0
+Bg	市街地B2(緑)					0
+Bgm	絶望
+	黒グラデーション		エフェクト裏
+	ディーア	怒り2	2_2			0
+	シェリー	驚き	1_2_b			0
+FadeIn	white					.7
+	シェリー	驚き						ここが、任務で指定された、街？
+	ディーア	怒り2						ああ、そのはずだけど…………
+	シェリー	怪しい						結界で覆われてる……
+	シェリー	怪しい						これ、知ってるわ\nあたしの敵、悪い心の塊ってやつ
+	ディーア	怒り2						そうか……
+	ディーア	悔しい2						もしかしたら、\n中は想像以上に\n酷い状態かもしれないな
+	ディーア	怒り2						様子を見る限り、\n入るのは問題なさそうだけど\n出られるかは分からない
+	ディーア							だけど、オレたちの任務は\n『街に出没する\n　特殊な魔物を討伐せよ』だ
+	シェリー	怪しい						結界の中に入らないと\nどうにもならないってわけね
+	ディーア	悔しい2						……一緒に来てくれるか？\nシェリー？
+	シェリー	通常						とーぜんでしょ、おにーさん♪
+	シェリー	通常						こんな悪の塊、\n放っておけるわけないじゃない
+CharacterOff	ディーア
+	シェリー	笑い	2_3
+Tween	シェリー	PunchPosition	y=30				NoWait
+	シェリー	笑い						だってあたしは<dash=2>\n魔法少女なんだから!!
+FadeOut	black					.7
+CharacterOff						0
+Se	魔剣入る
+Wait						1.5
+Bgm	ガヤA_BGM
+Param	character_grayout=false
+	旅人		画面外_左			0
+	街の女性		画面外_左_b			0
+	　　　　　　　　　　					0
+FadeIn	black					.3
+	　　　　　　　　　　					0
+Tween	旅人	MoveTo	x=800 time=8				NoWait
+Wait						1
+	　　　　　　　　　　
+Tween	街の女性	MoveTo	x=800 time=7				NoWait
+Wait						1.5
+Param	character_grayout=true
+FadeOut	black					.3
+CharacterOff						0
+Bgm	平和
+	シェリー	驚き	1_2_b			0
+	ディーア	驚き2	2_2			0
+FadeIn	black					.5
+	ディーア	驚き2						……あれ？\n中は意外と平和だな？
+	シェリー	怪しい						いきなり敵が襲ってくる\nなんてこともなさそうね……
+	シェリー	驚き						結界の外にも出られそうよ\nあたしたちを\n閉じ込めるものじゃなかったみたい
+	ディーア	悔しい2						そうか……\nでも、かえって不気味だ\nこの結界はなんのために……？
+	シェリー	通常						あたし、ちょっとその辺を見てくる！\n手がかりがあるかもしれないし
+	ディーア	怒り2						分かった、気をつけて
+Se	走る
+Tween	シェリー	MoveTo	x=-800 time=2				NoWait
+FadeOut	black					.5
+CharacterOff						0
+	フィノ	進化慌て？	画面外_右_b			0
+	ディーア	怪しい2	2_3			0
+FadeIn	black					.3
+	ディーア	怪しい2						オレも、\nもう少し街の様子を見てみるか……
+	ディーア	驚き2						……って、あれ？
+Se	走る
+Tween	フィノ	MoveTo	x=50 time=1.5				NoWait
+	フィノ	進化慌て？						大変たいへんー!!\n……ってわぁ!?
+Se	打1
+Tween	フィノ	PunchPosition	y=50				NoWait
+Tween	フィノ	MoveBy	x=40				NoWait
+Tween	ディーア	MoveBy	x=-90				NoWait
+	ディーア	驚き2						うわっ!?
+	フィノ	進化慌て？						いたた……ごめんなさい！\n急いでてよく見てなくて……
+	ディーア	驚き2						こっちこそごめんな……\n怪我はないか？
+	フィノ	進化通常？						うん、大丈夫！\n心配してくれてありがとう！
+	フィノ	進化驚き？						あ、そうだ……\nわたし、急がなきゃ！
+	ディーア	驚き2						急ぐって……何かあったのか？
+	フィノ	進化きらーん？						そう！\nこの辺で魔物が出るかもって\n聞いたの！
+	ディーア	怪しい2						聞いた……？
+	フィノ	進化通常？						お兄ちゃんにも\n分かりやすく言うと……
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表
+	フィノ	進化怒り？						『突然街に現れた魔物が\n　人を襲い始めてもう大変！\n　わたし、どうすればいいのー!?』
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	1_2
+	フィノ	進化通常？	2_2_b					って感じかなっ！\nだから急いでたの!!
+	ディーア	悔しい2						ちょ、ちょっと待ってくれ！\n今の喋り方は!?
+	フィノ	進化きらーん？						小さい子にも分かりやすい\nあらすじ解説だよ！\n魔法少女には必須のスキル！
+	ディーア	怪しい2						（魔法少女……シェリーと同じ？）
+	ディーア	驚き2						キミはいったい……？
+Tween	フィノ	PunchPosition	y=30				NoWait
+	フィノ	進化通常						わたしフィノ！\nまたの名を、魔法少女ローズフィノ！\nよろしくね！
+	ディーア	驚き2						この魔力……\nそうか、キミも魔剣なのか
+	ディーア	驚き2						けど、\nなんでアンロックされてるんだ？
+	フィノ	進化きらーん						えっ、よく分からないけど\nたぶん……わたしが魔法少女だから!!
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	汗2						よく分からないのにすごい自信だな!?
+	フィノ	進化通常						それで、あなたは？
+	ディーア	驚き2						え？ ああ、オレは\n<param=name>
+	ディーア	通常2						魔剣使いだ
+	フィノ	進化通常						そっか！\nじゃあ、お兄ちゃんはこれから\nわたしのお助けキャラクターだね！
+	ディーア	驚き2						えっ!?
+CharacterOff
+	フィノ	拡大進化照れ	エフェクト表					これからよろしくね、\nお兄ちゃん♪
+CharacterOff
+	フィノ	進化照れ	2_2_b
+	ディーア	怪しい2	1_2					（アンロックされた魔剣、か……\n　任務と関係があるかもしれないな）
+	ディーア	怒り2						（……少し変わってるけど、\n　悪い子じゃなさそうだし\n　ここは<dash=2>）
+	ディーア	通常2						あ、ああ……よろしく
+StopBgm						1
+	ディーア							それで、フィノ\nさっき魔物って言ってたけど、\nこの街で一体なにが<dash=2>
+CharacterOff
+	　　　　　　　　　　
+Se	闇1
+Bg	市街地B2(紫)					.5
+StopBgm						.5
+CharacterOff	　　　　　　　　　　
+Wait						1
+	フィノ	進化怒り	2_2_b
+	ディーア	驚き2	1_2					…………!?
+	ディーア	悔しい2						……なんだっ!?
+Bgm	緊迫
+	フィノ	進化怒り						はっ！\nお兄ちゃん気を付けて！\n来るよ！
+	ディーア	悔しい2						来るってなにが……？
+	フィノ	進化怒り						危ない!!
+	ディーア	驚き2						うわっ!?
+CharacterOff
+Se	闇1
+	ワルイーゾ	ワルイーゾ？	1_3			.5		ワルイゾー!!
+Se	闇1
+	ワルイーゾ2	ワルイーゾ？	3_3			.3		ワルイゾー!!
+CharacterOff
+	フィノ	進化怒り	2_2
+	ディーア	悔しい2	1_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							なっ……!?\nこいつら、どこから現れたんだ!?
+	ディーア	怒り2						（この魔物の特徴、\n　任務の討伐対象と一致してる……）
+	フィノ	進化怒り
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	進化怒り						出たわね！ 悪の軍団！
+	ディーア	驚き2						知ってるのか？
+	フィノ	進化怒り						え、うん！\n少し前からこの街をうろついてて\n街の人に悪さばかりするの！
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							名前はたしか\nワルイコダー！ とかワルダー！ とか\nそんな感じの……
+CharacterOff
+	ワルイーゾ		1_3
+	ワルイーゾ2		3_3
+Tween	ワルイーゾ	PunchPosition	y=50				NoWait
+	ワルイーゾ	ワルイーゾ？						ワルイーゾ！
+Tween	ワルイーゾ2	PunchPosition	y=50				NoWait
+	ワルイーゾ2	ワルイーゾ？						ワルイーゾ!!
+CharacterOff
+	ディーア	怪しい2						もしかして……『ワルイーゾ』？
+	フィノ	進化通常						そうそう、それ！\nすごいねお兄ちゃん！\nなんで分かったの？
+	ディーア	怪しい2						いや、だって……
+CharacterOff
+	ワルイーゾ		1_3
+	ワルイーゾ2		3_3
+Tween	ワルイーゾ	ShakePosition	x=10				NoWait
+	ワルイーゾ							ワルイーゾ!!
+CharacterOff
+	フィノ	進化驚き	2_2
+	ディーア	怪しい2	1_2					……そのままだしな
+CharacterOff
+StopBgm
+	シャイニィ	怒り						まったく、フィノは\n適当に覚えすぎだニィ！
+CharacterOff
+Bgm	コメディ
+	フィノ	進化驚き	2_2_b
+	シャイニィ	怒り	1_3
+	ディーア	驚き2	1_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						うわっ!? 今度はなんだ!?
+	フィノ	進化驚き						あっ、驚かないで！\nこの子は魔法少女のお約束！\n『マスコット』のシャイニィだよ！
+Tween	ディーア	MoveBy	x=-10				NoWait
+	ディーア	怪しい2						お約束？\nぬいぐるみにしか見えないけど……\nこれって、生き物なのか？
+Se	ポップイン
+	シャイニィ
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ	怒り						こらぁー!!\n気軽につっつくんじゃないニィ！
+	シャイニィ	通常						ボクはお前より\nすごく位が高いんだニィ！
+Tween	ディーア	MoveBy	x=10				NoWait
+	ディーア	驚き2						あっ、ごめん\nええと、名前はシャイ……なんだっけ
+	シャイニィ	通常						ふふ……正確にはシャイニィ･\nエクストリーム･マックスイケメン･\nサイコーハイパワード･キングだニィ
+	ディーア	汗2						なんて……??
+	フィノ	進化きらーん
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	進化きらーん						大丈夫！ 覚えなくていいよ！\nわたしも覚えられないから！
+	シャイニィ	怒り
+Tween	シャイニィ	ShakePosition	y=30				NoWait
+	シャイニィ	怒り						ひどいニィー!!
+	フィノ	進化笑い						とにかく、わたしのことを\n助けてくれる、大事な相棒ってとこ！
+	シャイニィ	悲しい						そういうことだニィ\n……ところで、フィノ\nボクたち喋ってて大丈夫だニィ？
+StopBgm
+	フィノ	進化驚き						え……？
+CharacterOff
+Bgm	緊迫
+	ワルイーゾ2		3_3
+	ワルイーゾ		1_3					ワルイゾー!!
+	ワルイーゾ2
+Tween	ワルイーゾ2	ShakePosition	x=10				NoWait
+	ワルイーゾ2							ワルイゾー!!
+CharacterOff
+	シャイニィ	慌て						すっかり敵に囲まれてるニィ！
+CharacterOff
+Param	character_grayout=false
+	シャイニィ	慌て	1_3
+	ディーア	本気2	1_2
+	フィノ	進化慌て	2_2_b
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	フィノ	PunchPosition	y=50				NoWait
+	ディーア&フィノ							忘れてた!!
+Param	character_grayout=true
+	ディーア	悔しい2						（どうする？ シェリーとは、\n　今は離れ離れだ……）
+	ディーア	本気2						……フィノ\nオレと一緒に戦ってくれないか？
+	フィノ	進化驚き						えっ、お兄ちゃんと？\nもしかして、お兄ちゃんも魔法少女？
+	ディーア	汗2						いや、オレは魔法少女じゃなくて\n魔剣使いで……って、\nこんな話をしてる場合じゃ……!!
+FadeOut	white					.5
+CharacterOff						0
+	ワルイーゾ		画面外_左			0
+	フィノ	進化驚き	2_2			0
+FadeIn	white					.3
+Se	走る
+Tween	ワルイーゾ	MoveTo	x=-180 time=1				NoWait
+Tween	ワルイーゾ	PunchPosition	y=50				NoWait
+	ワルイーゾ							ワルイゾー!!
+	フィノ	進化慌て
+Tween	フィノ	PunchPosition	y=50				NoWait
+StopBgm							1
+	フィノ	進化慌て						うわぁっ!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Wait						.1
+Se	光2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	市街地B2(紫)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	フィノ	進化慌て	2_2
+	ワルイーゾ		1_3
+Wait						.1
+Tween	ワルイーゾ	MoveTo	x=-800 y=100 time=1				NoWait
+	ワルイーゾ							イタイゾー!!
+	フィノ	進化驚き						……え？
+CharacterOff
+Bgm	キノコリオン
+	シェリー	<Off>						あたしを求める声がする……\n悪い心が暴れてる……！
+FadeOut	white					.5
+	シェリー	拡大進化通常	エフェクト表			0
+FadeIn	white					.5
+Se	シャキーン
+	シェリー	拡大進化通常	エフェクト表					夢と希望の守護者、\n魔法少女ブルーシェリー、降臨♪
+CharacterOff
+Bg	市街地B2(紫)
+	フィノ	進化驚き
+Tween	フィノ	ShakePosition	x=5				NoWait
+	フィノ	進化驚き						あ、あ、あ……あなた、は……！
+CharacterOff
+	ディーア	通常2						シェリー！ 来てくれたのか
+CharacterOff
+	フィノ	進化驚き	1_3
+	シェリー	進化通常	3_3					もちろん、このあたしが\nはびこる悪を見逃すはずないわ♪
+	シェリー	進化笑い						あなた、怪我はない？
+	フィノ	進化驚き						やっぱり、本物だ……！
+	シェリー	進化驚き						……あなた、あたしを知ってるの？
+CharacterOff
+	ディーア	本気2						二人とも、今は敵が優先だ！\nフィノ、シェリー！\nオレと一緒に戦ってくれ！
+CharacterOff
+	シェリー	進化通常	3_3
+	フィノ	進化驚き	1_3					え、その、えっと、はい!!
+	シェリー	進化通常						最初からそのつもりよ\nおにーさん♪
+If	isdebug==true
+CharacterOff
+Jump	*E_516_02
+EndIf
+EndScenario
+
+# E_516_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	市街地B2(紫)
+	ワルイーゾ
+FadeIn	white					.5
+												プロローグクエスト　バトル後
+	ワルイーゾ							ワルイゾー!!
+FadeOut	white					.1
+Se	光1
+FadeIn	white					.1
+Tween	ワルイーゾ	ShakePosition	x=30				NoWait
+	ワルイーゾ							ツライゾー!!
+Se	倒れる
+Tween	ワルイーゾ	MoveBy	y=-100
+CharacterOff
+Se	闇1
+Bg	市街地B2(緑)					1
+StopBgm						.5
+Wait						1.5
+Bgm	平和
+	シャイニィ	通常	1_3			0
+	フィノ	進化通常	2_3_b			0
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	進化通常						やったぁ！\nローズフィノ、だいしょうりー♪
+CharacterOff
+	ワルイーゾ							ウウウ……
+Se	光1
+CharacterOff	ワルイーゾ					.7
+Wait						.7
+	旅人					.7		あれ、俺、どうして……？
+CharacterOff
+	ディーア	悔しい2						魔物が人になった……!?\nいや、人が魔物に変えられてたのか！
+CharacterOff
+	シャイニィ	通常	p2			0
+	フィノ	進化きらーん	p3b
+	シェリー	進化通常	3_3					結界の中にある黒いもやが、\n人を魔物に変えているみたいなの
+	シェリー	進化笑い						だけど、人に戻す方法はあるわ\nさっきみたいに\n魔法少女の力でもやを払えばいいの
+	フィノ
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	進化きらーん						すごーい、さすがシェリーちゃん！\n魔法少女の中の魔法少女！
+	シェリー	進化怪しい						……やっぱり、\nあたしのこと知ってるのね
+	シェリー							そんなに驚かなくても\nあなたも出来るはずでしょ？
+	シェリー							その姿、その力、\nあなただって<dash=2>\n魔法少女なんだから……
+	フィノ	進化通常						えっ？ ああ、そっか！\nそうだよね、わたしも出来るよね！
+CharacterOff
+	ディーア	驚き2						…………？
+StopBgm
+CharacterOff
+Se	闇1
+Bg	市街地B2(紫)					1
+StopBgm						.5
+Wait						1.5
+Se	火事					.5
+Shake	Graphics	ShakePosition	time=2	easeInQuart			NoWait
+Wait						1.5
+	フィノ	進化怒り	2_3_b			0
+	シャイニィ	慌て	1_3			0
+Wait						.3
+Tween	シャイニィ	MoveTo	x=-800 y=30 time=2				NoWait
+	シャイニィ							……ニィー！
+	フィノ	進化怒り						くっ……！\nなに、この風……！
+CharacterOff
+	ディーア	悔しい2						……なんだ、何が起こってる!?
+	シェリー	進化悔しい						この気配は……!?
+CharacterOff
+Bgm	魔王バトル
+Se	闇1
+	ジャークエンペラー	通常？				1		ふはははは！
+CharacterOff
+	フィノ	進化慌て						きゃあっ!?
+	シェリー	進化本気						あいつは……!?
+CharacterOff
+	ジャークエンペラー	通常？						この時を待っていた……
+	ジャークエンペラー	通常？						……滅びの時は近い
+CharacterOff
+	シェリー	進化本気						この力……！\nあなたが、街の異変の元凶なの？
+CharacterOff
+	ジャークエンペラー	通常？						貴様らの疑問など興味はない\nさぁ<dash=2>
+	ジャークエンペラー	通常？						その力、渡してもらうぞ……!!
+CharacterOff
+	フィノ	進化慌て	1_3
+	シェリー	進化驚き	3_3					…………!!
+FadeOut	white					.3
+Param	character_grayout=false
+Se	闇1
+	黒グラデーション		エフェクト裏			0
+	スモーク		エフェクト表			0
+FadeIn	white					.3
+	フィノ	進化慌て						えっ!?
+FadeOut	white					.5
+CharacterOff						0
+Se	闇2
+	フィノ	慌て	1_3			0
+	シェリー	本気	3_3			0
+FadeIn	white					.3
+	シェリー							…………!?
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						なっ……!?
+CharacterOff
+	シェリー	悔しい	3_3
+	フィノ	慌て	1_3
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	慌て						ちょっ!? えっ、どうなってるの!?
+	シェリー	悔しい						力が……吸い取られた!?
+	フィノ	怒り						ちょっとコラァっ！\nわたしの大事な力、返しなさーい！
+CharacterOff
+	ジャークエンペラー	通常？						これでお前たちに用はない……\n……失せろ
+FadeOut	white					.3
+CharacterOff						0
+Se	闇3
+Shake	Graphics	ShakePosition	time=2	easeInQuart			NoWait
+Param	character_grayout=false
+	フィノ	慌て	1_3			0
+	シェリー	悔しい	3_3			0
+	　　　　　　　　　　
+FadeIn	white					.3
+	フィノ&シェリー							きゃああああっ!?
+Tween	フィノ	MoveTo	x=800 time=1				NoWait
+Tween	シェリー	MoveTo	x=800 time=1.5				NoWait
+Param	character_grayout=true
+FadeOut	black					.5
+CharacterOff						0
+Bg	市街地B2(緑)					0
+StopBgm
+Wait						.5
+Se	倒れる
+	ディーア	悔しい2				0
+Wait						1
+FadeIn	black					.5
+	ディーア							痛っ……二人とも、大丈夫か!?
+CharacterOff
+	フィノ	慌て	1_3
+	シェリー	悔しい	3_3
+Tween	シェリー	ShakePosition	x=5				NoWait
+	シェリー							ええ、なんとかね
+Tween	フィノ	ShakePosition	x=5				NoWait
+	フィノ							うーん、うーん……\n目が回るけど、無事だよー……！
+CharacterOff
+	ディーア	怒り2						良かった……それにしても、\nだいぶ飛ばされたみたいだな……
+CharacterOff
+Bgm	絶望
+	シェリー	悔しい	3_3
+	フィノ	怒り
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	怒り	1_3					はっ!! そうだ、今すぐあいつから\n力を取り戻さないと……！
+	シェリー							すぐには無理よ……\nあの巨大な気配\nもうどこにもないから……
+	フィノ	慌て						そ、そんなぁ……
+CharacterOff
+	ディーア	悔しい2						だけど、この異変の原因は\nおそらくあいつだ……\nなんとか見つけて倒さないと
+CharacterOff
+	フィノ	慌て	1_3
+	シェリー	悔しい	3_3					まあ、もっと調べてみないと\n確定できないけどね……
+	フィノ							ねぇ！ シェリーちゃんどうしよう！\nわたし、もう変身できないのかなぁ!?
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							変身できないと力を出せないし、\nあいつを倒すこともできないよ……！
+CharacterOff
+	シャイニィ							大丈夫だニィ!!\n心配する必要はないニィ！
+CharacterOff
+	シャイニィ		2_3
+	シェリー		3_3
+	フィノ	驚き	1_3
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							あっ！ シャイニィ！\n今までどこにいたの!?
+	シャイニィ							吹っ飛ばされてたんだニィ！\n……それより！ 二人の力を\n取り戻す方法はちゃんとあるニィ！
+	フィノ	怒り						やっぱり、あいつを探すしかない？
+CharacterOff
+	ディーア	悔しい2						いや、今のシェリーとフィノには、\nあれだけの魔力を持つ敵と\n戦える力は残ってない……
+CharacterOff
+	フィノ	驚き	1_3
+	シェリー	怪しい	3_3
+	シャイニィ		2_3					そうだニィ\nだから、もっと違う方法で\n力を取り戻すんだニィ！
+	シェリー	悔しい
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー							ちょっと、話してる場合じゃないわよ
+CharacterOff
+Bgm	バトル
+	ワルイーゾ		画面外_左
+Tween	ワルイーゾ	PunchPosition	y=100 time=1			loop=2	NoWait
+Tween	ワルイーゾ	MoveBy	x=700 time=1
+	ワルイーゾ							ワルイコトスルゾー!!
+CharacterOff
+	シャイニィ		1_3
+	フィノ	通常	2_3_b					まかせて！\nこのくらいなら、\n今のわたしでも！ えいっ！
+Tween	フィノ	PunchPosition	x=-50				NoWait
+Wait						.1
+FadeOut	white					.1
+CharacterOff						0
+Se	光1
+	ワルイーゾ					0
+FadeIn	white					.1
+Tween	ワルイーゾ	ShakePosition	x=30				NoWait
+	ワルイーゾ							チョーイタイゾー!!
+Se	倒れる
+Tween	ワルイーゾ	MoveBy	y=-100
+StopBgm
+Se	光1
+CharacterOff	ワルイーゾ					.7
+Wait						.7
+	街の女性					.7		えっ!? ああ、よかった！\nようやく自由になれたわ！
+	街の女性							ありがとう!!
+FadeOut	yellow					.3
+Se	キラン
+CharacterOff						0
+Wait						.5
+	シャイニィ		1_3			0
+	フィノ	驚き				0
+FadeIn	yellow					.3
+	フィノ							えっ？
+CharacterOff
+	ディーア	驚き2						今の光は……？
+CharacterOff
+Bgm	作戦会議
+	シャイニィ		2_3
+	フィノ	驚き	1_3
+	シェリー	驚き	3_3					『感謝の気持ち』よ\n魔法少女はこれを力にして<dash=2>
+	シェリー	通常						あ、そうか！ そうすればいいのね！
+	フィノ	通常
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							えっ、なになに、\nどういうこと、シェリーちゃん？
+	シェリー	怪しい						あなたも魔法少女なら、\n分かるでしょ？
+	フィノ	怒り						えっ、えーと……うーん？
+CharacterOff
+	ディーア	通常2						つまり、困っている人たちを助けて\n良いことをすれば、\n力が取り戻せるってことじゃないか？
+CharacterOff
+	フィノ	通常	1_3
+	シェリー	通常	3_3
+	シャイニィ		2_3
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ		2_3					そういうことだニィ！\n感謝の気持ちを、力に変換するニィ♪
+	フィノ							そっか、分かった！
+CharacterOff
+	ディーア	笑い2						これでやることは決まりだな！\nフィノ、シェリー、よろしく頼む！
+CharacterOff
+	フィノ		1_3
+	シャイニィ		2_3
+	シェリー		3_3					準備ならできてるわ♪\n小さなお友達の夢と希望は\nあたしが守るんだから♪
+	フィノ							わあぁ、すごい……！\nシェリーちゃん、キラキラしてる……\n……あっ！ わたしも頑張る！
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	きらーん						見ててね、お兄ちゃん！\nみんなをいじめる悪い子は\n絶対にわたしがぶっ倒すっ！
+	シェリー	悔しい						えっ、『ぶっ倒す』……!?
+	フィノ							……じゃなかった！\n『ぶっ倒す』はなし！\nこほん……こらしめちゃうんだから♪
+CharacterOff
+	ディーア	通常2	2_2
+	シェリー	怪しい	画面外_左_b
+Tween	シェリー	MoveTo	x=-90 time=1.5				NoWait
+	シェリー	怪しい						<size=20>……おにーさん、ちょっといい？\nあたし、気づいたことがあるの</size>
+	ディーア	驚き2						うん？ どうした、シェリー？
+	シェリー							魔法少女ローズフィノ\nあの子、確実に…………\n魔法少女初心者よ
+StopBgm						.5
+FadeOut	black					.7
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル51607		エフェクト表
+FadeIn	black					.5
+Bgm	水属性バトル
+	イベントスチル51607
+	フィノ	<Off>						よーし、早く力を取り戻すために、\nどんどん敵を倒して\n街の人たちを救っちゃお♪
+	フィノ	<Off>						……だけど、シェリーちゃんは\nなんだかずっと怖い顔で\nわたしのことを見てるんだよね……
+	フィノ	<Off>						うう、どうしようー！ わたし、\nなにかやっちゃったのかなぁ!?
+	フィノ	<Off>						次回！\nまじかるシャイン☆ファンタジア！\n『困惑！ ひよっこ魔法少女！』
+	フィノ	<Off>						魔法少女はいつだって、\n信じる心に応えるの♪
+StopBgm						1.5
+Param	character_grayout=true
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_516_03
+EndIf
+EndScenario
+
+# E_516_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	市街地B2(緑)
+	フィノ		2_3_b
+	シャイニィ	本気	1_3
+FadeIn	white					.5
+												1話　バトル前
+	フィノ							じゃあ、改めて自己紹介するね！
+	シャイニィ	通常
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ							ニィー！
+	フィノ	笑い						『わたしはフィノ！\n　願望鏡ローズフィノ！\n　どこにでもいる普通の女の子！』
+	フィノ	怒り						『だけどある日突然、不思議な力が\n　使えるようになっちゃったの！』
+	フィノ	慌て						『いきなり魔法少女とか\n　言われても困るよ！\n　ど、どうしよう!?』
+	フィノ	通常						……って感じ！
+CharacterOff
+	シェリー	怪しい						……えっと、今のなに？
+CharacterOff
+	ディーア	汗2						なんだろうな……
+CharacterOff
+	シャイニィ		p2
+	シェリー	怪しい	3_3
+	フィノ		p3b					魔法少女らしいあらすじ説明だよ！\n自己紹介といえばこんな感じでしょ？
+	フィノ	照れ
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							シェリーちゃんもするよね！\nあらすじ説明！
+	シェリー	悔しい						そんなことしないわよ！
+	フィノ	驚き						えっ、そんな!?\n魔法少女って、みんな\nこういう感じじゃないの!?
+	シェリー	怪しい						あいにくと、あたしはずっと一人で\n魔法少女やってきたからね
+	シャイニィ	悲しい						『お約束』を知らないとは……\n仕方ないニィ！
+Tween	シャイニィ	MoveTo	x=0 time=2				NoWait
+	シャイニィ	通常						どうやらブルーシェリーにも、\nシャイニィという魔法少女師匠が\n必要みたいだニィ♪
+	シェリー	本気
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー	本気						い・ら・な・い!!\n……大体なんなの？\nこの、よく分からない生き物は
+Tween	シャイニィ	ShakePosition	x=10				NoWait
+	シャイニィ	怒り						なニィーー!?\n生意気だニィ！
+	フィノ	怒り
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	怒り						ちょっ、シャイニィ！\nシェリーちゃんに向かって\n怒鳴るなんて失礼だよ！
+	シャイニィ
+Tween	シャイニィ	ShakePosition	y=20				NoWait
+	シャイニィ							フィノはどっちの味方だニィー！
+CharacterOff
+	ディーア	汗2						と、とにかく！
+	ディーア	通常2						フィノは魔法少女になりたてで、\nシャイニィに色々教わってる途中……\nってことだよな？
+CharacterOff
+	シャイニィ		1_3
+	フィノ		2_3_b					そう！\nまだまだ勉強中！
+	フィノ							それにわたし、\nシェリーちゃんに憧れて\n魔法少女になるって決めたの！
+	フィノ	照れ						だから今、一緒にいられるのが\nすごく嬉しくて……！
+CharacterOff
+	ディーア	笑い2						シェリー、大人気だな
+CharacterOff
+	シェリー							ファンがいるくらい、\n魔法少女なら当然よ♪
+CharacterOff
+	ディーア	驚き2						だけど、魔法少女としては\n今まで一人でやってきたんだよな？
+	ディーア							ということは、シェリーにとって\nフィノは初めての魔法少女仲間\nってことか？
+CharacterOff
+	シャイニィ		p2
+	シェリー	照れ	3_3
+	フィノ	驚き	p3b					……え？ なか、ま？
+Tween	フィノ	ShakePosition	x=5				NoWait
+	フィノ	照れ						そ、そうなの……!?\nうわぁ……ここ、光栄だよ……!!
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	きらーん						チーム名みたいなのどうする!?\n魔法少女らしくて\n可愛い響きがいいよね！
+	シェリー	悔しい						チーム名……？
+	フィノ	怒り						シェリーちゃんみたいに\nキラキラした魔法少女になるため……\nえっと、シャイン……
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	照れ						シャイン☆ファンタジア、どう？\nかわいいよね！
+CharacterOff
+	ディーア	笑い2						ああ、響きもいいんじゃないか？
+CharacterOff
+	シャイニィ		p2
+	シェリー	悔しい	3_3
+	フィノ	照れ	p3b					やったぁ……！
+	シェリー							かっ、勝手に話を進めないでよ！\nあたしはまだ、あなたのこと\n仲間って認めてないから！
+	フィノ	笑い						あ、そっか！ これから\n仲間になれるかどうか試すんだね！
+	シェリー	怪しい						そう……そういうこと！\n足手まといでした、じゃ困るからね！
+	シャイニィ	怒り						フィノ、がんばるニィ！\nぜったいにあいつを見返して\nぎゃふんと言わせてやるニィ！
+	シェリー	本気						良いわよ！ 受けて立つわ！
+	フィノ	怒り						こらシャイニィ！\nシェリーちゃんは『ぎゃふん』なんて\n言わないよ！
+	シェリー	照れ
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー	照れ						そこじゃないでしょ!?
+CharacterOff
+	ディーア	汗2						まあまあ二人とも、\n力を試すのはいいけど\n言い合いはほどほどにな
+	ディーア	通常2						街の人は今も魔物に困ってる……\nこの事件を解決するのが\n今一番優先するべきことだからな
+CharacterOff
+	シャイニィ		p2
+	フィノ		p3b
+	シェリー	悔しい	3_3					分かってるわ
+	フィノ							そうだよね！\n早く魔物にされちゃった人たちを\n戻してあげなきゃ！
+CharacterOff						0
+Se	闇1
+Bg	市街地B2(紫)					1
+StopBgm						.5
+Wait						1.5
+Se	闇1
+	ワルイーゾ		1_3			.3		ワルイコトスルゾー!!
+Se	闇1
+	メチャワルイーゾ		3_3			.3
+Tween	メチャワルイーゾ	PunchPosition	y=50 time=0.7		loop=2		NoWait
+	メチャワルイーゾ							メチャワルイコトスルゾー!!
+CharacterOff
+	シェリー							噂をすれば……早速来たわね！
+CharacterOff
+Bgm	コメディ
+	シャイニィ		1_3
+	フィノ	きらーん	2_3_b
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	きらーん						よっしゃー！ ラッキー！
+CharacterOff
+	シェリー	悔しい						えっ……\n『よっしゃー』……？
+CharacterOff
+	シャイニィ		1_3
+	フィノ	きらーん
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							さぁ、かかってこいやぁー!!
+CharacterOff
+	ディーア	汗2						『かかってこいや』……
+	ディーア							シェリー、これはもしかして……
+CharacterOff
+	シェリー	怪しい
+Tween	シェリー	MoveBy	y=-10				NoWait
+	シェリー	怪しい						はぁ……もしかしなくても……\n前途多難よ……
+If	isdebug==true
+CharacterOff
+Jump	*E_516_04
+EndIf
+EndScenario
+
+# E_516_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	市街地B2(紫)
+	メチャワルイーゾ
+FadeIn	white					.5
+												1話　バトル後
+	メチャワルイーゾ							メチャワルイゾー!!
+CharacterOff
+	フィノ	怒り						オラァァ!!
+FadeOut	white					.1
+CharacterOff						0
+Se	光1
+	メチャワルイーゾ					0
+FadeIn	white					.1
+Tween	メチャワルイーゾ	ShakePosition	x=30				NoWait
+	メチャワルイーゾ							メチャクチャイタイゾー!!
+Se	倒れる
+Tween	メチャワルイーゾ	MoveBy	y=-100
+CharacterOff
+Se	闇1
+Bg	市街地B2(緑)					1
+StopBgm						.5
+Wait						1.5
+	ワルイーゾ
+Wait						.3
+CharacterOff	ワルイーゾ					.7
+Se	光1
+Wait						.7
+	旅人					.7		はっ……!!
+CharacterOff
+	シャイニィ		p2
+	フィノ	きらーん	p3b
+	シェリー		3_3					さぁ、もう大丈夫よ♪
+CharacterOff
+	旅人							た、助かりました！\nありがとうございます！
+Se	走る
+Tween	旅人	MoveTo	x=800 time=1.5				NoWait
+FadeOut	black					.5
+CharacterOff						0
+Bgm	平和
+	シャイニィ		p2			0
+	シェリー		3_3			0
+	フィノ	照れ	p3b			0
+FadeIn	black					.5
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	照れ						やったー！\nお礼言われちゃったー！
+	シャイニィ
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ							やったニィ！\nフィノ、大活躍だニィ！
+CharacterOff
+	ディーア	笑い2						よし、この調子なら、\n力を戻すのもそんなに\nかからないんじゃないか？
+CharacterOff
+	シャイニィ		p2
+	シェリー	怪しい	3_3
+	フィノ	きらーん	p3b
+Tween	フィノ	MoveBy	x=30				NoWait
+	フィノ							そうだね、お兄ちゃん！\nよーし、どんどんいこ……！
+Tween	シェリー	MoveBy	x=-30				NoWait
+	シェリー							その前に！\n……フィノ、ちょっといい？
+	フィノ	驚き						なに？ シェリーちゃん
+	シェリー	怪しい						聞かせて欲しいんだけど\n……魔法少女は、あたしたちは\n小さいお友達にとって、どんな存在？
+	フィノ	通常						えっと、夢と希望をくれるような\n強くてキラキラした存在、だよね！
+	シェリー	悔しい						そう！ そんな魔法少女が\n『オラァァ！』とか\n急に言い出したらどう思う？
+	フィノ
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	怒り						ゆ、夢が壊れる！\n全然キラキラじゃない！
+	シェリー	本気
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー							分かってるじゃない!!
+	フィノ	驚き						それがどうかした<dash=2>
+CharacterOff
+Bgm	コメディ
+	シャイニィ	慌て	1_3
+	フィノ	慌て	2_3_b
+Tween	フィノ	ShakePosition	x=10				NoWait
+	フィノ	慌て						<dash=2>ってああああ!?
+	フィノ							もしかしてわたし……\n『オラァァ』って言っちゃってた？
+CharacterOff
+	シェリー	本気						それだけじゃないわ\n『よっしゃー！』とか……
+CharacterOff
+	シャイニィ	悲しい	1_3
+	フィノ	慌て	2_3_b
+Tween	フィノ	MoveBy	x=10				NoWait
+	フィノ	慌て						あちゃー……
+CharacterOff
+	ディーア	汗2						『かかってこいやー』とか？
+CharacterOff
+	シャイニィ	悲しい	1_3
+	フィノ	慌て	2_3_b
+Tween	フィノ	ShakePosition	x=5				NoWait
+	フィノ	慌て						ひえぇ……
+	シャイニィ	悲しい						『ぶっ倒す』はもう\n決め台詞の一部だニィ……
+	フィノ
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	慌て						ご、ごめんなさいぃ……！\n直そうとしてるんだけど\nつい癖で出ちゃうというか……
+CharacterOff
+Bgm	平和
+	シェリー	怪しい						……魔法少女なら、\n言葉遣いは注意しないと\n小さいお友達に嫌われちゃうわよ？
+CharacterOff
+	シャイニィ		1_3
+	フィノ		2_3_b					う、うん！ 気をつけるね……！
+CharacterOff
+	シェリー	通常						まったく……それじゃあ\nあたしは他に魔物がいないか\nこの辺をパトロールしてくるわね
+CharacterOff
+	ディーア	驚き2						ああ、一人で大丈夫か？
+CharacterOff
+	シャイニィ		1_3
+	フィノ	驚き	2_3_b					シェリーちゃん、\nわたしも一緒に……！
+CharacterOff
+	シェリー	怪しい						一人で大丈夫よ\n……今までだって、\nずっとそうだったんだから
+Se	走る
+Tween	シェリー	MoveTo	x=800 time=1.5
+CharacterOff
+	シャイニィ	通常	1_3
+	フィノ	驚き	2_2
+	ディーア	通常2	1_2					じゃあオレたちは、\n周囲の状況を見つつ、\nシェリーが戻るのを待とう
+	フィノ	驚き						そうだね……
+	シャイニィ	怒り						全く、この偉大なるシャイニィに\n留守番させるなんて、\nあいつはほんとに生意気だニィ！
+	フィノ	怒り						……ダメだよシャイニィ\nシェリーちゃんのこと悪く言っちゃ
+	ディーア	通常2						……フィノ、\nあまり落ち込まない方がいい
+	フィノ	通常						え？ 大丈夫！\nわたし、落ち込んでないよ！
+	フィノ	笑い						口が悪いなんて、\nたしかに魔法少女らしくないもん\n……シェリーちゃんが正しいよ
+	ディーア	驚き2						……その口調は\n魔法少女になる前の癖、なのか？
+	フィノ							……うん、そうだよ
+	ディーア	通常2						じゃあ、\nどうして魔法少女に憧れたのか\n聞いてもいいか？
+	フィノ	驚き						………………うーん
+	シャイニィ	悲しい						フィノ……
+	ディーア	通常2						もちろん、嫌だったらいいんだ
+	フィノ	通常						ううん！ お兄ちゃんは、\n魔法少女を助けてくれる\n大事なパートナーだもん！
+	フィノ	きらーん						ちゃんと話すよ！
+FadeOut	black					.7
+Se	回想
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	砂漠A					0
+StopBgm
+Param	character_grayout=false
+	黒グラデーション		エフェクト表			0
+FadeIn	black					.5
+	フィノ	<Off>						……わたしね、元々は\nただの兵器だったの
+	フィノ	<Off>						ずっと破壊しか知らなくて……\nそしてそれが当たり前だった
+Bgm	キノコリオン
+	シェリー	進化通常
+	フィノ	<Off>						でもある時、魔法少女を……\nシェリーちゃんを見たの！
+FadeOut	white					.3
+CharacterOff						0
+	イベントスチル51606		エフェクト表
+FadeIn	white					.3
+	イベントスチル51606		エフェクト表
+	フィノ	<Off>						シェリーちゃんはね！\n敵をかっこよく倒して……
+	フィノ	<Off>						子どもたちに\n夢と希望をあげてたの！
+FadeOut	black					.7
+StopBgm						.5
+CharacterOff						0
+Bg	市街地B2(緑)					0
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+	シャイニィ		1_3			0
+	フィノ	驚き	2_3_b			0
+FadeIn	black					.5
+Bgm	平和
+	フィノ	驚き						びっくりしたなぁ……\n何かを壊すことは、\n奪うことでしかないって思ってた
+	フィノ	笑い						でも魔法少女は\n悪い敵を倒して、そして\nみんなを幸せにする！
+	フィノ	照れ						あのシェリーちゃんを見た時、\nわたしの世界が\nキラキラーって輝いたんだ……！
+	フィノ	通常						わたしも、みんなを幸せにしたい\nみんなを笑顔にしたい……！ って\n強く、強く願ったの！
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							だから、魔法少女になりたいって\n思ったんだよ！\nそして今は、勉強中！
+	シャイニィ	通常						そして！ それを助けるために\n駆けつけたのが、このボクだニィ！
+	フィノ	照れ						えへへ、いつもありがとね\nシャイニィ！
+CharacterOff
+	ディーア	通常2						話してくれてありがとう\nフィノの気持ちは、よく分かった
+	ディーア	笑い2						フィノが思う魔法少女になれるように\nオレは出来る限り応援するよ
+CharacterOff
+	シャイニィ		1_3
+	フィノ	驚き	2_3_b					え、ほ、ほんとに……？
+	シャイニィ							なら、お前は、今日から\nこのボクのしもべってことだニィ♪
+CharacterOff
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							なんでだよ!!
+CharacterOff
+	フィノ	驚き	2_3_b
+	シャイニィ		1_3
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ							ボクの方が先にフィノのことを\n応援してるニィ！ だからお前が\nしもべになるのは当然ニィ！
+CharacterOff
+	ディーア	汗2						せめて先輩後輩だろ……！
+CharacterOff
+	シャイニィ		1_3
+	フィノ	照れ	2_3_b					え、えへへ……\nシャイニィ、お兄ちゃん、ありがとう
+	フィノ	きらーん						わたし、精一杯がんばるね……！
+CharacterOff
+	シェリー	怪しい	画面外_右
+Tween	シェリー	MoveTo	x=0 time=1.5				NoWait
+	シェリー	怪しい						話の途中で悪いわね
+CharacterOff
+	ディーア	驚き2						シェリー！\nワルイーゾは見つかったか？
+CharacterOff
+	シェリー	怪しい						いいえ、でも一つ\n街を囲む結界について\n分かったことがあるの……
+CharacterOff
+	シャイニィ		1_3
+	フィノ	きらーん	2_3_b
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	きらーん						ほんとに!?\nさっすがシェリーちゃん！
+CharacterOff
+	シェリー	怪しい						………………
+CharacterOff
+	ディーア	怒り2						シェリー？
+CharacterOff
+	フィノ	驚き	2_3_b
+	シャイニィ		1_3
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ	怒り						もったいぶらずに\nさっさと教えるニィー！
+CharacterOff
+	シェリー	怪しい						……この結界には、\n核があるみたいなの
+CharacterOff
+	ディーア	驚き2						結界の核？
+CharacterOff
+	シェリー	怪しい						うん、だからその核が移動すると、\nそれに合わせて結界も移動する
+CharacterOff
+	シャイニィ	怒り	1_3
+	フィノ	通常	2_3_b					なるほど！\nそれなら、その核が何か分かれば\nこの変な結界も解けるかも……！
+	シャイニィ							それで、核ってなんだニィ？
+CharacterOff
+StopBgm
+	シェリー	怪しい						……たぶん、\n…………あなたよ
+CharacterOff
+	ディーア	悔しい2						…………!?
+CharacterOff
+	シェリー	悔しい						人々を魔物に変えるもやを生む結界、\nその中心にいるのは……\n……フィノ、あなた
+CharacterOff
+	シャイニィ		1_3
+	フィノ	驚き	2_3_b					………………\n…………え？
+StopBgm						.5
+FadeOut	black					.7
+CharacterOff						0
+Bg	市街地B2(緑)					0
+Param	character_grayout=false
+	イベントスチル51607		エフェクト表
+FadeIn	black					.5
+Bgm	水属性バトル
+	イベントスチル51607
+	フィノ	<Off>						ええ!?\nわたしが、結界の中心にいるの!?\nわ、わたし、悪い子じゃないよぉ！
+	フィノ	<Off>						待ってて！ これから証明するから！\nちゃんと街中の人を助けて\n変身の力も取り戻してみせるから！
+	フィノ	<Off>						そうやって焦ってたら、今度は\nワルイーゾの幹部まで現れちゃった！\nもうー！ どうなっちゃうのー!?
+	フィノ	<Off>						次回！\nまじかるシャイン☆ファンタジア！\n『苦難！ 独りぼっちの魔法少女！』
+	フィノ	<Off>						魔法少女はいつだって、\n信じる心に応えるの♪
+StopBgm						1.5
+Param	character_grayout=true
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_516_05
+EndIf
+EndScenario
+
+# E_516_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	市街地B2(紫)
+	ワルイーゾ
+FadeIn	white					.5
+												2話　バトル前
+	ワルイーゾ							ワルイゾー!!
+FadeOut	white					.1
+Se	光1
+FadeIn	white					.1
+Tween	ワルイーゾ	ShakePosition	x=10				NoWait
+	ワルイーゾ							ツライゾー!!
+Se	倒れる
+Tween	ワルイーゾ	MoveBy	y=-500
+CharacterOff
+Bgm	作戦会議
+	シェリー	通常						……よし\n力は着実に戻ってきてるわね
+CharacterOff
+	街の女性							ああ、ありがとう！ 助かりました！
+CharacterOff
+	女の子
+Tween	女の子	PunchPosition	y=50				NoWait
+	女の子							お姉ちゃんたち、ありがとー！
+CharacterOff
+	シャイニィ	悲しい	p2
+	フィノ	驚き	p3b
+	シェリー	笑い	3_3					いいのよ\n魔法少女として、当然のことだから♪
+	フィノ	驚き						………………
+CharacterOff
+	女の子							悪いやつ、また倒しに行くんだよね？\nわたし、応援するね！
+CharacterOff
+	シェリー	笑い						ありがとう♪\nあなたたちの応援が、\nあたしの力になるわ♪
+CharacterOff
+	女の子							うん！ ばいばーい！
+Se	走る
+Tween	女の子	MoveTo	x=800 time=1.5
+CharacterOff
+StopBgm
+	シャイニィ	悲しい	1_3
+	フィノ	驚き						………………
+CharacterOff
+Bgm	絶望
+	ディーア	怒り2						フィノ、大丈夫か？
+CharacterOff
+	シャイニィ	怒り	p2
+	フィノ	驚き	p3b
+	シェリー	怪しい	3_3					あのね、いくら心配事があっても\n小さいお友達の前で\nそういう顔しちゃだめなの
+	シェリー	本気						愛と勇気を与える魔法少女が、\n誰かを不安にしちゃだめでしょ？
+	フィノ	怒り						そうだけど……\nこの結界がわたしのせいなら……
+CharacterOff
+	ディーア	怒り2						フィノがこの街の結界の核って話は\nまだ不確定だ
+	ディーア	通常2						だから今は力を取り戻すことに\n専念しようって話になっただろ？
+CharacterOff
+	シャイニィ	怒り	p2
+	シェリー	怪しい	3_3
+	フィノ	怒り	p3b					うん……でも
+	シェリー	怪しい						そんなんじゃ、いつまで経っても\n魔法少女にはなれないわよ
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ	怒り						フィノ、気にすることないニィ\n適当なことを言うやつが悪いニィ！
+	シェリー	本気						あたしが悪いっていうの？
+	シャイニィ
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ	怒り						ほかに誰がいるニィ！
+CharacterOff
+	ディーア	悔しい2						待て待て！ 喧嘩はダメだって！
+CharacterOff
+	シャイニィ	悲しい	1_3
+	フィノ	悲しい	2_3_b					ごめん……みんな\nわたしがもっと、\nちゃんとしてれば……！
+Se	走る
+Tween	フィノ	MoveTo	x=800 time=1.5				NoWait
+	シャイニィ	悲しい						フィノ!? 待つニィ！
+Tween	シャイニィ	MoveTo	x=800 time=1.5
+CharacterOff
+	ディーア	怒り2	2_2
+	シェリー	怪しい	1_2_b					………………
+	ディーア							シェリー……
+	シェリー	怪しい						言い過ぎだって言いたいんでしょ？\nそのくらい分かってる……
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	市街地B2(紫)
+Bgm	緊迫
+	シャイニィ	悲しい	1_3
+	フィノ	怒り	2_3_b
+FadeIn	black					.5
+	フィの	怒り
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							ほらー！ ワルイーゾたちー！\nいるなら返事しなさーい！\nいなくても返事しなさーい!!
+	シャイニィ	悲しい						いや、いない時は返事できないニィ
+	フィノ	驚き						あれ、そっか……
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ	悲しい						フィノ、さっきから焦り過ぎだニィ\n少し休んだ方が……
+	フィノ
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	怒り						だめ!! わたしのせいで\nみんなが困ってるなら\nわたしが事件を解決しないと……
+Tween	フィノ	ShakePosition	x=10				NoWait
+	フィノ							そうじゃないと、魔法少女として\n認めてもらえない……！
+	シャイニィ	悲しい						ニィ…………
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ	怒り						はっ、あれは……！\n……フィノ！
+	フィノ	驚き						……えっ？
+FadeOut	black					.5
+CharacterOff						0
+	　　　　　　　　　　
+Bgm	絶望
+FadeIn	black					.5
+Se	闇1
+CharacterOff						0
+	キョウアクワール					.5
+	キョウアクワール							おやおや、ひとりですか\nこれはちょうどいい
+CharacterOff
+	シャイニィ	怒り	1_3
+	フィノ	怒り	2_3_b					……!! ワルイーゾ！
+CharacterOff
+Se	闇1
+	ガイアクワール					.5		オレサマをあのテイキュウと\nイッショにするナ!!
+CharacterOff
+	シャイニィ	慌て	1_3
+	フィノ	驚き	2_3_b					に、二体!?
+CharacterOff
+	ワルイーゾ		1_3
+Tween	ワルイーゾ	PunchPosition	y=50				NoWait
+	ワルイーゾ							ワルイゾー!!
+	ワルイーゾ2		3_3
+Tween	ワルイーゾ2	PunchPosition	y=50				NoWait
+	ワルイーゾ2							ワルイゾー!!
+CharacterOff
+	フィノ	怒り	2_3_b
+	シャイニィ	怒り	1_3					か、囲まれたニィ！
+	フィノ	怒り						シャイニィ、お兄ちゃんたちを\n呼んできて！ 今すぐに！
+	シャイニィ
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ	怒り						分かったニィ！ すぐに戻るニィ！
+Se	風1
+Tween	シャイニィ	MoveTo	x=800 time=1.5
+	フィノ	怒り						あなたたちは、一体何なの!?
+CharacterOff
+	キョウアクワール							わたしはワルイーゾ幹部\nキョウアクワール
+CharacterOff
+	ガイアクワール							オレサマはガイアクワールだゼ！
+CharacterOff
+StopBgm
+	フィノ	通常						そうなんだ、よろしくね！
+CharacterOff
+	ガイアクワール							いやヨロシクするナヨ
+CharacterOff
+	フィノ	怒り						はっ……！ ま、間違えた！
+CharacterOff
+Bgm	絶望
+	キョウアクワール							……よろしくではなく、\nさよならがただしいですね
+	キョウアクワール							……よりによってあなたを\nたおしてしまうのは\nすこしもったいないですが
+CharacterOff
+	フィノ	怒り						……どういうこと？
+CharacterOff
+	シェリー	本気	画面外_右_b
+	ディーア	本気2	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=90 time=1.5				NoWait
+Se	走る
+Tween	シェリー	MoveTo	x=-90 time=1				NoWait
+	ディーア	本気2						フィノ！ 大丈夫か！
+CharacterOff
+	フィノ	通常						お兄ちゃん！ シェリーちゃん！
+CharacterOff
+	シャイニィ	怒り						フィノ、連れてきたニィ！
+CharacterOff
+	ディーア	悔しい2	2_2
+	シェリー	本気	1_2_b					……なに、こいつら、\n普通のワルイーゾと違う……!?
+	ディーア	悔しい2						確かに、魔力量も桁違いだ……！
+CharacterOff
+	シャイニィ	怒り	1_3
+	フィノ	怒り	2_3_b					ワルイーゾの幹部なんだって……！
+CharacterOff
+Bgm	バトル
+	キョウアクワール							えものがふえてしまったのは\nけいさんがいですが……
+CharacterOff
+	ガイアクワール							オマエはヒッコンデロ！\nオレサマ一人でもジュウブンダ！
+CharacterOff
+	シャイニィ	怒り	p2
+	フィノ	怒り	p3b
+	シェリー	本気	3_3					……幹部だろうと関係ない\n夢と希望の魔法少女が倒してあげる\n行くわよ、フィノ！
+	フィノ	怒り						う、うん……！
+If	isdebug==true
+CharacterOff
+Jump	*E_516_06
+EndIf
+EndScenario
+
+# E_516_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	市街地B2(紫)
+	ガイアクワール
+FadeIn	white					.5
+												2話　バトル後
+FadeOut	white					.1
+Se	光1
+FadeIn	white					.1
+Tween	ガイアクワール	ShakePosition	x=20			NoWait
+	ガイアクワール							グッ……
+CharacterOff
+	シャイニィ	怒り	1_3
+	集中線		エフェクト表
+	フィノ	怒り						この、倒れろーーーー!!
+CharacterOff
+	ガイアクワール
+	女の子		1_4
+Tween	女の子	PunchPosition	y=30				NoWait
+	女の子							お姉ちゃん、がんばれー！
+CharacterOff
+	シェリー	本気
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー							子どもが……!！\nだめ、フィノ！\nそんなに深追いしたら……！
+CharacterOff
+	シャイニィ	怒り	1_3
+	フィノ	怒り						はああっ!!
+Tween	フィノ	PunchPosition	x=-40 time=1				NoWait
+Wait						.2
+FadeOut	white					.1
+CharacterOff						0
+Se	光1
+	ガイアクワール
+	女の子		1_4
+Tween	ガイアクワール	ShakePosition	x=30 time=0.7				NoWait
+FadeIn	white					.1
+	ガイアクワール							グワアア！
+Tween	女の子	MoveTo	x=-800 time=1				NoWait
+	女の子							きゃあっ！
+CharacterOff
+	シェリー	本気						危ないっ！
+CharacterOff
+	シェリー	本気	画面外_左_b
+	女の子		画面外_右
+	　　　　　　　　　　
+Tween	女の子	MoveTo	x=90 time=0.7				NoWait
+Tween	シェリー	MoveTo	x=-45 time=0.5
+Se	打1
+Tween	シェリー	MoveBy	x=-10
+CharacterOff
+	ガイアクワール
+Tween	ガイアクワール	ShakePosition	x=30				NoWait
+	ガイアクワール							アアアア…………
+Se	敵殺
+Tween	ガイアクワール	MoveBy	y=-500
+Wait						.7
+CharacterOff
+	キョウアクワール							ふん……あれだけおおぐちを\nたたいておきながら、\nやられるとは、だらしない……
+	キョウアクワール							……きょうのところは、\nさるとしましょうか
+Se	闇1
+CharacterOff	キョウアクワール					.5
+Wait						.5
+Bg	市街地B2(緑)					.5
+StopBgm						.5
+Wait						1
+CharacterOff
+	シャイニィ	通常	1_3
+	フィノ	通常
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							やったぁ！ 勝った、よ……
+	フィノ	驚き						あ…………
+CharacterOff
+	女の子		1_2
+	シェリー	驚き	2_2_b
+Tween	シェリー	MoveBy	y=-100				NoWait
+	シェリー							大丈夫？ 怪我はない？
+	女の子							う、うん……ありがと……
+	シェリー	笑い						気を付けて帰ってね
+	女の子
+Tween	女の子	PunchPosition	y=50				NoWait
+	女の子							うん……！
+Se	走る
+Tween	女の子	MoveTo	x=800 time=1.5				NoWait
+Wait						.5
+Tween	シェリー	MoveBy	y=100
+CharacterOff
+Bgm	絶望
+	シャイニィ	怒り	p2
+	シェリー	怪しい	3_3
+	フィノ	怒り	p3b					ご、ごめんなさい……\nわたし、あの子を\n傷つけるつもりじゃなくて！
+	シェリー	怪しい						それでも、危険に晒したのは事実よ
+	フィノ
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	怒り						あ、相手は幹部だって言ってたし\n逃げられるくらいなら\n倒した方がいいでしょ!!
+	シェリー	本気						だからといって、\n一般の人を巻き込むなんて！
+	フィノ	怒り						でも、幹部を倒せるくらいの力が\n戻って来てるんだよ！\n変身の力だってもうすぐ戻るはず……
+	フィノ	きらーん
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							ほら、悪を倒せば\nそれが事件解決に繋がる……\n結局は街の人のためにもなるよ！
+	シェリー	悔しい						そのためなら、子どもが\n傷ついてもいいっていうの!?\nそんなの絶対間違ってる！
+Tween	フィノ	ShakePosition	x=5				NoWait
+	フィノ	怒り						だって……！ ああしなかったら\nわたし、いつまで経っても\nシェリーちゃんに……！
+	シェリー	驚き						あたしに……？
+	シェリー	本気						呆れたわ！\nあたしに認められるために\nあんな無茶をしたの!?
+	シェリー	悔しい						どんな理由があっても、\n守るべき人を傷つけるなんて\n許されない！
+	フィノ	怒り						シェ、シェリーちゃ……！
+	シェリー	本気						……フィノ、\nあなたは魔法少女失格よ！
+	フィノ	驚き						…………!!
+CharacterOff
+	ディーア	悔しい2						シェリー！\n少し言い過ぎじゃないか？
+CharacterOff
+	シャイニィ	悲しい	p2
+	シェリー	悔しい	3_3
+	フィノ	悲しい	p3b
+Tween	フィノ	ShakePosition	x=5				NoWait
+	フィノ							ぐすっ……ううっ……！
+	シェリー							…………っ!!\n……まだ敵が周りにいるかもしれない\nパトロールしてくるわ
+Se	走る
+Tween	シェリー	MoveTo	x=800 time=1.5
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							あっ、シェリー！
+CharacterOff
+	シャイニィ	悲しい	1_3
+	フィノ	悲しい	2_3_b					ごめん、ごめんなさい……
+	シャイニィ
+Tween	シャイニィ	PunchPosition	y=50				NoWait
+	シャイニィ							フィノ……
+CharacterOff
+	ディーア	怒り2						大丈夫か？
+CharacterOff
+	シャイニィ	悲しい	1_3
+	フィノ	絶望	2_3_b					……今度こそ\nシェリーちゃんに\n見放されちゃった……
+CharacterOff
+	ディーア	悔しい2						そんなことは……
+CharacterOff
+	シャイニィ	悲しい	1_3
+	フィノ	悲しい						ぐすっ……いいの！\nお兄ちゃん、心配かけてごめんね
+Tween	フィノ	MoveTo	x=70 time=2				NoWait
+Wait						.5
+CharacterOff
+	ディーア	驚き2						フィノ、どこに行くんだ？
+CharacterOff
+	シャイニィ	悲しい	1_3
+	フィノ	照れ	2_3_b					大丈夫……少し頭を冷やすだけ……\nすぐに戻るから
+	シャイニィ	悲しい						ニィ……
+Se	走る
+Tween	フィノ	MoveTo	x=800 time=2				NoWait
+Tween	シャイニィ	MoveTo	x=900 time=2.5				NoWait
+Wait						1.5
+CharacterOff
+	ディーア	悔しい2						………………
+FadeOut	black					.7
+StopBgm						1
+Wait						.3
+CharacterOff						0
+	シェリー	怪しい	画面外_右			0
+FadeIn	black					.5
+Tween	シェリー	MoveTo	x=0 time=3				NoWait
+	シェリー	怪しい						……おにーさん
+CharacterOff
+	シェリー	怪しい	1_2_b
+	ディーア	通常2	2_2					もう戻ってきたのか
+	シェリー	通常						パトロール終わったから……\nふふ、優秀でしょ？
+	ディーア	怪しい2						……本当は？
+	シェリー	悔しい
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー	悔しい						うっ……\nあの、えっと、フィノのことで……\nその、少し混乱しちゃって……
+	シェリー	怪しい						失格なんて、思ってないのに……\n言い過ぎちゃったなって……
+	ディーア	通常2						……シェリーも、\nフィノと同じなんだな
+	シェリー	驚き						……え？
+	ディーア	通常2						フィノと同じで、何かを抱えて\n……悩んでる
+Bgm	穏やか					.5
+	シェリー	怪しい						…………ああ、\nおにーさんは\n全部お見通しかぁ……
+	ディーア	笑い2						オレは、魔法少女に\n詳しいわけじゃないけど
+	ディーア	通常2						シェリーの話を聞いて、\n一緒に考えることぐらいはできる
+	シェリー	通常						だから、話して欲しいの？
+	ディーア	通常2						もちろん、\nシェリーが嫌じゃなければ
+	シェリー	笑い						……ふふ、\nありがとう、おにーさん
+	シェリー	怪しい						……あたしはね、その、\nフィノとどう接したらいいか\n分からないの……
+	シェリー							あたしは、ずっと一人で戦ってきたし\nこれからもそうだと思ってた
+	シェリー	悔しい						それなのに、\n急に仲間とか言われても……\nどうしたらいいのか
+	ディーア	通常2						……一緒に戦うフィノのこと、\nどう思ってるんだ？
+	シェリー	笑い						それは……\nえっと、すごく努力家で、\n夢にまっすぐで、良い子だなって……
+	ディーア	笑い2						……そっか
+	シェリー	嬉しい						フィノが隣にいてくれると、\n……とても頼もしいし、嬉しいの
+	シェリー	悔しい						でもあたし、\nフィノにどういう言葉を掛けたら\nいいのか、全然分からなくて
+	シェリー	怪しい						つい、言い過ぎちゃうし……
+	ディーア	驚き2						態度や言葉遣いを注意することか？
+	シェリー							うん……
+	シェリー	悔しい						それに、街の結界のことだって、\nフィノに伝えたのは\n間違いだったかもしれないって思うの
+	シェリー	怪しい						フィノを、\n傷つけただけなんじゃないかって……
+	ディーア	通常2						……シェリー、大丈夫だよ
+	シェリー	驚き						……え？
+	ディーア	笑い2						シェリーの行動は、\n全部フィノのことを\n思ってやってきたことだろ？
+	シェリー	驚き						そう、だけど……
+	ディーア	通常2						だったら大丈夫\nちゃんとそれを言葉にすれば、\nフィノにも気持ちが伝わるさ
+	シェリー	悔しい						えっ、今のを……伝えろっていうの？
+	ディーア	笑い2						そういうこと！
+Tween	シェリー	ShakePosition	x=10				NoWait
+	シェリー	照れ						そんなのできるわけないでしょ！\n……は、恥ずかしいじゃない！
+	ディーア	あはは2						そこはほら、魔法少女の勇気で……
+	シェリー	照れ
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー							都合よく魔法少女を\n引っ張り出さないで！
+	シェリー	本気						ほ、ほら、もうフィノたちの所に\n行くわよ！\n敵に遭遇してたら大変じゃない！
+	ディーア	笑い2						……そうだな
+	シェリー	怪しい						そのうち伝えるわ\n……そのうちね
+	ディーア	通常2						ああ、今はそれでいいよ
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地B2(紫)
+Bgm	絶望
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	フィノ	驚き
+FadeIn	black					.5
+	フィノ							……そう、わたし\nそうすれば良かったんだね
+	フィノ							……うん、それで、\n全部解決するなら……
+	フィノ							なんでもしなきゃね……
+Param	character_grayout=true
+CharacterOff
+StopBgm
+	ディーア	驚き2	画面外_左
+Tween	ディーア	MoveTo	x=0 time=1.5				NoWait
+	ディーア	驚き2						……フィノ？
+CharacterOff
+	フィノ	通常						あ、お兄ちゃん……\n迎えに来てくれたの？
+CharacterOff
+	ディーア	驚き2						今、誰かと話してたか？
+CharacterOff
+	フィノ	通常						ううん……なんでもないよ！
+Se	走る
+Tween	フィノ	MoveTo	x=-800 time=1.5				NoWait
+FadeOut	black					.5
+CharacterOff						0
+Wait						.5
+	黒グラデーション		エフェクト表			0
+FadeIn	black					.5
+	？？？？							くっくっく…………
+FadeOut	black					.7
+CharacterOff						0
+Bg	市街地B2(紫)					0
+Param	character_grayout=false
+	イベントスチル51607		エフェクト表
+FadeIn	black					.5
+Bgm	絶望
+	フィノ	<Off>						変身の力を取り戻すまであと少し……\nもうちょっとだけがんばれば、\nきっと明るい未来が見えてくるはず
+	フィノ	<Off>						待っててね\nお兄ちゃん、シェリーちゃん……\nわたし、きっとみんなの役に立つから
+	フィノ	<Off>						次回\nまじかるシャイン☆ファンタジア\n『変身！ シャインファンタジア！』
+	フィノ	<Off>						魔法少女はいつだって、\n信じる心に応えるの……
+StopBgm						1.5
+Param	character_grayout=true
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_516_07
+EndIf
+EndScenario
+
+# E_516_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	市街地B2(緑)
+	黒グラデーション		エフェクト表
+FadeIn	white					.5
+												3話　バトル前
+	フィノ	<Off>						……お兄ちゃん、シェリーちゃん\nわたし決めたよ……
+	フィノ	<Off>						何をしても……\nみんなを助けてみせるから
+FadeOut	black					.5
+Wait						.5
+CharacterOff						0
+Bg	市街地B2(緑)					0
+Bgm	図書館
+	シェリー	怪しい	画面外_右			0
+FadeIn	black					.5
+Tween	シェリー	MoveTo	x=0 time=1.5				NoWait
+	シェリー							おにーさん、\nちょっと頭を整理したいの……\n話、聞いてくれる？
+CharacterOff
+	ディーア	通常2						ああ、オレで良ければ\nいくらでも
+CharacterOff
+	ディーア	通常2	2_2
+	シェリー	驚き	1_2_b					……フィノは？
+	ディーア	通常2						ああ、パトロールに行くって\n聞いたけど……
+	シェリー	怪しい						そう……
+	ディーア	驚き2						シェリー……？
+	シェリー							分かってる……\nちゃんとこの気持ちは\nフィノに伝えるから
+	シェリー	悔しい						……今はその話じゃなくて、\n結界の話をしたいの
+	ディーア	怒り2						なにか、気になることがあるのか？
+	シェリー	怪しい						うん……あのね
+	シェリー							この前、フィノが幹部に囲まれて、\nあたしたちがフィノの所に\n向かう少し前……
+	シェリー							あの時は焦ってて気づかなかったけど\n結界が少し、移動してたと思うの
+	ディーア	驚き2						フィノが移動したからか……？
+	シェリー	悔しい						フィノが幹部と対峙してたなら\nそんなに動くことはないはず……
+	シェリー	怪しい						……あの時の中心は、\nフィノとは違う位置にあった……
+	シェリー	本気						どちらかとえば、中心は、\nあたしとおにーさんの方に\n近付いて、そして……はっ!!
+	ディーア	本気2						なっ……!?\nそれって、まさか……！
+	シェリー	本気						そうだ……\nどうして気づかなかったの……!?
+StopBgm
+	シェリー	悔しい						どうしよう、あたし\n勘違いしてた……！\n本当の結界の核はフィノじゃない！
+	シェリー	本気						『シャイニィ』よ……！
+FadeOut	black					.5
+Bgm	緊迫
+CharacterOff						0
+	ディーア	悔しい2	画面外_右			0
+FadeIn	black					.5
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1.5				NoWait
+	ディーア							くそ、フィノはどこだ!?
+CharacterOff
+	シェリー	本気	画面外_右
+Se	走る
+Tween	シェリー	MoveTo	x=0 time=1.5				NoWait
+	シェリー							もっと早く気づけば良かった……！
+	シェリー	怪しい						『シャイニィ』は\nいつもフィノのそばにいたんだから
+	シェリー	悔しい						結界の核はあいつかもって、\nちゃんと考えられたはずなのに！
+CharacterOff
+	ディーア	怒り2						……フィノがどうして\nアンロックされてるのか、\nずっと不思議だったけど……
+	ディーア	悔しい2						側にいたあいつが\n魔力を与えたんだとしたら……！
+CharacterOff
+	シェリー	驚き
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー	驚き						……あっ！\nおにーさん、フィノがいた！
+CharacterOff
+	ディーア	驚き2						…………！
+FadeOut	black					.5
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	シャイニィ	本気	1_3
+	フィノ	怒り	2_3_b
+FadeIn	black					.5
+	フィノ							……じゃあ、お願いね
+Tween	フィノ	MoveBy	x=-10				NoWait
+Tween	シャイニィ	MoveBy	x=10
+Wait						.5
+CharacterOff
+	シェリー	本気
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー							だめ、フィノ！
+CharacterOff
+	シャイニィ	本気	1_3
+	フィノ	驚き	2_3_b					……！ シェリーちゃん
+CharacterOff
+	ディーア	本気2						そいつに触ったら駄目だ！
+CharacterOff
+	黒グラデーション		エフェクト裏
+	シャイニィ	本気	1_3
+	フィノ	驚き	2_3_b					どうして……？\nシャイニィなら、\nこの事件を解決できるんだって……！
+	フィノ							今まで集めた力を渡してあげる\nただそれだけで……
+	フィノ	怒り						魔法少女としては失格でも\nこれで、みんなの\n役に立てるなら……！
+CharacterOff
+	シェリー	本気
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー	本気						違う！\n本当の悪者はそいつ<dash=2>
+CharacterOff
+	黒グラデーション		エフェクト表
+	シャイニィ	悪い顔						……もう遅い
+CharacterOff
+	フィノ	驚き
+Wait						.5
+FadeOut	white					.3
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏			0
+FadeIn	white					.3
+	フィノ	驚き						………………!!
+FadeOut	white					.3
+Param	character_grayout=false
+Se	闇1
+	黒グラデーション		エフェクト裏			0
+	スモーク		エフェクト表			1	NoWait
+FadeIn	white					.3
+	フィノ	驚き						……え？
+CharacterOff
+	　　　　　　　　　　
+Se	闇1
+Bg	市街地B2(紫)					.5
+Wait						.5
+Se	火事					.5
+Shake	Graphics	ShakePosition	time=2				NoWait
+Wait						1.5
+CharacterOff
+	ディーア	悔しい2						くっ……！
+CharacterOff
+	フィノ	驚き
+Tween	フィノ	ShakePosition	x=10				NoWait
+	フィノ	驚き						な、なんで……？\n結界が、拡がって……！
+CharacterOff
+Se	闇1
+	キョウアクワール					.5
+Wait						.5
+	キョウアクワール							あなたのおかげですよ
+CharacterOff
+	フィノ	怒り						えっ……？
+CharacterOff
+	キョウアクワール							あなたのおかげで、\nわれわれのりょういきは\nさらにひろがった
+	キョウアクワール							ジャークエンペラーさまも\nおよろこびだ
+CharacterOff
+	フィノ	怒り						そんな……
+CharacterOff
+Se	闇1
+	ジャークエンペラー					1		実に扱いやすかったぞ……\nフィノ……
+CharacterOff
+	フィノ	怒り						なんで、わたしの名前……
+CharacterOff
+	ジャークエンペラー							ふっ、この顔に見覚えはないか……？
+	ジャークエンペラー	きらーん						…………ニィ
+CharacterOff
+	フィノ	驚き						シャイニィ、なの……？
+CharacterOff
+	シェリー	本気
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー	本気						フィノ、結界の中心は\n最初からシャイニィだったの！
+	シェリー							あいつがあたしたちの力を奪って、\n黒いもやを操り、\n人々を魔物に変えていた張本人よ！
+CharacterOff
+	フィノ	驚き						シャイニィ……\nわたしのこと、騙したの……？
+CharacterOff
+	ジャークエンペラー							貴様は大いなる野望のため\n利用しただけだ……
+	ジャークエンペラー							貴様のその強い羨望、\n魔法少女への執着……
+	ジャークエンペラー							強い力でありながら\n操るのは容易い……！
+	ジャークエンペラー							おかげで十分な力が手に入ったぞ……
+	ジャークエンペラー							魔界中の全てをワルイーゾに変え、\n私の支配下に置くことが出来る……！
+FadeOut	white					.3
+CharacterOff						0
+Se	闇3
+Shake	Graphics	ShakePosition	time=2	easeInQuart			NoWait
+Param	character_grayout=false
+	フィノ	怒り	1_3			0
+	シェリー	悔しい	3_3			0
+FadeIn	white					.3
+Tween	フィノ	MoveTo	x=800 time=1				NoWait
+Tween	シェリー	MoveTo	x=800 time=1.5				NoWait
+	フィノ&シェリー							きゃああああっ!!
+Param	character_grayout=true
+FadeOut	black					.5
+StopBgm
+CharacterOff						0
+Wait						.5
+Se	倒れる
+	ディーア	悔しい2				0
+Wait						1
+FadeIn	black					.5
+	ディーア	悔しい2						ぐっ……！\nなんて力だ……！
+CharacterOff
+Bgm	絶望
+	黒グラデーション		エフェクト表
+	フィノ	絶望						ううっ……ごめんなさい……\nわたし、わたしのせいで、こんな……
+	フィノ	絶望						こんなわたしじゃ、やっぱり……\n魔法少女、失格……
+CharacterOff	フィノ
+	シェリー	悔しい
+Tween	シェリー	ShakePosition	x=5				NoWait
+	シェリー							ちがう……\nごめんね、フィノ……\nあなたを追い詰めたのは、あたしよ
+	シェリー	怪しい						最初から一人で戦うべきだった……
+	シェリー	悔しい						……だから、ここからは\n全部あたし一人で……
+CharacterOff
+	ディーア	怒り2						シェリー、それは違う
+CharacterOff
+	シェリー	悔しい						お、おにーさん……？
+CharacterOff
+	ディーア	怒り2						シェリーの本当の気持ちは\nそうじゃないはずだ
+	ディーア	通常2						前に言ってただろ？
+FadeOut	black					.5
+Se	回想
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地B2(緑)					0
+StopBgm
+	シェリー	怪しい				0
+FadeIn	black					.5
+	シェリー	怪しい						そのうち伝えるわ\n……そのうちね
+FadeOut	black					.5
+CharacterOff						0
+Bg	市街地B2(紫)
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+	ディーア	通常2				0
+FadeIn	black					.5
+	ディーア							今がその時だよ
+CharacterOff
+	シェリー	驚き						そっか……そう、かもね……
+FadeOut	black					.5
+CharacterOff
+	フィノ	絶望	1_3
+	シェリー	悔しい	画面外_右
+FadeIn	black					.5
+Tween	シェリー	MoveTo	x=180 time=2				NoWait
+	シェリー							フィノ……
+	フィノ	絶望						シェリーちゃんごめんね……\nわたし、役立たずで……
+	シェリー	悔しい						フィノ、聞いて\nあたしはあなたを役立たずなんて\n思ったことない
+	フィノ	驚き						……え？
+Bgm	凱旋
+	シェリー	悔しい						あたしはずっと、一人で戦ってきた\nだから、あなたと\nどう接したらいいのか……
+	シェリー	怪しい						仲間ってどういうものなのか\nよく分からなかった……
+	シェリー	本気						でも、ようやく気づいたの
+	シェリー	本気						あたしは、出会ってからずっと\nフィノに力をもらってた
+	フィノ	驚き						わたし、から……？
+	シェリー	本気						一緒にいてくれる\n仲間がいることが、
+	シェリー	笑い						こんなにもあたしを\n安心させてくれるんだって\n分かったの！ だからね……！
+	シェリー	嬉しい						フィノがいてくれて良かったの\nフィノがいてくれて嬉しいの……！
+	シェリー	笑い						だから、あなたは\n立派な魔法少女よ！\n失格なんかじゃない……！
+	フィノ	驚き
+Tween	フィノ	ShakePosition	x=5				NoWait
+	フィノ	驚き						シェリーちゃん……！
+	フィノ	悲しい						でも、わたしは、\n失敗しちゃったから……
+CharacterOff
+	ディーア	通常2						失敗がどうしたんだ？
+CharacterOff
+	シェリー	笑い	3_3
+	フィノ	驚き	1_3					……え？
+CharacterOff
+	ディーア	悔しい2						この戦いは終わってない\nまだオレたちは負けてない
+	ディーア	怒り2						失敗したならそれを挽回すればいい\n諦めるにはまだ早い
+	ディーア	通常2						絶対負けない、諦めない\nそれが魔法少女だろ？
+CharacterOff
+	シェリー	悔しい	3_3
+	フィノ	驚き	1_3					そっか……うん、そうだったね……
+	フィノ	笑い						……みんなの夢が、希望がある限り\n魔法少女は負けないんだ……！
+	フィノ	照れ						お兄ちゃん、ありがとう……！
+	シェリー	悔しい						もう、おにーさんがあたしたちに\n魔法少女を語るなんて、生意気！
+CharacterOff
+	ディーア	笑い2						まあ、\n魔法少女のサポート役だからな
+CharacterOff
+	シェリー	笑い	3_3
+	フィノ	照れ	1_3					うん、そうだね！
+CharacterOff
+	ディーア	通常2						二人が協力すれば、\nきっと乗り越えられるさ
+CharacterOff
+	シェリー	笑い	3_3
+	フィノ	慌て	1_3
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							あっ、でもどうしよう……\nわたしが集めた力は、あいつに……
+	シェリー							心配ないわ！ あたしに任せて♪
+	フィノ	驚き						……えっ？
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+Bgm	緊迫
+	ジャークエンペラー					0
+FadeIn	black					.5
+	ジャークエンペラー							……性懲りもなく戻ってきたか
+CharacterOff
+	キョウアクワール							ふん、わざわざたおされにくるとは
+CharacterOff
+	ディーア	本気2						お前たちこそ、\n倒される覚悟は出来てるか？
+CharacterOff
+	シェリー							勝算もなく戻るわけないじゃない！
+CharacterOff
+	キョウアクワール							……なに？
+CharacterOff
+	ジャークエンペラー							どういうことだ……\nフィノの力が、戻っている……
+CharacterOff
+	シェリー	通常	3_3
+	フィノ	笑い	1_3
+Se	キラン
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	笑い						見ての通り、元気いっぱいだよ！
+	シェリー							どうして？ って顔してるわね！\nあたしが集めた力を分けただけよ♪
+CharacterOff
+	キョウアクワール							おかしい、それだけでは……
+CharacterOff
+	フィノ	笑い	1_3
+	シェリー	通常	3_3					もちろん、それだけじゃないわ\nあたしたちの力は、\n人々の気持ちから生まれるの
+	シェリー	笑い						あたしとフィノの、\nお互いを思う気持ちも\n例外じゃないの♪
+	フィノ	照れ						これが、\n魔法少女のキラキラ絆パワー！\nだよね？
+	シェリー	怪しい						それは初めて聞いたけど……\nまあそれでいっか
+CharacterOff
+	ディーア	通常2						二人とも、いけるか？
+CharacterOff
+Bgm	水属性バトル
+	シェリー	通常	3_3
+	フィノ	きらーん	1_3					うん……！\nいこう、シェリーちゃん！
+	シェリー	笑い						ふふ♪\nあたしの活躍、見逃さないでね！
+Param	character_grayout=false
+	フィノ&シェリー							<size=40>変身!!</size>
+FadeOut	white					.5
+Wait						.3
+Bg	黒背景					0
+CharacterOff						0
+	カバー上部		カバー上部			0
+	イベントスチル51601		エフェクト表			0
+	フィノ	<Off>				0
+FadeIn	white					.2
+Se	光3
+Tween	イベントスチル51601	MoveBy	y=-700 time=2.5	easeInOutQuart
+	フィノ	<Off>						ファンタジーローズ！\nメタモルフォーゼ★
+FadeOut	white					.3
+CharacterOff						0
+Wait						.3
+	イベントスチル51602		エフェクト表			0
+	フィノ	<Off>				0
+Se	シャキーン
+FadeIn	white					.3
+	フィノ	<Off>						愛と勇気の守護者！\n魔法少女ローズフィノ、参上！
+FadeOut	white					.3
+CharacterOff						0
+Wait						.3
+	イベントスチル51603		エフェクト表			0
+	フィノ	<Off>				0
+FadeIn	white					.3
+	フィノ							みんなをいじめる悪い子は、\nさくっとぶっ倒……じゃなくて！\nおしおきしちゃうからっ♪
+FadeOut	white					.5
+CharacterOff						0
+	カバー上部		カバー上部			0
+	イベントスチル51604		エフェクト表			0
+	シェリー	<Off>				0
+FadeIn	white					.2
+Se	光3
+Tween	イベントスチル51604	MoveBy	y=-700 time=2.5	easeInOutQuart
+	シェリー	<Off>						ファンタジーブルー！\nメタモルフォーゼ！
+FadeOut	white					.3
+CharacterOff						0
+Wait						.3
+	イベントスチル51605		エフェクト表			0
+	シェリー	<Off>				0
+Se	シャキーン
+FadeIn	white					.3
+	シェリー	<Off>						夢と希望の守護者、\n魔法少女ブルーシェリー降臨♪
+FadeOut	white					.3
+CharacterOff						0
+Wait						.3
+	イベントスチル51606		エフェクト表			0
+	フィノ	<Off>				0
+FadeIn	white					.3
+	シェリー	<Off>						みんなをいじめる悪い人は、\nブルーシェリーが\n許さないんだから！
+FadeOut	white					.5
+CharacterOff						0
+	イベントスチル51610		エフェクト表			0
+FadeIn	white					.5
+Se	キラン
+	フィノ	<Off>						二人合わせて！\nシャイン☆ファンタジア！
+	フィノ	<Off>						き、決まったぁ……！
+	シェリー	<Off>						そのチーム名で確定なんだ……
+	フィノ	<Off>						うん！ かわいいよね！
+	シェリー	<Off>						まあね……！
+Param	character_grayout=true
+CharacterOff
+Bg	市街地B2(紫)
+	ジャークエンペラー							面白い……\nその力が通用するか\n試してみるがいい……
+CharacterOff
+	キョウアクワール							ふふ……まずはわたしがあいてをして\nあげましょう……
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル51610		エフェクト表			0
+FadeIn	white					.3
+	フィノ	<Off>						さぁ、覚悟しなさい！
+	シェリー	<Off>						後悔しても遅いんだから！
+FadeOut	white					.5
+Param	character_grayout=true
+If	isdebug==true
+CharacterOff
+Jump	*E_516_08
+EndIf
+EndScenario
+
+# E_516_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	市街地B2(紫)
+	キョウアクワール
+FadeIn	white					.5
+												3話　バトル後
+FadeOut	white					.1
+Se	光1
+FadeIn	white					.1
+Tween	キョウアクワール	ShakePosition	x=20				Add
+	キョウアクワール							ぐあああっ…………
+	キョウアクワール							まさか……\nまさかこのわたしが……\nやられるなん、て……！
+Se	敵殺
+Tween	キョウアクワール	MoveBy	y=-700				NoWait
+Wait						.5
+CharacterOff
+	シェリー	進化笑い	3_3
+	フィノ	進化通常	1_3					やった……！
+	シェリー	進化笑い						さぁ、残ったのはあなただけよ\n観念しなさい！
+CharacterOff
+Bgm	魔王バトル
+	ジャークエンペラー							雑魚どもを倒したくらいで\nいい気になるな……
+	ジャークエンペラー							お前たちでは\n私の足元にも及ばん……
+CharacterOff
+	シェリー	進化通常	3_3
+	フィノ	進化怒り	1_3					やってみなきゃ分からないでしょ！
+	シェリー	進化本気
+Param	character_grayout=false
+	フィノ&シェリー							えーーーいっ!!
+CharacterOff
+	ジャークエンペラー
+Wait						.5
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Wait						.1
+Se	光2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	市街地B2(紫)					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	ジャークエンペラー
+Se	ガードブレイク
+Tween	ジャークエンペラー	MoveBy	x=-10
+Tween	ジャークエンペラー	MoveBy	x=10				NoWait
+	ジャークエンペラー							ふん……
+CharacterOff
+	フィノ	進化驚き	1_3
+	シェリー	進化悔しい	3_3					なっ……！
+	フィノ
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	進化驚き						えっ……!?
+CharacterOff
+	ジャークエンペラー							言ったはずだ……\nお前たちでは、私には勝てん……
+CharacterOff
+	ディーア	悔しい2						あの攻撃で無傷なのか……!?
+CharacterOff
+	ジャークエンペラー							つまらんな……
+FadeOut	black					.3
+Param	character_grayout=false
+Se	闇2
+	黒グラデーション		エフェクト裏
+FadeIn	black					.3
+	スモーク		エフェクト表			.3
+	ジャークエンペラー							今度はこちらから行くぞ……
+FadeOut	black					.1
+CharacterOff						0
+Param	character_grayout=false
+Se	闇3
+Shake	Graphics	ShakePosition	time=2				NoWait
+FadeIn	black					.1
+	シェリー	進化本気	3_3
+	フィノ	進化怒り	1_3
+	フィノ&シェリー							きゃあああっ!?
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	本気2				0
+FadeIn	black					.5
+	ディーア	本気2						フィノ、シェリー！
+CharacterOff
+	フィノ	進化怒り	1_3
+	シェリー	進化本気	3_3
+Tween	シェリー	ShakePosition	x=10				NoWait
+	シェリー							だい、じょうぶ……！\n魔法少女は、負けないから！
+Tween	フィノ	ShakePosition	x=10				NoWait
+	フィノ	進化怒り						そうだよ……このくらいで\n諦めるわけにはいかない……！
+	シェリー							行くわよ、フィノ！
+	フィノ
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							うん!!
+Param	character_grayout=false
+	フィノ&シェリー							はあああああっ!!
+Param	character_grayout=true
+CharacterOff
+	ジャークエンペラー							まだ、力の差が分からないのか……
+FadeOut	black					.1
+CharacterOff						0
+Se	闇3
+Shake	Graphics	ShakePosition	time=2				NoWait
+FadeIn	black					.1
+	フィノ	進化怒り	1_3
+	シェリー	進化悔しい	3_3
+Se	倒れる
+Tween	シェリー	MoveBy	y=-20				NoWait
+	シェリー							くっ……!!
+Se	倒れる
+Tween	フィノ	MoveBy	y=-20				NoWait
+	フィノ	進化怒り						きゃあっ!!
+CharacterOff
+	ジャークエンペラー							ふはははははっ!!
+CharacterOff
+	黒グラデーション		エフェクト裏
+	フィノ	進化怒り	1_3
+	シェリー	進化悔しい	3_3					どうして……\nどうして攻撃が効かないの
+	フィノ	進化怒り						変身の力を取り戻して……\nシェリーちゃんとも、\n仲間になれたのに……
+	シェリー	進化悔しい						まだ、何か足りないっていうの……？
+CharacterOff
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						二人とも、避けろ!!
+CharacterOff
+	ジャークエンペラー							これで……
+FadeOut	black					.2
+Param	character_grayout=false
+Se	闇2
+	黒グラデーション		エフェクト裏			0
+FadeIn	black					.2
+	スモーク		エフェクト表			.3
+StopBgm
+	ジャークエンペラー							……終わりだ
+CharacterOff	スモーク						NoWait
+CharacterOff	ジャークエンペラー
+	フィノ	進化怒り	1_3
+	シェリー	進化本気	3_3
+	フィノ&シェリー							………………!!
+Param	character_grayout=true
+StopBgm						.5
+FadeOut	black					.7
+Wait						.5
+CharacterOff						0
+Bg	塩湖					0
+Param	character_grayout=false
+	フィノ	進化笑い	1_3
+	シェリー	進化笑い	3_3
+	イベントスチル51607		エフェクト表			0
+FadeIn	black					.5
+Bgm	水属性バトル
+	フィノ							どうしよう！\nジャークエンペラーには、\nわたしたちの攻撃が効かない！
+	フィノ							だけど、\nわたしたちを信じた街の人たちが、\n力いっぱい応援してくれてる……！
+	フィノ							そうだ、わたしたちは魔法少女！\n絶対諦めない！\n絶対に負けないんだから！
+	フィノ							次回、\nまじかるシャイン☆ファンタジア\n『決戦！ キラメキの行方』
+	フィノ							魔法少女はいつだって、\n信じる心に応えるの!!
+StopBgm						1.5
+Param	character_grayout=true
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_516_09
+EndIf
+EndScenario
+
+# E_516_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	市街地B2(紫)
+	フィノ	進化怒り	1_3
+	シェリー	進化本気	3_3
+Param	character_grayout=false
+	フィノ&シェリー					0
+FadeIn	white					.5
+												4話　バトル前
+	フィノ&シェリー							はあああっ！
+Param	character_grayout=true
+CharacterOff
+	ジャークエンペラー
+FadeOut	white					.3
+Se	光2
+Wait						.3
+FadeIn	white					.3
+Se	ガードブレイク
+Tween	ジャークエンペラー	MoveBy	x=-10
+Tween	ジャークエンペラー	MoveBy	x=10				NoWait
+	ジャークエンペラー							ぬるい……
+CharacterOff
+	シェリー	進化悔しい	3_3
+	フィノ	進化怒り	1_3					だめ……！
+	シェリー	進化悔しい						やっぱり攻撃が効かない！
+CharacterOff
+	ジャークエンペラー							諦めろ……\nどう足掻いても\nお前たちに勝ち目はない
+CharacterOff
+	シェリー	進化悔しい	3_3
+	フィノ	進化慌て	1_3					どうしよう、シェリーちゃん！
+	シェリー							くっ……！
+CharacterOff
+StopBgm
+	黒グラデーション		エフェクト表
+	？？？？	<Off>						…………れ
+CharacterOff
+	シェリー	進化驚き	3_3
+	フィノ	進化驚き	1_3					えっ？
+	シェリー							今なにか……？
+CharacterOff
+	女の子
+Tween	女の子	PunchPosition	y=50				NoWait
+	女の子							お姉ちゃんたち、がんばれー！
+CharacterOff
+	シェリー	進化驚き	3_3
+	フィノ	進化驚き	1_3					あの子は……！
+CharacterOff
+Bgm	光属性バトル
+	女の子							負けないで、がんばってー！
+CharacterOff
+	街の女性							お願い負けないで!!
+CharacterOff
+	旅人							応援ならいくらでもする！\nだからがんばってくれ……！
+CharacterOff
+	街の女性		1_3
+	旅人		3_3
+	女の子		2_3
+Tween	女の子	PunchPosition	y=30				NoWait
+	女の子							がんばれー！
+CharacterOff
+	シェリー	進化驚き	3_3
+	フィノ	進化驚き	1_3					街の人が……！
+	シェリー	進化通常						そうね、この応援を力にして、\nあいつに立ち向かえば……！
+StopBgm						.5
+	フィノ	進化怒り						だけど、それで倒せるかな……\nあいつを……
+	シェリー	進化悔しい						それは……
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？	<Off>						<dash=2>二人とも、がんばれ！
+CharacterOff
+	シェリー	進化驚き						この、声は……
+CharacterOff
+Param	character_grayout=false
+Se	キラン
+	集中線		エフェクト表
+	ディーア	拡大本気2	エフェクト裏					オレは最後まで二人を支える！\nがんばれ！ 負けるな！
+Param	character_grayout=true
+CharacterOff
+	シェリー	進化驚き	3_3
+	フィノ	進化驚き	1_3					お兄ちゃん……！
+Bgm	風属性バトル					.5
+	シェリー	進化通常						そうか、分かったわ……\nあたしたちにまだ\n足りなかったもの……！
+	フィノ	進化通常
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							うん、きっとそうだね\nずっと近くて気づかなかったけど！
+	シェリー	進化笑い						おにーさんこそ、\nあたしたちに足りなかった力なんだ！
+CharacterOff
+	ディーア	驚き2						オレが……？
+CharacterOff
+	シェリー	進化通常	3_3
+	フィノ	進化怒り	1_3					お願い、お兄ちゃん\n力を貸して欲しいの！
+CharacterOff
+	ディーア	怒り2						ああ、分かった！
+	ディーア	本気2						教えてくれ二人とも、\nオレはどうすればいい？
+CharacterOff
+	フィノ	進化通常						そんなの決まってるよ！
+StopBgm
+	フィノ	進化きらーん
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							お兄ちゃんも、\n魔法少女になればいいのっ！
+CharacterOff
+	ディーア	驚き2						えっ？
+CharacterOff
+	ジャークエンペラー							えっ……
+CharacterOff
+	ディーア	驚き2						えっ!? 魔法少女!?
+	ディーア	汗2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	汗2						ちょっと待て！\nむりむり、それは無理だって!!
+CharacterOff
+	ジャークエンペラー							ふははは……！\n血迷ったのか……\nその魔剣使いは男ではないか……！
+CharacterOff
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						ほら、あいつも無理だって言ってる！
+CharacterOff
+Bgm	風属性バトル					.5
+	フィノ	進化きらーん	1_3
+	シェリー	進化通常	3_3					ふふっ、\nぜーんぜん分かってないわね♪
+	フィノ	進化きらーん						魔法少女は\nみんなの夢と希望で、\n愛と勇気なの！
+	シェリー	進化笑い						そしてそこに\n男女なんて関係ないんだから♪
+	フィノ							さあ、お兄ちゃん！
+	シェリー							一緒に戦って！
+CharacterOff
+	ディーア	悔しい2
+Tween	ディーア	ShakePosition	x=10				NoWait
+	ディーア							うっ……\n二人がそこまで言うなら\nオレも……覚悟を決めるしかないな！
+CharacterOff
+	ジャークエンペラー							…………決めたのか
+CharacterOff
+	ディーア	本気2						……まずは変身だな！\nえーと、口上は……
+CharacterOff
+	フィノ	進化笑い						なんでもいいんだよ！
+CharacterOff
+	ディーア	怒り2						よし……！
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表
+	ディーア	拡大本気2	エフェクト裏					<size=40>マケンツカイー･\nメタモルフォーゼ☆</size>
+Param	character_grayout=true
+CharacterOff
+	フィノ	進化慌て	1_3
+	シェリー	進化怪しい	3_3					えっ、ださ……
+	フィノ	進化慌て						なんでもいいとは言ったけど……!?
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+Wait						.3
+Se	光3
+	イベントスチル51608		エフェクト表			0
+	ディーア	<Off>				0
+FadeIn	white					.5
+	ディーア	<Off>						はあああっ！
+Param	character_grayout=true
+CharacterOff
+	ジャークエンペラー							何だ……\n何故お前たち全員の力が\n上昇している……！
+CharacterOff
+	シェリー	進化通常	3_3
+	フィノ	進化笑い	1_3					あれ、知らないの？
+	フィノ	進化きらーん						魔法少女三人が力を合わせた時\n力は三人分になるんじゃない\n三倍になるんだよ！
+	シェリー	進化通常						まぁ、それはあたしもついさっき\n知ったんだけど
+	フィノ	進化驚き						……わたしのおかげ？
+	シェリー	進化照れ						うん、フィノのおかげ
+	フィノ	進化照れ						えへへ……♪
+StopBgm						.5
+CharacterOff
+Param	character_grayout=false
+Se	光2
+	イベントスチル51608		エフェクト表
+	ディーア	<Off>						はあああああっ!!
+Param	character_grayout=true
+CharacterOff
+Bgm	コメディ
+	フィノ	進化驚き	1_3
+	シェリー	進化怪しい	3_3					あれ……おにーさん\nいつまで光ってるの……？
+CharacterOff
+Param	character_grayout=false
+	イベントスチル51608		エフェクト表
+	ディーア	<Off>						カッコよくソウルを纏ってるんだ！\nもうちょっと待ってくれ!!
+Param	character_grayout=true
+CharacterOff
+	シェリー	進化怪しい	3_3
+	フィノ	進化驚き	1_3					あいつ、そういうの\n待ってくれるかな……？
+CharacterOff
+	ジャークエンペラー	通常						………………
+Se	キラン
+	ジャークエンペラー	きらーん						…………ちょっとだけニィ
+CharacterOff
+	フィノ	進化通常	1_3
+	シェリー	進化本気	3_3
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー							待つって!!
+	フィノ	進化きらーん						そっか、これが魔法少女のお約束\n『着替え中の攻撃はNG！』だね!!
+	シェリー	進化悔しい						そんなお約束あるの!?
+CharacterOff
+Param	character_grayout=false
+Bgm	風属性バトル					.5
+	イベントスチル51608		エフェクト表
+	ディーア	<Off>						さあ行くぞ！ フィノ、シェリー！\nオレが、オレたち三人が！\nシャイン☆ファンタジアだ！
+Param	character_grayout=true
+CharacterOff
+	シェリー	進化通常	3_3
+	フィノ	進化通常	1_3					うん、行こう！\nシェリーちゃん、お兄ちゃん！
+	シェリー	進化笑い						ふふ、いいわ♪\n三人の魔法少女の力、見せてあげる！
+If	isdebug==true
+CharacterOff
+Jump	*E_516_10
+EndIf
+EndScenario
+
+# E_516_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	魔王バトル
+Bg	市街地B2(紫)
+	ジャークエンペラー
+FadeIn	white					.5
+												4話　バトル後
+Tween	ジャークエンペラー	ShakePosition	x=20				NoWait
+	ジャークエンペラー							ぐっ、ばかな……この私が\n魔法少女ごときに……！
+CharacterOff
+	フィノ	進化通常	1_3
+	シェリー	進化本気	3_3					とどめ行くわよ、フィノ！
+	フィノ	進化通常						うん、シェリーちゃん！
+FadeOut	white					.5
+CharacterOff
+Wait						.3
+Bgm	水属性バトル					.5
+Param	character_grayout=false
+	イベントスチル51606		エフェクト表
+FadeIn	white					.5
+	シェリー							この矢に集まれ夢と希望！
+CharacterOff
+	イベントスチル51603		エフェクト表
+	フィノ							この煌めきは勇気の証！
+FadeOut	white					.3
+CharacterOff
+	カバー上部		カバー上部			0
+	イベントスチル51609		エフェクト表
+FadeIn	white					.3
+Tween	イベントスチル51609	MoveBy	y=-349 time=2
+	フィノ&シェリー	<Off>						<size=40>ブレイズドライブ!!</size>
+Se	光3
+FadeOut	white					.5
+Wait						.5
+CharacterOff						0
+	ジャークエンペラー					0
+Tween	ジャークエンペラー	ShakePosition	x=30 time=1.5				NoWait
+FadeIn	white					.5
+	ジャークエンペラー							があああああッ!!
+CharacterOff
+Se	キラン
+	イベントスチル51606		エフェクト表
+	シェリー							夢と希望を胸にだき、\n輝く未来を護り抜く！\nそれが魔法少女ブルーシェリー！
+CharacterOff
+Se	キラン
+	イベントスチル51603		エフェクト表
+	フィノ							愛と勇気がある限り、\n煌めく願いは必ず叶う！\nそれが魔法少女、ローズフィノ！
+CharacterOff
+	ジャークエンペラー
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏
+Se	倒れる
+Tween	ジャークエンペラー	MoveBy	y=-50				NoWait
+	ジャークエンペラー							私の野望が……魔界、征服が……！
+Se	火事
+Shake	Graphics	ShakePosition	time=2	easeInQuart			NoWait
+	スモーク		エフェクト表			1
+Wait						1.5
+Se	ボス殺
+CharacterOff	スモーク					1	NoWait
+CharacterOff	ジャークエンペラー					1
+StopBgm						.5
+Wait						1.5
+FadeOut	white					.3
+CharacterOff						0
+Se	光1
+FadeIn	white					.3
+Bg	市街地B2(緑)					1.5
+Wait						1.5
+Param	character_grayout=true
+CharacterOff
+	シェリー	進化驚き	3_3
+	フィノ	進化通常	1_3					結界が……
+	シェリー	進化笑い						消えた……！
+Param	character_grayout=false
+Tween	シェリー	PunchPosition	y=50				NoWait
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ&シェリー							やったぁ!!
+CharacterOff
+StopBgm
+Se	光1
+	イベントスチル51608		エフェクト表
+	ディーア	<Off>						やったな！ オレたちの勝利だ！
+Param	character_grayout=true
+CharacterOff
+Bgm	コメディ
+	シェリー	進化怪しい	3_3
+	フィノ	進化驚き	1_3					……お兄ちゃん\nなんでまた光ってるの？
+CharacterOff
+Param	character_grayout=false
+	イベントスチル51608		エフェクト表
+	ディーア	<Off>						今はソウルを解いてるんだ！\nちょっと待ってくれ！
+Param	character_grayout=true
+CharacterOff
+	フィノ	進化笑い	1_3
+	シェリー	進化悔しい	3_3					あたしたちより目立つって何事……？
+CharacterOff
+	ディーア	通常2						よし……これで\n魔物に変えられた人も元に戻った\n一件落着だな
+CharacterOff
+	フィノ	進化驚き	1_3
+	シェリー	進化本気	3_3
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー							あっさり元に戻った……！
+	フィノ	進化驚き						はぁ……良かった\n安心したら、なんか\nおなか空いちゃった……
+	フィノ	進化もぐもぐ						お菓子、食べていいよね……\nもぐもぐ……
+	シェリー	進化本気
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー	進化本気						ちょっ……!?
+CharacterOff
+StopBgm
+	女の子		画面外_左
+Se	走る
+Tween	女の子	MoveTo	x=0 time=1.5				NoWait
+	女の子							お姉ちゃんたちー！
+CharacterOff
+	シェリー	進化通常	3_3
+	フィノ	進化通常	1_3					あ、あの時応援してくれた……！
+CharacterOff
+Bgm	凱旋
+	女の子
+Tween	女の子	PunchPosition	y=50		loop=2		NoWait
+	女の子							街を守ってくれて、ありがとー！
+CharacterOff
+	シェリー	進化通常	3_3
+	フィノ	進化きらーん	1_3					あなたが応援してくれたおかげだよ！\n街を守ったのは、あなただよ！
+CharacterOff
+	女の子							ほんと……？ わーい！\nわたしも、大きくなったら\n魔法少女になれるかな……！
+CharacterOff
+	シェリー	進化通常	3_3
+	フィノ	進化照れ	1_3					うん、きっとなれるよ！\nわたしも、シェリーちゃんに憧れて\n魔法少女になったから！
+	シェリー	進化笑い						そうね、\nきっとすごい魔法少女になるわ♪
+CharacterOff
+	女の子							ありがとう！\nシャインファンタジアー！
+CharacterOff
+	ディーア	笑い2						二人とも、みんなの憧れの的だな！
+CharacterOff
+	シェリー	進化通常	3_3
+	フィノ	進化慌て	1_3					どうしよう！\nこんなこと今までなかったから\nどうすればいいか分からないよ！
+	フィノ	進化慌て
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	進化慌て						決めポーズ!?\nこういう時は決めポースするの!?
+	シェリー	進化通常						しなくていいわよ\nもうフィノは街の人みんなに\n魔法少女として認められたんだから
+	シェリー	進化笑い						あの子からも、おにーさんからも\nそして……あたしからもね
+	フィノ	進化驚き						シ、シェリーちゃん……!!
+	シェリー	進化照れ						それじゃあ、\nこ、これからよろしくね、フィノ
+	フィノ	進化照れ						うん……！\nわたし、もっとがんばる！
+	フィノ	進化笑い						がんばって、シェリーちゃんみたいな\nキラキラの魔法少女になる！
+	シェリー	進化通常						うん、あたしも応援してあげる
+	フィノ	進化照れ
+Tween	フィノ	ShakePosition	x=10				NoWait
+	フィノ	進化照れ						わぁぁ、シェリーちゃんから\n応援してもらえるなんて……！
+CharacterOff
+	ディーア	通常2						良かったな
+CharacterOff
+	シェリー	進化通常	3_3
+	フィノ	進化笑い	1_3
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							よっしゃー！
+StopBgm
+	シェリー	進化怪しい						あ、ダメ
+	フィノ	進化驚き						へ……？
+Bgm	コメディ
+	シェリー	進化本気						言葉遣い！ 『よっしゃー』は駄目！\n魔法少女らしくない！\n乱暴な言葉は全面的に禁止！
+	フィノ	進化怒り
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ	進化怒り						は、はい!! 気を付けます!!
+	シェリー	進化本気						それから、子どもたちの前で\nおやつとか食べない！
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー							こういうのはオンとオフが大事なの！
+Tween	フィノ	ShakePosition	x=10				NoWait
+	フィノ	進化怒り						はいー!!
+CharacterOff
+	ディーア	汗2						ス、スパルタ指導だ……！
+CharacterOff
+	フィノ	進化怒り	1_3
+	シェリー	進化笑い	3_3					あたしと一緒に活動するからには\n今までよりずっと厳しい練習が\n待ってるから、覚悟して♪
+	シェリー	進化本気
+Tween	シェリー	PunchPosition	y=50				NoWait
+	シェリー	進化本気						さあ、まずは走り込み！\n酒場までの道のりを走るのよ！
+	フィノ	進化驚き						え、今やるの!?
+	シェリー	進化本気						立派な魔法少女になるんでしょ！
+	フィノ	進化怒り
+Tween	フィノ	PunchPosition	y=50				NoWait
+	フィノ							はいぃ!! 行ってきます……！
+Se	走る
+Tween	フィノ	MoveTo	x=800 time=1.5
+CharacterOff
+	シェリー	進化本気	画面外_左_b
+	ディーア	汗2						た、大変だな……
+Tween	シェリー	MoveTo	x=-120 time=1				NoWait
+	シェリー	進化本気						おにーさんもやるのよ！
+	ディーア	悔しい2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	悔しい2						え、いや、オレは魔法少女じゃ……
+	シェリー	進化通常
+Tween	シェリー	MoveBy	x=20				NoWait
+	シェリー	進化通常						三人で！\nシャインファンタジアだって、\n言ってたよね……おにーさん♪
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						い、言いました!!
+	シェリー	進化笑い						じゃあ、一緒に走ろうか♪
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						は、はい……！
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=1.5				NoWait
+	シェリー	進化嬉しい
+Wait						1
+FadeOut	white					2
+Param	character_grayout=false
+CharacterOff						0
+Bg	塩湖					0
+Bgm	水属性バトル					.5
+	　　　　　　　　　　
+FadeIn	white					.7
+	フィノ	<Off>						<dash=2>魔法少女
+CharacterOff
+	イベントスチル51606		エフェクト表
+	フィノ	<Off>						それは、颯爽と現れて\nみんなのために戦う正義の味方
+	フィノ	<Off>						キラキラしてて、かわいくて\nそして<dash=2>すごく強い
+CharacterOff
+	イベントスチル51610		エフェクト表
+	フィノ	<Off>						どんな悪にも勇気をもって\n立ち向かい、人々に夢と希望を与える\nみんなが憧れる、素敵な存在
+FadeOut	white					.3
+CharacterOff						0
+	フィノ	拡大通常	エフェクト表			0
+FadeIn	white					.3
+	フィノ	拡大通常	エフェクト表					そしてわたしも\nそんな魔法少女になれるように！
+FadeOut	white					.5
+CharacterOff						0
+	フィノ	拡大進化照れ	エフェクト表			0
+FadeIn	white					.3
+	フィノ	拡大進化照れ	エフェクト表					今日も頑張ります！
+FadeOut	white					1
+CharacterOff						0
+	イベントロゴ516		エフェクト表			0
+FadeIn	white					.7
+								\n　　まじかるシャイン☆ファンタジア\n　　　　　　　　　　　　<dash=2>完<dash=2>
+Param	character_grayout=true
+FadeOut	white					1.5
+StopBgm						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_516_01
+EndIf
+EndScenario

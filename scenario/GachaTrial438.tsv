@@ -1,0 +1,431 @@
+# G_438_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	コメディ
+Bg	市街地A(Xmas)
+	ヱレキテリ	拡大通常	エフェクト表
+FadeIn	white					.5
+Se	走る
+Shake	Graphics	ShakePosition	time=1.5	easeInQuart			NoWait
+	ヱレキテリ	拡大通常	エフェクト表					はわぁぁ!!\n揺れる、揺れてますぅ!!
+CharacterOff
+	ディーア	拡大本気2	エフェクト表					大丈夫だ！\nオレが必ず助けるから！\nもう少し我慢してくれ!!
+CharacterOff
+	ヱレキテリ	拡大通常	エフェクト裏
+Se	走る
+Tween	ヱレキテリ	PunchPosition	y=50		loop=2		NoWait
+	ヱレキテリ	拡大通常	エフェクト裏					こ、こんなに揺れたら\n無理ですってぇ！
+Tween	ヱレキテリ	ShakePosition	x=10				NoWait
+	ヱレキテリ	拡大通常	エフェクト裏					もうだめ、\n我慢できない……！\nも、もれちゃう……！
+Param	character_grayout=false
+	集中線		エフェクト表
+	ヱレキテリ	拡大慌て	エフェクト裏					漏電しちゃいますよぉぉぉ!!
+Param	character_grayout=true
+FadeOut	black					1
+StopBgm
+CharacterOff						0
+Bg	酒場1F					0
+	　　　　　　　　　　					0
+FadeIn	black					.5
+								\n　　　　　 　<color=blue>―10分前―</color>
+FadeOut	black					.5
+CharacterOff
+Bgm	緊迫
+	ヱレキテリ	通常				0
+FadeIn	black					.3
+	ヱレキテリ							か、管理者さん……!!
+	ディーア	驚き2						ヱレキテリ？ どうしたんだ？
+	ヱレキテリ	慌て
+Tween	ヱレキテリ	ShakePosition	x=5				NoWait
+	ヱレキテリ	慌て						えっと、えっと、そのっ！\n大変申し上げにくいんですけどぉ！
+	ディーア
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	悔しい2						大丈夫か!?\n落ち着いてくれ！
+	ヱレキテリ							ごめんなさいぃ！\nでも、落ち着けないです!!
+	ヱレキテリ							もうすぐ私……私……！
+CharacterOff
+StopBgm
+	ヱレキテリ	拡大慌て	エフェクト表					漏電、しちゃいますぅぅ！
+CharacterOff
+Bgm	コメディ
+	ヱレキテリ	慌て	p7b
+	ディーア	驚き2	p3
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						ろ、漏電!?
+	ヱレキテリ
+Tween	ヱレキテリ	ShakePosition	x=10				NoWait
+	ヱレキテリ	慌て						わ、私の中に電気が貯まりすぎて……\nこれ以上我慢できないんですぅ!!
+	ディーア	悔しい2						漏電したらどうなるんだ!?
+	ヱレキテリ	驚き
+Tween	ヱレキテリ	PunchPosition	y=50				NoWait
+	ヱレキテリ	驚き						えっ!? ええと、それは……
+Tween	ヱレキテリ	MoveBy	x=10				NoWait
+	ヱレキテリ							だ、大事な物を……失いますっ！
+	ディーア	驚き2						ええっ!?
+	ヱレキテリ	慌て
+Tween	ヱレキテリ	PunchPosition	y=50				NoWait
+	ヱレキテリ							とにかく\n（私の乙女の尊厳が）大ピンチで！
+	ディーア	驚き2						大ピンチ!?
+Tween	ヱレキテリ	MoveBy	x=10				NoWait
+	ヱレキテリ							（私が恥ずかしさのあまり）\n大パニックで……!!
+	ディーア	悔しい2						そんな……!!
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表
+	ヱレキテリ	拡大慌て	エフェクト裏
+Tween	ヱレキテリ	ShakePosition	x=5				NoWait
+	ヱレキテリ	拡大慌て	エフェクト裏					（私が）大惨事になりますぅ!!
+Param	character_grayout=true
+CharacterOff
+	集中線		エフェクト表
+	ディーア	絶望2						だ、大惨事だって!?
+CharacterOff	集中線
+	黒グラデーション		エフェクト裏
+	ディーア	悔しい2						（まさか、爆発の危険が!?\n　放っておけばこの街が……\n　いや、魔界が危険なのか!?）
+CharacterOff
+	ヱレキテリ		p7b
+	ディーア	本気2	p3					それは……まずいな!!
+	ヱレキテリ
+Tween	ヱレキテリ	PunchPosition	y=50				NoWait
+	ヱレキテリ	汗						ええ、まずいんですぅ!!\nだから、外に運んでくれませんか！\n私はこの通り、こんな格好なので……
+	ディーア	本気2						分かった、オレに任せてくれ\nすぐ街の外に連れて行くからな！
+	ヱレキテリ	通常						<size=20>できたら、あの……\nなるべく揺らさないでもらえると……</size>
+Tween	ヱレキテリ	PunchPosition	x=5				NoWait
+	ヱレキテリ	慌て						<size=20>男の人の前で\n漏電しちゃうのは、その……\nは、恥ずかし……</size>
+	ディーア	本気2						一刻も早く街を出るぞ!!
+	ヱレキテリ	驚き						へ……!?
+Tween	ディーア	MoveBy	x=30				NoWait
+	ディーア	本気2						行こう!!
+CharacterOff
+	ヱレキテリ	拡大通常	エフェクト表					ええっ!?
+Se	走る
+Tween	ヱレキテリ	ShakePosition	x=20				NoWait
+	ヱレキテリ	拡大通常	エフェクト表					ああああああああ……!!
+Tween	ヱレキテリ	ShakePosition	x=20				NoWait
+	ヱレキテリ	拡大慌て	エフェクト表					ゆ、揺れちゃってますよぉぉー!!
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A(Xmas)					0
+	ヱレキテリ	拡大慌て	エフェクト表			0
+FadeIn	black					.5
+Se	走る
+Tween	ヱレキテリ	PunchPosition	y=50		loop=2		NoWait
+	ヱレキテリ	拡大慌て						ひゃぁああああ!!
+CharacterOff
+	ヱレキテリ	通常
+Tween	ヱレキテリ	ShakePosition	x=10				NoWait
+	ヱレキテリ	通常						がまんがまん！\n私はできるこ！ 私はできるこ！		1540-18
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏
+	ヱレキテリ	汗						でも……\nこ、このまま漏電しちゃったら、\nどんなに楽かなぁ……
+Param	character_grayout=true
+CharacterOff	黒グラデーション					0
+	ヱレキテリ	慌て
+Tween	ヱレキテリ	PunchPosition	y=50				NoWait
+	ヱレキテリ	慌て						はっ!! ダメダメ！ 漏電はダメ！\n乙女の尊厳が犠牲になっちゃうぅ！
+Tween	ヱレキテリ	ShakePosition	x=10				NoWait
+	ヱレキテリ	通常						か、管理者さんー!!\nもう少しゆっくり……\nゆっくり運んでくださいぃーー!!
+	ヱレキテリ	慌て						じゃないと、漏電しちゃいますよぉ！
+CharacterOff
+	ヱレキテリ	慌て	p7b
+	ディーア	怒り2	p3					もうすぐ街から出られる！\nあとちょっとだから頑張ってくれ！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	雪原(吹雪)					0
+Bgm	平和
+	ディーア	怒り2	画面外_左
+	ヱレキテリ		画面外_左_b
+	キノコリオン		画面外_右
+Tween	キノコリオン	RotateTo	y=180 time=0.1
+FadeIn	black					.5
+Tween	キノコリオン	MoveTo	x=180 time=2
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコ？
+Se	走る
+Tween	ディーア	MoveTo	x=-120 time=1.5				NoWait
+Tween	ヱレキテリ	MoveTo	x=120 time=1.5
+Se	打1
+Tween	ヱレキテリ	MoveBy	x=-10				NoWait
+Se	キラン
+Tween	キノコリオン	MoveTo	x=800 y=300				NoWait
+	キノコリオン							ノコー!?
+	ヱレキテリ	慌て
+Tween	ヱレキテリ	PunchPosition	y=50				NoWait
+	ヱレキテリ							わきゃあ!!
+	ディーア	驚き2						なんだ!?
+	ヱレキテリ	慌て						い、今、何かに\nぶつかったような……！
+	ディーア	通常2						はぁ……とりあえず、\nここまでくれば大丈夫だ\n街に被害も出ないだろうし
+StopBgm
+	ヱレキテリ	汗						はぁ、ふぅ、なんとか我慢できた……\nあとは放電すれば……あっ！
+Bgm	緊迫
+	ヱレキテリ	通常						（このままじゃ\n　管理者さんに見られちゃう!!\n　なんとか一人にならなきゃ……！）
+	ヱレキテリ	通常						か、管理者さん！\n急いで私から離れて下さい！
+	ディーア	悔しい2						そんなに限界なのか!?
+	ヱレキテリ	通常						はい……！\nと、とにかく、は、離れて！\n離れてくださいぃ！
+	ヱレキテリ	慌て						私一人で、\nな、何とかしますからぁ！
+	ディーア	怒り2						そうか、分かった……
+	ヱレキテリ	照れ						よ、良かった……！
+	ディーア	怒り2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	怒り2						けど、オレは最後までここにいる！
+Bgm	コメディ
+	ヱレキテリ	驚き
+Tween	ヱレキテリ	PunchPosition	y=50				NoWait
+	ヱレキテリ	驚き						ええっ!? なぜ!?
+Tween	ディーア	MoveBy	x=10				NoWait
+	ディーア	悔しい2						ヱレキテリを一人に\nするわけにはいかない！
+	ヱレキテリ							えっ!? いえいえ、\n一人にしてくださいぃ！
+	ディーア	本気2						ダメだ！ オレはマスターとして\nどんなことになっても\n絶対に見捨てたりしない！
+	ディーア	本気2						大丈夫、オレはヱレキテリの\n全てを受け止めてみせる！
+	ヱレキテリ	汗
+Tween	ヱレキテリ	PunchPosition	y=50				NoWait
+	ヱレキテリ							受け止めないでください!!
+	ディーア	怒り2						ずっと見守ってるから！
+	ヱレキテリ	通常						むしろ見ないで欲しいんですけどぉ！
+	ヱレキテリ	慌て						（も、もう漏電しちゃいそう\n　なのに……！）
+Tween	ヱレキテリ	ShakePosition	x=10				NoWait
+	ヱレキテリ	慌て						お、お願いですから、\nここは私に任せて、\n離れていてくださいぃー!!
+CharacterOff
+	キノコリオン		画面外_右
+Tween	キノコリオン	RotateTo	y=180 time=0
+Se	走る
+Tween	キノコリオン	MoveTo	x=0				NoWait
+	キノコリオン							ノコノコー!!
+CharacterOff
+	ディーア	驚き2						なっ、キノコリオン!?
+CharacterOff
+	ヱレキテリ	驚き						なんか怒ってませんか!?
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	RotateTo	y=180 time=0
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコノコ!!\nノッコノコ―!!
+CharacterOff
+	ディーア	怪しい2						もしかして、\nさっきぶつかったのは……
+	ディーア	驚き2						はっ、ヱレキテリ!!
+CharacterOff
+	ヱレキテリ		2_2
+	キノコリオン		1_3
+Se	打1
+Tween	キノコリオン	PunchPosition	x=20 y=50		loop=2		NoWait
+Tween	ヱレキテリ	ShakePosition	x=10				NoWait
+	キノコリオン							ノッコノコ―!!!!
+	ヱレキテリ	慌て
+	ヱレキテリ	慌て						や、やめてくださいぃ！\nそんなに揺らされたらぁ!!
+Se	打1
+Tween	キノコリオン	PunchPosition	x=20 y=50				NoWait
+Tween	ヱレキテリ	ShakePosition	x=10				NoWait
+	キノコリオン							ノコノコノッコノコ―!!!!
+CharacterOff
+	ヱレキテリ	拡大慌て	エフェクト表
+Tween	ヱレキテリ	ShakePosition	x=10		loop=2		NoWait
+	ヱレキテリ	拡大慌て	エフェクト表					んんんんーーーーーー!!!!		1540-19
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*G_438_02
+EndIf
+EndScenario
+
+# G_438_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	雪原(吹雪)
+	キノコリオン
+FadeIn	white					.5
+Wait						.3
+Se	光1
+Tween	キノコリオン	MoveTo	x=-800 y=200				NoWait
+	キノコリオン							ノコーッ！
+CharacterOff
+	ディーア	悔しい2						やったか……！
+	ヱレキテリ							はぁ……よ、良かった……
+Tween	ヱレキテリ	ShakePosition	x=10				NoWait
+	ヱレキテリ							ああ、でも、もう……！
+CharacterOff
+	ヱレキテリ	拡大慌て	エフェクト表
+Tween	ヱレキテリ	ShakePosition	x=10				NoWait
+	ヱレキテリ	拡大慌て	エフェクト表					んんんんーー!!\nも、もうだめぇぇー!!
+Se	光1
+FadeOut	white					.5
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	white					.3
+	ディーア	悔しい2						くっ、まさか、爆発が……!?
+Se	光1
+FadeOut	white					.3
+Wait						.2
+FadeIn	white					.3
+	ディーア	本気2						ヱレキテリ……!!
+Se	チャージ
+FadeOut	white					1
+StopBgm
+Wait						1
+	ディーア	驚き2
+FadeIn	white					1
+	ディーア	驚き2						あ、あれ……？
+FadeOut	white					.3
+CharacterOff						0
+	　　　　　　　　　　
+ZoomCamera	SpriteCamera	1.5	-350	250		.1
+FadeIn	white					.3
+Wait						1
+ZoomCamera	SpriteCamera	1.5	350	250		1.5
+Wait						1
+FadeOut	white					.3
+CharacterOff
+	ディーア	驚き2				0
+ZoomCamera	SpriteCamera	1				.1
+FadeIn	white					.3
+	ディーア	驚き2						爆発……してない？
+Bgm	マイページ
+	ヱレキテリ	汗						爆発……？\nあの、管理者さん……\n私の漏電で爆発はしないです……
+	ヱレキテリ	汗						それに……漏電の危機は\nもう去りました……
+CharacterOff
+	ディーア	驚き2						じゃあ、さっき光った時、\n無事に放電できたってことか……？
+CharacterOff
+	ヱレキテリ	汗
+Tween	ヱレキテリ	MoveBy	y=-30				NoWait
+	ヱレキテリ	汗						……ソウデス、ナノデ\nモウダイジョウブデス、ハイ
+CharacterOff
+	ディーア	笑い2						そうか……良かったな！
+CharacterOff
+StopBgm
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	ヱレキテリ	通常						…………………………\n………………全然良くないです
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2						え？
+Bgm	コメディ
+	ヱレキテリ	慌て
+CharacterOff
+Param	character_grayout=false
+	ヱレキテリ	拡大慌て	エフェクト裏
+Tween	ヱレキテリ	PunchPosition	y=50				NoWait
+	集中線		エフェクト表
+	ヱレキテリ	拡大慌て	エフェクト裏					全然良くないですよぉ！
+Param	character_grayout=true
+CharacterOff
+	ヱレキテリ	通常						大事な物を失いました!!\n乙女の尊厳が犠牲になったんですぅ！
+	ヱレキテリ	慌て
+Tween	ヱレキテリ	ShakePosition	x=10				NoWait
+	ヱレキテリ	慌て						もう、お嫁に行けない……\n男の人の前で、あんな風に\n放電しちゃうなんて……
+	ディーア	驚き2						あ、だから\nあんなに離れて欲しかったのか!?
+	ヱレキテリ	慌て
+Tween	ヱレキテリ	ShakePosition	x=5				NoWait
+	ヱレキテリ	慌て						ずっとそう訴えてたのにぃ……！
+FadeOut	black					.3
+Se	回想
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+	ヱレキテリ	通常				0
+FadeIn	black					.5
+	ヱレキテリ	通常						か、管理者さん！\n急いで私から離れて下さい！
+FadeOut	white					.3
+Se	回想
+	ヱレキテリ	慌て				0
+FadeIn	white					.3
+	ヱレキテリ	慌て						私一人で、\nな、何とかなりますからぁ！
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+	ディーア	驚き2
+FadeIn	black					.5
+	ディーア	驚き2						そうか……あれは\nずっと恥ずかしがってたんだな……！
+	ヱレキテリ
+Tween	ヱレキテリ	PunchPosition	y=50				NoWait
+	ヱレキテリ	通常						今気づいたんですかぁ!!
+	ディーア	汗2						ご、ごめん……\n必死で気づかなかった……
+	ヱレキテリ	汗						まぁ、いいです\n元々私のこの状態が……\n設計ミスがいけないんです
+	ヱレキテリ	通常						すぐ漏電しそうに\nなっちゃうなんて……\n扱いづらいことこの上ないですし……
+Bgm	凱旋					.5
+	ディーア	通常2						……いや、そんなことないよ
+	ヱレキテリ	驚き						……え？
+	ディーア	通常2						ずっと漏電を我慢してたのは、\nオレが感電しないように\n気遣ってくれてたからだろ？
+	ヱレキテリ	汗						えっ、ええ、まぁ……
+	ディーア	笑い2						そのヱレキテリの気持ちが\n分かっただけでも、良かったと思う
+	ディーア	通常2						扱いづらいなんて思わないよ
+CharacterOff
+	ヱレキテリ	拡大照れ	エフェクト表					管理者さん……！
+CharacterOff
+	ディーア	笑い2						オレの方こそ、\nヱレキテリの気持ちに気づけなくて\nごめんな……
+CharacterOff
+	ヱレキテリ	拡大照れ	エフェクト表					いえ！ その、なんというか\n管理者さんに揺らされるの……\nそ、そんなに嫌じゃなかったですし
+	ヱレキテリ							あんなに心配されて、\nむしろ嬉しいかも、なんて……
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏
+	ディーア	てへぺろ2						<size=20>まあ、それはそれとして……\n必死で我慢するヱレキテリは\n可愛かったし……</size>
+	ディーア	にやけ2						<size=20>もしかして、ヱレキテリを\n揺らしたら、またあの顔が……！</size>
+Bgm	コメディ
+Param	character_grayout=true
+CharacterOff
+	ヱレキテリ	驚き						……管理人さん、何か言いました？
+	ディーア	汗2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	汗2						いや、何も……！
+	ヱレキテリ	通常						か、管理人さん、\n何か変な事考えてませんか？
+	ディーア	笑い2						え、何も考えてないぞ？
+	ヱレキテリ	汗						……本当ですか？
+	ディーア	笑い2						さて！\nそろそろ帰ろうか、ヱレキテリ
+	ヱレキテリ	照れ						は、はい……あの、管理者さん
+	ディーア	驚き2						どうした？
+	ヱレキテリ	汗						その、帰り道なんですけど……\n今すぐ漏電しそう\nってわけではないんですが
+	ヱレキテリ	通常						……なるべく平らな道を\nゆっくり、歩いてもらえたらなって！
+	ディーア	怒り2						……ごめん、ヱレキテリ
+	ヱレキテリ	驚き						な、何故謝るんですか……
+	ディーア	悔しい2						雪道が……戦闘のせいで\nボッコボコなんだ
+StopBgm
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏
+	ヱレキテリ	通常						……………………ボッコボコ
+Param	character_grayout=true
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表
+	ディーア	拡大本気2	エフェクト裏					だから、なるべく急いで\n通り抜けるしかないんだ!!
+Param	character_grayout=true
+Bgm	緊迫
+CharacterOff
+	ヱレキテリ	通常
+Tween	ヱレキテリ	PunchPosition	y=50				NoWait
+	ヱレキテリ	通常						いやいや！\nゆっくり歩けますよねぇ!?
+Tween	ヱレキテリ	ShakePosition	x=10				NoWait
+	ヱレキテリ	慌て						あまり揺らされると\nまた漏電の危機がぁ……!!
+	ディーア	にやけ2						頑張って我慢してくれると嬉しい！
+	ヱレキテリ	通常
+Tween	ヱレキテリ	PunchPosition	y=50				NoWait
+	ヱレキテリ							今、嬉しいって言いました!?\n絶対わざとですよね！\n絶対面白がってますよねぇ!?
+	ディーア	笑い2						よし、出発だ！
+FadeOut	white					.3
+CharacterOff						0
+Shake	Graphics	ShakePosition	time=2	easeInQuart			NoWait
+Param	character_grayout=false
+	ヱレキテリ	拡大通常	エフェクト表			0
+FadeIn	white					.3
+Se	走る	TRUE
+	ヱレキテリ	拡大通常	エフェクト表					ちょぉっ、管理者さん!?\nああああああっ!!
+	ヱレキテリ	拡大慌て	エフェクト表					はわぁぁぁあ！\n揺れるっ！ ゆれちゃうっ！\n漏電しちゃいますよぉぉぉー！		1540-15
+FadeOut	white					.5
+StopSe
+If	isdebug==true
+CharacterOff
+Jump	*G_438_01
+EndIf
+EndScenario

@@ -1,0 +1,1041 @@
+# E_1119_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	和の国の町
+Bg	和室（夜）					0
+	ヒメ	拡大通常	エフェクト表			0
+FadeIn	black					.5
+	ヒメ	拡大通常	エフェクト表					ひかえおろー♪
+CharacterOff
+	ヒメ	通常						わらわこそはじゅーにし魔剣、\n辰王ヒメミズチ！
+	ヒメ	きらーん						いずれ神の座にいたる、\n偉大なる水の竜である！
+	ヒメ	通常						ここにつどいし、みなのしゅーよ！\nわらわに願いを告げるがよい！
+	ヒメ	嬉しい						年が明ければ、わらわの辰年！
+	ヒメ	通常						この辰王ヒメミズチが、\nみなの願いをかなえてしんぜよう！
+	民衆							辰王さまー！\nお願いかなえてー！
+	民衆							たくさん金がほしい！\nおいしいものたくさん食べたい！
+	民衆							アイドルライブのアリーナ最前列！
+	民衆							ちっちゃくてかわいい\nもちひつじになりたい……！
+Shake	ヒメ		x=5				NoWait
+	ヒメ	慌て						お、おぉ……！\nさすがにたくさんのお願いであるな
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	通常						し、しかーし！\nどんなお願いも叶えてこその神様！\nわらわに任せるがよい！
+Param	character_grayout=false
+	集中線		エフェクト表
+Se	ガヤB
+	民衆							わぁああああ！\n辰王！ 辰王！ 辰王！ 辰王!!
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	通常						ふ、ふははははは！\nくるしゅーない、くるしゅーない！
+StopBgm
+StopSe
+FadeOut	black					1
+CharacterOff						0
+	ディーア	笑い2				0
+Wait						1
+FadeIn	black					1
+	ディーア	笑い2						おつかれさま、ヒメミズチ\nみんなも喜んでいた<dash=2>
+Bgm	緊迫
+CharacterOff
+	ヒメ	拡大慌て	エフェクト表					ぴぇええええええ！\nお師匠さまぁあああ、どうしよー!!
+Bgm	平和
+Param	character_grayout=true
+CharacterOff
+	ヒメ	泣き	p3b
+	ディーア	驚き2	p7
+	ディーア	驚き2						ひ、ヒメ!?
+Tween	ヒメ	PunchPosition	y=50				NoWait
+	ヒメ	泣き						むりだよぉ！\nあんなにたくさんお願いされたら\nヒメちゃんパンクしちゃうよぉ！
+	ヒメ	泣き						ヒメ、まだまだ修行中なのにぃ！\nたくさんお願い叶えられないのにぃ！
+	ディーア	汗2						あんな風に話したら\nみんなもその気になっちゃうって……
+	ヒメ	泣き						うぅ、ほんとは、\n来年はがんばるから安心してって\n伝えるつもりだったの
+	ヒメ	悲しい						でも、ヒメの伝承を知ってる\nみんなから\nすごい期待の目で見られちゃって
+Shake	ヒメ		x=5				NoWait
+	ヒメ	悲しい						期待に応えないとって思ったら\nつい……ぐすんっ
+	ディーア	汗2						期待を高めすぎちゃったと
+	ディーア	通常2						けれど\nヒメに願いを叶える力があるのは\n本当のことだろ？
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Bg	神社（花）					0
+	          					0
+FadeIn	white					.3
+	ディーア	<Off>						十二支魔剣の辰王ヒメミズチ
+	ディーア	<Off>						捧げられた願いを力に変えて、\n現実にできるすごい魔剣だ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	和室（夜）					0
+	ヒメ	悔しい				0
+FadeIn	white					.3
+	ヒメ	悔しい						でも、\n今のヒメちゃんはそこまで……
+	ヒメ	悲しい						たくさんの人に期待されると\nすぐ緊張しちゃうし
+	ヒメ	悲しい						ふうりちゃんたちみたいに\n立派にお仕事できないし
+Shake	ヒメ		x=5				NoWait
+	ヒメ	泣き						もしお正月に失敗して、\nなんかちいさくてダメな辰だって\nバレちゃったら……
+	ヒメ	慌て						うっ……\nお腹の奥がぐるぐるしてきた……
+CharacterOff
+	ディーア	汗2						うーん、\nだったらまずは自信をつけることが\n必要なのかもな
+	ディーア	通常2						そうすれば\nもっとみんなの前で堂々とできて\n実力も発揮できるし
+CharacterOff
+	ヒメ	驚き						自信……！
+	ヒメ	驚き						お師匠様、\nどうやって自信ってつければいいの!?
+	ヒメ	通常						お師匠様の言う事なら\nたとえ火の中、水の中……！\nなんでもやるよ！
+Shake	ヒメ		x=5				NoWait
+	ヒメ	悲しい						あっ……！\n火、火の中だけはやっぱりなしぃ
+CharacterOff
+	ディーア	笑い2						例えば、\n理想の自分の姿に近づけてみるのも\n自信をつけるには良い方法だな
+	ディーア	通常2						今も話し方とかふるまいは\nそうしていると思うけど
+	ディーア	通常2						ヒメにはそういう\nなりたい姿とかはあるのか？
+CharacterOff
+	ヒメ	通常						えっと……\nアマテラス様やミカボシ様みたいに\n立派な姿だったらって思うよ
+	ヒメ	にやけ						もっと背が高くて、\nいろいろなところがおっきくて\nキラキラオーラもあって
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+Bg	和風市街（昼）					0
+	アマテラス	通常	p2			0
+	アマツミカボシ	通常	p8			0
+	           
+FadeIn	white					.5
+	ディーア	<Off>						たしかにアマテラスたちは\n見るからに\n神様っぽいオーラがあるもんな
+FadeOut	white					.5
+CharacterOff						0
+	イザナギ	通常				0
+	           
+FadeIn	white					.5
+	ディーア	<Off>	1_2					でもイザナギなんて\nヒメくらい小さい体をしてるけど、\nすごく神様っぽいぞ？
+	ヒメ	<Off>	1_2					イザナギ様は……\n体の大きさとか\nそのレベルは越えちゃってるし
+FadeOut	white					.3
+CharacterOff						0
+Bg	和室（夜）					0
+	ヒメ	悔しい				0
+FadeIn	white					.3
+	ヒメ	悔しい						やっぱり、今のヒメに必要なのは\nおっきくて立派な体だと思う
+	ヒメ	悔しい						ヒメもちいさくて、\nつるーんな体じゃなくて
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	怒り						ばいーんで、お山みたいな\nアマテラス様たちの体になれたら
+	ヒメ	怒り						お正月のあいさつの時も、\n堂々とできるかも
+CharacterOff
+	ディーア	怪しい2						魔剣の体型変化か\nかなり難易度が高いな
+CharacterOff
+	ヒメ	通常						お師匠様なら\nヒメを育てることできない!?
+CharacterOff
+	ディーア	驚き2						えっ!? そ、育てる!?
+CharacterOff
+	ヒメ	通常						こんなお願いできるの、\nヒメにはお師匠様しかいないし
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	怒り						お師匠様に\nヒメを大人にしてほしいの!!
+	ヒメ	怒り						つらいことでも、\nちゃんとガマンできるから！
+CharacterOff
+	ディーア	絶望2						ちょっと落ち着け！\n誰かに聞かれたらE.D.E.N.に捕まる!!
+	ディーア	汗2						それに育てるにしても、\n正月まで一ヶ月もないんだぞ？
+CharacterOff
+	ヒメ	悔しい						そっかぁ……\n今からお師匠様に育ててもらえても\nお正月までは間に合わな<dash=2>
+Param	character_grayout=true
+	？？？？		1_2					ふふーん♪\nそれを可能にするのが愛だよ！\n愛！
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	驚き						はっ……！\n誰……じゃなくて！\nなにやつ！
+CharacterOff
+	オメガ	通常						邪魔しちゃったらごめんね♪\n愛を求める声がしたから来ちゃった！
+CharacterOff
+	ヒメ	慌て
+Tween	ヒメ	PunchPosition	y=50				NoWait
+	ヒメ	慌て						ぴっ!?\nお、オメガ、さん……!?
+Shake	ヒメ		x=10				NoWait
+	ヒメ	慌て						か、神様にすごく近い竜王さん\nほんものだぁ……！
+CharacterOff
+	オメガ	通常						あれ、\nどうしたのヒメミズチちゃん？\n緊張してる？
+CharacterOff
+	ヒメ	慌て						な、なんでもないっ！\n武者震いであーる！
+CharacterOff
+	ディーア	汗2						そ、それよりもオメガ？\nすぐ体を大きくする方法があるって\n聞こえたけど？
+CharacterOff
+	オメガ	通常						そうそう！\nだからマスターちゃんを探してたの♪
+	オメガ	通常						これね、\n街で配られてたチラシなんだけど\n面白いこと書いてあるんだよ！
+CharacterOff
+	ディーア	怪しい2						どれどれ？\n『年末の旅行にはここがおすすめ！\n　すくすく育つ愛の島』？
+	ディーア	怪しい2						『島で過ごすだけで、\n　ナイスバディになること\n　間違いなし』
+CharacterOff
+	オメガ	通常
+Tween	オメガ	PunchPosition	y=30				NoWait
+	オメガ	通常						つまり！ ここに行けば\nちっちゃいオメガちゃんたちも！
+CharacterOff
+	ヒメ	驚き						おっきくなれる……ってコト!?
+CharacterOff
+	ディーア	怪しい2						でもそんな島があるなんて\n魔界といえど信じられないな
+	ディーア	怪しい2						体型に悩む人はたくさんいるんだし\n本当ならもっと話題になっても
+CharacterOff
+	オメガ	通常						まあまあ、\n本当かどうかはいいじゃん♪
+	オメガ	通常						ヒメちゃんの事情は知らないけど、\nずっと宿にいても\nおっきくはなれないし
+	オメガ	通常						大げさな宣伝だったとしても、\nマスターちゃんと\nバカンスで愛を深められる♪
+Tween	オメガ	PunchPosition	y=30				NoWait
+	オメガ	通常						愛だよ、愛！\n愛しかないよ♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	汗2	1_2
+	ヒメ	悔しい	画面外_右_b
+	ディーア	汗2						うーん
+Tween	ヒメ	MoveBy	x=-610 time=1				NoWait
+	ヒメ	悔しい						お、お師匠様……！\nひ、ヒメもいきたい……！
+	ディーア	驚き2						ヒメ？
+	ヒメ	悔しい						せっかくのお正月に、\nみんなのことがっかりさせたくない
+	ヒメ	悔しい						可能性があるなら、\nそこで修行してみたいの
+	ディーア	通常2						そうだな\nオレも気にはなっているし\n二人がそこまで言うなら
+	ディーア	笑い2						羽を伸ばすつもりで\n行ってみようか
+	ディーア	にやけ2						それに、オメガやヒメの\nあれやこれやが\nいきなり大きくなったなら
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	ヒメ	慌て				0
+	オーラ桃		エフェクト表			0
+FadeIn	white					.3
+	ヒメ	慌て						お師匠様ぁ！\nパンパンになっちゃったよぉ！
+	オメガ	泣き						このままじゃ破れちゃう！\nマスターちゃんも押さえてぇ！
+FadeOut	white					.3
+CharacterOff						0
+Bg	和室（夜）					0
+	ディーア	にやけ2				0
+FadeIn	white					.3
+	ディーア	にやけ2						そんなあれやこれやが……
+CharacterOff
+	黒グラデーション		エフェクト表
+	オメガ	通常						なんだか\nマスターちゃんから\n邪な愛を感じる……
+CharacterOff
+	ディーア	笑い2						よしっ！\nそれじゃあさっそく出発しよう！\n大きくなる島へ！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	海岸					0
+	          
+FadeIn	black					.3
+Bgm	都市
+Wait						2
+FadeOut	black					.3
+CharacterOff						0
+Bg	色鮮やかな大森林					0
+	          					0
+FadeIn	black					.3
+Wait						2
+FadeOut	black					.3
+CharacterOff						0
+Bg	海の家					0
+	          					0
+FadeIn	black					.3
+	オメガ	通常				1		ようやく着いたね、デッカイ島！\n向こうと違ってあったかい♪\nなんだかすごく愛の予感がする♪
+CharacterOff
+	ヒメ	通常						ふはははは！\nわらわが過ごすにふさわしい\nうつくしき島であるっ！
+CharacterOff
+	ディーア	笑い2						ヒメ、ここにはオフで来たんだから\nその言い方だとバレちゃうぞ？
+CharacterOff
+	ヒメ	驚き						あっ……！\nた、たしかに……！
+	ヒメ	嬉しい						えっと……\nここならゆったりできそうだね\nお師匠様♪
+	ヒメ	嬉しい						あとは体もおっきくできたら\nしあわせぇ♪
+Param	character_grayout=true
+CharacterOff
+	オメガ	通常	2_2
+	ディーア	通常2	1_2
+	オメガ	通常						ねえねえ、マスターちゃん？\nもしかして今のが\n本当のヒメミズチちゃんなの？
+	ディーア	通常2						みんなにはナイショな？
+	オメガ	通常						うん！\nナイショ話に秘密の関係！\n愛を感じちゃう♪
+	ディーア	通常2						それじゃあ\nまずは荷物を宿に置かないと<dash=2>
+Param	character_grayout=false
+CharacterOff
+	鎧村長							観光客か～？
+CharacterOff
+	ディーア	驚き2						よ、鎧の人？
+CharacterOff
+	鎧村長							村長デス
+	鎧村長							それで、キミたちは\n観光客か～？
+CharacterOff
+	ヒメ	慌て						は、はい……
+CharacterOff
+	鎧村長							だったらァ～
+	集中線		エフェクト表
+	鎧村長							歓迎だッ!!
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地D					0
+	ちい少女	通常	1_3			0
+	ちい旅人	通常	3_3			0
+FadeIn	black					.3
+Bgm	わくわく
+	島民	<Off>						たのしーたのしーしませいかーつ♪
+	島民	<Off>						ぽかぽかてんきに、おいしいごはん\nおんせんずーっとわきほーだい♪
+	島民	<Off>						ときをわすれて、みんなでごろごろ\nしごとのつかれをいやしてね～♪
+CharacterOff
+	ディーア	汗2						これって、もしかして……
+CharacterOff
+	オメガ	通常						歓迎されてるッ!!
+Param	character_grayout=true
+CharacterOff
+	ちい少女	笑い	1_2
+	ヒメ	通常	2_2
+Tween	ちい少女	PunchPosition	y=30				NoWait
+	ちい少女	笑い						…………っ!!
+	ヒメ	通常						わあ、おっきい桃！\n食べていいの？
+	ヒメ	通常						シャブっ……！
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	嬉しい						すごい甘いよ、お師匠様！
+CharacterOff
+	ディーア	驚き2						こんな大きい桃、\nどこで採れるんだ？
+CharacterOff
+	鎧村長							おかわりあるよ～\nマンゴー入りトロピカルカレー♪
+CharacterOff
+	オメガ	通常						ハフハフ……！\nあまくてからくて、愛がある！
+CharacterOff
+	ディーア	汗2						ちょっと変なノリだけど\nこんなに歓迎してくれるなんて\nいい島だな
+CharacterOff
+	オメガ	通常						それにマスターちゃん、\n気づいた？
+CharacterOff
+	ディーア	通常2						ああ、この島の人達、\nリーマの住人と比べたら\nかなり身長が大きいよな
+CharacterOff
+	オメガ	通常						もしかしてあるかもしれないよッ!!\n愛の奇跡ッ！
+CharacterOff
+	ヒメ	てへぺろ						ここで過ごしたら、\n神様っぽい大人ボディに！
+	ヒメ	通常						あのッ！\nこの島に来れば体がおっきくなるって\n聞いたんですけど！
+StopBgm
+CharacterOff
+	鎧村長							あっ……
+CharacterOff
+	ディーア	驚き2						あれ？\n島民の反応がおかしい気が
+CharacterOff
+	ちい少女	泣き						うっ、フ……！
+Shake	ちい少女		x=5				NoWait
+	ちい少女	泣き						わァ……あ……
+CharacterOff
+	オメガ	通常						泣いちゃった!!
+CharacterOff
+	ディーア	驚き2						これは、いったい？
+CharacterOff
+	鎧村長							ごめんネ～\nその情報はもう古いんだァ
+CharacterOff
+	ヒメ	慌て						えッ!!\nど、どういうコト!?
+CharacterOff
+	鎧村長							実はァ～
+CharacterOff
+Bgm	緊迫
+	ちい研究者							大変ダー！\n魔物が村の近くに出たぞォ！
+CharacterOff
+	鎧村長							なにィ～
+	鎧村長							ここまでは\n来ていなかったのに!!
+Tween	鎧村長	MoveBy	x=700 time=1				NoWait
+	鎧村長							みんなで止めに行くゾォ!!
+CharacterOff
+	ディーア	驚き2						行っちゃった
+CharacterOff
+	オメガ	通常						マスターちゃん！\n島に魔物なんて大変だよ！
+CharacterOff
+	ヒメ	怒り						お師匠様！\nヒメたちも……！
+CharacterOff
+	ディーア	怒り2						ああ、救援に行こうっ！
+Se	走る
+FadeOut	black					.3
+CharacterOff						0
+Bg	色鮮やかな大森林					0
+	ディーア	本気2				0
+Wait						1
+FadeIn	black					.3
+	ディーア	本気2						みんな無事か!?
+CharacterOff
+	鎧村長							おっとー！\nここは危ないゾー！
+CharacterOff
+	ディーア	怒り2						大丈夫、\nオレは魔剣使いだ！
+	ディーア	怒り2						それで敵は<dash=2>
+	ディーア	驚き2						えっ……！
+CharacterOff
+	でかい魔物							でかいでーす
+CharacterOff
+	ディーア	絶望2						なんか\n魔物までデカすぎないか!?
+CharacterOff
+Se	シャキーン
+	でかい魔物							ジャキン
+CharacterOff
+	ヒメ	慌て						わわわ！
+CharacterOff
+	集中線		エフェクト表			.5
+	でかい魔物							でかいでーす、でかいでーす！
+CharacterOff
+	ヒメ	拡大慌て	エフェクト表					ワァ～～～～～～!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1119_02
+EndIf
+EndScenario
+
+# E_1119_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	バトル
+Bg	色鮮やかな大森林					0
+Param	character_grayout=false
+	ヒメ	泣き				0
+FadeIn	black					.5
+	ヒメ	泣き						ワワ～！\nな、なんなのこの魔物ッ!!
+CharacterOff
+	オメガ	泣き						なんかでかすぎてつよすぎて\nこわすぎるんだけど！
+CharacterOff
+	でかい魔物							でかいよ
+CharacterOff
+	ディーア	怒り2						だけど、\n周りには木や障害物も多い！\n身軽さを活かせば有利だ！
+	ディーア	本気2						ヒメ、頼む！\nその魔物を倒してくれ！
+CharacterOff
+	ヒメ	驚き						お師匠様からのお願いっ……！
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ヒメ	怒り						だったら怖いけど<dash=2>
+	ヒメ	怒り						ヤーーッ!!!!
+Se	斬1
+FadeOut	white					.2
+CharacterOff						0
+	でかい魔物					0
+FadeIn	white					.2
+Wait						.2
+Shake	でかい魔物		x=3				NoWait
+StopBgm
+	でかい魔物							でかいのに
+CharacterOff	でかい魔物					1
+Wait						.8
+Bgm	平和
+CharacterOff
+	ディーア	笑い2						ふぅ……\nようやく倒せたな
+CharacterOff
+	鎧村長							オォ～！\nすごい魔剣使いか～？
+CharacterOff
+	オメガ	通常						あの魔物\nなんだったのかな？
+	オメガ	通常						おんなじことしか言わないし\n愛もぜんぜん感じなかったよ？
+CharacterOff
+	ヒメ	悔しい						うぅ、\n大きすぎて怖かった……
+CharacterOff
+	ディーア	通常2						ああ、それに\n知らないといけないことは\n他にもある
+	ディーア	怒り2						村長さん
+	ディーア	怒り2						この島は一体なんなんだ？
+If	isdebug==true
+CharacterOff
+Jump	*E_1119_03
+EndIf
+EndScenario
+
+# E_1119_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	色鮮やかな大森林					0
+Param	character_grayout=false
+	ディーア	驚き2				0
+FadeIn	black					.5
+	ディーア	驚き2						島が魔物に占拠された？
+CharacterOff
+	オメガ	通常						ごくごくっ（特産しじみ汁）
+CharacterOff
+	ヒメ	通常						むしっ！\nはむはむ（特産ぬれせんべい）
+CharacterOff
+	鎧村長							そうなんダヨ～
+	鎧村長							この島は昔から不思議で\nどんなものでも大きく育つんだ
+CharacterOff
+	ディーア	怪しい2						もしかして、\n特殊な魔力が流れているのか？
+	鎧村長							ソウ！
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Bg	タークディアバーブ					0
+	          					0
+FadeIn	white					.3
+	鎧村長	<Off>						かつて禁足地と言われていた\n湖が森の奥にあって
+	鎧村長	<Off>						その水を通して\n島中に魔力が流れていたんだァ
+	鎧村長	<Off>						だけど時代は変わったし\n島での暮らしは厳しい
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	色鮮やかな大森林					0
+	鎧村長					0
+FadeIn	white					.3
+	鎧村長							だから観光地にしようと思って\n島を開いたんだケド
+CharacterOff
+	ディーア	怪しい2						観光客だけじゃなくて\n魔物が来ちゃったと
+CharacterOff
+	鎧村長							湖が占領されちゃって～\n魔力も奪われちゃって\n魔物だけぐんぐん大きく
+CharacterOff
+	ディーア	怒り2						しかもあの巨木の森だ\nこの島の大きな住人だったら\n戦いづらいだろうな
+CharacterOff
+	鎧村長							ケドッ！\nあなたたちが来たッ！
+Shake	鎧村長		x=5				NoWait
+	鎧村長							こんなにちいさくてかわいいのに\n強いなんて……すごすぎるッ！
+	鎧村長							どうか島を\n救ってくれないだろうかッ！
+CharacterOff
+	ディーア	通常2						なるほど……\n二人はどうしたい？
+CharacterOff
+	オメガ	通常						オメガちゃん的には\n見捨てるのは愛がないと思う！
+CharacterOff
+	ヒメ	通常						ひ、ヒメも……！\nみんなにお願いされたなら\n叶えてあげたい
+CharacterOff
+	鎧村長							ほ、本当かァ～！
+CharacterOff
+	ディーア	笑い2						その代わり\n魔物から湖を取り戻せたら
+CharacterOff
+	鎧村長							もちろん、\n体が大きくなる食べ物を\n食べ放題！
+	鎧村長							ぐんぐーん、そだつー♪\nおしりとおやまー♪
+CharacterOff
+	ディーア	汗2						はぁー\nとんだ年末休暇になったけど、\n仕方ないな
+CharacterOff
+	鎧村長							そういえば、\nあんなにちいさくて強いなんて\nキミは有名な魔剣なのか～？
+CharacterOff
+	ヒメ	驚き						えっ……！
+	ヒメ	悔しい						ヒメは……そのぉ\nただのちいさいヒメだよ？
+FadeOut	black					.3
+CharacterOff						0
+	鎧村長					0
+Wait						1
+FadeIn	black					.3
+	鎧村長							こっちダァ～！
+Param	character_grayout=true
+CharacterOff
+	ディーア	汗2	1_2
+	ヒメ	悔しい	2_2
+	ヒメ	悔しい						ほんとに狭い道だね、\nお師匠様
+	ディーア	汗2						ああ、\n体が小さくなかったら\n移動も大変だったな
+	ヒメ	怒り						むぅ……\nおっきくなるために来たのに\nちっちゃいばかり褒められてる
+	ディーア	通常2						小さい体だからこそ\n役に立てる場面はあるんだよ
+	ヒメ	怒り						そ、そうかもしれないけど……
+	ヒメ	怒り						ヒメはもっと立派に……
+CharacterOff
+	オメガ	通常						うーん……
+CharacterOff
+	鎧村長							アッ！ 前方注意！
+	鎧村長							ここからは\nキノコの群生地なんだァー！
+CharacterOff
+	？？？？							ノコーっ！
+CharacterOff
+	ディーア	驚き2						この声……\nキノコリオンか？
+	ディーア	汗2						まあ、でもキノコリオンなら\nいきなり出てきても<dash=2>
+Bgm	緊迫
+Param	character_grayout=false
+CharacterOff
+	ドーピングキノコリオン	通常大
+	          		1_2
+	巨大キノコリオン？？？？	<Off>						ん゛んんノゴッ!!\n（こんなになっちゃったノコッ!!）
+Bgm	コメディ
+CharacterOff
+	ヒメ	拡大慌て	エフェクト表					変になったキノコリオンッ!?
+CharacterOff
+	鎧村長							強襲型だッ!!
+CharacterOff
+	ディーア	絶望2						逃げろー！
+FadeOut	black					.3
+CharacterOff						0
+	チョコキノコリオン					0
+	          		1_2
+FadeIn	black					.3
+	やさしいキノコリオン	<Off>						ノコノコノコノ？\n（チョコ食べるノコ？）
+CharacterOff
+	鎧村長							友好型か……
+FadeOut	black					.3
+CharacterOff						0
+	大樹型モンスター		1_2			0
+	          
+FadeIn	black					.3
+	キノコリオン？？？？	<Off>						ノコォオオオオオ！\n（キノコだよ！）
+CharacterOff
+	ディーア	絶望2						お前のようなキノコがいるかぁ!!
+CharacterOff
+	鎧村長							擬態型かァ～！
+CharacterOff
+	ディーア	悔しい2						もうなんでもいいから\n討伐するぞ！
+CharacterOff
+	ヒメ	拡大慌て	エフェクト表					な、なんとかなれーッ
+If	isdebug==true
+CharacterOff
+Jump	*E_1119_04
+EndIf
+EndScenario
+
+# E_1119_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	色鮮やかな大森林					0
+	ディーア	悔しい2				0
+FadeIn	black					.5
+	ディーア	悔しい2						はぁ、はぁ……\nいつまで続くんだ、この森は……
+	ディーア	悔しい2						バカンスのはずが\n森を駆け回って……
+CharacterOff
+	オメガ	通常	p3
+	ヒメ	悔しい	p7b
+	ヒメ	悔しい						うぅ……\nヒメちゃんも足がそろそろ……
+Tween	オメガ	MoveBy	x=10				NoWait
+	オメガ	通常						大丈夫？\nオメガちゃんはまだ歩けるから\n肩を貸そっか？
+	ヒメ	慌て						あっ……！\nそ、その……大丈夫
+	オメガ	通常						あれ？\nまだ緊張してるの？
+Tween	オメガ	PunchPosition	y=30				NoWait
+	オメガ	通常						おんなじマスターちゃんの魔剣だし\n遠慮はいらないよ！
+Tween	ヒメ	MoveBy	x=10				NoWait
+	ヒメ	悔しい						でもぉ……やっぱり、\nすごいドラゴンさんたちは特別なの
+	オメガ	通常						特別？
+	ヒメ	悔しい						ヒメはまだまだ修行中で、\nたくさんのお願いを叶えられない\n神様見習い
+	ヒメ	悔しい						こんなにちっちゃくて、\n演技してないと\nカワイイしか言ってもらえない
+	ヒメ	悔しい						神様に近いオメガさんとは違う\nそのままだと役に立てない子だから
+	オメガ	通常						ヒメちゃんがなりたい神様って\nどんな神様なの？
+	ヒメ	驚き						えっ？
+	オメガ	通常						アマテラスちゃんたちみたいに\n立派になりたいのは知ってるけど
+	オメガ	通常						見た目が変わるのが\nゴールじゃないんでしょ？
+	オメガ	通常						自信をつけて、本物の神様になれたら\nどんなことをしたいの？
+	ヒメ	怒り						ヒメは……\nみんなのお願いを叶えられる\n立派な神様になりたい
+	ヒメ	通常						だから見るだけで安心できて\nお願いを任せてもらえる\nすごい竜神様になりたい……
+	ヒメ	嬉しい						昔、みんながヒメに\nそうなれるって言ってくれたの
+StopBgm
+Tween	オメガ	PunchPosition	y=30				NoWait
+	オメガ	通常						わぁー♪\nそれってすごい愛があることだね！
+	ヒメ	驚き						あ、愛……？
+Bgm	神秘
+	オメガ	通常						だってヒメちゃんは\n他の人が幸せになるために\nがんばってるんでしょ？
+	オメガ	通常						それが愛じゃなくてなんなの！
+Tween	オメガ	PunchPosition	y=30				NoWait
+	オメガ	通常						ヒメちゃんの愛は\nすっごく大きいんだね！
+	オメガ	通常						見えないけどすごく感じるよ♪\nヒメちゃんの愛！
+	オメガ	通常						オメガも神様に近い竜だけど\n世界からは選ばれなかった可能性だし
+	オメガ	通常						選ばれて、選んでる\nヒメちゃんはすごいと思うよ！
+	ヒメ	驚き						ヒメが……
+Tween	オメガ	PunchPosition	y=30				NoWait
+	オメガ	通常						でも、愛の大きさは負けない！\nマスターちゃん！\nオメガちゃんに愛をちょーだい！
+	ヒメ	嬉しい						…………えへへ
+	ヒメ	嬉しい						ありがとう、オメガちゃん
+	オメガ	通常						あっ！\nオメガちゃんって呼んでくれた！\nこれで愛がもっと深まるね♪
+	ヒメ	通常						う、うん……！
+	ヒメ	通常						ヒメがなりたい、神様……
+CharacterOff
+	鎧村長							そろそろ到着だぞ～！
+StopBgm
+Param	character_grayout=false
+FadeOut	white					1
+CharacterOff						0
+Bg	タークディアバーブ					0
+	ディーア	驚き2				0
+Wait						1
+FadeIn	white					1
+	ディーア	驚き2						ここが魔物に占領された湖？
+CharacterOff
+	オメガ	通常						へえー！\nたしかに不思議な魔力が貯まってるね
+CharacterOff
+	ヒメ	通常						じゃあ、\nここにいる魔物を倒せば……！
+Bgm	緊迫
+Se	火3
+FadeOut	red					.2
+	オーラ炎		エフェクト表			.5
+FadeIn	red					.2
+	ヒメ	泣き						ひゃあああああ!?
+CharacterOff
+	巨竜デカイヤス							グォオオオ！
+CharacterOff
+	ディーア	驚き2						巨大な、ドラゴン型の魔物？
+CharacterOff
+	オメガ	通常						ちょっと大きすぎない!?
+CharacterOff
+	ヒメ	泣き						火の、竜……！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	神社（夜）					0
+	オーラ炎		エフェクト表			0
+FadeIn	white					.3
+	？？？？？？	<Off>						（アハハハ！ 燃えろ燃えろ！\n　地獄すら燃やし尽くし\n　私をあの方のところへ……！）
+FadeOut	white					.3
+CharacterOff						0
+Bg	和風市街（廃）					0
+	オーラ青		エフェクト表			0
+FadeIn	white					.3
+	？？？？？？	<Off>						（お前しかいないんだ！\n　頼む、みんなのために……！）
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	タークディアバーブ					0
+	ヒメ	泣き				0
+FadeIn	white					.3
+Shake	ヒメ		x=5				NoWait
+	ヒメ	泣き						やぁっ！\n火、火は怖いのぉ……!!
+CharacterOff
+	ディーア	悔しい2						ヒメ、どうしたんだ!?
+CharacterOff
+	ヒメ	泣き						うっうっ……！
+CharacterOff
+	鎧村長							だ、大丈夫かァ～？
+CharacterOff
+	ディーア	悔しい2						この魔物、\n召喚獣に匹敵するほど成長してる\n精鋭部隊を投入するレベルの敵だ
+CharacterOff
+	巨竜デカイヤス							アハハ！ 大きいのは怖いか？\nオレの炎は恐ろしいか？
+CharacterOff
+	ヒメ	泣き						うっ……
+CharacterOff
+	鎧村長							やっぱりダメかぁ……
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	悔しい2
+	ディーア	悔しい2						（まずいな\n　村長のヒメへの信頼が低下して\n　ヒメの出力が落ちている）
+CharacterOff	黒グラデーション
+	ディーア	怒り2						おい、\nなんでお前はここに居続ける\nなにが目的なんだ
+CharacterOff
+	巨竜デカイヤス	通常						望みぃ……？\nそれはお前たちみたいなのを\n待っていたんだよォー！
+CharacterOff
+	ディーア	悔しい2						オレたちを？
+CharacterOff
+	巨竜デカイヤス	通常						そうさァ！\nあの森と魔物を抜けてくるなんて\nちいさくて強いやつに決まってる！
+	巨竜デカイヤス	通常						そんなちいさくて強いやつが\nほしかったんだー！
+	巨竜デカイヤス	通常						おい、\nそこの怖がってる魔剣！
+StopBgm
+	巨竜デカイヤス	通常						体をよこせ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1119_05
+EndIf
+EndScenario
+
+# E_1119_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	タークディアバーブ					0
+Param	character_grayout=false
+	ヒメ	驚き				0
+FadeIn	black					.5
+	ヒメ	驚き						ひ、ヒメの体を……!?
+CharacterOff
+	ディーア	怒り2						奪うつもりか!?
+CharacterOff
+	巨竜デカイヤス							もちろん、\nタダじゃないぞ？
+	巨竜デカイヤス							こっちの体とコーカンだッ！
+	巨竜デカイヤス							聞いたぞー！\nお前はおっきくて立派な体が\nほしいんだってナ！
+CharacterOff
+	ヒメ	驚き						そ、それは……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	和室（夜）					0
+	ヒメ	にやけ				0
+FadeIn	white					.3
+	ヒメ	にやけ						もっと背が高くて、\nいろいろなところがおっきくて\nキラキラオーラもあって
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	タークディアバーブ					0
+	巨竜デカイヤス					0
+FadeIn	white					.3
+	巨竜デカイヤス							だけどオレは逆だ！\nちいさくてかわいくなりたい！
+	巨竜デカイヤス							もううんざりなんだよーッ
+	巨竜デカイヤス							自由にしたいだけなのに\n攻撃されるし
+	巨竜デカイヤス							おちおち寝てもいられない！
+	巨竜デカイヤス							けど、小さくなれば\nかわいがられて楽ばっかできる！
+	巨竜デカイヤス							だからお前と\nコーカンすればいいだろっ！
+	巨竜デカイヤス							お前はでかくてつよくなって\nオレはちいさくてかわいくなる！
+	巨竜デカイヤス							それにお前の体なら\nオレもよわくはならないからな
+	集中線		エフェクト表
+	巨竜デカイヤス							だから交換しよーぜー！\nお願いだからァ！
+CharacterOff
+	ディーア	本気2						そんな馬鹿な要求、\nヒメが呑むわけがないだろ！
+CharacterOff
+	黒グラデーション		エフェクト表			1
+	ヒメ	怒り
+	ヒメ	怒り						お願い……
+CharacterOff
+StopBgm
+	ディーア	驚き2						ヒメ……？
+Bgm	絶望
+CharacterOff
+	黒グラデーション		エフェクト表
+	ヒメ	怒り
+	ヒメ	怒り						あのドラゴンさんは\nヒメみたいにちいさい体に\nなりたがってる
+	ヒメ	怒り						ヒメは……
+	ヒメ	怒り						ヒメは強くて、\n立派にならないといけない
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	遺跡B_過去					0
+	          
+FadeIn	white					.3
+Se	マイクノイズ
+	？？？？	<Off>						お願いします！\nどうかみんなのために……！
+	？？？？	<Off>						あなたは立派なことをするの\nいつか神様にもなれるわ
+	？？？？	<Off>						願いを叶えておくれ！
+FadeOut	white					.3
+CharacterOff						0
+StopSe						0
+Bg	タークディアバーブ					0
+	ヒメ	怒り				0
+FadeIn	white					.3
+	ヒメ	怒り						みんながヒメに\n立派な神様になってって\nずっと願ってきた
+	ヒメ	怒り						ヒメは、願われてきた
+CharacterOff
+	巨竜デカイヤス							そーだ！\nだからコーカンしよーぜっ！
+CharacterOff
+	ディーア	悔しい2						ヒメ……！
+StopBgm
+CharacterOff
+	オメガ	通常						………………………………\n大丈夫だよ、マスターちゃん♪
+CharacterOff
+	ヒメ	怒り						でも！
+Bgm	勇者バトル
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	怒り						あなたみたいに\n強いだけの怪物になりたい\nわけじゃない！
+	ヒメ	怒り						みんなを\n怖がらせたいわけじゃないよっ！
+	ヒメ	通常						ヒメが叶える願いごとは\nあなたを止めて\n島のみんなを助けること！
+	ヒメ	怒り						火が怖くても、大きすぎても\nそこだけは間違えないっ！
+CharacterOff
+	ヒメ	拡大通常	エフェクト表					ヒメは、\nなにかがちいさくても十二支魔剣！\n辰王ヒメミズチ！
+	ヒメ	拡大通常						一年間、魔界を守って\nみんなを幸せにする\nちいさくてもめでたい辰王！
+	ヒメ	拡大嬉しい						そうだよね、お師匠様！
+CharacterOff
+	鎧村長							辰王……\nあの有名な十二支魔剣の？
+	鎧村長							こっちも擬態型だったかァ～
+CharacterOff
+	ディーア	笑い2						よく言ったな、ヒメ！
+CharacterOff
+	オメガ	通常						さっきからあのドラゴン\n自分のことしか考えてないもん！
+	オメガ	通常						そんな自分だけの愛、\nヒメちゃんの愛に釣り合ってない！
+CharacterOff
+	ヒメ	きらーん						えへへ♪\n本当は少しだけ迷っちゃったけど\nやっと気づいたの
+	ヒメ	怒り						ヒメみたいに小さいのが嫌な人も\nあのドラゴンみたいに大きくても\n嫌な人がいる
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	怒り						だったら、\n立派になるのも自信を持つのも\n大きさなんて関係ない！
+CharacterOff
+	巨竜デカイヤス							わけわかんないこと言うなァー！
+	巨竜デカイヤス							だったら力づくでぇ!!\nよこせ！
+CharacterOff
+	ヒメ	拡大通常	エフェクト表					ひかえおろー！\nわらわはめでたき辰王ヒメミズチ！
+	ヒメ	拡大通常	エフェクト表					みなの願い、\n今こそ叶えてしんぜよう！
+If	isdebug==true
+CharacterOff
+Jump	*E_1119_06
+EndIf
+EndScenario
+
+# E_1119_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	タークディアバーブ					0
+Param	character_grayout=false
+	巨竜デカイヤス					0
+FadeIn	black					.5
+	巨竜デカイヤス							うぅ……\nちいさくてかわいいこと\nしたかったのに……
+CharacterOff	巨竜デカイヤス					1
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	ディーア	笑い2	1_2
+	オメガ	通常	2_2
+	オメガ	通常						愛の大きさは、\nヒメちゃんの圧勝だったね、\nマスターちゃん♪
+	ディーア	笑い2						外見がどう変わっても、\n中身が同じなら\nなんの意味もないのにな
+CharacterOff
+	ヒメ	嬉しい						お師匠様、オメガちゃん、\n助けてくれてありがとう
+	ヒメ	嬉しい						まだまだなヒメだけど\nちょっと成長できた気がする！
+CharacterOff
+	鎧村長							じゃあ、\n大きくなりたいっていうのはァ？
+CharacterOff
+	ヒメ	通常						やっぱりなし！\nヒメはお師匠様に鍛えてもらって\nちゃんと成長するの♪
+	ヒメ	通常						自分たちでできるとこから\nコツコツがんばる！
+CharacterOff
+	鎧村長							そうかァ～
+	鎧村長							まあドラゴンが\n湖の魔力を吸いすぎちゃって\n力も薄れてしまったんだが
+CharacterOff
+	オメガ	通常						でも湖は\n変な色のままだけど<dash=2>ペロっ！
+Tween	オメガ	PunchPosition	y=20				NoWait
+	オメガ	通常						こ、これっ！
+	オメガ	通常						豆乳だ～！
+CharacterOff
+	ディーア	絶望2						豆乳？？？？
+CharacterOff
+	ヒメ	驚き						だから栄養たっぷりなの？
+CharacterOff
+	鎧村長							おぉー！\nドラゴンの炎でいい感じにゆだって\n豆乳鍋にぴったりだァ～！
+CharacterOff
+	ディーア	笑い2	1_2
+	オメガ	通常	2_2
+	ディーア	汗2						これはこれで\nいい観光地になるのか？
+	オメガ	通常						楽しみだね、マスターちゃん♪
+CharacterOff
+	鎧村長							もちろん\n助けてくれた恩人だから\nたっぷりごちそうするぞ～
+CharacterOff
+	ヒメ	にやけ						やったぁ、豆乳鍋で年越し♪
+CharacterOff
+	ディーア	笑い2	1_2
+	オメガ	通常	2_2
+	ディーア	通常2						それと、まだ島のあちこちが\n慌ただしいみたいだから
+	ディーア	通常2						動きやすい子たちを連れて\n復興を手伝うとしようか
+	オメガ	通常						さんせー♪\nバハちゃんたちと豆乳風呂はいろー♪
+CharacterOff
+	ヒメ	通常						あ、その前にお師匠様……
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	和室（夜）					0
+Wait						1
+	ヒメ	拡大通常	エフェクト表			0
+Param	character_grayout=true
+FadeIn	black					.3
+Bgm	和の国の町
+	ヒメ	拡大通常						ひかえおろー♪\nわらわこそが辰王ヒメミズチ！
+	ヒメ	拡大通常						みなの願いを叶える\n辰の年を収める十二支魔剣である！
+CharacterOff
+	ヒメ	通常						そんなわらわから、\n一つみんなに頼みがある！
+	民衆							えっ……？
+	民衆							なーにー！
+	ヒメ	通常						わらわの願いを叶える力は\n決して万能ではない
+	ヒメ	怒り						みなが本気で願って、\n真剣に努力することで初めて、\nわらわの力になる！
+	ヒメ	怒り						だから、その……\nみなも次の一年をがんばってほしい！
+	ヒメ	嬉しい						そのがんばりを\nわらわは精一杯助けると誓おう！
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	嬉しい						共に良い一年にしようぞ！
+	ヒメ	悔しい						………………どきどき
+	民衆							さすが立派な辰王！\n俺たちもがんばらないと！
+	民衆							辰王様にまかせてばかりじゃ\n怠けてしまうもんな！
+	民衆							辰王！ 辰王！
+	ヒメ	嬉しい						よかったぁ……\nみんな、わかってくれた……
+	ヒメ	嬉しい						ヒメも一年間がんばれそう！
+FadeOut	black					.3
+CharacterOff						0
+	ヒメ	嬉しい				0
+Wait						1
+FadeIn	black					.3
+	ヒメ	嬉しい						お師匠様ぁー♪\nヒメ、ちゃんとできたよぉー！
+	ヒメ	嬉しい						はやく島に<dash=4>
+	ヒメ	慌て						ぴっ!?
+CharacterOff
+	アマテラス	通常						のう、主よ♪\nそろそろ年越しの宴とまいろう♪
+CharacterOff
+	アマツミカボシ	通常						なにが宴だ、アマテラス\n人間にしだれかかるなんて\n恥ずかしい！
+CharacterOff
+	イザナギ	通常						どれも些事だ\n新しい年になったとて\n人間と我のすべきことは変わらぬ
+	イザナギ	通常						世界を護る戦いは\n終わりなどないのだからな
+CharacterOff
+	アマテラス	通常						…………
+CharacterOff
+	アマツミカボシ	通常						…………
+CharacterOff
+	イザナギ	通常						…………
+CharacterOff
+	ディーア	絶望2						み、みんな少し落ち着いて……
+	ディーア	汗2						あ、ひ、ヒメ！\nアマテラスたちをなんとかしてくれ！
+CharacterOff
+	ヒメ	慌て						そ、そんなこと言われてもぉ……！
+CharacterOff
+	アマテラス	通常						ほほう♪\nそこにおるは辰王の魔剣か♪\nこっちで宴をしよう♪
+CharacterOff
+	ヒメ	慌て						ほ、ほほー！\nわらわをさ、さそうとは\nきょーえつしごくっ！
+	ヒメ	慌て						だから、その、あの……！
+	ヒメ	慌て						ひぃいいいん！\n今のヒメには無理だよぉ！
+CharacterOff
+	ヒメ	拡大慌て	エフェクト表					お、お師匠様ぁ！\nもっとヒメと修行しよぉ！
+	ヒメ	拡大慌て						ヒメのこと、\n立派な神様にしてぇ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1119_07
+EndIf
+EndScenario
+
+# E_1119_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	和の国の町
+Bg	色鮮やかな大森林					0
+Param	character_grayout=false
+	ヒメ	拡大嬉しい	エフェクト表			0
+FadeIn	black					.5
+	ヒメ	拡大嬉しい						新年！
+CharacterOff
+	グラム=スサノオ	拡大通常	エフェクト表					あけまして！
+CharacterOff
+	ヒメ	嬉しい	p2b
+	グラム=スサノオ	通常	p8
+	          
+	二人							おめでとうございまーす!!
+Param	character_grayout=true
+CharacterOff
+	ヒメ	通常						ついに、\nヒメの辰年が始まったね、\nお師匠様！
+CharacterOff
+	グラム=スサノオ	通常
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常						ドラゴンみたいに\nぐんぐん空を飛んじゃうような\n熱血ファイアーな年ですね！
+CharacterOff
+	ヒメ	慌て
+Shake	ヒメ	PunchPosition	x=5				NoWait
+	ヒメ	慌て						あうっ……スサノオ様ぁ\nヒメは燃えちゃうのはちょっと……
+CharacterOff
+	グラム=スサノオ	通常						これは失礼っ！
+	グラム=スサノオ	通常						では熱血ウォーターな一年ですっ！
+	グラム=スサノオ	通常						そしてそして……！\n一年のはじまりと言えば……！
+CharacterOff
+	ヒメ	通常
+Tween	ヒメ	PunchPosition	y=30				NoWait
+	ヒメ	通常						修行だよね！
+	ヒメ	てへぺろ						滝に打たれたり、\n百八回も鐘にパンチをしたり！
+	ヒメ	にやけ						神社をダッシュして\n誰が速いかを決めたり！
+CharacterOff
+	グラム=スサノオ	通常						それだけじゃありません！\n年末も巨大なアスレチックに挑み\n時にはお尻を叩き合い……！
+	グラム=スサノオ	通常						つまり！\n年末年始は修行シーズン！
+Tween	グラム=スサノオ	PunchPosition	y=50				NoWait
+	グラム=スサノオ	通常						そして私たちは今っ！
+CharacterOff
+	ヒメ	てへぺろ
+Tween	ヒメ	PunchPosition	y=50				NoWait
+	ヒメ	てへぺろ						島でしゅぎょーちゅー！
+	ヒメ	通常						お正月も気を緩めないのは\n立派な神様らしいこと！
+CharacterOff
+	グラム=スサノオ	通常						年末から島ごもりして\nヒメちゃんと鍛えていたんです！
+CharacterOff
+	ヒメ	嬉しい						たくさん探検して、\nキノコや宝石を探したり\n素肌で温めあったり
+CharacterOff
+	グラム=スサノオ	通常						涙なくして語れぬ日々！\nそれでついに今日は……！\n修行の最後っ！
+CharacterOff
+	ヒメ	嬉しい						これから\nすごいスーツを着て、\n禁じられた森に突撃っ♪
+	ヒメ	通常						強い魔物がいるらしいけど、\n島のみんなを守るために\nヒメたちが活躍しないとだね♪
+Tween	ヒメ	PunchPosition	y=50				NoWait
+	ヒメ	嬉しい						お師匠様がくれたスーツは\nすごく薄いけど、\n当たらないようにするのも修行！
+CharacterOff
+	グラム=スサノオ	通常						さすがです、マスターさん！
+CharacterOff
+	ヒメ	嬉しい						それじゃあスサノオ様！\nヒメの修行に付き合ってください！\nめざせ！ 立派な神様っ！
+CharacterOff
+	グラム=スサノオ	通常						もちろんですっ！\nいきますよー！
+FadeOut	white					1
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル11191		エフェクト表			0
+Tween	イベントスチル11191	MoveBy	y=-493 time=8	linear			NoWait
+FadeIn	white					1
+	ヒメ	<Off>						お師匠様！\nヒメからのお願いっ！
+	ヒメ	<Off>						今年もヒメたちのこと\n見守っててね！
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1119_01
+EndIf
+EndScenario

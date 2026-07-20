@@ -1,0 +1,963 @@
+# E_1125_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神社
+Bg	黒背景					0
+Param	character_grayout=false
+	ナナビ	拡大お面刀	エフェクト表			0
+FadeIn	black					1
+	ナナビ	拡大お面刀						ひとつ、\nひとのご主人傷つける
+FadeOut	black					.3
+CharacterOff						0
+	ナナビ	拡大お面足	エフェクト表			0
+FadeIn	black					.3
+	ナナビ	拡大お面足						ふたつ、\nふらちなわるいやつ
+FadeOut	black					.3
+CharacterOff						0
+	ナナビ	拡大お面	エフェクト表			0
+FadeIn	black					.3
+	ナナビ	拡大お面						みっつ、\nみごとなサムライパワーで
+FadeOut	black					.3
+CharacterOff						0
+Bg	草原A					0
+	ナナビ	拡大通常	エフェクト表			0
+FadeIn	black					.3
+	ナナビ	拡大通常						倒してみせるよ、\r\nナナツサヤ=ビーストが
+CharacterOff
+	ナナビ	通常						だから……見ててね、ご主人
+	ナナビ	本気						アォオオオオオン!!
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	剣閃
+Se	光3
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	草原A					0
+CharacterOff						0
+	キノコリオン
+ImageEffectOff	SpriteCamera	MotionBlur
+Shake	キノコリオン		x=3				NoWait
+	キノコリオン							ノコぉおおおお
+Tween	キノコリオン	MoveBy	y=-50 time=1				NoWait
+CharacterOff						1
+Wait						1
+StopBgm
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常2	p3
+	ナナビ	通常	p7b
+	ナナビ	通常						ふんすっ！\r\nサムライのナナならこんなもの
+Bgm	平和
+	ディーア	通常2						よしっ！\r\nこれで依頼された任務は完了だな
+	ディーア	通常2						サムライになった、\r\nビーストのナナツサヤの活躍、\r\n見せてもらったぞ！
+	ディーア	汗2						ナナがビースト魔剣になると\r\nなんでサムライっぽくなったのかは\r\n謎のままだけど
+	ディーア	通常2						相変わらず\r\nビースト魔剣は不思議だな
+	ディーア	驚き2						って、あれ？
+Tween	ナナビ	MoveBy	x=-50				NoWait
+	ナナビ	ドヤ						んっ、んっ……！\r\nご主人、ご主人……！
+	ディーア	通常2						ああ、そっか\r\nごめんな、考え事してた
+	ディーア	笑い2						ナナ=ビースト……よしっ！
+Tween	ナナビ	PunchPosition	y=30				NoWait
+	ナナビ	驚き						っ！ よし、がでたっ！
+Shake	ナナビ		x=5				NoWait
+	ナナビ	嬉しい						わふぅ♪\r\nご主人、ご主人……！
+	ナナビ	嬉しい						ナナ、ご主人のこと\r\nちゃんと守れていたよね？
+	ナナビ	嬉しい						サムライのナナは\r\nご主人を守るのが、お仕事\r\nだから、絶対、負けないの
+Tween	ナナビ	PunchPosition	y=30				NoWait
+	ナナビ	嬉しい						だから、ごおんとほーこー♪\r\nがんばったから\r\nごほーび、ちょうだい♪
+	ディーア	笑い2						よし、助かったから\r\nはりきってご褒美をあげるぞ！
+Param	character_grayout=false
+Tween	ディーア	MoveBy	x=50				NoWait
+	ディーア	にやけ2						もふもふもふ！\r\nナデナデナデナデ！！
+Param	character_grayout=true
+Shake	ナナビ		x=5				NoWait
+	ナナビ	嬉しい						わふわふっ\nご主人守った後のごほーびは\nトクベツ♪
+	ディーア	通常2						でも、これくらい、\r\n普通に甘えてくれてもいいのに
+Tween	ナナビ	MoveBy	x=40				NoWait
+	ナナビ	ドヤ						たくさん守るから、\r\n大好きもたくさん生まれるの
+	ナナビ	ドヤ						きっと狗王のナナよりも\r\n大好きな気持ちは負けてないよ？
+	ナナビ	通常						だからご主人のこと、\r\nもっと、もっと、守るから\r\nもっとごほーび、ね？
+	ディーア	通常2						ああ、もちろん
+	ディーア	驚き2						って、そうか\r\nご褒美って言ったら\r\nもうすぐバレンタインもあったな
+	ディーア	通常2						みんなからのチョコの\r\nお返しの準備もしておかないと
+Tween	ナナビ	PunchPosition	y=10				NoWait
+	ナナビ	驚き						っ……！\nばれん、たいん……！
+	ナナビ	驚き						そっか、ナナ不覚
+	ナナビ	本気						ばれんたいん、\r\nちゃんと用意しないと
+	ディーア	通常2						ナナ=ビーストも\r\nチョコを用意してくれるのか？
+	ナナビ	ドヤ						うん……！\r\nナナ、知ってるよ
+	ナナビ	ドヤ						ばれんたいんは、\r\n大好きな人にチョコを渡す日だって
+	ナナビ	通常						ご主人も、\r\nナナからばれんたいんのプレゼント\r\nほしいよね？
+	ディーア	笑い2						もちろん、\nもらえたら嬉しいよ
+	ナナビ	嬉しい						わかった、ご主人\r\nナナ、すごいの、用意する
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ナナビ	通常				0
+Wait						1
+FadeIn	black					.3
+	ナナビ	通常						ご主人は休憩中……\n今日も任務大変だったから
+	ナナビ	通常						お宿なら安心だし\r\n今のうちにナナも準備しないと
+	ナナビ	本気						すごい、ばれんたいん
+	ナナビ	本気						他のみんなより\nすごいのをプレゼントしたら……
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	ディーア	笑い2				0
+FadeIn	white					.3
+	ディーア	笑い2						ナナ=ビーストが\r\nいちばんなサムライさんだ\r\nすごいごほーびをあげるぞ！
+Se	ポップイン
+	オーラ桃		エフェクト表			1
+	ディーア	笑い2						そーれー！
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ナナビ	ドヤ				0
+FadeIn	white					.3
+	ナナビ	ドヤ						ご主人から\r\nすごいごほーび、もらえちゃう\r\nわふ♪
+StopBgm
+	ナナビ	通常						そうと決めたら、\nまずはてーさつしないと
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_カフェ					0
+	ナナビ	通常				0
+Wait						1
+FadeIn	black					.3
+Bgm	わくわく
+	ナナビ	通常						たしか\nこっちでトルテたちが……
+CharacterOff
+	ザッハトルテ	通常2						マカロの準備はいかがですのー！
+CharacterOff
+	マカロンヌ	通常2						ちゃーんと\r\nおいしくできましたー♪
+CharacterOff
+	ザッハトルテ	通常2						プディンとエクレはー？
+CharacterOff
+	エクレアンヌ	通常
+Tween	エクレアンヌ	PunchPosition	y=30				NoWait
+	エクレアンヌ	通常2						もちろん！\r\n完璧にできてるよ！
+CharacterOff
+	プディングンヌ	通常2						マスター様が\r\nぷるんぷるんになっちゃうくらい\r\nおいしいのを♪
+CharacterOff
+	ザッハトルテ	通常2						すばらしいですわっ！
+Tween	ザッハトルテ	PunchPosition	y=30				NoWait
+	ザッハトルテ	通常2						ふふふふ！\r\n待っていなさい、パティシエ！
+	集中線		エフェクト表
+	ザッハトルテ	通常2						今年はみんなで、\r\nチョコのお城をプレゼントしますわ！
+CharacterOff
+	ナナビ	通常						むむむ……！\r\nおっきなチョコのおしろ、すごい
+	ナナビ	ドヤ						だったら、\r\nナナはもっとおっきなおしろを\r\n作らないと
+	ナナビ	通常						この調子で、\r\n他の魔剣のことも調べる……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	小怺	通常				0
+Wait						1
+FadeIn	black					.3
+	小怺	通常						白櫃ちゃんは\r\nどんなチョコを贈るの？
+CharacterOff
+	白櫃	嬉しい						たくさん悩みましたけど、\r\nこういうのにしようと思います
+CharacterOff
+	小怺	通常						白い箱型のチョコ？
+	小怺	笑い						わかった！\r\nあま～い気持ちを入れちゃったり♥\r\nとか言ってみたりして♪
+CharacterOff
+	白櫃	嬉しい						えへへ♪ 当たりです\r\nマスターさんが驚くような\r\n仕掛けをしてみました！
+	白櫃	きらーん						黒櫃ちゃんと相談した\r\n変態なアイデアなんですよ♪
+CharacterOff
+	小怺	通常						……\r\nこれってどっちの意味だろ？
+CharacterOff
+	丑王アコ	通常2						うーん、天才の意味のほうが\r\n平和だけど……
+	丑王アコ	嬉しい2						そういうしょこらちゃんは\nハート型のチョコレートなんだね？
+CharacterOff
+	小怺	笑い
+Tween	小怺	PunchPosition	y=30				NoWait
+	小怺	笑い						しょこらさんは今年こそ\n千代火鈴丹を使いこなしてみせるの
+	小怺	笑い						感度3000倍で、\r\n気持ちも3000倍伝えるんだから♥\r\nとか言ってみたりして♪
+CharacterOff
+	ナナビ	本気	画面外_右
+Tween	ナナビ	MoveTo	x=520 time=2				NoWait
+Tween	ナナビ	RotateTo	z=20 time=0				NoWait
+	ナナビ	本気						びっくりサプライズと\n感度3000倍……
+StopBgm
+	ナナビ	本気						よし、じゃあナナは……
+CharacterOff
+	ナナツサヤ	通常2						ビーストのナナだー！\r\nここでなにしてるの？
+Bgm	都市
+CharacterOff
+	ナナビ	驚き
+Tween	ナナビ	PunchPosition	y=30				NoWait
+	ナナビ	驚き						あ、狗王のナナ……
+CharacterOff
+	小怺	通常						こんにちは、ナナちゃんたち♪\r\n二人もチョコを用意しに来たの？
+CharacterOff
+	ナナツサヤ	通常2						うんっ！\r\nご主人に、甘くておいしーチョコを\r\nプレゼントするんだ♪
+CharacterOff
+	丑王アコ	通常2						マスターさんも喜びそうだね♪\r\nビーストのナナちゃんは？
+CharacterOff
+	ナナビ	ドヤ						ふっふっふ、\r\nナナはもっとすごいのをする
+CharacterOff
+	白櫃	驚き						すごいの、ですか？
+CharacterOff
+	ナナビ	通常						うん
+	集中線		エフェクト表
+	ナナビ	ドヤ						すごくデッカイおしろで\r\nサプライズもたくさん飛び出す、\r\n感度7000倍のチョコ
+CharacterOff
+	小怺	通常	p3
+	丑王アコ	通常2	p7b
+	二人							…………
+Param	character_grayout=true
+	丑王アコ	悲しい2						えっと……
+	丑王アコ	悲しい2						それだとマスターさんが\n平和じゃなくなっちゃうかも？
+	小怺	驚き						愛で爆発しちゃったり？\r\n……とか言ってみたりして？
+CharacterOff
+	ナナビ	驚き						…………
+	ナナビ	本気						てーせい\r\nやっぱりご主人が危ないのはダメ
+	ナナビ	本気						みんなよりすごいのにしたいけど、\r\n今のは勝ってもダメなやつ
+	ナナビ	驚き						じゃあ……どうしよう？
+	ナナビ	驚き						ナナは\r\n一番すごいチョコをつくりたい
+	ナナビ	ドヤ						一番のつくって、\r\nご主人からの、ごほーびも一番
+CharacterOff
+	小怺	通常	p3
+	丑王アコ	通常2	p7b
+	小怺	通常						一番のチョコかぁ……
+	丑王アコ	通常2						難しいけど、\n一番がどんな意味かでも違ってくるね
+CharacterOff
+	ナナビ	驚き						意味？
+CharacterOff
+	丑王アコ	通常2	p7b
+	小怺	通常	p3
+	小怺	通常						ほら、バレンタインって\n魔導儀式の意味もあったでしょ？
+	丑王アコ	通常2						だから、\r\nそのオリジナルにのっとるなら\r\n古い仕来りに従うのが一番
+CharacterOff
+	白櫃	通常						でも、今のバレンタインって\r\n好きな人とか友達に贈る行事に\r\nなっていますよね？
+	白櫃	通常						友チョコに家族チョコ、\r\n義理チョコに本命チョコとか
+CharacterOff
+	小怺	通常	p3
+	丑王アコ	通常2	p7b
+	丑王アコ	通常2						時間と一緒に\nバレンタインの意味も\n変わってきたんだよね
+	丑王アコ	嬉しい2						トルテちゃんが作ってる\n芸術品みたいなチョコもできたり♪
+	丑王アコ	嬉しい2						光陰、世界平和の如し\n受け入れやすい形に\n物事は変わっていくの
+	小怺	通常						そういうアコちゃんは\n友チョコ寄りのにするんでしょ？
+Tween	丑王アコ	PunchPosition	y=30				NoWait
+	丑王アコ	嬉しい2						うん♪ 私はバレンタインでも\r\n世界平和を目指すから\r\nたくさんの人にチョコを配るよ
+CharacterOff
+	ナナビ	通常						そっか、アコにとっての一番は\r\n一番たくさんチョコを配って\r\nみんなを幸せにすること
+	ナナビ	通常						だからビーストのナナも、\r\nナナの一番を決めるのが大事
+CharacterOff
+	ナナツサヤ	通常2						ねえねえ、\r\nむずかしーおはなし？
+Tween	ナナツサヤ	PunchPosition	y=30				NoWait
+	ナナツサヤ	通常2						ナナはご主人大好きーって\nチョコをつくりたいんだけど\nそれでいーい？
+CharacterOff
+	丑王アコ	嬉しい2						ふふふ♪\r\nナナちゃんにとっての一番が\r\nそれだからいいと思うよ？
+CharacterOff
+	ナナビ	ドヤ						だったら、ナナは……
+	ナナビ	嬉しい						ナナがなりたいのは、\r\nご主人の一番のサムライ
+CharacterOff
+	小怺	笑い						じゃあ、\nサムライらしいチョコでアピール♪\nとか言ってみたりして♪
+CharacterOff
+	ナナビ	嬉しい						うん、それがいいと思う
+	ナナビ	ドヤ						それでたくさん\nごほーびももらっちゃうの
+CharacterOff
+	ナナツサヤ	通常2						わぁ！ おサムライさんっ!!\r\nかっこいい！
+CharacterOff
+	小怺	通常						じゃあ、\r\nサムライさんと言うと
+CharacterOff
+	白櫃	通常						カタナとかですかね？
+CharacterOff
+	ナナビ	通常						でもご主人に\r\n刃を向けるのはダメ
+CharacterOff
+	丑王アコ	通常2	p7b
+	小怺	通常	p3
+	小怺	通常						それじゃあ和風な食べ物は？\nサムライと関係あるよね
+	小怺	通常						今もサムライが残っていたら\nどんなプレゼントがいいかも\nわかりやすいと思うけど……
+	丑王アコ	通常2						物語の中とか私達の伝承には\nたくさん出てくるし\n文化が残ってる地方もあるのに
+	丑王アコ	通常2						本物のサムライさんは\r\nいつの間にか消えちゃったって\r\n言われてるからね
+CharacterOff
+	ナナビ	ドヤ						……サムライは、\r\nご主人を、シュパ、バシって\r\nかっこよく守る、すごいの
+	ナナビ	ドヤ						それで、\r\nいつでもご主人と一緒
+CharacterOff
+	丑王アコ	嬉しい2						確かに、\r\n認めた主への忠義と滅私の心は\r\nすごかったって伝わってるよね
+CharacterOff
+	白櫃	驚き						滅私って……\n恋愛とか、好きもダメなんですか？
+CharacterOff
+	小怺	通常						身分の差には厳しかったらしいし\n主さんとの恋愛はダメかも？
+CharacterOff
+	ナナビ	驚き						っ……！\r\nえ、ナナ、ご主人と一緒、ダメ？
+CharacterOff
+	小怺	驚き						あっ、そんなことないよ！\nそういう人もいたっていうだけ
+	小怺	笑い						むしろ、\n身分の差があるからこそ燃えたり♪\nとか言ってみたりして
+CharacterOff
+	ナナビ							ほっ……よかった
+CharacterOff
+	丑王アコ	通常2	p7b
+	小怺	通常	p3
+	丑王アコ	通常2						ナナ=ビーストちゃんも\n詳しくないなら\nどんな贈り物がいいかな？
+	小怺	笑い						やっぱり和菓子風のチョコとか？\r\nほどよい甘さがピッタリ！\r\nとか言ってみたり♪
+	小怺	笑い						チョコ大福とか♪
+CharacterOff
+	白櫃	嬉しい						抹茶もいいかも知れませんよ！\r\n抹茶チョコはとってもおいしいです
+CharacterOff
+	ナナビ	本気						ふむふむ……
+CharacterOff
+	ナナツサヤ	通常2						どうどう？ ビーストのナナ？\r\nいいの思いついた!?
+CharacterOff
+	ナナビ	ドヤ						うーん、\r\nみんなのアイデアも、すごくいい
+	ナナビ	通常						でも、\r\nもっと、ナナらしいのもありそう
+CharacterOff
+	丑王アコ	通常2						うん、そうだね♪\nまだバレンタインまで時間あるし\n焦って決めなくてもいいよ
+	丑王アコ	通常2						待てば世界平和の日和あり♪
+CharacterOff
+	白櫃	通常						あっ！ それじゃあ、\r\nまずは材料を集めませんか？
+	白櫃	通常						ちょうどここにあるチョコも\n少なくなってきましたし
+	白櫃	通常						ナナ=ビーストちゃんも\nチョコを見たら、\n新しいアイデアが浮かぶかも！
+CharacterOff
+	小怺	通常						それいいね♪\r\nさすが白櫃ちゃん、天才的
+CharacterOff
+	白櫃	照れ						て、天才だなんて！\r\nはしたないこと言ってませんよ！\r\nそれを言うなら変態です！
+CharacterOff
+	丑王アコ	通常2	p7b
+	小怺	通常	p3
+	小怺	通常						う、うん……！\r\nそうだね、変態的だよね！
+	丑王アコ	通常2						それじゃあマスターさんを誘って\r\nチョコ集めに出発♪
+CharacterOff
+	ナナビ	通常						うん、ナナがんばるっ
+If	isdebug==true
+CharacterOff
+Jump	*E_1125_02
+EndIf
+EndScenario
+
+# E_1125_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋(夜)					0
+Param	character_grayout=true
+	ナナビ	通常	画面外_右			0
+FadeIn	black					.5
+Tween	ナナビ	MoveBy	x=-700 time=2				NoWait
+Wait						1
+	ナナビ	通常						ふぅ……\r\nもうすぐ、今日も終わり
+	ナナビ	通常						みんな、協力してくれて\r\nチョコもたくさん手に入った
+	ナナビ	ドヤ						あとはナナが\r\nプレゼントを決めないと
+	ナナビ	本気						サムライなナナらしい\r\nチョコレート……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+	丑王アコ	通常2	p7b			0
+	小怺	通常	p3			0
+FadeIn	white					.3
+	小怺	笑い						やっぱり和菓子風のチョコとか？\r\nほどよい甘さがピッタリ！\r\nとか言ってみたり♪
+	小怺	笑い						チョコ大福とか♪
+CharacterOff
+	白櫃	嬉しい						抹茶もいいかも知れませんよ！\r\n抹茶チョコはとってもおいしいです
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ナナビ	通常				0
+FadeIn	white					.3
+	ナナビ	通常						うーん、\r\nやっぱり、まだ思いつかない
+	ナナビ	ドヤ						でも、サムライは焦らない\r\nこういう時は一度休むのも大事
+	ナナビ	通常						だから<dash=2>
+	ディーア	<Off>	1_2					すやすや……
+Se	衣擦れ1
+FadeOut	black					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	ナナビ	<Off>				0
+FadeIn	black					.3
+	ナナビ	<Off>						ご主人、おやすみなさい
+	ナナビ	<Off>						ぎゅっ♪
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	          					0
+Wait						2
+FadeIn	white					1
+Bgm	緊迫
+Se	ドア開く
+	白櫃	悲しい				1		ま、マスターさん、マスターさん！\r\n起きてください！
+Se	衣擦れ2
+CharacterOff
+	ナナビ	通常						白櫃、どうしたの？
+CharacterOff
+	白櫃	驚き						あれ？\r\nどうしてナナ=ビーストちゃんが\r\nマスターさんのお部屋に？
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	悲しい						じゃなくてっ！\r\n早くマスターさんを起こさないと！
+	白櫃	悲しい						ま、街が……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	和風市街（昼）					0
+	集中線		エフェクト表			0
+	サムライ住民1					0
+	          		1_2
+FadeIn	black					.3
+Se	和太鼓
+	白櫃	<Off>						サムライだらけに\r\nなっちゃったんですぅ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1125_03
+EndIf
+EndScenario
+
+# E_1125_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	コメディ
+Bg	市街地A					0
+Param	character_grayout=false
+	サムライ住民1					0
+	集中線		エフェクト表			0
+FadeIn	black					.3
+Se	和太鼓
+	サムライ住民1							貴様ぁあああ!!\r\n武士の魂である髷を落とすとは！\r\n斬ってくれる、そこに直れ!!
+CharacterOff
+	勇者A							今や武士も文明開化と共に\n生きるものっ！
+Tween	勇者A	PunchPosition	y=30				NoWait
+	勇者A							髷がなくとも\n武士の魂は滅びない！
+CharacterOff
+	サムライ住民1							いいや！\r\n武士の嗜みは変わらぬ！\r\n戦支度に流鏑馬なり！
+CharacterOff
+	勇者B							それいつの時代？\n今どき茶の湯と和歌でしょ？
+CharacterOff
+	旅人							スシ、ゲイシャ、ハラキリ!!
+	旅人							コレがイマドキのサムライデス！
+CharacterOff
+	サムライ住民1							どいつもこいつも\n軟弱者め!!
+FadeOut	black					.3
+CharacterOff						0
+	ナナビ	驚き				0
+FadeIn	black					.3
+	ナナビ	驚き						な、なにこれ？
+CharacterOff
+	白櫃	驚き						わからないんですぅ！\n起きたらこうなってて、\nみんなケンカしてて!!
+FadeOut	black					.3
+CharacterOff						0
+	サムライ住民2					0
+FadeIn	black					.3
+Se	和太鼓
+	サムライ住民2							その口調は!!\n見つけたぞ、我が妹の仇!!
+	集中線		エフェクト表
+	サムライ住民2							ちぇすとぉおおおおおお!!
+Se	ザシュ
+FadeOut	red					.3
+CharacterOff						0
+	旅人					0
+FadeIn	red					.3
+Shake	旅人		x=3				NoWait
+	旅人							アイェエエエエ……！
+	旅人							ひ、人違いデス
+Se	倒れる
+Tween	旅人	MoveBy	y=-100 time=1				NoWait
+CharacterOff	旅人					1
+Wait						1
+CharacterOff
+	サムライ住民2							む、誤チェストにごわす
+CharacterOff
+	女の子							ちゃーん
+FadeOut	black					.3
+CharacterOff						0
+	白櫃	悲しい				0
+FadeIn	black					.3
+	白櫃	悲しい						あわわわわっ！\nさ、さつばつっ!!
+CharacterOff
+	ナナビ	本気						これ、おかしい……
+	ナナビ	本気						みんな、本気でサムライごっこ
+	ナナビ	本気						だけど、\n世界観とか、全然ちがってる
+CharacterOff
+	白櫃	悲しい
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	悲しい						それだけじゃないんです！\nあそこのお店なんて、\n昨日までチョコのお店だったのに！
+CharacterOff
+	市場のおばちゃん							ちょこれいとぉ？\r\nそんな軟弱なもん、売ってないよ！
+	集中線		エフェクト表
+Tween	市場のおばちゃん	PunchPosition	y=30				NoWait
+	市場のおばちゃん							ばれんたいんには\nシャケを食え！
+CharacterOff	集中線
+	市場のおばちゃん							シャケはいいよぉ！\r\n甘味はダラダラと心を堕落させるが
+	市場のおばちゃん							シャケは\n流れに逆らって川をのぼるっ！\nサムライらしい立派な食べ物さ！
+CharacterOff
+	ナナビ	本気						シャケとサムライに関係が？
+CharacterOff
+	白櫃	悲しい						このままだと\nバレンタインどころじゃ\nなくなっちゃいますぅ！
+CharacterOff
+	サムライ住民2							ばれん、たいん？
+CharacterOff
+	サムライ住民1							今、なんと言った？
+CharacterOff
+	白櫃	悲しい						ぴぃっ！
+CharacterOff
+	ナナビ	本気						白櫃、下がって……
+CharacterOff
+	サムライ住民2							ばれんたいんとは、\r\n男子が女子といちゃいちゃする\r\nけしからん行事
+CharacterOff
+	勇者A							ばれんたいんは女々か？
+CharacterOff
+	サムライ住民1							しかし、\r\nこやつらはおなごぞ？
+CharacterOff
+	サムライ住民2							なら女々もいたしかたなし
+CharacterOff
+	サムライ住民1							しかし、\r\nばれんたいんに現をぬかす\r\nサムライがいるならば
+CharacterOff
+	勇者A							チェストでごわすな
+CharacterOff
+	サムライ住民1							うむ、チェストじゃ
+CharacterOff
+	白櫃	悲しい						なんですか、チェストって!?
+Shake	白櫃		x=3				NoWait
+	白櫃	悲しい						わけがわからないですよぉ！\nみんな天才みたいですぅ！
+CharacterOff
+	小怺	怒り						マスター君！ こっちこっち！
+CharacterOff
+	丑王アコ	本気2						世界平和の危機です！\r\nはやく解決しないと……！
+Se	走る
+CharacterOff
+	ディーア	驚き2				1		こ、これは……！
+CharacterOff
+	ナナビ	本気						んっ、ご主人\r\nみんな、おかしなサムライになってる
+StopBgm
+	ナナビ	本気						ここは真のサムライの出番\r\n今すぐ、この異変を<dash=2>
+CharacterOff
+	ディーア	絶望2						おっ……！
+CharacterOff
+	ナナビ	本気						お？
+Bgm	緊迫
+CharacterOff
+	集中線		エフェクト表
+	ディーア	絶望2						おなごと手をつなぐなど！\r\n恥ずかしい！
+CharacterOff
+	ナナビ	驚き						……え？
+CharacterOff
+	小怺	驚き						えぇええええ!?
+CharacterOff
+	白櫃	驚き						あ、あのマスターさんが？
+CharacterOff
+	サムライ住民1							おおっ！\r\nサムライの心は健在なり！
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	サムライ住民1							だが、\r\nこんなにおなごに囲まれるなど\r\nうらやま……けしからん！
+CharacterOff	サムライ住民1
+	サムライ住民2							これはチェストじゃ
+Se	和太鼓
+Se	闇1
+FadeOut	white					.3
+CharacterOff						0
+	カタナ型冥獣？					0
+FadeIn	white					.3
+	カタナ型冥獣？							チェスト魔剣使い!!
+CharacterOff
+	小怺	驚き						冥獣……のようなもの!?
+CharacterOff
+	丑王アコ	本気2						あの人たちの\n思念が形になったみたい
+	丑王アコ	本気2						マスターさん！\r\nなんとかしないと！
+StopBgm
+CharacterOff
+	ディーア	絶望2						けど女の子を握りながら戦うなんて\nサムライの風上にも<dash=2>
+StopBgm
+	ナナビ	本気						ご主人
+Bgm	和の国バトル
+	ディーア	驚き2						ナナ、ビースト？
+CharacterOff
+	ナナビ	本気						ちゃんと見て、\nただ暴れるのはサムライじゃない
+	ナナビ	本気						サムライの姿？ これが……
+	ナナビ	本気						ううん、生き恥
+	ナナビ	本気						元に戻してあげないと
+	ナナビ	本気						だから、戦ってご主人
+CharacterOff
+	ディーア	驚き2						っ……！ ああ！
+	ディーア	本気2						そうだ、\n恥よりも大事なものがある！\nサムライとしてオレもっ！
+	集中線		エフェクト表
+	ディーア	本気2						チェストぉおおおおお!!
+CharacterOff
+	白櫃							そ、そこは\n変わらないんですね……！
+If	isdebug==true
+CharacterOff
+Jump	*E_1125_04
+EndIf
+EndScenario
+
+# E_1125_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	和風市街（昼）					0
+	カタナ型冥獣？					0
+FadeIn	black					.5
+	カタナ型冥獣？							見事な、チェストなり……！
+CharacterOff	カタナ型冥獣？					1
+Wait						1
+CharacterOff
+	丑王アコ	通常2						ふぅ、乗り切りましたね\r\nマスターさん
+CharacterOff
+	白櫃	悲しい						でも街はおかしいままですし、\nなんであの人たちの思いが\n冥獣の形に？
+CharacterOff
+	小怺	通常						それに、\r\nしょこらさん達への魔力の通り方も\r\nいつもより良いような？
+CharacterOff
+	ナナツサヤ	通常2						ナナも体が軽かったよ！
+CharacterOff
+	小怺	通常						もしかして魔力自体が、\nしょこらさん達、\n和風な魔剣に適合してるのかも？
+	小怺	通常						その分、街の人には悪影響して\n自分がサムライだと思いこんでいたり\nとか言ってみたり！
+CharacterOff
+	白櫃	悲しい						それにしては、\r\nみなさん、サムライのイメージが\r\n違うみたいですけど……
+CharacterOff
+	小怺	通常						そこはほらっ！\n物語の中だと色々なサムライがいるし\nその解釈の違いとか！
+CharacterOff
+	丑王アコ	悲しい2						な、なんだか\nすごくふわふわしてるね……
+CharacterOff
+	ナナビ	本気						なんにしても、\nこのままじゃ、ダメ
+	ナナビ	本気						だってご主人が<dash=2>
+CharacterOff
+	ディーア	絶望2						心頭滅却、心頭滅却……！\r\n女の子のやわらかい感触は忘れろ!!
+CharacterOff
+	ナナビ	本気						ずっとご主人は、変なまま
+	ナナビ	本気						ばれんたいんも続けられない
+StopBgm
+CharacterOff
+	？？？？	<Off>						いや、\r\nそのほうが良いではないか
+CharacterOff
+	ナナビ	本気						っ……！ だれ!?
+Bgm	緊迫
+Se	闇1
+CharacterOff
+	サムライ冥獣					1		迎えに来たぞ、\r\nナナツサヤ=ビースト
+	サムライ冥獣							さあ、\r\n我らが望むサムライの世を再び!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1125_05
+EndIf
+EndScenario
+
+# E_1125_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	神社（昼）					0
+Param	character_grayout=false
+	サムライ冥獣					0
+FadeIn	black					.5
+	サムライ冥獣							ここなら良いだろう、\n静かに話ができるはずだ
+CharacterOff
+	白櫃	驚き						また冥獣の姿なんですね
+CharacterOff
+	サムライ冥獣							この時代において\nもっともサムライとしての力を\n発揮できる姿というだけだ
+	サムライ冥獣							とうに本来の姿形など\n朽ち果ててしまっているからな
+	サムライ冥獣							だが、そなたのおかげで\n拙者は意志を取り戻すことができた
+CharacterOff
+	ナナビ	驚き						……お前、\r\nナナのことを知ってるの？
+CharacterOff
+	サムライ冥獣							なにを言っているのだ
+	サムライ冥獣							拙者こそ\nそなたによって目覚めた記憶
+	サムライ冥獣							魔界をあるべき姿に正すべく、\n遣わされた獣こそがそなただ!!
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	日の出					0
+	          
+FadeIn	white					.3
+	サムライ冥獣	<Off>						かつては素晴らしき世だった
+	サムライ冥獣	<Off>						確固たる柱を心に持ち\n力こそを真として生きた武士たち
+	サムライ冥獣	<Off>						それがどうだ、\n本来の武士の姿など忘れさられ\n堕落した文化に耽る世界になった
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	神社（昼）					0
+	サムライ冥獣					0
+FadeIn	white					.3
+	サムライ冥獣							だからこそ拙者は、\r\n人々の心のサムライを呼び起こした
+	サムライ冥獣							そうすれば\n歴史の影に潜んだサムライたちも\n再び表に現れるだろう!!
+CharacterOff
+	ナナビ	本気						…………
+CharacterOff
+	丑王アコ	本気2						つまり、\nあなたがこの異変の元凶ですね？
+CharacterOff
+	小怺	通常						だったら、\nこの冥獣を倒したら魔界は元に♪
+CharacterOff
+	サムライ冥獣							ふっ、もう遅い\nすでに魔界はサムライの世となった
+	サムライ冥獣							ほら、そなたらの主も
+CharacterOff
+	ディーア	絶望2						働きたくないでござる！\nもう働きたくないでござる！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						武士は食わねど高楊枝!!
+CharacterOff
+	ナナツサヤ	通常2						えぇええ！\nご主人どうしたのぉ!?
+CharacterOff
+	サムライ冥獣							よほど日々に疲れていたのか……
+	サムライ冥獣							ま、まあ戦えねばそれでよい！
+	サムライ冥獣							どうだ！\nもはや魔界全土がこうなっている
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	戦場跡					0
+	          
+FadeIn	white					.3
+	サムライ冥獣	<Off>						今に魔剣機関は魔剣幕府となり！
+	サムライ冥獣	<Off>						魔剣は全て魔刀となる！
+FadeOut	white					.3
+CharacterOff						0
+Bg	市街地B					0
+	          
+FadeIn	white					.3
+	サムライ冥獣	<Off>						そしてユグドラシルさえも、\nいずれカタナの形になるだろうっ！
+FadeOut	white					.3
+CharacterOff						0
+Bg	神社（昼）					0
+	ナナツサヤ					0
+FadeIn	white					.3
+	ナナツサヤ							そんな魔界、変だよぉ!!
+CharacterOff
+	サムライ冥獣							だがそれこそ、\nナナツサヤ=ビーストが望む世界
+	サムライ冥獣							欲しいだろう！\nサムライとその刀として\n主と一身になる世界が！
+	サムライ冥獣							狗王という護国の役割を捨て\n主に身を捧げたそなたならば、\n素晴らしさがわかるはずだ！
+	サムライ冥獣							さあナナツサヤ=ビースト、\nもっと魔界をサムライに<dash=2>
+StopBgm
+CharacterOff
+	ナナビ	本気						ご主人……
+	ナナビ	本気						ちょっと体、借りるね？
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	剣閃
+Se	光3
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	神社（昼）					0
+CharacterOff						0
+	サムライ冥獣
+ImageEffectOff	SpriteCamera	MotionBlur
+Shake	サムライ冥獣		x=3				NoWait
+	サムライ冥獣							ぐあああああああ!?
+	サムライ冥獣							な、なにを!?
+Bgm	和の国バトル
+CharacterOff
+	ナナビ	本気						話が長いし、\nごちゃごちゃうるさい
+	ナナビ	本気						お前、\nナナのご主人に手を出したでしょ？
+	ナナビ	本気						ぐるるぅ……！
+	ナナビ	本気						そんなのゆるせない、\nぜったいに、ダメ……！
+	ナナビ	本気						ナナはご主人だけのサムライ、\nご主人を傷つけるやつ、誰でも倒す
+	ナナビ	本気						それが、\r\nたった一つのナナの仕事
+CharacterOff
+	サムライ冥獣							ま、待て！\nサムライの世に戻すのは\nそなたの役目！
+	サムライ冥獣							それにいいのか!?
+	サムライ冥獣							そなたはいまのままでは\n主と結ばれないぞ！
+	サムライ冥獣							他の魔剣達も主を狙い、\n傍らに控えるサムライでは\n遅れを取るばかり！
+	サムライ冥獣							だがサムライだけの世になれば、\nそなたにも機会が<dash=2>
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	剣閃
+Se	光3
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	神社（昼）					0
+CharacterOff						0
+	サムライ冥獣
+ImageEffectOff	SpriteCamera	MotionBlur
+Shake	サムライ冥獣		x=3				NoWait
+	サムライ冥獣							ぐあああああ！
+CharacterOff
+	ナナビ	本気						それが？
+	ナナビ	ドヤ						ナナは勉強した
+	ナナビ	ドヤ						ばれんたいんも、サムライも同じ
+	ナナビ	本気						友チョコも義理チョコも\n儀式でもなんでもあり
+	ナナビ	本気						サムライもチェストとか\nちょんまげとか、いろいろ
+	ナナビ	本気						元がどんな意味でも関係ない\nみんな変わってきたの
+	ナナビ	本気						みんな、\r\n自分のやりたいことを、やる\r\nそれがいちばん
+	ナナビ	嬉しい						だからナナも、\nご主人を守り抜いて\nたくさんごほーびをもらう
+	ナナビ	嬉しい						それがナナのサムライ
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ナナビ	本気						だからお前のサムライを\n押し付けるなら……斬るっ！
+	ナナビ	本気						アォオオオオオオ!!
+Se	連撃
+FadeOut	white					.3
+FadeIn	white					.3
+	サムライ冥獣							ぐはああああ!?
+Param	character_grayout=true
+CharacterOff
+	ナナビ	本気	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						はっ……!?\nお、オレはいったい？
+	ナナビ	嬉しい						んっ、よかった\nご主人が元にもどって
+	ナナビ	嬉しい						あとはお願いするね？
+	ディーア	汗2						な、なんだか\nよくわからないけど……！
+	ディーア	本気2						サムライだって\nバレンタインを楽しんでいいだろ！
+	ディーア	絶望2						いや、\nオレはチョコが貰えないなんて\nいやだっ！
+	ディーア	本気2						だから\n魔界をもとに戻してもらう!!
+	ディーア	本気2						いくぞ、みんな!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1125_06
+EndIf
+EndScenario
+
+# E_1125_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	市街地A					0
+Param	character_grayout=false
+	          
+FadeIn	black					.5
+	          							　　　　　　　<color=blue>数日後</color>
+CharacterOff
+	市場のおばちゃん							バレンタイン！\r\nバレンタインの準備はできてるかい!?
+	市場のおばちゃん							でも甘いものばかり\n食べたらダメだよっ！
+	市場のおばちゃん							塩っ気のあるシャケを\nご飯に食べな！
+CharacterOff
+	勇者A							なんか、\n今年は抹茶のチョコが食べたく\nなってきたんだよな
+CharacterOff
+	勇者B							ああ、\r\nそれに、なんだっけ……
+Tween	勇者B	PunchPosition	y=30				NoWait
+	勇者B							そうそう、チェストだ！
+	勇者B							余計なことを考えずに\n覚悟を決めろって呪文らしい
+CharacterOff
+	勇者A							告白のときに勇気を貰える\n良い呪文だよな！
+CharacterOff
+	サムライ住民1							この髪型も、\n慣れれば逆にオシャレじゃないか？
+CharacterOff
+	サムライ住民2							今度、\n和風のバレンタイン祭をやるらしいし\nこの格好で行こう！
+FadeOut	black					.3
+CharacterOff						0
+	ナナビ	通常	2_2			0
+	ディーア	通常2	1_2			0
+Param	character_grayout=true
+FadeIn	black					.3
+	ディーア	通常2						一時はどうなるかと思ったが、\nなんとかなりそうだな
+	ディーア	汗2						あの異変の影響が残って \n魔界はふわふわしたままだし、\n冥獣もどきはまだ出ているけど
+	ディーア	笑い2						バレンタインと和風文化か、\r\nうまく混ざりあえば、\r\n楽しい行事になりそうだ
+	ディーア	汗2						残った冥獣もどきのことは\n和の伝承をもつ\n魔剣のみんなと後始末に行こう
+	ナナビ	嬉しい						うん、ナナもがんばる
+	ディーア	通常2						頼りにしてるよ
+	ディーア	怪しい2						でも、\nあの敵が言っていたっていう\n内容は気になるな……
+	ディーア	怪しい2						世界を変質させる……\nそれがビースト魔剣の役目？
+	ディーア	怪しい2						そう言えば、今までも<dash=2>
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A					0
+	集中線		エフェクト表			0
+	キノコリオン	大				0
+FadeIn	white					.3
+	集中線		エフェクト表
+	キノコリオン	大						<size=40>パーティー\nノコ～～～～～～!!</size>
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	海岸					0
+	ダイビ	泣き	2_3			0
+FadeIn	white					.3
+	だー	<Off>						海の底きれい……
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	通常2				0
+FadeIn	white					.3
+	ディーア	通常2						いい機会だろ？\n読めない本を持ってても仕方ないし\n他の人に譲ろうと思ってさ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A					0
+	ナナビ	通常	2_2			0
+	ディーア	怪しい2	1_2			0
+Param	character_grayout=true
+FadeIn	white					.3
+	ディーア	怪しい2						いきなり話をしだした魔物に、\n浮くんじゃなくて沈む海、\nあの読めない魔導書も<dash=2>
+	ディーア	汗2						まさかな
+	ナナビ	通常						ご主人、どうしたの？
+	ディーア	通常2						……いや、なんでもない
+	ディーア	笑い2						それよりも\r\nナナ=ビーストのお手柄だったな\r\n今回の事件が解決したのは
+	ナナビ	嬉しい						勝手に、\r\nご主人の体を借りちゃったけど
+	ディーア	笑い2						仕方ないさ\n前にもそんなことはあったし
+	ディーア	笑い2						それで\n今回のご褒美はなにがいい？
+	ナナビ	嬉しい						うーん……今はいい
+	ディーア	驚き2						え？
+	ナナビ	ドヤ						サムライはごおんとほーこー\nごほーびは大事
+	ナナビ	嬉しい						だから、ばれんたいんに\nまとめてごほーびがほしい♪
+	ディーア	笑い2						なるほどっ！
+	ナナビ	嬉しい						ナナね、\nやっとナナらしいプレゼントを\n決められたの
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト表
+	ナナビ	拡大嬉しい	エフェクト裏					ご主人を\nたくさんよろこばせるから
+	ナナビ	拡大嬉しい						サムライのナナに\nご主人の大好きもちょうだいね♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1125_07
+EndIf
+EndScenario
+
+# E_1125_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	酒場1F					0
+Param	character_grayout=false
+	ナナビ	お面				1
+FadeIn	black					.5
+	ナナビ	お面						ご主人、お待たせ
+Tween	ナナビ	PunchPosition	y=30				NoWait
+	ナナビ	お面						うん……\nはっぴーばれんたいん♪
+	ナナビ	お面						え、この格好？
+	ナナビ	お面						街でお祭をやってたから\n狗王のナナと一緒に遊んできたの
+	ナナビ	お面						チョコバナナとか\nおいしかった
+	ナナビ	通常						でも、ナナはサムライだから\nここからはご主人とずっと一緒
+	ナナビ	嬉しい						それで……\nご主人にチョコをあげるね
+	ナナビ	ドヤ						ナナ、考えたの\nたーくさん、考えた
+	ナナビ	ドヤ						サムライのナナは\nご主人といつでも一緒
+	ナナビ	ドヤ						だから、\n一緒にいられるナナのチョコが\nナナらしいチョコ
+	集中線		エフェクト表
+	ナナビ	嬉しい						そう……\nナナの等身大チョコ……！
+CharacterOff	集中線
+	ナナビ	ドヤ						作る時、\n熱くしすぎてヤケドしちゃったから
+	ナナビ	ドヤ						ご主人にも\nおくすりぬりぬりしてほしい
+	ナナビ	嬉しい						でも、ほら\nナナの形になってるよね？
+	ナナビ	嬉しい						これを食べたら、\nご主人はずっとナナと一緒♪
+CharacterOff
+	ナナビ	拡大嬉しい	エフェクト表					だからご主人、\nナナのチョコ、食べてね？
+If	isdebug==true
+CharacterOff
+Jump	*E_1125_01
+EndIf
+EndScenario

@@ -1,0 +1,420 @@
+# E_1099_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	大灯台					0
+Param	character_grayout=false
+	          
+FadeIn	white					.5
+Se	アラート	TRUE
+	          							<color=red>緊急警報、緊急警報!!</color>
+	          							<color=red>魔剣機関および世界図書館より\n全魔剣使いに通達!!</color>
+	          							<color=red>特殊魔導災害八二号の発生が\n確認された！</color>
+	          							<color=red>現在、勢力を強めながら\n魔界全土に進撃中とみられる！</color>
+	          							<color=red>これは魔界存亡の危機である\nただちに鎮圧にあたるべし！</color>
+	          							<color=red>繰り返す、\nこれは魔界の危機である!!</color>
+	          							<color=red>ただちに\n奴らを食い止めるのだ!!</color>
+StopSe
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A					0
+	ディーア	悔しい2				0
+Wait						2
+FadeIn	black					.3
+Bgm	バトル
+	ディーア	悔しい2						はぁ、はぁ……！\nここが異変の現場か……！
+	ディーア	怒り2						魔剣機関と世界図書館の連名\nそれにあの切迫した文面……！
+	ディーア	悔しい2						魔導災害八二号……\nいったい、ここでなにが……？
+Param	character_grayout=true
+CharacterOff
+	魔劍グラム=オルタ	慌て2
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	慌て2						あっ、マスターさん！\nあっちに街のみなさんが！
+Param	character_grayout=false
+CharacterOff
+	黒グラデーション		エフェクト裏
+	旅人
+Shake	旅人		x=5				NoWait
+	旅人							ぐぅ……\nなんで、なんでこんなことに……！
+CharacterOff	旅人
+	研究員							救いは……\n俺たちに救いはないのか……！
+CharacterOff	研究員
+	勇者D	通常						もう、一歩も動けない……
+Param	character_grayout=true
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						ひどい……！\nケガはないみたいですけど\nみんな動けなくなってます
+CharacterOff
+	ディーア	悔しい2						ここまで心を折るなんて、\nいったい誰がこんなことを……！
+CharacterOff
+	勇者D	通常	p7
+	ディーア	怒り2	画面外_左
+Tween	ディーア	MoveBy	x=550 time=1				NoWait
+	ディーア	怒り2						おい、そこの勇者！\n俺たちも異変を解決しに来たんだ！\n原因の魔物はどこに……！
+Tween	勇者D	PunchPosition	y=30				NoWait
+	勇者D	通常						だめ、近づかないで……！\nそれ以上近づかれたら、私、私……！
+	ディーア	怒り2						かわいそうに、\nこんなに怯えて……
+	ディーア	怒り2						頼む、教えてくれ\n君をこんなにした敵は\nどこにいるんだ？
+Shake	勇者D		x=5				NoWait
+	勇者D	通常						あ、あいつは……！\nあいつらは……
+Tween	勇者D	PunchPosition	y=50				NoWait
+	勇者D	通常						ひぃっ……！\nあ、あなたたちの後ろに!?
+	ディーア	驚き2						え……？
+Param	character_grayout=false
+StopBgm
+CharacterOff
+Se	シャキーン
+	黒グラデーション		エフェクト裏
+	シタギノコリオン	拡大	エフェクト表					ノコっ……！
+CharacterOff
+	シタギノコリオン		画面外_左
+	魔劍グラム=オルタ	悲しい2
+ImageEffect	SpriteCamera	MotionBlur
+Tween	シタギノコリオン	MoveBy	x=600 time=1.5				NoWait
+	シタギノコリオン							ノコーっ!!!!
+Se	ザシュ
+FadeOut	white					.1
+	魔劍グラム=オルタ	慌て2
+FadeIn	white					.1
+Tween	シタギノコリオン	MoveBy	x=800 time=1				NoWait
+Wait						.8
+	魔劍グラム=オルタ	慌て2						ひぃいいいん……！
+Bgm	魔獣バトル
+CharacterOff
+	ディーア	驚き2						オルタ……!?
+	ディーア	悔しい2						い、今のはキノコリオンなのか？\nとんでもない速さだった……
+	ディーア	驚き2						っ、それよりも……！
+	ディーア	本気2						大丈夫か!?\n今すぐオレもそっちに<dash=2>
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	魔劍グラム=オルタ	慌て2						こ、こっちに来たらダメです！\nマスターさん……！
+CharacterOff
+	ディーア	驚き2						え、でも……！
+CharacterOff
+	魔劍グラム=オルタ	悲しい2
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	悲しい2						こ、こんなの\nマスターさんに見られたら\nもうお外を歩けませんよぉ……！
+CharacterOff
+	ディーア	悔しい2						オルタがこんなになるなんて\nいったいなにが……
+CharacterOff
+	魔劍グラム=オルタ	慌て2
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	慌て2						あっ……！\nマスターさんの後ろにも!!
+Param	character_grayout=false
+CharacterOff
+	ディーア	悔しい2
+	シタギノコリオン		画面外_左
+ImageEffect	SpriteCamera	MotionBlur
+Se	ピューン
+Se	光1
+Tween	シタギノコリオン	MoveBy	x=1400 time=2				NoWait
+	シタギノコリオン							ノコーっ！
+ImageEffectOff	SpriteCamera	MotionBlur
+	ディーア	悔しい2						っ……!?\nオレにいったいなに<dash=2>
+StopBgm
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						こ、これは……
+Se	回想
+FadeOut	white					2
+CharacterOff						0
+	トライアルスチル46402		エフェクト表			0
+FadeIn	white					1
+Bgm	神秘
+	ディーア	<Off>						なにか、なにかとても大事なものが\nオレの中から抜き取られた
+	ディーア	<Off>						この魂まで無防備にされたような\nイノセントな感触
+	ディーア	<Off>						自分のすべてを世界に晒されている\nいけない開放感……！
+	ディーア	<Off>						そう、オレは確かに\nこの正体を知っている……
+StopBgm
+FadeOut	white					1
+CharacterOff						0
+Bg	市街地A					0
+	ディーア	悔しい2				0
+FadeIn	white					1
+	ディーア	悔しい2						まさか……！
+Bgm	緊迫
+CharacterOff
+	ディーア	拡大絶望2	エフェクト表					パンツがとられた!?
+CharacterOff
+Bgm	コメディ
+	ディーア	驚き2						ということは、オルタも!?
+Param	character_grayout=true
+CharacterOff
+	魔劍グラム=オルタ	悲しい2
+Shake	魔劍グラム=オルタ		x=5				NoWait
+	魔劍グラム=オルタ	悲しい2						マスターさん！\n言わないでくださいぃ……！
+CharacterOff
+	ディーア	悔しい2						じゃあ\n街の人や女勇者も……
+CharacterOff
+	勇者D	通常						そうよ、\n奴らは突然街に溢れ出して\nすべてのパンツを奪っていったの
+Param	character_grayout=false
+CharacterOff
+	シタギノコリオン		画面外_左
+	ディーア	悔しい2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	悔しい2						そういうことか、\nパンツを奪うなんて許せない！
+	ディーア	本気2						だけどオレは男だ！\nパンツの一枚やニ枚奪われたくらい\n<dash=2>
+ImageEffect	SpriteCamera	MotionBlur
+Tween	シタギノコリオン	MoveBy	x=600 time=0.5				NoWait
+	シタギノコリオン							ノコノコ♪\n（パンツ以外ももらっちゃうノコ♪）
+Se	光1
+FadeOut	white					.2
+	ディーア	絶望裸2				0
+Se	ピューン
+Tween	シタギノコリオン	MoveBy	x=900 time=2				NoWait
+FadeIn	white					.2
+ImageEffectOff	SpriteCamera	MotionBlur
+	ディーア	絶望裸2						なんでだよ!?
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						マスターさん……！\nこのまま戦うなんてむりですぅ！
+CharacterOff
+	ディーア	悔しい裸2						くっ、ここは撤退だ！\n一旦、酒場まで退くぞ！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	怪しい裸2				0
+FadeIn	black					.3
+Bgm	作戦会議
+	ディーア	怪しい裸2						どうやら魔界の全土で\nキノコリオンによるパンツ強奪が\n行われているみたいだな
+	ディーア	悔しい裸2						こんな異常事態、\nいったいどうすれば……
+CharacterOff
+	魔劍グラム=オルタ	慌て2
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	慌て2						マスターさん……！\n魔剣機関から連絡が来ましたぁ……！
+	魔劍グラム=オルタ	悲しい2						うぅ……\n動くとスースーするよぉ……
+CharacterOff
+	ディーア	驚き裸2						あのキノコリオンの情報か！\nえーっと<dash=2>
+	ディーア	怪しい裸2						超古代遺物オーパンツと接触した\nキノコリオンが\n暴走シタギノコリオンに変化
+Tween	ディーア	PunchPosition	y=10				NoWait
+	ディーア	驚き裸2						服の上からでも\nパンツを抜き取ることが可能で\n防御は事実上不可能、だと……！
+	ディーア	悔しい裸2						くっ……！\nなんて力だ……!!
+	ディーア	悔しい裸2						オレの魔剣たちも\nみんなパンツを奪われたし……
+CharacterOff
+	ブライド
+	ブライド	姉						そうそう！\nびゅーんって奪われちゃったの！
+	ブライド	妹悲しい						おねえちゃぁぁん！\nお尻をそっちに向けないでぇ!!\nはいてないからぁ！
+CharacterOff
+	ルーンロッド	通常						私のくまさんも……！
+CharacterOff
+	バールのようなもの	通常2						隠してた\nばよののコレクションも……！
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						ふぃぃん……！\nこれじゃあ力が出せないですよぉ……
+CharacterOff
+	ディーア	悔しい裸2						みんなパンツを奪われて、\n力が出せなくなっている……！
+	ディーア	悔しい裸2						いや、魔剣だけじゃない
+	ディーア	本気裸2						パンツは\nみんなが備える最後の防御……！
+	ディーア	本気裸2						それが無くなるということは、\n心の支えが消えるのと同じ……！
+	ディーア	悔しい裸2						堂々と立つことも\n力を込めることもできなくなる！
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						そ、そうなるといったいなにが……？
+CharacterOff
+	ディーア	目閉じ裸2						決まってる\n生産、製造、物流からサービスまで\nあらゆる社会活動が停止するだろう
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	戦場跡					0
+	          					0
+FadeIn	white					.3
+	ディーア	<Off>						必然的に\n新たなパンツも作られなくなり\n魔界全体のモラルも崩壊……！
+	ディーア	<Off>						誰もがノーパンツで過ごす\nディスパンツトピアが生まれるんだ
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	悔しい裸2				0
+FadeIn	white					.3
+	ディーア	悔しい裸2						魔王戦争による荒廃どころじゃない\nこのままだと<dash=2>
+StopBgm						0
+CharacterOff						0
+Bg	黒背景					0
+	ディーア	<Off>						魔界が崩壊するぞ
+FadeOut	black					2
+CharacterOff						0
+Bg	研究所A					0
+	          					0
+Wait						0
+Param	character_grayout=true
+FadeIn	black					1
+								<color=blue>ロルリアンレット世界図書館</color>
+Bgm	図書館
+	司書王ロルリアンレット	通常HM						ようやく集まったわね\n魔剣使いたち……
+	司書王ロルリアンレット	悔しいHM						知っての通り、\n今の魔界は未曾有の混乱の\n最中にあるわ
+	司書王ロルリアンレット	悔しいHM						暴走シタギノコリオンの侵攻は\n留まるところを知らない
+	司書王ロルリアンレット	悔しいHM						このままでは一両日中に\n魔界からパンツが消え去るでしょう
+	魔剣使い	<Off>	1_2					パンツを無くしたら\nこれからどう生きたらいいんだ……！
+	司書王ロルリアンレット	ドヤHM						私も同じ気持ちよ\nだからこそあなた達を招集したの\n今回は協力を惜しまないわ
+	司書王ロルリアンレット	ニヤHM						いい？\n一枚たりともキノコたちに\nパンツを残さないで！
+	司書王ロルリアンレット	悪い顔HM						ただちに\n暴走シタギノコリオンを殲滅\nそしてパンツを奪還するのよ！
+Param	character_grayout=false
+	集中線		エフェクト表
+	司書王ロルリアンレット	悪い顔HM						司書王の名のもとに\nパンツ解放戦線の結成を宣言するわ！
+Param	character_grayout=true
+	魔剣使いたち	<Off>	1_2					<size=45>うぉおおおおお!!</size>
+CharacterOff
+	ディーア	驚き裸2						ロール様、なんて気迫だ……！\nけど<dash=2>
+	ディーア	怪しい裸2						…………ロール様、\n一つだけ質問があります
+CharacterOff
+	司書王ロルリアンレット	悔しいHM						なにかしら、魔剣使い
+CharacterOff
+	ディーア	悔しい裸2						これは世界図書館と連携するために\n必要不可欠な内容です\n偽ることなく正直に答えてください
+CharacterOff
+	司書王ロルリアンレット	ニヤHM						いいわ、\n質問を許可しましょう
+CharacterOff
+	ディーア	通常裸2						ありがとうございます、\nロールお嬢様
+	ディーア	怪しい裸2						さきほど貴女は\nシタギノコリオンの殲滅だけじゃなく\nパンツの『奪還』と言いました
+CharacterOff
+	司書王ロルリアンレット	悔しいHM						ええ、そうよ
+CharacterOff
+	ディーア	目閉じ裸2						つまりロール様も……
+StopBgm
+	ディーア	拡大怪しい裸2	エフェクト表					パンツ、奪われたんですね……？
+Bgm	コメディ
+CharacterOff
+	司書王ロルリアンレット	照れHM						っ……！
+CharacterOff
+	ディーア	怪しい裸2						いま、はいてないんですね？
+	魔剣使いたち	<Off>	1_2					うぉおおおおお!?
+CharacterOff
+	司書王ロルリアンレット	慌てHM						だ、だまりなさい……！\nその質問になんの意味が……！
+CharacterOff
+	ディーア	本気裸2						魔界存亡をかけた戦いです！\n手を結ぶ相手が\n本気かどうか俺たちは確かめたい！
+	ディーア	本気裸2						なにより\n魔剣使い全員の士気に関わります！
+	ディーア	悔しい裸2						そうだろう、みんなっ！
+	魔剣使い	<Off>	1_2					そうだそうだ！
+	魔剣使い	<Off>	1_2					それがわからないと戦いにならない！
+CharacterOff
+	司書王ロルリアンレット	照れHM						くっ……うぅ……！
+CharacterOff
+	ディーア	本気裸2						ロール様、さあ……！
+CharacterOff
+	司書王ロルリアンレット	泣きHM						<size=20>っ、はいて、ないわよ……</size>
+CharacterOff
+	ディーア	本気裸2						聞こえません！\nもっと大きな声で……！
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	司書王ロルリアンレット	泣きHM
+	司書王ロルリアンレット	泣きHM						<size=45>だから、\nはいてないわよ……！</size>
+Bgm	クエスト勝利_BGM
+CharacterOff
+	ディーア	拡大本気裸2	エフェクト表					聞いたかみんな！\nぜったいにロール様のパンツを\n奪い返すぞ！
+	魔剣使いたち	<Off>	1_2					<size=40>おぉおおおおおおお！！！！</size>
+StopBgm
+CharacterOff
+	司書王ロルリアンレット	慌てHM						あぁあああ！\nあとで覚えていなさい、魔剣使い！
+Bgm	作戦会議
+	司書王ロルリアンレット	照れHM						そこまで言うからには\nなにか策があるんでしょうね!?
+CharacterOff
+	ディーア	通常裸2						もちろんですよ\n魔剣機関の必死の研究によって\n奴らの生態がわかってきたんです
+CharacterOff
+	司書王ロルリアンレット	悔しいHM						生態？
+CharacterOff
+	魔剣機関の人							それは私から説明します
+	魔剣機関の人							超古代遺物オーパンツと接触した\nキノコリオンはシタギノコリオンへと\n変貌を遂げますが
+	魔剣機関の人							それと同時にパンツへの\n強い正の走性を獲得するのです
+CharacterOff
+	司書王ロルリアンレット	ドヤHM						つまり\nパンツに近づかずにはいられない\nということ？
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル10991		エフェクト表			0
+FadeIn	white					.3
+	魔剣機関の人	<Off>						はい、\nパンツがあるところにキノコも集まる\nパンツが飛べばキノコも飛ぶ
+	魔剣機関の人	<Off>						これは自然の摂理なのです
+	魔剣機関の人	<Off>						そしてこの習性はパンツの類似品、\nつまり逆三角形の物に対しても\n同様に働きます
+	魔剣機関の人	<Off>						さらにキノコリオンはキノコリオン\n集団行動を好むのは変わりません
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	通常裸2				0
+FadeIn	white					.3
+	ディーア	通常裸2						だからその習性を利用して、\n奴らを一箇所に集めれば……！
+CharacterOff
+	司書王ロルリアンレット	ドヤHM						なるほど\n一網打尽にすることが可能ね
+	司書王ロルリアンレット	悔しいHM						だけれど\nそんな都合のいい場所があるかしら？
+	司書王ロルリアンレット	悔しいHM						奴ら全員の注目を引くほど目立つ\n逆三角形があって
+	司書王ロルリアンレット	悔しいHM						その上でキノコリオンが\n密集している場所<dash=4>
+StopBgm
+Tween	司書王ロルリアンレット	PunchPosition	y=10				NoWait
+	司書王ロルリアンレット	通常HM						っ……なるほど
+Bgm	特殊バトル
+CharacterOff
+	ディーア	通常裸2						そうです、さすがはロール様
+	ディーア	通常裸2						今の時期だからこそ、\nこの二日間だからこそ\n作戦が可能なんです……！
+	ディーア	本気裸2						逆三角形をしていて\nウ＝ス異本を求めるキノコリオンが\n集結する……！
+FadeOut	black					.3
+CharacterOff						0
+	イベントスチル10992		エフェクト表			0
+FadeIn	black					.3
+	ディーア	<Off>						あの黒祭天司城なら……！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	荒野					0
+	シタギノコリオン		1_2			0
+Wait						2
+FadeIn	black					.3
+	シタギノコリオン							ノコノコっ！\n（もうすぐ黒祭天司城につくノコ！）
+	シタギノコリオンB		2_2					ノコノコー！\n（パンツを被って読むウ＝ス異本は\n　最高ノコ！）
+	ディーア	<Off>						ふっ、かかったな……！
+	シタギノコリオン							ノコノコ!?\n（なにやつノコ!?）
+Bgm	タイトル
+CharacterOff
+	ヱレキテリ	通常	1_3
+	ノラ	通常	3_3
+	ディーア	本気裸2	2_3
+	ディーア	本気裸2						お前たちは\nここでオレたちが食い止める！\n魔界を滅ぼさせたりしない！
+CharacterOff
+	シタギノコリオン		1_2
+	シタギノコリオンB		2_2
+	シタギノコリオン							ノコノコ♪\n（なんか言ってるノコ！）
+	シタギノコリオンB							ノコノー！\n（でもパンツとられたら\n　動けなくなるノコ！）
+Param	character_grayout=false
+CharacterOff
+	ヱレキテリ	通常	1_3
+	ノラ	通常	3_3
+	シタギノコリオン		画面外_左
+	シタギノコリオン							ノコノコノコー!!\n（くらえノコー!!）
+Se	ピューン
+Tween	シタギノコリオン	MoveBy	x=1400 time=2				NoWait
+Wait						1
+Param	character_grayout=true
+	ノラ	通常						あれ？\n今のエイム、ずれてない？
+	ヱレキテリ	通常						ふわぁ、\nそこを刺激されると漏洩しそうで……
+CharacterOff
+	シタギノコリオンB							の、ノコノコ……ノコ？\n（な、なんだと……ノコ？）
+CharacterOff
+	神兎カルバノグ	通常						ふっふっふ♪\nカルバたちにはキノコの攻撃なんて\n効かないですよう♪
+CharacterOff
+	バグイーター	通常						にひひ♪\n勝てるって妄想、しちゃってた？
+CharacterOff
+	ディーア	怪しい裸2						もうお前たちなんて怖くはない
+	ディーア	悔しい裸2						この魔剣たちは無垢の象徴……
+	ディーア	悔しい裸2						世界の強制力に負けることなく\n己を貫き続けた強者
+	ディーア	本気裸2						羞恥にくじけない心を持つ魔剣！
+	ディーア	本気裸2						つまり……！
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	煌刀ソハヤ	通常						ソハヤちゃんたちが\nサイキョーかわいいってこと♪
+CharacterOff
+	シタギノコリオン	拡大	エフェクト裏
+	集中線		エフェクト表
+	シタギノコリオン	拡大						ノコノコノーっ!?\n（パンツはいてないノコーっ!?）
+CharacterOff
+	ディーア	目閉じ裸2						さあ、行くぞシタギノコリオン\n二日でケリをつけてやる！
+CharacterOff
+	ディーア	拡大本気裸2	エフェクト表					『パンツ解放作戦』の開始だー！
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1099_01
+EndIf
+EndScenario

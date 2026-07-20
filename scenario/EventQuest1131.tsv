@@ -1,0 +1,300 @@
+# E_1131_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+Param	character_grayout=false
+	リディ	怒り2	画面外_右			0
+	          
+FadeIn	black					1
+Tween	リディ	MoveBy	x=-610 time=1				NoWait
+Wait						.5
+	リディ	怒り2						マスター、マスター！
+	ディーア	驚き裸2	画面外_左
+Tween	ディーア	MoveBy	x=610 time=1.5				NoWait
+Wait						.5
+	ディーア	驚き裸2						いったいどうしたんだ、リディ？
+Param	character_grayout=true
+	リディ	怒り2						その……\nリディの大切な物、落ちてなかった？
+	ディーア	あはは裸2						落とし物をするなんて、\nリディはそそっかしいなぁ♪
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						茶化さないでよぉ！\nほんとにほんとに大事な物なの！
+	ディーア	通常裸2						でも、探している物がわからないと\nオレも探しようがないぞ？
+	リディ	悔しい2						えーっと、\nでもすごく言い難いもので……
+	ディーア	通常裸2						それでも\nお前のマスターを信じて、\n教えてくれ！
+	リディ	悲しい2						……あのね？\nリディのパンツが無くなったの
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き裸2						な、なんだって!?
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						いきなり、\nお部屋から消えちゃったんだよ！
+	リディ	怒り2						マスターは\nリディのパンツ、見てないよね？
+	ディーア	驚き裸2						見てない見てない！
+Param	character_grayout=false
+CharacterOff
+	ディーア	拡大本気裸2	エフェクト裏
+	集中線		エフェクト表
+	ディーア	拡大本気裸2	エフェクト表					大人っぽくなりたいリディの\n攻めたピンクのパンツなんて\nオレは見てないぞ!!
+StopBgm
+CharacterOff
+	ディーア	本気裸2	1_2
+	リディ	絶望2	2_2
+	ディーア	本気裸2						オレの部屋にも\n置いていないからな！
+	リディ	絶望2						…………
+FadeOut	black					.2
+CharacterOff						0
+Bg	市街地A					0
+	ディーア	絶望裸2	2_2			0
+	勇者A	通常	1_2			0
+	非常線		エフェクト表			0
+FadeIn	black					.2
+Bgm	神秘
+	勇者A	通常						来い
+	ディーア	絶望裸2						はい……
+Tween	勇者A	MoveBy	x=-800 time=3				NoWait
+Tween	ディーア	MoveBy	x=-800 time=3				NoWait
+Wait						1
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	リディ	怒り2				0
+FadeIn	black					.3
+Bgm	平和
+	リディ	怒り2						もーっ！\nマスターったらほんとにエッチ!!
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						このままE.D.E.N.で\nたっぷり反省してくればいいんだよ！
+	リディ	怒り2						帰って来るまで時間かかると思うし\nそれまで、\nリディはたくさん甘いものを<dash=2>
+StopBgm
+Se	和太鼓
+CharacterOff
+	集中線		エフェクト表
+	ディーア	通常裸2						ただいまー！
+CharacterOff
+	リディ	絶望2						早すぎないっ!?
+Bgm	コメディ
+	リディ	絶望2						なんで!?\nマスター、捕まったでしょ!?
+CharacterOff
+	ディーア	きらーん裸2						ふふふふ♪\n今日のオレには頼もしい味方が\nいてくれるからな！
+CharacterOff
+	シャイ	拡大通常	エフェクト表					ごめんなさいごめんなさい！\n謝ることしかできない光る石ころが\n出しゃばってごめんなさい！
+Param	character_grayout=true
+CharacterOff
+	シャイ	通常	2_2
+	ディーア	通常裸2	1_2
+	ディーア	通常裸2						シャイが\n一緒に謝ってくれたおかげで\n執行猶予がもらえたんだ
+	シャイ	通常						本当は\nシャイが粗品として渡されないと\n効果ないんですけどぉ……
+	ディーア	通常裸2						話して分かったならそれが一番！\nこれで自由だな！
+CharacterOff
+	リディ	怒り2						執行猶予は自由じゃないって！
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						それに！\nマスターにはまだ罪があるでしょ！
+CharacterOff
+	シャイ	通常	2_2
+	ディーア	通常裸2	1_2
+	ディーア	怪しい裸2						いったい、なんのことだ？
+CharacterOff
+	リディ	怒り2						しらばっくれないで！\nここに証拠があるんだよ！
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル11312		エフェクト表			0
+FadeIn	white					.3
+	リディ	<Off>						パイちとシーちゃんと\nお医者さんごっこしてたでしょ!!
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	悔しい裸2	1_2			0
+	リディ	怒り2	2_2			0
+Param	character_grayout=true
+FadeIn	white					.3
+	リディ	怒り2						魔界では\nお医者さんごっこは違法なんだよ!!
+	ディーア	悔しい裸2						お医者さんごっこじゃなくて\nれっきとした治療だ!!
+	リディ	笑い2						すごーい♪\nいったいどんな治療したの？
+	ディーア	てへぺろ裸2						それはもう、\n色んなとこを触診してもらったり\n汗拭きしたり、ペロペロ<dash=2>
+StopBgm
+FadeOut	black					.2
+CharacterOff						0
+Bg	市街地A					0
+	リディ	絶望2				0
+FadeIn	black					.2
+Bgm	神秘
+	リディ	絶望2						勇者さん、こいつです
+Param	character_grayout=false
+CharacterOff
+	ディーア	絶望裸2	2_2
+	勇者A	通常	1_2
+	非常線		エフェクト表
+	勇者A	通常						来い
+	ディーア	絶望裸2						はい……
+Tween	勇者A	MoveBy	x=-800 time=2				NoWait
+Tween	ディーア	MoveBy	x=-800 time=2				NoWait
+Wait						1
+StopBgm
+FadeOut	black					.2
+CharacterOff						0
+Bg	酒場1F					0
+	リディ	怒り2				0
+FadeIn	black					.2
+Bgm	平和
+	リディ	怒り2						はぁ……\n二人にも後で注意しないと
+StopBgm
+Se	和太鼓
+CharacterOff
+	集中線		エフェクト表
+	ディーア	てへぺろ裸2						ただいまー！
+Bgm	コメディ
+CharacterOff
+	リディ	絶望2						だから早くない!?
+Param	character_grayout=true
+CharacterOff
+	シャイ	通常	2_2
+	ディーア	通常裸2	1_2
+	ディーア	通常裸2						シャイが\nすごい土下座してくれたからな！
+Tween	シャイ	PunchPosition	y=30				NoWait
+	シャイ	泣き						ごめんなさいごめんなさい！\nビッグバン土下座で星を創って\nごめんなさい!!
+CharacterOff
+	リディ	絶望2						どんな土下座か気になるけど\nその前に！
+	リディ	悔しい2						他にも罪があるでしょ！\nちゃんと反省するまで許さないよ！\nほら、これを見て!!
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル11313		エフェクト表			0
+FadeIn	white					.3
+	ディーア	<Off>						ミラ=ロストとの\n卒業式ごっこじゃないか？\nこれがどうした？
+	リディ	<Off>						こんなハレンチな\n卒業式があるわけ無いでしょ!?\nなにを卒業したの？
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	リディ	怒り2	2_2			0
+	ディーア	怪しい裸2	1_2			0
+Param	character_grayout=true
+FadeIn	white					.3
+	ディーア	怪しい裸2						へー、学校の卒業式以外に\n卒業するものがあるんだなー？
+	ディーア	怪しい裸2						オレは詳しくないから、\nリディが教えてくれないか？
+	リディ	悔しい2						うっ……！\nそれは、その……
+	ディーア	怪しい裸2						リディが言えないなら、\n罪にだって問えないだろう？
+	ディーア	きらーん裸2						二人っきりの教室で、\n禁断の卒業をしたりなんて<dash=2>
+	ディーア	絶望裸2						……はっ！
+Tween	リディ	MoveBy	x=-20				NoWait
+	リディ	絶望2						エッチなことしたんですね？
+Tween	リディ	MoveBy	x=-20				NoWait
+	リディ	絶望2						卒業式はお楽しみでしたか？
+StopBgm
+FadeOut	black					.2
+CharacterOff						0
+Bg	市街地A					0
+	勇者A	通常	1_2			0
+	ディーア	絶望裸2	2_2			0
+	非常線		エフェクト表			0
+Param	character_grayout=false
+FadeIn	black					.2
+Bgm	神秘
+	勇者A	通常						田舎のおっかさんが泣いてるぞ
+	ディーア	絶望裸2						はい……
+Tween	勇者A	MoveBy	x=-800 time=2				NoWait
+Tween	ディーア	MoveBy	x=-800 time=2				NoWait
+Wait						1
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	リディ	怒り2				0
+FadeIn	black					.3
+Bgm	コメディ
+	リディ	怒り2						今度こそマスターも反省<dash=2>
+Param	character_grayout=true
+CharacterOff
+	シャイ	通常	2_2
+	ディーア	通常裸2	1_2
+	ディーア	通常裸2						ただいまー！
+	シャイ	通常						ごめんなさいごめんなさい！\nシャイニング土下座のシャイで\nごめんなさい！
+CharacterOff
+	リディ	拡大絶望2	エフェクト表					やっぱりー!!
+CharacterOff
+	ディーア	あはは裸2						はははは！\nオレを訴える罪はないのかー！
+CharacterOff
+	リディ	怒り2						ここにあるよー！\n見なさいっ！
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル11314		エフェクト表			0
+FadeIn	white					.3
+	リディ	<Off>						ノーネームちゃんと\n一緒にお風呂入ったのも\n知ってるんだから！
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	リディ	怒り2	2_2			0
+	ディーア	怪しい裸2	1_2			0
+Param	character_grayout=true
+FadeIn	white					.3
+	ディーア	怪しい裸2						知らないのか、リディ？\n魔界では妹と風呂に入るのは\n合法なんだぞ？
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						そんなことないよ！\n勇者さん、ちゃんと<dash=2>
+CharacterOff
+	勇者A	通常						合法だ
+CharacterOff
+	リディ	拡大絶望2	エフェクト表					<size=40>嘘だ、そんなこと！</size>
+CharacterOff
+	勇者A	通常						兄妹仲が良いのは\n素晴らしいことだからな
+CharacterOff
+	リディ	怒り2	2_2
+	ディーア	通常裸2	1_2
+	リディ	怒り2						ダメでしょ!?\nどうなってるの魔界！
+	ディーア	通常裸2						ほら、勇者だって\n合法って言ってくれているぞ！
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						でもマスターにはもっともっと！\nたくさんの罪があるよ！
+StopBgm
+CharacterOff
+	シャイ	通常						あのぉ……！
+CharacterOff
+	リディ	驚き2						シャイちゃん……？
+Bgm	凱旋
+CharacterOff
+	シャイ	泣き						マスター様を\n許してあげてください……
+	シャイ	通常						マスター様は悪い人じゃないです\nシャイみたいな光る石でも\n家に置いてくれた魔剣使いさんです
+	シャイ	通常						こんな<ruby=シャイ>詫び石</ruby>で良ければ\nリディ様にお渡ししますから\nどうかマスター様を許して<dash=2>
+CharacterOff
+	ディーア	驚き裸2						いや、それはダメだ！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気裸2						お前はオレの大切な魔剣だ\n渡されるのが前提な詫び石でも\nオレの身代わりにしない！
+CharacterOff
+	シャイ	通常						マスター様……！
+CharacterOff
+	リディ	怒り2	2_2
+	ディーア	驚き裸2	1_2
+	リディ	通常2						はぁ……\nもう、マスターは仕方がないなぁ
+	リディ	通常2						リディだって\nマスターがただエッチな人だなんて\n思っていないよ
+	ディーア	驚き裸2						リディ……
+	リディ	笑い2						みんなの言うことを聞いてたら\nエッチになっただけなんだよね？
+	リディ	笑い2						リディのパンツのことも許してあげる\nどうせ拾っただけでしょ？
+	ディーア	通常裸2						そうなんだよ、たまたま落ちてて
+	ディーア	通常裸2						わかってくれて\nありがとう、リディ
+	リディ	笑い2						やっぱり！
+StopBgm
+	リディ	笑い2						マスターがずっと裸でいるのにも\n深い事情があるんだよね？
+Param	character_grayout=false
+Tween	ディーア	MoveBy	x=-100 time=5				NoWait
+	ディーア	絶望裸2						…………それは
+	リディ	絶望2						…………
+Bgm	タイトル
+FadeOut	black					.5
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル11311		エフェクト表			0
+FadeIn	black					.5
+Wait						3
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1131_01
+EndIf
+EndScenario

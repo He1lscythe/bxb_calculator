@@ -1,0 +1,3353 @@
+# Q2002_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔獣バトル
+Bg	市街地C(火事)					0
+Param	character_grayout=false
+	          
+Se	火1
+FadeIn	red					.3
+Wait						.3
+Se	火2
+	住民	<Off>						きゃああああっ！
+Se	血が垂れる
+	血痕A		エフェクト表
+	住民	<Off>						逃げろ！ 早く逃げろ!!
+Se	ぐちゃ
+	血痕B		エフェクト表2
+	住民	<Off>						たすけて、たすけ<dash=4>
+FadeOut	red					1
+CharacterOff						0						演出明けの背景
+Bg	市街地C(火事)					0
+Wait						1
+	地名背景		地名背景			0
+	地名ロゴ	ノイルマレヴ	地名ロゴ			0						地名ロゴ（大陸など）
+	左縦線		左縦線			0
+	左横線		左横線			0
+	右縦線		右縦線			0
+	右横線		右横線			0
+FadeIn	red					1
+CharacterOff	黒背景					1
+Wait						1
+Tween	左縦線	MoveBy	y=-800 time=1.5	easeOutQuart			NoWait
+Tween	左横線	MoveBy	x=-800 time=1.5	easeOutQuart			NoWait
+Tween	右縦線	MoveBy	y=800 time=1.5	easeOutQuart			NoWait
+Tween	右横線	MoveBy	x=800 time=1.5	easeOutQuart			NoWait
+Wait						1.3
+	場所ロゴ	スーヴァ大火山	場所ロゴ			1						大陸の下に表示される地名
+Wait						1
+	　　　　　　　　　　							　
+Tween	左縦線	MoveBy	y=-100 time=6				NoWait
+Tween	左横線	MoveBy	x=-100 time=6				NoWait
+Tween	右縦線	MoveBy	y=100 time=6				NoWait
+Tween	右横線	MoveBy	x=100 time=6				NoWait
+CharacterOff	地名ロゴ					.5
+CharacterOff	場所ロゴ					.5
+CharacterOff	左縦線					.3
+CharacterOff	左横線					.3
+CharacterOff	右縦線					.3
+CharacterOff	右横線					.3
+Wait						1.5
+CharacterOff	地名背景					1
+Wait						1.5
+CharacterOff
+	エキドナ兵	通常						この一帯は危険です！\n住民は早く逃げてください！
+Shake	エキドナ兵		x=1				NoWait
+	エキドナ兵	通常						くっ……！\n冥獣が次から次に現れるなんて！
+	エキドナ兵	通常						これも、\nスーヴァ大火山の活性化と\n関係があるのか？
+CharacterOff
+	旅人	通常
+Tween	旅人	MoveBy	x=100 time=0				Add
+Tween	旅人	RotateTo	y=180 time=0				Add
+	旅人	通常						へ、兵隊さん！\n後ろからまた冥獣が……！
+CharacterOff
+	グレイヴ型冥獣	通常	1_2					グォオオオオ!!
+CharacterOff
+	エキドナ兵	通常
+Tween	エキドナ兵	MoveBy	x=100 time=0				Add
+Tween	エキドナ兵	RotateTo	y=180 time=0				Add
+	エキドナ兵	通常						侵攻が早すぎるっ！\nこのままだと街のみんなが<dash=2>
+StopBgm
+CharacterOff
+	ディーア	本気4						行くぞ、クサナギ!!
+Bgm	キノコリオン
+CharacterOff
+	クサナギノツルギ	通常						神劍クサナギノツルギ！\nあるじ様の期待にこたえるよっ！
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	剣閃
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	市街地C(火事)					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	グレイヴ型冥獣	通常	1_2					ぐぉおおお!?
+Se	倒れる
+CharacterOff	グレイヴ型冥獣					1
+Wait						1
+CharacterOff
+	ディーア	悔しい4	p3
+	クサナギノツルギ	通常	p7
+	ディーア	悔しい4						大丈夫か!?
+CharacterOff
+	エキドナ兵	通常
+Tween	エキドナ兵	MoveBy	x=100 time=0				Add
+Tween	エキドナ兵	RotateTo	y=180 time=0				Add
+	エキドナ兵	通常						あ、ああ……！\n助けてくれて、ありがと<dash=2>
+Tween	エキドナ兵	PunchPosition	y=30				NoWait
+	エキドナ兵	通常						ま、待て!?\nお前は手配中の魔剣王！\nまさかこの街を<dash=2>
+CharacterOff
+	ディーア	怒り4	p3
+	クサナギノツルギ	通常	p7
+	ディーア	怒り4						無事ならよかった！\nはやく逃げろ！
+Se	走る
+Tween	クサナギノツルギ	MoveBy	x=-1000 time=1				NoWait
+Tween	ディーア	MoveBy	x=-1000 time=1				NoWait
+Wait						1
+CharacterOff
+	エキドナ兵	通常
+Tween	エキドナ兵	MoveBy	x=100 time=0				Add
+Tween	エキドナ兵	RotateTo	y=180 time=0				Add
+	エキドナ兵	通常						あ、あれ？
+CharacterOff
+	旅人	通常
+Tween	旅人	MoveBy	x=100 time=0				Add
+Tween	旅人	RotateTo	y=180 time=0				Add
+	旅人	通常						お、おい……\n魔剣王は乱心して魔界を滅ぼした\n最悪の王なんだろ？
+	旅人	通常						なんで俺たちを助けたんだ？
+CharacterOff
+	エキドナ兵	通常
+Tween	エキドナ兵	PunchPosition	y=30				NoWait
+	エキドナ兵	通常						と、とにかく！\n今のうちに避難しましょう！
+FadeOut	black					.3
+CharacterOff						0
+Bg	固まった溶岩の大地					0
+	クサナギノツルギ	通常	p7			0
+	ディーア	通常4	p3			0
+Wait						1.5
+Se	パリン
+FadeIn	white					.3
+Param	character_grayout=true
+	ディーア	通常4						無事に封印結界を抜けられたな！\nスーヴァの火口に突入するぞ!!
+	クサナギノツルギ	通常						うん♪ ……えへへ♪
+	ディーア	驚き4						クサナギ、どうかしたのか？
+	クサナギノツルギ	通常						ううん！\nあるじ様が元気になって嬉しいの！
+	クサナギノツルギ	通常						やっぱり、\n困ってる人を助けてるあるじ様が、\n一番好きだから！
+	ディーア	通常4						みんなが\n支えてくれたおかげだよ
+	ディーア	怒り4						だからオレも、\nリディと魔界の未来を救ってみせる
+StopBgm
+	ディーア	怒り4						そのためにも<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ロサ	通常				0
+Param	character_grayout=false
+FadeIn	white					.3
+Bgm	作戦会議
+	ロサ	通常						新たな<ruby=アンダーカバー>虚構伝承</ruby>の反応が\nスーヴァ大火山で確認されました
+CharacterOff
+	ディーア	怒り4						予想通り、\n世界意思は六大異変を狙ってきたか
+CharacterOff
+	ロサ	通常						ええ、リディ様の力の根源、\nその伝承の多くは\n魔剣殺し、そして魔王獣としての功績
+	ロサ	通常						その中でも\n六大異変を発生させた伝承は、\n魔界を一変させた出来事です
+	ロサ	通常						リディ様の伝承を奪おうとするなら\n真っ先に狙うのは当然でしょう
+CharacterOff
+	ディーア	怒り4						大風穴に続いてスーヴァ大火山……\nオレとリディもあそこで\nアークと戦ったこともある
+	ディーア	怒り4						虚構伝承セイメイと同様に、\n一度にリディの伝承を\n奪おうとするかもしれないな
+	ディーア	悔しい4						かつてと同規模の被害を、\n虚構伝承によって引き起こすことで
+CharacterOff
+	ロサ	通常						おそらく虚構伝承は、\nスーヴァ大火山を活性化させるに\nふさわしく
+	ロサ	通常						それが伝承の穴埋めとして\n矛盾のない姿で現れると推測できます
+CharacterOff
+	ディーア	怒り4						……なら、心当たりがある
+	ディーア	怒り4						異変獣スーヴァ
+FadeOut	black					.3
+CharacterOff						0
+Bg	洞窟B					0
+	異変スーヴァ	通常				0
+	          		1_2
+FadeIn	black					.3
+	ロサ	<Off>	1_2					ご主人様と太陽王アーク様との戦いで\n目覚めた異変の化身ですね？
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	悔しい4				0
+FadeIn	black					.3
+	ディーア	悔しい4						この予測通りなら、\nノイルマレヴ大陸全土が\n火と灰に包まれるぞ
+	ディーア	悔しい4						それに<dash=2>
+Se	回想
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	リディ絶望スチル		エフェクト表			0
+FadeIn	black					.3
+Wait						1
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	悔しい4				0
+FadeIn	black					.3
+	ディーア	悔しい4						前回の戦いの後でも\nリディに大きな変化はなかった
+	ディーア	目閉じ4						まだ多くの伝承が、\nリディから切り離されたまま\nだからだろう
+	ディーア	悔しい4						これ以上、世界意思の\n好きにさせるわけにはいかない
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	固まった溶岩の大地					0
+	ディーア	怒り4				0
+FadeIn	white					.3
+	ディーア	怒り4						ロサ、敵の現在地は？
+CharacterOff
+	ロサ	通信通常						変わらず火口で停止しています
+	ロサ	通信通常						魔力波のパターンから、\n虚構伝承は予想通りに\n異変獣スーヴァを模したようです
+	ロサ	通信通常						しかし停止中も、\n改竄深度および融界指数は増大
+	ロサ	通信通常						スーヴァの膨大な魔力を吸収し、\n更なる強化を図っているのでしょう
+CharacterOff
+	ディーア	悔しい4						だったら、\nもっと急がないとな……！
+	ディーア	怒り4						多少の危険は構わない、\n虚構伝承までの\n最短ルートを教えてくれ！
+CharacterOff
+	ロサ	通信照れ						はぁ……、\nこちらの気も知らないで\n危険なことばかり
+	ロサ	通信照れ						どうか無事の帰還と、\nありがとうスタンプをお忘れなく
+	ロサ	通信照れ						それに急ぐと言うなら、\n女の人とフケツなことしないように
+CharacterOff
+	ディーア	汗4						だから、それは誤解だって……
+CharacterOff
+	ロサ	通信通常						……最短ルートを割り出しました
+	ロサ	通信通常						この速度なら\n五分後には虚構伝承と接敵できます
+CharacterOff
+	クサナギノツルギ	通常						そうしたら私が、\nあるじ様の期待にこたえるよ！
+CharacterOff
+	ロサ	通信通常						古来より天災は\n悪竜とみなされてきましたし\n異変獣は竜に似ています
+	ロサ	通信通常						ドラゴンを滅する\n神劍クサナギノツルギ様は\nその討滅に最適ですね
+CharacterOff
+	クサナギノツルギ	通常						うん！ あるじ様、期待してて!!
+StopBgm
+CharacterOff
+	ディーア	悔しい4						よしっ！\nここからは立ち止まらず一気に<dash=2>
+CharacterOff
+	ロサ	通信通常
+Shake	ロサ		x=2				NoWait
+	ロサ	通信通常						っ……！
+Tween	ロサ	PunchPosition	y=30				NoWait
+	ロサ	通信通常						ご主人様！
+CharacterOff
+Param	character_grayout=true
+Bgm	緊迫
+CharacterOff
+	勇者レイ	拡大本気	エフェクト表					止まりなさい！ 魔剣王!!
+CharacterOff
+	勇者A	通常	p2b
+	勇者D	通常	p8b
+	勇者レイ	蔑み	p5
+	勇者レイ	蔑み						一度魔界を滅ぼすだけに飽き足らず、\nスーヴァ大火山も狙うなんて
+	勇者レイ	蔑み						この魔界が\n憎くてしょうがないようね？
+CharacterOff
+	ディーア	驚き4						勇者だと……!?
+CharacterOff
+	ロサ	通信通常						待ち伏せ!?\n反応はなかったのに……!!
+CharacterOff
+	ディーア	悔しい4						おそらくレドの魔剣、\nヴァルトの隠蔽の力を使った\n奇襲用の魔装具だ
+	ディーア	悔しい4						それを使えるなら、\nE.D.E.N.の中でも高位の勇者……
+	ディーア	怒り4						世界図書館との繋がりが\n露見すると困る\n通信を切るぞ、ロサ……
+CharacterOff
+	ロサ	通信通常						ご主人様、ご武運を……
+CharacterOff	ロサ					1
+Wait						1
+CharacterOff
+	勇者レイ	通常						やはり誰か、協力者がいるのね\nでもそれを調べるのは後
+	勇者レイ	本気						誇りある父とE.D.E.N.の名にかけて\n魔剣王、あなたを討ち取る!!
+	勇者レイ	通常						我が名はレイ！ 勇者レイ!!
+	勇者レイ	通常						先代勇者王シドウの娘！\nそして未来の勇者王になる女よっ!!
+CharacterOff
+	ディーア	驚き4						勇者王シドウの……？\nなら<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	遺跡A					0
+	勇者ルル	通常2				0
+FadeIn	white					.3
+	勇者ルル	通常2						やあ、僕はルル\nE.D.E.N.所属の勇者さ！
+	勇者ルル	照れ2						か、階級はまだまだ下っ端の\n見習いだが、未来の大勇者……\nいや……勇者王となる男さっ!!
+FadeOut	white					.3
+CharacterOff						0
+Bg	竜鍵マナ神域					0
+	エクスカリバー=ノイズ		2_2			0
+	希望王ルル	怒り2	1_2			0
+FadeIn	white					.3
+	希望王ルル	怒り2						いま目の前にいるこいつに、\n僕が犠牲にしたすべてを拾い上げた\nこの魔剣王に
+	希望王ルル	怒り2						僕が認め、僕を認めてくれた、\nこの終生のライバルに<dash=2>
+	希望王ルル	怒り2						僕の全霊を以て挑まなければ\n気が済まない!!
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	固まった溶岩の大地					0
+	ディーア	驚き4				0
+FadeIn	white					.3
+	ディーア	驚き4						お前はルルの、\n妹……いや、姉なのか？
+Param	character_grayout=true
+CharacterOff
+	勇者A	通常	p2b
+	勇者D	通常	p8b
+	勇者レイ	蔑み	p5
+	勇者レイ	蔑み						っ…………！
+	勇者A	通常						庶子でありながら、\n王位を簒奪した希望王ルルと、\nレイ様を一緒にするな！
+	勇者D	通常						レイ様は、\nシドウ様のお后様より生まれた\n尊き血筋の姫なのっ！
+CharacterOff
+	ディーア	目閉じ4						なるほど、\n相変わらずエデン国内は\nゴタゴタしているようだな
+CharacterOff
+	勇者A	通常	p2b
+	勇者D	通常	p8b
+	勇者D	通常						なにをっ……!!
+	勇者A	通常						レイ様 このような下郎は、\nあなたが手を出すまでもありません！
+	勇者D	通常						まずは私たちが<dash=2>
+StopBgm
+	勇者A	通常						……あれ？
+	勇者D	通常						レイ様はどこに<dash=2>
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	レイ本気スチル	通常	エフェクト表			0
+Bgm	勇者バトル
+	勇者レイ	<Off>	1_2					はぁっ……！
+Se	抜刀
+Wait						.2
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景					0
+	黒背景		エフェクト表
+	斬撃(39205A)		エフェクト裏
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.5				NoWait
+Wait						1.2
+Se	斬2
+	斬撃(39205B)		lost1
+CharacterOff	黒背景
+Wait						.2
+Se	斬2
+	斬撃(39205C)		lost2
+Wait						.2
+Se	斬2
+	斬撃(39205D)		lost3
+Wait						.3
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Bloom
+	黒背景		エフェクト表			0
+FadeOut	white					.3
+CharacterOff						0
+Bg	固まった溶岩の大地					0
+	ディーア	悔しい4				0
+FadeIn	white					.3
+Wait						.2
+Se	剣を打ち合う
+FadeOut	white					.2
+FadeIn	white					.2
+Shake	ディーア		x=2				NoWait
+	ディーア	悔しい4						速いっ……!?
+CharacterOff
+	勇者レイ	怒り						私の初撃を防いだ!?
+CharacterOff
+	ディーア	悔しい4						危ないところだったけどな
+	ディーア	怒り4						まさかお供を置いて、\n一人で突撃してくるなんて
+CharacterOff
+	勇者レイ	怒り						当然よ！\nそもそも私は一人で来るつもりだった
+	勇者レイ	怒り						人々を脅かす脅威へと、\n恐れることなく一歩を踏み出す！
+	勇者レイ	怒り						それが勇者のあり方！
+	勇者レイ	本気						たとえ下郎が相手でも\n寄って集って斬りつけるなんて\n勇者らしくないわ！
+	勇者レイ	本気						私は勇気を示し、勇者王になる！\nそしてE.D.E.N.を再建するの!!
+CharacterOff
+	ディーア	怪しい4						甘い考えだな……
+	ディーア	通常4						だけど、オレは嫌いじゃない
+	ディーア	通常4						さっきの斬撃も\nよく鍛えられた真っ直ぐな剣だった
+CharacterOff
+	勇者レイ	通常
+Shake	勇者レイ		x=1				NoWait
+	勇者レイ	泣き						っ…………！
+Tween	勇者レイ	PunchPosition	y=30				NoWait
+	勇者レイ	怒り						敵を褒めるなんて、\nずいぶんと余裕じゃない、魔剣王！
+	勇者レイ	怒り						でも、\nそんな余裕がいつまで続くかしら？
+	勇者レイ	本気						感謝しなさい、\n未来の王の手で裁かれることを!!
+CharacterOff
+	ディーア	怒り4						どうする……？
+Selection	*Q2002_01_01							説得する
+Selection	*Q2002_01_02							戦う
+*Q2002_01_01
+	ディーア	悔しい4						聞いてくれ、勇者レイ！\nこの異変も魔界を滅ぼしたことも\n誤解なんだ……！
+CharacterOff
+	勇者レイ	怒り						戯言を！
+	勇者レイ	怒り						魔界を滅ぼしたことは\n多くの目撃者も証拠もあるのよ！\n誰が信じるものですか！
+	勇者レイ	本気						さあ、魔剣を構えなさい!!
+CharacterOff
+	ディーア	悔しい4						やはり、\n聞く耳を持ってはくれないか
+	ディーア	悔しい4						そういう強情なところ、\nあいつに似てるよ
+	ディーア	怒り4						これ以上は、\n立ち止まっていられない
+Jump	*Q2002_01_03
+*Q2002_01_02								戦う
+	ディーア	悔しい4						説得は無駄だろうな
+	ディーア	悔しい4						あいつによく似た、\n意思が強くて強情な目をしている
+	ディーア	目閉じ4						それにオレも、\n急がないといけない理由がある
+Jump	*Q2002_01_03
+*Q2002_01_03
+	ディーア	怒り4						魔剣王、\n<param=name>!!
+	ディーア	本気4						押し通らせてもらうぞ、\n勇者レイ!!
+CharacterOff
+	勇者レイ	怒り						来なさい、魔剣王!!
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_02
+EndIf
+EndScenario
+
+# Q2002_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	バトル
+Bg	固まった溶岩の大地					0
+Param	character_grayout=false
+	勇者レイ	本気
+FadeIn	black					1
+	勇者レイ	本気						ハァアアアア!!
+Se	斬2
+FadeOut	white					.2
+CharacterOff
+	ディーア	悔しい4
+FadeIn	white					.2
+Se	ガード
+Shake	ディーア		x=2				NoWait
+	ディーア	悔しい4						汎用エクスカリバーで、\nよくここまで！
+CharacterOff
+	勇者レイ	本気						この剣こそ勇者の証！\n初代勇者王アーサー以来、\n魔界を守り続けた勇敢なる剣!!
+	勇者レイ	本気						勇者の裁きを受けなさい、\n魔剣王!!
+CharacterOff
+	ディーア	目閉じ4						本当にまっすぐだよ\nだけど<dash=2>
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	剣閃
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	固まった溶岩の大地					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	勇者レイ	怒り
+Shake	勇者レイ		x=3				NoWait
+	勇者レイ	怒り						きゃあああっ!?
+Se	倒れる
+Tween	勇者レイ	MoveBy	y=-50 time=1				NoWait
+CharacterOff	勇者レイ					.5
+Wait						.3
+CharacterOff
+	ディーア	怒り4						あいつには及ばないし、\nオレも遅れを取るつもりはない
+Bgm	絶望
+CharacterOff
+	勇者A	通常
+Tween	勇者A	PunchPosition	y=30				NoWait
+	勇者A	通常						レイ様……！
+CharacterOff
+	勇者D	通常						私たちがお助け<dash=2>
+CharacterOff
+	ディーア	怒り4						決断が遅い
+Se	剣閃
+FadeOut	black					.3
+CharacterOff						0
+	勇者A	通常	p3b			0
+	勇者D	通常	p7b			0
+Wait						2
+FadeIn	black					.3
+Shake	勇者A		x=3				NoWait
+Shake	勇者D		x=3				NoWait
+	勇者A	通常						ぐっ…………
+Tween	勇者A	MoveBy	y=-50 time=1				NoWait
+Tween	勇者D	MoveBy	y=-50 time=1				NoWait
+CharacterOff						.5
+Wait						1
+CharacterOff
+	クサナギノツルギ	通常						安心して？\nみんな、ちゃんと峰打ちだから！
+CharacterOff
+	ディーア	怒り4						動けるようになったら、\nすぐに撤退しろ\nここはもうすぐ危険<dash=2>
+CharacterOff
+	勇者レイ	怒り				1
+Shake	勇者レイ		x=3				NoWait
+	勇者レイ	怒り						ふざ、けないで……！
+Wait						.5
+CharacterOff
+	ディーア	怒り4						体を動かすだけで激痛のはずだ\n動かないほうが良い
+CharacterOff
+	勇者レイ	怒り						だったら、なに……？
+	勇者レイ	怒り						痛かったら……\n傷があったら、退く理由になるの？
+	勇者レイ	怒り						私は、勇者よ……！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洋館					0
+	勇者レイ	怒り				0
+FadeIn	white					.3
+	勇者レイ	怒り						なんでよっ!?
+	勇者レイ	怒り						私は勇者王の娘なんでしょ!?
+	勇者レイ	怒り						お父様が討たれて、\n魔界に危機が迫っているというのに\nまだ戦ったらいけないの!?
+FadeOut	white					.3
+CharacterOff						0
+Bg	教会					0
+	勇者B	嘲笑	1_2			0
+	勇者C	嘲笑	2_2			0
+FadeIn	white					.3
+	勇者B	嘲笑						聞いたか、あのお姫様のこと
+	勇者C	嘲笑						今さら出てきて、\n勇者王になるだなんてさ！
+Param	character_grayout=false
+	勇者	<Off>	3_3					ハハハハハ!!
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	固まった溶岩の大地					0
+	勇者レイ	怒り				0
+FadeIn	white					.3
+	勇者レイ	怒り						私は、あなたを倒す……！
+	勇者レイ	怒り						その功績で、\n父の玉座……勇者王を受け継ぐ
+	勇者レイ	本気						受け継がないといけないの!!
+	勇者レイ	本気						私を止めたいなら、\nこの心臓を切り裂きなさい!!
+CharacterOff
+	クサナギノツルギ	慌て						あるじ様、どうしよう？
+CharacterOff
+	ディーア	怒り4						本当に強情だ……
+	ディーア	怒り4						オレはこれ以上の\n足踏みも回り道もできないんだ\n今度は加減できないぞ
+CharacterOff
+	勇者レイ	怒り						勇者に、恐れるものなんてないわ
+CharacterOff
+	ディーア	怒り4
+	オーラ青		エフェクト表			.5
+	ディーア	怒り4						だったら……！
+CharacterOff
+	勇者レイ	怒り						っ…………!!
+StopBgm						0
+CharacterOff						0
+	オズアリス	拡大通常	エフェクト表			0
+	？？？？	<Off>						はいはーい、そこまでー♪
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	弓2
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(赤)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	固まった溶岩の大地					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	勇者レイ	怒り	p7b
+	ディーア	驚き4	p3
+Wait						.3
+Se	闇1
+ImageEffect	SpriteCamera	NegaPosi
+Wait						.3
+ImageEffectOff	SpriteCamera	NegaPosi				.3
+Wait						.3
+Shake	ディーア		x=3				NoWait
+Shake	勇者レイ		x=3				NoWait
+	勇者レイ	怒り						なに、これ……？
+	ディーア	驚き4						魔力が静止した……？
+	ディーア	悔しい4						これ、\n<ruby=アンダーカバー>虚構伝承</ruby>との戦いでも<dash=2>
+Param	character_grayout=true
+	？？？？	<Off>	1_2					ちゅーもーくっ！
+Param	character_grayout=false
+Bgm	カルバノグC		.8
+FadeOut	white					2
+Bg	白背景					0
+CharacterOff						0
+	オズアリス	拡大足	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	オズアリス	拡大胸	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+Bg	固まった溶岩の大地					0
+CharacterOff						0
+	オズアリス	笑い				0
+	          
+FadeIn	white					.3
+	？？？？	<Off>						このケンカ、\n女王様が止めさせてもらうよー♪
+CharacterOff
+	勇者レイ	怒り						女王様……？
+CharacterOff
+	ディーア	驚き4						お前、その顔……！
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場1F					0
+	ロンゴミアント=オズ	通常				0
+FadeIn	white					.3
+	ロンゴミアント=オズ	通常						わはは！\nしれーっとお尻さわったやろ\nマスター！
+	ロンゴミアント=オズ	通常						しゃーないなぁ、\nファンサービスや！\n今だけ無料やでー
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	固まった溶岩の大地					0
+	ディーア	驚き4				0
+FadeIn	white					.3
+	ディーア	驚き4						ロンゴミアント、オズ？
+	ディーア	悔しい4						でもオレのオズは、\n酒場で待機しているはずなのに
+CharacterOff
+	オズアリス	嬉しい
+	？？？？	<Off>	1_2					おぉー！\nさっすがマスターや♪
+	？？？？	<Off>						ウチがこうなっても、\nちゃんと気づいてくれるなんて\nうれしいなぁ♪
+	オズアリス	ニヤリ
+	？？？？	<Off>						正解や！\nウチはロンゴミアント=オズ
+	？？？？	<Off>						でも、\nこの世界のマスターと出会った\nロンゴミアント=オズやない
+FadeOut	white					.3
+CharacterOff						0
+	オズアリス	拡大通常	エフェクト表			0
+FadeIn	white					.3
+	オズアリス	拡大通常	エフェクト表					アリスファミリーの"ハートの女王"\n永劫平和の夢の主、\nロンゴミアント=オズ.ALICE♪
+	オズアリス	拡大通常	エフェクト表					それがアリス様に\nこの世界へと招かれたオズの名前や！
+CharacterOff
+	勇者レイ	怒り						アリスファミリー!?
+	勇者レイ	怒り						魔帝アリスの親衛隊じゃない！
+CharacterOff
+	ディーア	悔しい4						でも、どうして、\nオズがその一員になっている？
+	ディーア	悔しい4						それにどうやって\nマスターなしで単独行動を<dash=2>
+CharacterOff
+	オズアリス	慌て						いっぺんに質問するのはやめてー！\nふくざつーな事情があんの!!
+	オズアリス	慌て						それに親衛隊いうより、\n同志とか、お茶飲み友達とか、\nそういう関係やし
+Tween	オズアリス	PunchPosition	y=30				NoWait
+	オズアリス	通常						とにかく！\nアリス様とウチからのお願いや♪
+	オズアリス	笑い						二人ともケンカはやめて、\nこのまま撤退してな♪
+Param	character_grayout=true
+CharacterOff
+	勇者レイ	怒り	p7b
+	ディーア	驚き4	p3
+	ディーア	驚き4						なにっ……？
+	勇者レイ	怒り						アリスファミリーが\nなんで介入してくるのよ！
+	勇者レイ	怒り						あの時、魔剣王を退けたのは\n魔帝アリスだったんじゃないの!?
+CharacterOff
+	オズアリス	笑い						細かいことはええやん♪\nそこは昔のオズさんらしく\nゆるゆるいこ♪
+	オズアリス	通常						それで……答えは？
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	勇者レイ	怒り	p7b
+	ディーア	本気4	p3
+	二人	<Off>	1_3					断る！
+Bgm	バトル
+Param	character_grayout=true
+	ディーア	本気4						オレはこの先に進んで、\n虚構伝承を倒さないといけない！
+	勇者レイ	怒り						魔剣王が目の前にいるのに、\n退くわけがないでしょ!!
+CharacterOff
+	オズアリス	驚き						えー？ ほんまにダメ？
+Param	character_grayout=false
+CharacterOff
+	勇者レイ	怒り	p7b
+	ディーア	本気4	p3
+	二人	<Off>	1_3					ダメ！
+CharacterOff
+	オズアリス	驚き						ちょっとだけで、\nちょっとだけでええんや！
+CharacterOff
+	勇者レイ	怒り	p7b
+	ディーア	本気4	p3
+	二人	<Off>	1_3					ダメ！！
+CharacterOff
+	オズアリス	嬉しい						お願い聞いてくれたら、\nウチがごほうびあげるけど♪
+Param	character_grayout=true
+CharacterOff
+	勇者レイ	怒り	p7b
+	ディーア	怪しい4	p3
+	勇者レイ	怒り						そんなことで<dash=2>
+	ディーア	怪しい4						…………
+	勇者レイ	蔑み						魔剣王……？
+	ディーア	驚き4						対処法を考えてただけだっ！
+	ディーア	本気4						とにかく断る!!\nそちらこそ早く撤退しろ!!
+CharacterOff
+	オズアリス	通常						はぁ……そうかぁ……
+	オズアリス	慌て						でもウチがいなくなったら\n二人はまたケンカするんやろ？
+	オズアリス	慌て						マスターも勇者のレイちゃんも、\n無駄な争いなんてせんで、\n握手して仲良くすればええのに
+	オズアリス	慌て						やっぱり、\nこの現実だと仲良しこよしとは\nいかないんやなぁ？
+CharacterOff
+	勇者レイ	怒り						仲良しなんて、くだらないわ！
+	勇者レイ	本気						邪魔をするのなら、\nあなたから倒してやるわよ！\nアリスファミリー！
+CharacterOff
+	オズアリス	怒り						なら、しゃーないな♪
+StopBgm						0
+CharacterOff						0
+Bg	黒背景					0
+	オズアリス	<Off>						<dash=2>《<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>》
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景
+Param	character_grayout=false
+	スチルアリスファミリー	オズ1	エフェクト裏			0
+	黒背景		エフェクト表			0
+Se	光2
+Tween	黒背景	MoveBy	x=1500 time=2				NoWait
+	オズアリス	<Off>						《<ruby=アリス・イン・ワンダーランド>彷徨う少女と夢幻の鍵</ruby>》♪
+Se	光3
+	スチルアリスファミリー	オズ2				2
+Wait						2.5
+ImageEffectOff	SpriteCamera	Bloom
+FadeOut	black					.1
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+StopSe
+	スチルオズアリス魔法陣		エフェクト表
+	イベントスチル1048A		エフェクト裏
+Wait						.1
+FadeIn	black					.1
+Wait						.5
+Se	光2
+	イベントスチル1048C		g000045300
+Tween	イベントスチル1048C	ScaleBy	x=10 y=10				NoWait
+Wait						1
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+Bg	遊園地					0
+	クサナギノツルギ	慌て	p7
+	ディーア	驚き4	p3
+FadeIn	white					1
+Bgm	魔獣バトル
+	ディーア	驚き4						なっ……!?
+	ディーア	悔しい4						悪魔の鍵、だと？
+CharacterOff
+	勇者レイ	怒り						なにが、どうなってるの？
+CharacterOff
+	オズアリス	通常						ようこそ！\nここがウチの描いた夢の国！
+	オズアリス	嬉しい						女王様の夢の楽園！\n終わらない永遠の遊園地！
+	オズアリス	嬉しい						アリス様がくれた\n<ruby=ワンダーランド>理想郷</ruby>へ！
+	オズアリス	通常						マスター、レイちゃん！\nここで仲良く暮らそーな！
+CharacterOff
+	オズアリス	拡大嬉しい	エフェクト表					永遠に♪
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_03
+EndIf
+EndScenario
+
+# Q2002_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	遊園地					0
+Param	character_grayout=false
+	勇者レイ	怒り				0
+FadeIn	black					1
+	勇者レイ	怒り						ここで永遠に暮らす？
+	勇者レイ	怒り						馬鹿らしい！\nこんな結界はすぐ脱出して<dash=2>
+Shake	勇者レイ		x=2				NoWait
+	勇者レイ	通常						っ……！
+CharacterOff
+	ディーア	悔しい4						勇者レイ、\nお前も気づいたんだな?
+CharacterOff
+	勇者レイ	怒り						どうなっているのよ、魔剣王
+	勇者レイ	怒り						この結界……\nいいえ、この世界には境界がない
+CharacterOff
+	ディーア	悔しい4						ああ、そうだ
+	ディーア	怒り4						本来の結界術や異空間形成術には\nもっと明確な壁や境がある
+	ディーア	怒り4						それが目に見えない境界でも、\nオレたちなら認識できる
+	ディーア	怒り4						なのにオズ.ALICEの\n<ruby=ワンダーランド>理想郷</ruby>にはそれがない
+	ディーア	悔しい4						一個の独立した世界として、\nあまりにも完成されすぎている
+	ディーア	目閉じ4						この感覚、\nゼタの夢に取り込まれたときに\n似ているな……
+CharacterOff
+	オズアリス	笑い						言ったやろ？\nここはウチが創った理想の夢！
+	オズアリス	通常						せっかくやから、\nさっきのマスターの質問にも\n答えてあげる♪
+Tween	オズアリス	MoveBy	x=-100				NoWait
+	オズアリス	怒り						どうして\nオズがアリスファミリーに\nなっている？
+Tween	オズアリス	MoveBy	x=200				NoWait
+	オズアリス	怒り						どうやって\nマスターなしで単独行動を？
+Tween	オズアリス	MoveBy	x=-100
+Tween	オズアリス	PunchPosition	y=30				NoWait
+	オズアリス	笑い						その文字通りの鍵が、\n《<ruby=アリス・イン・ワンダーランド>彷徨う少女と夢幻の鍵</ruby>》や♪
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	アリス	通常魔帝				0
+	          		1_2
+FadeIn	white					.3
+	オズアリス	<Off>						この鍵は\nアリス様がくれたファミリーの証
+	オズアリス	<Off>						資格を得た魔剣に\nアリス様は悪魔の鍵を分け与えて
+	オズアリス	<Off>						その魔剣はファミリーとしての\n<ruby=ロール>役割</ruby>を得る
+	オズアリス	<Off>						同時に理想を叶える、\n夢の世界の運営権を得るんや♪
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	遊園地					0
+	オズアリス	笑い				0
+FadeIn	white					.3
+	オズアリス	笑い						だから\nウチはこの世界を創った♪
+	オズアリス	ニヤリ						戦争もなくて、戦いもケンカもなし\n仲良しこよしで住んでよし♪
+	オズアリス	ニヤリ						もちろん、\nアトラクションは乗り放題や♪
+	オズアリス	嬉しい						好きなだけ楽しんでええよ♪
+Tween	オズアリス	PunchPosition	y=30				NoWait
+	オズアリス	通常						みんな！\n新しい仲間を歓迎してや♪
+CharacterOff
+	妖精型モンスター							ようこそ、ようこそ夢の国♪
+Tween	妖精型モンスター	PunchPosition	y=30				NoWait
+	妖精型モンスター							太陽いつでもかたむいて、\nずっとお月さまがコンニチハ♪
+CharacterOff
+	大樹型モンスター		1_2					朝とお昼はずーっとおやすみ\n夜はお尻を隠して頭が見えてる♪
+Tween	大樹型モンスター	PunchPosition	y=30				NoWait
+	大樹型モンスター							楽しい楽しい夕方が\nつづくよ、つづく、どこまでも！
+CharacterOff
+	オズアリス	ニヤリ						なあ？ 楽しそうやろ？
+	オズアリス	笑い						二人には永遠に\nここで楽しく暮らしてもらうな♪
+CharacterOff
+	勇者レイ	怒り
+Shake	勇者レイ		x=2				NoWait
+	勇者レイ	怒り						このっ……！\n遊びに付き合ってる暇はないの！
+Tween	勇者レイ	PunchPosition	y=30				NoWait
+	勇者レイ	本気						この国がお前の夢なら、\nお前を倒せば夢も終わるんでしょ！
+Se	チャージ
+	オーラ青		エフェクト表			.5
+	勇者レイ	本気						お前も魔剣王も、\n今すぐに斬り伏せて<dash=2>
+StopBgm
+Shake	勇者レイ		x=2				NoWait
+CharacterOff	オーラ青					.5
+	勇者レイ	怒り						っ……
+	勇者レイ	怒り						なんで……？
+Bgm	緊迫
+	勇者レイ	怒り						魔剣を抜くことさえできない？
+CharacterOff
+	オズアリス	笑い						あかんなぁ、レイちゃん
+	オズアリス	笑い						人が真剣にやっとるのに、\n遊びだなんだって悪口言ったら
+	オズアリス	通常						ウチはゆるゆるな女王様やけど、\nこの世界はお遊びやないよ？
+	オズアリス	笑い						そこで機会を伺っとる\nマスターもあかん
+CharacterOff
+	ディーア	悔しい4
+Shake	ディーア		x=1				NoWait
+	ディーア	悔しい4						っ…………！
+CharacterOff
+	オズアリス	笑い						レイちゃんと同時に\n死角から来るつもりだったやろ？
+	オズアリス	通常						ゼタちゃんの時と同じなら、\nウチを倒せばええって\nマスターなら想像つくもんな？
+CharacterOff
+	ディーア	悔しい4						レイにかかっているのは\n拘束術式じゃないな？
+	ディーア	悔しい4						攻撃意思に反応して、\n身体が静止している……
+	ディーア	驚き4						まさか……！
+	ディーア	悔しい4						元のオズの力、\n断罪シリーズとしての赦しの権能を、\n先出ししているのか!?
+CharacterOff
+	オズアリス	怒り						赦しがあるのは、\nいつも事件が終わった後やろ？
+	オズアリス	怒り						言い換えたら、\n赦しが行われたということは、\n事件は終わった扱いになる……
+CharacterOff
+	ディーア	悔しい4						……！\nこれがアリスファミリー
+	ディーア	悔しい4						ここまで\n元の伝承から変質させるなんて
+CharacterOff
+	オズアリス	ニヤリ						まあ、大層なこと言ったけど\n大事なのはたった一つのルールや♪
+	オズアリス	嬉しい						<color=red>この国ではみんな仲良く</color>
+	オズアリス	嬉しい						大切な仲間を傷つけることは、\n女王様が赦さんよ？
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	オズアリス	通常						だから、\nそれを破った二人にはペナルティ♪
+StopBgm
+CharacterOff	オズアリス
+	ディーア	悔しい4	p3
+	勇者レイ	怒り	p7
+Wait						.5
+Se	光1
+FadeOut	white					.3
+	ディーア	絶望4裸	p3			0
+	勇者レイ	怒り	p7			0
+FadeIn	white					.3
+Wait						1
+Param	character_grayout=true
+Bgm	コメディ
+	勇者レイ	驚き						きゃあっ!?\nなんて格好してるのよ、魔剣王！
+CharacterOff	オーラ赤					.2
+	ディーア	絶望4裸						オズ.ALICEにやられたんだよっ！\nレイの服も<dash=2>
+Tween	勇者レイ	PunchPosition	y=30				NoWait
+	勇者レイ	驚き						私は魔剣を弾かれただけっ！\n変な期待するなっ！
+	ディーア	絶望4裸						じゃあ、なんでオレだけ!?
+Param	character_grayout=false
+CharacterOff
+	オズアリス	嬉しい						初回はサービスや♪\n二回目から後は\nこうはならんから気をつけてな♪
+	オズアリス	嬉しい						ほな、\n女王様はお外でお仕事があるから、\n若い二人で楽しんでー♪
+	オズアリス	通常						住めば都、\n暮らせばワンダーランド♪
+Tween	オズアリス	PunchPosition	y=30				NoWait
+	オズアリス	通常						争いなんて忘れて、\nみんなで仲良くしような♪
+CharacterOff
+	ディーア	悔しい4裸						待て、オズ.ALICE!!
+	ディーア	悔しい4裸						オレはこんなことで\n時間を無駄にするわけには……！
+CharacterOff
+	オズアリス	嬉しい						またな～♪
+Se	光1											転送エフェクト
+CharacterOff	オズアリス					1.5
+	イベントスチル459H1		effect_a			1
+	イベントスチル459H2		effect_b			1
+Tween	イベントスチル459H1	RotateBy	z=5 time=100				NoWait
+Tween	イベントスチル459H2	RotateBy	z=-5 time=100				NoWait
+Wait						2
+CharacterOff						1
+Wait						1.5
+	ディーア	悔しい4裸						くっ……!!
+	ディーア	怒り4裸						今の転移術式、\nカルバノグのものに似ていたな
+	ディーア	悔しい4裸						そうか、\n並行世界のオズを手に入れたのも\nカルバの力を使って
+	ディーア	目閉じ4裸						魔帝アリス、どういうつもりだ？
+	ディーア	悔しい4裸						このままじゃスーヴァ大火山も、\nリディの伝承も……！
+	ディーア	怒り4裸						レイ、お前も<dash=2>
+CharacterOff
+	集中線		エフェクト表
+	勇者レイ	拡大怒り	エフェクト裏
+	勇者レイ	拡大怒り						まずは服を着なさいっ!!
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	悔しい4				0
+Wait						1
+FadeIn	black					.3
+	ディーア	悔しい4						念の為に、\n着替えを持っててよかったな……
+CharacterOff
+	勇者レイ	怒り						アリスファミリー、\nぜったいに許さないわ……！
+CharacterOff
+	ディーア	怒り4						…………
+Bgm	作戦会議
+	ディーア	怒り4						レイ、確認したい
+	ディーア	怒り4						お前もこの世界から脱出したい\nそうだろう？
+	ディーア	怒り4						その点で、\nオレとお前の目的は共通のはずだ
+CharacterOff
+	勇者レイ	通常						協力なんて嫌よ
+CharacterOff
+	ディーア	悔しい4						レイ……！
+CharacterOff
+	勇者レイ	本気						気安く呼ばないで、魔剣王！
+	勇者レイ	本気						あなたは魔界を滅ぼした悪しき王で、\n勇者である私が討つべき相手！
+	勇者レイ	怒り						そんな相手と協力する？\nありえないわ
+	勇者レイ	怒り						私は一人で脱出してみせる
+	勇者レイ	怒り						そしてあなたも、\nへらへらした女王気取りも倒して\n勇者王になってみせるの！
+CharacterOff
+	ディーア	本気4						今は意固地になってる\n場合じゃないだろ!?
+	ディーア	悔しい4						なんでそんなに、\n勇者王にこだわるんだ！
+CharacterOff
+	勇者レイ	怒り						あなたに語る筋合いはないわ
+	勇者レイ	蔑み						あなただって虚構伝承だとか\n訳のわからないこと言って、\nずいぶん焦っているようじゃない
+	勇者レイ	蔑み						ここから脱出して、\nなにを企んでいるのかしら？
+CharacterOff
+	ディーア	悔しい4						E.D.E.N.には、教えられない……
+CharacterOff
+	勇者レイ	蔑み						ほら見なさい！\nそっちこそ後ろめたいことが\nあるんでしょ？
+CharacterOff
+	ディーア	悔しい4						だから<dash=2>
+CharacterOff
+	夢の住人B	通常						まあまあ、\nちょっと落ち着きなさい
+CharacterOff
+	夢の住人A	通常						そうそう、\nこれから長く一緒に暮らすんだ
+CharacterOff
+	ディーア	驚き4						……あなたたちは？
+CharacterOff
+	夢の住人B	通常						私たちはハートの女王様に救われた、\n夢の国の民だよ
+	夢の住人B	通常						まずは二人を、\n歓迎させてちょうだい♪
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_04
+EndIf
+EndScenario
+
+# Q2002_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	遊園地					0
+Param	character_grayout=false
+	夢の住人B	通常				0
+FadeIn	white					1
+	夢の住人B	通常						さあどうぞ！\nここの紅茶とスコーンは\n絶品なんだ！
+	夢の住人B	通常						どこからでも湧いて来るから、\n自由に食べていいわよ！
+CharacterOff
+	ディーア	怪しい4	p3
+	勇者レイ	通常	p7
+	二人							…………
+CharacterOff
+	夢の住人B	通常						警戒する気持ちはわかるわ\n私たちもここに来た時はそうだった
+CharacterOff
+	ディーア	驚き4						じゃあ、あなたたちも\nオズ.ALICEに捕らわれたのか？
+CharacterOff
+	夢の住人A	通常						捕らわれたわけじゃない\n俺たちはハートの女王様に救われた
+	夢の住人A	通常						辛い現実から、\nこの夢の国に匿ってもらったんだ
+	夢の住人A	通常						俺が暮らしていた街は\n魔王戦争の影響で荒れ果てていてね
+	夢の住人A	通常						生きるためには\n誰かを傷つけ奪うしかなかった
+	夢の住人A	通常						女王様はそんな俺を救い、\n夢に招いてくれたんだ
+CharacterOff
+	夢の住人B	通常						私も似たようなものよ\n戦争や魔物被害に傷ついて疲れていた
+	夢の住人B	通常						そんな女王様に救われた民が、\nこの夢の国に住んでいるの
+CharacterOff
+	夢の住人A	通常						しかも不思議なことに\nこの夢の国では歳を取らないんだ
+	夢の住人A	通常						そもそも外の世界とは、\n時間の流れが違うのかもしれないな
+	夢の住人A	通常						永遠に安心して過ごせるって、\n女王様は保証している
+CharacterOff
+	ディーア	驚き4						なっ……！
+	ディーア	驚き4						じゃあこの時も、\n外では年単位で時間が経過している\n可能性があるのか!?
+	ディーア	悔しい4						そんなことになったら、\nリディを助けられなくなるっ!!
+CharacterOff
+	夢の住人A	通常						まあまあ、\nそんな不安にならなくてもいい
+	夢の住人A	通常						女王様の話を聞く限り、\nそこまで極端な違いはないと思う\nだからゆっくり<dash=2>
+StopBgm
+CharacterOff
+	夢の住人C	通常
+Tween	夢の住人C	PunchPosition	y=30				NoWait
+	夢の住人C	通常						ねえねえ！\nお外の世界のせんそーって、\nもう終わったんでしょ？
+Bgm	神秘
+CharacterOff
+	ディーア	驚き4						えっ……？
+CharacterOff
+	夢の住人B	通常						いきなりごめんなさいね\nこの子は好奇心が旺盛なんだ
+CharacterOff
+	夢の住人C	通常						ねえ、せんそーは終わったから\nみんなはなかよくなれたの？
+	夢の住人C	通常						お外であそんでも、\nおこられないようになったの？
+Tween	夢の住人C	PunchPosition	y=30				NoWait
+	夢の住人C	通常						パパとママをさがしにいっても、\n大丈夫になったの？
+CharacterOff
+	ディーア	驚き4						それは<dash=2>
+CharacterOff
+	勇者レイ	通常						いいえ、魔王戦争が終結しても\n魔界は良くなっていない
+	勇者レイ	通常						魔物の襲撃も後を絶たず、\n各国の和平も仮初にすぎないわ
+	勇者レイ	通常						加えて魔剣王が\n魔界をめちゃくちゃにしたしね
+CharacterOff
+	夢の住人C	通常						そうなんだ……
+CharacterOff
+	勇者レイ	通常						…………
+	勇者レイ	ニヤリ						でも、安心しなさい？
+	勇者レイ	ニヤリ						お姉ちゃんが必ず、\n勇者王になって\n魔界を良くしてみせる
+CharacterOff
+	夢の住人C	通常						ゆうしゃおう、さん？
+CharacterOff
+	勇者レイ	ニヤリ						ええ、そうよ
+	勇者レイ	ニヤリ						だから早く、\nここから脱出しないといけないの\nあの女王を倒してね
+StopBgm
+CharacterOff
+	夢の住人B	通常						だっ、しゅつ……？
+CharacterOff
+	夢の住人A	通常						女王様を倒す……？
+Bgm	図書館
+CharacterOff
+	夢の住人B	通常						いやいや！\nやめておいたほうがいいって！\n争いはルールに反するわ！
+	夢の住人B	通常						そうしたら女王様に……!!
+CharacterOff
+	夢の住人A	通常						それに女王様がいなくなれば\n国が消え去ってしまうかもしれない！
+CharacterOff
+	勇者レイ	蔑み						だとしても、\nこんな甘くて腑抜けた夢の中に\nいるべきじゃないわ
+	勇者レイ	蔑み						未来を捨てて夢に逃げるなんて、\n私だったらイヤ
+	勇者レイ	蔑み						現実が辛くても、\n勇気を持って立ち向かうべきよ！
+CharacterOff
+	夢の住人D	通常						それは……違うと思います
+CharacterOff
+	ディーア	驚き4						その姿は……
+CharacterOff
+	夢の住人D	通常						ええ、私も……\nかつては勇者であったものです
+CharacterOff
+	勇者レイ	蔑み						なんてことなの……\n勇者があんな女王に屈するなんて\n恥を知りなさい
+CharacterOff
+	夢の住人D	通常						はは、とても強い言葉ですね
+	夢の住人D	通常						そう言えるあなたは、\n優れた魔剣使いなんでしょう
+	夢の住人D	通常						だから力がない我々にとって\n魔界がどれだけ辛い世界なのかを\nあなたは知らない
+	夢の住人D	通常						勇者となって理想に燃えて、\n待っていたのは、\n魔物や敵兵と戦い続ける日々
+	夢の住人D	通常						それをずっと繰り返しても、\n平和なんて訪れやしない
+	夢の住人D	通常						だからハートの女王様の誘いを受け\nこの国を選んだんです
+	夢の住人D	通常						なにも変わらない代わりに、\n戦う必要もない国を
+CharacterOff
+	勇者レイ	蔑み						罪の告白かしら？\n敵前逃亡は<dash=2>
+CharacterOff
+	夢の住人D	通常						だったら私は、\n犠牲になればよかったんですか？
+CharacterOff
+	勇者レイ	本気						勇者は人々の盾であり刃！\nそうあるべきよ！
+CharacterOff
+	夢の住人D	通常						理想論ですよ\n誰もがそんなに強くはないんだ
+	夢の住人D	通常						それに<dash=2>\n勇者レイ様……でしたっけ？
+	夢の住人D	通常						私は希望王ルル様の即位後に、\n夢の住人になりました
+	夢の住人D	通常						でもそれまで\nあなたの名前を聞いたことがない
+	夢の住人D	通常						逃げるなというあなたは、\n魔王戦争でなにをしていたんですか？
+CharacterOff
+	勇者レイ	泣き						っ……！\nそれ、は……！
+CharacterOff
+	夢の住人A	通常						そこまでにしてくれ！\nこれ以上はケンカになる！
+CharacterOff
+	夢の住人B	通常						女王様に怒られちゃうよっ！
+CharacterOff
+	勇者レイ	怒り						でも……！
+CharacterOff
+	ディーア	目閉じ4						平和、か
+CharacterOff
+	勇者レイ	通常						魔剣王……？
+CharacterOff
+	ディーア	怒り4						勇者レイ、\nこの人たちが望んだことは\n間違っていないよ
+	ディーア	目閉じ4						魔王戦争が始まってから、\n魔界には平和と呼べる時期が\nほとんどなかった
+	ディーア	目閉じ4						セイメイたちが苦心して\n停滞状態を維持してくれたけれど\n常に犠牲はあったんだ
+	ディーア	怒り4						だからあいつは、\n希望王ルルは平和な世界を目指した
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia				0
+CharacterOff						0
+Param	character_grayout=false
+Bg	遺跡C					0
+	エクスカリバー=ノイズ		2_2			0
+	希望王ルル		1_2			0
+FadeIn	white					.3
+	希望王ルル							僕は全ての戦争を終わらせる\n人類の歴史が\n争いの歴史だというのなら<dash=2>
+	希望王ルル							人類の未来が\n争いの絶えない世界だというのなら、\n僕はそれを否定する
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	遊園地					0
+	ディーア	目閉じ4				0
+FadeIn	white					.3
+	ディーア	目閉じ4						そのやり方は皆に否定されたけど、\n平和を創ろうとしたんだ
+	ディーア	怒り4						オレは夢や理想のためなら\n戦いを許容する
+	ディーア	怒り4						だからこそルルとも戦って、\n今の魔界を守った
+	ディーア	目閉じ4						でも魔界の王となるのなら、\n平和を望む人の声を\n無視してはいけないんだよ
+	ディーア	目閉じ4						ああ、そうだ……
+	ディーア	怒り4						女王という「唯一」による\n安全で安定した幸福な支配……
+	ディーア	怒り4						ここはあいつの希望によく似てる
+CharacterOff
+	勇者レイ	本気						希望王ルルが言ったから、\nどうだっていうのよ！
+	勇者レイ	怒り						自分の父を……\n私のお父様を裏切った簒奪者!!
+	勇者レイ	本気						私の前で奴の名を出すなんて、\n挑発しているの!?
+CharacterOff
+	ディーア	怒り4						それでも、\nそんなあいつにお前は似ているよ
+	ディーア	怒り4						真っ直ぐすぎるところも、\n強情なところも
+	ディーア	目閉じ4						……それが危ういところも
+CharacterOff
+	勇者レイ	怒り						……っ、なんて侮辱！
+	勇者レイ	怒り						あなたと話をしたことが\nそもそもの間違いだったわ！
+Se	走る
+CharacterOff	勇者レイ					.5
+Wait						.5
+CharacterOff
+	ディーア	目閉じ4						…………クサナギ
+CharacterOff
+	クサナギノツルギ	通常				.3		うん
+CharacterOff
+	ディーア	怒り4						クサナギは、\nこの国のことをどう思う？
+CharacterOff
+	クサナギノツルギ	通常						私も……あるじ様と同じで、\n間違ってはないと思う
+	クサナギノツルギ	通常						クサナギノツルギは\nみんなの期待にこたえる神の剣
+	クサナギノツルギ	通常						だからみんなのお願いを、\nたくさん聞いてきた
+	クサナギノツルギ	通常						家族みんなが幸せになりますように\n世界が平和になりますように
+	クサナギノツルギ	通常						平和を望む人は、\nとてもたくさんいるの
+	クサナギノツルギ	通常						みんなが仲良しを望んだ結果なら、\nこの国は正しいと思うよ
+	クサナギノツルギ	通常						でも<dash=2>
+CharacterOff
+	ディーア	驚き4						でも？
+CharacterOff
+	クサナギノツルギ	慌て						うーん、\nまだ良くわからないんだけど
+	クサナギノツルギ	慌て						これって本当に、\nみんなのお願いなのかな……？
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_05
+EndIf
+EndScenario
+
+# Q2002_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	作戦会議
+Bg	森林A					0
+Param	character_grayout=false
+	勇者レイ	蔑み				0
+FadeIn	black					1
+	勇者レイ	蔑み						はぁ、はぁ……
+	勇者レイ	蔑み						どこまで進んでも出口がないし\n気がつけば最初の地点に戻される
+	勇者レイ	蔑み						加えて戦ってはいけない？\n武装解除のペナルティ？
+	勇者レイ	蔑み						まさにワンダーランド、\nめちゃくちゃにもほどがあるわね
+	勇者レイ	通常						でもこんなところで\n足踏みする時間はないのよ
+	勇者レイ	通常						私は必ず勇者王を受け継ぐ
+	勇者レイ	泣き						そうじゃないと<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	遊園地					0
+	夢の住人D	通常				0
+FadeIn	white					.3
+	夢の住人D	通常						逃げるなというあなたは、\n魔王戦争でなにをしていたんですか？
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	森林A					0
+	勇者レイ	泣き				0
+FadeIn	white					.3
+	勇者レイ	泣き						ただの私に、\n生きる意味なんてないんだから
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	遊園地					0
+	クサナギノツルギ	通常				0
+FadeIn	black					.3
+Bgm	わくわく
+	クサナギノツルギ	通常						おまたせっ！\n野菜、切ってきたよ!!
+CharacterOff
+	夢の住人B	通常						ありがとう！\n魔剣のお嬢ちゃん、上手だねぇ！
+CharacterOff
+	クサナギノツルギ	通常						ふふーん♪\nレガリアちゃんと修行してるから♪
+CharacterOff
+	ディーア	汗4						オレも手伝ったけど、\nクサナギのと比べたらデコボコだ
+CharacterOff
+	夢の住人B	通常						ハハハ！\nこればかりは場数が大事だよ！
+	夢の住人B	通常						私だってここに来る前は\n料理なんてまともにできなかったけど
+Tween	夢の住人B	PunchPosition	y=30				NoWait
+	夢の住人B	通常						練習した今じゃ、\nみんなが私の料理を美味しいって\n言ってくれるんだ
+CharacterOff
+	夢の住人A	通常						おーい、魔剣使いさん！\nあんたたちの家を作ろうと思うから\nこの設計図を見てくれ！
+CharacterOff
+	ディーア	驚き4						オレの家？
+	ディーア	悔しい4						でもオレは<dash=2>
+CharacterOff
+	夢の住人A	通常						あんたもさっきの勇者さんのように\n外に出たいのは知ってるさ
+	夢の住人A	通常						でも急いでる時だからこそ、\n体を休ませる場所は必要だろ？
+	夢の住人A	通常						よく言うじゃないか、\n急がば回れって！
+CharacterOff
+	ディーア	悔しい4						だけど<dash=2>
+	ディーア	驚き4						って！\nすごく本格的な設計図だな!!
+CharacterOff
+	夢の住人A	通常						姐さんの料理みたいに\n暇な時間で建築を勉強したんだ！
+	夢の住人A	通常						日がな一日中、\n遊園地で遊ぶのも飽きるからな
+	夢の住人A	通常						建築は愉快な魔物がやってくれるし\n夕方には完成するよ
+Tween	夢の住人A	PunchPosition	y=30				NoWait
+	夢の住人A	通常						まあ、\nずーっと夕方なんだけどな！
+	夢の住人A	通常						ははは！\nワンダーランドジョークさ！
+CharacterOff
+	クサナギノツルギ	通常						みんな、いきいきしてるね♪
+CharacterOff
+	ディーア	通常4						ああ、そうだな\n他の人も好きなことを楽しんでいた
+	ディーア	驚き4						そう言えばオズ.ALICE……\nハートの女王も\n一緒に遊んだりするのか？
+CharacterOff
+	夢の住人A	通常						女王様？ ないないっ！\nあの方は俺たちを見守るだけだよ
+CharacterOff
+	夢の住人B	通常						まあ、私らとは違うよ\nなんたって女王様だからねぇ
+CharacterOff
+	ディーア	驚き4						そうなのか？\nオレのオズは妹のロンゴミアントと\n仲良く遊んだりしてるけど
+CharacterOff
+	夢の住人B	通常						えっ！\n女王様に妹がいたのかい？\n知らなかったよ
+CharacterOff
+	ディーア	怒り4						…………
+FadeOut	black					.3
+CharacterOff						0
+Wait						1
+	イベントスチル459H1		effect_a			1
+	イベントスチル459H2		effect_b			1
+FadeIn	black					.3
+Se	フォーン
+Tween	イベントスチル459H1	RotateBy	z=5 time=100				NoWait
+Tween	イベントスチル459H2	RotateBy	z=-5 time=100				NoWait
+	オズアリス	通常				1
+Wait						1
+CharacterOff	イベントスチル459H1		effect_a			.5
+CharacterOff	イベントスチル459H2		effect_b			.5
+	オズアリス	笑い						みんなー？\n仲良くしとるかー？
+CharacterOff
+	夢の住人A	通常						じょ、女王様!?\n戻られるのが早いですねっ！
+CharacterOff
+	夢の住人B	通常						もちろん！\nケンカもしてないですよ！
+CharacterOff
+	オズアリス	嬉しい						うんうん♪ 素敵や♪\n仲良しな夢の国は健在♪
+	オズアリス	通常						マスターも、\nちょっとは慣れたみたいやな♪
+	オズアリス	通常						もう、いきなり斬りかかっても\n無駄ってわかったんやろ？
+CharacterOff
+	ディーア	怒り4						ああ、そうだな
+	ディーア	怒り4						ここの人たちには\n武器を向けることさえもできない
+	ディーア	汗4						そんなことは\nするつもりもないけどな
+CharacterOff
+	オズアリス	嬉しい						それなら、\nちょっとだけお話しよっか♪
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Bg	遊園地					0
+	ディーア	怪しい4				0
+Wait						1
+FadeIn	black					.3
+Bgm	雪の街
+	ディーア	怪しい4						話ってなんだ？
+	ディーア	怪しい4						すぐに出してくれると言うなら\n大歓迎だけど
+CharacterOff
+	オズアリス	慌て						もー！ そんな怖い目はやめてー！\nウチはマスターとも仲良くしたいの！
+	オズアリス	通常						実はずーっと夢見とったんや\nマスターをこの国にお招きするの♪
+	オズアリス	嬉しい						アリス様から指令を聞いた時は、\nうれしかったなぁ♪
+	オズアリス	嬉しい						だから、\nマスターが急いでる原因と\n心配を減らしてあーげる♪
+	オズアリス	通常						<ruby=アンダーカバー>虚構伝承</ruby>とリディちゃん
+CharacterOff
+	ディーア	悔しい4						っ……！
+CharacterOff
+	オズアリス	通常						まず世界意思……\n虚構伝承への対処はウチが引き継ぐ
+	オズアリス	通常						今も外で、\nちゃーんと見張ってるんや
+	オズアリス	通常						アレが成長して、\nスーヴァが大噴火する前に、\nなんとかしたる
+	オズアリス	嬉しい						それからリディちゃんのことは、\nアリス様に任せればええ
+	オズアリス	嬉しい						アリス様と一緒におる\nウサギ耳のリディちゃんのことも\n知っとるやろ？
+CharacterOff
+	ディーア	怒り4						お前はアレの正体も、\n魔帝アリスの目的も知ってるのか？
+CharacterOff
+	オズアリス	通常						それは言えんなぁ\nアリス様には恩があるんやから
+	オズアリス	通常						ウチらは\nアリス様の願いを叶えるために\nファミリーに招かれた
+	オズアリス	通常						そしてみんな、\n自分の夢を叶えるために、\n<ruby=スカウト>招待状</ruby>に応じた
+	オズアリス	嬉しい						それこそが\nアリスファミリーや
+	オズアリス	通常						個人でありながらお互いに結びつき\n群体でありながら個々で決断する
+	オズアリス	嬉しい						だからこそ、\nウチらはファミリーとしての\nお互いの行動を信じとる
+	オズアリス	嬉しい						でもアリス様のことや\n魔界にとって悪いことはせんよ♪
+CharacterOff
+	ディーア	怒り4						だけど……\nそれがオレにとって良いこととは\n限らないだろう？
+CharacterOff
+	オズアリス	通常						マスターは\n魔界で悪いことを企んどるの？
+CharacterOff
+	ディーア	目閉じ4						……いいや
+CharacterOff
+	オズアリス	嬉しい						ならええやん♪\nゆるゆるのんびりしながらでも\n世界は回るんや♪
+	オズアリス	嬉しい						この夢の中みたいに♪
+CharacterOff
+	ディーア	目閉じ4						……あれから、\nこの夢の人たちと話をしたよ
+	ディーア	目閉じ4						みんな、現実で傷ついて\nオズ.ALICEに救われたって感謝してた
+	ディーア	怒り4						確かにここは、\nみんなが仲良く暮らしている\n理想的な夢かもしれない
+CharacterOff
+	オズアリス	通常
+Tween	オズアリス	PunchPosition	y=30				NoWait
+	オズアリス	嬉しい						うれしいなぁ♪\nウチもみんなが仲良くやっとるのを\n見るのが好きなんや♪
+	オズアリス	嬉しい						それが女王様の役目！\nみんなの夢を叶えるハートの女王♪
+	オズアリス	通常						だからウチは、\nこの夢を守るためならなんでもする
+CharacterOff
+	ディーア	怒り4						なら教えてくれ、\nどうしてお前はこの夢を望んだ？
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+	ロンゴミアント=オズ	通常				0
+	          		1_2
+FadeIn	white					.3
+	ディーア	<Off>	1_2					断罪シリーズ……\n罪を裁く権能を持つ魔剣の中で\n最後にして最高傑作
+	ディーア	<Off>	1_2					全ての罪を赦し、償わせる魔剣\nロンゴミアント=オズ
+	ディーア	<Off>	1_2					そしてオレのところのオズは、\nタッチしたりしても許してくれる\n優しくて懐の広い子だ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	遊園地					0
+	ディーア	怒り4				0
+FadeIn	white					.3
+	ディーア	目閉じ4						だけどこんな風に\n夢の国を創ろうとまでしない
+	ディーア	怒り4						お前を変えたのは、なんだ？
+CharacterOff
+	オズアリス	絶望						昔のウチ……\nマスターのとこのオズ、か
+	オズアリス	絶望						ロンゴたんも……、\n断罪魔剣のみんなも元気にしとる？
+CharacterOff
+	ディーア	通常4						ああ、元気だよ
+CharacterOff
+	オズアリス	嬉しい						なら、よかったぁ♪
+	オズアリス	通常						ウチもなんもなかったら、\nそのままマスターの魔剣でいられたら\n幸せやったやろうな
+	オズアリス	通常						争いがなかったら<dash=2>
+Se	マイクノイズ
+FadeOut	white					.2
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	戦場跡					0
+	          		1_2
+FadeIn	white					.2
+Wait						1
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	遊園地					0
+	ディーア	驚き4	p7			0
+	オズアリス	通常	p3b			0
+FadeIn	white					.2
+Param	character_grayout=true
+StopSe
+Shake	オズアリス		x=3				NoWait
+	オズアリス	絶望						っ…………！
+	オズアリス	笑い						あー、やめやめ！\n辛気くさい話は女王様に似合わん!!
+Tween	ディーア	MoveBy	x=-30				NoWait
+	ディーア	悔しい4						でも、お前は<dash=2>
+Tween	オズアリス	MoveBy	x=-50				NoWait
+	オズアリス	怒り						っ……ウチに触れんで
+	ディーア	驚き4						オズ、ALICE？
+	オズアリス	怒り						お願いや、マスター\n変なことを考えるのはやめて？
+	オズアリス	怒り						そうやないと、\nマスターにまた罰を与えないと\nいけなくなる
+StopBgm
+	オズアリス	怒り						今のレイちゃんみたいにな？
+	ディーア	驚き4						レイ……？
+FadeOut	black					.3
+CharacterOff						0
+Bg	森林A					0
+	オズアリス	幻想体				0
+Wait						1
+Param	character_grayout=false
+FadeIn	black					.3
+Bgm	魔獣バトル
+	オズアリス	幻想体						あかんなぁ、\n木も草も生きてるんよ？
+	オズアリス	幻想体						むやみに切り裂いたら、\n悲しむやんかぁ
+CharacterOff
+	勇者レイ	通常						本体……じゃないわね？
+	勇者レイ	ニヤリ						でも来てくれて、安心した
+	勇者レイ	ニヤリ						それは、\nこの夢が完全無欠じゃないことの\n証拠でもあるもの
+	勇者レイ	通常						この国のルールには\nこういう抜け道もあるんでしょ？
+	勇者レイ	通常						人が暮らし、営みがある以上、\n野菜も切るのも禁止なんてできない
+	勇者レイ	通常						だから木や大地への攻撃は、\n静止の対象にならない
+	勇者レイ	ニヤリ						このまま地面を抉れば？\n広範囲を破壊すれば？
+	勇者レイ	ニヤリ						どれだけ暴れれば、\nこの夢は崩れるのかしら？
+CharacterOff
+	オズアリス	幻想体						その程度で夢は揺らいだりせんけど、\n……あかんなぁ
+Se	闇1
+	黒グラデーション		エフェクト表			1
+	オズアリス	幻想体						聞き分けの悪い子は赦せん
+	オズアリス	幻想体						そうや、赦せん
+	オズアリス	幻想体						赦したらあかん
+	オズアリス	幻想体						ウチはハートの女王様やから
+CharacterOff
+	勇者レイ	怒り						っ……！
+CharacterOff
+	オズアリス	幻想体						悪い子にはお仕置きや
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_06
+EndIf
+EndScenario
+
+# Q2002_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	森林A					0
+Param	character_grayout=false
+	オズアリス	幻想体
+FadeIn	black					1
+	オズアリス	幻想体						この国で、\nハートの女王様は絶対なんや
+	オズアリス	幻想体						逆らったらあかん\n裏切ったらあかん\n侮ったらあかん
+	オズアリス	幻想体						一度目は勘弁したけど、\n二度目のお仕置きはキツイよ？
+CharacterOff
+	勇者レイ	怒り						そんな脅し、聞くものですか！
+Se	抜刀
+	勇者レイ	怒り						私はこの剣で勇者王に<dash=2>
+Se	光1
+FadeOut	white					.2
+FadeIn	white					.2
+Shake	勇者レイ		x=2				NoWait
+	勇者レイ	泣き						くっ……！
+	勇者レイ	泣き						よくも私の、剣を……！
+CharacterOff
+	オズアリス	幻想体						だからぁ、\nそんな危ないものを女王様に\n向けたらあかん
+	オズアリス	幻想体						この夢の国には\n仲良し以外はありえないんやから
+CharacterOff
+	勇者レイ	怒り						はぁ……はぁ……
+	黒グラデーション		エフェクト表
+	勇者レイ	怒り						武装解除はさっきと同じ……\nでもなにか<dash=2>
+CharacterOff
+	オズアリス	幻想体						大人しくお仕置きを受けよ？\n今ならまだ引き返せる
+CharacterOff
+	勇者レイ	怒り						言ったはずよ、\n私はあなたになんて屈しないし\n恐れるものなんてない
+	勇者レイ	怒り						それに……ははっ！
+	勇者レイ	怒り						仲良しなんて戯言、\nこんな国でよく言えるわね、\n女王様？
+CharacterOff
+	オズアリス	幻想体						なんやて？
+CharacterOff
+	勇者レイ	怒り						ルールで縛って、\n自分のために戦うという権利も奪い\n籠の中に閉じ込める
+	勇者レイ	本気						逆らえない弱者を集めて\n上から目線で愛でてるだけじゃない！
+	勇者レイ	怒り						救世主気取りで\nいい夢が見れているんでしょうね
+	勇者レイ	本気						ええ、あなたは女王様よ！\n独裁者の二つ名に相応しいわ！
+CharacterOff
+	オズアリス	幻想体						ほんま、\nチクチク言ってくれるなぁ
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	アリス	通常魔帝				0
+FadeIn	white					.3
+	アリス	通常魔帝						選べ、ロンゴミアント=オズ
+	アリス	通常魔帝						このまま滅びるか、\n我がファミリーに加わるか
+	アリス	通常魔帝						だが忘れるな、\nその代償としてお前には<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	森林A					0
+	オズアリス	幻想体				0
+FadeIn	black					.3
+	オズアリス	幻想体						っ…………
+CharacterOff
+	勇者レイ	怒り						顔色が変わった？
+	勇者レイ	本気						今なら<dash=2>
+CharacterOff
+	オズアリス	幻想体
+	オーラ赤		エフェクト表			.3
+	オズアリス	幻想体						ペナルティや
+CharacterOff
+	勇者レイ	通常
+Wait						.5
+StopBgm						0
+Se	闇1
+Bg	黒背景					.5
+Wait						.5
+	勇者レイ	蔑み						えっ……？
+	黒グラデーション		エフェクト表			.5
+	勇者レイ	蔑み						なによ、これ……？
+	勇者レイ	蔑み						なにも見えない、聞こえない……
+	黒背景		エフェクト表2			1
+	勇者レイ	泣き						まっくら…………
+	勇者レイ	泣き						<size=15>ひゅっ………</size>
+	勇者レイ	泣き						あぁ……あぁ……
+Se	マイクノイズ	TRUE
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洞窟A					0
+	          
+FadeIn	white					.3
+	女の声	<Off>						レイ、\nあなたは勇者王を継ぐ者
+	女の声	<Off>						だから生き延びて？
+	少女の声	<Off>						待って……\n行かないで、ママ……！
+FadeOut	white					.3
+CharacterOff						0
+	          
+FadeIn	white					.3
+	恐ろしい声							お前は生きていてはいけない
+FadeOut	white					.3
+CharacterOff						0
+	勇者B	嘲笑				0
+	         		1_2
+FadeIn	white					.3
+	？？？？	<Off>	1_2					母親は始末しました
+StopSe
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	黒背景					0
+	黒グラデーション		エフェクト表			0
+	勇者レイ	泣き				0
+FadeIn	white					.3
+	勇者レイ	泣き						おもい、だしたく、ない……！
+	勇者レイ	泣き						ぁぁ……
+Bgm	魔獣バトル
+	勇者レイ	<Off>	1_2					いやぁあああああああああああああ\nああああああああああ!!
+Param	character_grayout=true
+CharacterOff
+Bg	森林A
+	オズアリス	幻想体
+	オズアリス	幻想体						なんや、怖いものあるやん
+	オズアリス	幻想体						レイちゃんも\nウチとおんなじやなー
+	勇者レイ	<Off>						出してっ！\nここから出してぇええええ!!
+CharacterOff
+	クサナギノツルギ	慌て	p7b			.5
+	ディーア	悔しい4	p3			.5
+Se	走る
+Wait						.5
+	ディーア	悔しい4						レイ……!!
+	クサナギノツルギ	慌て						あの結界の中にいるみたい!!
+	ディーア	悔しい4						幻想体が捕らえているのか
+CharacterOff
+	オズアリス	幻想体						邪魔したらダメや、マスター
+	オズアリス	幻想体						ウチは今、お仕置き中
+	オズアリス	幻想体						この国を……\nみんなの夢を守るためには\n必要なんや
+CharacterOff
+	ディーア	本気4						みんなのため、だと？
+	ディーア	本気4						この悲鳴でわかるだろ！\n懲罰なら十分だ、レイを離せ!!
+CharacterOff
+	オズアリス	幻想体						ダメや
+	オズアリス	幻想体						女王様は謝らない\n女王様は赦さない\n女王様は間違えない
+	オズアリス	幻想体						幻想体でも\nこの意思はハートの女王と同じ\nそれだけはゆるゆるできん
+	オズアリス	幻想体						口で何度言ってもわからないなら、\n心に刻むしかないんや
+	オズアリス	幻想体						それにマスター？\nこの子はマスターも傷つけるよ？
+	オズアリス	幻想体						この子をそのまま助けて、\n仲良くできる？
+	オズアリス	幻想体						もうちょっとだけ、\n素直になってもらったほうが\nよくない？
+CharacterOff
+	ディーア	悔しい4						くっ……！
+Selection	*Q2002_06_01							助けない
+Selection	*Q2002_06_02							助ける
+*Q2002_06_01
+	黒グラデーション		エフェクト表			.5
+	ディーア	悔しい4						たしかにレイは敵だ
+	ディーア	悔しい4						ここから脱出した後も、\n立ちふさがる可能性がある
+	ディーア	悔しい4						なら助けない方が<dash=2>
+Jump	*Q2002_06_03
+*Q2002_06_02
+	黒グラデーション		エフェクト表			.5
+	ディーア	悔しい4						レイは敵対する勇者で\nメルトナ兵やヴェルとは違う
+	ディーア	悔しい4						でも、それでも<dash=2>
+Jump	*Q2002_06_03
+*Q2002_06_03
+StopBgm
+FadeOut	black					.2
+CharacterOff						0
+Bg	黒背景					0
+	勇者レイ	<Off>				0
+FadeIn	black					.2
+	勇者レイ	<Off>						<size=15>たすけて、お父様……</size>
+FadeOut	black					.2
+CharacterOff						0
+Bg	森林A					0
+	ディーア	悔しい4				0
+FadeIn	black					.2
+Bgm	決戦
+	ディーア	悔しい4						っ!!
+	ディーア	本気4						この声を無視するなら、\nオレに王となる資格はない!!
+	ディーア	本気4						レイを助けるぞ！\n力を貸してくれ、クサナギ!!
+CharacterOff
+	クサナギノツルギ	通常						うんっ！\nあるじ様のお願い、叶えるよ!!
+CharacterOff
+	オズアリス	幻想体						マスターも、ウチに逆らうの？
+CharacterOff
+	ディーア	本気4						誰かを助けようとする行為が、\n"仲良し"に反するわけがない……!!
+	ディーア	本気4						それを罰するというのなら、\nお前は間違っている!!
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_07
+EndIf
+EndScenario
+
+# Q2002_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔王バトル
+Bg	森林A					0
+Param	character_grayout=false
+	ディーア	悔しい4				0
+FadeIn	black					1
+	ディーア	悔しい4						くっ……！\nやはり攻撃行動が静止される!!
+	黒グラデーション		エフェクト裏				1
+	ディーア	悔しい4						だけど、どういうことだ？
+	ディーア	怒り4						国民相手には\n武器を抜くことさえできなかったのに
+	ディーア	怒り4						幻想体へは\n魔剣を構えることはできている
+	ディーア	驚き4						まさか……!?
+CharacterOff
+	オズアリス	幻想体						ああ、\nこれはそろそろあかんな
+	オズアリス	幻想体						なら言う事を聞かんマスターにも\nペナルティや！
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	オズアリス	幻想体						そのクサナギちゃんを没収♪
+CharacterOff
+	ディーア	悔しい4						いったい、どうすれば……!!
+CharacterOff
+	クサナギノツルギ	通常						あるじ様！
+	クサナギノツルギ	通常						あるじ様の、\nレイちゃんを助けたい気持ちは、\n本当の本当だよね？
+	クサナギノツルギ	通常						あるじ様の敵になるかもしれないけど\nそれでも助けたいんだよね？
+CharacterOff
+	ディーア	本気4						ああっ!!
+	ディーア	本気4						例え敵になっても、\nああいう不器用なやつは\n放っておけない!!
+CharacterOff
+	クサナギノツルギ	通常						だったら！\nクサナギノツルギが<dash=2>
+Se	チャージ
+	オーラ青		エフェクト表			1
+	クサナギノツルギ	通常						期待にこたえるよっ!!
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	光1
+Se	剣閃
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	森林A					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	オズアリス	幻想体						なんや、今の……
+Se	フォーン
+CharacterOff	オズアリス	幻想体				1
+Wait						1
+CharacterOff
+	ディーア	驚き4						攻撃が通じた？
+CharacterOff
+	クサナギノツルギ	通常						あるじ様、それより早く!!
+CharacterOff
+	ディーア	悔しい4						ああ！ レイ……！
+CharacterOff
+	黒グラデーション		エフェクト表
+	勇者レイ	泣き
+Shake	勇者レイ		x=2
+	勇者レイ	泣き				2		ぁ、ぁぁ……
+CharacterOff
+	ディーア	怒り4						待ってろ、今すぐ<dash=2>
+Bgm	図書館
+CharacterOff
+	オズアリス	怒り						幻想体が消えたけど、\nなにをしたん？
+CharacterOff
+	ディーア	悔しい4						オズ、ALICE!?
+CharacterOff
+	オズアリス	怒り						そっか、クサナギちゃんが……
+CharacterOff
+	ディーア	悔しい4						オレを、どうするつもりだ？
+CharacterOff
+	オズアリス	怒り						…………
+Tween	オズアリス	PunchPosition	y=30				NoWait
+	オズアリス	嬉しい						なーんも♪
+	オズアリス	嬉しい						なんかマスターとレイちゃんが、\n仲良くなれそうな気配やし♪
+	オズアリス	通常						ウチはみんなが、\n仲良しになれればええんや
+	オズアリス	通常						それに幻想体をどうにかできても、\nこの"国"を出ていくことはできんから
+	オズアリス	嬉しい						あとは二人でご自由に♪
+CharacterOff
+	ディーア	本気4						待ってくれ、オズ.ALICE！
+	ディーア	悔しい4						この夢は、\n本当にお前の描いた夢なのか？
+	ディーア	悔しい4						お前がしたかったことなのか？
+CharacterOff
+	オズアリス	嬉しい						当たり前や♪
+	オズアリス	嬉しい						だってウチは<dash=2>
+	オズアリス	通常						"ハートの女王様"やから！
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_08
+EndIf
+EndScenario
+
+# Q2002_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	酒場_宿屋					0
+Param	character_grayout=true
+	勇者レイ	泣き				2
+FadeIn	black					1
+	勇者レイ	泣き						うぅ……ここ、は……？
+Bgm	神秘
+	勇者レイ	泣き						あったかい……
+	勇者レイ	泣き						なんで、わたし、ベッドで……
+Se	マイクノイズ
+FadeOut	white					.1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	黒背景					0
+	勇者レイ	<Off>				0
+FadeIn	white					.1
+	勇者レイ	<Off>						出してっ！\nここから出してぇええええ!!
+FadeOut	white					.1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場_宿屋					0
+	勇者レイ	泣き				0
+StopSe
+FadeIn	white					.1
+Shake	勇者レイ		x=2				NoWait
+	勇者レイ	泣き						ひっ…………！
+	勇者レイ	泣き						やだ、やだ……！
+	ディーア	驚き4	画面外_右
+Se	走る
+Tween	ディーア	MoveBy	x=-550 time=1				NoWait
+	ディーア	驚き4						大丈夫か、レイ……？
+Tween	勇者レイ	MoveBy	x=-150				NoWait
+	勇者レイ	泣き						ま、魔剣王……!?\nなんで、どうし<dash=4>
+	ディーア	通常4						落ち着け
+	ディーア	通常4						ここはオレのために、\n夢の国の人が造ってくれた家だ
+	ディーア	笑い4						オズ.ALICEも追撃してこないし、\n安全だよ
+	勇者レイ	泣き						あん、ぜん……
+Shake	勇者レイ		x=2				NoWait
+	勇者レイ	泣き						うぅ、ぐすっ……
+	ディーア	悔しい4						ごめんな、\n一人にさせるべきじゃなかった
+	勇者レイ	泣き						ちが、ちがうわよっ……
+	勇者レイ	泣き						わるいのは、わたしだった……！
+	勇者レイ	泣き						一人で突っ走って、\nあなたを、なんどもなんども……！
+	勇者レイ	泣き						なのに、なんで……？
+	勇者レイ	泣き						なんで、\nこんなに優しくしてくれるのよ……？
+	ディーア	怒り4						お前みたいなヤツを\n嫌いになんてなれないんだ
+	ディーア	怒り4						不器用で、理想に真っすぐで……\nどこか危なっかしい勇者を
+	ディーア	目閉じ4						きっともう……\nそういうヤツを失いたくないんだ
+	勇者レイ	泣き						ぐすっ……
+	勇者レイ	泣き						…………暗いのが、怖いの、\nどうしようもなく
+	ディーア	目閉じ4						そうか……
+Tween	勇者レイ	MoveBy	x=50				NoWait
+	勇者レイ	泣き						だからお願い、\nもう暗くしないで……
+	ディーア	通常4						一晩中でも、\n灯りはつけておくよ
+Tween	勇者レイ	MoveBy	x=50				NoWait
+	勇者レイ	泣き						一人にしないで……
+	ディーア	通常4						お前がイヤじゃないなら、\n一緒にいる
+Tween	勇者レイ	MoveBy	x=50				NoWait
+	勇者レイ	泣き						怖くて、体が震えるの……
+	勇者レイ	泣き						お願い……
+StopBgm
+Se	衣擦れ1
+FadeOut	black					1
+CharacterOff						0
+	勇者レイ	泣き				0
+Wait						3
+FadeIn	black					1
+Bgm	雪の街
+	勇者レイ	泣き						まだ言葉を覚え始めたくらい、\n私が小さい頃のことだったそうよ
+	勇者レイ	泣き						私とママは、\nママの生家からエデンの王城に\n移ることになって
+	勇者レイ	泣き						その途中で、\nお父様を憎む一団に襲われたの
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	カジノ					0
+	勇者レイ	<Off>				0
+FadeIn	white					.3
+	勇者レイ	<Off>						私のママは名門勇者の家系で、\n勇者王夫人
+	勇者レイ	<Off>						だから私が生まれた時は、\n後継者の誕生に国中が喜んだって\n養父から教えてもらった
+	勇者レイ	<Off>						ママも次代の勇者王を産むのを\n責任だと思ってたから\n私のことを大事にしてくれたそうよ
+	勇者レイ	<Off>						でもあの事件で<dash=2>
+FadeOut	white					.3
+CharacterOff						0
+Bg	洞窟A					0
+FadeIn	white					.3
+	勇者レイ	<Off>						奇襲を受けて護衛も少なくて、\nママは小さい私のために囮になった
+	勇者レイ	<Off>						その最期は……\n言葉に表せないほど凄惨だったって
+	勇者レイ	<Off>						そして私は、\n養父が助け出してくれるまで一週間、\n真っ暗な洞窟に隠れていた
+	勇者レイ	<Off>						当時のことは、\n怖くて怖くて仕方なかったこと以外\n断片的にしか覚えていない
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場_宿屋					0
+	勇者レイ	泣き				0
+FadeIn	white					1
+	勇者レイ	泣き						それからずっと暗闇が怖い\n体が震えて、動けなくなっちゃう
+	勇者レイ	泣き						おかしいわよね？\n暗闇が怖い勇者なんて？
+	勇者レイ	泣き						ただでさえ致命的な弱点があるのに、\n私はずっと回り道をさせられた
+	勇者レイ	泣き						養父に匿われ、\n彼が亡くなった後はあいつ……\n師と屋敷で修行して
+	勇者レイ	泣き						第二次魔王獣戦役でも、\n希望王との戦いでも\n外に出ることさえ許されなかった
+	勇者レイ	泣き						だから仲間の勇者にも、\n今さらなにをしに来たんだって、\n陰口を言われてるのも知ってる
+	勇者レイ	泣き						それ以外の人が、\n血統しか見てないことも知ってる
+	勇者レイ	泣き						でも……\n私は勇者王になりたい、\nならなくちゃいけない
+	勇者レイ	泣き						養父は私を、\n未来の勇者王として育ててくれた
+	勇者レイ	泣き						ママは私を、\n未来の勇者王だから守ってくれた
+	勇者レイ	泣き						お父様だって、\n私には記憶さえ残っていないけれど\nそれを望んでいたはずよ
+	勇者レイ	泣き						私の命は、\n次代の勇者王になるためにある
+	勇者レイ	泣き						だからママと養父、\nそしてお父様に報いるためにも、\n早く王になりたかった
+CharacterOff
+	ディーア	怪しい4						そのためにオレを、\n魔界を滅ぼした魔剣王を\n倒そうとしたのか
+CharacterOff
+	勇者レイ	泣き						実績もない血筋だけの女が、\n勇者王になるために、\nそれが一番の近道だったのよ
+Shake	勇者レイ		x=2				NoWait
+	勇者レイ	泣き						でも、もう終わりね
+	勇者レイ	泣き						暗闇が怖い勇者の姫なんて、\n物笑いの種
+	勇者レイ	泣き						いつかはバレることだったけど、\n夢が終わるのって、\nこんなにあっさりなのね
+CharacterOff
+	ディーア	目閉じ4						…………
+	ディーア	怒り4						オレはお前の境遇になにも言えない
+	ディーア	目閉じ4						勇者王とは戦ったこともあるけれど\n彼の考えも思いも知らない
+	ディーア	怒り4						それにE.D.E.N.の内情も、\n正直どうでもいい
+CharacterOff
+	勇者レイ	泣き						そう、でしょうね
+StopBgm
+CharacterOff
+	ディーア	目閉じ4						でも、一つだけ\n自信を持って言えることがある
+Bgm	凱旋
+	ディーア	通常4						お前の剣はすごかったよ
+CharacterOff
+	勇者レイ	泣き						え……？
+CharacterOff
+	ディーア	笑い4						まっすぐで美しくて、\n鍛錬の日々と意思の強さが\n太刀筋に出ていた
+	ディーア	笑い4						これまで戦った大勇者にも負けない\n素晴らしい剣だった
+	ディーア	通常4						お前はこれまでを\n回り道で足踏みだと思っているかも\nしれないけれど
+	ディーア	通常4						その日々で磨いた剣技を、\nお前は誇るべきだ
+	ディーア	笑い4						だからお前は堂々と戦った『レイ』、\nオレにとってはそれだけだよ
+CharacterOff
+	勇者レイ	泣き						…………
+	勇者レイ	笑い						ふふ、なによそれ
+	勇者レイ	笑い						私はあなたの前だと、\nただのレイだってこと？
+	勇者レイ	笑い						勇者王の血筋に対して、不敬よ
+CharacterOff
+	ディーア	笑い4						だったらその不敬の罰は、\nお前の秘密を一生抱えることで償う
+	ディーア	笑い4						諦めるなよ、\nお前はまだ戦い始めたばかりだろ？
+	ディーア	通常4						生きているなら、\n何度だって立ち上がれるんだ
+	ディーア	笑い4						それにお前みたいなタイプは、\nとことん諦めが悪いって知ってる
+CharacterOff
+	勇者レイ	通常						もう、好き勝手言うわね
+	勇者レイ	通常						でもそっか……\n私、まだ諦めなくていいんだ……
+	勇者レイ	笑い						ありがとう、\n<param=name>
+StopBgm						1
+FadeOut	black					1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	勇者レイ	泣き				0
+Wait						3
+FadeIn	black					1
+Bgm	平和
+	勇者レイ	泣き						冷静に考えたら、\nとんでもなく恥ずかしいことを\nした気がする
+Shake	勇者レイ		x=2				NoWait
+	勇者レイ	泣き						敵であったあなたに、\nあんなに弱いところ見せちゃって
+	勇者レイ	泣き						でも……\nずいぶんと女の子の扱いに\n手慣れているわね？
+CharacterOff
+	ディーア	汗4						だってほら、\nオレの周りは魔剣少女でいっぱいだし\n自然と身につくというか
+CharacterOff
+	勇者レイ	蔑み						…………
+CharacterOff
+	ディーア	絶望4						なんか余計に怒ってないか？
+CharacterOff
+	勇者レイ	怒り						怒ってないわよっ！
+	勇者レイ	怒り						それで!?\nこれからどうやって脱出するの!?
+CharacterOff
+	ディーア	通常4						今度は協力してくれるんだ
+CharacterOff
+	勇者レイ	通常						ええ、\nもう意地を張るのは止めるわ
+	勇者レイ	通常						あの女王も私の秘密を知ったし、\n口外できないように倒して、脱出！
+	勇者レイ	笑い						それで私は、\nまた勇者王を目指すの！
+StopBgm
+CharacterOff
+	ディーア	通常4						よし、わかった
+Bgm	作戦会議
+	ディーア	怪しい4						まず現状での脱出方法は、\nオズ.ALICEを倒すか、説得するか
+	ディーア	目閉じ4						他にも最終手段があるけれど、\nこの後のことを考えると温存したい
+	ディーア	怒り4						二つのどちらかでいこう
+CharacterOff
+	勇者レイ	通常						まず説得には\n応じそうもないわね……
+	勇者レイ	通常						能力的には相手が有利だし、\n私たちは交渉材料を持っていない
+	勇者レイ	通常						それにあいつは、\n"仲良し"に病的に固執してるから
+	勇者レイ	蔑み						かといって戦闘で倒すにも、\n戦闘行為は停止させられるし\n強制的な武装解除も……
+	勇者レイ	通常						…………あれ？
+CharacterOff
+	ディーア	通常4						やっぱりレイも気づいたか
+CharacterOff
+	勇者レイ	通常						ええ、冷静に考えればおかしいわ
+	勇者レイ	通常						そういえば\nあの戦いでも違和感はあった
+CharacterOff
+	ディーア	通常4						オレもそうだ
+	ディーア	通常4						国の人と話したことや、\nレイを助ける戦いからヒントを得た
+CharacterOff
+	勇者レイ	通常						でも、どうして？\nあいつの望みは"みんな仲良く"よ？
+	勇者レイ	通常						なのに、\nこんな根本的な<dash=2>
+CharacterOff
+	ディーア	目閉じ4						それもきっと、\nオズ.ALICEを倒せば分かるさ
+	ディーア	怒り4						そのためにも、まずは<dash=2>
+	ディーア	笑い4						オレと結婚してくれ、レイ
+StopBgm
+	勇者レイ	笑い						わかったわ！
+	勇者レイ	笑い						………………
+CharacterOff
+	勇者レイ	驚き
+	集中線		エフェクト表
+	勇者レイ	驚き						えぇええええええええええ！！！？
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_09
+EndIf
+EndScenario
+
+# Q2002_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	わくわく
+Bg	森林A					0
+	妖精型モンスター					0
+Tween	妖精型モンスター	RotateTo	y=180 time=0				Add
+FadeIn	black					1
+Tween	妖精型モンスター	PunchPosition	y=30				NoWait
+	妖精型モンスター							ケッコンだって、ケッコン！
+CharacterOff
+	大樹型モンスター		1_2					ケッコンってなぁに？
+CharacterOff
+	妖精型モンスター
+Tween	妖精型モンスター	RotateTo	y=180 time=0				Add
+	妖精型モンスター							ケッコンを知らないの？\n大きな樹はおバカさんねぇ？
+	妖精型モンスター							いい？
+	妖精型モンスター							ケッコンはケッコンなの、\nおわかり？
+CharacterOff
+	大樹型モンスター		1_2					わぁ！ さすが妖精さん♪\nものしりー！
+CharacterOff
+	妖精型モンスター
+Tween	妖精型モンスター	RotateTo	y=180 time=0				Add
+	妖精型モンスター							それじゃあ、\n国のみんなでお祝いをするわよ♪
+Tween	妖精型モンスター	PunchPosition	y=30				NoWait
+	妖精型モンスター							はっぴーはっぴーはっぴー♪
+	妖精型モンスター							お菓子のお家に、ジャムの小川♪\n砂糖菓子の雪を降らせてお祝いよ♪
+Param	character_grayout=false
+FadeOut	black					.3
+CharacterOff						0
+Bg	遊園地					0
+	オズアリス	驚き				0
+	集中線		エフェクト表
+FadeIn	black					.3
+	オズアリス	驚き						えぇええええええええええ!!
+	オズアリス	驚き						マスターとレイちゃん、\n結婚するん!?
+Param	character_grayout=true
+CharacterOff
+	ディーア	笑い4	p3
+	勇者レイ	笑い	p7
+	勇者レイ	笑い						そ、そうよ……！
+	ディーア	笑い4						オズ.ALICEには、\nこれまでたくさん迷惑をかけたな
+	ディーア	笑い4						でもそのおかげで、\n本当の気持ちに気づけたんだ！
+CharacterOff
+	オズアリス	慌て						あんなに憎み合ってた二人が、\nこーんなに仲良くなるなんて！
+	オズアリス	慌て						ウチは……ウチは……！
+Tween	オズアリス	PunchPosition	y=30				NoWait
+	オズアリス	嬉しい						ウチはうれしいっ！
+	オズアリス	嬉しい						うれしくて、涙がでてくるっ！
+CharacterOff
+	ディーア	笑い4	p3
+	勇者レイ	笑い	p7
+	ディーア	笑い4						計画通り、\nオズ.ALICEが出てきてくれたな
+	勇者レイ	笑い						そ、そうね
+	勇者レイ	泣き						<size=15>これは演技……これは演技……\nなのになんでドキドキするの？</size>
+CharacterOff
+	オズアリス	通常						なんか言うた？
+CharacterOff
+	ディーア	笑い4	p3
+	勇者レイ	笑い	p7
+	ディーア	笑い4						いいや、なんにも！
+CharacterOff
+	オズアリス	絶望						うーん？\nでも考えてみたらおかしいなぁ
+	オズアリス	絶望						ケンカしとったのに、\n一日で仲直りしちゃうなんて
+	オズアリス	驚き						しかも！\n恋人をすっとばして結婚！
+	オズアリス	驚き						近頃の若者は決断が早いいうけど、\n早すぎやろ!?
+CharacterOff
+	ディーア	笑い4	p3
+	勇者レイ	笑い	p7
+	勇者レイ	笑い						だ、だって！\n一日も待ってられないんだもの！
+	勇者レイ	笑い						わ、私たちの愛は\nそれだけおっきいのよっ！
+	勇者レイ	笑い						ね、ねー？ ダーリン♪
+	ディーア	汗4						そ、そうだな、ハニー？
+CharacterOff
+	オズアリス	絶望						じゃあ、\nもう抱き合ってギューッとかした？
+CharacterOff
+	ディーア	笑い4	p3
+	勇者レイ	笑い	p7
+	ディーア	笑い4						もちろん！
+CharacterOff
+	オズアリス	慌て						ちゅ、チューもしたの？
+CharacterOff
+	ディーア	笑い4	p3
+	勇者レイ	笑い	p7
+	勇者レイ	笑い						と、当然よ！\nあんなに幸せな時間は初めて！
+CharacterOff
+	オズアリス	慌て						じゃ、じゃあ……！
+	オズアリス	慌て						二人で\nイチャイチャラブラブしたり？
+CharacterOff
+	ディーア	汗4	p3
+	勇者レイ	驚き	p7
+	勇者レイ	驚き						そ、それは……
+CharacterOff
+	オズアリス	慌て						してないの？
+CharacterOff
+	ディーア	汗4	p3
+	勇者レイ	驚き	p7
+Tween	勇者レイ	PunchPosition	y=50				NoWait
+	勇者レイ	驚き						し、したわよっ！
+	勇者レイ	驚き						ちゃんとイチャイチャしたわっ！
+Shake	勇者レイ		x=2				NoWait
+	勇者レイ	泣き						…………あぅ
+	ディーア	汗4						あははは……\nま、まだ照れてるみたいだな……
+CharacterOff
+	オズアリス	笑い						でも大丈夫や！\nレイちゃんの気持ちは伝わった!!
+	オズアリス	笑い						二人の愛を疑ってごめんな！
+	オズアリス	笑い						でも、ええなー♪\nウチもそんな仲良しになりたい！
+	オズアリス	嬉しい						マスターのこと、\n実はええかもーって思ってたけど\nレイちゃんに取られたー！
+CharacterOff
+	ディーア	絶望4	p3
+	勇者レイ	蔑み	p7
+	勇者レイ	蔑み						ずいぶんモテるわね、魔剣王……
+	ディーア	絶望4						殺気を感じる……
+CharacterOff
+	オズアリス	嬉しい						よーし、わかった！\n疑ったウチがわるかった！
+	オズアリス	嬉しい						お詫びに国の総力をあげて、\n二人の結婚をお祝いしたるっ！
+	オズアリス	通常						ごちそうは！
+CharacterOff
+	夢の住人B	通常
+Tween	夢の住人B	PunchPosition	y=30				NoWait
+	夢の住人B	通常						私が頼まれたよ！
+CharacterOff
+	オズアリス	通常						式場は？
+CharacterOff
+	夢の住人A	通常
+Tween	夢の住人A	PunchPosition	y=30				NoWait
+	夢の住人A	通常						俺が造ろう!!
+CharacterOff
+	オズアリス	通常						ドレスの用意は？
+CharacterOff
+	夢の住人D	通常
+Tween	夢の住人D	PunchPosition	y=30				NoWait
+	夢の住人D	通常						私にお任せを！
+CharacterOff
+	オズアリス	通常						なら、エスコートは？
+CharacterOff
+	夢の住人C	通常
+Tween	夢の住人C	PunchPosition	y=30				NoWait
+	夢の住人C	通常						私、やってみたい!!
+CharacterOff
+	オズアリス	嬉しい						か、完ぺきやないかー!!
+	オズアリス	嬉しい						ウチが出る幕なんかあらへん！
+	オズアリス	通常						みんなが仲良しになって、\n力を合わせてお祝い！
+	オズアリス	嬉しい						ウチの国民、すごすぎやろっ！
+CharacterOff
+	ディーア	笑い4	p3
+	勇者レイ	ニヤリ	p7
+	ディーア	笑い4						オズ.ALICEのおかげだよ、\nお前が平穏と安全を与えたから\n彼らは人生を豊かにできた
+	ディーア	通常4						オレとレイも、\nこの国に入ることは回り道だったけど\n最後には支え合えるようになった
+	ディーア	通常4						だからそんな女王様に、\n一つだけどうしてもお願いがある
+CharacterOff
+	オズアリス	嬉しい						なんやっ!?\n二人がもっと仲良くなるためなら\nなんでもするよ♪
+CharacterOff
+	ディーア	通常4	p3
+	勇者レイ	ニヤリ	p7
+	ディーア	通常4						ハネムーンに行きたいんだ
+StopBgm
+CharacterOff
+	オズアリス	怒り						…………は？
+Bgm	絶望
+CharacterOff
+	夢の住人A	通常						ハネムーンか、いいねえ！
+CharacterOff
+	夢の住人B	通常						新婚さんなら、\nそうするべきだよね！
+CharacterOff
+	ディーア	通常4	p3
+	勇者レイ	笑い	p7
+	勇者レイ	笑い						南国のビーチに行こうって、\n約束したの♪
+	勇者レイ	笑い						水着でイチャイチャするって\n楽しそうじゃない！
+	勇者レイ	笑い						お願いよ、女王様！\nたった数日だけでも<dash=2>
+CharacterOff
+	オズアリス	怒り						ダメや
+CharacterOff
+	ディーア	怒り4	p3
+	勇者レイ	通常	p7
+	ディーア	怒り4						どうして？\nオレたちは仲良くなりたいだけなのに
+CharacterOff
+	オズアリス	怒り						ダメや、\nここから外には出さん
+	オズアリス	怒り						それはルールや
+CharacterOff
+	ディーア	怒り4	p3
+	勇者レイ	通常	p7
+	勇者レイ	通常						大事なルールは一つ、
+	勇者レイ	通常						<color=red>この国ではみんな仲良く</color>
+	勇者レイ	通常						そうなんでしょう？
+	勇者レイ	通常						私たちはルールに反してない
+CharacterOff
+	オズアリス	怒り						この世界だから平和なんや、\n夢だから仲良しなんや
+	オズアリス	怒り						外を知って、変化を求めたら、\nまた人は争い合う
+	オズアリス	怒り						そんなこと、\nハートの女王は許容しない
+	オズアリス	怒り						マスター、レイちゃん？\nもしかしてその話をするために\n結婚するなんて言ったんか？
+CharacterOff
+	夢の住人D	通常						じょ、女王様！\nそれは流石に言いすぎですよ！
+CharacterOff
+	夢の住人A	通常						そうそう！\n数日って言ってたじゃないですか\nこの国がいいなら戻ってきますよ！
+CharacterOff
+	夢の住人B	通常						望んで国に来た私たちとは違うし、\n外に出してあげても
+CharacterOff
+	オズアリス	怒り						なにを言ってるんや？
+	オズアリス	怒り						そんなの赦さん
+	黒グラデーション		エフェクト表			1
+	オズアリス	怒り						ウチがみんなを守るんや
+	オズアリス	怒り						みんなの夢をウチが守るんや
+	オズアリス	怒り						ずーっと\nみんなが仲良く暮らすんや
+	オズアリス	怒り						これ以上、\nなにかを欠いたり失うことを\nウチは赦さん
+CharacterOff
+	夢の住人A	通常						そ、それは……\nおかしくないですか？
+	夢の住人A	通常						本当は、俺たちだって……
+CharacterOff
+	ディーア	怒り4						そうだ、みんなにも\nやりたいこと、叶えたいことがある
+	ディーア	怒り4						確かにここは、\nみんな平和で変わらない理想郷だよ
+	ディーア	怒り4						そして平和だからこそ\n国のみんなは新しい夢を持った
+CharacterOff
+	夢の住人A	通常						俺も本当は……\n外でたくさんの建物を造りたい
+	夢の住人A	通常						今なら荒れ果てた故郷を、\n住める街に変えられるかもしれない
+CharacterOff
+	夢の住人B	通常						私もそうさ、\n傷つけて、見捨ててしまった仲間に\n美味しいご飯を食べさせたい
+CharacterOff
+	夢の住人D	通常						私は……逃げてしまったけど、\nせめて仲間の墓参りをしたいんです
+CharacterOff
+	夢の住人C	通常						私はちゃんと大人になりたいっ！
+CharacterOff
+	オズアリス	怒り						なんでやっ！
+	オズアリス	怒り						この国はみんなの夢！\nみんながいる仲良しの国やろ!?
+	オズアリス	怒り						なんで外に行きたいなんて、\nバカなこと言うんや!?
+StopBgm
+CharacterOff
+	クサナギノツルギ	通常						オズ.ALICEちゃんだって、\n本当はわかっているんでしょ？
+CharacterOff
+	オズアリス	怒り						なんやて……？
+Bgm	神社
+CharacterOff
+	クサナギノツルギ	通常						あなたの、\nみんなを守りたい気持ちは本当
+	クサナギノツルギ	通常						でもね？\nこの夢はみんなの夢じゃない\nあなたの夢だよ？
+	クサナギノツルギ	通常						私はお願いをたくさん聞いてきた\n期待にこたえる魔剣
+	クサナギノツルギ	通常						だから、分かるの
+	クサナギノツルギ	通常						みんな、\nたくさんのお願いを持ってるの
+	クサナギノツルギ	通常						でも、それが生きることでしょ？
+	クサナギノツルギ	通常						平和に、仲良しになったら\n新しいやりたいことが増えるでしょ？
+CharacterOff
+	ディーア	怒り4						新しい場所に行きたい、\nもっと新しい知識を手に入れたい
+	ディーア	怒り4						人の好奇心、夢、希望は\nそうやって膨らんでいくんだ
+	ディーア	怒り4						他のみんなにとって、\n仲良しや平和は夢を実現する前提だ
+	ディーア	怒り4						お前だって本当は<dash=2>
+StopBgm
+CharacterOff
+	オズアリス	怒り						もうええ
+CharacterOff
+	ディーア	悔しい4						オズ.ALICE……!!
+Bgm	魔王バトル
+Param	character_grayout=false
+CharacterOff
+Se	チャージ
+	オーラ赤		エフェクト表
+	オズアリス	怒り						みんなはわかってない
+	オズアリス	怒り						なにもかも失う孤独も、恐怖も\nあの寂しさも……
+	オズアリス	怒り						ここはウチの国、ウチの夢!!
+Se	火1
+FadeOut	red					.2
+	オズアリス	敵				0
+FadeIn	red					.2
+	オズアリス	敵						逆らう者にはペナルティや!!
+CharacterOff
+	ディーア	目閉じ4						やっぱり、こうなるのか
+CharacterOff
+	夢の住人D	通常						どうするんですかっ！\nハートの女王様には逆らえない!!
+	夢の住人D	通常						戦うことさえも<dash=2>
+CharacterOff
+	ディーア	怒り4						大丈夫、安心してくれ
+	ディーア	怒り4						レイはみんなの保護を頼む
+CharacterOff
+	勇者レイ	通常						任せたわよ、魔剣王
+Param	character_grayout=false
+CharacterOff
+	ディーア	本気4	p3
+	クサナギノツルギ	通常	p7b
+	ディーア	本気4						いくぞ、クサナギ!!
+	クサナギノツルギ	通常						うん！
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_10
+EndIf
+EndScenario
+
+# Q2002_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	決戦
+Bg	遊園地					0
+Param	character_grayout=false
+	クサナギノツルギ	通常	p7b
+	ディーア	本気4	p3
+FadeIn	black					.3
+	ディーア	本気4						はぁああああああああ!!
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	剣閃
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	遊園地					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	オズアリス	敵						くっ……！
+CharacterOff
+	ディーア	本気4						よしっ！\n届くまでに静止はされるが<dash=2>
+CharacterOff
+	夢の住人D	通常						女王様に敵対できた!?
+	夢の住人D	通常						<color=red>この国ではみんな仲良く</color>
+	夢の住人D	通常						私たちがお互いを傷つける行動は\n停止させられるのに
+CharacterOff
+	勇者レイ	通常						それは女王様である\nロンゴミアント=オズ.ALICEにも\n適応されるはず……だった
+	勇者レイ	通常						でもね、\n考えてみたらおかしいのよ
+	勇者レイ	通常						私も魔剣王も、\nあいつに向かって剣を構えた後に\n武装解除させられた
+	勇者レイ	通常						でも攻撃の意思自体を挫けるなら、\n武装解除の必要はある？
+	勇者レイ	通常						つまり、\n国民が互いに仲良くというのは\n絶対のルールなのに
+	勇者レイ	ニヤリ						ハートの女王だけは\n自分の力で敵を止めるという\n矛盾があったの
+CharacterOff
+	夢の住人A	通常						でもハートの女王様がいる時に\n動けなくなることもあったような
+CharacterOff
+	勇者レイ	ニヤリ						それはハートの女王の近くに\n他の国民がいたから
+	勇者レイ	ニヤリ						最初に私が動きを止められたのは、\n魔剣王ごと斬ろうとしたからだった
+CharacterOff
+	夢の住人A	通常						で、でも、どうして？
+Param	character_grayout=true
+CharacterOff
+	クサナギノツルギ	通常	p7b
+	ディーア	目閉じ4	p3
+	ディーア	目閉じ4						オズ.ALICE
+	ディーア	怒り4						お前は"みんな"じゃないんだな？
+CharacterOff
+	オズアリス	敵						っ……！
+CharacterOff
+	勇者レイ	通常						みんな仲良くを謳いながら、\n頂点である絶対の女王が存在する
+	勇者レイ	通常						女王とそれ以外の国民という状態を\n仲良しと呼べる？
+	勇者レイ	通常						そもそも基本構造からして、\nこの夢は矛盾だらけ
+	勇者レイ	通常						だからみんなに含まれない、\nハートの女王は攻撃対象にできる
+	勇者レイ	通常						そのリスクを背負うことで、\n夢の国での強制的な"仲良し"を\n実現していたんでしょうね
+CharacterOff
+	クサナギノツルギ	通常	p7b
+	ディーア	悔しい4	p3
+	ディーア	悔しい4						それはとても寂しくて、\n悲しいルールだよ、オズ.ALICE
+	ディーア	目閉じ4						だからもう一度聞く、\nこれは本当にお前が望んだ夢なのか？
+	ディーア	悔しい4						お前"が"みんなと仲良くしたいから\nこの夢を創ったんだろう？
+	ディーア	悔しい4						こんな風に、\n孤独な王様でいる必要は<dash=2>
+CharacterOff
+	オズアリス	敵						わかってない！
+	オズアリス	敵						マスターはわかってないっ！
+	オズアリス	敵						口で言って、何度も赦したら、\nそれで戦いは止まるの!?
+	オズアリス	敵						みんなわかり合って、\n仲良くなんてしてくれるの!?
+	オズアリス	敵						だったら世界は、\nこんな風になっとらんよ!!
+	オズアリス	敵						だからウチはハートの女王に成った！\n成り果てた！
+	オズアリス	敵						それでええんや！\nウチが大切に思ったみんなだけが\n仲良くなれたら!!
+	オズアリス	敵						その夢に、ウチがいなくても!!
+Param	character_grayout=false
+StopBgm
+CharacterOff
+	夢の住人D	通常	p6
+	夢の住人C	通常	p8
+	夢の住人B	通常	p4
+	夢の住人A	通常	p2
+	夢の住人A	通常						女王様……
+Bgm	勇者バトル
+Param	character_grayout=true
+CharacterOff
+	クサナギノツルギ	通常	p7b
+	ディーア	悔しい4	p3
+	ディーア	悔しい4						クサナギ、頼む
+	クサナギノツルギ	通常						うん……！\nあるじ様の期待、受け取ったよ！
+CharacterOff
+	オズアリス	敵						なにをしても無駄やっ！
+	オズアリス	敵						ルールに穴があろうとも、\nウチには絶対の赦しの力がある!!
+	オズアリス	敵						このまま攻撃しても、\nウチに届くことはない……!!
+CharacterOff
+	クサナギノツルギ	通常	p7b
+	ディーア	怒り4	p3
+	クサナギノツルギ	通常						ううん！ できるよっ!!
+	クサナギノツルギ	通常						オズ.ALICEちゃん、\nあなたは自分の願いに縛られてる
+	クサナギノツルギ	通常						でも私は知ってるの！\n新しい家族が教えてくれたの！
+	クサナギノツルギ	通常						お願いは！ 希望は、夢は！\n背中を押してくれるすごい力!!
+StopBgm
+	クサナギノツルギ	通常						だから、\nみんなが期待してくれるなら<dash=2>
+Param	character_grayout=false
+Se	チャージ
+	オーラ青		エフェクト表			.5
+	クサナギノツルギ	通常						クサナギノツルギは、\nなんでもできる!!
+Bgm	タイトル
+FadeOut	white					2
+Bg	白背景					0
+CharacterOff						0
+	クサナギノツルギ	拡大魔王足	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	クサナギノツルギ	拡大魔王	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+Bg	遊園地					0
+CharacterOff						0
+	クサナギノツルギ	魔王				0
+	          
+FadeIn	white					.3
+	クサナギノツルギ	魔王						あるじ様の期待！\nクサナギノツルギがこたえるよ!!
+CharacterOff
+	オズアリス	敵						魔王装!?
+CharacterOff
+	ディーア	目閉じ4						確かにお前の力は、\n結果の先出しで対象の行動を封じる\n神に等しい権能だ
+	ディーア	怒り4						だがクサナギノツルギは\n神の武力として、\n人々の期待と願いにこたえ続けた神劍
+	ディーア	怒り4						そこに攻撃という過程は必要ない\nただ叶えたという結果が残るだけだ
+	ディーア	怒り4						お前の赦しによる静止は、\nクサナギに通用しない
+CharacterOff
+	オズアリス	敵						そんなの赦さん!!
+	オズアリス	敵						もうウチは……\nこの夢を失いたくないっ！
+CharacterOff
+	ディーア	本気4						行くぞ、オズ.ALICE！
+	ディーア	本気4						お前の願いと、オレたちの願い！\nここからは押し付けあいだ!!
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_11
+EndIf
+EndScenario
+
+# Q2002_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	決戦
+Bg	遊園地					0
+Param	character_grayout=false
+	オズアリス	絶望				0
+FadeIn	black					1
+	オズアリス	絶望						だめ、だめや……！
+	オズアリス	絶望						ウチの夢はまだ……!!
+Param	character_grayout=true
+CharacterOff
+	クサナギノツルギ	魔王2	p7b
+	ディーア	悔しい4	p3
+	ディーア	悔しい4						もうやめよう、オズ.ALICE
+	ディーア	悔しい4						女王であることは、\nお前にとっても辛いだけだ
+CharacterOff
+	オズアリス	絶望						だとしても、\nウチは叶えたかったんや！
+	オズアリス	絶望						ウチの夢をずっと<dash=2>
+Param	character_grayout=false
+StopBgm						0
+Se	闇1
+CharacterOff
+	裏ディーア	ハテナ				.5		ならば希望通り、\nこの夢を永遠にしてやろう
+	裏ディーア	ハテナ						やれ
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景
+Param	character_grayout=false
+	イベントスチル1048N	N1	エフェクト裏			0
+	黒背景		エフェクト表			0
+Se	火2
+Tween	黒背景	MoveBy	x=1500 time=2				NoWait
+	裏ディーア	<Off>						ルーンブレード:Blaze
+Se	火3
+	イベントスチル1048N	N2				2
+Wait						2.5
+ImageEffectOff	SpriteCamera	Bloom
+FadeOut	black					.2
+CharacterOff						0
+	黒背景		エフェクト表			0
+	射撃(青)		エフェクト裏			0
+ImageEffect	SpriteCamera	MotionBlur
+FadeIn	black					.2
+Se	剣閃
+Se	光3
+Tween	黒背景	MoveBy	y=-3000 time=0.8
+Wait						.3
+Bgm	魔獣バトル
+Bg	遊園地					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	土煙		エフェクト表			1
+	オズアリス	泣き
+Shake	オズアリス		x=2				NoWait
+	オズアリス	泣き						きゃあああああ!?
+CharacterOff
+	ディーア	驚き4
+	ディーア	驚き4						オズ.ALICE!?
+CharacterOff
+	オズアリス	絶望						なんで、あんたが……！
+	オズアリス	絶望						<ruby=ワンダーランド>理想郷</ruby>に入るには\nウチの許可が必要<dash=2>
+CharacterOff
+	裏ディーア	ハテナ						だからオレは招きに応じた
+	裏ディーア	ハテナ						しかし、残念だよ
+	裏ディーア	ハテナ						アリスファミリーの誇る\n<ruby=ワンダーランド>理想郷</ruby>、\n少し期待していたんだ
+	裏ディーア	ハテナ						だがこうまで\n個人に依存しているとなると駄目だ\n脆すぎる
+	裏ディーア	ハテナ						所詮は弱者の世界、\n抗うことを諦めて夢に逃げた\n偽りの女王の国だ
+	裏ディーア	ハテナ						そして<dash=2>
+CharacterOff
+	ディーア	驚き4						お前は……誰だ？
+CharacterOff
+	裏ディーア	ハテナ						なにを呆けている
+	裏ディーア	ハテナ						魔剣王、\n貴様なら分かるだろう？
+CharacterOff
+	勇者レイ	怒り						ど、どうなってるのよ!?\n魔剣王が二人!?
+	勇者レイ	怒り						しかもあの姿は……!!
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	市街地C(火事)					0
+	裏ディーア	通常				0
+	          	<Off>	1_2
+FadeIn	white					.3
+	勇者レイ	<Off>	1_2					魔界を滅ぼした黒い王……！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	遊園地					0
+	裏ディーア	ハテナ				0
+FadeIn	white					.3
+	裏ディーア	ハテナ						呪われた勇者王の血、か
+	裏ディーア	ハテナ						だが今は<dash=2>
+CharacterOff
+	オズアリス	怒り						この国の中で、\n好き勝手はさせないっ！
+	オズアリス	怒り						ウチがあんたを<dash=2>
+CharacterOff
+	裏ディーア	ハテナ						夢は脆くとも、\n兵器としての性能は流石だな
+	裏ディーア	ハテナ						……聖剣ルカ
+Se	フォーン
+	聖剣ルカ	プレ	p5b			2
+Tween	聖剣ルカ	MoveBy	x=150 time=2				NoWait
+Wait						2
+	聖剣ルカ	プレ						…………
+Se	チャージ
+FadeOut	white					1
+CharacterOff						0
+	オズアリス	泣き				0
+Se	光3
+Se	光2
+FadeIn	white					.2
+Shake	オズアリス		x=2				NoWait
+	オズアリス	泣き						あぁっ……!!
+CharacterOff
+	裏ディーア	ハテナ						終わりだ
+Se	チャージ
+	オーラ赤		エフェクト表			.3
+	裏ディーア	ハテナ						<color=blue><ruby=アルターノヴァ>伝承融合</ruby></color>
+	裏ディーア	ハテナ						<ruby=アンダーカバー>虚構伝承</ruby>よ、\nこの夢を悪夢に塗り替えろ
+Se	火3
+Se	闇3
+FadeOut	red					.3
+CharacterOff						0
+	オズアリス	絶望				0
+	オーラ赤		エフェクト表			0
+	黒グラデーション		エフェクト表2			0
+FadeIn	red					.3
+	オズアリス	絶望						がぁああああああああ！
+	オズアリス	絶望						ウチの、夢に……伝承に……！\nなにかが、はいって……!?
+	オズアリス	絶望						熱い……
+	オズアリス	絶望						<color=red>熱い熱い熱い熱い熱い……!!</color>
+CharacterOff
+	ディーア	驚き4						聖剣、ルカ……？\nそれに虚構伝承を<dash=2>
+	ディーア	悔しい4						っ！\nオズ.ALICEになにをした!?
+Param	character_grayout=true
+CharacterOff
+	聖剣ルカ	プレ	p7b
+	裏ディーア	ハテナ	p3
+	裏ディーア	ハテナ						ロンゴミアント=オズ.ALICEと、\n虚構伝承を融合させた
+	裏ディーア	ハテナ						虚構伝承は模倣情報生命、\n本物に成るという原始的な欲求で\nあらゆる適応を行う
+	裏ディーア	ハテナ						人々の畏怖……悪夢を力とし、\n虚構である己を世界に焼き付けさせる
+	裏ディーア	ハテナ						そしてコレは、\n十分にスーヴァに対する\n畏怖を吸収した
+	裏ディーア	ハテナ						ハートの女王という伝承を\n上書きできるほどに
+Param	character_grayout=false
+CharacterOff
+	オズアリス	絶望
+	オーラ赤		エフェクト表
+	黒グラデーション		エフェクト表2			0
+	オズアリス	絶望						ます、たぁ……
+Se	火3
+FadeOut	red					.3
+CharacterOff						0
+	虚構伝承スーヴァ	通常				0
+FadeIn	red					.3
+	虚構伝承スーヴァ	通常						ォオオオオオオオオ!!
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	黒背景		エフェクト裏			0
+Wait						.2
+Se	火3
+Se	火事
+	オーラ赤		エフェクト表2
+	オーラ炎		エフェクト表			.5
+Wait						.3
+FadeOut	red					.5
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Bloom
+Bg	洞窟B
+	オーラ炎		エフェクト表			0
+FadeIn	red					.5
+Wait						1
+CharacterOff
+	夢の住人A	通常
+Shake	夢の住人A		x=3				NoWait
+	夢の住人A	通常						そんな！ 女王様の国が！\n俺たちの国が!?
+CharacterOff
+	ディーア	悔しい4						オズ.ALICEの夢の国が、\n虚構に塗りつぶされていく
+	ディーア	悔しい4						この技術、まさか<dash=2>
+Param	character_grayout=true
+CharacterOff
+	聖剣ルカ	プレ	p7b
+	裏ディーア	ハテナ	p3
+	裏ディーア	ハテナ						これより虚構伝承は、\n夢の領域を魔界全土へ広げる
+	裏ディーア	ハテナ						取り込んだ人類を\n逃れられぬ炎の海で灰にするために
+	裏ディーア	ハテナ						全てを破壊し尽くす獣こそ、\n魔王獣の穴埋めに相応しいからな
+CharacterOff
+	ディーア	本気4						ふざけるな……！
+	ディーア	悔しい4						どうしてこんな、\n魔界の人々を滅ぼそうだなんて!!
+CharacterOff
+	聖剣ルカ	プレ	p7b
+	裏ディーア	ハテナ	p3
+	裏ディーア	ハテナ						ふざけているのはどちらだ、\n魔剣王？
+	裏ディーア	ハテナ						貴様はすべてを知っている
+	裏ディーア	ハテナ						知っていながら、\nここにこうして立っている
+	裏ディーア	ハテナ						本当に貴様は、\n愚かなる卑怯者だよ
+Param	character_grayout=false
+	聖剣ルカ	プレ						…………
+Se	フォーン
+CharacterOff	聖剣ルカ					1
+CharacterOff	裏ディーア					1
+Wait						1
+CharacterOff
+	ディーア	悔しい4						っ……!!\nなんで、ルカまで……!!
+CharacterOff
+	集中線		エフェクト表
+	虚構伝承スーヴァ	通常						■■■■■■■■■■!!
+CharacterOff
+	勇者レイ	本気						ヤツは後よ、魔剣王！\nまずはこの異変獣を止めないと!!
+CharacterOff
+	ディーア	悔しい4						ああ、そうだな……
+	ディーア	本気4						行くぞっ!!
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_12
+EndIf
+EndScenario
+
+# Q2002_12
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔獣バトル
+Bg	洞窟B					0
+Param	character_grayout=false
+	ディーア	悔しい4				0
+FadeIn	black					1
+	ディーア	悔しい4						はぁ、はぁ……！
+	ディーア	悔しい4						さすがは、六大異変の力
+	ディーア	悔しい4						ヤツの言葉はハッタリじゃない\n虚構に堕ちた夢が魔界を飲み込めば、\n魔界の住人は全滅する
+CharacterOff
+	勇者レイ	怒り						なら、早く倒さないと！\n手段を選んでいる暇はないわ！
+CharacterOff
+	ディーア	悔しい4						でも、あの中には<dash=2>
+CharacterOff
+	勇者レイ	驚き						まさかあなた、\nハートの女王を助ける気!?
+	勇者レイ	怒り						本気で言っているの!?\nただでさえ抑えるので手一杯なのに\nそんなのムリよ！
+CharacterOff
+	ディーア	本気4						でも！\nこの夢はあいつの全てだったんだ！
+	ディーア	悔しい4						こんな形で利用されて、\n夢の国と一緒に討伐される？
+	ディーア	本気4						そんな結末、\n受け入れてたまるかっ！
+CharacterOff
+	勇者レイ	怒り						なんてお人好し……！
+	勇者レイ	通常						でも今はわかるわよ、\nそれがあなたなんだってことは
+	勇者レイ	通常						あなたは\n敵だった私も助けてくれたもの
+	勇者レイ	通常						だけど夢が広がるまで\nもう一刻の猶予もないのよ？
+	勇者レイ	通常						ハートの女王だって、\n自分の夢で魔界が滅びることは\n望んでない！
+	勇者レイ	通常						ハートの女王と共に異変獣を倒す\nそれが正解なの
+CharacterOff
+	ディーア	悔しい4						くっ……！
+CharacterOff
+	虚構伝承スーヴァ	通常						…………
+Se	チャージ
+	オーラ赤		エフェクト表
+	虚構伝承スーヴァ	通常						オォオオオオ!!
+CharacterOff
+	黒グラデーション		エフェクト裏
+	勇者レイ	怒り
+	ディーア	悔しい4
+Se	マイクノイズ	TRUE
+	ディーア	悔しい4						ぐっ……なんだ？
+	勇者レイ	怒り						頭の中にイメージが……！
+StopBgm
+	ディーア	悔しい4						これ、は……オズ.ALICEの記憶？
+StopSe
+Se	回想
+FadeOut	white					1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	魔術空間					0
+	オズアリス	怒り				0
+Wait						1
+FadeIn	white					1
+Bgm	神秘
+	オズアリス	怒り						最後の断罪の魔剣、\n神の如く罪を"赦す"権能を持つ、\n贖罪を司る魔槍
+	オズアリス	怒り						それが元のウチ、\nロンゴミアント=オズ
+	オズアリス	怒り						でもほんまはな、\nそんな大層な力は必要なかったんや
+FadeOut	black					.2
+CharacterOff						0
+Bg	酒場1F					0
+	ロンゴミアント	通常				0
+FadeIn	black					.2
+	ロンゴミアント	通常						姉さんったら！\nまたマスターに甘々対応してー！
+	ロンゴミアント	通常						でもウチは甘くない！\n姉さんを守るんが\nロンゴミアントの役目やから！
+CharacterOff
+	ディーア	絶望2						誤解だ！\n本当の本当に滑ってコケただけで！
+CharacterOff
+	ロンゴミアント	通常
+Tween	ロンゴミアント	PunchPosition	y=30				NoWait
+	ロンゴミアント	通常						そんな\nコントみたいなことあるかー！
+CharacterOff
+	ディーア	絶望2						オズからも弁護してくれー！
+CharacterOff
+	ロンゴミアント=オズ	通常						もー！\nマスターはしゃーないなぁ♪
+CharacterOff
+	ロンゴミアント	通常	p7
+	ディーア	絶望2	p3
+	ロンゴミアント=オズ	<Off>						厳しいけど優しい妹のロンゴたん、\n面白すぎるマスター
+	ロンゴミアント=オズ	<Off>						毎日がゆるゆるで楽しくて、\n夢を見てる気分やった
+	ロンゴミアント=オズ	<Off>						ウチは大した力を持たなくていいし、\n神様のマネもしたくない
+	ロンゴミアント=オズ	<Off>						ただ仲良しなみんなを、\n守っていけたらそれだけでええの
+	ロンゴミアント=オズ	<Off>						そんな毎日を繰り返して、\nいつか世界中のみんなとも仲良しに\nなれたら素敵やなって
+StopBgm
+	ロンゴミアント=オズ	<Off>						でも<dash=2>
+FadeOut	black					.2
+CharacterOff						0
+Bg	戦場跡					0
+	ロンゴミアント	悲しい				0
+FadeIn	black					.2
+Wait						.5
+Se	ぐちゃ
+	血痕A		エフェクト表			0
+	ロンゴミアント	悲しい						ごめんな、姉さん……
+Se	倒れる
+CharacterOff	ロンゴミアント					.5
+Wait						.5
+CharacterOff
+Bgm	絶望
+	ロンゴミアント=オズ	悲しい						ロンゴたん？ マスター？
+	ロンゴミアント=オズ	悲しい						なんでや……\nウチを一人にせんでよぉ……
+CharacterOff
+	ロンゴミアント=オズ	<Off>						この世界は、\nそんな甘い夢を赦してくれなかった
+	ロンゴミアント=オズ	<Off>						どんどん悪化する戦況に、\n倒れていく仲間、家族、大切な人
+	ロンゴミアント=オズ	<Off>						何度も赦した、何度も贖罪させた
+	ロンゴミアント=オズ	<Off>						でも神の如き赦しの力は、\n終わった物事にしか使えない
+	ロンゴミアント=オズ	<Off>						大切な誰かを、\n傷つけられた後に赦すしかない
+	ロンゴミアント=オズ	<Off>						ウチは、なんも守れなかった
+	ロンゴミアント=オズ	<Off>						それでウチの世界は、\n失敗した並行世界は滅んだ
+FadeOut	black					1
+CharacterOff						0
+Bg	荒野					0
+	ロンゴミアント=オズ	悲しい				0
+FadeIn	black					1
+	ロンゴミアント=オズ	悲しい						あはは……\nなにやっとったんやろ、ウチは！
+	ロンゴミアント=オズ	悲しい						なんにもできんかった！\nなんにもっ!!
+	ロンゴミアント=オズ	悲しい						大切なみんなを守れんで、\nなんでウチだけ……守られて……
+	ロンゴミアント=オズ	悲しい						ウチはただみんなと<dash=2>
+	ロンゴミアント=オズ	悲しい						…………\nみんなが仲良しだったら\nよかったんや
+	ロンゴミアント=オズ	悲しい						世界のみんなが仲良くなれたら、\nこんなこと起こらんのに!!
+	ロンゴミアント=オズ	悲しい						それだけのことが、なんで……!!
+StopBgm
+FadeOut	black					.5
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	アリス	通常魔帝				0
+FadeIn	black					.5
+Bgm	図書館
+	アリス	通常魔帝						夢を叶えたいか？\nロンゴミアント=オズ
+	アリス	通常魔帝						全てが滅んだこの世界で、\n唯一生き残った特異個体よ
+	アリス	通常魔帝						ファミリーの一員となれば、\nこの鍵が貴様の夢を叶えるだろう
+	アリス	通常魔帝						誰もが仲良く平和に過ごす、\n<ruby=ワンダーランド>理想郷</ruby>を
+	アリス	通常魔帝						だが忘れるな、\n過ぎた願いには代償がある
+	アリス	通常魔帝						<ruby=ワンダーランド>理想郷</ruby>を維持する限り、\nハートの女王を演じなければいけない
+	アリス	通常魔帝						ハートの女王は\n誰かを赦すことはできない
+	アリス	通常魔帝						誰かと仲良くすることは赦されない
+	アリス	通常魔帝						誰かと触れ合うことさえ赦されない
+	アリス	通常魔帝						それでもこの力を望むか？\n貴様だけの理想郷を創りたいか？
+CharacterOff
+	ロンゴミアント=オズ	絶望						当然や……
+	ロンゴミアント=オズ	絶望						もう戦いも、失うのもイヤ
+	ロンゴミアント=オズ	絶望						みんなが平和で仲良く暮らせるなら、\nウチは女王様にでもなる
+Se	火1
+FadeOut	white					.3
+CharacterOff						0
+	オズアリス	怒り				0
+FadeIn	white					.3
+	オズアリス	怒り						仲良くしているみんなの中に、\nウチが入れなくても！
+StopBgm
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洞窟B					0
+	ディーア	目閉じ4				0
+Wait						1
+FadeIn	white					1
+	ディーア	目閉じ4						………………
+CharacterOff
+	虚構伝承スーヴァ	通常						グッグッグッグッ！
+CharacterOff
+	ディーア	怒り4						<ruby=アンダーカバー>虚構伝承</ruby>、\n今のは精神攻撃のつもりか？
+	ディーア	怒り4						オズ.ALICEに同情して、\nオレたちが攻撃を緩めるのを\n期待したんだろう
+	ディーア	怒り4						だけどお前は、\n人間ってものをまるでわかってない
+	ディーア	本気4						こんなものを見せられて、\n火が点かないわけないだろう!!
+Bg	黒背景
+CharacterOff
+	レイ本気スチル	通常	エフェクト表
+Bgm	勇者バトル
+	勇者レイ	<Off>						はぁあああああああ!!
+Se	抜刀
+Wait						.2
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景					0
+	黒背景		エフェクト表
+	斬撃(39205A)		エフェクト裏
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.5				NoWait
+Wait						1.2
+Se	斬2
+	斬撃(39205B)		lost1
+CharacterOff	黒背景
+Wait						.2
+Se	斬2
+	斬撃(39205C)		lost2
+Wait						.2
+Se	斬2
+	斬撃(39205D)		lost3
+Wait						.3
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Bloom
+	黒背景		エフェクト表			0
+FadeOut	white					.3
+CharacterOff						0
+Wait						1
+Bg	洞窟B					0
+	虚構伝承スーヴァ	通常				0
+FadeIn	white					.3
+Se	ザシュ
+Shake	虚構伝承スーヴァ	通常	x=3				NoWait
+	虚構伝承スーヴァ	通常						■■■■■■■■!?
+CharacterOff
+	勇者レイ	本気						勇者を舐めるんじゃないわよ！\nこの化け物が!!
+	勇者レイ	本気						泣いて傷ついていた女の子を\n見殺しにする？
+	勇者レイ	本気						そんなの勇者のあり方に反するわ！
+	勇者レイ	通常						私はレイ！\n勇者王シドウの娘にして、\n未来の勇者王!!
+	勇者レイ	通常						魔界もハートの女王も、\nみんなまとめて救ってやるっ!!
+CharacterOff
+	ディーア	通常4						本当に、\nまっすぐで綺麗な剣だよ
+CharacterOff
+	勇者レイ	ニヤリ						魔剣王！\n私が撹乱して隙をつくるわ！
+	勇者レイ	ニヤリ						隠し玉があるんでしょう!?\nさっさとそれを使いなさいよっ！
+CharacterOff
+	ディーア	本気4						ああ！
+	ディーア	怒り4						オズ.ALICE、今助ける！
+	ディーア	本気4						お前の夢は、\nこんな形で失わせない!!
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_13
+EndIf
+EndScenario
+
+# Q2002_13
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	決戦
+Bg	洞窟B					0
+Param	character_grayout=false
+	虚構伝承スーヴァ	通常				0
+FadeIn	black					1
+	虚構伝承スーヴァ	通常						■■■■■■■■■■!?
+CharacterOff
+	勇者レイ	ニヤリ						敵の体勢が崩れたわっ！
+CharacterOff
+	クサナギノツルギ	魔王2						あるじ様とレイちゃん、\nすごい息ぴったり♪
+CharacterOff
+	ディーア	笑い4						"夫婦"だからな！
+CharacterOff
+	勇者レイ	驚き						な、なな!?\n変なこと言わないでよっ!!
+	勇者レイ	本気						こいつはすぐ起き上がってくるっ！\nその前に!!
+CharacterOff
+	ディーア	通常4						任せろっ！
+	ディーア	怒り4						マリーさん、使います!!
+Se	フォーン
+	オーラ赤		エフェクト表			.5
+	ディーア	目閉じ4						<ruby=BLAZING L.O.S.T.>対魔剣殲滅魔導兵装･無式</ruby>\n解放っ!!
+Se	チャージ
+FadeOut	black					.2
+CharacterOff						0
+Bg	黒背景					0
+	痛む腕スチル	通常	エフェクト表			.5
+FadeIn	black					.2
+Wait						1
+Se	光3
+Se	闇3
+FadeOut	white					1
+CharacterOff						0
+Bg	洞窟B					0
+	虚構伝承スーヴァ	通常				0
+StopBgm
+Wait						2
+FadeIn	white					1
+Shake	虚構伝承スーヴァ		x=3				NoWait
+	虚構伝承スーヴァ							■■■■■………!!
+CharacterOff
+	オズアリス	驚き				1		あ、れ……ウチは……？
+CharacterOff
+	勇者レイ	怒り						今のは……\n融合していた伝承を、切り離した？
+CharacterOff
+	ディーア	笑い4破損						よかった、助けられて……
+Se	闇1
+	ディーア	悔しい4破損						ぐっ……!?
+Se	倒れる
+CharacterOff	ディーア					.5
+Wait						.5
+CharacterOff
+Bgm	ロルリアンレットB
+	オズアリス	慌て						マスター!?
+	オズアリス	慌て						腕、酷いことになっとる……
+	オズアリス	慌て						なんでウチごと、\nこいつを倒さなかったんや
+CharacterOff
+	ディーア	汗4破損						仕方ないだろう、\n元とは言え並行世界のオレの魔剣、\n放っておけないよ
+CharacterOff
+	オズアリス	驚き						っ…………！
+	オズアリス	悲しい						夢が燃えて、魔界が危なくて、\nみんなも危険にさらして
+	オズアリス	悲しい						なのに、ウチの魔力も\n<ruby=アンダーカバー>虚構伝承</ruby>に根こそぎ奪われとる
+	オズアリス	悲しい						あの時みたいに、\nウチ、なんもできんのに……
+CharacterOff
+	虚構伝承スーヴァ	通常						ォオオオオオオオオ!!
+CharacterOff
+	勇者レイ	怒り						こいつ！\nハートの女王を分離したのに、\nまだこんな力を!?
+	勇者レイ	怒り						<ruby=ワンダーランド>理想郷</ruby>も\n元に戻らないっ！
+CharacterOff
+	オズアリス	悲しい						だめやなぁ……\nウチはいつも気づくのに遅れる
+	オズアリス	悲しい						みんなが仲良くなれればって\n思うだけでなんにもできなかったから\n世界が滅びて
+	オズアリス	悲しい						夢を叶える力をもらっても、\n失うのが怖くて夢に逃げて……
+	オズアリス	悲しい						みんなを支配して、\n怖い思いをさせて……
+	オズアリス	悲しい						なのにまた、なにもかも<dash=2>
+StopBgm
+CharacterOff
+	ディーア	目閉じ4破損						夢に逃げた？\nみんなに怖い思いをさせた？
+	ディーア	怒り4破損						バカを言うなよ
+CharacterOff
+	オズアリス	慌て						え……？
+CharacterOff
+Bgm	ロルリアンレットC
+CharacterOff
+	夢の住人A	通常						こっちだ、化け物!!
+CharacterOff
+	虚構伝承スーヴァ	通常						っ………!!
+CharacterOff
+	勇者レイ	本気						あなたたち!?\n危ないわよ、下がっていて!!
+CharacterOff
+	夢の住人B	通常						いやだねっ！\n私たちの夢のピンチなんだ!!
+	夢の住人B	通常						私たちでも\n注意をそらすぐらいできるっ!!
+CharacterOff
+	夢の住人D	通常						私は元勇者！\n戦うこともできますっ！
+Shake	夢の住人D		x=2
+	夢の住人D	通常						はは！\nこんなに勇気を出すのは久しぶりだ
+	夢の住人D	通常						でも戦いから逃げた私が、\nまた立ち上がれたのもこの夢のおかげ
+	夢の住人D	通常						女王様が休ませてくれた、\n時間があったから
+	夢の住人D	通常						その恩義に今こそ報いるときです!!
+CharacterOff
+	オズアリス	慌て						みんな……!!
+CharacterOff
+	ディーア	通常4破損						お前が彼らを守った時間が、\n彼らを強くした
+	ディーア	通常4破損						夢を見て休んだから、\n彼らもまた立ち上がれたんだ
+	ディーア	目閉じ4破損						この争いばかりの魔界で、\nどうしようもなく平和から遠い世界で
+	ディーア	怒り4破損						それでもお前が\n誰よりも真剣に理想を願ったから！
+	ディーア	怒り4破損						ただ逃げていただけ？
+	ディーア	本気4破損						夢に逃げたなんて言わせない！\nお前は絶望に逃げずに努力したんだ！
+	ディーア	通常4破損						だから<dash=2>
+	ディーア	笑い4破損						お前の夢に、\nオレも協力させてくれ
+	ディーア	笑い4破損						オレだって、\n魔界の未来をつくっていく王なんだ
+	ディーア	笑い4破損						もう一人ぼっちの\n孤独な女王様になんてさせない
+	ディーア	通常4破損						だからもう一度、\n今度は魔界を平和にするために
+CharacterOff
+	クサナギノツルギ	魔王2						私も協力する！
+	クサナギノツルギ	魔王2						一人より、みんな！\nみんなのお願いが集まったほうが\n強い力になるよ♪
+	クサナギノツルギ	魔王2						世界のみんなが仲良し！\nすごく素敵な夢だもんっ！
+CharacterOff
+	オズアリス	慌て						マスター、クサナギちゃん……
+Se	回想
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	アリス	通常魔帝				0
+FadeIn	black					.3
+	アリス	通常魔帝						ハートの女王は\n誰かを赦すことはできない
+	アリス	通常魔帝						誰かと仲良くすることは赦されない
+	アリス	通常魔帝						誰かと触れ合うことさえ赦されない
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洞窟B					0
+	オズアリス	泣き				0
+FadeIn	white					.3
+	オズアリス	泣き						ウチは、まだ怖い……
+	オズアリス	泣き						その手を取ったら、\nもう<ruby=ワンダーランド>理想郷</ruby>を続けられない
+	オズアリス	泣き						また失敗したら、\nまた全部を失ったらって思ったら\n怖くて仕方ない
+	オズアリス	悲しい						それでもっ……!!\nウチは夢を叶えたいんや！
+	オズアリス	悲しい						世界のみんなが仲良くなって！\nずっと遊べる夢を!!
+CharacterOff
+	ディーア	笑い4破損						その夢を叶えよう、オズ.ALICE！\nこの魔界で!!
+FadeOut	white					1.5
+CharacterOff						0
+Bg	白背景					0
+	イベントBGオズALICE		エフェクト表			0
+Tween	イベントBGオズALICE	MoveBy	y=-483 time=20				NoWait
+FadeIn	white					1.5
+	オズアリス	<Off>	1_2					あっ……
+	オズアリス	<Off>						強い手や……
+	オズアリス	<Off>						そうや、ずっと忘れてた\n支えてくれる誰かの手の強さ
+	オズアリス	<Off>						この支えがあれば今度こそ、\nみんなを仲良しにできるかな？
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	オズアリス	<Off>						ううん、\n『できるか？』やない
+Bgm	鍵師バトル
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景
+Param	character_grayout=false
+	スチルアリスファミリー	オズ2	エフェクト裏			0
+	黒背景		エフェクト表			0
+Se	チャージ
+Tween	黒背景	MoveBy	x=1500 time=2				NoWait
+	オズアリス	<Off>						夢は、叶えるもの！
+Se	パリン
+Se	チャージ
+FadeOut	white					1
+Bg	白背景					0
+ImageEffectOff	SpriteCamera	Bloom
+	スチルアリスファミリー	オズ3	エフェクト裏			0
+Se	光3
+FadeIn	white					2
+Wait						2
+FadeOut	white					1
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	アリス	通常魔帝				0
+Wait						1
+FadeIn	white					1
+	アリス	通常魔帝						ハートの女王が、\n鎖から解き放たれたか
+	アリス	通常魔帝						それでいい
+FadeOut	red					1
+CharacterOff						0
+Bg	洞窟B					0
+	オズアリス	本気				0
+Se	光3
+Se	火3
+FadeIn	red					1
+	オズアリス	本気						アリスファミリーの"ハートの女王"\n永劫平和の夢の主！
+	オズアリス	本気						そしてマスターの魔剣！\nロンゴミアント=オズ.ALICE！
+	オズアリス	本気						まだウチは夢の途中!!\n守りたいみんながいるんやっ！
+	オズアリス	本気						邪魔をするなら覚悟せえ！\n虚構伝承!!
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_14
+EndIf
+EndScenario
+
+# Q2002_14
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	決戦
+Bg	洞窟B					0
+Param	character_grayout=false
+	虚構伝承スーヴァ	通常				0
+	集中線		エフェクト表
+FadeIn	black					1
+	虚構伝承スーヴァ	通常						■■■■■■■■!!
+CharacterOff
+	オズアリス	本気						無駄やっ!!
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	弓2
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(赤)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	洞窟B					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	虚構伝承スーヴァ	通常
+Wait						.3
+Se	闇1
+ImageEffect	SpriteCamera	NegaPosi
+Wait						.3
+ImageEffectOff	SpriteCamera	NegaPosi				.3
+	虚構伝承スーヴァ	通常						ガ、ア……!?
+CharacterOff
+	オズアリス	本気						無罪無罪無罪無罪無罪!!
+	オズアリス	本気						マスターもクサナギちゃんも、\nレイちゃんもみんなも！
+	オズアリス	本気						ウチの大切な人はみーんな無罪！\n女王様が赦したる!!
+Tween	オズアリス	PunchPosition	y=30				NoWait
+	オズアリス	敵						攻撃なんて通さんっ!!
+CharacterOff
+	ディーア	通常4破損						赦しの先出し……\n味方になるとこんなに！
+CharacterOff
+	虚構伝承スーヴァ	通常						■■■■■■……
+CharacterOff
+	オズアリス	敵						ごめんな、\nほんまはアンタとも仲良くしたい
+	オズアリス	敵						そんな夢の世界をつくりたい
+	オズアリス	敵						いつかその夢を、\n絶対に叶えてみせるから
+	オズアリス	敵						赦してな……
+	オズアリス	敵						さあ、行くでぇええ!!
+Se	チャージ
+	オーラ赤		エフェクト表			.3
+	オズアリス	本気						ブレイズ、ドライブ!!
+FadeOut	white					2
+StopBgm
+Se	光3
+Se	闇3
+CharacterOff						0
+	虚構伝承スーヴァ	通常				0
+Wait						1
+FadeIn	white					.5
+	虚構伝承スーヴァ	通常						っ…………
+	虚構伝承スーヴァ	通常						マ、ダ……
+Se	チャージ
+	オーラ赤		エフェクト表
+	虚構伝承スーヴァ	通常						ホンモノ、ニ……!!
+Bgm	魔獣バトル
+CharacterOff
+	ディーア	悔しい4破損						こいつ、自爆する気か!?
+	ディーア	悔しい4破損						六大異変を覚醒させる程の魔力が\n爆発すれば<dash=2>
+CharacterOff
+	オズアリス	敵						うん、だから……！
+Se	光1											転送エフェクト
+	イベントスチル459H1		effect_a			1
+	イベントスチル459H2		effect_b			1
+Tween	イベントスチル459H1	RotateBy	z=5 time=100				NoWait
+Tween	イベントスチル459H2	RotateBy	z=-5 time=100				NoWait
+Wait						1.5
+Se	チャージ
+FadeOut	white					.5
+CharacterOff						0
+Bg	固まった溶岩の大地					0
+	ディーア	驚き4破損				1
+FadeIn	white					.5
+StopBgm
+	ディーア	驚き4破損						ここは!?
+CharacterOff
+	勇者レイ	怒り						私たち、外に!?
+CharacterOff
+	夢の住人B	通常						外……\nまた、外に……！
+Bgm	タイトル
+CharacterOff
+	オズアリス	笑い						さあ今や！\n夢の世界に<ruby=アンダーカバー>虚構伝承</ruby>を閉じ込めた!!\nこれなら爆発しても影響ないっ！
+	オズアリス	通常						マスター！ 夢ごとトドメを!!
+CharacterOff
+	ディーア	怒り4破損						いいんだな？
+CharacterOff
+	オズアリス	笑い						うん！\n女王様が赦したる♪
+	オズアリス	笑い						ウチはマスターの手を取った以上、\nもう理想郷は維持できないし、
+	オズアリス	嬉しい						次の夢は！\nマスターやみんなと一緒に見るから♪
+	オズアリス	通常						それでええんやろ、アリス様？
+CharacterOff
+	ディーア	通常4破損						ありがとう、オズ.ALICE
+	ディーア	本気4破損						CODE:THISWAY！\n<ruby=メモライズ>伝承付記</ruby><全能殺しリディ>!!
+CharacterOff
+	ディスウェイ	通常
+Tween	ディスウェイ	PunchPosition	y=30				NoWait
+	ディスウェイ	通常						ディース……
+	集中線		エフェクト表
+	ディスウェイ	通常						ウェエエエエエエエエイ！！！！
+FadeOut	black					.2
+CharacterOff						0
+Bg	洞窟B					0
+	虚構伝承スーヴァ	通常				0
+FadeIn	black					.2
+	虚構伝承スーヴァ	通常						ボクモ、ホン、モノニ…………
+Se	火3
+Se	光3
+StopBgm
+FadeOut	white					2
+Wait						2
+CharacterOff						0
+Bg	固まった溶岩の大地					0
+	ディーア	通常4破損				0
+FadeIn	white					2
+	ディーア	通常4破損						やった……！
+Bgm	凱旋
+	ディーア	笑い4破損						また一つ、\nリディの伝承を取り戻せた
+CharacterOff
+	勇者レイ	ニヤリ						お疲れ様、魔剣王
+CharacterOff
+	ディーア	通常4破損						レイこそ、\n助けてくれてありがとう
+CharacterOff
+	勇者レイ	通常						…………
+	勇者レイ	通常						むしろ謝らないといけないのは、\n私のほうかもね
+	勇者レイ	通常						あの黒いやつが、\n魔界を滅ぼした真犯人だとしたら
+	勇者レイ	通常						あなたは濡れ衣を着せられて、\n追われていることになる
+	勇者レイ	通常						すぐE.D.E.N.に掛け合って<dash=2>
+CharacterOff
+	ディーア	驚き4破損						いや、それは待ってくれ
+CharacterOff
+	勇者レイ	通常						どうして？\n指名手配がなければ<dash=2>
+	勇者レイ	怒り						……待って？
+	勇者レイ	怒り						まさか、そういうことなの？
+CharacterOff
+	ディーア	怒り4破損						今は深入りしないほうがいい\nお前が危険なことになる
+CharacterOff
+	勇者レイ	怒り
+Tween	勇者レイ	PunchPosition	y=30				NoWait
+	勇者レイ	怒り						でも……！
+CharacterOff
+	ディーア	怒り4破損						いつかまた、\nお前の助けが必要になると思うから
+CharacterOff
+	勇者レイ	怒り						…………っ
+Tween	勇者レイ	PunchPosition	y=30				NoWait
+	勇者レイ	怒り						なら私は、\nそれまでに勇者王になってみせる!!
+	勇者レイ	怒り						そうしないと、\n私の人生は始まりすらしないから
+Shake	勇者レイ		x=3				NoWait
+	勇者レイ	怒り						そして、\n全部の問題が解決したら……
+	勇者レイ	怒り						あなたのことも、\n私が従えてあげる、魔剣王！
+StopBgm
+	勇者レイ	ニヤリ						働き次第なら、\n側近よりも近い存在に<dash=2>
+Bgm	コメディ
+CharacterOff
+	オズアリス	嬉しい	画面外_右_b
+	ディーア	驚き4破損
+Tween	オズアリス	MoveBy	x=-500 time=1				NoWait
+Se	ポップイン
+	オズアリス	嬉しい						まーすーたぁー♪
+Param	character_grayout=true
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き4破損						うわっ！ オズ.ALICE!?\nいきなり抱きついたら危ないって！
+Tween	オズアリス	PunchPosition	y=30				NoWait
+	オズアリス	嬉しい						ええやん♪\nもうウチはお触り解禁♪
+	オズアリス	嬉しい						それに夢を\n一緒に叶えてくれるって\n約束したやろ？
+	オズアリス	通常						世界中のみんなに、\nウチらの仲良しっぷりを見せて\n仲良しの良さを伝えるんや♪
+	オズアリス	嬉しい						たーくさん、\nイチャイチャしような、マスター♪
+	勇者レイ	怒り	画面外_左_b
+Tween	勇者レイ	MoveBy	x=500 time=1				NoWait
+	勇者レイ	怒り						ちょっと！\n魔剣王とは私が話をしていたの!!
+	勇者レイ	怒り						邪魔をしないで、ハートの女王！
+	オズアリス	通常						おっ！ そやそや！\nウチはレイちゃんのことも\n気に入ったよ♪
+	オズアリス	嬉しい						マスター挟んで、\nハーレム仲良ししよっか♪
+	勇者レイ	驚き						はぁあああああ!?
+Tween	勇者レイ	PunchPosition	y=30				NoWait
+	勇者レイ	驚き						な、なんで私が魔剣王と？
+CharacterOff
+	クサナギノツルギ	魔王2						だってレイちゃんも、\nあるじ様のことが好きじゃないの？
+CharacterOff
+	ディーア	絶望4破損	p5
+	オズアリス	通常	p7b
+	勇者レイ	驚き	p3b
+Tween	勇者レイ	PunchPosition	y=30				NoWait
+	勇者レイ	驚き						好きじゃないわよ、こんなやつ！
+CharacterOff
+	クサナギノツルギ	魔王2						それ知ってるよ♪\nレガリアちゃんが教えてくれた\nツンデレってやつだよね！
+	クサナギノツルギ	魔王2						でも、レイちゃんも気をつけてね？
+	クサナギノツルギ	魔王2						あるじ様は時々、すごくいけないの！\n恋人同士じゃないと\nダメなことしようとするんだから！
+	クサナギノツルギ	魔王2						でもやっぱり私は、\n責任を取れるようにならないと\nしちゃいけないと思うんだよね！
+CharacterOff
+	ディーア	絶望4破損	p5
+	オズアリス	通常	p7b
+	勇者レイ	驚き	p3b
+	勇者レイ	驚き						こ、こんなに\n小さい子ども相手になにをっ!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4破損						ちがうって！\nクサナギの言い方が……!!
+	勇者レイ	本気						ただでさえ乙女を、\n一晩中抱きしめたくせにっ！
+	ディーア	絶望4破損						抱き枕扱いして\n離してくれなかったのは\nお前だろ!?
+	オズアリス	嬉しい						流石はマスターやなぁ♪\nこのままみんなで仲良しになろ♪
+CharacterOff
+Se	通信
+	ロサ	通信慌て				1		ご主人様、ご無事ですか!?
+	ロサ	通信慌て						ずっと連絡もくれないし、\nどうなっているか心配で夜も<dash=2>
+Param	character_grayout=false
+CharacterOff
+	ディーア	絶望4破損	p5
+	オズアリス	嬉しい	p7b
+	勇者レイ	驚き	p3b
+	ディーア	絶望4破損						…………あっ
+CharacterOff
+	ロサ	通信通常						これはどういう状況ですか？
+CharacterOff
+	夢の住人A	通常						魔剣王さんが\n勇者のレイちゃんと結婚して\n女王様にも気に入られたんだ！
+CharacterOff
+	夢の住人B	通常						めでたいねぇ♪\n私たちもこんな風に仲良く\n助け合っていくよ！
+CharacterOff
+	ロサ	通信通常						私をあんなに心配させておいて
+	ロサ	通信通常						もう知りません！
+CharacterOff	ロサ					.5
+Wait						.5
+CharacterOff
+	ディーア	絶望4破損						ロサーーーーー!?
+StopBgm
+	ディーア	絶望4破損						と、とにかく！\nオレは早くここから離脱しないと！\nすぐ世界意思に察知されるだろうし！
+CharacterOff
+	オズアリス	通常						あと、マスター？\n気をつけるのは世界意思だけやないよ
+Bgm	図書館
+CharacterOff
+	ディーア	驚き4破損						どういう、ことだ？
+CharacterOff
+	オズアリス	怒り						実はウチを含めたファミリーへ\nアリス様から命令が出されとるんや
+	オズアリス	怒り						各地に出現した\n虚構伝承を回収せよって
+CharacterOff
+	ディーア	驚き4破損						なんだって……？
+FadeOut	black					1
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	アリス	通常魔帝				0
+Wait						1
+FadeIn	black					1
+	アリス	通常魔帝						ハートの女王が、\n魔剣王のもとに戻ったようだ
+	アリス	通常魔帝						だがそれもヤツの判断、\nファミリーとして祝福しよう
+	アリス	通常魔帝						そして<dash=2>
+Param	character_grayout=true
+	バンダースナッチ？	<Off>						こちら"バンダースナッチ"、\n任務完了……残念です……\nまだもっと、戦いたいのに……
+	マッドハッター？	<Off>						えへへ♪ "マッドハッター"!!\n任務完了だよー♪
+	眠りネズミ？	<Off>						ふわぁ……\nむにゃむにゃ……"眠りネズミ"……\nにんむかんりょ……すやぁ♪
+	チェシャ猫？	<Off>						あれぇ？ えーっと、えーっと？\nあ、そうでした"チェシャ猫"でした♪\n任務完了です♪ 多分♪
+	アリス	通常魔帝						よくやった、我がファミリーよ
+	アリス	通常魔帝						もう少しだな<dash=2>
+	アリス	通常魔帝						待っていろ、リリス
+Param	character_grayout=false
+FadeOut	black					1
+CharacterOff						0
+Bg	固まった溶岩の大地					0
+	ディーア	驚き4破損				0
+FadeIn	black					1
+	ディーア	驚き4破損						なぜ魔帝アリスが\n虚構伝承を回収するんだ？
+CharacterOff
+	オズアリス	怒り						マスターの魔剣になっても、\nウチはアリスファミリーの一員や\nアリス様の願いを裏切れん
+	オズアリス	怒り						言えるんは、\nアリス様は酔狂に見えても\n意味のないことはしないこと
+	オズアリス	怒り						全てに狙いがあるんや
+	オズアリス	怒り						ウチをここに派遣したことも、\nこうしてマスターに情報を伝えるのも\n織り込み済みやろうな
+CharacterOff
+	ディーア	目閉じ4破損						そうか
+	ディーア	通常4破損						オズ.ALICEが\n仲間になってくれてよかったよ\nおかげで貴重な情報を得られた
+	ディーア	怒り4破損						こうなったら\nアリスファミリーの回収より早く、\n虚構伝承を倒さないといけない
+	ディーア	怒り4破損						そして\n魔帝アリスに真意を問いただす
+	ディーア	目閉じ4破損						もう少しだけ
+	ディーア	怒り4破損						待っていてくれ、リディ
+StopBgm
+FadeOut	black					0
+CharacterOff						0
+	　　　　　　　　　　
+Bg	黒背景
+Wait						2
+Bgm	タイトル
+FadeIn	black					0
+	もちアマリ	通常				2
+	もちアマリ	通常2						ぴっぴー、アウトー
+	もちアマリ	通常2						今回の物語はここまでよ♪
+	もちアマリ	通常2						新しい登場人物たちも現れて、\n先が気になっていると思うけれど
+	もちアマリ	通常2						今はここまでで\n我慢をしてちょうだいね
+	もちアマリ	通常2						きっとすぐにまた、\nあなたをドキドキさせる物語が\n読めるようになるはずよ
+	もちアマリ	嬉しい2						新しいページが記されるまで\n魔界の喧騒を楽しみながら\n一息をつきましょう
+	もちアマリ	嬉しい2						それに今日はリコさまちゃんも\nお友達に会いに行く約束があるの♪
+	もちアマリ	通常2						そうだわ！\nあなたたちにも紹介しましょう！
+Param	character_grayout=false
+FadeOut	black					0
+StopBgm
+CharacterOff						0
+Bg	カリスカエリステラ					0
+ImageEffect	SpriteCamera	Blur
+	ドア左		エフェクト表			0
+	ドア右		エフェクト表2			0
+Wait						3
+FadeIn	black					.5
+Se	ドア開く
+Tween	ドア左	MoveBy	x=-320 time=1.5	easeInCubic			NoWait
+Tween	ドア右	MoveBy	x=320 time=1.5	easeInCubic			NoWait
+Wait						1
+ImageEffectOff	SpriteCamera	Blur				1
+Wait						.5
+	リディ	驚き3				1
+	          		1_2
+Wait						1
+	リコ	<Off>						こんにちは、リディちゃん♪
+If	isdebug==true
+CharacterOff
+Jump	*Q2002_01
+EndIf
+EndScenario

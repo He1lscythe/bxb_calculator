@@ -1,0 +1,903 @@
+# G_515_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	滅んだ神社					0
+Param	character_grayout=false
+	瞬きA		blink_a
+	瞬きB		blink_b
+	ムラマサロスト_スチル闇		エフェクト裏
+Wait						.5
+FadeIn	black					.5
+Tween	瞬きA	MoveBy	y=200				NoWait
+Tween	瞬きB	MoveBy	y=-200				Add
+	ムラマサロスト	<Off>						いま、「この魔剣」……、\n"私"の話をしてたでしょう？
+Tween	瞬きA	MoveBy	y=-200				Add
+Tween	瞬きB	MoveBy	y=200
+Tween	瞬きA	MoveBy	y=325				NoWait
+Tween	瞬きB	MoveBy	y=-325				Add
+	ムラマサロスト	<Off>						そう、かの有名な妖刀ムラマサ、です
+Tween	瞬きA	MoveBy	y=1000 time=2				NoWait
+Tween	瞬きB	MoveBy	y=-1000 time=2
+	ムラマサロスト	<Off>
+	ムラマサロスト	<Off>						最早だれかに自慢できるような\n代物ではありませんが
+	ムラマサロスト	<Off>						……と言っても、\n最早「この魔剣」に、\n主など存在しません<dash=2>
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+	オボロ	泣き
+Bgm	図書館
+Bg	滅んだ神社
+	オボロ	泣き
+Shake	オボロ		x=5				NoWait
+Wait						1
+	オボロ	泣き						「ぐ……」
+	オボロ	泣き						「ムラ、マサ……」
+CharacterOff						1
+Wait						1
+Se	倒れる
+	ムラマサロスト	通常
+	ムラマサロスト							…………
+	ムラマサロスト							……足りない
+	ムラマサロスト							まだまだ足りない\nまだまだまだまだまだまだ足りない
+	ムラマサロスト							"姉"だった貴方……、\n答えてください
+	ムラマサロスト							貴方の言った狂気と絶望とは、\nこの程度なんですか？
+CharacterOff
+	黒グラデーション		エフェクト表
+	オボロ	<Off>						…………
+CharacterOff
+	ムラマサロスト	通常						…………
+	ムラマサロスト	通常						もう、聞こえませんか
+	黒グラデーション		エフェクト表
+	ムラマサロスト	通常						こんなこと、何度繰り返せば\nいいんでしょうか<dash=2>
+	ムラマサロスト	通常						<dash=2>苦しい
+StopBgm
+FadeOut	black					0
+Se	雨
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒グラデーション		エフェクト表			0
+	あやとりスチル		エフェクト裏			0
+Wait						1
+FadeIn	black					0
+StopSe
+	ムラマサロスト	<Off>						可もなく不可もなし\nそれ以上でもそれ以下でもない
+	ムラマサロスト	<Off>						この一幕も、\n平凡で有りふれて在り来りな有象無象
+	ムラマサロスト	<Off>						この運命は、退屈な、\nつまらない紐の絡み合い<dash=2>\nこの「最強」の魔剣の一人遊び
+	ムラマサロスト	<Off>						偏に最強でしかない刀の形をした鋼の塊\nかつて妖刀ムラマサだったものの末路
+FadeOut	black					.5
+Param	character_grayout=true
+ImageEffect	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	滅んだ神社
+FadeIn	black					.5
+Bgm	絶望
+	ムラマサロスト	<Off>						それはもう随分と昔のこと\n「この魔剣」がまだ「ムラマサ」\nだった頃の話
+	ムラマサロスト	<Off>						己に課せられた"語られ"に見合う\n強い魔剣になりたいと願った\n「この魔剣」は<dash=2>
+CharacterOff
+Se	回想
+Param	character_grayout=false
+FadeOut	white					.5
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale				0
+ImageEffect	SpriteCamera	Sepia
+	？？？？
+FadeIn	black					.5
+	？？？？	<Off>						<dash=2>「最強の魔剣」に\nなりたいのだろう？
+	妖刀ムラマサ	通常						そう、だって私、\n旦那様の一番刀だもの！
+	妖刀ムラマサ	通常						いつまでもオボロ姉さまの\n後ろをついていくのは嫌！
+	？？？？	<Off>						ならば、証明してみせるといい\n妖刀ムラマサはオボロを越える\n「最強の魔剣」であると
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+ImageEffect	SpriteCamera	GrayScale				0
+CharacterOff						0
+FadeIn	black					.5
+Param	character_grayout=true
+	ムラマサロスト	<Off>						果たして、「この魔剣」に課せられたのは\n主に及ぶ危険を排除すること
+	ムラマサロスト	<Off>						それは、たとえば\n語ることすら出来ない力を秘めた\n恐るべき魔剣を破壊すること
+	ムラマサロスト	<Off>						即ち「姉」……、\n天刀ムラマサ=オボロを\n破壊すること
+	ムラマサロスト	<Off>						それが、「この魔剣」の\n長い長い一人遊びの始まりだったのだ
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	オボロ	泣き
+	ムラマサロスト	<Off>						<ruby=オボロ>姉</ruby>を破壊するのは\nひどく簡単だった
+	ムラマサロスト	<Off>						<ruby=ムラマサ>「この魔剣」</ruby>からしてみれば\nまるで手応えのない、\n取るに足らない出来事
+	ムラマサロスト	<Off>						それこそ、\n赤子の手をひねるように……
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+FadeIn	black					0
+ImageEffectOff	SpriteCamera	GrayScale				0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+Bgm	絶望
+Bg	滅んだ神社
+	ムラマサロスト	<Off>						そして、気付けば\n「この魔剣」はまた\n絡み合う運命の上に立っている
+	ムラマサロスト	<Off>						どういう理屈かは分からない\n世界は無限に枝分かれして\n無数の時間があるのかもしれない
+	ムラマサロスト	<Off>						いずれにせよ「この魔剣」は\n絡まり、ほどけぬ一人遊びの末に\nまた「オボロ」と行き会う
+	ムラマサロスト	<Off>						もう「姉」ではなくなった\n弱い、憐れな魔剣を\n果てなく、何度も屠り続けていく
+CharacterOff
+Param	character_grayout=false
+	瞬きA		blink_a
+	瞬きB		blink_b
+Wait						1
+FadeIn	black					.5
+Tween	瞬きA	MoveBy	y=200				NoWait
+Tween	瞬きB	MoveBy	y=-200				Add
+	ムラマサロスト	<Off>						いま、「この魔剣」……、\n"私"の話をしてたでしょう？
+Tween	瞬きA	MoveBy	y=-200				Add
+Tween	瞬きB	MoveBy	y=200
+Tween	瞬きA	MoveBy	y=325				NoWait
+Tween	瞬きB	MoveBy	y=-325				Add
+	ムラマサロスト	<Off>						そう、かの有名な妖刀ムラマサ、です
+Tween	瞬きA	MoveBy	y=1000 time=2				NoWait
+Tween	瞬きB	MoveBy	y=-1000 time=2
+Param	character_grayout=true
+	ムラマサロスト	<Off>						最早だれかに自慢できるような\n代物ではありませんが
+	ムラマサロスト	<Off>						……と言っても、\n最早「この魔剣」に、\n主など存在しません<dash=2>
+FadeOut						1
+Bg	滅んだ神社
+StopBgm
+FadeIn						1
+	ごくひらロスト	通常	1_2
+	名刀・大包平	通常2	2_2
+	ごくひらロスト	無						……!!
+	名刀・大包平	通常2						ごくひらロストちゃん、どうしたの？
+	ごくひらロスト	怒り						お姉ちゃん、伏せて!!
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+Bgm	緊迫
+Bg	滅んだ神社
+	黒グラデーション		エフェクト表
+	ムラマサロスト	通常
+	ムラマサロスト							…………
+CharacterOff
+	ごくひらロスト	無						貴方は……\n妖刀ムラマサ=ロストね？
+	ムラマサロスト	通常						おや、"あの"十三振りのロストの一人\nあなたがいるということは、ここが<dash=2>
+	ごくひらロスト	無						私達の目的は既に達されたわ\n一体何をしに来たのかしら？
+	ムラマサロスト	通常						大した用ではありません\n天刀ムラマサ=オボロはどこですか？
+	ごくひらロスト	無						…………、\n貴方、オボロさんに何をするつもり？
+	ムラマサロスト	通常						「この魔剣」は\n天刀ムラマサ=オボロをただ\n屠る、それだけが目的のようです
+	ごくひらロスト	無						貴方……、\n実の姉を破壊するつもりなのね
+	ムラマサロスト	通常						「この魔剣」にとって\n天刀ムラマサ=オボロは\nもう「姉」ではありません
+	ムラマサロスト	通常						ただ「この魔剣」は\n天刀ムラマサ=オボロを\n屠らねばならないのです
+	ごくひらロスト	通常						そうはさせないわ\nそれが実の姉とあれば、なおさらよ
+	ムラマサロスト	通常						……、へえ\nロストが魔剣をかばうのですか\n不思議なこともあるものですね
+	ムラマサロスト	通常						いずれにせよ邪魔立てするなら\n貴方も排除することになりますが？
+CharacterOff
+	名刀・大包平	通常2	2_3
+	ごくひらロスト	驚き	3_3
+	名刀・大包平							させないっ！
+CharacterOff
+	ムラマサロスト							…………？
+CharacterOff
+	名刀・大包平	通常2	2_3
+	ごくひらロスト	驚き	3_3
+	名刀・大包平	通常2						私も手伝うよ、\nごくひらロストちゃん！
+	ごくひらロスト	怒り						お姉ちゃんは下がってて\nここは私一人でどうにか<dash=2>
+	名刀・大包平	通常2						一人で抱え込まないでっ……！\nやりたいことがあるなら\nちゃんと、お姉ちゃんを頼ってっ！
+	ごくひらロスト	怒り						……っ！\nおねえ、ちゃん……
+CharacterOff
+	ムラマサロスト	驚き						…………！
+CharacterOff
+StopBgm
+Se	回想
+Param	character_grayout=false
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+	黒グラデーション		エフェクト表			0
+	あやとりスチル		エフェクト裏			0
+FadeIn	black					.3
+	オボロ	<Off>						はい、ほどけた<dash=2>
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bgm	緊迫
+Param	character_grayout=true
+CharacterOff						0
+StopBgm						0
+FadeIn	black					.3
+	ムラマサロスト							…………
+StopBgm
+	ムラマサロスト							気に入らない
+	黒グラデーション		エフェクト表
+	ムラマサロスト							「この魔剣」は\n貴方がたを破壊するようです
+CharacterOff
+	名刀・大包平	通常2	1_2
+	ごくひらロスト		2_2
+	名刀・大包平							か、かかってきなさいっ！\nごくひらロストちゃん、行くよっ！
+	ごくひらロスト							うんっ！
+	？？？？							「<dash=2>もし」
+StopBgm
+	ごくひらロスト							<dash=2>！
+CharacterOff
+	黒グラデーション		エフェクト裏			1
+	オボロ					1
+Bgm	神社
+	オボロ	通常						「……もし」\n朧は、そう語り始めた
+	オボロ	通常						「貴方の目的は朧である\n他の魔剣には手を出す必要がない」\n<dash=2>と
+CharacterOff
+	ごくひらロスト							<dash=2>オボロさん!!\n貴方が今出てきてはだめ!!
+	ディーア	本気2						大包平！ ごくひらロスト！\n無事か!?
+CharacterOff
+	名刀・大包平	通常2	1_2
+	ごくひらロスト	怒り	2_2
+	ごくひらロスト							旦那さま、ここは私が！
+CharacterOff
+	ディーア
+	ディーア	本気2						ムラマサっ!!
+	ディーア	本気2						無駄な抵抗はよせ\nオレたちはお前と争いたくない
+CharacterOff
+	ムラマサロスト	通常						…………、\nはぁ……
+	ムラマサロスト	通常						まるで置かれている立場を\n理解していないんですね
+	ムラマサロスト	通常						いいでしょう、\n「最強」の兵器の力、見せてあげます
+CharacterOff
+Bgm	和の国バトル
+	ディーア	悔しい2						くっ……！\n問答無用かよ……！
+	ディーア	本気2						来るぞ！\nみんな、備えてくれ！
+CharacterOff
+	名刀・大包平	通常2	1_2
+	ごくひらロスト		2_2
+	名刀・大包平	通常2						はいっ！
+	ごくひらロスト	通常						かかってきなさい！
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+	あやとりスチル		エフェクト表
+	オボロ	<Off>						「妹の不始末を片付けねば」\nそう、朧は呟いた
+	オボロ	<Off>						「さあ、始めましょう\n長い長い遊戯の種明かしを」\n<dash=2>と
+If	isdebug==true
+CharacterOff
+Jump	*G_515_02
+EndIf
+EndScenario
+
+# G_515_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	滅んだ神社					0
+Param	character_grayout=false
+	名刀・大包平	泣き2
+FadeIn	white					.5
+	名刀・大包平	泣き2						<dash=2>！
+CharacterOff
+	ごくひらロスト	怒り						<dash=2>お姉ちゃん!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	滅んだ神社
+Param	character_grayout=true
+CharacterOff
+	ごくひらロスト	悔しい
+	ごくひらロスト							ぐっ……!!
+	名刀・大包平	泣き2						ごくひらロストちゃん！
+	ごくひらロスト	悔しい						だ、め……\nお姉、ちゃん……
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	滅んだ神社
+CharacterOff
+	名刀・大包平	泣き2
+Shake	名刀・大包平		x=5				NoWait
+	名刀・大包平							うあああっ……！
+CharacterOff
+	ムラマサロスト							さあ、天刀ムラマサ=オボロ\n来てください\nその力を私に見せてくださいよ
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	滅んだ神社					.5
+CharacterOff
+	オボロ
+Shake	オボロ		x=5				NoWait
+	オボロ							ぐ……はぁっ……!!
+CharacterOff
+	ディーア	悔しい2						……っ!!\nこのっ!!
+CharacterOff
+Bgm	絶望
+	ムラマサロスト							……足りない
+	ムラマサロスト							まだまだ足りない\nまだまだまだまだまだまだ足りない
+	ムラマサロスト							"姉"だった貴方……、\n答えてください
+	ムラマサロスト							貴方の言った狂気と絶望とは、\nこの程度なんですか？
+CharacterOff
+	黒グラデーション		エフェクト表
+	オボロ	怒り						「くっ……」\n朧は、膝をついた……
+	オボロ	怒り						「ムラ、マサ……」
+CharacterOff
+	ムラマサロスト							……また、同じですね
+CharacterOff
+	黒グラデーション		エフェクト表
+	オボロ	怒り						…………
+CharacterOff
+	ムラマサロスト	通常						…………
+	ムラマサロスト	通常						もう、聞こえませんか
+	ムラマサロスト	通常						一体、何度目でしょうね？\n何度貴方を打ち壊せばいいんです？
+	ムラマサロスト	通常						「この魔剣」は失望しているようです\nいつまでも繰り返す無為な運命に
+CharacterOff
+	黒グラデーション		エフェクト表
+	オボロ	怒り						…………\nう……
+	ムラマサロスト							……まだ、生きていましたか
+	ムラマサロスト							もう少しは愉しめそうですね\nさあ、もう一度始めましょう
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	滅んだ神社					.5
+CharacterOff
+	オボロ
+	黒グラデーション		エフェクト表
+	ムラマサロスト							…………
+CharacterOff
+	ムラマサロスト	通常						やはり、手応えはない\n無為なことを繰り返すだけで<dash=2>
+	ムラマサロスト	通常						…………？
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト表
+	オボロ	怒り						「うう……」\n朧は、頭を垂れた\n「しかし、オボロは、まだ……」
+	オボロ	怒り						「……斃れ伏すわけには、\n　いきませんので」
+CharacterOff
+	ムラマサロスト	驚き						……!!
+	ムラマサロスト	驚き						何度でも、同じことっ!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	滅んだ神社					.5
+CharacterOff
+	オボロ
+	黒グラデーション		エフェクト表
+	オボロ	怒り						「ぐ……はっ……！」
+CharacterOff
+	ムラマサロスト							これで、もう終わりです!!
+	ムラマサロスト							<dash=2>!!
+CharacterOff
+	黒グラデーション		エフェクト表
+	オボロ							「……ッ、それでも……オボロは、\n　決して斃れなかった……ッ！」
+CharacterOff
+	ムラマサロスト							な、何度も何度も……!!\nこのっ!!
+CharacterOff
+	黒グラデーション		エフェクト表
+	オボロ	怒り						「ぐ……」
+	オボロ	怒り						幾度の剣撃を受けて尚、\n何とか朧は立ち上がったのだった
+	オボロ	怒り						<dash=2>そして、\n漸く己が言葉で\nこう語り掛けるのであった
+	オボロ	怒り						<dash=2>ムラマサッ……！
+CharacterOff
+	ムラマサロスト							<dash=2>!!
+CharacterOff
+Bgm	キノコリオン
+	オボロ							オボロは云う<dash=2>\nここまでになさい、と……！
+	ムラマサロスト							えっ……
+	オボロ							聞こえないのならば、と\n朧はもう一度云った
+	オボロ							おいたは、\nここまでになさい、と！
+If	isdebug==true
+CharacterOff
+Jump	*G_515_03
+EndIf
+EndScenario
+
+# G_515_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	滅んだ神社
+Bgm	緊迫
+Param	character_grayout=false
+	ムラマサロスト	通常
+FadeIn	white					.5
+	ムラマサロスト							このっ……!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	滅んだ神社
+CharacterOff
+	オボロ
+	黒グラデーション		エフェクト表
+	オボロ	怒り						「ぐっ……！」
+	オボロ	怒り						しかし、朧は立ち上がる\n何度でも、立ち上がっている\nそして<dash=2>
+	オボロ	笑い						「この程度で音をあげるわけには\n　いきません」と、\n笑うのであった<dash=2>
+CharacterOff
+	ムラマサロスト							…………
+	ムラマサロスト	悪い顔						「この魔剣」は驚いているようです\nこういうことはこれまでに\nありませんでしたからね
+	ムラマサロスト	悪い顔						ですが、それもそう長くない話\nすぐに終わる話<dash=2>
+	ムラマサロスト	悪い顔						「最強」となった\n「この魔剣」の前には<dash=2>
+StopBgm
+	オボロ	怒り						朧は、失望していた
+	ムラマサロスト	通常						…………
+	ムラマサロスト	通常						…………は？
+Bgm	特殊バトル
+	オボロ	怒り						姿も縁も違えたとはいえ、\nそれはかつて由縁を共にした妹のはず
+	オボロ	怒り						しかし、目の前にいるのは\n運命に抗うも受け入れるも出来ない\n情けなく憐れな魔剣の成れの果て<dash=2>
+	オボロ	怒り						朧は、ひどく失望した\n変わり果て、魂を錆びつかせた妹の姿に
+	ムラマサロスト	悪い顔						妹？\n妹ですって？\n笑わせる<dash=2>
+	ムラマサロスト	悪い顔						もうとうの往古に貴方は\n「この魔剣」の姉ではありません
+	ムラマサロスト	悪い顔						弱く、憐れな、\n「最強」の糧でしかない存在
+	オボロ	怒り						まったく、くだらない……
+	ムラマサロスト	通常						<dash=2>何ですって？
+	オボロ	怒り						朧は問う\nそれは一体\n何の為の「最強」なのか、と
+	オボロ	怒り						朧もまた、狂気と絶望に侵された\n語ることすら出来ぬ存在
+	オボロ	怒り						しかし<dash=2>\n目的なき強さに取りすがる\n目の前の魔剣の何と虚ろなことか
+	オボロ	怒り						朧は問う\nその強さで一体何を成し遂げるのか
+StopBgm
+	オボロ	通常						「おままごと、ですか？」
+CharacterOff
+CharacterOff
+Se	回想
+Param	character_grayout=false
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+	あやとりスチル		エフェクト表			0
+FadeIn	white					.3
+Wait						.5
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+CharacterOff						0
+FadeIn	black					.3
+	ムラマサロスト	通常						こ、の<dash=2>!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	滅んだ神社
+CharacterOff
+	ムラマサロスト
+	オボロ	怒り						「くっ……！ しかし\n　何ということは有りません」
+	ムラマサロスト	悪い顔						「この魔剣」の所業を\nおままごととは<dash=2>\n口の聞き方を知らぬ<dash=2>
+Bgm	和の国ボス
+	オボロ	怒り						朧は告げる\n「何度刃を振るっても同じことです」\n<dash=2>と
+	オボロ	怒り						無為な剣戟を止め、\n朧の話を聞くことが<dash=2>
+	ムラマサロスト	驚き						うっ<dash=2>\nうるさいっ!!
+	ムラマサロスト	驚き						その偉そうな態度<dash=2>\n何でも分かったような顔!!
+	ムラマサロスト	驚き						見透かしているような顔をして\n何一つ察しないその心根!!
+	ムラマサロスト	驚き						気に入らない<dash=2>\n気に入らない気に入らない気に入らない!!
+Param	character_grayout=false
+	オーラ紫		エフェクト表
+	ムラマサロスト	暴走						「この魔剣」も\n加減を捨てることとしましょう
+	ムラマサロスト	暴走						次こそ、間違いなく仕留める<dash=2>
+Param	character_grayout=true
+CharacterOff
+	オボロ	怒り						「<dash=2>仕方、ないですね」\n朧は戦いに備える腹を据えたのだった
+	オボロ	怒り						「ときに主人」\nそう朧は語りかける
+	ディーア	怒り2						ああ、大丈夫かオボロ？
+	オボロ							「大きな問題は起きていません」\n朧はそう答えた
+	ディーア	怒り2						よかった……\n大包平とごくひらロストも立てるか？
+CharacterOff
+	名刀・大包平	通常2	1_2
+	ごくひらロスト	悔しい	2_2
+	名刀・大包平	通常2						う……うんっ……\n大丈夫っ！
+	ごくひらロスト	悔しい						くっ……遅れを取ってしまった……\n任せて、今度はしくじらないわ
+CharacterOff
+	オボロ	通常						「主、大包平、\n禁式･獄刀大包平=ロスト<dash=2>」\n朧は語りかける
+	オボロ	通常						貴方達の手間をかけてしまうことを\nどうか許していただきたいのです\nそして<dash=2>
+	オボロ	通常						感謝を申し上げます\n長い長い縁の末に\nここまで辿り着けたのですから
+	オボロ	通常						<dash=2>ありがとう
+	ディーア	驚き2						オボロ、お前、\n己の内の"深淵"を<dash=2>！
+	オボロ	通常						さあ、きちんと始末をつけなければ\nこの朧の妹の不始末なのだから<dash=2>
+FadeOut	black					.3
+CharacterOff
+	黒背景		エフェクト表
+FadeIn	black					.3
+	オボロ	<Off>						<dash=2>そう、朧は云った
+If	isdebug==true
+CharacterOff
+Jump	*G_515_04
+EndIf
+EndScenario
+
+# G_515_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	黒背景					0
+Param	character_grayout=false
+FadeIn	white					.5
+CharacterOff
+	ムラマサ	<Off>						中指、通して……、\n反対の、中指で……
+	ムラマサ	<Off>						こうして、ここを抜いて……、\nあっ……
+	ムラマサ	<Off>						絡まっちゃった……、\nどうしよう……
+	ムラマサ	<Off>						あっ<dash=2>\nオボロ姉様<dash=2>
+	オボロ	<Off>						「ムラマサ」
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+	ムラマサロスト
+Bg	滅んだ神社
+	ムラマサロスト							<dash=4>!!
+	ムラマサロスト							う<dash=2>そ<dash=2>
+CharacterOff
+Bgm	図書館
+	オボロ							「さあ、ムラマサ<dash=2>」\nそう、朧は語り掛ける
+	ムラマサロスト							う<dash=2>\nこ、こない、で<dash=2>
+	オボロ							ムラマサ、よく聞いてください\n貴方の姉から、貴方へ\n真実を告げなければなりません
+	ムラマサロスト							真、実<dash=2>？
+	オボロ							その手で何回朧を壊したのか……、\nそれすらももう分からない程に\n繰り返され続けた過ち<dash=2>
+	オボロ							その事をこの朧が何も知らずに\nただ破壊されていただけだと\n思うのですか？
+	ムラマサロスト							えっ<dash=2>
+	オボロ							それは只、ムラマサの縁に\nこの朧が答えただけ
+	ムラマサロスト							そんな<dash=2>
+	ムラマサロスト							それじゃあ、\n私が天刀ムラマサ=オボロを\n破壊し続けていたのは<dash=2>？
+	オボロ							いくつもの世界線の中で彷徨う妹の\nその存在が為に敢えて身を捧げた<dash=2>
+	オボロ							ただ、それだけのこと
+	ムラマサロスト							わ、わざと、倒されて<dash=2>？
+	ムラマサロスト							それじゃあ、私は何のために<dash=2>\nど、どうして<dash=2>？
+	オボロ							知れたこと\n己が妹の所業を止めるに\n最も相応しい方法であったから
+	オボロ							しかし<ruby=いもうと>ムラマサ</ruby>は、\nその生来の諦めの悪さと\nこの朧への執着から<dash=2>
+	オボロ							別の世界でまた、この朧を探した\n朧はそれをまた迎え、\n同じように刃を受けた
+	オボロ							それももう今日までです
+	オボロ							いい加減に遊戯をやめなさい、\nいたずらに暴れ回り\n己の空虚を誤魔化すのをやめなさい
+	ムラマサロスト							…………
+StopBgm
+	ムラマサロスト							…………\nう………
+	ムラマサロスト							ううう……\nうううう……
+Bgm	Xmasボス
+	ムラマサロスト							うわあああああああ!!\nオボロ姉様の、ばかああああ!!
+	オボロ							<dash=2>！
+	ムラマサロスト							オボロ姉様は、オボロ姉様は、\nずるい、ひどい<dash=2>！
+	ムラマサロスト							いつもそうやって、\n先回りして、何でも勝手に決めて、\n何でも分かった顔をして<dash=2>！
+Se	回想
+Param	character_grayout=false
+FadeOut	white					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+	あやとりスチル		エフェクト表
+FadeIn	black					.5
+	オボロ	<Off>						<dash=2>はい、ほどけた\nこれが、<ruby=はしご>階子</ruby><dash=2>
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+	　　　　　　　　　　
+CharacterOff						0
+FadeIn	black					.5
+	ムラマサロスト							オボロ姉様には\n私の気持ちなんて絶対に\n分からないくせに!!
+	ムラマサロスト							どうして<dash=2>\nどうして!!
+	ムラマサロスト							何も<dash=2>\n何も気付いてくれないの<dash=2>
+	オボロ							ムラマサ<dash=2>
+	ムラマサロスト							一人で全部背負い込んで\n私には<dash=2>\n私のことは<dash=2>
+CharacterOff						0
+Bg	黒背景					0
+	ムラマサ	通常						よし、出来た♪\nこれが、<ruby=はしご>階子</ruby>！
+	ムラマサ	通常						オボロ姉様、まだかな？\n今日も遅いのでしょうか<dash=2>
+	ムラマサ	通常						オボロ姉様、ムラマサは待っています！
+	ムラマサ	通常						もっともっと練習して、\nオボロ姉様と同じくらい上手になって！
+	ムラマサ	通常						えへへ、そうしたら\nオボロ姉様、褒めてくれるでしょうか？
+CharacterOff
+Bg	滅んだ神社
+	ムラマサロスト
+	ムラマサロスト	泣き						オボロ姉様に、並んで立ちたかった\nあなたのようになりたかった
+	ムラマサロスト	泣き						だから、誰よりも強くならなければ\n誰よりも強いあなたよりも、\nもっと、もっと<dash=2>
+	ムラマサロスト	泣き						オボロ姉様、私<dash=2>\nたくさん、練習したんです
+	ムラマサロスト	泣き						たくさん、たくさん<dash=2>
+	オボロ	泣き						ムラマサ<dash=2>\nもう良い、もう良いんだよ<dash=2>
+	オボロ	泣き						おいでムラマサ、\n姉様が撫でてあげるから
+	ムラマサロスト	泣き						ああ、姉様、姉様<dash=2>
+Param	character_grayout=false
+	オーラ紫		エフェクト表
+	ムラマサロスト	泣き						<dash=2>!!
+StopBgm
+	ムラマサロスト	泣き						ね、姉様……、\nか、体が、熱い<dash=2>!!
+Param	character_grayout=true
+CharacterOff
+	オボロ	驚き						ムラマサ!?\nその体は<dash=2>
+Param	character_grayout=false
+CharacterOff
+	オーラ紫		エフェクト表
+	ムラマサロスト	泣き						ああ……、\nああああああ…………
+	ムラマサロスト	泣き						どうしよう、姉様、\n私、私、強くなりたくって、\nでもなれなくて、それで、それで<dash=2>
+CharacterOff
+	オボロ	驚き						ムラマサ、落ち着きなさい\n大丈夫ですよ\n姉様がついていますから<dash=2>
+Param	character_grayout=true
+Bgm	Xmasバトル
+CharacterOff
+	ごくひらロスト		1_2
+	ディーア	本気2	2_2
+	ごくひらロスト	驚き						これは<dash=2>\n魔核に、自ら傷と刻印を<dash=2>!?
+	ディーア	本気2						何だって<dash=2>!?\nオボロ、離れろ!!
+CharacterOff
+	オボロ	泣き						ムラマサ、可愛いムラマサ\n姉様が守ってあげますからね<dash=2>
+CharacterOff
+	ディーア	本気2						聞いてくれオボロ!!\nお前まで巻き添えになるぞ!!
+CharacterOff
+	オボロ	泣き						でも、でも、ムラマサが<dash=2>
+CharacterOff
+	ディーア	本気2						分かってるだろオボロ！\n魔核崩壊の力は恐ろしく巨大だ\nオレたちはそれを制御できないんだ!!
+CharacterOff
+	ディーア	本気2						まずは暴走を止めるぞ\n力を貸してくれ、オボロ!!
+	オボロ	泣き						ああ、そうか、そうだった<dash=2>\nそれならば<dash=2>
+	オボロ	泣き						妹よ、ようく見ておいで\n姉様は、頑張るからね\n心を強く持つのですよ
+CharacterOff
+	ディーア	本気2						みんな行くぞ!!\n躊躇するな<dash=2>!!
+CharacterOff
+Param	character_grayout=false
+	オーラ紫		エフェクト表
+	ムラマサロスト	泣き						オボロ姉様、私、私、強くなりました\nオボロ姉様、大好きです、\nオボロ姉様<dash=2>
+	ムラマサロスト	泣き						オボロ姉様<dash=2>\nたすけて<dash=4>
+If	isdebug==true
+CharacterOff
+Jump	*G_515_05
+EndIf
+EndScenario
+
+# G_515_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	滅んだ神社					0
+Param	character_grayout=false
+FadeIn	white					.5
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	滅んだ神社
+CharacterOff
+	ムラマサロスト	泣き
+	オーラ紫		エフェクト表
+	ムラマサロスト	泣き						ぐ<dash=2>\nは<dash=4>
+	ムラマサロスト	泣き						お、オボロ、姉様………
+	ムラマサロスト	泣き						私……\nこのまま、消えてしまうの……？
+CharacterOff
+	オボロ	泣き						…………
+CharacterOff
+	ムラマサロスト	泣き
+	オーラ紫		エフェクト表
+	ムラマサロスト	泣き						どうして、どうして、\n私、頑張ったのに、どうして
+	ムラマサロスト	泣き						いやだ、いやだ!!\n<dash=2>怖い!!
+	ムラマサロスト	泣き						私、まだ消えたくない!!\n消えたくないよ<dash=2>\n助けて、オボロ姉様<dash=2>
+CharacterOff
+	オボロ	泣き						…………
+	オボロ	泣き						ムラマサ……
+Bgm	ロルリアンレットB
+	ディーア	怒り2						二人とも
+CharacterOff
+	ムラマサロスト	泣き
+	オーラ紫		エフェクト表
+	ムラマサロスト	驚き						<dash=2>！
+CharacterOff
+	オボロ	驚き						<dash=2>主人
+CharacterOff
+	ディーア	怒り2						聞いてくれ\n約束しよう、ムラマサ
+CharacterOff
+	ムラマサロスト	驚き
+	オーラ紫		エフェクト表
+	ムラマサロスト	驚き						<dash=2>？
+CharacterOff
+	ディーア	怒り2						これで、絶対に終わりにはしない
+	ディーア	怒り2						オレは絶対に諦めない\nお前がどんな闇に沈もうと\nお前がお前である限り
+CharacterOff
+	ムラマサロスト	驚き
+	オーラ紫		エフェクト表
+	ムラマサロスト	驚き						<dash=2>でも\nでも、でも、私<dash=2>
+CharacterOff
+	ディーア	本気2						必ず救い出してみせる\nオレはお前を諦めない！
+CharacterOff
+	ムラマサロスト	驚き
+	オーラ紫		エフェクト表
+	ムラマサロスト	驚き						でも<dash=2>\nどうやって<dash=2>？
+CharacterOff
+	ディーア	怒り2						今はまだ、分からない\nでも、いつか必ず、\nオレはお前を見つけ出す
+CharacterOff
+	ムラマサロスト	嬉しい
+	オーラ紫		エフェクト表
+	ムラマサロスト	嬉しい						そう、ですか<dash=2>
+CharacterOff
+	ごくひらロスト	通常
+	ごくひらロスト	驚き						…………！
+CharacterOff
+	ムラマサロスト	嬉しい
+	オーラ紫		エフェクト表
+	ムラマサロスト	嬉しい						たくさんの<ruby=ロスト>兵器</ruby>を\n救い出した貴方なら、もしかして<dash=2>
+CharacterOff
+	ディーア	本気2						出来る！\nオレはお前を見つけられる\n絶対だ！
+	ディーア	本気2						オレは「最強」のお前を倒したんだ\nもしもお前が「最強の魔剣」なら<dash=2>
+	ディーア	本気2						オレはお前の\n「最強の魔剣使い」になってやる!!
+CharacterOff
+	ムラマサロスト	嬉しい
+	オーラ紫		エフェクト表
+	ムラマサロスト	嬉しい						<dash=2>ふ
+	ムラマサロスト	嬉しい						<dash=2>ふふ\nなんですかそれは、可笑しい<dash=2>
+	ムラマサロスト	嬉しい						こんなふうに、姉への憧れから\n無為に「最強」と「絶望」と「狂気」を\n追い求めた兵器を、使うだなんて<dash=2>
+	ムラマサロスト	嬉しい						ああ、でも<dash=2>\nもし本当に、いつか<dash=2>
+CharacterOff
+	ディーア	怒り2						ああ、いつか必ず<dash=2>\n今日の続きをやろう、絶対だ！
+CharacterOff
+	白背景		エフェクト表			2
+	ムラマサロスト	<Off>						ええ、分かりました<dash=2>
+	ムラマサロスト	<Off>						旦那、様<dash=2>！
+If	isdebug==true
+CharacterOff
+Jump	*G_515_06
+EndIf
+EndScenario
+
+# G_515_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	ロルリアンレット
+Bg	リノ世界桜自治区					0
+	オボロ	通常	2_2
+	ディーア	通常2	1_2
+FadeIn	black					.5
+	ディーア	通常2						<dash=2>これで、よし、と
+	ディーア	通常2						さて、オボロ<dash=2>\n心の準備はいいか？
+	オボロ	通常						朧に備える為の心の揺らぎは無く<dash=2>\nただ静寂があるのみ
+	ディーア	あはは2						せっかくの妹との再会なのに\n結局その話し方になるんだな……
+	オボロ	通常						朧にとっては至極当然のこと\nなぜなら<dash=2>
+	オボロ	通常						この朧の妹なのだから\nきっと、全てを覚えている
+	オボロ	通常						この朧を慕ってくれた妹なのだから\n私の大事な大事な、妹なのだから<dash=2>
+	ディーア	通常2						お前は、ムラマサが大好きなんだな\n良かったよ、姉妹が仲良くしてくれて
+	オボロ	通常						当然のこと\n妹が気にならない姉など、\n世界のどこも存在しない
+CharacterOff
+Param	character_grayout=false
+	瞬きA		blink_a
+	瞬きB		blink_b
+Wait						1
+FadeIn	black					.5
+Tween	瞬きA	MoveBy	y=200				NoWait
+Tween	瞬きB	MoveBy	y=-200				Add
+	ディーア	笑い2						……ムラマサ！
+Tween	瞬きA	MoveBy	y=-200				Add
+Tween	瞬きB	MoveBy	y=200
+Tween	瞬きA	MoveBy	y=325				NoWait
+Tween	瞬きB	MoveBy	y=-325				Add
+	ディーア	笑い2	1_2
+	オボロ	通常	2_2
+	ディーア	笑い2						オレが分かるか？\nそれから、お前のお姉さんも<dash=2>
+Tween	瞬きA	MoveBy	y=1000 time=2				NoWait
+Tween	瞬きB	MoveBy	y=-1000 time=2
+CharacterOff	瞬きA
+CharacterOff	瞬きB
+	ディーア	笑い2	1_2
+	オボロ	通常	2_2
+	ムラマサロスト	<Off>						…………！
+	ムラマサロスト	<Off>						<dash=2>ふ
+	ムラマサロスト	<Off>						<dash=2>ふふ、\nふふふふ……
+CharacterOff
+	ムラマサロスト	<Off>						ええ、もちろん
+	ムラマサロスト	<Off>						いま、「この魔剣」……、\n"私"の話をしてたでしょう？
+Param	character_grayout=false
+CharacterOff
+	ムラマサロスト_スチル光		エフェクト表			2
+Wait						2
+	ムラマサロスト	<Off>						そう、かの有名な妖刀ムラマサ、\nだったもの
+	ムラマサロスト	<Off>						最早だれかに自慢できるような\n代物ではありませんが
+	ムラマサロスト	<Off>						さて、あの日の続きをしましょう
+	ムラマサロスト	<Off>						<dash=2>旦那様！
+	白背景		エフェクト表2			1
+Wait						1
+	　　　　　　　　　　							\n\n　　　　　　　　　　　　　　<dash=2>完
+If	isdebug==true
+CharacterOff
+Jump	*G_515_01
+EndIf
+EndScenario

@@ -1,0 +1,1303 @@
+# E_247_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	市街地B2
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+FadeIn	white					.5
+	クサナギノツルギ		3_3					はぁー疲れたぁー！
+	タウロシア		2_3					今回の任務も大変だったわね
+	タウロシア		2_3_b
+	ヤグルシ		1_3					それでマスター君、リディちゃんの\n今回のバイト先はどこなんだし？
+CharacterOff
+	ディーア	通常2	2_3_b
+	ディーア							ああ、ここの酒場だよ
+	ディーア							リディの迎えついでにちょっと\n休憩していこうか
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3
+	クサナギノツルギ							さんせーい！
+CharacterOff
+	ディーア	驚き2	2_3_b
+	ディーア							おじゃましまーす！
+FadeOut	white					.5
+CharacterOff
+Bg	酒場1F
+Se	ガヤA	TRUE
+	リディ	笑い2	画面外_左
+Wait						.5
+FadeIn	white					.5
+	男性客	<Off>						リディちゃん！\n注文いいかい？
+Tween	リディ	MoveTo	x=180
+	リディ							はーい、ただいまー！
+	男性客	<Off>						リディちゃん、こっちも頼むよー！
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	驚き2						はーい、ちょっと\nまっててくださいねー！
+CharacterOff
+	ディーア	通常2	1_2_b					おーいリディ！
+	リディ	驚き2	画面外_右
+Tween	リディ	MoveTo	x=90
+	リディ							んぅ、マスターどうしたの？
+	ディーア	通常2						こっちでの任務は昨日で終わったし、\nそろそろリーマに戻るよ
+	リディ	驚き2						うわ、もうこんな時間だ！
+	リディ	笑い2						わかった、\nこれ終わったら準備するね！
+	ディーア	通常2						ああ、待ってるよ
+	リディ	驚き2						てんちょー！\nこれ終わったら私帰らないとです！
+Tween	リディ	MoveTo	x=-350
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	タウロシア							リディちゃんばっかり、\nいつも悪いわね
+	クサナギノツルギ		3_3					今日のご飯が食べられるのも\nリディちゃんのおかげだからね♪
+	ヤグルシ		1_3					ヤグルシも手伝いたいんだし！\nマスター君、ヤグルシも\nアルバイトしていいんだし？
+CharacterOff
+	ディーア	怪しい2	2_3_b					だーめ、お店に迷惑かけるでしょ
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	ヤグルシ		1_3					なんでだし！？\nそんなことないんだし！
+	ヤグルシ		1_3_b
+	クサナギノツルギ		3_3					ヤグルシ昨日お皿3つ\n割ったじゃーん
+	クサナギノツルギ		3_3_b
+	タウロシア		2_3					店長にこっぴどく\n怒られてましたね
+	タウロシア		2_3_b
+	ヤグルシ		1_3					あっ、あれは運が悪かったんだし！\n今度は上手くやれるんだし！
+CharacterOff
+	リディ	照れ2	2_3_b					お待たせー！どしたの？
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	ヤグルシ		1_3					リディちゃんからも\n言ってほしいし！
+	ヤグルシ							ヤグルシも酒場の仕事\nしてみたいんだし！\nヤグルシがんばるんだし！
+CharacterOff
+	ディーア	あはは2	1_2_b
+	リディ	照れ2	2_2
+	リディ							あっ、私がやるから大丈夫だよ？
+CharacterOff
+	ヤグルシ		1_3
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	ヤグルシ							ひどいんだしーーーっ！
+CharacterOff
+	ディーア	通常2	1_2_b
+	リディ	笑い2	2_2
+	ディーア							まあ、今度機会があったらな
+	ディーア							今日から休暇だし、\n向こうに戻ったら店長に\n頼んでみよう
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	ヤグルシ		1_3					ほんとだし!?約束だし!!
+CharacterOff
+	ディーア	通常2	1_2_b
+	リディ	笑い2	2_2
+	ディーア							さて、リディも準備出来た\nみたいだから、帰ろうか！
+	リディ							うんっ！
+CharacterOff
+Param	character_grayout=false
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	三人							はーい！
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常2	1_2_b
+	リディ	通常2	2_2
+StopBgm						3
+	ディーア							お邪魔しましたー……
+FadeOut	white					1
+StopSe
+StopBgm
+Bg	廃墟A
+FadeIn	white					1
+	リディ	驚き2						……え？
+	ディーア	驚き2						あれ？街が……
+FadeOut	white					.1
+ImageEffect	SpriteCamera	Sepia				0
+Bg	市街地B2
+CharacterOff
+	クサナギノツルギ		3_3_b
+	タウロシア		2_3_b
+	ヤグルシ		1_3_b
+Wait						.5
+FadeIn	white					.1
+	クサナギノツルギ		3_3					はぁー疲れたぁー！
+	タウロシア		2_3					今回の任務も大変だったわね
+FadeOut	white					.1
+ImageEffectOff	SpriteCamera	Sepia				0
+Bg	廃墟A
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2_b
+Param	character_grayout=false
+Wait						.5
+FadeIn	white					.1
+	二人							えええええええええええ!?
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=true
+Bg	イベントスチル24701
+Wait						.5
+FadeIn	white					.5
+	　　　　　　　　　　							　
+FadeOut	white					.5
+Bg	廃墟A
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2_b
+Bgm	絶望
+FadeIn	white					.5
+	リディ							どういうことなのこれは……！？
+	リディ							だってついさっきまで……
+FadeOut	white					.1
+ImageEffect	SpriteCamera	Sepia				0
+Bg	市街地B2
+CharacterOff
+	リディ	<Off>
+	ディーア	<Off>
+Wait						.5
+FadeIn	white					.1
+	　　　　　　　　　　							　
+FadeOut	white					.1
+ImageEffectOff	SpriteCamera	Sepia				0
+Bg	廃墟A
+CharacterOff
+	リディ	悔しい2	2_2
+	ディーア	怪しい2	1_2_b
+Wait						.5
+FadeIn	white					.1
+	リディ							こうだったじゃん！
+	ディーア							普通に街があったよな……？
+	リディ	驚き2						結界……とかじゃないよね？
+	ディーア	怪しい2						結界ではないな\n幻術でもなさそうだ
+	リディ	悔しい2						でも、揺れたりもしなかったし……
+	ディーア	怪しい2						ああ、災害でもなさそうだな
+	ディーア							まるで突然消失したかのような……
+	リディ	悔しい2						まさか、霊獣とかじゃないよね？
+	ディーア	悔しい2						霊獣だったら、もっと魔力の\n痕跡が残ってるはずだ
+	ディーア	悔しい2						こんなに跡形もなく、魔力の\n痕跡さえ残さずに物体を\n消失させるものなんて……
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	タウロシア							確かに様子がおかしいですね\n酒場から先は無事ですし……
+	クサナギノツルギ		3_3					ヤグルシの寝相が悪かったから？
+	ヤグルシ		1_3					流石にこうはならないし!!
+	ヤグルシ							ていうか寝相悪くないし！\nクサナギちゃんの方が寝相\n悪かったんだし！
+	ヤグルシ		1_3_b
+	クサナギノツルギ		3_3					えぇ!?\n嘘だぁ、そんなことないよっ！
+	タウロシア		2_3					もう、そんな話してる\n場合じゃないですよ！
+	タウロシア		2_3_b
+	クサナギノツルギ							そうだった！\nでもこれどうやってやったんだろう？
+	タウロシア		2_3					何か鋭利な刃物で\nえぐり取ったような……
+ImageEffect	SpriteCamera	MotionBlur
+	アンノウン	幻想体	画面外_右
+Tween	アンノウン	MoveTo	x=-1000 time=0.8
+Se	風1
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff	アンノウン
+	タウロシア		2_3_b
+Tween	クサナギノツルギ	PunchPosition	y=50				NoWait
+	クサナギノツルギ		3_3					わあっ！？
+	ヤグルシ		1_3					な、なんなんだし！？
+CharacterOff
+	ディーア	驚き2	1_2_b
+	リディ	驚き2	2_2
+	ディーア							今の黒い影……！
+	リディ							魔剣……！？
+	ディーア	悔しい2						いや、あれは幻想体……？
+StopBgm						2
+	ディーア	驚き2						でも、見たこともない魔剣だ……\nそれに、何か普通の幻想体とは\n違うような……
+Se	光3					.1
+FadeOut	white
+	オーラ青		エフェクト表
+FadeIn						1
+	ディーア	驚き2						うわっ！？
+Bgm	緊迫
+	オーラ青							<dash=2>魔剣使い\n<param=name>に告ぐ
+	リディ	驚き2						魔剣機関……！？
+	ディーア	驚き2						作戦指令……！\nこんなタイミングで……！
+	オーラ青							未確認の魔剣幻想体の\n大量発生を確認した
+	オーラ青							影響範囲は魔界全土だ
+	ディーア	悔しい2						魔界全土……！？
+	オーラ青							該当の魔剣幻想体は正体不明、\nデータベース上にも存在しない魔剣だ
+	オーラ青							魔剣機関はこの魔剣幻想体を\nコード：アンノウンと定め、\n災害指定とする
+	オーラ青							作戦目標は全アンノウン\n幻想体の撃破だ
+	オーラ青							……君の活躍に期待している
+	リディ	悔しい2						…………休暇中でも来るんだね、これ
+	ディーア	汗2						ああ……もう\n一方的に好き勝手言って！
+	ディーア							わかったよ、\nあの幻想体を倒せば良いんだろ！
+FadeOut	white					.3
+CharacterOff
+ZoomCamera	SpriteCamera	1.5	-350	250		.1
+FadeIn	white					.3
+Wait						1
+ZoomCamera	SpriteCamera	1.5	350	250		1.5
+Wait						1
+FadeOut	white					.3
+ZoomCamera	SpriteCamera	1				.1
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+Wait						.5
+FadeIn	white					.3
+	ディーア	汗2						っていないし！！
+	リディ	悔しい2						お、追いかけなきゃだよマスター！
+	ディーア	悔しい2						どっちの方に行ったかわかるか？
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	クサナギノツルギ		3_3					ん……たぶんあっちの方だ
+	ヤグルシ		1_3					あの子の魔力はもう覚えたんだし！\nあっちなんだし！
+CharacterOff
+	ディーア	怒り2	1_2_b
+	リディ	怒り2	2_2
+	ディーア							よし、追うぞ！
+If	isdebug==true
+CharacterOff
+Jump	*E_247_02
+EndIf
+EndScenario
+
+# E_247_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	色鮮やかな大森林
+StopBgm						4
+	アンノウン	幻想体	2_3
+FadeIn	white					.5
+Wait						.5
+Tween	アンノウン	MoveTo	y=-500 time=3				NoWait
+CharacterOff						3
+FadeOut	black					.1
+Se	水1
+FadeIn	black					.1
+Wait						1
+FadeOut	black					.1
+Se	水2
+FadeIn	black					.1
+Wait						2
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+Bgm	図書館
+	クサナギノツルギ		3_3					あれ……？
+	ヤグルシ		1_3					おかしいんだし……\n倒したはずなのに、\nそこらじゅうから気配が……
+	ヤグルシ		1_3_b
+	タウロシア		2_3					大量発生とは聞いてましたけど、\nまさかこれほどとは……
+	タウロシア		2_3_b
+	クサナギノツルギ							もう何体も倒してるのにねー
+	クサナギノツルギ							次の気配は……\nもっと森の奥の方かな？
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	通常2	2_2
+	ディーア							よし、そっちに行ってみるか
+	アンノウン	幻想体	1_3_b			1
+	ディーア	怪しい2						しかし、気が休まらないな……\nいつどこから出てくるか……
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	ディーア	本気2						おっと！
+CharacterOff	ディーア
+CharacterOff	リディ
+	アンノウン	幻想体	1_3
+Tween	アンノウン	MoveTo	y=-500 time=2				NoWait
+FadeOut	black					.1
+Se	水1
+FadeIn	black					.1
+Wait						1
+FadeOut	black					.1
+Se	水2
+FadeIn	black					.1
+CharacterOff						1
+Wait						1
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	クサナギノツルギ		3_3					わあ、ここにもいた！
+	タウロシア		2_3					なんだか不気味ね……
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア	汗2						はぁ……\nさっさと終わらせて、休暇に戻ろう
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+Bg	森林A
+	アンノウン	武器状態	2_3
+Bgm	神社
+FadeIn	black					.5
+	アンノウン	武器状態						　
+CharacterOff
+	ディーア	驚き2	2_3_b					これが……魔剣アンノウン？
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	タウロシア							あの幻想体の放っていた魔力とは\n違いますけど……
+	クサナギノツルギ		3_3					うーん、それに幻想体の魔力源に\nなりそうな感じじゃないけどなあ……
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	リディ							アンロックしてみる？
+	ディーア	怪しい2						ああ、暴走はしてなさそうだしな……
+FadeOut	white					.1
+Se	光3
+	オーラ青		エフェクト表
+FadeIn	white					1
+	オーラ青							魔核エーテライト認識\nコード：アンロック承認\nシステム：ブレイブソード展開		9000-24
+	オーラ青							ネフィリム機関をオーバーロードし\n環境変数をブレイズゼロに固定
+	オーラ青							魔力結晶体構築<dash=2>\n《魔剣少女》解放します
+FadeOut	white					.5
+Se	光3
+CharacterOff
+	アンノウン		2_3
+FadeIn	white					1
+StopBgm
+StopVoice
+Param	character_grayout=false
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	三人							…………ッ！
+CharacterOff
+	アンノウン							…………!?
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2	2_3_b
+	ディーア							三人共、そこまで\n警戒しなくても大丈夫だよ
+Bgm	平和
+CharacterOff
+	ディーア	悔しい2	1_2
+	アンノウン		2_2
+	アンノウン							……私をアンロックしたのは誰？
+	ディーア	驚き2						ああ、オレだけど……
+	アンノウン							なぜ私の場所がわかったの？\n私のことは誰も知らないはず……
+	ディーア	あはは2						ああ、君の幻想体を倒していたら\nここにたどり着いて……
+	アンノウン							……離して
+	ディーア	驚き2						え？
+Bgm	緊迫
+	アンノウン							……いいから離して、と言っているの\n私をロックして、\nそして二度と此処へは来ないで
+	ディーア	あはは2						そんな事言われても……
+	アンノウン							いいから早くして\n……それとも消えたいの？
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	クサナギノツルギ		3_3					……！
+CharacterOff
+	ディーア	驚き2	1_2
+	アンノウン		2_2
+	ディーア							もしかして、街が消えたりしたのも\n君の能力で……！
+	アンノウン							……街が消えた？
+	ディーア	悔しい2						ああ、魔界中で君の\n幻想体が出現していて……
+	ディーア							何か心当たりはないのか？
+	アンノウン							……幻想体？\n知らないわ、そんなの
+	ディーア	悔しい2						そうか……なにか手がかりになるかと\n思ったんだけど
+	アンノウン							ちょっと、その話を\n詳しく聞かせてもらえるかしら
+	ディーア	驚き2						ああ、さっき魔剣機関から\n指令が来て……
+CharacterOff
+	ディーア	悔しい2	1_2
+	クサナギノツルギ		2_2					<size=20>……あるじ様</size>
+	ディーア	悔しい2						<size=20>……っと、アンノウンの\n幻想体の気配があるな</size>
+	クサナギノツルギ		2_2					<size=20>後ろの方の草むらだね</size>
+	ディーア		1_2					<size=20>……よし、少しつついてみるか</size>
+CharacterOff
+	アンノウン		2_3_b					あなた、何を……
+CharacterOff
+	クサナギノツルギ		2_2
+	ディーア	本気2	1_2
+	ディーア							はぁっ！！
+FadeOut	white					.1
+Se	突2
+CharacterOff
+StopBgm
+	カドゥケウス	？？？？	画面外_下
+FadeIn	white					.1
+Se	ポップアウト
+Tween	カドゥケウス	MoveTo	y=-350	easeOutBack
+Se	ポップイン
+	カドゥケウス	？？？？						うばぁあっ！？
+CharacterOff
+	ディーア	驚き2	2_3					うわぁっ！？
+Bgm	コメディ
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3_b
+	クサナギノツルギ							……あれ、アンノウンじゃない？
+	ヤグルシ							……この子も、魔剣なんだし？
+CharacterOff
+	カドゥケウス	？？？？	2_3_b					あ、あ、ぁぁ……
+	カドゥケウス	？？？？						うびゃーーーーっ!!!!
+Tween	カドゥケウス	MoveTo	x=-3000	easeInOutBack
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							あ、逃げた
+	リディ							えっ何今の……はっや……
+CharacterOff
+	アンノウン		2_3_b					……あなた、さっき私の幻想体が\n魔界中にいると言ったわね？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							ああ、言ったけど……
+CharacterOff
+	アンノウン		2_3					追いかけるわ、魔剣使い
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア							え、いや、でも……
+CharacterOff
+	アンノウン		2_3_b					あの魔剣、私と同じ気配がした……\nあなたも勘違いしたのだから\nわかるでしょう？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							幻想体と同じ魔力の魔剣……\nそうか、あいつが……！
+CharacterOff
+Bgm	キノコリオン
+	クサナギノツルギ		2_3_b					追いかけよう、あるじ様！\n見失う前にっ！
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悔しい2	2_2
+	ディーア							ああ！\nみんな、はぐれないようにな！
+	ディーア							よし、行くぞ！
+If	isdebug==true
+CharacterOff
+Jump	*E_247_03
+EndIf
+EndScenario
+
+# E_247_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	森林A
+	ヤグルシ		2_2
+	タウロシア		1_2_b
+FadeIn	white					.5
+	タウロシア		1_2					はぁ……追いついた……
+	タウロシア		1_2_b
+	ヤグルシ		2_2					観念するんだし！
+CharacterOff
+	カドゥケウス	？？？？	2_3_b					うばばば……\nなんなんですかぁ……
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+	ディーア	悔しい2	2_3_b
+	クサナギノツルギ		3_3_b
+	リディ	驚き2	1_3_b
+FadeIn	black					.5
+	クサナギノツルギ		3_3					あるじ様、やっぱりこの子だ
+	ディーア	悔しい2	2_3					アンノウンの幻想体はこいつが\n生み出してたのか
+	ディーア	怪しい2	2_3					違和感の正体はそのせいか……？
+	ディーア	怪しい2	2_3_b
+	リディ	驚き2	1_3					違和感？
+	ディーア	怪しい2	2_3					手応えがありすぎるんだ\n見た目では区別がつかないけど、\nこれは魔力の霧とかじゃない
+	ディーア							もっと金属に近い何か……
+CharacterOff
+	アンノウン		2_3_b					ふん、じゃあこの魔剣の暴走を\n止めれば、幻想体はもう増える\nことはないのね
+CharacterOff
+	ディーア	悔しい2	2_3_b
+	クサナギノツルギ		3_3_b
+	リディ	悔しい2	1_3_b
+	ディーア							おそらく、な……
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+	ヤグルシ		1_3_b
+	タウロシア		3_3_b
+	カドゥケウス	？？？？	2_3_b
+FadeIn	black					.5
+	ヤグルシ		1_3					なんか面白い魔剣だし？\nへんないきもの連れてるし
+	タウロシア		3_3					あまり見ないタイプね\n水属性かしら？
+	カドゥケウス	？？？？	2_3					ああぁぁぁぁ……うばぁ…………
+	カドゥケウス	？？？？						やっぱり私を処分する\nつもりなんだぁ……
+	カドゥケウス	？？？？						そうですよね……\nカドゥケウスなんて……\n誰も使わないですもんね……
+CharacterOff
+	ディーア	驚き2	1_2
+	アンノウン		2_2
+	ディーア							この子、カドゥケウスっていうのか
+	ディーア	怪しい2						暴走状態とはいえ、\n悪いことしそうには\n見えないんだけどなあ……
+	アンノウン							…………
+CharacterOff
+	ヤグルシ		1_3_b
+	クサナギノツルギ		3_3_b
+	カドゥケウス		2_3_b
+	カドゥケウス							ゆるしてぇ……\nなんでもするからぁ……
+	ヤグルシ		1_3					じゃあおとなしくロックされて\nほしいんだし
+	カドゥケウス		2_3					やだぁ……
+	カドゥケウス		2_3_b
+	ヤグルシ							なんでだし!?
+	カドゥケウス		2_3					だって、ロックされちゃったら\nぎんいろさんに会えないし……
+	カドゥケウス		2_3_b
+StopBgm						3
+	ヤグルシ							ぎんいろさん？
+	カドゥケウス		2_3					うばぁ……
+CharacterOff
+	アンノウン		2_3_b					支離滅裂ね
+CharacterOff
+	カドゥケウス		2_3_b					う……ぅ……
+	カドゥケウス							うばぁーーーっ！！
+CharacterOff
+Bgm	コメディ
+	ディーア	驚き2	1_2
+	アンノウン		2_2
+	ディーア							あっ逃げた！！
+CharacterOff
+	ヤグルシ		1_3_b
+	クサナギノツルギ		3_3_b
+	タウロシア		2_3_b
+	クサナギノツルギ		3_3					ああっ、監視してたのに！
+	ヤグルシ		1_3					油断したんだし！
+CharacterOff
+	ディーア	悔しい2	1_2
+	アンノウン		2_2
+	ディーア							追うぞ！！
+	アンノウン							…………
+StopBgm						3
+CharacterOff
+	ヤグルシ		2_3_b					ぎんいろさんって……\nあのぎんいろちゃん？
+If	isdebug==true
+CharacterOff
+Jump	*E_247_04
+EndIf
+EndScenario
+
+# E_247_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	森林A
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+FadeIn	white					.5
+	ディーア							はぁ……はぁ……
+	リディ							全然追いつけない……！
+	ディーア							これは一筋縄ではいかないな……
+CharacterOff
+	クサナギノツルギ		2_3_b					どうする、あるじ様？
+CharacterOff
+	リディ		2_2
+	ディーア	怪しい2	1_2					……作戦を立てよう
+CharacterOff
+	タウロシア		2_3_b					作戦？
+CharacterOff
+	リディ		2_2
+	ディーア	悔しい2	1_2					<dash=2>カドゥケウスを罠にはめるんだ
+FadeOut	black					.1
+CharacterOff
+Bgm	平和
+Bg	市街地B2
+	カドゥケウス		画面外_右
+FadeIn	black					.5
+Tween	カドゥケウス	MoveTo	x=180 time=0.5				Add
+Tween	カドゥケウス	PunchPosition	y=80 time=0.5
+Tween	カドゥケウス	MoveTo	x=0 z=150 time=0.5				Add
+Tween	カドゥケウス	PunchPosition	y=80 time=0.5
+	カドゥケウス							うばぁ……ひどい目に遭ったぁ……
+	カドゥケウス							これ持って逃げ回るだけで\nいいって話だったのに……
+	カドゥケウス							やっぱり処分とか\nされちゃうのかなぁ……
+	カドゥケウス							あの人達なんか怖いし……\n追っかけてくるしぃ……
+Param	character_grayout=false
+	クサナギノツルギ	幼女服	画面外_左
+Se	走る
+Tween	クサナギノツルギ	MoveTo	x=1000 time=3
+Param	character_grayout=true
+Tween	カドゥケウス	PunchPosition	y=50				NoWait
+	カドゥケウス							うばっ!?
+	カドゥケウス							ぁ、あれ？あの子\nさっき見たような……？
+	カドゥケウス							うつむいてたからよくわかんないけど\nなんか見覚えあるような……！？
+CharacterOff
+	クサナギノツルギ	幼女服	2_3_b					…………！
+	クサナギノツルギ							あ、あー今日はどこであそぼうかなー？
+	クサナギノツルギ							おままごとでもしよっかなー？
+CharacterOff
+	カドゥケウス		2_3_b					あ……普通の女の子だぁ……\n勘違いかぁ……
+	カドゥケウス							よかったぁ……こわかったぁ……
+CharacterOff			2_3_b
+	クサナギノツルギ	幼女服						<size=20>…………あるじ様、配置についたよ</size>
+Param	character_grayout=false
+	オーラ青		エフェクト表
+	ディーア	<Off>
+	ディーア	<Off>						<size=20>…………よし、ちゃんと騙せてるな！\nこのまま警戒させないように……！</size>
+Param	character_grayout=true
+CharacterOff
+	クサナギノツルギ	幼女服	2_3_b					<size=20>あとはヤグルシとタウロシアさんが\n配置についてくれれば……！！</size>
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+	カドゥケウス		2_3_b
+FadeIn	black					.5
+	カドゥケウス							これからどうしようかなぁ……
+Param	character_grayout=false
+	ヤグルシ	幼女服	画面外_右
+Se	走る
+Tween	ヤグルシ	MoveTo	x=-1000 time=3
+Param	character_grayout=true
+Tween	カドゥケウス	PunchPosition	y=50				NoWait
+	カドゥケウス		2_3_b					うばぁっ!?
+	カドゥケウス							あ、あれ？\nあの子も……あれ？あれ？
+CharacterOff
+	ヤグルシ	幼女服	2_3_b					お、お母さんとはぐれちゃったー
+	ヤグルシ							どうしようーたいへんだー
+CharacterOff
+	カドゥケウス		2_3_b					よかったぁ、あの子も\n普通の女の子だぁ……
+CharacterOff
+	ヤグルシ	幼女服	2_3_b					……よし、上手くいったんだし
+CharacterOff
+	カドゥケウス		2_3_b					だし？
+CharacterOff
+	ヤグルシ	幼女服	2_3_b					<dash=2>ッ!?
+CharacterOff
+	カドゥケウス		2_3_b					いや、気のせいだよねぇ……\nちょっとびくびくしすぎかなあ……
+	カドゥケウス							メウたんもそう思う？そっかぁ……
+CharacterOff
+	ヤグルシ	幼女服	2_3_b					<size=20>……あぶなかったんだし……!!</size>
+Param	character_grayout=false
+	オーラ青		エフェクト表
+	ディーア	<Off>
+	ディーア	<Off>						まあ、なんとか成功だ！
+	ディーア	<Off>						あとはタウロシアを待って\nみんなで奇襲を……!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Param	character_grayout=true
+CharacterOff
+	カドゥケウス		2_3_b
+FadeIn	black					.5
+StopBgm						3
+	カドゥケウス							おなかへったなぁ……
+Param	character_grayout=false
+	タウロシア	幼女服	画面外_左
+Se	走る
+Tween	タウロシア	MoveTo	x=1000 time=3
+Param	character_grayout=true
+	カドゥケウス							………………………
+	カドゥケウス							ぅ
+ZoomCamera	SpriteCamera	2	0	250		0
+Tween	カドゥケウス	ShakePosition	x=10 y=30 time=30				NoWait
+	カドゥケウス							<size=40>うばあああああああああ\nあああああああああああ\n!!!!!!!!!!!???????????</size>
+FadeOut	white					.1
+ZoomCamera	SpriteCamera	1				0
+CharacterOff
+	ディーア	悔しい2	2_3_b
+Bgm	コメディ
+Wait						.3
+FadeIn	white					.1
+	ディーア							やっぱりダメか！\nええい、プランB!!
+CharacterOff
+	タウロシア	幼女服	2_3_b					や、やっぱりってなんですか！\nわかってたんですかマスターさま！？
+CharacterOff
+	ディーア	本気2	2_2
+	アンノウン		1_2_b
+	ディーア							アンノウン、退路を塞げ！
+	アンノウン							指図しないで、それと近づかないで
+Tween	アンノウン	MoveTo	x=-850
+CharacterOff
+	アンノウン		画面外_左
+Tween	アンノウン	MoveTo	x=-180
+Wait						.5
+	カドゥケウス		画面外_右
+Tween	カドゥケウス	MoveTo	x=-90 time=0.5 z=90
+Tween	カドゥケウス	PunchPosition	y=50				NoWait
+	カドゥケウス							うばあぁぁっ！？
+Tween	カドゥケウス	MoveTo	x=3000 time=0.5
+	アンノウン							！？
+CharacterOff
+	ヤグルシ	幼女服	1_3_b
+	タウロシア	幼女服	2_3_b
+	クサナギノツルギ	幼女服	3_3_b
+	ヤグルシ	幼女服	1_3					うっわ、めちゃくちゃ速いんだし……
+	クサナギノツルギ	幼女服	3_3					そんな速さで動けるんだ……
+	タウロシア	幼女服	2_3					うぅ……私はいったいなんのために……
+CharacterOff
+	ディーア	悔しい2	2_3_b					作戦立て直しだな……
+	ディーア	本気2						よし、もう一回カドゥケウスに\n追いつくぞ！！
+If	isdebug==true
+CharacterOff
+Jump	*E_247_05
+EndIf
+EndScenario
+
+# E_247_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	市街地B2
+	ディーア	通常2	2_3_b
+FadeIn	white					.5
+	ディーア							……上手く街の方に追い込めたな
+CharacterOff
+	ヤグルシ	幼女服	1_3_b
+	タウロシア	幼女服	2_3_b
+	クサナギノツルギ	幼女服	3_3_b
+	クサナギノツルギ	幼女服	3_3					今度は失敗しちゃだめだよ、\nタウロシアさん！
+	タウロシア	幼女服	2_3					私のせいなんですか、あれ……
+	タウロシア	幼女服	2_3_b
+	ヤグルシ	幼女服	1_3					ヤグルシも気をつけるんだし……
+CharacterOff
+	ディーア	怒り2	2_3_b					よし、仕掛けるぞ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	wipe
+	カドゥケウス		2_3_b
+FadeIn	black					.5
+	カドゥケウス							うばぁ……またひどい目に\nあったぁ……
+	カドゥケウス							でもなんだろう、手加減\nされてたような……？
+	カドゥケウス							うぅ……怖いよぅ……
+Tween	カドゥケウス	PunchPosition	y=50				NoWait
+	カドゥケウス							うばぁっ!?\nまたいるぅ……!!
+Tween	カドゥケウス	MoveTo	x=-3000
+CharacterOff
+	複数立ち絵		画面外_右
+Param	character_grayout=false
+	　　　　　　　　　　
+Tween	複数立ち絵	MoveTo	x=180 time=2
+	　　　　　　　　　　
+	ディーア	<Off>						いやー疲れた！\nもう魔剣機関からの任務とか\nどうでもいいし、みんなで遊ぶか！
+	リディ	<Off>						私お買い物したーい！
+Tween	複数立ち絵	MoveTo	x=0 time=2
+	クサナギノツルギ	<Off>						あっあるじ様！\n私あのぬいぐるみ欲しいなー！
+	ヤグルシ	<Off>						あのお洋服もかわいいんだし！\n買ってほしいんだし！
+	タウロシア	<Off>						わ、私も普通の服を……
+Tween	複数立ち絵	MoveTo	x=-90 time=2
+	ディーア	<Off>						よし、じゃあ買いに行くか！
+	三人	<Off>						わーい！
+Tween	複数立ち絵	MoveTo	x=-180 time=2
+	タウロシア	<Off>						あの、聞いてます……？
+	アンノウン	<Off>						…………
+Tween	複数立ち絵	MoveTo	x=-350 time=2
+FadeOut	black					.5
+CharacterOff
+	複数立ち絵		画面外_右
+	　　　　　　　　　　
+Wait						1
+FadeIn	black					.5
+Tween	複数立ち絵	MoveTo	x=100 time=2
+	　　　　　　　　　　
+	ディーア	<Off>						いやーたくさん買ったねー！
+	タウロシア	<Off>						なんだかお腹が減りましたね
+	ディーア	<Off>						ご飯でも食べるか！
+	リディ	<Off>						そうだねーっ！\nリディ、ハンバーグ食べたいな！！
+	タウロシア	<Off>						ふふ、賛成です♪
+Tween	複数立ち絵	MoveTo	x=-50 time=2
+	ヤグルシ	<Off>						ヤグルシもお腹すいたんだし！
+	クサナギノツルギ	<Off>						ねえねえあるじ様ーっ、\nあそこのお店行こうよ！
+Tween	複数立ち絵	MoveTo	x=-180 time=2
+	アンノウン	<Off>						………………はぁ
+	ディーア	<Off>						ほら、アンノウンも行くぞ
+	アンノウン	<Off>						……わかったから、触らないで\n消えたいの？
+Tween	複数立ち絵	MoveTo	x=-500 time=1
+CharacterOff
+	カドゥケウス		画面外_右
+Tween	カドゥケウス	MoveTo	x=520 time=0.5				NoWait
+	カドゥケウス							………………あれ？
+Tween	カドゥケウス	MoveTo	x=180 time=0.5				Add
+Tween	カドゥケウス	PunchPosition	y=80 time=0.5
+Tween	カドゥケウス	MoveTo	x=0 z=150 time=0.5				Add
+Tween	カドゥケウス	PunchPosition	y=80 time=0.5
+	カドゥケウス							も、もう諦めてくれたのかな……？
+Tween	カドゥケウス	MoveTo	x=-90 time=0.5				Add
+Tween	カドゥケウス	PunchPosition	y=80 time=0.5
+Tween	カドゥケウス	MoveTo	x=-180 z=150 time=0.5				Add
+Tween	カドゥケウス	PunchPosition	y=80 time=0.5
+Tween	カドゥケウス	MoveTo	x=-350 time=0.5				Add
+Tween	カドゥケウス	PunchPosition	y=80 time=0.5
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+Param	character_grayout=true
+Bg	酒場1F
+	ディーア	驚き2	1_2
+	リディ	笑い2	2_2
+Wait						.5
+FadeIn	black					.5
+	リディ							わぁ、おいしそう！
+Param	character_grayout=false
+CharacterOff
+	ヤグルシ	幼女服	1_3_b
+	タウロシア	幼女服	2_3_b
+	クサナギノツルギ	幼女服	3_3_b
+	三人							いっただきまーす！
+Param	character_grayout=true
+CharacterOff
+	アンノウン		2_3_b					…………いただきます
+	アンノウン							……これで食べるの？
+CharacterOff
+	クサナギノツルギ	幼女服	2_3_b					そうだよっ！\nフォークとナイフで食べるの！
+CharacterOff
+	アンノウン		2_3_b					そう……ありがとう
+FadeOut	#ffff99					.1
+Se	光1
+FadeIn	#ffff99					.3
+	アンノウン							ぁ……
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	リディ							あ、フォーク消えちゃった……
+	ディーア							……本当に触れたものを消すんだな
+CharacterOff
+	アンノウン		2_3					信じていなかったのかしら？\nあれだけ言ったのに
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							いや、信じていなかった\nわけじゃないけど……
+CharacterOff
+	アンノウン		2_3					そう、別にどっちでもいいけど
+	アンノウン							……それより、こんなことして\n本当に意味あるの？
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	驚き2	2_2
+	ディーア							カドゥケウスを捕まえるには、まず警戒を解かないといけないからな
+	ディーア							悪いな、付き合わせて
+CharacterOff
+	アンノウン		2_3_b					別に構わない\nあなた達と目的は同じだもの
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	笑い2	2_2
+	ディーア							それは助かるよ
+CharacterOff
+	アンノウン		2_3_b					私も聞きたいのだけれど、\nアンノウンって何？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							ああ、そうだ\nまだ君の名前を聞いてなかったんだ
+	ディーア	通常2						魔剣機関に君の情報が一切なくてさ
+	ディーア							大抵の魔剣は未発見でもわずかな\n伝承くらいはあるものなんだけど\n珍しいことに君の情報はなかったんだ
+CharacterOff
+	アンノウン		2_3_b					……それで、アンノウンなのね
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	通常2	2_2
+	ディーア							便宜上ね\nそれで、君の本当の名前は？
+CharacterOff
+	アンノウン		2_3_b					私の名前は……
+	アンノウン							いえ、アンノウンでいいわ\n本当の名前なんて、知っても\n意味ないもの……
+	アンノウン							アンノウン……\n私にふさわしい名前だわ
+CharacterOff
+	クサナギノツルギ	幼女服	2_2
+	タウロシア	幼女服	1_2					……なんだか二人とも\n楽しそうじゃないわね
+	タウロシア	幼女服	1_2_b
+	クサナギノツルギ	幼女服						楽しい場所で楽しくない\n話しちゃいけないんだよー！\n楽しい話しよっ♪
+CharacterOff
+	ヤグルシ	幼女服	2_2
+	アンノウン		1_2					……こんな状況で、たのしく\nご飯なんてできるわけないでしょう
+	カドゥケウス		画面外_右
+Tween	カドゥケウス	MoveTo	x=520 time=0.5 z=-400				NoWait
+	ヤグルシ		2_2
+	アンノウン							……私のフォークないし
+Tween	カドゥケウス	MoveTo	x=0 time=15				NoWait
+	ヤグルシ							こんな時だからこそ楽しむんだし！\nあ、使ってないフォークあげるんだし
+	アンノウン							ありがとう\nまあこれが作戦じゃなければ、\n本当に見限っていたけれど
+	カドゥケウス							………………ぐぅ～～～～～～～
+CharacterOff
+	ディーア	怪しい2	2_3_b					………………
+CharacterOff
+	アンノウン		2_3_b					………………
+CharacterOff
+	ディーア	本気2	2_3_b
+	ヤグルシ	幼女服	1_3_b
+	クサナギノツルギ	幼女服	3_3_b
+	ディーア							今だ！！！
+CharacterOff
+	カドゥケウス		2_3					うばぁぁぁあああっ！？
+Bgm	コメディ
+CharacterOff
+	クサナギノツルギ	幼女服	2_3_b					逃した……っ！
+CharacterOff
+	アンノウン		2_3_b					……本当にやる気あるのかしら？
+CharacterOff
+	ヤグルシ	幼女服	1_3_b
+	クサナギノツルギ	幼女服	3_3_b
+	タウロシア	幼女服	2_3_b
+	ヤグルシ	幼女服	1_3					そんなこと言ってる場合\nじゃないんだし！
+	タウロシア	幼女服	2_3					追いましょう、マスターさま！
+If	isdebug==true
+CharacterOff
+Jump	*E_247_06
+EndIf
+EndScenario
+
+# E_247_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	草原A
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+FadeIn	white					.5
+	ディーア							くっ……結局逃げられたか……
+	リディ							幻想体のアンノウンちゃんも、\n少しずつ増えてきているような……
+StopBgm						3
+	ディーア							あの高速移動する水銀に\n追いつく手段を考えないと……
+CharacterOff
+	アンノウン		2_3					……万事休すかしら
+Bgm	絶望
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							アンノウン？
+CharacterOff
+	アンノウン		2_3					もういい、私一人でやるわ\n協力ありがとう
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	リディ							アンノウンちゃん……
+CharacterOff
+	ディーア	悔しい2	1_2
+	アンノウン		2_2
+	ディーア							一人でどうやって戦う気だ？
+	ディーア							魔剣使いがいなきゃ、魔剣少女だって\nただの女の子と変わらないんだ
+	ディーア	怒り2						魔力ならオレがいくらでもあげるよ\nでも、一人でどうにかできる問題じゃ…
+	アンノウン							私とあなたでは前提が違うのよ
+	ディーア	驚き2						前提？
+	アンノウン							あなたはカドゥケウスも私の幻想体に\n襲われてる人々も、\n両方救うつもりなんでしょう？
+	アンノウン							でも、そのやり方では\n時間がかかりすぎる
+	アンノウン							……消したほうが良いのよ、\nカドゥケウスを
+	ディーア	悔しい2						それは…………！
+	アンノウン							今カドゥケウスを消せば、\n幻想体の増殖はひとまず止まるわ\nあとは幻想体を駆逐するだけ……
+	アンノウン							私がこの手でカドゥケウスに\n触れるのが、一番てっとり早いのよ
+	ディーア	怒り2						……そのために、\nカドゥケウスを消すって？
+	アンノウン							私だって消したいわけじゃないわ\nでも、他に方法はないでしょう？
+	アンノウン							あなたの話だと、私の幻想体は\n手当たり次第に街を\n襲っているみたいだけど……
+	アンノウン							のんびりしている間に、\n魔界から人がいなくなるわよ
+CharacterOff
+StopBgm
+	ヤグルシ	幼女服	2_3_b					…………あ
+CharacterOff
+	ディーア	驚き2	2_3_b					ヤグルシ？
+CharacterOff
+	ヤグルシ	幼女服	2_3_b					そういえば、一つだけ方法が\nあるかもしれないんだし
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+Bg	森林A
+Bgm	キノコリオン
+	ディーア	怒り2	1_2
+	ぎんいろ		2_2
+FadeIn	black					.5
+	ぎんいろ							……なんで私、呼ばれたの？
+	ディーア							ぎんいろなら、カドゥケウスを\n捕まえられるかもしれないんだ
+	ぎんいろ							……そう、私の力が、必要なのね
+CharacterOff
+	ヤグルシ	幼女服	1_3_b
+	クサナギノツルギ	幼女服	3_3_b
+	タウロシア	幼女服	2_3_b
+	ヤグルシ	幼女服	1_3					確かにさっき、ぎんいろちゃんに\n会いたいって言ってたんだし！
+	タウロシア	幼女服	2_3					言われてみれば、あの子と\nぎんいろちゃん、少し似てるような……
+CharacterOff
+	アンノウン		2_3					……これでダメだったら、\n本当に見限るわよ
+CharacterOff
+	ディーア	怒り2	2_3					わかってるって\nよし、じゃあもう一回カドゥケウスを\n追いかけて誘い込むぞ！
+If	isdebug==true
+CharacterOff
+Jump	*E_247_07
+EndIf
+EndScenario
+
+# E_247_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	凱旋
+Bg	市街地B2
+	カドゥケウス	武器状態	2_3_b
+FadeIn	white					.5
+Wait						.5
+Tween	カドゥケウス	MoveTo	y=-500 time=3				NoWait
+CharacterOff						3
+FadeOut	black					.1
+Se	闇1
+FadeIn	black					.1
+Wait						1
+FadeOut	black					.1
+Se	水2
+FadeIn	black					.1
+Wait						2
+	ディーア	あはは2	2_3					ふぅ、やっと捕まえた……
+CharacterOff
+	ヤグルシ	幼女服	1_3_b
+	タウロシア	幼女服	2_3_b
+	クサナギノツルギ	幼女服	3_3_b
+	タウロシア	幼女服						……まさかぎんいろちゃんを見た\n途端に突っ込んでくるなんて
+	クサナギノツルギ	幼女服	3_3					すごい勢いだったねー
+	ヤグルシ	幼女服	1_3					びっくりしたんだし……
+	タウロシア	幼女服	2_3					それにしても、ぎんいろちゃんに\n似てるわね
+	タウロシア	幼女服	2_3_b
+	クサナギノツルギ							ぎんいろちゃんの妹なの？
+CharacterOff
+	ディーア	通常2	1_2
+	ぎんいろ		2_2
+	ぎんいろ							……違うわ\n……私は知らない子よ
+	ぎんいろ							でも、あの幻想体は銀の霧ね
+	ディーア	驚き2						銀の霧？
+	ぎんいろ							ええ……でも私の使う魔導性白銀\nとは少し違うわね
+	ぎんいろ							たぶん、魔導性液体金属……\n錬成された魔導性の水銀
+	ディーア	悔しい2						水銀の霧……ずっと感じてた\n違和感はこれだったのか
+	ぎんいろ							逃げる時に撒き散らした水銀が\nアンノウンの形を取るように\n仕組まれていたみたい
+	ディーア	驚き2						その術式とランクSS魔剣の暴走時の\n魔力が合わさってこんなことに\nなったのか……
+	ぎんいろ							……追いかけ回しすぎ
+	ディーア	あはは2						あはは……まあ遭遇した幻想体は\n全部片付けてきたからさ
+	ディーア	通常2						なにはともあれ、これで原因は\n解決したわけだ
+	ディーア							あとは幻想体の撃破だな
+CharacterOff	ぎんいろ
+	アンノウン		2_2					これで、もう幻想体は増えないのよね
+	ディーア	通常2						ああ……多分な
+	アンノウン							そう、ならいいわ
+	ディーア	あはは2						……少しは落ち着いたか？
+	アンノウン							何のことかしら？
+	ディーア	あはは2						ずっと気を張っていたように\n見えたからさ
+	アンノウン							……そんなことないわ
+	ディーア	怪しい2						……アンノウン\nお前さっき、目的はオレ達と\n一緒だって言ったよな
+	アンノウン							……そうだったかしら
+	ディーア	通常2						もしかして、\nカドゥケウスを消す気なんて\nなかったんじゃないか？
+	ディーア							もしカドゥケウスを消したいなら、\nいくらでもチャンスはあった\nはずだしな
+	ディーア							それに、アンロックされるのを\n嫌がったり、\n近づきたがらないのもそうだ
+	アンノウン							……何が言いたいの
+	ディーア	怪しい2						アンノウン……お前、もしかして\n誰も消したくないんじゃないのか？
+	アンノウン							……能力と性格が反した\n魔剣は変かしら？
+	ディーア	通常2						そんなことないよ\nそういう子はよく見るしな
+	ディーア	悔しい2						ただ……大切なものを消してしまう\n恐怖に怯えて生きるのは、\n辛かっただろうなと思ってさ
+	アンノウン							……あなたに、何がわかるの？
+	ディーア	通常2						そりゃあわかるさ\n常に命のやり取りをしてるんだからな
+	ディーア	悔しい2						いつどこで命を落としても\nおかしくないし、常に戦うときは\n最悪の可能性を考える
+	ディーア							考えた上で、大切な魔剣たちを\n失わないように、大切な魔剣達と\nどう戦うか考えるんだ
+	アンノウン							……戦わないという選択肢はないの？
+	ディーア	あはは2						ないよ\n魔界じゃ、戦わないと\n夢もかなわないしな
+	アンノウン							欲張りなのね
+	ディーア	あはは2						まあ、そうとも言うかな
+	アンノウン							…………私はもう、大切なものを\nなくしてしまったの
+	ディーア	驚き2						え？
+	アンノウン							何をなくしたのかは覚えてない\nただ、大切なものだったという記憶と\nそれをなくした喪失感だけがあるの
+	アンノウン							……名前さえ、今の私は覚えてないわ
+	ディーア	悔しい2						……だから、アンノウンって名前が\n相応しいって言ったのか
+	アンノウン							そう、本来なら私は認知されない\n誰も知らない魔剣のはずだった
+	アンノウン							……幻想体が出なければ
+	アンノウン							さあ、早く私をロックして
+	アンノウン							あなたが大切な魔剣を\n失わないように戦うのと同じ
+	アンノウン							私も大切なものを失わないように……\n大切なものを作らないように、\n私は眠るの
+	ディーア	怪しい2						……まだ幻想体は残ってるぞ？
+	アンノウン							幻想体の相手くらい、\nあなたたちなら容易いでしょう？
+StopBgm
+	ディーア	悔しい2						はぁ……こうなったら仕方ない、\n本当は歓迎会で渡すつもり\nだったんだけど
+	アンノウン							……は？\n歓迎会？
+CharacterOff
+	タウロシア	幼女服	2_3					渡しちゃっていいのですか？
+CharacterOff
+	ディーア	通常2	1_2
+	アンノウン		2_2
+	ディーア							ああ、よろしく
+	アンノウン							え？
+CharacterOff
+Bgm	都市
+	ヤグルシ	幼女服	2_3_b					さっきアンノウンちゃんに\n似合うと思って買った服が\nあるんだし！
+CharacterOff
+	アンノウン		2_3_b
+	アンノウン							ちょっと、近づかないで、私は……
+CharacterOff
+	クサナギノツルギ	幼女服	2_3_b					あとねっ！\nぬいぐるみもあるんだよーっ！\nあるじ様の魔剣になったお祝いっ！
+CharacterOff
+	アンノウン		2_3_b
+	アンノウン							私はそんなつもりじゃ……
+CharacterOff
+	リディ	笑い2	2_3_b					ほらほら、いいからいいから♪
+CharacterOff
+	ディーア	通常2	1_2
+	アンノウン		2_2
+	アンノウン							…………
+	ディーア							これからよろしくな、アンノウン
+	アンノウン							はぁ……
+	アンノウン							最初から私に拒否する\n権利なんてないわけね
+	アンノウン							……いつか、あなたを\n消してしまっても知らないわよ
+	ディーア	あはは2						大丈夫さ、消えたりなんてしないよ\nまだまだ消える訳にはいかないしな
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	通常2	2_2
+	ディーア							さあ、じゃあ残った\n幻想体を倒しに行くか！
+	リディ	驚き2						連戦だねマスター、大丈夫？
+	ディーア							もちろん！よし、行くぞ！
+If	isdebug==true
+CharacterOff
+Jump	*E_247_08
+EndIf
+EndScenario
+
+# E_247_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	市街地B2
+	カドゥケウス	武器状態	2_3_b
+FadeIn	white					.5
+	カドゥケウス							　
+FadeOut	white					.1
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	驚き2	2_2
+Wait						.3
+FadeIn	white					.1
+	リディ							…………そういえば、\nこの子はどうするの？
+	ディーア	怪しい2						うーん、クランさんのとこで\n一度見てもらいたいけど、\n目立った外傷はないしな……
+	リディ							アンロックしてみる？
+	ディーア	通常2						ああ、そうだな
+FadeOut	white					.1
+Se	光1
+	オーラ青		エフェクト表
+FadeIn	white					.1
+	オーラ青							魔核エーテライト認識\nコード：アンロック承認\nシステム：ブレイブソード展開		9000-24
+	オーラ青							ネフィリム機関をオーバーロードし\n環境変数をブレイズゼロに固定
+	オーラ青							魔力結晶体構築<dash=2>\n《魔剣少女》解放します
+FadeOut	white					.5
+CharacterOff
+Se	光3
+	カドゥケウス	通常	2_3_b
+StopVoice
+FadeIn
+	カドゥケウス							うばぁっ！？
+	カドゥケウス							ご、ごめんなしゃい……\nもう逃げたりしませんからぁ……\nゆるしてぇ……
+CharacterOff
+	ディーア	あはは2	2_3					大丈夫大丈夫、\nもう追いかけ回したりしないから
+CharacterOff
+	カドゥケウス	通常	2_3					ほぇ……本当ですか……？
+CharacterOff
+	ディーア	汗2	1_2
+	ぎんいろ		2_2					あなた、ずっとこの子を\n追い回してたの……？
+	ディーア							ち、違うんだ\nいや違わないんだけど、\nこれには理由が……
+CharacterOff
+	カドゥケウス	通常	2_3					そうなんですぅ……\nずっとこの人に追い回されてぇ……
+	カドゥケウス							…………え
+CharacterOff
+	ぎんいろ		2_3					……？\nどうか、した？
+CharacterOff
+	カドゥケウス	通常	2_3					………………!!!!!???
+ZoomCamera	SpriteCamera	2	0	250		0
+Tween	カドゥケウス	ShakePosition	x=10 y=30 time=30				NoWait
+	カドゥケウス	通常						<size=40>ぎんいろさん!!!???</size>
+FadeOut	white					.1
+ZoomCamera	SpriteCamera	1				0
+CharacterOff
+Bgm	コメディ
+	ぎんいろ		1_2
+	カドゥケウス	通常	2_2
+Wait						.3
+FadeIn	white					.1
+	ぎんいろ							…………っ!?
+	ぎんいろ		1_2_b
+	カドゥケウス							うばぁ……\nほ、本物のぎんいろさんだ……！！\nぎんいろさんだぁっ！！
+	ぎんいろ		1_2					え、と……何……？
+	ぎんいろ		1_2_b
+	カドゥケウス							わ、私ぎんいろさんが大好きでぇっ！\nえと、あと、あの、\n握手……してくださいっ！！
+	ぎんいろ		1_2					握手……？
+	ぎんいろ		1_2_b
+	カドゥケウス							ぁ……い、嫌ですよね、そうですよね\n私なんて……\nああ、ごめんなさいぃ……
+	ぎんいろ		1_2					……別に、構わないわ\n握手をすればいいのね？
+	ぎんいろ		1_2_b
+	カドゥケウス							ほほほ本当ですか!?\nわわ、わ、女神と握手しちゃったぁ!!\nメウたんメウたんどうしよ！
+	カドゥケウス							にへへ♪\nこの手はもう洗わないんだぁ……♪\nでへへへ……♪
+CharacterOff
+	ディーア	汗2	1_2
+	ぎんいろ		2_2
+	ぎんいろ							あの、これは……どういうこと？
+	ディーア							……ぎんいろに会いたいっていうのは\n本当だったんだな
+	ぎんいろ							それで走り回っていたの？
+	ディーア	驚き2						逃げてたのは別の理由なんだけど…\nそういえば結局黒幕も\nわからず終いだな
+	ディーア	悔しい2						術式を組んだ誰かがいるはず\nなんだけど……
+CharacterOff
+	ディーア	悔しい2	1_2
+	アンノウン		2_2
+	アンノウン							それが誰であれ\n幻想体に私を選んだのが間違いね
+	アンノウン							抵抗されないとでも思ったのかしら
+CharacterOff
+StopBgm
+	カドゥケウス	通常	2_3_b					…………っ!?
+CharacterOff
+	ディーア	驚き2	1_2
+	アンノウン		2_2
+	ディーア							カドゥケウス？
+CharacterOff
+	カドゥケウス	通常	2_3_b					う、うぅ、うばばば……！
+	カドゥケウス							や、やめて……襲わないで……
+CharacterOff
+	ディーア		1_2
+	アンノウン		2_2
+	アンノウン							……いや、そんなつもりは
+CharacterOff
+	カドゥケウス	通常	2_3					うばああああーーーっ!!!!
+Tween	カドゥケウス	MoveTo	x=-3000
+CharacterOff
+Bgm	コメディ
+	ディーア	驚き2	1_2
+	アンノウン		2_2
+	アンノウン							ちょっ……!!
+	ディーア	汗2						……また逃げちゃった
+	アンノウン							……そんなに怖いかしら
+	ディーア	あはは2						そんなことないさ\nカドゥケウスがちょっと\n大げさなだけだ
+	アンノウン							追いかけないの？
+	ディーア	怪しい2						……今は幻想体の対処が先だな
+	ディーア	驚き2						……ところでアンノウン、\nその荷物重くないか？
+	アンノウン							……なんのことかしら？
+	ディーア	怪しい2						いや、そのぬいぐるみに服に……
+	アンノウン							別に支障はないわ\n……まあ、少し重いけれど
+	ディーア	あはは2						いくつか持とうか？
+	アンノウン							近寄らないで\nそれに、これは私がもらったもの\n私が持ち歩くわ
+	ディーア	あはは2						あはは……まあ大丈夫ならいいけどさ
+	アンノウン							それに、うっかり\nあなたを消したら……
+	ディーア	汗2						別に近づくくらいは\n大丈夫だと思うけどな……
+	アンノウン							ダメよ\n万が一があるかもしれないもの
+	ディーア	通常2						そんなに怖がらなくてもいいのに
+	アンノウン							…………そうかしら
+	アンノウン							<size=20>でもそうはいかないのよ</size>
+	アンノウン							<size=20>……大切なものなんて\n作らないつもりだったのに</size>
+	アンノウン							<size=20>いつのまにか増え過ぎて\nしまったみたいだし</size>
+	ディーア	驚き2						ん、なにか言ったか？
+	アンノウン							なんでもないわ\n気にしないで
+	ディーア	怪しい2						そう言われると気になるな
+	アンノウン							ナイショの話よ\n詮索しないでもらえるかしら
+	ディーア	あはは2						そっか、まあいいや
+	ディーア	通常2						よし、次の幻想体を探しにいくか！
+	アンノウン							……わかったわ、マスター
+FadeOut	white					3
+If	isdebug==true
+CharacterOff
+Jump	*E_247_01
+EndIf
+EndScenario

@@ -1,0 +1,503 @@
+# E_203_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="神亥戦線"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	ガヤA_BGM
+Bg	市街地A
+	村人男		1_2_b
+	女の子		2_2
+Tween	女の子	RotateTo	y=180 time=0.1
+FadeIn	white					.1
+	女の子							パパ、あたし、あれほしい！
+	村人男							ぬいぐるみ？\nあれが欲しいのか？
+	女の子							うんっ！
+	村人男							仕方ないなあ、\nお年玉ってことにしてやろう
+	村人男
+Tween	女の子	PunchPosition	y=150	easeInCubic			NoWait
+	女の子							やったぁ♪
+	村人男							ママには内緒だぞ？
+	女の子							うん、わかった！
+Se	火事	TRUE					NoWait
+Shake	Graphics		time=2 x=10 y=10				Add
+	村人男							……ん？何だ……？<speed=1>　　</speed>	BrPage
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+	亥王シシガミ		画面外_右a
+	　　　　　　　　　　
+StopSe
+Tween	亥王シシガミ	MoveTo	x=-700
+Se	火1
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff	亥王シシガミ
+Se	火事						NoWait
+Shake	Graphics		time=1.5 x=10 y=10				NoWait
+Tween	村人男	PunchPosition	y=50				NoWait
+Tween	女の子	PunchPosition	y=50				NoWait
+	スモーク					10
+StopSe						2
+Param	character_grayout=true
+	村人男		1_2_b
+	女の子							きゃあっ！
+	村人男							だ、大丈夫か!?
+	村人男
+	女の子							今の……なに……？
+Tween	村人男	RotateTo	y=180				NoWait
+	村人男							何かが、走っていったような……
+CharacterOff
+Bgm	絶望
+Se	火事						NoWait
+Shake	Graphics		time=2 x=10 y=10				NoWait
+Wait						1
+Se	闇1
+	魔物　		1_3_m			.7		<speed=0.7>  </speed>	BrPage
+Se	闇1
+	魔物　　		3_3_m			.7		<speed=0.7>  </speed>	BrPage
+Se	闇1
+	魔物　　　		2_3_m			.7		<speed=0.7>  </speed>	BrPage
+Wait						.5
+CharacterOff
+	村人男		1_2_b
+	女の子		2_2
+	女の子							なに、これ……！
+Tween	女の子	RotateTo	y=180				NoWait
+	村人男		1_2					魔物……!?\nなんでこんなところに!?
+	村人男							とにかく逃げるぞ……!!
+Tween	村人男	RotateTo	y=180				NoWait
+Tween	女の子	RotateTo	y=180
+Se	走る
+Tween	村人男	MoveTo	x=-700				Add
+Tween	女の子	MoveTo	x=-700
+	魔物　		画面外_右m
+	　　　　　　　　　　
+Tween	魔物　	MoveTo	x=180 time=3				NoWait
+Wait						1
+FadeOut	black					1
+CharacterOff						0
+	ディーア	悔しい2	2_3			0
+Wait						1.5
+Bgm	台風_BGM
+Bg	森林A					0
+FadeIn	black
+	ディーア							<dash=2>見つけた\nあれが亥王シシガミか
+CharacterOff
+	童子切安綱		b1					お、魔力探知？\n流石あるじ様、遠いのに\nよく見つけるね
+CharacterOff
+	ディーア	通常2	2_3					かなり強い魔力を放ってるからな\nそれに異質だからわかりやすい
+CharacterOff
+	童子切安綱		b2 2
+	紅因幡		a2 2					イナバには全然見えません……\n本当に近くにいるんですか？
+	童子切安綱		b1 2					いやー？まだかなり遠いねえ！\n……あ、見えた
+	紅因幡		a1 2					見えた!?どこですか……？\nイナバには全然……
+	紅因幡		a2 2
+	童子切安綱							鬼と戦うなら、\n目が良くなきゃねー♪
+CharacterOff
+	ディーア	悔しい2	2_3					どうだ？\n亥王シシガミは暴走してるか？
+CharacterOff
+	童子切安綱		b1					うん、十中八九暴走してるねー\nというか……
+CharacterOff
+	ディーア	驚き2	2_3					というか？
+CharacterOff
+	童子切安綱		b1					あるじ様\nあれ、鬼だ
+FadeOut	black					.1
+	　　　　　　　　　　
+Param	character_grayout=false
+CharacterOff						0
+BgOff
+Bg	神社（ロゴ合わせ用）					0
+FadeIn						2
+	イベントロゴ20301		BG_c			1
+	　　　　　　　　　　
+Wait						3
+	　　　　　　　　　　							<dash=2><ruby=かむいせんせん>神亥戦線</ruby>、開戦
+FadeOut	black					2
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	驚き2	2_3
+Bg	研究所A					0
+Wait						.5
+Bgm	作戦会議
+ImageEffect	SpriteCamera	Sepia
+FadeIn	black					.1
+	ディーア							亥王シシガミが消えた？
+CharacterOff
+	ロルリアンレット		2_3
+	ロルリアンレット	通常2						ええ、正確には逃げ出したと\nいうべきかしら
+CharacterOff
+	ディーア		2_3
+	ディーア	怪しい2						逃げるって、何から…？
+CharacterOff
+	ロルリアンレット		2_3
+	ロルリアンレット	通常2						世界を守るお役目よ
+	ロルリアンレット							毎年、12本の魔剣のうち1本を\n祀って世界を守ってもらう\n風習…亥王シシガミはその1本よ
+	ロルリアンレット							といっても、とうの昔に\n形骸化したものだけれどね
+CharacterOff
+	ディーア		2_3
+	ディーア	驚き2						じゃあ、その逃げた\n亥王シシガミを捕まえて…
+CharacterOff
+	ロルリアンレット		2_3
+	ロルリアンレット	通常2						それだけじゃないわ
+	ロルリアンレット							ハルラ=ズーからリーマ近郊まで…\n同時多発的に魔物や魔獣の\n大量発生が確認されているわ
+CharacterOff
+	ディーア		2_3
+	ディーア	悔しい2						魔獣まで…!?
+CharacterOff
+	ロルリアンレット		2_3
+	ロルリアンレット	ニヤリ2						そしてその全てが亥王シシガミの\n走破したルート上にある地域…\n無関係とは思えないわね
+CharacterOff
+	ディーア		2_3
+	ディーア	怪しい2						亥王シシガミが、呪いか何かを\n撒き散らしている…？
+CharacterOff
+	ロルリアンレット		2_3
+	ロルリアンレット	通常2						ふん、まるで厄落としね\n信じがたいことだけど、\n霊獣級の反応もあったわ
+CharacterOff
+	ディーア		2_3
+	ディーア	悔しい2						魔獣がいるなら、霊獣がいても\nおかしくはない、か…
+CharacterOff
+	ロルリアンレット		2_3
+	ロルリアンレット	通常2						ダフィートはもう既に壊滅的な\n被害を受けているわ
+	ロルリアンレット	ニヤリ2						あれ、放っておけばそのうち\n世界を滅ぼすわよ
+CharacterOff
+	ディーア		2_3
+	ディーア	汗2						新年を迎えるって時に……
+CharacterOff
+	ロルリアンレット		2_3
+	ロルリアンレット	通常2						様子を見て、止められそうなら\n力づくで止めてきなさい
+	ロルリアンレット	悪い顔2						……世界が滅ぶ前にね
+FadeOut	black					1
+StopBgm
+ImageEffectOff	SpriteCamera	Sepia
+Bg	森林A					0
+Bgm	台風_BGM
+CharacterOff						0
+	ディーア	怒り2	2_3			0
+FadeIn	black					.1
+	ディーア	怒り2						<dash=2>確かなのか？
+CharacterOff
+	童子切安綱		b1					あれは絶対鬼だね！\n肌にピリピリくる！
+CharacterOff
+	ディーア	悔しい2	2_3					鬼に乗っ取られているのか……？
+CharacterOff
+	紅因幡		a2 2
+	童子切安綱		b2 2
+Tween	紅因幡	PunchPosition	y=150	easeInCubic
+Tween	紅因幡	PunchPosition	y=151	easeInCubic			NoWait
+	紅因幡							うぅ……見えない……
+	童子切安綱		b1 2					あるじ様！あれ斬ってもいい!?
+CharacterOff
+	ディーア	あはは2						ダメ、シシガミの救出が最優先
+CharacterOff
+	紅因幡		a2 2
+	童子切安綱		b1 2
+	童子切安綱							むー、せっかく鬼退治には\nお誂え向きなメンバーなのにぃ
+	紅因幡		a1 2					イナバは違うような……
+CharacterOff
+	酉王アメノウズメ		a2
+	狗王ナナツサヤ		c2
+	猿王如意棒		b2
+	酉王アメノウズメ		a1					うずめも鬼退治する\n鳥じゃないけど!?
+	狗王ナナツサヤ		c1					おにたいじ!?たのしそう!!\nナナもやる！わうわう！
+	猿王如意棒		b1					むー、ナナうるさぁい
+	猿王如意棒		b2
+	狗王ナナツサヤ							わうっ!?うー！がるる……！
+CharacterOff
+	ディーア	怪しい2	2_3					喧嘩しないの
+CharacterOff
+	酉王アメノウズメ		a2
+	狗王ナナツサヤ		c2
+	猿王如意棒		b2
+	狗王ナナツサヤ		c1					きゃあう!?\nち、ちがうの、ちがうの！\nあのね、にょんがね…！
+	猿王如意棒		b1					僕悪くないもん！\nナナが…あたっ！
+	猿王如意棒		b2
+	狗王ナナツサヤ							あうっ
+CharacterOff
+	ディーア	怪しい2	2_3					喧嘩してると怒るぞー？
+CharacterOff
+Param	character_grayout=false
+	猿王如意棒		a2 2
+	狗王ナナツサヤ		b1 2
+	二人	<Off>
+	二人							ごめんなさい……
+Param	character_grayout=true
+CharacterOff
+	紅因幡		a2 2
+	童子切安綱		b1 2
+	童子切安綱							んふふ、こんな賑やかな\n鬼退治も楽しそうだねぇ♪
+CharacterOff
+	ディーア	汗2	2_3					まったく、退治するのは\nシシガミの中の鬼だけに\nしてくれよ？
+CharacterOff
+	紅因幡		a2 2
+	童子切安綱		b2 2
+	紅因幡							そうですよ！シシガミさんを\n斬っちゃダメですからね！
+	童子切安綱		b1 2					わかってるって♪
+CharacterOff
+	ディーア	怪しい2	2_3					さて、そろそろ見えてくる距離か
+CharacterOff
+	紅因幡		a2 2
+	童子切安綱		b1 2
+	童子切安綱							市街地を抜けて森に入ったね\nまっすぐこっちに向かってる！
+	紅因幡		a1 2					あっ、あの土煙あげて\n走ってくる……えっ
+CharacterOff
+	酉王アメノウズメ		a2 2
+	狗王ナナツサヤ		b2 2
+	狗王ナナツサヤ		b1 2					わう？シシガミちゃん……？
+	酉王アメノウズメ		a1 2					マスター、なにあれ？
+CharacterOff
+	紅因幡		b2					……ちょ、速すぎ……!?
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	森林（移動）					0
+	亥王シシガミ		画面外_右a			0
+Bgm	コメディ
+FadeIn	black					.5
+Se	走る
+Tween	亥王シシガミ	MoveTo	time=2 x=-180				NoWait
+	亥王シシガミ							がんばれ♪がんばれ♪\nがんばれ…わたし？
+	亥王シシガミ							みんなもがんばって走ろう～～♪
+	亥王シシガミ							えへへ♪
+Se	走る
+Tween	亥王シシガミ	MoveTo	x=180 time=0.5	easeOutBack
+Tween	亥王シシガミ	MoveTo	x=-700 time=1	easeInOutCirc
+FadeOut	black					.5
+CharacterOff						0
+Bg	森林A					0
+Bgm	魔獣バトル
+	ディーア	本気2	2_3
+ZoomCamera	SpriteCamera	1.5	0	250		.1
+FadeIn	black					.1
+	ディーア							迎え撃つ！<speed=0.5>  </speed>	BrPage
+CharacterOff
+	童子切安綱		b1					よしきた！
+CharacterOff
+ZoomCamera	SpriteCamera	1				0
+	紅因幡		b1					ええっ!?
+FadeOut	black					.5
+CharacterOff						0
+Bg	森林（移動）					0
+	亥王シシガミ		b1
+FadeIn	black					.5
+	亥王シシガミ							みんなで走ろう♪\nがんばれ♪がんばれ♪
+Se	走る
+Tween	亥王シシガミ	MoveTo	x=180 time=0.5	easeOutBack
+Tween	亥王シシガミ	MoveTo	x=-700 time=1	easeInOutCirc
+FadeOut	black					.5
+CharacterOff						0
+Bg	森林A					0
+	紅因幡		b1
+FadeIn	black					.5
+	紅因幡							もう、知りませんよ！\n衝突まで、3…2…1…！
+FadeOut	white					.5
+Se	光3
+Se	火3
+Se	闇3
+Se	火事	TRUE					NoWait
+Wait						2
+Shake	Graphics		time=5 x=10 y=10				NoWait
+FadeIn	white					2
+	紅因幡							……成功……ですか？
+StopSe						3
+CharacterOff
+	猿王如意棒		a2 2
+	狗王ナナツサヤ		b2 2
+	猿王如意棒							いったたた……
+	狗王ナナツサヤ		b1 2					きゃあう……
+CharacterOff
+	亥王シシガミ		b1					きゅー……
+CharacterOff
+	ディーア	汗2	2_3					な、なんとかなったな……
+CharacterOff
+	童子切安綱		b1					(ん？こいつ……)
+CharacterOff
+	酉王アメノウズメ		a2
+	狗王ナナツサヤ		c2
+	猿王如意棒		b2
+	酉王アメノウズメ		a1					わ、ほんとにシシガミちゃんだ
+	猿王如意棒		b1					シシ、どしたの？なんか変だよ
+	猿王如意棒		b2
+	狗王ナナツサヤ		c1					くぅーん……？
+CharacterOff
+	ディーア	驚き2						やっぱり会ったことあるんだ？
+CharacterOff
+	酉王アメノウズメ		a2
+	狗王ナナツサヤ		c2
+	猿王如意棒		b2
+	酉王アメノウズメ		a1					お役目の引き継ぎで毎年会うの！
+	猿王如意棒		b1					まあちょっと話すくらいだけどね\nシシ、いつも旅に出てるし
+	猿王如意棒		b2
+CharacterOff
+	亥王シシガミ		b1					うずめ……ちゃん？\nにょん……ナナ……？
+	亥王シシガミ							一緒に走ろう!!!!
+CharacterOff
+Param	character_grayout=false
+	酉王アメノウズメ		a2
+	狗王ナナツサヤ		c2
+	猿王如意棒		b2
+	三人	<Off>
+	三人							え？
+CharacterOff
+Param	character_grayout=true
+	ディーア	汗2	2_3					は、走る？一緒に？
+CharacterOff
+	亥王シシガミ		b1					頑張ろう♪頑張れ♪\nふんふふん♪
+CharacterOff
+	紅因幡		b1					支離滅裂ですね……
+CharacterOff
+	ディーア	怒り2	2_3					うずめ、解呪霊符は\n持ってきたか？
+CharacterOff
+	酉王アメノウズメ		b1					うん！ちゃんとあるよ！はい！
+CharacterOff
+	ディーア	悔しい2	2_3					この暴走が呪いの類なら、\nきっとこれで<dash=2>
+CharacterOff
+	亥王シシガミ		b1					ん～？\nふんふん、なぁ～るほどぉ？
+FadeOut	white
+CharacterOff						0
+	ディーア	驚き2	2_3			0
+Se	斬1
+FadeIn	white
+	ディーア	悔しい2						ッ!?<speed=0.7>  </speed>	BrPage
+FadeOut	white
+Se	突2						NoWait
+	酉王アメノウズメ		a2
+	狗王ナナツサヤ		c2
+	猿王如意棒		b2
+Wait						.2
+Se	ガード
+	ディーア		2_3_b
+FadeIn	white
+	猿王如意棒							それ以上はダメだよ、シシ
+	酉王アメノウズメ		a1					もー！\nほんとにどうしちゃったのー？
+	狗王ナナツサヤ		c1					がう……！
+CharacterOff
+	亥王シシガミ		b1					……いて、こないで……
+CharacterOff
+	童子切安綱		b1					……！
+CharacterOff
+Param	character_grayout=false
+	オーラ青		エフェクト表			3
+	亥王シシガミ		b1
+	亥王シシガミ		b1					ふんふんふふん♪\nじゃあがんばってね！
+FadeOut	white					.7
+Param	character_grayout=true
+Se	光3
+FadeIn	white					.7	Add
+CharacterOff	亥王シシガミ
+CharacterOff	オーラ青					.7
+Wait						.7
+	ディーア	悔しい2	2_3					結界……!?
+CharacterOff
+	紅因幡		a2 2
+	童子切安綱		b2 2
+	紅因幡							閉じこもる気ですか！
+	童子切安綱		b1 2					あるじ様、こいつまだ\n自我が残ってる！
+CharacterOff
+	ディーア	驚き2	2_3					なんだって!?\n完全に暴走したわけじゃない…？
+CharacterOff
+	亥王シシガミ		b1					えへへ♪\nがんばったらきっと幸せ♪
+	亥王シシガミ							みんなで走ろーっ♪
+Se	走る
+Tween	亥王シシガミ	MoveTo	x=180 time=0.5	easeOutBack
+Tween	亥王シシガミ	MoveTo	x=-700 time=1	easeInOutCirc
+CharacterOff
+	スモーク		エフェクト表			10
+	紅因幡		a2 2
+	童子切安綱		b2 2
+	紅因幡							逃げられた！
+	童子切安綱		b1 2					うっわ、はっや……
+CharacterOff	紅因幡
+CharacterOff	童子切安綱
+	ディーア	怪しい2	2_3					まさか、走ることで呪いを\n落とそうとしているのか…？
+CharacterOff	ディーア
+Se	闇1
+	魔物　		1_3_m			.7		<speed=0.7>  </speed>	BrPage
+Se	闇1
+	魔物　　		3_3_m			.7		<speed=0.7>  </speed>	BrPage
+Se	闇1
+	魔物　　　		2_3_m			.7		<speed=0.7>  </speed>	BrPage
+Wait						.5
+CharacterOff
+	紅因幡		a2 2
+	童子切安綱		b2 2
+	紅因幡							魔物!?
+	紅因幡							囲まれた……！\n厄落としなんて\n規模じゃないですよ、これ<dash=2>！
+	童子切安綱		b1 2					さながら百鬼夜行といった\nところねー♪\nどうする、あるじ様？
+CharacterOff
+	ディーア	悔しい2	2_3					……元を断つ！追いかけるぞ！
+CharacterOff
+	酉王アメノウズメ		b2					どうやって!?
+CharacterOff
+	紅因幡		b2					あのスピードは、\n人に追えるものじゃ……
+CharacterOff
+	ディーア	怒り2	2_3					魔力の8割を脚に回す！
+CharacterOff
+	童子切安綱		b2					……8割？
+CharacterOff
+	ディーア	怒り2	2_3					雑魚は残りの魔力で充分だ！
+CharacterOff
+	童子切安綱		b2					あっはっは！流石あるじ様！\nいいねえ楽しそうだ！
+CharacterOff
+	ディーア	本気2	2_3					のんびりしている時間はない……\n行くぞ!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	亥王シシガミ		b1			0
+Bgm	コメディ
+Bg	森林（移動）					0
+FadeIn	black					.5
+	亥王シシガミ							がんばれ♪がんばれ♪
+Se	走る
+Tween	亥王シシガミ	MoveTo	x=-700	easeInBack
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	酉王アメノウズメ		b2			0
+Bgm	魔獣バトル
+FadeIn	black					.5
+	酉王アメノウズメ							見っけ！\n距離、だいたい1000メートル！
+CharacterOff
+	童子切安綱		b2					相変わらず楽しそうに走ってる！\n早くご一緒させてもらお！
+CharacterOff
+	紅因幡		b1					距離100メートル先に魔物数体！\n突っ込んできます！
+CharacterOff
+	猿王如意棒		a2 2
+	狗王ナナツサヤ		b2 2
+	猿王如意棒							あはっ、突っ込んでるのは\n僕たちのような？
+	狗王ナナツサヤ		b1 2					わうわう！
+CharacterOff
+Se	走る
+	ディーア	本気2	2_3_b					来るぞ！
+	ディーア	悔しい2
+Tween	ディーア	MoveTo	x=50 time=0.5				NoWait
+	魔物　		画面外_左m
+Tween	魔物　	MoveTo	x=0 time=0.3				NoWait
+Wait						.1
+FadeOut	white					.1
+Se	突2
+FadeIn	white					.1
+Tween	魔物　	MoveTo	x=700 y=-700 time=0.5
+CharacterOff	魔物　
+Tween	ディーア	MoveTo	x=-20 time=0.7				NoWait
+	魔物　		画面外_左m
+Tween	魔物　	MoveTo	x=0 time=0.3				NoWait
+Wait						.1
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Tween	魔物　	MoveTo	x=700 y=-700 time=0.5
+CharacterOff	魔物　
+Wait						.5
+CharacterOff
+	童子切安綱		b2					その調子ぃー♪
+CharacterOff
+	ディーア	本気2	2_3					このまま戦線を上げる！行くぞ!!
+Se	走る
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_203_01
+EndIf
+EndScenario

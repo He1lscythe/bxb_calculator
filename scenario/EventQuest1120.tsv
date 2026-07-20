@@ -1,0 +1,1749 @@
+# E_1120_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	研究所B					0
+Param	character_grayout=false
+	研究員	通常				0
+FadeIn	black					1
+	研究員	通常						準備が整いました、ププッピマリー様
+CharacterOff
+	ププッピマリー	佇む						わかりました、始めてください
+CharacterOff
+	研究員	通常						はっ……！
+FadeOut	black					.3
+CharacterOff						0
+	オメガB	シルエット	p5b			0
+	オーラ青		エフェクト表			2
+FadeIn	black					.3
+Se	チャージ
+	オペレーター	<Off>						魔力結晶体構成開始！
+	オペレーター	<Off>						ネフィリム機関に魔力充填\n90、100…………120％！\n臨界点突破！
+CharacterOff
+	研究員	通常						今だ！\r\n共振性魔核内燃機関、起動っ！
+Param	character_grayout=true
+	オペレーター	<Off>						魔力共振、開始します！
+	研究員	通常						頼むぞ、\r\nもう百回も試してるんだからな
+Param	character_grayout=false
+CharacterOff
+	オメガB	シルエット	p5b
+	オーラ青		エフェクト表
+Wait						.5
+Se	闇1
+CharacterOff	オーラ青					1
+	オーラ赤		エフェクト表2			1
+Wait						2
+	オペレーター	<Off>						っ、ダメです！\r\n魔力結晶体が安定しません！
+	研究員	<Off>						これは魔核の……拒絶反応か!?
+Param	character_grayout=true
+CharacterOff
+	研究員	通常						魔力をもっと送り込め！\r\n崩壊する端から充填するんだ！
+	オペレーター	<Off>	1_2					Blazeエンジンも\nオーバーヒートを起こしています！\nこのままでは!!
+	研究員	通常						くそっ……
+	研究員	通常						くっ……！\r\nマリー様、どうやらここまでの<dash=2>
+CharacterOff
+	ププッピマリー	佇む						いえ、続けてください
+CharacterOff
+	研究員	通常						マリー様!?\r\n区画が丸ごと吹き飛びますよ!?
+CharacterOff
+	ププッピマリー	佇む						だから、なんだというのです？
+	ププッピマリー	佇む						我々が挑もうとしているのは、\r\nまぎれもなく禁忌の所業
+	ププッピマリー	佇む						この程度のリスクも背負わず\r\n達成できるものではありません
+CharacterOff
+	研究員	通常						ですが、\r\n司書王様にも被害が及ぶ可能性が！
+CharacterOff
+	ププッピマリー	佇む						お嬢様の身は\r\n私が命に変えても守ります
+	ププッピマリー	佇む						貴方達が\r\n心配することではありません
+	ププッピマリー	佇む						続けてください
+CharacterOff
+	研究員	通常						っ、はっ……！
+Tween	研究員	MoveBy	x=20				NoWait
+	研究員	通常						Blazeエンジンとの共振に\n残るリソースを全て投入しろ！\n同調が成れば安定化する！
+	研究員	通常						なんとしても、\nここで完成させるぞ！
+	オペレーター	<Off>						はいっ！
+Param	character_grayout=false
+CharacterOff
+	オメガB	シルエット	p5b
+	オーラ赤		エフェクト表
+	オペレーター	<Off>						共振率、徐々に上がっています！
+	オペレーター	<Off>						共振率66、70、80……！
+	研究員	<Off>						こいっ！ こいっ！
+	オペレーター	<Off>						92、95、96……っ！
+Wait						.5
+Se	チャージ
+CharacterOff	オーラ赤					1
+	オーラ青		エフェクト表2			1
+Wait						2
+Param	character_grayout=true
+CharacterOff
+	ププッピマリー	佇む
+	オペレーター	<Off>	1_2					っ！\r\nオールスコア、突破しました！
+	オペレーター	<Off>						第一次起動、成功です!!
+CharacterOff
+	研究員	通常						ふぅ……
+	研究員	通常						おわった、のか……
+CharacterOff
+	ププッピマリー	微笑む						皆様、お疲れ様でした
+CharacterOff
+	研究員	通常						いえ、全ては\r\nププッピマリー様の指導が\r\nあってのものです
+	研究員	通常						もっともこれは下準備\n彼の手で起動できなければ\nただのナマクラですが
+CharacterOff
+	ププッピマリー	微笑む						お嬢様が選んだ魔剣使いです\n<param=name>様\nを信じましょう
+CharacterOff
+	研究員	通常						あの司書王様が\nそこまで入れ込む方がいるとは
+CharacterOff
+	ププッピマリー	微笑む						…………
+CharacterOff
+	研究員	通常						いえ、これは失言でした
+CharacterOff
+	ププッピマリー	微笑む						私も聞かなかったことにしましょう
+CharacterOff
+	研究員	通常						助かります
+	研究員	通常						しかし、とうとう\n此処までたどり着きましたね
+CharacterOff
+	ププッピマリー	通常						ええ、これにより\nBlazeシリーズの可能性が\n広がりました
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	魔術空間					0
+	魔剣グラム:Blaze	通常				0
+	          		1_2
+FadeIn	white					.3
+	ププッピマリー	<Off>	1_2					Blazeシステムはこれまで\n派生前の伝承を持つ魔剣のみに\n搭載をしてきました
+	ププッピマリー	<Off>						ただでさえ不安定化を招く\nBlazeエンジンを搭載するためには\nそれしか手がなかったからです
+	ププッピマリー	<Off>						魔剣グラムや大包平、ノートゥング、\n鳳凰円文螺鈿黒櫃
+	ププッピマリー	<Off>						派生魔剣……姉妹を有する魔剣や\nクラレントのように伝承の大元と\nなった魔剣
+	ププッピマリー	<Off>						彼女たちには\n伝承にBlazeシステムを受け入れる\n余白が存在しましたからね
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	研究所B					0
+	研究員	通常				0
+FadeIn	white					.3
+	研究員	通常						しかし、今回は違う
+	研究員	通常						魔界史に残るイレギュラー、\nありえない可能性に手を加えようとは\n失礼ながら正気とは思えませんでした
+CharacterOff
+	ププッピマリー	通常						ですが、\n私には確かな勝算がありましたよ
+	ププッピマリー	通常						Blazeシステムは\n着実に進化していたのですから
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	魔術空間					0
+	かねひらブレイズ	通常				0
+	          		1_2
+FadeIn	white					.3
+	ププッピマリー	<Off>	1_2					初期のBlazeシリーズは\r\n兵器としての純粋さを高めるため、\r\nあえて感情を抑制してきました
+FadeOut	black					.3
+CharacterOff						0
+	クラレントブレイズ	通常				0
+	          		1_2
+FadeIn	black					.3
+	ププッピマリー	<Off>	1_2					しかしその方針を変えたのが、\r\nクラレント:Blazeと\r\n鳳凰円文螺鈿黒櫃:Blaze
+	ププッピマリー	<Off>						彼女たちは明確な自我を有しながら\nその力を損ねることはなく
+	ププッピマリー	<Off>						七罪王の討伐においても\n他のBlazeと同様の戦績を残した
+FadeOut	black					.3
+CharacterOff						0
+	黒櫃:Blaze	通常				0
+	          		1_2
+FadeIn	black					.3
+	ププッピマリー	<Off>	1_2					特に黒櫃:Blazeは\n彼の黒櫃の魔核を使用したため\n感情抑制がなかったにもかかわらず
+	ププッピマリー	<Off>						片や兵器としては制御不能の欠陥\n片や急事における例外が
+	ププッピマリー	<Off>						魔剣本来の感情とBlazeシステムとの\n新たな関係を導き出した
+FadeOut	black					.3
+CharacterOff						0
+	ノートB	通常	p2			0
+	クサナギB		p8			0
+	          		1_2
+FadeIn	black					.3
+	ププッピマリー	<Off>						そして彼女たちを経て生まれた\nノートゥング:Blaze、\nクサナギノツルギ:Blazeは
+	ププッピマリー	<Off>						魔剣本来の感情さえも\nシステムに組み込んだことで\n洗練された能力を発揮しました
+	ププッピマリー	<Off>						ノートゥング:Blazeは\n他魔剣の因子を取り入れる\nテストケースともなっています
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	研究所B					0
+	研究員	通常				0
+FadeIn	black					.3
+	研究員	通常						それらBlazeシリーズの最新発展形が\nこのBlaze魔剣というわけですね
+	研究員	通常						しかし、研究者としては\n空恐ろしいものもあります
+	研究員	通常						この"ありえない"兵器が\n一人の少年に託されるというのは
+CharacterOff
+	ププッピマリー	通常						備えあればと言うように\nこのBlazeを起動するのは\nあくまでも最終手段としてです
+	ププッピマリー	通常						しかし……\r\nその最終手段を切らざるをえないのも\r\nこの魔界という世界の業
+StopBgm
+	ププッピマリー	通常						あるいはこの瞬間にも<dash=2>
+Bgm	緊迫
+Se	アラート
+FadeOut	red					.5
+FadeIn	red					.5
+Wait						1
+FadeOut	red					.5
+FadeIn	red					.5
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	研究員	通常						っ！
+	研究員	通常						どうした、なにがあった！
+	オペレーター	<Off>						本拠北西方向、\r\n100キロの地点に高熱源反応!!
+	研究員	通常						規模はどの程度だ！
+	オペレーター	<Off>						すでにランクSS魔剣の\nブレイズドライブに\n匹敵するエネルギー量ですっ！
+	オペレーター	<Off>						対象の熱量、なおも急上昇中！\nこ、こんなのあり得ないっ!!
+CharacterOff
+	ププッピマリー	通常						その熱源は\r\nとどまっているのですか？
+CharacterOff
+	研究員	通常						マリー様……？
+CharacterOff
+	ププッピマリー	通常						急いでください
+CharacterOff
+	研究員	通常						今、計測します……！
+Shake	研究員		x=5				NoWait
+	研究員	通常						こ、これはっ！
+CharacterOff						0
+Bg	黒背景					0
+	研究員	<Off>						た、対象……\n世界図書館へ向けて侵攻中!!
+FadeOut	black					1
+CharacterOff						0
+Bg	草原A(火事)					0
+	イベントロゴ1120		エフェクト表			5
+FadeIn	black					1
+Wait						8
+FadeOut	black					1
+StopBgm
+CharacterOff						0
+Bg	酒場1F					0
+	グラム=スサノオ	拡大通常	エフェクト表			0
+Wait						2
+FadeIn	black					1
+Bgm	和の国の町
+	グラム=スサノオ	拡大通常	エフェクト表					あけましておめでとうございまーす！\nかんぱぁああああいっ!!
+CharacterOff
+	アマテラス	通常
+Tween	アマテラス	PunchPosition	y=30				NoWait
+	アマテラス	通常						かんぱーい♪\n杯を乾すと書いてこその乾杯よ♪
+CharacterOff
+	グラム=スサノオ	通常2						さすがはアマテラス姉さん！\nすごい飲みっぷりですっ！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						ワンド姉さんたちも、\r\nこっちに来て宴会をしましょうよー！
+CharacterOff
+	ワンド	通常						うるさい……
+CharacterOff
+	偽剣グラム×サンタ	通常						いつまでお正月気分なのよ
+CharacterOff
+	モッド							にははー♪\r\nずーっと宴会やってるねぇ、\r\nスサノオちゃんたち♪
+CharacterOff
+	魔劍グラム=オルタ	慌て2						お正月、\r\n何日も前に終わってるのにね
+CharacterOff
+	アマテラス	通常						人の世の年月など関係なし♪\n杯とうまい肴があればそこは宴よ！\nスサノオはよぉくわかっておる♪
+CharacterOff
+	ツクヨミ	通常						どうせ限られた命なら、\n余生を飲んで暮らすというのも\n悪くはないものねぇー
+Param	character_grayout=true
+CharacterOff
+	ワンド	通常	p3b
+	グラム=スサノオ	通常2	p7
+	グラム=スサノオ	通常2						そうですよ！\r\nお正月もクリスマスも関係なしっ！\r\n今は細かいことはいいんですっ！
+	ワンド	通常						あなたの場合は\r\n年がら年中、細かいことなんて\r\n考えていないでしょう
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						いやー、それほどでもっ！
+Tween	ワンド	PunchPosition	y=30				NoWait
+	ワンド	通常						褒めてないわよっ!!
+CharacterOff
+	ファフニル	通常	p7
+	魔劍グラム=オルタ	嬉しい2	p3b
+	ファフニル	通常						ふぁふぅー♪\r\nスサノオお姉さんたちが飲んでるの\r\nおいしそー！
+	ファフニル	通常						ファフニーも飲んでいい？
+	魔劍グラム=オルタ	慌て2						ファフニーちゃんはダメだよ!?\r\nこっちのジュースを飲もうね？
+CharacterOff
+	アマテラス	通常	p3b
+	グラム=スサノオ	通常2	p7
+	グラム=スサノオ	通常2						そうです、\r\nファフニーちゃんには\r\nまだ早いですよ！
+	アマテラス	通常						これは\nオトナの味というものじゃ♪
+Param	character_grayout=false
+	二人							はははは！
+	集中線		エフェクト表
+	グラム=スサノオ	通常2						麦茶ですけどねっ！
+CharacterOff
+	偽剣グラム×サンタ	通常						なにがしたいのよっ!?
+CharacterOff
+	ファフニル	通常						麦茶だったら\nファフニーも飲めるねー♪
+Param	character_grayout=true
+CharacterOff
+	ワンド	通常	p7b
+	モッド		p3
+	ワンド	通常						なんであの野蛮なのは\n麦茶だけであんなに浮かれてるのよ
+	モッド							さあねえ？\r\nスサノオちゃんはこの私にも\r\n理解不能なところがあるし
+	モッド							普通に場に酔っちゃったのか\r\nあるいはなにか別の要因が……♪
+	ワンド	通常						はぁ、頭が痛くなるわ\r\nあの子がグラムシリーズという事実に
+	ワンド	通常						偽物以上に偽物っていうか、\r\n別物よあれは\r\n同じにされたくないわ
+	モッド							私的にはそれも\r\nグラムシリーズの面白さだけどねぇ♪
+	モッド							奇跡に奇跡を重ねた贋作なんて\n研究しがいがあるよ♪
+	モッド							ワンドちゃんの\r\n今日の深い青色のパンツくらい\r\n深遠なテーマだね♪
+Tween	ワンド	PunchPosition	y=30				NoWait
+	ワンド	通常						なっ！ い、いつの間に!?
+CharacterOff
+	グラム=スサノオ	通常2						お正月といえば一発芸！\nいきますよぉ！\nせーの、とりゃあああああ!!
+Se	光1
+FadeOut	white					.2
+FadeIn	white					.2
+	グラム=スサノオ	通常2						カワラ割りですっ！
+CharacterOff
+	ファフニル	通常	p7
+	魔劍グラム=オルタ	慌て2	p3b
+	ファフニル	通常						ふぁふー♪\r\nスサノオお姉さん、すごーい！
+	魔劍グラム=オルタ	慌て2						でも酒場の床がぁ……！
+Param	character_grayout=false
+CharacterOff
+	魔剣グラム	通常						まったく、\n今年も騒がしい年になりそうね
+Tween	魔剣グラム	MoveBy	x=700 time=2				NoWait
+Wait						1.5
+Se	ドア開く
+Param	character_grayout=true
+CharacterOff
+	オメガ	通常	2_2			1
+	ディーア	通常2	1_2			1
+	ディーア	通常2	1_2					ただいま、\r\nまだ宴会やってたんだな
+	オメガ	通常						マスターちゃんとの\n愛の新年初任務♪\nんー♪ 愛、感じちゃった♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						って、うわっ!?\nなんだこのでかい穴は!?
+CharacterOff
+	グラム=スサノオ	通常2						あ、マスターさん！\nこっちきて遊びましょーっ！
+	グラム=スサノオ	通常2						謹賀新年、熱血パワー！\r\nよく食べて、よく飲んで\r\n元気を出すんですっ！
+CharacterOff
+	オメガ	通常	2_2
+	ディーア	通常2	1_2
+	ディーア	絶望2						新年早々、弁償することになって\n元気どころじゃないんだけど
+CharacterOff
+	グラム=スサノオ	通常2						元気がないんですかっ！\n大変ですねっ！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						じゃあ、温泉に行きましょうっ！\n熱い温泉でパワーもらうんですっ！
+	グラム=スサノオ	通常2						マスターさんに\nまたカラダを\n洗ってもらいたいですっ！
+CharacterOff
+	偽剣グラム×サンタ	通常	p3
+	ワンド	通常	p7b
+	偽剣グラム×サンタ	通常						『また』？
+	ワンド	通常						『カラダを洗う』？
+	偽剣グラム×サンタ	通常						ちょっと、\nどういうこと、マスター
+	ワンド	通常						あなた、\nスサノオとナニを……？
+CharacterOff
+	ディーア	汗2						い、いや、ほら……！\r\nスサノオが一人で\r\n風呂入れないって言うから！
+Param	character_grayout=false
+CharacterOff
+	偽剣グラム×サンタ	通常	p3
+	ワンド	通常	p7b
+	二人							だからってねえ……！
+CharacterOff
+	オメガ	通常
+	オメガ							今年のマスターちゃんも\nたくさん愛されてるねー♪
+CharacterOff
+	グラム=スサノオ	通常2						あはははは♪\r\nみんな仲良しで楽しいですねっ！
+StopBgm
+CharacterOff
+	スペルビア	通常
+	          		1_2
+	？？？？	<Off>	1_2					たしかに滑稽なことだな
+	？？？？	<Off>						前途有望なる\n魔王候補ともあろう者が\nこの体たらくとは
+Bgm	絶望
+CharacterOff
+	ディーア	悔しい2						っ……！
+CharacterOff
+	スペルビア	にやけ
+	          		1_2
+	？？？？	<Off>	1_2					『いったい、いつの間に』と\r\nキミは考える
+CharacterOff
+	ディーア	怒り2						いったい、いつの間……！
+	ディーア	悔しい2						っ……!?
+CharacterOff
+	スペルビア	にやけ
+	          		1_2
+	？？？？	<Off>	1_2					ほら♪
+CharacterOff
+	ディーア	怒り2						（なんだこいつは……\n　気配さえ感じられなかったぞ）
+CharacterOff
+	スペルビア	通常
+	          		1_2
+	？？？？	<Off>	1_2					ククク、当然だとも\r\nキミ如きに悟られる私ではない
+	？？？？	<Off>						そして次にキミはこう考える\n『誰なんだコイツは』とね
+	？？？？	<Off>						だがわかりきった問答を続けるのも\n無駄でしかない
+StopBgm
+	？？？？	<Off>						だから光栄に思え\r\nこの私が自ら名乗ってあげよう
+Bgm	魔獣バトル
+	？？？？	<Off>						高らかに、高慢に！
+CharacterOff
+	スペルビア	拡大通常	エフェクト表					我は七罪王にして、世界王！\n高慢の王、スペルビア！
+CharacterOff
+	ディーア	悔しい2						高慢の……七罪王っ！
+CharacterOff
+	スペルビア	通常						学習しないな、魔剣使い\nその返答も予測しているんだよ\n口を開く意味もない
+	スペルビア	にやけ						もっと頭を働かせ、\n私が自ら足を運んだ理由くらい\n予想してみせろ！
+	スペルビア	悪い顔						ククク……ハハハハ!!
+CharacterOff
+	ディーア	怒り2						それくらい、\nお前の態度で嫌でもわかるさ！
+	ディーア	本気2						戦うぞ、みんな！
+CharacterOff
+	スペルビア	怪しい						そう、たたか<dash=2>
+	スペルビア	驚き						なにっ!?
+CharacterOff
+	グラム=スサノオ	通常2						よくわかんないけど、\n殴ればいいんですねっ！
+CharacterOff
+	グラム=スサノオ	拡大通常	エフェクト表					魔拳グラム=スサノオ、\n殴りますっ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_02
+EndIf
+EndScenario
+
+# E_1120_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	酒場1F					0
+Param	character_grayout=false
+	スペルビア	拡大破損驚き	エフェクト表			0
+FadeIn	black					.5
+	スペルビア	拡大破損驚き	エフェクト表					ぐああああああああああ!?
+StopBgm
+CharacterOff
+	ディーア	怪しい2						…………あれ？
+Bgm	コメディ
+CharacterOff
+	スペルビア	驚き破損						ま、待て待て待て！\r\n少し話を……!!
+CharacterOff
+	グラム=スサノオ	拡大通常	エフェクト表					いよいしょおおおおお!!
+Se	光3
+FadeOut	white					.2
+CharacterOff						0
+	スペルビア	驚き破損				0
+	土煙		エフェクト表			0
+Shake	スペルビア		x=3				NoWait
+FadeIn	white					.2
+	スペルビア	驚き破損						ぐぁああああああああっ!?
+CharacterOff
+	グラム=スサノオ	通常2						どうですか、マスターさん！\r\n私の熱血パワーは！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						ふふん♪\r\nやっぱり気合と熱血は\r\n全てを解決するんです♪
+CharacterOff
+	ディーア	怪しい2						というより、この七罪王が<dash=2>
+CharacterOff
+	ワンド	通常						弱い
+CharacterOff
+	偽剣グラム×サンタ	通常						弱いわね
+CharacterOff
+	ファフニル	通常						よわよわー？
+CharacterOff
+	魔劍グラム=オルタ	通常2						みんな、本当のことでも\r\n言ったらかわいそうだよぉ
+CharacterOff
+	スペルビア	驚き破損
+Tween	スペルビア	PunchPosition	y=30				NoWait
+	スペルビア	驚き破損						ぐはっ!?
+Param	character_grayout=true
+CharacterOff
+	モッド		p7
+	魔劍グラム=オルタ	通常2	p3b
+	モッド							オルタちゃんのが\r\n一番効いたみたいだねー♪
+	魔劍グラム=オルタ	通常2						えぇ……
+CharacterOff
+	スペルビア	悔しい破損						ぐっ、貴様ら……\r\nよくも好き勝手に……
+	スペルビア	悪い顔破損						かつての私なら、\r\nこの本を片手で読みながらでも\r\n貴様ら程度は……！
+Param	character_grayout=false
+CharacterOff
+	グラム=スサノオ	拡大通常	エフェクト表					とぉりゃああっ!!
+Se	光3
+FadeOut	white					.2
+CharacterOff						0
+	スペルビア	拡大破損驚き	エフェクト表			0
+	土煙		エフェクト裏			0
+FadeIn	white					.2
+	スペルビア	拡大破損驚き	エフェクト表					ぐおぉおおおおお!?
+CharacterOff
+	グラム=スサノオ	通常2						まだ立てるなんて頑丈ですねっ！
+CharacterOff
+	ディーア	怪しい2						これ、どんな状況？
+StopBgm
+FadeOut	black					.5
+CharacterOff						0
+	スペルビア	悪い顔				0
+Wait						2
+FadeIn	black					.5
+Bgm	平和
+	スペルビア	悪い顔						ククク……！\r\n流石はこの時代の英雄候補君！
+	スペルビア	悪い顔						世界王の敵となるならば、\r\nこうでなくてはな！
+CharacterOff
+	ディーア	怪しい2						なんでボロボロに負けておいて\r\nこんなに偉そうなんだ
+CharacterOff
+	スペルビア	にやけ						ボロボロではない\r\nこれもまた進化の証！
+	スペルビア	にやけ						そもそも\r\n私は負けてなんていないぞっ！
+	スペルビア	通常						敗北とは精神の挫折っ！\r\n無限に進化する私にとっては、\r\nこんなもの敗北ですらない！
+Tween	スペルビア	PunchPosition	y=30				NoWait
+	スペルビア	悪い顔						見ていろっ！\r\nやがて煉獄に至った私が\r\n世界の罪を洗い流して<dash=2>
+CharacterOff
+	ディーア	怪しい2						やっぱりここで倒しておくか……
+CharacterOff
+	グラム=スサノオ	拡大通常	エフェクト表					気合！ 熱血!!\r\n拳をにぎってぇえええ!!
+CharacterOff
+	スペルビア	拡大驚き	エフェクト表					だから待てと言っているだろう!?
+CharacterOff
+	スペルビア	驚き						私は野蛮なコミニュケーションを\nしに来たわけではない
+CharacterOff
+	ディーア	怪しい2						…………
+CharacterOff
+	スペルビア	悔しい						『だったら神妙にしろ』？
+	スペルビア	通常						断る！\nなぜなら私は高慢の王だからな！
+	スペルビア	通常						しかし、私は負けてはいないが、\r\n断じて負けてはいないが……
+	スペルビア	通常						キミには英雄に恥じぬ力と\n魔剣使いの腕があることは理解した
+Tween	スペルビア	PunchPosition	y=30				NoWait
+	スペルビア	にやけ						ならばこそ\r\nキミたちに助力してやろう！\r\n光栄に思うがいい！
+CharacterOff
+	ディーア	怪しい2						はぁ……
+Param	character_grayout=true
+CharacterOff
+	ワンド	通常	p3b
+	グラム=スサノオ	通常2	p7
+	グラム=スサノオ	通常2						じょりょくって、なんですか？
+	ワンド	通常						馬鹿ね\n協力するって言う意味よ
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						バカとはなんですか、\nワンド姉さん！
+	グラム=スサノオ	通常2						私、ちゃんと知ってます！\nバカというほうがバカなんですよ！
+CharacterOff
+	偽剣グラム×サンタ	通常						言い過ぎよ、ワンド\nお馬鹿くらいにしなさい
+CharacterOff
+	グラム=スサノオ	通常2						おバカならいいですねっ！\r\nそれならなんだかカワイイです！
+	グラム=スサノオ	通常2						でもかっこいい方が好きなので、\r\nドバカとかになりませんかね!?
+Param	character_grayout=false
+CharacterOff
+	偽剣グラム×サンタ	通常	p3
+	ワンド	通常	p7b
+	二人							ドバカ
+CharacterOff
+	グラム=スサノオ	通常2						えへへへ♪
+CharacterOff
+	スペルビア	驚き						私の話を聞けっ!!
+CharacterOff
+	ディーア	怒り2						スサノオたちは置いておいて、\n助力ってなんの話だ
+	ディーア	怒り2						いきなり酒場に来て協力すると\n言われても訳が分からないし
+	ディーア	怪しい2						グーラ王みたいに\r\n高潔な戦士だったらともかく、\r\nお前は怪しすぎる
+	ディーア	怪しい2						実力も……うん
+CharacterOff
+	スペルビア	悔しい						この私に向かって\n含みのある言い方だな……！
+	スペルビア	通常						だが、グーラか……\n確かに今の私を\n彼と比べられるのは痛い
+	スペルビア	通常						グーラは敵からさえも\n尊敬を集めた偉大な王だからな
+	スペルビア	にやけ						しかし、\n選り好みをしていられる状況かな？
+StopBgm
+CharacterOff
+	ディーア	怪しい2						なにを<dash=2>
+Se	火事
+FadeOut	red					.3
+FadeIn	red					.3
+Bgm	緊迫
+	ディーア	驚き2						っ!? これは!?
+CharacterOff
+	グラム=スサノオ	通常2						な、なんだか、\n熱くなってきましたよ!?
+CharacterOff
+	スペルビア	にやけ						ほら、話しているうちに\nもう来てしまったじゃないか
+StopBgm
+StopSe
+CharacterOff						0
+Bg	黒背景					0
+	スペルビア	<Off>						憤怒の王が
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_03
+EndIf
+EndScenario
+
+# E_1120_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	市街地C(火事)					0
+	イーラ	拡大通常	エフェクト表			0
+FadeIn	black					.5
+Se	火3
+	イーラ	拡大通常						ゴォオオオオオオ!!
+FadeOut	red					.2
+CharacterOff						0
+	          
+FadeIn	red					.2
+	街の人							あぁっ！\r\n家が、俺たちの家が……！
+CharacterOff
+	警備兵							一般市民は早く避難しろ！\r\n駐留していた勇者たちはどこだ!?
+CharacterOff
+	街の人							もう全滅してるよ！\r\nあの怪物に向かった途端に\r\n炭になっちまった！
+FadeOut	black					.3
+CharacterOff						0
+	グラム=スサノオ	通常2	2_2			0
+	ディーア	驚き2	1_2			0
+FadeIn	black					.3
+	ディーア	驚き2						これは……！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						わわわっ！\nすごくあっついですねっ！
+CharacterOff
+	スペルビア	通常						ククク！\n流石は我ら七罪王の中でも\n武に長けた王だ
+	スペルビア	怪しい						だが、静寂なる怒りこそを\r\n尊んでいたお前が、\r\n憤怒の大罪にこうも呑まれるとは
+	スペルビア	怪しい						嘆かわしいな
+CharacterOff
+	ディーア	怒り2						スペルビア……\r\nお前はアレを知っているのか？
+CharacterOff
+	スペルビア	通常						それを伝えるために\r\nわざわざキミに会いに来たんだがね
+	スペルビア	悔しい						だというのに、\r\n話も聞かずにボコボコと
+	スペルビア	悔しい						いや、\n断じて負けてはいないが
+CharacterOff
+	ディーア	怪しい2						それはお前が悪い
+CharacterOff
+	スペルビア	通常						ふっ……！
+	スペルビア	通常						彼は七罪王、憤怒のイーラ
+Param	character_grayout=false
+FadeOut	white					.3
+CharacterOff						0
+	イーラ	拡大通常	エフェクト裏			0
+	オーラ炎		エフェクト表			0
+FadeIn	white					.3
+	スペルビア	<Off>	1_2					怒りという感情を無限に循環し、\r\n自身の炉に焚べ続けることで\r\n無限の熱と物理法則の崩壊をもたらす
+	スペルビア	<Off>						燃え盛る怒りの王だ
+	スペルビア	<Off>						今は憤怒の大罪に呑まれ\n聡明で武勇に優れた姿など\n見る影もないがな
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	怒り2				0
+FadeIn	white					.3
+	ディーア	怒り2						憤怒……怒りの暴走か
+	ディーア	怒り2						イーラの\n怒りの原因はなんだ？
+CharacterOff
+	スペルビア	通常						ククク、\n流石は我が強敵、鋭いな
+	スペルビア	通常						そう原因なく怒る者などいない\n怒りとは行いの結果が反映される\n副次的なものだ
+	スペルビア	怪しい						だが、\nイーラを怒らせる原因など\nこの魔界にはいくらでもあり
+	スペルビア	怪しい						そのどれかなどとは\n私でも見通せない
+	スペルビア	怪しい						しかし原因がわかったとて\n結果は変わらないさ
+	スペルビア	怪しい						怒りは彼自身も苛み、\n炎と化して魔界を灰燼に帰す
+	黒グラデーション		エフェクト表			.5
+	スペルビア	にやけ						ルークスリアめ、\nこうするために\nイーラを伏せていたか……
+CharacterOff
+	ディーア	驚き2						ルークスリア……？
+CharacterOff
+	スペルビア	にやけ						おっと、聞き流してくれ
+	スペルビア	通常						とにかく今のイーラは\n見たとおりに太陽に匹敵する熱量だ\nそれも爆発寸前
+	スペルビア	通常						今は本能と理性の狭間で\r\n世界図書館へと歩を進めているが
+	スペルビア	通常						遠からずに彼の憤怒は炸裂し、\n魔界全てを焦土にするだろう
+CharacterOff
+	ディーア	悔しい2						なっ……！
+CharacterOff
+	スペルビア	悪い顔						実にすばらしい！
+	スペルビア	悪い顔						我々が望んだ通り、\n魔界への復讐が完遂される！
+	スペルビア	怪しい						…………\nなどと喜びたいところだが、\n私はその結果を望まない
+	スペルビア	通常						世界王という名も\n世界そのものがなくなれば\n虚しいだけだからな
+	スペルビア	通常						これがキミに\n協力を申し出た理由だ
+	スペルビア	通常						今の魔界に思うところも\n恨みもあるが、\n焦土の王になるつもりはない
+CharacterOff
+	ディーア	怒り2						つまり、\nイーラを止めるのに協力すると？
+CharacterOff
+	スペルビア	悪い顔						万人の味方を手にした\n気分だろう？
+CharacterOff
+	ディーア	怪しい2						なんでそんなに\n自信満々なんだよ……
+	ディーア	怒り2						…………\nお前の言葉を信用する材料を\nオレはもっていない
+	ディーア	怒り2						出会ったばかりの相手を\n信用できないし\nお前とイーラは七罪王の仲間だ
+CharacterOff
+	スペルビア	通常						だろうな、\nその答えは容易に想像できた
+	スペルビア	通常						そしてキミが考える通り\n戦闘においては\n今の私は役に立たない
+CharacterOff
+	ディーア	目閉じ2						だが……
+	ディーア	怒り2						お前が勝手に話して\n情報をくれるというなら\n喜んで受け取る
+	ディーア	怒り2						それをどう使うかは\nオレたちの自由だからな
+	ディーア	怒り2						スペルビア、\nお前の考えをすべて話してもらう
+CharacterOff
+	スペルビア	にやけ						ククク！\r\nキミも負けず劣らずに高慢であり、\r\n傲慢だな！
+	スペルビア	にやけ						だが気に入った！
+	スペルビア	通常						この私を都合よく利用するとは！\r\nそれでこそ我が好敵手！
+	スペルビア	通常						ならば私も誓おう、\n冠する世界王の名にかけて\nキミを助けると
+CharacterOff
+	ディーア	汗2						いつの間に好敵手になったんだよ
+CharacterOff
+	スペルビア	通常						では、\nイーラの情報を教えよう\nその後はキミ次第だがね！
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+	イーラ	通常				0
+Wait						1
+FadeIn	black					1
+	イーラ	通常						オォ、オオオオオ……!!
+Bgm	絶望
+Param	character_grayout=true
+CharacterOff
+	グラム=スサノオ	通常2	2_2
+	ディーア	本気2	1_2
+	ディーア	本気2						そこまでだ、憤怒のイーラっ！
+	グラム=スサノオ	通常2						これ以上は進ませませんっ！
+CharacterOff
+	イーラ	通常						っ…………！
+CharacterOff
+	グラム=スサノオ	通常2	2_2
+	ディーア	怒り2	1_2
+	グラム=スサノオ	通常2						わぁー、熱すぎですけど、\n逆に燃えてきますねっ！
+	グラム=スサノオ	通常2						熱血気合！\nしんとーめっきゃく！
+	グラム=スサノオ	通常2						あれ……？\nしんとーめっきゃくって\nなんでしたっけ？
+	ディーア	汗2						知らないで使ってたのか？
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						ふふーん♪\nかっこいいですからっ！
+CharacterOff
+	イーラ	通常						まけん、つかい……！
+CharacterOff
+	グラム=スサノオ	通常2	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						こっちを認識させることには\n成功したな
+	ディーア	怒り2						だけど、\nここからが命がけだ
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia				0
+CharacterOff						0
+	スペルビア	通常				0
+FadeIn	white					.3
+	スペルビア	通常						高らかに言ったはいいが、\r\n今のイーラを止める方法はない
+CharacterOff
+	ディーア	悔しい2						ないってどういうことだよ!?
+CharacterOff
+	スペルビア	通常						イーラの力は\n憤怒を燃料とした無限循環
+	スペルビア	通常						グーラの暴食が\n魔界を食い尽くそうとしたのと同じく\nそれが暴走している
+	スペルビア	通常						比喩でもなく\n太陽を相手にするようなものだ
+	スペルビア	にやけ						だからイーラを止めるには\n彼が奥深くに沈めた理性を\n取り戻す必要がある
+	スペルビア	通常						憤怒の感情を抑えられれば、\n力もまた弱体化するはずだからな
+	スペルビア	にやけ						殴るなり、説得するなり、\n方法はキミに任せよう！
+CharacterOff
+	ディーア	驚き2						それってつまり、\n真正面から向き合えってことか!?\n太陽と等しい相手に!?
+CharacterOff
+	スペルビア	通常						倒しきるなどという\n無茶と比べれば現実的な方法だ
+	スペルビア	通常						もう一つ言えるとすれば
+	スペルビア	にやけ						外から刺激し理性を呼び起こすなら\n短期決戦を選ぶといい
+	スペルビア	にやけ						彼は攻撃を受けるごとに\n怒りを増幅させていく
+	スペルビア	にやけ						長期戦は\n魔界を破滅へと近づけるぞ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+	グラム=スサノオ	通常2	2_2			0
+	ディーア	怒り2	1_2			0
+FadeIn	white					.3
+	ディーア	怒り2						弱点とか\nそういう助言を期待したのに
+	ディーア	悔しい2						なんなんだアイツ……！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						安心してくださいっ！\nマスターさんっ！
+	ディーア	驚き2						スサノオ？
+	グラム=スサノオ	通常2						私は細かいことはわかりませんけど、\r\nその分、気合とパワーがありますっ！
+	グラム=スサノオ	通常2						このスサノオが\nマスターさんのことを守りますから\n大丈夫ですっ！
+	ディーア	笑い2						そういうところ、\n本当に頼もしく思うよ
+	ディーア	怒り2						よし……！
+	ディーア	本気2						憤怒のイーラ！\r\n話を聞いてくれ!!
+CharacterOff
+	イーラ	通常						…………っ
+CharacterOff
+	グラム=スサノオ	通常2	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						頼む、今すぐに止まってくれ！
+	ディーア	本気2						オレたちには\nきっと話し合う余地がある！
+	ディーア	怒り2						オレはずっと\r\nお前たちをただの敵だと思ってたけど
+	ディーア	怒り2						グーラのように\n話せば分かりあえる相手もいるって\n今はわかっているんだ
+	ディーア	怒り2						お前たちの恨みが消えて、\n魔界と和解できるように\nオレは協力したい
+	ディーア	本気2						こんな怒りで\n全てを台無しにしないでくれ！
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	イーラ	通常						グゥウウ……！
+Bgm	魔獣バトル
+Se	火3
+	オーラ炎		エフェクト表			1
+	イーラ	通常						ガアアアアアアアアア!!
+Param	character_grayout=true
+CharacterOff
+	グラム=スサノオ	通常2	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						っ……!?
+	グラム=スサノオ	通常2						マスターさんっ！\r\nもっと熱くなりましたよっ!?
+	ディーア	怒り2						聞く耳もたず、か
+	ディーア	怒り2						だったら力づくで、\n聞ける状態にしてみせる！
+	ディーア	本気2						いくぞ、スサノオ！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						はいっ！\r\nとりあえず殴ってみます!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_04
+EndIf
+EndScenario
+
+# E_1120_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔獣バトル
+Bg	市街地C(火事)					0
+	グラム=スサノオ	通常2	2_2			0
+	ディーア	悔しい2	1_2			0
+FadeIn	black					.5
+	ディーア	悔しい2						ぐうっ……！\r\nなんてエネルギーだ
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						あれ、私のパンチ効いてない!?\r\nもしかして効いてません!?
+	ディーア	悔しい2						あの熱が\r\nすべての攻撃を相殺してるんだ
+	ディーア	悔しい2						物理法則を無視した破壊……\r\nやられたことを返す、怒りの発露
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						なるほど！
+	ディーア	驚き2						わかったのか!?
+Tween	グラム=スサノオ	PunchPosition	y=50				NoWait
+	グラム=スサノオ	通常2						わかりませんっ！
+	ディーア	驚き2						えっ!?
+	グラム=スサノオ	通常2						グラム姉様やモッド姉さんと違って\r\n考えるのは苦手ですからっ！
+	グラム=スサノオ	通常2						でも、\r\nやるべきことはわかりますっ！
+Tween	グラム=スサノオ	PunchPosition	y=50				NoWait
+	グラム=スサノオ	通常2						私は最も魔剣グラムを\n名乗ってほしくないグラム\n今年もナンバーワンっ！
+	グラム=スサノオ	通常2						拳と書いて\n魔拳グラム=スサノオっ!!
+	グラム=スサノオ	通常2						やるべきことは\r\n超熱血全力全開でぶちかますだけ！
+	グラム=スサノオ	通常2						熱血気合パワーなら\n誰にも負けない！
+	グラム=スサノオ	通常2						だからマスターさん、\r\n力を貸してください!!!!
+	グラム=スサノオ	通常2						どんな敵も\n気合と熱血で倒してみせます！
+Param	character_grayout=false
+	ディーア	本気2						ああっ！\r\n渾身の力をこめて!!
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	グラム=スサノオ	通常2						いきますよぉ!!
+CharacterOff
+	グラム=スサノオ	拡大通常	エフェクト表					とぉりゃあああああ!!
+CharacterOff
+	イーラ	通常						…………
+	イーラ	通常						神規の<dash=4>
+CharacterOff
+	イーラ	拡大通常	エフェクト表					崩壊!!
+Se	光3
+Se	火3
+FadeOut	white					1
+Se	光2
+Se	光3
+Se	大爆発1
+Se	大爆発2
+CharacterOff						0
+	ディーア	絶望3				0
+Wait						3
+StopBgm
+FadeIn	white					1
+Se	火事
+	ディーア	絶望3						…………え？
+	ディーア	絶望3						おれ、たちは……
+Bgm	絶望
+	ディーア	驚き3						っ……ぁ
+CharacterOff
+	グラム=スサノオ	絶望2
+	ディーア	<Off>	1_2					すさ、のお？
+CharacterOff
+	ディーア	悔しい3						あの攻撃から\nオレをかばって……！
+	ディーア	本気3						スサノオ！\nおい、しっかりしてくれ!!
+StopSe
+CharacterOff						0
+Bg	黒背景					0
+	ディーア	<Off>						スサノオ!!
+Wait						2
+FadeOut	black					.3
+CharacterOff						0
+Bg	研究所C					0
+	グラム=スサノオ	通常2				0
+Wait						2
+FadeIn	black					.3
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						はいっ！\r\nおはよーございますっ！
+	グラム=スサノオ	通常2						って、あれ？
+	グラム=スサノオ	通常2						ここ、どこですか？
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_05
+EndIf
+EndScenario
+
+# E_1120_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔王バトル
+Bg	市街地C(火事)					0
+Param	character_grayout=false
+	グラム=スサノオ	絶望2				0
+FadeIn	black					.5
+	グラム=スサノオ	絶望2						…………
+CharacterOff
+	ディーア	本気3						スサノオ！ スサノオ!!
+	ディーア	悔しい3						魔核へのダメージが\n大きすぎる……!!
+	ディーア	悔しい3						このままじゃ魔核崩壊して<dash=2>
+CharacterOff
+Se	怪獣の足音
+	イーラ	通常				2		オオオォ……
+Wait						1
+CharacterOff
+	ディーア	悔しい3						憤怒の、イーラ……！
+CharacterOff
+	イーラ	通常						ッ……!!
+Se	チャージ
+	オーラ炎		エフェクト表			1
+Wait						1
+Se	光3
+FadeOut	white					.2
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+	ディーア	悔しい3	1_2			0
+	スペルビア	悔しい	画面外_右			0
+Tween	スペルビア	MoveBy	x=-600 time=1				NoWait
+FadeIn	white					.2
+	スペルビア	悔しい						なにをやっている！
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Tween	ディーア	MoveBy	x=-100				NoWait
+	ディーア	驚き3						スペルビア!?
+	スペルビア	悔しい						失敗したのならすぐに撤退しろ
+	スペルビア	怪しい						イーラの一撃を\nまともに受けたのなら諦めろ\n耐えられる魔剣などいない
+	スペルビア	怪しい						つまり、その魔剣は手遅れだ
+	ディーア	本気3						スサノオの魔核は崩壊していない！\nちゃんと治療をすれば……！
+Param	character_grayout=false
+CharacterOff
+	イーラ	通常
+Se	火3
+	オーラ炎		エフェクト表			1
+	イーラ	通常						ぐぉおおおおお!!
+Se	火1
+FadeOut	red					.2
+CharacterOff						0
+	ディーア	悔しい3				0
+FadeIn	red					.2
+	ディーア	悔しい3						うぅっ!?
+CharacterOff
+	スペルビア	通常						イーラを前に\nその余裕があるというのなら\nキミはすでに魔王だよ
+	スペルビア	通常						どちらにせよ、\r\nその壊れかけをこれ以上維持して\r\n戦えるわけがない
+CharacterOff
+	グラム=スサノオ	絶望2						…………
+CharacterOff
+	ディーア	悔しい3						だが、オレは<dash=2>
+CharacterOff
+	スペルビア	怪しい						『マスターとしてそれはできない』\r\nだろ？
+	スペルビア	悔しい						ふん、わかっている\n試しに言ってみただけだ
+CharacterOff
+	ディーア	驚き3						スペルビア？
+CharacterOff
+	スペルビア	悔しい						イーラを倒すまでは\r\n私はキミに協力すると言った
+	スペルビア	悔しい						その結果、\n協力相手を失ったというのであれば
+	スペルビア	悔しい						世界王としての名に傷がつく
+	スペルビア	怪しい						まったく、\n人間というのは誰も彼も……！
+CharacterOff
+	ディーア	驚き3						お前……
+CharacterOff
+	スペルビア	通常						五分だけ時間を稼いでやろう\nそれまでになんとかしてみせろ\n魔王を目指す者よ
+CharacterOff
+	ディーア	本気3						っ！\nわかった、頼む！
+CharacterOff
+	スペルビア	怪しい						さて……
+	スペルビア	通常						久しいな、イーラ
+CharacterOff
+	イーラ	通常						スペル、ビア……
+	イーラ	通常						キサマ、キサマァアアアア!!
+CharacterOff
+	スペルビア	悪い顔						さすが世界王である私だ\r\n燃え盛る記憶の中でも\r\n忘れられてはいないらしい
+	スペルビア	通常						そして……\r\n案の定、憎まれているのも\r\n仕方がないと受け入れよう
+	スペルビア	通常						だが友よ、\n私にはやるべきこともあり\n見届ける物語もある
+	スペルビア	通常						キミの怒りで\n全てを灰にするわけには\nいかないのだよ
+Se	チャージ
+	オーラ青		エフェクト表			1
+	スペルビア	通常						今は非力なれども\r\n私は高慢の王にして、世界王
+CharacterOff
+	スペルビア	拡大通常	エフェクト表					キミの憤怒も\n受け流してみせよう
+StopBgm
+FadeOut	white					1
+CharacterOff						0
+Bg	研究所C					0
+	グラム=スサノオ	通常2				0
+Wait						2
+FadeIn	white					1
+Bgm	図書館
+	グラム=スサノオ	通常2						マスターさーん？\nグラムねえさまー？\nねえさんたちー？
+	グラム=スサノオ	通常2						うーん、誰もいない
+	グラム=スサノオ	通常2						えーっと思い出してみましょう\nたしか私はマスターさんと一緒に
+	グラム=スサノオ	通常2						ボオボオ燃えてる仮面さんを\nガツンと\nお仕置きしようとして<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地C(火事)					0
+	イーラ	拡大通常	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						1.5
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	研究所C					0
+	黒グラデーション		エフェクト表			0
+	グラム=スサノオ	通常2				0
+FadeIn	white					.3
+Shake	グラム=スサノオ		x=5				NoWait
+	グラム=スサノオ	通常2						…………あっ
+	グラム=スサノオ	通常2						もしかして、\r\n魔拳グラム=スサノオ、負けました？
+	グラム=スサノオ	通常2						パワーだけは\r\n誰にも負けないのが私だったのに
+	グラム=スサノオ	通常2						他のことできなくても、\n気合と熱血ができるグラムなのに
+	グラム=スサノオ	通常2						たったの一撃で、\nパワーもなにも効かなくて……
+	グラム=スサノオ	通常2						マスターさんも守れないで\nやられちゃった……？
+CharacterOff	黒グラデーション		エフェクト表
+	グラム=スサノオ	通常2						それじゃあ、\nここは天国だったり<dash=2>
+Param	character_grayout=true
+	遠い声	<Off>						やった！ やったぞ！\r\nこれは奇跡だ!!
+	グラム=スサノオ	通常2						あれ……？\r\n誰かの声が聞こえる？
+Se	マイクノイズ
+CharacterOff
+	黒グラデーション		エフェクト表
+	遠い声	<Off>						■■■■体目にして\r\nついに安定化するなんて！
+	遠い声	<Off>						ああ、\r\nまさかスサノオの因子が\r\nこうも反応するとはな
+	遠い声	<Off>						だが、どうして\r\nグラム型の魔剣に闘神スサノオが？
+	遠い声	<Off>						理由なんていいだろ\r\n何百何千とガラクタを積み上げた\r\n甲斐もあった
+CharacterOff
+	グラム=スサノオ	通常2						ガラクタ……？
+FadeOut	black					.3
+CharacterOff						0
+	幻想残響1	通常	p3b			1
+	幻想残響2	通常	p7b			1
+	          
+FadeIn	black					.3
+	グラム=スサノオ	<Off>						ガラクタって、\nこの子たちのこと<dash=2>
+Wait						.5
+Se	闇1
+Shake	幻想残響1		x=2				NoWait
+	幻想残響1	通常						スサ、ノオ……
+	幻想残響2	通常						すさ、のお……
+CharacterOff
+	グラム=スサノオ	通常2						…………
+	グラム=スサノオ	通常2						あぁ、そっか……\nどこかで聞いた声だと思いました
+	グラム=スサノオ	通常2						ここは天国なんかじゃない
+	グラム=スサノオ	通常2						私が……\nグラム=スサノオが\n生まれた場所なんですね
+CharacterOff
+	幻想残響1	通常	p3b
+	幻想残響2	通常	p7b
+	幻想残響1	通常						オマエモ、オチロ……!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_06
+EndIf
+EndScenario
+
+# E_1120_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	研究所B_過去					0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+	          		1_2			0
+FadeIn	black					.5
+	グラム=スサノオ	<Off>						考えなかったことが\nないわけじゃないんです
+	グラム=スサノオ	<Off>						みんなは\n私をこんな風に呼びます
+	グラム=スサノオ	<Off>						なんで\nこうなったのかわからない
+	グラム=スサノオ	<Off>						なぜかできちゃった魔剣
+	グラム=スサノオ	<Off>						奇跡のグラム
+	グラム=スサノオ	<Off>						モッド姉さんも\r\n私が生まれた理由は奇跡としか\r\nいいようがないって言ってました
+	グラム=スサノオ	<Off>						奇跡……
+	グラム=スサノオ	<Off>						何回も何回もやって\nそれでも起きないから奇跡
+	グラム=スサノオ	<Off>						じゃあ、\nその奇跡が起こるまでには
+	グラム=スサノオ	<Off>						どのくらいの\n"私"がつくられたんだろうって
+StopBgm
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	研究所C					0
+	グラム=スサノオ	通常2				0
+Wait						1
+FadeIn	white					1
+Bgm	緊迫
+	グラム=スサノオ	通常2						なんでマスターさんがいないのに\n戦えるのかも
+	グラム=スサノオ	通常2						ここにどうやって来たのかも\nよくわかりませんけどっ！
+CharacterOff
+	幻想残響1	通常	p3b
+	幻想残響2	通常	p7
+	スサノオ？							すさ、のお……！
+CharacterOff
+	グラム=スサノオ	通常2						殴れないおばけは、\n苦手ですっ!!
+	グラム=スサノオ	通常2						自分の形をしてるから、\nもっと殴りづらいし
+	グラム=スサノオ	通常2						それに……
+	グラム=スサノオ	通常2						やっぱりこの子たちって\nみんな私の姉妹なんでしょうね
+	黒グラデーション		エフェクト表			1
+	グラム=スサノオ	通常2						私が創られるまでに\n壊されちゃった、\n生まれてこれなかった姉妹
+FadeOut	white					.3
+CharacterOff						0
+Bg	研究所B_過去					0
+	          					0
+FadeIn	white					.3
+Se	マイクノイズ	TRUE
+	遠い声							今度はこの因子を混ぜてみよう
+	遠い声							くそっ！\nもう魔核に限界が来た！
+	遠い声							うわっ、何が起こったんだよ\r\n原型なんてなくなってるじゃないか
+	遠い声							破棄だ、破棄！\n次の模造グラムをもってこい！
+FadeOut	white					.3
+CharacterOff						0
+Bg	研究所C					0
+	グラム=スサノオ	通常2				0
+	黒グラデーション		エフェクト表			0
+StopSe
+FadeIn	white					.3
+	グラム=スサノオ	通常2						グラム姉様とオルタ姉さんが\nすごすぎたから
+	グラム=スサノオ	通常2						自分たちもすごいグラムを
+	グラム=スサノオ	通常2						そうやって\nなんどもなんどもなんども壊して\nたくさん酷いことをして
+	グラム=スサノオ	通常2						たまたま\nスサノオの因子が相性良かっただけの\n私が生まれた
+	グラム=スサノオ	通常2						気合と熱血のおかげもあったけど\nたまたまなんです
+	グラム=スサノオ	通常2						だから、\n私とこの子たちの間には\n違いなんてない
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	魔術空間					0
+	魔剣グラム	通常				0
+	          		1_2
+FadeIn	white					.3
+	グラム=スサノオ	<Off>	1_2					超完ぺきで超完成品な\nグラム姉様と比べたら、\n出来の悪すぎる贋作
+	グラム=スサノオ	<Off>						でも、\nせっかく生まれたんだから\nマスターさんと会えたから
+	グラム=スサノオ	<Off>						グラム姉様みたいに\n魔剣として役に立ちたい
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	研究所C					0
+	グラム=スサノオ	通常2				0
+FadeIn	white					.3
+	グラム=スサノオ	通常2						パワーと熱血と気合なら\n誰にも負けないって思ってたのに
+	グラム=スサノオ	通常2						結局、負けちゃって……
+CharacterOff
+	幻想残響1	通常	p5
+	幻想残響2	通常	p2b
+	幻想残響3	通常	p8b
+	スサノオ？							アナタも、コッチに……！
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	グラム=スサノオ	<Off>						あぁ、これダメかもですね
+	グラム=スサノオ	<Off>						私、思っちゃってます\nもし私じゃなくて、\nこの子たちが生まれていたらって
+	グラム=スサノオ	<Off>						力だけのスサノオじゃなくて\nグラム姉様みたいな子がいたら\n……私もなれていたら
+	グラム=スサノオ	<Off>						マスターさんを\nちゃんと守れたかも<dash=2>
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+Bg	魔術空間					0
+	グラム=スサノオ	通常2				0
+Wait						1
+FadeIn	white					1
+	グラム=スサノオ	通常2						あれ……？
+	？？？？	<Off>	1_2					感傷に浸ってるなんて\nらしくないじゃない
+Bgm	神秘
+CharacterOff
+	魔剣グラム	通常						いったい何をしているの？\nグラム=スサノオ
+CharacterOff
+	グラム=スサノオ	通常2						ねっ……
+CharacterOff
+	集中線		エフェクト表
+	グラム=スサノオ	拡大通常	エフェクト裏					グラム姉様!?
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_07
+EndIf
+EndScenario
+
+# E_1120_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	魔術空間					0
+Param	character_grayout=false
+	グラム=スサノオ	通常2				0
+FadeIn	black					.5
+	グラム=スサノオ	通常2						姉様がどうしてここに!?
+CharacterOff
+	魔剣グラム	通常						落ち着きなさい、私は<dash=2>
+StopBgm
+CharacterOff
+	グラム=スサノオ	通常2						はっ！
+Bgm	コメディ
+CharacterOff
+	グラム=スサノオ	拡大通常	エフェクト裏					まさか\nグラム姉様もやられたんですか!?
+CharacterOff
+	グラム=スサノオ	通常2						完ぺきな姉様までやられちゃうなんて\n私なんかが勝てる相手じゃ……
+Shake	グラム=スサノオ		x=5				NoWait
+	グラム=スサノオ	通常2						ぐすっ、\nでも仇はきっとマスターさんが！
+CharacterOff
+	魔剣グラム	通常						違うわよ\n勝手に妄想するのはやめなさい
+CharacterOff
+	グラム=スサノオ	通常2						ふぇ？
+CharacterOff
+	魔剣グラム	通常						魔剣グラムはやられていないし\r\n私は貴女の姉じゃないわ
+CharacterOff
+	グラム=スサノオ	通常2						じゃあ……
+CharacterOff
+	グラム=スサノオ	拡大通常	エフェクト裏					姉様が二人もいた!?
+Param	character_grayout=true
+CharacterOff
+	魔剣グラム	通常	p3b
+	グラム=スサノオ	通常2	p7
+	グラム=スサノオ	通常2						それはすごく嬉しいような\nちょっと怖いような？
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						とにかく！\nよろしくお願いします！\n第二姉様！
+Tween	魔剣グラム	MoveBy	x=50				NoWait
+Se	打1
+	魔剣グラム	通常						だから……\r\n話を聞きなさいっ！
+Tween	グラム=スサノオ	PunchPosition	y=10				NoWait
+	グラム=スサノオ	通常2						あいたっ！
+StopBgm
+Tween	魔剣グラム	MoveBy	x=-50				NoWait
+	魔剣グラム	通常						まったく、\n我ながら不思議ね
+	魔剣グラム	通常						この私がいるというのに\nこんな子になるなんて
+	グラム=スサノオ	通常2						？？？？\nどういうことですか？
+Bgm	神秘
+	魔剣グラム	通常						私は言うなれば\n貴女の中のグラム因子よ
+	魔剣グラム	通常						そして、\nここは魔拳グラム=スサノオの魔核\nその記憶領域
+	魔剣グラム	通常						だから彼の記憶を元に\n魔剣として戦うこともできた
+	魔剣グラム	通常						現実の貴女は今も\n魔核崩壊の瀬戸際にあるの
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地C(火事)					0
+	イーラ	通常				0
+	          
+FadeIn	white					.3
+	魔剣グラム	<Off>	1_2					七罪王の憤怒の力は\n魔力結晶体を壊すだけでなく\n伝承の中の残響を呼び覚ました
+	魔剣グラム	<Off>						スサノオという伝承の負の側面\nそこに込められた憤怒をね
+	魔剣グラム	<Off>						このままでは\n貴女は負の思念に取り込まれて\n現実でも魔核崩壊は不可避
+FadeOut	white					.3
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	魔術空間					0
+	グラム=スサノオ	通常2	p7			0
+	魔剣グラム	通常	p3b			0
+FadeIn	white					.3
+	魔剣グラム	通常						だから\n魔核は貴女を守るために\n私を目覚めさせたの
+	魔剣グラム	通常						伝承が暴走したならば、\nより上位、\nつまりグラムの伝承で収めるために
+	魔剣グラム	通常						おわかり？\n見た目は貴女の姉だけど、\n私は貴女自身でもあるのよ
+	グラム=スサノオ	通常2						それって……
+	魔剣グラム	通常						ええ
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						私も\nグラム姉様だったんですね!?
+	グラム=スサノオ	通常2						実はこっそり\n私は私で完成品じゃないかとか\n思ってましたけど！
+	グラム=スサノオ	通常2						今日から私もお姉ちゃん！
+	魔剣グラム	通常						…………
+	魔剣グラム	通常						もう説明するのも\n億劫になってきたわ……
+	グラム=スサノオ	通常2						それほどでもっ！
+	魔剣グラム	通常						褒めていないわよ
+	魔剣グラム	通常						でも、\r\nようやくらしくなってきたじゃない\r\n魔拳グラム=スサノオ
+	魔剣グラム	通常						あんな亡霊相手に\r\nしおらしいことを言うよりも\r\n今の方が貴女らしいわよ
+	グラム=スサノオ	通常2						そ、そうでしょうか？
+	グラム=スサノオ	通常2						でもやっぱり私って\r\nたくさんの姉妹の犠牲で生まれて
+	グラム=スサノオ	通常2						なのにパワーだけ得意で、\n姉様みたいな\n完全完ぺき魔剣じゃないですし
+	魔剣グラム	通常						…………え？
+	グラム=スサノオ	通常2						姉様には憧れていますけど、\nこれからどうしたらって思ったり
+	魔剣グラム	通常						ちょっと待ちなさい、\n貴女、私みたいになる気でいたの？
+	グラム=スサノオ	通常2						…………え？
+	魔剣グラム	通常						あんなにパワーだけで\r\n淑女らしさも完全さもなくて
+	魔剣グラム	通常						三歩も歩けば\r\n目的を忘れちゃうような貴女が\r\n魔剣グラムに？
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						はいっ!!
+	魔剣グラム	通常						はぁーーーーーー
+Tween	グラム=スサノオ	PunchPosition	y=10				NoWait
+	グラム=スサノオ	通常2						た、ため息が長いですね？
+	魔剣グラム	通常						貴女にとって魔剣グラムが\r\n目標にできる相手に思えていたなんて
+	グラム=スサノオ	通常2						？？？？
+	魔剣グラム	通常						もういいわ\n貴女に長々と話しても伝わらない
+StopBgm
+	魔剣グラム	通常						だから<dash=4>
+CharacterOff
+Bgm	勇者バトル
+	魔剣グラム	通常						構えなさい、スサノオ
+	魔剣グラム	通常						私たちは魔剣の中の魔剣\n戦うことで見つかるものがある
+	魔剣グラム	通常						完全なる敗北をした貴女が\nどうなるべきか何を目指すのか
+	魔剣グラム	通常						貴女自身を見つけるのよ
+	魔剣グラム	通常						この私が\n胸を貸してあげるから
+CharacterOff
+	グラム=スサノオ	通常2						姉様……
+StopBgm
+CharacterOff
+	魔剣グラム	通常						おわかり？
+Bgm	コメディ
+Param	character_grayout=false
+CharacterOff
+	グラム=スサノオ	拡大通常	エフェクト表					私、姉様より胸大きいから、\nわざわざ借りなくてもっ！
+CharacterOff
+	集中線		エフェクト表
+	魔剣グラム	通常						本当に叩き斬られたいの!?
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_08
+EndIf
+EndScenario
+
+# E_1120_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	勇者バトル
+Bg	魔術空間					0
+Param	character_grayout=false
+	魔剣グラム	通常				0
+	          
+FadeIn	black					.5
+	魔剣グラム	通常						はぁっ!!
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	剣閃
+Se	光3
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	魔術空間					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	魔剣グラム	通常						どう？\nこの魔剣グラムの姿は
+CharacterOff
+	グラム=スサノオ	通常2						うわぁ♪\nやっぱりグラム姉様はすごいです
+	グラム=スサノオ	通常2						びゅーんてしゃきーんて\r\n戦い方がすごくキレイで……
+CharacterOff
+	魔剣グラム	通常						なら、私から生まれた貴女は\nなにができるの？
+CharacterOff
+	グラム=スサノオ	通常2						私は<dash=2>
+	グラム=スサノオ	通常2						えーっと……\n殴って、殴って、殴って、殴って
+CharacterOff
+	集中線		エフェクト表
+	グラム=スサノオ	拡大通常	エフェクト裏
+	グラム=スサノオ	拡大通常						<size=60>殴ります！</size>
+Param	character_grayout=true
+CharacterOff
+StopBgm
+	グラム=スサノオ	通常2						というか\n他のことは無理ですっ！
+CharacterOff
+Bgm	凱旋
+	魔剣グラム	通常						そうよ、\n貴女はグラムと似ても似つかない\n力だけに特化した魔剣
+	魔剣グラム	通常						でも……それでいいの
+	魔剣グラム	通常						そんな無茶苦茶なグラムだから\n貴女はグラム=スサノオなの\nおわかり？
+CharacterOff
+	グラム=スサノオ	通常2						姉様……
+FadeOut	white					.5
+Param	character_grayout=false
+CharacterOff						0
+Bg	酒場1F					0
+	偽剣グラム×サンタ	通常	p7b			0
+	魔劍グラム=オルタ	通常	p3			0
+FadeIn	white					.5
+	魔剣グラム	<Off>						グラムから\r\n数多の模造品が生まれたことは
+	魔剣グラム	<Off>						私がそれだけ\r\n完成品であったことの証明
+FadeOut	white					.5
+CharacterOff						0
+Bg	酒場1F					0
+	モッド		p7b			0
+	ワンド	通常	p3			0
+	          
+FadeIn	white					.5
+	魔剣グラム	<Off>						オルタや貴女たちがいたことで\n魔剣グラムは完成品となった
+	魔剣グラム	<Off>						貴女たちが多様な力と姿を\nしていることは\nとても尊ぶべきことなの
+FadeOut	white					1
+CharacterOff						0
+Bg	酒場1F					0
+	ファフニル	通常	p7			0
+	グラム=スサノオ	通常2	p3b			0
+	          
+FadeIn	white					1
+	魔剣グラム	<Off>						だから思い悩むことなく\n貴女という可能性を突き進めばいい
+	魔剣グラム	<Off>						戯言を言っていたじゃない\n『私は私で完成品』って
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff						0
+Bg	魔術空間					0
+	グラム=スサノオ	通常2	p7			0
+	魔剣グラム	通常	p3b			0
+FadeIn	white					1
+	魔剣グラム	通常						たしかにそうよ
+	魔剣グラム	通常						偽物以上に偽物ということは、\n新しい本物にも等しい
+	魔剣グラム	通常						それが偶然でも運命でも、\nあるいは必然だったとしても\n貴女は魔剣として生まれた
+	魔剣グラム	通常						その中に数多の犠牲があっても\n気に病むことなんてない
+	魔剣グラム	通常						背負いなさい
+	魔剣グラム	通常						背負った上で自分を誇りなさい\n偽物以上に偽物だと
+	魔剣グラム	通常						そうして初めて、\r\nあの子たちの犠牲も報われる
+StopBgm
+	魔剣グラム	通常						それに、ほら\r\nそろそろ聞こえてくるでしょう？
+FadeOut	white					1
+CharacterOff						0
+Bg	市街地C(火事)					0
+	モッド					0
+FadeIn	white					1
+Bgm	結婚
+	モッド							スサノオちゃん！\r\n早く起きて！
+	モッド							まだスサノオちゃんの\r\n研究はしたりないんだよっ！
+	モッド							なんでそんなにバカなのかとか、\n脳筋になった理由とか！\nとにかく私に研究させてよ！
+CharacterOff
+	偽剣グラム×サンタ	通常						この馬鹿！ 馬鹿なんだから！\n寝坊してないで起きなさいっ！
+	偽剣グラム×サンタ	通常						クリスマスの日付も忘れて\n一ヶ月前からくつ下を吊ってる\n馬鹿なんだから！
+	偽剣グラム×サンタ	通常						やられたことなんて忘れて\n起きてきなさい！
+CharacterOff
+	ワンド	通常						なにを一人前に\r\n戦いでやられているの！
+	ワンド	通常						あなたは野蛮なんだから、\nその場ですっころんだとか
+	ワンド	通常						もっとらしい\nやられ方がきっとあるのよ！
+	ワンド	通常						いつもの野蛮な気合とか\nファイアーでなんとかしなさい！
+	ワンド	通常						この高貴な私に……！\n心配かけさせないでよ、お馬鹿!!
+CharacterOff
+	ファフニル	通常						ふぁふぅー！\r\nスサノオお姉さんののーきん！\r\nおばか！ たんさいぼー！
+	ファフニル	通常						これでいいの？
+CharacterOff
+	魔劍グラム=オルタ	慌て2						う、うーん、\r\nスサノオちゃんを起こすなら\r\nこの方がいいかも？
+	魔劍グラム=オルタ	嬉しい2						でも……\nみんな待ってるよ、スサノオちゃん
+CharacterOff
+	偽剣グラム×サンタ	通常						この馬鹿！
+CharacterOff
+	ワンド	通常						野蛮人！
+CharacterOff
+	モッド							グラムっぽくないグラム！
+CharacterOff
+	ツクヨミ	通常						これって元気づけられているの？\nそれともけなされているの？
+	アマテラス	通常						そういうところも\nスサノオと似ておるのぅ♪
+	アマテラス	通常						ほれ、\n我らも力を送ってやろうぞ♪\n奇跡から生まれた妹に
+FadeOut	white					1
+CharacterOff						0
+Bg	魔術空間					0
+	グラム=スサノオ	通常2				0
+FadeIn	white					1
+	グラム=スサノオ	通常2						姉さんたち……！
+CharacterOff
+	魔剣グラム	通常						貴女には理屈をこねるより\nこっちのほうが効くでしょう？
+StopBgm
+	魔剣グラム	通常						思った以上に\r\n罵詈雑言の嵐だけれど、どう？
+Param	character_grayout=false
+Bgm	タイトル
+Se	火1
+	オーラ炎		エフェクト表			.5
+	グラム=スサノオ	通常2
+	グラム=スサノオ	通常2						うおおおおおお！\r\n燃えてきましたぁあああああ!!
+CharacterOff
+	魔剣グラム	通常						…………\r\n予想以上に効き目があったわね？
+CharacterOff
+	グラム=スサノオ	通常2
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						だって姉さんたちが\r\n私に戻ってこいって言ってるんです！
+	グラム=スサノオ	通常2						それってぇ♪\n姉さんたちは認めてくれてたって\nことじゃないですか！
+CharacterOff
+	魔剣グラム	通常						そうかもね
+CharacterOff
+	グラム=スサノオ	通常2						うん、\r\nやっぱり細かいことはいいんです
+	グラム=スサノオ	通常2						それに……\n昔のことも忘れたりしない
+	グラム=スサノオ	通常2						けど、\n大事なことは一つです！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						私は大切なマスターさんと\r\n姉さんたちを守るために\r\nこの熱血パワーをつかいます！
+	グラム=スサノオ	通常2						考えなくても、殴ればわかる！
+Tween	グラム=スサノオ	PunchPosition	y=50				NoWait
+	グラム=スサノオ	通常2						それがグラム=スサノオ！
+CharacterOff
+	魔剣グラム	通常						ほんと、どこがグラムなんだか
+	魔剣グラム	通常						でも決めたのなら\n貴女らしく……こほんっ
+	魔剣グラム	通常						思いっきり\r\nブチかましなさい
+CharacterOff
+	グラム=スサノオ	通常2						はいっ！
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	グラム=スサノオ	通常2						超熱血！ 全力！ 全開!!
+CharacterOff
+	集中線		エフェクト表
+	グラム=スサノオ	拡大通常	エフェクト裏					みんな、待っててください！
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_09
+EndIf
+EndScenario
+
+# E_1120_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	red					0
+StopSound
+Bgm	タイトル
+Bg	白背景					0
+Param	character_grayout=false
+Se	火2
+Se	火3
+	グラム=スサノオ	拡大魔王尻	エフェクト表			2
+	          
+FadeIn	red					2
+	グラム=スサノオ	拡大魔王尻						おはよーございまーす!!!!
+FadeOut	white					.3
+CharacterOff						0
+	グラム=スサノオ	拡大魔王胸	エフェクト表			0
+	          
+FadeIn	white					.3
+	グラム=スサノオ	拡大魔王胸						かの魔剣グラムを姉に持つ！\r\n最もグラムを名乗ってほしくない\r\nグラム第一位！
+FadeOut	white					.3
+CharacterOff						0
+	グラム=スサノオ	拡大魔王顔	エフェクト表			0
+	          
+FadeIn	white					.3
+	グラム=スサノオ	拡大魔王顔						拳と書いて\r\n魔拳グラム！ ザ！ スサノオとは\r\nこの私っ!!!!
+FadeOut	white					.3
+Bg	市街地C(火事)					0
+CharacterOff						0
+	グラム=スサノオ	魔王エフェクト				0
+	          
+FadeIn	white					.3
+	グラム=スサノオ	魔王エフェクト						決まった!!
+CharacterOff
+	ワンド	通常
+Shake	ワンド		x=5				NoWait
+	ワンド	通常						きまった、じゃない、わよ……
+CharacterOff
+	偽剣グラム×サンタ	通常						こ、声が、おっきいっ……！
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						み、耳がぁ……
+CharacterOff
+	グラム=スサノオ	魔王装						あれっ!?\r\nどうしましたか、マスターさん！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装						まさか、敵の攻撃ですか！\n許せませんねっ!!
+CharacterOff
+	ディーア	汗3						ハハハ……
+	ディーア	汗3						そ、それよりも……その姿は？
+CharacterOff
+	グラム=スサノオ	魔王装						わかりません！
+	グラム=スサノオ	魔王装						夢の中でおばけとか\nグラム姉様にあったり、\nなんだか難しい話をしたり!!
+	グラム=スサノオ	魔王装						気がついたら\r\nこんなになっちゃってました！
+	グラム=スサノオ	魔王装						でもっ！\nいつもより気合と熱血が\n出てますよっ！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装きらーん						名付けて！\n超絶怒涛の熱血最強灼熱モード！
+	グラム=スサノオ	魔王装どや						ほらほら、見てください！\n胸もでっかくなってないです？
+	グラム=スサノオ	魔王装きらーん						サンタ姉さんを越えましたかねっ！
+CharacterOff
+	モッド							こんなふわふわな理由で\n魔王装になるなんて、予想外だね♪
+CharacterOff
+	ファフニル	通常						すごーい！\nふぁふにーもやりたーい！
+CharacterOff
+	ワンド	通常						心配して損したわ……
+CharacterOff
+	ディーア	汗3						す、スサノオらしいじゃないか
+	ディーア	通常3						とにかくっ！\r\n起きたばかりだけど、戦えるか？
+	ディーア	怪しい3						あっちのほうで<dash=2>
+CharacterOff
+	オーラ炎		エフェクト裏
+	スペルビア	驚き破損						ぐあああああ！\nそ、そろそろ本が燃えるっ！\n早く助けろ、魔剣使い！
+CharacterOff
+	ディーア	怪しい3						あいつを助けるとかはともかく
+	ディーア	怒り3						相手はさっき\r\n一撃でやられた相手だ\r\nなにか作戦を<dash=2>
+CharacterOff
+	グラム=スサノオ	魔王装きらーん						殴りましょう！
+CharacterOff
+	ディーア	驚き3						…………え？
+CharacterOff
+	グラム=スサノオ	魔王装						私はそれしかできません！
+	グラム=スサノオ	魔王装						とりあえず殴る！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装						相手が強かったら、\r\nもっと強い力で殴る！
+Tween	グラム=スサノオ	PunchPosition	y=50				NoWait
+	グラム=スサノオ	魔王装どや						それでも強かったら、\r\nもっともっと強く殴る！
+	グラム=スサノオ	魔王装						これがグラム姉様も認めた\nグラム=スサノオのやり方です！
+CharacterOff
+	ディーア	通常3						ああ、わかった
+StopBgm						2
+CharacterOff
+	ディーア	怒り3	画面外_右
+	スペルビア	驚き破損						ぐぉおおおお！\r\nこの世界王がこんなところで!!
+Bgm	和の国ボス
+ImageEffect	SpriteCamera	MotionBlur
+Se	シャキーン
+FadeOut	white					.2
+Tween	ディーア	MoveBy	x=-600 time=1.5				NoWait
+FadeIn	white					.2
+	ディーア	怒り3						助かったスペルビア！\nバトンタッチだ！
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	グラム=スサノオ	魔王エフェクト						はいっ、いきますよぉ!!
+	オーラ炎		エフェクト表			1
+	グラム=スサノオ	魔王エフェクト						とぉりゃああああああっ!!
+Se	光3
+Se	火3
+Se	打2
+FadeOut	red					.2
+CharacterOff						0
+	イーラ	通常				0
+Shake	イーラ		x=5			0	NoWait
+FadeIn	red					.2
+	イーラ	通常						ぐぉおおおおお!?
+CharacterOff
+	ディーア	怒り3						効いた！
+CharacterOff
+	グラム=スサノオ	魔王エフェクト						やっぱり殴るのが一番ですね！\r\nこれに限りますっ！
+CharacterOff
+	イーラ	通常						マケン、ツカイ……！
+CharacterOff
+	グラム=スサノオ	魔王エフェクト						神の力を宿した、完成品のさらに先！\r\n魔拳グラム=スサノオとはこの私！
+CharacterOff
+	グラム=スサノオ	拡大魔王顔	エフェクト表					さあ、かかってきなさい！\r\n火の玉の王様！
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_10
+EndIf
+EndScenario
+
+# E_1120_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	和の国ボス
+Bg	市街地C(火事)					0
+Param	character_grayout=false
+	イーラ	通常				0
+	オーラ赤		エフェクト表			1
+FadeIn	black					.5
+	イーラ	通常						神規の……！
+CharacterOff
+	ディーア	本気3						さっきのがくるぞ！
+CharacterOff
+	グラム=スサノオ	魔王エフェクト						だったら、\r\nもっと強い力で……!!
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	グラム=スサノオ	魔王エフェクト						交差する螺旋、赤銅の空\r\n天を灼く翼<dash=4>
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王エフェクト						<size=60>以下略っ!!</size>
+CharacterOff
+	グラム=スサノオ	拡大魔王顔	エフェクト表					ねぇっけつ！ ちょーぜつ！\nブレイズドライブゥウウウウ!!
+Se	チャージ
+FadeOut	white					2
+StopBgm
+Se	光3
+Se	火3
+Se	闇3
+CharacterOff						0
+Bg	市街地C(火事)					0
+	グラム=スサノオ	魔王エフェクト				0
+Wait						2
+FadeIn	white					.5
+	グラム=スサノオ	魔王エフェクト						どーですっ！\n私の力、おわかりですかっ！
+CharacterOff
+	イーラ	通常
+	オーラ赤		エフェクト表
+Shake	イーラ		x=2				NoWait
+CharacterOff	オーラ赤					.5
+	イーラ	通常						っ……オォ……
+Wait						.5
+Bgm	凱旋
+CharacterOff
+	ディーア	通常3						イーラが止まった……!!
+	ディーア	笑い3						やったな、スサノオ
+CharacterOff
+	グラム=スサノオ	魔王装どや						はいっ！\r\nやっぱり私、強かったですねぇ！
+CharacterOff
+	ワンド	通常						そこは認めてあげるけど
+CharacterOff
+	偽剣グラム×サンタ	通常						やっぱり\r\n同じグラムシリーズって認めたくない
+CharacterOff
+	魔劍グラム=オルタ	嬉しい2						す、すごいよ！ スサノオちゃん！
+CharacterOff
+	ファフニル	通常						ふぁふぅー♪\r\nファフニーも真似していい？
+CharacterOff
+	グラム=スサノオ	魔王装どや						どーぞどーぞっ！\n姉さんたちもスサノオの！\nスサノオの真似していいですよ！
+CharacterOff
+	ワンド	通常						またこの子ったら、\nすぐに調子にのって……
+CharacterOff
+	モッド							ますます興味深い\nグラムになったねぇ♪
+CharacterOff
+	ディーア	通常3						でも本当によくやった\r\nBlaze魔剣もなしに七罪王を\r\n倒せたんだ
+CharacterOff
+	スペルビア	通常破損						まったくだ\nこういう結末になるとはな
+CharacterOff
+	ディーア	驚き3						スペルビア
+CharacterOff
+	スペルビア	にやけ破損						真正面からイーラを\n打ちのめす魔剣がいるなど\n埒外の事態だよ
+	スペルビア	にやけ破損						今回ばかりは\nこの私も認めざるを得ないな\nキミの力を
+CharacterOff
+	ディーア	通常3						一応、\nお前にも感謝するよ
+	ディーア	怪しい3						ろくな情報をくれなかったことが\n原因な気もするけど
+	ディーア	笑い3						あとはロール様に連絡して\r\n封印を<dash=2>
+StopBgm
+	？？？？	<Off>	1_2					<size=5><color=red>赤狼の遠吠え、金猿の狂鳴……\n黒鼬の自傷……</color></size>
+	？？？？	<Off>						<size=5><color=red>其は忍辱の上に生まれ、\n臓腑の淵に渦巻く</color></size>
+	ディーア	驚き3						…………え？
+Bgm	魔獣バトル
+CharacterOff
+	イーラ	通常
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	イーラ	通常						<color=red>赤狼の遠吠え、金猿の狂鳴……\n黒鼬の自傷……</color>
+	イーラ	通常						<color=red>其は忍辱の上に生まれ、\n臓腑の淵に渦巻く</color>
+	イーラ	通常						<color=red>満ちよ、絶えよ、爆ぜよ……</color>
+CharacterOff
+	ディーア	驚き3						なに、を……
+CharacterOff
+	スペルビア	悔しい破損						っ……！\n撤退しろ、魔剣使い！
+FadeOut	black					.2
+CharacterOff						0
+Bg	黒背景					0
+	イーラ	拡大通常	エフェクト表			0
+FadeIn	black					.2
+	イーラ	拡大通常	エフェクト表					神滅の<dash=2>
+	イーラ	拡大通常	エフェクト表					新生!!
+StopBgm						0
+Se	光3
+FadeOut	white					2
+CharacterOff						0
+Bg	魔術空間_過去					0
+Wait						1
+	ディーア	<Off>				0
+FadeIn	white					2
+Bgm	図書館
+	ディーア	<Off>						な、なにが……？
+	ディーア	<Off>						なにがおこったんだ？
+	ディーア	<Off>						スサノオ、みんな……
+	ディーア	<Off>						意識があるのに、\n考えることができない
+	ディーア	<Off>						なにか大きな流れの中に\nすり潰されていく
+	ディーア	<Off>						だめだ、時間も、感覚も……\r\nすべてが、消え……
+	ディーア	<Off>						だれ、か……
+StopBgm
+Wait						3
+	ディーア	<Off>						あれ、は……？
+Bgm	BlazeA
+FadeOut	white					2
+CharacterOff						0
+Bg	白背景					0
+	オメガB	拡大プレ尻	エフェクト表			2
+	          
+FadeIn	white					1
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	オメガB	拡大プレ腕	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	オメガB	拡大プレ	エフェクト表			0
+	          
+FadeIn	white					.3
+	オメガB	拡大プレ						奇跡の竜王から生まれた兵器、\nバハムート=オメガ:Blaze
+	オメガB	拡大プレ						助けに来たよ、マスターちゃん
+FadeOut	white					0
+CharacterOff						0
+Bg	白背景					0
+	イベントロゴ1120		エフェクト表			3
+FadeIn	white					1
+Wait						3
+	イベントロゴ1120							<color=blue>The Days of Blaze World\n　　　　　　　　To Be Continued……</color>
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_01
+EndIf
+EndScenario

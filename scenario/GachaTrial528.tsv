@@ -1,0 +1,443 @@
+# G_528_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	わくわく
+Bg	黒背景					0
+Param	character_grayout=false
+	トライアルスチル52802A		エフェクト裏2			0
+	トライアルスチル52802		エフェクト裏			0
+	ノラ	通常	3_3			0
+FadeIn	black					.3
+	ノラ	通常						ぶいぶい、ハローワールド
+	ノラ	通常						今日のノラネコチャンネルは\n名作ソフトのRTAに挑戦だよ\n目標は30分よろしく、ぶい♪
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	通常						それじゃあ、みんないつも通り\n「メイドさんかわいい」って言ってー
+Thread	*G_528_01_01
+	ノラ	通常						ありがとう、みんな\n全魔界メイド計画は順調だね
+	ノラ	本気						それじゃあオープニングはここまで\nゲームを始めていくよ
+WaitThread	*G_528_01_01	TRUE
+	ノラ	通常						面白かったら\nチャンネル登録と高評価\nメイドへの転職希望をよろしくね
+FadeOut	black					.3
+	オーラ青		エフェクト表2			0
+	ノラ	拡大ゲーム	エフェクト表			0
+Wait						1
+FadeIn	black					.3
+Se	アイテムゲット
+	ノラ	拡大ゲーム						グッドゲーム、じーじー
+CharacterOff	オーラ青
+CharacterOff	ノラ
+	ノラ	悔しい	3_3
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	悔しい						記録は……おしい31分
+	ノラ	通常						次こそ、\n新記録出しちゃうから\nそれじゃあまたねー
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ノラ	私服				0
+Bgm	平和
+FadeIn	black					.3
+	ノラ	私服						ふむふむ……今日の配信も順調、\nぶい♪
+	ノラ	私服						でも……\nもうちょっと人気でないかな……
+	ノラ	私服						もっとバズれば\nメイド人気も……あれ？
+Tween	ノラ	MoveBy	x=-10				NoWait
+	ノラ	私服						アヌビスちゃんねるが急上昇一位？\n炎上してから伸び悩んでたのに
+FadeOut	white					.3
+CharacterOff						0
+Bg	黒背景					0
+	トライアルスチル52803		エフェクト裏2			0
+	＃ｆｆｆｆｆｆ	拡大メイド	g90-70190			0
+	アヌビス	拡大メイド	g-180-70200			0
+FadeIn	white					.3
+Tween	アヌビス	PunchPosition	y=30				NoWait
+	アヌビス	拡大メイド						やぁん、ジュースこぼしちゃったぁ\nアヌビス悪くないのにぃ……
+Tween	＃ｆｆｆｆｆｆ	MoveBy	x=-30				NoWait
+	＃ｆｆｆｆｆｆ	拡大メイド						なにやってるのアヌビス\nほら、キレイにしてあげるから\nじっとしていなさい♪
+Tween	アヌビス	PunchPosition	y=10				NoWait
+	アヌビス	拡大メイド						ひゃっ♪ くすぐったいよぉ\nじゃあ、アヌビスも……えいっ♪
+Tween	アヌビス	MoveBy	x=10				NoWait
+Wait						.2
+Param	character_grayout=false
+	視聴者	<Off>						<color=blue>百合メイドいいぞー</color>
+	視聴者	<Off>						<color=blue>アヌ×ピュアてぇてぇ……！</color>
+	視聴者	<Off>						<color=red>10000ヘル\n百合の花束代です</color>
+CharacterOff	＃ｆｆｆｆｆｆ
+	黒グラデーション		エフェクト裏
+	アヌビス	拡大メイド				.3		（にやっ、計画通り……！）
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ノラ	私服				0
+FadeIn	white					.3
+Shake	ノラ		x=10				NoWait
+	ノラ	私服						ゆ、百合営業……!?\nメイドもノラちゃんと被ってる！
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	私服						メイドが増えるのは嬉しいけど、\nぜったいお金儲け狙いだよぉ……！
+Tween	ノラ	MoveBy	x=-20				NoWait
+	ノラ	私服						メイド魔界ちゅーばーの座と、\nメイドの誇りを守るために、\nアヌビスチャンネルに勝たないと……
+Tween	ノラ	MoveBy	x=40				NoWait
+	ノラ	私服						でもどうしたら……\n百合……営業……カップル……
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	私服						はっ！ これだ……！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場1F					0
+	ノラ	本気	画面外_右			0
+	ディーア	通常2				0
+Bgm	コメディ
+FadeIn	black					.3
+	ディーア	通常2						ふぅ……\n任務も終わったし、のんびり<dash=2>
+Se	走る
+Tween	ノラ	MoveBy	x=-500 time=1				NoWait
+Wait						1
+	ノラ	本気						ご主人くん、はっけーん\nちょっと来てー
+Se	ピューン
+Tween	ノラ	MoveBy	x=600 time=1				NoWait
+Tween	ディーア	MoveBy	x=600 time=1				NoWait
+	ディーア	絶望2						うわぁああああああああ!?
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	絶望2	p3b			0
+	ノラ	通常	p7			0
+Wait						1
+Bgm	作戦会議
+Param	character_grayout=true
+FadeIn	black					.3
+	ノラ	通常						ということでご主人くん、\nカップル配信しようよ
+	ディーア	絶望2						…………意味がわからないけど？
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	通常						チャンネルを盛り上げるために\nご主人くんの力を借りたいんだよ
+Tween	ノラ	MoveBy	x=-20				NoWait
+	ノラ	通常						ノラちゃんメイドだし、\nカップル配信がいいでしょ？
+	ディーア	汗2						いや、どんな理屈……？
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	本気						とにかく\n一緒にイチャイチャしてよー
+	ディーア	怪しい2						そもそも、オレが配信に出ても\n人気が上がったりするか？
+Tween	ノラ	MoveBy	x=-10				NoWait
+	ノラ	通常						ご主人くん、魔剣に大人気だし\nえらい人にも知り合い多いでしょ？\n需要たっぷりだと思うんだよね
+	ディーア	汗2						いわれてみるとそんな気も……！
+Tween	ノラ	MoveBy	x=-30				NoWait
+	ノラ	怪しい						ご主人くん\nノラちゃんを助けてよー\nセクハラしてもいいからー
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						……わかった！\nセクハラはしないけど協力する！\nこれでも演技には自信あるからな！
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	通常						ほんと？ やったー♪\nそれじゃあ打ち合わせね？\n今回の企画は<dash=2>
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.3
+Bg	酒場_宿屋					0
+CharacterOff						0
+	ノラ	通常				0
+Wait						1
+FadeIn	black					.3
+	ノラ	通常						じゃあ、始めるよ\nご主人くん
+CharacterOff
+	ディーア	笑い2						ああ、任せておけ！
+FadeOut	white					.3
+CharacterOff						0
+Bg	黒背景					0
+	トライアルスチル52802A		エフェクト裏2			0
+	トライアルスチル52802		エフェクト裏			0
+	ノラ	通常	3_3			0
+Bgm	わくわく
+Param	character_grayout=false
+FadeIn	white					.3
+	ノラ	通常						ぶいぶい、ハローワールド
+	ノラ	通常						今日は特別企画\n豪華ゲストが来てくれたんだよ？\nゲストはこちら
+	ディーア	笑い2	2_3			.5		…………
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	通常						そう、ノラちゃんのご主人くん♪\n今日は二人でカップル配信していくよ
+	ノラ	通常						ということで今日の企画は<dash=2>\nご主人くん攻略RTA♪
+	ディーア	絶望2						ナンダッテー
+	ノラ	通常						…………
+	ノラ	通常						ご主人くんを照れさせたら\nノラちゃんの勝ちだよ……！
+	ディーア	絶望2						ソウナンダー
+	ノラ	通常						ノラちゃん、がんばるよー
+	ディーア	絶望2						ガンバッテー
+StopBgm
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	絶望2	p3			0
+	ノラ	通常	p7			0
+FadeIn						.3
+	ノラ	通常						…………ご主人くん
+CharacterOff	ディーア
+Bgm	緊迫
+	ノラ	拡大怪しい	エフェクト表					なんで棒読みなの……！
+CharacterOff
+	ディーア	絶望2	p3
+	ノラ	怪しい	p7
+Tween	ノラ	MoveBy	x=-20				NoWait
+	ノラ	怪しい						ご主人くん\n自慢の演技力はどうしたの……!?
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望2						な、なんかカメラを意識したら\n緊張してきて……！
+Shake	ノラ		x=5				NoWait
+	ノラ	悔しい						それ、始まってから言うかー？
+Bgm	コメディ
+Tween	ノラ	MoveBy	x=30				NoWait
+	ノラ	怪しい						いや、待ってよ？\nこれは逆に大チャンス？
+	ノラ	通常						ほんとにご主人くんを攻略して、\n視聴者もゲットできちゃったり？
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	通常						よーし、\nゲームスタート♪
+	ディーア	驚き2						え……？
+Param	character_grayout=false
+CharacterOff							NoWait
+	ノラ	拡大通常	エフェクト表
+	オーラ桃		エフェクト裏
+	ノラ	拡大通常	エフェクト表					ご主人くん\nご飯にする、お風呂にする？\nそれともメ・イ・ド？
+Param	character_grayout=true
+CharacterOff
+	ノラ	通常	p7
+	ディーア	絶望2	p3
+	ディーア	絶望2						メイドデ……
+	ノラ	通常						それじゃあノラちゃん式マッサージ\nはじめるよー
+Tween	ノラ	MoveBy	x=-50				NoWait
+Tween	ノラ	PunchPosition	y=50				NoWait
+	ノラ	通常						よいしょっと
+Se	ポップイン
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+	ノラ	拡大胸	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.2
+	ディーア	<Off>						ウワー
+	ノラ	拡大胸						むむ、ご主人くん\nもっと気持ちよさそうな声出してよ
+	ディーア	<Off>						そんなこと言われても……！
+	ノラ	拡大胸						じゃあ、演技も忘れちゃえ\nえいえい、ぎゅーっ♪
+Se	ポップイン
+Tween	ノラ	PunchPosition	y=20				NoWait
+Wait						.2
+Se	ポップイン
+Tween	ノラ	PunchPosition	y=20				NoWait
+	ディーア	<Off>						おうふっ！ あ、圧が強い……！
+Param	character_grayout=true
+CharacterOff
+	ノラ	怪しい	2_2
+	ディーア	絶望2	1_2
+	ノラ	怪しい						ちょっとセンシティブだけど、\nこういうほうが視聴者受けがいいはず
+	ノラ	通常						さあ、ご主人くんも\nいいリアクションを……
+	ディーア	絶望2						す、スゴイナー
+StopBgm
+	ノラ	怪しい						…………
+Bgm	絶望
+Shake	ノラ		x=5				NoWait
+	ノラ	怪しい						演技が、演技が下手すぎる……！\nこのままじゃ逆効果……！
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	本気						こうなったら……！\nキノコを元気にしないと
+	ディーア	驚き2						き、キノコ!?
+	ディーア	絶望2						だめだ、そんなことしたら\nアカウントが削除されるぞ！
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	本気						これが一番早いと思います\n元気になれー、キノコ！
+Se	チャージ
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=20				NoWait
+Bgm	緊迫
+	キノコリオン							ノコッ！！！！
+CharacterOff
+	ディーア	本気2						って、キノコリオンかよ!?
+Bgm	キノコリオン
+CharacterOff
+	ノラ	通常						ハプニング用に準備してまして\nほら私、メイドだし
+	ノラ	拡大通常	エフェクト表					ノラちゃんのチャンネルのために、\nコラボ、いってみよー
+If	isdebug==true
+CharacterOff
+Jump	*G_528_02
+EndIf
+EndScenario
+*G_528_01_01
+Tween	トライアルスチル52802A	MoveBy	y=25 time=0.1				NoWait
+Wait						.3
+Tween	トライアルスチル52802A	MoveBy	y=28 time=0.1				NoWait
+Wait						.3
+Tween	トライアルスチル52802A	MoveBy	y=28 time=0.1				NoWait
+Wait						.3
+Tween	トライアルスチル52802A	MoveBy	y=30 time=0.1				NoWait
+Wait						.3
+Tween	トライアルスチル52802A	MoveBy	y=30 time=0.1				NoWait
+EndThread
+
+# G_528_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋					0
+Param	character_grayout=true
+	ディーア	絶望2	p3			0
+	ノラ	通常	p7			0
+FadeIn	white					.5
+	ノラ	通常						グッドゲーム、じーじー\n命令は完全に実行したよ、ご主人くん
+	ディーア	絶望2						もうドタバタしすぎて、\nなにがなんだか……
+Tween	ノラ	MoveBy	x=20				NoWait
+	ノラ	通常						ここまでやったら、\nコメントとかマカチャも……
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	怪しい						え゛っ……!?
+Tween	ディーア	MoveBy	x=20				NoWait
+	ディーア	驚き2						ノラ？\nいったい、どうした……
+FadeOut	black					.2
+Bg	黒背景					0
+CharacterOff						0
+	トライアルスチル52802B		エフェクト裏			0
+	トライアルスチル52802		エフェクト表			0
+Param	character_grayout=false
+FadeIn	black					.2
+Wait						.5
+	ノラ	<Off>						し、視聴者が一桁に……!?
+	視聴者	<Off>						<color=blue>ご主人くんが棒過ぎて\n営業感がすごかったです</color>
+CharacterOff
+Bg	酒場_宿屋
+	ノラ	怪しい	p7
+	ディーア	怒り2	p3
+Param	character_grayout=true
+Shake	ノラ		x=5				NoWait
+	ノラ	怪しい						そ、そんなぁ……\nこうなったら案件剥がれるのを覚悟で\nご主人くんと<dash=2>
+StopBgm
+	ディーア	通常2						…………
+Tween	ディーア	MoveBy	x=30				NoWait
+	ディーア	通常2						なあノラ、そういうのは、\n違うんじゃないかな？
+Bgm	凱旋
+	ノラ	本気						え……？
+	ディーア	通常2						無理なコラボも変な企画も、\n本当にやりたいことじゃないだろ？
+	ディーア	怒り2						魔界ちゅーばーになったのは、\n好きなものがあるからだろ？\n……伝えたいものがあるんだろ？
+	ディーア	笑い2						だったら、\nそれを素直に表現するべきだと思うな
+Tween	ノラ	MoveBy	x=10				NoWait
+	ノラ	悔しい						で、でも……\nそれで人気が出なかったら
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						それでも、\n理解してくれる人は残ってくれるさ
+	ディーア	通常2						なにより、\n目標を見誤ったら苦しいのは自分だ\nノラが納得できる道を選ぼう
+Tween	ノラ	MoveBy	x=-10				NoWait
+	ノラ	本気						私が納得できる、道……
+	ディーア	笑い2						大丈夫、演技はできないけど\nオレも精一杯協力するから
+	ディーア	笑い2						ノラがメイドなら、\nオレはマスターだからな
+	ディーア	通常2						好きなことをやってる\nノラのほうが可愛いと思うぞ!!
+	ノラ	本気						…………
+Shake	ノラ		x=3				NoWait
+	ノラ	悔しい						やば、どこでフラグ立ったんだろ\nすごいイベント来てる
+	ノラ	通常						クリティカル、もらっちゃった……
+Tween	ノラ	MoveBy	x=-10				NoWait
+	ノラ	通常						でも、ご主人くんの言うとおりかも\n好きなことを好きなように、か
+	ノラ	本気						じゃあ、今度動画に出る時は\nご主人くんをちゃんと紹介しないと
+	ノラ	通常						大好きな私のご主人くんだって
+	ディーア	驚き2						え……？
+	ノラ	通常						まあ、そういうエンディングは追々
+	ノラ	本気						とりあえず\nチャンネルの存続方法を……
+StopBgm
+	ノラ	怪しい						って、あれ？
+FadeOut	black					.2
+Bg	黒背景					0
+CharacterOff						0
+	トライアルスチル52802		エフェクト表			0
+Bgm	コメディ
+Param	character_grayout=false
+Thread	*G_528_02_01
+FadeIn	black					.2
+Wait						1
+	ノラ	<Off>						なんでコメントがこんなに……？
+	ノラ	<Off>						マカチャもたくさん……
+FadeOut	black					.2
+WaitThread	*G_528_02_01	TRUE
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	驚き2	p3			0
+	ノラ	本気	p7b			0
+Param	character_grayout=true
+FadeIn	black					.2
+	ノラ	本気						…………あ
+	ノラ	本気						ご主人くん\nカメラ、切り忘れてるみたい
+	ディーア	驚き2						……へ？
+	ノラ	通常						視聴者さんすごく増えてるし、\nガチ恋疑惑、できちゃったね\nぶい♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						ぶいじゃないって、ぶいじゃ!?
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望2						ど、どうするんだ!?\n生配信だろ!? 魔界中に流れただろ!?\n魔剣のみんなにも<dash=2>
+CharacterOff
+	アヌビス	メイド	画面外_右
+	＃ｆｆｆｆｆｆ	メイド	画面外_右_b
+Se	走る
+Tween	アヌビス	MoveBy	x=-850 time=1				NoWait
+Tween	＃ｆｆｆｆｆｆ	MoveBy	x=-550 time=1				NoWait
+	アヌビス	メイド						マスター!!\nノラちゃんとガチ恋ってほんと!?
+	＃ｆｆｆｆｆｆ	メイド						私たちというものが\nありながら！
+	アヌビス	メイド						もうゆりゆりしてる暇ないって！\n説明してよぉ、マスター!!
+CharacterOff
+	ノラ	本気						アヌビスちゃん\n今、そんなこと言ったら……
+CharacterOff
+Bg	黒背景
+	トライアルスチル52803		エフェクト表
+Param	character_grayout=false
+	視聴者	<Off>						<color=blue>アヌビスちゃん、\n百合は営業だったんですね</color>
+	視聴者	<Off>						<color=blue>失望しました\nアヌビスのファンやめます</color>
+CharacterOff
+Bg	酒場_宿屋
+	ノラ	本気						あ……アヌビスちゃんねるの\n登録者数がゼロになった……
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望2	p3
+	アヌビス	メイド	p7
+	アヌビス	メイド						アヌビス悪くないよ!!\nなんとかして、マスター!!
+	ディーア	絶望2						オレのほうが\nなんとかして欲しいって！
+Param	character_grayout=false
+	集中線		エフェクト表
+	二人	<Off>						もう配信はこりごりだー!!
+StopBgm
+CharacterOff
+	ノラ	通常						ふぅ……
+FadeOut	black					.3
+Bg	黒背景					0
+CharacterOff						0
+	トライアルスチル52802		エフェクト裏			0
+	ノラ	通常	3_3			0
+Bgm	わくわく
+FadeIn	black					.3
+	ノラ	通常						はい、というところで、\n今日のコラボ配信は終わりだよー
+	ノラ	通常						色々あったけど、\n楽しんでもらえたかな？
+Tween	ノラ	PunchPosition	y=30				NoWait
+	ノラ	通常						ご主人くんとのドキドキコラボ\n大成功、ぶいぶい♪
+	ノラ	拡大通常	エフェクト表					それじゃあ、\n次のノラネコチャンネルも\n見てねー♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_528_01
+EndIf
+EndScenario
+*G_528_02_01
+	トライアルスチル52802C		g00-35015			0
+Tween	トライアルスチル52802C	MoveBy	y=20 time=0.1				NoWait
+Wait						.3
+Tween	トライアルスチル52802C	MoveBy	y=30 time=0.1
+Wait						.3
+Tween	トライアルスチル52802C	MoveBy	y=30 time=0.1				NoWait
+Wait						.3
+Tween	トライアルスチル52802C	MoveBy	y=30 time=0.1
+Wait						.3
+Tween	トライアルスチル52802C	MoveBy	y=30 time=0.1				NoWait
+Wait						.3
+Tween	トライアルスチル52802C	MoveBy	y=30 time=0.1
+Wait						.3
+Tween	トライアルスチル52802C	MoveBy	y=30 time=0.1				NoWait
+Wait						.3
+Tween	トライアルスチル52802C	MoveBy	y=10 time=0.1
+Wait						.3
+Se	ルビードロップ
+Tween	トライアルスチル52802C	MoveBy	y=70 time=0.1				NoWait
+Wait						.5
+Se	ルビードロップ
+Tween	トライアルスチル52802C	MoveBy	y=90 time=0.1				NoWait
+EndThread

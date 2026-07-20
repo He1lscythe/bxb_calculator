@@ -1,0 +1,1769 @@
+# E_1037_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	教会											この列は何をしているのかのメモ
+												赤い行は演出都合でセリフを追加したところです
+Bgm	ガヤA_BGM					2
+FadeIn	black					2						★フェードインのポイントをこのあたりに持ってきてチャイムを鳴らしながらフェードインにする
+	　　　　　　　　　　							\n  勇ロトリアス学園 - 第245-A教室
+Bgm	魔剣の日常
+	歴史科教師ソティア							え～、こうして魔界歴1113年、\n魔界の地殻変動が原因とされる\n巨大な魔力振が生じましてぇ……
+	歴史科教師ソティア							各地に今もその爪痕を残す異変を\n引き起こしたわけであります
+	歴史科教師ソティア							え～、これが\nいわゆる六大異変……
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A		1_2					ふぁ～、何回目だよこの話
+	勇者B		2_2					ソティアの講義は\n催眠術みたいなもんだぜ……
+StopBgm
+Se	回想											ブワッ！っていうSEと同時に一瞬で暗転、\n音を聞かせるだけ待機したあと映画でよく使われる低めのドーンって音と同時にフェードインする\n0秒なのは急展開と不穏さの表現 緩急を強くつけると非日常感や緊張感が強くなるので、冒頭とか前段でよく使うやつ！
+FadeOut	black					0
+CharacterOff						0
+	アリス=ピュア=ロスト	ぺろり？				0
+Bg	夜空					0
+Wait						3
+Se	ドーン					0
+FadeIn	black					0
+	アリス=ピュア=ロスト	ぺろり？						<dash=4>……
+Se	強風	TRUE				5
+	カルバノグ	慌て						あ、アリス様？\n本当に、ここに転移するんですか？\nこの……教室に？
+	アリス=ピュア=ロスト	笑い？						ええ♪\nあなたも知ってるでしょう？\nアリスが一番嫌いなもの♪
+	カルバノグ	慌て						それは……
+	アリス=ピュア=ロスト	通常半目？						わかったなら、\nさっさと準備をなさい？
+	カルバノグ	慌て						……はい
+StopSe						1						音は画面と一緒にフェードアウト
+FadeOut	black					.5
+CharacterOff						0						場面変わってメメモリオンリー
+Bg	教会					0
+	歴史科教師ソティア					0
+Wait						.5						音が完全に消えるまで待つよ
+FadeIn	black					.5						音が消えたら学校になってる
+Bgm	魔剣の日常
+	歴史科教師ソティア							え～、この異変は\n魔鍵ユグドラシルがぁ……
+	歴史科教師ソティア							魔界の魔力バランスを保つために\n作ったとする説がありましてぇ……
+CharacterOff
+	勇者A		1_2									メメモリが天井にぶっ刺さる演出を作るのちょっと手間なので\nここで授業を受けている勇者たちに画面を切り替える
+	勇者B		2_2
+	勇者A							はぁ、全然時計進まねえなぁ
+	勇者B							なんかおもしれぇことねえかなぁ
+	歴史科教師ソティア	<Off>						……であるからしてぇ
+	歴史科教師ソティア	<Off>						我らが聖地スイルノームも\nこの異変の力によって守らッ
+Se	打2
+FadeOut	white					.1						画面外でなにかおきたようす
+Se	火事
+Shake	Graphics		x=5 y=5				NoWait
+FadeIn	white					.1
+StopBgm
+Wait						.5
+	勇者A							まもら……？
+	勇者B							……お、おい見ろあれ！
+FadeOut	black					.3
+CharacterOff						0						マミメメモリ　上半分を黒グラデーションで染めたいので専用でスチルつくるよ
+	イベントスチル1037C		エフェクト表			0						余裕があったら揺らしたいけどRotateの管理めんどくせ～～～～！！！！ってなってる
+Shake	イベントスチル1037C		x=2 time=1.8				NoWait
+FadeIn	black					.3
+Wait						1.5
+Bgm	絶望
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							ソティアが……\n天井に、刺さってる……
+CharacterOff
+Param	character_grayout=false
+	アリス=ピュア=ロスト	黒？				3
+	アリス=ピュア=ロスト	黒？						魔界の歴史なんて、\n学ばないのが正解よ？\nだってこの魔界は……
+StopBgm
+	アリス=ピュア=ロスト	笑い？						もうすぐアリスが\n終わらせちゃうんだから……♪
+CharacterOff
+Param	character_grayout=true
+	勇者A		1_2
+	勇者B		2_2
+Bgm	緊迫
+	勇者B							な、なんだあいつ……
+	勇者A							ど、どうしよう！\n他の先生は……
+CharacterOff												ここからはテキスト未定なので仮組～～～～
+	勇者リーセル	通常
+	勇者リーセル	通常						不埒な侵入者よ！\nこの由緒正しき勇者の学び舎を\n襲撃するとは良い度胸だな？				まずバルト先生を単体で出す
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							リーセル！\n模擬戦闘50連勝のアイツなら……
+CharacterOff
+StopBgm
+Se	打2
+	勇者リーセル	黒						がッ				バルトさんも死んでもろてな
+FadeOut	red					.2
+Wait						.5						赤フェードで血をばらまいてから顔暗くなって横揺れして倒れて消える
+Shake	勇者リーセル		x=5				NoWait
+FadeIn	red					.3
+CharacterOff	勇者リーセル					.7
+Wait						.7
+Se	倒れる
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							嘘だろ……\nリーセルが、一瞬で……
+CharacterOff
+Bgm	勇者バトル
+	魔科学教師ロンダイク	通常
+	魔科学教師ロンダイク	通常						全員落ち着け\n侵入者は我々が排除する
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者B							ロンダイク先生！
+	勇者A							よかった、\nロンダイク先生さえいれば……
+CharacterOff
+	魔科学教師ロンダイク	通常
+	魔科学教師ロンダイク	通常						観念しろ、侵入者\n俺がこの学校にいるかぎり、\n生徒には指一本触れさせない
+CharacterOff
+	アリス=ピュア=ロスト	通常半目？
+	アリス=ピュア=ロスト	通常半目？						あなた、頭が高いわね……
+CharacterOff
+	魔科学教師ロンダイク	通常
+	魔科学教師ロンダイク	通常						何……？
+CharacterOff
+Param	character_grayout=true
+	勇者A		1_2
+	勇者B		2_2
+	魔科学教師ロンダイク		画面外_右
+Se	闇1
+	魔科学教師ロンダイク							がああっ!!
+	勇者A							先生!!
+	勇者B							なんだあれ、見えない何かに、\nねじ伏せられて……
+CharacterOff
+	アリス=ピュア=ロスト	笑い？
+	アリス=ピュア=ロスト	笑い？						あら、上手にお辞儀できるじゃない♪
+CharacterOff
+	魔科学教師ロンダイク							ぐっ……ガキが……\nE.D.E.N.を、舐めるなよ……!!
+	実験霊獣		エフェクト裏			2						utageでのサイズ調整めんどいので霊獣は画像で書き出す前提でエフェクト裏配置\nバルト先生の後ろに数秒かけてフェードイン
+	魔科学教師ロンダイク							実験霊獣の性能を試すいい機会だ
+	魔科学教師ロンダイク							後悔しろ侵入者、\n貴様はこの霊獣が小間切れに……
+	実験霊獣							Ah<dash=6>!!				潰れる前になんか威勢よく叫ばせたほうがあっけない感じ出そうだなと思うなどしました
+StopBgm
+Se	水1
+FadeOut	white					.1
+Shake	Graphics		x=5 y=5				NoWait
+CharacterOff	実験霊獣					1
+FadeIn	white					.1
+Wait						1
+	魔科学教師ロンダイク							ば、しゃ……？
+Se	斬2
+FadeOut	red					.2
+	魔科学教師ロンダイク	黒										バルトさんも死んでもろてな
+Wait						.5						赤フェードで血をばらまいてから顔暗くなって横揺れして倒れて消える
+Shake	魔科学教師ロンダイク		x=5				NoWait
+FadeIn	red					.3
+Wait						.7
+Se	倒れる
+CharacterOff	魔科学教師ロンダイク					1
+Wait						1
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							ロンダイク先生!!
+	勇者B							あ、あんなでかい霊獣が……\n一瞬で、つぶれた……？
+FadeOut	white					.3
+Bgm	魔王バトル
+CharacterOff						0
+	イベントスチル1037A		エフェクト表			0						名称アリス\n逆光でなんかかっこいいやつ。絵面は引き
+Se	パリン
+FadeIn	white					.3
+	イベントスチル1037A							さぁ、退屈な講義はおしまい♪
+	イベントスチル1037A							ここからは、愉しい愉しい<dash=2>
+	イベントスチル1037B		エフェクト表
+	イベントスチル1037B							<dash=2><ruby=ティーパーティー>魔界崩壊</ruby>の時間よ♪				★\n(逆光アリスのスチル)\nここからは、愉しい愉しい──\n<改ページ>\n(上記の顔拡大)\n──お茶会の時間よ♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_02
+EndIf
+EndScenario
+	ディーア
+	リディ
+
+# E_1037_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	研究所A
+	ロルリアンレット	通常H
+FadeIn	black					1						フィーリングだけどちょっと長く取りたいなー
+	ロルリアンレット	通常H						遅かったわね、魔剣使い
+CharacterOff
+	ディーア	汗2
+	ディーア	汗2						すみません、いつも通れる場所が\n今日はなぜか通行止めで……
+	ディーア	驚き2						あの、いつも急ですけど\n今日はいつにもまして急ですね？
+CharacterOff
+	ロルリアンレット	ニヤリH
+	ロルリアンレット	ニヤリH						文句なら魔剣機関に言ってちょうだい\n諸悪の根源は彼らなんだから
+	ロルリアンレット	怪しいH						まぁ、今回は事が事なだけに\n焦る気持ちもわからなくはないけどね
+CharacterOff
+	ディーア	驚き2
+	ディーア	驚き2						事が事って……\n何が起きたんですか？
+CharacterOff
+	ロルリアンレット	怪しいH
+	ロルリアンレット	怪しいH						現在発生している事象は二つよ
+	ロルリアンレット	怒りH						一つ目は……\nあの引きニートが\nエイビシュタットから消えたわ
+CharacterOff
+	ディーア	驚き2
+	ディーア	驚き2						……アリス様が？
+	ロルリアンレット	怒りH						正直、こっちは大したことじゃないの\nこれまでも無断で消息を絶つ事自体は\nよくあったから
+	ロルリアンレット	怪しいH						知っての通り、あの引きニートは\n暇つぶしと魔剣の存続にしか\n興味がないわ
+	ロルリアンレット	怪しいH						きっと今回も、\n魔界のどこかで良からぬことを……
+CharacterOff
+	黒グラデーション		エフェクト表									黒グラデで影から声だけ聞こえているように見せる演出
+	？？？？	<Off>						引きニートがどうしたって？\n図書館に引きこもりの<ruby=フロイライン>お嬢様</ruby>
+CharacterOff
+	ロルリアンレット	驚きH
+	ロルリアンレット	驚きH						この声は……
+CharacterOff
+Param	character_grayout=false
+	イミティション=アリス	通常s
+	ディーア	<Off>						アリス様！
+	イミティション=アリス	通常s						……の姿をした大嘘つきだ\nあはははは!!
+CharacterOff
+Param	character_grayout=true
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	怪しい2						なんだ、イミティションの方か……
+	イミティション=アリス	通常s						ふはは！ 気づくのが遅いじゃないか\n魔剣使い、ホワイトラビットは\n行ってしまったぞ？
+CharacterOff
+	ロルリアンレット	怪しいH
+	ロルリアンレット	怪しいH						……これ以上不毛な時間が過ぎるなら\nこの偽引きニートを追い出すけど
+CharacterOff
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2						あ、いや、大丈夫です！
+	イミティション=アリス	通常s						諸々不毛なのは貴様ではないか？\n図書館の<ruby=フロイライン>お嬢様</ruby>？
+CharacterOff
+	ロルリアンレット	怪しいH
+	ロルリアンレット	怪しいH						……まぁいいわ、\n道化は無視して話を先に進めましょう
+	ロルリアンレット	怒りH						二つ目の事象が本題よ\nこれはまだ箝口令が敷かれて\n表には出ていない情報だけど……
+	ロルリアンレット	怪しいH						勇ロトリアス学園に\n不審者が侵入したそうよ
+CharacterOff
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2						勇ロトリアスっていうと……\nE.D.E.N.の勇者学校ですよね？
+CharacterOff
+	ロルリアンレット	怪しいH						ええ、勇者学校の中でも名門ね\n名のある勇者を多数輩出してるわ
+CharacterOff
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2						勇者学校に、侵入なんて……
+CharacterOff
+	ロルリアンレット	怒りH
+	ロルリアンレット	怒りH						大胆不敵という他ないわね
+	ロルリアンレット	怪しいH						その上、侵入した不審者は……\n警備を蹴散らして、今も校内で\n破壊活動を続けているそうよ
+CharacterOff
+	ディーア	悔しい2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	悔しい2						そんな……
+CharacterOff
+	ロルリアンレット	怪しいH
+	ロルリアンレット	怪しいH						今回の依頼は、この不審者の確保よ\n確保が難しい場合は、\n討伐してもかまわない
+CharacterOff
+	ディーア	悔しい2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	悔しい2						討伐……\nそれだけ手強い相手ってことですね
+CharacterOff
+	ロルリアンレット	通常H
+	ロルリアンレット	通常H						……まぁ、そうね\nどう、引き受ける？
+CharacterOff
+	ディーア	怒り2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	怒り2						……わかりました\n学校が襲われるなんて、\n放っておいちゃいけない気がするので
+CharacterOff
+	ロルリアンレット	悪い顔H
+	ロルリアンレット	悪い顔H						それじゃあよろしく頼むわ\nまぁ、元からあなたに断る\n選択肢なんてなかったのだけど
+CharacterOff
+	ディーア	汗2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	汗2						なかったんですか……
+CharacterOff
+	ロルリアンレット	通常H
+	ロルリアンレット	通常H						それと、最後に一つ忠告よ
+	ロルリアンレット	怪しいH						侵入者に関する情報が\n魔剣機関から届いてる
+	ロルリアンレット	怪しいH						学園への侵入者は……
+StopBgm
+	ロルリアンレット	怒りH						「アリス」と名乗っているそうよ
+FadeOut	black					0						インパクト重視のアウトから普通の場面転換のイン
+CharacterOff						0
+Bg	山岳A					0
+	　　　　　　　　　　
+Wait						2
+FadeIn	black					1
+	　　　　　　　　　　							\n　　  　宗教国家エデン某所
+Bgm	平和
+CharacterOff
+	ディーア	怒り2	1_2
+	イミティション=アリス	通常s	2_2
+	イミティション=アリス	通常s						ふはは！あのあの<ruby=フロイライン>お嬢様</ruby>、\nなかなか物騒でいい依頼を\n寄越すじゃないか！
+	ディーア	怒り2						笑いごとじゃないぞイミティション\n勇者の養成学校が襲撃されて、\n侵入者がつかまらないなんて…
+	ディーア	怒り2						相手は、相当な手練れに違いない
+	イミティション=アリス	通常s						まぁ、元・六大魔王の名を\n騙るのだからな、多少は\nやってもらわねば困る
+	ディーア	汗2						お前も騙ってるんだけどな\n……あれ？
+StopBgm
+	イミティション=アリス	通常s						どうした小僧、情けない顔をして
+FadeOut	black					.3
+Bg	色鮮やかな大森林					0
+CharacterOff						0						シームレスに移動させることができないので、ディーアの視線の先を見せる演出をディーアを消すことで表現
+	　　　　　　　　　　
+FadeIn	black					.3
+	ディーア	<Off>						……勇ロトリアス学園の校舎は、\nここにあったはずなんだ
+Bgm	絶望
+	イミティション=アリス	<Off>						<dash=4>ほう\n近頃の勇者は森で学ぶのだな？				手前でディーアを消したので、この背景にもう一回ディーアとイミティション=アリスを表示させて状況に入ったことを伝える必要があるためのセリフ追加
+CharacterOff
+Bgm	絶望
+	双子キノコリオンのコリ		2_2			1
+	双子キノコリオンのキノ		1_2			1.5						こいつら本当に好き
+Wait						1
+Tween	双子キノコリオンのキノ	PunchPosition	y=50				NoWait
+	双子キノコリオンのキノ							兄さん、ヘンなやつが来たよ？
+Tween	双子キノコリオンのコリ	PunchPosition	y=50				NoWait
+	双子キノコリオンのコリ							ヘンなやつ？ オレたちより？
+CharacterOff
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2						キノコリオンが……しゃべってる？
+	イミティション=アリス	通常s						最近は菌類も勇者を目指せるのだな
+	ディーア	汗2						えーっと……そこの、お二人さん？
+CharacterOff
+	双子キノコリオンのキノ		1_2
+	双子キノコリオンのコリ		2_2
+Tween	双子キノコリオンのキノ	PunchPosition	y=50				NoWait
+	双子キノコリオンのキノ							お二人さんだって！\nキノコなのに！
+Tween	双子キノコリオンのコリ	PunchPosition	y=50				NoWait
+StopBgm
+	双子キノコリオンのコリ							キノコなのに二人！\nあはははは！
+Bgm	コメディ
+CharacterOff
+	ディーア	汗2	1_2
+	イミティション=アリス	通常s	2_2
+	イミティション=アリス	通常s						なかなか不愉快な菌類だ
+	ディーア	汗2						あー、えーと、質問いいかな？
+CharacterOff
+	双子キノコリオンのキノ		1_2
+	双子キノコリオンのコリ		2_2
+Tween	双子キノコリオンのキノ	PunchPosition	y=50				NoWait
+	双子キノコリオンのキノ							いいよ質問、キノコだけど！
+Tween	双子キノコリオンのコリ	PunchPosition	y=50				NoWait
+	双子キノコリオンのコリ							キノコに質問、すればいいよ！
+CharacterOff												迷いの入り口みたいな演出でソロにしてみる
+	ディーア	汗2
+	ディーア	汗2						もし知ってたらでいいんだけど……\n勇ロトリアス学園を知らないか？
+CharacterOff
+StopBgm
+	双子キノコリオンのキノ		1_2
+	双子キノコリオンのコリ		2_2
+Tween	双子キノコリオンのキノ	ScaleBy	x=1.2 y=1.2			40	NoWait					ほんのすこしずつせまってくる
+Tween	双子キノコリオンのコリ	ScaleBy	x=1.2 y=1.2			40	NoWait
+	双子キノコリオンのキノ							知ってるけど、今はわからない！
+	双子キノコリオンのコリ							そろそろもっと、わからなくなる！
+CharacterOff
+Bgm	絶望
+	ディーア
+	ディーア	汗2						それって、どういう……？
+CharacterOff
+	双子キノコリオンのキノ		1_2
+	双子キノコリオンのコリ		2_2
+Tween	双子キノコリオンのキノ	ScaleBy	x=1.2 y=1.2			20	NoWait
+Tween	双子キノコリオンのコリ	ScaleBy	x=1.2 y=1.2			20	NoWait
+	双子キノコリオンのキノ							ダンスをしたら、教えてあげよう！
+	双子キノコリオンのコリ							教えてあげよう、俺たちのダンス！
+CharacterOff
+Bgm	緊迫
+	ディーア	悔しい2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	悔しい2						くっ……ダンスって、結局バトルかよ
+	イミティション=アリス	通常s						いくぞ小僧、\n<ruby=ティーパーティー>キノコ狩り</ruby>のはじまりだ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_03
+EndIf
+EndScenario
+
+# E_1037_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	バトル
+Bg	色鮮やかな大森林
+FadeIn	black					0
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.1
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	色鮮やかな大森林					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	ディーア	本気2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	本気2						ダンスは見せたぞ！\nちょっと手荒だったけどな……
+StopBgm
+CharacterOff
+	双子キノコリオンのキノ		1_2
+	双子キノコリオンのコリ		2_2
+	双子キノコリオンのキノ							見せた……見せたか？
+	双子キノコリオンのコリ							見せたは、見せたな
+CharacterOff
+	双子キノコリオンのキノ		1_2
+	双子キノコリオンのコリ		2_2
+Bgm	平和
+	双子キノコリオンのキノ							手荒だけど、いいダンスだ
+	双子キノコリオンのコリ							いいダンスだけど、手荒だ
+CharacterOff
+	ディーア	怒り2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	怒り2						約束通り、勇ロトリアス学園の\n場所を教えてもらおうか
+CharacterOff
+	双子キノコリオンのキノ		1_2
+	双子キノコリオンのコリ		2_2
+StopBgm
+	双子キノコリオンのキノ							勇ロトリアス学園は、もうないよ
+	双子キノコリオンのコリ							勇ロトリアス学園は、なくなったよ
+CharacterOff
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2						……なくなった？
+CharacterOff
+	イベントスチル1037D1		エフェクト表									これは普通のアリスのシルエット\n背景エグめ&逆光(禁式･獄刀大包平=ロストのイメージ)
+	？？？？	<Off>						ええ、たった今\n勇ロトリアス学園はなくなったわ♪
+Se	雨
+	イベントスチル1037D2		エフェクト表			0						パラパラ漫画の仕組みで画面ノイズっぽい演出作る
+Wait						.1
+	イベントスチル1037D3		エフェクト表			0
+Wait						.1
+	イベントスチル1037D4		エフェクト表			0						ノイズが走ってIMTアリスピュアになる
+Wait						.1
+	イベントスチル1037D5		エフェクト表			0
+StopSe
+	？？？？	<Off>						このアリスが強制閉校して、\n跡地に国を作ることにしたの♪
+CharacterOff
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2						……お前は
+CharacterOff
+	アリス=ピュア=ロスト	笑い？						はじめまして♪\n私は第四帝国第三皇女、\nアリス=フォン=アルクトス！				※画像次第で変わるのでまだ作らない！が、基本的には上と同じ仕組みでアニメーションさせる演出になるはず！\n一応E飛ばし
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル1037E		エフェクト表_c			0						キャラ 中心顔
+	イベントスチル1037F		エフェクト裏_c			0						背景
+Tween	イベントスチル1037E	ScaleBy	x=1.2 y=1.2 time=40				NoWait
+Tween	イベントスチル1037F	ScaleBy	x=0.66 y=0.66 time=40				NoWait
+	イベントスチル1037E		エフェクト表_c					またの名を、\nアリス=ピュア=ロストよ♪
+Se	ライズ
+Wait						4.6
+CharacterOff						0
+	黒背景		エフェクト裏			0
+Se	ドーン											混ぜるかどうか考える
+	イベントロゴ1037		エフェクト表_c			0						衝撃っぽい音と同時にロゴが出る
+Tween	イベントロゴ1037	ScaleBy	x=0.7 y=0.7 time=40	linear			NoWait					ロゴはほんの少しだけ小さくなるような形で動いている
+Wait						3
+FadeOut	black					1						1秒かけてフェードアウト
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_04
+EndIf
+EndScenario
+
+# E_1037_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	色鮮やかな大森林
+CharacterOff
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2	1_2
+FadeIn	black					.5
+	ディーア	驚き2						ロスト？\nお前が……？
+CharacterOff
+	アリス=ピュア=ロスト	笑い
+	アリス=ピュア=ロスト	笑い						ええそうよ？ アリスが\nロストといったらロストなの♪
+CharacterOff
+	ディーア		1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2						でも、ロストにしては、違和感が……\nアリス様にしても、若すぎるし……
+	イミティション=アリス	通常s						小僧、くたばりたいのか？
+	ディーア	汗2						あ、いや、待ってくれ\n今のはオレの言い方が悪かった
+CharacterOff
+	アリス=ピュア=ロスト	通常半目
+	アリス=ピュア=ロスト	通常半目						あら？ それは……
+	アリス=ピュア=ロスト	ニヤリ半目						あなたたちも、アリスを止めに来た\nくだらない「魔剣使い」なの？
+	アリス=ピュア=ロスト	笑い						まったく、次から次と\n飛んで火に入る羽虫のようね♪
+	アリス=ピュア=ロスト	ニヤリ半目						アリスが手を下すまでもないわ\nルイスをお散歩させてあげましょう♪
+CharacterOff
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	イミティション=アリス	通常s						ルイス？
+CharacterOff
+	黒グラデーション		エフェクト表
+Shake	Graphics		x=5 y=5				Add
+	？？？？	<Off>						ウゥゥゥゥ……
+CharacterOff
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2						なんだこの、地鳴りは……
+CharacterOff
+Param	character_grayout=true
+	ルイス･C･アルクトス	通常？	エフェクト裏			1.5						サイズ感重視(イリヤとバーサーカーみたいな)\nアルクトスさんはアリスに合わせてBG規格で作り、アリスの背後に立たせる
+	アリス=ピュア=ロスト	笑い
+	ルイス･C･アルクトス	通常？						グゥゥゥゥゥゥ……
+	アリス=ピュア=ロスト	笑い						ご紹介するわ♪\nルイス･C･アルクトスよ♪
+	ルイス･C･アルクトス	通常？						グァァァァァアアアアアア！！！！！
+	アリス=ピュア=ロスト	通常						私のペット兼用心棒兼、元父親なの♪
+Shake	Graphics		x=5 y=5				Add
+	ルイス･C･アルクトス	通常						アアアアアアァァァァァァ！！！！！
+CharacterOff
+Param	character_grayout=true
+	ディーア	絶望2	1_2
+	イミティション=アリス	通常s	2_2
+Shake	ディーア	絶望2	x=5
+	イミティション=アリス	通常s						よく吠えるペットだな
+	ディーア	絶望2						いや、そもそも\n元父親がペットっておかしいだろ!?\nどういう家庭環境だよ……
+CharacterOff
+Param	character_grayout=true
+	ルイス･C･アルクトス		エフェクト裏
+	アリス=ピュア=ロスト
+	アリス=ピュア=ロスト	通常半目						……あなたたち、\nマナーがなってないわね？
+CharacterOff
+Param	character_grayout=true
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2						……え？
+CharacterOff
+Param	character_grayout=true
+	ルイス･C･アルクトス		エフェクト裏
+	アリス=ピュア=ロスト	ニヤリ半目
+	アリス=ピュア=ロスト	ニヤリ半目						ルイスがこんなに元気に挨拶したのに\nお返事しないなんて、\nどういう神経をしてるのかしら？
+CharacterOff
+Param	character_grayout=true
+	ディーア	絶望2	1_2
+	イミティション=アリス	通常s	2_2
+	イミティション=アリス	通常s						なんだ、あれは挨拶だったのか
+	ディーア	絶望2						どういう神経してるって、\n完全にこっちの台詞だけどな……？				ここも同上で、聞き方によっては強キャラに聞こえる「なんだ、挨拶だったのか」をアリスに言わせ、引いてるセリフはディーアに言わせたほうが良いです！
+CharacterOff
+Param	character_grayout=true
+	ルイス･C･アルクトス		エフェクト裏
+	アリス=ピュア=ロスト
+	アリス=ピュア=ロスト	通常半目						もう結構！\nこれ以上あなたたちと口を利いても\n時間の無駄よ♪
+	アリス=ピュア=ロスト	笑い						こんな魔界、\nアリスが滅ぼしてあげる♪
+Se	光1
+	オーラ青		エフェクト表			1						ルイスに何らかの信号を送る演出
+	アリス=ピュア=ロスト	ニヤリ半目						さぁルイス、餌の時間よ？
+CharacterOff	オーラ青					1
+Shake	ルイス･C･アルクトス		x=5				Add
+	ルイス･C･アルクトス							グルルルル……
+CharacterOff
+Param	character_grayout=true
+	ディーア	本気2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	本気2						まずい、来るぞ！
+CharacterOff
+	アリス=ピュア=ロスト	笑い
+	アリス=ピュア=ロスト	笑い						みぃんな食べておしまいなさい♪
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表
+	ルイス･C･アルクトス	大	エフェクト裏
+Shake	ルイス･C･アルクトス		x=5				NoWait
+	ルイス･C･アルクトス	大						ルアアアアアァァァァ!!!!
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_05
+EndIf
+EndScenario
+
+# E_1037_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bg	色鮮やかな大森林
+	ルイス･C･アルクトス		エフェクト表
+FadeIn	white					.5
+Shake	ルイス･C･アルクトス		x=5				Add					情けなく震わせる。なさけないねえ！！
+	ルイス･C･アルクトス		エフェクト表					クゥン……				パパ、サイズ小さくなっていてもいいかもなー
+CharacterOff
+	ディーア	悔しい2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	悔しい2						よし、なんとか倒したぞ……
+CharacterOff
+	アリス=ピュア=ロスト	通常半目
+Bgm	平和
+	アリス=ピュア=ロスト	通常半目						あら、だらしない番犬ねぇ\nしつけが足りなかったかしら？
+	アリス=ピュア=ロスト	笑い						あなた、なかなかやるじゃない♪\n名を名乗りなさい？\nさえずることを許可するわ♪
+CharacterOff
+	ディーア	怒り2
+	イミティション=アリス	通常s
+	ディーア	怒り2						名前は、<param=name>だ\nこっちは……
+	イミティション=アリス	通常s						数多くの名はあれど\nつまるところは「終焉の魔剣」、\nイミテーション=アポカリプスだ
+CharacterOff
+	アリス=ピュア=ロスト	ニヤリ半目
+	アリス=ピュア=ロスト	ニヤリ半目						ふぅん……♪
+CharacterOff
+	ディーア	本気2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	本気2						お前も、アリスといったな？\n好き放題暴れて……\nいったい、何が目的なんだ！
+CharacterOff
+	アリス=ピュア=ロスト	笑い
+	アリス=ピュア=ロスト	笑い						あら、言ったでしょう？\n「こんな魔界滅ぼしてあげる」って♪
+CharacterOff
+	ディーア	悔しい2	1_2
+	イミティション=アリス		2_2
+	ディーア	悔しい2						魔界を滅ぼすなんて、\nどうして、そんな大それたこと……
+CharacterOff
+	アリス=ピュア=ロスト	通常半目						あなたたちが退屈だから
+CharacterOff
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2						退屈？\nたったそれだけで……
+CharacterOff
+	アリス=ピュア=ロスト	笑い
+	アリス=ピュア=ロスト	笑い						アリスにとっては、\n充分すぎる理由だわ♪
+	アリス=ピュア=ロスト	ぺろり						元はといえばあなたたちが悪いのよ？\n満足のいくように、アリスを\n愉しませないんだもの♪
+CharacterOff
+	ディーア	悔しい2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	悔しい2						こいつ……\n本当にデタラメなやつだな
+	イミティション=アリス	通常s						全くだ\n帝王学の欠片もない
+	ディーア	通常2						でもまぁ、残念だったな\nこれでお前の野望も終わりだ
+CharacterOff
+	アリス=ピュア=ロスト	通常						残念？\nあなたの顔のこと？
+CharacterOff
+	ディーア	絶望2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	絶望2						こいつ……\n可愛い顔してなんて辛辣なんだ……
+	イミティション=アリス	通常s						小僧、そうめげるな\nあの菌類の双子よりはマシな面だぞ
+	ディーア	絶望2						イミティション、\nお前慰める気あるか……？
+	ディーア	悔しい2						とにかく、\nこの魔界には、今の日常が\n続いてほしい人たちが沢山いるんだ
+	ディーア	怒り2						お前が「愉しくない」なんて理由で\nこの魔界を滅ぼさせはしないさ
+CharacterOff
+	アリス=ピュア=ロスト	笑い
+StopBgm
+	アリス=ピュア=ロスト	笑い						ふぅん……あなた、\nいつまでそんな強気なことが\n言っていられるかしらね？
+CharacterOff
+	ディーア	悔しい2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	悔しい2						……何？
+CharacterOff
+	アリス=ピュア=ロスト	ぺろり
+	アリス=ピュア=ロスト	ぺろり						あの湖、なんていうんでしたっけ？\nこの大陸にある、綺麗な湖♪
+CharacterOff
+	ディーア	悔しい2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	悔しい2						……まさか、六大異変\nタークディアバーブのことか？
+CharacterOff
+	アリス=ピュア=ロスト	笑い
+	アリス=ピュア=ロスト	ニヤリ半目						そうそう、タークディアバーブ♪
+	アリス=ピュア=ロスト	笑い						アリスね、あそこをもっと\n元気にしてあげようと思うの♪
+Bgm	緊迫
+CharacterOff
+	ディーア	驚き2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2						なっ……
+CharacterOff
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1						カルバを呼び出す
+	アリス=ピュア=ロスト	笑い	1_2_b					さぁ白うさぎ、\n私をあの場へ連れていきなさい♪
+CharacterOff	オーラ青					1
+Param	character_grayout=true
+	カルバノグ	慌て	2_2			1		で、でも、アリス様……？\nあそこは、私たちにとっても……
+	アリス=ピュア=ロスト	通常半目						あら、私に歯向かう気？\nあの人がなんていうかしらね♪
+	カルバノグ	慌て						そ、それは……
+	アリス=ピュア=ロスト	ニヤリ半目						アリス、いますぐ\n綺麗な湖面が見たいんだけど？
+	カルバノグ	慌て						……では
+Se	光1
+Param	character_grayout=false
+	オーラ青		エフェクト表			1
+	アリス=ピュア=ロスト	笑い						わかればいいのよ♪
+Se	光3
+FadeOut	white					.2						カルバを呼び出したときと同じ演出で消える
+CharacterOff	カルバノグ					0
+CharacterOff	アリス=ピュア=ロスト					0						オーラだけ残す
+	　　　　　　　　　　
+FadeIn	white					.2
+Wait						.5
+CharacterOff
+	ディーア	本気2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	本気2						あっ、待て!!
+CharacterOff												残ってるワープ(オーラ)の残滓
+	オーラ青（アリスPL）	通常	エフェクト表			0		此処から先は不思議の国よ？
+	オーラ青（アリスPL）	通常						ついてくるのは構わないけど\nせいぜい覚悟することね♪
+CharacterOff						1						ここでオーラが一秒かけて消え、アリスピュアロストの声が聞こえなくなる
+Param	character_grayout=true
+Wait						1
+	ディーア	悔しい2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	悔しい2						どこまでも人を食った奴だな……
+	ディーア	本気2						仕方ない、オレたちも森を抜けて\nタークディアバーブに向かうぞ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_06
+EndIf
+EndScenario
+
+# E_1037_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	黒背景
+Param	character_grayout=false
+	イベントスチル1037G		エフェクト表
+FadeIn	black					1
+												ここのスチルはどう動かしてもあんまり良い効果が得られなさそうなので動きなしで
+	アネセサリ構成員	<Off>						例のアリスが\nタークディアバーブに\n向かったそうです
+	？？？？	<Off>						……そうか\n可愛いものだな
+	？？？？？？？？	<Off>						何悠長なこと言ってるの、\nこのまま好きにやらせたら……
+	？？？？	<Off>						意図を知れば、\n君だって可愛いと思うさ				「あの子の」などを付け加えてアリスぴゅあより上に立っている人である感を出したいです！
+	？？？？？？？？	<Off>						意図？
+	？？？？	<Off>						それに……\nなかなか巧妙な手じゃないか
+	アネセサリ構成員	<Off>						……いかがなされますか？
+	？？？？	<Off>						密使を送れ\n万が一に備えてな
+	？？？？	<Off>						これはあくまで保険だ\nきっと「奴」が全てうまくやるさ
+	？？？？？？？？	<Off>						ずいぶん信用してるのね
+	？？？？	<Off>						当然じゃないか
+	黒背景		エフェクト表			0
+	？？？？	<Off>						「奴」は私の<dash=2>
+FadeOut	black					1
+StopBgm
+CharacterOff
+	　　　　　　　　　　
+Bg	森林A
+FadeIn	black					1
+	　　　　　　　　　　							\n　　　　   テオウィルの森				イベントの聖地巡礼だ～～～～～～いいな～～～～～～～
+CharacterOff
+Bgm	図書館
+Param	character_grayout=true
+	ディーア	怪しい2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	怪しい2						ここで、いいはずだよな……
+	イミティション=アリス	通常s						どうした小僧、情けない顔をして
+	ディーア	目閉じ2						タークディアバーブへ向かう道には\nありとあらゆる罠が仕掛けられてる
+	ディーア	怪しい2						だから、このテオウィルの森が\n一番安全なルート、\nだったはずなんだけどさ……				メモ：テオウィルって安全だったっけ？要確認
+	イミティション=アリス	通常s						ふむ、\nとても安全とは言い難い気配だな
+	ディーア	悔しい2						きっと、あの「アリス」が\n何か仕掛けたせいだろうな
+	イミティション=アリス	通常s						見ろ小僧、\nさっそく妙な代物のお出ましだぞ
+	ディーア	驚き2						これは……小瓶に、クッキー？
+	イミティション=アリス	通常s						おおよそ、森にあるには\n似つかわしくない代物だな
+	ディーア	怪しい2						一緒にあるのは……手紙だ\nなになに……
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff							0
+	アリス=ピュア=ロスト	通常					0
+Bg	黒背景						0					白枠囲うスチルつくってもいいかもしれない
+FadeIn	white					.3
+	アリス=ピュア=ロスト	通常						『この道の先には、\n　強固な結界が貼られているわ♪』
+	アリス=ピュア=ロスト	ニヤリ						『アリスに会いたいなら\n　大きくなって踏み越えるか、\n　小さくなってくぐりなさい♪』
+	アリス=ピュア=ロスト	笑い						『P.S.あなたみたいなクズには\n　どちらもできないでしょうから\n　アリスがいいものを用意したわ♪』
+	アリス=ピュア=ロスト	ニヤリ半目						『這いつくばって跪いてから\n　ありがたく口に含むこと♪』
+	アリス=ピュア=ロスト	ぺろり						『第四帝国第三皇女\n　アリス=フォン=アルクトス』
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	森林A					0
+	イミティション=アリス	通常s	2_2			0
+	ディーア	絶望2	1_2			0
+FadeIn	black					.3
+	ディーア	絶望2						……手紙でも、辛辣だな
+	イミティション=アリス	通常s						此の小物には、\n強力な魔力の気配がある
+	イミティション=アリス	通常s						きっと口に含むことで\n身体の形を変えられるのだろう
+	ディーア	怪しい2						そんなものまで用意できるなんて……\nあいつ、本当に何者なんだ
+	イミティション=アリス	通常s						おい小僧、迷ってる時間はないぞ\nさっさと選べ
+*E103706Q
+	ディーア	驚き2						オレが？\nそれじゃあ……
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_06
+EndIf
+EndScenario
+
+# E_1037_07A
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	図書館
+Bg	森林A
+	ディーア	通常2
+	イベントスチル1037H		エフェクト裏									この背景を消さないよう、エフェクト裏と全体キャラオフを使わずに回す
+FadeIn	white					.5
+	ディーア	通常2						この小瓶の方にしよう\nきっと「飲め」って意味だよな？\nそれじゃあ、一気に……
+Se	回復											軽めの音がいい
+FadeOut	white					.1
+FadeIn	white					.1
+Tween	ディーア	ScaleBy	x=0.1 y=0.1 time=20	linear			NoWait
+	ディーア	怪しい2						あれ？\nなんか、周りの草が伸びて……
+FadeOut	white					.3
+CharacterOff
+Param	character_grayout=false
+StopBgm
+	イベントスチル1037T		エフェクト裏
+	イベントスチル1037T
+Wait						2
+FadeIn	white					.3
+	イミティション=アリス	<Off>						ふははははは！\nますます小僧といった趣だな
+CharacterOff
+	ディーア	驚き2
+Bgm	コメディ
+	ディーア	驚き2						イミティション!?\nちょっと待て、これどうなって……
+CharacterOff	ディーア
+	イベントスチル1037T		エフェクト裏
+	イミティション=アリス	<Off>						貴様が小さくなったのだ\n瓶の中身は縮み薬だったらしい
+	イミティション=アリス	<Off>						毒見も済んだことだ、\n私も貴様に続くとしよう
+CharacterOff
+Se	回復
+Wait						1
+	ディーア
+	ディーア	怪しい2						毒見って……オレ、\n一応マスターだぞ？
+	ディーア	怒り2						でもこれで、結界を\nくぐれるようになったはずだ
+	ディーア	怒り2						早くタークディアバーブの方に……
+FadeOut	white					.2
+	？？？？	<Off>
+FadeIn	white					.2
+StopBgm
+	？？？？	<Off>						ギランッ
+	ディーア	驚き2						ギラン？
+CharacterOff	ディーア
+Bgm	魔獣バトル
+	でかくて怖い妖精							ハァイ♪\nキュートな妖精さんよ♪
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表2
+	ディーア	絶望2						うわああああ！！！\nバケモンだ！！！！！
+Param	character_grayout=true
+CharacterOff
+	でかくて怖い妖精							バケモンなんて、失礼ね？\nふみつぶしちゃいましょう♪
+CharacterOff	でかくて怖い妖精
+	ディーア	悔しい2	1_2
+	イミティション=アリス	通常s	2_2
+	イミティション=アリス	通常s						ふははははは！\nこれはなかなか、愉快な光景だな！
+	ディーア	悔しい2						笑ってる場合かよ……\n妖精ですら普段の\n十倍ぐらいでかいんだぞ？
+CharacterOff	ディーア	悔しい2
+CharacterOff	イミティション=アリス	通常s
+	でかくて怖い妖精							さぁ、イリュージョン（物理）の\nはじまりよ♪
+CharacterOff	でかくて怖い妖精
+	ディーア	悔しい2	1_2
+	イミティション=アリス	通常s	2_2
+	ディーア	悔しい2						……くそ、今はやるしかない\n踏みつぶされる前に倒すぞ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_08
+EndIf
+EndScenario
+
+# E_1037_07B
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	図書館
+Bg	森林A
+	ディーア	通常2
+	イベントスチル1037H		エフェクト裏
+FadeIn	white					.5
+	ディーア	通常2						このクッキーの文字、\nきっと「食べて」って意味だよな？\nじゃあ、遠慮なく……
+Se	回復											軽めの音がいい
+FadeOut	white					.1
+FadeIn	white					.1
+Tween	ディーア	ScaleBy	x=10 y=10 time=100	linear			NoWait
+StopBgm
+	ディーア	驚き2						あれ？\nなんか、周りの木が縮んで……
+FadeOut	white					.3
+Wait						2
+CharacterOff						0
+	イベントスチル1037I		エフェクト裏			0
+	イミティション=アリス	通常s				0
+FadeIn	white					.3
+Param	character_grayout=false
+	イミティション=アリス	通常s						あはははは！\nなかなか貫禄が出たじゃないか！
+Bgm	緊迫
+	ディーア	<Off>						イミティション!?\nどうした、そんなに\nちっちゃくなって……
+	イミティション=アリス	通常s						貴様が大きくなったのだ\nどうやらクッキーの方は\n成長を促進する効果があったらしい
+	イミティション=アリス	通常s						魔帝を名乗る者には\n相応しい茶菓子だな\nさっそく私もいただくとしよう
+CharacterOff	イミティション=アリス					1
+Se	回復											軽めの音がいい
+Wait						1
+	ディーア	<Off>						魔帝って、別にサイズで\n決まるもんではないだろ……？
+	ディーア	<Off>						まあでもこれで、結界を\nまたげるようになったはずだ
+StopBgm
+	ディーア	<Off>						早くタークディアバーブの方に……
+	？？？？	<Off>						<size=15>キャオーッ</size>
+	ディーア	<Off>						……キャオー？
+CharacterOff
+FadeOut	black					.3
+	イベントスチル1037I		エフェクト表
+	ちいさくてかわいいクマ
+FadeIn	black					.3
+	ちいさくてかわいいクマ							<size=15>オレはこの森の番人だ\n湖を目指したいなら、\nオレを倒していくことだ</size>				★文字全部小さくしたい\nあとなんかこのノリでいくならちいかわでもいい気がしてきたな……
+Bgm	コメディ
+	ディーア	<Off>						こいつ……クマか？\nめちゃくちゃ声高くて可愛いな……
+	ちいさくてかわいいクマ							<size=15>お前、オレをバカにしたな？\n絶対に許さねえ……\nハラワタを引き裂いてやる!!</size>
+	イミティション=アリス	<Off>						ふははははは！\nこれはなかなか、滑稽な光景だな！
+	ディーア	<Off>						いやまあ、滑稽は滑稽だけど、\nこのちいさいクマ、\nだいぶ猟奇的なこと言ってるぞ……
+	ちいさくてかわいいクマ							<size=15>生まれてきたことを後悔させてやる！</size>
+	ディーア	<Off>						ほら、また怖いこと言ってる……
+	ディーア	<Off>						体格は有利だけど……\nここは気を抜かずに戦おう！
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_08
+EndIf
+EndScenario
+
+# E_1037_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	作戦会議
+Bg	黒背景
+Param	character_grayout=false
+FadeIn	black					.5
+	ディーア	<Off>						よし、倒したぞ……\nあとは結界さえ超えれば……
+	白背景		エフェクト表			2
+Wait						2
+Param	character_grayout=true
+	イミティション=アリス	通常s	2_2			0
+	ディーア	驚き2	1_2			0
+StopBgm
+Bg	色鮮やかな大森林					0
+Wait						1
+CharacterOff	白背景					1
+Wait						1
+	ディーア	驚き2						あれ……\nオレたち、元の大きさに戻ってる？
+Bgm	平和
+	イミティション=アリス	通常s						ふむ、結界を超えた途端に、\n例の魔術の効果も消えたようだな\n全く、残念なことだ
+	ディーア	汗2						何が残念なんだよ、\nあのままだったら\n二度と酒場に戻れなかったぞ
+	イミティション=アリス	通常s						その時は、私と同じスケールで\n酒場を作り直せばいいだろう？\n至極簡単なことだ
+	ディーア	汗2						どこが簡単なんだ……
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	嬉しい2						あれ？\n向こうに見えるの、湖じゃないか？\nほら、今キラッて！
+	イミティション=アリス	通常s						どうやら、そのようだな
+	ディーア	本気2						あそこに例のアリスもいるはずだ、\n急ごう！
+StopBgm
+Se	闇1
+	黒背景		エフェクト表			0
+	？？？？	<Off>						……本当に、それでいいの？
+Bg	墓場					0
+CharacterOff	黒背景					0
+	ディーア	驚き2						……なに？
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？	<Off>						あなたは、\nそれが正しいと思うの……？
+CharacterOff
+	ディーア	驚き2						この、声は……
+FadeOut	black					0
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_09
+EndIf
+EndScenario
+
+# E_1037_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	墓場
+	ディーア	悔しい2
+FadeIn	white					.5
+	ディーア	悔しい2						……この声は
+CharacterOff
+	霊獣モデュレイト=エクス											霊獣？は全てこれに変える
+	霊獣モデュレイト=エクス	通常？						まだ、そんなことをやってるのね
+CharacterOff
+	ディーア	悔しい2
+	ディーア	悔しい2						霊獣……？\nたしか、勇リオハルト学園で見た……
+CharacterOff
+	霊獣モデュレイト=エクス	通常？						せっかく、見せてあげたのに\nあなたの覚えていない"失敗"を
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	イベントスチル1037K		エフェクト表			0
+Wait						1
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	霊獣モデュレイト=エクス	通常？						せっかく、教えてあげたのに\n世界は、たくさんの"犠牲"で\n成り立っていると
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	荒野					0
+Wait						.5
+Bg	戦場跡					0						同上
+Wait						.5
+ImageEffectOff	SpriteCamera	Sepia
+Bg	研究所B					0
+	ディーア	悔しい2						何の、話だ……
+	霊獣？	<Off>						あなたの話よ？\nそして、あなたが"ロスト"と呼ぶ\n兵器の、生まれ故郷の話……
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル1037L		エフェクト表			0
+FadeIn	black					.3
+	霊獣モデュレイト=エクス	通常？						"過ち"の犠牲になる人と同数、\nあるいはそれ以上に、\n"正しさ"の犠牲になる人がいるの
+	霊獣モデュレイト=エクス	通常？						怖いわよねぇ\nだって、正しいんだもの……
+	霊獣モデュレイト=エクス	通常？						歯向かったら\n"悪者"なんだもの……
+	霊獣モデュレイト=エクス	通常？						どんなに純粋な愛を叫ぼうと、\n"正しさ"の前には勝てないわ
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=true
+Bg	魔術空間					0
+	ディーア	悔しい2				0
+FadeIn	black					.3
+	ディーア	悔しい2						どうしてオレに、そんな話を……
+	霊獣？	<Off>						あなたが、本当に聞きたい話だから
+	ディーア	絶望2						……なん、だと
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル1037M1		エフェクト表			0						改行ごとにタップ待ちして鏡の反転
+	霊獣？	<Off>						私は、鏡
+	イベントスチル1037M2		エフェクト表			0
+	霊獣？	<Off>						あなたの心を写す鏡……
+	黒背景		エフェクト表			0
+CharacterOff						0
+	イベントスチル1037N1		エフェクト表			0
+	霊獣？	<Off>						私の話は、あなたの話				InputBrうまく動いてくれるといいな～～～～！！！！\n同じページ内に改行されてテキストが追加されれば正常な挙動！
+	イベントスチル1037N2		エフェクト表			0
+	霊獣？	<Off>						あなたの知ってる、あの子の話
+CharacterOff						0
+	霊獣モデュレイト=エクス	通常？						さあ、私とここで眠りましょう\nあなたが魔界を守る必要なんてないの
+	霊獣モデュレイト=エクス	通常？						重い荷物を降ろしましょう\n役割から降りてしまえば、\nあなたも楽になるでしょう？
+CharacterOff
+	ディーア	悔しい2
+	ディーア	悔しい2						オレは……				ここはディーアが一人で立ち向かっているのでソロ配置
+CharacterOff
+StopBgm
+	イミティション=アリス	通常s
+	イミティション=アリス	通常s						小僧……
+CharacterOff
+	ディーア	本気2
+Bgm	勇者バトル
+	ディーア	本気2						オレは戦う！\nそれが……オレの選んだ道なんだ
+CharacterOff
+	霊獣モデュレイト=エクス	通常？						……残念ね\n言葉に折られてしまったほうが\n痛い目に遭わず済んだのに……
+CharacterOff
+	イミティション=アリス	通常s	2_2									戦う決意をしたのでアリスと並ぶ
+	ディーア	怒り2	1_2
+	ディーア	怒り2						魔界を守るための痛みなら……\n喜んで引き受けるさ
+CharacterOff
+	霊獣モデュレイト=エクス	通常？						あなた……可愛そうに
+	霊獣モデュレイト=エクス	通常？						せめて安らかに、\n魂を眠らせてあげましょう
+CharacterOff
+	イミティション=アリス	通常s	2_2
+	ディーア	本気2	1_2
+	ディーア	本気2						やれるもんならやってみろ！\n<ruby=ワールドイズマイン>愚かなる卑怯者の鍵</ruby>……\nアンロック！
+												背景はこれ+αでもっと変えたりして不思議空間らしさを出していきたい
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_10
+EndIf
+EndScenario
+
+# E_1037_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	墓場
+	イミティション=アリス	通常s	2_2
+	ディーア	本気2	1_2
+FadeIn	white					.5
+	ディーア	本気2						これが……オレの答えだ！
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.1
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+StopBgm
+CharacterOff						0
+Bg	墓場					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	霊獣モデュレイト=エクス	通常？
+	霊獣モデュレイト=エクス	通常？						ふふ……いい顔ね……
+Bgm	絶望
+	霊獣モデュレイト=エクス	通常？						あなたに、\nいいことを教えてあげましょう
+FadeOut	white					.3
+CharacterOff						0						アリスピュアロストの悲劇の演出
+Param	character_grayout=false
+	イベントスチル1037L		エフェクト表			0
+Shake	イベントスチル1037L		x=2 time=20				NoWait
+FadeIn	white					.3
+	霊獣モデュレイト=エクス	通常？						本物の悲劇というのは\n喜劇性を帯びるものなの
+	霊獣モデュレイト=エクス	通常拡大？				0
+Shake	霊獣モデュレイト=エクス		x=2 time=20				NoWait
+	霊獣モデュレイト=エクス	通常拡大？						だからあの子は、\n道化になるしかなかった……
+CharacterOff
+Param	character_grayout=true
+	イミティション=アリス	通常s	2_2
+	ディーア	悔しい2	1_2
+	イミティション=アリス	通常s						…………
+CharacterOff
+	霊獣モデュレイト=エクス	通常？						きっとあなた、あの子を気に入るわ\nだって二人とも……純粋なんですもの
+CharacterOff
+	イミティション=アリス	通常s	2_2
+	ディーア	本気2	1_2
+	ディーア	本気2						待て、どういう……
+CharacterOff
+	霊獣モデュレイト=エクス	通常？						……いったでしょう？\nこれは……あなたの……
+Wait						.5
+Se	闇1
+CharacterOff						2
+Bg	森林A					2
+	アリスぬいぐるみ		2_3_b			0
+Wait						2
+CharacterOff	アリスぬいぐるみ					1
+Wait						1
+CharacterOff
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						消えた……
+	イミティション=アリス	通常s						これも奴の罠だったというわけか
+	ディーア	悔しい2						あの「アリス」の？\nそれじゃあ、オレが見たのは……
+CharacterOff
+Se	火事
+Shake	Graphics		x=5 y=5 time=2
+CharacterOff
+	イミティション=アリス	通常s	2_2
+	ディーア	驚き2	1_2
+	ディーア	悔しい2						なんだ、この揺れ……
+	イミティション=アリス	通常s						これほど魔界を揺るがすのは\n六大異変くらいのものだろうな
+	ディーア	悔しい2						くっ……急ごう、\n手遅れになる前に！
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_11
+EndIf
+EndScenario
+
+# E_1037_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	タークディアバーブ
+CharacterOff
+	イミティション=アリス	通常s	2_2
+	ディーア	本気2	1_2
+FadeIn	white					.5
+	ディーア	本気2						見えてきたぞ、\nタークディアバーブだ！
+	イミティション=アリス	通常s						どうやら、先客がいるようだな
+StopBgm
+CharacterOff
+	アリス=ピュア=ロスト	笑い						あら？\nずいぶん遅かったじゃない♪
+Bgm	緊迫
+CharacterOff
+	イミティション=アリス	通常s	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						アリス=ピュア=ロスト……
+CharacterOff
+	アリス=ピュア=ロスト	通常						いまね、この湖に張られてた\n生意気な結界を破ってたの♪
+	アリス=ピュア=ロスト	ぺろり						もう少し破ってあげたら、\nもーっと元気になるはずよ♪
+CharacterOff
+	イミティション=アリス	通常s	2_2
+	ディーア	本気2	1_2
+	ディーア	本気2						くそ……\nこれ以上の勝手はさせないっ！
+CharacterOff
+	アリス=ピュア=ロスト	通常半目						<dash=6>♪
+Se	ハイタッチ
+CharacterOff
+Param	character_grayout=false
+Se	闇1
+	オーラ紫		エフェクト表			1
+	ディーア	怒り2
+Wait						1
+ImageEffect	SpriteCamera	NegaPosi										かえたとこ
+Wait						.2
+ImageEffectOff	SpriteCamera	NegaPosi
+ImageEffect	SpriteCamera	MotionBlur
+Se	闇3
+Se	火事
+Shake	Graphics		y=10 time=2				Add
+	ディーア	悔しい2						ぐあああっ！
+	ディーア	悔しい2						なんだこの、力は……
+CharacterOff
+	アリス=ピュア=ロスト	ぺろり
+	アリス=ピュア=ロスト	ぺろり						あなたの頭上に、ざっと十倍の\n重力をかけてあげたわ♪
+	アリス=ピュア=ロスト	通常半目						今はあなたの出る幕じゃないの♪\nそこでゆっくり寝てなさい？
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	ディーア	悔しい2
+Shake	ディーア		x=5				NoWait
+	ディーア	悔しい2						くッ……				おくちわるわるなのでそ抜いてほしいです
+CharacterOff
+	カルバノグ	慌て
+	アリス=ピュア=ロスト
+	カルバノグ	慌て
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ	慌て						アリス様！
+	アリス=ピュア=ロスト	ニヤリ						……なぁに、白うさぎ？
+	カルバノグ	慌て						いくらアリス様と生き写しでも、\nこの場所で、これ以上の乱暴は……
+	アリス=ピュア=ロスト	ニヤリ半目						一つおもちゃが壊れるだけじゃない♪\nいったい、何の問題があるというの？
+	カルバノグ	慌て						それは……
+CharacterOff
+	ディーア	悔しい2
+Shake	ディーア		x=5				NoWait
+	ディーア	悔しい2						……おもちゃじゃ、ないからだ
+CharacterOff
+	アリス=ピュア=ロスト	笑い						あら、まだしゃべれるの？\n重力のかけ方が甘かったかしら♪
+CharacterOff
+	ディーア	怒り2
+	ディーア	怒り2						お前も……本当は、\n魔界をおもちゃだなんて、\n思っちゃいないんだろ？
+CharacterOff
+StopBgm
+	アリス=ピュア=ロスト	通常						……あなた、\n何が言いたいのかしら？
+CharacterOff
+	ディーア	悔しい2
+Bgm	ロルリアンレットB
+	ディーア	悔しい2						オレの知ってるアリス様は……\nいつもお道化たふりをして、誰よりも\nこの魔界を大事にしてる人なんだ
+	ディーア	悔しい2						口ではひどいことばかり言うけど……\n誰よりも、魔界を愛しているんだよ
+CharacterOff
+	イミティション=アリス	通常s						…………
+CharacterOff
+	ディーア	悔しい2						アリスロスト……お前も……\n本当はそうなんじゃないか？
+	ディーア	目閉じ2						詳しいことはわからない\nでも、お前は……
+	ディーア	本気2						お前が元いた世界のために、\nこの魔界を滅ぼそうと\nしてるんじゃないか？
+CharacterOff
+	アリス=ピュア=ロスト	通常半目
+	アリス=ピュア=ロスト	通常半目						…………
+	アリス=ピュア=ロスト	通常						随分たくましい\n妄想力を持ってるのね？
+	アリス=ピュア=ロスト	笑い						劇作家でも目指して\n秒で路頭に迷うといいわ♪
+CharacterOff
+	ディーア	悔しい2
+	ディーア	悔しい2						アリスロスト……
+CharacterOff
+	アリス=ピュア=ロスト
+	アリス=ピュア=ロスト	笑い						残念だけど、あなたが\n今さら何を言おうと、手遅れよ
+	アリス=ピュア=ロスト	ぺろり						あなたが戯言をさえずっている間に、\n最後の結界は破いちゃったから♪
+StopBgm
+CharacterOff
+	ディーア	悔しい2
+	ディーア	絶望2						なッ…………
+CharacterOff
+Se	火事
+Shake	Graphics		x=5 time=4				NoWait
+Wait						2
+	アリス=ピュア=ロスト	通常半目						さぁ、さっさと目覚めなさい\n……勇者王アーサー				←ここにアーサー呼びまで入れてしまう！
+CharacterOff
+Shake	Graphics		x=5 time=2				NoWait
+Wait						1
+Bgm	魔王バトル
+Bg	異変タークディアバーブ
+	アーサー	<Off>						ほうほうほう！！！\nなんだか騒がしいことに\nなってるみたいだねえ！！
+	アーサー	<Off>						これはボクの出番ってことなのかな？\n人に必要とされるのは気持ちいいな！\n胸が踊るよ！ 体ないんだけどね！！！
+CharacterOff
+Bg	タークディアバーブ
+Param	character_grayout=false
+	アリス=ピュア=ロスト	通常半目						あなた、どんな世界でも、\n残留思念ですらウザったいのね……
+CharacterOff
+Bg	異変タークディアバーブ
+	アーサー	<Off>						ウザったいは褒め言葉だよ！\n存在感があるってことだからね！！！
+	アーサー	<Off>						……おや？ その紋章は……\nボクが滅ぼした彼らの残党かい？
+	アーサー	<Off>						これはこれは、\nこのままでは寝覚めが悪いな……\nボクは、磨き残しが嫌いなんだよね！
+Se	光3
+Se	闇3
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+	イベントスチル1037U		エフェクト表
+Wait						2
+Shake	Graphics		x=2 y=2 time=40				NoWait
+FadeIn	white					.5
+Tween	イベントスチル1037U	MoveBy	y=-200 time=10				NoWait					ガチャトップ、キャラ合わせずに背景として使ってしまおうかと思っている(アリスピュアのパースがヤバすぎて全然合わないので)
+	ディーア	<Off>						なんだこの、莫大な魔力は……
+	カルバノグ	<Off>						た、大変ですよう!!\nこのままじゃ、カルバたちまで……
+	ディーア	<Off>						まさか……アネセサリまでここで\nまとめて片付けるつもりなのか……？
+	ディーア	<Off>						カルバノグ、ここは一時休戦だ！\nこいつはヤバすぎる……
+	ディーア	<Off>						協力して、\nタークディアバーブを元に戻すぞ！
+	カルバノグ	<Off>						わ、わかりましたよう！
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_12
+EndIf
+EndScenario
+
+# E_1037_12
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	アリス風タークディアバーブ
+	ディーア	悔しい3										ここからディーアはソロ
+FadeIn	white					.5
+Shake	ディーア		x=5				Add
+	ディーア	悔しい3						くっ……
+CharacterOff
+	アリス=ピュア=ロスト	笑い
+	アリス=ピュア=ロスト	笑い						あら、これで終わり？\n意気込んでたわりに、\nずいぶん粘りがないのね♪
+CharacterOff
+	ディーア	悔しい3
+	ディーア	悔しい3						これだけ攻撃し続けても、 \nまるで手ごたえがない……
+Shake	ディーア		x=5				Add
+	ディーア	悔しい3						でも、これ以上は……
+CharacterOff
+	アリス=ピュア=ロスト	通常
+	アリス=ピュア=ロスト	通常						魔剣のアンロックもままならない\nそんな顔ね？
+CharacterOff
+	ディーア	驚き3
+	ディーア	驚き3						なッ……
+CharacterOff
+	アリス=ピュア=ロスト	通常半目
+	アリス=ピュア=ロスト	通常半目						だって、さっきまで使ってた魔剣、\nみぃんな消えちゃってるもの♪
+CharacterOff
+	ディーア	悔しい3
+Shake	ディーア		x=5				Add
+	ディーア	悔しい3						くそ……\nそこまで、魔力が……
+CharacterOff
+	アリス=ピュア=ロスト	通常半目
+	アリス=ピュア=ロスト	通常半目						残念だわ\n少しは面白くなりそうだったのに……
+	アリス=ピュア=ロスト	笑い						あなたには、退屈な魔界と一緒に、\n消えてもらいましょう♪
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+	アリス=ピュア=ロスト	ニヤリ半目						それじゃあ、おいきなさい？\n<ruby=RABBIT>夢幻帝国</ruby>……				ここはダーシで
+CharacterOff
+	ディーア		2_3_b
+	イミティション=アリス	通常s	2_2
+Tween	イミティション=アリス	MoveTo	x=0
+Wait						.5
+CharacterOff
+StopBgm
+	アリス=ピュア=ロスト	通常半目						……あら？
+FadeOut	black					.5
+CharacterOff
+Shake	Graphics		x=2 y=2 time=60				NoWait
+	黒背景		エフェクト表2
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+	イベントスチル1037R		エフェクト裏
+FadeIn	black					.5
+	イミティション=アリス	<Off>						……全く、世話の焼ける奴だ
+Bgm	魔王バトル
+CharacterOff	黒背景					2.5
+Tween	瞬きA	MoveBy	y=400 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-400 time=2	easeOutCirc
+Wait						.5
+	黒背景		エフェクト表2			1
+Tween	瞬きA	MoveBy	y=-400 time=1.5	easeInCirc			Add
+Tween	瞬きB	MoveBy	y=400 time=1.5	easeInCirc
+	イベントスチル1037S		エフェクト裏
+CharacterOff	黒背景					2.5
+Tween	瞬きA	MoveBy	y=400 time=2	easeOutCirc			NoWait
+Tween	瞬きB	MoveBy	y=-400 time=2	easeOutCirc			NoWait
+Wait						1
+	ディーア	<Off>						イミティ、ション？
+Wait						1.5
+FadeOut	black					0
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_13
+EndIf
+EndScenario
+
+# E_1037_13
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	台風_BGM
+Bg	アリス風タークディアバーブ
+	ディーア	悔しい3
+FadeIn	white					.5
+Shake	ディーア		x=5				NoWait
+	ディーア	悔しい3						イミティション、\nお前、どうして残って……
+	？？？？	<Off>						私がそんな名ではないからだ
+	ディーア	驚き3						……え？
+	？？？？	<Off>						どうだった？\n私の「イミティション」は
+	ディーア	絶望3						ウソ……だろ……
+CharacterOff
+Param	character_grayout=false
+	イベントスチル1037P		エフェクト裏
+StopBgm
+	？？？？	<Off>						ウソではないさ
+Bgm	魔王バトル
+	？？？？	<Off>						六大異変エイビシュタット\n城主にして《すべてを知る者》
+	？？？？	<Off>						あるいは、原初六魔剣が一振り、\n終焉の魔剣アポカリプスの\nマスターにして元・六大魔王が一人
+	魔帝アリス	<Off>						私が……\n魔帝アリスだ				このタイミングで最近全然やってなかったあのアリスイベント恒例の名乗りを上げてほしいです！！アリス来た！！！ってテンション上がるので！！！！
+FadeOut	black					.3
+CharacterOff
+	アリス=ピュア=ロスト	通常半目
+FadeIn	black					.3
+	アリス=ピュア=ロスト	通常半目						あなたが……魔帝？
+CharacterOff
+Param	character_grayout=true
+	アリス	笑い魔帝						この魔界でそう名乗るのを\n許されるのは……私だけだな
+	ディーア	<Off>						あ、アリス様……
+	アリス	笑い魔帝						小僧、なかなか愉快だったぞ\n恥も遠慮もない貴様と旅をするのは
+	ディーア	<Off>						オレはずっと、魔帝と……？
+	アリス	笑い魔帝						ふはははは！ \nなんて顔をしているのだ小僧！
+	アリス	通常						丁度いい、あの偽物にも……\nこの愉快さの欠片くらいは\n味わわせてやろうではないか
+FadeOut	black					.5
+CharacterOff
+Param	character_grayout=false
+	イベントスチル1037Q		エフェクト表
+FadeIn	black					.5
+	魔帝アリス	<Off>						ここからが……\n本物の<ruby=ティーパーティー>魔界決戦</ruby>だ
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_14
+EndIf
+EndScenario
+
+# E_1037_14
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔王バトル
+Bg	アリス風タークディアバーブ
+	イベントスチル1037Q		エフェクト表
+FadeIn	white					.5
+Param	character_grayout=false
+	魔帝アリス	<Off>						くははははははははは!!\nどうだ偽物よ？\nこれでも！ 我が魔界は！ 退屈か!!				くはははは！のほうがありすっぽいです！
+CharacterOff
+	アリス=ピュア=ロスト	通常半目
+	アリス=ピュア=ロスト	通常半目						……なか、なか……
+	魔帝アリス	<Off>						聞こえんなぁ！\n悦びのあまり、声も出せないか？				出せないか？の方がアリスっぽいです！
+	アリス=ピュア=ロスト	通常半目						…………くッ…………
+CharacterOff
+	イベントスチル1037P		エフェクト表
+	魔帝アリス	<Off>						喜べ、貴様に栄誉を与えよう！
+	魔帝アリス	<Off>						魔帝が……
+Se	闇1
+Shake	イベントスチル1037P		x=3 time=100				NoWait
+	魔帝アリス	<Off>						直々に手を下し……
+Se	闇2
+	魔帝アリス	<Off>						焼き尽くしたという……
+Se	闇3
+	魔帝アリス	<Off>						……栄誉を!!
+Se	火3
+	アリス=ピュア=ロスト	<Off>						あぁ……あああああああああ!!!!
+FadeOut	white					1
+StopBgm
+CharacterOff
+	カルバノグ	慌て	2_2			0
+	ディーア	悔しい3	1_2			0
+Wait						2
+Param	character_grayout=true
+FadeIn	white					1
+Bgm	台風_BGM
+	ディーア	悔しい3						……やっと、収まったか
+	カルバノグ	慌て						はぁーーーーたすかりましたよう\nカルバはひやひやしましたあ……				カルバさんはアリスを見つけてから状況を理解しているはずなので、\n「はぁーーーーたすかりましたよう\n　カルバはひやひやしましたあ……」\nみたいな感じの全て理解して安堵した感じの台詞がいいです！
+	ディーア	悔しい3						ああ、でも……
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+Bg	異変タークディアバーブ					0
+Bgm	神秘
+Param	character_grayout=false
+	オーラ光		エフェクト表			0
+FadeIn	black					.3
+	アーサー	<Off>						おやぁ？\nてっきりボクの出番かと思ったけど
+	アーサー	<Off>						彼らの気配は\n消えてしまったようだねぇ！
+	アーサー	<Off>						いやーーーー残念だ！\n久々に血沸き肉躍る\n気分だったというのに！！
+	ディーア	<Off>						何だこの、地響きみたいな声……
+	オーラ光		エフェクト表
+	アーサー	<Off>						……お？\nキミは、ヘルメリアの……
+	アーサー	<Off>						なるほど、そういうことか！！！\nますますボクの出番ではないねぇ！
+	アーサー	<Off>						それじゃあ仕方ない！\nここは若い子たちに任せて\nボクは少し眠るとしよう！！！
+	アーサー	<Off>						あ、そうだ\nボクはもう寝るけど……\nみんなもっと観光に来てくれよ？
+	アーサー	<Off>						聖地なんて呼ばれ方、\n肩が凝って仕方ないからさ！\nそれじゃあまたね！ おやすみ！！！
+Se	光3
+FadeOut	white					.5
+StopBgm
+CharacterOff						0
+Bg	タークディアバーブ
+	カルバノグ	慌て	2_2
+	ディーア	悔しい3	1_2
+Wait						2
+Bgm	台風_BGM
+Param	character_grayout=true
+FadeIn	white					.5
+	ディーア	悔しい3						な、なんだったんだ……\nあれが、初代勇者王……？
+CharacterOff
+	アリス	蔑み魔帝
+	アリス	蔑み魔帝						奴は出さずで正解だ\n湖の中にいても\nあれだけやかましいのだから				「奴は出てこなくて正解だった」のほうがしっくり来る気がする
+CharacterOff
+	ディーア	驚き3	1_2
+	カルバノグ	慌て	2_2
+	ディーア	驚き3						……アリス様
+	カルバノグ	慌て						今回だけは……敵じゃなくて、\nよかったですよう……
+CharacterOff
+	アリス	通常魔帝						しかし、我が名を名乗るだけあって\n例の偽物も、少しはやるようだな
+CharacterOff
+	ディーア	驚き3
+	ディーア	驚き3						え……？
+	黒グラデーション		エフェクト表
+StopBgm
+	アリス=ピュア=ロスト	<Off>						まったく……魔帝が直々に\n出てくるなんてシナリオは\n想定してなかったわ
+FadeOut	white					.5
+Bgm	ロルリアンレット
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル1037BG
+Tween	イベントスチル1037BG	MoveBy	y=-340 time=8	linear		0	NoWait
+FadeIn	white					.5
+	アリス=ピュア=ロスト	<Off>						あなた、バカでクズな男だとばかり\n思っていたけど……\n少しは面白いこともできるのね？
+	ディーア	<Off>						アリス、ロスト……
+	アリス=ピュア=ロスト	<Off>						玩具を手放すのは気に入らないけど、\n今回はこの体がもたないみたい♪\n一時休戦ってところかしらね？
+	ディーア	<Off>						お前……消え、るのか……？
+	アリス=ピュア=ロスト	<Off>						自分の世界を滅ぼしに来た相手に\nなんて顔してるの？\nあなた、ほんとにバカでクズなのね♪
+	ディーア	<Off>						はは、ほんとに、口が悪いな……
+	ディーア	<Off>						……なあ、アリスロスト\n少し、教えてくれないか？
+	アリス=ピュア=ロスト	<Off>						何よ改まって、気持ち悪いわね♪
+	ディーア	<Off>						もしお前が、\nオレたちの魔界を滅ぼしていたら……
+	ディーア	<Off>						お前と、お前が元いた魔界は\n……救われたのか？
+	アリス=ピュア=ロスト	<Off>						……ほんとに退屈なことを聞くのね♪
+	アリス=ピュア=ロスト	<Off>						過ぎ去ったことについて、「もし」\nなんて言ったって仕方ないじゃない♪
+	アリス=ピュア=ロスト	<Off>						それとも、あなたが代わりに\nこの魔界を滅ぼしてくれるの？
+	ディーア	<Off>						いや、そうじゃない\nオレは……
+	ディーア	<Off>						オレは、お前の世界も救いたいんだ
+	アリス=ピュア=ロスト	<Off>						……はぁ？
+	ディーア	<Off>						お前がこの世界に来たことで、\nこの魔界は壊れる寸前に陥った
+	ディーア	<Off>						もしかしたら、その逆も、\nできるんじゃないかって思ったんだ
+	アリス=ピュア=ロスト	<Off>						……逆？
+	ディーア	<Off>						オレとお前で、\nお前が元いた世界を\n救いに行くんだよ
+	アリス=ピュア=ロスト	<Off>						…………
+	ディーア	<Off>						世界同士が影響を与え合ってるなら\nそんなことだって、いつかは\nできるんじゃないか？
+StopBgm
+	アリス=ピュア=ロスト	<Off>						……ふん、
+Bgm	結婚
+	アリス=ピュア=ロスト	<Off>						最後まで生意気な口を利くのね
+	アリス=ピュア=ロスト	<Off>						あなたの質問には答えないわ
+	アリス=ピュア=ロスト	<Off>						過ぎ去った事でアレコレ悩むなんて、\nもっとも退屈なことだもの♪
+	ディーア	<Off>						アリスロスト……
+	アリス=ピュア=ロスト	<Off>						ひとつだけ、\nあなたに仮定の話をしてあげる
+	アリス=ピュア=ロスト	<Off>						もし、次会うことがあったら……
+	アリス=ピュア=ロスト	<Off>						あなたはアリス専用の家具にするわ♪
+	ディーア	<Off>						か、家具？
+	アリス=ピュア=ロスト	<Off>						ええそうよ？\nだってあなた、生意気なんだもの♪
+	アリス=ピュア=ロスト	<Off>						この皇女アリス=フォン=アルクトスが\nありとあらゆる家具として\nこき使ってあげるから、覚悟なさい？
+	ディーア	<Off>						い、一応オレ、人間なんだけどな……
+	アリス=ピュア=ロスト	<Off>						あらあなた、自分のこと\n人間だと思ってたの？
+	アリス=ピュア=ロスト	<Off>						それはずいぶんな勘違いね♪
+	ディーア	<Off>						勘違い……？				勘違い……？
+	アリス=ピュア=ロスト	<Off>						さて、ほんのわずかに\n退屈も紛れたことだし\nこの世界とはお暇するわ♪
+	アリス=ピュア=ロスト	<Off>						それでは、ごきげんよう♪\n馬鹿でクズな、アリス専用家具候補♪
+StopBgm
+FadeOut	white					.5
+CharacterOff
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	怪しいH	1_1
+Bg	研究所A
+Wait						3
+FadeIn	white					.5
+Bgm	図書館
+Param	character_grayout=true
+	ロルリアンレット	ニヤリH						……それじゃあ、この引きニートは\nまた私まで騙してたってわけね
+CharacterOff
+	ディーア	汗2	1_2
+	アリス	蔑みp	2_2
+	アリス	蔑みp						今回に限って言えば、引きニートは\n貴様の方だろう？ <ruby=フロイライン>お嬢様</ruby>
+	アリス	笑いp						この図書館に引きこもった上に、\n例の娘の討伐に\n何の働きもしなかったのだからなぁ♪
+CharacterOff
+	ロルリアンレット	照れるH	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	照れるH						……マリー！\nこのバカから世界図書館の入室権を\n未来永劫剥奪しなさい!
+	ププッピマリー	佇む						しかしお嬢様、\n本当によろしいのですか……？
+CharacterOff
+	ディーア	汗2	1_2
+	アリス	笑いp	2_2
+	ディーア	汗2						ま、まぁまぁまぁ！\n敵を騙すにはまず味方から、\nなんて言葉もありますし……
+CharacterOff
+	ロルリアンレット	照れるH	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	照れるH						……魔剣使い、あなたもあなたよ！\nどうしてこの引きニートがずっと\n傍にいて、それに気づかないわけ？
+CharacterOff
+	ディーア	汗2	1_2
+	アリス	笑いp	2_2
+	ディーア	汗2						いや、その、\n本当にうまく擬態してたので……
+	アリス	笑いp						ふはは、大は小を兼ねるのだよ\nこの魔帝が偽物を演じるなど\n児戯に等しい容易さと言えよう
+CharacterOff
+	ロルリアンレット	泣きH	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	泣きH						完全に面白がってるわね……\nこのバカ……私がどれだけ……
+CharacterOff
+	ディーア	汗2	1_2
+	アリス	笑いp	2_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	汗2						そ、そうだ！\nお願いしてた解析は進んでますか？\nあの湖に落ちてたトランプの……
+CharacterOff
+	ロルリアンレット	怪しいH	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	怪しいH						ああ、それなら……
+	ププッピマリー	佇む						付着していたのは、\nこの魔界には存在しない物質です
+	ププッピマリー	佇む						おそらく、彼女が元いた\n「異界」のものと思われます
+	ロルリアンレット	通常H						この物質の分析から、\n彼女らの正体が\nわずかでも解明できるかもしれない
+	ロルリアンレット	ニヤリH						これは素直にお手柄ね\n褒めてつかわすわ
+CharacterOff
+	ディーア	嬉しい2	1_2
+	アリス	笑いp	2_2
+	ディーア	嬉しい2						あ、ありがとうございます！
+	アリス	笑いp						気をつけろよ、魔剣使い\nこの<ruby=フロイライン>お嬢様</ruby>が人を褒めるときは\n必ず"何か"あるはずだ
+	ディーア	驚き2						えっ……？
+CharacterOff
+	ロルリアンレット	ニヤリH	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	ニヤリH						その後ろのバカは、\n「余計なことしか言えない病」にでも\n全身を侵されているのかしらね……
+CharacterOff
+	ディーア	絶望2	1_2
+	アリス	笑いp	2_2
+	ディーア	絶望2						そ、それで……\nやっぱり何かあるんですか？
+CharacterOff
+	ロルリアンレット	ドヤ顔H	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	通常H						……タークディアバーブ周辺に\n大量の罠が仕掛けられているのは\nあなたも知ってるでしょう？
+CharacterOff
+	ディーア	汗2	1_2
+	アリス	笑いp	2_2
+	ディーア	汗2						それはまぁ、\n行ったばっかりなので、たくさん\n罠があるのは知ってますけど……
+CharacterOff
+	ロルリアンレット	怪しいH	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	怪しいH						その罠の一つに……\n周辺に存在した魔力を吸収して\n魔剣に擬態する罠があるのよ
+	ロルリアンレット	悪い顔H						ちょうど、あなたが持っている\n「イミティション=バカうさぎ」と\n同じような技術ね
+CharacterOff
+	ディーア	汗2	1_2
+	アリス	笑いp	2_2
+	ディーア	汗2						えーと……\nたぶん、イミティション=アリスの\nことですよね……？
+	アリス	笑いp						ほう、E.D.E.N.にもあれと\n同格のものを作れるだけの\n技術があるのか
+	ディーア	汗2						それで、その罠が何か……
+CharacterOff
+	ロルリアンレット	怒りH	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	怒りH						その罠は今……\n例のアリス=ピュア=ロストを\n模倣してあの森に居座ってるの
+CharacterOff
+	ディーア	絶望2	1_2
+	アリス	笑いp	2_2
+	ディーア	絶望2						ええっ!?
+	ディーア	絶望2						あんなに苦労して倒したのに……
+CharacterOff
+	ロルリアンレット	通常H	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	通常H						まぁでも、見方を変えれば\nこれはチャンスよ、マリー？
+	ププッピマリー	佇む						はい、お嬢様
+	ププッピマリー	佇む						現在この罠は、\n件のアリス=ピュア=ロストと\n同じ魔力から形作られております
+	ププッピマリー	佇む						討伐すれば、彼女たちのいた世界、\nそれに「ロスト」の正体に\n近づく情報が得られるかもしれません
+	ロルリアンレット	ドヤ顔H						と、いうわけ
+	ロルリアンレット	ニヤリH						魔剣使い、\nあなたがすべきことはわかったわね？
+CharacterOff
+	ディーア	笑い2	1_2
+	アリス	笑いp	2_2
+	ディーア	笑い2						……そのアリスを、\n討伐しに行けばいいんですね？
+CharacterOff
+	ロルリアンレット	通常H	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	通常H						なかなか理解が早いじゃない\n見直したわ♪
+CharacterOff
+	ディーア	驚き2	1_2
+	アリス	通常p	2_2
+	アリス	通常p						頑張れよ、小僧
+	ディーア	驚き2						えっ？\nアリス様も来てくれるんじゃ……
+	アリス	蔑みp						思いあがるなよ\nこの魔帝がいつから\n貴様の所有物になったんだ？
+	ディーア	絶望2						え、でも……
+	アリス	笑いp						貴様は私の専属家具だ\n廃品にならんよう、\nせいぜい努力することだな
+CharacterOff
+	ロルリアンレット	悪い顔H	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	悪い顔H						可哀想ねえ……
+CharacterOff
+	ディーア	本気2	1_2
+	アリス	笑いp	2_2
+	ディーア	本気2						ロ、ロール様！\nこれだけ危険な任務に行くんですよ？\nもう少し、ご褒美というか……
+CharacterOff
+	ロルリアンレット	通常H	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	通常H						そうね、成果が出た暁には……\n頭をナデナデしてあげましょう♪
+CharacterOff
+	ディーア	きらーん2	1_2
+	アリス	通常p	2_2
+	ディーア							ほんとですか!?
+CharacterOff
+	ロルリアンレット	悪い顔H	1_1
+	ププッピマリー	佇む	3_3_b
+	ロルリアンレット	悪い顔H						ええ……\n足で、ね♪
+FadeOut	white					.5
+CharacterOff
+	ディーア	通常2	2_2
+	リディ	通常2	1_2
+Bg	酒場1F
+Wait						3
+Bgm	平和
+FadeIn	black					.5
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	通常2						あ、マスター！
+	ディーア	通常2						ただいま、リディ
+	リディ	笑い2						無事だったんだね、よかった♪
+	リディ	通常2						心配してたんだよ？\nいっぱい地震とかあったから……
+	ディーア	笑い2						ああ、心配かけて悪かった\nオレは大丈夫だ
+	リディ	笑い2						そっかぁ、よかった♪\nじゃあ、しばらくは休めるね♪
+	ディーア	汗2						そうなる、はずだったんだが……
+	ディーア	怒り2						……なぁリディ
+	リディ	驚き2						ふぇ？ \nどうしたのマスター、改まって……
+	ディーア	目閉じ2						オレって……\n家具になる才能、あるのかな
+	リディ	通常2						……マスター？
+	ディーア	怒り2						ここんところ、\n「家具になれ」とか「足で踏む」とかよく言われるからさ
+	ディーア	目閉じ2						もしかしたらオレ、\nそっちの道に向いてるのかなって……
+	リディ	通常2						えぇ……\nじゃあ、試しに踏んでみようか？
+	ディーア	きらーん2						いいのか!?
+	リディ	悲しい2						あ、やっぱりやめる\nなんか目がこわいもん
+	ディーア	絶望2						そんな……
+	リディ	怒り2						マスター、任務帰ってきてから\nちょっとヘンじゃない？
+	ディーア	驚き2						そうか？\n別に何も変なことは……
+	リディ	通常2						ふーん……それならいいけど\nもう、あんまりヘンなとこには\nいっちゃだめだよ？
+	リディ	笑い2						あらためて……おかえり、マスター！
+	ディーア	笑い2						ああ、ただいま
+FadeOut	white					.5
+StopBgm
+CharacterOff
+	アリス=ピュア=ロスト	通常？
+Bg	色鮮やかな大森林
+Wait						3
+Bgm	結婚
+Param	character_grayout=false
+	イベントスチル1037BG
+FadeIn	black					.5
+	？？？？	<Off>						<dash=2>ふふ……また会いましょう？\n私の専属……家具候補♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1037_01
+EndIf
+EndScenario

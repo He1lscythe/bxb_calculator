@@ -1,0 +1,352 @@
+# G_351_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	海岸
+Bg	海岸
+Param	character_grayout=false
+	魔物　		2_3_m
+	　　　　　　　　　　
+FadeIn	white					.5
+Wait						1
+Se	斬2
+FadeOut	white					.2
+FadeIn	white					.2
+Shake	魔物　		time=0.5 x=30 y=0
+Se	敵殺
+Tween	魔物　	MoveTo	y=-800 time=1				NoWait
+Wait						1
+CharacterOff						1
+Param	character_grayout=true
+	ディーア	汗2	1_2
+	ウル		2_2
+	ディーア	汗2						ふぅ……\nこれで半分くらいは片付けたかな
+	ディーア	汗2	1_2_b
+	ウル							ふふ、私とマスターくん、\nやっぱり相性ばっちりかもですね
+	ディーア	通常2	1_2					きっとウルが他人に合わせるのが\n上手いからかな
+	ディーア	通常2	1_2_b
+	ウル							そんなことないです！\n私の方こそマスターくんに\n合わせてもらってばっかりで……
+	ディーア	驚き2	1_2					そうか？\nオレもいつも通り\n戦ってるだけだけど……
+	ディーア	驚き2	1_2_b
+	ウル							えへへ、じゃあ本当に\n相性ばっちりですね♪
+	ディーア	笑い2	1_2					あはは、そうかもな
+	ディーア	あはは2						最初の頃はちょっと不安だったけど、\nもう全然心配ないな
+	ディーア	あはは2	1_2_b
+	ウル							初めて一緒に任務に参加したときは\n私がうまく戦えなかったんですよね
+	ディーア	驚き2	1_2					ああ、あの頃はたしか……
+FadeOut	white					1.5
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+	魔物　		2_3_m
+	　　　　　　　　　　
+Bg	洞窟A
+Bgm	緊迫
+Param	character_grayout=false
+FadeIn	white					1
+Wait						1
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Shake	魔物　		time=0.5 x=30 y=0
+Se	敵殺
+Tween	魔物　	MoveTo	y=-800 time=1				NoWait
+Wait						1
+CharacterOff						1
+Param	character_grayout=true
+	ウル		2_2
+	ディーア	悔しい2	1_2_b
+	ウル							はぁ……\nこれであらかた片付きましたか？
+	ディーア	驚き2	1_2					……なあウル\nひょっとして緊張してるのか？
+	ディーア	驚き2	1_2_b
+	ウル							え？\nわ、私がですか？
+	ディーア	通常2	1_2					ああ、なんか力を加減してるように\n感じたからさ
+	ディーア	汗2						魔剣機関の任務っていっても\n普通に闘うだけだから、\n別に緊張しなくても大丈夫だぞ
+	ディーア	汗2	1_2_b
+	ウル							えへへ、緊張はしてない……\nはずなんですけどね！
+	ディーア	怪しい2	1_2					そうか？\n魔力の相性は悪くないし……\nひょっとして何か不調でもあるのか？
+	ディーア	怪しい2	1_2_b
+	ウル							いえいえ！\nそんなことはないですよ！
+	ウル							ただ……
+	ディーア	驚き2	1_2					ただ？
+	ウル							……きっと、怖いんだと思います\n誰かに怖がられるのが……
+	ディーア	通常2	1_2					……なるほど\n怖がられたくない、か……
+	ディーア	通常2						よし、じゃあもっと強い敵がいる\n所に行こうか
+	ディーア	通常2	1_2_b
+	ウル							…………え？\nちょ、マスター様!?
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	洞窟C
+Bgm	火属性バトル
+	冥獣Ω級		1_2
+FadeIn	black					.5
+	冥獣Ω級							ガアアアッ!!
+FadeOut	black					.3
+CharacterOff
+	ディーア	怒り2	1_2_b
+	ウル		2_2
+FadeIn	black					.3
+Tween	ウル	PunchPosition	y=50				NoWait
+	ウル							ええええええっ!!\nま、マスター様!?\n私の話、聞いてました……？
+	ディーア	通常2	1_2					……魔剣と魔剣使いは、\n身体を預けて一緒に戦う仲間だ
+	ディーア	あはは2						信頼こそすれ、怖がったりなんて\nすることはないさ
+	ディーア	怒り2						それに、心配しなくたってオレは\nウルを使いこなしてみせるさ
+	ディーア							っていうのを、身を持って\n証明しようと思ってな！
+	ディーア	怒り2	1_2_b
+	ウル							マスター様……
+	ウル							……マスター様って、意外と\n強引なんですね
+	ディーア	驚き2	1_2					そ、そうかな？
+	ディーア	驚き2	1_2_b
+	ウル							そうですよ\nもう……びっくりしました
+	ウル							…………本気の私を見ても、\n驚かないでくださいね？
+	ディーア	通常2	1_2					驚くもんか\n大丈夫だよ、ちゃんと\n受け止めてあげるから
+	ディーア	通常2	1_2_b
+	ウル							えへへ、じゃあ……\nちょっとだけ魔力をお借りしますね！
+Tween	ウル	MoveTo	x=0	easeOutCubic
+FadeOut	white					.1
+CharacterOff
+Param	character_grayout=false
+	ウル		2_3
+	オーラ青		エフェクト表
+Se	光3
+Wait						.1
+FadeIn	white					.1
+	ウル							<color=red>我は暴蝕<dash=2>\n完全世界を貪る悪食の暴力にして\n我が暴蝕は絶対なり……!!</color>
+Se	火3
+FadeOut	red					1
+Param	character_grayout=true
+CharacterOff
+ImageEffectOff	SpriteCamera	Sepia
+StopBgm						2
+	ディーア	あはは2	1_2_b
+	ウル		2_2
+Bg	海岸
+Wait						2
+Bgm	海岸
+FadeIn	white					1
+	ウル							なんか思い出してたら\n恥ずかしくなってきました……
+	ディーア	あはは2	1_2					別に恥ずかしがることないのに
+	ディーア	あはは2	1_2_b
+	ウル							ふふ、でもあのマスターくんの言葉が\nあったから、私はいまこうして\nいられるわけですし
+	ウル							やっぱり、私にとっては\n大切な思い出です♪
+	ディーア	照れ2	1_2					な、なんか改まって言われると、\nそっちのほうが気恥ずかしいような……
+	ディーア	通常2						でも、ウルが頑張ってくれるおかげで\nオレも安心して戦えるよ\nありがとな
+	ディーア	通常2	1_2_b
+Tween	ウル	PunchPosition	y=50				NoWait
+	ウル							当然です♪\nマスターくんのウルですから！
+CharacterOff
+	リディ	驚き2	2_3					あっ、マスター！
+CharacterOff
+	ウル		2_2
+	ディーア	驚き2	1_2					あれ、リディどうしたんだ？
+CharacterOff
+	リディ	悔しい2	2_3					ちょっと聞きたいことが……\nってマスター、またウルちゃんと\nお出かけしてたの？
+CharacterOff
+	ウル		2_2
+	ディーア	汗2	1_2					まぁ……そんなとこかな
+CharacterOff
+	リディ	悔しい2	2_3					むぅ、マスター最近ずっと\nウルちゃんとお出かけしてる……
+CharacterOff
+	ディーア	汗2	1_2_b
+	ウル		2_2					ふふ、リディちゃんにも\nお土産ありますよ♪
+CharacterOff
+	リディ	驚き2	2_3					お、お土産？
+CharacterOff
+	ディーア	あはは2	1_2_b
+	ウル		2_2					はい！\nマスターくんから、リディちゃんが\n好きなやつ教えてもらったので♪
+CharacterOff
+	リディ	驚き2						あっ、これって……\nこの辺りの海の家でしか買えない\nお菓子……!!
+	リディ	悔しい2						で、でもこのお店って結構\n並ぶんじゃないの？
+CharacterOff
+	ディーア	通常2	1_2_b
+	ウル		2_2					えへへ、リディちゃんのために\n頑張っちゃいました♪
+CharacterOff
+	リディ	悔しい2						む、むぅ……なんかフクザツ……\nでもありがと
+CharacterOff
+	ディーア	通常2	1_2_b
+	ウル		2_2					ふふっ♪\nどういたしまして、です！
+	ディーア	驚き2	1_2					そういえばリディはなんでここに？\nさっき聞きたいことがあるって……
+CharacterOff
+Param	character_grayout=false
+	ノートゥング	フキダシ	2_3_f			.5
+	リディ	驚き2	2_3
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							あ、そうだ！\nマスター、ノートちゃん見なかった!?
+CharacterOff
+Param	character_grayout=true
+	ウル		2_3					………………ッ!?
+CharacterOff
+	ウル		2_2
+	ディーア	驚き2	1_2					いや、見てないけど……\nどうかしたのか？
+CharacterOff
+	リディ	悔しい2						それが……なんか妹がどうとか\n言いながら急に酒場を\n飛び出して行っちゃって……
+CharacterOff
+	ディーア	怪しい2	1_2_b
+	ウル		2_2					の、ノート…………？
+	ディーア	通常2	1_2					ああ、ノートゥングっていう魔剣だよ\nウルはまだ会ったことなかったっけ？
+	ディーア	通常2	1_2_b
+	ウル							の、ノートゥング……!!\nへ、へぇ～……\nお会いしたことないですね……
+Tween	ウル	MoveTo	x=180	easeOutCubic
+	ウル							<size=20>ノート……姉さん……？\nなんでマスターくんのところに……？</size>
+CharacterOff
+	リディ	驚き2						ウルちゃん？
+CharacterOff
+	ウル
+Tween	ウル	PunchPosition	y=50				NoWait
+	ウル							はい!?\nどうかしましたか!?
+CharacterOff
+	リディ	驚き2						どうしたの？\nなんか顔色悪いよ？
+CharacterOff
+	ウル							いえ！なんでもないですよ！
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2					ああ、ひょっとして\nノートの居場所を知ってたり……
+CharacterOff
+	ウル							いや、わからないですね……\nというか知らない人ですしー……\nちょっと存じ上げないですー……
+	ウル							な、なんかすごい暴力的でわがままで\n自己中で、二面性とかありそうな\n名前ですけど……
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	あはは2	1_2					そんなに情報量の多い名前か……？\nだいたい間違ってない気がするけど
+	ディーア	あはは2	1_2_b
+	リディ	悔しい2	2_2					……ウルちゃん、なんかへんだよ？
+CharacterOff
+	ウル							いえいえ！なんでも！\nなんでもないです！
+CharacterOff
+Param	character_grayout=false
+	ノートゥング	フキダシ	2_3_f
+Tween	ノートゥング	PunchPosition	y=50				NoWait
+	リディ	驚き2	2_3_b					あれ、そういえばウルちゃんって、\nちょっとノートちゃんに似て……
+CharacterOff	ノートゥング
+Param	character_grayout=true
+	リディ	驚き2
+	ウル		1_3
+Tween	ウル	MoveBy	x=30
+	ウル							ああ！はいリディちゃん！\nさっきのお菓子食べてみてください！\n美味しいですから！はいあーん！
+	リディ	驚き2	2_3					え、いや、リディ今ちょっと\nお腹いっぱもごもぐ
+CharacterOff
+	ディーア	怪しい2						やっぱりウル、ノートのこと\n知ってるんじゃ……
+CharacterOff
+	ディーア	驚き2	1_2_b
+	ウル		2_2
+Tween	ウル	PunchPosition	y=50				NoWait
+	ウル							ああっ！敵ですマスターくん！\n大変です、倒さなきゃ！
+	ディーア	驚き2	1_2					え？いや、あれは人畜無害な\nキノコリオン……
+	ディーア	驚き2	1_2_b
+	ウル							さあマスターくん！\n存分にウルを使ってください！さあ！
+	ディーア	驚き2	1_2					あ、ちょっと……！
+Se	走る
+Tween	ウル	MoveBy	x=-1000 time=2				NoWait
+Wait						.3
+Se	走る
+Tween	ディーア	MoveBy	x=-1000 time=2				NoWait
+CharacterOff
+Wait						.5
+	リディ	悔しい2						んぐ、もぐもぐ……ぷはっ
+	リディ	驚き2						うーん……\nやっぱり、ノートちゃんと\n似てる気がする……
+	リディ	悔しい2						気のせいかなあ……？
+If	isdebug==true
+CharacterOff
+Jump	*G_351_02
+EndIf
+EndScenario
+
+# G_351_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bg	鍛冶病院
+	ププッピマリー		2_2
+	鍛冶医クランベリー	通常2	1_2
+FadeIn	white					.5
+Tween	鍛冶医クランベリー	PunchPosition	y=50				NoWait
+	鍛冶医クランベリー							<dash=2>っていうのはどうかしら!?
+CharacterOff
+Param	character_grayout=false
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2
+	二人							は？
+CharacterOff
+Param	character_grayout=true
+Bgm	コメディ
+	鍛冶医クランベリー	怒り2	1_2
+	ププッピマリー		2_2
+	鍛冶医クランベリー							いやいや、どうだったかしら？\n今のプレゼン！
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア							どうだったと言われましても
+CharacterOff
+	鍛冶医クランベリー	悔しい2	1_2_b
+	ププッピマリー		2_2
+	ププッピマリー							ノートゥング=ウルの研究に\n協力する気になられましたか
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	リディ	驚き2						なられましたかといわれましても
+	ディーア	あはは2						いや……よく作りましたね\nこんなプレゼン資料……
+	リディ	驚き2						全部クランさんとマリーさんの\n妄想なのが驚きだよね……
+CharacterOff
+	鍛冶医クランベリー	笑い2	1_2
+	ププッピマリー		2_2
+	鍛冶医クランベリー							ウルちゃんとの生活がイメージできれば\nきっと協力してくれるかなーって\n思ったんだけど
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	悔しい2	2_2
+	リディ							てゆーかこのリディちょっと\nヤキモチ焼きすぎじゃない？
+CharacterOff
+	鍛冶医クランベリー	驚き2	1_2
+	ププッピマリー		2_2
+	鍛冶医クランベリー							そうかしら？\n普段のリディちゃんに結構近づけたと\n思うんだけど
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	悔しい2	2_2
+	リディ							そ、そんなにヤキモチ焼かないもん！\n……たぶん
+CharacterOff
+	鍛冶医クランベリー	通常2	1_2_b
+	ププッピマリー		2_2
+	ププッピマリー							しかし、あのノートゥング様を\n安定化させた魔剣がウル様です
+	ププッピマリー							味方に加われば、かなりの戦力の\n増強が見込めるはずでございます
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	通常2	2_2
+	ディーア							まあ確かに、戦力としては助かるな
+	リディ	悔しい2						あ、マスターも乗り気なんだ\nへぇ……
+	リディ							いーんじゃん？\nリディは大変だけど
+	ディーア	驚き2						り、リディ？
+	リディ	悲しい2						はぁ～マスターってば人たらし\nだからなぁ……
+	リディ							クランさんの作った資料の中でも\nなんかかっこつけてたし
+	ディーア	汗2						あれ考えたのオレじゃないからね!?\nまあ確かにそう思ってはいるけどさ
+	リディ	悔しい2						はぁ……気が抜けないなぁ……
+CharacterOff
+	鍛冶医クランベリー	笑い2	1_2_b
+	ププッピマリー		2_2
+	ププッピマリー							決まりのようですね
+	鍛冶医クランベリー	笑い2	1_2					ふふ、じゃあよろしくね♪
+CharacterOff
+	ディーア	驚き2
+	ディーア							ちょ……！何が!?\nまだ何も言ってないですけど!?\nクランさん、マリーさん！
+CharacterOff
+	リディ	悲しい2						はぁ……\nリディもちょっと出かけてくるね
+CharacterOff
+	ディーア	驚き2						ちょ、どこに……
+CharacterOff
+	リディ	悔しい2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	悔しい2						マスターにはおーしえなーい！
+Se	走る
+Tween	リディ	MoveTo	x=-800 time=2	easeOutCubic
+CharacterOff
+	ディーア	驚き2						ちょっとリディ！\n……はぁ、まったくもう
+	ディーア	悔しい2						……それにしても、\n魔剣ノートゥング=ウルか
+	ディーア	怪しい2						ノートゥングと日蝕の神ウルを\nかけ合わせて作られた\nノートゥングの完成形ね……
+	ディーア	悔しい2						……オレに使いこなせるかな\nいや、使いこなしてみせる！
+If	isdebug==true
+CharacterOff
+Jump	*G_351_01
+EndIf
+EndScenario

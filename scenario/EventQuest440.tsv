@@ -1,0 +1,2124 @@
+# E_440_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	川A
+	ゆうり	嬉しい？	2_2
+	ナナ	通常？	1_2
+FadeIn	white					.5
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	ゆうり	嬉しい？						せんぱーい！
+	ナナ	通常？						準備はできたー？
+CharacterOff
+	ディーア	絶望2
+Shake	ディーア		x=5				NoWait
+	ディーア							ああ……\nせっかくの休暇が……
+CharacterOff
+	ナナ	悲しい？	1_2
+	ゆうり	通常？	2_2					まだ言ってるの、先輩？
+	ナナ	悲しい？						まさか、今更やめるなんて\n言わないよね？
+CharacterOff
+	ディーア	怒り2						そうだな……\nここでやらなきゃ、オレは……！
+CharacterOff
+	ゆうり	通常？	2_2
+	ナナ	通常？	1_2					なぁんだ、覚悟できてるじゃん♪
+	ゆうり	嬉しい？						一緒にがんばろうね、先輩！
+Param	character_grayout=false
+Tween	ナナ	PunchPosition	y=50				NoWait
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	？？？？							真夏の特別合宿、スタートっ♪
+Param	character_grayout=true
+FadeOut	black					1
+CharacterOff
+StopBgm
+	　　　　　　　　　　
+FadeIn	black					1
+	　　　　　　　　　　							\n　　　　　　　<color=blue>～1時間前～</color>
+CharacterOff
+Bgm	都市
+	ディーア	嬉しい2	1_2
+	リディ	笑い2	2_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							川だー!!
+	ディーア	きらーん2
+	リディ	笑い2						えへへ\n嬉しそうだね、マスター♪
+	ディーア	笑い2						もちろん！\n特別に取れた休暇だからな！
+	リディ	驚き2						いつも海なのに、今回はどうしたの？
+	ディーア	通常2						たまにはこういう夏もいいだろ？\n川で水遊びもできるし、すぐ側の\n山に探検だっていける
+	ディーア	怪しい2						それに……
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+StopBgm
+Bg	海岸
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	　　　　　　　　　　
+	ディーア？	笑いF				0
+FadeIn	white					.3
+Wait						.7
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+	　　　　　　　　　　
+	イミティション=アリス	水着
+Param	character_grayout=true
+FadeIn	white					.3
+Wait						.7
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	川A
+	ディーア	怪しい2	1_2
+	リディ	通常2	2_2
+FadeIn	white					.5
+Bgm	都市
+	ディーア	怪しい2						<size=20>海に行くと\nろくな事がないからな……</size>
+	リディ	驚き2						ふぇ？\n何か言った？
+	ディーア	汗2						いや、なんでもない！
+	リディ	驚き2						魔剣ちゃんたちは連れてこなくて\n良かったの？
+	ディーア	通常2						ああ、今日はみんなに留守番して\nもらってるんだ
+	ディーア	笑い2						リディにゆっくり\n休んでもらうための時間に\nしたかったからな
+	ディーア							いつもバイト頑張ってくれてるし
+	リディ	照れ2						マスター……！\nありがとう！
+	ディーア	驚き2						それにしても……
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=false
+	酒場のおばちゃん		画面外_左_b			0
+	女の子		画面外_左			0
+	　　　　　　　　　　
+FadeIn	black					.5
+Se	走る
+Tween	酒場のおばちゃん	MoveTo	x=800 time=8				NoWait
+Wait						1
+	女の子
+Se	走る
+	　　　　　　　　　　
+Tween	女の子	MoveTo	x=800 time=4				NoWait
+Wait						.5
+FadeOut	black					.5
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	驚き2	1_2			0
+	リディ	通常2	2_2			0
+FadeIn	black					.5
+	ディーア							やっぱり暑いからか、\nこの辺は結構賑わってるよな\nちょっとした観光地だ
+	リディ							それは多分、\nここの噂のせいじゃないかな？
+	ディーア							噂って？
+CharacterOff
+StopSe
+	リディ	笑い2						ふふふ……
+CharacterOff
+	ディーア	怪しい2						な、なんだよその怪しい笑いは……
+CharacterOff
+Param	character_grayout=false
+	イベントスチル44001		エフェクト表
+	リディ	<Off>						リディが教えてあげるよ、マスター\nこの山にまつわる、こわ～い話……
+FadeOut	black					1
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bgm	絶望
+Bg	山岳A_過去
+FadeIn	black					.5
+	リディ	<Off>						『山の奥のどこかに棲む魔物を\n　倒した者は、剣豪となる資格を\n　与えられ、超常の力を得る』
+	リディ	<Off>						その噂を聞きつけて、今まで何人もの\n剣士が山に入っていったの<dash=2>
+	黒背景		エフェクト表			0
+Se	雨
+Bg	廃墟A_過去
+Wait						.5
+CharacterOff						0
+StopSe
+	リディ	<Off>						だけど、恐ろしいことに\nその人たちは一人残らず……
+	リディ	<Off>						魂が抜けたように闘気を失くすか\n行方不明のまま戻ってこないか、\nそのどちらかになってしまうの……
+FadeOut	black					.5
+CharacterOff						0
+	イベントスチル44001		エフェクト表			0
+Bg	川A
+ImageEffectOff	SpriteCamera	GrayScale
+FadeIn	black					.5
+	リディ	<Off>						そして、この時期になると\nなぜか行方不明になる人が\n多くなって<dash=2>
+FadeOut	black					.5
+Param	character_grayout=true
+CharacterOff						0
+Bgm	都市
+	リディ	笑い2	1_2			0
+	ディーア	汗2	2_2			0
+FadeIn	black					.5
+	リディ							……っていう\nちょっとこわーい話
+	リディ	通常2						その噂がおもしろおかしく広まって\n麓がちょっとした観光地に\nなったみたい
+	ディーア							そ、そんな話あるわけ……
+	リディ	笑い2						あっれー？\nマスターもしかして怖いのー？
+	ディーア	汗2						怖いわけないだろ？\n力が手に入るなんてあからさまに\n怪しいし……魔物だって本当かどうか
+	リディ	笑い2
+Tween	リディ	PunchPosition	x=50				NoWait
+	リディ	笑い2						言い訳しちゃってー♪\n怖いの隠してる証拠だよね♪
+	ディーア	怒り2						なっ、違うって！
+	リディ	笑い2						強がらなくていいんだよ、マスター！
+	ディーア	怪しい2						……リディはオレを怖がりだと\n思ってるんだな？
+	リディ	驚き2						あれ、マスター怒った？
+	ディーア	怪しい2						……よく分かったよ\nそんなに言うなら、\n実際に行って確かめてくるさ
+	リディ	驚き2						えっ？
+	ディーア							ちょっと山を散策すれば、\n噂は本当じゃないってすぐ分かるだろ
+	リディ	驚き2						ええ？\nや、やめておきなよマスター\nもし本当だったら……
+	ディーア	笑い2						リディは少しここで待っててくれ\nそれとも、一人だと怖いか？
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						むっ、リディ全然怖くないもん！
+	ディーア	笑い2						よし、じゃあ行ってくるからな
+FadeOut	black					1
+CharacterOff						0
+Bgm	平和
+Bg	森林A
+	ディーア	怪しい2				0
+FadeIn	black					1
+	ディーア							うーん、\n……かなり歩いたはずだけど\nやっぱり何もないな
+	ディーア							元々入り組んでる山みたいだし\nあれは人避けのための噂か……
+	ディーア	驚き2
+Se	ポップイン
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	ディーア	MoveBy	x=10				NoWait
+	ディーア	驚き2						うわっ……!?
+	ディーア	怒り2						なんだ？ 何か柔らかいものを\n踏んだ……？
+	ディーア	怪しい2						……まあいいか
+CharacterOff
+Bgm	緊迫
+	黒グラデーション		エフェクト表
+Se	闇1
+	魔物　		2_3_m			.5		………………
+CharacterOff
+	ディーア	悔しい2						なっ……!?
+CharacterOff
+	キノコリオン	大
+Tween	キノコリオン	PunchPosition	y=100 time=1.5				NoWait
+	キノコリオン	大						ノッコ―ー!!
+CharacterOff
+	ディーア	汗2						な、なんだ……キノコリオンか\nってかなり大きいな！
+CharacterOff
+	キノコリオン	大
+Tween	キノコリオン	ShakePosition	x=5				NoWait
+	キノコリオン							ノコノコーー!!
+CharacterOff
+	ディーア	汗2						お、怒ってる……！
+	ディーア	怪しい2						いや、まあ\nキノコリオンくらいならすぐに\n倒せ………………あっ
+Se	回想
+FadeOut	white					.5
+StopBgm
+CharacterOff						0
+Bg	川A
+ImageEffect	SpriteCamera	Sepia
+	ディーア	通常2	1_2			0
+	リディ	驚き2	2_2			0
+FadeIn	white					.5
+	リディ	驚き2						魔剣ちゃんたちは連れてこなくて\n良かったの？
+	ディーア	通常2						ああ、今日はみんなに留守番して\nもらってるんだ
+FadeOut	white					.5
+Bg	森林A
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	ディーア	本気2				0
+Bgm	コメディ
+FadeIn	white					.5
+	ディーア							魔剣だれも連れてきてなかったー!!!!
+CharacterOff
+	キノコリオン	大
+Tween	キノコリオン	ShakePosition	x=30 time=1.5				NoWait
+	キノコリオン	大						ノッコ――!!
+Se	走る
+Tween	キノコリオン	MoveTo	x=800 time=1
+CharacterOff
+	ディーア	本気2						うわああああああ!!
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=1				NoWait
+Wait						.5
+	キノコリオン	大	画面外_左
+Se	走る
+Tween	キノコリオン	MoveTo	x=800 time=2				NoWait
+Wait						1
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	本気2				0
+Bg	森林A
+FadeIn	black					.5
+Bgm	絶望
+	ディーア							くそ、いつもならキノコリオンくらい\n何でもないのに……！
+CharacterOff
+	キノコリオン	大
+Tween	キノコリオン	PunchPosition	y=100				NoWait
+	キノコリオン	大						ノコーーーーーーーーーーーー!!!!
+CharacterOff
+	ディーア	怒り2						（どうする？　追われたまま\n　リディの所に戻るわけには……）
+FadeOut	black					.5
+CharacterOff						0
+	黒グラデーション		エフェクト表2
+	ナナ	武器？	エフェクト表			0
+	ゆうり	武器？	エフェクト裏			0
+	　　　　　　　　　　
+FadeIn	black					.5
+Wait						1
+CharacterOff
+	ディーア	悔しい2						なっ!?　今のは……!?
+FadeOut	black					.5
+CharacterOff						0
+	ナナ	武器？	エフェクト表			0
+	ゆうり	武器？	エフェクト裏			0
+FadeIn	black					.5
+Wait						1
+CharacterOff
+	ディーア	驚き2						やっぱり、魔剣だ……！\nでも、どうしてこんなところに……
+CharacterOff
+	キノコリオン	大						ノコノコーー!!
+CharacterOff
+	ディーア	怒り2						考えてる場合じゃない、とにかく\n今はここを切り抜けて……！
+Param	character_grayout=false
+	オーラ青		エフェクト表
+	ディーア							<ruby=アンロック>魔剣解放</ruby>!!
+Se	光3
+FadeOut	white					.1
+CharacterOff						0
+Param	character_grayout=false
+	　　　　　　　　　　
+	ナナ	拡大通常？	エフェクト表			0
+FadeIn	white					.7
+Wait						1
+	ゆうり	拡大通常？	エフェクト表
+Wait						1
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+	ナナ					0
+	ゆうり	慌て？				0
+FadeIn	white					.3
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	ゆうり	慌て？						うわぁ!?
+	ナナ	驚き？						び、びっくりしたぁ！
+	ゆうり	通常？						きゅ、急になんですか!?
+	ナナ	通常？						あっ、もしかして、特訓希望の人？
+CharacterOff
+	ディーア	驚き2						特訓……？
+	ディーア	怒り2						いや、いきなりで悪いんだが\n挨拶はひとまず後回しにしていいか？
+CharacterOff
+	ゆうり	慌て？	2_2
+	ナナ	通常？	1_2					わかってるって、特訓なら\nすぐにでもぉ♪
+	ゆうり	慌て？						な、ナナちゃん、あれ見て……！
+	ナナ	驚き？						え？　\n……あれキノコリオンじゃん！\nなんか超怒ってる!?
+	ゆうり	慌て？						どうしてあんなに暴れて……？
+CharacterOff
+Bgm	バトル
+	ディーア	本気2						全部後で説明する！\nとにかく、力を貸してくれ！
+CharacterOff
+	ゆうり	通常？	2_2
+	ナナ	通常？	1_2					う、うん！ 分かった！
+	ゆうり	通常？						うん、ゆうりたち\n一緒に戦うよ！
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_440_02
+EndIf
+EndScenario
+
+# E_440_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	森林A
+	キノコリオン	大
+FadeIn	white					.5
+FadeOut	white					.1
+Se	光1
+Param	character_grayout=false
+FadeIn	white					.1
+Tween	キノコリオン	ShakePosition	x=10 time=1
+Wait						.5
+Se	風2
+	オーラ青		エフェクト表			.7
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						よし、怯んだ……！\n今のうちに撤退しよう！
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=1
+FadeOut	black					.5
+CharacterOff
+Bg	川A
+StopBgm
+	ディーア	悔しい2
+FadeIn	black					.5
+	ディーア							ふぅ……なんとか撤退できたか……\nありがとう、二人とも
+CharacterOff
+	ゆうり	通常？	2_2
+	ナナ	悔しい？	1_2					はぁ、もうびっくりだよぉ！\nあんなに怒ってるの初めて見たよ！\nね、ゆうち？
+	ゆうり	通常？						うん……あれじゃ、また暴れるかも\nしれないね、ナナちゃん……
+CharacterOff
+	ディーア	怒り2						とりあえず、ここまでくれば\nしばらくは大丈夫だと思うけど……
+	ディーア	通常2						さっきは挨拶もできなくてごめんな\nオレは<param=name>だ
+Bgm	平和
+CharacterOff
+	ナナ	通常						対ムラマサ訓練及試験魔剣\n阿號 七詩村正だよ……って長いかな\n「ナナ」って呼んでね♪
+CharacterOff
+	ゆうり	通常						同じく、対ムラマサ訓練及試験魔剣\n吽號 有里村正です\n「ゆう」って呼んで欲しい、かな
+CharacterOff
+	ディーア	驚き2						ムラマサ……？\n訓練及び試験……？
+CharacterOff
+	ゆうり	通常	2_2
+	ナナ	通常	1_2					ちゃんとアンロックされるのって\n初めてじゃない？
+	ゆうり	照れ						うん、今度は合格できるかもね
+	ナナ
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ	通常						じゃあ早速始めよっか！
+CharacterOff
+	ディーア	驚き2						え、何を？
+CharacterOff
+	ゆうり		2_2
+	ナナ		1_2					何って、強くなるための特訓だよ！
+	ゆうり							先輩、そのために\nここに来たんでしょ？
+CharacterOff
+	ディーア	怒り2						ええっと……と、特訓って？
+CharacterOff
+	ゆうり		2_2
+	ナナ	驚き	1_2					……もしかして何も知らずに\n来ちゃったの？
+	ゆうり	慌て						噂を聞いてここに来たんじゃないの？
+CharacterOff
+	ディーア	怪しい2						噂って、\n力が手に入るっていうあの……
+CharacterOff
+	ゆうり		2_2
+	ナナ	通常	1_2					なぁんだ、やっぱり特訓しに\n来たんじゃん！
+	ゆうり	照れ						よろしくお願いしますね、先輩♪
+CharacterOff
+	ディーア	驚き2						ちょ、ちょっと待ってくれ\nオレは特訓しに来たわけじゃない！
+CharacterOff
+	ゆうり		2_2
+	ナナ	驚き	1_2
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ	驚き						ええっ!?
+	ゆうり	通常						で、でも先輩……\nもう特訓は始まっちゃったよ？
+	ナナ	悲しい						そうだよ、もうあのキノコリオンを\n倒さないと、山からは\n出られないんだよ？
+CharacterOff
+	ディーア	本気2						えっ!?　出られない!?
+CharacterOff
+	ナナ		1_2
+	ゆうり		2_2					うん……先輩、やっぱり何も\n知らないんだね
+	ナナ							仕方ないなぁ♪\nナナたちが、ちゃんと教えてあげる！
+	ゆうり							ゆうりたちは、訓練用の魔剣なの
+	ゆうり							例えば、妖刀ムラマサさんみたいな\n魔刀や妖刀<dash=2>そういう超常の\n力を使えるように作られた魔剣だよ
+	ナナ							あの噂を聞きつけた剣士の人を\n訓練して、素質があるか試すために\nずっとここにいるんだ♪
+	ナナ							あのキノコリオン見たでしょ？
+CharacterOff
+	ディーア	驚き2						あ、ああ
+CharacterOff
+	ゆうり		2_2
+	ナナ		1_2
+	ナナ							あれはこの山に棲みついた特殊な\nキノコリオンだよ
+	ナナ							刺激すると幻覚を見せる胞子を\n吐き出しちゃうんだよね
+CharacterOff
+	ディーア	悔しい2						幻覚を見せる……？
+CharacterOff
+	ナナ		1_2
+	ゆうり		2_2					しかもこの時期になると\n増殖しちゃって、放っておくと\n魔界を覆い尽くす危険もあって……
+	ナナ							だからナナたちは、ずっとこの山で\n訓練してるんだ♪
+CharacterOff
+	ディーア	怒り2						訓練の過程でキノコリオンが\n増え過ぎるのを防ぎつつ、\n剣士を育ててるのか
+CharacterOff
+	ゆうり		2_2
+	ナナ		1_2					そういうこと♪
+	ゆうり							山の主にあたる\nあの大きいキノコリオンを\n倒せれば、訓練は修了するの
+	ゆうり							それで十分な力を\n手に入れた証明になるから
+CharacterOff
+	ディーア	驚き2						山を降りられないっていうのは\n幻覚のせいなんだよな？
+CharacterOff
+	ナナ	通常	1_2
+	ゆうり		2_2					そうなの\n元々迷いやすい山なんだけど\n幻覚のせいで更に危険になってて……
+	ナナ	悔しい						がんばれば降りられるんだよ？\nただ、何日かかるか分からないし、\n大怪我する人だっている……
+	ゆうり							でも多分、あのキノコリオンは\n先輩に対して\n怒ってるみたいだから……
+	ナナ	驚き						あ、そっか\n降りようとしても追いかけてくるね
+CharacterOff
+	ディーア	怪しい2						無闇に山を降りても\n麓にいるリディや他の人を\n危険に晒すだけ……か
+	ディーア	怒り2						……要するに、ここで二人と\n特訓してあのキノコリオンを倒す方が\n早い上に、魔界も安全ってことだな
+CharacterOff
+	ナナ		1_2
+	ゆうり	照れ	2_2					うん、そうだよ、先輩！
+	ナナ							飲み込み早いねぇ♪
+CharacterOff
+	ディーア	悔しい2						なら、やるしかない、な……
+	ディーア	絶望2
+Tween	ディーア	ShakePosition	x=10				NoWait
+	ディーア	絶望2						くっ……せっかくの休暇が……！\n余計なことをするんじゃなかった!!
+CharacterOff
+	ナナ		1_2
+	ゆうり	照れ	2_2					反省会は後にして、\n今はとにかく頑張ろうよ、先輩
+	ナナ							ナナとゆうちと三人で\n特訓して、一緒に強くなろうよ♪
+	ゆうり							特別な夏合宿だね♪
+CharacterOff
+	ディーア	怒り2						……ああ\n七詩、有里！　よろしく頼む！
+FadeOut	black					.5
+StopBgm
+CharacterOff						0
+Param	character_grayout=false
+	イベントロゴ440		エフェクト表			1
+Se	シナリオスタート
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　<color=blue>エンドレスサマーレッスン!!\n　　　～ナナとゆうりの特別合宿～</color>
+FadeOut	black					1
+Param	character_grayout=true
+CharacterOff						0
+	黒グラデーション		エフェクト裏
+	ナナ		1_2			0
+	ゆうり		2_2			0
+Bgm	絶望
+FadeIn	black					1.5
+	ナナ							さて、どうなるかなぁ♪\n楽しみだね、ゆうち
+	ゆうり							きっとあの人、\n失敗しちゃうんじゃないかな……
+	ナナ							そうかもしれないけど\nやるしかないって
+	ナナ	笑い						今回はちゃんと\nナナたちをアンロックできてるしさ♪
+	ゆうり	慌て						でも、今は山の様子が……
+	ナナ	照れ						……ナナたちのやることは\n変わらないよ
+	ゆうり	通常						……そうだね、ただ\nあの人を試して、見極める
+	ナナ	通常						そういうこと♪\nあの人がナナの誘いに乗っちゃったら\nゆうちの出番、なくなっちゃうね
+	ゆうり							それはちょっと寂しいけど……\nまあ、訓練だもん\n仕方ないよね
+CharacterOff
+	ナナ	拡大通常	エフェクト表					それじゃあ、\nお仕事始めようか、ゆうち♪
+	ゆうり	拡大照れ	エフェクト表					うん♪
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_440_03
+EndIf
+EndScenario
+
+# E_440_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	川A
+	ゆうり
+FadeIn	white					.5
+	ゆうり							じゃあ、ゆうりはキノコリオンの\n様子を見てくるね
+CharacterOff
+	ディーア	驚き2						えっ、三人で特訓するんじゃ……？\nそれに、幻覚は大丈夫なのか？
+CharacterOff
+	ゆうり	嬉しい						ここからそんなに\n離れなければ大丈夫だよ！
+	ゆうり	照れ						それに、ナナちゃんとゆうりの訓練は\n一緒にやらない方が良いんだよね
+CharacterOff
+	ナナ	通常						仲良しなんだけどね♪\n試してる項目が違うんだよぉ
+CharacterOff
+	ディーア	通常2						なるほど……\n分かった、キノコリオンに\n動きがあったら知らせてくれ
+CharacterOff
+	ゆうり	笑い						うん！　まかせて、先輩っ
+Se	走る
+Tween	ゆうり	MoveTo	x=800 time=1.5				NoWait
+FadeOut	black					.5
+CharacterOff						0
+	ナナ		1_2
+	ディーア	通常2	2_2
+FadeIn	black					.5
+	ナナ							えへへ……二人っきりになったね♪\nじゃあ特別特訓、はじめよっか
+	ディーア							ああ、よろしくな七詩
+	ナナ	悔しい						むぅ、ナナって呼んで\n欲しいんだけどなぁ……\nまぁいいけど
+	ナナ	通常						キミはナナに何て呼んで欲しいの？\nマスターさん？ マスター様？\nご主人さま……とか？
+	ディーア	通常2						七詩が好きなように\n呼んでくれればいいよ
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ	悔しい						もう、つれなーい！
+FadeOut	black					1
+FadeIn	black					1
+	ディーア	悔しい2						はぁ、はぁ……\nひたすら素振りっていうのも\nなかなか大変だな
+	ナナ							お疲れさまぁ♪
+	ディーア	驚き2						七詩、次は何をする？
+	ナナ	嬉しい						やる気満々だねぇ♪\n特訓メニューならたくさんあるよ！
+	ディーア	悔しい2						どんどんやっていけば\n早くあのキノコリオンに挑めるしな
+	ナナ	悲しい						えー？　だめだよ、焦りは禁物！
+	ナナ	悲しい						ナナは訓練魔剣だから、\nそうやって焦って失敗した人、\nたくさん見てるんだからね？
+	ディーア	悔しい2						だけど、ぐずぐずしてたら\n魔界が危ないだろ？
+	ナナ	悲しい						そうならないためにナナたちが\nいるんだし、
+	ナナ	悔しい						焦った結果キミが倒されちゃったら\n元も子もないでしょぉ？
+	ディーア	怪しい2						それは……\n確かにそうだな
+	ディーア	驚き2						着実にやっていく方が、\n魔界の安全に繋がる、か……
+	ナナ	通常						うん、そういうこと！\n大丈夫だよ♪\nナナがちゃんと特訓するから♪
+	ナナ							色んなこと\nじっくり勉強していこうね？
+	ディーア	驚き2						色んなことって？
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	ナナ	拡大通常	エフェクト表					もちろん分かるでしょ？\n……いろんなコト、だよ♪
+CharacterOff
+Param	character_grayout=true
+	ナナ	通常						（よーし……これだけ\n　近づいてささやいたら、\n　きっとあっという間に……♪）
+CharacterOff
+	ディーア	通常2						そっか、とにかく色々なんだな！\n何すればいい？　筋トレか？
+CharacterOff
+	ナナ	驚き						（あ、あれ……？）
+FadeOut	black					1
+CharacterOff
+	　　　　　　　　　　
+FadeIn	black					1
+								\n　　　　　　<color=blue>～2時間後～</color>
+CharacterOff						0
+Param	character_grayout=false
+	ナナ		2_3			0
+	ディーア	本気2	画面外_左			0
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=3				NoWait
+	ナナ	通常						ねぇねぇ、そろそろ疲れた\nんじゃない？
+	ナナ							ちょっとお休みして\nナナとお喋りしたり、しない？
+CharacterOff
+Param	character_grayout=true
+	ディーア	本気2	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=3				NoWait
+	ディーア	本気2						いや、まだいける!!\nあとこの岩場100周はいける!!
+CharacterOff
+	ナナ	驚き
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ	驚き						えっ、ちょ、ちょっとー!!
+FadeOut	black					1
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	black					1
+	　　　　　　　　　　							\n　　　　　<color=blue>～さらに1時間後～</color>
+FadeOut	black					.5
+CharacterOff
+	ディーア	悔しい2	2_2			0
+	ナナ	悔しい	1_2			0
+FadeIn	black					.5
+	ディーア	悔しい2						はぁ、はぁ……！\nさすがに、やりすぎた……
+	ナナ	悔しい
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ	悔しい						もう、ストップって\n何回も言ったのにぃ！
+	ディーア	汗2						ごめん！\nつい気合が入って……
+	ナナ	悔しい						がんばりすぎは良くないよ？\nお休みだって\n大事な訓練の内なんだから！
+	ディーア	汗2						そうだよな……
+	ナナ	笑い						それで、ご飯食べるのも訓練の内！
+	ディーア	通常2						うん、七詩の言う通りだよ
+	ナナ	通常						だから、一緒にご飯、作ろう？
+	ディーア	笑い2						ああ、そうだな！
+FadeOut	black					1
+FadeIn	black					1
+	ナナ	嬉しい						えへへ……こうやって\n外で料理したりしてると\n夏合宿って感じだね♪
+	ディーア	通常2						……確かに\nもう本格的な合宿だな
+Tween	ナナ	MoveBy	x=10 time=1				NoWait
+	ナナ	通常						しかも、ちょっとデートっぽくない？
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	ナナ	拡大通常	エフェクト表					ずっとナナと隣で訓練して、それから\nナナと一緒にご飯準備して……\nね、ドキドキしない……？
+CharacterOff
+Param	character_grayout=true
+	ナナ		1_2
+	ディーア	怒り2	2_2					ああ……ドキドキするな……
+	ナナ	嬉しい
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ	嬉しい						…………!!
+	ナナ	通常						や、やっぱり？\nキミも女の子と二人きりになると……
+	ディーア	悔しい2						はぁ、はぁ……\nまださっきの訓練で\n息が上がっててな
+	ナナ	驚き						えっ？
+	ディーア	汗2						ドキドキしっぱなしだよ
+	ナナ
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ	驚き						えっ、そっちなの!?
+	ディーア	驚き2						ん？ そっちって何だ？
+	ナナ	驚き						う、ううん！\nなんでもない！
+	ナナ	悔しい						（むぅ……ときめいてるんだと\n　思ったのにぃ！）
+FadeOut	black					1
+FadeIn	black					1
+	ディーア	通常2						さて、腹ごしらえもしたし、\n次の特訓は何する？
+	ナナ	通常						えっとぉ……\nキノコリオン狩りはどう？
+	ディーア	通常2						おっ、ついに実戦か！
+	ナナ	微笑み						そう、この山に棲むキノコリオンは\n小さい子でも\n幻覚を見せる胞子を飛ばすから
+	ナナ	通常						実戦も兼ねて、少しでも\n胞子を減らそうって作戦♪
+	ディーア	笑い2						なるほど、一石二鳥だな
+	ナナ	通常						でしょでしょ？\n少しだけ奥に行けば見つかるはずだよ
+	ディーア	通常2						よし、さっそく出発しよう！
+	ナナ	笑い						うん！
+FadeOut	black					.5
+CharacterOff						0
+StopBgm
+Bg	森林A
+	ディーア	驚き2				0
+Wait						1
+FadeIn	black					.5
+Bgm	都市
+	ディーア	驚き2						七詩、大丈夫か？
+CharacterOff
+	ナナ	悔しい						うーん、足場が悪くて\n歩きづらくて……
+CharacterOff
+	ディーア	通常2						ほら
+CharacterOff
+	ナナ	驚き						え？
+CharacterOff
+	ディーア	通常2						手を繋いだ方が、こけそうになった\n時に助けられるだろ？
+CharacterOff
+	ナナ	嬉しい						えっ、ほんとに？
+CharacterOff
+	ディーア	驚き2	3_3
+	ナナ	驚き	1_3
+Tween	ナナ	PunchPosition	y=50				NoWait
+Tween	ナナ	MoveTo	x=-90				NoWait
+	ナナ	驚き						……って、ひゃあっ！
+Tween	ディーア	MoveTo	x=90 time=1				NoWait
+	ディーア	驚き2						おっと！\nだから言っただろ\nこけたら危ないって……
+	ナナ	通常						ありがと……\nあっ、せっかくならこのまま\nお姫様抱っこして欲しいなぁ♪
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	ナナ	拡大通常	エフェクト表					それで、ナナのこと……\nギュってしてくれてもいいんだよ？
+CharacterOff
+Param	character_grayout=true
+	ナナ		1_2
+	ディーア	怒り2	2_2					それは……多分やめた方がいい
+	ナナ	驚き						えっ？
+CharacterOff
+StopBgm
+	ナナ	驚き						（なんで？\n　なんで全然効かないの？）
+	ナナ	悔しい						（誘惑しても全然なびかないし……\n　もしかしてナナ……\n　魅力的じゃないの？）
+CharacterOff
+	ナナ		1_2
+	ディーア	通常2	2_2					前が見辛くなったら、\nうっかりこける可能性が高いからな
+	ナナ	悔しい						別にナナ、怪我とか気にしないよ？
+	ディーア	通常2						女の子に怪我させるわけには\nいかないだろ
+	ナナ	照れ						えっと……ありがと……
+Bgm	平和
+CharacterOff
+	ナナ	悔しい						（もう、またそうやって……）
+	ナナ	悔しい						（ナナの誘惑は全然効かないのに、\n　なんでナナばっかり……）
+CharacterOff
+	ナナ	悔しい	1_2
+	ディーア	驚き2	2_2					あれ、七詩、その顔……？
+	ナナ	驚き						えっ、何!?\nナナの顔がどうしたの!?
+CharacterOff
+	ナナ	照れ						（まさか、赤いわけじゃないよね!?）
+CharacterOff
+	ディーア	驚き2						………………
+CharacterOff
+	ナナ	悲しい						えっ、まっ、まって……\n顔、顔が近いってぇ……！
+CharacterOff
+	ディーア	怪しい2						動かないで、じっとしててくれ
+CharacterOff
+	ナナ	悲しい						ひゃぁああ!?
+CharacterOff
+	ディーア	笑い2						よし、綺麗になった！
+CharacterOff
+	ナナ	驚き						……え？
+CharacterOff
+	ディーア	笑い2						頬に少し泥がついてたんだよ\nちゃんと取れたから大丈夫
+CharacterOff
+	ナナ	驚き						泥……？
+CharacterOff
+	ディーア	通常2						身だしなみとか、\n七詩気にしそうだもんな
+CharacterOff
+	ナナ	驚き						そ、そこまで気遣ってくれたの？
+CharacterOff
+	ディーア	通常2						オレは汚れたって構わないけどさ\n七詩の綺麗な顔が汚れてるのは\n放っておけなくて
+CharacterOff
+	ナナ	微笑み						へ、へぇー、そう……\nあ、ありがと……
+CharacterOff
+	ディーア	笑い2						どういたしまして
+CharacterOff
+	ナナ	悔しい						ほ、ほら！　こんなところで\n立ち止まってる場合じゃないよ！\n早く実戦に行くよー！
+CharacterOff
+	ディーア	通常2						分かってるって
+CharacterOff
+	ナナ	悔しい						（もう、なんで？　なんでなの？）
+	ナナ							（誘いに乗ってこないのは\n　ナナの試験に合格できるってこと）
+	ナナ							（だから良いことのはずなのに……\n　……なんでこんなに悔しいの？）
+	ナナ	照れ						（そ、それに……なんで……）
+Param	character_grayout=false
+	オーラ桃		エフェクト裏			1
+	ナナ	悲しい						（なんでナナの方が、\n　…………ドキドキしてるの？）
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_440_04
+EndIf
+EndScenario
+
+# E_440_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	川A
+	ナナ	照れ
+FadeIn	white					.5
+	ナナ	照れ						一旦落ち着こう……
+	ナナ	照れ						ナナは、あの人の忍耐を試す魔剣\nきっと、ドキドキしてたのも\n気のせいだよ……
+	ナナ							うん、そうに決まってる！
+	ナナ	悔しい						でもやっぱりなんか悔しいし……\n今日こそお誘い成功させるもん！
+FadeOut	black					.5
+CharacterOff						0
+	ナナ	通常	画面外_左
+	ディーア	驚き2	2_2
+FadeIn	black					.5
+Se	走る
+Tween	ナナ	MoveTo	x=-90 time=1
+	ナナ	通常						ねぇねぇ♪
+	ディーア	驚き2						ん？ どうした？
+	ナナ	微笑み						……これから\n近くの川に行ってみない？
+	ディーア	通常2						ああ、川の周りを走るのか？
+	ナナ	通常						うーん、っていうより\nナナと一緒に、楽しいことしようよ\nたまには、ね？
+	ナナ							楽しく訓練っていう体でね♪\nいいと思わない？
+CharacterOff
+	ナナ	拡大通常	エフェクト表					キミだって元々ここには\n休暇に来たんでしょ？
+	ナナ							……えへへ、ナナの水着とか\n見たくない？
+CharacterOff
+	ディーア	驚き2						えっ
+CharacterOff
+	ナナ	通常						えへへ、期待した？\nもし連れてってくれたら……\nすぐに着替えるんだけどなぁ？
+	ナナ	微笑み						（よし！　これで間違いなく\n　ドキドキして……）
+CharacterOff
+	ディーア	怒り2						……でも、それだと\n結局遊びになるだろ？\n今は特訓に集中しよう、七詩
+CharacterOff
+	ナナ	驚き
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ							（ドキドキしてないしっ!?）
+Bgm	絶望
+	ナナ	悔しい						な、なんで……？\nナナに、そんなに興味ないの？
+CharacterOff
+	ディーア	驚き2						えっ……\n七詩、落ち込んでるのか？
+CharacterOff
+	ナナ	泣き
+Tween	ナナ	ShakePosition	x=5 time=1				NoWait
+	ナナ	泣き						だって……だって……
+CharacterOff
+	ナナ	泣き	1_2
+	ディーア	怒り2	2_2					ごめん……！\n傷つけるつもりじゃなかったんだ
+	ディーア	通常2						七詩と水遊びするのは\n楽しいだろうなって思ってるよ！
+	ディーア							だから、この事件が終わって\n訓練も全部やり遂げてからの\nお楽しみってことにしないか？
+	ナナ	泣き						ほ、ほんと……？
+	ディーア	通常2						ああ、約束だ\n全部終わったら、一緒に水遊びしよう
+	ナナ	微笑み						うん！\n約束だからねっ！
+Bgm	平和
+	ディーア	通常2						さあ、とりあえず素振りから始めるか
+	ナナ	笑い						うん！
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=2
+StopBgm
+	ナナ	照れ						やっぱりナナ……\nドキドキしてる、よね……
+FadeOut	black					.5
+CharacterOff
+Bg	川A（夕）
+	ディーア	怒り2	2_2
+	ナナ	通常	1_2
+Wait						1
+FadeIn	black					.5
+	ナナ	通常						お疲れ様ぁ♪\n少し休憩しよー！
+	ディーア	怒り2						七詩、どうだ？
+	ナナ	驚き						えっ、ど、どうって？
+Tween	ディーア	MoveTo	x=45 time=1				NoWait
+	ディーア	怒り2						オレのこと見て、どう思う？
+	ナナ	驚き						ええっ？　ええっと……\n……かっこい……じゃなくて、\n鍛えられてきた、かな？
+	ディーア							そろそろ、あのキノコリオンに\n挑戦しても\nいいんじゃないかと思うんだ
+Bgm	絶望
+	ナナ	悲しい						えっ、でも……
+	ディーア	通常2						まだ実力が不足してるかどうかは、\n実際に戦って見極めた方が早いと\n思うんだ
+	ナナ	悲しい						そ、それはそうだけど……！
+	ディーア	驚き2						まだ全然訓練が足りないか？
+	ナナ	照れ						ううん、そんなこと……ないよ
+	ディーア	通常2						なら行こうか、七詩
+	ナナ	照れ						うん……そうだね
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=2
+CharacterOff
+	ナナ	悲しい						……………………
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=false
+	夕焼け空		エフェクト表
+Wait						.1
+FadeIn	black					.5
+	七詩村正	<Off>						…………もし
+	七詩村正	<Off>						もし、あの山の主が\n倒されちゃったら……
+	七詩村正	<Off>						もし、これで実力が\n証明されちゃったら
+	七詩村正	<Off>						合宿も終わっちゃって\nキミも元いた場所に帰っちゃって
+	七詩村正	<Off>						ナナたちはここに置いて行かれて……
+	七詩村正	<Off>						……あっさり\n忘れられちゃうんだろうなぁ……\n……いやだな……
+	七詩村正	<Off>						お別れは、いやなの……
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff
+ImageEffect	SpriteCamera	Bloom
+	ナナ	拡大泣き	エフェクト裏
+	ネームプレート	七詩村正						<speed=0.1> </speed>	BrPage
+Wait						.2
+FadeIn	white					.3
+	ネームプレート	七詩村正						……あーあ、おかしいなぁ……
+	ナナ	拡大泣き
+	ネームプレート	七詩村正						こんなに必死になるはずじゃ\nなかったのに
+	ネームプレート	七詩村正						こんなに……\n好きになるはずじゃ\nなかったのに……
+FadeOut	black					1
+ImageEffectOff	SpriteCamera	Bloom
+If	isdebug==true
+CharacterOff
+Jump	*E_440_05
+EndIf
+EndScenario
+
+# E_440_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	森林A
+FadeIn	white					.5
+	ナナ	驚き						（すごい……思ったより訓練の成果が\n　出てる……）
+CharacterOff
+	ディーア	悔しい2						うーん、今のは大きかったけど\nあのキノコリオンじゃなかったな……
+StopBgm						.5
+	ディーア	驚き2						とりあえず、実戦は終わったけど\nどうだ、七詩？
+CharacterOff
+	ナナ	驚き
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ	驚き						えっ!?\nえーっと……その……\nま、まだ力が足りないみたい！
+Bgm	平和
+CharacterOff
+	ナナ	通常	1_2
+	ディーア	悔しい2	2_2					そうか
+	ナナ	通常						そう、そうだよっ！\nこの山の主は、今のキノコリオンより\n強力なんだから♪
+	ディーア	怒り2						なら、まだ特訓が必要ってことだな
+	ナナ	通常						そういうこと♪
+	ナナ	微笑み						それより、頑張ったご褒美に\nナナがいいことしてあげよっか♪
+Tween	ナナ	MoveBy	x=10				NoWait
+	ナナ	通常						ナナからのご褒美、何が欲しいー？\n……何でも、言ってみて？
+	ディーア	怪しい2						そうだな……ちょっと……\n休ませて……
+	ナナ
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ	驚き						思ったより燃え尽きてるー!!
+	ディーア	汗2						訓練続きからの実践でさすがに……
+Tween	ナナ	MoveBy	x=-10				NoWait
+	ナナ	通常						もう、仕方ないなぁ\nとりあえず、合宿のとこに行こう？
+	ディーア							そうだな……戻ろうか
+	ナナ	笑い						……うん♪
+CharacterOff
+	ナナ	微笑み						（良かった……\n　まだ終わりじゃないんだ……）
+FadeOut	black					.5
+CharacterOff						0
+	　　　　　　　　　　					0
+StopBgm
+Bg	川A（夕）					0
+	ナナ	照れ				0
+FadeIn	black					.5
+	ナナ	照れ						思わず引き留めちゃったな……\nでも、あのキノコリオンより\n主の方が強いのは本当だし……
+	ナナ	微笑み						まだ……まだ一緒にいても……\nいいよね……
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	本気2				0
+Bgm	平和
+FadeIn	black					.5
+Se	斬1
+Tween	ディーア	PunchPosition	x=50				NoWait
+	ディーア	本気2						はぁっ！
+CharacterOff
+	ディーア	本気2	2_2
+	ナナ	通常	1_2					ねぇ、まだ練習するの？\nもう暗くなってきたし……\nそろそろ休憩しない？
+	ディーア	悔しい2						ごめん七詩\nもう少しだけ……
+	ナナ	通常						だぁめ♪\n休憩だって特訓の内って言ったよね！\nさっきまでへとへとだったじゃん！
+	ディーア	怪しい2						はぁ、はぁ……\nまあたしかに、それもそうか……
+	ナナ	微笑み						ね、一緒に座ろう？
+Tween	ディーア	MoveBy	y=-30				NoWait
+	ディーア	悔しい2						はぁ……ごめんな\nせっかく特訓してくれてるのに
+Tween	ナナ	MoveBy	y=-30				NoWait
+	ナナ	微笑み						いいんだよ\nむしろ……ナナたちはずっと……
+	ディーア	驚き2						ん？
+	ナナ	驚き						……！\nううん、何でもない！
+	ナナ	微笑み						えへへ♪　こうしてると、\nデートみたいじゃない？
+	ディーア	通常2						そうか？
+	ナナ	通常						ほら、キミも\nドキドキしてるじゃん♪
+	ディーア	あはは2						いや、これはまた\n息が上がってるだけだよ
+	ナナ	悔しい						むぅ……\nナナは、こんなに\nドキドキしてるんだけどなぁ？
+Tween	ナナ	MoveTo	x=-45 time=1				NoWait
+	ナナ	照れ						ねぇ、分かるでしょ……？
+	ディーア	怪しい2						ごめん、ちょっと疲れてて……\nねむ……
+CharacterOff	ディーア					1
+StopBgm						.7
+Wait						1
+	ナナ	通常						……あれ、寝ちゃった？
+	ナナ							やっぱり、ナナに触らないんだね……\nえへへ、意気地なし♪
+	ナナ	微笑み						……でも、これで良かったかも\n本当に触れられたらきっと\nナナの気持ち、伝わっちゃうから……
+	ナナ	微笑み						ふわぁ……\nナナも眠くなって……きちゃっ……
+FadeOut	black					1
+StopBgm
+CharacterOff						0
+Bg	川A
+	ゆうり	嬉しい	画面外_右			0
+Wait						3
+FadeIn	black					.5
+Se	走る
+Tween	ゆうり	MoveTo	x=0 time=2				NoWait
+	ゆうり	嬉しい						さて、そろそろ交代かなー
+	ゆうり							ナナちゃん、上手くやってるかな？\nふふ、失敗して落ち込んでたりしてね
+	ゆうり	笑い						ねぇ、ナナちゃーん！\nそろそろゆうりとー……
+	ゆうり	慌て
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	ゆうり	慌て						………………って…………!?
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル44002		エフェクト表			0
+FadeIn	white					.5
+	ナナ	<Off>						むにゃ……\n……あったかい……
+	ナナ	<Off>						うーん……もっと……\nナナのちかくに……
+FadeOut	white					.5
+Param	character_grayout=true
+CharacterOff						0
+	ゆうり	泣き				0
+FadeIn	white					.5
+Shake	Graphics						NoWait
+	ゆうり	泣き						きゃあああああああああああああ!?!?
+CharacterOff
+Bgm	コメディ
+	ディーア	驚き2						はっ!!\nど、どうした!?
+CharacterOff
+	ナナ	寝顔						むにゃむにゃ……\nうーん、まだねむい～……
+CharacterOff
+	ゆうり	泣き
+Tween	ゆうり	ShakePosition	x=5 time=1				NoWait
+	ゆうり	泣き						な、なな、ナナちゃん……\n何で先輩と並んで寝てるの!?
+CharacterOff
+	ナナ	照れ						……ふぇ？\nな、なにごとぉ……？
+	ナナ	驚き						あ、あれ？\nナナいつの間に……
+CharacterOff
+	ゆうり	泣き						先輩、ひどいよ……！\nまさか本当に\nナナちゃんに手を出すなんて……!!
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						えっ、ご、誤解だ！
+CharacterOff
+	ナナ	驚き						手を出す!?　ち、違うよ、ゆうち！\nただちょっと疲れて\n寝ちゃっただけで……！
+CharacterOff
+	ゆうり
+	ゆうり	泣き						ばかーーーー!!
+Se	走る
+Tween	ゆうり	MoveTo	x=800 time=2				NoWait
+Wait						1
+CharacterOff
+	ナナ	悲しい						ま、待ってー!!　誤解だってばー!!
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_440_06
+EndIf
+EndScenario
+
+# E_440_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	森林A
+	ナナ	悲しい
+FadeIn	white					.5
+	ナナ	悲しい						……だからね、ゆうち\nぜんぶ勘違いなんだってぇ
+CharacterOff
+	ゆうり	泣き						……じゃあ\nあの時のあれは……
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+StopBgm
+Bg	川A					0
+Param	character_grayout=false
+	ゆうり	笑い				0
+FadeIn	white					.3
+	ゆうり	笑い						ねぇ、ナナちゃーん！\nそろそろゆうりとー……
+	ゆうり	慌て
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	ゆうり	慌て						………………って…………!?
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル44002		エフェクト表			0
+FadeIn	white					.5
+	ナナ	<Off>						むにゃ……\n……あったかい……
+	ナナ	<Off>						うーん……もっと……\nナナのちかくに……
+FadeOut	white					.5
+Param	character_grayout=true
+CharacterOff						0
+	ゆうり	泣き				0
+FadeIn	white					.5
+Shake	Graphics						NoWait
+	ゆうり	泣き						きゃあああああああああああああ!?!?
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff
+Bg	森林A
+Bgm	平和
+ImageEffectOff	SpriteCamera	Sepia
+	ゆうり	泣き
+FadeIn	black					.3
+	ゆうり	慌て						あれは本当に、\n二人とも疲れて寝ちゃっただけ……？
+CharacterOff
+	ナナ							そうそう！\nだから別に何もされてないよ！
+CharacterOff
+	ゆうり	照れ						う、うん、そうだよね……\nなんか、ごめんねナナちゃん\n早とちりしちゃった
+CharacterOff
+	ナナ							別にいいって♪\nそれで、ゆうちはナナと\n交代しにきたんでしょ？
+	ナナ							早くあの人のところに行ってあげて\nきっと待ってるからさ♪
+CharacterOff
+	ゆうり	嬉しい						うん、わかった！
+	ゆうり							あ、そうだナナちゃん\n先輩はどうだった？
+CharacterOff
+	ナナ	驚き						えっ？\nど、どうって？
+CharacterOff
+	ゆうり	照れ						ちゃんと誘惑に抵抗できる人だった？
+CharacterOff
+	ナナ	照れ						あー、うん……そう、だね
+CharacterOff
+	ゆうり							ナナちゃん……？ どうかしたの？
+CharacterOff
+	ナナ	驚き						え？ ううん！ なんでもないよ！
+CharacterOff
+	ゆうり	嬉しい						…………？
+CharacterOff
+	ナナ							それよりほら、次はゆうちが\nちゃんと役目を果たす番なんだから！
+CharacterOff
+	ゆうり							う、うん！そうだね！頑張らないと！
+CharacterOff
+	ナナ							その調子！\nじゃあナナは見張りに行ってくるね！
+CharacterOff
+	ゆうり							えっ？\n交代するって\n先輩に伝えに行かなくていいの？
+CharacterOff
+	ナナ	笑い						いいのいいの！\nじゃあゆうち、頑張ってね！
+CharacterOff
+	ゆうり	通常						う、うん\nまたね、ナナちゃん
+FadeOut	black					.5
+CharacterOff						0
+Bg	川A
+Bgm	都市
+	ゆうり					0
+FadeIn	black					.5
+	ゆうり							（ナナちゃん、なんか変だったなぁ\n　どうしたんだろう？）
+CharacterOff
+	ディーア	驚き2						有里！\nさっきは誤解させたみたいで\n悪かった……ごめん
+CharacterOff
+	ディーア	通常2	1_2
+	ゆうり	嬉しい	2_2					大丈夫だよ、先輩\n全部ナナちゃんに聞いたから
+	ディーア	通常2						そっか……あれ、七詩は？
+	ゆうり	通常						訓練は交代でやるって話したでしょ？\nナナちゃんはゆうりと交代して\n山の様子を見に行ったよ
+	ディーア							じゃあ、ここからの訓練は\n有里とだな？
+	ゆうり	照れ						うん、待たせちゃってごめんね\n一緒に訓練、頑張ろうね……先輩♪
+	ディーア	笑い2						ああ、よろしくな有里
+	ディーア	通常2						よし！\nじゃあまずは素振りから……
+	ゆうり	通常
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	ゆうり							えっ、も、もうやるの……？
+	ディーア	驚き2						えっ？　なにか変だったか？\n七詩のときは普通にやってたけど
+	ゆうり	通常						そ、そうだよね\nでも、素振りってことは\nゆ、ゆうりを使うんだよね
+	ゆうり							その、まだ心の準備が\nできてなくて……
+CharacterOff
+	ゆうり	照れ						（こう言えば、きっと……）
+CharacterOff
+	ゆうり		2_2
+	ディーア	通常2	1_2					なら、落ち着くために\n一回深呼吸してみるのはどうだ？
+	ディーア	笑い2						オレはその間に\n準備運動やっておくからさ！
+	ゆうり							えっ、あ、うん……
+CharacterOff
+	ゆうり							（あれ、おかしいな……\n　「じゃあ訓練はやめようか」って\n　言わないんだ……？）
+CharacterOff
+	ディーア	通常2						よし、じゃあ始めるぞ！
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	本気2				0
+FadeIn	black					.5
+Se	斬1
+Tween	ディーア	PunchPosition	x=50				NoWait
+	ディーア							はぁっ！
+	ゆうり	泣き						ひゃうっ！\nちょ、ちょっと乱暴だよぉ！\n目が回るぅぅ……！
+	ディーア	本気2						あと100回！
+	ゆうり
+Tween	ゆうり	ShakePosition	x=5 time=1				NoWait
+	ゆうり	泣き						えっ!?　ひゃあああーーっ!!
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	通常2	1_2			0
+	ゆうり		2_2			0
+FadeIn	black					.5
+	ディーア							ふぅ……！\nこれでノルマ達成だな
+	ゆうり							う、うん\nやったね……先輩
+CharacterOff
+	ゆうり							（ちゃんと涙目で甘えたのに\n　容赦なく訓練されちゃった……）
+	ゆうり							（ゆうりに甘えて\n　意思を曲げないなんて……）
+CharacterOff
+	ゆうり		2_2
+	ディーア	通常2	1_2					次は走り込みでいいか？
+	ゆうり	慌て
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	ゆうり							えっ、先輩さっきからずっと\n訓練しっぱなしだよ？
+	ゆうり							ナナちゃんの時からちゃんとした\nお休み取れてないんでしょ？\nゆうり、ちょっと心配だな……
+CharacterOff
+	ゆうり	通常						（次こそ、先輩の意思を……！）
+CharacterOff
+	ゆうり	通常	2_2
+	ディーア	笑い2	1_2					平気平気、\nゆうりと合流するまでは\n熟睡してたからな！
+	ディーア	通常2						今は元気が有り余ってるくらいだ\nだからどんどん特訓してくれ！
+	ゆうり							そ、そこまで言うなら……
+CharacterOff
+	ゆうり	慌て						（あ、あれ？　これも\n　ダメなの……？）
+FadeOut	black					.5
+CharacterOff						0
+Bg	森林A
+Bgm	バトル
+	キノコリオン					0
+FadeIn	black					.5
+	キノコリオン							ノコノコーーーーッ！
+CharacterOff
+	ディーア	本気2						はぁっ!!
+Se	斬1
+FadeOut	white					.3
+CharacterOff						0
+	キノコリオン					0
+FadeIn	white					.3
+Tween	キノコリオン	ShakePosition	x=10 time=1
+Se	敵殺
+	キノコリオン
+Tween	キノコリオン	MoveBy	y=-300 time=1
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	通常2	1_2
+	ゆうり		2_2
+Bgm	都市
+FadeIn	black					.5
+	ディーア	通常2						ふぅ、実戦もだいぶ安定してきたな\nゆうり、もう少し奥に行くぞ？
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=3				NoWait
+Wait						1.5
+CharacterOff	ディーア
+Tween	ゆうり	MoveBy	x=-30				Add
+	ゆうり							あっ、先輩……！
+	ゆうり	泣き
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	ゆうり	泣き						きゃあっ！
+	ディーア	驚き2	画面外_左
+Se	走る
+Tween	ディーア	MoveTo	x=-90 time=1				NoWait
+	ディーア	本気2						有里！ 大丈夫か!?
+	ゆうり	泣き						だ、だいじょうぶ\nちょっとこけちゃっただけ……
+	ディーア	怒り2						足を痛めたんじゃないか？
+Tween	ゆうり	ShakePosition	x=5 time=1				NoWait
+	ゆうり							うん、そうかも……\n左足、痛い……
+CharacterOff
+	ゆうり							（これなら、先輩も\n　訓練をやめるはず……！）
+CharacterOff
+	ゆうり	泣き	2_2
+	ディーア	通常2	1_2					ゆうりは無理しなくていい\nオレがこの辺で走れば\nいいだけの話だからな！
+	ゆうり	慌て						えっ？
+	ディーア	通常2						どうせ特訓するのはオレだ\nだから、ここでしばらく休んでてくれ
+	ゆうり	慌て						ちょ、ちょっと先輩……!?
+Se	走る
+	ディーア
+Tween	ディーア	MoveTo	x=-800 time=1				NoWait
+	ディーア	本気2						うおおおおおおおおおおお!!
+FadeOut	black					.5
+CharacterOff						0
+	ゆうり	慌て	2_2			0
+	ディーア	悔しい2	画面外_左
+FadeIn	black					.5
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=3				NoWait
+	ゆうり	慌て						せ、先輩！ もうストップー！
+Se	走る
+Tween	ディーア	MoveTo	x=-90 time=1
+	ディーア	驚き2						はぁ、はぁ……！\nあれ、もう終わりか？
+	ゆうり	通常						えっと、もう\n50周も走ってるよ……？
+	ディーア
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						そっか、前に比べたらまだ\n距離も負荷も足りない……\nもう少し走ってくる!!
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=1
+	ゆうり	慌て
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	ゆうり							えっ！　ちょっと！
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	悔しい2	画面外_右
+	ゆうり	慌て	2_2
+Bgm	平和
+FadeIn	black					.5
+Se	走る
+Tween	ディーア	MoveTo	x=-90 time=1				NoWait
+	ディーア	悔しい2						はぁ、はぁ……よし！\nこれで！ えーと、何周目だっけ
+	ゆうり
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	ゆうり	慌て						もう100周以上やってるよ！\nそんなにやったら先輩倒れちゃう……\nゆうり、心配だよ……
+	ディーア	笑い2						大丈夫！\nもうだいぶ七詩にも鍛えられてるから
+	ゆうり							先輩ったら……\nそれに、今の特訓相手はゆうりだよ？
+	ゆうり	泣き						ちゃんと、ゆうりと\n向き合って欲しいのに……
+	ディーア	驚き2						あ、ごめん……\nそんなつもりじゃなかったんだ
+	ディーア	通常2						ゆうりはちゃんと\nオレのこと見ててくれるだろ？\n特訓の状況を把握してくれてたし
+	ディーア	笑い2						だからつい安心して、\nやりすぎるというか……
+	ゆうり	通常						ゆうり、先輩を心配してるんだよ\n特訓のやりすぎはよくないよ……
+	ディーア							でも、あともう1周くらいなら\nやりすぎじゃないよな!!
+	ディーア							もう少しだけ待っててくれ！
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=1				NoWait
+	ゆうり	慌て						ええっ!? 先輩ってばー！
+CharacterOff	ディーア
+	ゆうり	通常						（うーん、上手くいかないなぁ……）
+	ゆうり	泣き						（試験としてはこれでいいはずなのに\n　なんかちょっと、悔しいかも……）
+FadeOut	black					.5
+CharacterOff
+	ゆうり		2_2
+	ディーア	通常2	1_2
+FadeIn	black					.5
+	ゆうり
+	ディーア	通常2						さて、そろそろ合宿場所に戻ろうか
+	ゆうり							う、うん
+	ディーア
+Tween	ディーア	MoveBy	y=-30 time=1				NoWait
+	ディーア	通常2						ほら、有里
+	ゆうり							え……？ どうしたの、急に……
+	ディーア	通常2						怪我が痛むだろ？\nオレが背負っていくからさ
+	ゆうり							…………！
+	ゆうり							あ、ありがとう、先輩……
+Tween	ゆうり	MoveBy	x=-30 time=1.5
+	ディーア							よっと
+Tween	ディーア	MoveBy	y=30 time=1				Add
+Tween	ゆうり	MoveBy	y=30 time=1
+	ゆうり							ご、ごめんね、重い……？
+	ディーア	笑い2						全然平気だって\nむしろこれで鍛えられるな！
+	ゆうり	泣き						それ重いって言ってるのと一緒だよ！
+	ディーア	汗2						ご、ごめん\n軽いよ！ 有里は羽根のように軽い！
+	ゆうり							後から言ったらウソっぽいよ！
+	ディーア	汗2						ですよね!! ごめん！
+	ゆうり	嬉しい						もう……でもありがとう\nゆうりのこと心配してくれて
+	ディーア	通常2						怪我してるのに、無理に歩かせる\nわけにはいかないよ
+	ゆうり	通常						うーん、わがまま言うなら、ゆうり\nお姫様抱っこして欲しかったかも
+	ディーア	あはは2						あはは、それ七詩にも言われた
+	ゆうり	慌て						えっ!? ナナちゃんにも？\nお、お姫様抱っこ、したの……？
+	ディーア	通常2						この山道じゃ、\n前が見えないのは危ないからな\n断ったよ
+	ゆうり							そ、そうなんだ
+	ディーア	通常2						ゆうりは特別だよ
+	ゆうり	慌て						え、とくべつ？\nゆうりが……？
+	ディーア	通常2						そうだよ、怪我してるんだから
+	ゆうり	通常						あ、そ、そうだよね\nありがとう、先輩……
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル44003		エフェクト表			0
+FadeIn	white					.5
+	ゆうり	<Off>						（び、びっくりしたぁ……\n　もう、ゆうりの方が\n　振り回されてどうするの……）
+	ゆうり	<Off>						（おかしいな……今までこんなこと\n　なかったのに……）
+	ゆうり	<Off>						（どうしよう、さっきからずっと\n　ドキドキしてるの……\n　先輩に伝わっちゃうよ……）
+FadeOut	black					.5
+Param	character_grayout=true
+If	isdebug==true
+CharacterOff
+Jump	*E_440_07
+EndIf
+EndScenario
+
+# E_440_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	川A（夕）
+	ディーア	驚き2	1_2
+	ゆうり	通常	2_2
+FadeIn	white					.5
+	ディーア							ゆうり、足の具合はどうだ？
+	ゆうり	照れ						うん、手当てしてもらって\n痛みも引いてきたし、\nもう大丈夫だよ
+	ディーア	通常2						そっか、それは良かった
+	ゆうり	通常						ごめんね\n先輩の優しさに甘えちゃって……\n訓練、途中だったのに……
+	ディーア							別に大丈夫さ\nゆうりのおかげで、\n戦闘もだいぶ安定してきたしな
+	ディーア	怒り2						だから、これから山の主を探しに\n行かないか？
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	ゆうり	通常						えっ？
+	ディーア	驚き2						そろそろどのあたりに居るのか\n把握しておきたいしな
+	ディーア	通常2						探すついでにキノコリオンを\n減らしていく方が、効率的だろ？
+	ゆうり	通常						それはそうかもしれないけど……\nゆうり、実戦で使われるの\nまだちょっと怖い……
+	ディーア	驚き2						でも、有里はもう何度か\n実戦に協力してくれてるだろ？
+	ゆうり	慌て						そうだけど……でも\n山の主と戦うには\nまだ練習不足じゃないかなぁ
+Tween	ゆうり	MoveBy	x=10				NoWait					感情の補足として一歩下がる
+	ゆうり	泣き						ゆうり、先輩が負けちゃうところ\n見たくないよ
+	ディーア	怒り2						そうは言っても、\nやっぱり挑戦しないことには\n事態は進展しないからさ
+	ディーア	通常2						でも……
+	ゆうり	通常						うん？
+	ディーア	笑い2						心配してくれてありがとな\nでも、二人が特訓してくれたんだから\nきっと大丈夫だよ
+	ディーア	通常2						それに、もうこれ以上、\n有里には怪我させたりしないから
+	ゆうり							先輩……
+	ディーア							約束するよ
+	ディーア							よし、じゃあ七詩に一度山の様子を\n聞きにいこう
+Tween	ゆうり	MoveBy	x=10				NoWait					感情の補足として一歩下がる
+	ゆうり							うん……
+Tween	ディーア	MoveTo	x=800 time=4				NoWait
+Wait						1.5
+CharacterOff	ディーア
+	ゆうり							………………				四話と同じやつ
+FadeOut	black					.5
+Bgm	絶望
+CharacterOff						0
+Param	character_grayout=false
+	夕焼け空		エフェクト表			0
+Wait						.1
+FadeIn	black					.5
+	ゆうり	<Off>						だめ……\nゆうり、先輩を\n引き留められそうにない……
+	ゆうり	<Off>						ナナちゃんの様子が\n変だった理由、分かった気がする
+	ゆうり	<Off>						先輩のこと……\n……好きになっちゃったんだね
+	ゆうり	<Off>						……先輩とお別れ、したくないなぁ
+	ゆうり	<Off>						お別れしたくない……\n忘れられたくないよ……
+	ゆうり	<Off>						もし、この気持ちを伝えても……\n先輩はきっと進んでいっちゃう
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	ゆうり	拡大通常	エフェクト裏			0
+	ネームプレート	有里村正						<speed=0.1> </speed>	BrPage
+Wait						.2
+FadeIn	white					.3
+	ネームプレート	有里村正						でも、やっぱり\n寂しいのはいやだよ……
+	ネームプレート	有里村正						だって……
+	ネームプレート	有里村正						だってゆうりも、\n先輩のことが……好きなんだもん……
+CharacterOff
+Bg	黒背景
+	ネームプレート	有里村正						<dash=4>だから
+FadeOut	white					1						修正版
+CharacterOff						0
+Bg	森林A
+ImageEffectOff	SpriteCamera	Bloom
+	ゆうり	通常				0
+FadeIn	black					1
+StopBgm
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	ゆうり							待って、先輩っ！
+CharacterOff
+	ディーア	驚き2						ん？\nどうした？
+CharacterOff
+	ゆうり							あのね、先輩……
+	ゆうり							ゆうり、先輩に言わなくちゃ\nいけないことがあるの
+CharacterOff
+	ディーア	驚き2						……言わなくちゃいけないこと？
+CharacterOff
+	ゆうり							あのね……ゆうりたち、\n本当はずっと先輩のこと……
+CharacterOff
+	ナナ	悲しい	画面外_左					大変だよぉーー!!
+Se	走る
+Tween	ナナ	MoveTo	x=0 time=1				NoWait
+Wait						1
+CharacterOff
+Bgm	緊迫											BGMなし期間、長すぎるのでなにかかけよう(未調整範囲かな？)
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						わっ!?　七詩!?
+CharacterOff
+	ゆうり							ナナちゃん!?　どうしたの!?
+CharacterOff
+	ナナ	悲しい						大変なの!! キノコリオンが\nナナたちの合宿場所に\n向かってきてるの！
+CharacterOff
+	ゆうり	慌て						えっ!?
+CharacterOff
+	ナナ	悲しい						普通のキノコリオンしか\n見てないけど、もしかしたら……
+CharacterOff
+	ディーア	怒り2						山の主も来てる可能性が\n高いってことか！\nならすぐにでも動いた方がいいな
+CharacterOff
+	ゆうり	慌て	2_2
+	ナナ	悲しい	1_2					そう、なんだけど……
+	ゆうり							ナナちゃん……どうしよう……
+	ナナ							ゆうち……
+CharacterOff
+	ディーア	怒り2						ぐずぐずしてられないぞ……\nすぐに合宿場所に戻ろう！
+CharacterOff
+	ゆうり		2_2
+StopBgm												雰囲気変える
+	ナナ	悲しい	1_2					えっと……
+	ゆうり							………………
+CharacterOff
+	ディーア	驚き2						…………？\n二人とも、どうした？
+CharacterOff
+	ナナ	悲しい	1_2
+Bgm	絶望											Bgm変える
+	ゆうり	慌て	2_2					……行かない方がいいよ、先輩\nまだ、練習不足だから……
+	ナナ							そうだよ、ゆうちとの特訓\nまだ終わってないんでしょ……？
+CharacterOff
+	ディーア	怒り2						キノコリオンが動き出してるんだろ？\nもし山の主が近くに来てるなら\n絶好のチャンスじゃないか
+CharacterOff
+	ゆうり		2_2
+	ナナ	照れ	1_2					そうだけど……\n来てないかもしれないじゃん？
+	ナナ	悲しい						だからお願い……もう少しだけ！
+	ゆうり	通常						ゆうりたちと一緒に\n特訓して欲しいの……
+CharacterOff
+	ディーア	怒り2						……どうしたんだ二人とも……？
+CharacterOff
+	ゆうり	通常	2_2
+	ナナ	悲しい	1_2
+Param	character_grayout=false
+	七詩＆有里							………………
+Param	character_grayout=true
+	ナナ	悲しい						……ゆうち
+	ゆうり							……うん
+	ナナ	通常						ご、ごめんね？ 気にしないで！\n合宿場所が荒らされたら大変だし\nやっぱり戻ろう？
+CharacterOff
+	ディーア	驚き2						…………？\nまあ、二人がそういうなら……\nそれじゃあ戻ろうか
+CharacterOff
+	ゆうり		2_2
+	ナナ	悲しい	1_2
+Param	character_grayout=false
+	七詩＆有里							………………
+FadeOut	black					.5
+CharacterOff						0
+Bg	川A（夕）
+	キノコリオン	ヤマノヌシ
+FadeIn	black					.5
+Tween	キノコリオン	ShakePosition	x=5 time=1				NoWait
+	キノコリオン	ヤマノヌシ						ノコノコー!!
+CharacterOff
+	ディーア	怪しい2						間違いない……あいつが最初に\nオレを追いかけてきたキノコリオン\n……山の主だな
+CharacterOff
+	ナナ	悲しい	1_2
+	ゆうり	慌て	2_2					まさか、倒しに行くの？
+	ナナ
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ							いきなりは危ないよぉ……！
+CharacterOff
+	ディーア	通常2						無理はしないさ\nだめなら上手く撤退すればいい
+CharacterOff
+	ゆうり							でも、もし倒したら……
+CharacterOff
+	ディーア	通常2						ああ……寂しいけど、\nこの特訓は終わりだな
+CharacterOff
+	ナナ	悲しい	1_2
+	ゆうり	通常	2_2
+Param	character_grayout=false
+Tween	ナナ	PunchPosition	y=50				NoWait
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	七詩＆有里							………………!!
+Param	character_grayout=true
+CharacterOff
+	ナナ	拡大泣き	エフェクト表					…………いや………
+CharacterOff
+	ゆうり	拡大通常	エフェクト表					終わりなんて、いやなの……
+CharacterOff
+	キノコリオン	ヤマノヌシ						…………!!
+Se	風2
+	オーラ青		エフェクト裏			.7
+Wait						1
+CharacterOff	キノコリオン					1
+Se	闇1
+	幻想体ゆうり		3_3			1
+Wait						1
+Se	闇1
+	幻想体ナナ		1_3			1
+Wait						1.5
+Bgm	緊迫											BGM変える
+CharacterOff
+	ディーア	悔しい2						えっ!?
+CharacterOff
+	ゆうり		2_2
+	ナナ	悲しい	1_2
+Param	character_grayout=false
+	七詩＆有里							あっ……!!
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						あれは、七詩と有里の……!?
+CharacterOff
+	ナナ	悲しい	1_2
+	ゆうり	慌て	2_2					せ、先輩！\nあれはただの幻覚だよ
+CharacterOff
+	ディーア	悔しい2						でも、何で山の主が二人の姿に……
+CharacterOff
+	ゆうり	慌て	2_2
+	ナナ	悲しい	1_2					き、きっと今\nナナたちが近づいたからだよ！
+CharacterOff
+	ディーア	本気2						…………とにかく、今はあいつを\n倒さないと……！
+CharacterOff
+	幻想体ゆうり		3_3
+	幻想体ナナ		1_3
+	オーラ青		エフェクト裏
+Wait						.5
+Se	闇1
+CharacterOff	幻想体ゆうり					1
+Wait						.5
+Se	闇1
+CharacterOff	幻想体ナナ					1
+Wait						.5
+	キノコリオン	ヤマノヌシ				1
+Wait						1
+CharacterOff
+	ディーア	本気2						幻覚が消えた!?\n……まずい、このままじゃ\n逃げられる!!
+CharacterOff
+Param	character_grayout=false
+	ナナ	悲しい	1_2
+	ゆうり	慌て	2_2
+Tween	ナナ	PunchPosition	y=50				NoWait
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	七詩＆有里							…………待って!!
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2						なっ!?\n二人とも、どうして止めるんだ!?
+CharacterOff
+	ゆうり	泣き	2_2
+	ナナ	悲しい	1_2					やっぱり、危ないよ！
+	ゆうり							お願い先輩……行かないで！
+CharacterOff
+	キノコリオン	ヤマノヌシ						…………ノコッ!!
+Se	風1
+Tween	キノコリオン	MoveTo	x=800 time=1
+CharacterOff
+	ディーア	悔しい2						くそっ！\n追いかけないと……！
+CharacterOff
+Param	character_grayout=false
+	キノコリオン		画面外_左
+	キノコリオン 		画面外_左_b
+	キノコリオン  		1_3
+Bgm	バトル
+Se	風1
+Tween	キノコリオン	MoveTo	x=0 time=1				NoWait
+Wait						.3
+Se	風1
+Tween	キノコリオン 	MoveTo	x=180 time=1				NoWait
+Wait						.5
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコノコーッ!!				幻想体出てきた後にキノコリオンとバトル……？ここはしもんさんにたのんで敵を幻想体にしてもらった上でキノコオミットしてよいのでは。
+Param	character_grayout=true
+CharacterOff												「これは……七詩と、有里……？」とかでおわってバトルに入るとそれっぽい
+	ディーア	本気2						なっ、別のキノコリオン……!?\nくっ……邪魔だ!!
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_440_08
+EndIf
+EndScenario
+
+# E_440_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	森林A
+	ディーア	悔しい2
+FadeIn	white					.5
+	ディーア	悔しい2						山の主は……!?\nくそ、見失ったか……
+CharacterOff
+	ナナ	悲しい						逃げたみたいだね
+CharacterOff
+	ディーア	悔しい2						すぐに追いかけないと……！
+CharacterOff
+Bgm	絶望
+	ナナ	悲しい	1_2
+	ゆうり	慌て	2_2					……やめた方がいいよ、先輩
+	ナナ	悲しい						そうだよ、逃げた方向は\n山奥の方だったもん
+	ナナ	照れ						山を降りたわけじゃないなら\n追いかける必要、ないよね……？
+	ゆうり	通常						そ、そうだよ\n胞子はまだ山を覆ってるから\n危ないし……
+CharacterOff
+	ディーア	悔しい2						…………？\n二人とも、\nどうしてそんなに……
+CharacterOff
+	ゆうり		2_2
+	ナナ	悲しい	1_2
+Tween	ナナ	PunchPosition	y=50				NoWait
+	ナナ							とにかく！\nゆうちが練習不足って言ってるうちは\n特訓も終わらないんだから！
+	ゆうり							ゆうりと一緒にもっと練習して\n力をつけよう？
+	ゆうり							先輩、お願い……
+	ナナ	悲しい						もう少しだけ……
+CharacterOff
+	ディーア	怒り2						……………………\n山の主は間違いなく\n山奥に行ったんだな？
+CharacterOff
+	ナナ							うん、間違いないよ\nそれに、この後もナナがちゃんと\n見張りするからさ
+	ゆうり							先輩……
+CharacterOff
+	ディーア	悔しい2						分かった……\n特訓を続けよう
+CharacterOff
+Bgm	穏やか
+	ナナ	嬉しい	1_2
+	ゆうり	嬉しい	2_2
+Param	character_grayout=false
+	七詩＆有里							…………!!
+Param	character_grayout=true
+	ナナ							やったぁ……！
+	ゆうり	嬉しい						ありがとう、先輩
+CharacterOff
+	ディーア	怒り2						もう一度敵が動いたら\nすぐにこっちも動くからな
+CharacterOff
+	ゆうり	嬉しい	2_2
+	ナナ		1_2					うん♪
+FadeOut	black					1
+Wait						1
+CharacterOff						0
+	ナナ	嬉しい	1_2			0
+	ゆうり	通常	2_2
+FadeIn	black					1
+	ナナ							良かったね……ゆうち\nもう少し一緒にいられるよ
+	ゆうり	嬉しい						そうだね……あと、少しだけ……\nあーあ、ナナちゃんには\nゆうりの気持ち、お見通しなんだねぇ
+	ナナ							えへへ……そりゃあね
+	ゆうり	照れ						ゆうりも分かってるよ\nナナちゃんも、先輩のことが……
+	ナナ	照れ						ストップー!!\nき、聞かれちゃったらどうするの！
+	ゆうり	照れ						えへへ、ごめんね
+	ナナ	照れ						……あーあ、特訓がずっと\n終わらなきゃいいのにね
+	ゆうり	通常						うん、そうすればずっと……\nずっと一緒なのにね……
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_440_09
+EndIf
+EndScenario
+
+# E_440_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	川A
+	ナナ
+FadeIn	white					.5
+Wait						.3
+FadeOut	white					1
+CharacterOff						0
+Se	光1
+	ナナ	進化通常
+FadeIn	white					.5
+	ナナ
+Wait						1
+CharacterOff
+	ナナ	拡大進化通常	エフェクト表					わぁ、すごい！
+FadeOut	black					.3
+CharacterOff						0
+	ゆうり
+FadeIn	black					.5
+Wait						.5
+FadeOut	white					1
+CharacterOff						0
+Se	光1
+	ゆうり	進化照れ
+FadeIn	white					.5
+Wait						1
+	ゆうり	進化照れ
+CharacterOff
+	ゆうり	拡大進化照れ	エフェクト表					ゆうりたちも、一緒に\n強くなれるなんて……！
+CharacterOff
+	ディーア	笑い2						ああ、三人で\n特訓した成果だ！
+	ディーア	通常2						これで、山の主を探しに行けるな
+CharacterOff
+Param	character_grayout=false
+	ナナ	進化悲しい	1_2
+	ゆうり	進化通常	2_2
+	七詩＆有里							………………!!
+Param	character_grayout=true
+	ナナ	進化通常						で、でも、ナナたちを強化したって\nことは、もっと一緒に特訓したい\nってことだよねぇ？
+	ゆうり	進化通常						もう少しだけ、特訓しようよ、先輩
+CharacterOff
+	ディーア	怒り2						………………
+	ディーア							七詩、有里……\n聞かなきゃいけないことがあるんだ
+CharacterOff
+	ゆうり	進化通常	2_2
+	ナナ	進化通常	1_2					なぁに？
+	ゆうり							どうしたの？
+CharacterOff
+StopBgm
+	ディーア	怒り2						……どうして二人は、オレをここに\n引き留めようとするんだ？
+	ディーア	怪しい2						オレたちは、山の主を倒すことを\n目的に特訓してるはずなのに
+	ディーア	怒り2						オレを引き留め続けることは\nその目的と食い違ってないか？
+CharacterOff
+Param	character_grayout=false
+	ナナ	進化悲しい	1_2
+	ゆうり	進化通常	2_2
+Tween	ナナ	PunchPosition	y=50				NoWait
+Tween	ゆうり	PunchPosition	y=50				NoWait
+	七詩＆有里							…………っ!?
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2						どうしてオレが山の主に挑むのを\n阻もうとしてるんだ……？
+	ディーア	悔しい2						それにあの時、山の主は……
+FadeOut	black					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+StopBgm
+Bg	川A
+Param	character_grayout=false
+	ナナ	拡大泣き	エフェクト表			0
+Se	回想
+FadeIn	black					.5
+	ナナ	拡大泣き	エフェクト表					…………いや………
+CharacterOff
+	ゆうり	拡大通常	エフェクト表					終わりなんて、いやなの……
+CharacterOff
+	キノコリオン	大						…………!!
+Se	風2
+	オーラ青		エフェクト裏			.7
+Wait						1
+CharacterOff	キノコリオン					1
+Se	闇1
+	幻想体ゆうり		3_3			1
+Wait						1
+Se	闇1
+	幻想体ナナ		1_3			1
+Wait						1.5
+FadeOut	black					.5
+Param	character_grayout=true
+CharacterOff
+Bg	川A
+Bgm	絶望
+ImageEffectOff	SpriteCamera	Sepia
+	ディーア	怒り2				0
+FadeIn	black					.5
+	ディーア	怒り2						二人の姿の幻覚を\n作り出していた<dash=2>
+	ディーア	怪しい2						あれは、二人の感情に\n反応しているように見えた……
+	ディーア	怒り2						……二人は、本当は山の主の存在に\n関わっているんじゃないか？
+CharacterOff
+Param	character_grayout=false
+	ナナ	進化悲しい	1_2
+	ゆうり	進化通常	2_2
+	七詩＆有里							………………
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2						七詩、有里……？
+CharacterOff
+	ゆうり	進化通常	2_2
+	ナナ	進化悲しい	1_2					……隠しておくのは無理だね、ゆうち
+	ゆうり							うん、そうだね……
+	ゆうり							……先輩の言う通りだよ
+CharacterOff
+	ディーア	悔しい2						じゃあ……あの山の主は……
+CharacterOff
+	ゆうり	進化通常	2_2
+	ナナ	進化照れ	1_2					うん……山の主には\nナナたちの魔力をあげてたの
+	ゆうり							試験に協力してもらってたんだよ
+CharacterOff
+	ディーア	怪しい2						……つまり、あのキノコリオンは、\n二人が最終試験として配置し
+	ディーア							最初から誰にも倒せないように\n強化していたってことか……
+	ディーア	怒り2						だけど、山の主を\n操っていたなら
+	ディーア	悔しい2						オレを引き留めずに、\n山の主自体を引き離しておけば\n良かったんじゃないのか？
+CharacterOff
+	ゆうり	進化通常	2_2
+	ナナ	進化照れ	1_2					ナナたちは、あの山の主を\n強くしてただけで、\n支配してたわけじゃないんだよ
+	ゆうり	進化慌て						あの子が怒って先輩を追いかけた時も\nゆうりたちには\nどうしようもなかったの
+CharacterOff
+	ディーア	怪しい2						……じゃあ、初めて会った時の状況は\n本当に予想外だったのか
+CharacterOff
+	ゆうり	進化通常	2_2
+	ナナ	進化悲しい	1_2					うん……まさか\n暴れ始めるなんて思ってなくて……
+	ゆうり	進化慌て						……どうしたらいいか\n分からなくなっちゃったの
+Param	character_grayout=false
+	七詩＆有里							危ない目に合わせて……\nごめんなさい
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						……分かった\nでも、どうして二人は、\nオレのことを……？
+CharacterOff
+	ゆうり	進化通常						最初に言ったよね、\nゆうりたちは訓練及試験魔剣だって
+	ゆうり							強くなりたいと思ってる人を\n訓練するために存在してるって
+CharacterOff
+	ナナ	進化悲しい						……訓練が終わった人たちって\nどうなると思う？
+	ナナ	進化照れ						……みーんなナナたちから\n離れていくの
+	ナナ	進化泣き						お別れだよ
+	ナナ	進化通常						最終試験に受かったら\nお別れなんて<dash=2>当然だけどね……
+CharacterOff
+	ゆうり	進化通常						もちろん嬉しいことだよ
+	ゆうり							訓練してた人たちが\n強くなっていくのを見て、\n嬉しくないわけないよ
+	ゆうり	進化嬉しい						嬉しいし……誇らしい
+CharacterOff
+	黒グラデーション		エフェクト表
+	ナナ	進化照れ						でも、そうやってお別れした人って\nどうなると思う？
+	ナナ							みんな、ナナたちよりもっと強い力の\n使い手になって……\nそれでね……
+	ナナ	進化泣き						……ナナたちのことなんて\n忘れちゃうんだ
+CharacterOff	ナナ
+	ゆうり	進化通常						いくらゆうりたちが訓練の思い出を\n大切にしても……
+	ゆうり							……訓練を終えた人たちにとって、\nゆうりたちは単なる通過点でしか\nなかったんだよ
+	ゆうり							何度も訓練して\n何度もお別れして……
+	ゆうり	進化泣き						……何度も忘れられてきた……
+CharacterOff	ゆうり
+	ナナ	進化照れ						お別れは嬉しいことだって\nいつも言い聞かせてきたけど……
+	ナナ	進化悲しい						忘れられるのは……やっぱり\n……いやなの……
+	ナナ							だからね、ゆうちと二人で決めたの
+	ナナ							……『お別れ』をなくしちゃおうって
+	ナナ	進化泣き						そうしたら、ずっと一緒に訓練できて\nずっと幸せでいられるはずで……！
+CharacterOff
+	ディーア	悔しい2						…………それで、\nあのキノコリオンを強化したのか
+CharacterOff
+	ナナ	進化悲しい						意地悪だって思った……？
+CharacterOff
+	ゆうり	進化慌て						ゆうりたちのこと\n嫌いに……なっちゃうよね……
+	ゆうり							でも先輩はすごく強いから\n山の主の所に行ったら\nきっと倒しちゃうから……
+	ゆうり	進化通常						だから引き留めちゃったの
+CharacterOff
+	ゆうり	進化通常	2_2
+	ナナ	進化泣き	1_2					ずっと一緒にいたかっただけなの……
+	ゆうり	進化慌て						でも、これ以上は無理だって\n分かってる
+	ナナ	進化照れ						一緒にいたいけど……\nそれはナナたちのわがままだもん
+	ゆうり	進化慌て						仕方ないよね……
+CharacterOff
+StopBgm
+	ディーア	怒り2						………………
+	ディーア	怪しい2						……二人の気持ちは分かった
+	ディーア	怒り2						だから今度は、\nオレの気持ちを聞いてくれ
+	ディーア							オレは二人のこと……
+	ディーア	通常2						意地悪だなんて思わないし\n嫌いにだってならないよ
+CharacterOff
+Param	character_grayout=false
+	ゆうり	進化慌て	2_2
+	ナナ	進化悲しい	1_2
+	七詩＆有里							…………え？
+Param	character_grayout=true
+CharacterOff
+Bgm	凱旋
+	ディーア	通常2						違和感には気づいてた、それでも\n二人と一緒に特訓を続けたのは\n二人から悪意を感じなかったからだ
+	ディーア	怒り2						どうして引き留めようとするのか、\nその理由が分からなかった
+	ディーア	通常2						だけど二人が\nちゃんと話してくれたから……
+	ディーア							『一緒にいたい』\nそれが二人の気持ちなんだな
+CharacterOff
+	ナナ	進化悲しい	1_2
+	ゆうり	進化慌て	2_2					先輩……
+CharacterOff
+	ディーア	通常2						話してくれてありがとう\n二人の気持ちは受け取った
+	ディーア	怒り2						……だけど、この山の状態を放って\nおくわけにはいかない
+CharacterOff
+	ゆうり	進化通常	2_2
+	ナナ	進化嬉しい	1_2					……えへへ、そうだよね\n分かってるよ
+	ゆうり	進化嬉しい						先輩ならきっと倒せるよ
+	ナナ	進化泣き						だから、全部解決したら\n特訓は終わり
+	ゆうり	進化泣き						……お別れ、だね
+CharacterOff
+	ディーア	通常2						……いや、お別れじゃない
+CharacterOff
+	ナナ	進化悲しい	1_2
+	ゆうり	進化通常	2_2					えっ？
+	ナナ	進化悲しい						なんで？\nだって山の主を倒したら……
+CharacterOff
+	ディーア	怒り2						オレは、二人にたくさん心配かけたし\n実戦で危ない目にも合わせた
+	ディーア	悔しい2						何より……二人の気持ちにずっと\n気付けなかった
+CharacterOff
+Param	character_grayout=false
+	ナナ	進化悲しい	1_2
+	ゆうり	進化通常	2_2
+	七詩＆有里							………………
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2						だから、山の主を倒したとしても\nオレにはまだ力が足りない……
+	ディーア	通常2						まだ特訓が必要だって、\nそう思うだろ？
+CharacterOff
+	ゆうり	進化慌て	2_2
+	ナナ	進化驚き	1_2					え、えっ？
+CharacterOff
+	ディーア	怒り2						オレはまだまだ未熟なんだ\nだから二人に特訓を続けて欲しい\n……これからも
+	ディーア							二人が、認めてくれるその時まで
+	ディーア	通常2						だからまだ、お別れじゃないよ\n……そうだろ？
+CharacterOff
+Param	character_grayout=false
+	ナナ	進化嬉しい	1_2
+	ゆうり	進化嬉しい	2_2
+	七詩＆有里							………………！\n…………うん
+Param	character_grayout=true
+CharacterOff
+	ディーア	笑い2						良かった、\nこれで、まだ訓練が続けられるな！
+CharacterOff
+	ナナ	進化通常	1_2
+	ゆうり	進化嬉しい	2_2					もう、先輩ったら……
+	ナナ							ちょっと、調子良すぎるんじゃない？
+CharacterOff
+	ディーア	あはは2						夏なんだし、ちょっとくらい\nいいだろ？
+CharacterOff
+	ゆうり	進化嬉しい	2_2
+	ナナ	進化通常	1_2					なにそれ、めちゃくちゃだよ……！
+	ゆうり	進化嬉しい						でも……
+	ゆうり							これからも、一緒にいて\nいいんだよね……
+CharacterOff
+	ディーア	通常2						ああ、もちろん！\n三人でまた訓練しよう
+	ディーア							さあ、行こうか\n山の主を倒しに……！
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_440_10
+EndIf
+EndScenario
+
+# E_440_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	キノコリオン
+Bg	森林A
+	ヤマノヌシノコリオン		2_3_m
+FadeIn	white					.5
+FadeOut	white					.3
+Se	斬1
+FadeIn	white					.3
+	ヤマノヌシノコリオン							ノコーッ!!
+Tween	ヤマノヌシノコリオン	ShakePosition	x=5 time=1				NoWait
+Se	ボス殺
+CharacterOff	ヤマノヌシノコリオン					1	NoWait
+Wait						1
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	怪しい2
+StopBgm
+FadeIn	black					.5
+	ディーア	怪しい2						………………
+CharacterOff
+	ナナ	進化通常	1_2
+	ゆうり	進化通常	2_2					やったね、先輩！\n……ってあれ？\nどうかしたの……？
+CharacterOff
+	ディーア	怪しい2						なんか……すごく……\n見覚えがあったような…………
+CharacterOff
+	ゆうり	進化通常	2_2
+	ナナ	進化驚き	1_2					キノコリオンに知り合いがいるの？
+	ゆうり							先輩、あれは幻覚だよ？
+CharacterOff
+	ディーア	汗2						いや、えーと……そうだよな\n幻覚だよな！
+	ディーア	通常2						とにかく、山の主は倒した！\nこれで山から安全に降りられるよな？
+CharacterOff
+	ナナ	進化通常	1_2
+	ゆうり	進化照れ	2_2					うん……\nもう幻覚を見せる胞子は\n少なくなっていくはずだから
+CharacterOff
+	ディーア	通常2						良かった、じゃあ行こうか\n七詩、有里
+CharacterOff
+	ナナ	進化照れ	1_2
+	ゆうり	進化通常	2_2					でも、先輩……？
+	ナナ	進化照れ						ナナたち、本当に\nお別れしなくていいの……？
+	ゆうり	進化通常						先輩についていって、いいの……？
+CharacterOff
+Bgm	凱旋
+	ディーア	通常2						言っただろ？\nオレにはまだ、\n二人の特訓が必要なんだ
+	ディーア							だから、一緒に来てほしい
+CharacterOff
+Param	character_grayout=false
+	ゆうり	進化嬉しい	2_2
+	ナナ	進化嬉しい	1_2
+	七詩＆有里							…………うん！
+Param	character_grayout=true
+FadeOut	white					1
+CharacterOff						0
+Wait						1
+Bg	川A
+Bgm	平和
+	リディ	笑い2				0
+FadeIn	white					1
+	リディ							それでぇ？　マスター……\nどういうことか説明してくれるよね？
+	ディーア	汗2						えーっと……
+FadeOut	black					.5
+CharacterOff						0
+	ナナ	水着嬉しい	1_2			0
+	ゆうり	水着嬉しい	2_2			0
+FadeIn	black					.5
+Tween	ナナ	PunchPosition	y=50
+Tween	ゆうり	PunchPosition	y=50				NoWait
+Wait						1
+FadeOut	black					.5
+CharacterOff						0
+	リディ	怒り2	2_2			0
+	ディーア	汗2	1_2			0
+FadeIn	black					.5
+	リディ	怒り2						マスターが全然戻ってこないから\nリディずっと心配してたのに！
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							やっと戻ってきたと思ったら\n知らない魔剣ちゃん連れてるって\nどういうことなの!!
+	ディーア	汗2						本当にごめん！\n何があったか話すと長いんだけど、\n実は魔界が危機的状況になってて……
+CharacterOff
+Param	character_grayout=false
+StopBgm
+	イベントスチル44001		エフェクト表
+	リディ	<Off>						へぇー、そうなんだ……\nいつもそうだよね？
+Param	character_grayout=true
+CharacterOff
+	リディ	笑い2	2_2
+	ディーア	本気2	1_2					リディさん!! 顔が怖いです!!
+Bgm	平和
+	リディ	怒り2						とにかく！ 心配したんだからね！
+	ディーア	あはは2						一人にしてごめんな……
+	リディ							後でいいよ、もう……\nそれより、リディを置いていった分\nたくさん遊んでもらうからね！
+	ディーア	通常2						ああ、もちろん！
+	ゆうり	<Off>						せんぱーい！
+	リディ	驚き2						あっ、呼んでるよ？　マスター
+	ディーア	通常2						そうだな\n少し待っててくれ
+	リディ	通常2						うん！
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=2				NoWait
+Wait						1.5
+FadeOut	black					.5
+CharacterOff						0
+	ゆうり	水着嬉しい
+FadeIn	black					.5
+	ゆうり							先輩、こっちだよ！
+CharacterOff
+	ディーア	通常2						どうした、何かあったのか？
+CharacterOff
+	ゆうり	水着嬉しい	2_2
+	ナナ	水着嬉しい	1_2					あのね……\nまだ、お礼を\n言ってなかったと思って
+	ゆうり							先輩、\n一緒にいてくれて……
+	ナナ							一緒にいていいって\n言ってくれて……
+Param	character_grayout=false
+	七詩＆有里							ありがとう
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常2						いや、お礼を言うのはこっちだよ\n二人がいなかったら、\nただ敵にやられてただろうし
+	ディーア	あはは2						まだまだ特訓が必要だって\n分かったしな
+	ディーア	通常2						……改めて、\nこれからもよろしくな\n七詩、有里
+CharacterOff
+	ナナ	水着嬉しい	1_2
+	ゆうり	水着嬉しい	2_2					うん、まだゆうりも半人前だけど\nよろしくお願いします
+	ナナ	水着嬉しい						もっともっと、ナナと一緒に\n訓練しようね♪
+CharacterOff
+	ディーア	通常2						ああ、だけど今は\n川遊びを満喫する時間にしよう
+	ディーア	あはは2						約束したからな
+CharacterOff
+	ナナ	水着笑い						えへへ……\n約束、覚えててくれてありがとねっ♪
+CharacterOff
+	ディーア	笑い2						休憩も特訓のうち、だしな！
+	ディーア	にやけ2						それに、二人の水着……\nすごくかわいいし……
+CharacterOff
+	ゆうり	水着笑い	2_2
+	ナナ	水着笑い	1_2
+Param	character_grayout=false
+	七詩＆有里							えへへ……♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	きらーん2						やっぱり川は正解だったなぁ……\nああ、ようやく夏を満喫できる……！
+CharacterOff
+	ゆうり	水着嬉しい						先輩、ちょっとこっちに来てー！
+CharacterOff
+	ディーア	にやけ2
+Tween	ディーア	MoveBy	x=-20 time=1				NoWait
+	ディーア	にやけ2						んー、どうした……
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						……ってちょっ!?
+CharacterOff
+StopBgm
+	魔物		2_3_m
+	魔物							………………!!
+CharacterOff
+Bgm	コメディ
+	ナナ	水着嬉しい	1_2
+	ゆうり	水着嬉しい	2_2					ゆうりたちの特訓は、\nまだ終わらないからね！
+	ナナ	水着笑い						これで水遊びしながら特訓できるね！
+CharacterOff
+	ディーア	本気2						もはや遊びじゃないんですけど!?\nオレの大事な休暇は!?
+CharacterOff
+Param	character_grayout=false
+	ナナ	水着笑い	1_2
+	ゆうり	水着笑い	2_2
+	七詩＆有里							えへへ、特訓開始ー！
+Param	character_grayout=true
+CharacterOff
+	ディーア	本気2
+Tween	ディーア	ShakePosition	x=5 time=1				NoWait
+	ディーア	本気2						もう少し遊ばせてくれー!!
+FadeOut	white					1
+CharacterOff						0
+Param	character_grayout=false
+	イベントロゴ440		エフェクト表			1
+FadeIn	white					1
+	　　　　　　　　　　							　　　<color=blue>エンドレスサマーレッスン!!\n　　　～ナナとゆうりの特別合宿～\n　　　　　　　　　　　　　<dash=2>完</color>
+Param	character_grayout=true
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_440_01
+EndIf
+EndScenario

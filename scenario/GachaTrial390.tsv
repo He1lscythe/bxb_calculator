@@ -1,0 +1,607 @@
+# G_390_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bg	酒場1F
+	モノホシザオ	拡大泣き	エフェクト表
+FadeIn	white					.5
+Shake	モノホシザオ		x=5				NoWait
+	モノホシザオ							<size=40>ぴええぇぇぇぇぇぇん!!!!</size>
+Bgm	コメディ
+CharacterOff
+	モノホシザオ	泣き	2_2
+	ディーア	汗2	1_2
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							無理ですぅ！\nモノさん、戦うのとか\n向いてないですからぁ！
+	ディーア							そ、そんなに泣くなって……
+Shake	モノホシザオ		x=5 time=0.5				NoWait
+	モノホシザオ							ぴぇぇ……ぐすん……
+	モノホシザオ	通常						ほんとにモノさんじゃないと\nダメなんですかぁ……？
+	ディーア	あはは2						そりゃあ、今回の目的は\nモノの性能テストだからな……
+	ディーア	通常2						今後一緒に戦うときのために、\nモノの特性を知っておきたいんだ
+Shake	モノホシザオ		x=5 time=0.5				NoWait
+	モノホシザオ							と、特性……
+CharacterOff						0
+	モノホシザオ	拡大	エフェクト表			0
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							戦うの苦手です！
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							できればじっとしてたいです！
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ	拡大泣き						飾られるのとか得意ですっ！
+CharacterOff
+	モノホシザオ		2_2
+	ディーア	怪しい2	1_2
+	ディーア							よし、じゃあ行こうか
+Shake	モノホシザオ		x=5 time=0.5				NoWait
+	モノホシザオ	泣き						ぴえぇぇ、どうして\nそうなるんですかぁぁ！
+	ディーア	あはは2						そんなに心配するなって、\n今回の任務は誰でもできる\n簡単なものだから
+	モノホシザオ	通常						じゃあ、モノは見てるだけでも\nいいですよね……？
+	ディーア	怪しい2						それは……ダメかな
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ	泣き						ぴぇぇぇ、やっぱり戦わないと\nダメですかぁ!?
+FadeOut	black					.3
+CharacterOff
+	リディ	驚き2	画面外_右
+Wait						.2
+Se	走る
+Tween	リディ	MoveTo	x=90 time=1.5				NoWait
+FadeIn	black					.3
+	リディ							ねーマスター今ひまー？\nちょっとお願いしたいことが……
+	リディ	悔しい2						あるん……だけど……
+CharacterOff
+	モノホシザオ	通常	2_2
+	ディーア	あはは2
+Shake	モノホシザオ		x=5 time=0.5				NoWait
+	モノホシザオ							ぴええぇぇぇ!!
+	ディーア							大丈夫！\n絶対大丈夫だから！
+Tween	モノホシザオ	MoveBy	x=20				NoWait
+	モノホシザオ	泣き						そ、そんな強引なぁ……
+CharacterOff
+StopBgm
+	リディ	絶望2						…………なに、してるの、ますたー？
+CharacterOff
+	モノホシザオ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							…………あっ
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							ぴえっ!?\nり、リディさん!?
+CharacterOff
+StopBgm
+	リディ	絶望2						………………あ、もしもし？\nE.D.E.N.ですか？
+CharacterOff
+Bgm	コメディ
+	モノホシザオ		2_2
+	ディーア	通常2	1_2
+	ディーア	本気2						誤解だリディ！\nオレは何もしてない！
+Thread	*ThreadG39001
+	リディ							してたじゃん！
+	ディーア							ぐわっ
+WaitThread	*ThreadG39001
+Jump	*SkipThreadG39001
+*ThreadG39001
+	リディ	悔しい2	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=-20				NoWait
+Wait						.8
+Se	打1
+Tween	ディーア	PunchPosition	y=50 time=2				NoWait
+Tween	ディーア	MoveBy	x=-800 time=1
+EndThread
+*SkipThreadG39001
+	リディ	怒り2						もう大丈夫だからねモノちゃん！\nリディが守ってあげるから！
+	モノホシザオ							ぴぇ……？\nあ、あの、リディさん？
+CharacterOff
+	ディーア	汗2						いいから話を聞けって！\n本当に何もしてないんだよ！
+FadeOut	black					.2
+CharacterOff
+	リディ	驚き2
+Wait						1
+FadeIn	black					.2
+	リディ							……任務に連れて行こうとしただけ？
+CharacterOff
+	モノホシザオ
+	モノホシザオ							ぴぇぇ……\nモノさんには向いてないって\n言ったんですけどぉ……
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	驚き2	2_2
+	リディ							…………マスター、\nほんとに何もしてなかったんだ
+	ディーア	怪しい2						最初からそう言ってるじゃないか
+	リディ	悲しい2						う、ごめんなさい……
+	リディ	悔しい2						でも、強引なのはダメだからね！
+	ディーア	汗2						そ、そうだな……\n悪かった、モノ
+CharacterOff
+	モノホシザオ							い、いえ……私は別に……
+Shake	モノホシザオ		x=5 time=0.5				NoWait
+	モノホシザオ	泣き						ただ、使い手さまがあんまり欲望を\n垂れ流すので……
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	絶望2	2_2
+	リディ							んー？
+	ディーア	汗2						も、モノ？
+CharacterOff
+	モノホシザオ	泣き						そ、そんな欲望まみれでモノさんに\n触ったら、絶対暴走してめちゃくちゃ\nになっちゃうと思っただけで……
+CharacterOff
+StopBgm
+	リディ	絶望2						あーもしもし？\nE.D.E.N.ですか？\nヘンタイの現行犯が出たんですけど
+CharacterOff
+Bgm	コメディ
+	モノホシザオ		2_2
+	ディーア	悔しい2	1_2
+	モノホシザオ							ぴぇ？
+	ディーア	本気2						違うから！\n本当に誤解だから！
+CharacterOff
+Param	character_grayout=false
+	目線(リディ)
+	リディ	絶望2	2_3_b					彼はいつかやると思ってました
+CharacterOff
+Param	character_grayout=true
+	モノホシザオ		2_2
+	ディーア	汗2	1_2
+	ディーア							どっから出したんだ、それ……
+CharacterOff
+	リディ		2_3_b
+	リディ	怒り2						もう！\n見損なったよマスター！\nこんな小さな女の子相手に……!!
+CharacterOff
+	モノホシザオ		2_2
+	ディーア	汗2	1_2
+	モノホシザオ							ぴぇぇっ!?\nち、ちがうんですリディさんっ！
+CharacterOff
+	リディ	驚き2						ほぇ？
+CharacterOff
+	モノホシザオ		2_2
+	ディーア	あはは2	1_2
+	ディーア							モノホシザオは、使い手の欲望を\n力に変えて戦う魔剣なんだ
+	モノホシザオ	泣き						そ、そうなんです……\nだから、使い手さまが\n悪いわけじゃなくて……
+CharacterOff
+	リディ	驚き2						そ、そうだったの……？
+CharacterOff
+	モノホシザオ		2_2
+	ディーア	汗2	1_2
+	モノホシザオ							ぴぇぇ……
+	ディーア							だからオレは何もしてないんだってば
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	悔しい2	2_2
+	リディ							でも欲望を垂れ流してるのは\n本当なんだよね……
+	ディーア	怪しい2						う……それは……\nし、仕方ないだろ……
+	ディーア	驚き2						それよりリディ、オレになにか\n用事があったんじゃなかったのか？
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	驚き2						あ、そうだった！
+	リディ	通常2						ちょっと買い物に行ってきて\nほしいんだけど、いい？
+	ディーア	驚き2						いいけど……\n何を買うんだ？
+	リディ	悔しい2						それがね、使おうと思ってた\n食材がなくて……
+	リディ	驚き2						多分お花見組が\n持っていったんだと思う
+	ディーア	怪しい2						ああ……
+FadeOut	black					.5
+CharacterOff						0
+Bg	リノ世界桜自治区
+	黑櫃		2_2
+Wait						.5
+FadeIn	black					.5
+Tween	黒櫃	PunchPosition	y=50				NoWait
+	黒櫃							くしゅん
+CharacterOff
+	流星刀		エフェクト表					……風邪？
+CharacterOff
+	黒櫃							とんでもない！\n風邪なんて引くものか！
+CharacterOff
+	黒櫃	拡大花見	エフェクト表					ボクは<size=40>天才</size>だからね！
+CharacterOff
+	流星刀		エフェクト表					……………………そう、すごいわね
+FadeOut	black					.5
+CharacterOff
+Bg	酒場1F
+	ディーア	あはは2	1_2
+	リディ	通常2	2_2
+Wait						.5
+FadeIn	black					.5
+	ディーア							そういえば、朝早くからなにか\n準備してたな……
+	ディーア	驚き2						それで、何を買ってくればいいんだ？
+	リディ	照れ2						はい、これ買い物リスト\nそれじゃあよろしくね、マスター♪
+Se	走る
+Tween	リディ	MoveTo	x=800 time=2				NoWait
+	ディーア	通常2						ああ、わかった\n……モノ！
+CharacterOff
+	モノホシザオ
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							ぴぇぇっ!?
+CharacterOff
+	モノホシザオ		2_2
+	ディーア	通常2	1_2
+	モノホシザオ	泣き						な、なんですか……？\nやっぱり戦わなきゃダメですか……？
+	ディーア	汗2						いや、任務はまた今度でいいよ\nちょっと買い物に付き合ってくれ
+	モノホシザオ	通常						ぴぇ……？\n買い物、ですか？
+	ディーア	通常2						ああ、戦ったりはしないから大丈夫だ
+	モノホシザオ							そ、それなら……\n私も、ご一緒します……っ
+FadeOut	black					.3
+CharacterOff
+StopBgm
+Bg	市街地A
+Bgm	平和
+	　　　　　　　　　　
+Wait						1
+FadeIn	black					.3
+	　　　　　　　　　　							\n　　　　　 <color=blue><dash=2>商店街<dash=2></color>
+Bgm	平和
+	ディーア	怪しい2
+Tween	ディーア	MoveTo	x=-90				NoWait
+	ディーア							ええと、これはこっちで……
+CharacterOff
+	モノホシザオ
+Wait						.2
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+Tween	モノホシザオ	MoveBy	x=-90				Add
+	モノホシザオ							…………
+CharacterOff
+	ディーア	驚き2	1_2
+Tween	ディーア	MoveTo	x=90				NoWait
+	ディーア							お、こっちは安くなってるな
+CharacterOff
+	モノホシザオ	泣き	1_2
+Wait						.2
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+Tween	モノホシザオ	MoveBy	x=180				Add
+	モノホシザオ							…………
+CharacterOff
+	ディーア	汗2						……ええと、モノ？
+CharacterOff
+	モノホシザオ
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							ぴぇっ!?\nなな、なんですかっ!?
+CharacterOff
+	ディーア	通常2						どうしてそんなに離れて歩くんだ？
+CharacterOff
+	モノホシザオ	泣き
+Tween	モノホシザオ	MoveBy	x=30				NoWait
+StopBgm						3
+	モノホシザオ							そ、それは……\nだって、モノさんは\n危ない魔剣ですし……
+CharacterOff
+	ディーア	怪しい2						……そういえば、さっきから\n暴走するとか言ってたけど……\nあれって何のことなんだ？
+CharacterOff
+	モノホシザオ							ぴぇぇ……え、ええと……
+	モノホシザオ	泣き						……モノさんは、自分の力を\n制御できないんです
+FadeOut	black					.2
+CharacterOff
+Bg	魔術空間
+Wait						.1
+Bgm	絶望
+Bg	黒背景					15
+	モノホシザオ(武器)		エフェクトBG
+	スモーク		エフェクト表			3
+Wait						.3
+Se	闇1
+Param	character_grayout=false
+FadeIn	black					.2
+	モノホシザオ(武器)							欲望を呪力に変えて跳ね返し、\n欲に溺れた妖を断つ……それが、\n<ruby=まとうひえんおさふね>魔刀飛燕長船</ruby><ruby=ものほしざお>妄奉祀座王</ruby>の力です
+	モノホシザオ(武器)							でも、私はそれを上手く\n使えなくて……
+Se	闇2
+CharacterOff	スモーク					2
+	オーラ青		エフェクト裏2
+	モノホシザオ(魔法陣)		エフェクト裏3			1
+	モノホシザオ(魔法陣)							勝ちたい、\n強くなりたい、\n敵を倒したい<dash=2>
+	モノホシザオ(魔法陣)							<ruby=ものほしざお>妄奉祀座王</ruby>は、\nそういう使い手さまの欲望も、\n力に変えて跳ね返してしまうんです
+CharacterOff	モノホシザオ(武器)
+Se	斬2
+Se	斬2
+Se	斬2
+	モノBD1		エフェクト裏
+Wait						.2
+Se	斬2
+Se	斬2
+Se	斬2
+	モノBD2		エフェクト表
+Wait						.2
+Se	斬2
+Se	斬2
+Se	斬2
+	モノBD3		エフェクト表2
+Wait						.5
+FadeOut	black					1
+Param	character_grayout=true
+Bg	市街地A
+CharacterOff
+	モノホシザオ
+Wait						.5
+FadeIn	black					.2
+	モノホシザオ							<dash=2>だから、モノさんを使うと、\n使い手さまは大怪我をしてしまうかも\nしれなくて……
+Shake	モノホシザオ		x=5 time=0.5				NoWait
+	モノホシザオ	泣き						そう考えると……\nこ、こ、こわくて……ぴぇぇ……
+CharacterOff
+	ディーア	怒り2						……もしかして、\nそれでずっとオレを避けてたのか
+CharacterOff
+	モノホシザオ							ぴぇぇ……だってぇ……\nモノさん、制御できないですし……\n絶対暴走してしまいますから……
+	モノホシザオ	泣き						だ、だから、酒場に戻ったら……\n私には手を触れず、大切に飾って\nおいていただければ……
+CharacterOff
+StopBgm
+	ディーア	通常2						……わかった、モノがそう言うなら
+CharacterOff
+	モノホシザオ	泣き						…………!!
+	モノホシザオ	通常						ぁ、あの……
+CharacterOff
+Bgm	平和					3
+	ディーア	笑い2						でも、買い物には\n最後まで付き合ってもらうからな？
+CharacterOff
+	モノホシザオ							…………ぁ\nも、もちろんです……!!\n戦い以外なら……っ
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	草原A
+	モノホシザオ	泣き	2_2
+	ディーア	通常2	1_2
+Wait						.2
+FadeIn	black					.5
+	ディーア							……このあたりかな
+	モノホシザオ							あの、商店街からだいぶ外れて……
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=150				NoWait
+	キノコリオン							ノコーーーーッ!!
+CharacterOff
+	モノホシザオ		2_2
+	ディーア	通常2	1_2
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							ぴぇっ!?
+	ディーア							ああ、いたいた
+Shake	モノホシザオ		x=5 time=0.5				NoWait
+StopBgm
+	モノホシザオ	泣き						…………あの？\nつ、使い手さま？
+	ディーア	笑い2						ほら、キノコリオン
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコッ!!
+CharacterOff
+	モノホシザオ	拡大	エフェクト表					ほら、じゃないですよっ!?
+CharacterOff
+Bgm	バトル
+	モノホシザオ	泣き	2_2
+	ディーア	あはは2	1_2
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							戦い以外ならって言いましたよね!?\nていうか買い物じゃ\nなかったんですかっ!?
+	ディーア							素材足りなくてさ、\n任務ついでにちょうどいいから
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							ぴぇぇぇっ!!\nう、うそつきぃ!!\n絶対むりですよぉ!!
+	ディーア	怒り2						大丈夫だって、心配するな！\nほら、来るぞ!!
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコーーーーっ!!
+CharacterOff
+	モノホシザオ	拡大泣き	エフェクト表					ぴえぇぇぇぇ……!!
+If	isdebug==true
+CharacterOff
+Jump	*G_390_02
+EndIf
+EndScenario
+
+# G_390_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	草原A
+FadeIn	white					.5
+	モノホシザオ	拡大泣き	エフェクト表
+Shake	モノホシザオ		x=5				NoWait
+	モノホシザオ							ぴええぇぇぇぇっ!!
+CharacterOff						0
+Bg	黒背景
+Se	斬2
+Se	斬2
+Se	斬2
+	モノBD1		エフェクト裏
+Wait						.2
+Se	斬2
+Se	斬2
+Se	斬2
+	モノBD2		エフェクト表
+Wait						.2
+Se	斬2
+Se	斬2
+Se	斬2
+	モノBD3		エフェクト表2
+Wait						1
+Se	ガードブレイク
+FadeOut	black					.2
+CharacterOff
+Bg	草原A
+	モノホシザオ
+Wait						.2
+FadeIn	black					.5
+StopBgm						3
+Wait						.5
+	モノホシザオ							はぁ、はぁ……\nなんとか、やっつけて……
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ	泣き						……っ!!\nつ、使い手さま……!?
+CharacterOff
+	ディーア	驚き2						ん？\nどうした？
+CharacterOff
+	モノホシザオ	泣き						どうした？　じゃないですよっ!?\nおおお、お怪我は……!?
+CharacterOff
+	モノホシザオ	泣き	2_2
+	ディーア	通常2	1_2
+	ディーア							怪我？\n別に大したことないぞ
+Bgm	凱旋
+	モノホシザオ	通常						ど、どうして……？\nモノさんを使ったのに……
+Shake	モノホシザオ		x=5 time=0.5				NoWait
+	モノホシザオ							本当なら、使い手さまもバラバラに\nなっていてもおかしくないのに……
+	ディーア	あはは2						はは、相性がいいのかもな
+	モノホシザオ	泣き						わ、笑い事じゃないですよぉっ!!
+	ディーア	通常2						心配しすぎだってば\n大丈夫って言っただろ？
+	モノホシザオ							……い、一歩間違えたら、\n本当に危なかったかも\nしれないんですよ？
+	ディーア	笑い2						でも、暴走もしなかったし、\nオレも無事だ
+	モノホシザオ	通常						ぴぇぇぇ……\nどうして？\nどうして、そこまで……
+	ディーア	通常2						どうして、か……
+Se	回想
+FadeOut	black					.2
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A
+	モノホシザオ
+FadeIn	black					.2
+	モノホシザオ							<dash=2>だから、モノさんを使うと、\n使い手さまは大怪我をしてしまうかも\nしれなくて……
+Shake	モノホシザオ		x=5 time=0.5				NoWait
+	モノホシザオ							そう考えると……\nこ、こ、こわくて……ぴぇぇ……
+FadeOut	black					.5
+Bg	草原A
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff
+	モノホシザオ		2_2
+	ディーア	通常2	1_2
+FadeIn	black					.5
+Bgm	凱旋
+	ディーア							モノにとって戦うのが怖いのと\n同じように、オレにも\n苦手なことがあってさ
+	モノホシザオ							ぴぇ……？
+	ディーア	あはは2						誰かが泣いているのに、\n何もできないのは嫌なんだ
+	ディーア	通常2						それに、オレは魔剣使いで、\nモノはオレの魔剣だからな
+	ディーア	笑い2						モノが悩んでいることがあるなら、\nそれを解決してあげるのが\nオレの役目だ
+	モノホシザオ	泣き						つ、使い手さま……
+StopBgm
+	ディーア	あはは2						あと、なんかちょっと\nいたずらしたくなっちゃって
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+Tween	モノホシザオ	MoveBy	x=20
+Bgm	コメディ
+	モノホシザオ	通常						ぴぇっ!?
+	ディーア	怪しい2						なんか、小動物みたいで\nかわいいというか……
+Tween	モノホシザオ	MoveBy	x=40				NoWait
+	モノホシザオ							ぴぇぇぇぇっ!?\nあ、あの、使い手さま!?\nなんか変なこと考えてませんか!?
+	ディーア	汗2						あはは、ごめんごめん
+CharacterOff
+Bgm	平和					2
+	ディーア	通常2						さあ、買い物も終わったし、\nモノの性能テストも\nできたことだし……
+	ディーア	笑い2						帰ろうか、リディが待ってる
+CharacterOff
+	モノホシザオ							あ……は、はいっ!!
+	モノホシザオ	泣き						…………ぁ
+Se	回想
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A
+StopBgm
+	モノホシザオ	泣き
+Wait						.1
+FadeIn	black					.2
+	モノホシザオ							だ、だから、酒場に戻ったら……\n私には手を触れず、大切に飾って\nおいていただければ……
+FadeOut	black					.5
+Bg	草原A
+ImageEffectOff	SpriteCamera	Sepia
+Wait						.1
+FadeIn	black					.5
+Bgm	凱旋
+	モノホシザオ	泣き
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							つ、使い手さまっ!!
+CharacterOff
+	ディーア	驚き2						ん？\nどうした、モノ？
+CharacterOff
+	モノホシザオ	泣き						あ、あの……ひとつ！\nモノさんと約束してください……っ!!
+CharacterOff
+	ディーア	通常2						約束？
+CharacterOff
+	モノホシザオ	泣き						……モノさんを使うときの三ヶ条です
+CharacterOff
+	ディーア	驚き2						…………!!
+CharacterOff
+	モノホシザオ	泣き						いいですか、よく聞いてくださいっ
+CharacterOff
+StopBgm
+	モノホシザオ	拡大泣き	エフェクト表					<speed=0>1.変なことを考えない</speed>
+	モノホシザオ							<speed=0>1.変なことを考えない\n2.変なことを考えない</speed>
+	モノホシザオ							<speed=0>1.変なことを考えない\n2.変なことを考えない\n3.変なことを考えない、ですっ!!</speed>
+CharacterOff
+Bgm	コメディ
+	ディーア	汗2						………………ん？\n一つしか、無かったような
+CharacterOff
+	モノホシザオ							そ、それだけ大事なんですっ
+CharacterOff
+	ディーア	あはは2						……そっか\nわかった、覚えておくよ
+	ディーア	笑い2						変なことは考えない\n約束な
+CharacterOff
+	モノホシザオ							は、はい、約束で……
+FadeOut	white					.1
+CharacterOff						0
+	トライアルスチル39001	脚	エフェクト表			0
+FadeIn	white					.1
+Wait						.7
+FadeOut	white					.1
+CharacterOff						0
+	モノホシザオ
+FadeIn	white					.1
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							ぴぇぇっ!?
+Shake	モノホシザオ		x=5 time=0.5				NoWait
+	モノホシザオ	泣き						あ、あの…………使い手さま？\nいま、変なこと\n考えてませんでした!?
+CharacterOff
+Param	character_grayout=false
+	トライアルスチル39001	肩	エフェクト表
+	ディーア	<Off>						いや？\nそんなことはないぞ？
+CharacterOff
+Param	character_grayout=true
+	モノホシザオ	泣き
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							ほらぁ!!\nていうか今、わざと欲望を\n垂れ流してましたよね!?
+Shake	モノホシザオ		x=5 time=0.5				NoWait
+	モノホシザオ	通常						ぴ、ぴぇぇぇ……っ\nだ、大事なことなんですよっ\nちゃんと覚えてくださいっ
+	モノホシザオ	泣き						いいですか、使い手さまっ!!
+FadeOut	white					.1
+CharacterOff
+	トライアルスチル39001	脚	エフェクト表			0
+Wait						.1
+FadeIn	white					.1
+	トライアルスチル39001							1.変なことを考えない
+FadeOut	white					.1
+	トライアルスチル39001	肩	エフェクト表			0
+FadeIn	white					.1
+	トライアルスチル39001							2.変なことを考えない……っ
+FadeOut	white					.1
+	トライアルスチル39001	顔	エフェクト表			0
+FadeIn	white					.1
+	トライアルスチル39001	顔						3.へ、変なことを……
+FadeOut	white					.1
+CharacterOff
+	モノホシザオ	拡大泣き	エフェクト表
+Wait						.1
+FadeIn	white					.1
+Shake	モノホシザオ		x=10				NoWait
+	モノホシザオ							<size=40>ぴえええええええええっ!!!!</size>
+FadeOut	black					.2
+StopBgm
+CharacterOff
+Bg	酒場1F
+	モノホシザオ	拡大	エフェクト表
+Wait						2
+Bgm	コメディ
+FadeIn	black					.2
+Shake	モノホシザオ		x=5				NoWait
+	モノホシザオ							ぴええぇぇぇん!!!!
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	リディ							……それで、仲良くなれたの？
+	ディーア							……さっきよりは、たぶん
+CharacterOff
+	モノホシザオ		2_2					ぴぇぇぇ……あぅぁぅ……
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	悔しい2	2_2
+	リディ							…………ほんとに？
+	ディーア							…………たぶん
+CharacterOff
+Param	character_grayout=false
+	円フェード		g090256500
+	モノホシザオ	泣き	2_2					ぴええぇぇぇぇ……!!
+Shake	モノホシザオ		x=5				NoWait
+Tween	円フェード	ScaleTo	x=0.1 y=0.1				Add
+	モノホシザオ	通常						やっぱり戦うのいやですぅぅ!!
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*G_390_01
+EndIf
+EndScenario

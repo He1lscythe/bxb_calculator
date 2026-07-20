@@ -1,0 +1,666 @@
+# E_1199_ex01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	黒背景					0
+	煌征ルカ	怒り				2
+FadeIn	black					1
+	煌征ルカ	怒り						私は復讐者……
+	煌征ルカ	怒り						お兄ちゃんを傷つけた魔界と、\nお兄ちゃんを倒して魔界を守った\n魔剣王様に刃を向ける者
+	煌征ルカ	怒り						魔剣王様の下にいるのも\n彼を狙い続け、\n私以外に倒されないようにするため
+	煌征ルカ	悲しい						しかし毎日、復讐を挑んでも<dash=2>
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	笑い4	p3			0
+	煌征ルカ	怒り	p7b			0
+FadeIn	white					.3
+Shake	煌征ルカ		x=2				NoWait
+	煌征ルカ	怒り						むむむむ……！\nあんなにあっさり防御されるとは！
+	ディーア	笑い4						ふっ、まだまだ太刀筋が甘いな!!
+	ディーア	通常4						戦い方、オレが教えようか？
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	怒り						結構ですわっ！\n仇に教えを請うなどありえません！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	黒背景					0
+	煌征ルカ	怒り				0
+FadeIn	white					.3
+	煌征ルカ	怒り						そんなふうに失敗ばかり……
+	煌征ルカ	怒り						相手は強い魔剣王様です\n私の選んだ復讐の道は遠く険しく
+StopBgm
+	煌征ルカ	怒り						私に遊んでいる暇はありません\nなのに<dash=2>
+FadeOut	white					.3
+CharacterOff						0
+Bg	海岸					0
+	煌征ルカ水着	照れ				0
+	集中線		エフェクト表			0
+Param	character_grayout=false
+FadeIn	white					.3
+Bgm	わくわく
+	煌征ルカ水着	照れ						これはなんなんですのー！！
+CharacterOff
+	ガラティーン	通常						合宿だよ！ 合宿！
+Tween	ガラティーン	PunchPosition	y=30				NoWait
+	ガラティーン	通常						約束したでしょ？\nルカちゃんのお願いを叶えてあげる！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場_宿屋					0
+	煌征ルカ	通常				0
+FadeIn	white					.3
+	煌征ルカ	通常						ガラティーン様、レプリカ様、\n私に戦い方を教えてくださいませ！
+CharacterOff
+Param	character_grayout=true
+	ガラティーン	通常	p3
+	エクス=レプリカ	通常2	p7b
+	ガラティーン	通常						戦い方？
+	エクス=レプリカ	通常2						ルカちゃんに？
+CharacterOff
+	煌征ルカ	通常						私は強くなりたいんです……
+	煌征ルカ	悲しい						しかし魔剣になりたてで、\n自分のことにも慣れていません
+	煌征ルカ	通常						だから、\nエクスカリバーの系譜の皆様から\n戦い方を教われればと……！
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	通常						お願いしますわっ！
+CharacterOff
+	ガラティーン	通常	p3
+	エクス=レプリカ	通常2	p7b
+	ガラティーン	通常						なるほどー！ 話はわかったよ！
+	エクス=レプリカ	通常2						立派になりたい気持ちは、\n私たちもおんなじよ♪
+Tween	ガラティーン	PunchPosition	y=30				NoWait
+	ガラティーン	通常						一緒に強くなろっ！
+CharacterOff
+	煌征ルカ	嬉しい						それでは<dash=2>
+Param	character_grayout=false
+	ガラティーン	通常						うん！ さっそく<dash=2>
+	集中線		エフェクト表
+	ガラティーン	通常						海にいくよー!!
+CharacterOff
+	煌征ルカ	通常						…………え？
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	海岸					0
+	ガラティーン	通常				0
+FadeIn	white					.3
+	ガラティーン	通常						だから海に来たんだよ♪
+CharacterOff
+	煌征ルカ水着	照れ						その「だから」がわかりませんわ！
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	照れ						どうして海なんですの!?\n水着に着替えるんですの!?
+	煌征ルカ水着	照れ						これでは、\n完全に海水浴の準備ですわ！
+	煌征ルカ水着	照れ						こんなところで遊んでられません\n私は帰りま<dash=2>
+Tween	煌征ルカ水着	MoveBy	x=-100				NoWait
+Wait						.2
+	ガラティーン	通常	画面外_右_b
+Se	ピューン
+Tween	ガラティーン	MoveBy	x=-650 time=0.5
+	ガラティーン	通常						まあまあ、落ち着いて♪
+Param	character_grayout=true
+Shake	煌征ルカ水着		x=3				NoWait
+	煌征ルカ水着	照れ						は、はやいっ!?\nはなしてくださいませーっ！
+	ガラティーン	通常						大丈夫、ちゃんと説明するよ！
+	ガラティーン	通常						復讐の先輩、出番だよー！
+	？？？？	<Off>						ふっふっふ！
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	照れ						あ、あなたは……！
+CharacterOff
+	バルムンク	水着						ふくしゅーならバルにまかせて♪
+CharacterOff
+	煌征ルカ水着	照れ						復讐の大先輩、バルムンク様！
+	煌征ルカ水着	照れ						何度もあの方に挑み続けている、\nあなたもこの合宿に!?
+CharacterOff
+	バルムンク	水着						うん！\nバルも海でふくしゅーするんだー！
+	バルムンク	水着						それにルカちゃん、\nふくしゅーはあせったらダメ！\nらしいんだよ♪
+	バルムンク	水着						たくさんふくしゅーして、\nあきらめないのがエライって、\nバルは言われたの！
+CharacterOff
+	煌征ルカ水着	通常						焦らず、あきらめない……
+CharacterOff
+	ガラティーン	通常						それに知ってるかな？\n海の合宿で強くなるのは常識！
+Tween	ガラティーン	PunchPosition	y=30				NoWait
+	ガラティーン	通常						スポーツでもアイドル活動でも\n海で合宿すると効果抜群！
+	ガラティーン	通常						でもその分、\n合宿のメニューはすごく厳しいよ！\nルカちゃんはついてこれる？
+CharacterOff
+	煌征ルカ水着	怒り						そ、そうだったのですね……！
+Shake	煌征ルカ水着		x=2				NoWait
+	煌征ルカ水着	怒り						私の認識が甘かったのですわ……
+	煌征ルカ水着	怒り						ぜひお願いします！\nガラティーン師匠、バルムンク先輩！
+CharacterOff
+	ガラティーン	通常						ぐはー♪\nその気合や、よしっ！
+StopBgm
+CharacterOff
+	バルムンク	水着						ふくしゅーだー♪
+FadeOut	black					.3
+CharacterOff						0
+	ガラティーン	通常				0
+Wait						.5
+FadeIn	black					.3
+Bgm	カジノ
+	ガラティーン	通常						砂浜ダッシュスタートー！
+CharacterOff
+	煌征ルカ水着	怒り	画面外_右_b
+Se	走る
+Tween	煌征ルカ水着	MoveBy	x=-750 time=3				NoWait
+Wait						.5
+	煌征ルカ水着	怒り						あ、足が砂に取られて、\n動くだけでも大変ですわーっ！
+	バルムンク	水着	画面外_右
+Se	ピューン
+Tween	バルムンク	MoveBy	x=-1400 time=2				NoWait
+	バルムンク	水着						おさきにー
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	怒り						なんて速さ！\nさすがは先輩です……！
+	煌征ルカ水着	嬉しい						私も負けませんわよー！
+FadeOut	black					.3
+CharacterOff						0
+Bg	海底					0
+	ガラティーン	通常				0
+Wait						.5
+FadeIn	black					.3
+	ガラティーン	通常						次は海の中でダイビング！\n泳いで全身ではしゃいじゃおう♪
+Tween	ガラティーン	PunchPosition	y=30				NoWait
+	ガラティーン	通常						魚やカニを捕まえたら、\nバーベキューが豪華になるし！\n一石二鳥♪
+CharacterOff
+	煌征ルカ水着	通常						あっ！\nたくさんのカニがいましたわっ！
+Tween	煌征ルカ水着	MoveBy	x=-50				NoWait
+	煌征ルカ水着	怒り						そーっと、\n背中から捕まえるように……
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	悲しい						ひゃあっ！
+	煌征ルカ水着	悲しい						挟まれそうになりましたわーっ！
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_海辺					0
+	エクス=レプリカ	通常2				0
+Wait						.5
+FadeIn	black					.3
+	エクス=レプリカ	通常2						海の家で働くのも特訓になるの！
+Tween	エクス=レプリカ	PunchPosition	y=30				NoWait
+	エクス=レプリカ	通常2						ご奉仕スキルを教えてあげるわ♪
+CharacterOff
+	煌征ルカ水着	怒り						たくさんの焼きそばをつくるのが、\nこんなに大変だなんて！
+	煌征ルカ水着	嬉しい						でも、できました！
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	嬉しい						とーってもおいしいですわよ♪
+CharacterOff
+	ディーア	笑い4						おっ！\n元気に働いているな、ルカ！
+CharacterOff
+	煌征ルカ水着	照れ
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	照れ						な、なんで！\nあなたまで来ているんですの!?
+CharacterOff
+	ディーア	笑い4						ルカの初めてのバイトだから\nちょっと心配で
+CharacterOff
+	煌征ルカ水着	照れ						恥ずかしいから、\nお帰りくださいませ！
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	照れ						せめて来るなら、\n事前に言っておくものですわ！
+CharacterOff
+	ガラティーン	通常						ふふ、いい調子♪
+FadeOut	white					.3
+CharacterOff						0
+Bg	夏空					0
+	ガラティーン	<Off>				0
+Wait						.5
+FadeIn	white					.3
+	ガラティーン	<Off>						次はスイカ割りをしよー♪
+	煌征ルカ水着	<Off>						な、なんにも見えません……！\nこっちですか？
+	エクス=レプリカ	<Off>						違うわ、こっちこっちー！
+	煌征ルカ水着	<Off>						こっちですの!?
+	バルムンク	<Off>						もーっと右だよー！
+	煌征ルカ水着	<Off>						えーいっ！
+	煌征ルカ水着	<Off>						って、失敗しましたわー！
+StopBgm
+FadeOut	white					1
+CharacterOff						0
+Bg	海岸					0
+	煌征ルカ水着	照れ				0
+Wait						1
+FadeIn	white					1
+Bgm	平和
+	煌征ルカ水着	照れ						はあ、はあ……\nとっても濃厚な一日でしたわ……
+	煌征ルカ水着	嬉しい						でも疲れた後の\nバーベキューがこんなに美味しいとは
+CharacterOff
+	ディーア	笑い4						ルカ、こっちの肉も焼けたぞ！
+	ディーア	通常4						ほら、取ってあげるから
+CharacterOff
+	煌征ルカ水着	照れ						子どもじゃありません！\n一人でお肉も取れますわ……！
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	照れ						せっかく焼いていただいたから、\nいただきますけど……
+	煌征ルカ水着	通常						もぐもぐっ……！
+	煌征ルカ水着	嬉しい						おいしいですわー♪
+StopBgm
+	煌征ルカ水着	怒り						って、あら……？
+	煌征ルカ水着	怒り						なんとなく、\nうすうす感じておりましたが……
+Bgm	緊迫
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	怒り						一日中、\n遊んでいただけですよねっ!?
+CharacterOff
+	ガラティーン	通常						い、いやいや！\nこれもちゃんと合宿の一環だよ！
+	ガラティーン	通常						みんなで仲良く楽し<dash=2>
+CharacterOff
+	煌征ルカ水着	怒り						やっぱり、\n楽しんでるではありませんか！
+	煌征ルカ水着	怒り						私も目的を忘れて、\nついつい楽しんでしまうなんて
+Shake	煌征ルカ水着		x=3				NoWait
+	煌征ルカ水着	悲しい						私は自分が情けないですわーっ！
+StopBgm
+CharacterOff
+	ガラティーン	通常						あ、ルカちゃん待って……！
+Bgm	コメディ
+CharacterOff
+	煌征ルカ水着	悲しい
+Se	走る
+Tween	煌征ルカ水着	MoveBy	x=-750 time=1				NoWait
+	煌征ルカ水着	悲しい						ついてこないでくださいませーっ！
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_海辺					0
+	煌征ルカ水着	悲しい	画面外_右			0
+FadeIn	black					.3
+Se	ピューン
+Tween	煌征ルカ水着	MoveBy	x=-1400 time=1				NoWait
+	煌征ルカ水着	悲しい						私はダメダメですわーっ！
+	ガラティーン	通常	画面外_右_b
+Se	走る
+Tween	ガラティーン	MoveBy	x=-700 time=2				NoWait
+	ガラティーン	通常						まってー！
+FadeOut	black					.3
+CharacterOff						0
+Bg	海岸					0
+	煌征ルカ水着	悲しい	画面外_右			0
+FadeIn	black					.3
+Se	ピューン
+Tween	煌征ルカ水着	MoveBy	x=-1400 time=1				NoWait
+	煌征ルカ水着	悲しい						いつになったら、もっと強く……！
+	ガラティーン	通常	画面外_右_b
+Se	走る
+Tween	ガラティーン	MoveBy	x=-400 time=2				NoWait
+	ガラティーン	通常						はぁ、はぁ、まってぇ……！
+StopBgm
+Tween	煌征ルカ水着	MoveBy	x=500 time=1				NoWait
+	煌征ルカ水着	通常						あ、あら……？
+	煌征ルカ水着	通常						合宿の前は、\nガラティーン様にすぐ捕まって\nしまいましたのに？
+Bgm	凱旋
+Tween	ガラティーン	MoveBy	x=-100				NoWait
+	ガラティーン	通常						ルカちゃん、\n足、はやくなったねー！
+CharacterOff
+	エクス=レプリカ	通常2						合宿の成果、\nちゃんとでたみたいね！
+CharacterOff
+	バルムンク	水着						うんうん、つよくなったねー
+CharacterOff
+	煌征ルカ水着	通常						皆様、これはいったい……？
+	煌征ルカ水着	通常						私はずっと遊んでばかりだったのに\nどうして体が……？
+CharacterOff
+	ガラティーン	通常						遊ぶことも、\n強くなるのに大事だったんだよ♪
+	ガラティーン	通常						ルカちゃん、\nずーっと体に余計な力が入ってたし
+Tween	ガラティーン	PunchPosition	y=30				NoWait
+	ガラティーン	通常						それじゃあ、\n動かせる体もこわばっちゃうもん！
+CharacterOff
+	エクス=レプリカ	通常2						それに慣れない砂の上で\nたくさん遊んだから、\nバランス感覚もよくなったの♪
+	エクス=レプリカ	通常2						私たちは魔剣少女だし、\n鍛えてもすぐに力は変わらないけど
+	エクス=レプリカ	通常2						体の動かし方は変えられるわ♪
+CharacterOff
+	煌征ルカ水着	照れ						た、たしかに、\nなんだか体が軽くなった気がします
+	煌征ルカ水着	照れ						では私がしたことは、\nあの楽しい時間も無駄ではない？
+CharacterOff
+	バルムンク	水着						だからあせっちゃダメだよー♪
+CharacterOff
+	煌征ルカ水着	通常						なるほど……
+	煌征ルカ水着	嬉しい						たまには休み、\n心を安らげることも成長には必要
+	煌征ルカ水着	嬉しい						また一つ、\n私は大事なものを学べました
+	煌征ルカ水着	嬉しい						皆様、ありがとうございますわ
+StopBgm
+	煌征ルカ水着	嬉しい						それから<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_海辺					0
+	ディーア	通常4				0
+Wait						1
+FadeIn	black					.3
+Bgm	平和
+	ディーア	通常4						おっ！ 帰ってきた！
+	ディーア	笑い4						ルカも合宿の成果が出たみたいで\n本当に良かったな！
+CharacterOff
+	煌征ルカ水着	通常						ええ、あなたの思惑のとおりに
+	煌征ルカ水着	通常						ガラティーン様やレプリカ様、\nそれに他の皆様も
+	煌征ルカ水着	通常						私に協力してくださるように、\n手を回してくださったのでしょう？
+	煌征ルカ水着	通常						冷静に考えると、\nあなたに復讐したい私を助けるのは\n本来はおかしいことですもの
+CharacterOff
+	ディーア	通常4						そんなことないさ
+	ディーア	通常4						魔剣にはいろんな考えの子がいるし\nみんなもお前を心配してた\nあの子たちの気持ちにウソはないよ
+CharacterOff
+	煌征ルカ水着	嬉しい						ええ、それもわかります
+CharacterOff
+	ディーア	通常4						それにお前は特殊な魔剣だ\n強くなろうとすることで何が起こるか\nオレも知りたかっただけだ
+	ディーア	通常4						オレはお前を助けたつもりも、\n手心を加えたつもりもない
+CharacterOff
+	煌征ルカ水着	怒り						まったく、\n本当によく口が回るお方ですわね
+	煌征ルカ水着	嬉しい						今も私たちは、\n魔剣でありながら敵でもある\n対等な関係であると
+	煌征ルカ水着	嬉しい						でしたら、\nこれからはあなたからも、\n私に戦い方を教えてくださいませ
+CharacterOff
+	ディーア	笑い4						いいのか？
+CharacterOff
+	煌征ルカ水着	怒り						倒すべき相手の力量を見極め、\n近づこうとするのは当然のことです
+	煌征ルカ水着	嬉しい						それに私に必要なのは、\nそうした気持ちの余裕ですもの
+	煌征ルカ水着	嬉しい						ただしお返しするのは復讐の刃\nつまり<dash=2>
+	煌征ルカ水着	怒り						隙あ<dash=2>
+ImageEffect	SpriteCamera	MotionBlur
+	ディーア	通常4	画面外_右
+Tween	ディーア	MoveBy	x=-550 time=0.5				NoWait
+	ディーア	通常4						おっと♪
+	ディーア	笑い4						確かに早くなったな！
+ImageEffectOff	SpriteCamera	MotionBlur
+Tween	煌征ルカ水着	MoveBy	x=-150				NoWait
+	煌征ルカ水着	照れ						むむむ……！\nまたそんな余裕な顔をして……！\nきらいですっ！
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	照れ						いつか！\nあなたから教わった力も使って\n勝ってみせますから！
+	煌征ルカ水着	照れ						どうかお覚悟を！
+	ディーア	笑い4						ああ、わかった
+	ディーア	通常4						でもまずは、\n復讐に失敗したルカに罰ゲームだな
+	煌征ルカ水着	通常						またですの？\n屈辱を忘れないためと自分から\n言い出したことですが
+	煌征ルカ水着	通常						今度はどんな服を<dash=2>
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	照れ						なっ……！\nその手にあるのは世界図書館伝統の\n例の水着ではないですか!?
+Shake	煌征ルカ水着	照れ	x=3				NoWait
+	煌征ルカ水着	照れ						それを私にもと言うのですか!?
+	ディーア	通常4						魔剣のみんなも着たことあるし\n恥ずかしくはないぞ？
+	ディーア	笑い4						それにほら、罰ゲームだから
+	煌征ルカ水着	照れ						くぅぅ……、\nよくもこんな屈辱を……！
+Tween	煌征ルカ水着	PunchPosition	y=30				NoWait
+	煌征ルカ水着	照れ						やっぱり！\nあなたのことだいっきらいですわー！
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_ex02
+EndIf
+EndScenario
+
+# E_1199_ex02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	酒場_宿屋					0
+	ディーア	怪しい4				2
+FadeIn	white					1
+	ディーア	怪しい4						おはよう、\nルーンブレード:Blaze
+	ディーア	怒り4						今回の君の任務は、\nさらわれたルーンシリーズの奪還だ
+	ディーア	目閉じ4						ルーンブレード、ルーンロッド、\nそしてルーンアクス
+	ディーア	怒り4						とある特殊な任務に参加していた\n三人が突如消息を絶ったんだ
+CharacterOff
+	ルンブレB	通常						なんですって……！
+Shake	ルンブレB		x=2				NoWait
+	ルンブレB	通常						そんな、あの三人が……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+	ルーンブレード	通常				0
+FadeIn	white					.3
+Tween	ルーンブレード	PunchPosition	y=30				NoWait
+	ルーンブレード	通常						ルーンブレード:Blazeちゃん！\nみんなで一緒にお昼ごはん食べない？
+CharacterOff
+	ルンブレB	通常						すみません、私は兵器ですから
+	ルンブレB	通常						どうか私抜きで、\nゆっくり過ごしてください
+CharacterOff
+	ルーンブレード	通常						そう……？
+	ルーンブレード	通常						じゃあ今度、\n一緒にお買い物とかはどう？
+CharacterOff
+	ルンブレB	通常						すみません……\n私にはおしゃれは不要ですし
+	ルンブレB	通常						この手の強い力は、\n洋服やあなたのことも傷つけます
+	ルンブレB	通常						このまま適度な距離感でいましょう
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ルンブレB	通常				0
+FadeIn	white					.3
+	ルンブレB	通常						傷つけまいと、\nあえて距離をとっていたのに……
+	ルンブレB	通常						私の判断ミスです
+CharacterOff
+	ディーア	怒り4						悔やむのはあとだぞ、\nこんなビデオレターが届いてるんだ
+CharacterOff
+	ルンブレB	通常						っ！\n犯人からのメッセージですね！
+StopBgm
+	ルンブレB	通常						再生してください！
+Se	マイクノイズ
+FadeOut	white					.3
+CharacterOff						0
+Bg	洞窟A					0
+	ルーンロッド	通常2	p8b			0
+	アクス	通常	p2b			0
+	ルーンブレード	通常				0
+Wait						.5
+FadeIn	white					.3
+StopSe
+Bgm	絶望
+	ルーンブレード	通常						た、たすけてー！\nルーンブレード:Blazeちゃん！
+	ルーンロッド	通常2						ここじゃおしゃれできないよー！
+	アクス	通常						トレーニングもできないー！
+Tween	ルーンロッド	PunchPosition	y=30				NoWait
+	ルーンロッド	通常2						で、でも、\n体調は悪くないから心配しないで！
+	アクス	通常						うんうん、空調もバッチリ！
+	ルーンブレード	通常						慌てたりしなくてもいいからね！
+Param	character_grayout=false
+	三人	<Off>	p3					でも、はやく助けに来てねー！
+StopBgm
+CharacterOff	ルーンロッド					.5
+CharacterOff	アクス					.5
+CharacterOff	ルーンブレード					.5
+	ルーンロッド	<Off>						こんな感じでいいのかな？
+	アクス	<Off>						うんうん、バッチリ撮れてる♪
+	ルーンブレード	<Off>						ふ、二人とも、まだ録画中だよー！
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=true
+Bg	酒場_宿屋					0
+	ディーア	汗4	p3			0
+	ルンブレB	通常	p7b			0
+Wait						.5
+FadeIn	white					.3
+Bgm	作戦会議
+	ルンブレB	通常						録画ボタンがつきっぱなしとは、\n犯人はルーキーですね
+	ディーア	汗4						そ、そうだな……！
+	ルンブレB	通常						ですが、\n犯人の目的はわかりました
+	ルンブレB	通常						私を誘い出すこと\nご丁寧に地図まで同封済みです
+	ルンブレB	通常						ではマスター、\n今回の任務とは<dash=2>
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気4						ああ、敵地に潜入して\n囚われた三人を救い出すことだ！
+	ディーア	悔しい4						困難な任務になるが<dash=2>
+	ルンブレB	通常						マスター、\nそのような前置きは不要です
+	ルンブレB	通常						私は兵器、あなたの剣\n仲間の平穏と憧れを守る蒼い刃
+	ルンブレB	通常						あなたは私に命じればいいのです、\n敵を倒せ、仲間を救えと
+Tween	ルンブレB	PunchPosition	y=30				NoWait
+	ルンブレB	通常						どんな不可能な任務でも、\n敵地を焦土にして達成してみせます
+	ディーア	絶望4						そ、そこまでしたら、\n三人があぶな<dash=2>
+	ディーア	驚き4						じゃなくて、いい覚悟だ！
+	ディーア	本気4						いくぞ！ ミッションスタート！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	洞窟A					0
+	ディーア	怒り4	p3			0
+	ルンブレB	通常	p7b			0
+FadeIn	black					.3
+Bgm	バトル
+	ルンブレB	通常						無事に潜入できましたね
+	ルンブレB	通常						しかし驚くほどに警備が手薄です\n敵影が見えません
+	ルンブレB	通常						さらになぜか、\n大きなダンボールも散乱しています
+	ルンブレB	通常						わざわざ敵である我々に、\n隠れる場所を提供してくれるとは\nどういう敵なのでしょう？
+	ディーア	怒り4						だが有利に見えるときこそ\n罠が仕掛けられているかもしれない\n慎重に行くぞ
+	ルンブレB	通常						はい、もちろ<dash=2>
+Tween	ルンブレB	PunchPosition	y=30				NoWait
+	ルンブレB	通常						なっ……！
+	ディーア	悔しい4						どうした、ルンブレ:Blaze!?
+StopBgm
+	ルンブレB	通常						あ、あそこにいるのは……！
+Param	character_grayout=false
+Bgm	緊迫
+CharacterOff
+	集中線		エフェクト表
+	高級くま	通常
+	ルンブレB	<Off>						超限定品の高級テディくまさん！
+Param	character_grayout=true
+Bgm	コメディ
+CharacterOff
+	ディーア	怒り4	p3
+	ルンブレB	通常	p7b
+	ルンブレB	通常						かの名工、\nラブベアー氏の手でつくられた\n幻の逸品……！
+	ルンブレB	通常						そのフワフワは抱きしめると、\n魔王さえ魅了するといいます……！
+	ルンブレB	通常						まさか、\nこんなところに囚われているなんて
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気4						よし、ルンブレ:Blaze！\nあのくまさんを救出するぞ！
+Shake	ルンブレB		x=2				NoWait
+	ルンブレB	通常						し、しかし……！\n兵器の私にはくまさんは不要で……
+	ディーア	怒り4						違うぞ、ルンブレ:Blaze！\nこれはミッション！
+	ディーア	本気4						敵の狙いを探るためにも、\nあのくまさんをキャプチャーだ！
+Tween	ルンブレB	PunchPosition	y=30				NoWait
+	ルンブレB	通常						は、はい！ 任務了解です！
+FadeOut	black					.3
+CharacterOff						0
+	高級くま	通常				0
+	ルンブレB	通常	画面外_左_b			0
+Wait						.5
+Param	character_grayout=false
+FadeIn	black					.3
+Tween	ルンブレB	MoveBy	x=550 time=2				NoWait
+	ルンブレB	通常						そーっと、そーっと、\n力を入れて壊さないように……！
+	ルンブレB	通常						マスター、キャプチャー成功です！
+Shake	ルンブレB		x=2				NoWait
+	ルンブレB	通常						な、なんてフワフワな……！\nえへへ……♪
+	ルンブレB	通常						しかし敵の狙いはなんでしょう？\nくまさんも丁寧に傷つかないように\n置かれているなんて
+	ルンブレB	通常						まさかこれは<dash=2>
+CharacterOff
+	ディーア	拡大本気4	エフェクト表					らりるれろ！\nらりるれろ!! らりるれろ!!
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り4	p3
+	ルンブレB	通常	p7b
+	ルンブレB	通常						ま、マスター!?\nしっかりしてください、マスター！
+	ディーア	絶望4						はっ……！\nおそらく敵の精神攻撃だ……！
+	ディーア	悔しい4						考えすぎると足元を救われる！\nまずはミッションを成功させるぞ！
+Tween	ルンブレB	PunchPosition	y=30				NoWait
+	ルンブレB	通常						了解しました！
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	怒り4	p3			0
+	ルンブレB	通常	p7b			0
+Wait						.5
+FadeIn	black					.3
+	ルンブレB	通常						今度はあれを見てください！
+Tween	ルンブレB	PunchPosition	y=30				NoWait
+	ルンブレB	通常						今季のトレンドナンバーワン\nワンピース！
+	ルンブレB	通常						くまさんに続いてなぜここに！\nしかもショーケースに入っています！
+	ルンブレB	通常						さらにあちらには、\nおしゃれでかわいいカバン！
+	ルンブレB	通常						ぬいぐるみもたくさん！
+Tween	ルンブレB	PunchPosition	y=30				NoWait
+	ルンブレB	通常						なぜかトレーニング器具まで、\nラッピングされています！
+	ディーア	本気4						きっと犯人の仕業だ！\n全部まとめて救出するぞ……！
+	ディーア	笑い4						安心しろ、\n持ち運びはオレが担当するから
+	ルンブレB	通常						はい……！
+Tween	ディーア	MoveBy	x=-50				NoWait
+	ディーア	怪しい4						よしよし、\nここまでは計画通り<dash=2>
+Tween	ルンブレB	MoveBy	x=-50				NoWait
+	ルンブレB	通常						なにか小声が聞こえたような？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						な、なんでもないっ！
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+Bg	神殿A					0
+	ディーア	怒り4	p3			0
+	ルンブレB	通常	p7b			0
+Wait						.5
+FadeIn	black					1
+Bgm	作戦会議
+	ルンブレB	通常						あれからも\nたくさんのものをキャプチャーし\n荷物も多くなりましたが
+	ルンブレB	通常						無事に最深部までこれましたね
+	ルンブレB	通常						何度か監視システムのようなものに\n見つかりそうになりましたが
+	ルンブレB	通常						さすがは\nダンボールを介したスニーキング術\n完全な偽装でした
+	ディーア	目閉じ4						いよいよこの奥に、\nルーンブレードたちが囚われている
+	ディーア	怒り4						覚悟はいいか、\nルーンブレード:Blaze？
+	ルンブレB	通常						はい、もちろんです！
+	ディーア	怒り4						じゃあいくぞ！
+	ディーア	本気4						またせたな……！
+StopBgm
+	ルンブレB	通常						皆さん、助けに<dash=2>
+Param	character_grayout=false
+FadeOut	white					.5
+StopBgm
+CharacterOff
+Bg	カジノ					0
+ImageEffect	SpriteCamera	Blur
+	ルーンロッド	通常2	p8b			0
+	アクス	通常	p2b			0
+	ルーンブレード	通常				0
+	ドア左		エフェクト表			0
+	ドア右		エフェクト表2			0
+Wait						1
+FadeIn	white					.5
+Se	ドア開く
+Tween	ドア左	MoveBy	x=-320 time=1.5	easeInCubic			NoWait
+Tween	ドア右	MoveBy	x=320 time=1.5	easeInCubic			NoWait
+Wait						1
+ImageEffectOff	SpriteCamera	Blur				1
+Bgm	都市
+	三人	<Off>	1_2					さぷらーいず！
+Param	character_grayout=true
+Tween	ルーンブレード	PunchPosition	y=30				NoWait
+	ルーンブレード	通常						改めて！\nようこそ、ルンブレ:Blazeちゃん！
+CharacterOff
+	ルンブレB	通常						なっ……！
+Tween	ルンブレB	PunchPosition	y=30				NoWait
+	ルンブレB	通常						これはどういうことですか、\nマスター!?
+CharacterOff
+	ディーア	笑い4						見ての通りの、\nサプライズパーティーだよ
+	ディーア	通常4						お前が仲間になってくれたお祝いを\n三人が企画したんだ
+	ディーア	笑い4						でも普通にお誘いしても、\n兵器だからと断られちゃうから\n一芝居したんだよ
+CharacterOff
+	ルーンロッド	通常2						し、心配させてごめんね？
+	ルーンロッド	通常2						でもどうしても、\nルンブレ:Blazeちゃんとも\n仲良くなりたくて
+CharacterOff
+	アクス	通常						くまさんやお洋服は、\nプレゼントだから、うけとって♪
+	アクス	通常						触るのが難しくても、\nマスターさんに飾る場所を\n用意してもらったから！
+StopBgm
+CharacterOff
+	ルンブレB	通常						…………
+CharacterOff
+	ルーンブレード	通常						あっ……
+	ルーンブレード	通常						や、やっぱり迷惑だったかな？
+Bgm	凱旋
+CharacterOff
+	ルンブレB	通常						ふふっ、いいえ違いますよ
+	ルンブレB	通常						兵器としては、\nこの誘いを断るのが正解なんです
+	ルンブレB	通常						しかし……\nここは皆さんの作戦勝ちです
+	ルンブレB	通常						ありがとうございます\nお祝いの気持ちがとても嬉しいです
+CharacterOff
+	ルーンブレード	通常						やったー！
+	ルーンブレード	通常						じゃあお菓子を食べよー！
+CharacterOff
+	ディーア	通常4	p3
+	ルンブレB	通常	p7b
+	ルンブレB	通常						はい、今行きます
+	ディーア	笑い4						任務は終わりだし、楽しもうな
+	ルンブレB	通常						ですがマスター？\n今後はサプライズはご遠慮くださいね
+	ディーア	通常4						でもルンブレ:Blazeも、\nわかってたんじゃないのか？
+	ディーア	通常4						本当にみんなが誘拐されてたら\nあんなにのんびりとはしてなかった
+	ルンブレB	通常						さあ、どうでしょう？
+	ルンブレB	通常						私という兵器が、\nみんなと一緒にいるのは危険\nそれは本当です
+	ルンブレB	通常						しかし私は兵器として、\nみんなの日常を守ると誓いました
+	ルンブレB	通常						だから<dash=2>
+CharacterOff
+	ルンブレB	拡大通常	エフェクト表					これで本当に、\nミッションコンプリートです
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_ex01
+EndIf
+EndScenario

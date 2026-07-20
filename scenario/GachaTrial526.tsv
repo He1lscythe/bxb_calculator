@@ -1,0 +1,519 @@
+# G_526_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	酒場1F					0
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	マネ	拡大通常
+FadeIn	white					.5
+	マネ	拡大通常						<ruby=よろしい>Guten Alles klar</ruby>♪\n取引開始ですわっ♪
+	マネ	拡大通常						ねえねえ……\nせーんぱい♪
+	マネ	拡大通常						マネとぉ……\nと・り・ひ・き♪\nしませんこと？
+	マネ	拡大笑い						くひひっ♪\nワルになっちゃいますわねぇ…♥
+CharacterOff
+	ディーア	驚き2						な、なんだ\n取引って、どういう……
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	2_2
+	マネ	通常	1_2_b
+	マネ	通常						あら♪\n先輩ったら……<ruby=かわいい>Niedlich</ruby>♥\nマネは、悪魔ですのよ？
+	マネ	通常						どんな取引なのか……\n想像してみて下さいまし♪
+	マネ	通常						とーっても魅力的でぇ……\nあーっというまに\nワルになってしまいますわよ♥
+	ディーア	驚き2						あ、悪魔の取引……\nゴクリ……
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	マネ	拡大通常
+	マネ	拡大通常						くひひっ♪\n興味を持っていただけた\nみたいですわね♪
+	マネ	拡大通常						それでは始めますわよ♪\nすぅっごく楽しい\n取引ですのよ……♥
+Bgm	火属性バトル
+CharacterOff
+	イベントスチル52602		エフェクト表
+	マネ	<Off>						では早速！ <ruby=ちゅうもく>Du kannst sehen</ruby>!\nこちらをご覧下さいまし！
+	ディーア	<Off>						た、タブレット……？\n何か、グラフが見えるな……
+	マネ	<Off>						<ruby=ごめいとう>Du hast es gut gemerkt</ruby>♪\nこれはマカイーサリアムの\n相場ですわ♪
+	ディーア	<Off>						マカイーサリアム……？
+	マネ	<Off>						<ruby=そのとおり>Stimmt</ruby>!\n魔界最先端の錬金術ですのよ♪
+	マネ	<Off>						これでお金が魔法のように……\nじゃぶ♪じゃぶ♪\n……って♥
+	マネ	<Off>						ほぉら♪\nここ数ヶ月でこぉんなに急騰……♥\nまるで天を衝くようですわねぇ……♥
+Bgm	コメディ
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	レイバーインヴェスティ	笑い2拡大	エフェクト裏
+Se	レベルアップ
+	レイバー	笑い2拡大						おっけー完全に理解したわ!!
+Param	character_grayout=true
+CharacterOff
+	黒グラデーション		エフェクト裏
+	レイバーインヴェスティ	通常	3_3
+	クラヴィス	通常	1_3
+Tween	クラヴィス	PunchPosition	y=50				NoWait
+	クラヴィス							（しーっ！\n　聞こえちゃうよっ……！）
+	レイバーインヴェスティ							（おっけー完全に理解したわ……\n　でも……これは一世一代の\n　超ビジネスチャンス……！）
+	レイバーインヴェスティ							（もちろんここは探究のために\n　ひと勝負行くわよね？\n　クラヴィスちゃん！）
+	クラヴィス							（ふふん♪ 当然♪）
+	クラヴィス							（この偉大なクラヴィスにかかれば\n　マカイーサリアムなんて\n　一瞬で完全攻略♪ だからね♪）
+	レイバーインヴェスティ							（ぐふふ♪ いざ探究♪）
+CharacterOff
+	ディーア	驚き2
+	ディーア							そこに誰かいるのか？
+CharacterOff
+	レイバーインヴェスティ	通常	2_2
+	クラヴィス	通常	1_2
+Tween	クラヴィス	PunchPosition	y=50				NoWait
+	クラヴィス							まずい！ 逃げるよレイバーちゃん！
+Tween	クラヴィス	MoveBy	x=-800 time=2				NoWait
+Se	走る
+Tween	レイバーインヴェスティ	PunchPosition	y=50				NoWait
+	レイバーインヴェスティ							おっけー完全に理解したわ!!\nいくぞいくぞー♪
+Tween	レイバーインヴェスティ	MoveBy	x=-800 time=2				NoWait
+Se	走る
+Wait						1
+CharacterOff
+	ディーア	驚き2	2_2
+	マネ	通常	1_2_b
+	ディーア	怪しい2						何だ、あいつら……？
+Tween	マネ	MoveBy	x=20				NoWait
+	マネ	通常						ほうっておくのですわ♪\nさ、始めますわよ……♪
+	ディーア	驚き2						ちょ、ちょっと待ってくれマネ\nオレは魔界仮想通貨は\nちょっと遠慮したい……！
+	ディーア	驚き2						何というか、\nすごい嫌な予感がするんだ……！
+	ディーア	怪しい2						レイバーたちが\n何か企んでるみたいだしな……
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ	笑い						あら♪\n先輩はマカイーサリアムに\n触れる必要はございませんわよ？
+	マネ	通常						ただマネと取引していただければ\nそれでいいのですわ♪
+	ディーア	驚き2						そ、そうなのか……？
+	ディーア	驚き2						それなら、話くらいは\n聞いてもいいか……？
+	マネ	笑い						<ruby=いいこですわね>Guter junge</ruby>♪\nそれでは早速……♪
+Bgm	平和
+CharacterOff
+	アスモデウス=サラ	驚き	2_2_b
+	プリム	驚き	1_2
+Tween	プリム	PunchPosition	y=50				NoWait
+	プリム	驚き						あーっ！ こんなとこにいましたっ！\n先輩！ マネ！\n何やってるんですかっ！
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+	アスモデウス=サラ	驚き						ぬけがけはだめですよっ！\n（おこおこ！）
+	プリム	怒り						今日先輩は\n歯磨きちゃんとするって\n約束したでしょっ！
+	アスモデウス=サラ	悔しい						耳掻きもする約束なのですよっ！\n（たぶん！）
+CharacterOff
+	マネ	通常
+	マネ							ふふん♪\n誰かと思えば、\nサラにプリムではないですか
+	マネ							マネは先輩と取引中ですのよ\nおこちゃまは\n邪魔しないでくださいまし♪
+CharacterOff
+	アスモデウス=サラ	悔しい	2_2_b
+	プリム	怒り	1_2
+	プリム							むぅーっ！\n上位悪魔だからって、\nずるいよマネちゃん！
+	アスモデウス=サラ							そうですよっ！\nせんぱいはみんなのものですっ！\n（きっぱり！）
+Tween	プリム	PunchPosition	y=50				NoWait
+	プリム							先輩！\nほら、こっちに来て\n歯磨きしましょうっ！
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+	アスモデウス=サラ							耳掻きだって\n同時にやっちゃうんです！\n（ごういん！）
+CharacterOff
+	マネ	怒り
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							<ruby=こら>Hör auf</ruby>!\nおやめなさい、二人とも\nこれは先輩とマネの商談なのですわ
+	マネ							あんまりおいたが過ぎるなら\nマネの目薬をお見舞いしますわよ？
+CharacterOff
+	アスモデウス=サラ	悔しい	2_2_b
+	プリム	怒り	1_2
+Tween	プリム	PunchPosition	y=50				NoWait
+	プリム							むむぅー！\nこうなったら、サラちゃん！\nアレをやりますよっ！
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+	アスモデウス=サラ							よーし！\nてかげんしませんよっ！\n（やるきまんまん！）
+CharacterOff
+	マネ	怒り
+	マネ							む……？\n何をするつもりですの……？
+CharacterOff
+	アスモデウス=サラ	通常	2_2_b
+	プリム	笑い	1_2
+Tween	プリム	PunchPosition	y=50				NoWait
+	プリム							ふふふ……♪\n私もサラちゃんも\n立派な悪魔なんだからね♪
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+	アスモデウス=サラ							うひひ……♪\nうらみっこなしだよ、マネちゃん♪\n（にやにや♪）
+CharacterOff
+	マネ	怒り
+Tween	マネ	MoveBy	x=-20				NoWait
+	マネ							何ですの……\n何をしようとしているんですの!?
+StopBgm
+CharacterOff
+	アスモデウス=サラ	通常	2_2_b
+	プリム	笑い	1_2
+	プリム							爆売り、ですよ♪
+CharacterOff
+	マネ	驚き
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							<dash=2>!!
+Bgm	緊迫
+Shake	マネ		x=5				Add
+	マネ							<ruby=なんてこと>Oh mein dämon…</ruby>!\nあなたたち、それだけは……\nそれだけはいけませんわよ……
+CharacterOff
+	ディーア	驚き2
+	ディーア							何だ、爆売りって……!?
+CharacterOff
+	アスモデウス=サラ	通常	2_2_b
+	プリム	笑い	1_2
+	プリム							解説してあげましょう♪\n爆売りというのは、\n<ruby=・・・・・・・・・>ればれっじとりひき</ruby>、というやつです！
+	アスモデウス=サラ							なんだかよく分かりませんが\nマカイーサリアムがぼうらく！\nするのです！（どかーん！）
+CharacterOff
+	マネ	怒り
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							や、やめなさい！\nそんなことしたら\nただではおきませんわよ！
+CharacterOff
+	アスモデウス=サラ	通常	2_2_b
+	プリム	笑い	1_2
+	プリム							へっへーん！\n先輩を独り占めする\nマネちゃんがいけないんだよっ♪
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+	アスモデウス=サラ							はじめますよ！\n（ふてきなわらい！）
+CharacterOff
+	マネ	驚き
+Bgm	コメディ
+Shake	マネ		x=5				Add
+	マネ							お願いですわ<dash=2>\nロスカットだけは<dash=2>\nロスカットだけは<dash=2>!!
+CharacterOff
+	アスモデウス=サラ	通常	2_2_b
+	プリム	笑い	1_2
+	プリム							もう遅いのです！\nさあ、サラちゃん！
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+	アスモデウス=サラ							了解です♪\n（ぽちっと♪）
+StopBgm
+CharacterOff
+	マネ	泣き
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							あ<dash=4>
+Bgm	魔剣の日常
+Param	character_grayout=false
+Bg	夏空
+	オーラ黒		エフェクト表
+	マネ							おそら<dash=2>ちょうちょ<dash=2>
+Se	キラン
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							きれい<dash=2>
+CharacterOff
+Bg	酒場1F
+	アスモデウス=サラ	通常	2_2_b
+	プリム	笑い	1_2
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+	アスモデウス=サラ							まだ押してませんよ♪\n（にやにや♪）
+StopBgm
+CharacterOff
+	ディーア	本気2
+	集中線		エフェクト表
+	ディーア							三人とも、そこまでだ！
+CharacterOff
+	マネ	驚き	2_3
+	アスモデウス=サラ	驚き	3_3_a
+	プリム	驚き	1_3
+	マネ・サラ・プリム	<Off>						<dash=2>!!
+Bgm	平和
+CharacterOff
+Param	character_grayout=true
+	ディーア	怪しい2
+	ディーア	怪しい2						まずプリムとサラ\n歯磨きと耳掻きは夜する約束だったろ\n違うか？
+CharacterOff
+	アスモデウス=サラ	驚き	2_2_b
+	プリム	驚き	1_2
+	プリム							せ、先輩……
+	アスモデウス=サラ							たしかに……\n（しょぼん……）
+CharacterOff
+	ディーア	通常2
+	ディーア							オレを思ってくれる\nその気持ちはうれしいけど\nマネの気持ちも考えてほしいな
+	ディーア							マネにごめんなさいできるか？
+CharacterOff
+	アスモデウス=サラ	驚き	2_2_b
+	プリム	驚き	1_2
+	プリム							はぁい……\nごめんなさい……
+	アスモデウス=サラ							きをつけますよぅ……\n（はんせい！）
+CharacterOff
+	ディーア	通常2
+	ディーア							それから、マネ\nひとつ聞きたいんだ
+CharacterOff
+	マネ	驚き
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							な、なんですの……？
+CharacterOff
+	ディーア	通常2
+	ディーア							お前はどうして取引がしたいんだ？
+	ディーア							取引っていうのは\nお互いに欲しい物を交換することだろ
+	ディーア							お前がしようとしているのは\nオレに与えることだけだろ？
+	ディーア							もし目的があるなら……\nよかったら、教えてくれないか
+CharacterOff
+	マネ	泣き
+	マネ							ええっと、そ、それは、\nそのぉ……
+CharacterOff
+	ディーア	通常2
+	ディーア							言いにくかったらいいんだ\nでもきっと、大事なことなんだろ？
+CharacterOff
+	マネ	泣き
+	マネ							え、ええ……\nわ、笑いませんこと……？
+CharacterOff
+	ディーア	通常2
+	ディーア							大丈夫だ、笑わないよ\n安心してくれ
+CharacterOff
+	マネ	怒り
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							そ、それじゃあ、\n言いますわよ……！
+	マネ							マネの取引の目的はっ……！
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*G_526_02
+EndIf
+EndScenario
+
+# G_526_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+	マネ	泣き
+FadeIn	white					.5
+	マネ							ま、マネは……！\nもうひとりぼっちは\nいやなのですわ……！
+CharacterOff
+	アスモデウス=サラ	驚き	2_2_b
+	プリム	驚き	1_2
+	プリム							……！\nひとり、ぼっち……？
+	アスモデウス=サラ							どういう意味なのですか？\n（しつもんっ！）
+CharacterOff
+	マネ	泣き
+	マネ							取引をしないと\nマネはひとりぼっちになるのですわ\nこれまでずっとそうでしたの……！
+CharacterOff
+	ディーア	通常2
+	ディーア							何があったんだ？\n教えてくれないか
+Bgm	図書館
+CharacterOff
+	マネ	泣き
+	マネ							わ、分かりましたわ……
+	マネ							取引をした相手は\nしばらくマネと一緒に\n居てくれましたわ
+	マネ							遊んでくれたり、\nお出かけしてくれたり……
+CharacterOff
+	アスモデウス=サラ	驚き	2_2_b
+	プリム	驚き	1_2
+	プリム							でもマネちゃん、\n取引がせいりつした相手って……
+	アスモデウス=サラ							いなくなっちゃうのではないですか？\n（ぎもん……？）
+CharacterOff
+	マネ	泣き
+	マネ							え、ええ……\nしばらくすると、みんな\n居なくなってしまったのですわ
+	マネ							きっとマネの取引が\nまだまだだからですの
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							だからもっともっと、\n勉強して、もっとちゃんと\n取引できるようにならないと……
+StopBgm
+CharacterOff
+	ディーア	通常2
+	ディーア							なるほど、そういうことか\nでも、それじゃ取引にならないぞ
+CharacterOff
+	マネ	驚き
+	マネ							……ふぇ？\nなぜですの……？
+Bgm	穏やか
+CharacterOff
+	ディーア	笑い2
+	ディーア							オレはお前が何もくれなくても\n一緒にいるからな
+CharacterOff
+	マネ	驚き
+	マネ							……！
+	マネ							ほ、ほんと、ですの……？
+CharacterOff
+	ディーア	通常2
+	ディーア							ああ、ほんとさ\nそうだろ、サラ、プリム？
+CharacterOff
+	アスモデウス=サラ	通常	2_2_b
+	プリム	通常	1_2
+Tween	プリム	PunchPosition	y=50				NoWait
+	プリム							はいっ！\n私も一緒にいますよっ♪
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+	アスモデウス=サラ							サラもです♪\n（よしよし♪）
+CharacterOff
+	マネ	驚き
+	マネ							う、うれしいですわ……\nそんな風に言われたのは、\n初めてですの……
+	マネ							でも、一緒にいるだけでは\n取引成立しないんですのね……
+CharacterOff
+	ディーア	通常2
+	ディーア							そうだな、結局お前が\n一方的に渡すことになるからな
+	ディーア							こっちはずっともらいっぱなしだろ\nそれじゃおかしくなってしまうんだ
+	ディーア							そんな関係はきっと\n長続きしないんだ
+CharacterOff
+	マネ	驚き
+	マネ							そ、そうですわね……
+CharacterOff
+	ディーア	通常2
+	ディーア	笑い2						だから、マネ\nお前の欲しい物を教えてくれないか
+CharacterOff
+	マネ	驚き
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							……ほぇ？
+	マネ							マネの、ほしいもの……？
+CharacterOff
+	ディーア	通常2
+	ディーア							そうだ、それをオレは\nお前に渡す
+	ディーア							そしてお前はオレに\nマカイーサリアムとやらを\nくれれば取引成立だ
+CharacterOff
+	マネ	驚き
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							ほ、ほんとですの……？
+CharacterOff
+	ディーア	通常2
+	ディーア							ああ、ほんとさ\nお前の欲しい物、言ってみてくれ\n何だっていいぞ
+CharacterOff
+	マネ	驚き
+	マネ							え、ええと……！
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							そ、それなら！\nひざまくらをしてほしいのですわ！
+StopBgm
+CharacterOff
+	アスモデウス=サラ	悔しい	2_2_b
+	プリム	怒り	1_2
+Tween	プリム	PunchPosition	y=50				NoWait
+	プリム							むむっ!?
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+	アスモデウス=サラ							はわわっ!?
+CharacterOff
+	ディーア	通常2
+	ディーア							なんだ、そんなことか\nそれならお安い御用<dash=2>
+Bgm	コメディ
+CharacterOff
+	アスモデウス=サラ	悔しい	2_2_b
+	プリム	怒り	1_2
+Tween	プリム	PunchPosition	y=50				NoWait
+	プリム							まってくださいっ！\nひざまくら、私もしてほしいですっ！
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+	アスモデウス=サラ							ずるーい！\nサラもしてほしいのですっ！\n（おねがいっ！）
+CharacterOff
+	ディーア	驚き2
+	ディーア							おいおい、ちょっと待ってくれ\nひとりずつな……
+CharacterOff
+	マネ	通常
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							そうですわよ、サラ、プリム\nここは取引にしたがって\n順番、ということに……
+StopBgm
+CharacterOff
+	アスモデウス=サラ	驚き	2_2_b
+	プリム	驚き	1_2
+	プリム							あーっ！\nたいへん！
+	アスモデウス=サラ							どうしたの？\n（かくにん……）
+CharacterOff
+	マネ	通常
+	マネ							どうしたのかしら……\nって<dash=2>
+Param	character_grayout=false
+Bgm	魔剣の日常
+Bg	夏空
+	マネ	泣き						う<dash=2>そ<dash=2>
+	マネ							おそら<dash=2>\nちょうちょ<dash=2>
+Se	キラン
+	マネ							きれい<dash=2>
+Param	character_grayout=true
+Bg	酒場1F
+CharacterOff
+	ディーア	驚き2
+	ディーア							どうしたんだ？\nタブレットをみんなで見て……
+CharacterOff
+	アスモデウス=サラ	驚き	1_3_b
+	マネ	泣き	2_3_b
+	プリム	驚き	3_3
+Tween	マネ	PunchPosition	y=50				NoWait
+	マネ							マカイーサリアムが……\n暴落しているのですわ……
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+StopBgm
+	アスモデウス=サラ							むしろ計画通りですっ！\n（にやりっ）
+	プリム							確かに！ 今がチャンス！
+Bgm	コメディ
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	プリム	拡大笑い	エフェクト表
+	プリム	拡大笑い						せんぱい♪ うー…ほにゃっ！
+CharacterOff
+	オーラ桃		エフェクト裏
+	アスモデウス=サラ	通常_拡大	エフェクト表
+	アスモデウス=サラ	通常_拡大						あっ！ ずるいですプリム！\nサラも！（だきつき！）
+CharacterOff
+	アスモデウス=サラ	通常	1_3_b
+	ディーア	驚き2	2_3_b
+	プリム	笑い	3_3
+Tween	アスモデウス=サラ	MoveBy	x=20				NoWait
+Tween	プリム	MoveBy	x=-20				NoWait
+	ディーア							うわ！\nお、重いぞ、お前ら……！
+Tween	プリム	PunchPosition	y=50				NoWait
+	プリム							ふぅ、だめですもう離しません\n先輩お口をあーんしてください♪
+Tween	アスモデウス=サラ	PunchPosition	y=50				NoWait
+	アスモデウス=サラ							お耳のお掃除も\nいっしょにやっちゃいますよ♪\n（ごじゅんびっ！）
+	ディーア							おい、よせ、順番だ、順番……！
+CharacterOff
+Param	character_grayout=false
+	マネ	驚き
+	マネ							<dash=2>はっ！\nこうしてはいられませんわ！
+	マネ	通常						マネもこの波に乗りますわよ！\nうー……<ruby=ほにゃ>Los geht’s</ruby>♪
+CharacterOff
+	ディーア	驚き2
+	ディーア	驚き2						うわっ！\nマネ、お前もか……！
+CharacterOff
+	オーラ桃		エフェクト裏
+	マネ	拡大通常
+	マネ	拡大通常						この、目薬はいかがですか……？\nとってもすーっきりして、\nきもちよーくなれちゃいますよ……♪
+CharacterOff
+	ディーア	驚き2
+	ディーア							ちょ、ちょっと待ってくれ\nひとりずつ、ひとりずつな……！
+CharacterOff
+	プリム	拡大笑い	エフェクト表
+	プリム	拡大笑い						くちゅくちゅしますよ、\nあーんしてください！
+CharacterOff						0
+	アスモデウス=サラ	通常_拡大	エフェクト表
+	アスモデウス=サラ	通常_拡大						耳かきほじほじの時間ですっ！\n（わきわき……♪）
+CharacterOff
+	マネ	拡大通常
+	マネ							いいえ、これからマネと\n気持ちのいい取引ですのよ♪
+CharacterOff
+	オーラ桃		エフェクト裏
+	アスモデウス=サラ	通常	1_3_b
+	マネ	笑い	2_3_b
+	プリム	笑い	3_3
+	マネ＆サラ＆プリム	<Off>						せ・ん・ぱ・い♪
+StopBgm						1
+FadeOut	white					.5
+CharacterOff
+Bg	酒場_カフェ					0
+Bgm	平和
+Wait						1
+	レイバーインヴェスティ	通常
+FadeIn	white					.5
+	レイバーインヴェスティ	通常						おっけー完全に理解したわ……\nさっき投資した全財産……
+CharacterOff
+	集中線		エフェクト表
+	レイバーインヴェスティ	笑い2拡大	エフェクト裏
+Se	レベルアップ
+	レイバーインヴェスティ	笑い2拡大						もうとんでもない額に\nなっちゃってるわ!!
+CharacterOff
+	クラヴィス
+	クラヴィス							ふふん♪\nこの偉大なクラヴィスにかかれば\n朝飯前……♪
+	クラヴィス							どれどれ……♪
+StopBgm
+CharacterOff
+	レイバーインヴェスティ	通常	3_3
+	クラヴィス	通常	1_3
+	レイバー＆クラヴィス	<Off>						<dash=2>え？
+Bgm	火属性バトル
+CharacterOff
+Param	character_grayout=false
+	イベントスチル52603		エフェクト表
+	レイバーインヴェスティ	<Off>						ロス、カット<dash=2>？
+	クラヴィス	<Off>						そんな<dash=2>うそ<dash=2>
+	クラヴィス	<Off>						マイナス7億ヘル<dash=2>？
+	レイバーインヴェスティ	<Off>						お、おおおおおオッケー\nかかか完全にりりり理解したわ<dash=2>\nこれは夢、夢よ<dash=2>
+	レイバーインヴェスティ	<Off>						あっはっはー！\n夢！ すごくリアルな夢！\n夢<dash=2>
+	レイバーインヴェスティ	<Off>						ちょうちょ<dash=2>
+	クラヴィス	<Off>						おそら<dash=2>
+Se	キラン
+	レイバー＆クラヴィス	<Off>						きれい<dash=2>!!
+CharacterOff
+	　　　　　　　　　　							\n\n　　　　　　　　To Be Continued...?
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*G_526_01
+EndIf
+EndScenario

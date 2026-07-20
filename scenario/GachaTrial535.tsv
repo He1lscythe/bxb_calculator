@@ -1,0 +1,644 @@
+# G_535_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	神秘
+Bg	夏空					0
+Param	character_grayout=false
+	ダイビ	拡大通常だー	エフェクト表			0
+	          
+FadeIn	white					.5
+	だー	<Off>						マスター様、遊びましょう♪
+	ダイビ	拡大通常いー
+	いー	<Off>						血も燃え上がるほど、遊びましょう♥
+	ダイビ	拡大通常すー
+	すー	<Off>						い、一緒に楽しく、遊びましょう？
+	ダイビ	拡大嬉しいだー
+	だー	<Off>						えへへ♪\n夏はまだまだこれからだもんね♪
+	ダイビ	拡大嬉しいいー
+	いー	<Off>						暑くても、\nマスター様からは離れないの♥
+	ダイビ	拡大嬉しいすー
+	すー	<Off>						私たち、\nマスター様が大好きだから……！
+	ダイビ	拡大嬉しい	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+	三人	<Off>						さあ、夏を楽しみましょう♪
+	          							<color=blue>新魔剣お試しコーナーへ続く</color>
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_535_02
+EndIf
+EndScenario
+
+# G_535_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	ダイビ	通常	2_3			0
+	          
+FadeIn	white					.5
+	だー	<Off>						えへへ♪\n夏って、とーっても楽しいね！
+	いー	<Off>						うふふ♪\nマスター様とどこでも一緒……\n心も体も……♥
+	ダイビ	驚き	2_3
+	すー	<Off>						はわわ！\nいーちゃん、怖いこと考えてない!?
+	だー	<Off>						え……？\nそんなに怖いこと考えてたの？
+	いー	<Off>						怖いことって、なんのこと？\nすーちゃんはどんな想像してたの？
+	すー	<Off>						えっ……！ そ、そのぉ……\nマスター様といけないこと、とか？
+	ダイビ	通常	2_3
+	だー	<Off>						あっ！ ヤンデレっぽいことでしょ？\nいーちゃんが一番ヤンデレっぽいし！
+	いー	<Off>						だーちゃん、ダイン姉さまは\nこういう時"本物"って呼ぶのよ？\n例えば<dash=2>
+	ダイビ	驚き	2_3
+	すー	<Off>						はわわわ！ とにかく\n危ないことしたらダメだよぉ！
+	ダイビ	通常	2_3
+	だー	<Off>						でも、せっかくの夏なんだから\nドキドキで危ないこともしたくない？
+	だー	<Off>						マスター様と\n仲良くなれるチャンスなんだよ？
+	いー	<Off>						私たちはまだまだ新入りだから\nすぐに姉様みたいになれなくても、\nチャンスを逃したらダメなの
+	いー	<Off>						すーちゃんはマスター様と\nもっと仲良くなりたくないの……？
+	すー	<Off>						うう、そ、それはぁ……\n仲良くなりたいよぉ
+CharacterOff
+	ダイビ	拡大通常だー	エフェクト表
+	だー	<Off>						だったら、\nもっとアピールしていこうよ♪
+CharacterOff
+	ダイビ	嬉しい	2_3
+	いー	<Off>						もっともっとマスター様が\n愛してくれる私たちになるの……♥
+	すー	<Off>						う、うん……！\nえっとそれじゃあ新しいことを\nしないとだよね？
+	すー	<Off>						えっと、\nこの間はハイキングに行って<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原A					0
+	ダイビ	拡大通常だー	エフェクト裏			0
+	          
+FadeIn	white					.3
+	だー	<Off>						マスター様、マスター様♪\nサンドイッチ、作ってきたの！\nあーん♪
+	ダイビ	拡大嬉しいいー
+	いー	<Off>						ああ♪\n私の魔力がマスター様の血肉に♥
+	ダイビ	拡大通常すー
+	すー	<Off>						お、おいしかったら、\nほめてほしいな……！
+	ダイビ	拡大嬉しい
+	三人	<Off>						マスター様、もっと食べて♪
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場_宿屋					0
+CharacterOff						0
+	ダイビ	嬉しい	2_3			0
+	          
+FadeIn	white					.3
+	いー	<Off>						マスター様からも\nあーんってしてくれて……うふふ♥
+	すー	<Off>						優しくしてくれてうれしかった♪
+	だー	<Off>						他にも、\n花火大会の時にこっそり……！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A(夜)					0
+	ダイビ	拡大嬉しいだー	エフェクト裏			0
+	          
+FadeIn	white					.3
+	だー	<Off>						マスター様、\nここなら誰も見てないね♪ ぎゅー！\nもう離さないよっ……♪
+	ダイビ	拡大通常いー
+	いー	<Off>						お互いの境がわからないほど\n体を重ねるの♥
+	ダイビ	拡大嬉しいすー
+	すー	<Off>						わぁ♪\nここ、とっても花火がキレイ……！
+	ダイビ	拡大嬉しい
+	三人	<Off>						マスター様、\n今日はずーっと一緒にいようね♥
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場_宿屋					0
+CharacterOff						0
+	ダイビ	嬉しい	2_3			0
+	          
+FadeIn	white					.3
+	だー	<Off>						えへへ♪
+	いー	<Off>						うふふ♥
+	すー	<Off>						はわわ……！
+	すー	<Off>						マスター様が\n頭をナデナデしてくれて、\nドキドキしちゃった……
+	だー	<Off>						マスター様の\n温度、まだ覚えてるの……♪
+	いー	<Off>						私とマスター様が\n一つになった日……♥
+	ダイビ	通常	2_3
+	すー	<Off>						マスター様と出会えてよかった♪
+	いー	<Off>						うん、このまま\nマスター様がいての私たち、\n私たちがいてのマスター様に……
+	だー	<Off>						そうなれたら、いいよね
+CharacterOff
+	ディーア	通常2						おっ！\n三人ともここにいたんだな！
+CharacterOff
+	ダイビ	驚き	2_3
+Tween	ダイビ	PunchPosition	y=30				NoWait
+	だー	<Off>						あっ、マスター様!!\n私たちを探してくれたの？
+	いー	<Off>						あぁ……\nこんなに求めてくれるなんて♥
+	すー	<Off>						マスター様、\n今日も遊んでくれるの？
+CharacterOff
+	ディーア	笑い2						ああ、三人とも\nいつもとっても楽しんでくれるからな\n今日も出かけようと思うんだ
+CharacterOff
+	ダイビ	嬉しい	2_3
+	だー	<Off>						お出かけに連れて行ってくれるの？\nわーいっ♪
+	いー	<Off>						どこへ行っても、\nマスター様の側に……！
+	すー	<Off>						ありがとう、マスター様
+CharacterOff
+	ディーア	笑い2						よかった、\nじゃあ出発するぞ<dash=2>
+StopBgm
+	ディーア	笑い2						<dash=2>海に！
+Bgm	緊迫
+CharacterOff
+	ダイビ	驚き	2_3
+	三人	<Off>						…………っ!?
+StopBgm
+CharacterOff
+	ディーア	驚き2						<dash=2>って、あれ？
+Bgm	絶望
+CharacterOff
+	ダイビ	悲しい	2_3
+Shake	ダイビ		x=10 time=2				NoWait
+	だー	<Off>						お、泳ぎ……？
+	いー	<Off>						う、海……
+	すー	<Off>						は、はわわ……！
+CharacterOff
+	ディーア	驚き2						みんな、どうかしたのか？
+CharacterOff
+	ダイビ	驚き	2_3
+Tween	ダイビ	PunchPosition	y=50				NoWait
+	だー	<Off>						な、なんでもないよっ！\nわーい、海たのしみっ♪
+	いー	<Off>						ええ……地獄の底であっても、\nマスター様が一緒なら……
+	すー	<Off>						も、もちろん、大丈夫！
+CharacterOff
+	ディーア	笑い2						そうか……！\nじゃあ出発の準備、よろしくな！
+CharacterOff
+	ダイビ	通常	2_3
+	三人	<Off>						はーい!!
+Se	走る
+FadeOut	black					.3
+CharacterOff						0
+	ダイビ	悲しい	2_3			0
+	黒グラデーション		エフェクト表			0
+Wait						1
+FadeIn	black					.3
+	三人	<Off>						…………
+CharacterOff
+	ダイビ	拡大悲しいだー	エフェクト表
+	だー	<Off>						ど、どうしよう……！
+	ダイビ	拡大悲しいいー	エフェクト表
+	いー	<Off>						まさかこんなことになるなんて……
+	ダイビ	拡大悲しいすー	エフェクト表
+	すー	<Off>						私たち<dash=2>
+	ダイビ	拡大悲しい	エフェクト裏
+	集中線		エフェクト表
+	三人	<Off>						泳げないよぉ……！
+CharacterOff
+	ダイビ	驚き	2_3
+	だー	<Off>						私、お水に顔をつけられない……
+	いー	<Off>						犬かきなら、少しは……
+	すー	<Off>						塩水がしみしみってしちゃうし……
+Tween	ダイビ	PunchPosition	y=30				NoWait
+	だー	<Off>						で、でも、\nマスター様についていけないと……！
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	ディーア	目閉じ2				0
+FadeIn	white					.3
+	ディーア	目閉じ2						そうか、だったらお留守番たのむ
+Tween	ディーア	MoveBy	x=600 time=1				NoWait
+	ディーア	本気2						い～ヤッホー！ 海サイコー!!
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+	ダイビ	泣き	2_3			0
+	          
+FadeIn	white					.3
+	だー	<Off>						マスター様に\n置いていかれちゃう……！
+	いー	<Off>						私たちだけを見てほしいのに
+	すー	<Off>						せっかく仲良くなれたのに
+StopBgm
+	ダイビ	通常	2_3
+	だー	<Off>						こうなったら……！
+Bgm	わくわく
+	いー	<Off>						獲物をどこまでも追いかけるのが\nダインスレイフ=ビースト
+	すー	<Off>						今から、\n泳げるようになろう！
+Tween	ダイビ	PunchPosition	y=30				NoWait
+	だー	<Off>						それじゃあ、\n教えてくれそうな人のところに出発！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場1F					0
+	ダイビ	通常	2_3			0
+	          
+FadeIn	black					.3
+	だー	<Off>						ダイン姉様ー！
+CharacterOff
+	ダインスレイフ	通常						あら、ビースト\nどうしたのですか？
+CharacterOff
+	ダイビ	悲しい	2_3
+	いー	<Off>						突然ごめんなさい\n姉様にお願いがあるの
+	すー	<Off>						ちょっとだけでもいいから……！
+CharacterOff
+	ダインスレイフ	通常						ふふ♪ 遠慮しないでいいんですよ？\n貴女たちも同じダインスレイフの系譜\nつまりは家族ですもの
+CharacterOff
+	ダイビ	通常	2_3
+Tween	ダイビ	PunchPosition	y=30				NoWait
+	すー	<Off>						姉様、ありがとう！
+CharacterOff
+	ダインスレイフ	通常						それで、\nお願いってどんなことです？
+CharacterOff
+	ダイビ	悲しい	2_3
+	すー	<Off>						実は<dash=2>
+CharacterOff
+	ディーア	怒り2	画面外_右
+Tween	ディーア	MoveBy	x=-600 time=2				NoWait
+	ディーア	怒り2						ダインスレイフ、\nさっきの話だけど<dash=2>
+CharacterOff
+	ダイビ	驚き	2_3
+Tween	ダイビ	PunchPosition	y=30				NoWait
+	だー	<Off>						あっ！\nま、マスター様!?
+CharacterOff
+	ディーア	驚き2						あれ、ビーストも\nダインスレイフに会いに来てたのか？
+CharacterOff
+	ダイビ	驚き	2_3
+	いー	<Off>						え、ええ
+	すー	<Off>						はわわ、どうしよう……！\nマスター様に相談がバレちゃう！
+	だー	<Off>						だ、ダイン姉様、ごめんね！
+StopBgm
+Se	走る
+Tween	ダイビ	MoveBy	x=900 time=1				NoWait
+Wait						.5
+CharacterOff
+	ダインスレイフ	通常	1_2_b
+	ディーア	驚き2	2_2
+Param	character_grayout=true
+	ディーア	驚き2						……三人とも、どうしたんだ？
+	ダインスレイフ	通常						さあ、私にも詳しくは\nところでマスター様は先程の話を？
+Bgm	絶望
+	ディーア	怒り2						ああ、レヴァにも聞いてきたんだけど\n姉として魔剣として\n感じていることを教えてほしいんだ
+	ダインスレイフ	通常						その様子を見るに、\nずいぶんと深刻そうですわね
+	ディーア	目閉じ2						まだ勘の域は出ないけど、\n備えるに越したことはない
+	ディーア	怒り2						だからビーストたちの<dash=2>\nビースト因子の正体について\n調べたいんだ
+StopBgm
+FadeOut	black					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	酒場_カフェ					0
+	ダイビ	悲しい	2_3			0
+	          
+Wait						1
+Bgm	穏やか
+FadeIn	black					.3
+	だー	<Off>						まさかマスター様が\nこっちに来るなんて……！
+	いー	<Off>						これも私とマスター様との絆かしら？\nうふふ……♪
+	すー	<Off>						そ、そんなこと\n言ってる場合じゃないよぉ\nどうしたら……
+CharacterOff
+	ソル	通常						あら？\nどうかしたのかしら？\nそんなに困り顔で
+CharacterOff
+	ダイビ	驚き	2_3
+Tween	ダイビ	PunchPosition	y=30				NoWait
+	だー	<Off>						ソル姉様！
+CharacterOff
+	ソル	通常						ふふ♪\n相談だったら、私がのりますわよ？
+CharacterOff
+	ダイビ	悲しい	2_3
+	いー	<Off>						実は<dash=2>
+FadeOut	black					.2
+CharacterOff						0
+	ソル	通常				0
+Wait						.5
+FadeIn	black					.2
+	ソル	通常						なるほど、マスター様のために\n泳げるようになりたい、と
+	ソル	通常						だったら私も手伝いましょう\n太陽の女神の力をもつ私なら、\n泳ぎも得意ですから
+CharacterOff
+	ダイビ	驚き	2_3
+	だー	<Off>						ほんと……!?
+	ダイビ	嬉しい	2_3
+	いー	<Off>						ああ、やっぱり姉様は素敵……♪
+	すー	<Off>						ありがとう、姉様！
+CharacterOff
+	ソル	通常						では、練習場所が必要ですね\n先に海に行って練習しましょうか♪
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	海岸					0
+	ソル	通常				0
+Bgm	ビーチ
+FadeIn	black					.3
+	ソル	通常						まず水泳の基本は水に浮くこと\nぷかぷか楽しみましょう♪
+CharacterOff
+	ダイビ	通常	2_3
+	すー	<Off>						うぅ……！\nやっぱり海は怖いよぉ……！
+	だー	<Off>						すーちゃん、\n怖がり過ぎだよぉ
+	いー	<Off>						マスター様が\n私たちから離れてしまうことこそが\n本当の恐怖でしょう？
+	すー	<Off>						それは、そうだけど……
+	ダイビ	嬉しい	2_3
+	すー	<Off>						じゃ、じゃあ、\nせーので、海に入ろ？ ね？
+	だー	<Off>						うん、もちろん！
+	いー	<Off>						三人一緒に、せーのっ
+Tween	ダイビ	PunchPosition	y=50				NoWait
+Wait						.1
+Se	ダイブ
+FadeOut	black					.2
+Bg	海底					0
+CharacterOff						0
+	          
+FadeIn	black					.2
+	三人	<Off>						ゴポポポポ……！
+Se	ダイブ
+FadeOut	black					.2
+CharacterOff						0
+Bg	海岸					0
+	ソル	通常				0
+FadeIn	black					.2
+	ソル	通常						だ、大丈夫ですか!?
+CharacterOff
+	ダイビ	泣き	2_3
+Shake	ダイビ		x=10 time=2				NoWait
+	だー	<Off>						海の底きれい……
+	いー	<Off>						魂だけでも、\nマスター様のもとへ
+	すー	<Off>						ふ、二人とも、\n戻ってきてよぉ……！
+CharacterOff
+	ソル	通常
+	ソル	通常						はぁ、ここまでとは\nまずは力を抜くところからですわね
+	ソル	通常						でも、私はソルの力があるので、\n自然と浮かんでしまいますし
+CharacterOff
+	ダイビ	悲しい	2_3
+	だー	<Off>						じゃあ、\n姉様でもムリなの？
+CharacterOff
+	ソル	通常						いいえ、であれば他の力を借りるだけ\nあの方なら、きっと……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_海辺					0
+	レト	水着				0
+FadeIn	black					.3
+	レト	水着						みずにうくほーほー？\nいいよー♪
+CharacterOff
+	ダイビ	驚き	2_3
+	だー	<Off>						たしかに、\nレトさんなら……！
+	いー	<Off>						力を抜くのも得意そうね
+CharacterOff
+	レト	水着						うみのうえでもぉ、\nおんなじだよぉ、すやすやーって\n力をぬくのぉ……
+CharacterOff
+	ダイビ	驚き	2_3
+	すー	<Off>						な、なるほど……！
+	だー	<Off>						私たちも、\n力の抜き方が分かればいいんだ！
+CharacterOff
+	レト	水着						じゃあ、れんしゅーしよー\nいくよー、すやすやー
+CharacterOff
+	ダイビ	驚き	2_3
+Tween	ダイビ	MoveBy	y=-50 time=3				NoWait
+	黒グラデーション		エフェクト表			2
+	だー	<Off>						すやすやー……
+	すー	<Off>						あっ、おひさまがきもちよくて……
+	いー	<Off>						すぅ、すぅ……
+FadeOut	black					.2
+CharacterOff						0
+	ソル	通常				0
+	集中線		エフェクト表			0
+FadeIn	black					.2
+Tween	ソル	PunchPosition	y=30				NoWait
+	ソル	通常						って、起きなさい三人とも！\n日が暮れてしまいますわ
+CharacterOff
+	ダイビ	驚き	2_3
+Tween	ダイビ	PunchPosition	y=30				NoWait
+	だー	<Off>						はっ……！\nい、いま、お昼寝しちゃってた！
+	いー	<Off>						夢でも\nマスター様に会えたわぁ♥
+	すー	<Off>						これじゃあ、\nただ寝ただけだよぉ
+CharacterOff
+	レト	水着						それじゃあ、レトはもう一眠り\nすやすやぁ……
+CharacterOff
+	ソル	通常						この方法はダメみたいですわね\nでしたら、あの方に……
+FadeOut	black					.3
+CharacterOff						0
+Bg	海岸					0
+	モア	水着				0
+FadeIn	black					.3
+	モア	水着						泳ぎ方を教えて欲しい、ですかぁ？
+CharacterOff
+	ソル	通常						ええ、火が消えるのを嫌う貴女なら、\n上手な泳ぎ方もご存知かと♪
+CharacterOff
+	ダイビ	驚き	2_3
+	だー	<Off>						お願い、モアさん！
+	いー	<Off>						もう頼れるのは、あなただけなの
+	すー	<Off>						どうしても\n泳ぎたいんです……！
+CharacterOff
+	モア	水着
+Shake	モア		x=10 time=1				NoWait
+	モア	水着						うぅ……童話魔剣として、\n子どもの頼みは断りづらい……！
+	モア	水着						わかりました、\n後でマッチ買ってくださいね！
+CharacterOff
+	ダイビ	嬉しい	2_3
+	三人	<Off>						はーい！
+FadeOut	black					.3
+CharacterOff						0
+	モア	水着				0
+Wait						.5
+FadeIn	black					.3
+	モア	水着						まずは足だけつけて、\nバシャバシャ！
+CharacterOff
+	ダイビ	拡大嬉しいだー	エフェクト表
+	だー	<Off>						バシャバシャ……♪
+CharacterOff
+	モア	水着						次は水をかけあって慣れましょう！
+CharacterOff
+	ダイビ	拡大嬉しいいー	エフェクト表
+	いー	<Off>						これが血だったら……うふふ♪
+CharacterOff
+	モア	水着						腰まで浸かってウォーキング！
+CharacterOff
+	ダイビ	拡大嬉しいすー	エフェクト表
+	すー	<Off>						いーちゃん、だーちゃん、\n手を繋いでいこうね……！
+FadeOut	black					.3
+CharacterOff						0
+Wait						.5
+	モア	水着				0
+FadeIn	black					.3
+	モア	水着						だいぶ水に慣れてきましたし、\n水遊びならできるでしょうっ！\nあとは泳ぐだけですっ！
+CharacterOff
+	ダイビ	嬉しい
+	だー	<Off>						うん、\nもう水だけなら怖くないよ！
+	いー	<Off>						今ならどこまでも行けそう
+	すー	<Off>						大丈夫、みんな一緒なら……！
+StopBgm
+CharacterOff
+	ダイビ	拡大通常	エフェクト表
+	三人	<Off>						せーのっ！
+Bgm	緊迫
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff
+	キノコリオン		p1
+Tween	キノコリオン	MoveBy	x=500 time=3				NoWait
+	キノコリオン							ノコォオオオオオ!!
+CharacterOff
+	ダイビ	悲しい	2_3
+	土煙		エフェクト表
+	だー	<Off>						きゃあ!?
+CharacterOff
+ImageEffectOff	SpriteCamera	MotionBlur
+	キノコリオン
+	集中線		エフェクト表
+	キノコリオン							波に乗るノコォオオオ!!
+StopBgm
+CharacterOff
+	ディーア	驚き水着2						おい、みんな無事か!?
+Bgm	キノコリオン
+CharacterOff
+	ダイビ	通常	2_3
+	すー	<Off>						マスター様！
+CharacterOff
+	ディーア	悔しい水着2						ここはサーフィン禁止なのに、\nなんて迷惑なキノコだ……！
+CharacterOff
+	ダイビ	悲しい	2_3
+	だー	<Off>						私たちの邪魔して……！
+	いー	<Off>						血の雨を見たいようね……
+	すー	<Off>						せっかく泳げそうだったのにぃ……
+CharacterOff
+	ディーア	本気水着2						行くぞ、みんな！
+CharacterOff
+	ダイビ	通常	2_3
+	三人							うん……！
+CharacterOff
+	ダイビ	拡大通常	エフェクト裏
+	オーラ赤		エフェクト表
+	三人	<Off>						ダインスレイフ=ビースト\n血を浴びるまで、止まらないよ♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_535_03
+EndIf
+EndScenario
+
+# G_535_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	海岸					0
+Param	character_grayout=false
+	ダイビ	悲しい	2_3			0
+	          
+FadeIn	white					.5
+	だー	<Off>						うぅ、キノコリオンは倒せたけど
+	いー	<Off>						時間切れね……
+	すー	<Off>						まだ泳げてないよぉ
+	ダイビ	泣き	2_3
+	だー	<Off>						私たち、\n嫌われちゃうのかな？
+	いー	<Off>						マスター様から\n愛をもらえないの……？
+	すー	<Off>						やっぱり、私たちは\n三分の一人前で、不完全なんだ
+CharacterOff
+	ダインスレイフ	通常						あら、どうしたのですか？\n泣きそうな顔をして
+CharacterOff
+	ダイビ	泣き	2_3
+	いー	<Off>						ダイン姉様……
+CharacterOff
+	ダインスレイフ	通常						ソルから聞きましたわ\n泳げるようになって、マスター様に\n認めてもらいたかったって
+CharacterOff
+	ダイビ	泣き	2_3
+	だー	<Off>						でも、失敗しちゃって……
+	いー	<Off>						目的を達成できなくて……
+	すー	<Off>						一人前になれなくて……ぐすっ
+CharacterOff
+	ダインスレイフ	通常						ああ、もう泣かないの……
+StopBgm
+CharacterOff
+	ダイビ	泣き	2_3
+	すー	<Off>						でもぉ……
+Bgm	凱旋
+CharacterOff
+	ダインスレイフ	通常						貴女たちに一つ教えてあげますわ
+	ダインスレイフ	通常						私たちのマスター様は、\nすぐに魔剣を嫌うような\n小さい人間ではありません
+	ダインスレイフ	通常						それになにより、\n貴女たちがとってもいい子なことは\nマスター様に伝わっています
+CharacterOff
+	ダイビ	悲しい	2_3
+	だー	<Off>						ほんと……？
+CharacterOff
+	ダインスレイフ	通常						ええ、泳げないなら\n素直にそういえばいいのですわ
+	ダインスレイフ	通常						それに、泳げるより\nもっと大切なことがありますわよ？
+CharacterOff
+	ダイビ	驚き	2_3
+	だー	<Off>						それって……
+CharacterOff
+	ダインスレイフ	通常						マスター様を想う気持ち\n楽しんでもらいたいという気持ち\n愛したいという気持ち
+	ダインスレイフ	通常						その気持ちこそが、\nいちばん大事なこと
+	ダインスレイフ	通常						それを、\n貴女たちは持っていますか？
+CharacterOff
+	ダイビ	通常	2_3
+Tween	ダイビ	PunchPosition	y=30				NoWait
+	だー	<Off>						う、うん……！
+	いー	<Off>						マスター様への愛は、負けない
+	すー	<Off>						優しくて、\n大好きなマスター様だから
+CharacterOff
+	ダインスレイフ	通常						なら胸をはって\nマスター様と遊びなさい？
+	ダインスレイフ	通常						それに……こほんっ、\n恥ずかしながらこの私も……
+CharacterOff
+	ダイビ	驚き	2_3
+	三人	<Off>						えっ……？
+CharacterOff
+	ダインスレイフ	通常						泳ぐのは、得意ではなくて……
+CharacterOff
+	ダイビ	驚き	2_3
+Tween	ダイビ	PunchPosition	y=30				NoWait
+	だー	<Off>						えぇえええ!?\nそ、そうなの!?
+	いー	<Off>						姉様が……意外……
+CharacterOff
+	ダインスレイフ	通常						太陽の女神は私と相反する存在\nソルが例外なのですわ
+	ダインスレイフ	通常						だから、泳げない程度で\n恥じ入る必要はないのです\nそうですわね、マスター様？
+CharacterOff
+	ディーア	笑い水着2						ああ、そうだぞ？\nみんなが無理するより、\n一緒に楽しめるほうが大事だ！
+	ディーア	通常水着2						さあ、なにする？\nスイカ割りに、バーベキューに\nキレイな貝殻を探すのもいいな！
+CharacterOff
+	ダイビ	嬉しい	2_3
+	だー	<Off>						マスター様……！\nえへへ♪
+	いー	<Off>						うふふ♪\nやっぱりお優しい方……♥
+	すー	<Off>						私たちが大好きな、\n優しいマスター様だね……♪
+StopBgm
+CharacterOff
+	ディーア	笑い水着2						それじゃあ、\n改めて、海水浴開始だ！
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	トライアルスチル5351		エフェクト表			0
+Tween	トライアルスチル5351	MoveBy	y=-390 time=15				NoWait
+FadeIn	white					.3
+Bgm	都市
+	だー	<Off>						すーちゃん、おひざかしてー♪
+	すー	<Off>						うん♪\nどうぞ、だーちゃん♪
+	いー	<Off>						あらあら、\n遊びすぎて疲れちゃった？
+	だー	<Off>						ううん、まだまだ！\nマスター様ともっとずっと遊ぶの♪
+	すー	<Off>						あっ、そうだ！\n今度はマスター様と鬼ごっこしよ？
+	いー	<Off>						楽しそう……♪\nマスター様を捕まえましょう……♥
+	だー	<Off>						離さないで、遊んじゃお♪
+	すー	<Off>						あ、あんまり危ないことしたら\nだめだよぉ……？
+	だー	<Off>						大丈夫\nそのときはすーちゃんも一緒♪
+	いー	<Off>						だーちゃんも一緒♥
+	すー	<Off>						いーちゃんも、一緒に
+	だー	<Off>						三人で本物になっちゃおっか♪
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	笑い水着2				0
+FadeIn	white					.3
+	ディーア	笑い水着2						ビースト因子か……\nまだ謎が多すぎる存在だけど
+CharacterOff
+	ダインスレイフ	通常						ええ、あの子たちは\nとっても素直でいい子\nそれで十分ですわ
+CharacterOff
+	ダイビ	拡大通常だー	エフェクト裏
+	だー	<Off>						あっ、マスター様！\nもっと海で遊びましょ♪
+	ダイビ	拡大通常いー	エフェクト裏
+	いー	<Off>						ずっと忘れられないくらい\n遊びましょ♥
+	ダイビ	拡大通常すー	エフェクト裏
+	すー	<Off>						た、楽しく一緒に遊びましょ？
+	オーラ桃		エフェクト裏
+	ダイビ	拡大嬉しい	エフェクト表
+	三人	<Off>						マスター様、大好きだよ♥
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_535_01
+EndIf
+EndScenario

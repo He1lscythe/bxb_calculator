@@ -1,0 +1,414 @@
+# E_1205_ex01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋					0
+	ラスリゾA	通常
+FadeIn	black					1
+	ラスリゾA	通常						えーっと、\nこれは残して、これはあげて……
+	ディーア	通常4	画面外_左
+Tween	ディーア	MoveBy	x=550 time=1				NoWait
+Wait						.3
+	ディーア	通常4						ラスリゾ.ALICE、\nこれからのことなんだけど<dash=2>
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き4						うわっ！\n散らかってるけどどうしたんだ？
+Tween	ラスリゾA	MoveBy	x=150				NoWait
+	ラスリゾA	嬉しい						あ、マスターさま♪
+	ラスリゾA	通常						実はね、\nいらない荷物を整理していたんだぁ♪
+	ラスリゾA	通常						カジノでの勝負とか幸運の力の影響で\nたくさん貰い物があるんだけど
+	ラスリゾA	通常						マスターさまのところには\n全部は持っていけないでしょう？
+	ディーア	汗4						そうだな、\n宿に入れたり持ち運ぶだけで大変だ
+	ラスリゾA	嬉しい						だからお気に入りだけ残して、\nみんなに欲しいものあればあげて、\nあとは生活費にしようと思って♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い4						本当か、オレも助かるよ！\nあの勝負ですっからかんだからな
+	ラスリゾA	笑い						だったら、\n大切なマスターさまを助けるために\n整理整頓がんばるねー♪
+	ラスリゾA	通常						それにぃ……\n物は少なくても支え合える生活って\nずっと憧れていたのぉ♪
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	笑い						ラブラブな新婚さんみたいでしょ♪
+Se	走る
+CharacterOff
+	レヴァ	笑い				1		ラスリゾ.ALICEちゃーん！\nここにあるものから選んでいいの？
+CharacterOff
+	ラスリゾA	通常						うん！\nたぶん必要ないものだから\n貰っていってぇ♪
+CharacterOff
+	レヴァ	通常						どれどれ～？
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	笑い						わぁ♪\nすごく有名なブランドの香水もある！\n他には<dash=2>
+Shake	レヴァ		x=2				NoWait
+	レヴァ	慌て						えっ!?
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	慌て						ら、ラスリゾ.ALICEちゃん！\nこれも本当にもらっていいの!?
+CharacterOff
+	ラスリゾA	笑い						いいよー♪
+CharacterOff
+	レヴァ	通常						やったぁー！\nみんなぁ、見てみてー！
+Se	ピューン
+Tween	レヴァ	MoveBy	x=600 time=0.5				NoWait
+Wait						.5
+CharacterOff
+	ディーア	怪しい4	p3
+	ラスリゾA	通常	p7b
+	ディーア	怪しい4						あんなにレヴァが喜ぶなんて、\nなにを持っていったんだ？
+	ラスリゾA	通常						私もちゃんと見てなかったから、\nよくわかんないや
+	ディーア	驚き4						それって大丈夫なのか？
+	ラスリゾA	笑い						今までもずっと大丈夫だったもの\nきっと大丈夫だよぉ♪
+	ディーア	怪しい4						でもそれは幸運があった時の話だし、\n今は幸運も消えてるんだよな
+StopBgm
+	ディーア	怪しい4						これからは、\n予想外の事態が起こることも<dash=2>
+Param	character_grayout=false
+Se	闇3
+Se	光3
+FadeOut	white					.2
+	土煙		エフェクト表			0
+Shake	Graphics		x=3 y=3 time=1				NoWait
+FadeIn	white					.3
+Bgm	緊迫
+	ラスリゾA	悲しい						ひゃあ!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き4						な、なんだ!?\n誰かが襲撃してきたのか!?
+	ラスリゾA	驚き						下のお部屋からだよ……！
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場1F					0
+	バールのようなもの	通常4				0
+Wait						1
+FadeIn	black					.3
+Bgm	コメディ
+Tween	バールのようなもの	PunchPosition	y=30				NoWait
+	バールのようなもの	通常4						マスターはばよのが貰うよ！\nそれを渡してー！
+CharacterOff
+	レヴァ	通常						ガード、ガード！\nぜったいに渡さないんだからぁ！
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	通常						これで本当の本当に！\nメインヒロインの座は私のもの！
+CharacterOff
+	フライパン	通常						ふふふ……\nそんなのぜったいにユルサナイ……
+Shake	フライパン		x=2				NoWait
+	フライパン	通常						それを奪い取って、\nダーリンとフーラは永遠になるの
+CharacterOff
+	ロサ	慌て
+Shake	ロサ		x=3				NoWait
+	ロサ	慌て						はわわわわ……！\nまさかこんなことになるなんて！
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き4	p3
+	ラスリゾA	驚き	p7b
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き4						ロサ、なんなんだこの事態は！\nみんなはどうしたんだ!?
+CharacterOff
+	ロサ	慌て						どうしたもこうしたもないですよ、\nご主人様！
+Tween	ロサ	PunchPosition	y=30				NoWait
+	ロサ	慌て						あんなものを渡したら、\n争いが勃発するに決まっています！
+CharacterOff
+	ディーア	怪しい4	p3
+	ラスリゾA	驚き	p7b
+	ディーア	怪しい4						あんなもの……？\nでもレヴァが持っているのは\nただの紙切れ<dash=2>
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	驚き						あっ……！\nもしかしてあれって……！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	カジノ					0
+	ラスリゾA	驚き				0
+FadeIn	white					.3
+	ラスリゾA	驚き						マスターさま（仮）が負けたから、\n約束通りに、\nあなたの生存権も人権も私のもの
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	悲しい						でも！\nこんな奴隷契約書をもらっても\nなんにも嬉しくないよぉ！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	絶望4	p3			0
+	ラスリゾA	驚き	p7b			0
+FadeIn	white					.3
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	悲しい						マスターさま権利書！\n間違えて渡しちゃったの!?
+	ディーア	絶望4						なんだって！\nじゃああの紙を手に入れた魔剣は\nオレを好き放題に……!?
+Param	character_grayout=false
+CharacterOff
+	ぎんいろ=ロスト	本気						旦那さんを永遠に所有する……\nつまりアレこそが伝説の婚姻届……
+Se	チャージ
+	オーラ青		エフェクト表			.5
+	ぎんいろ=ロスト	本気						ターゲット、ロックオン
+CharacterOff
+	ミオ	通常						これで合法的に永遠的に\nだんな様を閉じ込める権利が♪
+Se	チャージ
+	オーラ赤		エフェクト表			.5
+	ミオ	通常						たーくさん子兎つくりましょ♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望4	p3
+	ラスリゾA	悲しい	p7b
+	ディーア	絶望4						やめてくれ、みんな！\n酒場の中で暴れたら損害賠償が！
+	ディーア	悔しい4						それにその権利書は、\n誰にも渡したらダメなもので……！
+	魔剣たち	<Off>						マスターは私のものだよぉー！
+	ディーア	絶望4						誰も聞いちゃいない……
+Shake	ラスリゾA		x=3				NoWait
+	ラスリゾA	悲しい						ごめんなさい……！\n私のせいで大変なことにぃ……！
+CharacterOff
+	ロサ	通常						権利書の存在が皆様に知られた以上\nこの争いは必然です
+	ロサ	通常						無理に奪って破棄しようとしても、\n必ず誰かが妨害に現れることでしょう
+	ロサ	本気						そしていずれ必ず、\n魔剣の皆様によるご主人様争奪戦で\n魔界が滅びてしまいます……！
+Shake	ロサ		x=3				NoWait
+	ロサ	通常						皆様に納得してもらう、\n良い解決策はないでしょうか？
+CharacterOff
+	ラスリゾA	悲しい						権利書……勝負……\n景品……
+	ラスリゾA	驚き						そ、そうだ！
+CharacterOff
+	ロサ	驚き						なにか思いついたのですか？
+StopBgm
+CharacterOff
+	ラスリゾA	本気						戦え、と権利書が言っているの
+FadeOut	black					1
+CharacterOff						0
+Bg	酒場_カフェ					0
+	ロサ	本気				0
+Wait						1
+FadeIn	black					1
+Bgm	わくわく
+	ロサ	本気						これより！\nご主人様の権利書争奪！\nお嫁さんコンテストを開催します！
+	ロサ	通常						皆様には食事や洗濯など、\nお嫁さんパワーを競い合ってもらい
+Param	character_grayout=false
+CharacterOff
+	お嫁パワーカウンター	通常
+	ロサ	<Off>						公平を期すために\nお嫁パワーカウンターで力を測定し\n総合的に優勝者を決定
+CharacterOff
+	ロサ	通常						そしてその魔剣様には、\n皆様待望のご主人様全権権利書を\n景品としてお渡しします！
+Param	character_grayout=true
+	魔剣たち	<Off>						わーい♪
+	魔剣たち	<Off>						負けないよー！
+	ロサ	通常						ふぅ……\nなんとか穏便な形にまとまりました
+	ロサ	通常						争いが止められないのなら、\n戦いのやり方をコントロールする\n元カジノオーナーらしい作戦
+	ロサ	通常						ですが、勝負はここからです
+CharacterOff
+	ラスリゾA	通常						今こそ、\nお嫁さん修行の成果を見せる時♪
+	ラスリゾA	通常						任せて、マスターさま！\n私が優勝して権利書を取り返すから♪
+CharacterOff
+	ディーア	笑い4						ああ、頼むぞ！
+CharacterOff
+	ラストリゾート	嬉しい						アリスの私、がんばってぇー！
+CharacterOff
+	ジョーカー	通常						相手は強敵だけど、\nぜったいに勝てるわよー！
+CharacterOff
+	ラスリゾA	通常						ありがとー！
+	ラスリゾA	通常						みんなが応援してくれてるし、\nがんばらないと
+	ラスリゾA	通常						そして絶対に優勝して、\nマスターさまとの幸せ生活を続けるの
+CharacterOff
+	ロサ	通常						では始めましょう！\n第一種目は……甘やかし勝負！
+	ロサ	通常						マスターと魔剣、二人一組の\n<ruby=ベタベタ>B</ruby><ruby=アマアマ>A</ruby><ruby=バブバブ>B</ruby>
+Param	character_grayout=false
+	集中線		エフェクト表
+	ロサ	本気						通称バブ戦です！
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常4	p3
+	ラスリゾA	通常	p7b
+	ラスリゾA	通常						いくよぉ、マスターさーまっ♪
+	ラスリゾA	笑い						えーいっ！
+Param	character_grayout=false
+Tween	ラスリゾA	MoveBy	x=-120				NoWait
+Se	ポップイン
+	オーラ桃		エフェクト表			.5
+	ディーア	にやけ4						ふわぁあああ♪
+	ラスリゾA	嬉しい						マスターさまの\n疲れを癒やしてあげるねぇー♪
+	ラスリゾA	嬉しい						なでなで、よしよーし♪
+	オーラ光		エフェクト表			1
+	ディーア	にやけ4						疲れがとれて眼の前が明るく……\nキラキラだぁ……
+CharacterOff
+	ロサ	通常						基本にしてオーソドックス\nしかしその手つきには努力の跡が\n見て取れます！
+	ロサ	本気						まさにプリミティブな甘やかし！\nこの結果は<dash=2>
+CharacterOff
+	お嫁パワーカウンター	通常						ピピピ……
+	お嫁パワーカウンター	通常						ラストリゾート.ALICE様に\n千三百お嫁ポイント！
+CharacterOff
+	ラスリゾA	笑い						やったぁー！\n今までの最高記録だよぉー♪
+StopBgm
+	ラスリゾA	通常						これならきっと優<dash=2>
+Bgm	緊迫
+CharacterOff
+	ディーア	にやけ4	p3
+	ルイゼット	嬉しい	p7b
+	オーラ桃		エフェクト表
+	ディーア	にやけ4						ふにゃああああ……
+	ルイゼット	嬉しい						ゆーっくりおやすみなさーい♪
+	ディーア	にやけ4						やさしさにつつまれて、\nもうどうなってもいいやぁ……
+CharacterOff
+	ロサ	驚き						甘やかし力による意識反転現象!!\nあのご主人様が一瞬で!?
+CharacterOff
+	お嫁パワーカウンター	通常						ルイゼット様に五千お嫁ポイント！
+CharacterOff
+	ラスリゾA	悲しい
+Shake	ラスリゾA		x=3				NoWait
+	ラスリゾA	悲しい						そ、そんな……！
+	ラスリゾA	悲しい						あんなにがんばったのに、\n負けちゃうなんて
+CharacterOff
+	ロサ	本気						甘やかし勝負は\nルイゼット様の勝ちです！
+	ロサ	通常						ですが勝負はまだここから！\n続いてはお料理対決！
+CharacterOff
+	ラスリゾA	通常						大丈夫！\nこの勝負なら自信があるよ！
+	ラスリゾA	通常						最初は指を怪我しちゃったりしたけど\nお料理修業がんばったんだから！
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	笑い						マスターさーま♪\n愛情たっぷりご飯をめしあがれ♪
+CharacterOff
+	ディーア	怒り4						基本に忠実な、\nけれど欠片も手を抜いていない\n一汁三菜……！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き4						しかもこの味噌汁は……！\nちゃんと出汁をひいて作っている！
+	ディーア	目閉じ4						五臓六腑に染み渡る優しさの味だ
+	ディーア	にやけ4						オレにも……\nオレにも故郷が見える……
+CharacterOff
+	お嫁パワーカウンター	通常						ラストリゾート.ALICE様に\n三千お嫁ポイント！
+CharacterOff
+	ラスリゾA	嬉しい						やったぁー♪\n努力の成果が褒められるのって\nすごく幸せだなぁー♪
+	ラスリゾA	嬉しい						この調子で<dash=2>
+CharacterOff
+	セロトニン	通常						ヘイ、お待ち！
+Tween	セロトニン	PunchPosition	y=30				NoWait
+	セロトニン	通常						幸せホルモンたーっぷり配合！\nニンニクカラメヤサイマシマシ！\nセロトニンラーメンですよぉ!!
+CharacterOff
+	ディーア	本気4						ぐぉおおおおおお！\nどう見てもカロリーがやばいのに\nやめられないとめられない！
+	ディーア	本気4						お腹が膨れても、\nなお口の中に吸い込まれる中毒性！
+	ディーア	本気4						オレの胃袋が宇宙になるぅー！
+CharacterOff
+	ロサ	慌て						ご主人様が限界を超えている!?
+	ロサ	慌て						胃袋に許容しきれない麺を\n並行世界に送っているかのような\nラーメン吸引現象！
+CharacterOff
+	お嫁パワーカウンター	通常						セロトニン様に五千お嫁ポイント！
+StopBgm
+CharacterOff
+	ラスリゾA	悲しい						そんな、\nまた負けちゃったの……？
+Bgm	絶望
+Shake	ラスリゾA		x=2				NoWait
+	ラスリゾA	悲しい						みんなにはすごく得意なことがあって\n私はまだ練習中で……
+	ラスリゾA	悲しい						もし次も負けたら<dash=2>
+CharacterOff
+	ぎんいろ=ロスト	本気						お掃除勝負なら任せて
+	ぎんいろ=ロスト	本気						旦那さんの敵は全て排除する\nそれがお嫁さんのお仕事だから
+CharacterOff
+	ラスリゾA	悲しい						どうしよう、どうしよう……！
+	ラスリゾA	悲しい						このままじゃ\nマスターさまが私のせいで……
+	ラスリゾA	悲しい						もし今も……
+	黒背景		エフェクト表			1
+	ラスリゾA	悲しい						今も私に幸運があったら……
+StopBgm
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	魔術空間					0
+	ディーア	通常4破損	p3			0
+	ラスリゾA	嬉しい	p7b			0
+FadeIn	white					.3
+	ラスリゾA	嬉しい						私はたくさん苦労して、\nマスターさまと幸せに生きたい！
+	ラスリゾA	嬉しい						幸運がなくなっても力を合わせて、\n最後まで寄り添い合える！
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	嬉しい						私もマスターさまの、\n<ruby=ラストリゾート>最後の楽園</ruby>になりたいから！
+FadeOut	white					.3
+CharacterOff						0
+	トック魔物	通常				0
+FadeIn	white					.3
+	トック魔物	通常						どうかキミの未来に、\n終わらない幸福が待っていますように
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場_カフェ					0
+	ラスリゾA	悲しい				0
+FadeIn	white					.3
+Bgm	ウイニングラン
+	ラスリゾA	悲しい						っ……ううん！\nそんなこと考えたらダメ！
+	ラスリゾA	驚き						今の私があるのは、\nマスターさまやこっちの私、\nトックくんやアリス様
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	驚き						たくさんの人が、\n私の幸せを願ってくれたから！
+	ラスリゾA	通常						幸運がなくても、\nがんばって苦労できる今が幸せ！
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	通常						ピンチが待っていても、\nマスターさまと乗り越える！
+CharacterOff
+	ぎんいろ=ロスト	本気						…………
+	ぎんいろ=ロスト	通常						素敵な覚悟ね
+	ぎんいろ=ロスト	通常						そう、あなたも立派なお嫁さん
+	ぎんいろ=ロスト	本気						だからこそ、本気でいくわ
+CharacterOff
+	ラスリゾA	嬉しい
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	嬉しい						もちろん！\n本気で勝負しようね！
+FadeOut	black					1
+StopBgm
+CharacterOff						0
+	ロサ	通常				0
+Wait						2
+FadeIn	black					1
+Bgm	作戦会議
+	ロサ	通常						これで全ての勝負が終了しました\nあとは結果を待つのみ
+	ロサ	通常						ですが一部の方には、\n不本意な結末となることも\nあり得るでしょう……
+	ロサ	通常						今のうちに、\n仰りたいことはありますか？
+Bgm	凱旋
+CharacterOff
+	ラスリゾA	嬉しい						みんな！\n勝負してくれてありがとう♪
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	嬉しい						本気でぶつかりあって、\n練習の成果をみんなに見せられて\nすっごく幸せだったよぉー！
+CharacterOff
+	ロサ	驚き						ラストリゾート.ALICE様……
+CharacterOff
+	ラスリゾA	通常						えへへ……\n多分ね、私は一番じゃないと思う
+	ラスリゾA	通常						自分で起こした問題だから、\n私が解決したいって思っていたけど\nみんなはもっとすごかったから
+	ラスリゾA	嬉しい						でも、それも幸せなの♪
+	ラスリゾA	通常						目指したい目標があって、\nまだまだがんばる理由があるから！
+	ラスリゾA	嬉しい						今は負けちゃって\nマスターさまを独占されちゃっても\n次は負けないよ♪
+CharacterOff
+	ルイゼット	嬉しい						ふふふ♪
+CharacterOff
+	フライパン	通常						ものすごいライバル出現、ね……
+CharacterOff
+	ぎんいろ=ロスト	通常						そう、これが嫁友……
+CharacterOff
+	お嫁パワーカウンター	通常						…………
+CharacterOff
+	ロサ	通常						では結果発表を<dash=2>
+CharacterOff
+	お嫁パワーカウンター	通常						ラストリゾート.ALICE様に\n十三億新婚ポイント！
+CharacterOff
+	ロサ	驚き
+Tween	ロサ	PunchPosition	y=30				NoWait
+	ロサ	驚き						ええっ!?
+CharacterOff
+	ディーア	驚き4						十三億って……圧倒的じゃないか！
+CharacterOff
+	お嫁パワーカウンター	通常						ピピピ……\nこれは一時的な数字……
+	お嫁パワーカウンター	通常						幸せ生活が始まったばかりの\n未来を夢見るポテンシャル……
+	お嫁パワーカウンター	通常						彼女こそが次世代のニューワイフ\n新婚さん……
+CharacterOff
+	ディーア	笑い4						やったな、ラスリゾ.ALICE!!
+CharacterOff
+	ロサ	通常						お見事です
+CharacterOff
+	ラスリゾA	嬉しい						ありがとぉー！
+	ラスリゾA	通常						でもね、\nみんなにはまだまだスキルとかで\n負けちゃっているし
+Tween	ラスリゾA	PunchPosition	y=30				NoWait
+	ラスリゾA	通常						みんなとの勝負で、\n私も大事なことに気づけたの！
+	ラスリゾA	通常						だからこの権利書も、\nすぐにビリビリ破いちゃうけど
+	ラスリゾA	嬉しい						その前に、\n魔剣のみーんなでマスターさまを\n独占しちゃお♪
+	ラスリゾA	嬉しい						みんなで競い合ったご褒美！\n一日だけ♪
+	ラスリゾA	通常						それくらいならいいでしょ？
+CharacterOff
+	ディーア	汗4						一日くらいなら、まあ……
+	ディーア	汗4						お手柔らかにな？
+	ディーア	通常4						でもお前はそれだけでいいのか、\n優勝者さん？
+	ディーア	笑い4						せっかく優勝したんだから、\nもっとご褒美があってもいいだろ？
+CharacterOff
+	ラスリゾA	驚き						えっ……！\nそ、そうかなぁ……？
+	ラスリゾA	通常						それじゃあ<dash=2>
+CharacterOff
+	ラスリゾA	拡大通常	エフェクト表
+	ラスリゾA	拡大通常						追加で一日、\n私がマスターさまを独占していい？
+	ラスリゾA	拡大嬉しい						幸せな一日にしたいの♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1205_ex01
+EndIf
+EndScenario

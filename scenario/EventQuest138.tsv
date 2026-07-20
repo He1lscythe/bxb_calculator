@@ -1,0 +1,615 @@
+# E_138_00
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="出会いは突然！その名はジュジュ!!"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	平和
+Bg	酒場1F
+	ディーア	通常2	1_2
+	リディ	笑い2	2_2
+FadeIn	white					2
+Tween	リディ	PunchPosition	y=50			Add
+	リディ						ますたー、ひまだねー
+Tween	ディーア	PunchPosition	y=50			Add
+	ディーア						ああ、ひまだなー
+	謎の声	<Off>					ねぇちょっといいかしら？
+	リディ						んう？
+Bgm	コメディ
+CharacterOff
+Bg	イベントスチル13800
+	黒髪のかわいい少女	<Off>					ここに、私よりかわいい魔剣がいるって\n聞いてきたんだけど
+	リディ	<Off>					ふぇ？…どちらさま？
+	黒髪のかわいい少女	<Off>					あなたがヒロイン魔剣？\n…うんうん、かわいいっ♪
+	黒髪のかわいい少女	<Off>					でも、ジュジュに比べたら\nまだまだかなぁ？
+Bg	酒場1F
+	リディ	驚き2	1_1				…え？
+	リディ	悲しい2					どうしようマスター、\nまた変な子が現れたよ…
+CharacterOff
+Bg	イベントスチル13800
+	ジュジュ	<Off>					変な子？どこどこ？\nどこにいるの？
+Bg	酒場1F
+	リディ	驚き2	1_1				ちょっとまって、ちょっとまって！
+	リディ	悲しい2					なんでこの子、会話するたびに\nふんわり明るくアップになるの!?
+CharacterOff
+Bg	イベントスチル13800
+	ジュジュ	<Off>					ふぇ？みんなこうならないの？
+	ジュジュ	<Off>					あ、ジュジュがかわいすぎるからか！
+Bg	酒場1F
+	リディ	怒り2	1_1				マスター…この子、なんか\nちょっとイラっとするんだけど…！
+CharacterOff
+Bg	イベントスチル13800
+	ジュジュ	<Off>					殺意がわいちゃった？\nごめんね、よくあるんだ…
+	ジュジュ	<Off>					ジュジュ、かわいすぎるから…\n本当にごめんね？
+Bg	酒場1F
+	リディ	絶望2	1_1				あ、やばい
+	リディ						この子、ジェミニアちゃんや\nヴァルゴさんとも違うタイプの\n「アレ」な子だ
+CharacterOff
+Bg	イベントスチル13800
+	ジュジュ	<Off>					それはそうと、ジュジュはね\n私よりかわいい子を探してるの！
+	ジュジュ	<Off>					あなたもかわいいけど、\nちょっとジュジュの相手には\nならなそうだから
+	ジュジュ	<Off>					別の子を連れてきてもらっても\nいいですか？
+Bg	酒場1F
+	リディ	絶望2	1_1				マスター、マスター、\nここに暴走魔剣がいるよ
+	リディ						さっさと討滅して作戦貢献度を\nもらおう
+CharacterOff
+	リディ	絶望2	2_2
+	ディーア	汗2	1_2				まぁまぁ、おちついて…
+	ディーア						それで、えーっとジュジュちゃん？
+CharacterOff
+Bg	イベントスチル13800
+	ジュジュ	<Off>					ん？かわいいジュジュを呼んだ？\n……あなた、魔剣使いねっ！
+	ジュジュ						うんうん、みた感じは良さそうね！\nでもジュジュにふさわしいか試させて\nもらうわっ
+Bg	酒場1F
+	リディ	驚き2	1_1				え、え、なんで襲ってくるの!?\nマスター！マスター！
+CharacterOff
+	リディ	怒り2	2_2
+	ディーア	本気2	1_2				ちょちょちょ、え？何？\n戦うの？バトルなの!?
+CharacterOff
+Bg	イベントスチル13800
+Bgm	魔王バトル
+	ジュジュ	<Off>					全てのヒロインを倒して\nジュジュが本当にかわいいと\n証明するために！
+	ジュジュ	<Off>					力を貸してもらうわ！\n魔剣使いくんっ!!
+Bg	酒場1F
+	ディーア	驚き2	1_1				ええええええええええええ!?
+If	isdebug==true
+CharacterOff
+Jump	*E_117_02
+EndIf
+EndScenario
+
+# E_138_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列12位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	コメディ
+Bg	イベントスチル13800
+FadeIn	white					2
+Bg	イベントスチル13800
+	ジュジュ	<Off>					うんうん♪あなたステキに最高♪
+	ジュジュ	<Off>					やっと見つけたっ！\nジュジュを装備できる魔剣使い♪
+Bg	酒場1F
+	リディ	絶望2	1_1				え…なに、何が起きてるの？\n何が起きてるかわかってないの\nリディだけなの？
+CharacterOff
+	リディ	絶望2	2_2
+	ディーア	汗2	1_2				いや、俺も全然わかってない…
+CharacterOff
+Bg	イベントスチル13800
+	ジュジュ	<Off>					ずっと探してたの、うん！\nキミならジュジュにふさわしい！
+	ジュジュ	<Off>					早速ジュジュを装備して、\n次の戦いにでかけましょっ
+Bg	酒場1F
+	リディ	驚き2	2_2				次の…
+	ディーア	驚き2	1_2				戦い…？
+CharacterOff
+Bg	イベントスチル13800
+	ジュジュ	<Off>					うん！\nジュジュが世界で一番かわいいって\n証明するために
+	ジュジュ	<Off>					これから一緒に挑戦するんだよ！\nよーし、ジュジュ、がんばるぞっ♪
+Bg	酒場1F
+	リディ	悲しい2	2_2
+	ディーア	驚き2	1_2
+	リディ						会話のキャッチボールが\n剛速球で返ってきてるよマスター
+	ディーア	汗2					気をつけような、お互い
+	リディ						…うん
+	ディーア						ええと、それで…ジュジュちゃん、\n一緒に『何に』挑戦すれば\nいいのかな…？
+CharacterOff
+Bg	イベントスチル13800
+	ジュジュ	<Off>					え？何って、そんなの決まってるよ！
+	ジュジュ	<Off>					《ヒロイン魔剣十二宮》だよ！
+Bg	酒場1F
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2
+	リディ						ひ、ヒロイン魔剣十二宮…!?
+	ディーア						知っているのかリディ！
+	リディ	悔しい2					魔剣機関非公式の\n地下組織による魔剣人気ランキング！
+							序列1位から12位までの魔剣には\n「●●宮」という称号が与えられ、\n密やかに崇め奉られるという…
+		驚き2					ウワサだと思っていたのに\n実在したなんて…！
+	ディーア	本気2					ただの野良人気投票なのでは！
+CharacterOff
+Bg	イベントスチル13800
+	ジュジュ	<Off>					ちっちっち、甘いなぁマスターちゃん\nヒロイン魔剣十二宮は\n実質的ヒロインを決める戦いなの！
+	ジュジュ	<Off>					自称ヒロインには入り込む余地なし…\nそれはそれは厳しい世界…！
+Bg	酒場1F
+	リディ	悲しい2	2_2
+	ディーア	汗2	1_2
+	リディ						ジュジュちゃんが言っていることは\n本当だよ、マスター…
+	ディーア						知っているのかリディ！
+	リディ	悔しい2					事実、看板娘として知られている\nレヴァンテインちゃんは\n序列12位に入っていないの…
+	ディーア	汗2					な、なんだってー
+CharacterOff
+Bg	イベントスチル13800
+	ジュジュ	<Off>					ジュジュはこれから\n《ヒロイン魔剣十二宮》に\n殴り込みをかけるの！
+	ジュジュ	<Off>					そして、本当にかわいいのは\n誰かを世界におしえてあげようと\n思ってるんだ♪
+	ジュジュ	<Off>					だって、ジュジュのかわいさを\n知らないなんてとっても不幸だもの！
+Bg	酒場1F
+	リディ	悔しい2	2_2
+	ディーア	驚き2	1_2
+	リディ						マスター、この子ならやれるかも\nしれない…
+	ディーア						……リディ？
+	リディ						調子にのってグッズ化されまくりの\nヒロイン魔剣十二宮に、\nお灸をすえるチャンスかもしれない！
+	ディーア	汗2					リディさん、本音が漏れていますよ！
+	リディ	泣き2					私だって、私だってヒロインなのに！
+	ディーア	驚き2					リディさん！
+	リディ	照れ2					てへ♪
+CharacterOff
+Bg	イベントスチル13800
+	ジュジュ	<Off>					交渉成立ね！
+	ジュジュ	<Off>					それじゃあ行きましょ♪\nまずは序列12位…！
+FadeOut	white					.5
+CharacterOff
+Bgm	闇属性バトル
+	イベント全画面138	M2	af_bg2018
+FadeIn	white					2.5
+	ジュジュ	<Off>					白銀宮のスクールガール！
+CharacterOff
+Bg	イベントスチル13801v
+	ジュジュ	<Off>					白銀宮のスクールガール！\nアルギュロスぎんいろちゃんを倒す！
+If	isdebug==true
+CharacterOff
+Jump	*E_117_02
+EndIf
+EndScenario
+
+# E_138_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列11位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13801w
+FadeIn	white					2
+	ジュジュ	<Off>					ざんねんっ！ジュジュの方が\nほんの少しだけかわいかったかな？
+	ジュジュ	<Off>					スクールガール対決は、\nジュジュの勝ち♪
+	ジュジュ	<Off>					それじゃあ次に進んじゃうね？\n次は序列11位……
+FadeOut	white					.5
+CharacterOff
+HideMessageWindow
+Bgm	闇属性バトル
+	イベント全画面138	M3	af_bg2018
+FadeIn	white					2.5
+	ジュジュ	<Off>					ぬるぬるするぞ触手宮！
+CharacterOff
+Bg	イベントスチル13802v
+	ジュジュ	<Off>					ぬるぬるするぞ触手宮！\nネクロノミコンちゃんを倒しちゃお♪
+If	isdebug==true
+CharacterOff
+Jump	*E_138_03
+EndIf
+EndScenario
+
+# E_138_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列10位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13802w
+FadeIn	white					2
+	ジュジュ	<Off>					国に帰るんだな♪\n触手にも家族がいるだろう？
+	ジュジュ	<Off>					なーんちゃって！\nネクロちゃんとは仲良くなれそう♪
+	ジュジュ	<Off>					さぁて次は誰かなぁ？\n序列10位……
+FadeOut	white					.5
+CharacterOff
+HideMessageWindow
+Bgm	風属性バトル
+	イベント全画面138	M4	af_bg2018
+FadeIn	white					2.5
+	ジュジュ	<Off>					神劍宮の滅竜魔剣！
+CharacterOff
+Bg	イベントスチル13803v
+	ジュジュ	<Off>					神劍宮の滅竜魔剣！\nクサナギノツルギちゃんとバトル♪
+If	isdebug==true
+CharacterOff
+Jump	*E_138_04
+EndIf
+EndScenario
+
+# E_138_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列9位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13803w
+FadeIn	white					2
+	ジュジュ	<Off>					うんうん、あなたもかわいいけど\nジュジュの方がずっとかわいかった♪
+	ジュジュ	<Off>					ちょっとお化粧なおしてーっと…
+	ジュジュ	<Off>					よし！次もがんばるぞ♪\n序列9位！
+FadeOut	white					.5
+CharacterOff
+HideMessageWindow
+Bgm	闇属性バトル
+	イベント全画面138	M5	af_bg2018
+FadeIn	white					2.5
+	ジュジュ	<Off>					ヤンデレ風味の嘘病宮！
+CharacterOff
+Bg	イベントスチル13804v
+	ジュジュ	<Off>					ヤンデレ風味の嘘病宮！\n打倒！ダインスレイフちゃん！
+If	isdebug==true
+CharacterOff
+Jump	*E_138_05
+EndIf
+EndScenario
+
+# E_138_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列8位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13804w
+FadeIn	white					2
+	ジュジュ	<Off>					嘘ヤンデレなんかしなくても\n十分かわいいと思うけどなぁ
+	ジュジュ	<Off>					それでもジュジュの方が\nかわいいけど♪
+	ジュジュ	<Off>					それじゃあ次に進んじゃおー！\n次は序列8位……
+FadeOut	white					.5
+CharacterOff
+HideMessageWindow
+Bgm	闇属性バトル
+	イベント全画面138	M6	af_bg2018
+FadeIn	white					2.5
+	ジュジュ	<Off>					お姉ちゃんは完成宮！
+CharacterOff
+Bg	イベントスチル13805v
+	ジュジュ	<Off>					お姉ちゃんは完成宮！\n魔剣グラムちゃんを超えちゃうぞ♪
+If	isdebug==true
+CharacterOff
+Jump	*E_138_06
+EndIf
+EndScenario
+
+# E_138_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列7位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13805w
+FadeIn	white					2
+	ジュジュ	<Off>					魔剣の中の魔剣の完成品が\n世界で一番かわいいとは限らないの！
+	ジュジュ	<Off>					かわいさの完成品という意味では\nジュジュが一番だったかもね♪
+	ジュジュ	<Off>					そろそろ厳しくなってきた？\n序列7位は…
+FadeOut	white					.5
+CharacterOff
+HideMessageWindow
+Bgm	闇属性バトル
+	イベント全画面138	M7	af_bg2018
+FadeIn	white					2.5
+	ジュジュ	<Off>					救済宮は救えない！
+CharacterOff
+Bg	イベントスチル13806v
+	ジュジュ	<Off>					救済宮は救えない！\nジャガーノートちゃんを救っちゃおう！
+If	isdebug==true
+CharacterOff
+Jump	*E_138_07
+EndIf
+EndScenario
+
+# E_138_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列6位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13806w
+FadeIn	white					2
+	ジュジュ	<Off>					救えないなー、救われないなー\nジュジュがかわいすぎるからなー
+	ジュジュ	<Off>					ジュジュと一緒にいると、\nみんな霞んじゃうよね？ごめんね♪
+	ジュジュ	<Off>					思ったより余裕かも？\n序列6位もこの調子！
+FadeOut	white					.5
+CharacterOff
+HideMessageWindow
+Bgm	闇属性バトル
+	イベント全画面138	M8	af_bg2018
+FadeIn	white					2.5
+	ジュジュ	<Off>					竜王宮の竜王ちゃん！
+CharacterOff
+Bg	イベントスチル13807v
+	ジュジュ	<Off>					竜王宮の竜王ちゃん！\nバハムートちゃんとお手合わせ！
+If	isdebug==true
+CharacterOff
+Jump	*E_138_08
+EndIf
+EndScenario
+
+# E_138_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列5位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13807w
+FadeIn	white					2
+	ジュジュ	<Off>					竜王級にかわいかった♪\nでもジュジュはそれ以上だったね！
+	ジュジュ	<Off>					折り返したところで\n残る十二宮はあと5魔剣！
+	ジュジュ	<Off>					次はだれかな？\n序列5位……
+FadeOut	white					.5
+CharacterOff
+HideMessageWindow
+Bgm	水属性バトル
+	イベント全画面138	M9	af_bg2018
+FadeIn	white					2.5
+	ジュジュ	<Off>					断罪宮は赦しちゃえ！
+CharacterOff
+Bg	イベントスチル13808v
+	ジュジュ	<Off>					断罪宮は赦しちゃえ！\nジュジュも赦して！ねぇオズちゃん！
+If	isdebug==true
+CharacterOff
+Jump	*E_138_09
+EndIf
+EndScenario
+
+# E_138_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列4位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13808w
+FadeIn	white					2
+	ジュジュ	<Off>					かわいいと何でも赦されちゃうから\nある意味とっても罪深い♪
+	ジュジュ	<Off>					ジュジュのことを赦しちゃうのは\n必然だから安心して？
+	ジュジュ	<Off>					さーて次の十二宮はー？\n序列4位！
+FadeOut	white					.5
+CharacterOff
+HideMessageWindow
+Bgm	光属性バトル
+	イベント全画面138	M10	af_bg2018
+FadeIn	white					2.5
+	ジュジュ	<Off>					愛の証明は神竜宮で！
+CharacterOff
+Bg	イベントスチル13809v
+	ジュジュ	<Off>					愛の証明は神竜宮で！\nオメガちゃんとラブバトルっ！
+If	isdebug==true
+CharacterOff
+Jump	*E_138_10
+EndIf
+EndScenario
+
+# E_138_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列3位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13809w
+FadeIn	white					2
+	ジュジュ	<Off>					愛されすぎるのも困りモノだよね？\nうんうん、わかる♪
+	ジュジュ	<Off>					ジュジュもかわいすぎて\n愛されすぎちゃうことよくある♪
+	ジュジュ	<Off>					次はついにTOP3！\n序列3位は……
+FadeOut	white					.5
+CharacterOff
+HideMessageWindow
+Bgm	火属性バトル
+	イベント全画面138	M11	af_bg2018
+FadeIn	white					2.5
+	ジュジュ	<Off>					最古のヒロイン蒼焔宮！
+CharacterOff
+Bg	イベントスチル13810v
+	ジュジュ	<Off>					最古のヒロイン蒼焔宮！\nヘルちゃんと真っ向勝負！えへへ♪
+If	isdebug==true
+CharacterOff
+Jump	*E_138_11
+EndIf
+EndScenario
+
+# E_138_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列2位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13810w
+FadeIn	white					2
+	ジュジュ	<Off>					さすがはヘルちゃんかわいかったぁ\nでもでもジュジュの勝ちだったね！
+	ジュジュ	<Off>					次はついにTOP2…！\nジュジュよりかわいい子いるかなぁ？
+	ジュジュ	<Off>					いざ尋常に勝負！\n序列2位！
+FadeOut	white					.5
+CharacterOff
+HideMessageWindow
+Bgm	火属性バトル
+	イベント全画面138	M12	af_bg2018
+FadeIn	white					2.5
+	ジュジュ	<Off>					水着と嘘と夏肌宮！
+CharacterOff
+Bg	イベントスチル13811v
+	ジュジュ	<Off>					水着と嘘と夏肌宮！\nソルちゃんにジュジュが挑みます！
+If	isdebug==true
+CharacterOff
+Jump	*E_138_12
+EndIf
+EndScenario
+
+# E_138_12
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="めざせ序列1位！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13811w
+FadeIn	white					2
+	ジュジュ	<Off>					やったぁ！ジュジュの勝ちね！\nパーカーを脱がれていたら\n正直勝負は分からなかったかも…
+	ジュジュ	<Off>					でも、その時はジュジュも\n真の姿を見せちゃうから\nきっと負けなかったかな♪
+	ジュジュ	<Off>					…ふぅ、ついにここまで着たね\n最後の1人…序列1位……！
+FadeOut	white					.5
+CharacterOff
+HideMessageWindow
+Bgm	闇属性バトル
+	イベント全画面138	M13	af_bg2018_2
+FadeIn	white					2.5
+	ジュジュ	<Off>					最強ヒロイン贋作宮！
+CharacterOff
+Bg	イベントスチル13812v
+	ジュジュ	<Off>					最強ヒロイン贋作宮！\nオルタちゃんを超えて！\nジュジュがヒロインになってみせる！
+If	isdebug==true
+CharacterOff
+Jump	*E_138_13
+EndIf
+EndScenario
+
+# E_138_13
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="超えろ黒幕！黄金色の最終決戦!!"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13812w
+FadeIn	white					2
+	ジュジュ	<Off>					ジュジュ勝っちゃったぁ♪\nこれでジュジュが一番かわいいって\n証明されたねっ！
+Bg	イベントスチル13899
+	ジュジュ	<Off>					次の抱きまくらやシーツ、\nマグカップにマウスパッド、\n全部ぜーんぶジュジュに決定♪
+	ジュジュ	<Off>					ヒロイン魔剣十二宮は\nこれからジュジュを筆頭として\n魔界に名を轟かせるの！
+Bgm	魔王バトル
+	謎の声	<Off>					そうはいかんな…
+	ジュジュ	<Off>					…え？　誰？　どこにいるの？
+Bg	イベントスチル13898
+	オーア=ドラグ	<Off>					十二宮を倒した程度で\nヒロインを名乗られては困るな
+Bg	イベントスチル13800
+	ジュジュ	<Off>					…オーア=ドラグ……！
+	ジュジュ	<Off>					なんてかわいさ…！\n立っていられないほど…！
+Bg	イベントスチル13898
+	オーア=ドラグ	<Off>					《ヒロイン魔剣十二宮》は\nこのオーア=ドラグが秘密裏に計画し\n地下組織にて運営していたものだ
+	オーア=ドラグ	<Off>					愚鈍な魔界民衆から\n魔剣グッズとして注目と金銭を集め
+	オーア=ドラグ	<Off>					それを魔剣の可愛さに還元し、\nさらなるかわいさを提供する…
+	オーア=ドラグ	<Off>					これが《ヒロイン魔剣十二宮》の\n大いなる仕組みよ
+Bg	イベントスチル13800
+	ジュジュ	<Off>					なんという経済合理性…！
+Bg	イベントスチル13898
+	オーア=ドラグ	<Off>					呪咒乃飾よ、\n貴様もこのオーア=ドラグ運営の\n経済合理性の海に沈むがいい！
+Bg	イベントスチル13800
+	ジュジュ	<Off>					負けない！\nジュジュは、そんな運営の意図通りに\n人気魔剣に負けたりしない！
+	ジュジュ	<Off>					本当にかわいいかどうかは、\n誰かに決めてもらうことじゃない！
+	ジュジュ	<Off>					私のかわいさは！\n私が決める!!
+Bg	イベントスチル13898
+	オーア=ドラグ	<Off>					ククク！いいだろう！\nならばかかってくるがいい！
+	オーア=ドラグ	<Off>					お前に見せてやろう！
+Bg	酒場1F
+Bgm	コメディ
+	リディ	絶望2	2_2
+	ディーア	絶望2	1_2
+	リディ						ねぇマスター、なんだかリディたち\nずーっと置いてきぼりじゃない？
+	ディーア						気にしたら負けだよリディ\nさぁ、最後の戦いだ
+	リディ						がんばるぞー
+	ディーア						おー
+Bgm	魔王バトル
+CharacterOff
+Bg	イベントスチル13899
+	ジュジュ	<Off>					いくよマスターちゃん！\nジュジュが一番かわいいって信じて！
+	ジュジュ	<Off>					絶対に…負けないから！
+FadeOut	white					.5
+Bg	イベントスチル13813v
+CharacterOff
+HideMessageWindow
+Bgm	光属性バトル
+	イベント全画面138	M14	af_bg2018_2
+FadeIn	white					2.5
+	ジュジュ	<Off>					届け！黄金色の頂点！
+CharacterOff
+Bg	イベントスチル13813v
+	ジュジュ	<Off>					届け！黄金色の頂点！\nオーアちゃんとの最終決戦！
+If	isdebug==true
+CharacterOff
+Jump	*E_138_14
+EndIf
+EndScenario
+
+# E_138_14
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	Text	Voice	VoiceVersion
+Param	quest_name="私よりかわいい私になるために！"
+ShowMessageWindow
+Param	character_grayout=false
+StopSound
+FadeOut	white					.1
+Bgm	クエスト勝利_BGM
+Bg	イベントスチル13813w
+FadeIn	white					2
+	ジュジュ	<Off>					はぁはぁ、これでやっと…\nジュジュが世界で一番かわいいって\n証明…された…！
+Bg	イベントスチル13899
+	ジュジュ	<Off>					ジュジュが世界で一番…\nかわいいって証明されたっ♪
+Bg	イベントスチル13898
+	オーア=ドラグ	<Off>					よくやったなジュジュよ…\nだが、かわいさの道は無限に続く\nまだまだ上がいるだろう…
+Bg	イベントスチル13800
+	ジュジュ	<Off>					オーア先輩！
+	ジュジュ	<Off>					ジュジュ、どうしたら…
+Bg	イベントスチル13898
+	オーア=ドラグ	<Off>					真にかわいいのはジュジュ、\n貴様の胸の中にある\nかわいさを追い求める心だ
+Bg	イベントスチル13800
+	ジュジュ	<Off>					ジュジュの…心？
+Bg	イベントスチル13898
+	オーア=ドラグ	<Off>					超えるべきは他人ではない…\n己の中にある自分…！\n理想とする自分に打ち勝つのだ！
+Bg	イベントスチル13800
+	ジュジュ	<Off>					己の中の…本当の自分…！\n理想の…かわいいジュジュ…！
+Bg	イベントスチル13898
+	オーア=ドラグ	<Off>					それに打ち勝てた時、\nあらためて十二宮の座をかけて\n勝負しようではないか
+Bg	酒場1F
+Bgm	コメディ
+	リディ	絶望2	2_2
+	ディーア	絶望2	1_2
+	リディ						つまりそれって人気投票で、\nってことだよね…
+	ディーア						まぁ、そういうことだな…
+	リディ						ていうかオーアちゃん、\n地下組織なんか運営してたんだね
+	ディーア						魔剣の副業は禁止してないからな
+	リディ						働き方改革だね…
+Bgm	魔王バトル
+CharacterOff
+Bg	イベントスチル13899
+	ジュジュ	<Off>					いくよマスターちゃん！\nジュジュ、昨日の自分に勝つ！
+	ジュジュ	<Off>					世界一かわいい魔剣で\n居続けるために！
+FadeOut	white					.5
+CharacterOff
+Bgm	闇属性バトル
+Bg	イベントスチル13814v
+FadeIn	white					2.5
+	ジュジュ	<Off>					私よりかわいい私になるために！\nジュジュはジュジュを超えてみせる！
+If	isdebug==true
+CharacterOff
+Jump	*E_138_14
+EndIf
+EndScenario

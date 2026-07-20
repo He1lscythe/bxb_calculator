@@ -1,0 +1,1187 @@
+# E_414_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	教会前
+	ブライド	妹
+FadeIn	white					.5
+	ブライド	妹						お姉ちゃん、見つかった？
+CharacterOff
+	ブライド	姉
+	ブライド	姉						うーん、えっと\n今探してるとこ……
+Tween	ブライド	MoveTo	x=45 time=1
+Tween	ブライド	MoveTo	x=-45 time=1
+FadeOut	black					.5
+CharacterOff
+Se	ガヤA
+Param	character_grayout=false
+	ベルフェネス	花嫁	画面外_右
+	クレメンサ	花嫁	画面外_左
+	　　　　　　　　　　					0
+FadeIn	black					.5
+	　　　　　　　　　　					0
+Tween	クレメンサ	MoveTo	x=800 time=8				NoWait
+Wait						1
+	　　　　　　　　　　
+Tween	ベルフェネス	MoveTo	x=-800 time=7				NoWait
+Wait						1.5
+Param	character_grayout=true
+FadeOut	black					.5
+CharacterOff
+	ブライド	姉
+FadeIn	black					.5
+	ブライド	姉						結構人がたくさんいてさぁ……
+	ブライド	妹						せっかく一緒にフェアに\n連れてきてもらったんだし、\n今日こそは……！
+	ブライド	姉						そうだね、今日こそは！
+	ブライド	通常
+Tween	ブライド	PunchPosition	y=50				NoWait
+	ブライド	通常						エクスカリバーシリーズのみんなと\n仲良くなる!!
+	ブライド	姉						私たちだって聖剣伝承の模倣である\nデミエクス=ブライド……！\nきっと話せば仲良くなれるはず！
+	ブライド	妹						そうだよ！\nいつまでも近寄りがたいとか\n言っててもしょうがないもんね！
+	ブライド	妹						……というかお姉ちゃん？\nなんでずっと私を担いでるの？
+	ブライド	姉						メティアちゃん、今日は\nブライダルフェアなんだよ！\nつまり絶好の担ぎ日和!!
+	ブライド	妹						意味がわからないんだけど!?\nというかお姉ちゃんいつも\n私のこと担いでるよね！
+	ブライド	姉						そりゃあメティアちゃんのこと\n大好きだし……あっいた！\n見つけたよ！　メティアちゃん！
+CharacterOff
+	エクス=レプリカ		1_2
+	ガラティーン		2_2					……………………！
+	エクス=レプリカ
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ							……………………\n……………!!
+CharacterOff
+	ブライド	妹						いや担がれたままじゃ\nよく見えないよぉ！
+	ブライド	姉						よし、突撃はお姉ちゃんに任せて！
+	ブライド	妹						えっ突撃？\n話しかけに行くんだよね？\nあとその前に降ろして欲しいな？
+	ブライド	姉						聖剣伝承のはしくれとして\nここは引けないわ……！
+	ブライド	妹						ねぇ！ エクスカリバーシリーズの\nみなさんにお尻向けて\n喋るの嫌なんだけど！
+	ブライド	姉
+Se	走る
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ブライド	MoveTo	x=-800 time=1				NoWait
+	ブライド	姉						いっけーーー!!
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	ブライド	妹	画面外_左					お姉ちゃんてばーー!!
+FadeOut	black					.1
+CharacterOff
+Bg	教会前
+	マグナ		2_2
+	ミョルニル		1_2
+FadeIn	black					.5
+	ミョルニル							急に魔剣たちを連れ出して\n何の騒ぎかと思えば……\nブライダルフェア？
+	マグナ							マスターは相当暇なのねぇ♪
+CharacterOff
+	ディーア	汗2						いやいや、\n結構皆行きたがってただろ？
+CharacterOff
+	マグナ		2_2
+	ミョルニル		1_2					だからって、こんなに大勢\n連れてくる必要はあるのかしら？
+	マグナ							かわいい魔剣に囲まれて\nドヤ顔したいんでしょ、はい論破♪
+CharacterOff
+	ミョルファ		画面外_右
+	ディーア	汗2						そんなわけないだろ！\n皆の希望を聞いてたら\nこの人数になったんだって！
+	ディーア							それに、みんなが楽しんでくれれば、\nオレはそれで……
+Se	走る
+Tween	ミョルファ	MoveTo	x=-90 time=1				NoWait
+	ミョルファ							失礼します！
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							うわぁっ!?
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=1				NoWait
+Se	走る
+Tween	ミョルファ	MoveTo	x=-800 time=1
+CharacterOff
+	ミョルニル		1_2
+	マグナ		2_2
+Tween	マグナ	PunchPosition	y=50				NoWait
+	マグナ							ひゃあっ!?
+	ミョルニル
+Tween	ミョルニル	PunchPosition	y=50				NoWait
+	ミョルニル							ちょっとクズマスター!?\n待ちなさい！
+	マグナ							あの子って、確か……？
+FadeOut	black					.5
+CharacterOff
+	ミョルファ		3_3
+	ディーア	驚き2	2_3
+FadeIn	black					.5
+	ミョルファ							旦那さま、いつもあの論破の嵐に\nずっと付き合って\nいらっしゃるのですか？
+	ミョルファ							ミョルファなら……ミョルファなら\nもっと優しく論破して\nあげられますよ♪
+	ディーア	驚き2						ミョルファ……\n今日はミョルニルとマグナの二人と\n話したかったんじゃないのか？
+	ミョルファ
+Tween	ミョルファ	PunchPosition	y=50				NoWait
+	ミョルファ							はっ!! そ、そんなことは……！
+	ミョルファ							ろ、論破され続ける旦那さまが\nかわいそうだと思っただけですっ！\nはい、ろんぱ……！
+	ディーア	驚き2						オレを気遣ってくれるのは\nありがたいけど……
+	ディーア	汗2						ああやって割り込んで、\nしかも急に逃げ出したりしたら
+	ディーア	汗2						ミョルニルたちだって\nミョルファとどう接すればいいか\n分からないだろ？
+	ミョルファ							うっ、確かにそうです……\n絶対に挨拶はしておきたい\nところですけれど……でも……！
+	ディーア	驚き2
+Shake	Graphics					.7	NoWait
+	ディーア	驚き2	2_3
+	ミョルファ		3_3
+	ブライド	姉	画面外_左					マスターーーー!!!!
+Wait						.5
+	ブライド	姉	画面外_左			0
+Se	走る
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ブライド	MoveTo	x=-180 time=1
+ImageEffectOff	SpriteCamera	MotionBlur
+	ブライド	姉	1_3_b
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						メテオラ!?　メティア!?
+	ブライド	妹						お姉ちゃん、降ろしてってばぁぁ!!
+	ディーア	汗2						相変わらずメティアは\n担がれっぱなしなんだな
+	ブライド	妹悲しい						もう、いい加減\n降ろして欲しいのにぃ……！
+	ディーア	驚き2						それで、ガラティーンたちとは\n話せたのか？
+	ブライド	姉
+Tween	ブライド	PunchPosition	y=50				NoWait
+	ブライド	姉						それはもう見ての通り！\n無理だった！
+	ディーア	汗2						無理だったのかよ!!
+	ブライド	妹						話しかけようとしたんだけど、\nお姉ちゃんは叫ぶだけ叫んで\nそのままＵターンしてきちゃって
+	ディーア	汗2						なんで？
+	ブライド	姉						畏れ多いの！
+	ブライド	妹						エクスの名を冠しているとはいえ、\n私たちは所詮『エクスカリバーの\n伝承の模倣』だから……
+	ブライド	姉						エクスカリバーシリーズである\nレプリカちゃんたちと気軽に\n話すには……立場が違い過ぎるの！
+	ディーア	驚き2						そんなに気負うことは\nないと思うけどな？
+	ミョルファ
+Tween	ミョルファ	PunchPosition	y=50				NoWait
+	ミョルファ							メティアさんとメテオラさんの気持ち\nミョルファはよく分かります！
+	ディーア	驚き2						ミョルファも？
+	ミョルファ							ミョルファだって、ミョルニル様を\n目指して造られた\n『人造のミョルニル』ですから
+	ミョルファ	悲しい						いざ目指すべき本物を目の前にすると\n気持ちが空回ってしまって……
+	ブライド	姉						やっぱりそうだよね！
+	ブライド	妹						ミョルファちゃんなら\n分かってくれると思ってたよ！
+	ディーア	怪しい2						……意気投合してるところ悪いけど、\n三人とも、みんなと仲良く\nなりたいんだよな？
+	ブライド	妹						そりゃあ……
+	ミョルファ							そうですけど……
+	ディーア	怪しい2						うーん、まあ\n何かきっかけがあれば\nいけそうな気が……
+CharacterOff
+	リディ	笑い2	画面外_右
+	ディーア	怪しい2	1_2
+Se	走る
+Tween	リディ	MoveTo	x=90 time=1				NoWait
+	リディ	笑い2						マスター！\nもうすぐ、そこの教会でウェディング\nドレスの試着会が始まるよ！
+	ディーア							ウェディングドレス？
+	リディ	通常2						そう！\nそろそろ受付開始だって！\n係の人が言ってた！
+	ディーア	通常2						……そうか、その手があった！
+CharacterOff
+	ミョルファ							なんですか、旦那さま？
+CharacterOff
+	ディーア	通常2						メテオラ、メティア、ミョルファ！
+	ディーア	笑い2						ガラティーンやミョルニルたちと\n一緒にウェディングドレスの試着に\n参加するのはどうだ？
+CharacterOff
+	ミョルファ		2_2
+	ブライド	妹	1_3_b					ドレスの試着？
+	ミョルファ							だけど、ミョルファたちは既に\nドレスを着ていますけど……
+CharacterOff
+	ディーア	通常2						だからだよ\nウェディングドレスの試着は、\n一人じゃ難しいだろ？
+CharacterOff
+	ミョルファ		2_2
+	ブライド	妹	1_3_b					はっ！　なるほど！
+	ブライド	姉						え、なになに？\n全然分からないよマスター！
+	ミョルファ							つまり、ミョルファたちが\nミョルニル様たちのドレス選びと
+	ミョルファ							試着を手伝えば良い、\nということですね！
+CharacterOff
+	ディーア	笑い2						そういうことだ！
+CharacterOff
+	ブライド	妹						さすがマスターさん！
+	ブライド	姉						そっか！　マスター天才だね！
+	ブライド	姉						これでエクスカリバーシリーズの\nみんなに、メティアちゃんのお尻を\n堂々と見せつけることができる!!
+	ブライド	妹						お姉ちゃん何を目標にしてるの!?
+	ブライド	妹						そうだ、試着しに行くんだから\nもう私のこと担がなくていいよね？
+	ブライド	姉						よーし、レッツゴー！
+Se	走る
+Tween	ブライド	MoveTo	x=-800 time=1				NoWait
+	ブライド	妹						だから降ろしてってばぁぁ!!
+CharacterOff
+	ミョルファ							では、行ってまいりますね\n旦那さま
+CharacterOff
+	ディーア	笑い2						ああ、頑張れ！
+FadeOut	black					1
+CharacterOff						0
+	ディーア	驚き2	1_2
+	リディ	通常2	2_2
+Wait						1
+FadeIn	black					1
+	ディーア							あれ、全然戻ってこないな……？
+	リディ	怒り2						もー、マスターったら、\nただの試着とは違うんだよ？\nウェディングドレスだよ？
+	リディ							じっくり選びたいし、\n着るのだって時間かかるんだからー！
+	ディーア	驚き2						そういうものか
+	リディ							そうだよ！\nマスターは全然分かってない！
+	ディーア	汗2						そりゃ、オレは着ないしな……
+	リディ	怒り2						もう……マスターも選ぶの\n手伝ってみた方がいいんじゃない？
+	リディ	笑い2						みんなが帰ってきたら、\nリディのドレス、\n選んでみて欲しいな♪
+	ディーア	にやけ2						ああ、そうだな……！
+	リディ	怒り2						……えっちなやつはダメだからね
+	ディーア	本気2						なんでバレた!?
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						そりゃ分かるよ!!
+FadeOut	black					1
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+Wait						1
+FadeIn	black					1.5
+	リディ	驚き2						帰ってこないねー
+	ディーア	怪しい2						そうだな……
+	リディ	笑い2						ねぇマスター\nリディもドレス見てきていい？
+	ディーア	通常2						ああ、気をつけてな
+Se	走る
+Tween	リディ	MoveTo	x=800 time=1
+CharacterOff
+	ディーア	怪しい2						それにしても……\nいくらなんでも\n遅すぎないか……？
+CharacterOff
+	ブライド	通常	画面外_左
+Se	走る
+Tween	ブライド	MoveTo	x=0 time=1				NoWait
+	ブライド	姉悲しい						マースター!!!!
+CharacterOff
+	ディーア	驚き2						お、帰ってきたか！
+CharacterOff
+	ミョルファ	悲しい						旦那さまーー!!
+CharacterOff
+	ディーア	笑い2						どうだ、仲良くなれたか？
+CharacterOff
+StopBgm
+	ブライド	姉悲しい						そ、そ、それどころじゃないんだよ！
+CharacterOff
+Bgm	緊迫
+	ミョルファ	悲しい						旦那さま、申し訳ありません\nミョルファもまだ何がなんだか……
+CharacterOff
+	ディーア	驚き2						え？\nい、一体どうしたんだ？
+CharacterOff
+	ブライド	妹						お姉ちゃん！\n後ろから来てるよぉー!!
+CharacterOff
+Se	闇1
+	幻想体ブライド		1_3_b			1.5	NoWait
+Wait						.5
+Se	闇1
+	幻想体ミョルファ		2_2			1.5	NoWait
+Wait						2
+CharacterOff
+Bgm	バトル
+	ディーア	悔しい2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	悔しい2						なっ!?　げ、幻想体!?
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_414_02
+EndIf
+EndScenario
+
+# E_414_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	草原A
+	幻想体ブライド		3_3
+	幻想体ミョルファ		1_3
+FadeIn	white					.5
+Wait						1
+FadeOut	white					.3
+Se	光1
+FadeIn	white					.3
+Se	走る
+Tween	幻想体ブライド	MoveTo	x=800 time=1.5				NoWait
+Wait						.5
+Se	走る
+Tween	幻想体ミョルファ	MoveTo	x=-800 time=1.5				NoWait
+Wait						.5
+FadeOut	black					.5
+CharacterOff
+	ディーア	悔しい2
+Bgm	緊迫
+FadeIn	black					.5
+	ディーア	悔しい2						はぁ……なんとか追い払ったか……
+CharacterOff
+	ブライド	妹悲しい						ごめんねマスターさん\n逃げられちゃった……
+CharacterOff
+	ミョルファ	悲しい						ミョルファの力不足です……
+CharacterOff
+	ディーア	怒り2						気にするなって\nでも、どうして幻想体が……？
+CharacterOff
+	ブライド	姉						…………うーん、えっと……
+CharacterOff
+	ディーア	悔しい2						それに、他の魔剣たちの姿も\n見えないな……\n一体どこに行ったんだ……？
+CharacterOff
+	ブライド	姉悲しい						それが……
+	ブライド	妹悲しい						あの幻想体が現れたあと、\n全員、いなくなっちゃって……
+CharacterOff
+	ディーア	驚き2						い、いなくなった……!?
+CharacterOff
+	ミョルファ	悲しい						いえ、正確には、\n幻想体に連れて行かれてしまった\nという方が正しいです
+CharacterOff
+	ディーア	悔しい2						なっ!?\nどこに……!?
+CharacterOff
+	ミョルファ							ミョルファが案内しま……\nあっ!!
+CharacterOff
+	幻想体ブライド							……………………
+CharacterOff
+	ディーア	怒り2						幻想体……？\nさっきのとは違うな……
+CharacterOff
+	幻想体ブライド							ドコニイルノ……？
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							ちょっ！ それフェアで使ってる\nキャンドル……！\n勝手に持って行くな！
+CharacterOff
+Param	character_grayout=false
+	スモーク		エフェクト表
+Se	闇1
+	幻想体ブライド					.5
+Tween	幻想体ブライド	PunchPosition	y=50				NoWait
+	幻想体ブライド							…………!!
+Se	走る
+Tween	幻想体ブライド	MoveTo	x=800 time=1				NoWait
+FadeOut	black					.5
+CharacterOff
+	幻想体ミョルファ
+FadeIn	black					.5
+Tween	幻想体ミョルファ	MoveTo	x=90 time=1
+Tween	幻想体ミョルファ	MoveTo	x=-90 time=1				NoWait
+	幻想体ミョルファ							…………サビシイ…………\nサビシイヨ…………
+FadeOut	black					.5
+CharacterOff
+	ブライド	妹
+FadeIn	black					.5
+	ブライド	妹						うわっ！ あの幻想体も\n飾り全部持ってる！
+	ブライド	姉						ええっ!?　どうしよう\nこのままじゃ、ブライダルフェアが!!
+CharacterOff
+	ミョルファ	悲しい						もう！　ミョルファの姿で勝手に\n悪さしないでください！
+FadeOut	black					.5
+CharacterOff
+	幻想体ブライド
+FadeIn	black					.5
+	幻想体ブライド							……………………
+Se	走る
+Tween	幻想体ブライド	MoveTo	x=800 time=4				NoWait
+Wait						1.5
+FadeOut	black					.5
+CharacterOff
+	ディーア	怪しい2
+FadeIn	black					.5
+	ディーア	怪しい2						…………？\nただのテーブルや椅子は\n持って行かないのか……
+CharacterOff
+	ブライド	妹						あれ……？\n確かに、何でも持っていくわけじゃ\nないみたい……
+CharacterOff
+	幻想体ミョルファ
+Se	走る
+Tween	幻想体ミョルファ	MoveTo	x=800 time=2				NoWait
+Wait						1
+CharacterOff
+	ディーア	本気2						逃げた……!?\n追いかけるぞ！
+FadeOut	black					1
+Bg	教会前
+	ディーア	怒り2
+FadeIn	black					.5
+	ディーア							この中だな……
+CharacterOff
+	ミョルファ							旦那さま……ミョルニル様たちが\n連れ去られてしまったのもここです
+CharacterOff
+	ディーア	怒り2						よし、ならすぐにでも……！
+Tween	ディーア	MoveTo	x=-90 time=1				NoWait
+FadeOut	white					.3
+Se	魔1
+FadeIn	white					.3
+Tween	ディーア	MoveTo	x=0 time=1				NoWait
+	ディーア	悔しい2						なっ!?\n……弾かれた？
+CharacterOff
+	ブライド	妹						入れないみたいだね……
+CharacterOff
+	幻想体ミョルファ		画面外_右
+Tween	幻想体ミョルファ	MoveTo	x=0 time=1.5
+Se	光1
+CharacterOff	幻想体ミョルファ					1
+Wait						1
+	ディーア	怒り2						どうやら、結界があるみたいだ\n幻想体だけが通れるのか……
+CharacterOff
+	ブライド	姉						諦めちゃダメだよ！\nほら、今あの子が入っていった壁！\n今なら通れるかもしれない！
+Se	走る
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ブライド	MoveTo	x=-800
+	ブライド	妹						ちょぉっ!!\n私を担いだまま突撃しないでぇぇ!!
+Se	打1
+ImageEffectOff	SpriteCamera	MotionBlur
+	ブライド	通常	画面外_左
+StopBgm
+Se	走る
+Tween	ブライド	MoveTo	x=0 time=3				NoWait
+	ブライド	姉						ふぅ……！\nいい戦いだったわ！
+CharacterOff
+	ディーア	汗2						えっと……入れなかったんだよな？
+CharacterOff
+Bgm	緊迫
+	ブライド	姉						そうね！ メティアちゃんの\nお尻が引っかかっちゃって！
+	ブライド	妹悲しい						私のせいじゃないよね!?\nお姉ちゃんも通れてなかったよねぇ!?
+	ブライド	姉						よし、次はもっとメティアちゃんの\n可愛いお尻をアピールしよう!!
+	ブライド	妹						どういう理論でそうなるの!?
+CharacterOff
+	ミョルファ							メテオラさん……\n多分それは無理かと
+CharacterOff
+	ディーア	汗2						一旦落ち着こう\n状況を整理する方が先だ
+	ディーア	怒り2						見た限り、\nこの辺をうろつく幻想体よりも、
+	ディーア							さっき三人のことを\n追いかけてきた幻想体の方が\n魔力の反応が強かった
+	ディーア	悔しい2						そして、\n同じ力をこの建物の中から感じるんだ
+CharacterOff
+	ミョルファ							では、最初にミョルファたちを\n襲ってきた幻想体はこの中に……？
+CharacterOff
+	ディーア	怒り2						ああ、おそらくな……\n魔剣や物をここに集めて、\n一体何をしてるんだ……？
+CharacterOff
+	ブライド	妹						魔力をたくさん吸い取って\n仲間を増やしてるんじゃないかな？
+CharacterOff
+	ディーア	怪しい2						それもあるとは思うが……\nもっと別の目的が\nありそうな気がする
+	ディーア	怒り2						今分かるのは、この中の元凶を\nどうにかしないと、\n事態は悪化する一方ってことだ……
+CharacterOff
+	ミョルファ	悲しい						でも、その敵は結界の中ですよ……
+CharacterOff
+	ブライド	姉						ということは、私たち……
+	ブライド	妹						どうにもできない……？
+CharacterOff
+	ディーア	怒り2						あいつを結界の外におびき寄せる\nことが出来れば\nどうにかできると思うんだが……
+FadeOut	black					.5
+ImageEffect	SpriteCamera	Sepia
+CharacterOff
+	幻想体ブライド
+StopBgm
+FadeIn	black					.5
+	幻想体ブライド							ドコニイルノ……？
+FadeOut	black					.5
+CharacterOff
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	black					.5
+	ディーア	悔しい2						幻想体が何を探しているのか……\nそれさえ分かれば……！
+CharacterOff
+	ブライド	姉						でも……\n幻想体の目的なんて、どうやって\n調べるの？
+CharacterOff
+	ディーア	怪しい2						うーん、幻想体の姿を見る限り\nあれは三人の魔力を吸ってるみたい\nなんだが……
+	ディーア	驚き2						あの幻想体が出てきたとき\n三人は近くにいたんだよな？
+CharacterOff
+	ミョルファ	悲しい						え、ええ、まあ……
+CharacterOff
+	ブライド	妹						近くにいたというか……
+	ブライド	姉						私のせいというか!!
+CharacterOff
+	ディーア	驚き2						……え？
+Se	回想
+FadeOut	white					.3
+CharacterOff
+Bgm	平和
+ImageEffect	SpriteCamera	Sepia
+FadeIn	white					.3
+	ブライド	妹						よし、ドレス選びなら、\n私たちもきっと自然に\nガラティーンさんたちと話せるよ！
+	ブライド	妹						頑張ろうね、お姉ちゃん！\n……ってあれ？
+	ミョルファ							メティアさん、どうしたんですか？
+	ブライド	妹						お姉ちゃん、何持ってるの？
+	ブライド	姉						え？　これのこと？
+CharacterOff
+	花嫁ベア		エフェクト下部
+Wait						1.5
+CharacterOff
+	ミョルファ							どうしたんですか、これ？
+	ブライド	姉						建物の前で拾ったの！\nメティアちゃんに似て可愛いでしょ！
+	ブライド	妹						ええっ!?\n勝手に持ってきちゃったの!?
+	ミョルファ							メテオラさん、ダメですよ\n元の場所に返さないと……
+	ブライド	姉						大丈夫だよー！\nだってほら、この子のドレス\nほぼメティアちゃんとお揃いだもん！
+	ブライド	妹						大丈夫の理論がめちゃくちゃ\nなんだけど！
+CharacterOff
+	　　　　　　　　　　							……ドコ……
+CharacterOff
+	ブライド	妹						えっ？
+	ミョルファ							何か言いました？
+	ブライド	姉						私は何も……？\nもしかして、メティアちゃんの\nお尻が意思を……!?
+	ブライド	妹						そんなわけないでしょ！
+CharacterOff
+StopBgm
+	　　　　　　　　　　							ドコニイルノ……
+CharacterOff
+	花嫁ベア		エフェクト表
+CharacterOff	花嫁ベア					1
+Se	闇1
+	幻想体ブライド		3_3			.5
+Wait						.5
+Se	闇1
+	幻想体ミョルファ		1_3			.5
+Wait						1
+FadeOut	black					.5
+CharacterOff
+FadeIn	black					.5
+Param	character_grayout=false
+	ブライド	悲しい	1_3_b
+	ミョルファ	悲しい	2_2
+	三人							え……？
+Param	character_grayout=true
+FadeOut	white					.5
+CharacterOff
+Bgm	絶望
+ImageEffectOff	SpriteCamera	Sepia
+	ミョルファ	悲しい
+FadeIn	white					.3
+	ミョルファ							というわけなんです……
+CharacterOff
+	ディーア	驚き2						じゃあ、そのくまのぬいぐるみが\n幻想体になったのか!?
+CharacterOff
+	ブライド	姉						その通り！　ごめんなさい！
+CharacterOff
+	ミョルファ							たしか、ウェディングドレスを着た\nぬいぐるみでしたけど……
+CharacterOff
+	ディーア	怒り2						ってことは……ウェルカムベアか
+CharacterOff
+	ブライド	姉						ウェルカムベア？
+CharacterOff
+	ディーア	通常2						ああ、結婚式の時に、\n入口でお客様を迎えるぬいぐるみだよ\n花嫁と花婿の代理だな
+CharacterOff
+	ブライド	妹						さすがマスターさん\n詳しいんだね
+CharacterOff
+	ディーア	あはは2						まあ、リディが楽しそうに解説\nしてたのを聞いてただけなんだけど
+CharacterOff
+	ミョルファ							でも、メテオラさんが持っていたのは\n一体だけでした
+CharacterOff
+	ブライド	妹						お、お姉ちゃん！\n花嫁さんと花婿さんを\n離れ離れにしちゃったの!?
+	ブライド	姉						えーっと、見つけたときは\n一匹しかいなかったはずだけど……
+CharacterOff
+	ディーア	怒り2						ウェルカムベアが\n何かを探し回るとしたら……\n片割れでほぼ間違いないだろうな
+	ディーア	怪しい2						つまりあの幻想体たちは\nもう一体のベアを探して
+	ディーア	怪しい2						『結婚式』に関係のあるものを\n無差別に奪っていってるってことか
+CharacterOff
+	ミョルファ							それで、装飾のないテーブルなどは\n持って行かなかったんですね……
+CharacterOff
+	ブライド	姉						でも、それなら良かった！
+	ブライド	妹						え……？\nなにが良いの？　お姉ちゃん
+	ブライド	姉						幻想体がもう一体のベアを\n見つけたら、\nきっと結界が解けるでしょ？
+	ブライド	姉						つまり、何もせずに待ってれば\nいいんじゃないかな！
+CharacterOff
+	ディーア	怪しい2						そう確信できればいいんだけどな……
+CharacterOff
+	ミョルファ							何か心配があるのですか？
+CharacterOff
+	ディーア	怒り2						幻想体が目的のものを\n見つけたとして、結界が解けるとは\n限らないだろ？
+CharacterOff
+	ブライド	姉						えっ？\nそうかなぁ……？
+	ブライド	妹						も、もし結界が解かれなかったら……
+CharacterOff
+	ディーア	悔しい2						ああ、結界を力づくで破壊できない\n限り、魔剣たちを助ける方法が\nなくなる……
+CharacterOff
+	ブライド	悲しい						そっ……そんなぁ!!
+CharacterOff
+	ミョルファ	悲しい						それは、嫌です……!!
+CharacterOff
+	ディーア	悔しい2						ああ、オレだって\nそんな事態は避けたい
+	ディーア	怒り2						だから、魔剣たちを確実に取り戻す\nためには、
+	ディーア	怒り2						もう一体のウェルカムベアを探すのが\n一番いいと思うんだ
+CharacterOff
+	ブライド	妹						そうだね……！\nこっちが先にもう一体を見つけよう！
+	ブライド	姉						まだ挨拶もしてないのに、\nエクスカリバーシリーズのみんなと\nもう会えないのは嫌だよ！
+CharacterOff
+Bgm	緊迫
+	ミョルファ							……はっ！\n旦那さま、もう一体を探して幻想体が\n物を取っていくとしたら
+	ミョルファ							最初にいた会場も危ないんじゃ……！
+CharacterOff
+	ディーア	本気2						……！\n確かにそうだ、急いで戻るぞ！
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_414_03
+EndIf
+EndScenario
+
+# E_414_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	教会前
+	ディーア	怒り2	画面外_左
+FadeIn	white					.5
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1
+	ディーア							くっ、遅かったか！
+CharacterOff
+	リディ	驚き2						マスター！\n一体何がどうなってるの!?
+CharacterOff
+	ディーア	本気2						リディ、無事か!?
+CharacterOff
+	リディ	驚き2						うん……リディは平気だけど\n幻想体が急にたくさん来て……！
+CharacterOff
+	ブライド	通常	1_3_b
+	ミョルファ		2_2					飾り付けも、出されていた食事も\n何もありませんね……
+	ブライド	妹						というか、ほぼ何も残ってないね……
+CharacterOff
+	リディ	悲しい2						リディが目を離した隙に、\nドレスを着てた魔剣ちゃんたちも\n連れて行かれちゃって……！
+CharacterOff
+	ミョルファ		2_2
+	ブライド	妹	1_3_b					じゃあ、残ってる魔剣は\n私たちだけ？
+	ミョルファ							そんな……
+CharacterOff
+	ディーア	通常2						そんなに心配しなくても大丈夫だ\n連れていかれた場所も\nもう分かってる
+	ディーア	怒り2						あの幻想体は、\nウェルカムベアの片割れを探してる
+	ディーア	怒り2						取っていくのは結婚に関連するもの\nだけだから、\nドレスを着てなければ大丈夫だ
+	ディーア	通常2						リディ、事件が落ち着くまで\nここで待っててくれ
+CharacterOff
+	リディ	悲しい2						マスター……
+CharacterOff
+	ディーア	通常2						リディはドレスに着替えてるわけじゃ\nないから、幻想体の標的には\nならないはずだ
+	ディーア	怒り2						むしろ今は、オレたちと一緒に\nいる方が幻想体に狙われやすい……
+CharacterOff
+	リディ	通常2						うん、わかった……気を付けてね！
+CharacterOff
+	ディーア	通常2						ああ
+CharacterOff
+	ミョルファ							さあ行きましょう、旦那さま
+CharacterOff
+	ブライド	拡大姉	エフェクト表					この私にどーんと\n任せてれば大丈夫よ！
+CharacterOff
+	ブライド	妹						事の発端はお姉ちゃんでしょぉー!?
+FadeOut	black					.5
+StopBgm
+CharacterOff
+Bg	草原A
+	ミョルファ		2_2
+	ブライド		1_3_b
+Wait						1
+FadeIn	black					.5
+Bgm	バトル
+	ミョルファ							まずは教会の周辺を探しますよ！
+	ブライド
+Tween	ブライド	PunchPosition	y=50				NoWait
+	ブライド							おー!!!!
+CharacterOff
+	ディーア	驚き2						三人とも、やけに張り切ってるな？
+CharacterOff
+	ミョルファ		2_2
+	ブライド		1_3_b
+	ブライド	妹						だって、元々はお姉ちゃんが\nあのベアを拾っちゃったし……
+	ブライド	姉						せめてその分、マスターさんの役に\n立たないと……ってメティアちゃんが\nさっき呟いてたよ！
+	ブライド	姉						かー！　私のメティアちゃん\nかわいい！
+	ブライド	妹						お姉ちゃん!!
+	ミョルファ							責任、というのもありますけど\n幻想体は数も多くて力も強大ですから
+	ミョルファ							私たちだけの力で解決できたら\nそれが力の証明になりますよね……！
+	ブライド	妹						偽物の私たちでも\nエクスカリバーシリーズに\n近付いたことになるかなって……
+	ブライド	姉						私たちエクスカリバーシリーズ\nじゃないけどね！
+	ブライド	妹						そうなんだけど！\nマスターさんとなら、もっとずっと\n強くなれるかもしれないし！
+	ブライド	姉						そっか、そうすれば\nメティアちゃんのお尻も最強に！
+	ブライド	妹						お尻だけ強くしないでよ！\n全体的に強くなりたいんだから！
+	ミョルファ							ミョルファだって、\nミョルニル様たちを目指しています
+	ミョルファ							今回の件を通して\nこの有り余る力を完璧に制御できれば\n……本物になれるかもしれない！
+	ブライド	姉						よーし、早くもう一体のベアを\n見つけて、幻想体も倒しちゃおう！
+Se	走る
+Tween	ブライド	MoveTo	x=800 time=1				NoWait
+	ブライド	<Off>						ちょっ!! またー!!\n担いだまま走らないでぇぇぇぇ!!
+FadeOut	black					.5
+StopBgm
+CharacterOff
+	ミョルファ	悲しい
+Wait						1
+FadeIn	black					.5
+Bgm	緊迫
+Tween	ミョルファ	MoveTo	x=180 time=1
+Tween	ミョルファ	MoveTo	x=-180 time=1.5
+Tween	ミョルファ	MoveTo	x=0 time=1				NoWait
+	ミョルファ							だめです……
+CharacterOff
+	ディーア	驚き2						ミョルファ、大丈夫か？
+CharacterOff
+	ディーア	通常2	1_2
+	ミョルファ	悲しい	2_2					ごめんなさい、旦那さま\nベアはまだ見つかりません……
+	ディーア	通常2						ミョルファが謝ることじゃないだろ
+	ミョルファ	悲しい						だけど、もし幻想体が先に\n探し物を見つけたら！
+	ディーア	通常2						いや、まだ大丈夫だ\n少し前からこの辺でも幻想体を\n見かけるようになったからな……
+	ディーア							行動の範囲を広げてるってことは\nまだ探し物は見つかってないんだよ\nオレたちと一緒さ
+	ミョルファ	悲しい						でも、それも時間の問題ですよね
+	ディーア	驚き2						それは、そうだけど……
+	ミョルファ	悲しい						やっぱり急がないと……！
+CharacterOff
+	ブライド	<Off>						あったよマスターー!!
+CharacterOff
+	ミョルファ		2_2
+	ディーア	驚き2	1_2					えっ？　ぬいぐるみ!?
+CharacterOff
+	ブライド	姉
+Tween	ブライド	MoveFrom	x=-800 time=1				NoWait
+	ブライド	姉						ほら見て―！
+CharacterOff
+	魔物		2_3_m					……………………
+CharacterOff
+Bgm	バトル
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						ってそれは魔物だーー!!
+CharacterOff
+	ブライド	姉						えっ、こんなにかわいいのに……？
+	ブライド	妹						マスターさんごめんなさい！\nお姉ちゃんが可愛がって\nみんな連れてきちゃって……
+	ブライド	姉						大事にするから、\n飼ってもいいよね？
+CharacterOff
+	ディーア	汗2						魔物はペットじゃありません!!
+CharacterOff
+Se	闇1
+	幻想体ブライド					.5		…………シアワセ…………\n……チョウダイ……？
+CharacterOff
+	ミョルファ							旦那さま！\n幻想体も……！
+	ディーア	悔しい2						仕方ない……迎え撃つぞ！
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_414_04
+EndIf
+EndScenario
+
+# E_414_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	草原A
+	ディーア	悔しい2
+FadeIn	black					.5
+	ディーア	悔しい2						はぁ、はぁ……
+CharacterOff
+	ミョルファ	悲しい						もう二回も戦っているのに、\n全然倒せないなんて……！
+CharacterOff
+	ブライド	妹悲しい						やっぱり……私たちで\nなんとかできる相手じゃないのかな
+CharacterOff
+	ディーア	通常2						三人とも、あまり気にするなって
+	ディーア	通常2						今は幻想体を倒せなくても\nウェルカムベアを先に見つけられれば\n活路が見えるはずだ
+	ディーア	笑い2						もう少し遠くまで探してみよう、な？
+CharacterOff
+	ブライド	姉						そう、だよね！\nこっちが先にベアを見つけないと……
+FadeOut	black					.5
+CharacterOff
+Bg	森林A
+	ミョルファ	悲しい
+FadeIn	black					.5
+	ミョルファ	悲しい						ダメ……やっぱりどこを探しても\n見つからない……
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	ミョルファ	悲しい						きっとミョルニル様やマグナ様なら\n幻想体を相手に苦戦することもなくて
+	ミョルファ							旦那さまを困らせることなんて\nないんだろうな……
+	ミョルファ							ミョルファはきっといつまでも\n不出来な偽物のまま……
+FadeOut	black					.5
+CharacterOff
+	ブライド	妹
+FadeIn	black					.5
+	ブライド	妹						お姉ちゃん、見つかった？
+	ブライド	姉						だ、だめ……腕がしびれてきた……
+	ブライド	妹						おろせば良くない!?\nその悩み、私をおろせば解決しない!?
+	ブライド	姉						いや、ダメだよ……\nメティアちゃんは頑張らなくていいの
+	ブライド	姉悲しい						今回のことは\nお姉ちゃんのせいなんだから
+	ブライド	妹						お姉ちゃん……
+	黒グラデーション		エフェクト表
+	ブライド	姉悲しい						でも、なんだか凹んじゃうなぁ……
+	ブライド	妹悲しい						え？
+	ブライド	姉悲しい						レプリカちゃんやガラティーンさん\nみたいにさ……
+	ブライド	姉悲しい						私もちゃんと\nエクスカリバーシリーズだよ！って\n言えるだけの伝承があったら
+	ブライド	姉悲しい						こんなに……力が足りないって……\n悩むことなかったのかなぁ……
+	ブライド	妹悲しい						……お姉ちゃん……\n私たちは二人で一つなんだよ？\n力が足りないのは、私も一緒……
+	ブライド	妹悲しい						役立たずでごめんね、お姉ちゃん
+	ブライド	姉悲しい						ううん、私の方が……
+FadeOut	black					.5
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2
+FadeIn	black					.5
+	ディーア							二人とも、自分自身を\n追い込みすぎなんじゃないか？
+CharacterOff
+	ブライド	妹						ま、マスターさん……!?
+	ブライド	姉						ミョルファちゃんも！
+CharacterOff
+	ミョルファ	悲しい						ベアの方は……どうですか？
+CharacterOff
+	ブライド	妹悲しい						それが、見つけられてなくて……
+CharacterOff
+	ディーア	通常2						落ち込まなくていいって\n三人で力を合わせれば、きっと\n見つかるさ
+CharacterOff
+	ミョルファ	悲しい						……旦那さま\n残ってるのがミョルファで、\nごめんなさい
+CharacterOff
+	ディーア	驚き2						……え？
+CharacterOff
+	ブライド	姉悲しい						私たちも……
+	ブライド	妹悲しい						全然役に立てなくて……
+CharacterOff
+	ディーア	悔しい2						そんなこと……！
+CharacterOff
+	ブライド		1_3_b
+	ミョルファ	悲しい	2_2					もしここにいたのがミョルニル様\nなら、こんなことにはなってないです
+	ブライド	妹悲しい						レプリカちゃんやガラティーンさん\nの方が、もっとマスターさんのこと\n助けられてるはずだよ……
+Param	character_grayout=false
+	ブライド	悲しい
+	三人							だから……ごめんなさい
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						そんなことない！\nオレはお前たちを信じてる……！\nだから……
+CharacterOff
+	幻想体ミョルファ	<Off>						ゼッタイニユルサナイ……
+CharacterOff
+	ディーア	悔しい2						……え？
+CharacterOff
+Bgm	バトル
+Se	闇1
+	幻想体ミョルファ					1		ユルサナイ……ユルサナイ……！
+CharacterOff
+	ディーア	怒り2						くっ……！\nこんなところまで！
+CharacterOff
+	ミョルファ	悲しい						だ、旦那さま……!!
+CharacterOff
+	ブライド	妹悲しい						マスターさん……！
+CharacterOff
+	ディーア	悔しい2						こっちに来る！\nくっ、やるしかない……！
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_414_05
+EndIf
+EndScenario
+
+# E_414_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	森林A
+	ブライド	妹悲しい
+FadeIn	black					.5
+	ブライド	妹悲しい						また……\nまた倒せなかった……！
+	ブライド	姉悲しい						……やっぱり私たちじゃ\nダメなのかなぁ
+	ブライド	妹悲しい						なんとかして幻想体を\n倒さないといけないのに……！
+CharacterOff
+	ディーア	怒り2						メテオラ、メティア……
+CharacterOff
+	ミョルファ	悲しい						所詮ミョルファは偽物です\n力不足の偽物が、どうにかできる問題\nじゃなかったんです
+	ミョルファ							このままじゃずっと\nお役に立てないかもしれません……
+CharacterOff
+	ディーア	悔しい2						ミョルファ……
+FadeOut	black					1
+CharacterOff
+Bg	教会前
+Wait						.5
+FadeIn	black					.5
+	ミョルファ	悲しい						旦那さま……\nどうして会場まで戻るんですか？
+CharacterOff
+	ディーア	怒り2						もしかしたら、見落としてる場所が\nあるかもしれないだろ？
+	ディーア	通常2						案外こういうのって、\n最初の場所にあったりするものだし
+CharacterOff
+	ブライド	姉悲しい						でも、そっちは\nいっぱい幻想体がいるよ？
+	ブライド	妹悲しい						次こそとは思うけど\nまた逃げられちゃったら……
+	ミョルファ	悲しい						そうですよ、旦那さま\n悔しいですけど……\n酒場に残るもっと強い魔剣なら……！
+CharacterOff
+	ディーア	怒り2						オレは、お前たちと一緒に戦うって、\nもうとっくに決めてる
+	ディーア	通常2						三人なら、絶対出来るさ
+CharacterOff
+StopBgm
+Param	character_grayout=false
+	ブライド	悲しい	1_2
+	ミョルニル=アルファ	悲しい	2_2
+	三人							え？
+Param	character_grayout=true
+CharacterOff
+Bgm	凱旋
+	ディーア	通常2						あの幻想体を倒せるだけの力はあるし\n必ず魔剣たちを助けられるって\n確信してる
+CharacterOff
+	ブライド	妹悲しい						……どうして、そう思うんですか？
+CharacterOff
+	ディーア	通常2						一緒に戦ってるからさ
+CharacterOff
+	ミョルファ	悲しい						でも、ミョルファたちは\n一度も幻想体を倒せていません
+CharacterOff
+	ディーア	怒り2						……そうだな\nオレもずっと不思議だったんだ
+	ディーア	悔しい2						でも、三人の気持ちを聞いて\nその上で一緒に戦ってみて\n分かったんだ
+	ディーア	怒り2						メテオラとメティア\nそれにミョルファは、憧れを越える\nことを、怖がってるんじゃないかって
+CharacterOff
+	ミョルファ	悲しい						怖がる……？
+CharacterOff
+	ブライド	姉悲しい						私たちが？
+CharacterOff
+	ディーア	怒り2						自分でも気づかないうちに\n力を抑えてるんじゃないか？
+CharacterOff
+	ミョルファ	悲しい						そんなことは……
+CharacterOff
+	ディーア	通常2						レプリカやガラティーン、\nそれにミョルニルやマグナも
+	ディーア	怒り2						メテオラ、メティア、\nそしてミョルファの存在の根幹に\n関わる大事な魔剣たちだろ？
+	ディーア	悔しい2						三人は、その魔剣たちと能力の差を\n比べて、自分たちが劣っていると\n思い込んでる……
+	ディーア	怒り2						そして同時に、その目指すべき目標に\n近付けるかもしれない\nという可能性を前にして、
+	ディーア	通常2						どうしたらいいか\n分からなくなってるんじゃないかと\n思うんだ
+CharacterOff
+	ブライド	妹悲しい						……………………
+	ブライド	姉悲しい						そう、かもしれないね……
+CharacterOff
+	ミョルファ	悲しい						……旦那さまの言う通り、です\nミョルファたちは、知らない間に\nそう思い込んでいたかもしれません
+CharacterOff
+	ブライド	妹悲しい						もし憧れを超えてしまったら、\nその先には何もないんじゃないかって
+	ブライド	姉悲しい						勝手に怯えていただけ……
+CharacterOff
+	ディーア	通常2						本物か偽物かなんて関係ない\n他と比較する必要なんてないんだ
+	ディーア	通常2						ここにいるデミエクス=ブライドと\nミョルニル=アルファを、\nオレは今、心の底から信頼してる
+	ディーア	笑い2						大丈夫、力なら十分持ってるさ
+	ディーア	通常2						この場所、この時、\nあの幻想体を倒せるのは、\nお前たちの憧れの存在じゃない……
+	ディーア	怒り2						それができるのは……
+CharacterOff
+	ミョルファ							ミョルファたちだけ……！
+CharacterOff
+	ディーア	通常2						そういうこと！
+CharacterOff
+	ブライド	妹						あっ……！\nお姉ちゃん、足元……！
+FadeOut	white					.5
+CharacterOff
+	花婿ベア		エフェクト下部
+FadeIn	white					.5
+	花婿ベア
+Wait						1.5
+CharacterOff
+	ブライド	姉						あっ……あった！\nあったよマスター！
+CharacterOff
+	ミョルファ							もう一体のウェルカムベアですね！
+CharacterOff
+	ディーア	通常2						やったな……！
+CharacterOff
+	ブライド	妹						教会からこんなに近かったなんて……
+CharacterOff
+	ディーア	怒り2						多分、焦りで色んなことが\n見えなくなってたんだ\nオレたちも、そして……
+CharacterOff
+StopBgm
+Param	character_grayout=false
+Se	闇1
+	幻想体ブライド		1_3_b					カエシテ……
+Se	闇1
+	幻想体ミョルファ		2_2					ワタシノダイジナ……！
+Param	character_grayout=true
+CharacterOff
+	ディーア	本気2						この幻想体もな
+CharacterOff
+	ブライド	妹						あっ！ この子は……！
+CharacterOff
+	ミョルファ							最初にミョルファたちを\n追いかけてきた幻想体です！
+CharacterOff
+Bgm	Xmasボス
+Param	character_grayout=false
+	幻想体ブライド		1_3_b
+	幻想体ミョルファ		2_2
+	幻想体ブライド							カエセ……カエセ……!!
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2						この様子じゃ、素直に\n渡しても収まりそうにないな
+CharacterOff
+	ブライド	姉						ど、どうするのマスター!?
+CharacterOff
+	ディーア	本気2						こいつを倒して、魔力を削ぎ落す！
+CharacterOff
+	ブライド	妹						私たちで、だね？
+CharacterOff
+	ディーア	笑い2						ああ、できるだろ？
+CharacterOff
+	ミョルファ	拡大	エフェクト表					はい！\n任せてください、旦那さま！
+CharacterOff
+	ブライド	妹						うん、そうだね\n私たちならいけるよ！
+CharacterOff
+	ブライド	拡大姉	エフェクト表					よーし！\nメティアちゃんのお尻の威力！\n存分に見せつけちゃおう!!
+CharacterOff
+	ブライド	拡大妹	エフェクト表					もう！\nお姉ちゃんはそうやってまたー！
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_414_06
+EndIf
+EndScenario
+
+# E_414_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	教会前
+	幻想体ブライド		1_3_b
+	幻想体ミョルファ		3_3
+FadeIn	white					.5
+Wait						1
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.3
+Tween	幻想体ブライド	ShakePosition	x=10				NoWait
+Wait						.5
+Tween	幻想体ミョルファ	ShakePosition	x=10
+Wait						.5
+Se	ボス殺
+FadeOut	white					.3
+FadeIn	white					.3
+Se	光1
+CharacterOff	幻想体ブライド					1
+CharacterOff	幻想体ミョルファ					1
+Wait						.5
+	花嫁ベア		エフェクト下部			1
+Wait						1.5
+FadeOut	black					.5
+CharacterOff
+	ブライド		1_3_b
+	ミョルファ		2_2
+StopBgm
+FadeIn	black					.5
+	ブライド							や……！
+	ミョルファ							やった……！
+CharacterOff
+Param	character_grayout=false
+	ブライド		1_3_b
+	ミョルファ		2_2
+Tween	ブライド	PunchPosition	y=50				NoWait
+Tween	ミョルファ	PunchPosition	y=50				NoWait
+	三人							やったーーーー!!
+Param	character_grayout=true
+Bgm	凱旋
+CharacterOff
+	ディーア	通常2						結界も破れたみたいだな！
+CharacterOff
+	ミョルファ							見て下さい！\n中からみんなが出てきます……!!
+CharacterOff
+	ガラティーン							ふー、やっと出られたー！
+CharacterOff
+	ミョルニル							ひどい目にあったわ！
+CharacterOff
+	エクス=レプリカ							ご主人様、\n一体なにがどうなってたの!?
+CharacterOff
+	ディーア	通常2						幻想体が暴走してみんなを\n閉じ込めてたんだ\nだけど、もう解決したよ
+CharacterOff
+	ガラティーン							えっ？　そうなの!?
+CharacterOff
+	ディーア	笑い2						ああ、\nメテオラとメティア\nそれにミョルファのおかげでな
+CharacterOff
+Param	character_grayout=false
+	ブライド		1_3_b
+	ミョルファ		2_2
+	三人							…………!!
+Param	character_grayout=true
+CharacterOff
+	ミョルファ
+Tween	ミョルファ	PunchPosition	y=50				NoWait
+	ミョルファ							だ、旦那さま……!?
+CharacterOff
+	ブライド	妹
+Tween	ブライド	ShakePosition	x=10				NoWait
+	ブライド	妹						マスターさんそんな……！\nまだ心の準備が!!
+CharacterOff
+	ブライド		2_2
+	エクス=レプリカ		1_3					ありがとう\nおかげで助かったわ！
+	ブライド	姉						いや、えっと、あの……！
+	ブライド	妹						もしマスターさんがいなかったら\nど、どうなってたことか……
+	エクス=レプリカ							それでも、戦ったのは二人でしょ！\nとっても強いのね！
+	ブライド	通常						…………!!\nありがとう、ございます！
+CharacterOff
+	ミョルファ		2_2
+	ミョルニル		1_2					あなたが、あの教会から\n助けてくれたのね？
+	ミョルファ							あ、あの、\nミョルファはただ旦那さまの\nお手伝いをしただけというか……
+	ミョルニル							あのダメマスターは魔剣がいなきゃ\n何もできないわ\nつまり、あなたがいて良かったのよ
+	ミョルファ							ミョルニル様……!!
+	ミョルニル							助けてもらったんだから、\nお礼を言うのが当然よね\n……ありがとう
+	ミョルファ							…………はい！
+FadeOut	white					1
+CharacterOff
+Bgm	平和
+	　　　　　　　　　　
+Wait						1
+FadeIn	white					1
+	ディーア	驚き2						さて、あとは幻想体が手あたり次第\n持って行った飾り付けを\n元の場所に戻さないと、だな
+	ディーア	汗2						はぁ……骨が折れるな……
+	ディーア	驚き2						ってあれ\nメテオラ、メティア……？\nミョルファもいるのか？
+CharacterOff
+	ブライド	妹						あっマスターさん！
+	ブライド	姉						おっ！ さては\nこのかわいいメティアちゃんのお尻を\n眺めに来たなー！
+CharacterOff
+	ディーア	汗2						いや、違うけど……\n教会の入り口で何してるんだ？
+CharacterOff
+	ミョルファ							ふふ、これですよ♪
+CharacterOff
+	ディーア	驚き2						あっ
+CharacterOff
+Se	ラブ
+	ウェルカムベア		エフェクト下部					　
+CharacterOff
+	ディーア	通常2						並べてあげたんだな
+CharacterOff
+	ブライド	姉						それだけじゃないよ！\nこれはこの子たちの結婚式なの！
+CharacterOff
+	ミョルファ							幸い、飾りは周りにたくさん\nありましたから……\nあっ、係の方にも許可を取りましたよ
+	ミョルファ							なんでもこのウェルカムベアは\n結婚式の中止で使う予定がなくなった\nものらしくて
+CharacterOff
+	ディーア	驚き2						それであんなに\n結婚に固執してたのか……
+CharacterOff
+	ブライド	姉						花嫁と花婿の代理の子たちだけどね
+	ブライド	妹						代理でも関係ないよ\nそうでしょ、マスターさん？
+CharacterOff
+	ディーア	笑い2						そうだな
+CharacterOff
+	ミョルファ							本物も偽物も関係ない\nこのベアたちが幸せになりたいと思う\n気持ちは、このベアたちだけのもの
+CharacterOff
+	ブライド	妹						マスターさんの言葉は\nちゃんと私たちに伝わってるから
+CharacterOff
+	ウェルカムベア		エフェクト下部					　
+CharacterOff
+	ブライド	妹						離れ離れにしちゃって、ごめんね
+	ブライド	姉						偉い！\nミョルファちゃんも\nメティアちゃんも偉ーい！
+Se	打1
+	ブライド	妹悲しい						うひゃあ！\nもう、ノリでお尻叩かないで！
+CharacterOff
+	リディ	怒り2	画面外_右
+	ディーア	笑い2	1_2					よし、じゃあ早く片付けも進めて\nフェアの続きを……
+Se	走る
+Tween	リディ	MoveTo	x=90 time=1				NoWait
+	リディ	怒り2						マスター！　大変だよ！
+StopBgm
+	ディーア	驚き2						ん、どうした？
+	リディ	怒り2						魔剣機関から任務の依頼が来たの！\nあの幻想体、まだ\n色んな所で暴れてるんだって！
+Bgm	緊迫
+	ディーア	汗2						な……なんて……？
+	リディ	怒り2						ここの係の人も、\nブライダルショップの商品が\n全然なくて困ってるって
+	リディ	悲しい2						このままじゃショップが再開できない\nみたいなの……
+CharacterOff
+	ミョルファ	悲しい						元凶の魔力がなくなれば\n他の幻想体も消えるんじゃ……
+CharacterOff
+	ブライド	妹						盗られたものは全部教会にあると\n思ってたのに……！
+CharacterOff
+	ディーア	悔しい2						ショップはみんな\n楽しみにしてたしな……\n仕方ない、商品を取り戻しに行くか
+CharacterOff
+Bgm	バトル
+	ブライド	妹						私たちもついていきます！
+	ブライド	姉						元はと言えば私の責任だし！
+CharacterOff
+	ブライド	拡大妹	エフェクト表					マスターさんの魔剣として
+CharacterOff
+	ブライド	拡大姉	エフェクト表					しっかりばっちり活躍するからね！
+CharacterOff
+	ミョルファ
+Tween	ミョルファ	PunchPosition	y=50				NoWait
+	ミョルファ							ミョルファも旦那さまに\nついて行きます
+	ミョルファ							旦那さまのおかげで\n今度こそ、自信を持って言えます
+CharacterOff
+	ミョルファ	拡大	エフェクト表					きっと、お役に立ちますから\nミョルファをそばに置いてくださいね
+CharacterOff
+	ディーア	通常2						……ああ！\nそれじゃあ、行こうか！
+CharacterOff
+Param	character_grayout=false
+	ブライド		1_3_b
+	ミョルファ		2_2
+	三人							はい！
+StopBgm
+Param	character_grayout=true
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+Wait						.5
+FadeIn	white					1
+	イベントロゴ414		エフェクト表					\n　　 ハッピーメモリーブライダル！\n　　　　　　　　　　　<dash=2>完<dash=2>
+If	isdebug==true
+CharacterOff
+Jump	*E_414_01
+EndIf
+EndScenario

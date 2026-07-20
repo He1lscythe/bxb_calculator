@@ -1,0 +1,1623 @@
+# E_1256_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	白背景					0
+Param	character_grayout=false
+	？？？？	<Off>	1_2			0
+	ディーア	にやけ4				0
+	オーラ桃		エフェクト表			0
+FadeIn	black					1
+	？？？？	<Off>						せんぱい？
+	？？？？	<Off>						せーんぱい♪
+	ディーア	にやけ4						うぅーん……
+	ディーア	にやけ4						もうちょっと、あと少し……
+	ディーア	にやけ4						朝からまた仕事なんだ、\nあともう少しだけ休ませて……
+	？？？？	<Off>						しかたないなぁ、せんぱい
+	？？？？	<Off>						それじゃあ起きたら……
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	？？？？	<Off>						たーくさん、遊んでね♪
+FadeOut	black					1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+Wait						2
+	ディーア	にやけ4				2
+FadeIn	black					1
+Bgm	平和
+	ディーア	にやけ4						ふわぁ……よくねた……
+	ディーア	驚き4						って、あれ？\nまだ外は暗いままなのか？
+	ディーア	怪しい4						それにしては、\nずいぶん長く眠ってた気がするな
+	ディーア	怪しい4						二度寝……するのもアリ
+	ディーア	汗4						だけどなぁ、\nこの間のお休みの間に溜めちゃった\n仕事がまだ残っているし……
+	ディーア	通常4						目が冴えているうちに片付けてから\nまた休むか
+	ディーア	絶望4						あはは、\n休みの間も仕事のことが離れないとか\nこれがオトナになるということ……
+	ディーア	通常4						でも今は、\n魔剣王としてみんなの生活を守る\n立場になったんだし
+	ディーア	通常4						王らしくなったと思うとしよう
+	ディーア	笑い4						それじゃあ\n執務室に戻って仕事だ！
+Se	走る
+Tween	ディーア	MoveBy	x=700 time=1
+Wait						1
+FadeOut	black					.3
+CharacterOff						0
+Bg	洋館					0
+	ディーア	笑い4				0
+Wait						1
+FadeIn	black					.3
+StopBgm
+	ディーア	笑い4						…………
+CharacterOff
+Bgm	緊迫
+	集中線		エフェクト表
+	ディーア	拡大絶望4	エフェクト裏					どこだここ!?
+CharacterOff
+	ディーア	絶望4
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						エイビシュタットにいたはずなのに\nなんだこの洋館は!?
+	ディーア	絶望4						ロサ!? クランさん!?\n魔剣のみんな、どこにいるんだ!?
+	ディーア	絶望4						誰の反応もない……
+	ディーア	悔しい4						まさか拉致されたのか？\nそれとも世界意思の罠か!?
+	ディーア	悔しい4						いや、落ち着け魔剣王……\nもちを数えて落ち着くんだ……
+	ディーア	悔しい4						もちはふわふわで癒やしの権化\nいつも安らぎを与えてくれる
+StopBgm
+Se	フォーン
+FadeOut	white					1
+Bgm	神秘
+Bg	草原A					0
+CharacterOff						0
+	もち柵	通常				0
+	イマジナリーもちA	通常	p6			0
+FadeIn	white					1
+	ディーア	<Off>	1_2					もちひつじが一匹
+Tween	イマジナリーもちA	PunchPosition	y=200 time=1				NoWait
+Tween	イマジナリーもちA	MoveBy	x=-250 time=1				NoWait
+Wait						.5
+CharacterOff	イマジナリーもちA					.5
+	イマジナリーもちB	通常	p6
+	ディーア	<Off>	1_2					もちひつじが二匹
+Tween	イマジナリーもちB	PunchPosition	y=200 time=1				NoWait
+Tween	イマジナリーもちB	MoveBy	x=-250 time=1				NoWait
+Wait						.5
+FadeOut	white					1
+CharacterOff						0
+Bg	洋館					0
+	ディーア	にやけ4				0
+FadeIn	white					1
+	ディーア	にやけ4						ぐぅ♪
+Bgm	コメディ
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						じゃないっ!!\n安らぎすぎて寝ちゃダメだ！
+	ディーア	絶望4						リタンが今いたら、\nあっという間に好き放題されてたな
+	ディーア	悔しい4						とにかく、\n落ち着いて対処するんだ魔剣王！
+	ディーア	悔しい4						オレももう素人じゃないし、\n何度もこういう経験はしてきたんだ
+StopBgm
+	ディーア	目閉じ4						確か最後に記憶に残ってるのは
+Se	回想
+FadeOut	white					1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	ディーア	笑い4				0
+Wait						1
+FadeIn	white					1
+Bgm	魔剣の日常
+	ディーア	笑い4						よし行こう！\n今日もエイビシュタットの探索だ
+ImageEffectOff	SpriteCamera	Sepia				1
+	ディーア	通常4						この城をアリス様に託されてから\nだいぶ経ったけれど\nまだまだ未解明の領域が多いからな
+	ディーア	通常4						いざって時のために、\n罠や宝物庫の確認はしておかないと
+CharacterOff
+	アスモデウス=サラ	通常						だからサラたちも冒険なんですね！\n（ワクワク！）
+CharacterOff
+	ルキフェル	通常						この先はアリス姉様の妹君、\nリリス様の暮らしていた場所ですから
+	ルキフェル	通常						案内するのは、\n私たちリリスファミリーが適任です♪
+	ルキフェル	通常						ふふふ♪\n懐かしい場所に先輩と来れるなんて\nリリスはうれしいです♪
+	ルキフェル	通常						リリス様との思い出の詰まった場所で\n先輩に永遠の幸せを♪
+CharacterOff
+	ディーア	汗4						無事に探索から戻ってこれるか\n不安になってきた……
+	ディーア	汗4						と、とにかく、先へ進もう！\nこの向こうの部屋は<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+Bg	子供部屋					0
+	ディーア	驚き4				0
+FadeIn	black					.3
+	ディーア	驚き4						これは、子ども部屋か？
+CharacterOff
+	アスモデウス=サラ	通常						わあ！\nリリス様のお部屋ですね！\n（なつかしい！）
+Tween	アスモデウス=サラ	PunchPosition	y=30				NoWait
+	アスモデウス=サラ	通常						サラたちも昔は、\nあのへんに飾られてたんですよ♪\n（えっへん♪）
+CharacterOff
+	ディーア	通常4						へぇー、\nアリス様と妹のリリス様にも\n子どもの頃があったんだな
+	ディーア	怪しい4						でもオモチャもたくさんあるが\n遊んでいるところは想像できない……
+	ディーア	怪しい4						アリス様が\n遊び好きなのはよく知ってるけど\nオモチャを創る側の人だし
+CharacterOff
+	ルキフェル	通常						アリス様にも歴史アリ、ですよ
+	ルキフェル	通常						昔の話といえば、\n先輩のお話も聞いてみたいです♪
+CharacterOff
+	ディーア	驚き4						オレの？
+CharacterOff
+	ルキフェル	通常						先輩が小さい頃どう過ごしていたか\nどんなオモチャで遊んでいたか
+CharacterOff
+	ディーア	驚き4						オレは……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	市街地A					0
+	子どもの声	<Off>				0
+FadeIn	white					.3
+	子どもの声	<Off>						うぅ……ぐすっ……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	子供部屋					0
+	ルキフェル	通常				0
+FadeIn	white					.3
+	ルキフェル	通常						先輩？
+CharacterOff
+	ディーア	汗4						いや、なんでもない
+	ディーア	汗4						あんまり面白い話じゃないから\nやめておこう
+	ディーア	通常4						それにオレはまだ若いけど、\n一角の魔王候補になったんだから\n遊ぶヒマなんてないよ
+StopBgm
+Param	character_grayout=true
+	？？？？	<Off>	1_2					…………アソバ、ナイ？
+	ディーア	驚き4						え……？
+Param	character_grayout=false
+CharacterOff
+	ルキフェル	通常						先輩……！
+FadeOut	white					2
+CharacterOff						0
+Bg	洋館					0
+	ディーア	驚き4				0
+Wait						1
+FadeIn	white					1
+Bgm	図書館
+	ディーア	驚き4						そうだ、\nたしかそんなことがあって……
+	ディーア	驚き4						でもそこからどうして、\nこんな屋敷の中に移動したんだ？
+	ディーア	怪しい4						もしかしてこれも、\nエイビシュタット城の隠し機能とか？
+Se	闇1
+CharacterOff
+	スピン	通常				1		あーそーぼー♪
+Wait						1
+CharacterOff
+	ディーア	絶望4
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						わあっ!?
+	ディーア	絶望4						は、ハイパースピン!?\nびっくりした！
+CharacterOff
+	スピン	通常						驚かせてゴメンね、マスター
+CharacterOff
+	ディーア	汗4						いや、大丈夫だ
+	ディーア	笑い4						それよりも合流できて良かった\n他に誰もいないかと思った
+	ディーア	笑い4						お前がここにいるのなら、\n他のみんなもいるかもしれないな\nまずはみんなを探して<dash=2>
+CharacterOff
+	スピン	通常
+Tween	スピン	PunchPosition	y=30				NoWait
+	スピン	通常						そんなことより！\nはやくハイパースピンで遊ぼうよ！
+CharacterOff
+	ディーア	驚き4						あ、遊ぶ？
+CharacterOff
+	スピン	通常						うん！ ボクの……\nハイパースピンの遊び方は\n知ってるでしょ？
+CharacterOff
+	ディーア	通常4						もちろん、マスターだからな
+	ディーア	通常4						でも今は、\n遊んでいるヒマなんてないだろ？
+	ディーア	通常4						まずは脱出しないと！
+CharacterOff
+	スピン	通常						マスターは、\nボクと遊んでくれないの……？
+	黒グラデーション		エフェクト表			1
+Shake	スピン		x=3				NoWait
+	スピン	通常						ハイパースピンを使ってくれないの？\nボクを捨てるの？
+CharacterOff
+	ディーア	汗4
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	汗4						ちょ、ちょっと待ってくれ！\n捨てたりするわけがないだろう!?
+CharacterOff
+	黒グラデーション		エフェクト表
+	スピン	通常						違うよ……\n仲間の前にボクはオモチャなんだ
+	スピン	通常						遊ばれないオモチャは、\n捨てられたも同然なんだよ？
+	スピン	通常						ぐすっ、うぅ……\nマスターはボクがいらないんだ……
+CharacterOff
+	ディーア	汗4						な、泣かないでくれっ！
+	ディーア	汗4						わ、わかった！\n一回だけなら大丈夫だ！ 遊ぼう！
+CharacterOff
+	スピン	通常						ほんと？ やったー♪
+CharacterOff
+	ディーア	汗4						よかった……
+	ディーア	怪しい4						でもおかしいな\nハイパースピンは元気な子だけど\nここまで幼くはなかったぞ？
+StopBgm
+	ディーア	怪しい4						なんだかいつもと様子が<dash=2>
+CharacterOff
+	スピン	通常						じゃあ遊ぼうよ、マスター！
+Bgm	バトル
+FadeOut	white					.3
+	スピン	敵				0
+FadeIn	white					.3
+	スピン	敵						全力で♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1256_02
+EndIf
+EndScenario
+
+# E_1256_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	洋館					0
+Param	character_grayout=false
+	ディーア	絶望4				0
+FadeIn	black					1
+	ディーア	絶望4						はぁ、はぁ、はぁ……
+	ディーア	絶望4						いっかいだけと、いったのに……
+CharacterOff
+	スピン	敵						ダメだよ、マスター！
+	スピン	敵						今までのはスピンじゃない、\nただぐるぐる回しているだけ！
+	スピン	敵						ハイパースピンは、スピン道は、\nその遊びはこんなものじゃないよ！
+CharacterOff
+	ディーア	絶望4
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						ぜぇ、ぜぇ……\nで、でもオレはもう百回は回して……
+CharacterOff
+	スピン	敵
+Tween	スピン	PunchPosition	y=30				NoWait
+	スピン	敵						だからどうしたの!?
+StopBgm
+	スピン	敵						マスター、おかしいよ！\n前のマスターはこう言ってたじゃない
+Se	回想
+FadeOut	white					.3
+StopBgm
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	戦場跡					0
+	ディーア	目閉じ4				0
+FadeIn	white					.3
+Bgm	凱旋
+	ディーア	目閉じ4						ハイパースピンは所詮、遊びだ
+	ディーア	きらーん4						しかし、いや、だからこそ、\n人はスピンに夢中になれる……！
+	ディーア	きらーん4						好きだからこそ、\n遊びだからこそ本気になれるんだ！
+	ディーア	笑い4						たとえ腕が千切れようとも、\nオレは最後の瞬間までスピンを続ける
+FadeOut	white					.3
+StopBgm
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洋館					0
+	スピン	敵				0
+FadeIn	white					.3
+Tween	スピン	PunchPosition	y=30				NoWait
+	スピン	敵						二人のスピンの誓いを忘れたの!?
+Bgm	緊迫
+CharacterOff
+	ディーア	絶望4
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						そんなこと言った覚えないぞ!?
+Bgm	コメディ
+	ディーア	絶望4						いやすごい深い言葉だけど、\nオレはそんな境地に達していない！
+CharacterOff
+	スピン	敵						な、なんてことなの……？
+	スピン	敵						マスター、忘れちゃったの？
+	スピン	敵						ハイパースピンで魔界支配を目論む\n秘密結社『逆回転』を
+	スピン	敵						ボクらの\n友情黄金スピンで倒したことを！
+	スピン	敵						世界ハイパースピン選手権に現れた\n伝説の回転仙人に\n人類の希望を見せつけたことを！
+Tween	スピン	PunchPosition	y=30				NoWait
+	スピン	敵						全宇宙の回転を止めようとする\n高次元無回転生命体との戦いで\n未来を取り戻したことを！
+CharacterOff
+	ディーア	絶望4
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						そんな壮大なことしてないから!?
+CharacterOff
+	スピン	敵						ダメだ、\n今のマスターは失っているんだ
+	スピン	敵						情熱、思想、理念、頭脳、気品、\n優雅さ、勤勉さ……！
+Tween	スピン	PunchPosition	y=30				NoWait
+	スピン	敵						そして何よりも……!!\n遊び心が足りない！！！！！！
+CharacterOff
+	ディーア	悔しい4						な、なんて迫力!?
+	ディーア	悔しい4						でもやっぱり、\nハイパースピンの様子はおかしい！
+	ディーア	悔しい4						このままじゃ、\nここで一生スピンし続けることになる
+Se	ピューン
+Tween	ディーア	MoveBy	x=700 time=1				NoWait
+	ディーア	悔しい4						まずは逃げよう！
+CharacterOff
+	スピン	敵
+Tween	スピン	PunchPosition	y=30				NoWait
+	スピン	敵						あ、こらー、まってー！
+Se	走る
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	ディーア	絶望4				0
+Wait						2
+FadeIn	black					.3
+Bgm	図書館
+	ディーア	絶望4						はぁ、はぁ……\nこの部屋ですこしやすもう……
+	ディーア	絶望4						ずいぶんと走り回ったけれど\nこの館はおかしいぞ
+	ディーア	絶望4						走っても走っても、\n先がどんどんと広がってキリがない\n魔術的な異界みたいだ
+	ディーア	絶望4						それに、\nハイパースピンもおかしくなるなんて\nいったいどうしたら<dash=2>
+Param	character_grayout=true
+	？？？？	<Off>	1_2					せんぱい、困ってるの？
+Param	character_grayout=false
+CharacterOff
+	ディーア	驚き4						え……？
+FadeOut	black					.3
+CharacterOff						0
+	リズ	武器				1
+	ディーア	<Off>	1_2			0
+FadeIn	black					.3
+	ディーア	<Off>						これは……積み木のオモチャ？
+	？？？？	<Off>	1_2					それなら、\n今すぐ助けてあげるね、せーんぱい♪
+StopBgm
+	？？？？	<Off>						だって<dash=2>
+Se	チャージ
+FadeOut	white					2
+Bgm	カルバノグA
+Bg	白背景					0
+CharacterOff						0
+	リズ	拡大足	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	リズ	拡大胸	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+Bg	酒場_宿屋(夜)					0
+CharacterOff						0
+	リズ	拡大通常	エフェクト表			0
+FadeIn	white					.3
+	リズ	拡大通常						リズはせんぱいのオモチャだから♪
+CharacterOff
+	ディーア	驚き4
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き4						お、オレのオモチャ!?
+CharacterOff
+	リズ	通常						そうだよ♪\nシャイターン=リズはお・も・ちゃ♪
+	リズ	通常						あの時遊んでもらったオモチャが、\nあなたを助けてあげる♪
+	リズ	通常						だから代わりにたーくさん
+CharacterOff
+	リズ	拡大笑い	エフェクト表					リズをオモチャにしてね♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1256_03
+EndIf
+EndScenario
+
+# E_1256_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	雪の街
+Bg	市街地A					0
+ImageEffect	SpriteCamera	Sepia
+	リズ	悲しい
+Se	回想
+FadeIn	white					1
+	リズ	悲しい						せんぱい、\n本当に引っ越しちゃうの？
+	リズ	悲しい						リズとお別れしないといけないの？
+	少年の声	<Off>	1_2					うん、ごめん……
+	少年の声	<Off>						でもいつか……！\nいつか大きくなったらリズのことを\nまたオモチャにするから！
+	リズ	悲しい						っ……！
+	リズ	悲しい						約束だよ、せんぱい！
+	リズ	悲しい						また会えたなら、\nリズとせんぱいはずーっと一緒！
+	リズ	悲しい						またあなたのオモチャになるから\nリズで遊んでね！
+	少年の声	<Off>						ぐすっ……ああ、約束だっ！
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洋館					0
+	リズ	通常				0
+Wait						1
+FadeIn	white					1
+	リズ	通常						そう言ってリズは、\n泣く泣くせんぱいとお別れしたの
+	リズ	通常						でもそれから一日たりとも、\nせんぱいのことを忘れたことはない
+	リズ	通常						せんぱいがたくさん、\nオモチャのリズで遊んでくれたこと
+	リズ	笑い						その小さくても男の子な指で、\nリズをコツンコツンしたり\n形を変えたり……♪
+	リズ	笑い						幼い欲望を我慢することなく\nリズで発散してくれたことを♪
+	リズ	笑い						あの時からずっと、\nせんぱいの指の感触が忘れられない♪
+	リズ	笑い						せんぱいもそうでしょ？
+	リズ	笑い						リズのことをオモチャにして\nせんぱいもたのしかったでしょう？
+StopBgm
+	リズ	笑い						だから今日からまた<dash=2>
+Bgm	緊迫
+CharacterOff
+	ディーア	拡大絶望4	エフェクト表					そんな記憶ないんだけど!?
+Bgm	コメディ
+CharacterOff
+	ディーア	絶望4						それに！\n言い方、言い方を変えてくれ!!
+	ディーア	絶望4						オモチャとしてって\nそのまんまの意味だよな!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						なんにも意味深なことないよな!?
+	ディーア	絶望4						『リズを』って、\n積み木遊びをしたことだけだろ!?
+CharacterOff
+	リズ	通常						ふふふ♪\nだいじょーぶ、子どものしたこと♪
+	リズ	通常						世間の誰がなんと言おうと、\n子どものしたことだから許されるよ
+	リズ	通常						それにリズは、\nせんぱいにオモチャにされて\nうれしかったから♪
+CharacterOff
+	ディーア	絶望4
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						だから言い方ぁああああああ!?
+StopBgm
+	ディーア	悔しい4						はぁ、はぁ……
+Bgm	平和
+	ディーア	悔しい4						それに言った通り……\nオレにはお前と出会った覚えがない
+CharacterOff
+	リズ	悲しい						そ、そうなの……？
+	リズ	悲しい						リズのこと、覚えていないの？
+CharacterOff
+	ディーア	悔しい4						あ、ああ……
+	ディーア	怒り4						シャイターン=リズっていう\n魔剣の名前は聞いている
+	ディーア	怒り4						リリスファミリーの最後の一人だと\n他の子たちから
+	ディーア	怪しい4						でもそんなすごい魔剣と\n小さい頃から接触していたとしたら\nオレが忘れるはずないと思うんだ
+CharacterOff
+	リズ	通常						確かにリズは、リリスファミリー
+	リズ	通常						リリス様と戯れるために\nオモチャとして生まれた悪魔魔剣
+	リズ	悲しい						でもね、\nリリス様が氷の下に消えたあとは\nリズは役目がなくなったの
+	リズ	悲しい						サラちゃんやリリスちゃん\nファミリーとも散り散りになって
+	リズ	悲しい						まあ……\nみんなのことはそこまでだけど
+	リズ	悲しい						魔界にい続ける意味に迷って\n絶望していた時に
+	リズ	通常						せんぱいがリズを拾ってくれた♪
+	リズ	通常						だからリズは\nずーっとこの人のオモチャになるって\n決めたんだよ♪
+	リズ	通常						そのことを本当に忘れちゃったの？
+CharacterOff
+	ディーア	汗4						ひ、人違いとかは？
+CharacterOff
+	リズ	通常						ない、絶対に
+CharacterOff
+	ディーア	絶望4						うっ……本気の目をしている……
+	ディーア	怪しい4						じゃあ本当に、\nオレと昔に会ったことがある？
+	ディーア	怪しい4						積み木遊びをするくらい\n小さい頃の記憶なんて\n覚えている方が少ないというし
+	ディーア	怪しい4						でも別の可能性として、\nそもそもリズはリリスファミリー\n悪魔魔剣なんだ
+	ディーア	怪しい4						サラたちのように、\nオレのことを狙っている可能性も？
+CharacterOff
+	リズ	悲しい						そっか、\nせんぱいはいつのまにか\nオトナに近づいちゃったんだね？
+	リズ	悲しい						それなら、\nリズをオトナのオモチャに<dash=2>
+StopBgm
+CharacterOff
+	ディーア	絶望4						だから誤解される言い方は……！
+Bgm	魔獣バトル
+CharacterOff
+	スピン	敵						スピンしようよ！\nマスターがスピンね!!
+CharacterOff
+	ディーア	絶望4
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望4						オレがスピンってどういう意味!?
+CharacterOff
+	リズ	驚き						あれ？\n邪魔者が入ってきちゃったの？
+CharacterOff
+	ディーア	絶望4						そうだ、\nツッコミしすぎて忘れていたけど\nハイパースピンを元に戻さないと！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	悔しい4						り、リズ！\nさっきはオレを助けてくれるって\n言ってくれたよな？
+	ディーア	悔しい4						ハイパースピンの異変について、\nお前はなにか知らないか？
+CharacterOff
+	リズ	通常						うん、知ってるよ♪
+	リズ	通常						大丈夫だよ、せんぱい\n怖がる必要なんかないからね
+	リズ	通常						あの子は、\nオモチャの未練に取り憑かれたの
+CharacterOff
+	ディーア	驚き4						オモチャの未練？
+CharacterOff
+	リズ	通常						長く人と過ごしたお人形には\n魂が宿るって言い伝えあるでしょ？
+	リズ	通常						それはオモチャに宿った、\n人の思念や感情が\n擬似的なタマシイになるから
+	リズ	通常						遊びたい、遊び続けたい\nそんなオモチャに宿ったタマシイに
+CharacterOff
+	ディーア	怪しい4						つまり、\n亡霊みたいな残留思念が生まれる？
+	ディーア	怪しい4						確かに、\n長く愛用したものが怪異になるって\n伝承は多くあるよな
+CharacterOff
+	リズ	通常						リリスファミリーだって、\n元はリリス様の愛用品だからねぇ♪
+	リズ	通常						でもオモチャは\nよく持ち主に忘れられちゃうんだよ
+	リズ	通常						子どもは成長するのに、\nオモチャはずっとそのままだから
+	リズ	通常						オトナになるって名目で、\n暗いオモチャ箱の奥にしまわれたり\n捨てられたりしちゃう
+	リズ	悲しい						オモチャはずっと、\n相手のことが大好きなのに……
+	リズ	通常						あの子に憑いているのは、\nそんな未練が集まったものだね
+	リズ	通常						というか、\nこの空間自体がそれで構成されてる
+	リズ	通常						せんぱい、\nリリス様のお部屋に入ったでしょ？
+	リズ	通常						偉大なる魔女リリス様の、\n遊んだ楽しい思い出が核になって\nたくさんの未練が集まっちゃったの
+	リズ	通常						リズが呼び寄せられたのも、\n同じような思いを抱えた存在だから
+	リズ	通常						なら、元に戻す方法はただ一つだよ
+	リズ	通常						あの子の未練がなくなるように\n遊んであげるの♪
+CharacterOff
+	ディーア	驚き4						でもそれはさっき試したぞ？
+CharacterOff
+	リズ	通常						そう？\nでもあの子はそう思ってないみたい
+CharacterOff
+	スピン	敵						はぁ……\nへただねぇ、マスター……
+CharacterOff
+	ディーア	驚き4						へ……？
+CharacterOff
+	スピン	敵						へたっぴさ、\nオモチャの遊び方がへた……
+	スピン	敵						もっとこう、\nスピンっていうのは思いっきりよく\n楽しむものでしょう？
+	スピン	敵						一回、二回なんて数も数えずに\n日が暮れるまで夢中でするのが遊び
+StopBgm
+	スピン	敵						だから<dash=2>
+	スピン	敵						遊びきろうよ、マスター
+CharacterOff
+	ディーア	目閉じ4						…………
+Bgm	バトル
+	ディーア	目閉じ4						確かにそうだな
+	ディーア	目閉じ4						さっきまでのオレは、\nはやく終わらせることだけ考えて\nお前を疎かにしていた
+	ディーア	怒り4						ハイパースピンはオレの魔剣
+	ディーア	怒り4						お前のマスターとして、\nオレはお前を使いこなし幸せにする\n責任があるんだ！
+	ディーア	怒り4						だから、\n子どものように<dash=2>
+CharacterOff
+	ディーア	拡大本気4	エフェクト表					レッツ、スピン！！！！
+If	isdebug==true
+CharacterOff
+Jump	*E_1256_04
+EndIf
+EndScenario
+
+# E_1256_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	勇者バトル
+Bg	洋館					0
+Param	character_grayout=false
+	ディーア	拡大本気4	エフェクト表			0
+FadeIn	black					1
+	ディーア	拡大本気4	エフェクト表					うぉおおおおおお！\n回れ、煌めけ、オレの回転！！！！
+	ディーア	拡大本気4	エフェクト表					ストリングブレイズ！\nスピナーベイベぇええええ！！！！
+Se	チャージ
+FadeOut	white					2
+StopBgm
+Se	光2
+Se	光3
+CharacterOff						0
+	ディーア	怒り4				0
+Wait						2
+FadeIn	white					2
+	ディーア	怒り4						はぁ、はぁ……！
+Bgm	凱旋
+	ディーア	笑い4						どうだ、ハイパースピン！\nいや、オモチャの未練たち……!!
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い4						オレのスピン道を感じたか!!
+CharacterOff
+	スピン	敵						これが本気のスピン……♪
+	スピン	敵						タノシカッタ……
+Se	フォーン
+FadeOut	white					1
+CharacterOff						0
+	スピン	通常				0
+FadeIn	white					1
+Tween	スピン	PunchPosition	y=30				NoWait
+	スピン	通常						あ、あれ？\nボクは今までいったい？
+CharacterOff
+	ディーア	笑い4						よかった！\nハイパースピンが元に戻ったぞ！
+CharacterOff
+	スピン	通常						えへへ♪\nよく覚えていないけれど、\n今すごくいい気持ちがしてる
+	スピン	通常						マスター、\n遊んでくれてありがとう♪
+Se	フォーン
+CharacterOff	スピン					2
+Wait						2
+CharacterOff
+	ディーア	驚き4						ハイパースピン!?
+	ディーア	驚き4						ど、どこにいったんだ!?
+CharacterOff
+	リズ	通常						安心して、\nあの子は未練の依代として\n呼び寄せられていただけだから
+	リズ	通常						役目が終わって外に戻ったんだよ
+CharacterOff
+	ディーア	通常4						そうか、よかった
+	ディーア	驚き4						でもそれじゃあオレはどうして\nまだ外に出られないんだ？
+StopBgm
+Param	character_grayout=true
+CharacterOff
+	リズ	通常						それは<dash=2>
+Se	マイクノイズ
+	サラの声	<Off>	1_2					せーんぱい、聞こえますかぁ！\n（ひっしに！）
+	リズ	驚き						ぎくっ!?
+StopSe
+Bgm	作戦会議
+CharacterOff
+	ディーア	驚き4						この声、サラの？
+	ディーア	驚き4						サラ！ オレの声が聞こえるか？
+	サラの声	<Off>	1_2					よかったぁ♪\n先輩が消えちゃって心配したんです\n（一安心ですね♪）
+	サラの声	<Off>						こっちは大変なんですよぉ？\nリリスかいちょーが大暴れしてて\n（げっそり）
+	リリスの声	<Off>	1_2					先輩？ どこですか先輩？
+	リリスの声	<Off>						先輩を取り戻すためなら、\nこの氷をすべて砕いてでも<dash=2>
+	シエルの声	<Off>	1_2					会長、抑えてくださーい！
+	マネの声	<Off>	1_2					Stopp!! このままでは\nエイビシュタットの崩壊ですわぁ！
+	ディーア	汗4						な、なんか大変そう……
+	サラの声	<Off>	1_2					と、とにかく！\n一刻も早く戻ってきてくださいね！\n（おねがいっ！）
+	ディーア	通常4						ああ、もちろん！
+	ディーア	通常4						こっちはリズと出会えたから、\nきっとすぐ戻れるはずだ！
+	サラの声	<Off>	1_2					ふえ？ リズちゃんがそこに？\n（びっくり！）
+	サラの声	<Off>	1_2					もしかして<dash=4>
+CharacterOff
+	リズ	驚き
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	驚き						わあああああああああ!!
+	リズ	驚き						さ、サラちゃん！ またあとで！
+	リズ	驚き						というか、\nできれば会いたくないけど……
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	驚き						そうも言ってられないからあとで！
+	リズ	驚き						はぁ、はぁ……
+CharacterOff
+	ディーア	驚き4						り、リズ？
+CharacterOff
+	リズ	驚き						他の魔剣とか人間とか\nせんぱい以外の子は苦手なの……
+	リズ	驚き						同じファミリーでも、\nなんか波長のちがい、っていうか……
+	リズ	驚き						そ、それよりも！\n外と連絡ができたのはせんぱいが\n未練を浄化したからだよ
+	リズ	通常						この調子で、\n残る未練も遊びで解消してあげたら\n外に出ることができるはず
+CharacterOff
+	ディーア	通常4						ああ、わかった
+	ディーア	怒り4						王として、\nみんなのマスターとして
+	ディーア	怒り4						外でやらないといけないことが\n山ほどあるんだ
+	ディーア	本気4						必ずここから脱出してみせる！
+	ディーア	本気4						リズ、協力してくれ!!
+CharacterOff
+	リズ	通常						いいよぉ♪
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	通常						えへへ、昔もこうしていたよね♪
+	リズ	通常						一緒にこのまま遊び回って、\nちゃんと思い出してね
+	リズ	通常						リズがあの時、\n遊んでもらったオモチャだって♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1256_05
+EndIf
+EndScenario
+
+# E_1256_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	洋館					0
+	リズ	通常	p7b			0
+	ディーア	怪しい4	p3			0
+FadeIn	black					1
+	ディーア	怪しい4						オモチャたちの未練が取り憑いた\n魔剣と遊ぶことでその未練を解消する
+	ディーア	怪しい4						そうすれば、\nこの変な館からも脱出できるはず
+	ディーア	汗4						それは分かったけど、\nやっぱりオモチャたちが望むように\n遊ぶのって難しいな……
+	ディーア	汗4						小さな魔剣たちと遊ぶことはあるけど\n保護者な立場が多いし
+	リズ	通常						それもあるけど、\nせんぱいは余計なことを考えすぎ
+	リズ	通常						例えばせんぱい、\n今は遊びたいと思っていないでしょ？
+	リズ	通常						遊ぶときって、\nもっと自由で無邪気でわんぱくで
+Tween	リズ	PunchPosition	y=10				NoWait
+	リズ	通常						未来も過去も置き去りにするくらい\n夢中になるものじゃない？
+	リズ	通常						館からの脱出に必要なのは事実だけど\nオモチャにとっては悲しいよ？
+	ディーア	驚き4						それは、確かにそうだな
+	ディーア	驚き4						魔剣とのデート中に他のことを考えて\n怒られるのと同じだ
+Shake	リズ		x=3				NoWait
+	リズ	驚き						むぅ、そういうところだよ？
+	ディーア	驚き4						え、これもダメなのか!?
+	リズ	驚き						デートとか他の子のお話とか、\nそういうオトナの配慮とか気遣いとか
+	リズ	驚き						子どもは遊ぶ時、\nそんなこと考えたりもしないでしょ？
+	リズ	通常						せんぱいは、\n子どもの心を取り戻すべきなの
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	笑い						リズで遊んでた、あの頃みたいに♪
+	リズ	笑い						もっともっと純粋に、\n楽しい気持ちに素直になろうよ
+	ディーア	怪しい4						リズと遊んだことがあるかは\nまだわからないけど\n言っていることは納得できるな
+	ディーア	怪しい4						夢中になれる遊びか……
+StopBgm
+CharacterOff
+	アクアバリスタ	武器				.5		それならワシと
+Bgm	バトル
+Se	フォーン
+FadeOut	white					.3
+	アクアバリスタ	通常				0
+FadeIn	white					.3
+	アクアバリスタ	通常						思いっきり遊んでみないか♪
+CharacterOff
+	ディーア	驚き4						アクアバリスタ！
+	ディーア	驚き4						水を発射するアクアバリスタは\n水鉄砲にも見える魔剣だけど
+	ディーア	驚き4						取り憑かれたのは\n小さな魔剣だけじゃなかったんだな				武器画像
+CharacterOff
+	アクアバリスタ	通常						まあワシの場合は、\n無邪気な迷い子相手に\nひと肌脱いでやろうと思っただけ♪
+	アクアバリスタ	通常						それにたまには、\nヌシと無邪気に手合わせをするのも\n悪くはないからな♪
+CharacterOff
+	ディーア	通常4						そうか
+	ディーア	笑い4						ふふふふふ♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	きらーん4						やる気がみなぎってきたぁ!!
+CharacterOff
+	リズ	通常						わあ♪ せんぱいが燃えてる♪
+	リズ	通常						子どもの心が戻ってきたの？
+CharacterOff
+	ディーア	きらーん4						もちろんだ！\n水遊びは子どもの頃に誰もがした\n定番の遊び……！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	きらーん4						そして！
+	ディーア	にやけ4						水で濡れすけになった女の子を\n合法的に見れるからな♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	にやけ4						さあ！\nオレと一緒に水遊びでパシャパシャ♪
+CharacterOff
+	アクアバリスタ	通常						ぐっ……!?
+Se	闇1
+	アクアバリスタ	敵						いかん、\n未練たちが怒り狂い始めた!!
+CharacterOff
+	ディーア	絶望4						な、なんで!?
+CharacterOff
+	リズ	通常						せんぱいが、\nえっちなことを考えたからじゃない？
+	リズ	通常						小さい子どもは、\nそんなこと気にもしないでしょ？
+	リズ	笑い						でもせんぱい、\n昔からちょっとおませさんだもんね♪\nリズはちゃーんとわかってるよ♪
+	リズ	笑い						でもあの子たちはわかんないみたい
+	リズ	笑い						そーいうことを考えないで、\n純粋に遊んでほしいみたいだねぇ♪
+CharacterOff
+	ディーア	絶望4						ならオレは、\nあのムチムチなアクアバリスタと\n水遊びをしながら
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						邪な思いを抱いてはいけないのか!?
+	ディーア	絶望4						な、なんて試練だぁああああ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1256_06
+EndIf
+EndScenario
+
+# E_1256_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	勇者バトル
+Bg	洋館					0
+Param	character_grayout=false
+	ディーア	悔しい4				0
+FadeIn	black					1
+	ディーア	悔しい4						はぁ、はぁ、\n余計なことを考えないようにしてたら\nむしろすごく疲れてきた……
+	ディーア	悔しい4						でも<dash=2>
+	ディーア	汗4						疲れながら、\n水遊びに夢中になるのって楽しいな
+	ディーア	汗4						どうやって、\n相手に水を当てようかとか\nかっこよくポーズをしたりとか
+	ディーア	笑い4						そんな、なんてことないことが
+	ディーア	笑い4						ははは！
+CharacterOff
+	アクアバリスタ	敵						ふっ♪\nヌシもようやく楽しみだしたか♪
+	アクアバリスタ	敵						それならば、\nこの未練とやらも解き放ってやろう♪
+	アクアバリスタ	敵						圧力をこめて、こめて……！
+	アクアバリスタ	敵						最大出力で発射だ！\nせえええいっ！
+Se	ダイブ
+FadeOut	blue					.2
+CharacterOff						0
+	ディーア	笑い4				0
+FadeIn	blue					.2
+	ディーア	笑い4						ははは、やったなー！
+	ディーア	笑い4						なら、オレも！
+Se	ダイブ
+FadeOut	blue					.2
+CharacterOff						0
+	アクアバリスタ	敵				0
+FadeIn	blue					.2
+StopBgm
+	アクアバリスタ	敵						ふふ♪ 満足だ♪
+Bgm	平和
+FadeOut	white					.3
+	アクアバリスタ	通常				0
+FadeIn	white					.3
+	アクアバリスタ	通常						感謝するぞ、ヌシよ
+	アクアバリスタ	通常						おかげで彼らも、\n無事に旅立てたようだからな♪
+CharacterOff
+	ディーア	通常4						アクアバリスタも元に戻ったんだな
+	ディーア	笑い4						オレの方こそ、\n久しぶりに水遊びしてスッキリだよ
+CharacterOff
+	アクアバリスタ	通常						それは良い♪
+	アクアバリスタ	通常						それにしても、\n思い切り遊びほうけたことで\n暑くなってきたな
+	アクアバリスタ	通常						そろそろ一枚脱いでも良さそうだ♪
+CharacterOff
+	ディーア	きらーん4						それって!?
+CharacterOff
+	アクアバリスタ	通常						さて、脱<dash=2>
+Se	フォーン
+CharacterOff	アクアバリスタ					2
+Wait						2
+CharacterOff
+	ディーア	絶望4						！？！？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						ま、待ってくれ！\n戻ってきてくれアクアバリスタ！
+	ディーア	絶望4						今はE.D.E.N.も街の人もいないから\n一枚も二枚も脱いで良いんだ！
+	ディーア	絶望4						うわぁあああああああああああ!!
+CharacterOff
+	リズ	驚き						せ、せんぱい……\nそんなに悔しかったの……？
+	リズ	驚き						さっきまでの遊び心が、\n一瞬で汚れちゃったみたいだよ？
+CharacterOff
+	ディーア	拡大絶望4	エフェクト表					お姉さんとえっちなお遊びするのは\n全男子の夢だろ!?
+Param	character_grayout=true
+CharacterOff
+	リズ	驚き	p7b
+	ディーア	怪しい4	p3
+	リズ	驚き						そ、それはだいぶ\n特殊な子どもだと思うけど……
+	リズ	通常						それなら、\nその欲望をリズにぶつけるのはどう？
+	リズ	通常						オモチャでめちゃくちゃに遊ぶの♪\nたのしいよぉ？
+	ディーア	怒り4						リズ……\nたとえ魔剣本体がオモチャだとしても
+	ディーア	怒り4						かわいい女の子が\n誤解されるようなことを言うのは\nやっぱり危ないと思うぞ？
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	悲しい						いきなりオトナに戻らないでよ!?\n男の子の夢はどこに消えたの!?
+	リズ	悲しい						それじゃあせっかく<dash=2>
+	ディーア	怪しい4						せっかく？
+Tween	リズ	MoveBy	x=50				NoWait
+	リズ	悲しい						な、なんでもない……！
+	リズ	悲しい						うぅ……\nせんぱいの動きが予想できない
+	リズ	悲しい						おかげで、\nリリスちゃんたちにやられてないのは\nうれしいけれど……
+Tween	ディーア	MoveBy	x=-50				NoWait
+	ディーア	怪しい4						うーん
+	ディーア	怪しい4						サラたちみたいに、\nわかりやすいから可愛いものだけど\nやっぱりリズもなにか隠してそうだ
+	ディーア	怪しい4						この様子だと、\nリズと子どもの頃に遊んだというのも\n本当かどうか<dash=2>
+	ディーア	驚き4						あれ？
+StopBgm
+Se	フォーン
+FadeOut	white					1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A					0
+	少年の声	<Off>	1_2			0
+	リズ	通常				0
+Wait						1
+FadeIn	white					1
+Bgm	雪の街
+	少年の声	<Off>						うわぁーん！
+	リズ	通常						よしよし、泣かないで♪
+	リズ	通常						リズはあなたのオモチャ、\nどんなことをしても味方だからね
+	リズ	通常						ここは、\nせんぱいとリズの二人っきりの楽園
+	リズ	通常						悲しいことなんて、\n一緒に遊んで忘れちゃおうよ♪
+Se	回想
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洋館					0
+	ディーア	驚き4				0
+FadeIn	white					1
+	ディーア	驚き4						今のは、昔の記憶……？
+CharacterOff
+	リズ	通常						せんぱい、どうしたの？
+CharacterOff
+	ディーア	驚き4						な、なんでもない！
+CharacterOff
+	リズ	笑い						せんぱい、\nリズとおんなじこと言ってるー♪
+	リズ	笑い						でも昔からそう言ってたもんね♪\nリズのもせんぱいからうつったのかも
+CharacterOff
+	ディーア	怪しい4						そうかな？
+	ディーア	怪しい4						そうかも……
+	ディーア	怪しい4						なんか昔のことを考えすぎて、\nぐるぐるしてきた……
+StopBgm
+CharacterOff
+	スリーシックスティ	武器						ぐるぐる？
+Se	フォーン
+FadeOut	white					.3
+	スリーシックスティ	通常				0
+FadeIn	white					.3
+Bgm	バトル
+	スリーシックスティ	通常						つまりこのスリーシックスティと\n回転で遊びたいのね！
+CharacterOff
+	ディーア	驚き4						スリーシックスティまで？
+	ディーア	怪しい4						でも確かに……\nスリーシックスティの魔剣の形は\n子どものオモチャにありそうだな
+CharacterOff
+	スリーシックスティ	通常						そうでしょう、マスターくん？
+	スリーシックスティ	通常						この魔導数学に則った形は、\n子どもたちの心にも働きかけて
+	スリーシックスティ	通常						すごくゴーっとシュートして\n対戦したくなると判明しているの♪
+	スリーシックスティ	通常						って、そんな難しいことは\nオモチャたちには関係ないかもね
+	スリーシックスティ	通常						ここから言うべきことは一つ！
+Se	フォーン
+	スリーシックスティ	敵						先生と勝負よ、マスターくん！
+CharacterOff
+	ディーア	目閉じ4						なるほどな
+	ディーア	目閉じ4						オレもだんだんと、\n子どもらしい純粋さを取り戻してきた
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気4						だからそろそろ、\nこの子どもの時間も終わりにしよう！
+If	isdebug==true
+CharacterOff
+Jump	*E_1256_07
+EndIf
+EndScenario
+
+# E_1256_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	凱旋
+Bg	洋館					0
+	スリーシックスティ	通常
+FadeIn	black					1
+	スリーシックスティ	通常						流石ね、マスターくん
+	スリーシックスティ	通常						そしてこの対決で確信したわ\nすべては角度と回転が支配すると
+	スリーシックスティ	通常						きっと君なら、\n宇宙のあの黒い闇さえも<dash=2>
+Se	フォーン
+CharacterOff	スリーシックスティ					2
+Wait						2
+CharacterOff
+	ディーア	通常4						スリーシックスティに憑いた\n未練も晴れたか
+	ディーア	笑い4						うぅーん、たのしかった！
+	ディーア	怪しい4						それにしても\nどうして未練に取り憑かれた子は\n大仰なことを言うんだろう？
+CharacterOff
+	リズ	通常						理由は一つだけ、\nそれがワクワクして面白いから
+	リズ	通常						せんぱいも昔はそうだったよ？
+	リズ	通常						積み木のお城をつくって、\nリズと王子様とお姫様ごっこしたり
+	リズ	笑い						近所の大きな木を\n悪いドラゴンに見立てて戦ったり♪
+CharacterOff
+	ディーア	汗4						本当に覚えてないんだ……\nごめん……
+	ディーア	通常4						けど、そうだな\nそういうことは楽しかったかもな
+CharacterOff
+	リズ	通常						……今は違うの？
+CharacterOff
+	ディーア	汗4						そういうわけじゃないけど……
+	ディーア	通常4						魔剣のマスターとして\nみんなを見守る立場でもあるし
+	ディーア	通常4						魔剣王として、\n城と領地を管理したり、\n助けを求める民を救う義務もある
+	ディーア	通常4						遊ぶことは楽しいけれど、\nそれで大事なことを疎かにはできない
+CharacterOff
+	リズ	通常						つまり……オトナになったから？
+CharacterOff
+	ディーア	汗4						そう、かもしれないな
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い4						でも！\nここで思いっきり遊べたことは\nいい気分転換になったよ！
+	ディーア	笑い4						未練たちも満足しただろうし、\nそろそろ外に出る時間だと思う！
+StopBgm
+	ディーア	笑い4						リズとのことは、\nまだ思い出すことが出来ないけれど\n外に出たらオレの魔剣として<dash=2>
+Bgm	魔獣バトル
+Se	闇1
+CharacterOff
+	オモチャの未練A	通常	1_3_m			1		マダ……
+	オモチャの未練B	通常	2_3_m			1		マダだよ……
+	オモチャの未練C	通常	3_3_m			1		こんなんじゃ、マンゾクできない……
+CharacterOff
+	ディーア	驚き4						えっ!?
+CharacterOff
+	オモチャの未練A	通常	1_3_m
+	オモチャの未練B	通常	2_3_m
+	オモチャの未練C	通常	3_3_m
+	オモチャの未練A	通常						あそんでくれるっていったのに、\nまたおいていくの？
+	オモチャの未練B	通常						ワタシたちをワスれてステるの？
+	オモチャの未練C	通常						そんなの<dash=2>
+Param	character_grayout=false
+	オモチャの未練A	通常						ユルサナイ
+	オモチャの未練A	通常						オォオオオオオオオオオ！！！！
+Se	闇2
+	オーラ紫		エフェクト表			1
+Bg	遊園地					1
+Wait						2
+CharacterOff
+	ディーア	驚き4						これは!?
+	ディーア	悔しい4						まさか、異空間が強化されたのか？
+CharacterOff
+	リズ	驚き						せんぱいを、\nこのまま閉じ込めようとしているの？
+CharacterOff
+	ディーア	悔しい4						そんな……！
+CharacterOff
+	オモチャの未練A	通常	1_3_m
+	オモチャの未練B	通常	2_3_m
+	オモチャの未練C	通常	3_3_m
+	オモチャの未練A	通常						かえさない\nこのままえいえんに……！
+	集中線		エフェクト表
+	オモチャの未練A	通常						ワタシたちとあそぶんだ！！！！
+If	isdebug==true
+CharacterOff
+Jump	*E_1256_08
+EndIf
+EndScenario
+
+# E_1256_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔獣バトル
+Bg	遊園地					0
+Param	character_grayout=false
+	ディーア	悔しい4
+FadeIn	black					1
+	ディーア	悔しい4						ぐっ……!?
+	ディーア	悔しい4						普通の攻撃じゃ倒れないのか!?
+CharacterOff
+	リズ	驚き						やっぱり、\nオモチャの未練は遊ぶことでしか\n消えないんだと思う……
+CharacterOff
+	ディーア	悔しい4						ならさっきみたいに、\nまたこの子たちと遊べば<dash=2>
+CharacterOff
+	オモチャの未練A	通常	1_3_m
+	オモチャの未練B	通常	2_3_m
+	オモチャの未練C	通常	3_3_m
+	オモチャの未練A	通常						ダメ……
+	オモチャの未練A	通常						もうだまされない……
+	オモチャの未練A	通常						あなたはあそばない……\nあそびたく、ないんだ……
+CharacterOff
+	ディーア	驚き4						えっ？
+CharacterOff
+	オモチャの未練A	通常	1_3_m
+	オモチャの未練B	通常	2_3_m
+	オモチャの未練C	通常	3_3_m
+StopBgm
+	オモチャの未練B	通常						だって<dash=2>
+	オモチャの未練B	通常						あそびかたもしらないでしょ？
+CharacterOff
+	ディーア	悔しい4						っ……！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A					0
+	さびしい声	<Off>				0
+FadeIn	white					.3
+Bgm	図書館
+	さびしい声	<Off>						オレはひとりでいい
+	さびしい声	<Off>						だって、みんなとちがうから
+	さびしい声	<Off>						あそびたくなんてない
+FadeOut	white					.3
+CharacterOff						0
+Bg	白背景					0
+	NPディーア					0
+FadeIn	white					.3
+	NPディーア							天使として生まれたオレに、\n初めて居場所を与えてくれた
+	NPディーア							生き方さえ知らないオレを、\n魔剣使いにしてくれた
+	NPディーア							リディはオレに何不自由ない\n生き方をくれたんだ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	遊園地					0
+	ディーア	悔しい4				0
+FadeIn	white					.3
+	黒グラデーション		エフェクト表			2
+	ディーア	悔しい4						そうだ……\nオレには心から遊んだことがない
+	ディーア	悔しい4						オレは他の人とは違った、\n天使で異物で\n受け入れてもらえなかった……
+	ディーア	悔しい4						リディと出会ってから、\n魔剣のみんなや仲間とやっと出会えて\n初めて人生を歩めるようになった
+	ディーア	悔しい4						だから、\nオレには子どもみたいに遊ぶことは\n最初から無理だったんだ
+	ディーア	悔しい4						子どもの時代を通り越して、\nオトナに、王に、なってしまったから
+CharacterOff
+	オモチャの未練A	通常	1_3_m
+	オモチャの未練B	通常	2_3_m
+	オモチャの未練C	通常	3_3_m
+	オモチャの未練B	通常						それなら、あなたはこどもじゃない
+	オモチャの未練B	通常						かわりに、\nワタシたちのナカマにしてあげる♪
+	オモチャの未練B	通常						いっしょに遊び相手をマツの♪
+	オモチャの未練B	通常						カードで、せっていつくって、\nヤミのバトルをしよう♪
+	オモチャの未練B	通常						あぶないばしょで、\nドキドキのたたかいもしよう♪
+	オモチャの未練B	通常						ないて、わらって、\nあしたのことなんてわすれるの♪
+	オモチャの未練B	通常						あなたもそれならタノシイよ♪
+CharacterOff
+	ディーア	絶望4
+Se	闇1
+	オーラ紫		エフェクト表			1
+	ディーア	絶望4						ぐっ……?!
+	ディーア	絶望4						あ、あぁ……！\nオレの、たましいを……？
+StopBgm
+CharacterOff
+	リズ	通常						させないよ
+CharacterOff
+	ディーア	絶望4						り、ず……？
+Bgm	雪の街
+CharacterOff
+	リズ	通常						オモチャとして気持ちはわかるから\n見逃してあげたけど
+	リズ	通常						せんぱいの遊び相手は、\nずーっと昔から\nリズだって決まっているの
+	リズ	通常						あなたたちの未練のすべて、\nシャイターン=リズが受け止める
+	リズ	通常						取り込むのなら、リズにして……！
+Se	闇1
+	オーラ紫		エフェクト表			1
+	リズ	驚き						うぅ……あぁああああああ！！！！
+CharacterOff
+	ディーア	驚き4
+	オーラ紫		エフェクト表
+Wait						.5
+CharacterOff	オーラ紫					.5
+	ディーア	驚き4						リズ……!?
+CharacterOff
+	オーラ紫		エフェクト表
+	リズ	驚き						だいじょうぶだよ、せんぱい……
+	リズ	驚き						リズもオモチャだから……
+	リズ	通常						そう、あなたのオモチャ……\nずっと昔からの友達で仲間……
+CharacterOff
+	ディーア	驚き4						オレの、オモチャ……
+CharacterOff
+	オーラ紫		エフェクト表
+	リズ	悲しい						それに大丈夫、\nせんぱいはちゃんと遊べる人……
+	リズ	悲しい						昔はあんなに、\nリズで夢中になってくれたでしょ？
+	リズ	悲しい						オトナになったからって、\nあそんじゃダメな理由はないよ
+	リズ	悲しい						あの楽しかった頃を\nリズとのことを、思い出して？
+If	isdebug==true
+CharacterOff
+Jump	*E_1256_09
+EndIf
+EndScenario
+
+# E_1256_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔王バトル
+Bg	遊園地					0
+Param	character_grayout=false
+	リズ					0
+	オーラ紫		エフェクト表			0
+FadeIn	black					1
+	リズ							■■■■■■■■■■■！！！！
+Se	光1
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						.5
+Se	光1
+FadeOut	white					.2
+FadeIn	white					.2
+CharacterOff
+	ディーア	悔しい4						止まってくれ、リズ！
+	ディーア	悔しい4						すべての思念体を取り込むなんて\nお前の体がもたない!!
+	ディーア	悔しい4						魔核が崩壊してしまうぞ!?
+	ディーア	悔しい4						……どうして、オレのために？
+	ディーア	目閉じ4						いや……それはもう知ってる
+Se	回想
+FadeOut	white					1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	リズ	通常				0
+FadeIn	white					1
+	リズ	通常						そうだよ♪\nシャイターン=リズはお・も・ちゃ♪
+	リズ	通常						あの時遊んでもらったオモチャが、\nあなたを助けてあげる♪
+FadeOut	white					.3
+CharacterOff						0
+Bg	洋館					0
+	リズ	悲しい				0
+FadeIn	white					.3
+	リズ	悲しい						オモチャはずっと、\n相手のことが大好きなのに……
+FadeOut	white					.3
+CharacterOff						0
+Bg	遊園地					0
+	リズ	悲しい				0
+FadeIn	white					.3
+	リズ	悲しい						そう、あなたのオモチャ……\nずっと昔からの友達で仲間……
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	遊園地					0
+	ディーア	目閉じ4				0
+FadeIn	white					1
+	ディーア	目閉じ4						わかってる……\nだから、オレを助けてくれたって
+StopBgm
+	ディーア	悔しい4						だったらオレも<dash=2>
+Bgm	風属性バトル
+Se	光1
+CharacterOff
+	アスモデウス=サラ	驚き						せんぱーい！（おおあわて！）
+CharacterOff
+	プリム	通常						異空間の壁が弱くなったから\n入ってきたけど……
+CharacterOff
+	マネ	驚き						り、リズ？\nどうしてこんなことに!?
+CharacterOff
+	ベルゼ	通常						異空間を構成していた思念を\n全て取り込んだようですね
+	ベルゼ	通常						そのおかげで、\n中に入ることができたのでしょう
+CharacterOff
+	リヴィア	悲しい						うへぇー、\nあれをぜんぶは大変だねぇ……\nヌクヌクできないよ……
+CharacterOff
+	ルキフェル	通常						先輩を守っての行動なら、\nファミリーの長として\n賞賛しますが<dash=2>
+CharacterOff
+	ディーア	本気4						ちょうどよかった！\nリリスファミリーのみんな！\n頼みがある！
+CharacterOff
+	ルキフェル	通常						先輩？
+CharacterOff
+	ディーア	本気4						リズをこれから助ける！\nだからオレからぜんぶを奪え!!
+	ディーア	本気4						理性とか、知性とか、魂とか、\nそういうぜんぶ！
+	ディーア	悔しい4						とにかく、\n遊ぶのに不要な雑念を奪ってくれ！
+CharacterOff
+	アスモデウス=サラ	通常						えぇええ♪（やったー♪）
+CharacterOff
+	プリム	通常						そんなこと、やってもいいの♪
+Tween	プリム	PunchPosition	y=30				NoWait
+	プリム	驚き						じゃ、じゃなくて！\n先輩の口を思いっきりくちゅくちゅ\nしちゃったら……！
+CharacterOff
+	ルキフェル	通常						いいんですか？
+CharacterOff
+	ディーア	笑い4						ああ、もちろん！
+	ディーア	絶望4						……お、終わったら、\nちゃんと返してほしいけれど
+	ディーア	怒り4						きっとリズが言うとおりだと思う
+	ディーア	通常4						オレには遊んだ記憶は無いけれど、\n遊びたいと思う心はあった
+	ディーア	通常4						一つのオモチャを、\n輝く宝物に思える想像力や遊び心
+	ディーア	通常4						年をとって、大きくなっても、\nそれが消えてなくなるわけがない
+	ディーア	通常4						それどころか、\n王として新しい世界を創るために\nこれから必要になる力だ
+	ディーア	目閉じ4						でもオレは、\nすぐには昔に戻れないから
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気4						お前たちの、\n悪魔の力を借りて取り戻す！
+	ディーア	怒り4						ルキフェル=リリス、頼めるか？
+CharacterOff
+	ルキフェル	通常						はい、もちろん♪
+CharacterOff
+	ベルゼ	通常						困るのは、\nコレをチャンスだとせんぱいのを\n奪いすぎる人がでた時ですが
+CharacterOff
+	アスモデウス=サラ	驚き						ぎくっ！
+CharacterOff
+	プリム	驚き						ぎくっ！
+CharacterOff
+	マネ	驚き						ぎくっ！
+CharacterOff
+	リヴィア	悲しい						ぎくっ！
+CharacterOff
+	ベルゼ
+Tween	ベルゼ	PunchPosition	y=30				NoWait
+	ベルゼ	慌て						みんな、そのつもりですか!?
+CharacterOff
+	ルキフェル	通常						ご安心ください、\n先輩が私に全てを委ねるというなら\n完全な安心と幸せでお返しします
+	ルキフェル	通常						ファミリーであっても、\n絶対に邪魔はさせませんから♪
+	ルキフェル	通常						では、リリスファミリーの皆
+	ルキフェル	通常						悪魔の出番ですよ♪
+CharacterOff
+	アスモデウス=サラ	通常						はーい！（がんばる！）
+Se	フォーン
+FadeOut	purple					.3
+CharacterOff						0
+	ディーア	きらーん4				0
+FadeIn	purple					.3
+	オーラ紫		エフェクト表			1
+	ディーア	きらーん4						お、おぉおおお!?
+	ディーア	にやけ4						余計な重荷が消えて、\n心と魂が軽くなっていくようだ♪
+	ディーア	絶望4						なんか軽くなりすぎな気もするけど
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						だ、だいじょうぶか？\n大事なもの奪われてないよな!?
+CharacterOff
+	ベルゼ	慌て						大丈夫です！ ……たぶん
+	ベルゼ	慌て						それよりもせんぱいは、\nリズちゃんのことを……！
+CharacterOff
+	ディーア	本気4						……ああ！
+	ディーア	本気4						リズ！
+	ディーア	怒り4						確かにもうオトナに近づいて\n王にもなった
+	ディーア	怒り4						でも、\n遊んだらダメな理由なんて無い\n遊び心まで無くしたりしない
+	ディーア	悔しい4						だからオレと……！
+	ディーア	本気4						遊んでくれ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1256_10
+EndIf
+EndScenario
+
+# E_1256_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	雪の街
+Bg	子供部屋					0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+	ディーア	<Off>				0
+FadeIn	black					1
+	ディーア	<Off>						確かに、\n人間の間には入れなかったけれど
+	ディーア	<Off>						それでもオレには昔から、\n寄り添ってくれるモノはあったんだ
+	ディーア	<Off>						それは例えば物語
+	ディーア	<Off>						そしてそこへ向けた憧憬や興奮を\n受け止めてくれたオモチャ
+Param	character_grayout=true
+	リズ	通常				1		せんぱいは何をつくってるの？
+	少年の声	<Off>	1_2					城だよ、お城！
+	少年の声	<Off>						いつか魔王になって、\n立派なお城に住んでみたいんだ♪
+	リズ	通常						へぇ♪ ステキな夢だねぇ♪
+	リズ	通常						ふふふ♪\n過去の先にある無限の可能性♪
+	リズ	笑い						リズもそれがだーいすきなの♪
+	リズ	通常						だからね、せんぱい？
+	リズ	通常						このままずーっと一緒にいようね♪
+FadeOut	white					2
+StopBgm
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	ディーア	驚き4				0
+Wait						1
+FadeIn	black					1
+Bgm	平和
+	ディーア	驚き4						はっ……！
+	ディーア	驚き4						こ、ここは？
+	ルキフェル	通常						異空間の外側、\nエイビシュタットの中ですよ♪
+	ディーア	驚き4						外に出られたのか？\nそれならリズはどうなって<dash=2>
+CharacterOff
+	リズ	通常						せんぱい……！
+CharacterOff
+	ディーア	笑い4						リズ、よかった無事だったんだな！
+CharacterOff
+	リズ	通常						せんぱいのおかげだよぉ♪
+	リズ	通常						せんぱい、すごかった……
+	リズ	笑い						理性無くして、\n無邪気に無謀に無自覚に無防備に\nリズをめちゃくちゃにして♪
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	笑い						はあぁ♪\n文字通りにリズをオモチャにしたの♪
+	リズ	笑い						せんぱいが\nリズをオモチャにしてくれたから\nあの未練たちも消えてなくなったよ
+CharacterOff
+	ディーア	驚き4						そ、そうなのか……？
+	ディーア	汗4						みんなに色々吸い取られてたから\nよく覚えてないけど
+	ディーア	怪しい4						記憶がなくてもったいない残念さと\n捕まらなくてよかったという安堵で\nオレの心は揺れている……
+CharacterOff
+	リヴィア	通常						リズちゃんがこんなに話すところ\n初めて見た……
+CharacterOff
+	リズ	驚き						あ、そ、それと……\nファミリーのみんなのおかげ……\nありが、とう……
+CharacterOff
+	ディーア	驚き4						そういえば、\n寝ている間にリズの夢を見たんだ
+CharacterOff
+	リズ	笑い						っ!?
+CharacterOff
+	ディーア	通常4						小さい頃に、\n積み木でお城をつくっている夢……
+	ディーア	通常4						その時の、\n楽しくてワクワクした気持ちも♪
+CharacterOff
+	リズ	笑い						ほんとぉ♪
+	リズ	笑い						うふふふ♪\n時間を忘れるほど楽しかったよねぇ♪
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	笑い						夢中になって、\nリズをオモチャにしてくれたよね♪
+	リズ	笑い						それじゃあ、\nこのままリズをオモチャにして♪
+	リズ	笑い						えへへぇ♪\nこれでせんぱいの未来はリズの<dash=2>
+CharacterOff
+	ディーア	笑い4						ああ！\n思い出を力に変えて王として頑張る！
+	ディーア	通常4						それで良いんだよな？
+CharacterOff
+	リズ	驚き						…………へ？
+CharacterOff
+	ディーア	通常4						思い返せば、\n悪魔魔剣のみんなもそうだった
+	ディーア	通常4						堕落や罪深いことに誘うけれど\nそれはオレに必要なことを\n教えてくれるためだったと思う
+	ディーア	笑い4						だからリズも、\n遊び心っていう王に必要なことを\n伝えてくれたんだよな！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い4						ありがとう！
+CharacterOff
+	リズ	驚き						ど、どういたしまして……？
+	リズ	驚き						じゃ、なくてぇ！
+StopBgm
+	ルキフェル	通常	p7b			1		…………リズ？
+Tween	リズ	MoveBy	x=-200 time=0.5				NoWait
+	リズ	悲しい						ぴっ!?
+Bgm	コメディ
+	ルキフェル	通常						あなた、\n私の先輩に何を仕込んだのですか？
+Shake	リズ		x=5				NoWait
+	リズ	悲しい						し、し、仕込む？
+	ルキフェル	通常						仮に先輩とリズが、\n本当に過去に接触していたとして
+	ルキフェル	通常						長い間一緒だったなら\n私がわからないはずありません♪
+	ルキフェル	通常						それに、\n先輩の童心を思い出させる異空間\nもしかして記憶を捏造<dash=2>
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	悲しい						ぎくぎくぎくっ！
+	リズ	悲しい						な、なんのことかなー？
+	リズ	悲しい						せんぱいはリズと、\n昔から本当にたーくさん遊んだの！
+	リズ	悲しい						そ、そうだよね？
+CharacterOff
+	ディーア	怪しい4						確かに今はそんな気がしてきてる
+CharacterOff
+	リズ	通常						うんうん！\nせんぱいが住んでた青い屋根の家で！
+CharacterOff
+	ディーア	怪しい4						青？
+	ディーア	怪しい4						いや確か、屋根は赤かった気が<dash=2>
+CharacterOff
+	リズ	驚き						昔を覚えてないっていったのに、\nそんな細かいところは覚えてるの!?
+	リズ	驚き						と、とにかくぅ！
+	リズ	驚き						リズはせんぱいのオモチャだから！
+CharacterOff
+	リズ	拡大笑い	エフェクト表					これからたーくさん、\nリズをオモチャにして遊んで♪
+	リズ	拡大笑い						せーんぱい♪
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1256_11
+EndIf
+EndScenario
+
+# E_1256_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	凍りついた神殿城					0
+Param	character_grayout=false
+	リズ	通常				0
+FadeIn	black					1
+	リズ	通常						にひひ♪\n今日もせんぱいとたくさん遊ぼっと♪
+	リズ	通常						リリスちゃんにはバレてるし、\nせんぱいもまだ疑っているけれど
+	リズ	通常						せんぱいは、\nリズと遊んだ記憶を「思い出した」し\nあとはリズがやりたいほうだい♪
+	リズ	笑い						存在した記憶も、\n存在しない記憶もせんぱいにあげて\nリズだけのせんぱいにするの♪
+Se	回想
+FadeOut	white					1
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	リズ	通常				0
+FadeIn	white					1
+	リズ	通常						せーんぱい、おぼえてるでしょ♪
+	リズ	通常						リズのここに、\nせんぱいがつけてくれたアレがあるの
+	リズ	通常						他の人なら気づかない隅々まで\nせんぱいが遊んでくれた証拠だよ♪
+CharacterOff
+	ディーア	にやけ4						そんなこともあった気がするー♪
+	ディーア	にやけ4						そうだった！\nリズはオレの大事なオモチャで、\n永遠のトモダチだもんな！
+	ディーア	にやけ4						リズと遊んでいるだけで幸せだぁ♪
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	リズ	笑い				0
+FadeIn	white					1
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	笑い						えへへへ♪\n待っててね、せーんぱい
+	リズ	笑い						先日遊んでもらったオモチャが\n会いに行くよぉ♪
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	アスモデウス=サラ	通常				0
+Wait						2
+FadeIn	black					.3
+Bgm	コメディ
+	アスモデウス=サラ	通常						先輩♪\n幼馴染のサラが耳かきしますねぇ♪\n（怖くないよ♪）
+	アスモデウス=サラ	通常						昔から先輩、\nこういうことするの好きでしたよね♪\n（ほんとはウソ）
+CharacterOff
+	ディーア	にやけ4						そうだったかもぉー！
+CharacterOff
+	集中線		エフェクト表
+	リズ	驚き
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	驚き						えぇええええええええ!?
+	リズ	驚き						さ、ささ、サラちゃん？
+	リズ	驚き						いったい、なにしてるのぉ……？
+CharacterOff
+	アスモデウス=サラ	通常
+Tween	アスモデウス=サラ	PunchPosition	y=30				NoWait
+	アスモデウス=サラ	通常						えへへ♪\nリズちゃんの真似をしてたの♪\n（どやぁ♪）
+	アスモデウス=サラ	通常						なんだか今の先輩、\n存在しない記憶とか浮かびやすくて\n（びっくり）
+	アスモデウス=サラ	通常						他のみんなも来てるよ♪\n（おもしろい♪）
+CharacterOff
+	プリム	通常						せーんぱい♪\n昔からプリムがお口をくちゅくちゅ\nするのが日常でしたよぉー！
+CharacterOff
+	ディーア	怪しい4						そうかな？ そうかも……
+CharacterOff
+	マネ	通常						マネもですわぁ！\nあーんなに小さい頃から、\n先輩はチャートの虜でしたもの！
+CharacterOff
+	ディーア	怪しい4						そうかな？ そうかも……
+CharacterOff
+	ベルゼ	通常
+Shake	ベルゼ		x=3				NoWait
+	ベルゼ	通常						いったい何歳から\n怪しい取引してた設定なんですか!?
+	ベルゼ	通常						そ、それよりもせんぱい……\n今日もまた昔みたいに……
+Tween	ベルゼ	PunchPosition	y=30				NoWait
+	ベルゼ	通常						私がアーンしてあげますからね♪
+CharacterOff
+	リズ	驚き
+Shake	リズ		x=3 y=3				NoWait
+	リズ	驚き						あぁああああああああ!?
+	リズ	悲しい						り、リズだけのせんぱいなのにぃ！
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	悲しい						みんなストップぅ！\nリズのせんぱいに\n変な記憶を詰め込まないでぇ!?
+CharacterOff
+	リヴィア	通常						じゃあやっぱり、\nリズちゃんも記憶を捏造してるのぉ？
+CharacterOff
+	リズ	驚き
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	驚き						ぎくっ！
+	リズ	驚き						えと、それは……ノーコメント……
+	リズ	驚き						でも、どうなってるの？
+	黒グラデーション		エフェクト裏			1
+	リズ	驚き						サラちゃんたちとの記憶まで\nせんぱいが生み出しちゃうなんて
+	リズ	驚き						ま、まさか……\nリズが記憶をいじったせいで、\nせんぱいの記憶の境界が曖昧に？
+	リズ	驚き						みんなにも、\nすごく騙されやすくなっちゃった!?
+CharacterOff
+	レイバーインヴェスティ	通常2						マスターちゃんに、\n好きな記憶を捏造できるってほんと!?
+	レイバーインヴェスティ	通常2						これは探求しがいがあるわねっ！
+	レイバーインヴェスティ	通常2						マスターちゃん！\nあなたは昔っからレイバーと一緒に\nギャンブルに狂っていたわ！
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+	レイバーインヴェスティ	通常2						さあ今日も、\n最新のカジノで探求しまくるわよ♪
+CharacterOff
+	ディーア	怪しい4						そうかな？ そうかも……
+CharacterOff
+	三日月宗近	通常						あるじはぁ♪\n昔っから宗近に夢中だったわよぉ♪
+CharacterOff
+	ディーア	怪しい4						そうかな？ そうかも……
+CharacterOff
+	月影	通常
+Tween	月影	PunchPosition	y=30				NoWait
+	月影	通常						いやいや！\n旦那さまは生まれたその瞬間から、\nロリに夢中でロリ一筋！
+CharacterOff
+	ディーア	怪しい4						そうかな？ そうかも……
+CharacterOff
+	プシュケー	通常						神話になるって約束してたよね♪
+CharacterOff
+	龍の髭	通常						ほしがりさんで豚さんだよねぇ！
+CharacterOff
+	カシウス	通常2						一緒に「悪いこと」してくれるって\n約束してくれたよね？
+StopBgm
+CharacterOff
+	ディーア	怪しい4						そうかな？ そうか<dash=2>
+Bgm	魔獣バトル
+Se	闇1
+	オーラ紫		エフェクト表			1
+Shake	ディーア		x=5 y=5				NoWait
+	ディーア	絶望4						ももももももももももも！？！？！？
+CharacterOff
+	リズ	驚き						せんぱい!?
+CharacterOff
+	アスモデウス=サラ	驚き						わあ!?\n先輩の様子がおかしくなっちゃった！\n（びっくり！）
+CharacterOff
+	リズ	驚き						せんぱいに変な記憶を与えすぎて\n暴走しちゃったの……？
+CharacterOff
+	ディーア	絶望4						なんだこの記憶は……？
+	ディーア	絶望4						生命の誕生、魔界の真実……\n伝説のオモチャ……未確認飛行物体
+	ディーア	絶望4						そうか、全てはつながっていた
+	ディーア	絶望4						世界の答えは……あのカード
+	ディーア	絶望4						アルティメイトスピンの力で\n未来の救済を……！
+CharacterOff
+	リズ	驚き						な、なにいってるのぉ……！
+CharacterOff
+	ベルゼ	慌て						まさか、\nせんぱいは高次元の記憶と接続を？
+CharacterOff
+	リズ	驚き						ど、どういうこと、シエルちゃん!?
+CharacterOff
+	ベルゼ	慌て						人間の脳と記憶は、\nまだまだ未解明の領域が含まれます
+	ベルゼ	慌て						そこに存在しない記憶が\n許容量を遥かに超えて生じた結果
+	ベルゼ	慌て						人類が到達してはいけない\n禁忌の知恵に辿り着いたのかも？
+CharacterOff
+	リズ	驚き						つ、つまり？
+CharacterOff
+	ベルゼ	慌て						魔界の……終わりかもしれません！
+CharacterOff
+	リズ	悲しい						それじゃあ、\nせんぱいと永遠に楽園で遊ぶ計画が\n台無しになっちゃうよぉ!?
+Tween	リズ	PunchPosition	y=30				NoWait
+	リズ	悲しい						み、みんな！\n協力してせんぱいを止めるよぉ！
+CharacterOff
+	ディーア	悔しい4						邪魔はさせない
+	ディーア	本気4						オレたちでゼロの魔界を創るまで\nいくぞ、<dash=4>
+CharacterOff
+	集中線		エフェクト表
+	リズ	驚き						とまってぇええええええええ!!
+StopBgm
+Se	チャージ
+FadeOut	white					2
+StopBgm
+CharacterOff						0
+Se	光2
+Se	火3
+	リズ	悲しい				0
+Wait						3
+FadeIn	black					2
+	リズ	悲しい						はぁ、はぁ、はぁ……
+CharacterOff
+	マネ	驚き						なんとか、なりましたの……？
+Bgm	凱旋
+CharacterOff
+	ディーア	驚き4						あれ？\nオレはいったいなにを<dash=2>
+CharacterOff
+	リズ	悲しい						せんぱーい！
+CharacterOff
+	ディーア	驚き4						リズ？
+CharacterOff
+	リズ	悲しい						リズとの昔のこと、\nどれくらい覚えてる……？
+CharacterOff
+	ディーア	汗4						えーっと、\nなんとなく会ったか会わなかったか\nよくわからないくらい？
+CharacterOff
+	リズ	通常						よかったぁ……
+	リズ	悲しい						まったく良くないけど、\n魔界が滅びるよりは良かったぁ……
+	リズ	悲しい						まさかせんぱいが、\nこんなことになるなんて\n想像できなかったよ……
+CharacterOff
+	ディーア	汗4						よくわからないけど……
+	ディーア	怪しい4						みんな、疲れ果てているようだな？\nいったいどうしたんだ？
+CharacterOff
+	ベルゼ	慌て						それはもう、\n説明するのも大変な戦いが……
+CharacterOff
+	リズ	通常						大丈夫♪\nせんぱいは考えなくていいよぉ？
+	リズ	通常						にひひ♪\nちょっと計画はずれちゃったけど
+	リズ	通常						みんなの干渉結果も消したし\nお邪魔なみんながバテバテになった\n今度こそリズのチャンス♪
+	リズ	通常						遊んでる間は、\n疲れなんて忘れて夢中になれるもの\nリズはまだまだ元気だよぉ♪
+	リズ	笑い						せーんぱい、\nあっちで二人でまた遊ぼうよぉ♪
+	リズ	笑い						せんぱいが昔してたみたいに♪
+CharacterOff
+	リズ	拡大笑い	エフェクト表					リズをオモチャにして♪
+FadeOut	white					2
+StopBgm
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	ルキフェル	通常				0
+Wait						2
+FadeIn	white					1
+Bgm	図書館
+	ルキフェル	通常						ふふふ♪\n先輩はご無事のようでなにより♪
+	ルキフェル	通常						でも私の先輩を困らせるなんて、\n同じリリスファミリーの仲間とはいえ\n悪い子たちです
+	ルキフェル	通常						後でしっかりお話をしなくては♪
+	ルキフェル	通常						それにしても……
+	ルキフェル	通常						やはり魔剣王……\n先輩のお力は私たちの想像以上……
+	ルキフェル	通常						先輩ならもしかして、\nアリス姉様ができなかったことを
+	ルキフェル	通常						妹君……リリス様を救えるかも
+FadeOut	white					3
+If	isdebug==true
+CharacterOff
+Jump	*E_1256_01
+EndIf
+EndScenario

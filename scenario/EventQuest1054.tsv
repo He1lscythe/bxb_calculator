@@ -1,0 +1,753 @@
+# E_1054_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	キノコリオン
+Bg	宇宙					0
+Param	character_grayout=false
+	レビュウ	拡大通常	エフェクト表			0
+FadeIn	black					.5
+	レビュウ	拡大通常						な、なんですかここは…！				酒場再生の超短い予告シナリオ
+	レビュウ	拡大通常						ラッキースケベ因子拡散！\nえっち係数……∞!?
+	レビュウ	拡大通常						こんなえっちな魔界は許せません！
+FadeOut	white					.2
+CharacterOff						0
+	レビュウ	拡大リンゴ	エフェクト表			0
+FadeIn	white					.2
+	レビュウ	拡大リンゴ						聖なるリンゴの名のもとに
+FadeOut	white					.2
+CharacterOff						0
+	イベントスチル10541					0
+FadeIn	white					.2
+Tween	イベントスチル10541	MoveBy	y=-200 time=3				NoWait
+Wait						1.5
+	レビュウ	<Off>	1_2					魔界の審査を開始します！
+If	isdebug==true
+CharacterOff
+Jump	*E_1054_02
+EndIf
+EndScenario
+
+# E_1054_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+Param	character_grayout=false
+	鍛冶医クランベリー	通常2				0
+FadeIn	white					.5
+	鍛冶医クランベリー	通常2						魔剣機関から\n通知が来てるわよ
+CharacterOff
+	ディーア	怪しい2						えーっと……？
+	ディーア	驚き2						新魔剣がブキダスに登録されましたが\n絶対に、絶対に\n製造してはいけません？
+	ディーア	怪しい2						クランさん、\nこれってどういうことなんですか？
+CharacterOff
+	鍛冶医クランベリー	怪しい2						そ、それはそのぉ、\n私からはちょっと言いづらくて……
+CharacterOff
+	ディーア	怪しい2						製造しちゃいけなくて、\nクランさんが言いにくい魔剣……\nまさか……！
+	集中線		エフェクト表
+	ディーア	にやけ2						とんでもなく\nえっちな魔剣だったり!?
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	白背景					0
+	禁書ヴォイニック	拡大日常尻	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	ディーア	<Off>	1_2					これまでの魔剣も\nみんなえっちだったしな！
+FadeOut	white					.3
+CharacterOff						0
+	白櫃	照れ拡大胸	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	ディーア	<Off>	1_2					肌色すぎて公開できませんとか、\n年齢制限とか……
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	驚き2				0
+FadeIn	white					.3
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						はっ!!\n今のうちに製造したら\nえっちなままの魔剣が!?
+	ディーア	にやけ2						こうしちゃいられない……！
+Se	走る
+Tween	ディーア	MoveBy	x=-900 time=1				NoWait
+Wait						.8
+CharacterOff
+	鍛冶医クランベリー	驚き2						あっ、待って！\n本当に製造したらダメなのよ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	笑い2				0
+FadeIn	black					.3
+	ディーア	にやけ2						それじゃあさっそく！\nブキダスさーん！
+Bgm	ガチャ
+CharacterOff
+Se	チャージ
+	ブキダス	虹				.5
+Wait						1.5
+CharacterOff
+	ディーア	笑い2						おぉ！\n虹色ってことは……！
+StopBgm
+CharacterOff
+	ブキダス	虹
+Se	アラート
+	オーラ赤		エフェクト表			.5
+FadeOut	red					.2
+FadeIn	red					.2
+Wait						.5
+FadeOut	red					.2
+FadeIn	red					.2
+Wait						1.5
+Se	光2
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+Bg	白背景					0
+	トライアルスチル49102		エフェクト表			0
+FadeIn	white					.2
+CharacterOff	トライアルスチル49102					.8
+Wait						1
+FadeOut	white					.2
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	絶望裸2				0
+	土煙		エフェクト表			0
+FadeIn	white					.2
+	ディーア	絶望裸2						…………へ？
+Bgm	緊迫
+CharacterOff
+	リディ	水着悔しい2	画面外_右
+Se	走る
+Tween	リディ	MoveBy	x=-700 time=1				NoWait
+Wait						.5
+	リディ	水着悔しい2						マスター、どうしたの!?\nすっごく揺れた<dash=2>
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	水着悔しい2						って、きゃあああああ!?\nなんで裸なの!? えっち!!
+CharacterOff
+	ディーア	絶望裸2						こ、これはえっちじゃなくて……！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	悔しい裸2						リディこそ、\n水着なんてえっちだろ!?
+CharacterOff
+	リディ	水着悔しい2						えっちじゃないもん！\n水着を試してただけだもん！
+CharacterOff
+	鍛冶医クランベリー	怒り2	画面外_右
+Se	走る
+Tween	鍛冶医クランベリー	MoveBy	x=-700 time=1				NoWait
+	鍛冶医クランベリー	怒り2						ダメよ、二人とも!!\nそんなにえっちえっち言うと<dash=2>
+FadeOut	white					.3
+CharacterOff						0
+	黒グラデーション		エフェクト表2			0
+	レビュウ	拡大腰	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+FadeIn	white					.3
+Bgm	キノコリオン
+	鍛冶医クランベリー	<Off>	1_2					<size=50>規制されちゃうわ！</size>
+CharacterOff	黒グラデーション					.3
+	レビュウ	拡大腰						聞こえていましたよ……\n何度も何度もえっち、えっちと……
+CharacterOff
+	ディーア	きらーん裸2						おぉ……！
+CharacterOff
+	レビュウ	拡大通常	エフェクト裏
+	集中線		エフェクト表
+	レビュウ	拡大通常						ですが、\nそんなえっちはもう許しません！
+CharacterOff
+	レビュウ	通常						魔界の未来を守るため、\n全てのえっちはリジェクトします！
+CharacterOff
+	ディーア	絶望裸2						へ……？\nえっちを、リジェクト……？
+CharacterOff
+	レビュウ	怪しい						まずは……\nそのえっちな格好をBANです!!
+CharacterOff
+	リディ	水着悔しい2	1_2
+	鍛冶医クランベリー	怒り2	2_2_b
+	二人							え……？
+	聖なるリンゴ		画面外_上
+Se	光1
+Tween	聖なるリンゴ	MoveTo	y=-250 time=0.3				NoWait
+Se	ドーン
+Shake	Graphics		x=2				NoWait
+	土煙		エフェクト表			.3
+Wait						.3
+	リディ＆クランベリー	<Off>						きゃああああ!?
+CharacterOff
+	ディーア	絶望裸2						り、リディ!? クランさん!?
+CharacterOff
+	聖なるリンゴ		2_3
+	レビュウ	<Off>						<color=blue>えっち係数オーバー13\n<ruby=Anti Porn Perspective Leading Examiner>A.P.P.L.E.</ruby>原則\n違反を確認</color>
+	レビュウ	<Off>						<color=blue>差し戻しにつき\n健全な姿に修正します</color>
+	レビュウ	<Off>						<color=blue>ぴこーんぴこーん♪\n修正完了……！</color>
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+	リディ	規制				0
+Param	character_grayout=true
+FadeIn	white					1
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	規制						きゃあああ!?\nな、なんなのこの格好!?
+CharacterOff
+	レビュウ	通常						お部屋で水着はえっちの極み！\nいやらしいことしてたんでしょう!!
+CharacterOff
+	リディ	規制
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	規制						してないよ!?
+CharacterOff
+	鍛冶医クランベリー	規制
+Tween	鍛冶医クランベリー	RotateTo	y=180 time=2				NoWait
+	鍛冶医クランベリー	規制						水着のリディちゃんはともかく、\n私はどうして規制するのよ!?
+CharacterOff
+	リディ	規制
+	リディ	規制						クランさんのナイスバディが\n『ペーパー◯◯◯RPG』みたいに!!
+CharacterOff
+	レビュウ	怪しい						あなたは<dash=2>
+	レビュウ	拡大通常	エフェクト表					なんか存在がえっちです!!
+CharacterOff
+	鍛冶医クランベリー	規制
+Tween	鍛冶医クランベリー	PunchPosition	y=30				NoWait
+	鍛冶医クランベリー	規制						えっちじゃないわよ!?
+CharacterOff
+	レビュウ	嬉しい						ともかく、これでえっち係数０\nとっても健全になりました!!
+CharacterOff
+	リディ	規制	1_2
+	鍛冶医クランベリー	規制	2_2
+Param	character_grayout=true
+	鍛冶医クランベリー	規制						こんな規制は\n受け入れられないわ……！
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	規制						そうだよ!!\nマスターからもなんとか<dash=2>
+Param	character_grayout=false
+CharacterOff
+	イベントスチル10545		エフェクト裏
+	集中線		エフェクト表
+	リディ	<Off>						って、うっっっっっっわ!?\nめっちゃ悔しそうな顔してる！！？？
+	ディーア	<Off>						えっちな魔剣が来たと思ったのに……
+CharacterOff
+	ディーア	悔しい裸2						いったい\nなんなんだこれは……！
+CharacterOff
+	リディ	規制						いきなり冷静に戻らないでよ!!
+CharacterOff
+	レビュウ	通常						見てのとおりです
+Tween	レビュウ	PunchPosition	y=30				NoWait
+	レビュウ	通常						魔界は無秩序えっちに溢れすぎ、\nえっちディストピア一直線！
+Param	character_grayout=false
+CharacterOff
+	レビュウ	拡大リンゴ	エフェクト表
+	レビュウ	拡大リンゴ	エフェクト表					聖なるリンゴの名のもとに\nえっちを規制する<dash=2>
+CharacterOff
+	レビュウ	嬉しい
+	集中線		エフェクト表
+	レビュウ	嬉しい						それが私、\n秩序の秩序による秩序のための魔剣\nレビュウの役目です！
+StopBgm
+CharacterOff
+	ディーア	怪しい裸2						ちじょの魔剣？
+CharacterOff
+	レビュウ	驚き						<size=50>ち・つ・じょ!!</size>
+Bgm	コメディ
+	レビュウ	通常						こんなことしている暇はありません！\n魔界を早く健全にしないと！
+Tween	レビュウ	MoveBy	x=-800 time=1.5				NoWait
+Wait						.5
+CharacterOff
+	ディーア	驚き裸2						あっ……！\nま、待て……！
+CharacterOff
+	リディ	規制
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	規制						追いかけてマスター！\nこんな格好のままはやだよぉ！
+CharacterOff
+	ディーア	目閉じ裸2						それより寒くないかいリディ、\nオレが暖めて<dash=2>
+CharacterOff
+	リディ	規制						<size=50>お･い･か･け･て!!</size>
+CharacterOff
+	ディーア	絶望裸2						は、はい……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	          
+Wait						1
+Bgm	魔王バトル
+FadeIn	black					.3
+	レビュウ	<Off>						さようなら全てのえっち
+	イベントスチル10541b		エフェクト表
+	レビュウ	<Off>						祈りましょう、\nラ・アッポゥ・エッティアーナ……
+FadeOut	white					.3
+CharacterOff						0
+Bg	市街地A					0
+	白櫃	驚き				0
+	黒グラデーション		エフェクト裏			0
+FadeIn	white					.3
+	白櫃	驚き						ふぇ……？\nあれは、なんでしょう？
+Wait						.1
+	聖なるリンゴ		画面外_上
+Tween	聖なるリンゴ	MoveTo	y=-250 time=0.5				NoWait
+Se	光2
+Wait						.3
+FadeOut	white					.2
+CharacterOff						0
+Bg	酒場_宿屋					0
+	イゾルデ	通常				0
+	黒グラデーション		エフェクト裏			0
+FadeIn	white					.2
+Wait						.1
+	聖なるリンゴ		画面外_上
+Tween	聖なるリンゴ	MoveTo	y=-250 time=0.5				NoWait
+Se	光2
+Wait						.3
+FadeOut	white					.2
+CharacterOff						0
+Bg	市街地B					0
+	キノコリオンヌ	驚き				0
+	黒グラデーション		エフェクト裏			0
+FadeIn	white					.2
+Wait						.1
+	聖なるリンゴ		画面外_上
+Tween	聖なるリンゴ	MoveTo	y=-250 time=0.5				NoWait
+Se	光2
+Wait						1
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+	ディーア	悔しい裸2				0
+Wait						1
+Param	character_grayout=false
+FadeIn	white					1
+	ディーア	悔しい裸2						くっ……！\nレビュウは一体どこに……？
+	L.O.V.E.	<Off>	1_2					旦那さまー！
+	ディーア	驚き裸2						この声は……！
+CharacterOff
+	L.O.V.E.	規制
+Shake	L.O.V.E.	PunchPosition	x=5				NoWait
+	L.O.V.E.	規制						ごめんなさいごめんさいっ！\n醜い肉すぎて規制されたんですね♥
+CharacterOff
+	ディーア	拡大悔しい裸2	エフェクト表					あのむちむちボディが……！\nえっちな肌色が……!!
+CharacterOff
+	イゾルデ	規制						ああ、騎士さま……♪\nこのテープを剥がしてくださる？
+CharacterOff
+	ディーア	拡大絶望裸2	エフェクト表					コウモリさんまで\nみえなくなってるー!?
+CharacterOff
+	ディーア	悔しい裸2
+Shake	ディーア		x=5				NoWait
+	ディーア	悔しい裸2						まずいぞ、レビュウを止めないと、\n魔界が本当にえっちじゃなくなる!!
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望裸2						そんなのダメだ！\nオレはえっちな魔剣と\nイチャイチャしたいんだー!!
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+	レビュウ	怪しい				0
+Wait						1
+FadeIn	black					.3
+Bgm	図書館
+	レビュウ	怪しい						なんということでしょう……！\nいくらBANしてもえっちが湧いてくる
+	レビュウ	通常						ダメだこの魔界、\n早くなんとかしないと……！
+CharacterOff
+	ディーア	本気裸2	画面外_右
+Se	走る
+Tween	ディーア	MoveBy	x=-700 time=1				NoWait
+Wait						.5
+	ディーア	本気裸2						見つけたぞ、レビュウ！\n頼むから規制をやめてくれ！
+CharacterOff
+	レビュウ	通常						なにを言っているのですか？\nこれはあなたのためでもあるんですよ
+CharacterOff
+	ディーア	驚き裸2						なっ……!?
+CharacterOff
+	レビュウ	通常						すでにえっちによる\n滅びが始まっています……
+CharacterOff
+Bg	黒背景
+	マグナ	通常	1_3
+	ぎんいろ=ロスト	通常	3_3_b
+	黒グラデーション		エフェクト表
+	レビュウ	<Off>						破損の姿が差し止められたり
+CharacterOff
+	リディ	パンツ
+	レビュウ	<Off>	1_2					パンツの出荷が止められたり
+CharacterOff
+Bg	市街地B
+	レビュウ	通常						このまま\nえっちレギュレーションが崩壊したら\n魔界全体がえっちに染まり
+CharacterOff
+Bg	白背景
+	集中線		エフェクト表2
+	イベントスチル10543		エフェクト裏
+	テープ		エフェクト表
+	レビュウ	<Off>						聖なるリンゴの審判で\n魔界がBANされてしまいます！
+StopBgm
+CharacterOff
+Bg	市街地B
+	ディーア	絶望裸2
+	ディーア	絶望裸2						そんな、\nえっちで魔界が滅びるなんて……
+CharacterOff
+Bg	市街地B
+Bgm	魔王バトル
+	レビュウ	通常	p5
+	レビュウ	通常						全ては魔界の未来のために!!\nえっちな魔剣は規制しちゃいます！
+Se	闇1
+	聖なるリンゴ		p5b			.5
+Wait						1
+CharacterOff
+	ディーア	悔しい裸2						ま、またあのリンゴが……！
+Se	チャージ
+FadeOut	white					1
+CharacterOff						0
+	キノコリオンヌ	規制				0
+FadeIn	white					1
+	キノコリオンヌ	規制						わぁああん！ 王子ぃ！\n■■■が規制されちゃったー！
+CharacterOff
+	ディーア	驚き裸2						■■■リオンヌ!!
+	ディーア	絶望裸2						って、これはまさか……!!
+CharacterOff
+	レビュウ	通常						そう、\n■■■なんてえっちの極み！
+	レビュウ	怪しい						まして■■■の上に腰を乗せて、\n■■■の■■■をお世話するなんて!!
+CharacterOff
+	ディーア	絶望裸2						規制したほうが\n危なくなってるから!!
+CharacterOff
+	テストあああああ文字数こ	規制						おいおい、健全安全なテストちゃんも\n規制対象だって？\nどうなってるんですか審査基準は
+	テストあああああ文字数こ	規制						これはレビューに\n１とかつけちゃいますって！
+CharacterOff
+	レビュウ	驚き						バグはそもそも規制対象ですよ！
+CharacterOff
+	テストあああああ文字数こ	規制
+Tween	テストあああああ文字数こ	PunchPosition	y=30				NoWait
+	テストあああああ文字数こ	規制						■■■■■■■■■■■■■■■■!!\n<color=blue>放送コードに引っかかるレベルの抗議</color>
+CharacterOff
+	ディーア	絶望裸2
+	ディーア	絶望裸2						もうめちゃくちゃだ!!
+	煌刀ソハヤ	<Off>	1_3					旦那様ー！
+StopBgm
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き裸2						この声はソハヤ？\nきっとソハヤも大変なことに<dash=2>
+Bgm	緊迫
+FadeOut	white					.3
+CharacterOff						0
+	煌刀ソハヤ	拡大胸	エフェクト表			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	煌刀ソハヤ	拡大腰	エフェクト表			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	煌刀ソハヤ	通常				0
+	集中線		エフェクト表			0
+FadeIn	white					.3
+	煌刀ソハヤ	通常						みんな、なにやってるのー？
+Bgm	コメディ
+CharacterOff
+	ディーア	拡大本気裸2	エフェクト表					なんで\nソハヤだけ無事なんだよ!?
+CharacterOff
+	レビュウ	嬉しい						ソハヤさんは\n自分で規制してますから！
+	レビュウ	通常						超安全＆健全！\n通ってよし！
+CharacterOff
+	ディーア	絶望裸2						その理屈ありか!?
+CharacterOff
+	レビュウ	通常						基準が全てです！
+Bgm	バトル
+CharacterOff
+	ディーア	本気裸2						こんな規制は横暴だ！\nオレたちで止めてやる!!
+CharacterOff
+	レビュウ	通常						そのえっちな欲望は規制対象ですね\n全ては魔界の未来のために
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	レビュウ	通常						全域型えっち制限魔剣レビュウ\n規制対象確定\nセーフティを解除……
+CharacterOff
+	レビュウ	拡大通常	エフェクト表					いきなさい！\nえっちリジェクトウェポン!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1054_03
+EndIf
+EndScenario
+
+# E_1054_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	市街地B					0
+Param	character_grayout=false
+	ディーア	悔しい裸2				0
+FadeIn	white					.5
+	ディーア	悔しい裸2						くっ……！
+CharacterOff
+	レビュウ	怪しい						えっちにまみれた哀れな魂よ\nレビュウがすっきりさせてあげます
+CharacterOff
+	レビュウ	拡大腰	エフェクト表					さあ、\nどうぞ懺悔室へ
+Bgm	コメディ
+CharacterOff
+	集中線		エフェクト表
+	ディーア	拡大本気裸2	エフェクト裏
+	ディーア	拡大本気裸2						そこで懺悔してもいいのか!?
+CharacterOff
+	キノコリオンヌ	規制
+Tween	キノコリオンヌ	PunchPosition	y=30				NoWait
+	キノコリオンヌ	規制						そんなことより、\n規制をなんとかしてよー！
+CharacterOff
+	ディーア	悔しい裸2						はっ……！\nそうだ懺悔の前に規制を止めないと！
+	ディーア	悔しい裸2						レビュウ！\nお前は誤解しているんだ！
+	ディーア	本気裸2						えっちな魔剣なんていない！
+CharacterOff
+	レビュウ	通常						というと？
+CharacterOff
+	ディーア	目閉じ裸2						ちゃんと清楚な格好な子も<dash=2>
+Se	回想
+FadeOut	white					.2
+CharacterOff						0
+Bg	白背景					0
+	小怺	通常				0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.2
+	小怺	通常						感度3000倍♥
+FadeOut	white					.2
+CharacterOff						0
+Bg	市街地B					0
+	ディーア	悔しい裸2				0
+FadeIn	white					.2
+	ディーア	悔しい裸2						えっちなことなんて\n考えていないような子も<dash=2>
+Se	回想
+FadeOut	white					.2
+CharacterOff						0
+Bg	白背景					0
+	プリム	通常				0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.2
+	プリム	通常						くちゅくちゅ♪
+FadeOut	white					.2
+CharacterOff						0
+Bg	市街地B					0
+	ディーア	絶望裸2				0
+FadeIn	white					.2
+	ディーア	絶望裸2						だめだ、\nみんなえっちすぎる……!!
+CharacterOff
+	レビュウ	通常						語るに落ちましたね！\nこの魔界は全てえっちです!!
+StopBgm
+	レビュウ	怪しい						ならば、\n念入りに規制をしないといけません
+Bgm	魔王バトル
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	レビュウ	通常						これだけはしたくありませんでしたが\n最終手段をつかいます！
+	レビュウ	怪しい						<color=blue>A.P.P.L.E.原則999項違反\nアブソリュートえっちリジェクト起動\n対象=魔界全域</color>
+CharacterOff
+	ディーア	驚き裸2						な、なにをするつもりなんだ!?\n待ってくれ、レビュウ！
+Shake	Graphics		x=10 time=3				NoWait
+	オーラ紫		エフェクト表			1
+	ディーア	絶望裸2						……あれ？
+	ディーア	絶望裸2						なんか世界がおかしく？
+Se	闇3
+FadeOut	black					1
+CharacterOff						0
+Bg	黒背景					0
+FadeIn	black					.2
+	ディーア	<Off>						これはまさか……！
+FadeOut	black					.2
+StopBgm
+CharacterOff						0
+Bg	宇宙					0
+	イベントスチル10544		エフェクト裏			0
+	集中線		エフェクト表			0
+FadeIn	black					.2
+	ディーア	<Off>						<size=50>魔界が規制された!?</size>
+FadeOut	white					.3
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル10546		エフェクト表			0
+Bgm	絶望
+FadeIn	white					.3
+	          							<color=blue>現在この魔界では遊べません</color>
+	          							<color=blue>ブラウザ版\nブレイブソード×ブレイズソウル R\nをお楽しみ下さい</color>
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地C					0
+	テープ		エフェクト裏			0
+	ディーア	絶望裸2				0
+Wait						1
+FadeIn	black					.3
+	ディーア	絶望裸2						うぅ……\n本当に全部規制されるなんて
+	ディーア	絶望裸2						このまま魔界は\n超健全になってしまうのか？
+	ディーア	絶望裸2						新魔剣登場のたびに\nえっちな期待ができなくなるのか？
+CharacterOff	ディーア
+	レビュウ	怪しい						それがリンゴの意思です
+CharacterOff	レビュウ
+	ディーア	絶望裸2
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望裸2						そんな魔界で生きる意味が\nどこに<dash=2>
+	白櫃	<Off>	1_2					マスターさーん！
+	ディーア	怪しい裸2						白櫃？
+StopBgm
+	ディーア	絶望裸2						いや、白櫃も規制されてるはずだ\nあのえっちな格好は二度と……
+Bgm	神秘
+FadeOut	white					.3
+CharacterOff						0
+	白櫃	拡大腰規制	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	白櫃	拡大胸規制	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	白櫃	規制				0
+	オーラ桃		エフェクト裏			0
+	集中線		エフェクト表			0
+	テープ		エフェクト裏2			0
+FadeIn	white					.3
+Bgm	緊迫
+	白櫃	規制						なんだか\n変態なことになっちゃいましたね！
+StopBgm
+CharacterOff	白櫃
+CharacterOff	オーラ桃
+CharacterOff	集中線
+	ディーア	拡大本気裸2	エフェクト表					変態なことになってるーッッ！！！！
+CharacterOff	ディーア
+	レビュウ	嬉しい						うんうん♪\nとっても健全な格好です\nこの調子で<dash=2>
+	レビュウ	通常						って、あれ？\nどうされたんですか？
+Bgm	勇者バトル
+CharacterOff	レビュウ
+	ディーア	目閉じ裸2						そうか……！\nオレは間違っていた！
+	ディーア	目閉じ裸2						目に見えるだけがえっちじゃない\n見えないところにこそ真髄がある！
+	ディーア	目閉じ裸2						これがえっちクオリア……！\nオレは真理を手にしたぞ!!
+CharacterOff	ディーア
+	レビュウ	通常						な、なにを言って……
+CharacterOff	レビュウ
+	ディーア	本気裸2						つまり、こういうことだ\nレビュウ!!
+CharacterOff	ディーア
+	白櫃	規制
+	オーラ桃		エフェクト裏
+	集中線		エフェクト表
+	ディーア	<Off>	1_2					規制されたほうが\nえっち！！！！！！！
+CharacterOff
+	集中線		エフェクト表
+	レビュウ	拡大通常	エフェクト裏					な、なんですって!?
+CharacterOff	レビュウ
+CharacterOff	集中線
+	テープ		エフェクト裏2			0
+	ディーア	目閉じ裸2	2_3_b
+	ディーアのもち	通常	mochi
+	ディーア	目閉じ裸2						見てみろ白櫃を！\n目を細めるだけで、ふふふふ♪
+Se	チャージ
+Tween	ディーアのもち	ScaleBy	x=5 y=5 time=2	easeOutBack			NoWait
+	レビュウ	<Off>						えっち係数急上昇!?\n99、100、まだ上がるの!?
+CharacterOff
+	テープ		エフェクト裏2			0
+	レビュウ	驚き
+Tween	レビュウ	PunchPosition	y=30				NoWait
+	レビュウ	驚き						規制した魔剣相手に\nこれほどのえっちが生まれるなんて!?
+CharacterOff	レビュウ
+	ディーア	本気裸2						そう、\n他の魔剣でも同じこと!!
+FadeOut	white					.2
+CharacterOff						0
+Bg	白背景					0
+	シェリー	規制	3_3			0
+	フィノ	規制	1_3			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.2
+	ディーア	<Off>						魔法少女の変身シーン！\n隠れているのになんかえっち!!
+	ディーア	<Off>						これこそ原初の体験、\nイノセンスえっちメモリー！
+FadeOut	white					.2
+CharacterOff						0
+Bg	市街地C					0
+	エリオミルグ	規制				0
+	テープ		エフェクト裏2			0
+FadeIn	white					.2
+	エリオミルグ	規制						うははは♪\nマスターの妄想が滾っているねぇ♪
+	エリオミルグ	規制						エリのことでも\n妄想してみていいんだよぉ♪
+	エリオミルグ	拡大胸規制	エフェクト表
+	ディーア	<Off>	1_2					黒塗りでわからないからこそ\nロマンがそこにある!!
+	エリオミルグ	拡大腰規制	エフェクト表
+	ディーア	<Off>	1_2					その下は裸なのか？\nそれとも裸じゃないのか？
+CharacterOff	エリオミルグ
+	ディーア	目閉じ裸2
+	集中線		エフェクト表
+	ディーア	目閉じ裸2						オレの目には、\nふふふふふ……！
+CharacterOff	ディーア
+CharacterOff	集中線
+	レビュウ	驚き
+Tween	レビュウ	PunchPosition	y=30				NoWait
+	レビュウ	驚き						ま、待ちなさい！\n規制したはずなのにえっちなんて!!
+CharacterOff	レビュウ
+	ディーア	本気裸2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気裸2						そもそも！\nお前が一番まちがっている！
+CharacterOff	ディーア
+	レビュウ	驚き						は、はい!?
+	レビュウ	拡大腰	エフェクト裏
+	集中線		エフェクト表
+	ディーア	<Off>						なぜなら\nお前の格好が一番えっちだからだ!!
+CharacterOff	集中線
+Shake	レビュウ		x=5				NoWait
+	レビュウ	驚き	2_3					な、ななななな!?
+	レビュウ	驚き						わ、私は規制を司る魔剣ですよ!?\n私自身がえっちな訳が……！
+	レビュウ	通常						でも、この人\n私を見ながらえっち係数を……!!
+	レビュウ	驚き						えっちじゃないのに、えっち……？\nそんなことが……！
+Se	光1
+Tween	レビュウ	PunchPosition	y=30				NoWait
+	レビュウ	悲しい						ぴ、ピピピピ、ガチャーン!!
+CharacterOff	レビュウ
+	ディーア	怪しい裸2						自分で言うんだな……
+CharacterOff	ディーア
+	レビュウ	悲しい						ぷしゅー
+Se	倒れる
+Tween	レビュウ	MoveBy	y=-100				NoWait
+CharacterOff	レビュウ					1
+Wait						1
+CharacterOff	レビュウ
+	ディーア	驚き裸2						あっ、ショートした！
+CharacterOff	ディーア
+	エリオミルグ	規制						マスターの\nすごい妄想の勝利だね
+CharacterOff	エリオミルグ
+	ディーア	目閉じ裸2						これで魔界は救われたな
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+	ディーア	目閉じ2	3_3			0
+	レビュウ	悲しい	1_3_b			0
+Wait						1
+Param	character_grayout=true
+FadeIn	black					.3
+Bgm	平和
+	レビュウ	悲しい						うぅ……\n私は急ぎすぎたのかもしれません
+	レビュウ	悲しい						本当にえっちなものがなにか\nわからないまま規制をしてしまった
+	レビュウ	怪しい						魔界を真に救うためにはえっちを\n見極められるようにならないと
+	レビュウ	通常						……あなたに教えられましたね
+	ディーア	目閉じ2						ああ、そうだ\nこれからじっくり考えればいいんだよ
+	ディーア	笑い2						ようこそ、\nオレたちの魔界へ！
+	レビュウ	通常						マスター……
+StopBgm
+	ディーア	怪しい2						で、アレはどうなってるんだ？
+Bgm	コメディ
+Param	character_grayout=false
+CharacterOff						0
+	規制					0
+Shake	規制		x=5				NoWait
+	？？？？	<Off>						…………!!
+Tween	規制	PunchPosition	y=30				NoWait
+	キノコリオン？	<Off>	1_2					ノコノコノコー!?\n（たすけてノコー!?）
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常2	3_3			0
+	レビュウ	悲しい	1_3_b			0
+	レビュウ	通常						さっきのショートで、\nえっちリジェクトウェポンが\n不具合を起こしたようですね
+	レビュウ	通常						私たちで剥がさないと\n魔界は規制されたままです
+	ディーア	目閉じ2						とんでもないことが\n起きているな……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						それじゃあ\nさっそく剥がしに行くぞ!!
+	レビュウ	通常						さすがマスター\nすごいやる気ですね
+	ディーア	怪しい2						ああ、\nあんなに黒塗りなんて<dash=2>
+Param	character_grayout=false
+CharacterOff
+	イベントスチル10545		エフェクト表
+	ディーア	<Off>						どれだけえっちなんだ！！！！
+CharacterOff
+	集中線		エフェクト表
+	レビュウ	拡大通常	エフェクト裏					やっぱりダメです、\nこのマスター!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1054_01
+EndIf
+EndScenario

@@ -1,0 +1,560 @@
+# E_1073_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	魔術空間					0
+Param	character_grayout=false
+	ミオ	拡大通常	エフェクト裏			0
+	黒背景		エフェクト表			0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+FadeIn	black					.5
+	？？？？							だんな様、だんな様♥
+CharacterOff	黒背景
+Tween	瞬きA	MoveBy	y=325 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-325 time=2	easeOutCirc
+	ディーア	<Off>						うぅーん……
+	？？？？	<Off>						起きてください、だんな様♪
+	ディーア	<Off>						あと、十分…………\n年末はゆっくりさせてくれぇ……
+	？？？？	<Off>						ふふふ♪\nだんな様はお疲れみたいですね
+	？？？？	<Off>						わかりました♪\nそれじゃあ、\n一緒にお休みしましょう？
+Tween	Graphics	PunchPosition	y=30				NoWait
+Se	ポップイン
+	ディーア	<Off>						ふわぁ……♪\nすごい柔らかいクッションだぁ♪
+Tween	瞬きA	MoveBy	y=-325 time=2	easeInCirc			NoWait
+Tween	瞬きB	MoveBy	y=325 time=2	easeInCirc			NoWait
+Wait						.5
+	黒背景		エフェクト表			1
+Wait						1.5
+Se	衣擦れ2
+	？？？？	<Off>						ひゃあん♪\nまだお昼ですよぉ♥
+	？？？？	<Off>						でも、だんな様が\n望むならしちゃいましょう♪
+CharacterOff						0
+Bg	黒背景					0
+	ミオ	拡大通常	エフェクト表			1		二人っきりで、うさはじめ♥
+	ディーア	<Off>						うさはじ……
+StopBgm
+CharacterOff						0
+Param	character_grayout=true
+Bg	魔術空間					0
+	ミオ	通常	1_2			0
+	ディーア	驚き2	2_2			0
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						はっ……！
+Bgm	平和
+	ミオ	通常						ようやくのお目覚めですね♪\nおはようございます、だんな様♥
+	ディーア	怪しい2						えっとお前はたしか<dash=2>
+Tween	ミオ	MoveBy	x=20				NoWait
+	ミオ	通常						まだ寝ぼけていらっしゃるんですか？\n貴方のお嫁さん、卯王のミオです♥
+	ディーア	怪しい2						お嫁……？\nミオ…………？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						あっ！ 来年の十二支魔剣の！
+	ミオ	通常						はい♪ だんな様のものに\nしていただいたミオです♪
+	ディーア	汗2						そっか、ごめんな\n本当に寝ぼけていたみたいだ
+	ミオ	通常						いえいえ♪\n年の瀬までお仕事で\n大変だったみたいですから♪
+	ミオ	通常						それに私も、\nだんな様をひとりじめできて、\n嬉しかったです♥
+	ディーア	笑い2						そう言ってくれると助かるよ
+StopBgm
+	ディーア	笑い2						それで質問なんだけど
+	ミオ	通常						はい♪
+Param	character_grayout=false
+Bgm	緊迫
+CharacterOff
+	集中線		エフェクト表
+	ディーア	<Off>						いったい、ここはどこなんだ!?
+Param	character_grayout=true
+Bgm	コメディ
+CharacterOff
+	ミオ	通常	1_2
+	ディーア	絶望2	2_2
+	ミオ	通常						私たちの愛の巣ですよぉ♪
+	ディーア	絶望2						そうじゃなくて!!
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						オレはたしか\n宿屋で寝ていたはずだろ!?
+	ミオ	通常						はい、たくさんの魔剣と一緒に
+	ミオ	通常						ですが、あの騒がしいお宿では\nゆっくりお休みになれません
+	ミオ	通常						だから、私が\nゆっくりできる空間を\nつくっちゃいました♪
+	ミオ	通常						見た目が気になるのでしたら……
+Param	character_grayout=false
+Se	チャージ
+	オーラ青		エフェクト表			1
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	驚き2	2_2			0
+	ミオ	通常	1_2			0
+Param	character_grayout=true
+FadeIn	white					.3
+	ミオ	通常						ほら、この通り♪
+	ディーア	驚き2						宿屋っぽくなった!?
+	ミオ	通常						ここは私のつくったお家\nだんな様の望みはなんでも叶います♪
+Tween	ミオ	MoveBy	x=10				NoWait
+	ミオ	通常						私と、だんな様だけのお家\n他の子は入って来れない\n狭いけれども密着できるところ♪
+Tween	ミオ	MoveBy	x=10				NoWait
+	ミオ	通常						だんな様と私で二人っきりです♪\nゆっくりのんびり、過ごせますね♥
+	ディーア	絶望2						ちょ、ちょっと待て！
+	ディーア	汗2						み、ミオ？\n早くここから出してほしいんだ
+	ミオ	怒り						え……？どうしてですか？
+	ディーア	汗2						だって、正月の準備もあるし……
+	ミオ	通常						それでしたら、\nもうミオが済ませておきました
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						はやい!?
+	ミオ	通常						ミオが"できる"うさぎだと\n知っていただきたくて♪
+	ディーア	悔しい2						で、でも、外に出ないと……
+	ミオ	通常						だから、どうしてですか？
+	ミオ	悲しい						だんな様はいつも、\nお正月だろうと事件に巻き込まれます
+	ミオ	通常						でもここにいれば、そんな心配は無用\n本当にのんびりできますよ？
+	ディーア	汗2						うーん、たしかにそうだけど\nずっとここにいるのは……
+StopBgm
+	ミオ	通常						大丈夫です、だんな様♥\nミオがお嫁さんとして、\nたっぷり癒やして差し上げます♥
+Bgm	神秘
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	ミオ	拡大通常	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	ミオ	拡大通常						だんな様、\nなんでもミオに命令してください\n束縛して、独占してください
+FadeOut	white					.3
+CharacterOff
+	ミオ	拡大胸	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	ミオ	拡大胸						本当になんでも……♥\nミオをひとりじめしてほしいんです♥
+	ディーア	<Off>						ミオを、ひとりじめ…………
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+	ミオ	通常	1_2			0
+	ディーア	にやけ2	2_2			0
+FadeIn	white					.3
+	ディーア	にやけ2						そ、そうだな……！\nせっかくの年末だし、\nゆっくりイチャイチャ<dash=2>
+StopBgm
+	神兎カルバノグ	通常	画面外_右
+Tween	神兎カルバノグ	MoveTo	x=520 time=1				NoWait
+Tween	神兎カルバノグ	RotateTo	z=20 time=0				NoWait
+	神兎カルバノグ	通常						ジーっ
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						…………はっ!?
+Tween	神兎カルバノグ	RotateTo	z=-20 time=0.3				NoWait
+	ディーア	驚き2						い、今！\n誰かいなかったか？
+	ミオ	通常						え……？\nなんのことですか？
+Bgm	神秘
+Tween	ミオ	MoveBy	x=20				NoWait
+	ミオ	通常						それよりはやく遊びましょう？\nカルタでも、双六でも、\n他にも貝合せもできますよ♥
+	ディーア	怪しい2						気のせいか……
+	ディーア	にやけ2						じゃあ、かいあ<dash=2>
+StopBgm
+CharacterOff
+	神兎カルバノグ	拡大	エフェクト表
+	神兎カルバノグ	拡大						ジーっですよう♪
+CharacterOff
+	ディーア	驚き2	2_2
+	ミオ	悲しい	1_2
+Bgm	コメディ
+Tween	ミオ	PunchPosition	y=30				NoWait
+	ミオ	悲しい						きゃあ!?
+	ディーア	驚き2						やっぱり、カルバ!?
+CharacterOff
+	神兎カルバノグ	通常						えへへぇ♪\n見つかっちゃいましたあ♪\nさすがはごしゅじんさまですねえ♪
+CharacterOff
+	ディーア	怪しい2	2_2
+	ミオ	怒り	1_2
+	ディーア	怪しい2						その呼び方……\nってことは、この世界のカルバか！
+Shake	ミオ		x=5 time=2				NoWait
+	ミオ	怒り						そ、そんな、\nこの空間に入れるなんて……!?
+CharacterOff
+	神兎カルバノグ	通常						ごしゅじんさまがいないから、\n探しにきちゃったんですよう♪
+	神兎カルバノグ	通常						ミオちゃんの結界もすごいですけどお\n条件が甘かったですねえ♪
+CharacterOff
+	ミオ	悲しい	1_2
+	ディーア	怪しい2	2_2
+	ディーア	怪しい2						条件……？
+	ミオ	悲しい						この結界に他の子が入らないよう、\nうさぎ魔剣以外を拒絶するって\n条件をつけていたんです……
+CharacterOff
+	神兎カルバノグ	通常
+	神兎カルバノグ	通常						うさぎはミオちゃんだけじゃ\nないんですう♪
+Tween	神兎カルバノグ	PunchPosition	y=30				NoWait
+	神兎カルバノグ	通常						ごしゅじんさまをひとりじめなんて\nルール違反ですよう♪
+	神兎カルバノグ	通常						しあわせうさぎとして、\nカルバは見過ごせませんよお♪
+CharacterOff
+	ディーア	汗2	2_2
+	ミオ	怒り	1_2
+	ミオ	怒り						くぅ……よりにもよって、\n他のうさぎ魔剣が来るなんて……！
+CharacterOff
+	神兎カルバノグ	通常						それじゃあ、\nごしゅじんさま、帰りましょう？
+	神兎カルバノグ	通常						お正月はカルバと一緒に、\nとーってもすてきで、\nなかよしなことをするんですよう♪
+CharacterOff
+	ディーア	汗2	2_2
+	ミオ	怒り	1_2
+	ミオ							さ、させません！\nだんな様は私と一緒にいるんです！
+Param	character_grayout=false
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ミオ							こうなったら\n結界をもっと複雑に……！
+	ミオ							しあわせうさぎは退場ですっ！
+CharacterOff
+	神兎カルバノグ	通常
+Wait						.3
+Se	ピューン
+Tween	神兎カルバノグ	PunchPosition	y=300 time=0.5				NoWait
+Tween	神兎カルバノグ	MoveBy	x=1200 time=0.5				NoWait
+	神兎カルバノグ							あ～れ～!!
+Param	character_grayout=true
+Wait						.5
+CharacterOff
+	ディーア	驚き2	2_2
+	ミオ	通常	1_2
+	ディーア	驚き2						カルバーっ!?
+	ミオ	通常						ご心配なく♪\n向こうに送り返しただけです♥
+	ミオ	通常						今度こそ二人っきりですね、\nだんな様♥
+	ミオ	通常						さあ、\nさっきの続き、しちゃいましょ♪
+	ディーア	にやけ2						うぅ……確かに、\nすごく魅力的な提案だけど<dash=2>
+	ディーア	悔しい2						ミオが\nこんなに独占欲が強いなんて
+StopBgm
+Se	回想
+FadeOut	white					1
+CharacterOff						0
+Bg	酒場1F					0
+	          
+FadeIn	white					1
+	          							<color=blue>数日前</color>
+Bgm	和の国の町
+CharacterOff
+	丑王アコ	通常	1_3
+	ふうり	通常	3_3
+	ふうり	通常						え？ ミオちゃんが来るのにゃ？
+	丑王アコ	通常						わぁ♪ さすがはマスターさん♪
+	丑王アコ	通常						千客万来、マスターさんが歩けば\n魔剣と世界平和♪\n素晴らしいですね！
+CharacterOff
+	ディーア	通常2						ああ、来年の験担ぎも兼ねて\n製造しようと思うんだ
+	ディーア	笑い2						それで、二人から\n卯王の魔剣について教えてほしくて
+CharacterOff
+	ふうり	通常						ミオちゃんはいい子にゃ♪\nふうりのことをちゃんと猫扱い<dash=2>
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり							じゃなくて、\n猫可愛がりしてくれるんだにゃ！
+CharacterOff
+	ディーア	怪しい2						ふうりを、猫扱い……？
+CharacterOff
+	丑王アコ	通常	1_3
+	ふうり	通常	3_3
+	ふうり	通常						猫可愛がり！\nしかもなんでハテナが\nくっついてんだにゃ!?
+CharacterOff
+	ディーア	汗2						いやいや、素直な子だなーって
+CharacterOff
+	丑王アコ	通常	1_3
+	ふうり	通常	3_3
+	ふうり	通常						にゃにゃにゃにゃ……！\n怪しいにゃ……！
+CharacterOff
+	ディーア	通常2						アコはどうだ？\nミオのことで知っているのは？
+CharacterOff
+	丑王アコ	通常	1_3
+	ふうり	通常	3_3
+	丑王アコ	通常						そうですねぇ
+	丑王アコ	通常						ミオちゃんは十二支の仲間の中でも\nあんまりおしゃべりしない子なので、\n多くは知らないんです
+	丑王アコ	通常						ただ、\nその力は世界平和にも使えるくらい\nすごいもの
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	神社（昼）					0
+	ミオ	通常				0
+	          
+FadeIn	white					.3
+	丑王アコ	<Off>						うさぎは神様の使いであり、導き手
+	丑王アコ	<Off>						縁を結び、国を作る伝承から\n複雑な領域を造ることが\nできると聞いています
+	丑王アコ	<Off>						そして、結界の条件を誤ると、\n使用者の身にも\n危険が及ぶ可能性があるとも……
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	丑王アコ	通常	1_2			0
+	ディーア	悔しい2	2_2			0
+Param	character_grayout=true
+FadeIn	white					.3
+	ディーア	悔しい2						なるほど、\n使い方を誤らないようにしないと
+	丑王アコ	通常						大丈夫です♪\nミオちゃんは魔剣使いさんが\n大好きな子ですから
+	ディーア	驚き2						大好き？
+	丑王アコ	通常						すぐにわかります♪\n世界平和は寝て待て、ですよ♪
+FadeOut	white					1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ミオ	通常	1_2			0
+	ディーア	汗2	2_2			0
+FadeIn	white					1
+	ディーア	汗2						って言ってたけど、\nここまで愛されるとは……
+	ミオ	悲しい						もしかして、\nミオはご迷惑でしょうか？\nお慕いしたらダメですか？
+	ディーア	目閉じ2						こんな\n可愛い子に慕われるなんて……
+	ディーア	本気2						ぜんぜんオッケーだぞ!!
+Tween	ミオ	PunchPosition	y=30				NoWait
+	ミオ	通常						ああ、だんな様ぁ♥\nミオの精一杯でお世話いたします♪
+	ディーア	汗2						た、ただ、\nやっぱり外の様子も見ないと……
+	ミオ	悲しい						うぅ、やっぱり\nミオではご満足できないのですね？
+StopBgm
+Tween	ミオ	MoveBy	x=-20				NoWait
+	ミオ	悲しい						しかたありません、\nだんな様はたくさんの魔剣に\n慕われていますもんね……
+Bgm	神秘
+	ミオ	悲しい						でも、私はさびしいのは嫌なんです\nだんな様と離れたくないんです……
+Tween	ミオ	MoveBy	x=40				NoWait
+	ミオ	悲しい						だから……せめて、数日\nお正月まで、\nくっついていてはダメですか？
+	ディーア	驚き2						み、ミオ……
+CharacterOff
+	ミオ	拡大通常	エフェクト表					離れてもさびしくないように、\nミオを愛して<dash=2>
+StopBgm
+CharacterOff
+	神兎カルバノグ	拡大	エフェクト表					ジーっですよう♪
+Bgm	コメディ
+CharacterOff
+	ミオ	悲しい	1_2
+	ディーア	驚き2	2_2
+	ミオ	悲しい						きゃあっ!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						またカルバ!?
+Tween	ミオ	PunchPosition	y=30				NoWait
+	ミオ	怒り						どうして!?\nしあわせうさぎは追い出したのに！
+CharacterOff
+	神兎カルバノグ	通常						今のカルバは\nキョーボーうさぎですう♪
+CharacterOff
+	ミオ	怒り						む、無茶苦茶ですね、このうさぎ！
+	ミオ	怒り						じゃあ、今度はキョーボーうさぎも！\nえいっ！
+CharacterOff
+	神兎カルバノグ	通常
+Wait						.2
+Se	ピューン
+Tween	神兎カルバノグ	PunchPosition	y=300 time=0.5				NoWait
+Tween	神兎カルバノグ	MoveBy	x=1200 time=0.5				NoWait
+Wait						1
+CharacterOff
+	ミオ	怒り						私が入るために、\nうさぎを許可しているのが\n裏目に出るなんて……
+	ミオ	通常						でも、今度こそ……
+CharacterOff
+	リゼビ	通常						く、黒いうさぎはだめですかぁ？
+CharacterOff
+	ディーア	驚き2						リーゼビースト!?
+CharacterOff
+	リゼビ	通常						マスター様、今年最後のページを\n読んでください……!\nはやくここを開いて<dash=2>
+CharacterOff
+	ミオ	怒り						くっ、私のだんな様、\nうさぎに好かれすぎ……！
+	ミオ	怒り						私たちの部屋でハレンチはだめです！\n小さいうさぎさんもお帰りを！
+CharacterOff
+	リゼビ	通常
+Wait						.5
+Se	ピューン
+Tween	リゼビ	PunchPosition	y=300 time=0.5				NoWait
+Tween	リゼビ	MoveBy	x=1200 time=0.5				NoWait
+	リゼビ	通常						ひゃあんっ!?
+CharacterOff
+	ミオ	悲しい						はぁ、はぁ、\nさすがに他にうさぎ魔剣は……
+CharacterOff
+	クロウリー	通常						それはボクのことかい？
+CharacterOff
+	ミオ	怒り						大きいうさぎもいるんですか!?
+Tween	ミオ	PunchPosition	y=30				NoWait
+	ミオ	怒り						カードを持った\nうさぎさんもダメっ！
+CharacterOff
+	ラストリゾート=エース	通常						だったらエースはいいですか？\n一緒に勝負です！
+CharacterOff
+	ミオ	怒り						ギャンブルな\nうさぎさんもダメですぅ！
+	ミオ							今度こそ、全員を外に出して<dash=2>
+CharacterOff
+	神兎カルバノグ	拡大	エフェクト表					えへへ♪\n今度は"カルバ"として来ましたよう♪
+CharacterOff
+	ミオ	怒り						もーっ!!!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	汗2	2_2			0
+	ミオ	悲しい	1_2			0
+FadeIn	black					.3
+Shake	ミオ		x=3				NoWait
+	ミオ	悲しい						な、なんでこんなことにぃ……
+	ディーア	汗2						うちはうさぎ魔剣が多いからなぁ
+	ミオ	悲しい						多すぎですよぉ……！
+	ミオ	怒り						このままじゃ、\n結界がゆるんで……！
+Se	チャージ
+Bg	魔術空間					2
+Wait						1
+	？？？？							ぴょんぴょん♪
+StopBgm
+	ディーア	驚き2						この音！\nまたうさぎ魔剣が<dash=2>
+Param	character_grayout=false
+Bgm	緊迫
+CharacterOff
+	魔物1073							うさぎだぴょん!!
+StopBgm
+CharacterOff
+	ディーア	絶望2	2_2
+	ミオ	怒り	1_2
+	集中線		エフェクト表
+	ディーア	絶望2						どこがだよ!?
+CharacterOff	集中線					0
+Bgm	バトル
+Param	character_grayout=true
+	ミオ	怒り						ま、魔物までこのお部屋に!?
+CharacterOff
+	魔物1073							魔物じゃないぴょん、\nうさぎだぴょん！
+CharacterOff
+	ディーア	本気2	2_2
+	ミオ	怒り	1_2
+	ディーア	本気2						なにがうさぎだ！ 早く帰れ！
+CharacterOff
+	魔物1073							そうはいかないぴょん！
+CharacterOff
+	ディーア	本気2	2_2
+	ミオ	怒り	1_2
+	ディーア	本気2						どうしてだ!?
+Param	character_grayout=false
+CharacterOff
+	魔物1073							なぜって、オレにも<dash=2>
+	集中線		エフェクト表
+	魔物1073							出番がほしいからだぁー!!
+CharacterOff
+Bg	白背景
+	魔物1063
+	魔物1073	<Off>	1_2					同族のあいつはおいしい出番を\nもらったのに、\nオレはずっと待機！
+CharacterOff
+Bg	魔術空間
+	魔物1073							だから最後に大暴れしてやるんだ\n……ぴょんっ！
+Param	character_grayout=true
+CharacterOff
+	ミオ	怒り	1_2
+	ディーア	悔しい2	2_2
+	ディーア	悔しい2						こいつ、急なキャラ付けだから\n語尾を忘れかけたな……
+	ディーア	本気2						行くぞ、ミオっ！\nこの迷惑な魔物を倒すんだ！
+	ミオ	怒り						はいっ！\nだんな様と私の愛の巣から、\n出ていってください!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1073_02
+EndIf
+EndScenario
+
+# E_1073_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+	魔物1073					0
+FadeIn	white					.5
+Shake	魔物1073		x=5 time=2				NoWait
+	魔物1073							まだまだ、\n来年まであきらめないぞ……
+Se	倒れる
+Tween	魔物1073	MoveBy	x=-80				NoWait
+CharacterOff	魔物1073					.3
+Wait						1
+CharacterOff
+	ミオ	悲しい	1_2
+	ディーア	汗2	2_2
+	ディーア	汗2						はぁ……\n外はこいつの仲間で\n溢れているみたいだな
+	ディーア	汗2						年明けまでに退治しないと
+	ミオ	悲しい						うぅ……\n結界が解けてしまいました……
+	ミオ	悲しい						だんな様にゆっくりして\nいただきたかったのに……
+StopBgm
+	ディーア	通常2						元気を出せってミオ
+Shake	ミオ		x=5 time=2				NoWait
+	ミオ	悲しい						でも、ミオはご迷惑をかけて\nこんなのお嫁さん失格です……くすん
+Bgm	凱旋
+	ディーア	通常2						ミオの気持ち、嬉しかったよ
+	ディーア	通常2						でも、オレは魔剣使いだからさ\nきっと今年も来年も、\nそして最後まで戦いは避けられない
+	ディーア	汗2						ゆっくり二人っきりになれる時間も\nそんなにとれないかもしれない
+	ディーア	通常2						お前の気持ちは嬉しいけれど、\nこれがオレの選んだ生き方なんだ
+	ディーア	通常2						だから、わがままだけど\nこんなオレをわかって<dash=2>
+	ディーア	笑い2						いや、ついてきてくれないか？
+	ディーア	笑い2						オレもできる限りで\nお前を大切にするから
+	ミオ	通常						だんな様……！
+	ミオ	通常						それがだんな様というなら\n私はお嫁さんとしてお支えします♪
+	ディーア	汗2						お、お嫁さんの前に、\n魔剣として頼む……！
+	ディーア	通常2						まずは年が開けるまでに\n魔物退治しないといけないけど
+	ディーア	笑い2						それが終わったら\n一緒にお正月を楽しもう！
+	ミオ	通常						はい……♪\nミオを思うままに使ってください♥
+	ディーア	笑い2						頼むぞ！
+	ミオ	通常						ああ、これで年明けまで一緒♪\nということは<dash=2>
+StopBgm
+CharacterOff
+	ミオ	拡大通常	エフェクト表
+	ミオ	拡大通常						だんな様の新年ハジメテは\n私ということですね♪
+Bgm	わくわく
+CharacterOff
+	ミオ	通常	1_2
+	ディーア	汗2	2_2
+Tween	ミオ	MoveBy	x=20				NoWait
+	ミオ							約束ですよ、だんな様♥
+	ディーア	汗2						…………ん？
+	ミオ	通常						予定と違ってしまいましたけど\nこれで正真正銘、うさはじめ♥
+	ミオ	通常						ずっと独占してもらえるなんて、\n幸せです♥
+CharacterOff
+	神兎カルバノグ	通常						あー、ミオちゃん、\n最初からそれ狙いでしたねえ？
+CharacterOff
+	ミオ	通常	1_2
+	ディーア	驚き2	2_2
+	ミオ	通常						なんのことでしょう♪\n私はだんな様を"魔剣として"、\nひとりじめしちゃうだけです♪
+	ディーア	驚き2						えっ!? えっ!?\nな、なんのことだ!?
+	ミオ	通常						いえいえ♪\nなんでもございませんよ？
+	ミオ	通常						さあ、はやく魔物を倒して\n二人っきりになりましょう♥
+CharacterOff
+	ミオ	拡大通常	エフェクト表					年の瀬も、新年も、\nだんな様を離しませんから♥
+FadeOut	white					1
+CharacterOff						0
+Bg	日の出					0
+	イベントロゴ1073		エフェクト表			0
+FadeIn	white					1
+Wait						2
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1073_03
+EndIf
+EndScenario
+
+# E_1073_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	和の国の町
+Bg	日の出					0
+	          					0
+FadeIn	white					.5
+	卯王ミオ	<Off>						あけましておめでとうございます、\nだんな様♥
+CharacterOff
+Bg	神社（昼）
+	ミオ	着物
+	ミオ	着物						この新年を貴方と迎えられて、\n私はとっても幸せです
+	ミオ	着物						貴方にいただいた振り袖は、\nいかがですか？
+	ミオ	着物						少しでもだんな様の目を\n楽しませられれば良いんですが……
+	ディーア	<Off>	1_2					とっても似合っているよ
+	ミオ	着物						ふふ♪\nそれではお参りも済みましたし、\n他の人が来る前に帰りましょう？
+StopBgm
+	ミオ	着物						それで帰ったあとは<dash=2>
+FadeOut	white					1
+CharacterOff
+Bg	白背景
+	イベントスチル10731		エフェクト表			0
+Wait						1
+Param	character_grayout=false
+Tween	イベントスチル10731	MoveBy	y=-419 time=15				NoWait
+FadeIn	white					1
+Bgm	神秘
+	卯王ミオ	<Off>						だんな様、おかえりなさいませ♪\nこれで貴方と二人っきり♥
+	卯王ミオ	<Off>						やっぱり、他の人や魔剣といるより\nこの場所が落ち着きます
+	卯王ミオ	<Off>						貴方と二人、\n狭いお部屋で寄り添って……\nああ、幸せです♪
+	卯王ミオ	<Off>						さあ、\nお嫁うさぎのお膝へどうぞ♪
+	卯王ミオ	<Off>						年末も大忙しで、\nお疲れだったでしょう？
+	卯王ミオ	<Off>						今年もまた頑張れるように、\nうさぎが癒やしてあげますから♥\nそれで元気が戻ったら<dash=2>
+	卯王ミオ	<Off>						魔剣としても良いですけど、\n女の子としても……
+FadeOut	white					.3
+CharacterOff						0
+	イベントスチル10732		エフェクト表			0
+FadeIn	white					.3
+	卯王ミオ	<Off>						だんな様と\nうさはじめ、させてください♥
+If	isdebug==true
+CharacterOff
+Jump	*E_1073_01
+EndIf
+EndScenario

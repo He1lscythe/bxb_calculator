@@ -1,0 +1,864 @@
+# E_1028_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	神秘
+Bg	夏空					0
+Param	character_grayout=false
+	          
+FadeIn	white					.5
+	ディーア	<Off>						拝啓、リディ様
+Bg	海岸
+	ディーア	<Off>						今年の夏は暖かく、\n最高のレジャーシーズンでしたね
+Bg	海の家
+	ディーア	<Off>						だからオレも、\nみんなと思いっきり遊びたいと\n思っていたのですが……
+StopBgm
+Bg	海底
+	ディーア	絶望水着2						オレは今、海の底にいます
+	ディーア	絶望水着2						海の底はまっくらです
+FadeOut	white					1
+CharacterOff						0
+Bg	海岸					0
+	          
+Wait						.5
+Bgm	わくわく
+FadeIn	white					1
+	          　　　　　　　							\n  　　  　 <color=blue><dash=2>数時間前<dash=2></color>
+Param	character_grayout=true
+CharacterOff
+	獄刀大包平	水着	p3b
+	名刀・大包平	水着	p7
+	名刀・大包平	水着						うわぁ……！\n綺麗な海だね、ごくひらちゃん♪\n早く、泳ぎにいこう♪
+Tween	獄刀大包平	PunchPosition	y=30				NoWait
+	獄刀大包平	水着						なに言ってるの、お姉ちゃん！\n遊んでる暇はないよ……！
+	名刀・大包平	水着						え……？
+	獄刀大包平	水着						水着を旦那さまにアピールする\n大チャンスなんだよ！\nその水着はなんのためにあるの!!
+	名刀・大包平	水着						う、海で遊ぶためじゃないの……？
+FadeOut	black					.3
+CharacterOff						0
+	レヴァ	水着	p3b			0
+	雷切丸	水着	画面外_右_b			0
+FadeIn	black					.3
+Se	走る
+Tween	雷切丸	MoveTo	x=150 time=1				NoWait
+	雷切丸	水着						ふむ、こちらにもいませんね……
+Tween	レヴァ	MoveBy	x=20				NoWait
+	レヴァ	水着						あ、雷切丸ちゃん！\nだれか探しているの？
+	雷切丸	水着						だんな様を探していたのですが……\nなかなか見つからず……
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	水着						マイマスターを？\n私も会いたいし、手伝うよ！\n急いで探そう！
+CharacterOff
+	エフ	水着						お待ちなさい……！
+	エフ	水着						お二人とも\nそのようなはしたない格好で\n走り回っては<dash=2>!!
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル102806		エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	エフ	<Off>						マスター様の目に毒です……！
+CharacterOff
+	レヴァ	水着	p3b
+	雷切丸	水着	p7
+	二人							………………………………\n………………………………
+FadeOut	white					.3
+CharacterOff						0
+	エフ	水着胸拡大	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+	エフ	水着胸拡大						ど、どうしましたか……？
+CharacterOff
+Param	character_grayout=true
+	レヴァ	水着	p3b
+	雷切丸	水着	p7
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ							エフちゃんが\n一番、目に毒だと思うよ？
+	雷切丸							説得力が「無」です
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+Bg	海の家					0
+	ムゥ	水着	p3b			0
+	フレア	水着	p7			0
+Bgm	ビーチ
+FadeIn	black					.3
+	フレア	水着						ふわぁ……♪\nなにもせずにのんびりぬくぬく\n楽ですわぁ……
+	フレア	水着						これもマスターさんのおかげですわね\n魔剣全員を豪華リゾートに\n招待なんて……♪
+	ムゥ	水着						うん！ すごく太っ腹だったんだし！\nこのパフェも奢ってくれたんだし♪\nあぐあぐ！ んぐんぐ！
+	フレア	水着						そういえば……\nそのマスターさんはどちらに？
+	フレア	水着						先ほどまで、\nあんなにはしゃぎながら\n遊んでいましたのに
+Tween	ムゥ	MoveBy	x=-30				NoWait
+	ムゥ	水着						あ！ ほんとなんだし！\nマスター、どこなんだしー!!
+FadeOut	black					1
+StopBgm
+CharacterOff						0
+Param	character_grayout=false
+Bg	海岸
+	黒グラデーション		エフェクト裏
+	集中線		エフェクト表			0
+	ディーア	絶望水着2				0
+Wait						1
+FadeIn	black					.3
+Bgm	緊迫
+	ディーア							金が、ない……!!
+CharacterOff	集中線					0
+	ディーア	絶望水着2						どうしよう、\nバカンスに来たからって\n金を使いすぎた……！
+	ディーア	悔しい水着2						いい格好がしたくて、\nおごったり、遊び回ったり……！
+	ディーア	絶望水着2						おかげで、\nもうすっからかん……！
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+	ムゥ	水着	p2b			0
+	名刀・大包平	水着	p8u			0
+	雷切丸	水着	p6			0
+	レヴァ	水着	p4			0
+	オーラ桃		エフェクト表			0
+	ディーア	にやけ水着2	p5u			0
+Tween	オーラ桃	MoveBy	y=-50 time=0				NoWait
+FadeIn	white					.3
+	ディーア	にやけ水着2						豪華に夏を遊んで、\n水着のみんなと\nイチャイチャしたかったのに！
+FadeOut	white					.3
+CharacterOff						0
+	黒グラデーション		エフェクト裏			0
+	ディーア	絶望水着2				0
+FadeIn	white					.3
+	ディーア	絶望水着2						このままじゃ\n遊ぶどころか破産だ……!!
+	ディーア	悔しい水着2						こうなったら、\n生活費を切り詰めて……\nいや、海の家で働くか……？
+Param	character_grayout=true
+	？？？？	<Off>						ふっふっふ……！\nお困りのようだね、マスターちゃん！
+	？？？？	<Off>						マスターちゃんの悩み、\n私が解決してあげるよ！
+CharacterOff	黒グラデーション
+	ディーア	驚き水着2						ほ、ほんとうか……!!
+	？？？？	<Off>						うん、任せてよ！
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	レイバーインヴェスティ	笑い2拡大	エフェクト裏
+	レイバーインヴェスティ	笑い2拡大						この真理の探究者、\nレイバーインヴェスティにね!!
+StopBgm
+Param	character_grayout=true
+CharacterOff
+	ディーア	怪しい水着2	2_4
+	レイバーインヴェスティ	笑い2	3_4_b
+	ディーア	怪しい水着2						なんだ、レイバーか……
+Bgm	コメディ
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+	レイバーインヴェスティ	慌て2						もっと嬉しそうにしてよ!?
+	ディーア	怪しい水着2						だって、レイバーの解決策なんて、\nどうせギャンブルだろ？
+	レイバーインヴェスティ	慌て2						そ、そうだけど、\nただのギャンブルじゃないの！
+Tween	レイバーインヴェスティ	MoveBy	x=-20				NoWait
+	レイバーインヴェスティ	笑い2						高級カジノが近くにあって、\n夏を遊び尽くせるくらい稼げるのよ！
+	ディーア	怪しい水着2						そんなこと言って、\n自分が遊びたいだけだろ？
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+	レイバーインヴェスティ	慌て2						ぎくぅ……！
+	ディーア	怪しい水着2						残念だが、\nもう遊びに使える金は残ってないし\n勝てないギャンブルなんて<dash=2>
+	レイバーインヴェスティ	通常2						ふふふふ……♪\nこのレイバーがなんの勝算もなく、\n賭けに誘うと思うかい？
+	ディーア	驚き水着2						なん、だと……？
+CharacterOff
+	レイバーインヴェスティ	笑い2拡大	エフェクト表
+	レイバーインヴェスティ	笑い2拡大						マスターちゃんを確実に勝たせるため\n必勝三魔剣を連れてきたよ！
+CharacterOff
+	ディーア	驚き水着2						必勝三魔剣？
+CharacterOff
+Param	character_grayout=false
+Se	和太鼓
+	レイバーインヴェスティ	通常2	p8b
+	カイロス	通常	p6
+	ラストリゾート	水着	p2b
+	集中線		エフェクト表
+Wait						1
+Param	character_grayout=true
+CharacterOff	集中線
+	レイバーインヴェスティ	通常2						幸運を引き寄せるラッキーガール！\nラストリゾートちゃん！
+	ラストリゾート	水着						幸せにしてあげるね、\nマスターさーまっ♥
+	レイバーインヴェスティ	通常2						幸運を捉えて離さない自称モブ子！\nカイロスちゃん！
+	カイロス	通常						やっほー！ ハロー！\nモブ子でいいなら、お手伝いするよ！
+CharacterOff
+	ディーア	驚き水着2						おぉ……！\nすごいメンバーだ！\n残る一人は……！
+CharacterOff
+	レイバーインヴェスティ	笑い2	p8b
+	カイロス	通常	p6
+	ラストリゾート	水着	p2b
+	レイバーインヴェスティ	笑い2						もちろん、この私！\nギャンブルのスペシャリスト、\nレイバーインヴェスティ！
+StopBgm
+CharacterOff
+	ディーア	怪しい水着2						…………そうですか
+CharacterOff
+	レイバーインヴェスティ
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+	レイバーインヴェスティ	慌て2						ちょっ！\n私の扱い、雑すぎ!?
+Bgm	都市
+CharacterOff
+	ディーア	通常水着2						でも、いい作戦だな\nレイバーはともかく、\n幸運を操る二人がいれば……
+CharacterOff
+	カイロス	通常	p7
+	ラストリゾート	水着	p3b
+	ラストリゾート	水着						私がマスターさまに幸運をあげて♪
+	カイロス	通常						その幸運を私が固定しちゃう♪\nそうしたら幸運は\nマスターくんから逃げ出さないよ♪
+CharacterOff
+	ディーア	通常水着2						たくさんの幸運が集まれば、\nギャンブルなら無敵だな……！
+CharacterOff
+	レイバーインヴェスティ	笑い2						どうよ、マスターちゃん！\nこの作戦なら必ず勝てると思わない？
+CharacterOff
+	ディーア	怪しい水着2						確かに、上手くいけば\n旅費を取り戻すことが……
+	ディーア	笑い水着2						……よしっ！\nその作戦で行こう！
+CharacterOff
+	レイバーインヴェスティ	笑い2
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+	レイバーインヴェスティ	笑い2						やったぁ！\nじゃあ、夢のカジノへ出発!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	カジノ					0
+	ラストリゾート	嬉しい				0
+Param	character_grayout=false
+Bgm	カジノ
+FadeIn	black					.3
+	ラストリゾート	嬉しい						マスターさまに幸運をあげるね♥\nちゅっ♥
+Se	チャージ
+	オーラ桃		エフェクト表			1
+Wait						2
+CharacterOff
+	ディーア	驚き2
+	          		2_2
+Param	character_grayout=true
+Se	チャージ
+Se	アイテムゲット
+Wait						1
+	ディーラー	<Off>						おめでとうございます！
+	ディーア							ほ、本当に大当たりした……！
+CharacterOff
+	ラストリゾート	笑い
+Tween	ラストリゾート	PunchPosition	y=30				NoWait
+	ラストリゾート	笑い						わーい♪\nやっぱり、私って運がいいねっ♪
+CharacterOff
+	レイバーインヴェスティ	笑い2						おっけー！ おっけー！\n次はあっちのポーカーに行くわよ！
+FadeOut	black					.3
+CharacterOff						0
+	カイロス	嬉しい	p7b			0
+	ディーア	驚き2	p3			0
+FadeIn	black					.3
+Se	キラン
+	ディーア	驚き2						こ、この手札は……！
+Se	ガヤB
+	カイロス	嬉しい						おぉおおおお！\nすごいじゃん、マスターくん！\nこんな手札見たことないよ！
+StopSe
+CharacterOff
+	レイバーインヴェスティ	笑い2						うっひゃー♪\n大勝利だねぇ！
+FadeOut	black					1
+StopBgm
+CharacterOff						0
+	レイバーインヴェスティ	通常2	3_4_b			0
+	ディーア	怪しい2	2_4			0
+Bgm	都市
+FadeIn	black					.3
+	ディーア	怪しい2						すごいな……！\nレイバーの作戦通りになったぞ
+	レイバーインヴェスティ	通常2						でしょー♪\nこのレイバーにかかれば、\nこんなもんよ！
+Tween	レイバーインヴェスティ	MoveBy	x=-30				NoWait
+	レイバーインヴェスティ	慌て2						つきましては、\n素敵な作戦を考えたレイバーにも、\n探求のための軍資金を……！
+	ディーア	笑い2						ああ、少しならいいぞ！
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+	レイバーインヴェスティ	笑い2						やったぁー♪\nマスターちゃん、大好きー♪\nさっそく探求してくるわね！
+Se	ピューン
+Se	走る
+Tween	レイバーインヴェスティ	MoveBy	x=800 time=1				NoWait
+Wait						1
+CharacterOff
+	ラストリゾート	通常						マスターさーま♪\n私達も次のゲームにいこ♪
+CharacterOff
+	ラストリゾート	笑い	画面外_左_b
+	ディーア	笑い2	2_3
+	ディーア	笑い2						ああ、\n旅費が貯まるまで\nあと少し頼むな！
+Param	character_grayout=false
+Tween	ラストリゾート	MoveBy	x=550 time=1				NoWait
+	ラストリゾート	笑い						はーい♪\nそれじゃあ、もっと幸運をあげるね♥
+CharacterOff
+	ラストリゾート	嬉しい拡大	エフェクト裏
+	オーラ桃		エフェクト表
+Se	ポップイン
+	ラストリゾート	嬉しい拡大						ぎゅーっ♪
+Param	character_grayout=true
+CharacterOff
+	ラストリゾート	通常	画面外_右_b
+	カイロス	通常	2_3
+Tween	カイロス	PunchPosition	y=30				NoWait
+	カイロス	通常						おぉ……！\nラッキースケベなしで\nあんなにイチャイチャするなんて……
+	カイロス	通常						やっぱり、\nモブ子さんには眩しすぎるねぇ
+Tween	ラストリゾート	MoveBy	x=-550 time=1				NoWait
+	ラストリゾート	通常						そんなことないよ♪\nカイロスちゃんも\nもっとマスターさまの近くに来て♥
+Tween	カイロス	PunchPosition	y=30				NoWait
+	カイロス	照れ						ラストリゾートちゃん!?\nで、でも私はモブ子だし……
+	ラストリゾート	笑い						マスターさまも、いいでしょ♪
+CharacterOff
+	ディーア	笑い2						もちろん！\nカイロスも頼りにしてるからな！
+CharacterOff
+	カイロス	照れ
+	カイロス	照れ						そ、そっか……えへへ♪
+Tween	カイロス	PunchPosition	y=30				NoWait
+	カイロス	通常						あ、そうだ！\n一応、注意しとくけど
+	カイロス	通常						いつもより幸運が溜まった分、\nラッキースケベ体質も強くなるから、\nくれぐれも気をつけてね？
+CharacterOff
+	ディーア	笑い2						大丈夫だって！\nこんなところで失敗しないさ！
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	カイロス	通常	p8b			0
+	ディーア	笑い2	p5			0
+	ラストリゾート	笑い	p3b			0
+	          
+FadeIn	white					.3
+Se	チャージ
+Se	ルビードロップ
+	ディーラー	<Off>						大当たり！
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル102801		エフェクト表			0
+FadeIn	white					.2
+Se	チャージ
+Se	エメラルドドロップ
+	ディーラー	<Off>						７７７!!
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル102802		エフェクト表			0
+FadeIn	white					.2
+Se	チャージ
+Se	アイテムゲット
+	ディーラー	<Off>						全て的中です！
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff						0
+	カイロス	通常	p8b			0
+	ディーア	あはは2	p5			0
+	ラストリゾート	笑い	p3b			0
+Wait						.5
+FadeIn	white					.3
+	ラストリゾート	笑い						おめでとう♥\nマスターさま♪
+	ディーア	あはは2						よかったぁ、\nこれで旅行分は稼げたぞ……！
+	ディーア	笑い2						二人のおかげだよ、\nありがとう！
+	ディーア	怪しい2						ん……？\nそういえばなにか忘れている気が……
+	レイバーインヴェスティ	<Off>						きゃぁああああ！
+StopBgm
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						この声……そうだ！\nレイバーを放置したままだった！
+	ディーア	驚き2						まさか、\nあいつ負けてるんじゃ<dash=2>
+Param	character_grayout=false
+CharacterOff
+	イベントスチル102801		エフェクト裏
+	レイバーインヴェスティ	笑い2
+Se	チャージ
+Se	エメラルドドロップ
+Se	ルビードロップ
+Se	アイテムゲット
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+Bgm	カジノ
+	レイバーインヴェスティ	笑い2						おっけーおっけー！\n完全に理解したわ！\n今日の世界は私に微笑んでる!!
+Param	character_grayout=true
+CharacterOff
+	カイロス	通常	p8b
+	ラストリゾート	笑い	p3b
+	ディーア	驚き2	p5
+Bgm	緊迫
+	ディーア	驚き2						なっ……！\nレイバーが\nオレよりも勝ってるだと……!?
+	カイロス	嬉しい						運がいいときって、\n誰でもあるからね♪
+	ディーア	悔しい2						それにしても、\n勝ちすぎだろ……！
+Param	character_grayout=false
+CharacterOff
+	イベントスチル102801		エフェクト裏
+	レイバーインヴェスティ	笑い2
+	レイバーインヴェスティ	笑い2						うひょー♪ また来たぁ♪
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+Se	アイテムゲット
+Wait						1
+CharacterOff
+	ディーア	怪しい2						しかも、\nめちゃくちゃ楽しそうだし……
+Param	character_grayout=false
+CharacterOff
+	イベントスチル102801		エフェクト裏
+	集中線		エフェクト表
+	レイバーインヴェスティ	笑い2
+	レイバーインヴェスティ	笑い2						自分の運と力で大勝利ぃ！\nそれでこそ真理も微笑むのよ♪\nギャンブルはこうでなくっちゃ！
+StopBgm
+Se	心拍	TRUE
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						ごくっ……！
+	ディーア	あはは2						そ、そうだ……！\nお、オレも目的は達成したし\n少しくらい遊んでも……！
+StopSe
+Bgm	コメディ
+	理性くん	理性	3_3
+Tween	理性くん	PunchPosition	y=30				NoWait
+	理性くん	理性						ちょっと待ったー！
+	ディーア	驚き2						なっ……！\nお前は、オレの中の理性！
+	理性くん	理性						もう必要なお金は稼いだだろ？\n危ないマネはしないで帰ろう……！
+	ディーア	汗2						そ、そうだったな……\nあとはのんびり……
+	欲望くん	欲望	1_3
+Tween	欲望くん	PunchPosition	y=30				NoWait
+	欲望くん	欲望						本当にそれでいいのか？
+	ディーア	驚き2						今度は、オレの中の欲望……！
+	欲望くん	欲望						せっかくカジノに来たのに、\nスリルも味わっていないんだぞ？
+	欲望くん	欲望						わかっているだろ？\n決まりきった勝ちなんて、\n物足りないと……！
+Tween	理性くん	PunchPosition	y=30				NoWait
+	理性くん	理性						惑わされるな！\n安定してお金を稼ぐことが大事だ！
+Tween	欲望くん	PunchPosition	y=30				NoWait
+	欲望くん	欲望						いいや、違うね！\nレイバーの楽しそうな顔を見るんだ！
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	イベントスチル102801		エフェクト裏2
+	レイバーインヴェスティ	笑い2
+	レイバーインヴェスティ	笑い2						ほら、見て見てー！\nマスターちゃんより稼いだわよ♪
+	レイバーインヴェスティ	笑い2						どんな気持ち？ どんな気持ち？\nレイバーのこと見直したぁ？
+Param	character_grayout=true
+CharacterOff
+	理性くん	理性	3_3
+	欲望くん	欲望	1_3
+	ディーア	怪しい2
+	欲望くん	欲望						レイバーだって勝てたんだ！\nお前が勝利をつかめないはずがない！
+	欲望くん	欲望						全力で遊びたかったんだろ？\n夏を遊び倒したかったんだろ？\n今がその時なんだ……！
+	ディーア	悔しい2						そうだ一回、一回くらいなら……\n幸運を使わなくても……！
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ディーア	拡大本気2	エフェクト裏
+Bgm	決戦
+	ディーア							<size=40>やってやるさッッッ!!!!</size>
+Param	character_grayout=true
+CharacterOff
+	ディーア	目閉じ2						ラストリゾート、カイロス\n幸運をストップしてくれ……
+	ディーア	本気2						オレは……行ってくる！
+Se	走る
+Tween	ディーア	MoveBy	x=-800 time=1				NoWait
+Wait						.5
+CharacterOff
+	ラストリゾート	通常	p3b
+	カイロス	照れ	p7
+	ラストリゾート	通常						うん♪ 行ってらっしゃい♪
+	カイロス	照れ						大丈夫かな、マスターくん
+	ラストリゾート	笑い						きっと大丈夫だよ♪
+FadeOut	black					.3
+CharacterOff						0
+Bg	白背景					0
+	ディーア	目閉じ2				0
+Wait						.5
+FadeIn	black					.3
+	ディーア	目閉じ2						そう、確かに満足できなかった……
+	ディーア	目閉じ2						幸運による簡単な勝利に……\n生ぬるい、約束された勝利に……！
+Se	回想
+FadeOut	white					.1
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+	ディーア	にやけ2	p5			0
+	イベントスチル102801		エフェクト裏			0
+FadeIn	white					.1
+Wait						.5
+FadeOut	white					.1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	怒り2				0
+FadeIn	white					.1
+	ディーア	怒り2						このままじゃ、\nオレは幸運の奴隷……\nずぶずぶと実感なく生きる奴隷……！
+	ディーア	本気2						そこから抜け出すには……！
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	カジノ					0
+CharacterOff						0
+	ディーア	本気2				0
+Bgm	闇属性バトル
+Param	character_grayout=true
+FadeIn	white					.3
+	ディーア	本気2						勝負だ、レイバー……！
+CharacterOff
+	レイバーインヴェスティ	笑い2						ほほぅ……！\n二人の幸運なしで、\nレイバーに勝てるとでも！
+	レイバーインヴェスティ	通常2						私が身勝手なる真理の探求者、\nレイバーインヴェスティガティオニス\nと知ってなお、挑むと！
+CharacterOff
+	ディーア	怒り2						そうだ、幸運なんていらない\nそんなものオレには必要ない……！
+	ディーア	怒り2						この両手さえあれば、\n勝負なんか怖くないさ……！
+	ディーア	本気2						お前に勝ってやる……！
+CharacterOff
+	レイバーインヴェスティ	笑い2						マスターちゃんの決意、\n完全に理解したわ♪
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル102805		画面外_下			0
+	イベントスチル102804		画面外_上			0
+Tween	イベントスチル102805	MoveTo	y=-60 time=0.4	linear			NoWait
+Tween	イベントスチル102804	MoveTo	y=-60 time=0.4	linear			NoWait
+FadeIn	white					.2
+Wait						.2
+	集中線		エフェクト表2			.5
+Wait						.2
+	二人							<size=40>勝負ッッッ!!!!</size>
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ディーア	怪しい2
+	ディーア	怪しい2						レイバーは考えているはずだ、\nオレが欲に負けて、\n考えなしに挑んだと……！
+	ディーア	本気2						だが、それこそ大間違い！\nオレには鍛えた勝負感があり、\n縋る幸運はとうに捨てている……！
+	ディーア	怒り2						あるのは、信頼……\n己に対する絶対的な信頼……！
+	ディーア	本気2						勝ち続け、慢心したレイバーに\n精神面で遅れをとることはない……！
+CharacterOff	ディーア
+	レイバーインヴェスティ	笑い2						……って、マスターちゃんは\n考えてるだろうけど、\nレイバーは慢心なんてしないわよ！
+	レイバーインヴェスティ	通常2						終わりなき探求こそレイバーの本質！\n満足するなんてありえない……！
+	レイバーインヴェスティ	笑い2						だからこそ、\n私はマスターちゃんの裏をつく……！\n勝つのはこのレイバーよ……！
+CharacterOff	レイバーインヴェスティ
+	ディーア	怒り2						ということを、\nレイバーが考える裏を……！
+CharacterOff	ディーア
+	レイバーインヴェスティ	通常2						そのさらに裏を……！
+FadeOut	white					1
+CharacterOff						0
+	          
+Param	character_grayout=true
+Se	アイテムゲット
+Se	ダイヤチャージ
+Wait						1
+FadeIn	white					.3
+	ディーラー	<Off>						おめでとうございます！
+	ディーア	目閉じ2	2_4
+	レイバーインヴェスティ	悔しい2	3_4_b
+	ディーア	目閉じ2						オレの勝ちだな……
+	ディーア	怪しい2						幸運に縋るものに、\n勝利は微笑まない……！\nこれがオレの真の実力だ
+Tween	レイバーインヴェスティ	MoveBy	x=20				NoWait
+	レイバーインヴェスティ	悔しい2						そ、そんなぁ……！
+	ディーア	目閉じ2						身勝手なる真理の探求者、\nだったか……？
+	ディーア	にやけ2						フッ……♪
+	レイバーインヴェスティ	悔しい2						ぐぎぎぎぎ……！
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+	レイバーインヴェスティ	悔しい2						も、もう一回！\nもう一回勝負しなさいよ！
+	ディーア	本気2						ああ！
+CharacterOff
+	理性くん	理性	3_3
+	欲望くん	欲望	1_3
+	ディーア	怪しい2
+	理性くん	理性						お、おい！\n一回の約束<dash=2>
+Se	打1
+Tween	ディーア	PunchPosition	x=100				NoWait
+Wait						.1
+Tween	理性くん	PunchPosition	y=50				NoWait
+Tween	理性くん	MoveBy	x=800 time=0.5				NoWait
+Wait						1
+	ディーア	笑い2						もちろんだ！\nやっと楽しくなってきた……！
+	欲望くん	欲望						ここからがカーニバルだぜ！
+FadeOut	black					.3
+CharacterOff						0
+	レイバーインヴェスティ	笑い2	3_4_b			0
+	ディーア	絶望2	2_4			0
+FadeIn	black					.3
+Se	闇1
+	ディーア	絶望2						ハァ!? なんだこの台……!!\nどっか詰まってんじゃないのか!?
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+	レイバーインヴェスティ	笑い2						あっれー♪\nさっきの自信はどこ行ったのかしら？
+	ディーア	悔しい2						ぐぐぐ……！\nノーカン！ 今のはノーカン！
+	レイバーインヴェスティ	笑い2						ギャンブルに\nノーカンはありませーん♪
+FadeOut	black					.3
+CharacterOff						0
+	レイバーインヴェスティ	笑い2	3_4_b			0
+	ディーア	本気2	2_4			0
+FadeIn	black					.3
+	ディーア	本気2						いけ、いけ！\nひらけー！ ひらけー！
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+	レイバーインヴェスティ	笑い2						飛べ！ 飛べぇー!!
+Param	character_grayout=false
+	集中線		エフェクト表
+	二人							やったぁー!!
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff						0
+	レイバーインヴェスティ	笑い2	3_4_b			0
+	ディーア	本気2	2_4			0
+FadeIn	black					.3
+	ディーア	本気2						オレが選ぶのは、\n当然、一点賭け……！
+	レイバーインヴェスティ	笑い2						マスターちゃんも\n勝負師の顔になってきたわね……！
+Tween	レイバーインヴェスティ	PunchPosition	y=30				NoWait
+	レイバーインヴェスティ	笑い2						あ、見て見て！\nマスターちゃん！\nあっちのマシン、倍率スゴイよ！
+	ディーア	怪しい2						ふふふふ……\n狂気の沙汰ほど、なんとやら！
+StopBgm						2
+Param	character_grayout=false
+CharacterOff
+	黒グラデーション		エフェクト裏			3
+	          		3_3
+Se	アイテムゲット
+	二人							あははははは……！
+Se	闇1
+	二人							あははは……
+Se	闇1
+	二人							…………あれ？
+Se	闇3
+FadeOut	black					.5
+CharacterOff						0
+	レイバーインヴェスティ	慌て2	3_4_b			0
+	ディーア	絶望2	2_4			0
+Wait						2
+Bgm	絶望
+Param	character_grayout=true
+FadeIn	black					.5
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望2						あれ……？\nここにあったお金はどこ……？
+Tween	レイバーインヴェスティ	MoveBy	x=-20				NoWait
+	レイバーインヴェスティ	慌て2						マスターちゃん、\nそれはさっき使い果たしたでしょ？
+	ディーア	絶望2						それじゃあ、\nさっき稼いだ賞金はどこ……？
+Tween	レイバーインヴェスティ	MoveBy	x=-20				NoWait
+	レイバーインヴェスティ	慌て2						マスターちゃん、\nそれは全部、\n沼に飲み込まれたでしょ……？
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望2						どうしてこうなった!!
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						せっかく稼いだ\n旅費も使い込んで……！
+	レイバーインヴェスティ	悔しい2						文字通り、一文無しだよね……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	悔しい2						い、いや！ まだだ！\nオレ達には幸運が\n味方してくれる……！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Param	character_grayout=true
+CharacterOff						0
+	ラストリゾート	嬉しい	p6b			0
+	カイロス	通常	p9			0
+	ディーア	絶望2	p2			0
+FadeIn	black					.3
+	ディーア	絶望2						ラストリゾート！ カイロス！\n頼む、また力を……！
+	カイロス	驚き						ちょっと待って、マスターくん！\nそんなに慌てたら幸運が暴走して\nラッキースケベが……！
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ディーア	MoveBy	x=170 time=1				NoWait
+	ディーア	絶望2						あっ……！
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	ディーア	MoveBy	x=80				NoWait
+FadeOut	white					1
+Param	character_grayout=false
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff						0
+	カイロス	拡大胸元2	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+Bgm	コメディ
+FadeIn	white					.3
+Se	ポップイン
+Tween	カイロス	PunchPosition	y=15				NoWait
+	カイロス	拡大胸元2						きゃああああああ!?\nちょっとぉ！ どこ触ってるのぉ!?\nそんなところに顔くっつけないでぇ！
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	ラストリゾート	足拡大	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+Bgm	コメディ
+FadeIn	white					.3
+Se	ポップイン
+Tween	ラストリゾート	PunchPosition	y=15				NoWait
+	ラストリゾート	足拡大						ひゃあん♥\nどうしたの、マスターさま？\n甘えたくなっちゃった？
+CharacterOff
+	レイバーインヴェスティ	慌て2
+	レイバーインヴェスティ	慌て2						なにやってるのマスターちゃん!?\nこんなところで暴れたら……！
+Se	走る
+Tween	レイバーインヴェスティ	MoveBy	x=800 time=1
+CharacterOff
+	オーラ桃		エフェクト表
+	ディーア	絶望2
+	ディーア	絶望2						れ、レイバーは来るな！\nこ、こっちに来たら……！
+Se	倒れる
+FadeOut	white					.3
+CharacterOff						0
+	レイバーインヴェスティ	胸拡大	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+FadeIn	white					.3
+Se	ポップイン
+Tween	レイバーインヴェスティ	PunchPosition	y=15				NoWait
+	レイバーインヴェスティ	胸拡大						うひゃああああ！\nな、なんで私までー！
+FadeOut	white					.3
+CharacterOff						0
+	ラストリゾート	胸拡大	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+FadeIn	white					.3
+	ラストリゾート	胸拡大						マスターさま♪\nぎゅーっ♥
+	カイロス	拡大胸元2	エフェクト裏					マスターくん、離れてー！
+	レイバーインヴェスティ	胸拡大	エフェクト裏					ちょっとぉ……！\nどこ探求してるのよぉ……!!
+CharacterOff	レイバーインヴェスティ
+	ディーア	絶望2						うわぁああああ!!
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	レイバーインヴェスティ	慌て2				0
+Param	character_grayout=true
+Bgm	絶望
+FadeIn	black					.3
+	レイバーインヴェスティ	慌て2						あははは……\n結局、お金なくなっちゃったね……
+CharacterOff
+	ディーア	絶望裸2						うぅ……\n警備員に身ぐるみ全部はがされた……
+CharacterOff
+	ディーア	絶望裸2	2_4
+	レイバーインヴェスティ	悔しい2	3_4_b
+	レイバーインヴェスティ	悔しい2						二人にもらった幸運も、\nさっきのラッキースケベで\nすっからかん……
+	ディーア	絶望裸2						オレ達、\nこれからどうなるんだろうな……
+	レイバーインヴェスティ	悔しい2						オーナーが来るって言うけど……
+Param	character_grayout=false
+CharacterOff
+	？？？？							貴様らか、\n負け込んだ挙げ句、\n店を荒らしたというのは……
+Param	character_grayout=true
+CharacterOff
+	レイバーインヴェスティ	悔しい2	3_4_b
+	ディーア	驚き裸2	2_4
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き裸2						ち、違うんです、オーナーさん！\nオレ達はただ……！
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望裸2						…………え？
+	レイバーインヴェスティ	慌て2						こ、ここのオーナーってまさか……
+Bgm	魔王バトル
+CharacterOff
+	アリス	通常						久しいな、魔剣使い
+CharacterOff
+	レイバーインヴェスティ	悔しい2	3_4_b
+	ディーア	絶望裸2	2_4
+	ディーア	絶望裸2						お、終わった……
+CharacterOff
+	アリス	蔑み						幸運を固定化しての増幅か\n足りない頭で少しは考えたようだが、\n露見した以上はイカサマだ
+	アリス	通常						カジノの負け分に施設の修繕費、\nそしてイカサマのペナルティ\n貴様が払う賠償金は……
+	アリス	通常						ククク……！\n随分な額になったなぁ♪
+CharacterOff
+	レイバーインヴェスティ	悔しい2	3_4_b
+	ディーア	絶望裸2	2_4
+	ディーア	絶望裸2						で、ですが、\n今のオレには少しの金もないし……
+CharacterOff
+	アリス	通常						ならば、選択肢は一つだ\n貴様には今すぐ返済のために\n働いてもらうぞ
+	アリス	通常						ちょうど、\n煩わしい後始末が\n残っていたしなあ？
+CharacterOff
+	レイバーインヴェスティ	悔しい2	3_4_b
+	ディーア	絶望裸2	2_4
+	ディーア	絶望裸2						あ、アリス様の仕事……
+CharacterOff
+	アリス	通常						安心するがいい\n貴様でもすぐに稼げるものだ
+CharacterOff
+	ディーア	絶望裸2	2_4
+	レイバーインヴェスティ	慌て2	3_4_b
+	レイバーインヴェスティ	慌て2						ちなみに、その仕事って……？
+StopBgm
+CharacterOff
+	アリス	通常						ククク……♪
+Bgm	緊迫
+	アリス	通常						<size=50>カニ捕りだ</size>
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ディーア	絶望裸2	2_4
+	レイバーインヴェスティ	慌て2	3_4_b
+	二人							<size=50>か、カニ捕りぃ!?</size>
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	海底					0
+	レイバーインヴェスティ	悔しい2	3_4_b			0
+	ディーア	絶望水着2	2_4			0
+Param	character_grayout=true
+Wait						1
+Bgm	海底
+FadeIn	black					.3
+CharacterOff	集中線					0
+Param	character_grayout=true
+	ディーア	絶望水着2						ここが海の底……\n借金を返せなかった者の地獄\n返済まで終わらない無限カニ捕り……
+	レイバーインヴェスティ	悔しい2						あっちに転送ツボがあったわ\nカニを捕って、あそこにいれたら、\n報酬もくれるって
+	ディーア	絶望水着2						それがあるだけ、温情かもな……
+CharacterOff
+	カイロス	通常	p7
+	ラストリゾート	水着	p3b
+	ラストリゾート	水着						わーい♪\nマスターさまとお出かけなんて、\nラッキーだね、カイロスちゃん♪
+	カイロス	嬉しい						そだねー♪ 捕まえるカニって\nどんなのかな？\nでっかいやつ？ かわいいやつ？
+CharacterOff
+	レイバーインヴェスティ	慌て2	3_4_b
+	ディーア	絶望水着2	2_4
+	レイバーインヴェスティ	悔しい2						二人とも……\nこのカニ捕りは遊びじゃないのよ？
+	レイバーインヴェスティ	悔しい2						あのとんでもない借金を返すまで、\nどれだけのカニが必要なのか……
+	ディーア	絶望水着2						元々、海の男だからできる仕事だ\nオレ達なんて、\nきっとすぐに力尽きて……
+	レイバーインヴェスティ	悔しい2						もうキラキラな夏、\nいや、明るい人生はおしまいね……
+	レイバーインヴェスティ	悔しい2						魅惑のギャンブルが……
+	ディーア	絶望水着2						水着のイチャイチャが……
+Param	character_grayout=false
+	二人							はぁ……
+Param	character_grayout=true
+CharacterOff
+	カイロス	通常	p7
+	ラストリゾート	水着	p3b
+Se	キラン
+	ラストリゾート	水着						…………♪
+Tween	カイロス	PunchPosition	y=30				NoWait
+	カイロス	通常						あぁー！ マスターくん！\nあっちにカニがたくさんいるよ！
+CharacterOff
+	ディーア	あはは水着2						はは、カイロス……\nそんなに都合よくカニが……
+Param	character_grayout=false
+Bgm	緊迫
+CharacterOff
+	集中線		エフェクト表
+	イベントスチル102803		エフェクト裏
+Shake	Graphics		x=5 y=5				NoWait
+	カニ							カニカニカニー！！！！
+CharacterOff
+	ディーア	絶望水着2						いっぱいいるー！？
+Bgm	バトル
+	ディーア	驚き水着2						な、なんなんだ、\nあの大量のカニは！\n魔界の海を埋め尽くすほどいるぞ！
+CharacterOff
+	キャンサル	通常						かにかにかにかに！\nカニ光線！
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き水着2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き水着2						きゃ、キャンサル!?
+CharacterOff
+	キャンサル	通常						マスタっちのために、解説しよう！
+	キャンサル	通常						あのカニはウマイガニ！\n珍しいけどすごくおいしいカニなの★
+Param	character_grayout=true
+CharacterOff
+	レイバーインヴェスティ	慌て2	3_4_b
+	ディーア	驚き水着2	2_4
+	レイバーインヴェスティ	慌て2						あ、それ知ってるわ！\n確か市場価格は<dash=2>
+Tween	レイバーインヴェスティ	MoveBy	x=-30				NoWait
+	レイバーインヴェスティ	慌て2						このくらい……！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き水着2						た、高っ!? それがこんなにいたら\n借金返済どころか\n大儲けだって夢じゃないぞ……！
+	ディーア	怪しい水着2						でも、珍しいはずのカニが\nどうしてここまで大量に……？
+CharacterOff
+	カイロス	通常	p7
+	ラストリゾート	水着	p3b
+	ラストリゾート	水着						わぁー♪\nこんなにカニさんが来るなんて、\nすっごく幸運だね♪
+CharacterOff
+	ディーア	驚き水着2						ラストリゾート、カイロス……\nもしかして二人が……？
+CharacterOff
+	ラストリゾート	水着	p3b
+	カイロス	嬉しい	p7
+	カイロス	嬉しい						いやいやモブ子さんは\nなんにもしていないよ♪
+	ラストリゾート	水着						私達は信じていただけ♪
+	ラストリゾート	水着						私達がいるかぎり、\nマスターさまが\n不幸になるはずないって♪
+Bgm	決戦
+	カイロス	嬉しい						マスターくん、\n今こそ絶好のチャンスだよ！
+CharacterOff
+	ディーア	驚き水着2						…………!!
+	ディーア	笑い水着2						ありがとうな、二人とも……
+	ディーア	怒り水着2						よし、みんな行くぞ……！\n今度こそ大儲けして、\nオレ達の夏を取り戻す……！
+Param	character_grayout=false
+	集中線		エフェクト表
+	ディーア	本気水着2						<size=50>カニ捕りだー！！！！</size>
+CharacterOff
+	レイバーインヴェスティ	通常2	p8b
+	カイロス	通常	p6
+	ラストリゾート	水着	p2b
+	集中線		エフェクト表
+	全員							おぉー！！
+FadeOut	white					.7
+Bg	海底					0
+CharacterOff						0
+	イベントロゴ1028		エフェクト表			0
+	                    
+FadeIn	white					.7
+Wait						2
+Param	character_grayout=true
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1028_01
+EndIf
+EndScenario

@@ -1,0 +1,331 @@
+# G_401_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	市街地A
+	ラーゼ	拡大通常	エフェクト表
+FadeIn	white					.5
+Tween	ラーゼ	ShakePosition	x=5				NoWait
+	ラーゼ							みゃあああああああああああああ!!\nもう帰りたいですぅぅ!!
+CharacterOff
+	ディーア	驚き2						ラーゼ？\n何でそんなに嫌がってるんだ？
+CharacterOff
+	ラーゼ	悲しい
+Tween	ラーゼ	PunchPosition	y=50				NoWait
+	ラーゼ	悲しい						マスターさん！\nラーゼ、アンロックされた時\n言いましたよね？
+	ラーゼ	通常						ラーゼの服は、\n純粋で心の綺麗な人には\n見えないって！
+CharacterOff
+	ディーア	通常2						ああ、分かってるよ
+CharacterOff
+	ラーゼ							だ、だったら……！
+CharacterOff						0
+Param	character_grayout=false
+	酒場のおばちゃん		画面外_左
+	　　　　　　　　　　
+Tween	酒場のおばちゃん	MoveTo	x=800 time=8				NoWait
+Wait						1
+	旅人		画面外_右
+	　　　　　　　　　　
+Tween	旅人	MoveFrom	x=-800 time=7				NoWait
+Wait						2
+Param	character_grayout=true
+CharacterOff						0
+	ラーゼ	拡大悲しい	エフェクト表					こんな人がたくさんいる場所に\n連れて来ないでくださいぃ!!
+	ラーゼ	拡大通常	エフェクト表					ラーゼのはだか、見える人がいたら\nどうするんですかぁぁ！
+CharacterOff						0
+	ディーア	怒り2						ご、ごめん……\nでも、少しだけ付き合って欲しい
+	ディーア	本気2						魔剣使いとして、\nオレはこのままじゃダメなんだ!!
+CharacterOff						0
+	ラーゼ							えっ？
+CharacterOff						0
+	ディーア	怒り2						オレに君の服が見えるってことは\nオレは純粋じゃないし、\n心が綺麗じゃない……
+CharacterOff						0
+	ラーゼ							そう、ですね……
+CharacterOff						0
+	ディーア	悔しい2						今だって、そのことでラーゼは\nオレを警戒してるんだろ？
+CharacterOff						0
+Bgm	コメディ
+	ディーア	怒り2	1_3
+	ラーゼ	悲しい	4_4					そ、そんなことは\n……ありませんよ？
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							この距離で警戒してないって\n言えるか!?\nさすがにつらいんだが!!
+CharacterOff						0
+	ラーゼ	悲しい						えっと、だって、ラーゼの服が\n見えるってことは\nマスターさんは変態さんです
+CharacterOff						0
+Se	打1
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						容赦ない変態認定!!
+CharacterOff						0
+	ラーゼ	悲しい						あまり近づきすぎるのは、ちょっと
+CharacterOff						0
+	ディーア	悔しい2
+Tween	ディーア	ShakePosition	x=5 time=1				NoWait
+	ディーア	悔しい2						くぅっ……！ とにかく\nラーゼに警戒されたままじゃ\n魔剣使いとして失格だ！
+	ディーア	本気2						見ててくれ、ラーゼ\nオレ、頑張るからな！
+CharacterOff						0
+	ラーゼ							何をですか？
+CharacterOff						0
+	ディーア	怒り2						オレはこれから、オレの心を\n綺麗にしてみせる！
+	ディーア	本気2						そうすれば、\nラーゼの警戒も解けるはずだ！
+CharacterOff						0
+	ラーゼ							えっ、で、でも、それってつまり！\nラーゼのはだかを見たいって\nことですよねぇ!?
+CharacterOff						0
+	ディーア	本気2						そうだ!!
+CharacterOff						0
+	ラーゼ
+Tween	ラーゼ	PunchPosition	y=50				NoWait
+	ラーゼ							みゃああっ!!\n全力で肯定しないでください!!
+CharacterOff						0
+	ディーア	本気2						純粋になって、きれいな心を\n手に入れるぞ!!
+	ディーア	きらーん2						ラーゼのありのままの姿を\n見るためにー!!
+CharacterOff						0
+	ラーゼ							みゃああっ!!\n変態さんな本音がだだ漏れですぅ!!
+FadeOut	black					.5
+CharacterOff						0
+Bgm	都市
+	旅人		画面外_左
+	ディーア	通常2	1_3
+FadeIn	black					.5
+	旅人	<Off>						道案内助かったよ！
+	ディーア	笑い2						いえいえ、これくらい！
+	ディーア	通常2
+Tween	ディーア	MoveTo	x=180 time=1
+	女の子	<Off>						お兄ちゃん、ありがとぉ！
+	ディーア	笑い2						ああ！\nお母さん見つかって良かったな！
+Tween	ディーア	MoveTo	x=-180 time=1				NoWait
+	ディーア	驚き2						あっ！ 大丈夫ですか？\n荷物持ちますよ？
+	酒場のおばちゃん	<Off>						あら、助かるわー！
+	ディーア	笑い2						任せてください！
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	笑い2
+FadeIn	black					.5
+	ディーア							ふぅ、良い事したなー！
+CharacterOff
+	ラーゼ							そうですね……
+	ラーゼ							（マスターさん、あれから\n　ずっと人助けしてるなぁ……）
+	ラーゼ							（もしかしてマスターさんって\n　本当は……良い人？）
+CharacterOff
+	ディーア	怒り2						………………
+CharacterOff
+	ラーゼ							あ、あの……マスターさん？\nなんでそんなに\nラーゼのことじっと見て……
+CharacterOff
+StopBgm
+Se	キラン
+	ディーア	拡大気づき	エフェクト表					ラーゼ！\nそ、その姿……！
+CharacterOff
+	ラーゼ							な、なんですか!?
+CharacterOff
+Bgm	コメディ
+	ディーア	拡大気づき	エフェクト表					見える、見えるぞ……！
+CharacterOff
+	ラーゼ
+Tween	ラーゼ	ShakePosition	x=5 time=1				NoWait
+	ラーゼ							えっ？　……ま、まさか\nラーゼのはだか、見えてるんですか？
+CharacterOff
+	ラーゼ	拡大胸元	エフェクト表					みゃぅぅっ！
+CharacterOff
+	ラーゼ	拡大腰	エフェクト表					ど、どこ見てるんですかぁっ!!
+CharacterOff
+	ラーゼ	拡大通常	エフェクト表					みゃぁぁ、や、やめて！\nそんなにじっと見られたらぁ……
+CharacterOff
+	ディーア	悔しい2
+Tween	ディーア	ShakePosition	x=10 time=1				NoWait
+	ディーア	悔しい2						……うう、ダメだ\nまだラーゼの服が見える……
+CharacterOff
+	ラーゼ	悲しい						…………え？\nな、なんだ……\n驚かせないでください
+CharacterOff
+	ディーア	怒り2						おかしいな\nまだ良い行いが足りないのか……？
+CharacterOff
+	女の子		1_3
+	ラーゼ	悲しい	3_3					マスターさん……
+Bgm	都市
+	女の子							………………
+CharacterOff
+	ラーゼ	通常
+Tween	ラーゼ	PunchPosition	y=50				NoWait
+	ラーゼ	通常						みゃぅっ！\nマスターさん！\nあの子、じっとラーゼを見てますぅ！
+CharacterOff
+	ラーゼ		3_3
+	ディーア	驚き2	1_3					え？ ああ、そっか\nもしかして、子どもは純粋だから……
+	ラーゼ							き、きっとあの子はラーゼの服が\n見えてないんですよぉ！\nは、恥ずかしいです……！
+	ディーア	悔しい2						なんてうらやま……じゃない\n大丈夫か、ラーゼ？\n建物の陰に移動しようか
+Tween	ラーゼ	MoveBy	x=20				NoWait
+	ラーゼ	悲しい						今すごい本音が漏れてたような……
+	ディーア	笑い2						そんなことないって！\nさ、行くぞ？
+FadeOut	black					.5
+CharacterOff
+	ディーア	通常2
+Param	character_grayout=false
+FadeIn	black					.5
+	ディーア	通常2						よし、ここなら大丈夫だな……
+	ディーア	笑い2						他になにか困ったことがあったら\n遠慮なく言ってくれ！
+	オーラ桃		エフェクト裏
+Se	ラブ
+	ディーア	笑い2						助け合うのが\n魔剣と魔剣使いだからな！
+Param	character_grayout=true
+CharacterOff
+	ラーゼ							マスターさん……！\nあ、ありがとうございます
+CharacterOff
+	ディーア	きらーん2						……オレ、今良い事した？
+CharacterOff
+	ラーゼ							えっ
+CharacterOff
+Bgm	コメディ
+Se	キラン
+	ディーア	拡大気づき	エフェクト表					…………………!!
+CharacterOff
+	ラーゼ	拡大通常	エフェクト表					みゃぅぅっ!!\nまたですかぁ！ そんなに見ても\nマスターさんの心はまだ！
+CharacterOff
+	ディーア	拡大気づき	エフェクト表					こ、これは……！
+CharacterOff
+	ラーゼ							え、え？ 見えてませんよね？\nら、ラーゼのはだか、\n見えてないですよね!?
+CharacterOff
+	ディーア	怪しい2						ああ……ばっちり服が見える……
+CharacterOff
+	ラーゼ							良かったぁ……
+CharacterOff
+	ディーア	本気2						オレの心はまだ\n綺麗じゃないのか……！
+Tween	ディーア	ShakePosition	x=10 time=1				NoWait
+	ディーア	悔しい2						どうしてだ……\nこんなにたくさん良い事をしたのに！
+CharacterOff
+	ディーア	悔しい2	1_3
+	ラーゼ	悲しい	3_3					……マスターさんは、\nラーゼのはだかを見たくて\nやってるんですよね？
+	ディーア	驚き2						そうだけど
+	ラーゼ	悲しい						それじゃあ\nいつまでたっても\n心は綺麗になりませんよ？
+	ディーア
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						え、ええっ!?　そうなのか!?
+	ラーゼ	悲しい						びっくりするところですか!?
+	ディーア	本気2						ラーゼのはだかを見たいという\nこの気持ちは、とてつもなく素直で\nまっすぐなのに!?
+	ラーゼ	悲しい						素直でまっすぐな変態さんなので\nダメです
+Tween	ディーア	MoveBy	x=20				NoWait
+	ディーア	悔しい2						くっ……そんな……\nラーゼ、オレは！
+Tween	ラーゼ	MoveBy	x=20				NoWait
+	ラーゼ	悲しい						ちょ、近づかないでください……
+	ディーア	本気2						オレは、ラーゼのことを\nもっと知りたいだけなんだ！
+	ラーゼ	通常						…………？
+	ディーア	怒り2						魔剣と魔剣使いは、\n信頼し合うことが大事だ
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+Se	ラブ
+	ディーア	本気2						だから、ラーゼの全てを\n知りたいと思うのは、当然だろ？
+Param	character_grayout=true
+CharacterOff
+	ラーゼ
+Tween	ラーゼ	PunchPosition	y=50				NoWait
+	ラーゼ							みゃうっ!?
+	ラーゼ							……って、いやいや！ あの、えっと\nかっこいいこと言ってもダメですぅ!!
+Param	character_grayout=false
+	ラーゼ							そんなこと言ってもラーゼは……！
+StopBgm
+	キノコリオン		画面外_左
+Se	風1
+Tween	キノコリオン	MoveTo	x=-180 time=1
+Wait						.5
+CharacterOff
+	ディーア	本気2						ラーゼ、あぶない！
+CharacterOff
+	ラーゼ							えっ
+CharacterOff
+FadeOut	white					.3
+Bgm	バトル
+	ディーア	本気2	2_3
+	ラーゼ		3_3
+	キノコリオン		1_3
+FadeIn	white					.3
+Tween	ディーア	MoveTo	x=90 time=0.5
+	キノコリオン
+Tween	キノコリオン	ShakePosition	x=10 time=1				NoWait
+	キノコリオン							ノコノコーッ！
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*G_401_02
+EndIf
+EndScenario
+
+# G_401_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	市街地A
+	ディーア	本気2
+FadeIn	white					.5
+	ディーア	本気2						ラーゼ、大丈夫だったか？
+CharacterOff
+	ラーゼ							は、はい……
+	ラーゼ							（マスターさん、私を助けて……\n　あ、あれ……本当に、良い人？）
+	ラーゼ							（それなら、ラーゼの服\n　最初から見えてないんじゃ……!?）
+CharacterOff
+	ディーア	怒り2						……服は、破れてないな
+CharacterOff
+	ラーゼ							（あれ、服、見えてる……？）
+	ラーゼ							あ、あの、マスターさんは、\nラーゼの服が破れてなくて\n残念なんじゃないですか……？
+CharacterOff
+	ディーア	通常2						ラーゼが怪我してないなら\nそれでいいさ
+CharacterOff
+	ラーゼ							……！\nえっと……怪我は、してないです
+CharacterOff
+	ディーア	笑い2						そうか\n無事でよかった
+	ディーア	通常2						ずっと付き合わせて悪かったな\n疲れただろ？\nそろそろ酒場に帰ろうか
+CharacterOff
+	ラーゼ							は、はい……！
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	通常2	1_2
+	ラーゼ		3_3
+FadeIn	black					.5
+	ラーゼ							……あの、マスターさん
+	ディーア	通常2						どうした？
+	ラーゼ							ラーゼ、\n一つ分かったことがあります
+	ディーア	通常2						ん？
+Bgm	凱旋
+	ラーゼ							ラーゼは、変態さんに良い人は\nいないって、決めつけていました
+	ディーア	驚き2
+	ラーゼ							でも、人助けしたり\nラーゼのことを気遣ってくれる\nマスターさんを見て
+	ラーゼ							変態さんの中にも、良い人はいるって\n分かったんです
+	ディーア	汗2						……えーと、それって褒められてる？
+Tween	ラーゼ	MoveBy	x=-45 time=1				NoWait
+	ラーゼ							はい！\nマスターさんは変態さんですけど\n思いやりがあって、優しいです……
+Tween	ラーゼ	MoveBy	x=-45 time=1				NoWait
+	ラーゼ							だから、その……\n少しだけ、近づいても大丈夫かなぁ？\nって思ったんです
+	ディーア	あはは2						ちょっとは仲良くなれた\nってことで、いいのかな？
+Tween	ラーゼ	PunchPosition	y=50				NoWait
+	ラーゼ							そうですね……！
+	ディーア	笑い2						ありがとう\nラーゼにそう言ってもらえると\nオレも一日頑張った甲斐があるよ
+	ディーア	通常2						改めて、これからよろしくな\nラーゼ
+	ラーゼ							はい、よろしくお願いします！
+CharacterOff
+	ディーア	笑い2						オレも今決めたよ！
+CharacterOff
+	ラーゼ							え、何をですか？
+CharacterOff
+Bgm	コメディ
+	ディーア	本気2						ラーゼの服のことは、絶対諦めない！
+CharacterOff
+	ラーゼ
+Tween	ラーゼ	PunchPosition	y=50				NoWait
+	ラーゼ							えっ!?
+CharacterOff
+	ディーア	本気2						いつかこの心を綺麗にして、\nラーゼの全てを目に焼き付ける!!\nオレ、頑張るからな!!!!
+CharacterOff
+	ラーゼ	拡大通常	エフェクト表
+Tween	ラーゼ	ShakePosition	x=5				NoWait
+	ラーゼ	拡大通常	エフェクト表					みゃああああああっ!!
+	ラーゼ							やっぱり\n筋金入りの変態さんですぅぅっ!!
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_401_01
+EndIf
+EndScenario

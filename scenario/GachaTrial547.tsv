@@ -1,0 +1,432 @@
+# G_547_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	神秘
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	リゼビ	拡大通常	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+FadeIn	white					.5
+	リゼビ	拡大通常						お、お願いです、マスター様……
+	リゼビ	拡大通常						私は、リーゼ様みたいに\n立派な魔剣にならないと\nダメなんです……
+	リゼビ	拡大通常						だ、だから、\n恥ずかしいけど……！
+CharacterOff	オーラ桃
+	リゼビ	拡大腹						リーゼのここ、開いてください……
+	          							<color=blue>新魔剣お試しコーナーへ続く</color>
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_547_02
+EndIf
+EndScenario
+
+# G_547_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏			0
+	リゼビ	通常				0
+FadeIn	white					.5
+	リゼビ	通常						はぁ……\n私、どうしたらいいのかな……
+	リゼビ	通常						せっかくリーゼ様と\n同じマスター様に出会えたのに……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Bg	草原A					0
+	リゼビ	通常				0
+FadeIn	white					.3
+Se	チャージ
+	オーラ赤		エフェクト表			.5
+	リゼビ	通常						今日こそ\nちゃんと活躍しないと……！
+CharacterOff	オーラ赤					.2
+	リゼビ	悔しい						あ、あれ……？\n魔力が……!?
+Shake	リゼビ		x=5				NoWait
+	リゼビ	悲しい						ふぇええ!?\nな、なんで上手くできないのぉ!?
+FadeOut	white					.3
+CharacterOff
+Bg	酒場1F					0
+	リゼビ	通常				0
+FadeIn	white					.3
+	リゼビ	通常						あのぉ、\nリーゼの文字を読んでくれませんか？
+	リゼビ	通常						おなかの文字を読んでいただけると\nリーゼ様やペシェ様みたいに\n力が使えるはずなので……
+	リゼビ	悔しい						だから、\nリーゼのここ、開いてください……！
+Tween	リゼビ	PunchPosition	y=30				NoWait
+	リゼビ	悲しい						え……？\n文字がよく見えない、ですか？\nでもこれ以上は……ふぇえ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場_宿屋					0
+	リゼビ	通常				0
+FadeIn	white					.3
+	リゼビ							私も、リーゼ様みたいな\n立派な魔剣にならないといけないのに
+	リゼビ							このまま\nちゃんと使ってもらえなかったら……
+Tween	リゼビ	PunchPosition	y=10				NoWait
+	リゼビ							……あれ？
+Param	character_grayout=true
+	リディ	<Off>	1_2					えぇっ!?\nマスター、捨てちゃうの!?
+	ディーア	<Off>	2_2					ああ、もったいないけどな
+StopBgm
+Tween	リゼビ	MoveBy	x=250 time=1				NoWait
+	リゼビ	通常						この声……\nリディちゃんとマスター様？
+Bgm	絶望
+	ディーア	<Off>	1_2					世界図書館で\n古本市が開かれるらしいんだ
+	ディーア	<Off>						いい機会だろ？\n読めない本を持ってても仕方ないし\n他の人に譲ろうと思ってさ
+	リディ	<Off>	2_2					うーん、\nたしかにそうかも……
+	ディーア	<Off>						そうと決まったら急ぐぞ\n明日までに準備しよう
+Tween	リゼビ	MoveBy	x=-250 time=2				NoWait
+	リゼビ	悔しい						マスター様が……\n本を……捨てる?
+Tween	リゼビ	PunchPosition	y=30				NoWait
+	リゼビ	悔しい						ふ、ふぇえええ……\nどうしよう……！
+	リゼビ	通常						読めない本って、\nリーゼのことだよね……！
+Shake	リゼビ		x=5				NoWait
+	リゼビ	通常						こ、このままじゃ\nリーゼ、捨てられちゃって<dash=4>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+Bg	研究所A					0
+	リゼビ	悲しい				0
+FadeIn	white					.3
+	リゼビ	悲しい						だ、だれかぁ……！\nここから出してくださいぃ……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場_宿屋					0
+	リゼビ	悲しい				0
+FadeIn	white					.3
+	リゼビ	悲しい						役に立てなくて捨てられるなんて、\nそんなのイヤだよぉ……！
+StopBgm
+	リゼビ	悔しい						こうなったら捨てられないように\nがんばらないと……！
+	リゼビ	通常						なんとかして\nおなかの文字を読んでもらおう……！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_カフェ					0
+	ロズ	通常	p3b			0
+	リーゼ	通常	p7			0
+Param	character_grayout=true
+FadeIn	black					.3
+Bgm	都市
+	リーゼ	通常						え……？\n力をちゃんと使えるようにしたい？
+Tween	ロズ	PunchPosition	y=30				NoWait
+	ロズ	通常						だからリーゼママとロズに\nアドバイスしてほしいんだ♪
+CharacterOff
+	リゼビ	通常						は、はい……！\n自分でもどうしたら良いか\nわからなくて……
+CharacterOff
+	ロズ	通常	p3b
+	リーゼ	通常	p7
+	リーゼ	通常						大丈夫！\nそういうことなら協力するわ！
+Tween	ロズ	PunchPosition	y=30				NoWait
+	ロズ	通常						ビーストちゃんの『スイッチ』\nロズが押してあげる♪
+CharacterOff
+	リゼビ	嬉しい						リーゼ様、ロズ様……！
+CharacterOff
+	ランベルセ	制服						なるほど\n原典の魔剣に聞くのは的確な方法だ\nでも、どうしてボクも呼んだのかな？
+CharacterOff
+	リゼビ	通常						えっと……みなさんから\nランベルセさんはとっても物知りって\n聞きまして……
+CharacterOff
+	ロズ	通常	p3b
+	リーゼ	通常	p7
+	リーゼ	通常						たしかに、\n私たちじゃ気づかないアドバイスも\nしてくれそうよね
+CharacterOff
+	リゼビ	通常						もう時間もないので、\nお願いできませんでしょうか？
+CharacterOff
+	ランベルセ	制服						ふふ、わかったよ\n戦いに没頭せず思い悩む姿は\nボクにとっても好ましい
+CharacterOff
+	リゼビ	嬉しい
+Tween	リゼビ	PunchPosition	y=30				NoWait
+	リゼビ	嬉しい						あ、ありがとうございます！
+	リゼビ	通常						それで、早速なんですけど、\nリーゼはどうしたら良いでしょうか？
+CharacterOff
+	ランベルセ	制服						まずは姉妹……つまりは\nリーゼを参考にするのが常道だね
+CharacterOff
+	ロズ	通常	p3b
+	リーゼ	通常	p7
+	リーゼ	通常						うーん、私の場合かぁ……
+	リーゼ	通常						私はマスター様に使ってもらう時\n『がんばるぞ』『たたかうぞ』って\n思うと力が出てくるけど……
+	ロズ	通常						じゃあ、ビーストちゃんも\nそうやってみればいいんじゃない？
+CharacterOff
+	リゼビ	悔しい						え、えっと……
+Shake	リゼビ		x=5				NoWait
+	リゼビ	通常						が、がんばるぞーっ!!
+CharacterOff
+	リーゼ	通常	p7
+	ロズ	通常	p3b
+	ロズ	通常						あ、いい感じ！\nそれで、おなかの文字は……
+CharacterOff
+	ランベルセ	制服						ふむ、出てこないね？
+CharacterOff
+	リゼビ	悔しい						ふぇえ、やっぱりぃ……
+	リゼビ	通常						ただリーゼ様の真似をするだけじゃ\nダメなんでしょうか？
+CharacterOff
+	ランベルセ	制服						ああ、キミは件の桃色の力に\nビースト因子も合わさった存在\n模倣だけでは足りないのだろう
+CharacterOff
+	リゼビ	通常						なるほど……
+CharacterOff
+	ランベルセ	制服						次は視点を変えるのはどうかな？\nボクらをあえて武器として捉えると\n必要なのは使い手だ
+	ランベルセ	制服						武器と使い手があって初めて、\n魔剣は力を発揮できる
+CharacterOff
+	リーゼ	通常	p7
+	ロズ	通常	p3b
+Tween	ロズ	PunchPosition	y=30				NoWait
+	ロズ	通常						じゃあマスターにも\nビーストちゃんを使いたいって\n思ってもらえばいいんだ！
+	リーゼ	通常						でもマスター様だったら\n魔剣を平等に扱ってると思うわよ？
+Tween	ロズ	PunchPosition	y=30				NoWait
+	ロズ	通常						それじゃあ足りないんだよぉ♪\n『男の子スイッチ』を入れないと！
+CharacterOff
+	リゼビ							お、男の子スイッチ……？
+CharacterOff
+	リーゼ	通常	p7
+	ロズ	通常	p3b
+	ロズ	通常						思い切って、ぎゅーって\n気持ちよくさせちゃうの♥
+	ロズ	通常						ロズに興味津々なロリコンだから、\nビーストちゃんもイけるって♪
+Tween	リーゼ	PunchPosition	y=30				NoWait
+	リーゼ	通常						ちょっとロズ！\nあなた、またそんな言い方して!!
+	ロズ	通常						にはは♪
+CharacterOff
+	ランベルセ	制服						けど、思いがけないことをするのは\n良い手かもしれないね
+CharacterOff
+	リゼビ	通常						そ、そうなんですか……!?
+CharacterOff
+	ランベルセ	制服						思わぬところにヒントが転がっている\nそれが人生というものさ♪
+StopBgm						2
+CharacterOff
+	リゼビ							思いっきり、マスター様に……！\nわ、わかりました……
+FadeOut	black					.5
+StopBgm
+CharacterOff						0
+Bg	酒場_宿屋					0
+	          
+Wait						1
+Param	character_grayout=false
+FadeIn	black					.5
+	ディーア	<Off>	1_2					ただいま
+Bgm	図書館
+	リゼビ	通常				.5		お、おかえりなさい\nマスター様……
+Wait						.5
+Selection	*G547_01							リーゼビースト？
+*G547_01
+	リゼビ	通常						は、はい……\nリーゼ、ずっと待ってました……
+StopBgm
+	リゼビ	通常						マスター様に\nリーゼを使ってほしくて……
+Bgm	神秘
+CharacterOff
+	リゼビ	拡大腹	エフェクト表
+	リゼビ	拡大腹						お願いですマスター様……！\nリーゼのここ、開いてください……！
+CharacterOff
+	リゼビ	通常
+Shake	リゼビ		x=5				NoWait
+	リゼビ	通常						はぅぅ……\nこ、こんな自分からなんて……
+	リゼビ	悔しい						恥ずかしくて、ドキドキして\nなんだかとっても熱いよぉ……
+	リゼビ	通常						で、でも……\nこれくらいしないと、私なんて……
+Tween	リゼビ	PunchPosition	y=30				NoWait
+	リゼビ	通常						わ、私にはマスター様だけなんです！\n他の人なんて、嫌なんです……！
+	リゼビ	通常						だからリーゼ様にしてるみたいに
+CharacterOff
+	集中線		エフェクト表
+	リゼビ	拡大通常	エフェクト裏
+	リゼビ	拡大通常						おなかぱふぱふでも、\nおなかマウスパッドでも\nなんでもしていいですから……！
+Selection	*G547_02							そんなことしてないぞ!?
+*G547_02
+CharacterOff
+StopBgm
+	リゼビ	通常						ほ、本当になんでもいいんです！\nマスター様のためならリーゼは……！
+Tween	リゼビ	ScaleBy	x=1.3 y=1.3				Add
+Tween	リゼビ	MoveBy	y=-38				Add
+Tween	リゼビ	PunchPosition	y=50				Add
+Wait						.5
+Se	倒れる
+FadeOut	black					.2
+CharacterOff						0
+Bg	黒背景					0
+	          
+FadeIn	black					.2
+	リゼビ	<Off>						…………あ
+FadeOut	white					1.3
+CharacterOff						0
+	トライアルスチル5471		エフェクト表			0
+Tween	トライアルスチル5471	MoveBy	y=-550 time=15				NoWait
+Bgm	雪の街
+FadeIn	white					1.3
+	リゼビ	<Off>						やっとリーゼを\n開いてくれるんですね……♪
+	リゼビ	<Off>						どうでしょう？ 変じゃないですよね\nリーゼのおなか……
+	リゼビ	<Off>						マスター様に\nちゃんと使ってもらえますよね？
+FadeOut	white					.3
+CharacterOff						0
+	トライアルスチル5472		エフェクト表			0
+FadeIn	white					.3
+	リゼビ	<Off>						リーゼの<ruby=ここ>ページ</ruby>\n誰にも開いてもらったこと無いから\nちゃんと新品なんです……
+	リゼビ	<Off>						きっとマスター様に出会うために、\nとっておいたんです
+	リゼビ	<Off>						ちょっと乱暴でも\n痛くても、我慢できます
+FadeOut	white					.3
+CharacterOff						0
+	トライアルスチル5473		エフェクト表			0
+FadeIn	white					.3
+	リゼビ	<Off>						だから、お願いです\nリーゼの<ruby=ここ>ページ</ruby>開いてください……！
+StopBgm
+	リゼビ	<Off>						あれ……？\nマスター様？
+Selection	*G547_03							お、落ち着けリーゼビースト……！
+*G547_03
+FadeOut	white					.2
+CharacterOff						0
+Bg	酒場_宿屋					0
+	リゼビ	通常				0
+FadeIn	white					.2
+	リゼビ	通常						で、でも、それじゃあ、\nマスター様に捨てられちゃう……！
+	リゼビ	悲しい						聞いたんです……！\n読めない本は古本市に出すって\nでもリーゼは諦めたくなくて……
+Selection	*G547_04							それ、古本のことだぞ？
+*G547_04
+	リゼビ	通常						ふる、ほん……？
+Bgm	平和
+Param	character_grayout=true
+	リゼビ	通常						り、リーゼのことじゃ……？
+	ディーア	<Off>	1_2					お前を古本市に\n出したりするわけないだろ？
+	ディーア	<Off>						任務で手に入れた\n読めない魔導書を出そうと思って
+Tween	リゼビ	PunchPosition	y=30				NoWait
+	リゼビ	嬉しい						よ、よかったぁ……
+	ディーア	<Off>						じゃあ、オレは任務があるから\nまた後でな
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Wait						1
+	リゼビ	通常				0
+FadeIn	black					.3
+	リゼビ	通常						………………\nでも、私がちゃんと使えないのは、\n変わってない……
+	リゼビ	通常						私はリーゼ様とペシェ様から\n生まれたビーストなのに
+	リゼビ	悲しい						ちゃんと立派な魔剣にならないと\nいけないのに……
+CharacterOff
+	ペシェ	通常2						へぇ♪ そんなこと考えてたんだ\nリーゼロッテのビースト♪
+Bgm	図書館
+CharacterOff
+	リゼビ	通常
+Tween	リゼビ	PunchPosition	y=30				NoWait
+	リゼビ	通常						ペ、ペシェ様!?
+CharacterOff
+	リゼビ	通常	p3
+	ペシェ	通常2	p7b
+	ペシェ	通常2						伝承ではあなたも姉妹みたいなもの\nそんな驚かなくってもいいよ♪
+Tween	リゼビ	MoveBy	x=-30				NoWait
+	リゼビ	悔しい						……でも、私なんかじゃ
+	ペシェ	通常2						ふぅーん？
+	リゼビ	悔しい						私はペシェ様たちの力を頂いたのに\n文字を読んでももらえない魔典\n桃幻の力を使えないダメな子
+	リゼビ	悔しい						世界を、救わないといけないのに……
+	ペシェ	通常2						……なるほど♪
+	リゼビ	通常						え、ペシェ様……？
+	ペシェ	通常2						ふふ♪ おもしろいなぁ\nこれがビースト因子なんだ♪
+Tween	ペシェ	PunchPosition	y=30				NoWait
+	ペシェ	通常2						ペシェとリーゼの……\nううん、さらに伝承を遡って\nいいとこ取りを狙ってる♪
+	ペシェ	通常2						ねえ、ビースト\nあなた、気づいてる？
+	ペシェ	通常2						力だけなら、\nあなたは私さえ凌駕しうるって
+Shake	リゼビ		x=5				NoWait
+	リゼビ	通常						そ、そんなはずないです……！\nじゃあ、私はなんで……
+	ペシェ	通常2						『救わないといけない』？\n『立派にならないといけない』？
+	ペシェ	通常2						責任とか義務とか後ろ向きなこと\n考えてるからだよ♪
+	ペシェ	通常2						私たちの力は永遠\n変わることなく在り続ける憧れ
+	ペシェ	通常2						なのにこんな後ろ向きじゃあ、\nすり潰されるだけ♪
+StopBgm
+	ペシェ	通常2						リーゼロッテ=ビースト
+Bgm	凱旋
+Tween	ペシェ	MoveBy	x=-30				NoWait
+	ペシェ	通常2						責任でも、義務でもなく\nあなたがやりたいことはなに？
+	リゼビ	通常						やりたい、こと……？
+	ペシェ	通常2						そしてリーゼみたいに強く願えば、\n私たちはそれを失うことはない
+Tween	ペシェ	PunchPosition	y=30				NoWait
+	ペシェ	通常2						ふふ♪ なーんて♥\nあとは自分で考えてねー♪
+Se	走る
+Tween	ペシェ	MoveBy	x=700 time=1				NoWait
+Wait						.2
+Tween	リゼビ	MoveBy	x=100				NoWait
+	リゼビ							あ、ペシェ様……
+	リゼビ							リーゼの憧れ、やりたいこと……
+FadeOut	white					.2
+CharacterOff						0
+Bg	白背景					0
+	リーゼ	通常	p3			0
+	ペシェ	通常	p7			0
+	          
+FadeIn	white					.2
+Wait						1
+FadeOut	white					.2
+CharacterOff						0
+Bg	酒場_宿屋					0
+	リゼビ	通常				0
+FadeIn	white					.2
+	リゼビ							私もリーゼ様やペシェ様みたいに……
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+Bg	草原A					0
+	厄介な魔物B					0
+Wait						1.5
+Param	character_grayout=true
+FadeIn	black					.3
+Bgm	バトル
+	厄介な魔物B							ノコノコっ!!
+	ディーア	<Off>	1_2					あとはコイツを倒せば……！
+Se	走る
+CharacterOff
+	リゼビ	通常						ま、マスター様……！
+	ディーア	<Off>						リーゼビースト？
+Bgm	勇者バトル
+Tween	リゼビ	PunchPosition	y=30				NoWait
+	リゼビ	通常						リーゼのページを、\n開いてください……！
+	リゼビ	通常						わ、私は……\nリーゼ様から生まれたビースト！
+Tween	リゼビ	PunchPosition	y=30				NoWait
+	リゼビ	通常						世界を救ったリーゼ様から\n力を貰った魔剣なんです……！
+	リゼビ	通常						ずっと、憧れでした\nあんな風にかっこよくなりたい\n戦って誰かを、世界を守りたい
+	リゼビ	通常						だから、まだ追いつけなくても、\nいつかあんな立派な魔剣に……！
+	リゼビ	拡大通常	エフェクト裏					私はなりたい……!!
+Param	character_grayout=false
+Se	チャージ
+	オーラ赤		エフェクト表			.7
+Wait						1
+	リゼビ	拡大通常						わ、わぁ……！\nい、いきなり力があふれて……!?
+Selection	*G547_05							行くぞっ、リーゼビースト！
+*G547_05
+	リゼビ	拡大嬉しい						はい……！\n桃色のリーゼロッテ=ビースト\n行きます！
+If	isdebug==true
+CharacterOff
+Jump	*G_547_03
+EndIf
+EndScenario
+
+# G_547_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	          
+FadeIn	white					.5
+	ディーア	<Off>						あれ以来、\n前よりもリーゼビーストは\n扱いやすくなった
+	ディーア	<Off>						まだ失敗することもあるが\nリーゼビーストはがんばっている
+CharacterOff
+	リゼビ	通常						あ、あのぉ、\nマスター様……？
+	リゼビ	通常						今日も、\nお願いしてもいいでしょうか？
+Shake	リゼビ		x=5				NoWait
+	リゼビ	嬉しい						えへへ、やっぱり二人っきりで\nこんなことするの、恥ずかしい……
+	リゼビ	通常						おなかの奥、\nすぐアツくなっちゃいますし……\n終わったあとも大変ですし……
+	リゼビ	嬉しい						でも、\nこれも新しいページを開くため、\nちゃんと立派になるためだから……
+FadeOut	white					.3
+CharacterOff						0
+	オーラ桃		エフェクト裏			0
+	リゼビ	拡大嬉しい	エフェクト表			0
+FadeIn	white					.3
+	リゼビ	拡大嬉しい						マスター様、\nリーゼのここ、開いてください♥
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_547_01
+EndIf
+EndScenario

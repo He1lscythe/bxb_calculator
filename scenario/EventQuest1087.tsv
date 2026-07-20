@@ -1,0 +1,241 @@
+# E_1087_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔剣の日常
+Bg	酒場1F					0
+Param	character_grayout=false
+	ファフニル	通常	画面外_右			0
+Tween	ファフニル	MoveBy	x=-700 time=1				NoWait
+FadeIn	black					.5
+Se	走る
+Wait						.5
+	ファフニル	通常						マスター、マスター！
+CharacterOff
+	ディーア	驚き2						ファフニル？\nそんなに慌ててどうしたんだ？
+CharacterOff
+	ファフニル	通常						えへへ♪\n実はね……！
+Tween	ファフニル	PunchPosition	y=30				NoWait
+	ファフニル	笑い						ファフニーに妹ができたの♪
+CharacterOff
+	ディーア	驚き2						妹……？
+CharacterOff
+	ファフニル	笑い						うん♪\nとーってもかわいい子なの♪
+	ファフニル	通常						今日からファフニーは\nお姉さんだよ♪
+CharacterOff
+	ディーア	笑い2						それはよかったな！\nお姉さんになるなんてすごいぞ！
+CharacterOff
+	ファフニル	通常						ふぁふー♪\nマスターにも紹介したいから、\n呼んでくるね！
+Se	走る
+Tween	ファフニル	MoveBy	x=700 time=0.5				NoWait
+Wait						1
+CharacterOff
+	ディーア	通常2						あのファフニルに妹か……
+	ディーア	怪しい2						でもグラムシリーズに\n新しい子はいないはずだし……\n別の小さな魔剣かな？
+	ディーア	目閉じ2						最近来た小さい子といえば、\nバグイーターとか、\nミステリオンだけど……
+	ディーア	怪しい2						二人もファフニルの妹って\nタイプじゃないし
+	ディーア	怪しい2						………………誰のことだ？
+StopBgm
+CharacterOff
+	ファフニル	笑い
+Tween	ファフニル	PunchPosition	y=30				NoWait
+	ファフニル	笑い						ふぁふー♪\nマスター、おまたせ！\nこの子がファフニーの妹の<dash=2>
+Bgm	緊迫
+CharacterOff
+	ノートB	通常
+	ファフニル	<Off>	1_2					ノート:Blazeちゃんだよ♪
+CharacterOff
+	集中線		エフェクト表
+	ディーア	本気2						ちょっと待て!?
+CharacterOff	集中線
+Bgm	コメディ
+	ディーア	汗2						そ、それはおかしくないか!?
+Param	character_grayout=true
+CharacterOff
+	ノートB	通常	p3b
+	ファフニル	悔しい	p7
+	ファフニル	悔しい						ふぁふっ!? おかしくないもんっ！\nノート:Blazeちゃんは妹だもん！
+CharacterOff
+	ディーア	汗2						で、でもほら、\nノート:Blazeのほうが\n色々なとこが大きいし……
+CharacterOff
+	ノートB	通常	p3b
+	ファフニル	悔しい	p7
+Tween	ファフニル	PunchPosition	y=30				NoWait
+	ファフニル	悔しい						ふぁふーっ！\nマスターはおわかってないんだから！
+	ファフニル	通常						大きいか小さいかなんて、\nかんけーないのっ！
+Tween	ファフニル	PunchPosition	y=50				NoWait
+	ファフニル	通常						ノート:Blazeちゃんは\nファフニーのファフニーなところを\nファフニってるの！
+	ファフニル	笑い						だからファフニーの妹なんだよ♪\nおわかり？
+StopBgm
+CharacterOff
+	ディーア	汗2						ごめん、\nまったくわからない……
+Bgm	平和
+CharacterOff
+	ノートB	通常	p3b
+	ファフニル	通常	p7
+	ノートB	通常						ふふ♪ マスターさん？\nファフニルちゃんが言っていることは\n本当なんですよ？
+CharacterOff
+	ディーア	驚き2						ノート:Blaze？
+CharacterOff
+	ノートB	通常	p3b
+	ファフニル	通常	p7
+	ノートB	通常						マスターさんも、\n私の中にファフニルちゃんの因子が\n入っているのは知っていますよね？
+CharacterOff
+	ディーア	驚き2						あ、ああ……\nその因子がつなぎになってるおかげで\nたくさんの力が共存できているって
+CharacterOff
+	ノートB	通常	p3b
+	ファフニル	通常	p7
+	ノートB	通常						はい♪\nファフニルちゃんがいなかったら、\n私は存在することさえできなかった
+	ノートB	嬉しい						この体には\n確かにファフニルちゃんの力が\n受け継がれているんです
+Tween	ファフニル	PunchPosition	y=30				NoWait
+	ファフニル	笑い						だからノート:Blazeちゃんは\nファフニーの妹なの♪\nこれでおわかったでしょ♪
+CharacterOff
+	ディーア	通常2						なるほど、\n二人が魔剣だからこその関係なんだな
+CharacterOff
+	ノートB	通常	p3b
+	ファフニル	笑い	p7
+	ファフニル	笑い						ノート:Blazeちゃん♪\nこれからはこの"お姉さん"を\nたーくさん頼っていいからね！
+	ノートB	通常						ふふ♪\nはい、ファフニルお姉さん♪
+Tween	ファフニル	PunchPosition	y=30				NoWait
+	ファフニル	笑い						ふぁふーっ！\nマスター、ほらお姉さんだって！\nファフニーがお姉さん！
+CharacterOff
+	ディーア	笑い2						よかったな、ファフニル
+	ディーア	通常2						それに……\nノート:Blazeもありがとうな
+CharacterOff
+	ノートB	通常	p3b
+	ファフニル	笑い	p7
+	ノートB	通常						いえいえ♪
+Bgm	わくわく
+	ファフニル	笑い						それじゃあノート:Blazeちゃん！\nファフニーがお姉さんとして\nたくさん教えてあげるね♪
+Tween	ファフニル	PunchPosition	y=30				NoWait
+	ファフニル	通常						まずは……！\nファフニーのポーズ！
+	ノートB	嬉しい						わぁ♪\nふぁふーっていうポーズですよね？\nとってもかわいいの！
+	ファフニル	笑い						うん！\nノート:Blazeちゃんもかわいいけど\nもーっとかわいくなれるよ♪
+	ファフニル	通常						それじゃあ\nファフニーのまねしてやってね♪\nせーのっ！
+CharacterOff
+	ファフニル	拡大通常	エフェクト表					ふぁふー♪
+CharacterOff
+	ノートB	拡大通常	エフェクト表					ふぁふー♪
+CharacterOff
+	ノートB	通常	p3b
+	ファフニル	笑い	p7
+	ファフニル	笑い						わぁ♪\n最初からすごくおわかってる！
+	ファフニル	通常						でも、\nもっともっと元気よくだよっ！
+CharacterOff
+	ファフニル	拡大通常	エフェクト表					ふぁふー♪
+CharacterOff
+	ノートB	拡大通常	エフェクト表					ふぁふー♪
+CharacterOff
+	ノートB	通常	p3b
+	ファフニル	笑い	p7
+	ファフニル	笑い						うんうん♪\nとーってもよくできましたっ！
+	ファフニル	通常						でもまだまだ\nお姉さんの方がファフニってるから、\nこれからも練習してね♪
+	ノートB	嬉しい						はい、ありがとうございます♪\nファフニルお姉さん♪
+	ファフニル	笑い						えへへ……♪\nそれじゃあ次は……！
+	ファフニル	通常						そうだ！\nオシャレのことも教えてあげる♪
+FadeOut	black					.3
+CharacterOff						0
+	ファフニル	街系				0
+FadeIn	black					.3
+	ファフニル	街系						見てみて！\n最近はこういうまちけい？\nな服がいいんだよっ！
+CharacterOff
+	ノートB	嬉しい						かっこよくてかわいい♪\nよく似合ってます！
+	ファフニル	街系						そーでしょ♪\nファフニーをオシャレの参考に\nしていいよ♪
+	ファフニル	街系						他にも……！
+FadeOut	white					1
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル10871		エフェクト表			0
+FadeIn	white					1
+	ファフニル	<Off>						それにそれに！\nこれも見せてあげる！\nファフニーの宝物の石なのっ！
+	ノートB	<Off>						わぁ♪ すべすべでまんまる……！\nとってもきれいですね！
+	ファフニル	<Off>						そうでしょっ！\n川でたくさん探したんだよ！\n一個分けてあげるね！
+	ノートB	<Off>						え、いいんですか？
+	ファフニル	<Off>						お姉さんだもん！
+	ノートB	<Off>						ふふ、ありがとうございます♪
+	ファフニル	<Off>						それから、\nえーっと、えーっと……！
+	ファフニル	<Off>						街でこんなゲーム、\n教えてもらったんだよ！
+	ファフニル	<Off>						あときれいなお花畑、知ってるの！
+	ファフニル	<Off>						グラムお姉さんたちから\nかわいいお店も！
+	ファフニル	<Off>						あとはあとは……！
+FadeOut	white					1
+CharacterOff						0
+Bg	酒場1F					0
+	ファフニル	街系				0
+FadeIn	white					1
+	ファフニル	街系						そうだ、\n今度は街に買い物に行こうっ！\nファフニーが案内してあげる！
+	ファフニル	街系						それでご飯の時は、\nグラムお姉さんから教えてもらった\nれでぃな食べ方を教えてあげるね♪
+	ファフニル	街系						ふぁふー♪ 準備するから、\nちょっと待っててねー！
+Se	走る
+Tween	ファフニル	MoveBy	x=-700 time=1				NoWait
+Wait						1
+CharacterOff
+	ディーア	汗2						まったく、\nファフニルは元気だなぁ……
+	ディーア	汗2						ノート:Blazeもありがとうな\nファフニルに付き合ってくれて
+StopBgm
+CharacterOff
+	ノートB	通常						いいえ、マスターさん\nお礼を言うのは私の方ですよ？
+CharacterOff
+	ディーア	驚き2						え……？
+Bgm	凱旋
+CharacterOff
+	ノートB	通常						マスターさんは\nファフニルちゃんが遊んでいるように\n見えたかもしれないですけど
+	ノートB	通常						きっとファフニルちゃん、\n私を気遣ってくれたんだと思います
+	ノートB	通常						ファフニルちゃんも私も、\n本家……オリジナルの系譜から\n外れてしまった魔剣
+	ノートB	通常						例えグラムやノートゥングと似てても\n私はもう完全な兵器ですから
+CharacterOff
+	ディーア	驚き2						ノート:Blaze……
+	ノートB	嬉しい						だから、ファフニルちゃんは一番に\n私を受け入れようとしてくれたんです
+Se	回想
+FadeOut						.3
+ImageEffect	SpriteCamera	Sepia				0
+CharacterOff						0
+	イベントスチル385		エフェクト表			0
+Tween	イベントスチル385	MoveBy	y=-270 time=3				NoWait
+FadeIn						.3
+	ノートB	<Off>						ファフニルちゃんも\nお姉さんたちがいたおかげで
+	ノートB	<Off>						今、こうしていられるんだって\n言っていました
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+	ノートB	通常				0
+FadeIn	white					.3
+	ノートB	通常						だからきっと、\n私が独りで寂しくないように\nお姉さんになってくれたんです
+CharacterOff
+	ディーア	驚き2						ファフニルが……
+	ディーア	通常2						そっか、オレはファフニルを\n子ども扱いしすぎてたのかもな……
+CharacterOff
+	ノートB	嬉しい						ふふ♪\n女の子は小さくてもレディなんです♪\n気づかない間にすぐ成長しますよ？
+CharacterOff
+	ディーア	笑い2						そうだな、\nノート:Blazeの言うとおりだ
+CharacterOff
+	ファフニル	通常						ふぁふー！\nおまたせ、ノート:Blazeちゃん！
+	ファフニル	真顔						ってあれ？\nマスターとお話してたの？
+CharacterOff
+	ディーア	笑い2						ああ、\nファフニルがとってもステキな\nレディになったって話をな
+CharacterOff
+	ファフニル	笑い
+Tween	ファフニル	PunchPosition	y=30				NoWait
+	ファフニル	笑い						ふぁふーっ！ ほんと!?\nマスターもおわかってくれた!?
+CharacterOff
+	ディーア	笑い2						うん、おわかったよ
+	ディーア	通常2						本当に、\nとってもステキなレディだ
+CharacterOff
+	ファフニル	笑い						えへへ♪
+	ファフニル	通常						それじゃあ\nノート:Blazeちゃん、お外に行こっ！
+	ファフニル	笑い						ファフニーがたくさん、\nたのしいこと教えてあげるね♪
+CharacterOff
+	ノートB	嬉しい						はい、お願いしますね♪\nお姉さん♪
+CharacterOff
+	ファフニル	拡大通常	エフェクト表
+	オーラ桃		エフェクト裏
+	ファフニル	拡大通常						うん！\nお姉さんなファフニーに任せて♪
+FadeOut	white					3
+If	isdebug==true
+CharacterOff
+Jump	*E_1087_01
+EndIf
+EndScenario

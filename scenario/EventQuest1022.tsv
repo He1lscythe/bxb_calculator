@@ -1,0 +1,1454 @@
+# E_1022_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	わくわく
+Bg	白背景					0
+Param	character_grayout=false
+	イベントスチル102201		エフェクト裏			0
+FadeIn	white					1
+	魔劍グラム=オルタ	<Off>						□月△日\nお天気は今日も晴れ
+	魔劍グラム=オルタ	<Off>						お日様が暖かくて、風が気持ちいい\n大きな事件もない平和な一日
+	魔劍グラム=オルタ	<Off>						今日もマスターさんとお仕事に行って\n帰って来てから、\nリディちゃん達とおやつを食べて
+	魔劍グラム=オルタ	<Off>						そんな、\nなんでもない一日でしたけど、\n私はそれが幸せでした
+	魔劍グラム=オルタ	<Off>						最近は、\nこんなふうに幸せに思える日が\nたくさんあるんです
+	魔劍グラム=オルタ	<Off>						昔は、\n私なんていないほうがいいって\n思っていたけれど
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	笑い2	3_3			0
+	リディ	笑い2	1_3			0
+	魔劍グラム=オルタ	嬉しい2	2_3_b			0
+FadeIn	white					.3
+	魔劍グラム=オルタ	嬉しい2						マスターさんと出会って
+FadeOut	white					.3
+CharacterOff						0
+Bg	市街地A					0
+CharacterOff						0
+	魔剣グラム	通常	1_3			0
+	魔劍グラム=オルタ	嬉しい2	3_3			0
+FadeIn	white					.3
+	魔劍グラム=オルタ	嬉しい2						お姉ちゃん達と日々を過ごして
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル102201		エフェクト裏			0
+FadeIn	white					.3
+	魔劍グラム=オルタ	<Off>						少しずつ幸せが増えて\n自分もだんだん好きになれました
+	魔劍グラム=オルタ	<Off>						それに、この間も……
+	魔劍グラム=オルタ	<Off>						そうだ！\n今日はあの日のことを書きますね
+	魔劍グラム=オルタ	<Off>						みんなのおかげで、\nとっても幸せになれた日と、\nそれまでの楽しい毎日も
+	魔劍グラム=オルタ	<Off>						いつか、これを見せる人にも\n私の気持ちを伝えたいから
+	イベントロゴ1022		エフェクト表			1
+	魔劍グラム=オルタ		画面外_右
+Tween	魔劍グラム=オルタ	MoveBy	x=100 time=2				Add
+	魔劍グラム=オルタ	<Off>						私がもらった\nたくさんの幸せを\nこの日記につめますね
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1022_02
+EndIf
+EndScenario
+
+# E_1022_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	わくわく
+Bg	白背景					0
+Param	character_grayout=false
+	イベントスチル102201		エフェクト裏			0
+FadeIn	white					.5
+	魔劍グラム=オルタ	<Off>						○月×日\nお天気は晴れ
+	魔劍グラム=オルタ	<Off>						今日は\nとてもびっくりすることがありました
+FadeOut	white					.5
+CharacterOff						0
+	リディ	悔しい2	画面外_右			0
+	魔劍グラム=オルタ	にやけ2	1_3			0
+Wait						.5
+Bg	酒場1F					0
+Bgm	平和
+FadeIn	white					.5
+Param	character_grayout=true
+	魔劍グラム=オルタ	にやけ2						ふわぁ……いい天気……♪\n今日はのんびりできそう……♪
+	魔劍グラム=オルタ	にやけ2						お仕事まで時間あるし、\nお昼寝でも<dash=2>
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1				NoWait
+Wait						1
+	リディ	悔しい2						オルタちゃん!!
+	魔劍グラム=オルタ	にやけ2						あ、リディちゃん\nリディちゃんも一緒にのんびり<dash=2>
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	悔しい2						そ、それどころじゃないよ\nオルタちゃん！\n一位だよ、一位!!
+	魔劍グラム=オルタ	通常2						へ……？ い、一位？
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	リディ	笑い2
+Bgm	緊迫
+	リディ	笑い2						オルタちゃんが一位になったの！\nすごい、すごすぎるよ!!
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト裏
+	魔劍グラム=オルタ	通常2
+	魔劍グラム=オルタ	通常2						わ、私が一位……？\nでも、私がなれるなんて、\n立派な一位じゃないよね……？
+Bgm	絶望
+	魔劍グラム=オルタ	悲しい2						私でももらえる一位……\n私がたくさんしてたこと……
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	悲しい2						もしかして……!?
+Se	回想
+FadeOut	white					.5
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A					0
+	魔劍グラム=オルタ	泣き2				0
+FadeIn	white					.5
+	魔劍グラム=オルタ	泣き2						助けて、お姉ちゃん……!!
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場1F					0
+	集中線		エフェクト表			0
+	魔劍グラム=オルタ	慌て2拡大	エフェクト裏			0
+FadeIn	white					.5
+	魔劍グラム=オルタ	慌て2拡大						『助けてお姉ちゃん』一位だ……!!
+Bgm	コメディ
+Param	character_grayout=true
+CharacterOff
+	リディ	通常2	3_3
+	魔劍グラム=オルタ	泣き2	1_3_b
+	魔劍グラム=オルタ	泣き2						り、リディちゃん、\n本当に私が一位になったの？
+	リディ	通常2						うん！ すごいよ！\nきっとオルタちゃんには\nインタビューも来て
+	魔劍グラム=オルタ	泣き2						い、インタビュー!?
+	リディ	笑い2						オルタちゃんが\n魔界の歴史にだって残るの！
+CharacterOff
+	魔劍グラム=オルタ	悲しい2拡大	エフェクト表
+	魔劍グラム=オルタ	悲しい2拡大						うわぁあああん!!
+CharacterOff
+	魔劍グラム=オルタ	泣き2	1_3_b
+	リディ	絶望2	3_3
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	絶望2						えぇええええ!?\nど、どうしたのオルタちゃん!?
+	魔劍グラム=オルタ	悲しい2						こんな理由で\n魔界の歴史に残っちゃうなんて……\nお姉ちゃんに合わせる顔が……!
+	リディ	悔しい2						えっと……オルタちゃん？\nいったいなんの一位だと思ってるの？
+	魔劍グラム=オルタ	悲しい2						ふぇ……？
+	魔劍グラム=オルタ	悲しい2						『助けてお姉ちゃん』ランキング\n一位じゃないの？
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						違うよ！\nそのマニアックなランキングなに!?
+	魔劍グラム=オルタ	悲しい2						それじゃあ、\nつまずいちゃった回数一位？
+	リディ	怒り2						違うって！
+Shake	魔劍グラム=オルタ		x=5				NoWait
+	魔劍グラム=オルタ	悲しい2						もしかして……ど、どうしよう!?
+	リディ	笑い2						よかった、\nやっと分かってくれた？\nオルタちゃんは<dash=2>
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	悲しい2						お店に入れなくてぐるぐるした回数\n魔界一位!?
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	リディ	怒り2
+	リディ	怒り2						だから違うってー!!
+Param	character_grayout=true
+CharacterOff
+	魔劍グラム=オルタ	悲しい2	1_3_b
+	リディ	通常2	3_3
+	リディ	通常2						いい？\nオルタちゃんは一位に選ばれたの！\n魔界の人気魔剣第一位に！
+	魔劍グラム=オルタ	悲しい2						にんき、まけん……？
+	リディ	笑い2						すごいでしょ！
+	魔劍グラム=オルタ	悲しい2						えぇええええええええ!?!?
+	リディ	通常2						魔界のみんながオルタちゃんを\n好きって言ってくれたの！
+	魔劍グラム=オルタ	にやけ2						いやいや、\nそんなことないよぉ……
+Tween	魔劍グラム=オルタ	MoveBy	x=-30				NoWait
+	魔劍グラム=オルタ	にやけ2						また、マスターさんが\nドッキリとかしてるんですよね？\n今日は騙されませんよー♪
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	悔しい2						もう！\n現実逃避したらダメ！\nちょっとついてきて！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	市街地A					0
+CharacterOff						0
+	魔剣機関職員		1_3			0
+	旅人		2_3_b			0
+	女の子		3_3			0
+FadeIn	black					.3
+	女の子							あ、オルタちゃんだ！
+	旅人							魔界一位の子だ！
+	魔剣機関職員							私も一位になれるかな？
+CharacterOff
+	リディ	笑い2	3_3
+	魔劍グラム=オルタ	悲しい2	1_3_b
+	魔劍グラム=オルタ	悲しい2						こ、これは……？
+	リディ	笑い2						みんな、一位のオルタちゃんを\n見に来たんだよ♪
+	魔劍グラム=オルタ	悲しい2						し、知らないうちに\nすごいことになってる……
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場1F					0
+	リディ	笑い2	3_3			0
+	魔劍グラム=オルタ	慌て2	1_3_b			0
+FadeIn	black					.3
+	魔劍グラム=オルタ	慌て2						ホントに私が一位……？\nど、どうして、こんなことに…
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	笑い2						オルタちゃんが\n頑張ってきたからだよ！
+	魔劍グラム=オルタ	悲しい2						そ、そうなの……？
+	リディ	驚き2						あ、お祝いまだだよね！\nマスターも呼んで\nパーティーしないと！
+	魔劍グラム=オルタ	悲しい2						えぇ……!?\nそ、それは……
+CharacterOff
+	バハムート	通常	3_3_b
+	クサナギノツルギ	通常	1_3
+	クサナギノツルギ	通常						なになに!?\nオルタちゃんのお祝いするの!?
+	バハムート	通常						だったら私達もお手伝いするよ!!
+CharacterOff
+	魔劍グラム=オルタ	通常2						クサナギちゃんに\nバハムートちゃんも!?
+CharacterOff
+	バハムート	通常	3_3_b
+	クサナギノツルギ	通常	1_3
+	クサナギノツルギ	通常						私達も聞いたよ！\nオルタちゃんが一位になったって！
+	バハムート	通常						でも、\nマスターの一番は譲ってないからね♪
+	クサナギノツルギ	通常						そうそう！\nまずはお祝いのお手伝いで\nたくさん役に立っちゃうんだから！
+	バハムート	通常						じゃあ、クサナギちゃん！\nどっちがすごいお祝いできるか、\n競争ね！
+Tween	クサナギノツルギ	PunchPosition	y=30				NoWait
+	クサナギノツルギ	通常						うん！\n私はプレゼントを用意するよ！
+	クサナギノツルギ	通常						すっごく豪華なやつ\n用意するから期待しててね♪
+Tween	バハムート	PunchPosition	y=30				NoWait
+	バハムート	通常						バハムートちゃんも\n負けないんだからね！
+CharacterOff
+	リディ	笑い2	3_3
+	魔劍グラム=オルタ	慌て2	1_3_b
+	魔劍グラム=オルタ	慌て2						あ、あわわ……\nなんだか大変なことに……！
+	リディ	笑い2						オルタちゃんは\nお祝いに欲しいものはないの？
+	魔劍グラム=オルタ	通常2						え!?\n私が欲しいもの？
+CharacterOff
+	バハムート	通常	3_3_b
+	クサナギノツルギ	通常	1_3
+	クサナギノツルギ	通常						あ、そうだね！\nやっぱりオルタちゃんが\n欲しいものにしないと！
+	バハムート	通常						オルタちゃん、\nなんでも言っていいよ♪
+StopBgm
+CharacterOff
+	魔劍グラム=オルタ	にやけ2						えっと……\nそれじゃあ……
+Param	character_grayout=false
+CharacterOff
+	バハムート	通常	1_3
+	クサナギノツルギ	通常	3_3
+	リディ	通常2	2_3
+	三人							うんうん……！
+CharacterOff
+	魔劍グラム=オルタ	にやけ2						ちょ、ちょっとだけ、\n欲張って……
+CharacterOff
+	バハムート	通常	1_3
+	クサナギノツルギ	通常	3_3
+	リディ	通常2	2_3
+	三人							おぉ……！
+CharacterOff
+	魔劍グラム=オルタ	にやけ2						ショートケーキが\n食べたいなぁ♪
+CharacterOff
+	バハムート	通常	1_3
+	クサナギノツルギ	通常	3_3
+	リディ	驚き2	2_3
+	三人							へ……？
+Param	character_grayout=true
+	バハムート	通常						そ、それだけでいいの!?
+	クサナギノツルギ	通常						もっと\nおっきなお祝いでもいいのに！
+Bgm	わくわく
+CharacterOff
+	魔劍グラム=オルタ	通常2						や、やっぱり派手なのは苦手だし！
+	魔劍グラム=オルタ	通常2						お祝いより、\nみんなでケーキが食べたいな\nだ、だめかな？
+CharacterOff
+	バハムート	通常	1_3
+	クサナギノツルギ	通常	3_3
+	リディ	驚き2	2_3
+	リディ	笑い2						ううん、だめじゃないよ♪
+	クサナギノツルギ	通常						いつもの\nオルタちゃんらしいよね！
+	バハムート	通常						うん♪\nそれじゃあ、ケーキ準備するよ！
+CharacterOff
+	魔劍グラム=オルタ	照れ2						あ、私もお手伝いするから……！
+	魔劍グラム=オルタ	嬉しい2						えへへ……♪
+StopBgm
+Se	走る
+FadeOut	white					.5
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル102201		エフェクト裏			0
+Wait						1
+FadeIn	white					.5
+	魔劍グラム=オルタ	<Off>						○月×日\nお天気は晴れ
+	魔劍グラム=オルタ	<Off>						今日は\nとてもびっくりすることがありました
+	魔劍グラム=オルタ	<Off>						まだ信じられないけど、\n私が一位に選ばれたんです
+	魔劍グラム=オルタ	<Off>						大変なことになったって思ったけど、\n最後はみんなとおやつもできて、\nとっても楽しかったです
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場_宿屋					0
+	魔劍グラム=オルタ	通常2				0
+Wait						1
+FadeIn	white					.3
+	魔劍グラム=オルタ	嬉しい2						よし……\n今日の日記、書けた……♪
+	魔劍グラム=オルタ	通常2						でも……\n私が一位……
+	魔劍グラム=オルタ	嬉しい2						ま、まだ信じられないなぁ……
+Se	ノック
+	<param=name>	<Off>						オルタ？\nそろそろ任務に行く時間だぞ？
+Tween	魔劍グラム=オルタ	PunchPosition	y=10				NoWait
+	魔劍グラム=オルタ	通常2						は、はい……！\n今、行きますね、マスターさん……！
+	魔劍グラム=オルタ	通常2						うん……\nまずはいつもどおりに、だよね\nお仕事、行ってきます
+FadeOut	black					.5
+Param	character_grayout=false
+StopBgm
+CharacterOff						0
+Bg	酒場1F					0
+	黒グラデーション		エフェクト表			0
+	リディ=ダークネス	通常				0
+Wait						1
+FadeIn	black					.5
+	リディ=ダークネス	通常						ふぅーん♪\nそっか、オルタちゃんが……♪
+FadeOut	white					1
+CharacterOff						0
+	イベントスチル102202		エフェクト表			0
+FadeIn	white					1
+Wait						2
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1022_03
+EndIf
+EndScenario
+
+# E_1022_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	わくわく
+Bg	白背景					0
+Param	character_grayout=false
+	イベントスチル102201		エフェクト裏			0
+FadeIn	white					.5
+	魔劍グラム=オルタ	<Off>						○月▲日\nお天気は雨
+	魔劍グラム=オルタ	<Off>						今日は、\nいつものお仕事をしたあと、\nリディ=ダークネスちゃんと……
+StopBgm
+FadeOut	white					.5
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場1F					0
+	魔劍グラム=オルタ	通常2	画面外_右			0
+Wait						1
+Bgm	平和
+FadeIn	white					.5
+Tween	魔劍グラム=オルタ	MoveTo	x=30 time=2				NoWait
+Wait						1
+	魔劍グラム=オルタ	通常2						も、戻りましたー\nきょ、今日も疲れちゃったぁ……
+Tween	魔劍グラム=オルタ	MoveBy	x=-20				NoWait
+	魔劍グラム=オルタ	通常2						……あれ？\nみんな、お出かけかな？
+	魔劍グラム=オルタ	通常2						リディちゃん？\nお姉ちゃんもいないの？
+	リディ？	<Off>						オルタちゃん、おかえりー♪
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	通常2						あ、リディちゃん……！\n地下室にいるの？
+	リディ？	<Off>						うん！\nちょっとお手伝いしてほしいことが\nあるんだけど<dash=2>
+	魔劍グラム=オルタ	嬉しい2						大丈夫だよ！\n今、行くね……！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	酒場の地下					0
+	リディ=ダークネス	通常	画面外_左			0
+	魔劍グラム=オルタ	通常2	画面外_右			0
+FadeIn	black					.3
+Tween	魔劍グラム=オルタ	MoveTo	x=180 time=1				NoWait
+Wait						1
+	魔劍グラム=オルタ	通常2						リディちゃん、お手伝いって……\nなに、を……？
+	？？？？							ふふふ……♪
+	魔劍グラム=オルタ	悲しい2						あ、あなたは……！
+Bgm	緊迫
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	リディ=ダークネス	拡大笑い	エフェクト裏
+	リディ=ダークネス	拡大笑い						リディちゃんだと思った？\nざーんねん、\nリディ=ダークネスでした♪
+Bgm	コメディ
+Param	character_grayout=true
+CharacterOff
+	リディ=ダークネス	笑い	1_3
+	魔劍グラム=オルタ	慌て2	3_3_b
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	慌て2						だ、ダークネスちゃん!?\nど、どうして\nリディちゃんのフリを？
+Tween	リディ=ダークネス	MoveBy	x=10				NoWait
+	リディ=ダークネス	通常						話題のオルタちゃんと\n二人っきりになりたかったんだ♪
+	魔劍グラム=オルタ	悲しい2						わ、私と……？\nど、どうして？
+	リディ=ダークネス	通常						うん……♪\nオルタちゃん<dash=2>
+CharacterOff
+	リディ=ダークネス	拡大笑い	エフェクト表
+	リディ=ダークネス	拡大笑い						私と一緒に、\nマスターをオトそうよ♥
+Bgm	コメディ
+CharacterOff
+	リディ=ダークネス	笑い	1_3
+	魔劍グラム=オルタ	慌て2	3_3_b
+	魔劍グラム=オルタ	慌て2						ま、マスターさんを!?
+	リディ=ダークネス	悔しい						だってマスター、\nどんな作戦をしても\n私にオチてくれないの
+	リディ=ダークネス	笑い						だから考えたんだ♪\n私一人じゃだめ！
+	リディ=ダークネス	笑い						魔剣二人で、\nもっとマスターを\nドキドキさせようって♪
+	魔劍グラム=オルタ	通常2						でも、それなら\nリディちゃんと一緒のほうが\nいいんじゃないの？
+	魔劍グラム=オルタ	通常2						ダークネスちゃんとリディちゃん、\n同じ姿だし
+	魔劍グラム=オルタ	通常2						元気なレヴァちゃんと\nクールなヘルちゃんみたいに
+FadeOut	white					.5
+CharacterOff						0
+Bg	白背景					0
+	ヘル	通常	3_3			0
+	レヴァ	通常	1_3			0
+FadeIn	white					.5
+	レヴァ	通常						マイマスター！\n私をマスターだけのヒロインにして♪
+	ヘル	通常						お姉ちゃんだけなんてだめ……\n私だって、あ、あなたに……
+FadeOut	white					.5
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場の地下					0
+	リディ=ダークネス	笑い	1_3			0
+	魔劍グラム=オルタ	通常2	3_3_b			0
+FadeIn	white					.5
+	魔劍グラム=オルタ	通常2						性格が違う子が一緒にいるのが\n可愛いって、\nマスターさんが言ってたよ？
+	リディ=ダークネス	笑い						ふむふむ♪
+	魔劍グラム=オルタ	通常2						同じ性格の子でも……
+FadeOut	white					.5
+CharacterOff						0
+Bg	白背景					0
+	グレイプニル=ロスト	恍惚	3_3_b			0
+	グレイプニル	恍惚	1_3			0
+FadeIn	white					.5
+	グレイプニル							はぁあああ、あるじぃ……\nまじやばみ……♥
+	グレイプニル=ロスト							ふぁあああ、あるじぃ……\nだいしゅきぃ……♥
+FadeOut	white					.5
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場の地下					0
+	リディ=ダークネス	笑い	1_3			0
+	魔劍グラム=オルタ	通常2	3_3_b			0
+FadeIn	white					.5
+	魔劍グラム=オルタ	通常2						仲良くしてるのも、\nすごく可愛いと思うよ？
+	リディ=ダークネス	笑い						へぇ、勉強してるのね♪
+	魔劍グラム=オルタ	照れ2						えへへ……\nもっとお姉ちゃんと\n並べる魔剣になりたくて……
+	リディ=ダークネス	笑い						確かに、\n同じ姿セットは相性もイイね
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	通常						でも、それはマスターにも\n予想できること！\nオトすには一手足りない！
+	リディ=ダークネス	通常						それに私とリディちゃんは\nマスターに対しては\nライバルでもあるしね♪
+	リディ=ダークネス	通常						だから、\n私にはオルタちゃんが必要なの♥
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	悲しい2						なんで、そこで私なのぉ……!?
+	リディ=ダークネス	通常						私とオルタちゃんなら\n相性バッチリなの♪
+	リディ=ダークネス	通常						似てるところも多いけど、\n悪い子な私と弱気なオルタちゃんで\n性格はギャップたっぷり♪
+	リディ=ダークネス	笑い						それに私と違って、\nオルタちゃんは<dash=2>
+Tween	リディ=ダークネス	MoveBy	x=180				NoWait
+	リディ=ダークネス	笑い						いろいろ柔らかいしね♪
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+	オーラ桃		エフェクト裏
+	魔劍グラム=オルタ	胸2拡大	エフェクト表			0
+FadeIn	white					.2
+Se	ポップイン
+Tween	魔劍グラム=オルタ	PunchPosition	x=4				NoWait
+	魔劍グラム=オルタ	胸2拡大						ひゃあ……！
+Param	character_grayout=true
+CharacterOff
+	魔劍グラム=オルタ	悲しい2	3_3_b			0
+	リディ=ダークネス	笑い
+Tween	リディ=ダークネス	MoveBy	x=-90				NoWait
+	リディ=ダークネス	通常						ということで、オルタちゃん！\n私とコンビを組もうよ♪
+	リディ=ダークネス	通常						想像してみて……♥\nマスターを虜にしちゃう\nオルタちゃんを♪
+	魔劍グラム=オルタ	通常2						マ、マスターさんを……
+FadeOut	white					1
+Param	character_grayout=false
+Bgm	神秘
+CharacterOff						0
+Bg	白背景					0
+	オーラ桃		エフェクト裏			0
+	魔劍グラム=オルタ	照れ2				0
+FadeIn	white					1
+	魔劍グラム=オルタ	照れ2						あーあ♪\nいっけないんだー♪
+	魔劍グラム=オルタ	嬉しい2						マスターさん、\n私、知っているんですよ？
+	魔劍グラム=オルタ	照れ2						マスターさんが\n私のお腹、触りたがっていること♪
+	魔劍グラム=オルタ	腹2拡大	エフェクト表
+	魔劍グラム=オルタ	腹2拡大						ふふ、触りたいですか？\nぷにぷにして遊びたいですかぁ？
+	魔劍グラム=オルタ	嬉しい2	2_3					だったら、\nどうすればいいか……\n分かるでしょう♥
+	魔劍グラム=オルタ	照れ2						ひざまずいて……\nお願いします、オルタ様ってね♥
+FadeOut	white					1
+Bgm	平和
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場の地下					0
+	リディ=ダークネス	通常	1_3			0
+	魔劍グラム=オルタ	にやけ2	3_3_b			0
+FadeIn	white					.3
+	魔劍グラム=オルタ	にやけ2						えへへへ……\nだめですよぉ、マスターさん
+	魔劍グラム=オルタ	にやけ2						触っていいのはお腹まで、\nそこはまだぁ<dash=2>
+Tween	リディ=ダークネス	MoveBy	x=100				NoWait
+	リディ=ダークネス							えいっ♪
+Tween	リディ=ダークネス	PunchPosition	y=20				NoWait
+Se	ポップイン
+Wait						.2
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+Tween	魔劍グラム=オルタ	MoveBy	x=50				NoWait
+	魔劍グラム=オルタ	悲しい2						うひゃう！
+	リディ=ダークネス	笑い						ふふふ……♪\n私の目に狂いはなかったね♥
+	リディ=ダークネス	通常						あれだけで妄想しちゃうなんて、\nオルタちゃんもダークネスの素質が\nたっぷり……♪
+StopBgm
+	魔劍グラム=オルタ	悲しい2						ダークネスの素質ってなんなの!?
+Bgm	絶望
+	黒グラデーション		エフェクト裏			1
+	リディ=ダークネス	通常						さあ、オルタちゃん♪\n私と一緒にマスターを……！
+	魔劍グラム=オルタ	悲しい2						ど、どうしよう……\nわたし……
+StopBgm
+	魔劍グラム=オルタ	悲しい2						あれ……？
+CharacterOff	黒グラデーション					1
+Bgm	コメディ
+	魔劍グラム=オルタ	通常2						ね、ねぇ、\nダークネスちゃん？
+	リディ=ダークネス	通常						なに？
+	魔劍グラム=オルタ	悲しい2						その作戦だと、\nマスターさんは二人のもの\nってことになるけど……
+	リディ=ダークネス	笑い						もちろん、\n最後は私がぜーんぶ<dash=2>
+	リディ=ダークネス	悔しい						はっ……！
+	魔劍グラム=オルタ	悲しい2						じーっ……
+	魔劍グラム=オルタ	本気2						やっぱり、\nそういう作戦だったんだ……！
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	笑い						ぎくっ……！\nそ、そんなことないよ？
+	魔劍グラム=オルタ	通常2						もうっ……！\nわ、私は協力しません……！
+StopBgm
+	魔劍グラム=オルタ	照れ2						それに、\nマスターさんの前だと緊張して\nダークネスなことはできないし
+Bgm	平和
+Tween	リディ=ダークネス	MoveBy	x=-50				NoWait
+	リディ=ダークネス	悔しい						えーっ！\nせっかくいい作戦だと思ったのにぃ！
+Tween	魔劍グラム=オルタ	MoveBy	x=-30				NoWait
+	魔劍グラム=オルタ	通常2						もう……\nさっき、似てるところ多いって\n言ってたけど
+	魔劍グラム=オルタ	通常2						やっぱりダークネスちゃんと私は\n似てないと思う……
+	リディ=ダークネス	通常						えー、似てるよー！
+	リディ=ダークネス	通常						だって、\n私達にはオリジナルがいるし\n黒っぽいのも同じでしょ？
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	通常2						あ……！\nそういえば……
+	リディ=ダークネス	通常						だからオルタちゃんなら……\n気持ちも分かって、\n協力してくれるかなーって
+	魔劍グラム=オルタ	通常2						（そっか、\n　確かに似てる……）
+	魔劍グラム=オルタ	通常2						（あれ？\n　私と同じなら、もしかして\n　ダークネスちゃんも……）
+	魔劍グラム=オルタ	通常2						ダークネスちゃんって、\nもしかしてリディちゃんのために\n頑張ってるの？
+StopBgm
+	リディ=ダークネス	悔しい						…………え？
+Bgm	コメディ
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	悔しい						ちょ、ちょっとまって!?\nなんでそうなるの!?
+	魔劍グラム=オルタ	嬉しい2						わぁ、やっぱりそうなんだ……!!
+	リディ=ダークネス	悔しい						ち、違うって！\nリディちゃんのためじゃないもん！\nマスターが欲しいからだもん！
+	魔劍グラム=オルタ	通常2						うん、わかった♪\nでも、頑張ってるダークネスちゃん\nすごいって思うから、応援するね
+	リディ=ダークネス	悔しい						な、なんだかすごく\n恥ずかしいんだけど……！\nこうなったら……！
+Tween	リディ=ダークネス	PunchPosition	y=30				NoWait
+	リディ=ダークネス	通常						オルタちゃん！\nやっぱり協力して！
+	魔劍グラム=オルタ	慌て2						ふぇ……？
+Tween	リディ=ダークネス	MoveBy	x=100				NoWait
+	リディ=ダークネス	通常						まずは、\nオルタちゃんをダークネスに\n染めてあげる♪
+	魔劍グラム=オルタ	慌て2						ちょ、ちょっと待って……!?
+	リディ=ダークネス	笑い						ダーメ♥
+FadeOut	black					1
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	オーラ桃		エフェクト表			0
+FadeIn	black					1
+	リディ=ダークネス	<Off>						まずはスカートをつまんで\nピラって♪
+	魔劍グラム=オルタ	<Off>						え、こっ、こう!?
+	リディ=ダークネス	<Off>						わぁ、オルタちゃん大胆！\nそんなに持ち上げなくていいのに♪
+	魔劍グラム=オルタ	<Off>						はわわわ！
+	リディ=ダークネス	<Off>						じゃあ、次は胸を使って<dash=2>
+	魔劍グラム=オルタ	<Off>						や、やっぱり\nダークネスは無理だよぉー！
+StopBgm
+FadeOut	white					1
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル102201		エフェクト裏			0
+Wait						1
+Bgm	わくわく
+FadeIn	white					1
+	魔劍グラム=オルタ	<Off>						○月▲日\nお天気は雨
+	魔劍グラム=オルタ	<Off>						今日は、\nいつものお仕事をしたあと
+	魔劍グラム=オルタ	<Off>						リディ=ダークネスちゃんと\n二人でたくさんお話をしました
+	魔劍グラム=オルタ	<Off>						ダークネスちゃんと\nもっと仲良くなれた気がして、\nドキドキしたけど楽しかったです
+	魔劍グラム=オルタ	<Off>						あ、でも……！\nダークネスな方法はナイショです！
+	魔劍グラム=オルタ	<Off>						ぜ、絶対に\n誰にも見せたりしませんから！\n絶対です！
+FadeOut	white					1
+CharacterOff						0
+	イベントスチル102202		エフェクト表			0
+FadeIn	white					1
+Wait						2
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1022_04
+EndIf
+EndScenario
+
+# E_1022_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	わくわく
+Bg	白背景					0
+Param	character_grayout=false
+	イベントスチル102201		エフェクト裏			0
+FadeIn	white					.5
+	魔劍グラム=オルタ	<Off>						○月◯日\nお天気はくもり
+	魔劍グラム=オルタ	<Off>						今日は初めて\nホロウちゃんとお話をしました
+StopBgm
+FadeOut	white					.5
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場1F					0
+	魔劍グラム=オルタ	通常2				0
+Wait						1
+Bgm	平和
+FadeIn	white					.5
+	魔劍グラム=オルタ	通常2						えーっと次の任務は……
+	魔劍グラム=オルタ	通常2						ハルピュイア=ホロウさんと一緒……
+	魔劍グラム=オルタ	通常2						ホロウさんって……\nどんな人なんだろう……？
+Se	回想
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F
+	オーラ黒		エフェクト裏			0
+	ホロウ	通常	画面外_左			0
+Tween	ホロウ	MoveTo	x=-520 time=0				NoWait
+Tween	ホロウ	RotateTo	z=-20 time=0				NoWait
+FadeIn	black					.3
+	ホロウ	通常						じーっ……
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+	ホロウ	通常	画面外_左			0
+	魔劍グラム=オルタ	通常2				0
+FadeIn	black					.3
+	魔劍グラム=オルタ	通常2						時々、私達のこと\n遠くからじーっと見てるけど、\nお話したことないし……
+	魔劍グラム=オルタ	悲しい2						すごく強い魔剣だって聞いたけど\n怖い人じゃないよね？\n一緒にお仕事できるよね？
+Tween	ホロウ	MoveBy	x=600 time=1				NoWait
+	ホロウ	通常						あ、あのぉ……
+FadeOut	white					.2
+FadeIn	white					.2
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+Tween	魔劍グラム=オルタ	MoveBy	x=100				NoWait
+Param	character_grayout=false
+	オルタ＆ホロウ							あうっ!?
+StopBgm
+Param	character_grayout=true
+	魔劍グラム=オルタ	悲しい2						ご、ごめんなさい！\n考え事をしてて……って、\nホロウさん!?
+	ホロウ	通常						…………っ！
+Tween	魔劍グラム=オルタ	MoveBy	x=50				NoWait
+Bgm	絶望
+	魔劍グラム=オルタ	悲しい2						（ど、どうしよう！\n　いきなりぶつかっちゃった！\n　挨拶もまだなのに！）
+	ホロウ	通常						…………
+	魔劍グラム=オルタ	悲しい2						（ホロウさん、怒ってるのかな!?\n　いきなりぶつかったんだもん！）
+	魔劍グラム=オルタ	通常2						<size=20>で、でも、\nまずは挨拶から……</size>				小声
+Tween	魔劍グラム=オルタ	MoveBy	x=-20				NoWait
+	魔劍グラム=オルタ	通常2						あ、あの……！\nい、いいお天気、ですね……？
+	ホロウ	通常						え……あ、そうですね……\nすっごく、くもり空で……
+	魔劍グラム=オルタ	悲しい2						……ふぇ!?
+Tween	魔劍グラム=オルタ	MoveBy	x=50 time=0.2				NoWait
+	魔劍グラム=オルタ	悲しい2						（そうだった！\n　今日はくもりだったよぉ……！）
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平	通常2	画面外_左
+	ごくひらロスト	通常	画面外_左_b
+Tween	名刀・大包平	MoveBy	x=550				NoWait
+	名刀・大包平	通常2						だ、大丈夫かな？\nオルタちゃんとホロウちゃん
+Tween	ごくひらロスト	MoveBy	x=400				NoWait
+	ごくひらロスト	通常						大丈夫でしょ\n放っておきなさいよ
+Tween	ごくひらロスト	MoveBy	x=-400				NoWait
+Tween	名刀・大包平	MoveBy	x=-400				NoWait
+Wait						.5
+CharacterOff
+	ホロウ	通常	1_3
+	魔劍グラム=オルタ	悲しい2	3_3_b
+	魔劍グラム=オルタ	悲しい2						えっと、一緒の任務ですよね\n初めてですけど、\nがんばりましょうね……！
+	ホロウ	通常						は、はい……
+	ホロウ	通常						………………
+	魔劍グラム=オルタ	悲しい2						（どうしようお話が続かない……！）
+	魔劍グラム=オルタ	悲しい2						（やっぱり、さっきので怒ってるの？\n　でも、任務があるし\n　仲良くなれないと……！）
+	魔劍グラム=オルタ	悲しい2						（そ、そうだ！\n　たしか仲良くなるには、\n　好きなものからって！）
+	魔劍グラム=オルタ	悲しい2						ほ、ホロウさん！
+	ホロウ	通常						は、はい……！
+	魔劍グラム=オルタ	悲しい2						私は……\nお姉ちゃんが大好きです！
+	ホロウ	通常						お姉ちゃんが好きなんですね……
+	ホロウ	通常						…………
+	魔劍グラム=オルタ	悲しい2						（は、反応してくれない……！\n　ホロウさん、\n　何を考えているのぉ……!?）
+	ホロウ	通常						…………
+StopBgm
+	黒グラデーション		エフェクト裏
+Bgm	コメディ
+	ホロウ	泣き						（ひぃん……！\n　いったいどうしたらいいのぉ！）
+	ホロウ	泣き						（オルタさんが\n　せっかく話しかけてくれたのに！\n　き、緊張しすぎて……！）
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ	泣き						（そういえば、仲良くなるには、\n　相手の好きなことを\n　したらいいって、本で！）
+	ホロウ	泣き						（えっと、\n　オルタさんはお姉ちゃんが好き……！\n　お姉ちゃん、お姉ちゃん……！）
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ	通常						（そ、そうだ！\n　私がお姉ちゃんになれば……！）
+CharacterOff	黒グラデーション
+	魔劍グラム=オルタ	悲しい2						ほ、ホロウさん……？
+Tween	ホロウ	MoveBy	x=20				NoWait
+	ホロウ	通常						オルタさん、\n分かりました……
+	魔劍グラム=オルタ	悲しい2						え……？
+Tween	ホロウ	MoveBy	x=20				NoWait
+	ホロウ	通常						私は分かりました……！\n分かったんです……！
+Tween	魔劍グラム=オルタ	MoveBy	x=30				NoWait
+StopBgm
+	魔劍グラム=オルタ	悲しい2						ホロウさん……！\nお、怒らないで……！
+	ホロウ	通常						終結の魔弾ハルピュイア=ホロウ！\nお姉ちゃんになります……!!
+	魔劍グラム=オルタ	慌て2						…………ふぇ？
+Param	character_grayout=false
+Bgm	緊迫
+CharacterOff
+	集中線		エフェクト表
+	ホロウ	拡大通常	エフェクト裏
+	ホロウ	拡大通常						全力で\nお姉ちゃんを遂行します……！
+CharacterOff
+	魔劍グラム=オルタ	慌て2拡大	エフェクト表					えぇええええええ!?
+Param	character_grayout=true
+CharacterOff
+	魔劍グラム=オルタ	悲しい2	3_3_b
+	ホロウ	通常	1_3
+Bgm	コメディ
+Wait						.3
+Tween	ホロウ	MoveBy	y=-50
+Tween	ホロウ	MoveBy	x=50				NoWait
+	ホロウ	通常						まずはひざまくら、どうぞ！\nお、お姉ちゃんだと思って……！
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	悲しい2						（ど、どうすればいいの？\n　なんで、いきなり膝枕!?）
+	魔劍グラム=オルタ	悲しい2						（も、もしかして……！\n　お姉ちゃんが好きって言ったから？）
+	ホロウ	通常						お、お姉ちゃんになりますから……！
+	魔劍グラム=オルタ	悲しい2						（ホロウさん、\n　私を妹にしたいの!?）
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平	通常2	画面外_左
+	ごくひらロスト	通常	画面外_左_b
+Tween	ごくひらロスト	MoveBy	x=550				NoWait
+	ごくひらロスト	通常						ああ、じれったい……！\nちょっと凄惨な現場に\nしてきていいですか？
+Tween	名刀・大包平	MoveBy	x=400				NoWait
+	名刀・大包平	通常2						ごくひら=ロストちゃん！\n抑えて、抑えて……！
+Tween	ごくひらロスト	MoveBy	x=-400				NoWait
+Tween	名刀・大包平	MoveBy	x=-400				NoWait
+Wait						1
+CharacterOff
+	魔劍グラム=オルタ	悲しい2	3_3_b
+	ホロウ	通常	1_3
+	ホロウ	通常						ドキドキ……！
+	魔劍グラム=オルタ	悲しい2						（すごい期待の目で見られてる！\n　周りからも視線を感じる……！）
+	魔劍グラム=オルタ	悲しい2						で、でもぉ……！\n私にはもう……
+	ホロウ	泣き						ひ、膝枕じゃだめですか!?
+Shake	魔劍グラム=オルタ		x=2				NoWait
+	魔劍グラム=オルタ	悲しい2						だ、だめかどうかで言ったら……\nだめで……！
+Tween	ホロウ	MoveBy	x=50				NoWait
+	ホロウ	通常						わ、分かりました……！
+	魔劍グラム=オルタ	通常2						よ、よかったぁ、\n分かってくれて……！
+	ホロウ	通常						じゃあ……！
+Tween	ホロウ	MoveBy	x=150				NoWait
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	オーラ桃		エフェクト裏
+	ホロウ	拡大通常	エフェクト表			0
+FadeIn	white					.3
+	ホロウ	拡大通常						ぎゅぅううううう!!
+FadeOut	white					.3
+CharacterOff						0
+	オーラ桃		エフェクト裏
+	魔劍グラム=オルタ	慌て2拡大	エフェクト表			0
+FadeIn	white					.3
+	魔劍グラム=オルタ	慌て2拡大						ふわわぁああああああ!!
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff						0
+	ホロウ	通常	2_3			0
+	魔劍グラム=オルタ	悲しい2	3_4_b			0
+FadeIn	black					.3
+Tween	魔劍グラム=オルタ	PunchPosition	y=50				NoWait
+Tween	魔劍グラム=オルタ	MoveBy	x=100				NoWait
+	魔劍グラム=オルタ	悲しい2						ひゃぁああ!?\nほ、ホロウさん!?\nどうしたんですか!?
+	ホロウ	通常						こ、こうすれば\n気持ちが伝わるかと思ってー！
+	魔劍グラム=オルタ	悲しい2						だ、だめですぅー！
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	魔劍グラム=オルタ	悲しい2拡大	エフェクト裏
+	魔劍グラム=オルタ	悲しい2拡大						私には\n大好きなお姉ちゃんが\nいますからぁー！
+Param	character_grayout=true
+CharacterOff
+	ホロウ	通常	1_3
+	魔劍グラム=オルタ	悲しい2	3_3_b
+	ホロウ	通常						…………え？
+	ホロウ	通常						あ、あの……\nオルタさんはお姉ちゃんが大好きって
+	魔劍グラム=オルタ	通常2						は、はい\nグラムお姉ちゃんが大好きです……
+	ホロウ	通常						グラム、お姉ちゃん……\nじゃあ\n私がお姉ちゃんになっても……！
+Shake	ホロウ		x=3				NoWait
+	ホロウ	泣き						あわわわわわ……！\n私ったら、早とちりして……！
+StopBgm
+	ホロウ	泣き						ご、ごめんなさい……！\nなんて下品なことを……！\n私、やっぱりだめな子ですぅ……！
+	魔劍グラム=オルタ							…………あっ
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	戦場跡					0
+	魔劍グラム=オルタ	泣き2				0
+FadeIn	white					.3
+	魔劍グラム=オルタ	泣き2						どうして私、\n生まれてきちゃったのかなぁ…\n私なんていない方が…
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場1F					0
+CharacterOff						0
+	ホロウ	泣き	1_3			0
+	魔劍グラム=オルタ	本気2	3_3_b			0
+FadeIn	white					.3
+Tween	魔劍グラム=オルタ	MoveBy	x=-50				NoWait
+	魔劍グラム=オルタ	本気2						だ、だめじゃないです！
+	ホロウ	泣き						お、オルタさん？
+Bgm	凱旋
+	魔劍グラム=オルタ	本気2						だ、だめな子なんていません！
+	魔劍グラム=オルタ	本気2						私なんかでも\nお姉ちゃんは必要って\n言ってくれたんです！
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	本気2						だから、その……\nホロウさんの\n失敗だって、だめじゃないです！
+	ホロウ	通常						オルタさん……
+	魔劍グラム=オルタ	通常2						だから……\n最初からやり直しましょう？
+Tween	魔劍グラム=オルタ	MoveBy	x=-20				NoWait
+	魔劍グラム=オルタ	通常2						私はオルタ\n魔劍グラム=オルタです\n……あなたは？
+Tween	ホロウ	MoveBy	x=20				NoWait
+	ホロウ	通常						ホロウ、\nハルピュイア=ホロウです……
+	魔劍グラム=オルタ	嬉しい2						ふふ、なんだか私達、似ていますね\nホロウさん……
+	ホロウ	通常						でも、オルタさんみたいな\nすごい魔剣と似てるだなんて……
+	魔劍グラム=オルタ	照れ2						えへへ……そういうこと、\n私もすぐに言っちゃいます
+	魔劍グラム=オルタ	嬉しい2						だから、分かるんです\nホロウさんが声をかけてくれたこと\nすごく勇気がいるって……
+	魔劍グラム=オルタ	嬉しい2						それにマスターさんから\n聞いていました……
+	魔劍グラム=オルタ	通常2						ホロウさんが\nとってもすごい魔剣だって\nだから自信、もってください……！
+	ホロウ	嬉しい						オルタさん……\n私、オルタさんと\nもっとお話したいです
+FadeOut	black					.3
+CharacterOff						0
+	ごくひらロスト	通常	1_3			0
+	名刀・大包平	通常2	3_3_b			0
+FadeIn	black					.3
+	名刀・大包平	通常2						よかったね、\nごくひら=ロストちゃん
+	ごくひらロスト	通常						誰もあの子達のことなんて\n気にしていないわ……
+	名刀・大包平	通常2						あ、あれ……？\nそうだったの……？
+	ごくひらロスト	通常						…………ふん
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_カフェ					0
+	ホロウ	通常	p3			0
+	魔劍グラム=オルタ	通常2	p7b			0
+Wait						1
+Bgm	平和
+FadeIn	black					.3
+	魔劍グラム=オルタ	通常2						それでマスターさんと\nお話したかったんだけど\nずっと声がかけられなくて……！
+	ホロウ	嬉しい						私も……！\n廊下をウロウロしてたら、\n夜になっちゃったり
+	ホロウ	嬉しい						わかりますぅ……
+	魔劍グラム=オルタ	嬉しい2						なんだか、こういうお話ができるの\nとっても楽しいですね
+	ホロウ	通常						私も、すごく安心します……
+	魔劍グラム=オルタ	嬉しい2						よかったぁ……♪\nホロウちゃん、\nすごく優しくていい子で……♪
+	ホロウ	嬉しい						そ、そんなぁ……！\nあの、こんな下品な私ですけど\nもしよければ……
+	魔劍グラム=オルタ	嬉しい2						はい……！\nお友達になりましょう……♪
+	ホロウ	嬉しい						えへへへ♪\nお友達……！
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ	通常						あ、そうだ！\n私、今までお友達がいなくて\n仲良くなれたらやりたいことが……！
+Tween	ホロウ	MoveBy	x=20				NoWait
+	ホロウ	通常						オルタさん、\n私、映画を観るのが好きなんです
+	魔劍グラム=オルタ	通常2						そうなんですか!?\n映画だったら、\n私も時々観ますよ……！
+	ホロウ	嬉しい						わぁ……♪\n楽しいですよね、映画\n観ていてドキドキしますし
+	ホロウ	嬉しい						特に、ぱぁって綺麗に\n飛び散ると、うっとりしちゃって
+	魔劍グラム=オルタ	にやけ2						（ぱぁって綺麗……？\n　あ、花火のことかな……？）
+	ホロウ	嬉しい						一生懸命もがいているところとか、\nたまらなくて……！
+	魔劍グラム=オルタ	にやけ2						（一生懸命もがく……\n　動物の赤ちゃん……？）
+	ホロウ	嬉しい						気がついたら、\nドロドロになっちゃって……！
+	魔劍グラム=オルタ	にやけ2						（恋愛映画かな…？\n　ドロドロの三角関係\n　とか聞くけど……）
+	ホロウ	嬉しい						ちょっとマニアックですけど、\nそういう映画、集めているんです！
+	魔劍グラム=オルタ	嬉しい2						（ど、どんな映画なんだろう……！）
+	魔劍グラム=オルタ	嬉しい2						それ！\n私も一緒に観てみたいです！
+	ホロウ	嬉しい						ほ、ほんとですか!?
+	ホロウ	嬉しい						よかったぁ……！\n誰かと一緒に観るの、\nとっても楽しみだったんです！
+	魔劍グラム=オルタ	嬉しい2						うんうん……！
+StopBgm
+CharacterOff
+	ホロウ	拡大嬉しい	エフェクト表
+	ホロウ	拡大嬉しい						ホラー映画♪
+CharacterOff
+	魔劍グラム=オルタ	慌て2拡大	エフェクト表
+	魔劍グラム=オルタ	慌て2拡大						…………へ？
+Bgm	コメディ
+CharacterOff
+	魔劍グラム=オルタ	悲しい2	p7b
+	ホロウ	嬉しい	p3
+	魔劍グラム=オルタ	悲しい2						ほ、ほ、ホラーですかぁ!?
+	ホロウ	嬉しい						ぱぁって綺麗に赤色が\n飛び散っちゃったり……♪
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	悲しい2						ひぃ……！
+	ホロウ	嬉しい						みんな必死に逃げるんですけど、\n結局やられちゃって……！
+Shake	魔劍グラム=オルタ		x=3				NoWait
+	魔劍グラム=オルタ	悲しい2						あわわわ……！
+	ホロウ	嬉しい						醜くて下品ですけど、\n面白いんですよね……♪\nぜひ、一緒に観ましょう！
+	魔劍グラム=オルタ	悲しい2						そ、それは……！
+	ホロウ	泣き						あれ、オルタさん？\nホラー映画ってだめですか？
+	魔劍グラム=オルタ	悲しい2						う、うぅうううう…………！
+CharacterOff
+	魔劍グラム=オルタ	悲しい2拡大	エフェクト表
+	魔劍グラム=オルタ							だ、だめじゃないでしゅ……！
+CharacterOff
+	ホロウ	嬉しい	p3
+	魔劍グラム=オルタ	悲しい2	p7b
+	ホロウ	嬉しい						わーい♪\nそれじゃあ、観に行きましょう♪
+StopBgm
+Se	走る
+Tween	ホロウ	MoveBy	x=900 time=1				NoWait
+Tween	魔劍グラム=オルタ	MoveBy	x=900 time=1				NoWait
+								……………………
+	魔劍グラム=オルタ	<Off>						<size=70>きゃあああああ!?</size>
+FadeOut	white					.5
+Param	character_grayout=false
+Bgm	わくわく
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル102201		エフェクト裏			0
+FadeIn	white					.5
+	魔劍グラム=オルタ	<Off>						○月◯日\nお天気はくもり
+	魔劍グラム=オルタ	<Off>						今日は初めて\nホロウちゃんとお話をしました
+	魔劍グラム=オルタ	<Off>						昔の私に似ている\n少し弱気だけれど\nとても可愛い女の子
+	魔劍グラム=オルタ	<Off>						最初は誤解しちゃったけど、\nいいお友達になれて嬉しかったです
+	魔劍グラム=オルタ	<Off>						で、でも……\n映画だけはお断りしちゃいます
+	魔劍グラム=オルタ	<Off>						きょ、今日は眠れないよぉ……！
+FadeOut	white					1
+CharacterOff						0
+	イベントスチル102202		エフェクト表			0
+FadeIn	white					1
+Wait						2
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1022_05
+EndIf
+EndScenario
+
+# E_1022_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	わくわく
+Bg	白背景					0
+Param	character_grayout=false
+	イベントスチル102201		エフェクト裏			0
+FadeIn	white					.5
+	魔劍グラム=オルタ	<Off>						○月●日\nお天気はくもり
+	魔劍グラム=オルタ	<Off>						今日はグラム姉妹のみんなと\nお話をしていました
+	魔劍グラム=オルタ	<Off>						そうしたら\nファフニーちゃんが<dash=2>
+StopBgm
+FadeOut	white					.5
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ファフニル	拡大怒り	エフェクト裏			0
+Wait						1
+Bgm	平和
+FadeIn	white					.5
+	集中線		エフェクト表			1
+	ファフニル	拡大怒り						ファフニーも\nオルタお姉さんみたいに\nなりたーい!!!!
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						えっ!?\nわ、私みたいに……？
+Param	character_grayout=true
+CharacterOff
+	魔劍グラム=オルタ	悲しい2	1_3
+	ファフニル	通常	3_3
+	ファフニル	通常						うん！\nファフニーもオルタお姉さんみたいに\n可愛くて、一位な魔剣になりたいの！
+	魔劍グラム=オルタ	通常2						あ、ありがとう……！\nで、でも、私みたいになっても……
+	ファフニル	悲しい						ふぁふー？\nファフニー、\nオルタお姉さんみたいになれないの？
+	魔劍グラム=オルタ	悲しい2						そ、そうじゃなくて、\nえっと……
+CharacterOff
+	グラム=スサノオ		3_3
+	ワンド		1_3
+	ワンド							確かにファフニルが\nオルタみたいになるには\nまだ早いわね
+	グラム=スサノオ							うんうん！\nそれにファフニーちゃんは\n今のままでも可愛いですよ！
+CharacterOff
+	ファフニル	悲しい						でも、ファフニーもっと\nすごい魔剣になりたいのに……
+CharacterOff
+	偽剣グラム×サンタ	通常	1_3
+	モッド		3_3
+	モッド							にはは♪\nなるほどファフニーちゃんは\n自分探しの真っ最中なんだ♪
+	モッド							いいよー、モッド姉さんは応援する！\nだって、その悩みこそが\n新しい可能性を広げるんだから♪
+	モッド							ということで、\nみんなでファフニーちゃんに\n協力してみない？
+	偽剣グラム×サンタ							また、\nなにか考え始めたわね……
+CharacterOff
+	魔劍グラム=オルタ	通常2						でも、モッドちゃん\nどうやって協力するの？
+CharacterOff
+	モッド							ふふふー♪\n実は、いい案を思いついたの！\nみんなで個性を交換しない？
+CharacterOff
+	魔劍グラム=オルタ	通常2						個性を交換？
+CharacterOff
+	偽剣グラム×サンタ	通常	画面外_左
+	モッド
+Tween	モッド	PunchPosition	y=30				NoWait
+	モッド							お互いの真似をして\n遊ぼうよってこと！\n例えば<dash=2>
+	モッド							…………
+	モッド							ねぇ、マスター？\n触れない本物より、\n触れる大きな偽物の方がいいでしょ？
+	モッド							クリスマスではないけれど、\n私からプレゼントをあげましょうか？
+Tween	偽剣グラム×サンタ	MoveBy	x=550 time=1				NoWait
+	偽剣グラム×サンタ	通常						待ちなさい！\nそれ、まさか私の真似を……？
+Tween	モッド	MoveBy	x=180 time=1				NoWait
+	モッド							似てるでしょ？\nサンタちゃんとマスターちゃんを\n盗み聞きして……こほん！
+Tween	偽剣グラム×サンタ	PunchPosition	y=30				NoWait
+	偽剣グラム×サンタ	通常						なんですって……!?
+	モッド							ともかく、こんな感じでどう？
+	モッド							ファフニーちゃんの\n新しい可能性にも繋がるし\nちょっと刺激的でしょ？
+StopBgm
+CharacterOff
+	グラム=スサノオ		3_3
+	ワンド		1_3
+	ワンド							確かに面白そうではあるわね\nモッドは間違いなく、\n研究がしたいだけでしょうけれど
+	ワンド							でも、この完全な私の真似なんて、\nそう簡単に<dash=2>
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ							じゃあ、はーいっ！\nワンド姉さんのモノマネ行きまーす！
+Bgm	コメディ
+	ワンド							す、スサノオ!?
+CharacterOff
+	グラム=スサノオ							真の完成品こそ、この私……\n完成された魔剣の使い方を、\n完全に教えてさしあげますわ
+CharacterOff
+	魔劍グラム=オルタ	通常2						わぁ！\nスサノオちゃん上手……！
+CharacterOff
+	ワンド		1_3
+	グラム=スサノオ		3_3
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ							えへへー♪\nワンド姉さんのことは、\nいつも見ていますのでー♪
+	ワンド							ぐ、ぐぬぬ……！\nこ、こんな簡単に……！
+CharacterOff
+	モッド							いいねいいね♪\n高貴なスサノオちゃんは新鮮だよ♪\nじゃあ、次はだれ？
+CharacterOff
+	偽剣グラム×サンタ	通常						既に使われたのは私とワンド\n残りは……
+Tween	偽剣グラム×サンタ	PunchPosition	y=30				NoWait
+	偽剣グラム×サンタ	通常						っ……!?\n待ちなさい！\n順番が後になると<dash=2>！
+CharacterOff
+	ファフニル	通常						ふぁふー！\nじゃあ、ファフニーは\nモッドお姉さんになるね♪
+Tween	ファフニル	PunchPosition	y=30				NoWait
+	ファフニル							にははー♪\n実験、実験ふぁふー♪\nパンツはどこふぁふー♪
+CharacterOff
+	モッド							うんうん♪\nファフニーちゃんは今日も可愛い♪\nでもオルタちゃんじゃなくていいの？
+CharacterOff
+	ファフニル	通常
+Tween	ファフニル	PunchPosition	y=30				NoWait
+	ファフニル							モッドお姉さんのほうが\n面白そうだったから！
+CharacterOff
+	モッド							なるほど、なるほど♪\nファフニーちゃんの\n私への認識が気になるなぁ♪
+	モッド							さてさてぇ、\nこれで残りは……♪
+CharacterOff
+	偽剣グラム×サンタ	通常	1_3
+	ワンド		3_3_b
+	ワンド							もうファフニルと、\nスサノオとオルタ……！
+	偽剣グラム×サンタ	通常						だったら、私はオルタを選ぶわ！
+Tween	ワンド	PunchPosition	y=30				NoWait
+	ワンド							なっ……！
+Param	character_grayout=false
+CharacterOff
+	偽剣グラム×サンタ	通常						い、いくわよ……！
+	オーラ桃		エフェクト裏			1
+	偽剣グラム×サンタ	通常						お、おねぇ、ちゃん……
+	偽剣グラム×サンタ	通常						お姉ちゃん、たすけてぇ……！
+CharacterOff
+	モッド							おぉ、迫真の演技だね♪\n今の恥ずかしそうな顔！\nオルタちゃんそっくりだったよ！
+Param	character_grayout=true
+CharacterOff
+	グラム=スサノオ		3_3
+	ファフニル		1_3
+	グラム=スサノオ							すごく可愛かったですよ！
+	ファフニル							かわいいー♪
+CharacterOff
+	偽剣グラム×サンタ	通常
+Shake	偽剣グラム×サンタ		x=4				NoWait
+	偽剣グラム×サンタ							くっ……！\n覚えておきなさい、モッド……
+CharacterOff
+	モッド							さあ、これで残るは\nワンドちゃんだけど……
+	モッド							どっちを選ぶ？
+Param	character_grayout=false
+CharacterOff
+	ワンド							ぐ、ぐぅうううう……\nもう残っているのは\nスサノオとファフニル……！
+	ワンド							に、逃げることは許されない……\nでも、野蛮な真似をするくらいなら！
+	ワンド							ふぁ……
+	オーラ桃		エフェクト裏			1
+	ワンド							<size=70>ふぁふー……!!</size>
+CharacterOff	オーラ桃		エフェクト裏
+	ワンド							くぅうううううううううう!!
+CharacterOff
+	グラム=スサノオ							こんなワンド姉さん、\n初めて見ました……！
+CharacterOff
+	モッド
+Tween	モッド	PunchPosition	y=30				NoWait
+	モッド							にははー♪\nこれこそ新しい可能性！\nワンドちゃん、可愛かったよ！
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ワンド
+	ワンド							好きに言うといいわ……
+Param	character_grayout=true
+CharacterOff
+	偽剣グラム×サンタ	通常	1_3
+	グラム=スサノオ		3_3
+	グラム=スサノオ							ラストはいよいよ……！
+	偽剣グラム×サンタ	通常						やっぱり最後はオルタなのね\nみんなに先をゆずっちゃうのが\nオルタらしいわ
+	グラム=スサノオ							オルタ姉さんが私の真似を……！
+CharacterOff
+	魔劍グラム=オルタ	通常2						どきどき……！
+	魔劍グラム=オルタ	通常2						（みんな頑張ってた……\n　いつもと違う\n　みんなになってた……！）
+	魔劍グラム=オルタ	通常2						（私もスサノオちゃんみたいに\n　元気な魔剣になるために……！）
+	魔劍グラム=オルタ	通常2						い、いきます……！
+CharacterOff
+	魔劍グラム=オルタ	慌て2拡大	エフェクト表
+	魔劍グラム=オルタ							ね、ねっけつ！ ぶつり……！\nふぁいあー！
+CharacterOff
+	偽剣グラム×サンタ	通常	1_3
+	グラム=スサノオ		3_3
+	グラム=スサノオ							かわいい
+	偽剣グラム×サンタ	通常						かわいい
+CharacterOff
+	ワンド							かわいすぎるけど、\n着火すらしてないわね
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						ふぇえええ……
+CharacterOff
+	ワンド							鎮火したわ……
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						ま、まって……！\nスサノオちゃんには似てなかったけど\nお姉ちゃんの真似なら……！
+CharacterOff
+	偽剣グラム×サンタ	通常	1_3
+	グラム=スサノオ		3_3
+	グラム=スサノオ							オルタ姉さんがグラム姉様を……！
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						じゃ、じゃあ……\n今度はお姉ちゃんの真似を……！
+CharacterOff
+	魔劍グラム=オルタ	慌て2拡大	エフェクト表
+	魔劍グラム=オルタ	慌て2拡大						こ、この私こそ\n魔剣の中の魔剣であり完成品\nお、おわかり……？
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						こ、これなら……！
+CharacterOff
+	偽剣グラム×サンタ	通常	1_3
+	グラム=スサノオ		3_3
+	グラム=スサノオ							かわいい
+	偽剣グラム×サンタ	通常						かわいい
+CharacterOff
+	ワンド							無理してる感じが\nたまらないわね……
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						そ、そんなぁ……！\nぐすん……！
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+	ファフニル		1_3			0
+	モッド		3_3			0
+Wait						1
+Bgm	平和
+FadeIn	black					.3
+	モッド							うんうん、いいデータが採れた♪\nファフニーちゃんの\n役にも立ったかな？
+	ファフニル	通常						えーっと、\nよくおわかりできなかったけど、\n楽しかったよ♪
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						私だけ、\nそんなに変われなかったぁ……\nうぅ……
+CharacterOff
+	偽剣グラム×サンタ	通常	1_3
+	グラム=スサノオ		3_3
+	グラム=スサノオ							でも、\nすっごくかわいかったですよ！
+	偽剣グラム×サンタ	通常						そうよ、\nあの可愛さがオルタのいいところよ？
+CharacterOff
+	魔劍グラム=オルタ	通常2						そ、そうだね……
+	魔劍グラム=オルタ	通常2						そうだよね……
+CharacterOff
+	ワンド							みんな、そろそろ出かける時間よ？\nオルタ、少し用事があるから\n私達は行くわね
+CharacterOff
+	魔劍グラム=オルタ	通常2						う、うん……！\nまた後でね……！
+StopBgm
+	魔劍グラム=オルタ	通常2						…………
+FadeOut	white					.5
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル102201		エフェクト裏			0
+Wait						1
+FadeIn	white					.5
+	魔劍グラム=オルタ	<Off>						○月●日\nお天気はくもり
+	魔劍グラム=オルタ	<Off>						今日はグラム姉妹のみんなと\nお話をしていました
+	魔劍グラム=オルタ	<Off>						そうしたら\nファフニーちゃんが\n私になりたいって言ってくれて……
+FadeOut	white					1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	魔劍グラム=オルタ	通常2				0
+Wait						1
+FadeIn	white					.3
+	魔劍グラム=オルタ	通常2						でも、私よりも\nみんなの方がやっぱり個性的だよね\n可愛くて、頑張ってて……
+	魔劍グラム=オルタ	悲しい2						私は、\n私のまま……
+	魔劍グラム=オルタ	悲しい2						それで……\n本当にいいのかな？
+	魔劍グラム=オルタ	悲しい2						お姉ちゃんの妹として、\n立派な魔剣になれるのかな？
+FadeOut	white					1
+CharacterOff						0
+	イベントスチル102202		エフェクト表			0
+FadeIn	white					1
+Wait						2
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1022_06
+EndIf
+EndScenario
+
+# E_1022_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	酒場_宿屋					0
+Param	character_grayout=true
+	魔剣グラム	通常	画面外_左			0
+	魔劍グラム=オルタ	悲しい2	3_3			0
+FadeIn	white					.5
+	魔劍グラム=オルタ	悲しい2						私、このままでいいのかな……？
+	魔劍グラム=オルタ	悲しい2						どうしたら、\n立派な魔剣になれるのかな？
+Se	ノック
+Wait						1
+Tween	魔剣グラム	MoveTo	x=-180 time=1.5				NoWait
+	魔剣グラム	通常						オルタ……？\nここで何をしているの？
+	魔劍グラム=オルタ	悲しい2						お姉ちゃん……？
+	魔剣グラム	通常						はぁ……\nワンド達から貴女が悩んでいるって\n聞いたけれど……
+Tween	魔劍グラム=オルタ	MoveBy	x=-20				NoWait
+	魔劍グラム=オルタ	悲しい2						うっ、そ、その……\nごめんね？\nまた心配かけちゃって……
+Tween	魔劍グラム=オルタ	MoveBy	x=40				NoWait
+	魔剣グラム	通常						気にする前に、話してみなさい\n妹の悩みごとを、\n受け止められない私ではないわよ？
+	魔劍グラム=オルタ	悲しい2						うん、そうだよね……\nお姉ちゃんは強くて、\nカッコいいから……
+	魔劍グラム=オルタ	悲しい2						お姉ちゃん、\n私……どうすればいいのかな？
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F					0
+	リディ	笑い2	3_3			0
+	魔劍グラム=オルタ	通常2	1_3_b			0
+FadeIn	white					.3
+	魔劍グラム=オルタ							お姉ちゃんの妹として認められて……\nその上、みんなにも選ばれて\nすごく嬉しかったの……
+FadeOut	white					.3
+CharacterOff
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場_宿屋					0
+	魔剣グラム	通常	1_3			0
+	魔劍グラム=オルタ	悲しい2	3_3_b			0
+FadeIn	white					.3
+Param	character_grayout=true
+	魔劍グラム=オルタ	悲しい2						でも私は……\n私が立派な魔剣だって\nまだ思えない
+	魔劍グラム=オルタ	悲しい2						私はお姉ちゃんみたいになれないし、\n弱気で、失敗ばかりで……\nみんな素敵な魔剣ばかりで……
+	魔劍グラム=オルタ	悲しい2						だから、\nもっとふさわしい自分に\nなりたかったのに
+	魔劍グラム=オルタ	悲しい2						考えても、\n分からなくて……
+	魔剣グラム	通常						…………
+StopBgm
+Tween	魔剣グラム	MoveBy	x=20				NoWait
+	魔剣グラム	通常						悩む必要はないわ、オルタ\n答えはもう分かりきっているもの
+	魔劍グラム=オルタ	悲しい2						……え？
+	魔剣グラム	通常						自分では気づかないものなのね\n少しずつ貴女は立派な魔剣に\n変わっていってるわ
+	魔剣グラム	通常						だって貴女、少し前までは\n変わりたいだなんて、\n思っていなかったじゃない
+Bgm	凱旋
+	魔劍グラム=オルタ	悲しい2						…………あ
+	魔剣グラム	通常						自分がだめだって思い込んで\n悩みを抱えこんでも、\nただ止まってしまっていた
+Se	回想
+Param	character_grayout=false
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	教会					0
+	魔劍グラム=オルタ	泣き2	1_3			0
+	魔剣グラム	通常	3_3			0
+FadeIn	white					.3
+	魔剣グラム							一人で思い込んだまま\n突き進んだこともあったわね
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場_宿屋					0
+	魔劍グラム=オルタ	悲しい2	3_3_b			0
+	魔剣グラム	通常	1_3			0
+FadeIn	white					.3
+Param	character_grayout=true
+	魔剣グラム	通常						今だってそうよ？
+	魔剣グラム	通常						貴女からこんな素直に\n悩みを打ち明けられたこと\nなかったもの
+	魔劍グラム=オルタ	悲しい2						お姉ちゃん……
+	魔剣グラム	通常						そんな前のオルタとは\n比べ物にならないほど、\n今の貴女は成長している
+	魔剣グラム	通常						おわかり？
+	魔劍グラム=オルタ	悲しい2						でも、\nまだ私は臆病で、ドジで……
+	魔剣グラム	通常						だったら、付いてきなさい\nそして、自分で理解するのよ
+	魔劍グラム=オルタ	悲しい2						えっ……？\nど、どこに行くの？
+StopBgm
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場1F					0
+	黒グラデーション		エフェクト裏
+	魔劍グラム=オルタ	悲しい2	2_4			0
+	魔剣グラム	通常	3_4_b			0
+FadeIn	black					.3
+	魔剣グラム	通常						ほら、行ってきなさい
+Tween	魔剣グラム	PunchPosition	x=-50				NoWait
+Wait						.3
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+Tween	魔劍グラム=オルタ	MoveBy	x=-80				NoWait
+	魔劍グラム=オルタ	慌て2						わっ……！
+CharacterOff	黒グラデーション					1
+FadeOut	white					1
+CharacterOff						0
+	リディ	笑い2				0
+FadeIn	white					.3
+	リディ	笑い2						オルタちゃん！\n人気魔剣一位おめでとう!!
+Bgm	都市
+Param	character_grayout=false
+CharacterOff
+	ホロウ	嬉しい	1_3
+	リディ=ダークネス	通常	3_3
+	全員							おめでとう！
+CharacterOff
+	ファフニル	通常	1_3
+	ワンド	通常	3_3
+	全員							おめでとう!!
+Param	character_grayout=true
+CharacterOff
+	リディ	笑い2	1_3
+	魔劍グラム=オルタ	慌て2	3_3_b
+	魔劍グラム=オルタ	慌て2						えっ、えっ……!?\nリディちゃん、みんな!?\nこれって……？
+	リディ	笑い2						えへへ♪\nオルタちゃんはお祝いはなくて\nいいって言ってたけど
+	リディ	通常2						やっぱり大切なことだから、\nお祝いしたかったの
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	笑い2						そうしたら、マスターが\nサプライズパーティにしようって！\nみんなが手伝ってくれたんだ！
+	魔劍グラム=オルタ	悲しい2						で、でも……
+	リディ	驚き2						オルタちゃん？
+Tween	魔劍グラム=オルタ	MoveBy	x=-20				NoWait
+	魔劍グラム=オルタ	悲しい2						本当に、私でいいのかな？\nこんな、だめな私なのに、\n素敵なパーティーまで……
+CharacterOff
+	ホロウ	通常						そ、そんなことないです！
+CharacterOff
+	ホロウ	通常	1_3
+	魔劍グラム=オルタ	通常2	3_3_b
+	魔劍グラム=オルタ	通常2						ホロウちゃん……？
+	ホロウ	通常						オルタさん、\n言ってくれましたよね？\nあの時、私にだめじゃないって
+Se	回想
+Param	character_grayout=false
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F					0
+	魔劍グラム=オルタ	嬉しい2	p7b			0
+	ホロウ	嬉しい	p3			0
+FadeIn	white					.3
+	ホロウ	嬉しい						私、それが嬉しかったんです！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+	魔劍グラム=オルタ	通常2	3_3_b			0
+	ホロウ	通常	1_3			0
+FadeIn	white					.3
+Param	character_grayout=true
+	ホロウ	嬉しい						私、弱気な自分が嫌いで\n誰かと友達になりたくても\n失敗ばかりで
+Tween	ホロウ	PunchPosition	y=30				NoWait
+	ホロウ	嬉しい						でも、オルタさんは\nそんな私と友達になってくれて、\n本当に嬉しかったんです!!
+	ホロウ	通常						だから、私も言います……！\nオルタさんはだめじゃないです！\nとても素敵な、私の友達です！
+CharacterOff
+	リディ=ダークネス	通常						私もそう思うよ♪
+CharacterOff
+	リディ=ダークネス	通常	1_3
+	魔劍グラム=オルタ	通常2	3_3_b
+	魔劍グラム=オルタ	通常2						ダークネスちゃんも……？
+	リディ=ダークネス	通常						オルタちゃんは私のことを\n偽物のダークネスを『すごい』って\n言ってくれたでしょ？
+Se	回想
+Param	character_grayout=false
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場の地下					0
+	魔劍グラム=オルタ	嬉しい2	3_3_b			0
+	リディ=ダークネス	通常	1_3			0
+FadeIn	white					.3
+	リディ=ダークネス	通常						ま、まぁ、リディちゃんとのこと、\n変な誤解もしてたけど、\n私のこと、理解してくれた……
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場1F					0
+	魔劍グラム=オルタ	通常2	3_3_b			0
+	リディ=ダークネス	通常	1_3			0
+FadeIn	white					.3
+Param	character_grayout=true
+	リディ=ダークネス	笑い						知ってるよね？\n私達みたいな存在にとって\n肯定されることがどんなに嬉しいか
+	リディ=ダークネス	笑い						だから私も、\nそんなオルタちゃんを\nすごいって思うよ♪
+	魔劍グラム=オルタ	通常2						ふたりとも……
+CharacterOff
+	魔剣グラム	通常						おわかり？\n貴女は自分のことを\nいつも下に見てしまうけれど
+	魔剣グラム	通常						そのかわり、\n貴女は他者の良いところを、\n真っ直ぐに認められるじゃない
+	魔剣グラム	通常						そんな貴女に\n救われた子だって多いのよ
+CharacterOff
+	ファフニル	通常	3_3
+	ワンド	通常	1_3
+	ワンド							それだけじゃないわよ
+	ワンド							私達は\nオルタが立派になろうと\n努力していたことを知ってる
+Tween	ファフニル	PunchPosition	y=30				NoWait
+	ファフニル							ファフニーも！\nオルタお姉さんを見習って、\n頑張ってるの！
+CharacterOff
+	魔剣グラム	通常	1_3
+	魔劍グラム=オルタ	通常2	3_3_b
+	魔劍グラム=オルタ	通常2						みんな……
+	魔剣グラム	通常						この景色を見ても、\n貴女はまだ自分が\nだめだと言う気かしら？
+	魔剣グラム	通常						人気投票は\nあくまで魔剣の一面を評価するもの
+	魔剣グラム	通常						頑張り屋で仲間を尊重できる貴女は\n誰よりも愛されていい魔剣だと、\nこのグラムは思うけれど？
+	魔劍グラム=オルタ	通常2						…………
+	魔剣グラム	通常						さあ、オルタ？\n主役の挨拶がないと\nパーティーは始まらないわよ？
+StopBgm						1
+	魔劍グラム=オルタ	嬉しい2						うん……！\nありがとう、お姉ちゃん
+FadeOut	white					.5
+CharacterOff						0
+	魔劍グラム=オルタ	通常2				0
+Wait						.5
+Bgm	結婚
+FadeIn	white					.5
+	魔劍グラム=オルタ	通常2						あの……\n今日は、素敵なパーティーを\nありがとうございます
+	魔劍グラム=オルタ	通常2						それに……\n私を一番に選んでくれて、\nありがとうございます……！
+	魔劍グラム=オルタ	通常2						本当はここにくるまで不安でした\n私は偽物で、未熟で、\nまだ立派な魔剣じゃないから……
+	魔劍グラム=オルタ	通常2						昔からずっと自分が嫌いで、\n生まれて良かったのかも\n分からなくて……
+	魔劍グラム=オルタ	嬉しい2						でも……！\nもう違います……
+	魔劍グラム=オルタ	照れ2						そう言ってもいいって、\nマスターさんが、お姉ちゃんが\nみんなが言ってくれたから……！
+	魔劍グラム=オルタ	照れ2						私がいていいよって、\n言ってくれたから……！
+	魔劍グラム=オルタ	嬉しい2						私はすごく幸せです……\n生まれてきて良かったって思えます
+	魔劍グラム=オルタ	嬉しい2						私はやっぱり臆病だし、\nお姉ちゃんみたいにはなれないけど
+	魔劍グラム=オルタ	照れ2						私は、私のままでいいんですね\n私らしく成長すればいいんですね……
+	魔劍グラム=オルタ	照れ2						だから、こんな私ですけど、\nこれからもよろしくおねがいします
+FadeOut	white					.5
+CharacterOff						0
+Bg	白背景					0
+	魔劍グラム=オルタ	照れ2拡大	エフェクト表			0
+FadeIn	white					.5
+	魔劍グラム=オルタ	照れ2拡大						マスターさん、みんな……\n本当にありがとうございます
+Param	character_grayout=false
+FadeOut	white					1
+Wait						1
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル102201		エフェクト裏			0
+FadeIn	white					.5
+	魔劍グラム=オルタ	<Off>						□月△日\nお天気は今日も晴れ
+	魔劍グラム=オルタ	<Off>						あの日、\n私はたくさんの幸せをもらいました
+	魔劍グラム=オルタ	<Off>						私は私でいいって、\n自分をもっと好きになれました
+	魔劍グラム=オルタ	<Off>						マスターさん、\nこんな私ですけど\nこれからも一緒にいてください
+	魔劍グラム=オルタ	<Off>						そして一緒に、\nたくさんの思い出を作りましょうね
+	イベントロゴ1022		エフェクト表			1
+Wait						2
+								<color=blue>\n   『オルタのハッピーダイアリー』\n　　　　　　　　　　　　　<dash=2>完</color>
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1022_01
+EndIf
+EndScenario

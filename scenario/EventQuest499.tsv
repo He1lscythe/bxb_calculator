@@ -1,0 +1,800 @@
+# E_499_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	スイーツ化図書館
+	黒グラデーション		エフェクト裏
+	リディ	怒り2	2_2
+	ディーア	怒り2	1_2
+FadeIn	white					.5
+	リディ							……ねぇ、マスター？\n本当にやるの？
+	ディーア							ああ、リディ\nオレはどうしてもやらなきゃ\nいけないんだ……！
+	ディーア	本気2						これだけは、譲るわけにはいかない！
+	リディ							でも、なんでよりによって\nまたこのお菓子工場なの!?
+	リディ							前に、お菓子が襲ってきて\n大変だったでしょ!?
+	ディーア	怪しい2						ああ、それはだな……
+FadeOut	black					.3
+Se	回想
+Wait						.5
+CharacterOff						0
+Bgm	平和
+Bg	市街地A(ハロウィン)					0
+ImageEffect	SpriteCamera	Sepia
+	ディーア	怒り2				0
+FadeIn	black					.5
+	ディーア	怒り2						はぁ、ダメだ……\nハロウィンに必要なお菓子が\n足りない……買い足さないと……
+Tween	ディーア	MoveBy	x=20				NoWait
+	ディーア	絶望2						でも、そんなことしたら貯金が\nあっという間になくなって、\n生活の危機……
+Tween	ディーア	MoveBy	x=-40				NoWait
+	ディーア	悔しい2						いや、やっぱりどうしても\nお菓子は必要だ……！
+CharacterOff
+StopBgm
+	アリス							くく、随分とくだらんことで\n悩んでいるようだな、魔剣使い
+CharacterOff
+	ディーア	驚き2						あっ、ええっ!? アリス様っ!?
+CharacterOff
+Bgm	緊迫
+	アリス	通常						……丁度いい、\n貴様の悩みを解決する\nいい手がある
+CharacterOff
+	ディーア	驚き2						えっ？\nど、どういうことですか？
+CharacterOff
+	アリス							菓子が足りないなら作ればいい
+	アリス							菓子を作るなら、\n工場に行けばいいだろう？
+CharacterOff
+	ディーア	悔しい2						工場……？ ま、まさか\nエイビシュタットにある\nあのお菓子工場、ですか？
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	スイーツ化図書館					0
+	　　　　　　　　　　
+FadeIn	black					.3
+Wait						1
+FadeOut	black					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A(ハロウィン)					0
+FadeIn	black					.3
+CharacterOff
+	アリス							他に何がある？
+CharacterOff
+	ディーア	汗2						いやでも、あそこはもう完全に\n廃工場ですよね？
+CharacterOff
+	アリス							使用する分には問題ない
+CharacterOff
+	ディーア	悔しい2						問題ないわけないでしょう……!?
+	ディーア							前にアリス様に言われて行ったら\nお菓子に襲われて\n大変なことになったじゃないですか！
+	ディーア	本気2						あれはもう懲り懲りなんですが……！
+CharacterOff
+	アリス							安心しろ、今は安全だ\nおそらくな
+CharacterOff
+	ディーア	汗2						お、おそらく、ですか……
+CharacterOff
+	アリス	蔑み						……貴様、この魔帝アリスの厚意を\n受け取ることができないと？
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	ShakePosition	x=5				NoWait
+	ディーア	絶望2						いえ、そんなことは……!!
+CharacterOff
+	アリス							ならば、迷う必要などあるまい
+CharacterOff
+	ディーア	本気2						ありがたく使わせていただきます!!
+FadeOut	black					.3
+Se	回想
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	スイーツ化図書館					0
+Bgm	絶望
+	リディ	怒り2	2_2			0
+	ディーア	汗2	1_2			0
+FadeIn	black					.3
+	リディ							マスター、それって\nほぼ脅されてるよ……！
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ							やっぱり、\nまたお菓子が動いちゃうとか\nそういうことになるんじゃないかな！
+	ディーア	怒り2						確かにその心配はある……\nだけど、これはチャンスでもある！
+	ディーア	笑い2						上手くいけば\nお金をかけずに皆の分のお菓子を\n用意することができる！
+	リディ	悲しい2						まあ、そうだけどさぁ……
+Tween	ディーア	ShakePosition	x=5				NoWait
+	ディーア	悔しい2						オレのお菓子が足りなくて\n悲しむ魔剣たちの顔は\n絶対に見たくないんだよ！
+	リディ	怒り2						…………本音は？
+CharacterOff
+Bgm	コメディ
+Param	character_grayout=false
+	集中線		エフェクト表
+	ディーア	拡大本気2	エフェクト裏					みんなのかわいい仮装を\nこの目にしかと焼き付けたい!!
+	ディーア							できれば間近で!!
+Param	character_grayout=true
+CharacterOff
+	ディーア	にやけ2	1_2
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2	2_2					この変態マスターー!!!!
+FadeOut	black					.7
+CharacterOff						0
+Wait						.7
+Bgm	平和
+	リディ	驚き2	2_2			0
+	ディーア	驚き2	1_2			0
+FadeIn	black					.5
+Se	工場						PageWait
+	ディーア							どうなることかと思ったけど<dash=2>
+	リディ	驚き2						お菓子作り、意外と順調だね？
+	ディーア	怪しい2						ああ、機械も術式も古いから\n心配してたけど、\n普通に動いてよかったよ
+	リディ	笑い2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	笑い2						これならお菓子も\nすぐ揃いそう！
+	ディーア	あはは2						そうだな、良かった……\nこれで今年のハロウィンは安心<dash=2>
+StopBgm
+Se	火事
+Se	打1
+Se	吹雪
+	リディ	怒り2	2_2					……あれ、マスター？\nなんか、機械の調子おかしくない？
+	ディーア	驚き2						えっ？
+FadeOut	white					.3
+Se	火3
+Shake	Graphics	ShakePosition	time=2				NoWait
+FadeIn	white					.5
+	ディーア	悔しい2						ええっ!?
+	リディ	驚き2						き、機械がっ!?
+	ディーア	本気2						爆発したああっ!?
+CharacterOff
+Se	闇1
+	魔物		1_3_m			.2
+Wait						.1
+Se	闇1
+	魔物　		2_3_m			.5
+Wait						.2
+Se	闇1
+	魔物　　		3_3_m			.3
+Wait						.7
+CharacterOff
+Bgm	緊迫
+	ディーア	悔しい2						なんだ!?\nこの魔物、どこから!?
+CharacterOff
+	魔物		2_3_m					グルルル……！
+Se	走る
+Tween	魔物	MoveTo	x=800 time=2				NoWait
+Wait						.5
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	驚き2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	驚き2	2_2					あっ、お菓子が\n持って行かれちゃうよっ!?
+	ディーア	本気2						こら、待てっ!!
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+StopBgm
+	？？？？							あーあ、アリス様の大事な機械\n壊しちゃったね♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						……!?\nこ、今度は誰だ……!?
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	リディ=ダークネス
+	？？？？							にしし……♪
+	？？？？							やだなぁ、忘れちゃったの？\n私はずーっと覚えてたのにさぁ……
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2						お前は……!?
+CharacterOff
+	リディ=ダークネス	照れ				.3		えへへ…また会えたね！ マスター♪
+	リディ=ダークネス	笑い						なぁーんて言うと思ったぁ？
+CharacterOff
+Bgm	緊迫
+	リディ=ダークネス	拡大笑い	エフェクト表					マスターがだーい好きな\nリディ=ダークネスちゃんが\n帰ってきたよー♪
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=false
+	イベントロゴ499		エフェクト表			0
+	　　　　　　　　　　
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　　<color=blue>リディの悪堕ち後夜祭</color>
+Param	character_grayout=true
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	black					.5
+	ディーア	悔しい2						リディ=ダークネス……!?
+CharacterOff
+	リディ=ダークネス	笑い						まぁ、イミティションだけど、ねっ♪
+CharacterOff
+	ディーア	驚き2						そんな!?\nだってリディはここに……！
+	リディ	驚き2						マスター、この子誰……？\nリディにそっくり……？
+	ディーア	悔しい2						あ、ああ、前に色々あって……
+FadeOut	black					.3
+Se	回想
+CharacterOff						0
+Bgm	コメディ
+Bg	酒場1F					0
+ImageEffect	SpriteCamera	Sepia
+	鍛冶医クランベリー	通常2	2_2			0
+	リディ	笑い2	1_2			0
+FadeIn	black					.3
+	リディ							ふぅーん、それでそれで、\nどんなお菓子つくってるの？
+	リディ							にしし、味見してあげる！
+CharacterOff
+	ディーア	驚き2						あ、ちょっと待ってリディ！
+FadeOut	black					.3
+CharacterOff						0
+	リディ…？		1_2
+FadeIn	black					.3
+	リディ…？							うふふ♪ あははは♪\nやっと出てこれた♪
+	クランベリー？		2_2
+	クランベリー？							ふぅ♪ んーー、うん、やったぁ♪\nちゃんと若返ってる♪
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	black					.3
+	ディーア							え、ええ……2人が……悪魔に……？
+CharacterOff
+	リディ…？							悪魔なんて酷いよぉ\nこれは、んーなんて言えば良いのかな
+CharacterOff
+	クランベリー？							そうねぇ、例えて言うなら…\n【悪堕ち】かな？
+FadeOut	black					.3
+Se	回想
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bgm	緊迫
+Bg	スイーツ化図書館					0
+	リディ	驚き2	2_2			0
+	ディーア	悔しい2	1_2			0
+FadeIn	black					.3
+	ディーア							<dash=2>ってことがあって\nリディとクランさんは\n悪堕ちしてたことがあるんだ
+	リディ
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							そうだったの!?
+	ディーア							だけどあの時は、リディ自身が\nリディダークネスとして\n行動していた……
+	ディーア	怪しい2						今はリディと別の存在として\n現れてるってことは……\nお前は魔剣なのか？
+CharacterOff
+	リディ=ダークネス	笑い						そうだよ、これからよろしくね、\nマスター♪
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2					待て、アンロックした覚えはないぞ!?
+CharacterOff
+	リディ=ダークネス	悔しい						えー？ 冷たいなぁ……\nしたじゃん、さっきの爆発で♪
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2					爆発!? あれがきっかけで\nアンロックされたのか!?
+CharacterOff
+	リディ=ダークネス							正確には、魔剣未満だった私が\nあの爆発で魔剣として成立したって\n感じかな♪
+	リディ=ダークネス	笑い						マスターに会いたくて、会いたくて\nそしたらこうなったの♪\nあはは、運命だねぇ♪
+CharacterOff
+	リディ	怒り2	2_2
+	ディーア	悔しい2	1_2					そんな無茶苦茶な……!?
+	リディ							むぅ、リディがもう一人って\nなんか変な感じだなぁ……
+CharacterOff
+	リディ=ダークネス	笑い						そんなに警戒しなくても大丈夫だよ♪\nまぁ隙があったら、私がマスターを\n取っちゃうかもしれないけど♪
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	怒り2	2_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						ええっ!? だ、だめだよっ！
+CharacterOff
+	リディ=ダークネス	笑い						あははっ♪\nじょーだんじょーだん♪
+	リディ=ダークネス	通常						にしし、よろしくね\n本物のリディちゃん♪
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	怒り2	2_2
+Tween	リディ	MoveBy	x=-10				NoWait
+	リディ	怒り2						むぅぅ……！
+CharacterOff
+	リディ=ダークネス	通常						それにしてもマスター？\nこんなところでのんびり\n私の相手をしてていいの？
+CharacterOff
+	リディ	怒り2	2_2
+	ディーア	驚き2	1_2					え……？
+CharacterOff
+	リディ=ダークネス	笑い						アリス様の機械を壊して\n魔物まで溢れさせちゃったの\n全部マスターなんだよ？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2					あっ、そっか\nお菓子を魔物に持って\nいかれちゃったから……！
+CharacterOff
+StopBgm
+	リディ=ダークネス							そう♪ この工場のお菓子を持った\n魔物が街で暴れちゃったら\n犯人がマスターだってバレバレ♪
+CharacterOff
+Bgm	コメディ
+	リディ	怒り2	2_2
+	ディーア	絶望2	1_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						た、たしかに……\nこの事件の犯人……オレだ!!
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						た、大変だよマスター……！\n捕まっちゃうよ！
+	ディーア	絶望2						まずい……\nしかも、これがアリス様にまで\n見つかったら……！
+	リディ	絶望2						捕まるだけじゃ済まないかも……
+Tween	ディーア	ShakePosition	x=5				NoWait
+	ディーア							終わった……オレの魔界生活……\n完全に終わった……
+CharacterOff
+	リディ=ダークネス							落ち込んじゃったのぉ？\nかーわいい♪
+CharacterOff
+	リディ	怒り2	2_2
+	ディーア	悔しい2	1_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	悔しい2						そ、そうだ、リディ=ダークネス！\n魔物を呼び寄せたのは\nお前じゃないのか!?
+	ディーア	怒り2						あの時みたいに、\n異世界のゲートが開いて
+	ディーア	悔しい2						そこから魔物が溢れ出して\nきてるんじゃないのか？
+CharacterOff
+	リディ=ダークネス							うん、そうだけど？
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2					だったら頼む、今すぐゲートを\n閉じてくれ……！
+CharacterOff
+	リディ=ダークネス							えー？ どうしよっかなぁ♪
+	リディ=ダークネス							にしし♪ マスターなら\nどうすればいいか\n分かってるでしょ？
+CharacterOff
+	リディ	怒り2	2_2
+	ディーア	怒り2	1_2					……そうか、前と同じように\nお菓子を渡せば……！
+	ディーア							リディ=ダークネスが満足すれば\nゲートが閉じるはずだ……！
+	ディーア	本気2						ほら、少しだけなら\nここにお菓子がある！
+CharacterOff
+	リディ=ダークネス	笑い						もう、マスターったら♪\n『受け取ってください、\nリディ=ダークネス様』でしょ？
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	本気2	1_2					どうか受け取ってください!!\nリディ=ダークネス様！
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ							ちょっ、マスター!?
+CharacterOff
+	リディ=ダークネス							あははっ♪\n仕方ないなぁ、仕方ないから\nもらっておいてあげる♪
+Se	光1
+	オーラ青		エフェクト表			.5
+Wait						1
+CharacterOff
+	ディーア	悔しい2						よし、これで……!!
+CharacterOff
+Param	character_grayout=false
+	キノコリオン		画面外_左
+Se	風1
+Tween	キノコリオン	MoveTo	x=800 time=4				NoWait
+	キノコリオン							ノッコノコー♪
+Se	闇1
+	魔物		1_3_m			.5
+Wait						.3
+Se	闇1
+	魔物　		3_3_m			.5
+Wait						.5
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2					マスター！\nさっきより魔物が増えてるよ!?
+	ディーア	悔しい2						そんなはずは……\nリディ=ダークネス、ゲートは!?
+CharacterOff
+	リディ=ダークネス	悔しい						えー？\nゲートの閉じ方？
+	リディ=ダークネス	笑い						……忘れちゃった♪
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2					そんな!?\nじゃあ、さっきの反応は……!?
+CharacterOff
+	リディ=ダークネス	笑い						それは、単純に私の魔力が少しだけ\n安定したって証拠だよ♪
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2					ど、どういうことだ……？
+CharacterOff
+	リディ=ダークネス	通常						実は私、魔剣として無理やり\n成立したから、\nまだ魔力が不安定なんだよね♪
+	リディ=ダークネス	笑い						だから、ゲートと関係なく、\nマスターからのお菓子は必要なの♪
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2					えっ!?
+CharacterOff
+	リディ=ダークネス	拡大通常	エフェクト表					にしし♪ \nトリックオアトリートだよ、\nマスター♪
+	リディ=ダークネス	拡大笑い	エフェクト表					お菓子くれなきゃ\n<ruby=いたずら>暴走</ruby>しちゃうぞ♪
+CharacterOff
+	ディーア	本気2						ええええっ!?
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+Wait						.7
+CharacterOff						0
+Bgm	緊迫
+Bg	草原B					0
+	ディーア	怒り2	1_2			0
+	リディ	驚き2	2_2			0
+FadeIn	black					.5
+	ディーア							よし、ここなら魔物も来ないな\nしばらくここで待っててくれ、リディ
+	リディ	驚き2						うん……でも、マスター\nこれからどうするの？
+	ディーア	怒り2						とにかく、ゲートを閉じる方法を\n探してくる
+	ディーア							きっと工場のどこかに\n手がかりがあるはずだ……！
+CharacterOff
+	リディ=ダークネス	笑い						そうだよ、\n全然心配しなくていいからね♪\nリディちゃん♪
+StopBgm
+	リディ=ダークネス	通常						<size=20>イチャイチャはするかも\nしれないけど……♪</size>
+CharacterOff
+	リディ	怒り2						マスター!?\n絶対あのリディに\n誘惑されたらダメだからね！
+	ディーア	にやけ2						大丈夫だって……多分
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ							多分って言った!?\nちょっとマスター!!
+FadeOut	black					.3
+CharacterOff						0
+Bg	スイーツ化図書館					0
+	魔物		2_3_m			0
+FadeIn	black					.5
+Bgm	バトル
+Wait						1
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.3
+Tween	魔物	ShakePosition	x=20				NoWait
+Wait						.5
+Se	敵殺
+Tween	魔物	MoveTo	y=-800 time=1.5
+CharacterOff
+	リディ=ダークネス	通常	2_2
+	ディーア	悔しい2	1_2					思ったより魔物が増えてきてるな……\n早く止めないと本当に捕まるぞ……
+	リディ=ダークネス	笑い						魔界を危機に陥れた犯人かぁ♪\n懲役何千年だろうねぇ？
+	ディーア	絶望2
+Tween	ディーア	ShakePosition	x=5				NoWait
+	ディーア	絶望2						うっ、どうしてこんなことに……
+	リディ=ダークネス	笑い						もう、やる気出してよマスター♪\n私に会えたんだからいいじゃん♪
+Tween	リディ=ダークネス	MoveBy	x=-10				NoWait
+	リディ=ダークネス	通常						それとも、リディちゃんには\n言えないようなことしてあげないと\nやる気、出ないの？
+	ディーア	にやけ2						えっ……？
+Tween	リディ=ダークネス	MoveBy	x=10				NoWait
+	リディ=ダークネス	笑い						やだなぁ、なに想像したのー？\nほんとマスターってさいてー♪
+CharacterOff
+	マイタケキノコリオン		画面外_右
+Se	風1
+Tween	マイタケキノコリオン	MoveTo	x=0 time=1.5				NoWait
+Wait						1
+CharacterOff
+	リディ=ダークネス	驚き	2_2
+	ディーア	驚き2	1_2					あっ、あいつ！\nお菓子をあんなに……!!
+	リディ=ダークネス	驚き						あっ、ほんとだ！
+CharacterOff
+	マイタケキノコリオン
+Tween	マイタケキノコリオン	PunchPosition	y=50				NoWait
+	マイタケキノコリオン							ノコノコッ!!
+Se	風1
+Tween	マイタケキノコリオン	MoveTo	x=-800 time=2				NoWait
+Wait						.5
+Se	カギ閉める
+Wait						.3
+CharacterOff
+	ディーア	悔しい2	画面外_右
+	リディ=ダークネス	驚き	画面外_右_b
+Se	走る
+Tween	リディ=ダークネス	MoveTo	x=90 time=1				NoWait
+Se	走る
+Tween	ディーア	MoveTo	x=-90 time=1				NoWait
+	ディーア	悔しい2						くっ……逃げ込まれた……！
+	リディ=ダークネス	悔しい						あーあ、鍵までかけられちゃったねぇ
+	ディーア	怒り2						仕方ない……\n工場のどこかに鍵があるはずだ、\nそれを見つけられれば……
+	リディ=ダークネス	驚き						ねぇマスター？\nあれ、なんだろう……？
+	ディーア	驚き2						ん……？
+CharacterOff
+Param	character_grayout=false
+Se	闇1
+	黒グラデーション		エフェクト裏
+	ショコラゴーレム2					.5		………………!!
+Param	character_grayout=true
+CharacterOff
+	リディ=ダークネス	驚き	2_2
+	ディーア	本気2	1_2					なっ、なんだあいつは!?
+	ディーア	悔しい2						今まで見かけた中で\n一番魔力が強いぞ……！
+CharacterOff
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			.5
+Wait						.5
+Se	闇1
+	魔物		1_3_m			.3
+Wait						.3
+Se	闇1
+	魔物　　		3_3_m			.3
+Wait						.7
+Param	character_grayout=true
+CharacterOff
+	リディ=ダークネス	驚き						しかも、魔物を増やしてるね？
+	ディーア	本気2						あれだけの魔力量だ……\nもしかしたら、あいつを倒せば\nゲートが閉じるかもしれない！
+CharacterOff
+	ショコラゴーレム2							………………!!
+Se	走る
+Tween	ショコラゴーレム2	MoveTo	x=-800 time=2
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ=ダークネス	驚き	2_2					あっ、逃げた
+	ディーア	本気2						待て!!
+Se	走る
+Tween	リディ=ダークネス	MoveTo	x=-800 time=2				NoWait
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=2				NoWait
+Wait						.5
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+Bgm	絶望
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　　　　<color=blue>～30分経過～</color>
+CharacterOff
+	ディーア	絶望2						だめだ……完全に見失った……\n敵も倒せないし、\nお菓子も取り返せない……
+	ディーア							もう、ダメかもしれない……
+CharacterOff
+	リディ=ダークネス							いじけてるの、マスター？\nあはは、おもしろーい♪
+CharacterOff
+	ディーア	悔しい2						オレは逮捕されるのか……？\nいや、その前にリディと逃げれば……
+	ディーア	絶望2						どっちにしろ\n今までの生活には戻れない……
+	ディーア	悔しい2						ハロウィンの\n準備をしようとしただけなのに！
+	ディーア	絶望2						どうしてこうなるんだ！ 理不尽だ！
+CharacterOff
+	リディ=ダークネス							ハロウィンにかこつけて\nえっちなこととか考えてたからだよ♪\n私には分かるもん♪
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表
+	ディーア	本気2						返す言葉もない!!
+Param	character_grayout=true
+CharacterOff
+StopBgm
+	リディ=ダークネス							ねぇマスター？\nもう諦めたんでしょ？ それなら、\n私と一緒にいようよ……♪
+CharacterOff
+	ディーア	驚き2						えっ……？
+CharacterOff
+	リディ=ダークネス	驚き						何もかも忘れて……\n誰にも見つからない場所で……\nずーっと二人で遊ぼう？
+CharacterOff
+	ディーア	怒り2						リディ=ダークネス……？
+CharacterOff
+Bgm	神秘
+	リディ=ダークネス	悔しい						私ね……本当は……\nずっと寂しかったんだよ？
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+	リディ…？					0
+	リディ=ダークネス	<Off>
+FadeIn	black					.5
+	リディ=ダークネス	<Off>						あの時、マスターとたくさん\nイチャイチャして、贈り物もらって
+	リディ=ダークネス	<Off>						最後に私という存在は\n消えちゃうって分かってたけど、\n満足したからいいかって思ってた……
+Param	character_grayout=true
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	スイーツ化図書館					0
+	リディ=ダークネス	悲しい				0
+FadeIn	black					.3
+	リディ=ダークネス	悲しい						だけどどうしても、\nマスターにまた会いたいって気持ち\n抑えられなかったの……
+	リディ=ダークネス	悔しい						そうやってただ漂ってたら、\nある日、武器の力に吸い寄せられて\n一つになった……
+CharacterOff
+	ディーア	怒り2						それで、魔剣として\n成立したのか？
+CharacterOff
+	リディ=ダークネス	悲しい						ううん、それだけじゃ\n足りなくて……
+	リディ=ダークネス	驚き						マスターが爆発を起こして、\nたまたまリディちゃんも近くに居て
+	リディ=ダークネス	通常						その条件がそろって、\n初めて私にチャンスが巡ってきたの
+CharacterOff
+	リディ=ダークネス	拡大照れ	エフェクト表					もう一度会いたいって\n願いが、ようやく叶ったの♪
+CharacterOff
+	リディ=ダークネス		2_2
+	ディーア	怒り2	1_2					そうだったのか……
+StopBgm
+	リディ=ダークネス	通常						だからね、マスター♪\n私と、ずっと一緒にいてよ♪
+	ディーア	驚き2						えっ……
+Bgm	コメディ
+Tween	リディ=ダークネス	MoveBy	x=-10				NoWait
+	リディ=ダークネス	笑い						リディちゃんにやって欲しいのに\n言えなかったこと……\n私ならぜーんぶやってあげるから♪
+	ディーア	汗2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	汗2						そ、それは……！\nちょっと待て、\nさっきと空気が違い過ぎるって……！
+Tween	ディーア	MoveBy	x=-10
+Tween	リディ=ダークネス	MoveBy	x=-10				NoWait
+	リディ=ダークネス	通常						捕まるの、イヤでしょ？\n二人だけで全部忘れて遊んだほうが\n楽しそうでしょ？
+	ディーア	にやけ2						それは、確かに楽しそう……
+	ディーア	悔しい2						くっ、オレはどうするべきなんだ！
+	リディ=ダークネス	通常						にしし♪
+CharacterOff
+	リディ	怒り2	画面外_右					ちょっと待ったー!!
+Se	走る
+Tween	リディ	MoveTo	x=0 time=1.5
+CharacterOff
+	リディ	怒り2	3_3
+	ディーア	驚き2	2_3
+	リディ=ダークネス	驚き	1_3					えっ……？
+	ディーア	驚き2						リディ!?\nどうしてここに!?
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						マスターが全然迎えに来ないから\n心配になって来たんだよ！
+	リディ	絶望2						そしたら、まんまと\n誘惑されちゃってるし！
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						しかもニヤニヤしてたでしょ！\nマスターのへんたい!!
+	ディーア	汗2						ちょっと待ってくれ、\nこれは……！
+	リディ=ダークネス	笑い						もう遅いよリディちゃん♪\nマスターは私と一緒に遊ぶって\n決めたんだもん♪
+	ディーア	汗2						いや、まだ決めたわけじゃ……
+	リディ	怒り2						じゃあリディと一緒に逃げよう！\nこのままじゃマスターは\nダメになったうえに捕まっちゃう！
+	ディーア	悔しい2						うっ、流石にそれは避けたいな……
+CharacterOff
+	リディ	怒り2	1_2
+	リディ=ダークネス		2_2					どうするの、マスター♪\n早く決めてよ♪
+	リディ
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							リディと一緒に逃げるよね？\nマスター！
+	リディ=ダークネス							私とずーっと遊ぶよね？
+CharacterOff
+	ディーア	汗2						ちょ、ちょっと待って……！
+CharacterOff
+	リディ	怒り2	1_2
+	リディ=ダークネス	通常	2_2					マスター♪
+	リディ							マスター！
+Param	character_grayout=false
+	集中線		エフェクト表
+	リディ&リディ=ダークネス							どうするの？
+Param	character_grayout=true
+CharacterOff
+StopBgm
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						はっ……！
+CharacterOff
+Se	キラン
+	ディーア	拡大気づき	エフェクト表					そうか！\nそうすれば良かったんだ……！
+CharacterOff
+	ディーア	本気2						二人とも、待ってくれ！\nオレは今、大変な事実に\n気が付いた……！
+	ディーア	悔しい2						オレは、リディと逃げるか\nリディ=ダークネスと過ごすか
+	ディーア							大人しく捕まるか\nそれとも証拠を隠滅するか、\nずっと迷ってた……
+	ディーア	本気2						でも、選ぶ必要なんてなかったんだ！
+CharacterOff
+	リディ	驚き2						えっ……？
+CharacterOff
+Param	character_grayout=false
+Se	ランクB
+	集中線		エフェクト表
+	ディーア	拡大本気2	エフェクト裏					全部選べば良かったんだよ！
+Bgm	コメディ
+Param	character_grayout=true
+CharacterOff
+	リディ=ダークネス	驚き						ええ……？
+	ディーア	怒り2						つまり、オレが犯人だと分かる証拠を\n隠蔽した上で……
+	ディーア							リディとリディ=ダークネスと\nイチャイチャする！
+	ディーア	本気2						これがオレの選ぶべき正解だ!!!!
+CharacterOff
+StopBgm
+	リディ=ダークネス	驚き	2_2
+	リディ	絶望2	1_2					………………
+	リディ=ダークネス	驚き						………………
+CharacterOff
+Bgm	コメディ
+	リディ=ダークネス		1_3
+	ディーア	きらーん2	2_3
+	リディ	怒り2	3_3
+Se	打1
+	リディ	怒り2
+Tween	リディ	PunchPosition	x=-10 y=50				NoWait
+	リディ							……このダメマスター!!\n何をどうしたら\nそういう結論になるの!!
+	ディーア	本気2						二人だけじゃない、\n上手くすれば魔剣たち全員と遊べる!!
+	リディ	絶望2						もっと酷くなった!!
+Tween	リディ=ダークネス	MoveBy	x=5				NoWait
+	リディ=ダークネス							だったら、マスターは私と\nイチャイチャしてくれるって\nことでいいんだよね？
+	ディーア	にやけ2						ああ、もちろんだ！
+Tween	リディ=ダークネス	MoveBy	x=5				NoWait
+	リディ=ダークネス							にしし♪ 何して欲しいの？\n頭ナデナデされたい？\nそれとも私の頭、ナデナデしたい？
+	リディ	驚き2						ちょっ!?\nこらマスター！
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						全部選ぶとしても、\n事件解決の方が先でしょ！
+	リディ=ダークネス		1_3					あはは♪\n本物のリディちゃんが\nやきもち焼いてるよ？
+	リディ	怒り2	3_3					そ、そんなんじゃないもん……！
+	ディーア	笑い2						リディ、こっちにおいで
+Tween	リディ	MoveBy	x=-10				NoWait
+	リディ	怒り2						な、なに……？
+Tween	リディ	MoveBy	x=-10				NoWait
+	リディ							言っておくけど、\n私は頭ナデナデされても嬉しくな<dash=2>
+	ディーア	笑い2						よしよし
+Se	ラブ
+	リディ	照れ2						ふわぁぁ……！
+	ディーア	笑い2						リディ、オレと一緒に\n楽しいハロウィンをしよう
+	リディ	照れ2						も、もう\n仕方ないなぁ……♪
+CharacterOff
+StopBgm
+	リディ=ダークネス	通常						にしし♪\nそれじゃあ、マスターに一つ\nいいこと教えてあげる♪
+CharacterOff
+	ディーア	驚き2						いいこと……？
+CharacterOff
+Param	character_grayout=false
+	リディ=ダークネス
+FadeOut	white					.2
+Se	光1
+FadeIn	white					.2
+	リディ=ダークネス
+	オーラ青		エフェクト表			.5
+Wait						.7
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2						なっ、何だ？
+CharacterOff
+Bgm	マイページ
+	リディ=ダークネス	笑い						あはは♪\nゲートを閉じたんだよ♪
+	リディ=ダークネス							忘れちゃったって言ったのは嘘♪
+	リディ=ダークネス	笑い						マスターに構ってもらえたら\n閉じてあげようと思ってたんだ♪
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	驚き2	1_2					えっ!?\nじゃあ、この事件は……！
+	リディ							解決したの!?
+	ディーア	きらーん2						やったな、リディ！\nこれで後は、\n魔物とお菓子の回収だけだ……！
+	リディ	笑い2						なんか、怒涛の展開で\n全然ついていけないけど！\n良かったね、マスター！
+	ディーア	笑い2						ああ！\nこれで安心して……
+CharacterOff
+StopBgm
+	ショコラゴーレム2		画面外_左
+Se	風1
+Tween	ショコラゴーレム2	MoveTo	x=800 time=3.5				NoWait
+Wait						1
+CharacterOff
+Bgm	コメディ
+	ディーア	絶望2	1_2
+	リディ	驚き2	2_2					あれ、今の魔物って……
+	ディーア	絶望2						……忘れてた
+CharacterOff
+	リディ=ダークネス	笑い						ああ、あの子がいると\nゲートを閉じても魔物増えちゃうね♪
+CharacterOff
+	ディーア	絶望2	1_2
+	リディ	驚き2	2_2					ええっ!? じゃあ、\n何も解決してないのと一緒じゃん!?
+Tween	ディーア	ShakePosition	x=5				NoWait
+	ディーア	絶望2						解決したとおもったのに……
+CharacterOff
+	リディ=ダークネス	通常						私のことも忘れないでよ、マスター？
+	リディ=ダークネス	照れ						お菓子くれないとイタズラするのは\n変わってないんだから♪
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	絶望2	1_2					そうだった!!
+	ディーア	怒り2						いや、オレは全てを選ぶと決めたんだ\n今この瞬間が大変でも\n絶対に諦めなければ事件は解決する！
+	リディ	笑い2						そうだね、諦めずに頑張れば\nみんなと楽しいハロウィンを……！
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						魔剣全員とイチャイチャするために!!
+Se	打1
+Tween	リディ	PunchPosition	x=-10 y=50				NoWait
+	リディ	怒り2						さっきから\n言ってること最低だよマスター!!
+CharacterOff
+	リディ=ダークネス	笑い						ほらほら、早くしないと\n他の人にお菓子取られちゃうかもよ？
+CharacterOff
+	ディーア	本気2						そうはさせない！\n行こう、リディ=ダークネス\nオレと一緒に戦ってくれ！
+	リディ=ダークネス							……うん♪
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	本気2	1_2					リディ、もう少しここで\n待っててくれ！
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=2				NoWait
+Wait						.7
+FadeOut	black					.5
+CharacterOff						0
+Bgm	マイページ
+	リディ=ダークネス		2_2			0
+	リディ	怒り2	1_2			0
+FadeIn	black					.3
+	リディ	怒り2						……まったくマスターったら
+	リディ	通常2						じゃあ、\nマスターのことお願いね
+	リディ=ダークネス	照れ						任せておいて、リディちゃん♪
+	リディ	怒り2						イチャイチャしちゃダメだからね！
+Tween	リディ=ダークネス	MoveBy	x=5				NoWait
+	リディ=ダークネス	通常						えぇ？\nそれは約束できないかも♪
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							ちょっと！
+	リディ	驚き2						あれ？ でも……よく考えたら\n爆発起こしたのはマスターだけど
+	リディ	怒り2						それ以外は全部あなたの\nせいじゃない？
+Tween	リディ=ダークネス	MoveBy	x=-5				NoWait
+	リディ=ダークネス	通常						にしし、気づいちゃったかぁ♪
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						気づいちゃったか、じゃないよもう！
+	リディ=ダークネス	通常						でもさ、結果的にマスターと\nイチャイチャできたんだし、\nよくない？
+	リディ	驚き2						え？ ま、まあ……\nそれはたしかに…………いいかも
+	リディ=ダークネス	照れ						でしょ？
+	リディ	通常2						うん、いいかな！
+	リディ=ダークネス	笑い						うん♪ じゃあいってくるね\nリディちゃん♪
+	リディ	笑い2						いってらっしゃーい！
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=false
+	イベントロゴ499		エフェクト表			0
+	　　　　　　　　　　					0
+FadeIn	black					.3
+								\n　　　　<color=blue>リディの悪堕ち後夜祭</color>
+Param	character_grayout=true
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_499_01
+EndIf
+EndScenario

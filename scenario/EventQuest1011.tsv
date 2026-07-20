@@ -1,0 +1,2811 @@
+# E_1011_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	黒背景
+	          
+FadeIn	black					.5
+	マグナ	<Off>						マグナは世界で一番なの
+	マグナ	<Off>						どんな悪でも薙ぎ払えて、\nどんな敵でも論破しちゃう！\n誰もマグナに敵わない！
+	マグナ	<Off>						世界で一番\n強くてかわいい魔剣なのよ！
+FadeOut	black					.2
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	通常2	1_2			0
+	マグナ	通常2	2_2			0
+FadeIn	black					.2
+	マグナ	通常2						ねぇ、クズマスター！\n今日もマグナが一番でしょ？
+	ディーア	笑い2						ああ、\nマグナのおかげで助かった！
+	マグナ	通常2						そう！\nだからマグナだけを\n甘やかしなさい♪ はい論破♪
+	ディーア	汗2						ははは、わかったよ\n確かにそれだけ活躍したもんな
+CharacterOff						0
+Bg	黒背景					0
+	マグナ	<Off>						なのに\nどうして……？
+FadeOut	black					.2
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	通常2				0
+FadeIn	black					.2
+	ディーア	通常2						でも今日は\nマグナだけじゃなくて……
+	ディーア	通常2						マグナ=ロスト
+	ディーア	笑い2						マグナを助けてくれて、\nありがとうな
+CharacterOff
+	マグロス	通常						お礼なんていいよぉ\nだって私は<dash=2>
+StopBgm
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+Wait						.5
+	マグロス	<Off>						<dash=2>負けたくなかっただけだし♪<speed=1>　　</speed>	BrPage
+	イベントロゴ1011		エフェクト表			3
+Wait						5
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A					0
+	          
+FadeIn	black					.3
+								\n　　　　　　<color=blue><dash=2>数日前<dash=2></color>
+CharacterOff						0
+Param	character_grayout=true
+Bgm	平和
+	酒場のおばちゃん		1_3			0
+	旅人		画面外_右			0
+Tween	旅人	RotateTo	y=180 time=0				NoWait
+Tween	旅人	MoveTo	x=180 time=1				NoWait
+Wait						.5
+	旅人							聞いたか、あの噂……？
+	酒場のおばちゃん							ええ、例の聖女でしょう？
+	旅人							従う連中も増えているらしい\nこっちにまで広がったら面倒だよな
+	酒場のおばちゃん							うちの子は大丈夫かしら\n心配ねぇ……
+Param	character_grayout=false
+CharacterOff
+	マグナ	通常2						大丈夫！\n怖がる必要ないわ♪
+Param	character_grayout=true
+CharacterOff						0
+	酒場のおばちゃん		1_3			0
+	旅人		3_3			0
+	旅人							え……？
+CharacterOff
+	マグナ	通常2						だって、この魔界には\nマグナがいるんだから！ はい論破♪
+CharacterOff
+	酒場のおばちゃん		1_3
+	旅人		3_3
+	旅人							確か……\n君は魔剣の……
+	酒場のおばちゃん							そうそう!!\nこの間も男の子と\n魔物を退治してくれたわね！
+CharacterOff
+	マグナ	嬉しい						そうよ！ 聖女だか知らないけど\nマグナが倒してあげるんだから♪\nみんな安心してよね♪
+CharacterOff
+	酒場のおばちゃん		1_3
+	旅人		3_3
+	旅人							そりゃあ、頼もしいな！
+	酒場のおばちゃん							そうね、マグナちゃんがいたら\n安心して眠れるわ♪
+CharacterOff
+	マグナ	嬉しい						ふふ♪ もっともーっと\nマグナを頼っていいの<dash=2>
+	ディーア	汗2	画面外_右			0
+Tween	ディーア	MoveTo	x=180 time=0.5				NoWait
+Se	走る
+Wait						.3
+Tween	マグナ	PunchPosition	x=10				NoWait
+	マグナ	悔しい						もがっ!?
+	ディーア	悔しい2						やっと見つけた！\nほら、マグナ！ 早く任務に戻るぞ！
+	マグナ	悔しい						ちょ、ちょっと！\nなにするのよ、\nこの変態マスター！
+Se	走る
+Tween	ディーア	MoveBy	x=800 time=2				NoWait
+Tween	マグナ	MoveBy	x=800 time=2				NoWait
+	マグナ	悔しい						えっち！ ばか！ へんたーい！\nマグナちゃんをおろしてよー!!
+	酒場のおばちゃん							行っちゃったわね……
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Param	character_grayout=true
+Bg	市街地B					0
+CharacterOff						0
+	マグナ	悔しい	2_2			0
+	ディーア	汗2	1_2			0
+FadeIn	black					.3
+	ディーア	汗2						はぁ、よかった……\nいきなりいなくなったから\n心配したぞ……
+	マグナ	悔しい						なによ、その言い方！\nマグナを子ども扱いするの!?\nマグナは世界一の魔剣なのに！
+	ディーア	汗2						もちろん、実力は信頼してるよ\nでも、マグナは体も小さいし……
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						やっぱり子ども扱い\nしてるじゃない！\nそれが余計な心配なのよ！
+	ディーア	汗2						そうは言っても、\nさっきも迷子に<dash=2>
+	マグナ	通常2						迷子じゃないわ！\nマグナは世界一の魔剣として、\nみんなを安心させてたの♪
+	マグナ	通常2						マグナがいるから、\n魔界の平和は護られるって！\nみんな嬉しそうだったわ！
+	マグナ	悔しい						マスターなら、\n優しいマグナのこと褒めるほうが\n先じゃない？ はい論破！
+	ディーア	通常2						それはいいことだし、\nマグナにそれだけの力があること、\nオレはわかってる
+	ディーア	汗2						だけど、なにが起きるか\nわからないのが魔界だろ？
+	ディーア	汗2						一人で動いて、\n万が一のことがあったら……
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	通常2						万が一なんて、ないわよ♪
+	マグナ	通常2						マグナの実力は\n客観的に見ても世界一なんだから♪
+Tween	マグナ	MoveBy	x=-20				NoWait
+	マグナ	通常2						それより、マスターのほうが\n世界で一番の魔剣のマスターとして\n問題があるわ♪
+	マグナ	通常2						こんなかわいいマグナを抱えて、\n街中を走り回るなんて！\nとんでもない変態よ！
+	ディーア	驚き2						ま、待て！\nさっきのは別に変なことじゃ……！
+	マグナ	通常2						はい論破！\nクズマスターがマグナを\n『小さい』って言ったのよ？
+	マグナ	通常2						小さい女の子をこんな街角に\n連れ込むなんて、\n世間はどう思うかしら？
+Tween	マグナ	MoveBy	x=40				NoWait
+	マグナ	嬉しい						マスターが変態である証拠よ！\nみなさーん！\nここに変態がいますよー！
+Tween	ディーア	MoveBy	x=20				NoWait
+	ディーア	汗2						こ、こら！\nそれはシャレにならないからな!!\n本当にお仕置きするぞ！
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	嬉しい						やだよー♪\n止めたいなら捕まえてみたら？\nはい論破♪
+	ディーア	汗2						こうなったら……!!
+Tween	ディーア	MoveBy	x=200				NoWait
+Wait						.3
+Tween	マグナ	MoveBy	x=-200				NoWait
+	マグナ	通常2						きゃー！\n助けてミョルニーお姉ちゃーん！\nマスターが変なことしてくる！
+Param	character_grayout=false
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ミョルニル	通常2						ク・ズ・マスター？
+CharacterOff
+Param	character_grayout=true
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						わっ!?\nみょ、ミョルニル!?
+CharacterOff
+	ディーア	驚き2	2_2
+	ミョルニル	通常2	1_2
+	ミョルニル	通常2						マグナを探すから待ってろと、\nあなたがそう言いましたわよね？
+	ミョルニル	通常2						いつまで待たせるのかと\n思ってましたら、\n隠れてマグナにイタズラなんて！
+	ディーア	絶望2						誤解だ！\nオレはマグナを止めようと……！
+Tween	ミョルニル	MoveBy	x=10				NoWait
+Tween	ディーア	MoveBy	x=10				NoWait
+	ミョルニル	通常2						そもそも目を離した時点で\nクズマスターの落ち度でしょう！\nはい論破！
+Tween	ミョルニル	MoveBy	x=10				NoWait
+Tween	ディーア	MoveBy	x=10				NoWait
+	ミョルニル	通常2						しかも、連れ戻さずに\n遊んでるなんて\nマスターもお子様ね！ はい論破!!
+Tween	ミョルニル	MoveBy	x=20				NoWait
+Tween	ディーア	MoveBy	x=20				NoWait
+	ミョルニル	通常2						ミョルニルたちのマスターとして\n品格に欠けると思わないのかしら？\nは・い・論・破！
+Tween	ミョルニル	MoveBy	x=20				NoWait
+Tween	ディーア	MoveBy	x=20				NoWait
+	ミョルニル	通常2						信を得たいならば、\n真に深なる心をもって、\n紳士に振る舞うことね！
+	ディーア	絶望2						うわぁあああ!?\nマグナー！\nはやく誤解を解いてくれー！
+CharacterOff
+	マグナ	通常2						にしし♪ 怒られてカワイソー♪\nあとでヨシヨシってしてあげよっ♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Param	character_grayout=true
+Bg	草原A					0
+CharacterOff						0
+	マグナ	通常2	p8			0
+	ミョルニル	通常2	p5b			0
+	ディーア	絶望2	p2			0
+FadeIn	black					.3
+	ディーア	絶望2						はぁ、ひどい目にあった……
+	ミョルニル	通常2						ふん！
+	ディーア	汗2						あの、ミョルニル？\nなんでそんなに\nマグナを離してるんだ……？
+	ミョルニル	通常2						さっきのは誤解としても、\nマスターの度し難いバカが、\nマグナに移ったら困りますから！
+	ミョルニル	通常2						それとも、近づいて\nなにかを企んでいるのかしら？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						わ、わかった！\nそのままで！
+	ディーア	汗2						ただ……\nここはもう冥獣の出現地点だ\n警戒は緩めるなよ？
+	ミョルニル	通常2						強力な冥獣が\n街道を塞いでいると、\n聞きましたけれど？
+	ディーア	悔しい2						勇者にも被害が出てるらしい\n油断したら、オレたちも危ない
+	マグナ	通常2						ふふん♪\nそんな初歩的なミス、\nマグナがするわけないでしょ？
+	マグナ	通常2						その証拠に……\nマグナはもう敵を見つけたもんね！
+Se	走る
+Tween	マグナ	MoveBy	x=-800 time=1.2				NoWait
+Wait						1
+	ディーア	驚き2						あ、こら！\n先に行ったらダメだって！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+StopBgm
+FadeOut	black					.3
+Bgm	バトル
+CharacterOff						0
+	マグナ	通常2				0
+FadeIn	black					.3
+	マグナ	通常2						あそこよ、クズマスター♪
+Param	character_grayout=false
+CharacterOff
+	Ω級グレイヴ型冥獣
+Shake	Ω級グレイヴ型冥獣		x=10 y=10				NoWait
+	Ω級グレイヴ型冥獣							グォオオオオオオ!!
+Param	character_grayout=true
+CharacterOff
+	マグナ	通常2	1_2
+	ディーア	驚き2	2_2_b
+	ディーア	驚き2						ま、まったく！\n見つけたのはお手柄だけど……
+	マグナ	通常2						にしし♪ それにいいこと考えたの♪\nクズマスター！\n今日はマグナだけを使いなさい♪
+	ディーア	驚き2						えっ……？
+	マグナ	悔しい						ダメマスターは\nマグナのことを子ども扱いしすぎ！
+	マグナ	嬉しい						でも、それは間違いよ♪
+	マグナ	通常2						マグナは世界で一番、\n強くてかわいい魔剣なんだから♪
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	通常2						論理的に、マグナ一人で\nなんでも解決できちゃうの♪\nはい論破♪
+	ディーア	汗2						はぁ……\nミョルニルはどうする？
+CharacterOff
+	ミョルニル	通常2						そうね、\nマグナなら大丈夫でしょう
+CharacterOff
+	ディーア	怒り2	2_2_b
+	マグナ	通常2	1_2
+	マグナ	通常2						ありがとう、\nお姉ちゃん♪
+	ディーア	本気2						わかった……\nいくぞ、マグナ!!
+CharacterOff
+	マグナ	通常拡大	エフェクト表
+	マグナ	通常拡大						にしし♪\nマグナの実力、\n証明してあげるわ♪
+FadeOut	white					.5
+StopBgm
+Param	character_grayout=false
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+	          
+Bg	草原B					0
+Wait						2
+FadeIn	white					.3
+	？？？？							……なるほどねー
+FadeOut	black					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1011_02
+EndIf
+EndScenario
+
+# E_1011_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	草原A
+Param	character_grayout=false
+	マグナ	通常2				0
+FadeIn	white					.5
+Se	光1
+	オーラ青		エフェクト表			1
+	マグナ	通常2						しつこいわね♪\nマグナに勝てるわけないんだから、\nあきらめなさい♪ はい論破♪
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Se	光3
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(青)	マグナ	エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	草原A					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffectOff	SpriteCamera	MotionBlur
+	Ω級グレイヴ型冥獣					0
+	Ω級グレイヴ型冥獣							グゥ……！
+Shake	Ω級グレイヴ型冥獣						NoWait
+	Ω級グレイヴ型冥獣							グォオオオオオオオオ!!
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2	2_2_b
+	マグナ	通常2	1_2
+	マグナ	通常2						もう、まだやるの？
+	ディーア	怒り2						情報通り、やっかいだな……
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	通常2						なに感心してるの、\nダメマスター！
+	マグナ	通常2						マグナを使ってるのに\n苦戦なんて、ありえないでしょ♪
+Param	character_grayout=false
+CharacterOff
+	マグナ	通常2
+Se	光1
+	オーラ青		エフェクト表			1
+	マグナ	通常2						このまま一気に<dash=2>
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2						だから、マグナ\nもっと冷静にって……！
+CharacterOff
+	ミョルニル	通常2						マグナ！ マスター!!
+StopBgm
+CharacterOff
+	ディーア	驚き2	2_2_b
+	マグナ	悔しい	1_2
+	マグナ	悔しい						え…………？　
+Param	character_grayout=false
+CharacterOff
+	Ω級グレイヴ型冥獣
+Shake	Ω級グレイヴ型冥獣						NoWait
+ZoomCamera	SpriteCamera	1.3	0	0		.3	NoWait
+	Ω級グレイヴ型冥獣							ガァアアアアアア!!
+FadeOut	white					.3
+Param	character_grayout=true
+ZoomCamera	SpriteCamera	1	0	0		0
+CharacterOff						0
+	マグナ	悔しい	1_2			0
+	ディーア	怒り2	2_2_b			0
+FadeIn	white					.3
+	ディーア							くっ、まずい……！
+FadeOut	black					.1
+Bg	黒背景					0
+CharacterOff						0
+	          					0
+FadeIn	black					.1
+	？？？？							よそ見は危ないよー
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+	黒背景		エフェクト表			0
+	射撃(赤)	マグロス	エフェクト裏			0
+Se	闇3
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+ImageEffectOff	SpriteCamera	MotionBlur
+Wait						.3
+CharacterOff
+Bg	草原A					0
+	Ω級グレイヴ型冥獣					0
+Shake	Graphics		x=5				NoWait
+	土煙		エフェクト表
+	Ω級グレイヴ型冥獣							ギャウ!?
+CharacterOff
+	マグナ	本気						…………え？
+Bgm	火属性バトル
+CharacterOff
+	マグロス	？						マグナちゃん、大丈夫？
+Param	character_grayout=false
+CharacterOff
+	Ω級グレイヴ型冥獣
+Shake	Ω級グレイヴ型冥獣		x=20				NoWait
+	Ω級グレイヴ型冥獣							グゥウウウウ……!!
+Param	character_grayout=true
+CharacterOff
+	マグロス	？						やる気満々だねー\n嫌だけど、仕方ないかなー
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル101101		エフェクト裏			0
+Wait						.5
+FadeIn	white					.3
+	？？？？							これは人命救助だから♪
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.5
+ImageEffect	SpriteCamera	Bloom
+Se	光3
+Se	闇3
+Se	火事
+FadeOut	white					1.5
+Wait						.5
+CharacterOff						0
+Bg	草原A(火事)					0
+	Ω級グレイヴ型冥獣					0
+ImageEffectOff	SpriteCamera	Bloom
+FadeIn	white					1
+Shake	Ω級グレイヴ型冥獣		x=5				NoWait
+	Ω級グレイヴ型冥獣							ガ……アァ…………
+CharacterOff	Ω級グレイヴ型冥獣					1
+Wait						1.2
+Param	character_grayout=true
+	マグナ	本気	1_2
+	ディーア	怒り2	2_2_b
+	ディーア	驚き2						……なっ!?
+	マグナ	絶望						あいつを、一瞬で……？
+FadeOut	white					.3
+CharacterOff						0
+	マグロス	通常
+Wait						.5
+FadeIn	white					.3
+	マグロス	通常						いやぁー\nごめんねぇ、驚かせてー					スチルに
+	マグロス	驚き						あ、でも……\n今のは仕方なーく\n手を出しただけだからね
+	マグロス	通常						勝ちでもなし、負けでもなし\n不慮の事故ってことでー
+Param	character_grayout=true
+CharacterOff
+	マグナ	本気	1_2
+	ディーア	悔しい2	2_2_b
+	ディーア	悔しい2						この魔力反応に、その姿……\nまさか、お前はマグナの……!?
+CharacterOff
+Param	character_grayout=false
+	マグロス	通常
+	マグロス	通常						そう、LS_No.13445\nミョルニル=マグナ=ロスト
+	マグロス	通常						元、そこのかわいいマグナちゃん
+Param	character_grayout=true
+CharacterOff
+	マグナ	本気	1_2
+	ディーア	悔しい2	2_2_b
+	ディーア	悔しい2						っ!! 油断するなマグナ！\nきっとあいつの狙いはお前だ!!
+	マグナ	本気						え、ええ！ もちろんよ！
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	通常2						ロストだからって\nマグナは負けないんだから！\n覚悟しなさい！
+	ディーア	本気2						いくぞ<dash=2>
+StopBgm
+Param	character_grayout=false
+CharacterOff
+Bg	草原A(鎮火)
+	集中線		エフェクト表
+	マグロス	泣き拡大	エフェクト裏
+	マグロス	泣き拡大						わぁああああ！\nそういうのなし！\n降伏！ 降伏!!
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	2_2_b
+	マグナ	本気	1_2
+	マグナ	本気						…………は？
+	ディーア	驚き2						…………なんだと？
+CharacterOff
+	マグロス	驚き						はぁ……\n勘違いしないでよー
+	マグロス	驚き						戦うなんて言ってないでしょ？\nだから戦ったりしないよー\nはい論破
+CharacterOff
+	ミョルニル	通常2						……いったい、どういうこと？
+CharacterOff
+	マグロス	泣き						むしろ逆、逆！\n戦いから逃げてきたんだよー
+	マグロス	泣き						だからね、マスター
+CharacterOff
+	マグロス	あはは拡大	エフェクト表
+	マグロス	あはは拡大						私を仲間に入れてくれない？
+If	isdebug==true
+CharacterOff
+Jump	*E_1011_03
+EndIf
+EndScenario
+
+# E_1011_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	都市					0
+Bg	酒場1F					0
+	マグロス	あはは				0
+FadeIn	white					.5
+	マグロス	あはは						やっぱりのんびりはいいねー\n愛すべきは平和だよー♪
+	ミョルファ		画面外_右_b
+Tween	ミョルファ	MoveTo	x=520 time=2				NoWait
+Tween	ミョルファ	RotateTo	z=20 time=0				NoWait
+	ミョルファ	悲しい2						そーっ……
+	ミョルファ	悲しい2						この方もマグナ様……\nミョルファはどうすれば……
+	マグロス	通常						おぉ！ ミョルファちゃん！\n相変わらず、かわいいねー\n飴ちゃん食べる？
+Tween	ミョルファ	RotateTo	z=0 time=0.5				NoWait
+	ミョルファ	悲しい2						ひゃっ!?
+	ミョルファ	悲しい2						だ、ダメです！\nまだ警戒しろって旦那さまが……！
+	マグロス	あはは						あ、そうだった、そうだった♪\nでも、お話くらいはしない？\n一応だけど、味方になったからねー
+Tween	ミョルファ	MoveTo	x=300 time=1				NoWait
+	ミョルファ	悲しい2						で、でも……
+	ヨルムンガンド		画面外_左_b
+Tween	ヨルムンガンド	MoveTo	x=-220 time=1				NoWait
+Wait						1
+	ヨルムンガンド	通常						大丈夫ですわよ、ミョルファちゃん
+	ヨルムンガンド	通常						数日、様子を見てましたけど、\n旦那様の言う通り\n敵意はなさそうですし
+	マグロス	通常						おぉー\nヨルムンお姉ちゃん
+	ヨルムンガンド	通常						ヨル様も入れてくださる？
+	マグロス	あはは						いいよー\nのんびりお茶でもしよっか
+	マグロス	通常						ほら、ミョルファちゃんも、\nこっちこっち♪
+	ミョルファ	悲しい2						そ、そうですね……\nちょっとだけでしたら
+Tween	ミョルファ	MoveTo	x=255				NoWait
+Wait						.5
+	マグロス	通常						うんうん♪\n懐かしいねー、この感じ
+	ヨルムンガンド	通常						なるほど……\n近くで見ると確かに、ヨル様の力が\nあなたにも入っていますわね……
+	マグロス	通常						そりゃあ、\n私もマグナちゃんだったからねー
+	マグロス	あはは						歳を食いすぎて\nロリババァになっちゃったけど♪
+	ヨルムンガンド	通常						そう言いますけど、\n見た目はマグナちゃんと\nそんなに変わりませんわね……
+	マグロス	あはは						知識と心だけ\n老けちゃったんだよ
+FadeOut	black					.3
+CharacterOff						0
+	マグナ	悔しい				0
+FadeIn	black					.3
+	マグナ	悔しい						なんであいつ、\n味方みたいな顔して\nのんびりダラダラしてるのよ……
+	マグナ	悔しい						みんなも、\nあいつと仲良さそうに……
+CharacterOff
+	ミョルファ	通常2	p8b
+	ヨルムンガンド	通常	p2b
+	マグロス	あはは	p5
+	マグロス	あはは						お、マグナちゃんだー\nキミもこっちでお話しないー？
+CharacterOff
+	マグナ	悔しい						……っ！ \nそんなこと、\nするわけ無いでしょ……!?
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						ヨルムンお姉ちゃんも、\nミョルファも！\nなんでこいつと仲良くしてるの!?
+	マグナ	悔しい						こいつはロストなのよ!?\nマグナたちの敵なの！ 論破！ 論破！
+	マグナ	悔しい						ほんとに……\nいったいなに考えてるのよ!!\nバカマスター!!
+Se	回想
+FadeOut	black					.3
+StopBgm
+Bg	草原A(鎮火)					0
+CharacterOff						0
+	          
+Bgm	絶望
+Wait						.5
+FadeIn	black					.3
+								\n　　　　　　<color=blue><dash=2>数日前<dash=2></color>
+CharacterOff
+Param	character_grayout=true
+	ディーア	怪しい2	1_2
+	マグナ	本気	2_2
+	ディーア	驚き2						な、仲間に入りたい？
+CharacterOff
+	マグロス	通常						そうだよぉ
+CharacterOff
+	マグナ	本気	2_2
+	ディーア	怪しい2	1_2
+	ディーア	悔しい2						<ruby=アネセサリ>魔人機関</ruby>の命令で\n来たんじゃないのか？
+CharacterOff
+	マグロス	あはは						違うよ\nむしろ追われてる立場だねぇ
+CharacterOff
+	マグナ	本気	2_2
+	ディーア	怪しい2	1_2
+	ディーア	怒り2						……どうしてだ？\n脱走した理由はなんだ？
+CharacterOff
+	マグロス	通常						そんなの、一つしかないでしょー
+	マグロス	泣き						戦うのがさー、\n嫌だったんだよー
+CharacterOff
+	マグナ	本気	2_2
+	ディーア	怪しい2	1_2
+	ディーア	驚き2						嫌だった……？ 戦うのが？
+CharacterOff
+	マグロス	泣き						そうだよ？
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	研究所C					0
+	          
+FadeIn	white					.3
+	マグロス	<Off>						なのに毎日毎日、\n怖い人たちが戦え、戦えってね
+	マグロス	<Off>						でもさ、そんなに言われても\n戦いたくなる人なんて\nいないでしょ？ はい論破ー
+	マグロス	<Off>						勝ったとか負けたーとか、\n本当に嫌だから、\n逃げちゃったんだよ
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	草原A(鎮火)					0
+	マグロス	通常				0
+FadeIn	white					.3
+	マグロス	通常						でも、\n行き場もないし、助けもないしさー
+	マグロス	通常						そんな時に、思い出したんだよ\nキミは<ruby=私たち>対魔剣殲滅魔導兵器</ruby>も\n仲間にしてるって
+	マグロス	本気						だから、私のことも\n匿ってくれないかな？
+CharacterOff
+	ディーア	怪しい2	1_2
+	マグナ	本気	2_2
+	マグナ	本気						なによ……\nこいつホントにマグナなの？
+	ディーア	怪しい2						…………
+	マグナ	本気						バカマスター？\nもちろんこいつの\n言うことなんか<dash=2>
+	ディーア	怒り2						脱走が本当なら、協力する
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						ちょ、ちょっと！ なに言ってるの!?
+	ディーア	怒り2						お前を匿えばいいんだな？
+CharacterOff
+	マグロス	あはは						おぉ、思ったよりいい答えで\n嬉しいよー
+CharacterOff
+	ディーア	怒り2	1_2
+	マグナ	悔しい	2_2
+	マグナ	悔しい						ば、バカバカバカ！\nそこまで馬鹿だった!?
+	ディーア	怒り2						ちゃんと考えてのことだ
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						どんな考えよ!?\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>なのよ!?\n倒すべきじゃない!!
+CharacterOff
+	マグロス	通常						まあ、そう思うのが普通だよね
+	マグロス	通常						マスター、私のこと\nそんな簡単に信じちゃっていいの？
+	マグロス	通常						マグロスちゃん、\n自分で言うのもなんだけど、\n怪しいよね？
+CharacterOff
+	マグナ	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						ああ、だが\nお前に戦意がないのは\n本当らしい
+	ディーア	怒り2						戦いたくないって言葉も、\n嘘をついているようには見えない
+	ディーア	怒り2						そんな相手に攻撃はできないよ
+	マグナ	悔しい						…………っ
+CharacterOff
+	マグロス	通常						やっぱり\nマグナちゃんを使うだけあって、\nキミは正義の味方なんだねー
+CharacterOff
+	ディーア	怒り2	1_2
+	マグナ	悔しい	2_2
+	マグナ	悔しい						で、でもっ！\nロストを仲間になんて……！
+	ディーア	怒り2						もちろんマグナの不安もわかる\nすぐに信用なんてできない
+	ディーア	怒り2						お前の行動は、\n監視させてもらう
+	ディーア	怒り2						そして怪しい行動をしたなら、\n魔剣を守るために、お前を倒す
+	ディーア	通常2						いいな？
+CharacterOff
+	マグロス	通常						うん、\nそのくらい警戒するのが自然だよ
+	マグロス	通常						マグナちゃんはどう？\nマスターに論破されちゃった？
+CharacterOff
+	ディーア	通常2	1_2
+	マグナ	悔しい	2_2
+	マグナ	悔しい						っ…………！\nマスター……！
+	ディーア	通常2						大丈夫、みんながいるなら、\nロスト一人に負けることはない
+	ディーア	笑い2						それに、マグナもいるしな
+	マグナ	通常2						……っ！ そ、そうよね！\nマグナがいるんだから！\nロストだろうと怖くないわよ！
+CharacterOff
+	マグナ	本気						そうよ……\nマグナは強いんだから……
+FadeOut	black					1
+Bgm	都市
+Bg	酒場1F					0
+CharacterOff						0
+	マグロス	あはは	1_3_b			0
+	マグナ	悔しい	3_3			0
+Wait						.5
+FadeIn	black					.3
+	マグナ	悔しい						いい!?\nあんたはお情けでここにいるの！\n黙って置物になってなさい！
+	マグロス	あはは						あー、置物かー♪\nなにもしなくていいなら、\n嬉しいよー♪
+	マグナ	悔しい						…………っ
+	マグロス	あはは						論破されちゃったねー♪
+	マグナ	悔しい						変なやつ……\nマグナなのに、\n情けない姿で平気なんて
+	マグロス	通常						マグナちゃんと違って、\n勝ちたいとか思わないからねー
+	マグロス	通常						負けなければいいし\nダラダラするのが好きだし
+	マグロス	通常						マグナちゃんも、\n私にはじっとしててほしいんでしょ？\nこれでウィンウィンだよ
+	マグナ	悔しい						そ、それはそうだけど……
+	マグロス	あはは						はい論破ー♪\nそれじゃあ言う通り、\nじっとしてるよー
+Tween	マグロス	MoveBy	x=-800 time=3				NoWait
+Wait						2
+	マグナ	本気						なんで……
+	マグナ	本気						なんであんなやつが……
+CharacterOff
+	ヨルムンガンド	通常	1_3
+	ミョルファ	通常2	3_3
+	ミョルファ	通常2						マグナ様、\n大丈夫ですか？
+CharacterOff
+	マグナ	本気						も、もちろん平気よ！\nあんなロストのことなんて、\n気にしてないわ♪ 
+CharacterOff
+	ヨルムンガンド	通常	1_3
+	ミョルファ	通常2	3_3
+	ヨルムンガンド	通常						そう、その調子よ！\nマグナちゃん♪
+	ヨルムンガンド	通常						あなたには\nヨル様譲りの邪竜の力が\n宿っているんだから♪
+CharacterOff
+	ミョルニル	通常2						あら、食べてばかりのトカゲより\nこのミョルニルの力のほうが\nマグナの自信になるわよ？
+CharacterOff
+	ミョルニル	通常2	1_3
+	ヨルムンガンド	通常	3_3
+Tween	ヨルムンガンド	PunchPosition	y=30				NoWait
+	ヨルムンガンド	通常						ミョルニル……!!\nあなたのその高慢ちきは、\nマグナの教育に悪いですわよ？
+	ミョルニル	通常2						褒め言葉かしら？\nそれは私があなたより上の証よ♪\nはい論破♪
+	ヨルムンガンド	通常						どこが上？ ああ……！\nはしたない服を堂々と着れる度胸は\n上かもしれませんわね？
+Param	character_grayout=false
+Tween	ミョルニル	MoveBy	x=20				NoWait
+Tween	ヨルムンガンド	MoveBy	x=-20				NoWait
+	二人							ぐぬぬぬ……！
+Param	character_grayout=true
+	ミョルニル	通常2						大丈夫よ、マグナ！\nあなたはこのミョルニルの妹\n世界一の魔剣なんだから！
+	ヨルムンガンド	通常						マグナはヨル様の妹ですわよ!?\nこうなったら……！
+CharacterOff
+	ミョルファ	通常2
+Tween	ミョルファ	PunchPosition	y=30				NoWait
+	ミョルファ	通常2						ケンカは、ダメですよぉ！\nここは酒場ですから、はい論破！
+CharacterOff
+	マグナ	悔しい						そ、そうだよ、\nお姉ちゃんたち……！
+StopBgm
+	マグナ	悔しい						…………っ
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	通常2						……まったく!!\nみんなマグナが好きなんだから♪\n人気者は大変ね♪
+FadeOut	black					.3
+Bgm	絶望
+CharacterOff						0
+	ディーア	通常2	2_2			0
+	ミョルニル	通常2	1_2			0
+Wait						1
+FadeIn	black					.3
+Wait						.5
+	ミョルニル	通常2						…………はぁ
+	ディーア	通常2						フォローありがとうな
+	ミョルニル	通常2						本当はあなたの役割でしょう？\nクズマスター
+	ディーア	汗2						すまない、\nロストを注意しないといけなくて
+	ミョルニル	通常2						それも自業自得\n最低ですわね、はい論破♪
+	ディーア	汗2						返す言葉もないです……
+	ミョルニル	通常2						……わかっていますの？
+FadeOut	white					.2
+CharacterOff						0
+	マグロス					0
+	          		2_2
+Bg	黒背景					0
+Param	character_grayout=false
+FadeIn	white					.2
+	ミョルニル	<Off>						元がロストの魔剣と違って\nあのロストには\n魔剣を破壊する力が残っている
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=true
+Bg	酒場1F					0
+	ディーア	怒り2	2_2			0
+	ミョルニル	通常2	1_2			0
+FadeIn	white					.2
+	ミョルニル	通常2						私たちにとって\n危険なことに変わりありませんわ\n特にマグナは内心……
+	ディーア	怒り2						わかってる……
+	ミョルニル	通常2						だったら、\n単に助けを求められたから\nなんて理由ではありませんよね？
+	ミョルニル	通常2						もしまともな理由がないのなら、\n私が論破しますわよ？
+	ディーア	怒り2						チャンスだと思ったんだ
+	ミョルニル	通常2						チャンス？
+	ディーア	怒り2						マグナ=ロストが本当に味方なら、\nロスト自体を手元に置くことになる
+	ディーア	怒り2						魔人機関の技術を知る上で\n有益な情報が手に入る可能性は高い
+	ディーア	怒り2						仮に敵でも、\nあの火力で不意を打たれるより\n監視下の方が安全だ
+	ディーア	怒り2						受け入れる方が\n得策だって判断したんだ
+Tween	ミョルニル	MoveBy	x=-10				NoWait
+	ミョルニル	通常2						考えなしでないとしても、\n危険な賭けですわね
+	ディーア	通常2						ああ、責任をとって、\nオレがちゃんと見張るよ
+	ディーア	通常2						ミョルニルは\nさっきみたいにフォローを頼む
+Tween	ミョルニル	MoveBy	x=10				NoWait
+	ミョルニル	通常2						妹ですもの\n当然ですわ、マスター
+Se	走る
+Tween	ミョルニル	MoveBy	x=800 time=2				NoWait
+Wait						1
+	ディーア	怒り2						オレもちゃんと見極めないとな……
+StopBgm
+CharacterOff
+	リディ	怒り2	画面外_左
+Tween	リディ	MoveTo	x=0 time=1.5				NoWait
+Se	ドア開く
+Se	走る
+Wait						1
+	リディ	怒り2						大変だよ、マスター！
+CharacterOff
+	リディ	怒り2	1_2
+	ディーア	驚き2	2_2
+	ディーア	驚き2						リディ？
+	リディ	怒り2						街に魔物が出たの！ 急いで！
+Bgm	緊迫
+	ディーア	驚き2						なんだって……！\nわかった、すぐに<dash=2>
+CharacterOff
+	マグナ	通常2						私も行くわ！
+CharacterOff
+	マグナ	通常2	1_2
+	ディーア	驚き2	2_2
+	ディーア	驚き2						いいのか、マグナ？\nさっきと連戦になるぞ？
+	マグナ	通常2						言ったでしょう？\nマグナが世界一なんだから、\nマグナ一人で十分って！
+	マグナ	通常2						それにさっきは、\n変なやつに邪魔されたし、\n論破の途中なの♪
+	ディーア	怪しい2						でも……
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						なによ！\nマグナを信じられないの!?
+	ディーア	怒り2						……わかった、\nいくぞマグナ！
+	ディーア	本気2						あと、マグナ=ロスト！\nお前から目を離すわけにはいかない\nついてきてもらうぞ！
+CharacterOff
+	マグロス	通常						はいはーい
+CharacterOff
+	マグナ	通常2						ふん！\nマグナが大活躍するとこ、\n指をくわえて見てなさい！
+CharacterOff
+	マグロス	通常						勝負ごとは任せるよー\n戦わないに越したことはないからー
+CharacterOff
+StopBgm
+	マグナ	本気						ほんと、ムカつく……！
+	マグナ	本気						今度こそ……マグナが一番って\n完全に論破してやるんだから……！
+Se	走る
+Tween	マグナ	MoveBy	x=-800 time=1.5				NoWait
+Wait						1
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1011_04
+EndIf
+EndScenario
+
+# E_1011_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	市街地A
+	クレイモア型冥獣		1_3			0
+FadeIn	white					.5
+	クレイモア型冥獣							ガァアアアア!!
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Se	光3
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(青)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+CharacterOff
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	市街地A					0
+	クレイモア型冥獣		1_3					グ、オォ……
+CharacterOff	クレイモア型冥獣					.7
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常2	2_2_b
+	マグナ	通常2	1_2
+	マグナ	通常2						にしし♪\nやっぱりマグナの敵じゃないわ♪
+	ディーア	通常2						よし、いい調子だマグナ！
+	マグナ	通常2						とーぜん！\nいちいち褒める必要もないわ！\nはい論破♪
+	マグナ	通常2						（そうよ、\n　これが世界一のマグナなの……！）
+	マグナ	通常2						だから……
+	？？？？							うわぁあああああ！
+	マグナ	本気						え……!?
+FadeOut	black					.3
+Bg	市街地B					0
+CharacterOff						0
+	クレイモア型冥獣		1_3			0
+	研究員		3_3			0
+FadeIn	black					.3
+Tween	研究員	PunchPosition	y=30			NoWait
+	研究員							た、助けてくれっ!! 誰かぁ!!
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A					0
+	マグナ	本気	1_2			0
+	ディーア	悔しい2	2_2_b			0
+FadeIn	black					.3
+	ディーア	悔しい2						しまった……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地B					0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+	クレイモア型冥獣		1_3			0
+	研究員		3_3			0
+	          
+FadeIn						.3
+Tween	クレイモア型冥獣	MoveBy	x=100 time=1				NoWait
+Wait						.5
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	黒背景					0
+CharacterOff						0
+	マグロス	<Off>						おっとー
+Se	光1
+FadeOut	white					.3
+Bg	市街地B					0
+	クレイモア型冥獣		1_2			0
+FadeIn	white					.1
+Shake	クレイモア型冥獣						NoWait
+	クレイモア型冥獣							グォオオ!?
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff						0
+	マグロス	あはは	1_2			0
+	研究員		2_2_b			0
+Tween	研究員	RotateTo	y=180 time=0
+FadeIn	black					.3
+	研究員							え……？
+	マグロス	通常						あぶなかったね、キミ
+	研究員							あ、ありがとう！\nキミは……？
+	マグロス	通常						通りすがりの\nロストちゃんだよ
+	マグロス	あはは						あ、覚えなくていいからね、\n戦ったわけでもないし、\n運が良かったってことでー
+	研究員							助かった！\n本当にありがとう！
+Tween	研究員	RotateTo	y=0 time=0.5
+Tween	研究員	MoveTo	x=800 time=2				NoWait
+Se	走る
+	マグロス	通常						お礼もいらないんだけど……\n気をつけてねー
+StopBgm
+CharacterOff
+Bg	市街地A
+	ディーア	驚き2	2_2_b
+	マグナ	本気	1_2
+	マグナ	悔しい						あいつ……！
+Se	走る
+Tween	マグナ	MoveBy	x=800 time=1.5				NoWait
+Wait						.5
+Bgm	絶望
+CharacterOff
+Bg	市街地B
+	マグロス	通常	3_3_b
+	マグナ	悔しい	画面外_左
+Se	走る
+Tween	マグナ	MoveTo	x=-180 time=1.5				NoWait
+Wait						1
+	マグナ	悔しい						ちょっと、\nどういうつもりよ……！
+	マグロス	通常						あ、やっぱり余計だったよね\nごめん、マグナちゃん
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						そうよ！\nあんたがいなくても、あの人は……
+CharacterOff
+	ディーア	怒り2						いや、オレたちだったら\n間に合わなかったかもしれない
+CharacterOff
+	マグロス	驚き	3_3_b
+	マグナ	悔しい	1_3
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						マスター！\nロストの肩を持つの!?
+CharacterOff
+	ディーア	怒り2						一番がんばったのは、\nもちろんマグナだ
+	ディーア	怒り2						けど、\nオレたちだけでは犠牲者が出た\nその可能性は認めないと
+CharacterOff
+	マグロス	本気	3_3_b
+	マグナ	悔しい	1_3
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						違う！ マグナたちでも助けられた!!\nマグナたちは邪魔されたの!!\nはい論破!!
+CharacterOff
+	ディーア	驚き2						ま、マグナ……？
+CharacterOff
+	マグロス	驚き	3_3_b
+	マグナ	悔しい	1_3
+	マグナ	泣き						あっ……
+	マグロス	驚き						どうして、\nそんなに怒ってるのかな？
+Tween	マグナ	MoveBy	x=30				NoWait
+	マグナ	泣き						あんた、なんなのよ！\n戦わないって言ったのに、\nマグナの邪魔して!!
+	マグロス	あはは						いやぁ、そのつもりだったんだよ？\nロリババァは隅っこに座って\n若い子に任せようって
+	マグロス	通常						でも、ほら\n怪我人が出たらマスターの負けで\nそれは私の負けにもなるから
+	マグロス	通常						こだわりより『負けない』を\n選んだだけ
+	マグロス	本気						勝負じゃないし、\nマグナちゃんが一番なのに\n変わりはないよ？
+	マグナ	本気						そんなの……
+CharacterOff
+	ディーア	驚き2						マグナ？
+CharacterOff
+	マグナ	泣き						そんなの、あたりまえじゃない!!\n論破！ 論破！ 論破！
+Se	走る
+Tween	マグナ	MoveBy	x=800 time=2				NoWait
+Wait						1
+CharacterOff
+	マグロス	本気	3_3
+	ディーア	驚き2	1_3
+	ディーア	驚き2						あ、待て！ マグナ！
+	マグロス	本気						あらら\nマスター、あとでマグナちゃん\n慰めたほうがいいよ？
+	ディーア	怒り2						ああ、そうだな\nそれと、マグナ=ロスト……
+	マグロス	本気						なに？
+	ディーア	怪しい2						オレはまだお前を信用できない
+	ディーア	怒り2						だけど、さっきは助かった\nありがとう
+	マグロス	あはは						うへへへ♪
+	マグロス	あはは						いやー、負けたくないだけなのに、\nお礼を言われたら\n勝ったみたいでくすぐったいねー♪
+	ディーア	怪しい2						けど……\nまだ少しお前を知っただけだ
+	マグロス	通常						そうだねー、なにもせずに\n得られる信用はなし
+	マグロス	通常						なにもしないのが一番だけど、\nちょっとは人助けとか\nやってみようかなー
+	マグロス	あはは						それくらいならいいでしょ？
+	ディーア	通常2						ああ\n人助けなら、な
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A					0
+	マグナ	悔しい				0
+Wait						.5
+FadeIn	black					.3
+	マグナ	悔しい						ふん、だ！ 変態マスター！\nマグナに夢中だと思ってたのに！
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						ロリババァに\n騙されるなんてさいてー！
+	マグナ	悔しい						マグナが世界で一番\nかわいくて強いのに！
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	マグナ	悔しい						…………
+	マグナ	悔しい						マグナより強いやつなんて、\nいるわけないんだから……
+If	isdebug==true
+CharacterOff
+Jump	*E_1011_05
+EndIf
+EndScenario
+
+# E_1011_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	市街地A
+	旅人		画面外_左_b			0
+	酒場のおばちゃん		3_3			0
+Tween	酒場のおばちゃん	RotateTo	y=180 time=0
+	マグロス	あはは	2_3			0
+FadeIn	white					.5
+Tween	マグロス	PunchPosition	y=30				NoWait
+	マグロス	あはは						荷物ここにおいておくよー
+	酒場のおばちゃん							おぉ！ マグロスちゃん！\nありがとうね！\nおかげで助かったよ！
+	マグロス	あはは						いいよー、お礼なんて\nまあ、受け取っておくけどねー
+Tween	旅人	MoveTo	x=-180 time=1.5				NoWait
+Wait						1
+	旅人							俺も！\nこの前は助けてくれてありがとうな
+	マグロス	あはは						マスターにも言っておいてー
+Tween	マグロス	MoveBy	x=800 time=3				NoWait
+Wait						.5
+CharacterOff
+	ディーア	怪しい2						（あれからしばらく経つ……）
+	ディーア	怪しい2						（マグナ=ロストは怪しい素振りを\n　見せたりしない……）
+	ディーア	怪しい2						（むしろ……）
+Se	回想
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+Bg	草原A					0
+CharacterOff						0
+	マグロス	あはは				0
+FadeIn	white					.6
+	マグロス	あはは						負けないように\nサポートだけはしようかなー
+FadeOut	white					.2
+CharacterOff						0
+	マグロス	通常				0
+Bg	廃墟A					0
+FadeIn	white					.2
+	マグロス	通常						勝負とか物騒なことはしないよー\nマグロスちゃんは\n通りすがりに手伝うだけー
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	Sepia				0
+Bg	市街地A					0
+	ディーア	怪しい2				0
+FadeIn	white					.6
+	ディーア	怪しい2						オレに言ったとおり、\n人助けだけをしている
+CharacterOff
+	マグナ	悔しい
+Shake	マグナ		x=5				NoWait
+	マグナ	悔しい						うぅ……\nまた、あいつのこと……！
+StopBgm
+CharacterOff
+	マグナ	悔しい	画面外_左
+	酒場のおばちゃん		3_3
+	ディーア	驚き2	画面外_左_b
+Se	走る
+Tween	マグナ	MoveTo	x=0 time=1.5				NoWait
+	マグナ	悔しい						ねえ、おばちゃん！\nマグナも！\nマグナも前に助けたの覚えてる!?
+Tween	酒場のおばちゃん	RotateTo	y=180 time=0.5
+	酒場のおばちゃん							へ？ あ、そうだったわね！
+Bgm	絶望
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						そうでしょ!?\nあんなロストより、マグナの方が\n役に立ってるでしょ!?
+	酒場のおばちゃん							え？ そ、それは……
+Se	走る
+Tween	ディーア	MoveTo	x=-200 time=1				NoWait
+	ディーア	驚き2						マグナ、そういう言い方は……！
+	マグナ	悔しい						なによ、クズマスター！\nみんなわかってないんだから、\n言うしかないでしょ!?
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	泣き						マグナが倒さないと\nみんなやられちゃってたの！\nはい論破！
+Tween	酒場のおばちゃん	MoveBy	x=-20				NoWait
+	酒場のおばちゃん							だけど、マグロスちゃんも\n助けてくれたし……
+	マグナ	悔しい						あいつは邪魔しただけよ！
+	マグナ	泣き						この間も、その前も……！\nマグナは一人でよかったんだから！
+Se	走る
+Tween	マグナ	MoveBy	x=800 time=2				NoWait
+Wait						1
+	ディーア	驚き2						ちょっと待ってくれ！\nマグナ！
+FadeOut	black					.3
+Bg	酒場_カフェ					0
+CharacterOff						0
+	マグナ	泣き				0
+Wait						.5
+FadeIn	black					.3
+	マグナ	泣き						まったく！\n街の人はわかってないわね！
+	マグナ	悔しい						あんなやつより、\nマグナの方が強くてかわいいって、\n論理的に明らかじゃない！
+CharacterOff
+	マグナ	悔しい	1_3
+	ミョルファ	通常2	3_3_b
+	ミョルファ	通常2						あれ、マグナ様？\nどうされたんですか？\n顔色が……
+	マグナ	通常2						ううん、なんでもないわ！
+Tween	マグナ	MoveBy	x=30				NoWait
+	マグナ	通常2						それより、ミョルファ\nこの後、時間ある？
+	マグナ	通常2						ほら、力の使い方のこと、\n困ってるって言ってたでしょ？
+	マグナ	通常2						私が解決してあげる！\nマグナなら<dash=2>
+	ミョルファ	悲しい2						そ、その……実は……\nそれ昨日教えてもらったんです\n……マグロス様に
+	マグナ	悔しい						な、なんで……!?
+	ミョルファ	通常2						マグロス様、すごいんですよ？\n『知識だけ達者なロリババァ』\nって笑ってましたけど、ちゃんと……
+	マグナ	悔しい						騙されたらだめよ!!
+Tween	ミョルファ	PunchPosition	y=20				NoWait
+	ミョルファ	悲しい2						あぅ……！
+	マグナ	泣き						あいつは油断させて！\nマグナたちを襲う気なの!!\nはい論破!!
+	ミョルファ	悲しい2						で、でも……\nまだ、なにもしていませんし……
+CharacterOff
+	ヨルムンガンド	通常						あらあら、マグナちゃん\nそんなに怒ったら体に悪いですわよ？
+	ヨルムンガンド	通常						気分転換に\n一緒に『よるむんむん』を<dash=2>
+CharacterOff
+	ミョルファ	悲しい2	3_3_b
+	マグナ	悔しい	1_3
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						しない!!\nもう、いいもん！
+	ミョルファ	悲しい2						マグナ様……
+FadeOut	black					.3
+Bg	酒場1F					0
+CharacterOff						0
+	マグナ	泣き				0
+Wait						1
+FadeIn	black					.3
+	マグナ	泣き						わかってない！\nあいつは魔剣を壊す、\nマグナたちの敵なのに!!
+	マグナ	泣き						絶対にマグナが<dash=2>
+	マグナ	悔しい						マグナが…………
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	通常2						そうだ！\nミョルニーお姉ちゃんなら、\nマグナが一番だって……！
+FadeOut	black					.3
+Bg	酒場_宿屋					0
+CharacterOff						0
+	マグナ	通常2				0
+FadeIn	black					.3
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	通常2						ミョルニーお姉ちゃん！\n入るね！
+	ミョルニル	<Off>	2_2					いいわよ
+	マグナ	悔しい						あのね……あっ!?
+CharacterOff
+	ディーア	通常2	3_3
+	マグロス	通常	2_3_b
+	ミョルニル	通常2	p2
+	ミョルニル	通常2						マグナ？
+	マグロス	通常						どうしたの、マグナちゃん？\n気分が悪そうだけど、お茶飲む？
+CharacterOff
+	マグナ	悔しい						お、お姉ちゃん……\nクズマスターまで\nどうして、そいつと一緒にいるの？
+CharacterOff
+	ディーア	通常2	3_3
+	マグロス	通常	2_3_b
+	ミョルニル	通常2	p2
+	ディーア	通常2						マグナ=ロストと話をしていたんだ
+CharacterOff
+	マグナ	悔しい						な、なんでよ……？
+CharacterOff
+	ディーア	通常2	3_3
+	マグロス	通常	2_3_b
+	ミョルニル	通常2	p2
+	ディーア	笑い2						なんでって、出会ってから\n危害を加えてこないし、\n約束通り、街の人を助けてるだろ
+	ディーア	通常2						だから、もう少し\n話を聞こうと思ってな
+	マグロス	あはは						助けたつもりもないけどねー、\n不可抗力に、事故ばっかりだよ\nはい論破ー
+	ディーア	汗2						はは……
+	ディーア	通常2						やる気はともかく\n役に立ってくれてるのは\n本当だからな
+	マグロス	通常						部屋に呼び出されたときは、\nまさか一般通行ロリババァに\n興味ありなのかと思ったけどね？
+	マグロス	通常						で？ 本当に話だけかね？\nそれを建前に言い寄ったりしない？
+	ディーア	驚き2						し、しないって！
+	マグロス	あはは						それはよかった♪\nマスター争奪戦なんて勘弁だからね
+CharacterOff
+	マグナ	悔しい						な、なによマスター、\nデレデレして……!!
+	マグナ	泣き						お、お姉ちゃんは信じてないよね？\nこんなロストのこと!!
+CharacterOff
+	ミョルニル	通常2						そうね、信じていないわ
+	ミョルニル	通常2						けれど……\n論理的に考えて、\n話くらいは聞くべきよ
+CharacterOff
+	マグナ	悔しい						……お姉ちゃん？
+CharacterOff
+	ミョルニル	通常2						それに今、\nこの子の体を調べていたの
+	ミョルニル	通常2						元は同じマグナだし、\nあなたの役にも<dash=2>
+CharacterOff
+	マグナ	泣き						同じじゃない!!
+CharacterOff
+	ミョルニル	通常2						マグナ……？
+CharacterOff
+	マグナ	泣き						同じじゃない！\nそれに役に立つってなに!?
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	泣き						マグナは世界で一番強い魔剣なの！\n他に代わりはいないのよ！
+CharacterOff
+	マグロス	本気	1_2_b
+	ディーア	驚き2	2_2
+	ディーア	驚き2						マグナ、落ち着いてくれ！\nマグナはどうしてそんなに……
+	マグロス	本気						……ごめんね、マグナちゃん
+	ディーア	驚き2						マグナ=ロスト？
+	マグロス	本気						マグナちゃんは、\n私がいたら不快だよね
+	マグロス	本気						ほら、最初のときも\nマグナちゃんの活躍、邪魔したし
+CharacterOff
+	マグナ	悔しい						……っ！
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	イベントスチル101101		エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						1
+FadeOut	white
+Param	character_grayout=true
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場_宿屋					0
+	マグナ	悔しい	3_3			0
+	マグロス	通常	1_3_b			0
+FadeIn	white					.3
+	マグロス	通常						でも安心してよ\n私はロストだから\n世界一強い魔剣はマグナちゃん
+	マグナ	悔しい						うるさい……
+	マグロス	あはは						それに私は勝負をしないし、\n世界一もなにもないでしょ？\n戦わない不戦敗で最下位、はい論破
+	マグナ	泣き						うるさいわよ！\nホントはマグナのこと\n馬鹿にしてるんでしょ!?
+CharacterOff
+	ディーア	本気2						マグナ！\n頼むから、\n少し冷静に話を聞いてくれ！
+	ディーア	怒り2						言い争っている時間はないんだ
+	ディーア	怒り2						アネセサリが動き始めているらしい
+CharacterOff
+	マグナ	悔しい	3_3			0
+	マグロス	通常	1_3_b			0
+	マグナ	悔しい						え……？
+	マグロス	通常						マグロスちゃんが<ruby=アネセサリ>魔人機関</ruby>から\n逃げてきた理由だよ
+	マグロス	通常						大きな戦いの準備をしてたから、\nその前にって
+CharacterOff
+	ディーア	通常2						それが本当なら、\n止めないといけないだろ？
+CharacterOff
+	マグナ	泣き
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	泣き						そんなの嘘に決まってるわよ!?
+CharacterOff
+	ディーア	怒り2						でも、その嘘をつく理由がない
+	ディーア	怒り2						だから、落ちついてくれ
+CharacterOff
+	マグナ	泣き						…………イヤ
+	マグナ	泣き						絶対にイヤ！ \nマグナがイヤなんだからイヤ！\n論破！ 論破！ 論破！
+CharacterOff
+	マグロス	本気	1_2_b
+	ディーア	驚き2	2_2
+	マグロス	本気						じゃあ……\nもっと証明すればいいのかな？
+	ディーア	驚き2						マグナ=ロスト？
+CharacterOff
+	マグナ	本気						…………え？
+CharacterOff
+	マグロス	本気	1_2_b
+	ディーア	驚き2	2_2
+	マグロス	本気						無理に信頼は得られないし、\n成り行きに任せればいいやーって\n思ってたけど
+	マグロス	本気						いざ、<ruby=アネセサリ>魔人機関</ruby>が攻めてきたとき、\nみんなが私を信じてくれないと、\nきっと大変なことになる
+	マグロス	本気						私は勝たなくていいけど、\n負けたくはないの
+	マグロス	本気						だから証明するよ\n私が安全なロストなこと
+StopBgm
+FadeOut	black					1
+Bg	草原A(夜)					0
+CharacterOff						0
+	マグロス	通常	1_3_b			0
+	マグナ	悔しい	3_3_b			0
+FadeIn	black					1
+	マグナ	悔しい						こんなところで、\nなにをするつもりなの……
+	マグロス	通常						うん？\nなんにもしないよ
+	マグナ	本気						は……？
+	マグロス	本気						だって、\n攻撃したら万が一があるでしょ？\nマスターにも止められてる
+	マグロス	本気						だからさ、\nマグナちゃんの気が済むまで、\n私を攻撃していいよ
+Bgm	緊迫
+	マグナ	泣き						ど、どういうことよ!?
+	マグロス	通常						やりたいだけボコボコにしていい\nでも、痛いの嫌だから、\n逃げはするけどね
+	マグロス	本気						私は攻撃しない\nなにがあっても絶対に攻撃しない
+	マグロス	本気						マグナちゃんも、\nもう私の仲間だから
+	マグロス	通常						もし、私が敵なら、\nこんなチャンス逃さないでしょ？\nはい論破
+CharacterOff
+	ディーア	怒り2						マグナ=ロストは\nそれでいいのか？
+CharacterOff
+	マグロス	通常	1_3_b
+	マグナ	悔しい	3_3_b
+	マグロス	通常						手を出さないことを\n証明するなんて、\nこれくらいしないと難しいから
+CharacterOff
+	ディーア	怒り2						わかった\nマグナ、言っておくが
+	ディーア	怒り2						裏切らない限り、\nマグナ=ロストを壊したりしない\nそれでいいな？
+CharacterOff
+	マグナ	悔しい						わかってる……
+	マグナ	悔しい						い、いくわよ……！
+Shake	マグナ		x=2				NoWait
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	マグナ	悔しい						（なんで、手が震えるの？）
+	マグナ	泣き						（チャンスじゃない！\n　マグナがやっぱり一番だって！）
+	マグナ	悔しい						（マグナは世界で一番強いの\n　勝負もしない弱いやつに……）
+	マグナ	泣き						（怖がってなんかない！）
+CharacterOff	黒グラデーション
+	マグナ	泣き						自分で言いだしたんだから、\n覚悟しなさい！
+CharacterOff
+	マグロス	本気						大丈夫、わかってるよ
+	マグロス	通常						お手柔らかにー
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1011_06
+EndIf
+EndScenario
+
+# E_1011_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	草原A(夜)
+	マグナ	悔しい				0
+FadeIn	white					.5
+	マグナ	悔しい						はぁはぁ……!!\nなんで……!!
+	マグナ	泣き						なんで、一発も当たらないのよ!?
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Se	光3
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(青)	マグナ	エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+CharacterOff
+ImageEffectOff	SpriteCamera	Bloom
+Bg	草原A(夜)
+	マグロス	本気
+Tween	マグロス	MoveBy	x=-100				NoWait
+	マグロス	通常						おっと……！
+ImageEffectOff	SpriteCamera	MotionBlur
+	マグロス	本気						あの……大丈夫、マグナちゃん？\nそろそろ止めたほうがいいと思うよ？
+	マグロス	本気						無理して勝つ必要ないし、\n私は証明できればいいだけだから
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	2_2_b
+	マグナ	泣き	1_2
+	マグナ	泣き						うるさい……！
+	ディーア	驚き2						マグナ=ロストの言うとおりだ！\nそれに何時間もたってる！\nこれ以上は……！
+	マグナ	泣き						そうよ！\nなのに一発も当たらないなんて！
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	泣き						マグナのせいじゃない！\nこんなの全部マスターが悪いのよ!!\n論破！ 論破！
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Se	光3
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(青)	マグナ	エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+CharacterOff
+ImageEffectOff	SpriteCamera	Bloom
+Bg	草原A(夜)
+	マグロス	本気
+Tween	マグロス	MoveBy	x=120				NoWait
+	マグロス	本気						うーん、マスターに八つ当たりはね
+FadeOut	black					.1
+CharacterOff						0
+	マグナ	悔しい	2_2_b			0
+	マグロス	本気	p1			0
+Tween	マグロス	MoveBy	x=200				NoWait
+Param	character_grayout=true
+FadeIn	black					.1
+	マグロス	本気						ストップ、マグナちゃん
+Shake	マグナ		x=5				NoWait
+	マグナ	悔しい						は、離してよ……!!
+	マグロス	本気						魔剣は魔剣使いと一緒なんだから、\n独りよがりはダメだよ\nはい論破
+	マグロス	通常						それと、\n今ので十回目
+	マグロス	通常						私がもし敵だったら\nマグナちゃんはもう十回も壊されてた
+ImageEffectOff	SpriteCamera	MotionBlur
+Tween	マグロス	MoveBy	x=-80				NoWait
+	マグロス	本気						そろそろ信じてくれないかな？\n私だってこんなの\nずっとやるのは嫌だよ
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	泣き						違う！ マグナはまだ負けてない！
+	マグロス	本気						だから勝ち負けじゃないのに……\nマグナちゃんは強情だね……
+StopBgm						1
+CharacterOff
+	マグナ	泣き						マグナは負けられない……
+	マグナ	泣き						あんたなんかに負けられない！
+Bgm	魔王バトル
+Param	character_grayout=false
+Se	チャージ
+	オーラ青		エフェクト表			1
+	マグナ	泣き						この世の悪を薙ぎ払うのが、\nミョルニル=マグナの役目！
+	マグナ	泣き						マグナは絶対に……\n勝たないといけないの！
+CharacterOff	マグナ
+	ディーア	驚き2
+	オーラ青		エフェクト表
+	ディーア	驚き2						っ、これは!?
+CharacterOff
+	ミョルニル	通常2						マグナ、あなた!!
+CharacterOff
+	マグロス	驚き						マグナちゃん？\nそれはちょっとまずいと思うよ？
+CharacterOff
+	マグナ	泣き
+	オーラ青		エフェクト表
+	マグナ	泣き						クズマスター！\nもっと出力上げるわよ！\nそうすれば……！
+CharacterOff	マグナ
+	ディーア	本気2
+	ディーア	本気2						マグナ、止めろ！\nこれ以上は無理だ！
+CharacterOff	ディーア
+	マグナ	泣き
+	マグナ	泣き						イヤよ!!\nマグナは勝つの！\nどんなことをしても！
+	オーラ赤		エフェクト表			1
+	マグナ	泣き						だって、\nマグナが世界で一番強いんだから!!
+StopBgm
+Se	ザシュ
+FadeOut	red					.1
+Param	character_grayout=false
+Bg	黒背景					0
+CharacterOff						0
+	          
+FadeIn	red					.1
+	ディーア	<Off>						ぐあぁあああああ!!
+FadeOut	black					.2
+Bg	草原A(夜)					0
+CharacterOff						0
+	マグナ	本気				0
+FadeIn	black					1
+	マグナ	本気						…………え？
+CharacterOff
+	ディーア	悔しい3						くっ…………！
+Param	character_grayout=true
+CharacterOff
+	マグナ	絶望						マス、ター……？\nな、なんでケガ……？
+CharacterOff
+Bgm	絶望
+	マグロス	本気						はぁ……\nケガで済んでよかったよ……
+	マグロス	本気						ヨルムンガンドの力を\n全部引き出そうなんて、\n万全の状態でも無茶なんだから
+CharacterOff
+	マグナ	絶望
+Shake	マグナ		x=2				NoWait
+	マグナ	絶望						ま、マグナ……いま……\nこれ、マグナが……？
+CharacterOff
+	ディーア	悔しい3						だ、だいじょうぶだ……\nこれくらい……
+CharacterOff
+	マグナ	絶望						っ…………！
+	マグナ	泣き						ちょ、ちょっと！\nなにやってるのよ！ バカマスター\nこれじゃあ、負けたみたいじゃない!!
+	マグナ	泣き						もう一度よ！ 今度こそ……！
+CharacterOff
+	ミョルニル	通常2						マグナ
+CharacterOff
+	マグナ	絶望						ち、違うの、お姉ちゃん！\nこんなの、マグナのせいじゃ……
+CharacterOff
+	ミョルニル	通常2						自分でわかっているでしょう？
+	ミョルニル	通常2						あなたの論理は破綻してる\nこれ以上の戦いに、意味はない
+	ミョルニル	通常2						なにより、マスターの怪我は……
+CharacterOff
+	ディーア	悔しい3						ち、違う……
+CharacterOff
+	ミョルニル	通常2						マスター……？
+CharacterOff
+	ディーア	悔しい3						オレが悪いんだ\nマグナは悪くない
+CharacterOff
+	マグロス	本気						マスターは優しいねー\nでも、これだけは言わないと
+	マグロス	本気						ねえ、マグナちゃん
+	マグロス	本気						私たちの内側にあるのは\nミョルニルとヨルムンガンド、\n二つの相反する力なんだよ？
+	マグロス	本気						無理に使おうとしたら\nバランス崩れちゃうのも当たり前\n気をつけないと危険だよ？
+CharacterOff
+	マグナ	絶望						ま、マグナのせいじゃない……
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	悔しい						そ、そう！\nちゃんと使ってくれない\nマスターがわるいのよ……！
+	マグナ	泣き						マスターだって、\n今、認めたじゃない……！\nろん<dash=2>
+CharacterOff
+	マグナ	泣き	2_2
+	ミョルニル	通常2	1_2
+	ミョルニル	通常2						マグナ!!
+	マグナ	絶望						っ……!?
+	ミョルニル	通常2						あなたの負けよ
+Tween	マグナ	MoveBy	x=10				NoWait
+	マグナ	絶望						ま、け……？
+	ミョルニル	通常2						そうよ……
+CharacterOff
+	マグロス	本気						ミョルニーお姉ちゃん、\nそこまで言わないほうが……
+	マグロス	本気						元は私がこんなこと\n持ちかけたのが原因だよ？\n責めるのは私に……
+CharacterOff
+	マグナ	絶望	2_2
+	ミョルニル	通常2	1_2
+	ミョルニル	通常2						私は客観的な事実を言うだけよ
+	ミョルニル	通常2						マグナ、\nあなたはマグナ=ロストにじゃない、\n自分自身に負けているの
+	ミョルニル	通常2						弱さを認められない、\nあなた自身に……
+	ミョルニル	通常2						世界を救う魔剣、\nミョルニル=マグナである意味
+	ミョルニル	通常2						それがわからないかぎり、\nあなたは勝てないわ……論破
+CharacterOff
+	マグナ	絶望						うぅ……
+	マグナ	絶望						ぐ、ぐすっ、\nちがう……、違うもん……！\nまぐな、わるくないもん……！
+Tween	マグナ	MoveBy	x=800 time=2				NoWait
+Se	走る
+	マグナ	絶望						うわぁああああああ!!
+CharacterOff
+	ミョルニル	通常2	1_2
+	ディーア	驚き3	2_2_b
+	ディーア	驚き3						ま、マグナ！ ぐっ！
+	ミョルニル	通常2						すぐに動くのは無茶ですわ
+CharacterOff
+	マグロス	本気						じゃあ、私が探しに……\nいや、それは逆効果だよね……
+CharacterOff
+	ミョルニル	通常2	1_2
+	ディーア	驚き3	2_2_b
+	ディーア	怒り3						ああ、そうだと思う\nマグナ=ロストは先に\n宿に戻っていてくれ……
+CharacterOff
+	マグロス	本気						うん、わかった\nマグナちゃんのことは任せるよ
+Tween	マグロス	MoveBy	x=-800 time=4				NoWait
+Wait						1
+CharacterOff
+	ミョルニル	通常2	1_2
+	ディーア	怒り3	2_2_b
+	ミョルニル	通常2						……あの子のワガママに、\n付き合わせてしまいましたわね
+	ディーア	怒り3						それもマスターの役目だろ？
+	ミョルニル	通常2						はぁ……本当にバカマスター\nあの子も、気づくといいですけれど
+StopBgm
+FadeOut	black					.2
+CharacterOff						0
+Bg	市街地A(夜)					0
+	マグナ	絶望				0
+Wait						.5
+FadeIn	black					.6
+	マグナ	絶望						ぐすっ……\nマグナ、わるくないもん……
+	マグナ	絶望						わるいの、みんなだもん……
+	マグナ	絶望						マグナが一番、つよ……うぅ……
+	マグナ	絶望						マグナ……強くないの？
+	マグナ	絶望						強くないなら……\nマグナは誰なの……？
+	マグナ	絶望						マグナ、どうしたら……
+	マグナ	悔しい						あれ……？
+Param	character_grayout=false
+CharacterOff
+	マグロス	通常
+Wait						.5
+Tween	マグロス	MoveTo	x=-800 time=8				NoWait
+Wait						2
+CharacterOff
+	マグナ	悔しい						今の、マグナ=ロスト？
+	マグナ	悔しい						なんで……\nこんなところに……？
+Bgm	絶望
+Param	character_grayout=false
+FadeOut	black					.2
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+	マグロス	通常				0
+FadeIn	black					.2
+	マグロス	通常						久しぶりだね……
+	マグロス	あはは						マスターは治療中だよー\nだからやっと一人で\n行動させてくれたの
+	マグロス	通常						そろそろマスターも\n私を信用して、\n装備してくれるはず
+	マグロス	あはは						そうすれば、任務完了だよー♪
+	マグロス	通常						魔剣がいくらいようと、\nマスターがいない魔剣は無力
+	マグロス	通常						マスターの体を操れば\nあとはただの作業で壊すだけ\n戦わずに目標達成♪
+CharacterOff
+Bg	市街地A(夜)
+	マグナ	絶望						そ、そんな……？
+	マグナ	絶望						（本当に……\n　あいつ、敵だったの……？）　
+CharacterOff
+	黒グラデーション		エフェクト表
+	マグロス	通常
+	マグロス	通常						そっちの調子は<dash=2>
+CharacterOff	黒グラデーション
+	マグロス	本気						……あれ？\nそこに、誰かいる？
+CharacterOff
+	マグナ	泣き
+Bg	市街地A(夜)
+Tween	マグナ	MoveTo	x=600 time=1.5				Add
+	マグナ	泣き						っ…………！
+CharacterOff
+	黒グラデーション		エフェクト表
+	マグロス	通常
+	マグロス	通常						…………\nあ、もしもし？\nオルタ=ロストちゃん？
+	マグロス	あはは						うん、だからね、\nこっちが終わったら遊びに行くよ
+	マグロス	あはは						……作戦のこと、\n聞かれてよかったか？\nそんなの、もちろん<dash=2>
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	マグロス	<Off>						わざと聞かせたに\n決まってるでしょ？
+If	isdebug==true
+CharacterOff
+Jump	*E_1011_07
+EndIf
+EndScenario
+
+# E_1011_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	市街地A(夜)
+Bgm	絶望
+	マグナ	絶望				0
+FadeIn	black					.5
+	マグナ	絶望						あのロストが、みんなの敵……
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	通常2						やっぱり……\nやっぱり、そうだったんだ！
+	マグナ	通常2						マグナが正しかったんじゃない！
+	マグナ	通常2						よかったのよ！\n本当にあいつが敵で！
+	マグナ	通常2						これでバカマスターたちも！\nマグナのこと……！
+FadeOut	black					.2
+StopBgm
+Se	走る
+Bg	酒場1F					0
+CharacterOff						0
+	マグナ	通常2	1_3			0
+FadeIn	black					.6
+Tween	マグナ	MoveBy	x=100				NoWait
+	マグナ	通常2						マスター!!
+	ディーア	驚き3	2_2_b
+	ディーア	驚き3						マグナ!! よかった！\n今から探しに行こうと<dash=2>
+	マグナ	通常2						にし、にしし……！
+	ディーア	驚き3						マグナ……？
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	通常2						いい、クズマスター！\n聞いて驚きなさい！
+	マグナ	通常2						それでマグナのこと、\n褒めて甘やかすのよ！
+Bgm	緊迫
+CharacterOff
+	マグナ	通常2
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	通常2						マグナが言ってたこと、\n本当だったの！
+	マグナ	通常2						マグナ=ロストは敵だったのよ！
+CharacterOff
+	ディーア	驚き3						……え？
+StopSe
+CharacterOff
+	マグナ	通常2						あっさり騙されるなんて！\nほんとに論理的じゃないわね♪
+	マグナ	通常2						マグナが正しかったの！\nあいつは味方のフリをして\n攻撃するつもりだったのよ！
+	マグナ	通常2						やっぱりマグナが一番なのよ！\nだってマグナが突き止めたんだから!!
+CharacterOff
+	ディーア	怒り3						…………
+CharacterOff
+	マグナ	通常2						はやく、あのロストを<dash=2>
+StopBgm						1
+	マグナ	悔しい						あれ……？
+	マグナ	悔しい						どうしたの、マスター？
+	マグナ	悔しい						マグナのこと、\nほめない、の……？
+CharacterOff
+	ディーア	怒り3
+	ディーア	怒り3						…………
+	ディーア	通常3						マグナ、疲れてるだろ？\n少し落ち着こう
+Bgm	絶望
+CharacterOff
+	マグナ	悔しい
+	マグナ	悔しい						えっ……？
+	マグナ	泣き						そ、そんな場合じゃないでしょ!?\n敵がすぐ近くにいるのよ！\n早く戦わないと!!
+CharacterOff
+	マグナ	悔しい	1_3
+	ディーア	怒り3	3_3
+	ディーア	怒り3						敵……\nマグナ=ロストのことか？
+	マグナ	泣き						当たり前でしょ!?\nマグナ聞いたの！\nあいつが、仲間と話しているの!!
+	ディーア	通常3						マグナ……\nマグナ=ロストは争う気はないんだ\nさっきもお前のことを気にしてた
+	ディーア	通常3						だから、\nそんなことをしなくても……
+	マグナ	絶望						そ、そんなことってなに……？\nマグナのこと、信じてないの……？
+	ディーア	通常3						そうじゃない\nでもマグナ=ロストのことでは、\nマグナは冷静じゃないだろ？
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	絶望						違う！\n嘘なんてついてない……！
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	絶望						ほんとなのよ！\nほんとにあいつは敵だったの!!\nマグナ、話を聞いたの！
+	マグナ	絶望						マスターなら一緒に戦ってよ！\nそれで証明してよ！\nマグナが一番だって！
+CharacterOff
+	マグロス	通常						なんの話をしているの？
+CharacterOff
+	マグナ	悔しい						っ……!?
+	マグナ	悔しい						マグナ、ロスト……!!
+CharacterOff
+	マグロス	通常						騒がしいのは嫌なんだけどなー\n怒らずにのんびりが一番だよ？\nはい論破
+CharacterOff
+	マグナ	悔しい						……マグナ、聞いたんだから
+CharacterOff
+	マグロス	通常						なにを？
+CharacterOff
+	マグナ	悔しい						あんたの、計画……
+CharacterOff
+	マグロス	本気						なにそれ？\nそんなのないよ？
+CharacterOff
+	マグナ	悔しい
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	泣き						嘘つき！\nみんなを壊すって言ったじゃない！
+CharacterOff
+	マグロス	本気						……その話、誰が信じてるの？\nねえ、"みんな"？
+CharacterOff
+CharacterOff
+	酒場のおばちゃん		1_3
+	研究員		2_3
+	旅人		3_3
+	旅人							いやいや！
+	研究員							俺たちも聞いてたけど、\nお嬢ちゃんのイタズラだよ！
+CharacterOff
+	マグナ	悔しい	3_3
+	マグロス	本気	1_3_b
+	マグナ	泣き						違う！\nみんなが騙されてるの！ 論破！
+	マグロス	本気						うーん、\n私は身に覚えが……
+	マグナ	悔しい						このっ……！
+	マグナ	泣き						ごまかさないで！\n早く正体を見せなさいよ!!
+Tween	マグナ	PunchPosition	x=-100				NoWait
+Se	パリン
+FadeOut	white					.1
+FadeIn	white					.1
+Tween	マグロス	MoveBy	x=-50
+	マグロス	泣き						いたたぁ……
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	泣き						嘘ついて、騙して！\nマグナが今から……！
+CharacterOff
+	ディーア	驚き3						ダメだ、マグナ！\nそんなことしたら……！
+CharacterOff
+	マグナ	絶望						な、なんで!?\nなんで、わかってくれないのよ!?
+	マグナ	絶望						マグナのこと\n信じられないの!?
+Param	character_grayout=false
+CharacterOff
+	酒場のおばちゃん		1_3
+	研究員		2_3
+	旅人		3_3
+	客							………………
+Param	character_grayout=true
+CharacterOff
+	マグロス	本気	1_3_b
+	マグナ	絶望	3_3
+	マグナ	絶望						だれも……\n信じてくれないの……？
+	マグナ	絶望						そ、そんな…………
+Tween	マグロス	MoveBy	x=20				NoWait
+	マグロス	本気						マグナちゃん、もうやめない？
+	マグロス	通常						勝ちたい気持ちはわかるよ？\n私だってマグナだったから
+	マグロス	本気						でもさ、勝ちたいからって、\n嘘ついても仕方ないでしょ？
+	マグロス	通常						大丈夫、\nマスターもマグナちゃんのことが\n嫌いになったわけじゃないよ？
+Tween	マグロス	MoveBy	x=100				NoWait
+	マグロス	通常						ただ、今のマグナちゃんは\n自分を見失ってるだけで……
+Tween	マグナ	PunchPosition	y=30				NoWait
+Tween	マグナ	MoveBy	x=50				NoWait
+	マグナ	絶望						さ、触らないで!!
+	マグナ	絶望						マスター!!\n早くマグナを装備して!!\nこのままじゃ……
+CharacterOff
+	ディーア	驚き3	2_2
+	リディ	悔しい2	1_2
+Tween	リディ	MoveTo	x=0 time=1				NoWait
+	リディ	悔しい2						だ、ダメだよ！ マグナちゃん!!
+CharacterOff
+	マグナ	悔しい						っ!? リディ、ちゃん……？
+CharacterOff
+	ディーア	驚き3	2_2
+	リディ	悔しい2	2_3
+	リディ	悔しい2						マスター、\nひどい怪我してるんだよ？\n戦うなんてできないよ！
+	ディーア	驚き3						待て! オレは<dash=2>
+CharacterOff
+	マグロス	本気						あのマスターの怪我、\nマグナちゃんのせいでしょ？
+CharacterOff
+	マグナ	絶望						そ、それは……
+CharacterOff
+	マグロス	本気						マグナちゃん、もう止めよう
+	マグロス	本気						文句ばっかり言ってたら\n子どもにしか見えないよ？
+	マグロス	本気						信じてほしいならさ、\nマグナちゃんも\nもう少し大人になろうよ？
+CharacterOff
+	マグナ	絶望						ち、ちがう、マグナは……！
+CharacterOff
+	マグロス	通常						それとも……\nまた、戦う？
+	マグロス	通常						私は勝負しないけど、\n勝手に挑んできてもいいよ？
+	マグロス	本気						でも……\nそんなに震えてたら\n戦えないよね？
+CharacterOff
+	マグナ	絶望						…………っ！
+Se	走る
+Tween	マグナ	MoveBy	x=-800 time=1.5				NoWait
+Wait						.5
+FadeOut	black					1
+Bg	市街地A(夜)					0
+CharacterOff						0
+	黒グラデーション		エフェクト裏			0
+	マグナ	絶望				0
+Wait						.5
+FadeIn	black					1
+	マグナ	絶望						はぁ、はぁ……
+Shake	マグナ		x=5				NoWait
+	マグナ	絶望						ま、まだ手が……
+	マグナ	絶望						止まって……！\n止まってよ……！
+	マグナ	絶望						マグナは強いの、マグナは強いの……\nマグナは世界で一番……
+	マグナ	絶望						世界で一番……
+	マグナ	泣き						つよく、ない……
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	マグナ	絶望						うぅ…ま、まぐな……\nまぐなが、いちばんじゃ、ない……!!
+	マグナ	絶望						ぐすっ、うぅ……\nうぅううううう……！
+	マグナ	泣き						どうして……\nどうして、信じてくれないのぉ……！
+	マグナ	泣き						みんな、やられちゃうのに……\n知ってるの、マグナだけなのに……
+	マグナ	泣き						マグナだけじゃ……\nあいつに勝てないのに……!!
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+	マグロス	通常	1_3_b			0
+	マグナ	絶望	3_3			0
+FadeIn	white					.2
+	マグナ							マグナが嫉妬したから？\nチャンスだと思ったから？
+FadeOut	white					.2
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原A					0
+	イベントスチル101101		エフェクト表			0
+	          					0
+FadeIn	white					.2
+	マグナ	<Off>						でも、悔しかったの！\nわかってたから！\nあいつのほうが強いって……!!
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A(夜)					0
+	黒グラデーション		エフェクト表			0
+	マグナ	絶望				0
+FadeIn	white					.3
+	マグナ	絶望						だから、一人じゃ、むりだよぉ……
+	マグナ	絶望						ぐすっ、ひっく、ひっく……\nこわい……、こわい…………！
+	マグナ	絶望						マスター……\nお姉ちゃん……たすけて……\nいっしょにたたかって……！
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原A					0
+	ディーア	本気2	2_2_b			0
+	マグナ	通常2	1_2			0
+FadeIn	white					.2
+	マグナ							いつもみたいに、\nマグナと……!!
+StopBgm
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A(夜)					0
+	黒グラデーション		エフェクト表			0
+	マグナ	泣き				0
+FadeIn	white					.2
+	マグナ	悔しい						いつも、みたいに……
+CharacterOff	黒グラデーション
+	マグナ	悔しい						そっか…………\nそう、だった…………
+	マグナ	悔しい						いつも、\n一人じゃ勝てなかった……
+	マグナ	悔しい						最初から、\n一人じゃなにもできなかった……
+	マグナ	悔しい						お姉ちゃんたちが……\nマスターが、助けてくれてた……
+Se	回想
+FadeOut	white					.2
+Param	character_grayout=true
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地B					0
+	ディーア	驚き2	2_2			0
+	ミョルニル	通常2	1_2			0
+FadeIn	white					.6
+	ミョルニル	通常2						私に隠れてマグナに\nイタズラしていたなんて！
+FadeOut	white					.2
+CharacterOff						0
+Bg	酒場1F					0
+	ミョルファ		3_3			0
+	ヨルムンガンド	通常	1_3			0
+FadeIn	white					.2
+	ヨルムンガンド	通常						あなたには\nヨル様譲りの邪竜の力が\n宿っているんだから♪
+FadeOut	white					.2
+CharacterOff						0
+Bg	草原A					0
+	マグナ	通常	1_2			0
+	ディーア	本気2	2_2_b			0
+FadeIn	white					.2
+	ディーア	本気2						いくぞ、マグナ!!
+FadeOut	white					.6
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A(夜)					0
+	マグナ	悔しい				0
+FadeIn	white					.2
+	マグナ	悔しい						なのに、マグナ……
+Se	回想
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原A					0
+	ディーア	驚き2	2_2_b			0
+	マグナ	通常2	1_2			0
+FadeIn	white					.6
+	マグナ	通常2						論理的に、マグナ一人で\nなんでも解決できちゃうの♪\nはい論破♪
+FadeOut	white					.6
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A(夜)					0
+	マグナ	悔しい				0
+FadeIn	white					.2
+	マグナ	悔しい						…………っ
+Bgm	凱旋
+	マグナ	悔しい						こわがってたら、ダメ……
+	マグナ	悔しい						勝てないなんて、\n思ったらダメ……
+	マグナ	本気						お姉ちゃんたちが大好きだから
+	マグナ	本気						マスターも\nバカで、変態だけど、好きだから
+	マグナ	本気						ミョルファやみんなも\n大切だから……
+	マグナ	本気						あんなロストに\n壊させない……！
+CharacterOff
+	マグナ	本気拡大	エフェクト表
+	マグナ	本気拡大						マグナが、勝つの……\n一人でも戦って、\nみんなを守るの……！
+	マグナ	本気拡大						だって、マグナは……!!
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1011_08
+EndIf
+EndScenario
+
+# E_1011_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	酒場1F
+	研究員		1_3_b			0
+	旅人		2_3_b			0
+	マグナ	泣き	3_3			0
+FadeIn	black					.5
+	マグナ	泣き						お願い！ 話を聞いて！
+	マグナ	泣き						嘘じゃない！\nロストは本当に敵なの！\nこのままじゃやられちゃう！
+	研究員							行こうぜ
+Tween	研究員	MoveBy	x=800 time=2				NoWait
+Tween	旅人	MoveBy	x=800 time=2				NoWait
+	マグナ	泣き						っ……！\nこ、このくらい平気だから！
+FadeOut	black					.3
+CharacterOff						0
+	マグナ	泣き				0
+Bg	市街地A(夜)					0
+Wait						.5
+FadeIn	black					.3
+	マグナ	泣き						マスター!!
+CharacterOff
+	ディーア	驚き2						マグナ、大丈夫か？ 最近<dash=2>
+CharacterOff
+	マグナ	悔しい						マグナのことはいいの！\nそれよりロストは本当に……！
+CharacterOff
+	マグロス	通常	2_3					今度はマスターに悪口かい\nマグナちゃん？
+CharacterOff
+	マグナ	悔しい						……っ!?
+CharacterOff
+	ディーア	驚き2	1_2_b
+	マグロス	通常	2_2
+	マグロス	通常						悪口なんてやめようよ\n強い言葉、マグロスちゃんは反対ー
+CharacterOff
+	マグナ	悔しい						っ……！\nあんたの思い通りに、させないから
+CharacterOff
+	ディーア	驚き2	1_2_b
+	マグロス	通常	2_2
+	マグロス	本気						また？\nそれ、もうやめてよー\nせっかくマスターが<dash=2>
+	マグロス	通常						私を装備してくれるって\n言ったのに
+CharacterOff
+	マグナ	悔しい						……っ!!\nほ、本当なの、マスター!?
+CharacterOff
+	ディーア	驚き2	1_2_b
+	マグロス	通常	2_2
+	ディーア	驚き2						い、いつかはって話だ！
+	ディーア	通常2						監視も長くなったが、\nおかしな行動は見えない
+	ディーア	通常2						ロストを装備できることは\nこれまでにわかってるからな
+	マグロス	通常						私は楽しみなんだよね\n元魔剣としては、\n装備されるって信頼の証でしょ？
+	マグロス	通常						私は怪我させたりしませんって、\n確証がないと、\n装備なんてできないから
+CharacterOff
+	マグナ	泣き						ダメよ！ \nそうしたら、マスターが操られて……
+CharacterOff
+	ディーア	驚き2	1_2_b
+	マグロス	通常	2_2
+	マグロス	通常						またそんなこと言って
+	マグロス	通常						そんなチャンスがあったら、\nこれまでも暴れているよねー\nはい論破
+CharacterOff
+	マグナ	泣き						魔剣を壊すつもりで……！
+CharacterOff
+	ディーア	驚き2	1_2_b
+	マグロス	通常	2_2
+	マグロス	通常						マグナちゃんを壊さなかったよね\nはい論破
+CharacterOff
+	マグナ	泣き						マグナ=ロストは敵なの……！
+CharacterOff
+	ディーア	驚き2	1_2_b
+	マグロス	通常	2_2
+	マグロス	本気						うーん、嘘つきって言われて\n意固地になっちゃったかな？
+	マグロス	通常						マスター、\n落ち着くまで待ってあげようよ
+CharacterOff
+	マグナ	泣き
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	泣き						ち、違うの！ 話を聞いて！
+CharacterOff
+	ディーア	怒り2	1_2_b
+	マグロス	通常	2_2
+	ディーア	怒り2						マグナ、\nマグナ=ロストの言うとおりだ\n少し落ち着いてくれ
+	マグロス	通常						マスター行くよー
+	ディーア	通常2						ああ
+Tween	ディーア	MoveBy	x=-800 time=2				NoWait
+Tween	マグロス	MoveBy	x=-800 time=2				NoWait
+Wait						2
+CharacterOff
+	マグナ	悔しい						だめ……\nこのままじゃ……
+CharacterOff
+	マグナ	悔しい	3_3_b
+	ミョルニル	通常2	1_2
+	ミョルニル	通常2						マグナ
+Tween	マグナ	MoveBy	x=-20				NoWait
+	マグナ	悔しい						お姉ちゃん！\nあ、あのね……
+	ミョルニル	通常2						少し落ち着きなさい
+	マグナ	悔しい						で、でも……
+	ミョルニル	通常2						いい、よく聞いて\nあなたは一人じゃない
+	ミョルニル	通常2						私も……ヨルムンガンドもいる\n一人で必死にならなくても<dash=2>
+	マグナ	泣き						ダメ!!
+	ミョルニル	通常2						マグナ？
+	マグナ	泣き						マグナは\n頑張らないとダメなの！
+	ミョルニル	通常2						それは……\nロストを見返したいから？
+	マグナ	泣き						ううん……\nだって、マグナはみんなを……
+	マグナ	泣き						みんなを守る、\n世界一強い魔剣だから！
+	ミョルニル	通常2						そう……\nだったらなにをするべきか、\nよく考えなさい……
+Tween	ミョルニル	MoveBy	x=-800 time=2				NoWait
+Se	走る
+Wait						1
+FadeOut	black					.3
+CharacterOff						0
+	マグナ	悔しい				0
+Bg	酒場_宿屋(夜)					0
+Wait						1
+FadeIn	black					.3
+	マグナ	悔しい						ダメ、みんな信じてくれない\n時間も、もうない……
+	マグナ	本気						だけど、それは予想できたわよ\nはい論破
+	マグナ	本気						考えるの……\nマグナだけで勝つ方法\nマグナにとっての勝ち……
+	マグナ	本気						……うん、\nこれしかないよね\n元はマグナのせいだもん
+FadeOut	black					.3
+CharacterOff						0
+	マグナ	本気				0
+Bg	草原A(夜)					0
+Wait						1
+FadeIn	black					.5
+	マグナ	本気						やっと来たわね……
+CharacterOff
+	マグナ	本気	3_3
+	マグロス	通常	1_3_b
+	マグロス	通常						……どうしたの？\n急に呼び出して
+	マグナ	本気						あんたに勝つの
+	マグロス	通常						マグロスちゃん、\n勝負はしないよ？
+	マグナ	本気						いいのよ\nあんたが勝負しなくても\nこれはマグナの勝負だから!
+ImageEffect	SpriteCamera	MotionBlur
+Tween	マグナ	MoveBy	x=-380				NoWait
+Se	打1
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.1
+Tween	マグロス	MoveBy	x=380				NoWait
+	マグロス	驚き						おっと？
+	マグロス	通常						論理的じゃないね？\n魔剣少女が生身で戦っても\n意味ないよ？
+	マグナ	悔しい						わかってるわよ！\nでも、もうこれしかない……！\nみんなを守るにはこれしか!!
+	マグナ	悔しい						一人でも、あんたを倒すの！
+	マグナ	悔しい						（来なさい……！）
+CharacterOff
+	マグロス	本気						……これって\n正当防衛になるよね？
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(赤)	マグロス	エフェクト裏			0
+Se	闇3
+Tween	黒背景	MoveBy	y=-3000 time=0.8
+ImageEffectOff	SpriteCamera	MotionBlur
+Wait						.3
+CharacterOff
+Bg	草原A(夜)					0
+	マグナ	絶望				0
+Shake	Graphics		x=5				NoWait
+	土煙		エフェクト表
+	マグナ	絶望						きゃぁああああ!!
+CharacterOff	土煙					1
+Wait						1
+Tween	マグナ	MoveBy	y=-100 time=1.5				Add
+	マグナ	絶望						あっ……、がはっ……！
+Wait						1
+	マグナ	悔しい						ま、まだ、よ……
+Tween	マグナ	MoveBy	y=100 time=2				NoWait
+Wait						.5
+Param	character_grayout=true
+CharacterOff
+	マグロス	本気						えぇ……\nまだやるの？
+CharacterOff
+	マグナ	悔しい						わかる、でしょ……？\nマグナは、あきらめないから……！
+	マグナ	悔しい						邪魔でしょ？ 目障りでしょ？\nでも、残念でした！\nマグナちゃんは勝つまでやるの！
+	マグナ	泣き						あんたがボロを出さなくても、\n誰かが信じてくれるまで、\n大声で叫び続けてやる……！
+CharacterOff
+	マグロス	本気						…………
+	マグロス	本気						ボロとか、信じるとか\nわからないけど、\nさすがに迷惑すぎるよね……
+Param	character_grayout=false
+CharacterOff
+	マグナ	本気	1_3_b
+	マグロス	本気	3_3
+ImageEffect	SpriteCamera	MotionBlur
+Tween	マグロス	MoveBy	x=-100 time=1				NoWait
+Wait						.5
+ImageEffectOff	SpriteCamera	MotionBlur
+FadeOut	black					.1
+CharacterOff						0
+Bg	黒背景					0
+	マグナ	本気				0
+FadeIn	black					.1
+	マグナ	本気						（これで、いい\n　これで、こいつはマグナを壊す\n　壊す理由も状況もあげた）
+	マグナ	本気						（でも、マスターなら、\n　マスターだったら……）
+	マグナ	本気						（マグナがいなくなったら、\n　ロストが敵だったって、\n　気づいてくれる……！）
+	マグナ	本気						（魔剣を壊したやつを、\n　マスターが信じるわけないから）
+	マグナ	泣き						（……こんなことしたら、\n　お姉ちゃんたちは怒るよね\n　ミョルファは泣いちゃうよね）
+	マグナ	泣き						（マスターも優しいから、\n　きっと、悲しむよね……）
+	マグナ	本気						（でも、そんなみんなだから、\n　マグナはワガママも言えた\n　すごく幸せだった）
+	マグナ	本気						（だから……\n　みんなを助けるためなら、\n　みんなが勝つためなら……！）
+FadeOut	white					.3
+Bg	草原A(夜)
+	マグナ	本気				0
+FadeIn	white					.3
+	マグナ	本気						マグナは……！
+StopBgm
+CharacterOff
+	マグロス	あはは						なんちゃって♪
+Param	character_grayout=true
+CharacterOff
+	マグナ	悔しい	1_3_b
+	マグロス	あはは	2_3
+Tween	マグロス	PunchPosition	y=30				NoWait
+Tween	マグロス	MoveBy	x=100				NoWait
+	マグナ	本気						えっ……
+	マグロス	あはは						やらないよー♪
+	マグロス	あはは						言ったでしょ？\nマグナちゃんを壊さない\n勝負の場にも立たない
+	マグロス	あはは						そんな必要、ないから♪
+CharacterOff
+	ディーア	驚き2	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=60 time=1.5				NoWait
+	ディーア	驚き2						マグナ!? マグナ=ロスト!?
+CharacterOff
+	マグロス	通常						おぉ、マスター！\nやっと来てくれたねー
+CharacterOff
+	マグナ	悔しい						マスター……!?\nなんで……
+CharacterOff
+	マグロス	通常						私が呼んだんだよ\nマグナちゃんの様子、\nおかしかったから
+	マグロス	通常						でもごめんね、マスター\n力、使っちゃった
+	マグロス	通常						いきなり襲われて、\nしかたなかったんだ\nほら、少し傷あるでしょ？
+	マグロス	本気						でも、ちゃんと壊さずに止めたよ？\nだって、マグロスちゃん\nマスターの仲間だからね？
+CharacterOff
+	マグナ	絶望						…………まさか
+Bgm	絶望
+CharacterOff
+	マグロス	本気						マスター、\nこれで私を信じてくれるよね？
+CharacterOff
+	マグナ	泣き						マグナ=ロスト！\nあんた、このために……!!\nマグナを使ったのね!?
+CharacterOff
+	マグロス	本気						やめてよ、そういう陰謀論は\nはい論破
+	マグロス	通常						マスター、\n私も少しは不安なんだよ？
+	マグロス	泣き						マグナちゃんに目の敵にされて\n大勢の前で信じないって言われて\n最後は襲われて……
+	マグロス	泣き						私がどれだけ証明しても、\nマグナちゃんは信じてくれない
+	マグロス	通常						だから、ここではっきりさせよう
+	マグロス	通常						私を装備して\nマグナちゃんに見せてあげるの
+	マグロス	通常						ほら、\nなにもなかったでしょ？ って
+CharacterOff
+	マグナ	絶望						だ、ダメよ！ マスター！
+Shake	マグナ		x=2				NoWait
+	マグナ	絶望						ちが、それは……\nわ、わなで……!!
+CharacterOff
+	マグロス	通常	1_3
+	ディーア	怒り2	3_3
+	ディーア	怒り2						そうか……\n今度もマグナを\n壊さなかったんだな？
+	マグロス	通常						もちろんだよー♪
+	ディーア	通常2						わかった……\nマグナ=ロストの気持ちを信じる
+	マグロス	通常						ありがとう\nじゃあ、\nマスターとの信頼の証くれる？
+CharacterOff
+	マグナ	絶望						だ、だめ……！
+CharacterOff
+	マグロス	通常	1_3
+	ディーア	通常2	3_3
+	ディーア	通常2						大丈夫だ、マグナ\nマグナ=ロストを装備するだけ\nそれで、この争いは終わりだろ？
+	マグロス	通常						うんうん♪\n戦わずに終わらせられる♪
+	マグロス	通常						マグナちゃんもわかったでしょ？\n戦って負けることが、\nどんなに痛くて、苦しいか
+	マグロス	通常						戦わなければいいんだよ
+	マグロス	通常						勝つのを諦めないと\nいつか全部失くしちゃうよ？
+CharacterOff
+	マグナ	泣き						だめ……負けない！\nマグナは、勝つ……！
+	マグナ	泣き						だって……
+	マグナ	悔しい						マグナが負けたら\n世界一じゃなくなったら……
+	マグナ	悔しい						マスターが\n世界で一番のマスターじゃなくなる
+	マグナ	悔しい						お姉ちゃんたちが\n世界で一番のお姉ちゃんたちじゃ\nなくなっちゃう…！
+	マグナ	泣き						気づいたの……\nマグナはみんなのおかげで\nマグナだって……
+	マグナ	泣き						だから、絶対に勝つの……！
+CharacterOff
+	マグロス	通常	1_3
+	ディーア	驚き2	3_3
+	マグロス	通常						それじゃあ、\n勝手に勝負して、\n勝手に負ければいいよ
+	マグロス	通常						マグロスちゃんは\n勝負しないから
+	マグロス	通常						さあ、マスター？
+	マグロス	通常						マスターの言うことを聞かないで、\n暴れちゃったマグナちゃんか、\n争いが嫌いなマグロスちゃんか
+	マグロス	通常						どっちを信頼する？
+	ディーア	怒り2						ああ、そうだな……\nオレが信じるのは……
+Tween	ディーア	MoveBy	x=-50				NoWait
+CharacterOff
+	マグナ	泣き						マスター!!
+Param	character_grayout=false
+CharacterOff
+	ディーア	怒り2
+	※※※※		2_2
+Se	チャージ
+	オーラ青		エフェクト表			1
+	※※※※							<color=mk2wisp>魔核エーテライト認識\nコード：アンロック承認\nシステム：ブレイブソード展開</color>
+	※※※※							<color=mk2wisp>ネフィリム機関をオーバーロードし\n環境変数をブレイズゼロに固定\n魔力結晶体構築<dash=4></color>
+CharacterOff						0
+Bg	黒背景					0
+	          
+	マグロス	<Off>						ふふ♪
+StopBgm
+CharacterOff
+Bg	草原A(夜)
+	マグナ	絶望						だめぇええええええええ!!
+CharacterOff
+	ディーア	本気2
+	ディーア	本気2						今だ！ ミョルニル!!
+Param	character_grayout=false
+CharacterOff
+	ミョルニル	通常2
+	オーラ青		エフェクト表			1
+	ミョルニル	通常2						わかってるわよ、\nこのクズマスター!!
+Se	チャージ
+ImageEffect	SpriteCamera	Bloom
+FadeOut	white					3
+CharacterOff						0
+Se	スローモーションエンド
+Se	光1
+Se	剣閃
+Wait						.15
+Se	光1
+Se	剣閃
+Wait						.15
+Se	光1
+Se	剣閃
+Wait						.15
+Se	光1
+Se	剣閃
+FadeOut						1	NoWait
+Wait						.15
+Se	光2
+Se	剣閃
+Wait						.15
+Se	光3
+Se	剣閃
+Wait						2
+Se	光3
+Bg	魔術空間					0
+	          
+ImageEffectOff	SpriteCamera	Bloom
+FadeIn	white					1.5
+Wait						1
+CharacterOff	オーラ青					1
+Bgm	勇者バトル
+	マグナ	本気					1	えっ……？\nこ、これって？
+CharacterOff
+	マグロス	本気						……結界、だね\nいったいどういうことかな？
+CharacterOff
+	ディーア	本気2						簡単だ！\nオレは、オレたちは<dash=2>
+	ディーア	本気2						マグナを信じる！
+Param	character_grayout=true
+CharacterOff
+	マグロス	通常						へぇ……♪\nミョルニーお姉ちゃんが\n用意したのかな？
+CharacterOff
+	ミョルニル	通常2						まったく！\nロストを閉じ込める特殊結界なんて\n手間取ったわよ！
+	ミョルニル	通常2						しかも、マグナが傷ついているのに\nここまで我慢させるなんて……！
+CharacterOff
+	マグロス	あはは						ああ、そっか……\nあのときに調べてたものねぇ
+CharacterOff
+	ミョルニル	通常2						信用させるために、\n任せたんでしょうけど、\n軽率だったわね、はい論破！
+CharacterOff
+	ディーア	悔しい2	2_2
+	マグナ	悔しい	1_2
+	マグナ	悔しい						え……？\nどういう、こと……？
+	ディーア	悔しい2						すまなかったマグナ！\n辛い目にあわせて！
+CharacterOff
+	ヨルムンガンド	通常	1_3
+	ミョルファ	悲しい2	3_3
+Tween	ミョルファ	PunchPosition	y=30				NoWait
+	ミョルファ	悲しい2						大丈夫ですか、マグナ様!?
+	ヨルムンガンド	通常						こんなにボロボロになって！\nはい、エメラルドありますわよ！
+CharacterOff
+	ディーア	怒り2	2_2
+	マグナ	泣き	1_2
+	マグナ	泣き						ミョルファに……\nヨルムンお姉ちゃんも……？
+	マグナ	泣き						どうして？\nみんな、ロストを信じてたんじゃ
+CharacterOff
+	マグロス	通常						そっかー\nまんまと踊らされたというわけだ
+CharacterOff
+	ディーア	怒り2	2_2
+	マグナ	泣き	1_2
+	ディーア	怒り2						最後まで半信半疑だったよ\nけれど、オレはお前より\nマグナのことを知っている
+	ディーア	怒り2						マグナはワガママで、\nお調子者で、プライド高い子どもで、\nオレたちを振り回してばかりだ
+	ディーア	本気2						でもマグナは\n本当に酷いことはしない
+	ディーア	怒り2						今のマグナが\n誰のために戦ったか、\nその真実くらいはわかるさ
+	ディーア	通常2						はい論破、だ！
+	マグナ	泣き						マスター……
+CharacterOff
+	マグロス	あはは						そういうマスターだからこそ\n効くはずの作戦だったけど、\n最後は重ねた時間か……
+CharacterOff
+	ミョルニル	通常2						最初からマグナの嫉妬を\n利用するつもりだったのね？
+	ミョルニル	通常2						そして、マグナを貶めて、\n自分の信頼を高める
+	ミョルニル	通常2						バカマスターのようなお人好しは、\n優しい態度を見せるのが\n信頼を得る一番の方法だもの！
+CharacterOff
+	マグロス	あはは						そりゃあ、自分だから\nなにをすればどう動くか、\n手にとるようにだよ
+	マグロス	通常						でも、\n最後だけは少し計算外
+	マグロス	通常						マグナは私のように\nもっと自己中心的な子だった\nはずなんだけどねー
+CharacterOff
+	ミョルニル	通常2						マグナも日々成長しているの！\nこれであなたは終わりよ、\nはい論破！
+CharacterOff
+	マグナ	泣き						じゃあ、みんなもマグナを信じて……\nよかったぁ……！
+CharacterOff
+	ミョルニル	通常2	p2b
+	マグナ	泣き	2_3
+	ヨルムンガンド	通常	p8b
+	ヨルムンガンド	通常						よくないですわよ！
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	泣き						えぇっ!?
+	ミョルニル	通常2						ヨルムンガンドの言うとおりよ！\n間に合ったから良かったものの\n自分の身を差し出そうなんて！
+	ミョルニル	通常2						私たちがどれだけ心配したか！\n勝つためとは言え、最低の作戦よ！\nはい論破！
+	マグナ	泣き						ご、ごめんなさい……
+	ミョルニル	通常2						でも……\nあなたが最後まで諦めなかったから、\nロストを油断させられた
+	ミョルニル	通常2						ありがとう、マグナは強いわね
+	マグナ	悔しい						お姉ちゃん……
+StopBgm
+CharacterOff
+	マグロス	あはは						いいねぇ、\n主人公って感じだねー\nいつでも勝っちゃう物語の王道だ
+	マグロス	通常						それで？\n囚われのマグロスちゃんを\nどうするつもりだい？
+CharacterOff
+	ディーア	怒り2						……マグナ=ロスト\nお前が戦いを嫌うのは、\n本当だと信じてる
+	ディーア	怒り2						だから、このまま\n大人しくしてくれれば<dash=2>
+CharacterOff
+	マグロス	通常						助けてくれるの？\nそっか優しいね、マスター\n敗者に慈悲をかけてくれるんだ
+	マグロス	通常						うん、そうだよねー\n普通は私の負けだよねー
+Se	火事
+Shake	BG		x=5 y=5 time=5				NoWait
+	マグロス	通常						破れない結界、\n歴戦の魔剣使いにミョルニルたち
+	マグロス	本気						でも、キミは勘違いしているよ\nマスター
+Param	character_grayout=false
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	マグロス	通常						私はまだ負けていないよ？
+Bgm	魔王バトル
+Se	チャージ
+FadeOut	red					3
+Se	スローモーションエンド
+Se	闇3
+Se	剣閃
+Wait						.15
+Se	闇3
+Se	剣閃
+Wait						.15
+Se	闇3
+Se	剣閃
+Wait						.15
+Se	闇3
+Se	剣閃
+Wait						.15
+Se	闇2
+Se	剣閃
+Wait						.15
+Se	火3
+Bg	魔術空間(赤)
+	          
+Wait						1
+FadeIn	red					1
+Wait						2
+CharacterOff
+	ディーア	驚き2						なっ……!?
+CharacterOff
+	マグロス	あはは						あーあ、\nやっぱり主人公ってやつはずるいね
+	マグロス	あはは						友情、努力、勝利\n最後に愛と正義が勝つって、\nそんな不条理な真理
+	マグロス	通常						でも……\n忘れていないかな、マスター？\n世界を救う魔剣使い
+	マグロス	通常						私はLS_No.13445、\nミョルニル=マグナ=ロスト
+Param	character_grayout=false
+Se	光2
+FadeOut	black					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景					0
+	ミラロストロゴ		effect_c			1
+	          
+FadeIn	black					.3
+Wait						.3
+Tween	ミラロストロゴ	ScaleBy	x=1.5 y=1.5 time=1.5				Add
+	マグロス	<Off>						勝負はしない、勝ちもしない\nでも…………
+Wait						.2
+Se	ガラス割れる
+Tween	ミラロストロゴ	ScaleBy	x=1.5 y=1.5				NoWait
+FadeOut	white					.5
+Param	character_grayout=false
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+	イベントスチル101103		エフェクト表			0
+FadeIn	white					.5
+	マグロス	<Off>						一度も負けたことがない\nロストだよ♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	1_2
+	ミョルファ	悲しい2	2_2
+Bg	魔術空間(赤)
+	ディーア	驚き2						こ、この魔力……！
+	ミョルファ	悲しい2						大変です！ 結界が侵食されて！\n二層、三層……！\n長く保ちません!!
+Param	character_grayout=false
+CharacterOff
+	イベントスチル101103		エフェクト表
+	マグロス	<Off>						私は勝ちを選ばない、\n栄光も欲しくない
+	マグロス	<Off>						名前に、<ruby=ロスト>喪失</ruby>の瑕さえ刻んだ\n勝たない兵器……				ルビでロスト
+	マグロス	<Off>						その代わりに……\nなにがあっても負けないよ♪
+	マグロス	<Off>						たとえ戦ったとしても\n誰にも負けるわけがないじゃない♪\nはい、論破ー♪
+Param	character_grayout=true
+CharacterOff
+Bg	魔術空間(赤)
+	ヨルムンガンド	通常	p8b
+	ミョルニル	通常2	p2b
+	マグナ	本気	2_3
+	マグナ	本気						い、今まで、\n本気を出してなかったの!?
+Param	character_grayout=false
+CharacterOff
+	イベントスチル101103		エフェクト表
+	マグロス	<Off>						これも本気じゃないよー\n出したら、本当に勝っちゃうし♪
+	マグロス	<Off>						私は結界を壊して出ていく\n負けないためにね
+	マグロス	<Off>						キミたちが私を止めるというなら、\n勝たない程度に\n相手をしてあげるよ♪
+StopBgm
+Param	character_grayout=true
+CharacterOff
+	マグナ	本気	1_2
+	ディーア	悔しい2	2_2
+	ディーア	悔しい2						くっ！ 行かせるわけないだろ！\nいくぞ、ミョル<dash=2>
+Bgm	決戦
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	泣き						ちょっとまって！
+	ディーア	驚き2						マグナ……!?
+	マグナ	本気						マグナが戦う
+	ディーア	驚き2						でも、体は……
+	マグナ	本気						もう治してもらったから\n万全よ、はい論破！
+	マグナ	本気						それに……\nあいつはマグナが勝たないとダメ
+	マグナ	本気						だってマグナは\n世界で一番強くてかわいい\n世界を救う魔剣だから！
+	マグナ	本気						もう迷ったり、不貞腐れたりしない！\n信じて、マスター！
+	ディーア	通常2						……わかった！\nマグナ、いくぞ！
+CharacterOff
+	マグナ	本気拡大	エフェクト表
+	マグナ	本気拡大						マグナ=ロスト、\n今度こそ、論破してあげる！
+If	isdebug==true
+CharacterOff
+Jump	*E_1011_09
+EndIf
+EndScenario
+
+# E_1011_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	決戦
+Bg	魔術空間(赤)
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+	ディーア	怒り2	2_2_b			0
+	マグナ	本気	1_2			0
+	          
+FadeIn	white					.5
+	マグロス	<Off>						やっぱり、若いってすごいね\nすごくて愚かだねー
+	マグロス	<Off>						痛みも、屈辱も、\nなにも知らない……
+	マグロス	<Off>						自分の勝利と可能性を疑わない
+	マグロス	<Off>						こういう頃が、\n私にもあったんだね
+	マグロス	<Off>						もう私はロリババァになって、\n勝ちよりも負けないを選んだけど……
+	マグロス	<Off>						マグナちゃん、キミを見てると\n懐かしいよ
+StopBgm
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	マグロス	通常				0
+FadeIn	white					.3
+	マグロス	通常						だからって、\n私は負けないけどね？
+	オーラ赤		エフェクト表			1
+	マグロス	通常						はい論破♪
+Bgm	緊迫
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(赤)	マグロス	エフェクト裏			0
+Se	闇3
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+ImageEffectOff	SpriteCamera	MotionBlur
+Wait						.3
+CharacterOff
+Bg	魔術空間(赤)					0
+Param	character_grayout=true
+	ディーア	悔しい2	2_2_b
+	マグナ	悔しい	1_2
+Shake	Graphics		x=5				NoWait
+	ディーア	悔しい2						くっ……
+	マグナ	悔しい						やっぱり、あいつ……！
+CharacterOff
+	マグロス	通常						勝つことばっかり考える\nロリババァになる前の\nマグナちゃんが相手なんだよ？
+	マグロス	本気						自分のことだから、\n動きも考えも読めちゃう
+	マグロス	本気						マグナちゃんがどれだけ勝ちたいか\nどれだけ、私を超えたいか
+CharacterOff
+	ディーア	怒り2	2_2_b
+	マグナ	本気	1_2
+	マグナ	本気						マスター!!\nもっと、もっとやるわよ！
+	ディーア	本気2						ああ！
+Param	character_grayout=false
+	オーラ青		エフェクト表			1
+Wait						.5
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(青)	マグナ	エフェクト裏			0
+Se	光3
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+CharacterOff
+ImageEffectOff	SpriteCamera	Bloom
+Bg	魔術空間(赤)					0
+	マグロス	通常				0
+Tween	マグロス	MoveBy	x=-100				NoWait
+	マグロス							ふふっ♪
+ImageEffectOff	SpriteCamera	MotionBlur
+Tween	マグロス	MoveBy	x=100				NoWait
+	マグロス	通常						そうだね、\nまっすぐ勝ちが欲しいよね\nどうしても欲しいよね
+	マグロス	通常						同じくらい……\n私は負けたくない\nなにを犠牲にしても負けない
+	マグロス	本気						幾度の勝利を逃しても\n幾度も栄光を手放しても
+	マグロス	本気						ただ一度の敗北を、許さない
+	マグロス	通常						それを知らない\nマグナちゃんには負けないよ\nはい論破♪
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.5
+Se	チャージ
+FadeOut	white					2
+CharacterOff						0
+Se	光3
+Se	闇3
+Se	火事
+	ディーア	悔しい2	2_2_b			0
+	マグナ	絶望	1_2			0
+Param	character_grayout=true
+FadeIn	white					.2
+Shake	Graphics		x=10				NoWait
+	マグナ	絶望						きゃあ!?
+CharacterOff
+	マグロス	通常						こうしている間にも\n私には選択がいくつもある
+	マグロス	通常						負けなければいいんだから\n過程はどうだっていい\n卑怯でも姑息でも受け入れる
+	マグロス	通常						でもさ、キミは私を倒さないと\n気がすまないでしょ？ 世界一ちゃん
+	マグロス	通常						一つのことしか出来ないキミと\nなんでも選択できる私、\nどちらが有利かは論理的に明らかだよ
+StopBgm
+CharacterOff
+	マグナ	本気						ぐ、うぅ……\nそれでも……！
+	マグナ	本気						それでも、\nマグナは勝つ……！
+	マグナ	本気						あんたがどんなに負けなくても、\nマグナは勝つ！
+Bgm	風属性バトル
+	マグナ	本気						認めてやるわ！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A(夜)					0
+	マグナ	絶望				0
+FadeIn	white					.3
+	マグナ	絶望						マグナは負けてた！\n力でも、頭脳でも！
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル101101		エフェクト表			0
+	          
+FadeIn	white					.3
+	マグナ	<Off>						あんたの方が上！\nマグナは、\n世界一の魔剣じゃなかった！
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	魔術空間(赤)					0
+	ディーア	悔しい2	2_2_b			0
+	マグナ	本気	1_2			0
+FadeIn	white					.3
+	マグナ	本気						だからこそ！\nマグナは勝ちたいって思った！\n負けたから大切なことがわかった！
+	マグナ	本気						負けないくらいで\n偉そうにしないでよ！\nこのロリババァ！
+	マグナ	本気						一回負けても……\n勝てるまで強くなればいいの！
+	マグナ	本気						それでまた何度でも\n世界一強い魔剣になる！
+	マグナ	通常2						マグナはロリババァじゃない！\nピッチピチの若い子なんだから！
+	マグナ	通常2						『負けない』だけじゃ、\n満足なんて出来ないの！\nはい論破！
+CharacterOff
+	マグロス	通常						ふふふ♪
+	マグロス	通常						だったら、見せてみなよ\n世界一の魔剣！\nこのロリババァを倒す方法を♪
+CharacterOff
+	マグナ	本気						お姉ちゃん、力を貸して！\n教えてあげる、世界の真理を！
+CharacterOff
+	ミョルニル	通常2	1_3
+	ヨルムンガンド	通常	3_3
+	ヨルムンガンド	通常						マグナちゃんに託しましょうか♪
+	ミョルニル	通常2						ええ\nマグナ、思いっきり論破しなさい！
+Param	character_grayout=false
+CharacterOff
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ディーア	驚き2						これは……\nマグナの力が……？
+Param	character_grayout=true
+CharacterOff
+	ミョルニル	通常2	1_3
+	ヨルムンガンド	通常	3_3
+	ミョルニル	通常2						マグナは\n私とヨルムンガンドを合わせた魔剣
+	ミョルニル	通常2						相反する力を受け止める器
+	ミョルニル	通常2						そう、世界を救うために\n悪逆さえ飲み干せることが、\nあの子の真の強さ
+	ミョルニル	通常2						敗北と成長も、\nマグナは全てを受け入れて\n強くなる
+Param	character_grayout=false
+CharacterOff
+	オーラ青		エフェクト表
+	マグナ	本気
+	マグナ	通常2						マグナは、ミョルニル=マグナは\n世界一強い魔剣！
+	マグナ	通常2						悪食の邪竜も合わさった、\nみんなの力でできたミョルニル！
+	マグナ	通常2						マスターとお姉ちゃんたちがいるから！\nマグナは世界一なの！
+Bgm	決戦
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						.5
+Se	光3
+FadeOut	white					1
+	イベントスチル101102		エフェクト表			0
+	          
+FadeIn	white					1
+	マグナ	<Off>						いくわよ、マグナ=ロスト！
+	マグナ	<Off>						今度こそ、失敗しない！\n負けたりしない！
+	マグナ	<Off>						負けないだけのあんたが、\nマグナに勝てるわけないでしょ！\nはい論破！
+If	isdebug==true
+CharacterOff
+Jump	*E_1011_10
+EndIf
+EndScenario
+
+# E_1011_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+Bgm	決戦
+Param	character_grayout=false
+	イベントスチル101104					0
+FadeIn	white					1
+Tween	イベントスチル101104	MoveBy	y=-180 time=3				NoWait
+Wait						1.5
+	マグナ	<Off>						勝つ、ミョルニル=マグナは勝つ！\nそれが世界の真理！\nマグナがそう決めたんだから！				BG画像
+	マグロス	<Off>						そっかー\nキミはそういう道をいくんだ
+	マグロス	<Off>						一人のプライドを投げ捨てて、\nひたすら勝利をつかもうとする
+	マグロス	<Off>						眩しいね、キラキラするね
+	マグロス	<Off>						でも、\n私はその道を選ばない
+	マグロス	<Off>						だって、どれだけ強くても、\nいつかは負けてしまうよ？
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	戦場跡					0
+	          
+FadeIn	white					.3
+	マグロス	<Off>						たとえ勝っても、\nその先には敗北が待っている
+	マグロス	<Off>						敗北は、取り返せない
+	マグロス	<Off>						だから私はロストになって、\n負けない存在になった
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	イベントスチル101104					0
+Tween	イベントスチル101104	MoveBy	y=-180 time=0
+FadeIn	white					.3
+	マグロス	<Off>						でも……\nそれを知っても\nマグナちゃんは進むんだね
+	マグナ	<Off>						進むわよ！\n敗北も、その意味も\nあんたがマグナに教えた!!
+	マグナ	<Off>						でもマグナはあんたと違う！\n強くなって、勝つって決めたの！
+	マグナ	<Off>						だから、感謝してあげる！
+	マグナ	<Off>						あんたのおかげで、\nもっとマグナは、\n勝ちたくなったのよ！
+	マグロス	<Off>						ふふふ♪
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	戦場跡					0
+FadeIn	white					.3
+	マグロス	<Off>				1		『あの時』
+	マグロス	<Off>						私は一人で、\n敗北しない道を選んだ
+	マグロス	<Off>						卑怯と罵られようと\n誇りなんて投げ捨てようと\n喪失を体に刻まれようと
+	マグロス	<Off>						でも、私はやっぱり\nマグナだったんだろうね
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	黒背景					0
+	イベントスチル101102		エフェクト表			0
+FadeIn	white					.3
+	マグロス	<Off>						絶対に勝ちたいキミと
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	黒背景					0
+	イベントスチル101103		エフェクト表			0
+FadeIn	white					.3
+	マグロス	<Off>						絶対に負けない私、\nほら、似た者同士だ
+	マグロス	<Off>						だからわかるでしょ、\n世界一強いマグナちゃん？
+	マグロス	<Off>						キミがどうしても\n勝ちを選ぶように
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル101104					0
+Tween	イベントスチル101104	MoveBy	y=-180 time=0
+FadeIn	white					.3
+	マグロス	<Off>						私は『負けない』を譲らないよ！
+	マグロス	<Off>						意地っ張りで強情張りな\nミョルニル=マグナとして
+	マグナ	<Off>						勝つ、絶対に勝つ！
+	マグナ	<Off>						お姉ちゃんたちと！\nマスターと！ みんなで勝つの!!
+	マグナ	<Off>						これで終わりよ！\nブレイズドライブ!!
+Se	光3
+FadeOut	white					1
+StopBgm						1
+CharacterOff						0
+Bg	魔術空間					0
+	マグナ	悔しい				0
+Wait						2
+FadeIn	white					1
+	マグナ	悔しい						はぁ、はぁ……
+Param	character_grayout=false
+CharacterOff
+	マグロス	あはは
+	オーラ青		エフェクト表
+	マグロス	あはは						そうだねぇ\n結局、私は勝たないから……
+	マグロス	あはは						ただの力比べに持ち込まれたら\nこうなるか……
+	マグロス	あはは						いやぁー、壊されちゃったー
+Param	character_grayout=true
+Bgm	凱旋
+CharacterOff
+	ディーア	笑い2	2_2_b
+	マグナ	嬉しい	1_2
+	マグナ	嬉しい						やった……？
+	マグナ	嬉しい						やった……\n勝ったぁ！
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	通常2						見てた？\nバカマスター！ お姉ちゃん！
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	嬉しい						マグナの勝ち！\n間違いなく\n世界で一番の魔剣でしょ？
+	ディーア	笑い2						ああ！\nよくやったな、マグナ！
+	マグナ	通常2						マグナ=ロスト！\n散々やられたけど、\n最後はマグナの勝ち！
+	マグナ	通常2						あんたの負け！\nこれからはマグナのことを<dash=2>
+Param	character_grayout=false
+CharacterOff
+	マグロス	あはは
+	オーラ青		エフェクト表
+	マグロス	あはは						いやいや、\nそれがね、マグナちゃん
+CharacterOff
+	マグナ	本気						……え？
+CharacterOff
+	マグロス	あはは
+	オーラ青		エフェクト表
+	マグロス	あはは						マグロスちゃん、\n負けてないんだよねー
+CharacterOff
+	マグナ	悔しい						えぇ!?
+CharacterOff
+	マグロス	あはは
+	オーラ青		エフェクト表
+	マグロス	あはは						ブレイズドライブ\n受ける時に考えたんだよ
+	マグロス	あはは						どうすれば負けにならないかって\nあそこで本気出して\n勝っちゃうのも違うし
+	マグロス	あはは						これはやられるのが\n一番いいなーって
+	マグロス	あはは						ほら、マグロスちゃん消えたら、\n捕獲作戦は失敗でしょ？
+CharacterOff
+	ディーア	驚き2						……あ！
+CharacterOff
+	マグロス	あはは
+	オーラ青		エフェクト表
+	マグロス	あはは						マグロスちゃんのお仕事、\n実はただの時間稼ぎだったし\nそれは達成したから
+CharacterOff
+	ミョルニル	通常2						なんですって……!?
+CharacterOff
+	マグロス	あはは
+	オーラ青		エフェクト表
+	マグロス	通常						そして破壊されることも……\nいや、これはまだ秘密かなー
+	マグロス	通常						あとは……うん
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	黒背景					0
+	イベントスチル101102		エフェクト表			0
+FadeIn	white					.3
+	マグロス	<Off>						元とはいえ、\nミョルニル=マグナが負けるのって\n嫌だったからね……
+FadeOut	white					.3
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	魔術空間					0
+	オーラ青		エフェクト表			0
+	マグロス	あはは				0
+FadeIn	white					.3
+	マグロス	あはは						ということで、\nマグロスちゃんは\n『負けない』ままなのでした♪
+	マグロス	あはは						はい論破♪
+CharacterOff
+	マグナ	泣き
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	泣き						ちょ、ちょっと！\nそれずるくない!?\nそんなの屁理屈でしょ！
+CharacterOff
+	マグロス	あはは
+	オーラ青		エフェクト表
+	マグロス	あはは						あははは♪
+CharacterOff
+	マグナ	悔しい						マグナが勝ったの！\nちゃんとあんたに勝ったの！\n論破!! 論破!! 論破!!
+CharacterOff
+	マグロス	あはは
+	オーラ青		エフェクト表
+	マグロス	あはは						まあ、そこは年の功ってことでー♪
+	マグロス	通常						でも……\nミョルニル=マグナはやっぱり、\n世界一強い魔剣だったね……
+CharacterOff
+	マグナ	本気						…………っ！
+	マグナ	悔しい						ちょ、待ちなさいよ！\n戻ってきなさいよ！\n今度こそ勝ってやるんだから！
+CharacterOff
+	マグロス	あはは
+	オーラ青		エフェクト表
+	マグロス	通常						ふふ、縁があったらね、\n楽しみにしてるよー！
+	マグロス	通常						ああ、今回も<dash=2>
+	マグロス	通常						勝てなかったし、\n負けなかったなー
+CharacterOff	マグロス					1
+Wait						2
+CharacterOff
+	ディーア	通常2						……終わったな
+	ディーア	笑い2						まあ、これで一件落着
+CharacterOff
+	ミョルニル	通常2						ではないですわよ？
+Param	character_grayout=true
+CharacterOff
+	ディーア	汗2	2_2
+	ミョルニル	通常2	1_2
+	ミョルニル	通常2						クズマスター？\nこんなに大きな結界を張らせて、\nマグナに怪我までさせて……
+	ミョルニル	通常2						戦果はどれほどかしら？
+	ディーア	絶望2						ぎくっ!?
+	ミョルニル	通常2						ロストが消えて\nゼロ、ですわね？
+	ミョルニル	通常2						ツメが悪すぎですわよ！\nやはり浅学なマスターに\n任せてはダメね！
+	ミョルニル	通常2						今後はもっと立場をわきまえ、\nミョルニルたちを敬いなさい！\nはい論破♪
+CharacterOff
+	ディーア	絶望2	1_2
+	マグナ	通常2	2_2
+	マグナ	通常2						にしし♪\nそうだよ、バカマスター♪
+	ディーア	驚き2						ま、マグナも!?
+	マグナ	通常2						あーあ、バカマスターのせいで\nかわいいマグナが\n傷ついちゃったー♪
+	マグナ	通常2						だから、その分、\n甘やかしてくれないとダメなの♪
+	マグナ	嬉しい						まずは一日、\nマグナの言うこと聞くこと！
+	ディーア	絶望2						ちょ、ちょっと待て！\nマグナも悪いところあっただろ!?
+	マグナ	悔しい						うっ!? ち、違う！\nそんなことないもん！
+	マグナ	通常2						騙されちゃうマスターが\n論理的に悪いの！ はい論破！
+	マグナ	通常2						というわけで、\nミョルニーお姉ちゃん！\nヨルムンお姉ちゃん！
+	マグナ	通常2						マスターを懲らしめてあげて！
+CharacterOff
+	ミョルニル	通常2	1_2
+	ヨルムンガンド	通常	2_2
+	ヨルムンガンド	通常						うふふ♪\n任されましたわー♪
+	ミョルニル	通常2						クズマスターは\n調子に乗りすぎですわね！
+CharacterOff
+	ディーア	絶望2						うわぁああああ！
+Se	走る
+Tween	ディーア	MoveBy	x=800 time=1.5				NoWait
+Wait						1
+CharacterOff
+	マグナ	嬉しい						にしし♪
+	マグナ	通常2						本当にマスターは\n馬鹿で変態でクズなんだから！
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	マグナ	通常拡大	エフェクト表
+	マグナ	通常拡大						世界で一番のマグナちゃんのこと、\nもっと大切にしないと、\n許さないんだから♪ はい論破♪
+FadeOut	white					1
+StopBgm						1
+CharacterOff						0
+Bg	夜空					0
+	          
+Wait						3
+FadeIn	black					1
+Wait						1
+	？？？？							そう……マグロスさんが				ここは澤口さんと調整したい
+	？？？？							マグロスさんも\n役目を果たしたのですね……
+	？？？？							では、我々も参りましょう
+	？？？？							完全なる聖女として、\n<dash=2>彼女を救い出すために
+If	isdebug==true
+CharacterOff
+Jump	*E_1011_01
+EndIf
+EndScenario

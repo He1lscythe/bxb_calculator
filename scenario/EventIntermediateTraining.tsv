@@ -1,0 +1,238 @@
+# E_IT_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	ガヤA_BGM
+Bg	カジノ
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　 <color=blue><dash=2>魔剣機関 大広間<dash=2></color>
+Bgm	平和
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	笑い2	2_2
+	リディ							わぁ！ すごーい！\n魔剣使いがこんなにたくさん……！
+	ディーア							おぉ……新人の魔剣使いだけでも\nこれだけいるのか
+	リディ	驚き2						あ、見てみて！\nあっちにもたくさん人がいる！
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+	新人研究員		1_2			0
+	研究員		2_2			0
+	　　　　　　　　　　					0
+Se	ガヤA
+FadeIn	black					.3
+Wait						2
+CharacterOff
+Param	character_grayout=true
+	ディーア	通常2	1_2
+	リディ	笑い2	2_2
+StopSe
+	ディーア							本当だ\n魔剣機関の研究者たちが\n見学に来てるのかな
+	リディ							えへへ、みんな\n何の研究してるんだろ？
+	ディーア	驚き2						おいリディ、あんまりはしゃぐなよ\nはぐれたら大変だ
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						むぅ、そんなに子供じゃないもん！
+	リディ	通常2						ところでマスター、\n今日は何のイベントなの？
+	ディーア	怪しい2						さあ……？\n魔剣機関からの招集としか\n聞いていないからな……
+	リディ	驚き2						あ、誰か来たよ！
+	ディーア	驚き2						……あの人は!!
+StopBgm
+Se	ドア開く
+FadeOut	black					.3
+CharacterOff
+Param	character_grayout=false
+	魔導王ユウ	黒
+	？？？？		1_2
+Wait						.5
+Bgm	図書館
+FadeIn	black					.3
+	？？？？							やあ諸君、\n今日は集まってくれてありがとう
+	？？？？							遠路はるばるやってきた者も\nいるだろう\nどうか楽にしていてくれ
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+	リディ							……ねえねえマスター、\nあの人ってえらいひと？
+Tween	ディーア	PunchPosition	x=30				NoWait
+	ディーア							しっ、静かにしろリディ\nあの人は……
+CharacterOff
+Param	character_grayout=false
+	魔導王ユウ	黒
+	？？？？		1_2					おっと失礼、自己紹介がまだだったね
+	魔導王ユウ							オレは魔導王ユウだ\nこの魔剣機関を\n代表させてもらっている
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人							…………！
+CharacterOff
+Param	character_grayout=true
+	魔導王ユウ	黒						今日集まってもらったのは\n他でもない、オレからキミたちに\n伝えたいことがあってね
+	魔導王ユウ							キミたちは基礎的な訓練を修了し、\n晴れて魔剣使いとしての第一歩を\n歩み始めたところだと思う
+	魔導王ユウ							きっとそこらへんにいる\n魔物くらいなら、問題なく\n討伐できるようになったことだろう
+	魔導王ユウ							組織の代表として、\nキミたちの成長を\n心からうれしく思うよ
+	魔導王ユウ							さて、そんなキミたちに\n質問をしよう
+	魔導王ユウ							キミたちは、魔剣使いの死因として\n最も多いものが何であるか、\n知っているかい？
+CharacterOff
+	黒グラデーション		エフェクト表
+	魔剣使いたち	<Off>						（ざわ……ざわ……）
+CharacterOff
+	魔導王ユウ	黒						ああ、別に焦らなくても構わないよ
+	魔導王ユウ							オレはあのお嬢様と違って、\n答えられなくても命を奪ったりは\nしないから安心してくれ
+CharacterOff
+	魔剣使い	<Off>						……冥獣ですか？
+	魔導王ユウ	黒						ああ、いい線いってるね\n確かにそれも少なくない
+	魔導王ユウ							だが、冥獣よりも\nもっと恐ろしいものがある\nそれがなんだか分かるかい？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							…………人間だ
+	リディ							……マスター？
+CharacterOff
+	魔導王ユウ	黒						素晴らしい、ほぼ正解だ\nだが100点満点の回答ではないね
+	魔導王ユウ							答え合わせをしようか、諸君\n魔剣使いの死因として最も多いのは\n<ruby=・・・・・・・>魔剣による殺傷</ruby>だ
+	魔導王ユウ							驚くことじゃない\n魔剣は兵器……我々人間の\n命を奪うための道具だからね
+	魔導王ユウ							今までのような魔物の討伐は、\n魔剣使いのもつ\nほんの僅かな一面でしかない
+FadeOut	white					.3
+Bgm	絶望
+CharacterOff						0
+Bg	戦場跡					0
+FadeIn	white					.3
+	魔導王ユウ	<Off>						……魔王戦争は、まだ終わっていない
+	魔導王ユウ	<Off>						キミたちはこれから、\n長い旅に出ることになる
+	魔導王ユウ	<Off>						自分こそが王であると、\n魔王に相応しいのだと\n証明するための果てなき旅だ
+	魔導王ユウ	<Off>						その過程で、キミたちはキミと同じく\n王たらんとする仲間を\n斬り捨てなければならないときが来る
+	魔導王ユウ	<Off>						誰かの理想を奪い、踏みにじり、\nそれでも自らの正しさを主張して、\n貫き通さねばならないときが来る
+	魔導王ユウ	<Off>						昨日まで共に過ごした仲間が、\n今キミの隣にいる同胞が、\nあるいはキミ自身が<dash=2>
+	魔導王ユウ	<Off>						<dash=2>明日には\n屍になっているかもしれない
+	魔導王ユウ	<Off>						キミたちが歩んでいく道のりは、\nそんな茨の道だ
+FadeOut	black					.3
+Bg	カジノ					0
+StopBgm
+CharacterOff						0
+Param	character_grayout=false
+	8章スチルA		エフェクト表			0
+FadeIn	black					.3
+	魔導王ユウ	<Off>						もう一つ問おうか、魔剣使い諸君
+Bgm	緊迫
+	魔導王ユウ	<Off>						キミはこの魔界で生き残るだけの\n強さと、強かさを持っているか？
+CharacterOff
+Param	character_grayout=false
+Se	抜刀
+Wait						.1
+Se	抜刀
+	黒グラデーション		エフェクト表
+	新人研究員		1_2
+	研究員		2_2
+	　　　　　　　　　　
+Wait						2
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+Tween	ディーア	MoveTo	x=0				Add
+	ディーア							…………ッ!?
+Tween	リディ	MoveBy	x=30				NoWait
+	リディ	悔しい2						ま、マスター!?
+	ディーア	怒り2						……こいつら、ただの研究者じゃない\n全員、凄腕の魔剣使いだ……!!
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	驚き2						えっ……!?
+CharacterOff
+	魔導王ユウ	黒						魔剣機関は軍隊ではなく研究組織だ
+	魔導王ユウ							組織というより集団に近く、\nそこに統一された理念はない
+	魔導王ユウ							それぞれが魔王を目指す者であり、\nお互いの研究のために機関を\n利用しているに過ぎない
+	魔導王ユウ							つまり、ここにいる全員が\nライバルであり、魔王を目指す限り\nいずれ倒さねばならない敵なのさ
+	魔導王ユウ							そしてそれは、\n魔導王であるこのオレも例外ではない
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							…………っ！
+CharacterOff
+Param	character_grayout=false
+	8章スチルA		エフェクト表
+	魔導王ユウ	<Off>						命が惜しくなった者は立ち去れ\n勇気なき者も立ち去れ
+	魔導王ユウ	<Off>						魔王にならずとも、\n茨の道を歩まずとも、\n幸福な人生を過ごすことはできる
+	魔導王ユウ	<Off>						誰もそれを止めるものはいない\nキミたち自身が選ぶんだ
+CharacterOff
+StopBgm
+	魔剣使いたち	<Off>						………………
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							………………
+CharacterOff
+	魔導王ユウ	黒						……いいだろう
+Bgm	風属性バトル
+	魔導王ユウ							もう一度言おう\nキミたちが選んだ道は茨の道だ
+	魔導王ユウ							それでも、\nこの道を選んだ勇気あるキミたちに\nオレは心からの敬意を表する
+CharacterOff
+Param	character_grayout=false
+Se	納刀
+Wait						.1
+Se	納刀
+	新人研究員		1_2
+	研究員		2_2
+	　　　　　　　　　　
+Wait						2
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							…………ふぅ
+	リディ							び、びっくりしたぁ……
+CharacterOff
+	魔導王ユウ	黒						ま、それはそれとして、\n魔剣機関の長としてキミたちには\n長生きしてもらいたい
+	魔導王ユウ							もちろんできる限り平穏にだ\nその方が研究機関としては\nありがたいからね
+	魔導王ユウ							そして、力を持つことは\n防御策でもある\n悪しき力から己を守るためのね
+	魔導王ユウ							正しく力を身に着け\n正しく扱うためにも、\nキミたちにはまだ【訓練】が必要だ
+	魔導王ユウ							……さて、\n少し脅かしすぎてしまったかな
+	魔導王ユウ							【訓練】については\n追って案内するよ
+	魔導王ユウ							それでは、また会おう\n魔剣使い諸君
+	魔導王ユウ							キミたちの未来に\n栄光があらんことを祈るよ
+Se	ドア閉まる
+FadeOut	black					.5
+Wait						1
+StopBgm
+CharacterOff						0
+Param	character_grayout=false
+Bg	和室（夜）					0
+	　　　　　　　　　　
+Wait						3
+	魔導王ユウ	黒				0
+Se	歩く
+Bgm	絶望
+FadeIn	black					.5
+	魔導王ユウ							…………
+StopSe
+	ディーア	ソードマスター？						……"魔剣は兵器"\n"人間の命を奪うための道具"\n……ですか
+	魔導王ユウ	黒						そうとも
+	魔導王ユウ							そして、それは\nキミだって例外じゃない
+	ディーア	ソードマスター？						………………
+CharacterOff
+	8章スチルA		エフェクト表
+	魔導王ユウ	<Off>						期待しているよ\n<dash=2>■■■■■■■ちゃん
+FadeOut	black					1
+StopBgm
+CharacterOff						0
+Param	character_grayout=true
+Bg	市街地C					0
+	リディ	通常2	2_2			0
+	ディーア	通常2	1_2			0
+Wait						2
+Bgm	都市
+FadeIn	black					.5
+	ディーア							……魔導王ユウ、か\nすごいオーラだったな……
+	リディ							ね、私もびっくりしちゃった！
+	ディーア	怒り2						それにしても、\n魔王を目指す者にとっては\nここにいる全員がライバルか……
+	リディ	笑い2						えへへ、負けてられないねっ！
+	ディーア	通常2						ああ、オレたちも\n訓練に行かなきゃな！
+	リディ	照れ2						がんばろーね、マスター♪
+If	isdebug==true
+CharacterOff
+Jump	*E_IT_01
+EndIf
+EndScenario

@@ -1,0 +1,1281 @@
+# E_1098_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	ビーチ
+Bg	海岸					0
+Param	character_grayout=false
+	レヴァ	水着
+FadeIn	white					.5
+	レヴァ	水着						あははっ！\n気持ちいいー♪
+CharacterOff
+	ヘル	通常						ちょっと\nお姉ちゃんはしゃぎすぎよ
+CharacterOff
+	レヴァ	水着						えー、そうかなぁ？\nヘルこそせっかくの海なんだし\n水着に着替えて遊ぼうよ♪
+CharacterOff
+	ヘル	通常						はぁ、水着なんて\n持ってきていないわよ……\nだって<dash=2>
+	ヘル	通常						私たちは特訓に来たのよ？
+FadeOut	white					1
+CharacterOff						0
+Bg	酒場1F					0
+	         
+Wait						2
+FadeIn	white					1
+Bgm	魔剣の日常
+								　　　　　　　<color=blue>数日前</color>
+Param	character_grayout=true
+CharacterOff
+	レヴァンテイン=トリガー	通常2						それでね、お姉様！\nこの間マスター様とデートしたの♪
+	レヴァンテイン=トリガー	通常2						レヴァがマスター様をエスコートして\nとーってもたのしかったのよ♪\nこれでまたヒロインに近づいたわ♪
+CharacterOff
+	レヴァ	通常						よかったね、トリガーちゃん♪\n私もトリガーちゃんを見習って\nマイマスターと遊びに行こうかな♪
+Se	走る
+Tween	レヴァ	MoveBy	x=-800 time=1				NoWait
+	レヴァ							マイマスター！\n今度、一緒にプール行こうよー♪
+CharacterOff
+	レヴァンテイン=トリガー	通常2
+Tween	レヴァンテイン=トリガー	PunchPosition	y=30				NoWait
+	レヴァンテイン=トリガー	通常2						ま、マスター様と二人でプール!?\nそんなヒロインイベントをするなんて\nさすがはお姉様ね……！
+FadeOut	black					.3
+CharacterOff						0
+	リディ	通常2	1_2			0
+	クサナギノツルギ	奉仕	2_2			0
+FadeIn	black					.3
+	クサナギノツルギ	奉仕						ねえねえリディちゃん！\nもっとお手伝いできることある？
+	リディ	通常2						それじゃあ、\nあっちのテーブルに\nお料理を運んでもらっていい？
+Tween	クサナギノツルギ	PunchPosition	y=30				NoWait
+	クサナギノツルギ	奉仕						任せてっ♪\n今日はお店に来てる人も多いし\nたくさんお手伝いするよ♪
+	リディ	笑い2						ありがとう！\n最近はすごく暑いから\nお店に涼みに来る人が多いんだよね
+FadeOut	black					.3
+CharacterOff						0
+	ヘル	通常				0
+FadeIn	black					.3
+	ヘル	通常						はぁ……\nまったく今日も騒がしいわね
+	ヘル	通常						わざわざこっちに出てきた\n私も私だけど……
+Tween	ヘル	MoveBy	x=-20				NoWait
+	ヘル	通常						あ、お姉ちゃん\nあんなにマスターに抱きついて……
+	ヘル	笑い						ふふ、\nマスター、困ってるじゃない
+	ヘル	笑い						でも、\nお姉ちゃんが楽しそうなら\nそれが一番<dash=2>
+	レヴァンテイン=ハル	通常2	画面外_右
+Tween	レヴァンテイン=ハル	MoveBy	x=-400 time=1				NoWait
+	レヴァンテイン=ハル	通常2						じーーーっ
+	ヘル	通常						…………
+	レヴァンテイン=ハル	通常2						じーーーーっ
+	ヘル	通常						…………\nなにをしているのかしら？\nレヴァンテイン=ハル？
+Tween	レヴァンテイン=ハル	PunchPosition	y=30				NoWait
+Tween	レヴァンテイン=ハル	MoveBy	x=-50				NoWait
+	レヴァンテイン=ハル	慌て2						ひゃあっ!? へ、ヘル!?\nまさか私の監視に気づくなんて！
+	ヘル	通常						バレるに決まっているでしょ\n毎日のようにしているんだから
+Tween	ヘル	MoveBy	x=-120				NoWait
+	ヘル	通常						いい加減つきまとうのは\nやめてもらえないかしら？
+Tween	レヴァンテイン=ハル	MoveBy	x=-110				NoWait
+	レヴァンテイン=ハル	通常2						そんなわけにはいかないわ！\nヘルの暴走を防ぐのが\nハルの役目なんだから！
+	レヴァンテイン=ハル	通常2						レヴァンテイン=ハルがいる限り\nヘルの好きにはさせないわよ！
+	ヘル	通常						…………
+Tween	レヴァンテイン=ハル	PunchPosition	y=30				NoWait
+	レヴァンテイン=ハル	慌て2						って、無視するんじゃないわよ!?
+	ヘル	通常						雑音が聞こえるわね
+Tween	レヴァンテイン=ハル	PunchPosition	y=30				NoWait
+	レヴァンテイン=ハル	慌て2						ハルの美しい声になんてことを!?
+	ヘル	通常						この暑さで\nどこかの水も蒸発しないかしら？
+Tween	レヴァンテイン=ハル	PunchPosition	y=30				NoWait
+	レヴァンテイン=ハル	慌て2						ハルはただの水じゃないわよっ！
+CharacterOff
+	ディーア	通常2						二人とも楽しそうだな
+CharacterOff
+	ヘル	通常	p3
+	レヴァンテイン=ハル	慌て2	p7b
+	レヴァンテイン=ハル	慌て2						なに言ってるの、マスター！\n楽しくなんてないわよ！
+	ヘル	通常						そうよ、\nいつも通りストーカーがいるだけ
+Shake	レヴァンテイン=ハル		x=2 time=0.5				NoWait
+	レヴァンテイン=ハル	慌て2						す、ストーカーじゃなくて、\nヘルをちゃんと監視してたの!!!!
+	ヘル	通常						ただ私のことを\n覗いていただけじゃない
+Tween	レヴァンテイン=ハル	PunchPosition	y=30				NoWait
+	レヴァンテイン=ハル	通常2						そんなことないわ……！\nヘルのことは丸わかりよ！
+	レヴァンテイン=ハル	通常2						その証拠に今日のヘルは\nお気に入りの紫で派手なのを\n履いてるって<dash=2>
+CharacterOff
+	ディーア	怪しい2						紫……？
+CharacterOff
+	ヘル	通常	p3
+	レヴァンテイン=ハル	慌て2	p7b
+	レヴァンテイン=ハル	慌て2						あっ……！
+Shake	ヘル		x=2 time=0.5				NoWait
+	ヘル	通常						レヴァンテイン=ハル……っ！
+Se	走る
+Tween	レヴァンテイン=ハル	MoveBy	x=700 time=1				NoWait
+	レヴァンテイン=ハル	慌て2						ち、違うの！\nこれもれっきとした調査の一環で!?
+Se	走る
+Tween	ヘル	MoveBy	x=1200 time=0.5				NoWait
+	ヘル	通常						……すべて、燃やすわ
+	レヴァンテイン=ハル	慌て2						ちょっとマスター!?\nヘルを止めて!?
+CharacterOff
+	レヴァ	通常	画面外_右
+	ディーア	汗2	1_2
+	ディーア	汗2						ふ、二人ともほどほどにな……
+Tween	レヴァ	MoveBy	x=-610 time=2				NoWait
+	レヴァ	通常						わぁ、ヘルが走り回るなんて珍しい♪\n私も混ざってこようかなぁ！
+	ディーア	汗2						レヴァまで行ったら大変だから\nここで大人しくしてくれ
+	レヴァ	笑い						そう？\nマイマスターの頼みなら了解♪
+	ディーア	通常2						助かるよ\nせっかく今日は平和なんだから
+	レヴァ	通常						そういえば、\n最近は忙しくないよね？
+	ディーア	笑い2						ああ、七罪王の襲撃も落ち着いたし\n異変や戦いも少ない
+	ディーア	笑い2						もちろん油断はできないけど\n今は休んで英気を<dash=2>
+StopBgm
+Se	ドア開く
+CharacterOff
+	？？？？							失礼する\nここは一人でも平気かな？
+CharacterOff
+	リディ	笑い2						はーい♪\nお一人様で<dash=4>
+	リディ	驚き2						<dash=4>え？
+CharacterOff
+	ディーア	通常2						リディ？\nいったいどうし……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						なっ!?
+Bgm	緊迫
+CharacterOff
+	グーラ	通常						ふむ、なかなか良い店だな
+CharacterOff
+	ディーア	悔しい2						お、お前は……？
+CharacterOff
+	グーラ	通常						こうしてまみえるのは\n初めてだな、魔剣使いよ……
+CharacterOff
+	グーラ	拡大通常	エフェクト表					我が名はグーラ\n暴食の大罪を背負う七罪王である
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Wait						2
+	グーラ	通常	p2b			0
+	リディ	悔しい2	p8			0
+Tween	リディ	MoveBy	x=-50				NoWait
+FadeIn	black					.3
+Bgm	平和
+	リディ	悔しい2						お、おしぼりと\nお水をお持ちしました……
+	グーラ	通常						感謝する\n……注文もよいかな？
+	リディ	悔しい2						は、はい……！
+	グーラ	通常						このメニュー\n上から下まで全部を一つずつ頼む
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	悔しい2						ふぇ……!?\nも、もう一度聞いてもいいですか!?
+	グーラ	通常						失礼した\nこのマコッタチーズパンケーキから\nジャイアントパフェまで全てを頼む
+	グーラ	通常						それと\nこの『メイド風萌え萌えビーム』は\n料理なのか？
+	リディ	悔しい2						それはちょっとしたサービスで……
+	グーラ	通常						そうか……内容は気になるが\n料理でないなら遠慮しよう
+Se	走る
+Tween	リディ	MoveBy	x=600 time=1				NoWait
+	リディ	悔しい2						かしこまりました……！
+	グーラ	通常						ふむ、あれが魔剣殺しか\n随分と可愛らしくなったものだな\nそして<dash=2>
+CharacterOff
+	ディーア	怒り2						…………
+CharacterOff
+	グーラ	通常						そう闘気を放つな魔剣使い\n他の客の迷惑になるぞ\nそれとも……
+CharacterOff
+	ディーア	悔しい2						……っ
+CharacterOff
+	グーラ	通常						お前もなにか食べるか？\n奢るぞ？
+CharacterOff
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						なんでだよ!?\nいらないって!?
+	ディーア	目閉じ2						はぁ……\nお前にコトを荒立てる気がないのは\n理解した
+	ディーア	怒り2						じゃあなおさら、\n七罪王がこの店になんの用だ？
+CharacterOff
+	グーラ	通常						第一の理由は食事だ\n今ならば食事を嗜好品として\n楽しむことができるからな
+	グーラ	通常						そして第二は……\nお前たちと約定を交わすことだ
+CharacterOff
+	ディーア	驚き2						俺たちと？
+StopBgm
+CharacterOff
+	グーラ	通常						そうだ、魔剣使いよ\n私は王として<dash=2>
+	グーラ	通常						お前に決闘を申し込む
+Bgm	絶望
+CharacterOff
+	クサナギノツルギ	奉仕	p7b
+	ヘル	通常	p3
+	ヘル	通常						決闘……
+	クサナギノツルギ	奉仕						あるじ様と一対一ってこと？
+CharacterOff
+	グーラ	通常						もちろん\nお前は魔剣を何本使ってもいい\n私は単騎でもって相手をしよう
+CharacterOff
+	ディーア	怒り2						正々堂々っていうのは\nありがたいし、嫌いじゃない
+	ディーア	怪しい2						けど、ただ戦うだけじゃないだろう？\n決闘でお前が求める物はなんだ？
+CharacterOff
+	グーラ	通常						もちろん、\nあのリディという少女の力だ
+CharacterOff
+	ディーア	怒り2						……やはり、か
+CharacterOff
+	グーラ	通常						我が同胞と闘う中で、\nお前も薄々気づいていたのだろう？
+	グーラ	通常						我らはその力の大部分を\n奪われた状態にある
+CharacterOff
+	ディーア	悔しい2						ああ……俺たちが封印できたのは、\nあくまで弱体化した七罪王だ
+CharacterOff
+	グーラ	通常						そしてその力を奪った存在こそ\n忌わしき獣
+	ディーア	怒り2						魔王獣……
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	戦場跡					0
+	          
+FadeIn	white					.3
+	グーラ	<Off>						そう、今の少女に罪はないが、\nその内には我らの力が囚われている
+	グーラ	<Off>						私は同胞の力を取り戻したい\nその時、彼らが選ぶのが\n復讐の道であったとしてもな
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	驚き2				0
+FadeIn	white					.3
+	ディーア	驚き2						グーラ、その口ぶりだとお前は\n魔界へ復讐をする気はないのか？
+CharacterOff
+	グーラ	通常						もちろん遺恨はある\nだが私が真に憎むのは別の者だ
+	グーラ	通常						その復讐を果たしたとしても、\n私には何も残らないがな
+	グーラ	通常						……話が逸れたな\nどうだ魔剣使い、決闘を受けるか？
+	グーラ	通常						受けるならば、期日は一週の後\n民に害が及ばない場所を\nお前が選ぶがよい
+CharacterOff
+	ディーア	怒り2						…………
+CharacterOff
+	グーラ	通常						どうした？\n不服でもあるのか？
+CharacterOff
+	ディーア	目閉じ2						いいや、なにもない\nけれどなにもないからこそ気になる
+	ディーア	怒り2						準備時間も場所も、\n俺たちに都合が良すぎるだろ
+	ディーア	怒り2						なんでここまで\n俺たちに有利な条件にしたんだ？
+StopBgm
+CharacterOff
+	グーラ	通常						ふむ……
+CharacterOff
+	グーラ	拡大通常	エフェクト表					自惚れるな
+Bgm	魔王バトル
+CharacterOff
+	ディーア	悔しい2						っ……!!
+CharacterOff
+	グーラ	通常						これは大罪の王としての\n我が慈悲である……
+	グーラ	通常						お前たちがどれだけ\n準備をしようと策を練ろうと\n私はそれを打ち砕くだろう
+	グーラ	通常						そして愚かにも\n己が勝利を疑っていないのならば\nその認識を今、改めさせよう
+	グーラ	通常						表に出るがいい
+	グーラ	通常						暴食のグーラ\n食前の余興として戦ってやろう
+CharacterOff
+	クサナギノツルギ	慌て奉仕	p7b
+	ヘル	通常	p3
+	ヘル	通常						マスター
+	クサナギノツルギ	慌て奉仕						あるじ様！
+CharacterOff
+	ディーア	悔しい2						行くぞ、みんな……!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1098_02
+EndIf
+EndScenario
+
+# E_1098_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔王バトル
+Bg	市街地A					0
+	ヘル	通常	2_2
+	ディーア	悔しい3	1_2			0
+FadeIn	white					.5
+	ディーア	悔しい3						ぐっ……！
+CharacterOff
+	グーラ	通常						よい運動だな\nこれならば食事も楽しめそうだ
+CharacterOff
+	ヘル	通常	2_2
+	ディーア	悔しい3	1_2
+	ディーア	悔しい3						どういうことだ……\n攻撃をしても手応えがない
+	ディーア	怒り3						傷を与えた瞬間に回復している……？
+	ヘル	通常						マスター！\nもっと火力をあげるわよ!!
+	ディーア	怒り3						ああっ……！
+Se	チャージ
+Param	character_grayout=false
+	オーラ紫		エフェクト表			1
+	ヘル	通常						はぁあああああ!!
+	ディーア	本気3						これで……！
+CharacterOff
+	グーラ	通常
+Wait						.5
+Se	火1
+	オーラ蒼炎		エフェクト表			1
+	グーラ	通常						ふむ……
+Se	斬1
+FadeOut	white					.2
+CharacterOff	オーラ蒼炎					0
+FadeIn	white					.2
+Wait						2
+Param	character_grayout=true
+CharacterOff
+	ヘル	通常	2_2
+	ディーア	悔しい3	1_2
+	ヘル	通常						なっ……！\n私の炎が効いていないの!?
+CharacterOff
+	グーラ	通常						レヴァンテイン=ヘル\nお前の冥獄の炎はこのような弱火か？
+CharacterOff
+	ヘル	悲しい	2_2
+	ディーア	悔しい3	1_2
+Tween	ヘル	PunchPosition	y=10				NoWait
+	ヘル	通常						そんなっ……！
+CharacterOff
+	グーラ	通常						これでは期待外れだ\n世界を燃やし尽くせるだけの力を\n使いこなせてはいない
+	グーラ	通常						レヴァンテインを屠った歪な炎より\nよほどヌルいではないか？
+CharacterOff
+	ディーア	驚き3						レヴァ=ロストのことか？
+StopBgm
+CharacterOff
+	ヘル	通常						っ……
+Bgm	絶望
+CharacterOff
+	グーラ	通常						よし……もう十分だ\n今は、ここまでとしよう……
+CharacterOff
+	ディーア	悔しい3						なっ……！\n俺たちはまだ……！
+CharacterOff
+	グーラ	通常						続けた結果がわからぬほど\n愚かではないだろう？
+	グーラ	通常						そろそろ配膳も済んだ頃合だ\n共に食卓を囲むならば歓迎するが……
+	グーラ	通常						そのような様子ではなさそうだな
+	グーラ	通常						ではな、\n約束されし時にまた会おう……
+Tween	グーラ	MoveBy	x=1000 time=2				NoWait
+Wait						1.5
+	グーラ							すまない、\n上から下までもう一セットずつ追加を
+	リディ	<Off>						えぇ!? もっと食べるの!?
+StopBgm
+CharacterOff
+	ディーア	怒り3						…………
+Bgm	作戦会議
+CharacterOff
+	ヘル	通常						マイマスター、\nこれで目的は果たせたかしら？
+CharacterOff
+	ディーア	通常3						ああ、\n奴も承知の上だっただろうけど、\nグーラの力を見定めることができたよ
+	ディーア	怒り3						けど、アイツの言うとおりだ\n今のオレたちではアイツに勝てない
+CharacterOff
+	クサナギノツルギ	慌て						で、でも、\nまだ私たち本気を出してないし\n:Blaze魔剣ちゃんとか……！
+CharacterOff
+	ディーア	怒り3						グーラだって\nまったく本気を出していなかった
+	ディーア	目閉じ3						グーラは他の七罪王とも違う\n暴走もしないで力を使いこなせている
+	ディーア	怒り3						今の全戦力を投入しても、\nよくて相打ちだろう
+	黒グラデーション		エフェクト表
+	ディーア	悔しい3						（だが、なんでだ？\n　今なら俺たちを倒せていたのに\n　俺たちに利することをする？）
+CharacterOff	黒グラデーション
+	ディーア	怒り3						まさか、\n決闘にはなにか別の目的が……
+CharacterOff
+	クサナギノツルギ	通常	p7b
+	ヘル	通常	p3
+	ヘル	通常						考える前に、\nこれからいったいどうするの？\nマイマスター
+	クサナギノツルギ	通常						あるじ様のお願いなら、\n私なんでもがんばるよ……！
+CharacterOff
+	ディーア	通常3						決まってるさ
+	ディーア	通常3						俺たちにはまだ時間がある\nだから<dash=2>
+	ディーア	怒り3						強くなるぞ、みんな
+FadeOut	black
+If	isdebug==true
+CharacterOff
+Jump	*E_1098_03
+EndIf
+EndScenario
+
+# E_1098_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	ビーチ
+Bg	海岸					0
+	ヘル	通常				0
+FadeIn	white					.5
+	ヘル	通常						それで……\nなんで海で特訓なのかしらね？
+CharacterOff
+	レヴァンテイン=トリガー	通常2						マスター様と\n一緒に海なんてヒロインっぽい！
+Tween	レヴァンテイン=トリガー	PunchPosition	y=30				NoWait
+	レヴァンテイン=トリガー	通常2						夕焼けを見ながらとか、\nロマンチックよね！
+CharacterOff
+	レヴァビ	笑い						こやーん♪\n海に来るのははじめてです♪
+	レヴァビ	悲しい						あっ！ しっぽが濡れて\nもふもふがピチピチに……！
+CharacterOff
+	レヴァンテイン=ハル	通常2	画面外_右
+	ヘル	通常	p3
+	ヘル	通常						案の定、\nはしゃいでる子もいるし……
+Tween	レヴァンテイン=ハル	MoveBy	x=-400 time=1				NoWait
+	レヴァンテイン=ハル	通常2						……ヘルは水着、なしと
+	レヴァンテイン=ハル	通常2						せっかく買っていたのに\n着ないなんて、もったいな<dash=2>\nじゃなくて怪しいわね
+	ヘル	通常						聞こえてるわよ、ハル
+Tween	レヴァンテイン=ハル	PunchPosition	y=20				NoWait
+	レヴァンテイン=ハル	慌て2						ぎくっ……！
+	ヘル	通常						そんなに言うなら、\nあなたも水着を着ればいいのに
+Tween	レヴァンテイン=ハル	MoveBy	x=-160				NoWait
+	レヴァンテイン=ハル	慌て2						き、着ないわよ！\n遊んでたらヘルが危ないことした時に\n世界を救えないじゃない……！
+	ヘル	通常						そう……
+	レヴァンテイン=ハル	慌て2						……ヘル？\nあなた、どうかした？
+	ヘル	通常						どういうこと？
+	レヴァンテイン=ハル	慌て2						なんだか\nいつもよりキレがないっていうか
+	ヘル	通常						まさか
+	ヘル	通常						あなたの方こそ\n私に言い返されるのを期待してたの？
+Tween	レヴァンテイン=ハル	PunchPosition	y=50				NoWait
+	レヴァンテイン=ハル	慌て2						そ、そんなわけないじゃない……!!
+	レヴァンテイン=ハル	慌て2						心配して損したわ……！\nこの特訓でヘルよりも\nもっと強くなってやるんだから！
+Se	走る
+Tween	レヴァンテイン=ハル	MoveBy	x=700 time=1				NoWait
+Wait						1
+Tween	ヘル	MoveBy	x=140				NoWait
+	ヘル	通常						…………はぁ、特訓ね
+CharacterOff
+	ディーア	通常2						ヘルにはなにか不満があるのか？
+CharacterOff
+	ヘル	通常						あなたが決めたことには従うわ\nマスター
+	ヘル	通常						だけれど、\nこんなところで遊んでいて\n本当に手に入るの？
+	ヘル	通常						魔王装なんて
+	ヘル	通常						:Blaze魔剣みたいな新戦力を\n期待する前に私たちの潜在能力を\n解放してみる
+	ヘル	通常						それがあなたの狙いなのでしょう？
+CharacterOff
+	ディーア	笑い2						ああ、そうだ
+	ディーア	通常2						魔王装の発現条件はまだわからない
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	神殿B					0
+	ハデスロスト	魔王エフェクト	エフェクト表			0
+	          
+FadeIn	white					.3
+	ディーア	<Off>						ハデス=ロストの時みたいに、\n己の伝承に向き合って理解を深めた時\n原初の因子が目覚めるらしいけどな
+	ディーア	<Off>						それを意図的に発現させるのは\n現時点では不可能だ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	海岸					0
+	ヘル	通常				0
+Param	character_grayout=true
+FadeIn	white					.3
+	ヘル	通常						伝承への理解……ね
+	ヘル	悲しい						（私の伝承は……）
+CharacterOff
+	ディーア	通常2						自分の始まりや根幹を理解してこそ\nなりたい自分が定まるのかもな
+	ディーア	通常2						だからこうして場所を変えて、\nみんなが自分と向き合える時間を\n用意したんだ
+	ディーア	笑い2						特にこの海岸は\n変な魔物が活性化しているらしいし\nいい修行の場になるはずだよ
+CharacterOff
+	ヘル	通常						驚いたわ\n思ったより真面目に考えていたのね
+CharacterOff
+	ディーア	通常2						七罪王との戦いだから\n万全の準備で望むに決まってる
+	ディーア	目閉じ2						それに\n対七罪王兵器である:Blazeだけに\n頼るのは得策じゃないからな
+	ディーア	通常2						ロール様には\nロール様の思惑があるみたいだし
+	ディーア	通常2						みんなの力を底上げできるなら\nそれに越したことはないさ
+	ディーア	笑い2						だから……\n今回はヘルにも期待してる
+CharacterOff
+	ヘル	通常						……私に？
+CharacterOff
+	ディーア	笑い2						ああ、レヴァンテイン=ヘルは\n元々原初六魔剣にも匹敵するって\n言われる魔剣だ
+	ディーア	通常2						もう長く一緒に戦ってきたけど\nヘルの力にはきっとまだ先がある
+	ディーア	笑い2						ヘルが本当の力を出せるように、\nオレもそれを支えられるように\nがんばるよ
+CharacterOff
+	ヘル	通常						……そう
+	ヘル	通常						勝手に期待するのはいいけれど、\n気をつけることね
+	ヘル	通常						いくら使い慣れたとはいえ、\n私の炎はあなたの心を蝕む\n昏き冥界の焔
+	ヘル	通常						そうでなくても、\n私は世界を滅ぼすと言われる魔剣なの\nどうなっても知らないわよ？
+CharacterOff
+	ディーア	笑い2						大丈夫、\nオレはヘルを信じているから
+CharacterOff
+	ヘル							信じる……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原A(曇り)					0
+	レヴァロスト	泣き				0
+FadeIn	white					.3
+	レヴァロスト	泣き						だって、だってだって……!!\nお姉ちゃんは私のせいで<dash=2>!!
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	海岸					0
+	ヘル	悲しい				0
+FadeIn	white					.3
+	ヘル	悲しい						…………っ
+	黒グラデーション		エフェクト表
+	ヘル	悲しい						（なんで、あの時のことが……）
+StopBgm
+CharacterOff
+	レヴァ	水着
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	水着						マイマスター！ ヘル！\nあっちに魔物が出たよ……!!
+Bgm	バトル
+CharacterOff
+	ヘル	通常						っ、お姉ちゃん？
+CharacterOff
+	レヴァ	水着						さっそく修行のチャンス！\n一緒に行こう、ヘル♪
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	水着						どうやって戦おっか♪\nそうだ、ヘルとぴったりくっついて\n一緒に炎を出したり！
+	レヴァ	水着						えへへ♪\nヘルとなかよく戦いたいなぁ♪
+CharacterOff
+	ディーア	怪しい2						水着でくっついて……
+CharacterOff
+	ヘル	通常						マスター……\n変な想像をするのはやめなさい
+CharacterOff
+	ディーア	驚き2						し、してないぞ!?
+CharacterOff
+	ヘル	通常						もうっ……\nいくわよ、マイマスター
+If	isdebug==true
+CharacterOff
+Jump	*E_1098_04
+EndIf
+EndScenario
+
+# E_1098_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	海岸					0
+	ヘル	通常
+FadeIn	white					.5
+	ヘル	通常						燃えなさい……！
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(紫)		エフェクト裏			0
+Wait						.1
+Se	火3
+Se	光2
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	海岸					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+	カニ型モンスター
+Shake	カニ型モンスター		x=3 time=1				NoWait
+	カニ型モンスター							ぐぉおおお……！
+Tween	カニ型モンスター	MoveBy	y=-100 time=5				NoWait
+CharacterOff	カニ型モンスター					1
+Wait						1
+CharacterOff
+	ディーア	汗2						報告通り\n出現する魔物がすごく多いな……
+Bgm	ビーチ
+CharacterOff
+	レヴァ	本気	p3
+	ヘル	通常	p7
+	レヴァ	本気						うーん…………
+	レヴァ	本気						ヘル、大丈夫？
+	ヘル	通常						どういうこと、お姉ちゃん？
+	レヴァ	慌て						なんとなくなんだけど\nヘルの炎の勢いが\nいつもより弱い気がして……
+	ヘル	通常						え……
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	本気						いつもが\nぐわぁあああああん！\nって感じなら
+	レヴァ	慌て						今日は\nぶわぁあああああ！\nみたいな？
+	ヘル	通常						……\nそれじゃあよくわからないわよ
+	レヴァ	通常						とにかく悩みがあるなら、\nお姉ちゃんに相談してよね♪
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	通常						私はいつだって\nヘルの味方なんだから！
+	ヘル	通常						……大丈夫よ\nこんなに明るいところに来たから\n本調子じゃないだけ
+CharacterOff
+	レヴァンテイン=ハル	慌て2						海に来たからだっていうの？\nそれくらいでヘルが<dash=2>
+CharacterOff
+	レヴァ	本気	p3
+	ヘル	通常	p7
+	ヘル	通常						あなたには好都合でしょ？\n私の調子が悪ければ、\n暴走の危険なんてないんだから
+CharacterOff
+	レヴァンテイン=ハル	慌て2						そ、それはそうだけど……
+CharacterOff
+	レヴァビ	悲しい	p3b
+	レヴァンテイン=トリガー	泣き	p7
+	レヴァンテイン=トリガー	泣き						ヘルお姉様、大丈夫？
+	レヴァビ	悲しい						もふもふしますか？
+CharacterOff
+	レヴァ	本気	p3
+	ヘル	通常	p7
+	ヘル	通常						まったく、\nあなた達はみんな心配性ね……\n問題ないって言ってるじゃない
+	レヴァ	本気						…………
+	レヴァ	通常						わかった！\nヘルが大丈夫って言うなら\nお姉ちゃんは信じるね！
+	レヴァ	笑い						でも約束だよ？\nなにかあった時はすぐ相談すること！
+	レヴァ	通常						私たちにとって\nヘルは大切な家族なんだから！
+CharacterOff
+	レヴァ	通常	画面外_左
+	レヴァンテイン=ハル	慌て2
+	レヴァンテイン=ハル	慌て2						ちょ、ちょっと私は……！
+Tween	レヴァ	MoveBy	x=600 time=1				NoWait
+	レヴァ	笑い						はーい、\nハルは一緒にあっちで修行しよ♪\nマイマスターも！
+Se	走る
+Tween	レヴァ	MoveBy	x=1200 time=2				NoWait
+Tween	レヴァンテイン=ハル	MoveBy	x=1200 time=2				NoWait
+Wait						1
+CharacterOff
+	ヘル	通常						…………はぁ
+	ヘル	通常						いつからかしらね、\n私の周りが\nこんなににぎやかになったのは
+	ヘル	笑い						温かくて、優しくて\nお姉ちゃんの炎みたい……
+	ヘル	悲しい						でも、私の炎は違う\n私の炎はいつかきっと……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	草原A(火事)					0
+	         					0
+FadeIn	white					.3
+Wait						1.5
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	海岸					0
+	ヘル	悲しい				0
+FadeIn	white					.3
+	ヘル	悲しい						みんなを傷つける
+If	isdebug==true
+CharacterOff
+Jump	*E_1098_04
+EndIf
+EndScenario
+
+# E_1098_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	海岸					0
+	ディーア	怪しい2				0
+FadeIn	white					.5
+	ディーア	怪しい2						うーん、\nいろんな魔剣の組み合わせを試したり\n特訓はできているけれど
+	ディーア	怪しい2						まだ魔王装が\n使えそうな子はいないか……
+	ディーア	怒り2						グーラの言葉からも\nヘルには期待しているけど……
+	ディーア	怒り2						レヴァ、ヘルは<dash=2>
+CharacterOff
+	レヴァ	笑い						大丈夫だよ、マイマスター♪
+	ディーア	驚き2						レヴァ……
+CharacterOff
+	レヴァ	通常						お姉ちゃんだし、\nヘルを一番よく見ているのは私
+	レヴァ	通常						だからちゃんと分かっているよ\nヘルが悩んでいることは
+	レヴァ	笑い						でも……\n同じくらいわかっているの\nヘルは悩みに負けるほど弱くない
+	レヴァ	通常						きっかけがあれば\nきっともっと強くなってくれる！
+	レヴァ	通常						それにヘルの近くには\n私たちがいるし、離れたりしないから
+CharacterOff
+	ディーア	笑い2						……そうか\nだったらヘルのこと頼んだぞ
+CharacterOff
+	レヴァ
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	笑い						うん、任せておいて♪
+	レヴァ	通常						あっ、任せてって言えば、\n昨日からクサナギちゃんがいないけど\nどうしたの？
+CharacterOff
+	ディーア	笑い2						ああ、実はクサナギには\n別の頼みごとをしていて<dash=2>
+	レヴァンテイン=トリガー	<Off>	1_2					マスター様！\nこっちに変な魔物がいるよ！
+	ディーア	驚き2						変な魔物？
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	レヴァンテイン=トリガー	通常2				0
+FadeIn	black					.3
+Tween	レヴァンテイン=トリガー	PunchPosition	y=30				NoWait
+	レヴァンテイン=トリガー	通常2						こっちこっち！\nこの魔物なの……！
+CharacterOff
+	カエル型モンスター							…………
+CharacterOff
+	ディーア	怪しい2						変って、普通の魔物じゃないか？
+CharacterOff
+	レヴァビ	通常						それが、\nわたくしが前に行くと……！
+CharacterOff
+	カエル型モンスター
+Wait						1
+Se	闇1
+FadeOut	white					.1
+CharacterOff						0
+	キノコリオン					0
+	オーラ青		エフェクト裏			0
+Param	character_grayout=false
+FadeIn	white					.1
+	キノコリオン							ノコっ！
+CharacterOff
+	ディーア	驚き2						キノコリオンになった！
+CharacterOff
+	レヴァビ	悲しい						うぅ……\nツルツルしてるキノコさんは\nあまり好きじゃないですぅ……
+CharacterOff
+	レヴァンテイン=トリガー	通常2						こんな風に\n形が変わっちゃうの！
+CharacterOff
+	ディーア	怪しい2						不定形の魔物……？\nそんなのが野生にいるのか？
+	ディーア	通常2						でも、\nキノコリオンに変化するくらいなら\n危なくはないだろ
+CharacterOff
+	ヘル	通常						みんな、\nなにを騒いでいるの？
+	ヘル	通常						そんなキノコリオンくらい<dash=2>
+StopBgm
+CharacterOff
+	キノコリオン							…………
+Se	闇1
+FadeOut	white					.1
+CharacterOff						0
+	レヴァロスト	通常偽				0
+	オーラ青		エフェクト表			0
+FadeIn	white					.1
+	レヴァロスト	通常偽						……お姉ちゃん
+Bgm	緊迫
+CharacterOff
+	ヘル	通常
+Shake	ヘル		x=2				NoWait
+	ヘル	通常						っ……！
+CharacterOff
+	ディーア	悔しい2						レヴァ=ロストになった!?\nなんでいきなり!?
+CharacterOff
+	レヴァロスト	通常偽						ヘル……\nレヴァンテイン=ヘル……
+	レヴァロスト	通常偽						あなたが壊したの\nお姉ちゃんを蒼い炎で壊したのよ
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原A(曇り)					0
+	レヴァロスト	泣き				0
+FadeIn	white					.3
+	レヴァロスト	泣き						だって、だってだって……!!\nお姉ちゃんは私のせいで<dash=2>!!
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	海岸					0
+	ヘル	通常				0
+FadeIn	white					.3
+	ヘル	通常						っ、なにを……!
+	ヘル	通常						私はそんなことしない……！\nお姉ちゃんを傷つけたりしない……！
+CharacterOff
+	ディーア	悔しい2						ヘル、落ち着け！\n相手はただの幻想体……\nいや模倣体だ
+CharacterOff
+	ヘル	通常						わかっているわ……！
+	ヘル	通常						だから早く、\nこの忌々しい偽物を倒すわよ！
+CharacterOff
+	ディーア	本気2						ああ、\n行くぞヘル……！
+If	isdebug==true
+CharacterOff
+Jump	*E_1098_06
+EndIf
+EndScenario
+
+# E_1098_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	海岸					0
+Param	character_grayout=false
+	ディーア	悔しい2				0
+FadeIn	white					.5
+	ディーア	本気2						こいつ、ただの魔物じゃない\nあの時のレヴァ=ロストと\n同じ出力だぞ……！
+	ディーア	悔しい2						それに姿を変えるのをやめた？\n一番強力な形態を維持するのか……？
+CharacterOff
+	ヘル	通常						っ、だからって……！
+CharacterOff
+	レヴァロスト	通常偽						あなたはその炎を使えるの？
+	レヴァロスト	通常偽						常世すべてを燃やし尽くす、\n冥獄の蒼い炎……
+	レヴァロスト	通常偽						こんなに\n大切な人たちがいる場所で？
+CharacterOff
+	ヘル	悲しい						っ……！
+CharacterOff
+	ディーア	悔しい2						ヘル……！\nもっと出力を上げないと……!!
+CharacterOff
+	ヘル	通常						わかっているわ……！
+Se	火3
+	オーラ蒼炎		エフェクト裏			1
+	ヘル	通常						（けど……）
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場1F					0
+	レヴァ	笑い				0
+FadeIn	white					.3
+	レヴァ	笑い						ヘルー♪
+CharacterOff
+	レヴァンテイン=トリガー	通常						お姉さま！
+CharacterOff
+	レヴァビ	通常						へるさま！
+CharacterOff
+	レヴァンテイン=ハル	通常2						ふんっ……！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	海岸					0
+	ヘル	通常				0
+	オーラ蒼炎		エフェクト裏			0
+FadeIn	white					.3
+	ヘル	通常						（ここで本気を出したら、\n　あの子たちも……！）
+Se	フォーン
+CharacterOff	オーラ蒼炎					1
+Tween	ヘル	PunchPosition	y=20				NoWait
+	ヘル	悲しい						…………え？
+	ヘル	悲しい						私の炎が……!?
+CharacterOff
+	レヴァロスト	通常偽						燃えるのは……あなたよ
+StopBgm
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(火)		エフェクト裏			0
+Wait						.1
+Se	火3
+Se	光2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	海岸					0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+	レヴァロスト	通常偽						■■■■■っ……！
+Se	フォーン
+CharacterOff	レヴァロスト					1
+Wait						1
+CharacterOff
+	ヘル	通常						……っ！\nだれが……！
+Bgm	絶望
+CharacterOff
+	ディーア	怒り2	1_2
+	レヴァロスト	通常真	2_2_b
+	レヴァロスト	通常真						なにをやっているの？
+CharacterOff
+	ヘル							ほんもの、の……\nレヴァンテイン=ロスト……？
+CharacterOff
+	レヴァロスト	通常真						今のあなたの炎は\nあんな偽物にも負けていた……
+	レヴァロスト	通常真						いいえ、\n最後には炎さえ出せなくなっていた\nそうでしょう？
+CharacterOff
+	ヘル	通常						っ……
+CharacterOff
+	レヴァロスト	通常真						私と同じ過ちを\nこの世界でも繰り返すつもり？
+	レヴァロスト	通常真						今のあなたの炎では、\n守りたいものさえ守れない\nだから<dash=2>
+CharacterOff						0
+Bg	黒背景					0
+	レヴァロスト	<Off>						決めなさい\n世界を滅ぼす覚悟を
+If	isdebug==true
+CharacterOff
+Jump	*E_1098_07
+EndIf
+EndScenario
+
+# E_1098_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	海底
+Bg	海岸（夕）					0
+Param	character_grayout=false
+	ヘル	悲しい				0
+FadeIn	white					.5
+	ヘル	悲しい						…………
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	海岸					0
+	レヴァロスト	通常真				0
+FadeIn	white					.3
+	レヴァロスト	通常真						今のあなたの炎では、\n守りたいものさえ守れない\nだから<dash=2>
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	海岸（夕）					0
+	ヘル	悲しい
+FadeIn	white					.3
+	ヘル	悲しい						あの子の言う通りね……
+	ヘル	悲しい						でも、\nどうすれば守れるっていうの……
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	冥界の神殿					0
+	          
+FadeIn	white					.3
+	ヘル	<Off>						私は……レヴァンテイン=ヘルは\n冥界に封じられた邪悪な炎
+	ヘル	<Off>						あの世界で一番美しい、\nお姉ちゃんの赤い炎とは全く違う\n醜い蒼い炎……
+FadeOut	white					.3
+CharacterOff						0
+Bg	戦場跡					0
+	          
+FadeIn	white					.3
+	ヘル	<Off>						お姉ちゃんは\nこの世を燃やし尽くすことも\n闇から救うこともできるけれど
+	ヘル	<Off>						亡者の世界とつながっている\n蒼い炎は本来\nこの世に存在が許されない
+FadeOut	white					.3
+CharacterOff						0
+Bg	灰の大地					0
+	          
+FadeIn	white					.3
+	ヘル	<Off>						だからこそ形がないものも\n使う者の心……魂さえ蝕めてしまう
+	ヘル	<Off>						私が本気を出す時は、\nきっと<dash=4>
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	海岸（夕）					0
+	ヘル	悲しい	p3			0
+	レヴァ	通常	p7			0
+Param	character_grayout=true
+FadeIn	white					.3
+	レヴァ	通常						この世界を滅ぼしちゃう？
+	ヘル	通常						お姉ちゃん……
+Tween	レヴァ	MoveBy	x=-50				NoWait
+	レヴァ	笑い						ふふ、ヘールー♪
+Tween	ヘル	PunchPosition	y=10				NoWait
+	ヘル	通常						きゃっ……！\nいきなりどうしたのよ？
+	レヴァ	笑い						ううん、\nなんとなく抱きつきたかっただけ♪
+Tween	レヴァ	MoveBy	x=50				NoWait
+	レヴァ	通常						どうしてこんなところにいるの？\n向こうでみんなが\nキャンプファイアーしてるよ？
+	ヘル	通常						ほんと、\nただ遊びに来たみたいになってるわね
+	ヘル	通常						でも私はいいわ\nこうして静かにしていたいの
+	レヴァ	慌て						……やっぱり元気でない？
+	ヘル	悲しい						元々、私はお姉ちゃんと違って\n明るく元気な子じゃない
+	ヘル	悲しい						でも……そうね、\n今日はどうしたらいいかわからないわ
+	レヴァ	通常						うん
+	ヘル	通常						私にもわかっているの\nこのままじゃいけないって
+	ヘル	通常						七罪王との戦いも\nマスターが王になるための戦いでも\nもっと強くならないといけない
+	ヘル	通常						けれど、\nお姉ちゃんも知っているでしょ？\n私の炎は世界を滅ぼす……
+	ヘル	通常						知らない誰かだけじゃない、\nお姉ちゃんやマスター、\nこの平穏さえも壊してしまう
+	ヘル	通常						レヴァ=ロストが\nそうしてしまったように……
+StopBgm
+	ヘル	通常						そんな私が本気を出して……\nいったい何ができるというのよ？
+Tween	レヴァ	PunchPosition	x=5				NoWait
+	レヴァ	通常						……えいっ♪
+	ヘル	悲しい						いたっ……!?
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	笑い						ヘルは真面目！ 考えすぎっ！
+StopBgm
+	ヘル	通常						お姉ちゃん……
+Bgm	凱旋
+	レヴァ	通常						知ってるよ、\nヘルの蒼い炎のことも
+	レヴァ	通常						そのせいで昏い世界に\nヘルを一人ぼっちにしちゃったことも\nちゃんと覚えてる
+	ヘル	通常						…………
+	レヴァ	笑い						でも、\n私はヘルを怖いと思ったことないよ
+	レヴァ	笑い						ヘルは私の大切な妹で、\nいつも一番に守ってあげたい子！
+	レヴァ	通常						私も世界を滅ぼすとか言われたけど、\nヘルを守るためなら、\n世界の全部を敵にしても良いの
+	レヴァ	通常						ヘルはどう？
+	レヴァ	笑い						もし私がヒロインじゃなくて、\nそんな悪い子になっちゃったとしたら\nヘルは私のこと嫌いになる？
+Tween	ヘル	PunchPosition	y=30				NoWait
+	ヘル	通常						そんなことないわ……！\n私だってお姉ちゃんを守るためなら
+	ヘル	通常						……あっ
+	レヴァ	笑い						それが大事なことなんだと思うよ
+	レヴァ	笑い						私だって同じ\nヘルやマスターを守るためなら\nなんだってできる……！
+	ヘル	悲しい						…………\nこれは私の弱さなのかしら
+	ヘル	悲しい						今いる場所が温かすぎて\n壊したり拒絶されることを\n恐れていたのね……
+	レヴァ	通常						違うよ、\nそれもヘルのちゃんとした成長
+	レヴァ	笑い						みんなのことを傷つけたくなくて\n手加減しなきゃなんて
+	レヴァ	笑い						マイマスターのところに来なかったら\n思うこともなかったでしょ？
+	ヘル	笑い						……ふふ、そうね
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	笑い						みんなで協力して、\n遊んだり、悩んだり、ふざけたり！
+	ヘル	笑い						海に行ったり山に行ったり、\n強い敵とも戦ったり
+	レヴァ	笑い						私はマイマスターとヘルと\n一緒にいるのが大好き……♪
+	レヴァ	通常						それはみんなも同じ♪\nそうでしょ、みんな……！
+	ヘル	通常						みんなって……
+CharacterOff
+	レヴァンテイン=トリガー	通常2	p7					うん、もちろんよ！\nヘルお姉様！
+	レヴァビ	通常	p3b			.5		へるさまのことも\nわたくしが守ってみせますっ！
+CharacterOff
+	レヴァ	笑い						それに……！
+CharacterOff
+	レヴァンテイン=ハル	慌て2						むむ……
+CharacterOff
+	ヘル	通常						ハル……
+CharacterOff
+	レヴァンテイン=ハル	通常2
+Tween	レヴァンテイン=ハル	PunchPosition	y=30				NoWait
+	レヴァンテイン=ハル	通常2						いい！\nハルが例えてあげる！
+	レヴァンテイン=ハル	通常2						いつもの\nヘルが燃え上がる綺麗な花なら
+	レヴァンテイン=ハル	通常2						今のヘルは\nしおしおの燃えカスよ!!
+	レヴァンテイン=ハル	通常2						この美しい私がわざわざ\nあなたを止めるって言ってるのに
+Tween	レヴァンテイン=ハル	PunchPosition	y=30				NoWait
+	レヴァンテイン=ハル	通常2						そのあなたがこんなに弱ってたら\n私の立場がないじゃない！
+CharacterOff
+	ヘル	通常						……この子、\nいきなり何を言ってるの？
+CharacterOff
+	レヴァンテイン=ハル	慌て2						と、とにかく！\nあなたを助けるわけじゃないし\nぜったいに勘違いしないでほしいけど
+	レヴァンテイン=ハル	通常2						もしあなたの炎が暴走して\n世界を壊しそうになったなら
+	レヴァンテイン=ハル	通常2						そうなる前に\n私が後始末くらいはしてやるわ！\nだから安心しなさい！
+CharacterOff
+	ヘル	通常						…………余計なお世話よ
+CharacterOff
+	レヴァンテイン=ハル	慌て2						な、なんですって!?
+CharacterOff
+	ヘル	笑い						でも……ありがとう
+CharacterOff
+	レヴァンテイン=ハル	慌て2						っ！
+CharacterOff
+	レヴァ	笑い						もちろん私もそうだよ♪
+	レヴァ	笑い						ロストになったヘルにも言ったでしょ\nぜったいにあなたを離さない\nお姉ちゃんとして助けるって
+	レヴァ	通常						みんなでヘルを支えるから、\nなにも気にしないで戦いなさい♪
+CharacterOff
+	ヘル	笑い						うん……
+	ヘル	笑い						そうね、\n私にはもうお姉ちゃんやみんながいる
+	ヘル	笑い						どうしても守りたいものがある
+StopBgm
+	ヘル	笑い						だったら私も……\nちゃんと覚悟を決めるわ
+FadeOut	black					.3
+CharacterOff						0
+Bg	草原A					0
+	ディーア	怒り2				0
+Wait						1
+FadeIn	black					.3
+	ディーア	怒り2						いいのか、ヘル？\n確かにあの魔物と同じ反応だけど
+CharacterOff
+	ヘル	通常						ええ、あの魔物は\n相手の恐怖心を具現化する\nだから私には、私の恐怖を<dash=2>
+	ヘル	通常						レヴァ=ロストっていう\nお姉ちゃんを傷つける可能性を\n見せてきた
+	ヘル	通常						だからちょうどいい相手よ\n私はその恐怖を乗り越えてみせる
+	ヘル	笑い						見せてほしいんでしょ？\n私の本気を
+CharacterOff
+	ディーア	笑い2						ああ、もちろんだ……！
+CharacterOff
+	ヘル	通常						そして……出たわね
+Bgm	特殊バトル
+CharacterOff
+	おばけB		1_5_m
+	おばけC		5_5_m
+	おばけA		2_3_m					…………
+Se	闇1
+FadeOut	white					.2
+CharacterOff						0
+	偽レヴァロスト2	通常偽2	p1b			0
+	偽レヴァロスト3	通常偽3	p9b			0
+	レヴァロスト	通常偽	p5			0
+FadeIn	white					.2
+	レヴァロスト	通常偽						ごめんなさい、お姉ちゃん……
+CharacterOff
+	ディーア	驚き2						数が多い……!?
+	ディーア	悔しい2						しかも一体一体が\nレヴァ=ロストと同じ程度の\n出力だぞ
+CharacterOff
+	ヘル	通常						数なんて関係ないわ
+	ヘル	通常						それに、この世界で頑張っている\nあの子の真似をするなんて趣味が悪い
+	ヘル	通常						こんな模造品\n何体でも倒してみせる
+CharacterOff
+	偽レヴァロスト2	通常偽2	p1b
+	偽レヴァロスト3	通常偽3	p9b
+	レヴァロスト	通常偽	p5
+	レヴァロスト	通常偽						本当に使うつもりなの？\nあなたの炎はすべてを\n燃やし<dash=2>
+CharacterOff
+	ヘル	通常						そうよ\nすべてを燃やすの
+	ヘル	通常						私はそうやって生まれた\nそういう伝承を背負って生きていく
+	ヘル	通常						なのに大切なものが増えて\nいつの間にか臆病にもなってた
+	ヘル	笑い						でも……ふふっ、世界を守る？
+	ヘル	笑い						違う、違う……！\nそんな殊勝なこともう考えない……
+	ヘル	笑い						私に必要なのは\nそんなありふれたものじゃない……
+Param	character_grayout=false
+Se	チャージ
+	オーラ紫		エフェクト裏2			2
+	ヘル	通常						私に必要なのは\n一番大切なものだけを守る力……！
+	ヘル	通常						私を昏い孤独から救ってくれた\nみんなを守る絶対の炎……！
+Se	火3
+	オーラ蒼炎		エフェクト裏			2
+	ヘル	通常						それで世界が燃えるというなら\n燃やし尽くしてみせるわ！
+	ヘル	通常						いくわよ、マイマスター！
+Se	火2
+Se	火3
+Bgm	タイトル
+FadeOut	purple					2
+CharacterOff						0
+Bg	白背景					0
+	ヘル	拡大魔王尻	エフェクト表			2
+	          
+FadeIn						1
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	ヘル	拡大魔王胸	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	ヘル	拡大魔王顔	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+Bg	草原A(火事)					0
+CharacterOff						0
+	ヘル	魔王エフェクト				0
+	          
+FadeIn	white					.3
+	ヘル	魔王エフェクト						もう私は、\n私の炎を恐れたりしない
+CharacterOff
+	ヘル	拡大魔王顔	エフェクト表					私はレヴァンテイン=ヘル\n世界を滅ぼす冥なる炎……！
+If	isdebug==true
+CharacterOff
+Jump	*E_1098_07
+EndIf
+EndScenario
+
+# E_1098_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	勇者バトル
+Bg	草原A(火事)					0
+	レヴァ	笑い				0
+FadeIn	white					.5
+	レヴァ	笑い						わぁ♪\nヘルの炎、すっごくきれい！
+	レヴァンテイン=トリガー	通常2						かっこいいわ！
+CharacterOff
+	レヴァンテイン=ハル	慌て2
+Tween	レヴァンテイン=ハル	PunchPosition	y=30				NoWait
+	レヴァンテイン=ハル	慌て2						ちょっと\n感心してる場合じゃないわよっ！
+	レヴァンテイン=ハル	慌て2						ほんとにヘルのやつ、\n炎のコントロールも放棄して……！
+	レヴァンテイン=ハル	慌て2						これが遠慮も配慮もなしな\n全力のレヴァンテイン=ヘル……！
+Tween	レヴァンテイン=ハル	PunchPosition	y=30				NoWait
+	レヴァンテイン=ハル	慌て2						燃える……！\nこのままだと本当に\n世界が燃えちゃうわよ!?
+Param	character_grayout=false
+CharacterOff
+	ヘル	魔王エフェクト						だったら、\nあなたが消せばいいでしょ……！\n自称美しすぎる水!!
+CharacterOff
+	レヴァンテイン=ハル	慌て2						自称じゃないわよ……！\nこのっ……！\nマスター、こっちにも魔力回して！
+	レヴァンテイン=ハル	通常2						言った通り、尻拭いしてあげるから\nさっさと終わらせなさい！
+CharacterOff
+	レヴァ	笑い						やっちゃえ、ヘル♪
+CharacterOff
+	ヘル	魔王エフェクト						なら、そろそろ\n勝負を決めましょうか……！
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	ヘル	魔王エフェクト						蒼翠の焔、冥なる昏き名において\n汝よ滅にて姿を示せ……！
+CharacterOff
+	ヘル	拡大魔王顔	エフェクト表					ブレイズドライブ……!!
+Se	チャージ
+FadeOut	white					2
+StopBgm
+Se	光3
+Se	火3
+Se	闇3
+CharacterOff						0
+Bg	海岸					0
+	レヴァ	笑い				0
+Wait						4
+FadeIn	white					.5
+	レヴァ	笑い						せーのっ!!
+CharacterOff
+	レヴァビ	通常	p2b
+	レヴァンテイン=ハル	通常2	2_3
+	レヴァンテイン=トリガー	通常2	p9
+	全員							ヘル、おめでとー！
+Bgm	海岸
+CharacterOff
+	ヘル	通常						……お姉ちゃん？\nいったいなんなのこれは？
+Param	character_grayout=true
+CharacterOff
+	レヴァ	通常						なにってヘルが勝ったお祝いだよ♪\nヘルの本気すごかったね……！
+	レヴァ	通常						私たちのこと\n信じてくれてありがとう……！
+CharacterOff
+	レヴァビ	通常	p3b
+	レヴァンテイン=トリガー	通常2	p7
+	レヴァンテイン=トリガー	通常2						辺り一面焼け野原だったわ！
+	レヴァビ	通常						ぺんぺん草も残りませんでした！
+CharacterOff
+	レヴァンテイン=ハル	慌て2						はぁ、はぁ……\nすべて鎮火させるのに、\nあれだけ時間がかかるなんて
+CharacterOff
+	レヴァ	笑い						ハルもお疲れ様♪
+CharacterOff
+	レヴァンテイン=ハル	慌て2						レヴァも煽ったんだから\nちょっとは協力しなさいよ……
+CharacterOff
+	ヘル	笑い						あら、自分で消すって言ったのに\nたいしたことないわね
+CharacterOff
+	レヴァンテイン=ハル	慌て2						な、なんですって……！\nこんなの平気よ！\nまだまだ私も強くなるんだから！
+CharacterOff
+	ヘル	笑い						そう、期待しないでおくわ
+	ヘル	通常						それで……\nみんな忘れていないでしょうね？\n私たちは特訓に来たのよ？
+	ヘル	通常						確かに私が魔王装を手に入れて\n戦力は増やせたけれど
+	ヘル	通常						七罪王グーラとの戦いは\nまだ始まってもいないんだから\nこんなことする暇なんて<dash=2>
+CharacterOff
+	レヴァ	笑い
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	笑い						えーいっ！
+Se	ダイブ
+CharacterOff
+	ヘル	通常
+Shake	ヘル		x=2				NoWait
+	ヘル	通常						わっ……！\nお、おねえちゃん……!?
+CharacterOff
+	レヴァ	通常						難しいこと考える前に、\nまずはヘルをちゃんと褒めたいの♪
+	レヴァ	通常						それに、\n私たちはただ戦うんじゃないよ？
+	レヴァ	通常						ヘルが言ってくれたみたいに\nマイマスターと仲間のみんなを\n守るために戦うの
+	レヴァ	笑い						だからこのお祝いも、\nちゃんとヘルに必要なこと♪\nそうでしょ？
+CharacterOff
+	ヘル	笑い						…………ふふっ、\nやっぱりお姉ちゃんには敵わないわね
+	ヘル	通常						じゃあ今日くらい、\nお祝いしてもらおうかしら
+CharacterOff
+	ヘル	拡大笑い	エフェクト表					みんな……\n………………いつもありがとう
+FadeOut	black					.3
+CharacterOff						0
+Bg	海岸					0
+	ディーア	通常2	1_2			0
+	レヴァロスト	通常真	2_2			0
+FadeIn	black					.3
+	レヴァロスト	通常真						あなたはどこまで気づいていたの？
+	ディーア	通常2						あの魔物が誰の差金かってことか？
+	レヴァロスト	通常真						ええ、都合がいいもの\n相手の心を読み姿を変える魔物が\n何体もいるなんて
+	レヴァロスト	通常真						どこかの誰かが一帯に放した……\nあなたたちを成長させるために
+	ディーア	目閉じ2						あくまで俺の妄想だけど
+	ディーア	笑い2						今日のお嬢様は、暑すぎて\n外に出るのが嫌だったのかもな……
+	レヴァロスト	通常真						食えない人ね、\nあなたも彼女も……
+StopBgm
+	ディーア	怒り2						だけどまだだ……
+CharacterOff						0
+Bg	黒背景					0
+	ディーア	<Off>						グーラを封印するためには\nまだ<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+Bg	洞窟A					0
+	グーラ	通常				0
+Wait						3
+FadeIn	black					.3
+Bgm	図書館
+Shake	グーラ		x=2				NoWait
+	グーラ	通常						ぐぅ……おぉおお……
+	グーラ	通常						まだだ、まだ……
+CharacterOff
+	ルークスリア	通常						苦しそうね、暴食のグーラ
+CharacterOff
+	グーラ	通常						ルークス、リアか……
+	グーラ	通常						心配しなくていい\n必ず私の役割は果たしてみせる……
+CharacterOff
+	ルークスリア	通常						……そぅ、なら安心したわ
+CharacterOff
+	グーラ	通常						ふふっ……\n期待しているぞ、魔剣使い……
+	グーラ	通常						お前ならば、きっと……
+FadeOut	black					.3
+CharacterOff						0
+Bg	研究所B					0
+	          
+Wait						2
+FadeIn	black					.3
+	クサナギノツルギ	通常				.5		ふんふんふーん♪\nおつかい、おつかいー♪
+	クサナギノツルギ	通常						あるじ様にお願いされちゃったー♪
+	クサナギノツルギ	通常						でも……\nほんとにここであってるのかなぁ？\nなんにもないけど
+CharacterOff
+	ププッピマリー	通常						お待ちしておりました\nクサナギノツルギ様……
+CharacterOff
+	クサナギノツルギ	通常						マリーさん？
+	クサナギノツルギ	通常						マリーさんも\nクサナギノツルギにお願いがあるの？
+CharacterOff
+	ププッピマリー	通常						ええ、\n全ては貴方のマスターのために
+	ププッピマリー	通常						どうかこの新たなる:Blazeを
+Param	character_grayout=false
+StopBgm
+FadeOut	black					.2
+CharacterOff						0
+	黒グラデーション		エフェクト表2			0
+	クサナギB	プレ				0
+	オーラ青		エフェクト表			0
+FadeIn	black					.2
+	ププッピマリー	<Off>	1_2					神劍クサナギノツルギ:Blazeを\nお願いいたします
+Se	心拍
+FadeOut	black					0
+CharacterOff						0
+Bg	黒背景					0
+	         					0
+FadeIn	black					1
+	イベントロゴ10981		エフェクト表			3
+Wait						3
+	          							<color=blue>Link Up :Blaze Hearts\n　　　　　　　　 To Be Continued</color>
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1098_01
+EndIf
+EndScenario

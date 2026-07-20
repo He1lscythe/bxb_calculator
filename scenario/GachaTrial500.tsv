@@ -1,0 +1,389 @@
+# G_500_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	オーラ桃		エフェクト裏			0
+	マナ	通常拡大	エフェクト表			0
+FadeIn	white					.5
+	マナ	通常拡大						だんな様、だんな様！\nマナにお仕事はありませんか？
+Selection	*G500_01							お仕事？
+*G500_01
+CharacterOff	オーラ桃					0
+	マナ	通常	2_3			0		はいっ！\nマナはだんな様の\nお役に立ちたいんです♪
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	嬉しい						だんな様のお家はとっても温かくて\n大好きだから
+	マナ	嬉しい						ちゃんと『せーしゃいん』に\nなれるようにがんばらないと♪
+	マナ	通常						人間の世界は難しいけど、\n『おちゃくみ』でも『ざつよー』でも\nなんでも言ってください♪
+	マナ	嬉しい						マナ、ちっちゃいですけど、\nだんな様のお役にたってみせます♪
+	ディーア	<Off>	1_2					じゃあ……
+Selection	*G500_02							モフらせて
+*G500_02
+	マナ	通常拡大	エフェクト表				0	はいっ！\nどうぞ……♪
+Se	ポップイン
+Shake	マナ		x=5				NoWait
+	マナ	嬉しい拡大	エフェクト表					ひゃん……♪\nくすぐったいけど、きもちいい♪\nもっとナデナデ<dash=2>
+CharacterOff
+	マナ	慌て
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	慌て						はっ……！
+	マナ	慌て						待ってくださいだんな様！\nナデナデも好きですけど、\nちゃんとしたお仕事はありませんか？
+CharacterOff
+	リディ	通常2						あっ！\nそれじゃあ、あのお仕事を\nお願いしたらいいんじゃない？
+CharacterOff
+	マナ	通常
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	通常						お仕事、あるんですか!?
+CharacterOff
+	リディ	笑い2						うん♪\nとっても楽しくて、\n大切なお仕事があるの♪
+CharacterOff
+	マナ	通常						ドキドキ……♪
+Selection	*G500_03							クリスマスの手伝いをしてほしい
+*G500_03
+	マナ	怪しい						クリスマス、ですか？
+Tween	マナ	PunchPosition	y=50				NoWait
+	マナ	嬉しい						わかりましたっ！\nクリスマスの準備、がんばります♪
+Se	走る
+FadeOut	black					.3
+CharacterOff						0
+Wait						1
+Bg	市街地A					0
+	マナ	笑い				0
+FadeIn	black					.3
+	マナ	笑い						えへへ♪ お仕事、お仕事～♪\nお役に立つぞー！
+	マナ	笑い						だんな様に\n最高のクリスマスを……！
+	マナ	怪しい						クリスマスを……
+	マナ	怪しい						あれ……？
+Bgm	緊迫
+CharacterOff
+	集中線		エフェクト表
+	マナ	慌て拡大	エフェクト裏
+	マナ	慌て拡大						クリスマスって……なに!?
+Bgm	コメディ
+CharacterOff
+	マナ	慌て
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	慌て						ふぇええ!? た、大変っ！\nマナ、わからないのに\nお返事しちゃったよぉ……！
+Shake	マナ		x=5				NoWait
+	マナ	慌て						ど、どうしよう……！\nこのままじゃ……！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	怪しい2				0
+FadeIn	white					.3
+	ディーア	怪しい2						残念だけど\nマナは『りすとら』だ
+CharacterOff
+	マナ	悲しい
+Shake	マナ		x=5				NoWait
+	マナ	悲しい						だんな様、\nすてないでくださいぃ……！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	市街地A					0
+	マナ	悲しい				0
+FadeIn	white					.3
+	マナ	悲しい						また一人になっちゃう……！\nそ、そんなのイヤだよぉ……！
+StopBgm
+	マナ	慌て						マナ、がんばらないと……！\nまずは<dash=2>
+Se	走る
+Tween	マナ	MoveBy	x=-800 time=1.5				NoWait
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場1F					0
+	スコハテ	聖夜				0
+Bgm	都市
+FadeIn	black					.3
+Tween	スコハテ	PunchPosition	y=30				NoWait
+	スコル	<Off>						わーい、クリスマス♪\nスーもサンタさん♪
+	ハティ	<Off>						楽しみだね、お姉ちゃん♪
+CharacterOff
+	マナ	通常	画面外_右
+Tween	マナ	MoveBy	x=-700 time=1.5				NoWait
+Wait						1.3
+	マナ	通常	画面外_右					スコルちゃん、ハティちゃん！\n二人はクリスマスって知ってる？
+CharacterOff
+	スコハテ	聖夜
+	ハティ	<Off>						うん、知ってるよ♪
+CharacterOff
+	マナ	怪しい						マナ、クリスマスがわからなくて、\n教えてほしいんだけどぉ……
+CharacterOff
+	スコハテ	聖夜
+	スコル	<Off>						教えてあげる♪
+	ハティ	<Off>						えっと、クリスマスは<dash=2>
+Tween	スコハテ	PunchPosition	y=30				NoWait
+	スコル	<Off>						パーティ♪
+	ハティ	<Off>						おいしいものを食べるの♪
+	スコル	<Off>						サンタさん！
+	ハティ	<Off>						ハーちゃんたちみたいな格好で\nプレゼントをくれる人だよ♪
+CharacterOff
+	マナ	通常						わぁ♪\n面白そうっ……！
+	マナ	怪しい						そういえば\nクリスマスってどんな意味なの？
+CharacterOff
+	スコハテ	聖夜
+	スコル	<Off>						うーん、わかんない！
+	ハティ	<Off>						もともとは禁忌術式っていう、\n危ないこともしてたみたいだけど
+Param	character_grayout=true
+CharacterOff
+	マナ	慌て						き、きんき……？\n難しそうだけど、\nがんばって勉強しないと……！
+	？？？？		1_2					ふっふっふ♪\nお困りかにゃ？ お困りだにゃ？
+	マナ	怪しい						え……？
+Param	character_grayout=false
+CharacterOff
+	バステト=ステラ	聖夜
+	集中線		エフェクト表
+	バステト=ステラ	聖夜						勉強なら、\nかしこいステラの出番にゃー！
+CharacterOff
+	マナ	通常						あっ、ステラちゃん！
+CharacterOff
+	バステト=ステラ	聖夜
+Tween	バステト=ステラ	PunchPosition	y=30				NoWait
+	バステト=ステラ	聖夜						かしこいステラがオトナな\nクリスマスを教えてあげるにゃ♪\n本もいっぱい拾ったんだにゃ♪
+CharacterOff
+	スコハテ	聖夜
+	スコル	<Off>						おとなー！ すごそう!!
+	ハティ	<Off>						よくわからないけど、\nマスターさまはそっちが好きかも！
+CharacterOff
+	マナ	通常						た、たしかに……！\nマナたちよりオトナだもんね！
+	マナ	怪しい						ステラちゃん、\n『オトナのクリスマス』って\nなにをするの？
+CharacterOff
+	バステト=ステラ	聖夜						にゃふふー！\nまずは<dash=2>
+Param	character_grayout=true
+CharacterOff
+	マナ	怪しい	1_2
+	バステト=ステラ	聖夜	画面外_右
+Tween	バステト=ステラ	MoveBy	x=-500 time=1				NoWait
+Wait						.5
+	バステト=ステラ	聖夜						ゴニョゴニョ……にゃ！
+Tween	マナ	PunchPosition	y=50				NoWait
+	マナ	慌て						えーっ！\nオトナのクリスマスってすごい！\nマナもできるかな……？
+	マナ	怪しい						でも、うまくできたら\nだんな様と家族に……！
+	マナ	笑い						ありがとう、みんな！\nマナ、がんばるね♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Param	character_grayout=false
+CharacterOff						0
+Bg	雪の街					0
+Bgm	ショッピング
+FadeIn	black					.3
+	         							\n  　　　<color=blue><dash=2>クリスマス当日<dash=2></color>
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	マナ	通常				0
+FadeIn	black					.3
+	マナ	通常						だんな様♪\nとうとうクリスマスですね♪
+Selection	*G500_04							準備はできた？
+*G500_04
+	マナ	嬉しい						はい！\n楽しんでください♪
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	通常						まずは、\nパーティのごちそうです♪
+	マナ	通常						美味しいキノコにチキン！\nくるみと木の実でケーキも！\n材料はマナが用意したんです♪
+	マナ	笑い						立派なもみの木も持ってきました♪\nクリスマスツリーです♪
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	通常						でも、\nこれだけじゃありません♪
+	マナ	嬉しい						パーティのあとは……\nオトナの時間です♪
+StopBgm
+	マナ	通常						だんな様♪
+FadeOut	white					.3
+CharacterOff						0
+	オーラ桃		エフェクト裏			0
+	マナ	嬉しい拡大	エフェクト表			0
+FadeIn	white					.3
+	マナ	嬉しい拡大						お部屋、用意していますよ♪
+Bgm	緊迫
+Selection	*G500_05							！？
+*G500_05
+Bgm	神秘
+	マナ	通常拡大						マナが\nだんな様を『せったい』します♪
+	マナ	嬉しい拡大						禁忌でイケないけど、\nとっても楽しいことをしましょう♪
+FadeOut	white					.3
+CharacterOff	マナ					0
+	マナ	通常腹拡大	エフェクト表			0
+FadeIn	white					.3
+	マナ	通常腹拡大						ちっちゃくても、\nマナはやり方を知っています♪
+	マナ	嬉しい拡大						眠くなるまで、六時間♪\nがんばりましょうね♪
+	マナ	嬉しい拡大						それで\n一緒に爆発したら<dash=2>
+	マナ	通常拡大	エフェクト表					家族が増えますから♪
+StopBgm
+Selection	*G500_06							どこでそんなの教わったんだ!?
+*G500_06
+CharacterOff						0
+Bgm	コメディ
+	マナ	嬉しい				0		ステラちゃんたちと\n勉強しました♪
+	マナ	通常						大人はさり気なく\nお部屋に誘うのがマナー♪
+	マナ	通常						ビンのラベルの向きとか、\nお皿のとりわけとかやり方も守ります
+	マナ	嬉しい						禁忌の儀式で仲良くできたら、\n爆発しろって言われて、\n家族が増えるんです♪
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	嬉しい						クリスマスってすごいですね！
+	マナ	嬉しい拡大	エフェクト表					さあ、だんな様♪\nマナとクリスマスしましょう♪
+Selection	*G500_7							却下
+*G500_7
+CharacterOff						0
+	マナ	慌て				0		ふ、ふぇええ!?\nどうしてですかぁ？
+	マナ	慌て						もしかして、\nマナ、間違えちゃったんですか!?
+	マナ	慌て						で、でも……！\nまだマナの『ぷれぜん』は\n終わっていません！
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	通常						クリスマスといえば、サンタさん！
+	マナ	笑い						さっきお外で\nサンタさんを見つけたんです！\n特別ゲストです！
+	マナ	嬉しい						さあ、どうぞ！\n赤くて白い<dash=2>
+FadeOut	white					.2
+CharacterOff						0
+	キノコリオン					0
+	集中線		エフェクト表			0
+Bgm	緊迫
+FadeIn	white					.2
+	マナ	<Off>						サンタさん!!
+	キノコリオン							ノコっ！
+StopBgm
+Selection	*G500_8							ノコ!?
+*G500_8
+CharacterOff						0
+Bgm	バトル
+	マナ	嬉しい				0		どうですか、だんな様！\nこれでお役に<dash=2>
+Selection	*G500_9							マナ、戦うぞ！
+*G500_9
+Shake	マナ		x=5				NoWait
+	マナ	慌て						えぇえええ!?\nサンタさん、倒しちゃうんですかぁ!?
+Selection	*G500_10							倒さないとクリスマスができない！
+*G500_10
+	マナ	慌て						さ、サンタさんを倒すのが\nクリスマスだったなんて……！
+CharacterOff
+	集中線		エフェクト表
+	マナ	慌て拡大	エフェクト裏
+	マナ	慌て拡大						わかりました！\nマナ、がんばります！
+If	isdebug==true
+CharacterOff
+Jump	*G_500_02
+EndIf
+EndScenario
+
+# G_500_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+Param	character_grayout=false
+	土煙		エフェクト裏			0
+	マナ	慌て				0
+FadeIn	white					.5
+CharacterOff	土煙					2
+	マナ	慌て						そんなぁ……！\nサンタさんじゃなかったなんて……\nお部屋も汚れちゃいましたぁ……
+Shake	マナ		x=5				NoWait
+	マナ	悲しい						だんな様ごめんなさい……！\nマナ、お役に立てなくて……！\nぐすっ……！
+	マナ	慌て						マナ、肩ポンですか？\n『りすとら』されちゃいますか？ 
+	マナ	悲しい						うぅっ……！\nお役に立てたら、\n家族になれると思ったのに……
+CharacterOff
+	スコハテ	聖夜
+	スコル	<Off>						大丈夫♪
+	ハティ	<Off>						泣かないで、マナちゃん！
+CharacterOff
+	マナ	悲しい						え……？
+CharacterOff
+	バステト=ステラ	聖夜						捨てられたりしないにゃ！
+Selection	*G500_11							マナはもう家族の一員だ
+*G500_11
+	マナ	怪しい				0		だ、だんな様……
+CharacterOff
+	スコハテ	聖夜
+	スコル	<Off>						お片付け！ パーティ！
+	ハティ	<Off>						マナちゃん、\n片付けも手伝うよ♪
+CharacterOff
+	バステト=ステラ	聖夜						みんなでならすぐ終わるにゃ！
+CharacterOff
+	マナ							みんな……！
+CharacterOff
+	バステト=ステラ	聖夜						マナちゃんはその間に\nお着替えしてくるにゃ♪
+CharacterOff
+	マナ	怪しい						でもぉ、\nマナ、お洋服はお古しか……
+StopBgm
+Selection	*G500_12							大丈夫
+*G500_12
+FadeOut	white					1
+CharacterOff						0
+Bg	白背景					0
+	マナ	聖夜胸拡大	エフェクト表			0
+	オーラ桃		エフェクト裏
+Bgm	雪の街
+FadeIn	white					.3
+Wait						1.5
+FadeOut	white					.3
+CharacterOff						0
+	マナ	聖夜足拡大	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Wait						1.5
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場_宿屋(夜)					0
+	マナ	聖夜2				0
+	          
+FadeIn	white					1
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	聖夜2						うわぁ……！\nカワイイお洋服です……！
+	マナ	聖夜2						本当に\nマナがもらっていいんですか？
+Selection	*G500_13							家族へのプレゼントだ
+*G500_13
+	マナ	聖夜嬉しい2						だんな様……!!
+	マナ	聖夜嬉しい2						あったかい♪ \nすんすん、だんな様の匂いもする♪
+	マナ	聖夜2						でも、だんな様……\nこれの付け方わからなくて<dash=2>
+FadeOut	white					.3
+CharacterOff						0
+	マナ	聖夜嬉しい2拡大	エフェクト表			0
+FadeIn	white					.3
+	マナ	聖夜嬉しい2拡大						マナに、\nつけてくれませんか？
+FadeOut	white					.3
+CharacterOff						0
+	マナ	聖夜嬉しい拡大	エフェクト表			0
+Se	チリン
+FadeIn	white					.3
+	マナ	聖夜嬉しい拡大						んっ……♪
+FadeOut	white					.3
+CharacterOff						0
+	マナ	聖夜嬉しい				0
+FadeIn	white					.3
+	マナ	聖夜嬉しい						えへへ……♪\nこれが、家族の証……♪
+	マナ	聖夜						ありがとうございます、だんな様\n家族に迎えてもらって、\nすてきなプレゼントまで……
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	聖夜嬉しい						マナ、\nこの場所が大好きです♪
+	マナ	聖夜嬉しい						だから、お役に立てるように\nもっともっとがんばりますね♪
+Selection	*G500_14							ああ、期待してるぞ
+*G500_14
+StopBgm
+Se	ドア開く
+CharacterOff						0
+	バステト=ステラ	聖夜				0		準備できたにゃ！
+Bgm	ショッピング
+CharacterOff
+	スコハテ	聖夜
+	スコル	<Off>						はやくはやく！
+	ハティ	<Off>						みんな待っていますよ♪
+Selection	*G500_15							それじゃあ、あの挨拶だな
+*G500_15
+CharacterOff						0
+	マナ	聖夜				0		はいっ！\nそれは勉強しました！
+Tween	マナ	PunchPosition	y=30				NoWait
+	マナ	聖夜嬉しい						だんな様、メリークリスマス♪
+FadeOut	white					.3
+CharacterOff						0
+Bg	白背景					0
+	マナ	聖夜嬉しい拡大	エフェクト表			0
+FadeIn	white					.3
+	マナ	聖夜嬉しい拡大						これからもだんな様の\n家族でいさせてください♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_500_01
+EndIf
+EndScenario

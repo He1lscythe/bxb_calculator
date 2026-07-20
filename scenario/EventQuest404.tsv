@@ -1,0 +1,2310 @@
+# E_404_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	作戦会議
+Bg	酒場1F
+	リディ	悔しい2
+FadeIn	white					.5
+												修正箇所を黄色に染めてみた
+	リディ							……さて、アヌビスちゃん
+CharacterOff
+	アヌビス
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							なあにリディちゃん
+	リディ	悔しい2						これから作戦会議を始めます
+	リディ	怒り2						<dash=2>まず状況を再確認するね
+	アヌビス							うん
+	リディ	悔しい2						リディたちは誰かさんのせいで\nすごい借金を背負ってしまいました
+CharacterOff
+	アヌビス
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							わぁ、大変だ
+	リディ	悔しい2						リディたちは今とてもピンチです
+StopBgm
+	アヌビス							アヌビス悪くないよ
+CharacterOff
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+Bgm	コメディ
+	リディ							アヌビスちゃんのせいだよね？\n酒場のお金勝手に使ったの、\nアヌビスちゃんだよね？
+	アヌビス							違うよ、アヌビスじゃないよ！
+	リディ	怒り2						もう、ごまかしても無駄だからね！\n他に誰もいないでしょ！
+	アヌビス							でも証拠とかなくない？\nもしかしたらリディちゃんかも\nしれないよ？
+	リディ	悔しい2						……アヌビスちゃん、\n魔界ちゅーぶやってるよね
+Param	character_grayout=false
+Tween	リディ	MoveTo	x=-90				NoWait
+	トライアルスチル37301		エフェクト表
+	トライアルスチル37301							<color=#C71585>アヌビス悪くないよ♪\nどうも、アヌビスちゃんねるです！</color>
+	アヌビス		画面外_右
+Tween	アヌビス	MoveTo	x=90 time=1.5				NoWait
+Wait						1
+Se	打1
+Tween	トライアルスチル37301	PunchPosition	y=100				NoWait
+Tween	トライアルスチル37301	MoveBy	x=-1500 time=2				NoWait
+Wait						.5
+Param	character_grayout=true
+	アヌビス							や、やってないよ？
+CharacterOff						0
+	アヌビス		2_2			0
+	リディ	悔しい2	1_2			0
+	リディ							リディ、ちゃんと動画見てるからね
+Shake	アヌビス		x=5				NoWait
+	アヌビス							で、でもアヌビスがお金使ったって\n証拠はどこにも……
+	リディ	驚き2						ぽちっと
+	ネームプレート	アヌビス						<color=#C71585>緊急ドッキリ企画～♪\n『酒場にあったお金を\n　全部使ってみたドッキリ』～!!<dash=2></color>
+Tween	アヌビス	PunchPosition	y=50				NoWait
+Tween	アヌビス	MoveBy	x=-10				NoWait
+	アヌビス							わぁぁぁ!!
+	リディ	笑い2						……使ったの、\nアヌビスちゃんだよね？
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス							う……
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							でも、悪いのはアヌビスじゃないよ！\nちゃんと管理してない\n店主さんが悪いんだもん！
+	リディ	絶望2						管理任されてたのリディなんだけど
+	アヌビス							じゃあリディちゃんが悪いよ
+Tween	リディ	MoveBy	x=10				NoWait
+	リディ	笑い2						ア・ヌ・ビ・ス・ちゃん？
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス							ひぅっ……
+	アヌビス							だ、だってお店のお金だと\n思わなかったし……
+Tween	リディ	MoveBy	x=-10				NoWait
+	リディ	悔しい2						いや、仮にマスターのお金\nだったとしても\n勝手に使っちゃダメだからね
+Tween	アヌビス	MoveBy	x=-10				NoWait
+	アヌビス							なんで？\nマスターのなら良くない？\n養ってくれるって言ってたし
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						だーめ！\nていうかそんなことより！\n作戦会議だよ、作戦会議!!
+	リディ	悔しい2						なんとかしてお店に\n弁償する方法を考えないと……
+	アヌビス							そんなこと言われても、\nアヌビス悪くないし……
+	リディ	絶望2						市場でアヌビスちゃん売ったら\n弁償できないかな
+	アヌビス							だだ、ダメだよリディちゃん？\nそんなのマスターが許さないよ？
+	リディ	悔しい2						そのマスターも\nアヌビスちゃんの尻拭いのために\n任務行ってるんだけど……
+Se	回想
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	絶望2				0
+FadeIn	black					.3
+	ディーア							とりあえず任務で稼いでくるけど……
+Tween	ディーア	MoveTo	x=-10				NoWait
+	ディーア							返済するのに\nどれくらいかかるかな……\nハハ……
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	アヌビス		2_2			0
+	リディ	驚き2	1_2			0
+FadeIn	black					.3
+	リディ							……って言ってたから、\n多分しばらく帰ってこないし
+Shake	アヌビス		x=5				NoWait
+	アヌビス							わかった、作戦会議するから！\n売るのはやめよう？\nね、リディちゃん……？
+	リディ	笑い2						よしよし、\nわかればいいんだよアヌビスちゃん
+	リディ	通常2						よし、それじゃあマスターが\n頑張ってる間に、リディたちは\nリディたちにできることをしなきゃ！
+	アヌビス							……でも、どうするの？\nアヌビスたちだけじゃ\n任務はできないよ？
+	アヌビス							働いて返すのも\nすっごく時間かかるし
+	リディ	悔しい2						うーん……そうだなぁ……\nもっとお客さんが増えてくれれば\nいいんだけど……
+FadeOut	white					.2
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	白背景					0
+	エクス=レプリカ	拡大	エフェクト表			0
+	？？？？					0
+	？？？？							<speed=0>  </speed>	BrPage
+FadeIn	white					.2
+	？？？？							お困りのようねっ!!
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	Bloom
+Bg	酒場1F
+CharacterOff						0
+	アヌビス		2_2			0
+	リディ	驚き2	1_2			0
+FadeIn	white					.2
+	リディ							その声は!?
+	アヌビス							レプリカちゃん？
+CharacterOff
+	エクス=レプリカ							二人にいい提案があるわっ!!
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							それって働かなくてもいいやつ？
+CharacterOff
+	エクス=レプリカ							いや、働く必要はあるわよ
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							じゃあやだ
+	リディ	絶望2						やっぱり売ろうかな？
+	アヌビス							いいい、今のは冗談だからね！\nちゃんとやるから！
+	リディ	怒り2						まったくもう……\nそれで、良い提案って？
+CharacterOff
+	エクス=レプリカ							ふふん！\nそれはずばり……メイド酒場よっ!!
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							……メイド酒場？
+CharacterOff
+	エクス=レプリカ							そう、由緒正しきメイドさんたちが\nオムライスに絵を描いたりしてご奉仕\nしてくれる、あのメイド酒場よ！
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	アヌビス							えぇ……なんかよくわかんないけど\n大変そう……\nていうか、それってお金になるの？
+CharacterOff
+	エクス=レプリカ							もっちろん！\nいま魔界では空前の\nメイド酒場ブームなんだから！
+	エクス=レプリカ							乗るしかないわ、\nこのビッグウェーブに!!
+CharacterOff
+	アヌビス
+	アヌビス							それほんと……？\nメイド酒場ブームって\n聞いたことないよ？
+	アヌビス							ねえ、リディちゃん……\nリディちゃん？
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	リディ	照れ2						メイドさん、かぁ……♪
+CharacterOff
+	アヌビス							あれ、リディちゃん？\nお、おーい？
+CharacterOff
+	オーラ桃		エフェクト裏
+	リディ	驚き2
+Tween	リディ	PunchPosition	y=50				NoWait
+Wait						.1
+CharacterOff	オーラ桃					1
+	リディ	驚き2						ふぇっ!?\nな、なんでもないよ！
+CharacterOff
+Param	character_grayout=true
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							……もしかしてリディちゃん、\nメイド酒場に興味あるの……？
+	リディ	悔しい2						べ、別に興味ってほどじゃ……\n行ったことあるわけじゃないし……
+	リディ	照れ2						ただ、メイド服とか一度\n着てみたいなぁって思っただけで……\nえへへ……
+	アヌビス							び、びっくりした……\nやりたいって言い出したら\nどうしようかと……
+CharacterOff
+	エクス=レプリカ							やろう、リディちゃん！\nそれで魔界一のメイド酒場を\n目指そう!!
+CharacterOff
+	アヌビス							……え？
+CharacterOff
+	エクス=レプリカ		2_2
+	リディ	怒り2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							そうだね、レプリカちゃん！\nそれでお金も返して、一石二鳥だよ！
+	リディ	笑い2						これはもうやるしかないよ、\nアヌビスちゃん!!
+CharacterOff
+	アヌビス							え、えぇ……？\nやるの……？　ほんとに……？
+CharacterOff
+	リディ	照れ2	1_2
+	エクス=レプリカ		2_2					もちろん！\nそうと決まれば、早速準備しよう！
+	リディ							よーしっ、がんばるぞーっ！
+Param	character_grayout=false
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人							おーーっ!!
+CharacterOff
+	アヌビス							…………わお
+If	isdebug==true
+CharacterOff
+Jump	*E_404_02
+EndIf
+EndScenario
+
+# E_404_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	市街地A
+	　　　　　　　　　　
+FadeIn	white					.5
+	　　　　　　　　　　							<color=blue>\n　　　　　<dash=2>二時間後<dash=2></color>
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	アヌビス							め、メイド酒場やってまーす……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							おかえりなさいませ、ご主人さま♪
+CharacterOff
+Param	character_grayout=false
+	通りすがりの女性		画面外_左_b
+	通りすがりの男性		画面外_左
+	　　　　　　　　　　
+Se	走る
+Tween	通りすがりの男性	MoveTo	x=180 time=1.5				NoWait
+Wait						.5
+Se	走る
+Tween	通りすがりの女性	MoveTo	x=-180 time=1.5				Add
+	通りすがりの人	<Off>						……………………
+Se	走る
+Tween	通りすがりの男性	MoveBy	x=1000 time=2				NoWait
+Se	走る
+Tween	通りすがりの女性	MoveBy	x=1000 time=2				NoWait
+Wait						1.5
+CharacterOff
+Param	character_grayout=true
+	アヌビス		2_2
+	リディ	悲しい2	1_2
+	リディ							おかえりなさいませ……
+FadeOut	black					.5
+Param	character_grayout=true
+CharacterOff						0
+	アヌビス		画面外_左_b			0
+	リディ	悲しい2	画面外_左			0
+	　　　　　　　　　　
+Bg	酒場1F					0
+FadeIn	black					.5
+Tween	アヌビス	MoveTo	x=90 time=1.5				NoWait
+Wait						.5
+Tween	リディ	MoveTo	x=-90 time=1.5				NoWait
+Wait						1
+	リディ							ダメだぁ……誰も来ないや……
+CharacterOff
+	エクス=レプリカ							うーん……\nこんなはずじゃなかったんだけど……
+CharacterOff
+	アヌビス		2_2
+	リディ	悲しい2	1_2
+	アヌビス							メイド酒場、ほんとに流行ってるの？
+CharacterOff
+	エクス=レプリカ
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ							は、流行ってるわよっ!!
+	エクス=レプリカ							特にリーマの街は激戦区だから、\n他のお店にお客さんを\n取られてるのかも……
+CharacterOff
+	アヌビス		2_2
+	リディ	悲しい2	1_2
+	リディ							そんな……\nどうしよう、レプリカちゃん？
+CharacterOff
+	エクス=レプリカ							こうなったら、なんとかして\nお客さんに振り向いてもらうしか\nないわね……
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							でも、どうやって……
+CharacterOff
+	エクス=レプリカ							リディちゃんとアヌビスちゃんの\n知名度を上げて、\nお客さんを増やす……とか？
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							知名度を上げるって言われても……
+	アヌビス							それって結構大変だよね……
+CharacterOff
+Bgm	作戦会議
+	エクス=レプリカ							そうだ！\nレプリカちゃんにいい作戦があるわ！
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							さくせん？
+CharacterOff
+	エクス=レプリカ							世界図書館のメイド道場に行くのよ！
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							め、メイド道場……!?
+	アヌビス							リ、リディちゃん？\n知ってるの？
+	リディ	悔しい2						ちょっとだけ聞いたことがある……				ややこしいのはここの書き方だった気がする
+	リディ							世界図書館の地下に、知る人ぞ知る\nメイド道場があるって……!!
+	アヌビス							世界図書館……ってことは\nマリーさんだよね……\nそんなのやってたんだあの人……
+CharacterOff
+	エクス=レプリカ							あら、メイドなら誰でも知っている\n超名門道場よ！
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							なるほど、そこで修行を積むんだね！
+CharacterOff
+	エクス=レプリカ							修行なんて積まないわよ？
+CharacterOff
+Param	character_grayout=false
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	二人							……え？
+CharacterOff
+Param	character_grayout=true
+	エクス=レプリカ							普通に修行を積んだだけじゃ、\n他のお店には勝てないもの！
+CharacterOff						0
+	エクス=レプリカ	拡大	エフェクト表			0		二人がやるのは<dash=2>道場破りよ!!
+CharacterOff
+Param	character_grayout=false
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	二人							……え
+Tween	アヌビス	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人							ええええええええ!?
+FadeOut	white					.1
+CharacterOff						0
+Bg	酒場_カフェ					0
+	イベントロゴ404		エフェクト表			0
+FadeIn	white					1
+Wait						2
+StopBgm						.5
+FadeOut	black					.5
+CharacterOff
+Param	character_grayout=true
+Bg	研究所A
+Wait						1.5
+Bgm	図書館
+FadeIn	black					.5
+	　　　　　　　　　　							<color=blue>\n　　 <dash=2>世界図書館 地下区画<dash=2></color>
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							こ、ここがメイド道場……!!
+Tween	アヌビス	MoveTo	x=180				NoWait
+	アヌビス							そぉー……
+Tween	リディ	MoveTo	x=90				NoWait
+	リディ	怒り2						こら、逃げないの
+Tween	リディ	MoveTo	x=-90 time=1.5				NoWait
+Tween	アヌビス	MoveTo	x=90 time=1.5				NoWait
+	アヌビス							や、やぁだ！\n道場破りとかしたくない！\nやーだー！
+	リディ							もう、元はといえば\nアヌビスちゃんのせいでしょ！
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							アヌビスわるくないもん!!
+	リディ	悔しい2						もー、ここまで来たんだから\nいい加減に……
+CharacterOff
+	ププッピマリー							……お待ちしておりました
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							あ、マリーさん！
+	リディ	悔しい2						あの、えっと……リディ達……!!
+CharacterOff
+	ププッピマリー							レプリカ様から\nお話は伺っております
+	黒グラデーション		エフェクト表
+	ププッピマリー							<dash=2>我がメイド道場を、\n破りに来たと
+CharacterOff
+Param	character_grayout=false
+	アヌビス		2_2
+	リディ	悲しい2	1_2
+Tween	アヌビス	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人							ひぃっ……
+Param	character_grayout=true
+Shake	アヌビス		x=5				NoWait
+	アヌビス							<size=20>え、ちょっとまって？\nすごい怖いんだけど？</size>
+	リディ	悔しい2						<size=20>そ、そりゃそうでしょ!!\n道場破りに来たんだから！</size>
+CharacterOff
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+	ププッピマリー							……修行モード、オン
+StopBgm
+Se	光3
+FadeOut	white					.5
+Bg	魔導コロシアム					2
+FadeIn	white					.5
+Wait						1
+CharacterOff
+Param	character_grayout=true
+	アヌビス		2_2
+	リディ	驚き2	1_2
+Bgm	緊迫
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							うわあっ!?
+	リディ							なな、なにこれ……!?
+CharacterOff
+	ププッピマリー							世界図書館の技術力を結集して\n作られた仮想修行場……
+	ププッピマリー							それがこの\nマリーズ★メイド道場でございます
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	リディ							意外と可愛い名前付けるんですね……
+Tween	アヌビス	MoveBy	x=-10				NoWait
+	アヌビス							<size=20>っていうかちょっと待ってリディちゃん\nイメージとだいぶ違うんだけど</size>
+Tween	リディ	MoveBy	x=10				NoWait
+	リディ	悔しい2						<size=20>奇遇だねアヌビスちゃん……\nこれもしかしなくても\nマリーさんと戦う流れだよね!?</size>
+CharacterOff
+	ププッピマリー							ああ、ご心配には及びません
+	ププッピマリー							ここは仮想空間……魔剣使いが\n不在でも、十全に力を\n発揮できるようになっておりますので
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							そんな心配してないよ!?
+CharacterOff
+	黒グラデーション		エフェクト表
+StopBgm
+	ププッピマリー							……さて、それでは\nお手並み拝見と参りましょうか
+	カバー上部		カバー
+	ギガントマリー	足	画面外_上_b					<speed=0>  </speed>	BrPage
+Wait						.1
+Tween	ギガントマリー	MoveTo	y=-70 x=0 time=0.8	easeInOutCirc
+ImageEffect	SpriteCamera	Bloom
+Se	火1
+Se	火事
+Shake	Graphics		time=2
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff
+	ギガントマリー	顔	エフェクト表
+	ギガントマリー							ギギ……ガガガ…………
+CharacterOff
+Param	character_grayout=false
+	アヌビス		2_2
+	リディ	絶望2	1_2
+	二人							…………え
+CharacterOff
+Bgm	魔王バトル
+	ギガントマリー	足	エフェクト裏
+	ププッピマリー							……いざ、尋常に!!
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	二人							ええええええええええ！！！？？？
+If	isdebug==true
+CharacterOff
+Jump	*E_404_03
+EndIf
+EndScenario
+
+# E_404_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	魔導コロシアム
+Param	character_grayout=false
+	ギガントマリー	顔	エフェクト表
+FadeIn	white					.5
+	ギガントマリー							メイドパワー・・・計測終了\n評価：基準値未満
+	ギガントマリー							挑戦資格・・・ナシ
+	オーラ青		エフェクト表
+Se	光3
+FadeOut	white					.5
+CharacterOff	ギガントマリー					0
+CharacterOff	オーラ青	1.5
+	　　　　　　　　　　
+FadeIn	white					.5
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							な、何いまの……？\nほんとに聞いてないんだけど……？
+Bgm	コメディ
+CharacterOff
+	ププッピマリー							メイド修行用魔導兵器\nギガント=ププッピマリーですが
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	アヌビス							えぇ……そんなのアリ……？
+	リディ							り、リディたち、そういうバトルを\nしに来たわけじゃなくて……
+CharacterOff
+	ププッピマリー							ええ、存じております\nだからこそ、戦っていただいたのです
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							ふぇ？
+CharacterOff
+Bgm	図書館
+	ププッピマリー							このギガント=ププッピマリーは\nメイドとしての資質を測るための\n魔導兵器でございます
+	ププッピマリー							これを倒すのに、\n戦闘技術の一切は必要ありません
+	ププッピマリー							そしてギガント=ププッピマリーを\n倒す方法はただひとつ……\n"メイドの真髄"に辿り着くこと
+	ププッピマリー							即ち、真のメイドと\nなることでございます
+	ププッピマリー							そしてギガント=ププッピマリーは\nお二方が未だその域に至っていないと\n判断しました
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							……じゃあ、リディたちはまだ\n真のメイドにはなれないってこと？
+CharacterOff
+	ププッピマリー							ええ、残念ながら
+CharacterOff
+	アヌビス		2_2
+	リディ	悲しい2	1_2
+	リディ							そんな……
+CharacterOff
+	ププッピマリー							……ですが、お二人とも確かに\n光るものをお持ちでいらっしゃいます
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							……え？
+	アヌビス							あ、アヌビスも？
+CharacterOff
+	ププッピマリー							ええ、恐らくそう遠くないうちに\n答えに辿り着くことができるでしょう
+	ププッピマリー							あなた方が"メイドの真髄"に辿り着き\n見事ギガント=ププッピマリーを\n倒した暁には……
+	ププッピマリー							我がメイド道場が破られたことを\n認めましょう
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							……じゃあ、あの\nギガント=ププッピマリーさんを\n倒せればいいんだね！
+CharacterOff
+	ププッピマリー							ええ……それまでの間、\n我がメイド道場は自由に使って\nいただいて構いませんので
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							ほんと!?\nありがとうございます、マリーさん♪
+	リディ							よし、がんばろう！\nアヌビスちゃん！
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス							ま、まだ続けるの……？
+	リディ							もっちろん！\n真のメイドになるためだもん！
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							がんばるぞーっ！
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス							お、おぉ……
+If	isdebug==true
+CharacterOff
+Jump	*E_404_01
+EndIf
+EndScenario
+
+# E_404_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	魔導コロシアム
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+FadeIn	white					.5
+	リディ							うーん……\nマリーさんの言う"メイドの真髄"って\nなんだと思う？
+	アヌビス							え、えぇ？\nアヌビスに聞かれてもわかんないよ？
+	リディ							そうだよねえ……
+Param	character_grayout=false
+Tween	リディ	PunchPosition	y=50				NoWait
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	二人							うーん……
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=true
+ImageEffect	SpriteCamera	Bloom
+Bg	白背景					0
+	咲刃十六夜	拡大眼鏡	エフェクト表			0
+	？？？？							<speed=0>　　</speed>	BrPage
+FadeIn	white					.2
+	？？？？							ふふ、困っているみたいですわね
+CharacterOff	咲刃十六夜
+	甕破り一文字	拡大眼鏡	エフェクト表
+	？？？？							お、お力になりますよ……
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+	アヌビス		2_2			0
+	リディ	驚き2	1_2			0
+Bg	魔導コロシアム					0
+FadeIn	white					.2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							その声は!!
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	咲刃十六夜							マリーさんから事情は\n聞かせてもらいましたわ
+	甕破り一文字							メイドのことなら任せてください！
+CharacterOff
+	黒グラデーション		エフェクト表
+	甕破り一文字	拡大眼鏡	エフェクト裏					<size=20>ついでにリディちゃん経由で旦那様の\n好感度アップ大作戦!!</size>
+CharacterOff
+	アヌビス		2_2
+	リディ	笑い2	1_2
+	リディ							十六夜ちゃんと<ruby=かめわり>甕破り</ruby>ちゃんだ！
+	アヌビス							……いま、すごい小さい声で\n何か言ってなかった？				最初にイヌミミアヌビスが気づく→それ以降無反応→最後に一回だけ触れる、にした
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	甕破り一文字							いえ、何も？
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	アヌビス							あれ……\n気のせいかな……？
+	リディ	驚き2						それで……マリーさんから\n聞いたってことは、二人が\n"メイドの真髄"を教えてくれるの？
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	咲刃十六夜							いえ、私たちはただ導くだけ……\n残念ながら、答えを教えることは\nできないのです
+Tween	甕破り一文字	PunchPosition	y=50				NoWait
+	甕破り一文字							自分で辿りつかないと\n意味ないですからね！
+	黒グラデーション		エフェクト表
+Tween	甕破り一文字	MoveBy	x=10				NoWait
+	甕破り一文字							<size=20>(マリーさんから教えちゃダメって言われてるし)</size>
+CharacterOff	黒グラデーション
+Tween	甕破り一文字	MoveBy	x=-10				NoWait
+	咲刃十六夜							そういうわけなので、\n今日は私たちがサポートしますね♪
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							じゃあ二人がメイドさんの\n師匠ってことだね！
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+Tween	甕破り一文字	PunchPosition	y=50				NoWait
+	甕破り一文字							し、師匠なんてそんな……!!
+	黒グラデーション		エフェクト表
+Tween	甕破り一文字	MoveBy	x=10				NoWait
+	甕破り一文字							<size=20>(でも、たまにはデキる先輩キャラもアリか？)</size>
+CharacterOff	黒グラデーション
+Tween	甕破り一文字	MoveBy	x=-10				NoWait
+	咲刃十六夜							ふふっ♪\nいざいざ師匠になんでも頼ってね♪
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							それじゃあ師匠、\nどうすれば"メイドの真髄"に\nたどり着けると思う？
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	咲刃十六夜							そうねえ……まずは普段の\nマリーさんをよく思い出してみると\n良いかもしれないわ
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							普段のマリーさんかぁ……
+	アヌビス							そういえばよく\n紅茶を入れてるような……
+Se	回想
+FadeOut	white					.3
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+Bg	研究所A					0
+	ププッピマリー					0
+FadeIn	white					.3
+	ププッピマリー							ロールお嬢様、紅茶をお持ちしました
+	ロルリアンレット	通常H						あら、ありがとうマリー
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	魔導コロシアム					0
+CharacterOff						0
+	アヌビス		2_2			0
+	リディ	驚き2	1_2			0
+FadeIn	white					.3
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							確かに！
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+Tween	甕破り一文字	PunchPosition	y=50				NoWait
+	甕破り一文字							えへへ♪　お茶を入れるのも\nメイドとしての大切な仕事なんです♪\n実はとても奥が深いんですよ♪
+	黒グラデーション		エフェクト表
+Tween	甕破り一文字	MoveBy	x=10				NoWait
+	甕破り一文字							<size=20>うーん、「えへへ♪」は\nちょっとあざとすぎか……？</size>
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							やっぱり何か言ってるよね？
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						もう、アヌビスちゃん！\n今大事な話してるの！
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス	悲しい						ふええ……
+	リディ	驚き2						それで、お茶汲みをやってみたら\n何かわかるかもしれない……\nってことだよね!?
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	咲刃十六夜							ええ、きっと何かわかるはずですわ
+CharacterOff
+	アヌビス		2_2
+	リディ	通常2	1_2
+	リディ							よし、やるしかないよ\nアヌビスちゃん！
+	アヌビス							じゃあアヌビスはお茶飲む役やるね
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						もう！\nアヌビスちゃんも一緒に淹れるの！
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス	悲しい						えー……
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	咲刃十六夜							そうと決まれば\nトレーニング開始ですわね♪
+	咲刃十六夜							修行モード、オン！
+StopBgm
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+Se	光3
+FadeOut	white					.5
+Bg	酒場_カフェ					1
+FadeIn	white					.5
+CharacterOff	オーラ青					1
+Wait						1
+Bgm	バトル
+CharacterOff
+Param	character_grayout=true
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							おお、メイド酒場になった……!!
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	咲刃十六夜							それじゃあ準備はいい？
+CharacterOff
+	アヌビス		2_2
+	リディ	笑い2	1_2
+	リディ							うんっ！\n真のメイド目指して……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	照れ2						がんばるぞーっ！
+	アヌビス							お、おおー……
+If	isdebug==true
+CharacterOff
+Jump	*E_404_05
+EndIf
+EndScenario
+
+# E_404_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	酒場_カフェ
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+FadeIn	white					.5
+	リディ							うーん……\nお茶の種類が多くて\nよくわかんない……
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	咲刃十六夜							ふふ、最初は無理もないですわね
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	アヌビス							こんなにたくさん必要なの？\n普通の紅茶だけでよくない？
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+Tween	咲刃十六夜	PunchPosition	y=50				NoWait
+	咲刃十六夜							うふふ、良いところに\n気づきましたわね♪
+	咲刃十六夜							実はちゃんとそれぞれに\n違った効能があるのですわ
+	咲刃十六夜							例えば緑茶には疲労回復や\n眠気覚ましの効果があるんです♪
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							そうなんだ……！\nじゃあこっちは？
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	咲刃十六夜							こちらはジャスミン茶ですわね、\n胃腸を整える効能があると\n言われていますわ
+	甕破り一文字							飲む人に合わせてブレンドすることも\nあるんですよっ♪
+	黒グラデーション		エフェクト表
+Tween	甕破り一文字	MoveBy	x=10				NoWait
+	甕破り一文字							<size=20>(旦那様には\n惚れやすくなるハーブとか……♪)</size>
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+Tween	アヌビス	MoveTo	x=180				NoWait
+	アヌビス							わ、難しそうな話だ\nアヌビス邪魔にならないように\nあっちで遊んでるね？
+Tween	リディ	MoveTo	x=90				Add
+	リディ	怒り2						こら
+Tween	リディ	MoveTo	x=-90				Add
+Tween	アヌビス	MoveTo	x=90				Add
+	アヌビス	悲しい						……だめー？
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	甕破り一文字							えへへ、例えば\n今のアヌビスちゃんには\nこのお茶がいいですねっ！
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							ふえ？\nなにこれ？
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	甕破り一文字							やる気をアップさせるお茶ですっ！\n私がブレンドしたんですよっ♪
+	黒グラデーション		エフェクト表
+Tween	甕破り一文字	MoveBy	x=10				NoWait
+	甕破り一文字							<size=20>(やば、私ってば天才？)</size>
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス							………………わぉ
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	咲刃十六夜							リディちゃんにはこれですわね
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							わ、甘くていい匂い！
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	咲刃十六夜							フルーツが入っているお茶ですわ\nリラックス効果があるんですよ
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	リディ							す、すごい、かっこいい……!!\nなんか出来る大人の女性って\n感じがする……!!
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+Tween	咲刃十六夜	PunchPosition	y=50				NoWait
+	咲刃十六夜							あら、大人だなんて♪\nいざいざはまだ16歳ですよ♪\n……なんちゃって★
+	咲刃十六夜							いかがでしたか？\nお茶もなかなか奥が深いでしょう？
+CharacterOff
+	アヌビス		2_2
+	リディ	通常2	1_2
+	アヌビス							アヌビス、もっと簡単だと\n思ってたんだけど……
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	咲刃十六夜							ふふ、確かにお茶を淹れること\n自体は、難しいことでは\nありませんからね
+	咲刃十六夜							ですがメイドに求められるのは\nその先……
+	咲刃十六夜							誰でもできる仕事だからこそ、\nメイドなりに愛を込めて\nこだわることが大切なのです
+Tween	甕破り一文字	PunchPosition	y=50				NoWait
+	甕破り一文字							それに、飲む人のことを想って淹れた\nお茶が一番美味しいものですから！
+CharacterOff
+	黒グラデーション		エフェクト表
+	甕破り一文字	拡大眼鏡	エフェクト裏					<size=20>(キメ台詞、決まった……!!)</size>
+CharacterOff
+	アヌビス	悲しい	2_2
+	リディ	驚き2	1_2
+Shake	アヌビス		x=5				NoWait
+	アヌビス							(小声が気になる……そわそわ……)
+	リディ							飲む人のことを想って、かぁ……\n確かにそうかも!!
+	リディ	照れ2						えへへ、なんだか\n"メイドの真髄"に近づいた気がする！
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						これなら、\nギガント=ププッピマリーさんに\n勝てるかも！
+CharacterOff
+	甕破り一文字	眼鏡	2_2
+	咲刃十六夜	眼鏡	1_2_b
+	甕破り一文字							頑張ってくださいねっ♪
+	黒グラデーション		エフェクト表
+Tween	甕破り一文字	MoveBy	x=10				NoWait
+	甕破り一文字							<size=20>(ライバルを応援する健気な女の子アピール……\nこれは使えるな)</size>
+CharacterOff	黒グラデーション
+	咲刃十六夜							ふふ、でもあんまり無理しすぎては\nいけませんわよ？
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							うんっ！\nありがとう、十六夜ちゃん！\n甕破りちゃん！
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス							アヌビスも\n頑張りすぎないようにするねー
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						アヌビスちゃんは\nもっと頑張ってね!!
+If	isdebug==true
+CharacterOff
+Jump	*E_404_01
+EndIf
+EndScenario
+
+# E_404_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	魔導コロシアム
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+FadeIn	white					.5
+	リディ							うーん……\nお茶の淹れ方は覚えたけど、\nそれだけじゃダメなのかぁ……
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							あ、みてリディちゃん、\n今度の紅茶は美味しくできたかも
+	リディ	驚き2						どれどれ？\nんっく、んっく……
+	リディ	笑い2						ぷはぁっ♪\nほんとだ、美味しい！
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						……ってアヌビスちゃんっ！\nお茶は一旦置いておいて！
+	リディ	悔しい2						早く"メイドの真髄"に\n辿り着かないと……!!
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							この紅茶の作り方、\n動画にしたら伸びるかな？
+	リディ	絶望2						アヌビスちゃんはしばらく\n魔界ちゅーぶ禁止だからね
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス	悲しい						えぇー……\nアヌビス悪くないのにー……
+Tween	アヌビス	MoveBy	x=-10				NoWait
+	アヌビス	通常						でも、お茶淹れる以外の\nメイドの仕事ってなに？
+	リディ	悔しい2						そ、それはほら……ええと……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	驚き2						そうだ！\nお掃除とか！
+FadeOut	white					.2
+CharacterOff						0
+Bg	白背景					0
+ImageEffect	SpriteCamera	Bloom
+	デッキブラシ	拡大眼鏡	エフェクト表			0
+	？？？？					0		<speed=0>　　</speed>	BrPage
+FadeIn	white					.2
+	？？？？							そう！\nお掃除はメイドの基本です!!
+ImageEffectOff	SpriteCamera	Bloom
+FadeOut	white					.2
+Bg	魔導コロシアム					0
+CharacterOff						0
+	アヌビス		2_2			0
+	リディ	驚き2	1_2			0
+FadeIn	white					.2
+	リディ							その声は……!!
+	アヌビス							デッキブラシちゃん？
+CharacterOff
+	デッキブラシ							はい！\nデッキブラシです！
+	デッキブラシ							メイドたるもの、一に掃除、二に掃除\n三四も五も全部掃除です!!
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							そ、そんなに……？
+CharacterOff
+	デッキブラシ							ええ！\nどんなに掃除をしても、ホコリは\nすぐに溜まってしまうものですから！
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							なるほど……
+FadeOut	black					.1
+CharacterOff						0
+StopBgm
+	黒グラデーション		エフェクト表			0
+	アヌビス		2_2			0
+	リディ	驚き2	1_2			0
+	アナイアレイター	眼鏡	2_3_b			0
+	スモーク		エフェクト表2			0
+	　　　　　　　　　　							<speed=0>　　</speed>	BrPage
+Wait						.1
+FadeIn	black					.1
+	？？？？							そう、一に掃除、二に掃除……
+	？？？？							どんなに掃除を繰り返しても、\n障害物はなくならない……
+FadeOut	black					.1
+CharacterOff	スモーク					0
+CharacterOff	黒グラデーション					0
+CharacterOff	アナイアレイター
+FadeIn	black					.1
+Tween	アヌビス	PunchPosition	y=50				NoWait
+Bgm	絶望
+	アヌビス							…………ッ!?
+	リディ	悔しい2						あ、アナイアレイターちゃん……？\nいつの間に後ろに……？
+CharacterOff
+	黒グラデーション		エフェクト表
+	アナイアレイター	眼鏡						失礼しました、\nリディ様、アヌビス様
+CharacterOff	黒グラデーション
+StopBgm						1
+	アナイアレイター							不肖、このアナイアレイターが\n<ruby=・・・>お掃除</ruby>のレクチャーをと思いまして！\nふんす！
+Bgm	コメディ
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	アヌビス							お、<ruby=・・・>お掃除</ruby>……？
+	リディ							それってアレだよね……？\n普通のお掃除のことだよね……？
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+	黒グラデーション		エフェクト表
+	アナイアレイター							…………
+CharacterOff	黒グラデーション
+	アナイアレイター							ええ、普通の<ruby=・・・>お掃除</ruby>ですっ！\nふんす！
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							な、なんか今一瞬だけ、闇社会の\n修羅場をくぐり抜けてきたような\n恐ろしく冷たい目をしてたような……
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+	アナイアレイター							気のせいですっ！　ふんす！\nさあ、お掃除をしましょう！
+	アナイアレイター							修行モード、オンです！
+StopBgm
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+Se	光3
+FadeOut	white					.5
+Bg	子供部屋					1
+FadeIn	white					.5
+CharacterOff	オーラ青					1
+Wait						1.5
+Param	character_grayout=true
+Bgm	バトル
+CharacterOff
+	アヌビス	悲しい	2_2
+	リディ	驚き2	1_2
+	アヌビス							うわぁ……すごい散らかってる
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+Tween	デッキブラシ	PunchPosition	y=50				NoWait
+	デッキブラシ							ふふん！\nこれは掃除のし甲斐が\nありそうですね！
+	デッキブラシ							しつこい汚れもたくさんありますから\n全部綺麗にしちゃいましょう!!
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							えぇ……\n余計汚くなっても\nアヌビス知らないよ？
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+Tween	デッキブラシ	PunchPosition	y=50				NoWait
+	デッキブラシ							大丈夫です！\n全部ピカピカになるまで終われない\nように設定してありますから！
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							ぜ、ぜんぜん大丈夫じゃないよ!?
+	リディ	悔しい2						でも、結構時間かかりそうだなぁ……
+CharacterOff
+	黒グラデーション		エフェクト表
+	アナイアレイター	眼鏡
+	アナイアレイター							手強い相手は、息を殺して\n背後から攻めるのがコツです
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							えっと……アナイアレイターちゃん？\nお掃除の話だよね？
+CharacterOff
+	黒グラデーション		エフェクト表
+	アナイアレイター	眼鏡						弱点を突いて一撃で\n仕留めると良いですよ
+CharacterOff
+	アヌビス		2_2
+	リディ	怒り2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							ねえ？\nほんとにお掃除の話してる!?
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+	アナイアレイター							ご心配なく、\nしくじった時はお任せください！
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							お掃除にしくじるって何……？\n心配しかないけど……？
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+	アナイアレイター							さあお掃除修行……スタートですっ！\nふんす！
+If	isdebug==true
+CharacterOff
+Jump	*E_404_07
+EndIf
+EndScenario
+
+# E_404_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	子供部屋
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+FadeIn	white					.5
+Tween	デッキブラシ	PunchPosition	y=50				NoWait
+	デッキブラシ							いっちょあがりーっ♪
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							ねえ!?\n最後の人、見覚えあるんだけど!?
+CharacterOff
+	黒グラデーション		エフェクト表
+	アナイアレイター							悪そうな人でしたね、\n排除できなかったのが\nやや心残りですが
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							いやいやいや……\nお掃除修行だから……\n心残りとかないから……
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+	デッキブラシ							ふふん！\nこれで部屋もピカピカ、気持ちよく\n過ごせるようになりましたね！
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	アヌビス							ていうかアヌビス汚してないし
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+Tween	デッキブラシ	PunchPosition	y=50				NoWait
+	デッキブラシ							誰が汚したかなんて関係ないですよ！\n大切なのは、\n誰のために綺麗にするか、です！
+	デッキブラシ							お店が汚れていたら気分も\n下がってしまいますし、\n何より不衛生です！
+	デッキブラシ							それでご主人様が体調を\n崩してしまうなんてことは、\n絶対にあってはなりませんからね！
+CharacterOff
+	アヌビス		2_2
+	リディ	通常2	1_2
+	アヌビス							それはそうだけど……
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+	アナイアレイター							それに、お店が汚れていると\n治安まで悪くなってしまいますっ！\nふんす！
+	黒グラデーション		エフェクト表
+Tween	アナイアレイター	MoveBy	x=10				NoWait
+	アナイアレイター							まあ、そうなったら私が\n<ruby=・・>掃除</ruby>するだけ……\nなのだけれど
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							アナイアレイターちゃんは\n何と戦ってるの……？
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+Tween	デッキブラシ	PunchPosition	y=50				NoWait
+	デッキブラシ							よし！\nじゃあ今度はもっと隅々まで\nピカピカにしましょう！
+CharacterOff
+	アヌビス		2_2
+	リディ	通常2	1_2
+	アヌビス							うぇ!?\nま、まだやるの？
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+	デッキブラシ							もちろんです！\nまだ修行場は散らかっていますし！
+Param	character_grayout=false
+Se	光1
+	オーラ青					1
+Se	光3
+FadeOut	white					.5
+Bg	魔導コロシアム					1
+FadeIn	white					.5
+CharacterOff	オーラ青					1
+Wait						1
+Param	character_grayout=true
+	デッキブラシ							いいですね、アヌビスさん！
+CharacterOff
+	アヌビス	悲しい	2_2
+	リディ	通常2	1_2
+Tween	アヌビス	MoveBy	x=-10
+	アヌビス							たすけてリディちゃん……！\nあれ絶対デッキブラシちゃんの\n趣味だよ……？
+	リディ	照れ2						大丈夫だよアヌビスちゃん、\nこれも修行の一環だから！
+	リディ	怒り2						それに、マスターだって今頃きっと\n頑張ってるんだもん！\nリディたちも頑張らないと！
+Shake	アヌビス		x=5				NoWait
+	アヌビス	悲しい						ふええええ……
+CharacterOff
+	アナイアレイター	眼鏡	2_2
+	デッキブラシ	眼鏡	1_2
+	アナイアレイター							では、引き続きご主人様に害為す\nホコリをきちんと\n<ruby=・・・>お掃除</ruby>するといたしましょう
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							うん……\nそっちの方は、できれば穏便にね？
+If	isdebug==true
+CharacterOff
+Jump	*E_404_08
+EndIf
+EndScenario
+
+# E_404_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	魔導コロシアム
+	ギガントマリー	顔	エフェクト裏
+FadeIn	white					.5
+	ギガントマリー							メイドパワー・・・計測終了\n評価：基準値未満
+	オーラ青		エフェクト表
+Se	光3
+FadeOut	white					.5
+CharacterOff	ギガントマリー
+CharacterOff	オーラ青					1.5
+	　　　　　　　　　　
+FadeIn	white					.5
+StopBgm						1
+Wait						1
+CharacterOff
+	アヌビス	悲しい	2_2
+	リディ	悔しい2	1_2
+	アヌビス							ダメだー、また倒せなかったー……
+	リディ							うーん、まだなにか\n足りないのかぁ……
+Bgm	平和
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							あれあれ？\nいつの間にか修行場が\nすごく綺麗になってますねぇー？
+	アンブレラ							前の担当はデッキブラシさんたち\nだったようです
+Tween	ハイドランジア	PunchPosition	y=50				NoWait
+	ハイドランジア							ああ、なるほどですー♪
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							あれ、アンブレラちゃんと\nハイドランジアちゃん？
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							やっほ、リディちゃんー♪
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							もしかして、二人が今度の師匠？
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							ええ、ププッピマリー様から\n依頼を受けたのです
+	アンブレラ							真のメイドになるために\n修行していると聞いて、\n力になれればと
+	ハイドランジア							でも本当にメイドやるの？\nたいへんだよー？
+CharacterOff
+	アヌビス
+	アヌビス							わかる
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							ぶっちゃけ何もしないで\nごろごろしてたいなーって思うことが\nほとんどだしー
+CharacterOff
+	アヌビス	悲しい
+	アヌビス							わかる…………
+CharacterOff
+	リディ	悔しい2						あれ？\nこの二人一緒にして大丈夫かな……\n心配になってきた……
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							……まあ、心配いらないわ
+	アンブレラ							ここまで来たということは、\nアヌビスさんも少なからず\nやる気はあるのでしょうし
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							ほんとかな……\nそうだといいけど……
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							んふふ、アヌビスちゃんは\n私と一緒で、\nやれば出来る子だと思うよー？
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							えへ、絶対やらないけどね
+	リディ	悔しい2						自分で言うんかい
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							それより早く、\n修行の方を始めましょう
+	ハイドランジア							そうだねー、面倒くさいことは\n先に全部やっちゃおう
+	ハイドランジア							修行モード、オン♪
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+Se	光3
+FadeOut	white					.5
+Bg	酒場_カフェ					1
+FadeIn	white					.5
+CharacterOff	オーラ青					1
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							それで、今度は何するの？
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							そりゃあもう、一つしかないよねー？
+	アンブレラ							ええ、私とハイドランジアが\n教えることと言えば、\nもう"あれ"しかないわ
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							"あれ"しかない……？
+	リディ	悔しい2						うーん、でも二人の共通点って……
+FadeOut	black					.1
+CharacterOff						0
+	アンブレラ	眼鏡				0
+FadeIn	black					.1
+Wait						1.5
+FadeOut	black					.1
+CharacterOff						0
+	ハイドランジア	眼鏡				0
+FadeIn	black					.1
+Wait						1.5
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	アヌビス							雨……？
+	リディ							た、確かに二人とも雨っぽいけど……\nメイドさんには\n関係なさそうだよね……
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							ハズレですねー\nというか私、あんまり\n雨好きじゃないですし
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							あ、そうなんだ
+	アヌビス							アンブレラちゃんは？
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							私はまあ……別に……
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							でもそれ以外だと……\n"毒を持ってる"ことくらいしか……
+CharacterOff
+	ハイドランジア	拡大眼鏡	エフェクト表
+	ハイドランジア							んふふ、正解はー♪
+	アンブレラ	拡大眼鏡	エフェクト表					料理、でした
+StopBgm
+CharacterOff
+Param	character_grayout=false
+	アヌビス		2_2
+	リディ	驚き2	1_2
+Tween	アヌビス	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+Bgm	コメディ
+	二人							えええええ!?
+Param	character_grayout=true
+	アヌビス							よ、よりにもよってそれなの!?
+	リディ	悔しい2						二人とも毒持ってるよね！\n流石に料理はまずいんじゃ……!?
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							えー？\n別に大丈夫だよ？
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							ほ、ほんとに……？
+	リディ	悔しい2						アンブレラちゃん、お洗濯とお料理は\nリスクあるって言ってたはずだよね？
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							あら、詳しいですね
+CharacterOff
+	アヌビス		2_2
+	リディ	怒り2	1_2
+	リディ							リディが自分で説明してるからね！\r\n教えてリディちゃんのコーナーで！
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							大丈夫ですよ、\n軽く痺れる程度ですから
+CharacterOff
+	アヌビス	悲しい	2_2
+	リディ	怒り2	1_2
+	アヌビス							何も大丈夫じゃなくない!?
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							今のはメイドジョークです
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	アヌビス							……わお
+	リディ							あ、アンブレラちゃんが言うと\nジョークに聞こえない……
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							ご心配なく\nしっかりと包帯を巻けば\n少しくらいは手伝えるわ
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							そ、そうなんだ……
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							さあさ、そろそろ始めるよー？
+	アンブレラ							お客様もたくさん待っていますからね
+StopBgm
+CharacterOff
+	　　　　　　　　　　
+Se	ガヤA	TRUE
+Wait						1.5
+Bgm	バトル
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							わわ、ほんとだ！
+	アヌビス	悲しい						うわぁ……すごい人だかりが……\nえ、あの人数分の料理作るの……？
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+								もちろんー♪
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+Tween	アヌビス	MoveBy	x=20				NoWait
+	アヌビス							じゃあアヌビス食べる側で……
+CharacterOff
+	アンブレラ	拡大眼鏡	エフェクト表
+	アンブレラ							あら、それでは私が\nアヌビスさんのために\n"特製"の手料理を……
+CharacterOff
+	アヌビス	悲しい	2_2
+	リディ	照れ2	1_2
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							わお!?\nうそです！\nちゃんとやります！
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							よーしっ、それじゃあ\nお料理修行……スタートっ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_404_09
+EndIf
+EndScenario
+
+# E_404_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	酒場_カフェ
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+FadeIn	white					.5
+	リディ							つ、疲れたぁー……
+	アヌビス	悲しい						もう休んでいい？\nいいよね？
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							ええ、休憩にしましょう\n二人ともお疲れ様です
+	ハイドランジア							はい、これリディちゃんと\nアヌビスちゃんの分♪
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							これって……オムライス？
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							ほら、メイドといえばこれでしょ？
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							もしかして、修行してる間に\n二人が作ってくれたの？
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							ええ、ずっと頑張っている\nみたいですから
+	ハイドランジア							たまには休憩も大事だよー♪
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	リディ							えへへ、二人ともありがとう！
+Param	character_grayout=false
+Tween	リディ	PunchPosition	y=50				NoWait
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	二人							いただきまーすっ！
+Param	character_grayout=true
+	リディ	通常2						もぐもぐ……
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							お、おいしい……!!
+	リディ	照れ2						うん、すごくおいしい……！
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							それはよかったわ
+	ハイドランジア							んふふ、毒とか入ってないでしょ？
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ	悲しい2						あ……そういえば、さっきリディたち\n失礼なこと言っちゃったよね……？
+	リディ							ごめんね、アンブレラちゃん、\nハイドランジアちゃん
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							もー冗談だってー♪\nリディちゃんってばかわいいなぁ♪\n全然気にしてないから大丈夫だよー♪
+CharacterOff
+	アヌビス		2_2
+	リディ	悲しい2	1_2
+	リディ							でも……
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							ええ、二人ともちゃんと\n食べてくれたものね
+CharacterOff
+Param	character_grayout=false
+	アヌビス		2_2
+	リディ	驚き2	1_2
+StopBgm
+Tween	アヌビス	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人							え？
+Param	character_grayout=true
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+Bgm	凱旋
+	アンブレラ							疑うのは当然です\n私たちは毒を持っている魔剣……
+	アンブレラ							その気になれば悪意をもって\n毒を盛ることだって\n簡単にできるんですから
+	ハイドランジア							まあ私達に限らず、そもそも\n食事って実は命がけな\nものなんですよー
+	ハイドランジア							もし変なものが入っていたら、\n大変なことになるかもしれないしー
+	ハイドランジア							それなのにちゃんと\n食べてくれたっていうのは、私達を\n信じてくれてる証拠なんだよー♪
+	ハイドランジア							たとえそれが、無意識だとしてもね♪
+Tween	ハイドランジア	PunchPosition	y=50				NoWait
+	ハイドランジア							やっぱりそれが一番うれしいよねー♪
+	アンブレラ							ええ……そうですね
+	ハイドランジア							だから、ちゃんと信頼されるメイドを\n目指さなきゃってことだよー♪
+	アンブレラ							ええ……それこそ\nこの人になら命を預けても構わないと\n思っていただけるように、ですね
+CharacterOff
+	アヌビス	悲しい	2_2
+	リディ	驚き2	1_2
+	アヌビス							う……信頼かぁ……
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							大丈夫ですよ、\n魔剣にならわかるはずです
+	アンブレラ							魔剣使いと日々命を\n預けあっているのですから
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							そっか……！
+	アヌビス							なんか、メイドさんについて\nちょっと分かってきた気がする
+	リディ	笑い2						そうだね！
+	リディ	照れ2						えへへ……なんだか早くマスターに\nオムライス作ってあげたく\nなってきちゃった♪
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	ハイドランジア							んふふ、でもこの様子だと\nゴールは近そうだねー♪
+CharacterOff
+	アヌビス		2_2
+	リディ	通常2	1_2
+	リディ							よし、じゃあもう一回\nギガント=ププッピマリーさんの\nところに……
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							……とその前に、\n一つだけ気になったんだけど
+	アヌビス							アンブレラちゃんって、マスターに\n出すお茶にはちょっと毒入れるよね？\nあれってなんで？
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							あぁ、それは……
+	ハイドランジア							むふふー♪\n危機感ないもんね、ご主人様
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	リディ							まぁ……確かに
+CharacterOff
+	アンブレラ	眼鏡	3_3
+	ハイドランジア	眼鏡	1_3
+	アンブレラ							……まあ、そういうことに\nしておいてください
+If	isdebug==true
+CharacterOff
+Jump	*E_404_10
+EndIf
+EndScenario
+
+# E_404_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	魔導コロシアム
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+FadeIn	white					.5
+	リディ	悲しい2						うーん、まだなにか\n足りないのかなぁ……？
+	アヌビス							でもだいぶ届きそうになってきたよね　
+	リディ	悔しい2						うん……あとちょっとだと\n思うんだけどなぁ……
+	アヌビス							お茶、掃除、料理……\nあと何が足りないんだろ？
+	リディ	驚き2						洗濯……は、メイド酒場では\nやらないし……
+Param	character_grayout=false
+Tween	アヌビス	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人							うーん……？
+CharacterOff
+Param	character_grayout=true
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+	エクス=レプリカ							やっほ、二人とも順調ー？
+	ミーティア							ミーティアも様子を見に来ましたーー
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							あ、レプリカちゃんと\nミーティアちゃん！
+CharacterOff
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+	エクス=レプリカ							どう？\n"メイドの真髄"、そろそろ\nわかってきた？
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	アヌビス							うーん……\nなにかが足りないみたいなの
+	アヌビス	悲しい						それが何なのか\nぜんぜんわかんないんだけど
+	リディ	驚き2						メイドさんに必要なことは\nだいたい学んだような……
+CharacterOff
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+	ミーティア							二人ともー、\n大事なことを忘れてないですかー？
+	エクス=レプリカ							そうそう！\n一番大事なことを忘れてるわ！
+CharacterOff
+Param	character_grayout=false
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	二人							一番大事なこと？
+Param	character_grayout=true
+CharacterOff
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+	エクス=レプリカ							ええそうよ！
+	エクス=レプリカ							確かにお茶を淹れるのも\n掃除をするのも\n料理を作るのも全部大事だけど……
+	ミーティア							やっぱり、メイドといえばーー
+Param	character_grayout=false
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+Tween	ミーティア	PunchPosition	y=50				NoWait
+	二人							甘やかし力!!
+CharacterOff
+Param	character_grayout=true
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							あ、甘やかし力……？
+CharacterOff
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+	エクス=レプリカ							そう！　やっぱりメイドといえば、\n可愛くてたっぷり甘やかしてくれる\n存在じゃなきゃ！
+	ミーティア							へへへー、\nメイド酒場に来る人は\nみんな癒やしを求めてますからーー
+CharacterOff
+	アヌビス		2_2
+	リディ	笑い2	1_2
+	リディ							そっか、ただお料理作ったり\n掃除したりするだけじゃ\n普通の酒場と一緒だもんね!!
+CharacterOff
+	エクス=レプリカ	眼鏡	1_2
+	ミーティア	眼鏡	2_2
+Tween	ミーティア	PunchPosition	y=50				NoWait
+	ミーティア							そうですよー、\nちゃんと甘やかしてあげるのが\n大切なんですー♪
+	ミーティア							この間もミーティアは旦那様に\n頼まれてひざまくらでお昼寝を……
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							ちょっとまって、\nそれは聞き捨てならない
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	ミーティア	眼鏡
+	ミーティア							寝顔がかわいくてーー\nへへへーーー♪
+CharacterOff
+Param	character_grayout=true
+	アヌビス		2_2
+	リディ	怒り2	1_2
+	アヌビス							あ、ミーティアちゃんが\n自分の世界に入り始めた……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							おーーい？\nミーティアちゃーーん!?
+CharacterOff
+	エクス=レプリカ	眼鏡
+	エクス=レプリカ							まあまあ、リディちゃん\n落ち着いて……
+	エクス=レプリカ							ミーティアは置いておいて、\n修行を始めるわよ！
+	エクス=レプリカ							修行モード、オン!!
+StopBgm
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+Se	光3
+FadeOut	white					.5
+Bg	酒場_カフェ					1
+FadeIn	white					.5
+CharacterOff	オーラ青					1
+Se	ガヤA	TRUE
+Wait						1
+Param	character_grayout=true
+Bgm	バトル
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							わ、また人がたくさん
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス							うわぁ……
+CharacterOff
+	エクス=レプリカ	眼鏡
+	エクス=レプリカ							ここにいる人たちを\n癒やすのが今回の修行よ！
+FadeOut	black					.2
+Param	character_grayout=false
+CharacterOff						0
+	研究員					0
+	研究に疲れた人	<Off>	2_3			0
+	黒グラデーション		エフェクト表			0
+FadeIn	black					.2
+	研究に疲れた人	<Off>						もう……研究は嫌だ……
+FadeOut	black					.2
+CharacterOff						0
+Param	character_grayout=true
+	アヌビス		2_2			0
+	リディ	悔しい2	1_2			0
+FadeIn	black					.2
+	リディ							うわ、すごい闇を感じる
+	アヌビス							あれはもう冥界に送ったほうが\nよくない？
+CharacterOff
+	エクス=レプリカ	眼鏡
+	エクス=レプリカ							ダメよ、ちゃんと\n癒やしてあげなきゃ意味がないわ！
+CharacterOff
+	アヌビス	悲しい	2_2
+	リディ	照れ2	1_2
+	アヌビス							ダメかー……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	通常2						よし、がんばろうアヌビスちゃん！\nきっとこの修行を乗り越えれば……!!
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス	通常						う……\nはぁ、仕方ないかぁ……
+CharacterOff
+	エクス=レプリカ	眼鏡						よし、いっくわよー！\n修行スタートーっ！
+If	isdebug==true
+CharacterOff
+Jump	*E_404_11
+EndIf
+EndScenario
+
+# E_404_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	酒場_カフェ
+Param	character_grayout=false
+	アヌビス		2_2
+	リディ	笑い2	1_2
+FadeIn	white					.5
+Tween	アヌビス	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人							終わったぁー!!
+Param	character_grayout=true
+CharacterOff
+	エクス=レプリカ	眼鏡						よしよし、\n二人とも様になってきたわね！
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							ほんと!?\nやったぁー♪
+Tween	アヌビス	MoveBy	x=-10				NoWait
+	アヌビス							ねえリディちゃん
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	照れ2						なあにアヌビスちゃん
+	アヌビス							アヌビスも頑張ったから\n癒やされたいなーって
+	リディ	驚き2						ふぇ？
+	アヌビス							具体的には帰ってお布団で\nごろごろしたいなーって
+	リディ	笑い2						よしよし、ちゃんと\nギガント=ププッピマリーさんを\n倒せてからね
+	アヌビス	悲しい						ダメかぁー……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						マスターが頑張ってるのに、\nリディたちだけ休むわけには\nいかないもん！
+FadeOut	black					.3
+CharacterOff						0
+	ミーティア	眼鏡	2_2			0
+	エクス=レプリカ	眼鏡	1_2			0
+FadeIn	black					.3
+	エクス=レプリカ							さて……と\nおーい、ミーティアちゃーん？
+	ミーティア							それでですねーー\n旦那様がですねーーーー
+Se	打1
+Tween	エクス=レプリカ	PunchPosition	x=50				NoWait
+	エクス=レプリカ							よっと
+Tween	ミーティア	PunchPosition	y=50				NoWait
+	ミーティア							あたっ!?\n……あれ、何の話でしたっけ？
+	エクス=レプリカ							もう修行終わったわよ
+	ミーティア							あれーー？\n早いですねーー!!\nさすがですーーーー
+CharacterOff
+	アヌビス	悲しい	2_2
+	リディ	照れ2	1_2
+	アヌビス							見てなかったんだ……
+CharacterOff
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+	ミーティア							へへへー♪\n旦那様の話を始めると\n止まらなくてーー♪
+	ミーティア							そうでしたー、\n今の話も旦那様かわいい日記に\n書かなくてはー
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	リディ							だ、旦那様かわいい日記……？
+CharacterOff
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+	ミーティア							そうですよー\n旦那様を観察して日記を\nつけているんですーー
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							それも、"メイドの真髄"と\n関係あるの？
+	リディ							たぶん、相手をよく見ること\n……だよね？
+CharacterOff
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+	エクス=レプリカ							ええ、その通りよ！
+	エクス=レプリカ							たとえば、ご主人様は今\n何をしてほしいのかなーとか、\nちょっと具合悪そうだなーとか、
+	エクス=レプリカ							細かな変化に気づけないと、\nちゃんと癒やしてあげられないもの！
+	ミーティア							そういう相手への気遣いこそ、\nメイドに必要不可欠なもの\nなのですよーー
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+StopBgm
+	アヌビス							……あれ？\nなんか、そんなことを\n他のみんなにも言われたような……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							それだよアヌビスちゃん！
+Bgm	凱旋
+	リディ	悔しい2						……やっとわかった\nリディたち、大切なことを\n忘れてたんだね
+	リディ							早くメイドにならなきゃって\n早く上手くならなきゃって\n自分のことしか考えてなかったけど
+	リディ	通常2						リディたちに足りなかったのは、\n料理や掃除の腕前じゃなくて……!!
+CharacterOff
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+	エクス=レプリカ							ふふ、これ以上教えることは\nなさそうね！
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							ありがとう、レプリカちゃん！\nミーティアちゃん！
+CharacterOff
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+	ミーティア							へへー♪\nお役に立てたのならなによりですー♪
+	エクス=レプリカ							まあ……観察日記までつける\n必要はないけどね？
+	ミーティア							へへー♪\nこれは半分趣味ですー♪
+CharacterOff
+	アヌビス		2_2
+	リディ	通常2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							よし、アヌビスちゃん！
+	リディ							もう一回\nギガント=ププッピマリーさんの\nところに行ってみよう！
+	アヌビス	悲しい						これで終わるといいなぁー……
+	リディ	照れ2						大丈夫、今度こそきっと\n倒せるよ！
+CharacterOff
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+	ミーティア							がんばってくださいねーー
+	エクス=レプリカ							私も応援してるわ！
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	リディ							よし、がんばるぞー！
+	アヌビス							おー
+FadeOut	white					1
+	アヌビス		2_2			0
+	リディ	怒り2	1_2			0
+Wait						1
+Bgm	コメディ
+FadeIn	white					.1
+	リディ							それはそれとしてミーティアちゃん、\nその日記後で見せてね
+	アヌビス							あ、それはアヌビスも気になる
+CharacterOff
+	ミーティア	眼鏡	2_2
+	エクス=レプリカ	眼鏡	1_2
+Tween	ミーティア	PunchPosition	y=50				NoWait
+	ミーティア							ええーーーー企業秘密ですーーーー
+CharacterOff
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+Wait						.1
+Tween	リディ	MoveBy	x=10				NoWait
+	リディ							よし、力づくで見せてもらおう\nアヌビスちゃん
+Tween	アヌビス	MoveBy	x=-10				NoWait
+	アヌビス							んふふ、仕方ないなぁ\n協力するよリディちゃん♪
+If	isdebug==true
+CharacterOff
+Jump	*E_404_12
+EndIf
+EndScenario
+
+# E_404_12
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	魔導コロシアム
+	ププッピマリー
+FadeIn	white					.5
+	ププッピマリー							そろそろ来る頃だと思っておりました
+	ププッピマリー							"メイドの真髄"……\n辿り着くことは出来ましたか？
+CharacterOff
+Param	character_grayout=false
+	アヌビス		2_2
+	リディ	悔しい2	1_2
+	二人							…………はい
+CharacterOff
+Param	character_grayout=true
+	ププッピマリー							……では、\n"メイドの真髄"とは、一体？
+CharacterOff
+	アヌビス		2_2
+	リディ	通常2	1_2
+	リディ							……思い返してみたら、\nみんな最初から\n教えてくれてたんだよね
+	アヌビス							そうだね、みんな言ってることは\n一つだけだったもん
+StopBgm
+Se	回想
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場_カフェ					0
+CharacterOff						0
+Param	character_grayout=false
+	咲刃十六夜	眼鏡	1_2			0
+	甕破り一文字	眼鏡	2_2			0
+	　　　　　　　　　　
+FadeIn	white					.2
+	　　　　　　　　　　							飲む人のことを想って淹れた\nお茶が一番美味しいものですから！
+Se	回想
+FadeOut	white					.2
+Bg	子供部屋					0
+CharacterOff						0
+	アナイアレイター	眼鏡	2_2			0
+	デッキブラシ	眼鏡	1_2			0
+	　　　　　　　　　　
+FadeIn	white					.2
+	　　　　　　　　　　							大切なのは、\n誰のために綺麗にするか、です！
+Se	回想
+FadeOut	white					.2
+CharacterOff						0
+Bg	酒場_カフェ					0
+	ハイドランジア	眼鏡	1_3			0
+	アンブレラ	眼鏡	3_3			0
+	　　　　　　　　　　
+FadeIn	white					.2
+	　　　　　　　　　　							だから、ちゃんと信頼されるメイドを\n目指さなきゃってことだよー♪
+Se	回想
+FadeOut	white					.2
+CharacterOff						0
+	ミーティア	眼鏡	2_2			0
+	エクス=レプリカ	眼鏡	1_2			0
+	　　　　　　　　　　
+FadeIn	white					.2
+	　　　　　　　　　　							細かな変化に気づけないと、\nちゃんと癒やしてあげられないもの！
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+Bg	魔導コロシアム					0
+CharacterOff
+	アヌビス		2_2
+	リディ	怒り2	1_2
+FadeIn	white					.5
+Bgm	風属性バトル
+	リディ							さあ、答えようアヌビスちゃん！
+	アヌビス							んふふ、間違っても責任取れないよ♪
+Param	character_grayout=false
+Tween	リディ	PunchPosition	y=50				NoWait
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	二人							メイドの真髄、それは<dash=2>
+Selection	*E_404_12_01							相手を思いやる気持ち!!
+*E_404_12_01
+	二人							相手を思いやる気持ち!!
+CharacterOff
+Param	character_grayout=true
+	ププッピマリー							……ふふっ
+	カバー上部		カバー
+	ギガントマリー	足	画面外_上_b					<speed=0>  </speed>	BrPage
+Wait						.1
+Tween	ギガントマリー	MoveTo	y=-70 x=0 time=0.8	easeInOutCirc
+ImageEffect	SpriteCamera	Bloom
+Se	火1
+Se	火事
+Shake	Graphics		time=2
+ImageEffectOff	SpriteCamera	Bloom
+	ププッピマリー							さあ、では答え合わせと\n参りましょう<dash=2>!!
+Se	光2
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_404_13
+EndIf
+EndScenario
+
+# E_404_13
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bg	魔導コロシアム
+	ギガントマリー	顔	エフェクト表
+FadeIn	white					.5
+	ギガントマリー							ギギギ……ガガ…………
+Tween	ギガントマリー	MoveBy	y=-1000 time=2				NoWait
+Wait						.7
+Se	火事
+Se	倒れる
+Shake	Graphics		x=10 y=10
+Wait						2
+CharacterOff
+Bgm	凱旋
+	ププッピマリー							……お見事でございます
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	アヌビス							た、倒せた……？
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	照れ2						やった……!!\nやったよアヌビスちゃん!!
+	アヌビス							ふわぁぁ……やっと解放される……!!
+CharacterOff
+	ププッピマリー							お二人とも、よくたどり着きましたね
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	リディ							えへへ……
+	リディ	驚き2
+	アヌビス							ううん、二人じゃなくて\n全部リディちゃんが\nやったことだよ
+	アヌビス							アヌビス、何も手柄立ててないし♪
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	通常2						ううん、そんなことないよ！
+	リディ	笑い2						それにみんなが支えてくれたから……\nみんなのおかげだよ！
+CharacterOff
+	ププッピマリー							ええ、ですがそれだけではありません
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							……え？
+CharacterOff
+	ププッピマリー							みんなに支えられながらも、\nあなた方はマスターの負担を\n取り除くために戦い続けた……
+	ププッピマリー							彼を大切に想う心を忘れず、\n最後まで折れることなく\n戦い抜いたからこそ、
+	ププッピマリー							ギガント=ププッピマリーは\nあなた方を認めたのです
+	ププッピマリー							これはあなた方の功績です\n胸を張って良いことなのですよ
+CharacterOff
+	アヌビス		2_2
+	リディ	笑い2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							マリーさん……!!
+Tween	アヌビス	MoveBy	x=10				NoWait
+	アヌビス							アヌビスはべつに、\nついてきただけだし
+	リディ	照れ2						えへへ……\n本当にありがとね、アヌビスちゃん♪
+CharacterOff
+	ププッピマリー							……では、\nリディ様、アヌビス様
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+Se	光3
+FadeOut	white					.5
+Bg	研究所A					1
+FadeIn	white					.5
+CharacterOff	オーラ青					1
+Wait						1
+Param	character_grayout=true
+	ププッピマリー							メイド道場の主として、\n我がメイド道場が破られたことを\n認めましょう
+	ププッピマリー							……お見事です\n今のあなた方なら、真のメイドとして\n大切な人の支えとなれるでしょう
+CharacterOff
+Param	character_grayout=false
+	アヌビス		2_2
+	リディ	照れ2	1_2
+Tween	アヌビス	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人							やったぁーっ!!
+Param	character_grayout=true
+CharacterOff
+	ププッピマリー							今のあなた方の姿を\n魔剣使い様にお見せすれば、\nきっと喜んでいただけるでしょう
+CharacterOff
+	アヌビス		2_2
+	リディ	笑い2	1_2
+	リディ							えへへ……♪\n喜んでくれるといいな♪
+CharacterOff
+	ププッピマリー							メイドとしての活躍……\n期待していますよ
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	リディ							はいっ！
+Param	character_grayout=false
+Tween	アヌビス	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人							ありがとうございましたっ!!
+FadeOut	white					.5
+StopBgm
+CharacterOff
+Bg	市街地A
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	　　　　　　　　　　
+Wait						1.5
+Bgm	凱旋
+FadeIn	white					.5
+Param	character_grayout=true
+	リディ	照れ2						よし、それじゃあ早速、\nメイド酒場の準備をしなくちゃ！
+	リディ	驚き2						とりあえず酒場に連絡して、\nメイド酒場に改装してもらって……
+	アヌビス							それから……\nえと……マスターにも、\nお披露目しなきゃいけないよね？
+	リディ	笑い2						うん、そうだねっ！
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=false
+Bg	酒場1F
+ImageEffect	SpriteCamera	Sepia
+	ディーア	絶望2	2_3			0
+	　　　　　　　　　　					0
+FadeIn	white					.2
+Wait						1
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Sepia
+Bg	市街地A					0
+	アヌビス		2_2			0
+	リディ	悔しい2	1_2			0
+FadeIn	white					.2
+	リディ							こうしてる間にもマスターは\n頑張ってくれてるんだもんね！
+	リディ	照れ2						メイドさんとして\nちゃーんと癒やしてあげないとっ♪
+	リディ	驚き2						……でも、どうしたら\n喜んでくれるかな？
+	アヌビス							リディちゃん、オムライス\n作りたいって言ってなかったっけ？
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	笑い2						そうだった！\nとびきり美味しいオムライス作って\nマスターにごちそうしてあげよう！
+	リディ	照れ2						えへへ、アヌビスちゃんも\n一緒に作ろっ♪
+	アヌビス							しょうがないなぁ♪\nせっかくだから、すごいの作ろう！
+	リディ	笑い2						そうだね！\n市場で一番良い卵買って、\n一番良いお米買ってー……♪
+	アヌビス							マスター、\n食べたらびっくりするかも？
+	リディ	照れ2						思いっきりびっくりさせちゃお♪
+Tween	アヌビス	MoveBy	x=-10				NoWait
+	アヌビス							んふふ、アヌビス責任取れないよ？
+Tween	リディ	MoveBy	x=10				NoWait
+	リディ							えへへ、リディも取れないかも♪
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							よーし、がんばるぞーっ!!
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							おーっ♪
+FadeOut	black					.5
+StopBgm
+CharacterOff
+Bg	酒場_カフェ
+	　　　　　　　　　　
+	ディーア	絶望2	画面外_右
+Wait						1
+FadeIn	black					.5
+Tween	ディーア	MoveTo	x=0 time=2				NoWait
+	ディーア							つ、疲れた……ただいま……\nあれ、なんか\nいい匂いがするような……
+Bgm	都市
+	ディーア	驚き2						って、おお!?\nなんか酒場が綺麗に!!
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+	イベントスチル404		エフェクト表			0
+FadeIn	white					.5
+	二人							おかえりなさい、ご主人様!!
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	驚き2				0		リディ、それにアヌビスも……!?\nどうしたんだ、その格好!?
+CharacterOff						0
+	イベントスチル404	リディ	エフェクト表			0		えへへ、メイド酒場を\n始めることにしたの！\n似合う？
+CharacterOff						0
+	ディーア	きらーん2				0		ああ、すごくかわいい……!!
+CharacterOff						0
+	イベントスチル404	アヌビス	エフェクト表			0		マスター、紅茶もどうぞー♪
+CharacterOff						0
+	ディーア	照れ2				0		ありがとな、アヌビス……!!\nあぁ……疲れた身体に染み渡る……
+CharacterOff						0
+	イベントスチル404	リディ	エフェクト表			0		オムライスも食べて！\nマスターのために作ったの！
+CharacterOff						0
+	ディーア	驚き2				0		はむっ……おお！\nすごく美味しい……!!
+CharacterOff						0
+	イベントスチル404	リディ	エフェクト表			0		えへへ、よかったぁ♪
+CharacterOff						0
+	ディーア	嬉しい2				0		ありがとな、二人とも……!!
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル404		エフェクト表			0
+	二人							こちらこそ、\nいつもありがとね、マスター♪
+FadeOut	white					1
+CharacterOff						0
+Param	character_grayout=true
+	アヌビス		2_2
+	リディ	照れ2	1_2
+Wait						1
+FadeIn	white					1
+	アヌビス							どう？\n疲れ、取れた？
+CharacterOff
+	ディーア	嬉しい2						ああ、最高だよ……\n任務の疲れが消えていく……
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	リディ							えへへ、大成功だねアヌビスちゃん！
+	アヌビス							やったね、リディちゃん♪
+CharacterOff
+	ディーア	悔しい2						……ところで二人とも、\nちょっと言いにくいんだけど……
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							ふぇ？\nなあにマスター？
+CharacterOff
+StopBgm
+	ディーア	怒り2						オレが任務に行く前より、\nお金が減ってる気がするんだけど……
+	ディーア	悔しい2						オレたち今、借金を\n返そうとしてるんだよな……？
+CharacterOff
+	リディ	驚き2
+	リディ							…………え
+Se	回想
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A					0
+CharacterOff						0
+	アヌビス		2_2			0
+	リディ	驚き2	1_2			0
+FadeIn	white					.2
+	リディ							とりあえず酒場に連絡して、\nメイド酒場に改装してもらって……
+Se	回想
+FadeOut	white					.2
+	アヌビス		2_2			0
+	リディ	照れ2	1_2			0
+FadeIn	white					.2
+	リディ							そうだね！\n市場で一番良い卵買って、\n一番良いお米買ってー……♪
+Se	回想
+FadeOut	white					.2
+Bg	酒場_カフェ					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	黒グラデーション		エフェクト表			0
+	リディ	絶望2				0
+FadeIn	white					.2
+	リディ							…………あっ
+Bgm	絶望
+CharacterOff
+	ディーア	怒り2	1_2
+	アヌビス		2_2
+Tween	アヌビス	MoveTo	x=180				NoWait
+	アヌビス							よーしっ、オムライス作って\n疲れちゃったから\nアヌビスちょっと休憩を<dash=2>
+Tween	ディーア	MoveTo	x=90				NoWait
+	ディーア	怒り2						待て
+Tween	アヌビス	MoveTo	x=90				NoWait
+Tween	ディーア	MoveTo	x=-90				NoWait
+	アヌビス							な、なあにマスター？
+	ディーア	絶望2						アヌビス……まさかお前、また……？
+	アヌビス	悲しい						あ、アヌビス知らないよ？
+	ディーア	絶望2						おま……二度目は……ないぞ……？
+	アヌビス	通常						ちちちち違うよ!?\n酒場の改装をしたのは\nリディちゃんで……
+	ディーア	絶望2						リディさん……？
+CharacterOff
+StopBgm
+	リディ	悔しい2						え、えええ、あ、えっと……\nりりり、り……
+CharacterOff
+Bgm	コメディ
+	リディ	拡大絶望2	エフェクト表
+Shake	リディ		x=5				NoWait
+	リディ							<size=40>リディ悪くないよ！！？？</size>
+CharacterOff
+	ディーア	驚き2	1_2
+	アヌビス		2_2					あ、リディちゃんが\nパニックになってる……
+	ディーア	汗2						おーい、リディさーん？
+CharacterOff
+	リディ	絶望2
+Shake	リディ		x=5				NoWait
+	リディ							り、リディ悪く……ないもん……？
+CharacterOff
+StopBgm
+	アヌビス							………………はぁ
+CharacterOff
+	アヌビス		2_2
+	リディ	絶望2	1_2
+	アヌビス							そうだよマスター、\nリディちゃんは悪くないよ！
+CharacterOff
+	ディーア	驚き2						……あ、アヌビス？
+Bgm	凱旋
+CharacterOff
+	アヌビス		2_2
+	リディ	絶望2	1_2
+	アヌビス							リディちゃんもアヌビスも、\n全然悪くないの
+	アヌビス							だって、マスターの為を思って\nいっぱい頑張ったんだもん
+	アヌビス							……リディちゃんは悪くないのに、\nいっぱい頑張ってくれたんだもん
+	リディ	悲しい2						アヌビスちゃん……
+	アヌビス							だからね、マスター？\nリディちゃんは全然悪くないんだよ！
+CharacterOff
+	ディーア	驚き2						アヌビス……
+	ディーア	通常2						…………ああ、そうだな\n悪かった、責める気はなかったんだ
+CharacterOff
+	アヌビス		2_2
+	リディ	悲しい2	1_2
+	リディ							ま、マスター……ごめんなさい……
+CharacterOff
+	ディーア	汗2						いいって、わざとじゃないんだろ？
+CharacterOff
+	アヌビス		2_2
+	リディ	驚き2	1_2
+	リディ							許してくれるの……？\nリディ、悪くない……？
+CharacterOff
+	ディーア	汗2						ああ、間違いなら誰にでもあるさ\nこれから巻き返せばいいんだ
+	ディーア	通常2						それに……それくらいで\n崩れるような信頼関係じゃないだろ？
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	リディ							うん……っ、そうだね!!
+	アヌビス							それならもうちょっと\n派手な企画をしても……
+CharacterOff
+	ディーア	絶望2						二度目は、ないぞ、アヌビス？
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+Tween	アヌビス	PunchPosition	y=50				NoWait
+	アヌビス							…………わお、なんでもないです
+	リディ	通常2						よし、やろうアヌビスちゃん！\n今度こそ借金を返すために、\nメイド酒場を成功させよう！
+	アヌビス							しょうがないなあ……
+	リディ	照れ2						マスターも楽しみにしててね！\n頑張って取り返すから！
+CharacterOff
+	ディーア	あはは2						ああ、期待してるぞ
+CharacterOff
+	アヌビス		2_2
+	リディ	照れ2	1_2
+	リディ							うんっ！
+Se	走る
+Tween	アヌビス	MoveBy	x=1500 time=5				NoWait
+Se	走る
+Tween	リディ	MoveBy	x=1500 time=5				NoWait
+Wait						1.5
+CharacterOff
+	ディーア	通常2						……よし、オレも\nもう一回任務に行くか！
+FadeOut	white					1
+CharacterOff
+	　　　　　　　　　　
+Bg	白背景
+Wait						.5
+FadeIn	white					.5
+	　　　　　　　　　　							<color=blue><dash=2>かくして、リディたちは\n無事に借金を返済することができた</color>
+	　　　　　　　　　　							<color=blue>数カ月後、リディたちの作った\nメイド酒場が魔界一と噂されるまでに\nなったのは<dash=2>また別の話だ。</color>
+FadeOut	white					.2
+Param	character_grayout=false
+Bg	酒場_カフェ
+	イベントロゴ404		エフェクト裏
+FadeIn	white					1
+	　　　　　　　　　　							<color=blue>\n\n　　　　　　　　　　　　　　<dash=2>完</color>
+FadeOut	black					1
+CharacterOff
+Param	character_grayout=true
+StopBgm						2
+Wait						3
+If	isdebug==true
+CharacterOff
+Jump	*E_404_01
+EndIf
+EndScenario

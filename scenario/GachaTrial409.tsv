@@ -1,0 +1,563 @@
+# G_409_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	海岸
+FadeIn	white					.5
+	　　　　　　　　　　							\n　 　　<color=blue><dash=2>リゾルタ海岸公園<dash=2></color>
+CharacterOff
+Param	character_grayout=false
+	ディーア	笑い水着2	1_2
+	リディ	水着照れ2	2_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	リディ	PunchPosition	y=50				NoWait
+	二人							海だーっ!!
+CharacterOff
+Param	character_grayout=true
+	みつよ	水着	b2 2
+	ルコ	水着	1_2					ちょっと、なにグズグズしてるのよ！\n置いていくわよ！
+	ルコ	水着	1_2_b
+	みつよ	水着	b1 2					ふふ、相変わらず\n素直じゃない子猫でありんす
+	みつよ	水着	b2 2
+	ルコ	水着	1_2
+Tween	ルコ	PunchPosition	y=50				NoWait
+	ルコ							もう、光世さん！\n子猫って呼ぶのやめてってば！
+FadeOut	black					.5
+CharacterOff						0
+	ステラ		2_2			0
+FadeIn	black					.5
+	ステラ							いっっちばん乗りにゃあーーーー★
+Se	走る
+Tween	ステラ	MoveTo	x=-1000 time=3				NoWait
+Wait						2
+Se	ダイブ
+Wait						.5
+	ナナツサヤ	水着	画面外_右
+	バステト×サマー	水着	2_3					バステト様も<dash=2>
+Se	走る
+Tween	ナナツサヤ	MoveTo	x=-90 time=2				Add
+	ナナツサヤ							ナナも行くーっ!!
+Tween	バステト×サマー	PunchPosition	y=50				Add
+Tween	バステト×サマー	MoveBy	x=150				Add
+	バステト×サマー							にゃふっ!?
+Shake	バステト×サマー		x=5				Add
+	バステト×サマー							フーーーーーーッ……!!
+Tween	ナナツサヤ	PunchPosition	y=50				Add
+	ナナツサヤ	楽しい水着						わ、わふっ!?\nぐるる……っ！
+Tween	バステト×サマー	MoveBy	x=90 time=0.5				NoWait
+Tween	ナナツサヤ	MoveBy	x=-90 time=0.5				NoWait
+	リディ	水着悔しい2	2_3_b					こら
+	バステト×サマー
+	ナナツサヤ
+Tween	バステト×サマー	PunchPosition	y=50				NoWait
+Tween	ナナツサヤ	PunchPosition	y=50				NoWait
+Param	character_grayout=false
+	二人							ひゃふっ!?
+FadeOut	black					.5
+CharacterOff						0
+	　　　　　　　　　　
+	獄刀大包平	水着
+FadeIn	black					.5
+Tween	獄刀大包平	PunchPosition	y=50				NoWait
+	獄刀大包平							お姉ちゃんほら！\n今がチャンスだよ！
+	名刀・大包平	水着						そ、そんなこと言われても……
+	アマリリス×キス	水着						ほらかねひらちゃん！\n勇気出して！
+	名刀・大包平	照れ水着
+Tween	名刀・大包平	PunchPosition	y=50				NoWait
+	名刀・大包平							うぅ、マリーちゃんまで……！
+FadeOut	black					.5
+StopBgm
+CharacterOff						0
+	　　　　　　　　　　
+Bg	酒場_海辺
+Wait						1
+Bgm	海岸
+FadeIn	black					1
+	　　　　　　　　　　							\n　　　　　　<color=blue><dash=2>海の家<dash=2></color>
+	セイブザオーダー	水着						んんーーっ……
+FadeOut	white					.3
+CharacterOff						0
+Bg	夏空					0
+	　　　　　　　　　　
+FadeIn	white					1
+	セイブザオーダー	<Off>						はぁ……暇だぁ……
+FadeOut	white					.3
+Bg	酒場_海辺					0
+CharacterOff						0
+	セイブザオーダー	悲しい水着
+FadeIn	white					.3
+	セイブザオーダー							……いや、まぁだらだらして\nいられるのはいいんだけどさー
+	セイブザオーダー							ここならのんびりし放題だし、\n寝てても文句言う人いないしー
+	リディ	<Off>						まーすたー！
+	セイブザオーダー	水着						……ん
+FadeOut	white					.3
+CharacterOff						0
+Bg	海岸					0
+	リディ	水着通常2				0
+Bgm	都市
+FadeIn	white					.3
+	リディ							えーいっ！
+Se	ダイブ
+FadeOut	aqua					.1
+FadeIn	aqua					.3
+Wait						.5
+	ディーア	あはは水着2						あはは！　やったな!?\nそれっ!!
+Se	ダイブ
+FadeOut	aqua					.1
+FadeIn	aqua					.3
+Wait						.5
+	リディ	水着照れ2						あはは！\nもーっ!!
+FadeOut	black					.3
+CharacterOff						0
+StopBgm
+Bg	酒場_海辺
+	セイブザオーダー	悲しい水着
+FadeIn	black					.3
+Tween	セイブザオーダー	MoveBy	x=10				NoWait
+	セイブザオーダー							…………む
+Tween	セイブザオーダー	MoveBy	x=-10				NoWait
+Bgm	海岸
+	セイブザオーダー							……いやいや、\n別になんとも思ってないし\nのんびりしてる方がいいし
+	セイブザオーダー	水着						これだけ魔剣がいれば、\nマスターも大変だろうしなぁ
+	セイブザオーダー							リディちゃんも、前からずっと\n海で遊びたいって言ってたし……
+FadeOut	white					.2
+CharacterOff						0
+Bg	夏空					0
+FadeIn	white					.3
+	セイブザオーダー	<Off>						はぁー……
+	セイブザオーダー	<Off>						……キングスとクイーンも\n来ればよかったのに
+FadeOut	white					.3
+CharacterOff						0
+StopBgm
+Bg	酒場_海辺
+Param	character_grayout=false
+	トライアルスチル40903		エフェクト裏
+	黒グラデーション		エフェクト表
+FadeIn	white					.3
+	？？？？							はぁー……
+Param	character_grayout=true
+CharacterOff
+	セイブザオーダー	水着						……ん
+FadeOut	white					.2
+CharacterOff						0
+	トライアルスチル40901		エフェクト表			0
+FadeIn	white					.2
+Wait						.7
+FadeOut	white					.2
+CharacterOff						0
+	トライアルスチル40902		エフェクト表			0
+FadeIn	white					.2
+Wait						.7
+FadeOut	white					.2
+CharacterOff						0
+	トライアルスチル40903		エフェクト表			0
+FadeIn	white					.2
+Wait						.7
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=false
+	サクラメント	怒り
+	？？？？		2_3
+FadeIn	white					.2
+	？？？？							むむ……
+CharacterOff
+Bgm	海岸
+Param	character_grayout=true
+	セイブザオーダー	水着						……あ、お仲間みっけー
+	セイブザオーダー							ねえ、キミ……\nこの間アンロックされた子だよね？\n確か、サクラメントちゃんだっけ
+	サクラメント							……あら？
+CharacterOff
+Param	character_grayout=false
+	サクラメント	拡大	エフェクト表					サクラにお声がけ？適当ならお手上げ\n選んでくれたのなら結構なお点前\n乙女心にずきゅん		1517-15
+	オーラ桃		エフェクト裏
+Param	character_grayout=true
+CharacterOff
+	セイブザオーダー	悲しい水着						……ええと？\nお点前？　おてあげ？
+	サクラメント							……慣れていないのお声がけ？\nまるで覚えかけのお膳立て\nでも許しちゃう乙女だけは
+	セイブザオーダー	水着						あー……\nもしかしてナンパだと思われた？\n違う違う、そういうのじゃなくてさ
+	セイブザオーダー	悲しい水着						……いや、ナンパといえば\nナンパになるのかな、今の？
+	サクラメント							あら？
+FadeOut	white					.2
+CharacterOff						0
+	トライアルスチル40904		エフェクト表
+FadeIn	white					.2
+Wait						.7
+FadeOut	white					.2
+CharacterOff						0
+	トライアルスチル40905		エフェクト表
+FadeIn	white					.2
+Wait						.7
+CharacterOff
+	セイブザオーダー	水着	2_2
+	サクラメント		1_2_b
+	サクラメント							ああ、あなたもマスターの\nファンみたいね\nいまのはサクラの勘違いね
+	セイブザオーダー	水着						あー、ファンっていうかまあ\nマスターの魔剣だけど
+	サクラメント							気を悪くしたなら謝るわ\nわからずやではないわサクラは
+Tween	サクラメント	MoveBy	x=10				NoWait
+	サクラメント							<ruby=あだざくら>徒桜</ruby>みたいに終わりたくないし\nせっかくだし……仲良くなりたいし
+	セイブザオーダー	水着						徒桜……？
+	セイブザオーダー	悲しい水着						ええと、その喋り方……\n私もやったほうがいいの？
+Tween	サクラメント	MoveBy	x=-10				NoWait
+	サクラメント							真似るかどうかはあなた次第ね\nまあ、あんまり気にはしないで
+	セイブザオーダー	水着						そっかー、じゃあ気にしない
+	セイブザオーダー							私はセイブザオーダー\nよろしくね
+	サクラメント							私はサクラメント、奇跡の手順書
+	サクラメント							内容は目分量、気をつけてね運用\nまあでも普通は読めない文章\n……マスター以外にはね♪
+	サクラメント							それでサクラちゃんになにかご用ね？\nなんだかちょっと退屈そうね
+	セイブザオーダー	水着						んー……用事っていうか、\nまあ暇だったからさー\nちょっと話し相手が欲しくてねー
+	サクラメント							暇だったのね\nいなかったのね話し相手\nでもいいの？　私相手で
+	セイブザオーダー							え？
+	サクラメント							マスターといっしょに遊ばないの？\nこれを逃したら後がないよ？
+	セイブザオーダー	悲しい水着						い、いや、マスターはいいよ\nほら、忙しそうだしさ
+	セイブザオーダー	水着						私はのんびりごろごろしながら\nぼーっとしてる方が好きだからねー
+	セイブザオーダー							……それにほら、
+FadeOut	black					.5
+CharacterOff						0
+Bg	海岸
+	獄刀大包平	水着	1_3
+	アマリリス×キス	水着	3_3
+	名刀・大包平	照れ水着
+FadeIn	black					.5
+Tween	名刀・大包平	PunchPosition	y=50				NoWait
+	名刀・大包平							あ、あのっ！\nえと、だんな様っ！
+CharacterOff
+	ディーア	笑い水着2						おお、包平！\n待ってろ、今行くから！
+FadeOut	black					.5
+CharacterOff						0
+Bg	酒場_海辺					0
+	セイブザオーダー	水着	2_2			0
+	サクラメント		1_2_b			0
+FadeIn	black					.5
+	セイブザオーダー							……これだけたくさん魔剣がいたら\nこうなるのはわかってたし
+Tween	サクラメント	PunchPosition	x=50				NoWait
+	サクラメント							えい
+Tween	セイブザオーダー	PunchPosition	y=50				NoWait
+	セイブザオーダー	悲しい水着						ひゃうっ!?
+Tween	セイブザオーダー	MoveBy	x=10				NoWait
+	セイブザオーダー							むー……ちょっと、何するのさ\n急にくすぐらないでよー……
+	サクラメント							思ったとおり\n所詮言葉遊び、気取る大人女子\nでもちょっと内心落ち込んでるでしょ
+	セイブザオーダー							えぇ？\nべ、べつにそんなこと……
+Tween	サクラメント	MoveBy	x=10
+	サクラメント							通用しない大うそつき\nサクラがあげるお墨付き\n間違いなくそれ勝負水着
+	サクラメント							今日のために買ったんでしょ\nマスターに見せたかったんでしょ？
+Tween	セイブザオーダー	MoveBy	x=10				NoWait
+	セイブザオーダー							う……
+	サクラメント							サクラちゃんの目は誤魔化せないわ\nそれに……
+Tween	セイブザオーダー	PunchPosition	y=50				NoWait
+	セイブザオーダー							ああもう、わかったってば！\nあ、あんまり言われると\n恥ずかしいから……
+Tween	サクラメント	MoveBy	x=-10				NoWait
+	サクラメント							恥ずかしい？
+	セイブザオーダー							ほ、ほら……\nなんか期待してたみたいじゃん……\n……ていうか、そういうサクラは？
+Tween	セイブザオーダー	MoveBy	x=-20				NoWait
+	セイブザオーダー	水着						こんなところにいるけど、\nサクラだって本当はマスターと\n遊びたいんじゃないの？
+Tween	サクラメント	MoveBy	x=-10				NoWait
+StopBgm
+	サクラメント	怒り						……………………………………別に？
+Bgm	コメディ
+	セイブザオーダー	悲しい水着						絶対遊びたいじゃん
+Tween	サクラメント	MoveBy	x=10				NoWait
+	サクラメント	怒り						ないわ心当たり、ほんとの話\n待つマスターの心変わり、\nだって子供じゃないもの
+Tween	セイブザオーダー	PunchPosition	x=-50				NoWait
+	セイブザオーダー	水着						えーい
+Tween	サクラメント	PunchPosition	y=50				NoWait
+	サクラメント	通常						ひゃうぅっ!?
+Tween	サクラメント	MoveBy	x=-10				NoWait
+	サクラメント	怒り						むぅぅ……しっぽの付け根は弱点\nきっと偶然のヒット\nでも下がる一歩……
+Shake	サクラメント		x=5				Add
+	サクラメント							隠す背中、学習するサクラ\nなくす隙、逆襲を警戒\nがるるる……
+Tween	セイブザオーダー	PunchPosition	x=-50				NoWait
+	セイブザオーダー	水着						あはは、えいっ♪
+Tween	サクラメント	PunchPosition	y=50				NoWait
+	サクラメント	通常						ひゃあうっ!?
+Tween	セイブザオーダー	MoveBy	x=-10
+	セイブザオーダー	水着						あぁ♪\nサクラの水着も新しいやつだ♪
+	セイブザオーダー							本当はサクラもマスターに水着\n見せたいんでしょ？\nさっきからマスターのこと見てるし
+	サクラメント	怒り						べ、別にそんなことない\nサクラが見てたのは女の子たち
+	セイブザオーダー	水着						ふーん？
+StopBgm
+FadeOut	black					.5
+CharacterOff						0
+Bg	海岸					0
+	ステラ
+FadeIn	black					.5
+Bgm	都市
+Tween	ステラ	PunchPosition	y=50				Add
+	ステラ							にゃふっ!?
+Tween	ステラ	MoveBy	y=-800 time=1.5				NoWait
+Wait						1
+Se	ダイブ
+Wait						1
+CharacterOff
+	ディーア	驚き水着2						おっと、大丈夫かステラ？
+CharacterOff
+Param	character_grayout=false
+	ステラ
+Tween	ステラ	PunchPosition	y=50				NoWait
+	ステラ							にゃっ!?\nだ、大丈夫にゃ!!
+FadeOut	black					.5
+StopBgm
+Bg	酒場_海辺					0
+CharacterOff						0
+Param	character_grayout=true
+	サクラメント	怒り拡大	エフェクト表			0
+FadeIn	black					.5
+	サクラメント							……………………………………………\n……………………………………………\n………………………………………むぅ
+CharacterOff
+	セイブザオーダー	水着	2_2
+	サクラメント	怒り	1_2_b
+	セイブザオーダー							絶対気になってるじゃん
+Bgm	海岸
+Shake	サクラメント		x=5				NoWait
+	サクラメント							うむむ……\nほんとはしてた熱めの期待、\nでもなれないのバステト姉妹……
+	サクラメント							ビーチは炎上、戦場に変貌\nでも逃した先攻、変わらない現状\n巻き返すにもちょっと面倒……
+	セイブザオーダー							まあ、あの様子じゃあねー
+	サクラメント							休日返上で延長も検討\nマスターは強制連行\n……っていうのはどう？
+	セイブザオーダー	悲しい水着						それ、いざ海に行ってみたら\n急な任務だーってなるやつだ
+	サクラメント							うーん……難しい独り占め\nこのままじゃすぐに日の入りね
+	セイブザオーダー	水着						まあ仕方ないよ
+	セイブザオーダー							海でマスターを独り占めなんて、\nそれこそ奇跡でも起きない限り\nできないし
+	セイブザオーダー							だから、サクラも\nのんびりごろごろしよー？
+	サクラメント							……奇跡でも起きない限り\nああ、そっか
+Tween	サクラメント	PunchPosition	y=50				NoWait
+	サクラメント							待っていてもできない期待\nこのままでは消化試合\nなら自分で作る機会
+	サクラメント							どうしようもないわこの展開は\nそんなときにはこの手がいいわ\n<dash=2>それなら奇跡を起こせばいいわ
+Tween	セイブザオーダー	PunchPosition	y=50				NoWait
+	セイブザオーダー	悲しい水着						き、奇跡？
+	セイブザオーダー	水着						そういえばさっきも\n奇跡の手順書とか言ってたけど……\nもしかして奇跡とか起こせるの？
+	サクラメント							そう、サクラは奇跡の手順書\n再現する神の奇跡、再演する神の秘跡
+	サクラメント							神様なんてただのプログラム\nただ祈るだけじゃ不合格\nなのに手順にはみんな無頓着
+	サクラメント							奇跡の手順、示す例文\n明文化された命運、\nそれが天煌の焔サクラメント
+	セイブザオーダー	悲しい水着						……もしかして、それを使えば\nマスターとイチャイチャできるー……\nとか考えてる？
+	サクラメント	怒り						う……
+	セイブザオーダー	水着						図星ね
+Tween	サクラメント	PunchPosition	y=50				NoWait
+	サクラメント	怒り						だ、だってこのままじゃ無い確率\n奇跡を使うほうが確実\n成功すればサクラがジャスティス
+	サクラメント	通常						操作する勝率のグラフ\nそうサクラが本日の主役
+	セイブザオーダー	悲しい水着						うーん……\nそんなに上手くいくものかなあ？
+	セイブザオーダー	悲しい水着						それに他の子たちもいるし……
+	サクラメント							でも迷ってるんでしょリゾート気分\nなのに程遠い理想の自分
+	サクラメント	怒り						夏の恋はMAX危険度\nぴえんとか言ってる間にジ・エンド\n……になっちゃうかも
+Tween	セイブザオーダー	MoveBy	x=10				NoWait
+	セイブザオーダー	悲しい水着						う、それは……
+	サクラメント	通常						もうビーチは中盤戦\nマスターが来る数％\n……なんて待っていられないわ
+	サクラメント							評価しないなんて大間違い\n謳歌しない夏も問題外
+Tween	サクラメント	PunchPosition	y=50				NoWait
+	サクラメント							<dash=2>だって、せっかくの水着だしね♪
+Tween	セイブザオーダー	MoveBy	x=-10				NoWait
+	セイブザオーダー	水着						……なるほど、賭けてみる\n価値はあるかもね\nものは試しっていうし
+	セイブザオーダー							……まあ、ちょっと\nズルいような気もするけど
+	サクラメント							これくらい別に狡猾じゃないわ\n爪があるものよ能ある鷹には\n任せておいてこういうときには
+	セイブザオーダー							おっけー\n……ふふ、変だな\nなんかちょっと楽しくなってきた
+	セイブザオーダー							自分からなにかするなんて\n柄じゃないのにね
+	セイブザオーダー							<dash=2>それで、\nどうすれば奇跡が起きるの？
+	サクラメント							奇跡の手順を読み上げるの\n神のシステムに問いかけるの
+	セイブザオーダー							……それ、私でもできるの？
+	サクラメント	怒り						……実用にはマスターが必要かも\n一応そこまでは実力かも
+ChangeSoundVolume	Bgm	0
+	セイブザオーダー	悲しい水着						ダメじゃん
+ChangeSoundVolume	Bgm	1
+	サクラメント	通常						でも読み上げてくれれば追い風\nそのまま取り下げも乗り換えも\nできない恋まで
+	セイブザオーダー							とはいえ、他の子にずっと\n囲まれてるからなあ……
+	セイブザオーダー							ううん、やっぱり\n奇跡に頼るのは<dash=2>
+StopBgm
+CharacterOff
+	ディーア	本気水着2						サクラメント!!
+	セイブザオーダー	水着
+Tween	セイブザオーダー	PunchPosition	y=50				NoWait
+	セイブザオーダー							……え？
+CharacterOff
+Param	character_grayout=false
+	ディーア	怒り水着2	画面外_右
+	サクラメント	通常	2_3					マスター？
+ImageEffect	SpriteCamera	MotionBlur
+Se	走る
+Tween	ディーア	MoveTo	x=10 time=2				NoWait
+Wait						1.5
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	MotionBlur
+Tween	サクラメント	PunchPosition	y=50				NoWait
+Tween	サクラメント	MoveBy	x=-90				NoWait
+Bgm	凱旋
+	サクラメント							ひゃああうっ!?
+	ディーア	怒り水着2						サクラメント……!!
+CharacterOff
+	セイブザオーダー	水着						おお、奇跡だ
+CharacterOff
+	ディーア	怒り水着2	2_2
+	サクラメント	怒り	1_2_b					まま、マスター!?\nびっくりするわ唐突なハグは\nそういうのは一つ一つ順番を……
+StopBgm
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=150				NoWait
+	キノコリオン							<size=40>ノコーーーーッ！！！！</size>
+CharacterOff
+Bgm	コメディ
+	セイブザオーダー	悲しい水着						……のこ？\nってうわ、キノコリオンだ
+CharacterOff
+	サクラメント	怒り	1_2_b
+	ディーア	怒り水着2	2_2
+Tween	サクラメント	MoveBy	x=10				Add
+Tween	ディーア	MoveBy	x=-10
+	ディーア							大丈夫かサクラメント、\n怪我してないか？
+Tween	サクラメント	PunchPosition	y=50				NoWait
+	サクラメント	通常						ひゃっ……!!
+CharacterOff
+	セイブザオーダー	悲しい水着						……すごいね奇跡\nちょっと見直したよー
+CharacterOff
+	ディーア	怒り水着2	2_2
+	サクラメント	怒り	1_2_b					ほ、本物じゃないの\nこんなのじゃないの\n奇跡なんてまだ起こしてないもの
+	ディーア	驚き水着2						奇跡……？\nなんの話だ？
+CharacterOff
+StopBgm						1
+	セイブザオーダー	水着						ああ、気にしないでー\n……それよりキノコリオンを\nなんとかしないと
+Bgm	バトル
+CharacterOff
+	サクラメント	怒り	1_2_b
+	ディーア	怒り水着2	2_2					そうだな、いけるかサクラ？
+	サクラメント	通常						い、いけるわマスター
+	サクラメント							……駆けつけるマスター <ruby=ライカ>like a</ruby> <ruby=ナイト>騎士</ruby>\nならばサクラも戦わないと
+	サクラメント							不届きキノコにダイナマイト\nサクラの隣は空いてないの♪
+If	isdebug==true
+CharacterOff
+Jump	*G_409_02
+EndIf
+EndScenario
+
+# G_409_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	海岸
+Bg	酒場_海辺
+	ディーア	汗水着2
+FadeIn	white					.5
+	ディーア							ふぅ……二人とも、怪我はないか？
+CharacterOff
+	セイブザオーダー	水着	2_2
+	サクラメント	通常	1_2_b
+	セイブザオーダー							だ、大丈夫だけど……\nマスター、よく気付いたね\n私達も気付いてなかったのに
+CharacterOff
+	ディーア	あはは水着2						そりゃ、ちゃんと見てたからな
+CharacterOff
+	セイブザオーダー	水着	2_2
+	サクラメント	通常	1_2_b
+Tween	セイブザオーダー	PunchPosition	y=50				NoWait
+	セイブザオーダー							ほぉ……\nすごいね、サクラの奇跡
+	サクラメント							今のはサクラの奇跡とは違う\nしてない知略、ただのリアル
+	セイブザオーダー	悲しい水着						あれ、違うの？
+	サクラメント	怒り						起こした奇跡なら押せる太鼓判\nでもキノコリオンなら大誤算\n嬉しいけど大混乱ね……
+	セイブザオーダー							でも今、ちゃんと見てたって……
+CharacterOff
+Bgm	凱旋
+	ディーア	あはは水着2						そりゃ見てるさ\nあんまり遊べなくてごめんな
+	ディーア	笑い水着2						水着、新しいやつだろ？\n二人ともよく似合ってるよ
+CharacterOff
+	セイブザオーダー	悲しい水着	2_2
+	サクラメント		1_2_b
+	セイブザオーダー							ふぇっ!?\nそ、そうかな……？
+Tween	サクラメント	PunchPosition	y=50				NoWait
+	サクラメント							きゅん……揺れる乙女心\n夏の衝動、に上がる鼓動\nこの展開は予想不可能……
+CharacterOff
+	ディーア	驚き水着2						それで、二人で何してたんだ？
+CharacterOff
+	セイブザオーダー	水着	2_2
+	サクラメント		1_2_b
+Tween	セイブザオーダー	PunchPosition	y=50				NoWait
+StopBgm
+	セイブザオーダー							え？\nい、いや、別にちょっと\n雑談してただけというか
+Bgm	都市
+	サクラメント							そうだわ、忘れかけてた用件♪\n奇跡が貢献、でもまだ表面\n独り占めするチャンス♪
+	セイブザオーダー	悲しい水着						え、これ以上やるの？\n……マスター来てくれたし\nもうよくない？
+	サクラメント	怒り						チャンスは有限迫る刻限\n防戦している場合じゃないわ
+	セイブザオーダー	悲しい水着						そ、そういうものかな……
+CharacterOff
+	ディーア	怪しい水着2						用件？　チャンス？\n……変なことじゃないだろうな？
+CharacterOff
+	セイブザオーダー	悲しい水着	2_2
+	サクラメント		1_2_b
+	サクラメント							変なことはしないわ\n大変なことは起きないわ
+	サクラメント							左手に抱いた奇跡\nいたいけな秘跡の担い手\nさあマスター、<ruby=サクラメント>手順書</ruby>を開いて
+Tween	サクラメント	PunchPosition	y=50				NoWait
+	サクラメント							<size=20>完璧な作戦、百点の達弁\n起こす確変作るは楽園\nこれでマスターを独り占め♪</size>
+CharacterOff
+	ディーア	汗水着2						ええと、サクラメント？\nなんの奇跡を起こすんだ？
+CharacterOff
+	セイブザオーダー	悲しい水着	2_2
+	サクラメント	怒り	1_2_b
+	サクラメント							こ、細かいことは気にしないで\nでも気をつけて言い違い\nできれば避けたい二次被害
+CharacterOff
+	ディーア	怪しい水着2						……なんか怪しいな
+StopBgm
+	ディーア	怪しい水着2						さてはサクラメント、\n何か悪いことしようとしてるだろ？
+Bgm	コメディ
+CharacterOff
+	セイブザオーダー	悲しい水着	2_2
+	サクラメント	怒り	1_2_b
+Tween	サクラメント	PunchPosition	y=50				NoWait
+	サクラメント							ぎく
+	セイブザオーダー							バレてるじゃん
+CharacterOff
+	セイブザオーダー	悲しい水着	2_2
+	ディーア	汗水着2	1_2					やっぱりか
+	セイブザオーダー							ほんと、よくわかるねマスター
+	ディーア	あはは水着2						はは、ちゃんと見てるからな
+CharacterOff
+	ディーア	笑い水着2						さて……\n悪い子にはお仕置きが必要だよな？
+CharacterOff
+	ディーア	笑い水着2	2_2
+	サクラメント	怒り	1_2_b
+Tween	サクラメント	PunchPosition	y=50				NoWait
+	サクラメント							ぅえっ!?　い、いらないお仕置き\nなんでノリノリ？
+	サクラメント	通常						なにもしてないわ悪いこと\nサクラはしないわ隠しごと<dash=2>
+Tween	ディーア	PunchPosition	x=-50				NoWait
+	ディーア	怪しい水着2						えい
+Tween	サクラメント	PunchPosition	y=50				NoWait
+Tween	サクラメント	MoveBy	x=-10				NoWait
+	サクラメント	通常						ひゃあうっ!?
+	サクラメント	怒り						うぅぅ……！\n過激な反撃、どころか<ruby=ワンウェイ>一方的</ruby>\n安寧に暗影、休戦に賛成……
+Tween	ディーア	MoveBy	x=-10				NoWait
+	ディーア	あはは水着2						あはは、反省したか？
+Tween	サクラメント	MoveBy	x=-10				NoWait
+	サクラメント	怒り						は、反省はしないし関係はないわ\nそもそもサクラは未遂、\n水着、の子をくすぐるのはギルティ
+	ディーア	怪しい水着2						そうか、そんなに言うなら\n仕方ないな……
+Tween	ディーア	PunchPosition	x=-50				NoWait
+	ディーア	あはは水着2						そりゃっ
+Tween	サクラメント	PunchPosition	y=50				NoWait
+	サクラメント	怒り						ひゃあんっ!!　も、もう……！
+Tween	サクラメント	MoveBy	x=-10				NoWait
+	サクラメント	怒り						調子づくマスター直視し抗議する\n防備するサクラ……ううー！
+FadeOut	black					.5
+CharacterOff						0
+	セイブザオーダー	水着				0
+StopBgm
+FadeIn	black					.5
+	セイブザオーダー							…………おぉ\nほんとに起きてるじゃん、奇跡
+Bgm	海岸
+	セイブザオーダー							……はぁ、私はまた一人かぁー
+Bgm	コメディ
+	ディーア	<Off>						お、追いかけっこか？\n逃さないぞ！
+	サクラメント	<Off>						ひゃああん！\nや、やめてって言ってるの！\n聞こえてないの!?
+StopBgm
+	セイブザオーダー	水着						…………………
+Bgm	海岸
+	セイブザオーダー	悲しい水着						……まあ、たまには奇跡に\n頼ってみるのも、悪くないかも？
+Tween	セイブザオーダー	MoveTo	x=-90				NoWait
+	セイブザオーダー	水着						ええと……私も韻踏めばいいのかな
+	セイブザオーダー	悲しい水着
+Param	character_grayout=false
+	円フェード		g-090240500
+Tween	円フェード	ScaleTo	x=0.12 y=0.12	linear			Add
+	セイブザオーダー							お、おーい、マスター、ええと、\nサクラ、の奇跡？\n私にも、読む、プリーズ？
+Se	走る
+Tween	セイブザオーダー	MoveBy	x=-500 time=2				NoWait
+FadeOut	black					1.5
+If	isdebug==true
+CharacterOff
+Jump	*G_409_01
+EndIf
+EndScenario

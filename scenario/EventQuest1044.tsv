@@ -1,0 +1,762 @@
+# E_1044_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	ショッピング
+Bg	黒背景					0
+Param	character_grayout=false
+	イベントスチル10441		エフェクト表			0
+	          		1_2
+FadeIn	white					.5
+Se	レベルアップ
+Wait	          					1.5
+Se	ポン
+	イベントスチル10442		エフェクト表			0
+Wait						1
+	ふうり	<Off>						は？ どう見ても猫だが？\n虎じゃないが？ ……だにゃん
+Se	ポン
+	イベントスチル10443		エフェクト表			0
+Wait						1
+	ふうり	<Off>						そんなわけないにゃ……！\n猫王の間違いだにゃ！\nふうりはかわいい猫ちゃん！
+Se	ポン
+	イベントスチル10444		エフェクト表			0
+Wait						1
+	ふうり	<Off>						何度も言わせるな、だにゃん！
+FadeOut	white					.5
+CharacterOff						0
+Bg	大橋					0
+	イベントロゴ1044		エフェクト表			0
+FadeIn	white					.5
+	ふうり	<Off>						だから、ふうりはネコなのにゃー！
+FadeOut	white					.5
+StopBgm
+CharacterOff						0
+Bg	酒場1F(正月)					0
+	ふうり	嬉しい				0
+Wait						1
+Bgm	都市
+FadeIn	white					.5
+	ふうり	嬉しい						はぁ……もういいか、にゃん？\nふうりは猫ちゃんなんだにゃん♪
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	嬉しい						だから猫らしく、\nこたつでゆっくりするにゃん♪
+CharacterOff
+	ディーア	笑い2						そっか、\n猫だから仕方ないな……
+CharacterOff
+Param	character_grayout=true
+	ディーア	怪しい2	画面外_左
+	ふうり	嬉しい	2_3_b
+Tween	ディーア	MoveBy	x=500 time=0.5				NoWait
+Wait						.3
+	ディーア	怪しい2						……って、\nそんなわけあるか！
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	慌て						はにゃ!?\nなにするんだにゃ、マスター！
+	ディーア	汗2						いつまでも現実逃避していないで、\n神社にいくぞ！
+Tween	ふうり	MoveBy	x=40				NoWait
+	ふうり	嬉しい						は？ 行かないが？ 猫だから♪\n外が寒いなら\n猫はこたつに隠れるんだにゃー♪
+	ディーア	怪しい2						でも、ふうりは虎だろ？
+	ふうり	通常						猫だにゃ！
+	ディーア	怪しい2						寅王だろ？
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	悔しい						は？ いま寅王っつった？\n……だにゃん！\nそんな名前は知らないにゃ！
+	ディーア	怪しい2						でも、\nそのシマシマのしっぽは……
+	ふうり	通常						ふうりが虎っぽいとしても\n虎猫なだけにゃ！
+	ディーア	汗2						いやいや、\nそんな理屈こねてないで行くぞ\n大事な役目があるんだろ？
+CharacterOff
+	丑王アコ	通常	p3b
+	シシガミ	通常2	p7
+	シシガミ	通常2						そうだよぉ\nもうすぐお正月だから、\nお役目を引き継ぐ番じゃない
+	丑王アコ	通常						うん♪\n私からふうりちゃんに交代しないと♪
+CharacterOff
+	ディーア	笑い2						十二支魔剣のうち一本が、\n交代で世界を守る役目に\nついてるんだよな？
+CharacterOff
+	アメノウズメ	通常2	p7b
+	マハ	通常2	p3
+	マハ	通常2						はい！ もう形だけの風習ですけど\n大切なお役目です！
+	アメノウズメ	通常2						交代、交代で、\n一年間祀ってもらえるのっ♪
+CharacterOff
+	ナナツサヤ	通常2	p3
+	如意棒	通常2	p7b
+	如意棒	通常2						お人形とか、\n絵もかざってもらえるんだよっ！
+	ナナツサヤ	通常2						ナナたちも大活躍っ♪
+CharacterOff
+	丑王アコ	嬉しい						今日の後に平和なし♪\n去年は私が祀ってもらえて、\n世界平和に近づきました♪
+CharacterOff
+	ディーア	通常2						だから\n今年は寅王であるふうりの順番、と
+	ディーア	笑い2						よかったな、ふうり！
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ふうり	通常拡大	エフェクト裏
+	ふうり	通常拡大						よくないにゃー！
+CharacterOff
+	ふうり	通常
+Shake	ふうり		x=3				NoWait
+	ふうり	通常						ふうりは寅王なんかじゃないにゃ！\n違う名前で祀られるのは不本意なの！\nだにゃん！
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	嬉しい						猫ちゃんたちもマスターに\n言ってくれだにゃ！
+CharacterOff
+	ふうり	猫	エフェクト表					ニャー！
+CharacterOff
+	ふうり	泣き
+Shake	ふうり		x=5				NoWait
+	ふうり	泣き						ふうりは、いたっ!? \n猫ちゃんの、はにゃっ!?\n仲……ちょ、そこはダメ……にゃ！
+CharacterOff
+	ディーア	怪しい2						猫にいたずらされまくってる……
+CharacterOff
+	ふうり	悔しい						ぐぅぅ……！\nマハもなんとか言ってくれにゃ！
+CharacterOff
+	マハ	怪しい2						ご、御主人様？\n本人が猫って言ってるし、\n猫あつかいしてあげても……
+CharacterOff
+	ナナツサヤ	通常2						でも、寅王は虎のことじゃないの？
+CharacterOff
+	マハ	怪しい2						うっ……！\nは、反論できない……！
+CharacterOff
+	ふうり	通常
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	通常						マハ!?\n裏切るの!? ……かにゃん!!
+CharacterOff
+	マハ	怪しい2						虎も猫の仲間だし……\nそれで、どう？
+CharacterOff
+	ふうり	通常						にゃー!?\n虎じゃないんだが!?\n断固拒否にゃー！
+Param	character_grayout=true
+CharacterOff
+	丑王アコ	通常	p3b
+	シシガミ	通常2	p7
+	シシガミ	通常2						うーん、マスターどうする？
+	丑王アコ	通常						お役目を引き継がないと\n平和が守れるかわからないですし……
+CharacterOff
+	ディーア	怪しい2						そうだな……
+	ディーア	通常2						よし、決めた！\nみんな、ふうりを引っ張り出すぞ！
+	全員							はーい！
+Param	character_grayout=false
+CharacterOff
+	マハ	通常2	画面外_左
+	ナナツサヤ	通常2	画面外_左_b
+	ふうり	通常	2_3_b
+Tween	ナナツサヤ	MoveBy	x=900 time=1				NoWait
+Tween	マハ	MoveBy	x=500 time=1				NoWait
+Wait						1.5
+Se	走る
+Tween	マハ	MoveBy	x=-1200 time=1.5				NoWait
+Tween	ふうり	MoveBy	x=-1200 time=1.5				NoWait
+Tween	ナナツサヤ	MoveBy	x=-1200 time=1.5				NoWait
+	ふうり	通常						いやにゃー！ いやにゃー！\n助けてー！ 助けてー！\nえっちなこと されるにゃー!!				ルビでステラ
+CharacterOff
+	ディーア	汗2						<ruby=ステラ>猫</ruby>のマネしてもダメ！\nほら、いくぞ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	大橋					0
+	丑王アコ	通常	p7b			0
+	ディーア	通常2	p3			0
+Param	character_grayout=true
+Wait						1
+Bgm	和の国の町
+FadeIn	black					.3
+	ディーア	通常2						たしか、\nこの近くの神社だったよな？
+	丑王アコ	通常						はい♪\nそこで私とふうりちゃんで\n簡単な儀式をすれば終わりです♪
+	ディーア	笑い2						なるほど、\n周りもにぎやかになってきたな……
+	丑王アコ	嬉しい						毎年の行事ですから、\nお祭にもなっているんですよ♪\nこれも平和の証ですね♪
+CharacterOff
+	研究員		p3b
+	街の人	通常	p7
+	街の人	通常						今年はとうとう寅王の年だな！
+	研究員							寅王か……\nどんな魔剣なんだろうな……
+	街の人	通常						虎って言うんだから、\nそりゃあ強くて威厳があるに\n決まってるさ！
+CharacterOff
+	ふうり	悔しい						むむむむ……！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	神社（昼）					0
+	ディーア	笑い2				0
+Wait						1
+FadeIn	black					.3
+	ディーア	笑い2						よし、ついたぞ！
+Param	character_grayout=false
+CharacterOff
+	丑王アコ	通常						それではさっそく♪
+Se	チャージ
+	オーラ青		エフェクト表			1
+	丑王アコ	通常						私、丑王アコは\nこの尊きお役目を寅王ふうりに\nお渡しいたします♪
+	丑王アコ	通常						寅王ふうり、\nよろしいですね？
+CharacterOff
+	ふうり	悔しい						………………
+CharacterOff
+	ディーア	通常2						これで新年を\n無事に迎えられそうだな！
+Param	character_grayout=true
+CharacterOff
+	如意棒	通常2	p7b
+	ナナツサヤ	通常2	p3
+	ナナツサヤ	通常2						ご主人！\nナナ、帰りに虎のぬいぐるみ欲しい！
+	如意棒	通常2						ぼくは\n寅王せんべいが食べたい！
+CharacterOff
+	ディーア	笑い2						ああ、\nみんなで楽しく<dash=2>
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	ふうり	悔しい						や……！
+Bgm	緊迫
+CharacterOff
+	集中線		エフェクト表
+	ふうり	通常拡大	エフェクト裏					やっぱりイヤにゃー!!\nふうりは虎じゃなくて猫にゃー！
+CharacterOff
+Shake	Graphics		x=4 y=4 time=2				NoWait
+	ディーア	驚き2						へ…………？
+Se	光1
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						1
+Se	光3
+Se	闇3
+FadeOut	white					1
+CharacterOff						0
+	ディーア	絶望2				0
+	土煙		エフェクト表			0
+FadeIn	white					.5
+	ディーア	絶望2						な、なんだなんだ!?
+CharacterOff
+Se	闇1
+	怨念	？？？？	3_5_m			1
+	怨念	？？？？						楔が……解かれたのか……!?
+	怨念	？？？？						我らの安らぎが……！\nグォオオオオオ！
+Se	光1
+FadeOut	white					.2
+CharacterOff						0
+	怨念テンバイノコリオン					0
+	          		1_2
+FadeIn	white					.2
+	怨念テンバイノコリオン							テン、バイ……!!
+Bgm	バトル
+Param	character_grayout=true
+CharacterOff
+	丑王アコ	本気	p7b
+	ディーア	驚き2	p3
+	ディーア	驚き2						こ、こいつはあの時の……!?
+	丑王アコ	本気						マスターさん！
+	ディーア	怒り2						ああ、戦うぞ！
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1044_02
+EndIf
+EndScenario
+
+# E_1044_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	神社（昼）					0
+Param	character_grayout=false
+	ディーア	悔しい2				0
+	土煙		エフェクト表			0
+FadeIn	white					.5
+CharacterOff	土煙					1
+	ディーア	悔しい2						はぁ……はぁ……！\nすこし、落ち着いたか……
+	ディーア	怪しい2						こいつらはいったい……？
+CharacterOff
+	マハ	怪しい2						まさか、\nこんなことが起こるなんて……
+CharacterOff
+	シシガミ	通常2						着任拒否なんて、\nはじめてだもんね……
+CharacterOff
+	ディーア	驚き2						みんな、\nなにか知っているのか？
+CharacterOff
+	丑王アコ	本気						おそらく、あの方々は怨念です\n魔界で倒された魔物たち、\nその怨みの魔力結晶体……
+CharacterOff
+	マハ	怪しい2						たぶん、いつもなら\n封じられたまま\n浄化されていくはずですけど
+CharacterOff
+	丑王アコ	本気						お役目、\n拒否しちゃいましたから……
+CharacterOff
+	ディーア	怪しい2						ってことは、原因は……
+CharacterOff
+StopBgm
+	ディーア	怪しい2	画面外_左
+	ふうり	嬉しい	2_3_b
+	全員	<Off>						じー……！
+Param	character_grayout=true
+Bgm	コメディ
+	ふうり	嬉しい						くしくし♪\n日向ぼっこあったかいにゃー！\nやっぱり猫はひなたでお昼寝にゃ♪
+	ふうり	嬉しい						猫は気楽が一番だなー！\nじゃなくて、にゃー！
+Tween	ディーア	MoveBy	x=500 time=0.5				NoWait
+	ディーア	怪しい2						ちょっと、こっちに来なさい
+Tween	ふうり	MoveBy	x=40				NoWait
+	ふうり	通常						いやだにゃー！\nひっぱるなにゃー！\nがるる……！
+Shake	ディーア		x=2 time=1				NoWait
+	ディーア	悔しい2						ぐぅ……！\nこの足の強さ、やっぱり虎……!!
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	慌て						はにゃっ!?
+	ふうり	嬉しい						ふうりは非力な猫なのにゃー♪\n足の力も強くはないにゃー♪
+	ディーア	怪しい2						よし、今のうちだ！
+	ふうり	泣き						ふにゃああああ!?
+Se	走る
+Tween	ディーア	MoveBy	x=-800 time=1				NoWait
+Tween	ふうり	MoveBy	x=-800 time=1				NoWait
+Wait						1
+FadeOut	black					.3
+CharacterOff						0
+	怨念	通常	3_5_m			0
+Wait						.5
+FadeIn	black					.3
+	怨念	通常						ウゥ……我らを封じる楔は……？\n寅王は……？
+CharacterOff
+	ディーア	汗2						お、おーい！\nここにちゃんと寅王がいるぞ！\nだから鎮まってくれ……！
+CharacterOff
+	ふうり	悔しい
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	悔しい						ふしゃー！\nふうりは猫なのにゃ！
+CharacterOff
+	怨念	通常	3_5_m					おぉ……!!\nその声は我らが寅王ではないか……？
+CharacterOff
+	ふうり	嬉しい						は？ 知らんし？\nふうりは猫だが？ 虎じゃないが？
+CharacterOff
+	怨念	通常	3_5_m					だが、その黄色と白の模様は……？
+CharacterOff
+	ナナツサヤ	通常2						虎さんだー！
+CharacterOff
+	ふうり	通常						猫の毛もこんなでしょ!?
+CharacterOff
+	怨念	通常	3_5_m					その丸い耳は……？
+CharacterOff
+	ふうり	通常						丸くないっての!?\n三角、角がとれた三角！
+CharacterOff
+	マハ	怪しい2						さすがに無理あるでしょ……
+CharacterOff
+	ふうり	嬉しい						それにほら！\n「ねこです」って書いてあるにゃ！
+CharacterOff
+	怨念	通常	3_5_m					猫がわざわざそんなことを……？
+CharacterOff
+	ふうり	慌て						ぎくっ……!?
+CharacterOff
+	アメノウズメ	通常2						あーっ！\nたしかにそうかも！
+CharacterOff
+	ふうり	慌て
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	慌て						と、とにかく！\nふうりは猫なの！
+CharacterOff
+	怨念	通常	3_5_m					そ、そうか……\n寅王ではないのか
+CharacterOff
+	ディーア	絶望2						ちょっと待て!?\nなんで納得するんだ!?
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	怨念	通常	3_5_m
+Se	闇1
+	オーラ紫		エフェクト表			1
+	怨念	通常						オォオオオ……！
+Bgm	バトル
+CharacterOff
+	ディーア	驚き2						また姿が……！
+CharacterOff
+	怨念	通常	3_5_m
+Wait						.3
+Se	光1
+FadeOut	white					.2
+CharacterOff						0
+	怨念ウマイガニ					0
+	          		1_2
+FadeIn	white					.2
+	怨念ウマイガニ							カニカニー！
+CharacterOff
+	ディーア	絶望2						も、もう……\nカニ取りはイヤだー！
+If	isdebug==true
+CharacterOff
+Jump	*E_1044_03
+EndIf
+EndScenario
+
+# E_1044_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	コメディ
+Bg	神社（昼）					0
+Param	character_grayout=false
+	ディーア	怪しい2				0
+FadeIn	white					.5
+	ディーア	怪しい2						ふうり、そろそろ認めろって\n寅王がいれば、怨念も鎮まるから
+CharacterOff
+	ふうり	通常						だから、知らんし！\n寅王はどっか別にいるの！\nふうりは猫王なの！ だにゃん！
+CharacterOff
+	怨念	通常	3_5_m					猫王など、\n聞いたこともないが……？
+CharacterOff
+	ふうり	通常
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	通常						怨念はシャラップ！ がおー！\nじゃなくて、にゃー！
+	ふうり	嬉しい						証人もいるにゃ！
+	ふうり	嬉しい						猫ちゃんたち、応援してくれにゃ！\nふうりはみーんなとおなじ、\nかわいい猫……♪
+CharacterOff
+	ふうり	猫	エフェクト表					ニャー！
+CharacterOff
+	ふうり	泣き						ひぃん！ いったぁ!?\nなにするにゃ!? 服引っ張るなー！
+CharacterOff
+	ディーア	驚き2						あっ……！\nこれは、動かぬ証拠……！
+CharacterOff
+	ふうり	慌て						はにゃ!?
+CharacterOff
+	ディーア	本気2						これを見ろ、怨念！\nふうりのパンツは<dash=2>
+FadeOut	white					.3
+CharacterOff						0
+	集中線		エフェクト表			0
+	ふうり	パンツ	エフェクト裏			0
+FadeIn	white					.3
+	ディーア	<Off>						虎柄だー！
+CharacterOff						0
+	ふうり	慌て拡大	エフェクト表			0
+	ふうり	慌て拡大						にゃあああああ!?
+CharacterOff
+	怨念		3_5_m					やはりお前は寅王……！
+CharacterOff
+	ふうり	通常
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	通常						みんな馬鹿なの!?\nそんなところで判断するなー!!\nだにゃん！
+	ふうり	悔しい						しましまパンツ履いてても、\nふうりは猫なの！
+StopBgm
+CharacterOff
+	怨念		3_5_m					そうか、ならば……
+Bgm	バトル
+Se	闇1
+	オーラ紫		エフェクト表			1
+Wait						1
+Se	光1
+FadeOut	white					.2
+CharacterOff						0
+	怨念お月見うさぎ					0
+	          		1_2
+FadeIn	white					.2
+	怨念お月見うさぎ							ガァアアアア!!
+CharacterOff
+	如意棒	通常2
+Tween	如意棒	PunchPosition	y=30				NoWait
+	如意棒	通常2						わぁ……！\nまた魔物が出てくるよぉ！
+CharacterOff
+	ディーア	悔しい2						くっ！\nそろそろ止めないと……！
+If	isdebug==true
+CharacterOff
+Jump	*E_1044_04
+EndIf
+EndScenario
+
+# E_1044_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	神社（昼）					0
+	丑王アコ	通常	p3b			0
+	シシガミ	通常2	p7			0
+FadeIn	white					.5
+	シシガミ	通常2						ふうりちゃん、\nまだ寅王はイヤなの？
+	丑王アコ	通常						時には嘘も平和というし、\nそもそも嘘ではないし、\n認めたほうが平和になるよ？
+CharacterOff
+	ふうり	通常						ダメにゃ！\nここで寅王って認めたら、\n一年、魔界中で寅王と呼ばれるにゃ！
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	通常						ふうりは猫ちゃんなの！
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	怨念	通常	3_5_m
+	オーラ紫		エフェクト表
+	怨念	通常						ウゥウウウ……！
+CharacterOff
+	ディーア	怪しい2						こ、今度はどうした!?
+CharacterOff
+	アメノウズメ	通常2						マスター！\n怨念さん、もう限界みたい！
+Bgm	緊迫
+CharacterOff
+	ディーア	驚き2						なっ……！
+CharacterOff
+	怨念	通常	3_5_m
+	怨念	通常						グォオオオ！
+Tween	怨念	MoveBy	x=800 time=1.2				NoWait
+Wait						.3
+CharacterOff
+	ディーア	悔しい2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	悔しい2						しまった！\nあっちは祭が……！
+CharacterOff
+	ふうり	慌て						はにゃ!?
+FadeOut	black					.3
+CharacterOff						0
+StopBgm
+Bg	大橋					0
+	女の子					0
+Wait						1
+Param	character_grayout=true
+Bgm	ガヤA
+FadeIn	black					.3
+Tween	女の子	PunchPosition	y=30				NoWait
+	女の子							お祭、お祭♪\n虎さんのお祭だー♪
+StopBgm
+	街の人	<Off>						きゃあああああ!?
+	女の子							…………え？
+Bgm	魔王バトル
+CharacterOff
+Se	闇1
+	怨念		3_5_m			1		グゥウウウウ……！
+CharacterOff
+	女の子
+Shake	女の子		x=3				NoWait
+	女の子							あっ、ああ……!?
+CharacterOff
+	怨念		3_5_m					ガァアアアア……！
+ZoomCamera	SpriteCamera	1.5				.3	NoWait
+Wait						.3						同秒数のWaitを挟まないとバグるので注意
+FadeOut	white					.2
+StopBgm
+CharacterOff						0
+	          
+ZoomCamera	SpriteCamera	1				0	NoWait
+ImageEffect	SpriteCamera	MotionBlur
+Se	シャキーン
+Bg	黒背景					0
+FadeIn	white					.2
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	大橋					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	怨念
+Shake	怨念		x=5				NoWait
+	怨念		3_5_m					ウゥ……
+CharacterOff
+	ふうり	悔しい						間に合った、にゃ……！
+CharacterOff
+	女の子							と、虎さん……？
+Bgm	勇者バトル
+CharacterOff
+	ふうり	悔しい						虎じゃなくて猫にゃ……って、\n言いたいところだけど、\nもう、そういう状況じゃないよね
+	ふうり	悔しい						あーあ、\nただのかわいい猫ちゃんでいるのも\nなかなか難しいにゃ
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	嬉しい						けど、他のみんながいなくなったら\n可愛がられるもなにもないにゃ！
+	ふうり	通常						だから……マスター!!
+CharacterOff
+	ディーア	本気2						ああ！\nいくぞ、ふうり……！
+CharacterOff
+	怨念	通常	3_5_m					オマエは、寅王か……？
+Param	character_grayout=false
+CharacterOff
+	ふうり	通常
+Se	チャージ
+	オーラ赤		エフェクト表			.5
+	ふうり	通常						虎でも猫でも、\n好きな方で呼ぶがいいにゃ！
+CharacterOff
+	集中線		エフェクト表
+	ふうり	通常拡大	エフェクト裏
+	ふうり	通常拡大						がおぉおおおお!!
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1044_05
+EndIf
+EndScenario
+
+# E_1044_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	大橋					0
+Param	character_grayout=false
+	怨念	通常	3_5_m
+FadeIn	white					.5
+Shake	怨念		x=5				NoWait
+	怨念	通常						この力、まさしく寅王……\nこれで我らも静かに……
+Tween	怨念	MoveBy	y=-100				NoWait
+CharacterOff	怨念					.5
+Wait						.5
+CharacterOff
+	ふうり	悔しい						だから、虎じゃないっつの……！
+	ふうり	悔しい						……って\nもう消えてるし、だにゃん
+CharacterOff
+	女の子
+Shake	女の子		x=3				NoWait
+	女の子							お、お姉ちゃん……？
+CharacterOff
+	ふうり	泣き						はぁ、やっぱり怖がらせて\nしまったかにゃん……？
+	ふうり	泣き						だから嫌なのにゃん\nまたふうりは<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Bg	戦場跡					0
+	勇者A	通常				0
+FadeIn	white					.3
+	勇者A	通常						これが寅王……！\n強すぎる……！
+CharacterOff
+	勇者D	通常						でも、なんか怖い……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	大橋					0
+	ふうり	悔しい				0
+FadeIn	white					.3
+	ふうり	悔しい						でも、みんなは守れたから\nいいか、にゃん……
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト裏
+	女の子
+	女の子							お姉ちゃん……！
+CharacterOff	黒グラデーション
+Tween	女の子	PunchPosition	y=30				NoWait
+	女の子							すごく強くて……\nかわいかった!!
+Bgm	凱旋
+CharacterOff
+	ふうり	慌て						…………え？
+CharacterOff
+	女の子							猫さん？ 虎さん？\nううん、どっちでもいいや！
+	女の子							ありがとう！\nこわい魔物、倒してくれて！
+CharacterOff
+	ふうり	悔しい						……これって？
+CharacterOff
+	ディーア	笑い2						ふうりの気持ちが届いたんだよ
+	ディーア	通常2						あの時、ふうりは\n虎でも猫でもなくて、\nふうりとしてあの子を守った
+	ディーア	通常2						そんな風に助けてくれた人を、\n怖いとか思うはずがないさ
+	ディーア	笑い2						オレも、がんばったふうりは\n強かったけど、\nなによりきれいでかわいかったと思う
+CharacterOff
+	ふうり	悔しい						マスター……
+	ふうり	嬉しい						にゃあ♪\nそれなら良かったにゃ♪
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	嬉しい						ふうりがかわいいこと、\nみんなもわかってくれたのにゃん♪
+	ふうり	嬉しい						それじゃあ、\n今年は一年、かわいいふうりを<dash=2>
+StopBgm
+CharacterOff
+	街の人							おい、聞いたか！\nやっぱり寅王、強かったってよ！
+CharacterOff
+	ふうり	慌て						はにゃ……？
+Bgm	コメディ
+Param	character_grayout=true
+CharacterOff
+	街の人	通常	p7
+	研究員		p3b
+	研究員							ああ……！\nとんでもない魔物を一撃だって！
+Tween	街の人	PunchPosition	y=30				NoWait
+	街の人	通常						さすが虎だ……！\nつえーよ、虎……！
+CharacterOff
+	ディーア	汗2						こ、これは……？
+CharacterOff
+	マハ	通常2						さっきの戦い、\n噂で広がっちゃったみたい
+CharacterOff
+Param	character_grayout=true
+CharacterOff
+	街の人	通常	p7
+	研究員		p3b
+	街の人	通常						みんなで称えるぞー!!
+Param	character_grayout=false
+	集中線		エフェクト表
+	人々							TO・RA・OU！ TO・RA・OU！
+	人々							来年は寅王祭だー!!
+CharacterOff
+	ふうり	慌て拡大	エフェクト表					にゃあぁああああ!?\n寅王って言うなー！ だにゃん！
+CharacterOff
+	ふうり	慌て
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	慌て						やっぱり虎はダメにゃ！\nふうりは猫！\nかわいい猫なのにゃ！
+	ふうり	慌て						なんとか、みんなに猫だって\n認めてもらうんだにゃ……！
+CharacterOff
+	ディーア	笑い2						それならいい方法があるぞ？
+CharacterOff
+	ふうり	通常						マスター、ホントかにゃ!?
+CharacterOff
+	ディーア	通常2						さっきの怨念の影響が\nまだ残ってるそうで、\n魔剣機関が猫の手も借りたいらしい
+CharacterOff
+	ふうり	嬉しい						猫の手……！\nそれなら、ふうりが活躍すれば！
+CharacterOff
+	ディーア	通常2						猫って認められるな！\n……………………たぶん
+CharacterOff
+	ふうり	嬉しい						ふふふ……！\nだったら、待ってろにゃ……！
+	ふうり	嬉しい						さっきみたいに、\nかわいく大活躍してやるのにゃ!!
+CharacterOff
+	街の人	通常	p7
+	研究員		p3b
+	街の人							おぉ……！\n寅王が出陣するぞ!!
+CharacterOff
+	ふうり	悔しい
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	悔しい						あー、もう！\n虎じゃないにゃ！
+CharacterOff
+	ふうり	通常拡大	エフェクト表					だから、ふうりはネコなのにゃ!!
+FadeOut	white					.7
+Bg	大橋					0
+CharacterOff						0
+	イベントロゴ1044		エフェクト表			0
+	                    
+FadeIn	white					.7
+Wait						2
+Param	character_grayout=true
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1044_06
+EndIf
+EndScenario
+
+# E_1044_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	都市
+Bg	酒場1F(正月)					0
+Param	character_grayout=false
+	ふうり	正月				0
+FadeIn	white					.3
+	ふうり	正月						あけましておめでとうにゃー♪
+	ふうり	正月						マスター、\n見てにゃ見てにゃー♪
+FadeOut	white					.3
+CharacterOff						0
+	ふうり	正月拡大	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	ふうり	正月服拡大	エフェクト表			0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	ふうり	正月				0
+FadeIn	white					.3
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	正月						たーっくさん猫の手を貸したから、\n晴れ着をプレゼントされたにゃん♪
+	ふうり	正月						これこそ、\nふうりが猫だって認められた証！\n……だにゃん！
+	ふうり	正月						マスター、\nこんなかわいい猫のふうりに、\n言うことはないかにゃ？
+	ディーア	<Off>						ああ、かわいいよ
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	正月						にゃはは♪\nそうでしょ♪ ……だにゃん！
+	ディーア	<Off>						でもやっぱり\nふうりは虎だな
+	ふうり	正月慌て						にゃっ!?
+	ふうり	正月慌て						まだ言うかにゃ!?\nふうりは猫だが？ 虎じゃないが!?
+	ふうり	正月						これを見ろ！ だにゃん！\n白くて猫ちゃん柄にゃん♪
+	ディーア	<Off>						いやいや、\nホワイトタイガーだっているし
+Shake	ふうり		x=5				NoWait
+	ふうり	正月慌て						うにゃー!?
+	ふうり	正月慌て						うぅ、こうなったら……！
+Tween	ふうり	PunchPosition	y=30				NoWait
+	ふうり	正月						覚悟するにゃ、マスター！
+CharacterOff
+	ふうり	正月拡大	エフェクト表
+	オーラ桃		エフェクト裏
+	ふうり	正月拡大						今年こそマスターに、\nふうりが猫だって認めさせてあげる！\n……だにゃん♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1044_01
+EndIf
+EndScenario

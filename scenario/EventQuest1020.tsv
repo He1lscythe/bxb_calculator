@@ -1,0 +1,597 @@
+# E_1020_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	白背景					0
+Param	character_grayout=false
+	オーラ桃		エフェクト裏			0
+	ネオ	にやけ拡大	エフェクト表			0
+FadeIn	white					.5
+	ネオ	にやけ拡大						あぁーーーーーーーー♪
+FadeOut	white					.3
+CharacterOff	ネオ					0
+	サフィンの篝火	にやけ拡大	エフェクト表			0
+FadeIn	white					.3
+	サフィンの篝火	にやけ拡大						ふわぁーーーーーーーー♪
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場_宿屋					0
+	サフィンの篝火	にやけ	3_3_b			0
+	ネオ	にやけ	1_3			0
+FadeIn	white					.5
+	ネオ	にやけ						静かだねぇ、サフィンちゃん
+	サフィンの篝火	にやけ						あったかいねー、ネオちゃん
+	ネオ	にやけ						これがいいんだよぉ\n朝から夜までのんびりして……\nたっぷりお昼寝もできてー
+	サフィンの篝火	にやけ						中途半端に動くより\nなにもしないほうが\nはっきりしてていいよねー
+	ネオ	にやけ						事件が起きてもー\nマスターちゃんがいるしー
+	ネオ	にやけ						お世話してくれる人がいるって\n最高のだらけ環境だぁ……
+	サフィンの篝火	にやけ						私、ハロウィン来るまで\nなんにもしないんだー、ダラダラー♪
+	ネオ	通常						あ、サフィンちゃん\nそういうこと言ってると……
+Tween	サフィンの篝火	PunchPosition	y=30				NoWait
+	サフィンの篝火	通常						あ、そっかぁ……\nこういう事言うとマスターが……\nドキドキ……
+StopBgm
+	ネオ	通常						…………来ないね？
+	サフィンの篝火	にやけ						良かったー\nこのままゆっくりしよ♪\nダラダラー♪
+	ネオ	にやけ						ネオちゃんも、\n今日は社会復帰ストップぅ\n元ニートには適度な休息も必要だよぉ
+Param	character_grayout=false
+	二人							えへへへへへ♪
+	二人							…………………………
+Param	character_grayout=true
+	ネオ	通常						…………あれ？
+	サフィンの篝火	通常						ほんとに静かだね……？
+	ネオ	通常						酒場から声も聞こえないよ？
+	サフィンの篝火	通常						ちょ、ちょっとだけ\n見に行こっか……
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場1F					0
+	サフィンの篝火	通常	3_3_b			0
+	ネオ	通常	1_3			0
+FadeIn	black					.3
+	ネオ	通常						マスターちゃん？ リディちゃん？\nなにか<dash=2>
+Bgm	絶望
+Param	character_grayout=false
+CharacterOff
+	黒グラデーション		エフェクト裏
+	リディ	絶望2
+	リディ	絶望2						リディはもちになりたい……
+StopBgm
+CharacterOff
+	集中線		エフェクト表
+	サフィンの篝火	通常	3_3_b
+	ネオ	通常	1_3
+	二人							リディちゃん……!?
+Bgm	コメディ
+CharacterOff
+	黒グラデーション		エフェクト裏
+	リディ	絶望2
+	リディ	絶望2						もちっていいよね……
+FadeOut	white					.3
+CharacterOff						0
+Bg	白背景					0
+	オーラ桃		エフェクト裏			0
+	リディのもち	拡大もち	エフェクト表			0
+	          
+FadeIn	white					.3
+	リディ	<Off>						なんにも考えてなさそうなのに\nいるだけでモフモフしてもらえるし\nご飯も食べられるんだよ……？
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	オーラ桃		エフェクト裏			0
+	リディ	照れ2				0
+FadeIn	white					.3
+	リディ	照れ2						リディもなんにもしないで\nかわいいって言われたい……\nかわいいだけで生きていきたい……
+Param	character_grayout=true
+CharacterOff
+	サフィンの篝火	通常	3_3_b
+	ネオ	通常	1_3
+	ネオ	通常						いやぁ、もちだって\nいろいろ考えて生きてるかも……
+Tween	ネオ	PunchPosition	y=30				NoWait
+	ネオ	通常						じゃなくて！
+Tween	サフィンの篝火	MoveBy	x=-10				NoWait
+	サフィンの篝火	通常						ネオちゃん？\nリディちゃんの様子、おかしいよね？
+	ネオ	絶望						あんなに働き者だったのが、\nネオちゃんたちみたいに……！
+	サフィンの篝火	泣き						まさか、働きすぎが原因なんじゃ？\nドキドキ……
+	ネオ	通常						毎日バイトしたり\nマスターちゃんのお世話したり\n頑張ってたもんねぇ
+	サフィンの篝火	通常						やっぱり労働は\n人を曖昧にさせるんだよ……\n今日は休ませてあげよ
+Tween	ネオ	MoveBy	x=-20				NoWait
+	ネオ							マスターちゃん、どこぉ？\nリディちゃんがお疲れだから\nお世話してあげてよぉー
+	サフィンの篝火							……あれ？\n誰もいない……？
+Tween	ネオ	PunchPosition	y=30				NoWait
+	ネオ							あ！\nあれ見て、サフィンちゃん
+	サフィンの篝火							……え？
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	レヴァ	通常
+	レヴァ	通常						あーーーーーー\nなんにもしないって最っ高……♪
+Param	character_grayout=true
+CharacterOff
+	サフィンの篝火	通常
+Tween	サフィンの篝火	PunchPosition	y=30				NoWait
+	サフィンの篝火	通常						れ、レヴァちゃん!?
+CharacterOff
+	レヴァ	笑い						そうだよー\n立てば消し炭、座れば鎮火、\n歩く姿は…………なんだっけ？
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	レヴァ	通常						なんでもいいけど、レヴァ剣だよー
+Param	character_grayout=true
+CharacterOff
+	ネオ	絶望	1_3
+	サフィンの篝火	泣き	3_3_b
+Shake	サフィンの篝火		x=1				NoWait
+	サフィンの篝火	泣き						レヴァちゃんも……!?\nこんなの業火じゃない、\nただの弱火だよ！ ブルブル……!!
+	ネオ	絶望						まさか、他のみんなも……！
+CharacterOff
+	天斧セレネ	通常						………………
+CharacterOff
+	サフィンの篝火	通常	3_3_b
+	ネオ	通常	1_3
+	ネオ	通常						セレネちゃん？\nよかったぁ、セレネちゃんは\n無事<dash=2>
+CharacterOff
+	天斧セレネ	通常						あーーーーーーなーーーーーたーー\nのーーーさーーーーがーーーーーしー\n<dash=8>
+CharacterOff
+	サフィンの篝火	通常	3_3_b
+	ネオ	絶望	1_3
+	ネオ	絶望						あ、ダメだ\nスローになってる
+	サフィンの篝火	通常						みんながこれなら、\nマスターも<dash=2>
+CharacterOff
+	ディーア	絶望2						オレは床になりたい……
+	ディーア	絶望2						床っていいよな……\nずーっと真っ平らで、\n動かなくていいし……
+	ディーア	絶望2						オレもずっと動かず寝ていたい……
+CharacterOff
+	ネオ	絶望	1_3
+	サフィンの篝火	通常	3_3_b
+	サフィンの篝火	通常						ですよねー
+	ネオ	通常						まあ、マスターちゃんは\nよくだらだらしてる気もするけど
+	サフィンの篝火	通常						レヴァちゃんたちもなんて、\n明らかに異常事態だよね……\nいったいなにが……
+StopBgm
+	？？？？							きゃーっ!?
+	ネオ	通常						あ、外からだ
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bgm	絶望
+CharacterOff						0
+Bg	市街地A					0
+	酒場のおばちゃん		1_3			0
+	女の子		2_3			0
+	旅人		3_3			0
+FadeIn	black					.3
+	旅人							な、なんだ、この魔物……！
+CharacterOff
+	ダルイーゾ							ダルイゾー……！
+Wait						.1
+Se	光2
+FadeOut	blue					1.5
+CharacterOff						0
+	黒グラデーション		エフェクト裏			0
+	酒場のおばちゃん		1_3			0
+	女の子		2_3			0
+	旅人		3_3			0
+FadeIn	blue					1
+	旅人							だるいわー、もう仕事やめるわー
+	酒場のおばちゃん							今日から週休七日よー
+	女の子							道端の雑草になりたい……
+CharacterOff
+	ネオ	通常	1_3
+	サフィンの篝火	通常	3_3_b
+	サフィンの篝火	通常						街のみんなまで……！
+	ネオ	通常						あの魔物が\nやる気を吸い取ってるんだねー
+StopBgm
+	サフィンの篝火	通常						でも、ネオちゃん\n私たちが平気なのはどうしてだろ？
+Bgm	コメディ
+	ネオ	にやけ						きっとあれじゃない？\n元から吸い取るやる気もないから♪
+	サフィンの篝火	にやけ						あ、そっかー\nやる気なくて助かったねー
+	ネオ	にやけ						ニート万歳ー♪
+	サフィンの篝火	通常						でも、私たちが動けても\n肝心のマスターが……
+FadeOut	black					.5
+CharacterOff
+Bg	酒場1F					0
+	ネオ	絶望	画面外_左_b
+	ディーア	にやけ2	3_3			0
+Tween	ディーア	RotateTo	z=60 time=0				NoWait
+Wait						.1
+Tween	ディーア	MoveBy	x=350 y=-450 time=0				NoWait
+FadeIn	black					.5
+	ディーア	にやけ2						床が冷たくて気持ちいい……♪
+Se	走る
+Tween	ネオ	MoveTo	x=-200 time=1				NoWait
+Wait						.5
+	ネオ	絶望						床と一体化してる……
+Tween	ネオ	MoveBy	x=50				NoWait
+	ネオ	通常						おーい、マスターちゃん？\n起きてよー、マスターちゃんの\nお仕事だよぉー？
+	ディーア	絶望2						し、仕事なんてイヤだー……！\nオレはこのまま床になるんだ……！
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ディーア	にやけ2
+	ディーア	にやけ2						ただ横になって……\n部屋でキンキンに冷える……\nそれがオレの余生……！
+CharacterOff
+Param	character_grayout=true
+	サフィンの篝火	通常	3_3_b
+	ネオ	絶望	1_3
+	ネオ	絶望						なんてだらけっぷり……！
+Shake	サフィンの篝火		x=2 time=1				NoWait
+	サフィンの篝火	通常						ね、ネオちゃん……！\nこの状況、あの魔物よりマズくない？\nガクガク……！
+	ネオ	通常						え……？
+Tween	サフィンの篝火	PunchPosition	y=30				NoWait
+	サフィンの篝火	通常						だって、このままじゃ\n私たちの立場がないよ！
+Tween	ネオ	PunchPosition	y=30				NoWait
+	ネオ	絶望						そっか……！\nみんなよりだらだらしてるから\nネオちゃんたちはだらだら魔剣！
+	ネオ	絶望						なのに、みんなが\nもっとだらだらしてたら……！
+Shake	サフィンの篝火		x=3 time=0.5				NoWait
+	サフィンの篝火	泣き						だらだら魔剣を追われて\n働くことに……！\n私たちの境界が崩れちゃうよぉ！
+	ネオ	絶望						どうしよう……！
+	サフィンの篝火	泣き						だらだら魔剣で\nあり続けるためには……
+	ネオ	通常						もっと、だらだらしないと……！
+	サフィンの篝火	通常						それだぁ……！
+Param	character_grayout=false
+FadeOut	white					.3
+CharacterOff						0
+	ネオ	にやけ拡大	エフェクト表			0
+FadeIn	white					.3
+	ネオ	にやけ拡大						ふわぁああ……\nもうネオちゃんは動かないよー
+FadeOut	white					.3
+CharacterOff						0
+	サフィンの篝火	にやけ拡大	エフェクト表			0
+FadeIn	white					.3
+	サフィンの篝火	にやけ拡大						私もハロウィンまで寝てるよ……
+Param	character_grayout=true
+	サフィンの篝火	にやけ	3_3_b
+	ネオ	にやけ	1_3
+	ネオ	にやけ						だからマスターちゃん、\nおかしちょうだーい
+CharacterOff
+	ディーア	通常2						ははは、そうはいかないぞ
+Tween	ディーア	MoveBy	y=-100
+	ディーア	にやけ2						ぐだー
+	ディーア	にやけ2						見ろ、オレのほうがだらけてる\n今日はオレがお世話される番だ！
+CharacterOff
+	ネオ	にやけ
+	ネオ	にやけ						ふふ、マスターちゃんもやるねぇ
+	ネオ	通常						でもネオちゃんのニート歴の長さ、\nなめないでよぉー
+Param	character_grayout=false
+	集中線		エフェクト表
+	ネオ	にやけ						これが目に入らぬかー
+CharacterOff
+	ディーア	絶望2						そ、それは……！\nせんべいよりも\n薄くなったそれは!!
+Param	character_grayout=true
+CharacterOff
+	ネオ	通常	1_3
+	サフィンの篝火	通常	3_3_b
+	サフィンの篝火	通常						そう！\n私たちの愛用クッション、だよ……！
+	ネオ	通常						だらだら初心者の\nマスターちゃんにはない、\nだらけの称号！
+	サフィンの篝火	にやけ						わかったでしょ？\nだらけなら私たちの方がスゴイって\nドヤドヤ……！
+	ネオ	にやけ						これでマスターちゃんは\nネオちゃんたちをお世話<dash=2>
+CharacterOff
+	ディーア	怒り2						ふふふ……
+CharacterOff
+	ネオ	通常	1_3
+	サフィンの篝火	通常	3_3_b
+	サフィンの篝火	通常						ど、どうしたの……？
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト裏			1
+	ディーア	怒り2
+	ディーア	怒り2						これだけは\n伝えたくなかったが仕方ない……
+	ディーア	怒り2						いいか、二人共……
+Param	character_grayout=false
+CharacterOff
+	ネオ	通常	1_3
+	サフィンの篝火	通常	3_3_b
+	二人							ごくりっ！
+Bgm	緊迫
+CharacterOff						0
+	集中線		エフェクト表			0
+	ディーア	拡大本気2	エフェクト裏			0
+	ディーア	拡大本気2						オレは、\n三日も着替えていない!!
+CharacterOff
+	ネオ	通常	1_3
+	サフィンの篝火	通常	3_3_b
+	二人							なっ……！
+Param	character_grayout=true
+CharacterOff
+	ディーア	きらーん2						着替えも風呂も、\nもうめんどくさいんだ……!!
+CharacterOff
+	サフィンの篝火	泣き	3_3_b
+	ネオ	絶望	1_3
+	ネオ	絶望						くっ……！\n確かにネオちゃんたちは\nニートでも女の子……！
+	サフィンの篝火	泣き						そこまで自分を捨てられない……！
+CharacterOff
+	ディーア	にやけ2						そうだろう……\nわかったら、オレのお世話を……
+CharacterOff
+	サフィンの篝火	通常	3_3_b
+	ネオ	通常	1_3
+	ネオ	通常						でもね、マスターちゃん！\nそんなのはとっくに対策済み……！
+	ネオ	通常						服なんて着るから汚れるの……！
+	サフィンの篝火	通常						だから、私たちは<dash=2>
+Bgm	緊迫
+Param	character_grayout=false
+	集中線		エフェクト表			0
+	二人							下着は履かないことにした!!
+StopBgm
+CharacterOff
+	ディーア	驚き2						なんだと……!?
+Bgm	コメディ
+Param	character_grayout=true
+CharacterOff
+	ディーア	怪しい2	画面外_左
+	ネオ	にやけ	1_3
+	サフィンの篝火	にやけ	3_3_b
+	サフィンの篝火	にやけ						やることをどれだけ減らせるかが\nだらけの真髄なんだよぉー
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ディーア	MoveTo	x=250 time=0.8
+	ディーア	怪しい2						じゃあ、ちょっと確認を……
+ImageEffectOff	SpriteCamera	MotionBlur
+Tween	ネオ	MoveBy	x=-50				NoWait
+Tween	サフィンの篝火	MoveBy	x=-150				NoWait
+	サフィンの篝火	泣き						キャアアアア!?
+	ネオ	絶望						確認したらダメぇ!!
+Tween	ネオ	PunchPosition	y=30				NoWait
+	ネオ	通常						う、動いたってことは、\nマスターちゃんの負けだよ……!!
+CharacterOff
+	ディーア	絶望2						はっ……！
+	ディーア	悔しい2						くっ、うぅっ……！
+	ディーア	本気2						オレはそんなものに興味はない!!
+CharacterOff
+	ネオ	通常	1_3
+	サフィンの篝火	通常	3_3_b
+	サフィンの篝火	通常						マスターが\nえっちな欲望を抑えるなんて……！
+	ネオ	通常						今のマスターちゃんは\nネオちゃんたちと同じだ……！
+	サフィンの篝火	通常						これ以上の争いは不毛だね……
+	ネオ	にやけ						こうなったら、\nみんなで仲良くだらだらしよっか
+	ネオ	にやけ						じゃあ、異変が解決するまで\nおやすみー
+	サフィンの篝火	にやけ						誰か代わりにやってくれるよ\nぐだぐだー
+Bgm	神秘
+CharacterOff
+	ディーア	にやけ2						よ、ようやく休みが……
+FadeOut	black					1
+Param	character_grayout=false
+CharacterOff						0
+Bg	宇宙					0
+	          
+FadeIn	black					1
+	 							そしてこの日、\n魔界の社会活動は完全に静止した
+	 							<color=blue>\n 『メーデー！ だらだらディザスター』\n　　　　　　　　　　　　　<dash=2>完？</color>
+FadeOut	black					1
+Bg	酒場1F					0
+FadeIn	black					1
+								\n　　　　　 <color=blue><dash=2>一週間後<dash=2></color>
+Param	character_grayout=true
+CharacterOff
+	ネオ	絶望	1_3
+	サフィンの篝火	通常	3_3_b
+Bgm	絶望
+	サフィンの篝火	通常						はぁ…………
+	ネオ	絶望						おなか、すいたぁ……\nだれかぁ、おかしちょうだい……
+	サフィンの篝火	泣き						飲み物もないのぉ……？\nグスグス……
+Tween	ネオ	PunchPosition	y=30				NoWait
+	ネオ							も、もう限界だよぉ!!
+Tween	サフィンの篝火	PunchPosition	y=30				NoWait
+	サフィンの篝火	泣き						ホントに!?\nホントに誰も解決してくれないの!?\n動けるの私たちだけ!?
+	ネオ	通常						一生寝てられるのはいいけどさぁ
+	ネオ	絶望						お菓子もない！\nジュースもない！
+	サフィンの篝火	泣き						だーれもお世話をしてくれない！\n毎日マスター、ぐーだぐだ！
+	ネオ	絶望						ネオちゃん、\nこんな魔界いやだー!!
+	ネオ	絶望						あの快適な\nだらだらライフがいいんだよぉ……!!
+	サフィンの篝火	泣き						働きたくないけど、\nほんとに働きたくないけど……！
+	ネオ	通常						ネオちゃんたちのだらだら生活は\nお世話してくれるマスターちゃんが\nいてこそだから……
+Tween	サフィンの篝火	MoveBy	x=-20				NoWait
+	サフィンの篝火	通常						ネオちゃん……やっちゃおっか
+	ネオ	通常						……うん
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bgm	平和
+CharacterOff						0
+Bg	市街地A					0
+	サフィンの篝火	通常	3_3_b			0
+	ネオ	通常	1_3			0
+FadeIn	black					.3
+	ネオ	通常						ほーら、\nマスターちゃん、こっちにおいでー♪
+	サフィンの篝火	通常						マスターをダメにするクッションが\n待ってるよー\n柔らかすぎて抜け出せないよー
+Tween	ネオ	MoveBy	x=-900 time=1.5				NoWait
+Tween	サフィンの篝火	MoveBy	x=-900 time=2				NoWait
+Wait						1
+	ディーア	にやけ2	画面外_右			0
+Tween	ディーア	MoveTo	x=90 time=2				NoWait
+	ディーア	にやけ2						ぬくぬく、もこもこ……\nえへへへへ……
+Wait						1
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	にやけ2	2_2			0
+	ネオ	通常	1_2			0
+FadeIn	black					.5
+	ネオ	通常						そろそろ……
+CharacterOff
+	ダルイーゾ
+Tween	ダルイーゾ	PunchPosition	y=30				NoWait
+	ダルイーゾ							ナ、ナンダ、オマエタチ……!!
+Bgm	バトル
+CharacterOff
+	サフィンの篝火	通常						あっ、いた！
+CharacterOff
+	ディーア	にやけ2	2_2
+	ネオ	にやけ	1_2
+	ネオ	にやけ						見つけたら\nこっちのものだよねぇー
+	ネオ	にやけ						マスターちゃん、\n体、ちょっと貸してー
+	ディーア	驚き2						……へ？\nちょ、オレは働きたく<dash=2>
+	ネオ	にやけ						問答無用ー♪
+	ネオ	にやけ						ネオちゃんたちの\n快適な生活のためにー
+Param	character_grayout=false
+Se	チャージ
+	オーラ青		エフェクト表			1
+Wait						1.5
+CharacterOff
+	ダルイーゾ
+Wait						1
+FadeOut	white					.2
+Se	銃2
+FadeIn	white					.2
+	ダルイーゾ							ギャー!?
+Shake	ダルイーゾ		x=5				NoWait
+	ダルイーゾ							ナ、ナゼダ……！
+	ダルイーゾ							ワレワレハ、ヒトビトノ、\nヨクボウカラウマレタ……！
+	ダルイーゾ							マケントイエド\nウゴケルハズガ……！
+Param	character_grayout=true
+CharacterOff
+	ネオ	通常	1_3
+	サフィンの篝火	通常	3_3_b
+	サフィンの篝火	通常						そんなの簡単だよ……！
+	ネオ	通常						ネオちゃんたちは<dash=2>
+Param	character_grayout=false
+	集中線		エフェクト表
+	二人							最初から、だらだらだー!!
+CharacterOff
+	ダルイーゾ
+Se	光3
+FadeOut	white					.3
+FadeIn	white					.3
+Wait						.8
+Shake	Graphics		x=5 y=5				NoWait
+	ダルイーゾ							グァアアアア!?\nソンナー!!
+Se	倒れる
+CharacterOff	ダルイーゾ					1
+Wait						1.5
+Se	ポップイン
+Param	character_grayout=true
+	ネオ	通常
+	サフィンの篝火	通常
+	サフィンの篝火	通常						あ！\nあの魔物、なんか落としたよ？
+	ネオ	通常						みんなから奪ったやる気だねー\n色が違うのは、\nネオちゃんたちの魔力の影響かなぁ？
+	サフィンの篝火	通常						これを集めれば問題解決だね\nじゃあ<dash=2>
+CharacterOff
+	ダルイーゾ		1_3
+	ダルイーゾ2		3_3
+	ダルイーゾ2							ナ、ナンダ!?\nナニガオコッタ!?
+CharacterOff
+	サフィンの篝火	にやけ	3_3_b
+	ネオ	にやけ	1_3
+	ネオ							疲れる前にもっと倒しちゃおー
+CharacterOff
+Param	character_grayout=false
+	ダルイーゾ		1_3
+	ダルイーゾ2		3_3
+Se	チャージ
+FadeOut						1
+CharacterOff
+Se	闇3
+Se	光3
+StopBgm
+Wait						3
+Param	character_grayout=true
+Bg	酒場1F					0
+	リディ	照れ2				0
+Bgm	平和
+FadeIn						.5
+	リディ	照れ2						Mochi、Mochi!!
+	リディ	絶望2						もぐもぐ……！\nルビーおいしいもちっ♪
+CharacterOff
+	ネオ	通常						はい、リディちゃん\nやる気出してー
+CharacterOff
+	リディ	絶望2						も……？
+Param	character_grayout=false
+Se	チャージ
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff	オーラ青					.5
+	リディ	驚き2						あ、あれ？\nリディは……？
+CharacterOff
+	ネオ	通常						やっぱり、これで元に戻ったね
+Param	character_grayout=true
+CharacterOff
+	レヴァ	通常						立てば紅、座れば業火\n歩く姿は終末戦争……!!
+	レヴァ	通常						レヴァ剣ふっかーつ!!!!
+CharacterOff
+	天斧セレネ	通常						あなたが探していたのは\nやる気にあふれるセレネさんですか？ \nだらだらスローなセレネさんですか？
+	天斧セレネ	通常						しかしだらだらセレネさんは売り切れ\nこれからも早口で元気なセレネさんを\nお楽しみください、どうぞよろしく
+CharacterOff
+	ネオ	通常	1_3
+	サフィンの篝火	通常	3_3_b
+	サフィンの篝火	通常						よかったぁ\nレヴァちゃんたちも元気になった
+StopBgm
+	ネオ	通常						じゃあ、マスターちゃんも<dash=2>
+CharacterOff
+	ディーア	絶望2						あ、あっれれー？\nきかないぞー？ 体がだるいぞー？\nこのままお休みにしたいなー
+Param	character_grayout=false
+CharacterOff
+	ネオ	通常	1_3
+	サフィンの篝火	通常	3_3_b
+	二人							………………
+Param	character_grayout=true
+	ネオ	通常						まさか、マスターちゃん……
+	サフィンの篝火	通常						魔物の影響、\n受けてなかったの……？
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						ぎくっ!?
+Bgm	コメディ
+CharacterOff
+	ネオ	通常	1_3
+	サフィンの篝火	通常	3_3_b
+	サフィンの篝火	通常						おかしいと思ったよ\nマスターはそんなに変じゃなかったし
+	ネオ	通常						マスターちゃんも\nネオちゃんたちと同じで、\nだらけたかったんだね……
+CharacterOff
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						だって、魔剣使いに\n休みはないんだぞ!?\nオレだって少しは<dash=2>
+CharacterOff
+	リディ	絶望2						ますたぁ……？
+CharacterOff
+	ディーア	絶望2						は、はい……
+CharacterOff
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						まだまだあの魔物が\nいっぱいいるでしょ！
+	リディ	怒り2						早くお仕事に行って、\n魔界を元に戻してきなさい!!
+CharacterOff
+	ディーア	絶望2						は、はいー！
+Se	走る
+Tween	ディーア	MoveBy	x=-800 time=2				NoWait
+Wait						1
+CharacterOff
+	サフィンの篝火	にやけ	3_3_b
+	ネオ	にやけ	1_3
+	ネオ	にやけ						いやぁ、これで\nネオちゃんたちも休めるねー
+CharacterOff
+	ディーア	驚き2	画面外_左
+Tween	ディーア	MoveTo	x=-150 time=0.8				NoWait
+Wait						1
+	ディーア							なに言ってるんだ！\nお前たちも行くぞ！
+Param	character_grayout=false
+CharacterOff
+	サフィンの篝火	通常	3_3_b
+	ネオ	通常	1_3
+	二人							えっ!?
+CharacterOff
+	ディーア	通常2						また魔物の影響で、\nだらだらになったら大変だからな\n落ち着くまで一緒に行ってもらうぞ
+Param	character_grayout=true
+CharacterOff
+	ネオ	絶望	1_3
+	サフィンの篝火	泣き	3_3_b
+	サフィンの篝火	泣き						そ、そんなぁ……！
+	ネオ	絶望						こ、こうなったら……\n一刻も早く魔物を倒して<dash=2>
+Param	character_grayout=false
+	集中線		エフェクト表
+	二人							また、だらだらするんだからー!!
+FadeOut	white					.7
+Bg	市街地A					0
+CharacterOff						0
+	イベントロゴ1020		エフェクト表			0
+	                    
+FadeIn	white					.7
+Wait						2
+Param	character_grayout=true
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1020_01
+EndIf
+EndScenario

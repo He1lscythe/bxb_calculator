@@ -1,0 +1,447 @@
+# G_568_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔王バトル
+Bg	廃墟A					0
+Param	character_grayout=false
+	          
+FadeIn	white					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	斬2
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	廃墟A					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	クラレント	通常2						はっ！ どうした、どうした!?\nこれで限界かビッチ？\nもっと遊んでやるから来いよっ！
+CharacterOff
+	ミステ	通常						ふんっ、それなんて傲慢？\n傲岸不遜はすぐさまゴーアウト
+	ミステ	嬉しい						ミステはしないミステイク\nティーブレイクする？\nでも余裕じゃ、タイブレイク……
+Tween	ミステ	PunchPosition	y=30				NoWait
+	ミステ	嬉しい						だから見せるよ、アタシの本気\n正気、でいられなきゃソーリー？
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ミステ	通常						でも\nアンタの損気が悪いぜ、正直！
+CharacterOff
+	クラレント	通常2						よくさえずるじゃないか！\n誘ってくるなら、抱いてやるよ!!
+CharacterOff
+	ミステ	通常
+	オーラ青		エフェクト表
+	ミステ	通常						よそ見は禁止だアヴェンジャー\nアタシの余裕は仮面じゃないぜ？
+CharacterOff
+	ミステ	拡大通常	エフェクト表					さあ見せろよ、無様なサレンダー\n……ほら、後ろだ
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(青)	マグナ	エフェクト裏			0
+Se	光3
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+CharacterOff
+ImageEffectOff	SpriteCamera	Bloom
+Bg	廃墟A					0
+	クラレント	怒り2				0
+Tween	クラレント	MoveBy	x=-100				NoWait
+	クラレント	怒り2						なっ……!? 空間転移か!?
+ImageEffectOff	SpriteCamera	MotionBlur
+Tween	クラレント	MoveBy	x=100				NoWait
+	クラレント	怒り2						いや、そんなチャチなものじゃない\n過程が省かれて事象が現れた？
+	クラレント	通常2						まったく、これが\nあの村の"神"が起こす奇跡か……！
+Se	チャージ
+	オーラ赤		エフェクト表			.5
+	クラレント	通常2						だが……!!\nこれだけで果ててないよな!?\nもっと付き合えよ、ミステリオン！
+CharacterOff
+	ミステ	通常						生意気なのは認めてやるよ、\nこっちも好きだぜ、その心意気
+	ミステ	嬉しい						変わり身、なんてイキじゃない\n最後までこのままシャカリキだ♪
+CharacterOff
+	クラレント	通常						はは……！
+CharacterOff
+	ミステ	通常						ふふっ……！
+StopBgm
+CharacterOff
+	ディーア	通常2						二人ともそこまで!!
+Bgm	平和
+CharacterOff
+	クラレント	怒り2						ちっ……！\nいいところで、邪魔が入ったな
+CharacterOff
+	ミステ	怒り						これなんて消化不良？\nまだまだアタシは超楽勝、だったのに
+	ミステ	怒り						こんなコンパクトじゃ\n下がるぜアンタの好感度？
+CharacterOff
+	ディーア	通常2						熱くなってたところで悪いけど、\nもうお前の力は見られたから十分だよ
+	ディーア	笑い2						クラレントも、\n模擬戦の相手をありがとうな
+CharacterOff
+	クラレント	通常2						ふん、興が削がれたな、\n次は乙女みたいに鳴かせてやるよ
+CharacterOff
+	ミステ	嬉しい						それはミステのセリフ、\nそんなエンディングなんて\nありえないイフ♪
+CharacterOff
+	ディーア	怪しい2						それにしても……\n噂通りに強力な力だな
+	ディーア	怪しい2						世界の裏側にアクセスして\n奇跡を最短で呼び出す
+	ディーア	怪しい2						サクラメントやリナと同じ\n奇跡を司る魔剣か……
+CharacterOff
+	ミステ	怒り						おいおいマスター、\nサクラといっしょは勘弁、\n詭弁はそこまでで断念
+	ミステ	通常						アタシは抜け道のパスファインダー\nサクラは尻軽なサプライヤー
+	ミステ	通常						技術も奇術もリリックも、\nアタシが上だシーイズ、ライアー
+CharacterOff
+	ディーア	汗2						ま、まあ、使い方も二人で違うし、\nどっちが上とかは……
+	ディーア	怪しい2						だけど……\n流石にちょっとやりすぎじゃないか？
+FadeOut	black					.3
+CharacterOff						0
+Bg	草原A(火事)					0
+FadeIn	black					.3
+	ディーア	<Off>						能力の余波だけで、\n周りがめちゃくちゃになってるし……
+CharacterOff
+Bg	廃墟A
+	ディーア	絶望2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						って、あっ!?\nあそこで燃えてるの、今日の宿だろ!?\n街から飛ばしてきたのか!?
+CharacterOff
+	ミステ	通常						おかげで邪剣は予想外、\nだからとーぜん、許容範囲♪\n奇跡で唖然な本領発揮
+CharacterOff
+	ディーア	汗2						で、でも、\nすこしは周りのことも考えないと
+CharacterOff
+	ミステ	怒り						おいおいマスター、なにが問題？\n力を使い放題、が武器の本来\nそんなにぼんやりなんて、論外
+	ミステ	通常						ミステが望むのは最短\n奇譚、みたいな寄り道ノーカン\nついてこれなきゃ怠慢、だぜ？
+CharacterOff
+	ディーア	通常2						確かにこうすることが\n勝利の最短手段だったかも\nしれないけど
+	ディーア	通常2						もっと被害の少ない手を使うことも\nミステリオンなら\nできたはずじゃないか？
+	ディーア	通常2						オレはそういうことも\n大事にしていくべきだと思うぞ
+CharacterOff
+	ミステ	怒り						安心安全？ マジ勘弁\n半人前なら大歓迎な概念\nだけど現実には残念
+	ミステ	通常						ぬるいって、それはパシフィスト\n答えはないのさマイリストの奥には
+CharacterOff
+	ディーア	目閉じ2						……答え、か
+	ディーア	怒り2						それが\nお前にとって大事なものなんだな\nだけど、オレは<dash=2>
+CharacterOff
+	ミステ	通常						もういい、\nこれじゃ堂々巡り、になるだけだろ？
+	ミステ	通常						まだする？\nこのレストと、見るテスト？\nそれより出せよ、リクエスト
+CharacterOff
+	ディーア	驚き2						リクエスト？\n魔剣機関から来た調査依頼のことか？
+	ディーア	怪しい2						確かに、対象の遺跡は\nミステリオン達のルーツにつながる\nとも言われているが……
+	ディーア	怪しい2						内部の情報も十分に揃っていない\n危険地帯なんだよな……
+	ディーア	怪しい2						（まだミステリオンと\n　信頼関係を築けているとはいえない\n　どうする……？）
+CharacterOff
+	ミステ	嬉しい						心配ご無用、行くなら衝動、\n的に動くが上々♪
+Tween	ミステ	MoveBy	x=-1200 time=2				NoWait
+Wait						.5
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						あっ……！\n待てって、ミステリオン!!
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	遺跡B					0
+	ディーア	怪しい2				0
+FadeIn	black					.3
+Bgm	絶望
+	ディーア	怪しい2						ここが任務で指定された\n遺跡だが……
+	ディーア	怒り2						なるほどな、\nここからでも魔力の反応を感じる\nかなりの罠が設置されていそうだ
+	ディーア	怒り2						それに\nこの先の通路も見当たらないな
+	ミステ	嬉しい						ふん♪\nこんなのミステは朝飯前♪\n先に行かなきゃ憐れむまで♪
+Se	チャージ
+	オーラ青		エフェクト表			.5
+	ミステ	嬉しい						ウェルカム、パスウェイ\n飽きるんだよ、この殺風景♪
+Shake	Graphics		x=2 y=2				NoWait
+Se	火事
+Wait						.8
+StopSe
+CharacterOff
+	ディーア	驚き2						すごい……！\n道が自然に出てきた……！
+CharacterOff
+	ミステ	通常						張り付いたレイヤーに\nエンター、で\n暴き出すぜ赤裸々にな♪
+CharacterOff
+	ディーア	通常2						この空間自体に\n奇跡が発生するようにしたんだな
+StopBgm
+	ディーア	怪しい2						だが……！
+Bgm	バトル
+CharacterOff
+Se	闇1
+	キノコリオン
+	キノコリオン							ノコノコっ！
+CharacterOff
+	ディーア	本気2						奥から魔物が出てきたか……！\n行くぞ、ミステリオン！
+CharacterOff
+	ミステ	通常						オーライ、オーナイ、\nイッツショータイム♪
+CharacterOff
+	ミステ	拡大通常	エフェクト表					来いよ、ちょこざいなエネミー！\n歌わせてやるさエレジー♪
+If	isdebug==true
+CharacterOff
+Jump	*G_568_02
+EndIf
+EndScenario
+
+# G_568_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	図書館
+Bg	遺跡B					0
+Param	character_grayout=false
+	ミステ	通常				0
+	オーラ青		エフェクト表			0
+FadeIn	white					.5
+CharacterOff	オーラ青					.5
+	ミステ	通常						見飽きたぜ、こんなトラップ\n進むぞ、フットワークはやく\n求めるグッドラック♪
+CharacterOff
+	ディーア	驚き2						まったく、すごいな……\nどんどんトラップを解除、\nいや、奇跡の力で無効化してる
+	ディーア	怪しい2						この調子なら……いや
+	ディーア	通常2						ちょっと待ってくれ、\nミステリオン！
+CharacterOff
+	ミステ	怒り						……立ち往生？\nそんな末期症状、じゃないよな？\nどんな管理方法？
+CharacterOff
+	ディーア	通常2						ああ、初めて来た遺跡だから、\n全体を調査していこうと思うんだ
+	ディーア	通常2						何かあったときに、\n困らないようにな……
+	ディーア	笑い2						こういう壁に残された魔力とか\n探索のヒントになるんだぞ
+CharacterOff
+	ミステ	怒り						むぅ……その判断には半信半疑、\n大惨事、なんてありえん感じ\nミステは段違い、なんだからさ？
+	ミステ	怒り						何かあってもアタシが解決、\n解説不要に危険を壊滅、がマジレス
+CharacterOff
+	ディーア	通常2						そこは信じているよ
+	ディーア	通常2						だけど、ミステリオンが\n安全を確保してくれるからこそ、\nなおさら慎重に行きたい
+	ディーア	笑い2						早く辿り着くことも大事だけど、\nちょっとしたことが\n後で役に立つこともあるんだから
+CharacterOff
+	ミステ	怒り						わからない、\nアンタの繊細な見解には、反対
+	ミステ	通常						アタシは脳内麻薬、全開で毎回、\n壮大に示すショータイム
+Tween	ミステ	PunchPosition	y=30				NoWait
+	ミステ	通常						後退？ いいや、迷わない\nソーハイでも健在だって♪
+	ミステ	怒り						それに……ちんたらしてたら、\n世界の謎になんて、たどり着けない
+CharacterOff
+	ディーア	驚き2						世界の謎……？
+CharacterOff
+	ミステ	怒り						…………
+	ミステ	怒り						You Know？\n絶望的な捏造の鉄牢な、この世情
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	神殿A_過去					0
+	          					0
+FadeIn	white					.3
+	ミステ	<Off>						張り巡らされた世界のレイヤー\nだけど、これはライヤー\n無慈悲な運命のスレイヤー
+	ミステ	<Off>						嘘を剥がすスクレイパーが\nミステリオン、\n世界を見通すパノプティコン
+FadeOut	white					.3
+CharacterOff						0
+Bg	遺跡B					0
+	ミステ	怒り				0
+FadeIn	white					.3
+	ミステ	怒り						それがアタシのアイデンティティ、\n安全、忌避なマイメンタリティー
+	ミステ	怒り						のんびりティータイム？\nそんなリーダーシップは、\n嫌シャラップ
+CharacterOff
+	ディーア	通常2						もちろんお前の邪魔なんてしない\nだけど、オレにも\n大事にするものがあるんだ
+	ディーア	通常2						時間はかけないから\n少しだけ待っていてくれ
+	ディーア	怪しい2						えっと、ここの魔力の反応は……\n……なるほど
+CharacterOff
+	ミステ	怒り						まったく、\n裏まで見るのがアナライザー
+	ミステ	怒り						度胸がないなら、\nパラライズ、してろよ……
+FadeOut	black					.3
+CharacterOff						0
+Bg	神殿B					0
+	ディーア	怪しい2				0
+Wait						2
+FadeIn	black					.3
+	ディーア	怪しい2						開けた場所に出たな……
+CharacterOff
+	ミステ	通常						ほら、すぐさま見つけたトレジャー\nこれじゃ、警戒も<dash=2>
+StopBgm
+CharacterOff
+	ディーア	驚き2						……ミステリオン？
+CharacterOff
+	ミステ	怒り						なんだこのミッシング、な\nサムシングがハウリング、してる？\nライカ、ファフニル？
+Tween	ミステ	PunchPosition	y=30				NoWait
+	ミステ	悔しい						まずい……！
+Se	アラート
+FadeOut	red					.2
+FadeIn	red					.2
+Wait						.5
+FadeOut	red					.2
+FadeIn	red					.2
+Wait						.5
+CharacterOff
+	ディーア	悔しい2						非感知型のトラップ!?\nここまでの全てが罠か……！
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+Bg	魔術空間(赤)					0
+Wait						2
+	ミステ	悔しい				0
+	鎖エフェクト前		エフェクト表			0
+	鎖エフェクト後ろ		エフェクト裏			0
+FadeIn	white					.2
+Bgm	絶望
+	ミステ	悔しい						はぁ……\nめぐらされたなバリアー
+Se	コインロック
+	ミステ	怒り						ハリアップ、といきたいけど、\nマスターいないし、\nムリだなこれは……
+CharacterOff
+	アビス防衛機兵1		p2b
+	アビス防衛機兵2		p5
+	アビス防衛機兵3		p8b
+	           
+Se	フォーン
+Wait						2
+CharacterOff
+	ミステ	悔しい
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ミステ	悔しい						しかも……まんまと敵に塩、で\n歴史に残るエキシビジョンってな
+	ミステ	怒り						（そういえばマスターが\n　言ってたな……）
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	遺跡B					0
+	ディーア	通常2				0
+FadeIn	white					.3
+	ディーア	通常2						何かあったときに、\n困らないようにな……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	魔術空間(赤)					0
+	ミステ	怒り				0
+	鎖エフェクト前		エフェクト表			0
+	鎖エフェクト後ろ		エフェクト裏			0
+FadeIn	white					.3
+	ミステ	怒り						……………………
+	ミステ	通常						認めるよ失敗、\nやればよかった反省会
+	ミステ	通常						そのときゃ自分に顔面パンチ、で\n目指すべき二人の完全体
+	ミステ	怒り						……まあ、もう遅いか
+	ミステ	怒り						くっ……アタシには、\nまだやることがあるのに……！
+CharacterOff
+	アビス防衛機兵1		p2b
+	アビス防衛機兵2		p5
+	アビス防衛機兵3		p8b
+	           
+	ガーディアン	<Off>						ピピピピ……！
+Se	チャージ
+CharacterOff
+	ミステ	怒り
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ミステ	怒り						っ…………！
+StopBgm
+Se	ガードブレイク
+FadeOut	white					.2
+CharacterOff						0
+	ミステ	怒り	2_2_b			0
+	ディーア	本気3	画面外_左			0
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ディーア	MoveBy	x=600 time=1				NoWait
+Wait						.3
+FadeIn	white					.2
+	ディーア	本気3						ミステリオン！
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bgm	タイトル
+	ミステ	怒り						なっ……！ マスター!?
+	ディーア	笑い3						よかった、間に合った！
+Tween	ミステ	PunchPosition	y=30				NoWait
+	ミステ	怒り						どうなってんだ、ショートカット!?\nもってないだろ高等魔法……！
+	ディーア	汗3						ああ、オレはミステリオンみたいに\n奇跡の力とかは使えないからな
+	ディーア	通常3						でも、その代わりに\nコツコツ情報収集してただろ？
+	ディーア	通常3						この場所の魔力反応と同じものを\n道中で感じたんだ
+	ディーア	笑い3						そうしたらこの空間へのゲートも\nそこで見つけたんだ
+	ディーア	笑い3						けっこう走ったけど、\n最短で来られてよかった
+	ディーア	通常3						たまには\n地道なことも役に立つだろ？
+	ミステ	通常						……そっか
+	ミステ	通常						アタシはなんて井の中の蛙\nアンタを待たず、に白旗かざす
+	ミステ	通常						悪かったな、マイマスター\nアタシは間違えたキャリアプラン\n罪悪感だよ、どうにでもしてくれ
+	ディーア	笑い3						謝る必要なんてないさ\nこうやってお互いのことが\nわかったんだから
+	ディーア	笑い3						それに、\nオレにはできないことがお前はできる
+	ディーア	通常3						なら、一緒に戦えば、\nできることももっと増えるだろ？
+	ディーア	通常3						だから、オレも\nお前の使命につき合わせてくれ\n一緒に世界に立ち向かうからさ
+	ミステ	通常						マスター……
+	ミステ	嬉しい						これは始まりの「ごきげんよう」\nやっと見つけた、よう相棒
+	ミステ	嬉しい						託すぜアタシの真価、\n委ねるさ、アンタの因果と審美眼に
+CharacterOff
+	ミステ	拡大通常	エフェクト表					一緒に行ってくれるか？\n……マイマスター？
+CharacterOff
+	ミステ	嬉しい	2_2_b
+	ディーア	笑い3	1_2
+	ディーア	笑い3						ああ、もちろん！\nいくぞ、ミステリオン!!
+Param	character_grayout=false
+Se	チャージ
+	オーラ青		エフェクト表			.5
+Wait						1
+Se	光3
+FadeOut	white					.3
+StopBgm
+CharacterOff						0
+Bg	神殿B					0
+	ミステ	通常	2_2_b			0
+	ディーア	怪しい3	1_2			0
+Wait						1.5
+Param	character_grayout=true
+FadeIn	white					.3
+Bgm	図書館
+	ディーア	怪しい3						やっぱり\nあれが最後のトラップだったか\nそして<dash=2>
+	ディーア	通常3						これが\nミステリオンが探してたものか？
+	ミステ	通常						違うさ、これはただのインスタンス\n先にはまだまだディスタンス
+	ミステ	嬉しい						でも、やっとつかんだよ\nビッグチャンス、\n相棒とアタシのチームワーク♪
+Tween	ミステ	MoveBy	x=-20				NoWait
+	ミステ	通常						ほら、見るか？
+	ディーア	怪しい3						古い文書だな……\n内容は『煌の十天』に『教団』\nそれに古い儀式の記録か……
+	ミステ	通常						単なるリフレインでも、\n先には異なるミステリー
+	ミステ	嬉しい						だから、\n幾重に必要なのさスタディが
+	ミステ	通常						……そう、\nアタシのもとめる答えはまだ先……
+	ミステ	通常						なあ、マイマスター
+	ミステ	嬉しい						ミステは止めるぜミステイク
+	ミステ	嬉しい						ビッグフェイスじゃ起こせない\nビックウェーブ\nだからここでリフレッシュ
+	ミステ	通常						……アンタがいたら、\nきっとアタシは先に進めるから
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場1F					0
+	          
+Param	character_grayout=false
+FadeIn	black					.3
+	          							\n　　　　　　　<color=blue>数日後</color>
+Bgm	平和
+	ミステ	怒り	p3
+	サクラメント	怒り2	p7
+	二人							むむむ……！
+Param	character_grayout=true
+	サクラメント	怒り2						マスターの覇権を取るのは魔剣サクラ\n手加減なんてしないわ、\nむしろ火をつけるわ、導火線に
+	サクラメント	怒り2						これから行くの、ショッピング\n甘カワ目指して更新中で、\nウォッチングユーなのマスターに
+Tween	ミステ	PunchPosition	y=30				NoWait
+	ミステ	怒り						うるせえ、甘いぞそのホーミング、\nアタシと相棒はオンリーユーで\nもう戦友……いや親友！
+Tween	ミステ	PunchPosition	y=50				NoWait
+	ミステ	嬉しい						Show you？\n見事な蛮勇でいつかは英雄、になるさ\nサクラ抜きで♪
+	サクラメント	怒り2						なんなの？ デレたのスクラップ？\nまるでへなったストラップつきの\nグダグダガールね？
+	ミステ	嬉しい						シャラップ♪\nサクラはナンバーツー！\n我慢してろよ、ばたんきゅーってな！
+Param	character_grayout=false
+	二人							むむむ……！
+CharacterOff
+	ミステ	嬉しい	画面外_右_b
+	ディーア	汗2						ふ、二人とも\nケンカはそこまでに<dash=2>
+Se	ピューン
+Tween	ミステ	MoveBy	x=-600 time=0.5				NoWait
+Wait						.5
+	ディーア	驚き2						うわぁ!?
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	ディーア	MoveBy	x=-100				NoWait
+Wait						.3
+Param	character_grayout=true
+	ミステ	嬉しい						ふんっ♪\n早く行こうぜ、マイマスター♪\nサクラもきっとアンダスタン♪
+Tween	ミステ	PunchPosition	y=30				NoWait
+	ミステ	嬉しい						アタシとあんたのコンビネーション\nで、成し遂げよう\n魔界のリベレーション♪
+CharacterOff
+	ミステ	拡大通常	エフェクト表					期待してるぜ……相棒♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_568_01
+EndIf
+EndScenario

@@ -1,0 +1,1691 @@
+# E_1130_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館					0
+Bg	荒野					0
+Param	character_grayout=true
+ImageEffect	SpriteCamera	Sepia
+	スペルビア	悔しい破損				0
+	          
+FadeIn	black					1
+	スペルビア	悔しい破損						…………\nこの私を助けようというのか？
+	スペルビア	怪しい破損						親切心からではないな\nお前には野心がある、求める物がある
+	スペルビア	怪しい破損						お前の眼は\n命を命とも思わぬ者のそれだ
+	スペルビア	悔しい破損						だが……\n私にはお前に差し出せるものなど\n残されてはいない
+	スペルビア	通常破損						私は全てを奪われた\n記憶も、力も、名前さえも
+	スペルビア	通常破損						残されたのは自身の命も救えない\nちっぽけな誇りと驕りだけ
+	スペルビア	通常破損						それでも、\nお前は私に救いの手を差し出すのか？\nこの罪人へと？
+	冷たい声	<Off>	1_2					もちろんです
+	冷たい声	<Off>						あなたは高慢のスペルビア\n私が探し求めていた存在
+	冷たい声	<Off>						私はあなたの命を救いましょう
+	冷たい声	<Off>						その対価として\nあなたの全てを差し出しなさい
+ImageEffectOff	SpriteCamera	Sepia
+StopBgm						0
+CharacterOff						0
+Bg	黒背景					0
+	冷たい声	<Off>						私はどうしても知りたいのです\n生命の全てを
+FadeOut	white					.5
+CharacterOff						0
+Wait						1
+Bg	研究所A					0
+	ププッピマリー	佇む	p7			0
+FadeIn	white					.5
+Bgm	神秘
+	ププッピマリー	佇む						夢、ですか……
+Param	character_grayout=false
+Se	フォーン
+	オーラ青		エフェクト表			1
+	スペルビア	通常				1
+Tween	スペルビア	MoveBy	x=-150 time=2				NoWait
+	スペルビア	通常						ずいぶんと\n懐かしい夢を見ていたようだな
+CharacterOff	オーラ青					1
+Param	character_grayout=true
+	ププッピマリー	佇む						スペルビア、\n勝手に出てくるなと……
+	スペルビア	通常						そう言うな、\nこの状態ならお前と私の魔力は同質\nお前以外に私は感知できない
+	スペルビア	通常						それにしても\n七罪王の命すらイチ実験材料とした\n高慢極まる少女が変わったな
+	スペルビア	怪しい						魔剣が誕生する以前からの\n長い付き合いだが、\n時の流れとは面白いものだ
+	ププッピマリー	佇む						それはあなたも同じでしょう？
+	スペルビア	怪しい						ああ、この私も変わった
+	スペルビア	怪しい						偶然や奇跡に依らない\n完全に意図された歴史の改変を\n望んでいたというのに
+	スペルビア	通常						その偶然と奇跡に助けられ、\nよもや其れを楽しむようになるとは
+	ププッピマリー	佇む						後悔をしているのですか？\n契約を結んだことを
+	スペルビア	通常						路傍の石にも劣る姿で朽ちるはずが\n罪の王としての己を取り戻せたのだ\nお前には感謝をしている
+	スペルビア	にやけ						お前たちの物語も\n私にとって興味深いものであったしな
+	スペルビア	通常						だからこそ問おう\n……もう覚悟はできたのか？
+	ププッピマリー	佇む						愚問ですね
+	ププッピマリー	佇む						『いつか必ずその時が来る』\n一時も忘れたことはありません
+	スペルビア	通常						ならば後悔が無いようにな\nプリエラ=ププッピマリー
+	スペルビア	通常						私は先に行くとしよう\nこの物語を終わらせるために
+Param	character_grayout=false
+CharacterOff	スペルビア					1
+Wait						1
+Tween	ププッピマリー	MoveBy	x=-150				NoWait
+	ププッピマリー	佇む						物語、ですか……
+	ププッピマリー	佇む						たしかにあなたとの出会いは\nいっそ物語のようでしたね
+	ププッピマリー	佇む						それならば\nどうか優しい昔話のような
+FadeOut	white					2
+CharacterOff						0
+Bg	黒背景					0
+	イベントロゴ1130		エフェクト表			3
+FadeIn	white					1
+	ププッピマリー	<Off>						幸福な結末が\nあの子に訪れますように
+FadeOut	white					2
+StopBgm
+CharacterOff						0
+Bg	カジノ					0
+	ディーア	通常2	1_2			0
+	リディ	笑い2	2_2			0
+Wait						1
+Param	character_grayout=true
+FadeIn	white					1
+Bgm	わくわく
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	笑い2						わー！\nすごいパーティーだね、マスター!!
+	ディーア	通常2						世界図書館のパーティーにも\nたくさん招いてもらったけど\n一段と気合が入ってるな
+	リディ	笑い2						えへへ♪\nだって魔界が復興された記念だもん\nみんな、嬉しいんだよ
+	ディーア	笑い2						ああ、\nオレもこうして祝えることが\n本当に嬉しい！
+	ディーア	笑い2						ロール様には\nあの戦いでも助けてもらったし\n改めてお礼を言わないとな
+CharacterOff
+	ププッピマリー	微笑む						それには及びません、\n<param=name>様
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	笑い2	2_2
+	ディーア	通常2						マリーさん！
+	リディ	笑い2						こんにちは、マリーさん！
+CharacterOff
+	ププッピマリー	通常						お二人をお待ちしておりました
+	ププッピマリー	通常						この度の宴は\nお二人の功績を称えるためのもの
+	ププッピマリー	通常						魔界と私どもを救ってくれたことを\nお嬢様に代わりお礼申し上げます
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	通常2	2_2
+	ディーア	笑い2						いえ、みんなの力のおかげです
+	ディーア	通常2						そう言えば、\nロールお嬢様はどちらに？
+CharacterOff
+	ププッピマリー	微笑む						お召し替えの最中かと\nもうすぐいらっしゃるでしょう
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	通常2	2_2
+	リディ	笑い2						わぁ♪\nロールお嬢様がどんなドレスを\n着て来るのか楽しみだね♪
+CharacterOff
+	ププッピマリー	微笑む						ドレスにご興味があるのでしたら\n来賓用のドレスのご用意もございます\nリディ様もいかがですか？
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	驚き2	2_2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	驚き2						ほんとっ!?\nねえねえ、マスター！
+	ディーア	笑い2						世界図書館の中なら\n魔界のどこよりも安全だし\n行ってきな
+	リディ	笑い2						わーい♪\n綺麗なドレスのリディを\n楽しみにしていてね♪
+CharacterOff
+	ププッピマリー	微笑む						では私はリディ様をご案内いたします\n本日はごゆるりとお楽しみください
+CharacterOff	ププッピマリー					1
+Wait						1
+CharacterOff
+	ディーア	笑い2						……平和だなぁ
+	ディーア	通常2						頻発していた異変も\nようやく落ち着いてきたし
+	ディーア	通常2						七罪王に関してギクシャクした\nロール様との関係も良好に戻った
+FadeOut	black					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Bg	神社（昼）					0
+	アセーディア					0
+	          
+Param	character_grayout=false
+FadeIn	black					.3
+	ディーア	<Off>	1_2					七罪王……\n魔界を憎む大罪の王たち
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地C(曇り)					0
+	アヴァリティア					0
+	          
+FadeIn	black					.3
+	ディーア	<Off>	1_2					伝説上の存在だった彼らは復活し\n魔界に害をなそうとして
+FadeOut	black					.3
+CharacterOff						0
+Bg	山岳B2					0
+	インウィディア					0
+	          
+FadeIn	black					.3
+	ディーア	<Off>	1_2					かつて彼らの力を喰らったという\nリディが狙われることになった
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地B2(紫)					0
+	ルークスリア	本気				0
+	          
+FadeIn	black					.3
+	ディーア	<Off>	1_2					そして、\n魔界とリディを守るために\nオレは彼らと何度も戦った
+FadeOut	black					.3
+CharacterOff						0
+Bg	荒野					0
+	グーラ	通常				0
+	          
+FadeIn	black					.3
+	ディーア	<Off>	1_2					彼らにも事情はあったし、\n理解し合えた七罪王もいたけれど
+FadeOut	black					.3
+CharacterOff						0
+Bg	魔術空間(赤)					0
+	イーラ	通常				0
+	          
+FadeIn	black					.3
+	ディーア	<Off>	1_2					最後には七罪王のほとんどを\n世界図書館に封印することになった
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	GrayScale				0
+Bg	カジノ					0
+	ディーア	怒り2				0
+FadeIn	black					.3
+	ディーア	怒り2						それは\nロールお嬢様たちが準備してくれた\nBlaze魔剣のおかげだけど<dash=4>
+StopBgm
+	ディーア	怒り2						世界図書館の目的は\n魔界の平和を守るためだけじゃない
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	アリス					0
+Bgm	図書館
+FadeIn	white					.3
+	アリス							あの<ruby=フロイライン>お嬢さん</ruby>は、"母親"が読んでくれた\n"たった一冊の本"を\n探し続けているのだ
+FadeOut	white					.3
+CharacterOff						0
+Bg	神殿B					0
+	キノコ先生					0
+FadeIn	white					.3
+	キノコ先生							ボクはね……「個人的な願望」を\nあたかも「正義」のように語る人間を\n「悪」と呼んでいる
+	キノコ先生							その尺度で評価すれば……\n今世界図書館の<ruby=フロイライン>お嬢さん</ruby>が行おうと\nしていることは、まさに「悪」なのさ
+FadeOut	white					.3
+CharacterOff						0
+Bg	魔術空間(赤)					0
+	イーラ	通常				0
+FadeIn	white					.3
+	イーラ	通常						司書王に気をつけろ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	カジノ					0
+	ディーア	目閉じ2				0
+FadeIn	white					.3
+	ディーア	目閉じ2						ロール様だって\n世界図書館を率いる王で謀略家\n思惑があるのは当然
+	ディーア	通常2						敵対もあり得るって\n覚悟もしたけれど
+	ディーア	通常2						ロール様は\nオレたちが危ないときには\nいつだって助けに来てくれた
+StopBgm
+	ディーア	通常2						魔界を救うために協力してくれた\nロール様をオレも信じよう
+Bgm	平和
+CharacterOff
+	黒櫃:Blaze	通常						ふふ♪\nいい顔をしているじゃないか\nさすが天才のマスターだ
+	黒櫃:Blaze	笑い						困難を乗り越え、\n自信と希望に満ちた表情をしている
+	黒櫃:Blaze	笑い						天才であるボクも\nそんなマスターが誇らしいよ
+CharacterOff
+	ディーア	笑い2						ありがとう、\n魔剣のみんながいてくれたからだよ
+	ディーア	通常2						今日は労いも兼ねてるし\n黒櫃:Blazeも護衛の仕事は忘れて\nのんびりと楽しんでくれ
+CharacterOff
+	黒櫃:Blaze	通常						そうしたいのは山々なのだが……
+	黒櫃:Blaze	通常						ちょっと\n白櫃のところに来てくれないか？
+CharacterOff
+	ディーア	怪しい2						……なにかあったのか？
+CharacterOff
+	黒櫃:Blaze	通常						それがだね<dash=2>
+StopBgm
+Param	character_grayout=false
+FadeOut	black					.3
+CharacterOff						0
+	白櫃	悲しい				0
+	集中線		エフェクト表			0
+FadeIn	black					.3
+Bgm	緊迫
+	白櫃	悲しい						こんにちは、\n役立たずの箱です
+CharacterOff	白櫃
+	ディーア	絶望2						白櫃ー!?
+CharacterOff	集中線
+Bgm	平和
+	ディーア	絶望2						どうしたんだ白櫃、\n来る前よりも落ち込んでるぞ!?
+	ディーア	絶望2						気分転換になると思って、\n黒櫃:Blazeと一緒に連れてきたのに
+CharacterOff
+	白櫃	悲しい						それが……\nどうにもお胸のところが重くて
+CharacterOff
+	黒櫃:Blaze	通常						それは大変だ！\n天才な姉である黒櫃:Blazeが\n胸をなでてあげよう！
+CharacterOff
+	白櫃	悲しい						うん……\nありがとう、黒櫃:Blazeちゃん
+CharacterOff
+	黒櫃:Blaze	驚き						あ、あれ？\n「天才じゃなくて変態です」って\n言わないのか？
+CharacterOff
+	白櫃	驚き						はっ……！\nそ、そうでした！
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	悲しい						黒櫃:Blazeちゃんは変態です……
+CharacterOff
+	黒櫃:Blaze	驚き						物悲しそうに言わないでくれ！\n本当に変態っぽく聞こえる!!
+CharacterOff
+	ディーア	怪しい2						これは重症だな\nいったいどうしたんだ？
+CharacterOff
+	白櫃	悲しい						そのぉ……この間の戦い、\nとっても大変だったじゃないですか？
+	白櫃	嬉しい						それが終わった時は\nやったーって思ったんですけど
+	白櫃	悲しい						改めて考えたら、\n私は役に立ててなかったなって
+	白櫃	悲しい						相変わらず\nイキタマ人さんの力の使い方は\nよくわかりませんし
+	白櫃	悲しい						マスターさんに使ってもらっても\n中でマスターさんのが爆発して、\n頭が真っ白になったり<dash=2>
+CharacterOff
+	ディーア	絶望2						言い方！ 言い方!!
+CharacterOff
+	白櫃	驚き						？？？？？？
+	白櫃	悲しい						とにかくパーティーでも\nたくさんの人にすごいすごいって\n褒めてもらったけど
+	白櫃	悲しい						マスターさんと\n黒櫃:Blazeちゃんたちがすごくて\n私は最弱の魔剣のまま
+	白櫃	悲しい						それに<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル107501		エフェクト表			0
+FadeIn	white					.3
+	白櫃=ロスト	<Off>						「お姉ちゃん」も、壊しちゃうね♥
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	カジノ					0
+	白櫃	悲しい				0
+FadeIn	white					.3
+	白櫃	悲しい						……私は本当にこのままで\nいいんでしょうか？
+CharacterOff
+	黒櫃:Blaze	怒り						ふむ……\nボクは白櫃の気持ちがわかるとは\n言えないな
+	黒櫃:Blaze	怒り						天才は振り返らないものだからね
+	黒櫃:Blaze	通常						だが自分を過度に責めるのは\n建設的ではない
+	黒櫃:Blaze	通常						気持ちを切り替えるのも\n大事なことだよ？
+CharacterOff
+	ディーア	笑い2						それに白櫃は\nみんなの傷を癒やしたりして\nちゃんと役に立ってくれたぞ？
+CharacterOff
+	白櫃	悲しい						でもぉ……\n私も本当はイキタマ人さんの力を\nもっと<dash=4>
+CharacterOff
+	ディーア	汗2						白櫃の中の生きた魔神は……\n白櫃=ロストの魔神みたいに\n優しいけど扱いが難しいだろうし
+	ディーア	通常2						オレと一緒に、\nまた上手な使い方を探してみよう
+	ディーア	笑い2						だから\nまず今日は難しいことを考えないで\n楽しもう！
+CharacterOff
+	白櫃	悲しい						は、はい……
+	白櫃	照れ						それじゃあ\nお料理を……あーん♪
+Tween	白櫃	PunchPosition	y=10				NoWait
+	白櫃	嬉しい						えへへ、おいしいです♪
+CharacterOff
+	ディーア	通常2						もうすぐリディも着替えて\n戻ってくるだろうから
+	ディーア	通常2						そうしたら\nみんなでダンスを<dash=2>
+	ディーア	怪しい2						って、あれ？\nリディが戻ってくるのが遅いな？
+CharacterOff
+	黒櫃:Blaze	通常						レディの着替えは\n少しくらい長くかかるものさ
+CharacterOff
+	ディーア	汗2						そうだな、\nそれにリディの魔剣はここにあるし\nなにかあったらわかるはず
+	ディーア	通常2						のんびり待つと<dash=2>
+CharacterOff
+	世界図書館司書A	通常						ご歓談中にすみません、\n<param=name>様
+CharacterOff
+	ディーア	驚き2						あなたは確か、\n世界図書館の司書さん？
+	ディーア	通常2						何度か図書館を\n案内してくれましたよね？
+CharacterOff
+	世界図書館司書A	通常						覚えていていただけたとは\n光栄の極みでございます
+	世界図書館司書A	通常						実は司書王様との\n面会の準備が整いましたので\nご案内に参りました
+CharacterOff
+	ディーア	笑い2						そうですか、\nありがとうございます
+	ディーア	通常2						みんな、ロール様に会いに行こう
+CharacterOff
+	白櫃	嬉しい						はい♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	研究所A					0
+	世界図書館司書A	通常				0
+FadeIn	black					.3
+	世界図書館司書A	通常						それにしても\n貴方様があんな偉業を成し遂げるとは\n一司書としても喜ばしいです
+	世界図書館司書A	通常						おかげで魔界も無事に存続できた\n散っていった仲間も浮かばれましょう
+CharacterOff
+	ディーア	通常2						そうですね……\nあの戦いではたくさんの人たちが\n協力してくれました
+CharacterOff
+	世界図書館司書A	通常						あっ！\n彼らもあの戦役に参加した仲間です
+CharacterOff
+	世界図書館司書B	通常						<param=name>様\nパーティーはいかがですか？
+CharacterOff
+	ディーア	通常2						はい、楽しんでいます
+CharacterOff
+	世界図書館司書B	通常						おーい！\n<param=name>様\nがいらっしゃったぞ！
+CharacterOff
+	世界図書館司書C	通常						では私もご挨拶を！
+CharacterOff
+	世界図書館司書A	通常						司書たちはみな、\nあなたのことを尊敬しております
+CharacterOff
+	ディーア	通常2						……ありがとうございます
+CharacterOff
+	黒櫃:Blaze	通常						……マスター
+CharacterOff
+	ディーア	目閉じ2						ふぅ…………
+StopBgm						0
+	ディーア	目閉じ2						見知った顔も多い\nやるなら早く始めよう
+Bgm	バトル
+CharacterOff
+	世界図書館司書A	通常						お覚悟を!!
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	光1
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(青)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	研究所A					0
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff						0
+	ディーア	怒り2				1
+	土煙		エフェクト表
+	ディーア	怒り2						魔力の起こりも感じなかった\n相当な手練れだな
+CharacterOff	土煙					1
+Wait						1
+CharacterOff
+	世界図書館司書A	通常						やはりこの程度では\n動揺させることもできないか……
+CharacterOff
+	ディーア	怪しい2						襲撃の目的は戦役での恨みか？\nそれとも<dash=2>
+	ディーア	怒り2						司書王の命令か？
+CharacterOff
+	世界図書館司書A	通常						あなたを傷つけるのは\n我々としても不本意です
+	世界図書館司書A	通常						どうかこのまま大人しく、\nご同行いただけませんでしょうか？
+CharacterOff
+	ディーア	目閉じ2						断ると言ったら？
+CharacterOff
+	世界図書館司書A	通常						力ずくで従っていただきます!!
+	世界図書館司書A	通常						迎撃システムを起動！\n必ず彼を無力化させるんだ!!
+CharacterOff
+	ディーア	本気2						黒櫃:Blaze!!
+CharacterOff						0
+	黒櫃:Blaze	通常						任せたまえ！\n天賦の才をお見せしよう!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1130_02
+EndIf
+EndScenario
+
+# E_1130_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	バトル					0
+Bg	研究所A					0
+Param	character_grayout=false
+	黒櫃:Blaze	通常				0
+	          
+FadeIn	black					1
+	黒櫃:Blaze	通常						パーティーに合わせた襲撃は\nマスターが主賓に配慮し\n軽武装で来ると考えてのことかな？
+	黒櫃:Blaze	通常						その判断は正しい\n事実として帯同はボクと白櫃\nそして彼女だけだった
+	黒櫃:Blaze	笑い						だが甘いね！\nこの天才がマスターの傍にいる限り\n全ての策は崩れる定めだ!!
+CharacterOff
+	世界図書館司書A	通常						くっ……！
+CharacterOff
+	白櫃	驚き						黒櫃:Blazeちゃん、\nやっぱりすごい……！
+	白櫃	悲しい						わ、私も！\nちょっとは役に立たないと！
+	白櫃	悲しい						マスターさん！\n私にも魔力を……！
+Se	チャージ
+	オーラ青		エフェクト表			1
+	白櫃	驚き						ってあれ？\nなんでしょうこの光……？
+Se	光3
+FadeOut	white					.2
+CharacterOff						0
+	世界図書館司書B	通常				0
+FadeIn	white					.2
+Shake	世界図書館司書B		x=3				NoWait
+	世界図書館司書B	通常						ぐああああ？
+CharacterOff
+	白櫃	悲しい						また爆発しちゃいました!?
+CharacterOff
+	黒櫃:Blaze	ニヤリ						相変わらず白櫃は\n天才の想定を超えていくな!!\nだがこれで<dash=2>
+StopBgm						1
+	黒櫃:Blaze	笑い						制圧完了だ
+CharacterOff
+	世界図書館司書A	通常						くっ……！
+Bgm	絶望
+CharacterOff
+	ディーア	悔しい2						知らない仲じゃないんだ\n教えてくれ
+	ディーア	悔しい2						どうして貴方達がオレを襲うのか\nそして<dash=2>
+	ディーア	怒り2						リディはどこにいる？
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Bg	研究所B					0
+	司書王ロルリアンレット	怪しいH				0
+	ププッピマリー	佇む	3_3			0
+Wait						1
+FadeIn	black					.3
+Param	character_grayout=true
+Bgm	図書館
+	ププッピマリー	佇む						お嬢様、\n第四区画で戦闘が始まったようです
+	司書王ロルリアンレット	ニヤリH						相変わらず\n勘が鋭いことね、魔剣使いは
+	司書王ロルリアンレット	ニヤリH						気づかないまま\n眠ってくれていたら楽だったのに
+	司書王ロルリアンレット	ニヤリH						施術の完了までは\nあと半刻ほどかかる予定よ
+	司書王ロルリアンレット	ニヤリH						こちらに向かってくるようなら\n迎撃しなさい
+	ププッピマリー	佇む						……かしこまりました
+	司書王ロルリアンレット	通常H						どうしたの？\n私の決定に不満があるようね？
+	ププッピマリー	佇む						いえ……
+	司書王ロルリアンレット	ニヤリH						遠慮する必要はないわ\nあなたが考えていることを言いなさい
+	ププッピマリー	佇む						僭越ながら、彼に全てを打ち明け\n協力してもらうという道もあったかと
+	司書王ロルリアンレット	怪しいH						……それは無理よ
+Param	character_grayout=false
+FadeOut	black					.3
+CharacterOff						0
+	リディ	黒2				0
+	オーラ紫		エフェクト表			0
+FadeIn	black					.3
+	司書王ロルリアンレット	<Off>						彼にとって\nこの子は文字通りの生命線
+	司書王ロルリアンレット	<Off>						わずかでもリスクが有るのなら\n彼が肯定することはない
+FadeOut	black					.3
+CharacterOff						0
+	ププッピマリー	佇む	3_3			0
+	司書王ロルリアンレット	怪しいH				0
+FadeIn	black					.3
+Param	character_grayout=true
+	司書王ロルリアンレット	怪しいH						まして……\n私の目的を知ったなら尚更ね
+	ププッピマリー	佇む						残念です\nこのような形で彼と決裂するとは
+	司書王ロルリアンレット	怪しいH						仕方ないじゃない\n私の望みを達成するには\n今しかなかった
+	司書王ロルリアンレット	怪しいH						魔剣機関もあの<ruby=アリス>ニート</ruby>も\n満足に動けない情勢
+	司書王ロルリアンレット	怪しいH						魔剣使いの奥の手も\nもう気軽には使えないでしょうしね
+	ププッピマリー	佇む						なにより彼は戦いを経て\n私たちを信頼しておりましたから
+	司書王ロルリアンレット	眠りH						…………
+	司書王ロルリアンレット	悪い顔H						遅かれ早かれ、\nきっとこうなっていたのよ
+	司書王ロルリアンレット	悪い顔H						司書王として\n私は誰かに屈することを良しとしない
+	司書王ロルリアンレット	悪い顔H						弱さは悪\n無価値であるどころか罪ですらある
+	司書王ロルリアンレット	ドヤ顔H						そう教えてくれたのは\n他ならぬあなた達でしょう、マリー？
+	ププッピマリー	佇む						…………ええ
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+Bg	研究所A					0
+	ディーア	悔しい2				0
+Wait						1
+FadeIn	black					1
+Bgm	絶望					0
+	ディーア	悔しい2						リディは今、どこにいる!!\n答えろ!!
+CharacterOff
+	世界図書館司書A	通常						…………\nあなたはご存知ですか？
+	世界図書館司書A	通常						我々、世界図書館が\n魔界で唯一魔剣を用いない\n戦闘集団である理由を
+CharacterOff
+	ディーア	怒り2						…………
+Param	character_grayout=false
+CharacterOff
+	世界図書館司書A	通常						ならば私の気持ちも\nわかるはずがないでしょう\nそして<dash=2>
+	世界図書館司書A	通常						リディ様の行方は、\nこの身が引き裂かれようとも\nお答えできません
+Se	チャージ
+	オーラ赤		エフェクト表			.5
+	世界図書館司書A	通常						…………お先に!!
+CharacterOff
+	ディーア	驚き2						っ……！\nバカっ……！
+Se	打1
+FadeOut	white					.2
+CharacterOff						0
+	世界図書館司書A	通常				0
+FadeIn	white					.2
+Shake	世界図書館司書A		x=2				NoWait
+	世界図書館司書A	通常						ぐっ……！
+Se	倒れる
+Tween	世界図書館司書A	MoveBy	y=-100 time=1				NoWait
+CharacterOff	世界図書館司書A					1
+Wait						.5
+CharacterOff
+	黒櫃:Blaze	通常						自決なんて愚かな真似はさせない\nマスターの傷になるからね
+CharacterOff
+	ディーア	目閉じ2						ありがとう、黒櫃:Blaze
+CharacterOff
+	白櫃	悲しい						この人、\nすごい執念でしたね
+CharacterOff
+	ディーア	怒り2						ああ、\nだからこそ確信できた
+	ディーア	怒り2						司書の人たちが\nこれほどの忠を尽くす相手は\n一人しかいない
+CharacterOff
+	黒櫃:Blaze	怒り						つまり、\n司書王ロルリアンレットが黒幕か
+CharacterOff
+	ディーア	悔しい2						ロール様がどうして……
+CharacterOff
+	黒櫃:Blaze	怒り						気持ちはわかるが\n悲しむ時間はないぞ、マスター
+	黒櫃:Blaze	怒り						世界図書館の主が敵なら、\nここは敵陣の真ん中ということになる\nつまり<dash=2>
+StopBgm
+Se	アラート
+FadeOut	red					.3
+FadeIn	red					.3
+Wait						.5
+FadeOut	red					.3
+FadeIn	red					.3
+Wait						.5
+Param	character_grayout=true
+	世界図書館司書	<Off>	1_2					いたぞ、こっちだ!!
+Bgm	緊迫
+	黒櫃:Blaze	怒り						増援は山ほど現れるということだ！
+CharacterOff
+	ディーア	悔しい2						くっ……!!\n見知った人ばかりなのに!!
+CharacterOff
+	白櫃	悲しい						ど、どうしましょう！\nあんなにたくさんの人と戦ったら\nマスターさんの魔力も！
+CharacterOff
+	ディーア	本気2						だけど\nリディの居場所がわからない以上\n正面突破しか<dash=2>
+	？？？？							ククク……！\n困っているようだな、魔剣使い♪
+	ディーア	怪しい2						この声は……！
+CharacterOff
+	スペルビア							助けてやろうか？\n高慢に、高らかに……！
+CharacterOff
+	ディーア	怒り2						七罪王、高慢のスペルビア……
+If	isdebug==true
+CharacterOff
+Jump	*E_1130_03
+EndIf
+EndScenario
+
+# E_1130_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	旧図書館					0
+Param	character_grayout=false
+	スペルビア	悪い顔				0
+	          
+FadeIn	black					1
+	スペルビア	悪い顔						フハハハ！\n完ぺきなタイミングだっただろう！\n流石はこの世界王！
+	スペルビア	にやけ						千の美辞麗句を並べて\n私に感謝するといい、魔剣使いよ
+	スペルビア	にやけ						その全ては想定済みだがな！
+CharacterOff
+	ディーア	驚き2						世界図書館の旧図書館区画……\nそこにこんな隠し通路があるなんて
+	ディーア	怒り2						だけど\n七罪王のお前がどうして<dash=2>
+CharacterOff
+	スペルビア	にやけ						『こんな場所を知っているんだ』？
+	スペルビア	にやけ						私が進化の限界に至った\n高慢の七罪王であるから……\nという答えでは不満か？
+CharacterOff
+	ディーア	怒り2						それだけじゃないだろう？
+	ディーア	怒り2						憤怒のイーラが疑っていた\nお前とロール様には繋がりがあると
+CharacterOff
+	スペルビア	にやけ						ふふふ♪\nあの怒りに満ちていたイーラから\n助言をもらうとは
+	スペルビア	にやけ						グーラやルークスリアといい\n罪の王によく好かれるな、魔剣使い
+CharacterOff
+	ディーア	怒り2						話をそらすな\nお前とロール様はどういう関係だ？
+CharacterOff
+	スペルビア	通常						それを知ってどうなる？\nここから抜け出して、\n完全防備した司書たちに突撃するか？
+	スペルビア	通常						世界図書館は奴らの本拠\nキミであっても命取りになるぞ
+	スペルビア	悔しい						そして先に言っておくが、\n私は戦力として数えるんじゃない
+	スペルビア	にやけ						高慢の王として、\n私は自信をもって言おう！\n戦いとなれば私は敗れる！
+CharacterOff
+	ディーア	本気2						自信たっぷりに言うことか!!
+CharacterOff
+	白櫃	驚き						はわぁ……\nすごい天才みたいな人ですね
+CharacterOff
+	スペルビア	にやけ						ほう♪\nキミの魔剣は見る目があるようだな
+CharacterOff
+	ディーア	怪しい2						……白櫃のことは黙っておこう
+	ディーア	怒り2						とにかく、\n素直に世界図書館との関係を\n説明する気はないんだな？
+CharacterOff
+	スペルビア	怪しい						数分で説明できるほど\n単純な話ではない
+	スペルビア	怪しい						この本のような\n数千のページをもってしても\n語りきれるかどうか
+	スペルビア	通常						だが世界王の名において約束しよう\n今このときはキミの味方だ
+StopBgm
+	スペルビア	通常						なにしろ、司書王を止めなければ\n魔界は滅びることになるからな
+CharacterOff
+	ディーア	驚き2						ロールお嬢様が、魔界を滅ぼす？
+Bgm	図書館
+CharacterOff
+	スペルビア	通常						最後のピースも手に入れて\n間もなく司書王は\n七罪王の力をすべて手に入れる
+CharacterOff
+	ディーア	怒り2						最後のピース\n…………リディのことか
+CharacterOff
+	スペルビア	通常						その通り\n私とルークスリアを除いた五王は\n伝承を魔王獣に喰われている
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	戦場跡					0
+	          
+FadeIn	white					.3
+	スペルビア	<Off>						第一次魔王獣戦役の折だ\n私以外の七罪王はとある策略により\n魔王獣と直面することになった
+	スペルビア	<Off>						強大な戦力として期待されたが、\n結果は敗北
+	スペルビア	<Off>						再起の希望として\nルークスリアだけを逃がし\n残りは力の大半を魔王獣に奪われた
+	スペルビア	<Off>						わずかな力を残し落ち延びた彼らは\n幻想王に使役され、\n辛酸を舐めることとなる
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	旧図書館					0
+	スペルビア	通常				0
+FadeIn	white					.3
+	スペルビア	悔しい						そこから長き時が経ち\nルークスリアの助力もあって\n力を取り戻すに至るが<dash=2>
+	スペルビア	悔しい						その後はキミも知っての通りだ\nルークスリアも含めて\n司書王に囚われる結果となった
+CharacterOff
+	ディーア	目閉じ2						ルゥは……いや、今はいい
+	ディーア	怒り2						それよりも、\n今の話におかしいところがあるぞ！\nお前はこうして自由の身だ
+	ディーア	怒り2						高慢のお前がいる以上、\n七罪の力は揃っては<dash=2>
+CharacterOff
+	スペルビア	怪しい						ああ、私の力の全ては\n最初から彼女の手元にある
+	スペルビア	怪しい						ロルリアンレットが\nお伽噺の悪役だった七罪王の実在に\n確信を持ったのもそれが原因だ
+CharacterOff
+	ディーア	絶望2						なんで!?
+CharacterOff
+	スペルビア	悔しい						だから数分では語りきれん！\n二度も言わせるな
+CharacterOff
+	ディーア	悔しい2						最初に言うべきことだろ!!
+CharacterOff
+	スペルビア	悔しい						とにかくだ
+	スペルビア	怪しい						司書王の側近は\n魔導生命のスペシャリスト
+	スペルビア	怪しい						魔力結晶体からでも\n七罪王の力を抽出できるだろう
+	スペルビア	悔しい						そうすれば七罪が束ねられ\n煉獄王が再臨することになる
+CharacterOff
+	ディーア	怒り2						煉獄王セイメイと煉獄剣……\nその伝承の起源である\n煉獄王ヴェルガトゥリオのことか
+CharacterOff
+	スペルビア	怪しい						そうだ、全歴史の罪を背負い\n全歴史の罪を救う者
+	スペルビア	怪しい						かつては私も七罪の全てを束ねて\n罪の極点へと到達した
+	スペルビア	にやけ						当時の英雄によって\n歴史を改変するという悲願は\n阻止されたがな
+CharacterOff
+	ディーア	怒り2						歴史の改変……\n煉獄王にはそれほどの力が……
+CharacterOff
+StopBgm
+	スペルビア	にやけ						そして今、\n司書王も七罪を束ねようとしている\nつまり彼女は魔界を<dash=2>
+Bgm	作戦会議
+CharacterOff
+	ディーア	怒り2						だけどロールお嬢様は\n魔界に害を為したりしない
+CharacterOff
+	スペルビア	通常						騙し討ちをされた男の言葉とは\n思えないな？
+CharacterOff
+	ディーア	怒り2						策略家なのは否定しないが、\n彼女はこれまで魔界を守ってきた
+	ディーア	怒り2						敵対したとしても、\nオレはその想いを信じている
+CharacterOff
+	スペルビア	通常						司書王を信じる……か
+	スペルビア	通常						では、私をどうする？\n私を信用して仲間とできるか？
+CharacterOff
+	ディーア	怒り2						お前にも\n語っていない目的があるんだろう？
+CharacterOff
+	スペルビア	にやけ						否定はしない
+CharacterOff
+	ディーア	目閉じ2						腹の内を見せない男だけど、\nお前は高慢の王として\n異常なプライドを持っている
+	ディーア	怒り2						イーラとの戦いでも助けてくれた\nその誇り高さを信じよう
+	ディーア	怒り2						ロール様の元まで案内してくれ\nあの人の真意を確かめたい
+CharacterOff
+	スペルビア	通常						よかろう魔剣使い\nキミが愛する魔剣を取り戻すまでは\n私が味方となってやる
+	スペルビア	通常						では急ぐぞ\nあの司書王は千里眼を持っている
+	スペルビア	にやけ						それに……\nどこで誰が聞き耳を立てているか\nわからないからな
+FadeOut	black					.5
+CharacterOff						0
+Wait						1
+	ルークスリア	どや				2
+FadeIn	black					.5
+	ルークスリア	どや						スペルビア……\nぁたしに気がついているわね？
+	ルークスリア	どや						何を考えているかわからないけど\n誘ってるなら、乗ってあげる
+	ルークスリア	どや						色欲の王らしく、ね
+	ルークスリア	本気						待っていなさい……七罪の同胞
+FadeOut	black					.5
+CharacterOff						0
+Bg	旧図書館					0
+	黒櫃:Blaze	通常	p3b			0
+	白櫃	驚き	p7			0
+Wait						2
+Param	character_grayout=true
+FadeIn	black					.5
+	白櫃	驚き						はぁ……\nぜんぜんお話についていけないよぉ
+	白櫃	驚き						でもこれって\nすごく大切な戦いになるんだよね？
+	白櫃	悲しい						なのに私みたいな\nただの箱が役に立てるのかな……
+	黒櫃:Blaze	驚き						本当にどうしたんだ、白櫃？\nいつものキミらしくないぞ？
+	黒櫃:Blaze	驚き						明るく、奇想天外で、奇跡的！\nそれが生きた魔神を宿した\n白き櫃だろう？
+	白櫃	悲しい						う、うん……でも、\n私の中にいるイキタマ人さんは
+Param	character_grayout=false
+StopBgm
+Bg	黒背景					1
+CharacterOff	黒櫃:Blaze					.5
+	白櫃=ロスト？	笑い	p7b			1
+Tween	白櫃=ロスト？	MoveBy	x=-300 time=1				NoWait
+Wait						1
+Bgm	絶望
+	白櫃=ロスト？	笑い						なぁに？\n私のことがこわいのぉ？
+Shake	白櫃		x=5				NoWait
+	白櫃	驚き						っ………!!
+	白櫃=ロスト？	笑い						私みたいな魔神が中にいるのが\n怖くて仕方ないんだぁ♪
+	白櫃=ロスト？	笑い						また黒櫃を壊すかもって♪
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洋館					0
+	インウィディア		3_3			0
+	白櫃=ロスト	通常	1_3			0
+FadeIn	white					.3
+	白櫃=ロスト	通常						でも、しょうがないよねぇ？\nみんな、よわよわだったし……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	旧図書館					0
+	白櫃	驚き	p7			0
+	黒櫃:Blaze	驚き	p3b			0
+FadeIn	white					.3
+Param	character_grayout=true
+Bgm	作戦会議
+	黒櫃:Blaze	驚き						白櫃？\nどうしたんだい？
+	白櫃	驚き						い、いま！\n白櫃=ロストちゃんが<dash=2>
+	白櫃	驚き						……っ、気のせい、なのかな？
+	白櫃	悲しい						ごめんね、\nこれから戦いになるのに\nこんなの<dash=2>
+	黒櫃:Blaze	驚き						何を言っているんだ！\nこの天才黒櫃:Blazeが白櫃を\n迷惑に思うはずがない！
+	黒櫃:Blaze	笑い						キミはボクの愛しい妹だ！\n今すぐぎゅっと<dash=2>
+	黒櫃:Blaze	通常						じゃなくて……！
+	黒櫃:Blaze	通常						白櫃は優しい
+	黒櫃:Blaze	通常						いつでも自分にできることを探し\nボクやマスターの役に立ちたいと\n想ってくれている
+	黒櫃:Blaze	通常						それは白櫃のかけがえのない長所だ
+	黒櫃:Blaze	笑い						そんな優しい白櫃を守るのは\n姉であり天才的な兵器となった\n黒櫃:Blazeに他ならない
+	黒櫃:Blaze	笑い						安心してくれ\nキミはボクの助けになっているし\n白櫃はボクが守ってみせる♪
+	白櫃	悲しい						黒櫃ちゃん……
+CharacterOff
+	スペルビア	通常	p3b
+	ディーア	通常2	p7
+	スペルビア	通常						キミの魔剣は\nずいぶんと人間らしいな
+	ディーア	怪しい2						おかしいか？
+	スペルビア	通常						興味深いと思っただけだ
+	スペルビア	通常						異なる種である者同士が\nこうして関係を深める様はな
+	ディーア	怪しい2						高慢だぞ\nそういう上から目線の物言いは
+	スペルビア	通常						私を誰だと思っている？
+	ディーア	笑い2						ふふ……たしかに
+	スペルビア	にやけ						そろそろ準備しろ、魔剣使い\nここを抜ければ司書王まで直ぐだ
+	スペルビア	にやけ						そして、\nそこには必ず<dash=2>
+StopBgm						0
+Se	ドア開く
+FadeOut	white					2
+CharacterOff						0
+Bg	魔術空間					0
+	ディーア	驚き2				0
+Se	チャージ
+FadeIn	white					2
+	ディーア	驚き2						これは……？
+	？？？？		1_2					一度目は幻想王ノア、\n二度目は七罪王と白櫃=ロスト
+	？？？？							二度にわたる襲撃の\n教訓を活かして完成させた\n世界を分かつ檻でございます
+Bgm	勇者バトル
+CharacterOff
+	ププッピマリー	佇む						お待ちしておりました、\n<param=name>様
+	ププッピマリー	佇む						そして<dash=2>
+	ププッピマリー	佇む						七罪王……\n高慢のスペルビア、様
+CharacterOff
+	スペルビア	にやけ						ふふふ♪
+CharacterOff
+	ディーア	怒り2						マリーさん、\nオレはロール様に話があるんです\nここから出してくれませんか？
+CharacterOff
+	ププッピマリー	佇む						お断りいたします
+	ププッピマリー	佇む						先に通すなという\nお嬢様からのご指示ですので
+	ププッピマリー	佇む						お嬢様の了承がなければ\nこちらでお待ちいただくより\n他にございません
+CharacterOff
+	ディーア	目閉じ2						その理由をマリーさんから\n教えていただくことは？
+CharacterOff
+	ププッピマリー	佇む						お嬢様の重要な秘密を、\nメイドである私が明かすなど\n万死に値します
+CharacterOff
+	ディーア	悔しい2						だとしても……！
+	ディーア	怒り2						前に戦ったときは、\n二人がかりであなたを倒したけど\n今のオレはあの時より何倍も強い
+	ディーア	悔しい2						あなたを怪我させたくないんだ
+CharacterOff
+	ププッピマリー	通常						それはどうでしょう？
+	ププッピマリー	通常						ご自身の勝利が揺るぎないものと\nお考えのようですが
+	ププッピマリー	通常						お忘れですか？\nお持ちになった強大なる兵器を\n誰が開発したのかを
+CharacterOff
+	ディーア	驚き2						……まさか!?
+CharacterOff
+	ププッピマリー	通常						そう<dash=2>
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景
+Param	character_grayout=false
+	イベントスチル1048N	N1	エフェクト裏			0
+	黒背景		エフェクト表			0
+Se	火2
+Tween	黒背景	MoveBy	x=1500 time=2				NoWait
+	ププッピマリー	<Off>						<color=red>GET READY:BLAZE</color>\nでございます
+Se	火3
+	イベントスチル1048N	N2				2
+Wait						2.5
+ImageEffectOff	SpriteCamera	Bloom
+FadeOut	white					1
+CharacterOff						0
+Bg	魔術空間					0
+	ププッピマリー	通常	2_2			0
+	グラムB幻想体	通常	1_2_b			0
+Bgm	魔獣バトル
+FadeIn	white					1
+	ププッピマリー	通常						世界図書館メイド長、\n《<ruby=マスター･オブ･ライブラリアン>世界図書館司書</ruby>》\nプリエラ=ププッピマリー
+	ププッピマリー	通常						お嬢様に害を為すならば\n敵となりましょう
+CharacterOff
+	ディーア	悔しい2						グラム、ブレイズの……\n幻想体……!?
+If	isdebug==true
+CharacterOff
+Jump	*E_1130_04
+EndIf
+EndScenario
+
+# E_1130_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔獣バトル
+Bg	魔術空間					0
+Param	character_grayout=false
+	ディーア	悔しい2				0
+	          
+FadeIn	black					1
+	ディーア	悔しい2						はあ……はあ……はあ……！
+	ディーア	悔しい2						今の幻想体……！\nグラム:Blazeと性能は同じだった
+CharacterOff
+	ププッピマリー	通常						Blaze魔剣の戦いは全て、\n世界図書館で解析しております
+	ププッピマリー	通常						これも\n開発者権限というものでございます
+CharacterOff
+	黒櫃:Blaze	通常						だがマスターなしの幻想体など\nこの天才黒櫃:Blazeの相手じゃない
+	黒櫃:Blaze	ニヤリ						事実として\n本物の魔剣グラム:Blazeの力は\nこんなものではないぞ！
+CharacterOff
+	ディーア	怒り2						ああ、そうだ……！\nマリーさん今度こそ<dash=2>
+CharacterOff
+	スペルビア	怪しい						いや、まだだ……！
+CharacterOff
+	ディーア	驚き2						スペルビア……？
+CharacterOff
+	スペルビア	悔しい						この私はプリエラという女を\nよく熟知している
+CharacterOff
+	ププッピマリー	通常						…………
+CharacterOff
+	スペルビア	悔しい						長き時を生き、\nあらゆる王の元を渡り歩いた\n魔導生命研究の極地
+	スペルビア	悔しい						一欠片の支配欲でもあれば、\nとうに王となっていた稀代の天才
+	スペルビア	悔しい						彼女の切り札が、\nこの程度で終わるわけがない
+CharacterOff
+	ププッピマリー	通常						よく分かっていらっしゃいますね\nスペルビア様
+	ププッピマリー	通常						主を守るためならば、\nメイドは命を賭すもの
+	ププッピマリー	通常						まして舞台は\n我らが世界図書館……
+StopBgm
+	ププッピマリー	通常						次はこのような\n催しをお楽しみください
+Se	チャージ
+	オーラ赤		エフェクト表			1
+Wait						.5
+Bgm	魔王バトル
+CharacterOff	ププッピマリー
+	包平B幻想体					1
+Wait						2
+CharacterOff	包平B幻想体
+	クラレントB幻想体					1
+Wait						2
+CharacterOff	クラレントB幻想体
+	黒櫃B幻想体					1
+Wait						2
+CharacterOff
+	ディーア	驚き2						そんな!?\nこんなにBlaze魔剣の幻想体を？
+CharacterOff
+	白櫃	驚き						黒櫃:Blazeちゃんのまで!?
+CharacterOff
+	黒櫃:Blaze	驚き						これは……！
+CharacterOff
+	ププッピマリー	通常						先程は司書たちの命を\n救ってくださり感謝しております
+	ププッピマリー	佇む						そして私としても\n敵対は本意ではございません
+	ププッピマリー	佇む						いかがでしょう？\nここで引いてはくれませんか？
+	ププッピマリー	佇む						お嬢様の願いが叶うまで、\n少しだけお待ちいただきたいのです
+	ププッピマリー	佇む						リディ様には\n傷一つ残さないことを誓います
+	ププッピマリー	佇む						ですから、どうか……
+CharacterOff
+	ディーア	目閉じ2						それはできません
+	ディーア	怒り2						オレを納得させたかったら\nお嬢様から直接説明してください
+CharacterOff
+	ププッピマリー	佇む						では、お覚悟を
+CharacterOff
+	ディーア	本気2						リディを助け出す！\n突破するぞ、黒櫃:Blaze!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1130_05
+EndIf
+EndScenario
+
+# E_1130_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔獣バトル
+Bg	魔術空間					0
+Param	character_grayout=false
+	黒櫃:Blaze	怒り				0
+	          
+FadeIn	black					1
+Shake	黒櫃:Blaze		x=3				NoWait
+	黒櫃:Blaze	怒り						ぐぅううう……！
+	黒櫃:Blaze	怒り						幻想体と言えど、\nBlazeがこれほど集まると
+	黒櫃:Blaze	怒り						いくらボクが天才でも\nどうにもならないかもね……
+CharacterOff
+	ププッピマリー	佇む						最後の警告です\nどうぞお引きください
+	ププッピマリー	佇む						黒櫃:Blaze様は限界を迎えています\nこれ以上戦えば<dash=2>
+CharacterOff
+	ディーア	悔しい2						でも……！
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	ディーア	驚き2						っ……この魔力は！\nリディになにかが……？
+FadeOut	black					.3
+CharacterOff						0
+Bg	研究所B					0
+	司書王ロルリアンレット	怪しいH				0
+FadeIn	black					.3
+	司書王ロルリアンレット	怪しいH						…………\n許してくれとは言わないわ\nあなたにも、あなたの主にも
+	司書王ロルリアンレット	怪しいH						でも私には\n生涯を賭けて求めたものがある\n答えを知りたい問いがある
+	司書王ロルリアンレット	怪しいH						いくら自分勝手だと罵られようと\nあなたたちに憎まれようと
+	司書王ロルリアンレット	苦しい悪い顔H						どうしても私は……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	魔術空間					0
+	スペルビア	悔しい				0
+FadeIn	black					.3
+	スペルビア	悔しい						七罪王の伝承の抽出が\n始まったようだな
+CharacterOff
+	ディーア	悔しい2						もう時間がない……！
+CharacterOff
+	白櫃	悲しい						どうしよう、どうしよう……！
+	白櫃	悲しい						マスターさんと\n黒櫃:Blazeちゃんを助けないと
+	白櫃	悲しい						私もなにか力にならないと……！
+StopBgm
+Param	character_grayout=false
+Bg	黒背景					1
+	白櫃=ロスト？	笑い	p5b			1
+Tween	白櫃=ロスト？	MoveBy	x=-200 time=1				NoWait
+Wait						1
+	白櫃=ロスト？	笑い						なら、\nいい方法があるよぉ♪
+Bgm	絶望
+	白櫃	驚き						……え？
+	白櫃=ロスト？	笑い						白櫃の箱を開けちゃえばいいの♪
+	白櫃=ロスト？	笑い						そうすれば\n私がぜーんぶ壊してあげる
+	白櫃=ロスト？	笑い						あなたを傷つけるもの、\nその全てを
+CharacterOff	白櫃=ロスト？					1
+Bg	魔術空間					1
+	白櫃	悲しい						箱を開ければ……
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	白櫃	悲しい						私にももっと戦う力が……
+CharacterOff
+	ディーア	驚き2						白櫃……!?
+	ディーア	悔しい2						これは魔神の……！
+CharacterOff
+	ププッピマリー	佇む						目標を麒麟円文螺鈿白櫃へ\n魔神を表に出してはなりません
+CharacterOff
+	黒櫃B幻想体
+Se	チャージ
+Wait						1
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	闇3
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(紫)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	魔術空間					0
+CharacterOff						0
+	白櫃	悲しい
+Tween	白櫃	PunchPosition	y=10				NoWait
+	白櫃	悲しい						っ……！
+	黒櫃:Blaze	怒り	画面外_右
+Tween	黒櫃:Blaze	MoveBy	x=-500 time=1				NoWait
+	黒櫃:Blaze	怒り						白櫃……!!
+ImageEffectOff	SpriteCamera	MotionBlur
+StopBgm
+Se	光3
+Se	闇3
+FadeOut	white					.5
+CharacterOff						0
+	白櫃	悲しい				0
+Wait						3
+FadeIn	white					.5
+Bgm	神秘
+	白櫃	驚き				1		あれ、わたし……？
+CharacterOff
+	黒櫃:Blaze	黒
+Shake	黒櫃:Blaze		x=3				NoWait
+	黒櫃:Blaze	黒						言っただろう？\nボクがキミを守るって……
+CharacterOff
+	白櫃	驚き						黒櫃ちゃん……!!
+StopSe
+If	isdebug==true
+CharacterOff
+Jump	*E_1130_06
+EndIf
+EndScenario
+
+# E_1130_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	魔術空間					0
+Param	character_grayout=false
+	ディーア	悔しい2				0
+	          
+FadeIn	black					1
+	ディーア	悔しい2						黒櫃:Blaze……!!
+CharacterOff
+	白櫃	驚き						どうして……\nなんで私なんて助けたの？
+Shake	白櫃		x=3				NoWait
+	白櫃	悲しい						私はなんの役にも立てない魔剣で\n最弱のただの箱なのに
+	白櫃	悲しい						あの時も……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洋館					0
+	黒櫃	破損悔しい	2_3_b			0
+	          					0
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia				0
+Bg	魔術空間					0
+	白櫃	悲しい				0
+FadeIn	white					.3
+	白櫃	悲しい						私、すぐにやられちゃって\n黒櫃ちゃんを守れなかった……！
+	白櫃	悲しい						今もそうだよ
+	白櫃	悲しい						自分の力もちゃんと使えない\n役立たずの箱で
+	白櫃	悲しい						なのに\n黒櫃ちゃんに迷惑ばかり<dash=2>
+StopBgm
+CharacterOff
+	黒櫃:Blaze	黒						ハハハ……\nそろそろ怒るよ、白櫃？
+Bgm	凱旋
+	黒櫃:Blaze	黒						キミはダメな魔剣じゃない\nただの最弱の箱でもない
+	黒櫃:Blaze	黒						このボクの妹なんだ
+	黒櫃:Blaze	黒						大切な妹を守るのに\n理由なんていらないじゃないか
+CharacterOff
+	白櫃	驚き						そんなの……私だって……
+	白櫃	悲しい						私だって同じだよ……！
+	白櫃	悲しい						なんにもできない箱だけど、\n戦いも下手な魔剣だけど
+	白櫃	悲しい						マスターさんと黒櫃ちゃんのことを\n守りたい……！
+	白櫃	悲しい						みんなのことが大好きだから……！
+	白櫃	悲しい						なのに、\n私の中のイキタマ人さんは\n黒櫃ちゃんを傷つけて
+CharacterOff
+	黒櫃:Blaze	黒						やっぱり優しい子だね、白櫃は
+	黒櫃:Blaze	黒						だったらそんな白櫃に\nてんさ……いや変態の姉から\nアドバイスをあげよう
+CharacterOff
+	白櫃	驚き						……え？
+CharacterOff
+	黒櫃:Blaze	黒						戦うだけが強さじゃない
+	黒櫃:Blaze	黒						キミの武器は、その優しさだ
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	山岳A					0
+	白櫃=ロスト	笑い				0
+	          		1_2
+FadeIn	white					.3
+	黒櫃:Blaze	<Off>						キミの中の魔神は\nやさしいキミを守りたいから\n周りに攻撃的にもなるけど
+	黒櫃:Blaze	<Off>						逆にキミのためなら\nどんなことでも力を貸してくれる
+	黒櫃:Blaze	<Off>						イメージするんだ\nキミが一番にしたいこと、願いを
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	魔術空間					0
+	黒櫃:Blaze	黒				0
+FadeIn	white					.3
+	黒櫃:Blaze	黒						大丈夫……信じて\nキミはこのボクの妹なんだから
+Se	倒れる
+Tween	黒櫃:Blaze	MoveBy	y=-100 time=1				NoWait
+CharacterOff	黒櫃:Blaze					1
+Wait						.5
+CharacterOff
+	白櫃	驚き						黒櫃ちゃん……！
+CharacterOff
+	ディーア	怒り2						大丈夫、\n魔核は傷ついていない
+	ディーア	怒り2						手加減してくれたんですね、\nマリーさん
+CharacterOff
+	ププッピマリー	佇む						言ったはずです\n敵対は本意ではないと
+	ププッピマリー	佇む						ですがこれ以上戦うというなら\n容赦はできません
+	ププッピマリー	佇む						さあ、どうなさいますか？
+CharacterOff
+	ディーア	怒り2						白櫃……\nオレもお前の力を信じる
+CharacterOff
+	白櫃	驚き						マスターさん……
+CharacterOff
+	ディーア	通常2						でもそれは、\n相手を倒せっていう意味じゃない
+	ディーア	通常2						優しいお前なら\nオレたちのことを助けてくれるって\n信じているんだ
+	ディーア	笑い2						自信を持ってくれ\nお前も他のみんなと同じように\n魔界を救ったオレの魔剣だ
+CharacterOff
+	白櫃	驚き						マスターさんも、\n私の力を信じてくれてる……
+	白櫃	悲しい						私は自分がわからないけれど\nマスターさんと黒櫃ちゃんのことは\n信じられる……
+	白櫃	悲しい						私の中のイキタマ人さん……
+	白櫃	悲しい						私の……したいこと
+StopBgm
+Se	チャージ
+FadeOut	white					2
+CharacterOff						0
+Bg	白背景					0
+	白櫃=ロスト？	通常				0
+FadeIn	white					1
+Bgm	神秘
+	白櫃=ロスト？	通常						ふふふ♪\nやっと私に会いに来たんだ♪
+	白櫃=ロスト？	通常						この魔神を外に出す気になった？
+CharacterOff
+	白櫃	悲しい						違うよ……！
+	白櫃	通常						イキタマ人さん！\nお願い！ 力を貸してほしいの!!
+	白櫃	通常						周りを壊すんじゃない\nマスターさんたちを助ける力を
+CharacterOff
+	白櫃=ロスト？	通常						なんで？\n私が守りたいのは白櫃だけだよ？
+	白櫃=ロスト？	通常						この<ruby=ロスト>兵器</ruby>みたいに\n敵を倒せば守ってあげられるのに
+CharacterOff
+	白櫃	悲しい						ううん、\nそれは守られたことにならないよ
+	白櫃	悲しい						だって\n黒櫃ちゃんもマスターさんもいないと\n私は幸せじゃない
+	白櫃	嬉しい						私を守って、信じてくれる\nみんながいるから私なんだよ
+	白櫃	嬉しい						だから私も\nみんなに幸せでいてほしい
+	白櫃	嬉しい						みんなを守れる白い櫃でいたい
+	白櫃	嬉しい						それが……私のやりたいこと！
+CharacterOff
+	白櫃=ロスト？	通常						そっか……\nやっと決められたんだね？
+CharacterOff
+	白櫃	通常						ごめんね、イキタマ人さん\nずっとあなたを怖がっちゃって
+	白櫃	通常						今日も危ないことが起こるって\n教えてくれてたんだよね？
+	白櫃	嬉しい						もう大丈夫\n何ができるかはまだわからないけど\n何がしたいかはわかったから
+CharacterOff
+	白櫃=ロスト？	通常						はあ……\n敵を壊す方がずっと楽なのに
+CharacterOff	白櫃=ロスト？					1
+	白櫃武器	通常	p5b			1
+Wait						.5
+	魔神	<Off>						でもそんなあなただからこそ\n魔神を包み込める
+	魔神	<Off>						私はこんなに安らかでいられる
+	魔神	<Off>						麒麟円文螺鈿白櫃\n……魔神もあなたを守るよ
+StopBgm
+CharacterOff
+	白櫃	嬉しい						ありがとう、イキタマ人さん♪
+CharacterOff
+	白櫃武器	通常	p5b			1
+	魔神	<Off>						生きた魔神、ね？
+Se	魔法陣を展開
+FadeOut	white					2
+CharacterOff						0
+	白櫃	拡大魔王胸	エフェクト表			0
+	          
+Bgm	タイトル
+FadeIn	white					.3
+	白櫃	拡大魔王胸						もうこれ以上、\n黒櫃ちゃんを傷つけさせない
+FadeOut	white					.3
+CharacterOff						0
+	白櫃	拡大魔王通常	エフェクト表			0
+	          
+FadeIn	white					.3
+	白櫃	拡大魔王通常						マスターさんから\nリディちゃんを奪わせない
+FadeOut	white					.3
+Bg	魔術空間					0
+CharacterOff						0
+	白櫃	魔王通常				0
+	          
+FadeIn	white					.3
+	白櫃	魔王通常						私がみんなを守ります！
+	白櫃	魔王通常						黒櫃ちゃんみたいに\n変態じゃない私だけど……！
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	魔王通常						私ができることで、\nみんなの役に立つんです!!
+Se	魔力回復
+Se	フォーン
+FadeOut	green					.2
+CharacterOff						0
+	黒櫃:Blaze	驚き				0
+	オーラ青		エフェクト表			0
+FadeIn	green					.2
+Tween	黒櫃:Blaze	PunchPosition	y=30				NoWait
+	黒櫃:Blaze	驚き						だから白櫃!!\n変態じゃなくて天才だと何度も！
+CharacterOff	オーラ青					1
+	黒櫃:Blaze	驚き						さっきは発破をかけるために\nあ・え・て！ 言い間違えたけれど
+	黒櫃:Blaze	驚き						ボクは天才だ!!
+	黒櫃:Blaze	通常						って……おや？\n体がずいぶんと楽だね？
+CharacterOff
+	ディーア	驚き2						黒櫃:Blaze……？\nお前の傷が直って……
+CharacterOff
+	黒櫃:Blaze	通常						優しき魔神の魔力を\n味方を癒やすために発揮する
+	黒櫃:Blaze	通常						それが白櫃の魔王装の力！\nこれならば:Blazeの幻想体が\nいくらいても大丈夫！
+	黒櫃:Blaze	笑い						白櫃と一緒ならば\nこの天才はいつまででも戦える！
+CharacterOff
+	白櫃	魔王通常						えへへ♪\n二人で変態な戦いをしようね♪
+CharacterOff
+	ディーア	汗2						……元の調子に戻ったなぁ
+CharacterOff
+	ププッピマリー	佇む						では……\nまだ戦われるのですね？
+CharacterOff
+	ディーア	怒り2						はい、ロール様から話を聞いて\nリディを取り戻すまで\nオレたちはあきらめません
+	ディーア	本気2						行きます、マリーさん!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1130_07
+EndIf
+EndScenario
+
+# E_1130_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	凱旋
+Bg	魔術空間					0
+Param	character_grayout=false
+	黒櫃:Blaze	通常				0
+	          
+FadeIn	black					1
+	黒櫃:Blaze	通常						見たか！\n天才が天才たる所以を！
+CharacterOff
+	白櫃	魔王通常						黒櫃:Blazeちゃん！\nすごく変態な戦いだったね♪
+CharacterOff
+	黒櫃:Blaze	ニヤリ						ふっ……\nもうみなまで言うまい……
+CharacterOff
+	ププッピマリー	佇む						お見事でした、\n<param=name>様
+	ププッピマリー	佇む						私の……負けのようですね……
+CharacterOff
+	ディーア	目閉じ2						もう、休んでください
+	ディーア	怒り2						いくらマリーさんでも\nBlaze幻想体の並行顕現なんて神業は\n負担が大きいはずだ
+	ディーア	怒り2						そこまでして守りたい\nロール様の目的ってなんですか？
+CharacterOff
+	ププッピマリー	佇む						私からは言えません
+	ププッピマリー	佇む						……言う資格などないのです
+CharacterOff
+	ディーア	驚き2						資格がない？
+CharacterOff
+	ププッピマリー	佇む						…………\nもうこの檻も保たないでしょう
+	ププッピマリー	佇む						ここを出れば\nロールお嬢様がいる研究室です
+	ププッピマリー	佇む						お嬢様のことを\nよろしくお願いいたします
+CharacterOff
+	ディーア	怒り2						はい……
+StopBgm
+CharacterOff
+	スペルビア	にやけ						では行くぞ、魔剣使い
+	スペルビア	怪しい						…………
+Bgm	神秘
+Bg	研究所A					1
+	ププッピマリー	佇む						これで、良い……
+Se	回想
+FadeOut	white					1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	天界					0
+	天上王セト	通常				0
+Wait						1
+FadeIn	white					1
+	天上王セト	通常						七罪王研究の第一人者\nプリエラ=ププッピマリー
+	天上王セト	通常						キミを魔導生命研究所の\n主任研究員として迎え入れたい
+	天上王セト	通常						人員も設備も資金も力も、\nこの天上王セトが全て用意しよう
+	天上王セト	通常						長き探求の成果を\nキミの理想を実現させるといい
+	天上王セト	通常						代わりに求める対価はただ一つ
+	天上王セト	通常						七罪王という\n強大な武力を使役する器を\n創り出すんだ
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	黒背景					0
+	天上王セト	<Off>						いかなる罪を犯してでも
+FadeOut	white					.3
+CharacterOff						0
+Bg	研究所A					0
+	ププッピマリー	佇む				0
+FadeIn	white					.3
+	ププッピマリー	佇む						罪……\n全ては私の罪から始まったのです
+	ププッピマリー	佇む						だから<dash=2>
+If	isdebug==true
+CharacterOff
+Jump	*E_1130_08
+EndIf
+EndScenario
+
+# E_1130_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	研究所B					0
+Param	character_grayout=false
+	司書王ロルリアンレット	通常H				2
+Se	ドア開く
+FadeIn	black					1
+	司書王ロルリアンレット	通常H						ようこそ、魔剣使い
+	司書王ロルリアンレット	ニヤリH						でもレディの部屋に入るのに\nノックもなしだなんて無粋じゃない？
+CharacterOff
+	ディーア	通常2						パーティーに招待してくれたのは\nあなたですよ、ロール様
+	ディーア	通常2						ホストなんだから\nゲストの多少の無礼は許してください
+	ディーア	通常2						それにせっかく招いてもらったのに\n食事もしてないし\nパーティーを楽しめていないんです
+	ディーア	怒り2						だから、\nリディを返してもらいます
+	ディーア	怒り2						そして\n事情を説明してください
+	ディーア	怒り2						またあなたと一緒に\nパーティーを楽しむために
+CharacterOff
+	司書王ロルリアンレット	ニヤリH						そのために\n七罪王と手を組むとはね
+	司書王ロルリアンレット	怪しいH						高慢のスペルビア\n世界図書館の周囲で感じた\n微小な反応は貴方ね？
+CharacterOff
+	スペルビア	にやけ						お初にお目にかかる、\n司書王ロルリアンレット
+CharacterOff
+	司書王ロルリアンレット	ニヤリH						歓迎してあげる\n貴方の存在が私に七罪王復活を\n確信させてくれたもの
+	司書王ロルリアンレット	怪しいH						でも、\n貴方自身には興味はないの\n既にその罪は全能中枢の中にある
+	司書王ロルリアンレット	ニヤリH						そして<dash=2>
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	司書王ロルリアンレット	ニヤリH						こうして七罪の全てを\n手中に収めることができたのだから
+CharacterOff
+	リディ	黒2
+	リディ	黒2						…………
+CharacterOff
+	ディーア	本気2						リディ……!!
+CharacterOff
+	司書王ロルリアンレット	通常H						眠っているだけよ\n慌てる必要はないわ
+	司書王ロルリアンレット	通常H						むしろ感謝してほしいわ\n私はこの子に治療を施したのだから
+CharacterOff
+	ディーア	悔しい2						治療……？
+CharacterOff
+	司書王ロルリアンレット	通常H						七罪王は\n罪の伝承を核とした魔力結晶体
+	司書王ロルリアンレット	通常H						魔剣少女と酷似した構造だから\n魔剣殺しブリジットは彼らの伝承を\n喰らうことができたの
+	司書王ロルリアンレット	通常H						だけどあくまで似ているだけ、\n魔剣ではない七罪王の伝承は\nこの子にとって異物
+	司書王ロルリアンレット	ニヤリH						いずれその権能に\n悪影響を及ぼしていたはずよ
+CharacterOff
+	ディーア	怒り2						それが本当なら感謝します
+	ディーア	本気2						だけどそれ以上に！\nなんで説明してくれないんですか!!
+	ディーア	本気2						本当にリディや魔界のためなら\nオレだって協力した!!
+	ディーア	怒り2						なのにロール様は\nまた全てを隠して独断に走ったんだ\n秘密主義にも程がある!!
+CharacterOff
+	司書王ロルリアンレット	怒りH						あなたに全てを打ち明けて\n私になんの得があるというの？
+	司書王ロルリアンレット	怒りH						王は孤高であり、\n孤独を許容しなければいけない
+	司書王ロルリアンレット	怒りH						誰かの助けを必要とするのは\n弱さよ
+	司書王ロルリアンレット	ニヤリH						そして、あなたは甘いわ
+	司書王ロルリアンレット	ニヤリH						この私に\n正面から向かってくるなんてね
+Se	光2
+	オーラ青		エフェクト表
+	魔法陣3	青	effect_a			.5
+Tween	魔法陣3	ScaleBy	x=7 y=7
+Wait						1
+CharacterOff
+	ディーア	悔しい2
+Se	フォーン
+	結界		エフェクト表			1
+Wait						.5
+	ディーア	悔しい2						これは……!!
+CharacterOff
+	司書王ロルリアンレット	ニヤリH						七罪王を封印したのと同じ\n空間の位相を分断する結界よ
+	司書王ロルリアンレット	ニヤリH						あなたでも破るのに\n数分は必要となるでしょう
+	司書王ロルリアンレット	通常H						あと少しで終わるのだから\n大人しくしていなさい
+	司書王ロルリアンレット	悪い顔H						<ruby=ライブラリ>《全能中枢》</ruby>、<ruby=アンロック>魔剣解放</ruby>
+Se	光1
+FadeOut	white					.3
+	オーラ青		エフェクト表			1
+FadeIn	white					.3
+	司書王ロルリアンレット	悪い顔H						七罪王の伝承を取り込み、\n<ruby=スキャニング>全球走査</ruby>を開始しなさい
+CharacterOff
+	結界		エフェクト裏
+	スペルビア	悔しい						どうする魔剣使い、\n司書王は七罪を取り込むつもりだ！
+CharacterOff	スペルビア
+	ディーア	悔しい2						くっ……!!
+	ディーア	本気2						そんなに\nお母さんが読んだ絵本を\n探したいんですか!?
+CharacterOff
+	オーラ青		エフェクト表
+	司書王ロルリアンレット	怒りH
+	司書王ロルリアンレット	怒りH						っ…………！
+	司書王ロルリアンレット	怒りH						あのニート、\nよくもペラペラと……！
+	司書王ロルリアンレット	怒りH						あなたにわかるわけがない\n私は……!!
+StopBgm
+Bg	黒背景					0
+CharacterOff						0
+	？？？？	<Off>						動揺したわね、司書王？
+Bgm	魔獣バトル
+FadeOut	black					.2
+CharacterOff						0
+Bg	研究所B					0
+	オーラ青		エフェクト表			0
+	司書王ロルリアンレット	苦しい悪い顔H				0
+FadeIn	black					.2
+Se	闇1
+CharacterOff	オーラ青					1
+	オーラ赤		エフェクト表2			1
+	司書王ロルリアンレット	苦しい悪い顔H						ぐっ……!?
+Shake	司書王ロルリアンレット		x=2				NoWait
+	司書王ロルリアンレット	苦しい悪い顔H						こ、これは、なに……？
+CharacterOff
+	ルークスリア	本気						苦しいでしょう？\nそれが罪の味というものよ……
+	ルークスリア	本気						七罪は全て揃わなければ\n意味がない……
+	ルークスリア	本気						不完全なまま取り込めば、\nその身を蝕む毒となる
+CharacterOff
+	ディーア	驚き2						ルークスリア!?\nやっぱり捕まっていなかったのか!?
+CharacterOff
+	ルークスリア	本気						ぁたしはどこにでもいられる
+	ルークスリア	本気						色欲は命の根源だから\nどんな生命にもぁたしの罪はある
+	ルークスリア	本気						司書王が手に入れたぁたしも\nぁたしであって、ぁたしではないの
+	ルークスリア	どや						でも、ちょっとの違和感も\n感じなかったでしょ？
+	ルークスリア	どや						誰だって苦労して手に入れた宝を\n偽物だなんて疑いたくないもの
+CharacterOff
+	オーラ赤		エフェクト表2
+	司書王ロルリアンレット	苦しい悪い顔H
+	司書王ロルリアンレット	苦しい悪い顔H						うぅっ……ああっ……！
+CharacterOff
+	ルークスリア	どや						七罪王を侮ったわね？\n終わりよ、仲間は返して<dash=2>
+CharacterOff
+	オーラ赤		エフェクト表2
+	司書王ロルリアンレット	苦しい悪い顔H						そう、終わりね……
+StopBgm
+	司書王ロルリアンレット	ニヤリH						貴女が
+Bgm	ボスバトル
+Se	光3
+	オーラ青		エフェクト表			1
+Wait						1
+FadeOut	white					.1
+CharacterOff						0
+	カバー上部		カバー上部
+	イベントスチル32902	B	エフェクト裏
+Wait						.1
+FadeIn	white					.1
+Se	光1
+Bg	黒背景					1
+	イベントスチル32902	A				2
+Wait						2
+Tween	イベントスチル32902	MoveTo	y=-1536 time=3				NoWait
+Wait						1.5
+CharacterOff	イベントスチル32902					0
+Se	光3
+	イベントスチル32903		エフェクト表			0
+Tween	イベントスチル32903	MoveBy	y=4200 time=5				NoWait
+Se	光2
+Wait						.2
+Se	光2
+Wait						.2
+Se	光2
+Wait						.2
+Se	光2
+Wait						.2
+Se	光2
+Wait						1
+FadeOut	white					2
+CharacterOff						0
+Bg	研究所B					0
+	ルークスリア	本気				0
+ImageEffectOff	SpriteCamera	Bloom
+Wait						2
+FadeIn	white					.5
+Se	闇3
+Se	火3
+Shake	ルークスリア		x=4				NoWait
+Se	ぐちゃ
+	血痕A		エフェクト表			0
+	ルークスリア	本気						があっ…………!?
+CharacterOff
+	司書王ロルリアンレット	ニヤリH						私は司書王ロルリアンレット\n世界図書館を統べる知恵の王よ？
+	司書王ロルリアンレット	ドヤ顔H						わかっていたわ\n貴女という狡猾な王が罠を張るくらい\nそして<dash=2>
+	司書王ロルリアンレット	ドヤ顔H						最後にはこうして\n本当の姿を現すことも
+	司書王ロルリアンレット	怒りH						そしてもう一つ\n訂正させてもらうわよ
+	司書王ロルリアンレット	怒りH						かつて世界を終焉寸前までに導いた\n魔王の中の魔王、真なる覇者
+	司書王ロルリアンレット	悪い顔H						偉大なる七罪王を侮ったことなど\n一度たりともないわ
+CharacterOff
+	黒グラデーション		エフェクト表2
+	ルークスリア	本気						そん、な……
+Se	闇1
+	オーラ紫		エフェクト表			1
+	ルークスリア	本気						あぁあああああああああ!!
+CharacterOff
+	司書王ロルリアンレット	ドヤ顔H						これで\n本物の色欲もこの手の中に
+CharacterOff
+	結界		エフェクト裏
+	ディーア	本気2						ロール様……！
+CharacterOff
+	司書王ロルリアンレット	怒りH						だから慌て過ぎだと言っているのよ
+	司書王ロルリアンレット	怒りH						勘違いしているようだけど\n私は煉獄の王になるつもりなんてない
+	司書王ロルリアンレット	怒りH						私が七罪王を求めたのは\n全能中枢を覚醒させるための触媒
+	司書王ロルリアンレット	怒りH						七罪王の伝承が全能中枢を\n活性化させることは\n高慢の伝承の存在からわかっていた
+	司書王ロルリアンレット	怒りH						そして七罪が融合した力、煉獄王と\n煉獄王が行おうとした歴史のやり直し
+	司書王ロルリアンレット	悪い顔H						それを応用することで\n全能中枢は\n魔界の歴史全てを解析できる
+	司書王ロルリアンレット	悪い顔H						こんな風にね♪
+Se	チャージ
+	オーラ青		エフェクト表			1
+	司書王ロルリアンレット	怒りH						魔界が記録した全ての命、伝承……\nその中にはきっと……!!
+	司書王ロルリアンレット	怒りH						きっと私の母<dash=4>
+StopBgm
+	？？？？	<Off>	1_2					<color=blue>ママ……</color>
+	司書王ロルリアンレット	驚きH						……え？
+CharacterOff
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去					0
+Wait						.1
+Bg	山岳B_過去					0
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去					0
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去					0
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部					0
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C					0
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去					0
+Wait						.1
+Bg	山岳B_過去					0
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去					0
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia				0
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale				0
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C					0
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	black					.1
+Wait						1
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+Bg	研究所B					0
+	          
+Wait						3
+FadeIn	black					.1
+Se	マイクノイズ	TRUE
+	サンタピュア	ロール						ママは……どこ？
+	？？？？	<Off>	1_2					そんなものお前にはいない\n■13■■■■■
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	黒背景					0
+	司書王ロルリアンレット	<Off>						これは……だれの記憶なの？
+	司書王ロルリアンレット	<Off>						だって、私……\nこんなの知らない……！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	研究所B					0
+	          
+FadeIn	white					.3
+	狂気的な声	<Off>						成功しましたよ、主任！
+	■■■■■■■	<Off>						ああ……\nあなたは私の夢の結晶……
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	黒背景					0
+	司書王ロルリアンレット	<Off>						この声は<dash=4>
+	司書王ロルリアンレット	<Off>						…………マリー？
+	司書王ロルリアンレット	<Off>						ああ……そんな……！\nそんなの嘘よ……!!
+StopSe
+Bgm	魔獣バトル
+FadeOut	white					1
+CharacterOff						0
+Bg	研究所B					0
+	司書王ロルリアンレット	黒H				0
+	オーラ紫		エフェクト表			1
+FadeIn	white					1
+Se	闇1
+	司書王ロルリアンレット	黒H						■■■■■■■■■■■■■■!!
+CharacterOff
+	結界		エフェクト裏
+	ディーア	驚き2						ロール様っ!?
+CharacterOff	結界					.5
+	ディーア	驚き2						結界が解けた！\n早く助けないと……！
+CharacterOff
+Se	走る
+	ププッピマリー	佇む				1		お嬢様……！
+CharacterOff
+	ディーア	悔しい2						マリーさん！\nロール様の様子が……！
+CharacterOff
+	ププッピマリー	佇む						わかっております！
+	ププッピマリー	佇む						高慢の王スペルビア\nその身に高慢の罪を取り戻しなさい！
+CharacterOff
+	スペルビア	通常						元よりそのつもりだ
+CharacterOff
+	ディーア	驚き2						マリーさんとスペルビア!?\nこれはいったい……？
+CharacterOff
+	スペルビア	怪しい						たしかに\nロルリアンレットは叡智の王だ
+	スペルビア	怪しい						この魔界で\n彼女以上の知恵を持つ者などいない
+	スペルビア	怪しい						だが司書王が\n唯一知らない事実がある
+	スペルビア	通常						その躰が\n七罪王の伝承を受け入れるために\n最適化されているということ
+	スペルビア	通常						彼女が動力源としてのみ\n使おうとしても\n罪の伝承はそれを許さない
+	スペルビア	通常						水が流れ落ちるように\nロルリアンレットという器に収まり\n罪の王へと変貌させるだろう
+Se	チャージ
+	オーラ青		エフェクト表			1
+	スペルビア	にやけ						だが、そこで私の存在だ\nこの身も七罪の全てを受け入れた器
+	スペルビア	にやけ						私が余剰分を受け持てば、\nロルリアンレットのままで\n七罪を制御できるからな
+	スペルビア	にやけ						さあ、我が罪と力を返して<dash=2>
+StopBgm
+Se	闇1
+CharacterOff	オーラ青					1
+	スペルビア	驚き						………………これは？
+Bgm	図書館
+CharacterOff
+	ププッピマリー	佇む						スペルビア……？
+CharacterOff
+	スペルビア	通常						ククク……これは驚いた
+	スペルビア	通常						高慢さえも、\n私の元に戻ろうとしないとは
+	スペルビア	にやけ						誇るがいい、\nプリエラ=ププッピマリー
+	スペルビア	にやけ						たしかにお前が創り出したのは\n究極の生命だ
+	スペルビア	にやけ						七罪の伝承に\nこの私以上に適合するとはな!!
+CharacterOff
+	ププッピマリー	佇む						お嬢様……!!
+FadeOut	white					1
+CharacterOff						0
+Bg	白背景					0
+	司書王ロルリアンレット	黒H				0
+FadeIn	white					1
+Se	マイクノイズ	TRUE
+	司書王ロルリアンレット	黒H						そういう、ことだったのね……\nだったら私は<dash=2>
+	司書王ロルリアンレット	黒H						この世界はなんて罪深いの？
+StopSe
+FadeOut	white					.3
+CharacterOff						0
+Bg	研究所B					0
+	スペルビア	怪しい				0
+FadeIn	white					.3
+	スペルビア	怪しい						進化限界を迎えた高慢たる私は\n《世界のやり直し》を求めて\n汎ゆる罪を清める煉獄王となった
+	スペルビア	悔しい						だがロルリアンレットは違う
+	スペルビア	悔しい						その命は神すら見捨てる\n知識欲と非道徳の果てに生まれ
+	スペルビア	悔しい						器自身も禁忌を知りたがり\n罪を求めて破滅へと向かった
+	スペルビア	悔しい						罪の根源、知恵を求める大逆\n人が生まれながらに抱く罪……\n『原罪』に導かれるように
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+Se	心拍	TRUE
+	スペルビア	<Off>						高慢の王として\nその誕生を祝福してやろう
+	スペルビア	<Off>						原罪の王よ
+	イベントロゴ1130		エフェクト表			3
+Wait						3
+	イベントロゴ1130							<color=blue>BreakLord×BlazeEnd\n　　　　　　　　To Be Continued……</color>
+If	isdebug==true
+CharacterOff
+Jump	*E_1130_01
+EndIf
+EndScenario

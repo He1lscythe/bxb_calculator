@@ -1,0 +1,2090 @@
+# SQ1210102_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="伝説のまんじゅう 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	市街地A
+Bgm	平和
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	通常	2_3
+	リディ	笑い_もち_笑い	3_3					ヤッホー\nマダムおばさん、こんにちは！		2001-06
+	マダム	通常	1_3					リディちゃん！\n相変わらず、いつも元気ねー		9999-00
+	ディーア	笑い
+	マダム							そういえば、ちょっと聞いておくれよ\nさっき港で聞いた話なんだけどね		3001-08
+	マダム							伝説のまんじゅう…\n<color=mk2impo>魔導まんじゅう</color>\nって、聞いた事あるかしら？
+	マダム							何でも近くの遺跡から、\nレシピが見つかったらしいのよ
+	ディーア	驚き						近くの遺跡？\nというと…\nリーマ封鎖遺跡ですか？		9999-00
+	マダム							そうよー\n封鎖されていなかったら、\nあたしがチャチャっと行くんだけどねー
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き						…!?\nマダムおばさん…\nそれ、とっても危ないよ！		2001-09
+	マダム							心配してくれてありがと、リディちゃん\nあたしも危ないのは分かっているわ\nだから諦めるしかないかなって…		9999-00
+	マダム							でも、残念だわ\nそのおまんじゅう…\nとっても美味しいって噂らしいの
+	ディーア	通常						そうなんですか…\nそれはとても残念です\nできれば食べてみたかったですよねー
+Tween	リディ	PunchPosition	y=50
+	リディ	通常_もち_誇る						マスター!!\n私、<color=mk2impo>魔導まんじゅう</color>食べてみたい		2001-13
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						え？\n何を言っているんだ、リディ？\nさっきの話を聞いて…		9999-00
+	リディ	怒り_もち_キラン						食ーべーたーいぃー!!
+Tween	リディ	PunchPosition	y=50
+FadeOut	red					.1
+Se	ガチャ回す
+FadeIn	red					.1
+Tween	ディーア	PunchPosition	x=100 time=1
+	ディーア	悔しい						ぐ…うぅ…く、首を絞めないで…く…れ…わ、分かった\n行く、遺跡に…行くから…
+	リディ	嬉しい						ほんと!?\nやったー！\nさっすがマスター♪		2001-04
+Se	走る
+Tween	リディ	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	リディ
+	マダム							大丈夫かい？
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+Tween	ディーア	PunchPosition	y=50
+	ディーア	悔しい						げほっ、げほっ…\nだ、大丈夫です、ご心配なく…\nそれに…
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	マダム
+CharacterOff	ディーア
+CharacterOff	wipe
+FadeIn	black					.5
+	リディ	嬉しい_もち_笑い	3_3					わーい♪		2001-06
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+Tween	リディ	PunchPosition	y=50
+	リディ	嬉しい_もち_笑い	2_3					やったー♪		2001-39
+Tween	リディ	MoveTo	x=-180 time=1			Add
+Wait						1
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_笑い	1_3					おまんじゅうー♪		2001-05
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	リディ
+CharacterOff	wipe
+FadeIn	black					.5
+	マダム		1_3
+	ディーア	笑い	2_3					あーなったリディを\n止めることは出来ませんから\n危なくなったら、すぐに逃げますよ		9999-00
+	マダム							そうなのかい？\nそれじゃあ…お願いしようかしらね\n気を付けて行っておいで		3001-10
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	マダム
+CharacterOff	ディーア
+CharacterOff	wipe
+Bg	遺跡B
+Bgm	作戦会議
+FadeIn	black					.5
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	通常	3_3					ねぇマスター\nここって、なんで封鎖されてるの？\n分かりやすく、飽きない程度で教えてー		2001-11
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						飽きないようにか…\nむ、難しい注文だな\nまーいくつか理由があるんだけど…		9999-00
+	ディーア	通常						1つはリディも知っての通り、\n《冥獣》の目撃情報があったからだ
+	リディ	笑い						フムフム…
+	ディーア							だけど、主な理由は…多分、\nダフィートは世界の中央にあって、\n貿易都市として栄えている
+	ディーア							だから人々の行き来が多くて、\n調査やら何かで、今の文化が…\n劣化してしまうのを防ぐためだ
+	ディーア	笑い						…って聞いたぞ\nだから現状維持のため、\n封鎖されたって話だ
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い						ふーん、なるほどぉ\nよく分かんない事がわかった★
+	ディーア	怪しい						……\n分かってもらって\n何よりだよ…
+	リディ	驚き_もち						あ、マスター！\n入口にモンスターが、たくさんいるよ\nワラワラと		2001-09
+	ディーア	驚き						マジか!?
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	リディ
+CharacterOff	ディーア
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+Wait						.5
+	カニ型モンスター	通常	1_3
+	カニ型モンスター 	通常	3_3
+	カエル型闇モンスター	通常	2_3					ガァァーーー!!!
+Wait						1.5
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	カニ型モンスター
+CharacterOff	カニ型モンスター 
+CharacterOff	カエル型闇モンスター
+CharacterOff	wipe
+FadeIn	black					.5
+Wait						.5
+	ディーア	通常	2_3
+	リディ	通常_もち	3_3
+	ディーア	笑い						それじゃあ、\n<color=mk2impo>魔導まんじゅう</color>のため…\n行くかっ!!
+	リディ	嬉しい_もち						おぉー！\nフルボッコにしちゃって、マスター♪
+EndScenario
+
+# SQ1210102_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="伝説のまんじゅう 2"
+ShowMessageWindow
+Bg	遺跡B
+Bgm	バトル
+	カエル型闇モンスター	通常	2_3
+	ディーア		3_3					はあーーっ!!
+Tween	ディーア	MoveTo	x=0 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	ディーア	通常	2_3
+CharacterOff	カエル型闇モンスター
+Se	敵殺
+Wait						.5
+Bgm	コメディ
+	ディーア	笑い						よし、決まった！
+	リディ	通常_もち_驚き	3_3					さすがだね、マスター！\n…あれ？\nあれれ？		2001-06
+	リディ	驚き_もち_驚き涙						もしかして私たち…\nいつの間にか、かなり\n奥まで進んじゃった？
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア	怪しい	1_3					…あ、本当だ\n思ったよりも深い遺跡だったな…\nまぁ、複雑な遺跡じゃなくて助かったよ		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	笑い						来るまで一本道だったから、\n迷わず進めるな\n帰る時にはラクが出来る♪
+	ディーア	怪しい						ちなみに、\nリディは今まで\n通った道を覚えてる？
+	リディ	笑い_もち_誇る						全然、覚えてません♪		2001-06
+	ディーア	笑い						ですよねー\nこれっぽっちも\n期待してなかったけど		9999-00
+	ディーア							それにしても…\nここまで進んで来たけど、\n宝箱の一つもないなんて珍しいな？
+	リディ	通常						<color=mk2wisp>「最初の遺跡には\n必ず宝箱が置いてあって、\n序盤はそれによく助けられるものだ」</color>
+	リディ	驚き_もち_笑い						って、よく言ったもんね\nところでマスター<color=mk2wisp>「序盤」</color>って何？		2001-11
+FadeOut	yellow					.1
+Se	キラン
+FadeIn	yellow					.1
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい	2_3					…んん？\nオヤオヤー、リディ\n今奥の方で何か光らなかったか？		9999-00
+	リディ	怒り_もち						あー！\n話を逸らしたー!!		2001-07
+	ディーア	笑い						いや、確かに光ったぞ…\nきっと、宝箱だ！\n念願のレシピとご対面だぞっと！		9999-00
+Tween	リディ	MoveTo	x=-180 time=1			Add
+Wait						1
+	リディ	嬉しい_もち_キラン	1_3					おっさきにー♪		2001-38
+Se	走る
+Tween	リディ	MoveTo	x=-600 time=2			Add
+Wait						1
+CharacterOff	リディ
+	ディーア	驚き						あーーーー！\nずるいぞ、リディーーー!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	wipe
+Bgm	コメディ
+FadeIn	black					.5
+	リディ	通常	画面外_右
+	妖精型火モンスター	通常	1_3
+Se	走る
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	笑い_もち_誇る	2_3					私の勝っちー♪\nもうー遅いよマスター★		2001-18
+	ディーア	悔しい	3_3					はぁはぁ…\n僅差で負けてしまった…		9999-00
+Tween	リディ	ScaleBy	x=-1 time=0.5
+	リディ	嬉しい						じゃあ約束通り、\nリーマに戻ったら私のために！\nアイスを買ってきてね
+	リディ							もちろん、最高級アイス\n<color=lightblue>「コペンハーゲンダット」</color>を\n希望します♪
+Tween	リディ	PunchPosition	y=50
+	リディ	照れ_もち_キラン						色々な種類があるけど、\nやっぱりバニラが\n一番美味しいよねー♪		2001-05
+	ディーア	驚き						そんな約束をした覚えはないぞ！\n全く…いつも勝手に\n約束を作るんだから		9999-00
+	妖精型火モンスター	通常						…………
+	ディーア	通常						あ……
+Tween	リディ	ScaleBy	x=-1 time=0.5
+	リディ	笑い_もち_驚き						うわー♪\nあなたがこの遺跡の\n主さんですか？		2001-09
+	リディ							初めまして、リディと言います\nこっちはたまに毒を吐くけど、\n基本的には私に従順なマスターです
+	妖精型火モンスター	通常						キィ？		9999-00
+	リディ	嬉しい_もち_驚き涙						あ、握手ですね！\nなんて礼儀正しい…
+	ディーア							リディ、危ないっ!!
+FadeOut	red					.1
+Se	斬1
+	リディ	驚き_もち	3_3
+	ディーア	悔しい	2_3
+FadeIn	red					.1
+	リディ	驚き_もち
+	ディーア	怒り						相手をよく見ろ！\nどう見ても敵だろ!!
+	リディ	怒り_もち_キラン						マスタぁー\n外見で判断したら、人生は損するって\nマダムおばさんが…		2001-13
+Se	火1
+Tween	妖精型火モンスター	PunchPosition	y=50
+	妖精型火モンスター	通常						ギィィィ…！
+	ディーア	通常						分かった！\n話は後で聞いてやる\n今はこいつを倒す事に専念するぞ！		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	通常_もち						はーい\n分っかりましたー
+EndScenario
+
+# SQ1210102_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="伝説のまんじゅう 3"
+ShowMessageWindow
+Bg	市街地A
+Bgm	平和
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+	リディ	笑い_もち_笑い	3_3					マダムおばさーん!!\nただいまー！
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	通常	2_3					今、戻りました
+	マダム	通常	1_3					あらあら、おかえりなさい\n大丈夫？\n怪我とかしていない？
+	リディ	照れ_もち_キラン						ありがとー\nうん、平気だよ		2001-04
+	ディーア	笑い						予想していたよりも\n簡単でした		9999-00
+	リディ	驚き_もち						えぇー？\n嘘だー
+	リディ	通常_もち_怒り						宝箱を見つけて、喜んだのも束の間…\nそれを開ける鍵を\n見つけてなかったから…
+	リディ	通常_もち						<color=mk2wisp>「メンドウだー！」</color>\n…って言って、無理やり\nこじ開けたのは…
+Tween	リディ	PunchPosition	y=50
+	リディ							簡単って言うの、マスター？\nねーえ、マースーター？		2001-12
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						なっ!?\nリ、リディだって、\n遺跡の入り口まで来た時に…		9999-00
+	ディーア	悔しい						<color=mk2wisp>「なんか怖い…引き返そうよ、マスター\nきっと超危険なモンスターが\nたっくさん、いるよー」</color>
+	ディーア	怪しい						とか言って、全然動こうと\nしなかったじゃないか！
+	リディ	驚き_もち_笑い涙						そ、そんな事…言ってないもん！\nもちだって、聞いてないよねー？
+	マダム							まぁまぁまぁ…\n二人とも落ち着いて\n大変だったのは十分、伝わったから
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						…店先で騒いでしまって\nスミマセン
+	リディ	怒り_もち_キラン						ぷうーーー!!\n私、何も悪くないもん		2001-07
+Tween	リディ	PunchPosition	y=50
+	ディーア							とにかく…\nこれが遺跡の奥にあったレシピです		9999-00
+Se	N取得
+	マダム							ありがとうねぇ\nとても助かったわ\n早速、見てみるわね		3001-01
+Tween	マダム	PunchPosition	y=50
+	マダム							あら、これ…
+	ディーア	驚き						何かありましたか？		9999-00
+	リディ	通常_もち						何なに？\n私にも見せて！
+Se	回避
+	ディーア	悔しい	3_3
+	リディ	驚き_もち_驚き涙	2_3					…読めない…		2001-23
+	ディーア	怪しい						すごく…\n字が汚いですね
+	マダム							うーん、困ったわね
+	マダム							でも…これ、きっとこういう意味よね？\nうんうん、よーく見てみると…\n読める字がいくつかあるわね
+	マダム							全部、解読するには\n時間が掛かりそうだけど…\nなんとか、なりそうだわ！
+	ディーア	驚き						本当ですか？
+	マダム							ええ！\n期待してて♪
+	マダム							すぐには難しいけれど…いつか必ず\n<color=mk2impo>魔導まんじゅう</color>を作ってみるわ
+	マダム							完成した時には、\n必ず食べにきてね？
+	リディ	嬉しい						行く！\n絶対、食べに行きます!!		2001-04
+Tween	リディ	PunchPosition	y=50
+	マダム							リディちゃんたちが頑張ったからね\n今度はおばさんが頑張る番よ\n楽しみにしてて♪		9999-00
+EndScenario
+
+# SQ1210103_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="不気味な物音 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	遺跡A
+Bgm	コメディ
+	ヘムヘム	通常	2_3					やぁ、よく来てくれた\n私は光の勇者ヘムヘム！
+	ヘムヘム							<color=mk2name>魔剣対策特務機関EDEN</color>より、\nこの遺跡の守備という…\n大役を仰せつかっている！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ヘムヘム
+CharacterOff	wipe
+FadeIn	black					.5
+Wait						.5
+	ディーア	通常	2_3
+	リディ	通常	3_3					あのー
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+FadeIn	black					.5
+	ヘムヘム	通常	2_3					あーみなまで言うな\n君たちの疑問は大体、分かっている\n私は大役を授かった身…
+	ヘムヘム							勇者王シドウ様…\n<color=mk2wisp>（の秘書官を務める知人の親戚の妹）</color>\nから直々にな！
+Tween	ヘムヘム	PunchPosition	y=50
+	ヘムヘム							故に私はここから…\n易々と動くわけには\nいかないのだ
+Tween	ヘムヘム	MoveTo	x=-180 time=1			Add
+Wait						1
+	ヘムヘム		1_3					だからこそ！\n今回は特別に、君たちのような\n魔剣使いに遺跡の調査を依頼したい！		3007-08
+	ヘムヘム							調べて欲しいのはたった1つ…\n遺跡の外から聞こえてくる\n原因不明の音を調べて欲しい！
+Tween	ヘムヘム	MoveTo	x=0 time=1			Add
+Wait						1
+	ヘムヘム		2_3					何かが起きてしまってからでは遅い\nそれに…このまま噂が流れ続け、\nそれを聞いた人々が…
+Tween	ヘムヘム	ScaleBy	x=-1 time=0.5
+	ヘムヘム							<color=mk2wisp>「ダフィートに行くの怖くね？」\n「だな、止めようぜ」</color>
+Tween	ヘムヘム	PunchPosition	y=50
+	ヘムヘム							と、なってしまっては\n資金問題に大きな影響が出てしまう！
+Tween	ヘムヘム	MoveTo	x=-180 time=1			Add
+Wait						1
+	ヘムヘム		1_3					そうなる前に！\n一刻も早く!!\n対策を打たねばならんのだよ！
+	ヘムヘム							では、諸君等の健闘を祈る\n後程、調査結果を\n報告してくれたまえ
+	ヘムヘム							私は報告書を作成せねばならないのでね\nこれで失礼させてもらうよ…\nいい結果を待っている
+Se	走る
+Tween	ヘムヘム	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	ヘムヘム
+Wait						1
+	リディ	通常_もち_怒り	3_3					……
+	ディーア	怪しい	2_3					一言もしゃべってないのに、\n行ってしまった…
+	リディ	通常_もち						マスター、どうする？		2001-13
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア							どうするも何も…\n依頼を受けた事に\nなっているみたいだし		9999-00
+	ディーア							調査しないと、\n後々もっとメンドウな事に\nなりそうじゃないか？
+	リディ	通常_もち_キラン						私のカンだと、あーいう人って\n何かあると、その事をずーっと\n根に持ってて…
+	リディ							ネチネチと嫌味を言い続ける\nタイプだと思う
+	ディーア	驚き						マジかー\n面倒くさいな…
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	遺跡B
+Bgm	作戦会議
+FadeIn	black					.5
+FadeOut	white					.1
+Se	台風
+FadeIn	white					.1
+Wait						1
+	リディ	驚き_もち_驚き	3_3					わっ、わっ…\nマスター、すっごい風だよー		2001-09
+	ディーア	通常	2_3					リディはちっちゃいから、\n飛ばされないように気をつけてな\nちゃんと、もちの事も見てないと…		9999-00
+	リディ	怒り_もち						むぅ、マスター\nそれって、遠まわしに\n私の事バカにしてる？		2001-07
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	笑い						そんなわけないだろ？\n小さくて可愛いもちと\nリディを心から…心配してる		9999-00
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア		1_3					こうしている間にも強風が吹いたり、\nモンスターが出てくるかもしれない\n慎重に調査を始めるぞ
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り_もち_キラン						うーーー！\nやっぱりバカに\nされてる気がする!!
+EndScenario
+
+# SQ1210103_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="不気味な物音 2"
+ShowMessageWindow
+Bg	遺跡B
+Bgm	作戦会議
+	ディーア	通常	2_3
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+	リディ	通常_もち_怒り	3_3					そういえばマスター\nあの自称勇者の人は、なんで\n自分で調査しなかったのかな？		2001-11
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						報告書作成とか言ってたけど、\n本当かどうかも怪しいな？
+	リディ	笑い_もち_驚き						なんか、嘘っぽいよねー\n大方、風の音が怖くて…\n行きたくなかったー
+	リディ							とか、そんな感じじゃ\nないかなー？
+FadeOut	white					.1
+Se	台風
+FadeIn	white					.1
+	リディ	もち無し_嬉しい
+Se	ポップアウト
+	ディーア							風の音ねー\nいくら自称勇者でも…さすがに、\nそれはないと信じたいが…
+	リディ	もち無し						そうだよねー\nさすがにそれは…ないよねー\nうん、ないない♪
+	ディーア							…よし、ここで丁度半分だな\n特に何もないし…折り返して、\n遺跡の入口へ戻ろう
+	リディ							了ー解ー\nそれじゃあ、戻ろうマスター		2001-06
+Tween	リディ	PunchPosition	y=50
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	コメディ
+FadeIn	black					.5
+	リディ	もち無し_驚き	1_3					あれ？
+Tween	リディ	ScaleBy	x=-1 time=0.5
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	もち無し_驚き						あれれー？
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+	リディ	もち無し_驚き	3_3					もちがいなくなっちゃった…\nど、ど、ど…\nどうしようマスター!?		2001-08
+Se	回避
+	ディーア	怪しい	2_3
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	怪しい						落ち着け、リディ\n何処からいなくなったのか\n思い出すんだ！！		9999-00
+	リディ	もち無し						うん、分かった\nえぇーっと…さっきの休憩時間、\nすっごく、暇だったから…
+	リディ							身代金誘拐事件ごっこで、\nもちと一緒に遊んでた時には\nまだいたから…
+	ディーア	驚き						ちょっと待て、\nえっと身代…？\n何をしていたって？
+Tween	リディ	PunchPosition	y=50
+	リディ	もち無し_驚き						え？何って…\n身代金誘拐事件ごっこだよ\nこう、もちを人質役にして…
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	遺跡B_過去
+FadeIn	black					.5
+FadeOut	white					.1
+	リディ	通常_もち_驚き	1_3
+Tween	リディ	ScaleBy	x=-1 time=0.1			Add
+Se	台風
+FadeIn	white					.1
+	リディ							もち「もちもち…もちっ！」\n<color=mk2wisp>（ボクをこんな人気のないところへ\n　連れてきて…どうするの!?）</color>
+FadeOut	white					.1
+Se	回避
+CharacterOff	リディ
+FadeIn	white					.1
+	リディ	もち無し_笑い	3_3					リディ「ふっふっふっ\n　身代金の受け渡しは成功した…」		2001-05
+	リディ							リディ「用済みになったお前は…\n　誰にも見つからないように…\n　埋めてやるぅー」
+FadeOut	white					.1
+Se	回避
+CharacterOff	リディ
+	リディ	通常_もち_驚き	1_3
+Tween	リディ	ScaleBy	x=-1 time=0.1			Add
+FadeIn	white					.1
+	リディ							もち「もち!?」\n<color=mk2wisp>（ボクの心の隙間を!?）</color>
+Bg	遺跡B
+	リディ	もち無し	3_3
+	ディーア		2_3					はい、ストップ！
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+Tween	ディーア	PunchPosition	y=50
+	ディーア	怒り						余計な事は思い出さなくていいから、\nもちがいなくなった時の事だけを\n思い出して！
+	リディ	もち無し_驚き						ここからが盛り上がるところなのにえぇーっと…\nうぅーんと、あ…思い出した		2001-07
+Tween	リディ	PunchPosition	y=50
+	リディ	もち無し						マスターが\n<color=mk2wisp>「ここから折り返す」</color>って、\n言ってた時に…
+	リディ							強風が吹いだから…\nきっとあの時に\nいなくなったんだよ！
+	ディーア	通常						分かった\n……色々と言いたい事はあるが、\n今はもちを探しにいくぞ		9999-00
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	遺跡A
+Bgm	作戦会議
+FadeIn	black					.5
+FadeOut	white					.1
+Se	台風
+FadeIn	white					.1
+	リディ	もち無し_驚き	3_3					いた、マスター！\nもちがいたよ!!		2001-13
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	カニ型モンスター	通常	1_3					カァァァ!!
+	ディーア	通常	2_3					そうだねー\nついでにモンスターもいたな\nサクっと倒して、もちを救出するぞ！		9999-00
+	リディ	もち無し_怒り						待っててね、もち…\nすぐに助けてあげるから！
+EndScenario
+
+# SQ1210103_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="不気味な物音 3"
+ShowMessageWindow
+Bg	遺跡A
+Bgm	作戦会議
+	ディーア	通常	2_3
+	リディ	通常_もち_誇る	3_3
+	ヘムヘム		1_3					よく戻って来てくれた\nでは早速だが、\n調査結果を報告してくれたまえ
+	ディーア	怪しい						えぇーっと\nリーマ遺跡周辺の調査結果…
+	ディーア	通常						時々聞こえる不気味な物音は、\n<color=mk2impo>ただの強風</color>\nが原因でした
+	ヘムヘム							何…\n強風…だと…!?
+Tween	ヘムヘム	PunchPosition	y=50
+	ヘムヘム							バカな…あの\n<color=mk2wisp>ビュオオオオ</color>と、\n化け物のような唸り声が風だと!?		3007-06
+	ディーア	笑い						風でした
+	リディ	笑い_もち_笑い						ただの風だったよねー♪		2001-06
+	ヘムヘム							何を言ってるいるのだ、貴様等は…\n私を謀るのもいい加減に…		9999-00
+FadeOut	white					.1
+Se	台風
+FadeIn	white					.1
+Tween	ヘムヘム	PunchPosition	y=50
+	ヘムヘム							ききゅああああーっ!?
+Se	走る
+Tween	ヘムヘム	MoveTo	x=-600 time=0.5			Add
+Wait						.5
+CharacterOff	ヘムヘム
+	ディーア	驚き						あ、逃げた		9999-00
+	リディ	笑い_もち_誇る						涙を流しながら逃げたね\nよっぽど怖かったのかな？
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	コメディ
+FadeIn	black					.5
+	ヘムヘム	通常	画面外_左
+Se	走る
+Tween	ヘムヘム	MoveTo	x=-180 time=1			Add
+Wait						1
+	ヘムヘム		1_3					…
+Se	ポップアウト
+Tween	ヘムヘム	MoveTo	x=180 time=0.5			Add
+Wait						.5
+	ヘムヘム		3_3					……
+Se	ポップアウト
+Tween	ヘムヘム	MoveTo	x=0 time=0.5			Add
+Wait						.5
+	ヘムヘム		2_3					………
+Se	ポップアウト
+CharacterOff	ヘムヘム
+Wait						1
+	ディーア	通常	2_3
+	リディ	通常	3_3					周りをすっごいキョロキョロしながら、\n安全確認してる…例えるなら、\n石橋を叩いて確認する感じだね
+	ディーア	怪しい						いや、あれは…不安になって\nもう1回叩いて、念のため\nもう1度叩く…みたいな挙動だ
+	リディ	笑い_もち_笑い						そうやっても、\n恐る恐る渡っちゃう\nビビリさんってやつだね、マスター		2001-05
+	ディーア	通常						しぃっ！\nリディ、そういうことは\n思ってても口にしちゃいけない		9999-00
+	リディ	笑い						<color=mk2wisp>（この自称勇者さんは、\nビビリさんってやつだね）</color>
+	ディーア	驚き						こいつ、直接脳内に…!?
+	ヘムヘム	通常	画面外_左
+Se	走る
+Tween	ヘムヘム	MoveTo	x=-180 time=1			Add
+Wait						1
+	ヘムヘム		1_3					私の華麗なる完璧な見回りの結果、\n本当に問題がない事を確認した\n嘘偽りがない事を信じよう！		3007-01
+	ヘムヘム							私が作成したパーフェクトな報告書に、\n君たちの功績を追加する\nこれで…依頼は終了だ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ヘムヘム
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	市街地A
+Bgm	平和
+FadeIn	black					.5
+	リディ	通常	3_3					色々あったけど\n無事に終わって\n良かったね、マスター		2001-11
+	ディーア	笑い	2_3					ああ、そうだな\nそれにしても、\nあの勇者の叫び声は面白かったなー
+	リディ	驚き_もち_キラン						うん、私も初めて聞いたよ\n<color=mk2wisp>「ききゅぅぅぅーっ!?」</color>\nだっけ？		2001-06
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						あれ？\nそんなんだっけ？\nもっとこう…		9999-00
+	？？？	<Off>						ききゅああああーっ!?
+	ディーア	笑い						そうそう、そんな感じ\nリディ、上手だね
+	リディ	驚き_もち_驚き						マスター、\n今の私じゃない…		2001-13
+	ディーア	驚き						え？\nじゃあ今のホンモノ？\n…何かあったのかな？		9999-00
+	リディ	笑い_もち_誇る						どうせ、強風が吹いただけだよ\n気にしてもしょうがないよ、マスター♪
+	ディーア	通常						そうだな、\n俺たちが気にしてもしょうがない\n勇者だし、何とかするだろ
+	リディ	笑い						それじゃあ、約束通り！\n港で大人気のお菓子…
+Tween	リディ	PunchPosition	y=50
+	リディ							<color=mk2impo>「ギャロップポップコーン」</color>\n私に買ってー♪
+	ディーア	笑い						また勝手に約束を作って…\nでもまぁ、たまにはいっか
+EndScenario
+
+# SQ1210202_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="お菓子いりませんか 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	市街地A
+Bgm	平和
+	リディ	笑い_もち_笑い	3_3
+	ディーア	通常	2_3
+	マダム	通常	画面外_左
+Se	走る
+Tween	マダム	MoveTo	x=-180 time=1			Add
+Wait						1
+	マダム		1_3					おや、リディちゃんたちじゃない\nこれから何処か\nお出かけかい？
+	リディ	笑い_もち_笑い						あ、マダムおばさんだ！\nこんにちはー♪		2001-06
+	ディーア	通常						これから野暮用で\nちょっと、サクラ街道へ\n行こうかと思ってまして…		9999-00
+	マダム							それなら丁度いいわ！\nもし良かったら、そこにいる\nモンスターたちを倒してくれないかい？		3001-09
+	マダム							結構な数のモンスターがいてねー\n地方から来た商人や旅人、\n冒険者が襲われてるって話なのさ
+	リディ	通常_もち						市民を襲うなんて…ダメ、絶対！\nそんなモンスターは\nマスターがボッコボコにしてくれます！
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	悔しい						おい、リディ\nまだ依頼を受けるなんて\n俺は一言も…
+	マダム							報酬には人気のお菓子…\n<color=mk2impo>「白竜の恋人」</color>\n付けちゃうわよ！
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	通常						やります
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い						さっすが、マスター♪\n甘いものには目がない！		2001-09
+	ディーア	笑い						そのセリフ…\nリボンを添えてリディに返してあげる		9999-00
+	マダム							それじゃあ善は急げよ！\n早速サクラ街道へ\n行きましょうか
+	ディーア	驚き						えぇ!?\nマダムおばさんも来るのですか？
+	マダム							もちろんよー\nモンスターのせいで、\n今サクラ街道にお店は1つもないの
+Tween	マダム	PunchPosition	y=50
+	マダム							そこで美味しくて甘い、\n絶品お菓子を売れば、\n今月の売り上げは黒字で間違いなし!!
+Tween	リディ	PunchPosition	y=50
+	リディ	嬉しい_もち_キラン						マダムおばさん…\n輝いているね！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	マダム
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	草原A
+Bgm	コメディ
+FadeIn	black					.5
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+	リディ	通常	3_3					ここからサクラ街道だねー\nモンスターが出るかもしれないから、\n気を付けないとー		2001-06
+	マダム	通常	画面外_左
+Se	走る
+Tween	マダム	MoveTo	x=-180 time=1			Add
+Wait						1
+	マダム		1_3					今のところ、\n周りにモンスターはいないわね		9999-00
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	通常	2_3					おばさん、安心してください\n俺たちがいれば\n万が一の事もありませんから
+	マダム							それはとても心強いわねー\nでももし、モンスターに\n倒されちゃったとしても…
+	マダム							<color=mk2wisp>「力が欲しいか…？」</color>
+	マダム							と言って、うちのお菓子を\n口に突っ込めば…
+	マダム							倒れてる人も\n復活するんじゃないかしら？
+	ディーア	驚き						…それは、\nとどめというやつでは…？
+	マダム							それが口コミで広まって、\nうちのお菓子が更に売れちゃって…\nもう一石二鳥じゃない!?
+	リディ	笑い_もち_誇る						もしマスターが倒れたら、\n私が復活の呪文を唱えて、\n口に突っ込んであげる♪		2001-05
+	ディーア	怪しい						…そうならないように頑張るよ		9999-00
+	ディーア	驚き
+	リディ	驚き
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	マダム	ShakePosition	x=-10 y=-10 time=1			Add
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	モンスターの声	<Off>				0		<color=mk2wisp>\n　　……シャァァァァッ!!……</color>
+	ディーア	通常						モンスターだな…\nよし、俺が相手になってやる！
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い						マスター、フラグは立ってるよ！\nいつ負けても大丈夫だからねー♪		2001-11
+Tween	マダム	PunchPosition	y=50
+	マダム							頑張ってー♪		9999-00
+	ディーア	悔しい						おばさんまで\n期待した目でこっちを見てる…
+	ディーア	怒り						絶対に…負けてたまるかーっ!!
+EndScenario
+
+# SQ1210202_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="お菓子いりませんか 2"
+ShowMessageWindow
+Bg	草原A
+Bgm	コメディ
+	ディーア	通常	2_3
+	リディ	通常_もち_キラン	3_3					ねーえ、マースーター？\nそろそろモンスターに倒されても\nいいんじゃない？		2001-12
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						…待て\n開口一番、何を言っている!?		9999-00
+	リディ	通常						せっかく、マダムおばさんが\nいい前振りをしてくれたのに…
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+FadeIn	black					.5
+	マダム		2_3					はい、いらっしゃい！\nうちのお菓子を食べて、\n元気出してちょうだーい♪
+Wait						.5
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	マダム
+CharacterOff	wipe
+FadeIn	black					.5
+	リディ	驚き	3_3
+	ディーア	通常	2_3					まぁ、周辺のモンスターは\n俺が倒したからな
+	リディ	驚き_もち_怒り						マスターが…全然倒れないから、\nマダムおばさん…\n普通に商売を始めちゃったよ？		2001-07
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						おばさんはソレが、\n当初の目的だったよ!?		9999-00
+	ディーア	怪しい						リディ…お前…\nそんな事ばっかり、考えてたのか？
+	リディ	通常_もち						ソンナコトナイヨー
+	ディーア	驚き						嘘っぽい!?
+	リディ	通常_もち						うーんとね、例えばー\nさっき、おばさんが言ってた…
+	リディ	通常_もち_キラン						<color=mk2wisp>「力が欲しいか…？」</color>
+	リディ	通常_もち_誇る						ってセリフ…もっと、こう\n全身が震えるような感じに\n出来ないかなーって…
+	ディーア	怪しい						震えるような感じ…\nアレか？\n神秘的で神々しい、みたいな？
+	リディ	通常						イメージだとそんな風に\n問いかけてくるのって、\nだいたい渋いオジ様の声なんだけど…
+	リディ	照れ_もち_笑い涙						<color=mk2wisp>「ダメよーダメダメ！\nこんなとこで倒れちゃうなんてぇ\n力が欲しいの？だったらあげちゃう♪」</color>
+Tween	リディ	PunchPosition	y=50
+	リディ	通常_もち_笑い涙						ていう感じの\n『オカマさん』だったら…\nどうかな、マスター？		2001-06
+	ディーア	怒り						黙れぇーーー!!\nって、キレるよ！		9999-00
+	ディーア	悔しい						くぅ…途中まで、\nセクシーな女神様のような声で\n脳内再生されてたよ
+	リディ	驚き_もち_怒り						マスターはそういう女の人が好みなの？\nやっぱり、\n胸が大きい人の方が好みなの？
+	ディーア							おい、リディ…\nそもそも力を与えて、復活の件は\nどうなった？
+	リディ	笑い_もち_驚き						忘れてた♪		2001-05
+Wait						1
+FadeOut	white					.1
+FadeIn	white					.1
+	マダム	<Off>						きゃぁぁぁっ!!		3001-06
+	リディ	驚き_もち_驚き
+	ディーア	驚き						今のは…\nマダムおばさんの声だ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+	カエル型モンスター		1_3
+	カエル型闇モンスター		3_3
+	カエル型水モンスター		2_3					ゲッゲッゲッ!!!
+Wait						1.5
+CharacterOff	カエル型モンスター
+CharacterOff	カエル型闇モンスター
+CharacterOff	カエル型水モンスター
+	マダム		2_3					アンタたちが食べれるお菓子なんて…\n1つもないよっ!!\nこっちに来るんじゃない！！
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア		1_3
+	リディ	驚き_もち	3_3					マダムおばさん、大丈夫？
+Tween	マダム	ScaleBy	x=-1 time=0.5
+	マダム							あたしは平気…\nそれよりも、モンスターが出て\n逃げた人たちの方が心配だよ
+	ディーア	怒り						分かりました、とりあえず…\n俺たちから、離れないで下さい…\nすぐに終わらせますから！
+EndScenario
+
+# SQ1210202_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="お菓子いりませんか 3"
+ShowMessageWindow
+Bg	草原A
+Bgm	凱旋
+	ディーア	通常	2_3
+	リディ	通常_もち	3_3
+	マダム		1_3					ありがとうー♪\nリディちゃんたちのおかげで、\nおばさん、助かっちゃった		3001-01
+	ディーア	笑い						怪我がなくて何よりです\nそれではモンスターも倒したので、\n街へ戻りましょう		9999-00
+	マダム							そうね、大分稼がせてもらったし…\nこれでまた、新作のお菓子作りに\n挑戦、出来るわ♪
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						新しいお菓子!?\nおばさん、ソレ…私が一番初めに\n毒見してあげる♪		2001-05
+	ディーア	怪しい						毒見って…リディ…\n試食って言いなよ		9999-00
+	マダム							うふふ\n食べたらほっぺたが\n落ちちゃうかもしれないわよ？
+	リディ	嬉しい_もち_キラン						わぁーい♪\nそれじゃあマスター、私…\n先に行ってるからねー		2001-06
+Tween	リディ	PunchPosition	y=50
+Se	走る
+Tween	リディ	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	リディ
+	ディーア	怪しい						それにしても、サクラ街道に\nまだモンスターが大量発生するなんて…\n何かあったのかな？		9999-00
+	マダム							あたしも何か引っかかってるのよー\n今までこんな事って、\n一度もなかったのに…
+	ディーア	通常						<color=mk2name>EDEN</color>が何かしらの情報を\n掴んでいるかもしれませんね…\n落ち着いたら、一度聞いてみますね
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	マダム
+CharacterOff	wipe
+Bg	市街地A
+Bgm	平和
+FadeIn	black					.5
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	嬉しい_もち_誇る	2_3					一番乗りー♪		2001-18
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=180 time=1			Add
+Wait						1
+	ディーア	悔しい	3_3					はぁはぁ…\nリディ、飛ばしすぎだぞ		9999-00
+	マダム		1_3					あんなに喜んじゃって…\n新しいお菓子がよっぽど、\n楽しみなのね
+	マダム							街道も通りやすくなって、\nあたしの懐も温かくなって…\nいい1日だったわ♪
+	マダム							そうだ！\n頑張ったリディちゃんには、\n特別にコレをあげるわ
+	リディ	驚き						なぁに？\nこれ？		2001-23
+	マダム							あたしの店の人気お菓子\n<color=mk2impo>「ポテブレイピー」</color>よ\nまだ食べた事、なかったでしょ？		9999-00
+Se	N取得
+	リディ	笑い_もち_笑い						わーい♪\nすっごく甘い匂いがするー!!\nこれは、絶対に美味しいよ、マスター		2001-39
+	マダム							砂糖でコーディングしてあるから、\n気を付けて食べてね		9999-00
+	マダム							おばさんの知り合いで、\nソレを髪にくっつけたままギルドへ\n行っちゃった子がいてねー
+	マダム							幸いにもマスターが気付いて、\n笑われずに済んだんだけど…
+	ディーア	驚き						それは危険だ\nリディなら十分やりかねない！
+Tween	リディ	ScaleBy	x=-1 time=0.5
+	リディ	怒り_もち_驚き						もうーーー!!\nマスターのバカ！\n私はそこまでドジっ子じゃないもーん！		2001-07
+Se	走る
+Tween	リディ	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	リディ
+	マダム							あらあら…\nどっか行っちゃったわね		9999-00
+	ディーア	通常						やれやれ…\nそれじゃあ、おばさん\nまた何かありましたら、また来ますね
+	マダム							その時は、よろしく頼むよ！\nそれよりも…早くリディちゃんを\n迎えに行った方がいいわよ		3001-10
+	マダム							<color=mk2impo>「ポテブレイピー」</color>を食べてる途中で\n行っちゃったから…\nその…髪にくっついて…
+	ディーア	悔しい						リディ…あいつは、本当に…！\n期待を裏切らないな\n…おばさん、先に失礼します!!
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	ディーア	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	ディーア
+	ディーア	<Off>						こらーーーリディーーーー!!\n街中は走るなと、\n何回も言ってるだろーーー
+	リディ	<Off>						ふーーんだ!!\nマスターなんか、もちの角に\n頭をぶつけて死んじゃえーーー!!!!
+Wait						.5
+Tween	マダム	MoveTo	x=0 time=1			Add
+Wait						1
+	マダム		2_3					うふふ\nなんだかんだ言って、\n仲が良いわね…あの2人♪
+EndScenario
+
+# SQ1210203_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="幻のキノコ 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	草原A
+Bgm	コメディ
+	ディーア	通常	2_3					うーん、今のところ\nモンスターもいないなー
+	リディ	嬉しい	3_3					ねぇねぇ、マスター\n暇だから<color=mk2impo>『今』</color>って10回言ってー		2001-11
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						いま？わかった\n今、今、今、今、今、\n今、今、今、今、今…
+	リディ	照れ						私に…\nいつお菓子を\n買ってくれるの？		9999-00
+	ディーア	笑い						ひざ
+	リディ	驚き_もち_驚き						ひざぁっ!?		2001-09
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り_もち_驚き涙						違うよ、マスター！\nそこは<color=mk2impo>『今』</color>って言うの!!\nそれで私にお菓子を買うのーー!!		2001-07
+	のっこ	通常	1_3					あのぉ…		9999-00
+Tween	ディーア	MoveTo	x=180 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+Se	打1
+FadeIn	white					.1
+Se	サイドアウト
+CharacterOff	リディ
+	ディーア	驚き	3_3					うおぉ!?\nび、ビックリしたぁ…
+	のっこ							失礼したのこ\n突然で申し訳ないが、\n相談したいことがあるのこ…
+	のっこ							モンスターが跋扈するサクラ街道で\n呑気に惚気けている…さぞかし、\n強い魔剣使いとお見受けするのこ！
+	ディーア	照れ						何を言って…\nべ、別に惚気てなんか…
+	リディ	<Off>						マスターーーーー!!		2001-21
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=180 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+Se	打1
+FadeIn	white					.1
+CharacterOff	ディーア
+Se	サイドアウト
+	ディーア	<Off>						うわぉ!?
+	リディ	怒り_もち_驚き	3_3					全く、いきなり押すなんて酷いよー\nいくらマスターだからって、\n女の子にはもっと優しく接し…		2001-07
+	のっこ							…………		9999-00
+	リディ	笑い_もち_笑い						あ、初めまして…私リディっていいます\n依頼人の方ですか？\n頭の上に乗っているのはもちです
+	リディ	笑い_もち_驚き						柔らかくって、すっごく可愛いけど\n非常食ではないので、\n決して口にはしないで下さい♪		2001-06
+Se	回避
+	ディーア	悔しい	2_3					はぁっ、はぁ…\nあ、危ないところだった…		9999-00
+	ディーア							押された先が坂になってて…\n落ちた先にモンスターがいて…\n変な匂いがして…
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						ご苦労様でした♪		2001-18
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怒り						ホントだよ!!\n全く、もう…		9999-00
+	のっこ							…………
+Tween	ディーア	PunchPosition	y=50
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	照れ						あ、スミマセン\nのっこさん、話の続きを\n伺います
+	のっこ							すごく話しづらいけど、\n続けるのこ…\nサクラ街道に伝説のキノコ、
+	のっこ							<color=mk2impo>「あしなが」</color>が\nいるという、\n目撃情報を聞いたのこ
+Tween	のっこ	PunchPosition	y=50
+	のっこ							一目でいいから、\nどうしても見てみたいのこ!!\nおびき出して欲しいのこ！
+	ディーア	怪しい						伝説のキノコ…<color=mk2impo>「あしなが」</color>\n聞いたことないな
+	リディ	通常						うーん、私も知らないな…\nどちらかというと…きのこよりも、\nたけのこの方が私は好きかなぁ
+	のっこ							強いあなた方なら、\nきっと大量のモンスターが出ても\n対処できるのこ！		3007-10
+	リディ	怒り_もち						うん、いいよ		9999-00
+	ディーア	驚き						ちょっと、\nリディさん!?
+	のっこ							ホントのこ!?\nやったのこーーー♪
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	のっこ	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	のっこ
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怒り						俺たちは<color=mk2impo>「あしなが」</color>なんて\n見たことも、\n聞いたこともないんだぞ？
+	リディ	通常_もち_笑い						大丈夫だよマスター、心配するなのこ♪\nさっき、のっこさんが\n目撃情報があるって言ってたでしょ？		2001-05
+	ディーア	通常						そんな簡単にいくかなー？		9999-00
+	リディ	笑い_もち_笑い						明日は明日の風が吹くよ、マスター♪\nそれよりも…こうして話している間にのっこさんが先に行っちゃうよ？
+	リディ	笑い_もち						この辺りはモンスターが多いから\n一緒に行動しないと危ないのこ！
+	ディーア	悔しい						くっ、リディに言われると\n釈然としないが…とにかく\nのっこさんと合流するぞ！
+EndScenario
+
+# SQ1210203_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="幻のキノコ 2"
+ShowMessageWindow
+Bg	草原A
+Bgm	作戦会議
+	のっこ		1_3
+	リディ	通常	3_3					<color=mk2impo>「あしなが」</color>いないねぇ
+Se	回避
+	ディーア	通常	2_3					モンスターがどんどん増えている…\nのっこさん、<color=mk2impo>「あしなが」</color>について、\n他に何か情報はありませんか？
+	のっこ							ちょっと待つのこ…\nメモ張にまとめてあるのを\n思い出したのこ
+Se	回避
+CharacterOff	のっこ
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						リディ、さっき…\nきのこより、たけのこの方が好きって\n言ってたけど…実は俺、きのこ派なんだ
+	リディ	驚き_もち_驚き						そんな…\n初耳だよ、マスター!!		2001-09
+	ディーア							たけのこは食べると、喉が渇く\nだから俺は、絶妙なバランスを誇る\nきのこの方が好きなんだ		9999-00
+Bgm	絶望
+	ディーア	通常						そんなある日、\n俺は大事なきのこを酒場に隠した\n保管するのに便利なんだよ、あそこは
+	リディ	通常_もち_驚き						ふ、ふーん…そうなんだ\n酒場に、ねぇー
+	ディーア	怪しい						少し経ってから、\nきのこを食べようと思い、\nタルを覗いたんだ
+	ディーア							すると、どうだろう…\nなぜか俺のきのこが、\n忽然と消えていたんだ…
+	リディ	通常_もち_驚き涙						私…し、知らないよ？\nそれに、たけのこ一筋だし…\n浮気なんてしないもん！
+	ディーア	悔しい						そうか、残念だよ…\n非常に残念だ\n素直になれば良かったのに
+	リディ	驚き_もち_驚き涙						え？えっ？\nど、どういう事？		2001-23
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+Bgm	コメディ
+FadeOut	yellow					.1
+Se	N取得
+FadeIn	yellow					.1
+	ディーア	笑い						はい！\nここにさっきまで話していた、\n俺の大事なきのこがあります
+	ディーア							分けてあげようかと思ったけど、\nリディは、たけのこ一筋らしいから…\nのっこさんと一緒に食べるよ♪
+	リディ	怒り_もち_キラン						ずーるーい!!\n私だってきのこが食べたいぃーー！		2001-07
+Tween	リディ	PunchPosition	y=50
+Tween	リディ	MoveTo	x=-180 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+	リディ	怒り_もち	1_3
+	ディーア	笑い	3_3
+FadeIn	white					.1
+Se	回避
+	ディーア							おっと、残念でした！\nリディはたけのこ派なんだろ？		9999-00
+	ディーア	笑い						<color=mk2wisp>「たけのこの方が至高だというのに…」</color>\nとか思ってるんだろ!?
+Tween	リディ	ScaleBy	x=-1 time=0.5
+	リディ							それとこれとは話が別だよ！\nマスターのきのこ…\n必ず貰うっ!!
+Tween	リディ	PunchPosition	y=50
+Tween	リディ	MoveTo	x=180 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+	リディ		3_3
+	ディーア	笑い	2_3
+FadeIn	white					.1
+Se	回避
+	ディーア							おっとっと\n素直に<color=mk2wisp>「ください」</color>と、\n言ったらあげない事もないぞ？
+Wait						.5
+	のっこ		1_3					お待たせのこー
+FadeOut	white					.1
+FadeIn	white					.1
+	リディ	驚き_もち_驚き	3_3
+	ディーア	驚き	2_3					のっこさん…\nび、ビックリしましたぁ…
+Wait						.5
+	のっこ							マスター君\nメモ張に<color=mk2impo>「あしなが」</color>の情報が\n書いてあったのこ
+	のっこ							<color=mk2impo>「あしなが」</color>は…\n日陰のところに\n生える習性がある
+	のっこ							非常に独特な匂いを発していて…\nそれがモンスターを集める匂いに\nなっているのこ
+	ディーア							やはり…そうだと思いました\n進むにつれてモンスターが\n増えているわけだ
+	ディーア	怪しい						ん？\n独特の匂い…もしかして、\nさっき坂から落ちた時の…？
+	ディーア	通常						という事は…そろそろ\n<color=mk2impo>「あしなが」</color>と\n対面できますよ、のっこさん\nあそこを見てください
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	のっこ
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+	キノコ型水モンスター		1_3
+Wait						.5
+	カエル型水モンスター		3_3
+Wait						.5
+	妖精型水モンスター		2_3
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	キノコ型水モンスター
+CharacterOff	カエル型水モンスター
+CharacterOff	妖精型水モンスター
+CharacterOff	wipe
+FadeIn	black					.5
+	ディーア		2_3
+	リディ	通常_もち	3_3
+	のっこ		1_3
+	ディーア							さっき俺が落ちたところ、\n異様な匂いがしたんです\nそこにモンスターが集まっているのは…
+	のっこ							わ、分かったのこ！\nすぐに準備するのこ!!
+Se	走る
+Tween	のっこ	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	のっこ
+	リディ	通常						あそこに<color=mk2impo>「あしなが」</color>が\nあるって事だよね、マスター？		2001-11
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア	笑い	1_3					あぁ、あんなに集まっているんだ…\n間違いない！		9999-00
+	リディ	通常_もち_キラン						ねーえーマスター、私…\nこの戦いが終わったら\nマスターのきのこ、食べてもいい？		2001-12
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						まだ狙っていたのか!?\n分かった、終わったらみんなで\n一緒に食べよう		9999-00
+	リディ	笑い_もち_笑い						うん♪\n約束だよ!!		2001-06
+EndScenario
+
+# SQ1210203_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="幻のキノコ 3"
+ShowMessageWindow
+Bg	草原A
+Bgm	バトル
+	キノコ型水モンスター		1_3
+	ディーア	怒り	3_3					はあああぁぁぁぁっ!!
+Tween	ディーア	MoveTo	x=0 time=0.5			Add
+Wait						.5
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Se	敵殺
+CharacterOff	キノコ型水モンスター
+Wait						1
+	ディーア	通常	2_3
+Se	回避
+	のっこ		1_3					も、もう大丈夫のこ？
+	ディーア	笑い						とりあえずは一安心かと
+	リディ	驚き_もち_驚き	3_3					でも、<color=mk2impo>「あしなが」</color>がある限り、\nモンスターは集まり続ける…\nって、事だよね？		2001-09
+	ディーア	怪しい						その通り、だから…のっこさん！\n今のうちに<color=mk2impo>「あしなが」</color>を\n確保してください！
+Tween	のっこ	PunchPosition	y=50
+	のっこ							既に、採ってきてあるのこー!!
+	ディーア	通常						よし…\nこれで依頼は達成ですね\n急いでサクラ街道から離れましょう！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	のっこ
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	市街地A
+Bgm	平和
+FadeIn	black					.5
+	のっこ		1_3
+	ディーア	通常	2_3
+	リディ	通常	3_3
+	ディーア							街まで来たら、\nさすがに大丈夫だろう？\nあぁー疲れたー
+	リディ	笑い						坂から落ちたり、\nたっくさんのモンスターと\nいーっぱい戦ったからね		2001-05
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						坂から落ちたのは\nリディのせいだろ？		9999-00
+	リディ	通常_もち_驚き						私、悪くないもん\n先に押したのはマスターだよ？
+	ディーア	悔しい						はいはい、俺が悪うございましたー\nもうリディの相手をする気力も\nないほど疲れたよー
+Se	打1
+CharacterOff	ディーア
+	リディ	通常_もち_キラン						ところでのっこさん\n手に入れた<color=mk2impo>「あしなが」</color>を\n見せてもらってもいいですか？
+	のっこ							いいのこよー\nこれのこ
+	リディ	驚き						見た目は確かにきのこだけど、\nなんか手足みたいなものが生えてる\nもしかして…これ、動く？		2001-23
+Se	強化魔石
+								<color=mk2wisp>（わさわさ…）</color>
+	リディ	驚き_もち_驚き						わわわっ…動いた!!\nこんな気持ち悪っ…じゃなくて、\n<color=mk2impo>「あしなが」</color>は何に使うの？		2001-09
+	リディ	驚き_もち						<color=mk2wisp>「あしながマスターに俺はなる！」</color>\nって宣言して、\n料理人デビューとか？
+	のっこ							実は…\n特に何か、特別な事がしたいとか\n別になかったのこ…		9999-00
+	リディ	驚き_もち_驚き						ええーーー!?\nそれじゃあ、どうして\n<color=mk2impo>「あしなが」</color>を手に入れようと？
+Tween	リディ	PunchPosition	y=50
+	のっこ							何をしていいのか、何をすればいいのか、全然わからなかったのこ…ただただ歩いて、一日を過ごしていた時に…
+	のっこ							偶然、<color=mk2impo>「あしなが」</color>の話を聞いて、\n幻と言われたきのこを見れれば…\n何かが変わるかもしれないと思ったのこ
+	リディ	通常_もち_驚き涙						のっこさん…
+	のっこ							それで一生懸命頑に張る君たちを見て、どんな事でも一生懸命やらなければ…\nやりたい事なんて見つけられない、と
+	のっこ							<color=mk2impo>「あしなが」</color>は加工すれば、\n料理にも武器にも\n鎧にもなる万能なきのこのこ！
+	のっこ							自分が何をしたいのか、\nまだ分からないけど…
+	のっこ							君たちのために\n<color=mk2impo>「あしなが」</color>を使って、\n何かを作ってみたいのこ！
+	リディ	嬉しい_もち						すごい！素敵!!\n私たちも応援するよー\nねぇ、マスター？		2001-06
+	ディーア	笑い						もちろん！\n応援していますから、\n頑張ってください！		9999-00
+	のっこ							ありがとうのこ！\n全力で頑張るのこ!!		3007-02
+	リディ	笑い_もち_誇る						マスター、のっこさんのやりたい事が\n見つかった記念に…\nマスターのきのこを皆で食べようよ♪		9999-00
+	ディーア	通常						そういう事はちゃんと覚えてるんだな？\nわかった、とっておきの\nデッカイきのこを食べさせてあげるよ
+	リディ							わーい♪\nやったぁー!!		2001-05
+Tween	リディ	PunchPosition	y=50
+	のっこ							デッカイきのこ…\n楽しみのこー♪		9999-00
+EndScenario
+
+# SQ1210302_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="助けてください 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	市街地A
+Bgm	平和
+	エク		1_3					ふぅー\n困ったわ、ここにもない…\nやっぱり…あの時、落としたのかしら？		3004-03
+Se	回避
+	ディーア	通常	2_3					何かお困りのようですね、ご婦人\nよろしければ、\n俺たちが手を貸しましょうか？		9999-00
+	リディ	怒り_もち_驚き	3_3					もうー!!\nマスターは困ってる女の人を見ると、\nすぐに声を掛けるんだからー		2001-07
+	エク							男の人に声をかけてもらうなんて、\n久しぶりだわ…\nあら？		9999-00
+	エク							あらあら、\nそちらの可愛いらしいお嬢ちゃんは、\nあなたの想い人かしら？
+	リディ	照れ_もち_笑い						可愛い!?\n想い人!?
+	リディ							そんな私なんて…\n助手みたいなモノで…\n特にそんなー		2001-06
+	ディーア							こんな、ちんちくりんなやつの事よりも\n俺はご婦人の悩みを\n解決したいと思っています		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り_もち						ち、ちんちくりん!?\nぷーーー\nマスターのばかーーー!!		2001-07
+Tween	リディ	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	リディ	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	リディ
+	エク							あらあら、大丈夫ですの？\nお連れのお嬢ちゃん、\n何処かへ行ってしまいましたわよ
+	ディーア	笑い						なぁに、心配いりませんよ\n後でお菓子でもあげれば、\n機嫌が良くなりますから
+	エク							そうなの？\nそれじゃあ…お言葉に甘えて、\n手伝って頂けますかしら？		3004-08
+	エク							先日…見学会としてエ・クォー遺跡へ行ってきましたの…洞窟が珍しくて、\nつい夢中になってしまって
+	エク							…後々になって気づいたのですが、\nとっても大事な指輪を\n落としてしまいましたの
+	ディーア	怪しい						指輪…ですか？
+	エク							ええ、これだけ街中を探しても\n見つからないの…\nもう、あの時に落としたとしか
+	ディーア	通常						なるほど…わかりました\nそれでは、俺たちが行って\n探してきますよ
+	エク							ありがとう、助かるわ\n最近、遺跡は地震が多いと聞きますの\nお気をつけて…		3004-01
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	エク
+CharacterOff	wipe
+Bg	遺跡B
+Bgm	作戦会議
+FadeIn	black					.5
+	リディ	怒り_もち	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	怒り_もち	2_3
+	ディーア	通常	画面外_右					おぉーい！\nリディー待てよー!!
+Se	走る
+Tween	ディーア	MoveTo	x=180 time=1			Add
+Wait						1
+Tween	リディ	ScaleBy	x=-1 time=0.5
+	リディ	通常_もち						マスター、遺跡内は静かにして\nモンスターたちに気づかれたら、\nどうするの？		2001-13
+	ディーア	通常	3_3					エク夫人からの注意された事を、\nリディにも伝えておこうと思ってな		9999-00
+	リディ	驚き						…んう？		2001-23
+	ディーア							最近、エ・クォー遺跡は\n地震が多いらしい…\n発生した時に注意する事があるんだ
+	ディーア	怪しい						リディは知ってるか？\n<color=mk2impo>「おはし」</color>というやつだ\n覚えておくんだぞ
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き						おはしぃ？
+	ディーア	通常						お、<color=mk2impo>「押さない」</color>\nは、<color=mk2impo>「走らない」</color>\nし、<color=mk2impo>「喋らない」</color>
+	ディーア							あくまでこれは逃げる時にする事で、\n確実に助かるというわけじゃない\nだから注意してくれ
+	ディーア							どちらかというと、パニックを\n起こさず、冷静に避難する方が\n一番、助かる方法じゃないかな？
+	リディ	通常_もち_驚き						ねぇ、マスター…\n余計な事を話している間に\nモンスターがたくさん出てきたよ		2001-11
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+	カエル型モンスター	通常	1_3					ガァァァ
+	カニ型風モンスター		2_3					ギギギ…
+Wait						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	カエル型モンスター
+CharacterOff	カニ型風モンスター
+CharacterOff	wipe
+FadeIn	black					.5
+	ディーア	通常	3_3
+	リディ	通常_もち	2_3
+	ディーア	怪しい						いつの間にか、\nモンスターがいる奥地まで\n進んでしまったみたいだな
+	リディ	通常_もち_怒り						マスターが余計な事ばっかり\n話すから…
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア	悔しい	1_3					分かったよ、それに関しては謝る！\nだから、まずはモンスターたちを倒すぞ\nそしてエク夫人の指輪を探すんだ！
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	ディーア
+	リディ	照れ_もち_笑い						マスターがちゃんと謝るなら…\n許してあげてもいいよ？
+	ディーア	<Off>						いくぞぉぉぉ！\nうぉぉぉーー!!
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	リディ	驚き_もち_驚き涙						って全然、\n聞いてないし!?		2001-09
+EndScenario
+
+# SQ1210302_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="助けてください 2"
+ShowMessageWindow
+Bg	遺跡B
+Bgm	バトル
+	カニ型風モンスター	通常	1_3
+	リディ	通常_もち	3_3
+	ディーア	<Off>						はあっ！
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	カニ型風モンスター							ゲッゲッゲ…
+Se	敵殺
+CharacterOff	カニ型風モンスター
+Wait						1
+	ディーア	笑い	2_3					よし！\nこれで終わったか!?
+	リディ	驚き_もち_驚き	3_3					まだだよ、マスター！\nあそこにまだ…\n1匹残ってる!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+FadeIn	black					.5
+	クマ型風モンスター	通常	1_3					ゴフゥ
+FadeOut	yellow					.1
+Se	キラン
+FadeIn	yellow					.1
+Wait						.5
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	クマ型風モンスター
+CharacterOff	wipe
+Bgm	作戦会議
+FadeIn	black					.5
+	ディーア	通常	2_3
+	リディ	通常_もち_キラン	3_3					マスター、今のモンスター\n何か光るものを\n持っていなかった？		2001-13
+	ディーア	怪しい						あぁ、確かに持ってた\nしかも大事にそうに、な\nもしかすると…		9999-00
+	ディーア							あのモンスター、\n光る物を集めるクセがあるのかな？\nという事は…
+	ディーア	笑い						あのモンスターの巣へ行けば、\nエク夫人の指輪が\n見つかるかもしれない！
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア	怪しい	1_3					こんなに探しても見つからないんだ…\nあいつが持っているに違いない！
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	通常	2_3					それじゃあ、こっそりと…\nあのモンスターの後をつけるんだね
+	リディ	照れ_もち						マスター、この依頼が終わったら\nちゃんと謝ってよ？\nじゃないと…私、また怒るから
+	ディーア							分かった…\n約束だ
+Tween	リディ	PunchPosition	y=50
+	リディ	嬉しい_もち_笑い						うん♪		2001-06
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+FadeIn	black					.5
+	クマ型風モンスター	通常	monster					ゴゥ、ゴフゥ…
+Se	回避
+Tween	クマ型風モンスター	MoveTo	x=-600 time=1			Add
+Wait						1
+Wait						1
+CharacterOff	クマ型風モンスター
+Se	ガチャ出た
+	リディ	通常	3_3
+Tween	リディ	ShakePosition	x=-10 y=-10 time=0.5			Add
+	リディ	驚き	3_3					ねぇ、マスター		2001-11
+	ディーア	通常	2_3					しっ！\n静かに、大きい声を出すな\n跡をつけているのが、バレてしまう		9999-00
+	リディ	通常_もち_驚き						気のせいかもしれないけど…\nこの遺跡…なんか、少し…\n揺れてない？
+	ディーア							えっ？\nそうかな…
+Se	ガチャ出た
+Tween	リディ	ShakePosition	x=-10 y=-10 time=0.5			Add
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=0.5			Add
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						た、確かに…揺れてる\nこんな奥まで来てたら、\nすぐに外へ出ることは不可能だな
+	リディ	驚き_もち_驚き涙						マ、マスター\nど、どうしよ…		2001-09
+	ディーア	通常						落ち着け、リディ\n<color=mk2impo>「おはし」</color>を思い出すんだ		9999-00
+	リディ							おはし…？\nえっと…なんだっけ…\nえぇっと…忘れちゃった！
+	リディ	通常_もち_驚き涙						パニックを起こさず冷静に、\nって言ってたマスターの話は\n覚えてるんだけど…
+	ディーア	驚き						いや、そっちの方が重要だから…\nおはしは正直どうでもいいや
+FadeOut	white					.1
+Se	ガチャ出た
+FadeIn	white					.1
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+	ディーア	驚き						大きい地震だ！\nくっ、まだ揺れてる…
+FadeOut	white					.1
+Se	ガチャ出た
+FadeIn	white					.1
+Tween	リディ	ShakePosition	x=-10 y=-10 time=0.5			Add
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=0.5			Add
+	ディーア							このままじゃあ、\nモンスターを見失ってしまうが、\n見た感じ…あそこからは一本道だな!?
+FadeOut	white					.1
+Se	ガチャ出た
+FadeIn	white					.1
+Tween	リディ	ShakePosition	x=-10 y=-10 time=0.5			Add
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=0.5			Add
+	ディーア							よし、今は身を守る方が大事だ！\nリディ、安全なところまで\n後退するぞ！
+	リディ	照れ_もち_笑い						マスター…
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+FadeIn	black					.5
+	リディ	照れ	3_3
+	ディーア	通常	2_3					……
+	リディ							…………
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						止まった、みたいだな
+	リディ	照れ_もち_キラン						んん、マスター近い…
+	ディーア	驚き						ん？\nあぁ、ごめん
+	リディ	照れ						うう…私、どこかヘンなのかなぁ\n胸の辺りが、\nすっごいドキドキしてる…
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	通常						よし、モンスターの追跡を続けよう\nそろそろ奴らの巣があっても\nおかしくない
+	リディ							ドキドキ…
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア	怪しい	1_3					リディ？\n聞いてるか？
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_驚き						ふぇっ!?\nあ、了解だよ、マスター\nれっつごー!!		2001-38
+EndScenario
+
+# SQ1210302_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="助けてください 3"
+ShowMessageWindow
+Bg	遺跡B
+Bgm	作戦会議
+	リディ	通常_もち_驚き	3_3
+	ディーア	通常	2_3					よし、指輪を探そう\nどこかにあるはずだ！
+Wait						.5
+Tween	リディ	MoveTo	x=-180 time=1			Add
+Wait						1
+Tween	リディ	ScaleBy	x=-1 time=0.5
+	リディ							うーん…
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+	リディ	驚き_もち_驚き涙	3_3					しかし、見事というか…\nさすがというか\n宝の山というより、ガラクタの山だよね		2001-09
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+FadeIn	black					.5
+	リディ	通常_もち_怒り	3_3					もうー！\nこんなにも探してないなんて…\n指輪なんて、ないんじゃないかなー		2001-07
+	リディ	怒り_もち_驚き						あー!!\n服が汚れちゃった\nもう、後でマスターに洗ってもら…
+FadeOut	yellow					.1
+Se	キラン
+FadeIn	yellow					.1
+	リディ	驚き_もち_驚き						あれ？\n今何か光った？\nもしかして…探し物かな？
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+Se	N取得
+Tween	リディ	PunchPosition	y=50
+	リディ	嬉しい_もち_キラン	2_3					あ、あった！\nマスターーーー！\n見つけたよーーーー!!!！		2001-41
+FadeOut	white					.1
+Se	ガチャ出た
+FadeIn	white					.1
+Tween	リディ	ShakePosition	x=-10 y=-10 time=0.5			Add
+	リディ	驚き_もち_驚き						わわわっ\nまた地震!?
+FadeOut	white					.1
+Se	ガチャ出た
+FadeIn	white					.1
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+	リディ							今回のは結構、危ないかも？\nは、早くマスターと合流しなくちゃ…
+Se	弓1
+	リディ	驚き_もち_驚き涙						え？まさか…地割れ？\nわわわわっ！\n落ちちゃう…
+CharacterOff	リディ
+Se	サイドアウト
+	リディ	<Off>						きゃああああああ!!!!
+	ディーア	通常	画面外_右					リディーーー!!
+Se	走る
+Tween	ディーア	MoveTo	x=180 time=0.5			Add
+Wait						.5
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=0.5			Add
+	ディーア	悔しい	3_3					手を…放すなよぉ
+	リディ	<Off>						マスター、ゴメン\n私、重いよね？
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=0.5			Add
+	ディーア	悔しい						し、知ってるぅよぉぉ\nリディが…お、お菓子を\nこっそり食べているのぉぉぉ!!
+	リディ	<Off>						てへへ…バレてた		2001-36
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=0.5			Add
+	ディーア							そ、そんな事よりも…\nはっ、早く…登ってこいぃぃ\nお、重いーーー！！！
+	リディ	<Off>						わかった、マスター\nこういう時にでも<color=mk2impo>「おはし」</color>が\n適応されるのかな？
+	ディーア							お、おはしぃ!?\nこ、こういう！\n場合のぉ…お、おはしは…!!		9999-00
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=0.5			Add
+	ディーア							おまえを…\nはなさない…\nしなせない!!
+Tween	ディーア	PunchPosition	y=50
+	ディーア	怒り	2_3					だあああぁぁぁあああ!!
+	リディ	通常_もち_驚き涙	3_3
+Se	ポップアウト
+Tween	ディーア	ScaleBy	x=-1 time=0.5			Add
+	ディーア	怪しい						はぁ、はぁっ…はぁ\nよかった、無事で…
+	リディ	照れ_もち_驚き涙						マスター♪\nそんなに私の事を…		2001-04
+	ディーア	笑い						エク夫人の指輪！		9999-00
+	リディ	驚き_もち_驚き涙						ふぇっ!?\nゆ、指輪ぁー!?
+	ディーア							目的は達成した！\nエク夫人のところへ戻って\n指輪を渡さないと！
+Se	走る
+Tween	ディーア	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	ディーア
+	リディ	怒り_もち_驚き涙						じ、じゃあ…\nあの、言葉も指輪に対してって事？\n…マスターのばかーーー!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	市街地A
+Bgm	平和
+FadeIn	black					.5
+	ディーア	通常	2_3
+	リディ	通常	3_3
+	エク		1_3					本当にありがとうございました\nこれで主人に\n怒鳴られずに済みそうですわ		3004-02
+	ディーア	笑い						いえ、困ってる人を助けるのは\n当然ですから		9999-00
+Tween	リディ	ScaleBy	x=-1 time=0.5
+	リディ	怒り_もち_驚き						今まさに、\n私が困ってるんだけどなー
+Se	走る
+Tween	リディ	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	リディ
+	エク							お連れのお嬢ちゃん、\nまだ怒ってる様子でしたけど…\nちゃんと仲直りはできましたの？
+	ディーア	通常						実は遺跡で\n色々ありまして…
+	エク							あらあら\n取り返しがつかないことになる前に、ちゃんと真摯に謝った方がいいですわよ
+	エク							うふふ…遺跡で言ったことは、\nあなたに対してだ、\nというだけで解決すると思いますのよ
+	ディーア	怪しい						うーん、難しいですね\n…自分なりに頑張ってみます
+	エク							頑張ってくださいね\n私、応援していますわよ
+Se	回避
+CharacterOff	エク
+	ディーア	驚き						あれ？\n俺、遺跡内の出来事って話したっけ？
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						うーん、まぁいいか\n…今は何よりもリディの機嫌を\n直さないとな
+EndScenario
+
+# SQ1210303_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="恩人への感謝 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	市街地A
+Bgm	平和
+	マサル		1_3					君たちと直接会うのは初めてだよな？\n俺は貿易センターの\n長を務めているマサルだ
+	ディーア	通常	2_3
+	リディ	通常_もち_笑い	3_3					マサルさん、初めましてー♪\n今日はどんな依頼でしょうか？
+	マサル							うむ、優秀な魔剣と\nその使い手である君たちに\nお願いしたいことは他でもない…		3003-08
+	マサル							俺が尊敬する…\nマモル先輩に\nとびっきりの花を贈りたいんだ！
+	リディ	驚き_もち_驚き						マモル先輩？\n花？		9999-00
+	マサル							実は…\n俺がセンター長になったのは、\nつい最近の事でな
+	マサル							前任者のマモル先輩に\n感謝と今までお世話になった\nお礼を伝えたい！
+	マサル							そこで！\nエ・クォー遺跡にしか咲かない花を\n採ってきて欲しいのだ
+	リディ	笑い_もち_笑い						お花かー\n良い匂いもするし、綺麗だし…\n贈り物にはピッタリだよね！		2001-06
+Tween	リディ	PunchPosition	y=50
+	ディーア	怪しい						エ・クォー遺跡にしか咲かない花…\nまさか、あの\n<color=mk2impo>「レアフラワー」</color>と称される…		9999-00
+	マサル							おお、察しが良くて助かる\n優秀な魔剣使いは博識だな
+	マサル							そう、採ってきて欲しい花は、\n<color=mk2impo>「アリ･ガ･トゥース」</color>だ！
+	ディーア	驚き						本気ですか!?\nあの花を贈り物に選ぶなんて…
+	マサル							それぐらいでなければ、\n俺のこの溢れんばかりの気持ちを\n先輩に伝える事は出来ん！
+	ディーア	通常						わかりました…\nすぐにエ・クォー遺跡へ向かいます！
+	リディ	驚き_もち_驚き						え？え？\n何かあるの、マスター？\n私、そんな花…全然知らないんだけどー
+	ディーア	怒り						行くぞ、リディ\n事態は一刻を争うんだ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	マサル
+CharacterOff	wipe
+Bg	遺跡B
+Bgm	作戦会議
+FadeIn	black					.5
+	ディーア		3_3
+Wait						1.5
+Se	回避
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア		2_3
+	リディ	通常	3_3					マスター！		2001-13
+Wait						1.5
+Se	回避
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア	怪しい	1_3
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	怒り_もち	2_3					ねぇマスターってば！\nマスター!!!!		2001-11
+FadeOut	red					.1
+Se	打1
+FadeIn	red					.1
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怒り						痛っ!?\nなんだよ、リディー
+	ディーア	怪しい						ここの遺跡はガレキが多いんだ\n…静かにしてくれないか？
+	リディ	通常_もち						わかった…\nでも、私たちが採りに行く\nお花の事を教えてよ！
+	ディーア	通常						ああーそっか\nリディは記憶がないっていう\n設定だったっけ？
+Tween	リディ	PunchPosition	y=50
+	リディ	怒り_もち_驚き						設定じゃないよ！\nホントに覚えてないんだもん!!		2001-07
+	ディーア							ごめん、ごめん…ちゃんと説明するよ\n<color=mk2impo>「アリ･ガ･トゥース」</color>というのは…		9999-00
+	ディーア							見た目は普通の花なんだけど、\n別名、<color=mk2impo>「高級食用花」</color>とも\n呼ばれている
+	リディ	驚き_もち_キラン						高級…食用花？\nもしかして、美味しいの!?
+	ディーア	笑い						栄養価が高く、低カロリー!\n更に特別な調理法をすると…\nなんと、筋肉増強剤のような効果もある
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						すごい!!\nその手の人には喉から手が出るほど、\n欲しい花だね♪		2001-05
+	ディーア	通常						あぁ、その通りだ\nだから競争率も高い\nそして、何より厳しいのは…		9999-00
+	ディーア	驚き
+	リディ	驚き_もち_驚き
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	モンスターの声	<Off>						ゴアァァァァァ…
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+	リディ	驚き_もち_驚き	3_3
+	リディ							モンスターの声？\nどうして!?
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						<color=mk2impo>「アリ･ガ･トゥース」</color>は、\n人だけじゃなく…\nモンスターが食べても、効果があるんだ
+	リディ	驚き_もち_驚き涙						えぇー!?\n万能すぎるっ!!		2001-09
+	ディーア	通常						だから…少しでも早く！\n<color=mk2impo>「アリ･ガ･トゥース」</color>が\n咲いている場所まで行かないと!!		9999-00
+	リディ	笑い_もち						なるほど、だから急いでたんだね\nうん♪\nバッチリ、覚えた！
+EndScenario
+
+# SQ1210303_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="恩人への感謝 2"
+ShowMessageWindow
+Bg	遺跡B
+Bgm	コメディ
+	ディーア		2_3
+	リディ	通常	3_3					そういえば、マスターは\n<color=mk2impo>「アリ･ガ･トゥース」</color>を\n食べた事あるの？		2001-13
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						……食べた事はない\nうん、ないな		9999-00
+	ディーア							それよりも、\n連戦が続いてるけど、\nリディは疲れてないか？
+	リディ	通常_もち						大丈夫だよ、マスター\nモンスターが出たら、\n全速力逃げて、岩陰に隠れてるから♪		2001-39
+	ディーア	笑い						本当か？\nじゃあ簡単な問題を出すから、\nサラっと答えてみて		9999-00
+	リディ	笑い_もち_誇る						いいですとも♪\nまっかせてー		2001-40
+	ディーア	通常						ここに美味しいお菓子、\n<color=mk2impo>「ポテブレイビー」</color>と\n<color=mk2impo>「モッチョコ」</color>があります		9999-00
+	リディ	通常						うんうん
+	ディーア							2つのお菓子は合わせて110ヘル\n<color=mk2impo>「ポテブレイビー」</color>は\n<color=mk2impo>「モッチョコ」</color>より100ヘル以上する
+	ディーア							それじゃあ、ここで問題です\n<color=mk2impo>「モッチョコ」</color>は…\nいくらでしょうーか！？
+Tween	リディ	PunchPosition	y=50
+	リディ	嬉しい_もち_笑い						そんなの簡単だよ、マスター！\n答えは10ヘル♪		2001-05
+	ディーア	驚き						リディ…少し休んだ方がいい\n色々あって疲れてるんだよ\n休憩しよう、な？		9999-00
+	リディ	驚き_もち_笑い涙						えぇー？\n大丈夫だよ、マスター\n私、元気いっぱいだよ？
+	ディーア							身体は元気でも、\n頭は疲れてるんだよ…\n無理はするな
+FadeOut	fuchsia					.1
+Se	ホワイトアウト
+FadeIn	fuchsia					.1
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						……ん？\n今、僅かにだけど…\n甘酸っぱい匂いがしたぞ
+	リディ	驚き_もち_驚き						匂い？\n<color=mk2impo>「アリ･ガ･トゥース」</color>のかな？
+Wait						.5
+	ディーア	笑い						ああ、この独特な匂い\n<color=mk2impo>「アリ･ガ･トゥース」</color>に、\n間違いない！
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア		1_3					行くぞ、リディ！\nあの地割れの先が怪しい
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+	カニ型風モンスター	通常	2_3					シャシャシャシャシャ
+Wait						1
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	カニ型風モンスター
+CharacterOff	wipe
+FadeIn	black					.5
+	ディーア	怪しい	2_3					先客がいたか…\nしかし、まだ花を食していないな
+	リディ	通常_もち	3_3					どうするの、マスター？\nこっそり採るの？		2001-09
+	ディーア	笑い						そんなの決まっているじゃないか…\n倒してでも、奪い取る！！		9999-00
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=1			Add
+Wait						1
+	ディーア	<Off>						これは競争だからな…先手必勝！\n早いもの勝ちだー!!
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Wait						1
+CharacterOff	ディーア
+Tween	リディ	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	通常_もち_誇る	2_3					行っちゃった…\nマスター楽しそうだね、もち？
+	リディ	驚き						そういえば、\nさっきマスターが出した問題…\nどこが間違っていたのかな？		2001-23
+EndScenario
+
+# SQ1210303_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="恩人への感謝 3"
+ShowMessageWindow
+Bg	市街地A
+Bgm	平和
+	マサル		1_3					おぉー帰ってきたか\nその様子だと無事に\n確保したようだな
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	リディ	通常_もち	3_3
+	ディーア	通常	2_3					ええ、これが依頼の花です\n袋の中に入っています
+Se	N取得
+	マサル							おぉー!!\nこの中に<color=mk2impo>「アリ･ガ･トゥース」</color>が…\n実に興味深い
+	リディ	驚き_もち_驚き						あれ？\nマサルさん、実物を見た事ないの？
+	マサル							実は初見なのだよ\nそれで<color=mk2impo>「アリ･ガ･トゥース」</color>が\n袋に入ってるの何故？
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_怒り						あっ！\n袋から出しちゃダメだよ！\nそれ…すっごく臭いの		2001-09
+Tween	マサル	PunchPosition	y=50
+	マサル							何!?\n本当か？		9999-00
+	ディーア	怪しい						えぇ、<color=mk2impo>「アリ･ガ･トゥース」</color>の効果や\n見た目は…\nすごく人気なのですが…
+	リディ	笑い_もち_笑い						モンスターにパクーって、\n食べられちゃうのも、\nすぐになくなる原因だよ♪
+	ディーア							あまり出回らないのは、\n地面から抜いた時に発する\n激臭も原因の1つなんです
+	ディーア							そんな<color=mk2impo>「アリ･ガ･トゥース」</color>を\nプレゼントにして…\n本当に大丈夫ですか？
+	マサル							大丈夫だ、問題ない\nむしろこれがいい!!
+	ディーア	驚き
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_驚き						えぇー!?
+	マサル							マモル先輩は日頃からいっていた\nこの花の匂いの良さを\n俺たちはまだ知らない…と
+	マサル							この花と一緒に感謝の言葉を添えれば、マモル先輩に俺の気持ちが届く！\nありがとう！
+	マサル							本当にありがとう！\n君たちには感謝しても足りないぐらいだ\nまた何かあった時はヨロシクな！		3003-02
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	マサル
+CharacterOff	リディ
+CharacterOff	wipe
+FadeIn	black					.5
+	ディーア	通常	2_3
+	リディ	通常	3_3					…マスター、\n世の中には色々な人がいるんだね\n私、勉強になったよ
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	笑い	2_3					そうだな\n今回の依頼は俺も勉強になった
+	リディ	驚き						あ、そうだ！\n私…\nマスターに聞きたい事があったの！		2001-11
+	ディーア	笑い						どうした？\n俺のチャームポイントでも、\n聞きたいのか？		9999-00
+	リディ	驚き_もち_驚き						そんなのどうでもいいよ\nそれよりも、遺跡で出した問題の\n答えを教えて！
+	ディーア	悔しい						どうでもいいって…\nん、問題？\nあーあの計算問題か
+	ディーア	通常						まだ考えていたのか？\n答えは…5ヘルだよ\n5ヘル
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_驚き涙						5ヘルぅ？\nどうしてぇー!?
+	ディーア							2つのお菓子は合わせて110ヘルだ\n<color=mk2impo>「ポテブレイビー」</color>は\n<color=mk2impo>「モッチョコ」</color>より100ヘル以上する
+	ディーア							リディが言った<color=mk2impo>「モッチョコ」</color>が\n10ヘルだと、\n<color=mk2impo>「ポテブレイビー」</color>は\n110ヘルということになる
+	ディーア	怪しい						110＋10はいくつになる？
+	リディ	通常_もち_驚き涙						120ヘルだ…
+	ディーア	通常						その通り\nだから<color=mk2impo>「ポテブレイビー」</color>は105ヘル<color=mk2impo>「モッチョコ」</color>は5ヘルが正解だよ
+	リディ	通常_もち_キラン						んー？		2001-23
+Wait						.5
+	リディ	嬉しい_もち						あーそっか!!\nマスター、<color=mk2impo>「ポテブレイビー」</color>は\n100ヘル以上って言ってたもんね！		2001-05
+	リディ	笑い_もち_笑い						無意識に100ヘルだって、\n思い込んじゃってた…\nうん、これはとっても勉強になったよ		9999-00
+	リディ	笑い_もち_笑い涙						でも、なんか悔しいから…\n次は私がマスターに問題を出すよ！\nとっても難しい問題を出すんだから！
+	リディ	通常_もち						笑っていられるのも今のうちだけだよ\n必ずギャフンと、\n言わせてやるんだからー!!
+	ディーア	笑い						ギャフン
+Wait						1
+	リディ	怒り_もち						どっかーん!!		2001-21
+FadeOut	red					.1
+Se	打1
+FadeIn	red					.1
+CharacterOff	ディーア
+	ディーア	<Off>						痛ってぇーーーー!!		9999-00
+EndScenario
+
+# SQ1210402_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="秘薬にご興味は？ 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	市街地A
+Bgm	平和
+	リリー	通常	画面外_左
+Se	走る
+Tween	リリー	MoveTo	x=-180 time=1			Add
+Wait						1
+	リリー	通常	1_3					あぁー\nどっかにイイ男でもいないかなー
+Tween	リリー	MoveTo	x=0 time=1			Add
+Wait						1
+	リリー		2_3					どーこーかーにー\n美女を助けてくれる\nイケメンはいないかなー？
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	リリー
+CharacterOff	wipe
+FadeIn	black					.5
+	リディ	通常	3_3					マスター、さっきから女の人が、\nチラチラとこっちを見てるよ\n何か困ってるのかも？		2001-11
+	ディーア		2_3					ダメだ、リディ\nあれは関わっちゃいけない感じがする\n俺の第6感がそう叫んでいる		9999-00
+	リディ	驚き_もち_驚き						えぇー？\nだって、いつもだったら…
+	リディ							<color=mk2wisp>「困っている女性を\n助けるのは紳士の務め」</color>\nとか言って、手助けするでしょ？
+	ディーア							それとこれとは話が別だ\n今回はスルーさせてもらう
+	リリー	<Off>						おおっとー\n足が滑っちゃったー!!
+	ディーア	驚き						わわっ!?
+	リリー	通常	画面外_左
+Se	走る
+Tween	リリー	MoveTo	x=0 time=1			Add
+Wait						1
+FadeOut	white					.1
+Se	打1
+CharacterOff	ディーア
+FadeIn	white					.1
+	リディ	通常_もち						マスターと女の人…\n大丈夫？		2001-09
+	リリー		2_3					ごめんなさーい\n足がすべっちゃってー		9999-00
+	ディーア	<Off>						だ、大丈夫です…\nとりあえず、\n降りてもらってもいいですか？
+Tween	リリー	MoveTo	x=-180 time=1			Add
+Wait						1
+	リリー		1_3					あら、ごめんあそばせ
+	ディーア		2_3
+	リリー							ここで出会ったのも何かの縁\nあたし、今ちょーっと困っててー\n話を聞いてくれないかしら？		3004-09
+	ディーア	悔しい						全然乗り気じゃないんですが、\n話は聞きましょう		9999-00
+	リディ	驚き_もち_驚き						聞くんだ!?
+	リリー							とあるスジから教えてもらった、\nパネー薬を作りたいんだけどね、\n材料が全然足りなくってさー
+	リリー							報酬は弾むからさー\nちょーっと行って、\nササッと、集めて来てくれないかしら？
+	ディーア	通常						…何処へ行けば\nいいのですか？
+	リリー							リーマから少し遠くにある洞窟…\n東ナーガ洞窟よ
+	ディーア	悔しい						場所も材料も分かっているなら、\nご自分で行かれては？
+	リリー							それができるならとっくにヤッてるしー\nほら、あそこって薄暗くってー\nジメジメしてるでしょ？
+	リリー							それにぃ、ほどよく街から離れててー\n危ないっていうかー
+	ディーア	通常						あなたと出会った人が危ない、\nというのは分かります
+	リリー							もうー\n冗談上手すぎー\nますます気に入っちゃいそうー♪
+	ディーア	怪しい						ごめんなさい\n勘弁して下さい\nマジで
+	リリー							とにかく、女性が1人で行くには\nとっても危険なところなのーだからー\nあたしの依頼、引き受けて頂戴？		3004-08
+	ディーア	悔しい						無理です\n本当に勘弁してください		9999-00
+	リリー							ここにメモってある\n4つのパネー材料をお願ーい♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	リリー
+CharacterOff	ディーア
+CharacterOff	リディ
+CharacterOff	wipe
+Bg	洞窟A
+Bgm	コメディ
+FadeIn	black					.5
+	ディーア	悔しい	2_3					…………\nまさか…\nあれから2時間以上も粘るとは…
+	リディ	通常	3_3					こっちが頷くまで、\n諦めなさそうな雰囲気だったもんね
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怒り						街中で<color=mk2wisp>「痴漢ー！」</color>って、\n叫ぶのは反則だろ…
+	リディ	驚き						あそこで依頼を引き受けて、\n誤解を解かなかったら…マスター、\n勇者さんに捕まってたかもね
+	ディーア	悔しい						冤罪なのに…\nそれを覆せない\n無力な自分が悔しい…
+Se	打1
+CharacterOff	ディーア
+	リディ	通常_もち_驚き						どしたのマスター？\n突然、膝をついて…\nお祈りでもするの？		2001-09
+	ディーア	<Off>						…魔界の神々よ\n俺のストレスを受け取り給え…		9999-00
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_驚き涙						これは重傷だ！\n早く依頼を終わらせなくっちゃ！
+EndScenario
+
+# SQ1210402_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="秘薬にご興味は？ 2"
+ShowMessageWindow	CharacterAlpha	1	.55
+Bg	洞窟A
+Bgm	コメディ
+	リディ	通常	3_3					マスター…\n少しは落ち着いた？		2001-13
+	ディーア	通常	2_3					な、なんとか\nだ、大丈夫だ…		9999-00
+	リディ	嬉しい_もち_笑い						そうだね、\n目に光が宿ったって感じ♪		2001-05
+	リディ							無表情で攻撃してる時なんて、\n傍からみたら亡霊や\nゾンビみたいだったもん
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア							褒めてもらって何よりだよ…		9999-00
+	リディ	通常						とりあえず、\nリリーさんに頼まれたものは…\nほとんど揃ったかな？
+	リディ	通常_もち						<color=mk2impo>「ビー蜜」\n「カンセツ虫の羽」\n「ゼゼヒヒの皮」</color>
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_笑い						あ、あと1つで\n依頼された品物が全部揃うよ、\nマスター♪		2001-06
+	ディーア	悔しい						やっと…\nこの苦しみから解放される…		9999-00
+	リディ	通常						罪人みたいな事言ってる…急がないと\nえぇーっと、\n最後の1個は<color=mk2impo>「白竜の恋人」</color>
+	リディ	驚き_もち_驚き						<color=mk2impo>「白竜の恋人」</color>!?\nあの人気お菓子が秘薬に必要なの!?\nただ単に食べたいだけなんじゃ…
+	リディ	通常_もち_驚き涙						さすがに人気のお菓子なんて…\n無いよねぇ？
+	ディーア	笑い						あるよ
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_驚き						あるの!?
+	ディーア							こんな事もあろうかと、\n俺のポケットにはいつも、\n<color=mk2impo>「白竜の恋人」</color>が入っている！
+Se	N取得
+	リディ	嬉しい_もち_笑い						良かった♪\nこれで依頼達成だよ、マスター！		2001-05
+	リディ	通常_もち						でも、なんかもう色々とおかしいから、\n急いで戻ろうマスター？
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア		1_3					極めて了解だ♪		9999-00
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	ディーア
+	リディ	驚き_もち_驚き						あぁー！\nそっちじゃないよ、マスター！\n寄り道しちゃダメー!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	リディ
+CharacterOff	wipe
+Bgm	バトル
+FadeIn	black					.5
+	ディーア	<Off>						違う！\n何度言ったら分かるんだ!!
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+	リディ	驚き_もち_驚き	3_3					あれ？\nマスター、誰とお話して…
+	ディーア	怒り	2_3
+	カニ型光モンスター	通常	1_3
+Wait						.5
+	リディ	驚き_もち_怒り						わぁっ!?\nよりにもよって、\nモンスターとお話してる!?		2001-09
+	ディーア							もう一度言うぞ…\nお前の脳みそは、カニミソか！		9999-00
+	カニ型光モンスター							ニィィィ…
+	リディ	通常_もち						もうー本当に余計な事ばっかりして…\n本当に残念な人だね\nそれに、マスターは勘違いしてるよ！
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						なん…だと…？
+	リディ							カニミソは脳みそじゃない！\n内臓なんだよ!!
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+Tween	カニ型光モンスター	PunchPosition	y=50
+	カニ型光モンスター							カアアアァァァ!!
+	リディ	驚き_もち_驚き						わっ!?\nこっちが怒った!?		2001-09
+	リディ	怒り_もち						もうー！\n残念なマスターの相手で、\nとっても忙しいのです		2001-07
+Tween	リディ	PunchPosition	y=50
+	リディ							邪魔するなら、私のマスターが\nボッコボコにするからね!!
+EndScenario
+
+# SQ1210402_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="秘薬にご興味は？ 3"
+ShowMessageWindow
+Bg	市街地A
+Bgm	平和
+	リディ	通常	3_3					マスター、\n少しは落ち着いた？		2001-13
+	ディーア	通常	2_3					な、なんとか\nだ、大丈夫だ…		9999-00
+	リディ	通常_もち_驚き						あれ？\n私、洞窟でも同じ事を\n聞いた気がする…
+	リリー	通常	画面外_左
+Se	走る
+Tween	リリー	MoveTo	x=-180 time=1			Add
+Wait						1
+	リリー		1_3					お帰りなさい\n首尾はどうだった？
+	リリー							…って、帰った来たんだから、\n聞くまでもないって感じー？
+	リディ	通常_もち_笑い						はい\n頼まれたものは\n全て揃っています
+Se	N取得
+	リリー							サンキュー♪\nまさか本当に\n全部集められるなんてねー		3004-01
+	ディーア	悔しい						…呪縛から…\n解放される…		9999-00
+	リリー							ざーんねんっ\nまだ依頼は完了していないしー
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_驚き						ふぇっ!?\nこれで終わりじゃないんですか？\nもうマスターの体力は0ですよ！
+	リリー							お嬢ちゃん、勘違いしないでー\n残りの依頼は秘薬を飲むだけよ		3004-06
+	リリー							せっかく作った秘薬を\n試さないなんてないでしょ？
+	リディ	通常_もち_驚き涙						確かに…\n試してみたいかも…		9999-00
+	リリー							でしょー\nそれじゃあ、ちょーっと待ってて\n5タップぐらいで戻ってくるわ
+Tween	リリー	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	リリー	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	リリー
+Wait						.5
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	通常						今のうちに…\n逃げてもいいかな？
+	リディ	通常_もち_怒り						私は別にいいけど…\nこんなに苦労したのに、\n報酬も貰わず帰っちゃうの？
+	ディーア	驚き						ぐぬぬ…\nそりゃもちろん、嫌だが…
+	リディ							それにリリーさん\nすぐ戻って来るって、言ってたし…
+	リリー	通常	画面外_左
+Se	走る
+Tween	リリー	MoveTo	x=-180 time=1			Add
+Wait						1
+	リリー		1_3					はーい♪\nお待たせっ
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア							本当にすぐ戻ってきた!?
+	リリー							はい\nこれが本に載ってた、\nパネー秘薬ってやつよ
+Se	アイテムゲット
+	リディ	驚き_もち_驚き						凄く毒々しい色…\n毎ターン体力が減りそうな感じがする
+	リリー							んー秘薬ってそんなものでしょ？\nささ、ぐいーっと\nぐぐーっと
+Tween	ディーア	PunchPosition	y=50
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+	ディーア	悔しい						う、うわーーー!!
+FadeOut	white					.1
+FadeIn	white					.1
+	リリー							ちょっと、暴れないで\nあっ…
+Se	消費
+Wait						1
+	リディ	通常_もち_驚き涙						うわぁ…\n地面に穴が空いてる
+Se	走る
+Tween	ディーア	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	ディーア
+	リディ	驚き_もち_驚き涙						逃げた!?
+	ディーア	<Off>						俺は逃げる、絶対逃げる！\n必ず逃げてみせる!!
+	リリー							あーあ、逃げられちゃった…\n結構あたし好みのタイプだったのに\nまっ、いっかー
+	リリー							彼に出会えただけでも、前進って感じ？お嬢ちゃんも手伝ってくれてありがと\n報酬は後日、届けてあげるー		3004-02
+Tween	リリー	ScaleBy	x=-1 time=0.5
+	リリー							お嬢ちゃんのマスターに伝えといてー\nまたお願いしますって\nフフフッ、じゃあねバァーイッ♪
+Se	走る
+Tween	リリー	MoveTo	x=-600 time=1			Add
+Wait						1
+CharacterOff	リリー
+	リディ	通常						すごい女の人だったね、もち		9999-00
+	リディ	笑い_もち_笑い						あんなマスター…\n普段は絶対に見れないから、\nちょっと面白かったかも
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_笑い涙						今度マスターが意地悪してきたら、\n今回の件をネタに反撃しようね♪		2001-41
+EndScenario
+
+# SQ1210403_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="求む魔獣ハンター 1"
+JumpSubroutine	*サブシナリオタイトル
+Bg	市街地A
+Bgm	平和
+	ディーア	通常	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+	ディーア	通常	2_3					結構、進んだな？\nここからあと3分ぐらい歩いたら、\nサクラ街道に出る道が見えてくるぞ
+	リディ	通常	画面外_右
+Se	走る
+Tween	リディ	MoveTo	x=180 time=1			Add
+Wait						1
+	リディ	嬉しい	3_3					たまにはお散歩もいいね、マスター♪\nところでマスター、\n3分ってどのくらい？
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						どのくらいって…どう言えばいいんだ？\n難しいな、うーんと\n60秒を3回数えたら3分だよ
+	リディ	通常_もち_笑い						へー\nじゃあすぐだね♪
+	リディ	笑い_もち_驚き						60、60、60…\nはい、3回数えたよ♪		2001-39
+	ディーア	驚き						うん、違う\n確かに60秒を3回数えると言ったが、\nそうじゃない		9999-00
+	リディ	怒り_もち_驚き涙						えぇー！\nマスターがそう言ったのにー\nもう、わがままさんだねぇ		2001-07
+Se	回避
+FadeOut	white					.1
+FadeIn	white					.1
+	？？？	<Off>						もし、そこの御方…
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_驚き						わぁっ、びっくりしたー		2001-09
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						…誰だ？		9999-00
+	リディ	通常						なにやつだー？
+	？？？	<Off>						魔剣使いの方とお見受けするが…\n相違ないか？\nなければ、是非にお願いしたい事がある		3006-08
+	ディーア							確かに魔剣使いだが…\nお願い？		9999-00
+	？？？	<Off>						故あって、急ぐ身…\n1つだけ応えて欲しい
+	ディーア	通常						こっちも暇じゃないんでね、\n1つだけならいいよ
+	？？？	<Off>						東ナーガ洞窟にて、\n《冥獣》が大量に見つかった…\n大至急増援を求む
+	ディーア	驚き						大量の《冥獣》が!?
+	リディ	驚き_もち						それって…\nかなり危険な状態じゃ…
+	？？？	<Off>						今現在、生まれたてで支障はないが…\nすぐに大事へ発展するだろう
+	ディーア							なるほどね、大体わかった
+	？？？	<Off>						無礼を承知で頼む\n《冥獣》退治に協力して欲しい…
+	？？？	<Off>						少しでも多くの戦力が必要なのだ\n引き受けてくれないだろうか？
+	ディーア	通常						そんな大事な依頼、\n断れるわけないだろう？
+	リディ	嬉しい						さっすがマスター♪		2001-06
+	ディーア							俺たちでよければ是非、\n協力させて欲しい		9999-00
+	？？？	<Off>						礼を言う…\n私は他の魔剣使いにも\n声をかけなければいけない
+	？？？	<Off>						恐らく、すぐに戦闘となるだろう\n準備だけは入念にしてくれ\nでは…!!
+Se	回避
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア							分かった…\nよし、リディ\n早速、東ナーガ洞窟へ向かうぞ
+	リディ	嬉しい_もち_驚き						あれ？\nマスター、準備\nしなくていいの？		2001-13
+	ディーア	驚き						何を言っているんだ、リディ？\n俺たちは…		9999-00
+	ディーア							<color=mk2impo>「いつなんどきも、\n敵が現れても対処できるように…」\nという状態で散歩してたじゃないか</color>
+Tween	リディ	PunchPosition	y=50
+	リディ	通常_もち_誇る						そうだった\n思い出したよ、マスター！
+	ディーア	通常						それじゃあ、\n東ナーガ洞窟へ出発だ
+	リディ							ぎょいー\nれっつごー★		2001-38
+EndScenario
+
+# SQ1210403_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="求む魔獣ハンター 2"
+ShowMessageWindow
+Bg	洞窟A
+Bgm	作戦会議
+	リディ	通常_もち	3_3
+	ディーア	通常	2_3
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						どうしたリディ？\nいつもより、元気がないじゃないか？
+	リディ	通常_もち_怒り						マスター、私…\n犯人がどしても許せなくって…		2001-11
+	リディ							《冥獣》だって…\n望んだわけでもないのに…\nこんなのって…
+	リディ	通常_もち_驚き涙						あまりにも…酷すぎるよ…\n私、絶対に犯人を許さないよ		2001-08
+	ディーア	笑い						リディは優しいな\nその心を犯人も、少しは\n見習ってもらいたいな…		9999-00
+Se	回避
+	？？？	<Off>						遅くなった…すまない
+	リディ	驚き_もち_驚き						その声は…\n依頼主さん？
+	冥獣ギルドの使者	通常	1_3					各所で戦っている、\n魔剣使いたちのおかげで、\nこの事件、なんとか対処が出来そうだ
+	冥獣ギルドの使者							おぬし達もその内の1組だ\n礼を言わせてくれ\n本当に…感謝する
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	通常						事件が解決しそうで良かった\n…ところで、1つ聞いてもいいかな？\n犯人は捕まえたのですか？
+	冥獣ギルドの使者							それは…
+	ディーア							事件解決に協力したんだから\n教えてくれても、\nいいと思うのですが…
+	リディ	怒り_もち						私も知りたい！\n犯人を問い詰めてやるの!!		2001-07
+	冥獣ギルドの使者							すまない…\nそれには答える事が出来ない\nいや、正確には答えられない		9999-00
+	ディーア	怪しい						…答えられない？
+	冥獣ギルドの使者							あぁ…実は今現在も\nこの事件の犯人を\n追っている最中なんだ
+	冥獣ギルドの使者							しかし、不思議な事に\n今回の事件…\n有力な情報が何1つ出て来ない
+	ディーア							何か…裏がある\nという意味か…
+	冥獣ギルドの使者							これはあくまで私個人の見解だが、\n我々の情報網を使って、\n所在を掴めないという事は…
+	冥獣ギルドの使者							何か大きな組織が\n絡んでいる可能性も…ある
+	ディーア	怪しい						<color=mk2wisp>（恐らく太陽聖域だろうな…\n　あいつ等なら…\n　こんな事、平気で…）</color>
+	ディーア	通常						なるほどね…理解しました\n俺たちにも何か出来る事があったら、\n何でも協力させて欲しい
+Tween	リディ	PunchPosition	y=50
+	リディ							この事件に関して、\n私はものすごく、怒っているのです！
+	冥獣ギルドの使者							そなたたちのような\n良い魔剣使いに\n出会えた事に感謝しよう
+	冥獣ギルドの使者							無事に完了した暁には、\n少ないが…\n報酬を渡したい
+	リディ	笑い						報酬！\n良かったね、マスター!!\n私たちの財布はまさに極寒の時代に…
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	照れ						可愛い可愛いリディちゃんはー\n少ーし、黙ってようねー
+Se	ポップイン
+Tween	リディ	PunchPosition	y=50			Add
+	リディ	驚き						むぐぐぅ
+Tween	ディーア	ScaleBy	x=-1 time=0.75
+	ディーア	通常						引き続き、俺たちは…\n《冥獣》の討伐を続ける\n必ず全員、助け出してみせる…！
+	冥獣ギルドの使者							すまぬ…\nそなたたちには感謝しても\n感謝しきれないな
+	冥獣ギルドの使者							<color=mk2wisp>（某も…そなたたちように\n　強い心を持っていれば、\n　違う未来もあったかもしれないな）</color>
+	ディーア							ん？\n何か言いましたか？
+	冥獣ギルドの使者							いや、何でもない\nそれでは一旦、失礼する
+Se	回避
+CharacterOff	冥獣ギルドの使者
+	リディ	怒り_もち_驚き						本当に酷いよね…\nこんなに暴れて…\n犯人を捕まえたら、私言ってやるんだ
+	リディ	笑い_もち						<color=mk2wisp>「暴力じゃ何も解決できない！」</color>って…\nそれで犯人をフルボッコにしてやるの\nぐうの音も出ないぐらいに♪
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	笑い						リディ\nそれは矛盾してる、が…\nそうなった時は俺も協力させてくれ
+EndScenario
+
+# SQ1210403_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="求む魔獣ハンター 3"
+ShowMessageWindow
+Bg	洞窟A
+Bgm	作戦会議
+	カタナ型冥獣	通常	1_3
+	ディーア	怒り	3_3					これで最後だ！
+Tween	ディーア	MoveTo	x=0 time=1			Add
+Wait						1
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Se	敵殺
+CharacterOff	カタナ型冥獣
+	ディーア	通常	2_3
+	リディ	嬉しい_もち_誇る	3_3					やったね、マスター！
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	笑い						あぁ、今のが最後だろう\nこれで…俺たちが出会った《冥獣》は\n全員助ける事が出来たかな？
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア	通常	1_3					周りも静かになったみたいだし…\n全部終わったかな？
+	リディ	通常_もち						よぉーし、早速帰って…
+FadeOut	white					.1
+Se	火1
+FadeIn	white					.1
+	グレイヴ型冥獣	通常	2_3					ハカ…スル…
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	驚き						リディ、危ない!!
+	リディ	驚き_もち_驚き						え？		2001-23
+FadeOut	red					.1
+Se	斬1
+CharacterOff	リディ
+CharacterOff	ディーア
+CharacterOff	グレイヴ型冥獣
+FadeIn	red					.5
+Se	回避
+	リディ	驚き_もち_驚き涙	3_3
+	冥獣ギルドの使者		2_3
+	リディ	通常_もち_驚き涙						ありがとっ…って、\nその腕の傷…\nまさか、私を庇って!?		2001-04
+	冥獣ギルドの使者							某のことよりも、\n先に《冥獣》を！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	リディ
+CharacterOff	冥獣ギルドの使者
+CharacterOff	wipe
+FadeIn	black					.5
+	グレイヴ型冥獣	通常	1_3
+	ディーア	怒り	3_3					このおーーーー!!
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	グレイヴ型冥獣							ギャァウッ!!		3010-04
+Se	敵殺
+CharacterOff	グレイヴ型冥獣
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	ディーア
+CharacterOff	wipe
+FadeIn	black					.5
+	冥獣ギルドの刺客		2_3
+	リディ	驚き	3_3
+	ディーア	通常	画面外_左
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+Se	走る
+Tween	ディーア	MoveTo	x=-180 time=1			Add
+Wait						1
+	ディーア	驚き						リディー、大丈夫か！\n怪我はないか!?
+	リディ	通常						私は大丈夫だよ、マスター\nそれよりも…刺客さんが…
+	冥獣ギルドの刺客							し、刺客さん…？\n某には、ちゃんと名前が…
+Bgm	コメディ
+Tween	ディーア	PunchPosition	y=50
+	ディーア	笑い						<color=mk2wisp>（チャンス！）</color>\nこ、これは…酷い傷だ\nすぐに手当をしないと手遅れになる！
+Tween	リディ	PunchPosition	y=50
+	リディ	驚き_もち_キラン						キラーン★\nマスター…私、\n包帯持ってるよ！		2001-41
+	冥獣ギルドの刺客							大丈夫だ\nこれぐらいの怪我…なんとも		9999-00
+	リディ	怒り_もち_キラン						ダメだよ！\nそんな強がりを言っちゃ！		2001-07
+FadeOut	white					.1
+Se	回復
+FadeIn	white					.1
+	ディーア	通常						とりあえず応急手当はしたが…\nちゃんとした手当を受けないと\n急いで街へ戻るぞ、リディ！		9999-00
+	冥獣ギルドの刺客							本当に大丈夫だから…
+	リディ	嬉しい_もち_笑い						合点だよ、マスター！\n依頼が終わって報酬が入ったら、\n美味しい高級お菓子が食べたいなー
+	冥獣ギルドの刺客							待て、人の話を聞…		3006-04
+	ディーア	笑い						そうだなー\nこの依頼の報酬次第では、\nそれも叶うぞー楽しみだなー		9999-00
+Se	走る
+Tween	ディーア	MoveTo	x=600 time=1			Add
+Wait						1
+CharacterOff	リディ
+CharacterOff	ディーア
+CharacterOff	冥獣ギルドの刺客
+	冥獣ギルドの刺客	<Off>						離せぇぇぇーーー!!\nお主ら、報酬を…\n水増しするつもりだろうー！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	wipe
+Bg	市街地A
+Bgm	平和
+FadeIn	black					.5
+	ディーア		2_3
+	リディ	通常_もち_笑い	3_3					刺客さんが無事に\n助かって良かったね、マスター		2001-05
+Tween	ディーア	ScaleBy	x=-1 time=0.5
+	ディーア	怪しい						あぁ、全くだ…\nあのまま放って置くと\n<color=mk2wisp>「命は投げ捨てるもの」</color>
+	ディーア	通常						とか言って、無茶しそうな\n雰囲気だったからなー\nでも、刺客さんを助けたおかげで…
+	ディーア	笑い						善意ある《冥獣》ギルドの人たちが、\n報酬を上乗せしてくれたんだ\n人助けって良い事だな、うん
+	ディーア							依頼人は喜び、\n俺たちも嬉しい\nまさにウィンウィンな状態だ♪
+	リディ	驚き_もち_誇る						という事は…最初より多くの報酬が\n貰えたって事？
+	ディーア	怪しい						その通りだ\n思っていたよりも水増…\nじゃなくって！
+	ディーア	笑い						多くもらえたから、\n後で高級お菓子を買ってあげるぞ
+Tween	リディ	PunchPosition	y=50
+	リディ	笑い_もち_誇る						わーい♪やったー！\n私、高級アイスの、\n<color=mk2impo>「コペンハーゲンダット」</color>がいいー		2001-06
+Tween	ディーア	PunchPosition	y=50
+	ディーア							よーし、俺…\n今日は特盛アイス頼んじゃうぞ		9999-00
+	リディ	驚き_もち_キラン						あ、マスターずるいー！\n私も同じやつがいいー!!
+EndScenario

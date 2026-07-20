@@ -1,0 +1,751 @@
+# G_429_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	市街地A2(ハロウィン)
+	旅人
+FadeIn	white					.5
+	旅人							ハッピーハロウィン!!
+CharacterOff
+	女の子
+Tween	女の子	PunchPosition	y=30				NoWait
+	女の子							おかしくれなきゃ、\nいたずらしちゃうよー♪
+CharacterOff
+	おばけ1		2_3_m					お菓子ちょうだい！
+Param	character_grayout=false
+CharacterOff
+	おばけ仮装（男）		1_3
+	おばけ仮装（女子）		3_3
+	おばけ仮装（女子）							トリックオアトリート!!
+CharacterOff
+StopBgm
+	黒グラデーション		エフェクト表
+	サフィンの篝火	通常
+	サフィンの篝火	通常						なにが……\nトリックオアトリート……
+	サフィンの篝火	通常						なにが……\nハロウィン……
+Bgm	緊迫
+Shake	サフィンの篝火		x=10 time=1				NoWait
+	サフィンの篝火							がくがく、ぶるぶる……
+	サフィンの篝火							も、もう<dash=2>
+CharacterOff
+	集中線		エフェクト表
+	サフィンの篝火	泣き_拡大	エフェクト裏
+	サフィンの篝火							もうハロウィンなんてやめようよー!!\nぐすぐすっ!!
+FadeOut	black					.5
+CharacterOff						0
+	　　　　　　　　　　
+Bg	酒場1F					0
+StopBgm
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　　　　 <color=blue>～1時間前～</color>
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	1_2_b
+	フレイムタン	ハロウィン	2_2
+Bgm	平和
+	フレイムタン	ハロウィン						ますたー♪\nとりっくおあとりーと！
+Tween	フレイムタン	PunchPosition	y=30				NoWait
+	フレイムタン	ハロウィン						ねぇねぇ！\nふれれの衣装、にあってる？
+	ディーア	笑い2						ああ、すごくよく似合ってるぞ！
+	フレイムタン	ハロウィン						それじゃあ、ますたー！\nおかしちょうだい♪
+	ディーア	笑い2						もちろん！\nはい、お菓子どうぞ！
+Tween	フレイムタン	PunchPosition	y=30				NoWait
+	フレイムタン	ハロウィン						わーい！\nますたー、ありがとうー♪
+Se	走る
+Tween	フレイムタン	MoveBy	x=-800 time=1.5
+Tween	ディーア	MoveTo	x=0 time=1				NoWait
+	ディーア							よかった！\n今年のハロウィンも、\nみんな楽しそうだな
+StopBgm
+CharacterOff
+	サフィンの篝火	通常_拡大	エフェクト裏
+	黒グラデーション		エフェクト表
+	サフィンの篝火	通常_拡大						はぁ……
+CharacterOff
+	ディーア	驚き2						……え？
+Bgm	絶望
+CharacterOff
+	サフィンの篝火	通常
+	黒グラデーション		エフェクト表
+	サフィンの篝火	通常						なんで、\nハロウィンがあるんだろ……
+	サフィンの篝火	通常						ハロウィンなんて\nなくなればいいのに……ジトジト
+CharacterOff
+	サフィンの篝火	通常	p7b
+	ディーア	驚き2	p3
+	ディーア	驚き2						さ、サフィン……？
+	サフィンの篝火	通常						……そうだよ\nハロウィンでテンションが下がってる\nサフィンだよ……
+	サフィンの篝火	通常						でも、マスターは\n楽しそうだね……ジロジロ
+	ディーア	汗2						あ、ああ\n年に一度のことだしな
+	ディーア	通常2						それより、\nサフィンが部屋から\n出てくるなんて珍しいな
+	サフィンの篝火	通常						だって、今日は\nお仕事しないといけないから
+	ディーア	驚き2						……え？
+StopBgm
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						さ、サフィンが仕事!?
+Bgm	平和
+Tween	サフィンの篝火	MoveBy	x=10				NoWait
+	サフィンの篝火	通常						どうしたの、マスター？\nそんなに驚いて
+	ディーア	驚き2						だ、だっていつもは……！
+Se	回想
+FadeOut	black					.5
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	サフィンの篝火					0
+Bg	酒場_宿屋(夜)					0
+FadeIn	black					.3
+	サフィンの篝火	通常						『ぐだぐだー\n　今日もなんにもしないよ』
+FadeOut	black					.3
+CharacterOff						0
+	サフィンの篝火					0
+FadeIn	black					.3
+	サフィンの篝火	通常						『ずっとのんびりしていたい\n　……ダラダラ』
+FadeOut	black					.3
+CharacterOff						0
+	サフィンの篝火					0
+FadeIn	black					.3
+	サフィンの篝火	通常						『働くのいやだし、\n　変わらない毎日がいいなー』
+FadeOut	black					.3
+CharacterOff						0
+	サフィンの篝火	通常	p7b			0
+	ディーア	驚き2	p3			0
+Bg	酒場1F					0
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	black					.5
+	ディーア	驚き2						<dash=2>って\nのんびりしてるのに！
+	サフィンの篝火	通常						……私だって働きたくないけど\n仕方ないでしょ？
+	サフィンの篝火	通常						だって、「サフィンの篝火」は\n冥府の儀式の管理人……\nにされちゃってる魔剣だから
+Shake	サフィンの篝火		x=10 time=1.5				NoWait
+	サフィンの篝火	通常						境界が曖昧になりすぎてないか、\nハロウィンがちゃんとできているか\n見なきゃいけないの……ぶるぶる
+	ディーア	あはは2						そうなんだな
+	サフィンの篝火	通常						おばけを見るのは、嫌なんだけど……\nでもハロウィンだから、\n見なきゃいけないし……
+FadeOut	black					.3
+CharacterOff						0
+	おばけ1		1_3_m			0
+	おばけ2		2_3_m
+	おばけ3		3_3_m
+	　　　　　　　　　　		1_2			0
+Bg	市街地A2(ハロウィン)					0
+FadeIn	black					.3
+Wait						1
+FadeOut	black					.3
+CharacterOff						0
+	サフィンの篝火	泣き				0
+Bg	酒場1F					0
+FadeIn	black					.3
+Shake	サフィンの篝火		x=5 time=1				NoWait
+	サフィンの篝火	泣き						なんで私のお仕事はこんななの……\nグスグスっ
+CharacterOff
+	サフィンの篝火	泣き	p7b
+	ディーア	通常2	2_4
+	フレイムタン	ハロウィン	画面外_右
+Se	走る
+Tween	フレイムタン	MoveTo	x=-800 time=4.5				NoWait
+	フレイムタン	ハロウィン						とりっくおあとりーとー♪
+Tween	サフィンの篝火	PunchPosition	y=30				NoWait
+Tween	サフィンの篝火	MoveBy	x=-100				NoWait
+Se	ポップイン
+	サフィンの篝火	通常						ひゃ!?
+Tween	ディーア	MoveBy	x=20				NoWait
+	ディーア	驚き2						さ、サフィン、大丈夫か？
+	サフィンの篝火	泣き						う、うん……\nって、ひゃぁあああん!?
+Tween	サフィンの篝火	PunchPosition	y=30
+Tween	サフィンの篝火	MoveBy	x=120				NoWait
+	サフィンの篝火	泣き						ちょ、ちょっと、マスター!?\n私にさわったらだめぇ!!				ジャストアイデア：リアクションにボイス使うのありかも
+	サフィンの篝火	泣き						う、うぅ……\n前にも言ったでしょ？\nすんすん……
+Shake	サフィンの篝火		x=5 time=1				NoWait
+	サフィンの篝火	泣き						私、誰にもさわられたくないって……\nグズグズ……
+	ディーア	汗2						そうだった……\nほんとにごめんな
+Tween	サフィンの篝火	MoveBy	x=-30				NoWait
+	サフィンの篝火	泣き						…………うん
+	サフィンの篝火	通常						わざとじゃなかったし、\nはっきり謝ってくれたからいいよ
+	サフィンの篝火	泣き						じゃあ、私は\nお仕事を……ぐすぐす……
+Tween	サフィンの篝火	MoveBy	x=40				NoWait
+	サフィンの篝火	泣き						うぅ……\nあ、あそこ……\nおばけがいっぱい……ぶるぶる
+	ディーア	怒り2						……サフィン、大丈夫か？
+	ディーア	笑い2						そうだ！\n外を見ながらでいいから、\nサフィンもパーティーしないか？
+	ディーア	通常2						そうすれば、\n気が紛れるかもしれないし
+	サフィンの篝火	通常						……ありがとう\nでも、私は一人がいいから
+	サフィンの篝火	通常						私のことは気にしないで\nハロウィンを楽しんでてよ……
+	サフィンの篝火	通常						このままトラブルが\n起こらなかったらそれで<dash=2>
+StopBgm
+								キャァアアアア!!
+Bgm	緊迫
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						な、なんだ!?\n……外から？
+	ディーア	怒り2						見に行こう！
+Shake	サフィンの篝火		x=5 time=1				NoWait
+	サフィンの篝火	通常						なんだか、いやな予感……\nぶるぶる……
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	サフィンの篝火	通常	画面外_右_b			0
+	ディーア	怒り2	画面外_右			0
+Bg	市街地A2(ハロウィン)
+Wait						1
+FadeIn	black					.5
+Se	走る
+Tween	サフィンの篝火	MoveTo	x=150 time=2			Add
+Tween	ディーア	MoveTo	x=-100 time=1
+	ディーア	驚き2						あ、あれは!?
+CharacterOff
+	旅人		3_3
+	おばけ仮装（女子）		1_3
+	キノコリオン		1_1
+Tween	キノコリオン	PunchPosition	y=30				NoWait
+	キノコリオン							ノコー！
+CharacterOff
+	サフィンの篝火	通常	p7b
+	ディーア	驚き2	p3
+	ディーア	驚き2						キノコリオン!?\nハロウィンに紛れ込んだのか？
+	サフィンの篝火	通常						おばけと人が混ざってるのに、\n今度は魔物まで……
+	ディーア	悔しい2						しかも<dash=2>
+CharacterOff						0
+	おばけ仮装（男）		2_2_b			0
+	酒場のおばちゃん		1_2_b			0
+	キノコリオン		2_3			0
+	キノコリオン  		1_3			0
+	キノコリオン 		3_3			0
+Tween	キノコリオン	PunchPosition	y=30				NoWait
+	キノコリオン							ノコー!!
+CharacterOff
+	サフィンの篝火	通常	3_3
+	ディーア	悔しい2	1_3
+	ディーア	悔しい2						こんなにたくさん……!?
+CharacterOff
+	旅人		3_3			0
+	おばけ仮装（女子）		1_3			0
+	キノコリオン		2_3			0
+	キノコリオン							ノコ！ ノコ！
+Tween	キノコリオン	RotateTo	y=180 time=0
+Tween	キノコリオン	MoveBy	x=800 time=2				NoWait
+Se	走る
+Wait						1
+CharacterOff
+	サフィンの篝火	通常	p7b
+	ディーア	怒り2	p3
+	ディーア	怒り2						待て！\nくそ、人混みが邪魔で……！
+	ディーア	悔しい2						早く退治しないと\n大変なことになるぞ！
+	サフィンの篝火	通常						はぁ……\nそっか、そっかぁ……
+	サフィンの篝火	通常						ほんとにいやだけど……\n<dash=2>これだけはやらないと
+	サフィンの篝火	通常						じゃあ、退治しに行こっか……
+	ディーア	驚き2						サフィンも一緒に来てくれるのか？
+	サフィンの篝火	通常						だって、それが役目だからね……
+	ディーア	驚き2						だけど、ここには\nおばけも人混みも……
+Se	走る
+Tween	サフィンの篝火	MoveTo	x=-800 time=2.5				NoWait
+Wait						.5
+	ディーア	驚き2						あっ！\n待ってくれ、サフィン！
+StopBgm
+	ディーア	悔しい2						（サフィン……）
+Se	回想
+Bgm	絶望
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	サフィンの篝火	泣き				0
+Bg	酒場1F					0
+FadeIn	black					.3
+	サフィンの篝火	泣き						う、うぅ……\n前にも言ったでしょ？\nすんすん……
+	サフィンの篝火	泣き						私、誰にもさわられたくないって……\nグズグズ……
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	怒り2				0
+Bg	市街地A2(ハロウィン)					0
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	black					.3
+	ディーア	怒り2						やっぱり心配だ……！
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=2.5				NoWait
+Wait						.2
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	怒り2	p3			0
+	サフィンの篝火	通常	p7b			0
+Bg	市街地A(ハロウィン)					0
+Wait						1
+FadeIn	black					.5
+Bgm	図書館											BGM合ってるけど、使っていいの？
+	サフィンの篝火	通常						うぅ、人もおばけもいっぱい……\n皆の境界がふれ合ってる……
+	ディーア	怒り2						これじゃあ、キノコリオンを\n探すのも一苦労だな
+	サフィンの篝火	通常						早く見つかんないかなぁ……\nこわごわ
+	ディーア	怒り2						サフィン、本当にいいのか？
+	サフィンの篝火	通常						……なにが？
+	ディーア	怒り2						おばけが怖いなら、\n酒場で待ってて良かったんだぞ
+	サフィンの篝火	通常						いつもならもちろんそうするけど、\n今日はハロウィンだから\nお仕事だけはちゃんとやらないと
+	サフィンの篝火	通常						じゃないと私の境界が\n<dash=2>曖昧になっちゃう
+	ディーア	驚き2						曖昧？
+Param	character_grayout=false
+FadeOut	black					.3
+CharacterOff						0
+	サフィンの篝火					0
+Bg	白背景					0
+FadeIn	black					.3
+	サフィンの篝火							境界ってね、簡単に崩れちゃうの
+FadeOut	black					.3
+CharacterOff						0
+	おばけ1		2_3_m			0
+	　　　　　　　　　　		2_2			0
+FadeIn	black					.3
+	サフィンの篝火	<Off>						あの世とこの世の境が崩れたら\nおばけが来ちゃう
+FadeOut	black					.3
+CharacterOff						0
+	サフィンの篝火	絶望				0
+FadeIn	black					.3
+	サフィンの篝火	絶望						自分の境界が崩れたら、\n他のものと混ざりあって、\n自分のことも分からなくなる
+Param	character_grayout=true
+CharacterOff						.7
+Wait						1
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	怒り2	p3			0
+	サフィンの篝火	通常	p7b			0
+Bg	市街地A(ハロウィン)					0
+FadeIn	black					.5
+	サフィンの篝火	通常						私の力はその境界を崩すから……\n世界は脆いって分かっちゃう
+	サフィンの篝火	通常						でも、私だけは……\n崩れない確かな存在でいたいの
+	サフィンの篝火	通常						だから、いつもはなにもしないし、\n他の人とも触れ合いたくない
+	サフィンの篝火	通常						けど……このお仕事は\n私を私だって決めるものだから、\nいやだけどやるんだ……
+	ディーア	怒り2						……そうだったんだな
+	サフィンの篝火	通常						はぁ……\n別に、深く考えなくていいよ？\n私のことは気にしないで
+	サフィンの篝火	通常						そんなことよりも、\n早くお仕事を終わらせたいな\n……びくびく
+StopBgm
+Tween	サフィンの篝火	PunchPosition	y=30
+	サフィンの篝火	通常						あれ……？\nあっちに今、なにか……
+Se	走る
+Tween	サフィンの篝火	MoveTo	x=-800 time=2				NoWait
+	ディーア	驚き2						サフィン、はぐれたら危ないって！
+CharacterOff
+	サフィンの篝火	通常	画面外_右_b
+	キノコリオン		1_3
+Tween	サフィンの篝火	MoveTo	x=150 time=1.5				NoWait
+	サフィンの篝火	通常						あ、キノコリオン見つけた……
+CharacterOff
+	キノコリオン							ノコノコ……\nノ、コ……？				キノコリオンがおばけへ変化する演出
+	オーラ青		エフェクト表
+Se	ガラス割れる
+Wait						1
+FadeOut	white					.1
+Se	闇1
+CharacterOff	キノコリオン					0
+CharacterOff	オーラ青					1
+	おばけ1		2_3_m			1.5
+FadeIn	white					.1
+Wait						.7
+Bgm	緊迫
+	おばけ1							おばけだぞー!!
+StopBgm
+CharacterOff
+	集中線		エフェクト表
+	サフィンの篝火	泣き_拡大	エフェクト裏
+Shake	サフィンの篝火		x=5				NoWait
+	サフィンの篝火	泣き_拡大						きゃぁあああああああ!?
+Bgm	コメディ
+CharacterOff
+	サフィンの篝火	泣き
+Tween	サフィンの篝火	PunchPosition	y=50				NoWait
+	サフィンの篝火	泣き						ひ、ひゃああああ!!\nなにあれ!? なにあれ!?
+Se	走る
+Tween	サフィンの篝火	MoveBy	x=800 time=2				NoWait
+	サフィンの篝火	泣き						やだぁ！\n怖いぃ！ 見たくないぃ……!!
+CharacterOff
+	おばけ1		2_3_m
+Tween	おばけ1	PunchPosition	y=30				NoWait
+	おばけ1							ドッキリ成功！\nとりっくおあとりーとぉ!!
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	驚き2	1_3			0
+	サフィンの篝火	泣き	画面外_左			0
+FadeIn	white					.2
+Wait						.5
+Se	走る
+Tween	サフィンの篝火	MoveTo	x=90 time=1				NoWait
+	サフィンの篝火	泣き						ひぃいいいん!!\nもうやだぁあああああ!!
+Se	走る
+Tween	サフィンの篝火	MoveBy	x=1600 time=4				NoWait
+Wait						.2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						サフィン！\nどこに行くんだ!?
+Se	走る
+Tween	ディーア	MoveBy	x=1600 time=5				NoWait
+Wait						.5
+FadeOut	black					.2
+CharacterOff						0
+	おばけ1		furisosu			0
+	おばけ2		ashimi			0
+	サフィンの篝火	泣き	p1b			0
+FadeIn	black					.2
+Tween	サフィンの篝火	MoveTo	x=90 time=0.5				NoWait
+Wait						.8
+	サフィンの篝火	泣き						ひぃぃ……！
+Tween	おばけ1	MoveTo	y=-90 time=0.4				NoWait
+Se	ポップイン
+	おばけ1							トリック！
+Tween	サフィンの篝火	PunchPosition	y=20				Add
+Tween	サフィンの篝火	MoveBy	x=-110 time=1				NoWait
+	サフィンの篝火	泣き						ひゃん!?
+Wait						.3
+Tween	おばけ2	MoveTo	y=-90 time=0.4				NoWait
+Se	ポップイン
+	おばけ2							トリート？
+Tween	サフィンの篝火	PunchPosition	y=50				NoWait
+Tween	サフィンの篝火	MoveBy	x=20				NoWait
+	サフィンの篝火	泣き						やだやだぁ!!
+FadeOut	white					.1
+CharacterOff						0
+	サフィンの篝火	泣き_拡大	エフェクト表			0
+FadeIn	white					.1
+Shake	サフィンの篝火		x=5				NoWait
+	サフィンの篝火	泣き_拡大						おばけ、来ないでよぉ……!!\nガクガク……!!
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	サフィンの篝火	通常				0
+Bg	市街地A2(ハロウィン)
+Wait						1
+FadeIn	black					.5
+	サフィンの篝火	通常						うぅ……\nここなら、誰も来ないよね……？
+Shake	サフィンの篝火		x=0.5				NoWait
+	サフィンの篝火	泣き						がくぶる、ぐすぐす
+	サフィンの篝火	泣き						ひっく……！\nうぅぅ……こわかったぁ……
+CharacterOff
+	ハデス	通常						……サフィンちゃん？
+CharacterOff
+	ハデス		1_2
+	サフィンの篝火		2_2
+Tween	サフィンの篝火	PunchPosition	y=30				NoWait
+	サフィンの篝火	泣き						ひゃっ!?
+	サフィンの篝火	通常						あ……ハデスちゃん？
+	ハデス	通常						よかった、見つけた……
+	サフィンの篝火	通常						ハデスちゃん、どうしたの？
+	ハデス	通常						マスターさんが、\nサフィンちゃんのこと\n探して、て……
+Shake	ハデス		x=5 time=5				NoWait
+	ハデス	通常						<dash=6>ぁ
+	サフィンの篝火	通常						ハデスちゃん……？
+	ハデス	通常						サフィンちゃん……う、後ろ……
+	サフィンの篝火	通常						後ろ？
+	ハデス	通常						う、うしろ、に……
+	サフィンの篝火	通常						…………え
+Se	心拍
+Wait						.7
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+	サフィンの篝火	通常	p4b			0
+FadeIn	white					.2
+	おばけ仮装（女子）		3_3			1.5						サフィンの肩口におばけが現れるように
+	おばけ仮装（女子）							はっぴー、はろうぃーん♪
+Param	character_grayout=true
+FadeOut	white					.2
+CharacterOff						0
+	ハデス	通常	1_2			0
+	サフィンの篝火	泣き	2_2			0
+FadeIn	white					.2
+	サフィンの篝火	泣き						きゃああああああああ!?
+Tween	ハデス	PunchPosition	y=30				NoWait
+	ハデス							<dash=4>っ!?
+Se	走る
+Tween	ハデス	MoveBy	x=-800 time=1.5				NoWait
+Se	走る
+Tween	サフィンの篝火	MoveBy	x=800 time=1.5				NoWait
+Wait						1
+FadeOut	black					.1
+CharacterOff						0
+	パイ＆シーズ=ハレ	通常	画面外_右			0
+	サフィンの篝火	泣き	p3b			0
+FadeIn	black					.3
+Shake	サフィンの篝火		x=10 time=2				NoWait
+	サフィンの篝火	泣き						いま、ピトってした!?\nさわられたぁ！\nブルブル、ガクガク!!
+	サフィンの篝火	泣き						私、私の境界を超えられた……
+Tween	パイ＆シーズ=ハレ	MoveTo	x=90 time=1.5				NoWait
+Wait						.3
+	パイ＆シーズ=ハレ	パイ						サフィンちゃんみっけ♪\nトリックアンド<dash=2>
+Tween	パイ＆シーズ=ハレ	PunchPosition	y=30				NoWait
+	パイ＆シーズ=ハレ	シーズ						トリック♪ いたずらしちゃうよ♪
+CharacterOff
+	サフィンの篝火	胸_拡大	エフェクト表
+Se	ポップイン
+Tween	サフィンの篝火	PunchPosition	y=10				NoWait
+	サフィンの篝火							ひゃあん!?
+CharacterOff
+	パイ＆シーズ=ハレ	通常	2_2
+	サフィンの篝火	泣き	1_2_b
+Wait						.5
+Tween	サフィンの篝火	MoveTo	x=-800 time=1.5				NoWait
+Se	走る
+	サフィンの篝火	泣き						さ、さわらないでぇ……!!
+	パイ＆シーズ=ハレ	通常						あ、待ってよー！
+FadeOut	black					.5
+CharacterOff						0
+	サフィンの篝火					0
+FadeIn	black					.5
+	サフィンの篝火							うぅぅ……ぐすぐすっ\nもう、ここどこぉ……
+	サフィンの篝火							おばけも、魔物も、人も……\nいっぱいでぐちゃぐちゃで……！
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	悔しい2	画面外_左			0
+	サフィンの篝火	通常	p3b			0
+	バハムート	ハロウィン	p7			0
+FadeIn	black					.2
+Tween	バハムート	MoveBy	x=-50				NoWait
+	バハムート	ハロウィン						あ、サフィンちゃん！\nどうしたの？\n困ってるならバハムートちゃんに<dash=2>
+	サフィンの篝火	泣き						きゃぁああああ……!!\nおばけはもうやだぁ……!!
+Se	走る
+Tween	サフィンの篝火	MoveTo	x=800 time=1				NoWait
+Wait						.5
+Tween	バハムート	PunchPosition	y=30				NoWait
+	バハムート	ハロウィン						え？ あれ？\nおばけじゃないんだけど……\n大丈夫かな、サフィンちゃん
+Se	走る
+Tween	ディーア	MoveTo	x=-80 time=1
+Tween	バハムート	PunchPosition	y=30				NoWait
+	バハムート	ハロウィン						あ！ マスターさん！
+	ディーア	驚き2						バハムート！\nサフィンが来なかったか!?
+	バハムート	ハロウィン						えっと、\nあっちに走っていきましたよっ！
+	ディーア	悔しい2						助かった！ ありがとう！
+StopBgm
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=1.5				NoWait
+FadeOut	black					.5
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+	サフィンの篝火	泣き				0
+Bg	市街地A(ハロウィン)					0
+FadeIn	black					.5
+Bgm	絶望
+	サフィンの篝火	泣き						ぐすっ、ひっく……
+	サフィンの篝火	泣き						どうしよう……\nいっぱい、さわられちゃった……
+Tween	サフィンの篝火	PunchPosition	y=10				NoWait
+	サフィンの篝火	泣き						色んな人が、おばけが\n私の境界を超えてきた……
+Param	character_grayout=false
+	オーラ青		エフェクト表			1
+Wait						1
+	サフィンの篝火	通常						お仕事もできてない……\nどうしよう……\nでも、おばけ、おばけが……
+Bg	黒背景					10
+	サフィンの篝火	泣き						わたし、わたし……
+CharacterOff	オーラ青					1
+	黒グラデーション		エフェクト表
+	サフィンの篝火	通常						あ、あれ……？
+	サフィンの篝火	通常						私、どこにいるの……？
+FadeOut	black					.3
+CharacterOff						0
+	　　　　　　　　　　					0
+Bg	市街地A(ハロウィン)					0
+Se	ガヤA
+FadeIn	black					.3
+Wait						2
+FadeOut	black					.3
+StopSe						0
+CharacterOff						0
+Bg	黒背景					0
+	黒グラデーション		エフェクト表			0
+	サフィンの篝火					0
+FadeIn	black					.3
+	サフィンの篝火	通常						誰も、私のこと見えてない……？
+	サフィンの篝火	通常						もしかして、私の力が……？\n私が、崩れかけてる……!?
+	サフィンの篝火	泣き						や、やだっ！\n曖昧になりたくない……\n私は、私のままで……！
+Bg	黒背景
+Param	character_grayout=false
+CharacterOff						1
+	？？？？							ハッピーハロウィン
+	？？？？							おかしくれなきゃ\nいたずらするぞぉ！
+	？？？？							きゃっきゃっ
+	？？？？							ノコー！ ノコー！
+Param	character_grayout=true
+FadeOut	black					.1
+Bg	黒背景					0
+	サフィンの篝火	絶望				0
+FadeIn	black					.1
+	サフィンの篝火	絶望						だ、誰か、助けて……！
+StopBgm
+	ディーア	<Off>						サフィン……
+	ディーア	<Off>						サフィン……!!
+	サフィンの篝火	通常						……え？\nこの声……？
+	ディーア	<Off>						サフィン!!
+Param	character_grayout=false
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	本気2	p4			0
+	サフィンの篝火	通常	2_2_b			0
+Bg	市街地A(ハロウィン)					0
+FadeIn	white					.3
+Wait						.3
+Param	character_grayout=true
+	サフィンの篝火	通常						ま、マスター……				ここの演出をなんとかしたいな
+Bgm	神秘
+	ディーア	通常2						よかった！\n間に合った!!
+	サフィンの篝火	照れ						……ど、どうしたの？\n……どきどき
+StopBgm
+	ディーア	怒り2						どうって……
+CharacterOff
+	キノコリオン
+Bgm	緊迫
+Tween	キノコリオン	PunchPosition	y=30				NoWait
+	キノコリオン							ノコー!!
+CharacterOff
+	ディーア	本気2	p4
+	サフィンの篝火	通常	2_2_b
+	サフィンの篝火	通常						き、キノコリオン？				調整
+	ディーア	本気2						ああ、探してたキノコリオンだ
+	サフィンの篝火	通常						あっ、そっか……\n私の境界が揺らめいてたから……
+	サフィンの篝火	通常						私のことも、他のことも\n分からなくなってたんだ……
+	サフィンの篝火	照れ						マスターが助けてくれたんだね……
+	ディーア	驚き2						サフィン、大丈夫か？
+	サフィンの篝火	照れ						だ、大丈夫……\n今は私、はっきりしてるから
+	ディーア	笑い2						そうか、良かった……
+Bgm	キノコリオン
+	ディーア	本気2						サフィン、一緒に戦えそうか？
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							トリックオアトリート、ノコー！
+CharacterOff
+	ディーア	本気2	p4
+	サフィンの篝火	照れ	2_2_b
+	ディーア	怒り2						あいつを倒して、\nサフィンの役割を果たそう！
+	サフィンの篝火	照れ						う、うん……！
+If	isdebug==true
+CharacterOff
+Jump	*G_429_02
+EndIf
+EndScenario
+
+# G_429_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	市街地A(ハロウィン)
+	サフィンの篝火	照れ	2_2_b
+	ディーア	笑い2	1_2
+FadeIn	white					.5
+	ディーア	笑い2						よかった\nようやく一匹倒せたな
+	サフィンの篝火	照れ						あ、あのさ、マスター\nその……私に、さわってる
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						え……？ あっ！\nごめんな、サフィン！
+Tween	ディーア	MoveTo	x=-100 time=0.5				NoWait
+	ディーア	汗2						いやだって言われたのにな
+	サフィンの篝火	通常						そ、それは……
+	サフィンの篝火	照れ						…………なんだか、不思議
+Tween	サフィンの篝火	MoveBy	x=-40				NoWait
+	サフィンの篝火	通常						他の人なら、いやだったのに
+	サフィンの篝火	照れ						今のマスター、\nなんか、いやじゃなかった\n……ドキドキ
+	ディーア	驚き2						え……？
+StopBgm
+	サフィンの篝火	通常						それより、\nどうして私の場所が分かったの？
+	サフィンの篝火	通常						私の力、暴走してた
+	サフィンの篝火	通常						自分の境界を崩しかけて、\n存在が薄まって……
+	サフィンの篝火	通常						だから、私のこと\nぼやけて見えなかったはずなのに……
+	サフィンの篝火	通常						なのに、どうして\nマスターは見つけてくれたの？
+	ディーア	通常2						そんなの当たり前だろ？
+Bgm	凱旋
+	ディーア	笑い2						オレはサフィンのマスターで\nサフィンは大切な仲間なんだから
+	ディーア	笑い2						どこにいても、どんな状態でも\n見つけてみせる
+	ディーア	通常2						それに、\nサフィンは曖昧になってなんかない
+	ディーア	通常2						オレにはちゃんと見えてたよ\nサフィンが、確かにここにいるって
+	サフィンの篝火	通常						…………
+	サフィンの篝火	照れ						そっか……\nマスターがいるから
+	サフィンの篝火	照れ						マスターが私を\n確かにしてくれたんだね……
+	サフィンの篝火	通常						そうやって強くなる\n境界もあるんだ……
+	サフィンの篝火	照れ						ねぇ、マスター……
+Param	character_grayout=false
+FadeOut	white					.3
+CharacterOff						0
+	オーラ桃		エフェクト裏			0
+	サフィンの篝火	笑い_拡大	エフェクト表			0
+FadeIn	white					.3
+	サフィンの篝火	笑い_拡大						<dash=4>ありがとう
+FadeOut	white					.3
+CharacterOff						0
+	サフィンの篝火	通常	2_2			0
+	ディーア	笑い2	1_2			0
+FadeIn	white					.3
+Param	character_grayout=true
+	サフィンの篝火	通常						でも、もしかしたら私\nまた自分が分からなくなるかも……
+	ディーア	笑い2						じゃあ、そうならないように\n今度は一緒に行こう
+	ディーア	通常2						それに、二人一緒なら\n怖いのも半分にできると思うんだ
+	ディーア	笑い2						残りのキノコリオンも倒して、\nサフィンの仕事を終わらせよう
+	サフィンの篝火	笑い						……離れないでね？\nちゃんと、私がいるって確かめてね
+	ディーア	笑い2						ああ、今度こそ見失わないよ
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+	キノコリオン
+Bg	市街地A(ハロウィン)
+Wait						1
+FadeIn	black					.5
+Bgm	都市
+Se	弓1
+Tween	キノコリオン	PunchPosition	y=600 time=2				NoWait
+Tween	キノコリオン	MoveBy	x=-800 time=2				NoWait
+	キノコリオン							ノコー!?
+FadeOut	black					.1
+CharacterOff						0
+	キノコリオン					0
+Bg	市街地A2(ハロウィン)					0
+FadeIn	black					.1
+Se	光1
+Tween	キノコリオン	PunchPosition	y=600 time=2				NoWait
+Tween	キノコリオン	MoveBy	x=-800 time=2				NoWait
+	キノコリオン							ノコー!!\n（おかし欲しかったノコー！）
+CharacterOff
+	サフィンの篝火	通常	2_2
+	ディーア	笑い2	1_2
+	ディーア	通常2						よし、\nこれで最後かな？
+	サフィンの篝火	通常						うぅ……疲れたぁ\n……グダグダ
+	ディーア	通常2						お疲れ様、サフィン
+	サフィンの篝火	笑い						もうこの後は\nなんにもしないよ
+	サフィンの篝火	笑い						次のハロウィンまで\nずーっとのんびりするんだから……\nだらだらー
+CharacterOff
+	サフィンの篝火	通常	3_3
+	ディーア	笑い2	2_3
+	リディ	笑いH	画面外_左
+Tween	リディ	MoveTo	x=-180 time=1				NoWait
+Se	走る
+	リディ	笑いH						マスター！ サフィンちゃん！\n魔物退治お疲れ様！
+	ディーア	驚き2						リディ！\nどうしたんだ？ こんな所まで来て
+	リディ	通常H						それがね、街の人達が……
+	リディ	通常H						『今年のハロウィンは\n　魔物も来て大変だったな』
+	リディ	通常H						『だから、また今度\n　改めてハロウィンをやろう』
+	リディ	笑いH						って言うから、知らせに来たの！
+StopBgm
+CharacterOff
+	サフィンの篝火	通常_拡大	エフェクト表
+	サフィンの篝火	通常_拡大						……………………え？
+Bgm	コメディ
+CharacterOff
+	ディーア	汗2	1_2
+	サフィンの篝火	絶望	2_2_b
+	サフィンの篝火	泣き						また、やるの？\nハロウィン？
+	ディーア	汗2						あ、あはは……\nそうみたいだな
+CharacterOff
+	サフィンの篝火	泣き_拡大	エフェクト表
+	サフィンの篝火	泣き_拡大						うぅう……！
+	サフィンの篝火	泣き_拡大						もうハロウィンはやだよー!!
+CharacterOff
+	ディーア	汗2	1_2
+	サフィンの篝火	泣き	2_2_b
+	サフィンの篝火	泣き						二回もやらなくていいでしょ!?\n今日はこんなに働いたのにー!!
+	ディーア	汗2						ま、また次も頑張ろう！
+CharacterOff
+	サフィンの篝火	泣き_拡大	エフェクト裏
+Shake	サフィンの篝火		x=5				NoWait
+	サフィンの篝火	泣き_拡大						グスグスっ！ こうなったら……\nマスター！
+Param	character_grayout=false
+	集中線		エフェクト表
+	サフィンの篝火	泣き_拡大						また、マスターにも\n付き合ってもらうからね！
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*G_429_01
+EndIf
+EndScenario

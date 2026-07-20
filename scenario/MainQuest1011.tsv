@@ -1,0 +1,5183 @@
+# Q1011_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Se	強風	TRUE
+Bg	黒背景
+Param	character_grayout=false
+	11章スチルA		エフェクト表									暗い草原or空、なんかつくる
+	黒背景		エフェクト表2
+FadeIn	black					.5
+CharacterOff	黒背景					4
+Se	草原を歩く
+Tween	11章スチルA	PunchPosition	y=-5				NoWait
+Tween	11章スチルA	MoveBy	x=2
+Wait						.5
+Tween	11章スチルA	PunchPosition	y=-5				NoWait
+Tween	11章スチルA	MoveBy	x=-2
+Wait						.5
+Tween	11章スチルA	PunchPosition	y=-5				NoWait
+Tween	11章スチルA	MoveBy	x=2
+Wait						.5
+Tween	11章スチルA	PunchPosition	y=-5				NoWait
+Tween	11章スチルA	MoveBy	x=-2				NoWait
+	リディ	<Off>						はぁ、はぁ……
+FadeOut	black					.5
+StopSe
+CharacterOff						0
+Bg	草原C2					0
+	リディ	悲しい2				0
+FadeIn	black					.5
+	リディ							マスター？\nどこにいるの……？
+Param	character_grayout=false
+	白背景		エフェクト表2			1.5
+Tween	白背景	ScaleBy	x=1.1 y=1.1 time=1.5				Add
+	リディ							うっ……
+CharacterOff	リディ					0
+Bg	白背景					0
+	ディーア	黒2				0						暗めのディーア　遠ざかっていけるように
+CharacterOff	白背景
+	リディ	<Off>						マスター!!
+Se	草原を歩く
+Tween	ディーア	ScaleBy	x=0.5 y=0.5 time=3	linear			NoWait
+Tween	ディーア	MoveBy	y=200 time=3	linear			NoWait
+CharacterOff	ディーア					3
+	リディ	<Off>						待って、マスター、待って……
+	リディ	<Off>						お願い、置いていかないで……！
+Param	character_grayout=false
+CharacterOff						0
+Bg	草原C2					0
+	魔剣殺しブリジット	通常2				0
+	リディ	<Off>						お願いだから……
+CharacterOff
+	　　　　　　　　　　
+Wait						2
+StopSe
+Se	フォーン
+	黒背景		エフェクト表			0
+	？？？？							『おいで、ブリジット』
+CharacterOff	黒背景					0
+StopSe						0
+	リディ	驚き4						……え
+CharacterOff						0
+Bg	白背景					0
+	ヘルメリア					0
+	　　　　　　　　　　		2_2
+Wait						1.5
+	リディ	悲しい4						あなたは<dash=2>
+Se	スローモーションエンド
+FadeOut	white					1
+StopSe
+CharacterOff						0
+Bg	鍛冶病院					0
+	　　　　　　　　　　
+Wait						3
+Bgm	図書館
+FadeIn	black					.5
+	魔剣殺しブリジット	眠り2						…………
+	鍛冶医クランベリー	怪しい2						うーん、これもダメね……
+	鍛冶医クランベリー							ブリジットの魔核機関に\n損傷があるなら、このやり方で\n解決すると思ったんだけど……
+	鍛冶医クランベリー							魔核機関の損傷ではない……\nということは、もっと根本的な部分に\n封印が施されているということかしら
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	8章スチルO		エフェクト表			0
+	白背景		エフェクト裏			0
+FadeIn	black					.3
+	鍛冶医クランベリー	<Off>						白リディちゃんは\n赤、白、黒の3つを混ぜ合わせ、\n魔剣殺しブリジットを復活させた
+	10章BG		エフェクト表			0
+	鍛冶医クランベリー	<Off>						そしてその上で、\n【魔王獣の記憶】を\nブリジットの中に封印した……
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	black					.3
+	鍛冶医クランベリー	怒り2						確かに、状況を聞く限りでは\nそれが最適解ではあるわ
+	鍛冶医クランベリー							【魔王獣の記憶】を安全に\n管理するには、ブリジットの中に\n封印してしまうのが一番良い
+	鍛冶医クランベリー							それはかつての魔剣殺しブリジットの\n使い手も考えたことだもの
+	鍛冶医クランベリー	怪しい2						ただ、それは一歩間違えば\n【魔王獣の記憶】の暴走……\nすなわち魔王獣の復活を招きかねない
+	鍛冶医クランベリー							だから白リディちゃんは\n魔剣殺しブリジットそのものを\n封印した
+	鍛冶医クランベリー							……理には適っているわね\nだからこそ不可解でもある
+Se	回想
+FadeOut	white					.5
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	怒り2				0
+FadeIn	white					.5
+	ディーア							【魔王獣の記憶】の封印を\n解いてほしいんです
+	鍛冶医クランベリー	驚き2						リディちゃんを目覚めさせるの？
+	ディーア	怒り2						いや、"魔剣殺しブリジットの封印"を\n解く必要はありません
+	ディーア							中に眠る【魔王獣の記憶】だけ\n取り出せればいい
+	ディーア							……お願いできますか、クランさん
+FadeOut	white					.5
+CharacterOff						0
+	　　　　　　　　　　
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	white					.5
+	鍛冶医クランベリー	怪しい2						……何を考えているのかしらね、\nあの子は
+	鍛冶医クランベリー							ブリジットを封印した上で、\n【魔王獣の記憶】だけを取り出す\n必要があったとすれば、あるいは……
+	鍛冶医クランベリー							でも、【魔王獣の記憶】を\n別で管理する必要なんて、一体……？
+	鍛冶医クランベリー							もしかして、これも全て\n計算済みなのだとしたら……\nいいえ、そんなことありえない
+	鍛冶医クランベリー							ありえないけれど、彼なら……
+	鍛冶医クランベリー							……一体彼は何を考えて、\n何と戦っているのかしらね
+	鍛冶医クランベリー							いずれにせよ、世界が大きく\n動きそうなことには変わりないわ
+	鍛冶医クランベリー	怒り2						……ねえ、リディちゃん
+	魔剣殺しブリジット	眠り2						<dash=4>
+	鍛冶医クランベリー	怒り2						もし仮に、彼が魔王獣を\n復活させようとしているのなら<dash=2>
+	黒背景		エフェクト表			0
+	鍛冶医クランベリー							歴史に名を残す悪役になるわね、私
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_02
+EndIf
+EndScenario
+
+# Q1011_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	バトル
+Bg	竜鍵マナ
+FadeIn	black					.5
+	勇者A		1_2_b					撤退しろ！\nこれ以上前線はもたない！
+	勇者B		2_2
+Tween	勇者B	MoveTo	x=0				NoWait
+	勇者B							隊長！\nここはオレに任せ<dash=2>
+CharacterOff
+Se	フォーン
+	竜鍵マナ防衛機構											キューブ
+Tween	竜鍵マナ防衛機構	MoveBy	y=500 time=0
+Tween	竜鍵マナ防衛機構	MoveBy	y=-500				NoWait
+	竜鍵マナ防衛機構							<dash=6>!!
+Se	光3
+FadeOut	white					.5
+CharacterOff						0
+	勇者A	黒	1_2			0
+	勇者B	黒	2_2			0
+FadeIn	white					.5
+Wait						1
+Se	倒れる
+Tween	勇者A	MoveBy	y=-300				NoWait
+Wait						.2
+Se	倒れる
+Tween	勇者B	MoveBy	y=-300
+CharacterOff
+	勇者C							くっ……下がれ！\n撤退だ!!
+Se	走る
+Tween	勇者C	MoveBy	x=500 time=2
+FadeOut	black					.5
+Bg	遺跡C					0
+StopBgm
+Wait						2
+Bgm	作戦会議
+FadeIn	black					.5
+	魔剣ヴァルト		2_2
+	勇者レド		1_2					……《<ruby=マスターキー>全知全能</ruby>》の出現を\n確認しました
+	勇者レド							侵攻中の部隊は全滅、\n聖鍵セフィロトまで\n前線を後退させています
+CharacterOff
+	希望王ルル							やはり月の守りは固いか
+	希望王ルル							全軍撤退させろ\n《<ruby=マスターキー>全知全能</ruby>》本人が出てきては\n勝ち目がない
+CharacterOff
+	魔剣ヴァルト		2_2
+	勇者レド		1_2					よろしいのですか？
+CharacterOff
+	希望王ルル							今はまだ兵力を削る時ではない\n今はまだ、な
+CharacterOff
+	魔剣ヴァルト		2_2
+	勇者レド		1_2					はっ、ではそのように
+StopBgm
+Se	歩く
+CharacterOff						1
+Wait						2
+StopSe
+Se	フォーン
+	オーラ青		エフェクト表			1
+Wait						1
+Tween	オーラ青	MoveBy	x=1 time=2				Add
+CharacterOff						1
+Wait						1
+Bgm	神社
+	幻想王ノア					1		苦戦しているようだね、希望王ルル
+	希望王ルル							物見遊山かい、幻想王ノア\n世界が変わろうとしているときに、\nのんきなものだ
+	幻想王ノア							世界は変わらないよ\nキミがどう足掻いてもね
+	希望王ルル							そう思うならば、なぜここに来た？
+	幻想王ノア							困っているだろうと思ったのさ\nマスターキーに\n手を焼いているのだろう？
+	希望王ルル							…………
+	幻想王ノア							考えたのさ、僕とキミの共通項をね
+	幻想王ノア							マスターキーの目的を阻止したい\nという意味では\n僕とキミは共闘の余地がある
+	幻想王ノア							もしマスターキーを掌握する方法が\nあるとするなら……キミは喉から手が\n出るほど欲しいんじゃないのかい？
+	希望王ルル							……そんな術はないよ
+	幻想王ノア							おや、もう諦めたのか
+	希望王ルル							いいや、事実を認めたまでだ
+	幻想王ノア							それはあくまで\nキミの知る事実だろう？
+	幻想王ノア							魔界の記憶は\n何者かによって操作されている
+	幻想王ノア							キミの主観が全てではない\nキミの知らない真実だって\nあるかもしれないわけだ
+	オーラ青		エフェクト表			.5
+StopBgm
+Se	光1
+Wait						.5
+CharacterOff	オーラ青					.5
+Wait						.5
+CharacterOff
+Param	character_grayout=false
+	希望王ルル
+Se	ドーン
+Se	心拍
+Bg	酒場_商業施設					5
+	幻想王ノア	<Off>						<color=mk2wisp>可哀想なルシフル\nキミはただ穏やかな日常を\n求めていただけだ</color>
+	幻想王ノア	<Off>						<color=mk2wisp>平和で、穏やかで、\n争いや悲しみとは無縁の世界を</color>
+	幻想王ノア	<Off>						<color=mk2wisp>聖剣を作る必要などない、\n世界を変える必要などない</color>
+	幻想王ノア	<Off>						<color=mk2wisp>ただ"今"が永遠に続けばいい</color>
+	幻想王ノア	<Off>						<color=mk2wisp>そう望むのであれば、\n倒すべきはマスターキーだ</color>
+CharacterOff
+	少女ルカ
+Tween	少女ルカ	PunchPosition	y=50				NoWait
+	少女ルカ							お兄ちゃん！
+Tween	少女ルカ	ScaleBy	x=1.2 y=1.2				NoWait
+Tween	少女ルカ	MoveBy	y=-50				NoWait
+	少女ルカ							おかえりなさい、お兄ちゃん！
+	希望王ルル							……ルカ
+	少女ルカ							お仕事ご苦労さまです！\n今日も変わりなかったですか？
+	希望王ルル							……ああ
+	少女ルカ							それはなによりです♪
+	少女ルカ							そうだ！\n今日はシチューを作ったんですよ！
+	少女ルカ							お兄ちゃんがこの間食べたいって\n言ってたので<dash=2>
+	黒グラデーション		エフェクト表
+	希望王ルル							…………
+CharacterOff	黒グラデーション
+	希望王ルル	冷徹						なるほど、\n天上王セトがお前を危険視するわけだ
+Se	斬1
+FadeOut	red					.2
+CharacterOff						0
+	少女ルカ
+FadeIn	red					.2
+	少女ルカ							<dash=2>、お兄<color=mk2wisp>、ちゃん？</color>
+Se	光2
+FadeOut	white					.5
+CharacterOff						0
+Bg	遺跡C					2
+FadeIn	white					.5
+Wait						1.5
+Bgm	神社
+	希望王ルル							……僕は夢を見ないよ、幻想王ノア
+	幻想王ノア							《<ruby=ロードオブイリュージョン>万象偽る幻想の鍵</ruby>》を拒絶するか\n……いや、予め読んでいたというのか
+	希望王ルル							おおかた僕から聖剣に関する情報を\n引き出そうとしたのだろうが、\n無駄なことだ
+	幻想王ノア							ククク、あながち無駄ではなかったよ
+	幻想王ノア							少なくともキミの目指す理想を\n知ることはできた
+	幻想王ノア							圧倒的な頂点による支配が生み出す、\n統括された"平和"……
+	幻想王ノア							それをたった一人の妹のために\n望むわけか
+	希望王ルル	冷徹						…………チッ
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+Param	character_grayout=true
+CharacterOff						0
+Bg	遺跡C					0
+	幻想王ノア					0
+Wait						.5
+Se	フォーン
+	オーラ青					1
+CharacterOff	幻想王ノア					1
+Wait						1
+CharacterOff						1
+Wait						1
+	希望王ルル							……幻影か
+CharacterOff
+	黒グラデーション		エフェクト表
+	幻想王ノア	<Off>						そうとも、キミが見ているのは幻想だ
+	幻想王ノア	<Off>						どこまでが本物で、どれが偽物か……\nキミには理解できるかい？
+CharacterOff						1
+Wait						1
+	希望王ルル	冷徹						……現状維持しか頭にない男が何を
+FadeOut	black					1
+CharacterOff						0
+StopBgm
+Bg	洋館
+	　　　　　　　　　　
+Wait						2
+FadeIn	black					.5
+Se	歩く
+	幻想王ノア					1
+Wait						1.5
+Bgm	図書館
+StopSe
+	幻想殺しゼタ	通常						おっかえり～！\nE.D.E.N.はどうだった？
+	幻想王ノア							相変わらずだね\n彼らとノアの一族は、\nどうしても相容れないようだ
+	幻想殺しゼタ	無						あ～わかるかも\nなんかごちゃごちゃしすぎ\nなんだよね、アイツら
+	幻想殺しゼタ	怒り						もっと単純に考えればいいのにさ～、\nそゆとこ苦手だわ
+	幻想王ノア							ああ、だが無関係ではいられない
+	幻想王ノア							これで僕らも動かざるを得なくなった
+	幻想殺しゼタ	通常						マジ!?\nあたしたちやっと戦えんの？
+	幻想王ノア							ああ、約束だからな\n我慢させて悪かったね
+	幻想殺しゼタ	怒り						ホントだよね、よく我慢できたわー\n自分で自分を褒めてあげたい
+	幻想王ノア							フフ、存分に発散するといいさ
+	幻想王ノア							ここから先は僕らの戦争だ
+	幻想王ノア							守るべきものを守るために、\n在るべき形を保つために<dash=2>
+	黒背景		エフェクト表			0
+	幻想王ノア							僕らも馳せ参じようじゃないか
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_03
+EndIf
+EndScenario
+
+# Q1011_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神社
+Bg	山岳A
+FadeIn	black					.5
+	ディーア	驚き2						<dash=2>星の鍵師、アストロロギア
+	アストロロギア							よろしく、無垢のディーア
+	ディーア	怒り2						……モモ以外の《<ruby=マスターキー>全知全能</ruby>》に\n会うのは初めてだ
+	アストロロギア	微笑み2						フフ、息をするように嘘を吐くのだね\nキミは
+	アストロロギア							どうせこれも一つの\n指標にしているのだろう？
+	アストロロギア							おめでとう、キミは今のところ、\n正しい選択をしているよ
+	ディーア	怪しい2						……なんのことだか
+	アストロロギア	笑い						知らないフリをするのは\n構わないけれど、\nきちんと味方は作っておいた方がいい
+	アストロロギア	無関心						キミ、アミグダラ……\nモモのことも騙しているだろう？
+	ディーア	怪しい2						……騙しているつもりはないよ
+	アストロロギア	通常						それならもう少し優しくして\nやってほしいところだけどね
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	戦場跡					0
+Param	character_grayout=false
+	モモ					0
+	　　　　　　　　　　		2_2
+FadeIn	white					.3
+	アストロロギア	<Off>						彼女はマスターキーの中でも\n特殊な存在だ
+	アストロロギア	<Off>						アルトリアの遺志を継ぎ、\nヘルメリアの理想を\n成し遂げようとしている
+	アストロロギア	<Off>						それは生存派マスターキーの総意に\n反することだ
+	アストロロギア	<Off>						もはや彼女に味方する\nマスターキーはいない
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	山岳A					0
+Param	character_grayout=true
+	アストロロギア					0
+FadeIn	white					.3
+	アストロロギア							彼女と協力し合えるのは\nキミくらいしかいないのさ
+	ディーア	怪しい2						……それで、オレを咎めにきたのか\nあるいは止めに来たのか？
+	アストロロギア	笑い						まさか、ボクにキミを\n止める理由はないよ
+	アストロロギア	通常						ボクは『中立派』だもの\nマスターキーで唯一のね
+	ディーア	驚き2						……中立派？
+	アストロロギア							生存派でも滅亡派でもない、\nどちらも支持しない立場ということさ
+	アストロロギア							マスターキーの対立については\n知っているかい？
+	アストロロギア							あるいは魔核機関を使った半永久的に\n生き続ける生命の確立については？
+	ディーア	怪しい2						……魔剣は、魔力の供給源がある限り\n半永久的に生命活動が可能な、\n不老不死の新生命である
+	ディーア	怒り2						やはり、マスターキーの狙いは\n不老不死か
+	アストロロギア	笑い						そうさ
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=false
+	11章スチルB		エフェクト表			0						マスターキー2体のスチル
+FadeIn	black					.5
+	アストロロギア	<Off>						マスターキーは魔界の魔力を\n消費して稼働している
+	アストロロギア	<Off>						だが、この魔界は既に滅びかけている
+	アストロロギア	<Off>						もはやマスターキーの活動を\n維持し続けるだけの\n魔力も残っていない
+	アストロロギア	<Off>						魔界の魔力を食い荒らす\nリオン生命体も\n年々数を増やしていることだしね
+	アストロロギア	<Off>						そんな中、永遠の命を欲した一部の\nマスターキーは、人間の魔力を用いた\n不老不死のシステムを考え始めた
+	アストロロギア	<Off>						それが魔剣システムだ
+	アストロロギア	<Off>						まあ、そうは言っても\n魔剣システムには\n多くの欠陥があるけれどね
+	アストロロギア	<Off>						例えば暴走や冥獣化、\n魔核自体の脆さも課題の一つだ
+FadeOut	black					.3
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	black					.3
+	ディーア	怪しい2						今はまだ、実用化に向けた\n実験の最中というわけか
+	アストロロギア	笑い						そういうことになるね
+	アストロロギア	微笑み2						人間が魔剣を製造し、\n戦争に使えば使うほど、\nマスターキーの実験は完成に近づく
+	アストロロギア							マスターキー自身が魔剣システムを\n取り入れ、永遠の命を得る日も\nそう遠くはないだろう
+FadeOut	black					.3
+CharacterOff						0
+	11章スチルD		エフェクト表									滅亡派マスターキーのスチル
+FadeIn	black					.3
+	アストロロギア	<Off>						一方で、永遠の命を得ることを\n良しとしない一派もいる
+	アストロロギア	<Off>						これが滅亡派と呼ばれる\nマスターキーたちだ
+	アストロロギア	<Off>						彼らはこう考えている\n不老不死というのは\n生命のあるべき形ではなく<dash=2>
+	アストロロギア	<Off>						我々マスターキーを作った\n旧人類に対する冒涜だとね
+	アストロロギア	<Off>						彼ら滅亡派はある手段をもって、\n不老不死の確立を\n阻止しようとしている
+	アストロロギア	<Off>						察しの良いキミなら、\nもうわかっているだろう？
+FadeOut	black					.3
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	black					.3
+	ディーア	怒り2						魔力源となるもの……\nすなわち、人類の絶滅か
+	アストロロギア							そういうことさ
+	アストロロギア							実験のために適度に魔剣を使わせ、\n戦争を長引かせたい生存派と、\n戦争によって人類を滅ぼしたい滅亡派
+	アストロロギア							つまり人類にはマスターキーの\n養分になるか、\n絶滅するかの二択しか残されていない
+	アストロロギア							今の人類が生きながらえているのは、\n生存派マスターキーの方が\n優勢だからに過ぎないのさ
+	ディーア	怪しい2						魔界で起きているあらゆる戦争の裏に\nマスターキーがいることは\n予測がついていた
+	ディーア							そもそも原初十三魔剣を作ったのは\nマスターキーだ
+	ディーア							人間の意思で戦っているというより、\nマスターキーに唆されて始まった\n戦争も多いんだろう
+	ディーア	怒り2						……だが、それをなぜオレに伝える？　\nマスターキーには\nメリットがないだろう
+	アストロロギア							言っただろう、\nボクは『中立派』なのさ
+	アストロロギア							生にしがみつく奴のことも、\n破滅主義に溺れる奴のことも、\nボクにはあまり共感できない
+	アストロロギア							ただ眺めているだけの『傍観派』\nなんてのもいるみたいだけど、\nそれはそれで面白くない
+	アストロロギア	笑い						それなら、人間に与したほうがまだ\n面白そうだ
+	アストロロギア	通常						それにキミは魔剣と人間の共存を\n望んでいるだろう？
+	アストロロギア							キミは魔剣を滅ぼすことも、\n人類を滅ぼすことも<dash=2>
+	アストロロギア							あるいはこのまま終わらない戦争を\n続けてマスターキーの\n養分となることも望んでいない
+	アストロロギア							マスターキーに反逆するには、\nこれ以上ないほどの逸材だと思ってね
+	ディーア	怒り2						それで、手を組みに来たのか
+	アストロロギア							本当はそうしたいところなんだけどね\n残念だけどボクは\n情報を伝えることしかできない
+	アストロロギア							あまり深く干渉しては、\nアムに怒られてしまうからね
+	ディーア	怪しい2						……味方だと思って良いんだな？
+	アストロロギア	笑い						ああ、そのつもりだよ
+FadeOut	black					.3
+CharacterOff						0
+Bg	竜鍵マナ					0
+	アーダ					0
+	　　　　　　　　　　		2_2
+FadeIn	black					.3
+	アストロロギア	<Off>						さて、キミも知っての通り、\nマスターキーが動き始めている
+CharacterOff
+Bg	夜空
+	希望王ルル
+	アストロロギア	<Off>						あの勇者王を継いだ少年……\nルシフルが竜鍵マナへの道を\n開いたらしいのでね
+FadeOut	black					.3
+CharacterOff						0
+Bg	山岳A					0
+	　　　　　　　　　　
+FadeIn	black					.3
+	ディーア	怒り2						……あまり猶予は残されていない、か
+	アストロロギア							いいや、準備を整えるだけの\n時間はあるさ
+	アストロロギア							なにせマスターキーは\n竜鍵マナへの道が開かれた程度では\n全く焦っちゃいない
+	アストロロギア							竜鍵マナはマスターキーの誇る\n技術の結晶だ
+	アストロロギア							ただの人間が触れたところで\n価値を発揮できるものでもない\n何も問題は起きていないよ
+	アストロロギア	笑い						<dash=2>とマスターキーは思い込んでいる\n彼らはまさか飼い犬に手を噛まれる\nとは夢にも思っていないのだからね
+	アストロロギア	微笑み						それにキミ、最近ずっと\n戦いの連続だったのだろう？
+	アストロロギア							いい機会だ、\nのんびりと羽を伸ばしてくると良い
+	アストロロギア							キミの相棒……ブリジットの方にも、\n必要な準備があるだろうしね
+	ディーア	怒り2						……ああ、そうだな
+	オーラ光		エフェクト表			2
+	アストロロギア							それじゃあ、しばしのお別れだ
+	アストロロギア							ボクはキミを応援しているよ\nキミの選んだ道は、きっと\n誰からも理解されないだろうけれどね
+	アストロロギア	笑い						どうせ世界は滅びるんだ\n好きにやろうじゃないか
+Se	光1
+CharacterOff	アストロロギア
+StopBgm
+Wait						1
+CharacterOff	オーラ光					1.5
+Wait						2
+	ディーア	怪しい2						…………
+	ディーア							とんだ墓参りになったな
+	ディーア	怒り2						また来るよ、アーク\n……次は魔王として、な
+Se	歩く
+CharacterOff						1.5
+Wait						2
+StopSe
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_04
+EndIf
+EndScenario
+
+# Q1011_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Se	強風	TRUE
+Bg	第零異変コア
+FadeIn	black					.5
+	アストロロギア							アミグダラ、いるかい？
+CharacterOff
+	モモ	冷徹				.5		……ロギア\n未だにボクをカテゴリー<ruby=エース>A</ruby>\n扱いするのはキミだけだ
+	アストロロギア							今更呼び方を変えるのは\n気恥ずかしくてね\nつい慣れた呼び方をしてしまう
+	モモ	通常						よくここがわかったね
+	アストロロギア	微笑み						キミのことだ、\nどうせ思い出に浸っていたのだろう
+	モモ	冷徹						思い出に浸るなんて、\nそんな生易しいものじゃないよ
+FadeOut	black					.3
+StopSe
+CharacterOff
+ZoomCamera	SpriteCamera	1.5	-350	250		.1
+FadeIn	black					.3
+Bgm	ロルリアンレットB
+ZoomCamera	SpriteCamera	1.5	350	250		1.5	Add
+	モモ	<Off>						ここは一度ブリジットを失った場所だ\nボクはボク自身を戒めるために\nここに来た
+FadeOut	black					.3
+	　　　　　　　　　　
+ZoomCamera	SpriteCamera	1				.1
+FadeIn	black					.3
+	アストロロギア							いつまでヘルメリアの\n亡霊を追いかけているつもりだい？
+	モモ	冷徹						もう、だいぶ前に見失ってしまったよ
+Se	歩く
+CharacterOff
+	　　　　　　　　　　
+Wait						1
+StopSe
+	モモ							彼に会ったんだろう？
+	アストロロギア	笑い						ああ、良い少年じゃないか
+	アストロロギア	通常						だが、彼はヘルメリアとは違う\nもちろん、アルトリアとも
+	アストロロギア							もしキミが純粋に彼女の幸せを\n願っているのなら、\n誰を信じるべきかよく考えるべきだ
+	アストロロギア							現に、彼は幾度となく\nブリジットを危険に晒している
+	モモ							……キミは\n彼に味方するんじゃないのかい？
+	アストロロギア							ああ、\nだがキミと敵対するつもりもない
+	モモ							……忠告はありがたく\n受け取っておくよ
+	モモ	冷徹						だけど、ボクも手段を選ぶ\n余裕はないんだ
+	アストロロギア							そう言うと思ったよ
+CharacterOff
+	　　　　　　　　　　
+Wait						1
+	モモ	冷徹						……アーベントロートには\n報告するのかい？
+	アストロロギア							しないよ、ボクは中立派だ\nそれに生存派との\nコネクションもないしね
+CharacterOff
+Bg	竜鍵マナ
+	アストロロギア	<Off>						だけど、既に連中は動いているよ
+	アストロロギア	<Off>						ルシフルが竜鍵マナへの道を\n開いたことで、危険因子には\nマスターキーの手が入るだろう
+	アストロロギア	<Off>						そうなった時、\n真っ先に狙われるのは<dash=2>
+CharacterOff
+Bg	第零異変コア
+	モモ	冷徹						……ブリジットだろうね
+	アストロロギア							もう一度伝えておくよ
+	アストロロギア							もしキミが純粋に\n彼女の幸せを願っているのなら<dash=2>
+	アストロロギア							どう振る舞うべきなのか、\nよく考えることだね
+FadeOut	black					.5
+StopBgm
+CharacterOff						0
+Bg	森林A(夜)					0
+	　　　　　　　　　　
+Param	character_grayout=true
+Wait						3
+Se	強風	TRUE
+FadeIn	black					.5
+Wait						1
+	ディーア	目閉じ2						…………
+	冥獣							<dash=4>!!
+Se	斬1
+FadeOut	white					.1
+FadeIn	white					.1
+Shake	冥獣		x=5
+Se	倒れる
+Tween	冥獣	MoveBy	y=-300				NoWait
+CharacterOff	冥獣
+Wait						1
+	冥獣		画面外_左
+Tween	冥獣	MoveTo	x=0				NoWait
+	冥獣							<dash=6>!!
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.2
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Shake	冥獣		x=5
+Se	倒れる
+Tween	冥獣	MoveBy	y=-300				NoWait
+CharacterOff	冥獣
+Wait						1
+	ディーア	怒り2						…………
+Se	回想
+FadeOut	white					.3
+StopSe
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	天界					0
+Param	character_grayout=true
+	赤黒リディ		2_2			0
+	ディーア	怒り2	1_2			0
+Bgm	絶望
+FadeIn	white					.3
+	ディーア							……お前の目的はなんだ
+CharacterOff
+	白リディ	笑い						前にも言ったでしょう
+	白リディ							世界を在るべき姿に《修繕》すること
+	白リディ							《<ruby=マスターキー>全知全能</ruby>》が\n魔剣を作り出す以前……
+	白リディ	通常						世界に存在しなかったはずの\n"不老不死"の否定
+CharacterOff
+	赤黒リディ	驚き	2_2
+	ディーア	怒り2	1_2
+	ディーア							……魔剣は、魔力の供給源がある限り\n半永久的に生命活動が可能な\n不老不死の新生命である、か
+CharacterOff
+	白リディ							ええ、その通り
+	白リディ							そして"魔剣殺しブリジット"\nに課せられた存在意義でもある
+	白リディ							ある意味では……\nあなたと同じ目的よ、"ディーア"
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	森林A(夜)					0
+	ディーア	黒2				0
+	黒グラデーション		エフェクト表			0
+FadeIn	black					.5
+	ディーア							<ruby=魔剣>不老不死</ruby>を否定する兵器……
+	ディーア							滅亡派マスターキーの切り札、\n魔剣殺しブリジット
+CharacterOff	黒グラデーション
+	ディーア	怒り2						……存在意義、か
+CharacterOff
+StopBgm
+Wait						2
+	ディーア	怪しい2						……覗き見とは感心しないな
+CharacterOff
+Se	茂み											★風の音か葉っぱの音、新規であれば
+Se	歩く
+	勇者レド					1
+Wait						1
+StopSe
+Bgm	緊迫
+	勇者レド							……バレていましたか
+	ディーア	怒り2						ルルのお使いかい？\n勇者レド
+	勇者レド	驚き						……っ、何故僕の名前を……？
+	ディーア	通常2						知っているさ\nE.D.E.N.の頭脳、\n希望王の右腕と呼ばれた男だ
+	ディーア							幾度となく君には世話になった\n君が知らないだけでね
+	勇者レド							そういう貴方は、魔剣機関所属\n<param=name>ですね
+	ディーア	通常2						ああ、そうだ
+	勇者レド							E.D.E.N.から手配されている\n身でありながら、\n<ruby=・・・>夜遊び</ruby>とは
+	ディーア	通常2						遊んでいるように見えるかい？
+	勇者レド							遊んでいるようにしか見えないほどの\n一方的な蹂躙ではありますね
+	勇者レド							……我々の予測では、太陽聖域による\n実験冥獣の一件から、冥獣が\n引き起こす事件は増加するはずでした
+	勇者レド							実際、冥獣の数は増えているはずです\nにも関わらず、冥獣による被害は\nあの一件以来急激に少なくなっている
+	勇者レド							おそらく、日常的に大量の冥獣を\n狩っている集団がいるものだと\n思っていましたが……
+	勇者レド							まさか、あなた一人の仕業だったとは
+	ディーア	通常2						魔剣機関からの依頼でね
+	ディーア							人々の安寧を守るのは、\n<ruby=力あるもの>魔剣使い</ruby>の責務だろう？
+	勇者レド	驚き						魔剣機関がわざわざあなたに\n冥獣討伐なんて依頼するとは\n思えませんが
+	勇者レド							ましてあなたは今や魔王候補の一人だ\n他にやるべきことなんて\n山程あるはずでしょう？
+	ディーア	通常2						確かにな\nでも合理的ではあるぞ
+	ディーア	怒り2						なにせ冥獣が相手だ\n並の魔剣使いでは相応の被害が出る
+	ディーア							冥獣を相手にできる魔剣使いは少ない
+	ディーア	通常2						だが原初十三魔剣を所有し、\n魔王候補でもあるオレなら、\n単独でもある程度被害なく完遂できる
+	ディーア							人的被害は少ないほうがいい\nそうだろう？
+	勇者レド							わざわざ封印されたブリジットを\n使って、アンロックもせずに\n冥獣を蹂躙するのが"合理的"ですか？
+	ディーア	怪しい2						…………
+	勇者レド							……冥獣は魔剣の成れの果てです
+	勇者レド							暴走した魔剣が自我を失い、\n使い手を食らって一体化したのが\n冥獣です
+	勇者レド							あなたは敢えてそれを\n魔剣殺しブリジットに"食わせて"いる
+	勇者レド	悔しい						……違いますか、魔剣使い\n<param=name>
+	ディーア	笑い2						鋭いね、勇者レド\n希望王の右腕と呼ばれるだけはある
+	ディーア	通常2						そこまでわかっているのなら、\nこれがなにを意味するかも\n見当がついているんじゃないか？
+	勇者レド							……クランベリー\nロルリアンレット現象
+	ディーア	笑い2						ふふ、悪くない発想だ\n確かに、ブリジットの【記憶余白】を\n考えるならありえない話じゃない
+	ディーア	怒り2						だが、ブリジットの記憶は\n関係ないよ\n彼女はなにも知らない
+	ディーア							ルルもそこまでの情報は\n掴んでいないようだな
+	勇者レド	悔しい						…………ちっ
+	ディーア	通常2						まあいずれわかることだ\n……それで、勇者レド\n君はオレを倒しにきたのか？
+	勇者レド	悔しい						…………
+	ディーア	笑い2						違うだろうね\n戦うのは苦手だろ、君
+	勇者レド	悔しい						……なぜそう思う？
+	ディーア	通常2						<ruby=・・・・・・・・>知っているからさ</ruby>
+	ディーア	笑い2						もしルルが本当に\nオレを倒そうとするなら、\n本人が来るはずだ
+StopBgm
+	ディーア	目閉じ2						さて<dash=2>
+Se	剣閃
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						1.5
+	冥獣
+Shake	冥獣		x=5
+Se	倒れる
+Tween	冥獣	MoveBy	y=-300				NoWait
+CharacterOff	冥獣
+Se	強風	TRUE
+Wait						1
+	勇者レド	驚き						……僕を見逃すのか？
+	ディーア	怪しい2						邪魔をしないなら止める理由はない
+	勇者レド	悔しい						……いいのか？\nルルに報告するが
+	ディーア	通常2						どうしてわざわざ聞く？\n黙って逃げれば良いものを
+	勇者レド	悔しい						…………
+	ディーア	笑い2						……そういう素直さは命取りになるよ\n勇者レド
+	ディーア	通常2						それに、別に報告されても構わない\nあいつは最初から気づいているよ
+	ディーア							お前を派遣したのは、\n推測が正しいかどうかの\n確認作業に過ぎない
+Param	character_grayout=true
+	勇者レド	怒り						……っ、そうですか
+Tween	勇者レド	MoveBy	x=-90				NoWait
+	勇者レド	悔しい						行こう、ヴァルト
+	魔剣ヴァルト	悲しい	2_2					もういいの？
+	勇者レド	通常						ああ、これ以上の情報はないよ
+	勇者レド							…………
+Se	歩く
+CharacterOff						1
+Wait						1.5
+StopSe
+Wait						1
+	ディーア	目閉じ2						…………そうだね、リディ
+	ディーア	怒り2						もうオレの魂の猶予はない\nこれ以上、並行世界を\n増やすことはできない
+CharacterOff
+Bg	宇宙
+	ディーア	<Off>						それでも、オレは成し遂げて見せる
+	ディーア	<Off>						これは約束だ\nオレたちが未来を紡ぐための<dash=2>
+Bg	黒背景					0
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Param	character_grayout=false
+Se	ドーン
+	11章ロゴA		effect_a
+Tween	11章ロゴA	ScaleBy	x=1.2 y=1.2 time=3	linear			NoWait
+Wait						2
+CharacterOff						1
+Wait						1
+	11章ロゴB		effect_a			1
+Tween	11章ロゴB	ScaleBy	x=1.2 y=1.2 time=3	linear			NoWait
+Wait						3
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_05
+EndIf
+EndScenario
+
+# Q1011_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	鍛冶病院
+FadeIn	black					.5
+	鍛冶医クランベリー	怒り2						……またリディちゃんを\n連れ出したの？
+	ディーア	通常2						アンロックしなくても、\n魔剣殺しの特性は使えますから
+	鍛冶医クランベリー	怒り2						……そうかもしれないけど、\n彼女の状態は未知数なのよ？
+	鍛冶医クランベリー							今は【魔王獣の記憶】が\n非活性化されているから\n大丈夫だけれど
+	鍛冶医クランベリー							もし【魔王獣の記憶】が活性化すれば\nあなたごと封印を破って\n暴走する可能性だって<dash=2>
+	ディーア	あはは2						もしそうなったら、\nクランさんに直してもらわないと
+	鍛冶医クランベリー	怒り2						流石に天使と魔王獣の\n面倒は見たことないわよ
+	鍛冶医クランベリー	怪しい2						……まあ、あなたがそれを\n選択するというのなら、\n私から言うことはなにもないわ
+	鍛冶医クランベリー							それより、これなのだけれど<dash=2>
+CharacterOff
+Se	紙をめくる
+Wait						1
+	ディーア	怪しい2						……手紙？
+	鍛冶医クランベリー	怪しい2						あなた宛よ\n差出人は書いていないわ
+	ディーア	怒り2						……どうしてオレが\nここにいるとわかったんだ？
+	鍛冶医クランベリー	通常2						さあ？\nよく顔を出すから、その時に\n渡してもらおうと思っていたのかもね
+	鍛冶医クランベリー							開けてみたら？
+	ディーア	怪しい2						ああ……
+CharacterOff
+Se	紙を広げる
+Wait						1.5
+	ディーア	驚き2						……白紙だ
+	鍛冶医クランベリー	驚き2						なにも書いていないの？
+	ディーア	怪しい2						ええ……これを届けた人はなんて？
+	鍛冶医クランベリー	怪しい2						渡せばわかるとしか聞いていないわ
+	ディーア	怪しい2						渡せばわかる……？
+	鍛冶医クランベリー	通常2						何か細工が仕掛けてあるのかしら
+	鍛冶医クランベリー							ちょっと待ってて、\n解析に使えそうな道具を持ってくるわ
+Se	走る
+CharacterOff						1
+Wait						1
+	ディーア	怪しい2						……まさか
+Se	フォーン
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff	オーラ青					1
+Wait						1
+	ディーア	驚き2						…………！
+	ディーア	怒り2						やはり、魔力に反応して\n文字が浮かび上がるように\nなっているのか……
+	ディーア	悔しい2						これは…………！
+CharacterOff
+Se	走る
+	鍛冶医クランベリー	通常2				1
+Wait						1
+StopSe
+	鍛冶医クランベリー							ほら、これを使えば<dash=2>
+Tween	鍛冶医クランベリー	PunchPosition	y=50				NoWait
+	鍛冶医クランベリー	驚き2						<dash=2>って\nちょっと、どこに行くの!?
+StopSe
+	ディーア	驚き2	1_3					ごめんなさいクランさん、\nちょっと急用が！
+	ディーア	通常2						そうだ、リディも連れていきますね\nそれじゃあ<dash=2>
+	鍛冶医クランベリー	怒り2						待ちなさい！
+	ディーア	怒り2						…………！
+	鍛冶医クランベリー	怒り2						手紙を読めたのね
+	ディーア	怒り2						……ええ
+	鍛冶医クランベリー	怒り2						ならリディちゃんは置いていきなさい
+	ディーア	怒り2						いいえ、連れていきます
+	鍛冶医クランベリー	怒り2						危険すぎるわ
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+Bg	第零異変コア					0
+CharacterOff						0
+FadeIn	white					.3
+	鍛冶医クランベリー	<Off>						ゼフが【魔王獣の記憶】を手に入れ、\n第零異変コアを狙った時点で、\n勘のいい人は既に気づいているはずよ
+	鍛冶医クランベリー	<Off>						今やあなたは魔界で最も命を\n狙われていると言っても過言ではない
+FadeOut	black					.3
+CharacterOff						0
+Bg	鍛冶病院					0
+	鍛冶医クランベリー	怒り2				0
+ImageEffectOff	SpriteCamera	GrayScale
+FadeIn	black					.3
+	鍛冶医クランベリー							この鍛冶病院アスクレピオスなら<dash=2>
+	ディーア	悔しい2						それでも、\n連れて行ったほうが安全です
+	鍛冶医クランベリー	怪しい2						……そう\nなら止めはしないわ
+	ディーア	怒り2						ありがとうございます、クランさん
+Se	走る
+CharacterOff						1
+Wait						1
+StopSe						.5
+Wait						1
+	鍛冶医クランベリー	怪しい2						……狙われれば、\nこの鍛冶病院アスクレピオスでさえ\n危険に陥る<dash=2>
+	鍛冶医クランベリー							今回は、それほどまでに\n力を持った相手だということね……
+FadeOut	black					.5
+CharacterOff						0
+StopBgm
+Bg	天界
+	　　　　　　　　　　
+Wait						3
+FadeIn	black					.5
+Wait						1
+Bgm	緊迫
+Param	character_grayout=false
+	アーダ
+	？？？？		2_2					よく来てくれた、無垢のディーア
+	？？？？							本当に一人で来たようだね\n君が理解ある人間であることを\n嬉しく思う
+	ディーア	<Off>						（何だ……？\n　姿は見えるが<ruby=・・・・・・>認識できない</ruby>……）
+	ディーア	<Off>						（無意識を利用した、\n　予測を阻害する能力……いや、\n　"認識を阻害する能力"か？）
+	ディーア	<Off>						（おそらく<ruby=アウトオブオーダー>ΦΦΦ</ruby>の源流か、\n　あるいはより上位の……）
+CharacterOff
+	ディーア	怒り2						……あの手紙にかけられた魔術は、\n不必要なほど緻密で繊細な、\n洗練された魔術でした
+	ディーア							まるで自分が特異な存在であることを\n証明するかのように
+CharacterOff
+	アーダ
+	？？？？		2_2					それに気づくことができる君もまた、\n類まれなる才能を持った\n人間であるようだ
+	？？？？							改めて自己紹介をしよう
+	アーダ							私は《<ruby=マスターキー>全知全能</ruby>》、\n煌の鍵師アーダ
+	黒背景		エフェクト表
+	アーダ							この世界の神様だ
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_06
+EndIf
+EndScenario
+
+# Q1011_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	天界
+FadeIn	black					.5
+	アーダ							驚かないところを見ると、\n君は既に何人かのマスターキーと\n面識があるようだね
+	ディーア	怒り2						…………
+	アーダ							そう怖い顔をするな\n探りを入れているわけじゃない
+	アーダ							なにせ君は原初十三魔剣を擁する\n魔剣使いの一人だ
+	アーダ							そういう人物には、\n大抵マスターキーが\n接触しているものなのさ
+	アーダ							特に、古い同胞にそういうことを\n考えそうな者がいるものでね
+	ディーア	怒り2						そういうこと、とは？
+	アーダ							有力な人間に接触して、\n我々生存派を出し抜いてやろう、\nということさ
+	ディーア	怒り2						随分と楽しそうに語るんですね
+	アーダ							そうだな、<ruby=たもと>袂</ruby>を分かったとはいえ、\nかつての友のやることだ\n嫌いになれるものじゃない
+	アーダ							それに我らの目的は、\nすべてのマスターキーの生存にある
+	アーダ							マスターキー同士で憎み合うのは\n好ましくない
+	アーダ							だが、その一方で\n争いが起きるのも事実だ
+	アーダ							残念ながら、\n失ってしまった同胞もいる
+	ディーア	怒り2						…………
+FadeOut	white					.3
+	　　　　　　　　　　
+CharacterOff						0
+ZoomCamera	SpriteCamera	1.5	-350	250		.1
+FadeIn	white					.3
+ZoomCamera	SpriteCamera	1.5	350	250		1.5	Add
+	アーダ	<Off>						ここがなにか知っているかね、少年
+	ディーア	<Off>						……【方舟】、でしょう？
+	アーダ	<Off>						そうとも
+	アーダ	<Off>						この【方舟】を使った実験計画……\n【方舟計画】を提唱したのも\n我らが同胞の一人であった
+	アーダ	<Off>						名をマスターキー"アテナ"という
+FadeOut	white					.3
+CharacterOff						0
+ZoomCamera	SpriteCamera	1				.1
+Wait						.1
+	アーダ					0
+FadeIn	white					.3
+	アーダ							彼女は人間に騙されて命を落として\nしまったが、彼女の存在を証明する\nものは今もこうして魔界に残っている
+	アーダ							これは彼女の生きた痕跡として、\nマスターキーの偉業の一つとして、\n我々に返還されるべきものだ
+	アーダ							……何が言いたいかわかるかね？
+	ディーア	怒り2						……魔剣殺しブリジットも、\n同様であると？
+	アーダ							その通り
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	魔剣殺しブリジット					0
+	　　　　　　　　　　		2_2
+Bg	神界改					0
+FadeIn	white					.3
+	アーダ	<Off>						魔剣殺しブリジットは、空の鍵師\nアルトリアによって作られた兵器だ
+	アーダ	<Off>						彼女が認めた使い手が命を落とし、\nアルトリア自身もまた命を落とした今\nその魔剣にふさわしい使い手はいない
+	アーダ	<Off>						魔剣殺しブリジットは危険な兵器だ
+	アーダ	<Off>						使い方によっては魔剣を、\nあるいは魔界そのものを\n滅ぼしてしまいかねない
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	天界					0
+FadeIn	white					.3
+	アーダ							その力は、人の手には余るものだ
+	ディーア	怒り2						……あなたの主張はわかりました\nでは、オレの質問にも\n答えていただきたい
+	ディーア							生存派マスターキーは\n永遠の命を手にするために\n魔剣を作った
+	ディーア							ならばもし、永遠の命を手にしたとき
+	ディーア							あなたは人間を、\nあるいは魔剣を、\n一体どうするつもりですか
+	アーダ							人も魔剣も、\n新たなる生命システムの\n実験装置に過ぎない
+	アーダ							魔剣システムが完成すれば、\n人間にも魔剣にも用はない
+	ディーア	怒り2						……ならば、\nブリジットを渡すわけには\nいきませんね
+	アーダ							自分の命を心配しているのかい？\nそれならば、\n君にも永遠の命を約束しよう
+	ディーア	怪しい2						……交渉が破綻しています\n人間とマスターキーでは構造が違う\nそれは不可能なはずだ
+	アーダ							だが君は半分「鍵」だ\n魔剣と同じ、あるいは我々と同じね
+CharacterOff
+Wait						1
+	ディーア	怒り2						……協力するメリットはないな\nブリジットは自分で探せばいい
+	アーダ							そうできれば良いのだけれどね\nあの魔剣はいま封印されているらしい
+	アーダ							我々マスターキーでさえ、ブリジットを探知することができなくなっている
+	アーダ							だから、君が隠すというのならば<dash=2>
+	ディーア	怒り2						隠すというなら？
+	アーダ							力づくで吐かせるまでだ
+Param	character_grayout=false
+	オーラ青		エフェクト表			1
+	ディーア	怒り2						……<ruby=アンロック>魔剣解放</ruby>
+CharacterOff
+	アーダ							抗うか、矮小な人間の力で
+	アーダ							君はまだわかっていないようだ\n我々世界意思の鍵が\n全知全能たる理由を
+Se	光3
+FadeOut	white					.5
+Param	character_grayout=false
+Bgm	魔王バトル
+	11章スチルE		エフェクト表			0						アーダがかっこいいとかあーだこーだ
+FadeIn	white					.5
+	アーダ							我々は世界の理そのものだ
+	アーダ							我が名は《<ruby=アーダ>繁栄させる者</ruby>》\n我が力に屈するがいい、矮小な人間よ
+Se	光3
+Se	火3
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_07
+EndIf
+EndScenario
+
+# Q1011_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	天界
+FadeIn	black					.5
+	ディーア	悔しい2						くっ……!!\nはぁぁぁぁ!!
+Se	斬2
+FadeOut	white					.1
+CharacterOff						0
+	アーダ					0
+FadeIn	white					.1
+Se	ジャストガード
+Tween	アーダ	PunchPosition	x=-50				NoWait
+Wait						1
+CharacterOff
+	ディーア	悔しい2						くそっ、まだ<dash=2>
+	アーダ							やはりブリジットの使い手には\n相応しくないな
+Param	character_grayout=false
+Se	フォーン
+	オーラ青		エフェクト表			1
+	アーダ							悪魔の鍵を使役しながら、\n鍵のなんたるかを知らんとは
+Se	光1
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	white					.3
+	ディーア							何……!?\n魔剣がロックされた……？
+	ディーア	怒り2						<ruby=アンロック>魔剣解放</ruby>!!
+CharacterOff
+	　　　　　　　　　　							<dash=6>……
+	ディーア	悔しい2						なんだと……!?
+	アーダ							鍵はあくまで鍵だ\nそれ自体は、ただ世界意思に\n接続するための力に過ぎない
+	アーダ							我々は《<ruby=マスターキー>全知全能</ruby>》だ
+	アーダ							世界意思の全権を司る\nカテゴリーAの一人、すなわち\n最も高次の権限を有する鍵師だ
+Se	光1
+	オーラ青		エフェクト表
+Bgm	魔王バトル
+	アーダ							さあ、思い知るがいい
+	アーダ							悪魔の鍵であろうと、魔剣であろうと\n人間が持てる僅かな権限では、\n我々に敵う道理などないのだと！
+Se	光3
+Se	火3
+FadeOut	white					.5
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	white					.5
+	ディーア	悔しい3	画面外_左
+	土煙		エフェクト表			1
+Tween	ディーア	MoveTo	x=0				Add
+	ディーア							ぐあああああっ!!
+CharacterOff	土煙					1
+Tween	ディーア	MoveBy	y=-50				Add
+	ディーア							かはっ……
+Param	character_grayout=true
+	アーダ		1_2_b			1
+Tween	アーダ	MoveBy	x=10				NoWait
+Wait						1
+Tween	ディーア	MoveBy	y=80				Add
+	ディーア	怒り3						ぐっ……
+	アーダ							確かに君は魔剣の使い方に\n長けているようだ
+	アーダ							だが魔剣の力を借りなければ……
+	アーダ							魔核への侵入を防ぐ力も\n残っていないだろう
+	ディーア	悔しい3						これが、世界の在り方を変える力……
+Se	光2
+ImageEffect	SpriteCamera	Bloom
+	黒グラデーション		エフェクト裏
+	NPアーダ		エフェクト表
+	NPアーダ							君の記憶を見せてみろ
+Se	光3
+	白背景		エフェクト表			1
+Wait						1
+Bg	白背景					0
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+	ディーアシルエット1
+Shake	ディーアシルエット1		x=5 y=5 time=20				NoWait
+	ディーア	<Off>						ぐっ……あああああああああッッ!!!!
+	ディーア	<Off>						オレの中に……入ってくるな……!!
+CharacterOff
+	アーダ							さあ、扉が開くぞ
+FadeOut	white					.5
+StopBgm
+ImageEffectOff	SpriteCamera	MotionBlur
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+Bg	天界					0
+	黒グラデーション		エフェクト表			0
+Wait						2
+FadeIn	black					0
+	幻想王ノア							……頃合いか
+	幻想殺しゼタ							そーみたいね
+Param	character_grayout=false
+	オーラ青		エフェクト表			1
+	幻想王ノア							<ruby=トゥルーエンド>真解放</ruby>、幻想殺しゼタ
+	幻想王ノア							《<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>》\n《<ruby=ロードオブイリュージョン>万象偽る幻想の鍵</ruby>》<dash=2>
+Se	闇1
+ImageEffect	SpriteCamera	NegaPosi
+	黒背景		エフェクト表			2
+Wait						1
+ImageEffectOff	SpriteCamera	NegaPosi
+Wait						1
+FadeOut	black					.5
+CharacterOff						0
+	　　　　　　　　　　
+Wait						5
+Bg	黒背景					0
+FadeIn	black					0
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+Bg	黒背景					0
+Wait						2
+Bg	戦場跡					0
+Bgm	ロルリアンレットB
+	リディ	<Off>						……ねえ、マスター
+	リディ	<Off>						もしマスターが言っていることが\n本当なら、私は……
+	ディーア	<Off>						信じてくれとは言わない\nでも、そうするしかないんだ
+	リディ	<Off>						……信じるよ\n信じられないことばっかりだけど、\nマスターはこういう時嘘つかないもん
+	リディ	<Off>						……そっか、マスターはずっと、\nずっと戦ってきたんだね
+	ディーア	<Off>						……ああ
+	黒背景		エフェクト表			0
+Wait						1
+Bg	宇宙					0
+	リディ	<Off>						わかった
+	リディ	<Off>						その代わり、約束して\n最後まで諦めないって
+	リディ	<Off>						何があっても、最後まで\nその未来を諦めないって<dash=2>
+FadeOut	white					.5
+StopBgm
+CharacterOff						0
+Bg	天界					0
+	　　　　　　　　　　					0
+Wait						1
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+ImageEffect	SpriteCamera	Blur
+Wait						2
+FadeIn	black					.5
+CharacterOff	黒背景					2.5
+Tween	瞬きA	MoveBy	y=400 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-400 time=2	easeOutCirc
+CharacterOff	瞬きA
+CharacterOff	瞬きB
+ImageEffectOff	SpriteCamera	Blur
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							……っ、オレは……!?
+	黒グラデーション		エフェクト表
+	？？？？							安心するといい\nキミは何も盗まれていないし、\n何もされていない
+CharacterOff
+	ディーア	驚き2						……ッ、そうだ、\nブリジットは……
+	ディーア	悔しい2						……無事、か
+Bgm	神社
+	幻想王ノア					.5		無事で何よりだ\n【ミキシド】の少年
+	ディーア	悔しい2						……ッ、幻想王ノア……!?
+	幻想王ノア							やあ、キミと会うのは\nいつ以来だろうね
+	ディーア	怒り2						……あの感覚には覚えがある\n前に、ゼタの魔術空間に入った時と\n同じ感覚だ
+	ディーア							……お前、一体何をした？
+	幻想王ノア							なに、幻想殺しゼタの力で、\nあのマスターキーの認識を\n少し改変させてもらっただけだ
+	幻想王ノア							世界に対して個の認識を変えるのが\n<ruby=アーダ>彼</ruby>の力だとすれば、個に対して\n世界の認識を変えるのがゼタの力でね
+	幻想王ノア							フフフ……\n今頃、彼はキミを説得して\n仲間にしたと思い込んでいるよ
+	ディーア	悔しい2						オレを……庇ったのか？
+	ディーア							だが、いくら原初十三魔剣の\n力といえど、マスターキーには……
+	幻想王ノア							鍵としての格が劣っていたとしても、\n真に迫ることはできる\nそれが《<ruby=トゥルーエンド>真解放</ruby>》だ
+Tween	幻想王ノア	MoveBy	x=-90				Add
+	幻想王ノア							それに、ああいう手合を\n騙すのは得意分野でね
+	幻想殺しゼタ		2_2					あいつのドヤ顔見たっしょー？\nまさか自分が騙されるなんて\n思ってないんだから
+	幻想殺しゼタ							そういう奴ほど騙されやすいの\nわかる？
+CharacterOff
+	ディーア	驚き2						……キミは
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア		1_2					幻想殺しゼタ\n僕の魔剣だ
+	幻想殺しゼタ	ウインク						どもー♪\n【ミキシド】の少年くん♪
+	幻想王ノア							心配しなくても、\nキミに術式はかけていない
+	幻想王ノア							キミのように警戒心の強い相手を\n騙すのは難しくてね
+	幻想王ノア							この力は心に作用する以上、\n心の強い相手には弱いんだ
+CharacterOff
+	ディーア	怒り2						……なぜ手の内を明かす？
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア		1_2					それが誠意であると信じているからさ
+	幻想王ノア							ああそうだ、ついでに\nもう一つ明かしておくとしよう
+CharacterOff
+Wait						1
+	幻想王ノア	笑いH						やあ、ディーア\n僕はノア<dash=2>\nまたの名を、真魔王ヘルメリアという
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_08
+EndIf
+EndScenario
+
+# Q1011_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神社
+Bg	天界
+FadeIn	black					.5
+	幻想王ノア	フードなしH						やあ、ディーア\n僕はノア<dash=2>\nまたの名を、真魔王ヘルメリアという
+	ディーア	驚き2						真魔王、ヘルメリア……？
+	幻想王ノア	フードなしH						この時代に生きる人間でも、\n聞いたことくらいはあるだろう？
+	ディーア	悔しい2						かつて最も魔王に近いと謳われた\n魔王候補にして、\n13番目の原初の魔剣使い
+	ディーア							……そして、魔剣殺しブリジットの\n初代マスターでもある
+	幻想王ノア	フードなしH						その通り、よく知っているじゃないか
+	ディーア	怒り2						……だが、\n彼女は【魔王獣戦役】のあと\n命を落としたはずだ
+	幻想王ノア	フードなしH						そうだね
+FadeOut	black					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Bg	戦場跡					0
+FadeIn	black					.3
+	幻想王ノア	<Off>						魔王獣によって暴走した六大異変を\n鎮めるために、当時の六大魔王は\n自らを異変に沈め、楔となった
+	幻想王ノア	<Off>						輝く湖タークディアバーブには\nアーサーが沈み、スーヴァ大火山には\nエキドナが眠っている
+	幻想王ノア	<Off>						そしてウィクク=ルー大風穴には\nメルティナが、\n氷城エイビシュタットにはリリスが
+	幻想王ノア	<Off>						海底都市メイグルーンには、この僕\n……ヘルメリアが
+FadeOut	black					.3
+CharacterOff
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	天界					0
+FadeIn	black					.3
+	幻想王ノア	フードなしH						それがキミたちの知っている\n歴史だろう\nだが、現実はそうじゃない
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	研究所B					0
+	魔導王ユウ					0
+FadeIn	white					.3
+	魔導王ユウ							この世界は夢を見ている\n酷く歪で、不格好な夢を
+	魔導王ユウ							不思議だとは思わないか？
+	魔導王ユウ							俺たちは何故、この魔界を\n魔界だと都合よく認識しているのか
+	ディーア	怒り2						……何者かが、\nこの世界の記憶を弄っている
+	魔導王ユウ							そうとも
+	魔導王ユウ							そんなことができるのは、\nせいぜい原初十三魔剣くらいのものだ
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	　　　　　　　　　　
+Bg	天界					0
+FadeIn	black					.3
+	ディーア	怒り2						……記憶を改変したのか
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	フードなしH	1_2
+	幻想王ノア							そうさ、この幻想殺しゼタの力でね
+	幻想殺しゼタ	怒り						ちなめっちゃ大変だった\n普通にヤバい
+CharacterOff
+	ディーア	悔しい2						だが、一体なんのために……？
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	フードなしH	1_2
+	幻想王ノア							ブリジットを守るためさ\n初代マスターとしてね
+	幻想王ノア							キミはもう知っているだろうが、\n魔王獣とは魔剣殺しブリジットが\n暴走した姿だ
+	幻想王ノア							そして事実として、\n魔剣殺しブリジットは数多くの魔剣を\n破壊し、魔界を滅ぼしかけた
+	幻想王ノア							それまで魔剣殺しブリジットという\n存在は一部の六大魔王が\n知るのみであったが<dash=2>
+	幻想王ノア							【魔王獣戦役】をきっかけに\n多くの人の目に触れてしまった
+	幻想王ノア							そして、その力を見せてしまった
+	幻想王ノア							……ある人は言った
+	幻想王ノア							あれは危険な兵器だ\n野放しにしておけばやがて\n魔界は滅びてしまう
+	幻想王ノア							ならばそうなる前に、\n二度と復活しないように、\n破壊し封印してしまうべきだ
+	幻想王ノア							そしてある人は言った
+	幻想王ノア							あれほどの力を手に入れることが\nできれば、この世界を掌握できる
+	幻想王ノア							この魔王戦争に勝利するために、\n何が何でもあの魔剣を\n手に入れなくては
+CharacterOff
+	ディーア	怒り2						…………
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	フードなしH	1_2
+	幻想王ノア							程度の違いはあれ、【魔王獣戦役】を\n生き残ったすべての人は、\nあらゆる形でブリジットを狙っていた
+	幻想王ノア							彼女を守るには、\nそうするしかなかったのさ
+	幻想王ノア							そうして後世には、こう伝えられた
+	幻想王ノア							「メルトナの実験から魔王獣が生まれ\n　三魔王によって討伐された」
+	幻想王ノア							……これを、【魔王獣戦役】と呼ぶ
+	幻想王ノア							そして魔剣殺しブリジットは、\nその魔王獣と刺し違えた英雄である
+	幻想王ノア							良い筋書きだろう？
+	幻想王ノア							そして月日は経ち、\nブリジットは新たな使い手の\n元に渡った
+CharacterOff
+Param	character_grayout=false
+	ディーア	怒り2
+	幻想王ノア	<Off>						それがキミだ\n<param=name>
+CharacterOff
+Param	character_grayout=true
+	幻想殺しゼタ		2_2
+	幻想王ノア	悔しいH	1_2
+	幻想王ノア							僕の目的はずっと昔から\n変わっていない
+	幻想王ノア							ヘルメリアを名乗っていた時から、\nずっと
+	幻想王ノア							僕はブリジットが幸せに暮らせる\n世界を創るために戦っている
+	幻想王ノア							僕の想いは、\nキミにも受け継がれているはずだ
+CharacterOff
+	ディーア	怒り2						……ならばなぜ、\nお前は今までオレと敵対してきた？\nなぜ今になってそれを明かす？
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	フードなしH	1_2
+	幻想王ノア							僕は一度失敗した身だ\n僕には、ブリジットを\n幸せにすることができなかった
+	幻想王ノア							だからキミにすべてを託し、\n僕は見守っているつもりだった
+	幻想王ノア							だが、状況が変わった\n司書王ロルリアンレットが\nキミに目を付けている
+	幻想王ノア							勘違いしないでもらいたいが、\n僕が敵対しているのは\nロルリアンレットさ
+	幻想王ノア							彼女はキミを利用しようとしている
+Param	character_grayout=false
+	イベントスチル1048BG		エフェクト表
+	幻想王ノア	<Off>						:Blazeシリーズの魔剣の開発も、\n所詮は魔核深層に新たな伝承を\n書き加える実験の一環に過ぎない
+	幻想王ノア	<Off>						彼女がキミを利用して、キミの目的を\n捻じ曲げようとするのなら、\n僕も黙っているわけにはいかない
+CharacterOff
+Param	character_grayout=true
+	幻想殺しゼタ		2_2
+	幻想王ノア	フードなしH	1_2
+	幻想王ノア							それならば、\n僕も介入してやろうと思ってね
+	幻想王ノア							それに、キミも追い詰められている
+	幻想王ノア							魂の希薄化は\nもう限界まできている\n違うかい？
+CharacterOff
+	ディーア	怒り2						……その通りだ
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	フードなしH	1_2
+	幻想王ノア							ならば、手を組んだほうが早い
+	幻想王ノア							ブリジットを幸せにしたいという\n想いは同じなのだから\nそうだろう？
+CharacterOff
+	ディーア	怒り2						……ああ、そうだな
+	ディーア							だが、オレがお前を\n信用できるかは別の話だ
+	ディーア	悔しい2						世界図書館での戦いから幾度となく、\nオレはお前に追い詰められた
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	フードなしH	1_2
+	幻想王ノア							……そうだね\nそう言うと思ったよ
+	幻想王ノア							だから僕は、\nよりキミに誠意を見せる必要がある
+	幻想王ノア							ブリジットを出すといい\n隠し持っているのだろう？
+CharacterOff
+	ディーア	悔しい2						……何をするつもりだ？
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	怒りH	1_2
+Bgm	緊迫
+	幻想王ノア							魔剣殺しブリジットを\n呼び戻そうじゃないか
+CharacterOff
+	ディーア	本気2						なっ……それをすれば、\nリディは<dash=2>
+CharacterOff
+	幻想殺しゼタ	怒り	2_2
+	幻想王ノア	悔しいH	1_2
+	幻想王ノア							ああ、普通にやれば目覚めた瞬間、\n世界は終焉を迎えることになるだろう
+	幻想王ノア							……それでは400年前の歴史を\n繰り返すだけだ
+	幻想王ノア							フフ、まあ見ているといい
+Se	光1
+Param	character_grayout=false
+	オーラ光		エフェクト表			1
+	幻想王ノア							記憶という爆弾を抱えているのなら、\nその記憶を無害化してしまえば\nいいだけのこと
+	幻想王ノア							【魔王獣の記憶】は強力な伝承だ\nだが、この幻想殺しゼタならば\n介入できる<dash=2>!!
+Se	光2
+	白背景		エフェクト表			2
+Wait						2
+	ディーア	悔しい2						くっ…………!?
+FadeOut	white					1
+CharacterOff						0
+	リディ	悲しい2				0
+	オーラ光		エフェクト表			0
+Param	character_grayout=false
+StopBgm
+Wait						1
+FadeIn	white					1
+CharacterOff	オーラ光					1
+	リディ							……あれ？\nここは……
+	リディ	驚き2						わたし、第零異変コアに来て……\nゼフさんと戦おうとして、それで……
+Bgm	神秘
+	ディーア	驚き2						……リディ？
+	リディ	悔しい2						マスター!?\nだ、大丈夫？
+	ディーア	驚き2						……リディこそ、大丈夫か？\nおかしなところはないか？
+	リディ	驚き2						リディ？\nえーと、大丈夫だと思うけど……
+CharacterOff
+Param	character_grayout=true
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							記憶に手を加えたから、\nしばらくは思う通りに\n力を出せなくなるだろう
+	幻想王ノア							魔剣殺しの力に頼った戦い方は\nしばらくやめることだね
+CharacterOff
+	リディ	驚き2						……あなたは！
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							久しぶり、お嬢さん
+CharacterOff
+	ディーア	悔しい2						……本当に、\nリディの封印を解いたのか？\nどうしてそこまで……
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							言っただろう、\nキミと僕は同じ目的で動いている
+	幻想王ノア							そしてキミたちの旅は\nまだ終わっていない\nそうだろう？
+CharacterOff
+	ディーア	悔しい2						……ああ、そうだな
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							さて、ここに来た目的は達した
+	幻想王ノア							帰ろうか、ゼタ
+	幻想殺しゼタ							あ、終わった？\nおっけーい
+CharacterOff
+	ディーア	怒り2						待て、幻想王ノア……！
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							<param=name>君
+	幻想王ノア							もちろん無理強いはしない\nだが、キミがもし僕を\n信頼してくれるというのなら<dash=2>
+	幻想王ノア							我らが拠点へ案内しよう\n失われし第六の大陸、オーロエズへ
+CharacterOff
+	ディーア	怒り2						…………!!
+	ディーア							……信じて良いんだな、幻想王ノア
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							もちろんだとも\nあとはキミが選ぶと良い
+Se	歩く
+CharacterOff						1
+Wait						1.5
+StopSe
+	リディ	通常2						……心配かけてごめんね、マスター
+	リディ							でも大丈夫だから\n行こ、マスター？
+Se	走る
+CharacterOff						1
+Wait						1
+StopSe						.5
+	ディーア	怒り2						…………
+	ディーア							……人は夢を見ている時が\n一番幸せ、か
+Se	走る
+CharacterOff						1
+Wait						1
+StopSe						1
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_09
+EndIf
+EndScenario
+
+# Q1011_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	鉄の街
+Bg	神殿A
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+FadeIn	black					.5
+	ディーア							ここがオーロエズ……\nかつて天空教会シーズクリアが\n存在した浮遊大陸
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							そう、そして\n世界から消失したはずの大陸さ
+	幻想殺しゼタ							消えたっつか、\nみんな覚えてないだけなんよね
+	幻想殺しゼタ	ウインク						ま、あたしが\nみんなの記憶から消したんだけどー
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							大陸まるごとを？\nそれも、こんなに長い期間？
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							もちろん、記憶を奪うだけでなく\n認識阻害の結界も張っている
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							入念だな
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							そうまでして隠すだけの\n理由があるということさ
+	幻想殺しゼタ	無						隠し事が多いんだよー、\nノアの一族ってやつはさー
+	幻想王ノア							……さて、\n我らが居城を案内するとしようか
+	幻想殺しゼタ	ウインク						マイホームへようこそー♪
+	幻想王ノア							ちょうどキミに\n会わせたい人もいることだしね
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							……会わせたい人？
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							そうとも、エトロサーバの\n戦役以来、共に戦っている\n戦友でもある
+	幻想王ノア							キミも知らない相手ではないはずだ
+StopBgm
+Se	ドア開く
+Param	character_grayout=false
+	白背景		エフェクト表2			1
+Wait						1
+	幻想王ノア	<Off>						紹介しよう、こちらが<dash=2>
+Bg	アリス庭園					0
+	アリス					0
+	　　　　　　　　　　		2_2			0
+	黒グラデーション		エフェクト表			0
+CharacterOff	白背景					1
+Wait						1
+Bgm	魔王バトル
+	アリス							<dash=2>よく来たな、愚民ども
+	アリス							六大異変エイビシュタット城主にして\n《すべてを知るもの》あるいは<dash=2>
+	アリス							原初六魔剣が一振り、終焉の魔剣\nアポカリプスのマスターにして、\n元･六大魔王が一人
+	アリス							<dash=2>この魔帝アリスが歓迎しよう
+	アリス							諸君、<ruby=ティーパーティー>お茶会</ruby>の時間だ
+FadeOut	black					.5
+StopBgm
+CharacterOff
+Bg	研究所A
+	　　　　　　　　　　
+Wait						3
+Bgm	図書館
+FadeIn	black					.5
+	魔導王ユウ	通信驚き						<param=name>ちゃんが\n消えた？
+	司書王ロルリアンレット	怪しいH						ええ、忽然と姿を消しているわ
+	魔導王ユウ	通信驚き						世界図書館でも観測ができないと？
+	司書王ロルリアンレット	怪しいH						……本当に遺憾だけれどね
+	魔導王ユウ	通信						魔剣機関にも\n情報は上がってきていないな
+	司書王ロルリアンレット	怪しいH						……そう、無駄骨だったわね
+	魔導王ユウ	通信						本当に消えたのかい？\n命を落としたとかではなく？
+	司書王ロルリアンレット	怪しいH						命を落としたとは考えづらいわ\nこれは封印の類、あるいは……
+	魔導王ユウ	通信						……世界から消えた
+	司書王ロルリアンレット	怪しいH						そうね、まるでおとぎ話にのみ\n存在する、空飛ぶ大陸のように
+	魔導王ユウ	通信						"例のもの"は？
+	ププッピマリー							既に彼に託してあります
+	魔導王ユウ	通信						ならばそれを追跡できないか？
+	司書王ロルリアンレット	驚きH						ちょうど今解析しているところよ
+	魔導王ユウ	通信						流石は世界図書館だ、仕事が早いね
+CharacterOff
+	　　　　　　　　　　
+Wait						1
+	ププッピマリー							……お嬢様、解析完了しました
+	司書王ロルリアンレット	驚きH						報告なさい
+	ププッピマリー							はっ、彼の反応はサリギュラ大陸の\n西の海上で消失しています
+	ププッピマリー							そこに強力な魔力場を確認、\n《<ruby=ライブラリ>全能中枢</ruby>》による解析と\n調査、照合の結果<dash=2>
+	ププッピマリー							<dash=2>第六の大陸、"オーロエズ"と
+	魔導王ユウ	通信						……オーロエズ
+	司書王ロルリアンレット	悪い顔H						大当たりね
+	魔導王ユウ	通信						……こちらも少し動いてみるよ\nまたね、お嬢様
+Se	フォーン
+CharacterOff						1
+Wait						1
+	司書王ロルリアンレット	怒りH						マリー
+	ププッピマリー							はっ、既に世界図書館の司書を\n動員しています
+	ププッピマリー							……本当によろしいのですね
+	司書王ロルリアンレット	怒りH						ええ、そうまでしなければならない\n理由があるもの
+	司書王ロルリアンレット							世界図書館の全職員、聞こえるわね
+	司書王ロルリアンレット							これより我々は\n"オーロエズ"襲撃へ向かうわ
+	司書王ロルリアンレット							相手はあの幻想王ノアよ\n油断しないことね
+	司書王ロルリアンレット	悪い顔H						<dash=2>オーロエズ殲滅戦、\n開始するわ
+Wait						1
+FadeOut	black					0
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_10
+EndIf
+EndScenario
+
+# Q1011_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	コメディ
+Bg	アリス庭園
+FadeIn	black					.5
+Param	character_grayout=false
+	集中線		エフェクト表
+	カルバノグ	通常						いきなり出てきてこんにちはあ!!\nカルバですよお!!
+CharacterOff	集中線
+Param	character_grayout=true
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ							今日はあ、お茶会に珍しく\nスペシャルゲストが登場ですう！
+	カルバノグ							それではあ！\nスペシャルゲストのご紹介でーすう!!\nじゃじゃあーーん!!
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							……カルバ？
+CharacterOff
+	カルバノグ							はいはい！\nカルバですよお！\nどうしましたあ？
+	カルバノグ							あれ、そいえばカルバも\nアリスファミリーの一員なのって\n言ってませんでしたっけえ？
+	カルバノグ							せっかくなので\n覚えて帰ってくださいねえ！
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							<size=20>お前、どこの世界の\nカルバだ……？</size>
+CharacterOff
+	カルバノグ							お茶会が大好きな世界の\nカルバですけどお！\nところでワイン飲みますう？
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							お茶じゃないのかよ
+	リディ							ワインなんてどこにあるの？
+CharacterOff
+	カルバノグ							リディちゃんにはまだ早いですよお？
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	リディ							いや、別に\n飲みたいわけじゃないけど……
+CharacterOff
+	カルバノグ							おや！ 奇遇ですね、\nカルバも別に飲みたくないですう\nあれおいしくないのでえ
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	照れ2	2_2
+	ディーア							じゃあ他人に勧めるなよ……
+CharacterOff
+	カルバノグ							まあそういう日もありますよねえ
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	悔しい2	2_2
+	リディ							い、意味がわからない……
+CharacterOff
+	幻想殺しゼタ							ふふん、つまりお茶会に\n意味を求めるなんて\nナンセンスだっつーことよね
+	幻想殺しゼタ							<ruby=こいつら>アリスファミリー</ruby>のやってるのは\n魔界が滅びるまでの\n"時間つぶし"だもん
+	幻想殺しゼタ	ウインク						あ、カルバ！\nあたしワインもらっていーい？
+	カルバノグ							ワインなんか用意してないですよお？
+	幻想殺しゼタ	怒り2						は？\n意味がわからん
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	驚き2	2_2
+StopBgm
+	ディーア							それより、こんなところで\nお茶会なんてしてて良いんですか？
+CharacterOff
+	アリス							なんだ、我々の方針に\n不満があるのか？
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							いえ、そういう意味では\nないですけど……
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想殺しゼタ							まあ、不安になるのも\nわからなくはないけれどね
+Bgm	図書館
+	幻想王ノア							《<ruby=フォビドゥン>隠された伝説</ruby>》を2本も抱えて、\nマスターキーに\n目を付けられないはずがない
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	驚き2	2_2
+	リディ							……《<ruby=フォビドゥン>隠された伝説</ruby>》？
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想殺しゼタ							あたしたちのことよ
+	幻想王ノア							そう、彼女たちのことさ
+	幻想王ノア							原初六魔剣を生存派マスターキーが\n作ったのは知っているだろう？
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							ああ、永遠の命を得るための\n実験装置として……って話か
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想殺しゼタ							そんで、それを量産化したのが\n滅亡派マスターキーなのよ
+	幻想殺しゼタ	ウインク						魔剣っつー鍵の兵器的な側面を\n活かして、いっそ人間同士で戦わせて\n滅ぼしちゃおう！っていうやつね
+	幻想王ノア							だが彼らが思っている以上に\n人間は賢かった
+	幻想殺しゼタ	通常						思ったより絶滅しなかったんだよね\nなんなら逆に生存派に\n利用されちゃったっていう
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	照れ2	2_2
+	ディーア							生存派がより多くのデータを\n得るだけの結果になったわけか
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想殺しゼタ							そーそー、だから、\n滅亡派は慌てて新しく\n原初の魔剣を増やしたわけ
+	幻想殺しゼタ							それが《<ruby=フォビドゥン>隠された伝説</ruby>》
+	幻想殺しゼタ							魔剣殺しブリジット、\n運命殺しワールドエンド、\nそしてあたし、幻想殺しゼタ
+	幻想殺しゼタ	無						全然関係ないけど、\n"幻想殺し"って\nあんまカワイくないよね
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	照れ2	2_2
+	ディーア							まあ、可愛くはないな……
+CharacterOff
+	カルバノグ							ところでお茶いりますう？
+CharacterOff
+	幻想殺しゼタ	怒り2	2_2
+	幻想王ノア		1_2
+	幻想殺しゼタ							いま真面目な話してんのよカルバぁ、\nわかってる？
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	照れ2	2_2
+	リディ							関係ない話したの\nゼタちゃんじゃん……
+CharacterOff
+	幻想殺しゼタ	無	2_2
+	幻想王ノア	通常H	1_2
+	幻想殺しゼタ							まあいいや、そうやってあたしたちが\n生まれたわけなんだけど……
+	幻想殺しゼタ	通常						あたしたちは、人類と魔剣を\n滅ぼすために滅亡派によって作られた\n兵器なわけよ
+	幻想殺しゼタ							んで、魔剣は"伝承"と"人格"を\n掛け合わせて作られるの\n古代兵器ブキダスによってね
+	幻想殺しゼタ							そのうち、"伝承"を破壊するのが\n運命殺しワールドエンド
+	幻想殺しゼタ							そして"人格"、記憶を破壊するのが\nあたし、幻想殺しゼタ
+	幻想殺しゼタ							最後に、既に製造されている\n魔剣の不死性を破壊するのが\nリディちゃん<dash=2>
+	幻想殺しゼタ	ウインク						魔剣殺しブリジットってこと
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							……そうか、人間の人格は体験、\nつまり記憶によって形成される
+	ディーア							記憶さえ奪ってしまえば、\n人は人でなくなってしまう
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想殺しゼタ							そーゆーこと！
+CharacterOff
+	カルバノグ							もお、せっかくのお茶会なのになんで\n面白くない話してるんですかあ！
+CharacterOff
+	幻想殺しゼタ	怒り2						はぁ～？\nあたしの話が面白くないって\n言ったか～？
+CharacterOff
+	カルバノグ							い、いたいですう！
+CharacterOff
+	幻想殺しゼタ	怒り2						いいでしょーどうせお茶会なんて\n意味のない会話しか\nしてないんだから～！
+CharacterOff
+	カルバノグ
+Shake	カルバノグ		x=5				NoWait
+	カルバノグ							あだだだだぎぶぎぶぎぶぎぶ
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	照れ2	2_2
+	ディーア							……なんだか平和だな
+CharacterOff
+	幻想王ノア	通常H						ピリピリしている方が好きかい？
+	ディーア	驚き2						いや、そういうわけではないけど……
+	ディーア	怒り2						ロルリアンレットが戦力を\n増強していることは\n把握しているはずだ
+	ディーア							それに、\n【:Blazeシステム】のこともある
+	ディーア							彼女が戦争に向けて\n準備を整えている中で、もう少し\n焦っているんじゃないかと思っていた
+	幻想王ノア	通常H						まあ、そうだね\n確かにロルリアンレットは脅威だ
+	幻想王ノア							だが、Blazeについては\n別に放っておいても構わない
+	ディーア	驚き2						……どういうことだ？
+	幻想王ノア	通常H						僕にとっても\n利用価値があるということさ
+	幻想王ノア							確かにロルリアンレットも\n脅威ではある
+	幻想王ノア							だが現在の魔界において最も魔王に\n近い魔王候補は希望王ルルだ
+	幻想王ノア							彼の計画を止める上で、\nBlazeは有用な駒になる
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+	聖征剣エクスカリバー					0
+	　　　　　　　　　　		2_2			0
+Bg	白背景					0
+FadeIn	white					.3
+	幻想王ノア	<Off>						聖剣システムの根幹に根ざす思想は\n人格の否定だ
+	幻想王ノア	<Off>						人格という不確定要素を排除し、\nスペックを最大限引き出した\nより完全な兵器
+	幻想王ノア	<Off>						魔剣どころか使い手の人格さえ否定し\n最も大切なものを犠牲にすることで\n初めて成立するシステム
+	幻想王ノア	<Off>						それが聖剣システムだ
+FadeOut	black					.3
+Param	character_grayout=true
+Bg	アリス庭園					0
+CharacterOff						0
+	ディーア	怒り2				0
+FadeIn	black					.3
+	ディーア							最も大切なものを犠牲に……
+	幻想王ノア	通常H						勇者王シドウは、その妹ミリアを\n犠牲にすることで聖剣システムを\n完成させようとした
+	幻想王ノア							もっとも、彼の場合は\n失敗に終わってしまったけれどね
+	ディーア	怒り2						その聖剣に対抗する兵器として、\nBlazeは有用であると？
+	幻想王ノア	通常H						歩み寄り方が異なるとはいえ、\nBlazeと聖剣システムの思想は\n似ている
+	幻想王ノア							兵器はより兵器らしく\n無駄なものを切り捨て、\nよりスマートな殲滅を
+	ディーア	怒り2						…………
+	幻想王ノア	通常H						Blazeがそこまでの高みに\nたどり着けるかどうかは、\n未だ未知数だが……
+	幻想王ノア							それでも、有用な駒に\nなりうるとは思っているよ
+	ディーア	悔しい2						……その思想を肯定したくはないな
+	幻想王ノア	通常H						同感だ\nその思想の先に、\nブリジットの幸せはない
+	幻想王ノア							むしろ未来を閉ざす考え方だ\n我々の方針とは合わないさ
+	幻想王ノア							だが有用であることは事実だ\n目的と手段は、分けて考えなくてはね
+	ディーア	怒り2						……でも、その技術を\n有しているのはロルリアンレットだ
+	幻想王ノア	通常H						技術はね\n魔剣の所有権はキミにある
+	幻想王ノア							Blazeは僕にとっても脅威だが、\nキミが僕の側につくというのなら\n問題はない
+	幻想王ノア	通常H						言っただろう？\n彼女がキミを利用するなら、\n僕もキミを利用するまでだ
+FadeOut	black					.5
+StopBgm
+CharacterOff						0
+Bg	宇宙					0
+	　　　　　　　　　　
+Wait						2
+FadeIn	black					.5
+Wait						2
+Bg	草原A(夜)
+	ディーア	怒り2						…………
+Bgm	図書館
+	ディーア							……魔剣と人類を滅ぼすための\n《<ruby=フォビドゥン>隠された伝説</ruby>》、聖剣システム、\n司書王の思惑<dash=2>
+	ディーア							正しいな\nだが一体どうやってそこまでの\n情報を手に入れている？
+	ディーア							幻想王は元々表舞台に\n立っている人間ではない
+	ディーア							アリスファミリーが味方にいる\nとしても、マスターキーの援助なしで\nそこまで……
+StopSe
+	アリス					.5		<dash=2>後片付けを\nサボって何をしていると思えば
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							……ッ、アリス様!?
+	アリス							今日のお茶会は最悪だったな\nくだらん話で茶が不味くなった
+	ディーア	あはは2						……申し訳ありません
+	アリス							貴様は何も考えずに\n我々の方針に従えばいい
+	アリス							頭をひねるのは奴の仕事だ
+	ディーア	怪しい2						…………
+	アリス							ヘルメリアを信用できないか？
+	ディーア	怒り2						……………………いいえ
+	ディーア							信用していますよ\nそうでなければ、丸腰で本陣に\n乗り込むような真似はしません
+	アリス							フン、ならば迷うことはあるまい
+	アリス							娘が貴様を探していたぞ\nせっかく元に戻ったのだ\n少しは構ってやれ
+Se	歩く
+CharacterOff						1
+Wait						1.5
+StopSe
+StopBgm
+	ディーア	怒り2						……そうですね
+CharacterOff
+Wait						1
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+Bgm	神秘
+	リディ							あーっ、マスター！\nこんなところにいた！
+	ディーア	怒り2						……リディ
+	リディ	怒り2						もー、一人で逃げてずるい！\nあのあと大変だったんだから！
+	ディーア	怒り2						何があったんだ？
+	リディ	驚き2						えっとね、カルバノグちゃんが\n淹れたお茶が実はお茶じゃなくて、\nゼタちゃんが、ぼーん!!ってなって
+	ディーア	怪しい2						本当に何があったんだ……
+	リディ	悔しい2						カップとか割れちゃって\n大変だったんだから
+	ディーア	怪しい2						お酒飲んでるわけじゃ\nないんだよな……？
+	リディ	驚き2						多分違うと思うけど……
+	リディ	照れ2						えへへ、でもみんな\n面白くていい人たちだね
+	ディーア	通常2						……そうか、よかったな
+	リディ	驚き2						……なにか悩み事？
+	ディーア	怒り2						ああ、だけどもう終わった
+	リディ	照れ2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							そっか！\nそれはよかった！
+	リディ	笑い2						マスターもノアさんたちと\n一緒に戦うことにしたんだね
+	ディーア	驚き2						……リディ？
+	リディ	驚き2						……んう？\n違うの？
+	ディーア	怒り2						……いや、違わないよ
+	リディ	笑い2						じゃあリディも頑張って応援するね！
+	ディーア	怒り2						……、そうだな、\n後ろで見守っていてくれ
+	リディ	笑い2						うんっ！\n頑張って、マスター!!
+CharacterOff
+Se	火事
+Shake	Graphics		x=5 y=5 time=2
+StopBgm
+	リディ	驚き2						……え？\nなに、今の揺れ……？
+	黒グラデーション		エフェクト表
+	ディーア	黒2						<size=20>……ようやく来たか\n遅かったな、"お嬢様"</size>
+CharacterOff
+	リディ	驚き2						ふぇ？\nマスター？
+	ディーア	黒2
+Wait						.2
+Se	走る
+CharacterOff						1.5
+Wait						1.5
+	リディ	驚き2
+Tween	リディ	PunchPosition	y=50				Add
+	リディ							わ、わ、ちょっと待ってよ！\nマスター！
+Se	走る
+CharacterOff						1.5
+Wait						1.5
+FadeOut	black					.5
+Bg	アリス庭園					0
+	　　　　　　　　　　					0
+Bgm	緊迫
+FadeIn	black					.5
+	アリス							フン、やる気じゃないか\n<ruby=フロイライン>図書館の君</ruby>
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							ほう、結界を破ったか\nまさかこのオーロエズを\n認識できるとはね
+	幻想王ノア							こちらの作戦に綻びがあったか、\nあるいは<dash=2>
+	幻想王ノア							まあいい、迎え撃とう、ゼタ
+	幻想殺しゼタ	ニヤリ						お！ なになに戦い？\n久々に戦っていいの!?\nよっしゃーやる気出てきたーっ！
+CharacterOff
+Se	火事
+Shake	Graphics		x=5 y=5 time=2
+FadeOut	black					.3
+CharacterOff						0
+	　　　　　　　　　　
+Bg	草原A(夜)					0
+Bgm	魔王バトル
+FadeIn	black					.3
+	司書王ロルリアンレット	怒りH2						オーロエズ大陸全土に告ぐわ
+	司書王ロルリアンレット							我が名は司書王ロルリアンレット！\n世界図書館の主にして、\n《竜王の鍵を継ぐ者》!!
+	司書王ロルリアンレット	悪い顔H2						宣戦布告よ<dash=2>\nさあ、全面戦争といきましょう、\n幻想王ノア!!
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_11
+EndIf
+EndScenario
+
+# Q1011_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	草原A(夜)
+FadeIn	black					.5
+	司書王ロルリアンレット	悪い顔H2						<dash=2>見つけたわよ、幻想王ノア!!
+CharacterOff
+	幻想殺しゼタ	ニヤリ	2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							フフ、真っ先にここに来るとは<dash=2>\nまったく、本当に愛されているね
+Se	連撃
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						1
+	幻想王ノア							いきなりご挨拶じゃないか\nなりふり構っていられなく\nなったのかい？
+CharacterOff
+	司書王ロルリアンレット	驚きH2						あなたと私の間に\n礼儀なんか必要ないでしょう
+	司書王ロルリアンレット							あなたこそ、人質を取るなんて\n随分姑息な戦術を取るじゃない
+	司書王ロルリアンレット	怪しいH2						答えなさい\n一体彼をどこにやったの？
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							さて、キミに教える義理はないな
+CharacterOff
+	司書王ロルリアンレット	怒りH2
+Se	光3
+FadeOut	white					1
+Se	火1
+CharacterOff						0
+	幻想殺しゼタ		2_2			0
+	幻想王ノア	通常H	1_2			0
+	土煙		エフェクト表			0
+Shake	Graphics	x=5 y=5 time=1.5					NoWait
+FadeIn	red					.5
+CharacterOff	土煙					1
+Wait						1.5
+CharacterOff
+Param	character_grayout=false
+	イベントスチル392K1		effect_c
+	イベントスチル392K2		effect_d
+	司書王ロルリアンレット	怒りH2						もう一度聞くわ\n今度は速やかに答えなさい
+	司書王ロルリアンレット							さもないと<dash=2>\n魔界の歴史から\nあなたの名前が消えるわよ
+CharacterOff
+Param	character_grayout=true
+	幻想殺しゼタ	ニヤリ	2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							<dash=2>面白い
+CharacterOff
+Param	character_grayout=false
+Se	光2
+	イベントスチル392K1		effect_c
+	イベントスチル392K2		effect_d
+Tween	イベントスチル392K1	RotateTo	z=160 time=1.5	easeInCirc			NoWait
+Tween	イベントスチル392K2	RotateTo	z=-160 time=1.5	easeInCirc			NoWait
+	司書王ロルリアンレット	怒りH2
+	オーラ青		エフェクト表			1.5
+Wait						1.5
+StopSe						0
+StopBgm						0
+	黒背景		エフェクト表2			0
+Bgm	魔王バトル
+	アリス							<dash=2>このアリスを放っておくとは\n随分と偉くなったものだな
+Se	光3
+FadeOut	white					.5
+CharacterOff
+	イベントスチル392K1		effect_c			0
+	イベントスチル392K2		effect_d			0
+	司書王ロルリアンレット	驚きH2				0
+FadeIn	white					.5
+Se	ガードブレイク
+CharacterOff	イベントスチル392K1					1
+CharacterOff	イベントスチル392K2					1
+	司書王ロルリアンレット							なっ……アリス!?\nどうしてあんたがここに……ッ
+CharacterOff
+	アリス							うちの家具が\n世話になったようだからなあ？
+	司書王ロルリアンレット	怒りH2						アリスファミリーが動く\n案件ではないはずよ
+	アリス							<ruby=ティーパーティー>お茶会</ruby>に理由なんて必要ない\n知っているだろう？
+	アリス							私の願いを叶えるのが\nアリスファミリーだ
+	司書王ロルリアンレット	怒りH2						理想などとうに捨てた女が何を<dash=2>
+FadeOut	black					.2
+CharacterOff						0
+	オーラ青		エフェクト表			0
+	幻想殺しゼタ	怒り				0
+FadeIn	black					.2
+	幻想殺しゼタ							……<dash=2>
+FadeOut	black					.2
+CharacterOff						0
+	司書王ロルリアンレット	怒りH2				0
+FadeIn	black					.2
+	司書王ロルリアンレット							<dash=2>、ああ、そういうことね\nどおりで"わかってない"わけだわ
+Se	光3
+FadeOut	white					0
+CharacterOff						0
+	　　　　　　　　　　
+Se	火事
+Shake	Graphics		x=5 y=5 time=2				NoWait
+Wait						.5
+FadeIn	white					1.5
+	アリス							よそ見をしている場合か？\nこの魔帝アリスの御前であるぞ？
+	司書王ロルリアンレット	怒りH2						ちっ……マリー!!
+CharacterOff
+Se	歩く
+	ププッピマリー					1		はっ、こちらの相手はお任せください
+StopSe
+	幻想王ノア	通常H						……ほう
+	ププッピマリー							幻想王ノアと、お見受けいたします
+	幻想王ノア	通常H						世界図書館のメイド長か\nフフ、相手に取って不足はないだろう
+	ププッピマリー							いざ<dash=2>!!
+Wait						1
+FadeOut	black					0
+StopBgm
+CharacterOff						0
+	　　　　　　　　　　
+Wait						2
+FadeIn	black					1
+	ディーア	黒2						……始まったか
+	ディーア							アリスを使った不意打ちは\n有効ではあったが、\nじきにロールお嬢様も対応するだろう
+	ディーア							有利を取れるのも今のうちか
+	リディ	悲しい2						……ま、マスター？\nマスターは助けに行かなくていいの？
+	ディーア	驚き2						ん？\nああ……そうだな、\n助けておいたほうがいいか
+FadeOut	black					.5
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	black					.5
+Bgm	特殊バトル
+Wait						1
+Se	連撃
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						1
+Param	character_grayout=false
+Se	後ずさり
+	幻想王ノア	通常H	3_3
+	土煙		エフェクト表			1
+Tween	幻想王ノア	MoveBy	x=-180				NoWait
+	幻想王ノア							……ッ
+CharacterOff
+Param	character_grayout=true
+Se	歩く
+	ディーア	通常2				1		……苦戦しているようだな、幻想王
+StopSe
+	幻想王ノア	通常H						恥ずかしながら、\nあまり状況は好ましくない
+	幻想王ノア							世界図書館は魔界で唯一、\n魔剣を用いない戦闘集団だ
+	幻想王ノア							彼女らは独自の体系によって\n編み出された魔術を駆使し、\n魔剣に匹敵した戦闘力を持っている
+	幻想王ノア							やりづらい相手ではあるな
+	ディーア	通常2						特にマリーさんなら尚更だ
+	ディーア							オレも一度、魔剣機関から集まった\n魔剣使いを一撃で葬り去ろうと\nしたのを見たことがある
+	幻想王ノア	通常H						今キミの戦力を失うのは\n我々としても得策ではない\n下がっていても構わないよ
+	ディーア	通常2						いいや、戦うさ\n七罪王がいない今、\nオーロエズは戦力不足だろう
+	幻想王ノア	通常H						フフ、心強いね\nキミを味方につけておいて正解だ
+	ププッピマリー							……そうですか、\nそうではないかと思っていましたが
+	ディーア	怒り2						マリーさんには\n今まで色々とお世話になりました
+	ディーア							ですが、これはオレの戦争なので
+	ププッピマリー							存じ上げております
+Bgm	魔王バトル
+	ププッピマリー							世界図書館メイド長、\n《<ruby=マスター･オブ･ライブラリアン>世界図書館司書</ruby>》\nプリエラ=ププッピマリー
+	ディーア	怒り2						《魔剣機関所属魔剣使い》\n《愚かなる卑怯者の鍵》\n<param=name>
+	ディーア	本気2						いざ、参ります<dash=2>!!
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_12
+EndIf
+EndScenario
+
+# Q1011_12
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	特殊バトル
+Bg	草原A(夜)
+FadeIn	black					.5
+	ディーア	本気2						はあああッ!!
+CharacterOff
+Se	連撃
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						1
+Se	後ずさり
+	ププッピマリー		1_2
+Tween	ププッピマリー	MoveTo	x=0				Add
+	ププッピマリー							くっ……
+CharacterOff
+	ディーア	怒り2						流石のマリーさんといえど、\n魔王候補2人の相手をするのは\n楽じゃないでしょう
+	ププッピマリー							ええ、楽な仕事ではございませんね
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			.5
+	ププッピマリー							<dash=2>ですが、勝機は十分に
+Se	光3
+FadeOut	white					1
+Se	火事
+Shake	Graphics		x=5 y=5 time=2				NoWait
+	ディーア	怒り2				0
+	土煙		エフェクト表			0
+FadeIn	black					.5
+CharacterOff	土煙					1
+	ディーア	悔しい2						ぐっ……ああっ……!!
+CharacterOff
+Param	character_grayout=true
+	幻想王ノア	通常H						くっ……相変わらず、\nとんでもない力の持ち主だ
+	幻想王ノア							それほどの力があれば、\n単独で魔王候補にだって\nなれただろうに
+	幻想王ノア							そうだ……\nプリエラ、キミは望むなら\n何にだってなれる
+	幻想王ノア							そうまでして主任研究員という\n職務に縛られる理由は一体何だ？
+	ププッピマリー							私の望みは、\nロールお嬢様の願いを叶えること
+	ププッピマリー							それが世界図書館の\nメイド長としての責務でございます
+	幻想王ノア	通常H						フン、つまらない幻想だ\n大した価値はないな
+Tween	幻想王ノア	MoveBy	x=-90				NoWait
+	幻想王ノア							<dash=2>来い、ゼタ
+	幻想殺しゼタ		2_2					よっと、\nほんとにやっちゃっていーのね？
+	幻想王ノア	通常H						構わない、やれ
+CharacterOff
+Se	連撃
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						1
+Se	後ずさり
+Param	character_grayout=false
+	土煙					1
+	ププッピマリー							くっ、ですがまだ<dash=2>
+CharacterOff	土煙					1
+Param	character_grayout=true
+FadeOut	black					0
+	幻想殺しゼタ	ニヤリ	2_2
+Wait						.2
+FadeIn	black					0
+	幻想殺しゼタ					0		もしかして、\n本気で勝てると思ってるんだ～？
+	幻想殺しゼタ							確かにそうだよね、\n人間は夢を見てる時が\n一番幸せなんだよ
+	幻想殺しゼタ							勝てない相手にも勝てる自分\nかっこよくて理想の自分\n素敵だよね～
+	幻想殺しゼタ	怒り						でもね、プリエラさんさー
+Se	光2
+FadeOut	white					0
+CharacterOff	幻想殺しゼタ					0
+FadeIn	white					.5
+Tween	ププッピマリー	MoveBy	x=30				NoWait
+	ププッピマリー							なっ……幻影!?
+	幻想殺しゼタ	<Off>						どんなに努力したって、\n人間が魔剣に敵うわけないんだよ？
+Se	ガードブレイク
+FadeOut	black					0
+StopBgm
+CharacterOff						0
+	　　　　　　　　　　
+Wait						4
+FadeIn	black					0
+	ププッピマリー
+Shake	ププッピマリー		x=5				Add
+	ププッピマリー							…………ッ
+Se	倒れる
+Tween	ププッピマリー	MoveBy	y=-300 time=1.5				NoWait
+CharacterOff						1
+Wait						2
+CharacterOff
+	幻想殺しゼタ	ウインク	2_2
+	幻想王ノア	通常H	1_2
+	幻想殺しゼタ							はぁいおっしまーい♪
+CharacterOff
+	ディーア	怒り2						……マリーさん
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							さて、アリスの支援に行くとしようか\nもっとも、助けなど\n嫌がられそうではあるが……
+CharacterOff
+	ププッピマリー							<dash=2>……\n<param=name>様
+	ディーア	怒り2						…………
+	ププッピマリー							……ロールお嬢様はこう仰られました
+	ププッピマリー							あなたは、世界図書館の全戦力に\n代えてでも救うべき人であると
+	ププッピマリー							あなたのこととなれば、\n少し冷静さを欠いてしまわれる\nところはございますが
+	ププッピマリー							それでも、ロールお嬢様は、\nそうまでしてあなたを<dash=2>
+CharacterOff						0
+	黒背景		エフェクト表			0
+	司書王ロルリアンレット	怒りH2						余計なことは喋らなくていいわ
+CharacterOff						0
+Bgm	魔王バトル
+	ディーア	怒り2						……ロールお嬢様
+CharacterOff
+	幻想殺しゼタ	無	2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							ロルリアンレット!?\n魔帝アリスを凌いだのか……？\nそんな馬鹿な……
+CharacterOff
+	司書王ロルリアンレット	怒りH2				.5		人質……と思っていたのだけれど、\nどうやら状況が違うようね
+	ディーア	怒り2						……そうですね、オレはオレの意思で\n幻想王の側につきました
+	ディーア							これはオレが決めたことです\nロールお嬢様には関係のないことだ
+	司書王ロルリアンレット	怒りH2						……ッ、……そう
+CharacterOff
+	幻想殺しゼタ	無	2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							そういうわけだ\nキミの出る幕ではないよ、\n司書王ロルリアンレット
+	幻想王ノア							だがそれでもまだ戦うというのなら、\n止めはしない
+	幻想王ノア							オーロエズの結界が破られた以上、\nこうなるのは時間の問題だしね
+	幻想王ノア							選ぶといい\nキミが望むなら、受けて立とう
+CharacterOff
+	司書王ロルリアンレット	怒りH2						……時間稼ぎご苦労だったわねマリー\nお疲れ様、下がっていいわよ
+	ププッピマリー							ですが、お嬢様<dash=2>
+	司書王ロルリアンレット	怒りH2						下がっていなさい\nこの痴れ者は、私が直々に\n手を下してやるわ
+	司書王ロルリアンレット							人に散々心配させておいて、\n素知らぬ顔で寝返っているそこの\n大馬鹿者にもね
+	ディーア	怒り2						<dash=2><ruby=アンロック>魔剣解放</ruby>
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							ゼタ、キミの出番だ
+	幻想殺しゼタ	ウインク						うぃうぃ、任せといてー
+CharacterOff
+	ディーア	本気2						《魔王候補十三王》\n<param=name>
+CharacterOff
+	幻想殺しゼタ	ウインク	2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							《魔王候補十三王》、幻想王ノア\nいざ参ろう
+CharacterOff
+	司書王ロルリアンレット	悪い顔H2						掛かってきなさい、大馬鹿者共
+	司書王ロルリアンレット							この《司書王》<dash=2>\nロルリアンレットが受けて立つわ！
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_13
+EndIf
+EndScenario
+
+# Q1011_13
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔王バトル
+Bg	草原A(夜)
+FadeIn	black					.5
+	ディーア	悔しい2						くっ……味方につくと\n頼もしいけれど、\n敵に回るとこうも厄介なものか……
+CharacterOff
+Param	character_grayout=false
+	イベントスチル392K1		effect_b
+	イベントスチル392K2		effect_c
+	司書王ロルリアンレット	怒りH2						休んでいる暇はないわよ\n<dash=2>喰らいなさい
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+	土煙		エフェクト表			0
+	ディーア	悔しい2				0
+Se	火事
+Shake	Graphics		x=5 y=5 time=1.5				NoWait
+FadeIn	white					.5
+	ディーア							ぐっ……まだまだ!!
+	ディーア	怒り2						はぁぁぁッ!!
+Se	剣閃
+FadeOut	white					.2
+CharacterOff						0
+	司書王ロルリアンレット	驚きH2				0
+FadeIn	white					.2
+Wait						.2
+Se	ジャストガード
+FadeOut	white					.2
+FadeIn	white					.2
+	司書王ロルリアンレット							甘いわね
+	ディーア	怒り2						くっ……
+	司書王ロルリアンレット	怒りH2						まだわかっていないようだけれど、\n私<dash=2>
+Se	光2
+Param	character_grayout=true
+ImageEffect	SpriteCamera	Bloom
+	黒グラデーション		エフェクト裏
+	NPロルリアンレット		エフェクト表					<dash=2>本気で怒っているのよ？
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff
+Param	character_grayout=false
+	ディーア	悔しい2						マズい……ッ!!
+Se	光3
+Se	火3
+FadeOut	white					1
+CharacterOff						0
+	ディーア	悔しい2
+	土煙		エフェクト表
+Se	火事
+Shake	Graphics		x=5 y=5 time=4				NoWait
+Wait						2
+FadeIn	white					.5
+	ディーア							ぐああっ……
+CharacterOff	土煙					1
+CharacterOff
+Param	character_grayout=false
+	イベントスチル392K1		effect_c
+	イベントスチル392K2		effect_d
+Tween	イベントスチル392K1	RotateTo	z=160 time=1.5	easeInCirc			NoWait
+Tween	イベントスチル392K2	RotateTo	z=-160 time=1.5	easeInCirc			NoWait
+	司書王ロルリアンレット	怒りH2						<dash=2><ruby=アンロック>術式解放</ruby>、\n《<ruby=全能中枢>ライブラリ</ruby>》
+Param	character_grayout=true
+	ディーア	<Off>						なっ……
+Param	character_grayout=false
+	司書王ロルリアンレット	怒りH2						斃れなさい<dash=2>!!
+CharacterOff
+Param	character_grayout=true
+	幻想王ノア							<dash=4>ッ!!
+Se	走る
+Tween	幻想王ノア	MoveBy	x=500				NoWait
+Wait						.5
+StopSe
+Se	風3
+FadeOut	lime					.2
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	lime					.2
+Se	闇3
+FadeOut	purple					.2
+FadeIn	purple					.2
+Se	火3
+FadeOut	red					.2
+FadeIn	red					.2
+Se	水3
+FadeOut	aqua					.2
+FadeIn	aqua					.2
+Se	光3
+FadeOut	white					1
+Wait						1
+FadeIn	white					.5
+Shake	Graphics		x=5 y=5 time=1.5				NoWait
+	土煙		エフェクト表			1
+Wait						1.5
+	幻想王ノア	悔しいH
+Shake	幻想王ノア		x=5				NoWait
+	幻想王ノア							かはっ……
+CharacterOff	土煙					1
+	ディーア	悔しい2						……ッ!?
+	ディーア							お前、オレを庇って……？
+	幻想王ノア	悔しいH						……クク、まさかこの僕が\nここまでの傷を負うとはね
+Se	倒れる
+Tween	幻想王ノア	MoveBy	y=-300				NoWait
+CharacterOff						1
+Wait						1
+	ディーア	悔しい2						ノア!!
+	幻想殺しゼタ	悲しい						ちょちょちょ、大丈夫!?
+CharacterOff
+Param	character_grayout=false
+	イベントスチル392K1		effect_c
+	イベントスチル392K2		effect_d
+StopBgm
+	司書王ロルリアンレット	驚きH2						…………
+Se	フォーン
+CharacterOff	イベントスチル392K1					1
+CharacterOff	イベントスチル392K2					1
+Wait						1.5
+CharacterOff
+Param	character_grayout=true
+Bgm	絶望
+	ディーア	悔しい2						お前、なんでオレを庇って……
+	幻想王ノア	悔しいH						……っ、ブリジットの\n今のマスターはキミだからね
+	幻想王ノア							僕にはもう彼女を\nアンロックする権限はない
+	幻想王ノア							ブリジットを救えるのはキミだ\nキミだけなんだよ
+	幻想王ノア							僕がここで斃れるのは構わない\nだがキミが斃れたら\n誰が彼女を救うんだ？
+	幻想王ノア							全てはブリジットのためだ\n……キミと同じだよ\n我々は同志だろう？
+	ディーア	怒り2						…………
+	幻想王ノア	悔しいH						ゼタ、撤退だ\n只今をもって、オーロエズは放棄する
+Param	character_grayout=false
+	オーラ青		エフェクト表			0
+	幻想王ノア	通常H						《<ruby=エンスージアクレイス>悪魔の鍵の能力》</ruby><dash=2>
+Se	ガードブレイク
+ImageEffect	SpriteCamera	NegaPosi
+Wait						.5
+CharacterOff						0
+	　　　　　　　　　　
+ImageEffectOff	SpriteCamera	NegaPosi
+StopBgm
+Wait						1
+Se	強風	TRUE
+	司書王ロルリアンレット	怒りH2						……魔剣使い、あなたは
+	ディーア	怒り2						<ruby=・・・・・・>ロールお嬢様</ruby>
+Se	フォーン
+	オーラ光		エフェクト表			.5
+Wait						.5
+CharacterOff	オーラ光					.5
+Wait						.5
+CharacterOff
+	司書王ロルリアンレット	驚きH2						…………っ!?
+	司書王ロルリアンレット	怒りH2						待ちなさい、それは……!!
+	ディーア	怒り2						……それでは
+Se	光1
+FadeOut	white					.5
+CharacterOff						0
+	　　　　　　　　　　
+	オーラ青		エフェクト表			0
+FadeIn	white					.5
+CharacterOff						1
+Wait						1
+Param	character_grayout=true
+	司書王ロルリアンレット	驚きH2						……あなた、何を企んで<dash=2>
+	ププッピマリー							……お嬢様
+	司書王ロルリアンレット	慌てH2						マリー！\n無事かしら!?
+	ププッピマリー							ええ……申し訳ございません\nですが、それより……
+	司書王ロルリアンレット	怪しいH2						彼は何かを狙っている……
+	ププッピマリー							……ええ、この大陸、オーロエズを\n<ruby=・・・・・・>見つけさせた</ruby>のも、\nもしかしたら……
+	ププッピマリー							態勢を立て直しましょう\nもしかすると……\n作戦を練り直す必要がありそうです
+StopSe
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_14
+EndIf
+EndScenario
+
+# Q1011_14
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	洋館
+FadeIn	black					.5
+	ディーア	怒り2						……身体の傷は？
+	幻想王ノア	通常H						問題ない、じきに治るさ
+	幻想王ノア							ノアの一族の血は特殊でね\n多少の怪我には\n耐えられるようになっている
+	幻想王ノア							……それよりも
+	幻想王ノア							痕跡を残していたようだね\n彼女らが我々の拠点、\nオーロエズにたどり着くように
+	ディーア	怒り2						……一体なんのことだ？
+	幻想王ノア	通常H						とぼけても無駄だ
+	幻想王ノア							キミは司書王が常にキミの動向を\n注視していることを知っていた上で、\n敢えて痕跡を残した
+	幻想王ノア							結界侵入時に細工を施したのも\nキミだね
+	幻想王ノア							なにせこの魔界で400年も人々の目を\n欺き続けた結界だ
+	幻想王ノア							何もなく破られるようなことが\n起きるはずがない
+	ディーア	怒り2						…………
+	幻想王ノア	通常H						なに、僕は怒っているわけではないよ
+	幻想王ノア							キミをオーロエズに招待した時点では\nまだ信用を勝ち取れていなかった\nだけの話だからね
+	幻想王ノア							もちろん、\nそのリスクは承知でキミを招待した
+	幻想王ノア							だからこれは当然の結末でもある
+	幻想王ノア							……だが
+	幻想王ノア							キミは判断を誤った\nキミの行動はブリジットを\n救うどころか、危険に晒す行為だ
+	幻想王ノア							……彼女を救いたいのだろう？
+	ディーア	怒り2						……ああ
+	幻想王ノア	通常H						ならば、忠誠心を示せ
+Param	character_grayout=false
+Se	フォーン
+	オーラ赤		エフェクト表
+	幻想王ノア							アンロック<dash=2>\n《<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>》\n《<ruby=ロードオブイリュージョン>万象偽る幻想の鍵</ruby>》!!
+CharacterOff
+ImageEffect	SpriteCamera	Bloom
+Param	character_grayout=true
+	11章スチルF1		エフェクト表2			0						ディーアの背後にだけ魔術刻印みたいなエフェクトが流れる
+	11章スチルF2		エフェクト裏2			0
+	11章スチルF3		エフェクト表			0		　　	BrPage
+Se	闇1
+Tween	11章スチルF3	MoveBy	y=1536 time=1	linear			Add
+Bgm	緊迫
+	11章スチルF3							<dash=6>!!
+	幻想王ノア	<Off>						<color=mk2wisp><dash=2>ここから先、\n同じような失敗は許されない</color>
+	幻想王ノア	<Off>						<color=mk2wisp>僕にキミを信頼させてくれ、\n<param=name></color>
+	ディーア	<Off>						…………
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff
+Param	character_grayout=true
+	幻想殺しゼタ	無						……本当に、よく言ったもんよね
+	幻想殺しゼタ							人間は夢を見ている時が\n一番幸せなんだって
+	幻想王ノア	通常H						……ブリジットの中にあるはずだった\n【魔王獣の記憶】は存在しなかった
+Se	回想
+FadeOut	white					.3
+Bg	天界					0
+	リディ	悲しい2				0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+Bg	洋館					0
+	幻想王ノア	通常H				0
+FadeIn	white					.3
+	幻想王ノア							ならば、【魔王獣の記憶】の在り処は\n一つしかない
+	幻想王ノア							<dash=2>キミが\n隠し持っているのだろう？
+	幻想王ノア							大丈夫、心配はいらない\n僕はキミと志を同じくする者だ\n共にブリジットを救おうじゃないか
+	幻想王ノア							さあ、【魔王獣の記憶】を寄越せ、\n<param=name>
+	ディーア	黒2						…………
+Param	character_grayout=false
+Se	フォーン
+	オーラ光		エフェクト表			1.5
+Wait						1
+CharacterOff
+Wait						.5
+	モモ	冷徹				.5		<dash=2>そこまでだ、幻想王ノア
+	幻想王ノア	通常H						……これはこれは、誰かと思えば\n過去に囚われた神様じゃないか
+	幻想王ノア							ブリジットを救いに来たとでも？\nキミはいつまで人間の真似事を\nしているつもりだい？
+CharacterOff
+	モモ	冷徹	2_3_b					黙れ、幻想王ノア\n貴様の"戯言"は\n<ruby=ボク>マスターキー</ruby>には通用しない
+	モモ							彼女の幸せを邪魔する者は\nすべて排除すると決めたんだ
+	モモ							キミがボクの前に\n立ちはだかるというのなら<dash=2>
+CharacterOff
+Se	歩く
+	ディーア	黒2	1_3
+Tween	ディーア	MoveTo	x=0	linear
+	ディーア							……モモ
+CharacterOff
+	モモ	冷徹						……【ナレハテ】の魔剣使い、\nキミは<dash=2>
+CharacterOff
+	幻想王ノア	通常H						そうだ、"ディーア"
+CharacterOff
+Param	character_grayout=false
+	ディーア	黒2
+	幻想王ノア	<Off>						僕に、忠誠を示せ
+Bgm	魔王バトル
+Se	火1
+FadeOut	red					.5
+	ディーア	天使2				0
+	オーラ炎		エフェクト表
+FadeIn	red					.5
+Wait						1
+Se	剣閃
+FadeOut	white					.2
+FadeIn	white					.2
+CharacterOff
+	モモ	冷徹
+Tween	モモ	MoveBy	x=-50	easeOutBack			NoWait
+	モモ							なっ……!?
+	モモ							この炎は焔華剣の……くぅっ!?
+Se	コインロック
+FadeOut	white					.1
+	鎖エフェクト前		エフェクト表			0
+Shake	モモ	MoveBy	x=5 time=0.5				NoWait
+FadeIn	white					.1
+Wait						.4
+Se	コインロック
+FadeOut	white					.1
+	鎖エフェクト後ろ		エフェクト裏			0
+Shake	モモ	MoveBy	x=5 time=0.5				NoWait
+FadeIn	white					.1
+	モモ							これは……ッ、そうか、\n無垢の世界意思の力……\nまさか、こんな使い方を……!!
+CharacterOff
+Param	character_grayout=true
+	幻想王ノア	通常H						……見事だ\n初めて戦うはずのマスターキーを\nこうも一方的に仕留めるとは
+	幻想王ノア							やはり、キミは……
+CharacterOff
+Param	character_grayout=false
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	モモ	冷徹						目を覚ませ、\n<param=name>！\nキミは<dash=2>!!
+CharacterOff
+	リディ	幻覚						<color=mk2wisp>大丈夫だよ、マスター\nリディも、ノアさんのこと\n信じてるから</color>
+	ディーア	通常2						……リディ
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	モモ	冷徹						目を覚ませ!! それは幻想だ!!\n<ruby=・・・・・・・・・・>そこにリディはいない</ruby>!!
+	モモ							彼女はずっと封印されたままだ！\nわかるだろう！\nそんな簡単に封印が解けるものか！
+	モモ							ノアはブリジットの救済など\n一切考えてはいない！\n奴が欲しいのは魔剣殺しの力だけだ！
+CharacterOff
+	ディーア	通常2						わかった、リディがそう言うなら……\nオレも信じてみることにしよう
+	リディ	幻覚						<color=mk2wisp>うんっ、そうしよう、マスター！</color>
+	ディーア	目閉じ2
+Se	光1
+	オーラ光		エフェクト表			1
+Wait						1.5
+	幻想王ノア	通常H						……やはりキミが隠し持っていたか
+	幻想王ノア							さあ、その記憶を寄越せ\nそれで全てが完成する<dash=2>!!
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+Se	コインロック
+	モモ	冷徹
+Shake	モモ		x=5				NoWait
+	モモ							くっ……こんなところで……ッ!!
+CharacterOff
+	オーラ光		エフェクト表
+Se	フォーン
+	ディーア	目閉じ2
+Wait						.5
+CharacterOff	オーラ光					1
+Wait						1
+CharacterOff
+	幻想王ノア
+	オーラ光					1
+Wait						1
+CharacterOff	オーラ光					1
+StopBgm						1
+Wait						1
+	幻想王ノア	通常H						クク……【魔王獣の記憶】\nは確かに受け取った
+	幻想王ノア							これで僕らは<dash=2>
+StopBgm
+	ディーア	目閉じ2						<dash=2>記憶に触れたな、幻想王ノア
+	幻想王ノア	通常H						……何？
+	ディーア	怒り2						ずっと<dash=2>この時を待っていた
+CharacterOff
+Param	character_grayout=true
+Bgm	風属性バトル
+Se	光2
+ImageEffect	SpriteCamera	Bloom
+	黒グラデーション		エフェクト裏
+	幻想王ノア	通常H
+	NPノア	光	エフェクト表					<dash=2>ッ、これは……\n記憶による悪魔の鍵の侵食……？
+	NPノア							まさか、【魔王獣の記憶】に\n貴様自身の記憶を\n混ぜ合わせたのか……!?
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff
+	リディ	幻覚						<color=mk2wisp>マスター!?\nちょっと待って、何を<dash=2></color>
+	ディーア	怒り2						邪魔だ
+Se	斬1
+FadeOut	white					.2
+CharacterOff						0
+	リディ	幻覚				0
+FadeIn	white					.2
+	リディ							マス、ター……？
+Se	ガラス割れる
+CharacterOff						1
+Wait						1.5
+	ディーア	怒り2						お前の悪魔の鍵は\n預からせてもらうぞ、幻想王ノア
+CharacterOff
+	幻想王ノア	通常H						そうか、悪魔の鍵に干渉するために\n【魔王獣の記憶】を媒介にして\n僕とキミの魔力を直結させたのか！
+	幻想王ノア							だが、鍵を奪ったとて何ができる？\nキミは<dash=2>
+	幻想王ノア							まさか、キミの<ruby=ワールドイズマイン>悪魔の鍵</ruby>は、\n他の悪魔の鍵にさえ\n対応しているとでもいうのか!?
+	ディーア	怒り2						よく気づいたな、幻想王
+	ディーア							オレの鍵は多重並行世界において\n解錠した権限をそのまま\n引き継ぐことができる
+	ディーア							それは魔剣だけでなく、\n悪魔の鍵も同様だ
+	ディーア	本気2						その鍵の権限を手に入れるのは\n苦労したぞ、幻想王……！
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							フフフ……そうか、そうかそうか！\nキミは最初から全て\nわかっていたわけだ！
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+	幻想王ノア	通常H						<dash=2><ruby=トゥルーエンド>真解放</ruby>、幻想殺しゼタ!!
+CharacterOff
+Param	character_grayout=true
+	ディーア	目閉じ2						<dash=2>止めろ、モモ
+CharacterOff
+Param	character_grayout=false
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	モモ	冷徹						まったく、"鍵"使いの荒い\n魔鍵使いだな
+	鎖エフェクト前							   	BrPage
+Param	character_grayout=true
+	黒グラデーション		エフェクト裏2			0
+ImageEffect	SpriteCamera	Bloom
+Se	ガードブレイク
+	鎖エフェクト後ろ							  	BrPage
+CharacterOff	鎖エフェクト前					1
+CharacterOff	鎖エフェクト後ろ					1
+ImageEffectOff	SpriteCamera	Bloom
+Wait						1
+	モモ							魔剣は使わせないよ\n悪いけれど、楽に戦いたいからね
+Se	光1
+	オーラ青		エフェクト表			1
+Wait						1
+Se	光2
+FadeOut	white					.5
+CharacterOff						0
+	幻想王ノア	通常H	1_2			0
+	幻想殺しゼタ		2_2			0
+FadeIn	white					.5
+	幻想殺しゼタ	悲しい						は？\nあれ、ちょちょ、\n"真解放"できてないけど……？
+	幻想王ノア							チッ、おそらく魔力の\nジャミングのようなものだ\nこのまま戦っては分が悪いか……
+CharacterOff
+	モモ		1_2
+	ディーア	怒り2	2_2					畳み掛けるぞ、モモ
+	モモ							手伝うよ、魔鍵使い
+	ディーア							<dash=2><ruby=アンロック>魔剣解放</ruby>!!
+	ディーア	本気2						オレの名は\n<param=name>\n<dash=2>覚悟しろ、幻想王!!
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_15
+EndIf
+EndScenario
+
+# Q1011_15
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	洋館
+FadeIn	black					.5
+Param	character_grayout=false
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	幻想王ノア	悔しいH
+Se	コインロック
+Shake	幻想王ノア		x=5				NoWait
+	幻想王ノア							ぐっ……あああっ……
+CharacterOff
+	ディーア	怒り2						アリスファミリーを幻想として\n作り出したのは失策だったな、幻想王
+	ディーア	怒り2						こう見えてもオレとアリス様は\nある程度交流があってな
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	幻想王ノア	悔しいH						……ほう？\nだが、僕の作り出す彼女は\n完璧だったはずだ
+	幻想王ノア							なにせ魔帝アリスの最も近くにいた、\n真魔王ヘルメリアの記憶だ
+CharacterOff
+	ディーア	怒り2						それだけ時が経てば、\n人も変わるというわけさ
+	ディーア							それに、ヘルメリア本人ならまだしも\n借り物の記憶だろう？
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	幻想王ノア	悔しいH						……それも気づいていたのか
+CharacterOff
+	ディーア	怒り2						だいたい、アリス様が本気で\nロールお嬢様と敵対する道を\n選ぶわけがない
+	モモ	冷徹						……それ、本人の前で言ったら\n生きて帰れないと思うよ
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	幻想王ノア	笑いH						……フフ、そうか\n魔帝アリスが気に入るものなど、\nこの世界には存在しないと思っていた
+	幻想王ノア							それに、今まで\n《<ruby=ロードオブイリュージョン>万象偽る幻想の鍵</ruby>》を\n破ったものは存在しなかった
+	幻想王ノア							原初六魔剣を有する六大魔王でさえ、\nこの鍵の力からは逃れられなかった
+	幻想王ノア	悔しいH						……自分の力を盲信している者ほど\n騙されやすいというのは、本当だな
+	幻想王ノア							まさか僕の鍵の力を破ってくる者が\nいるなど、思ってもいなかった
+CharacterOff
+	モモ	冷徹						いい気味だね
+	モモ							キミが今までマスターキーを\n馬鹿にし続けてきたツケが\n回ってきたというわけだ
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+StopBgm
+	幻想王ノア	フードなしH						フフ、だが騙されているのは\n僕だけじゃないよ\n時の鍵師モモ
+CharacterOff
+	モモ	冷徹						……なんだって？
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+Bgm	絶望
+	幻想王ノア	フードなしH						僕の鍵の力を破るには、\n事前に知識を得て\n対策をする必要がある
+	幻想王ノア							問題は彼がどこでその力を\n手に入れたかという話だ
+	幻想王ノア							彼はさっきこう言ったね、\n『この鍵の権限を手に入れるのは\n　苦労した』と
+	幻想王ノア							彼は自分がアンロックできる鍵を\n覚えている
+	幻想王ノア							どの魔剣が自分にアンロックできて、\nどの魔剣はアンロックできないか
+	幻想王ノア							それはつまり、自分の生み出した\n多重並行世界でどの魔剣をアンロック\nしたか覚えているということだ
+CharacterOff
+	モモ							…………!!
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	幻想王ノア	フードなしH						それに、彼はアリスの幻影を\n作ったのが失策だと言ったが<dash=2>
+	幻想王ノア							彼はそれ以前からロルリアンレットに\nオーロエズの場所を伝えている
+	幻想王ノア							もっと遡れば、聖鍵セフィロトの解放\n覇王ゼフの復活、\n第零異変コアの発掘<dash=2>
+	幻想王ノア							魔界に変革が起きる時、\nそれら全てに、\n彼は偶然を装って居合わせている
+	幻想王ノア							……いいや、違うな
+CharacterOff
+	ディーア	怒り2
+	幻想王ノア	<Off>						それらは彼が狙って起こしていると\n言っても過言ではない
+	幻想王ノア	<Off>						太陽聖域の七天をシーズクリアまで\n誘導し、異変化させて\n聖鍵セフィロトを解錠させ<dash=2>
+	幻想王ノア	<Off>						天界の異変に合わせて\n六大魔王を一箇所に集めて暗殺し、
+	幻想王ノア	<Off>						覇王ゼフの復活を手助けし、\n第零異変コアまでたどり着いた
+CharacterOff
+Bg	遺跡A_過去
+	幻想王ノア	<Off>						それはたった一度の人生で\n成し遂げられるようなものではない
+Bg	遺跡B_過去
+	幻想王ノア	<Off>						途方もない数の試行錯誤を重ね、\nすべての条件を満たした行動を記憶し\nそれをその通りに実践する
+Bg	洋館
+CharacterOff
+Param	character_grayout=false
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	幻想王ノア	フードなしH						それは悪魔の鍵の能力者である\nキミにしかできない芸当だ
+CharacterOff
+	モモ	冷徹						……嘘だ、彼の魂は多重並行世界の\n運営によって希薄化し、記憶も<dash=2>
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	幻想王ノア	フードなしH						嘘だと思うなら聞いてみれば良い
+CharacterOff
+	モモ	冷徹						魔鍵使い、キミは<dash=2>
+	ディーア	怒り2						…………
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	幻想王ノア	フードなしH						彼は今日、"計画通りに"\nこの場にたどり着いた
+	幻想王ノア							あらゆる犠牲を払い、\n並行世界の自分さえ犠牲にして
+	幻想王ノア							そして\n黒リディ、白リディ、赤リディを\nすべて犠牲にするように仕向けて
+CharacterOff
+	モモ	冷徹						…………ッ
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	幻想王ノア	フードなしH						騙されているのはキミも同じだよ、\nモモ
+	幻想王ノア							彼はブリジットを\n救う気など微塵もない
+	幻想王ノア							数多くの魔剣を犠牲にしながら、\n魔剣と人間の共存なんて笑わせる
+CharacterOff
+	ディーア	怒り2						……モモ、今は
+CharacterOff
+ImageEffect	SpriteCamera	GrayScale
+	10章BG		エフェクト表
+	モモ	<Off>						確かキミは、修繕のブリジットが\n戦っているときも\n何もせず立ち尽くしていたね
+	7章BG		エフェクト表
+	モモ	<Off>						シーズクリアで\nブリジットが暴走したときも、\nキミは何もしなかった
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff
+	ディーア	怒り2						今はその話をする時じゃない\nまずはノアを<dash=2>
+	モモ	冷徹						いいや、この話が先だ
+	モモ							……ボクは今まで、\nそれらがキミが全力で彼女を守ろうと\n戦った結果だと思っていた
+	モモ							実際に今までのキミは\nブリジットのために戦っていた
+	モモ							だからボクはキミを選んだ\nキミならばヘルメリアの意思を継いで\nブリジットを幸せにできると信じて
+	黒グラデーション		エフェクト表
+	モモ							だけど、それらが全てキミの\n意図通りに起こされた\n事象だというのなら
+	モモ							キミが意図してブリジットを\n追い詰めてきたというのなら、\nボクは<dash=2>
+	モモ							ボクはこれ以上、\nキミを信用できなくなる
+CharacterOff
+	ディーア	怒り2
+	モモ	<Off>						……答えろ、"ディーア"
+	モモ	<Off>						キミは、一体何を企んでいる？
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_16
+EndIf
+EndScenario
+
+# Q1011_16
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	洋館
+FadeIn	black					.5
+	モモ	冷徹						……答えろ、"ディーア"
+	モモ							キミは、一体何を企んでいる？
+	ディーア	目閉じ2						……そうだな\nやはり、隠し通せるものではないか
+	ディーア	怒り2						ノアの言う通りだ\nオレはすべての多重並行世界の記憶を\n保持している
+	モモ	冷徹						…………!!
+	ディーア	怒り2						覇王ゼフを復活させたのも、\nブリジットを封印に追い込んだのも、\n全て知っていて仕組んだことだ
+	モモ	冷徹						ならキミは、ブリジットを\nわざと見殺しに<dash=2>
+	ディーア	怒り2						ああ、それが必要だったから選んだ
+	モモ	冷徹						ブリジットを犠牲にしてまで\n選ぶべきものなど<dash=2>
+	ディーア	怒り2						<dash=2>そうしなければ、\nこの世界は滅んでいた
+	モモ	冷徹						<dash=4>ッ
+	ディーア	怒り2						そうだ\nオレは魔界が滅びるのを見てきた
+FadeOut	black					.3
+CharacterOff						0
+Bg	戦場跡					0
+ImageEffect	SpriteCamera	GrayScale
+FadeIn	black					.3
+	ディーア	<Off>						ある時は異変スーヴァによって、\nある時は医療世界プラタナスによって\nある時は方舟計画によって
+	ディーア	<Off>						そしてその他のほとんどは、\n【魔王獣】によって終焉を迎えた
+	ディーア	<Off>						オレの知る限り、\n聖鍵セフィロトが開かれた場合……\n全てのパターンで魔界は滅んでいる
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	洋館					0
+FadeIn	black					.3
+	ディーア	怒り2						それは並行世界の結末を見てきた\nお前も知っているはずだ、モモ
+	モモ	冷徹						では、ブリジットの魔王獣化を\n封じるために……？
+	ディーア	怒り2						ああ、そうだ
+	ディーア							もし白リディがブリジットを\n封印していなければ、\n今頃魔王獣が復活している
+	ディーア							……気づかないのも無理はない
+	ディーア							モモがオレの行動を\nきちんと観測し始めたのは\nこの世界が初めてだったな
+	ディーア							今回初めてなのは、この時点で3人の\nリディが融合済であること、\n六大異変の神域が開放されていること
+	ディーア							魔人ディーアに出会っていること\nそしてモモ、\nお前を味方につけていることだ
+	黒グラデーション		エフェクト表
+	モモ	冷徹						……だが、魔界を救うために\nブリジットを犠牲にしていては\n本末転倒じゃないか
+CharacterOff	黒グラデーション
+	モモ							キミの主張に至ってもそうだ
+	モモ							魔剣と人間の共存を目指し、\n全ての魔剣を救うと言いながら、\nキミはジュビテリアを手に掛けた
+	モモ							キミはどちらかというと、\n目的のために手段を選ばない\n傾向がある
+	モモ							その行動基準は、全てを救おうとする\nキミの目的とは相反するものだ
+	モモ							キミが魔界を救おうとしていることは\nわかった\nだが、その先で目指すものはなんだ？
+	モモ							キミは、本当にブリジットを\n救おうとしているのかい……？
+	ディーア	怒り2						…………
+	モモ							魂が希薄化してもなお記憶を\n保っているというのなら、\n精神の摩耗は尋常ではないはずだ
+	モモ							事実、キミはブリジットを\n犠牲にしても罪悪感すら\n感じていないじゃないか
+	モモ							……キミは本当に、\nブリジットを愛しているのかい？
+	モモ							答えろ、\n<param=name>\nキミは<dash=2>
+	ディーア	悔しい2						……今は、まだ話せない
+	モモ							……どうしてだ？
+	モモ							キミがただ一言、\n認めてくれれば<dash=2>
+	モモ							キミがただ一言、ブリジットを幸せに\nするためだと言ってくれれば、\nボクはキミを信頼できるというのに
+	ディーア	悔しい2						…………
+	モモ							……そうか、わかった\nならばボクは、\nキミをブリジットの敵と見なそう
+Se	歩く
+CharacterOff						1
+Wait						1
+StopSe						1
+Wait						1
+	ディーア	悔しい2						……余計なことをしてくれたな
+CharacterOff
+Param	character_grayout=false
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	幻想王ノア	悔しいH						自業自得じゃないのか？\n仲間だというのなら、きちんと\n腹を割って話せば良いものを
+	幻想王ノア							どうせブリジットにもろくに話さずに\n一人で抱え込んでいるのだろう、\nキミは
+CharacterOff
+	ディーア	目閉じ2						……そうだな、\nそうだったかもしれない
+	ディーア	怒り2						だが、今はどうでもいい話だ
+	ディーア							さあ、【魔王獣の記憶】を\n返してもらおう
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	幻想王ノア	フードなしH						断るよ\n囮に使ったのはキミだろう？\nそう都合よく渡してなるものか
+CharacterOff
+Se	抜刀
+	ディーア	怒り2						そうか
+StopBgm
+Se	剣閃
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=true
+	鎖エフェクト前		エフェクト表			0
+	鎖エフェクト後ろ		エフェクト裏			0
+	幻想王ノア	フードなしH				0
+FadeIn	white					.2
+Wait						.5
+Se	フォーン
+CharacterOff	幻想王ノア					1
+Wait						1
+Param	character_grayout=false
+	鎖エフェクト前							　　	BrPage
+	鎖エフェクト後ろ							　　	BrPage
+Se	コインロック
+CharacterOff						1
+Wait						1
+	ディーア	悔しい2						……ッ、これは、幻影……!?
+CharacterOff
+	黒グラデーション		エフェクト表
+Bgm	緊迫
+	幻想王ノア	<Off>						キミの計画を狂わせるには、\n十分すぎるほどの時間を稼げた
+	幻想王ノア	<Off>						彼女に感謝しなくてはね
+CharacterOff
+	ディーア	悔しい2						くっ……待て、幻想王ノア!!
+CharacterOff
+	黒グラデーション		エフェクト表
+	幻想王ノア	<Off>						待たずとも、\nキミには僕がどこへ向かうか\nわかっているのだろう？
+CharacterOff
+	ディーア	怒り2						……竜鍵マナ\nそこで【魔王獣の記憶】を使う気だな
+CharacterOff
+	黒グラデーション		エフェクト表
+	幻想王ノア	<Off>						フフ……本当に見てきたのだね、\n未来を
+CharacterOff
+	ディーア	悔しい2						魔界を滅ぼす気か、幻想王ノア
+CharacterOff
+	黒グラデーション		エフェクト表
+	幻想王ノア	<Off>						滅ぼす気はないよ
+	幻想王ノア	<Off>						キミはさっき、また嘘を吐いた
+	幻想王ノア	<Off>						全てのパターンで\n魔界は滅びたと言ったが、本当は\nそうではないパターンもあったはずだ
+	幻想王ノア	<Off>						例えば、キミが命を落としたことで\n目的を達することができなくなった\n世界とかね
+CharacterOff
+	ディーア	怒り2						……チッ
+CharacterOff
+	黒グラデーション		エフェクト表
+	幻想王ノア	<Off>						フフ、どうせ嘘を吐くのなら、\n奪った悪魔の鍵を\n使えばよかったものを
+FadeOut	black					.3
+CharacterOff						0
+Bg	宇宙					0
+	幻想王ノア	通常H				0
+FadeIn	black					.3
+	幻想王ノア							さあ、ここから先は対等な勝負と\nいこうじゃないか、\n<param=name>
+	幻想王ノア							僕は僕の目指す結末を、\nキミはキミの知らない結末を
+	幻想王ノア							フフ……\n月で待っているよ、"ディーア"
+CharacterOff
+Bg	洋館
+	ディーア	怒り2						……ああ、受けて立ってやる\n待っていろ、幻想王<dash=2>
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_17
+EndIf
+EndScenario
+
+# Q1011_17
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	夜空
+FadeIn	black					.5
+	アストロロギア							そうか、彼と話したのだね
+	モモ	冷徹						……ああ、そして決別したよ
+	アストロロギア							だから言っただろう
+	アストロロギア							キミが彼女の幸せを願っているのなら\n誰を信じるべきなのか\nよく考えろと
+	モモ	冷徹						……本当に、彼はブリジットを\n救う気がないのだろうか
+	アストロロギア							さあね\n本当のところはわからない
+	アストロロギア							……だが彼は幾度となく、\n魔王獣化を止めるために自らの手で\nブリジットの命を奪っている
+Se	回想
+CharacterOff						0
+Bg	チュートリアルスチル1					0
+Wait						2
+CharacterOff						0
+Bg	夜空					0
+	モモ							……そうだね
+	モモ							これは推測なのだけれど……
+	モモ							もし多重並行世界の運営による魂の\n希薄化の代償が、記憶でないのなら
+	モモ							……彼は、愛情を\n失くしてしまったのかもしれない
+FadeOut	black					0
+Bg	草原B_過去					0
+	ディーア	ソードマスター				0
+Wait						.2
+FadeIn	black					0
+	モモ	<Off>						ただでさえ、魂を数万、\n数億に分割して、\nその分の人生を生きているんだ
+FadeOut	black					0
+Bg	廃墟A_過去					0
+	魔人ディーア					0
+Wait						.2
+FadeIn	black					0
+	モモ	<Off>						それも、たった一つの目的を\n追い続ける、過酷な旅を
+FadeOut	black					0
+CharacterOff						0
+Bg	夜空					0
+Wait						.2
+FadeIn	black					0
+	モモ	冷徹						辛い記憶に耐えるには、\nそれより遥かにたくさんの\n幸せな記憶が必要だ
+	モモ							それがなければ、\n人の精神はすり減っていく
+	モモ							魔王獣の記憶が怨嗟に\n包まれたのと同じようにね
+	モモ							……そうして彼は、\nもう愛する人を冷酷に\n殺害できるようになってしまった
+	モモ							そこに、もはや愛情はない
+	モモ							目的を達するためとはいえ、\nそれが彼女の救済に\n繋がっているとはいえ
+	モモ							冷徹に、冷酷に、何も知らない道化を\n演じながら愛する人を\n犠牲にし続けるなんて……
+	アストロロギア							……彼はもはや、\n人間と呼べるものでは\nなくなっているのかもしれないね
+	アストロロギア							それで、キミはどうするんだい？
+	モモ	冷徹						そうだね……
+	モモ							誰を信じるべきなのか、\nもう一度考えてみるよ
+FadeOut	black					.5
+StopBgm
+CharacterOff						0
+	　　　　　　　　　　
+Bg	竜鍵マナ					0
+Wait						2
+FadeIn	black					.5
+Bgm	緊迫
+Wait						1
+	幻想殺しゼタ	無						ふーん、これが\n【魔王獣の記憶】ねえ……
+	幻想殺しゼタ	悲しい						確かに、これを練り上げるには\nあたし一人の力じゃしんどそうだわ
+	幻想王ノア	通常H						竜鍵マナは魔剣伝承の\nデータベースにも等しい叡智の結晶だ
+	幻想王ノア							これによって魔剣が作り出されている\nと言っても過言ではない
+	幻想殺しゼタ							でもさー、"鍵"はどうすんの？\n古代兵器ブキダスとか持ってないけど
+	幻想王ノア	通常H						大丈夫さ、別に\n魔剣を作るわけじゃない
+	幻想王ノア							少しシステムを\n拝借すればいいだけのことだからね
+	幻想殺しゼタ							だいじょぶ？\nマスターキーに怒られるんじゃない？
+	幻想王ノア	通常H						心配いらないよ\nマスターキーは我々に竜鍵マナを扱う\n力があるとは思っていない
+	幻想王ノア							そのために、マスターキーは\nノアの一族を使って魔界から\n記憶を奪ったのだから
+Param	character_grayout=false
+Se	光2
+FadeOut	white					0
+	オーラ紫		エフェクト表			1
+Bgm	魔王バトル
+FadeIn	white					.5
+	幻想王ノア	通常H						さあ、悲嘆を喰らえ、絶望を糧と為せ
+	幻想王ノア							次なる【方舟】となるがいい、\n幻想記憶結晶ブリジット<dash=2>!!
+Se	闇2
+Se	闇3
+FadeOut	purple					1
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_18
+EndIf
+EndScenario
+
+# Q1011_18
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	夜空
+FadeIn	black					.5
+Se	火事
+Shake	Graphics		x=5 y=5 time=1.5
+	ディーア	怒り2						……始まった\nノアめ、竜鍵マナにたどり着いたな
+CharacterOff
+Se	火事
+Shake	Graphics		x=5 y=5 time=1.5
+	ディーア	驚き2						っと、リデ……
+	ディーア	目閉じ2						……そうだ、一人だったな
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	草原A(夜)					0
+ImageEffect	SpriteCamera	Sepia
+	リディ	幻覚				0
+	　　　　　　　　　　		2_2
+FadeIn	white					.3
+Wait						1.5
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	夜空					0
+	　　　　　　　　　　
+FadeIn	white					.3
+	ディーア	黒2						……情けない話だ
+	ディーア							<ruby=ノア>敵</ruby>の作り出した\n幻影と知りながら、\nそれを支えにしていたなんてな
+Param	character_grayout=false
+	オーラ青		エフェクト表			1
+	ディーア	目閉じ2						……<ruby=アンロック>魔剣解放</ruby>
+Se	光1
+FadeOut	white					.3
+CharacterOff						0
+	焔華剣テュフォーン					0
+FadeIn	white					.3
+	焔華剣テュフォーン							ふぁ～、なんじゃ、\n戦いにはまだ早いであろう
+	ディーア	あはは2						出不精だな、\nいつ呼ばれても構わないように\n待機しておけ
+	焔華剣テュフォーン							は？\n誰がデブじゃとクソガキ、\n豊満と言え豊満と
+	焔華剣テュフォーン							ウォーミングアップがしたいのなら\n付き合ってやるぞ、\n思う存分温めてやる
+	焔華剣テュフォーン							なんなら燃やし尽くして\nやってもよいが？\nああん？
+	ディーア	怒り2						……テュフォーン
+	焔華剣テュフォーン							なんじゃの、顔色の悪い\nこれから戦に赴く顔ではないのう
+	焔華剣テュフォーン							臆病になっておるな\n"勇気"の使いすぎじゃ\nろくに休みもせずに連戦するからじゃ
+	焔華剣テュフォーン							……ブリジットを失い、\nあのマスターキーの信頼を失い、\n仲間がいなくなることを恐れておるか
+	ディーア	悔しい2						…………
+	焔華剣テュフォーン							安心せい\nあのマスターキーに告げなかったのは\n良い判断じゃ
+	焔華剣テュフォーン							まずはノアめをなんとかせねば\n話は始まらん
+	焔華剣テュフォーン							それにな、考えてみるがよい
+	焔華剣テュフォーン							小僧、貴様にはワシらがおる\n貴様を慕っておる、\n数百の魔剣たちがおる
+	焔華剣テュフォーン							それを仲間だとは思えば、\n少しは楽になるであろう
+	ディーア	怒り2						……だが、オレは皆を壊すことになる
+	焔華剣テュフォーン							なに、皆それを承知で\nついてきておるのじゃろうが
+	焔華剣テュフォーン							確かに、小僧の理想を\n最初に聞いた時は驚いたがな
+CharacterOff
+Bg	宇宙
+	焔華剣テュフォーン	<Off>						じゃが今は皆、お主の理想を知り、\n同じ理想を抱いて共におる
+	焔華剣テュフォーン	<Off>						兵器であるワシらに、\n兵器ではない在り方を\n教えてくれたのは紛れもなく小僧じゃ
+	焔華剣テュフォーン	<Off>						それに、壊されたとて、\nそれが今生の別れと\nなるわけではあるまい
+	ディーア	<Off>						だけど、もし失敗したら……
+	焔華剣テュフォーン	<Off>						失敗などせぬ
+	焔華剣テュフォーン	<Off>						ワシらがついておるのだぞ\n失敗などするはずがなかろうが
+	ディーア	<Off>						……そうだな、そうだった
+Bg	夜空
+	焔華剣テュフォーン							貴様の積み上げてきたものは、\n貴様だけのものだ
+	焔華剣テュフォーン							何人たりとも、\nそれを邪魔することは許されん
+	焔華剣テュフォーン							安心してどーんと立ち向かうがよい
+	ディーア	あはは2						……ありがとう、テュフォーン
+	焔華剣テュフォーン							なに、構わぬ\n若人の反応は新鮮でよいわ
+	焔華剣テュフォーン							ケルベリルのババアは、\nそういう可愛げは\n持ち合わせておらなんだからな
+	ディーア	怒り2						そうか、ならよかった
+CharacterOff
+Bg	宇宙
+	ディーア	<Off>						さあ、行こうか\n<dash=2>竜鍵マナへ
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_19
+EndIf
+EndScenario
+
+# Q1011_19
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	竜鍵マナ
+FadeIn	black					.5
+	幻想王ノア	通常H						来たね、\n<param=name>\n待っていたよ
+	ディーア	怒り2						……幻想王ノア
+	幻想王ノア	通常H						懐かしいね、\n初めてキミを見つけた日を思い出す
+	幻想王ノア							その頃から、いつかキミとこうして\n決着をつけることになるのではないか\nと思っていたものだ
+	ディーア	怒り2						……オレはお前を倒して、\n【魔王獣の記憶】を取り戻す
+	幻想王ノア	通常H						わかっているとも
+	ディーア	怒り2						……だが
+	幻想王ノア	通常H						…………？
+	ディーア	怒り2						その前に、魔王候補として<dash=2>\n聞かなければならないことがある
+	ディーア							オレ自身、幾度となく\n問われてきた問いだ
+	ディーア							そして、お前への敬意として、\n知らなければならないことだ
+	幻想王ノア	通常H						……聞こうじゃないか
+	ディーア	怒り2						<dash=2>幻想王ノア\nお前は何を目指して\n魔王を志している？
+	幻想王ノア	通常H						……フフ、ゼフやセトが\n好きそうな問いだ\nキミも魔王候補らしくなってきたな
+	幻想王ノア							キミは【方舟計画】を\n知っているかい？
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	天界					0
+	天上王セト					0
+	　　　　　　　　　　		2_2
+Param	character_grayout=false
+FadeIn	white					.3
+	ディーア	<Off>						天上王セトが立案した、\n魔鍵ノアを使った新たなる\n魔界の生成……
+	ディーア	<Off>						そして、そこから魔界を支配する、\n絶対王政の樹立
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	竜鍵マナ					0
+	ディーア	怒り2				0
+FadeIn	white					.5
+	ディーア							つまり、究極の上位存在による\n圧倒的な支配を目論む計画だ
+	幻想王ノア	通常H						その通り、\nそれが歴史に残る【方舟計画】だ
+	幻想王ノア							だがそれは表向きの歴史だ\n実際の【方舟計画】を\n隠蔽するためのフェイクに過ぎない
+	幻想王ノア							【方舟計画】は、\n究極の断罪システムだよ
+	幻想王ノア							ロンギヌスの原典と双璧をなす、\n"神を裁く力"さ
+FadeOut	white					.3
+Bg	神界改					0
+CharacterOff						0
+FadeIn	white					.3
+	幻想王ノア	<Off>						方舟は罪なき者を迎え入れる楽園の\n土壌であり、マスターキーはここで\n永遠の平和を手に入れようとした
+	幻想王ノア	<Off>						そう、彼らは自らが罪なきものである\nと信じて疑わなかったのさ
+	幻想王ノア	<Off>						なにせ彼らは鍵であり、\n作られた生命だからね
+	幻想王ノア	<Off>						だが罪なき生物などいない\n彼らで言うなら、そうだな
+	幻想王ノア	<Off>						自らを罪なきものとする驕り、\n人を間引こうとする\nその選民思想こそ罪だ
+FadeOut	black					.3
+CharacterOff						0
+Bg	竜鍵マナ					0
+FadeIn	black					.3
+	幻想王ノア	通常H						方舟はもはや、\nマスターキーさえ滅ぼす\n断罪の力となった
+	幻想王ノア							当時、まだ自らの命が\n永遠であることを疑わなかった\n彼らにとって、
+	幻想王ノア							それは初めて目にした\n「自らの生命を脅かすもの」だった
+	幻想王ノア							当然、彼らはこれを廃棄した\nそれで、この計画は\n終わったはずだった
+CharacterOff
+Param	character_grayout=false
+	11章スチルG		エフェクト表									ノアの一族たくさん、足元だけ
+	幻想王ノア	通常H						だが、運悪くノアの一族が\nこれを発掘してしまったのさ
+	幻想王ノア							ノアの一族は代々、\n魔鍵ノアを守護する一族だった
+	幻想王ノア							マスターキーの技術にも精通していた\n彼らは、【方舟】を\n修繕してしまったんだ
+	幻想王ノア							ノアの一族は【方舟】を\n保有することで、マスターキーに\n対抗できるようになった
+	幻想王ノア							だが、ノアの一族はマスターキーを\n滅ぼそうとはしなかった
+	幻想王ノア							彼らはそれを使って、マスターキーと\n同等の権限を得ようとしたんだ
+	幻想王ノア							マスターキーはそれを渋々受け入れた\n代わりに、\n方舟の存在を隠すよう指示した
+	幻想王ノア							人類に対して優位に立ちたかった\nノアの一族は、それを受け入れた
+CharacterOff	11章スチルG
+	幻想王ノア	通常H						彼らは【方舟計画】のフェイクを\n作り出し、マスターキーの\nアテナがその犠牲となった
+	ディーア	怒り2						……セトが裏切ったのも、\nノアの一族の計画のうちだったのか？
+	幻想王ノア	通常H						そうさ、アテナを犠牲にしたのは、\nマスターキーに対する\n脅しのつもりだった
+	幻想王ノア							【方舟】を使えば、人類は\nマスターキーに対抗できる……\nそれを忘れるな、というメッセージさ
+	幻想王ノア							こうして、ノアの一族と\nマスターキーは共存関係になった
+CharacterOff
+ImageEffect	SpriteCamera	GrayScale
+Bg	戦場跡
+	幻想王ノア	<Off>						だが、【方舟】は\n魔王獣戦役によって失われた
+	幻想王ノア	<Off>						だからノアの一族は、\n方舟の存在とその保管場所であった\nオーロエズを世界から隠した
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	竜鍵マナ
+	ディーア	怒り2						……ノアの一族は、\n方舟を所有している\nそうマスターキーに思わせるためか
+	幻想王ノア	通常H						その通りだ
+	ディーア	怒り2						そうか……！\nだから魔王獣のことも\n歴史から消し去ったわけだな……！
+	ディーア							【方舟】を壊した魔王獣もまた、\nマスターキーに匹敵する兵器として\n利用するために……!!
+	幻想王ノア	通常H						魔剣殺しブリジットが\n元々マスターキーに対する力を\n持っていたのか、
+	幻想王ノア							あるいは魔王獣として後天的に\n手に入れたのかはわからないけれどね
+	ディーア	怒り2						なるほど、そうして今再び、\nお前はマスターキーに\n匹敵する力を手に入れた
+	ディーア							失われた【方舟】に代わる、\n新たなる力……\n【魔王獣の記憶】という【方舟】を
+	ディーア							……つまり、お前はマスターキーを\n従え、その権限をもって\n魔界の頂点に立とうとしているわけだ
+StopBgm
+	幻想王ノア	通常H						いいや、そんなことは考えていないよ
+	ディーア	驚き2						……なに？
+Bgm	神社
+	幻想王ノア	通常H						僕の望みはノアの一族と同じだ\n何も変わらない、ずっとこのままの\n世界が続くことを望んでいる
+	ディーア	悔しい2						……なんだと？
+	幻想王ノア	通常H						マスターキーの願いも成就せず、\n誰も魔王にはならない
+	幻想王ノア							究極の"現状維持"こそ、僕の望みだ
+	ディーア	悔しい2						何故、そんなものを……
+	幻想王ノア	通常H						言っただろう、\n人は夢を見ている時が一番幸せなのさ
+	幻想王ノア							だが誰かが魔王となり、\n魔王の願いが叶った途端に、\n他の全ての夢は潰える
+	幻想王ノア							そして夢を抱くことさえ\n許されなくなる
+	幻想王ノア							誰かの夢が叶うということは、\n誰かの夢を潰すことに他ならない
+	ディーア	驚き2						それは……
+	幻想王ノア	通常H						例えば希望王ルシフル、\n彼の求める世界などは\nまさにそれだろう
+	ディーア	悔しい2						……だが、そうじゃない可能性もある
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+Param	character_grayout=false
+	太陽王アーク					0
+	　　　　　　　　　　		2_2
+FadeIn	black					.3
+	ディーア	<Off>						太陽王アークが願ったのは、\n魔王戦争の継続だった
+	ディーア	<Off>						誰もが王を目指せる世界ならば、\nそれは<dash=2>
+CharacterOff
+Bg	竜鍵マナ
+	幻想王ノア	通常H						それは問題を先送りにしているに\n過ぎないよ
+	幻想王ノア							アークを継ぐ魔王がルシフルの\nような思想を持っていないと、\n誰が断言できる？
+	幻想王ノア							叶うかどうかは重要じゃない\n夢を抱くことのできる\n世界であることが重要なのさ
+	ディーア	怒り2						…………
+	幻想王ノア	通常H						別にわかり合おうなどとは\n思っていないよ
+	幻想王ノア							キミの理想も、\n僕には理解できないのだからね
+	ディーア	悔しい2						……そうか、残念だ
+	幻想王ノア	通常H						さて、いいのかい？\n僕の狙いが時間稼ぎであることくらい\nキミはわかっているんだろう？
+	幻想王ノア							これ以上、僕に時間を与えるのは\n得策ではないと思うけれどね
+	ディーア	怒り2						……そうだな、\n【魔王獣の記憶】を利用される前に\n片付けるにはここが限界だ
+CharacterOff
+Param	character_grayout=true
+	幻想王ノア	通常H	1_2
+Bgm	魔王バトル
+	幻想王ノア							<dash=2><ruby=アンロック>魔剣解放</ruby>、幻想殺しゼタ
+	幻想殺しゼタ	ウインク	2_2			1		はいはーい、準備バッチリよー
+	幻想殺しゼタ	無						……あ、うそちょっとまって、\nメイク終わってなかった
+	幻想王ノア							気にするな、どうせ落ちる
+	幻想殺しゼタ	怒り2						気にしますぅ～！\n美しく戦うのがあたしの\nモットーなんですぅ～！
+	幻想殺しゼタ	ニヤリ						それにせっかく久々にちゃんと\n<ruby=たのしめ>戦え</ruby>るんだからさ～
+	幻想殺しゼタ	ウインク						全力でやらなきゃ損だよ、マスター！
+	幻想王ノア							そうだな　"幻想殺し"の名が\n伊達ではないところを\n見せてやるといい
+	幻想王ノア							《魔王候補十三王》\n《方舟の守護者》幻想王ノア
+	幻想殺しゼタ	通常						《<ruby=フォビドゥン>隠された伝説</ruby>》\n幻想殺しゼタ
+	幻想殺しゼタ	ウインク						とびきりの夢を見せてあげるよ、\n少年!!
+CharacterOff
+Param	character_grayout=false
+	オーラ青		エフェクト表			1
+	ディーア	怒り2						<dash=2><ruby=アンロック>魔剣解放</ruby>
+	ディーア							《魔王候補十三王》\n《<ruby=ワールドイズマイン>愚かなる卑怯者の鍵</ruby>》\n<param=name>
+	ディーア	目閉じ2						夢は見るものじゃない\n<dash=2>目指すものだ
+	ディーア							思いに耽るだけで幸せなんてのは嘘だ\n叶えてこそ価値があるんだ
+	ディーア	本気2						夢の抱き方を教えてやるよ、\n幻想王ノア<dash=2>!!
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_20
+EndIf
+EndScenario
+
+# Q1011_20
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔王バトル
+Bg	竜鍵マナ
+FadeIn	black					.5
+Se	連撃
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						1.5
+	ディーア	悔しい2	1_2
+Tween	ディーア	MoveBy	x=90				NoWait
+	ディーア							くっ……
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想殺しゼタ							へぇ、なかなかやるじゃん！\nさすが【ナレハテ】の魔剣使いだ
+	幻想殺しゼタ							いいね、楽しくなってきた！\nこれは名勝負になる気がするね！
+CharacterOff
+	ディーア	悔しい2	1_2
+	焔華剣テュフォーン		2_2					……大丈夫か、小僧\n奴のペースに飲まれておるぞ
+	ディーア	悔しい2						……マズいな、\n幻想殺しの<ruby=スキル>力</ruby>を使わず、\n魔剣としての純粋な力だけでこれか
+	焔華剣テュフォーン							奴と対峙するのはこれが初めてか？
+	ディーア	悔しい2						ああ、ゼタは実戦向きじゃない\n魔剣だと思いこんでいたが……
+	焔華剣テュフォーン							フン、それは甘い考えじゃったな
+	ディーア	怒り2						……そのようだ
+CharacterOff
+Param	character_grayout=false
+	幻想殺しゼタ							ねえねえ、キミはさ、\n記憶を消してもう一回\n戦いたい相手とかいる？
+	幻想殺しゼタ							あたしはいるよ！\n運命殺しワールドエンドに、\n竜王の血ディクシヴゼロ！
+	幻想殺しゼタ	無						それからラグナロク……\nは、まあどうでもよかったか
+	幻想殺しゼタ	ニヤリ						あと魔剣殺しブリジットも良かったな\n流石《<ruby=フォビドゥン>隠された伝説</ruby>》って感じで！
+	幻想殺しゼタ	通常						ねえ、キミも\n原初十三魔剣なんでしょう？
+	幻想殺しゼタ							原初六魔剣でもなく、\n《隠された伝説》でもなく、\n《創生の鍵》でもない
+	幻想殺しゼタ							<dash=2>原初十三魔剣の《<ruby=アナザー・ワン>例外</ruby>》\n世界意思ディーア
+	幻想殺しゼタ	ウインク						キミとの戦いも、\n記憶を飛ばしてもう一回\n<ruby=や>戦</ruby>りたくなるくらい<dash=2>
+Se	光2
+FadeOut	white					.5
+Param	character_grayout=false
+CharacterOff						0
+	11章スチルH		エフェクト裏2			0						遠目のゼタさん
+FadeIn	white					.5
+	幻想殺しゼタ	<Off>						<dash=2>楽しめるといいな！
+ImageEffect	SpriteCamera	Bloom
+	　　　　　　　　　　							<speed=0.1>　</speed>	BrPage
+	イベントスチル32901	A	effect_c
+Wait						.1
+	イベントスチル32901	B
+ImageEffect	SpriteCamera	NegaPosi
+CharacterOff	イベントスチル32901
+Wait						.1
+ImageEffectOff	SpriteCamera	NegaPosi
+StopSe
+Wait						.5
+Param	character_grayout=false
+	イベントスチル32905		effect_d			.4
+	イベントスチル32901	A	effect_c
+Tween	イベントスチル32901	RotateBy	z=50 time=0.1				NoWait
+Wait						.1
+	イベントスチル32901	B
+Se	水3
+Se	光3
+Se	火事
+Wait						.1
+	イベントスチル32901	C	effect_c
+Wait						.1
+Tween	イベントスチル32901	RotateBy	z=2000 time=3				NoWait
+Tween	イベントスチル32901	ScaleBy	x=10 y=10 time=3.5				NoWait
+	イベントスチル32901	E				.1
+Wait						.1
+	イベントスチル32904
+Tween	イベントスチル32904	RotateBy	z=2000 time=2				NoWait
+Wait						.5
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+	　　　　　　　　　　							　	BrPage
+Wait						1
+CharacterOff						0
+Param	character_grayout=false
+	焔華剣テュフォーン					0
+	ディーア	悔しい2				0
+FadeIn	white					0
+Shake	ディーア		x=5				NoWait
+	ディーア							ぐぅぅぅっ……!!
+	ディーア	本気2						灼き尽くせ、焔華剣テュフォーン!!
+Se	火2
+	オーラ炎		エフェクト表			1
+	焔華剣テュフォーン							おおおおおおおッ!!
+Se	火3
+FadeOut	red					.5
+FadeIn	red					.5
+Se	水3
+FadeOut	white					.5
+CharacterOff						0
+FadeIn	white					.5
+Se	ホワイトアウト
+Wait						1
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	焔華剣テュフォーン		2_2					ほう、ワシの焔をも凍らせるとは！
+	ディーア	本気2						チッ、テュフォーンとは\n相性が悪いな！
+	焔華剣テュフォーン							業腹じゃがその通りのようじゃのう！
+	焔華剣テュフォーン							そうでなくても、\n《<ruby=フォビドゥン>隠された伝説</ruby>》はワシらの\n後継機のようなものじゃ
+	焔華剣テュフォーン							性能はあちらのほうが格上……\n闇雲に戦っても勝ち目はないぞ
+	ディーア	悔しい2						ああ……おまけに手が凍ってきた\nあまり勝負を長引かせたくはないな
+	ディーア	怒り2						切り札に取っておくつもりだったが\n……そうも言ってられないか
+Bgm	決戦
+	焔華剣テュフォーン							ほう、やるのじゃな小僧！
+	焔華剣テュフォーン							じゃが、それは前人未踏の領域じゃ\n貴様とて、耐えられるかわからぬぞ
+	ディーア	通常2						やってみせるさ、\n今までだってそうやって\n乗り越えてきたんだ
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+	ディーア	本気2						<dash=2>覇神を照らす眩き黄昏、\n陽煌の導き、我は覇道を歩む者！
+CharacterOff
+Param	character_grayout=true
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							ほう、この力はまさか……\n原初十三魔剣の並行解錠か!!
+CharacterOff
+	焔華剣テュフォーン		2_2
+	ディーア	本気2	1_2					……これは太陽王から託されたものだ\nオレは、彼の分まで共に\n背負って戦い抜きたい！
+	※※※※							<color=mk2wisp>ベリファイ、ブレイズエーテライト\nアンロック=コード\nプライモーディアル<ruby=サーティーン>ⅩⅢ</ruby></color>
+	ディーア	本気2						<dash=2><ruby=アンロック>魔剣解放</ruby>!!
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+	覇王剣ラグナロク					0
+Wait						2
+FadeIn	white					0
+	覇王剣ラグナロク							原初六魔剣が一振り、\n覇王剣ラグナロク<dash=2>ここに
+	覇王剣ラグナロク							どうかお心のまま<dash=2>\n我が力をお使いください、マスター
+	焔華剣テュフォーン							なんじゃ、清楚ぶりおって
+	覇王剣ラグナロク							あなたの尻拭いに来たのよ？\n随分な言いようじゃない
+	覇王剣ラグナロク							多様な属性に浮気しているようでは、\n一つを極め続けた究極の焔には勝てぬ\n……とかなんとか言ってたくせに
+	覇王剣ラグナロク							随分と押されているようじゃない？
+	焔華剣テュフォーン							前回ワシに負けたのを\n根に持っておるのかの？\nそういうタイプはモテぬぞ～
+	覇王剣ラグナロク							別に構わないわ\n私はこれに勝って\nマスターの寵愛を頂くもの
+	焔華剣テュフォーン							マスターにも\n相手を選ぶ権利はあるわい！\nのう？
+	ディーア	怒り2						言ってる場合か、\n味方にぶつけるエネルギーがあるなら\n敵にぶつけろ
+	覇王剣ラグナロク							<dash=2>さて、さっき何か\n面白いことを言っていたわね
+	幻想殺しゼタ							ん？\nあたしなんか言ったっけ？
+	覇王剣ラグナロク							私との戦いは\nどうでもよかったですって？
+	幻想殺しゼタ							ああ、どうでも良すぎて\n忘れちゃってたや
+	焔華剣テュフォーン							ワシなんか\n名前すら挙がってないぞ
+	幻想殺しゼタ							そりゃ戦ったことないもん
+	焔華剣テュフォーン
+Tween	焔華剣テュフォーン	PunchPosition	y=50				NoWait
+	焔華剣テュフォーン							そうじゃったか、ガハハ！
+	幻想殺しゼタ
+Tween	幻想殺しゼタ	PunchPosition	y=50				NoWait
+	幻想殺しゼタ							あははははは！
+	覇王剣ラグナロク							あははじゃないわよ！
+	覇王剣ラグナロク							その生意気な口、\n二度と利けないようにしてあげるわ!!
+	焔華剣テュフォーン							あ？\nワシもか？
+	覇王剣ラグナロク							あんたもよ！
+	焔華剣テュフォーン							フン、まあじゃが確かに、<ruby=ガキ>後継機</ruby>に\n良いようにされるのも癪じゃのう！
+	焔華剣テュフォーン							ワシらが切り込む\nその隙に小僧はゼタを狙え
+	ディーア	怒り2						ああ、わかった
+CharacterOff
+	覇王剣ラグナロク		p3
+	焔華剣テュフォーン		p7u					どれ、いっそ灼き尽くすとするか、\nラグナロクよ！
+	覇王剣ラグナロク							道を切り拓くわ、\nついてきなさいテュフォーン!!
+	覇王剣ラグナロク							《覇神を照らす黄昏》\n覇王剣ラグナロク!!
+	焔華剣テュフォーン							《赤熱せし大地の血脈》\n焔華剣テュフォーン!!
+	覇王剣ラグナロク							原初の力を見せてやるわよ
+	焔華剣テュフォーン							応ッ!!
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+	幻想殺しゼタ		2_2			0
+	幻想王ノア	通常H	1_2			0
+Wait						1
+FadeIn	white					0
+	幻想殺しゼタ	ニヤリ						あはは！\nやっぱりすごいね、これは\n<ruby=・・・・・・>忘れられない</ruby>戦いになりそうだ！
+	幻想王ノア							……だが残念だ
+	幻想殺しゼタ	無						そうだねえ、残念だよ
+	幻想殺しゼタ	悲しい						キミとの戦いがここで\n終わってしまうなんて
+	幻想殺しゼタ	怒り						《鮮冽なる虚の幻》\n幻想殺しゼタ
+	幻想殺しゼタ	ウインク						楽しもう、夢が終わるその時まで！
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_21
+EndIf
+EndScenario
+
+# Q1011_21
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	竜鍵マナ
+FadeIn	black					.5
+	覇王剣ラグナロク							はぁぁぁああああッ!!
+	焔華剣テュフォーン							おおおおおおッ!!
+Se	光3
+FadeOut	white					.5
+CharacterOff						0
+FadeIn	white					.5
+Wait						.5
+Se	火3
+FadeOut	red					.5
+FadeIn	red					.5
+Wait						1
+	幻想殺しゼタ							……ふふ、ふふふ！
+Se	水3
+FadeOut	aqua					.5
+CharacterOff						0
+FadeIn	aqua					.5
+	焔華剣テュフォーン							くっ……おいおい、\nなんじゃあいつは!?
+	覇王剣ラグナロク							私たちが2人揃って、ようやく\n互角といったところかしら……
+	焔華剣テュフォーン							じゃが力が互角なら\n手数の多い我々に分があるぞ
+	覇王剣ラグナロク							そうね、一気に\n畳み掛けましょう<dash=2>!!
+Se	光2
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	11章スチルI		エフェクト表			0						ラグナロクのかっこいいやつ
+FadeIn	white					.5
+	覇王剣ラグナロク							陽煌の導き、巨星の黄昏\n<dash=2>覇道よ、拓け!!
+Se	火2
+FadeOut	red					.5
+CharacterOff						0
+	11章スチルJ		エフェクト表			0						テュフォーンのかっこいいやつ
+FadeIn	red					.5
+	焔華剣テュフォーン							魔を呼ぶ豪炎、赤熱の血潮\n<dash=2>これが原初の焔!!
+CharacterOff
+Param	character_grayout=true
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							……来るぞ、ゼタ
+	幻想殺しゼタ	ニヤリ						ええ<dash=2>
+CharacterOff
+Param	character_grayout=false
+	11章スチルK		エフェクト表									二人のかっこいいやつ
+	二人							<size=35><dash=2>ブレイズドライブ!!</size>
+	焔華剣テュフォーン							うおおおおおおおッ!!
+	覇王剣ラグナロク							はあああああああッ!!
+Se	光3
+Se	火3
+FadeOut	white					1
+CharacterOff						0
+Param	character_grayout=true
+	幻想殺しゼタ		2_2			0
+	幻想王ノア	通常H	1_2			0
+Wait						.5
+StopBgm
+FadeIn	black					0
+	幻想殺しゼタ	ニヤリ						<dash=2>あたしたちの勝ちね
+CharacterOff
+Se	武器を落とす
+Wait						1.5
+Param	character_grayout=false
+	オーラ青
+	覇王剣ラグナロク
+Wait						.1
+CharacterOff						1
+	覇王剣ラグナロク							……、力が……!?
+	焔華剣テュフォーン							……ッ、おい、小僧<dash=2>!?
+CharacterOff
+Param	character_grayout=true
+	黒グラデーション		エフェクト表
+	ディーア	黒2						…………ッ
+Se	倒れる
+Tween	ディーア	MoveBy	y=-300
+CharacterOff	ディーア					1
+CharacterOff
+	焔華剣テュフォーン							おい、小僧！\nしっかりせんか！
+Bgm	絶望
+CharacterOff
+	黒グラデーション
+	ディーア	絶望2						<size=20>……無理だ、無理だよ……\nオレにはできない……こんな……</size>
+CharacterOff
+	覇王剣ラグナロク							まさか、魔力が……
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							当然だ、元々魔力が\n枯渇しかかっていた上に、\n原初十三魔剣の並行解錠など……
+CharacterOff
+	覇王剣ラグナロク							でも、そんな兆候なんて……
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							絆の浅い魔剣に\nわかるものでもないだろう
+	幻想王ノア							それに、そいつは\n《愚かなる卑怯者の鍵》を\n平気な顔で使うような男だ
+	幻想王ノア							最初からやせ我慢していたのだろうさ
+CharacterOff
+	焔華剣テュフォーン							…………ッ
+	幻想殺しゼタ	無
+	幻想殺しゼタ							魔剣の魔力切れは\n力使えなくなるだけだから\n楽でいいけどさー
+	幻想殺しゼタ							人間のは残酷だよね\n勇気を全て使い果たして、\n誰よりも臆病で卑屈になる
+	幻想殺しゼタ							多分相当な苦痛だと思うよ\nいっそ壊してあげたほうが楽なくらい
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff
+	焔華剣テュフォーン							やめろ<dash=2>!!
+CharacterOff
+	オーラ青		エフェクト表
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							<dash=2><ruby=トゥルーエンド>真解放</ruby>、幻想殺しゼタ
+FadeOut	black					0
+CharacterOff						0
+	　　　　　　　　　　
+StopBgm
+Bg	荒野(雨)
+Wait						4
+Se	大雨2	TRUE
+FadeIn	black					0
+Wait						1
+Shake	Graphics		x=5 y=5				NoWait
+	※※※※							<color=red><dash=2>ァァアアアァァァ<dash=4></color>
+	ディーア	黒2						…………
+CharacterOff
+Se	武器を落とす
+Wait						2
+Param	character_grayout=true
+	ディーア	黒2
+	※※※※		2_2					あなたが壊したんだよ
+	※※※※		2_2					彼女も、他の魔剣たちも
+	ディーア	黒2						…………
+	ディーア							……ああ、そうだね<dash=2>
+FadeOut	black					0
+StopSe
+CharacterOff						0
+Wait						3
+Bg	魔術空間					0
+Se	雨	TRUE
+FadeIn	black					0
+	リディ	黒2						……ねえマスター
+	ディーア	怒り2						……なんだ？
+StopSe						0
+Bg	魔術空間(赤)
+	リディ	黒4						なんでリディを<color=red>助けてくれなかったの？</color>
+Se	ドーン
+FadeOut	black					0
+CharacterOff						0
+Param	character_grayout=false
+Bg	荒野(雨)					0
+	イベントスチル1012U		エフェクト表			0
+Wait						3
+Se	大雨2	TRUE
+FadeIn	black					0
+	ディーア	<Off>						…………
+	幻想殺しゼタ	<Off>						みんないなくなっちゃったね
+	ディーア	<Off>						…………
+	幻想殺しゼタ	<Off>						酷いよね\nみんなあなたのせいにしてさ
+	幻想殺しゼタ	<Off>						あなたはずっと一人で戦ってるのに
+	幻想殺しゼタ	<Off>						何万回、何億回とずっと繰り返して、\nずっと戦っているのに
+	幻想殺しゼタ	<Off>						ひどいよね、おかしいよね
+	ディーア	<Off>						……お前は、誰だ
+CharacterOff						0
+Bg	教会					0
+	幻想殺しゼタ	無						あたしはね、\nあなたを助けに来たんだよ
+Se	フォーン
+	オーラ青		エフェクト表			1
+	幻想殺しゼタ	無						だから安心して\n<dash=2>全部忘れちゃおう
+CharacterOff
+StopSe
+Se	ガードブレイク
+Wait						1
+	幻想殺しゼタ	怒り
+Tween	幻想殺しゼタ	PunchPosition	y=50				NoWait
+	幻想殺しゼタ							……ッ!?
+CharacterOff
+Bgm	風属性バトル
+	司書王ロルリアンレット	驚きH				.5		あなたの主<dash=2>幻想王ノアって、\n本当にこういうやり方が好きよね
+	幻想殺しゼタ	怒り						あんたは……!!
+	司書王ロルリアンレット	驚きH						あなたとは初めましてかしら\n礼儀として一応名乗っておくわ
+	司書王ロルリアンレット							私は司書王ロルリアンレット\n世界図書館の主にして、十三王の一人
+	司書王ロルリアンレット	悪い顔H						そしてあなたの敵よ、幻想殺しゼタ
+	幻想殺しゼタ	怒り						これは……反応型の記憶結晶!?\nそうか、世界意思ディーアの\n記憶余白に……！
+	司書王ロルリアンレット	悪い顔H						ノアがリディに接触した時から、\n絶対もう一度同じことを\nしてくるだろうと思って待っていたの
+	幻想殺しゼタ	怒り						そっか、オーロエズも\nこれを頼りに探し当てたってことか
+	幻想殺しゼタ							本の虫にしてはやるじゃん、\n<ruby=フロイライン>お嬢様</ruby>ッ
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+Bg	竜鍵マナ					0
+CharacterOff						0
+	幻想殺しゼタ	怒り	2_2			0
+	幻想王ノア	通常H	1_2			0
+Param	character_grayout=true
+FadeIn	white					.5
+	幻想殺しゼタ							……ッ、マスター!!
+	幻想王ノア							ならば<dash=2>!!
+Se	光3
+FadeOut	white					1
+FadeIn	white					0
+CharacterOff						0
+	司書王ロルリアンレット	通常通信						そうはさせないわ!!
+CharacterOff
+Param	character_grayout=false
+	ディーア	黒2
+	覇王剣ラグナロク		1_3
+	焔華剣テュフォーン		3_3
+Se	光1
+StopBgm
+Se	ジャストガード
+FadeOut	white					.1
+	結界		エフェクト表
+FadeIn	white					.1
+Wait						1
+CharacterOff
+Param	character_grayout=true
+	幻想殺しゼタ	怒り	2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							……ッ!?\nなんだ、この力は……
+Bgm	BlazeA
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景					0
+Param	character_grayout=false
+	イベントスチル1048N	N1	エフェクト裏			0
+	黒背景		エフェクト表			0
+Se	火2
+Tween	黒背景	MoveBy	x=1500 time=2				NoWait
+	イベントスチル1048N	N2				1
+Wait						1
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+	黒グラデーション		エフェクト表
+	魔剣グラム:Blaze							<dash=2>:Blazeシステム起動承認\n目標補足
+Se	火1
+CharacterOff	黒グラデーション
+Bg	竜鍵マナ					1
+	魔剣グラム:Blaze							魔剣グラム:Blaze\nこれより、対象を破壊するわ
+CharacterOff
+Param	character_grayout=true
+	幻想殺しゼタ	怒り	2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							Blazeだと……ッ!?
+CharacterOff
+	司書王ロルリアンレット	通常通信						間に合ったようね、よくやったわ
+	焔華剣テュフォーン							司書王……!!
+	覇王剣ラグナロク							しかし、マスターが……
+	司書王ロルリアンレット	通常通信						大丈夫よ、心配いらないわ
+FadeOut	black					0
+CharacterOff						0
+	　　　　　　　　　　					0
+Wait						1
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+ImageEffect	SpriteCamera	Blur
+Wait						1
+FadeIn	black					.5
+CharacterOff	黒背景					2.5
+Tween	瞬きA	MoveBy	y=400 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-400 time=2	easeOutCirc
+	かねひらブレイズ							……だんな様、これを
+	ディーア	<Off>						……やめてくれ、オレは……
+	かねひらブレイズ							大丈夫です\nだんな様を害するものではないですよ
+Se	回復
+FadeOut	lime					.5
+FadeIn	lime					.5
+CharacterOff	瞬きA					1
+CharacterOff	瞬きB					1
+Wait						1
+ImageEffectOff	SpriteCamera	Blur
+Wait						1.5
+	ディーア	驚き2						<dash=2>……オレは
+	かねひらブレイズ							おかえりなさい、だんな様
+	ディーア	驚き2						一体どうやって……
+	クラレントブレイズ							その魔力なら、マスターの\nへそくりをいただきましたよ
+	クラレントブレイズ							棚の裏に隠してあった\n魔宝石ダイヤをね♪
+	ディーア	汗2						あ、あれを使ったのか……
+	クラレントブレイズ							ふふ、そのまま朽ち果てるより\nずっと良いでしょう？
+	ディーア	怪しい2						いや、聞きたいのは\nそんなことより<dash=2>
+	司書王ロルリアンレット	通常通信						:Blazeシステムの<ruby=エマージェンシー･コード>緊急起動術式</ruby>を\n使用したのよ
+	司書王ロルリアンレット	通常通信						有り体に言うと開発者権限ってやつね\n一度きりの博打だったけれど、\n成功してよかったわ
+	黒櫃:Blaze							タイミングも作戦も全て\n天才的だっただろう？
+	黒櫃:Blaze							これぞ天賦の才を持つ者のみが\n成し得る業さ
+	黒櫃:Blaze							言っただろう、期待には行動で応える\nだからもっと期待してくれ、マスター\nボクたちは<dash=2>
+	黒櫃:Blaze							<dash=2>全霊をもって、\nキミの期待に応えてみせる
+	ノートB							私がかわいくありたいのって、\nあなたが見てくれるからなんですよ？
+	ノートB							本当の姿を見せたくないのも、\n怖がられたくないのも、\n全部全部、あなたがいるからなんです
+	ノートB							本当は、ずっとかわいいって\n思われてたいです\nでも、でもね！
+	ノートB							あなたの命が天秤にかかっているなら\n私はかわいくなくたっていい<dash=2>
+	ノートB							あなたのためなら、\n"暴虐非道のノートゥング"に\nなったって構わないんです！
+	ディーア	怒り2						……みんな
+	焔華剣テュフォーン							言ったじゃろう？\n皆、小僧を慕っておるのだと
+	焔華剣テュフォーン							貴様の理想を知り、\n同じ理想を抱いて共におる
+	焔華剣テュフォーン							どうじゃ小僧、そう思えば……\n勇気も湧いてきたであろう！
+	ディーア	怒り2						……ああ、そうだな！
+	司書王ロルリアンレット	通常通信						準備はできたようね\n<ruby=デリゲーション>権限委譲</ruby>、:Blazeシステムを\n<param=name>へ
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff	司書王ロルリアンレット
+	ディーア	通常2						……ありがとうございます、\nロールお嬢様
+CharacterOff
+Param	character_grayout=true
+	司書王ロルリアンレット	通常通信						本当は2、3度ぶん殴ってやらないと\n気がすまないけれど……\nまあ後にしておいてあげるわ
+	司書王ロルリアンレット	通常通信						私は万が一に備えて、\n<ruby=あなたの帰る場所>魔界</ruby>を守るわ
+	司書王ロルリアンレット	通常通信						後は任せたわよ\n<param=name>
+	司書王ロルリアンレット	通常通信						必ず帰ってきなさい\n……殴る相手がいなくなるのは\n困るもの
+	ディーア	怒り2						<dash=2>はい！
+Se	光2
+Param	character_grayout=false
+	オーラ青		エフェクト表			1
+	ディーア	目閉じ2						:Blazeシステム、<ruby=オールアンロック>全解除</ruby>!!
+	ディーア	本気2						幻想王、お前に見せてやる！\nオレたちが見た夢の行く末を、\nオレたちが作り出す未来を!!
+CharacterOff
+Param	character_grayout=true
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							……良いだろう、\nならば僕がキミを目覚めさせてやる
+	幻想王ノア							現実を見て、そして知るがいい\nこの魔界の無情さを、\n人の見る夢の儚さを!!
+CharacterOff
+	ディーア	本気2						《魔王候補十三王》\n《愚かなる卑怯者の鍵》\n<param=name>!!
+CharacterOff
+	幻想殺しゼタ		2_2
+	幻想王ノア	通常H	1_2
+	幻想王ノア							《魔王候補十三王》\n《方舟の守護者》\n幻想王ノア!!
+Bg	宇宙
+CharacterOff
+	二人							うおおおおおおおおッ!!
+Se	光3
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_22
+EndIf
+EndScenario
+
+# Q1011_22
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	竜鍵マナ
+CharacterOff
+	幻想殺しゼタ	悲しい	2_2
+	幻想王ノア	悔しいH	1_2
+FadeIn	black					.5
+Shake	幻想王ノア		x=5				NoWait
+	幻想王ノア							ぐっ……ああ……
+	幻想殺しゼタ	悲しい						うへぇー……、流石にキツいか……
+	幻想王ノア							ああ……だが、
+	幻想殺しゼタ							ん？
+	幻想王ノア	フードなしH						忘れられない思い出にはなっただろう
+	幻想殺しゼタ	通常						……へへ、マスターそゆとこあるよね
+CharacterOff
+Se	歩く
+	ディーア	怒り2				1
+Wait						1
+StopSe
+	ディーア	怒り2						終わりだ、幻想王ノア
+	幻想王ノア	笑いH						……そのようだな
+	焔華剣テュフォーン							その顔で笑うでないわ\n気分悪いのう
+	覇王剣ラグナロク							ヘルメリアは高潔な女性だったわ\nあなたのような男が\n穢していい相手じゃない
+	幻想王ノア	フードなしH						それは魂の話をしているのかい？\nならばそれは終わった話だ
+	幻想王ノア							彼女は異変の楔となるべく身を投げた\n彼女の魂は失われたのさ
+	幻想王ノア							この世界にもう\nヘルメリアは存在しない\n残ったのはただの肉体だけだ
+	幻想王ノア							僕はただ資源を\n有効活用しているだけだよ
+	幻想王ノア							膨大な、かつ高純度の貯蔵魔力、\nそしてブリジットに最適化された\n魔力適性……
+	幻想王ノア	笑いH						これほどまでの財産を\n捨て置くほうがもったいない\nそうは思わないか？
+	覇王剣ラグナロク							……反吐が出るわね
+	ディーア	怒り2						同感だな
+	幻想王ノア	悔しいH						フン、高度に発達した情報生命体の\n価値観を、肉体に囚われた人間が\n理解できるはずもないか
+	ディーア	驚き2						情報生命体……!?\nまさかノアの一族は魔天を\n冠する一柱なのか……？
+	幻想王ノア	悔しいH						いいや、魔天の連中とは根本的に違う\n価値観で生きている
+	幻想王ノア							僕は無限の叡智にも\n不老不死にも興味はないよ
+	幻想王ノア							価値観といえば、\nこの女も理解しがたい理想を\n抱いていたね
+	幻想王ノア							魔剣殺しとして生まれた兵器を、\nまるで人間のように扱うなど、\n存在に対する冒涜に他ならない
+	幻想王ノア							それを高潔と呼ぶのであれば、\n貴様らの魂の価値も\n知れたようなものだ
+	焔華剣テュフォーン							貴様、その顔でヘルメリアを\n愚弄するか<dash=2>!!
+	ディーア	目閉じ2						……テュフォーン
+	焔華剣テュフォーン							マスター、しかし……
+CharacterOff
+Se	抜刀
+FadeOut	white					.1
+FadeIn	white					.1
+	ディーア	怒り2						残す言葉はそれだけか、幻想王
+	幻想王ノア	フードなしH						フフ、フフフ……
+	幻想王ノア							そうだね、じゃあ僕からキミに一つ\n……先輩の十三王として、\nアドバイスを残しておこう
+	幻想王ノア							キミは人というものを信用しすぎだ\nもちろんそれは\nキミの良いところなのだろうけれどね
+	幻想王ノア	笑いH						だが疑うことを覚えた方がいい\nこの世界は騙し合いだ\nそうしないと足元を掬われてしまう
+	幻想王ノア							例えば<dash=2>こういう風にね
+CharacterOff
+StopBgm
+Param	character_grayout=false
+Se	衝撃
+	スモーク		エフェクト表2			2
+Wait						1
+	黒グラデーション		エフェクト表			2
+Wait						1
+	幻想記憶結晶ブリジット					2
+Wait						5
+CharacterOff
+	ディーア	悔しい2						<dash=2>な
+CharacterOff
+	オーラ赤		エフェクト表
+	幻想記憶結晶ブリジット							<dash=6>!!
+Se	闇3
+Se	闇2
+FadeOut	purple					.5
+CharacterOff						0
+	ディーア	悔しい2	1_2			0
+Tween	ディーア	MoveBy	x=90				NoWait
+FadeIn	purple					.5
+	土煙		エフェクト表			1
+Wait						.5
+Shake	ディーア		x=5				NoWait
+	ディーア							ぐっっ……ああ……ッ
+CharacterOff
+Bgm	魔王バトル
+Param	character_grayout=true
+	幻想殺しゼタ		2_2
+	幻想王ノア	笑いH	1_2
+	幻想王ノア							フフフフ……アハハハハハハハハ!!
+	幻想殺しゼタ	無						あっぶなぁー、間に合ったかぁー
+	幻想王ノア							よくやったよ、ゼタ\nキミが期待以上の時間を稼いでくれた\nおかげで、製造が間に合った
+	幻想王ノア							来い<dash=2>《幻想記憶結晶ブリジット》!!
+CharacterOff
+Se	闇1
+Param	character_grayout=false
+	スモーク		エフェクト表			1
+	幻想記憶結晶ブリジット		2_3_b					<dash=6>
+Se	闇2
+	幻想記憶結晶ブリジット2		2_3			0
+Tween	幻想記憶結晶ブリジット2	MoveBy	y=-159				NoWait
+Tween	幻想記憶結晶ブリジット2	ScaleBy	x=1.3 y=1.3				NoWait
+CharacterOff	幻想記憶結晶ブリジット2
+Wait						1.5
+CharacterOff
+	ディーア	悔しい2						あれは……マズい……
+	魔剣グラム:Blaze							……知ってるの？
+	ディーア	怒り2						ああ……この感覚は、\n幾度となく経験してきた
+	ディーア							そして、\n幾度となく道を閉ざされてきた
+	ディーア							……"あれ"によって何度\n世界が滅びたか、もう覚えていない
+	ディーア							ノアは幻想記憶結晶と言っていたな
+	ディーア	悔しい2						あれは……おそらく\n【魔王獣の記憶】を核とした\n記憶結晶だ
+	ディーア							魔王獣戦役を構成する記憶、\nつまり虐殺の記録……
+	ディーア							破壊する意志と破壊によって生まれた\n悲劇だけが形を成したもの
+	かねひらブレイズ							それって、つまり……
+	ディーア	怒り2						……ああ
+CharacterOff
+	スモーク		エフェクト表
+	幻想記憶結晶ブリジット
+	ディーア	<Off>						【魔王獣】そのものだ
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_23
+EndIf
+EndScenario
+
+# Q1011_23
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔王バトル
+Bg	竜鍵マナ
+FadeIn	black					.5
+	覇王剣ラグナロク							……魔王獣
+	焔華剣テュフォーン							胸糞悪いのう……
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+Bg	カジノ					0
+	ヘルメリア		1_2			0
+	魔剣殺しブリジット	笑い	2_2			0
+	　　　　　　　　　　　
+FadeIn	white					.3
+	焔華剣テュフォーン	<Off>						かつてヘルメリアは誰よりも\n<ruby=ブリジット>魔剣</ruby>を愛していた
+	焔華剣テュフォーン	<Off>						魔剣を人のように扱うのは、\n当時はまだ理解されにくい\n思想ではあったがな
+	覇王剣ラグナロク	<Off>						ええ、彼女は誰より誇り高く、\n誰よりも優しかった
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	竜鍵マナ					0
+CharacterOff						0
+	幻想記憶結晶ブリジット		2_2			0
+	幻想王ノア	フードなしH	1_2			0
+	　　　　　　　　　　
+FadeIn	black					.3
+	覇王剣ラグナロク	<Off>						……間違っても、あんな輩に\n穢されていい人ではありません
+CharacterOff
+	覇王剣ラグナロク							魔剣を道具としてしか扱わない王と、\n破壊しか頭にない剣など<dash=2>
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=true
+	幻想殺しゼタ		2_2			0
+	幻想王ノア	笑いH	1_2			0
+FadeIn	black					.5
+	幻想王ノア	笑いH						フフフ、アハハハハハハ！
+	幻想王ノア							ついにノアの一族は\n【方舟】を取り戻したんだ
+	幻想王ノア	フードなしH						……だが、新たな【方舟】の\n動作確認をしないといけないな
+	幻想王ノア							人が制御してこその断罪システムだ\nマスターキーの愚行を\n繰り返してはならないからね
+	幻想王ノア							<dash=2>壊せ、\n《幻想記憶結晶ブリジット》!!
+CharacterOff
+Param	character_grayout=false
+Se	闇2
+	11章スチルT		エフェクト表
+	幻想記憶結晶ブリジット							<dash=6>!!!!
+Se	闇3
+Se	火3
+Se	光3
+FadeOut	red					1
+CharacterOff						0
+	11章スチルU1		エフェクト表			0
+Wait						1
+FadeIn	black					.5
+Se	スローモーションエンド
+Wait						1
+Se	闇3
+Se	火3
+FadeOut	red					.3
+CharacterOff						0
+	11章スチルU2		エフェクト表			0
+ImageEffect	SpriteCamera	MotionBlur
+Shake	Graphics		x=3 y=3 time=1.6				NoWait
+Se	火事
+FadeIn	red					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+Bg	草原A(夜)					0
+	ロルリアンレット	怒りH				0
+	イベントスチル392K1		effect_a			0
+	イベントスチル392K2		effect_b			0
+FadeIn	white					.3
+Se	光2
+ZoomCamera	SpriteCamera	1.5				1	NoWait
+Tween	イベントスチル392K1	RotateTo	z=160 time=1.5	easeInCirc			NoWait
+Tween	イベントスチル392K2	RotateTo	z=-160 time=1.5	easeInCirc			NoWait
+Wait						.5
+FadeOut	white					.5
+ZoomCamera	SpriteCamera	1				.1
+Se	闇3
+Se	光3
+Se	ジャストガード
+CharacterOff						0
+	11章スチルX		エフェクト表
+Shake	11章スチルX		x=5 y=5 time=200				NoWait
+Se	火事
+FadeIn	white					.5
+	司書王ロルリアンレット							くぅ、ぅぅうう……ッッ!!
+	世界図書館司書							ロールお嬢様!!
+	司書王ロルリアンレット							下がり、なさい……!!
+Se	光1
+FadeOut	white					.3
+Se	ガードブレイク
+Bg	草原A(火事)					0
+CharacterOff						0
+	　　　　　　　　　
+	土煙		エフェクト表
+Wait						3
+Shake	Graphics		x=5 y=5 time=1.5				NoWait
+Se	火事
+FadeIn	white					.5
+Wait						1
+	世界図書館司書							お嬢様!!
+	司書王ロルリアンレット	怒りH						マリー、状況報告!!\n今のは一体何!?
+	ププッピマリー							はっ、おそらく月からの攻撃……\nそれも、【魔王獣】クラスの力を持つ\n魔導砲撃かと
+	司書王ロルリアンレット	怒りH						道理で頭のおかしな\n火力してるわけだわ……\n損害は？
+	ププッピマリー							リーマ防衛に当たっていた\n図書館司書三個大隊……\nおおよそ1500人が<ruby=・・・・・・>消失しました</ruby>
+	司書王ロルリアンレット	怒りH						……彼らには哀悼の意を表すわ\n彼らの補助がなければ、\n私も消し飛んでいたわね
+	ププッピマリー							現在、残された職員で\n戦線を立て直しています\n……しかし
+	司書王ロルリアンレット	怒りH						……次は耐えられないわね
+	ププッピマリー							いかがなさいますか、お嬢様
+	司書王ロルリアンレット	怒りH						……今は信じるしかないわ
+FadeOut	black					.5
+CharacterOff						0
+Bg	竜鍵マナ					0
+Shake	Graphics		x=5 y=5 time=2				NoWait
+	　　　　　　　　　
+FadeIn	black					.5
+Wait						1.5
+ImageEffectOff	SpriteCamera	MotionBlur
+	魔剣グラム:Blaze
+Shake	魔剣グラム:Blaze		x=5				NoWait
+	魔剣グラム:Blaze							くうぅ……っ!!
+	かねひらブレイズ							きゃああっ!!
+	ディーア	悔しい2						なんだ、今のは……!?
+	ディーア	本気2						下がれ!!\n魔剣がまともに戦って\n勝てる相手じゃない！
+	ディーア							<dash=2>ラグナロク!!\nテュフォーン!!
+CharacterOff
+Param	character_grayout=true
+	覇王剣ラグナロク		p3
+	焔華剣テュフォーン		p7u					そうじゃなあ……\n魔王獣が相手となれば、\nワシら以外には荷が重かろう
+	覇王剣ラグナロク							魔剣たちが下がる隙を作りましょう\nあれによって魔核に傷を負えば\n修復できません
+CharacterOff
+	幻想記憶結晶ブリジット							<dash=6>!!
+Se	闇3
+FadeOut	purple					.5
+Se	衝撃
+StopBgm
+CharacterOff						0
+	　　　　　　　　　　
+Shake	Graphics		x=5 y=5 time=2
+FadeIn	purple					.5
+Wait						1.5
+Shake	Graphics		x=10 y=10 time=1.5				Add
+Bgm	絶望
+	幻想記憶結晶ブリジット	<Off>						<color=red><dash=2>ァァアアアァァァ<dash=4></color>
+	ディーア	悔しい2						ぐっ……
+	焔華剣テュフォーン							思い出すのう……【魔王獣戦役】を
+	焔華剣テュフォーン							かつて、魔王獣は世界を変えた
+	焔華剣テュフォーン							地形を変え、勢力図を塗り替えた
+	焔華剣テュフォーン							そして、魔界に存在する魔剣を\nことごとく破壊し尽くした
+	焔華剣テュフォーン							……誰にも止められなかったのう\nマスターキーも、\n六大魔王でさえ、誰も
+	覇王剣ラグナロク							震えているわよ、テュフォーン
+	焔華剣テュフォーン							なに、武者震いじゃ\n貴様こそ震えておるぞ、ラグナロク
+	覇王剣ラグナロク							そんなことあるもんですか
+	ディーア	怒り2						……無理もないさ
+	ディーア	悔しい2						オレも最初の【魔王獣戦役】こそ\n経験してはいないが、魔王獣によって\n世界が滅びるのは何度も見てきた
+	覇王剣ラグナロク							でもあれは記憶結晶……\nかつて起きた事象を再現する\n器に過ぎません
+	ディーア	悔しい2						その通りだ、あれは【魔王獣】と\n同等のスペックを持っているが\n【魔王獣】じゃない
+	焔華剣テュフォーン							だが、放っておくわけにもいかない\n放っておけば、あれはいずれ……
+	焔華剣テュフォーン							この魔界を喰らい尽くすじゃろうな
+	ディーア	悔しい2						おそらく、あれに魔力を\n供給しているのは竜鍵マナだ\nそれを断ち切ることができれば……
+	焔華剣テュフォーン							なんじゃ、勝機が見えておるなら\n十分ではないか
+	ディーア	悔しい2						だが相手が魔剣殺しの力を\n持っているんだぞ
+	ディーア	怒り2						魔核に傷を負えば修復できない\nまともに戦えば一体どれほどの\n被害が出るか……
+StopBgm
+	焔華剣テュフォーン							それでも、戦わねばならぬ時はある
+Bgm	凱旋
+	焔華剣テュフォーン							なんじゃ、今までの威勢と危険を\n省みぬ立ち振舞いはどこにいった？
+	焔華剣テュフォーン							未来がわかっていなければ\n踏み出せぬのか、貴様は
+	ディーア	驚き2						……テュフォーン
+	焔華剣テュフォーン							ワシは今ワクワクしておるぞ
+	焔華剣テュフォーン							かつて世界を滅ぼし、\nワシ自身も敗北を喫した魔王獣と、\n今一度戦えるのじゃ
+	焔華剣テュフォーン							そして勝てば救世の英雄よ\nこれがワクワクせずにいられようか
+	覇王剣ラグナロク							そうね、ブリジットには\n散々してやられましたもの
+	覇王剣ラグナロク							雪辱を果たすには、\nあまりに出来すぎているくらいです
+	ディーア	怒り2						……ラグナロクまで
+	覇王剣ラグナロク							この魔界の命運を、\nそしてこのラグナロクの全霊を、\nあなたに託します
+	覇王剣ラグナロク							戦いましょう、マスター
+	焔華剣テュフォーン							ワシも全てを託そう
+	焔華剣テュフォーン							あのババアでさえ大して\n使いこなせなかった力じゃが……\n小僧、貴様ならできる
+	ディーア	怒り2						……2人とも
+	ディーア							……わかった、一か八かだ\nやってみよう
+	焔華剣テュフォーン							クハハハハハ！\nそれでこそ我が主よ、小僧！
+	焔華剣テュフォーン							共に往こうぞ、\n力を解放したその先へ！\n貴様が望むならば<dash=2>
+CharacterOff
+Param	character_grayout=false
+Bgm	風属性バトル
+	オーラ光		エフェクト表			1
+	ディーア	目閉じ2
+Wait						1
+Se	光1
+FadeOut	white					.3
+	ディーア	天使2
+FadeIn	white					.3
+	ディーア							<ruby=トゥルーエンド>真解放</ruby>、焔華剣テュフォーン!!
+FadeOut	white					.5
+CharacterOff						0
+	11章スチルK1		エフェクト表			0						テュフォーン見せるやつ
+Tween	11章スチルK1	MoveBy	y=-768 time=2.5	linear			NoWait
+FadeIn	white					.5
+Wait						2
+	11章スチルK2		エフェクト表			0
+Tween	11章スチルK2	MoveBy	y=-768 time=2.5	linear			NoWait
+Wait						2
+FadeOut	white					.5
+CharacterOff						0
+	焔華剣テュフォーン	真解放				0
+FadeIn	white					.5
+	焔華剣テュフォーン							<dash=2>このテュフォーンの真の力、\n見せてくれようではないか!!
+CharacterOff
+	オーラ光		エフェクト表
+	ディーア	天使2						<ruby=トゥルーエンド>真解放</ruby>、覇王剣ラグナロク!!
+FadeOut	white					.5
+CharacterOff						0
+	11章スチルL1		エフェクト表			0						ラグナロク見せるやつ
+Tween	11章スチルL1	MoveBy	y=-768 time=2.5	linear			NoWait
+FadeIn	white					.5
+Wait						2
+	11章スチルL2		エフェクト表			0
+Tween	11章スチルL2	MoveBy	y=-768 time=2.5	linear			NoWait
+Wait						2
+FadeOut	white					.5
+CharacterOff						0
+	覇王剣ラグナロク	真解放				0
+FadeIn	white					.5
+	覇王剣ラグナロク							<dash=2>覇道とは、\n何者に阻まれようとも\n決して折れることはなく
+	覇王剣ラグナロク							何人に蔑まれようとも\n決して霞むことはなく！
+	覇王剣ラグナロク							人々の憧憬を一身に集め、\nただ志のみを糧として進む\nその姿を指す！
+	覇王剣ラグナロク							この魔界において、\n我が使い手としてこれほど\n相応しい者はおりません
+	覇王剣ラグナロク							あなたの覇道、\nこのラグナロクが\n切り拓いてみせましょう!!
+CharacterOff
+	幻想記憶結晶ブリジット							<dash=6>……
+CharacterOff
+Param	character_grayout=false
+Se	光2
+	白カーテン20A		エフェクト表			1
+Shake	Graphics		x=5 y=5 time=1.5				NoWait
+Wait						1
+CharacterOff						.5
+Wait						.5
+CharacterOff
+Param	character_grayout=true
+	幻想殺しゼタ		2_2
+	幻想王ノア	フードなしH	1_2
+	幻想王ノア							魔力が高まっている……\nこれは……まさか魔核共振現象か？
+	幻想王ノア							魔王獣が喰らった記憶が\n響き合っているとでもいうのか……
+	幻想王ノア							だが、逆に好都合だ\nこの【方舟】の真価を\n示すのにはちょうどいいだろう
+	幻想王ノア							さあ、《幻想記憶結晶ブリジット》\n眼前の敵を破壊しつくせ！
+CharacterOff
+	幻想記憶結晶ブリジット							<dash=6>!!
+CharacterOff
+	ディーア	天使2						来るぞ!!\n後のことなど考えるな、\nここで負ければ全て終わりだと思え！
+	焔華剣テュフォーン	真解放						応よ！
+	覇王剣ラグナロク	真解放						お任せください！
+	ディーア	天使2						歴史は繰り返させない\n<dash=2>これは、世界を救う戦いだ!!
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_24
+EndIf
+EndScenario
+
+# Q1011_24
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	風属性バトル
+Bg	竜鍵マナ
+Param	character_grayout=false
+FadeIn	black					.5
+	集中線		エフェクト表
+	焔華剣テュフォーン	真解放						うおおおおおおッッ!!
+CharacterOff	焔華剣テュフォーン
+	覇王剣ラグナロク	真解放						はぁぁぁぁぁああああッ!!
+CharacterOff
+	幻想記憶結晶ブリジット							<dash=6>ッ
+	ディーア	天使2						攻撃の手を止めるな！\nあれをもう一度撃たせるなよ！
+	魔剣グラム:Blaze							わかっているわ\n次撃たせれば魔界が危ない……
+	かねひらブレイズ							でも逆に止めれば、\n新しい伝説になりそうですね\nそれはちょっとアリです
+Se	火3
+FadeOut	red					.3
+CharacterOff						0
+	　　　　　　　　　
+FadeIn	red					.3
+Wait						.2
+Se	風3
+FadeOut	green					.3
+FadeIn	green					.3
+	クラレントブレイズ							ふふ……♪\n王殺しの邪剣として、魔剣の王と\n刃を交わせるとは光栄です！
+Se	光3
+FadeOut	yellow					.3
+CharacterOff						0
+	　　　　　　　　　
+FadeIn	yellow					.3
+	黒櫃:Blaze							天賦の才を持つ者には、\nその才能に尽くす義務がある\nさあ、魔神同士戦おうじゃないか!!
+Se	無
+FadeOut	white					.3
+CharacterOff						0
+	　　　　　　　　　
+FadeIn	white					.3
+	ノートB							完全世界と暴虐を超越した\n純粋なる力……\nどちらが強いか、力比べしましょう!!
+Se	水3
+FadeOut	aqua					.5
+CharacterOff						0
+	　　　　　　　　　
+FadeIn	aqua					.5
+	ディーア	天使2						いいぞ、もう少しだ!!
+StopBgm
+	焔華剣テュフォーン	真解放						待て、小僧！\n様子がおかしい！
+	覇王剣ラグナロク	真解放						あれは……\n魔力を溜め込んでいる……!?
+CharacterOff
+Param	character_grayout=false
+Se	闇1
+	オーラ赤		エフェクト表			1
+	幻想記憶結晶ブリジット							<dash=6>
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい天使2						マズい……ッ!!
+	焔華剣テュフォーン	真解放						来るぞ、マスター!!
+Se	闇3
+Bgm	魔王バトル
+FadeOut	red					.5
+CharacterOff						0
+Param	character_grayout=false
+	11章スチルY		エフェクト表			0
+FadeIn	red					.5
+	幻想記憶結晶ブリジット							<dash=6>!!
+Se	闇3
+Se	光3
+Se	火3
+FadeOut	red					.5
+CharacterOff						0
+	11章スチルZ2		エフェクト表			0
+ImageEffect	SpriteCamera	MotionBlur
+FadeIn	red					.5
+Wait						1.5
+Se	光3
+Se	火3
+FadeOut	red					.2
+CharacterOff						0
+	11章スチルZ1		エフェクト表			0
+Shake	Graphics		x=5 y=5 time=3				NoWait
+FadeIn	red					.2
+Wait						1.5
+FadeOut	red					.5
+CharacterOff						0
+	11章スチルV1		エフェクト表			0
+Wait						1
+FadeIn	red					.5
+Se	スローモーションエンド
+Wait						1
+Se	闇3
+Se	火3
+FadeOut	red					.3
+CharacterOff						0
+	11章スチルV2		エフェクト表			0
+ImageEffect	SpriteCamera	MotionBlur
+Se	火事
+Shake	Graphics		x=5 y=5 time=2.2				NoWait
+FadeIn	red					.3
+Wait						1.5
+FadeOut	white					.5
+CharacterOff						0
+	焔華剣テュフォーン	真解放				0
+ImageEffectOff	SpriteCamera	MotionBlur
+FadeIn	white					.3
+	焔華剣テュフォーン	真解放						こやつ、無差別に攻撃を……!!
+	ディーア	悔しい天使2						くっ……\nこのままじゃ、魔界が……!!
+	集中線		エフェクト表
+	覇王剣ラグナロク	真解放						マスター！\n正面、来ます!!
+	ディーア	悔しい天使2						防ぐしかない、構えろ!!
+Se	光1
+Wait						1
+Se	光3
+Se	闇3
+Se	火3
+FadeOut	red					.5
+CharacterOff	集中線					0
+	赤カーテン30A		エフェクト表2			0
+ImageEffect	SpriteCamera	MotionBlur
+Shake	Graphics	x=5 y=5 time=5
+Se	火事
+FadeIn	red					.5
+	ディーア							耐えろ……おおおおおおおッッ!!
+	かねひらブレイズ							だんな様に力を……!!
+	クラレントブレイズ							共におります、マスター!!
+Se	光1
+	幻想記憶結晶ブリジット							<dash=6>!!
+Se	火3
+Se	闇3
+FadeOut	red					.5
+CharacterOff	幻想記憶結晶ブリジット					0
+	赤カーテン30B		エフェクト表3			0
+	ディーア	悔しい天使2				0
+Se	火事
+FadeIn	red					.5
+	ディーア							更に……出力が上がっただと……!?
+	覇王剣ラグナロク	真解放						マスター!!
+	焔華剣テュフォーン	真解放						無理じゃ、耐えきれぬ!!
+	ディーア	悔しい天使2						まだだ、まだ……!!\nうおおおおおおおおおッッ!!
+CharacterOff	結界					1
+Se	ガードブレイク
+	白背景		エフェクト表3			0
+Wait						1.5
+	魔剣グラム:Blaze	<Off>						マスター!!
+CharacterOff						0
+StopBgm
+	黒背景		エフェクト表			0
+Wait						1.5
+	ディーア							また、オレは……<dash=2>
+Se	回想
+FadeOut	white					.5
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル59314		エフェクト表2			0
+FadeIn	white					.5
+	　　　　　　　　　　							だが、<ruby=オレ>お前</ruby>は諦めない
+	　　　　　　　　　　							そうだろう、"ディーア"
+CharacterOff						0
+Bg	草原A(火事)					0
+	ププッピマリー							<dash=2>お嬢様!!
+	司書王ロルリアンレット	怒りH						なんとかしてみなさい、魔剣使い!!
+CharacterOff						0
+Bg	竜鍵マナ
+	11章スチルAA		エフェクト表			0
+Wait						.5
+CharacterOff						0
+	11章スチルAB		エフェクト裏			0
+Bgm	風属性バトル
+	ディーア	<Off>						うおおおおおおおおおッッッッ!!!!
+	結界		エフェクト表
+Se	光1
+ImageEffect	SpriteCamera	Bloom
+Wait						.1
+ImageEffectOff	SpriteCamera	Bloom
+	ディーア	<Off>						<dash=2><ruby=アンロック>魔剣解放!!</ruby>
+Se	光1
+FadeOut	white					.5
+CharacterOff						0
+	ムラマサロスト					0
+FadeIn	white					.5
+	ムラマサロスト							どうせ壊れるのならば、\n世界の命運を賭けた大戦にて\n……この魔剣も、それを望んでいます
+	じらいちゃん							推しを傷つけるとかありえないです\n正ヒロイン面してれば\nなんでもしていいと思ってます？
+	ネクロノミコン=ロスト							魔王獣の怨嗟も記憶も、\n深淵の闇には敵わない……
+	白櫃=ロスト							シロ、あなたのことを壊しにきました\nあなたは、ぜんぶ壊す人だから\nあなたのことも壊していいですよね！
+Se	光3
+FadeOut	white					.5
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	white					.5
+Se	闇3
+FadeOut	purple					.5
+FadeIn	purple					.5
+Se	火3
+FadeOut	red					.5
+	幻想殺しゼタ
+FadeIn	red					.5
+Se	ジャストガード				 
+Tween	幻想殺しゼタ	MoveBy	x=-50				NoWait
+	幻想殺しゼタ	怒り						……ッ、ああもうしつこいっ！
+CharacterOff
+	ディーア	天使2						まだまだ<dash=2>!!
+FadeOut	white					.3
+Se	光1
+CharacterOff						0
+	オーラ光		エフェクト表			0
+	9章スチルQ		エフェクト裏			1
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+Se	光1
+CharacterOff	9章スチルQ					0
+	9章スチルR		エフェクト裏			1
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+Se	光1
+CharacterOff	9章スチルR					0
+	9章スチルS		エフェクト裏			1
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+Se	光1
+CharacterOff	9章スチルS					0
+	9章スチルT		エフェクト裏			1
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+Se	光1
+CharacterOff	9章スチルT					0
+	9章スチルT2		エフェクト裏			1
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	幻想殺しゼタ	怒り
+FadeIn	white					.5
+	幻想殺しゼタ							ちっ……
+Se	剣閃
+FadeOut	white					.2
+FadeIn	white					.2
+Se	剣閃
+FadeOut	white					.2
+FadeIn	white					.2
+Se	剣閃
+FadeOut	white					.2
+Tween	幻想殺しゼタ	MoveBy	x=-50				NoWait
+FadeIn	white					.2
+	幻想殺しゼタ	怒り						こいつらダルすぎ！\nちょっとノアどうするの!?\nこのままだと負けちゃうけど!?
+	幻想王ノア	悔しいH						なんとかするのが\n<ruby=お前>魔剣</ruby>の仕事だろう？
+	幻想王ノア							認識改変でもなんでもいい、\n《幻想記憶結晶ブリジット》に\n触れさせるな!!
+Se	斬2
+ImageEffectOff	SpriteCamera	MotionBlur
+FadeOut	white					.2
+FadeIn	white					.2
+Se	斬2
+FadeOut	white					.2
+CharacterOff						0
+	幻想殺しゼタ	怒り				0
+FadeIn	white					.2
+	幻想殺しゼタ							でも、こいつら……\n一人ひとりの"記憶の密度"が\n尋常じゃない!!
+	幻想殺しゼタ							まさか、\n《<ruby=ワールドイズマイン>愚かなる卑怯者の鍵</ruby>》……\n並行世界の記憶を束ねて……！
+	幻想王ノア	悔しいH						チッ、ただの魔剣の相手もできずに\n何が《<ruby=フォビドゥン>隠された伝説</ruby>》だ
+	幻想王ノア							やはり魔剣などに\n頼るべきではなかったな！
+	幻想殺しゼタ	怒り2						はぁ？\nあたしとの魔力適正のない<ruby=肉体>依代</ruby>を\n選んだのはアンタでしょ!?
+	焔華剣テュフォーン	真解放						……ッ、今が好機のようじゃぞ、\n<param=name>!!
+	覇王剣ラグナロク	真解放						全て終わらせましょう、マスター!!
+	ディーア	天使2						うおおおおおおおおおおおおッッ!!!!
+FadeOut	white					1
+CharacterOff						0
+Se	ガードブレイク
+	　　　　　　　　　　
+StopBgm
+Wait						2
+FadeIn	white					.5
+Se	破壊											ロボットを強く殴る3
+Wait						1
+	ディーア	天使2						やった……!!\n竜鍵マナとの接続を破壊したぞ!!
+	焔華剣テュフォーン	真解放						フン、見たことか！\nやればできるではないか！
+	覇王剣ラグナロク	真解放						ええ、これで幻想記憶結晶は<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+	幻想殺しゼタ	悲しい				0
+Bgm	絶望
+FadeIn	black					.3
+	幻想殺しゼタ							……、ノア
+	幻想王ノア	悔しいH						失望したよ、ゼタ
+	幻想殺しゼタ	悲しい						え、ちょ、ごめん、でもあたし……
+	幻想王ノア	悔しいH						まあいいさ、<ruby=魔剣>道具</ruby>には\n相応しい使い道がある
+	幻想殺しゼタ	悲しい						……ちょ、ノア？\n何を<dash=2>
+	幻想王ノア	悔しいH						魔力供給を失ったのなら、\n別の魔力源を放り込んでやればいい
+	幻想王ノア							魔剣としての使い勝手は悪いが、魔核の純度は一級品だ
+	幻想殺しゼタ	怒り						はぁっ!?\nちょ、まさかあたしを\n魔力炉代わりに<dash=2>
+Se	光1
+	オーラ青		エフェクト表
+	幻想殺しゼタ							ノアあんた最低……！\nいくらなんでもそんな命令は<dash=2>
+CharacterOff
+	11章スチルAD		エフェクト表			0
+	幻想王ノア							<ruby=・・・・・・・・・・・・・>魔剣は魔剣使いに逆らえない</ruby>
+CharacterOff						0
+	幻想殺しゼタ
+Shake	幻想殺しゼタ		x=5				NoWait
+	幻想殺しゼタ	悲しい						ぐっ……かはっ……!?
+	幻想殺しゼタ	悲しい						あんた、まさか魔力に……!?
+Se	闇3
+ImageEffect	SpriteCamera	NegaPosi
+Wait						.2
+ImageEffectOff	SpriteCamera	NegaPosi
+Shake	幻想殺しゼタ		x=5				NoWait
+	幻想殺しゼタ	悲しい						がっ……いき、が、できない……っ!!
+	幻想王ノア	悔しいH						主従関係を間違えるな\n人が魔剣を使うんだ\nお前は道具に過ぎないんだよ
+	ディーア	悔しい天使2						何をしている……!?
+	幻想王ノア	フードなしH						何をしている？\n魔力を高めているだけさ
+	幻想王ノア							魔剣は暴走状態に近づくにつれ、\n魔力濃度が高まる傾向にある
+	幻想王ノア							それくらい知っているだろう
+	ディーア	悔しい天使2						やめろ、ノア!!\nそんなことが許されるとでも<dash=2>
+	幻想王ノア	悔しいH						フン、道具に情でも移ったか？\nくだらない
+	幻想殺しゼタ
+Tween	幻想殺しゼタ	PunchPosition	y=50				NoWait
+	幻想殺しゼタ	怒り						待ってよ……ッ!!\n話が違う……!!\n私ちゃんと約束守ってたじゃん!!
+	幻想王ノア	悔しいH						約束？\n人間と魔剣で\n約束が成り立つとでも思ったか
+	幻想王ノア							お前は飼い犬の言う事に\nいちいち耳を傾けるのか？
+	幻想殺しゼタ	悲しい						…………………ッ
+Shake	幻想殺しゼタ		x=5				NoWait
+	幻想殺しゼタ	悲しい						まって、\nごめんなさい、ごめんなさい……\n言う事聞くから……
+	幻想殺しゼタ	悲しい						なにしたらいい……？\nおしえて、なんでもするから……
+	幻想王ノア	悔しいH						…………
+Se	闇1
+	スモーク		エフェクト表			1
+	幻想殺しゼタ	悲しい
+Shake	幻想殺しゼタ		x=5				NoWait
+	黒グラデーション		エフェクト表2
+StopBgm
+	幻想殺しゼタ	悲しい						どうして、約束守ったのに……\nやだよ……
+	幻想殺しゼタ	悲しい						もう一人は嫌……
+	黒背景		エフェクト表
+	幻想殺しゼタ	悲しい						お願い、一人にしないで……
+Se	ガードブレイク
+Se	闇3
+Se	火3
+Wait						3
+CharacterOff						0
+	スモーク		エフェクト表
+Bgm	魔王バトル
+Se	闇1
+	幻想記憶結晶ブリジット					1
+Wait						1.5
+	幻想王ノア	<Off>						フハハハハハ!!\n絶望を喰らい、覚醒しろ、\n《幻想記憶結晶ブリジット》!!
+CharacterOff
+	ディーア	悔しい天使2						ノア、貴様……ッ!!
+	幻想王ノア	悔しいH						なぜ貴様が怒る？\nゼタは貴様の敵だろう？
+	幻想王ノア	笑いH						ああ……\nもしかして彼女に惚れていたのかい？
+CharacterOff
+	焔華剣テュフォーン	真解放						<dash=4>貴様
+	覇王剣ラグナロク	真解放						我が眼前でマスターを侮辱するとは\n覚悟はできているのでしょうね
+	幻想王ノア	笑いH						貴様らこそ、覚悟はできているのか？
+	幻想王ノア							魔剣に生まれたがゆえに、\n約束されてきた永遠の命……
+	幻想王ノア							貴様らは死は無縁のものだと\n心の何処かで思っていただろう？
+	覇王剣ラグナロク	真解放						…………ッ
+	幻想王ノア	笑いH						さあどうする、\n<param=name>!!
+	幻想王ノア							キミの可愛い魔剣が、\n僕の【方舟】の射程内だぞ
+	ディーア	悔しい天使2						くっ……!!
+	幻想王ノア	笑いH						さあ、蹂躙するがいい！\n征け、《幻想記憶結晶ブリジット》!!
+Param	character_grayout=false
+Se	闇1
+	スモーク		エフェクト表			1
+	幻想王ノア	悔しいH						……なんだ、この霧は
+Se	闇3
+ImageEffect	SpriteCamera	NegaPosi
+Wait						.2
+ImageEffectOff	SpriteCamera	NegaPosi
+Shake	Graphics		x=5 y=5 time=2				NoWait
+	幻想王ノア	悔しいH						ぐぅぅぅっ……ああああああッ!?!?
+	幻想王ノア							なんだ、これは……ッ、\n記憶の波に……飲まれる、だと……!?
+	幻想王ノア	怒りH						やめろ……ッ!!\n僕を誰だと思っている……\n幻想王ノアだぞ……ッ!!
+	幻想王ノア							道具が、記憶結晶ごときが\n意思を持って人間に抗おうなどと……ッ
+Se	闇3
+ImageEffect	SpriteCamera	NegaPosi
+Wait						.2
+ImageEffectOff	SpriteCamera	NegaPosi
+Shake	Graphics		x=5 y=5 time=2				NoWait
+	幻想王ノア	悔しいH						ぐああああああッッ……!!
+	幻想王ノア							やめろ、やめろ……ッ!!\n僕に、夢を、見せるな……ッ!!
+Se	闇1
+FadeOut	black					.5
+CharacterOff	幻想王ノア					0
+	　　　　　　　　　
+CharacterOff						0
+	　　　　　　　　　　
+Wait						.5
+FadeIn	black					.5
+	ディーア	天使2
+	ディーア							なんだ、あれは……!?\nまさか、魔力源を自ら吸収したのか!?
+	ディーア							……あれは、\nもはや記憶結晶なんかじゃない!!
+	焔華剣テュフォーン	真解放						まずいのう、魔力源を\n体内に取り込まれてしまっては\n対処のしようがない
+	覇王剣ラグナロク	真解放						いよいよ正面からぶつかるしか\nなくなるわね、でも<dash=2>
+FadeOut	white					.1
+CharacterOff						0
+	焔華剣テュフォーン	真解放				0
+FadeIn	white					.1
+	焔華剣テュフォーン	真解放						<dash=2>！\n小僧、下がれ!!
+	ディーア	悔しい天使2	2_3_b
+Tween	焔華剣テュフォーン	MoveBy	x=-90				NoWait
+	ディーア							な……ッ
+Se	闇3
+Se	ガードブレイク
+FadeOut	red					.2
+Tween	焔華剣テュフォーン	MoveBy	x=180				NoWait
+FadeIn	red					.2
+	焔華剣テュフォーン							ぐおおおおッ……!!
+CharacterOff
+	ディーア	天使2						テュフォーン!!
+CharacterOff
+	焔華剣テュフォーン	真解放
+Shake	焔華剣テュフォーン		x=5				NoWait
+	焔華剣テュフォーン							……おお、久しぶりに\nまともなのを食らったのう
+	ディーア	天使2						軽口叩いている場合か、傷は!?
+	焔華剣テュフォーン	真解放						……ッ、心配ない\n魔核までは食らっておらぬわ
+	ディーア	悔しい天使2						……今、攻撃が見えなかった、\nあいつは<dash=2>
+	覇王剣ラグナロク	真解放						幻想殺しゼタの力を、\n取り込んで<dash=2>
+CharacterOff
+Se	光1
+Param	character_grayout=false
+	オーラ赤		エフェクト表			1
+	幻想記憶結晶ブリジット							<dash=6>!!
+Se	闇3
+Se	火2
+FadeOut	red					.3
+CharacterOff						0
+	ディーア	天使2
+FadeIn	red					.3
+	ディーア	天使2						<dash=2>マズい……ッ!!
+Se	闇3
+FadeOut	purple					.2
+Se	ガードブレイク
+FadeIn	purple					.2
+	ディーア	悔しい天使2
+Wait						1
+Se	ガラス割れる
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	悔しい3
+FadeIn	white					.2
+	ディーア	悔しい3										喰らったことでもとに戻る演出を入れる
+Shake	ディーア		x=5				NoWait
+	ディーア							ぐぅぅッ、あああ……!!
+Param	character_grayout=true
+	ディーア	悔しい3	2_3_b
+	覇王剣ラグナロク	真解放	1_3
+Tween	覇王剣ラグナロク	MoveBy	x=90				NoWait
+	覇王剣ラグナロク							マスター！\n今手当を<dash=2>
+	ディーア	悔しい3	2_3					……ッ、している場合じゃない……！\n後ろだ！
+CharacterOff
+Param	character_grayout=false
+	オーラ赤
+	幻想記憶結晶ブリジット							<dash=6>
+Se	剣閃
+Se	闇3
+Se	火3
+FadeOut	red					.2
+CharacterOff						0
+	覇王剣ラグナロク	真解放				0
+FadeIn	red					.2
+Se	ジャストガード
+FadeOut	white					.2
+FadeIn	white					.2
+Shake	覇王剣ラグナロク		x=5				NoWait
+	覇王剣ラグナロク							くっ……あああッ!!
+CharacterOff
+	ディーア	本気3						攻撃を受けすぎるな、破壊されるぞ!!\nこいつに壊されてしまっては\n<ruby=・・・・・>意味がない</ruby>!!
+CharacterOff
+Param	character_grayout=false
+	スモーク		エフェクト表			1
+	覇王剣ラグナロク	真解放						なに、この記憶の波……嵐のような、\n悲しみの奔流は……
+Se	ガードブレイク
+FadeOut	white					.2
+Tween	覇王剣ラグナロク	MoveBy	x=180				NoWait
+FadeIn	white					.2
+CharacterOff	覇王剣ラグナロク					.5
+	覇王剣ラグナロク	<Off>						きゃあああっ!!
+CharacterOff
+	ディーア	悔しい3						ラグナロク!!\nくっ……《<ruby=ワールドイズマイン>愚かなる卑怯者の鍵</ruby>》!!
+Se	光1
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	天使2				0
+FadeIn	white					.3
+	ディーア							くっ……\nうおおおおおおおおおおおおッ!!
+CharacterOff
+Se	連撃
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						1.5
+	ディーア	悔しい天使2
+Tween	ディーア	MoveBy	y=-20				NoWait
+	ディーア							かはッ……!!
+	ディーア							くそ、魔力が……
+	覇王剣ラグナロク	真解放						無茶をしすぎです！\nそんなに大量にアンロックして\n戦っては<dash=2>
+	焔華剣テュフォーン	真解放						逃げろ……!!\n今は生き延びるのじゃ、小僧!!
+StopBgm
+	ディーア	悔しい天使2						……無茶をするな？\n逃げろ？
+Bgm	決戦
+	ディーア							今無茶をしなくて、いつするんだ！
+	ディーア							ここで逃げたら誰が世界を救うんだ!!
+	ディーア							耐えろ、耐えろ、耐えろ!!\n何度もここで\n失敗してきたじゃないか……ッ!!
+	覇王剣ラグナロク	真解放						……マスター
+	ディーア	悔しい天使2						限界を超えろ、\nオレはまだ戦える<dash=2>!!
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+Param	character_grayout=true
+Bg	竜鍵マナ					0
+	ディーア	悔しい天使2						1本でダメなら2本！
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393D)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.3
+Wait						.2
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+Bg	竜鍵マナ					0
+	ディーア	悔しい天使2						2本でダメなら3本!!
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393B)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.3
+Wait						.2
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(393C)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(393D)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+Bg	竜鍵マナ					0
+CharacterOff
+	覇王剣ラグナロク	真解放						もう、魔力が……
+	11章スチルAB		エフェクト表
+	ディーア	<Off>						オレの持ちうる全てを、\nこの一瞬に賭ける<dash=2>!!
+	ディーア	<Off>						うおおおおおおおおお\nおおおおおおおおッッッッ!!!!
+Se	ガードブレイク
+FadeOut	black					0
+StopBgm
+CharacterOff						0
+Wait						2
+	魔剣グラム:Blaze					0
+	オーラ光		エフェクト表			0
+FadeIn	black					0
+Wait						1
+CharacterOff	魔剣グラム:Blaze					1
+Wait						1.5
+CharacterOff
+	ディーア	悔しい天使2						……………………ここまでか
+Se	闇1
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	悔しい3				0
+FadeIn	white					.5
+	ディーア							ロストとBlazeの力を総動員して、\n原初十三魔剣を並行解錠しても\nまだ届かないのか……
+	11章スチルM		エフェクト表
+	幻想記憶結晶ブリジット	<Off>						<dash=6>
+	ディーア	<Off>						……遠いな、遠すぎる\nあと一歩だったはずなのに
+Se	倒れる
+	黒背景		エフェクト表			0
+	ディーア							リディ、オレは<dash=2>
+FadeOut	black					0
+Wait						2
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_25
+EndIf
+EndScenario
+
+# Q1011_25
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	幻想記憶
+Se	強風	TRUE
+FadeIn	black					.5
+	※※※※							<color=red><dash=2>お前が■した、お前が<dash=2></color>
+	※※※※							<color=red>マスターはどこ？\n私はどこ？</color>
+ImageEffect	SpriteCamera	NegaPosi
+Wait						.2
+ImageEffectOff	SpriteCamera	NegaPosi
+	※※※※							<color=red>痛い、痛いよう、痛い</color>
+	※※※※							<color=red>嫌だ、死にたくない、\n死にたくない<dash=2></color>
+Wait						1
+	※※※※							<color=red><dash=2>死にたくない</color>
+FadeOut	black					.5
+CharacterOff						0
+	ディーア	悔しい3				0
+FadeIn	black					.5
+	ディーア							……ッ、オレはもう、\n記憶の一部になっているのか……？
+CharacterOff
+	※※※※							<color=red><dash=2>破壊してやる、壊してやる、\n全部全部壊して<dash=2></color>
+	※※※※							<color=red><dash=2>嫌だ、壊したくない、\n壊したくなんか<dash=2></color>
+FadeOut	black					0
+CharacterOff						0
+Wait						1
+FadeIn	black					0
+	リディ	黒4				0		……だって、\nみんなが私を攻撃するから
+	リディ	黒4						私は何もしてない\n……なにもわからない
+Se	ガードブレイク
+CharacterOff
+Wait						1
+	ディーア	悔しい3
+Shake	ディーア		x=5				NoWait
+	ディーア							くっ……\nこれが、魔王獣の記憶の奔流……
+	ディーア							喰らった者の狂気、\n喰われた者の怨嗟……
+	ディーア							なるほど……これは……\n気が、狂いそうになるな……
+CharacterOff
+Wait						.5
+StopSe
+Bgm	絶望
+	幻想記憶結晶ブリジット					.5		そう、これが【魔王獣の記憶】
+	幻想記憶結晶ブリジット							リディちゃんが内に抱え続けた、\n莫大な呪いの記憶
+	ディーア	怒り3						……《幻想記憶結晶ブリジット》
+	ディーア	目閉じ3						……そうか\nオレは、また負けたんだな
+	幻想記憶結晶ブリジット							ええ
+	幻想記憶結晶ブリジット							やがて魔界は滅びるわ\nこの記憶の奔流に飲み込まれて
+CharacterOff
+	※※※※							<color=red>痛い、痛い痛い<dash=2></color>
+ImageEffect	SpriteCamera	NegaPosi
+Wait						.2
+ImageEffectOff	SpriteCamera	NegaPosi
+	※※※※							<color=red>怖い、怖い<dash=2></color>
+CharacterOff
+	ディーア	怒り3						……これは、破壊された魔剣の記憶\nブリジットが取り込んだ記憶の一部か
+	幻想記憶結晶ブリジット							ええ、そしてブリジットが拒絶した\n記憶の一部……災害の負の側面
+	ディーア	悔しい3						……辛いだろうな、こんなものを、\n胸に仕舞い続けるのは……
+	幻想記憶結晶ブリジット							こんな状況で他人の心配をするのね\n魔界が滅びるというのに
+	ディーア	怒り3						心配じゃない、反省をしているんだ\n……オレは、彼女の苦しみを\n少しもわかっていなかった
+	ディーア							こんなもの、\n正気で受けれられるものじゃない
+	幻想記憶結晶ブリジット							……あなたこそ
+	ディーア	驚き3						……え？
+	幻想記憶結晶ブリジット							あなたこそ、おかしいわ\nどうして正気を保っていられるの？
+	幻想記憶結晶ブリジット							普通の人間が、\nこの狂気に耐えられるはずがない
+	幻想記憶結晶ブリジット							【魔王獣の記憶】に匹敵する\n負の記憶でも抱えていない限り、\n決して<dash=2>
+	ディーア	目閉じ3						……ああ、そうか
+	ディーア							きっと、オレの記憶もそれくらい\n溜まっているんだな
+	ディーア							世界が滅びるのを何度も見て、\nその度にリディを失ってきて
+	ディーア							自分の人生を、普通の人としての\n楽しみを全部投げ捨てて
+	ディーア							幾万、幾億の絶望を\n積み重ねてきたもんな
+	幻想記憶結晶ブリジット							……それほどの負の記憶を抱えて
+	幻想記憶結晶ブリジット							それなのに、\nどうして狂わずにいられるの？
+StopBgm
+	ディーア	通常3						それは、オレが幸せだったからだ
+Bgm	ロルリアンレットB
+	幻想記憶結晶ブリジット							……あなたが、幸せ？
+	ディーア	通常3						ああ、そうさ
+	ディーア							辛いことに耐えるには、\nそれよりも遥かに多くの\n幸せなことが必要だ
+	ディーア	怒り3						……そうか、キミにも\nそれが必要なんだな
+	幻想記憶結晶ブリジット							幸せな、こと……
+	幻想記憶結晶ブリジット							……私には、そんなのない\n私の人生は、そんな……
+	ディーア	通常3						いいや、キミも確かに持っている\nキミは覚えていないだけだ
+	ディーア							そうだな、オレの記憶を\nキミにあげることはできないが……
+	ディーア							<dash=2>夢を見せてやることくらいは\nできるだろう
+Param	character_grayout=false
+	オーラ光		エフェクト表			1
+	ディーア	本気3						《<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>》、<ruby=アンロック>解放</ruby>、《<ruby=ロードオブイリュージョン>万象偽る幻想の鍵</ruby>》<dash=2>!!
+Se	光3
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+	11章スチルN		エフェクト表			0						適当なBG連打
+Wait						3
+Bgm	結婚
+FadeIn	white					1
+	※※※※							<color=mk2wisp>マスター!!</color>
+	11章スチルO		エフェクト表			0
+	※※※※							<color=mk2wisp>ねえマスター、今日は何する？</color>
+	11章スチルP		エフェクト表			0
+	※※※※							<color=mk2wisp>なにしてるの？\nマースター！</color>
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=false
+	オーラ光		エフェクト表			0
+	ディーア	本気3				0
+FadeIn	white					.2
+	ディーア							どれほどの絶望に直面しても、\nどれだけの終焉に立ち会っても、\nそれを超えるだけの思い出がある！
+	ディーア							分岐した並行世界の数だけ、\nキミと過ごした時間の分だけ、\nキミと過ごした最高の思い出がある！
+	ディーア							だからオレは、\n戦い続けていられるんだ!!
+CharacterOff
+	幻想記憶結晶ブリジット							<dash=6>っ
+FadeOut	white					.5
+CharacterOff						0
+	11章BG		エフェクト表			0
+FadeIn	white					.5
+	ディーア	本気3						幻想記憶結晶ブリジット、お前が\n【魔王獣の記憶】から生み出された\n負の記憶の奔流だというのなら<dash=2>
+	ディーア							それを超える幸せな記憶で、\nお前の全てを塗り替えてやる！
+	11章スチルQ		エフェクト表			0						リディ連打
+	※※※※							<color=mk2wisp>マスター♪</color>
+	11章スチルR		エフェクト表			0
+	※※※※							<color=mk2wisp>マスター……</color>
+	11章スチルS		エフェクト表			0
+	※※※※							<color=mk2wisp>マスター!!</color>
+Param	character_grayout=false
+Se	光3
+	白背景		エフェクト表2			2
+Wait						4
+	幻想記憶結晶ブリジット							……………………、マスター
+FadeOut	white					0
+CharacterOff						0
+Bg	竜鍵マナ					0
+Param	character_grayout=false
+FadeIn	white					0
+	焔華剣テュフォーン	真解放						幻想記憶結晶の動きが止まった……？
+	オーラ光		エフェクト表			2
+	焔華剣テュフォーン	真解放						これは、記憶の奔流……\n小僧、お主というやつは……
+	覇王剣ラグナロク	真解放						……ロマンチックな人ね
+	焔華剣テュフォーン	真解放						起きておったのか、ラグナロク
+	覇王剣ラグナロク	真解放						ええ
+	覇王剣ラグナロク	真解放						……これだけの愛情を\n恥ずかしげもなく吐露して、\nそれで世界を救おうというのだもの
+	焔華剣テュフォーン	真解放						たしかにな\nこんな大胆な告白は初めて見るわい
+	焔華剣テュフォーン	真解放						ブリジットに見せてやりたかったのう\nなんて言うと思う？
+	覇王剣ラグナロク	真解放						そうねえ……
+	覇王剣ラグナロク	真解放						顔真っ赤にして逃げるわよ、彼女なら
+	焔華剣テュフォーン	真解放
+Tween	焔華剣テュフォーン	PunchPosition	y=50				NoWait
+	焔華剣テュフォーン	真解放						がはは！\n違いないな！
+FadeOut	black					.5
+CharacterOff						0
+Bg	夜空					0
+	　　　　　　　　　　
+	オーラ光		エフェクト表			0
+FadeIn	black					.5
+	アストロロギア	微笑み						なるほど、彼は並行世界の記憶を\n全て保持するが故に<dash=2>
+	アストロロギア							ある側面では、魔王獣の記憶を超える\n記憶媒体となっていたわけか
+	モモ							これを見て真っ先に言うのが\nそれかい？\n本当に、キミは彼とは対称的だね
+	アストロロギア	通常						む、記録なら負けないくらい\n持っているが？
+	モモ							違うよ、ロマンがない
+	モモ							だいたい何が愛情を失った、だ？\n見当違いもいいとこじゃないか
+	モモ							……彼は全て覚えていた\n記憶も、愛情も、全部
+	アストロロギア	微笑み						……とんでもないな\n我々の理解を超えている
+	モモ							でも、人間とはそういうものだよ
+	モモ							脆弱で愚かな生き物に見えて、\nいつも我々の理解を超えていく
+	モモ							だからボクは、\n彼らから目を離すことができない
+	モモ							……良かった、\n彼は本気で彼女を愛しているのだね
+FadeOut	black					.5
+CharacterOff						0
+Param	character_grayout=false
+	黒背景		エフェクト表2			0
+	11章BG		エフェクト表			0
+FadeIn	black					.5
+	※※※※							人は夢を見ている時が一番幸せなのさ
+CharacterOff	黒背景					0
+	ディーア							……オレはそうではないと\n信じたいが、それでも……
+	ディーア							夢を見ることで、救われるものも\nあるのかもしれないな、幻想王
+Wait						1
+	ディーア							リディ\nオレは全部覚えているよ
+	ディーア							思い出も、愛情も、全部抱えてここまで来たんだ
+	ディーア							そして、これからも……
+	白背景		エフェクト表2			2
+Wait						5
+	リディ							ます、たー……<dash=2>
+FadeOut	white					0
+CharacterOff						0
+Wait						5
+Bg	草原A(鎮火)					0
+FadeIn	white					0
+	ププッピマリー							《幻想記憶結晶ブリジット》、\n消失しました
+CharacterOff
+	世界図書館司書	<Off>						ラグナロクとテュフォーンの\n健在を確認
+	世界図書館司書	<Off>						例の少年については、\n強力な魔力放射が発生しているため\n詳細は不明ですが……
+	世界図書館司書	<Off>						おそらく、命に別状はないかと
+CharacterOff
+	司書王ロルリアンレット	驚きH						……ふぅ
+	ププッピマリー							お疲れ様でした、お嬢様
+	司書王ロルリアンレット	驚きH						ひとまず、魔界は滅びずに\n済んだようね
+FadeOut	black					.5
+CharacterOff						0
+Bg	アリス庭園					0
+	　　　　　　　　　　
+Wait						1
+FadeIn	black					.5
+	アリス							貴様の出番は無くなったな
+	？？？？							えぇー？\nせっかくの初仕事だったのにぃ～！
+	アリス							良かったじゃないか、\nお前の"お気に入り"も\n無事で済んだのだ
+	？？？？							ん～たしかに……まいっか！
+	アリス							帰るぞ、お茶会の続きだ
+	？？？？							はいは～いっ☆
+FadeOut	black					.5
+StopBgm						1
+CharacterOff						0
+Bg	草原C2					0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+ImageEffect	SpriteCamera	Blur
+Wait						3
+FadeIn	black					.5
+CharacterOff	黒背景					2.5
+Tween	瞬きA	MoveBy	y=400 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-400 time=2	easeOutCirc
+Wait						1
+	ディーア	<Off>						……リ、ディ
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_26
+EndIf
+EndScenario
+
+# Q1011_26
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	凱旋
+Bg	草原C2
+FadeIn	black					.5
+	焔華剣テュフォーン	真解放						……目覚めたかの
+	ディーア	驚き3						……オレは
+	焔華剣テュフォーン	真解放						幸せな思い出に浸るのは良いが、\nあまりワシらを心配させるでないぞ
+	覇王剣ラグナロク	真解放						あれだけの魔力を放出して……\nもう起きないかと思いましたよ
+	ディーア	あはは3						……心配かけたな、すまない
+	ディーア	怒り3						……幻想記憶結晶は？
+	覇王剣ラグナロク	真解放						完全に消失しました\n【魔王獣の記憶】も……こちらに
+Se	フォーン
+CharacterOff
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff						1
+Wait						1
+	ディーア	怒り3						ああ、ありがとう
+	焔華剣テュフォーン	真解放						一応、ゼタも回収できたようじゃぞ\nもっとも、修復は必要じゃがな
+	ディーア	汗3						……戦力になってくれるかな？
+	覇王剣ラグナロク	真解放						味方についてくれれば\n心強いですけれど、どうでしょうね
+	ディーア	怪しい3						……これもオレ次第というわけか
+	焔華剣テュフォーン	真解放						じゃが、戦力の増強は\n死活問題ではあるな
+	ディーア	怒り3						……そうだな
+	ディーア							……本物の魔王獣だったら、\nオレたちは負けていた
+	ディーア							これだけの魔剣を保有してもなお、\n魔剣殺しという力には抗えない
+	覇王剣ラグナロク	真解放						ええ……\nですが、いつかはブリジットも\nこれと向き合わねばなりません
+	覇王剣ラグナロク							……たとえ、\n魔王獣になってしまうとしても
+	ディーア	怒り3						……そうだな
+	ディーア							今回は人格のない記憶結晶だから\nなんとかなったようなものだ
+	ディーア							記憶の上書きだなんて、\n同じ手は通用しないだろうな
+	焔華剣テュフォーン	真解放						……そうじゃろうな
+	焔華剣テュフォーン							乗り越えるのは奴自身じゃ\nじゃが支えにはなるじゃろう
+	ディーア	怒り3						そうだといいね\n……できれば、\nあんな思いはしてほしくないが
+CharacterOff
+Se	フォーン
+Wait						1.5
+	モモ							……お疲れさま、ディーア
+	ディーア	驚き3						……モモ
+	モモ							全て見ていたよ\n……悪かった、ボクは\nキミという人間を誤解していたようだ
+	ディーア	通常3						……いいや、オレが\n誤解されるようなことをしたんだ\n仕方ないさ
+	モモ							だけど、大変なのはこれからだ
+	モモ							これほどの力を示してしまっては、\nマスターキーが黙っちゃいない
+	モモ							おそらくキミは\n要監視対象になっているだろう
+	ディーア	通常3						……そうだろうね
+	ディーア							だが、別に構わないさ\n……いずれ戦わなければ\nならない相手だ
+	モモ							……やはり、\nマスターキーと戦うのだね
+	ディーア	怒り3						……ああ
+StopBgm
+	モモ	冷徹						……キミがブリジットを\n愛していることはよくわかった
+	モモ							だが、さっきの問いに\nまだ答えてもらっていなかったね
+	ディーア	怒り3						ああ、そうだな
+Bgm	神社
+	モモ	冷徹						今一度問おう、無垢のディーア
+	モモ							キミは何を求めて\n《最終到達選択肢》を目指している？
+	モモ							キミの……本当の目的は何だ？
+	ディーア	通常3						……リディを幸せにしたいという\n思いは変わらないよ
+	ディーア							オレもリディも、\n兵器としての生き方は望んでいない
+	ディーア							できることなら、\n人としての幸せを手に入れたい
+	ディーア	目閉じ3						だから<dash=2>
+FadeOut	black					0
+CharacterOff
+StopBgm
+	　　　　　　　　　　
+Bg	教会
+Wait						3
+Bgm	絶望
+FadeIn	black					.5
+	勇者レド	驚き						……なんですって？
+	勇者レド							そんなことをすれば、魔界は\n滅びてしまうのではないですか？
+	希望王ルル							構わないさ\nいずれにせよ、魔界は既に\n滅びかけている
+	希望王ルル							この沈みゆく泥舟では、\n人類の未来を保証することはできない
+	希望王ルル							だからこそ、一度壊して作り直すんだ
+	希望王ルル							こんな不完全で不平等な世界ではなく\n統制された完全な平和を\n実現した世界を
+	勇者レド	悔しい						しかし、それでは\n陛下の身にも危険が……
+	希望王ルル							問題ない、聖剣ならば\nアレに対抗できる
+	希望王ルル							安心しろ、レド\nすべて終われば、キミは\n平和のために尽力した英雄となる
+	希望王ルル							キミにもヴァルトにも、\n何不自由ない生活が待っているんだ
+	希望王ルル							……わかったな、レド
+	希望王ルル							《魔王獣の記憶》を奪い、\n【魔王獣】を復活させろ
+	希望王ルル							そして<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+Bg	草原C2					0
+Param	character_grayout=false
+	ディーア	目閉じ3				0
+FadeIn	black					.3
+	ディーア							オレは全ての魔剣を破壊する
+Bg	教会					0
+	希望王ルル					0		僕は全ての魔剣を破壊する
+Bg	草原C2					0
+	ディーア	目閉じ3				0		そして全ての魔剣を
+Bg	教会					0
+	希望王ルル					0		全ての人類を
+Bg	草原C2					0
+	11章スチルAC		エフェクト表			0
+	二人							この世界そのものを作り変える
+	黒背景		エフェクト表			0
+	二人							そのためにオレは-僕は-\n魔王になるんだ
+FadeOut	black					0
+CharacterOff						0
+	　　　　　　　　　　
+Bg	黒背景
+Wait						3
+If	isdebug==true
+CharacterOff
+Jump	*Q1011_01
+EndIf
+EndScenario

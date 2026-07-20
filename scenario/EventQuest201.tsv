@@ -1,0 +1,488 @@
+# E_201_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="魔帝アリスの聖夜感謝祭"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	キノコリオン
+Bg	酒場1F
+	ディーア	きらーん2	2_3
+FadeIn	white					.1
+	ディーア							みんな、大ニュースだ!!
+CharacterOff
+	リディ	怒り2	2_3
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							もう、マスター！\nどこ行ってたの!?
+	リディ							今日はみんなでクリスマスの\n準備するって言ったのに！
+CharacterOff
+	ディーア	嬉しい2	2_3
+	ディーア							リディ、そんなことより\nビッグニュースがあるんだ！
+CharacterOff
+	リディ	驚き2	2_3
+	リディ							ふぇ？\nびっぐにゅーす？
+CharacterOff
+	マンイーター	クリスマス	b1
+	マンイーター							なになに、ご主人様？
+CharacterOff
+	ディーア	きらーん2	2_3
+	ディーア							魔剣機関から、今までの\n追加任務の報酬が\nまとめて出るらしい!!
+CharacterOff
+	リディ	驚き2	2_3
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							ええーーーっ！？
+	リディ	笑い2						じゃあじゃあ、\n今年のクリスマスは！
+CharacterOff
+	ディーア	にやけ2	2_3
+	ディーア							ああ、みんなで豪華な\nパーティーを！！
+FadeOut	black					.1	NoWait
+Bg	市街地B
+Wait						1
+Bgm	絶望
+	ディーア	絶望2	2_3
+FadeIn	black					.1
+	ディーア							<dash=4>する、はず\nだったんだけどなぁ……
+	ディーア							なんでこんなことに\nなったんだ……
+FadeOut	black					.3
+CharacterOff
+	　　　　　　　　　　
+Bg	研究所A
+Wait						1
+Bgm	平和
+FadeIn	black					.3
+	　　　　　　　　　　							<dash=2>3時間前
+CharacterOff
+	ディーア	にやけ2	2_3
+	ディーア							よし、このお金でクリスマス\nパーティーの準備を…
+CharacterOff
+	魔剣使い	<Off>						なあ、アンタ！\n<param=name>！
+CharacterOff
+	ディーア	通常2	2_3
+	ディーア							ん？
+CharacterOff
+	魔剣使い	<Off>						随分もらったみたいだなァ！\nその金でカジノ行くんだろ？\n一緒に行こうぜ！
+CharacterOff
+	ディーア	あはは2	2_3
+	ディーア							いや、これはパーティーの\n準備に…
+CharacterOff
+	魔剣使い	<Off>						大丈夫だって、カジノで増やせば\nもっと豪華なパーティーに\nできるぞ！
+CharacterOff
+	ディーア	きらーん2	2_3
+	ディーア							もっと豪華に……！
+FadeOut	black					.3
+CharacterOff
+Bg	カジノ
+Wait						.3
+Bgm	キノコリオン
+Param	character_grayout=false
+FadeIn	black					.1
+	ディーラー	<Off>						おおっ！またフルハウスだァ！
+	ディーラー	<Off>						こっちはファイブカード！\nなんなんだ今日は!?
+	ディーア	きらーん2	2_3
+	ディーラー	<Off>						おっ、お兄さんは……
+	ディーア	絶望2	2_3
+	ディーラー	<Off>						ああ…またノーペアだ、残念！
+	ディーア		2_3
+	ディーア	絶望2						負け……た……？
+FadeOut	black					.1
+Param	character_grayout=true
+Bg	草原A
+Bgm	絶望
+CharacterOff
+	ディーア	悔しい2	2_3
+Wait						1
+FadeIn	black					.1
+	ディーア							やっぱり寄り道なんかせず\n帰るべきだった……
+	ディーア	怒り2						絶対イカサマされてたぞ……\nいや、でもしっかり監視\nされてるはずだし……
+	ディーア	悔しい2						運が悪かっただけ？\n……まさかな
+	ディーア							くそ……少し、いやかなり\n寂しいクリスマス\nパーティーになりそうだ
+	ディーア	怪しい2						……腹が減った
+	ディーア	汗2						少し買い食いするくらい\n……許されるだろ
+FadeOut	black					.3
+CharacterOff
+	妖精型モンスター		2_3
+Wait						1
+Bgm	緊迫
+FadeIn	black					.1
+	妖精型モンスター							<dash=4>ッ！
+CharacterOff
+	ディーア	驚き2	2_3
+	ディーア							うわぁっ！
+CharacterOff
+	妖精型モンスター		2_3
+	妖精型モンスター							<dash=2>ッ！<dash=2>ッ！
+Tween	妖精型モンスター	MoveTo	y=1000 time=0.5	easeInQuint
+CharacterOff
+	ディーア	絶望2	2_3
+Bgm	絶望				.5	.5
+	ディーア							ああ、オレのおやつ……！
+	ディーア							もうすぐクリスマスだってのに\nツイてないな……
+StopBgm
+CharacterOff
+	？？？？	<Off>						<dash=6>!!
+CharacterOff
+	ディーア	怒り2	2_3
+	ディーア							ああもう、また魔物か！
+CharacterOff
+Param	character_grayout=false
+Bgm	魔王バトル
+	聖鐘のサタナス		b2
+	？？？？
+	？？？？							<dash=6>ッ!!!!
+CharacterOff
+Param	character_grayout=true
+	ディーア	汗2	2_3
+	ディーア							……へ？
+FadeOut	black					.3
+Wait						.5
+Se	斬1
+Wait						.1
+Se	斬1
+Wait						.2
+Se	斬2
+Wait						1
+FadeIn	black					.1
+	ディーア	悔しい2						はぁ……はぁ……っ！
+Bgm	絶望				1	1
+	ディーア	悔しい2						なんとか、なんとか倒した……！
+	ディーア	怪しい2						なんであんな強い魔物が\nこんなところにいるんだ……？
+	ディーア	怪しい2						それにしても疲れた……\nさっさと買い物して帰ろう……
+FadeOut	black					.3
+Bg	市街地A
+Wait						1
+Bgm	平和
+FadeIn	black					.1
+	ディーア	通常2						よし、ケーキは買えるな\nそれから食材をこれとこれと\n……すみませーん！
+CharacterOff
+	市場のおばちゃん		2_3
+	市場のおばちゃん							はーい、全部で70,000ヘルね
+CharacterOff
+	ディーア		2_3
+	ディーア	汗2						ななま……70,000ヘル？\n高すぎない？
+CharacterOff
+	市場のおばちゃん		2_3
+	市場のおばちゃん							嫌なら買わなくてもいいんだよ
+CharacterOff
+	ディーア		2_3
+	通りすがりの男性		画面外_左
+Tween	通りすがりの男性	MoveTo	x=-130 y=-350 z=120 time=0.5	easeOutExpo			NoWait
+	ディーア	汗2						いや、買います買います\n……おっと<speed=1>  </speed>	BrPage
+Tween	通りすがりの男性	MoveTo	x=700 time=0.7	easeInExpo			NoWait
+	ディーア	怪しい2						ええと、70,000ヘルね……
+	ディーア	驚き2						財布財布……あれ？
+CharacterOff
+	市場のおばちゃん		2_3
+	市場のおばちゃん							なんだい、払えないのかい？
+CharacterOff
+Bgm	絶望				1	1
+	ディーア		2_3
+	ディーア	悔しい2						いや、そんなはずは……\nまさか、スられた……!?
+CharacterOff
+	市場のおばちゃん		2_3
+	市場のおばちゃん							金がないのにうちの商品に\n手を付けたのかい!?\nこの泥棒！
+CharacterOff
+	ディーア		2_3
+	ディーア	汗2						い、いや、そういうわけじゃ…！
+CharacterOff
+	通りすがりの女性		1_2
+	通りすがりの男性		2_2
+	通りすがりの女性							泥棒？
+	通りすがりの男性							捕まえたほうがいいか？
+CharacterOff
+	ディーア		2_3
+	ディーア	汗2						ちょ、ご、ごめんなさい！\n商品、置いておきますから!!
+Tween	ディーア	MoveTo	x=-700 time=1	easeOutSine
+CharacterOff
+	市場のおばちゃん		2_3
+	市場のおばちゃん							待ちな!!\n待てこの泥棒!!
+	ディーア	<Off>
+	ディーア	<Off>						ごめんなさーい!!
+FadeOut	black					.1	NoWait
+Wait						1
+Bg	市街地B
+	ディーア	悔しい2	2_3
+Wait						1
+FadeIn	black					.1
+	ディーア							なんなんだ今日は！
+	ディーア							カジノでは負け、魔物に遭い、\n財布は盗まれるし\n泥棒扱いされるし…
+	ディーア	絶望2						キノコリオンにも躓いて転ぶし\n蜂には刺されるし\n池には落ちるし……
+	ディーア							はぁ……なんて日だ
+	ディーア							みんなになんて説明しよう……
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F
+CharacterOff
+	ホーリーナイト	通常	b1
+Wait						1
+FadeIn	black					.3
+	ホーリーナイト		b1					豪華なパーティ!?\nにゃふふん♪楽しみにゃん♪
+CharacterOff
+	リディ	驚き2	2_3					ねえねえ、もしかして大きな\nケーキとかも買えちゃう!?
+CharacterOff
+	マンイーター	クリスマス	b1					でっかいケーキ！\nダブルサイズ？みたいな！
+CharacterOff
+	アンハッピーサブマリン	クリスマス	b1					それは、ベッドの大きさ……
+CharacterOff
+	リディ	笑い2	2_3					でもでも、それくらいおっきな\nケーキ買えちゃう!?
+CharacterOff
+	ディーア	通常2	2_3					ああ、楽しみにしとけ！
+CharacterOff
+Param	character_grayout=false
+	アンハッピーサブマリン	クリスマス	a1
+	ホーリーナイト		b1
+	マンイーター	クリスマス	wc1
+	三人	<Off>
+	三人							やったーっ!!
+CharacterOff
+	リディ	照れ2	2_3					行ってらっしゃい、マスター♪
+CharacterOff
+	アンハッピーサブマリン		a1
+	ホーリーナイト		b1
+	マンイーター		wc1
+	三人	<Off>
+	三人							気をつけてねー！
+FadeOut	black					.3
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff
+	ディーア	絶望2	2_3
+Bg	市街地B
+Wait						1
+FadeIn	black					.1
+	ディーア							……ああ！心が痛い！
+CharacterOff
+	アリス	笑いXmas	2_3					クク、あははは！\n随分と惨めな姿じゃないか、\n魔剣使い！
+CharacterOff
+	ディーア	驚き2	2_3
+	ディーア							アリス……!?
+CharacterOff
+	アリス	笑いXmas	2_3					なんだ、世界から\n見放されたような顔をして
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							うっ……あながち間違いでも\nないというか……
+CharacterOff
+	アリス	蔑みXmas	2_3					ふん、どうせ調子に乗って\nギャンブルで大負けしたか、\n突然魔物に襲われたか、
+	アリス							もしくは財布が盗まれたとか\nそんなところだろう？
+CharacterOff
+	ディーア	絶望2	2_3
+	ディーア							うっ……
+CharacterOff
+	アリス	笑いXmas	2_3					ククク、あっははははは！\nその顔は図星だな！
+CharacterOff
+	ディーア	絶望2	2_3
+	ディーア							いや、図星というか……\nその全部というか……
+	ディーア	汗2						はぁ…せっかく報酬が出たのに…
+CharacterOff
+	アリス	通常2Xmas	2_3					クク、その様子だと報酬に\n有頂天になって大見得を切って\n家を飛び出してきたのだな？
+CharacterOff
+	ディーア	絶望2	2_3
+	ディーア							うっ…………
+CharacterOff
+	アリス	笑いXmas	2_3					これも図星か！あはははは！\nクク、本当に愉快だな、\n貴様というやつは！
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							笑い事じゃないんですって……
+	ディーア	絶望2						クリスマスパーティーを楽しみに\n待ってる魔剣たちもいるし、\n早くなんとかしないと……
+CharacterOff
+	アリス	通常2Xmas	2_3					……つまり金さえあれば、\nなんとかなる、と？
+CharacterOff
+	ディーア		2_3
+	ディーア	驚き2						あ、ああ、そうだけど……
+CharacterOff
+	アリス	通常2Xmas	2_3					ふん、興が乗った\n愉快なものを見せてもらった礼だ\nこの魔帝アリスが助けてやろう
+CharacterOff
+	ディーア		2_3
+	ディーア	驚き2						助け……え？
+CharacterOff
+	アリス	通常2Xmas	2_3					何を呆けている？\nこのアリスが金を貸してやると\n言っているのだ
+CharacterOff
+	ディーア		2_3
+	ディーア	汗2						いや、女の子に借金なんて……
+CharacterOff
+	アリス	蔑みXmas	2_3					そうか、では帰る
+CharacterOff
+	ディーア		2_3
+	ディーア	怒り2						ちょっっっと待ってください……
+CharacterOff
+	アリス	蔑みXmas	2_3					なんだ、騒々しい
+CharacterOff
+	ディーア		2_3
+	ディーア	汗2						やっぱり、少しだけ\n助けていただけないかと……
+CharacterOff
+	アリス	蔑みXmas	2_3					ふん、最初から素直に\nそう言えばいいものを
+CharacterOff
+	ディーア		2_3
+	ディーア	きらーん2						ありがとうございます……！
+	ディーア	嬉しい2						これでクリスマスパーティーの\n準備ができる……！
+	ディーア							ありがとうございます、\nアリス様!!
+CharacterOff
+	アリス	笑いXmas	2_3					ああ、そうだ
+StopBgm
+	アリス		2_3					まだ対価の話を\nしていなかったな？
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							……対価？
+CharacterOff
+	アリス	笑いXmas	2_3					簡単に言えば担保だ\nわかるだろう？
+	アリス							担保になる家は？\n別に魔剣でも構わんぞ
+CharacterOff
+	ディーア		2_3
+	ディーア	悔しい2						くっ……魔剣は……
+CharacterOff
+	アリス	通常2Xmas	2_3					そうだろうな、\n貴様ならそう言うだろう
+Bgm	Xmasボス
+	アリス	笑いXmas						ならば労働で支払え
+CharacterOff
+	ディーア	驚き2	2_3					労働……！
+CharacterOff
+	アリス	通常2Xmas						偶然にも今ちょうど\n欲しいものがあってなあ？
+CharacterOff
+	ディーア		2_3
+	ディーア	驚き2						欲しい、もの？
+CharacterOff
+	アリス	通常2Xmas	2_3					とある魔物の核を集めていてな
+	アリス	通常2Xmas						そう、おそらく貴様も一度\n戦っただろう？\n六枚翼の魔物だ
+FadeOut	black					.1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff
+Bg	草原A
+Wait						.3
+FadeIn	black					.1
+	？？？？	<Off>						<dash=6>!!
+CharacterOff
+	ディーア	怒り2	2_3
+	ディーア							ああもう、また魔物か！
+CharacterOff
+Param	character_grayout=false
+	聖鐘のサタナス		b2
+	？？？？
+	？？？？							<dash=6>ッ!!!!
+CharacterOff
+Param	character_grayout=true
+	ディーア	汗2	2_3
+	ディーア							……へ？
+FadeOut	black					.1
+ImageEffectOff	SpriteCamera	Sepia
+Bg	市街地B
+Wait						.3
+FadeIn	black					.1
+	ディーア	驚き2						ああ、あの魔物か！
+CharacterOff
+	アリス	通常2Xmas	2_3					そう、奴らは<color=blue>聖鐘のサタナス</color>\nという魔物の一部だ\n眷属、というべきか
+	アリス							奴らのなかには聖鐘のオーブが\n核になっている奴がいてな
+	アリス	笑いXmas						そいつを根こそぎ倒して\n集めてこい\n頼んだぞ、魔剣使い
+CharacterOff
+	ディーア		2_3
+	ディーア	汗2						えっと、それを\nいくつ持ってくれば……？
+CharacterOff
+	アリス	蔑みXmas	2_3					いくつ、だと？
+	アリス	笑いXmas						たくさん、だ
+CharacterOff
+	ディーア		2_3
+	ディーア	絶望2						たくさん……？\nあの魔物を……？
+CharacterOff
+	アリス	笑いXmas	2_3					しっかりと準備をしていけば\n大したことないだろう？
+	アリス							ついでに、面白いものがあったら\n寄越すがいい\nそれも担保にしてやろう
+	アリス							そこらに魔物やら何やらが\nうじゃうじゃいるだろう？\n掃除ついでに探してこい
+CharacterOff
+	ディーア	絶望2	2_3
+	ディーア							アクケルテもひっくり返る\nブラックぶりだ……
+CharacterOff
+	ロルリアンレット	ニヤリXmas2	2_3					あら、楽しそうね\n何をやっているのかしらアリス？
+CharacterOff
+	ディーア	驚き2	2_3
+	ディーア							ロール様……！
+CharacterOff
+	アリス	笑いXmas	2_3					ふん、ほんの暇つぶしさ\nこの魔剣使いが、金がないと\n嘆いていたのでな
+CharacterOff
+	ロルリアンレット	通常Xmas2	2_3					……金がない？
+CharacterOff
+	アリス	笑いXmas	2_3					ギャンブルで溶かして…くくっ\n残りはスられたらしいぞ！
+CharacterOff
+	ロルリアンレット	通常Xmas2	2_3					……情けないわね
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							皆まで言わないで……
+CharacterOff
+	ロルリアンレット	通常Xmas2	2_3					ふん、それで？\n何にお金がいるのかしら？
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							えっと、クリスマス\nパーティーに……
+CharacterOff
+	ロルリアンレット	通常Xmas2	2_3					クリスマスパーティー？
+CharacterOff
+	ディーア	あはは2	2_3
+	ディーア							そうです、それの準備に\n色々買わなきゃいけなくて……
+CharacterOff
+	ロルリアンレット	通常Xmas2	2_3					……招待されていないわよ？
+CharacterOff
+	アリス	笑いXmas						くくっ、どうやら\nお呼びではないらしいぞ？
+CharacterOff
+	ロルリアンレット	ニヤリXmas2	2_3					黙ってなさい、ヒキニート
+	ロルリアンレット	通常Xmas2						いいわ、お金なら私が\n工面してあげる
+CharacterOff
+	アリス	蔑みXmas	2_3					金ならもう私がくれてやったぞ\n相応の労働を対価にな
+CharacterOff
+	ロルリアンレット	ニヤリXmas2	2_3					労働？\n……なるほど、例の後始末を\n丸投げしようって魂胆かしら
+	ロルリアンレット	ニヤリXmas2						チッ、出遅れたわね\n私が後手に回るなんて……
+	ロルリアンレット	通常Xmas2						そうだわ、魔剣使い\n聖鐘のオーブと集めた物品は\n全部私に持ってきなさい
+CharacterOff
+	ディーア	驚き2	2_3
+	ディーア							はい？
+CharacterOff
+	ロルリアンレット	ニヤリXmas2	2_3					その代わりに、そのヒキニート\nからの借金は私が\n肩代わりしてあげるわ
+CharacterOff
+	アリス	蔑みXmas	2_3					ふん、何を言い出すかと思えば\n<ruby=おじょうさま>図書館の姫君</ruby>は、私の邪魔を\nしないと気が済まないらしいな
+CharacterOff
+	ロルリアンレット	ニヤリXmas2	2_3					魔帝アリス様は世界を救う\n大仕事でお疲れでしょう？
+	ロルリアンレット							残った後片付けまで\n手伝う必要はないわよ
+CharacterOff
+	アリス	蔑みXmas	2_3					貴様に労われる日が来るとはな\n心底驚いた、これは雪が降るぞ
+CharacterOff
+	ロルリアンレット	ニヤリXmas2	2_3					あら、私のおかげでホワイト\nクリスマスになるわね\nこれも一つ貸しでいいかしら？
+CharacterOff
+	アリス	笑いXmas	2_3					ふん、我がエイビシュタットは\n常に雪が降っているがな
+CharacterOff
+	ロルリアンレット	ニヤリXmas2	2_3					あら、それはいいわね
+	ロルリアンレット	ニヤリXmas2						ならニートらしく自宅に\n引きこもって素敵なホワイト\nクリスマスを過ごしてなさい
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							あの……
+CharacterOff
+	アリス	蔑みXmas	2_3					なんだ、まだいたのか魔剣使い\nさっさと働け、\n馬車馬のようにな
+CharacterOff
+	ロルリアンレット	通常Xmas2	2_3					魔剣使い、こんな奴の言うことは\n聞かなくていいわ
+	ロルリアンレット	ニヤリXmas2						わかったら早くオーブを集めて\n私に渡しなさい
+CharacterOff
+	ディーア	本気2	2_3
+	ディーア							は、はいっ！一生懸命働きます!!
+Tween	ディーア	MoveTo	x=-700 time=1	easeOutSine
+Wait						1.5
+	ロルリアンレット	通常Xmas2	2_3					ねえアリス、一応\n確認したいのだけれど
+CharacterOff
+	アリス	笑いXmas	2_3					聖鐘のサタナスか？\n本体はとっくに無力化した\n残っているのは眷属と魔物だけだ
+CharacterOff
+	ロルリアンレット	通常Xmas2	2_3					そう、また誰も知らない間に\n魔界は救われたというわけね
+CharacterOff
+	アリス	通常2Xmas	2_3					ああ、後は魔剣使いに\n任せておけば\n事態は収束するだろう
+CharacterOff
+	ロルリアンレット	通常Xmas2	2_3					趣味の悪いやり方ね\nいかにもヒキニートが\n思いつきそうなことだわ
+CharacterOff
+	アリス	蔑みXmas	2_3					ふん、加担した奴の\n言うことではないぞ？
+	アリス	笑いXmas						しかし、奴は見ていて飽きないな\nクク、今年は楽しいクリスマスに\nなりそうだ
+CharacterOff
+	ロルリアンレット	ニヤリXmas2	2_3					あら、珍しく同感ね\nきっと最高のクリスマスに\nなるわ
+CharacterOff
+	アリス	通常2Xmas	2_3_b					ああ……
+FadeOut	white					.5
+CharacterOff
+Bg	イベントスチル20101
+FadeIn	white					.5
+	アリス	<Off>						さあ、楽しい楽しい\n<ruby=強制労働>クリスマスパーティー</ruby>\nの始まりだ！
+FadeOut						1.5
+Wait						1
+CharacterOff
+If	isdebug==true
+CharacterOff
+Jump	*E_201_01
+EndIf
+EndScenario

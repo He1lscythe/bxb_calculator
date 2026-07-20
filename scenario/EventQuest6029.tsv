@@ -1,0 +1,321 @@
+# E6029_a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="氷の城を守るモノ"
+JumpSubroutine	*イベントクエストタイトル
+Bgm	図書館
+Bg	凍りついた神殿城
+	ディーア	通常	2_3
+	リディ	通常	3_3
+Tween	ディーア	PunchPosition	y=10 time=3			Add
+Tween	リディ	PunchPosition	y=10 time=3			Add
+Tween	ディーア	MoveBy	x=-30 time=3			Add
+Tween	リディ	PunchPosition	x=-30 time=3
+	ディーア	怪しい						中は静かだな…
+Tween	リディ	PunchPosition	y=50 time=0.5			Add
+	リディ	怒り						うう…寒い……
+	ディーア	驚き						砂漠のど真ん中だってのに、\nまったく溶ける気配がないな…\nこれが六大異変エイビシュタット…
+	リディ	驚き						マスターは寒くないの？
+	ディーア	悔しい						……………………さむい
+	ディーア	通常						でも、そうは言ってられないな
+	ディーア	怒り						場外で勇者たちが冥獣を\n足止めしてくれている内に\n事件を解決しないと
+	リディ	怒り						霊獣姫モルガンルフェ、だよね
+	ディーア							ああ…
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+	リディ	驚き						わぁぁぁ！
+	ディーア	怪しい						すごいな…魔力振、圧力、\n外とは大違いだ
+Tween	ディーア	ScaleTo	x=-1 time=0			Add
+	ディーア	笑い						やっぱりリディは酒場に戻って\nいた方がいいんじゃないか
+Tween	リディ	PunchPosition	y=50			Add
+	リディ	怒り						や！
+	リディ	通常						メアルーさんと約束したもん
+	リディ	悔しい						それに、気になるの
+	ディーア	怪しい						気になる？
+	リディ	通常						…魔帝アリスさん
+	ディーア	通常						エイビシュタット城主にして、\n六大魔王の1人、か
+	ディーア	怪しい						でも長らくこの城には\n戻ってきてないって話だ
+	リディ	照れ						うん、なんだけど、\nもしかしたら何かあるかな、って
+	ディーア	通常						……何か、か
+Tween	リディ	PunchPosition	y=50			Add
+	リディ	笑い						女の子の直感！
+	ディーア	笑い						なら、仕方ないか！
+FadeOut	red					.5
+Se	アラート
+	ディーア	驚き
+	リディ	驚き
+FadeIn	red					2
+	ディーア							！！
+Tween	ディーア	ScaleTo	x=1 time=0			Add
+	ディーア							なんだ今の…！
+Tween	リディ	PunchPosition	y=50			Add
+	リディ	驚き						マスターあれ見て！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bgm	バトル
+CharacterOff	wipe
+	ディーア	驚き	2_3
+Tween	ディーア	MoveTo	x=50 time=0
+	リディ	驚き	3_3
+	氷城封鎖術式装置	通常	1_3
+FadeIn	black					.5
+	ディーア							これは…魔術結界器！？
+	リディ							ま、まじゅつけっか…？
+	ディーア	怪しい						主人の留守を守る、\n結界型の番犬みたいなもの、かな
+	リディ	悔しい						え…じゃあさっきの音は…
+FadeOut	red					.5
+Se	アラート
+FadeIn	red					2
+	氷城封鎖術式装置							<color=mk2wisp>《侵入者発見：モード正当防衛》</color>
+Tween	リディ	PunchPosition	y=50			Add
+	リディ	驚き						わ、わ、わ！\n私たち敵じゃないよ！
+	ディーア	通常						聞いてくれる相手じゃないな…
+	ディーア	怒り						リディ下がってろ！\n悪いけど、通してもらう！
+EndScenario
+
+# E6029_b
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="結界の先"
+JumpSubroutine	*イベントクエストタイトル
+Bgm	図書館
+Bg	凍りついた神殿城
+	ディーア	驚き	2_3
+Tween	ディーア	MoveTo	x=50 time=0
+	リディ	驚き	3_3
+	氷城封鎖術式装置	通常	1_3
+Tween	リディ	PunchPosition	y=50			Add
+	リディ							マスター見て！\nこっちにも、あっちにも！
+	ディーア	怪しい						ああ、結界器だらけだ！
+	リディ	悔しい						壊れてるのもたくさんあるけど…
+	ディーア	通常						氷城の魔力を吸って、\n直ぐに復活する仕組みだな…
+	リディ	驚き						このまま此処にいたら…！
+	ディーア	怒り						ああ、俺たちの相手はこいつじゃない\n魔力振の強い方へ進むぞ！
+Tween	リディ	PunchPosition	y=50			Add
+	リディ	笑い						うん！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bgm	バトル
+CharacterOff	wipe
+	ディーア	驚き	2_3
+Tween	ディーア	MoveTo	x=50 time=0
+	リディ	驚き	3_3
+	氷城封鎖術式装置	通常	1_3
+FadeIn	black					.5
+	ディーア							…とは言ったものの
+	リディ	悔しい						すぐに囲まれちゃったね…
+	ディーア	怪しい						こいつらの封印を解除して、\nそのスキに進むしかないってことか
+	リディ	驚き						マスター、大丈夫？
+	ディーア	笑い						何言ってるんだリディ
+FadeOut	red					.5
+Se	アラート
+FadeIn	red					2
+	氷城封鎖術式装置							<color=mk2wisp>《侵入者発見：モード正当防衛》</color>
+	ディーア	怒り						俺を誰だと思ってる！
+EndScenario
+
+# E6029_c
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="魔導師と霊獣"
+JumpSubroutine	*イベントクエストタイトル
+Bgm	絶望
+Bg	凍りついた神殿城
+	ディーア	悔しい	1_2
+	リディ	悔しい	2_2
+Tween	リディ	PunchPosition	y=50 time=1			Add
+	リディ							ま、マスター…
+Tween	リディ	MoveTo	x=30 time=1			Add
+Tween	ディーア	MoveTo	x=-70 time=1			Add
+	ディーア							リディ、後ろに…
+	リディ							う、うん
+	ディーア							間違いない、この魔力振…\nこの寒気の塊のようなオーラ…
+	ディーア							この先に霊獣姫モルガンルフェが居る
+	リディ	怒り						…行くの？マスター
+	ディーア	怒り						ああ、メアルーさんとも約束したし、\n外の勇者たちも長くはもたない…
+	ディーア	悔しい						モルガンの目的が何なのかは\nわからないけれど
+	ディーア	怒り						そいつが降りかかる火の粉なら、\n払わなきゃならない！
+Tween	リディ	PunchPosition	y=50			Add
+	リディ	驚き						ま、マスター！見て、この部屋…！
+	ディーア	驚き						部屋…？
+	リディ							モルガンのいる部屋の名前…！
+Tween	ディーア	PunchPosition	y=50			Add
+	ディーア							名前…？\n…………これは！
+	ディーア							『…リス………研…室』!!
+	ディーア	怪しい						アリスの部屋、なのか…？\n研究室？
+Bgm	Xmasボス
+Tween	ディーア	ShakePosition	x=-10 y=-10 time=1			Add
+Tween	リディ	ShakePosition	x=-10 y=-10 time=1			Add
+	リディ	驚き						わぁぁぁ！
+	ディーア	悔しい						くっ！向こうもこっちに気づいた！
+	ディーア	怒り						行くぞリディ！力を貸してくれ！
+	リディ	怒り						気をつけてねマスター！
+	ディーア							あぁ！
+	ディーア							<color=mk2impo>「愚かなる卑怯者の鍵」\n(ワールドイズマイン)</color>!!
+FadeOut	white					.5
+Se	闇1
+Se	闇2
+Se	闇3
+Se	火3
+Se	水3
+EndScenario
+
+# E6029_d
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="暴虐たるモルガンルフェ"
+JumpSubroutine	*イベントクエストタイトル
+Bgm	Xmasボス
+Bg	凍りついた神殿城
+	ディーア	驚き	2_3
+Tween	ディーア	MoveTo	x=50 time=0
+	リディ	驚き	3_3
+	氷城封鎖術式装置	通常	1_3
+	ディーア	悔しい						はぁはぁ、逃げられたか！
+	リディ							マスター！見て！\nなんだかモルガンの様子が…！
+	ディーア	驚き						な…！結界器を吸収して―!!
+FadeOut	white					.5
+Se	闇1
+Se	闇2
+Se	闇3
+Se	火3
+Se	水3
+Bg	宇宙
+CharacterOff	氷城封鎖術式装置
+FadeIn	white					2
+Tween	ディーア	MoveTo	x=-70 time=1			Add
+Tween	リディ	MoveTo	x=30 time=1			Add
+	ディーア	怪しい						…これは、亜空間！？
+	リディ	驚きR						……………
+	ディーア	通常						モルガンが吸収した異変の魔力が\n別空間を作り出している…！？
+	ディーア	怪しい						これは、一度退いたほうがいいか…？
+	リディ							………………<color=mk2wisp>『くくく』</color>
+Tween	ディーア	ScaleTo	x=-1 time=0			Add
+	ディーア	驚き						リディ？
+	リディ	笑い						<color=mk2wisp>『なんだその程度か魔剣使い』</color>
+Tween	ディーア	MoveTo	x=-170 time=1			Add
+	ディーア	驚き						…！？リディ！？
+	リディ	通常						<color=mk2wisp>『せっかく我が城に招待したのだぞ？\n　もっと力を見せてみよ』</color>
+	ディーア	怒り						……まさか、アリス…！？
+	リディ	笑い						<color=mk2wisp>『どうした？怖気づいたか？』</color>
+Tween	リディ	MoveTo	x=0 time=1			Add
+	リディ	照れ						<color=mk2wisp>『まぁそれはそれで良い見ものだ』</color>
+Tween	リディ	MoveTo	x=-70 time=1			Add
+	リディ	笑い						<color=mk2wisp>『この少女もろとも喰われるがよい』</color>
+Tween	ディーア	PunchPosition	y=50			Add
+	ディーア	驚き						……！！
+	ディーア	怒り						リディに、手は出させない！
+	ディーア							モルガンは俺が倒す
+	ディーア							アリスさん、あんたも\n早くその娘から出ていってくれ
+	リディ	照れ						<color=mk2wisp>『くかか！我に指図をするとはな！\n　口の利き方には気をつけよ雑種』</color>
+Tween	リディ	MoveTo	x=70 time=0.2			Add
+	リディ	悔しい						きゃああああああ!!
+Tween	ディーア	MoveTo	x=-70 time=0.5			Add
+Tween	ディーア	PunchPosition	y=50			Add
+	ディーア	驚き						リディ…！！
+	リディ	笑い						<color=mk2wisp>『モルガンも魔導師の端くれ、\n魔導師同士の本気の戦いを所望するが\nいかがかな？』</color>
+	ディーア	怒り						アリス…貴様!!
+	リディ							<color=mk2wisp>『勝てばいいのだ、勝てばな\n　そうすればこの娘の体も返ってくる』</color>
+	ディーア	怪しい						言われるまでもない…！
+	ディーア	怒り						やってやるさ、霊獣相手であっても！
+	リディ	嬉しい						<color=mk2wisp>『ほう、悪魔の鍵…か、\n　楽しくなりそうだ』</color>
+	ディーア							<color=mk2impo>「愚かなる卑怯者の鍵」\n(ワールドイズマイン)</color>!!
+FadeOut	white					.5
+Se	闇1
+Se	闇2
+Se	闇3
+Se	火3
+Se	水3
+FadeIn	white					2
+Tween	ディーア	ScaleTo	x=1 time=0			Add
+	ディーア							この城の主の命だ、\nお前を止めるぞ、霊獣モルガン!!
+EndScenario
+
+# E6029_e
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="帰路に漂う蜃気楼"
+JumpSubroutine	*イベントクエストタイトル
+Bgm	絶望
+Bg	凍りついた神殿城
+	ディーア	悔しい	1_2
+Tween	ディーア	ScaleTo	x=-1 time=0
+	リディ	悔しい	2_2
+	ディーア	驚き						リディ大丈夫か！
+	リディ							うう…マスター……モルガンは…？
+	ディーア	笑い						倒した！\n亜空間も晴れた！
+	リディ							はぁはぁ…マスター…
+	ディーア							大丈夫だリディ、今から脱出する！\n少し揺れるけどごめんな！
+	リディ							うん、だいじょう…ぶ……
+Tween	ディーア	PunchPosition	y=50			Add
+	ディーア	悔しい						リディ！！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+Bg	蜃気楼の町
+Bgm	凱旋
+CharacterOff	wipe
+	リディ	悔しい	3_3
+	ディーア	驚き	2_3
+Tween	ディーア	ScaleTo	x=1 time=0
+FadeIn	black					.5
+	ディーア							ここは…フォリオ！？\nエイビシュタットから出た\nばかりなのに…！
+	魔導師メアルー･スル	通常	1_3					おかえりなさい魔剣使い
+Tween	ディーア	PunchPosition	y=50			Add
+	ディーア	驚き						メアルーさん！
+	魔導師メアルー･スル							安心してここは安全よ\n町まで送らせてもらうわ\nお嬢さんもお疲れのようだし
+	リディ							…めあるーさん……
+	魔導師メアルー･スル							ありがとう<param=name>\n一時的ではあれモルガンの動きは\n封じられた
+	ディーア	悔しい						一時的…やはり
+	魔導師メアルー･スル							ええ、モルガンがエイビシュタットの\n中に居る以上、いずれ力を取り戻す
+	ディーア	怪しい						六大異変の魔力を吸い上げて…
+	魔導師メアルー･スル							あら、あなたほどの魔剣使いでも\nそこの真相には届かなかったのね
+Tween	ディーア	PunchPosition	y=50			Add
+	ディーア	驚き						………まさか！
+	魔導師メアルー･スル							氷城エイビシュタット自体は、\n六大異変ではない
+	魔導師メアルー･スル							あれは、あくまで結果
+	ディーア	怒り						つまり異変の中心自体は別にある…！
+	魔導師メアルー･スル							ご名答
+	ディーア	驚き						そうか、あの部屋！\nモルガンの居たアリスの部屋が\n異変の中心につながって――!!
+	魔導師メアルー･スル							…アリスの…部屋？
+	ディーア	通常						ええ、モルガンはアリスの研究室…？\nのような部屋に居ました
+	魔導師メアルー･スル							………それは妙ね
+	ディーア	驚き						…！？
+	魔導師メアルー･スル							アリス様のお部屋の1つに\n研究室があるのは正しいわ
+	魔導師メアルー･スル							けれどね、エイビシュタットには\nアリス様の研究室は無いの
+Tween	ディーア	PunchPosition	y=50			Add
+	ディーア							な！
+	ディーア	怪しい						でも、たしかに…！
+	魔導師メアルー･スル							……あ、なるほど、そういうこと…
+	ディーア	驚き						…何か心当たりでも？
+	魔導師メアルー･スル							ひとつ聞いても良いかしら
+	ディーア	通常						？？
+	魔導師メアルー･スル							その部屋でアリス様の声を、\n何かの方法で聞いたり感じたり、\nそういうことはなかったかしら？
+Tween	ディーア	PunchPosition	y=50			Add
+	ディーア	驚き						ありました！\nリディの口から聞いたこともない声で！
+	魔導師メアルー･スル							ふふふ！そう、そういうこと…！
+	ディーア	怪しい						？？？
+	魔導師メアルー･スル							魔剣機関もなかなか良い采配をするわ\nさすがは王の1人が束ねるだけはある
+	ディーア							……？？
+	魔導師メアルー･スル							いいえ、こちらの話よ
+	魔導師メアルー･スル							それに、今はそのお嬢さんを\n看病してあげたほうがよいのでは？
+Tween	ディーア	PunchPosition	y=50			Add
+	ディーア	驚き						！！
+Tween	ディーア	ScaleTo	x=-1 time=0			Add
+	ディーア							そうだ、リディを病院に…！
+	魔導師メアルー･スル							拠点はどこ？
+Tween	ディーア	ScaleTo	x=1 time=0			Add
+	ディーア	通常						バル・ミラージュです
+	魔導師メアルー･スル							了解、送るわね
+FadeOut	white					.5
+Se	風1
+FadeIn	white					1
+	ディーア	驚き						転送…魔術！？
+Tween	ディーア	PunchPosition	y=50			Add
+	ディーア							まって、まだ聞きたい話が…!!
+	魔導師メアルー･スル							大丈夫、いずれわかることよ\n特に、あなたくらいの使い手ならね
+	ディーア							一体それはどういう―……
+FadeOut	white					1
+Se	台風
+CharacterOff	ディーア
+CharacterOff	リディ
+FadeIn	white					2
+	魔導師メアルー･スル							是非また遊びに来てね\n超常なる魔剣使いさん
+EndScenario

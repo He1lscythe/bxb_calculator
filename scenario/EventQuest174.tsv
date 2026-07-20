@@ -1,0 +1,625 @@
+# E_174_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="アフタースクールエクスペリエント"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	台風_BGM
+Bg	海底
+	ヘルファイアワークス	武器状態	b2
+	？？？？	通常
+FadeIn	white					.1
+	？？？？							……
+	研究員	<Off>						ポ……トに…着…
+	研究員	<Off>						こん…深………剣が…
+	研究員	<Off>						そ……魔力………に強…
+	研究員	<Off>						……なか……
+	？？？？							…………
+FadeOut	black					3
+CharacterOff
+	　　　　　　　　　　
+Bg	イベントスチル17401
+FadeIn	black					1
+Wait						3
+FadeOut	black					1
+Bgm	武器修理
+Bg	研究所A
+	研究員	通常	2_3
+FadeIn	black					.5
+	研究員							いらっしゃい、君が\n<param=name>くんだね
+CharacterOff
+	不倶戴天華		b2
+	ディザスターマイン		wb2
+	ディーア	通常2	2_3
+	ディーア							はい\nそれからこっちが…
+Tween	ディザスターマイン	MoveTo	x=-130 y=-250 z=100
+	ディザスターマイン							……ディザスターマインよ
+Tween	不倶戴天華	MoveTo	x=180 y=-250 z=190
+	ディーア	照れ2
+	不倶戴天華							そして私は不倶戴天華！\nよろしくねぇー♪
+CharacterOff
+	研究員	通常	2_3
+	研究員							おお、魔剣まで持ってきて\nくれたか！\nそれはとても助かるよ！
+CharacterOff
+	ディーア	驚き2	2_3
+	ディーア							それで、これが海底で発見\nされた魔剣ですか？
+FadeOut	white					.3
+CharacterOff
+	ヘルファイアワークス	武器状態	b2
+	？？？？
+Param	character_grayout=false
+ZoomCamera	SpriteCamera	2	0	-80		.1
+FadeIn	white					.3
+Wait						1
+ZoomCamera	SpriteCamera	2	0	250		1
+Wait	white					1
+FadeOut						.3
+CharacterOff
+ZoomCamera	SpriteCamera	1				.1
+Param	character_grayout=true
+	研究員	通常	2_3
+FadeIn	white					.3
+	研究員							そうだ。\n君の持つディザスターマイン、\n不倶戴天華と同じ
+	研究員							第三のオーパーツ魔剣\nではないかと推測している
+CharacterOff
+	ディーア	驚き2	2_3
+	ディーア							推測？
+CharacterOff
+	研究員	通常	2_3
+	研究員							オーパーツ魔剣なんてものは、\n長い間伝承にしかない空想の\n産物だと思われていたからな
+	研究員							魔力の波長が不倶戴天華と\nディザスターマインに似ている\nというだけで、
+	研究員							今の段階でオーパーツだと断定\nすることはできないのが現実だ
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							なるほど、データが\n足りないんですね
+CharacterOff
+	研究員	通常	2_3
+	研究員							有り体に言えばそういうことだ\n現状ではランクさえも\n判断できない
+	研究員							それで君たちを呼んだのさ
+CharacterOff
+	ディーア	驚き2	2_3
+	ディーア							二人とも、どうだ？\nなにかわかるか？
+CharacterOff
+	ディザスターマイン		b2 2
+	不倶戴天華		a2 2
+	不倶戴天華							うーん……これ、どう見ても\nヘルファイアワークスだよね？
+	ディザスターマイン		b1 2					そうね。ご主人、オーパーツ\n魔剣で間違いないわ
+CharacterOff
+	ディーア	怪しい2	2_3
+	ディーア							これが第三のオーパーツ魔剣…
+CharacterOff
+	研究員	通常	2_3
+	研究員							おお、本当か！\nへるふぁいあ…なんだって？
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a2 2
+	ディザスターマイン							ヘルファイアワークスよ\n爆散させられたいの？
+CharacterOff
+	研究員	通常	2_3
+	研究員							ヘルファイアワークスか…\n記録しておこう
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a1 2
+	不倶戴天華							でもこの子、ちょっと\n変なんだよね…
+CharacterOff
+	ディーア	驚き2	2_3
+	ディーア							変？
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a2 2
+	ディザスターマイン							そうね…上手く言葉に\nできないけれど…
+	不倶戴天華		a1 2					ねえご主人、この子アンロック\nできないの？
+CharacterOff
+	ディーア	通常2	2_3
+	ディーア							…やってみても？
+CharacterOff
+	研究員	通常	2_3
+	研究員							構わないよ\nだけど、職員は誰もアンロック\nできなかったぞ？
+CharacterOff
+	ディーア	怒り2	2_3
+	ディーア							そりゃまあ、普通は\nそうでしょう…ねッ！
+FadeOut	white					.1
+Se	魔剣入る
+FadeIn	white					.1
+	ディーア	驚き2						……
+CharacterOff
+	ヘルファイアワークス	武器状態	b2
+	ヘルファイアワークス							……
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							……あれ？
+CharacterOff
+	研究員	通常	2_3
+	研究員							やっぱりダメか…
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a1 2
+	不倶戴天華							うっそぉ！できなかったの？
+CharacterOff
+	ディーア	怒り2	2_3
+	ディーア							いや、もう一回……！
+FadeOut	white					.1
+Se	魔剣入る
+CharacterOff
+	ヘルファイアワークス	武器状態	b2
+FadeIn	white					.1
+	ヘルファイアワークス							……
+CharacterOff
+	ディーア	悔しい2	2_3
+	ディーア							あれ？\nいや、そんなはずは……!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+	ディーア	絶望2	2_3
+FadeIn	black					1
+	ディーア							……
+CharacterOff
+	ヘルファイアワークス	武器状態	b2
+	ヘルファイアワークス							……
+CharacterOff
+	不倶戴天華		b2
+	不倶戴天華							ねーーーご主人ーーー!!\nまだーーー？
+CharacterOff
+	ディーア	怒り2	2_3
+	ディーア							もう少し……\nもう少しできっと……
+CharacterOff						0
+	不倶戴天華		b2
+ZoomCamera	SpriteCamera	2	0	250		0	NoWait
+Shake	不倶戴天華		time=2 x=10 y=10				NoWait
+	不倶戴天華							まだーーー!!!????
+ZoomCamera	SpriteCamera	1				0	NoWait
+CharacterOff
+	ヘルファイアワークス	武器状態	b2
+	ヘルファイアワークス							……
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							だぁー……ダメだ……
+CharacterOff
+	研究員	通常	2_3
+	研究員							どうやら特殊なロックか、封印\nのようなものが掛けられてる\nみたいだね…
+CharacterOff
+	ディーア	あはは2	2_3
+	ディーア							そうは見えないんだけどなあ…
+CharacterOff
+	ディザスターマイン		b2
+	ディザスターマイン							もう３時間もやってるけど…\nさっさとしないと爆散\nさせるわよ
+CharacterOff
+	不倶戴天華		b2
+	不倶戴天華							そうだよーー!!そんなの\nやめて遊ぼうよぉーー!!
+CharacterOff
+	ディーア	怒り2	2_3
+	ディーア							もう少し…
+CharacterOff						0
+	不倶戴天華		b2
+ZoomCamera	SpriteCamera	2	0	250		0	NoWait
+Shake	不倶戴天華		time=2 x=10 y=10				NoWait
+	不倶戴天華							ご主人ーーーー!!!!
+ZoomCamera	SpriteCamera	1				0	NoWait
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							はぁ…やれやれ、じゃあこれで\n最後にするから
+CharacterOff
+	不倶戴天華		b2
+	不倶戴天華							やたーー!!
+CharacterOff
+	ヘルファイアワークス	武器状態	b2
+	ヘルファイアワークス							……
+CharacterOff
+	ディーア	怒り2	2_3
+	ディーア							じゃあ、もう一度\nアンロックを……
+CharacterOff
+Param	character_grayout=false
+StopBgm
+	ヘルファイアワークス	武器状態	b2
+	？？？？
+	？？？？							『リア充を爆発させます』
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2
+	ディーア							……へ？
+	ディーア							今、なにか…
+Se	アラート	TRUE
+FadeOut	red					.4
+FadeIn	red					.4
+Wait						.2
+FadeOut	red					.4
+FadeIn	red					.4
+Wait						.2
+FadeOut	red					.4
+CharacterOff
+	ヘルファイアワークス	武器状態	b2
+FadeIn	red					.4
+Wait						.2
+FadeOut	red					.4
+	スモーク	通常	エフェクト表
+	ヘルファイアワークス	武器状態	b2
+FadeIn	red					.4
+CharacterOff
+	スモーク	通常	エフェクト表
+	ディーア	通常2
+	ディーア							なん……ッ!?
+ChangeSoundVolume	Se	.3
+	※※※※							《Aブロックで異常発生！》
+CharacterOff
+	スモーク	通常	エフェクト表
+	研究員	通常	2_3
+	研究員							隔壁閉鎖！魔力遮断剤散布\n急げ！
+CharacterOff
+	スモーク	通常	エフェクト表
+	ディーア	悔しい2	2_3
+	ディーア							暴走……!?
+	※※※※							《遮断剤で抑えられる魔力の\n量を超えています！》
+CharacterOff
+	スモーク	通常	エフェクト表
+	研究員	通常	2_3
+	研究員							Sランク以上の魔剣か…！\nやはり本物のオーパーツ…！
+	魔力の渦							『リア充爆発しろ！』\n『リア充爆発しろ！』
+CharacterOff
+	スモーク	通常	エフェクト表
+	ディーア	悔しい2	2_3
+	ディーア							魔界中の恨みを集めてる…？
+CharacterOff
+	スモーク	通常	エフェクト表
+	研究員	通常	2_3
+	研究員							こんなに魔力を使って、\n何を…!?
+CharacterOff
+	スモーク	通常	エフェクト表
+	ディーア	本気2	2_3
+	ディーア							みんな、遮蔽物に隠れろ!!
+Se	光3
+FadeOut	white					1.5
+Bg	白背景
+Bgm	台風_BGM
+StopSe
+CharacterOff
+ChangeSoundVolume	Se	1				0
+Se	火事	TRUE
+ChangeSoundVolume	Se	.5				0
+	ヘルファイアワークス	武器状態	b2
+	　　　　　　　　　　
+Wait						2
+Tween	ヘルファイアワークス	ShakePosition	time=20 x=30 y=30	easeInOutBounce			NoWait
+ImageEffect	SpriteCamera	MotionBlur
+FadeIn	white					.5
+ChangeSoundVolume	Voice	0
+	※※※※							<speed=0.8>  </speed>	BrPage	9000-24
+ChangeSoundVolume	Voice	1				.2
+	※※※※							<color=red><speed=0>…テライト………</speed><speed=0.3>  </speed></color>	BrPage
+ChangeSoundVolume	Voice	0				.2
+	※※※※							<color=red><speed=0>……………………</speed></color><speed=1.9>  </speed>	BrPage
+ChangeSoundVolume	Voice	1				.4
+	※※※※							<color=red><speed=0>……アンロック…</speed><speed=0.4>  </speed></color>	BrPage
+ChangeSoundVolume	Voice	0				.4
+	※※※※							<color=red><speed=0>……………………</speed></color><speed=2.2>  </speed>	BrPage
+ChangeSoundVolume	Voice	1				.4
+	※※※※							<color=red><speed=0>……………………</speed></color><speed=0.4>  </speed>	BrPage
+ChangeSoundVolume	Voice	.3				.3
+	※※※※							<color=red><speed=0>ソード展開………</speed><speed=0.8>  </speed></color>	BrPage
+ChangeSoundVolume	Voice	1				.2
+	※※※※							<color=red><speed=0>…ネフィリム……</speed><speed=0.6>  </speed></color>	BrPage
+ChangeSoundVolume	Voice	0				.6
+	※※※※							<color=red><speed=0>……………………</speed></color><speed=1.5>  </speed>	BrPage
+ChangeSoundVolume	Voice	1				.4
+	※※※※							<color=red><speed=0>………環…………</speed><speed=0.7>  </speed></color>	BrPage
+ChangeSoundVolume	Voice	0				.4
+	※※※※							<color=red><speed=0>……………………</speed></color><speed=1>　　　</speed>	BrPage
+	ディーア	<Off>						<speed=0>ヘルファイアワークス…？</speed>\n<speed=1>　　</speed><speed=0.3>  </speed>	BrPage
+ChangeSoundVolume	Voice	1				0
+ChangeSoundVolume	Se	1				0
+StopSe
+Se	スキル発動
+CharacterOff	ヘルファイアワークス					1
+	ヘルファイアワークス	通常	b1			2
+	　　　　　　　　　　
+FadeOut	white					1
+ChangeSoundVolume	Voice	1
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	教室A
+Wait						4
+CharacterOff
+ZoomCamera	SpriteCamera	1.5	-320	250		.1
+FadeIn	white					.3
+Wait						1
+ZoomCamera	SpriteCamera	1.5	320	250		1.5
+Wait						1
+FadeOut	white					.3
+Bgm	絶望
+ZoomCamera	SpriteCamera	1				.1
+	ディーア	驚き2	2_3
+FadeIn	white					.3
+	ディーア							これは…学校？
+CharacterOff
+	研究員	通常	2_3
+	研究員							こんな広い結界、\n見たことないぞ…
+CharacterOff
+	ヘルファイアワークス	通常	b2
+	ヘルファイアワークス							うぷぷぷ♪
+CharacterOff
+	ディーア	怪しい2	2_3
+	ディーア							お前は…\nヘルファイアワークス…？
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a1 2
+	不倶戴天華							この結界は…まさか…!!
+CharacterOff
+	ディーア	驚き2	2_3
+	ディーア							知っているのか、天華!?
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a2 2
+	ディザスターマイン							私の記憶が正しければ、これは\n<color=blue>《リア充殲滅大作戦》</color>ね
+CharacterOff
+Bgm	コメディ
+	ディーア	汗2	2_3
+	ディーア							リア充殲滅…なんだって？
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a2 2
+	ディザスターマイン							爆散させられたいの？
+CharacterOff
+	ディーア	あはは2	2_3
+	ディーア							ひどい！
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a1 2
+	不倶戴天華							ああ、<color=blue>《リア充殲滅大作戦》</color>\nかぁ！
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							えーと…なんなんだ、それ…？
+CharacterOff
+	ディザスターマイン		b2 2
+	不倶戴天華		a2 2
+	不倶戴天華							ヘルファイアワークスってもう\nほんっとたくさん使い方がある\n面白い魔剣でね！
+	ディザスターマイン		b1 2					これはそのうちの一つ、\nリア充を殲滅する機能ね
+CharacterOff
+	ディーア	驚き2	2_3
+	ディーア							リア充を殲滅する…？
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a1 2
+	不倶戴天華							ほら、あんな感じで…
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+	ヘルファイアワークス	通常	画面外_右a
+	研究員	通常	1_2
+FadeIn	black					.5
+Tween	ヘルファイアワークス	MoveTo	x=130 y=-250 z=150
+	ヘルファイアワークス							リア充は爆発しろ!!
+FadeOut	red
+Se	火3
+FadeIn	red
+Tween	研究員	PunchPosition	y=30				Add
+	研究員							ひぃっ！僕はリア充\nじゃないです!!
+	ヘルファイアワークス	通常
+	ヘルファイアワークス							証拠は！
+	研究員	通常
+	研究員							彼女いない歴＝年齢です！
+	ヘルファイアワークス	通常
+	ヘルファイアワークス							うぷぷ♪\nじゃあキミは用なしだねっ！
+	研究員	通常
+	研究員							ほっ……え？\nうわ、うわぁあああっ!?
+FadeOut	white					.5
+Se	光3
+CharacterOff	研究員					1
+FadeIn	white					1
+	ヘルファイアワークス	通常						うぷぷ♪
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a2 2
+	ディザスターマイン							あら残念、非リアだったわね
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							残念って…
+CharacterOff
+	ディザスターマイン		b2 2
+	不倶戴天華		a2 2
+	不倶戴天華							あの人どこいったのー？
+	ディザスターマイン		b1 2					たぶん結界の外に\n追い出されただけね
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							なら安心だ
+CharacterOff
+	非リア再現体A		b2
+	非リア再現体B		wb2
+	非リア再現体C		ss_b2
+	ヘルファイアワークス	通常	b1
+	ヘルファイアワークス							さて…うぷぷぷ♪
+Param	character_grayout=false
+Tween	非リア再現体A	MoveTo	x=-180 y=-250 z=110				NoWait
+Tween	非リア再現体B	MoveTo	x=130 y=-250 z=120				NoWait
+Tween	非リア再現体C	MoveTo	x=200 y=-250 z=130				NoWait
+	ヘルファイアワークス	通常	b1
+	ヘルファイアワークス							キミはどう見ても、\n絶対リア充だよね！
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	2_3
+	ディーア							ヘルファイアワークス…\n一体なぜこんなことを？
+CharacterOff
+	ヘルファイアワークス	通常	b2
+	ヘルファイアワークス							うぷぷ♪願ったのは\n君たちじゃん♪
+	ヘルファイアワークス							そこの二人の言う通り、\nこれは<color=blue>《リア充殲滅大作戦》</color>！
+	ヘルファイアワークス							この魔界からリア充を根絶やし\nにする術式だよ♪
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							なんでそんな術式があるんだ…
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a2 2
+	ディザスターマイン							人類を滅ぼすため？
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							回りくどすぎる！
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a1 2
+	不倶戴天華							いやぁそうでもないんだよね！\n負のエネルギーって大きいから\n集めやすいし！
+CharacterOff
+	ディーア	あはは2	2_3
+	ディーア							なるほど…
+CharacterOff
+	ヘルファイアワークス	通常	b2
+	ヘルファイアワークス							うぷぷ♪じゃあまずはキミから\n爆破してあげる♪
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a1 2
+	不倶戴天華							ご主人、非リア再現体が\n来るよ！
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							そんな名前なのか!?
+Param	character_grayout=false
+	ディーア	驚き2
+	非リア再現体D		画面外_右a
+Tween	非リア再現体D	MoveTo	x=100 y=-250 z=130				NoWait
+Tween	ディーア	MoveTo	x=-180 y=-350 z=150				NoWait
+	ディーア	悔しい2						くっ…！ごめん！<speed=1>  </speed>	BrPage
+FadeOut	white					.1
+Se	打1
+FadeIn	white					.1
+Wait						.5
+FadeOut	pink					.5
+Se	ラブ
+FadeIn	pink					.1
+Param	character_grayout=true
+	非リア再現体D							……やだ…かっこいい……
+Se	魔剣出る
+CharacterOff	非リア再現体D					1
+Wait						2
+	ディーア	驚き2
+	ディーア							……？
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a1 2
+	不倶戴天華							どうしたの、ご主人？
+CharacterOff
+	ディーア	嬉しい2	2_3
+	ディーア							もしかして、こいつら…\nチョロい？
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a2 2
+	ディザスターマイン							チョロ……なんですって？
+CharacterOff
+	ディーア	嬉しい2	2_3
+	ディーア							こいつら、オレに惚れさせて\nやれば消えるんじゃないか…？
+CharacterOff
+	不倶戴天華		b2
+	不倶戴天華							いやいやー、いくらご主人でも\nそんなまさか…
+CharacterOff
+Param	character_grayout=false
+	ディーア	怒り2	2_3
+	非リア再現体B		画面外_右a
+Tween	非リア再現体B	MoveTo	x=100 y=-250 z=130				Add
+Tween	ディーア	MoveTo	x=-180 y=-350 z=150
+FadeOut	white					.1
+Se	打1
+FadeIn	white					.1
+Wait						.5
+FadeOut	pink					.5
+Se	ラブ
+FadeIn	pink					.1
+Param	character_grayout=true
+	非リア再現体B							きゃっ……好き……
+Se	魔剣出る
+CharacterOff	非リア再現体B					1
+Wait						1
+	ディーア	嬉しい2	2_3
+	ディーア							ほら!!
+CharacterOff
+	不倶戴天華		b2
+	不倶戴天華							おおおーー！ご主人すごい!!\n面白ーい!!ねえねえもっと\nやっていこ!!
+CharacterOff
+	ディザスターマイン		b2
+	ディザスターマイン							…………
+CharacterOff
+	ディーア	笑い2	2_3
+	ディーア							ニコッ
+FadeOut	pink					.1
+CharacterOff
+Se	ラブ
+	非リア再現体C		b2
+FadeIn	pink					.1
+	非リア再現体C							きゅん…
+Se	魔剣出る
+CharacterOff	非リア再現体C					1
+Wait						1
+	不倶戴天華		b2
+	不倶戴天華							わはーー♪すごーーい!!
+CharacterOff
+	ディザスターマイン		b2
+	ディザスターマイン							いっそのこと私が爆散させて\nあげようかしら…
+CharacterOff
+	ディーア	てへぺろ2	2_3
+	ディーア	汗2						えっ…？ディザスターマイン？\nなんで怒ってるんだ？
+CharacterOff
+	ディザスターマイン		b2
+	ディザスターマイン							うるさい！もう知らない！
+CharacterOff
+Wait						.2
+	ヘルファイアワークス	通常	b2
+Shake	ヘルファイアワークス		time=2 x=10 y=10				NoWait
+ZoomCamera	SpriteCamera	2	150	240		0	NoWait
+	ヘルファイアワークス							リア充爆発しろ!!!!!!
+ZoomCamera	SpriteCamera	1				0	NoWait
+CharacterOff
+	ディーア	驚き2	2_3
+Tween	ディーア	PunchPosition	y=30				Add
+	ディーア							うわぁっ!!
+CharacterOff
+	ヘルファイアワークス	通常	b2
+	ヘルファイアワークス							うぷぷぷ♪ふざけていられる\nのも今のうちだけ…リア充は\n全員爆破してやるんだから♪
+CharacterOff
+	ディザスターマイン	通常	b2
+	ディザスターマイン							ほらご主人…！ちゃんと\n戦わないと…！
+CharacterOff
+	ディーア	あはは2	2_3
+	ディーア							うーん…なんというか、特に\n理由もなくリア充を許せなく\nなる気持ちもわかるんだよな…
+CharacterOff
+	ディザスターマイン		b1 2
+	不倶戴天華		a1 2
+	ディザスターマイン							嘘でしょご主人!?
+	不倶戴天華							あんないい生活してるのに!?
+CharacterOff
+	ヘルファイアワークス	通常	b2
+	ヘルファイアワークス							へぇ……？
+CharacterOff
+	ディーア	汗2	2_3
+	ディーア							火に油を注ぐなよ！\nそれに、リア充だって悪いやつ\nばかりじゃないんだぞ！
+	ディーア	通常2						お前たちだってリア充に憧れて\nいるんだろ！これからリア充に\nなればいいじゃないか！
+CharacterOff
+	非リア再現体A		b2
+	非リア再現体A							ドキッ…
+CharacterOff
+	ヘルファイアワークス	通常	b2
+StopBgm
+	ヘルファイアワークス							うぷぷぷぷ♪
+	ヘルファイアワークス							そう、そういうやり方も\nあるかもねー♪
+	ヘルファイアワークス							でもここは永遠の学校だよ？
+Bgm	魔王バトル
+	ヘルファイアワークス							ずーっとずーっと、\n終わらない授業中！
+	ヘルファイアワークス							デートの約束をしたって、\n放課後は永遠に来ないよ♪
+CharacterOff
+	非リア再現体A		b2
+	非リア再現体A							……(コクコク
+CharacterOff
+	非リア再現体A		b2
+	非リア再現体B		wb2
+	非リア再現体C		ss_b2
+	ヘルファイアワークス	通常	b1
+Param	character_grayout=false
+Tween	非リア再現体A	MoveTo	x=-180 y=-250 z=110				NoWait
+Tween	非リア再現体B	MoveTo	x=130 y=-250 z=120				NoWait
+Tween	非リア再現体C	MoveTo	x=200 y=-250 z=130				NoWait
+	ヘルファイアワークス	通常	b1
+	ヘルファイアワークス							……というわけで
+	ヘルファイアワークス							大人しくリア充は\n爆発しておけよなぁ!!
+Se	光3
+FadeOut	white					1
+StopSound
+Param	character_grayout=true
+If	isdebug==true
+CharacterOff
+Jump	*E_174_01
+EndIf
+EndScenario

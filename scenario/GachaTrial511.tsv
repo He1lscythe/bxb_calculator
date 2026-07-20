@@ -1,0 +1,432 @@
+# G_511_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場_カフェ					0
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	小怺	拡大通常
+FadeIn	white					.5
+	小怺	拡大通常						もうすぐ魔導儀式バレンタインだよ♪
+	小怺	拡大通常						みんなマスター君に\nチョコを作ったり内緒にしたり\nそわそわしてるけど……
+	小怺	拡大通常						やっぱりマスターくんには\n本物の<ruby=ちよこれいたん>千代火鈴丹</ruby>を食べてもらいたいな♥
+Tween	小怺	PunchPosition	y=50				NoWait
+	小怺	拡大通常						とか言ってみたりして♪
+	小怺	拡大笑い
+	小怺	拡大笑い						でも……本物を作れるのは\nしょこらさんだけ……！
+	小怺	拡大笑い						本物の霊薬<dash=2>\n<ruby=ちよこれいたん>千代火鈴丹</ruby>を食べたマスター君は\nしょこらさんに首ったけに……
+Tween	小怺	PunchPosition	y=50				NoWait
+	小怺	拡大笑い						とか言ってみたりして♥
+Param	character_grayout=true
+CharacterOff
+	カグツチ	通常
+	カグツチ	通常						これは<ruby=しょこら>小怺</ruby>ではないか\nどうした、随分と張り切っておるな
+CharacterOff
+	小怺	通常	1_3
+	カグツチ	通常	3_3
+Tween	小怺	PunchPosition	y=30				NoWait
+	小怺	笑い						あ！ 大おばあさま！
+Tween	カグツチ	MoveBy	x=20				NoWait
+	カグツチ	通常						ぐ……\nその呼び方はやめよと言ったはずだぞ
+	小怺	笑い						もうすぐバレンタインなの♪\nしょこらさんも霊薬を作っているの！
+Tween	カグツチ	MoveBy	x=-20				NoWait
+	カグツチ	笑い						ほう、それは殊勝なことだ\nして、霊薬はいかにする？
+	小怺	通常						マスター君にプレゼントするの♪
+Tween	小怺	PunchPosition	y=50				NoWait
+	小怺	笑い						とか、言ってみたりして♪
+Tween	カグツチ	PunchPosition	y=50				NoWait
+	カグツチ	驚き						何<dash=2>!?\n主へ霊薬を<dash=2>!?
+	小怺	通常						うん！\n偽物のチョコではなく、しょこらさんの\n本物の霊薬を味わってもらわなきゃ♪
+	小怺	通常						マスター君、喜んでくれるかなあ……\nとか言ってみたりして♥
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	カグツチ	驚き
+	集中線		エフェクト表
+	カグツチ	驚き						な、なんとむごいことを……!!
+Param	character_grayout=true
+CharacterOff
+	小怺	通常	1_3
+	カグツチ	通常	3_3
+	小怺	驚き						ふぇ？
+Bgm	緊迫
+Tween	カグツチ	MoveBy	x=-20				NoWait
+	カグツチ	驚き						ならん！\nならんぞ小怺！
+	小怺	驚き						え……どうして？
+Tween	カグツチ	PunchPosition	y=50				NoWait
+	カグツチ	通常						どうしてもだ！\nこの世には為してはならぬことがある！
+CharacterOff
+	カグツチ	通常	3_3
+	小怺	怒り	1_3
+Shake	小怺		x=5 time=1				NoWait
+	小怺	怒り						そんな、ひどいよ大おばあさま！
+	小怺	怒り						しょこらさんはマスター君に\n本物の<ruby=ちよこれいたん>千代火鈴丹</ruby>を\n食べてもらいたいだけなのに！
+	小怺	怒り						しょこらさんがマスター君に\n贈り物をすることは\nそんなにいけないことなの……？
+Tween	カグツチ	MoveBy	x=-20				NoWait
+	カグツチ	通常						いけないことだ！\n天下が許してもこのカグツチが許さん！
+	カグツチ	通常						よいか、そもそも小怺、\nお前の霊薬を主に渡すと\n大変なことになるのだ
+	小怺	驚き						大変な、こと……？
+Bgm	平和
+CharacterOff
+	フツノミタマ	通常
+	フツノミタマ	通常						おや、これはカグツチに小怺。\n随分と楽しそうですね
+CharacterOff
+	カグツチ	通常
+	カグツチ	通常						ちょうど良かった妹よ、\n少しこれを試してみてはくれんか\n殊に珍しい甘味だ
+CharacterOff
+	フツノミタマ	通常
+	フツノミタマ	通常						ふむ、良いでしょう\nどれ、ひとつ……
+	フツノミタマ	通常						うむ、大変に美味ですね
+CharacterOff
+	小怺	怒り
+	小怺	怒り						あーっ！\nそれはしょこらさんの霊薬！
+Bgm	緊迫
+CharacterOff
+	フツノミタマ	通常
+	フツノミタマ	通常						なん、ですって<dash=2>!?
+CharacterOff
+Param	character_grayout=false
+	フツノミタマ	通常	2_3			0
+	フツノミタマ2	通常	2_3_b			0		<dash=2>！
+Se	光1
+ImageEffect	SpriteCamera	MotionBlur
+ImageEffect	SpriteCamera	NegaPosi
+Shake	フツノミタマ		x=1				NoWait
+Tween	フツノミタマ2	ScaleBy	x=1.2 y=1.2				NoWait
+Tween	フツノミタマ2	MoveBy	y=-100				NoWait
+Wait						.1
+CharacterOff	フツノミタマ2					.2
+ImageEffectOff	SpriteCamera	NegaPosi
+Wait						1
+ImageEffectOff	SpriteCamera	MotionBlur
+	フツノミタマ	破損						体が<dash=2>熱い<dash=2>!!
+	フツノミタマ	破損						う……ううぅ……\n熱い、燃えるような、熱さ……
+CharacterOff
+	小怺	驚き
+	小怺	驚き						おばあさま、どうしたの……？
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	フツノミタマ	破損
+	オーラ桃		エフェクト裏			3
+	フツノミタマ	破損						ひぅっ!!\nふ、触れてはなりませぬ小怺!!
+Bgm	コメディ
+Shake	フツノミタマ		x=5 time=5				NoWait
+Tween	フツノミタマ	MoveBy	y=-400 time=5				NoWait
+	フツノミタマ							あああ……♥\nふああああああ……♥
+CharacterOff	フツノミタマ					.5
+	フツノミタマ	<Off>						（ビクン♥ ビクンビクン♥）
+Param	character_grayout=true
+CharacterOff
+	小怺	驚き
+	カグツチ	通常
+	小怺	驚き						おばあさま、しっかり！\nおばあさま……なんてあられもない姿！
+	小怺	驚き						どうしよう大おばあさま！\nおばあさまがまるで魚みたいに\nビクビクと跳ね回って！
+	カグツチ	通常						これで理解できたか小怺\nお前の霊薬を服するとだな……
+Param	character_grayout=false
+CharacterOff
+	カグツチ	拡大通常
+	集中線		エフェクト表
+Se	レベルアップ
+	カグツチ	拡大通常						<size=50>全身の感度が\n3000倍になるのだ!!</size>
+Param	character_grayout=true
+CharacterOff
+	小怺	驚き
+	小怺	驚き						ええー!!
+	小怺	驚き						しょこらさんの霊薬が\n神経を研ぎ澄ますとは知っていたけど……\nまさか3000倍だなんて！
+	カグツチ	通常						それにしてもこの絵面……大丈夫か？\nあまりやると然るべき方面から\nお叱りを受けないか
+	小怺	驚き						ふぇ？\nおしかり？
+	カグツチ	通常						何でもないぞ小怺\nお前は何も知らなくていいのだ……
+CharacterOff
+	カラドボルグ=エア	魔装
+	カラドボルグ=エア	魔装						にひひ♪ 今3000倍って聞こえたよ？\nいいの？ いいの？\nエアも3000倍になっちゃうよ？
+Param	character_grayout=false
+CharacterOff
+	カグツチ	拡大通常
+	集中線		エフェクト表
+	カグツチ	拡大通常						去れエア!!\n話がややこしくなる!!
+Param	character_grayout=true
+CharacterOff
+	カラドボルグ=エア	魔装
+Tween	カラドボルグ=エア	MoveBy	x=50				NoWait
+Tween	カラドボルグ=エア	PunchPosition	y=50				NoWait
+	カラドボルグ=エア	魔装						やん♪\nせっかくのチャンスなのに♥
+CharacterOff
+	カグツチ	通常
+	カグツチ	通常						シッシッ！ 全く油断も隙もない！\nよし……魔界の危機は去った
+	カグツチ	通常						というわけだ、小怺\n主に霊薬を服させるのは諦めろ
+CharacterOff
+	小怺	怒り	1_3
+	カグツチ	通常	3_3
+	小怺	怒り						……むうー！\nでもしょこらさんも\nマスター君にプレゼントしたいもん!!
+	小怺	怒り						しょこらさんがマスター君に\n振り向いてもらうには\n本物を贈るしかないの！
+	小怺	怒り						マスター君にこの気持ちを\n届けちゃいけないなんて\nそんなのおかしいもん!!
+Tween	小怺	PunchPosition	y=50				NoWait
+	小怺	怒り						とか言ってみたりして!!
+	カグツチ	驚き						おかしいのはお前だぞ小怺……!?\n見ろこれを、3000倍だぞ？
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	フツノミタマ	<Off>						んん……ひいぃ……♥\n（ビクン♥）
+CharacterOff
+	小怺	怒り
+	小怺	怒り						そんなの関係ないよ！\n大おばあさまもおばあさまもいじわる！
+CharacterOff
+	オーラ桃		エフェクト裏
+	フツノミタマ	<Off>						くっ……、\nなぜ私がいじわるになるのです小怺……\nひぎっ!?
+CharacterOff
+	カグツチ	通常
+	カグツチ	通常						今は安らかに眠れ妹よ……\nこの童子はこのカグツチが鎮めよう……
+CharacterOff
+	ディーア	驚き2
+	ディーア	驚き2						どうした、小怺、カグツチ\nそこで寝てるのは……フツノミタマか？
+CharacterOff
+	オーラ桃		エフェクト裏
+	フツノミタマ	破損
+Shake	フツノミタマ		x=5 time=1				NoWait
+	フツノミタマ	破損						ご、ごしゅじん……\nに、逃げて、ください……\nふぐぅっ!!
+CharacterOff
+	ディーア	驚き2
+	ディーア	驚き2						顔が真っ赤じゃないか！\nどういうことだ小怺、カグツチ！
+CharacterOff
+	オーラ桃		エフェクト表
+	フツノミタマ	破損
+Shake	フツノミタマ		x=5 time=1				NoWait
+	フツノミタマ	破損						いぎぃっ♥\nふ、触れてはなりませぬ……\n触れてはなりませぬ……!!
+Param	character_grayout=true
+CharacterOff
+	小怺	怒り	1_3
+	カグツチ	通常	3_3
+	カグツチ	通常						主よ、話すと長いのだ\n全ては3000倍の禁忌を犯したがため……
+	小怺	怒り						しょこらさんの霊薬は悪くないもん！\n勝手に3000倍になったおばあさまが\nいけないんだよ！
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	フツノミタマ	破損
+Shake	フツノミタマ		x=5 time=1				NoWait
+	フツノミタマ	破損						小怺……その理屈はおかしいのです……\nんごぉっ!?
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	1_2
+	カグツチ	通常	2_2
+	ディーア	驚き2						何だ、3000倍って\n何が3000倍なんだ……？
+	カグツチ	通常						<dash=2>感度、だよ
+	ディーア	驚き2						感度が、3000倍……!?\nどういうことなんだ、\n説明してくれカグツチ！
+CharacterOff
+	小怺	怒り
+	小怺	怒り						大おばあさまは黙ってて！\nマスター君、これあげる!!
+CharacterOff
+	ディーア	驚き2	1_2
+	カグツチ	通常	2_2
+StopBgm
+	ディーア	驚き2						これは何だ？\nチョコレート……？
+	カグツチ	通常						それを服してはならんぞ主！\n今このカグツチが説明しよう
+CharacterOff
+	小怺	怒り
+	小怺	怒り						いや！ やめて！\n大おばあさま！
+Bgm	図書館
+CharacterOff
+	ディーア	驚き2	1_2
+	カグツチ	通常	2_2
+	カグツチ	通常						小怺は貴殿に、チョコレートを贈ろうと\n励んでいたのだ\n貴殿に内緒でな
+	ディーア	驚き2						そうだったのか……\n小怺……
+CharacterOff
+	小怺	怒り
+	小怺	怒り						…………
+CharacterOff
+	ディーア	驚き2	1_2
+	カグツチ	通常	2_2
+	カグツチ	通常						だが小怺の霊薬はチョコレートの本家本元\nそれ故にとんでもない霊力を持っておる\n服したものはその霊力にやられるのだ
+	ディーア	驚き2						それが<dash=2>\n3000倍<dash=2>
+	ディーア	怪しい2						フツノミタマ、お前<dash=2>
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	フツノミタマ	<Off>						そんな目で見ないでくださいませ……\nふぐっっ♥
+CharacterOff
+	カグツチ	通常
+	カグツチ	通常						そういうわけだ\n小怺の想いは我にも分からぬでもない\nだが3000倍となれば話は別だ
+	カグツチ	通常						諦めるのだ小怺……\n人の子に感度3000倍は耐えられぬ\n地獄の所業なのだから
+CharacterOff
+	小怺	怒り
+	小怺	怒り						分かってるもん……\n大おばあさま、しょこらさんは\n本当は分かってるもん！
+	小怺	怒り						しょこらさんの作る霊薬は\nみんなが作ってる普通の、素敵な\n可愛いチョコとは違うってことも
+	小怺	怒り						もしかしたら迷惑かもしれないとか\nマスター君を困らせるだけかもとか\nしょこらさんだって思ったんだよ!!
+StopBgm
+	小怺	怒り						でも<dash=2>\nそれでも!!
+Bgm	キノコリオン
+	小怺	怒り						しょこらさんは、\nマスター君に\n本物のチョコをプレゼントしたい！
+CharacterOff
+	カグツチ	通常
+	カグツチ	通常						<dash=2>!!
+CharacterOff
+	小怺	怒り
+	小怺	怒り						ほんとは分かってる……\nしょこらさんの霊薬で\n感度が3000倍になっちゃうことも！
+	小怺	怒り						それでも<dash=2>\nしょこらさんは、マスター君に！\n「本物」を！ 届けたいの!!
+	小怺	怒り						しょこらさんの想いを全部込めた\n「本物」を届けたいの！
+CharacterOff
+	カグツチ	通常
+	カグツチ	笑い						クク……面白い！\n面白いぞ小怺！\nその想い、本物であろうな？
+CharacterOff
+	小怺	怒り
+	小怺	怒り						本物だよっ！\nしょこらさんの想い、\n貫いてみせるんだから！
+Param	character_grayout=false
+CharacterOff
+	オーラ桃		エフェクト裏
+	フツノミタマ	<Off>						二人とも待ちなさいっ……\nその流れは……おかしいっ……
+	フツノミタマ	<Off>						ふぐっっ♥
+CharacterOff
+	カグツチ	通常
+	カグツチ	笑い						ククク！ その意気や良し！\nかかってこい小怺！\nこのカグツチが相手をしてやる！
+CharacterOff
+	小怺	拡大怒り
+	小怺	拡大怒り						負けない！\nしょこらさんの愛は負けないんだから！
+	小怺	拡大怒り						<dash=2>とか、言ってみたりして！
+If	isdebug==true
+CharacterOff
+Jump	*G_511_02
+EndIf
+EndScenario
+
+# G_511_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	キノコリオン
+Bg	酒場_カフェ					0
+Param	character_grayout=false
+	集中線		エフェクト表
+	小怺	怒り
+FadeIn	white					.5
+	小怺	怒り						はああっ!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	酒場_カフェ
+Param	character_grayout=true
+CharacterOff
+	カグツチ	笑い
+	カグツチ	笑い						<dash=2>ほう！
+	カグツチ	笑い						やるではないか、やるではないか！\nこのカグツチ、感心したぞ小怺！
+CharacterOff
+	小怺	怒り
+	小怺	怒り						しょこらさんの、霊薬を<dash=2>\nマスター君に届けるんだもん！
+StopBgm
+CharacterOff
+	カグツチ	笑い
+	カグツチ	笑い						良かろう！
+CharacterOff
+	小怺	怒り
+	小怺	驚き						<dash=2>！
+CharacterOff
+	カグツチ	笑い	3_3
+	小怺	驚き	1_3
+Bgm	結婚
+	カグツチ	笑い						その想い、しかと味わったぞ\nそこまで真摯な心であれば\nこのカグツチ、最早何も言うまい！
+	カグツチ	笑い						その心をしっかりと霊薬にこめろ\nそして主に服させるのだ\nよいな？
+	小怺	驚き						お、大おばあさま！
+	カグツチ	笑い						大きうなったなあ、小怺！\n大おばあさまは満足ぞ！
+Tween	小怺	MoveBy	x=20
+	小怺	笑い						大おばあさま……ありがとう！
+	カグツチ	笑い						おおこれこれ、よさんか\nそうはしゃぐでないぞ
+CharacterOff
+	小怺	通常
+	小怺	通常						しょこらさん、頑張る！\n<dash=2>マスター君！
+Param	character_grayout=false
+CharacterOff
+Bgm	コメディ
+	オーラ桃		エフェクト裏
+	フツノミタマ	破損
+	フツノミタマ	破損						待ちなさい小怺……\nそうはさせません……\nんぅっ!?
+CharacterOff
+	小怺	笑い
+	小怺	笑い						ごめんなさいおばあさま♪\n乙女の気持ちはもう止められないの♪
+	小怺	笑い						とか言ってみたりして♪
+	小怺	通常						マスター君、しょこらさんのチョコ、\n食べてくれる……？
+CharacterOff
+	ディーア	笑い2
+	ディーア	笑い2						ああ、もちろんだ！
+CharacterOff
+	オーラ桃		エフェクト裏
+	フツノミタマ	破損
+	フツノミタマ	破損						ご主人よ……\n感度が3000倍になっても\n構わないのですか……んほぉっ♥
+StopBgm
+CharacterOff
+	ディーア	笑い2
+	ディーア	笑い2						構わないよ\n小怺の本当の気持ちがこもっているなら\n本物でも偽物でも、オレはすごく嬉しいぞ
+	小怺	驚き						……え？\n偽物でも、嬉しいの……？
+	小怺	通常						でもでも、偽物には\n本当の気持ちなんて<dash=2>
+CharacterOff
+	ディーア	笑い2
+Bgm	凱旋
+	ディーア	笑い2						そんなことないぞ、小怺\nお前が心を込めて作れば\nどんなものだってオレには素敵なものだ
+	小怺	通常						そう、なんだ……\nしょこらさんが、心を込めて作れば……
+	小怺	通常						…………
+	小怺	怒り						ねえ、マスター君！\nしょこらさん、本物じゃなくて\nみんなが作ってるやつを作ってみる！
+	小怺	笑い						本物の霊薬じゃなくても、\n心を込めて作って、マスター君に\nプレゼントしてみたいの
+CharacterOff
+	ディーア	笑い2
+	ディーア	笑い2						そうか、小怺\nそれはすごくありがたいぞ
+	ディーア	笑い2						オレだって感度3000倍に\nなりたくないからな
+Bgm	ショッピング
+CharacterOff
+	小怺	笑い
+	小怺	笑い						もう、マスター君ったら！\nうふふ♥
+	カグツチ	笑い						何だ、主はならぬのか\n少し余興が減ったが良かろう！\n天晴れ、天晴れ！
+CharacterOff
+	小怺	笑い
+	小怺	拡大通常						さあ、頑張って作らなきゃ♪\n霊薬じゃないチョコでも\nしょこらさんが一番上手なんだから♪
+	小怺	拡大通常						マスター君もとろーり\nとろけちゃうかもね♥
+	小怺	拡大笑い						……とか、言ってみたりして♥
+CharacterOff
+	ディーア	笑い2
+	ディーア	笑い2						楽しみにしてるぞ
+	小怺	笑い						うんっ！\n楽しみにしてて！
+CharacterOff
+	カグツチ	笑い	2_2					ククク……
+Tween	カグツチ	PunchPosition	x=-50				NoWait
+	カグツチ	笑い						ほれ、なんとか言え妹よ\nつんつん
+CharacterOff
+	オーラ桃		エフェクト裏
+	フツノミタマ	破損	1_2
+Shake	フツノミタマ		x=5 time=1				NoWait
+	フツノミタマ	破損						んぎひぃっ♥
+	フツノミタマ	破損						お、おぼえておきなさいカグツチ……\n絶対に、お、おしおきですからね……!!
+CharacterOff
+	カグツチ	笑い	2_2
+Tween	カグツチ	PunchPosition	x=-50				NoWait
+	カグツチ	笑い						つん
+CharacterOff
+	円フェード		g-090300500
+	オーラ桃		エフェクト裏
+	フツノミタマ	破損	1_2
+Shake	フツノミタマ		x=5 time=1				NoWait
+	フツノミタマ	破損						ひぐうっ!!
+Tween	円フェード	ScaleBy	x=0.1 y=0.1				NoWait
+	フツノミタマ	破損						このぉっ……、\nもういやーーーーっっっ!!
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*G_511_01
+EndIf
+EndScenario
+	フツノミタマ	破損
+	フツノミタマ						NoWait
+	フツノミタマ	破損
+	フツノミタマ						NoWait
+	フツノミタマ	破損
+	フツノミタマ						NoWait

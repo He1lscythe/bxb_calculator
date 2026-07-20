@@ -1,0 +1,1283 @@
+# E_358_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	草原A
+	魔物		2_3_m
+FadeIn	white					.5
+FadeOut	white					.1
+Se	斬1
+FadeIn	white					.1
+Tween	魔物	ShakePosition	x=20				NoWait
+Wait						.5
+Se	敵殺
+Tween	魔物	MoveTo	y=-800 time=1
+FadeOut	black					.5
+CharacterOff
+	ディーア	通常2
+FadeIn	black					.5
+Bgm	平和					1
+	ディーア	通常2						よし、これで最後か……！
+CharacterOff
+	イゾルデ		3_3
+	L.O.V.E.		1_3					ラヴちゃん\nちょっと疲れちゃいましたぁ……
+	イゾルデ							まさかあんなに大きな魔物が\nいるなんて……
+CharacterOff
+	ディーア	通常2						二人ともお疲れ様\n任務も片付いたし、酒場に戻ろう
+	ディーア	嬉しい2						あとはバレンタインの準備を\n手伝うだけだ!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	市街地A
+Bgm	平和
+FadeIn	black					.5
+CharacterOff
+	イゾルデ		3_3
+	L.O.V.E.		1_3					ふふ♪　旦那さま、\nずっと楽しそうですね♪
+CharacterOff
+	ディーア	あはは2						それは二人だって一緒だろ？
+CharacterOff
+	L.O.V.E.		1_3
+	イゾルデ		3_3					当然ですわ♪\nだってもうすぐ<dash=2>
+CharacterOff
+	L.O.V.E.							だってもうすぐバレンタイン！\n恋する乙女にとって\n大切な日ですからっ♪
+	L.O.V.E.							胸の内に秘めた想いを\n美しく飾り付けたチョコレートと共に\n打ち明ける日<dash=2>
+Bgm	コメディ
+	L.O.V.E.	嬉しい						そしてこの私……ラヴちゃんが、\n儚く散っていく失恋の痛みを\nたくさん食べられる日！
+	ディーア	汗2						………………ええ？
+CharacterOff
+Bgm	平和
+	イゾルデ	怒り						……はぁ、これだから……！
+CharacterOff
+	L.O.V.E.	嬉しい						ああっ、あああっ！　ごめんなさい！\nはしたなく失恋を欲しがる醜い肉で\nごめんなさいぃっ！
+CharacterOff
+	イゾルデ	怒り						まったくですわ、迷惑な話です！\nバレンタインは多くの恋が実る\n大事な日なのですよ！
+	ディーア	通常2						……ああ、そうだよな！
+	イゾルデ	通常						イズもとっても\n楽しみにしているんです……
+	イゾルデ							だってバレンタインは<dash=2>
+Bgm	コメディ
+	イゾルデ							失恋の痛みで苦しむ人々を\n私が存分に堪能できる日<dash=2>
+	イゾルデ							誰かの大事な人を奪い取り、\nそして恋した人を他の誰かに奪われる
+	イゾルデ							そんな人々が嘆く姿をより多く、\nより長く楽しむことができる\n素敵な日ですのよ……！
+	ディーア	汗2						…………え、ええ？
+Bgm	平和
+	イゾルデ	怒り						それを、失恋を食べるために\n楽しみにしてるだなんて!!
+	イゾルデ							しかも、情緒もなくパクパクと……\n下品すぎますわ！\n失恋捕食者はこれだから！
+CharacterOff
+	L.O.V.E.	嬉しい						ああ、ごめんなさい！
+	L.O.V.E.	嬉しい						バレンタインじゃなくても\nイズちゃんの傍にいれば、おいしい\n失恋が食べられますもんね……♪
+	イゾルデ	怒り						それが困ると言っているのです！\n恋を奪われた痛みと苦しみは\n私が味わうもの！
+	イゾルデ							あなたに食べさせるために作って\nいるのではないんですのよ!!
+CharacterOff
+	ディーア	驚き2						………………
+CharacterOff
+	イゾルデ	怒り						騎士さまもなんとか言ってください！
+CharacterOff
+	ディーア	本気2						ああ、オレもバレンタインは、\nすっごく楽しみにしてる<dash=2>
+	ディーア	本気2						いや、してた……ん、だけど……
+CharacterOff
+Param	character_grayout=false
+	イゾルデ		3_3
+	L.O.V.E.		1_3
+	L.O.V.E.＆イゾルデ							…………？
+Param	character_grayout=true
+CharacterOff
+StopBgm
+	ディーア	絶望2						バレンタインが、無くなってる……
+CharacterOff
+	イゾルデ		3_3
+	L.O.V.E.		1_3
+Tween	イゾルデ	PunchPosition	y=50				NoWait
+Tween	L.O.V.E.	PunchPosition	y=50				NoWait
+	L.O.V.E.							えっ、ええっ!?
+	イゾルデ							どういうことですの!?
+CharacterOff
+Bgm	絶望
+	ディーア	悔しい2						街中にあった装飾が、\nなくなってるんだ……！
+CharacterOff
+	イゾルデ							……ほんとですわ\n任務に出る前はあんなに\nあったのに……？
+	ディーア	怒り2						チョコレートの店も閉まってるし……\nやけに静かだ……
+	L.O.V.E.	悲しい						ど、どうなってるんでしょう……？
+CharacterOff
+	ディーア	怒り2						なんだかおかしい……\nとにかく、一度酒場に戻るぞ
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	酒場1F
+FadeIn	black					.5
+	リディ	驚き2						あっ、マスター！　大変だよ！\nあのね、なんかみんな\n様子がおかしくて……
+CharacterOff
+	ディーア	悔しい2						やっぱり、ここもか……？
+	L.O.V.E.							街と一緒で、すごく静かですね……
+	イゾルデ							朝はあんなに賑やかだったのに\n……どういうことですの？
+CharacterOff
+	リディ	怒り2						やっぱりこれ\nなんかおかしいよね……？
+	リディ	驚き2						みんな、今年のチョコレートは\n用意しないって、急に言い始めて……
+CharacterOff
+	ディーア	驚き2						え、ええええええ!?\n用意しないって……ええっ!?
+CharacterOff
+	リディ	怒り2						みんな、渡したい人がいないんだって\nだから今年のバレンタインは\n無しになっちゃうかもしれないの……
+CharacterOff
+	ディーア	悔しい2						そ、そんな！ 昨日までみんな\nそわそわしてたのに！\n何かの間違いじゃないのか!?
+	ディーア	絶望2						去年まで、チョコを渡しに来た\n魔剣たちで酒場がいっぱいに\nなってたのに!?
+CharacterOff
+	リディ	怒り2						うーん……みんな急に\n態度が変わっちゃって……
+CharacterOff
+	ディーア	絶望2						オ、オレの毎年の楽しみが……
+CharacterOff
+Bgm	凱旋
+	リディ	笑い2						大丈夫だよマスター\nそんなに落ち込まないで！\nリディはちゃんと準備してるから♪
+CharacterOff
+	ディーア	きらーん2						リ、リディ……！
+CharacterOff
+	リディ	笑い2						えへへ♪　だってリディ、\nバレンタインずっと楽しみに<dash=2>
+StopBgm
+	チョコキノコリオン		画面外_左
+Tween	チョコキノコリオン	MoveTo	x=-90
+Se	光1
+Tween	チョコキノコリオン	PunchPosition	y=50
+Tween	チョコキノコリオン	MoveTo	x=800 time=1
+CharacterOff	チョコキノコリオン
+	リディ	驚き2						あれ……？
+CharacterOff
+	ディーア	本気2						リディ！　大丈夫か!?
+CharacterOff
+Param	character_grayout=false
+	イゾルデ		3_3
+	L.O.V.E.		1_3
+	L.O.V.E.＆イゾルデ							…………!?
+Param	character_grayout=true
+CharacterOff
+	リディ	驚き2						……ずっと楽しみに……楽しみ……\nうーん……えーと、なんだっけ
+CharacterOff
+	ディーア	驚き2						………………え？
+CharacterOff
+	リディ	驚き2						なんでだろう……\n急に熱が冷めちゃった……
+CharacterOff
+	ディーア	驚き2						ええええええ!?
+Bgm	絶望
+	リディ	怒り2						え、なに？\nそんなにチョコレート欲しいの？\nええ……？
+	ディーア	怒り2						リディ、しっかりしてくれ……！
+CharacterOff
+	リディ	通常2						マスター落ち着いて?\nチョコならいつでも食べれるでしょ？
+CharacterOff
+	L.O.V.E.	本気						…………！
+CharacterOff
+	ディーア	絶望2						だってさっきまで\nバレンタインチョコ作るって……！
+CharacterOff
+	リディ	笑い2						バイトが忙しいの忘れてた！\nあーあ、マスターがもっとお金を\n稼いでくれてたらなー？
+	ディーア	絶望2						くぅっ……!!
+	リディ	笑い2						じゃあバイトに戻るね！
+Se	走る
+Tween	リディ	MoveTo	x=800 time=1
+CharacterOff	リディ
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						リディ！\nリディーーーー！！
+	ディーア	絶望2
+Tween	ディーア	MoveTo	y=-400				NoWait
+	ディーア	絶望2						ううっ……チョコが……\nリディからのチョコが……\n貰えない、だと……！
+	ディーア	絶望2						オレはこれから、何を楽しみに生きて\nいけばいいんだ……？
+	L.O.V.E.	嬉しい						はああ♪　心の痛みを感じますっ！\nでも、旦那さまのこれは……失恋？
+	イゾルデ							いいですわぁ♪\n騎士さまの苦しむ顔が\nこんなに近くで見られるなんて♪
+	イゾルデ							……ですが、あの子の様子は変でしたわね\n失恋というより、\n恋する心を忘れたような……
+CharacterOff
+	ディーア	怒り2						そうだ、\nきっとあのキノコリオンが……！\nあれを追いかければ……！
+CharacterOff
+	イゾルデ							ダメですわ……\n動きが速くて\n今から追いかけるのは難しいです
+CharacterOff
+	ディーア	悔しい2						くっ……\n手がかりはないってことか……
+CharacterOff
+	L.O.V.E.							いえ、旦那さま\n手がかりならあります♪
+	ディーア	驚き2						……LOVE？
+Bgm	作戦会議
+	L.O.V.E.	悲しい						あの魔物は皆さんの\n『恋する気持ち』を奪ったんです！\nもう、ずるいですっ！
+	ディーア	驚き2						恋する気持ち……？\nそんなことが分かるのか？
+	L.O.V.E.							ええ、ラヴちゃんはいつも\n失恋の痛みを食べていますからっ♪
+CharacterOff
+	イゾルデ							それでは、さっきのは\n恋心が奪われた結果ですの？
+	L.O.V.E.	悲しい						酒場も街もおかしいのは\nきっとそのせいだと思います……
+CharacterOff
+	ディーア	怒り2						恋が消えて、\nバレンタインに参加する意味も\nなくなったってことか……
+CharacterOff
+	イゾルデ							それは困りますわ！\n恋がなければ、恋を奪い奪われる\n苦しみもなくなってしまいます……！
+CharacterOff
+	ディーア	悔しい2						せめてあのキノコリオンが\nどこにいるか分かれば……！
+CharacterOff
+	イゾルデ							キノコリオンの居場所……\nそうですわ！
+	ディーア	驚き2						なにか策があるのか？
+	イゾルデ							おびき寄せればいいのです♪
+	L.O.V.E.	悲しい						……え？\nでもどうやって……？
+	イゾルデ							一つアイデアがありますの！
+	イゾルデ							そこのゲスラヴさんは、私の周りの\n失恋の痛みを感じ取って、\nどこにいてもやってくるんですのよ
+CharacterOff
+	ディーア	驚き2						そ、そうなのか？
+CharacterOff
+	L.O.V.E.							そうなんです♪\nイズちゃん、\nいつもありがとうございますっ♪
+	イゾルデ	怒り						お礼を言わないでくださる!?
+	イゾルデ	通常						……だから、私たちで\n『恋する気持ち』を餌に、\nあの魔物を呼び寄せるのですわ
+	ディーア	驚き2						それでおびき寄せられるのか……？
+	L.O.V.E.							私だったらすぐに\n飛んで行っちゃいますね！
+	イゾルデ							どうかしら騎士さま♪
+	L.O.V.E.							この時期で『恋する気持ち』なら、\nやっぱりバレンタインですね♪
+CharacterOff
+	ディーア	怒り2						……つまり、三人で\nバレンタインを準備していけば、
+	ディーア							敵をおびき寄せられるかも\nしれないってことか……
+CharacterOff
+	イゾルデ							恋人らしく振る舞うことが\n重要ですわよ
+	L.O.V.E.							雰囲気とシチュエーションも\n大事ですっ♪
+CharacterOff
+	ディーア	通常2						恋する気持ちを演じる、か……
+Bgm	凱旋
+	ディーア	本気2						よし、三人でバレンタインを\n取り戻すぞ！
+CharacterOff
+	イゾルデ							もちろんですわ\n失恋の苦しみを味わうために♪
+	L.O.V.E.	嬉しい						甘酸っぱい失恋を\nたくさん食べるためにぃ♪
+CharacterOff
+	ディーア	きらーん2						バレンタインチョコを\nいっぱい貰うためにー!!
+FadeOut	black					1
+CharacterOff
+Param	character_grayout=false
+	イベントロゴ358フェイクなし		エフェクト裏
+	イベントロゴ358フェイクのみ		エフェクト表
+FadeIn	black					1
+	イベントロゴ358フェイクなし							<speed=0>　　 ハッピーフェイクバレンタイン\n　　　　 あまーい恋の作り方 </speed>
+FadeOut	black					1
+Param	character_grayout=true
+CharacterOff
+	ディーア	汗2
+Bgm	コメディ
+FadeIn	black					1
+	ディーア	汗2						……ん、あれ？\nもしかしてオレ、\n最後にフられるってこと？
+CharacterOff
+	イゾルデ		3_3
+	L.O.V.E.	嬉しい	1_3					旦那さま、そんな今更ぁー♪
+	イゾルデ							何を言ってるんですか♪
+Param	character_grayout=false
+	イゾルデ		3_3
+	L.O.V.E.	嬉しい	1_3
+Tween	イゾルデ	PunchPosition	y=50				NoWait
+Tween	L.O.V.E.	PunchPosition	y=50				NoWait
+	L.O.V.E.＆イゾルデ							当然でしょう♪
+Param	character_grayout=true
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_358_02
+EndIf
+EndScenario
+
+# E_358_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	市街地A
+	L.O.V.E.		2_2
+	ディーア	通常2	1_2
+FadeIn	white					.5
+												LOVE買い物
+	L.O.V.E.	嬉しい						ああ、ごめんなさいごめんなさい！\n本当は魔剣の皆さんは\n旦那さまのことが大好きなのに！
+	L.O.V.E.							私みたいな美少女の形をした肉が、\n恋人役になっちゃって\n本当にごめんなさいぃっ！
+	ディーア	怪しい2						なんかすごく嬉しそうだな……？
+	L.O.V.E.	通常						だって、当日の服選びまで付き合って\nもらえるなんて……！
+	L.O.V.E.	嬉しい						全て解決したらきっと、\nラヴちゃんは皆さんの嫉妬の炎で\n燃やされちゃいますっ♪
+	ディーア	汗2						あー……楽しそうだな？
+	L.O.V.E.							ええ、とてもわくわくしていますっ♪
+	L.O.V.E.							さあ旦那さま！\nラヴちゃんという肉に着せる服を\n選んでください……！
+	ディーア	驚き2						えっ、いや、オレは詳しくないから\nLOVEが好きなものを選んでいいよ
+	L.O.V.E.	嬉しい						ああっそうですよね！　私みたいな、\n他人の失恋を望むゲスの服なんて\n選ぶ価値ないですよね！
+	ディーア	汗2						そこまで言ってないけど……
+	L.O.V.E.							いいんです！\nいくつか見繕ってきますねっ♪
+FadeOut	black					1
+CharacterOff
+	　　　　　　　　　　
+FadeIn	black					1
+	　　　　　　　　　　							\n　　　　　　―数十分後―\n
+CharacterOff
+	ディーア	驚き2						遅いな……何かあったのか……？
+	ディーア	怒り2						まさか、LOVEも\nあのキノコリオンに……!!
+Se	走る
+Tween	ディーア	MoveTo	x=800
+FadeOut	black					.5
+CharacterOff
+	ディーア	怒り2	画面外_左
+Se	走る
+Bg	酒場_商業施設
+FadeIn	black					.5
+Tween	ディーア	MoveTo	x=0
+	ディーア	怒り2						LOVE、ここか!?
+CharacterOff
+	L.O.V.E.	悲しい
+Tween	L.O.V.E.	PunchPosition	y=50				NoWait
+	L.O.V.E.	悲しい						きゃあっ!?
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						あっ、ごめん!!
+	ディーア	にやけ2						時間かかってるみたいだったから……\nちょっと心配になって……\nまさかまだ着替えてるとは……
+CharacterOff
+	L.O.V.E.	嬉しい						はぁぁ、いいんですよ、旦那さま♪\nラヴちゃんはゲスなお肉です♪
+	L.O.V.E.	嬉しい						本当は試着室なんて必要ないくらい\nなんですから♪
+CharacterOff
+	ディーア	汗2						いや試着室は必要だよ……！
+CharacterOff
+	L.O.V.E.	悲しい						でも、困りました……
+CharacterOff
+	ディーア	驚き2						迷ってるのか？\nよく似合ってると思うけど
+CharacterOff
+	L.O.V.E.							ラヴちゃんは美少女の形をした\nお肉ですから、どんな服でも\n着こなすことができるんです……
+	L.O.V.E.							このコートも、ボトムスも……！
+CharacterOff
+	ディーア	通常2						たしかに、どれも似合ってるな
+CharacterOff
+	L.O.V.E.							ええ、だから迷ってしまいます……
+	L.O.V.E.	嬉しい						ああ、貴重な旦那さまの時間を\nラヴちゃんみたいなゲスのために\n使わせて、ごめんなさいっ！
+CharacterOff
+	ディーア	通常2						いや、いいんだ\nみんなのチョコレートを貰うためなら\nこれくらいなんでもないさ
+	ディーア	笑い2						LOVEにぴったりの服が見つかるまで\n付き合うよ
+CharacterOff
+	L.O.V.E.	悲しい						でも、やっぱり決めきれなくて……
+CharacterOff
+	ディーア	驚き2						うーん、そうだな……
+	ディーア	通常2						そういえば、もう何着か試してる\nけど、この服は何回か着てるよな？\nこの色が好きなのか？
+CharacterOff
+	L.O.V.E.							そうですね、情熱的で、それでいて\n甘酸っぱい失恋のような色で、\n私は好きです♪
+CharacterOff
+	ディーア	笑い2						なら、これは決まり
+CharacterOff
+	L.O.V.E.							えっ？
+CharacterOff
+	ディーア	笑い2						この服に、他の服を\n合わせていくって感じでどうだ？\nそれなら決まりそうだろ？
+CharacterOff
+	L.O.V.E.							……はいっ♪\nさすがは旦那さまですっ！\nこれなら決められますっ♪
+	L.O.V.E.	嬉しい						はぁ、きっとたくさんの魔剣ちゃん\nたちの嫉妬を貰っちゃいますね
+	L.O.V.E.	嬉しい						早く恋心を取り戻して、たくさんの\n失恋を味わいたい♪
+CharacterOff
+	ディーア	汗2						……ほどほどにな？
+FadeOut	black					1
+CharacterOff
+Wait						.5
+FadeIn	black					.5
+	ディーア	笑い2						LOVE、決まったか？
+	L.O.V.E.							はい、ありがとうございます♪\nバレンタインの日が楽しみです！
+	L.O.V.E.							旦那さまに選んでもらった服……\nずーっと大事にします♪
+CharacterOff
+	ディーア	笑い2						よし、じゃああとは買うだけ……
+CharacterOff
+StopBgm
+	L.O.V.E.
+	チョコキノコリオン		画面外_左
+Tween	チョコキノコリオン	MoveTo	x=-100
+Se	回避
+Tween	チョコキノコリオン	PunchPosition	y=80
+Se	風1
+Tween	チョコキノコリオン	MoveBy	x=800 time=1				NoWait
+	L.O.V.E.
+Tween	L.O.V.E.	PunchPosition	y=50				NoWait
+	L.O.V.E.							あっ、服がっ!?
+CharacterOff
+Bgm	バトル
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						なっ!?　え？\nちょ、泥棒ー！
+CharacterOff
+	L.O.V.E.	悲しい						旦那さま！\n持っていかれちゃいますっ！
+CharacterOff
+	ディーア	悔しい2						なんで服……!?\n恋心を奪うんじゃないのか？
+CharacterOff
+	L.O.V.E.	悲しい						ああっ！\nちょっと待って！
+CharacterOff
+	ディーア	本気2						とにかく、服を取り返すぞ！
+If	isdebug==true
+CharacterOff
+Jump	*E_358_03
+EndIf
+EndScenario
+
+# E_358_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	酒場の地下
+	L.O.V.E.	嬉しい
+FadeIn	white					.5
+												ＬＯＶＥチョコ作り
+	L.O.V.E.	嬉しい						ああっ、旦那さまっ\nまだ私を恋人役として\n隣においてくれるなんて……！
+	L.O.V.E.	嬉しい						……たくさんの魔剣ちゃんたちの\n嫉妬からの失恋を\n味わえる予感がっ……ああっ！
+CharacterOff
+	ディーア	汗2						そこまではいかないと思うけど……\nあ、よーし、チョコが溶けたぞー
+CharacterOff
+	L.O.V.E.	嬉しい						ああっ！　想像しただけで気持ちよく\nなっちゃってごめんなさい！\nちゃんとお手伝いしますからぁっ！
+	ディーア	笑い2						ありがとな、じゃあ\nそこにある型を取ってくれるか？
+	L.O.V.E.							はい♪　もちろんですっ♪
+CharacterOff
+	ディーア	通常2	1_2
+	L.O.V.E.	嬉しい	2_2					あぁ、旦那さまだけにチョコレートを\n作らせるなんて……私は本当に\n顔がいいだけのお肉♪
+	ディーア	笑い2						そんなことないって、\nちゃんと手伝ってくれてるだろ？
+	L.O.V.E.	悲しい						でも、なかなか\n思ったように上手くいきませんし
+	L.O.V.E.							やっぱり私みたいな醜い肉が\n近くにいると、チョコも美味しく\nならないのかもしれませんっ！
+	ディーア	通常2						大丈夫だ\nとりあえず練習ってことで\n溶かして固めてるだけだしな
+	ディーア	怒り2						味は変わらないけど、いや、\n変わらないのはむしろ問題か？
+	L.O.V.E.	悲しい						可愛い形にはなりますけど、\nこれじゃあ、魔物が来ないんじゃ\nないでしょうか……
+	ディーア	怒り2						うーん……何か工夫が要るか……\nあっ、板チョコなくなった
+	L.O.V.E.	嬉しい						ごめんなさいごめんなさい！\n板チョコを取りに行くのが\nこんなクズなお肉で！
+Se	走る
+Tween	L.O.V.E.	MoveTo	x=800 time=1.5
+	ディーア	汗2						はいはい、ゆっくりで大丈夫だぞー
+FadeOut	black					1
+CharacterOff
+	L.O.V.E.		画面外_右
+FadeIn	black					1
+Se	走る
+Tween	L.O.V.E.	MoveTo	x=0
+	L.O.V.E.							旦那さまっ！\nお待たせして……あっ！
+CharacterOff
+Bgm	絶望
+	ディーア	怒り2	1_2
+	イゾルデ		2_2					ねぇ、騎士さま？\nこんなところで\nのんびりしている場合かしら？
+	イゾルデ							酒場の魔剣たちは\n旦那さまへの気持ちを\n失っただけでしてよ？
+	イゾルデ							それなら、今ごろ\n見ず知らずの魔剣使いが魔剣たちを\n奪っている可能性もありますわ
+	ディーア	怒り2						そ、そんなことは……
+	イゾルデ							ないと言い切れるかしら？
+	イゾルデ							大事な大事な子たちが\nあなたに見せたこともない顔を\n見せているかもしれませんわよ？
+	イゾルデ							ほら、だんだん心配に\nなってきたのではなくて？
+	イゾルデ							もしかしたら、今まさに……♪
+	ディーア	悔しい2						う…………
+CharacterOff
+StopBgm
+	L.O.V.E.							イズちゃん！ ダメですよっ！
+CharacterOff
+Bgm	平和
+	イゾルデ	怒り						はぁ……邪魔しないでくださる？\n失恋暴食天使モドキ……！
+	イゾルデ	怒り						せっかく騎士さまの心が\n揺さぶられて、苦しむ姿を\n見られるところだったのに！
+CharacterOff
+	ディーア	通常2	1_2
+	L.O.V.E.		2_2					心の痛みはもう、ラヴちゃんが\nもぐもぐしちゃいましたよ♪
+	ディーア	通常2						LOVE……！
+	L.O.V.E.	嬉しい						はぁっ……♪\nやっぱりイズちゃんの近くにいると、\nおいしい痛みが食べられますね……
+CharacterOff
+	イゾルデ	怒り						……人をごちそう製造機みたいな目で\n見ないでくださる？
+CharacterOff
+	ディーア	通常2						……そうだ、イゾルデも一緒に\nチョコレート作るか？
+CharacterOff
+	イゾルデ	怒り						やめておきますわ
+	イゾルデ	怒り						ゲスなラヴが一緒にいたら\n私好みの騎士さまの顔は\n見られそうにないですから
+CharacterOff
+	L.O.V.E.							ラヴちゃんは大歓迎ですよっ！
+CharacterOff
+	イゾルデ
+Tween	イゾルデ	PunchPosition	y=50				NoWait
+	イゾルデ	怒り						では!!　失礼しますっ！
+Se	走る
+Tween	イゾルデ	MoveTo	x=800 time=2				NoWait
+FadeOut	black					.5
+CharacterOff
+	ディーア	怒り2	1_2
+	L.O.V.E.	悲しい	2_2
+FadeIn	black					.5
+	ディーア	怒り2						LOVEはイゾルデと\n上手くいかないのか……？
+	L.O.V.E.	悲しい						うーん、私はイズちゃん\n好きなんですけどね？\n私が失恋の痛みを食べちゃうので
+	L.O.V.E.	悲しい						その痛みをずっと\n眺めていたいイズちゃんとは、\nちょっと相性が悪いみたいで……
+	ディーア	通常2						……じゃあ、試しに\nイゾルデに渡すチョコレートを\n作ってみるのはどうだ？
+	L.O.V.E.	通常						イズちゃんに、ですか？
+	ディーア	あはは2						手の込んだチョコは\n今のオレたちじゃ作れないけど
+	ディーア	通常2						気持ちを込めれば\n相手には伝わるはずだから
+	L.O.V.E.							チョコペンでメッセージを\n書くんですね！
+	ディーア	汗2						まぁ、そうだな！
+	L.O.V.E.							私みたいなゲスにチョコを\n貰ったら、イズちゃんに拒否される\n可能性もありますね……！
+	L.O.V.E.	嬉しい
+Tween	L.O.V.E.	ShakePosition	x=20 time=1				NoWait
+	L.O.V.E.	嬉しい						ああ、ああ……♪\nでも拒否されるのも良い……♪
+	ディーア	汗2						興奮するのは分かった！\nだけど少し落ち着かないと……！
+	L.O.V.E.	嬉しい						ああっ、ダメです\n私はメッセージも上手く書けない\nただのお肉なんですっ！
+Tween	ディーア	MoveTo	x=-45				NoWait
+	ディーア	にやけ2						大丈夫だって、ほら\nこうやって持てば震えない……
+StopBgm
+Param	character_grayout=false
+	チョコキノコリオン		画面外_左
+Tween	チョコキノコリオン	MoveTo	x=-180 time=1
+Tween	チョコキノコリオン	PunchPosition	y=100				NoWait
+Se	風1
+Tween	チョコキノコリオン	MoveBy	x=800 time=2				NoWait
+Wait						1
+Param	character_grayout=true
+	L.O.V.E.
+Tween	L.O.V.E.	PunchPosition	y=50				NoWait
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	L.O.V.E.							あっ……！
+	ディーア	驚き2						うわっ！
+Bgm	バトル
+	L.O.V.E.	悲しい						ああっ、材料が……！\n全部取られて……っ！
+	ディーア	怒り2						なんで周りにあるものを\n奪っていくんだ……？
+	L.O.V.E.							旦那さま！\n逃げられちゃいますっ！
+	ディーア	悔しい2						ああもう！\nLOVE、協力してくれ！
+If	isdebug==true
+CharacterOff
+Jump	*E_358_04
+EndIf
+EndScenario
+
+# E_358_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	草原A
+	ディーア	通常2	1_2
+	L.O.V.E.	通常	2_2
+FadeIn	white					.5
+												LOVEデート
+	L.O.V.E.							もうすぐバレンタインですね\n旦那さまっ♪
+	ディーア	汗2						そうだな……相変わらず出てくるのは\nキノコリオンばっかりだけど
+	L.O.V.E.							大丈夫ですよっ！\nもし元凶がいたとしても\nバレンタインは当日が本番ですから♪
+	L.O.V.E.							ああ、でも、ラヴちゃんみたいな\n誰かの失恋を望む醜いお肉じゃ……
+	L.O.V.E.							奪うに値する恋心を装うのは\n無理かもしれませんっ！
+	L.O.V.E.	嬉しい						ああ、ああっ、ごめんなさい\nこんな時でも失恋を望んでいて\nごめんなさいぃっ！
+	ディーア	通常2						そんなに謝らなくていいって\n失恋の痛みを食べるのは\nLOVEが持ってる大事な能力だ
+	ディーア							それに、LOVEなりに\n頑張ってくれてるのは\nよく分かってるし
+	ディーア	あはは2						もっと頑張らないといけないのは\nオレの方かもな\n戦闘でも助けてもらってばかりだから
+	L.O.V.E.	本気						……ラヴちゃんを使ってるんですから\n旦那さまも失恋の痛みを\n少なからず感じていますよね？
+	ディーア	通常2						心配してくれてるのか？\nオレは平気だよ
+	L.O.V.E.							……いえ、もしかして旦那さまも\n痛いの大好きなお肉なのかと思って！\nああ、ごめんなさい！
+	L.O.V.E.	嬉しい						こんな大天使の顔をしただけのゲスな\nお肉と一緒にしてごめんなさいっ！
+	ディーア	驚き2						大天使……か\nLOVEはバレンタインの\n魔剣だって言ってたっけ？
+	L.O.V.E.							そうですっ\nラヴちゃんの名前は略称です♪
+	L.O.V.E.							本当はロード･オブ･ヴァレンタイン･\nエボリューションといって
+	L.O.V.E.							まさに恋の季節にぴったりな\n魔剣なんですよっ♪
+	ディーア	通常2						恋の季節の魔剣か……
+	ディーア	驚き2						それにしては、ちょっと不思議な\nスキルを使うような……
+	L.O.V.E.	通常
+Tween	L.O.V.E.	PunchPosition	y=50				NoWait
+	L.O.V.E.	通常						……！\nそんなことは……あっ！
+	ディーア	驚き2						どうした？
+	L.O.V.E.							まだ足りないものがありましたっ！\nせっかく最後のデートですから\n買い物に付き合ってくださいっ！
+	ディーア	通常2						それはいいけど……\nなにを買うんだ？
+	L.O.V.E.							チョコレートの入れ物ですっ！
+	ディーア	汗2						あっ、忘れてた……\nそういえばまだ買ってなかったな
+	ディーア	笑い2						よし、行こうか
+FadeOut	black					.5
+CharacterOff
+Bg	市街地B
+	ディーア	驚き2	1_2
+FadeIn	black					.5
+	ディーア	驚き2						待っててって言われたけど……\nあっ！　LOVE！
+Se	走る
+	L.O.V.E.		2_2
+Tween	L.O.V.E.	MoveFrom	x=800				NoWait
+	L.O.V.E.							美少女の形をした肉の分際で\n旦那さまをお待たせして\nごめんなさいごめんなさいっ！
+	ディーア	通常2						全然大丈夫だよ\nで、どんなのにしたんだ？
+	L.O.V.E.							当日までのお楽しみです♪\nはあ、ラヴちゃんのお楽しみなんて\n大したものじゃないですけど！
+	ディーア	笑い2						そんなことないって\n楽しみにしてるよ
+	ディーア							そうだ、LOVEが買い物行ってる間に\nこれを買ったんだ
+Tween	ディーア	MoveTo	x=-45
+Tween	ディーア	MoveTo	x=-90				NoWait
+	L.O.V.E.							え、私に、ですか……？
+	ディーア	通常2						この前買った服に似合うと思って
+	L.O.V.E.							あああっ、ありがとうございますっ！\nわぁ、チョーカーじゃないですかぁ♪
+	L.O.V.E.							つまり旦那さまは私を束縛したいと\n思っていて、これを身に着けたら
+	L.O.V.E.							私もまた旦那さまに\n束縛されたいと思っているという\n証になるってことですよねっ
+	L.O.V.E.	嬉しい
+Tween	L.O.V.E.	PunchPosition	y=50				NoWait
+	L.O.V.E.	嬉しい						ああっ、あああっ！　いいです！\nもっと激しいのでもいいんですよっ！\n旦那さまっ♪
+	ディーア	汗2						さすがにそこまでの\n意味はないけど……！\n喜んでくれたならよかった
+	L.O.V.E.	嬉しい						はぁ、はぁぁ……\nつい取り乱してしまいましたっ♪
+	L.O.V.E.							旦那さまっ、明日\n必ずこれを着けていきますっ……！\nこの場所で待っていますね♪
+	L.O.V.E.	嬉しい						ああっ、ゲスなラヴちゃんとの\n約束なんて破ってしまっても\nかまいませんからっ！
+	ディーア	通常2						そんなことしないよ\nちゃんと約束は守るから
+	ディーア	怒り2						あとはその前に……
+CharacterOff
+StopBgm
+	チョコキノコリオン
+Tween	チョコキノコリオン	MoveTo	x=45
+Tween	チョコキノコリオン	MoveBy	x=45
+Se	ポップイン
+Tween	チョコキノコリオン	PunchPosition	y=50
+Se	風1
+Tween	チョコキノコリオン	MoveTo	x=800
+CharacterOff
+Bgm	バトル
+	L.O.V.E.							あれっ、い、いつの間に\nお買い物袋が……!?
+	ディーア	怒り2						LOVEへのプレゼントも\n取り返さないとな！
+If	isdebug==true
+CharacterOff
+Jump	*E_358_05
+EndIf
+EndScenario
+
+# E_358_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	酒場_商業施設
+FadeIn	white					.5
+												イズ買い物
+	イゾルデ	怒り						……騎士さま\n早くしてくださる？
+	ディーア	汗2						えっ、オレ？
+	イゾルデ	怒り						バレンタイン復活のためとはいえ\n既に嫁ぎ先が決まっている私が\n恋人役をやっているのですよ……？
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						ええ!?　そうなのか!?
+	イゾルデ							まぁ、そのままイズのことを\n奪っていただいてもかまわないですが
+	イゾルデ	怒り						とにかく、それっぽい雰囲気作りに\n協力する気はないんですの？
+	ディーア	汗2						いや、バレンタインデート服って\n言われても、どう選べばいいか\n分からないし……
+	イゾルデ	通常						……こちらの服はどうです？\nイズに似合いますか？
+	ディーア	通常2						素敵だと思うよ
+	イゾルデ							……こちらは？
+	ディーア	笑い2						うん、すごくかわいい
+	イゾルデ							……ワンパターンですわね
+	ディーア	汗2						いや、本当に似合ってると思うし……
+	イゾルデ							……そんなことでは、魔剣たちが\nもっと魅力的な男に惹かれて\n離れていくかもしれませんわよ？
+	イゾルデ							私は、心を揺さぶられる\n騎士さまを見られるのなら\nそれでいいのですけれど
+	ディーア	汗2						もっと褒め方を勉強しないと\nまずいってことだな！
+	イゾルデ							そうですねぇ……ふふっ♪
+FadeOut	black					.5
+CharacterOff
+	イゾルデ		2_2
+	ディーア	怒り2	1_2
+Bgm	絶望
+FadeIn	black					.5
+	イゾルデ							そうやって、騎士さまが魅力を\n高めて、もしイズと本物の恋人に\nなったとしたら……
+	イゾルデ							酒場の優しい魔剣たちはどれだけ\n嫌がるかしら♪
+	イゾルデ							はぁ……恋心が奪われていなければ\n今すぐにでもその苦しみの表情を\n見られたのに、残念でなりませんわ
+	ディーア	悔しい2						イゾルデ……
+CharacterOff
+StopBgm
+	L.O.V.E.
+Tween	L.O.V.E.	PunchPosition	y=50				NoWait
+	L.O.V.E.							ぱくっ！　もぐもぐ……
+CharacterOff
+	イゾルデ							なっ、ゲスラヴさん……!?
+CharacterOff
+Bgm	平和
+	L.O.V.E.	嬉しい						はぁ、イズちゃんの近くは\nやっぱり良いですね♪
+CharacterOff
+	イゾルデ	怒り						あなた……また痛みを食べたわね!!
+CharacterOff
+	ディーア	驚き2						LOVE！　どうしてここに!?
+CharacterOff
+	イゾルデ		3_3
+	L.O.V.E.		1_3					イズちゃんはいっつも\n失恋の痛みを分けてくれるので\n実は様子を見てたんです♪
+	イゾルデ	怒り
+Tween	イゾルデ	PunchPosition	y=50				NoWait
+	イゾルデ	怒り						分けてないわよ！　それどころか\nあなたが全部食べてしまうじゃない！\nドＭ暴食肉天使モドキ……！
+	L.O.V.E.							旦那さまを苦しませようとしても\nダメですよ♪\nラヴちゃんが全部食べちゃいますから
+	イゾルデ							これだから失恋イーターは!!
+	L.O.V.E.							それから旦那さまっ！\nイズちゃんは……きっと自分に\n似合う服をよく分かっていますよっ
+CharacterOff
+	ディーア	通常2						えっ？
+CharacterOff
+	イゾルデ	怒り						ちょっと、あなたね……!!
+CharacterOff
+	L.O.V.E.							ああ、ごめんなさいごめんなさい！
+	L.O.V.E.	嬉しい						ラヴちゃんみたいな失恋を食べる\n醜いお肉が、旦那さまに余計なことを\n言っちゃってごめんなさいっ！
+	L.O.V.E.							こんなお肉は\nすぐに帰りますぅっ！
+Se	走る
+Tween	L.O.V.E.	MoveTo	x=800
+CharacterOff
+	ディーア	怪しい2	1_2
+	イゾルデ	怒り	2_2					あの暴食天使モドキ……！
+	ディーア	怪しい2						イゾルデ……もしかして\nオレをからかってただけ……？
+	イゾルデ	通常						…………そんなことは、ありませんわ
+	ディーア	きらーん2						バレンタインのデート服\nもうイゾルデの中では\n決まってるってことだよな？
+	イゾルデ	怒り						……ふ、ふんっ！　当然ですわ！\nイズを奪いたいと思わせるのに\n効果的な服を……
+	ディーア	笑い2						なら、オレにどんなのか\n教えてくれないか？
+	ディーア	にやけ2						イゾルデがオレのことを思いながら\nどんな服を選んだのか知りたいな
+	イゾルデ	通常						そ、それは……\n当日までのお楽しみの方が\n騎士さまも良いのではなくて？
+	ディーア	にやけ2						ああそっか、言われてみれば\n確かにそうかもな
+	ディーア	驚き2						あっ……でも……
+	イゾルデ							なんですの？
+	ディーア	汗2						今イゾルデが持ってた服、\nあいつが持っていったけど……
+CharacterOff
+StopBgm
+	チョコキノコリオン
+Tween	チョコキノコリオン	PunchPosition	y=100
+Se	風1
+Tween	チョコキノコリオン	MoveTo	x=800 time=1				NoWait
+Wait						2
+CharacterOff
+Bgm	バトル
+	イゾルデ							はっ！　い、いつの間にっ!?\nどうして服を……？
+	ディーア	怪しい2						恋心だけを\n狙ってるわけじゃないってことか？
+	イゾルデ							取り返しますわよ！\nあれは買うつもりだった服で……！
+	ディーア	にやけ2						なるほど、あれを着てくるのか！
+	イゾルデ
+Tween	イゾルデ	PunchPosition	y=50				NoWait
+	イゾルデ							はっ！\nい、今のは忘れてくださいっ！
+If	isdebug==true
+CharacterOff
+Jump	*E_358_06
+EndIf
+EndScenario
+
+# E_358_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	酒場の地下
+	イゾルデ
+FadeIn	white					.5
+												イズチョコ作り
+	イゾルデ							敵の意図が分かりませんわ……
+	イゾルデ							特に恋人らしく\n振る舞ったわけでもないのに\n寄ってきたり……
+CharacterOff
+	ディーア	怒り2						恋心を食べるでもなく\n物を奪っていったしな……
+	ディーア	悔しい2						くっ……\n分からないことが多いな……
+CharacterOff
+	イゾルデ							けれど、今のところは、\nバレンタインの準備を進めるしか\n打つ手はなさそうですわね
+CharacterOff
+	ディーア	怒り2						ああ、そうだな……
+CharacterOff
+Bgm	平和
+	イゾルデ							それで、騎士さまのチョコレート作り\nは終わったのかしら？
+CharacterOff
+	ディーア	驚き2						まぁ、溶かして固めるだけなら……
+CharacterOff
+	イゾルデ							フォンダンショコラでも作って\nくださいます？
+	ディーア	汗2						無茶言うなよ!!
+	ディーア	驚き2						というか、なんでオレばっかり\nチョコレート作ってるんだ？
+	ディーア							イゾルデは練習とかしなくて\nいいのか？
+	イゾルデ							もう作り終わっていますわ
+	ディーア	驚き2						えっ早っ!?\n材料買ってきたところしか\n見てなかった!!
+	イゾルデ							ちょうど固めていたところですの
+	イゾルデ							味見したいですか？\nこちらも当日のお楽しみでは\n騎士さま、つまらないでしょう？
+	ディーア	きらーん2						え、食べていいのか？
+	イゾルデ							もちろんですわ♪
+Se	走る
+Tween	イゾルデ	MoveTo	x=800 time=1.5				NoWait
+FadeOut	black					.5
+CharacterOff
+	イゾルデ		画面外_右
+	ディーア	通常2	1_2
+FadeIn	black					.5
+Se	走る
+Tween	イゾルデ	MoveTo	x=180 time=2
+	イゾルデ		3_3_b
+	イゾルデ							それでは騎士さまのチョコレートから\n食べさせてくださいな♪
+	ディーア	驚き2						えっ、オレのから!?\nいいけど、まだちゃんと\n固まってないぞ？
+	イゾルデ							大事なのは気持ちですわ♪\nそれに、味見しないと不安でしょう？
+	ディーア	笑い2						それもそうか……\nはい、どうぞ
+	イゾルデ	怒り						……もう、騎士さま？\n今、私たちは役とはいえ\n恋人同士ですのよ？
+	イゾルデ	通常						ちゃんと食べさせてくださいな♪
+	ディーア	汗2						えーっと、それって……\nはい、あーん……？
+Tween	ディーア	MoveTo	x=-45 time=1.5
+	イゾルデ							あーんむっ♪\nんふふっ、よくできました♪
+	イゾルデ							なるほど、味は普通ですわね！
+	ディーア	怪しい2
+Tween	ディーア	MoveTo	x=-90 time=1.5				NoWait
+	ディーア	怪しい2						本当に溶かして型に入れてただけ\nだからな……
+	イゾルデ							ではイズの番です♪\nはい、あーん♪
+Tween	イゾルデ	MoveTo	x=90 time=1.5
+	ディーア	驚き2						あーん……
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	笑い2						うんっ！\n……おいしい!!
+Tween	イゾルデ	MoveTo	x=180 time=2				NoWait
+	イゾルデ							ふふっ♪\nはぁ……この光景を誰かに見られて\nいたら良かったのに……！
+	イゾルデ							もし街が元通りになって、\nこんな風に騎士さまとチョコレートを\n食べさせ合ったことがバレたら……
+	イゾルデ							二人ともただでは済みませんわね♪
+	ディーア	怒り2						…………イゾルデ
+	イゾルデ							なんでしょう？\nイズに愛想が尽きてしまいましたか？
+	ディーア	怒り2						その、言いにくいんだけど……
+	イゾルデ							ああ、イズって最悪な女だって\nようやく気付きました？
+	ディーア	あはは2						いや、イゾルデのチョコレートも\n固めただけだったよな！
+	イゾルデ							え……ええ？
+	ディーア	あはは2						フォンダンショコラとか言うから\nどんな凄いのが出てくるかと\n思ったけど……
+	イゾルデ	怒り						なっ、なんですの？\n料理ができないとダメだって\n言いたいのかしら!?
+	ディーア	あはは2						違うよ、オレとお揃いだと思って……\nそれに、イゾルデが\nさっき言ってただろ？
+	ディーア	通常2						大事なのは気持ちだって
+	イゾルデ	通常						………………
+	ディーア	通常2						食べたチョコは\nなんだか優しい味がして……\nいつもより美味しかったんだ
+	ディーア	笑い2						……これが、気持ちを込めるって\nことなんだな
+	チョコキノコリオン		画面外_左
+StopBgm
+Tween	チョコキノコリオン	MoveTo	x=-170 time=1
+Se	回避
+Tween	チョコキノコリオン	PunchPosition	y=50
+Se	風1
+Tween	チョコキノコリオン	MoveTo	x=800 time=1.5				NoWait
+	イゾルデ							………………あっ
+Bgm	平和
+	ディーア	にやけ2						これはバレンタイン本番が\nますます楽しみになってきたな！
+	イゾルデ							……楽しみになさるのは\nいいですけれど、\nその前にやることがありますわ
+	ディーア	驚き2						え、やること？
+	イゾルデ							たった今奪われた材料全部を\n取り返すことです！
+CharacterOff
+StopBgm
+	チョコキノコリオン
+Se	ポップイン
+Tween	チョコキノコリオン	PunchPosition	y=50				NoWait
+Tween	チョコキノコリオン	MoveBy	x=90 time=1
+Se	ポップイン
+Tween	チョコキノコリオン	PunchPosition	y=50				NoWait
+Tween	チョコキノコリオン	MoveBy	x=90 time=1
+Se	風1
+Tween	チョコキノコリオン	MoveBy	x=800 time=1
+CharacterOff
+Bgm	バトル
+	ディーア	驚き2						うわっ!?　いつの間に!?
+	イゾルデ							ふふっ、イズに夢中で\n周りが見えなかったのではなくて？
+	イゾルデ							そんなことでは\nすぐに他の魔剣たちにも\n愛想を尽かされますわよ？
+	ディーア	本気2						言ってる場合か！
+If	isdebug==true
+CharacterOff
+Jump	*E_358_07
+EndIf
+EndScenario
+
+# E_358_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	都市
+Bg	市街地A
+	イゾルデ		画面外_右
+FadeIn	white					.5
+Se	走る
+Tween	イゾルデ	MoveTo	x=0 time=1.5									イズデート
+	イゾルデ							お待たせしましたわ、騎士さま
+CharacterOff
+	ディーア	笑い2						イゾルデ、おかえり\n欲しいものは買えたのか？
+CharacterOff
+	ディーア	笑い2	1_2
+	イゾルデ		2_2					ええ、約束の日はもうすぐなのに、\nチョコレートの入れ物がないことを\nすっかり忘れていましたの
+	イゾルデ							もう少しでまた騎士さまのお口に\n直接チョコを入れる展開になる\nところでしたわ
+	イゾルデ							……それを酒場の子たちに\n見せるのも面白そうですけれど♪
+	ディーア	汗2						さすがにあれを\n外でやるのは気まずいな……
+StopBgm
+	ディーア	通常2
+	イゾルデ							ふふっ♪\nその方がデートらしいですわよ？
+Bgm	絶望
+Tween	イゾルデ	MoveBy	x=-10
+	イゾルデ							……けれど、今こうしている間に\n魔剣たちは何をしているのかしら？
+	ディーア	怒り2						………………
+	イゾルデ							あの敵に食べられたのは、\n『騎士さまに対しての恋心』\nだけだとしたら……？
+	イゾルデ							他の人に対しての恋心が、今まさに\n生まれていてもおかしくありませんわ
+	ディーア	怒り2						……オレは、\nその心配はないと思ってる
+	イゾルデ							……騎士さまは\n魔剣たちのことをとっても\n信頼しているんですね
+	ディーア	怒り2						ああ、もちろん、信頼してる
+	イゾルデ							それは魔剣たちも同じなのかしら？
+	ディーア	怒り2						信頼する心は食われてないだろ？
+	イゾルデ							そうですわね♪\nでも<dash=2>
+	イゾルデ							優しい子たちは、\n他の人についていって\nしまう可能性もあるでしょう？
+	ディーア	悔しい2						………………
+	イゾルデ							ああ、とってもいい顔ですわ♪\nもっと苦しそうな顔を見せて下さいな
+	ディーア	怒り2						……イゾルデ
+Tween	イゾルデ	MoveBy	x=10
+	イゾルデ							軽蔑しましたか？　デートしていたのは\nこんな女だったのかって、\n失望しました？
+	イゾルデ							騎士さまも\nこれまでのイズを見ていれば\n分かるでしょう？
+	イゾルデ							イズは最低最悪な女♪\nそれはイズも分かっているんです♪
+	イゾルデ							二度と生まれ変わりませんように……\nいつもそう願っていますし、\nイズに接した人は皆そう思っています
+	イゾルデ							騎士さまも同じでしょう？\nイズのことなんて\n少しも信じられないでしょう？
+	ディーア	怒り2						……イゾルデ
+StopBgm
+	ディーア	通常2
+Tween	ディーア	MoveBy	x=10
+	ディーア	通常2						オレはイゾルデのこと、信じてるよ
+Bgm	凱旋
+	ディーア	通常2						信じてなかったら\nそもそも一緒に戦えないだろ？
+	イゾルデ							………………
+	ディーア	通常2						イゾルデはどう思ってる？
+	イゾルデ							え？
+	ディーア	通常2						イゾルデは\nオレのこと信じられないか？
+	イゾルデ							そんなことは……\nあのゲスラヴさんの様子や\n酒場の魔剣たちの顔を見ていれば
+	イゾルデ							あなたが大きな信頼を得ていることは\n分かりますから
+	ディーア	笑い2						……ありがとう\nそれならオレたちは、ちゃんと\nお互い信頼し合えてるよな
+	ディーア	通常2						今はそれで十分だ
+	イゾルデ							………………
+	ディーア	あはは2						それに、本当に信じてなかったら\n最初からバレンタインの恋人役なんて\n引き受けてくれないよな？
+	ディーア	通常2
+Tween	ディーア	MoveTo	x=-45 time=2
+	イゾルデ
+Tween	イゾルデ	PunchPosition	y=50				NoWait
+	イゾルデ							……………!!\n騎士さま、これは……
+Tween	ディーア	MoveTo	x=-90 time=2				NoWait
+	ディーア	通常2						付き合ってもらったお礼……かな\nイゾルデのあの服に似合うと思って
+	イゾルデ							……ふふっ、残念ですわ\nこんなに良い雰囲気になっているのに\n誰も見ていないなんて……♪
+	ディーア	怪しい2						酒場のみんなに嫉妬させたいのか？
+	イゾルデ							それもありますけど……\nイズは同時に奪われたいと\n思っていますのよ……
+	イゾルデ							騎士さまには酒場の魔剣たちが\nいるように、イズにだって\n嫁ぎ先がありますの……
+	イゾルデ							騎士さまなら……このままイズを\n奪ってしまっても、かまわなくてよ？
+Param	character_grayout=false
+	ディーア	怪しい2						<speed=0> </speed>	BrPage
+StopBgm
+	チョコキノコリオン		画面外_左
+Tween	チョコキノコリオン	MoveTo	x=-180 time=1.5
+Se	風1
+Tween	チョコキノコリオン	MoveBy	x=800 time=1
+CharacterOff	チョコキノコリオン
+	イゾルデ		2_2
+	ディーア	驚き2	1_2
+Param	character_grayout=true
+	イゾルデ							え？
+	ディーア	驚き2						あ……
+	イゾルデ							……奪われましたわ……
+	ディーア	怪しい2						……奪われたな……
+Bgm	バトル
+	イゾルデ
+Tween	イゾルデ	PunchPosition	y=50				NoWait
+	イゾルデ	怒り						かまわないとは言いましたが、\n持ち物の話ではなくてよ!?
+	ディーア	あはは2						大丈夫だって、今までみたいに\n取り返せば解決だろ？
+	イゾルデ	通常						今すぐに取り返しますわ、騎士さま！\nさぁ、手を取って！
+	ディーア	通常2						ああ、行こう！　イゾルデ！
+If	isdebug==true
+CharacterOff
+Jump	*E_358_08
+EndIf
+EndScenario
+
+# E_358_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	凱旋
+Bg	市街地B
+	　　　　　　　　　　
+FadeIn	white					.5
+												LOVEBG
+	　　　　　　　　　　							\n　　　　　　―約束の日―\n
+FadeOut	white					.5
+CharacterOff
+	L.O.V.E.	<Off>
+FadeIn	white					.5
+	L.O.V.E.	<Off>						<color=blue>これは失恋の痛みとは違う<dash=2></color>
+	L.O.V.E.	<Off>						<color=blue>最初は、そんな曖昧な感覚でした</color>
+	L.O.V.E.	<Off>						<color=blue>けれど<dash=2>\n旦那さまとお話して、触れ合って、\nたくさんたくさん言葉をもらう内に</color>
+	L.O.V.E.	<Off>						<color=blue>この胸の痛みの正体がなんなのか\n分かった気がするんです</color>
+	L.O.V.E.	<Off>						<color=blue>これはとても小さい<dash=2>\n本当に小さい気持ちですが</color>
+	L.O.V.E.	<Off>						<color=blue>こんな優しい痛みもいいな、と\n思ってしまったりするのです<dash=2></color>
+	ディーア	汗2						LOVE、待たせてごめんな！
+	L.O.V.E.	<Off>						いいえ、全然大丈夫ですよ♪
+	L.O.V.E.	<Off>						……本当は30分くらい\n待っていたんですけどっ♪
+	L.O.V.E.	<Off>						<color=blue><dash=2>つい、そんな嘘を\nつきたくなってしまうんです</color>
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						えっ!?\nオレ、そんなに遅れた!?\nごめん!!
+	L.O.V.E.	<Off>						<color=blue>ああ、こんな私のために\nそんなに慌ててくれるなんて<dash=2></color>
+	L.O.V.E.	<Off>						大丈夫です\n本当はそんなに待ってませんよ♪
+	ディーア	あはは2
+	L.O.V.E.	<Off>						旦那さま……どうか……\nこれを受け取ってくださいっ！
+FadeOut	white					2
+Param	character_grayout=false
+	カバー上部		カバー
+	L.O.V.E.	拡大	エフェクト下部
+FadeIn	white					2
+	L.O.V.E.							ラヴちゃんからの気持ちを\nたくさん込めました♪
+Tween	L.O.V.E.	MoveTo	y=-700 time=4				NoWait
+Wait						1.5
+	L.O.V.E.							もし、旦那さまがこれを持ったまま、\n皆が恋心を取り戻したなら……
+	L.O.V.E.							あああっ！　想像するだけで……\n気持ちよくなってしまいますっ♪\nああっ、こんな時までごめんなさい！
+	L.O.V.E.							ラヴちゃんみたいな醜い肉を\nそばに置いてくださって\nありがとうございます、旦那さま♪
+	L.O.V.E.							どうかこれからも\nおいしい失恋を\n食べさせてくださいね……♪
+FadeOut	white					1
+Wait						.5
+Se	ラブ
+If	isdebug==true
+CharacterOff
+Jump	*E_358_09
+EndIf
+EndScenario
+
+# E_358_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	凱旋
+Bg	市街地A
+FadeIn	white					.5
+												イズＢＧ
+	　　　　　　　　　　							\n　　　　　　―約束の日―\n
+FadeOut	white					.5
+CharacterOff
+	イゾルデ	<Off>
+FadeIn	white					.5
+	イゾルデ	<Off>						<color=blue>自分が誰かのものになったなら\n奪われたいと思う</color>
+	イゾルデ	<Off>						<color=blue>誰かが誰かのものになったら\n奪いたいと思う</color>
+	イゾルデ	<Off>						<color=blue>それが私にとっての『普通』で<dash=2></color>
+	イゾルデ	<Off>						<color=blue>しかしそれは、\n他人にとっての最悪最低だと\nちゃんと分かっていました</color>
+	イゾルデ	<Off>						<color=blue>けれど<dash=2></color>
+	イゾルデ	<Off>						<color=blue>騎士さまはそんな私を\n信じていると言うのです</color>
+	イゾルデ	<Off>						<color=blue>信じて、私の手を取ってくれるのです</color>
+	イゾルデ	<Off>						<color=blue>ああ、もしかしたら私の『普通』は、\nこれからほんの少し\n形を変えるのかもしれません<dash=2></color>
+	ディーア	通常2						イゾルデ、待たせたか？
+	イゾルデ	<Off>						危ないですわ、騎士さま\nもう少し遅かったら、\nイズは別の殿方にこれを……
+	ディーア
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						えっ!?
+	イゾルデ	<Off>						ふふっ、少し焦ってもらえたかしら？
+	ディーア	汗2
+	イゾルデ	<Off>						<color=blue>本当は他に渡す相手など\nいないのですけれど</color>
+	ディーア	汗2						ごめん、こんな大事な日に……
+	イゾルデ	<Off>						別にいいですわ\nその代わり、また私とこうして\n会ってくださるかしら？
+	ディーア	笑い2						ああ、もちろん
+	イゾルデ	<Off>						<color=blue>ああ、この人は\n今日という日と同じように</color>
+	イゾルデ	<Off>						<color=blue>最低最悪な私との約束でも\nきっとちゃんと守ってくれる<dash=2></color>
+FadeOut	white					2
+CharacterOff
+Param	character_grayout=false
+	カバー上部		カバー
+	イゾルデ	拡大	エフェクト下部
+FadeIn	white					2
+	イゾルデ							はい、騎士さま\n約束のチョコですわ♪
+Tween	イゾルデ	MoveTo	y=-600 time=4				NoWait
+Wait						1.5
+	イゾルデ							これで全てが解決したなら\n他の魔剣たちの失恋は確定的<dash=2>
+	イゾルデ							ふふっ、騎士さまの苦しむ顔も\n存分に見られそうですわね♪
+	イゾルデ							楽しみにしていますわ♪\nじっくりと味わって\n食べてくださいね、騎士さま♪
+FadeOut	white					1
+Wait						.5
+Se	ラブ
+If	isdebug==true
+CharacterOff
+Jump	*E_358_10
+EndIf
+EndScenario
+
+# E_358_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	ボスバトル
+Bg	塩湖
+	恋を奪うもの
+FadeIn	white					.5
+												ED
+	恋を奪うもの							………………!!
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+Se	ボス殺
+Tween	恋を奪うもの	ShakePosition	x=20
+Se	倒れる
+Tween	恋を奪うもの	MoveTo	y=-1000 time=2				NoWait
+Wait						1.5
+FadeOut	black					.5
+CharacterOff
+	ディーア	本気2
+StopBgm
+FadeIn	black					.3
+	ディーア	本気2						二人とも大丈夫か……？
+CharacterOff
+Bgm	凱旋
+	L.O.V.E.		1_3
+	イゾルデ		3_3					今のが、元凶だったのですか？
+	L.O.V.E.							多分、そうだと思います
+	L.O.V.E.							私が食べている失恋の痛みを\nもっとずっと濁らせて\n固めたような……
+	L.O.V.E.	嬉しい						ああ、とても濃厚な痛みでしたぁ……\nおいしくいただきました♪
+CharacterOff
+	ディーア	怒り2						失恋の痛みの塊……\n怨念の集合体ってところか……
+CharacterOff
+	L.O.V.E.		1_3
+	イゾルデ		3_3					それなら、恋を奪っていたのも\n納得ですわ
+CharacterOff
+	ディーア	怪しい2						ああ、恋の気持ちがなければ、\nそもそも失恋も存在しないからな
+CharacterOff
+	イゾルデ		3_3
+	L.O.V.E.		1_3					勝手に恋の気持ちを\n奪うなんてダメですっ！
+	イゾルデ	怒り						失恋を食べるドＭ天使モドキが\n何を言ってるのかしら？
+	L.O.V.E.
+Tween	L.O.V.E.	PunchPosition	y=50				NoWait
+	L.O.V.E.							ラヴちゃんのは別にいいんですっ♪
+	イゾルデ	通常						全く、調子がいいですわね……\nとにかく、元凶がいなくなったのなら\n街は元通りになるのではなくて？
+CharacterOff
+	ディーア	通常2						そうだな！\n酒場に戻ってみるか……
+	ディーア	通常2						あっ、そうだ、二人とも
+CharacterOff
+Param	character_grayout=false
+	イゾルデ		3_3
+	L.O.V.E.		1_3
+	L.O.V.E.＆イゾルデ							…………？
+Param	character_grayout=true
+CharacterOff
+	ディーア	笑い2						チョコレート\n本当にありがとな\n大事に食べるよ
+CharacterOff
+Param	character_grayout=false
+	イゾルデ		3_3
+	L.O.V.E.		1_3
+Se	ラブ
+Tween	イゾルデ	PunchPosition	y=50				NoWait
+Tween	L.O.V.E.	PunchPosition	y=50				NoWait
+	L.O.V.E.＆イゾルデ							………………！
+	L.O.V.E.＆イゾルデ							………………\n………………\n………………うん
+Param	character_grayout=true
+FadeOut	white					1.5
+CharacterOff
+	　　　　　　　　　　
+Bg	酒場1F
+Bgm	平和
+	ディーア	驚き2
+FadeIn	white					2
+	ディーア	驚き2						…………!!
+CharacterOff
+	リディ	通常2						あ、三人とも帰ってきた！\nどこに行ってたの？
+CharacterOff
+	リディ	通常2	2_2
+	ディーア	本気2	1_2					リディ、バレンタインは!?
+	リディ	笑い2						もちろんやるよ！
+	ディーア	きらーん2						や……やったー！
+	ディーア	にやけ2
+	リディ	怒り2						でも、何故かみんなついさっきまで\nやる気がなくなってて……\n今慌てて準備してるところなの！
+	リディ	怒り2						リディ、材料の買い足しに\n行ってくるね！
+	ディーア	笑い2						ああ、いってらっしゃい
+Se	走る
+Tween	リディ	MoveTo	x=800 time=2				NoWait
+FadeOut	black					.5
+CharacterOff
+	ディーア	嬉しい2
+FadeIn	black					.5
+	ディーア	嬉しい2						はぁ、良かった！
+CharacterOff
+	L.O.V.E.							街の様子も元通りに\nなってきましたねぇ♪
+CharacterOff
+	ディーア	嬉しい2						ああ、二人のおかげだよ\n本当にありがとう！
+	ディーア	にやけ2						これで今年も\nチョコがたくさんもらえる……！
+CharacterOff
+Bgm	コメディ
+	イゾルデ							あら、騎士さま\n今年はもうイズのチョコレートを\n受け取ったじゃありませんか？
+CharacterOff
+	ディーア	驚き2						えっ
+CharacterOff
+	L.O.V.E.	嬉しい						はぁ、ラヴちゃんのチョコレートを\n受け取った時の旦那さまの顔……\n酒場の皆さんにも見てもらいた……
+CharacterOff
+	ディーア	悔しい2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	悔しい2						しーっ！\nちょっ、声が大きいぞ二人とも！
+CharacterOff
+	イゾルデ							何を慌てているの？\nさぁ騎士さま、約束通り\nイズを奪ってくださいな♪
+CharacterOff
+	L.O.V.E.							イズちゃんもいつもより\n嬉しそうですよね♪
+CharacterOff
+	イゾルデ	怒り						なっ！ そんなことはありませんわ！\nゲスラヴさんは黙って離れて\n断食なさっていてもらえるかしら？
+CharacterOff
+	ディーア	汗2						ちょ、二人とも……！
+CharacterOff
+	L.O.V.E.							断食なんてできません♪\nイズちゃんの周りはおいしい失恋で\n満ちていますからっ♪
+CharacterOff
+	イゾルデ							……ゲスラヴさんは、<ruby=・・・>本当は</ruby>\n騎士さまのそばに\nいたいんですよねぇ？
+	イゾルデ							さっきから騎士さまとの距離が\nやけに近いですわよ
+CharacterOff
+	L.O.V.E.							…………！\nほ、本当ですかっ？\nああっ、ごめんなさい！
+	L.O.V.E.	嬉しい						美少女の形をしただけの肉が、\n旦那さまの一番近くにいて\nごめんなさいっ！
+CharacterOff
+	ディーア	汗2						二人とも一回落ち着けってば！
+CharacterOff
+	イゾルデ							……そもそも、騎士さまは本当に\n魔剣たちからチョコを貰いたい\nのかしら？
+CharacterOff
+	ディーア	本気2						も、もらいたいに決まってるだろ！
+CharacterOff
+	イゾルデ							でしたら……\nもう少し努力が必要だと思いますわ
+CharacterOff
+	ディーア	驚き2						えっ？
+CharacterOff
+	イゾルデ							魔剣たちがチョコレートを\n渡したいと思えるような\n騎士さまになる必要がありますわ
+	イゾルデ							実際に騎士さまとデートした私が\n言うのだから、間違いありません♪
+CharacterOff
+	ディーア	汗2						声が大きいって！
+CharacterOff
+	L.O.V.E.							ラヴちゃんも、\n旦那さまとチョコレートを作ってみて\n分かりました
+	L.O.V.E.							旦那さまの頑張りしだいで\nもっとバレンタインを盛り上げて
+	L.O.V.E.	嬉しい						もっともっと恋を増やすことが\nできると思うのですっ♪
+CharacterOff
+	ディーア	汗2						分かった！\n分かったからLOVEも声を抑えてくれ！
+CharacterOff
+	イゾルデ							ふふ、やる気になってくださって\nなによりですわ♪
+FadeOut	black					.3
+	ディーア	汗2	2_3
+	イゾルデ		画面外_右
+FadeIn	black					.3
+Tween	イゾルデ	MoveTo	x=180 time=1				NoWait
+	イゾルデ							がんばってくださいね\nイズがたくさん失恋の苦しみを\n味わえるように……♪
+CharacterOff
+	L.O.V.E.							ラヴちゃんも、旦那さまに\nはしたなくおねだりしても、\nいいですか……？
+FadeOut	black					.3
+	ディーア	絶望2	2_3
+	イゾルデ		3_3
+	L.O.V.E.		画面外_左
+FadeIn	black					.3
+Tween	L.O.V.E.	MoveTo	x=-180 z=120 time=1				NoWait
+	L.O.V.E.							ああ、どうか\n甘酸っぱい失恋をたくさんください♪
+	ディーア	汗2
+Tween	ディーア	ShakePosition	x=10 time=1				NoWait
+	ディーア	汗2						えーっと……
+Param	character_grayout=false
+	イゾルデ		3_3
+	L.O.V.E.		1_3
+Tween	イゾルデ	PunchPosition	y=50				NoWait
+Tween	L.O.V.E.	PunchPosition	y=50				NoWait
+	L.O.V.E.＆イゾルデ							失恋ください!!!!
+Param	character_grayout=true
+	ディーア	絶望2						うわああああああ
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=1				NoWait
+	L.O.V.E.							あっ！ 旦那さまっ！
+	イゾルデ							お待ちなさいっ！
+Se	走る
+Tween	L.O.V.E.	MoveTo	x=-800 time=1.5				NoWait
+Se	走る
+Wait						.3
+Tween	イゾルデ	MoveTo	x=-800 time=1.5				NoWait
+FadeOut	black					.5
+CharacterOff
+Param	character_grayout=false
+	ディーア	本気2	画面外_左
+	イゾルデ	<Off>	1_3
+	L.O.V.E.	<Off>	3_3
+FadeIn	black					.5
+	イゾルデ	<Off>						逃げても無駄ですわよ♪
+	L.O.V.E.	<Off>						待ってくださーいっ♪
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=1.5
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						ちょっ!!\n追いかけてくるなー!!
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=2				NoWait
+FadeOut	white					.5
+CharacterOff
+	イベントロゴ358フェイクなし		エフェクト裏
+	イベントロゴ358フェイクのみ		エフェクト表
+Wait						.5
+FadeIn	white					.5
+Wait						1
+Se	火事
+Shake	イベントロゴ358フェイクのみ		x=10 y=0				NoWait
+Wait						.9
+StopSe
+Se	ポップアウト						NoWait
+Tween	イベントロゴ358フェイクのみ	RotateAdd	z=10 time=4				NoWait
+Tween	イベントロゴ358フェイクのみ	MoveBy	y=-800 time=2				NoWait
+Wait						1.5
+Se	アイテムドロップ
+Wait						1
+	　　　　　　　　　　							\n\n　　　　　　　　　　　　―完―
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_358_01
+EndIf
+EndScenario

@@ -1,0 +1,6358 @@
+# Q1009_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	酒場_宿屋
+FadeIn	black					2
+Wait						1
+	リディ	黒2						<size=20>すぅ、すぅ……</size>
+	黒グラデーション		エフェクト表
+	ディーア	怒り2						…………
+Param	character_grayout=false
+CharacterOff
+Wait						1
+Se	フォーン
+	オーラ青		エフェクト表			.5
+Wait						.5
+CharacterOff						.5
+Wait						1
+Param	character_grayout=true
+	モモ	冷徹				.5
+Wait						.5
+	モモ							まだ、目覚めないんだね
+CharacterOff
+	ディーア	怒り2						…………モモ
+CharacterOff
+	モモ							そう警戒しないでくれ\n彼女の顔を見に来ただけさ
+	モモ	冷徹						……魔剣殺しブリジットの力を\n使ったんだろう？
+CharacterOff
+	ディーア	怒り2						……力を少し借りただけだ
+	ディーア							結局、オレはリディを\nアンロックすることができなかった
+Se	回想
+FadeOut	white					.5
+Bg	山岳B2					0
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Param	character_grayout=false
+	オーラ赤		エフェクト表			1
+	リディ	暴走2
+Shake	Graphics		x=5 y=5 time=3				NoWait
+FadeIn	white					.5
+Bgm	緊迫
+	リディ	暴走2						<dash=2>ぁ、ああ……ッ!!
+	ディーア	悔しい3						くっ……やはりダメなのか……ッ!?
+	ディーア	本気3						《<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>》、\n《<ruby=ワールドイズマイン>愚かなる卑怯者の鍵</ruby>》……ッ!!
+Se	光2
+FadeOut	white					.2
+CharacterOff
+	ディーア	悔しい天使2				0
+FadeIn	white					.2
+Wait						1
+	リディ	暴走2						……っ、ますたー……
+	リディ							ますたーを、まもらなきゃ……\nますたー……を……ッ!!
+	ディーア	悔しい天使2						あと少しだけ……がんばれ、\nリディ……!!
+FadeOut	white					.3
+Se	剣閃
+StopBgm
+Wait						2
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	black					0
+Se	強風	TRUE
+	醜き		エフェクト表					…………これまでか
+	醜き		エフェクト表					<dash=2>醜き獣、そして偽りの契約\nなるほど、その首輪は\nかの魔鍵に繋がれているというわけか
+CharacterOff
+	ディーア	悔しい3						……なに？
+CharacterOff
+	狡猾		エフェクト表					あぁ、あの女も\n姑息なことをするものだ
+	偽り		エフェクト表					さらばだ、偽りの同胞……\n否、偽りであるのは\n我らの方であったか
+CharacterOff
+	ディーア	本気3						待て、まだ<dash=2>!!
+CharacterOff
+Param	character_grayout=false
+	オーラ光		エフェクト表			.5
+	三天使		エフェクト裏
+Wait						1
+FadeOut	white					.3
+Se	光1
+CharacterOff	三天使					0
+Wait						.5
+FadeIn	white					1
+Wait						.3
+CharacterOff						1
+Wait						2
+StopSe						1
+	ディーア	悔しい3						……魔鍵、ユグドラシル\nやはりそうか……
+	リディ	悲しい2						……ます、たー
+	リディ							…………やった、の？
+Wait						.3
+Tween	リディ	MoveBy	y=-100 time=2				NoWait
+Wait						.5
+Se	倒れる
+CharacterOff						1
+Wait						1.5
+	ディーア	本気3						リディ!!
+	ディーア	悔しい3						大丈夫か、リディ？
+CharacterOff
+	リディ	笑い2
+	リディ							うん……\nえへへ、ちょっと\n疲れちゃったみたい……
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	　　　　　　　　　　
+Bg	酒場_宿屋					0
+Wait						2
+Bgm	図書館
+	モモ					0
+FadeIn	white					.3
+	モモ	冷徹						……そうか\nそんなことがあったんだね
+	黒グラデーション		エフェクト表
+	モモ							ヘルメリア、君は……
+CharacterOff
+	ディーア	怒り2						オレはブリジットを\nアンロックできない
+	ディーア							……いや、正確には"不完全な\n状態でしか"アンロックできない
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia				0
+	7章BG1		エフェクト表			0
+FadeIn	white					.3
+	ディーア	<Off>						……もしリディの魔力が、\n魔鍵ユグドラシルから\n供給されているのだとしたら
+	ディーア	<Off>						リディの力を使う度に、\n彼女が暴走するのは<dash=2>
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	black					.3
+	ディーア	悔しい2						モモ、お前……\nなにか知っているんだろう？
+	モモ							……さあね？
+	モモ							ボクはおそらく、\n君が望む答えは持っていないよ
+	モモ							きっと"彼女"が拒絶しているのさ\n……そういう仕組みなんだよ
+	モモ	冷徹						……だが、\n彼女がマスターと呼ぶのは君一人だ
+	モモ							そういうことさ
+	ディーア	怒り2						…………
+	モモ							それじゃあ、ボクはこれでお暇するよ
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			.5
+Wait						1
+	モモ							ああ、そうだ<dash=2>\nキミにも一つ、\n聞いておきたいことがあるんだった
+CharacterOff
+	ディーア	怒り2
+	モモ	<Off>						<param=name>……\nキミは、魔王候補十三王になり、\nそして魔界を統べる魔王になり
+StopBgm
+	黒背景		エフェクト表			0
+	モモ							……その果てに、\n一体どんな未来を望むんだい？
+FadeOut	black					0
+Param	character_grayout=true
+CharacterOff
+Wait						2
+	オーラ青		エフェクト表			0
+FadeIn	black					.5
+CharacterOff						.5
+Wait						1
+	黒グラデーション		エフェクト表
+	ディーア	怒り2						…………
+Se	回想
+FadeOut	white					.5
+Bg	研究所A					0
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	怒り2	1_2			0
+	リディ	怒り2	2_2			0
+FadeIn	white					.5
+	リディ	怒り2						マスター！
+	ディーア	怒り2						分かってるさ、リディ\n……ここは危ないから、下がってろ
+FadeOut	white					.3
+Bg	魔術空間					0
+CharacterOff						0
+	リディ	怒り2	2_2
+	ディーア	悔しい2	1_2
+FadeIn	white					.3
+	ディーア	悔しい2						リディ、今は下がってろ！\nまだ戦いは終わっていない！
+CharacterOff
+	太陽剣ソエル							そうね、それが賢明な判断よ\n<color=mk2impo>「魔鍵使い」</color>……\n今は、ね
+FadeOut	white					.3
+CharacterOff						0
+Bg	山岳B2					0
+	　　　　　　　　　　
+FadeIn	white					.3
+	リディ	怒り2						……ねえ、マスター
+	リディ							<dash=2>リディ、\nもう下がってなくていいよね
+	ディーア	怒り2						ああ、もちろんだ
+FadeOut	white					.5
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	　　　　　　　　　　
+Bg	酒場_宿屋					0
+Wait						.5
+FadeIn	white					.5
+	ディーア	怒り2						…………リディ
+	黒背景		エフェクト表			0
+	ディーア							これで、良かったんだよな……？
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_02
+EndIf
+EndScenario
+
+# Q1009_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	黒背景
+Param	character_grayout=false
+FadeIn	black					.5
+Wait						.5
+Se	時計の針
+	8章スチルK		エフェクト表			0
+	※※※※	<Off>						<dash=2>天蓋より来たりし三天使
+	※※※※	<Off>						聖鍵セフィロトをアンロックするに\nあたって最も大きな障害となるのが\n奴らの存在だ
+Se	時計の針
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	大灯台B					0
+	太陽王アーク					0
+	※※※※	<Off>						太陽聖域はまだ動かない
+	※※※※	<Off>						彼らは天穹魔儀ヘリオスフィアを\n完成させるまでは、\n己の身の安全を取るだろう
+CharacterOff						0
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	GrayScale
+Se	時計の針
+Bg	魔術空間					0
+	黒グラデーション		エフェクト裏			0
+	ディーア	怒り2				0		つまり、オレが三天使を倒すしかない
+	※※※※	<Off>						そうだ
+	ディーア	悔しい2						だけど、どうやって<dash=2>
+	※※※※	<Off>						ブリジットを使えばいい
+	ディーア	怒り2						……正気か？
+	※※※※	<Off>						もちろんだとも
+	※※※※	<Off>						キミならわかるだろう？
+Se	時計の針
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+Bg	山岳B2					0
+	8章スチルD					0
+	天使					0
+	※※※※	<Off>						天使は人と魔剣を\nかけ合わせて作られている
+	※※※※	<Off>						彼らが有する魔核機関は、\n魔剣のものと何ら変わりはない
+Se	時計の針
+CharacterOff						0
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	GrayScale
+	黒グラデーション		エフェクト裏			0
+Bg	魔術空間					0
+	ディーア	怒り2				0		…………
+	※※※※	<Off>						彼女を守りたいのだろう？
+	※※※※	<Off>						簡単なことさ\nこの先、キミに待ち受けている\n運命に比べれば、ね
+Se	スローモーションエンド
+Wait						1.6
+StopBgm
+FadeOut	black					0
+Bg	酒場_宿屋
+CharacterOff
+	　　　　　　　　　　
+Wait						3
+FadeIn	black					.5
+	魔導王ユウ	通常						……<param=name>ちゃん
+	ディーア	驚き2						……ッ!!
+	ディーア	怒り2						……魔導王
+	魔導王ユウ	ニヤリ						迷っているのかい？\nらしくないね、<param=name>ちゃん
+	ディーア	怒り2						……そうかもしれないですね
+Bgm	図書館
+	魔導王ユウ	笑い						まあ、魔剣機関としてもキミに\n無理を言っているのはわかっているさ
+	魔導王ユウ	通常						キミやリディだけでなく、\n魔界全体の命運が懸かっているんだ
+	魔導王ユウ							キミにかかる重圧は、\n想像を絶することだろう
+	ディーア	怒り2						…………
+	魔導王ユウ	通常						別に迷うのは悪いことじゃない\nそれはキミが視野を広く持てている\n証拠だからね
+	魔導王ユウ							だから、迷っているのであれば、\n存分に迷えばいいさ
+	魔導王ユウ	ニヤリ						……だが、キミは本当は\n迷ってなんかいない\nそうだろう？
+	ディーア	驚き2						…………！
+	魔導王ユウ	ニヤリ						キミは今、何をするべきかを\n理解していて、\nこれから何をするかも決めている
+	魔導王ユウ							違うかい？
+	ディーア	悔しい2						……そうなのかも、しれません
+	魔導王ユウ	笑い						ならば
+	魔導王ユウ	通常						魔王候補十三王の一人として、\nそして魔剣機関局長として、\n改めてキミに問おう
+	魔導王ユウ							キミは魔王になった暁に、何を望む？
+	ディーア	怒り2						オレが魔王として望むもの……
+	ディーア							それは<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+Bg	戦場跡					0
+	モモ					0
+	　　　　　　　　　　		1_2
+FadeIn	white					.3
+Wait						.8
+CharacterOff						0
+Bg	チュートリアルスチル2					0
+Wait						1
+	7章BG1		エフェクト表			0
+Wait						1
+	8章BG		エフェクト表			0
+Tween	8章BG	MoveBy	y=-500 time=2	linear			NoWait
+Wait						1
+	白背景		エフェクト表2			1
+	モモ							……その果てに、\nキミはどんな未来を望むんだい？
+ImageEffectOff	SpriteCamera	Sepia				.5
+Wait						.5
+	ディーア	怒り2						<dash=2>オレは
+	ディーア							リディが\n平和に生きていける世界を
+	ディーア							彼女が危険に晒されることなく、\nそして誰からも奪い合われることなく
+	ディーア							平和に、穏やかに\n生きていくことのできる世界を
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	怒り2				0		……オレは、望みます
+	魔導王ユウ	ニヤリ						いいね\nいかにも魔王らしい"強欲"な願いだ
+	魔導王ユウ	通常						ならば、キミに必要なのは\n一歩踏み出す勇気だけだ
+	魔導王ユウ							<dash=2>そんなキミに、丁度いい話がある
+	魔導王ユウ							世界図書館から、\nキミに作戦司令が出ている\nもちろん、我が魔剣機関も連名でね
+	ディーア	怒り2						……ついに、ですか
+	魔導王ユウ	通常						ああ、そうだ
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	天界					0
+	天上王セト					0
+	　　　　　　　　　　		2_2
+FadeIn	white					.3
+	魔導王ユウ	<Off>						天上王セト、天業剣クリーフォート、\nならびに方舟の再封印
+	魔導王ユウ	<Off>						そして聖鍵セフィロトの所有権の奪取
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_宿屋					0
+	魔導王ユウ	通常				0
+FadeIn	black					.3
+	魔導王ユウ							この作戦には、魔剣機関に所属する\n大勢の魔剣使いが動く
+	ディーア	怒り2						……総力戦というわけですね
+	魔導王ユウ							ああ、国境で天使兵を抑えている\n部隊もだいぶ疲弊してきている
+	魔導王ユウ							彼らのためにも、聖鍵セフィロトを\n巡る戦いは早く決着をつけなければね
+	魔導王ユウ							それに、ここでの勝敗が\n長く続いた魔王戦争を終結させると\n言っても過言ではない
+	魔導王ユウ	笑い						やってくれるかい？\n<param=name>ちゃん
+	ディーア	怒り2						……一歩を踏み出す勇気、か
+	ディーア	通常2						ええ、オレが引き受けましょう
+	魔導王ユウ	笑い						それでこそだ
+	魔導王ユウ							決行はもうしばらく先だ\nゆっくり休んでおくといい
+Se	歩く
+CharacterOff	魔導王ユウ					1
+Wait						1
+StopBgm
+StopSe
+Se	ドア閉まる
+Wait						3
+	黒グラデーション		エフェクト表
+	ディーア	怒り2						何をするべきか……\nそして、これから何をするか
+	ディーア							オレの、やるべきこと……
+	ディーア							<ruby=木天のツヴァイクの死>風の六大異変の封印</ruby>、\n魔鍵ユグドラシルとの直結、\nそして天蓋の廻封
+CharacterOff	黒グラデーション
+	ディーア	目閉じ2						……これで、全ての条件が整った\nもう二度と、引き返すことはできない
+	ディーア							……あとは、\n覚悟を決めるだけだ
+	黒背景		エフェクト表			0
+Wait						3
+CharacterOff						0
+Bgm	神社
+Param	character_grayout=false
+Bg	黒背景					0
+	イベントスチル59314		エフェクト表			0
+	？？？？							<dash=2>シニクアノン教団の殲滅、\n13本の<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>\n<dash=2>そして我が手には終末の詩篇
+	？？？？							そう、これで全ての条件が整った
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル392BG		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+	イベントスチル393BG		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+	イベントスチル459BG		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+ImageEffectOff	SpriteCamera	Sepia
+	イベントスチル59314		エフェクト表			0
+	？？？？							我々は<ruby=A Necessary Evil>必要悪</ruby>だ\n過ちを犯し、人の道から外れた者だ
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル460BG		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+	イベントスチル471BG		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+	イベントスチル59205_2		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+ImageEffectOff	SpriteCamera	Sepia
+	イベントスチル59314		エフェクト表			0
+	？？？？							あるいは踏みにじられ、\n糧とされる存在だ
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル59301		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+	イベントスチル101104_2		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+	イベントスチル1012H		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+ImageEffectOff	SpriteCamera	Sepia
+	イベントスチル59314		エフェクト表			0
+	？？？？							<dash=2>だが、その存在には\n大いなる意義がある
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル103006_2		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+	イベントスチル10315_2		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+	イベントスチル1037BG_2		エフェクト表			0
+	　　　　　　　　　　
+Wait						.7
+ImageEffectOff	SpriteCamera	Sepia
+	イベントスチル59314		エフェクト表			0
+	？？？？							神は我々を残し給うた\n我々が必要悪だというのならば<dash=2>
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル104714		エフェクト表			0
+	　　　　　　　　　　
+Wait						1.3
+ImageEffectOff	SpriteCamera	Sepia
+	イベントスチル59314		エフェクト表			0
+	？？？？							<dash=2>きっと、\nこの時のために生まれたのだ
+CharacterOff						0
+	黒背景		エフェクト表			0
+	？？？？							さあ、征こうか
+CharacterOff						0
+Bg	酒場_宿屋					0
+	黒グラデーション		エフェクト裏			0
+	ディーア	怒り2				0		オレの大切な魔剣を\nオレの大切な相棒を<dash=2>
+CharacterOff						0
+Bg	魔人機関					0
+	？？？？							我々を愛した神を\n我々の愛した魔神を<dash=2>
+	黒背景		エフェクト表			0
+								<dash=2>彼女の望んだ"未来"を、\n取り返すとしよう
+CharacterOff						0
+	黒背景		エフェクト裏			0
+ImageEffect	SpriteCamera	Bloom
+	9章ロゴA		エフェクト表			1
+Wait						3
+CharacterOff	9章ロゴA		エフェクト表			1
+Wait						2
+	9章ロゴB		エフェクト表			1
+Wait						3
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_03
+EndIf
+EndScenario
+
+# Q1009_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+CharacterOff						0
+Bg	大灯台B					0
+	　　　　　　　　　　
+Wait						1.5
+ImageEffect	SpriteCamera	Bloom
+	地名背景		地名背景			0
+	地名ロゴ	セフィロト	地名ロゴ			0
+	左縦線		左縦線			0
+	左横線		左横線			0
+	右縦線		右縦線			0
+	右横線		右横線			0
+Param	character_grayout=false
+FadeIn	black					.5
+Wait						1
+Tween	左縦線	MoveBy	y=-800 time=1.5	easeOutQuart			NoWait
+Tween	左横線	MoveBy	x=-800 time=1.5	easeOutQuart			NoWait
+Tween	右縦線	MoveBy	y=800 time=1.5	easeOutQuart			NoWait
+Tween	右横線	MoveBy	x=800 time=1.5	easeOutQuart			NoWait
+Wait						1.3
+	場所ロゴ	聖鍵セフィロト　神域	場所ロゴ			1
+Wait						1
+	　　　　　　　　　　							　
+Tween	左縦線	MoveBy	y=-100 time=6				NoWait
+Tween	左横線	MoveBy	x=-100 time=6				NoWait
+Tween	右縦線	MoveBy	y=100 time=6				NoWait
+Tween	右横線	MoveBy	x=100 time=6				NoWait
+CharacterOff	地名ロゴ					.5
+CharacterOff	場所ロゴ					.5
+CharacterOff	左縦線					.3
+CharacterOff	左横線					.3
+CharacterOff	右縦線					.3
+CharacterOff	右横線					.3
+Wait						.3
+ImageEffectOff	SpriteCamera	Bloom
+Wait						1.2
+CharacterOff
+Se	歩く
+Wait						1.5
+StopSe
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	リディ	通常2	2_2
+	ディーア							……待て
+	リディ	驚き2						マスター？
+CharacterOff
+	魔剣機関の魔剣使い	<Off>						どうした、なにかあったのか？
+CharacterOff
+Param	character_grayout=false
+Se	闇1
+	スモーク		エフェクト表			2
+Wait						1
+CharacterOff						1
+Wait						1
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+Bgm	絶望
+	ディーア							……嫌な気配がする\n前に来た時は感じなかったけど……
+	ディーア							この気配、\nユグドラシルに似ているような……\nそれに、強力な悪魔の鍵……
+	ディーア	悔しい2						いや、まさかこれは……\nマスターキーか……!?
+Se	風1
+Param	character_grayout=false
+	スモーク		エフェクト表			2
+Wait						1
+CharacterOff	スモーク					1
+Wait						1
+Param	character_grayout=true
+	リディ	悲しい2						うぅっ……\n……ます、たー……頭が……
+	ディーア	驚き2						リディ、大丈夫か!?
+	リディ	悔しい2						う、うん、なんとか……
+	リディ	悲しい2						でも、この"空気"……\nすっごく、嫌な感じがする……
+	ディーア	怒り2						ああ、おそらく\nこれも天上王セトの仕業なんだろう
+	ディーア							つまり、セトはもう既に\n《方舟計画》を再始動させている\nということだ
+	ディーア	悔しい2						それにルルも……\nあいつ、まさか……
+	リディ	悔しい2						……マスター、急がなきゃ
+	ディーア	怒り2						ああ……でも、その前に<dash=2>
+CharacterOff
+StopBgm
+	天使							<dash=6>!!
+CharacterOff
+Bgm	緊迫
+	魔剣機関の魔剣使い	<Off>						天使兵……!!
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							やはり、門番がいたか
+	リディ	悲しい2						マスター、大丈夫……？
+	ディーア	怒り2						ああ、任せとけ
+	ディーア	本気2						いくぞ、<ruby=アンロック>魔剣解放</ruby><dash=2>!!
+Se	光3
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_04
+EndIf
+EndScenario
+
+# Q1009_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	天界
+FadeIn	black					.5
+Se	歩く
+Wait						1.5
+StopSe
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							ここが、聖鍵セフィロトの神域\n"方舟"の入り口……
+CharacterOff
+	魔剣機関の魔剣使い	<Off>						なあ、<param=name>\n……おかしいとは思わないか？
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+	ディーア							ああ……"静かすぎる"
+	ディーア							ここは聖鍵セフィロトの制御を担う\n中枢にして核だ
+	ディーア							あれほどの天使兵を使って\n厳重に守っておきながら、\nなにもないなんて……
+CharacterOff
+	魔剣機関の魔剣使い	<Off>						まさか、\nもう逃げ出した後ってことか？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							いや、そんなはずは<dash=2>
+CharacterOff
+	魔剣機関の魔剣使い	<Off>						まあいい、\n調査の手間が省けるってものだ
+	魔剣機関の魔剣使い	<Off>						行こうぜ、\n<param=name>
+Se	歩く
+ZoomCamera	SpriteCamera	1.5		350		1.8
+FadeOut	black					.1
+CharacterOff						0
+	ディーア	本気2	1_2			0
+	リディ	怒り2	2_2			0
+StopSe
+ZoomCamera	SpriteCamera	1				0
+FadeIn	black					.1
+	ディーア							<dash=2>待て、罠だ!!
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393D)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.3
+Wait						.2
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+ImageEffectOff	SpriteCamera	Bloom
+Param	character_grayout=true
+CharacterOff						0
+Bg	天界					0
+	ディーア	悔しい2	1_2			0
+	リディ	驚き2	2_2			0
+Tween	ディーア	MoveTo	x=0 time=0.5				NoWait
+FadeOut	white					.1
+Se	ジャストガード
+FadeIn	white					.1
+	ディーア							くっ……
+Bgm	緊迫
+CharacterOff
+	姫鶴	通常2	1_2_b
+	勇者ヌイ		2_2
+	姫鶴							<dash=2>ほう、やりよる！
+	勇者ヌイ							<dash=2>完全なる不意打ち\nそれも姫鶴の全速を凌駕するなんて
+	勇者ヌイ							腕をあげたようね、魔剣使い
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							……ヌイさん!!
+	リディ							なんで……
+	ディーア	怒り2						やはり、\nこのセフィロトを守っているのは\nルル隊か
+	リディ	怒り2						……ってことは、\nルルくんはこの奥に<dash=2>
+CharacterOff
+	姫鶴	通常2	1_2_b
+	勇者ヌイ		2_2
+	勇者ヌイ							<dash=2>ふふ、何も知らないのね
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							なんだと……？
+CharacterOff
+	姫鶴	通常2	1_2_b
+	勇者ヌイ		2_2
+	勇者ヌイ							ルル隊という部隊は\nE.D.E.N.に存在しない
+	勇者ヌイ							だって私たちは、\n<ruby=・・・・・・・・・>全員彼の兵隊だもの</ruby>
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	怒り2	2_2
+	ディーア							……まさか
+CharacterOff
+	姫鶴	通常2	1_2_b
+	勇者ヌイ		2_2
+	勇者ヌイ							貴方たちは\n希望王に謁見するに値しない
+	勇者ヌイ							これより先は新たなる聖域<dash=2>\n何人たりとも通すわけにはいかないわ
+CharacterOff
+Param	character_grayout=false
+	勇者A		2_3
+	勇者B		1_2_b
+	勇者C		2_2
+Tween	勇者B	MoveTo	x=-180				NoWait
+Tween	勇者C	MoveTo	x=180				NoWait
+Se	抜刀
+Se	抜刀
+Wait						.1
+Se	抜刀
+Wait						1.5
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	リディ							マスター、新手が！
+CharacterOff
+Param	character_grayout=false
+	勇者ナルティズ					1
+	？？？？							やれやれ、因果なものだな、\n<param=name>！
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+	ディーア							お前は……！
+CharacterOff
+	勇者ナルティズ							いかにも！\n勇者ナルティズだ、未踏水路以来だな
+	勇者ナルティズ							残念だが、\n我が王はご多忙であらせられる！
+	勇者ナルティズ							……日を改めてはどうだろう、\n<param=name>
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+	ディーア							……どいてくれ\nオレは行かなきゃいけないんだ
+CharacterOff
+	勇者ナルティズ							ふむ、ならば致し方あるまい！
+Se	抜刀
+Tween	勇者ナルティズ	MoveBy	x=20				NoWait
+	勇者ナルティズ							<ruby=ヌイ>希望王第一親衛</ruby>隊、\n副隊長ナルティズ
+	勇者ナルティズ							<dash=2>この先に行くというのなら\n押し通ってみせよ!!
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+	ディーア							魔剣機関所属、魔剣使い\n<param=name>\n<dash=2>邪魔をするなら容赦はしない!!
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_05
+EndIf
+EndScenario
+
+# Q1009_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	黒背景
+FadeIn	black					.5
+Wait						.5
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	天界					0
+	黒グラデーション		エフェクト表
+	魔剣機関の魔剣使い	<Off>						ぐ……ああああッ!!
+Se	倒れる
+Wait						1.5
+FadeOut	red					.3
+Se	突1
+	魔剣機関の魔剣使い	<Off>
+FadeIn	red					.3
+	魔剣機関の魔剣使い	<Off>						バカな……そんなはずは……
+Se	倒れる
+CharacterOff						1
+Wait						1.5
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	リディ							そんな……魔剣使いさんたちが……
+Tween	ディーア	MoveBy	x=20				NoWait
+	ディーア	怒り2						リディ、下がってろ!!
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+Param	character_grayout=true
+Bg	天界					0
+CharacterOff
+	ディーア	悔しい2
+	リディ	悔しい2	2_2
+Se	ジャストガード
+	ディーア							くっ……
+CharacterOff
+	勇者ナルティズ							おっと、よそ見してる場合か？
+Se	斬2
+FadeOut	white					.2
+CharacterOff						0
+	ディーア	悔しい2				0
+	リディ	悲しい2	2_2			0
+FadeIn	white					.2
+Shake	ディーア		x=10
+	ディーア							ぐはっ……!!
+CharacterOff
+	勇者ナルティズ							はっはっは！\n見違えたであろう、\n<param=name>！
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア							一体なんだ、この力は……？
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？	<Off>						<dash=2>何もしていないさ\nそれが本来のA級勇者の力だ
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							……その声は!!
+CharacterOff
+	勇者ナルティズ							陛下……!!
+CharacterOff
+Wait						.5
+Se	歩く
+	希望王ルル					1		……遅かったな、魔鍵使い
+StopSe
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							……勇者王を継いだのか、ルル
+CharacterOff
+	希望王ルル							勇者王？ ……フン\nあの男の跡など継ぐ気にもならない
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+	ディーア							……何？
+CharacterOff
+	希望王ルル							僕の父……\n勇者王シドウが作った<ruby=エクスカリバー>聖征剣</ruby>は、\n勇者の勇気を食らう醜悪な魔剣でね
+	希望王ルル							それがE.D.E.N.を、\nそして勇者組織を腐らせていた\n正体だったというわけだ
+	希望王ルル	冷徹						……全く、前王はとんだ俗物だった
+	希望王ルル							だが、僕は\n<dash=2>これからのE.D.E.N.は違う
+	希望王ルル							僕は聖征剣の毒牙を逃れた者たちで\n新たなるE.D.E.N.を作り上げる
+	希望王ルル							そしてそのE.D.E.N.を率いる王は、\n勇気ある本来の"勇者"たちの\n希望でなければならない
+	希望王ルル							故に、僕は勇者王ではない\n<dash=2>希望王ルルだ
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							……そのために、\n勇者王を暗殺したのか！
+CharacterOff
+	希望王ルル							やはり気付いていたか
+	希望王ルル							だが、貴様こそ\n知っていて僕を泳がせたのだろう？
+	希望王ルル							貴様が<ruby=ヘリオスフィア>太陽聖域</ruby>の連中を\n留めておいてくれたおかげで、\n僕はシドウを討つことができた
+	希望王ルル	冷徹						礼を言う、魔鍵使い
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							……なんのことだ？
+CharacterOff
+	希望王ルル	冷徹						あくまで白を切るか、\n"ソードマスター"
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							……なぜ、それを
+CharacterOff
+	黒リディ							それは、私が見ているからね
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							……その声は
+CharacterOff
+	黒リディ							<dash=2>キミがその子と行動を\n共にしている以上、何をしているかは\nお姉さんに筒抜けなのサ
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	リディ							マスター、あの子……！
+	ディーア	悔しい2						ああ、エレちゃんの時の……\nやはりE.D.E.N.についていたか
+CharacterOff
+	希望王ルル							そう、貴様がここに来るということは\nわかっていた
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							……その上で、\n敢えて待ち受けていた、と？
+CharacterOff
+	希望王ルル							そうさ
+	希望王ルル	冷徹						僕は父を討ち、新たなる王となった
+	希望王ルル							そして天上王セトと手を組み、\n《聖剣機構》を手に入れた
+	希望王ルル							もはや僕の歩む道を\n邪魔するものはいない
+	希望王ルル							……魔剣殺しブリジット\n君を除いてね
+StopBgm
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	リディ							……え
+CharacterOff
+Bgm	緊迫
+	希望王ルル	冷徹						第一親衛隊、戦闘用意\n相手はあの魔鍵使いだ\n油断するな
+CharacterOff
+Param	character_grayout=false
+	勇者A		2_3
+	勇者B		1_2_b
+	勇者C		2_2
+Tween	勇者B	MoveTo	x=-180				NoWait
+Tween	勇者C	MoveTo	x=180				NoWait
+Se	抜刀
+Se	抜刀
+Wait						.1
+Se	抜刀
+	勇者たち	<Off>						はっ!!
+CharacterOff
+	黒リディ							…………
+CharacterOff
+Param	character_grayout=true
+	ディーア	本気2	1_2
+	リディ	怒り2	2_2
+	ディーア							ルル、貴様……!!
+CharacterOff
+Param	character_grayout=false
+	希望王ルル							悪く思うな、魔鍵使い
+Se	光1
+	オーラ赤		エフェクト表			1
+	希望王ルル	冷徹						<ruby=アンロック>並列解放</ruby>、\nハバキリ、ゲオル、そしてノイズ
+Se	光3
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+	ゲオルギウス	無	1_3			0
+	アマノハバキリ	無	3_3			0
+	ノイズ	無	2_3			0
+FadeIn	white					.3
+Wait						1.5
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							くっ……\nルルの奴、どうやら本気のようだな
+	リディ	悲しい2						大丈夫なの、マスター……？
+	ディーア							さあな……こんな人数を\n相手にするのは久しぶりだ
+	ディーア							それに、ルルもいる
+CharacterOff						0
+Param	character_grayout=false
+	希望王ルル	冷徹
+	オーラ赤		エフェクト表
+	ディーア	<Off>						複数の魔剣をアンロックできる\n魔剣使いは、オレも含めて\nごく稀に存在するけど……
+	ディーア	<Off>						あいつはその三本を\n同時に扱うことができる\n……手加減できる相手じゃない
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=true
+	ディーア	悔しい2	1_2			0
+	リディ	悔しい2	2_2			0
+FadeIn	black					.3
+	リディ							……でも、やるしかないよね\nマスター
+	ディーア							ああ……いけるか、リディ？
+	リディ	怒り2						うん、任せて！
+	リディ							マスターはリディが守る!!
+Se	回想
+FadeOut	white					.3
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+Bg	酒場_宿屋					0
+	ディーア	悔しい2				0
+FadeIn	white					.3
+	ディーア							<dash=2>……いや、正確には\n"不完全な状態でしか"\nアンロックできない
+CharacterOff
+	7章BG2		エフェクト表
+Wait						1.5
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Param	character_grayout=true
+Bg	天界
+	ディーア	悔しい2	1_2			0
+	リディ	怒り2	2_2			0
+FadeIn	black					.3
+	ディーア							……"やるしかない"、か
+Bgm	勇者バトル
+	ディーア	本気2						いくぞ、リディ！\n《<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>》\n《<ruby=ワールドイズマイン>愚かなる卑怯者の鍵</ruby><dash=2>》
+	ディーア							<dash=2><ruby=アンロック>魔剣解放</ruby>、\n魔剣殺しブリジット<dash=2>!!
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_06
+EndIf
+EndScenario
+
+# Q1009_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	天界
+CharacterOff						0
+	ディーア	怒り2	1_2			0
+	リディ	悔しい2	2_2			0
+FadeIn	black					.5
+	リディ							……大丈夫、だいじょうぶ
+	ディーア	本気2						……ッ、右だ!!
+	リディ	怒り2						うんっ!!
+Se	斬2
+FadeOut	white					.1
+CharacterOff						0
+	勇者A					0
+FadeIn	white					.1
+Shake	勇者A		x=5				NoWait
+	勇者A							ぐっ……
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	怒り2	2_2
+	リディ							たぁっ!!
+Se	剣閃
+FadeOut	white					.1
+CharacterOff						0
+	勇者B					0
+FadeIn	white					.1
+Shake	勇者B		x=5				Add
+	勇者B							ぐあああッ……!!
+	勇者C		2_2
+Tween	勇者C	MoveTo	x=0				NoWait
+Tween	勇者B	MoveBy	x=-90				Add
+CharacterOff	勇者B					.5
+	勇者C							下がれ、オレがやる<dash=2>!!
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_3
+	リディ							だいじょうぶ、\nリディはマスターを守れる……
+CharacterOff
+	勇者C							うおおおおおおッ!!
+CharacterOff
+	ディーア	悔しい2
+Wait						.2
+Se	ジャストガード
+FadeOut	white					.1
+Tween	ディーア	MoveBy	x=-30				NoWait
+FadeIn	white					.1
+	ディーア							ぐっ……!!
+CharacterOff
+	勇者C							いける……ッ!!
+CharacterOff
+	リディ	悔しい2						マスター!!\n危ない……!!
+	リディ	怒り2
+Se	光2
+ImageEffect	SpriteCamera	Bloom
+	黒グラデーション		エフェクト裏
+	NPリディ	赤	エフェクト表			1		　	BrPage
+Wait						1
+	NPリディ							<dash=2>私が、マスターを守らなきゃ
+Se	光3
+Se	火3
+FadeOut	white					1
+	黒背景		エフェクト表			0
+Wait						1
+FadeIn	black					0
+Se	ガラス割れる
+StopBgm
+Param	character_grayout=false
+ImageEffectOff	SpriteCamera	Bloom
+	黒背景		エフェクト表			0
+	リディ	暴走悲しい2						…………ぁ
+CharacterOff	黒背景					0
+	黒背景		エフェクト裏			0
+	リディ	暴走悲しい2
+Wait						1
+CharacterOff	黒背景
+Thread	*Q1009_06_01
+	リディ							だめ、だめ……\n<color=#fe3333>リディは、マスターを守らなきゃ……</color>
+	リディ	暴走泣き2						<color=#fe3333>マスターを守らなきゃ……\nマスターが死んじゃう</color>
+	リディ	暴走2				.5		<color=#fe3333>マスターが死んじゃう\n魔剣で殺されちゃう\n魔剣を壊さなきゃ</color>
+	リディ							<color=#fe3333>マスターが死んじゃう\nマスターが死んじゃう</color>
+	リディ							<color=#fe3333>魔剣を壊さなきゃ、\nマスターが死んじゃう</color>
+WaitThread	*Q1009_06_01
+Se	スローモーションエンド
+Wait						1.6
+	黒背景		エフェクト表			0
+Wait						.5
+Bgm	魔王バトル
+Bg	天界					0
+CharacterOff						0
+Shake	Graphics		x=10 y=10				NoWait
+Se	闇2
+Se	火事	TRUE
+	オーラ赤2		エフェクト表			1
+Wait						1
+CharacterOff	オーラ赤2					1
+Wait						1
+CharacterOff
+	ディーア	悔しい2						くっ……!!
+	勇者C							なんだ、この魔力……!?
+CharacterOff
+	ノイズ	無	1_3
+	希望王ルル	冷徹						……来たか
+CharacterOff
+StopSe
+	リディ	暴走2						<color=#fe3333>……マスター、マスターマスターマスターマスターマスター</color>
+	ディーア	絶望2						…………リディ？
+	リディ	暴走2						<color=#fe3333>マスターが死んじゃう、\nマスターが死んじゃう、\nマスターが死んじゃう</color>
+Se	光2
+FadeOut	white					.1
+ImageEffect	SpriteCamera	Bloom
+	黒グラデーション		エフェクト裏2
+	9章スチルV		エフェクト裏			0		　	BrPage
+FadeIn	white					.1
+	9章スチルV							<color=#fe3333>マスターを、助けなきゃ</color>
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+	勇者ナルティズ					0
+FadeIn	black					.2
+	勇者ナルティズ							マズい、下がれ!!\n"魔剣殺し"だ!!
+CharacterOff
+	勇者C
+Se	斬2
+FadeOut	red					.2
+FadeIn	red					.2
+Shake	勇者C		x=5				NoWait
+	勇者C							ぐっ……あああ……ッ
+Se	倒れる
+CharacterOff						1
+Wait						1
+	黒グラデーション		エフェクト裏
+	リディ	暴走2						<color=#fe3333>マスターが死んじゃう、\nマスターが死んじゃう、\nマスターが死んじゃう</color>
+CharacterOff
+	勇者B
+Se	斬2
+FadeOut	red					.2
+FadeIn	red					.2
+Shake	勇者B		x=5				NoWait
+	勇者B							そんな……バカな……ッ!!
+CharacterOff						1
+Wait						1
+	希望王ルル	冷徹						……潮時か　行くぞ、ヌイ
+	勇者ヌイ							…………はい
+	ノイズ	無						……リディちゃん
+FadeOut	black					.5
+CharacterOff						0
+	黒グラデーション		エフェクト裏			0
+	リディ	暴走2				0
+FadeIn	black					.5
+	リディ							<color=#fe3333>魔剣を壊さなきゃ、\n魔剣を壊さなきゃ、\n魔剣を壊さなきゃ</color>
+CharacterOff
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+	【ディーア】	悔しい2	2_3
+	ディーア	悔しい2	2_3_b					リディ、止まれ!!
+Se	光2
+Tween	【ディーア】	ScaleBy	x=3 y=3				NoWait
+Tween	【ディーア】	MoveBy	y=-600				NoWait
+CharacterOff	【ディーア】
+	ディーア	悔しい天使2
+Wait						1
+Se	光3
+FadeOut	white					1
+Shake	Graphics		x=10 y=10 time=3				NoWait
+Se	火事	TRUE
+FadeIn	white					.5
+	ディーア							くっ……\n天使の力でも\n抑えきれないのか……ッ!?
+CharacterOff
+	リディ	暴走2						<color=#fe3333>壊さなきゃ<dash=2>!!</color>
+	ディーア	悔しい天使2						く…………ッ\nここまでか……
+	黒背景		エフェクト表			0
+	？？？？							危ない<dash=2>!!
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	黒リディ					0
+	オーラ青		エフェクト表
+Shake	Graphics		x=10 y=10 time=5				NoWait
+Param	character_grayout=false
+FadeIn	black					.5
+	黒リディ							くぅぅっ……!!
+	黒リディ							さすがは魔鍵ユグドラシル……\n同じブリジットとはいえ、\n吸収が間に合わない……っ
+CharacterOff
+	ディーア	悔しい天使2						……っ!?\nお前……
+CharacterOff
+	オーラ青		エフェクト表
+	黒リディ							これ以上は、マズい……カナっ!!
+Se	光2
+FadeOut	white					.5
+CharacterOff	オーラ青					0
+FadeIn	white					.5
+	黒リディ							うぅっ……げほっ……\n大丈夫？ 怪我はないカナ？
+CharacterOff
+	ディーア	悔しい天使2						お前……オレを庇った、のか……？
+CharacterOff
+	黒リディ							細かい話は後！\n今は逃げるよ、"マスター"
+FadeOut	black					0
+CharacterOff						0
+StopBgm						1
+StopSe
+	　　　　　　　　　　
+Wait						3
+FadeIn	black					1
+Se	ホワイトアウト
+Wait						1.5
+	黒グラデーション		エフェクト表
+	勇者ナルティズ							…………なん、だ、これは……？
+Bgm	絶望
+	勇者ナルティズ							第一親衛隊が全滅……、だと？
+	勇者ナルティズ							違う、こんなはずじゃ……\nオレは陛下のように……
+CharacterOff
+	リディ	暴走2						<color=#fe3333><dash=4>……</color>
+CharacterOff
+	黒グラデーション		エフェクト表
+	勇者ナルティズ							この……貴様……ッ\n貴様さえ……!!
+CharacterOff	黒グラデーション
+	勇者ナルティズ							……う、うおおおおおッ!!
+	リディ	暴走2						<color=#fe3333>…………ぁ</color>
+Se	剣閃
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.2
+Se	ガードブレイク
+FadeOut	white					.1
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+	勇者ナルティズ					0
+FadeIn	white					.1
+Shake	勇者ナルティズ		x=5				Add
+	勇者ナルティズ							…………ッ
+Se	倒れる
+CharacterOff						1
+Wait						1
+FadeOut	black					.5
+Param	character_grayout=false
+	9章スチルA		エフェクト表			0
+FadeIn	black					.5
+	リディ							<color=#fe3333>マスターが死んじゃう\n魔剣で殺されちゃう\nマスターを守らなきゃ</color>
+CharacterOff
+	ディーア	悔しい天使2						リディ……
+CharacterOff
+	黒リディ							……あの子にはまだ早かったのサ
+	黒リディ							魔剣殺しという膨大な力を、\nあの子一人では制御しきれない
+	黒リディ							<ruby=キャパシティ>限界値</ruby>を\n超えちゃってるんだよ
+	黒リディ							本来は、そういうのは\n魔剣使いが制御するものだけど……
+	黒リディ							そもそも、魔剣殺しブリジットには\n主人がいないからね
+CharacterOff
+	リディ	暴走2						<color=#fe3333>壊さなきゃ、壊さなきゃ、壊さなきゃ<dash=2></color>
+CharacterOff
+	ディーア	悔しい天使2						黒リディ、\nお前はE.D.E.N.の\n味方をしていたはずだろう？
+	ディーア							……一体何を企んでいる？
+	黒リディ							私はE.D.E.N.に与してはいないし、\nあなたと敵対する気もないよ
+	黒リディ							……今は、信じてもらうしかないカナ
+	ディーア	天使2						……あとで色々と\n聞かせてもらうからな
+	黒リディ							生き延びることができたらね！\n早く逃げないと<dash=2>\n本当に壊されちゃうよ
+	ディーア	天使2						……いや、オレはまだやることがある\n先に逃げていてくれ、黒リディ
+	黒リディ							……え？\nあなた、何を考えて<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+	9章スチルA		エフェクト表
+FadeIn	black					.3
+	リディ	<Off>						<color=#fe3333>…………壊さなきゃ、\nマスターが死んじゃう</color>
+	リディ	<Off>						<color=#fe3333>……マスターが、マスターがマスターが……</color>
+	ディーア	<Off>						…………リディ
+	リディ	<Off>						<color=#fe3333>壊さなきゃ、壊さなきゃ、死んじゃう、死んじゃう、死んじゃう</color>
+CharacterOff
+Se	歩く
+	ディーア	悔しい天使2						……大丈夫だ、リディ
+CharacterOff
+StopSe
+	黒リディ							……ちょ、何を<dash=2>\n今その子に近づいたら……!!
+CharacterOff
+	ディーア	悔しい天使2						大丈夫だ、リディ\nオレはここにいる
+	リディ	暴走2						<color=#fe3333>…………ます、たー？</color>
+	ディーア	天使2						オレは生きてる\n死んだりなんかしないから
+	リディ	暴走2						<color=#fe3333>…………ますたー
+	リディ							<color=#fe3333>……てんし、まけん\n壊さなきゃ<dash=2></color>
+Se	突1
+FadeOut	red					.2
+ImageEffect	SpriteCamera	Blur
+	赤枠		エフェクト表			0
+	リディ	暴走2				0
+Wait						1
+FadeIn	red					.5
+	ディーア	<Off>						<dash=2>え
+Se	倒れる
+FadeOut	black					.5
+Wait						2
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_07
+EndIf
+EndScenario
+*Q1009_06_01
+Se	ルビードロップ
+	9章スチル13		エフェクト裏			0
+Bg	遺跡A_過去					0
+Wait						.1
+CharacterOff	9章スチル13					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル12		エフェクト裏			0
+Bg	研究所A_過去					0
+Wait						.1
+CharacterOff	9章スチル12					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル11		エフェクト裏			0
+Bg	砂漠A_過去					0
+Wait						.1
+CharacterOff	9章スチル11					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル10		エフェクト裏			0
+Bg	山岳A_過去					0
+Wait						.1
+CharacterOff	9章スチル10					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル9		エフェクト裏			0
+Bg	森林A_過去					0
+Wait						.1
+CharacterOff	9章スチル9					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル8		エフェクト裏			0
+Bg	断層A_過去					0
+Wait						.1
+CharacterOff	9章スチル8					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル7		エフェクト裏			0
+Bg	市街地A_過去					0
+Wait						.1
+CharacterOff	9章スチル7					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル6		エフェクト裏			0
+Bg	神殿A_過去					0
+Wait						.1
+CharacterOff	9章スチル6					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル5		エフェクト裏			0
+Bg	廃墟A_過去					0
+Wait						.1
+CharacterOff	9章スチル5					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル4		エフェクト裏			0
+Bg	草原C_過去					0
+Wait						.1
+CharacterOff	9章スチル4					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル3		エフェクト裏			0
+Bg	瀑布A_過去					0
+Wait						.1
+CharacterOff	9章スチル3					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル2		エフェクト裏			0
+Bg	洞窟A_過去					0
+Wait						.1
+CharacterOff	9章スチル2					.5
+Wait						.9
+Se	ルビードロップ
+	9章スチル1		エフェクト裏			0
+Bg	魔術空間_過去					0
+Wait						.1
+CharacterOff	9章スチル1					.5
+Wait						.9
+Bg	黒背景					0
+EndThread
+
+# Q1009_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Se	強風
+Bg	白背景
+FadeIn	black					.5
+	リディ	悲しい3						…………んぅ？
+	リディ	驚き3						……あれ？\nここは……
+	リディ	悔しい3						これは……扉？\nそれに、この場所って……
+CharacterOff
+	？？？？							<dash=2>また、戻ってきてしまったのね
+	リディ	驚き3						……え？
+	ヘルメリア	悔しい						……ブリジット
+	リディ	<Off>						……あなたは
+	リディ	<Off>						マスター……？
+	ヘルメリア	悔しい						…………
+	リディ	悲しい3						わかんない、わかんないけど……\nあなたは、私のマスターなの？
+	ヘルメリア	悔しい						『それは、一人の少女と、\n　そして、もうひとりの少女<dash=2>』
+	リディ	驚き3						……え
+	ヘルメリア	悔しい						私は、"あなた"を助けられない
+	ヘルメリア							私には"あなた"を、\n救ってあげることができない
+	ヘルメリア							それでも、知りたいかい？
+	リディ	怒り3						……教えて
+	リディ							この扉の向こうに、何があるのかを
+	ヘルメリア	悔しい						<dash=2>そう、\n『ここから全てが始まるのです』
+Se	光2
+FadeOut	white					1
+StopSe
+CharacterOff
+Bg	荒野
+	　　　　　　　　　　
+Wait						3
+FadeIn	white					.5
+	　　　　　　　　　　							\n　　　　<dash=2>魔界歴XXXX年<dash=2>
+	　　　　　　　　　　							\n　　　 <dash=2>ニーア観測基地<dash=2>
+Bgm	絶望
+	リディ	驚き3						…………え
+	リディ	悔しい3						ここは……？
+	兵士							伝令!!
+	ヘルメリア	怒り						状況は？
+	リディ	驚き3						ぁ<dash=2>あの……
+	兵士							煉獄王メルティナ率いる駐留部隊は\nほぼ全滅、煉獄剣ヴェルガトゥリオも\n■■■の攻撃により機能停止……！
+	兵士							おそらく、戦線復帰は難しいかと……
+	ヘルメリア	悔しい						持っていかれたか……\nだが、魔核を\n破壊されていないのなら良い
+	ヘルメリア	怒り						アーサーご自慢の\n精鋭部隊はどうなった？
+	兵士							はっ！ E.D.E.N.も引き続き交戦中と\nみられますが、既に聖処女ジャンヌと\n魔剣ラピュセルが<dash=2>
+	ヘルメリア	悔しい						……芳しくないな
+	リディ	悲しい3						……なに？\n何が起きてるの……？
+	ヘルメリア	怒り						ここも長くは持たない\n観測資料をまとめろ、\nこれよりニーア観測基地を放棄する
+	兵士							ヘルメリア様は？
+	ヘルメリア	怒り						アリスからの支援が\n見込めないのであれば仕方があるまい
+	兵士							……氷の魔女、リリス様なら、\nこの状況もあるいは<dash=2>
+	ヘルメリア	怒り						バカを言うな\nそんなことをすれば魔界が滅ぶぞ？
+	兵士							しかし<dash=2>
+	ヘルメリア	笑い						どうせ自分の巻いた種だ\n<dash=2>自分でケリをつけるさ
+FadeOut	white					.5
+StopBgm
+CharacterOff						0
+Param	character_grayout=false
+Bg	神界改
+	白背景		エフェクト表
+Wait						2
+FadeIn	white					1
+Bgm	ロルリアンレットB
+	ヘルメリア	悔しい						……終わらせに来たよ、ブリジット
+CharacterOff	白背景					1
+Wait						1
+	ヘルメリア	怒り						<dash=2>聖征剣エクスカリバー、\n焔華剣テュフォーン、\n煉獄剣ヴェルガトゥリオ
+	ヘルメリア							天業剣クリーフォート、\n終焉剣アポカリプス、\n魔刀マガツツクヨミ
+	ヘルメリア							運命殺しワールドエンド、\n幻想殺しゼタ
+	ヘルメリア							創生の竜剣ディクシヴ･ゼロ、\n創生の魔剣ソード×ソード、\nそして、世界意思ディーア
+	ヘルメリア							たくさん"食"ったなあ
+	ヘルメリア							……たくさん、戦ってきたもんな
+	ヘルメリア	悔しい						なあ、ブリジット\n私はどこで間違えたんだろうな
+	ヘルメリア							私はただ、人間と魔剣が共に平和に\n暮らせる未来を望んだだけだった
+	ヘルメリア							私は、そのために剣を執ったんだ\n真魔王の座も、原初十三魔剣の力さえ\n私にとっては手段でしかなかった
+	ヘルメリア							でも、その結果がこれだ
+	ヘルメリア	怒り						私たちは、英雄になれなかった
+	黒グラデーション		エフェクト表
+	リディ	悔しい3						…………え
+	ヘルメリア	怒り						だから、せめてもの償いだ
+	ヘルメリア	笑い						私たちが、この世界の最後の悪となろう
+	ヘルメリア	怒り						なあ<dash=2>魔王獣ブリジット
+CharacterOff
+	スモーク		エフェクト表
+	魔剣殺しブリジット							…………
+CharacterOff
+	リディ	絶望3						…………ッ!!
+	ヘルメリア	怒り						多くの魔剣を破壊し、\n魔界を混沌に陥れた魔王獣は、\n私によって討たれる
+	ヘルメリア							そして私は"災害を引き起こした\n邪悪なる魔王ヘルメリア"として\n討伐される
+	ヘルメリア							こうして悪は滅び、世界は平和になる
+	オーラ青		エフェクト表
+	ヘルメリア	怒り						<ruby=アンロック>魔剣解放</ruby>、覇王剣ラグナロク
+Se	光1
+FadeOut	white					.2
+CharacterOff	オーラ青					0
+	覇王剣ラグナロク					0
+FadeIn	white					.2
+Tween	覇王剣ラグナロク	MoveBy	y=10				NoWait
+	覇王剣ラグナロク							覇王ゼフより伺っております\nヘルメリア様の力になれと
+	ヘルメリア	怒り						一撃でも食らったら終わりだと思え
+	覇王剣ラグナロク							<dash=2>ええ
+	ヘルメリア	怒り						じきに三魔王がやってくる\nその前に、私たちだけで終わらせよう
+	ヘルメリア	悔しい						……ごめんね、ブリジット
+FadeOut	black					0
+StopBgm
+CharacterOff						0
+Wait						3
+	9章スチルB		エフェクト表			0
+FadeIn	black					0
+	リディ	<Off>						…………そっか
+	リディ	<Off>						……あは、あはは
+	リディ	<Off>						……リディ、何を勘違いしてたんだろ
+	リディ	<Off>						そうだよね\nわたしが、魔界を救った\n英雄の剣であるはずがないもん
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	遺跡C					0
+	ハクビ		monster			0
+FadeIn	white					.3
+	ハクビ							何やら騒がしいかと思えば……\n随分と懐かしい反面、可愛らしく……\n憎らしくもある顔じゃのう
+FadeOut	white					.3
+CharacterOff						0
+Bg	魔術空間					0
+	太陽剣ソエル					0
+FadeIn	white					.3
+	太陽剣ソエル							あら……？\nふふっ、そこにいたのね\nブリジット
+CharacterOff
+ImageEffectOff	SpriteCamera	GrayScale
+	9章スチルB		エフェクト表
+	リディ	<Off>						……そうだ、そうだった
+	リディ	<Off>						どうして忘れていたんだろう
+Se	闇1
+FadeOut	red					.1
+	9章スチルB	B2				0
+FadeIn	red					.1
+	リディ	<Off>						何度も、何度も\nそう呼ばれていたはずだったのに
+Se	闇1
+FadeOut	red					.1
+	9章スチルB	B3				0
+FadeIn	red					.1
+	リディ	<Off>						……ごめんね、マスター
+	リディ	<Off>						私の名前は<dash=2>
+StopBgm						1
+	白背景		エフェクト表2			1
+Wait						2
+	白背景		エフェクト表			0
+	9章スチルC		エフェクト表2			1
+Wait						5
+FadeOut	white					.5
+CharacterOff
+Bg	天界
+Wait						3
+Param	character_grayout=false
+	9章スチルW		エフェクト表			0
+Shake	9章スチルW		x=1 y=1 time=50				NoWait
+FadeIn	white					0
+Bgm	魔王バトル
+	リディ	<Off>						<color=#fe3333>……壊さなきゃ</color>
+	リディ	<Off>						<color=#fe3333>壊さなきゃ壊さなきゃ壊さなきゃ壊さなきゃ壊さなきゃ壊さなきゃ壊さなきゃ壊さなきゃ壊さなきゃ</color>
+CharacterOff
+	黒リディ	照れ						ちょっと、マスター!?\nしっかりしてよ！\nマスター!!
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	黒2						…………
+CharacterOff
+	黒リディ	照れ						…………っ\nこれはちょっと、マズいカナ……！
+FadeOut	black					.3
+CharacterOff						0
+	　　　　　　　　　　
+Wait						2
+FadeIn	black					.3
+CharacterOff
+Param	character_grayout=true
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り/フード	1_2
+	ドロシー							環境変数の固定を確認\n大規模な魔核機関抑制効果が発生
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							魔鍵ユグドラシルが\n活性化しているのか\n……あの時を思い出す
+	？？？？							ブリジットは？
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り/フード	1_2
+	ドロシー							推定魔核侵食度は30％程度でしょう
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							……想定より進行が早いな
+CharacterOff
+	カルバノグ							<dash=2>魔剣殺しブリジット、\n本物は初めて見ますよう！
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							カルバノグ、報告と違うようだが
+CharacterOff
+	カルバノグ							いいえ、間違いないですよう？
+	カルバノグ							あなたの探していたものは、\n必ずここにあるはずですよう
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							……どうだかな
+Bgm	特殊バトル
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り/フード	1_2
+	？？？？							ドロシーとブロードソード=ロストは\n<param=name>、\n並びに<ruby=黒リディ>碩学のブリジット</ruby>の保護に当たれ
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り/フード/武器	1_2
+	ドロシー							はっ
+CharacterOff
+	カルバノグ		2_2
+	？？？？							オレとカルバノグは<dash=2>
+CharacterOff
+Param	character_grayout=false
+	9章スチルX		エフェクト表
+	？？？？	<Off>						これより暴走した\n【魔剣殺しブリジット】の\n対処にあたる
+FadeOut	black					.3
+CharacterOff						0
+	9章スチルA		エフェクト表			0
+FadeIn	black					.3
+	リディ	<Off>						<color=#fe3333>壊さなきゃ……\n壊さなきゃ……っ</color>
+CharacterOff
+	カルバノグ							ちょーっと痛いかも、ですよう？
+Se	斬2
+FadeOut	white					.1
+CharacterOff						0
+FadeIn	white					.1
+Param	character_grayout=true
+	リディ	暴走泣き2
+Shake	リディ		x=5				Add
+	リディ							<color=#fe3333>ぁ…………っ</color>
+	？？？？	<Off>						<dash=2>少し手荒にいく\n許せ、ブリジット
+	リディ	暴走2						<color=#fe3333>ぁ、あああぁぁ<dash=2>!!</color>
+Se	闇3
+FadeOut	red					1
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_08
+EndIf
+EndScenario
+
+# Q1009_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	天界
+Param	character_grayout=false
+	リディ	暴走2
+FadeIn	black					.5
+	リディ							<color=#fe3333>壊さなきゃ、壊さなきゃ<dash=2></color>
+Se	闇3
+FadeOut	red					1
+Wait						.5
+Se	突1
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+FadeIn	red					.5
+	？？？？							くっ……
+CharacterOff
+	カルバノグ							マスター!!
+Se	光1
+Param	character_grayout=false
+	オーラ青		エフェクト表			1
+	？？？？							……無力化する\n離れていろ
+CharacterOff
+	リディ	暴走悲しい2
+Param	character_grayout=false
+FadeOut	white					.1
+	鎖エフェクト前		エフェクト表			0
+Se	コインロック
+FadeIn	white					.1
+Wait						.2
+FadeOut	white					.1
+Se	コインロック
+StopBgm
+	鎖エフェクト後ろ		エフェクト裏
+FadeIn	white					.1
+Wait						1
+Se	コインロック
+Shake	リディ		x=10				Add
+	リディ							<color=#fe3333>…………ぁ</color>
+Se	倒れる
+CharacterOff						1
+Wait						1.5
+Bgm	絶望
+	カルバノグ							……大丈夫ですかあ？
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							問題ない\n魔核損傷率は軽微だ\n……それにしても
+	？？？？							これが魔剣殺しブリジットの呪いか\n凄まじいな
+CharacterOff
+	カルバノグ							……おかしいですよう\nこんなパターンは\n見たことないですよう
+	カルバノグ							暴走しているにしても、\n他の世界線と違う……
+	カルバノグ							彼女が自らの意思でマスターを\n攻撃するなんて、できないはず<dash=2>
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							いや、そういうことか\n……なるほど、\nそれがお前の意思ならば
+CharacterOff
+	カルバノグ							…………マスター？
+FadeOut	black					.3
+CharacterOff						0
+	黒リディ					0
+FadeIn	black					.3
+Tween	黒リディ	PunchPosition	x=-30				NoWait
+	黒リディ							<dash=2>……スター！\nしっかりして！
+	黒グラデーション		エフェクト表
+	ディーア	悔しい2						…………リディ？
+CharacterOff
+	黒リディ	照れ						……っ！\nよかった……
+	ディーア	悔しい2						オレ……は……
+CharacterOff
+	ドロシー	怒り						ようやく目覚めたか、少年
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							……ドロシー、お前なんでここに
+CharacterOff
+	ドロシー	怒り						いつもどおり、ただの仕事だ
+CharacterOff
+	黒リディ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							<dash=2>まさか
+CharacterOff
+Param	character_grayout=false
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	リディ	暴走2
+	リディ							<color=#fe3333>…………</color>
+CharacterOff
+Param	character_grayout=true
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							<dash=2>リディ!!
+	ディーア	本気2						貴様、リディをどうする気だ……!!
+CharacterOff
+	ドロシー	怒り						知らん、"彼"に聞け\n私は興味がない
+CharacterOff
+	黒リディ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							……なんだと？
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							やれやれ\n面倒ごとから逃げるのは\nキミの悪い癖だ、ドロシー
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							……お前が、アネセサリのトップか
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							ああ、そうだ
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							リディを返せ\nその子はお前のような奴が\n触れていい存在じゃない
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							貴様にこそ、その資格はないだろう
+	？？？？							魔剣殺しブリジットの変則的な\n"アンロック"<dash=2>
+CharacterOff
+	黒リディ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							…………!?
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							それもただ力を引き出すだけの、\n中途半端な解放を繰り返せば\nこうなることはわかっていたはずだ
+	？？？？							それなのに貴様は彼女を危険に晒した
+	？？？？							あらゆる魔剣を\nアンロックできる異能の中の異能……
+	？？？？							それを有するがゆえに、\n"オレならできる"などと\n思い上がった結果がこの末路だ
+	？？？？							……違うか？
+CharacterOff
+	黒リディ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							なんだと……？
+CharacterOff
+	魔人ディーア	？				.5		貴様には期待していたのだがな\n……どうやら見立てを誤ったようだ
+	魔人ディーア	？						残念だよ、『ディーア』
+CharacterOff
+Bgm	緊迫
+	黒リディ	照れ	2_2
+	ディーア	怒り2	1_2
+	ディーア							…………ッ!?
+	黒リディ							この声、マスターと同じ……!?
+	ディーア							何故、\nその名前を知っている……？
+CharacterOff
+Param	character_grayout=false
+	魔人ディーア	笑い
+	？？？？		2_2					オレは"お前自身"だからさ
+	？？？？							<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>による\n多重並行世界の生成によって分裂した\n数千万の世界のうちの一人
+	？？？？							<param=name>の名は\n無数に存在するそれらを\n識別するための記号に過ぎない
+	？？？？							ここでは不要なものだろう
+	　　　　　　　　　　		3_3
+Tween	　　　　　　　　　　	MoveBy	x=5				Add
+	魔人ディーア	ニヤリ				1		だが、そうだな……\n便宜上、『魔人』とでも\n名乗っておくとしよう
+Param	character_grayout=true
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							魔人……まさか、お前<dash=2>!!
+CharacterOff
+	魔人ディーア	通常						いかにも\nオレは魔人機関アネセサリを\n代表する者だ
+	魔人ディーア							<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>が\n世話になっているようだな
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							……今までのロスト魔剣は、\nお前が作ったのか
+CharacterOff
+	魔人ディーア	笑い						そうだ
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							……魔剣の心を弄び、\n姉妹や自分自身を破壊するように\n仕組んだのか
+CharacterOff
+	魔人ディーア	笑い						それがどうした？
+CharacterOff
+	黒リディ		2_2
+	ディーア	本気2	1_2
+	ディーア							お前は、魔剣を何だと思って<dash=2>
+CharacterOff
+	魔人ディーア	ニヤリ						魔剣は兵器だろう
+	魔人ディーア							オレの目指す、\nたった一つの正解に\nたどり着くための道具だ
+CharacterOff
+	黒リディ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							お前<dash=2>
+	ディーア	怒り2						今までロスト化した魔剣たちが、\nどんな気持ちで<dash=2>
+CharacterOff
+	魔人ディーア	ニヤリ						それはオレの知ったことじゃない\n全て彼女たちが望んだことさ
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル392G	G2	エフェクト表			0
+FadeIn	white					.3
+	魔人ディーア	<Off>						『姉が存在しなければ、\n　お前は伝説になっていた』
+	イベントスチル393C		エフェクト表2
+	魔人ディーア	<Off>						『バハムートがいなければ、\n　未来を手にするのはお前だった』
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+CharacterOff						0
+FadeIn	black					.3
+	魔人ディーア	ニヤリ						オレはただ可能性を伝えただけのこと
+	魔人ディーア	笑い						<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>に\nなったのは、彼女たち自身が決めた\n尊い選択だ
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+	イベントスチル459BG		エフェクト表			0
+FadeIn	white					.3
+Wait						.9
+	イベントスチル103006_2		エフェクト表			0
+Wait						1
+	イベントスチル1037BG_2		エフェクト表			0
+Wait						1
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff
+CharacterOff						0
+Param	character_grayout=true
+	黒リディ		2_2			0
+	ディーア	怒り2	1_2			0
+FadeIn	white					.3
+	ディーア							……お前は、リディも同じように\n兵器として使うのか
+CharacterOff
+StopBgm
+	魔人ディーア	冷徹						……フン、何を聞くかと思えば
+	魔人ディーア	ニヤリ						当然だ\nそれが必要になるのであれば、な
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							貴様<dash=2>
+CharacterOff
+	魔人ディーア	ニヤリ						丁度いい、\nたった一つの正解にたどり着くためだ\n利用させてもらうぞ
+CharacterOff
+	黒リディ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							な……!?
+CharacterOff
+Param	character_grayout=false
+Se	闇1
+	オーラ赤		エフェクト表			1
+Bgm	魔王バトル
+	魔人ディーア							力を貸せ\n<dash=2>魔鍵ユグドラシル
+Se	闇3
+FadeOut	red					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	黒グラデーション		エフェクト裏			0
+	リディ	暴走泣き2				0
+	NPリディ	赤	エフェクト表			0
+FadeIn	red					.5
+	NPリディ							<color=#fe3333>くっ……いや……\nあああああああああああああ!!!!</color>
+Se	光3
+FadeOut	black					.5
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Bloom
+	ディーア	本気2				0
+Shake	Graphics		x=5 y=5 time=2				NoWait
+FadeIn	black					.2
+	ディーア							貴様……!!
+CharacterOff
+	魔人ディーア	笑い						ブリジットには\nこのまま暴走し続けてもらう
+	魔人ディーア							……それが、彼女のためだ
+CharacterOff
+	ディーア	怒り2						なんだと……？
+FadeOut	black					.3
+	9章スチルA		エフェクト表			0
+Shake	9章スチルA		x=1 y=1 time=50				NoWait
+FadeIn	black					.3
+	リディ	<Off>						<color=#fe3333>壊したくない、壊さなきゃ、壊したくない、壊さなきゃ<dash=2></color>
+	魔人ディーア	<Off>						<dash=2>衝動に抗う必要はない
+	魔人ディーア	<Off>						魔剣は全て貴様の贄だ\n思うがままに喰らいつくすが良い
+	魔人ディーア	<Off>						さあ<dash=2>\n破壊しつくせ、魔剣殺しブリジット
+FadeOut	black					.2
+CharacterOff						0
+	ディーア	本気2				0
+FadeIn	black					.2
+	ディーア	本気2						貴様の好きにはさせない<dash=2>!!\n<ruby=アンロック>魔剣解放</ruby>!!
+Se	光3
+FadeOut	white					.5
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_09
+EndIf
+EndScenario
+
+# Q1009_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	天界
+FadeIn	black					.5
+	ディーア	本気2						お前だけは許さない……お前だけは!!
+CharacterOff
+	魔人ディーア	ニヤリ						…………フン
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+Param	character_grayout=true
+Bg	天界					0
+	ディーア	悔しい2
+Shake	ディーア		x=5				NoWait
+StopBgm						1
+	ディーア							ぐっ……
+CharacterOff
+	リディ	暴走泣き2						<color=#fe3333>死んじゃう、殺されちゃう、守らなきゃ<dash=2></color>
+CharacterOff
+Bgm	絶望
+	黒グラデーション		エフェクト表
+	ディーア	怒り2						お前には見えないのか……？\nリディは、あんなに\n苦しんでいるんだぞ!!
+CharacterOff	黒グラデーション
+	ディーア							……オレは、\n今までリディを救うために戦ってきた\nそれはお前も同じはずじゃないのか!!
+	ディーア	本気2						なのに何故……!!\n答えろ!!
+CharacterOff
+	魔人ディーア	冷徹						お前こそ、\n何故オレを止めようとする？
+	ディーア	悔しい2						なに……？
+	魔人ディーア							そもそも、\nお前の言う救いとはなんだ？
+	魔人ディーア							ブリジットを大切に守り、匿い、\n何不自由なく幸せな生活を送る<dash=2>
+	魔人ディーア							確かに、お前の命があるうちは\nそれでもいいだろう
+	魔人ディーア							だが、魔剣は人間より\n遥か長い時を生きる
+FadeOut	black					.2
+CharacterOff						0
+Bg	戦場跡					0
+FadeIn	black					.2
+	魔人ディーア	<Off>						今のお前がブリジットを\n守ったとして、その後はどうする？
+	魔人ディーア	<Off>						誰が彼女を守る？\n誰が彼女の幸せを保証する？
+	魔人ディーア	<Off>						魔剣というものが存在する以上、\n魔剣殺しブリジットは\n兵器であることを強いられ続ける
+	魔人ディーア	<Off>						戦乱に巻き込まれ続け、\n朽ち果てるまで兵器として過ごす<dash=2>\nそんな生き方が幸せだとでも？
+FadeOut	black					.2
+CharacterOff						0
+Bg	天界					0
+	魔人ディーア	ニヤリ
+FadeIn	black					.2
+	魔人ディーア							オレは、そんな結末を避けるための\n手段を提案しているに過ぎない
+CharacterOff
+	ディーア	怒り2						……なんだと？
+CharacterOff
+	魔人ディーア	笑い						簡単なことだ
+	魔人ディーア							魔剣という、\n不死性を持った兵器が存在するから\n魔剣殺しブリジットに価値が生まれる
+	魔人ディーア							魔剣が存在しなければ、\n彼女を巡る争いは発生しなくなる
+CharacterOff
+	ディーア	悔しい2						<dash=2>まさか
+CharacterOff
+	魔人ディーア	ニヤリ						ああ、そのまさかだとも
+	魔人ディーア							貴様の手持ち、\nそして今まで出会った数々の魔剣たち
+	魔人ディーア							それら全ての魔剣を救おうなどと、\n甘いことは考えるな
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏2
+	9章スチルV		エフェクト裏
+	リディ	暴走2
+	魔人ディーア	<Off>						魔剣殺しブリジットを\n救いたいのであれば、\n貴様のすべきことは、ただ一つ
+	魔人ディーア	<Off>						<dash=2>魔剣殺しブリジット以外の魔剣を\n全て破壊しろ
+	黒背景		エフェクト表
+	魔人ディーア	<Off>						それが彼女を救う唯一の道だ
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_10
+EndIf
+EndScenario
+
+# Q1009_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	天界
+	黒グラデーション		エフェクト表
+	ディーア	悔しい2
+FadeIn	black					.5
+Shake	ディーア		x=5				NoWait
+	ディーア							くっ……
+CharacterOff
+	魔人ディーア	笑い						心当たりはあるのだろう？
+	魔人ディーア	通常						少なくとも、ブリジットを使って\n魔剣を破壊していく上で、貴様は\n確かな手応えを感じていたはずだ
+	魔人ディーア							魔剣を破壊していくことこそ、\nブリジットを救う手段であると
+	魔人ディーア							だから貴様は魔導王ユウの\n依頼を受けた
+	魔人ディーア	ニヤリ						貴様ならわかる……\nいや、貴様にだけはわかるはずだ\n違うか？
+CharacterOff
+	ディーア	怒り2						……だからといって、\n全ての魔剣を破壊するなんてやり方を\n認めるわけにはいかない
+	ディーア							もちろん、リディは大切な相棒だ\nだが、他の魔剣との絆だって\nオレにとって大切な宝物だ
+CharacterOff
+	魔人ディーア	冷徹						……甘えたことを
+	魔人ディーア							ならば貴様は、ブリジットと\n貴様の魔剣が同時に危険に晒された時\n一体どちらを助けるつもりだ？
+	ディーア	怒り2						…………
+	魔人ディーア							答えは既に出ているはずだろう
+	ディーア	怒り2						……オレは、二人とも救う
+	魔人ディーア							…………
+	ディーア	怒り2						お前がオレだというのなら、\nお前だってずっとそうしてきたはずだ
+	魔人ディーア	冷徹						……話のわからん奴だ\nその選択の結果がこれだということを\nどうして理解しようとしない
+	魔人ディーア							これ以上の問答は必要ないな\n<dash=2>後は任せる、ドロシー
+Se	歩く
+CharacterOff						1
+Wait						1
+StopSe
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	通常	1_2
+	ドロシー							はっ
+CharacterOff
+	ディーア	本気2						待て、話はまだ……!!
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り	1_2
+Bgm	緊迫
+	ドロシー							残念だが、追わせるわけにはいかない\n悪く思うなよ、これも仕事なんだ
+	ドロシー							やれ、ブロードソード=ロスト
+	緋剣ブロードソード=ロスト							お任せください
+CharacterOff
+	ディーア	悔しい2						ブロードソード……
+CharacterOff
+	緋剣ブロードソード=ロスト							対魔剣殲滅魔導兵器LS_No.13052\n緋剣ブロードソード=ロスト
+ImageEffect	SpriteCamera	Bloom
+	黒グラデーション		エフェクト裏
+	ブロソロストロゴ		effect_c
+Tween	ブロソロストロゴ	ScaleBy	x=2 y=2 time=2				NoWait
+	ブロソロストロゴ							……全てはマスターのために
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_11
+EndIf
+EndScenario
+
+# Q1009_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	天界
+FadeIn	black					0
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー		1_2
+	緋剣ブロードソード=ロスト							<dash=2>これで、終わりです!!
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+Param	character_grayout=true
+Bg	天界					0
+Se	ジャストガード
+StopBgm
+	ディーア	悔しい2
+Shake	ディーア	MoveBy	x=5				NoWait
+	ディーア							くっ……
+	カルバノグ							そこまで、ですよう
+	ディーア	驚き2						……カルバノグ？\nお前、なんで……
+	カルバノグ							あ、言っておきますけどお、\nあなたのためじゃないですよう？
+	カルバノグ							カルバ、ちょーっと\nやりたいことがあるのでえ♪
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り	1_2
+Bgm	緊迫
+	緋剣ブロードソード=ロスト							……邪魔をしないでください、\nカルバノグ
+	ドロシー							彼の命令だ\n邪魔をするというのなら<dash=2>
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+Param	character_grayout=true
+Bg	天界					0
+	カルバノグ
+Tween	カルバノグ	MoveBy	x=30				NoWait
+	カルバノグ							マスターの邪魔をしている気は\nありませんよう？
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り	1_2
+	緋剣ブロードソード=ロスト							なら<dash=2>
+CharacterOff
+	カルバノグ							緋剣ブロードソード=ロスト<dash=2>
+	カルバノグ							魔剣ではなく、\n天使『ディーア』の魔核を\n破壊するために作られた<ruby=ガベージコレクタ>魔導兵器</ruby>
+	カルバノグ							確かに、ここでこの人を破壊すれば\n<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>による\n魂の希薄化は軽減されますよう
+	カルバノグ							そしたらあ、\n確かにちょーっとだけマスターも\n楽になるかもしれませんねえ
+	カルバノグ							でも、それじゃあ結局\n今までと何も変わらないままですよう
+	カルバノグ							カルバはマスターの力に\nなりたいからこそ<dash=2>
+	カルバノグ							もう少し、様子を見ても良いんじゃ\nないかなーって思いますよう？
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り	1_2
+	緋剣ブロードソード=ロスト							……貴女には申し訳ありませんが、\nこれは彼の決定です
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.5
+CharacterOff
+ImageEffect	SpriteCamera	MotionBlur
+	カルバノグ
+Se	風1
+Tween	カルバノグ	MoveBy	x=150				NoWait
+	カルバノグ							思考停止っていうんですよう、\nそういうの
+	カルバノグ							ドロシーだって\n納得いってないんじゃないですう？
+ImageEffectOff	SpriteCamera	MotionBlur
+	カルバノグ							誰よりも魔剣を愛している\n貴女だからこそ<dash=2>
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+StopBgm
+	ドロシー	怒り	1_2
+	ドロシー							<dash=2>黙れ
+CharacterOff
+	カルバノグ							あっ
+Bgm	緊迫
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ							やっちゃいましたよう♪\nカルバ、地雷\n踏んじゃったみたいですう！
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り	1_2
+	緋剣ブロードソード=ロスト							……ドロシー？
+	ドロシー							…………やれ、\nブロードソード=ロスト
+	緋剣ブロードソード=ロスト							……いいんですか？
+	ドロシー							どうせカルバノグは\n並行世界に遍在できる存在だ\n一人くらい消えたところで問題はない
+CharacterOff
+	カルバノグ
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ							おおーこっわ！\nカルバびっくりしちゃいましたよう！
+	カルバノグ							よし、逃げますよう！\n<param=name>の\nディーアさん！
+CharacterOff
+	黒リディ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							お前、どうして……
+CharacterOff
+	カルバノグ							細かい話は後ですよう！\nアレの攻撃をまともに食らったら、\n本当に壊れちゃいますよう？
+	カルバノグ							それに、ブリジットの攻撃を受けて\n本当はもう限界みたいですしい
+CharacterOff
+Param	character_grayout=false
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り	1_2
+Se	光1
+	オーラ赤		エフェクト表			1
+	緋剣ブロードソード=ロスト							逃がすとでも？
+CharacterOff
+Param	character_grayout=false
+Se	光2
+	オーラ青		エフェクト表
+	カルバノグ							ウサギは逃げ足が速いんですよう！\n知りませんでしたあ？
+FadeOut	white					.1
+CharacterOff	カルバノグ					0
+StopBgm
+FadeIn	white					.1
+CharacterOff						1
+Wait						3
+CharacterOff
+Param	character_grayout=true
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り	1_2
+	ドロシー							……ったく、本当に面倒な仕事だ
+	緋剣ブロードソード=ロスト							追わなくて、良いのですよね
+	ドロシー							構わん\n追撃してでも仕留めろとは\n言われていない
+	緋剣ブロードソード=ロスト							……カルバノグはどうします？
+	ドロシー	通常						問題ないだろう\n奴のことだ\n悪いようにはしないだろうさ
+FadeOut	black					.5
+CharacterOff						0
+Wait						3
+	　　　　　　　　　　
+Bgm	図書館
+Bg	大灯台					0
+FadeIn	black					.5
+	魔人ディーア							……奴は逃げおおせたか
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	ドロシー	怒り	1_2
+	ドロシー							申し訳ありません
+CharacterOff
+	魔人ディーア							いや、構わない\n想定通りだ
+	魔人ディーア							ブロードソード=ロストは\nオレが引き受ける\nドロシーはカルバノグを監視しろ
+CharacterOff
+	ドロシー	怒り/フード
+	ドロシー							はっ
+Se	走る
+CharacterOff						1
+Wait						3
+StopBgm
+	魔人ディーア	冷徹						……さて
+	魔人ディーア							やはり不思議な感覚だな\nまさか、もう一度会えるとは
+CharacterOff
+Param	character_grayout=false
+Se	コインロック
+	リディ	暴走2
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	魔人ディーア	<Off>						大丈夫だよ、ブリジット\n今度はもう失敗しない
+	黒背景		エフェクト表
+	魔人ディーア							オレは、全ての魔剣を壊して<dash=2>\nキミを救ってみせる
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_12
+EndIf
+EndScenario
+
+# Q1009_12
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	酒場_宿屋
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+ImageEffect	SpriteCamera	Blur
+Wait						2
+	黒リディ
+	　　　　　　　　　　		2_2
+FadeIn	black					.5
+CharacterOff	黒背景					2.5
+Tween	瞬きA	MoveBy	y=400 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-400 time=2	easeOutCirc
+	ディーア	<Off>						う……ここ、は……
+CharacterOff	瞬きA
+CharacterOff	瞬きB
+Bgm	図書館
+	黒リディ							マスター……！\nやっと目が覚めたんだね
+	ディーア	<Off>						リディ……？
+CharacterOff
+	黒リディ
+ImageEffectOff	SpriteCamera	Blur
+	黒リディ	照れ						……ごめんネ\nあっちのリディちゃんじゃないんだ
+	ディーア	汗2						……ああ、黒リディか\n悪い、声が同じだったから……
+	黒リディ	笑い						別にいいよ\n気にしてないサ
+	黒リディ							……怪我はもう大丈夫カナ？\n痛みはない？
+	ディーア	通常2						ああ、大丈夫だけど……
+	ディーア	怒り2						…………
+	ディーア							黒リディ、聞いてもいいか？
+	ディーア							お前、なんであの時オレを庇ったんだ？
+	黒リディ							うーん……そうだナ
+	黒リディ							私も魔剣殺しブリジットの\n一人だから、カナ
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+	白背景		エフェクト裏
+	8章スチルO		エフェクト表			0
+FadeIn	black					.3
+	黒リディ	<Off>						魔剣殺しブリジットが\n三つに砕け散った……っていう話は、\nもう聞いてるカナ？
+	ディーア	<Off>						ああ……ケルベリルが\n話しているのを聞いたことがある
+	黒リディ	<Off>						そう、なら話は早いね
+	黒リディ	<Off>						ヘルメリアは、ブリジットを\n三つの権能に分けて破壊した
+	黒リディ	<Off>						医療と治癒の権能、\n学問と詩の権能、\nそして鍛冶と工芸の権能
+	黒リディ	<Off>						だから私たちは別々の役割を持つ\n同一人物なのサ
+	黒リディ	<Off>						それに、私たちは\n記憶と感情を共有してる
+	黒リディ	<Off>						あの子は、\nそれに気づいていないみたいだけど
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff						0
+	　　　　　　　　　　					0
+FadeIn	black					.3
+	黒リディ							つまり、サ\nマスターを助けたいと思う気持ちは\n同じなんだよ
+	ディーア	悔しい2						……でも、\nオレはお前のマスターじゃない
+	黒リディ							あの子のマスターでもないでしょ？
+	ディーア	怒り2						…………
+	黒リディ							それでも、\nあの子はキミをマスターって呼んでる\nだからマスターでいいんだヨ
+	ディーア	通常2						…………そうか
+	ディーア							でも、何故E.D.E.N.に？
+	黒リディ							E.D.E.N.が一番厄介だったからサ
+FadeOut	white					.3
+CharacterOff
+Param	character_grayout=false
+	9章スチルD		エフェクト表2			0
+	黒背景		エフェクト表			0
+FadeIn	white					.3
+	黒リディ	<Off>						魔剣機関の局長はマスターと同じ\n目的で動いているし、世界図書館も\nマスターに危害を加えるとは思えない
+	9章スチルE		エフェクト表2
+	黒リディ	<Off>						魔女王ケルベリルも自分から戦争を\n起こすタイプじゃないし、太陽聖域は\nマスター自身が動くべきだった
+	9章スチルF		エフェクト表2
+	黒リディ	<Off>						だから残るはメルトナか\nE.D.E.N.だったんだけど……ほら、\n私あそこの王様に嫌われてるからサ
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	驚き2				0
+FadeIn	black					.3
+	ディーア							…………
+	黒リディ							ン？\nなあに、その顔は
+	ディーア	驚き2						いや……\n色々考えてるんだなって思ってさ
+	黒リディ							そりゃ碩学のブリジットだからネ
+	黒リディ	照れ						というか今「ちょっと意外……！」\nって思ったでしょ\nお姉さんおこだぞ
+	ディーア	あはは2						あはは……ごめんごめん
+	ディーア	怒り2						ああ、それから……\nもう一つ聞いてもいいか？
+	黒リディ	笑い						もちろん\n私に答えられることならね
+	ディーア	悔しい2						……オレは\nリディの攻撃を食らったはずだ
+	ディーア	怒り2						でも、オレの傷はもう治ってる……\nこれも、お前がやってくれたのか？
+	黒リディ	通常						ああ、それね
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Param	character_grayout=false
+Bg	戦場跡					0
+	白リディ					0
+	　　　　　　　　　　		2_2
+FadeIn	white					.3
+	黒リディ	<Off>						それはあの子<dash=2>\n修繕のブリジットの力、カナ
+	ディーア	<Off>						あの子が……？
+	黒リディ	<Off>						うん　ふらっと来て、\n修繕してどこかに行っちゃった
+	ディーア	<Off>						あの子も、\nオレの味方……なのか？
+	黒リディ	<Off>						さあね？\nそれはわからないカナ
+	黒リディ	<Off>						記憶と感情を共有してても、\nわからないんだよね\nあの子が何を考えているのか
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale
+Param	character_grayout=true
+Bg	酒場_宿屋					0
+	ディーア	驚き2
+FadeIn	white					.3
+	ディーア							……<ruby=ブリジット>自分自身</ruby>のことなのに？
+	黒リディ							あなただって、\n自分のこと全部\nわかってるわけじゃないでしょ？
+	黒リディ							人にはいろんな一面があるものサ\nもちろん、自分の知らない部分もね
+	ディーア	怒り2						……自分の知らない一面、か
+	黒リディ							迷っているんでしょう？\n……彼の言うことが、\n本当に正しいのか
+	ディーア	怒り2						…………
+	黒リディ							それなら、調べてみるといいよ
+	黒リディ							判断に迷うということは、\n情報が足りていないということサ
+	黒リディ							知識は全てを補ってくれる\n足りていないと感じるならば、\n学ぶといい
+	黒リディ							碩学のブリジットが\n言うんだから間違いないよ
+FadeOut	black					.5
+CharacterOff						0
+StopBgm
+	　　　　　　　　　　					0
+Bg	学校図書館					0
+Wait						2
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　魔剣機関　第八十五歴史資料庫
+Bgm	図書館
+	ディーア	悔しい2						今までに送り込まれた\nロスト魔剣は十三本……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Bg	天界					0
+CharacterOff
+	魔人ディーア	ニヤリ				0
+FadeIn	white					.3
+	魔人ディーア							<dash=2>魔剣殺しブリジット以外の魔剣を\n全て破壊しろ
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	　　　　　　　　　　
+Bg	学校図書館					0
+FadeIn	black					.3
+	ディーア	悔しい2						それを通して、あいつはずっと\n伝えようとしていたのか……？
+CharacterOff
+Se	歩く
+	黒リディ					.5		探しものは見つかった？
+StopSe
+	ディーア	怒り2						……いや、ダメだな
+	ディーア							魔王獣ブリジットに関する記述は\nほとんど残っていない
+	ディーア							強いていえば、メルトナの実験場から\n逃げ出した実験体の話が少しだけ\n残っているくらいだったけど……
+	ディーア	怪しい2						でも、この伝承は\n史実と違うんだろう？
+	黒リディ							そうだネ\n少なくとも、\n私が覚えている話とは違う
+	ディーア	怒り2						……仮に、この実験体が、\n魔王獣ブリジットだったとして
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Bg	天界					0
+CharacterOff						0
+	魔人ディーア	冷徹				0
+FadeIn	white					.3
+	魔人ディーア							その選択の結果がこれだということを\nどうして理解しようとしない
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	　　　　　　　　　　
+Bg	学校図書館
+FadeIn	black					.3
+	ディーア	怪しい2						<size=20>……あながち、\n間違っていないのかもしれないな</size>
+	黒リディ							……確かに、彼のやり方なら\n私たちが危険な目に\n遭うことはなくなると思うヨ
+	黒リディ							魔剣がいなくなるということは、\n"魔剣殺し"に\n価値がなくなるということ
+	黒リディ							魔剣殺しブリジットは、\n魔核機関に対してのみ\n特異性を持つ魔剣だからね
+	黒リディ							誰も魔剣を使わなくなったら、\nただのちょっと強い剣でしかないのサ
+	黒リディ							そうなったら、\n誰も私たちを奪い合うことがなくなる
+	黒リディ							私たちを巡る争いも、\n私たちが引き起こす災害も、\n存在しなくなる
+	黒リディ							……そこは間違いなく、\n魔剣殺しブリジットが\n平穏に暮らせる世界になるだろうネ
+	黒リディ							でも、私は<dash=2>
+CharacterOff
+	　　　　　　　　　　
+StopBgm
+Se	ドア開く
+Wait						1
+	魔導王ユウ							ああ、ここにいたんだね\n<param=name>ちゃん
+	ディーア	驚き2						……魔導王！
+	魔導王ユウ							ちょっといいかい？\nキミに話がある
+	ディーア	怒り2						わかりました、すぐ向かいます
+	魔導王ユウ							ああ、待ってるよ
+	ディーア	通常2						……ごめん、なにか言いかけたか？
+	黒リディ							ううん、なんでもない\n行こ、マスター
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	研究所B					0
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+Bgm	作戦会議
+FadeIn	black					.5
+	ディーア							……天上王セトが？
+CharacterOff
+	魔導王ユウ							ああ、どうやら不穏な動きを\n見せているようだ
+CharacterOff
+	黒リディ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							一度展開した天使兵を\nセフィロトに再集結させている……
+	黒リディ							……変だね
+	黒リディ							魔界を滅ぼしたいのであれば、\nそのまま天使兵を使役して\n各地を襲撃し続けたほうが良いはず
+	黒リディ							仮に十三王クラスが現れたとしても、\n彼とクリーフォートで\n対処できるはずだし……
+	黒リディ							……なにを企んでいるのカナ？
+	ディーア	怒り2						もし、天使兵を集結しなければ\n倒せないもの<dash=2>
+	ディーア							いや、そうしないと\n<ruby=・・・・・・・・>手に入れられない</ruby>ものが\nあるとしたら
+CharacterOff
+	魔導王ユウ							そう、奴の狙いはそれだ
+	魔導王ユウ							奴が狙っているのは、\nおそらくロストの技術か、\n魔剣殺しブリジットの奪取……
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							あるいはその両方、ですね
+CharacterOff
+	魔導王ユウ							そうだ\nそのために、あの魔人と\n一太刀交えようとしているのだろう
+	魔導王ユウ							いずれにせよ、セフィロト奪還の機を\n一度逃している我々としては、\nここで動かざるを得ないだろう
+	魔導王ユウ							それに、キミにとっても……\n黙ってみているわけには\nいかないだろう？
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							ええ、そうですね
+CharacterOff
+	魔導王ユウ							なら、決まりだな
+	魔導王ユウ							残念だが魔剣機関の転送装置は\n軒並み壊れている
+	魔導王ユウ							バハムート=ロストの襲撃で、\nちょうど無理をさせたばかりだからね
+	魔導王ユウ							……少し長い移動になる\nすぐにでも支度してもらうよ
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							ええ、オレもすぐに準備します
+CharacterOff
+	カルバノグ							カルバも行きますよう！\nなんだか面白そうですしい♪
+CharacterOff
+	黒リディ		2_2
+	ディーア	本気2	1_2
+	ディーア							カルバ、お前<dash=2>!!
+CharacterOff
+	魔導王ユウ							それは困るな\nキミにはまだ調査に協力してもらう\n必要がある
+CharacterOff
+	カルバノグ							えー、やですよう！\n調査って楽しくないですしい
+	カルバノグ							まあ、力ずくで\n縛り上げるっていうなら\n話は別ですけどお……
+	カルバノグ							やってみますう？
+CharacterOff
+	魔導王ユウ							……やめておくよ\nアリスファミリーを敵に回すのは\nあまりにリターンが見合っていない
+	魔導王ユウ							悪いね、\n<param=name>ちゃん\nその子の監視も頼んでいいかい？
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							……それは構わないですが\n何故、カルバがここに？
+CharacterOff
+	魔導王ユウ							ブリジットとの戦闘で負傷した\n<param=name>ちゃんを\n連れてきたのは彼女だよ
+CharacterOff
+	黒リディ		2_2
+	ディーア	驚き2	1_2
+	ディーア							……カルバが？
+CharacterOff
+	カルバノグ							えっへへぇ♪\n褒めてくれてもいいですよう？
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							…………
+CharacterOff
+	カルバノグ							ちぇー、けちですねえ\nさびしくてないちゃいそうですよう！\nえーんえーん
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							……オレはお前やアネセサリの\nしてきたことを許してはいない
+	ディーア							魔剣をロスト化して、\n都合のいいように使うなんてやり方、\nオレは絶対に認めない
+	ディーア							……だが
+CharacterOff
+	カルバノグ							んう？
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							助けてくれたことには礼を言う\nありがとう、カルバ
+CharacterOff
+	カルバノグ							おぉ！ えっへへへ♪\n今はその言葉で十分ですよう♪
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ							さ、そうと決まれば\n聖鍵セフィロトにしゅっぱーつ！\nですよう！
+	カルバノグ							楽しいことになってると\nいいですねえ、えへへー♪
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_13
+EndIf
+EndScenario
+
+# Q1009_13
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	都市
+Bg	灰の大地
+FadeIn	black					.5
+	　　　　　　　　　　							　　　乾いた大地エトロサーバ\n　 　　　大河の街オトキア
+	カルバノグ							ふんふふーんふーん♪\nらんららーん♪
+	ディーア	怪しい2						……上機嫌だな
+	カルバノグ							そりゃー上機嫌ですよう！\nだってカルバ、こんな旅行なんて\n久しぶりですしい！
+	ディーア	怪しい2						……旅行じゃないぞ
+	カルバノグ
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ							えぇ？ 違うんですかあ？
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	9章スチルY		エフェクト表			0
+FadeIn	white					.3
+	カルバノグ	<Off>						じゃあなんでわざわざ魔剣機関から\nアマラブルムに向かうのに\nエトロサーバを経由してるんです？
+	9章スチルY	Y2	エフェクト表			.5
+	カルバノグ	<Off>						陸路で行ったほうが\n早くないですう？
+	ディーア	<Off>						天使軍の侵攻のせいさ
+	9章スチルY	Y3	エフェクト表			.5
+	ディーア	<Off>						研究市街ジーヴォは、\nほとんど壊滅状態らしい
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=true
+	カルバノグ					0
+FadeIn	black					.3
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ							あぁ、せっかくの旅行なのに\nおいしいもの食べられないと\n楽しくないですもんねえ
+CharacterOff
+	黒リディ		2_2
+	ディーア	怪しい2	1_2
+	ディーア							だから旅行じゃないってば
+CharacterOff
+	カルバノグ							ところでカルバ、\nこのあたりの名物の\nパフェ食べたいんですけどお
+CharacterOff
+	黒リディ	照れ	2_2
+	ディーア	汗2	1_2
+	ディーア							人の話を聞けって
+	黒リディ							カルバちゃん、スイーツ詳しいね……
+CharacterOff
+	カルバノグ							アネセサリの情報網を\n甘く見ちゃいけませんよう！
+	カルバノグ							このあたりにある美味しいお店や\n有名店は、カルバの頭の中に\nぜーんぶ入ってますからねえ♪
+	カルバノグ							あっ、カルバあそこ行きたいですう！\n謎の傭兵集団「八咫烏」が運営する\nオトキアの隠れた名店！
+	カルバノグ							その名もcafe ヤタガラス！\nそこの名物、六大異変パフェが\n食べたいんですよう！
+CharacterOff
+	黒リディ		2_2
+	ディーア	怪しい2	1_2
+	黒リディ							ろくだいいへんぱふぇ……？
+	ディーア							オトキアには六大異変ないのに？
+CharacterOff
+	カルバノグ							まあエイビシュタット近いから\nいいじゃないですかあ
+CharacterOff
+StopBgm
+	黒リディ		2_2
+	ディーア	怪しい2	1_2
+	ディーア							だいたい、\nお前はこんなところにいていいのか？
+CharacterOff
+	カルバノグ							んえ？\nなにがですう？
+CharacterOff
+Bgm	図書館
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							お前はアネセサリの魔剣だろう？
+	ディーア							<ruby=あいつ>魔人ディーア</ruby>を裏切ったのなら、\nただじゃ済まされないんじゃ\nないのか？
+CharacterOff
+	カルバノグ							え？\nカルバ、べつに裏切ってませんよう？
+CharacterOff
+	黒リディ		2_2
+	ディーア	驚き2	1_2
+	ディーア							……なに？
+CharacterOff
+	カルバノグ							カルバは、彼のためにやるべきと\n思ったことをやっているだけですよう
+	カルバノグ							それはブロードソード=ロストも、\n今までのロストたちも、\nみーんな同じですう
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							……たった一つの正解のため、\nってやつか
+CharacterOff
+	カルバノグ							そう！\nそれですよう！
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+	9章スチルG		エフェクト表			0
+FadeIn	white					.3
+	ディーア	<Off>						全ての魔剣を破壊して、\nリディを救う……\nあいつはそう言ったな
+	ディーア	<Off>						それだと、お前たちだって\n救われないんじゃないのか？
+	ディーア	<Off>						<ruby=あいつ>魔人ディーア</ruby>が掲げる救済に、\nお前たちは含まれていない
+	ディーア	<Off>						……いや、含まれていないどころか、\n必要な犠牲として計上されている
+	ディーア	<Off>						お前も、ブロードソードも、\nみんな<dash=2>
+CharacterOff
+Param	character_grayout=true
+	カルバノグ							わかってますよう？
+	カルバノグ							それでも、たった一つの正解を\n探すために全てを尽くす
+	カルバノグ							だって、それが\n魔人機関アネセサリですよう
+CharacterOff
+StopBgm
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							……理解、できないな
+CharacterOff
+	カルバノグ							そうでしょうねえ\nでも、きっとそのうちわかりますよう
+Bgm	都市
+	カルバノグ							それでパフェの話なんですけどお！
+CharacterOff
+	黒リディ		2_2
+	ディーア	怪しい2	1_2
+	ディーア							……それもアネセサリのためなのか？
+CharacterOff
+	カルバノグ							いや、これはカルバのためですねえ！
+CharacterOff
+	黒リディ		2_2
+	ディーア	あはは2	1_2
+	ディーア							……はは\nほんとに不思議なやつだな、お前は
+CharacterOff
+	カルバノグ							別に不思議じゃないですよう！\nカルバ、一回\n行ってみたかったんです！
+	カルバノグ							<size=20>……だって、全部なくなっちゃったから</size>
+CharacterOff
+	黒リディ		2_2
+	ディーア	驚き2	1_2
+	ディーア							……え？
+CharacterOff
+	カルバノグ							なんでもないですよう♪\nほらほら～！ もうすぐですよう♪
+Tween	カルバノグ	MoveBy	x=500 time=2				NoWait
+Wait						1.5
+CharacterOff						.5
+Wait						.5
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	黒リディ							……いいの？\nまた迷ってるみたいだけど
+	ディーア							ああ、でも今はとりあえず\n一緒に行動してみよう
+	ディーア	通常2						それに、\n黒リディも甘いもの好きだろ？
+Tween	黒リディ	PunchPosition	y=50				NoWait
+	黒リディ	照れ						ふぇっ!?\nま、まあ……あなたのリディちゃん\nほどじゃないけどネ
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_14
+EndIf
+EndScenario
+
+# Q1009_14
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	酒場_カフェ
+FadeIn	black					.5
+Param	character_grayout=false
+Param	character_grayout=false
+	9章スチルZ		エフェクト表
+	酒場のおばちゃん	<Off>						ハイお待ち！\n特盛カレーライス\n辛さ増しのお客様ァ！
+CharacterOff
+Param	character_grayout=true
+Bgm	絶望
+	火天のブラム							ああ、ありがとう
+	火天のブラム							……ハフ、ハフ
+CharacterOff
+	黒リディ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							…………ええと
+CharacterOff
+	ドロシー	怒り						…………
+CharacterOff
+	太陽王アーク							…………
+CharacterOff
+	火天のブラム							…………ハフ
+CharacterOff
+Param	character_grayout=false
+	9章スチルZ		エフェクト表
+	酒場のおばちゃん	<Off>						オムライスのお客様ァ!!
+CharacterOff
+Param	character_grayout=true
+	太陽王アーク							……オレだ
+CharacterOff
+	黒リディ	照れ	2_2
+	ディーア	悔しい2	1_2
+	黒リディ							えぇ……何この気まずい空気……
+	ディーア							ど、どうしてこんなことに……
+Se	回想
+FadeOut	black					.5
+StopBgm
+CharacterOff						0
+	　　　　　　　　　　
+Wait						2
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　<dash=2>cafe ヤタガラス<dash=2>
+Bgm	魔剣の日常
+	カルバノグ
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ							おじゃましますよう！
+	カルバノグ							いやぁー楽しみですねえ、\n六大異変パフェ！
+CharacterOff
+	黒リディ		2_2
+	ディーア	通常2	1_2
+	黒リディ							うん、楽しみ……！
+	ディーア	あはは2						黒リディもすっかり\nその気になっちゃってるな
+	黒リディ	照れ						い、いや、これはっ……\n……もー、たまにはいいじゃん！
+	ディーア	あはは2						はいはい
+CharacterOff
+	店員	<Off>						お客様、ただいま満席でして……\n相席でもよろしいでしょうか？
+	ディーア	通常2						ああ、それで大丈夫です
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+StopBgm
+FadeIn	black					.5
+	店員	<Off>						こちらにどうぞ♪
+CharacterOff
+	火天のブラム							……な、魔鍵使い!?
+	ディーア	驚き2						ブラムさん!?
+Bgm	緊迫
+	火天のブラム							貴様、ここに何をしに<dash=2>
+	ディーア	悔しい2						あなたこそ、何故ここに<dash=2>
+	ディーア	本気2						まさか、奇襲のつもりか!?
+	火天のブラム							貴様こそ、\nオレを尾けてきたのだろう！
+	火天のブラム							ここはあの太陽王に\n"隠れ家"と言わしめた店だ
+	火天のブラム							貴様のような魔剣使いが\n自力で見つけられるわけが<dash=2>
+	黒リディ	照れ						隠れ家的って\nそういう意味じゃないと思うけど……
+	カルバノグ							確かに隠れた名店ですけどねえ
+CharacterOff
+	火天のブラム							敵意は明確だな\n<dash=2>マージニア!!
+	ディーア	本気2						いいぜ、そっちがその気なら<dash=2>
+CharacterOff
+Param	character_grayout=false
+Bgm	コメディ
+	9章スチルZ		エフェクト表
+	酒場のおばちゃん	<Off>						<size=40>騒ぐんじゃないよ!!</size>
+CharacterOff
+	火天のブラム		1_2
+	ディーア	汗2	2_2
+	二人							あ、はい……
+CharacterOff
+	酒場のおばちゃん							喧嘩ならよそでやんな!!\nったく最近の若いモンは……
+Se	走る
+Tween	酒場のおばちゃん	MoveBy	x=500
+CharacterOff
+Wait						.5
+StopBgm
+	？？？？							……座れ
+	ディーア	驚き2						……その声は!!
+	太陽王アーク							オレたちはただ飯を食いに来ただけだ
+	火天のブラム							……アーク
+Bgm	絶望
+	ディーア	驚き2						何故、アークがブラムと一緒に……？\nブラムは太陽聖域を\n裏切ったはずじゃ……
+	太陽王アーク							この店で偶然会ったのさ
+	太陽王アーク							この店は元々、\n太陽聖域が使っていた集会場だ
+	ディーア	驚き2						太陽聖域が……？
+	太陽王アーク							太陽聖域は、かつて\nE.D.E.N.の暗部を担う組織でな
+FadeOut	black					.3
+ImageEffect	SpriteCamera	GrayScale
+Param	character_grayout=false
+CharacterOff						0
+	7章スチル2		エフェクト表			0
+FadeIn	black					.3
+	太陽王アーク	<Off>						勇者王に影があってはならない\nだが、綺麗事だけでやっていけるほど\n十三王は甘くない
+	太陽王アーク	<Off>						勇者王の代わりに、\n汚れ仕事を請け負う組織が必要だった
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Param	character_grayout=true
+	太陽王アーク					0
+FadeIn	black					.3
+	太陽王アーク							もっとも、今となっては全員が\nE.D.E.N.を離反し、代わりに\n<ruby=ヘキサナイツ>異端勇者</ruby>がその責を担っているがね
+	黒リディ							……本当に隠れ家だったんだ
+	太陽王アーク							オレたちには不要になったから、\n今は「八咫烏」に提供している
+	太陽王アーク							オレとブラムはたまたまここで\n会ったに過ぎない
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							……お前は、ブラムのことを\nなんとも思わないのか？
+	黒リディ							そうね\nブラムは太陽聖域の\n敵になったんでしょう？
+CharacterOff
+	太陽王アーク							別にブラムを咎める必要はあるまい
+	太陽王アーク							ただ、己の心に従った結果、\n道を違えただけのことだ
+	火天のブラム							…………
+StopBgm
+CharacterOff
+Se	ドア開く
+	　　　　　　　　　　
+Wait						1
+	店員	<Off>						いらっしゃいませー！
+Bgm	緊迫
+	ドロシー							<dash=2>やっと見つけたぞ、カルバノグ\nまさかエトロサーバにいるとはな
+CharacterOff
+	カルバノグ							うげえ……\n面倒なのに見つかりましたよう……
+	ディーア	怒り2						ドロシー!?\nどうしてここに<dash=2>
+	ドロシー	怒り						ああ、やはり少年も一緒だったか
+	ディーア	悔しい2						リディはどうした\nまさか……
+	ドロシー	怒り						知らないねえ、\nそれは私の管轄じゃない
+	ドロシー							それに悪いが、お前の相手をしている\n暇はなくてな
+	ドロシー							用があるのは\nそこの子ウサギだけだ……が
+	ディーア	怒り2						それで、はいそうですかと\n引き下がるとでも思ったのか？
+StopBgm
+	ドロシー	ニヤリ						フン\nこれは私の仕事じゃないんだがな<dash=2>
+Bgm	魔王バトル
+	ドロシー							いいぜ、少年\nお前がその気ならやってやる
+	ドロシー							前のような\n手抜きはしてくれるなよ？
+	ディーア	本気2						何が何でもリディの居場所を\n教えてもらうぞ<dash=2>\n行くぞ、ドロシー!!
+	ドロシー	ニヤリ						フン、かかってきな<dash=2>!!
+CharacterOff
+Param	character_grayout=false
+Bgm	コメディ
+	9章スチルZ		エフェクト表
+	酒場のおばちゃん							<size=40>騒ぐんじゃないっ\nつってんだよ!!!!</size>
+CharacterOff
+	ディーア	怪しい2	2_2
+	ドロシー	驚き	1_2
+	二人							あ、はい……
+FadeOut	black					.5
+StopBgm
+CharacterOff						0
+	　　　　　　　　　　
+Wait						1
+Bgm	ガヤA
+FadeIn	black					.5
+	火天のブラム							…………ハフ、ハフ
+	ドロシー							……もぐ
+	ディーア	怒り2						…………仕事はいいのか、ドロシー
+	ドロシー	怒り						…………うるさい、昼休憩だ
+	ドロシー							だいたい、お前こそ\n何故こんな寄り道をしている？
+	ディーア	怪しい2						それは<dash=2>
+CharacterOff
+Bgm	コメディ
+	集中線		エフェクト表
+	カルバノグ							スイーツが\n食べたかったからですよう！
+CharacterOff
+	ドロシー	怒り						………………ああ\nいや、聞いた私が悪かった
+	ドロシー							苦労しただろ、少年……
+	ディーア	汗2						ああ、まあ……
+	ドロシー							だがまあ、たまには\nこういう日があってもいいだろう
+CharacterOff
+	酒場のおばちゃん		1_2
+Tween	酒場のおばちゃん	MoveBy	x=90				NoWait
+	酒場のおばちゃん							ハンバーグ定食でお待ちのお客様！
+CharacterOff
+	カルバノグ
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ							あ、注文いいですかあ？\nカルバ、六大異変パフェが\n食べたいんですけどお！
+CharacterOff
+	火天のブラム							ほう、六大異変パフェだと？
+	太陽王アーク							噂には聞いたことがある\n六大異変を模った巨大なパフェが\nオトキアにあると
+	カルバノグ							そうなんですよう！\nカルバ、一度\n食べてみたかったんですう！
+	火天のブラム							なるほど、気になるな
+	酒場のおばちゃん							あ、ごめんねえ\n六大異変パフェは数量限定で\nあと1つなんだ
+CharacterOff
+Param	character_grayout=false
+Bgm	緊迫
+	集中線		エフェクト表
+	火天のブラム		1_2
+	カルバノグ		2_2
+	二人							な……ッ!!?
+CharacterOff
+	ドロシー							では私がもらおう
+	カルバノグ
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+Bgm	コメディ
+	カルバノグ							カルバです！\nカルバが食べますう！
+	火天のブラム							よく考えてみろ、\nオレは激辛を食べたばかりなんだぞ\n甘味はオレが頂くべきだ
+	カルバノグ
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ							火力上がりそうで\nいいじゃないですかあ！
+	カルバノグ							甘いもの食べたら\n火力下がりますよう？
+	太陽王アーク							ならばオレがいただく\nこの場で一番地位が高いのは\n十三王であるこのオレだ
+CharacterOff
+Param	character_grayout=true
+	黒リディ		2_2
+	ディーア	怪しい2	1_2
+	ディーア							アーク？
+	黒リディ							……貴方も食べたいの？
+CharacterOff
+	太陽王アーク							パフェには興味がないが、\n六大異変絡みとなると話は別だ
+	太陽王アーク							それに、一つを求め合う\n戦いだというのであれば……\n共に争うのもやぶさかではない
+CharacterOff
+	黒リディ		2_2
+	ディーア	あはは2	1_2
+	ディーア							お前さては戦いたいだけだろ
+CharacterOff
+	太陽王アーク							ああ、心踊る戦いは好きだ\n魔界に生まれたものなら皆そうだろう
+	ドロシー	ニヤリ/武器						フン、太陽王に"火焔勇者"ブラムか\n間引いておいて損はないだろう
+	カルバノグ							カルバを敵に回したこと、\n後悔させてあげますよう！\nぷんぷん！
+	火天のブラム							オレの火力を\n甘く見てもらっては困るな
+Bgm	魔王バトル
+	太陽王アーク							クク……いくぞ、ラグナロク!!
+CharacterOff
+Param	character_grayout=false
+	9章スチルAA		エフェクト表
+	太陽王アーク	<Off>						我が覇道を阻む者、\nその尽くを\n蹂躙してみせようじゃないか<dash=2>!!
+CharacterOff
+	9章スチルZ		エフェクト表
+Bgm	コメディ
+	酒場のおばちゃん							<size=40>よそでやんな!!!!!</size>
+CharacterOff
+Shake	Graphics		y=20 time=0.2				Add
+	全員							はい!!!!!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	市街地C					0
+Bgm	平和
+Param	character_grayout=true
+	　　　　　　　　　　
+FadeIn	black					.5
+	火天のブラム							まさか追い出されるとは……
+	太陽王アーク							……オレは十三王だぞ？\nあのような振る舞い<dash=2>
+	ドロシー	怒り						知るか、エトロサーバじゃ\n支持されてないんだろ
+	カルバノグ							アリス様のお膝元ですしねえ
+	太陽王アーク							まあいい……\nそれで、セフィロトに\n向かうのだろう、魔鍵使い？
+CharacterOff
+	黒リディ		2_2
+	ディーア	驚き2	1_2
+	ディーア							え？\nああ……その予定だが
+CharacterOff
+	太陽王アーク							そうか
+	太陽王アーク							ではな、魔鍵使い\nまた会うこともあるだろう\n……行くぞ、ブラム
+	火天のブラム							あ、ああ……
+Se	歩く
+CharacterOff						1
+Wait						1.5
+StopSe
+StopBgm
+	カルバノグ							……変な二人ですねえ
+Bgm	図書館
+	ディーア	怒り2						……なあ、ドロシー
+	ドロシー	怒り						どうした、文句なら聞く気はないぞ
+	ディーア	怒り2						……お前は、<ruby=あいつ>魔人ディーア</ruby>のことを\nどう思っているんだ？
+	ドロシー	驚き						なんだ、藪から棒に
+	ディーア	怒り2						……いや、少し気になったんだ
+	ディーア							お前は、一体どんな気持ちで\n<ruby=あいつ>魔人ディーア</ruby>に\n従っているのかってな……
+	ドロシー	怒り						……そうだな
+	ドロシー							彼が何故魔人を\n名乗っているのか、知っているか？
+	ディーア	驚き2						……いや、知らないな
+	ドロシー	怒り						魔人とは、魔剣を取り込んだ\n人間なのさ
+FadeOut	black					.3
+CharacterOff						0
+Bg	魔人機関					0
+FadeIn	black					.3
+	ドロシー	<Off>						天使とは異なり、魔剣主体ではなく、\n人間主体で構成される究極の生命体
+	ドロシー	<Off>						そしてそれは、我々アネセサリが\n魔神と崇める少女……
+	ドロシー	<Off>						魔剣殺しブリジットを\n破壊するために作られた技術だ
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地C					0
+	ディーア	悔しい2
+FadeIn	black					.3
+	ディーア							リディを破壊する、だと……？\nそれを、あいつ自身が……？
+	ドロシー	怒り						ああ、そうだ\n……そうしなければならなかったのさ
+	ドロシー							彼は自分の身体を兵器にしてまで、\n自分の犯した過ちの責任を取った
+	ドロシー							そして今、\n彼はその未来を覆そうとしている
+	黒リディ							…………
+	ドロシー	怒り						……どんな気持ちで\n命令に従っているのかと聞いたな
+	ドロシー							私にとってはただの仕事さ\nそれ以上でも以下でもない
+	ドロシー							……だが、分からないでもないな\n愛する魔剣を救いたいという気持ちは
+	ディーア	悔しい2						……ドロシー
+	ドロシー							アネセサリは皆、\nどこか欠けた人間が集まっている
+	ドロシー							……彼の苦しみは、\nみな手に取るようにわかるんだよ
+	ディーア	怒り2						…………
+	ドロシー							……っと、話しすぎたな
+	ドロシー	ニヤリ/フード						さて、休憩は終わりだ\nじゃあな、少年
+	カルバノグ							……ドロシー？\nカルバを探しに\n来たんじゃなかったんですう？
+	ドロシー	ニヤリ/フード						別にいいさ\nお前は好きに行動しろ
+Se	歩く
+CharacterOff						1.5
+StopSe
+StopBgm						1
+	ドロシー	<Off>						どうせ、\n放っておいても\nそっちから来るだろう？
+Wait						1
+	ディーア	怪しい2						……愛する魔剣を\n救いたいという気持ち、か
+	カルバノグ							あーあ、六大異変パフェ\n食べそこねちゃいましたよう
+	ディーア	あはは2						……また今度来ればいいだろ
+	カルバノグ
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ							<dash=4>！\n……たしかに、それもそうですねえ
+	カルバノグ							そのためにも、\n頑張ってもらわなきゃですねえ♪
+	ディーア	通常2						ああ……そうだな
+FadeOut	black					1
+CharacterOff
+Bg	大灯台B
+	　　　　　　　　　　
+Wait						3
+Se	ドーン
+FadeIn	black					0
+Wait						1
+Se	歩く
+	天上王セト					1		…………
+CharacterOff
+StopSe
+Bgm	図書館
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	冷徹	1_2					……来たか、天上王セト
+CharacterOff
+	天上王セト							まるで俺が来ることが\nわかっていたかのように言うのだな
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	笑い	1_2					当然だ\n知っていたからな
+	緋剣ブロードソード=ロスト							…………
+CharacterOff
+	天上王セト							それが"ロスト"か\n<dash=2>素晴らしいな
+	天上王セト							見事なものだよ、\nロスト技術というものは
+	天上王セト							俺がその答えに\nたどり着けなかったことが\n悔しくて仕方がないほどに
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							…………
+CharacterOff
+	天上王セト							天使化の技術を以てしても\n成し得なかった自律式の魔剣型兵器
+	天上王セト							これに比べれば、\n我が最高傑作と呼ばれた天使も\nただの人形のようなものだ
+	天上王セト							魔人……それに"ディーア"といったか\nキミに興味が湧いた
+	黒背景		エフェクト表
+	天上王セト							少し話をしようじゃないか<dash=2>
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_15
+EndIf
+EndScenario
+
+# Q1009_15
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	酒場_宿屋
+Bg	大灯台B					0
+FadeIn	black					0
+Bgm	緊迫
+	天上王セト							<dash=2>魔王になることに\n興味がないと？
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	ニヤリ	1_2
+	魔人ディーア							ああ
+	魔人ディーア							協力を持ちかけるつもりで\nあったのならば、無駄なことだ
+CharacterOff
+	天上王セト							いいや、ならばなおさらだ
+	天上王セト							キミの持つ技術は素晴らしい
+	天上王セト							俺の<dash=2>\nひいては魔導生命研究所の持つ技術が\n児戯にも等しく思えてくるほどだ
+	天上王セト							一研究者として\nこれほど興味を惹かれることも\nそうそうない
+	天上王セト							そしてキミ自身の天使という特性も\n素晴らしいものだ
+	天上王セト							原初の魔剣と人間の交配によって\n生まれた正真正銘の天使……
+	天上王セト							原初の魔剣を模倣した魔剣は数あれど\n原初の魔剣の胎内から生まれた人間は\n世界でキミ一人だけだろう
+	天上王セト							ぜひともご両親に会ってみたいものだ　\n……おそらく、もう人間の形は\nしていないだろうがな
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							…………
+CharacterOff
+	天上王セト							それに、キミはもう一つ、\n魔剣を取り込んでいるな？
+	天上王セト							いやはや、素晴らしい技術だよ\n本当に……
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							なるほど、噂には聞いていたが\n……見る目はあるようだな
+CharacterOff
+	天上王セト							これほどの技術を持っている者が、\n魔王に興味を持たないとは\n……嘆かわしいことだ
+	天上王セト							その技術は、\nキミの手で腐らせておくには\nあまりにもったいない
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							……つまり、ロスト技術を寄越せと？
+CharacterOff
+	天上王セト							そうだ
+	天上王セト							力は然るべきところにあるべきだ
+	天上王セト							少なくとも、その力を十全に\n発揮できない者は持つべきではない
+	天上王セト							俺ならば、その技術を以て\n魔導生命の研究を完成させ、\nマスターキーの野望を打ち砕く
+	天上王セト							そして全ての魔剣を破壊し、\n魔王として世界を\n支配するに至れるだろう
+	天上王セト							力を貸すというのならば、\n貴様の望みもついでに\n叶えてやらんこともないが？
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							下らないな
+CharacterOff
+	天上王セト							……何？
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							力は、それを正しく使えるものが\n持つべきだ
+	魔人ディーア							魔剣殺しブリジットの力を\n兵器としてしか扱えない者が\n持つべきではない
+	魔人ディーア							お前も\n……そしてオレも
+CharacterOff
+	天上王セト							……夢想家だな
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	笑い	1_2
+	魔人ディーア							夢を持つこともまた力だ\n正しい使い方は、\n未だに思いつかないがね
+CharacterOff
+	天上王セト							なるほど、わかり合えないわけだ
+	天上王セト							同じ研究者として、\n少しは理解できると思ったんだが<dash=2>
+StopBgm						1
+	天上王セト							<dash=2><ruby=アンロック>魔剣解放</ruby>
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							……正気か？
+CharacterOff
+Param	character_grayout=false
+	天上王セト		2_2					そんなもの、とうに捨てた
+Se	光1
+	オーラ青		エフェクト表			1
+Bgm	魔王バトル
+	天上王セト							原初十三魔剣が一振り、\n天業剣クリーフォート
+FadeOut	white					.1
+	天業剣クリーフォート		1_2_b
+FadeIn	white					.1
+	天上王セト							そして魔王候補十三王が一人、\n天上王セト\n<dash=2>推して参る
+CharacterOff
+	魔人ディーア							……仕方ないな\nここで戦うのは本意じゃないが
+CharacterOff
+Param	character_grayout=false
+	9章スチルAB		エフェクト表
+	黒グラデーション		エフェクト裏2
+	オーラ赤		エフェクト裏
+	魔人ディーア	<Off>						原初十三魔剣が一振り、\n《世界意思ディーア》\nブリジットは渡さない<dash=2>
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_16
+EndIf
+EndScenario
+
+# Q1009_16
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	大灯台B
+FadeIn	black					.5
+Wait						.5
+Se	光3
+FadeOut	white					.5
+FadeIn	white					.5
+Shake	Graphics
+	天使							<dash=4>!!
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393D)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.3
+Wait						.2
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+ImageEffectOff	SpriteCamera	Bloom
+Param	character_grayout=true
+CharacterOff						0
+Bg	大灯台B					0
+	天使
+	緋剣ブロードソード=ロスト		2_3_b
+Se	倒れる
+Shake	天使		x=5				NoWait
+CharacterOff						1
+Wait						1
+	緋剣ブロードソード=ロスト							…………!!
+CharacterOff
+Se	風1
+	天使		画面外_上
+Tween	天使	MoveTo	y=-350				Add
+	天使							<dash=6>!!
+CharacterOff
+	魔人ディーア	笑い						……見事な連携だ\n指揮系統なくして\n軍隊を機能させるとは
+	魔人ディーア							まるで群が一つの生命体のようだ
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト	怒り	2_2					……クリーフォート
+	天業剣クリーフォート							はっ
+Se	風3
+Se	光3
+FadeOut	white					.5
+CharacterOff						0
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア		1_2
+Wait						.5
+FadeIn	white					.5
+Tween	緋剣ブロードソード=ロスト	MoveBy	x=30				NoWait
+	緋剣ブロードソード=ロスト							……っ
+	緋剣ブロードソード=ロスト							第零式天使兵マルアフ=ノフェルの\n波状攻撃、間隙を縫うかのような\nクリーフォートの抑制術式
+	緋剣ブロードソード=ロスト							さらに退路を塞ぐように周回する\n天使兵による<ruby=コロシアム>闘技場</ruby>とは
+	魔人ディーア	ニヤリ						奴に試されているな
+	緋剣ブロードソード=ロスト							ええ、試されてますね
+	魔人ディーア							<dash=2>ブロードソード=ロスト
+Tween	緋剣ブロードソード=ロスト	MoveBy	x=-30				NoWait
+Bgm	魔王バトル
+	緋剣ブロードソード=ロスト							お任せを\n貴方の道は、私が切り開きます
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+Param	character_grayout=true
+Bg	大灯台B					0
+	天上王セト	怒り						<dash=2>悪くない\nだが、これならどうだ？
+Se	光3
+Se	闇3
+FadeOut	purple					.3
+CharacterOff						0
+	魔人ディーア	冷徹				0
+Param	character_grayout=false
+	結界		エフェクト表2			0
+Se	ジャストガード
+FadeIn	purple					.5
+Wait						.5
+CharacterOff	結界					.5
+	魔人ディーア							……子供騙しだな
+Se	闇1
+	オーラ紫		エフェクト表			.5
+	魔人ディーア	笑い						お返しだ
+Se	光3
+Se	闇3
+FadeOut	purple					.3
+CharacterOff						0
+	　　　　　　　　　　
+Shake	Graphics		x=5 y=5 time=1.5
+FadeIn	purple					.5
+Wait						1
+	天上王セト	怒り						……ッ、ほう、\nクリーフォートの術式を複製……\nいや、喰らったのか
+	魔人ディーア	ニヤリ						悠長に喋っている場合か？
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+Param	character_grayout=true
+Bg	大灯台B					0
+	天上王セト
+Tween	天上王セト	MoveBy	x=-30				NoWait
+	天上王セト	怒り						くっ……
+	魔人ディーア	ニヤリ						かの天上王セトのことだ\nオレの正体には\n気付いているのだろう？
+	天上王セト							あくまで推測だがね
+	天上王セト							時間旅行……\nあるいは世界そのものの複製
+	天上王セト							もしも有り得ないことが\n有り得てしまっているのであれば、\n俺の仮説は全て成立する
+	魔人ディーア	ニヤリ						ならば、これも\n推測できているんじゃないかな
+	魔人ディーア	笑い						オレは既に一度、\nお前を倒しているんだよ\n<dash=2>天上王セト
+Se	斬2
+FadeOut	white					.1
+CharacterOff						0
+	天上王セト					0
+FadeIn	white					.1
+Se	ジャストガード
+	天上王セト	笑い						……フン\nだがそれは、魔剣殺しブリジットを\n使ってのことだろう？
+	魔人ディーア	ニヤリ						……<ruby=・・・・>食えない</ruby>男だ
+	天上王セト	笑い						引き換え、貴様は単純だな
+	魔人ディーア	冷徹						なに？
+	天上王セト	怒り						オレとクリーフォートにしか\n興味がないといった戦い方だ
+	天上王セト							天使を雑兵と見下すのは結構だが、\n甘く見ていると痛い目を見るぞ？
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+	天使		2_3_b			0
+	リディ	暴走2				0
+	鎖エフェクト前		エフェクト表			0
+	鎖エフェクト後ろ		エフェクト裏			0
+FadeIn	black					.3
+Se	コインロック
+Shake	リディ	黒2	x=5				NoWait
+	天使							<dash=6>!!
+	リディ	暴走2						…………ぅ、ぁ<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=true
+	　　　　　　　　　　
+FadeIn	black					.3
+	緋剣ブロードソード=ロスト							……ブリジット!!
+	天上王セト	笑い						戦いの趨勢を決めるのは力ではない\n頭脳だ
+	天上王セト							貴様のそのロスト技術……\n魔剣殺しブリジットの能力を転用した\nものであることはわかっていた
+	魔人ディーア	冷徹						…………
+	天上王セト							オレと一度戦ったことがあると\nいうのなら、これくらい読めていて\n然るべきではないのかね
+StopBgm
+	魔人ディーア	冷徹						はぁ……
+	天上王セト							……なにをしている？
+	魔人ディーア	冷徹						……自らの不甲斐なさに\n呆れ返っているだけさ
+	魔人ディーア							都合のいい駒とはいえ……\n結果的に、奴の力を借りるような\n作戦を立てた自らの不甲斐なさにね
+	天上王セト	怒り						……なんだと？
+FadeOut	black					.3
+Bgm	緊迫
+CharacterOff						0
+	天使					0
+FadeIn	black					.3
+	天使							<dash=4>!?
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Shake	天使		x=5				Add
+CharacterOff						1
+Wait						1
+	ディーア	本気2						リディ!!
+FadeOut	black					.3
+CharacterOff						0
+	天上王セト					0
+FadeIn	black					.3
+	天上王セト							……なっ、貴様<dash=2>
+	魔人ディーア	ニヤリ						ああ、読めていたとも\n貴様の考えそうなことくらいは\nわかるさ
+	天上王セト							ちっ……計算済みだったということか\n貴様は馴れ合いを\n忌避するものだと思っていたが
+CharacterOff
+Param	character_grayout=false
+Se	光1
+	オーラ赤		エフェクト表			1
+	魔人ディーア	ニヤリ						だからこそさ\n……これは読めなかっただろう？
+Se	火3
+Se	光3
+Se	闇3
+FadeOut	white					.5
+StopBgm
+CharacterOff						0
+	ディーア	悔しい2
+Wait						3
+FadeIn	black					.2
+Bgm	絶望
+	ディーア	悔しい2						リディ、大丈夫か？
+	リディ	黒2
+Shake	リディ	MoveBy	x=5				NoWait
+	リディ							……ぅ
+	ディーア	悔しい2						……魔剣殺しブリジットの力が\nだいぶ弱まっている
+	ディーア							これなら、天使の力で抑えきれば<dash=2>
+Se	光1
+FadeOut	white					.2
+	ディーア	天使2
+FadeIn	white					.2
+Wait						.5
+Se	回復
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff	ディーア
+	リディ	黒2
+Wait						.2
+	リディ	悲しい2				1		…………ぁ
+CharacterOff	オーラ青					1
+	リディ							ます、たー……？\nわたし……
+CharacterOff
+	ディーア	天使2
+Wait						.1
+Se	光1
+	ディーア	怒り2				.5		リディ……！\n無事で良かった……
+CharacterOff
+	カルバノグ							<ruby=彼>魔人ディーア</ruby>のおかげですよう
+CharacterOff
+	ディーア	驚き2						……え？
+CharacterOff
+	カルバノグ							あの拘束術式は、\n彼の魔力で作られてますからねえ
+	カルバノグ							あの状態からでは、\nゆっくりとブリジットの魔力を\n消耗させるしかありませんでしたしい
+CharacterOff
+	ディーア	悔しい2						……あいつは、\nリディを暴走させるつもりじゃ\nなかったのか？
+CharacterOff
+	カルバノグ							彼がそれをしても、\n魔剣殺しブリジットを守ることは\nできないですよう
+	カルバノグ							だって、彼はこの世界の\n人間じゃないですしい
+	カルバノグ							大切なのは、あなたが\nその選択をすること、ですよう？
+CharacterOff
+	ディーア	怒り2						<dash=2>あいつは、\n本当にリディを守るために\n戦っているんだな
+CharacterOff
+	カルバノグ							当然ですよう\n彼も、あなたなのですからねえ♪
+CharacterOff
+StopBgm
+	ディーア	目閉じ2						…………
+Bgm	特殊バトル
+	ディーア	怒り2						……<ruby=あいつ>魔人ディーア</ruby>と共闘する\n力を貸せ、カルバノグ
+CharacterOff
+	カルバノグ							はいはーい、わかってますよう♪
+CharacterOff
+	ディーア	本気2						行くぞ\n<ruby=アンロック>魔剣解放</ruby><dash=2>!!
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_17
+EndIf
+EndScenario
+
+# Q1009_17
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	大灯台B
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+FadeIn	black					.5
+	天上王セト							……流石に分が悪いか\nここで下がるのは本意ではないが<dash=2>
+CharacterOff
+	魔人ディーア	ニヤリ						そのまま逃がすとでも？
+Se	剣閃
+FadeOut	white					.1
+CharacterOff						0
+	天業剣クリーフォート		1_2_b			0
+	天上王セト		2_2			0
+	黒グラデーション		エフェクト表			0
+StopBgm
+FadeIn	white					.1
+Shake	天上王セト		x=5				NoWait
+	天上王セト							ぐっ……
+CharacterOff
+Bgm	絶望
+	魔人ディーア	笑い						いいか、\n<param=name>\nよく覚えておけ
+	魔人ディーア							魔王を目指す者にとって、\n魔剣殺しブリジットは\n喉から手が出るほど欲しい存在だ
+	魔人ディーア							全ての魔剣を破壊し、\n頂点に君臨するべく彼女を求める者は\nこれからもきっと後をたたない
+	ディーア	本気2						待て<dash=2>
+	魔人ディーア	ニヤリ						……貴様が心から、\nブリジットを守りたいと願うなら
+	魔人ディーア							全ての魔剣を破壊しろ\n……これは、その第一歩だ
+Se	斬2
+FadeOut	black					0
+Wait						.5
+Se	ジャストガード
+Wait						1
+CharacterOff						0
+	天業剣クリーフォート		1_2_b			0
+	天上王セト		2_2			0
+StopBgm
+FadeIn	black					0
+	天上王セト							…………ふ
+CharacterOff
+	魔人ディーア	冷徹						<dash=2>何？
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト	怒り	2_2					この瞬間を待っていたのさ\nキミが、俺の領域に\n足を踏み入れる瞬間を
+CharacterOff
+	魔人ディーア	冷徹						<dash=2>まさか
+Bgm	魔王バトル
+CharacterOff
+Param	character_grayout=false
+	天業剣クリーフォート		1_2_b
+	オーラ青		エフェクト表			1
+	天上王セト		2_2					なあ、魔人ディーア\nいくらキミでも、\n<ruby=・・・・・・・・・・・・>これは読めなかっただろう</ruby>？
+Se	光2
+Param	character_grayout=true
+ImageEffect	SpriteCamera	Bloom
+	黒グラデーション		エフェクト裏
+	NP天上王セト		エフェクト表			.5
+	NP天上王セト							<dash=2>《<ruby=トゥルーエンド>真解放</ruby>》、\n天業剣クリーフォート
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+	魔人ディーア	冷徹				0
+FadeIn	white					.3
+Tween	魔人ディーア	MoveBy	x=30				NoWait
+	魔人ディーア							くッ……!?
+	魔人ディーア	冷徹						貴様、わかっているのか……\nここでその力を使うという\n意味が<dash=2>
+CharacterOff
+ImageEffect	SpriteCamera	Bloom
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	NP天上王セト		エフェクト表					そうでもしないと、\n貴様を欺くことなど\nできなかっただろう？
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff
+	カルバノグ		2_2
+	ディーア	本気2	1_2
+	ディーア							魔人ディーア!!
+Tween	カルバノグ	MoveBy	x=-20				NoWait
+	カルバノグ							離れたほうがいいですよう!!
+	ディーア	悔しい2						なっ……!?
+	カルバノグ							天業剣クリーフォートは\n支配を司る剣……その真解放は、\n魔人機関でもデータがないんですよう
+CharacterOff
+	リディ	悲しい2						……マスター
+CharacterOff
+	カルバノグ		2_2
+	ディーア	悔しい2	1_2
+	ディーア							……くっ
+CharacterOff
+	緋剣ブロードソード=ロスト							<dash=6>!!
+Se	風1
+ImageEffect	SpriteCamera	MotionBlur
+Tween	緋剣ブロードソード=ロスト	MoveBy	x=-1000
+	天業剣クリーフォート							な<dash=2>
+Se	剣閃
+FadeOut	white					.1
+ImageEffectOff	SpriteCamera	MotionBlur
+FadeIn	white					.1
+Tween	天業剣クリーフォート	MoveBy	x=-20				NoWait
+	天業剣クリーフォート							くっ……
+CharacterOff
+	緋剣ブロードソード=ロスト		2_2
+	魔人ディーア	冷徹	1_2_b
+	魔人ディーア							……ブロードソード=ロスト
+	緋剣ブロードソード=ロスト							下がってください、\nここは私が抑えます
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393D)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.3
+Wait						.2
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+ImageEffectOff	SpriteCamera	Bloom
+Wait						.2
+Param	character_grayout=true
+CharacterOff						0
+StopBgm
+Bg	大灯台B					0
+	天上王セト							<dash=2>甘いな
+	緋剣ブロードソード=ロスト							……な
+Se	突1
+FadeOut	red					.3
+	天使		2_3_b
+Wait						.5
+FadeIn	red					.5
+Shake	緋剣ブロードソード=ロスト		x=5				NoWait
+	天使							<dash=4>!!
+Se	斬1
+FadeOut	red					.2
+	黒グラデーション		エフェクト表			0
+FadeIn	red					.2
+CharacterOff	緋剣ブロードソード=ロスト					1
+Se	倒れる
+Wait						2.5
+CharacterOff
+Bgm	絶望
+	魔人ディーア	冷徹						……<ruby=ダーティープレイ>姑息なやり方</ruby>だな\n真解放もブラフとは
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2					褒め言葉として受け取っておこうか
+	天上王セト							対魔剣殲滅魔導兵器のサンプルは\n預からせてもらう
+	天上王セト							……目的は達した\n行くぞ、クリーフォート
+	天業剣クリーフォート							はい、セト様
+Se	光1
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff						1
+Wait						1
+StopBgm
+Wait						1
+	魔人ディーア	冷徹						…………
+	カルバノグ							マスター!!
+CharacterOff
+Bgm	図書館
+	カルバノグ		2_2
+	魔人ディーア	笑い	1_2
+	魔人ディーア							カルバノグか
+	カルバノグ							もーーーーヒヤヒヤしましたよう!!
+	カルバノグ							あのままセトが《真解放》してきたら\nどうするつもりだったんですう？
+	魔人ディーア	笑い						……さあな\nだが、ブリジットは死守できた\n彼女が無事ならそれでいい
+	魔人ディーア							帰るぞ、カルバノグ
+	カルバノグ							はいはーい♪
+CharacterOff
+StopBgm
+	ディーア	怒り2						…………
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							……何を突っ立っている？
+CharacterOff
+Bgm	絶望
+	ディーア	怒り2						……帰る？\nお前こそ、何を言っているんだ？
+	ディーア							ブロードソードはどうするつもりだ？　\n……まさか見捨てるつもりじゃ\nないよな？
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							…………
+CharacterOff
+	ディーア	怒り2						冗談だよな？\n……あいつはオレの<dash=2>\nお前の魔剣だろう？
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	笑い	1_2
+	魔人ディーア							ああ、そして彼女は兵器として、\nブリジットを守る役割を果たした
+	魔人ディーア							十分な功績だ\n何か不足でもあるか？
+CharacterOff
+	ディーア	怒り2						お前<dash=2>
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	笑い	1_2
+	魔人ディーア							彼女の願いは、\nお前も知っているだろう
+	魔人ディーア							彼女は自らの力不足を嘆いていた
+	魔人ディーア							ランクSS魔剣のように、\n主を守れる絶対の力がないことを\n悔やんでいた
+CharacterOff
+	ディーア	怒り2						……知っているとも
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							だが、彼女は今見事に\n役割を果たしたじゃないか
+CharacterOff
+	ディーア	怒り2						彼女がそれを望んでいるとでも？
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	ニヤリ	1_2
+	魔人ディーア							ああ、そうだ\nそれがブロードソード=ロストの\n在り方だ
+CharacterOff
+	ディーア	本気2						違うだろう!!
+	ディーア	怒り2						彼女は確かに力を望んでいた
+	ディーア							だがそれは、\n彼女自身の平穏を、幸せを、\n居場所を守るためだったはずだ！
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							……そうか、そうだったかな
+CharacterOff
+	ディーア	悔しい2						そうだったかな、だと……？
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	ニヤリ	1_2
+	魔人ディーア							忘れたよ\nそもそも、大して興味のないことだ
+	魔人ディーア							彼女が何を望んでいたとしても、\nオレはそれを叶える気はない
+	魔人ディーア							全てはブリジットを救うための駒だ\n彼女の命を除いては、\n全てが等しく無価値なんだよ
+CharacterOff
+	ディーア	悔しい2						ならばお前は、ブロードソードや\n他の魔剣たちと紡いだ時間も、\n全て無駄だったと……？
+	ディーア							彼女たちと向き合い、費やした時間\n……紡いだ絆は、全て偽りだったと、\nそう言うのか……？
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							何度も言っただろう
+	魔人ディーア							魔剣を兵器扱いせず、\n全てを救おうとした結果がこのオレだ
+	魔人ディーア							全てを救おうなんて、\nオレという人間一人では\n到底無理なことだった
+	魔人ディーア							忘れたか？\n我々は<ruby=A Necessary Evil>必要悪</ruby>なんだよ
+	魔人ディーア							綺麗事で全てを救えるのならば\nそうしている
+	魔人ディーア							それができなかったから\n今ここにオレたちがいる
+	魔人ディーア							彼女を救うためならば、\nオレはどんな悪でも為す
+	魔人ディーア							……お前には、その覚悟がないのか？
+CharacterOff
+	ディーア	怒り2						<dash=2>それでも
+	ディーア							オレは、ブロードソードを\n見捨てることはできない
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							…………
+CharacterOff
+	ディーア	怒り2						オレは一人でも取り返しに行くぞ
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							……好きにしろ
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悲しい2	2_2
+	リディ							……マスター
+	ディーア							リディ、ちょっとだけ待っていてくれ
+	リディ							ううん、リディも行く
+	リディ	悔しい2						だってリディ、マスターの相棒だもん
+	リディ							……お願い
+	ディーア	通常2						……わかった\nでも、無理はするなよ
+	リディ							うん……！\nありがとう、マスター！
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							……わかっているんだろうな
+	魔人ディーア							ブリジットの身体は\n限界を迎えている
+	魔人ディーア							次にアンロックすれば、\n完全に暴走するぞ
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							わかっているさ……そうはさせない
+Se	歩く
+CharacterOff						1
+Wait						1.5
+CharacterOff
+StopSe
+StopBgm
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	カルバノグ							良いんですかあ？\n行かせちゃってえ
+	カルバノグ							カルバ、ちょっと心配ですよう
+	魔人ディーア							別にいいさ\nどちらに転んでも好都合だ
+	カルバノグ							まあ、そうですけどお
+	カルバノグ							……もう少し、\nなんとかならなかったんですう？
+	魔人ディーア	冷徹						何がだ？
+	カルバノグ							その言い方、ですよう
+	カルバノグ							マスターは彼女の望みを\n叶える気がないんじゃなくて
+	カルバノグ							何をしても叶えることが\nできなかった、だけですよねえ？
+	魔人ディーア	笑い						……さあ、どっちでも変わらないよ
+	カルバノグ							変わりますよう\nカルバにとっては、大事なことです
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_18
+EndIf
+EndScenario
+
+# Q1009_18
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	洋館
+Param	character_grayout=false
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	緋剣ブロードソード=ロスト
+FadeIn	black					.5
+Se	コインロック
+	緋剣ブロードソード=ロスト							…………
+CharacterOff
+Se	歩く
+	天上王セト					1		色々と解析させてもらったよ\nブロードソード=ロスト
+StopSe
+	天上王セト	笑い						随分と興味深い構成をしているのだな　\n対魔剣殲滅魔導兵器というものは
+	天上王セト	通常						一見すると同一因子を持つ魔剣しか\n破壊できないように見せかけているが\nそうではない
+	天上王セト							原初十三魔剣を除き、\n魔界に存在する魔剣は全て\n原初十三魔剣の模造品だ
+	天上王セト							故に、対応した原初十三魔剣を\n破壊するための魔力構成がされている\n……実に合理的だ
+	天上王セト	笑い						《真解放》することが前提の\nシステムとはいえ……\nくく、まさかこれほどとは
+	天上王セト	通常						かつて魔人ディーアが\n送り込んできたとされる十三本の\n対魔剣殲滅魔導兵器……
+	天上王セト							確か、あれは全て異なる\n<ruby=ルーツ>原初魔剣</ruby>からなる\nロストだったな
+	天上王セト							つまり、この十三本を揃えることで、\n擬似的に魔剣殺しブリジットを\n再現することができるというわけか
+	天上王セト	笑い						それにしても、\n惚れ惚れするほど繊細で\n美しい魔術式だ
+	天上王セト							……一体何人の魔剣研究家が\nこの美しさを理解できると\nいうのだろうな
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	緋剣ブロードソード=ロスト
+Se	コインロック
+	緋剣ブロードソード=ロスト							…………
+CharacterOff
+	天上王セト	怒り						残念だよ\n出会い方が違えば、\n良き友になりえたものを
+	天上王セト							そして、キミは<dash=2>
+	天上王セト							《世界意思ディーア》を\n破壊する能力を持った\n対魔剣殲滅魔導兵器というわけか
+	天上王セト	笑い						素晴らしい……これほど素晴らしい\n魔導生命体を、俺は初めて見る
+	天上王セト	怒り						<dash=2>だが、\n俺ならもっと美しく作れる
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	緋剣ブロードソード=ロスト
+Se	コインロック
+Shake	緋剣ブロードソード=ロスト		x=5				Add
+	緋剣ブロードソード=ロスト							…………っ
+CharacterOff
+	天上王セト	笑い						やはり魔剣は人間と\n掛け合わせてこそだ
+	天上王セト							キミならきっと、\n良い素材になってくれることだろう
+Param	character_grayout=true
+StopBgm
+	ディーア	<Off>						<dash=2>そこまでだ
+	天上王セト							……ほう\nこれはこれは、意外な客人だな
+CharacterOff
+Bgm	緊迫
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+	ディーア							ブロードソード=ロストは\n返してもらう
+CharacterOff
+	天上王セト							彼の言うことを聞かなかったのかい？
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+	ディーア							オレはあいつとは違う\n目の前で傷ついている仲間を見捨てる\nことなんて、オレにはできない
+CharacterOff
+	天上王セト							……そうか\n殊勝なことだ
+	天上王セト							キミは、魔剣殺しブリジットを\n守るために戦っている\nそうだろう？
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+	ディーア							ああ
+CharacterOff
+	天上王セト							では、キミは彼女を\nどう守るつもりだ？
+	天上王セト							ただ漠然と\n「守りたい」\nというだけでは子供の我儘と同じだ
+	天上王セト							……本当はそれが何を意味するのか\n自分でも\n理解していないのではないか？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	怒り2	2_2
+	ディーア							…………ッ
+CharacterOff
+	天上王セト							ブリジットを守る\nブリジットを救う\n……キミはそう言うが
+	天上王セト							キミは一体何から\nブリジットを守るつもりだ？
+	天上王セト							一体何からブリジットを\n救い出すつもりだ？
+Se	回想
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	戦場跡					0
+FadeIn	black					.3
+	天上王セト	<Off>						そもそも、魔剣殺しブリジットは\nかの異変を引き起こした災害の獣だ
+	天上王セト	<Off>						通常の魔剣のみならず、\n原初十三魔剣でさえ彼女の前では\n無力となる
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+Bg	洋館					0
+CharacterOff						0
+	リディ	怒り2	2_2			0
+	ディーア	悔しい2	1_2			0
+FadeIn	black					.3
+	ディーア							原初、十三魔剣……
+CharacterOff
+	天上王セト							……お前も天使であるならば、\nわかるはずだろう
+	天上王セト							伝承を力の源とする魔剣が、\nそれを破壊されるということの意味が
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	リディ							…………
+CharacterOff
+	天上王セト							そんな獣を救うということが\nどれほどの意味を持つことなのか、\nキミは理解しているのかい？
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							それは……
+CharacterOff
+	天上王セト							問いを変えようか
+	天上王セト							……何故貴様はブリジットを連れて\nここに来た？
+	天上王セト							そのリスクを、承知していなかった\nわけではないだろう？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア							…………オレは
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	　　　　　　　　　　
+Bg	チュートリアルスチル2					0
+FadeIn	white					.3
+Wait						.9
+	7章BG1		エフェクト表			0
+Wait						1
+	7章BG2		エフェクト表			0
+Wait						1
+FadeOut	black					0
+Bg	洋館
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	悔しい2	1_2			0
+	リディ	悲しい2	2_2			0
+FadeIn	black					.3
+	リディ							……マスター
+CharacterOff
+Param	character_grayout=false
+	天上王セト		2_2					答えを持ち合わせない、か\n無駄な問答だったな
+	天上王セト							ならば、貴様は魔王の座に<ruby=あた>能</ruby>わぬ
+Bgm	魔王バトル
+Se	光1
+	オーラ青		エフェクト表			1
+	天上王セト							<dash=2><ruby=アンロック>魔剣解放</ruby>、\n天業剣クリーフォート
+FadeOut	white					.1
+	天業剣クリーフォート		1_2_b			0
+FadeIn	white					.1
+	天上王セト							王たるものの在り方、\nとくと見せてやれ
+	天業剣クリーフォート							……御意
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							……来るぞ、下がってろリディ
+	リディ							うん……！
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_19
+EndIf
+EndScenario
+
+# Q1009_19
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	洋館
+FadeIn	black					.5
+	ディーア	本気2						はぁっ!!
+FadeOut	white					.1
+CharacterOff						0
+	天業剣クリーフォート		1_2_b			0
+	天上王セト		2_2			0
+FadeIn	white					.1
+Se	ジャストガード
+Wait						.5
+	天上王セト							未熟だな、少年
+CharacterOff
+	ディーア	悔しい2						くっ……はあああっ!!
+FadeOut	white					.1
+CharacterOff						0
+	天業剣クリーフォート		1_2_b			0
+	天上王セト		2_2			0
+FadeIn	white					.1
+Se	ガード
+	天上王セト							ブリジットを守りながら\nこの俺と戦おうなどと、\n随分と舐められたものだな
+	天上王セト							さっさと見捨てたほうが\nお前のためではないのか？
+CharacterOff
+	ディーア	悔しい2						うる、さい……!!
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+Param	character_grayout=true
+Bg	洋館					0
+	リディ	悔しい2						マスター、鍵を使って！
+	ディーア	悔しい2						でも、そうしたらリディが……
+	リディ	悔しい2						大丈夫、それくらいなら、\nリディは大丈夫だから……！
+Param	character_grayout=false
+	ディーア	目閉じ2						……ああ、わかった
+Se	光1
+	オーラ青		エフェクト表			1
+	ディーア	怒り2						《<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>》\n《<ruby=ワールドイズマイン>愚かなる卑怯者の鍵</ruby><dash=2>》!!
+Se	光2
+FadeOut	white					.2
+	ディーア	天使2
+FadeIn	white					.2
+	ディーア							オレは絶対にブロードソードを\n取り返してみせる<dash=2>
+	ディーア							行くぞ、天上王セト!!
+CharacterOff
+Param	character_grayout=false
+StopBgm
+	9章スチルH		エフェクト表
+	？？？？							<dash=2>この時を待っていたわ
+CharacterOff
+	ディーア	悔しい天使2						……何？
+Bgm	絶望
+CharacterOff
+	白リディ					.5		ついに知ってしまったのね、\nかわいそうなブリジット
+	リディ	絶望2						…………ぁ、あなたは<dash=2>
+Se	光3
+	オーラ青		エフェクト表			1
+	白リディ							あなたなら、\nきっとこうすると思ってた
+	ディーア	悔しい天使2						まさか<dash=2>
+Se	風1
+FadeOut	white					.1
+	ディーア	本気2				0
+FadeIn	white					.1
+	ディーア							鍵を閉じる!!\n抑えろ、リディ!!
+CharacterOff
+Param	character_grayout=true
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2					<dash=2>遅い
+Se	光3
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	白背景
+	　　　　　　　　　　
+Wait						3
+FadeIn	white					.5
+	白リディ							あなたのせいよ、ブリジット
+	リディ	悲しい2						……え？
+	白リディ							そして、私のせい
+	白リディ							あなたがついてこなければ、\nきっとマスターは\nこんなことにならなかった
+	白リディ							あなたが自分のことを\n英雄の剣だなんて勘違いしなければ\nこんなことは起こらなかった
+	リディ	悔しい2						……やめて
+	白リディ							夢を見てしまったのね、\nかわいそうな<ruby=わたし>ブリジット</ruby>
+	白リディ							自分は足手まといじゃないって、\n彼の隣に立てる立派な相棒だって\nそう思い込みたかったのでしょう？
+	リディ	悲しい2						…………やだ、やめて\nききたくない……
+	白リディ							でも、残念\nあなたは彼に相応しくない
+	白リディ							だって、あなたは<dash=2>
+	黒背景		エフェクト表			0
+	白リディ							<color=#fe3333>世界を滅ぼす、\n魔王獣ブリジットなんだもの</color>
+Se	光3
+Se	闇3
+FadeOut	red					1
+CharacterOff						0
+	ディーア	悔しい2				0
+Wait						1
+Bg	洋館
+Param	character_grayout=true
+Shake	Graphics		x=5 y=5 time=5				NoWait
+Bgm	Xmasボス
+FadeIn	black					.3
+	ディーア							なんだ、これは……!?\n魔核が共振している……!?
+	ディーア							まさか、同じ魔力を同時に\nぶつけ合ったことで\n過剰に励起しているのか……？
+	リディ	暴走2						<color=#fe3333>私は、わたしは<dash=2></color>
+	ディーア	怒り2						マズい……リディ！\nしっかりしろ!!
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天上王セト							無駄だよ\nキミの声が彼女に届くことはない
+	天上王セト							修繕のブリジットは医療と治癒の\n権能を持っているが<dash=2>
+	天上王セト							元々魔剣殺しブリジットの持つ\n治癒とは人のそれとは違う
+	天上王セト							彼女の行う修繕とは、\n人の修繕ではない　剣の修繕だ
+	天上王セト							剣の欠けて失った部分に\n素材を充てて修繕するように
+	天上王セト							彼女は不足した要素を他から充てがい\n混ぜ合わせることで修復を試みる
+CharacterOff
+	ディーア	怒り2						じゃあ、リディは……!!
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天上王セト							彼女の伝承を補填するのならば、\nお誂え向きのものがあるだろう
+	天上王セト							全ての情報を記録する聖杯であり、\n魔界全体の生命活動を\n維持できるほどの膨大な魔力源
+	天上王セト							そう\n<dash=2>魔鍵ユグドラシルだよ
+CharacterOff
+	ディーア	悔しい2						何のためにそんなことを<dash=2>
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天上王セト							それこそが\n《方舟計画》に必要だからさ
+CharacterOff
+	ディーア	怒り2						何……？
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天上王セト							四百年前の魔王獣の暴走は、\n実に魔界の半数以上の魔剣を葬った
+	天上王セト							事実、これを起因として魔王戦争は\n停滞を余儀なくされた
+CharacterOff
+	ディーア	怒り2						……まさか、それを\nもう一度繰り返そうというのか
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天上王セト							その通りさ\nそうすれば、人々は\n魔王戦争どころではなくなる
+	天上王セト							魔界に王は二人と必要ない\n魔剣も、魔王戦争も、\n俺が王になった暁には不要なものだ
+CharacterOff
+	ディーア	怒り2						…………！
+	ディーア	悔しい2						そうか、魔界に住む人々を無力化し、\n自分は方舟より人々を支配する……
+	ディーア							そうすれば、\n天上王の地位は絶対のものとなる
+	ディーア							魔鍵ノアを組み込んだ方舟の完成、\n魔界を切り離した新たなる星の王……
+	ディーア							それが《方舟計画》の狙いか<dash=2>!!
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天上王セト							いかにも
+	天上王セト							彼女……ブリジットには、\nそのための礎となってもらう
+	天上王セト							悪く思うな、魔剣使い
+CharacterOff
+	ディーア	怒り2						くっ……させてたまるか……!!
+Se	光2
+FadeOut	white					.2
+	ディーア	悔しい天使2				0
+FadeIn	whtie					.2
+	ディーア							しっかりしろ!!\nリディ!!
+CharacterOff
+Se	闇2
+Param	character_grayout=false
+	9章スチルV		エフェクト裏
+	リディ	暴走2						<color=#fe3333>……いや……\nあああああああああああああ!!!!</color>
+CharacterOff
+Param	character_grayout=true
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天上王セト							ご苦労だった、修繕のブリジット
+CharacterOff
+	白リディ							礼には及びません\n私のためでもありますから
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天上王セト							じきに暴走が始まる\n方舟に急ぐぞ、クリーフォート
+	天業剣クリーフォート							……はい
+FadeOut	black					.5
+StopBgm
+CharacterOff						0
+Wait						2
+	ディーア	悔しい天使2
+FadeIn	black					.5
+	ディーア							くっ……\n頼む、リディ……\n戻ってきてくれ……!!
+	緋剣ブロードソード=ロスト	<Off>						……下がってください
+	ディーア	天使2						…………っ!?
+	緋剣ブロードソード=ロスト							ここは、私にお任せください
+	ディーア	天使2						……ブロードソード=ロスト、\nお前<dash=2>
+FadeOut	black					0
+StopBgm
+CharacterOff						0
+	　　　　　　　　　　
+Param	character_grayout=false
+Wait						1
+	9章スチルJ		エフェクト表
+Se	強風	TRUE
+FadeIn	black					1
+	緋剣ブロードソード=ロスト	<Off>						貴方は、"リディちゃん"の\nためなら自分の人生さえ\n投げ出してしまえる人です
+	緋剣ブロードソード=ロスト	<Off>						少なくとも、\n"彼"はそうでした
+	緋剣ブロードソード=ロスト	<Off>						彼女を守る、幸せにする\n<dash=2>そこに、自分がいる必要はない
+	緋剣ブロードソード=ロスト	<Off>						<dash=2>太陽聖域、冥葬医師団\n魔界三国や、魔王候補十三王
+	緋剣ブロードソード=ロスト	<Off>						魔剣殺しブリジットを求める人間は、\n星の数ほど存在します
+FadeOut	white					.3
+StopSe
+Bgm	神秘
+CharacterOff						0
+	9章スチルL		エフェクト表			0
+FadeIn	white					.3
+	緋剣ブロードソード=ロスト	<Off>						もしかしたら、\nリディちゃんは貴方の元にいない\nほうが幸せになれるかもしれない
+	緋剣ブロードソード=ロスト	<Off>						王としての矜持を持って、\nリディちゃんを大切にしてくれる人が\nいるかもしれない
+	緋剣ブロードソード=ロスト	<Off>						真魔王ヘルメリアがそうだったように\n時の鍵師モモがそうだったように
+FadeOut	black					.3
+CharacterOff						0
+	9章スチルJ		エフェクト表			0
+FadeIn	black					.3
+	緋剣ブロードソード=ロスト	<Off>						でも、貴方は<dash=2>\n絶対にリディちゃんを\n手放そうとしなかった
+	緋剣ブロードソード=ロスト	<Off>						リディちゃんのためなら自分の全てを\n投げ出せるはずの貴方が
+	緋剣ブロードソード=ロスト	<Off>						それでも頑なに、\nリディちゃんを手元に置いておくのは\n何故なのです？
+	ディーア	<Off>						…………!!
+	緋剣ブロードソード=ロスト	<Off>						……その答えを、\n貴方は既に持っているはず
+	緋剣ブロードソード=ロスト	<Off>						だから、貴方に託します
+	緋剣ブロードソード=ロスト	<Off>						彼の夢を、希望を、\n貴方に託します
+	緋剣ブロードソード=ロスト	<Off>						……魔剣殺しブリジットは、\nまだ完全に暴走しきっていません
+	緋剣ブロードソード=ロスト	<Off>						私が、時間を稼ぎます\nその間に、早く<dash=2>
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい天使2						でも、お前は<dash=2>
+	緋剣ブロードソード=ロスト	<Off>						貴方は、\nここで命を落とすべきではない
+	ディーア							…………っ
+	緋剣ブロードソード=ロスト	<Off>						貴方は、彼女に必要な人です
+	緋剣ブロードソード=ロスト	<Off>						だから<dash=2>
+	ディーア							じゃあ、お前は\n命を落としても構わないというのか
+	ディーア							……お前は、必要とされていないと？
+CharacterOff
+Param	character_grayout=false
+	9章スチルJ		エフェクト表2
+	緋剣ブロードソード=ロスト	<Off>						いいえ、そうではありません\n……ただ、これが私の役割なのです
+	緋剣ブロードソード=ロスト	<Off>						貴方は、ブリジットのことだけ\n考えていればいい
+	ディーア	<Off>						でも<dash=2>
+	緋剣ブロードソード=ロスト	<Off>						これは、私の罪なのです
+	ディーア	<Off>						……え？
+	緋剣ブロードソード=ロスト	<Off>						……私は、誰かに使われ続けたかった
+	緋剣ブロードソード=ロスト	<Off>						私だってやればできるって、\n使い続けてくれさえすれば、きっと\n誰かを英雄にすることができるって
+	緋剣ブロードソード=ロスト	<Off>						……私は、心のどこかで\nそう思い上がっていたのです
+	緋剣ブロードソード=ロスト	<Off>						でも、私は彼を\n彼の望む英雄にしてあげられなかった
+CharacterOff						0
+Param	character_grayout=false
+	9章スチルM		エフェクト表			0
+	緋剣ブロードソード=ロスト	<Off>						私は英雄を作る剣などではなく、\nただのちっぽけで無力な剣だった
+	緋剣ブロードソード=ロスト	<Off>						……だから、今度こそ
+CharacterOff
+	ディーア	天使2						……ブロードソード
+CharacterOff
+	9章スチルJ		エフェクト表			0
+	緋剣ブロードソード=ロスト	<Off>						勘違いなさらぬよう\nこれは、私が自ら選んだ道です
+	緋剣ブロードソード=ロスト	<Off>						私が、果たすべき役割です
+	緋剣ブロードソード=ロスト	<Off>						彼が、貴方が、正しい道を歩むために
+	緋剣ブロードソード=ロスト	<Off>						貴方の道は、私が切り開きます
+	緋剣ブロードソード=ロスト	<Off>						だから<dash=2>\n行ってください、"マスター"
+	ディーア	<Off>						…………ッ
+Se	走る
+StopBgm						2
+Wait						2
+	緋剣ブロードソード=ロスト	<Off>						……それで良いのです
+FadeOut	black					0
+CharacterOff						0
+StopBgm
+	　　　　　　　　　　
+Wait						3
+ImageEffect	SpriteCamera	Sepia
+Bg	荒野(雨)					0
+Se	大雨2	TRUE
+FadeIn	black					0
+	※※※※							どうして……どうしてこんな……!!
+	※※※※							オレは、オレは……!!
+	※※※※							…………こんなはずじゃ、\nなかったんだ<dash=2>
+StopSe						0
+	黒背景		エフェクト表			0
+ImageEffectOff	SpriteCamera	Sepia
+Wait						1
+	　　　　　　　　　　							……私がヒーローだと思っていた人は\nただの男の子だった
+	　　　　　　　　　　							そして、魔王を育てる剣だと\n思っていた私もまた
+	　　　　　　　　　　							悲しみに暮れて泣きじゃくる男の子を\nただ見ていることしかできない<dash=2>
+	　　　　　　　　　　							ただの、ちっぽけで、無力な剣だった
+FadeOut	black					0
+Bgm	ロルリアンレットB
+CharacterOff						0
+Param	character_grayout=false
+	カテゴリエース		エフェクト表
+ImageEffect	SpriteCamera	Sepia
+Wait						.5
+FadeIn	black					0
+	　　　　　　　　　　							「魔剣にだって\n　誰かを幸せにできるんだ」
+	　　　　　　　　　　							「強さだけが魔剣の価値じゃない」
+	黒背景		エフェクト表			0
+	　　　　　　　　　　							……本当にそうだとするならば
+	　　　　　　　　　　							あなたを幸せに出来なかった私は、\nやっぱり出来そこないの\n魔剣だったのだ
+FadeOut	black					0
+CharacterOff						0
+Bg	魔人機関
+Wait						.5
+FadeIn	black					0
+	※※※※							……オレは、\nリディを救うために全てを費やす
+	※※※※							リディが"ああなった"のを\n目撃した魔剣は、お前だけだ
+	※※※※							……だから、これは\nお前にしか頼めない
+	※※※※							もう余裕がないんだ\n<ruby=エンスージアクレイス>《悪魔の鍵の能力》</ruby>は\n限界に近い
+	※※※※							それなのに、《最終到達選択肢》は\nあまりにも遠い……
+	※※※※							……オレを壊せ、\nブロードソード=ロスト
+	※※※※							たった一つの正解にたどり着くオレを\n見つけるまで、ずっと
+	※※※※							……オレを壊し続けろ、\nブロードソード=ロスト
+	ブロードソード=ロスト	<Off>						<dash=2>了解、しました
+	白背景		エフェクト表			1
+Wait						1
+ImageEffectOff	SpriteCamera	Sepia
+Wait						1
+	　　　　　　　　　　							ああ、その愛が私に向いていれば、\nどれだけ幸せだっただろう
+	　　　　　　　　　　							……そう思ってしまうのは、\nおこがましいことだろうか
+	　　　　　　　　　　							そうか、私は、\nあなたのことが好きだったんだ
+	　　　　　　　　　　							……好きになってしまっていたんだ
+	　　　　　　　　　　							ああ、今更気づくなんて\n全部ダメになってから気づくなんて
+	　　　　　　　　　　							……私は、\nなんて出来損ないなんだろう
+	　　　　　　　　　　
+	　　　　　　　　　　
+	　　　　　　　　　　							……だから、今度こそ、\n私は役割を全うする
+	　　　　　　　　　　							どれほどの罪を背負おうとも構わない
+	　　　　　　　　　　							だって、私たちは\n<ruby=A Necessary Evil>必要悪</ruby>なのだから
+	　　　　　　　　　　							どんなことでもやってみせる\nそれが例え、\n大切な人の命を奪うことでも
+	　　　　　　　　　　							私の愛した人を、私の大好きだった\nあの世界を、今度こそ守るために
+CharacterOff						0
+StopBgm
+ImageEffect	SpriteCamera	Sepia
+Bg	鍛冶病院					0
+CharacterOff
+	ディーア	通常2	2_3			0
+	鍛冶医クランベリー	通常2	1_3			0
+	ブロードソード		3_3			0
+	　　　　　　　　　　					0
+Wait						1
+CharacterOff						0
+Bg	酒場1F					0
+	ブロードソード	正月	2_3			0
+	ルーンブレード	正月	1_3			0
+	ワイルドエッジ	正月	3_3			0
+	　　　　　　　　　　					0
+Wait						1
+CharacterOff						0
+Bg	リノ世界桜自治区					0
+	リディ	照れ正装2	1_2			0
+	ブロードソード	正装	2_2			0
+	　　　　　　　　　　					0
+Wait						.8
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bgm	風属性バトル
+ImageEffect	SpriteCamera	Bloom
+Se	光2
+	9章スチルK		エフェクト表			0
+FadeIn	white					.5
+	ブロードソード=ロスト	<Off>						対魔剣殲滅魔導兵器LS_No.13052\nブロードソード=ロスト
+	ブロードソード=ロスト	<Off>						全ては、<ruby=アネセサリ>魔人機関</ruby>のために<dash=2>
+FadeOut	black					0
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_20
+EndIf
+EndScenario
+
+# Q1009_20
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	荒野
+Param	character_grayout=false
+FadeIn	black					.5
+Wait						1
+	ディーア	黒2						…………
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Bg	天界
+	魔人ディーア	冷徹				0
+FadeIn	white					.3
+	魔人ディーア							あらゆる魔剣をアンロックできる\n異能の中の異能……
+	魔人ディーア							それを有するがゆえに、\n"オレならできる"などと\n思い上がった結果がこの末路だ
+Se	ルビードロップ
+FadeOut	white					0
+Wait						.5
+FadeIn	white					0
+	魔人ディーア	冷徹						ブリジットを戦いから遠ざけ、\n大切に大切に匿い、\nそれで彼女が救われるとでも？
+	黒背景		エフェクト表			0
+	魔人ディーア							<dash=2>魔剣殺しブリジット以外の\n魔剣を、全て破壊しろ
+	魔人ディーア							それが彼女を救う唯一の道だ
+Wait						.5
+CharacterOff						0
+	9章スチルJ		エフェクト表			0
+	緋剣ブロードソード=ロスト							……その答えを、\n貴方は既に持っているはず
+	緋剣ブロードソード=ロスト							だから、貴方に託します
+FadeOut	black					0
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	荒野
+Wait						2
+FadeIn	black					0
+	魔人ディーア	冷徹				0		…………
+	ディーア	黒2						……っ
+	魔人ディーア	冷徹						だから言っただろう
+	魔人ディーア							そうだ\nお前の選択は間違っている
+	魔人ディーア							お前が選択を誤ったために、\nブロードソード=ロストは散った
+	魔人ディーア							そして、オレが介入しなければ\nブリジットは既に二度、\n命を落としている
+	魔人ディーア							貴様の抱える理想、\n全ての魔剣を救いたいという夢が、\nいかなる結末を招くのか
+	魔人ディーア							……ようやく理解したか？
+	ディーア	黒2						…………ッ
+	ディーア							お前には、全て読めていたというのか
+	ディーア							オレのこの選択も、この結末も
+	魔人ディーア	冷徹						当然だ
+	魔人ディーア							お前の手は、\n多くを救えるほど大きくはない
+	魔人ディーア							お前のやり方では、誰も救えない
+	魔人ディーア							それでは魔剣たちはおろか、\nブリジットさえも取りこぼしてしまう
+	ディーア	怒り2						…………
+	魔人ディーア	冷徹						あとは、何をすべきか\n……理解しているな？
+	魔人ディーア							ブリジットを救う手段は、\nたった一つしかない
+	魔人ディーア							<dash=2>魔剣を破壊しろ
+	ディーア	悔しい2						…………断る
+	魔人ディーア	冷徹						なに？
+	ディーア	怒り2						それでも、オレは<dash=2>
+	黒グラデーション		エフェクト表
+	ディーア	悔しい2						オレは……
+CharacterOff
+	魔人ディーア	冷徹						……ふん、下らない
+	魔人ディーア							<dash=2>カルバ
+	カルバノグ							待ってくださいよう、まだ<dash=2>
+	魔人ディーア	冷徹						いや、終わりだ
+	カルバノグ							……っ
+	魔人ディーア	冷徹						この世界を見つけたのは貴様の功績だ\n感謝している
+	魔人ディーア							だが、ここまでだ\n諦めろ
+	ディーア	悔しい2						…………
+Se	光1
+Param	character_grayout=false
+	オーラ赤		エフェクト表			1
+	魔人ディーア	冷徹						<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>の\nキャパシティ解放のため、\nこの世界を終わらせる
+CharacterOff
+	ディーア	黒2						……<ruby=アンロック>魔剣、解放</ruby>
+	魔人ディーア	冷徹						……抵抗する気か
+	ディーア	黒2						……それでもまだ、\n諦めるわけにはいかない
+	ディーア	悔しい2						少しでも、ほんの僅かでも、\n可能性があるなら<dash=2>
+Bgm	緊迫
+	ディーア	怒り2						魔剣機関所属、魔剣使い\n<param=name>\nオレは、オレの信じた道を行く!!
+	魔人ディーア	冷徹						……仕方ない
+CharacterOff
+	9章スチルN		エフェクト表
+	魔人ディーア	<Off>						魔人機関アネセサリ局長\nそして原初十三魔剣、\n世界意思ディーア
+	魔人ディーア	<Off>						<dash=2>貴様の道はここで終わりだ
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_21
+EndIf
+EndScenario
+
+# Q1009_21
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	荒野
+FadeIn	black					.5
+	魔人ディーア	冷徹						何度やっても無駄なことだ
+	魔人ディーア	冷徹						貴様がそのやり方にこだわり\n続ける限り、いつか必ずオレと\n同じ道を辿ることになる
+	魔人ディーア	冷徹						リディは度重なる不完全な\nアンロックにより暴走し、\n行き着く先は四百年前の大災害だ
+	魔人ディーア	冷徹						ならば、そうなる前に<dash=2>!!
+FadeOut	white					.1
+Se	連撃
+FadeIn	white					.1
+Wait						.1
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.1
+FadeOut	white					.1
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	white					.1
+Wait						.1
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.1
+FadeOut	white					.1
+FadeIn	white					.1
+	ディーア							…………ッ
+	ディーア	本気2						だからといって、オレは<dash=2>
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+	9章スチルK		エフェクト表			0
+Wait						1
+	イベントスチル471BG		エフェクト表			0
+Wait						1
+	イベントスチル59205_2		エフェクト表			0
+Wait						1
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff	イベントスチル59205_2					0
+	ディーア	怒り2						魔剣はオレにとって大切な仲間だ\n決してただの道具じゃない
+	ディーア							オレは、お前のやり方を\n認めるわけにはいかない!!
+Param	character_grayout=false
+Se	闇2
+	黒グラデーション		エフェクト裏			1
+	オーラ紫		エフェクト表			1
+	ディーア	本気2						<dash=2><ruby=アンロック>魔剣解放</ruby>
+Se	闇3
+Se	光3
+FadeOut	purple					1
+CharacterOff
+Param	character_grayout=true
+	魔人ディーア	冷徹
+Wait						.5
+Shake	Graphics		x=5 y=5 time=3				NoWait
+FadeIn	purple					.5
+	魔人ディーア							…………何ッ!?
+	魔人ディーア							この魔力……魔導王の入れ知恵か！\nやってくれるな……!!
+	カルバノグ							……っ！\nこれは、魔核共振……？\nセフィロトで観測したのと同じ……!!
+	カルバノグ							でも、暴走もしてないのに一体<dash=2>
+Se	回想
+FadeOut	white					.3
+Bg	天界					0
+CharacterOff						0
+	魔人ディーア
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+FadeIn	white					.3
+	魔人ディーア	冷徹						<dash=2>少し手荒にいく\n許せ、ブリジット
+CharacterOff
+	リディ	暴走2						<color=#fe3333>ぁ、あああぁぁ<dash=2>!!</color>
+FadeOut	black					0
+CharacterOff						0
+Wait						1
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+	カルバノグ
+Bg	荒野					0
+FadeIn	black					.5
+	カルバノグ							もしかして、あの時の傷が<dash=2>
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏
+	オーラ紫		エフェクト表
+	ディーア	本気2						うおおおおお<dash=2>ッ!!!!
+CharacterOff
+Param	character_grayout=true
+	魔人ディーア	冷徹						くっ……!!
+Se	光3
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+	　　　　　　　　　　
+Bg	市街地A
+	白背景		エフェクト表
+Param	character_grayout=false
+Wait						2
+FadeIn	white					.5
+	？？？？							マスター!!
+	ディーア	<Off>						……っ!?
+	ディーア	<Off>						あれは……
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff	ディーア
+CharacterOff						1
+Param	character_grayout=true
+Bgm	ロルリアンレットB
+Wait						1
+	【ディーア】	通常2						ごめんな、おまたせ、リディ
+	ディーア	<Off>						…………オレ？
+	リディ	悔しい2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							もー、おそーい！\nすぐ終わるって言ってたのに！
+ImageEffectOff	SpriteCamera	GrayScale				2
+CharacterOff
+	【ディーア】	あはは2	1_2
+	リディ	悔しい2	2_2
+	【ディーア】							あはは、ちょっとややこしい任務でな\nまさか説明を聞くのに\nそんなに時間がかかるなんて
+	リディ	驚き2						なになに？\nどんなお仕事？
+	【ディーア】	驚き2						えーっと、非人道的な反魔剣研究を\nしている組織があるから、\nそれの調査をしろってさ
+	リディ	驚き2						ハンマケンケン……？
+	【ディーア】	あはは2						反魔剣研究\n魔剣が嫌いな人たちってことだ
+	リディ	怒り2						えー！\nなんで嫌いなんだろう、\n魔剣ちゃん、みんなかわいいのに……
+	【ディーア】	怪しい2						本当だよな、\nみんなあんなにキュートで\n魅力的なのに
+	リディ	照れ2						マスターが言うと\nヘンタイ的に聞こえるね
+	【ディーア】	あはは2						そんなことないぞ\nオレだってみんなを\n大切に思ってるんだからな
+	リディ	照れ2						はいはい
+	【ディーア】	怪しい2						……まあ、\n魔剣はかわいいだけじゃないからな
+	リディ	驚き2						ふぇ？\nたとえば？
+	【ディーア】	怪しい2						食いしん坊とか
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						む
+	【ディーア】	怪しい2						おやつばっかり食べたりとか
+	リディ	悔しい2						むむむ
+	【ディーア】	驚き2						えーっと、それから\nわがままばっかりで<dash=2>
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						むー！\nそれって絶対リディのことでしょ！
+	【ディーア】	あはは2						ははは、バレたか
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						もう、今度から\nマスターのおやつ\n作ってあげないからね！
+	【ディーア】	あはは2						ごめんって
+	リディ	怒り2						べーだ
+	【ディーア】	汗2						悪かったって\n機嫌直してくれよ
+	リディ	怒り2						…………
+	【ディーア】	あはは2						わかった、二人で何か食べて帰ろう
+	リディ	笑い2						ほんと!? やったぁ！\nリディ、甘いものがいいな！
+	【ディーア】	通常2						ああ、そうするか
+	リディ	照れ2						ふふーん♪\n……あ、そういえばさ
+	【ディーア】	通常2						ん？
+	リディ	驚き2						さっき言ってたその魔剣が嫌いな\n人たちって、なんていう組織なの？
+	【ディーア】	驚き2						ああ、えーっと確か、\n旧シニクアノン教団……\n今の名前は<dash=2>
+	【ディーア】	怒り2						<dash=2>反魔剣主義団体《アネセサリ》
+CharacterOff						0
+	黒背景		エフェクト表			0
+Wait						1
+	ディーア							<dash=2>ああ、そうか
+	ディーア							これは<dash=2>\n<ruby=あいつ>魔人ディーア</ruby>の記憶だ
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_22
+EndIf
+EndScenario
+
+# Q1009_22
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔剣の日常
+Bg	市街地B
+FadeIn	black					.5
+	【ディーア】	驚き2	1_2
+	リディ	驚き2	2_2
+	リディ							ここが、アネセサリさんの研究所？
+	【ディーア】	汗2						多分人の名前じゃないぞ、リディ
+Se	ドア開く
+	リディ	照れ2						おじゃましまーす！
+	【ディーア】	驚き2						おいおい、そんな無邪気に<dash=2>
+FadeOut	black					.3
+StopBgm
+Bg	研究所B					0
+	黒背景		エフェクト表			0
+FadeIn	black					.3
+	リディ							……あれえ？\n真っ暗だけど……
+	【ディーア】							ええと、明かりは<dash=2>
+CharacterOff						0
+CharacterOff	黒背景					.5
+	リディ	驚き2				0
+Tween	リディ	PunchPosition	y=50				NoWait
+Bgm	絶望
+	リディ							<dash=2>っ!?
+	【ディーア】	驚き2						なんだ、ここは……？
+	リディ	驚き2						ねえねえ、何かあるよ！
+	【ディーア】	怪しい2						これは……研究資料……？
+	【ディーア】	怒り2						『魔人計画』……？
+	リディ	驚き2						……ねえマスター、何が書いてあるの？
+	【ディーア】	怒り2						……ここで行われていた\n研究についての概要だ
+	【ディーア】							魔剣を超える力を持つ人類を\n生み出し魔剣に搾取されない\n魔人による魔界統治を目指す……
+	【ディーア】							魔核機関の構成、\nネフィリム機関による\n結晶体組成への影響……
+	【ディーア】	悔しい2						……なんだ、これ
+	【ディーア】							これじゃ、まるで魔剣機関の最先端の\n研究を応用したかのような<dash=2>
+CharacterOff
+Shake	Graphics		x=5 y=5 time=0.5				Add
+	？？？？							<dash=4>
+StopBgm
+	【ディーア】	本気2						<dash=2>誰だ!!
+CharacterOff
+Wait						1
+	【ディーア】	悔しい2						…………気のせい、か？
+	リディ	<Off>						マスター!!
+Bgm	緊迫
+CharacterOff
+Param	character_grayout=false
+	9章スチルO		エフェクト表
+	？？？？							…………ッ!!
+Se	打2
+FadeOut	white					.1
+CharacterOff						0
+	【ディーア】	悔しい2				0
+FadeIn	white					.1
+Se	ガード
+Tween	【ディーア】	MoveBy	x=30				NoWait
+	【ディーア】							なんだ、こいつ……!?
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+	【ディーア】	怒り2						くっ……\nこいつら、強い……
+	【ディーア】	悔しい2						ああそうか、そういうことか……!!
+	リディ	悲しい2						マスター……？
+	【ディーア】	怒り2						どうりでおかしいと思ったんだ\n魔剣機関も最初からグルか!!
+	リディ	悔しい2						……っ!?\nもしかして、罠だったってこと……？
+	【ディーア】	悔しい2						ああ……\nとりあえず、ここを脱出するしかない
+CharacterOff
+	9章スチルO		エフェクト表
+	リディ	<Off>						でも、こんな数……
+CharacterOff
+	【ディーア】	怒り2						……仕方ない\nリディ、やるぞ!!
+	リディ	悔しい2						うん……!!
+	【ディーア】	本気2						<ruby=アンロック>魔剣解放</ruby>、\n魔剣殺しブリジット<dash=2>!!
+Se	闇3
+FadeOut	red					.5
+CharacterOff
+	リディ	暴走2				0
+	白背景		エフェクト裏			2
+FadeIn	red					.5
+StopBgm
+	リディ							<dash=2>え
+	黒背景		エフェクト表			0
+Wait						1
+	※※※※							<dash=2>素晴らしい
+	※※※※							これぞ、神に匹敵する力
+	※※※※							我々は、これを待っていた<dash=2>
+FadeOut	black					0
+CharacterOff						0
+Bg	ブリジット魔核深層2					0
+	　　　　　　　　　　
+Se	強風	TRUE
+Wait						2
+FadeIn	black					0
+Wait						1
+	【ディーア】	絶望2						…………リディ
+	リディ	暴走悲しい2						……ごめんね、マスター
+	リディ							リディ、失敗しちゃったみたい
+	【ディーア】	絶望2						……嘘だろ、そんな<dash=2>
+CharacterOff
+	アネセサリ研究員	<Off>						ククク……\nこれで、我らが悲願は<dash=2>
+Se	突1
+FadeOut	red					0
+Wait						.5
+FadeIn	black					.5
+	アネセサリ研究員	<Off>						ぐ、は……っ
+	【ディーア】	悔しい2						リディ、今助けに<dash=2>
+	リディ	暴走悲しい2						<color=#fe3333>お願い</color>
+	リディ							<color=#fe3333>逃げて、マスター</color>
+	【ディーア】	悔しい2						…………ッ
+	リディ	暴走悲しい2						<color=#fe3333>リディ、もうだめみたい</color>
+	【ディーア】	絶望2						そん、な……
+	リディ	暴走悲しい2						<color=#fe3333>…………</color>
+FadeOut	black					.3
+Param	character_grayout=false
+StopSe
+Bgm	ロルリアンレットB
+	9章スチルAC		エフェクト表			0
+FadeIn	black					.3
+	リディ	<Off>						<color=#fe3333>ごめんね、マスター</color>
+	リディ	<Off>						<color=#fe3333>リディ、あんまり\nいい子じゃなかったよね</color>
+	リディ	<Off>						<color=#fe3333>わがままばっかり\n言って、ごめんね</color>
+	【ディーア】	<Off>						なにを<dash=2>
+	リディ	<Off>						<color=#fe3333>…………</color>
+	リディ	<Off>						<color=#fe3333>マスター、リディね</color>
+	リディ	<Off>						<color=#fe3333>マスターのこと<dash=2></color>
+FadeOut	black					0
+StopBgm
+CharacterOff						0
+Param	character_grayout=true
+	　　　　　　　　　　
+Bg	魔人機関
+	黒グラデーション		エフェクト表
+Wait						3
+FadeIn	black					0
+Bgm	絶望
+	ロルリアンレット	怪しいH						<dash=2>駆逐対象、\n仮称、魔王獣ブリジット
+	ロルリアンレット	怪しいH						現在はダフィート北部にて\n活動を停止しているわ
+CharacterOff
+	【ディーア】	<Off>						活動を停止している？
+	ロルリアンレット	怪しいH						……おそらく、ブリジットの\n探知範囲内の魔剣は\nすべて駆逐されたんでしょう
+	ロルリアンレット							魔王獣ブリジットの顕現によって、\n魔界に現存するほとんどの魔剣は\n破壊されてしまったもの
+	アリス							このままではどうしようもないな
+	アリス							奴はおそらく新たなターゲットを\n発見すればまた動き出す
+	アリス							奴を破壊するには、\n魔剣を使わずに\n戦う必要があるというわけだ
+	ロルリアンレット	怪しいH						やはり、これを使うしかなさそうね
+	ロルリアンレット							元々は魔核内燃機関の励起を応用して\n新たなる兵器を作る計画<dash=2>
+	ロルリアンレット							『Blaze計画』に使われるはずだった\n技術だけれど
+	ロルリアンレット							これを使えば、\nこの魔人計画に足りなかった\nピースが揃うわ
+CharacterOff
+	【ディーア】	<Off>						……うまくいくと思うか？
+	ロルリアンレット	通常H						当然でしょう？
+	ロルリアンレット							こちらには叡智を司る最強の魔剣が\n二本も揃っているんだもの
+	ロルリアンレット							創生の竜剣ディクシヴ……\nいえ、全能中枢ライブラリ
+	ロルリアンレット							そして、世界意思ディーア\n……あなたならやれるわ
+FadeOut	black					0
+StopBgm						0
+CharacterOff						0
+Bg	ブリジット魔核深層2					0
+	【ディーア】	魔人										魔人
+Wait						3
+Se	強風	TRUE
+FadeIn	black					0
+	【ディーア】	魔人						…………
+CharacterOff
+Param	character_grayout=false
+	9章スチルV		エフェクト裏
+	リディ	暴走2
+	黒グラデーション		エフェクト表
+	魔王獣ブリジット=ロスト	<Off>						<color=#fe3333>アぁ♪ まスたー！\nやッパり来テくれたんダね？</color>
+	魔王獣ブリジット=ロスト	<Off>						<color=#fe3333>信じテいタの、ずっト\n信じテいタのよ、ずっト、ズット<dash=2></color>
+CharacterOff
+Param	character_grayout=true
+	【ディーア】	魔人						<dash=2>ごめん
+	【ディーア】	魔人						<dash=2>ごめんな、リディ
+StopSe
+Se	突1
+FadeOut	red					0
+	黒背景		エフェクト表
+Wait						1
+FadeIn	red					0
+	【ディーア】							なんで
+	【ディーア】							どうしてだ
+Se	突1
+FadeOut	red					.2
+FadeIn	red					.2
+	【ディーア】							どうして、こんなことに……
+Se	突1
+FadeOut	red					.2
+FadeIn	red					.2
+	【ディーア】							オレはリディを守るために\n戦っていたはずだ
+Se	突1
+FadeOut	red					.2
+FadeIn	red					.2
+	【ディーア】							何故、オレがリディを壊しているんだ
+Se	突1
+FadeOut	red					.2
+CharacterOff
+Param	character_grayout=false
+	9章スチルM		エフェクト表
+Wait						1
+StopBgm
+FadeIn	red					1
+	【ディーア】	<Off>						オレは、オレは<dash=2>
+	【ディーア】	<Off>						ぁ、あああ、ああ<dash=2>
+	黒背景		エフェクト表			0
+	　　　　　　　　　　							<dash=2>もし、オレが\nリディを救うことだけに\n全力を尽くしていたら
+	　　　　　　　　　　							<dash=2>もし、オレが\nリディを救うこと以外を\n全て切り捨てていたら
+	　　　　　　　　　　							世界はきっと、違っていたはずだった
+FadeOut	black					0
+CharacterOff						0
+Bg	荒野					0
+	ディーア	黒2				0
+	黒グラデーション		エフェクト表			0
+Wait						3
+Se	強風	TRUE
+FadeIn	black					1
+	ディーア	黒2						……ッ
+CharacterOff
+	カルバノグ							だ、大丈夫ですう……？
+	魔人ディーア	冷徹						魔核共振によって魔力が混ざったか
+	魔人ディーア	冷徹						だが、貴様もあれを見たなら\n理解しただろう
+	魔人ディーア	冷徹						オレが魔剣殺しにこだわる理由も\n<ruby=失った彼女のための>ロスト</ruby>技術を作った理由も
+	黒グラデーション		エフェクト表
+	ディーア	黒2						…………
+CharacterOff
+StopSe
+Bgm	絶望
+	魔人ディーア	冷徹						魔剣殺しブリジットと、\n他の魔剣たちを同時に救うなどという\n道をいつまでも探して
+	魔人ディーア	冷徹						ありもしない方法を\nいつまでも探し続けて
+	魔人ディーア	冷徹						少しずつ時間を、\nそして彼女の力を使い続けた結果が\nあの未来だ
+	魔人ディーア	冷徹						もうブリジットの身体は限界に近い\n……これが、最後のチャンスだ
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	黒2						…………
+CharacterOff
+	魔人ディーア	冷徹						魔剣を破壊するか、\nあるいはこの場で命を終わらせるか
+	黒背景		エフェクト表			0
+	魔人ディーア							それがお前に与えられた、\n最後の選択肢だ
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_23
+EndIf
+EndScenario
+
+# Q1009_23
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	荒野
+	ディーア	黒2
+	黒グラデーション		エフェクト表
+FadeIn	black					.5
+	ディーア							…………
+CharacterOff
+	魔人ディーア	冷徹						終わりだな
+	カルバノグ							…………っ
+	魔人ディーア	冷徹						やれ、カルバノグ
+	カルバノグ							…………わかりましたよう
+	黒グラデーション		エフェクト表
+	ディーア	黒2						…………
+CharacterOff
+	カルバノグ							……ごめんなさい\nカルバ、あなたならなんとか\nしてくれると思ったんですけどお
+	カルバノグ							きっと、この世界が、\nやっと見つけた\n正解だと思ったんですけどお
+	カルバノグ							……どうやら、違ったみたいですねえ
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	黒2						…………
+CharacterOff
+	カルバノグ							……なんで、\n武器を構えないんですう？
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	黒2						…………
+CharacterOff
+	カルバノグ							<dash=2>本当に、壊しちゃいますよう？
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	黒2						…………
+CharacterOff
+	カルバノグ							……失望しましたよう
+	魔人ディーア	冷徹						……カルバノグ？
+	カルバノグ							あなたの想いは\nその程度だったんですねえ
+	カルバノグ							残念ですよう\nたったこれだけのことで<dash=2>
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	黒2						たった、これだけのこと……？
+	ディーア							リディの命を奪うか、\n魔剣たちの命を奪うかの選択が、\nたったこれだけだと……？
+CharacterOff
+	カルバノグ							…………
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	黒2						……オレは、\n<ruby=あいつ>魔人ディーア</ruby>の記憶を見た
+FadeOut	black					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	チュートリアルスチル2					0
+FadeIn	black					.3
+	ディーア	<Off>						リディの細くて小さな身体を、\n何度も何度も貫いた
+	ディーア	<Off>						リディが小さく咳き込んで\n吐いた生ぬるい血が、頬に当たって
+	ディーア	<Off>						小さく跳ねて痙攣する四肢を、\n膝で無理やり押さえつけて
+	ディーア	<Off>						少しずつ、少しずつ\n命の灯を消していく\nその時間が、その感触が
+	ディーア	<Off>						ずっと脳裏に、両手に、\n焼き付いて離れないんだ<dash=2>
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	GrayScale
+Param	character_grayout=true
+Bg	荒野					0
+	黒グラデーション		エフェクト表			0
+	ディーア	黒2				0
+FadeIn	black					.3
+	ディーア							……失望するならすればいい
+	ディーア							……何が正解なのか、\nオレにはもう<dash=2>
+CharacterOff
+StopBgm
+	カルバノグ							やっぱり\nたったそれだけのこと、ですよう
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	黒2						お前<dash=2>
+CharacterOff
+	カルバノグ							だって、彼は<dash=2>\n彼は、それでもまだ\n戦っているんですよう!!
+Bgm	ロルリアンレットB
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	悔しい2						…………!!
+CharacterOff
+	魔人ディーア	冷徹						もういい\n終わらせろ、カルバノグ
+	カルバノグ							まだですよう！
+	魔人ディーア	冷徹						……何故、\nお前がそこまで必死になる
+	カルバノグ							……カルバも、\n大好きだったからですよう
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F					0
+CharacterOff						0
+	　　　　　　　　　　					0
+FadeIn	white					.3
+	カルバノグ	<Off>						理由なんてないですよう\nただ、どうしようもなく\n好きだったんですよう
+Bg	凍りついた神殿城
+	カルバノグ	<Off>						あのアリス様のいた世界が\nあのマスターのいた世界が!!
+Bg	ブリジット魔核深層2
+	カルバノグ	<Off>						でも、それはもう\n終わってしまった話なのでえ
+	カルバノグ	<Off>						嘆いても、悲しんでも、\nもう帰ってこないので……
+ImageEffectOff	SpriteCamera	Sepia
+Bg	魔人機関
+	カルバノグ	<Off>						カルバの大好きだったあの日々は、\nあのお茶会は、あの世界は、\nもう二度と帰ってこないので
+FadeOut	black					.3
+Bg	荒野					0
+	カルバノグ					0
+FadeIn	black					.3
+	カルバノグ							……だから、カルバは託すんです\n最も正解に近い彼に、\n未来を託すんですよう
+	ディーア	黒2						…………
+	カルバノグ							それに、カルバは……
+	カルバノグ							……カルバは、これ以上\nあなたを苦しめたくないんですよう
+	魔人ディーア	冷徹						…………
+	カルバノグ							まだ、わからないんですかあ？
+	カルバノグ							彼は……魔人ディーアは、\n今でもずっと\n戦い続けているんですよう
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+	9章スチルL		エフェクト表			0
+FadeIn	white					.3
+	カルバノグ	<Off>						どの世界線でもいい\nたった一つでもいい
+	カルバノグ	<Off>						どこか一つでも、リディちゃんが\n救われる世界を作るために
+	カルバノグ	<Off>						全てを犠牲にして、\n魔剣使いであることも、\n人間であることも捨てて
+	カルバノグ	<Off>						人から愛されることも、\n英雄であることも、\n魔王であることも捨てて
+	カルバノグ	<Off>						ただ、たった一人愛した少女のために\n彼はずっと一人で\n戦いつづけているんですよう？
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=true
+	カルバノグ					0
+FadeIn	black					.3
+	カルバノグ							……だからカルバは、\nカルバたちアネセサリは、\nそんな彼に敬意を表して
+	カルバノグ							最後の最後までリディちゃんを\n救うために悪に徹すると決めた\n彼に報いるために
+	カルバノグ							悪に徹する彼の理解者として、\n彼とともに戦っているんですよう
+	カルバノグ							……それなのに、\nそうまでして戦おうとしているのに
+	カルバノグ							他でもないあなたが逃げるんですう？
+	カルバノグ							彼は、決して逃げなかったのに!!
+	ディーア	黒2						…………ッ
+StopBgm
+	カルバノグ							……それでも、\nあなたが戦わないというのなら
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+Bgm	Xmasボス
+	9章スチルP		エフェクト表			0
+FadeIn	white					.3
+	カルバノグ	<Off>						アリスファミリーが一人《白兎》\n《世界を壊す蹂躙と暴虐の化身》\n<dash=2>カルバノグ
+	カルバノグ	<Off>						<ruby=A Necessary Evil>必要悪</ruby>として\n<dash=2>あなたを破壊しますよう
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_24
+EndIf
+EndScenario
+
+# Q1009_24
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Se	強風	TRUE
+Bg	荒野
+FadeIn	black					.5
+	ディーア	黒2
+Shake	ディーア	MoveBy	x=5				NoWait
+	ディーア							……、くッ
+	黒グラデーション		エフェクト表
+	カルバノグ							……立ってくださいよう
+	カルバノグ							それでも、あなたは……っ
+CharacterOff
+	魔人ディーア	冷徹						……もういい、カルバノグ\n後はオレがやる
+	カルバノグ							……マスター
+	魔人ディーア	冷徹						残念だ、もう少し早く\n貴様が自分の過ちに気がついていれば\n……可能性はあったものを
+	ディーア	黒2						…………
+	魔人ディーア	冷徹						……さらばだ、\n<param=name>
+CharacterOff
+Wait						.3
+StopSe
+	黒リディ					1		……マスターは、\n間違ってないと思うヨ
+	黒リディ							間違っているのは、\nあなたの方じゃないカナ\n"魔人ディーア"くん
+	魔人ディーア	冷徹						なに……？
+Bgm	絶望
+	黒リディ							魔剣を全て破壊して、\n魔剣殺しブリジットが\n必要とされない世界を作る
+	黒リディ							そうなったら、\n誰も私たちを奪い合うことがなくなる
+	黒リディ							私たちを巡る争いも、\n私たちが引き起こす災害も、\n存在しなくなる
+	黒リディ							そこは間違いなく、\n魔剣殺しブリジットが\n平穏に暮らせる世界になるだろうネ
+	魔人ディーア	冷徹						ああ、そうだ\nだから<dash=2>
+	黒リディ							それを、リディちゃんが\n本当に望むと思うのカナ？
+	魔人ディーア	冷徹						…………
+	黒リディ							魔剣大好きなリディちゃんなら、\nきっとこう思うんじゃないカナー
+	黒リディ							みんなが不幸になるくらいなら、\n私が<dash=2>
+	魔人ディーア	冷徹						ならばお前は、\nブリジットは死んだほうがマシだった\nとでも言うつもりか？
+	黒リディ							んーん、そうは言わないカナ
+StopBgm
+	黒リディ							でも、こうは思うかもしれない
+CharacterOff						0
+Param	character_grayout=false
+Bg	酒場1F
+ImageEffect	SpriteCamera	GrayScale
+	リディ	悔しい2
+	黒リディ	<Off>						……そんなことで諦めるなんて、\nマスターらしくない
+CharacterOff
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	荒野
+Param	character_grayout=true
+	魔人ディーア	冷徹						なっ……
+	黒リディ							私もあの子と記憶と感情を\n同期しているから、\nそれくらいはわかるヨ
+	黒リディ							あなたはリディちゃんを\n愛していたみたいだけど、\n<dash=2>でも知らないでしょ
+	黒リディ							あの子が、私が、私たちが、\nあなたをどれほど信頼しているのか
+	魔人ディーア	冷徹						…………ッ
+Bgm	凱旋
+	黒リディ							魔剣を壊せなんて、あなたらしくない
+	黒リディ							私の知ってるマスターは、\nどんなことがあっても、\nそんなこと絶対に言わないヨ
+	黒リディ							それに、私たちだって、\n自分たちだけが救われる未来なんて\n望んでいない
+	魔人ディーア	冷徹						……じゃあ、どうしろというんだ
+	黒リディ							それを、ずっと試しているんでしょ？
+	黒リディ							数千万の多重並行世界を\n同時に運営して、\nあらゆる可能性と未来を検証して
+	黒リディ							……それがどれほどの苦痛なのかは、\n私にはわからないケド\nあなたは、それができる人なんでしょ
+	魔人ディーア	冷徹						…………っ
+	黒リディ							ねえ、マスター
+	黒リディ							前に、なんであの子は\nキミをマスターって呼ぶのかって\n話、したよネ
+	ディーア	悔しい2						……ああ
+	黒リディ							それはきっと、\nあの子がどこかで\n感じ取っているからじゃないカナ
+	黒リディ							私をアンロックできるのは、\nあなたしかいない、ってネ
+	黒リディ							……期待に応えるかどうかは、\nあなた次第だヨ
+	ディーア	悔しい2						…………ああ、そうだな
+	ディーア	悔しい2						力を貸してくれるか、\n碩学のブリジット
+	ディーア							……一人だと、\nまだ迷ってしまいそうなんだ
+	ディーア	怒り2						……リディがいないことが、\nこんなにも苦しいとは思わなかった
+	黒リディ							うん\n私でよければ、いくらでも
+	ディーア	通常2						ありがとう\n……おかげで、オレはまだ戦える
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+	魔人ディーア	冷徹				0
+FadeIn	black					.3
+	魔人ディーア	冷徹						……無駄なことを
+	魔人ディーア	冷徹						もう、手段なんてないはずだろう
+	ディーア	怒り2						いや<dash=2>\n一つだけ
+	黒背景		エフェクト表
+	ディーア							どうやら、\nやってみる価値はありそうだ<dash=2>
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_25
+EndIf
+EndScenario
+
+# Q1009_25
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	魔人機関
+	黒背景		エフェクト表
+FadeIn	black					.5
+	ディーア							<dash=2>きっかけは\nほんの僅かな違和感だった
+	ディーア							<ruby=あいつ>魔人ディーア</ruby>の記憶の中の\n魔剣殺しブリジットは、魔剣を全て\n破壊して機能を停止したと言っていた
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+FadeIn	white					.3
+	【ディーア】	<Off>						活動を停止している？
+	ロルリアンレット	怪しいH						……おそらく、ブリジットの\n探知範囲内の魔剣は\nすべて駆逐されたんでしょう
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	黒背景		エフェクト表			0
+FadeIn	black					.3
+	ディーア							だが、本来の魔王獣ブリジットで\nあれば、魔剣を全て破壊したところで\n止まるはずがない
+	ディーア							だから、ヘルメリアは自らの手で\nブリジットを破壊する必要があった
+	ディーア							ならば、\nおそらくそこに鍵があるはずだ
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場_宿屋					0
+	　　　　　　　　　　
+FadeIn	white					.3
+	モモ							きっと"彼女"が拒絶しているのさ\n……そういう仕組みなんだよ
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	黒背景		エフェクト表			0
+FadeIn	black					.3
+	ディーア							……リディを無理やりアンロック\nし続ければ、いずれ彼女は暴走して、\nあの世界と同じ結末になる
+	ディーア							ならば<dash=2>
+FadeOut	black					.5
+CharacterOff						0
+Bg	荒野					0
+	黒リディ		2_2			0
+	ディーア	怒り2	1_2			0
+FadeIn	black					.5
+	ディーア							魔剣は魔剣使いの固有魔力波動と\n魔核固有振動数が一致する\nことによってアンロックできる
+	ディーア							だが、リディの魔核固有振動数は\n一定じゃない
+	ディーア							リディの魔核固有振動数は\n常に変動し、同調し続けるのが\n難しい状態になっているんだ
+	ディーア							最初は、それが魔剣殺しブリジットの\n特性なのかと思っていたけど……
+	ディーア	悔しい2						もし、ブリジットのアンロックが\n何者かによって\n阻害されているのだとしたら
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							……おそらく、\nヘルメリアの仕組んだ呪いだろう
+	魔人ディーア							だが、どうやってそれを解く？
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							……オレとお前は、\n魔核共振によって記憶を\n同期することができた
+	ディーア							そしてお前は、\n魔人化の際にリディの\n魔核片を取り込んでいるはずだ
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							……まさか
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							ロストの魔核片は\n既に解析させてもらった
+	ディーア							かつての記憶を複製した\n<ruby=ロスト･フラグメント>虚失伝承断片</ruby>を、\n魔剣化したロストに使えるのであれば
+	ディーア							リディの魔核片を取り込んだ\nお前が、リディの記憶を見ることも\n理論上は可能なはずだ
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							オレとお前が記憶を同期した上で、\nオレがブリジットと\n記憶を同期すると？
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							ああ、そうだ
+	ディーア							そうすれば、おそらく\nリディのアンロックを邪魔している\n原因を突き止めることができる
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+StopBgm
+	魔人ディーア							……正気か？
+Bgm	絶望
+	魔人ディーア							彼女と記憶を同期するということは、\nオレの記憶を\n彼女に見せるということでもある
+	魔人ディーア							もしそうなれば、\nもう彼女を抑えることは不可能だ
+	魔人ディーア							……魔界が滅びるぞ
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							……やってみる価値はある
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							冗談じゃない\nリスクが高すぎる
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							大丈夫さ
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+StopBgm
+	魔人ディーア							何を根拠に<dash=2>
+CharacterOff
+	黒リディ		2_2
+	ディーア	通常2	1_2
+Bgm	凱旋
+	ディーア							オレはリディを信じている\nそして、オレの魔剣たちのことも
+	ディーア							考えたんだ\nオレとお前の、一体何が違うのか
+	ディーア	怒り2						確かにお前は、\nリディを守るために\n全力を尽くしてくれている
+	ディーア							その姿は、きっとカルバたちの心にも\n響いたんだろう
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	魔人ディーア							…………
+CharacterOff
+	黒リディ		2_2
+	ディーア	怒り2	1_2
+	ディーア							オレは、\nオレの魔剣たちを捨てられない
+	ディーア							もちろん、リディのことも\n捨てられない\nオレは何も捨てられない
+	ディーア							……確かに、お前からすれば\nそれは不自由なのかもしれない
+	ディーア							でも、だからこそ\n<dash=2>みんなもオレを絶対に見捨てない
+	ディーア	目閉じ2						<dash=2><ruby=アンロック>魔剣解放</ruby>
+Se	光1
+FadeOut	white					.5
+CharacterOff						0
+	9章スチルQ		エフェクト表			0
+FadeIn	white					.5
+Wait						1
+	9章スチルR		エフェクト表			0
+Wait						1.2
+	9章スチルS		エフェクト表			0
+Wait						1.2
+	9章スチルT		エフェクト表			0
+Wait						1.2
+	9章スチルT2		エフェクト表			0
+Wait						1.2
+FadeOut	white					.3
+CharacterOff						0
+	黒リディ		2_2			0
+	ディーア	怒り2	1_2			0
+FadeIn	white					.3
+	ディーア							もしオレが失敗しても、\nみんなが助けてくれる
+	ディーア							魔剣使いと魔剣ってのはさ、\nそういう関係なんだよ
+	ディーア							お前にだってわかるだろ？
+	ディーア							お前は、そんな魔剣との関係が\n大好きだったはずだろ？
+	ディーア							お前だって、最後まで\nそれを捨てきれなかったから<dash=2>
+	ディーア							だから、魔剣をロスト化して\n兵器として使っても、たった一本だけ
+	ディーア							カルバノグだけは、魔剣として\n手元に置き続けたんじゃないのか？
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	冷徹	1_2
+	カルバノグ							…………っ
+	魔人ディーア							……ああ、そうだ
+	魔人ディーア							だが、その選択の結末をお前は既に\n知っているはずだ
+	魔人ディーア							……それなのに、\nお前は、何故諦めようとしない
+CharacterOff
+	黒リディ		2_2
+	ディーア	通常2	1_2
+	ディーア							簡単さ
+	ディーア							オレは、こいつらを救うことを\nまだ一度も諦めたことがないからだ
+StopBgm
+	ディーア	目閉じ2						……それに、何より
+Bgm	風属性バトル
+	ディーア	本気2						気に入らないんだよ、オレは!!
+	ディーア	怒り2						何が魔剣を壊さなければ\nリディは救えない、だ
+FadeOut	black					.3
+ImageEffect	SpriteCamera	GrayScale
+Param	character_grayout=false
+CharacterOff						0
+	魔人ディーア	笑い				0
+	　　　　　　　　　　		2_2
+Bg	天界					0
+FadeIn	black					.3
+	ディーア	<Off>						それしかない、仕方ないって、\n貼り付けたような笑みを浮かべて
+	ディーア	<Off>						本当は誰よりも\nお前が納得できてないんだろう!?
+	ディーア	<Off>						本当は我慢できないくせに、\n狂ってしまいそうなほど\n怒っているくせに!!
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale
+Param	character_grayout=true
+Bg	荒野					0
+	ディーア	怒り2				0
+FadeIn	black					.3
+	ディーア							未来を知ってるからどうした！
+	ディーア							結末を知っているから、\nそれがどうした!!
+	ディーア	本気2						それを変えるために、\nオレは、お前は！\n悪魔の鍵を使ったんだろう!!
+	ディーア							幾千万の世界を作って、\n全て成し遂げるために\nその鍵を手にしたんだろう!!
+	ディーア	悔しい2						確かにそれは、\n見たくない現実から逃げるための\n手段だったかもしれない
+	ディーア							愚かで卑怯な手段だったかもしれない
+	ディーア	怒り2						……でも、そうまでして\n成し遂げたいものがあったはずだろう
+CharacterOff
+	魔人ディーア	冷徹
+	魔人ディーア							…………
+	魔人ディーア							……そう、だったな
+	魔人ディーア							だが<dash=2>\n今更、それをやり直すには\n失ったものが多すぎた
+	魔人ディーア							……犠牲にしたものが、多すぎた
+	魔人ディーア							……今更引き返すわけには\nいかないんだよ
+CharacterOff
+	ディーア	怒り2						……なら、オレは\nここでお前を倒して先に行く
+CharacterOff
+	魔人ディーア	冷徹						……オレに勝てると\n本気で思っているのか？
+CharacterOff
+	ディーア	怒り2						思っているさ\nお前には、理解できないだろうけどな
+CharacterOff
+StopBgm
+	魔人ディーア	冷徹						ああ、理解できないな\n……だが、面白い
+Bgm	タイトル
+	魔人ディーア							魔人機関アネセサリ局長、\nそして原初十三魔剣が一振り、\n世界意思ディーア
+	魔人ディーア	ニヤリ						……オレの理解を超えてみせろ\n<param=name>
+CharacterOff
+	ディーア	怒り2
+	ディーア							魔剣機関所属、魔剣使い\n《愚かなる卑怯者の鍵》\n《勇敢なる魂を受け継ぐ者》!!
+	ディーア	本気2						お前が諦めたもの<dash=2>\nオレが全て救ってみせる!!
+Se	光3
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_26
+EndIf
+EndScenario
+
+# Q1009_26
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	凱旋
+Bg	荒野
+FadeIn	black					.5
+Wait						1
+	ディーア	怒り2						……オレの、勝ちだ
+	魔人ディーア	冷徹						……どうしても、行くというのか
+	ディーア	怒り2						ああ
+	魔人ディーア	冷徹						……そうか
+	魔人ディーア							……オレは、\n今まで数多の世界線を見てきた
+	魔人ディーア							だが、お前がその道を選んで\n成功した世界を知らない
+	ディーア	怒り2						…………
+	魔人ディーア	冷徹						……だが、\nここまでして折れなかった世界も、\nオレは初めて見る
+	魔人ディーア							……好きにしろ、\nオレはお前に賭けてみるさ
+	ディーア	怒り2						……いや、違うだろう
+	魔人ディーア	冷徹						……何？
+	ディーア	怒り2						オレはお前も見捨てない
+	ディーア	通常2						オレたちで救うんだ\n……行くぞ、"ディーア"
+	魔人ディーア	冷徹						…………！
+	魔人ディーア	笑い						ああ<dash=2>\nそうだったな
+	ディーア	怒り2						さあ、行こうか<dash=2>
+	黒背景		エフェクト表			0
+	二人							<dash=2>"彼女の望んだ未来"を、\n取り返すとしよう
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_27
+EndIf
+EndScenario
+
+# Q1009_27
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	廃墟グレー
+Bgm	台風_BGM
+FadeIn	black					.5
+	謎の声	通常	2_3					<dash=2>モノ懐いに耽っていたの？				★チュートリアル部分丸ごとコピペするので話者と改行は仮
+	謎の声	通常	2_3					そう、想い出していたのね、\n貴方の<color=mk2impo>"未来"</color>を、あの<color=mk2impo>"夢"</color>を
+	謎の声	通常	2_3					でも、もうダメ、終った事なの\n鍵はもう開かない\n誰にも開けられはしない
+	謎の声	通常	2_3					貴方がそうであったように、\n<color=mk2impo>"未来"</color>もまた、同じなの\nきっと同じことの繰り返し
+	謎の声	通常	2_3					あら、今更神様に命乞い？\nいい気なものね、元はといえば\n貴方が原因の事なのよ？		2001-55
+	謎の声	通常	2_3					………さようなら
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+Se	ガチャ出た
+Bg	魔殿グレー				-200
+	黒い少女	通常	2_3							9999-00
+FadeIn	white					1
+	黒い少女	笑い	2_3					ふーん、いい目をしてるじゃん♪\nさぁ、行こっか、<color=mk2name>《魔鍵使い》</color>		2034-16
+	黒い少女							大丈夫、大丈夫♪\nちゃんと取り戻せるよ
+	黒い少女							はぁ、それにしてもまったく、\n好き勝手暴れてくれちゃって
+	黒い少女							お姉さん、ちょっとおこだぞ？
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+Se	ガチャ出た
+Bg	神殿グレー				-200
+	白い少女	通常	2_3							9999-00
+FadeIn	white					1
+	白い少女	照れ	2_3					まさか六魔剣のお相手をするとは…\nあの子に占ってもらっておけば\nよかったかしら？		2035-16
+	白い少女							ふふ、でも私にしか出来ない事が\nあるのですね？
+	白い少女							あなたが私を頼るなんて…\n明日は魔界終焉の日ではなくて？
+	白い少女							うふふ、あながち間違いでも\nないのかしら…？
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+Se	ガチャ出た
+Bg	溶岩グレー				-200
+	黒い少女	通常	2_3
+FadeIn	white					1
+	黒い少女	通常	2_3					ちょ、ちょっと待って！\n今、なんて言ったの…？		9999-00
+	黒い少女							<color=mk2impo>《<ruby=エンスージアクレイス>悪魔の鍵の能力</ruby>》…\n</color>\n…本気、なの？		2034-17
+	黒い少女							本気で、<color=mk2impo>"それ"</color>をやるつもり…？
+	黒い少女							それは…<color=mk2impo>【ヒト】</color>の領分を超えるよ？
+Tween	黒い少女	ScaleBy	x=-1 time=0.75
+Tween	黒い少女	ScaleBy	x=0.95 y=0.95 time=1.5			Add
+Tween	黒い少女	MoveBy	y=+60 time=1.5			Add
+	黒い少女	通常						斬りたくないものを斬らされる…\nそれでも主人に従うのが…\n<color=mk2impo>【魔剣】</color>…なのカナ		2034-18
+	黒い少女							ねぇ、どうして私たち<color=mk2impo>【魔剣】</color>は、\nヒトの姿をしているのだと思う？				★コピペここまで
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+Se	ガチャ出た
+Bg	水晶グレー				-200
+FadeIn	white					1
+	白い少女	通常	2_3					脆い、儚い、切ない…\n命というのは危ういからこそ\n美しいのですわ		9999-00
+	白い少女							お気づきになられましたか？\n<color=mk2impo>《<ruby=カリス＝カエリステラ>聖杯の記憶</ruby>》</color>に…		2035-17
+Tween	白い少女	ScaleBy	x=1.2 y=1.2 time=2			Add
+Tween	白い少女	MoveBy	y=-60 time=2			Add
+	白い少女	笑い						所詮、魔剣は兵器なのですよ？\n命を奪う道具…なのですよ？		2035-18
+	白い少女							…本当に命を奪っているのは、\n<color=mk2impo>【魔剣】</color>なのか<color=mk2impo>【ヒト】</color>なのか、\nきっとあの子はそれが知りたいのです
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+Se	ガチャ出た
+BgOff
+FadeIn	red					1
+	魔剣殺しブリジット							<color=mk2name>あぁ♪ マスター！\nやっぱり来てくれたんだね？</color>		9999-00
+FadeOut	black					0
+CharacterOff						0
+Param	character_grayout=false
+	9章スチルU		エフェクト表			0
+Bg	神界改					0
+Wait						1
+FadeIn	black					0
+	ヘルメリア	<Off>						<dash=2>ああ
+	ヘルメリア	<Off>						……終わらせに来たよ、ブリジット
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_28
+EndIf
+EndScenario
+
+# Q1009_28
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	ロルリアンレットB
+Bg	神界改
+FadeIn	black					.5
+	覇王剣ラグナロク							<dash=2>聖征剣エクスカリバー、\n焔華剣テュフォーン、\n煉獄剣ヴェルガトゥリオ
+	覇王剣ラグナロク							覇王剣ラグナロク、\n天業剣クリーフォート、\n終焉剣アポカリプス
+	覇王剣ラグナロク							魔刀マガツツクヨミ、\n運命殺しワールドエンド、\n幻想殺しゼタ
+	覇王剣ラグナロク							創生の竜剣ディクシヴ･ゼロ、\n創生の魔剣ソード×ソード、\n世界意思ディーア
+	覇王剣ラグナロク							……そして、魔剣殺しブリジット
+	覇王剣ラグナロク							原初十三魔剣の並行励起……\nとても人に許された技とは\n思えませんね
+	ヘルメリア	悔しい						ブリジットが今まで喰らった、\nあるいは傷を負わせたことで、\n原初魔剣の魔力は全て取り込んでいる
+	ヘルメリア	悔しい						そして……彼女が喰らった\n《<ruby=カリス＝カエリステラ>聖杯の記憶</ruby>》の鍵
+	ヘルメリア	悔しい						それらの条件が揃って\n初めて成し得る業だよ
+	ヘルメリア	悔しい						……これで、\n彼女の魔核固有振動数はカオス化する
+	ヘルメリア	悔しい						魔剣殺しブリジットは、\n誰にもアンロックされない魔剣になる
+	ヘルメリア	悔しい						もし、無理やりにでも\nアンロックしようとすれば、\nその時は……
+	覇王剣ラグナロク							……彼女は、自滅する
+	覇王剣ラグナロク							本当によいのですか、ヘルメリア
+	ヘルメリア	怒り						さあね
+	ヘルメリア	怒り						ただ、こうすることでしか、\n私には彼女を救うことが出来なかった
+	ヘルメリア	悔しい						……どうか、安らかに
+Param	character_grayout=false
+	白背景		エフェクト表			0
+	ヘルメリア							……後は頼んだわ、モモ
+FadeOut	black					0
+StopBgm
+Bg	魔術空間					0
+CharacterOff						0
+Param	character_grayout=true
+Wait						2
+Bgm	台風_BGM
+FadeIn	black					0
+	ディーア	怒り2						これが、リディの記憶……
+	魔人ディーア							……やはり、そうだったか
+	魔人ディーア							全ての原初十三魔剣の魔力を\n使って紡がれた\n魔核固有振動数のカオス化術式
+	魔人ディーア							なるほど、これは厄介だ
+	魔人ディーア							解呪するには、\n十三個の術式を全て破壊する\n必要があるというわけか
+	ディーア	悔しい2						……十三個全て、か
+	魔人ディーア							ああ、どれか一つでも残っていれば、\n魔力を通した瞬間に術式のバランスは\n崩壊し再起不能になるだろう
+	魔人ディーア							それ故に、\n全て破壊しておく必要がある
+	魔人ディーア							……しかも、これは\n原初十三魔剣の力で作られた呪いだ
+	魔人ディーア							破壊するには、原初十三魔剣を\n破壊するだけの力がいる
+	魔人ディーア	ニヤリ						……クク、そうか、そういうことか
+	魔人ディーア							オレの目論見は、\n間違っていなかったのか
+	魔人ディーア	通常						ああ……\nようやくたどり着いたな、ブリジット
+	ディーア	怒り2						……随分と楽しそうだな\nどうにかする目処はついているのか？
+	魔人ディーア	ニヤリ						もちろんさ\n何のために貴様に<ruby=・・・>十三本</ruby>の\nロストを託したと思っている
+StopBgm						1
+	ディーア	驚き2						……そうか!!
+Bgm	凱旋
+	ディーア	悔しい2						真の魔剣は原初十三魔剣のみ
+	ディーア	怒り2						それ以外は原初十三魔剣のベースに\n《ゼロシステム》を使って\n伝承を上乗せした模倣品にすぎない
+	ディーア							逆に言えば、あらゆる魔剣は\n原初十三魔剣の特性をある程度\n受け継いでいるというわけだ
+	魔人ディーア							……そして、お前の手元には\nそれらを破壊するための\n十三本が揃っている
+CharacterOff
+Param	character_grayout=false
+	エクスカリバー=ロスト
+	魔人ディーア	<Off>						《<ruby=MODEL:エクスカリバー>聖なる剣より生まれしもの</ruby>》\n偽聖剣エクスカリバー≠ロスト
+	レヴァロスト	通常真
+	魔人ディーア	<Off>						《<ruby=MODEL:テュフォーン>焔華を纏いし紅刃</ruby>》\nレヴァンテイン=ロスト
+	マグロス
+	魔人ディーア	<Off>						《<ruby=MODEL:ヴェルガトゥリオ>罪深き煉獄の使者</ruby>》\nミョルニル=マグナ=ロスト
+	ミラロスト
+	魔人ディーア	<Off>						《<ruby=MODEL:ラグナロク>王となるべく作られた器</ruby>》\nバハムート=ミラ=ロスト
+	ハデスロスト
+	魔人ディーア	<Off>						《<ruby=MODEL:クリーフォート>天冥より世を支配するもの</ruby>》\n天冥杖ハデス=ロスト
+	聖女グラム=オルタ=ロスト
+	魔人ディーア	<Off>						《<ruby=MODEL:アポカリプス>闇より闇き終焉</ruby>》\n聖女グラム=オルタ=ロスト
+	グレイプニル=ロスト
+	魔人ディーア	<Off>						《<ruby=MODEL:マガツツクヨミ>禍つの月を鎮めるもの</ruby>》\nグレイプニル=ロスト
+	ごくひらロスト
+	魔人ディーア	<Off>						《<ruby=MODEL:ワールドエンド>流転する運命の天秤</ruby>》\n禁式･獄刀大包平=ロスト
+	魔天猫リーナ×ロスト
+	魔人ディーア	<Off>						《<ruby=MODEL:ゼタ>幻想なき情報生命</ruby>》\n魔天猫リーナ×ロスト
+	バハロス
+	魔人ディーア	<Off>						《<ruby=MODEL:ディクシヴ･ゼロ>竜の意思を継ぐもの</ruby>》\n神竜機関バハムート=ロスト
+	アリス=ピュア=ロスト
+	魔人ディーア	<Off>						《<ruby=MODEL:ソード×ソード>創世神話</ruby>》\nイミティション=アリス=\nピュア=ロスト
+	ぎんいろ=ロスト
+	魔人ディーア	<Off>						《<ruby=MODEL:ディーア>無垢なる世界の意思</ruby>》\nぎんいろ=ロスト
+	ジャガーノート=ロスト
+	魔人ディーア	<Off>						《<ruby=MODEL:ブリジット>破壊と滅亡の神</ruby>》\nジャガーノート=ロスト
+CharacterOff
+	魔人ディーア							必要な要素は全て揃った
+	魔人ディーア							ヘルメリアの残した楔は、\nこれでようやく解き放たれる
+	魔人ディーア							……全ては、この時のために
+	ディーア	怒り2						……ああ、だが、その前に
+	魔人ディーア							……ああ、そうだな
+	魔人ディーア							ヘルメリアの呪いを解いたところで、\n彼女が負った心の傷が\n癒えることはない
+	魔人ディーア							今のブリジットは、\n暴走して心の殻に\n閉じこもってしまっている状態だ
+	魔人ディーア							彼女を救うためには、やはり<dash=2>
+StopBgm
+Se	歩く
+CharacterOff						1
+Wait						1
+StopSe
+Bgm	風属性バトル
+	ディーア	怒り2						原初十三魔剣の<ruby=ルークスステラ>魔核深層</ruby>……\n生きて帰れるかはわからない代物だぞ
+	魔人ディーア							わかっているさ
+	魔人ディーア							だが、お前には\nやるべきことがあるだろう
+	魔人ディーア							あの十三本は\n一度破壊され、魔剣として\n伝承が再解釈されている
+	魔人ディーア							……扱えるのは、お前だけだ
+Se	光1
+	オーラ青		エフェクト表
+	魔人ディーア	笑い						それに、オレは失敗した\n……だから、お前に託す
+	魔人ディーア	通常						<ruby=ルークスステラ>魔核深層</ruby>、解放<dash=2>
+FadeOut	white					1
+StopBgm
+	黒背景		エフェクト表			0
+Wait						4
+Bgm	絶望
+FadeIn	white					0
+	リディ							<color=#fe3333>壊さなきゃ、壊さなきゃ、壊さなきゃ<dash=2></color>
+	白背景		エフェクト表2			0
+	ハクビ							……妾を眠らせたのも、\nまた、其方…だが、なぁ？
+CharacterOff	白背景					0
+	リディ							<color=#fe3333>壊さなきゃ、壊さなきゃ、壊さなきゃ<dash=2></color>
+	白背景		エフェクト表2			0
+	ヘルメリア							なあ<dash=2>魔王獣ブリジット
+CharacterOff	白背景					0
+	リディ							<color=#fe3333>壊さなきゃ、壊さなきゃ、壊さなきゃ<dash=2></color>
+	白背景		エフェクト表2			0
+	モモ							…………思い出したかい、ブリジット\nキミが"魔剣殺し"たる所以を
+FadeOut	black					0
+CharacterOff						0
+Bg	ブリジット魔核深層					0
+	リディ	<Off>				0
+Wait						.5
+Bgm	Xmasボス
+FadeIn	black					0
+	リディ	<Off>						<color=#fe3333>私が<dash=2>壊した</color>
+	リディ	<Off>						<color=#fe3333>ハクビ、ラピュセル、\nトリニティ、ジュビテリア</color>
+	リディ	<Off>						<color=#fe3333>みんな、\n友達だったはずなのに</color>
+	リディ	<Off>						<color=#fe3333>みんな大好きだったはずなのに</color>
+	リディ	<Off>						<color=#fe3333><dash=2>ぁぁ、あああぁ……!!</color>
+CharacterOff
+Wait						.5
+	魔人ディーア	冷徹						…………怒り、悲しみ、後悔\n呪詛、怨嗟、嘆きの声
+	魔人ディーア							……憎しみで作られた、魔力の渦
+	魔人ディーア							今まで、\n彼女が一人で背負ってきたもの\n……彼女に背負わせてきたもの
+	魔人ディーア							……オレが\n半分背負ってやるよ、リディ
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_29
+EndIf
+EndScenario
+
+# Q1009_29
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	台風_BGM
+Bg	魔術空間
+Param	character_grayout=false
+FadeIn	black					.5
+Wait						1.5
+	ディーア	目閉じ2
+	ディーア							<dash=2><ruby=アンロック>魔剣解放</ruby>
+Bgm	魔王バトル
+ImageEffect	SpriteCamera	Bloom
+Se	光1
+Param	character_grayout=true
+	黒グラデーション		エフェクト裏
+	NP※※※※	青	エフェクト表			2		</color=mk2wisp><dash=2>……魔核エーテライト、認識</color>		9000-24
+	NP※※※※	青						</color=mk2wisp>コード:アンロック承認\nシステム:ブレイブソード展開
+	NP※※※※	青						</color=mk2wisp>ネフィリム機関をオーバーロードし\n環境変数をブレイズゼロに固定
+	ディーア	怒り2
+	NP※※※※	青						</color=mk2wisp>魔力結晶体構築\n<dash=2>《魔剣少女》解放します
+Se	光3
+FadeOut	white					.5
+CharacterOff						0
+	9章スチルQ		エフェクト表			0
+ImageEffectOff	SpriteCamera	Bloom
+Wait						.3
+FadeIn	white					.5
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	9章スチルR		エフェクト表			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	9章スチルS		エフェクト表			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	9章スチルT		エフェクト表			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	9章スチルT2		エフェクト表			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.5
+CharacterOff						0
+	ディーア	怒り2				0
+Wait						1
+FadeIn	white					.3
+	ディーア							……すまない、みんな\n少し力を借りるぞ
+CharacterOff
+	ぎんいろ=ロスト	通常						……あなたが、それを望むなら
+	ごくひらロスト	通常						私たちは、あなたの魔剣だもの
+	ジャガーノート=ロスト							救ってあげようよ\n私たちを救ったように
+	ジャガーノート=ロスト							ね、マスターさん
+CharacterOff
+	ディーア	怒り2						……ああ
+	ディーア							行くぞ、みんな\nリディを救いに行こう
+	ディーア	目閉じ2						…………
+	黒背景		エフェクト表
+	ディーア							……そっちは任せたぞ、<ruby=ディーア>魔人</ruby>
+FadeOut	black					0
+CharacterOff						0
+Wait						3
+Bgm	Xmasボス
+Param	character_grayout=true
+Bg	ブリジット魔核深層					0
+Se	強風	TRUE
+FadeIn	black					0
+	リディ	<Off>						<color=#fe3333>ぁぁ、ああああああぁ<dash=2>!!</color>
+	魔人ディーア	冷徹						くっ……\n前に進むこともままならない……
+	魔人ディーア	冷徹						リディ！\n聞こえるか！ リディ!!
+CharacterOff
+	リディ	<Off>						<color=#fe3333>ぁぁあぁぁあ<dash=2></color>
+	リディ	<Off>						<color=#fe3333>私が壊した、私が殺した\n私が奪った、私が、私が<dash=2></color>
+	魔人ディーア	冷徹						ああそうだ、だからどうした!!
+	魔人ディーア							魔界に生まれた以上、\n魔剣という兵器として生まれた以上、\nそれが運命だ!!
+	魔人ディーア							その程度のこと、\n皆覚悟していたはずだ!!
+CharacterOff
+	リディ	<Off>						<color=#fe3333>私が壊した、私が<dash=2></color>
+	魔人ディーア	冷徹						それでも、\n全て背負っていくのが王だ！\n英雄だ！
+	魔人ディーア							お前は、\nそれに憧れていたんじゃないのか!!
+CharacterOff
+	リディ	<Off>						<color=#fe3333>壊したく、ない<dash=2></color>
+StopBgm
+	魔人ディーア	冷徹						…………!!
+Se	回想
+FadeOut	white					.2
+CharacterOff						0
+	7章BG1		エフェクト表			0
+FadeIn	white					.2
+Wait						1
+	7章BG2		エフェクト表			0
+Wait						1
+FadeOut	white					.2
+CharacterOff						0
+	　　　　　　　　　　					0
+FadeIn	white					.2
+	リディ	<Off>						<color=#fe3333>違う、そんなつもりじゃ、\n嫌だ、壊したくない<dash=2></color>
+	魔人ディーア	冷徹						……ああ、そうか
+	魔人ディーア							……そうだよな\nそんなこと、わかってるよな
+StopSe
+Bgm	ロルリアンレットB
+	魔人ディーア							……お前は、ただ英雄の剣に\nなりたかったわけじゃない
+	魔人ディーア							<dash=2>ただ、寂しかっただけなんだ
+CharacterOff
+	リディ	<Off>						<color=#fe3333><dash=6></color>
+	魔人ディーア	冷徹						……そうだよな
+	魔人ディーア							お前がどんなに拒んでも、\nお前は魔剣殺しという呪いから\n逃れられない
+	魔人ディーア							どんなに大切な友達でも、\n戦えば壊すしかなくなってしまう
+	魔人ディーア							そして人に恨まれ、世界に恨まれ<dash=2>\nそれなのに、人々はその\n忌まわしい力だけを求める
+	魔人ディーア							……今まで誰も、\nお前のことなんて\n見てくれなかったんだもんな
+CharacterOff
+	リディ	<Off>						<color=#fe3333>……わたし、わた、しは<dash=2></color>
+	魔人ディーア	冷徹						だから、"ディーア"と一緒にいる間は\n彼に相応しい英雄の剣になりたかった
+	魔人ディーア							人々から疎まれる魔剣殺しではなく
+	魔人ディーア							彼の隣に、胸を張って立てる、\n英雄の剣に
+StopBgm
+	魔人ディーア	冷徹						……あぁ、なんて
+Bgm	ロルリアンレットC
+	魔人ディーア							……なんて馬鹿げた話だ
+	魔人ディーア	冷徹						あのなあ、リディ\nお前は一つ勘違いをしているぞ
+	魔人ディーア							魔剣殺しだろうが、\n魔王獣だろうが、そんなの関係ない
+	魔人ディーア							数千万の並行世界で、オレは\nそんなの嫌というほど見てきた
+	魔人ディーア							だからといってさ\nオレがお前を\n見捨てたことがあったか？
+	魔人ディーア							お前を壊して、\nなかったことにしようなんて\n言ったことが一度でもあったか？
+CharacterOff
+	リディ	<Off>						<color=#fe3333><dash=6></color>
+	魔人ディーア	冷徹						ぐっ……聞け、リディ！\nお前は決して一人じゃない!!
+	魔人ディーア							忘れるな！\n誰が何と言おうと、なんと罵ろうと
+	魔人ディーア							お前を、お前だけを、\nずっと愛し続けた魔剣使いがいたんだ
+	魔人ディーア							数千万の試行錯誤を繰り返し、\n自分の人生のすべてを擲って、\nそれでも!!
+	魔人ディーア							それでも、お前の幸せを\n願い続けた奴がいたんだ!!
+	魔人ディーア							お前は断じて、\n皆に恨まれ、嫌われた\n災害の魔剣なんかじゃない
+	魔人ディーア							皆に呪われる\n破滅の魔剣なんかじゃない！
+	魔人ディーア							だから<dash=2>
+	魔人ディーア							<dash=2>帰ってこい、リディ!!
+Se	光3
+FadeOut	white					1
+	白背景		エフェクト表			0
+Param	character_grayout=false
+StopBgm						2
+Wait						2
+FadeIn	white					.5
+	リディ							<dash=4>、ぁ
+	リディ							……マス、ター
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_30
+EndIf
+EndScenario
+
+# Q1009_30
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	台風_BGM
+Bg	ブリジット魔核深層2
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+ImageEffect	SpriteCamera	Blur
+Wait						2
+	　　　　　　　　　　		2_2
+FadeIn	black					.5
+CharacterOff	黒背景					2.5
+Tween	瞬きA	MoveBy	y=400 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-400 time=2	easeOutCirc
+	魔人ディーア	<Off>						<dash=2>……ぐっ、う……
+	魔人ディーア	<Off>						ここ、は……
+ImageEffectOff	SpriteCamera	Blur
+CharacterOff	瞬きA
+CharacterOff	瞬きB
+Wait						1
+	魔人ディーア	冷徹						暴走が止まっている……\nやったのか、\n<param=name><dash=2>
+	リディ	通常2				.5		おはよ、マスター\n目、覚めた？
+	魔人ディーア	冷徹						…………ブリジット
+	リディ	笑い2						えへへ♪\nマスターのことだから\nきっと来てくれると思ってた
+	魔人ディーア	冷徹						……オレは、お前のマスターじゃない
+	リディ	通常2						マスターはマスターだよ\nリディにはわかるもん
+	魔人ディーア	冷徹						…………
+	リディ	驚き2						お話、しに来たんじゃないの？
+	魔人ディーア	冷徹						ああ……だが、もう終わった
+	魔人ディーア	冷徹						一か八か、賭けだったが……\nなんとかなったようで良かった
+	リディ	悲しい2						……そっか、残念
+	魔人ディーア	冷徹						…………え？
+	リディ	照れ2						リディは、\n"あなた"とお話してみたかったのに
+	魔人ディーア	冷徹						……いいや、\n今更話すことなんて何もない
+	魔人ディーア							それに、オレにそんな資格は<dash=2>
+	リディ	通常2						……最近ね、リディ、\nなんか忘れっぽいみたいなの
+	魔人ディーア	冷徹						…………？
+	リディ	驚き2						なんか、記憶に穴があるんだって\nノアって人が\n教えてくれたんだけど
+	リディ	通常2						……だからね
+	リディ	照れ2						リディ、ここで聞いたこと\n全部忘れちゃうかも
+	魔人ディーア	冷徹						…………っ
+	リディ	通常2						だから、ね\n……マスター
+	魔人ディーア	切ない						…………ああ、そうだな
+Bgm	結婚
+	魔人ディーア	切ない						……こうして話すのは\n久しぶりだな、リディ
+	リディ	悲しい2						……うん
+CharacterOff						0
+Param	character_grayout=false
+Bg	市街地A					0
+	【ディーア】	笑い2	1_2			0
+	リディ	照れ2	2_2			0
+ImageEffect	SpriteCamera	Sepia
+Wait						1.2
+CharacterOff						0
+Bg	ブリジット魔核深層2					0
+ImageEffectOff	SpriteCamera	Sepia
+	魔人ディーア	切ない				0		……元気だったか？
+	リディ	照れ2						ふふ、なにそれ\nおじいちゃんみたい
+	リディ							ちゃんと、元気だったよ
+	魔人ディーア	切ない						…………そうか
+	黒背景		エフェクト表			0
+	魔人ディーア	切ない						「<dash=2>風邪は引いていないかい」\n「怪我はしていないかい」\n「ご飯はちゃんと食べているかい」
+	魔人ディーア	切ない						……いつだって、思い出すのは\nそういう他愛のないことばかりだ
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場_カフェ					0
+	リディ	照れ2				0
+	魔人ディーア	<Off>						……あの、穏やかな日々を、\nずっと過ごしていたかった
+CharacterOff						0
+Bg	市街地A					0
+	リディ	怒り2				0
+	魔人ディーア	<Off>						あの、優しい毎日を、\nずっと過ごしていたかった
+ImageEffectOff	SpriteCamera	Sepia
+	黒背景		エフェクト表			0
+Wait						.5
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+	9章スチルAC		エフェクト表			0
+	リディ	<Off>				0		<color=#fe3333>リディ、あんまり\nいい子じゃなかったよね</color>
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	黒背景		エフェクト表			0
+Bg	ブリジット魔核深層2					0
+	魔人ディーア							いいんだ\nいい子じゃなくたっていい\nオレはキミといたかったんだ
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+	9章スチルAC		エフェクト表			0
+	リディ	<Off>				0		<color=#fe3333>わがままばっかり言って、\nごめんね</color>
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	黒背景		エフェクト表			0
+Bg	ブリジット魔核深層2					0
+	魔人ディーア					0		いいんだ\nキミのわがままなら、\n本当はずっと聞いていたかったんだ
+CharacterOff						0
+	黒背景		エフェクト表			0
+Wait						1
+	9章BG1		エフェクト表2
+	9章BG2		エフェクト表
+	リディ	<Off>						……きっと辛かったよね\nすごく、苦しかったよね
+	リディ	<Off>						……それでも、マスターは\nずっと一人で頑張ってくれたんだよね
+	リディ	<Off>						……こんなこと言ったら、\nあっちのリディちゃんに\n怒られちゃうかもしれないけど
+	リディ	<Off>						……リディね、すっごく嬉しいんだ
+	リディ	<Off>						マスターが、リディのために、\nこんなに頑張ってくれたことが
+	リディ	<Off>						だから……
+CharacterOff	9章BG1					.5
+	リディ	<Off>						………ありがとう、マスター
+	魔人ディーア	<Off>						…………ッ
+	リディ	<Off>						私のために、頑張ってくれて
+	リディ	<Off>						私のために、戦ってくれて
+	魔人ディーア	<Off>						……ああ
+	リディ	<Off>						……私を救ってくれて、ありがとう
+	魔人ディーア	<Off>						…………ああ
+FadeOut	white					1
+CharacterOff						0
+Bg	天界					0
+	　　　　　　　　　　
+Wait						3
+Se	強風	TRUE
+FadeIn	white					0
+	ディーア	怒り2						……リディ、リディ!!
+	ディーア	通常2						よかった、無事で……!!
+	リディ	照れ2						マスター……！
+	リディ	悲しい2						……ごめんね、\n私、きっとたくさん迷惑かけたよね
+	ディーア	通常2						いいんだ、それくらい\nリディがいてくれれば
+CharacterOff
+	魔人ディーア	冷徹						……じきにセトが来る\nブリジットの暴走が止まったのは\nもう気付いているはずだ
+CharacterOff
+Param	character_grayout=true
+	ディーア	通常2	1_2
+	リディ	悲しい2	2_2
+	リディ							…………ぁ
+CharacterOff
+	魔人ディーア	冷徹						貴様はブリジットの回復を最優先しろ
+	魔人ディーア							奴は俺が食い止める\n……足止めにしかならないだろうがね
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悲しい2	2_2
+	ディーア							……待ってくれ！
+CharacterOff
+	魔人ディーア	冷徹						……なんだ
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悲しい2	2_2
+	ディーア							……ありがとう\n助かった
+	魔人ディーア	<Off>						…………
+CharacterOff
+	魔人ディーア	冷徹						…………ふん
+	魔人ディーア							お前のためにやったわけじゃない
+FadeOut	black					0
+CharacterOff						0
+StopSe
+	魔人ディーア	冷徹	1_2
+	カルバノグ		2_2
+Bg	大灯台B					0
+Wait						2
+FadeIn	black					.5
+	カルバノグ							<dash=2>だーから言ったじゃないですかあ
+	魔人ディーア	冷徹						何がだ？
+	カルバノグ							マスター、\n悪役には向いてないですよう
+	魔人ディーア	冷徹						……それはお前もだろう
+	カルバノグ							えぇ～？ そうですかあ？\nカルバ、結構上手だったと\n思いますけどお
+	魔人ディーア	切ない						……何を言う
+	魔人ディーア							誰よりも争いを嫌い、\n平和を願っていたのは\n他でもないお前だっただろうに
+	カルバノグ							まあでも、\nブロードソード=ロストちゃんよりは\nマシでしたよう
+	魔人ディーア	通常						……ふ、そうかもしれないな
+	魔人ディーア	切ない						悪役に向いてる奴なんかいないさ\n……優しすぎるんだ、\nオレの魔剣たちは、みんな
+	カルバノグ							……これからどうするんですう？
+	魔人ディーア	冷徹						そうだな、ロスト魔剣の派兵は\n引き続き行うとしよう
+	カルバノグ							え、まだやるんですう？
+	魔人ディーア	冷徹						当然だ\nこれで終わるはずがあるまい
+	魔人ディーア							むしろ、奴の旅は\nようやく始まったところだ
+	魔人ディーア							兵力も、ロスト技術も、\nこの先必ず必要になる時が来る
+	魔人ディーア	切ない						……それに
+	魔人ディーア							……オレに救えなかったものを、\nあいつは救ってみせるらしい
+	魔人ディーア							託してみようじゃないか\nあいつなら、きっと……
+	カルバノグ							ふふ、それは面白そうですねえ！
+	魔人ディーア	笑い						ああ、だから、そのためにも<dash=2>
+StopBgm
+CharacterOff
+	天上王セト							やはり貴様とは相容れぬな
+	魔人ディーア	ニヤリ						同感だ　
+Bgm	風属性バトル
+CharacterOff
+ImageEffect	SpriteCamera	Bloom
+	黒グラデーション		エフェクト裏
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	NP天上王セト		エフェクト表			1		<dash=2>《<ruby=トゥルーエンド>真解放</ruby>》、\n天業剣クリーフォート
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	ニヤリ	1_2
+	魔人ディーア							……厄介なものだ
+	カルバノグ							ですねえ
+	魔人ディーア							お前が真の力を出せば、魔界は滅びる
+	魔人ディーア							だがそうしなければ奴を倒せはしない\n……奴が仕掛けてくるのは\nそういう戦いだ
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2					悪いが、貴様に勝機はないぞ
+CharacterOff
+	カルバノグ		2_2
+	魔人ディーア	笑い	1_2
+	魔人ディーア							構わないさ\n<dash=2>お前を倒すのはオレじゃない
+	魔人ディーア	ニヤリ						我々は"<ruby=A Necessary Evil>必要悪</ruby>"だ\n英雄になど、最初から興味はないのさ
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_31
+EndIf
+EndScenario
+
+# Q1009_31
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	魔人機関
+	黒グラデーション		エフェクト表
+FadeIn	black					.5
+Se	フォーン
+	オーラ青		エフェクト表2			1
+Wait						1
+CharacterOff	オーラ青					1
+Wait						1
+	魔人ロルリアンレット	<Off>						<dash=2>おかえりなさい
+	魔人ロルリアンレット	<Off>						もう、いいの？
+	魔人ディーア	冷徹						……ああ、役目は終えたよ
+	魔人ディーア	冷徹						天上王の魔力も全て使わせた\n後は、あいつに任せれば大丈夫だろう
+	魔人ロルリアンレット	<Off>						……やっと、終わったのね
+	魔人ディーア	切ない						……ああ
+	魔人アリス	<Off>						長かったな
+	魔人アリス	<Off>						……これで、満足したか？
+	魔人ディーア	切ない						……そうだな
+	黒背景		エフェクト表2
+	魔人ディーア							……疲れた\n少し、眠るよ<dash=2>
+FadeOut	black					0
+StopBgm
+Bg	天界
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+Wait						3
+Bgm	凱旋
+FadeIn	black					.5
+	リディ							……私たちの核を融合する？
+CharacterOff
+	黒リディ							融合といっても、\n別に難しい話じゃない
+	黒リディ							そもそも、\n分かれている状態がおかしいんだ\n元の状態に戻るだけサ
+	黒リディ							……これで、\nヘルメリアの残した呪いは解かれた
+	黒リディ							あなたも、\n前を向いて歩き始めることができる
+	黒リディ							でも、\n魔剣殺しブリジットの力を扱うには、\nやっぱりまだ足りない
+	黒リディ							……だから、\n私はここでお別れ<dash=2>カナ
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	リディ							……そんな
+CharacterOff
+	黒リディ							といっても、\n私はリディちゃんの中で\n眠ってるからサ
+	黒リディ							会おうと思えば、いつでも会えるヨ
+CharacterOff
+	ディーア	通常2						……ありがとうな\nお前がいなければ、\n一体どうなっていたか<dash=2>
+CharacterOff
+	黒リディ							ううん、\nマスターの力になれてよかった
+	黒リディ							本当は、ずっと羨ましかったんだ\nマスターの近くで、\n直接支えになれるこの子が
+CharacterOff
+	黒リディ	笑い	2_2
+	ディーア	驚き2	1_2
+	黒リディ							だから、サ\n最後にこれくらいしてもいいよネ？
+Tween	黒リディ	MoveBy	x=-30				NoWait
+	黒リディ							……ちゅ♪
+	ディーア	驚き2						<dash=2>え
+CharacterOff
+	リディ	悔しい2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							えええええええ!?
+	リディ	怒り2						ちょ、な、ななな、何してるの!?\nずる……じゃなくて、えっち！
+CharacterOff
+	黒リディ							あはは、ごめんごめん
+CharacterOff
+	ディーア	照れ2	1_2
+	リディ	怒り2	2_2
+	リディ							もう！\nマスターもなにニヤニヤしてるの！\nえっち！ ロリコン！ 変態！
+	ディーア	汗2						いや、急だったからびっくりして……
+CharacterOff
+	黒リディ							大丈夫大丈夫、\nマスターはリディちゃんの、だもんネ
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	悔しい2	2_2
+	リディ							～～～～ッ!!
+CharacterOff
+	黒リディ							……大事にしなよ、マスター
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							ああ、言われなくても
+	リディ							むぅ……なんか納得いかない……
+CharacterOff
+	黒リディ							あはは……さあ、時間だ
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	怒り2	2_2
+StopBgm
+	ディーア							……ああ
+Bgm	決戦
+	ディーア	本気2						<dash=2>魔剣殺しブリジット、\n<ruby=アンロック>魔剣解放</ruby>
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+	赤黒リディ	驚き				0
+Wait						2
+Param	character_grayout=false
+	オーラ赤		エフェクト表
+FadeIn	white					.5
+	赤黒リディ							<dash=2>すごい、今までと全然違う
+CharacterOff
+	ディーア	驚き2						おぉ……なんだか見違えたな\n身長も少し伸びたか？
+CharacterOff
+	オーラ赤		エフェクト表
+	赤黒リディ	笑い						うん！\n元の私にちょっとだけ\n近づけたのかな♪
+	赤黒リディ	笑い						……えへへ、\n私、マスターの魔剣になれたんだね
+CharacterOff
+	ディーア	通常2						……ああ\nこれからもよろしくな、リディ
+CharacterOff
+	オーラ赤		エフェクト表
+	赤黒リディ	笑い						うん！
+CharacterOff
+StopBgm						1
+Wait						1
+Param	character_grayout=true
+	天業剣クリーフォート		1_2_b			.5
+	天上王セト		2_2			.5		……間に合わなかったか
+Se	強風	TRUE
+CharacterOff
+	ディーア	怒り2	1_2
+	赤黒リディ		2_2
+	赤黒リディ							…………!!
+	ディーア							来たな、天上王セト
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト	怒り	2_2
+	天上王セト							やはり奴の狙いは時間稼ぎだったか
+	天上王セト							してやられたよ\nあの男、なかなかどうして侮りがたい
+	天上王セト	通常						……魔剣殺しブリジットを\nアンロックしたようだな
+CharacterOff
+	ディーア	怒り2	1_2
+	赤黒リディ		2_2
+	ディーア							ああ、リディはオレの魔剣だ
+CharacterOff
+StopSe
+Bgm	ロルリアンレット
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天上王セト							……そうか、\nやはりその道を選ぶのか
+	天業剣クリーフォート							これで、いよいよ\n四百年前の再現が始まるのですね
+	天業剣クリーフォート							始まりの魔王戦争<dash=2>\n忌まわしきマスターキーが唱えた、\nかの計画の再現が
+CharacterOff
+	ディーア	悔しい2	1_2
+	赤黒リディ	悔しい	2_2
+	赤黒リディ							……クリーフォートちゃん
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天業剣クリーフォート							あなたにそう呼ばれるのも、\n懐かしいものです
+	天業剣クリーフォート	無						良いのですか、ブリジット？
+	天業剣クリーフォート							あなたのその選択は、\n多くの人々の想いを踏みにじることに\nなるでしょう
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+	9章スチルU		エフェクト表			0
+FadeIn	white					.3
+	天業剣クリーフォート	<Off>						……真魔王ヘルメリアは、\n人間と魔剣が共存する世界を\n望んでいました
+	天業剣クリーフォート	<Off>						それは度し難く、<ruby=セト>彼</ruby>の理想とも\n相容れないものでしたが、\n確かに美しい願いでありました
+	9章スチルB	B3	エフェクト表2
+	天業剣クリーフォート	<Off>						……あなたのその力は、\n否応なく魔剣使いを\n戦いへと導くでしょう
+	天業剣クリーフォート	<Off>						比類なき力を得るために、\n魔王となり世界を統べるために
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale
+Param	character_grayout=true
+	天上王セト		2_2			0
+	天業剣クリーフォート	無	1_2_b			0
+FadeIn	black					.3
+	天業剣クリーフォート							……あるいは、\n己の大切なものを守るために
+CharacterOff
+	ディーア	怒り2	1_2
+	赤黒リディ	悲しい	2_2
+	赤黒リディ							……わかってる
+	赤黒リディ							確かに、このままだとリディはまた、\nたくさんの人を\n傷つけちゃうかもしれない
+	赤黒リディ	通常						でも、<ruby=・・・・・・>そうならない</ruby>かもしれない
+	赤黒リディ							マスターと一緒なら……\nマスターが私を使ってくれるなら、\nそうはならないかもしれない
+	赤黒リディ							だから、リディは\nマスターと一緒に戦うの
+CharacterOff
+	天業剣クリーフォート	無	1_2_b
+	天上王セト		2_2
+	天業剣クリーフォート							……後悔しますよ、ブリジット
+CharacterOff
+	ディーア	笑い2	1_2
+	赤黒リディ		2_2
+	ディーア							オレがさせないさ
+Tween	赤黒リディ	PunchPosition	y=50				NoWait
+	赤黒リディ	笑い						マスター！
+	ディーア	怒り2						オレは天上王セトのように、\nあるいは<ruby=あいつ>魔人ディーア</ruby>のようには\nなれない
+	ディーア							たった１つの目的のために\n全てを犠牲にするようなことは\nオレにはできない
+	ディーア							オレには、叶えたいことが多すぎる\n拾いたいものが多すぎるんだ
+	ディーア	目閉じ2						だけど、捨てられないのは\n弱みじゃない
+	ディーア	怒り2						オレは全てを拾う強さを手に入れる\nそのために魔王になる
+	ディーア							……そして、天上王セト\nオレの望む世界にとって、\nあなたは邪魔になる
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天上王セト							……ああ、本当に懐かしいな
+CharacterOff
+	ディーア	驚き2	1_2
+	赤黒リディ		2_2
+	ディーア							……天上王セト？
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	山岳A					0
+	　　　　　　　　　　
+ImageEffect	SpriteCamera	Sepia
+FadeIn	white					.3
+	天上王セト	<Off>						かつて六大魔王が共に理想を語り、\n覇を競い合う時代があった
+	天上王セト	<Off>						聖鍵に封印され、四百年が過ぎ、\nそれは失われてしまったと思っていた
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	天界
+	天業剣クリーフォート		1_2_b			0
+	天上王セト	笑い	2_2			0
+FadeIn	black					.3
+	天上王セト							……だが、\nやはり何も変わっていないな
+	天上王セト							魔王を目指す者は\n相変わらず傲慢で、度し難く、\nどうしようもないほどに輝かしい
+	天上王セト							奴は<dash=2>、魔人ディーアは\n間違いなくこの魔王戦争を制し、\n魔王となりうる器を持っていた
+	天上王セト							いや、あるいは\n既にそうなっているのかもしれない
+	天上王セト	通常						そして同様に<dash=2>
+	天上王セト							認めよう\nキミにも、その素質があると
+CharacterOff
+	ディーア	怒り2	1_2
+	赤黒リディ		2_2
+	ディーア							…………!!
+CharacterOff
+	天業剣クリーフォート	無	1_2_b
+	天上王セト	笑い	2_2
+	天上王セト							理想を追い求めることは、\n人として在るべき姿だ
+	天上王セト							よりよい未来を求めるのは、\n人間の本質とも言えるだろう
+	天上王セト	怒り						……だが、人類はその夢に、理想に、\nあまりにも犠牲を払いすぎた
+	天上王セト							……命を落としすぎたのだ
+CharacterOff
+	ディーア	怒り2	1_2
+	赤黒リディ	悔しい	2_2
+	ディーア							…………
+CharacterOff
+	天業剣クリーフォート	無	1_2_b
+	天上王セト	怒り	2_2
+	天上王セト							魔王というものは、\n人が背負うにはあまりに重すぎる業だ
+FadeOut	black					.3
+CharacterOff						0
+Bg	戦場跡					0
+FadeIn	black					.3
+	天上王セト	<Off>						マスターキーは己が利益のために\nそれを人に押し付けた
+	天上王セト	<Off>						それが始まりだ\n四百年続くこの戦争の、\nそして全ての始まりだった
+	天上王セト	<Off>						魔王などとというものに容易に\n手が届いてしまうから、人はそれに\n焦がれることをやめられない
+	天上王セト	<Off>						誰もが魔王になれるからこそ、\n人類はいつまで経っても、\nこの戦争をやめられないのだ
+FadeOut	black					.3
+CharacterOff						0
+Bg	天界
+	天業剣クリーフォート	無	1_2_b			0
+	天上王セト	怒り	2_2			0
+FadeIn	black					.3
+	天上王セト							……だから
+	天上王セト							俺は新たなる世界の創造主となり\n天上より絶対の支配者として\nこの魔界に君臨する
+	天上王セト							そして誰も手が届かないところで、\n全ての業を背負うのだ
+	天上王セト							それでこそ、魔界に真の平和が訪れる
+	天上王セト							故に<dash=2>我が名は天上王セト
+	天上王セト	通常						これが《方舟計画》の全てだよ
+CharacterOff
+	ディーア	怒り2	1_2
+	赤黒リディ	悲しい	2_2
+	ディーア							……なるほど、確かに"魔王"らしい
+	ディーア	悔しい2						……だが、\nその平和は本当に平和なのか？
+	ディーア							争う力を奪って、\n望むものに手が届かなくなって……\nそれは、本当に幸せなのか？
+	ディーア							オレは、そうは思えない
+	赤黒リディ							……それに、そんなの寂しいよ
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天業剣クリーフォート							……ブリジット？
+CharacterOff
+	ディーア	驚き2	1_2
+	赤黒リディ	悲しい	2_2
+	赤黒リディ							世界を平和にするために頑張るのに\nそのために戦ってるはずなのに
+	ディーア	悔しい2
+	赤黒リディ							その平和の中に、\nクリーフォートちゃんたちが\nいないなんて
+	赤黒リディ							そんなの、寂しいよ……
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天業剣クリーフォート							……あなたも変わらないですね、\nブリジット
+CharacterOff
+	ディーア	怒り2	1_2
+	赤黒リディ	悲しい	2_2
+	赤黒リディ							……え？
+CharacterOff
+	天業剣クリーフォート		1_2_b
+	天上王セト		2_2
+	天業剣クリーフォート							誰よりも凶悪な力を持ちながら、\n誰よりも広い愛を持ち合わせている
+	天業剣クリーフォート	笑い						魔剣殺しの力を得たのが\nあなたでよかったと心から思います
+CharacterOff
+	ディーア	怒り2	1_2
+	赤黒リディ	悲しい	2_2
+	赤黒リディ							……クリーフォートちゃん
+CharacterOff
+	天業剣クリーフォート	ニヤリ	1_2_b
+	天上王セト		2_2
+	天業剣クリーフォート							ですがご心配なく
+	天業剣クリーフォート							彼には、私がいますので
+StopBgm						5
+Se	強風	TRUE
+	天上王セト	怒り						……では、今一度問おう
+	天上王セト							貴様は魔王として、\nいかなる世界を望む？
+CharacterOff
+	ディーア	目閉じ2	1_2
+	赤黒リディ		2_2
+	ディーア							オレは<dash=2>
+	ディーア							オレは、二度とリディが\n悲しまなくて済むように
+	ディーア							そして、人間と魔剣が、\n使い手と兵器ではなく<dash=2>
+	ディーア							共に、平和に暮らせる未来を望みます
+CharacterOff
+	天業剣クリーフォート	ニヤリ	1_2_b
+	天上王セト	笑い	2_2
+	天上王セト							……クク、ははははは！
+	天上王セト							やはり貴様とは相容れないな\nだが<dash=2>
+	天上王セト	通常						ヘルメリアの遺志を継ぐものとして、\nこれほどの適任もいないだろう
+CharacterOff
+StopSe
+Bgm	風属性バトル
+	ディーア	怒り2	1_2
+	赤黒リディ	悔しい	2_2
+	ディーア							……決着をつけよう、天上王
+CharacterOff
+	天業剣クリーフォート	ニヤリ	1_2_b
+	天上王セト	怒り	2_2
+	天上王セト							ああ、望むところだ
+CharacterOff
+	ディーア	怒り2	1_2
+	赤黒リディ	悲しい	2_2
+	赤黒リディ							……戦うしかないんだね、\nクリーフォートちゃん
+CharacterOff
+	天業剣クリーフォート	ニヤリ	1_2_b
+	天上王セト	怒り	2_2
+	天業剣クリーフォート							当然でしょう
+	天業剣クリーフォート							私は彼の望みを叶えるものとして、\nあるいは彼の手足として、\n死力を尽くすのみ
+	天業剣クリーフォート							それが、魔剣というものです
+	天業剣クリーフォート							……そして、\nそれはあなたも同じでしょう？
+CharacterOff
+	ディーア	怒り2	1_2
+	赤黒リディ	悔しい	2_2
+	赤黒リディ							……うん、そうだね
+CharacterOff
+	天業剣クリーフォート	ニヤリ	1_2_b
+	天上王セト	怒り	2_2
+	天上王セト							魔王候補十三王が一人\n《天上の覇者》\n《睥睨する方舟の王》
+	天上王セト							天上王セト、\nそして天業剣クリーフォート、参る
+CharacterOff
+	ディーア	怒り2	1_2
+	赤黒リディ	通常	2_2
+	ディーア							真魔王の遺志を継ぐ者\n《愚かなる卑怯者の鍵》\n《無垢なる世界意思の継承者》
+	ディーア	本気2						魔剣使い<param=name>\nそして魔剣リディ！\nオレは全てを救ってみせる<dash=2>!!
+Se	光3
+FadeOut	black					1
+Wait						2
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_32
+EndIf
+EndScenario
+
+# Q1009_32
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	遺跡B
+FadeIn	black					.5
+Wait						1
+	天上王セト							…………、ハ
+	天上王セト							四百年という時は恐ろしいものだな
+	天上王セト							最も魔王に近いと謳われたこの俺が、\nよもやこのような醜態を晒すとは
+	天上王セト	笑い						クク、だがいい\n得るものはあった
+	天上王セト							ふ、ふふ……魔剣殺しブリジット、\nそしてあの少年……\nそれに、アテナの遺産があれば<dash=2>
+CharacterOff
+Wait						.5
+Se	歩く
+	希望王ルル	冷徹				1
+Wait						.5
+	希望王ルル							…………
+StopSe
+CharacterOff
+StopBgm
+	天上王セト	怒り						<dash=4>！
+	天上王セト	笑い						……ふ、\nああそうか、やはりキミか
+	黒背景		エフェクト表			0
+	天上王セト							<dash=2>俺に引導を渡しに来るのは
+FadeOut	black					0
+CharacterOff						0
+	ディーア	通常2	1_2
+	赤黒リディ		2_2
+Bg	天界
+	　　　　　　　　　　
+Wait						2
+Bgm	凱旋
+FadeIn	black					.5
+	ディーア							身体は大丈夫か、リディ？
+	赤黒リディ	笑い						うん！\n心配かけちゃってごめんね
+Se	光1
+FadeOut	white					.5
+	リディ	通常2	2_2			0
+FadeIn	white					.5
+	リディ							よいしょっと
+	ディーア	あはは2						……無事でよかった
+	リディ	怒り2						マスターの方こそ！
+	リディ							リディ、\nずっと心配だったんだからね！
+	ディーア	驚き2						……もしかして、見てたのか？
+	リディ	怒り2						あの子を通じて、ちょっとだけね
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							いーい、マスター！\nマスターはもっと\n自分を大事にすること！
+	リディ	悔しい2						リディが助かっても、\nマスターがいなかったら\n意味ないんだからね！
+	ディーア	あはは2						……ああ、わかったよ
+	リディ	笑い2						ふふん、わかればよろしい♪
+	ディーア	怒り2						……ようやく、\nここまでたどり着いたな
+	リディ	驚き2						…………んぅ？
+	ディーア							いや、なんでもない\nこっちの話だ
+	ディーア	怪しい2						それより……
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト表
+Wait						.5
+	？？？？							……聖征剣、煉獄剣、焔華剣\nそして今ここに、天業剣が沈んだ
+	？？？？							……もうすぐだ\nもうすぐだよ、ルカ
+CharacterOff
+Bgm	緊迫
+	ディーア	怒り2	1_2
+	リディ	驚き2	2_2
+	リディ							マスター、あれ……！
+	ディーア							ああ……、遅かったな、ルル\nようやくお出ましか
+CharacterOff
+	希望王ルル	冷徹				.5		遅かった？\nフン、何も理解していないようだな
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							なに……？
+CharacterOff
+	希望王ルル	冷徹						《第零異変》の扉は既に開かれた
+	希望王ルル							残りは、氷城エイビシュタット神域\nそして<dash=2>
+StopBgm
+	希望王ルル							天空教会シーズクリア神域だ
+CharacterOff
+Bgm	Xmasボス
+Shake	Graphics	MoveBy	x=5 y=5 time=100				NoWait
+Se	火事	TRUE
+ImageEffect	SpriteCamera	MotionBlur
+Wait						1
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	悔しい2	2_2
+	ディーア							なんだ……!?\n何が起きている……!?
+Se	光1
+FadeOut	white					.2
+	赤黒リディ	悔しい	2_2			0
+FadeIn	white					.2
+	赤黒リディ							マスター、伏せて!!
+	ディーア	悔しい2						くっ……!!
+CharacterOff
+	希望王ルル	冷徹						今や方舟は天上王セトの支配から\n解き放たれた
+	希望王ルル							その隙を、\n"奴"が見逃すはずがない
+	希望王ルル							魔鍵ノアは、天穹魔儀ヘリオスフィア\nという新たなる器を得て、\n本来の力を取り戻そうとしている
+	黒背景		エフェクト表			0
+	希望王ルル							<dash=4>"始まった"
+StopBgm						1
+StopSe						1
+FadeOut	black					1
+CharacterOff						0
+Bg	黒背景
+	　　　　　　　　　　
+Wait						3
+If	isdebug==true
+CharacterOff
+Jump	*Q1009_01
+EndIf
+EndScenario

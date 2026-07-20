@@ -1,0 +1,568 @@
+# G_552_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+Param	character_grayout=true
+	          
+FadeIn	white					.5
+								<color=blue>クリスマスイブ</color>
+CharacterOff
+	リディ	通常2	画面外_左
+	ディーア	通常2	2_2
+Tween	リディ	MoveTo	x=-90 time=1				NoWait
+Wait						.5
+	リディ	通常2						マスター！\nあっちの飾りつけは終わったよ♪
+	ディーア	笑い2						ありがとう、リディ\nおかげでクリスマスパーティが\n無事にできそうだ
+	リディ	笑い2						うん♪\n街の方もとっても盛り上がってるし、\nみんなでパーティ楽しもうね！
+	ディーア	通常2						あとはみんなの分の\nプレゼントを受け取るだけだな
+	リディ	驚き2						配達屋さんに\nお願いしているんだったよね？
+	ディーア	通常2						さすがに全員分は多すぎたから、\n持ってきてもらうことにしたんだ\nそろそろ来るはずだけど……
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	笑い2						あっ、マスター！\n向こうから誰か走ってくるよ！
+	ディーア	笑い2						本当だ角が見える……！\nきっとプレゼントが届いたんだ！
+	リディ	笑い2						そっか♪\nクリスマスといえばトナ<dash=2>
+Bgm	緊迫
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ラヴィ	拡大嬉しい	エフェクト裏
+	ラヴィ							シカです！！！！！！
+StopBgm
+CharacterOff
+	リディ	絶望2	1_2
+	ディーア	絶望2	2_2
+	二人							…………
+Param	character_grayout=true
+	リディ	絶望2						あ、シカだ
+	ディーア	絶望2						シカだった
+Bgm	平和
+CharacterOff
+	ラヴィ	怒り
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	怒り						もぅ！\nなんなんですかその反応は！\n嬉しそうな顔をしてくださいよぉ！
+Param	character_grayout=true
+CharacterOff
+	リディ	驚き2	1_2
+	ディーア	汗2	2_2
+	ディーア	汗2						いや、嬉しいんだけど\nてっきりトナカイが来たと思ったから
+CharacterOff
+	ラヴィ	慌て						むむむ！\nマスターさんまでラヴィのこと\nトナカイだと思ったんですか!?
+	ラヴィ	怒り						ラヴィはシカです！ シカなのです！\nほら、ちゃんとシカの角があります！
+CharacterOff
+	リディ	驚き2	1_2
+	ディーア	汗2	2_2
+	ディーア	汗2						ご、ごめんごめん！\nそれよりラヴィがプレゼントを\n持ってきてくれたんだよな？
+	リディ	笑い2						配達のお手伝いしてくるって\n言ってたもんね！
+CharacterOff
+	ラヴィ	通常						はいっ！ マスターさんあてに\nプレゼントをお届けに来ました♪
+	ラヴィ	通常						他にもたくさんのお家に\n配達してきたんですよ♪
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	嬉しい						とっても多かったですけど、\n魔界で一番の配達屋ですからね！\nらくしょーです、ドヤァ！
+	ラヴィ	慌て						でも、どこのお家に行っても\n『トナカイさんだ！』と言われて……
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	怒り						みんな、ラヴィのこと\nトナカイと間違えたんですよ！\nひどいですよね！
+CharacterOff
+	ディーア	汗2	2_2
+	リディ	驚き2	1_2
+	リディ	驚き2						クリスマスに赤い服を着てたら、\nサンタさんだと思っちゃうよね……
+	ディーア	汗2						しかも角が生えてたらな
+CharacterOff
+	ラヴィ
+Shake	ラヴィ		x=5				NoWait
+	ラヴィ	怒り						赤い服は配達員の証ですよぉ！\nサンタさんじゃないんです！
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	嬉しい						でも、誤解される毎日は終わり♪\n今日こそトナカイに\n"げこくじょー"しちゃいます♪
+CharacterOff
+	ディーア	驚き2	2_2
+	リディ	驚き2	1_2
+	ディーア	驚き2						下剋上？
+CharacterOff
+	ラヴィ	通常						はい！\nこの聖夜にシカのラヴィが大活躍して\nトナカイより有名になるんです！
+	ラヴィ	嬉しい						"クリスマス＝シカ"になれば、\n間違えられることもないですから！
+CharacterOff
+	ディーア	汗2	2_2
+	リディ	悔しい2	1_2
+	ディーア	汗2						な、なるほど……？
+	リディ	悔しい2						でも、どうやって？\nクリスマスといえばトナカイって\nとっても有名だよ？
+CharacterOff
+	ラヴィ	通常						えっ……？\nがんばって働くだけじゃ\nだめですかぁ？
+CharacterOff
+	ディーア	汗2	2_2
+	リディ	驚き2	1_2
+	ディーア	汗2						それだけだと足りないだろ\nトナカイといえば、\nサンタの相棒として有名だしな
+CharacterOff
+	ラヴィ	怒り						じゃあ、どうすれば\nトナカイ・サンタさんコンビより\n有名になれるんでしょうか？
+CharacterOff
+	ディーア	怪しい2	2_2
+	リディ	驚き2	1_2
+	ディーア	怪しい2						そうだなぁ……\n今日もっと活躍するのは当然だけど
+	ディーア	通常2						おっ！\nこういうのはどうだ？
+	ディーア	笑い2						オレがラヴィに\n乗っていけばいいんだよ！
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	悔しい2						えぇ!?
+CharacterOff
+	ラヴィ	嬉しい						なるほどぉ！\nサンタよりマスターのほうが\n強そうな名前ですよね！
+	ラヴィ	嬉しい						これで\nサンタさんとトナカイに勝てます♪
+CharacterOff
+	ディーア	笑い2	2_2
+	リディ	悔しい2	1_2
+	リディ	悔しい2						リディは無理があると思うな……
+CharacterOff
+	ラヴィ	通常						そうと決まれば、\nルディさんに"せんせんふこく"です！
+CharacterOff
+	ディーア	驚き2	2_2
+	リディ	驚き2	1_2
+	ディーア	驚き2						ルディに？
+CharacterOff
+	ラヴィ	嬉しい
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	嬉しい						はい！\nトナカイといえば聖獣ルディさん！
+	ラヴィ	通常						ラヴィはルディさんを\n超えるために生まれたんですからっ♪
+StopBgm
+CharacterOff
+	ラヴィ	拡大嬉しい	エフェクト表
+	ラヴィ	拡大嬉しい						ルディさーん、待っててください！\nあなたのライバルが今行きますよぉ！\n今日こそラヴィと決着を<dash=2>
+FadeOut	black					.1
+Param	character_grayout=false
+CharacterOff						0
+Bg	酒場の地下					0
+	集中線		エフェクト表			0
+	ルディ	泣き2				0
+FadeIn	black					.1
+Bgm	緊迫
+	ルディ	泣き2						うぇえええええ、\nルディはだめな子ですぅ！
+CharacterOff
+	集中線		エフェクト表
+	ラヴィ	慌て
+	ラヴィ	慌て						えええええええええええ!?\nど、どうしたんですか、ルディさん!?
+Bgm	穏やか
+Param	character_grayout=true
+CharacterOff
+	ラヴィ	慌て	3_3
+	ルディ	泣き2	1_3
+Shake	ルディ		x=5				NoWait
+	ルディ	泣き2						らゔぃちゃん……！\nるでぃはやくたたずですぅ……！
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	慌て						いつものルディさんは\nどうしたんですか!?
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Bg	雪の街					0
+	ルディ	炎2				0
+FadeIn	white					.3
+	ルディ	炎2						いまからここを聖夜にしましょうっ！\n季節や時期なんて関係ありません！\n私がいれば年がら年中聖なる夜です！
+	ルディ	炎2						聖夜こーりーん!!!!
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	酒場の地下					0
+	ルディ	泣き2	1_3			0
+	ラヴィ	慌て	3_3			0
+FadeIn	white					.3
+	ラヴィ	慌て						って、いつでも\n元気いっぱいじゃないですかぁ!!
+CharacterOff
+	ディーア	驚き2						あ……！\nそういえばクリスマス当日だと……
+CharacterOff
+	ルディ	泣き2	1_3
+	ラヴィ	慌て	3_3
+Shake	ルディ		x=5 time=2				NoWait
+	ルディ	泣き2						はいぃ、なぜかこの日は、\n聖夜降臨できないんですぅ……
+	ラヴィ	慌て						えぇ!?
+CharacterOff
+	ディーア	汗2						ルディの聖夜降臨は、\n大気中の魔素をぎゅっと集める現象
+	ディーア	汗2						環境に影響を与えられる\nすごい力だけど、\n本当の聖夜と満月は苦手らしくて……
+CharacterOff
+	ラヴィ	慌て	3_3
+	ルディ	泣き2	1_3
+	ルディ	泣き2						ぴかぴか光れないルディなんてぇ……\nみんな期待してるのにぃ……
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	慌て						ら、らしくないですよ……！\n元気になってください、ルディさん！
+	ラヴィ	慌て						る、ルディさんが\nこんなに落ち込んじゃうなんて……
+	ラヴィ	慌て						このままラヴィが活躍しても、\nいいんですか!?
+Tween	ルディ	PunchPosition	y=30				NoWait
+	ルディ	泣き2						それです……！\nお願いします、ラヴィちゃん……！
+	ラヴィ	怒り						はい……？
+	ルディ	泣き2						ルディの代わりに、\nクリスマスを盛り上げてください！
+Tween	ラヴィ	PunchPosition	y=50				NoWait
+	ラヴィ	慌て						えええええ!?
+	ルディ	泣き2						ラヴィちゃんになら\nおまかせできますから……！
+Tween	ラヴィ	MoveBy	x=20				NoWait
+	ラヴィ	怒り						うぅ、ラヴィは\nルディさんとけっちゃくを……\nでもこんなにお願いされたら……！
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	慌て						わ、分かりました！\nこのラヴィにおまかせくださいっ！\nクリスマスを盛り上げてみせます！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A(Xmas)					0
+	ディーア	驚き2	2_2			0
+	ラヴィ	慌て	1_2_b			0
+FadeIn	black					.3
+	ラヴィ	慌て						と、言ったものの……\nなんか、調子がでないですよぅ……
+	ディーア	驚き2						あれ？\nルディは倒すべきライバルじゃ……？
+Tween	ラヴィ	MoveBy	x=20				NoWait
+	ラヴィ	慌て						そ、そうですけど……
+	ラヴィ	怒り						ほんとは、ルディさんと\n夜空を走り回るはずだったのにぃ
+	ディーア	笑い2						でも、\nこれは絶好のチャンスじゃないのか？
+	ディーア	通常2						トナカイがいないシカの独壇場だし\nシカ人気を高めるチャンスだぞ？
+	ディーア	通常2						トナカイの代わりにシカが来たぞって\nプレゼントを配ったり
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	通常						はっ……！ た、たしかに！\nこれはチャンスです！
+	ディーア	汗2						気づいてなかったんだな……
+	ラヴィ	通常						そうとわかれば、\n最初の計画通りに、ですね！
+	ラヴィ	嬉しい						ではマスターさん、\nラヴィに乗ってください！
+	ディーア	通常2						ああ！
+Tween	ディーア	MoveBy	x=-40				NoWait
+Se	ポップイン
+	ディーア	にやけ2						これで自然に密着デートが<dash=2>
+StopBgm
+	ラヴィ	嬉しい						"ちょーこーそく"で\nいきますよぉおおおおおお!!
+Se	ピューン
+Tween	ラヴィ	MoveBy	x=-2000 time=1				NoWait
+Tween	ディーア	MoveBy	x=-2000 time=1				NoWait
+	ディーア							うわああああああああああああ!?
+Wait						.5
+FadeOut	black					.3
+CharacterOff						0
+Bg	草原A(夜)					0
+	ラヴィ	通常	画面外_右			0
+	ディーア	絶望2	画面外_右_b			0
+	旅人	通常	p2b			0
+	女の子	通常	p3			0
+FadeIn	black					.3
+Bgm	コメディ
+	女の子	通常						おとーさん、\nサンタさん、まだかな？
+	旅人	通常						ははは、\nもうすぐトナカイに乗ってくるさ♪
+Se	ピューン
+Tween	ラヴィ	MoveBy	x=-1400 time=0.3				NoWait
+Tween	ディーア	MoveBy	x=-1400 time=0.3				NoWait
+Wait						.5
+	女の子	通常						あっ！\nトナカイさん!!
+	旅人	通常						ほ、本当か!?
+Se	ピューン
+Tween	ラヴィ	MoveBy	x=880 time=0.3				NoWait
+Tween	ディーア	MoveBy	x=980 time=0.3				NoWait
+Wait						.2
+	ラヴィ	通常						シカです！
+	女の子							え……？
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	嬉しい						シカです!!
+	ラヴィ	嬉しい						そしてこっちはマスターさんです！\nそれでは！
+Se	ピューン
+Tween	ラヴィ	MoveBy	x=-880				NoWait
+Tween	ディーア	MoveBy	x=-980				NoWait
+Wait						.2
+	女の子							いっちゃった……
+Se	ピューン
+Tween	ラヴィ	MoveBy	x=880				NoWait
+Tween	ディーア	MoveBy	x=980				NoWait
+Wait						.2
+	ラヴィ	嬉しい						忘れてました！ プレゼントどうぞ！\nメリークリスマス！
+Se	ピューン
+Tween	ラヴィ	MoveBy	x=-880				NoWait
+Tween	ディーア	MoveBy	x=-980				NoWait
+Wait						.2
+	旅人							……やっぱり\nトナカイなんじゃないか？
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場_商業施設					0
+	ラヴィ	嬉しい	3_3			0
+	酒場のおばちゃん		1_3			0
+FadeIn	black					.3
+	酒場のおばちゃん							ありがとうねえ、\n手伝ってもらって！
+	ラヴィ							いえいえ！\nシカですから当然です！
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A(上空)					0
+	          		1_2			0
+FadeIn	black					.1
+	ペリュネイア=ラヴィ	<Off>						クリスマスにはシカ！
+	ペリュネイア=ラヴィ	<Off>						トナカイじゃなくて、\nシカのぬいぐるみどうぞ！
+FadeOut	black					.1
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	          		1_2			0
+FadeIn	black					.1
+	ペリュネイア=ラヴィ	<Off>						シカシカシカシカ、シカクリスマス！
+FadeOut	black					.1
+CharacterOff						0
+Bg	星空					0
+	          		1_2			0
+FadeIn	black					.1
+	ペリュネイア=ラヴィ	<Off>						<size=40>クリスマスには\nシカを推しましょう♪</size>
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A(Xmas)					0
+	ラヴィ	通常	画面外_右
+	旅人		1_2			0
+FadeIn	black					.3
+	旅人							今日は美味しいチキンだぞ♪
+Tween	ラヴィ	MoveBy	x=-500 time=0.5				NoWait
+	ラヴィ							チキンじゃなくてシカを食べ<dash=2>
+	ラヴィ							なくていいですっ！
+Se	ピューン
+Tween	ラヴィ	MoveBy	x=500 time=0.3				NoWait
+	旅人							……なんのことだ？
+FadeOut	black					1
+CharacterOff						0
+Bg	草原A(夜)					0
+	ディーア	絶望2	2_2			0
+	ラヴィ	嬉しい	1_2_b			0
+Wait						.5
+FadeIn	black					1
+	ラヴィ	嬉しい						ふぅ、たくさん\nシカアピールができましたね♪
+	ディーア	絶望2						う、うぅ……\n目が、目がまわるぅ……
+	ラヴィ	通常						この調子で……
+	ラヴィ	慌て						はっ！\nあっちで悲鳴が！ 行きますよぉ！\nシカデリバリー！
+StopBgm
+Se	ピューン
+Tween	ラヴィ	MoveBy	x=880				NoWait
+Tween	ディーア	MoveBy	x=980				NoWait
+	ディーア	絶望2						うぁあああああ……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	雪の街_幻想					0
+	キノコリオン					0
+FadeIn	black					.3
+Tween	キノコリオン	PunchPosition	y=30				NoWait
+	キノコリオン							ノコー！\n（クリスマスはキノコだノコ！）
+Bgm	バトル
+CharacterOff
+	ディーア	絶望2	2_2
+	ラヴィ	嬉しい	1_2_b
+	ラヴィ	嬉しい						違います！クリスマスはシカ！
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	嬉しい						マスターさん、行きますよ！
+CharacterOff
+	ラヴィ	拡大嬉しい	エフェクト表					クリスマスの平和は\nシカのラヴィが守ります！
+If	isdebug==true
+CharacterOff
+Jump	*G_552_02
+EndIf
+EndScenario
+
+# G_552_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	市街地A(Xmas)					0
+	酒場のおばちゃん		2_2			0
+	街の人		1_2			0
+FadeIn	white					.5
+	街の人							なあ、聞いたか？\n今年はシカが大活躍だってな
+	酒場のおばちゃん							え、トナカイじゃなくてシカが？\nどうして？
+	街の人							さあ、でもプレゼントを配ったり\nみんなを笑顔にしてるらしい
+Tween	酒場のおばちゃん	PunchPosition	y=30				NoWait
+	酒場のおばちゃん							シカ、やるねぇ……
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	絶望2	2_2			0
+	ラヴィ	嬉しい	1_2_b			0
+FadeIn	black					.3
+	ラヴィ	嬉しい						ふむふむ♪\nみんながシカの話をしてますね♪
+	ディーア	絶望2						も、もうダメだ……
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	嬉しい						よーし、このまま\nトナカイより有名になって<dash=2>
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場の地下					0
+	ルディ	泣き2				0
+	          		1_2
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A(Xmas)					0
+	ラヴィ	慌て				0
+Param	character_grayout=true
+FadeIn	white					.3
+	ラヴィ	慌て						…………有名になって
+CharacterOff
+	女の子
+Tween	女の子	PunchPosition	y=30				NoWait
+	女の子							あ、トナカイのおねえちゃん！
+CharacterOff
+	ラヴィ	慌て						ふぇ!?
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	怒り						ち、違いますよ！\nラヴィはシカです！
+CharacterOff
+	女の子							じゃあ、\nトナカイさんはどこにいるの？
+CharacterOff
+	ラヴィ	慌て						えーっと、今年はトナカイさんは\nお休みなんです
+	ラヴィ	慌て						代わりに\nシカのラヴィが来たんですけど……
+CharacterOff
+	女の子							トナカイさん、いないんだ……
+CharacterOff
+	ラヴィ	怒り						……そんなに\nトナカイさんに来てほしいですか？
+CharacterOff
+	女の子
+Tween	女の子	PunchPosition	y=30				NoWait
+	女の子							うん！\nだって、トナカイさんがいるのが\nクリスマスだもん！
+CharacterOff
+	ラヴィ	怒り						…………
+StopBgm
+	ラヴィ	慌て						そう、ですよね\nやっぱり、そうですよね
+FadeOut	black					.3
+CharacterOff						0
+	ラヴィ	慌て	1_2_b			0
+	ディーア	驚き2	2_2			0
+FadeIn	black					.3
+	ディーア	驚き2						ラヴィ……？
+Bgm	雪の街
+	ラヴィ	慌て						やっぱり、違うんです
+	ラヴィ	慌て						ラヴィは\nシカに有名になって欲しいけど\nこういうのはちがうんです……
+	ラヴィ	慌て						どうしてでしょう？\n確かにチャンスなのに\nなんでこんな気持ちになるんでしょう
+	ディーア	通常2						……ラヴィはさ\n有名になりたいだけじゃないんだよ
+	ディーア	笑い2						ルディと正々堂々勝負して\n勝って超えたいんじゃないかな？
+	ラヴィ	通常						……っ、そうです！
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	通常						ラヴィはルディさんを超えるために\n生まれた魔剣!!
+	ラヴィ	通常						ルディさんがいない勝負で、\nラヴィだけが活躍するのは違います！
+	ラヴィ	嬉しい						だって、\nラヴィが超えたいルディさんは……！
+Tween	ラヴィ	MoveBy	x=70				NoWait
+	ラヴィ	嬉しい						よーし！\n決めました！ マスターさん!!\nぜんそくりょくでいきますよぉ!!!!
+	ディーア	絶望2						ま、またかぁああああ!?
+Se	ピューン
+Tween	ラヴィ	MoveBy	x=-800 time=0.5				NoWait
+Tween	ディーア	MoveBy	x=-800 time=0.5				NoWait
+Wait						.3
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場の地下					0
+	ルディ	泣き2	1_3			0
+	ラヴィ	通常	3_3			0
+FadeIn	black					.3
+	ラヴィ	通常						ルディさん！
+	ルディ	泣き2						ら、ラヴィちゃん……？
+	ラヴィ	通常						一緒に行きましょう！\nクリスマスを盛り上げるんです！
+	ルディ	泣き2						でも、今日のルディは……
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	嬉しい						だいじょーぶ♪\nここはラヴィにまかせてください！
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A(Xmas)					0
+	ディーア	通常2	2_2			0
+	ラヴィ	嬉しい	1_2_b			0
+StopBgm
+FadeIn	black					.3
+	ラヴィ	嬉しい						ラヴィはルディさんと反対の魔剣\nたくさんの魔素を発生させられます♪
+	ディーア	笑い2						なるほど、本調子じゃないルディでも\n材料がたくさんあれば！
+Bgm	ウイニングラン
+Param	character_grayout=false
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ラヴィ	嬉しい						いきますよー！\nルディさんに届けー!!
+Wait						.3
+CharacterOff
+	オーラ青		エフェクト表
+	ルディ	通常2
+	ルディ	通常2						ち、力が戻って！\nこれなら、きっと……！
+	ルディ	通常2						聖夜、こーりん……!!
+Se	チャージ
+FadeOut	white					1
+CharacterOff						0
+	ディーア	笑い2	2_2			0
+	ラヴィ	嬉しい	1_2_b			0
+FadeIn	white					1
+	ラヴィ							わぁああ♪ きれー♪\nやっぱりルディさんはすごいです……
+CharacterOff
+	ルディ	炎2						ご主人、ラヴィちゃん！\nルディ、ちゃんと聖夜できました♪
+CharacterOff
+	ディーア	笑い2	2_2
+	ラヴィ	嬉しい	1_2_b
+	ラヴィ	嬉しい						えへへ♪\nやっぱりルディさんはこうでないと！
+	ラヴィ	通常						でも、ここからが勝負です♪\nどっちが聖夜を盛り上げられるか！
+CharacterOff
+	ラヴィ	拡大嬉しい	エフェクト表					みなさーん、\nシカとトナカイがやってきましたよ♪
+FadeOut	white					.3
+CharacterOff						0
+	トライアルスチル5521		エフェクト表			0
+FadeIn	white					.3
+	二人							メリークリスマス♪
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	酒場1F					0
+	          
+Param	character_grayout=true
+Wait						1
+FadeIn	white					1
+								<color=blue>クリスマス当日</color>
+Bgm	平和
+CharacterOff
+	ディーア	笑い2						ようやく落ち着いたな\n大変だったけど、街の役に立てたし
+	ディーア	通常2						こうしてクリスマスパーティも\n盛り上がってる
+CharacterOff
+	ラヴィ	私服
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	私服						マスターさん♪\nメリークリスマス！
+CharacterOff
+	ラヴィ	私服	1_2_b
+	ディーア	笑い2	2_2
+	ディーア	笑い2						ラヴィ！\n今日はおめかししてるんだな
+Tween	ラヴィ	MoveBy	x=-10				NoWait
+	ラヴィ	私服						あ、あの服は仕事用ですから！\nそのぉ、どうですか？
+	ディーア	通常2						よく似合ってるよ
+	ラヴィ	私服						あ、ありがとうございます……！\nそれで、渡したいものがありまして
+	ディーア	驚き2						もしかして、\n後ろに持ってるのは……
+Tween	ラヴィ	MoveBy	x=50				NoWait
+	ラヴィ	私服						はい♪\nマスターさんにプレゼントです♪\nどうぞ♪
+	ディーア	笑い2						ありがとうな、ラヴィ
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	私服						こちらこそですよぉ♪
+	ラヴィ	私服						マスターさんのおかげで\n大・活・躍！ できましたし\nこれでシカが有名に♪ えへへぇ♪
+CharacterOff
+	リディ	笑い2						あ、ラヴィちゃんここにいた！\n昨日のこと、話題になってたよ♪
+CharacterOff
+	ラヴィ	私服
+Shake	ラヴィ		x=10				NoWait
+	ラヴィ	私服						来ましたぁ!!\nそれでそれで？ どんなお話ですか!?\nすごいシカがやってきたとか!?
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	笑い2	2_2
+	リディ	笑い2						えーっとね……
+	リディ	笑い2						『聖夜を駆けた二匹のトナカイ』！
+Param	character_grayout=false
+	ディーア	絶望2	1_2
+	リディ	絶望2	2_2
+	二人	<Off>	3_3					あ……
+Bgm	コメディ
+CharacterOff
+	ラヴィ	私服
+Shake	ラヴィ		x=10 time=2				NoWait
+	ラヴィ	私服悲しい						と、とととと、トナカイぃ～!?
+Tween	ラヴィ	PunchPosition	y=30				NoWait
+	ラヴィ	私服悲しい						どういうことですかぁ!?\nシカは!? シカはいないんですか!?
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望2	1_2
+	リディ	悔しい2	2_2
+	リディ	悔しい2						う、うん、\nトナカイと間違われてるね
+CharacterOff
+	ラヴィ	私服悲しい						うえぇええええ!?\nあんなに頑張ったのにぃ……！
+	ラヴィ	私服						こうなったら！\nマスターさん、行きましょう!!
+CharacterOff
+	ディーア	絶望2	1_2
+	リディ	悔しい2	2_2
+	ディーア	絶望2						い、今からか!?
+CharacterOff
+	ラヴィ	私服						はい！\nこんどこそ誤解を解くんです!!
+CharacterOff
+	ラヴィ	拡大私服	エフェクト表					みなさーん！\n今からシカのラヴィが行きますよぉ♪
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*G_552_01
+EndIf
+EndScenario

@@ -1,0 +1,1090 @@
+# E_1050_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	神秘
+Bg	市街地B					0
+Param	character_grayout=false
+	イベントスチル10501		エフェクト裏			0
+	オーラ桃		エフェクト表			0
+FadeIn	white					.5
+	レヴァ	<Off>						だ、だめよ、ヘル……！\nみんなが見てるのに……
+	ヘル	<Off>						お姉ちゃんごめんなさい……\nでも、もう離れられないの……
+	レヴァ	<Off>						それじゃあ……仕方ないよね\nヘル……おいで♪
+StopBgm
+	ヘル	<Off>						おねえ、ちゃん……\nわたし……
+CharacterOff
+Bgm	コメディ
+	ソシャ子	慌て拡大	エフェクト表
+	ソシャ子	慌て拡大						ダメなのだー！\n離れないとダメなのだー！
+CharacterOff
+	イベントスチル10501		エフェクト裏
+	レヴァ＆ヘル	<Off>						…………!?
+	ヘル	<Off>						あ、あなただれよ!?
+CharacterOff
+	ソシャ子	慌て拡大	エフェクト表					そー！ シャル！ ディスタンス!!\nまずは離れてほしいのだー！
+	ソシャ子	通常拡大						だって、このままじゃ<dash=2>
+FadeOut	white					.5
+CharacterOff						0
+Bg	夏空					0
+	イベントロゴ1050		エフェクト表			0
+FadeIn	white					.5
+	ソシャ子	<Off>						危ない恋が始まっちゃうのだー！
+FadeOut	white					.5
+CharacterOff						0
+	         
+Bg	市街地A					0
+StopBgm
+Wait						1
+FadeIn	white					.3
+	          　　　　　　　							\n  　　  　 <color=blue><dash=2>1時間前<dash=2></color>
+Bgm	平和
+Param	character_grayout=true
+	勇者D	通常	2_2
+	勇者A	通常	1_2
+Tween	勇者A	MoveBy	x=10				NoWait
+	勇者A	通常						あ、あのさ……！\n今度の休日、よかったら俺と……！
+Shake	勇者D		x=2				NoWait
+	勇者D	通常						それって……そういうこと、だよね？
+	勇者A	通常						あ、ああ……！
+Tween	勇者D	MoveBy	x=-10				NoWait
+	勇者D	通常						えへへ♪ 嬉しいな……！
+CharacterOff
+	名刀・大包平	通常2	2_2
+	ディーア	絶望2	1_2
+	ディーア	絶望2						はあ……\nあそこにもカップルが……\n街中が浮かれている感じだな
+	名刀・大包平	通常2						きっと、\nそういう時期だからですね
+	名刀・大包平	通常2						でも……私もこうしてると\nドキドキしてきちゃいます……
+	ディーア	笑い2						ああ、すごく寒いからな\n体調には気をつけろよ？
+Shake	名刀・大包平		x=5				NoWait
+	名刀・大包平	通常2						うぅ……\nそういう意味じゃ……
+CharacterOff
+	ごくひらロスト	通常	2_2
+	獄刀大包平	通常	1_2
+Tween	獄刀大包平	PunchPosition	y=30				NoWait
+	獄刀大包平	通常						もう、お姉ちゃん……！\nすかさずデートのお誘いしないと！\nロスひらちゃんもそう思うでしょ!?
+Tween	ごくひらロスト	MoveBy	x=10				NoWait
+	ごくひらロスト	通常						知らないわよ、こっちの私
+Tween	獄刀大包平	MoveBy	x=10				NoWait
+	獄刀大包平	通常						えーっ！\nそんなさびしいこと言わないでよ、\nロスひらちゃん！
+	ごくひらロスト	通常						そもそも、その呼び名を\n許可した覚えもないわ\nそれに兵器の私が買い物だなんて……
+CharacterOff
+	ディーア	通常2						たまには姉妹みんなで\n出かけるのも楽しいだろ？
+CharacterOff
+	ごくひらロスト	通常	2_2
+	獄刀大包平	通常	1_2
+	ごくひらロスト	通常						そういう命令だから来ただけよ
+	獄刀大包平	通常						ロスひらちゃんは\n素直じゃないよねー
+CharacterOff
+	ディーア	笑い2						来てくれただけでもいいさ\nありがとうな
+CharacterOff
+	ごくひらロスト	通常	2_2
+	獄刀大包平	通常	1_2
+	ごくひらロスト							…………そう
+CharacterOff
+StopBgm
+	ディーア	怪しい2						でもちょっと変なんだよな……\nいくらバレンタインが\n近いからって<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+	旅人		p4			0
+	酒場のおばちゃん		p6			0
+Bgm	コメディ
+FadeIn	black					.3
+Tween	酒場のおばちゃん	PunchPosition	y=15				NoWait
+	酒場のおばちゃん							は、離しなさいって！
+	旅人							い、いや、無理なんだ……！\nこれは……！
+	酒場のおばちゃん							いきなり抱きついてくるなんて!?\nあんた、\nそういうつもりだったのかい!?
+Tween	旅人	MoveBy	x=-10				NoWait
+Wait						.2
+Shake	旅人		x=2				NoWait
+	旅人							そんなわけないだろ!?\n体が離れないだけだ……!!
+	酒場のおばちゃん							でも、こんな強く抱きしめるなら\n……ちょっとは考えても
+	旅人							ちがうってー！\n勇者ー！ 勇者ー!!\nなんとかしてくれー!!
+CharacterOff
+	勇者A	通常	p4b
+	勇者B	通常	p5
+	勇者C	通常	p6b
+	勇者B	通常						こっちもそれどころじゃないんだ!!
+	勇者B	通常						いくぞ、せーので離れるぞ……！
+Param	character_grayout=false
+	勇者A	通常						せーのっ！
+Shake	勇者A		x=2				NoWait
+Shake	勇者B		x=2				NoWait
+Shake	勇者C		x=2				NoWait
+Wait						.5
+Param	character_grayout=true
+	勇者C	通常						ぐぅうう……！\nダメだ、びくともしない！
+CharacterOff
+	名刀・大包平	通常2	2_2
+	ディーア	怪しい2	1_2
+	ディーア	怪しい2						あれはさすがに\nカップルじゃないよな……？
+StopBgm
+	レヴァンテイン=ヘル？	<Off>						ひゃああああああ!?
+Bgm	緊迫
+	ディーア	驚き2						今の声は……ヘル!?
+Tween	名刀・大包平	PunchPosition	y=30				NoWait
+	名刀・大包平	通常2						行ってみましょう……！
+	ディーア	悔しい2						ああ……！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	市街地B					0
+	ディーア	悔しい2	画面外_右			0
+FadeIn	black					.3
+Tween	ディーア	MoveBy	x=-700 time=1				NoWait
+Wait						.5
+	ディーア	悔しい2						どうしたんだ、ヘル！\n大丈夫<dash=2>
+	ディーア	絶望2						か……？
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル10501		エフェクト表			0
+Wait						.5
+Bgm	神秘
+FadeIn	white					.3
+	レヴァ	<Off>						ヘール♪\n遠慮しなくていいの♪\nお姉ちゃんに甘えてきなさい♪
+	ヘル	<Off>						だから、\nしたくてしているわけじゃ……！
+CharacterOff
+	ソシャ子	慌て拡大	エフェクト表
+	ソシャ子	慌て拡大						離れるのだー！ 離れるのだー！
+Param	character_grayout=true
+CharacterOff
+StopBgm
+	ディーア	絶望2						なんだこれ……？
+Bgm	コメディ
+CharacterOff
+	ヘル	通常	p6b
+	レヴァ	通常	p4
+	レヴァ	通常						あ！ マイマスター！\nヘルがいきなり抱きついてきたの♪\nカワイイでしょ！
+Shake	ヘル		x=5				NoWait
+	ヘル	通常						ち、ちがうわ……！\nこれは体が離れないだけで……！
+CharacterOff
+	ソシャ子	慌て
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	慌て						もうダメなのだ……！\n危ない恋が始まりそうなのだ……！
+CharacterOff
+	ヘル	通常	p6b
+	レヴァ	通常	p4
+	ヘル	通常						って、あなたはいったい誰よ!?\n恋なんて始まらないわよ!?
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ソシャ子	慌て拡大	エフェクト裏					はやく離れるのだー!!
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	イベントスチル10504		エフェクト裏
+	イベントスチル10503		エフェクト表			0
+StopBgm
+FadeIn	black					.3
+Se	ピューン
+Tween	イベントスチル10503	PunchRotation	y=180 time=0.5	linear			NoWait
+Wait						.5
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地B
+Param	character_grayout=true
+	ディーア	汗2				0
+Wait						.5
+Bgm	都市
+FadeIn	black					.3
+	ディーア	汗2						えーっと、\n状況を整理するぞ……！
+	ディーア	怪しい2						まずお前は魔剣だよな……？
+CharacterOff
+	ソシャ子	通常拡大	エフェクト表
+	ソシャ子	通常拡大						そうなのだ！\n魔界の最終安全装置！\n<ruby=ソーシャルディスタンス>戦闘距離拡大戦略</ruby>なのだ！				ルビつける
+CharacterOff
+	ソシャ子	嬉しい
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	嬉しい						お姉ちゃんたちがくっついていたから\n離すためにがんばっていたのだ！\nえっへん！
+CharacterOff
+	ディーア	汗2						それは助かるんだが……
+	ディーア	汗2						だけど、\n近づいたからって危ない恋は\nはじまらないと思うぞ……？
+CharacterOff
+	ソシャ子	通常						そんなことないのだ！\nお姉ちゃんたち、すっごく真っ赤で\nドキドキしてたのだ！
+	ソシャ子	通常						いまにも爆発しそうだったのだ！\nあれは危ない恋に決まってるのだ！
+CharacterOff
+	ヘル	通常	p6b
+	レヴァ	通常	p4
+	ヘル	通常						ご、誤解よ！\nそんなことするわけないじゃない！
+CharacterOff
+	ソシャ子	通常						あーっ！\nそのセリフ、ツンデレなのだ!?\n恋の専門書で読んだのだ!!
+	ソシャ子	慌て						やっぱり危ない恋が始まってたのだ！
+CharacterOff
+	ディーア	汗2						と、とにかく\n二人を助けようとしてくれたんだな
+CharacterOff
+	ソシャ子	通常	p4
+	ディーア	笑い2	画面外_右
+Tween	ディーア	MoveBy	x=-500 time=0.8				NoWait
+	ディーア	笑い2						ありが<dash=2>
+	ソシャ子	慌て						ひゃあああ……!?
+Se	走る
+Tween	ソシャ子	MoveBy	x=-800 time=1				NoWait
+	ディーア	汗2						………………
+FadeOut	black					.2
+CharacterOff						0
+Bg	市街地A					0
+	ソシャ子	怒り	1_3			0
+FadeIn	black					.2
+	ソシャ子	怒り						あ、あぶなかったのだ……\n近づきすぎだったのだ
+	ディーア	<Off>						<size=5>離れすぎだろ</size>
+	ソシャ子	通常						ふぇ……？\nきこえないのだー!?
+FadeOut	black					.1
+Param	character_grayout=false
+CharacterOff						0
+Bg	市街地B					0
+	ディーア	拡大本気2	エフェクト裏			0
+	集中線		エフェクト表			0
+FadeIn	black					.1
+	ディーア	拡大本気2						<size=50>離れすぎだろー!?</size>
+FadeOut	black					.1
+Param	character_grayout=true
+CharacterOff						0
+Bg	市街地A					0
+	ソシャ子	怒り				0
+FadeIn	black					.1
+	ソシャ子	怒り						確かに！\nこれはちょっと不便なのだ……！
+Se	走る
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地B					0
+	ディーア	汗2	3_3			0
+	ソシャ子	通常	画面外_左			0
+FadeIn	black					.3
+Tween	ソシャ子	MoveBy	x=400 time=1				NoWait
+Wait						1
+	ソシャ子	通常						こ、これくらいなのだ!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						そ、そんなに\n距離をとらないとダメなのか!?
+	ソシャ子	慌て						あなたからは、\n危ない恋の予感がするのだ！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						誤解だって……！\nもうちょっとだけ近くに……！
+Tween	ソシャ子	MoveBy	x=50				NoWait
+	ソシャ子	悲しい						じゃ、じゃあ……
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	慌て						このくらいなのだ……！
+	ディーア	汗2						うーん……
+CharacterOff
+	ヘル	通常	p6b
+	レヴァ	通常	p4
+	ヘル	通常						ちょっとマイマスター？\n先にこっちをなんとかしてくれない？
+CharacterOff
+	ディーア	驚き2						あっ、ごめんな！
+	ディーア	怪しい2						でも、\nいったいどうしたら離せるんだ？
+Param	character_grayout=false
+CharacterOff
+	白櫃	通常	p4
+	黒櫃	通常	p6b
+	集中線		エフェクト表
+	黒櫃	通常						はーはっはっは！\n悩みならこの天才に任せてくれ！
+CharacterOff
+	ディーア	絶望2						二人もくっついてる!?
+CharacterOff
+	白櫃	通常	p4
+	黒櫃	通常	p6b
+Param	character_grayout=true
+	白櫃	通常						はい♪\nすごく変態的なことに\nなっちゃいました♪
+	黒櫃	通常						これには深い理論があるのだが、\n天才のボク以外には\n理解しづらいだろう……！
+	黒櫃	通常						なので結論から言うと、\nこれは魔物の仕業だ
+CharacterOff
+	ディーア	怪しい2						あぁ、なるほど！\nじゃあ街にいた人たちも\n同じ原因か……！
+CharacterOff
+	白櫃	通常	p4
+	黒櫃	通常	p6b
+	黒櫃	通常						その通り！\n理解が早くて助かるよ！
+	白櫃	嬉しい						うわぁ♪ さすがマスターさん！\n黒櫃ちゃんと変態同士で\n以心伝心ですね♪
+	黒櫃	慌て						だから、変態じゃなくて……\nまあ、今はいい……！
+	黒櫃	通常						とにかく、その魔物を\n倒さなければ、みんなは離れられない
+CharacterOff
+	ソシャ子	通常
+Shake	ソシャ子		x=5				NoWait
+	ソシャ子	通常						な、なんてことなのだ!?
+	ソシャ子	怒り						それは大変なのだ！\nみんなが距離を\nとれなくなっちゃうのだ!!
+	ソシャ子	慌て						このままじゃ\nあちこちで危ない恋が……！
+CharacterOff
+	ディーア	通常2						けど話は簡単になったぞ\n魔物を倒せば事態は解決だ！
+CharacterOff
+	ソシャ子	通常						はっ……！\nたしかにそうなのだ！\n急いで魔物を探すのだ!!
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+	くっつけムシ					0
+Bg	市街地A					0
+Wait						1
+Bgm	絶望
+FadeIn	black					.3
+	くっつけムシ							クスクスクス……♪
+	くっつけムシ							くっついちゃえ、くっついちゃえ♪
+	くっつけムシ							もどかしいから、くっついちゃえ♪
+Bgm	バトル
+CharacterOff
+	ディーア	怒り2						いたぞ、あいつだ！
+CharacterOff
+	ソシャ子	怒り						なんてことをするのだ！
+CharacterOff
+	ディーア	本気2						ああ！\n無理やり人を操るなんて許されない！\nみんなを解放してもらうぞ！
+Param	character_grayout=false
+CharacterOff
+	くっつけムシ		2_3_b
+	くっつけムシ							クスクス♪ やってみなさい♪
+Se	闇1
+	くっつけムシ2		3_3			.5
+	くっつけムシ3		1_3			.5
+Wait						1
+CharacterOff
+	ディーア	怪しい2						魔物の群れか……\nこの数を一斉に攻撃できれば\n有利に戦えるが……
+CharacterOff
+	名刀・大包平	通常2	p5
+	獄刀大包平	通常	1_3_b
+	ごくひらロスト	通常	3_3_b
+	名刀・大包平	通常2						でも、私たちなら大丈夫です！
+CharacterOff
+	ディーア	本気2						ああ、そうだな\nよし……みんな、いくぞ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1050_02
+EndIf
+EndScenario
+
+# E_1050_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	市街地A					0
+	ごくひらロスト	通常	2_2			0
+	獄刀大包平	通常	1_2			0
+FadeIn	white					.5
+	ごくひらロスト	通常						やっぱり数が多いだけね
+	獄刀大包平	通常						でも、すごい数がいるよ……！
+CharacterOff
+	ディーア	悔しい2						ああ、倒しきるには……！\nもっと近づいて……！
+Param	character_grayout=false
+CharacterOff
+	くっつけムシ							クス♪
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	くっつけムシ							くっついちゃえ♪
+StopBgm
+CharacterOff
+	オーラ赤		エフェクト表
+	名刀・大包平	通常2	3_4
+	ごくひらロスト	通常	4_4
+	獄刀大包平	通常	1_4
+	ディーア	驚き2	2_4
+	ディーア	驚き2						なっ……!?
+Tween	名刀・大包平	MoveBy	x=-40				NoWait
+Tween	ディーア	MoveBy	x=40				NoWait
+Tween	ごくひらロスト	MoveBy	x=-120				NoWait
+Tween	獄刀大包平	MoveBy	x=110				NoWait
+Se	ポップイン
+Wait						.5
+CharacterOff	オーラ赤
+Bgm	コメディ
+	ディーア	絶望2						うわぁ……!?
+Param	character_grayout=true
+Tween	獄刀大包平	PunchPosition	y=30				NoWait
+	獄刀大包平	通常						きゃあ!?\n旦那様、そこ触っちゃダメですぅ!!\nさわるならお姉ちゃんにぃ……！
+	ディーア	絶望2						わ、わざとじゃないんだ……！\nえっと、まずは腕を出さないと……
+Tween	獄刀大包平	PunchPosition	y=30				NoWait
+	獄刀大包平	通常						ひゃあっ!? だ、旦那様ぁ……！
+	獄刀大包平	通常						私までドキドキして……うぅ……\nこんなのイケないのに……
+	名刀・大包平	通常2						お、重くてごめんね！\nごくひらロストちゃん……！
+	ごくひらロスト	通常						べ、別に軽いくらいよ……\n支えてあげるから、安心しなさい……
+	名刀・大包平	通常2						う、うん……！\nありがとう、ごくひらロストちゃん
+	ごくひらロスト	通常						っ……！\nどういたしまして……
+CharacterOff
+	ソシャ子	慌て
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+Wait						.1
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	慌て						た、大変なのだ！\n危ない恋が……！\n早く離れないとダメなのだー！
+StopBgm
+CharacterOff
+	名刀・大包平	通常2	p6
+	ごくひらロスト	通常	p7b
+	獄刀大包平	通常	p3
+	ディーア	驚き2	g-20-350100
+	ディーア	驚き2						離れる…………そうだ!!
+Bgm	キノコリオン
+	ディーア	本気2						ソーシャルディスタンス！
+CharacterOff
+	ソシャ子	慌て
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	慌て						な、なんなのだ!?
+CharacterOff
+	名刀・大包平	通常2	p6
+	ごくひらロスト	通常	p7b
+	獄刀大包平	通常	p3
+	ディーア	驚き2	g-20-350100
+	ディーア	悔しい2						あいつらを倒すには\n離れて戦わないとダメなんだ！
+	ディーア	本気2						お前は離れたままで戦えるか？
+CharacterOff
+	ソシャ子	悲しい
+Shake	ソシャ子		x=5				NoWait
+	ソシャ子	悲しい						たしかに、わたしならできるのだ……\nけど、あなたと近づいちゃうし……
+CharacterOff
+	名刀・大包平	通常2	p6
+	ごくひらロスト	通常	p7b
+	獄刀大包平	通常	p3
+	ディーア	驚き2	g-20-350100
+	ディーア	本気2						少しの間でいい！\nみんなを守るために力を貸してくれ！
+CharacterOff
+	ソシャ子	悲しい						みんなを……守る……
+StopBgm
+	ソシャ子	通常						……っ！
+Bgm	勇者バトル
+Tween	ソシャ子	PunchPosition	y=50				NoWait
+	ソシャ子	通常						わ、わかったのだ！\nそれなら、一緒に戦うのだ！
+Se	チャージ
+	オーラ青		エフェクト表			1
+Wait						1.5
+FadeOut	white					.2
+CharacterOff						0
+	ソシャ子	通常	1_3			0
+	ディーア	怒り2	3_3			0
+FadeIn	white					.2
+	ディーア	驚き2						オレだけ、離れられた!?
+	ソシャ子	嬉しい						わたしはマスターの\n安全装置だからなのだ！
+	ディーア	通常2						なるほど……！
+	ディーア	本気2						じゃあ、いくぞ……！
+CharacterOff
+	ソシャ子	通常拡大	エフェクト表					そー！ シャル！ ディスタンス！\nみんなを離すのだー！
+If	isdebug==true
+CharacterOff
+Jump	*E_1050_03
+EndIf
+EndScenario
+
+# E_1050_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	市街地A					0
+	ソシャ子	通常	1_3			0
+	ディーア	怒り2	3_3			0
+FadeIn	white					.5
+	ディーア	怒り2						思ったとおりだ！\nこの距離なら\nくっつけられたりしない！
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	嬉しい						おぉー！\nすごいのだ、マスター！
+	ディーア	笑い2						ディスタンスのおかげだ
+	ソシャ子	照れ						そっ、そうなのだ？
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	嬉しい						えへへ♪\nやっぱりわたしは役に立つのだー♪\nもっとほめてもいいのだー！
+CharacterOff
+	くっつけムシ							クスクスクス……♪
+Se	風1
+Tween	くっつけムシ	RotateTo	y=180 time=0				NoWait
+Tween	くっつけムシ	MoveBy	x=700 time=1.5				NoWait
+Wait						.5
+CharacterOff
+	ディーア	怒り2	3_3			0
+	ソシャ子	通常	1_3			0
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	怒り						むむ……！\n魔物が逃げるのだ！
+	ディーア	怒り2						小さいだけあって素早いな！\n追うぞ、ディスタンス！
+StopBgm
+	ソシャ子	通常						わかったのだ……って、あっ!?
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ディーア	驚き2						どうしたんだ……？
+Bgm	魔剣の日常
+Tween	ソシャ子	MoveBy	x=-100				NoWait
+	ソシャ子	慌て						大変なのだ！\nマスターと近づいちゃってるのだ！\n距離をとらないとダメなのだ！
+	ディーア	怪しい2						でも、そんなに離れたら\n魔物が襲ってきた時に戦えないぞ？
+	ソシャ子	通常						た、確かにそうなのだ！
+Tween	ソシャ子	MoveBy	x=50				NoWait
+	ソシャ子	照れ						じゃあ、これくらい……？
+	ディーア	汗2						いやいや、もっと近くに来いって
+Tween	ソシャ子	MoveBy	x=50				NoWait
+	ソシャ子	照れ						こ、これくらい、なのだ……？
+	ディーア	笑い2						ああ、これくらいなら……！\nお前のこともよく見えるしな！
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	嬉しい						えへへ♪\nじゃあ、これで行くのだ！
+	ソシャ子	悲しい						あれ……？ でも……
+	ディーア	驚き2						どうかしたのか？
+	ソシャ子	通常						な、なんでもないのだ……！
+Param	character_grayout=false
+CharacterOff
+	ソシャ子	照れ拡大	エフェクト表
+	黒グラデーション		エフェクト裏2
+	オーラ桃		エフェクト裏
+	ソシャ子	照れ拡大						（へ、変なのだ……\n　離れなくちゃいけないのに……\n　近づくのは危ないのに……）
+	ソシャ子	照れ拡大						（マスターに近づいたら\n　安心しちゃったのだ……）
+If	isdebug==true
+CharacterOff
+Jump	*E_1050_04
+EndIf
+EndScenario
+
+# E_1050_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	都市
+Bg	市街地B					0
+Param	character_grayout=false
+	ディーア	通常2	画面外_右			0
+	ソシャ子	通常	画面外_右_b			0
+FadeIn	white					.5
+Tween	ディーア	MoveBy	x=-500 time=1.5				NoWait
+Tween	ソシャ子	MoveBy	x=-900 time=1.5				NoWait
+Wait						1
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+Param	character_grayout=true
+	ソシャ子	通常						魔物はどこにいったのだ？
+	ディーア	通常2						あの様子なら\nすぐに場所がわかるさ……
+	ディーア	驚き2						それより、\nみんなの体は大丈夫か？
+CharacterOff
+	名刀・大包平	通常2	p5
+	ごくひらロスト	通常	p7b
+	獄刀大包平	通常	p3b
+	ごくひらロスト	通常						ま、まあ……\nただくっついてるだけだから……
+	獄刀大包平	通常						でも、ロスひらちゃんの体温、\n上がってきてるような……
+	名刀・大包平	通常2						心臓の音も\n早くなってるよね……？
+Shake	ごくひらロスト		x=5				NoWait
+	ごくひらロスト	通常						そ、そんなことないわよ！\n私はこれくらいで動揺しないわ！
+CharacterOff
+	ディーア	汗2	3_3
+	ソシャ子	怒り	1_3
+	ソシャ子	怒り						ふむふむ！\nやっぱり近づくと危ないのだ\n喧嘩しちゃうのだ
+	ディーア	汗2						あれは仲がいいだけだと思うぞ？
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	通常						そ、そうなのだ!?
+	ディーア	笑い2						ああ、\nレヴァとヘルみたいに……
+Param	character_grayout=false
+CharacterOff
+	イベントスチル10501		エフェクト表
+	レヴァ	<Off>						はーい、ヘール♪\nあーん♪
+	ヘル	<Off>						あ、あーん……！
+	レヴァ	<Off>						えへへ♪\nようやく素直になってくれた♪
+	ヘル	<Off>						解決するまではこのままだもの\nお姉ちゃんの好きにして……
+Param	character_grayout=true
+CharacterOff
+	ディーア	通常2	3_3
+	ソシャ子	通常	1_3
+	ディーア	通常2						なんて、元から仲が良ければ\n嫌だとは思わないだろうし
+	ディーア	笑い2						黒櫃と白櫃は<dash=2>
+CharacterOff
+	白櫃	通常	p4
+	黒櫃	通常	p6b
+	黒櫃	通常						はははは！\nこうして白櫃とくっつけば、\n天才と奇才の相乗！ 大天才！
+	白櫃	驚き						え……？\n天才になったら大変だよ？\n大変態の間違いじゃないの？
+	黒櫃	慌て						くっついて大変態になるほうが\nとんでもないだろ!?
+CharacterOff
+	ディーア	汗2	3_3
+	ソシャ子	通常	1_3
+	ディーア	汗2						……ま、まあ独特だよな
+	ソシャ子	悲しい						じゃ、じゃあ……！\nわたしとマスターが近づいても……
+Tween	ソシャ子	MoveBy	x=20				NoWait
+	ソシャ子	照れ						（わたしも……\n　マスターともっとくっつけたら）
+Shake	ソシャ子		x=5				NoWait
+	ソシャ子	慌て						って、ダメなのだ!?\nそんなことを考えたら\n危ないのだ！
+	ディーア	驚き2						大丈夫か？\nなにか悩みでも……？
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	慌て						な、なにもないのだ！
+StopBgm
+	？？？？							きゃああああ!?
+	ソシャ子	通常						っ！ 悲鳴が聞こえたのだ！
+	ディーア	悔しい2						ああ、あっちだな！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地B					0
+	くっつけムシ					0
+Bgm	絶望
+FadeIn	black					.3
+	くっつけムシ							クスクスクス♪
+Param	character_grayout=false
+CharacterOff
+	黒グラデーション		エフェクト裏
+	街の人	<Off>						うぅ……体が、動かない……！
+	街の人	<Off>						くるしいよぉ……！
+Param	character_grayout=true
+CharacterOff
+	ソシャ子	通常	1_3
+	ディーア	悔しい2	3_3
+	ディーア	悔しい2						これは……！\nひどいな……！
+Bgm	魔王バトル
+	ソシャ子	怒り						そこまでなのだ！\n今度こそ逃さないのだ！
+	ディーア	本気2						いくぞ、ディスタンス！
+If	isdebug==true
+CharacterOff
+Jump	*E_1050_05
+EndIf
+EndScenario
+
+# E_1050_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔王バトル
+Bg	市街地B					0
+Param	character_grayout=false
+	くっつけムシ					0
+	          
+FadeIn	white					.5
+Se	闇1
+	くっつけムシ2		1_3			.5
+	くっつけムシ3		3_3			.5
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						また敵が増えた……！
+	ディーア	悔しい2						くっ……！\nあと少しなのに……！\nその決め手が……！
+CharacterOff
+	くっつけムシ							くっついちゃえ♪
+CharacterOff
+Se	闇2
+	黒グラデーション		エフェクト裏
+	街の人	<Off>						うわぁあああ!?
+	街の人	<Off>						や、やめて……\nそこ、わたしの足が……！
+	街の人	<Off>						おも、い……いき、がぁ……！
+	街の人	<Off>						あぁああああ!?\n骨が……！ 骨がぁ……!?
+CharacterOff
+	ディーア	悔しい2						また、街の人が……！
+CharacterOff
+	ソシャ子	慌て						ど、どうすればよいのだ!?
+	黒グラデーション		エフェクト表			.2
+	ソシャ子	悲しい						（もしかして、\n　わたしが近づきたいって\n　思ったのがいけないのだ!?）
+	ソシャ子	悲しい						（だから、力が発揮できなくて……\n　それなら……！）
+CharacterOff	黒グラデーション
+	ソシャ子	慌て						や、やっぱりダメなのだ！\n近づくのは危ないのだ……！
+CharacterOff
+	ディーア	驚き2						でぃ、ディスタンス！?\nいきなり出力を上げたら制御が……！
+CharacterOff
+	ソシャ子	慌て拡大	エフェクト表					そー！ シャル！ ディスタンス!!\nみんな、はなれるのだー!!
+StopBgm
+CharacterOff
+	ディーア	悔しい2						うわぁああ!?
+FadeOut	white					.2
+Se	チャージ
+FadeIn	white					.2
+Wait						.3
+FadeOut						1.5
+Se	光3
+CharacterOff						0
+	ソシャ子	悲しい				0
+Wait						1
+FadeIn	white					1
+	ソシャ子	悲しい						はぁ、はぁ……
+Bgm	凱旋
+CharacterOff
+	旅人		1_3			.5		か、体が離れたぞ……！
+	勇者A	通常	3_3			.5		よかった、これで自由だ……！
+CharacterOff
+	ソシャ子	嬉しい						よ、よかったのだ！\nみんな、元に戻ったのだ！
+	ソシャ子	通常						これで、恋もはじまらないのだ！\n危ないことはなくなったのだ！
+	ソシャ子	嬉しい						マスターもよくがんばったのだ！
+StopBgm
+	ソシャ子	悲しい						って、あれ……？
+	ソシャ子	悲しい						マスター？ どこいったのだ……？
+FadeOut	black					.3
+If	isdebug==true
+CharacterOff
+Jump	*E_1050_06
+EndIf
+EndScenario
+
+# E_1050_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	市街地C					0
+Param	character_grayout=true
+	旅人		画面外_左
+	ソシャ子	悲しい	2_2			0
+FadeIn	white					.3
+Tween	ソシャ子	MoveBy	x=-100 time=0.7				NoWait
+	ソシャ子	悲しい						マスター？ マスター!?\nどこ行っちゃったのだー!?
+Tween	ソシャ子	MoveBy	x=200 time=1.7				NoWait
+	ソシャ子	悲しい						どこにもいないのだ……\nやっぱり、わたしのせいで\n飛ばされちゃったのだ……？
+Tween	旅人	MoveBy	x=450 time=1				NoWait
+Wait						1
+	旅人							おーい！\nさっきは助けてくれて\nありがとうな！
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	嬉しい						あっ……！\nそんなの当然のことなのだ！
+	ソシャ子	慌て						でも、そこでストップなのだ！\nそー！ シャル！ ディスタンス!!
+Tween	旅人	MoveBy	x=-30				NoWait
+	旅人							そ、そうだったな……！\n近づいたらダメなんだった！
+	ソシャ子	慌て						そ、そのとおりなのだ！
+	ソシャ子	悲しい						だから<dash=2>
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地B
+	ディーア	通常2	3_3			0
+	ソシャ子	悲しい	1_3			0
+FadeIn	white					.3
+	ソシャ子	悲しい						（わたしも……\n　マスターともっとくっつけたら）
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+CharacterOff						0
+Bg	市街地C					0
+	旅人		1_4
+	ソシャ子	悲しい	2_2			0
+FadeIn	white					.3
+	ソシャ子	悲しい						うん……\nこれでいいかもしれないのだ……
+	ソシャ子	悲しい						また会えたら、\n近くにいたくなっちゃうのだ
+	ソシャ子	悲しい						離れている方が危なくないのだ……\nだから、このまま……
+	旅人							それじゃあ、俺達はこれで……！
+	ソシャ子	通常						ふぇ……？\nもう行っちゃうのかなのだ？
+	旅人							ああ、待ってる人がいるしな！
+Se	走る
+Tween	旅人	RotateTo	y=180 time=0.5				NoWait
+Wait						.5
+Tween	旅人	MoveBy	x=300 time=1				NoWait
+Wait						.8
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	慌て						ちゃ、ちゃんと距離は守るのだー！
+	ソシャ子	通常						ほんとにみんな守ってくれるのだ？\nねえ、マスター？
+	ソシャ子	悲しい						…………あ
+	ソシャ子	悲しい						もう、お返事はないのだ……
+	ソシャ子	悲しい						マスターがいないと……\nわたしは……
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A					0
+	ソシャ子	嬉しい	1_3			0
+	ディーア	笑い2	3_3			0
+FadeIn	white					.3
+	ディーア	笑い2						ああ、これくらいなら……！\nお前のこともよく見えるしな！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地C					0
+	ソシャ子	悲しい				0
+FadeIn	white					.3
+	ソシャ子	悲しい						どうして……どうしてなのだ？
+	ソシャ子	悲しい						これが正しいはずなのに、\n近づいたらダメなのに……
+	ソシャ子	慌て						マスターがいないと、\nどうしてさびしいのだ……？
+Shake	ソシャ子		x=5				NoWait
+	ソシャ子	悲しい						うぅ……！\n顔が見たいのだ、声が聞きたいのだ、\nお話がしたいのだ……！
+	ソシャ子	悲しい						なんで……\n一人のときは平気だったのに……！
+	ソシャ子	悲しい						一人ぼっちって、\nこんなにつらいのだ……？
+StopBgm
+	ソシャ子	悲しい						なのにわたしは、\nみんなに離れろって……
+Bgm	緊迫
+Param	character_grayout=true
+CharacterOff
+	くっつけムシ3		3_3
+	くっつけムシ		1_3
+	くっつけムシ2		2_3
+	くっつけムシ2							クスクスクス♪
+CharacterOff
+	ソシャ子	通常
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	通常						っ……！\nおまえ、たちは……！
+CharacterOff
+	くっつけムシ3		3_3
+	くっつけムシ		1_3
+	くっつけムシ2		2_3
+	くっつけムシ							かわいそう♪ かわいそう♪
+	くっつけムシ2							ひとりぼっちでかわいそう♪
+	くっつけムシ3							ひとりになってよわくなって♪\nくっついちゃえばよかったのに♪
+Param	character_grayout=false
+	くっつけムシ							こんなふうに♪
+Se	チャージ
+	オーラ赤		エフェクト表			.5
+Wait						.5
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						.5
+FadeOut	white					.5
+CharacterOff						0
+Se	闇1
+	くっつキング					0
+	          					0
+FadeIn	white					.5
+Wait						1.5
+CharacterOff
+	ソシャ子	慌て						が、合体したのだ!?
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	慌て						こ、このままじゃ……！
+CharacterOff
+	くっつキング							さあ……
+	くっつキング							くっついてしまえ……！
+StopBgm
+CharacterOff
+	ディーア	本気2
+	集中線		エフェクト表
+	ディーア	本気2						ソーシャルディスタンス！
+CharacterOff
+	ディーア	怒り2	p8
+	ソシャ子	慌て	1_2
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ディーア	MoveBy	x=-200 time=1				NoWait
+Wait						1
+Bgm	神秘
+	ソシャ子	照れ						ま、マスター!?
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+	ディーア	笑い2						ようやく見つけた……！\nすごく遠い所に飛ばされたんだぞ？
+	ソシャ子	悲しい						ご、ごめんなさいなのだ！\n力の使い方、間違えちゃったのだ！
+	ディーア	笑い2						ああ、わかってる！\nけど今度は失敗しないだろ？\nさあ、あいつを<dash=2>
+Tween	ソシャ子	PunchPosition	y=50				NoWait
+Tween	ソシャ子	MoveBy	x=-500				NoWait
+	ソシャ子	慌て						だ、ダメなのだ!!
+	ディーア	驚き2						ディスタンス？
+CharacterOff
+	ソシャ子	悲しい
+	黒グラデーション		エフェクト表
+	ソシャ子	悲しい						わかっちゃったのだ……\n離れるって、さびしくて辛いのだ
+	ソシャ子	悲しい						なのにわたしは……\n造られた理由だからって、\nみんなに離れろって言ったのだ……
+	ソシャ子	悲しい						離れる理由もわかってなかったのに、\nわたしはダメな魔剣なのだ……\nだから……
+StopBgm
+CharacterOff
+	ディーア	笑い2						理由ならわかってるだろ？
+CharacterOff
+	ソシャ子	悲しい						えっ……？
+Bgm	凱旋
+CharacterOff
+	ディーア	通常2						ほら、オレに力をくれた時\nみんなを守るって言ったじゃないか！
+	ディーア	笑い2						さっきもそうだ！\nみんなを守るため力を使いすぎた
+	ディーア	通常2						ちゃんと人を守るって\n理由があったじゃないか……！
+CharacterOff
+	ソシャ子	悲しい						でも……離れるのは……\nそれはみんなが辛くなることなのだ
+CharacterOff
+	ディーア	目閉じ2						確かに、離れすぎたらな\nオレもみんなには\n目の届くところにいてほしい
+	ディーア	怒り2						オレとお前のように、\n人と人とはつながっていたほうが\nいいって思う
+	ディーア	本気2						けど、あいつらのように\n無理やりにつなげるのは\n絶対に間違ってる！
+	ディーア	本気2						それは、みんなを踏みにじる\n傷つけるやり方だ！
+	ディーア	通常2						だから、ソーシャルディスタンス！\nオレたちで、\nちゃんとしたつながりを取り戻そう！
+CharacterOff
+	ソシャ子	照れ						マスター……
+	ソシャ子	照れ						そっか……\nわたしがやるべきことは人を……\nこのマスターを守ること……
+StopBgm
+	ソシャ子	通常						そのために……！
+CharacterOff
+	ディーア	通常2	2_2
+	ソシャ子	通常	画面外_左
+Bgm	勇者バトル
+Tween	ソシャ子	MoveBy	x=500 time=0.8				NoWait
+	ソシャ子	通常						そー！ シャル！ ディスタンス！\nちゃんと距離をとるのだ！
+	ソシャ子	嬉しい						魔物たち！ これからはわたしが、\nマスターに指一本触れさせないのだ！
+	ディーア	笑い2						ああ、決着をつけるぞ！
+CharacterOff
+	ソシャ子	通常拡大	エフェクト表					対象の距離判定、密なのだ！\n戦闘距離拡大戦略、発動なのだ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1050_07
+EndIf
+EndScenario
+
+# E_1050_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	市街地C					0
+Param	character_grayout=false
+	くっつけムシ					0
+FadeIn	white					.3
+Shake	くっつけムシ		x=5				NoWait
+	くっつけムシ							くっ……！
+Se	風1
+Tween	くっつけムシ	RotateTo	y=180 time=0				NoWait
+Tween	くっつけムシ	MoveBy	x=700 time=1				NoWait
+Wait						1
+CharacterOff
+Param	character_grayout=true
+	ディーア	通常2	3_3
+	ソシャ子	通常	1_3
+	ソシャ子	通常						まだ敵が残っているのだ！
+	ディーア	通常2						だけど、ほとんどは倒しきった\nもう大騒動にはならないさ
+	ディーア	笑い2						ありがとうな、\nソーシャルディスタンス
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	嬉しい						えへへ♪\n嬉しいのだ！
+	ソシャ子	通常						マスター、\nわたしはわかったのだ！
+	ソシャ子	嬉しい						わたしの役目は\nマスターを危険から遠ざけること！\nちゃんとした距離を守ることなのだ！
+	ソシャ子	通常						そして……！
+CharacterOff
+	ヘル	通常	p7
+	レヴァ	笑い	p3
+	レヴァ	笑い						あ、マイマスター♪\nやっと見つけた♪
+	ヘル	通常						さっきのこと\n誰にも言ったりしないわよね……！
+CharacterOff
+	ごくひらロスト	通常	3_3
+	名刀・大包平	通常2	2_3
+	獄刀大包平	通常	1_3
+Tween	獄刀大包平	PunchPosition	y=30				NoWait
+	獄刀大包平	通常						お姉ちゃん、いまだよ！\n今がチャンスだよ！\nバレンタインデートに誘うの！
+	名刀・大包平	通常2						えっ、でも、それはぁ……！
+	ごくひらロスト	通常						はぁ……\n騒がしすぎるわね……
+CharacterOff
+	黒櫃	通常	2_2
+	白櫃	通常	1_2
+	白櫃	嬉しい						マスターさん！\n黒櫃ちゃんと合体しませんか？\n変態と変態が合わされば大変態です♪
+	黒櫃	慌て						だから白櫃、\n誤解を招く言い方はやめてくれー！
+CharacterOff
+ImageEffect	SpriteCamera	MotionBlur
+	ソシャ子	通常	画面外_左
+	ディーア	汗2	2_2
+	ディーア	汗2						ちょ、みんな!?\n一斉に来たら……！
+Tween	ソシャ子	MoveBy	x=500 time=1				NoWait
+	ソシャ子	通常						ピピー！\nみんな、そこでストップなのだ！
+ImageEffectOff	SpriteCamera	MotionBlur
+Tween	ソシャ子	PunchPosition	y=30
+	ソシャ子	慌て						やっぱり、恋は危ないのだ……!!\nこのままじゃマスターは\n危ない恋で爆発しちゃうのだ！
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ソシャ子	慌て拡大	エフェクト裏					そー！ シャル！ ディスタンス！
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	2_2
+	ソシャ子	通常	1_3
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	通常						みんなの正しい距離を\nわたしが管理してあげるのだ！
+	ソシャ子	嬉しい						これがマスターを守る方法なのだ!!
+Tween	ソシャ子	MoveBy	x=20				NoWait
+	ソシャ子	通常						それじゃあ、マスター♪
+	ソシャ子	嬉しい						距離を取るために、\n一緒に魔物を倒しにいくのだ♪
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						えっ……!?\nいますぐか!?
+	ソシャ子	嬉しい						もちろんなのだ♪
+CharacterOff
+	ソシャ子	通常拡大	エフェクト表					そー！ シャル！ ディスタンス！\n適切な距離を守るのだー♪
+FadeOut	white					.7
+Param	character_grayout=false
+Bg	市街地C					0
+CharacterOff						0
+	イベントロゴ1050		エフェクト表			0
+	                    
+FadeIn	white					.7
+	          							<color=blue>\n    『あぶない恋にディスタンス！』\n　　　　　　　　　　　　　<dash=2>完</color>
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1050_08
+EndIf
+EndScenario
+
+# E_1050_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	都市
+Bg	市街地A					0
+Param	character_grayout=false
+	ソシャ子	悲しい				0
+FadeIn	white					.3
+	ソシャ子	悲しい						むむむ……！\n一体どうしたらいいのだ!?
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	照れ						マスターにご褒美をあげたいのだ！\n距離を守れている\nご褒美をあげたいのだ！
+Tween	ソシャ子	MoveBy	x=30				NoWait
+	ソシャ子	照れ						でも、なにがいいのだ……？
+	ソシャ子	嬉しい						ナデナデ……♪
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	通常						は、近づきすぎるからダメなのだ!!
+Tween	ソシャ子	MoveBy	x=-30				NoWait
+	ソシャ子	嬉しい						お菓子をあげる……♪
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	通常						のも、なんだか味気ないのだ!!
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	照れ						でも……\nいつもがんばってるマスターには、\nもっとちゃんと伝えたいのだ！
+	ソシャ子	照れ						距離をちゃんととって、\nでも気持ちを伝える方法……
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	通常						あっ……！\nきっとあれなら大丈夫なのだ！
+	ソシャ子	嬉しい						そうと決まれば急ぐのだー！
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ソシャ子	嬉しい				0
+Wait						1
+FadeIn	black					.3
+	ソシャ子	嬉しい						かきかき……♪
+	ソシャ子	嬉しい						『ますたーへ、あなたは\n　いつもきょりをまもって……\n　ほめてあげるのだ……』
+	ソシャ子	嬉しい						えへへ♪\nこれならマスターもよろこんで……
+Selection	*E1050_01							なにをしているんだ？
+*E1050_01
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	慌て						ふぇっ!?\nま、ままま、マスター!?\nいつの間に近くにいたのだ!?
+Selection	*E1050_02							手紙……？
+*E1050_02
+	ソシャ子	慌て						ち、違うのだ！\nこ、これは見ちゃダメなのだ！\nまだ途中なのだ！
+Selection	*E1050_03							わかった
+*E1050_03
+	ソシャ子	怒り						じーっ！ 見てないのだ？\nほんとにほんとなのだ……？
+ZoomCamera	SpriteCamera	1.2				1	NoWait
+Wait						1
+	ソシャ子	怒り						気になっても\n教えてあげられないのだ！
+ZoomCamera	SpriteCamera	1.4				1	NoWait
+Wait						1
+	ソシャ子	怒り						どーしても、なのだ！\nわかったのだ!?
+	ソシャ子	通常						……って、はわわわ!?
+ZoomCamera	SpriteCamera	1				.2	NoWait
+Wait						.3
+	ソシャ子	慌て						いつの間にか近づいていたのだ!?
+	ソシャ子	慌て						ダメなのだマスター！\nそー！ シャル！ ディスタンス!!\nもっと離れて……うわぁ!?
+Tween	ソシャ子	RotateTo	z=10 time=1				NoWait
+Wait						.5
+Tween	ソシャ子	RotateTo	z=-10 time=1				NoWait
+Wait						.5
+Tween	ソシャ子	RotateTo	z=0 time=1				NoWait
+Wait						1
+Tween	ソシャ子	MoveBy	y=-100				NoWait
+Wait						.2
+Se	倒れる
+FadeOut	black					.2
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+FadeIn	black					.2
+	ソシャ子	<Off>						うぅ、こ、こけちゃったのだ!?
+	ソシャ子	<Off>						あれぇ……？\nこのあったかいのは……？
+FadeOut	white					.3
+CharacterOff						0
+	イベントスチル10502		エフェクト表			0
+Bg	黒背景					0
+Bgm	神秘
+FadeIn	white					1
+	ソシャ子	<Off>						って、うひゃああああ!?
+	ソシャ子	<Off>						マスター!?\nどうしてわたしの下にいるのだ!?
+	ソシャ子	<Off>						こ、こんな近くでマスターと……！
+	ソシャ子	<Off>						も、もうダメなのだー！\n離れるのだー！
+FadeOut	white					.3
+CharacterOff						0
+	ソシャ子	照れ				0
+Bg	酒場1F					0
+FadeIn	white					.3
+	ソシャ子	照れ						はぁ、はぁ……\nマスターはなんだか\nがっしりしてて熱かったのだ
+	ソシャ子	照れ						そして、胸がドキドキするのだ\nやっぱり、恋は危ないものなのだ
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	慌て						マスター！\nやっぱりもっと距離をとるのだ！
+Tween	ソシャ子	PunchPosition	y=30				NoWait
+	ソシャ子	照れ						それでちゃんと守れたら……\nそのぉ……\nマスターをほめてあげるのだ……
+	ソシャ子	嬉しい						だから、わたしと約束なのだ！\nそー！ シャル！ ディスタンス!!
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1050_01
+EndIf
+EndScenario

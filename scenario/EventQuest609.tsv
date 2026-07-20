@@ -1,0 +1,1019 @@
+# E_609_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	宝石鉱山
+	ヌスミノコリオン		2_3
+	テンバイノコリオン		3_3
+	ダマシノコリオン		1_3
+FadeIn	black					.5
+	ダマシノコリオン							ノコ……ノコノコノコ!!\n(クク、計画は上手くいってるノコ!!)
+	テンバイノコリオン							ノコノコーッ!!\n(ボスもきっとお喜びになるノコ!!)
+	ヌスミノコリオン							ノコノコノコ!!\n(次はリーマ百貨店を襲うノコ!!\n もっとチョコを集めるノコ!!)
+Param	character_grayout=false
+	ダマシノコリオン
+	ヌスミノコリオン
+	テンバイノコリオン
+Tween	ダマシノコリオン	PunchPosition	y=70				NoWait
+Tween	ヌスミノコリオン	PunchPosition	y=100				NoWait
+Tween	テンバイノコリオン	PunchPosition	y=70				NoWait
+	悪徳キノコリオンズ	<Off>						ノコノコーーーーッ!!!!
+FadeOut	black					.5
+CharacterOff						0
+StopBgm
+Param	character_grayout=false
+	妖刀ムラマサ	拡大	エフェクト裏
+	集中線		エフェクト表
+Bg	酒場_カフェ
+Wait						2
+Bgm	緊迫
+FadeIn	black					.2
+	妖刀ムラマサ							旦那様の本命は絶対に私よ!!
+	ニルヴァーナ	拡大	エフェクト裏					ざーんねん！\n本命は絶対ニルだもんねー♪
+CharacterOff
+	カルマ							……もー\nお姉ちゃんもムラマサさんも、\nいい加減にしなよ……
+CharacterOff
+	イベントスチル60901		エフェクト裏
+	二人							カルマは黙ってて!!
+CharacterOff
+Param	character_grayout=true
+	カルマ	慌て
+Tween	カルマ	MoveBy	x=30				NoWait
+	カルマ							…………はぁーい
+CharacterOff
+	モノホシザオ							……あの、カルマさん……？
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							ああ、モノちゃん……どうしたの？
+	モノホシザオ							えっと……\nムラマサさんとニルヴァーナさんは\nなにをやってるんですか……？
+	カルマ							あー……\nほら、もうすぐ\nホワイトデーだからね……
+	モノホシザオ							ぴえ……？
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+StopBgm
+	ニルヴァーナ		2_2			0
+	妖刀ムラマサ		1_2_b			0
+	　　　　　　　　　　
+FadeIn	white					.2
+	カルマ	<Off>						どっちが本命をもらえるかで\nバトルしてるの
+Param	character_grayout=true
+	ニルヴァーナ
+Bgm	コメディ
+	妖刀ムラマサ
+Tween	妖刀ムラマサ	MoveBy	x=20				NoWait
+	妖刀ムラマサ							私の方が良いの渡したもんねー！
+Tween	ニルヴァーナ	MoveBy	x=-20				NoWait
+	ニルヴァーナ							ニルの方があるじの好み\nわかってるもーん♪
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							お、お二人とも、\nそんなに争わなくても……
+CharacterOff
+Param	character_grayout=false
+	イベントスチル60901		エフェクト裏
+	二人							争わないとダメなのよ!!
+CharacterOff
+Param	character_grayout=true
+	モノホシザオ	泣き	2_2
+	カルマ		1_2
+Tween	モノホシザオ	MoveBy	x=-30				NoWait
+	モノホシザオ							ぴぇっ…………
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ	慌て	1_2_b
+	妖刀ムラマサ							だって旦那様はあれだけ多くの\n魔剣からチョコをもらってるのよ？
+	ニルヴァーナ	慌て						そして、本命を貰えるのは\nそのうち一握りの魔剣だけ……!!
+CharacterOff
+Param	character_grayout=false
+	イベントスチル60901		エフェクト裏
+	集中線		エフェクト表
+	二人							つまり、ホワイトデーは\n乙女の戦争なのよ!!
+CharacterOff
+Param	character_grayout=true
+	モノホシザオ	泣き	2_2
+	カルマ		1_2_b
+Shake	モノホシザオ		x=5				NoWait
+	モノホシザオ							ぴえええ……\nほ、ホワイトデーってそんなに\n殺伐としたイベントでしたっけ……？
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ							しかも、今あるじは\nリーマ百貨店で\nお買い物中なんだって！
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							り、リーマ百貨店……？
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+Tween	妖刀ムラマサ	PunchPosition	y=50				NoWait
+	妖刀ムラマサ							そう！\n最近リーマ貿易街にできた百貨店よ！\nすっごいオシャレなんだって！
+	ニルヴァーナ							そんなところに魔剣を連れず\n一人でお出かけしたってことはぁ<dash=2>
+CharacterOff
+Param	character_grayout=false
+	イベントスチル60901		エフェクト表
+	二人							<dash=2>本命のプレゼントを\n買いに行ったに違いない！
+CharacterOff
+Param	character_grayout=true
+	モノホシザオ	泣き	2_2
+	カルマ		1_2
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+Tween	モノホシザオ	MoveBy	x=-30				NoWait
+	モノホシザオ							ぴえええええっ……
+	カルマ	慌て						もー二人とも、\nモノちゃん怯えてるじゃん……
+	カルマ	通常						ていうか……\nマスターの本命なんて\nそんなに欲しいかなぁ？
+	カルマ							あの人煩悩垂れ流しだし、\nいつも変なこと考えてるし、\nなに渡してくるかわかんな<dash=2>
+CharacterOff
+Param	character_grayout=false
+	イベントスチル60901		エフェクト表
+	二人							カルマは黙ってて
+CharacterOff
+Param	character_grayout=true
+	モノホシザオ		2_2
+	カルマ	慌て	1_2_b
+Tween	カルマ	MoveBy	x=-20				NoWait
+	カルマ							はい
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	妖刀ムラマサ							モノちゃんだって、\n旦那様からの本命プレゼント\n欲しいでしょ？
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							そ、それは……\nもらえるなら、欲しい、\nかもですけど……
+	モノホシザオ							でも、モノさんなんて、\n普通のお返しさえ貰えるか\nわかんないですし……
+	モノホシザオ	泣き						そもそも、チョコ\n食べてもらえてないかもですし……\nぴえん……
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ							そんな弱気になってちゃダメだよ！
+CharacterOff
+	モノホシザオ	泣き	2_2
+	カルマ		1_2_b
+	モノホシザオ							で、でもぉ……\nバレンタインの後の使い手さま、\nなんか微妙な顔してましたし……
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ	慌て	1_2_b
+	妖刀ムラマサ							む、そういわれてみれば確かに……\nアレって<dash=2>
+CharacterOff
+StopBgm
+Se	ドア開く
+	　　　　　　　　　　
+Wait						1.2
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							大変だよみんな!!!!
+CharacterOff
+Bgm	緊迫
+	ニルヴァーナ	慌て	2_2
+	妖刀ムラマサ	慌て	1_2_b
+	妖刀ムラマサ							リディちゃん!?
+	ニルヴァーナ							どうしたの、そんなに慌てて……
+CharacterOff
+	リディ	悔しい2						魔剣機関からのお知らせ見た!?
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							お知らせ……？
+CharacterOff
+	リディ	怒り2						ほら、これ見て!!
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	妖刀ムラマサ							なになに……？
+FadeOut	white					.2
+Param	character_grayout=false
+	イベントスチル60902		エフェクト表
+Wait						.1
+FadeIn	white					.2
+	妖刀ムラマサ	<Off>						魔剣機関配送局、スイーツ配達部より\nお届けした\n手作りチョコに関して……？
+Tween	イベントスチル60902	MoveBy	y=170	linear			NoWait
+	妖刀ムラマサ	<Off>						誤ったチョコが配送され…………
+FadeOut	black					.1
+Param	character_grayout=true
+CharacterOff						0
+	ニルヴァーナ	慌て	2_2			0
+	妖刀ムラマサ	慌て	1_2_b			0
+FadeIn	black					.1
+	妖刀ムラマサ							…………え
+StopBgm
+CharacterOff						0
+Shake	Graphics		x=5 y=5				Add
+	全員							キノコリオンによって\nチョコがすり替えられていた<dash=2>!?
+CharacterOff
+Bgm	コメディ
+	ニルヴァーナ	慌て	2_2
+	妖刀ムラマサ	慌て	1_2_b
+	妖刀ムラマサ							あぁ、だから旦那様、\nバレンタインの後\n複雑な顔してたんだ……
+CharacterOff
+	モノホシザオ		2_2
+	カルマ	慌て	1_2_b
+	カルマ							あの時のマスターの心、\nなんか変だなって思ったけど\nそういうことだったんだね……
+CharacterOff
+	ニルヴァーナ	慌て	2_2
+	妖刀ムラマサ	慌て	1_2_b
+	ニルヴァーナ							……でも、おかしくない？\nチョコの配送なんて頼んでないよ？
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							そもそも、スイーツ配達部なんて\n魔剣機関にあるんですか……？\nモノさん聞いたことないですけど……
+CharacterOff
+	リディ	驚き2						た、確かに……\nでもスイーツ配達部のキノコリオンが\n間違えたのは本当みたい
+	リディ	悔しい2						魔剣機関で聞いた噂だと、\n配送を頼んでない家のチョコまで\n全部すり替えられてたみたいだし……
+CharacterOff
+	モノホシザオ		2_2
+	カルマ	慌て	1_2_b
+	カルマ							ダメじゃん魔剣機関……
+CharacterOff
+	リディ	怒り2						でも！\nそれよりも重要なのはこの先だよ!!\nほら、ここ見て！
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	妖刀ムラマサ							ええと……なになに？
+	妖刀ムラマサ							調査の結果、配送アルバイトの\nキノコリオンが働き詰めで……
+CharacterOff
+	リディ	怒り2						ちがうちがう！\nもっと下だよ！
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ	慌て	1_2_b
+	妖刀ムラマサ							えーっと……\n魔剣機関の持ちうる全ての力を使い、\n改めてバレンタインを開催する……？
+Param	character_grayout=false
+	ニルヴァーナ	慌て
+	妖刀ムラマサ	慌て
+	二人							…………え
+CharacterOff
+Param	character_grayout=true
+	モノホシザオ		2_2
+	カルマ	慌て	1_2_b
+	モノホシザオ							ということは、\nホワイトデーと同時に……
+	カルマ							バレンタインが\nもう一度やってくる……？
+FadeOut	white					.1
+Bg	夏空					0
+Param	character_grayout=false
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	white					.1
+Shake	Graphics		x=5 y=5				Add
+	全員							えええええええええ!!?!?!?!?
+	　　　　　　　　　　
+	イベントロゴ609		エフェクト表			1
+Wait						2
+FadeOut	black					1
+StopBgm
+CharacterOff
+Param	character_grayout=true
+Bg	酒場_カフェ
+	リディ	悔しい2
+Wait						1
+Bgm	都市
+FadeIn	black					.5
+	リディ							で、ででではこれより……!!\nささ、作戦会議を……!!
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	妖刀ムラマサ							落ち着いてリディちゃん
+CharacterOff
+	リディ	悔しい2						う、うん……！\nすー……はー……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	照れ2						ではこれより！\nチョコ作り＆作戦会議を始めます！
+CharacterOff
+Param	character_grayout=false
+	イベントスチル60901		エフェクト表
+Tween	イベントスチル60901	PunchPosition	y=5				NoWait
+	二人							おーっ!!
+CharacterOff
+Param	character_grayout=true
+	モノホシザオ	泣き	2_2
+	カルマ		1_2_b
+	モノホシザオ							……あの、ムラマサさんと\nニルヴァーナさんって\n喧嘩してたんじゃ……
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ							え？\n喧嘩なんてするわけないじゃーん♪
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							競ってはいたけどね
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	妖刀ムラマサ							でも今は二回目のバレンタインまで\n時間ないし、みんなで協力しないと！
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							な、なるほど……
+	カルマ							でもチョコ作りはわかるけど\n作戦会議ってなにをするの……？
+CharacterOff
+	リディ	照れ2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							それはもちろん！\nマスターからの本命をもらうための\n作戦を考えるんだよ！
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							……本命をもらうための\n作戦、ですか？
+CharacterOff
+	リディ	通常2						そう！\nだってチョコ渡すのこれで\n二回目だもん！
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ							前回と同じやり方をしても\n効果は薄いものね！
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							そういうものなの……？
+Tween	モノホシザオ	MoveBy	x=-20				NoWait
+	モノホシザオ							そういえば、\n聞いたことがあります……
+	モノホシザオ							去年と同じ\nチョコの渡し方をした場合の\n告白成功率は限りなく0に近いと!!
+	カルマ	慌て						すごい詳しいじゃん……
+	モノホシザオ	泣き
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+Tween	モノホシザオ	MoveBy	x=20				NoWait
+	モノホシザオ							ぴえっ!?\nここ、これは魔剣機関の調査資料を\n偶然読んだだけで……
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ							でも、いつもと違うチョコの\n渡し方って言われてもなぁ……
+Tween	妖刀ムラマサ	PunchPosition	y=50				NoWait
+	妖刀ムラマサ							はいはい！\n私、良いアイディアがあるわ!!
+FadeOut	white					1
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	妖刀ムラマサ
+	オーラ桃		エフェクト裏
+Wait						.5
+Bgm	神秘
+FadeIn	white					.5
+Tween	妖刀ムラマサ	PunchPosition	y=50				NoWait
+	妖刀ムラマサ							旦那様！\nハッピーバレンタイン！
+	妖刀ムラマサ							ふふん♪\n今年は二回目だから、\n張り切っちゃいましたよ♪
+	妖刀ムラマサ							見てください！\n実物大の太刀型チョコです！\n型はもちろんムラマサですよ!!
+	妖刀ムラマサ							伝説の妖刀で作ったチョコ！\nこれは即ち伝説のチョコといっても\n過言ではないです！
+CharacterOff	妖刀ムラマサ
+	妖刀ムラマサ	拡大	エフェクト表					ふふーん♪ どうですか!?\nムラマサから受け取ったことも含めて\nみんなに自慢していいですよ♪
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff						0
+	ニルヴァーナ		2_2			0
+	妖刀ムラマサ		1_2_b			0
+Bgm	コメディ
+FadeIn	white					.5
+	妖刀ムラマサ							……なんてのはどう!?
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							いや、それムラマサさんしか\nできないじゃん……
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ							太刀型チョコ、\nなんだか駄菓子屋にありそうね
+	妖刀ムラマサ	慌て						あるわけないでしょ!!\n伝説のチョコよ!?\nこれ以上ないほど最高級品よ!?
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							でも、なんだか\n食べるのがもったいなく\nなってしまいそうです……
+CharacterOff
+	リディ	照れ2						それは確かに……
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+StopBgm
+	ニルヴァーナ							ふふん♪\nニルならもっと\n賢いやり方をするけどなぁ♪
+FadeOut	white					1
+Param	character_grayout=false
+CharacterOff
+	ニルヴァーナ
+	オーラ桃		エフェクト裏
+Wait						.5
+Bgm	神秘
+FadeIn	white					.5
+	ニルヴァーナ							あるじぃ♪\nハッピーバレンタイン！
+	ニルヴァーナ							ニルからのバレンタインチョコ、\n楽しみにしてたんでしょ♪ にひひ♪
+	ニルヴァーナ							でもざーんねん♪\nあるじの思い通りになんて\nさせてあげない♪
+	ニルヴァーナ							……え？ なにもないのかって？\nそうは言ってないじゃーん♪
+Tween	ニルヴァーナ	PunchPosition	y=50				Add
+Tween	ニルヴァーナ	ScaleBy	x=1.2 y=1.2				Add
+Tween	ニルヴァーナ	MoveBy	y=-150				Add
+	ニルヴァーナ							代わりに、あるじが欲しいもの、\n一つだけあげちゃおっかなぁ♪
+Tween	ニルヴァーナ	ScaleTo	x=1 y=1				NoWait
+Tween	ニルヴァーナ	MoveBy	y=150				NoWait
+	ニルヴァーナ							うわ、うわ♪\n今ニルでえっちな想像したでしょ！\nきもーい♥ さいあく♥
+	ニルヴァーナ							そんなあるじにぃ……
+CharacterOff
+	ニルヴァーナ	拡大	エフェクト表					その妄想、今日だけ特別に\n叶えてあげる♥
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff						0
+	妖刀ムラマサ		1_2_b			0
+	ニルヴァーナ		2_2			0
+Bgm	コメディ
+FadeIn	white					.5
+	ニルヴァーナ							ふふん！\nこうすれば本命はニルのものね♪
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							でも、この間それやろうとして\n失敗してたよね
+CharacterOff
+	ニルヴァーナ	慌て	2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ							ちょっとぉ!?\nそれは秘密だって言ったじゃん!!
+Tween	妖刀ムラマサ	PunchPosition	x=30				NoWait
+	妖刀ムラマサ							おやおやぁ～～？
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							な、なんで失敗\nしちゃったんですか……？
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ	慌て						えと、当日はみんな\nあるじの部屋に押しかけてて……
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							……ほんとにマスターと\nどうにかなっちゃったらって思ったら\n恥ずかしくなったんでしょ
+CharacterOff
+	ニルヴァーナ	慌て	2_2
+	妖刀ムラマサ		1_2_b
+Tween	ニルヴァーナ	PunchPosition	y=50				NoWait
+	ニルヴァーナ							ち、違うしっ！\nそういうカルマは\nどうやって渡すのよ！
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							えー……？\nカルマは別に……
+FadeOut	white					1
+Param	character_grayout=false
+CharacterOff
+StopBgm
+	カルマ
+Wait						.5
+Bgm	神秘
+FadeIn	white					.5
+	カルマ							……え、なに？\nマスター、チョコ欲しいの……？
+	カルマ							うぇ、しかも手作りがいいの……？\n煩悩丸出しじゃん……\nしかもなんか変なこと考えてそう……
+	カルマ							まあいいけど……\nはい、せっかく作ったしあげますよ
+Tween	カルマ	PunchPosition	y=50				NoWait
+	カルマ	慌て						うわ、ちょ、マスター……？\nカルマでなに妄想してるの……？\n考えてること筒抜けなんだけど……
+Shake	カルマ		x=5				NoWait
+	カルマ	慌て						あーんとか、口移しとか、\nうわ、うわうわ……\nそんなことまで……えええ……
+	カルマ	通常						あ、ああもうわかった……\nマスターがしてほしいことは\nわかったから……もういいから……
+CharacterOff
+	オーラ桃		エフェクト裏
+	カルマ	拡大	エフェクト表					<size=20>……そういうのは、みんなが寝た後\n二人きりで、ね……？</size>
+FadeOut	white					1
+CharacterOff						0
+Param	character_grayout=false
+Bgm	コメディ
+	イベントスチル60901		エフェクト裏			0
+	集中線		エフェクト表			0
+FadeIn	white					.2
+	二人							ちょっと待てぇ!!
+CharacterOff
+Param	character_grayout=true
+	モノホシザオ	泣き	2_2
+	カルマ		1_2_b
+	カルマ							え？\nなにかあった？
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	妖刀ムラマサ							なにが｢二人きりで、ね……？｣よ!!\nしれっと抜け駆けしようと\nしてるじゃない!!
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							え、いや、だって仕方なくない？\nマスターの妄想だし……
+	モノホシザオ							いや、今のカルマさんの\n妄想ですよね……？
+	カルマ							だって絶対そうなるし……
+CharacterOff
+	ニルヴァーナ	拡大	エフェクト表					お姉ちゃんがさせないからね!?!?
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							あ、あはは……
+CharacterOff
+	リディ	照れ2						それで、モノちゃんはどうするの？
+CharacterOff
+	モノホシザオ	泣き	2_2
+	カルマ		1_2_b
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							ぴえっ!?\nわわわ、私ですかっ!?
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	妖刀ムラマサ							そうそう、なんかアイディアないの？
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							そ、そうですね……\nでも、モノさんは渡せればそれで……
+FadeOut	white					1
+StopBgm
+CharacterOff
+	モノホシザオ
+Wait						.5
+Bgm	神秘
+FadeIn	white					.5
+Shake	モノホシザオ		x=5				NoWait
+	モノホシザオ							あ、あの、使い手さま……
+	モノホシザオ							えっと、ですね、その……
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							こ、これ！\n使い手さまに……！
+	モノホシザオ	泣き						使い手さまの好みが\nわからなかったので、\nどれを買うか悩んだんですが……
+	妖刀ムラマサ	<Off>						『モノの手作りはないのか？』
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ	通常						ぴえっ!? て、手作りですかっ!?\nそ、そそそ、そんなの……\nい、一応ありますけど……
+	モノホシザオ							ほんとに欲しいんですか……\nモノさん、へたっぴですよ……？
+Shake	モノホシザオ		x=5				NoWait
+	モノホシザオ	泣き						形も崩れちゃってますし、\n買ってきたやつのほうが\nきっとおいしいですし……
+	妖刀ムラマサ	<Off>						『いや、それでも\n　モノが作ったやつが欲しいんだ』
+StopBgm
+Param	character_grayout=false
+Se	ラブ
+	オーラ桃		エフェクト裏			1
+	モノホシザオ							ぴえ……使い手さまぁ……
+Bgm	結婚
+	モノホシザオ	通常						つ、使い手さまが\nそんなに言うなら……
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							モノさんのチョコ、\n受け取ってください……っ!!
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Param	character_grayout=true
+	リディ	照れ2
+Bgm	都市
+FadeIn	white					.2
+	リディ							渡せてよかったね、モノちゃん……!!
+CharacterOff
+	カルマ
+	カルマ							こういうのでいいんだよ、\nお姉ちゃん……
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ							カルマだって\n勝ち逃げしようとしてたじゃん
+	妖刀ムラマサ							いやぁーモノちゃん\n名演技だったねー♪
+CharacterOff
+	モノホシザオ
+Shake	モノホシザオ		x=5				NoWait
+	モノホシザオ							ぴええ……恥ずかしいですぅ……
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	妖刀ムラマサ							さて、これでみんなアイディア\n出し終わったけど……
+CharacterOff
+	リディ	悔しい2						うーん……\n結局どう渡すのがいいんだろう……
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ							やっぱりニルのアイディアが\n一番じゃん？
+Tween	妖刀ムラマサ	PunchPosition	y=50				NoWait
+	妖刀ムラマサ							いやいや！\n伝説の妖刀で作った\n伝説のチョコでしょ!!
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							も、モノさんにはどれも\n魅力的に思えましたけど……
+	カルマ							……ていうか、それより先に\nチョコ作ったほうがいいんじゃない？
+CharacterOff
+	リディ	驚き2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							そうだった！\nチョコ作りながらお話する\nつもりだったのに！
+CharacterOff
+	ニルヴァーナ
+	ニルヴァーナ							そうだよ、\n急いでチョコ作らないと……
+CharacterOff
+StopBgm
+	妖刀ムラマサ	<Off>						あーーーーっ!!!!!!
+CharacterOff
+	リディ	驚き2						ムラマサさん!?\nどうしたの!?
+CharacterOff
+	ニルヴァーナ	慌て	2_2
+	妖刀ムラマサ	慌て	1_2_b
+Tween	妖刀ムラマサ	PunchPosition	y=50				NoWait
+Bgm	緊迫
+	妖刀ムラマサ							見て！\nチョコの材料がなくなってる!!
+CharacterOff
+	リディ	悔しい2						あ、本当だ!!\nここに置いておいたはずなのに……
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							誰かがもっていった……とか？
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ	泣き						リディさん、あれ……！
+FadeOut	black					.3
+CharacterOff						0
+	　　　　　　　　　　					0
+	ヌスミノコリオン		1_3
+Se	走る
+Tween	ヌスミノコリオン	MoveBy	x=1000 time=3				NoWait
+FadeIn	black					.3
+Wait						1.3
+FadeOut	black					.3
+CharacterOff						0
+	リディ	驚き2				0
+FadeIn	black					.3
+	リディ							キノコリオン!?
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ	泣き						あれ、もしかして\n魔剣機関のお知らせにあった……!!
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ	慌て						チョコをすり替えたキノコリオン!?
+	妖刀ムラマサ							私の伝説のチョコ計画を\n邪魔するなんて……!!
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							あ、本気でやるつもりだったんだ……
+	モノホシザオ	泣き						でもどうしましょう？\n今は使い手さまもいませんし……
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	妖刀ムラマサ							でも、このまま逃がすわけには\nいかないわ！
+	ニルヴァーナ							よし、バレないように\nこっそり後を追いかけましょう！
+CharacterOff
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						うん!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	宝石鉱山
+StopBgm
+	ヌスミノコリオン		1_3
+Wait						1
+Se	走る
+Tween	ヌスミノコリオン	MoveBy	x=1000 time=3				NoWait
+FadeIn	black					.3
+Wait						1.5
+FadeOut	black					.3
+CharacterOff						0
+	妖刀ムラマサ		1_2_b			0
+	ニルヴァーナ	慌て	2_2			0
+Bgm	絶望
+FadeIn	black					.3
+	ニルヴァーナ							うう、なんかジメジメしてる……
+	妖刀ムラマサ							あのキノコリオン、\nどこに行ったんだろ……
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							あ、あそこ！\nキノコリオンがたくさんいます……!!
+FadeOut	black					.3
+CharacterOff						0
+	ヌスミノコリオン		2_3			0
+	テンバイノコリオン		3_3			0
+	ダマシノコリオン		1_3			0
+FadeIn	black					.3
+Tween	ダマシノコリオン	PunchPosition	y=50				NoWait
+	ダマシノコリオン							ノコ！ ノコノコ！\n(ククク……計画は順調ノコ!!)
+Tween	ヌスミノコリオン	PunchPosition	y=50				NoWait
+	ヌスミノコリオン							ノコーッ!!\n(ボスの立てた計画は完璧ノコ!!)
+FadeOut	black					.3
+CharacterOff						0
+	カルマ		1_2			0
+	ニルヴァーナ		2_2			0
+FadeIn	black					.3
+	ニルヴァーナ							<size=20>あいつら……!!</size>
+	カルマ	慌て						<size=20>お姉ちゃん、しーっ……\n心の声が聞こえなくなっちゃう……</size>
+CharacterOff
+	ダマシノコリオン		1_3
+	ヌスミノコリオン		2_3
+	テンバイノコリオン		3_3
+	ダマシノコリオン							ノコノコ！ ノココ！\n(幻惑キノコで魔剣機関を騙せたノコ!\n 配送なんかしてないのにノコ!!)
+	ヌスミノコリオン							ノコノコーッ!!\n(リーマ百貨店のチョコも\n 全部盗んでやったノコ!!)
+	テンバイノコリオン							ノコノコノコ!!\n(それに、キノコリオンヌにサウナ\n 一年分を転売して大儲けノコ!)
+	ヌスミノコリオン							ノココー!!\n(これで魔界中のチョコをかき集めて\n 幻惑チョコを作るノコ!!)
+Param	character_grayout=false
+	ダマシノコリオン
+	ヌスミノコリオン
+	テンバイノコリオン
+Tween	ダマシノコリオン	PunchPosition	y=50				NoWait
+Tween	ヌスミノコリオン	PunchPosition	y=50				NoWait
+Tween	テンバイノコリオン	PunchPosition	y=50				NoWait
+	悪徳キノコリオンズ	<Off>						ノコノコーッ!!\n(これを流通させて、\n 魔界を牛耳るノコーッ!!)
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff						0
+	リディ	悔しい2				0
+FadeIn	black					.3
+	リディ							…………カルマちゃん、聞き取れた？
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							うん……\nあいつら、どうやら魔界中のチョコを\n集めて悪さをしようとしてるみたい
+	カルマ							しかも、リーマ百貨店の\nチョコを全部盗んだって……
+CharacterOff
+	リディ	悔しい2						リーマ百貨店って、\nマスターが買い物に行った……!?
+CharacterOff
+	ニルヴァーナ	慌て	2_2
+	妖刀ムラマサ	慌て	1_2_b
+	ニルヴァーナ							それじゃあ、バレンタインどころか\nホワイトデーも……
+	妖刀ムラマサ							旦那様の本命も\nもらえないかもしれないってこと!?
+CharacterOff
+	モノホシザオ	泣き	2_2
+	カルマ		1_2_b
+	モノホシザオ							そ、そんなの……!!
+CharacterOff
+CharacterOff
+	ダマシノコリオン		1_3
+	ヌスミノコリオン		2_3
+	テンバイノコリオン		3_3
+Tween	ヌスミノコリオン	PunchPosition	y=50				NoWait
+StopBgm
+	ヌスミノコリオン							ノコ!?\n(誰かいるノコ!?)
+CharacterOff
+	ニルヴァーナ	慌て	2_2
+	妖刀ムラマサ	慌て	1_2_b
+Tween	ニルヴァーナ	PunchPosition	y=50				NoWait
+	ニルヴァーナ							やば、気付かれた……!?
+CharacterOff
+Bgm	緊迫
+	ダマシノコリオン		1_3
+	ヌスミノコリオン		2_3
+	テンバイノコリオン		3_3
+Tween	ダマシノコリオン	PunchPosition	y=50				NoWait
+	ダマシノコリオン							ノコーーッ!!\n(魔剣がいるノコ!!)
+Tween	テンバイノコリオン	PunchPosition	y=50				NoWait
+	テンバイノコリオン							ノコ!! ノコノコ!!\n(ボスを!! ボスを呼んでくるノコ!!)
+CharacterOff
+	モノホシザオ		2_2
+	カルマ	慌て	1_2_b
+	カルマ							まずい、ボスを呼ぼうと\nしてるみたい……
+CharacterOff
+	リディ	悔しい2						早くここから逃げなきゃ!!
+CharacterOff
+	モノホシザオ	泣き	2_2
+	カルマ	慌て	1_2_b
+	モノホシザオ							ぴええ！\nもう囲まれてます……!!
+CharacterOff
+	　　　　　　　　　　
+Se	歩く
+Wait						.3
+	魔剣機関職員					1.2
+Wait						.5
+	魔剣機関職員							……やれやれ、\n騒がしいと思ったら"彼"の魔剣たちか
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ	慌て	1_2_b
+	妖刀ムラマサ							あなたは……？
+CharacterOff
+Param	character_grayout=false
+	ダマシノコリオン		1_3
+	ヌスミノコリオン		2_3
+	テンバイノコリオン		3_3
+Tween	ダマシノコリオン	PunchPosition	y=50				NoWait
+Tween	ヌスミノコリオン	PunchPosition	y=50				NoWait
+Tween	テンバイノコリオン	PunchPosition	y=50				NoWait
+	悪徳キノコリオンズ	<Off>						ノコ!! ノコノコ!!\n(ボス! やっちゃってくださいノコ!!)
+Param	character_grayout=true
+CharacterOff
+	モノホシザオ		2_2
+	カルマ	慌て	1_2_b
+Shake	カルマ		x=5				NoWait
+	カルマ							う、すごい煩悩……
+	モノホシザオ							この人がボス……？\nでもこの格好、魔剣機関の……
+CharacterOff
+	魔剣機関職員							バレてしまっては仕方がない\nそうとも、私がキノコリオンに\n策を与えたのさ
+CharacterOff
+	リディ	怒り2						魔剣機関の人が、どうして……!!
+CharacterOff
+	魔剣機関職員							それを話して\nなんの意味があるのかね
+CharacterOff
+	モノホシザオ	泣き	2_2
+	カルマ	慌て	1_2_b
+	モノホシザオ							ぴええ……
+	カルマ							お姉ちゃん……
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	ニルヴァーナ							なんとか、ここから逃げないと……
+CharacterOff
+	魔剣機関職員							おっと、変な真似はしないことだ\n君たちは秘密を\n知ってしまったんだからね
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ	慌て	1_2_b
+	妖刀ムラマサ							くっ……
+CharacterOff
+	魔剣機関職員							なに、魔剣とはいえど\n使い手がいなければ\nただの少女と同じ<dash=2>
+	魔剣機関職員							魔剣使いではない私でも、\n君たちを捕まえることは造作もない
+CharacterOff
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	妖刀ムラマサ							……私たちを捕まえて、\nどうするつもり？
+CharacterOff
+	魔剣機関職員							心配するな、苦痛を与えたりはしない\n暴力などナンセンスだ\n私はそんなものに頼ったりしない
+	魔剣機関職員							その代わり……\n君たちに忘れ得ぬ快楽を\n叩き込んでやろう
+CharacterOff
+	モノホシザオ	泣き	2_2
+	カルマ		1_2_b
+	モノホシザオ							ぴえええっ…………
+CharacterOff
+	リディ	悲しい2						ま、まさか……
+CharacterOff
+	魔剣機関職員							そう<dash=2>!!
+StopBgm
+Param	character_grayout=false
+	集中線		エフェクト表
+	魔剣機関職員							ビジネスという快楽を!!
+CharacterOff
+Param	character_grayout=true
+	リディ	驚き2						…………ふぇ？\nビジネス？
+CharacterOff
+Bgm	コメディ
+	魔剣機関職員							いかにも！\n簡単に<ruby=ヘル>金</ruby>を稼ぐことができる\n夢のようなビジネスがあるのだ!!
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表
+	妖刀ムラマサ	拡大	エフェクト裏					そんなのがあるの!?
+CharacterOff
+Param	character_grayout=true
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							あ、釣られてる
+	モノホシザオ	泣き						ぴええ……\n絶対怪しいですよぉ……
+CharacterOff
+	妖刀ムラマサ
+	妖刀ムラマサ							それで、なにをすればいいの!?
+CharacterOff
+	魔剣機関職員							クク、まずは我々からチョコを買い、\n我々と共にチョコを\n売るだけで良いのだ
+CharacterOff
+	ニルヴァーナ	慌て
+	ニルヴァーナ							そんな上手い話があるわけ……
+CharacterOff
+	魔剣機関職員							確かに君たちの売り上げの一部を\nマージンとして我々が受け取るが、\n心配はいらない
+	魔剣機関職員							君たちも他の魔剣たちに\nこのビジネスを紹介すればいいのだよ
+	魔剣機関職員							そうすれば、君たちは\nたちまち億万長者というわけだ
+	魔剣機関職員							聞けば君たちの主は\n金に困っているそうじゃないか
+	魔剣機関職員							彼を助ければ、本命だって\nもらえるかもしれないぞ
+CharacterOff
+Param	character_grayout=false
+	ダマシノコリオン		1_3
+	ヌスミノコリオン		2_3
+	テンバイノコリオン		3_3
+Tween	ダマシノコリオン	PunchPosition	y=50				NoWait
+Tween	ヌスミノコリオン	PunchPosition	y=50				NoWait
+Tween	テンバイノコリオン	PunchPosition	y=50				NoWait
+	悪徳キノコリオンズ	<Off>						ノコノコ!! ノコノコノコ!!\n(流石ボスノコ!! ボスは天才ノコ!!)
+Param	character_grayout=true
+	妖刀ムラマサ							旦那様の本命になれる……!!
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+StopBgm
+	モノホシザオ							でも、それって……\nネットワークビジネスっていうやつ\nじゃないですか……？
+CharacterOff
+	妖刀ムラマサ							ねっとわーくびじねす？
+CharacterOff
+	リディ	驚き2						モノちゃん、知ってるの？
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+Bgm	絶望
+	モノホシザオ							はい……それ、確か結局買ったものが\n売れなくて、どんどん借金が溜まって\nいってしまうやつですよね……？
+	カルマ	慌て						詳しいじゃん……
+Tween	モノホシザオ	PunchPosition	y=50				NoWait
+	モノホシザオ							ぴえっ!?\nここ、これも魔剣機関の資料で\nたまたま読んだだけで……！
+CharacterOff
+	妖刀ムラマサ	慌て						ってことは、億万長者には\nなれないってこと!?
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	モノホシザオ							つまりはそういうことです……
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表
+	妖刀ムラマサ	慌て拡大	エフェクト裏					あなた、私を\n騙そうとしたんですね……!!
+CharacterOff
+Param	character_grayout=true
+	モノホシザオ		2_2
+	カルマ	慌て	1_2_b
+	カルマ							最初からずっとだよムラマサさん……
+CharacterOff
+	ディーア	怪しい2	1_2_b
+	魔剣機関職員							……ふん、バレてしまっては\n仕方がないな
+	魔剣機関職員							ならば君たちには\nこの幻惑キノコリオンで作った\nチョコレートを<dash=2>
+StopBgm
+	ディーア	怒り2						させるか
+Se	光3
+FadeOut	white					.5
+Se	打1
+	魔剣機関職員		2_2			0
+FadeIn	white					.3
+Shake	魔剣機関職員		x=5				Add
+	魔剣機関職員							ぐはぁッ!?
+Tween	魔剣機関職員	MoveBy	y=-800 time=3				NoWait
+Wait						.3
+Se	倒れる
+Wait						.7
+CharacterOff	魔剣機関職員					.5
+Wait						.2
+Bgm	緊迫
+	ディーア	怪しい2						ったく、まさかとは思ったけど……\n本当に魔剣機関の職員が\n黒幕だったとはな
+CharacterOff
+	リディ	驚き2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							マスター!!
+CharacterOff
+	ニルヴァーナ	慌て	2_2
+	妖刀ムラマサ	慌て	1_2_b
+	妖刀ムラマサ							どうしてここが……？
+CharacterOff
+	ディーア	通常2						酒場に戻ったら誰もいなかったから、\nどうしたのかと思って\n魔力の痕跡を追ったんだ
+	ディーア							あの酒場には、\nキノコリオンの魔力が\nかすかに残ってたからな
+	ディーア	怪しい2						………さて
+CharacterOff
+Param	character_grayout=true
+	ダマシノコリオン		1_3
+	ヌスミノコリオン		2_3
+	テンバイノコリオン		3_3
+Tween	ダマシノコリオン	PunchPosition	y=50				NoWait
+Tween	ヌスミノコリオン	PunchPosition	y=50				NoWait
+Tween	テンバイノコリオン	PunchPosition	y=50				NoWait
+	悪徳キノコリオンズ							ノコっ!?
+Param	character_grayout=true
+	テンバイノコリオン							ノコノコーッ!!!!\n(ぼ、ボスがやられたノコ!!\n 大変だノコ!!)
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							……ちょうど良かった\n<ruby=キノコリオン>お前たち</ruby>を\n探していたところだったんだ
+	リディ	驚き2						マスター？\nそれってどういう……？
+	ディーア	通常2						襲撃されたリーマ百貨店の\nオーナーに頼まれたんだ
+	ディーア	目閉じ2						『商品がないと営業再開ができない、\n　盗まれた"ホワイトギフト"を\n　取り返して欲しい』……ってな
+Param	character_grayout=false
+CharacterOff
+	ダマシノコリオン		1_3
+	ヌスミノコリオン		2_3
+	テンバイノコリオン		3_3
+Tween	ダマシノコリオン	PunchPosition	y=50				NoWait
+Tween	ヌスミノコリオン	PunchPosition	y=50				NoWait
+Tween	テンバイノコリオン	PunchPosition	y=50				NoWait
+	悪徳キノコリオンズ	<Off>						ノコ……ッ!?\n(なに……っ!?)
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2	1_2
+	リディ	悔しい2	2_2
+	ディーア							さあ、盗んだチョコは\n全て返してもらう\nそれに、幻惑チョコも全部没収だ
+CharacterOff
+	ダマシノコリオン		1_3
+	ヌスミノコリオン		2_3
+	テンバイノコリオン		3_3
+	ダマシノコリオン							ノ、ノコノコ!!\n(そ、そんなことはさせないノコ!!)
+	ヌスミノコリオン							ノコノコ、ノコ!!\n(我々は抵抗するノコ!!)
+CharacterOff
+	ディーア	目閉じ2	1_2
+	リディ	悔しい2	2_2
+	ディーア							……やるしかない、か
+CharacterOff
+	妖刀ムラマサ							そうと決まれば<dash=2>よっと！
+Se	斬2
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						.2
+CharacterOff
+	ダマシノコリオン		1_3
+	ヌスミノコリオン		2_3
+	テンバイノコリオン		3_3
+Shake	ヌスミノコリオン		x=5 time=0.5				Add
+	ヌスミノコリオン							ノコッ!?!?
+Tween	ヌスミノコリオン	MoveBy	y=-800 time=3				NoWait
+Se	倒れる
+Wait						.7
+CharacterOff	ヌスミノコリオン
+Param	character_grayout=false
+	ダマシノコリオン
+	テンバイノコリオン
+Tween	ダマシノコリオン	PunchPosition	y=50				NoWait
+Tween	テンバイノコリオン	PunchPosition	y=50				NoWait
+	悪徳キノコリオンズ	<Off>						ノコーーッ!?!?!?!?
+CharacterOff
+Param	character_grayout=true
+Bgm	特殊バトル
+	ニルヴァーナ		2_2
+	妖刀ムラマサ		1_2_b
+	妖刀ムラマサ							さっさと倒して、旦那様の本命を\n貰わなきゃいけませんね♪
+Tween	ニルヴァーナ	PunchPosition	y=50				NoWait
+	ニルヴァーナ							ちょっと、本命はニルだってば!!
+CharacterOff
+	モノホシザオ		2_2
+	カルマ		1_2_b
+	カルマ							また始まった……\nほら、戦う準備しなよー……
+	モノホシザオ							も、モノさんも……ここで頑張れば、\nお返しをもらえるかも……？\nなーんて……
+CharacterOff
+	ディーア	怒り2	1_2
+	リディ	照れ2	2_2
+	リディ							よし！\nそのためにも早く倒して帰らなきゃ！
+	ディーア	通常2						ああ、そうだな！
+Se	光1
+	オーラ青		エフェクト表			1
+Param	character_grayout=false
+	リディ	怒り2
+	ディーア	怒り2						行くぞ！\n魔力結晶体構築<dash=2>\n<ruby=アンロック>魔剣、解放</ruby>!!
+Se	光3
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_609_01
+EndIf
+EndScenario

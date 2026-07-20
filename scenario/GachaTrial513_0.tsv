@@ -1,0 +1,54 @@
+# G_513_00
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+FadeOut	black					0
+StopSound
+Bg	黒背景
+Param	character_grayout=false
+	トライアルスチル513G	警告文	center			0
+FadeIn	black					1
+WaitInput						10
+FadeOut	black					1
+CharacterOff						0
+SendMessage	ShowSkipPrologue
+Se	廊下を走る
+WaitInput						2.5
+StopSe						0
+WaitInput						.5
+Se	ドア開く2
+Se	大雨2					1.5
+ChangeSoundVolume	Se	.5
+WaitInput						3.5
+	トライアルスチル513H1	星空	center			0
+StopSe
+WaitInput						.5
+FadeIn	black					1
+WaitInput						1
+	トライアルスチル513H2	セリフ1	center2			1		 	BrPage	1579-33
+WaitInput						4.5
+	トライアルスチル513H3	セリフ2	center3			1
+WaitInput						4.5
+FadeOut	black					1
+CharacterOff						0
+	トライアルスチル513A	A	center			0
+Se	大雨2					1
+Bgm	ロルリアンレットB					1
+FadeIn	black					1
+WaitInput						3.3
+	トライアルスチル513A	B	center			2
+WaitInput						3.3
+	トライアルスチル513A	C	center			2
+WaitInput						3.6
+	トライアルスチル513A	D	center			2
+WaitInput						3.1
+	トライアルスチル513A	E	center			2
+WaitInput						3.3
+	トライアルスチル513A	F	center			2
+WaitInput						2.4
+StopSound						2
+StopSe						1
+WaitInput						1
+FadeOut	black					0
+WaitInput						7
+StopSound
+StopSe
+EndScenario

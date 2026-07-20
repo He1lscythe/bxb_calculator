@@ -1,0 +1,439 @@
+# G_520_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+	レヴァビ	笑い拡大
+FadeIn	white					.5
+Tween	レヴァビ	ScaleBy	x=1.2 y=1.2				NoWait
+Tween	レヴァビ	MoveBy	y=-100				NoWait
+	レヴァビ	笑い拡大						こゃーん♪
+CharacterOff
+	レヴァビ	笑い						やっとぱーてぃの準備が\nできたようです！
+	レヴァビ	通常						どきどき……♪
+	レヴァビ	通常						わたくしはみなさんと\n仲良くできるでしょうか……！
+	レヴァビ	悲しい2						……よし！\nいきますよ！
+StopBgm
+Se	ドア開く
+	レヴァビ	きょとん						ごめんくださーい……
+	？？？？	<Off>						<size=40>ヒロインは\n渡さないんだから！</size>
+Tween	レヴァビ	PunchPosition	y=50				NoWait
+	レヴァビ	驚き						ひゃっ!!
+	レヴァビ	驚き						な、なんでしょう……!?
+Param	character_grayout=false
+Bgm	コメディ
+CharacterOff
+	集中線		エフェクト表
+	レヴァ
+	レヴァ	通常拡大						"アプリアイコン"の座は\nもちろん私のものだからね！
+CharacterOff
+	集中線		エフェクト表
+	レヴァンテイン=トリガー	泣き拡大
+	レヴァンテイン=トリガー	泣き拡大						だめーっ！\nレヴァだって"アプリアイコン"\nやりたいもんっ！
+CharacterOff
+	集中線		エフェクト表
+	レヴァンテイン=ハル	通常拡大
+	レヴァンテイン=ハル	通常拡大						いいえ、私よ！\n私が"アプリアイコン"なの！
+Param	character_grayout=true
+CharacterOff
+	レヴァビ
+	レヴァビ	驚き						わわわっ！\nどうしたんですか……？
+Tween	レヴァビ	PunchPosition	y=50				NoWait
+	レヴァビ	悲しい2						けんかはおやめくださいまし……！
+CharacterOff
+	レヴァンテイン=トリガー	泣き	1_2
+	レヴァ	本気	2_2
+	レヴァ	本気						あっ！ レヴァビちゃん！\nごめんね、ここは譲れないの……！
+	レヴァンテイン=トリガー	泣き						そうよっ！\n"アプリアイコン"は譲れないわっ！
+CharacterOff
+	レヴァビ
+	レヴァビ	きょとん						"アプリアイコン"って\nなんなのですか……？
+CharacterOff
+	レヴァ
+	レヴァ	通常						話すと長いんだけど……\n要は正ヒロインってことだよ！
+	レヴァ							ちなみに私がずっと\n"アプリアイコン"を\nやってきたんだけど……
+Tween	レヴァ	PunchPosition	y=50				NoWait
+	レヴァ							今回ももちろん私で決まりね♪
+CharacterOff
+	レヴァンテイン=トリガー	通常2
+	レヴァンテイン=トリガー							そうはさせないわよっ！\n今回はレヴァがいただくわっ！
+	レヴァンテイン=トリガー							いいっ？ マスターはね♪\nちっちゃい子が大好きなのっ♪\nとーけーでもそう言われてるのよっ♪
+Tween	レヴァンテイン=トリガー	PunchPosition	y=50				NoWait
+	レヴァンテイン=トリガー							だからヒロインは\nレヴァのものなのよっ♪
+CharacterOff
+	ヘル	通常
+	ヘル							あまりもめないでほしいわ\nお姉ちゃん、ほどほどにしてね……
+	ヘル							だいたい、ハルは何で\n参戦してるのよ……
+CharacterOff
+	レヴァンテイン=ハル	通常
+	レヴァンテイン=ハル							決まってるじゃない\nヘルに勝つためよ
+	レヴァンテイン=ハル							いい？ ハルが例えてあげる！\nハルが超高級ドレスなら\nヘルは履き古した靴下よ！
+	レヴァンテイン=ハル							ハルがヒロインになれば\nそのことが証明されるわね♪
+CharacterOff
+	ヘル	通常
+	ヘル							ばからしいわね……\n好きにして頂戴
+CharacterOff
+	レヴァンテイン=ハル	通常
+	レヴァンテイン=ハル							あら♪\n負けを認めるのね？
+Tween	レヴァンテイン=ハル	PunchPosition	y=50				NoWait
+	レヴァンテイン=ハル							これでようやく\nどっちが上か分かったわね♪
+CharacterOff
+	ヘル	通常
+	ヘル							……っ！
+	ヘル							気が変わったわ\n私も参戦するわよ……
+CharacterOff
+	レヴァ	通常	2_2
+	レヴァロスト	正装	1_2
+	レヴァ							レヴァンテイン=ロスト\nあなたはどうするの？
+	レヴァロスト							えーっと……\n私は……
+	レヴァロスト							お姉ちゃんさえ幸せなら\nそれでいい、かな……
+	レヴァ	笑い						うーん！ 嬉しいけど\nそういうことを聞いてるんじゃ\nなくてね……！
+	レヴァロスト							……？
+CharacterOff
+StopBgm
+	レヴァビ	通常						むむむ……！\nけんかをやめていただかなくては！
+	レヴァビ							こんなときは\nわたくしのしっぽの出番です♪
+	レヴァビ	笑い拡大						みんな、仲良く♪\nなのです♪
+Tween	レヴァビ	ScaleBy	x=1.2 y=1.2				NoWait
+Tween	レヴァビ	MoveBy	y=-100				NoWait
+	レヴァビ	笑い拡大						こゃーん♪
+CharacterOff
+	レヴァンテイン=トリガー	泣き	1_2
+	レヴァビ	笑い2	2_2
+	レヴァンテイン=トリガー							わーっ！\nな、なにーっ!?
+CharacterOff
+	レヴァ	通常
+	レヴァ							レヴァビちゃん、何を……！
+Bgm	魔剣の日常
+Param	character_grayout=false
+CharacterOff
+	レヴァンテイン=トリガー	通常2	1_2
+	レヴァビ	笑い2	2_2
+	レヴァンテイン=トリガー							ふわあああ……！\nも、もふもふ……！
+Tween	レヴァビ	MoveBy	x=-20				NoWait
+	レヴァビ							わたくしのしっぽの\nさわり心地はいかがですか♪
+	レヴァンテイン=トリガー							あなた、すっごくふかふかなのねっ！\nとってもすてき！
+	レヴァビ	笑い2						え、えへへ……
+	レヴァビ							よろこんでもらえて\nわたくしは嬉しいのです……！
+Param	character_grayout=true
+CharacterOff
+	レヴァ	通常	1_3
+	ヘル	通常	3_3
+	ヘル							き、気持ちよさそうね……！
+	レヴァ							私も触っていいかな！
+CharacterOff
+	レヴァビ	笑い2
+	レヴァビ							もちろん、いいですよ♪
+Param	character_grayout=false
+CharacterOff
+	レヴァ	通常	1_4
+	レヴァビ	笑い2	2_3_b
+	ヘル	通常	4_4
+Tween	レヴァ	MoveBy	x=50				NoWait
+	レヴァ							ほら、ヘルも！
+Tween	ヘル	PunchPosition	y=50				NoWait
+	ヘル							えっ、でも私は……
+	レヴァ							いいのいいの、ほら！
+Tween	ヘル	MoveBy	x=-50				NoWait
+	ヘル							ひゃっ！
+CharacterOff
+	レヴァンテイン=ハル	通常
+	レヴァンテイン=ハル							よーし♪\n私もー♪
+CharacterOff
+	レヴァ	通常
+	レヴァ							レヴァンテイン=ロスト\nあなたもどう？
+CharacterOff
+	レヴァロスト	正装
+	レヴァロスト							えっ……？
+	レヴァロスト							ええと、お姉ちゃん\n私は……
+CharacterOff
+	レヴァ	通常
+Tween	レヴァ	PunchPosition	y=50				NoWait
+	レヴァ							ほらほら、早く♪
+CharacterOff
+	レヴァロスト	正装
+Tween	レヴァロスト	PunchPosition	y=50				NoWait
+	レヴァロスト							あっ……\nお姉ちゃん……
+CharacterOff
+	レヴァビ	笑い2	2_3_b
+	ヘル	通常	4_4
+	レヴァンテイン=トリガー	通常2	1_3
+Tween	ヘル	MoveBy	x=-20				NoWait
+	ヘル							ふわあ……\nやわらかい……！
+Tween	レヴァンテイン=トリガー	PunchPosition	y=50				NoWait
+	レヴァンテイン=トリガー							大事なこうはいなんだから\n優しくさわってね、ヘル！
+	ヘル							え、ええ……\nそれにしても、素敵な触り心地だわ……
+CharacterOff
+	レヴァンテイン=ハル	通常	3_3
+	レヴァビ	笑い	2_3_b
+	レヴァロスト	正装	1_3
+Tween	レヴァンテイン=ハル	PunchPosition	y=50				NoWait
+	レヴァンテイン=ハル							うーん……\n確かにこれは絶品ね……！
+Tween	レヴァロスト	PunchPosition	y=50				NoWait
+	レヴァロスト							気持ちいい……\nお姉ちゃん、ありがとう……
+CharacterOff
+	レヴァビ	笑い2
+	レヴァビ							よかったのです♪\nみなさん、仲良く、なのです♪
+	レヴァビ							こゃーん♪
+CharacterOff
+	レヴァロスト	正装
+	レヴァロスト							も、もしかして……\nこれが「正ヒロイン」ということ\nなのかしら……？
+StopBgm
+CharacterOff
+	レヴァ	慌て
+	レヴァ							……はっ！\nそうだった!!
+Bgm	コメディ
+CharacterOff
+	集中線		エフェクト表
+	レヴァ
+	レヴァ	通常拡大						正ヒロインの座は\nもちろん私のものだからね！
+CharacterOff
+	集中線		エフェクト表
+	レヴァンテイン=トリガー	泣き拡大
+	レヴァンテイン=トリガー	泣き拡大						だめーっ！\nレヴァだって正ヒロイン\nやりたいもんっ！
+CharacterOff
+	集中線		エフェクト表
+	レヴァンテイン=ハル	通常拡大
+	レヴァンテイン=ハル	通常拡大						いいえ、私よ！\n私が正ヒロインなの！
+Param	character_grayout=true
+CharacterOff
+	レヴァビ	悲しい
+	レヴァビ							きゅーん……\nうまくいったと思ったのですが……
+	レヴァビ	悲しい2						こゃーん……！
+CharacterOff
+	レヴァ	通常
+	レヴァ							はっ……\nなんて可愛いの……
+Shake	レヴァ		x=5				NoWait
+	レヴァ	本気						で、でもだめ！\nヒロインの座は譲れない！
+CharacterOff
+	レヴァンテイン=トリガー	通常2
+	レヴァンテイン=トリガー							すごいわ……\nさすがレヴァの後輩ね……
+Tween	レヴァンテイン=トリガー	PunchPosition	y=50				NoWait
+	レヴァンテイン=トリガー							でもレヴァが\nヒロインになるんだものっ！
+CharacterOff
+	レヴァンテイン=ハル	通常	1_3
+	ヘル	通常	3_3
+	レヴァンテイン=ハル							可憐だわ……\n少なくともヘルよりは上……
+Se	打1
+Tween	ヘル	PunchPosition	x=-30				NoWait
+	ヘル							余計なことを言わないで頂戴
+CharacterOff
+	レヴァ	通常	2_2
+	レヴァロスト	正装	1_2
+	レヴァ							レヴァンテイン=ロスト\nあなたはどう？
+	レヴァロスト							えーっと……\n私は……
+	レヴァロスト							お姉ちゃんが幸せそうだから\nいいと、思う……
+	レヴァ	笑い						うーん！\n嬉しいんだけどね……！
+CharacterOff
+	レヴァ	通常
+	レヴァ							ところで、レヴァビちゃんは\nどう思う？
+	レヴァ							誰が正ヒロインに\nふさわしいかな？
+CharacterOff
+	レヴァビ	悲しい
+	レヴァビ	悲しい						え、えっと……\nわ、わたくしは……
+Tween	レヴァビ	PunchPosition	y=50				NoWait
+	レヴァビ	悲しい2						みんななかよしなのが\n一番なのです……！
+CharacterOff
+	レヴァ	慌て
+	レヴァ							……な……！
+CharacterOff
+	レヴァンテイン=トリガー	通常2
+	レヴァンテイン=トリガー							なんていい子なの……！
+CharacterOff
+	ヘル	通常	3_3
+	レヴァンテイン=ハル	通常	1_3
+	レヴァンテイン=ハル							少なくとも\nヘルよりは……！
+Se	打1
+Tween	ヘル	PunchPosition	x=-30				NoWait
+	ヘル							余計なことを言わないで頂戴……！
+CharacterOff
+	レヴァ	通常
+	レヴァ							じゃあレヴァビちゃんは\nどうなりたい？
+CharacterOff
+	レヴァ	通常	3_3
+	レヴァビ	きょとん	1_3
+	レヴァビ							ほぇ？\nなにがですか？
+	レヴァ							レヴァビちゃんも\n正ヒロインに\nなりたくはないの？
+	レヴァビ	悲しい						うーん……\nそうですねえ……
+	レヴァビ	悲しい2						うーん……\nうーーーーん……！
+	レヴァビ	怒り						わたくしは、だいじょうぶですっ！
+	レヴァ							あら、どうして？
+Tween	レヴァビ	PunchPosition	y=50				NoWait
+	レヴァビ	笑い2						みなさんが幸せになるのが\nわたくしの幸せなのです！
+	レヴァビ							わたくしはまだまだ\n未熟者ですので\nもっと修行しないとっ！
+CharacterOff
+	ヘル	通常	2_2
+	レヴァンテイン=トリガー	通常2	1_2
+	ヘル							なんて謙虚なの……！
+	レヴァンテイン=トリガー							レヴァビちゃん……\nえらーい♪
+CharacterOff
+	ディーア	通常2
+	ディーア							みんな、揃ってるな
+Param	character_grayout=false
+CharacterOff
+	ヘル	通常	1_3
+	レヴァ	通常	2_3
+	レヴァンテイン=ハル	通常	3_3
+Tween	レヴァ	PunchPosition	y=50				NoWait
+	レヴァ							マイマスター！\n正ヒロインはもちろん\n私よね!?
+Tween	ヘル	PunchPosition	y=50				NoWait
+	ヘル							いいえ、ここは私……!!
+Tween	レヴァンテイン=ハル	PunchPosition	y=50				NoWait
+	レヴァンテイン=ハル							私のほうが\nヘルより上よね！
+CharacterOff
+	レヴァロスト	正装
+	レヴァロスト							えーと、うーん……
+	レヴァロスト							一応、私も\n立候補しよう……！
+CharacterOff
+	レヴァンテイン=トリガー	通常2
+	レヴァンテイン=トリガー							あのね、マスター様！
+	レヴァンテイン=トリガー							誰が"アプリアイコン"になるか……\nレヴァは、決めたわ！
+CharacterOff
+	ディーア	通常2
+	ディーア							ああ、聞かせてくれトリガー\n誰がいいんだ？
+CharacterOff
+	レヴァンテイン=トリガー	通常2
+	レヴァンテイン=トリガー							魔界の顔にふさわしい\n魔剣はね……！
+FadeOut	black
+If	isdebug==true
+CharacterOff
+Jump	*G_520_02
+EndIf
+EndScenario
+
+# G_520_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+	レヴァンテイン=トリガー	通常2
+FadeIn	white					.5
+	レヴァンテイン=トリガー	通常2						魔界の顔にふさわしい\n魔剣はね……！
+Tween	レヴァンテイン=トリガー	PunchPosition	y=50				NoWait
+	レヴァンテイン=トリガー							レヴァンテイン=ビーストちゃん！
+CharacterOff
+	レヴァビ	きょとん
+	レヴァビ							……ほぇ？
+CharacterOff
+	レヴァビ	きょとん	2_2
+	レヴァンテイン=トリガー	通常2	1_2
+Tween	レヴァビ	PunchPosition	y=50				NoWait
+	レヴァンテイン=トリガー							レヴァビちゃんが\n魔界の顔にふさわしいと思うの！
+Param	character_grayout=false
+CharacterOff
+	イベントスチル52001		エフェクト表
+	レヴァンテイン=トリガー	<Off>						この、もふもふのしっぽ……
+CharacterOff
+	イベントスチル52002		エフェクト表
+	レヴァンテイン=トリガー	<Off>						やわらかいお耳……
+Param	character_grayout=true
+CharacterOff
+	レヴァビ	きょとん	2_2
+	レヴァンテイン=トリガー	通常2	1_2
+	レヴァンテイン=トリガー							……もそうなんだけど\nそれよりもね！
+	レヴァンテイン=トリガー							レヴァビちゃんは\nとっーても優しいの！
+	レヴァンテイン=トリガー							それに、とっても偉いの♪
+	レヴァンテイン=トリガー							レヴァはちょっぴりわがままで\n自分が魔界の顔になることばかり\n考えていたけど……
+	レヴァンテイン=トリガー							レヴァビちゃんは\nレヴァたちに譲ってくれたの！
+Tween	レヴァンテイン=トリガー	PunchPosition	y=50				NoWait
+	レヴァンテイン=トリガー							だからレヴァはレヴァビちゃんに\nまなばないといけないのよっ♪
+	レヴァビ	悲しい						で、でも……\nわたくしは……
+	レヴァンテイン=トリガー							いいのいいの♪\nレヴァビちゃんは\n特別なこうはいだわっ♪
+Tween	レヴァビ	PunchPosition	y=50				NoWait
+	レヴァビ	悲しい2						はわわ……\nありがとうございます……！
+CharacterOff
+	ディーア	通常2
+	ディーア							そうか、でもトリガー\nお前はいいのか？
+CharacterOff
+	レヴァビ	きょとん	2_2
+	レヴァンテイン=トリガー	通常2	1_2
+	レヴァンテイン=トリガー							うんっ♪\nだってレヴァは\n正ヒロインになるんだもの♪
+	レヴァンテイン=トリガー							たまには素敵なこうはいに\n晴れ舞台をゆずるのも大事なことよ♪
+CharacterOff
+	レヴァ	通常
+	レヴァ							そうね！\n譲り合いの気持ちはとっても大事♪
+	レヴァ							私もトリガーの意見に賛成かな♪
+CharacterOff
+	レヴァンテイン=ハル	通常	1_3
+	ヘル	通常	3_3
+	ヘル							いいわね\n私も譲ることにするわ
+	レヴァンテイン=ハル							ヘルとの決着はおあずけね\n仕方ないわ！
+CharacterOff
+	レヴァロスト	正装
+	レヴァロスト							もちろん、私は\nお姉ちゃんさえよければ……！
+CharacterOff
+	レヴァンテイン=トリガー	通常2
+	レヴァンテイン=トリガー							よーしっ♪\nこれで決まりねっ♪
+Tween	レヴァンテイン=トリガー	PunchPosition	y=50				NoWait
+	レヴァンテイン=トリガー							マスター様！\nレヴァビちゃんが\n"アプリアイコン"よっ♪
+CharacterOff
+	ディーア	笑い2	2_2
+	レヴァンテイン=トリガー	通常2	1_2
+	ディーア							よしよし、偉いぞトリガー！
+	レヴァンテイン=トリガー							えへへー♪\nなでなで嬉しいな♪
+CharacterOff
+	レヴァ	慌て	1_3
+	ヘル	通常	3_3
+Tween	レヴァ	PunchPosition	y=50				NoWait
+	レヴァ							あーっ！\nトリガーだけずるーい！
+Tween	ヘル	PunchPosition	y=50				NoWait
+	ヘル							わ、私も……\nなでなで、してもらうわよ……！
+CharacterOff
+	ディーア	驚き2
+	ディーア							おいおい、勘弁してくれ\nひとりずつな……！
+CharacterOff
+	レヴァビ	驚き
+	レヴァビ	驚き						きゅーん！\nまいますたぁがお悩みの気配！
+	レヴァビ	笑い拡大
+Tween	レヴァビ	ScaleBy	x=1.2 y=1.2				NoWait
+Tween	レヴァビ	MoveBy	y=-100				NoWait
+	レヴァビ	笑い拡大						さささっ、しゅぱっ、もふっ！
+	レヴァビ	笑い拡大						どうぞ！\nわたくしをもふもふしてください！
+	レヴァビ	笑い拡大						こゃーん♪
+StopBgm
+CharacterOff
+	レヴァ
+	ヘル
+	レヴァ	本気						……うーん？
+	ヘル	通常						どうしたの、お姉ちゃん？
+	レヴァ	慌て						これってつまり……
+	レヴァ							レヴァビちゃんが\n正ヒロインということじゃ……？
+Bgm	コメディ
+Param	character_grayout=false
+CharacterOff
+	レヴァンテイン=トリガー	通常2
+	レヴァンテイン=トリガー							はっ!!\nたしかにっ!!
+CharacterOff
+	レヴァ	通常拡大
+	集中線		エフェクト表
+	レヴァ							こうしてはいられないよ！\nやっぱり、私が\n"アプリアイコン"にならなきゃ！
+CharacterOff
+	レヴァンテイン=トリガー	泣き拡大
+	集中線		エフェクト表
+	レヴァンテイン=トリガー							違うわっ！\nレヴァがヒロインになるのよっ！
+CharacterOff
+	ヘル	通常	3_3
+	レヴァンテイン=ハル	通常	1_3
+	レヴァンテイン=ハル							いいえヒロインはハルのもの！\nなぜならヘルよりも上だから!!
+	ヘル							また、余計なことを……
+CharacterOff
+	レヴァロスト	正装
+	レヴァロスト							え……ええと……\n私は……
+	レヴァロスト							やっぱり……\nお姉ちゃんが幸せなら\nそれでいい、かな……
+CharacterOff
+	レヴァビ	悲しい
+	レヴァビ							こゃーん！
+Tween	レヴァビ	PunchPosition	y=50				NoWait
+	レヴァビ	悲しい2						みんななかよく！\nなのですー!!
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*G_520_01
+EndIf
+EndScenario

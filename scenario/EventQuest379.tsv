@@ -1,0 +1,940 @@
+# E_379_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bg	市街地A
+StopBgm
+	キノコのみ		エフェクト裏
+Param	character_grayout=false
+Bgm	台風_BGM
+FadeIn	black					1.5
+								魔界にキノコリオンが\n降り続けるようになってから
+								三年の月日が経つ<dash=2>
+								<dash=2>きっとあの日\nオレと彼女は、魔界の姿を\n決定的に変えてしまったんだ
+StopBgm						2
+Tween	キノコのみ	MoveBy	y=-154 time=2	linear			NoWait
+Wait						1
+	メイン用イベントロゴ379		エフェクト表			1.5	NoWait
+Wait						4
+FadeOut	black					.7
+CharacterOff
+	ディーア	本気2
+Param	character_grayout=true
+FadeIn	black					1
+Bgm	バトル
+	ディーア	本気2						もう無理だ！\nタケノコリオンが多すぎる！\nオレはこの街を出るぞリディー!!
+CharacterOff
+	タケノコリオン
+Wait						1
+Se	斬1
+FadeOut	white					.1
+FadeIn	white					.3
+Tween	タケノコリオン	ShakePosition	x=20				NoWait
+Wait						.3
+Se	敵殺
+Tween	タケノコリオン	MoveTo	y=-800 time=1.5
+FadeOut	black					.5
+CharacterOff
+	ディーア	悔しい2
+FadeIn	black					.5
+	ディーア	悔しい2						珍しく連続で任務が来ると思ったら\n『タケノコリオンを狩れ』\n『タケノコリオンを狩れ』って!!
+	ディーア	本気2						魔界はいつから\nタケノコリオンパレードを\nやるようになったんだ!!
+CharacterOff
+	タケノコリオン		1_2
+	タケノコリオン2		2_2
+Wait						1
+Se	斬1
+Se	斬1
+FadeOut	white					.1
+FadeIn	white					.3
+Tween	タケノコリオン	ShakePosition	x=20 time=1				NoWait
+Wait						.5
+Tween	タケノコリオン2	ShakePosition	x=20 time=1				NoWait
+Wait						.5
+Se	敵殺
+Tween	タケノコリオン	MoveTo	y=-800 time=1.5				NoWait
+Wait						.5
+Se	敵殺
+Tween	タケノコリオン2	MoveTo	y=-800 time=1.5				NoWait
+Wait						.3
+FadeOut	black					.5
+CharacterOff
+	ディーア	悔しい2
+FadeIn	black					.5
+	ディーア	悔しい2						はぁ、毎日毎日\nタケノコリオンばかり……\nもはやキノコリオンが恋しい……
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	キノコリオンヌ	泣き	3_3
+	タケノコリオン		1_3					キノコを持っているのは\n分かっているッ!!\n大人しく差し出せッ!!
+CharacterOff
+	ディーア	驚き2						……………ん？
+CharacterOff
+	黒グラデーション		エフェクト表
+	キノコリオンヌ	泣き	3_3
+	タケノコリオン		2_3
+Se	打1
+Tween	タケノコリオン	PunchPosition	x=50				NoWait
+Wait						.1
+Se	打1
+Wait						.1
+Se	打1
+	キノコリオンヌ	泣き	3_3
+Tween	キノコリオンヌ	ShakePosition	x=20 time=1				NoWait
+	キノコリオンヌ	泣き						のこーーーっ!!
+CharacterOff
+	ディーア	怒り2						なっ、誰か襲われてる……!?
+CharacterOff
+	黒グラデーション		エフェクト表
+	キノコリオンヌ		3_3
+	タケノコリオン		2_3
+Se	打1
+Tween	タケノコリオン	PunchPosition	x=50				NoWait
+Wait						.1
+Se	打1
+Wait						.1
+Se	打1
+	キノコリオンヌ	泣き	3_3
+Tween	キノコリオンヌ	ShakePosition	x=20
+	キノコリオンヌ	泣き						うひゃあ！　王女なのに、\n王女なのにぃぃ！		1507-18
+Param	character_grayout=true
+CharacterOff	キノコリオンヌ
+	タケノコリオン
+Wait						1
+Se	斬1
+FadeOut	white					.1
+FadeIn	white					.3
+Tween	タケノコリオン	ShakePosition	x=20				NoWait
+Wait						.5
+Se	敵殺
+Tween	タケノコリオン	MoveTo	y=-800 time=1.5
+FadeOut	black					.5
+CharacterOff
+	ディーア	本気2
+FadeIn	black					.5
+	ディーア	本気2						大丈夫かっ!?
+StopBgm
+	キノコリオンヌ	驚き						……はっ!!
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	ディーア	驚き2						怪我はないか？
+Param	character_grayout=true
+CharacterOff
+Se	ラブ
+	キノコリオンヌ	驚き
+Tween	キノコリオンヌ	ShakePosition	x=20				NoWait
+	キノコリオンヌ							あ、あ……！
+CharacterOff
+Bgm	コメディ
+	キノコリオンヌ	拡大	エフェクト表					あーっ！　素敵な人はっけんーー！\n決めたわ！　あなた、\nこの王女キノコリオンヌと結婚ねっ！		1507-03
+	キノコリオンヌ	拡大嬉しい	エフェクト表					嬉しいでしょ？　えへへー♪\nこれで今日からあなたはキノコたちの\n王子さまっ♪
+	キノコリオンヌ	拡大嬉しい	エフェクト表					さぁ今から結婚記念パレードよっ！
+CharacterOff
+	キノコリオンヌ		2_2
+	ディーア	本気2	1_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						なっ!?\nボイス付き、だと……!?
+	キノコリオンヌ	通常						ああっ！　なんてかっこいい\n王子さまなのぉ♪
+	ディーア	怪しい2						………………困ったな\nキノコリオンが恋しいとは言ったが\nこれは予想外だ
+	キノコリオンヌ	嬉しい						ええっ!?\nキノコリオンが恋しい!?\nますます結婚するしかないわっ!!
+	キノコリオンヌ	通常						王子っ！　早く準備を進めましょっ！\nあっ、でもまずは\nキノコリカルパレードの準備を……！
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						それ以上いけない!!
+	ディーア	怪しい2						……というか、ちょっと待ってくれ、\n勢いで何も頭に入ってこなかった
+	キノコリオンヌ	嬉しい						もう、王子ったら♪\nそういうところだぞっ♪
+	ディーア	汗2						あはは……\nえっと、キノコリオンヌって……\nキノコリオンと何か関係が？
+	キノコリオンヌ	通常						もちろん！\n私はキノコリオン王国の王女\nキノコリオンヌよっ！
+	ディーア	本気2						いやキノコリオン王国って何!?
+	キノコリオンヌ	通常						キノコリオンたちの住まう王国に\n決まってるでしょう？
+	ディーア	悔しい2						キノコリオンの国とかあったの!?
+	キノコリオンヌ	通常						当然よっ♪\nそしてあなたは私の王子っ！\nさあ今すぐ結婚をっ!!
+	ディーア	本気2						話の展開が急すぎるって!!
+	ディーア	本気2						そうだ、\n休憩もかねて一回座ろう……な？
+Tween	ディーア	MoveTo	y=-400 time=1				NoWait
+	ディーア	怪しい2						…………はぁ
+	キノコリオンヌ	嬉しい
+Tween	キノコリオンヌ	PunchPosition	y=50				NoWait
+	キノコリオンヌ	嬉しい						結婚はー!?
+	ディーア	悔しい2						落ち着けって！\nせ、せめて今抱えてる問題を解決\nしてから考えさせてくれ！
+	キノコリオンヌ	嬉しい						はぁぁ！　なるほどっ♪\n王子はとっても思慮深いのねっ！
+	キノコリオンヌ	通常						王子が抱える問題は\nお妃となる私の問題でもあるわ！
+	キノコリオンヌ	嬉しい						ここはひとカサ脱いじゃうわよーっ♪
+	ディーア	驚き2						えっ？　いや、でも\nオレが抱えてるのは……
+	キノコリオンヌ	通常						もちろん、\n王子の悩みはわかってるわっ！\nズバリ……
+CharacterOff
+	キノコリオンヌ	拡大	エフェクト表					タケノコリオンねっ!!
+CharacterOff
+	キノコリオンヌ	嬉しい	2_2
+	ディーア	驚き2	1_2					……え？\nなんで分かるんだ……？
+	キノコリオンヌ	嬉しい						だってこの状況なら、\n明らかじゃないかしらっ！
+CharacterOff
+Param	character_grayout=false
+	タケノコリオン		2_3
+	タケノコリオン2		1_3
+	タケノコリオン3		3_3
+Se	ポップアウト
+Tween	タケノコリオン	PunchPosition	y=70				NoWait
+Tween	タケノコリオン2	PunchPosition	y=50				NoWait
+Tween	タケノコリオン3	PunchPosition	y=50				NoWait
+Wait						1.3
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						うわっ!?\nさ、さっきより増えてる……!!
+	キノコリオンヌ							この時期は増殖するのが早いのっ!!\nそれが王子の悩みでしょう？
+	ディーア	怪しい2						え、ああ、まあ……そうだけど……
+	キノコリオンヌ	嬉しい						それなら私に任せなさいっ！
+	ディーア	驚き2						え？ でも、こんなに大量の\nタケノコリオン……どうやって？
+StopBgm
+CharacterOff
+	キノコリオンヌ	拡大	エフェクト表					ねぇ\n今から生えるよ
+CharacterOff
+	ディーア	怪しい2						………………はぇ？
+FadeOut	white					.7
+CharacterOff
+Param	character_grayout=false
+	カバー上部		カバー上部
+	キノコのみ		エフェクト下部
+Se	シナリオスタート
+FadeIn	white					1
+Wait						.5
+Tween	キノコのみ	MoveBy	y=-154 time=3
+CharacterOff
+	メイン主人公		エフェクト表
+	ディーア	<Off>						なっ……!?
+CharacterOff
+Bgm	コメディ
+	メインオンヌ		エフェクト表
+	ディーア	<Off>						ちょっ……!!
+CharacterOff
+	メインビジュアル
+	ディーア	<Off>						空から……き、キノコリオンが……!?
+FadeOut	white					.7
+CharacterOff
+Param	character_grayout=true
+	キノコリオンヌ		2_2
+	ディーア	驚き2	1_2
+FadeIn	white					.5
+	キノコリオンヌ							キノコリオン王国の王女たるもの、\nこのくらい簡単よっ！
+	ディーア	本気2						なんですと……!?
+	キノコリオンヌ							ほら、見て王子！
+CharacterOff
+Bgm	バトル
+	キノコリオン		画面外_左
+	タケノコリオン
+Se	風1
+Tween	キノコリオン	MoveTo	x=-90 time=1				NoWait
+Wait						.5
+Se	打1
+Tween	キノコリオン	PunchPosition	x=10 y=50				NoWait
+Wait						.5
+Se	敵殺
+Tween	タケノコリオン	MoveTo	y=-800 time=1.5
+FadeOut	black					.5
+CharacterOff
+Bgm	平和
+FadeIn	black					.5
+	ディーア	驚き2						あ……
+	キノコリオンヌ							これで王子の悩みは\n万事解決、でしょう？
+	ディーア	怪しい2						そ、そう、なるのか……？
+	キノコリオンヌ							さあ、王子！\n私と結婚!!　するわよねっ!!
+	ディーア	汗2						やっぱりその流れになるんです!?
+*E37901Q
+	ディーア	怪しい2						(どうする？)
+CharacterOff
+Selection	*E379011							強い意志で結婚するノコ！
+Selection	*E379012							強い意志でお断りするノコ！
+Selection	*E379013							ちょっと待ってくれ!!
+*E379011
+	ディーア	笑い2						ああ、もちろん結婚だ！\n結婚するしかない！
+	キノコリオンヌ	嬉しい						ほ、ほんとに!?　やったぁ!!!!\n王子ならきっと受けてくれると\n思ってたノコッ！
+	ディーア	怪しい2						……『ノコ』？
+	キノコリオンヌ	驚き
+Tween	キノコリオンヌ	PunchPosition	y=50				NoWait
+	キノコリオンヌ	驚き						はっ!! ……こほん\nノコなんて言ってない言ってない……
+	キノコリオンヌ	通常						はぁぁ、王子と結婚なんて\n夢のようだわっ…！
+	キノコリオンヌ	嬉しい						早速結婚式の準備をしましょうっ！
+	ディーア	笑い2						ああ、そうだな！
+FadeOut	black					.5
+CharacterOff
+Bg	教会前
+Bgm	凱旋
+	ディーア	通常正装2	1_2
+	キノコリオンヌ	通常	2_2
+FadeIn	black					.5
+	ディーア	通常正装2						キノコリオンヌ……幸せにするよ
+	キノコリオンヌ	通常						やんっ、王子かっこいい……♪		1507-15
+	ディーア	にやけ正装2						一緒にキノコサウナ、行こうな
+	キノコリオンヌ	嬉しい						……はい♪
+CharacterOff
+	キノコリオンヌ	<Off>						こうして二人は、いつまでも\n幸せに暮らしましたとさ♪
+FadeOut	white					.5
+StopBgm
+CharacterOff
+Param	character_grayout=false
+	白背景		エフェクト裏
+	イベントロゴ379		エフェクト表			2	NoWait
+FadeIn	white					.5
+	　　　　　　　　　　							　　　　\n　　　　　　<color=blue>近日ロードショー</color>
+FadeOut	white					.5						結婚エンド
+*E379051
+CharacterOff
+Bg	酒場1F
+	キノコリオンヌ
+FadeIn	white					.5
+	キノコリオンヌ							……という映画はどうかしらっ♪
+	ディーア	怪しい2						………………
+Selection	*E379041							却下
+*E379041
+	ディーア	怪しい2						却下だ
+Bgm	コメディ
+	キノコリオンヌ
+Tween	キノコリオンヌ	PunchPosition	y=50				NoWait
+	キノコリオンヌ	驚き						きゃっかーーー!?\nなんでノコ!?　どうしてノコォッ！\nもう修正は無理ノコ！
+	キノコリオンヌ	泣き						王子が私の幻覚を見ている間の\n伝説に残る1カットのみで\n撮り終わっちゃったノコーー!!
+	ディーア	本気2						撮ってたんかいっ!!
+	ディーア	怪しい2						とにかく勝手に映画なんて……
+FadeOut	white					.5
+StopBgm
+CharacterOff
+	ディーア	驚き2
+FadeIn	white					.5
+	ディーア	驚き2						……あれ？
+FadeOut	white					.5
+FadeIn	white					.5
+Bgm	絶望
+	ディーア	悔しい2						なんだ……？\n眩暈が……
+ImageEffect	SpriteCamera	Blur
+FadeOut	black					.5
+ImageEffectOff	SpriteCamera	Blur
+CharacterOff
+	リディ	笑い2	画面外_右
+	ディーア	悔しい2	1_2
+Bg	酒場の地下
+Wait						1
+FadeIn	black					.5
+Se	走る
+Tween	リディ	MoveTo	x=90			2	NoWait
+	リディ	笑い2						マスター！\n準備できた？
+	ディーア	怪しい2						リディ、ちょっと待ってくれ\n今キノコリオンヌと話して……
+	リディ	驚き2						……ふぇ？\nキノコリオンヌってなに？
+	ディーア	驚き2						なにって、\nキノコリオンのお姫様で……\nあ、あれ？
+FadeOut	white					.3
+CharacterOff
+ZoomCamera	SpriteCamera	1.5	-350	250		.1
+FadeIn	white					.3
+Wait						1
+ZoomCamera	SpriteCamera	1.5	350	250		1.5
+Wait						1
+FadeOut	white					.3
+ZoomCamera	SpriteCamera	1				.1
+FadeIn	white					.3
+	ディーア	怪しい2						さっきまでここに……
+	リディ	驚き2						もう、寝ぼけてるの？\nそんなのいないよ？
+	ディーア	悔しい2						ええっ!?\n……幻でも見てたのか……？
+	リディ	笑い2						それより、今日はパレードに\n連れてってくれるって\n約束だったでしょ？
+	ディーア	驚き2						……パレードって、まさか……
+Bgm	コメディ
+	リディ	笑い2						忘れちゃったの!?\nキノコリカルパレードだよ♪
+	ディーア	悔しい2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	悔しい2						そっちはあるんかいっ!!
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_379_01
+EndIf
+EndScenario
+*E379012
+	ディーア	本気2						強い意志でお断りするノコ！
+Bgm	絶望
+	キノコリオンヌ	驚き
+Tween	キノコリオンヌ	PunchPosition	y=50				NoWait
+	キノコリオンヌ	驚き						そっそんなぁ!!\n嘘でしょ、王子!?
+	キノコリオンヌ	驚き						キノコリオン王国の王女の\n申し入れを、断るの!?
+	キノコリオンヌ	泣き						本当に？　本当にそれでいいノコ!?\nよく考えて欲しいノコォ!!
+	ディーア	怪しい2						うう……えーと……
+*E37902Q
+	ディーア	怪しい2						（どうする？）
+CharacterOff
+Selection	*E379021							絶対結婚はお断りノコ！
+Selection	*E379013							ちょっと待って欲しい！
+*E379021
+	ディーア	本気2						絶対結婚はお断りノコ！
+	キノコリオンヌ	驚き						そ、そんなぁ……
+	ディーア	汗2						ご、ごめん\nでも突然結婚って言われても困るノコ
+	ディーア	怪しい2						………………ん？
+	ディーア	本気2						なんだ、喋ると違和感が……ノコ
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							ノコッ！？
+	ディーア							なんだノコッ！　語尾が変ノコッ！
+Bgm	コメディ
+	キノコリオンヌ	通常						王子……\n王子は選ぶ選択肢を間違えたノコよ!!
+	ディーア	本気2						な、なんだってノコ!?
+	キノコリオンヌ	通常						ふっふっふ！\n王子はキノコリオンを甘く見過ぎ\nているわっ！
+	キノコリオンヌ	嬉しい						たかがキノコリオン！\nされどキノコリオンよッ！
+	ディーア	怪しい2						うん？
+	キノコリオンヌ	通常						さっきのシーンを\nよく思い出すのよっ！
+	ディーア	怪しい2						さっきのシーンノコ？
+FadeOut	black					.5
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+	メインビジュアル							 
+FadeIn	black					.5
+CharacterOff
+Param	character_grayout=false
+Se	レベルアップ
+	メイン主人公		エフェクト表
+	キノコリオンヌ	<Off>						王子はここで\n私が生やしたキノコに触れたノコ!!
+Param	character_grayout=true
+FadeOut	black					.5
+CharacterOff
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	black					.5
+	ディーア	本気2						ま、まさか……ノコッ！
+	キノコリオンヌ							そう!!　もう王子は私と仲良く\nキノコサウナに入るしかないノコ！
+	ディーア	驚き2						……キノコサウナノコ？
+	キノコリオンヌ							そうっ！　熱々の蒸気を浴びて\nひゅんっと冷ますノコっ！\n最高にととのっちゃうノコぉ♪
+	ディーア	本気2						はっ、もしかして、\nこの語尾になる条件は……\nさっきの選択肢だったノコッ!?
+	キノコリオンヌ							ふふっ♪　その通りノコ♪\nでも心配しないでね、王子？
+	キノコリオンヌ							私の国の方言が完璧になるだけノコ♪
+	ディーア	怪しい2						なるほどノコ……？
+	キノコリオンヌ							さぁ、王子！\n結婚記念パレードをやるノコっ！
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						って、ずっとこの語尾じゃ\n困るノコーーーッ!!
+FadeOut	black					.5
+CharacterOff
+Param	character_grayout=false
+	キノコのみ		エフェクト表
+FadeIn	black					.5
+StopBgm
+	　　　　　　　　　							それから、キノコリオンヌは\n魔界各地にキノコを生やしたノコ
+	　　　　　　　　　							タケノコ大量発生のこの時期、\nキノコを自在に生やす\nキノコリオンヌは有難がられたノコ
+	　　　　　　　　　							しかしノコ<dash=2>
+Param	character_grayout=true
+FadeOut	black					.5
+CharacterOff
+Bgm	緊迫
+	キノコシツジ
+FadeIn	black					.5
+	キノコシツジ							王女は連れて帰るノコ！
+CharacterOff
+	ディーア	怒り2	1_2
+	キノコリオンヌ	泣き	2_2					じいや、やめてぇ！\nそれは方言なのよっ！
+	ディーア	怒り2						話してもダメだ、キノコリオンヌ！\nここは一旦逃げるノコ！
+	キノコリオンヌ	通常						やんっ！\n王子と愛の逃避行ねっ！
+Se	走る
+Tween	ディーア	MoveTo	x=-800 time=1.5				NoWait
+Se	走る
+Tween	キノコリオンヌ	MoveTo	x=-1000 time=1.5
+Wait						.5
+CharacterOff
+	キノコシツジ
+Tween	キノコシツジ	RotateTo	y=180 time=0
+Tween	キノコシツジ	ShakePosition	y=50				NoWait
+	キノコシツジ							マツノコーッ!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	草原A
+FadeIn	black					.5
+	キノコリオンヌ		2_2
+	ディーア	悔しい2	1_2					はぁ……ここまでくれば……ノコ
+Bgm	絶望
+	キノコリオンヌ		2_2
+Tween	キノコリオンヌ	ShakePosition	x=10 time=1				NoWait
+	キノコリオンヌ							さすがね王子……♪\nやっぱり、私の王子レーダーに\n狂いはなかった……
+	ディーア	驚き2						……!?\nキノコリオンヌ、しっかりするノコ！
+CharacterOff	キノコリオンヌ					2
+Wait						1
+	キノコリオンヌ		2_2			2		私、力を使い過ぎたみたい……				ノコエンド
+	ディーア	悔しい2						なっ!?\n無理をしてたノコ……!?
+CharacterOff	キノコリオンヌ					2
+Wait						1
+	キノコリオンヌ	嬉しい	2_2			2		王子が、人々が喜んでくれるのが\n嬉しくて……つい……
+Se	光1
+CharacterOff	キノコリオンヌ					2.5
+	キノコリオンヌ	<Off>						さよなら王子……\n私、王子に会えて、嬉しかった……
+	ディーア	悔しい2						消え、た……そんな……ノコ
+	ディーア	悔しい2						いや、まだノコ！　まだ\nキノコリオンヌの魔力を感じるノコ！\n彼女は魔界から消えちゃいないノコ!!
+	ディーア	本気2						キノコリオンヌ、どこノコ!!\nキノコリオーーーーーンヌノコ!!
+StopBgm						1
+FadeOut	black					.5
+CharacterOff
+Bg	廃墟A
+	キノコシツジ
+FadeIn	black					.7
+Bgm	絶望
+	キノコシツジ							王女をどこにやったノコ！
+	ディーア	悔しい2						くそノコっ！　邪魔をするなノコ！
+	ディーア	本気2						オレはただ……\nもう一度キノコリオンヌに……
+	ディーア	本気2						会いたいんノコ!!
+FadeOut	black					.5
+CharacterOff
+StopBgm
+FadeIn	black					.5
+								果たして物語の結末は<dash=2>
+FadeOut	black					.5
+	メインビジュアル
+Param	character_grayout=false
+FadeIn	black					.5
+								\n　　　　 <color=blue>近日ロードショーノコ</color>
+FadeOut	black					.5
+CharacterOff
+Param	character_grayout=true
+	キノコリオンヌ
+Bg	酒場1F
+StopBgm
+FadeIn	black					.5
+	キノコリオンヌ							……という映画はどうかしらっ♪
+	ディーア	怪しい2						………………
+Selection	*E379061							却下ノコ
+*E379061
+	ディーア	怪しい2						却下ノコ
+Bgm	コメディ
+	キノコリオンヌ	驚き
+Tween	キノコリオンヌ	PunchPosition	y=50				NoWait
+	キノコリオンヌ	驚き						きゃっかーーー!?\nなんでノコ!?　どうしてノコォッ！\nもう修正は無理ノコ！
+	キノコリオンヌ	泣き						王子が私の幻覚を見ている間の\n伝説に残る1カットのみで\n撮り終わっちゃったノコーー!!
+	ディーア	本気2						撮ってたんかいノコっ!!
+	ディーア	本気2						とにかく勝手に映画なんて\nダメノコ……！
+StopBgm
+	ディーア	驚き2
+FadeOut	white					.5
+FadeIn	white					.5
+	ディーア	驚き2						あれノコ？
+FadeOut	white					.5
+FadeIn	white					.5
+Bgm	絶望
+	ディーア	悔しい2						なんだノコ……？\n眩暈がするノコ……？
+ImageEffect	SpriteCamera	Blur
+FadeOut	black					.5
+ImageEffectOff	SpriteCamera	Blur
+CharacterOff
+	リディ	笑い2	画面外_右
+	ディーア	悔しい2	1_2
+Bg	酒場の地下
+Wait						1
+FadeIn	black					.5
+Se	走る
+Tween	リディ	MoveTo	x=90			2	NoWait
+	リディ	笑い2						マスター！\n準備できたノコ？
+	ディーア	怪しい2						リディ、ちょっと待ってくれノコ\n今キノコリオンヌと話してるノコ……
+	リディ	驚き2						……ふぇ？\nキノコリオンヌってなにノコ？
+	ディーア	驚き2						なにって、\nキノコリオンの王女様で……\nあ、あれノコ？
+FadeOut	white					.3
+CharacterOff
+ZoomCamera	SpriteCamera	1.5	-350	250		.1
+FadeIn	white					.3
+Wait						1
+ZoomCamera	SpriteCamera	1.5	350	250		1.5
+Wait						1
+FadeOut	white					.3
+ZoomCamera	SpriteCamera	1				.1
+FadeIn	white					.3
+	ディーア	怪しい2						さっきまでここにいたノコ……
+	リディ	驚き2						もう、寝ぼけてるノコ？\nそんなのいないノコよ？
+	ディーア	悔しい2						………………え？　ノコ？\n……幻でも見てたのかノコ？
+	リディ	笑い2						それより、今日はパレードに\n連れてってくれるって\n約束だったノコよ？
+	ディーア	驚き2						……パレードって、まさか……
+Bgm	コメディ
+	リディ	笑い2						忘れちゃったノコ!?\nキノコリカルパレードノコよ♪
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						そっちはあるんノコーーっ!?
+	リディ	笑い2						ノコノコノコー♪
+	ディーア	本気2						ノコノコーッ!!
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_379_01
+EndIf
+EndScenario
+*E379013
+Bgm	平和
+	ディーア	本気2						ちょっと待ってくれ!!
+	キノコリオンヌ							どうしたの、王子？
+	ディーア	怒り2						聞きたいことがあるんだ
+	ディーア	怒り2						ちょっとまだ信じがたいけど、\nキミはキノコリオン王国の\n王女なんだろ？
+	キノコリオンヌ	嬉しい						ええ、その通りよっ♪
+	ディーア	怪しい2						そんな身分の高いキミが、\nこんなところにいていいのか？
+	キノコリオンヌ	驚き						……！\nお願いノコッ！どのキノコにも\n喋らないで欲しいノコッ！
+	キノコリオンヌ	泣き						抜け出してきたことは\n内緒にしてるノコッ！
+	ディーア	怒り2						王国を放ってきたのか……？
+	キノコリオンヌ	驚き						いけないとは思ってるわ……\nでもどうしても\n確かめたいことがあって!!
+	ディーア	怪しい2						確かめたいこと？
+	キノコリオンヌ	驚き						私は毎日、パレードに出かけては\n魔剣使いに叩かれて帰ってくる\nキノコたちを見てきたの……
+	ディーア	怪しい2						(おや、身に覚えがあるような……？)
+	キノコリオンヌ	驚き						そして思ったの……
+	キノコリオンヌ	泣き						キノコリオンは魔界全てから\n嫌われてるんじゃないかって！
+	キノコリオンヌ	泣き						キノコリオンは本当に\n必要な存在なのか、この目で\n確かめたいと思ったノコォッ!!
+	ディーア	怪しい2						キノコリオンヌ……\n『ノコ』って言ったりするんだな
+	キノコリオンヌ	驚き
+Tween	キノコリオンヌ	PunchPosition	y=50				NoWait
+	キノコリオンヌ	驚き						はっ！ そんなこと言ってたノコッ!?\nひゃあっ！ またぁっ！\nわ、忘れて、王子ぃっ!!
+	ディーア	通常2						とにかく、キノコリオンヌがどうして\nここに来たのかは分かったよ\nオレで良ければ、協力させてくれ
+	キノコリオンヌ	通常						えっ、本当に……？
+	ディーア	あはは2						キミはオレの悩みを解決してくれた\nだから、今度はオレの番だ！
+	キノコリオンヌ	通常						やん、王子かっこいい……♪		1507-15
+FadeOut	black					.5
+CharacterOff
+FadeIn	black					.5
+	　　　　　　　　　　							　　　　　\n　　　　　　<dash=2>翌日<dash=2>
+FadeOut	black					.5
+CharacterOff
+	ディーア	笑い2
+FadeIn	black					.5
+	ディーア	笑い2						これでよし！
+	キノコリオンヌ	通常						『タケノコリオン対策に！\n　キノコリオンをお届けします！』？
+	キノコリオンヌ	通常						王子、こんな詐欺みたいな張り紙で\n人が来るの？
+	ディーア	通常2						まあ見てろって……
+FadeOut	black					.5
+CharacterOff
+	酒場のおばちゃん		画面外_左
+FadeIn	black					.5
+Se	走る
+Tween	酒場のおばちゃん	MoveTo	x=0 time=1.5				NoWait
+	酒場のおばちゃん							あのーすいません、張り紙を見た\nんですけど……
+CharacterOff
+	キノコリオンヌ	驚き
+Tween	キノコリオンヌ	PunchPosition	y=50				NoWait
+	キノコリオンヌ	驚き						えっ、本当に……？
+	ディーア	笑い2						ほら、さっそく出番だぞ！
+	キノコリオンヌ	通常						……!!\nええ、まかせておいて!!\n魔界の危機は、この私が救うわよー！
+FadeOut	white					.5
+StopBgm
+CharacterOff
+Param	character_grayout=false
+	カバー上部		カバー上部
+	キノコのみ		エフェクト表
+Se	シナリオスタート
+FadeIn	white					1
+Wait						.5
+FadeOut	black					.5
+Param	character_grayout=true
+CharacterOff
+	キノコリオン		画面外_左
+	タケノコリオン
+FadeIn	black					.5
+Se	風1
+Tween	キノコリオン	MoveTo	x=-90 time=0.5				NoWait
+Wait						.5
+Se	打1
+Tween	キノコリオン	PunchPosition	x=10 y=50				NoWait
+Wait						.5
+Se	敵殺
+Tween	タケノコリオン	MoveTo	y=-800 time=1.5
+Tween	キノコリオン	MoveTo	x=800 time=1				NoWait
+FadeOut	black					.5
+CharacterOff
+Bgm	平和
+FadeIn	black					.5
+	旅人							ありがとうございます！\nキノコリオンのおかげで、\nタケノコに悩まされずに済みます！
+	酒場のおばちゃん
+Tween	酒場のおばちゃん	PunchPosition	y=50				NoWait
+	酒場のおばちゃん							キノコリオンばんざーい!!
+CharacterOff
+	ディーア	笑い2						やったな、キノコリオンヌ!!
+	キノコリオンヌ	嬉しい						やん!!　王子のおかげで、私の人生\nととのっちゃうぅぅーーー♪
+FadeOut	black					.5
+CharacterOff
+Param	character_grayout=false
+	カバー上部		カバー上部
+	キノコのみ		エフェクト表
+FadeIn	black					.5
+	キノコのみ							それから、キノコリオンヌは人々に\n求められるまま、魔界各地で\nキノコリオンを生やした
+	キノコのみ							タケノコ大量発生のこの時期、\nキノコを自在に生やす\nキノコリオンヌはとても有難がられた
+FadeOut	black					.5
+Param	character_grayout=true
+CharacterOff
+FadeIn	black					.5
+	キノコリオンヌ							さあ、行きなさいキノコたちっ！
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコーーーーッ!!
+Se	風1
+Tween	キノコリオン	MoveTo	x=800 time=1.5				NoWait
+CharacterOff
+	ディーア	通常2	1_2
+	キノコリオンヌ		2_2
+Tween	キノコリオンヌ	PunchPosition	y=50 time=1.5				NoWait
+	キノコリオンヌ	通常						はぁ、はぁ……王子！\n今日も私のキノコたちが\n人を助けたわーーっ！
+	ディーア	あはは2						ああ、大活躍だな！\nこれで魔菌機関の任務も達成だ！
+	キノコリオンヌ	通常						王子のおかげよっ!!
+	キノコリオンヌ	嬉しい						……私知らなかった！\nキノコが必要な人がこんなに\nたくさんいるなんてっ！
+	ディーア	怪しい2						そりゃあ、ルビーは欲しいしな……
+	キノコリオンヌ	通常						何か言った？
+	ディーア	汗2						いや！\nタケノコリオン倒してくれて\nすごく助かるなー！
+	キノコリオンヌ	嬉しい						えへへー♪\nこの調子で、どんどん\nタケノコたちを減らして……
+CharacterOff
+	キノコリオン							ノコノコッ！
+CharacterOff
+	キノコリオンヌ	驚き
+Tween	キノコリオンヌ	PunchPosition	y=50				NoWait
+	キノコリオンヌ	驚き	2_2
+	ディーア	驚き2	1_2					ん……？\nなんだ、このキノコリオン？
+Bgm	緊迫
+	キノコリオンヌ	驚き						はわぁっ!!\nあ、あなたは……じいや!!
+	ディーア	驚き2						じいや？
+	キノコリオンヌ	驚き						うちのキノコシツジよ！
+	ディーア	怪しい2						キノコシツジとは
+CharacterOff
+	キノコシツジ							ノコノコッ！\nキノコッノッコーノコ！
+CharacterOff
+	ディーア	怪しい2	1_2
+	キノコリオンヌ	驚き	2_2					なっ！\nいきなり何を言い出すのかしらっ！
+	ディーア	怪しい2						……そもそも何て言ってる？
+CharacterOff
+	キノコシツジ							ノコーッ！ノコノコッ!!
+CharacterOff
+	ディーア	怪しい2	1_2
+	キノコリオンヌ	泣き	2_2					怒ってもだめよっ！\nサウナを取り上げられたって、\n私はまだ帰らないんだからぁっ！
+	ディーア	驚き2						（ああ、王国に帰るか帰らないか\n　の話か……？）
+CharacterOff
+	キノコシツジ
+Tween	キノコシツジ	PunchPosition	y=50				NoWait
+	キノコシツジ							ノコッノコッ！\nノコノコカエルノコ！
+CharacterOff
+	キノコリオンヌ	驚き	2_2
+	ディーア	驚き2	1_2					カエルノコ!?
+	キノコリオンヌ	泣き						何を言われても私は帰らないわっ！
+CharacterOff
+	キノコシツジ
+Tween	キノコシツジ	ShakePosition	x=20 time=1				NoWait
+	キノコシツジ							ノコッノコノコノコノコッ！\nホウシッ!!
+CharacterOff
+	ディーア	怪しい2	1_2
+	キノコリオンヌ	驚き	2_2					じいや！\nノコノコ言うのをやめなさい！\nそれは方言だと何回言ったら……！
+	ディーア	怪しい2						（あれ方言だったのか……）
+CharacterOff
+	キノコシツジ							……王女様、さあ帰りましょう
+CharacterOff
+	キノコリオンヌ	泣き	2_2
+	ディーア	本気2	1_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						しゃべった……!!!!
+CharacterOff
+	キノコシツジ							……これ以上は見ていられません
+CharacterOff
+	キノコリオンヌ	驚き	2_2
+	ディーア	本気2	1_2					わりと普通に喋る……!!
+	キノコリオンヌ	泣き						帰らないわッ！\n私は、私は理想の王子を見つけたの！
+	キノコリオンヌ	泣き						それに、まだ\nやらなきゃいけないことが\nあるんだからぁっ！
+CharacterOff
+	キノコシツジ		2_3
+	キノコリオンヌ	驚き	3_3
+Tween	キノコシツジ	MoveBy	x=-30 time=1				Add
+Tween	キノコリオンヌ	MoveBy	x=-30 time=1				NoWait
+	キノコシツジ							わがままを言わないでください
+Tween	キノコシツジ	MoveBy	x=-30 time=1				Add
+Tween	キノコリオンヌ	MoveBy	x=-30 time=1				NoWait
+	キノコリオンヌ	泣き						いやよ、いやだってばぁっ!!\n王子、助けてぇ!!
+Tween	キノコシツジ	MoveBy	x=-30 time=1				Add
+Tween	キノコリオンヌ	MoveBy	x=-30 time=1				NoWait
+Wait						1
+CharacterOff
+*E37903Q
+	ディーア	怪しい2						(どうする……？)
+CharacterOff
+Selection	*E379031							引き留める
+Selection	*E379032							引き留めない
+*E379032
+	ディーア	笑い2						王女が心配な気持ち、よく分かります\nさあ、どうぞ連れて帰って！
+CharacterOff
+	キノコリオンヌ	拡大驚き	エフェクト表					嘘……？\n嘘でしょ、王子ぃ!!
+	キノコリオンヌ	拡大驚き	エフェクト表					嘘だと言ってよぉぉぉぉ!!\n王子ぃぃぃぃ!!!!
+CharacterOff
+	キノコリオンヌ	泣き						うわーーーーん!!
+CharacterOff
+	キノコシツジ
+Tween	キノコシツジ	ShakePosition	x=30 time=1				NoWait
+	キノコシツジ							貴様それでも\nキノコリオン王国の王子かっ!?
+CharacterOff
+	ディーア	汗2						いやオレが怒られるの!?
+CharacterOff
+	キノコリオン							もう一度選び直せぇーーっ!!
+CharacterOff
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	本気2						は、はいぃーーっ!!
+Jump	*E37903Q
+*E379031
+	ディーア	本気2						……待ってくれ
+	キノコリオンヌ	通常						王子……っ!!
+Bgm	凱旋
+	ディーア	悔しい2						まだ、キノコリオンヌには\nやるべきことがあるんだ
+	ディーア	本気2						王女として知りたいことがあって\nオレはそれを手伝いたい\nただそれだけなんだ
+	ディーア	悔しい2						キノコリオンヌだって、\nずっと王国に戻らないって\n言ってるわけじゃない
+	ディーア	怒り2						だから……\nもう少し待ってくれないか？
+	キノコシツジ							………………
+	ディーア	悔しい2						…………頼む
+StopBgm
+	キノコシツジ							ダメノコ
+Bgm	緊迫
+	ディーア	汗2						だめかー!!
+	キノコシツジ							連れて帰るノコ！
+CharacterOff
+	ディーア	汗2	1_2
+	キノコリオンヌ	泣き	2_2					だから方言はやめてよぉっ！
+	ディーア	本気2						話してもダメだ、キノコリオンヌ！\nここは一旦逃げるぞ！
+	キノコリオンヌ	嬉しい						やんっ！\n王子と愛の逃避行ねっ！
+Se	走る
+	ディーア	悔しい2
+Tween	ディーア	MoveTo	x=-800 time=1				NoWait
+Se	走る
+Tween	キノコリオンヌ	MoveTo	x=-1000 time=1
+CharacterOff
+	キノコシツジ
+Tween	キノコシツジ	RotateTo	y=180 time=0
+Tween	キノコシツジ	ShakePosition	y=50				NoWait
+	キノコシツジ							マツノコーッ!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	草原A
+FadeIn	black					.5
+	ディーア	悔しい2	1_2					はぁ……ここまでくれば……
+	キノコリオンヌ		2_2
+Tween	キノコリオンヌ	ShakePosition	x=10 time=1				NoWait
+	キノコリオンヌ							さすがね王子……♪\nやっぱり、私の王子レーダーに\n狂いはなかった……
+	ディーア	驚き2						……!?\nキノコリオンヌ、そんな……
+CharacterOff	キノコリオンヌ					2
+Wait						1
+	キノコリオンヌ		2_2			2		私、力を使い過ぎたみたい……
+	ディーア	悔しい2						なっ!?\n無理をしてたのか……!?
+CharacterOff	キノコリオンヌ					2
+Wait						1						あ
+	キノコリオンヌ	嬉しい	2_2			2		王子が、人々が喜んでくれるのが\n嬉しくて……つい……
+Se	光1
+CharacterOff	キノコリオンヌ					2.5
+	キノコリオンヌ	<Off>						さよなら王子……\n私、王子に会えて、嬉しかった……
+	ディーア	悔しい2						消え、た……そんな……
+	ディーア	悔しい2						いや、まだだ！　まだ\nキノコリオンヌの魔力を感じる！\n彼女は魔界から消えちゃいない!!
+	ディーア	本気2						キノコリオンヌ、どこだ!!\nキノコリオンヌーーーーーー!!
+FadeOut	black					.7
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	キノコシツジ
+Bg	草原A
+Bgm	緊迫
+FadeIn	black					.7
+	キノコシツジ							だから言っただろう……
+	キノコシツジ							取り返しのつかないことになると
+Param	character_grayout=true
+FadeOut	black					.5
+CharacterOff
+Bg	市街地A
+	リディ	驚き2	2_2
+	ディーア	本気2	1_2
+FadeIn	black					.5
+	リディ	驚き2						大変だよマスター！\nキノコリオンの次は\nタケノコリオンが降ってきた！
+	ディーア	悔しい2						なん……だと……!?
+FadeOut	black					.5
+CharacterOff
+Bg	市街地B
+	　　　　　　　　　　
+FadeIn	black					.5
+	　　　　　　　　　　							『キノコリオンとタケノコリオンの\n　戦争が各地で勃発し、\n　魔界が大混乱しています』
+FadeOut	black					.5
+Bg	宇宙
+	ディーア	悔しい2
+FadeIn	black					.5
+Bgm	キノコリオン
+	ディーア	悔しい2						なんなんだ……あの\n巨大なメカキノコリオンは……!?
+FadeOut	black					.5
+Bg	魔術空間
+	ディーア	本気2
+Bgm	神社
+FadeIn	black					.5
+	ディーア	本気2						なんで、どうして\nキノコリオンとタケノコリオンが\n傷つけ合わなきゃいけないんだ！
+	ディーア	悔しい2						悪いのは……\n全部オレたちじゃないか……!!
+FadeOut	black					.5
+Bg	塩湖
+	キノコシツジ					0
+FadeIn	black					.5
+StopBgm
+	キノコシツジ							王女をどこにやったノコ！
+	ディーア	悔しい2						くそっ！　邪魔をするな！
+Bgm	風属性バトル
+	ディーア	怒り2						オレはただ……\nもう一度キノコリオンヌに……
+	ディーア	本気2						会いたいんだ!!
+FadeOut	white					.5
+CharacterOff						0
+FadeIn	white					.5
+	　　　　　　　　　							果たして物語の結末は<dash=2>
+FadeOut	white					.5
+	白背景		エフェクト裏
+	イベントロゴ379		エフェクト表			2	NoWait
+StopBgm						0
+FadeIn	white					.5
+Wait						4
+	　　　　　　　　　
+FadeOut	white					1
+CharacterOff
+Bg	カジノ
+	キノコリオンヌ	嬉しい
+Wait						1
+Bgm	マイページ
+FadeIn	white					.5
+	キノコリオンヌ	嬉しい
+Tween	キノコリオンヌ	PunchPosition	y=50				NoWait
+	キノコリオンヌ	嬉しい						さぁ、それでは！\n一足先に観てくれた人に\n感想を聞いちゃうノコよぉ♪
+	旅人							いやぁ、今回の映画も期待どおり!!\nとても面白かったです！
+	酒場のおばちゃん
+Tween	酒場のおばちゃん	PunchPosition	y=100				NoWait
+	酒場のおばちゃん							キノコリオンヌちゃん、最高ー!!
+	キノコリオン							ノコノコッ！\n（主人公が親指を立てて溶鉱炉に沈む\n　シーンは涙なしでは見れないノコ）
+	魔剣機関の人
+Tween	魔剣機関の人	ShakePosition	x=20 time=1				NoWait
+	魔剣機関の人							号泣しました……\n魔剣機関が爆破されるシーンは\n何回でも見たいですね
+	リディ	笑い2						リディというヒロインがいながら\n結婚するんだぁ？　へぇー？
+CharacterOff
+	タケノコリオン		2_2
+Tween	タケノコリオン	RotateTo	y=180 time=0
+	キノコリオン		1_2
+	タケノコリオン							キノコなんて\nすぐに滅ぼしてやろうッ!!
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+	キノコリオン							ノコノコッ！\n（なんだとこのタケノコォ!!）
+	タケノコリオン							やるのかこのキノコ風情がッ!!
+CharacterOff
+	キノコリオンヌ	通常						『天キノコ』もうすぐ公開！\nみんな、お楽しみにぃ！\n最後にかけ声いっくわよー！
+Tween	キノコリオンヌ	PunchPosition	y=50				NoWait
+	キノコリオンヌ	嬉しい						天キーーーー？
+CharacterOff
+Param	character_grayout=false
+	キノコリオン		1_3
+	キノコリオン 		2_3
+	キノコリオン  		3_3
+Tween	キノコリオン  	RotateTo	y=180 time=0
+Tween	キノコリオン	PunchPosition	y=50				NoWait
+Tween	キノコリオン 	PunchPosition	y=100				NoWait
+Tween	キノコリオン  	PunchPosition	y=70				NoWait
+	キノコリオンたち							ノコーーーーッ!!
+Param	character_grayout=true
+FadeOut	white					.5
+StopBgm
+Bg	白背景
+CharacterOff
+	イベントロゴ379		エフェクト表			2	NoWait
+Param	character_grayout=false
+FadeIn	white					1
+Wait						3.5
+	　　　　　　　　　　							　　　　\n　　　　　　<color=blue>近日ロードショー</color>
+FadeOut	white					1
+Param	character_grayout=true
+Jump	*E379051
+If	isdebug==true
+CharacterOff
+Jump	*E_379_01
+EndIf
+EndScenario

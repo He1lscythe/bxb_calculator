@@ -1,0 +1,918 @@
+# E_1103_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔王バトル
+Bg	戦場跡					0
+Param	character_grayout=true
+	ディーア	悔しい2				0
+FadeIn	white					.5
+	ディーア	悔しい2						くっ……！ こんな敵、\nいったいどうしたらいいんだ！
+	ディーア	絶望2						冥獣十三体融合に\n原初六魔剣の因子まで持つ魔物なんて\nもう打つ手は<dash=2>
+StopBgm
+	？？？？		1_2					諦めないで下さい、マスター様！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						お前は!?
+Bgm	タイトル
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	キャバリア	通常
+	キャバリア	通常						獣槍騎士キャバリア、見参！
+CharacterOff	集中線
+	キャバリア	通常						どんな敵が相手でも\n私がマスター様を守り抜きます！
+	キャバリア	通常						行きますよ！\nこれが騎士の一撃!!
+	キャバリア	拡大通常	エフェクト表					えーいっ！
+Se	闇3
+Se	光3
+FadeOut	white					1
+StopBgm
+Wait						.5
+CharacterOff						0
+	キャバリア	通常				0
+FadeIn	white					1
+Bgm	クエスト勝利_BGM
+	キャバリア	通常						いかがでしたか、\nあなたの騎士の活躍は？
+CharacterOff
+	ディーア	笑い2						すごいぞキャバリア！
+	ディーア	笑い2						お前こそが最強で無敵の騎士！
+	ディーア	笑い2						いや騎士団長！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						それでも足りない\nスーパー超すごい騎士XIIIだ!!
+Param	character_grayout=false
+CharacterOff
+	キャバリア	慌て
+	ディーア	笑い2	画面外_左_b
+Tween	ディーア	MoveBy	x=620 time=1				NoWait
+Wait						.5
+	ディーア	笑い2						もふもふもふもふ！
+Se	ポップイン
+	オーラ桃		エフェクト裏			1
+	キャバリア	通常						わ、わふーん♪
+	キャバリア	通常						そ、そんなにもふもふされたら\n困っちゃいますよ、マスター様ぁ♪
+StopBgm
+Se	回想
+FadeOut	white					2
+CharacterOff						0
+Bg	酒場1F					0
+	キャバリア	通常				0
+	黒グラデーション		エフェクト表			0
+Wait						1
+FadeIn	white					.3
+	キャバリア	通常						えへへぇ……\nそこはもふもふしたらだめぇ……♪
+CharacterOff	黒グラデーション
+Tween	キャバリア	PunchPosition	y=30				NoWait
+	キャバリア	通常						……はっ！
+Bgm	平和
+	キャバリア	慌て						い、いけないいけない！\n私ったらぼーっとしちゃって！
+Tween	キャバリア	PunchPosition	y=30				NoWait
+	キャバリア	慌て						今はお留守番の任務中だから\nしっかりしないと！
+	キャバリア	通常						でも、\nいつかはあんな風に立派な騎士に……
+Tween	キャバリア	PunchPosition	y=30				NoWait
+	キャバリア	慌て						だ、だからダメ！\n変なこと考えないで真面目に！
+Se	走る
+CharacterOff
+	マンイーター	通常	画面外_右
+Tween	マンイーター	MoveBy	x=-700 time=1				NoWait
+	マンイーター	通常						ただいまー！\nやっぱり酒場は涼しくていいですね♪
+CharacterOff
+	マンイーター＝スピカ	にやけ						んふふ～♪\nマスター様がスピカを抱きしめて
+Shake	マンイーター＝スピカ		x=5				NoWait
+	マンイーター＝スピカ	にやけ						『待たせるなんてお仕置きだぜ！』\nとか言って、そのまま……
+CharacterOff
+	バグイーター	通常						にひひっ♪ スピカちゃんが\nまた美味しそうな妄想してる～\nちょっと食べちゃおっと♪
+CharacterOff
+	キャバリア	通常						あ、マンイーターさんたちっ！
+	キャバリア	通常						マンイーターさん、スピカさん\nバグイーターさん！
+	キャバリア	通常						おつとめご苦労さまです!!
+CharacterOff
+	マンイーター＝スピカ	通常	p2b
+	マンイーター	通常	p5
+	バグイーター	通常	p8b
+	三人							…………
+Param	character_grayout=true
+	マンイーター	通常						えっと、キャバリアちゃん？
+CharacterOff
+	キャバリア	通常						はい！ 獣槍騎士キャバリア！\nお迎えにあがりました！
+CharacterOff
+	マンイーター＝スピカ	通常	p2b
+	マンイーター	通常	p5
+	バグイーター	通常	p8b
+	マンイーター	通常						あ、ありがとうございます\nでもその言い方だとぉ
+	バグイーター	通常						にひっ♪\nなんだか別のお迎えみたいだねぇ♪
+Shake	マンイーター＝スピカ		x=5				NoWait
+	マンイーター＝スピカ	通常						はぁ♪ そういうシチュもいい♪\n昏い独房に閉じ込められたスピカを\n助けに来てくれるマスター様
+	マンイーター＝スピカ	通常						再会した二人は\n何年も会えなかった寂しさを\n埋めるために<dash=2>
+CharacterOff
+	キャバリア	慌て						ふぇっ!?\nもしかして私、変なこと言いました!?
+CharacterOff
+	マンイーター＝スピカ	通常	p2b
+	マンイーター	通常	p5
+	バグイーター	通常	p8b
+	マンイーター	通常						間違ってるわけではないですけど
+	バグイーター	通常						妄想しがいがある言葉だねって♪
+CharacterOff
+	キャバリア	慌て						騎士なのに、私ったら\n言葉遣いを間違えちゃった……？
+Tween	キャバリア	PunchPosition	y=30				NoWait
+	キャバリア	慌て						し、失礼しました！\n以後このようなことがないように\n一層の努力をします！
+CharacterOff
+	マンイーター	通常						そ、そんなに\n謝らなくてもいいですからね！\nちょっとしたことですし！
+CharacterOff
+	マンイーター＝スピカ	通常						スピカ的にも\nマスター様との妄想が捗ったし♪
+CharacterOff
+	バグイーター	通常						私もこってりした\n妄想を食べられたし♪
+CharacterOff
+	マンイーター
+Tween	マンイーター	PunchPosition	y=30				NoWait
+	マンイーター	通常						二人はもっと自重しなさいっ！
+	マンイーター	通常						とにかく\nお出迎えありがとうございます\nキャバリアちゃん
+	マンイーター	通常						でも私たちの出迎えとか\nそんなに頑張らなくていいですよ？
+CharacterOff
+	マンイーター＝スピカ	通常						それに、うちに来てからずっと\nお留守番とかお買い物とか\nキャバリアちゃんがやってるよね？
+CharacterOff
+	バグイーター	通常						そうそう！\nもっと遊んだりしてもいいよ？\n私たちみたいに
+CharacterOff
+	マンイーター	通常						二人は遊びすぎですけどね
+	マンイーター	通常						でも、涼しくなってきて\n私たちケモ耳な魔剣も\n動きやすくなりましたし
+	マンイーター	通常						キャバリアちゃんも\nお出かけしたり楽しんでください
+Param	character_grayout=false
+CharacterOff
+	キャバリア	通常
+Tween	キャバリア	PunchPosition	y=30				NoWait
+	キャバリア	通常						い、いいえ！\n騎士は自分に厳しいものです！
+	キャバリア	通常						それに、外は面白そうなものとか\nおいしそうなものがいっぱいですし\n夢中になっちゃいそうで……
+	キャバリア	通常						見習いの私は\n誘惑に負けてはいけないんです！
+Se	火事
+	オーラ炎		エフェクト裏			1
+	キャバリア	通常						今は立派な騎士になれるよう\nもっとマスター様に\n厳しく躾けていただかないと！
+StopSe
+Se	回想
+CharacterOff
+	オーラ桃		エフェクト裏			1
+	マンイーター	通常						躾けて<dash=2>
+CharacterOff
+	キャバリア	慌て						あ、あれ？\nマンイーターさん？
+CharacterOff
+	オーラ桃		エフェクト裏
+	マンイーター	通常
+Shake	マンイーター		x=3				NoWait
+	マンイーター	通常						うへへ……\nご主人様がイケナイ私を躾けて……
+CharacterOff
+	マンイーター＝スピカ	通常						今度はお姉ちゃんが\n妄想の世界に行っちゃったねぇー
+CharacterOff
+	キャバリア	慌て						また変なこと言っちゃいました!?
+CharacterOff
+	バグイーター	通常						けっして間違ってないってのが\n妄想の種なんだよねー♪\n解釈、解釈♪
+CharacterOff
+	キャバリア	慌て						うぅ、\nやっぱりまだ修行が足りませんね\nちゃんと躾けてもらわないと……
+CharacterOff
+	ディーア	通常2	画面外_右
+Se	ドア開く
+Tween	ディーア	MoveBy	x=-700 time=2				NoWait
+	ディーア	通常2						ただいまー\nみんなももう帰って<dash=2>
+CharacterOff
+	オーラ桃		エフェクト裏
+	マンイーター	通常
+	マンイーター	通常						ご主人様が\n私にあんなことやこんなこと……
+CharacterOff
+	オーラ桃		エフェクト裏
+	マンイーター＝スピカ	通常
+	マンイーター＝スピカ	通常						マスター様、\nスピカをたーっぷり躾けてね♪\nんふふ♥
+CharacterOff
+	ディーア	驚き2						えっ!?\nい、いったいなんのことだ!?
+CharacterOff
+	キャバリア	慌て
+Tween	キャバリア	PunchPosition	y=30				NoWait
+	キャバリア	慌て						な、なんでもないですっ！
+	キャバリア	通常						それよりも\nおかえりなさいませ、マスター様！
+	キャバリア	通常						キャバリアはこれより\nマスター様の護衛に入ります！
+CharacterOff
+	ディーア	笑い2						留守番ありがとう\nでも護衛の前に<dash=2>
+	ディーア	通常2						キャバリアへお土産の\nアイスを買ってきたんだけど\n何味がいい？
+CharacterOff
+	キャバリア	通常						アイスっ！\nでしたらいちごあ<dash=2>
+Shake	キャバリア		x=3				NoWait
+	キャバリア	慌て						だ、ダメダメ……！\nさっき自分で言ったでしょ？\n誘惑に負けないのが騎士だって
+	キャバリア	通常						わ、私はマスター様が\nお休みになってからいただきます！
+Param	character_grayout=true
+CharacterOff
+	マンイーター＝スピカ	通常	画面外_左_b
+	バグイーター	通常	画面外_右_b
+	ディーア	汗2						そこまで\n堅苦しくなくていいんだけどなぁ
+Tween	マンイーター＝スピカ	MoveBy	x=550				NoWait
+	マンイーター＝スピカ	通常						じゃあ私は食べよっかなぁー\nそろそろ夏も終わるし食べ納め♪
+	ディーア	通常2						たしかに\n風とか涼しくなってきたよな
+Tween	バグイーター	MoveBy	x=-550				NoWait
+	バグイーター	通常						私たちが近づいても\nもう暑くなくなったでしょ♪
+Tween	バグイーター	MoveBy	x=-30				NoWait
+	バグイーター	通常						にひひ♪\n我慢してたもふもふをするチャンス♪\nこのまま秋から冬になって<dash=2>
+Tween	マンイーター＝スピカ	MoveBy	x=30				NoWait
+	マンイーター＝スピカ	通常						寒い夜も\nもふもふなケモ耳魔剣ちゃんが\n周りにいて<dash=2>
+	ディーア	にやけ2						えへへ、\nケモ耳魔剣たちともふもふしながら\nぬくぬくするんだ……
+	バグイーター	通常						バグバグ♪\nマスターったらすぐ妄想するんだから
+CharacterOff
+	マンイーター	通常						バグイーターちゃん！\nつまみ食いはダメですよ！
+CharacterOff
+	バグイーター	通常						はーい♪
+CharacterOff
+	ディーア	通常2						そういえば\nお前たち以外のケモ耳魔剣は\nどこに行ったんだ？
+CharacterOff
+	バグイーター	通常						うーん、どこだろぉ？
+CharacterOff
+	キャバリア	通常						朝から見ていない気もしますね？
+Param	character_grayout=true
+CharacterOff
+	マンイーター	通常						でも気ままな子も多いですし\nきっとどこかで遊<dash=2>
+StopBgm
+	街の人	<Off>	1_2					うわぁああああ！
+CharacterOff
+	キャバリア	慌て
+Tween	キャバリア	PunchPosition	y=30				NoWait
+	キャバリア	慌て						この悲鳴は！
+CharacterOff
+	ディーア	驚き2						外からだぞ!?
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地A					0
+	ディーア	驚き2				0
+FadeIn	black					.3
+Bgm	緊迫
+	ディーア	驚き2						こ、これは!?
+Param	character_grayout=false
+CharacterOff
+	ホーリーナイト	極
+	黒グラデーション		エフェクト裏
+	オーラ赤		エフェクト表
+	ホーリーナイト	極						ウゥ……！
+CharacterOff
+	ディーア	驚き2						ホーリーナイト!!
+CharacterOff
+	キャバリア	慌て						でも、なんだか様子が変です！
+CharacterOff
+	ディーア	怪しい2						ああ、\n異様な魔力が体をとりまいてる\nこんなの見たことがない
+	ディーア	怪しい2						それに\nなんだかオレも体がうずくし\n指がわきわきしてきて<dash=2>
+CharacterOff
+	ホーリーナイト	極
+	黒グラデーション		エフェクト裏
+	オーラ赤		エフェクト表
+	ホーリーナイト	極						ウゥ……モフ……
+CharacterOff
+	ディーア	怪しい2						もふ？
+StopBgm
+CharacterOff
+	ホーリーナイト	極
+	黒グラデーション		エフェクト裏
+	オーラ赤		エフェクト表
+	集中線		エフェクト表2
+	ホーリーナイト	極						もふもふしてにゃー！！！！
+CharacterOff
+	ディーア	驚き2						……へ？
+Bgm	コメディ
+CharacterOff
+	ホーリーナイト	極
+	黒グラデーション		エフェクト裏2
+	オーラ桃		エフェクト裏
+	ホーリーナイト	極						もふもふナデナデはどこにゃ!?
+Tween	ホーリーナイト	PunchPosition	y=30				NoWait
+	ホーリーナイト	極						うにゃー！ マスター様に\nたくさんもふもふしてほしいにゃー！
+CharacterOff
+	ディーア	悔しい2						こ、これはいったい？
+CharacterOff
+	マンイーター	通常						まさか……！
+CharacterOff
+	ディーア	驚き2						知ってるのか、マンイーター？
+CharacterOff
+	マンイーター	通常						はい、私たちケモ耳魔剣は\n獣や動物に関する\n伝承を持っています
+	マンイーター	通常						だから\nみんなもふもふナデナデが大好き！\nもふもふを欲するのは本能！
+	マンイーター	通常						いつもはご主人様が\nたくさんもふもふしてくれて\n自然と解消されてましたけど
+	マンイーター	通常						今年の夏は異常な暑さで\nご主人様が\nもふもふしてなかったでしょう？
+Tween	マンイーター	PunchPosition	y=30				NoWait
+	マンイーター	通常						溜まりに溜まった\nもふられ欲がついに爆発したんです！
+CharacterOff
+	バグイーター	通常						涼しくなってきて\nタガが外れちゃったんだろうね♪\nもふられ期突入ってこと♪
+CharacterOff
+	マンイーター＝スピカ	通常						放置したら\nもっと暴走しちゃうかもねぇ
+CharacterOff
+	ディーア	悔しい2						そんなことが!?\n早くこの状態をなんとかしないと！
+CharacterOff
+	ホーリーナイト	極
+	黒グラデーション		エフェクト裏2
+	オーラ桃		エフェクト裏
+Shake	ホーリーナイト		x=5				NoWait
+	ホーリーナイト	極						ふにゃあああ！\nマスター様ぁ、なでてなでてぇ！
+CharacterOff
+	ディーア	悔しい2						こんな姿を見てたら、\nかわいすぎてなにも手がつかない！
+	ディーア	絶望2						周りの住人だって身悶えしてるし\nそれがケモ耳魔剣全員だと？
+	集中線		エフェクト表
+	ディーア	本気2						このままだと魔界が\nかわいさでどうにかなるぞ!!
+CharacterOff
+	キャバリア	慌て						そんな……!!
+	キャバリア	慌て						もふもふ不足のせいで\n魔界が大変なことになるなんて！
+StopBgm
+CharacterOff
+	ディーア	悔しい2						こうしちゃいられない\n早くみんなを元に戻すんだ！
+CharacterOff
+	マンイーター	通常						だったら\n方法は一つですよ、ご主人様！
+Bgm	バトル
+	集中線		エフェクト表
+	マンイーター	通常						もふもふですっ！
+CharacterOff
+	ディーア	驚き2						もふもふだって!?
+CharacterOff
+	マンイーター	通常						ご主人様は多くのケモ耳魔剣を\nその手で癒やしてきたもふもふの達人
+	マンイーター	通常						みんなのもふられ欲が満足するまで\nもふもふしてあげるんですっ！
+CharacterOff
+	ディーア	目閉じ2						たしかにこの事態も\nオレが暑いからってもふもふを\nサボったせいだ
+	ディーア	悔しい2						わかった、\nオレが全力でもふもふを執行する！
+CharacterOff
+	キャバリア	通常						（これは騎士の役目を果たす\n　ワンチャンス……！）
+	キャバリア	通常						マスター様、私もがんばります！
+CharacterOff
+	ディーア	悔しい2						よし、まずは\nホーリーナイトを大人しくさせてから
+	ディーア	本気2						もふもふだっ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1103_02
+EndIf
+EndScenario
+
+# E_1103_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	神秘
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	ディーア	にやけ2				0
+FadeIn	white					.5
+	ディーア	にやけ2						よーしよしよし！\nもふもふもふもふ!!
+CharacterOff
+	オーラ桃		エフェクト裏
+	ホーリーナイト	極						ふにゃあーーーーん♪\nこれを待ってたにゃーー♪
+CharacterOff
+	ディーア	にやけ2						はははは！\n気持ちいいだろう、もふもふっ！
+	マンイーター＝スピカ	通常	画面外_左_b
+Tween	マンイーター＝スピカ	MoveBy	x=540 time=1				NoWait
+Wait						.5
+	マンイーター＝スピカ	通常						マスター様ぁ♪\n私も頑張ったからもふもふして♪\nそこからもっと、んふふ～♪
+	ディーア	にやけ2						よーしっ！\nスピカのことももふもふもふもふ！
+Shake	マンイーター＝スピカ		x=5 time=2				NoWait
+Se	ポップイン
+	オーラ桃		エフェクト裏
+	マンイーター＝スピカ	通常						ふわぁあああ♪\n妄想もいいけど現実はもっといぃ♪
+	マンイーター＝スピカ	通常						妄想の中のマスター様と\n現実のマスター様が一つになって\n無限になるぅ♪
+CharacterOff
+	マンイーター	通常						さすがの指使い！\nこれは手による捕食と同じですよ！
+CharacterOff
+	ディーア	目閉じ2						ああ、オレも夏の暑さにやられて\n忘れていたんだ
+	ディーア	目閉じ2						このなめらかな毛並みを指が通る\n気持ちよさ
+	ディーア	目閉じ2						ケモ耳魔剣たちの\nふんわりとした甘い匂いと\n肌の温度を直で感じる幸福
+	ディーア	にやけ2						もふもふは\n相手を幸せにするだけじゃない
+	ディーア	にやけ2						オレ自身も幸せをもらえる\nもふもふハッピースパイラルなんだ
+	ディーア	本気2						ということで、\n二人をもっともふもふしてやる！
+FadeOut	white					1
+CharacterOff						0
+Bg	夏空					0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					1
+	ホーリーナイト	<Off>						にゃーーーん♪
+	マンイーター＝スピカ	<Off>						んふふー♪
+StopBgm
+FadeOut	white					1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	キャバリア	通常				0
+FadeIn	white					1
+Bgm	平和
+	キャバリア	通常						ホーリーナイトさんもスピカさんも\nすごく気持ちよさそうです……
+	キャバリア	通常						わ、私ももふもふされたら<dash=2>
+	キャバリア	慌て						い、いやいや！\n騎士たるもの情けない姿は\n見せられません！
+CharacterOff
+	ホーリーナイト	極						はぁ……\nすっきりしたにゃあ♪
+CharacterOff
+	マンイーター＝スピカ	通常						これでまた妄想も捗るねぇー♪
+CharacterOff
+	ディーア	目閉じ2						ひと夏ぶりのもふもふだったけど\nオレの指も錆びついていなくて\nよかったよ
+CharacterOff
+	バグイーター	通常						こうしてマスターの\nもふレベルは上がりました、なんて♪
+CharacterOff
+	マンイーター	通常						でもご主人様？\nまだ始まったばかりですよ？
+CharacterOff
+	ディーア	にやけ2						ふふふふ、\n異変を解決しながら合法的に\nもふもふしていいなんて
+	ディーア	にやけ2						こんな異変があっていいのか？
+	ディーア	にやけ2						異変を解決するためだからな\nもっとケモ耳魔剣を\nもふもふしてあげないと……
+CharacterOff
+	マンイーター＝スピカ	通常						マスター様の妄想も\n捗ってるみたいだねぇー♪
+CharacterOff
+	ディーア	驚き2						っと、そういえば\nマンイーターたちは平気なのか？
+	ディーア	怪しい2						スピカをもふもふしたけど\nホーリーナイトと違って\nいつも通りだったし
+	ディーア	怪しい2						みんなもケモ耳魔剣だし\nもふられ期があるんじゃ？
+CharacterOff
+	マンイーター	通常						あるにはありますけど……
+CharacterOff
+	マンイーター＝スピカ	通常						私たちは……ねえ♪
+CharacterOff
+	バグイーター	通常						にひひ……♪
+CharacterOff
+	マンイーター	通常						そ、その……私は妄想で……
+CharacterOff
+	ディーア	怪しい2						妄想？
+CharacterOff
+	マンイーター	通常
+Tween	マンイーター	PunchPosition	y=30				NoWait
+	マンイーター	通常						だ、だから！\n毎日もふもふされる妄想してたから\n平気みたいなんですっ！
+	マンイーター	通常						誰のこと思ってとかは\n恥ずかしいから聞かないで下さい……
+CharacterOff
+	マンイーター＝スピカ	通常						そんなのバレバレだけどー♪\n欲望を妄想で発散してたんだよぉ♪
+CharacterOff
+	ディーア	汗2						な、なるほど
+CharacterOff
+	キャバリア	通常						もふもふ……
+CharacterOff
+	ディーア	通常2						キャバリアはどうだ？\nもふもふされたかったら<dash=2>
+CharacterOff
+	キャバリア	慌て						だ、大丈夫です！
+	キャバリア	通常						私は騎士ですから！\nもふもふも我慢できますっ！
+Tween	キャバリア	PunchPosition	y=30				NoWait
+	キャバリア	通常						それより\n早く事件を解決しにいきましょう！
+	キャバリア	通常						それが騎士のお仕事ですから！
+CharacterOff
+	ディーア	目閉じ2						わかった……\nならオレももっと本気を出さないとな
+	ディーア	本気2						さあ、もふりに行くぞ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1103_03
+EndIf
+EndScenario
+
+# E_1103_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	わくわく
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	ディーア	本気2				0
+	集中線		エフェクト表			0
+FadeIn	black					.5
+	ディーア	本気2						さあ、\nオレのもふフィンガーをくらえっ！\nもーふもふもふ！
+CharacterOff
+	オーラ桃		エフェクト裏
+	レオ	通常						ますた、ますた！\nくすぐったいよぉー♪
+CharacterOff	レオ
+	レオ×エッジ	通常						でもそれがいいの♪\nがおがおー♪
+CharacterOff	レオ×エッジ
+	セイバートゥース	通常						も、もふもふなんて\n嬉しくないんだし……ふにゃあ……
+CharacterOff	セイバートゥース
+	セイバートゥース=ムゥ	通常						ムゥはもっと\nもふもふしてほしいんだしー♪
+CharacterOff
+	ディーア	本気2						さらにもう一発！\nがんばったマンイーターにも!!
+CharacterOff
+	オーラ桃		エフェクト裏
+	マンイーター	通常
+Shake	マンイーター		x=5 time=2				NoWait
+	マンイーター	通常						も、妄想じゃない\nご主人様の指が……！
+	マンイーター	通常						うへへへ♪
+CharacterOff
+	キャバリア	通常						すごいですっ！\nマスター様のもふもふで\nどんどん元に戻っていきます！
+CharacterOff
+	オーラ桃		エフェクト裏
+	マンイーター	通常						このもふもふで\n一年は食べていけるぅ……♪
+CharacterOff	マンイーター
+	マンイーター＝スピカ	通常						『これがいいんだろ？ カモン！』\nとか……んふふふふ♪
+CharacterOff
+	バグイーター	通常						けっぷ……\nこの二人の妄想はホント底知らずね\nお腹いっぱいになっちゃった
+StopBgm
+CharacterOff
+	キャバリア	通常						まだケモ耳魔剣は残ってます！\n次の魔剣さんを探しに行きましょう！
+Se	走る
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	市街地B					0
+	ディーア	怪しい2				0
+FadeIn	black					.3
+Bgm	平和
+	ディーア	怪しい2						うーん、\nこっちの方にも魔力の反応が……
+CharacterOff
+	魔天猫リーナ×ロスト	通常L						マスターさん♪
+CharacterOff
+	ディーア	通常2						リーナ×ロスト！
+	ディーア	笑い2						よかったリーナ×ロストは\n正気っぽい<dash=2>
+Bgm	神秘
+CharacterOff
+	魔天猫リーナ×ロスト	通常L
+	オーラ桃		エフェクト裏			1
+	魔天猫リーナ×ロスト							うふふ♪
+CharacterOff
+	ディーア	絶望2						……でもなさそうだな
+CharacterOff
+	魔天猫リーナ×ロスト	通常L
+	オーラ桃		エフェクト裏
+	魔天猫リーナ×ロスト	通常L						ごめんなさい、マスターさん♪
+	魔天猫リーナ×ロスト	通常L						私の体がもふもふを求めて\nもう我慢なんてできないんです♪
+	魔天猫リーナ×ロスト	通常L						でもよかったぁ\nマスターさんが来てくれて♥
+	魔天猫リーナ×ロスト	通常L						ね、お姉ちゃん♪
+CharacterOff
+	魔天猫ルコ	通常
+	オーラ桃		エフェクト裏
+	魔天猫ルコ	通常						うぅ……
+CharacterOff
+	ディーア	驚き2						ルコ!?
+CharacterOff
+	みつよ		b1
+	オーラ桃		エフェクト裏
+	みつよ							ふふ、子猫よ♪\nお待ちかねのぬし様が来たぞ？
+CharacterOff
+	ディーア	驚き2						光世まで!?\nしかもなんで水着?!
+CharacterOff
+	オーラ桃		エフェクト裏
+	みつよ		b1					わっちには\nまだまだ暑すぎるでありんすから♪
+CharacterOff	みつよ
+	魔天猫リーナ×ロスト	通常L						お姉ちゃんも大変なんだよね？\nだから言っちゃおうよ♪
+CharacterOff	魔天猫リーナ×ロスト
+	魔天猫ルコ	通常						う、うにゃ……
+CharacterOff	魔天猫ルコ
+	みつよ		b1					ほれほれ、\nあと一息でありんすよ♪
+CharacterOff	みつよ
+	魔天猫ルコ	通常						<size=20>わ、わたしにも……</size>
+Tween	魔天猫ルコ	PunchPosition	y=30				NoWait
+	魔天猫ルコ	通常						<size=50>もふもふしてーっ！</size>
+Shake	魔天猫ルコ		x=5				NoWait
+	魔天猫ルコ	通常						うぅ……！\n君じゃないともう満足できないのっ！
+CharacterOff
+	キャバリア	慌て						いつも\nしっかり者なルコさんまで!?
+CharacterOff
+	バグイーター	通常						そりゃあ欲望なんて\nみんなにあるものだもん♪
+	バグイーター	通常						真面目な子ほど\n溜め込みやすいって言うし\nあれは相当なもふられ欲だね♪
+CharacterOff
+	魔天猫ルコ	通常
+	オーラ桃		エフェクト裏
+	魔天猫ルコ	通常						な、なんで黙ってるのよぉ！\nするなら早くしてよぉ！
+StopBgm
+CharacterOff
+	ディーア	怪しい2						…………
+CharacterOff
+	マンイーター＝スピカ	通常						あ、マスター様が\nもふハンターの目になってるぅ♪
+Bgm	バトル
+CharacterOff
+	ディーア	怪しい2						確認するぞ？
+	ディーア	怪しい2						リーナ×ロストと光世も\nもふられ希望なんだよな？
+CharacterOff
+	オーラ桃		エフェクト裏
+	魔天猫リーナ×ロスト	通常L						はい、お姉ちゃんと一緒に\nもふもふゆりゆりしてください♪
+CharacterOff	魔天猫リーナ×ロスト
+	みつよ		b1					ふふ、\nたまにはハメを外して逢瀬というのも\n悪くないでありんす♪
+CharacterOff
+	ディーア	本気2						じゃあ容赦なく行くぞ！\nもふもふタイムだ……!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1103_04
+EndIf
+EndScenario
+
+# E_1103_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	神秘
+Bg	市街地B					0
+Param	character_grayout=false
+	魔天猫ルコ	通常				0
+	オーラ桃		エフェクト裏			0
+FadeIn	white					.5
+Shake	魔天猫ルコ		x=5				NoWait
+	魔天猫ルコ	通常						ふにゃあ……\nなんでこんなに気持ちいいのよぉ……
+CharacterOff	魔天猫ルコ
+	魔天猫リーナ×ロスト	通常L						うふふ♪\nお姉ちゃんを光世さんと挟んで\nもふもふゆりゆり♪
+CharacterOff	魔天猫リーナ×ロスト
+	みつよ		b1					そんなに照れるでない、子猫♪\nぬし様とわっちらに任せるでありんす
+CharacterOff
+	ディーア	本気2						なら、もっともふもふして\n素直なルコにしてやる！
+	ディーア	にやけ2						そーれもふもふもふー♪\nかわいいねぇ、かわいいねぇ♪
+CharacterOff
+	オーラ桃		エフェクト裏
+	魔天猫ルコ	通常						にゃあーん！\nあとで覚えてなさいよぉー！
+CharacterOff
+	キャバリア	通常						…………
+	黒グラデーション		エフェクト表			1
+	キャバリア	通常						ルコさん\n言葉は素直じゃないけど\nうれしそう……
+	キャバリア	通常						もし私も騎士として活躍して\nもふもふしてもらえたら
+	キャバリア	慌て						でも、\nそんなこと考えるなんて\n騎士っぽくないし……
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地D					0
+	ディーア	悔しい2				0
+Wait						1
+FadeIn	black					.3
+Bgm	平和
+	ディーア	悔しい2						はぁ……はぁ……\nルコたちでもふ待ち魔剣は\n最後みたいだな……
+	ディーア	絶望2						くっ……\nもふりすぎてもふエナジーが\n尽きそうだ……
+CharacterOff
+	マンイーター	通常						最後の方のルコちゃん\n見せられない感じでしたもんね
+CharacterOff
+	バグイーター	通常						精根尽き果てちゃった感じ♪
+CharacterOff
+	マンイーター＝スピカ	通常						マスター様ぁ？\nスピカたちのことも\nもっともふもふしてよぉ♪
+CharacterOff
+	ディーア	絶望2						せ、せめてもっと回復してから……
+CharacterOff
+	黒グラデーション		エフェクト裏
+	キャバリア	通常						（みんな\n　もふもふしてもらえたのに\n　私はまだで<dash=2>）
+	キャバリア	通常						（ううん、騎士になるためには\n　必要なことなんだもん……）
+	キャバリア	通常						（いつでも真面目で頼れて\n　欲に惑わされない）
+Param	character_grayout=false
+	キャバリア	慌て						でも……ルコさんも\n他の皆さんも気持ちよさそうで……
+StopBgm
+ImageEffect	SpriteCamera	MotionBlur
+Se	闇1
+	キャバリア幻想体		p5b
+Tween	キャバリア幻想体	MoveBy	x=50
+	キャバリア幻想体							モウガマンデキナイ……
+	キャバリア	慌て						え……？
+ImageEffectOff	SpriteCamera	MotionBlur
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+	          
+FadeIn	white					1
+	ディーア	驚き2						キャバリア!?
+CharacterOff
+	キャバリア							な、なんで……？
+Bgm	緊迫
+CharacterOff
+	キャバリア幻想体		p1
+	キャバリア幻想体2		p3
+	キャバリア幻想体3		p7
+	キャバリア幻想体4		p9
+	集中線		エフェクト表
+	キャバリア	<Off>	1_2					私の幻想体がこんなに!?
+If	isdebug==true
+CharacterOff
+Jump	*E_1103_05
+EndIf
+EndScenario
+
+# E_1103_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	市街地D					0
+	キャバリア	慌て				0
+FadeIn	white					.5
+	キャバリア	慌て						わぁあああん！
+	キャバリア	慌て						もうやめてよぉ……！
+Bgm	コメディ
+CharacterOff
+	ディーア	絶望2
+	キャバリア幻想体		p1b
+	キャバリア幻想体2		p3b
+	キャバリア幻想体3		p7b
+	キャバリア幻想体4		p9b
+	キャバリア幻想体2							マスター様、マスター様！\nもふもふして！
+Tween	キャバリア幻想体3	PunchPosition	y=30				NoWait
+	キャバリア幻想体3							なでてなでて！
+	キャバリア幻想体							おいしーものたべたい！
+	キャバリア幻想体4							ほめてほめて！
+	キャバリア幻想体							くぅーん！ わんわん！
+CharacterOff
+	マンイーター	通常						幻想体のキャバリアちゃんが
+CharacterOff
+	バグイーター	通常						すっごく遊んでる……！
+CharacterOff
+	ディーア	絶望2
+	キャバリア幻想体		p1b
+	キャバリア幻想体2		p3b
+	キャバリア幻想体3		p7b
+	キャバリア幻想体4		p9b
+	ディーア	絶望2						くっ……！\nかわいすぎて引き剥がせないっ！
+CharacterOff
+	キャバリア	慌て						かわいいって言わないでくださいぃ
+	キャバリア	慌て						こんなの\n騎士っぽくないですよぉ……！
+CharacterOff
+	ディーア	絶望2
+	キャバリア幻想体		p1b
+	キャバリア幻想体2		p3b
+	キャバリア幻想体3		p7b
+	キャバリア幻想体4		p9b
+Shake	キャバリア幻想体2		x=2				NoWait
+	キャバリア幻想体2							マスター様ぁ、大好き！\nペロペロ！
+CharacterOff
+	キャバリア	慌て						いやぁああああ!?
+	キャバリア	慌て						なんでこんなに\n幻想体が出てきたんですかぁ！
+	キャバリア	慌て						しかもみんな\nもふられたがってますしぃ！
+CharacterOff
+	バグイーター	通常						あー、やっぱり我慢してたんだね\n途中からおいしそうな妄想の香りが\nしてたもん
+CharacterOff
+	マンイーター	通常						ケモ耳魔剣の本能である\nもふられ欲……
+	マンイーター	通常						限度を越えて我慢したら\n幻想体まで生み出しちゃうなんて
+CharacterOff
+	バグイーター	通常						にひひ♪\n真面目な子ほどって言ったけど\nやっぱりキャバリアちゃんもだね♪
+StopBgm
+CharacterOff
+	キャバリア	慌て						ぐすん……\nせっかく我慢してきたのにぃ……
+	キャバリア	慌て						このままじゃ\n立派な騎士になんてなれませんよぉ
+CharacterOff
+	マンイーター	通常						え、そうですか？
+CharacterOff
+	キャバリア	通常						……ふぇ？
+Bgm	雪の街
+CharacterOff
+	マンイーター＝スピカ	通常						私はむしろ\n夢がおっきくていいなぁって\n思ったよぉー♪
+CharacterOff
+	マンイーター	通常						はい、スピカの言うとおりです！
+	マンイーター	通常						キャバリアちゃんは\n我慢したり欲しがらないほうが\nいいって思ってるみたいですけど
+	マンイーター	通常						ご主人様に\n褒められたいっていう気持ちは\n立派なものだと思いますよ？
+CharacterOff
+	キャバリア	慌て						で、でも……\n騎士はいつだって真面目に……
+CharacterOff
+	マンイーター	通常						真面目にっていうのと\n欲望をもたないのは別のことです
+	マンイーター	通常						もちろん、\nそれに溺れたらダメですけどね
+	マンイーター	通常						キャバリアちゃんは\n幻想体を作っちゃうくらい\n我慢していた気持ちが大きいんです
+	マンイーター	通常						それって妄想するくらい\n相手のことが大切なんですよね？
+	マンイーター	通常						なら、その妄想も気持ちも\n絶対に悪いものじゃありません♪
+	マンイーター	通常						私たちなんて\nその欲望が力になったりしてますしね
+CharacterOff
+	マンイーター＝スピカ	通常						むしろ\n欲望を吐き出しちゃったほうが\n強くなれるよぉ♪
+CharacterOff
+	バグイーター	通常						私は欲望を食べちゃう方だけど\nだからこそ、\nそれが大切だって知ってるしね♪
+StopBgm
+	バグイーター	通常						それじゃあ、\n二人ともそろそろやろっか♪
+	バグイーター	通常						マスターもお疲れで\n毛玉に埋もれちゃってるし♥
+Bgm	特殊バトル
+CharacterOff
+	マンイーター	通常						じゃあ行きますよ、\nスピカ、バグイーター！
+Param	character_grayout=false
+CharacterOff
+	マンイーター＝スピカ	通常	p3b
+	バグイーター	通常	p7
+	二人							はーい♪
+CharacterOff
+	マンイーター	通常						ご主人様は\n私たちが守ります！
+	マンイーター	通常						たぁあああああ！
+Se	チャージ
+FadeOut	white					1
+CharacterOff						0
+	キャバリア幻想体		p3b			0
+	キャバリア幻想体2		p7b			0
+FadeIn	white					1
+	キャバリア幻想体							もふー！
+Se	闇1
+CharacterOff	キャバリア幻想体					1
+	キャバリア幻想体2							おやつー！
+Se	闇1
+CharacterOff	キャバリア幻想体2					1
+Wait						1
+CharacterOff
+	キャバリア	通常						す、すごい……！
+	キャバリア	通常						私の夢も願いも\nちゃんとした欲望で、私の力……
+	キャバリア	通常						そっか、\n私はそれをイケナイって思って\n受け入れなかったから
+CharacterOff
+	キャバリア幻想体2		p3b					もふもふして♪
+	キャバリア幻想体3		p7b					ほめてほめて♪
+	キャバリア幻想体4		p5b					おいしもの食べたーい♪
+CharacterOff
+	キャバリア							この気持ちも私の本音だけど！
+	キャバリア							でも、\n私が本当にしたいことは！
+CharacterOff
+	キャバリア幻想体2		p3b
+	キャバリア幻想体3		p7b
+	キャバリア幻想体4		p5b
+	キャバリア	通常	画面外_右
+ImageEffect	SpriteCamera	MotionBlur
+Se	風3
+Tween	キャバリア	MoveBy	x=-1400 time=2				NoWait
+	キャバリア							えーいっ！
+Se	光3
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff						0
+	ディーア	驚き2	1_2			0
+	キャバリア	通常	2_2			0
+FadeIn	white					.3
+	キャバリア	通常						私はマスター様の騎士！\nキャバリアです！
+Param	character_grayout=true
+	ディーア	笑い2						た、たすかった……\nもふもふも二本腕じゃ足りなくて\n毛玉で窒息するところだったぞ
+	ディーア	にやけ2						それもそれで\n悪くなかった気がするけど……
+	キャバリア	通常						ごめんなさい、マスター様\n私が間違っていました
+	キャバリア	通常						自分の気持ちに嘘をついて\nこんなに迷惑をかけちゃって
+	キャバリア	通常						でも今は\n私の気持ちがちゃんとわかります
+	キャバリア	通常						相手が私の欲望であっても\nマスター様を守ることが私の役目！
+Tween	キャバリア	PunchPosition	y=30				NoWait
+	キャバリア	通常						だって私が一番やりたいのは\n騎士の夢を叶えることなんですから！
+	キャバリア	通常						だから、\nいつか立派な騎士になるために\n戦います！
+CharacterOff
+	マンイーター＝スピカ	通常	p2b
+	マンイーター	通常	p5
+	バグイーター	通常	p8b
+	マンイーター	通常						私たちも\nまだまだやれますよ！
+	バグイーター	通常						まずは\nこの子たちを止めないとね
+	マンイーター＝スピカ	通常						それからぁ♪
+CharacterOff
+	ディーア	本気2						みんなでもふもふ祭りだ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1103_06
+EndIf
+EndScenario
+
+# E_1103_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	市街地D					0
+Param	character_grayout=false
+	ディーア	目閉じ2				0
+FadeIn	white					.5
+	ディーア	目閉じ2						それじゃあ、いいんだな？
+CharacterOff
+	キャバリア	通常						はい、覚悟はできました！
+CharacterOff
+	ディーア	本気2						よし<dash=2>
+CharacterOff
+	キャバリア
+	ディーア	<Off>	1_2					もふもふもふもふ♪
+	オーラ桃		エフェクト表			1
+	キャバリア	通常						ふわぁあああああ♪
+	キャバリア	通常						マスター様の指が、手が……！\n私の頭を撫でて、尻尾をほぐして♪
+	キャバリア	通常						もふもふされるって\nこんなに気持ちいいんですね……！
+CharacterOff
+	マンイーター	通常						あ、ほら見てください！\nキャバリアちゃんが満足したから！
+CharacterOff
+	キャバリア幻想体2		p3b
+	キャバリア幻想体3		p7b
+	キャバリア幻想体4		p5b
+Wait						1
+CharacterOff	キャバリア幻想体2					1
+Wait						1
+CharacterOff	キャバリア幻想体3					1
+Wait						1
+CharacterOff	キャバリア幻想体4					1
+Wait						1
+CharacterOff
+	マンイーター＝スピカ	通常						幻想体が消えていくねぇ♪
+CharacterOff
+	バグイーター	通常						マスターの指も\n元気になったみたいだね♪
+CharacterOff
+	ディーア	目閉じ2						さっきまでのオレだったら\n幻想体は鎮められなかっただろう
+	ディーア	怒り2						けどみんなをもふもふして\nもふレベルが上がったからな！
+	ディーア	怒り2						限界を越えて\nオレ自身がもふの化身になった\nみたいだ
+	ディーア	笑い2						今のオレなら\nどんな相手でも満足させられる！
+CharacterOff
+	キャバリア	通常						さすが、マスター様
+	キャバリア	慌て						でも、\nやっぱりちょっと恥ずかしいです
+	キャバリア	慌て						騎士なのに\nマスター様にご迷惑をおかけして
+	キャバリア	慌て						しかも\n幻想体はまだ残っていますし
+CharacterOff
+	ディーア	通常2						でもキャバリアも\n最後にはちゃんと自分の気持ちを\nコントロールできただろ？
+	ディーア	通常2						お前の夢と理想は大きいんだから\n失敗することもある
+	ディーア	笑い2						それも\n受け入れて成長すればいいんだよ\nお前ならできるさ
+CharacterOff
+	キャバリア	通常						マスター様……！\nこんなに信頼してくれるなんて
+	キャバリア	通常						えへへ、わかりました\nまだまだ未熟な騎士見習いですけど
+	キャバリア	通常						ちゃんと失敗も反省して
+	キャバリア	通常						いつかマスター様にふさわしい\n立派な騎士になります！
+	キャバリア	通常						だから\nさっそく今日の反省ですけど
+	キャバリア	通常						その……ときどきさっきみたいに\nもふもふしてほしいです
+CharacterOff
+	ディーア	笑い2						今からでもいいぞ？
+CharacterOff
+	キャバリア	通常						い、今からは困ります!?\nお仕事できなくなっちゃいますから！
+CharacterOff								ああ、もちろん！
+	ディーア	通常2						わかった、じゃあ先に\n残った幻想体を満足させにいこう
+CharacterOff
+	マンイーター＝スピカ	通常						お手伝いするから、\nスピカたちももふもふしてねぇ♪
+CharacterOff
+	バグイーター	通常						私はそれを見ながら、\nバグをいただき♪					 
+CharacterOff
+	マンイーター	通常						もう、\nさっきあんなに食べたでしょう！
+CharacterOff
+	キャバリア	通常						騎士キャバリアも、\n最後までマスター様にお供します！
+CharacterOff
+	ディーア	通常2						それじゃあ行くぞ！
+	ディーア	本気2						もふもふ開始だ!!
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_1103_01
+EndIf
+EndScenario

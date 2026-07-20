@@ -1,0 +1,507 @@
+# G_402_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Se	夏の田んぼ	TRUE
+Bg	夏空
+Param	character_grayout=false
+	　　　　　　　　　　
+Wait						1
+FadeIn	white					2
+Wait						1
+	ディーア	<Off>						暑い……
+	リディ	<Off>						もう夏だね……
+	ディーア	<Off>						暑すぎて動きたくない……
+	リディ	<Off>						わかる……
+FadeOut	white					.3
+Param	character_grayout=true
+Bg	酒場_海辺					0
+CharacterOff						0
+StopSe
+	ディーア	汗2	1_2			0
+	リディ	悔しい2	2_2			0
+Bgm	平和
+FadeIn	white					.3
+	リディ							急に暑くなったよね……
+	ディーア							この間まで寒かったのにな……
+CharacterOff
+	黒グラデーション		エフェクト表
+	アルマース
+Shake	アルマース		x=5				NoWait
+	アルマース							ええ……これは死活問題です……
+	アルマース							このままじゃ……わたし……
+CharacterOff
+StopBgm
+	アルマース	集中線	エフェクト表					ロリになってしまいます！！！！！！
+CharacterOff
+Bgm	コメディ
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							……大丈夫か？\n暑さで頭をやられたか？
+CharacterOff
+	アルマース							頭は大丈夫ですけど\n身体が大丈夫ではありません
+	アルマース							地獄の氷で出来ているわたしにとって\n地上の暑さは致命的なんです
+Shake	アルマース		x=5				NoWait
+	アルマース	驚き						このままでは\n氷が溶けて完全に\nロリになってしまいます……
+	アルマース							だから早くなんとかしないと……
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	悲しい2	2_2
+	リディ							そうなんだー……
+	ディーア							あっつー……
+CharacterOff
+	アルマース	驚き
+Tween	アルマース	ScaleBy	x=1.2 y=1.2 time=1				Add
+Tween	アルマース	MoveBy	y=-110 time=1				Add
+	アルマース							って、おーい？\n聞いてますかー？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+StopBgm
+	ディーア							うん……\n聞いてはいるんだけど……
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+Bg	夏空					0
+	　　　　　　　　　　					0
+Se	夏の田んぼ	TRUE
+FadeIn	white					.3
+	リディ	<Off>						暑すぎて……
+	ディーア	<Off>						動きたくない……
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+Bg	酒場_海辺
+	アルマース					0
+StopSe
+Bgm	コメディ
+FadeIn	white					.3
+	アルマース							おっけーわかりました、\nせめてエアコンとかありませんか
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	悔しい2	2_2
+	リディ							それが、この酒場、\nエアコン無いんだよね……
+	ディーア	あはは2						そもそも屋外だしな……
+CharacterOff
+	アルマース
+Shake	アルマース		x=5				NoWait
+	アルマース							うぐぐ……
+	アルマース	驚き						どうしましょう、このままでは\n本当につるぺた幼女に……
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	悲しい2	2_2
+	ディーア							ええと……それって\nそんなに切羽詰まってる状況なのか？
+CharacterOff
+	アルマース	驚き						ええ、見て下さい\n既に氷が溶けかけてびしょびしょです\nこれは由々しき事態です
+CharacterOff
+Param	character_grayout=false
+	アルマース	腹	エフェクト裏					ほら、服だって透けて……
+	ディーア	<Off>						ほう？
+	トライアルスチル402		画面外_下
+Tween	トライアルスチル402	MoveTo	y=-60 time=0.7				NoWait
+Wait						.5
+	トライアルスチル402							マ、ス、ター？
+	ディーア	<Off>						…………あの、リディさん\n前が見えない
+Tween	トライアルスチル402	PunchPosition	y=50				NoWait
+	トライアルスチル402							見ちゃダメなの！\nえっち！
+CharacterOff
+Param	character_grayout=true
+	ディーア	あはは2	1_2
+	リディ	悔しい2	2_2
+	リディ							もう、アルマースちゃんも\n気をつけなきゃダメだよ！
+	リディ							マスターはすぐえっちなこと\n考えるんだから
+	ディーア	怪しい2						人聞きが悪いぞリディさん
+CharacterOff
+	アルマース	驚き
+Shake	アルマース		x=5				NoWait 
+	アルマース							えっちなこと……\n考えてたんですか……？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	怒り2	2_2
+	ディーア							いやいや!?\nそ、そんなことはないぞ……多分？
+CharacterOff
+	アルマース							まあそう考えるように仕向けてたので\n当然ですけどね
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	悔しい2	2_2
+	リディ							なんて？
+	ディーア	あはは2						じゃあセーフだ
+Se	打1
+Tween	リディ	PunchPosition	x=-50				NoWait
+	リディ	怒り2						マスタぁー？？？？
+CharacterOff
+	アルマース							まあそんなことはどうでもいいんです\nとにかくヤバいんですよ
+	アルマース							これでも昔は豊満なわがままぼでぃ\nだったんですよ\nそれがここまで溶けてしまったんです
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							マジで？
+CharacterOff
+	アルマース							マジです
+	アルマース	驚き						このまま溶けていったら、\n本当にロリになってしまうんですよ
+	アルマース	通常						マスターさんはそれでもいいんですか
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							くっ…………
+	リディ	絶望2
+	ディーア	本気2						スレンダー少女かロリか……\nこれは迷う…………
+CharacterOff
+	アルマース							何を迷っているんですか\n暑さで頭をやられましたか
+CharacterOff
+	アルマース	拡大	エフェクト表					それともアレですか、\n実は身体じゃなくて\n顔で選んでるんですか
+CharacterOff
+	アルマース	集中線	エフェクト表					顔採用なんですか、マスターさん
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	悔しい2	2_2
+	リディ							そうなの、マスター……？
+	ディーア	汗2						んなわけあるか
+CharacterOff
+	アルマース	驚き						ではやはり身体ですか\nロリコンなんですか
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	絶望2	2_2
+	リディ							マスター…………？
+	ディーア	汗2						違うからな!?
+CharacterOff
+	アルマース	驚き						とにかく、ロリ枠は既に\n飽和状態なんです
+	アルマース	通常						氷で出来てるロリくらいじゃ\nイニシアチブは取れないんですよ
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	悔しい2	2_2
+	リディ							そ、そういう問題なの……？
+CharacterOff
+	アルマース							そういう問題です
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							はぁ……わかった、\nそれでどうすればロリ化は\n食い止められるんだ？
+CharacterOff
+	アルマース							簡単です、冷やせばいいんです
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	悔しい2	2_2
+	リディ							でもエアコンないよ？
+	ディーア							しかも炎天下だぞ？
+CharacterOff
+	アルマース	驚き						そうですね、夏ですし\n部屋にどデカい氷の柱を\n敷き詰めるとかどうでしょう
+	アルマース	通常						きっとスパコンだって冷やせますよ
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	驚き2	2_2
+	ディーア							それはやめておこう、\n良くない結果になる気がする
+CharacterOff
+	アルマース	通常						ふむ……ダメですか\nそれなら……
+	アルマース	驚き						わたしとデートしませんか、\nマスターさん
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							デート？\n……炎天下の中、か？
+CharacterOff
+	アルマース	通常						ええ、デートです\n避暑地に行けば良いのです
+	アルマース							リーマは暑いですから、\n涼しくて快適な地方に\nお出かけしましょう
+CharacterOff
+	ディーア	きらーん2	1_2
+	リディ	悔しい2	2_2
+	ディーア							なるほど！\nそれはいいな！
+	ディーア	通常2						よし、そうと決まれば<dash=2>
+FadeOut	black					.5
+CharacterOff						0
+StopBgm
+Bg	雪原(吹雪)
+CharacterOff
+	アルマース		2_2
+	ディーア	絶望2	1_2
+Wait						2
+Bgm	緊迫
+FadeIn	black					.1
+	ディーア							……聞いてないんだけど
+	アルマース	驚き						え？
+Se	回想
+StopBgm
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場_海辺					0
+CharacterOff						0
+	アルマース					0
+FadeIn	black					.2
+	アルマース							リーマは暑いですから、\n涼しくて快適な地方に\nお出かけしましょう
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	アルマース		2_2			0
+	ディーア	絶望2	1_2			0
+Bg	雪原(吹雪)					0
+FadeIn	black					.2
+Bgm	コメディ
+	ディーア							どこが涼しくて快適なんだ！！
+	アルマース	驚き						でも暑くないですよ？
+	ディーア	汗2						避暑地ってそういう\n意味じゃなくない？
+	アルマース	通常						それにわたしにとっては快適ですし
+	ディーア	汗2						オレにとっては\nめちゃくちゃ寒いんだが……
+	アルマース	驚き						寒がりですね、マスターさん
+	ディーア	怪しい2						こんな場所、誰だって寒がると思う
+	アルマース	驚き						そうですかね、リディちゃんなら\n喜んだかもしれませんよ
+	アルマース	通常						本当はリディちゃんも\n来られたらよかったんですけど
+Se	回想
+StopBgm
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	リディ	悔しい2				0
+Bg	酒場_海辺					0
+FadeIn	black					.2
+Shake	リディ		x=5				NoWait
+	リディ							むぅ……\nリディはお店番しなきゃ\nいけないから……
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	アルマース		2_2			0
+	ディーア	絶望2	1_2			0
+Bg	雪原(吹雪)					0
+Bgm	コメディ
+FadeIn	black					.2
+	アルマース							残念ですね
+	ディーア							いや、これはリディが正解だぞ……\nオレも酒場にいればよかった……
+Tween	アルマース	PunchPosition	x=-20				NoWait
+	アルマース							もう、そんなに照れないでください
+	ディーア	怪しい2						照れてるわけじゃないぞー
+Tween	アルマース	MoveBy	x=-50				NoWait
+	アルマース							じゃあ恥ずかしがってるんですか？
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	絶望2						ひい！\nつめたい！
+Tween	アルマース	MoveBy	x=50				NoWait
+	アルマース	驚き						大げさですね
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望2						オレ今半袖なんだぞ……？
+	アルマース							インナー着てるじゃないですか
+	ディーア	怪しい2						吹雪に耐えられる装備ではないよな？
+	アルマース	通常						でも年中その格好じゃないですか？
+	ディーア	本気2						そこは触れないでほしいな！
+	アルマース	驚き						大丈夫です、魔界ではよく\n「変態は風邪を引かない」って\n言いますから
+	ディーア	怒り2						言わないからな！\n普通に風邪引くからな！
+Tween	アルマース	MoveBy	x=10				NoWait
+	アルマース	驚き						仕方ありませんね、\nそんなに言うなら場所を変えましょう
+	ディーア	あはは2						ああ……そうしてくれると助かる……
+FadeOut	black					.5
+StopBgm
+Bg	洞窟A
+CharacterOff
+	アルマース		2_2
+	ディーア	絶望2	1_2
+Wait						2
+FadeIn	black					.5
+	アルマース							はい
+	ディーア							どうして？
+Bgm	コメディ
+	アルマース							吹雪より良いでしょう
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望2						鍾乳洞も十分寒いぞ……
+	アルマース	驚き						そうですか……わかりました\nではもう少し\n暖かいところに行きましょう
+FadeOut	black					.5
+Bg	洞窟C
+CharacterOff
+	アルマース	通常	2_2
+	ディーア	本気2	1_2
+Wait						1.5
+FadeIn	black					.5
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							寒い!!
+Tween	アルマース	MoveBy	x=10				NoWait
+	アルマース	驚き						文句多いですね、\nひょっとしてアンチですか？\nあーやだやだ
+	ディーア	絶望2						こんなに寒い中連れ回されたら\n文句の一つも言いたくなるさ……
+Tween	アルマース	MoveBy	x=-10				NoWait
+	アルマース	通常						何が不満なんですか、\nこんなにかわいくてむちむちぼでぃな\n美少女とデートなんですよ？
+	ディーア	怪しい2						むちむちぼでぃではないだろ
+	アルマース	驚き						……かわいいは否定しないんですね
+	ディーア	通常2						まあ、実際かわいいしな
+	アルマース							<speed=0>　</speed>	BrPage
+Tween	アルマース	PunchPosition	y=50
+Wait						.3
+Tween	アルマース	MoveBy	x=10				NoWait
+	アルマース	驚き						ふぅーん……
+	アルマース							さあマスターさん、\n次の場所に移動しましょうか
+	ディーア	汗2						まだ続けるのか……？
+Tween	アルマース	MoveBy	x=80 time=3				NoWait
+	アルマース							はい、なんかここも\n暑くなってきましたし
+	ディーア	汗2						暑いってことはないだろ……
+	ディーア	驚き2						っておい、\nあんまり一人で先に行くと……
+CharacterOff
+StopBgm
+	ユキノコリオンA
+Wait						.1
+Tween	ユキノコリオンA	PunchPosition	y=100 time=2				NoWait
+	ユキノコリオンA							ノコノコノコーーーーッ!!
+Bgm	バトル
+CharacterOff
+	アルマース	驚き
+Tween	アルマース	PunchPosition	y=50				NoWait
+	アルマース							きゃあっ!?
+CharacterOff
+	ディーア	悔しい2						ああもう、言わんこっちゃない……
+CharacterOff
+	アルマース		2_2
+	ディーア	悔しい2	1_2
+Wait						.1
+Tween	アルマース	MoveBy	x=-20				NoWait
+	アルマース	驚き						こんなところにもいるんですね、\nキノコリオン
+Tween	アルマース	MoveBy	x=5				NoWait
+	アルマース	通常						……もしかしたらマスターさんより\nタフかもしれませんよ？
+	ディーア	本気2						そんなこと言ってる場合か！\nやるぞアルマース！
+If	isdebug==true
+CharacterOff
+Jump	*G_402_02
+EndIf
+EndScenario
+
+# G_402_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	洞窟C
+CharacterOff
+	アルマース		2_2
+	ディーア	怪しい2	1_2
+FadeIn	white					.5
+	ディーア							……さて、そろそろ酒場に帰るか
+	アルマース	驚き						もう帰るんですか、\nわたしはまだ\nデートしていたいんですが
+	アルマース	通常						それに酒場に戻ったら\nロリになってしまいますし
+	ディーア	怪しい2						…………
+	アルマース	通常						マスターさん？\nどうしたんですか、早く<dash=2>
+StopBgm
+	ディーア	怒り2						……お前はなにをそこまで\n焦ってるんだ？
+Bgm	絶望
+	アルマース	驚き						え、だって溶けちゃうんですよ\n普通は嫌じゃないですか？
+	ディーア	あはは2						そりゃまあそうかもしれないけどさ
+	ディーア	通常2						でもお前は溶けることを\n嫌がってるわけじゃないだろ？
+Tween	アルマース	MoveBy	x=10				NoWait
+	アルマース	通常						……どうしてそう思うんです？
+	ディーア	悔しい2						溶けてなくなるのが嫌なら、\n怖がったり怯えたりするはずだ
+	ディーア	怒り2						でもアルマースは、\n何か使命感みたいなものに囚われて\n動いてるように見える
+	ディーア	汗2						本気で溶けて困ってるならオレだって\n最初から協力したけど……\n本当はそういうわけじゃないんだろ？
+	アルマース	驚き						…………！
+Tween	アルマース	MoveBy	x=-10
+	アルマース	通常						……ええ、実はわたし、\n昔は豊満なわがままぼでぃで……
+	ディーア	あはは2						それはわかったから
+	アルマース	驚き						冷やせばむちむちに\n戻れるかもしれなくてですね
+	ディーア	怪しい2						冷やしてもむちむちにはなれないだろ
+StopBgm
+Tween	アルマース	MoveBy	x=10				NoWait
+	アルマース	通常						そんなバカな
+	ディーア	怪しい2						……アルマース
+Bgm	絶望
+Tween	アルマース	MoveBy	x=-10
+	アルマース	驚き						はぁ、よく見てますね\nよもや観察力のある変態とは
+	ディーア	汗2						人聞きが悪すぎる……
+	アルマース	通常						まあ困ってるのは事実ですけどね
+Se	回想
+StopBgm
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洞窟C_過去					0
+	　　　　　　　　　　
+FadeIn	white					.5
+	　　　　　　　　　　							<color=blue>…………お願い<dash=2></color>
+FadeOut	black					.5
+ImageEffectOff	SpriteCamera	Sepia
+Bg	洞窟C
+CharacterOff						0
+Bgm	絶望
+	アルマース	驚き	2_2			0
+	ディーア	怒り2	1_2			0
+FadeIn	black					.2
+	アルマース							約束したんですよ、\n"本物のアルマース"と
+	ディーア	驚き2						本物……？
+	アルマース							はい\nわたしが、<ruby=アルマース>あの人の代わり</ruby>になるって
+	アルマース	通常						……だからこれ以上溶けて\n幼くなるわけにはいかないんです
+	ディーア	悔しい2						アルマース……
+Tween	アルマース	MoveBy	x=-10				NoWait
+	アルマース	驚き						知ってます？\n元々のアルマースってむっちむちで\n魅惑的なわがままぼでぃなんですよ？
+	ディーア	汗2						いや、知らないけど……
+	アルマース	驚き						えっとですね、\n胸もこれくらいあって……
+Tween	アルマース	MoveBy	x=10
+	アルマース	通常						……まあ、それはそのうち、\n気が向いたら教えてあげます
+	アルマース							さ、そういうわけなので\n次のデートスポットに行きましょう、\nマスターさん
+Se	走る
+Tween	アルマース	MoveTo	x=1500 time=6				NoWait
+	ディーア	怒り2						…………
+	アルマース	驚き						マスターさん？\nおーい？
+StopBgm
+	ディーア							……アルマース
+CharacterOff
+	アルマース	驚き						はい？\nなんですか？
+Bgm	凱旋
+	ディーア	怒り2						オレはお前を誰かの代わりだなんて\n思っていないからな
+	アルマース	驚き
+Tween	アルマース	PunchPosition	y=50				NoWait
+	アルマース							…………！
+	ディーア	怒り2						……お前が本当にそうなりたいなら\n止めはしないけどさ
+	ディーア	通常2						無理して本物の代わりに\nなろうとしなくたって良い
+	ディーア	あはは2						オレは今のアルマースしか\n知らないけど、可愛くて魅力的な\n女の子だと思ってるしさ
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	アルマース	驚き
+Se	ラブ
+Tween	アルマース	PunchPosition	y=50				NoWait
+	アルマース							きゅん……!!
+	アルマース							そんな、\n今の方が良いなんて……!!
+StopBgm
+CharacterOff	オーラ桃
+	アルマース	通常						マスターさんって\nほんとにロリコンなんですね
+Param	character_grayout=true
+Bgm	コメディ
+CharacterOff
+	ディーア	汗2						あれ？\nオレ今ちょっと良いこと言ったと\n思うんだけど
+	アルマース	驚き						そういうの、\n自分で言っちゃダメですよ
+StopBgm
+	アルマース	通常						<size=20>…………まったくもう</size>
+	ディーア	驚き2						……アルマース？
+	アルマース	通常						いえ、なんでもないです
+Bgm	都市
+Tween	アルマース	ScaleBy	x=1.2 y=1.2 time=1				Add
+Tween	アルマース	MoveBy	y=-110 time=1				Add
+	アルマース	驚き						それで、どこが可愛くて\n魅力的なんですか？
+CharacterOff
+	ディーア
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア	驚き2						えっ？
+CharacterOff
+	アルマース	驚き						せっかくなので教えて下さい
+CharacterOff
+	アルマース	拡大	エフェクト表					顔ですか？\nやっぱり顔採用ですか？
+	アルマース							仕方有りませんね\nわたし、顔はかわいいですし
+CharacterOff
+	ディーア	汗2						そういうの自分で言うなよ
+CharacterOff
+	アルマース
+Tween	アルマース	PunchPosition	y=50				NoWait
+	アルマース							自信ありますから\nえへん
+	アルマース	驚き						……それともやっぱり身体ですか？\nロリコンなんですか？
+	ディーア	怪しい2						あのなあ、\nオレはそういうのじゃなくて……
+	アルマース	通常						……ふふふ、今のは冗談です
+	アルマース	驚き						大丈夫です\nマスターさんの気持ちは、\nちゃんとわかってますよ
+	ディーア	汗2						……それならいいけど
+StopBgm
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	アルマース	拡大	エフェクト表					ええ、マスターさんは……
+CharacterOff
+Bgm	コメディ
+	アルマース	集中線	エフェクト表					<size=40>やっぱり顔が\nいいんですよね</size>
+CharacterOff
+	集中線		エフェクト表
+	トライアルスチル402	ディーア	エフェクト裏					<size=40>わかってないじゃないか!!!!</size>
+If	isdebug==true
+CharacterOff
+Jump	*G_402_01
+EndIf
+EndScenario

@@ -1,0 +1,602 @@
+# Q1006_5_01a
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Se	強風	TRUE				3
+Bg	廃村					0
+Param	character_grayout=false
+	黒背景		エフェクト表			0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+FadeIn	black					.5
+	　　　　　　　　　　							<dash=4>時期不明
+CharacterOff	黒背景					2
+Tween	瞬きA	MoveBy	y=325 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-325 time=2	easeOutCirc
+	少年(レド)	<Off>						<dash=4>やめて……
+CharacterOff						0
+	地名背景		地名背景			0
+	地名ロゴ	スイルノーム	地名ロゴ			0
+	左縦線		左縦線			0
+	左横線		左横線			0
+	右縦線		右縦線			0
+	右横線		右横線			0
+Wait						1
+Tween	左縦線	MoveBy	y=-800 time=1.5	easeOutQuart			NoWait
+Tween	左横線	MoveBy	x=-800 time=1.5	easeOutQuart			NoWait
+Tween	右縦線	MoveBy	y=800 time=1.5	easeOutQuart			NoWait
+Tween	右横線	MoveBy	x=800 time=1.5	easeOutQuart			NoWait
+Wait						1.3
+	場所ロゴ	宗教国家エデン	場所ロゴ			1
+Wait						1
+	　　　　　　　　　　							　
+Tween	左縦線	MoveBy	y=-100 time=6				NoWait
+Tween	左横線	MoveBy	x=-100 time=6				NoWait
+Tween	右縦線	MoveBy	y=100 time=6				NoWait
+Tween	右横線	MoveBy	x=100 time=6				NoWait
+CharacterOff	地名ロゴ					.5
+CharacterOff	場所ロゴ					.5
+CharacterOff	左縦線					.3
+CharacterOff	左横線					.3
+CharacterOff	右縦線					.3
+CharacterOff	右横線					.3
+Wait						2
+	6.5スチル1		エフェクト表			1
+Wait						1
+	少年(レド)	<Off>						もう、やめてくれ……
+Se	突1
+Wait						.2
+	6.5スチル2		エフェクト表2			0
+Wait						1.5
+FadeOut	black					1
+CharacterOff						0
+	黒背景		エフェクト表
+StopSe
+Wait						1.5
+FadeIn	black					.5
+Bgm	絶望
+	　　　　　　　　　　							<dash=2>少年の悲痛な叫びは\n無情にも空に消えた
+	　　　　　　　　　　							叫び<dash=2>否、それはお世辞にも\n大声で誰かに呼びかけるそれではなく
+Bg	廃村					0
+	　　　　　　　　　　							心の底から絞り出した\n絶望の呟きであった
+CharacterOff						0
+	6.5スチル3		エフェクト裏			0
+Shake	6.5スチル3		x=3				NoWait
+	魔剣少女(ヴァルト)	<Off>						……ぁ……ぅ…………
+Se	斬1
+FadeOut	red					0
+CharacterOff						0
+	黒背景		エフェクト表2			0
+Wait						.5
+FadeIn	red					.5
+Wait						.2
+	　　　　　　　　　　							<dash=2>前を向くことは、\nもう出来なかった
+	　　　　　　　　　　							強く握った拳から、\n血が混じって微かに湿った土が\n零れ落ちた
+CharacterOff						0
+	勇者C	嘲笑	3_3			0
+	勇者B	嘲笑	1_3			0
+	勇者A	嘲笑	2_3			0
+	黒グラデーション		エフェクト表			0
+Wait						1
+CharacterOff						0
+	黒背景		エフェクト表			0
+Bg	曇天					0
+Wait						1
+CharacterOff						1
+	　　　　　　　　　　							<dash=2>自分は今、どんな顔を\nしているのだろうか
+	　　　　　　　　　　							この世界は、本当に\n実在するのだろうか
+	　　　　　　　　　　							全て夢で、ふいに全て霧散して\nしまうような、曖昧な場所に\n自分はいるのではないか
+	　　　　　　　　　　							……地面につく膝の痛みはもはや\n麻痺し、感覚も感情も\nぼやけはじめていた
+	黒背景		エフェクト表2			1
+Wait						1
+Bg	廃村					0
+	6.5スチル4		エフェクト裏			0
+	黒グラデーション		エフェクト表			0
+CharacterOff	黒背景					1
+Wait						1
+	　　　　　　　　　　							四つん這いに、まるで神に\n許しを乞うように、頭を垂れ悲痛に\n少年は、目の前の彼らに許しを乞うた
+	　　　　　　　　　　							<dash=2>目の前で、\nわずかほんの数メートル先で、\n彼女に降りかかる悲劇を止めたかった
+CharacterOff						0
+	黒背景		エフェクト表2			0
+Bg	市街地A					0
+ImageEffect	SpriteCamera	Sepia
+	6.5スチル5		エフェクト表			0
+Wait						.5
+CharacterOff	黒背景					.5
+Wait						.5
+	　　　　　　　　　　							<dash=2>彼女のためなら何でもする\n何にでもなる
+	　　　　　　　　　　							そう約束した日のことが、頭をよぎる
+	　　　　　　　　　　							思い出される彼女の顔は\nいつも笑顔で
+	黒背景		エフェクト表			0
+	　　　　　　　　　　							いつも優しく、\nいつも柔らかかった
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	6.5スチル7		エフェクト裏			0
+Se	斬1
+Tween	黒背景	MoveBy	x=-3000 time=2				NoWait
+Wait						.2
+	6.5スチル6		エフェクト表2			0
+Wait						1
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff						0
+Bg	廃村
+Param	character_grayout=true
+	魔剣少女(ヴァルト)	絶望2	2_3
+Shake	魔剣少女(ヴァルト)		x=5				Add
+	魔剣少女(ヴァルト)							……ぁぐッ……\nぃあぁっ……ぁ…………
+	　　　　　　　　　　							<dash=2>声に、ならない声
+	　　　　　　　　　　							喉から押し出される少女の声は\n次第にやがてただの音へと変化した
+	　　　　　　　　　　							少年には、その現実が\n理解できなかった
+	　　　　　　　　　　							なぜ\nどうして
+	　　　　　　　　　　							大切だった少女が、どうして
+	　　　　　　　　　　							……守ると誓った少女が、どうして
+	　　　　　　　　　　							少年は何もできず、ただ願った\n少年にできることは、それだけだった
+	黒背景		エフェクト表2			0
+	　　　　　　　　　　							だが、少年の願いは叶わなかった
+CharacterOff						0
+	少年(レド)	絶望
+	少年(レド)							……やめ、やめて……
+	少年(レド)	絶望2						たのむ……から……
+CharacterOff
+	勇者C		3_3
+	勇者B		1_3
+	勇者A		2_3
+	　　　　　　　　　　							彼らにその声は届いていた\nだが、彼らの手は止むことはなかった
+	勇者A							……何いってんだお前
+	勇者A							コレがそんなに大事かよ
+Se	斬1
+FadeOut	red					.1
+FadeIn	red					.1
+Wait						.2
+CharacterOff
+	魔剣少女(ヴァルト)	絶望
+Shake	魔剣少女(ヴァルト)		x=5				Add
+	魔剣少女(ヴァルト)							…………ぐ……ぅぁ……
+Tween	魔剣少女(ヴァルト)	MoveBy	y=-50				NoWait
+Wait						.5
+Se	倒れる
+Wait						.5
+CharacterOff
+	勇者C		3_3
+	勇者B		1_3
+	勇者A		2_3
+	勇者C							……チッ、もう動かなくなりやがった
+	勇者B							んだよてめーの魔剣、やっぱクズだな
+CharacterOff
+	黒グラデーション		エフェクト表
+	魔剣少女(ヴァルト)	絶望
+Shake	魔剣少女(ヴァルト)		x=5				NoWait
+	魔剣少女(ヴァルト)							…………あ……ぐ……ぅあ……
+	黒背景		エフェクト表2			1
+Wait						1
+CharacterOff	魔剣少女(ヴァルト)					0
+Param	character_grayout=false
+	6.5スチル9		エフェクト裏			0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+Tween	瞬きA	MoveBy	y=325 time=2	easeOutCirc			NoWait
+Tween	瞬きB	MoveBy	y=-325 time=2	easeOutCirc			NoWait
+Wait						.3
+CharacterOff	黒背景					1.7
+Wait						.8
+	　　　　　　　　　　							声帯を潰され\n視界も封じられた彼女には、
+	　　　　　　　　　　							主人たる魔剣使いが、\n目の前にいることに気付くことは\n難しかった
+Tween	瞬きA	MoveBy	y=500 time=4	easeOutCirc			NoWait
+Tween	瞬きB	MoveBy	y=-500 time=4	easeOutCirc			NoWait
+Wait						.5
+CharacterOff	6.5スチル9					1
+	少年(レド)	絶望	2_3			1
+	　　　　　　　　　　							少年は声が出せなかった\n<dash=2>否、出さなかった
+	　　　　　　　　　　							頭上で笑う彼らは\n自分の臆する表情と、それに反応し\n絶望する少女が見たいのだ
+	　　　　　　　　　　							……少年にできる抵抗は\nそれだけだった
+CharacterOff
+Param	character_grayout=true
+	勇者C		2_2
+	勇者B		1_2
+	勇者C							んだよ、つまんねぇな
+CharacterOff
+	勇者A							おい、アレ出せよ\nアレ、応急エメ
+CharacterOff
+	勇者C		2_2
+	勇者B		1_2					あと一個しかねーから、\nこれで最後だな
+	勇者C							お前んち貴族だろ？\nまた持ってこいよ
+	勇者B							バレたらやべーんだよ
+CharacterOff
+	勇者A							ちっ、また破損偽装して申請するか
+CharacterOff
+	勇者B		1_2
+	勇者C		2_2					お前ほんとクズだなー
+	勇者B							……ほい、準備できたぜ
+CharacterOff
+Param	character_grayout=false
+	魔剣少女(ヴァルト)	絶望	2_2
+	勇者A		1_2
+Tween	勇者A	MoveBy	x=50				NoWait
+Wait						.3
+	勇者A							ほーらエサだぜ、ちゃんと飲めよな？
+Se	回復
+FadeOut	lime					.5
+	魔剣少女(ヴァルト)	悲しい				0
+Wait						.2
+FadeIn	lime					.5
+	魔剣少女(ヴァルト)							……ぁ……ぅ…………
+CharacterOff
+Param	character_grayout=true
+	勇者C		2_2
+	勇者B		1_2					あーきもちわり
+	勇者C							すげえな魔剣、まじで治ってく
+	勇者B							何度見てもまじやべえわ
+CharacterOff
+	魔剣少女(ヴァルト)	悲しい	2_2
+	勇者A		1_2					まあそうだわな\n"人間"じゃねえし
+	勇者A							だからさ<dash=2>
+Tween	勇者A	MoveBy	x=40 time=0.5
+Se	打1
+Tween	魔剣少女(ヴァルト)	MoveBy	x=60				NoWait
+Tween	魔剣少女(ヴァルト)	PunchPosition	y=50				NoWait
+	魔剣少女(ヴァルト)	悲しい						…………っぅ……
+CharacterOff						0
+Param	character_grayout=false
+	黒グラデーション		エフェクト裏
+	6.5スチル10		エフェクト表			0
+	勇者A	<Off>						別に何したっていいだろ？
+CharacterOff						0
+	黒背景		エフェクト裏			0
+Wait						.2
+Se	突1
+Wait						.2
+	6.5スチル8		エフェクト表			0
+Wait						1
+CharacterOff						0
+Param	character_grayout=false
+	6.5スチル19		エフェクト表
+Shake	6.5スチル19		x=5				NoWait
+	魔剣少女(ヴァルト)	<Off>						あぎゃああああああああああああ!!!!
+CharacterOff						0
+	魔剣少女(ヴァルト)	絶望2	2_2
+	勇者A
+Tween	勇者A	MoveBy	x=-90	easeInOutSine			NoWait
+Tween	魔剣少女(ヴァルト)	MoveBy	y=-40 time=1.5	easeInQuart			NoWait
+	魔剣少女(ヴァルト)							あがっ、がはっ……はぁはぁ……
+CharacterOff
+	少年(レド)	絶望2						……………ッ
+CharacterOff
+StopBgm
+	6.5スチル11	b	エフェクト表					\n　　　　『　　　にげて　　　』
+	6.5スチル11	a	エフェクト表			.5		\n　『 　わたしのことはいいから 　』
+FadeOut	black					0
+CharacterOff
+Bg	曇天
+Wait						1.5
+FadeIn	black					.5
+	　　　　　　　　　　							<dash=2>少年にはわかっていた\n伝わっていた
+	　　　　　　　　　　							それでも少年は逃げられなかった\n……逃げなかった
+	　　　　　　　　　　							足を折られ、全身に痛みが走る今でも\n少年は逃げることはできた
+	　　　　　　　　　　							だが、それだけはしなかった
+	　　　　　　　　　　							<dash=2>許せなかった
+	　　　　　　　　　　							かつて友人だと思ったものたちが、\n今こうして、自分の大切なものを\n私利私欲のために破壊することを
+	　　　　　　　　　　							そして、それを愉しんでいることを\n一人の魔剣使いとして許せなかった
+	　　　　　　　　　　							だから、彼は\n逃げずに戦うことを決意した
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=true
+Bg	廃村					0
+	勇者A					0
+FadeIn	black					.3
+	勇者A							くはは！\nやっぱりヒトガタはいいな
+CharacterOff
+	勇者C		2_2
+	勇者B		1_2					斬る感覚を覚えておかねーとな
+	勇者C							いざ人を斬れなんて命令が来た時に\n躊躇してたらこっちがやべえもん
+CharacterOff
+	勇者A							なんだっけ、"勇者狩り"？\nそんなやつに狙われたら困るからな！\n容赦なく斬る感覚ってのは大事さ！
+CharacterOff
+	勇者C		2_2
+	勇者B		1_2					でも本物の人間は斬れねえからな
+	勇者C							勇者だからなあ
+	勇者B							その点、魔剣はやっぱいいわ、まじで
+	勇者C							斬っていい上、女の形してるもんな
+CharacterOff
+	勇者A							魔剣ってのはつくづく都合がいい
+FadeOut	black					0
+CharacterOff						0
+	黒背景		エフェクト表
+Wait						1
+FadeIn	black					.5
+	　　　　　　　　　　							……笑いながら、\nまるでおもちゃで遊ぶように\n彼らの斬撃練習は続けられた
+FadeOut	black					.5
+Bg	市街地C					0
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Param	character_grayout=false
+	勇者C		3_3			0
+	勇者B		1_3			0
+	勇者A		2_3			0
+	　　　　　　　　　　
+Bgm	絶望
+FadeIn	black					.5
+	　　　　　　　　　　							<dash=2>彼らは少年と違い\n固有の魔剣の携帯が\n許されてはいなかった
+CharacterOff						.5
+Wait						.5
+	少年(レド)	通常	1_2			.5
+	魔剣少女(ヴァルト)	通常	2_2			.5
+	黒背景		エフェクト表			35
+	　　　　　　　　　　							ただし特別なのは少年の方で、\n偶然家の蔵に眠る出処不明の魔剣を\nアンロックできてしまったのだ
+	　　　　　　　　　　							それが偶然、汎用エクスカリバーより\n性能が少しだけ高かった
+	　　　　　　　　　　							それが、不幸のはじまりだった
+	　　　　　　　　　　							固有魔剣の携帯は、\n最上位勇者の証であり
+	　　　　　　　　　　							家柄や血統、あるいは任務遂行上の\n特別な理由がない限りは、\nそれが認められることは少なかった
+	　　　　　　　　　　							その意味で、\n少年は勇者学園の頃から特別で、\n教師陣から一目置かれるようになった
+	　　　　　　　　　　							本部から固有帯刀許可が降りたという\n事実は、将来の幹部候補であるという\n証左だった
+	　　　　　　　　　　							だからこそ、\nそれは疎まれる要因となり
+	　　　　　　　　　　							魔剣少女をパートナーとしない\n者たちから、いわれのない差別を\n受ける原因となった
+FadeOut	black					.5
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	廃村					0
+	魔剣少女(ヴァルト)	絶望				0
+FadeIn	black					.5
+	魔剣少女(ヴァルト)							<dash=4>……ぁ……\n……ぐ……ぅ<dash=2>
+Tween	魔剣少女(ヴァルト)	MoveBy	y=-100 time=2				NoWait
+Wait						.4
+Se	倒れる
+Wait						.3
+CharacterOff						.5
+	　　　　　　　　　　							血塗れの少女は、\nただの人形のように力なく\n土と壁の間に崩れ落ちた
+CharacterOff
+Param	character_grayout=true
+	勇者C		3_3
+	勇者B		1_3
+	勇者A		2_3
+	勇者B							<dash=2>まあ、破損限界ってとこか
+	勇者A							ギリ魔核までいってねーだろ
+	勇者C							暴走反応はないけど、\nまじギリギリだな
+	勇者A							クハハ！ アンロックまじサンキュな\nまさか魔剣少女相手にできるとは\n思ってなかったわ
+	勇者B							まあお前も良い判断\nだったんじゃない？
+	勇者B							もし途中でロックしてたら\nお前の魔剣の魔核、いってたから
+	勇者C							それに、アンロックなしじゃ\nどーせ俺たちに勝てないっしょ？
+Param	character_grayout=false
+CharacterOff							0
+	勇者C		3_3				0
+	勇者B		1_3				0
+	勇者A		2_3				0
+	三人							あはははは!!
+FadeOut	black					0
+CharacterOff
+	6.5スチル12		エフェクト裏
+	黒グラデーション		エフェクト表
+Wait						.5
+FadeIn	black					0
+	　　　　　　　　　　							<dash=2>少年は逃げなかった
+	　　　　　　　　　　							絶望しても、眼の前が地獄でも
+	　　　　　　　　　　							この世界の全てを恨んでも
+	少年(レド)	<Off>						…………僕は、勇者だから<dash=2>
+FadeOut	white					.5
+StopBgm
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	MotionBlur
+	6.5スチル13		エフェクト表
+Bg	市街地A					0
+FadeIn	white					.3
+Wait						1
+CharacterOff
+	6.5スチル14	a	エフェクト表
+Wait						1
+	6.5スチル14	b				.5
+Wait						1.5
+CharacterOff
+	6.5スチル15	a	エフェクト表
+Wait						1.5
+	6.5スチル15	b				.5
+Wait						1
+	白背景		エフェクト表2			1
+Wait						1
+	　　　　　　　　　　							<dash=2>その全てを、守ると決めたんだ
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff						0
+Bg	廃村					0
+	6.5スチル16		エフェクト表			0
+FadeIn	white					0
+	勇者ルル	<Off>						<dash=4>よく言った
+Bgm	緊迫
+CharacterOff
+	少年(レド)	絶望						<dash=2>ぇ
+CharacterOff
+Param	character_grayout=true
+	勇者C		3_3
+	勇者B		1_3
+	勇者A		2_3
+	勇者A							…………な、いつの間に<dash=2>
+CharacterOff
+Param	character_grayout=true
+	アマノハバキリ
+	ノイズ							やだやだ、E.D.E.N.の腐敗も\nここまでとはね……
+	アマノハバキリ							ふふ、所詮は人間ですもの
+CharacterOff
+	勇者ルル	闇落ち2	1_2
+	ゲオルギウス		2_2					<dash=2>で、\nやっちゃっていいの、ルル様？
+	勇者ルル							ああ、なるべく死なないように\n<dash=2>人生のすべてを後悔させる
+	ゲオルギウス							らじゃー♪
+FadeOut	black					0
+StopBgm
+CharacterOff						0
+	勇者A	黒
+Wait						3
+FadeIn	black					.3
+Shake	勇者A		x=5				Add
+	勇者A							……ぁ、ぐ…………
+Tween	勇者A	MoveBy	y=-100 time=2				NoWait
+Se	倒れる
+Wait						.5
+CharacterOff
+Bgm	絶望
+	黒グラデーション		エフェクト表
+	　　　　　　　　　　							<dash=2>それは、凄惨な現場だった
+	　　　　　　　　　　							さっきまでのそれが地獄ならば\n今のこれは恐らく地獄の底のさらに底\n血と剣戟だけで創られた世界の最底辺
+	　　　　　　　　　　							絶望を絶望で塗りつぶしたような\n闇だった
+CharacterOff
+	ゲオルギウス							ふぃー\nこれでよかったかな、ルル様
+	勇者ルル	冷徹2						ああ、いい仕事だよゲオル
+	ゲオルギウス							さすがにお互いを斬らせ合うのは\nちょっとかわいそうだったけどね
+	勇者ルル	冷徹2						大丈夫、全員かろうじてまだ生きてる\n手加減の具合はさすがだよ
+	ゲオルギウス							えへへ♪
+	アマノハバキリ							<dash=2>全員の名前、所属を記録しました
+	勇者ルル	冷徹2						助かるよ、あーちゃん
+	アマノハバキリ							でもこの損傷だと、\n全員あと10分くらいで\nお亡くなりになるかと
+CharacterOff
+Param	character_grayout=false
+	勇者C	黒	3_3
+	勇者B	黒	1_3
+	勇者A	黒	2_3
+	勇者たち	<Off>						………………ぅ……
+CharacterOff
+Param	character_grayout=true
+	勇者ルル	冷徹2						それでいい
+	勇者ルル							そうやってお前たちは、\n自分の人生を後悔して死ぬんだ
+	アマノハバキリ							ふふ、微妙に意識が残っている分\n逝くまでがお辛いでしょうけれど
+	アマノハバキリ							ルル様が死なないようにと\n仰った以上、それまでの\nあなた方の生は確実です♪
+	ノイズ							…………ルル、あんたさ
+	勇者ルル	冷徹2						………………
+	ノイズ							いや、なんでもない\n私らはあんたの魔剣だから、\nあんたがやりたいことを実現する
+	勇者ルル	冷徹2						……ありがとう、ノイズ
+	ノイズ							…………ふん\nそれで彼はどうすんの
+	少年(レド)	絶望						……………………
+	　　　　　　　　　　		1_2					……少年はあっけにとられていた\n目の前で起きた現実に
+CharacterOff
+Param	character_grayout=false
+	6.5スチル17		エフェクト表
+	　　　　　　　　　　							<dash=2>特進して特AAA級勇者となり、\n勇者王シドウ直下の部下として\n特命任務をこなす男
+	　　　　　　　　　　							勇者界の若手エースにして希望の星
+	　　　　　　　　　　							絶望を乗り越え禁忌級魔剣3本を\n同時に操る稀代の天才魔剣使い\n<dash=2>勇者ルシフル
+CharacterOff
+	勇者C	黒	3_3
+	勇者B	黒	1_3
+	勇者A	黒	2_3
+	　　　　　　　　　　							その彼が、今、目の前で、彼らを
+	　　　　　　　　　　							人間を、勇者を、惨殺した
+	　　　　　　　　　　							……否、今はまだ生きているけれど\nその死は確実で
+	　　　　　　　　　　							怨嗟が共鳴するこの場所は\n地獄そのもので、\nそれを作り上げたのが憧れの彼だった
+CharacterOff
+StopBgm
+	6.5スチル17		エフェクト表
+	勇者ルル	<Off>						キミは、勇者だ
+CharacterOff
+	少年(レド)	絶望						…………ぇ
+	勇者ルル	冷徹2						キミがどうして"こうなった"のかは\n僕には知る由もない
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+	6.5スチル15	b	エフェクト表			0
+Bg	市街地A
+FadeIn	white					.3
+	　　　　　　　　　　							<dash=2>魔剣を守るため、\n家族を守るため
+	6.5スチル14	a	エフェクト表
+	　　　　　　　　　　							<dash=2>信念を守るため、\n自分を守るため
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	Bloom
+CharacterOff						0
+Param	character_grayout=true
+Bg	白背景					0
+	6.5スチル17		エフェクト表
+	　　　　　　　　　　							　	BrPage
+FadeIn	white					.3
+	勇者ルル	冷徹2	画面外_下					だが、ひとつ言えることは\nキミは『勇者』だ
+	白背景		エフェクト表			1.5
+Wait						2
+Param	character_grayout=false
+Bgm	凱旋
+	　　　　　　　　　　							<dash=4>勇者
+ImageEffectOff	SpriteCamera	Bloom
+	　　　　　　　　　　							そう言われた途端、\n世界に光が差し込んだような気がした
+	　　　　　　　　　　							血に塗れた少年は、\nさらにもっと血に塗れた少年に\n光を感じた
+	　　　　　　　　　　							この闇の世界で\n彼が希望そのものに見えた
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=true
+Bg	廃村
+	勇者ルル	冷徹2
+Wait						2
+FadeIn	white					.5
+	勇者ルル							<dash=2>E.D.E.N.は腐敗している
+	勇者ルル							この程度の人間が勇者を語り\nこの世界を、この魔界を\n守ろうとしている
+	勇者ルル							だが結局のところ、こんな者たちには\n何もできやしない
+CharacterOff
+	魔剣少女(ヴァルト)	悲しい	2_2
+	少年(レド)	悔しい	1_2					………………
+CharacterOff
+	勇者ルル	冷徹2						これらは膿だ
+	勇者ルル							シドウを王とする現在の\nエデン国家では、平和は訪れやしない
+	勇者ルル							<dash=2>初代勇者王アーサーが\n成し遂げようとした、\n本当の魔界の平和は訪れない
+	勇者ルル							<dash=2>だから、\n僕は『勇者』を探している\n本当に世界を救える、『勇者』を
+CharacterOff
+	魔剣少女(ヴァルト)	悲しい	2_2
+	少年(レド)	怒り	1_2					…………僕は<dash=2>
+CharacterOff
+	勇者ルル	冷徹2						僕と一緒に来い\n勇者レド、魔剣ヴァルト
+	勇者ルル							……僕と共に、E.D.E.N.を変えよう
+CharacterOff
+	　　　　　　　　　　							<dash=2>少年が強く握ったルルの手は\n思いの外に華奢で、優しくて、暖かく\nそしてとても心強かった
+FadeOut	black					.5
+CharacterOff
+StopBgm						.5
+Wait						.5
+	ノイズ					0
+FadeIn	black					.5
+	ノイズ							はぁ、これで何人目？\nこの間の魔剣研究家といい、\n変なのばかり仲間にするのね
+	アマノハバキリ							いえいえ、\nルル様が選んだ方ですから
+	ゲオルギウス							ヴァルトちゃんとレドちゃんでいい？\nえへへ、これからよろしくね！
+	ノイズ							…………待って
+	ノイズ							最後に確認させて\n…………本当にいいのね？
+CharacterOff
+	魔剣ヴァルト	悲しい	2_2
+	勇者レド	怒り	1_2					…………僕は
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+	6.5スチル12		エフェクト表			0
+FadeIn	white					.3
+	　　　　　　　　　　							<dash=2>少年は決意した\nこの命は、彼のために使うと
+	　　　　　　　　　　							少年は逃げなかった\n絶望しても、眼の前が地獄でも\nこの世界の全てを恨んでも
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+	6.5スチル18		エフェクト表
+FadeIn	white					.3
+Bgm	風属性バトル
+	勇者レド	<Off>						…………僕は、『勇者』だから
+	　　　　　　　　　　							<dash=2>その全てを、守ると決めたんだ
+CharacterOff
+Param	character_grayout=true
+	勇者ルル	冷徹2						ようこそ『勇者』、歓迎する\nそして力を貸してくれ
+	　　　　　　　　　　		1_2					……少年には覚えがあった
+	　　　　　　　　　　							『勇者狩り』\n腐り始めた勇者の粛清を謳う\n謎の人物
+	勇者ルル	闇落ち2						<dash=2>僕は、この腐敗の元凶を断つ
+	勇者ルル							勇者という地位と権力を利用し、\nこの世界の真実すらも踏み台にして
+	勇者ルル							己が欲望のために世界支配を狙う者を\n……この手で討ち倒す
+	勇者ルル	冷徹2						僕は、勇者シドウを<dash=2>
+CharacterOff
+Param	character_grayout=false
+	6.5スチル17		エフェクト裏
+	勇者ルル	<Off>						<dash=2>いや、聖剣使いシドウを倒す
+	黒背景		エフェクト表			0
+Wait						1
+	　　　　　　　　　　							<dash=4>勇者レド
+	　　　　　　　　　　							これは、勇者ルルと<dash=2>\n後にルル派幹部としてルルの右腕、\nそして『頭脳』と呼ばれる男の<dash=2>
+	　　　　　　　　　　							<dash=2>出会いの物語である
+FadeOut	white					1
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*Q1006_5_01a
+EndIf
+EndScenario

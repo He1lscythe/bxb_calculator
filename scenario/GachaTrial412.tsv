@@ -1,0 +1,737 @@
+# G_412_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	バトル
+Bg	草原A(夜)
+Param	character_grayout=false
+	カシウス		1_2_b
+	ディーア	本気2	2_2
+FadeIn	white					.5
+	ディーア							これで<dash=2>終わりだッ!!
+Se	光2
+	オーラ青		エフェクト表			1
+Wait						1.2
+CharacterOff						0
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=100				NoWait
+	キノコリオン							ノコッ!?
+Wait						.5
+Se	光3
+Se	光2
+FadeOut	aqua					.5
+CharacterOff
+	オーラ青					0
+Wait						1
+FadeIn	aqua					1
+CharacterOff	オーラ青					1
+StopBgm						1
+Wait						1.5
+Param	character_grayout=true
+CharacterOff
+	カシウス		1_2_b
+	ディーア	悔しい2	2_2
+	ディーア							はぁ、はぁ……
+Bgm	平和
+	カシウス							ふぅー、疲れたぁ♪
+	ディーア	汗2						長時間おつかれさま\nよく頑張ったな、カシウス
+Tween	カシウス	PunchPosition	y=50				NoWait
+	カシウス							えへへへ♪\r\n褒められちゃったぁ♪
+	ディーア	悔しい2						それにしても、まさかこんなに\n時間のかかる任務だとは……
+	カシウス							えへへ……♪\nすっかり暗くなっちゃったね♪
+	カシウス							カシウス、こんなに遅くまで\nお外にいたの初めて！
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	カシウス	拡大	エフェクト表					なんだかすごくドキドキするね……♪\n「悪いこと」してるみたい♪
+	カシウス							ねぇ、これって「悪いこと」かな？\n見つかったら、怒られちゃうかなっ？
+CharacterOff
+Param	character_grayout=true
+	カシウス		1_2_b
+	ディーア	あはは2	2_2
+	ディーア	あはは2						……大丈夫だよ、任務だしな\nE.D.E.N.に見つかっても、\n説明すればわかってくれるさ
+	カシウス	悲しい						むぅ……「悪いこと」じゃないの？
+	ディーア	怪しい2						ああ、それに夜の魔界には\nもっと悪い人がいるしな
+Tween	カシウス	PunchPosition	y=50				NoWait
+	カシウス	通常						ほんとっ!?\nもっと悪いの？　どんな人？
+	ディーア	あはは2						……あんまり楽しい話じゃないよ
+	カシウス	照れ						……そうかなあ？
+	ディーア							ああ　早く帰ろう、オレもう限界だ\n今日は疲れたよ……
+	カシウス	悲しい						………………はぁーい
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+StopBgm						1
+CharacterOff
+StopBgm
+Bg	酒場_宿屋(夜)
+	黒背景		エフェクト表			0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+Wait						3
+FadeIn	black					.5
+	　　　　　　　　　　							\n 　　　　　　<color=blue><dash=2>深夜<dash=2></color>
+CharacterOff	黒背景
+Tween	瞬きA	MoveBy	y=325 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-325 time=2	easeOutCirc
+	ディーア	<Off>						…………ん\nふぁ……なんか目が覚めちゃったな
+	ディーア	<Off>						眠い……二度寝するか……
+Tween	瞬きA	MoveBy	y=-325 time=2	easeInCirc			NoWait
+Tween	瞬きB	MoveBy	y=325 time=2	easeInCirc			NoWait
+Wait						.5
+	黒背景		エフェクト表			1
+Wait						1.5
+	？？？？		2_3					…………んぅ
+Param	character_grayout=false
+	トライアルスチル41207		エフェクト裏
+	カシウス	<Off>
+	ディーア	<Off>						んぅ？
+CharacterOff	黒背景					2.2
+Tween	瞬きA	MoveBy	y=375 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-375 time=2	easeOutCirc
+	カシウス	<Off>						ん……ふぁ……♪\nあ、マスターさん♪
+	カシウス	<Off>						えへへ、おじゃましてまーす♪
+	ディーア	<Off>						なんだ、カシウスか……
+	黒背景		エフェクト表			1
+Tween	瞬きA	MoveBy	y=-325 time=2	easeInCirc			NoWait
+Tween	瞬きB	MoveBy	y=325 time=2	easeInCirc			NoWait
+Wait						1
+CharacterOff						0
+Param	character_grayout=true
+	カシウス		1_2			0
+	ディーア	本気2	2_2			0
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	ディーア	MoveBy	x=100				NoWait
+Bgm	コメディ
+	ディーア							ってえええええ!?
+	ディーア	驚き2						いいいい、いつの間にオレの布団に!?
+	カシウス							えへへ、ちょっと\n悪い子になっちゃった♪		1520-28
+	カシウス	照れ						……カシウスだって、\n悪い子になりたい時もあるんだよ？
+	ディーア	汗2						そうはいっても、急に布団に\n潜り込まれると困るというか……
+	ディーア	怪しい2						……普通に"事案"というか
+StopBgm
+Tween	カシウス	PunchPosition	y=50				NoWait
+	カシウス	悲しい						…………だめなの？
+Tween	ディーア	MoveTo	x=90				NoWait
+Bgm	雪の街					3
+	ディーア	怪しい2						だ、ダメとは言わないけど……\nひょっとして、怖い夢でも見たのか？
+	カシウス	照れ						ううん、違うよ？
+	ディーア	驚き2						じゃあ何か嫌なことでもあったのか？
+	カシウス	通常						ううん、あのね？\nごほうび、ほしいなーって
+	ディーア	驚き2						ご褒美？
+Tween	カシウス	PunchPosition	y=50				NoWait
+	カシウス							うんっ！\nカシウス今日がんばったから、\nごほうびほしいの
+	ディーア							ああ、今日は任務終わって\nすぐに帰ってきちゃったもんな……\nごめんな、疲れてたんだ
+	ディーア	通常2						……それで、\nどんなご褒美がほしいんだ？
+Tween	カシウス	MoveBy	x=10				NoWait
+	カシウス	照れ						えっと、あのね……\nカシウスに「悪いこと」\n教えてほしいの
+	ディーア	汗2						わ、悪いこと……？
+	カシウス							マスターさん、悪い人なんでしょ？
+	カシウス							リディちゃん言ってたよ、\nマスターさんは悪い人だから、\n手を出されないように気をつけろって
+	ディーア	怪しい2						そんなこと言ってたのか……
+Tween	カシウス	MoveBy	x=10				NoWait
+	カシウス							……ねえ、手<dash=2>出してもいいよ？
+	ディーア	驚き2						……え？
+	カシウス	照れ						……手、出してもいいって言ったの\nマスターさんの、好きにしていいよ？
+	カシウス	通常						ね？\nだから、カシウスに\n「悪いこと」……教えて？
+	ディーア							そ、そんなこといわれてもな……
+	カシウス	悲しい						…………だめ？
+	ディーア	悔しい2						ああ、それはできない\nそんなことしたら、\nE.D.E.N.に捕まっちゃうからな
+Tween	カシウス	MoveBy	x=30
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	カシウス	悲しい拡大	エフェクト表					……なんで？\nカシウスが、してって言ってるのに？
+	トライアルスチル41205		エフェクト表
+	カシウス	<Off>						マスターさんはカシウスに\n好きなことしていいんだよ？
+	トライアルスチル41206		エフェクト表
+	カシウス	<Off>						だって、カシウスも\nしてほしいんだから
+	カシウス	拡大	エフェクト表					……ね？
+CharacterOff
+Param	character_grayout=true
+	カシウス		1_2_b
+	ディーア	汗2	2_2
+	ディーア							いや、でも……
+Tween	カシウス	MoveBy	x=10				NoWait
+	カシウス							ね、マスターさん……
+	ディーア	悔しい2						ちょ、カシウス……！
+FadeOut	black					.2
+CharacterOff						0
+Param	character_grayout=false
+	オーラ桃		エフェクト裏2
+	トライアルスチル41207		エフェクト裏			0
+FadeIn	black					.2
+	カシウス	<Off>						マスターさん……
+Se	心拍	TRUE
+	ディーア	<Off>						あ、あ……
+	ディーア	<Off>						だ、ダメだ、カシウス<dash=2>
+	カシウス	<Off>						<size=20>……大丈夫だよ\nぜんぶ、ナイショにしてて\nあげるから</size>
+	カシウス	<Off>						<size=20>だから、ね<dash=2></size>
+	黒背景		エフェクト表			2
+Wait						2
+	カシウス	<Off>						<size=20>カシウスと2人で、\n「悪いこと」<dash=2>しよ♪</size>
+FadeOut	black					3
+CharacterOff						0
+	理性くん	拡大	エフェクト表			0
+	？？？？
+StopBgm
+StopSe
+FadeIn	black					.1
+Shake	Graphics						Add
+	？？？？							ちょーーっと待ったぁ!!!!
+Param	character_grayout=true
+CharacterOff
+Bgm	コメディ
+	理性くん		3_3
+	ディーア	本気2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							(お前は!!\n オレの中の<ruby=りせい>天使</ruby>!!)
+Tween	理性くん	PunchPosition	y=50				NoWait
+	理性くん							何してんだよ!!\n相手は小さな女の子なんだぞ!?
+	ディーア	驚き2
+	理性くん							こんな年端もいかない女の子に\n手なんか出してみろ!!\n人生が終わるぞ!!
+	ディーア	悔しい2						(あ、ああ、そうだな……\n オレ、どうかしてたよ)
+CharacterOff	理性くん
+Tween	ディーア	MoveTo	x=90				NoWait
+Wait						.4
+	カシウス		1_2_b
+	ディーア	怒り2						……カシウス
+	カシウス							なあに、マスターさん？
+	ディーア	本気2						ごめん、オレは<dash=2>
+FadeOut	black					.2
+CharacterOff						0
+Param	character_grayout=false
+	黒グラデーション		エフェクト表			0
+	欲望くん	拡大	エフェクト裏			0
+StopBgm
+	？？？？					0
+FadeIn	black					.2
+	？？？？							おいおい、断るのか？\nせっかく女の子が\n勇気を出して誘ってくれたのに
+Param	character_grayout=true
+FadeOut	black					.2
+CharacterOff						0
+	欲望くん		1_3			0
+	理性くん		3_3			0
+	カシウス		1_2_b			0
+	ディーア	悔しい2	2_2			0
+FadeIn	black					.2
+Tween	ディーア	PunchPosition	y=50				NoWait
+Bgm	コメディ
+	ディーア							(お前は!!\n オレの中の<ruby=よくぼう>悪魔</ruby>!!)
+	欲望くん							女の子が一人でベッドに忍び込んで\nマスターを誘うなんて、きっとすごく\n勇気がいることだっただろうなあ？
+Tween	欲望くん	PunchPosition	y=50				NoWait
+	ディーア	驚き2
+	欲望くん							お前はそんな勇気を無下に\n切り捨てるのか？
+	ディーア	悔しい2
+	欲望くん							<dash=2>そんなかわいそうなこと\nできないよなあ？
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望2						(あ、ああ……そうだな……\n そんなことはオレにはできない……)
+FadeOut	black					.2
+CharacterOff						0
+	カシウス	照れ拡大	エフェクト裏			0
+FadeIn	black					.2
+	カシウス							マスターさん、お願い……♪
+	欲望くん		1_3
+Tween	欲望くん	PunchPosition	y=50				NoWait
+	欲望くん							ほら、カシウスもこう言ってるしさ
+CharacterOff	欲望くん
+Param	character_grayout=false
+	カシウス	拡大
+	ディーア	<Off>						か、カシウス……
+	カシウス							マスターさん……
+CharacterOff						0
+Param	character_grayout=true
+	理性くん	拡大	エフェクト表			0
+Shake	Graphics						Add
+	理性くん							だめーーーーっ!!
+CharacterOff						0
+	カシウス		1_2_b			0
+	ディーア	驚き2	2_2			0
+Tween	ディーア	PunchPosition	y=50				NoWait
+Tween	ディーア	MoveBy	x=90				NoWait
+	ディーア							いったぁ!?\nう、腕が勝手に……？
+Tween	カシウス	MoveBy	x=10				NoWait
+	カシウス	悲しい						ま、マスターさん？\nどうしたの……？
+Tween	ディーア	MoveBy	x=-90				NoWait
+	ディーア	汗2						い、いや、大丈夫だ……\nなんでもないぞ……
+	欲望くん		1_3
+	理性くん		3_3
+Tween	欲望くん	PunchPosition	y=50				NoWait
+Tween	理性くん	PunchPosition	y=50				NoWait
+	ディーア	本気2
+	欲望くん							何するんだよ！\nいいところだったのに！
+	理性くん							いいわけあるか！\n人生が終わりかけてたんだぞ!!
+	ディーア	怪しい2
+	欲望くん							いいじゃないか、E.D.E.N.の牢屋と\n天秤にかけるくらいの価値は\nあると思うぜ
+Tween	理性くん	PunchPosition	y=50				NoWait
+	ディーア	悔しい2
+	理性くん							それだけで済むわけないだろ!!
+	理性くん							いいか、もし手なんか出してみろ！\n二度と外を歩けない身分に\nなってしまうぞ！
+	ディーア	本気2
+	理性くん							そんなこと、絶対ダメだからな、\n<param=name>!!
+Tween	欲望くん	PunchPosition	y=50				NoWait
+Tween	理性くん	PunchPosition	y=50				NoWait
+Wait						.3
+CharacterOff	欲望くん
+CharacterOff	理性くん
+Wait						.5
+	カシウス	悲しい						……どうしたの、マスターさん？\nさっきからなんだか変だよ？
+	ディーア	あはは2						いやいやいや！\nなんでもない、気にしないでくれ！
+	カシウス	通常						えへへ、変なマスターさん♪\nちょっとおもしろいかも♪
+Tween	カシウス	PunchPosition	y=50				NoWait
+	カシウス							あ！\nもしかして、カシウスを見て\n「悪いこと」考えてたの？
+	ディーア							えっ!?\nい、いや、そういうわけじゃ……
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	カシウス	照れ拡大	エフェクト表					……ずるい\nカシウスも一緒に混ぜて？
+Param	character_grayout=true
+CharacterOff
+	欲望くん	拡大	エフェクト表					<size=40>今だ!!</size>
+CharacterOff
+	欲望くん		1_3
+	理性くん		3_3
+	カシウス		1_2_b
+	ディーア	怒り2	2_2
+Tween	理性くん	PunchPosition	y=50				NoWait
+	理性くん							今だじゃないよ!!
+	理性くん							ほらよく見て！\nこんな純粋でかわいい女の子を\n汚すなんて許されるわけないでしょ！
+	ディーア	驚き2						(あ、ああ……\n そのとおりだ、\n 俺がどうかしていた……)
+	理性くん							どうかしすぎなんだよキミは
+StopBgm
+Tween	欲望くん	PunchPosition	y=50				NoWait
+	ディーア	怪しい2
+	欲望くん							かちん
+Tween	欲望くん	MoveBy	x=10				NoWait
+Bgm	絶望
+	欲望くん							おい<param=name>、考えても見ろよ
+	欲望くん							お前はいま誘われてる側なんだぜ？\n許してくれるに決まってるだろ
+	ディーア	照れ2						(そ、そうかな……)
+Tween	理性くん	MoveBy	x=-10				NoWait
+	理性くん							そんなことない！\n彼女だって絶対に嫌がるはずで<dash=2>
+	ディーア	悔しい2						うっ……やっぱりそうだよな……\nなあ、カシウス……
+CharacterOff
+Param	character_grayout=false
+	トライアルスチル41207		エフェクト裏2
+	カシウス	<Off>						ん……いいよ、マスターさん
+	トライアルスチル41203		画面外_下			0
+	トライアルスチル41204		画面外_上			0
+Tween	トライアルスチル41203	MoveTo	y=-60 time=0.4	linear			NoWait
+Tween	トライアルスチル41204	MoveTo	y=-60 time=0.4	linear			NoWait
+Wait						.2
+	集中線		エフェクト表2			.5
+Bgm	バトル
+Wait						.2
+	二人							<size=40>イケるッッッッ!!!!</size>
+CharacterOff
+Param	character_grayout=true
+StopBgm
+	理性くん	拡大	エフェクト表
+Shake	Graphics						Add
+	理性くん							<size=40>ダメだってば!!!!</size>
+CharacterOff
+	欲望くん		1_3
+	理性くん		3_3
+	カシウス		1_2_b
+	ディーア	驚き2	2_2
+Tween	理性くん	PunchPosition	y=50				NoWait
+Bgm	コメディ
+	理性くん							キミはいま自分が何をしようと\nしてるのかわかってるのか!?
+	理性くん							<dash=2>魔界の謎を解くんだろう？\n探しものがあるんだろう!?
+	理性くん							いま彼女に手を出せば、\nキミは幼い女の子に手を出した\n犯罪者になる！
+	理性くん							そうなったら魔剣機関にも\nいられなくなるし、冒険だって\n続けられなくなるんだぞ!!
+Tween	ディーア	PunchPosition	y=50				NoWait
+StopBgm
+	ディーア	悔しい2						(<dash=2>そうだ、オレは……!!)
+Bgm	凱旋
+	ディーア	怒り2						(そうだったな、\n オレはここで冒険を\n 終わらせるわけにはいかない)
+	欲望くん							お、おい、何を<dash=2>
+	ディーア							(悪いな悪魔、オレは決めたよ)
+Tween	理性くん	PunchPosition	y=50				NoWait
+	理性くん							よっしゃ！\n勝った！
+	欲望くん							くっ……!!
+CharacterOff
+	カシウス	照れ拡大	エフェクト表					…………マスターさん？\nまだ？
+CharacterOff
+	ディーア	本気2						……ごめんなカシウス、オレは<dash=2>
+CharacterOff
+StopBgm
+	欲望くん		1_3
+	理性くん		3_3
+	カシウス	照れ	1_2_b
+	ディーア	本気2	2_2
+	欲望くん							こうなったら……えいっ
+Se	打1
+Tween	欲望くん	PunchPosition	x=50
+Tween	カシウス	PunchPosition	y=50				Add
+Tween	カシウス	MoveBy	x=30				Add
+	カシウス	通常						わっ
+	ディーア	驚き2						カシウス!?\n危ない!!
+Tween	ディーア	MoveBy	x=-50				NoWait
+Wait						.2
+FadeOut	black					.1
+CharacterOff						0
+Se	倒れる
+	黒背景		エフェクト表
+Wait						2
+FadeIn	black					1
+	ディーア	<Off>						だ、大丈夫か？
+	カシウス	<Off>						う、うん、大丈夫……
+Param	character_grayout=false
+	トライアルスチル41201		エフェクト裏
+CharacterOff	黒背景					2
+Wait						1.8
+	ディーア	<Off>						…………え
+	カシウス	<Off>						……えへへ♪\n押し倒されちゃった♪
+	ディーア	<Off>						ご、ごめ、わざとじゃ<dash=2>
+Se	心拍	TRUE
+	カシウス	<Off>						みて……カシウス、\nすごいどきどきしてる
+	カシウス	<Off>						えへへ、二人で悪いこと<dash=2>\nしちゃってるね♪
+	ディーア	<Off>						…………ッ
+	カシウス	<Off>						ほら、マスターさん……
+FadeOut	black					.5
+CharacterOff						0
+	トライアルスチル41202		エフェクト裏			0
+FadeIn	black					.5
+	カシウス	<Off>						<size=20><dash=2>触って、確かめて？</size>
+	ディーア	<Off>						…………ぁ
+	トライアルスチル41201		エフェクト表			.5
+StopSe
+Bgm	凱旋
+	欲望くん	<Off>						……もうよくない？\nお前、十分頑張ったよ
+	ディーア	<Off>						……ああ……そう、だよな……
+	ディーア	<Off>						カシウス……
+	理性くん							だめだめだめ!!\nさっきの決意を忘れたのかい!?
+	ディーア	にやけ2						(もう疲れたよ<ruby=りせい>天使</ruby>……)
+	理性くん							弱いな！\nそれでも魔剣使いかよ！
+CharacterOff
+Param	character_grayout=true
+StopBgm
+	欲望くん		1_3
+	理性くん		3_3
+	カシウス		1_2_b
+	ディーア	怪しい2	2_2
+	ディーア							(むっ)
+Bgm	コメディ
+	欲望くん							英雄色を好むっていうだろ
+	ディーア	怒り2						(だよな)
+	理性くん							だよなじゃないんだよ！\n事案だぞ、わかってるのか!?
+	理性くん							よく考えろ！\nキミを信じてくれている\n他の子たちはどうする！
+	ディーア	悔しい2						(……！\n そうだ、オレにはみんなが……!!)
+	欲望くん							まあ待て、それならこう考えるんだ
+FadeOut	black					.2
+CharacterOff						0
+Param	character_grayout=false
+	トライアルスチル41201		エフェクト表			0
+FadeIn	black					.2
+	欲望くん	<Off>						……いいか、これは<dash=2>夢だ
+	ディーア	<Off>						(夢かあ……)
+CharacterOff
+Param	character_grayout=true
+	欲望くん		1_3
+	理性くん		3_3
+	カシウス		1_2_b
+	ディーア	にやけ2	2_2
+Tween	理性くん	PunchPosition	y=50				NoWait
+	理性くん							夢なわけあるか！
+	欲望くん							いいじゃんたまには息抜きくらい\nだってあんな可愛い子が\n迫ってくるんだぞ
+	ディーア	にやけ2						(そうだよねぇ、いいよねぇ\n えへへ……)
+	理性くん							このっ……リディはどうする！\nリディに顔向けできるのか!?
+	ディーア	驚き2						(そうだ、リディ……!!)
+	理性くん							そうだ、よく考え直せ！\nもしこれがリディにバレたら……
+StopBgm
+Se	回想
+FadeOut	white					.5
+Bg	酒場1F					0
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	リディ	絶望2				0
+FadeIn	white					.5
+	リディ							マスター、そんな人だったんだね……
+	リディ							最低……っ
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	酒場_宿屋(夜)					0
+CharacterOff						0
+	欲望くん		1_3			0
+	理性くん		3_3			0
+	カシウス		1_2_b
+	ディーア	怪しい2	2_2			0
+FadeIn	white					.5
+	理性くん							なんてことになるかも\nしれないんだぞ!!
+Bgm	コメディ
+	欲望くん							正直ちょっとゾクゾクする
+	ディーア	怪しい2						(……わかる)
+	理性くん							キミたちさあ！
+	欲望くん							なんだよ口うるさい<ruby=りせい>天使</ruby>だな
+	ディーア	怪しい2						(そーだそーだ)
+	理性くん							同意するな！
+Bgm	凱旋
+	ディーア	悔しい2						(でも、そうだな……\n リディや他のみんなに\n 見限られるわけにはいかない)
+	ディーア	怒り2						(オレはそんな魔剣使いに\n なりたいわけじゃない)
+	ディーア							だから……カシウス
+	カシウス	照れ						ん……なあに？
+	ディーア	怒り2						いいか、これは悪いことなんだ
+	カシウス	悲しい						うん、わかってるよ\nでも……
+	ディーア	通常2						もちろん、オレはカシウスを\n大切に思ってる
+	ディーア							共に戦う仲間として信頼しているし、\n好ましくも思っているさ
+	ディーア	怒り2						だけど……だからといって、\nカシウスみたいな子に手を出しては\nいけないんだ
+	カシウス	通常						マスターさん……
+	ディーア							例えばもしリディに見つかったら、\nオレは大変なことになる
+	ディーア							旅は続けられないかもしれないし、\n魔剣使いとしてもおしまいだ
+	ディーア							だから<dash=2>
+StopBgm
+	カシウス	通常						でも、リディちゃんは\nバイトで疲れてぐっすりだよ？
+Bgm	コメディ
+	ディーア	にやけ2						じゃあ大丈夫だなぁえへへへへ
+CharacterOff
+	理性くん	拡大	エフェクト表
+Tween	理性くん	PunchPosition	y=50				NoWait
+	理性くん							<size=40>ダメだから!!!!</size>
+CharacterOff
+	欲望くん		1_3
+	理性くん		3_3
+	カシウス		1_2_b
+	ディーア	悔しい2	2_2
+	ディーア							(わ、わかってるよ……)
+Tween	欲望くん	PunchPosition	y=50				NoWait
+Tween	理性くん	PunchPosition	y=50				NoWait
+Wait						.2
+CharacterOff	欲望くん
+CharacterOff	理性くん
+StopBgm						3
+	ディーア	怪しい2						…………はぁ
+	カシウス	照れ						マスターさん？\n……どうしたの？
+	ディーア	驚き2						い、いや！　なんでもないぞ！\nちょっと疲れてるみたいだ
+	ディーア	怪しい2						はぁ、のどが渇いた……
+Tween	カシウス	MoveBy	x=10				NoWait
+Bgm	雪の街					1
+	カシウス	悲しい						だ、大丈夫？\nマスターさん、お水飲む？
+	ディーア	あはは2						ああ、そうだな……そうしようか\nジュースでも飲んで一服しよう
+Tween	カシウス	PunchPosition	y=50				NoWait
+	カシウス	通常						ふぇ？\nじゅーす？
+	ディーア	通常2						ああ、この間リディが作ってた\n薬草のジュースが余ってるはずだ
+	カシウス							こんな遅い時間に、\nジュース飲んでいいの？
+Tween	カシウス	MoveBy	x=10				NoWait
+	カシウス							それってもしかして……\n「悪いこと」？
+	ディーア	驚き2						……え？\nああ、言われてみれば……\n確かに「悪いこと」かもな
+Tween	カシウス	PunchPosition	y=50				NoWait
+	カシウス							えへへ、「悪いこと」だぁ♪\nねえねえ、それじゃあ、\nカシウスもジュース飲んでいい？
+	ディーア	笑い2						ああ、もちろん
+	カシウス							やったぁ♪
+StopBgm						3
+	ディーア	笑い2						…………
+	ディーア	驚き2						………………
+	ディーア	絶望2						オレは……こんな純粋な子に……\nいったい何をしようと……？
+	欲望くん		1_3
+	理性くん		3_3
+Tween	欲望くん	PunchPosition	y=50				NoWait
+Tween	理性くん	PunchPosition	y=50				NoWait
+	理性くん							ようやく気付いたかバカ
+	欲望くん							ちぇっ、あと少しだったのに
+Tween	欲望くん	PunchPosition	y=50				NoWait
+Tween	理性くん	PunchPosition	y=50				NoWait
+Wait						.2
+CharacterOff	欲望くん
+CharacterOff	理性くん
+	ディーア	怪しい2						はぁ……
+FadeOut	black					.5
+CharacterOff						0
+Bg	酒場1F
+	カシウス		1_2_b			0
+	ディーア	通常2	2_2			0
+Bgm	平和
+Wait						1
+FadeIn	black					.5
+	カシウス							ねえねえ、カシウスにも\nジュースとって♪
+	ディーア	笑い2						ああ、はい\nこれでいいか？
+	カシウス							えへへ、ありがとーっ♪
+Shake	カシウス		x=5				NoWait
+	カシウス	悲しい						うー……固くて開かない……
+	ディーア	驚き2						カシウスにはちょっと固いかもな、\n貸してくれ
+	ディーア	通常2						よっと\nはい、これで飲めるぞ
+Tween	カシウス	PunchPosition	y=50				NoWait
+	カシウス							えへへ♪\nありがと、マスターさん♪
+	カシウス							んっく、んっく……ぷはぁっ♪\nえへへ、「悪いこと」しちゃった♪
+	カシウス							ね、マスターさんは何飲んでるの？
+	ディーア	通常2						ああ、これは薬草のジュースだよ
+Tween	カシウス	PunchPosition	y=50				NoWait
+	カシウス							マスターさんのも飲みたいなぁ♪
+	ディーア	驚き2						いいけど、ちょっと苦いぞ？
+	カシウス							んっくんっく……ぷはっ
+Shake	カシウス		x=5				NoWait
+	カシウス	悲しい						うえー、にがいー……
+	ディーア	あはは2						あはは、だから言ったのに
+Tween	カシウス	PunchPosition	y=50				NoWait
+	カシウス							あ、ごめんなさい……\nちょっとこぼしちゃった
+	ディーア	通常2						後で拭いておけばいいさ
+	カシウス							い、いいの？
+	ディーア	あはは2						ああ……まあ、これもちょっと\n「悪いこと」だけどな
+	カシウス	通常						そっか♪\n……マスターさん、大人だね♪
+	ディーア	驚き2						そうか？
+	カシウス							うん、「悪いこと」\nいっぱい知ってるもん
+	ディーア	怪しい2						……ああ、そうかもな
+Tween	カシウス	PunchPosition	y=50				NoWait
+	カシウス							えへへ、カシウス、もっとたくさん\n「悪いこと」知りたいなっ♪
+	ディーア	汗2						あはは……また今度な
+	カシウス							うんっ♪\nありがとうっ♪
+	ディーア	汗2						それじゃあ、オレはこれで……
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏
+	カシウス	拡大	エフェクト表					じゃあ悪いこと教えてくれたお礼に、\nカシウスのジュースもあげるね♪
+Param	character_grayout=true
+CharacterOff
+StopBgm
+	カシウス		1_2_b
+	ディーア	驚き2	2_2
+	ディーア							……え？
+	カシウス							ちょっとまってね、直接あげるから
+	ディーア	怪しい2						ちょ、直接？
+	カシウス							んっく、んっく……
+	ディーア	悔しい2						カシウス？\nおい、まさか……
+CharacterOff
+Param	character_grayout=false
+Se	心拍	TRUE
+	トライアルスチル41207		エフェクト表
+	カシウス	<Off>						んー……♪
+	ディーア	<Off>						ちょ、まっ……
+FadeOut	black					1
+StopSe
+CharacterOff						0
+Param	character_grayout=true
+	リディ	絶望2				0
+	黒グラデーション		エフェクト表			0
+FadeIn	black					.1
+	リディ							<dash=2>マスター？
+CharacterOff
+	カシウス		1_2_b
+	ディーア	絶望2	2_2
+Bgm	コメディ
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							ひえっ!?
+CharacterOff
+	黒グラデーション		エフェクト表
+	リディ	絶望2						なに……してるの……？
+CharacterOff
+	カシウス		1_2_b
+	ディーア	悔しい2	2_2
+	ディーア							い、いや！\n何もしてない！　本当だ！
+CharacterOff
+	リディ	怒り2						ふーん……？
+	リディ	悔しい2						リディにはなんか二人が……\nちゅ、<size=20>ちゅー</size>しようとしてるように\n見えたんだけど……!!
+CharacterOff
+	カシウス		1_2_b
+	ディーア	悔しい2	2_2
+	ディーア							ちちち違う！\nジュース飲んでただけで!!
+CharacterOff
+	リディ	悔しい2						……そうなの、カシウスちゃん？
+CharacterOff
+	カシウス		1_2_b
+	ディーア	悔しい2	2_2
+	カシウス							ごっくん……ぷはっ♪
+	カシウス							あのね、カシウスね、\nマスターさんと\n「悪いこと」してたの♪
+CharacterOff
+	リディ	怒り2						わるいこと……？
+CharacterOff
+	カシウス		1_2_b
+	ディーア	本気2	2_2
+	カシウス							うんっ！
+	カシウス							えっとね……苦いの飲んだの！\nあっ、その前にね！　すごく固くて、\nでもマスターが手伝ってくれてね？
+CharacterOff
+	リディ	絶望2						……………………え
+CharacterOff
+	カシウス		1_2_b
+	ディーア	絶望2	2_2
+	ディーア							おいカシウス？
+	カシウス							それで、マスターのをもらって\n飲んだんだけど、苦くてちょっと\nこぼしちゃったの……
+CharacterOff
+	リディ	絶望2						マスタぁー？？？？？？
+CharacterOff
+	カシウス		1_2_b
+	ディーア	本気2	2_2
+	ディーア							ジュースの話！\nこれジュースの話だから!!
+CharacterOff
+	リディ	絶望2						へえ、そうやって騙したんだ
+CharacterOff
+	カシウス		1_2_b
+	ディーア	悔しい2	2_2
+	ディーア							違うってば!!
+CharacterOff
+	リディ	絶望2						さすがのマスターもそこまでやるとは\n思ってなかったけど……
+	リディ							あーあ、もうおしまいだね
+CharacterOff
+	カシウス		1_2_b
+	ディーア	悔しい2	2_2
+	カシウス							おしまい？\nでも、また今度しよって\n言ってくれたよ？
+	ディーア	絶望2
+	カシウス							えへへ♪\nカシウス、楽しみにしてるね♪
+CharacterOff
+	リディ	絶望2						マスター………………
+CharacterOff
+	カシウス		1_2_b
+	ディーア	悔しい2	2_2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							ち、違う！　本当にジュースを\n飲んでただけなんだって！\n薬草ジュースを！
+	ディーア	怒り2						頼む、信じてくれ……!!
+CharacterOff
+	リディ	悔しい2						…………本当に？\n本当に手出してない？\n嘘ついてない？
+CharacterOff
+	カシウス		1_2_b
+	ディーア	本気2	2_2
+	ディーア							ああ、本当だ！\n誓って嘘なんて……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	トライアルスチル41201		エフェクト表			0
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	カシウス		1_2_b			0
+	ディーア	怪しい2	2_2			0
+FadeIn	black					.3
+	ディーア							あ、いや……\n嘘、ついて……ない……\nと、思う……たぶん
+CharacterOff
+	リディ	絶望2						ふーん……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	笑い2						あっリディ急用思い出しちゃった♪\nちょっとE.D.E.N.行ってくるね♪
+Se	走る
+Tween	リディ	MoveTo	x=800 time=3				NoWait
+Wait						1.5
+CharacterOff
+	カシウス		1_2_b
+	ディーア	悔しい2	2_2
+	ディーア	悔しい2						ちょっと待て！　違うんだって！\n誤解だ！
+	ディーア	本気2						リディ!!\nリディーーーーッ!!!!
+Se	走る
+Tween	ディーア	MoveTo	x=800 time=2.5				NoWait
+Wait						1
+	カシウス	悲しい						あっ、まってまって！\nカシウスも行くー！
+Se	走る
+Tween	カシウス	MoveTo	x=800 time=3				NoWait
+Wait						1
+StopBgm						2
+FadeOut	black					1
+CharacterOff
+Param	character_grayout=false
+	欲望くん		1_3
+	理性くん		3_3
+Wait						2
+FadeIn	black					.5
+Tween	欲望くん	PunchPosition	y=50				NoWait
+	二人							……………………
+Param	character_grayout=true
+	欲望くん							……どっち選んでも\n変わらなかったんじゃね？
+Se	打1
+Tween	理性くん	PunchPosition	x=-50				NoWait
+	理性くん							そんなことないからな
+If	isdebug==true
+CharacterOff
+Jump	*G_412_01
+EndIf
+EndScenario

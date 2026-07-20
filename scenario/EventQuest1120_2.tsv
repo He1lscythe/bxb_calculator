@@ -1,0 +1,1891 @@
+# E_1120_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	研究所B					0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+	         					0
+FadeIn	black					1
+	オメガB	<Off>						目が覚めて、すぐにわかった
+	オメガB	<Off>						この兵器に与えられた役目
+	オメガB	<Off>						この身体に与えられた\n圧倒的な力
+	オメガB	<Off>						それと同時に<dash=2>
+Se	マイクノイズ	TRUE
+		<Off>						<color=red>なぜここにいる</color>
+		<Off>						<color=red>ありえない</color>
+		<Off>						<color=red>はやく消え去れ</color>
+		<Off>						<color=red>お前は選ばれなかった</color>
+StopSe
+	オメガB	<Off>						声もないのに\n伝わってくるメッセージ
+	オメガB	<Off>						それでわからされる
+FadeOut	black					.3
+CharacterOff						0
+	オメガB	本気				0
+FadeIn	black					.3
+	オメガB	本気						この<ruby=オメガ:Blaze>力</ruby>は、\nどうしようもなく世界の異物だって
+FadeOut	white					1
+StopBgm
+Wait						1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洞窟B					0
+	黒背景		エフェクト表			0
+	オメガB	拡大通常	エフェクト裏			0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+FadeIn	white					1
+Wait						.5
+CharacterOff	黒背景
+Tween	瞬きA	MoveBy	y=325 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-325 time=2	easeOutCirc
+Bgm	平和
+	？？？？	<Off>						マスターちゃん、マスターちゃん？
+	ディーア	<Off>						んっ……オメガ？
+	ディーア	<Off>						なんだか今日は静かだなぁ
+	ディーア	<Off>						いつもは朝から愛がほしいって\r\nはげしくぅ<dash=2>
+Tween	瞬きA	MoveBy	y=-325 time=2	easeInCirc			NoWait
+Tween	瞬きB	MoveBy	y=325 time=2	easeInCirc			NoWait
+Wait						.5
+	黒背景		エフェクト表			1
+Wait						1.5
+	？？？？	<Off>						……寝ぼけてる？
+	グラム=スサノオ	<Off>						そういう時は、こうですっ！
+Bgm	緊迫
+CharacterOff						0
+	集中線		エフェクト表			0
+	グラム=スサノオ	拡大魔王顔	エフェクト裏			0		<size=60>全力全開で！</size>
+StopBgm
+CharacterOff
+	ディーア	絶望3
+Tween	ディーア	PunchPosition	y=50				NoWait
+Bgm	コメディ
+	ディーア	絶望3						っ……!?\nちょ、ちょっと待て!?
+	ディーア	絶望3						全力全開で殴られるのは\nまずいからっ！
+StopBgm						1
+	ディーア	驚き3						……ってあれ？
+Bgm	神秘
+CharacterOff
+	グラム=スサノオ	魔王装						おはようございますっ！\nマスターさん！
+CharacterOff
+	ディーア	驚き3						……スサノオ？\r\nそれに隣りにいるのは<dash=4>
+CharacterOff
+	オメガB	通常						よかった、\r\nちゃんと目が覚めたみたいで
+CharacterOff
+	ディーア	驚き3						オメガ？
+CharacterOff
+	オメガB	通常						うん、そうだよ
+CharacterOff
+	オメガB	拡大通常	エフェクト表					竜王バハムート=オメガ、\nその兵器としての形\nバハムート=オメガ:Blazeだよ
+CharacterOff
+	オメガB	本気						さあ、急ごうマスターちゃん\r\n憤怒に飲み込まれる前に\r\n七罪王を討伐するの
+	オメガB	本気						オメガちゃんは\nそのためにいるんだから
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+Bg	市街地C(火事)					0
+	スペルビア	通常				0
+Wait						1
+FadeIn	black					1
+Bgm	絶望
+	スペルビア	通常						憤怒の逆流……
+	スペルビア	通常						行き過ぎた怒りは他者だけでなく\n矛先を自身へも向ける
+	スペルビア	通常						罪の変遷を利用した内部への封印\nいや、圧縮による殲滅術式か
+	スペルビア	怪しい						太陽に等しい熱どころか、\nその消滅まで真似るとはな
+CharacterOff
+	ルークスリア	通常						えぇ、ぁなたは識らない\r\nイーラの隠し玉よ
+CharacterOff
+	スペルビア	通常						…………\r\nククク、久しいなルークスリア
+	スペルビア	通常						あの魔剣使いはどうした？
+CharacterOff
+	ルークスリア	通常						イーラの内部、\nその異空間に吸収されたわ
+	ルークスリア	照れ						本当なら\nそこで命を落とすはずだけど、\n……彼は運がいいわね
+CharacterOff
+	スペルビア	怪しい						なるほど、\n先ほど感じた凄まじい魔力は、\n:Blaze魔剣が介入した結果か
+	スペルビア	通常						よかったじゃないか、\r\nキミの懸想相手が塵に帰らなくて
+CharacterOff
+	ルークスリア	どや						その高慢で不遜な物言いは\n変わらないのね？
+CharacterOff
+	スペルビア	通常						フッ、イーラといい\n随分と嫌われたものだな？
+CharacterOff
+	ルークスリア	本気						自分の胸に\r\n手を当てて考えてみるといいわ
+CharacterOff
+	スペルビア	にやけ						『なぜ裏切ったの』などと\nつまらないことは言うなよ？
+	スペルビア	にやけ						例の魔王獣の時には\n私はすでにこの状態だった\n何もできなかったのさ
+	スペルビア	通常						そしてルークスリアよ\n私は今も高慢の七罪王であり\nその罪を忘れたことはない
+	スペルビア	怪しい						ただ……\r\nたしかに不義理を働いたとは思う\r\nすまなかったな
+CharacterOff
+	ルークスリア	本気						…………
+	ルークスリア	本気						訂正するゎ
+	ルークスリア	どや						変わったわね、スペルビア
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	遺跡B_過去					0
+	          	<Off>				0
+FadeIn	white					.3
+	ルークスリア	<Off>						かつてのスペルビアは\nぁたしたち七罪王を従えて\n罪の極点……煉獄を目指した
+	ルークスリア	<Off>						『進化限界』を迎えた全能、\nぁなたには世の全てが見通せて、\nその全てが平等に些事
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+Bg	市街地C(火事)					0
+	スペルビア	通常	p7			0
+	ルークスリア	通常	p3			0
+FadeIn	white					.3
+	ルークスリア	通常						そんなぁなたが謝るなんて\nどうしたの？
+	スペルビア	通常						たしかに\n己を振り返らぬことこそ\n高慢という罪だが
+	スペルビア	通常						その罪にかまけて、\n己を顧みることもないのなら\n王ではなく愚者でしかない
+	スペルビア	怪しい						力の全てを失い、\n煉獄の王の名も彼奴らに奪われ\n失意と無力に私は陥った
+	スペルビア	通常						そんな状態で数百年も\n人間の中で過ごしてきたのだ\n変わりもするさ
+	スペルビア	通常						そして\n憎しみを埋める感情さえも\n得ることがある
+	スペルビア	怪しい						私はこう定義しているよ\nこれもまた新たなる進化だとね
+	ルークスリア	通常						それが、\r\n彼に力を貸した理由なのかしら？
+	スペルビア	悪い顔						さあ、どうかな？\n彼に期待しているのは確かだが\n真意の全てを明かしはしないさ
+	ルークスリア	照れ						……でも残念ね、彼は終わりよ
+	ルークスリア	本気						イーラの内の異空間、\n憤怒の灼熱地獄から\n抜け出すなんてありえない
+	ルークスリア	本気						そしてイーラを止める者はなく\nこのまま魔界は灰になるわ
+	スペルビア	悪い顔						ククク、ありえない？\r\n本当にそう思っているのか？
+	スペルビア	にやけ						キミも魔界に生きる王なら\r\nわかっているはずだ
+StopBgm
+	スペルビア	にやけ						ありえないという言葉は\r\n覆されるために存在するとね
+CharacterOff
+	ルークスリア	本気						……本当に、変わったわね
+CharacterOff						0
+Bg	黒背景					0
+	ルークスリア	<Off>						もっと恐ろしくなったゎ
+FadeOut	black					.3
+CharacterOff						0
+Bg	洞窟B					0
+	グラム=スサノオ	魔王装慌て	p7b			0
+	ディーア	驚き3	p3			0
+Wait						1
+FadeIn	black					.3
+Bgm	作戦会議
+	ディーア	驚き3						ここが、イーラの中!?
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装慌て						私たち、\r\n食べられちゃったんですか!?
+CharacterOff
+	オメガB	本気						食べられたとは違うけれど\nここはあの七罪王の中だよ\nそれはオメガちゃんが確認したもん
+	オメガB	本気						あの時、七罪王は\r\n膨大な魔力で大爆発を起こして
+	オメガB	本気						そして破壊した全てを収縮して、\r\n内部に取り込んだの
+	オメガB	本気						マスターちゃんたちは\r\n爆発に巻き込まれそうだったから\r\nオメガちゃんが保護したんだけど
+	オメガB	本気						その引力が強すぎて、\n一緒に取り込まれちゃったんだ
+	オメガB	本気						マスターちゃんに\n起動してもらう前だったから\nそれが限界だったの
+CharacterOff
+	グラム=スサノオ	魔王装慌て	p7b
+	ディーア	怒り3	p3
+	ディーア	怒り3						そうだったのか
+	ディーア	目閉じ3						この感じ……大罪の中枢、\nどこか魔核深層に似ている気も……
+	グラム=スサノオ	魔王装慌て						マスターさん、\r\n姉さんたちは大丈夫ですか？
+	ディーア	通常3						ああ、\r\n破損しているから戦えないけど\r\nクランさんなら修理できる
+	グラム=スサノオ	魔王装						そうですか、よかったですっ！
+	ディーア	通常3						それから\nオメガ:Blazeも助かったよ、\nありがとう
+CharacterOff
+	オメガB	本気						お礼なんていいよ、\r\nそれが兵器としての役目で\r\n命令だったから
+CharacterOff
+	ディーア	驚き3						あ、ああ……
+CharacterOff
+	オメガB	本気						どうしたの？
+CharacterOff
+	ディーア	汗3						いや、その……\n:Blazeじゃないオメガだったら
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	オメガ	通常				0
+FadeIn	white					.3
+	オメガ	通常						マスターちゃんからのお礼の愛♪\nすごく愛を感じちゃう♪
+Tween	オメガ	PunchPosition	y=30				NoWait
+	オメガ	通常						オメガちゃんからもぉ♪\nマスターちゃんに愛のお返し！
+FadeOut	white					.3
+CharacterOff						0
+Bg	洞窟B					0
+	グラム=スサノオ	魔王装	p7b			0
+	ディーア	汗3	p3			0
+FadeIn	white					.3
+	ディーア	汗3						みたいに喜んでいたと思うから\nギャップで驚いたんだ
+	グラム=スサノオ	魔王装						たしかにそうですねっ！\r\nオメガ:Blazeちゃんも\r\n愛とかそういうの感じるんですか？
+CharacterOff
+	オメガB	本気						感じないよ？
+CharacterOff
+	グラム=スサノオ	魔王装	p7b
+	ディーア	驚き3	p3
+	ディーア	驚き3						そうなのか？
+CharacterOff
+	オメガB	本気						というより、\nオメガちゃんは自分の伝承のことも\n昔のこともよくわからないの
+	オメガB	本気						竜王バハムート=オメガを\n武力に特化させた兵器だってことは\n認識しているけれどね
+CharacterOff
+	ディーア	驚き3	p3
+	グラム=スサノオ	魔王装	p7b
+	グラム=スサノオ	魔王装						なるほどぉ、\n魔剣なのに不思議ですねっ！
+CharacterOff
+	オメガB	本気						魔剣の前に、\nオメガ:Blazeは兵器だから
+	オメガB	本気						<size=20>どんな形でも\n求められていないのは\n変わらないし</size>
+CharacterOff
+	グラム=スサノオ	魔王装	p7b
+	ディーア	驚き3	p3
+	ディーア	驚き3						伝承への理解が少ない……
+	ディーア	目閉じ3						それもオメガの伝承を\n:Blazeにした影響なのかもな
+	グラム=スサノオ	魔王装						？？？？\r\nどういうことですか？
+	ディーア	怒り3						オメガは\r\n<ruby=ドラゴン×ドライツェン>神竜伝承</ruby>を起源として
+	ディーア	怒り3						選ばれなかった、\r\nありえなかった可能性から\r\n生まれた魔剣なんだ
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	魔術空間					0
+	バハムート	通常	p7			0
+	オメガ	通常	p3			0
+	          
+FadeIn	white					.3
+	ディーア	<Off>						相克する神の如き二竜が繰り広げた\n無限に輪廻する戦い
+	ディーア	<Off>						そんな宿敵である二つの竜が\n"もし"手を携えていたらっていう\n『イフ』の可能性
+	ディーア	<Off>						それは\nこの世界に正史として伝わる\n伝承とは異なっていて
+	ディーア	<Off>						だからこそ\nそこから生まれたオメガ自身が\n奇跡的な存在だと言われている
+FadeOut	white					.3
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	洞窟B					0
+CharacterOff						0
+	グラム=スサノオ	魔王装	p7b			0
+	ディーア	目閉じ3	p3			0
+FadeIn	white					.3
+	ディーア	目閉じ3						そんな奇跡的なオメガを\n:Blaze魔剣という\nさらにあり得ない存在に改造する
+	ディーア	目閉じ3						ロールお嬢様は、\nその無茶を成立させるために\n伝承の影響を抑制したのかもな
+	グラム=スサノオ	魔王装						なるほどっ！
+	ディーア	驚き3						わかるのか、スサノオ？
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装						いえっ、ぜんぜんっ！
+	ディーア	汗3						だよなぁ
+CharacterOff
+	オメガB	本気						うーん、そういう難しいのは\nオメガちゃんもよくわかんないし\n意味もないでしょ？
+	オメガB	本気						兵器のでき方なんて、\r\n性能には関係ないんだもん
+	オメガB	本気						元のオメガちゃんみたいに\n神様に近い存在ではないけれど\n戦力はすごく強化されてるし
+StopBgm
+	オメガB	本気						それにおしゃべりしてる時間も\nないんじゃない？
+CharacterOff
+	グラム=スサノオ	魔王装						あっ！\nマスターさん、前から！
+Param	character_grayout=false
+Bgm	バトル
+CharacterOff
+Se	闇1
+	憤怒の火種1	通常	p3			1
+Wait						.5
+	憤怒の火種2	通常	p5			1
+Wait						.5
+	憤怒の火種3	通常	p7			1
+Wait						2
+CharacterOff
+	ディーア	悔しい3						中にも魔物が……！\nしかも数が多いぞ!!
+CharacterOff
+	オメガB	拡大本気	エフェクト表					任せて
+Se	火3
+Se	光3
+Se	闇3
+FadeOut	white					.3
+	憤怒の火種1	通常	p3			0
+	憤怒の火種2	通常	p5			0
+	憤怒の火種3	通常	p7			0
+	土煙		エフェクト表			0
+FadeIn	white					.3
+	魔物							ォォ……
+CharacterOff	憤怒の火種1					1
+CharacterOff	憤怒の火種2					1
+CharacterOff	憤怒の火種3					1
+Wait						1
+CharacterOff
+	オメガB	本気						対七罪王決戦兵器、\nオメガ:Blaze
+	オメガB	本気						こんな魔物なんて、\n敵じゃないよ
+CharacterOff
+	ディーア	驚き3						あの数を一方的に一撃で！
+	ディーア	怒り3						竜王の兵器化……\nその結果がこの力なのか
+CharacterOff
+	グラム=スサノオ	魔王装						マスターさん！\nまだ奥から出てきてますよっ！
+CharacterOff
+	オメガB	本気						さあ、マスターちゃん\nオメガ:Blazeに<ruby=オーダー>指示</ruby>を
+	オメガB	本気						今も七罪王イーラは、\n世界図書館に向けて移動してる
+	オメガB	本気						オメガちゃんなら\nこの異空間を無理やり破いて\n脱出することも可能だけど
+	オメガB	本気						イーラを止めない限り、\n魔界に未来はないんでしょ？
+CharacterOff
+	ディーア	怒り3						ああ、わかってる\n脱出せずに先に進もう
+	ディーア	目閉じ3						ここならイーラの力、\n憤怒の根源が見つかるかもしれない
+	ディーア	目閉じ3						実際にこの奥から、\r\n凄まじい魔力を感じているしな
+	ディーア	怒り3						そこにたどり着けば、\nスペルビアの言っていたように
+	ディーア	怒り3						イーラの理性を目覚めさせることも\n可能なはずだ
+	ディーア	本気3						このまま進んで、\nイーラを内部から停止させるぞ！
+CharacterOff
+	グラム=スサノオ	魔王装きらーん						いいですねっ！\nすっごくわかりやすいです！
+CharacterOff
+	ディーア	笑い3						そのためにはお前の力も必要だ、\n頼んだぞ、オメガ:Blaze！
+CharacterOff
+	オメガB	本気						もちろん、\nそれがオメガちゃんの役目で\nこの力の理由だもん
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	オメガB	本気						D-13:Blaze機構、\n一番、三番、八番を開放
+CharacterOff	オメガB
+	オメガB	拡大本気	エフェクト表					目標、前方の魔物<dash=2>
+StopBgm
+CharacterOff
+	オメガB	慌て
+Shake	オメガB		x=5				NoWait
+	オメガB	慌て						ふにゃあ～
+Se	ポップイン
+Tween	オメガB	MoveBy	y=-100				NoWait
+Wait						1
+CharacterOff
+	ディーア	驚き3						……………………へ？
+Bgm	コメディ
+CharacterOff
+	オメガB	悲しい						はれぇ、どうしてぇ？\n力が抜けて、戦えないよぉ……！
+CharacterOff
+	グラム=スサノオ	魔王装慌て	p7b
+	ディーア	絶望3	p3
+	集中線		エフェクト表
+	二人							えぇえええええ!?
+Param	character_grayout=true
+CharacterOff	集中線
+	ディーア	絶望3						な、なんで、\r\nいきなりどうして!?
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装慌て						マスターさん前！ 前！\r\nもう敵が来てますよっ!!
+	ディーア	悔しい3						くっ、先に魔物を倒すぞ！\r\n頼む、スサノオ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_12
+EndIf
+EndScenario
+
+# E_1120_12
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	洞窟B					0
+	グラム=スサノオ	魔王装どや	p7b			0
+	ディーア	通常3	p3			0
+FadeIn	black					.5
+	ディーア	通常3						よし、魔物は全部倒したな！
+	グラム=スサノオ	魔王装どや						はいっ！\r\n熱血パワーの勝利ですねっ！
+StopBgm
+	ディーア	怪しい3						だけど、\r\nオメガ:Blazeが<dash=4>
+Bgm	コメディ
+Param	character_grayout=false
+CharacterOff
+	オメガB	悲しい						ちょ、ちょっと待ってて！\r\n少し休んだし、力が出せるはず……
+Shake	オメガB		x=2				NoWait
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	オメガB	悲しい						ふにゅう～！
+CharacterOff	オーラ紫					.5
+	オメガB	慌て						ふにゃあ～
+CharacterOff
+	グラム=スサノオ	魔王装きらーん						か、かわいい……！
+CharacterOff
+	オメガB	悲しい						スサノオちゃん！\r\nそんなこと言わないでよぉ!!
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	悲しい						ほ、ほんとに\r\nオメガちゃん、強かったんだよ!?
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	オメガB	本気						本気を出したら\nこの異空間もぱりーんって……！
+Tween	オメガB	MoveBy	y=-100				NoWait
+	オメガB	慌て						ふにゃぁああああ
+CharacterOff	オーラ紫					.5
+Shake	オメガB		x=5				NoWait
+	オメガB	慌て						うぅ、なんでぇ？\nさっきはちゃんとできたのにぃ
+Param	character_grayout=true
+CharacterOff
+	グラム=スサノオ	魔王装どや	p7b
+	ディーア	通常3	p3
+	グラム=スサノオ	魔王装						なんだかオメガ:Blazeちゃん、\nクールっぽくなくなりましたね？
+	ディーア	汗3						そ、そうだな……
+Param	character_grayout=false
+CharacterOff
+	オメガB	悲しい						だって、\nああいうほうがかっこいいし\nすごい:Blazeに見えるでしょ!?
+	黒グラデーション		エフェクト表			.2
+	オメガB	悲しい						せっかくの任務だったから\r\nちゃんと成功させたかったのにぃ
+Param	character_grayout=true
+CharacterOff
+	グラム=スサノオ	魔王装どや	p7b
+	ディーア	汗3	p3
+	ディーア	汗3						しおしおになってるな
+	グラム=スサノオ	魔王装どや						:Blazeだけに、鎮火してますねっ！
+	グラム=スサノオ	魔王装どや						でもカワイイですよっ！
+CharacterOff
+	オメガB	悲しい
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	悲しい						鎮火とか言わないでぇ！
+	オメガB	悲しい						兵器なオメガちゃんは\nかわいくなくてもいいのぉ！
+CharacterOff
+	グラム=スサノオ	魔王装どや	p7b
+	ディーア	汗3	p3
+	ディーア	汗3						ノート:Blazeだったら\n否定しそうだけど\n考え方はそれぞれだしな
+StopBgm
+	ディーア	怪しい3						でも、本当にどうしたんだ？\r\n力が入らなくなったみたいだけど
+Bgm	作戦会議
+CharacterOff
+	オメガB	悲しい						少しの間なら戦えるけど、\n本気を出そうとしたら無理なのぉ
+	オメガB	悲しい						力を使おうとしたら、\nなにかぎゅーって体が縛られてる\nみたいになっちゃって
+	オメガB	悲しい						なんだか、\n体の全部が重くなったみたい
+	オメガB	本気						…………これって
+	オメガB	悲しい						もしかしてオメガちゃんが\n選ばれなかったから？\nこの世界に拒絶されてるの？
+CharacterOff
+	ディーア	驚き3						魔界からの抑制？
+CharacterOff
+	オメガB	悲しい						だって、\nマスターちゃんも言ってたでしょ
+	オメガB	悲しい						バハムート=オメガは\r\n本当はありえない魔剣だったって
+	オメガB	悲しい						この魔界にいないはずの魔剣\n選ばれなかった選択
+	オメガB	悲しい						オメガ:Blazeは\nそれを更に改造した兵器だから
+	オメガB	悲しい						本当は、\n目が覚めたときからずっと感じてたの\nじわじわって嫌な感覚を
+CharacterOff
+	ディーア	怪しい3						ありえない、とは言えないな
+	ディーア	怒り3						オメガの伝承となれば\n今の魔界の成り立ちとも密接に関わる
+	ディーア	怒り3						そこに手を加えたなら\n逆に世界から束縛を受ける可能性は\n否定できない
+	ディーア	怒り3						でもそんな状態を解決するなんて、\n敵陣の中でどうすれば
+CharacterOff
+	オメガB	悲しい						……そう、\nじゃあオメガちゃんがいる意味は\nないってこと？
+	オメガB	悲しい						マスターちゃんたちの\n助けにもなれない欠陥兵器なの？
+CharacterOff
+	グラム=スサノオ	魔王装
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装						そんなことないですよっ！
+CharacterOff
+	オメガB	驚き						っ！ スサノオちゃん？
+CharacterOff
+	グラム=スサノオ	魔王装						だってオメガ:Blazeちゃんは\r\nちゃんとここにいます！\r\nなら欠陥とかありえませんっ！
+	グラム=スサノオ	魔王装きらーん						そうだっ！\r\n世界が邪魔するって言うなら\r\n私が殴りましょう！
+	グラム=スサノオ	魔王装きらーん						なんだかイケる気がしますっ！
+CharacterOff
+	ディーア	通常3						魔界を殴るかはともかく\nスサノオの言う通りだ\n諦める必要なんてどこにもない
+	ディーア	笑い3						オメガ:Blazeと同じ伝承を持ち、\r\nちゃんと活躍できている魔剣が\r\nいるんだから
+CharacterOff
+	オメガB	驚き						それって
+CharacterOff
+	グラム=スサノオ	魔王装どや	p7b
+	ディーア	通常3	p3
+	グラム=スサノオ	魔王装どや						なるほど！\nオメガちゃんですね！
+	ディーア	通常3						たとえ選ばれなかった選択でも\r\nオメガは魔剣として\r\nずっとオレの力になってくれた
+	ディーア	通常3						だからオメガを参考にしたら、\r\nオメガ:Blazeが力を発揮する\r\nヒントが見つかるかもしれない！
+	ディーア	笑い3						伝承とその解釈は\r\n魔剣の根幹にあるんだから
+CharacterOff
+	オメガB	驚き						確かに、\r\nそれはありえるかも
+	オメガB	驚き						でも、どこを参考したら？
+CharacterOff
+	グラム=スサノオ	魔王装	p7b
+	ディーア	怪しい3	p3
+	ディーア	怪しい3						オメガといえば<dash=2>
+	グラム=スサノオ	魔王装						オメガちゃんは<dash=2>
+Param	character_grayout=false
+	二人	<Off>						…………
+Param	character_grayout=true
+	ディーア	怪しい3						愛？
+	グラム=スサノオ	魔王装						愛、ですかね？
+CharacterOff
+	オメガB	本気						…………
+	オメガB	本気						マスターちゃん、スサノオちゃん
+CharacterOff
+	オメガB	拡大悲しい	エフェクト表					愛って、なに？
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_13
+EndIf
+EndScenario
+
+# E_1120_13
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	白背景					0
+Param	character_grayout=false
+	ディーア	目閉じ2				0
+	オーラ桃		エフェクト裏			0
+FadeIn	black					.5
+	ディーア	目閉じ2						オメガ:Blaze、愛してるよ
+	ディーア	笑い2						オレにはキミが必要なんだ\r\nオメガ:Blaze
+CharacterOff	ディーア
+	オメガB	通常						マスターちゃん……！
+	オメガB	通常						オメガちゃんの\nどんなところが好きなの!?
+CharacterOff	オメガB
+	ディーア	笑い2						それはもちろん<dash=2>
+CharacterOff	ディーア
+	オメガB	拡大通常	エフェクト表
+	          		1_2
+	ディーア	<Off>						すごく一生懸命にがんばってるとこも\nかわいくてキレイな顔も
+CharacterOff	オメガB
+	オメガB	拡大尻	エフェクト表
+	          		1_2
+	ディーア	<Off>						かなり際どい角度も……！\n全てが大好きなんだ！
+CharacterOff	オメガB
+	オメガB	照れ						お、オメガちゃんも\nそんなマスターちゃんのことが\nだいす<dash=2>
+StopBgm
+CharacterOff
+	グラム=スサノオ	拡大魔王顔	エフェクト表					いいですねぇ！\nワンド姉さんが大好きなマンガに\nそっくりですっ！
+Bgm	平和
+Bg	洞窟B
+CharacterOff
+	グラム=スサノオ	魔王装きらーん						そして\n感極まったオメガ:Blazeちゃんが\n壁ドンしながらマスターさんにっ！
+CharacterOff
+	オメガB	本気						壁……ドンっ！
+Se	光3
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+	ディーア	絶望2				0
+	土煙		エフェクト表			0
+FadeIn	white					.2
+Shake	ディーア		x=2				NoWait
+	ディーア	絶望2						っ…………
+Bgm	コメディ
+CharacterOff
+	オメガB	通常						これでいいの？\nすごく手加減したけどっ！
+CharacterOff
+	グラム=スサノオ	魔王装きらーん						もういっかい！\nもっと全力でいきましょうっ！
+CharacterOff
+	ディーア	絶望2						やめてくれっ！
+CharacterOff
+	グラム=スサノオ	魔王装						さあさあ、どうですか\r\nオメガ:Blazeちゃんっ？
+	グラム=スサノオ	魔王装						愛、わかりましたかっ!?
+CharacterOff
+	オメガB	本気						…………
+CharacterOff
+	集中線		エフェクト表
+	オメガB	拡大悲しい	エフェクト裏					ぜんぜん、わかんないよぉ！
+	オメガB	拡大悲しい						<size=50>愛ってなんなの!?</size>
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+	          					0
+Wait						1
+FadeIn	black					.3
+	          							　　　　　　　<color=blue>十分前</color>
+CharacterOff
+Bgm	平和
+	オメガB	悲しい						愛って、なに？
+CharacterOff
+	ディーア	笑い3						それは\r\nもちろん愛っていえば
+	ディーア	怪しい3						愛って言えば……
+	ディーア	絶望3						なんだろ？
+CharacterOff
+	グラム=スサノオ	魔王装						あれっ!?\nマスターさんはわからないんですか!?
+CharacterOff
+	ディーア	汗3						よかった、\nスサノオはわかるんだな
+CharacterOff
+	グラム=スサノオ	魔王装どや						はい、もちろんっ！
+	集中線		エフェクト表
+	グラム=スサノオ	魔王装どや						愛とはラブですっ！
+CharacterOff
+	ディーア	絶望3						そ、それじゃあラブって？
+CharacterOff
+	集中線		エフェクト表
+	グラム=スサノオ	魔王装						もちろん愛ですっ！
+CharacterOff
+	ディーア	絶望3						…………うん
+CharacterOff
+	オメガB	本気
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	悲しい						ちょ、ちょっとマスターちゃん！\nそんなに愛って難しいの!?
+CharacterOff
+	ディーア	汗3						難しいっていうか\n説明がしづらいっていうか
+	ディーア	怪しい3						相手のことを思いやるのも愛だし\n恋人とイチャイチャしたり、\n誰かを守ったりするのも愛だから
+	ディーア	汗3						『愛はこれだ』\nって言いづらいんだ
+CharacterOff
+	オメガB	本気						じゃあオメガちゃんが\nマスターちゃんに『愛して』って\n言ったらなにしてくれるの？
+CharacterOff
+	ディーア	驚き3						そ、そう言われたら……
+	ディーア	にやけ3						は、ハグとか？
+CharacterOff
+	オメガB	本気						じゃあじゃあ！\nもっと激しく、愛がわかるくらいに\n愛してって言ったら!?
+CharacterOff
+	ディーア	にやけ3						そこまで言われたら……えへへ
+CharacterOff
+	黒グラデーション		エフェクト裏
+	オメガB	悲しい						なんだか邪な気配を感じるけど\nこれが……愛？
+CharacterOff
+	ディーア	驚き3						と、とにかく！\n愛って言葉で説明しきれない\n特別なものなんだよ
+	ディーア	怪しい3						それに\n:Blazeじゃないオメガの場合は\nもっと<dash=4>
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	オーラ桃		エフェクト裏			0
+	オメガ	通常				0
+FadeIn	white					.3
+	オメガ	通常						これ愛だねっ！
+Tween	オメガ	PunchPosition	y=30				NoWait
+	オメガ	通常						それも愛っ！
+Shake	オメガ		x=3				NoWait
+	オメガ	通常						ぜーんぶ愛っ！
+Tween	オメガ	PunchPosition	y=50				NoWait
+	オメガ	通常						愛、愛、愛！
+	集中線		エフェクト表
+	オメガ	通常						愛をたくさん感じちゃう♪
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+Bg	洞窟B					0
+	グラム=スサノオ	魔王装	p7b			0
+	ディーア	絶望3	p3			0
+FadeIn	white					.3
+	ディーア	絶望3						ほんとに愛ってなんだ!?
+	ディーア	悔しい3						オメガにとっての愛を考えたら\nもっとわからなくなってきた！
+	グラム=スサノオ	魔王装						たっくさん\n愛って言ってましたもんね！
+	ディーア	悔しい3						くっ、ここにオメガがいれば！\n任務終わりで休ませてたから……！
+CharacterOff
+	オメガB	慌て
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	慌て						マスターちゃんにわからないなら\nオメガちゃんも無理だよぉ！
+	オメガB	慌て						うぅ、どうしよう……\nこのままじゃ
+CharacterOff
+	ディーア	怪しい3	p3
+	グラム=スサノオ	魔王装	p7b
+	グラム=スサノオ	魔王装						考えると難しいので、\n愛は愛でいいんじゃないですか？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き3						また真理っぽいけど\n難しいことをっ！
+	グラム=スサノオ	魔王装						それじゃあ<dash=4>
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装きらーん						あっ！\nいいことを思いつきましたっ！
+	グラム=スサノオ	魔王装きらーん						考えてダメなら\nまずは試してみましょうっ！
+	ディーア	驚き3						試す？
+	グラム=スサノオ	魔王装どや						はいっ！\n愛を感じることをやってみるんです!!
+	ディーア	怒り3						シミュレーションを\nしてみるってことか……
+	ディーア	怒り3						たしかにただ考え続けるより\n可能性はありそうだな
+CharacterOff
+	オメガB	驚き						なるほどぉ……！
+CharacterOff
+	ディーア	怪しい3	p3
+	グラム=スサノオ	魔王装	p7b
+	ディーア	怪しい3						でも、そういうのに良さそうな\nシチュエーションって？
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装どや						そこは\nこのスサノオにおまかせをっ！
+	グラム=スサノオ	魔王装						ワンド姉さんとサンタ姉さんの\nマンガコレクションに\nいろいろのってました!!
+	ディーア	本気3						ワンドたちに\nぜったい怒られるぞ!?
+	ディーア	怪しい3						けど、時間もないし\nもう手段は選んでられないな
+	ディーア	怒り3						オメガ:Blazeが戦えないと\n魔界も滅びる
+	ディーア	本気3						仕方ない、やろう！
+FadeOut	white					.3
+StopBgm
+ImageEffect	SpriteCamera	MotionBlur				0
+CharacterOff						0
+	オメガB		画面外_右_b
+	ディーア	絶望2	p3			0
+Param	character_grayout=false
+Tween	オメガB	MoveBy	x=200 time=0				NoWait
+FadeIn	white					.3
+	ディーア	絶望2						そう言って\nはじめたのはいいけど<dash=2>
+Bgm	コメディ
+	オメガB	にやけ						いっけない♪\nちこくちこくっ！
+Tween	オメガB	MoveBy	x=-800 time=1				NoWait
+	ディーア	絶望2						うわあああああ！？
+Se	光3
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	MotionBlur				0
+CharacterOff						0
+	ディーア	絶望2				0
+	土煙		エフェクト表			0
+FadeIn	white					.2
+	ディーア	絶望2						うぅ……
+CharacterOff
+	グラム=スサノオ	魔王装どや						出会いはごっつんこからっ！\nこれも定番ですねっ！
+	グラム=スサノオ	魔王装						マスターさん、\nドキドキしてますかっ！
+CharacterOff
+	ディーア	絶望2						違う意味でドキドキしてる……
+CharacterOff
+	オメガB	にやけ						これが、愛？
+CharacterOff
+	ディーア	本気2						違うって！
+CharacterOff
+	グラム=スサノオ	魔王装どや						どんどんいきましょうっ！
+FadeOut	white					.3
+CharacterOff						0
+	グラム=スサノオ	魔王装				0
+FadeIn	white					.3
+	グラム=スサノオ	魔王装						バレンタインのチョコと一緒に\n愛の告白っ！
+CharacterOff
+	オメガB	通常						マスターちゃん、\nハッピーバレンタイン！
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	通常						チョコないから、\nドロドロの溶岩をあげる！
+CharacterOff
+	ディーア	絶望2						あついっ!!
+FadeOut	white					.3
+CharacterOff						0
+	グラム=スサノオ	魔王装				0
+FadeIn	white					.3
+	グラム=スサノオ	魔王装						転んだらスカートに\r\n突っ込んじゃったり!!
+CharacterOff
+	ディーア	にやけ2						そういうラッキーな\nシチュエーションなら……！
+Se	ぐちゃ
+FadeOut	red					.2
+CharacterOff						0
+	オメガB	拡大尻	エフェクト表			0
+	ディーア	<Off>	1_2			0
+FadeIn	red					.2
+	ディーア	<Off>						ああああああああああ!!\nギブギブギブっ！
+CharacterOff
+	オメガB	てへぺろ						足で挟んだら、\nマスターちゃんが青くなった!!\nこれも愛!?
+CharacterOff
+	グラム=スサノオ	魔王装						愛だと思いますっ！
+CharacterOff
+	ディーア	絶望2						ぜったいに違うっ!!
+CharacterOff
+	グラム=スサノオ	魔王装						じゃあ、\nマスターさんにはありますか？\n愛がわかるシチュエーション
+CharacterOff
+	ディーア	にやけ2						そうだなぁ\n王道の甘々イチャイチャもいいけど
+	ディーア	にやけ2						たまには\n強引にぎゅっとされるのも\n愛を感じて<dash=2>
+CharacterOff
+	オメガB	拡大通常	エフェクト表					強引にぎゅっ！ だね♪
+CharacterOff
+	ディーア	拡大絶望2	エフェクト表					ぎゅって潰れる!?
+CharacterOff
+	ディーア	絶望2						ストップストップ！\nとりあえず落ち着こうっ！
+	ディーア	絶望2						はぁ、はぁ、おかしい\nイチャイチャイベントなはずなのに\nどんどんダメージが
+CharacterOff
+	グラム=スサノオ	魔王装						オメガ:Blazeちゃん！\nそろそろ\nなにかわかりましたかっ!?
+CharacterOff
+	オメガB	驚き						マスターちゃんを\nボロボロにするのが、愛？
+CharacterOff
+	グラム=スサノオ	魔王装						なんか違いますねっ！
+	グラム=スサノオ	魔王装						それじゃあ\n他にやっていないことは<dash=2>
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装						あっ！\nとっておきのを忘れてました！
+	グラム=スサノオ	魔王装						好きな子を\n女の子たちが取り合うんですっ！
+	グラム=スサノオ	魔王装						ワンド姉さんは\n最後にクールな子が勝つのが\nお気に入りでしたっ！
+CharacterOff
+	ディーア	絶望2						確かに定番だけど嫌な予感が……
+StopBgm
+	ディーア	怪しい2						それに、\nこの場に他の女の子がいないし
+Bgm	バトル
+CharacterOff
+	憤怒の火種2
+	魔物		1_2					■■■■!!
+CharacterOff
+	集中線		エフェクト表
+	グラム=スサノオ	魔王装						あっ、ちょうどいい魔物がっ！
+CharacterOff	グラム=スサノオ
+	ディーア	絶望2						よくないって！
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_14
+EndIf
+EndScenario
+
+# E_1120_14
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	洞窟B					0
+	グラム=スサノオ	魔王装	p7b			0
+	ディーア	絶望2	p3			0
+FadeIn	black					.5
+	ディーア	絶望2						はぁ、はぁ……
+	ディーア	絶望2						やっぱり、\r\n敵陣のど真ん中でこんなこと\r\n無茶があったな
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装きらーん						いえいえっ！\r\nまだまだやってないラブなことが\r\nたくさんありますっ！
+	グラム=スサノオ	魔王装きらーん						今度は\r\nオルタ姉さんのお気に入りな\r\nマスターさんとの<dash=2>
+StopBgm
+CharacterOff
+	オメガB	本気						…………
+Bgm	図書館
+	オメガB	本気						ごめんねスサノオちゃん、\nもういいよ
+CharacterOff
+	グラム=スサノオ	魔王装						オメガ:Blazeちゃん？
+	グラム=スサノオ	魔王装慌て						で、でもっ、愛がわからないと\r\nオメガ:Blazeちゃんは！
+Param	character_grayout=false
+CharacterOff
+	オメガB	悲しい						うん、\n役に立てない……
+	オメガB	悲しい						オメガ:Blazeには愛なんて\nぜんぜんわかんなかったから
+	オメガB	本気						でも、考えてみたら\nそれも当たり前だよね？
+	オメガB	本気						オメガ:Blazeは\nオメガちゃんみたいに\n神様に近くもない
+	オメガB	本気						その神性を削り落として\n戦う力に変えた兵器
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	竜鍵マナ					0
+	          
+FadeIn	white					.3
+	オメガB	<Off>						世界から拒絶されても、\n任務をこなせればいいっていう\nそれだけの存在なの
+	オメガB	<Off>						バハムート=オメガみたいに\n誰かを愛することなんてできないよ
+FadeOut	white					.3
+CharacterOff						0
+Bg	戦場跡					0
+	          
+FadeIn	white					.3
+	オメガB	<Off>						マスターちゃんも\n本当は怖かったでしょ？
+	オメガB	<Off>						この身体は\nちょっと力を入れただけで\nマスターちゃんの体を傷つける
+	オメガB	<Off>						誰かを愛する真似事をしても、\nその人を壊しちゃうよ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	洞窟B					0
+	オメガB	本気				0
+FadeIn	white					.3
+	オメガB	本気						オメガ:Blazeは兵器\n戦い合って、奪い合うための道具
+	オメガB	本気						元のバハムート=オメガとは違う\n愛がわからない存在なの
+	オメガB	悲しい						なのに\n戦いでも役目を果たせないなんて\nどうしようもない欠陥品だね
+CharacterOff
+	ディーア	怒り2						オメガ:Blaze……
+CharacterOff
+	グラム=スサノオ	魔王装悲しい						なるほど……
+CharacterOff
+	オメガB	本気						だからもう残った手段は一つだよ\nオメガ:Blazeの力を\nスサノオちゃんに渡し<dash=4>
+StopBgm
+CharacterOff
+	グラム=スサノオ	魔王装						わかりましたっ！
+Bgm	バトル
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装きらーん						ならば決闘ですっ!!
+CharacterOff
+	オメガB	驚き						………………えっ!?
+Tween	オメガB	PunchPosition	y=50				NoWait
+	オメガB	驚き						ちょ、ちょっと待って！\nいきなり何を言ってるの!?
+CharacterOff
+	集中線		エフェクト表
+	グラム=スサノオ	魔王装きらーん						細かいことはいいんです！\nスサノオと決闘ですっ!!
+CharacterOff	グラム=スサノオ
+	オメガB	驚き						ぜんぜん細かくないよね!?
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_15
+EndIf
+EndScenario
+
+# E_1120_15
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	バトル
+Bg	洞窟B					0
+Param	character_grayout=false
+	オメガB	本気				0
+FadeIn	black					.5
+	オメガB	本気						なんでいきなり決闘なの!?
+CharacterOff
+	ディーア	驚き2						そうだぞ、\r\nいくらスサノオでも突然すぎる
+CharacterOff
+	グラム=スサノオ	魔王装						うーん、\r\n私もよくわかってないんですけど\r\n闘うしかないって思ったんですっ！
+	グラム=スサノオ	魔王装						考えてもダメなら\nもう動くしかない!!
+	グラム=スサノオ	魔王装						オメガ:Blazeちゃんが\r\n戦うだけの兵器だって言うなら\r\n戦いで答えを見つけるしかないです
+CharacterOff
+	オメガB	驚き						スサノオちゃん……
+CharacterOff
+	グラム=スサノオ	魔王装慌て						なんて、さっきの夢の中で\nグラム姉様に言われたことですけど
+	グラム=スサノオ	魔王装						私はこれが正解だと思います！\n最後は熱血＆パワー!!
+	グラム=スサノオ	魔王装						それにっ！\r\n兵器に愛なんて不要って\r\n言ってましたけど
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装						私は違うと思いますっ！
+CharacterOff
+	オメガB	驚き						……違う？
+CharacterOff
+	グラム=スサノオ	魔王装						はいっ！\n私も殴ることしかできない\n偽物以上の偽物ですけど
+	グラム=スサノオ	魔王装						戦う時も\r\nいちいち考えたりしませんけど
+CharacterOff
+	グラム=スサノオ	拡大魔王顔	エフェクト表					それでもっ！\r\nこの拳には気持ちを込めています！
+	グラム=スサノオ	拡大魔王顔						大好きなマスターさんを\r\n守りたい気持ちを込めてるんです！
+CharacterOff
+	グラム=スサノオ	魔王装どや						これが私なりの愛で、\nそれで殴るからラブナックルっ！\n……決まったっ！
+CharacterOff
+	オメガB	本気						…………戦いに、愛？
+	オメガB	本気						そんなことも、ありうるの？
+CharacterOff
+	グラム=スサノオ	魔王装						それにっ！\nメラメラ燃える:Blaze魔剣が\nシナシナに鎮火中なら！
+	グラム=スサノオ	魔王装きらーん						火は叩いて点けないとっ！\nそうでしょう!?
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装						だからマスターさん！\r\nオメガ:Blazeちゃんと\r\n戦わせてくださいっ！
+CharacterOff
+	オメガB	驚き						…………
+CharacterOff
+	ディーア	笑い2						ははは、\r\n本当にスサノオって……！
+	ディーア	通常2						そうだな、スサノオの言う通り\n愛の形も表し方もいろいろだ
+	ディーア	笑い2						やろう、オメガ:Blaze
+	ディーア	通常2						魔剣一人ひとりだって\nいろんなものを愛していて\n表現の仕方も違う
+	ディーア	通常2						だからお前も\nお前なりの愛を、その示し方を\n見つけられるさ
+	ディーア	怒り2						戦う力だけを与えられた兵器でも\n世界から否定されていても
+	ディーア	怒り2						オメガのように\nお前自身の愛の形を見つけて\n戦い、抗うんだ
+CharacterOff
+	オメガB	驚き						…………
+	オメガB	悲しい						いいの？
+	オメガB	悲しい						ずっと本気は出せなくても\nオメガ:Blazeはすごく強いよ
+	オメガB	悲しい						もしかしたら\r\nスサノオちゃんを壊しちゃうかも\r\nしれない
+StopBgm
+	オメガB	悲しい						オメガ:Blazeのために\r\nそんなリスクを負う必要は<dash=2>
+Bgm	勇者バトル
+Se	チャージ
+CharacterOff
+	オーラ炎		エフェクト表			1
+	グラム=スサノオ	魔王装						ふふーん！\r\n強い力はばっちこいですっ！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	魔王装						全力でっ！\r\nぶつかりあいましょうっ!!
+CharacterOff
+	オメガB	驚き						っ…………!!
+	オメガB	笑い						……ありがとう、スサノオちゃん
+	オメガB	笑い						わかったっ！
+Bgm	勇者バトル
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	オメガB	本気						Blazeシステム、起動っ!!
+	オメガB	本気						オメガ:Blaze、\r\n今の全力でいくよっ!!
+CharacterOff
+	グラム=スサノオ	拡大魔王顔	エフェクト表					はいっ！\nかかってきなさいっ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_16
+EndIf
+EndScenario
+
+# E_1120_16
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	勇者バトル
+Bg	洞窟B					0
+Param	character_grayout=false
+	グラム=スサノオ	拡大魔王顔	エフェクト裏			0
+	オーラ炎		エフェクト表			1
+FadeIn	black					.5
+Se	火3
+	グラム=スサノオ	拡大魔王顔						はあああああああっ！\r\nねっけつ!!
+CharacterOff
+	オメガB	本気
+	オーラ紫		エフェクト表
+	オメガB	本気						スサノオちゃん、
+Shake	オメガB		x=3				NoWait
+CharacterOff	オーラ紫					1
+	オメガB	悲しい						…………ううっ！
+Se	マイクノイズ	TRUE
+CharacterOff						0
+Bg	遺跡B_過去					0
+	オメガB	<Off>						また、同じだ
+	オメガB	<Off>						あの嫌な声が、感覚が\n力を奪おうとする
+		<Off>						<color=red>ありえない</color>
+		<Off>						<color=red>お前がいると世界が乱れる</color>
+		<Off>						<color=red>選ばれなかった</color>
+		<Off>						<color=red>いなくなれ</color>
+	オメガB	<Off>						オメガ:Blazeを否定する声
+	オメガB	<Off>						オメガちゃんも\nずっとこの声に抗っていたの？\nそれでも愛を見つけたの？
+	オメガB	<Off>						兵器になった身体じゃ、\nオメガちゃんと同じように\n誰かを愛するなんて無理
+	オメガB	<Off>						きっとそれは事実で
+StopSe
+StopBgm
+	オメガB	<Off>						だけど……!!
+Bgm	和の国ボス
+FadeOut	black					.2
+CharacterOff						0
+Bg	洞窟B					0
+	オメガB					0
+	オーラ炎		エフェクト表			1
+FadeIn	black					.2
+Se	チャージ
+	オメガB	ニヤリ						世界でもなんでもっ！\r\n邪魔しないでっ!!
+CharacterOff	オメガB
+	オメガB	拡大通常	エフェクト裏					オメガちゃんは!!\nスサノオちゃんと戦ってるのっ!!
+CharacterOff
+	ディーア	驚き2						オメガ:Blazeの出力が上がった!?
+	ディーア	怒り2						いや、それだけじゃない
+	ディーア	驚き2						受けた攻撃も\n自分の力に変換しているのか!!
+CharacterOff
+	グラム=スサノオ	魔王装						いいですねっ！\r\nその気合いと熱血ですよっ！
+	グラム=スサノオ	魔王装						もっともっともっと！\r\n心に火を点けるんですっ！
+CharacterOff
+	オーラ炎		エフェクト表
+	オメガB	ニヤリ
+	オメガB	ニヤリ						あははっ！
+	オメガB	嬉しい						スサノオちゃんはすごいっ！
+	オメガB	嬉しい						スサノオちゃんの拳は\nすっごく重いのっ！
+	オメガB	ニヤリ						それに……！
+	オメガB	笑い						感じるの、スサノオちゃん！\nスサノオちゃんが\n拳に込めた気持ちっ！
+	オメガB	笑い						オメガ:Blazeに、\nこんな迷惑をかけてばかりの兵器に\nがんばれって言ってくれる
+	オメガB	笑い						熱いくらいに元気が出る魔力と\n支えるマスターちゃんの思いも\nちゃんと感じるっ!!
+CharacterOff
+	グラム=スサノオ	魔王装どや						そうでしょうっ！\n思いがあるから、重いんです！
+CharacterOff
+	オメガB	嬉しい						あはははっ！\nいま、ギャグなんて言うんだっ！
+	オメガB	笑い						笑えちゃうけどっ！\r\n今のオメガちゃんはもっと戦いたい！\r\nもっとオメガちゃんに力をぶつけて!!
+Se	回想
+FadeOut	black					.2
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	グラム=スサノオ	魔王装				0
+	          		1_2
+FadeIn	black					.2
+	オメガB	<Off>						ああ、不思議
+	オメガB	<Off>						強い拳で、当たると痛くて\r\n身体はダメージだって認識するのに
+	オメガB	<Off>						痛いだけじゃない
+	オメガB	<Off>						ただの戦いじゃない
+FadeOut	black					.2
+CharacterOff						0
+Bg	戦場跡					0
+	          		1_2
+FadeIn	black					.2
+	オメガB	<Off>						力をぶつけ合って、\n傷つくたびに\n相手を理解できていく
+	オメガB	<Off>						つらいはずなのに\nもっともっとって気持ちが高まる
+	オメガB	<Off>						どこの誰かもわからない声より\r\nこの痛みと重さが、\r\nオメガ:Blazeを支えてくれるっ！
+	オメガB	<Off>						スサノオちゃんとマスターちゃんの\nまっすぐな愛がっ！
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	洞窟B					0
+	オメガB	笑い				0
+	オーラ炎		エフェクト表			0
+FadeIn	black					.2
+	オメガB	笑い						もしかしたら、この形がっ!!
+CharacterOff
+	オメガB	拡大笑い	エフェクト表					スサノオちゃん！\r\n渾身の一撃をちょうだいっ！
+CharacterOff
+Se	チャージ
+	オーラ炎		エフェクト表			1
+	グラム=スサノオ	拡大魔王顔	エフェクト裏					もちろんですっ！
+CharacterOff
+Se	火3
+	オーラ炎		エフェクト表			1
+	オメガB	拡大笑い	エフェクト裏					はぁああああああ!!
+Se	光3
+Se	闇3
+Se	火3
+FadeOut	white					.3
+StopBgm						0
+CharacterOff						0
+	オメガB	本気				0
+Wait						2
+FadeIn	white					.3
+	オメガB	本気						はぁ、はぁ……
+	オメガB	驚き						スサノオちゃん？
+Bgm	凱旋
+CharacterOff
+	グラム=スサノオ	通常2						いったったぁ……\n魔王装、とけちゃいましたぁ\nこれ以上は戦えないかも
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						でも……！
+CharacterOff
+	ディーア	通常2						ああ、\r\n今のオメガ:Blazeにだったら\r\n託せるはずだ
+	ディーア	通常2						なにか、掴めたんだろ？
+CharacterOff
+	オメガB	通常						…………うんっ！
+	オメガB	嬉しい						今はすごくドキドキして、\r\nでもスッキリもしているのっ！
+	オメガB	嬉しい						戦っただけなのに、\nそれだけじゃないっ！
+	オメガB	嬉しい						スサノオちゃんの熱を\nここで感じてるっ！
+	オメガB	悲しい						でも……\nスサノオちゃんはどうして\nここまでしてくれるの？
+CharacterOff
+	グラム=スサノオ	通常2						そ、そうですね……\nうまく言えないんですけど
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						オメガ:Blazeちゃんの話を聞いて\n『私と同じ』だって思ったんです！
+	グラム=スサノオ	通常2						私もありえないって言われて\n生まれるまでにたくさんの犠牲も出た\n奇跡から生まれたグラム
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	研究所C					0
+	          					0
+FadeIn	white					.3
+	グラム=スサノオ	<Off>						スサノオがいなければ、\nどうしてスサノオだけって\nさっき自分に言われました
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	洞窟B					0
+	グラム=スサノオ	通常2				0
+FadeIn	white					.3
+	グラム=スサノオ	通常2						でも、奇跡でもなんでも\r\n魔拳グラム=スサノオはここにいます\r\nみんなの助けでここにいますっ！
+	グラム=スサノオ	通常2						だから私も強くて殴る\n魔拳グラム=スサノオでいるって\n決めたんです！
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						オメガ:Blazeちゃんだって大丈夫！
+	グラム=スサノオ	通常2						細かいことはいいんですっ!!
+	グラム=スサノオ	通常2						世界とか誰かが\nよくわからないこと言うなら\nパワーで燃やしちゃいましょう！
+CharacterOff
+	オメガB	通常						うん……
+	オメガB	嬉しい						スサノオちゃん、\r\nオメガ:Blazeに愛をくれて、\r\nありがとう
+CharacterOff
+	グラム=スサノオ	通常2						えへへ♪\r\nオメガ:Blazeちゃんの力にも\r\n気持ちこもってましたっ！
+CharacterOff
+	オメガB	通常						マスターちゃん、行こうっ！\nこのままイーラの最深部へ！
+	オメガB	通常						今のオメガ:Blazeなら\r\nきっと掴めるはずだから
+CharacterOff
+	オメガB	拡大通常	エフェクト表					オメガ:Blazeの愛！
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_17
+EndIf
+EndScenario
+
+# E_1120_17
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	図書館
+Bg	洞窟B					0
+Param	character_grayout=false
+	ディーア	怒り2				0
+FadeIn	black					.5
+	ディーア	怒り2						この奥だな、行くぞ
+FadeOut	white					1
+CharacterOff						0
+	イーラ	通常				2
+FadeIn	white					1
+Wait						.5
+	イーラ	通常						来たか、魔剣使いよ……
+CharacterOff
+	ディーア	驚き2						っ、イーラ\nお前、理性があるのか？
+CharacterOff
+	イーラ	通常
+	イーラ	通常						言語機能など仮初だ\n言葉もまた憤怒を表出する\n手段にすぎぬ……
+	イーラ	通常						此処は我が大罪の中心
+	イーラ	通常						静謐なる怒りも、激情たる怒りも\n全てが憤怒であり、我自身
+	イーラ	通常						我は憤怒のイーラ\r\n怒りを支配し、怒りを放つ者
+	イーラ	通常						そしてもはや最低限の礼は示し\n言葉は不要……
+	イーラ	通常						我はただ怒りの化身となりて\nこの復讐を成す
+StopBgm
+	イーラ	通常						それが、\r\n我の役目であるのだから
+Bgm	魔獣バトル
+Se	チャージ
+FadeOut	red					.2
+	オーラ炎		エフェクト表			1
+FadeIn	red					.2
+	イーラ	通常						オォオオオオオオ!!
+	イーラ	通常						我が憤怒を、スベテキサマニ!!
+CharacterOff
+	ディーア	悔しい2						外で戦ったときより、\n憤怒の力が増大している……！
+CharacterOff
+	オメガB	本気						すごいね、これが大罪の力\r\n溜め込まれた純粋な怒り……
+StopBgm
+	オメガB	本気						でも……
+Bgm	勇者バトル
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	通常						オメガちゃんには感じるのっ！
+	オメガB	通常						さっきのスサノオちゃんと同じ！\r\nこの力が持っているのは\r\nただの怒りだけじゃないっ！
+CharacterOff
+	イーラ	通常						ナ、ニ……？
+CharacterOff
+	ディーア	驚き2						オメガ:Blaze？
+CharacterOff
+	オメガB	通常						オメガちゃんは答えを知りたい！\r\nそのナニカを知りたいっ！
+	オメガB	通常						その先に、\r\nオメガの愛も見つかるはずっ！
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	オメガB	ニヤリ						だから戦おう、七罪王さんっ！
+CharacterOff
+	イーラ	通常						ワカラヌコトヲ……!!
+	イーラ	通常						我はイーラっ！\r\nタダ怒リヲ放ツケモノ也!!
+CharacterOff
+	ディーア	本気2						くるぞっ!!\n相手の攻撃は強力だ！\nなるべく当たらないように<dash=2>
+CharacterOff
+	オメガB	ニヤリ						ううんっ！\r\n避けたりしないよっ！
+CharacterOff
+	ディーア	驚き2						えっ!?
+CharacterOff
+	オメガB	ニヤリ						全て受け止めるっ！\r\nスサノオちゃんがしてくれたように！
+	オメガB	通常						それで\nオメガちゃんもぶつけるのっ！\nこの力の全てを!!
+	オメガB	通常						お願い、マスターちゃん♪
+CharacterOff
+	ディーア	目閉じ2						…………
+	ディーア	笑い2						まったく、\r\nスサノオの影響を受けすぎたな
+	ディーア	本気2						わかった、行くぞ!!
+CharacterOff
+	オメガB	拡大笑い	エフェクト表					うんっ!!\nD-13:Blaze機構、起動っ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_18
+EndIf
+EndScenario
+
+# E_1120_18
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	勇者バトル
+Bg	洞窟B					0
+Param	character_grayout=false
+	イーラ	通常				0
+	オーラ炎		エフェクト表
+FadeIn	black					.5
+	イーラ	通常						ガアアアアアアア！！
+Se	火3
+FadeOut	red					.2
+CharacterOff						0
+	ディーア	悔しい2				0
+Shake	ディーア		x=3				NoWait
+FadeIn	red					.2
+	ディーア	悔しい2						さっきよりもずっと……！\nこんなの受けとめ続けたら!!
+CharacterOff
+	オメガB	ニヤリ						でも、受け止めるっ!!\nこの兵器ならそれができるからっ!!
+	オメガB	ニヤリ						攻撃は痛いっ！
+	オメガB	ニヤリ						痛いし、辛いよっ！
+	オメガB	笑い						でもっ……！\r\nそれだけじゃないっ！
+	オメガB	笑い						七罪王イーラ！\r\nその怒りを全てオメガにぶつけて！
+	オメガB	笑い						あなたの全部を\nオメガちゃんが受け止めるから!!
+CharacterOff
+	オメガB	拡大笑い	エフェクト表					もっともっともっと！\nあなたの気持ちを\nオメガちゃんに教えて!!
+CharacterOff
+	イーラ	通常						ザレゴトをっ……!!
+	イーラ	拡大通常	エフェクト表					神規の<dash=4>
+CharacterOff
+	ディーア	驚き2						ダメだっ！\nこれは避けろ、オメガ:Blaze!!
+CharacterOff
+	オメガB	拡大笑い	エフェクト表					ううん、避けないっ!!
+CharacterOff
+	イーラ	拡大通常	エフェクト表					崩壊!!
+StopBgm						0
+Se	光3
+FadeOut	white					1
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	白背景					0
+	オメガB	<Off>				2
+Wait						1
+FadeIn	white					1
+	オメガB	<Off>						ああ、感じる…………
+	オメガB	本気				1		オメガ:Blazeの体に伝わる、\n大きな気持ち
+	オメガB	本気						すごく激しい、\n体が八つ裂きになるほどの怒りと
+	？？？？		1_2					同胞たちよ……！
+Bgm	神秘
+	オメガB	本気						悲しみと、愛
+	オメガB	本気						スサノオちゃんの拳に\r\n愛が込められていたみたいに
+	オメガB	本気						七罪王さんも\r\n背負って戦ってるんだよね？
+Se	回想
+FadeOut	black					1
+CharacterOff						0
+Bg	神殿A_過去					0
+	グーラ	通常				0
+	          		1_2			0
+FadeIn	black					1
+	イーラ	<Off>	1_2					グーラは誇り高い王だった
+	イーラ	<Off>						高潔で民を重んじ、\n彼の背に憧れた者は数知れない
+FadeOut	black					.3
+CharacterOff						0
+	ルークスリア	本気				0
+	          		1_2			0
+FadeIn	black					.3
+	イーラ	<Off>	1_2					ルークスリアは無垢な王だった
+	イーラ	<Off>						純粋な愛を信じ、\nそれ故に彼女も愛されていた
+FadeOut	black					.3
+CharacterOff						0
+	インウィディア	通常				0
+	          		1_2			0
+FadeIn	black					.3
+	イーラ	<Off>	1_2					インウィディアは慈悲の王だった
+	イーラ	<Off>						兄と仲間を慈しみ、\r\n自らの痛みなど気にもかけなかった
+FadeOut	black					.3
+CharacterOff						0
+	アヴァリティア	通常				0
+	          		1_2			0
+FadeIn	black					.3
+	イーラ	<Off>	1_2					アヴァリティアは探求の王だった
+	イーラ	<Off>						飽くなき好奇心は\r\n民に奇跡と恵みをもたらしていた
+FadeOut	black					.3
+CharacterOff						0
+	アセーディア	通常				0
+	          		1_2			0
+FadeIn	black					.3
+	イーラ	<Off>	1_2					アセーディアは聡明なる王だった
+	イーラ	<Off>						見識は天にも通じ、\r\nその慎重さで安寧を与えていた
+FadeOut	black					.3
+CharacterOff						0
+	スペルビア	通常				0
+	          		1_2			0
+FadeIn	black					.3
+	イーラ	<Off>	1_2					スペルビアも……！
+CharacterOff
+	イーラ	通常						皆、罪を抱えた化生に非ずっ!!
+	イーラ	通常						裏切りも、怒りも\n互いに抱いたこともあったが
+	イーラ	通常						我が愛しき同胞であり、\r\n偉大なる王であったというのに!!
+	イーラ	通常						なぜ、なぜだ……\r\nなぜこの世界は我らを……!!
+FadeOut	black					.3
+CharacterOff						0
+	オメガB	<Off>				0
+FadeIn	black					.3
+	オメガB	<Off>						怒りのその奥にある\n言葉にできないむき出しの心\nが伝わってくる
+	オメガB	<Off>						苦しくてたまらなくて気持ち\nその原点にある温かさ
+FadeOut	white					.3
+CharacterOff						0
+Bg	戦場跡					0
+	          					0
+FadeIn	white					.3
+	オメガB	<Off>						これが愛なの？
+	オメガB	<Off>						こんな愛の形もあるの？
+	オメガB	<Off>						ううん！\nこの真っ直ぐな気持ちが\n愛じゃなかったらなんなの!?
+	オメガB	<Off>						これはきっと\n戦いじゃないと表せない思いで\n戦いの中で示せる愛!!
+	オメガB	<Off>						ああ、そっか……！
+FadeOut	black					.3
+CharacterOff						0
+Bg	戦場跡					0
+	オメガB	拡大腕	エフェクト表			0
+FadeIn	black					.3
+	オメガB	拡大腕						この愛が、\nオメガ:Blazeが生まれた理由っ！
+FadeOut	black					.3
+CharacterOff						0
+Bg	魔術空間					0
+	オメガB	拡大通常	エフェクト表			0
+FadeIn	black					.3
+	オメガB	拡大通常						マスターちゃんたちが\nオメガちゃんに向き合って\nくれたみたいに
+	オメガB	拡大通常						受けとめてあげたい、\r\nオメガからも愛をあげたいっ！
+CharacterOff
+	オメガB	通常						兵器だからこそ！\n戦いで示せる愛があるっ！
+StopBgm
+	？？？？		1_2					うん、そうだよ\r\nオメガ:Blazeちゃん
+Se	回想
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	魔術空間					0
+	オメガ	通常				0
+FadeIn	white					1
+Bgm	結婚
+	オメガ	通常						よかった、\nやっぱり見つけられたんだね♪\nオメガ:Blazeちゃんの愛！
+	オメガ	通常						オメガちゃんは思うんだ
+	オメガ	通常						オメガちゃんは\n世界に選ばれなかったからこそ\nたくさんの愛を感じられるって
+	オメガ	通常						だってそうでしょ？\nバハムート=オメガの伝承が\n生まれたのは
+	オメガ	通常						争い合った二つの竜が、\nもし戦いの中でわかりあえて\n許しあえたら、なんて
+	オメガ	通常						そんな『もしも』を想像するほど\n終わってしまった歴史を\n誰かが愛してくれていたから
+	オメガ	通常						その確かな愛から\nバハムート=オメガは生まれたの
+FadeOut	white					.3
+CharacterOff						0
+Bg	竜鍵マナ					0
+	         
+FadeIn	white					.3
+	バハムート=オメガ	<Off>						世界には\r\n選ばれなかったかもしれないけど\r\n望まれなかったわけじゃない
+	バハムート=オメガ	<Off>						誰か一人だけでも望んでくれて\nマスターちゃんも愛してくれるから\nオメガはここにいる
+	バハムート=オメガ	<Off>						オメガたちは\nたくさん愛されてる
+	バハムート=オメガ	<Off>						だから\nマスターちゃんを、みんなを、\n世界も愛してあげたい
+	バハムート=オメガ	<Off>						オメガ:Blazeちゃんもそうでしょ？
+FadeOut	white					.3
+CharacterOff						0
+Bg	魔術空間					0
+	オメガ	通常				0
+FadeIn	white					.3
+	オメガ	通常						どんなやり方でも、\nその気持ちがあれば本物の愛だよ♪
+CharacterOff
+	オメガB	嬉しい						うん……！
+StopBgm
+FadeOut	white					1
+Bg	洞窟B					0
+CharacterOff						0
+	オメガB	本気				0
+	黒グラデーション		エフェクト表			0
+FadeIn	white					1
+	オメガB	本気						………………
+CharacterOff
+	ディーア	悔しい2						オメガ:Blaze……
+CharacterOff
+	黒グラデーション		エフェクト表			0
+	オメガB	本気				0
+Wait						1
+CharacterOff	黒グラデーション					1
+	オメガB	ニヤリ						あははっ！
+CharacterOff
+	イーラ	通常						ナ、ニ……？
+Bgm	決戦
+CharacterOff
+	オメガB	ニヤリ						あはははははははっ!!
+	オメガB	嬉しい						やっとわかった……！\nこれがオメガ:Blazeの愛っ！
+	オメガB	嬉しい						戦場で、\nたくさんの愛がぶつかってる!!
+	オメガB	笑い						戦い続けて、\n新しい愛が生まれることもある!!
+	オメガB	嬉しい						愛！ 愛！ 愛！ 愛！\n戦いは愛で満ちている!!
+	オメガB	笑い						バハムート=オメガは、\nその愛から生まれたの!!
+Se	チャージ
+Se	火3
+	オーラ炎		エフェクト表			2
+	オメガB	ニヤリ						だからオメガ:Blazeも\n戦って愛して、愛されたいっ!!
+	オメガB	嬉しい						この兵器の体でも！\n戦いでなら愛を示せるっ！\n愛を受けとめられる!!
+CharacterOff
+	オメガB	拡大通常	エフェクト表					マスターちゃん！\n火を点けて!!
+StopBgm
+CharacterOff
+	ディーア	本気2						ああっ!!
+Bgm	BlazeA
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景
+Param	character_grayout=false
+	イベントスチル1048N	N1	エフェクト裏			0
+	黒背景		エフェクト表			0
+Se	火2
+Tween	黒背景	MoveBy	x=1500 time=2				NoWait
+	オメガB	<Off>						戦いの輪廻から生まれた\n竜王バハムート=オメガ
+Se	火3
+	イベントスチル1048N	N2				2
+Wait						2.5
+ImageEffectOff	SpriteCamera	Bloom
+FadeOut	white					1
+CharacterOff						0
+Bg	黒背景					0
+	イベントスチル11201		エフェクト表			0
+FadeIn	white					1
+	オメガB	<Off>						その兵器としての形！\nバハムート=オメガ:Blaze!!
+	オメガB	<Off>						この愛を！ 力を!!\nオメガ:Blazeは全て受け止める!!
+	オメガB	<Off>						戦おうよ、思いを込めて！
+	オメガB	<Off>						愛し合おうよ、全てをぶつけて！
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_19
+EndIf
+EndScenario
+
+# E_1120_19
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	決戦
+Bg	白背景					0
+Param	character_grayout=false
+	イベントスチル11203		エフェクト表			0
+Tween	イベントスチル11203	MoveBy	y=-483 time=15				NoWait
+FadeIn	white					1
+	オメガB	<Off>						アハハハ！！
+	オメガB	<Off>						いいよ、いいよっ！\nもっと出してよ、あなたの愛!!
+	オメガB	<Off>						あなたの力には\r\nたくさんの愛が込められてるっ！
+	オメガB	<Off>						じゃないと、\r\nこんなに強くなれないっ！\r\nこんなに痛くないっ！
+	オメガB	<Off>						だから、\nはやくはやくはやくはやくっ！\nもっとオメガに愛をぶつけて!!
+	オメガB	<Off>						燃え尽きるほどっ！\n戦って、愛し合おうよっ!!
+Bg	洞窟B
+CharacterOff
+	イーラ	通常
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	イーラ	通常						オォオオオオオオ!!
+Se	光3
+Se	闇3
+FadeOut	white					.3
+CharacterOff						0
+	オメガB	笑い				0
+Shake	オメガB		x=3				NoWait
+FadeIn	white					.3
+	オメガB	笑い						っ……！
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	笑い						すごい愛を感じるっ！
+	オメガB	嬉しい						あぁ、素敵……♪\r\nやっぱり戦いってすばらしい♪
+CharacterOff
+	イーラ	通常						このムスメ……!!
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	オメガB	笑い				0
+	          		1_2
+FadeIn	white					.3
+	イーラ	<Off>	1_2					我の攻撃を\nすでに百度は受けているというのに\n壊れるどころか怯みもしない
+	イーラ	<Off>						ただまっすぐに我へと向かい、\n攻撃を受け止め、\n返礼のように返してくる
+	イーラ	<Off>						……この憤怒を\n理解しようと言うのか？
+	イーラ	<Off>						魔剣使いもまた……
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale				0
+	ディーア	悔しい3				0
+FadeIn	white					.3
+	ディーア	悔しい3						ぐっ……！\r\nまだまだ……!!
+	ディーア	本気3						がんばれオメガ:Blaze！\nお前ならこの憤怒を受けとめられる\nオレがそれを支えるっ!!
+	ディーア	本気3						だから、\nお前の愛を貫くんだっ!!
+Param	character_grayout=true
+	イーラ	<Off>	1_2					これは敵に向けるものではない\r\n理解不能の獣に向けるものでもない
+	イーラ	<Off>						これは<dash=2>
+FadeOut	black					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	イベントスチル11203b		エフェクト表			0
+FadeIn	black					.3
+	オメガB	<Off>						無限の輪廻を繰り返しても！\nあなたの想いを受け止めるっ！\n愛に向き合い続けるっ!!
+	オメガB	<Off>						それがオメガ:Blaze!!\r\nそれがこの兵器の力の意味っ!!
+	オメガB	<Off>						あなたが\r\nオメガちゃんたちを敵だと思うなら\r\nそれでもいいのっ！
+	オメガB	<Off>						さあ、来てっ！\nあなたの敵は、倒すべき兵器は\nここにいるんだよっ！
+	オメガB	<Off>						全ての愛を！\n戦いにぶつけてきてよっ!!
+CharacterOff						0
+Bg	白背景					0
+	イーラ	<Off>						ああ、この者は……!!
+	イーラ	<Off>						ただひたすらに、\n我と向き合おうと……
+FadeOut	black					.3
+CharacterOff						0
+Bg	洞窟B					0
+	イーラ	拡大通常	エフェクト表			0
+FadeIn	black					.3
+	イーラ	拡大通常						オォオオオオオオオ!!
+Se	光3
+Se	闇3
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+	イーラ	通常				0
+Wait						1
+FadeIn	white					1
+	イーラ	通常						………………
+CharacterOff
+	ディーア	驚き3						イーラが、止まった？
+CharacterOff
+	イーラ	通常						ククク……!!
+Se	チャージ
+Bg	魔術空間(赤)					1
+	イーラ	通常						<size=50>がははははははは!!</size>
+CharacterOff
+	ディーア	驚き3						イーラ……
+Bgm	凱旋
+CharacterOff
+	イーラ	通常						そうか！\n我の怒りも根源は愛か!!
+	イーラ	通常						そのようなことを言う者が\n居るとはな
+	イーラ	通常						我らを裏切った\n魔界への怒りは消えぬ\nそれは永劫の憤怒
+	イーラ	通常						しかし……\n我もかつては民を率いた\n王であったのだ
+	イーラ	通常						憤怒をこうも受けとめられては\n正気に戻らざるをえないではないか
+	イーラ	通常						久方ぶりに清々しい気分だ\nそれだけでも礼を言うぞ、魔剣使い
+CharacterOff
+	ディーア	通常3						それは\r\nオメガ:Blazeに言ってくれ
+CharacterOff
+	イーラ	通常						フフ、若き竜の兵器よ\r\nそなたの選んだ道は厳しいぞ？
+	イーラ	通常						そなたの力は\n敵の全てを奪い自らのものとする\n力も、想いさえも
+	イーラ	通常						その気になれば\n一方的な殲滅さえ可能だというのに\nあえて敵と向き合うとは
+	イーラ	通常						だがそうまでしても\n戦いは戦い\n想いが伝わらぬことは多いだろう
+CharacterOff
+	オメガB	嬉しい						それでもオメガ:Blazeは\n戦って、愛し合うよ！
+	オメガB	通常						兵器になった\nオメガ:Blazeだけができる\n愛し方だもんっ！
+CharacterOff
+	イーラ	通常						その力が\n魔界から疎まれようとも、か？
+CharacterOff
+	オメガB	笑い						魔界とだって戦って\n愛し合っちゃえばいいじゃん♪
+	オメガB	笑い						今、この時も戦いだよっ！\n愛の戦いっ！
+CharacterOff
+	イーラ	通常						そうか……\r\nそなたらは強いのだな
+	イーラ	通常						ならば我も、\n王でありながら怒りに呑まれた\n大罪を詫びたい
+	イーラ	通常						誰もが我らを理解せぬなら\r\nもはや誇りもなにもかも\r\n必要ないと思っていた
+	イーラ	通常						これが彼女の\r\n計略だとわかっていても\r\n我は怒りに身を任せた
+	イーラ	通常						だが、\r\nそれはただの諦めであったな
+StopBgm						1
+	イーラ	通常						このように堂々たる戦いを\r\n挑まれた以上
+Se	チャージ
+	オーラ炎		エフェクト表			1
+Bgm	タイトル
+	イーラ	通常						我も王として向き合おう
+	イーラ	通常						王として、この怒りをもって！\n世界に挑みかかろう!!
+CharacterOff
+	ディーア	本気3						ああ、かかってこい!!
+Se	光3
+Se	チャージ
+Se	闇3
+FadeOut	white					.3
+CharacterOff						0
+Bg	黒背景					0
+	イベントスチル11202		エフェクト表			0
+FadeIn	white					.3
+	イーラ	<Off>						《憤怒の七罪王》《神規の崩壊》\n《終焉なき静と動の循環》\n告げる！ 我は憤怒のイーラ!!
+	イーラ	<Off>						勇敢なる魔剣使いに\n勝負を挑むものである!!
+Bg	魔術空間(赤)
+CharacterOff
+	ディーア	怒り3						《魔剣機関所属魔剣使い》\r\n《愚かなる卑怯者の鍵》\r\n<param=name>！
+	ディーア	本気3						最後の戦いだ！\r\nいくぞっ、オメガ:Blaze!!
+Se	光3
+Se	チャージ
+Se	火3
+FadeOut	white					.3
+CharacterOff						0
+Bg	黒背景					0
+	イベントスチル11201		エフェクト表			0
+FadeIn	white					.3
+	オメガB	<Off>						うん！\n最後まで愛し合おうっ!!
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_20
+EndIf
+EndScenario
+
+# E_1120_20
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	魔術空間(赤)					0
+Param	character_grayout=false
+	イーラ	通常				0
+	オーラ赤		エフェクト表			0
+FadeIn	black					.5
+	イーラ	通常						我の、負けか……
+CharacterOff	オーラ赤					1	NoWait
+	イーラ	通常						しかし、不思議だな\r\n憤怒の情念は感じないのだ
+	イーラ	通常						むしろ愉快……\r\n心からそう思ったのはいつぶりだろう
+	イーラ	通常						司書王の虜囚となるは\n我が同胞にとって屈辱でしか\nないと考えていたが
+	イーラ	通常						ただ一つ、\nそなたと戦うことができたのは\n誉れでもあったのだろう
+	イーラ	通常						我も感謝するぞ、魔剣使い\r\n王として相対してくれて
+CharacterOff
+	ディーア	笑い3						ああ、\r\nこちらこそ戦えて光栄だった
+CharacterOff
+	オメガB	笑い						イーラさんの愛っ！\r\nメラメラって感じたよっ！
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	嬉しい						オメガちゃんも\r\n愛し愛され満足満足♪
+CharacterOff
+	イーラ	通常						ふはは、ならばよい
+	イーラ	通常						そして……\r\n勝者であるそなたらに一つ忠告だ
+	イーラ	通常						司書王に気をつけろ
+	イーラ	通常						これで司書王は\r\n七罪の力を全て手中にしたはずだ
+CharacterOff
+	ディーア	驚き3						どういうことだ？\r\nまだスペルビアが残っているのに
+CharacterOff
+	イーラ	通常						我にも確証はないが……\nスペルビアと\n司書王にはなにかの繋がりがある
+	イーラ	通常						やつと相対した時に\r\nそのような感覚がしたのだ
+CharacterOff
+	ディーア	怪しい3						ロール様とスペルビアに？
+CharacterOff
+	イーラ	通常						司書王の目的は定かではないが\r\n本願を果たそうと動き出すだろう
+	イーラ	通常						スペルビアもまた、\r\n奴には奴の目的があるに違いない
+CharacterOff
+	ディーア	怒り3						ルゥ……\nいや、ルークスリアにもか？
+CharacterOff
+	イーラ	通常						むぅ、ルークスリアも\n囚えられたと聞いたが……
+	イーラ	通常						いや、彼女のことだ\r\n二重三重の策は用意しているだろう
+	イーラ	通常						我をこのように\n行動させたのも含めてな
+	イーラ	通常						いずれにせよ、\nそなたにとって容易ならざる相手\nくれぐれも油断をするな
+CharacterOff
+	ディーア	通常3						わかった、ありがとう
+CharacterOff
+	イーラ	通常						外の我も\n同様に停止したはずだ
+	イーラ	通常						ここも消滅する\r\nすぐに出ていくがよい
+	イーラ	通常						そなたらのように\r\n我らも在れたのなら……
+CharacterOff	イーラ					1
+Wait						1
+CharacterOff
+	ディーア	怒り3						イーラ……
+StopBgm
+Se	チャージ
+FadeOut	white					1
+CharacterOff						0
+Bg	市街地A(崩壊)					0
+	ディーア	通常3				0
+Wait						2
+FadeIn	white					1
+	ディーア	通常3						ようやく、外に出られたな
+CharacterOff
+	オメガB	嬉しい						うん♪\nそれじゃあ<dash=4>
+CharacterOff
+	ディーア	怒り3						もう、行くんだな？
+Bgm	結婚
+CharacterOff
+	オメガB	にやけ						もー♪ なんでそんな顔するの？\r\nマスターちゃん♪
+	オメガB	嬉しい						オメガちゃん的には\n大満足だったんだよ？
+	オメガB	笑い						オメガ:Blazeにとっての\r\n愛の意味もちゃんと見つかって
+	オメガB	笑い						兵器として\r\n任務も完了させることができた
+	オメガB	てへぺろ						さすがに\r\nイーラさんの攻撃をあんなに受けたら\r\n無事じゃ済まなかったけど
+Tween	オメガB	PunchPosition	y=30				NoWait
+	オメガB	嬉しい						戦いの中で\r\n気持ちを、愛をぶつけ合って\r\n理解し合えたんだもん！
+Tween	オメガB	PunchPosition	y=50				NoWait
+	オメガB	嬉しい						だから！\n今度はマスターちゃんとも\nちゃんと愛し合いたいな♪
+CharacterOff
+	ディーア	驚き3						えっ……!?
+	ディーア	汗3						ちょ、ちょっと待ってくれ\r\nオメガ:Blazeにとっての愛って
+CharacterOff
+	オメガB	嬉しい						もちろん！\r\n戦って、ぶつかり合おうよ！
+	オメガB	嬉しい						今のオメガちゃんなら、\n戦う力を調整できると思うし\n安心して？
+	オメガB	ニヤリ						マスターちゃんだってぇ\r\n他の魔剣ちゃんに言えない気持ちも\r\nぜったいにあるでしょ？
+	オメガB	ニヤリ						それをぜーんぶ、\r\nオメガ:Blazeが受けとめてあげる！
+	オメガB	嬉しい						どんなに激しくても大丈夫だよ♪
+CharacterOff
+	ディーア	絶望3						リディに聞かれたら、\r\nぜったいに誤解されそうだな
+CharacterOff
+	オメガB	嬉しい						あはは！\nその時はリディちゃんとも\n愛し合おっかな♪
+	オメガB	通常						実は今もね\n魔界から拒絶されるのは感じるの
+	オメガB	笑い						それでも\nオメガ:Blazeは戦って、\n愛し合っていく！
+	オメガB	笑い						それにイーラさんを止めたから、\r\n魔界もオメガちゃんを不要なんて\r\n言えないだろうし
+	オメガB	嬉しい						だから!!\nすぐに会おうねマスターちゃん♪
+CharacterOff
+	オメガB	拡大笑い	エフェクト表					それでたくさん愛し合おっ♪
+CharacterOff
+	ディーア	笑い3						ああ！\r\n約束だ、オメガ:Blaze！
+FadeOut	white					2
+CharacterOff						0
+Bg	酒場1F					0
+	グラム=スサノオ	拡大通常	エフェクト表			0
+Wait						2
+StopBgm						0
+FadeIn	white					1
+Bgm	和の国の町
+	グラム=スサノオ							あけましてー！\r\nおめでとーございまーすっ！
+CharacterOff
+	グラム=スサノオ	通常2
+Tween	グラム=スサノオ	PunchPosition	y=30				NoWait
+	グラム=スサノオ	通常2						かんぱーいっ!!
+CharacterOff
+	ワンド	通常						なんでまた\nお正月の宴会してるのよ
+CharacterOff
+	グラム=スサノオ	通常2						知らないんですか、ワンド姉さん！\r\nお祝いは何度してもいいんですっ！
+CharacterOff
+	偽剣グラム×サンタ	通常						だからって\r\nお正月は一回だけでしょうに
+CharacterOff
+	ファフニル	通常						ふぁふぅー！\r\nファフニーはお祝い大好き♪
+CharacterOff
+	モッド							にははー！\r\n私も今日は参加しようかなっ！
+	モッド							ワンドちゃんとサンタちゃんの\r\n好みの恋愛マンガ話を肴にして♪
+Param	character_grayout=true
+CharacterOff
+	偽剣グラム×サンタ	通常	p3
+	ワンド	通常	p7b
+	ワンド	通常						なっ……!!
+	偽剣グラム×サンタ	通常						スサノオ、あなたねぇ！
+	ワンド	通常						マスターだけじゃなくて\r\nモッドにまでバラしたの!?
+Param	character_grayout=false
+CharacterOff
+	グラム=スサノオ	通常2						はいっ！\r\nもっとドキドキするマンガも\r\n教えてくださいっ！
+CharacterOff
+	魔剣グラム	通常						フフフ♪\r\n本当に賑やかな一年になるわね
+	魔剣グラム	通常						貴女も混ざってきたら？
+CharacterOff
+	聖女グラム=オルタ=ロスト	通常						私は聖女ですから\r\n浮かれ騒ぐのはいけないことです
+CharacterOff
+	魔剣グラム	通常						あら？\nマスターとこっそり逢瀬を\n楽しむのはいいのに？
+CharacterOff
+	聖女グラム=オルタ=ロスト	驚き						そ、それは……！
+	聖女グラム=オルタ=ロスト	悔しい						こっちの\nお姉ちゃんはちょっとイジワルです
+	聖女グラム=オルタ=ロスト	通常						それじゃあ、\nす、少しだけなら
+CharacterOff
+	魔劍グラム=オルタ	嬉しい2						えへへ♪\r\nジュース取ってくるから\r\n一緒に飲もうね♪
+CharacterOff
+	グラム=スサノオ	通常2						とりゃー!!\r\nもう一度カワラ割り!!
+Se	光1
+FadeOut	white					.2
+FadeIn	white					.2
+	土煙		エフェクト表			.2
+	グラム=スサノオ	通常2						この威力！\nグラム姉様も認めた\nスサノオの力!!
+CharacterOff
+	魔剣グラム	通常						そんなこと、\r\n一言も言った記憶がないのだけど
+FadeOut	black					.3
+CharacterOff						0
+	オメガ	通常				0
+FadeIn	black					.3
+Tween	オメガ	PunchPosition	y=30				NoWait
+	オメガ	通常						わぁー♪\nオメガちゃんの:Blaze!?\nすごく愛があるっ！
+CharacterOff
+	ディーア	通常2						うん、\r\nできればオメガにも会わせたかった
+	ディーア	笑い2						けれど\r\nきっとすぐに会えるさ、約束する
+CharacterOff
+	オメガ	通常						うん♪\r\nマスターちゃんのまっすぐな愛♪\r\nうれしいっ！
+	オメガ	通常						オメガ:Blazeちゃんも、\r\nこっちに来たら\r\nたくさんの愛を見つけるのかな♪
+Tween	オメガ	PunchPosition	y=30				NoWait
+	オメガ	通常						マスターちゃんとなら\r\n戦うこともたくさんあるし♪
+CharacterOff
+	ディーア	怪しい2						あれ？\r\nオメガ:Blazeの愛の話はしてないけど\r\nどこで聞いたんだ？
+CharacterOff
+	オメガ	通常						うーん♪ ナイショ♪
+	オメガ	通常						でもね！\n同じオメガだもん！
+	オメガ	通常						いつでも愛でつながってるの！
+FadeOut	white					2
+CharacterOff						0
+Bg	夏空					0
+	イベントロゴ1120		エフェクト表			3
+FadeIn	white					1
+Wait						3
+FadeOut	white					2
+CharacterOff						0
+Bg	洞窟A					0
+	黒グラデーション		エフェクト裏			0
+StopBgm
+Wait						1
+FadeIn	white					1
+Bgm	図書館
+	ルークスリア	どや				1		これで\r\n司書王は七罪を揃えた
+	ルークスリア	どや						その中に\r\n毒が混ざっているとも知らずに
+	ルークスリア	どや						みんな、待たせたゎ
+	ルークスリア	どや						ぁたしたちの復讐はもぅすぐよ
+FadeOut	black					.3
+CharacterOff						0
+Bg	研究所C					0
+	ププッピマリー	佇む				0
+Wait						1
+FadeIn	black					.3
+	ププッピマリー	佇む						お嬢様、\r\nイーラの討伐について報告書です
+CharacterOff
+	司書王ロルリアンレット	通常H						ありがとう、下がっていいわよ
+CharacterOff
+	ププッピマリー	佇む						……お嬢様、\n最近、お休みはとられていますか？
+	ププッピマリー	佇む						お食事を残されることが多いですし\nお体にどこか<dash=2>
+CharacterOff
+	司書王ロルリアンレット	通常H						下がりなさい
+CharacterOff
+	ププッピマリー	佇む						……はい
+FadeOut	black					1
+CharacterOff						0
+Bg	研究所A					0
+	ププッピマリー	佇む				0
+FadeIn	black					1
+	ププッピマリー	佇む						お嬢様……
+CharacterOff
+	スペルビア	通常						どうした？\r\n浮かない顔じゃないかプリエラ
+CharacterOff
+	ププッピマリー	通常						……はぁ\nどこに行っていたのです\nスペルビア
+	ププッピマリー	通常						勝手な行動は慎むようにと\r\n命じたはずですが？
+CharacterOff
+	スペルビア	通常						そう目くじらを立てるな\nお前の目的のために\nひと働きをしたまでさ
+	スペルビア	悪い顔						光栄に思うがよいっ！\r\n高慢の王が手を貸していることを！
+	スペルビア	にやけ						それに何より、\nお互い、知らないところはない\n仲じゃないか？
+CharacterOff
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ププッピマリー	佇む						わかりました\nまた実験室で隅々まで\n調べられたいのですね？
+CharacterOff
+	スペルビア	拡大驚き	エフェクト表					待て待て！ ほんの冗談だ！
+CharacterOff
+	ププッピマリー	佇む						まったく、\nあなたという人は昔から
+CharacterOff
+	スペルビア	悔しい						お前の方こそ\nいつまで経っても\n私に対する当たりがきつい
+	スペルビア	怪しい						本題に入ろう、\n我らがお嬢様の様子は\n思わしくないようだな？
+CharacterOff
+	ププッピマリー	佇む						…………
+CharacterOff
+	スペルビア	にやけ						見ずともわかるさ
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	研究所C2					0
+	          
+FadeIn	white					.3
+	スペルビア	<Off>						新しい玩具を手にしたように\n七罪王の成り立ちや構造まで\n夢中になって調べているのだろう
+	スペルビア	<Off>						今頃、我らの体が\n魔剣に近しいということまでは\n暴き出したに違いない
+	スペルビア	<Off>						だがどうしても、\n欲しい答えは手に入らない
+FadeOut	white					.3
+CharacterOff						0
+Bg	研究所A					0
+	          
+FadeIn	white					.3
+	スペルビア	<Off>						それはさぞ耐え難いことだろう
+	スペルビア	<Off>						原初の欲求、あるいは大罪である\n禁忌の智慧への欲望
+	スペルビア	<Off>						その絶大なる欲で\nこれほどの図書館まで築いたのだ\n今さら止まる方法もわかるまい
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	研究所A					0
+	スペルビア	にやけ				0
+FadeIn	white					.3
+	スペルビア	にやけ						実に高慢なことだ\r\nまったく誰に似たのやら
+CharacterOff
+	ププッピマリー	佇む						少なくとも、\nあなたでないことは確かです
+CharacterOff
+	スペルビア	にやけ						ではキミかな？\n…………なんて、冗談だよ
+	スペルビア	通常						これからだ
+	スペルビア	通常						七罪が揃い、\n自らの原罪にしたがって\nロルリアンレットは動き出す
+	スペルビア	通常						お前はどうするんだ、\r\nプリエラ=ププッピマリー？
+CharacterOff
+	ププッピマリー	佇む						決まっております、\r\n私のすべてはお嬢様のために
+	ププッピマリー	佇む						あなたにもそうしてもらいますよ、\r\nスペルビア
+CharacterOff
+	スペルビア	にやけ						ククク、わかっているとも
+CharacterOff						0
+Bg	黒背景					0
+	スペルビア	<Off>						我がマスターよ
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1120_11
+EndIf
+EndScenario

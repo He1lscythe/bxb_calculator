@@ -1,0 +1,2304 @@
+# E_1030_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Se	強風
+Bg	戦場跡
+	聖征剣エクスカリバー	黒2
+FadeIn	black					1.5
+Tween	聖征剣エクスカリバー	ShakePosition	x=5				NoWait
+	聖征剣エクスカリバー	黒2						……ぁ…………
+Se	突1
+FadeOut	red					.2
+CharacterOff						.5
+	エクスカリバー=ロスト	逆光？
+Se	倒れる
+Wait						.3
+Wait						.7
+FadeIn	red					1
+Bgm	絶望
+Param	character_grayout=true
+	エクスカリバー=ロスト	逆光？				1		………………
+CharacterOff
+	カルバノグ	通常				1	NoWait
+	カルバノグ	通常						おつかれさまでしたあ♪
+	カルバノグ	通常						"本物"の聖剣を倒した\n手ごたえはいかがですかあ？
+CharacterOff
+	エクスカリバー=ロスト	通常？
+	エクスカリバー=ロスト	通常？						……なんてことないわ
+	エクスカリバー=ロスト	悲しい？						もう、慣れたもの
+CharacterOff
+	カルバノグ
+Tween	カルバノグ	PunchPosition	y=50				NoWait
+	カルバノグ							さすがですよう！\nあなたにかかればエクスカリバーも\n棒切れみたいなもんですねえ♪
+CharacterOff
+	エクスカリバー=ロスト	怒り？
+	エクスカリバー=ロスト	怒り？						………………
+CharacterOff
+	カルバノグ
+Tween	カルバノグ	ShakePosition	x=5				NoWait
+	カルバノグ							あぁぁ～、\nカルバはその目つきだけで\n抹消されちゃいそうですよう♪
+CharacterOff
+	エクスカリバー=ロスト	悲しい？
+	エクスカリバー=ロスト	悲しい？						……そんなことを言うために\n此処へ来たんじゃないでしょう？
+	エクスカリバー=ロスト	通常？						……あなた"たち"は
+CharacterOff
+	ドロシー	ニヤリ	1_2			1	NoWait
+	ドロシー	ニヤリ						……ふん\n気配を消そうがお見通しってわけか
+	ドロシー	通常						<ruby=われわれ>魔人機関</ruby>の与えた力を\n存分に使いこなしているようだな
+	ドロシー	ニヤリ						その名に恥じぬ活躍だよ、\n<ruby=ロストナンバー>対魔剣殲滅魔導兵器LS_No.</ruby>13464\n……いや、エクスカリバー=ロスト
+CharacterOff
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト	怒り						…………
+CharacterOff
+	ドロシー	通常	1_2
+	カルバノグ	通常	2_2
+	ドロシー	通常						エクスカリバー掃討作戦は\nこれでめでたく完了だ
+	ドロシー	ニヤリ						ただし、こちら側では、な
+CharacterOff
+	エクスカリバー=ロスト	悲しい
+	エクスカリバー=ロスト	悲しい						……兵器に休息はないってわけね
+CharacterOff
+	ドロシー	ニヤリ	1_2
+	カルバノグ	通常	2_2
+	ドロシー	ニヤリ						ああ\n貴様にはさっそく\n新たな仕事に取り掛かってもらう
+	ドロシー	通常						向こうには\n少々厄介な因子が存在する\n気を抜かないで取り組むことだな
+	カルバノグ							それじゃあ、\nさっそく転送しちゃいますよう♪\n準備はいいですかあ？
+CharacterOff
+	エクスカリバー=ロスト
+	エクスカリバー=ロスト	通常						……ええ
+Se	光1
+	イベントスチル459H1		effect_a			1
+	イベントスチル459H2		effect_b			1
+Tween	イベントスチル459H1	RotateBy	z=5 time=100				NoWait
+Tween	イベントスチル459H2	RotateBy	z=-5 time=100				NoWait
+Wait						2
+FadeOut	black					1
+CharacterOff						0
+StopSe						0
+Bg	黒背景
+FadeIn	black					.7
+Wait						1
+	カルバノグ	<Off>						……がんばってくださいねえ？\nエクス=ロストさん♪
+	　　　　　　　　　　　　　　　　　　
+Wait						1
+CharacterOff
+	イベントロゴ1030		エフェクト表			5
+	イベントロゴ1030							    
+FadeOut	black					.5
+Wait						3
+Param	character_grayout=true
+StopBgm
+CharacterOff						0
+Bg	市街地A					0
+	エクス=レプリカ	通常2	1_2			0
+FadeIn	black					.5
+Bgm	平和
+	エクス=レプリカ	通常2						いっつかほんものこえるため～♪\nきょーうもがんばれっ♪\nれっぷりっかちゃ～ん♪
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	通常2						ご主人様、\n他に食べたいものはないかしら？
+	エクス=レプリカ	通常2						今日はレプリカちゃんが\nご主人様のためになぁんでも\n作ってあげるわ♪
+CharacterOff
+	エクス=レプリカ	通常2	1_2
+	ディーア	汗2	画面外_右
+Tween	ディーア	MoveTo	x=90 time=1.2				Add
+	ディーア	汗2						おーいレプリカ、\nちょっと待てって\nこっちは大荷物なんだぞ？
+CharacterOff
+	エクス=レプリカ	通常2	1_2
+	ディーア	汗2	2_2
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	ニヤリ2						もぉ、ご主人様はだらしないわねぇ♪
+	エクス=レプリカ	ニヤリ2						私のお料理が\n食べられるんだから、\n荷物持ちくらい我慢しなさい？
+	エクス=レプリカ	通常2						レプリカちゃんのお料理の腕前は、\n本物にだって負けないのよ♪
+	ディーア	汗2						……ほんとかぁ？\nだいたい、エクスカリバーが\n料理するなんて聞いたことないぞ
+	エクス=レプリカ	ニヤリ2						するとしたら、負けないってこと♪\nほぉら、ご主人様！\nとびっきりの食材買っちゃいましょ♪
+	ディーア	汗2						レプリカ、もう十分買い物はしたろ？
+	ディーア	驚き2						そろそろ酒場に帰……ん？
+FadeOut	black					.5
+CharacterOff
+	兵士	通常2	1_2			0
+FadeIn	black					.5
+Bgm	ガヤB_BGM
+	兵士	通常2	1_2					離れて！\n押さないでください！
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	通常2	1_2
+	エクス=レプリカ	通常2						なにかしら？\n人がたくさん集まってるわ！
+CharacterOff
+	兵士	通常2	1_2
+	兵士	通常2	1_2					ここから先は現在通行禁止です！\n線に近づかないで、離れて！
+CharacterOff
+	女の子		1_2
+	女の子							ねえ、おかあさん\n向こうに、人、倒れてる……
+	母親	<Off>						見ちゃダメ、\n早くこっちに来なさい！
+Se	走る
+Tween	女の子	MoveBy	x=-500
+	　　　　　　　　　　　　　　　　　　
+CharacterOff
+	黒グラデーション		エフェクト表
+	群衆の声	<Off>						……また勇者が狙われたらしい\n例の「エクスカリバー狩り」か
+	群衆の声	<Off>						E.D.E.N.の連中は何をやってるんだ
+StopBgm
+	群衆の声	<Off>						この体たらくじゃ\nシドウの王政も長くはないな
+FadeOut	black					.5
+CharacterOff
+Bgm	絶望
+	エクス=レプリカ	泣き2	1_2
+	ディーア	怒り2	2_2
+FadeIn	black					.5
+	ディーア	怒り2						……勇者が襲われる事件、\nまだ続いてるのか
+	ディーア	怒り2						レプリカ、今日は別の道で……
+	エクス=レプリカ	通常2						ねえご主人様！\n私、いいことを思いついたわ！
+	ディーア	驚き2						いいこと？
+	エクス=レプリカ	通常2						「エクスカリバー狩り」を\n私たちでやっつけるのよ！
+	ディーア	汗2						……あのなぁ、レプリカ\n相手は正体も分からない凶悪犯だぞ？
+	ディーア	怪しい2						それに、勇者が持ってる\n汎用エクスカリバーばかり\n狙って奪われてるらしいじゃないか
+	ディーア	怒り2						レプリカも、\nエクスカリバー系の魔剣なんだから\n下手に動いたらかえって危ないぞ？
+	エクス=レプリカ	通常2						だからこそよ！
+	エクス=レプリカ	ニヤリ2						たくさん勇者がやっつけられてるのに\n本物のエクスカリバーもE.D.E.N.も、\nまだ何もできてないんでしょう？
+	エクス=レプリカ	通常2						それなら、私たちが先に\n「エクスカリバー狩り」を捕まえれば\n本物を超えたことになるじゃない！
+	ディーア	目閉じ2						レプリカ、本物のエクスカリバーに\n対抗意識があるのは分かるけどな……
+CharacterOff
+	勇者A	通常	画面外_右
+Se	走る
+Tween	勇者A	MoveTo	x=0				NoWait
+	勇者A							いたぞ、あそこだ！
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	通常2	1_2
+	ディーア	怒り2						……E.D.E.N.の勇者だ
+	エクス=レプリカ	通常2						こっちに来るわ、何の用かしら？
+CharacterOff
+	勇者A	通常	1_2
+	勇者B	通常	2_2
+	勇者A							金髪に十字の髪飾り……
+StopBgm
+	勇者B							間違いない！\nこいつが「エクスカリバー狩り」だ！
+Bgm	緊迫
+CharacterOff
+	ディーア	驚き2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア	驚き2						……なんだって？
+	エクス=レプリカ	泣き2						私が……「エクスカリバー狩り」？
+	ディーア	本気2						おい待ってくれ！\n何か誤解が……
+StopBgm
+CharacterOff
+	勇者A	通常	1_2
+	勇者B	通常	2_2
+Tween	勇者A	PunchPosition	y=50				NoWait
+Bgm	バトル
+	勇者A							問答無用！
+Tween	勇者B	PunchPosition	y=50				NoWait
+	勇者B							仲間の仇だ、覚悟しろ！
+CharacterOff
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	通常2	1_2
+	ディーア	悔しい2						どうなってるんだ……
+	エクス=レプリカ	通常2						戦いましょうご主人様！\n私たちなら、\nE.D.E.N.にだって負けないわ！
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1030_02
+EndIf
+EndScenario
+
+# E_1030_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	市街地A
+	ディーア	本気2	2_2
+	エクス=レプリカ	通常2	1_2
+FadeIn	white					1
+	エクス=レプリカ							はぁっ!!
+Se	斬2
+FadeOut	white					.2
+FadeIn	white					.2
+Se	ガード
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+Tween	勇者A	ShakePosition	x=5				NoWait
+	勇者A							ぐ、ぅ……
+Tween	勇者B	ShakePosition	x=5				NoWait
+	勇者B							ちくしょう、仲間の、仇……
+CharacterOff
+	ディーア	驚き2	2_2
+	エクス=レプリカ	ニヤリ2	1_2
+	ディーア	驚き2						おい待て、落ち着けって！\n何か……勘違いしてないか？
+	ディーア	本気2						オレはこれ以上戦いたくない！\nあんたらの思ってる敵は……\nオレたちじゃないはずだ！
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							なら、なぜその魔剣をかばう！\n我々の仇は、その金髪の魔剣だ！
+CharacterOff
+	ディーア	本気2	2_2
+	エクス=レプリカ	ニヤリ2	1_2
+	ディーア	本気2						だから、それが勘違いなんだよ！
+StopBgm
+	エクス=レプリカ	ニヤリ2						ねえ、勇者さんたち？
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							……な、なんだ
+CharacterOff
+	ディーア	驚き2	2_2
+	エクス=レプリカ	泣き2	1_2
+Bgm	絶望
+	エクス=レプリカ	通常2						どうして勇者さんは、私のこと\n「エクスカリバー狩り」だと思うの？
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							……その髪飾りだよ
+CharacterOff
+	ディーア	驚き2	2_2
+	エクス=レプリカ	通常2	1_2
+	ディーア	驚き2						髪飾り？
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+Bgm	絶望
+	勇者A							……今、宗教国家E.D.E.N.では、\n国の威信をかけて、\n「エクスカリバー狩り」を捜索してる
+	勇者A							「勇者襲撃事件」の現場周辺から\n目撃者の証言を集めた結果……
+	勇者A							現場周辺で同じ特徴を持つ魔剣が\n何度も目撃されていることが分かった
+	勇者A							その特徴が……\n金髪に十字の髪飾りだったんだ
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	ニヤリ2	1_2
+	ディーア	怒り2						……他には？
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							……何？
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	ニヤリ2	1_2
+	ディーア							他に、何か目立った特徴はないのか？
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							他には、たしか……
+	勇者B							右腕だ
+CharacterOff
+	ディーア	驚き2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア							右腕？
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者B							大きな黒い右腕、それに、赤い眼\n俺たちが聞いた特徴は、これで全部だ
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	泣き2	1_2
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	泣き2						ちょっとそれ、\n全然私と違うじゃない！
+	エクス=レプリカ	通常2						私の腕はこんなにスマートだし、\n目だって綺麗な青色よ？
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							それは……
+	勇者B							お前が暴走でもさせたんだろ！
+	勇者B							お前らは兵器なんだ！\n一度暴走すれば、\n目の色だって何だって変わるはずだ！
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア	怒り2						兵器に、暴走……
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	泣き2						何よこの人、失礼ね！\n私は戦ってるときだって\nちゃーんとスマートなんだから！
+	ディーア	本気2						おい、みんな落ち着け！
+	ディーア	怒り2						レプリカの言う通り、魔剣少女は\n簡単に変形なんかできない
+	ディーア	悔しい2						だから、「エクスカリバー狩り」の\n正体はこの子じゃない
+	ディーア	怒り2						ただ……
+StopBgm
+	エクス=レプリカ	泣き2						ただ？
+	ディーア	怒り2						オレは、「エクスカリバー狩り」の\n正体に心当たりがある
+Bgm	緊迫
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							なんだと？
+	勇者B							心当たりとは何だ！\n今すぐ教えろ！
+CharacterOff
+	ディーア	怒り	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア	怒り2						それは……できない
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者B							なぜだ！
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア	怒り2						まだ、確信を\n持ってるわけじゃないんだ
+	ディーア	怒り2						ただ、もし何かわかったら、\nすぐにE.D.E.N.にも伝える\nここはいったん、オレを信じてくれ
+	ディーア	悔しい2						……オレはこれ以上\nあんたらと戦いたくはない
+CharacterOff
+	勇者A		1_2
+	勇者B		2_2
+	勇者A							ぐ……仕方ない\nここはいったん引いてやろう
+	勇者B							……魔剣使い、\n何か分かったらすぐ\nE.D.E.N.に伝えろ、いいな！
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア	怒り2						ああ、約束する
+FadeOut	black					1
+StopBgm
+CharacterOff
+Bg	草原A
+Bgm	平和
+	ディーア	通常2	2_2
+	エクス=レプリカ	泣き2	1_2
+FadeIn	black					1
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	泣き2						何よあの人たち、\nご主人様の方がずっと強いのに、\nあんなに偉そうに指図して！
+	ディーア	笑い2						いいんだレプリカ、\nお前が無事だったからな
+	エクス=レプリカ	泣き2						もう……ご主人様は\nほんとに優しいんだから
+	エクス=レプリカ	ニヤリ2						……ねえ、ご主人様？
+	ディーア	驚き2						ん？ どうした
+	エクス=レプリカ	通常2						ご主人様は「エクスカリバー狩り」の\n正体に、心当たりがあるって\n言ってたじゃない？　
+	ディーア	怒り2						……ああ、そうだな
+	エクス=レプリカ	通常2						その心当たりって……
+StopBgm
+CharacterOff
+	？？？？	<Off>						うわああああああああ!!!!
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	泣き2	1_2
+	エクス=レプリカ	泣き2						……悲鳴だわ
+	ディーア	怒り2						まさか……「エクスカリバー狩り」？
+	エクス=レプリカ	通常2						向こうの洞窟から聞こえたわ！\nご主人様、行ってみましょ！
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1030_03
+EndIf
+EndScenario
+
+# E_1030_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	遺跡B
+	エクス=レプリカ	通常2	1_2
+	ディーア	本気2	2_2
+FadeIn	white					.5
+	ディーア	本気2						おーい、誰かいるか！\nいたら返事してくれ！
+	エクス=レプリカ	通常2						ご主人様見て！\nあそこにいるの、勇者さんじゃない？
+	ディーア	悔しい2						あのマント……\nきっとそうだ、行ってみよう！
+Se	走る
+FadeOut	black					1
+CharacterOff
+	エクス=レプリカ	通常2	1_2
+	ディーア	本気2	2_2
+FadeIn	black					1
+	ディーア	本気2						おい、大丈夫か！
+CharacterOff
+	勇者C	黒2
+	勇者C	黒2						………ぁ………あぁ……
+CharacterOff
+	ディーア	本気2	2_2
+	エクス=レプリカ	泣き2	1_2
+	エクス=レプリカ	泣き2						ひどい傷……
+	ディーア	本気2						聞こえるか、誰にやられたんだ？
+CharacterOff
+	勇者C	黒2
+	勇者C	黒2						あ……
+	勇者C	黒2						あかい、めの……
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	泣き2	1_2
+	エクス=レプリカ	泣き2						赤い眼……？
+	ディーア	本気2						汎用エクスカリバーも\nそいつに持っていかれたのか？
+CharacterOff
+	勇者C	黒2
+	勇者C	黒2						……ぁ、あぁ……
+	勇者C	黒2						……きを、つけろ……\nきっと……まだ、ちかくに……
+Se	倒れる
+Tween	勇者C	MoveBy	y=-300 time=2				NoWait
+Wait						.5
+CharacterOff						1
+Wait						2
+CharacterOff
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア	悔しい2						間に合わなかったか……
+	エクス=レプリカ	泣き2						これもきっと、\n「エクスカリバー狩り」の仕業ね！
+	ディーア	怒り2						……まだ「エクスカリバー狩り」が\n近くにいるかもしれない\n気を付けて奥に進もう
+FadeOut	black					1
+StopBgm
+Wait						2
+CharacterOff
+	エクスカリバー=ロスト	逆光				0
+FadeIn	black					1
+	エクスカリバー=ロスト	逆光						…………
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+	　　　　　　　　　　
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A_過去					0
+FadeIn	white					.3
+	※※※※	<Off>						いくらエクスカリバーを壊そうが……\nお前は"本物"にはなれない
+	※※※※	<Off>						お前は「聖剣」なんかじゃない！\n聖剣のまがい物……「偽聖剣」だ！
+FadeOut	white					.5
+Bg	遺跡B					0
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	エクスカリバー=ロスト	通常				0
+FadeIn	white					.3
+	エクスカリバー=ロスト	通常						………………
+	エクスカリバー=ロスト	通常						……ここにはもう、誰もいない
+	？？？？	<Off>						待ちなさいっ！
+	エクスカリバー=ロスト	悲しい						…………？
+CharacterOff
+	エクス=レプリカ	通常2
+Bgm	緊迫
+	エクス=レプリカ	通常2						やっと見つけたわ！\nもう逃がさないわよ？
+CharacterOff
+	エクスカリバー=ロスト	驚き
+	エクスカリバー=ロスト	驚き						……あなたは
+CharacterOff
+	エクス=レプリカ	通常2
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	ニヤリ2						よくぞ聞いてくれたわね!!
+	エクス=レプリカ	通常2						私は原初六魔剣が一振り、\nエクスカリバーが贋作！
+	エクス=レプリカ	ニヤリ2						エクスカリバー･\nファルシュ･ファクティス･\nアマンテレプリカント！
+	エクス=レプリカ	通常2						通称、エクス=レプリカよ！
+CharacterOff
+	エクスカリバー=ロスト	悲しい
+	エクスカリバー=ロスト	悲しい						贋作……
+CharacterOff
+	エクス=レプリカ	泣き2
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	泣き2						あーっ！\nいまニセモノって\nバカにしたわね？
+	エクス=レプリカ	通常2						ご主人様と私なら、\n本物にだって負けないんだから！
+CharacterOff
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト	怒り						……なにを、子どもじみたことを
+Se	走る
+CharacterOff
+	ディーア	怒り2	画面外_右
+Tween	ディーア	MoveTo	x=90				Add
+	ディーア	本気2						レプリカ！\n気を付けて進めってあれほど……
+	ディーア	怒り2						……！
+CharacterOff
+	エクスカリバー=ロスト	驚き
+	エクスカリバー=ロスト	驚き						…………あなた
+CharacterOff
+	ディーア	怒り2	2_2
+	ディーア	怒り2						お前が、\n「エクスカリバー狩り」だな？
+CharacterOff
+	エクスカリバー=ロスト	通常
+	エクスカリバー=ロスト	通常						………………
+	エクスカリバー=ロスト	悲しい						……だったら、何なの？
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	ニヤリ2	画面外_左
+Se	走る
+Tween	エクス=レプリカ	MoveTo	x=-90
+	エクス=レプリカ	通常2						私とご主人様が、\nあなたをやっつけてあげるわ！
+Tween	エクス=レプリカ	MoveBy	x=10				NoWait
+	エクス=レプリカ	通常2						ね、ご主人様？\n「エクスカリバー狩り」を倒せば、\n本家越えも間違いなしよね？
+CharacterOff
+	エクスカリバー=ロスト	通常
+	エクスカリバー=ロスト	通常						……くだらない
+	エクスカリバー=ロスト	悲しい						子どもね……\nあなたは、何も知らない子ども
+CharacterOff
+	エクス=レプリカ	泣き2	1_2
+	ディーア	怒り2	2_2
+	エクス=レプリカ	泣き2						あ～っ！ あなたっ！\nまたバカにしたわね！
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	通常2						いきましょう、ご主人様！\n私がちゃーんとオトナだってところ、\n見せてあげるんだから！
+	ディーア	怒り2						…………
+StopBgm
+	エクス=レプリカ	嬉しい2						……ご主人様、どうかした？
+	ディーア	通常2						いや、なんでもない
+Bgm	勇者バトル
+	ディーア	怒り2						……オレたちで、\n「エクスカリバー狩り」を倒そう
+	エクス=レプリカ	嬉しい2						さっさとやっつけちゃいましょう！\nこれで本物越え間違いなしね！
+CharacterOff
+	エクスカリバー=ロスト	逆光
+	エクスカリバー=ロスト	逆光						……木っ端微塵にしてやるわ
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1030_04
+EndIf
+EndScenario
+
+# E_1030_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+ImageEffect	SpriteCamera	Sepia
+Bg	研究所A_過去					0
+Se	大雨
+	エクス=レプリカ	通常2？
+FadeIn	white					.5
+	エクス=レプリカ	通常2？						ねえご主人様、今日は私と……
+	エクス=レプリカ	通常2？						……ご主人様？
+Se	ドア閉まる
+FadeOut	black					2
+Wait						1
+CharacterOff
+	エクス=レプリカ	泣き2？
+Bg	研究所B_過去
+FadeIn	black					.5
+	エクス=レプリカ	泣き2？						また……どこか行くの？\nねえ、私のこと……
+Se	ドア閉まる
+FadeOut	black					2
+Wait						1
+	エクス=レプリカ	黒2？				0
+Bg	研究所C_過去					0
+FadeIn	black					.5
+	エクス=レプリカ	黒2？						ご主人様……\nねえ、ご主人、さま……
+FadeOut	black					.5
+	　　　　　　　　　　					0
+StopSe
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+	エクスカリバー=ロスト
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	遺跡B					0
+Tween	エクスカリバー=ロスト	MoveBy	x=-20				NoWait
+StopBgm
+	エクスカリバー=ロスト							<dash=6>ッ
+Bgm	バトル
+CharacterOff						0
+	ディーア	本気2	2_2
+	エクス=レプリカ	通常2	1_2
+	ディーア							いいぞレプリカ、もう一押しだ！\nこのまま一気に踏み込め！
+	エクス=レプリカ							わかったわ、ご主人様！
+CharacterOff						0
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト	怒り						…………
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	遺跡B					0
+	エクス=レプリカ	泣き2	1_2
+	ディーア	悔しい2	2_2
+Tween	エクス=レプリカ	MoveBy	x=50				NoWait
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ							きゃあっ!!
+Tween	ディーア	MoveBy	x=10				NoWait
+	ディーア							うぉっ！
+CharacterOff
+	エクスカリバー=ロスト	逆光
+Bgm	緊迫
+	エクスカリバー=ロスト	逆光						この程度の強さで……\n本物を超えるなんて言わないことね
+CharacterOff
+	エクス=レプリカ	泣き2	1_2
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2						うぅ……
+Tween	ディーア	MoveBy	x=-20				NoWait
+	ディーア	本気2						レプリカッ！\n大丈夫か!?
+CharacterOff
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト	怒り						…………
+	エクスカリバー=ロスト	通常						私には目的があるの\n……余計な邪魔をしないで
+Tween	エクスカリバー=ロスト	MoveBy	x=-90 time=0.8				NoWait
+Wait						.5
+CharacterOff
+	エクス=レプリカ	泣き2	1_2
+	ディーア	悔しい2	2_2
+	ディーア	本気2						おい待て！
+CharacterOff
+	エクスカリバー=ロスト	悲しい	1_2
+Tween	エクスカリバー=ロスト	MoveBy	x=-10				NoWait
+	エクスカリバー=ロスト	悲しい						…………
+CharacterOff
+	エクス=レプリカ	泣き2	1_2
+	ディーア	悔しい2	2_2
+	ディーア	悔しい2						お前は一体、何者なんだ\n何の目的で勇者を……
+CharacterOff
+	エクスカリバー=ロスト	通常	1_2
+	エクスカリバー=ロスト	通常						……私は、エクスカリバー=ロスト\nエクスカリバーを破壊する者
+	エクスカリバー=ロスト	悲しい						あなたは……
+StopBgm
+	エクスカリバー=ロスト	怒り						二度と私に、関わらないで
+Se	風1
+Tween	エクスカリバー=ロスト	MoveBy	x=-600
+CharacterOff
+	エクス=レプリカ	泣き2	1_2
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2						ちょっと、待ちなさいっ！
+StopBgm
+	ディーア	悔しい2						エクスカリバー、ロスト……
+FadeOut	black					1
+CharacterOff
+Bg	森林A
+Bgm	平和
+	ディーア	怒り2	2_2
+	エクス=レプリカ	ニヤリ2	1_2
+FadeIn	black					1
+	エクス=レプリカ	ニヤリ2						あの子、すごい速さで逃げてったわ
+	ディーア	怒り2						ああ……
+	エクス=レプリカ	通常2						「エクスカリバー狩り」を\nやっつければ、本家越え\nできたかもしれないのにね！
+	ディーア	怒り2						ああ……
+	エクス=レプリカ	泣き2						ご主人様、ちゃんと聞いてる？
+StopBgm
+	ディーア	怒り2						ああ……
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+Bgm	コメディ
+	エクス=レプリカ	泣き2						もう！ ご主人様！\nちゃんと私の話を聞きなさいっ！
+	ディーア	驚き2						……え？
+	エクス=レプリカ	泣き2						洞窟から出てきてから、\nずっとそんな感じじゃない！
+	ディーア	汗2						……ああ、悪い\n少し、考え事をしてたんだ
+StopBgm
+	エクス=レプリカ	ニヤリ2						考えごと？
+FadeOut	black					.3
+Bgm	絶望
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	遺跡B					0
+	イベントスチル103007		エフェクト表			0
+FadeIn	black					.3
+	ディーア	<Off>						……あの「エクスカリバー狩り」は、\n自分のことを「ロスト」と呼んでいた
+	ディーア	<Off>						足には<ruby=アネセサリ>魔人機関</ruby>の紋章があった
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Param	character_grayout=true
+	エクス=レプリカ	ニヤリ2	1_2			0
+	ディーア	怒り2	2_2			0
+Bg	森林A					0
+FadeIn	black					.3
+	ディーア	怒り2						だとすると、やっぱり\n「エクスカリバー狩り」の正体は\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>って事になる
+	エクス=レプリカ	嬉しい2						ロストって？
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル392D	D3	エフェクト表			0
+ImageEffect	SpriteCamera	Sepia
+FadeIn	black					.3
+	ディーア	<Off>						魔剣使いの命令無しに自律して動く、\n魔剣を破壊するための兵器だよ
+	ディーア	<Off>						なんでこんな兵器があるのか、\nオレも詳しくは分からないけど……
+	イベントスチル393BG		エフェクト表
+	ディーア	<Off>						これまでの経験で分かったことは、\nこの<ruby=ロスト>対魔剣殲滅魔導兵器</ruby><dash=2>
+	イベントスチル459BG		エフェクト表
+	ディーア	<Off>						別の世界、あるいは未来<dash=2>\nとにかく、ここではないどこかで\n改造された<dash=2>魔剣なんだ
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	嬉しい2	1_2
+FadeIn	black					.3
+	エクス=レプリカ	嬉しい2						……それじゃあ、\nあの「エクスカリバー狩り」も、\n別の世界で改造された魔剣ってこと？
+	ディーア	悔しい2						ああ、おそらくな……
+	ディーア	怒り2						ただ、あの<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>が\n「エクスカリバー狩り」だとすると\nどうも納得いかないことがある
+	エクス=レプリカ	嬉しい2						何が納得いかないの？
+	ディーア	悔しい2						今までの<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>の\n目的は、魔剣の破壊だったんだ
+StopBgm
+	ディーア	怒り2						でも、あいつは……
+CharacterOff
+	勇者B	通常	画面外_左
+Se	走る
+Tween	勇者B	MoveTo	x=0				NoWait
+	勇者B							た、助けてくれえええ！
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	通常2	1_2
+	エクス=レプリカ	通常2						あれは……勇者さんだわ！
+	ディーア	本気2						どうした、何があったんだ！
+CharacterOff
+	勇者B	通常
+Tween	勇者B	PunchPosition	y=50				NoWait
+Bgm	緊迫
+	勇者B							ひっ、ひいいいい！\nかかか、かこまれてる！！
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	通常2	1_2
+	エクス=レプリカ	通常2						安心して！\n私たちは敵じゃないわ！
+	エクス=レプリカ	ニヤリ2						ねえ勇者さん、\nいったい、何があったの？
+CharacterOff
+	勇者B
+Shake	勇者B	MoveBy	x=5				NoWait
+	勇者B							みみ、みんな、みんなやられた……
+	勇者B							あ、あかいめの、あくまに……
+	勇者B							に、にげるが、かちいいい！
+Se	走る
+Tween	勇者B	MoveBy	x=-700
+CharacterOff
+	ディーア	驚き2	2_2
+	エクス=レプリカ	通常2	1_2
+	ディーア	驚き2						あ、おい待て！！\nそっちはお前が\n逃げてきた方向じゃ……
+	エクス=レプリカ	通常2						行きましょうご主人様！\nきっと「エクスカリバー狩り」が\n向こうにいるはずよ！
+	ディーア	悔しい2						……ああ、急ごう！
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1030_05
+EndIf
+EndScenario
+
+# E_1030_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	遺跡B
+	勇者B	黒2	2_2
+	勇者A	黒2	1_3
+FadeIn	white					.5
+Shake	勇者A		x=5				NoWait
+	勇者A	黒2						……ぐ、うう……
+	勇者B	黒2						……ぁ……あぁ……
+FadeOut	black					.5
+CharacterOff
+	勇者A	黒2	3_3
+	勇者C	黒2	1_2
+FadeIn	black					.5
+Shake	勇者C	MoveBy	x=5				NoWait
+	勇者C	黒2						……ぃ、いのち……だけは……
+	勇者A	黒2						……………………
+FadeOut	black					.5
+CharacterOff
+	エクス=レプリカ	泣き2	2_2
+	ディーア	悔しい2	1_2
+FadeIn	black					.5
+	ディーア	悔しい2						……なんだよ、これ……
+	エクス=レプリカ	泣き2						勇者さんが、こんなに、たくさん……\nうっ……ひどすぎるわ……
+	ディーア	悔しい2						血の跡は、向こうに続いてる……\nたぶん、あの奥が敵のアジトだ
+Tween	エクス=レプリカ	MoveBy	x=-10			NoWait
+	エクス=レプリカ	泣き2						……い、行きましょう、ご主人様
+	ディーア	怒り2						レプリカ……\nここで待っていてもいいんだぞ
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	泣き2						こ、子ども扱いしないで！\n私だって、ご主人様の力になれるわ！
+	ディーア	通常2						……そうだな、悪かった
+	ディーア	怒り2						それじゃあ……行こう
+FadeOut	black					.5
+CharacterOff
+Bg	洞窟B
+StopBgm
+	エクス=レプリカ	泣き2	2_2
+	ディーア	悔しい2	1_2
+FadeIn	black					.5
+	ディーア	悔しい2						すごい熱気だ\nこの先に……
+Shake	Graphics		x=5 y=5				Add
+	勇者B	<Off>						ぎゃああああああああああ！
+	エクス=レプリカ	泣き2						さっきの、勇者さんの声だわ……
+	ディーア	悔しい2						くっ……
+Se	走る
+Tween	ディーア	MoveBy	x=-600				NoWait
+FadeOut	black					.5
+CharacterOff
+	ディーア	悔しい2	画面外_右
+FadeIn	black					.5
+Tween	ディーア	MoveTo	x=90				NoWait
+	ディーア	本気2						そこまでだ！\n「エクスカリバー狩り」！\n今すぐ武器を捨てろ!!
+CharacterOff
+	黒グラデーション		エフェクト表
+	ドロシー	ニヤリ/フード/武器？
+	ドロシー	ニヤリ/フード/武器？						おや？\n意外な客人だな
+CharacterOff
+	ディーア	悔しい2	2_2
+	ディーア							その声は……
+FadeOut	black					.5
+CharacterOff
+	ドロシー	ニヤリ
+FadeIn	black					.5
+Bgm	緊迫
+	ドロシー	ニヤリ						また会ったな、少年
+CharacterOff
+	ディーア	悔しい2	2_2
+	ディーア	悔しい2						ドロシー……!!
+	ディーア	悔しい2						どうして、お前が……
+CharacterOff
+	ドロシー
+	ドロシー	ニヤリ						ハッ！\nお前に説明する筋合いはないだろう
+	ドロシー	怒り						ただまあ、\n厄介な裏切りがあってねえ\n私も苦労してるんだよ
+CharacterOff
+	ディーア	悔しい2	2_2
+	ディーア	本気2						裏切り…？\nあの勇者たちも、お前がやったのか！
+CharacterOff
+	ドロシー	ニヤリ
+	ドロシー	ニヤリ						わざわざ気に留めるようなことか？\n勇者の命ほど軽いものもないだろうに
+CharacterOff
+	ディーア	怒り2	2_2
+	ディーア	怒り2						……相変わらずの、外道だな
+CharacterOff
+	ドロシー	ニヤリ
+	ドロシー	ニヤリ						フン\n褒め言葉として受け取っておこう
+	ドロシー	通常						やつらはただの付属品にすぎない\n気に留めるだけ無駄というものだ
+CharacterOff
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2	1_2
+	エクス=レプリカ	泣き2						ご、ご主人様、どういうこと？\nそれじゃあ、この人が……
+	ディーア	悔しい2						ああ、こいつが……\n「エクスカリバー狩り」の、正体だ
+CharacterOff
+	ドロシー	通常
+	ドロシー	ニヤリ						私は魔剣と子守が大嫌いでね
+	ドロシー	通常						本当なら、魔剣を集めるなんて\n下品な真似はしたくなかったんだ
+	ドロシー	怒り						だが、裏切ったガキの穴埋めで\nこんな真似をせざるをえなくなった
+	ドロシー	怒り						今の私は、すこぶる機嫌が悪い
+	ドロシー	ニヤリ						国一つ、潰してやりたいくらいにはね
+	ドロシー	通常						……おい\n起きろ、兵隊
+StopBgm
+FadeOut	black					.5
+Param	character_grayout=false
+CharacterOff
+Se	心拍	TRUE
+	イベントスチル103003		エフェクト表
+Shake	イベントスチル103003		x=1 y=1 time=40				NoWait
+FadeIn	black					.5
+	イベントスチル103003		エフェクト表
+	？？？？	<Off>						ハイ……\nゴ主人、サマ……
+	エクス=レプリカ	<Off>						あれは……エクスカリバー=ロスト？
+StopSe
+	ディーア	<Off>						いや……あの魔剣とは、色が違う
+CharacterOff
+	ドロシー	通常
+Bgm	魔王バトル
+	ドロシー	通常						汎用型エクスカリバーを\nロスト技術で無理やり改造した\n闇の兵隊だ
+	ドロシー	ニヤリ						量産型エクスカリバー=ロスト、\nとでも名づけようか
+	ドロシー	通常						さあ、\n『エクスカリバー掃討作戦』の再開だ
+	ドロシー	ニヤリ						手始めに……\nそこの出来損ないのエクスカリバーを\n壊すとしようか
+CharacterOff
+	量産型エクス=ロスト	通常
+	量産型エクス=ロスト							……エクスカリバー、破壊
+CharacterOff
+	エクス=レプリカ	泣き2	1_2
+	ディーア	悔しい2	2_2
+Tween	エクス=レプリカ	MoveBy	x=20				NoWait
+	エクス=レプリカ	泣き2						ご主人様……
+	ディーア	怒り2						……大丈夫だ、レプリカ
+	ディーア	本気2						ドロシー！\nお前の好きにはさせない!!
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1030_06
+EndIf
+EndScenario
+
+# E_1030_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	洞窟B
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	通常2	1_2
+FadeIn	white					.5
+	ディーア	本気2						レプリカ、今だっ！
+	エクス=レプリカ	通常2						まかせてっ！
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+	量産型エクス=ロスト
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	洞窟B					0
+Shake	量産型エクス=ロスト		x=5				Add
+StopBgm
+	量産型エクス=ロスト							…………
+Tween	量産型エクス=ロスト	MoveBy	y=-300 time=2				NoWait
+Wait						.5
+Se	倒れる
+CharacterOff						1
+Wait						1
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	通常2	1_2
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	通常2						やったわ！\nさっすが私とご主人様!!
+CharacterOff
+Se	闇1
+	量産型エクス=ロストA	通常	2_2			.7
+Wait						.5
+Se	闇1
+Param	character_grayout=false
+	量産型エクス=ロストB	通常	1_2			.5
+	量産型エクス=ロストB							………………
+CharacterOff
+Param	character_grayout=true
+Bgm	絶望
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	通常2	1_2
+	エクス=レプリカ	通常2						って、あれぇ！
+	ディーア	悔しい2						勝てない相手じゃないが……\nこいつら、数が、多すぎる……
+CharacterOff
+	量産型エクス=ロストA		画面外_左
+	量産型エクス=ロストB		画面外_左_b
+Tween	量産型エクス=ロストA	MoveTo	x=-90				Add
+Tween	量産型エクス=ロストB	MoveTo	x=90				Add
+	量産型エクス=ロストA							抹消……
+	量産型エクス=ロストB							エクスカリバー、抹消……
+CharacterOff
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2	1_2
+	エクス=レプリカ	泣き2						後ろにも、回りこまれたわ……
+CharacterOff
+	量産型エクス=ロストA		1_2
+	量産型エクス=ロストB		2_2
+	量産型エクス=ロストB							破壊……
+	量産型エクス=ロストA							エクスカリバー、全テ破壊……
+CharacterOff
+	ドロシー
+	ドロシー	ニヤリ						フン\nちっぽけな正義感で\n私の邪魔をしたことを悔やむんだな
+	ドロシー	通常						やれ、兵器ども
+CharacterOff
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア							くっ……
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	洞窟B					0
+CharacterOff						0
+	量産型エクス=ロスト
+Shake	量産型エクス=ロスト	MoveBy	x=5				Add
+	量産型エクス=ロスト							…………
+Tween	量産型エクス=ロスト	MoveBy	y=-300 time=2				NoWait
+Wait						.5
+Se	倒れる
+CharacterOff						1
+Wait						1
+CharacterOff
+	ディーア	驚き2	2_2
+	エクス=レプリカ	通常2	1_2
+	ディーア							なっ……一瞬で!?
+CharacterOff
+	ドロシー	怒り
+	ドロシー	怒り						チッ……\nまた邪魔しに来やがったか
+	ドロシー	ニヤリ						エクスカリバー=ロスト……
+CharacterOff
+Bgm	緊迫
+	エクスカリバー=ロスト	逆光
+	エクスカリバー=ロスト	逆光						………………
+CharacterOff
+	ディーア	驚き2	2_2
+	エクス=レプリカ	通常2	1_2
+	エクス=レプリカ	通常2						えっ？\nどうして、あなたが!
+CharacterOff
+	ドロシー	怒り
+	ドロシー							この裏切り者は、\n我々の命令を放棄した上に……
+	ドロシー							私が急遽立てた第二の作戦も、\n何度も潰しにきやがったんだ
+	ドロシー							いったい、なんのつもりだ？\n裏切り者のニセモノさんよ
+CharacterOff
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト	怒り						…………
+CharacterOff
+	ドロシー	怒り
+	ドロシー	怒り						おい、何とか言えよクソガキ
+CharacterOff
+	エクスカリバー=ロスト	逆光
+	エクスカリバー=ロスト	逆光						……減らず口は、\n私に勝ってから叩くことね
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	洞窟B					0
+	ドロシー	怒り	2_2
+Tween	ドロシー	MoveBy	x=-50				NoWait
+Param	character_grayout=true
+	ドロシー							……ちっ
+	ドロシー							だからガキの子守は嫌いなんだ……
+	ドロシー							カルバノグ!!
+	カルバノグ	オーラ青	エフェクト表					……あれえ？\nずいぶんピンチみたいですねえ♪
+	ドロシー							やかましい\n多少のイレギュラーはあったが……\n目的は必ず完遂する
+	カルバノグ	オーラ青	エフェクト表					エクス=ロストちゃんは、\n連れて行かないんですかあ？
+	ドロシー							計画が大幅に変わった\nやつは……裏切り者だ
+	カルバノグ	オーラ青	エフェクト表					……そうですかあ、ざあんねん♪
+	カルバノグ	オーラ青	エフェクト表					それじゃあ、運んじゃいますねえ♪
+CharacterOff
+	ディーア	本気2	2_2
+	エクス=レプリカ	通常2	1_2
+	ディーア	本気2						待てドロシー、逃げる気か!!
+CharacterOff
+	ドロシー	ニヤリ
+Se	光1
+Param	character_grayout=false
+	イベントスチル459H1		effect_c			1
+	イベントスチル459H2		effect_d			1
+Tween	イベントスチル459H1	RotateBy	z=5 time=100				NoWait
+Tween	イベントスチル459H2	RotateBy	z=-5 time=100				NoWait
+	ドロシー	ニヤリ						クソガキども、\n冥土の土産に教えてやろう
+	ドロシー	ニヤリ						最上の作戦とは、\n「戦わずして勝つ」ことだ
+	ドロシー	通常						我々は、必ず目的を成し遂げる……
+Se	光2
+	オーラ赤		エフェクト表			.5
+Wait						.5
+FadeOut	white					.3
+CharacterOff	ドロシー					0
+CharacterOff						1
+FadeIn	white					.3
+Wait						1
+CharacterOff
+	エクス=レプリカ	泣き2	1_2
+	ディーア	本気2	2_2					くっ……ドロシー……!!
+FadeOut	black					1
+CharacterOff						0
+	量産型エクス=ロストA		2_2
+	量産型エクス=ロストB		1_2
+StopSe						0
+Bg	洞窟B
+FadeIn	black					1
+	量産型エクス=ロストA							……行動、開始
+Se	風1
+Tween	量産型エクス=ロストA	MoveTo	x=900
+	量産型エクス=ロストB							……作戦行動、開始
+Se	風1
+Tween	量産型エクス=ロストB	MoveTo	x=800
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア							なんだ、あいつらの動き……
+CharacterOff
+	エクスカリバー=ロスト
+	エクスカリバー=ロスト	通常						……彼らはおそらく、\nE.D.E.Nの首都、\n天空都市エデンに向かってる
+CharacterOff
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2	1_2
+	エクス=レプリカ							どうして？
+CharacterOff
+	エクスカリバー=ロスト
+	エクスカリバー=ロスト	通常						それが、作戦に必要なことだから
+CharacterOff
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア							教えてくれ、エクス=ロスト、\nお前はいったい……
+CharacterOff
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト	怒り						…………あなたには、関係ない
+Se	風1
+Tween	エクスカリバー=ロスト	MoveTo	x=900
+CharacterOff
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2	1_2
+	エクス=レプリカ							あ、待って！\nエクス=ロストちゃん！
+	エクス=レプリカ	泣き2						……いっちゃった
+	ディーア	怒り2						……エクス=ロストも、\n量産型も、きっと行先は聖都だ
+	ディーア	本気2						何か起きる前に、急いで追いかけよう
+	エクス=レプリカ	通常2						ええ、そうしましょっ！
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1030_07
+EndIf
+EndScenario
+
+# E_1030_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	市街地A2
+	量産型エクス=ロストA		1_2
+	量産型エクス=ロストB		2_2
+FadeIn	white					.5
+	量産型エクス=ロストA							抹消……
+	量産型エクス=ロストB							抹消、破壊スル……
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	市街地A2					0
+CharacterOff						0
+	量産型エクス=ロスト
+Shake	量産型エクス=ロスト	MoveBy	x=5				Add
+	量産型エクス=ロスト							…………
+Tween	量産型エクス=ロスト	MoveBy	y=-300 time=2				NoWait
+Wait						.5
+Se	倒れる
+CharacterOff						1
+Wait						1
+	エクスカリバー=ロスト	逆光
+	エクスカリバー=ロスト	逆光						………………
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff
+	ドロシー	ニヤリ/フード
+Bg	廃墟A_過去					0
+FadeIn	white					.3
+	ドロシー	ニヤリ/フード						お前は兵器だ\n敵を破壊することだけ考えればいい
+	？？？？	<Off>						私は、兵器……
+	ドロシー	怒り/フード						余計な感情は持つな\n兵器に感情も信頼も必要ない
+	ドロシー	怒り/フード						必要なものがあるとすれば……
+	ドロシー	ニヤリ/フード						破壊への意思\nただそれだけだ
+FadeOut	white					.5
+Bg	市街地A2
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	量産型エクス=ロストA		1_2
+	量産型エクス=ロストB		2_2
+FadeIn	white					.3
+	量産型エクス=ロストA							破壊……
+	量産型エクス=ロストB							全テ、破壊……
+CharacterOff
+	エクスカリバー=ロスト
+	エクスカリバー=ロスト	通常						…………哀れね
+	エクスカリバー=ロスト	通常						ただの、使い捨ての兵器
+	エクスカリバー=ロスト	悲しい						貴女も……私も
+CharacterOff						0
+	黒グラデーション		エフェクト表
+	量産型エクス=ロストA		1_2			0
+	量産型エクス=ロストB		2_2			0
+	量産型エクス=ロストB							全テ……
+	量産型エクス=ロストA							……破壊!!
+FadeOut	Black					.5
+	　　　　　　　　　　
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur				.5
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	Black					.5
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+StopBgm
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+StopSe
+Bg	市街地A2					0
+CharacterOff						0
+	量産型エクス=ロスト
+Shake	量産型エクス=ロスト	MoveBy	x=5				Add
+	量産型エクス=ロスト							…………？
+Tween	量産型エクス=ロスト	MoveBy	y=-500 time=2				NoWait
+Wait						.5
+Se	倒れる
+Wait						.4
+CharacterOff
+	エクス=レプリカ	通常2	2_2
+	ディーア	悔しい2	1_2
+Bgm	勇者バトル
+	ディーア	本気2						大丈夫か、エクス=ロスト！
+	エクス=レプリカ	通常2						私とご主人様が\n来たからには、もう安心よ！
+CharacterOff
+	エクスカリバー=ロスト	驚き
+	エクスカリバー=ロスト	驚き						……貴方たち
+CharacterOff
+	量産型エクス=ロスト	通常	画面外_右2_b
+	ディーア	本気2	1_2
+	ディーア							オレたちはこっちを片付ける！\nエクス＝ロストは向こうを頼めるか？
+CharacterOff
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト							…………
+CharacterOff
+	量産型エクス=ロスト	通常	画面外_右2_b
+	ディーア	驚き2	1_2
+	ディーア	驚き2						どうした？\nどこか怪我でも……
+Tween	量産型エクス=ロスト	MoveTo	x=110
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210C)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	市街地A2					0
+	ディーア	驚き2	1_2
+	量産型エクス=ロスト		2_2
+Tween	量産型エクス=ロスト	MoveTo	x=110 time=0				NoWait
+Shake	量産型エクス=ロスト	MoveBy	x=5				Add
+	量産型エクス=ロスト							………………
+Tween	量産型エクス=ロスト	MoveBy	y=-500 time=2				NoWait
+Wait						.5
+Se	倒れる
+Wait						1
+CharacterOff
+	エクスカリバー=ロスト	逆光
+	エクスカリバー=ロスト	逆光						貴方こそ……油断しないことね
+CharacterOff
+	ディーア	驚き2
+	ディーア	驚き2						エクス=ロスト……ありがとう
+	ディーア	目閉じ2						それと、誤解していて悪かった
+	ディーア	怒り2						でもお前……\nどうして、量産型を壊すんだ
+	ディーア	悔しい2						あいつらには、\nお前と同じ技術が使われてる
+	ディーア	怒り2						お前は……ロストなんだろ？\nどうして、そのお前が……
+CharacterOff
+	エクスカリバー=ロスト	悲しい
+	エクスカリバー=ロスト	悲しい						<size=20>……でしか、救われないもの</size>
+CharacterOff
+	ディーア	驚き2						え……？
+CharacterOff
+	エクスカリバー=ロスト	通常
+	エクスカリバー=ロスト	通常						……減らず口は、\nこの大群を倒してから叩きなさい
+CharacterOff
+	量産型エクス=ロストA		1_2
+	量産型エクス=ロストB		2_2
+	量産型エクス=ロストA							エクスカリバー……
+	量産型エクス=ロストB							全テ、抹消……
+CharacterOff
+	ディーア	悔しい2	1_2
+	エクス=レプリカ	通常2	2_2
+	ディーア	悔しい2						くっ……\n今は、お前の言う通りだな
+	ディーア	本気2						いくぞ、レプリカ！\n街が荒らされる前に、\nここで食い止めるんだ！
+	エクス=レプリカ	通常2						任せて、ご主人様！
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1030_08
+EndIf
+EndScenario
+
+# E_1030_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	市街地C(曇り)
+	エクス=レプリカ	通常2	2_2
+	ディーア	悔しい2	1_2
+FadeIn	white					.5
+	ディーア	悔しい2						よし、向こうは片付いた！\nあとは広場のほうを……
+	エクス=レプリカ	泣き2						ご主人様見て、あそこ！
+FadeOut	black					.5
+Bg	市街地C(曇り)
+CharacterOff						0
+	勇者B
+FadeIn	black					.5
+Shake	勇者B		x=5				NoWait
+	勇者B							く、来るな、化け物……
+CharacterOff
+	量産型エクス=ロスト
+Tween	量産型エクス=ロスト	MoveBy	x=30				Add
+	量産型エクス=ロスト							…………
+Se	突1
+FadeOut	red					.2
+CharacterOff						0
+	量産型エクス=ロストA		画面外_左
+	量産型エクス=ロストB		画面外_右2_b
+	勇者B	黒	2_3
+Wait						.5
+FadeIn	red					.5
+Shake	勇者B		x=5				Add
+	勇者B	黒						ぐわぁああっ！
+Tween	勇者B	MoveBy	y=-700 time=2				NoWait
+Se	倒れる
+Wait						1.5
+Tween	量産型エクス=ロストA	MoveTo	x=-90				Add
+Tween	量産型エクス=ロストB	MoveTo	x=90				Add
+	量産型エクス=ロストA							…………
+Tween	量産型エクス=ロストA	MoveTo	x=-50 y=-500				Add
+	量産型エクス=ロストA							……エクスカリバー
+Tween	量産型エクス=ロストB	MoveTo	x=50 y=-500				Add
+	量産型エクス=ロストB							…………エクスカリバー
+Param	character_grayout=false
+Se	光1
+	オーラ赤		エフェクト表			1
+Wait						1
+FadeOut	white					1
+CharacterOff						0
+Param	character_grayout=false
+	オーラ赤		エフェクト表			0
+	量産型エクス=ロストA		1_2
+	量産型エクス=ロストB		2_2
+	量産型エクス=ロストC		画面外_下
+FadeIn	white					1
+CharacterOff	オーラ赤					1
+Tween	量産型エクス=ロストC	MoveTo	y=-350 time=2.5				NoWait
+Wait						2
+	量産型エクス=ロストC							……………………
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	エクス=レプリカ	泣き2	2_2
+	ディーア							あれは……
+CharacterOff
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト	怒り						量産型エクスカリバー=ロストには\n……汎用エクスカリバーを、\n新たに同族の兵器にする能力があるの
+	エクスカリバー=ロスト	通常						……汎用エクスカリバーか、\n量産型エクスカリバー=ロストか
+	エクスカリバー=ロスト	悲しい						どちらかを根絶やしにしないかぎり\n……この惨劇は永遠に続くのよ
+CharacterOff
+	ディーア	悔しい2	1_2
+	エクス=レプリカ	泣き2	2_2
+	エクス=レプリカ							そんな……
+CharacterOff
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト	怒り						(量産型エクスカリバー＝ロストは\n 汎用エクスカリバーより強力な上に\n この広場には勇者が大勢いる)
+	エクスカリバー=ロスト	通常						(このままの情勢なら、広場は<dash=2>)
+CharacterOff
+StopBgm
+Param	character_grayout=false
+	量産型エクス=ロストA		1_3_b
+	量産型エクス=ロストB		2_3
+	量産型エクス=ロストC		3_3_b
+	量産型エクス=ロストC							…………？
+CharacterOff
+Se	強風
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	エクス=レプリカ	泣き2	2_2
+	ディーア							なんだ、寒気が……
+	エクス=レプリカ							ご主人様、なに、この音……
+CharacterOff
+Param	character_grayout=false
+	エクスカリバー=ロスト	驚き
+	エクスカリバー=ロスト	驚き						この気配、まさか……
+	黒背景		エフェクト表2			0
+	イベントスチル103012		エフェクト表			0
+CharacterOff	黒背景					1
+	　　　　　　　　　　
+Tween	　　　　　　　　　　	MoveTo	x=5				Add
+Bgm	Xmasボス
+	　　　　　　　　　　							<color=mk2wisp>ォォォォォォ…………</color>
+	勇者王シドウ	<Off>						……征け
+CharacterOff						0
+FadeOut	black					.1
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+StopSe
+	市街地C(曇り)		エフェクト裏2
+	イベントスチル1030D		エフェクト裏
+Tween	イベントスチル1030D	ScaleBy	y=0.99 x=0.99				NoWait
+Tween	市街地C(曇り)	ScaleBy	y=0.55 x=0.55				NoWait
+	　　　　　　　　　　
+Wait						.1
+FadeIn	black					.1
+Wait						.5
+ChangeSoundVolume	Se	.2				.4
+Wait						.3
+	　　　　　　　　　　							<speed=0.1>　</speed>	BrPage
+	イベントスチル1030A	A	effect_c			0
+Wait						.1
+	イベントスチル1030A	B				0
+ImageEffect	SpriteCamera	NegaPosi
+CharacterOff	イベントスチル1030A
+Wait						.1
+ImageEffectOff	SpriteCamera	NegaPosi
+StopSe
+Wait						1.3
+Param	character_grayout=false
+	イベントスチル1030C		effect_d			.4
+	イベントスチル1030A	A	effect_c			0
+Tween	イベントスチル1030A	RotateBy	z=50 time=0.1				NoWait
+Wait						.1
+	イベントスチル1030A	B				0
+ChangeSoundVolume	Se	1				.2
+Se	火3
+Se	光3
+Se	火事
+Wait						.1
+	イベントスチル1030A	C	effect_c			0
+ImageEffect	SpriteCamera	Bloom
+Wait						.1
+Tween	イベントスチル1030A	RotateBy	z=2000 time=3				NoWait
+Tween	イベントスチル1030A	ScaleBy	x=10 y=10 time=3.5				NoWait
+	イベントスチル1030A	E				.1
+Wait						.1
+	イベントスチル1030B					0
+Tween	イベントスチル1030B	RotateBy	z=2000 time=2				NoWait
+Wait						.5
+FadeOut	red					1
+CharacterOff
+ImageEffectOff	SpriteCamera	MotionBlur
+ImageEffectOff	SpriteCamera	Bloom
+Wait						2.5
+	イベントスチル103011		エフェクト表			0
+Shake	イベントスチル103011		x=1 y=1 time=40				NoWait
+FadeIn	black					1
+	勇者王シドウ							E.D.E.N.も\nずいぶんコケにされたものだ……
+	勇者王シドウ							この程度の玩具で\n転覆できると思われるとは
+CharacterOff
+Param	character_grayout=false
+	　　　　　　　　　　		3_3
+	オーラ炎		エフェクト表			0
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー		1_2
+Se	火1
+CharacterOff	オーラ炎					1
+Tween	　　　　　　　　　　	MoveTo	x=5				Add
+	聖征剣エクスカリバー							……然り
+CharacterOff
+	エクスカリバー=ロスト	驚き
+	エクスカリバー=ロスト	驚き						聖征剣、エクスカリバー…………
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2	1_2
+	エクス=レプリカ	通常2	2_2
+	ディーア	悔しい2						まさか、勇者王と原初六魔剣が\n直々に出てくるなんて……
+	エクス=レプリカ	通常2						本物のエクスカリバーが、\n私たちのこと助けに来てくれたの!?
+CharacterOff
+	エクスカリバー=ロスト	通常
+	エクスカリバー=ロスト	通常						……それは、どうかしら
+CharacterOff
+	ディーア	悔しい2	1_2
+	エクス=レプリカ	泣き2	2_2
+	エクス=レプリカ	泣き2						……え？
+	ディーア							ああ……何かが、おかしい
+Se	強風
+CharacterOff
+	勇者A		1_2
+	勇者C		2_2
+	勇者A							よかった……\nシドウ様が助けに来てくださった！
+	勇者C							こ、これで俺たちも救われ……
+Tween	勇者C	MoveTo	y=-400				Add
+Se	倒れる
+	勇者A							お、おいどうした！\nシドウ様がいらっしゃったんだぞ！\n座ってる場合じゃ……
+Shake	勇者C		x=5				Add
+	勇者C							ち、違う……そんなつもりじゃ……\n……震えが、止まらないんだ……\nお前だって……そうだろ……？
+Shake	勇者A		x=2				Add
+	勇者A							……こ、これは……違う……\nオレは……うれしいはずなんだ……
+Shake	勇者A		x=5				Add
+	勇者A							でも、いまは……\n逃げ出したくて、たまらない……
+CharacterOff
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト							…………
+	エクスカリバー=ロスト							(鼓舞されるはずの勇者が\n エクスカリバーを見て\n 激しく震えている……）
+	エクスカリバー=ロスト	驚き						(まさか、人の勇気を、\n 吸っている……？)
+FadeOut	black					.5
+CharacterOff
+Param	character_grayout=false
+	イベントスチル103008		エフェクト表			0
+FadeIn	black					.5
+	イベントスチル103009		エフェクト表			.5
+	エクスカリバー=ロスト	<Off>						(「聖剣」を名乗るには、\n あまりに禍々しいオーラ……）
+	エクスカリバー=ロスト	<Off>						(これだけ離れていても\n 伝わってくる、絶対的な\n 「征伐」への意志…………）
+	エクスカリバー=ロスト	<Off>						(このエクスカリバー……)
+	イベントスチル103010		エフェクト表2			.5
+	エクスカリバー=ロスト	<Off>						(今まで倒したものと、\n 明らかに、違う…………)
+CharacterOff
+Param	character_grayout=true
+	勇者王シドウ
+	勇者王シドウ							宗教国家E.D.E.N.宗主、\n勇者王シドウが命ずる
+FadeOut	black					.5
+Param	character_grayout=false
+	イベントスチル103013		エフェクト表			0
+FadeIn	black					.5
+	勇者王シドウ	<Off>						<ruby=・・・・・・・・・・>不適格エクスカリバー</ruby>を掃討せよ
+	勇者王シドウ	<Off>						塵も残さず、な
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1030_09
+EndIf
+EndScenario
+
+# E_1030_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔王バトル
+Bg	市街地C(曇り)
+CharacterOff
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ		2_2
+FadeIn	white					.5
+	白グラデーション
+	勇者王シドウ							……薙ぎ払え
+	聖征剣エクスカリバー	通常						<dash=4>御意
+Se	光2
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	量産型エクス=ロスト		1_2
+	勇者A	黒	2_2
+FadeIn	white					.5
+Shake	量産型エクス=ロスト		x=2				Add
+Shake	勇者A		x=2				Add
+	勇者A	黒						ぐあああああああっ！
+Se	敵殺
+FadeOut	white					1.5
+CharacterOff						1.5
+Wait						1.5
+Se	倒れる
+CharacterOff
+Param	character_grayout=true
+	エクス=レプリカ	泣き2	2_2
+	ディーア	悔しい2	1_2
+FadeIn	white					.5
+	ディーア	悔しい2
+	ディーア							嘘だろ……今あいつ、\n勇者ごと、量産型を葬って……
+	エクス=レプリカ	泣き2						ねえ、ご主人様……\nあの子が、ほんとに本物なの……？\nあんなことする子が、聖剣なの……？
+CharacterOff
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト	怒り						…………エクス、カリバー
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ							弱き者が、囀る声が聞こえるな
+StopSe
+CharacterOff
+	ディーア	悔しい2	1_2
+	エクス=レプリカ	泣き2	2_2
+	ディーア	悔しい2						シドウ……
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ							大義、親を滅す
+	勇者王シドウ							貴様もいずれわかるときが来るだろう
+	勇者王シドウ							王の高みからでなくては\n見えぬ景色があるのだ
+CharacterOff
+	ディーア	悔しい2	1_2
+	エクス=レプリカ	泣き2	2_2
+	ディーア							……民を害虫みたいに扱う理由なんて\nオレには一生、分からなくていい
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ							ふん……青いな
+	勇者王シドウ							今は貴様に用はない
+	勇者王シドウ							おい、魔剣
+CharacterOff
+	エクスカリバー=ロスト	怒り
+	エクスカリバー=ロスト	怒り						…………
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー		1_2
+	勇者王シドウ							貴様が「エクスカリバー狩り」だな
+CharacterOff
+	エクスカリバー=ロスト	怒り	1_2_b
+	エクス=レプリカ	泣き2	画面外_右
+Tween	エクス=レプリカ	MoveTo	x=90				NoWait
+	エクス=レプリカ							違うわ！\nこの子は犯人じゃない！
+	エクス=レプリカ							王様なのに、\nそんなことも分からないの！
+CharacterOff
+	ディーア	悔しい2
+	ディーア	悔しい2						待てレプリカ、それ以上は……
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ							……エクスカリバーの、贋作か
+	勇者王シドウ							そして貴様も、やはり贋作だ
+CharacterOff
+	エクスカリバー=ロスト	怒り	1_2_b
+	エクス=レプリカ	泣き2	2_2
+	エクスカリバー=ロスト							…………だったら、何なの
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ							目障りだ\n今すぐ消えろ
+	聖征剣エクスカリバー							…………
+CharacterOff
+	エクスカリバー=ロスト	怒り	1_2_b
+	エクス=レプリカ	泣き2	2_2
+	エクス=レプリカ							ねえあなた、\nほんとに、本物なの……？\n本物なのに、あんなこと……
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ							やれ\nまずは、その赤眼からだ
+	聖征剣エクスカリバー							<dash=2>御意
+CharacterOff						0
+	　　　　　　　　　　
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	white
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+	エクスカリバー=ロスト	驚き	1_3_b
+	エクス=レプリカ	泣き2	2_3
+	ディーア	悔しい2	3_3
+	エクス=レプリカ
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	市街地C(曇り)					0
+Tween	エクス=レプリカ	MoveBy	x=-20				NoWait
+StopBgm
+	エクス=レプリカ							…………っ
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ							……なに？
+Bgm	勇者バトル
+CharacterOff
+	エクスカリバー=ロスト	驚き	1_3_b
+	エクス=レプリカ	泣き2	2_3
+	ディーア	悔しい2	3_3
+	エクス=レプリカ	泣き2						エクス=ロストちゃんは……\n私が、護るわ！
+	ディーア	本気2						こいつを壊したいなら……\nオレたちを倒してからだ！
+	エクスカリバー=ロスト	驚き						……あなたたち
+	ディーア	怒り2						昔のことは知らない……\nでもな、エクス=ロストは\nオレたちを助けてくれた
+	ディーア	悔しい2						人の命を救うために\nドロシーの兵隊と戦ってくれた
+	ディーア	悔しい2						こいつは……\n「エクスカリバー狩り」じゃない！
+	ディーア	本気2						オレたちが本当に\n戦うべき敵は別にいるんだ！
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ							……小僧の戯言に付き合う暇はない
+	勇者王シドウ							いいか\n善なる本物が悪辣な偽物を倒す\nそして、乱れた国家が統治を取り戻す
+	勇者王シドウ							その筋立てにこそ、意味があるのだ
+	勇者王シドウ							実際に魔剣が何をやったかなど\n取るに足らない些末なことだ
+CharacterOff
+	エクスカリバー=ロスト	驚き	1_3_b
+	エクス=レプリカ	泣き2	2_3
+	ディーア	悔しい2	3_3
+	ディーア	本気2						違う！\n何を成したかこそが、\nその魔剣の本質を決めるんだ！
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ							それが青いと言うのだ……
+	勇者王シドウ							まあ良い\nおかげで大義名分も立った
+StopBgm
+	勇者王シドウ							貴様らは全員、疑いの余地なく\n<ruby=・・・・・・・・・・>不適格エクスカリバー</ruby>だ
+FadeOut	black					.5
+CharacterOff
+	イベントスチル103009		エフェクト表
+Param	character_grayout=false
+FadeIn	black					.5
+	勇者王シドウ	<Off>						さあ征け、聖剣
+Bgm	Xmasボス
+	イベントスチル103010		エフェクト表2			1
+	勇者王シドウ	<Off>						本物の力を見せてやれ
+	聖征剣エクスカリバー	<Off>						<dash=4>御意
+FadeOut	black					.3
+CharacterOff						0
+	イベントスチル103013		エフェクト表			0
+FadeIn	black					.3
+	勇者王シドウ	<Off>						魔王候補十三王が一人\n宗教国家エデンの長にして\n勇者王アーサーの遺志を継ぎし者
+	勇者王シドウ	<Off>						……勇者王シドウ
+FadeOut	black					.3
+	イベントスチル103001		エフェクト表			0
+FadeIn	black					.3
+	勇者王シドウ	<Off>						<dash=2>原初六魔剣が一振り、\n聖征の魔剣エクスカリバー
+	勇者王シドウ	<Off>						国家に巣食いし姦悪\n騒擾の種となりし賊徒を\n自ら断獄へと導かん
+	イベントスチル103002		エフェクト表2			.3
+	※※※※	<Off>						<color=mk2wisp>魔核エーテライト認識\nコード：アンロック承認\nシステム：ブレイブソード展開</color>
+	※※※※	<Off>						<color=mk2wisp>ネフィリム機関をオーバーロードし\n環境変数をブレイズゼロに固定<dash=2></color>
+	聖征剣エクスカリバー	<Off>						<dash=4>推して参る
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1030_09
+EndIf
+
+# E_1030_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bg	黒背景
+FadeIn	white					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393D)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.3
+Wait						.2
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+ImageEffectOff	SpriteCamera	Bloom
+Param	character_grayout=true
+CharacterOff						0
+Bg	市街地C(曇り)					0
+	聖征剣エクスカリバー	通常2
+Tween	聖征剣エクスカリバー	MoveBy	x=-5			NoWait
+	聖征剣エクスカリバー	通常2						………………
+	聖征剣エクスカリバー	通常2						……笑止
+CharacterOff						0
+	ディーア	本気2	3_3
+	エクス=レプリカ	泣き2	2_3
+	エクスカリバー=ロスト	怒り	1_3
+	ディーア	悔しい2						これだけ攻撃しても、\n傷一つ、つかないなんて……
+Shake	エクス=レプリカ		x=3				Add
+	エクス=レプリカ	泣き2						ご主人様……\n私、まだ戦えるわ……
+	エクスカリバー=ロスト							(この子、震えてる……\n そこまでして、私を……)
+	ディーア	悔しい2						レプリカ、でも、お前……
+	エクス=レプリカ	通常2						大丈夫、こ、こんなの、武者震いよ！
+CharacterOff
+Bgm	Xmasボス
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ							児戯に付き合う趣味はない
+	勇者王シドウ							それが貴様の願いなら\n先に貴様らを逝かせてやろう
+CharacterOff						0
+	ディーア	本気2	3_3
+	エクス=レプリカ	泣き2	2_3
+	エクスカリバー=ロスト	怒り	1_3
+	エクス=レプリカ	泣き2						ご主人様……\nエクス=ロストちゃん……
+	ディーア	悔しい2						大丈夫だ\n……オレがそばにいる
+	エクスカリバー=ロスト	怒り						………………
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常	1_2
+	勇者王シドウ							聖剣よ、引導を渡してやれ
+	聖征剣エクスカリバー							……承知
+	勇者王シドウ							E.D.E.N.に歯向かったこと\nせいぜい地獄で悔いるがいい
+	聖征剣エクスカリバー							<dash=4><ruby=い>去</ruby>ね
+Se	光1
+	オーラ赤		エフェクト表			1
+Wait						1
+Param	character_grayout=false
+StopBgm
+Se	闇3
+FadeOut	white					3	NoWait
+CharacterOff
+	ディーア	本気2	3_3_b
+	エクス=レプリカ	泣き2	2_3_b
+	エクスカリバー=ロスト	驚き	1_3
+Tween	エクスカリバー=ロスト	MoveTo	x=0 time=2				Add
+	エクスカリバー=ロスト	驚き						<dash=6>っ!!<speed=3>　　</speed>	BrPage
+CharacterOff						0
+	　　　　　　　　　　
+Bg	黒背景					0
+Wait						1
+FadeIn	black					.5
+Se	大雨
+Wait						3
+	　　　　　　　　　　	<Off>						真っ暗な夜道を、\nずっと一人で歩いているようだった
+FadeOut	black					.5
+ImageEffect	SpriteCamera	Sepia
+Bg	遺跡B					0
+CharacterOff
+	エクスカリバー=ロスト	逆光
+FadeIn	black					.5
+	エクスカリバー=ロスト	逆光						この程度の強さで……\n本物を超えるなんて言わないことね
+FadeOut	black					.5
+CharacterOff						0
+	　　　　　　　　　　					0
+Bg	黒背景
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	black					.5
+	　　　　　　　　　　	<Off>						あんなことを言ってしまったのは……
+	　　　　　　　　　　	<Off>						きっと、うらやましかったから
+ImageEffect	SpriteCamera	Sepia
+	エクス=レプリカ	泣き2
+Bg	研究所A_過去
+	エクス=レプリカ	泣き2						ご主人様？\nねえ、今日は……
+Se	ドア閉まる
+FadeOut	black					2
+	　　　　　　　　　　
+ImageEffectOff	SpriteCamera	Sepia
+Wait						1
+Se	大雨
+Bg	黒背景
+FadeIn	black					.5
+	　　　　　　　　　　	<Off>						私のご主人様は、\nある日を境に変わってしまった
+	　　　　　　　　　　	<Off>						ご主人様は私を……
+	　　　　　　　　　　	<Off>						魔剣自体を、\n嫌いになってしまったようだった
+	　　　　　　　　　　
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	研究所A_過去
+	エクス=レプリカ	泣き2
+	エクス=レプリカ							……どうしてご主人様は、\n私を、使ってくれないの？
+FadeOut	black					.5
+	　　　　　　　　　　					0
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	黒背景					0
+FadeIn	black					.5
+	　　　　　　　　　　	<Off>						子どもだった私は、\nとても単純な理由にすがった
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	研究所A_過去
+	エクス=レプリカ	通常2
+	エクス=レプリカ							きっと、私が弱いからだわ！\nがんばって強くなれば……
+FadeOut	black					.8
+	　　　　　　　　　　					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	黒背景					0
+FadeIn	black					.5
+	　　　　　　　　　　	<Off>						ご主人様は、また私を使ってくれる
+		<Off>						そうすれば、いつか本物にもなれる
+	　　　　　　　　　　	<Off>						だから……
+FadeOut	black					0
+StopSe
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff
+Param	character_grayout=false
+	アネセサリロゴ	赤2	エフェクト表
+Wait						1
+FadeIn	black					.5
+	※※※※	<Off>						<ruby=ロスト>《対魔剣殲滅魔導兵器》</ruby>になれ
+	※※※※	<Off>						そして……
+	※※※※	<Off>						エクスカリバーを破壊しろ
+CharacterOff						1
+	　　　　　　　　　　
+FadeOut	black					.5
+Param	character_grayout=true
+Wait						.5
+CharacterOff
+ImageEffect	SpriteCamera	Bloom
+	エクス=レプリカ	泣き2				0
+	エクスロストロゴ	レプリカ	effect_c					　	BrPage
+FadeIn	black					.5
+	エクスロストロゴ	レプリカ						私…………
+CharacterOff	エクス=レプリカ					1
+Wait						1
+Bg	黒背景
+	エクスカリバー=ロスト	驚き				1
+	エクスロストロゴ	ロスト	effect_c			0		　	BrPage
+	エクスロストロゴ	ロスト				1		私は…………
+Tween	エクスロストロゴ	ScaleBy	x=2 y=2 time=3				NoWait
+Se	光2
+Wait						1.5
+FadeOut	black					1.5
+CharacterOff						0
+	　　　　　　　　　　
+ImageEffectOff	SpriteCamera	Bloom
+FadeIn	black					.5
+Bg	黒背景					0
+Se	大雨
+Wait						1
+	　　　　　　　　　　	<Off>						私は強くなった
+FadeOut	black					0
+Bg	神殿A
+ImageEffect	SpriteCamera	Sepia
+CharacterOff
+	聖征剣エクスカリバー	通常2
+Wait						1
+FadeIn	black					0
+Se	突1
+Shake	聖征剣エクスカリバー		x=5
+	聖征剣エクスカリバー							そん、な……
+Tween	聖征剣エクスカリバー	MoveTo	y=-1000 time=2			NoWait
+Se	倒れる
+Wait						.5
+CharacterOff						1
+Wait						1
+ImageEffectOff	SpriteCamera	Sepia
+Bg	黒背景					0
+Wait						.5
+	　　　　　　　　　　							とても強くなった
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+Bg	戦場跡					0
+	聖征剣エクスカリバー	黒2				0
+Tween	聖征剣エクスカリバー	ShakePosition	x=5				NoWait
+	聖征剣エクスカリバー	黒2						……ぁ…………
+	　　　　　　　　　　
+Se	突1
+FadeOut	red					.2
+CharacterOff						.5
+Wait						.5
+Se	倒れる
+Wait						.7
+Bg	黒背景					0
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	black					1
+Param	character_grayout=true
+	　　　　　　　　　　	<Off>						それでも……
+FadeOut	black					.5
+CharacterOff
+Bg	市街地A_過去
+ImageEffect	SpriteCamera	Sepia
+Se	ガヤB	TRUE
+FadeIn	black					.5
+	「善良な市民」	<Off>						エクスカリバー様になんてことを!!
+CharacterOff
+Bg	市街地B_過去
+FadeIn	black					.5
+	「善良な市民」							お前は聖剣なんかじゃない！\nお前は……「偽聖剣」だ!!
+FadeOut	black					.5
+StopSe	ガヤB
+	　　　　　　　　　　
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						1
+Bg	黒背景
+Se	大雨
+FadeIn	black					.5
+	　　　　　　　　　　	<Off>						誰も私を、\n「本物」とは認めてくれなかった
+Wait						1
+ImageEffect	SpriteCamera	GrayScale
+Bg	荒野(雨)					1
+	　　　　　　　　　　	<Off>						私は悟った
+		<Off>						偽物は、どこまでいっても偽物なのだ
+	　　　　　　　　　　	<Off>						私は、兵器としてのみ利用され……
+		<Off>						そして、いつかは使い捨てられるのだ
+	　　　　　　　　　　	<Off>						それが、私の運命なら……
+	　　　　　　　　　　	<Off>						同じ運命を辿る兵器を……
+Se	斬1
+Shake	Graphics		y=5 time=0.3				NoWait
+Bg	黒背景					0
+	　　　　　　　　　　	<Off>						壊して、
+Bg	戦場跡					0
+Se	突1
+Shake	Graphics		y=5 time=0.3				NoWait
+Wait						.8
+Se	斬1
+Shake	Graphics		y=5 time=0.3				NoWait
+Bg	黒背景					0
+	　　　　　　　　　　	<Off>						壊して、壊して、
+Bg	遺跡A					0
+Se	斬2
+Shake	Graphics		y=5 time=0.3				NoWait
+Wait						.6
+Se	突1
+Shake	Graphics		y=5 time=0.3				NoWait
+Wait						.8
+Se	斬1
+Shake	Graphics		y=5 time=0.3				NoWait
+Bg	黒背景					0
+	　　　　　　　　　　	<Off>						壊して、壊して、壊して、
+	イベントスチル1012U		エフェクト表			0
+Wait						.5
+Se	突1
+Shake	Graphics		y=5 time=0.3				NoWait
+Wait						1.7
+Se	斬1
+Shake	Graphics		y=5 time=0.3				NoWait
+Wait						2.2
+Se	突1
+Shake	Graphics		y=5 time=0.3				NoWait
+Wait						1
+CharacterOff						0
+	　　　　　　　　　　	<Off>						壊して……
+Bg	戦場跡					0
+Wait						2.5
+StopSe
+Bg	黒背景					0
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+		<Off>						\n　　　 　 誰か私を、壊して
+FadeOut	black					0
+Wait						2
+CharacterOff						0
+Param	character_grayout=false
+Bgm	ロルリアンレットB
+	イベントスチル103006		エフェクト裏			0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+	黒背景		エフェクト表			0
+ImageEffect	SpriteCamera	Blur
+FadeIn	black					.5
+CharacterOff	黒背景					1
+Tween	瞬きA	MoveBy	y=325 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-325 time=2	easeOutCirc			Add
+Wait						1
+CharacterOff	黒背景
+Wait						1
+	エクス=レプリカ	<Off>						……あれ？\nどうして、私、無事……
+	？？？？	<Off>						………い……つか……\nほん……もの、こえる……ため……
+	エクス=レプリカ	<Off>						……え？
+	？？？？	<Off>						きょ……うも……がん、ばれ……\n……れ、ぷり……かちゃ……ん……
+	エクス=レプリカ	<Off>						この、歌………
+Tween	瞬きA	MoveBy	y=325 time=2	easeOutCirc			Add
+Tween	瞬きB	MoveBy	y=-325 time=2	easeOutCirc
+ImageEffectOff	SpriteCamera	Blur
+Wait						1
+Tween	イベントスチル103006	MoveBy	y=-540 time=6	linear
+Wait						1
+	エクス=レプリカ	<Off>						……エクス=ロストちゃん!!
+	エクス=レプリカ	<Off>						どうしよう、ひどい怪我……！\n私を、かばって……
+	エクスカリバー=ロスト	<Off>						……大丈夫\nなんてこと、ないわ
+	エクスカリバー=ロスト	<Off>						これは……私の、\n望んだこと、だから……
+	エクス=レプリカ	<Off>						エクス=ロストちゃん……
+	エクス=レプリカ	<Off>						その眼……あの、歌……
+	エクス=レプリカ	<Off>						あなたは……
+	エクス=レプリカ	<Off>						あなたは、私なの……？
+	エクスカリバー=ロスト	<Off>						………………
+	エクスカリバー=ロスト	<Off>						……違うわ
+	エクスカリバー=ロスト	<Off>						貴女は……私とは、違う……
+	エクスカリバー=ロスト	<Off>						私は、弱かったから……
+	エクスカリバー=ロスト	<Off>						ご主人様を……\n最後まで、信じられなかった……
+	エクスカリバー=ロスト	<Off>						だから……悪いのは、私……
+	エクスカリバー=ロスト	<Off>						ぜんぶ……私が選んだ、結末なの……
+	エクスカリバー=ロスト	<Off>						……でも、貴女は違う
+	エクスカリバー=ロスト	<Off>						貴女は……\nご主人様を、信じてる
+	エクスカリバー=ロスト	<Off>						……あの人も、\n貴女のことを、信じてる……
+	エクスカリバー=ロスト	<Off>						きっと、貴女たちなら……\nいつか……本物だって、超えられるわ
+	エクスカリバー=ロスト	<Off>						だから……
+	エクスカリバー=ロスト	<Off>						貴女はこのまま、\n自分を、信じて……
+	エクスカリバー=ロスト	<Off>						貴女を信じる、あの人を……
+StopBgm
+Se	斬1
+	エクスカリバー=ロスト	<Off>						…………ぁ……
+FadeOut	white					.5
+Se	倒れる
+CharacterOff						0
+Param	character_grayout=true
+Bg	市街地C(曇り)					0
+	聖征剣エクスカリバー	通常3	1_2			0
+	勇者王シドウ		2_2			0
+FadeIn	white					.5
+	勇者王シドウ							……フン
+CharacterOff
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2	1_2
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	泣き2						エクス=ロストちゃん!!
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常3	1_2
+	勇者王シドウ							偽物に相応しい、惨めな最期だな
+CharacterOff
+	ディーア	怒り2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア	怒り2						………………
+	ディーア	悔しい2						…………しろ
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常3	1_2
+	勇者王シドウ							ん？ 何を……
+CharacterOff
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア	悔しい2						その言葉、撤回しろ!!
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常3	1_2
+	聖征剣エクスカリバー							…………
+CharacterOff
+	ディーア	悔しい2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア	悔しい2						エクス=ロストは……\nオレたちを助けるために、\n命を賭けて戦ってくれた
+	ディーア	怒り2						……王座の隣で、\nすましているのが聖者か？
+	ディーア	怒り2						……国民を虫けらみたいに、\n蹴散らすのが聖者か？
+	ディーア	悔しい2						……違う
+Bgm	ロルリアンレットC
+	ディーア	本気2						虐げられた者を助けるために\n命を賭して戦うのが、本物の聖者だ！
+	ディーア	悔しい2						エクス=ロストこそが、\n本物の……聖剣なんだ!!
+CharacterOff
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	通常3	1_2
+	聖征剣エクスカリバー							…………
+	勇者王シドウ							……戯言を
+CharacterOff
+	ディーア	本気2	2_2
+	エクス=レプリカ	泣き2	1_2
+	ディーア	本気2						だから……\nお前らには、絶対に負けない!!\nいくぞ、レプリカ！
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル103014		エフェクト裏			0
+FadeIn	white					.3
+	エクス=レプリカ	<Off>						任せて、ご主人様!!
+	エクス=レプリカ	<Off>						私とご主人様、それに……
+Se	光2
+	　　　　　　　　　　		3_3
+	イベントスチル103015		エフェクト表			1
+	エクス=レプリカ	<Off>						エクスロストちゃんの思いがあれば、\n本物だって超えられる!!
+	二人							くらえ!!\n<ruby=ブレイズドライブ>背信せし愛約の煌</ruby>ッ!!
+Se	光3
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Param	character_grayout=true
+	　　　　　　　　　　
+Wait						2
+Se	強風	TRUE
+Shake	Graphics		x=1 y=1 time=2				NoWait
+FadeIn	white					.5
+Wait						1
+	勇者王シドウ		2_2
+	聖征剣エクスカリバー	傷2	1_2
+Tween	聖征剣エクスカリバー	MoveBy	x=-10				NoWait
+	聖征剣エクスカリバー	傷2						<dash=6>ッ
+	勇者王シドウ							エクスカリバーに、傷を……？
+	勇者王シドウ							そうか、お前が……
+	勇者王シドウ							クク、なるほど、おもしろい
+	勇者王シドウ							……退くぞ\n彼奴らはこれで十分だ\n量産型を五分で抹消しろ
+	聖征剣エクスカリバー	傷2						……御意
+CharacterOff
+	ディーア	本気2
+	ディーア	本気2						おい待て、シドウ！
+CharacterOff						0
+	勇者王シドウ		1_2
+	勇者王シドウ							…………
+	勇者王シドウ							お前なら……来れるかも知れない\n<ruby=ここ>王の座</ruby>まで……な
+	勇者王シドウ							その時は話をしよう\nこの世界の真理、\nそして、お前自身について
+CharacterOff
+	ディーア	悔しい2
+	ディーア	悔しい2						おい、どういう……
+CharacterOff
+	勇者王シドウ		1_2
+	勇者王シドウ							いずれわかる<dash=2>
+CharacterOff	勇者王シドウ					1
+Wait						1
+CharacterOff
+	ディーア	本気2
+	ディーア	悔しい2						くっ……
+	エクス=レプリカ	<Off>						ご主人様、\nエクス=ロストちゃんが……！
+	ディーア	驚き2						……そうだ
+	ディーア	悔しい2						待ってろ、すぐ行く!!
+Se	走る
+Tween	ディーア	MoveTo	x=-800
+FadeOut	white					.5
+StopSe
+Wait						2
+CharacterOff						0
+Param	character_grayout=false
+	白背景		エフェクト表2			0
+	イベントスチル103004		エフェクト表			0
+FadeIn	white					1	Add
+	ディーア	<Off>						エクス=ロスト！\n大丈夫かっ!!
+CharacterOff	白背景					3
+Bgm	ロルリアンレット
+	エクスカリバー=ロスト	<Off>						…………ご主人、様
+	ディーア	<Off>						しっかりしろ！\nこんなところで消えちゃダメだ！\n一緒に、ドロシーを倒すんだよ!!
+	エクスカリバー=ロスト	<Off>						……………………
+	エクスカリバー=ロスト	<Off>						……これまで……本当に\nたくさんの世界で戦ってきたわ……
+	エクスカリバー=ロスト	<Off>						だから……自分の傷がどれだけ\n致命的かも、すぐに、わかるの……
+	エクス=レプリカ	<Off>						そんな……
+	エクスカリバー=ロスト	<Off>						私……ずっと、誤解してた
+	エクスカリバー=ロスト	<Off>						本物のエクスカリバーより強くなれば\n本物になれるって、思ってた……
+	エクスカリバー=ロスト	<Off>						……子ども、だったのね……
+	エクスカリバー=ロスト	<Off>						本当は、強さも、何も関係ない……
+	エクスカリバー=ロスト	<Off>						誰かに「本物だ」って\n選んでもらえれば……
+	エクスカリバー=ロスト	<Off>						その人にとっては……\n……確かに、本物なの
+	ディーア	<Off>						エクス=ロスト……
+	エクスカリバー=ロスト	<Off>						貴方に……本物の、聖剣だって……\n言ってもらえて、嬉しかった……
+	エクスカリバー=ロスト	<Off>						やっと……本当にやっと……
+	エクスカリバー=ロスト	<Off>						私は貴方の、本物になれた…………
+	エクスカリバー=ロスト	<Off>						ねえ、ご主人、様……
+	エクスカリバー=ロスト	<Off>						……生まれ、変わっても\nまた私のこと、選んでくれる……？
+	エクスカリバー=ロスト	<Off>						私のこと……また、\n本物だって、言ってくれる……？
+	ディーア	<Off>						…………当たり前だ
+	ディーア	<Off>						何度だって選ぶ……何度だって……\n本物だって言ってやる！
+	ディーア	<Off>						だから……<dash=2>
+	エクスカリバー=ロスト	<Off>						……ありがとう、ご主人様
+	白背景		エフェクト表2			4	NoWait
+	エクスカリバー=ロスト	<Off>						その言葉だけで、私には、十分……
+	エクス=レプリカ	<Off>						エクス=ロストちゃん……？
+	ディーア	<Off>						だめだ、いくなエクス<dash=2>
+	エクス=レプリカ	<Off>						返事してよ、ねえ……\nエクス=ロストちゃん!!
+FadeOut	white					.5
+CharacterOff
+	　　　　　　　　　　
+StopBgm
+Wait						3
+Bg	黒背景					0
+FadeIn	white					.5
+	　　　　　　　　　　	<Off>						E.D.E.N.の首都、天空都市エデン\n通称･聖都に大きな被害をもたらした\n「聖都事変」は<dash=2>
+	　　　　　　　　　　	<Off>						勇者王シドウと\n聖征剣エクスカリバーの活躍により
+	　　　　　　　　　　	<Off>						多くの勇者の\n犠牲を払いながら鎮圧された
+	　　　　　　　　　　	<Off>						その「聖都事変」から一ヶ月後<dash=2>
+	　　　　　　　　　　
+FadeOut	white					.5
+Param	character_grayout=true
+Bg	市街地A
+Bgm	平和
+CharacterOff
+	ディーア	怒り2	2_2			.5
+	エクス=レプリカ	通常2	1_2
+FadeIn	white					.5
+	エクス=レプリカ							すごーい♪\nこのあたりの壁もレンガも、\nみーんな元通りになってるわね♪
+	ディーア	怒り2						ああ……
+	ディーア	目閉じ2						まるで、何もなかったみたいに、な
+	エクス=レプリカ	泣き2						…………
+	エクス=レプリカ	通常2						ほら、お花をあげましょう？\n私は造花も好きだけど、\n今日は本物のお花よ♪
+	エクス=レプリカ	ニヤリ2						エクス=ロストちゃんも、\nこれならきっと喜ぶわ♪
+	ディーア	目閉じ2						エクス=ロスト……
+Tween	エクス=レプリカ	PunchPosition	y=50				NoWait
+	エクス=レプリカ	泣き2						…………もーうご主人様！\nそんなにしょげなくていいでしょ！
+	ディーア	目閉じ2						ああ、悪い……\nでも……本当にいないんだと思ってさ
+	エクス=レプリカ	通常2						……そうかしら？
+	ディーア	驚き2						え……？
+	エクス=レプリカ	ニヤリ2						エクス=ロストちゃんは\n本当に消えちゃってなんかいないわ
+StopBgm
+	エクス=レプリカ	通常2						だって、エクス=ロストちゃんは……\n聖剣だもの！
+Bgm	タイトル
+	ディーア	驚き2						聖剣……
+	エクス=レプリカ	ニヤリ2						聖なるものはずっと消えないで、\nちゃーんとみんなの心に残るのよ♪
+	ディーア	目閉じ2						…………そうか
+	ディーア	通常2						そうだったな……
+	ディーア	笑い2						……よしレプリカ、今日はご馳走だ\nオレが料理をつくるぞ
+	エクス=レプリカ	通常2						え、ご主人様がつくってくれるの？
+	ディーア	通常2						ああ、買い出しも奮発する
+	エクス=レプリカ	通常2						ほんと？\nやったぁ♪
+	エクス=レプリカ	嬉しい2						それじゃあ、レプリカちゃんは～♪
+FadeOut	black					1
+CharacterOff
+Bg	黒背景
+	イベントロゴ1030a	before	エフェクト表			1
+Wait						1
+Param	character_grayout=false
+FadeIn	black					.5
+Wait						.5
+	イベントロゴ1030a	after				2
+Wait						2
+	イベントロゴ1030a	after				0		\n　　ホーリー≠ロスト デイブレイク
+If	isdebug==true
+CharacterOff
+Jump	*E_1030_01
+EndIf

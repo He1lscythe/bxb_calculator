@@ -1,0 +1,2481 @@
+# E_393_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	市街地A
+	ミラロスト	無
+FadeIn	white					.5
+	ミラロスト							<dash=2>ねぇ、いい加減教えてよー
+	ミラロスト	笑い						バハムートちゃん、\nどこに逃がしたの？
+	イザナギ	破損						ふん、貴様に教えることなど何も……
+	ミラロスト	無						ふーん……
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	斬撃(393C)		エフェクト裏			0
+	黒背景		エフェクト表			0
+Wait						.2
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.3				NoWait
+Wait						.5
+Param	character_grayout=true
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Bg	市街地A					0
+	イザナギ	破損
+Tween	イザナギ	MoveBy	x=20				NoWait
+	イザナギ							くっ……
+ImageEffectOff	SpriteCamera	MotionBlur
+	ミラロスト	笑い						どう？\n話す気になった？
+	イザナギ	破損						くっ……\nふん、その程度で我が口を割ると\n思うなよ
+	ミラロスト	無						えー、つまんなーい
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	斬撃(393C)		エフェクト裏			0
+	黒背景		エフェクト表			0
+Wait						.2
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+CharacterOff						0
+	斬撃(393E)		エフェクト裏			0
+	黒背景		エフェクト表			0
+Wait						.1
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.3				NoWait
+Wait						.5
+Param	character_grayout=true
+CharacterOff						0
+Bg	市街地A					0
+	イザナギ	絶望
+Shake	イザナギ		x=5 y=0				NoWait
+	イザナギ							ぐあっ……
+	ミラロスト	無						……はぁ
+	ミラロスト	笑い						オメガなら教えてくれるよね♪
+	オメガ	絶望						あなたには……\n絶対に教えない……
+	ミラロスト	無						もー意地っ張りなんだからぁ
+	オメガ	絶望						…………くぅ……
+	イザナギ	絶望						……忌々しい、\nあの術式さえなければ……
+CharacterOff
+Param	character_grayout=false
+Se	光1
+	ミラロスト	ニヤリ
+	アネセサリロゴ	赤	エフェクト表			.5
+Wait						.5
+CharacterOff	アネセサリロゴ					.5
+Wait						.5
+	ミラロスト	笑い						……にゃは♪
+Param	character_grayout=true
+	ミラロスト	通常						いいからさっさと教えてよー\n初めから選択肢なんて無いんだから
+	イザナギ	絶望						…………
+	ミラロスト	無						ねえ、ミラが聞いてるんだけど？
+	イザナギ	絶望						…………教えるものか
+CharacterOff
+	オメガ	絶望
+Shake	オメガ		x=5				NoWait
+	オメガ							バハちゃんのとこには……\n行かせない……
+	ミラロスト	無						…………は
+	ミラロスト	悔しい						はぁーー面白くないっ！
+	ミラロスト	ニヤリ						まいいや♪\nバハムートちゃんじゃないから\nちゃんと壊せないかもだけど……
+	ミラロスト	笑い						にゃは♪
+CharacterOff						0
+	ミラロスト	拡大	エフェクト表			0		頭の凝り固まった神竜と愛に狂った\n竜王は、この聖竜王ミラちゃんが\n滅ぼしてあげる♪
+FadeOut	black					.1
+StopBgm
+CharacterOff
+Bg	市街地A
+	ディーア	本気2	画面外_右
+Wait						2
+Bgm	絶望
+Se	走る
+Tween	ディーア	MoveTo	x=0				NoWait
+FadeIn	black					.5
+	ディーア							オメガ、イザナギ!!\n無事か!?
+CharacterOff
+	イザナギ	絶望						…………ああ\nようやく来たか、人間……
+	ディーア	悔しい2						イザナギ……!?\nその傷……!!
+	オメガ	絶望						マスターちゃん……？
+	ディーア	怒り2						オメガも……\n今クランさんのとこに……!!
+	オメガ	絶望						気をつけて……まだ、近くに……
+CharacterOff
+	ミラロスト	ニヤリ				1.5
+	ミラロスト							あっれぇ～？\nやっと帰ってきたんだぁ
+	ミラロスト							その様子だと、ごくひらちゃんは\nダメだったみたいだねぇ
+CharacterOff
+	ディーア	悔しい2						………………お前は
+CharacterOff
+	ミラロスト	笑い拡大	エフェクト表					もー、ミラちゃん\nずっと待ってたんだよ？
+	ミラロスト	ニヤリ拡大	エフェクト表					にゃはは♪\nおかえり、マスターさん♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							……バハムート=ミラの\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>……!!
+CharacterOff
+	ミラロスト	無						あー、ごくひらちゃん\n全部言っちゃったんだぁ
+	ミラロスト							やっぱりもっとちゃんと\n見張っておけばよかったかなぁ……
+	ミラロスト	笑い						まあでも、知ってるなら\n話は早いよね♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							何……？
+CharacterOff
+Bgm	緊迫
+	ミラロスト	笑い						ねえマスターさん♪\nバハムートちゃんちょうだい？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							……バハムートは渡せない
+CharacterOff
+	ミラロスト	笑い						えー、なんでぇ？\nちょっと遊ぶだけだよ？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							……今更そんな言い方が通用すると\n思ってるのか？
+CharacterOff
+	ミラロスト	笑い						にゃはは♪\nこわぁーい♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							……お前はなぜ\nバハムートを狙う？
+CharacterOff
+	ミラロスト	無						はぁ……\nそんなこと聞いてどうするの？
+	ミラロスト	ニヤリ						ひょっとして、\nミラに興味持っちゃった？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							……いいから答えろ
+CharacterOff
+	ミラロスト							うーん……まあ、それくらいなら\n教えてあげてもいっかなぁー♪
+	ミラロスト	笑い						<dash=2>世界平和のため、だよ♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							世界平和だと……？\nふざけるな……!!
+CharacterOff
+	ミラロスト	笑い						にゃはは♪\nふざけてないよぉ♪
+	ミラロスト	ニヤリ						だって、竜王という世界を支配する\n邪悪で危険な因子を\n排除するためなんだから♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	驚き2	1_2
+	ディーア							なっ……!?
+CharacterOff
+	ミラロスト	ニヤリ						ごくひらちゃんから聞かなかった？
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル392F		エフェクト表
+FadeIn	black					.3
+	バハムート=ミラ=ロスト	<Off>						<dash=2>伝説を得た名刀･大包平は、\n世界を支配しうる力を手にする
+	バハムート=ミラ=ロスト	<Off>						ごくひらちゃんは、\nその可能性を覆すために戦った
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+FadeIn	black					.3
+	ディーア							まさか……
+CharacterOff
+	ミラロスト	ニヤリ						そう♪\nバハムートちゃんも同じ！\n世界の支配者♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	驚き2	1_2
+	バハムート							世界の支配者……？\nバハムートちゃんが……？
+CharacterOff
+	ミラロスト	笑い						うん！\nそんなの、放っておくわけには\nいかないでしょ？
+	ミラロスト	ニヤリ						だって危険じゃん？\n竜王が統治する世界なんて\nだからミラちゃんが止めなくちゃ♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							……それは表向きの理由\nただの"命令"だろ？
+CharacterOff
+	ミラロスト	ニヤリ						ああ、ひょっとしてドロシーにも\n会ったんだ？\nそう、ただの命令♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							そんなものに従ってどうする？\nオレはお前自身を<dash=2>
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	オメガ							……無理だよマスターちゃん\nあのミラちゃんは\n話してどうにかなる相手じゃないよ
+	イザナギ							……オメガの言う通りだな\nあれに余計な情を持つべきではない
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							……でも、あれはミラなんだぞ
+	ディーア	怒り2						ごくひらロストだって、\n望んでロストになったわけじゃ\nなかった……
+	ディーア	悔しい2						ミラにだって何か\n事情があるはずなんだ
+	ディーア	怒り2						<dash=2>もう、何もできないのは嫌なんだ
+	バハムート							……マスターさん
+CharacterOff
+	ミラロスト	笑い						にゃはは♪\nマスターさん、\nそんなにミラのこと気になるんだぁ♪
+	ミラロスト	ニヤリ						でもざーんねん♪\nおしえてあーげない♪
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							……だから言っただろう
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	本気2	1_2
+	ディーア							どうして……!!
+CharacterOff
+	ミラロスト	通常						にゃははー♪\nずいぶんとごくひらちゃんに\n絆されちゃって♪
+	ミラロスト	ニヤリ						残念だけどごくひらちゃんと\n同じようにしようったって\n無理だからぁ♪
+	ミラロスト	笑い						だってミラ、ごくひらちゃんほど\n真面目じゃないしぃ♪
+	ミラロスト	ニヤリ						そもそもミラあなたの魔剣じゃないし\nあなたの言うことなんて\n聞く必要なくない？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							…………くっ
+CharacterOff
+	ミラロスト	ニヤリ						<dash=2>で、\nバハムートちゃん渡してくれる\n気になった？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							……ダメだ\nバハムートは渡せない
+CharacterOff
+	ミラロスト	無						へぇ？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							…………
+CharacterOff
+	ミラロスト	無						……そか、残念だなあ
+	ミラロスト	笑い						よいしょっと
+Se	突1
+StopBgm
+FadeOut	red					.1
+FadeIn	red					1
+CharacterOff
+	通りすがりの旅人	絶望
+Shake	通りすがりの旅人		x=5 y=0				Add
+	通りすがりの旅人							ぐぅっ…………!?
+Tween	通りすがりの旅人	MoveBy	y=-800				NoWait
+Wait						.3
+Se	倒れる
+Wait						.5
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	絶望2	1_2
+	ディーア							…………は？
+Bgm	絶望
+CharacterOff
+	通りすがりの女性	<Off>						きゃぁぁあああ!!!!
+	通りすがりの男性	<Off>						ひ、人が……!!\n誰か!!
+CharacterOff
+	ミラロスト	笑い						にゃっはー♪\nどう？\n渡してくれる気になった？
+CharacterOff
+	黒グラデーション		エフェクト表
+	通りすがりの旅人	絶望
+Shake	通りすがりの旅人		x=5 y=0				NoWait
+	通りすがりの旅人							……な、なんで……嫌だ、俺\nこんなところで……
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	本気2	1_2
+	ディーア							お前……!!\n無関係な人を……!!
+CharacterOff
+	ミラロスト	ニヤリ						早く渡してくれないと、\nトドメ刺しちゃうけど
+	ミラロスト	笑い						じゅー、きゅー、はーち♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	本気2	1_2
+	ディーア							そんなことさせるか……!!
+CharacterOff
+	ミラロスト	驚き						ななー……あっ
+Se	斬1
+FadeOut	red					.1
+Wait						.5
+FadeIn	red					.5
+	ミラロスト	笑い						にゃは♪\n手が滑っちゃった♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							お前……!!
+CharacterOff
+	ミラロスト	通常						わ、マスターさんこわぁい♪\nでもマスターさんが悪いんだよ？
+	ミラロスト	ニヤリ						おとなしくバハムートちゃんを\n渡してくれたら、ミラだって\nこんなことしなくて済むもん♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							そんな……
+CharacterOff
+	ミラロスト	笑い						ね、マスターさん♪\nはやくバハムートちゃんちょーだい♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+Tween	ディーア	MoveTo	x=0				NoWait
+Wait						.3
+	ディーア							………………
+CharacterOff
+	ミラロスト	笑い						そっかぁー\nそれがマスターさんのお返事かぁー♪
+CharacterOff
+	通りすがりの女性
+Shake	通りすがりの女性		x=5				NoWait
+	通りすがりの女性							きゃあぁぁっ!!\nいや、やめて、助けて……っ!!
+CharacterOff
+	ミラロスト	笑い						えーいっ♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	本気2	1_2
+	ディーア							やめろ!!
+CharacterOff
+	ミラロスト	驚き
+Tween	ミラロスト	PunchPosition	y=50				NoWait
+	ミラロスト							ぴぐぅっ!?
+Se	突1
+FadeOut	red					.1
+FadeIn	red					.5
+Wait						.2
+CharacterOff
+	通りすがりの女性	絶望
+Shake	通りすがりの女性		x=5				NoWait
+	通りすがりの女性							くっ……ぁぁ……
+CharacterOff
+	ミラロスト	無						あーもう、びっくりさせるから\nちゃんとできなかったじゃん
+	ミラロスト							かわいそー、あなたのせいだよ？
+CharacterOff
+	黒グラデーション		エフェクト表
+	通りすがりの女性	絶望
+Shake	通りすがりの女性		x=5				NoWait
+	通りすがりの女性	絶望						やだ……血が……\n血が……止まら……\nたすけ……
+CharacterOff
+	ミラロスト	笑い						…………うーん\nまいっか♪
+Se	突1
+FadeOut	red					.1
+FadeIn	red					.5
+Wait						.2
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	オメガ							ひどい……
+	イザナギ							……この外道
+CharacterOff
+	ミラロスト	通常						にゃは♪
+	ミラロスト	ニヤリ						だってミラちゃんは\n<ruby=アネセサリ>必要悪</ruby>だもの♪
+	ミラロスト	笑い						だから、とことん悪くなくちゃね♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							…………ッ
+CharacterOff
+	ミラロスト	通常						どう？\nそろそろ渡す気になった？
+	ミラロスト	ニヤリ						それとも、何人犠牲にしたら\nバハムートちゃんの命と釣り合うか、\n試してみる？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							…………くっ
+Bgm	緊迫
+	バハムート							……止めなきゃ、マスターさん
+	ディーア	怒り2						……ああ
+CharacterOff
+	イザナギ	破損						待て、そいつは……!!
+CharacterOff
+	ミラロスト	ニヤリ拡大	エフェクト表
+Wait						.5
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	斬撃(393C)		エフェクト裏			0
+	黒背景		エフェクト表			0
+Wait						.1
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.3				NoWait
+Wait						.7
+Param	character_grayout=true
+CharacterOff						0
+Bg	市街地A					0
+	イザナギ	絶望
+Shake	イザナギ		x=5				NoWait
+	イザナギ							ぐっ……
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	本気2	1_2
+	ディーア							イザナギ!!
+CharacterOff
+	ミラロスト	笑い						にゃは♪\n次はオメガかなぁ♪
+CharacterOff
+	オメガ	破損						…………っ!!
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	本気2	1_2
+	ディーア							ミラ=ロスト……!!\nお前……!!
+CharacterOff
+	ミラロスト	笑い						にゃははは♪
+CharacterOff
+	ミラロスト	ニヤリ拡大	エフェクト表					……いい顔できるじゃん、\nマスターさん♪
+If	isdebug==true
+CharacterOff
+Jump	*E_393_02
+EndIf
+EndScenario
+
+# E_393_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bgm	緊迫
+Bg	市街地A
+	バハムート	悔しい	2_2
+	ディーア	本気2	1_2
+FadeIn	black					.5
+	ディーア							はぁぁっ!!
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	斬撃(39210H)		エフェクト裏			0
+	黒背景		エフェクト表			0
+Wait						.2
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+Param	character_grayout=true
+CharacterOff						0
+Bg	市街地A					0
+	イザナギ	破損						<size=40>止まれ、人間!!</size>
+CharacterOff
+	黒グラデーション		エフェクト表
+	ミラロスト	ニヤリ拡大	エフェクト裏					…………♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							……ッ!?
+Se	斬1
+FadeOut	red					.1
+CharacterOff						0
+	ミラロスト	悔しい
+FadeIn	red					.5
+Wait						.5
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							なっ……!?
+	ディーア							お前、なんで今避けなかった……？
+	ディーア	悔しい2						いや、むしろ自分から当たりに……
+CharacterOff
+	ミラロスト	悔しい						くっ……\nあーあ残念、邪魔してくれちゃって
+	ミラロスト	ニヤリ						<dash=2>もう一歩踏み込んでたら\n終わってたのに
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	驚き2	1_2
+	ディーア							…………は？
+StopBgm						3
+	バハムート							ぐっ……くっ……\nますたー……さん……
+	ディーア	怒り2						バハムート!?
+CharacterOff
+	オメガ	破損
+	オメガ							バハちゃん!?\n大丈夫!?
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+Bgm	絶望
+	ディーア							何をされた……？\nミラ=ロストの攻撃は\nかわしたはず……
+	バハムート							わかんない……\n急に、力が入らなくなって……
+CharacterOff
+	ミラロスト	ニヤリ						にゃは♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							お前……何を……!!
+CharacterOff
+	ミラロスト	笑い						何をって、\nマスターさんがやったんでしょー♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							何だと……？
+CharacterOff
+Param	character_grayout=false
+	ミラロスト	ニヤリ
+Se	光1
+	アネセサリロゴ	赤	エフェクト表			1
+Wait						1
+CharacterOff	ミラロスト
+	バハムート	悔しい
+Shake	バハムート		x=5				NoWait
+Se	闇1
+CharacterOff	アネセサリロゴ					1
+Wait						.5
+	バハムート							マスターさん……？\nなにこれ……!!
+CharacterOff
+	ディーア	驚き2						なっ……!?\n魔力が流れ込んで……
+	ディーア	怒り2						<dash=2>これは、魔術リンク!?\nミラ=ロストとバハムートが\n繋がっている……!?
+Param	character_grayout=true
+CharacterOff
+	ミラロスト	ニヤリ						にゃは♪\nやっと気付いたの？\nおそすぎぃ♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							くっ……
+CharacterOff
+	ミラロスト	笑い						びっくりした？\nちょっとした禁術的なやつ\n使ってみたんだぁ♪
+	ミラロスト	ニヤリ						こういうの、必要悪っぽいでしょ？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							ふざけるな……!!
+CharacterOff
+	ミラロスト	ニヤリ						あはは♪　というわけだから\n気をつけてねマスターさん♪
+	ミラロスト	笑い						<dash=2>もしミラちゃんを壊そうとしたら\nバハムートちゃんも一緒に\nコワれちゃうから♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	バハムート							くぅ……\nそんな……
+	ディーア							大丈夫だバハムート\n心配するな、必ずなんとかしてみせる
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	オメガ							…………っ\nごめんね、バハちゃん……
+	オメガ							オメガちゃんがいながらこの失態……\nマスターちゃんも、\n本当にごめんなさい……
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	驚き2	1_2
+	バハムート							オメガちゃんが謝ることじゃ……
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							……こやつに襲われた際、\nバハムートが身を挺して酒場の\n人々を守ったのだ
+	イザナギ							あの禁術とやらを植え付けられたのも\n恐らくその時だ
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							……そうか\nありがとうオメガ、イザナギ
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	オメガ							……え？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	通常2	1_2
+	ディーア							これまで被害を抑えられたのは\n二人のおかげだ
+	ディーア							バハムートを人質に取られている\n状況で、よくやった
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	オメガ							マスターちゃん……
+	イザナギ							……だがここから先はどうする、人間\n奴を倒せないことは変わらぬぞ
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							ああ\nそれともう一つわかったことがある
+CharacterOff
+	ミラロスト	ニヤリ						あ、そっちにも気がついた？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							ああ、初めからお前は\n"そういうつもり"だったんだな
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	研究所A					0
+	ロルリアンレット	ニヤリH				0
+FadeIn	white					.3
+	ロルリアンレット							魔剣使いなしで自律駆動する兵器など\nどうせ長持ちはしないもの
+	ロルリアンレット							放っておけば自壊するわ\n貴方はそれまで耐え凌げばいい
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	市街地A					0
+	バハムート	悔しい	2_2			0
+	ディーア	怒り2	1_2			0
+FadeIn	white					.3
+	ディーア							お前の狙いは、自壊……\nバハムートと共に心中すること……!!
+CharacterOff
+	ミラロスト	ニヤリ						そう！せいかい！\nだいせいかい♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							バハムートの命を狙うのに、\nバハムートの命を盾にするのは\nおかしいからな……!!
+CharacterOff
+	ミラロスト	ニヤリ						にゃは♪\nだってミラだけ生き残っても\n仕方ないし、ね♪
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	オメガ							……てことは\nこいつが自壊する前に\nなんとかしなきゃ……
+	イザナギ							……倒しても駄目、放っておいても\n自壊されて終わり……\nふん……なかなか難儀するな、人間
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							ああ、本当にまったくお前は……
+CharacterOff
+Param	character_grayout=false
+	ミラロスト	ニヤリ						え？なになに？\n気が狂ってるって？\nそれ褒め言葉ぁ♪
+	ミラロスト	笑い						でもまぁ、自壊するまでは\n楽しませてもらうけどね♪\nねー、バハムートちゃん♪
+Se	光1
+	アネセサリロゴ	赤	エフェクト表			.7
+Wait						.4
+Se	光2
+FadeOut	white					.5
+CharacterOff	ミラロスト					0
+Se	闇1
+CharacterOff	アネセサリロゴ					1
+	バハムート	悔しい				0
+Shake	バハムート		x=5				NoWait
+FadeIn	white					.5
+	バハムート							きゃあああぁぁっ!?
+CharacterOff
+	ディーア	悔しい2						くっ……
+CharacterOff
+Param	character_grayout=true
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							これが抑止の力か……！
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							抑止の、力……？\nそれが今の……
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							ああ、ミラが持つ本来の能力\n奴の力の源泉にして真骨頂だ……
+	イザナギ							……我々は神と言えど、\n創世神話を持つ存在ではない
+	イザナギ							こと竜王においては成り上がりの神だ\n最初から神として\n創られたものですらない
+	イザナギ							人に例えるのであれば、\n我々のような神はいわば\n革命家のようなものだ
+	イザナギ							伝説を残して神に成り上がれば、\n抑止力となる対抗兵器を\n用意されるのは世の常だとも
+	イザナギ							……よもやそれが、こんなに\n身近にいるとは思わなかったがな
+	オメガ							そういう意味では\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>も\nきっとそういった抑止力の一つ……
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	驚き2	1_2
+	ディーア							つまり、ミラ=ロストは抑止力から\n造られた抑止力……
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							そういうことだ\n……本当に性質が悪い
+CharacterOff
+	ミラロスト	笑い						にゃは♪\nだからそれ、ミラにとっては\n褒め言葉なんだけど♪
+	ミラロスト	ニヤリ						ねえねえマスターさん、どう？\n自分の手でバハムートちゃんを\n傷つけた気持ちは
+	ミラロスト	笑い						ミラ、あなたのために\n頑張ったんだよ♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							……くっ
+CharacterOff
+	ミラロスト	ニヤリ						にゃは♪\nそうそう、そういう顔が\n見たかったんだぁ♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							お前……!!
+CharacterOff
+	ミラロスト	笑い						それでどーするの？\nバハムートちゃんを犠牲にしてでも\nミラを壊してみる？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	バハムート							…………っ!!
+	ディーア							そんなこと……
+CharacterOff
+	ミラロスト							できない？\nじゃあバハムートちゃんと一緒に\n誰も居ない世界で生きていく？
+	ミラロスト	ニヤリ						オメガも、イザナギも、\nそれからリディちゃんとかも\nいない世界で！
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							…………バハムートを解放しろ
+CharacterOff
+	ミラロスト	無						……マスターさんひょっとしてバカ？\nマスターさんが命令できる\n立場じゃないんだよ？
+	ミラロスト							言ったでしょ？\nあなたの言うことは聞いてあげない
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							くっ……
+CharacterOff
+StopBgm
+	黒グラデーション		エフェクト表
+	ミラロスト	無						ああもう面倒くさいなあ……\nやっぱりここもダメか
+CharacterOff	黒グラデーション
+	ミラロスト	笑い						やーめた、やっぱり\n普通に壊しちゃおっかなあ♪
+CharacterOff
+Bgm	緊迫
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							マスターさん……!!
+	ディーア							くっ……\n来るぞ、バハムート!!
+Se	光1
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル393BG		エフェクト表			0
+FadeIn	black					.3
+	バハムート=ミラ=ロスト	<Off>						抵抗してもいいよー♪
+	バハムート=ミラ=ロスト	<Off>						でもその時は、バハムートちゃんを\n犠牲にするつもりで来ないと、\nすぐにやられちゃうからね
+	イベントスチル393BG	拡大
+	バハムート=ミラ=ロスト	<Off>						にゃは♪\nいつまで持つかな、\nあなたのバハムートちゃん♪
+FadeOut	white					1
+Param	character_grayout=true
+If	isdebug==true
+CharacterOff
+Jump	*E_393_03
+EndIf
+EndScenario
+
+# E_393_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bgm	絶望
+Bg	黒背景
+Param	character_grayout=false
+	黒背景		エフェクト表
+	斬撃(393F)		エフェクト裏
+FadeIn	black					.5
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.5
+CharacterOff						0
+Bg	市街地A					0
+Param	character_grayout=true
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							くっ……
+	バハムート							大丈夫、マスターさん!?
+	ディーア							身体が思うように動かない……\nこれも、抑止力の影響なのか……？
+CharacterOff
+	ミラロスト	無						思ったより頑張るね、マスターさん
+	ミラロスト	ニヤリ						でもバハムートちゃん、\nそろそろキツそうだよ？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							くぅっ……
+	ディーア							……このままじゃ、\n防戦どころか撤退するのも難しい……
+	バハムート	悔しい						抑止力……\nあの力さえなんとかできれば……
+	ディーア							抑止力の適応外……\n竜王の伝承を持たない魔剣なら\nあるいは……？
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							無理だろうな\nそもそも、あの聖竜王と\nまともに渡り合える魔剣など……
+	オメガ							……真っ当にやり合うなら、\nミラちゃんを使うのが一番だけど……
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							そうか、同じ抑止力同士なら……!!
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							……どうだろうな
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	驚き2	1_2
+	ディーア							……イザナギ？
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							ミラは今まで頑なにその力を\n使おうとしてこなかった
+	イザナギ							……今アンロックしたとて\n戦力になるか……
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							……今はそんなこと言っていられない\nバハムートの命がかかってるんだ……
+FadeOut	black					.3
+CharacterOff						0
+	ミラロスト	無
+FadeIn	black					.3
+	ミラロスト							はぁ……ねえミラ退屈なんだけど？\nいつまで作戦会議してるのさー
+	ミラロスト	驚き						話し合ったところで、\nミラに勝とうなんて無理なのに……\n……って、え？
+CharacterOff
+StopBgm
+	ディーア	本気2						やるしかない……\n<ruby=アンロック>魔剣解放</ruby><dash=2>!!
+	ミラロスト	無						…………!!
+Se	光3
+FadeOut	white					1
+CharacterOff
+	ミラ	驚き
+Wait						.2
+FadeIn	black					.5
+	ミラ							ぅおっととと、ふわぁぁ……\nなーにマスターさん
+	ミラ	通常						ミラちゃんお昼寝して、て……
+Param	character_grayout=false
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+Wait						1.5
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+Wait						1.5
+CharacterOff
+	ミラロスト	驚き
+Wait						1.5
+CharacterOff
+	ミラ							…………え
+	ミラロスト	無						…………うわ
+Bgm	緊迫
+	ミラ							うえっ、ええ……っ!?
+If	isdebug==true
+CharacterOff
+Jump	*E_393_04
+EndIf
+EndScenario
+
+# E_393_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	市街地A
+	ミラ
+FadeIn	white					.5
+Tween	ミラ	PunchPosition	y=50				NoWait
+	ミラ							うえっ、ええ……っ!?\nあ、あれっ？
+	ミラ							ど、どうなってるの？？\nなんでみんなそんなに怪我して……
+CharacterOff
+	ミラロスト	無						あーあ、出てきちゃった……
+CharacterOff
+	ミラ	驚き
+Tween	ミラ	PunchPosition	y=50				NoWait
+	ミラ							びくっ!?\nあ、あなた、その魔力……
+	ミラ	通常						もしかして、ミラちゃん……？
+CharacterOff
+	ミラロスト	無						……せいかい\nはじめまして、<ruby=ミラちゃん>こっち側</ruby>
+CharacterOff
+	ミラ							…………そっか\n使ったんですね、その力を
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	オメガ							ミラちゃん……？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							やれることは全部やりたい\n……わかってくれるか、ミラ
+CharacterOff
+	ミラ							びくぅ……とか、言ってられないって\nことですよね……\nでも、うん……はい……
+	ミラ							ミラちゃんがやったのなら……\nミラちゃんがやるしかないですもんね
+CharacterOff
+	ミラロスト	悔しい						…………
+CharacterOff
+	ミラ							……いきます\n可能性の補正<dash=2>、聖竜王\n抑止の魔竜バハムート=ミラ……!!
+CharacterOff
+	黒グラデーション		エフェクト表
+	ミラロスト	無						やっぱり<ruby=ミラちゃん>こっち側</ruby>の\n抑止力を使うよねー……
+	ミラロスト	ニヤリ						…………はぁ\n困ったなぁ、困ったなぁ……
+CharacterOff	ミラロスト
+	ミラロスト	ニヤリ拡大	エフェクト裏					……計算通りすぎて、\n本当に困っちゃう♪
+If	isdebug==true
+CharacterOff
+Jump	*E_393_05
+EndIf
+EndScenario
+
+# E_393_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	市街地A
+	ディーア	悔しい2	1_2
+	ミラ	泣き	2_2
+FadeIn	white					.5
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+	ディーア
+Tween	ミラ	PunchPosition	y=50				NoWait
+	ミラ							ひゃあああっ!?
+	ディーア							ミラ……!?
+CharacterOff
+	ミラロスト	ニヤリ						ふふ、あはは、あははは!!
+	ミラロスト							どうせ、<ruby=ミラちゃん>こっち側</ruby>の抑止力で\nミラを止めて、その間に\n魔術リンクを切ろう<dash=2>
+	ミラロスト							とか、思ってたんでしょ♪
+	ミラロスト	笑い						ざーーんねん♪\nぜーんぶミラの計算通り♪
+CharacterOff
+	ミラ	泣き	2_2
+	ディーア	悔しい2	1_2					どういうことだ……？\n抑止力が機能していない……？
+	ミラ	驚き						うぅ……
+CharacterOff
+	ミラロスト							抑止力っていうのはね、犯しては\nいけない領域を犯して行き過ぎて\nしまったものを止める作用<dash=2>
+	ミラロスト							神様がバランスを取るために作った\nシステムのこと
+	ミラロスト	笑い						だとしたら？\nミラというこの世界の異常値を\n止められるのは<ruby=ミラちゃん>こっち側</ruby>だけ♪
+	ミラロスト	ニヤリ						でも<ruby=ミラちゃん>こっち側</ruby>は、抑止力の正しい\n使い方なんて知らないもんね？
+	ミラロスト							抑止力を使ったことのない……\nいや、使おうとさえしなかった\n<ruby=ミラちゃん>こっち側</ruby>は!!
+CharacterOff
+	ディーア	悔しい2	1_2
+	ミラ	泣き	2_2					…………っ
+CharacterOff
+	ミラロスト							<dash=2>だから<ruby=ミラちゃん>こっち側</ruby>は\nより強いものにしかその力を\n向けることができない
+	ミラロスト							ミラにその力を向けた瞬間、\n<ruby=ミラちゃん>こっち側</ruby>は竜王バハムートの\n抑止力じゃなくなった
+	ミラロスト	ニヤリ						ミラに挑んだ時点で\n<ruby=ミラちゃん>こっち側</ruby>の負け確なんだよ♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							……マスターさん、この子……\nバハムートちゃんの……魔力を……
+	ディーア							なっ……!!
+CharacterOff
+	ミラロスト	笑い						……にゃは♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							そうか……!!\n今のミラにはバハムートの力を\n止めることはできない……!!
+	ディーア	悔しい2						だから、魔術リンクで\n逆にバハムートの魔力を使って……!!
+CharacterOff
+	ミラロスト	ニヤリ						にゃはは♪\n魔術リンクは一方通行だと思った？
+	ミラロスト	笑い						ざーんねん♪\n魔力を流すも奪うも\nミラの思うままなので♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							くっ……
+StopBgm
+Shake	バハムート		x=5				NoWait
+	バハムート							…………ぁ
+Bgm	絶望
+	バハムート							…………ひとつだけ\n……それなら、ひとつだけある
+	バハムート							…………バハムートちゃんが<dash=2>
+	ディーア	怒り2						バハムート!!
+	バハムート							……ッ!!
+	ディーア	悔しい2						……変なことは考えるな
+	バハムート							…………うん
+CharacterOff
+Param	character_grayout=false
+	ミラロスト	ニヤリ						ふふ、そうだよバハムートちゃん♪\nもし変なこと考えたら……
+Se	光1
+	アネセサリロゴ	赤	エフェクト表			.7
+StopBgm
+Wait						.5
+Se	光3
+FadeOut	white					.8
+CharacterOff						0
+Param	character_grayout=true
+Bg	廃墟A
+Se	火事
+Se	強風
+Wait						1.5
+Shake	Graphics		x=5 y=5 time=1.5				NoWait
+FadeIn	white					.5
+Wait						1.2
+	バハムート	悔しい	2_2
+	ディーア	絶望2	1_2
+	バハムート							…………ぇ
+StopSe						1
+	ディーア							………………は
+	バハムート							ま、街が…………
+CharacterOff
+Bgm	緊迫
+	ミラロスト	笑い						にゃは♪
+	ミラロスト	ニヤリ						……今ので何人が犠牲になったかな？\nかわいそー♪
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	本気2	1_2
+	ディーア							お前…………!!
+CharacterOff
+	ミラロスト							ねーマスターさん♪\nこれでもまだ、バハムートちゃん\n渡してくれない？
+	ミラロスト							まだバハムートちゃんの方が大事？
+	ミラロスト	笑い						それとも、そろそろ\nバハムートちゃんを犠牲にして\n世界を救う気になってくれた？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							そんなこと……っ!!
+CharacterOff
+	勇者ノミヤ		画面外_左_b
+	男勇者		画面外_左
+Se	走る
+Tween	男勇者	MoveTo	x=90				NoWait
+Wait						.3
+Se	走る
+Tween	勇者ノミヤ	MoveTo	x=-90				NoWait
+Wait						.7
+	男勇者							<dash=2>いたぞ!!
+CharacterOff
+	ミラロスト	無
+Se	斬1
+FadeOut	white					.1
+FadeIn	white					.1
+Tween	ミラロスト	PunchPosition	y=50				NoWait
+	ミラロスト							……っ!?
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							勇者……!?
+CharacterOff
+	勇者ノミヤ		画面外_左_b
+Se	走る
+Tween	勇者ノミヤ	MoveTo	x=800 time=3				NoWait
+	女勇者		2_2
+	男勇者		1_2
+	女勇者							霊獣級災害指定、確認!!
+Se	走る
+Tween	女勇者	MoveTo	x=800 time=2				NoWait
+	男勇者							C班は負傷者の救護！\nそれ以外は散開して\n全方位から攻撃しろ!!
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	本気2	1_2
+	ディーア							やめ……ッ!!
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							……大丈夫だ人間、\nむしろ好都合だ
+	イザナギ							量産型の聖剣などでは、\n聖竜王には傷ひとつ付けられまい
+FadeOut	black					.3
+CharacterOff						0
+	ミラロスト	悔しい				0
+FadeIn	black					.3
+	ミラロスト							鬱陶しいなあ……っ
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+	男勇者
+Shake	男勇者		x=5 time=0.5
+Tween	男勇者	MoveBy	y=-800				NoWait
+Wait						.3
+Se	倒れる
+Wait						.3
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							……くっ\nでも……っ!!
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							撤退するぞ、人間
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							……っ、ああ……!!
+StopBgm
+Se	走る
+Tween	バハムート	MoveBy	x=-1300 time=3				NoWait
+Se	走る
+Tween	ディーア	MoveBy	x=-1300 time=3				NoWait
+Wait						1
+FadeOut	black					.3
+CharacterOff						0
+	　　　　　　　　　　
+Wait						1.5
+Se	強風	TRUE
+FadeIn	black					.3
+	ミラロスト	無						…………はぁ、逃げられちゃった
+	ミラロスト							なあんだ、ちょっと期待してたのに\nあーあ、残念
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	雨の空		エフェクト表			0
+Wait						.2
+FadeIn	white					.3
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale
+	ミラロスト	悔しい
+Wait						.2
+FadeIn	white					.3
+	ミラロスト							…………また、いつもどおりかぁ
+FadeOut	black
+StopSe
+If	isdebug==true
+CharacterOff
+Jump	*E_393_06
+EndIf
+EndScenario
+
+# E_393_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	鍛冶病院
+	鍛冶医クランベリー	怪しい2
+FadeIn	white					.5
+	鍛冶医クランベリー	怪しい2						応急処置は終わったわ\n……随分派手にやられたわね
+	ディーア	悔しい2						……クランさん\n二人はまだ戦えますか
+	鍛冶医クランベリー	悔しい2						しばらくは無理よ\nこれ以上戦えば、取り返しのつかない\nことになってもおかしくないわ
+	ディーア	悔しい2						…………そうですか
+	鍛冶医クランベリー	怪しい2						それにしても<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>の\n聖竜王に、抑止の力で人質にされた\n状態のバハムート……
+	鍛冶医クランベリー							……マリーから少し状況は\n聞いていたけれど、思ったより\n切迫しているようね
+	ディーア	悔しい2						……ええ
+	ディーア	怪しい2						しかもロールお嬢様も言っていた通り\n主を持たないロストは恐らく\nいずれ自壊する……
+	鍛冶医クランベリー	怪しい2						そうね……そうなる前に\n手を打たないと、バハムートは……
+	ディーア	驚き2						クランさんの技術で、ミラ=ロストと\nバハムートを繋ぐ術式を\n解除することはできないんですか？
+	鍛冶医クランベリー	悔しい2						……バハムートの状態は見たけれど、\n現実的じゃないわね
+	鍛冶医クランベリー							魔核に絡みついた術式が複雑すぎて、\n剥がすだけでも果てしない\n時間がかかるわ
+	鍛冶医クランベリー	怪しい2						繋がれた魔力回路を無理やり\n断ち切れば簡単だけれど……
+	鍛冶医クランベリー							そんなことをすれば、バハムート側に\n残った抑止の力がバハムートを\n滅ぼすでしょうね
+	バハムート	悔しい						そんな……
+	ディーア	怪しい2						魔力回路を断ち切るにしても、\nまず流れ込む魔力を\nどうにかしないといけないのか……
+	鍛冶医クランベリー	怪しい2						ええ\nでも、ミラ=ロストの力は強大よ
+	鍛冶医クランベリー							対抗するには同等かそれ以上の\n魔力で押し返すしかないけれど……
+	鍛冶医クランベリー	悔しい2						例えバハムートを暴走させたとしても\n足りないでしょうね
+	ディーア	悔しい2						無理やり魔術リンクを切断するのは\n現実的じゃない、か……
+	イザナギ	破損						…………おい、ミラ
+	ミラ	驚き
+Tween	ミラ	PunchPosition	y=50				NoWait
+	ミラ							ぴぐっ!?
+	イザナギ	破損						……なぜあの時、\n本気を出さなかった？
+	ディーア	驚き2						……イザナギ？
+	イザナギ	破損						改造を受けたとはいえ、\nあの兵器もバハムート=ミラなのだ
+	イザナギ							抑止の力が機能しないとしても\nお前は本気を出せばあの兵器に\n対抗しうる力を有しているはずだ
+	イザナギ							……にも関わらず、\n本気を出さなかったな？
+	ミラ							…………
+CharacterOff
+	バハムート	悔しい	3_3
+	オメガ	破損	1_3					イザナギ、\nそんなに責めなくても……!!
+	バハムート							そ、そうですよ！\nミラちゃんだって\n頑張ってくれたんですから……
+CharacterOff
+	イザナギ	破損						状況が状況なのだ、\n甘えたことを言っていられる場合か
+	イザナギ							竜王の命がかかっている\nそして我らに弓を引いたのは\n他でもない"抑止力"だ
+	イザナギ							……我々とて、\n無関係ではいられまいよ
+	ディーア	悔しい2						イザナギ……
+CharacterOff
+	ミラ							でも……ミラちゃんには無理だよ\nバハムートちゃんみたいには\nできないもん
+	ミラ							それに、ミラちゃんは\n不安定な魔剣だし……
+CharacterOff
+	鍛冶医クランベリー	悔しい2						……どうやら、今の所\nミラ=ロストに対抗する術は\nなさそうね
+CharacterOff
+StopBgm
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							……ふん
+	オメガ							…………そんな
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							…………っ
+	バハムート							……やっぱり、バハムートちゃんが\n犠牲になるしか……
+Bgm	絶望
+CharacterOff
+	オメガ	破損						バハちゃん!?
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							ダメだ、そんなのは解決にならない
+	バハムート							でも、そうすれば……\n少なくとも、これ以上無関係の人が\n犠牲になることはないですよ
+	バハムート							それに、あのミラちゃんだって\n救えるかもしれない……
+	ディーア	悔しい2						……それじゃダメなんだ
+	ディーア	怒り2						二人とも救わなきゃ意味がないんだ\nどちらか犠牲にする方を\n選ぶなんて……
+	バハムート							……放っておいたら、\nみんな犠牲になっちゃいますよ\n……それでも、いいんですか？
+	ディーア	悔しい2						…………ッ
+	バハムート							……マスターさんには、\n守らなきゃいけない人が\nたくさんいるんでしょう？
+	バハムート							……心配しないでください\nバハムートちゃんは、\nそのお手伝いをするだけですから
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							…………正気か？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							……もちろん
+	バハムート							……私は自分を犠牲にして\n世界を救った魔剣ですから\n伝承を、もう一度繰り返すだけですよ
+	ディーア	怒り2						……ダメだ、許容できない\nバハムートだって守らなきゃいけない\n仲間の一人だ
+	バハムート							大丈夫ですよ、マスターさん\nバハムートちゃんは\nマスターさんのこと信じてますから
+	バハムート							マスターさんなら、きっとまた\n私を使ってくれますよね？
+	バハムート							たとえ魔核が壊れて、\n記憶を失ったとしても、また……\nバハムートちゃんはそれだけで……
+	ディーア	悔しい2						そんなのは……
+CharacterOff
+StopBgm
+	鍛冶医クランベリー	怒り2						残念だけれど、\nそれは無理でしょうね
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	驚き2	1_2
+	バハムート							…………え？
+CharacterOff
+Bgm	絶望
+	鍛冶医クランベリー	怒り2						……あのロストにやられれば、\n恐らく魔核崩壊だけでは済まないわ
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	驚き2	1_2
+	ディーア							魔核崩壊では済まない……？\nそれってどういう……
+CharacterOff
+	鍛冶医クランベリー	怪しい2						さっき二人の容態を\n確認した時に気付いたのだけれど……
+	鍛冶医クランベリー							二人とも、魔力結晶体が\n不自然な傷つき方をしていたわ
+	鍛冶医クランベリー							まるで存在そのものを抉り取るかの\nように、無理やり傷つけたような……
+	鍛冶医クランベリー							それでいて、的確に竜王系の\n魔力組成の弱点を突いているような
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							…………まさか
+CharacterOff
+	鍛冶医クランベリー	怪しい2						ミラ=ロストはバハムートを\n狙っていると、\nそう言っていたのよね？
+	鍛冶医クランベリー	悔しい2						二人とも、あと少しで\n魔核に到達するほどの\n重傷だったけれど……
+	鍛冶医クランベリー	怒り2						もし、仮にこれが\n"バハムートではなかったから\nこの程度で済んだ"のだとしたら
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							…………ッ!!
+CharacterOff
+	鍛冶医クランベリー	悔しい2						あり得ない……\nいえ、あってはならないことだけれど
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>は、\n魔剣の魔核を完全に破壊することが\nできる……？
+	バハムート							…………っ
+CharacterOff
+	鍛冶医クランベリー	悔しい2						ええ……その可能性があるわ\n万能ではないようだけれどね
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							…………そうか、\n確かに違和感はあったんだ
+	ディーア							魔剣を壊すだけなら、\nより強い力をぶつけるだけで\nいいはずだ
+	ディーア	悔しい2						でも、そんなものにわざわざ\n"対魔剣殲滅魔導兵器"なんて\n名前をつけるはずがない……!!
+CharacterOff
+	鍛冶医クランベリー	怒り2						オメガとイザナギが焦っているのも、\n戦ってそれに気付いたからでしょう？
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	イザナギ							…………
+CharacterOff
+	鍛冶医クランベリー	悔しい2						一体誰が、何の目的であんなものを\n作ったのかはわからないけれど……
+	鍛冶医クランベリー							……あんなものが存在し得るのならば\n魔界の勢力図は大きく変わるわね
+	鍛冶医クランベリー	怒り2						……とにかく、あれをバハムートに\n近づけてはいけないわ
+CharacterOff
+	バハムート	悔しい
+	バハムート							でも、クランさん……
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	オメガ							そうだよ！　バハちゃんも、\n自分が犠牲になるとか考えちゃ\nダメだからね!!
+CharacterOff
+	バハムート	悔しい						オメガちゃんも……
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト表
+	バハムート=ミラ=ロスト	<Off>						……もう遅いけどね？
+Se	光3
+FadeOut	white					.5
+Se	火事
+CharacterOff						0
+	ミラロスト	ニヤリ
+Shake	Graphics		x=5 y=5				NoWait
+FadeIn	black					.5
+Wait						1.2
+CharacterOff
+Bgm	緊迫
+	鍛冶医クランベリー	悔しい2						ミラ=ロスト!?
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							もう追いついたなんて……!!
+	ディーア							勇者、たちは……!?
+CharacterOff
+	ミラロスト	ニヤリ						……勇者？\nああ♪
+Se	打1
+FadeOut	white					.1
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+FadeIn	white					.1
+	黒グラデーション		エフェクト表
+	男勇者		画面外_右
+Tween	男勇者	MoveTo	x=0
+ImageEffectOff	SpriteCamera	MotionBlur
+Tween	男勇者	MoveBy	y=-800 time=3				NoWait
+Wait						.3
+Se	倒れる
+Wait						.5
+CharacterOff
+	ミラロスト	笑い						これのこと？
+CharacterOff
+	黒グラデーション		エフェクト表
+	男勇者
+Shake	男勇者		x=5				NoWait
+	男勇者							ぐっ……ぁぁ……
+CharacterOff
+	ミラロスト	笑い						えいっ♪
+Se	突1
+FadeOut	red					.1
+FadeIn	red					.5
+	ミラロスト	無						あーあ♪\nほら、また一人犠牲が増えちゃった
+	ミラロスト	ニヤリ						あなたが大人しくバハムートちゃんを\n渡してくれないからだよ？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							くっ……
+CharacterOff
+	ミラロスト	ニヤリ						さてさて……♪
+FadeOut	black					.1
+CharacterOff						0
+	イザナギ	破損	3_3_b			0
+	オメガ	破損	1_3			0
+FadeIn	black					.1
+Wait						.7
+FadeOut	black					.1
+CharacterOff						0
+	鍛冶医クランベリー	悔しい2				0
+FadeIn	black					.1
+Wait						.7
+	ミラロスト							ふぅーん……\n次はこの人かなぁ♪
+	鍛冶医クランベリー	怒り2						…………っ!!
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	本気2	1_2
+	バハムート							たあああっ!!
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.2
+CharacterOff
+	イザナギ	破損	3_3_b
+	オメガ	破損	1_3
+	オメガ							ちょっと!?\nバハちゃん!?
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							ここで戦うわけにはいかない……\n逃げるぞ、バハムート!!
+	バハムート							はい、マスターさんっ!!
+Se	走る
+Tween	ディーア	MoveBy	x=-1500 time=2				NoWait
+Se	走る
+Tween	バハムート	MoveBy	x=-1500 time=2				NoWait
+Wait						1.5
+FadeOut	black					.5
+CharacterOff						0
+	ミラロスト	無
+FadeIn	black					.5
+	ミラロスト							ふーん……まだ逃げるんだ
+Tween	ミラロスト	PunchPosition	y=50				NoWait
+	ミラロスト	笑い						まいっか♪\nじゃあ追いかけっこしよーっと♪
+CharacterOff
+	ミラロスト	笑い拡大	エフェクト表					にゃは♪\nいつまで逃げられるかなーっ♪
+If	isdebug==true
+CharacterOff
+Jump	*E_393_07
+EndIf
+EndScenario
+
+# E_393_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	遺跡A
+	ミラロスト	無
+FadeIn	white					.5
+	ミラロスト							…………あれ？\n見失っちゃった
+	ミラロスト	笑い						おーいバハムートちゃーん？\nマスターさーん？
+	ミラロスト	ニヤリ						どーせそこらへんに\n隠れてるんでしょー？
+Se	光3
+FadeOut	white					.5
+CharacterOff						0
+Se	火事
+Shake	Graphics		x=10 y=10				NoWait
+FadeIn	white					.5
+Wait						1.5
+CharacterOff
+	黒グラデーション		エフェクト表
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							くっ…………
+	バハムート							マスターさん……!!
+	ディーア	怒り2						こっちだ……!!
+Se	走る
+Tween	バハムート	MoveBy	x=-1300 time=3				NoWait
+Se	走る
+Tween	ディーア	MoveBy	x=-1300 time=3				NoWait
+Wait						1
+CharacterOff
+	ミラロスト	無						おーい、きこえないのー？
+Se	光3
+FadeOut	white					.5
+CharacterOff						0
+	黒グラデーション		エフェクト表
+	バハムート	悔しい	2_2			0
+	ディーア	悔しい2	1_2			0
+FadeIn	white					.3
+Se	打1
+FadeOut	white					.1
+FadeIn	white					.1
+Shake	ディーア		x=5				NoWait
+CharacterOff	黒グラデーション
+	ディーア							ぐっ……!!
+	バハムート							マスターさん!!
+CharacterOff
+	ミラロスト	ニヤリ拡大	エフェクト表					にゃは♪\nみぃつけたぁ♪
+Bgm	緊迫
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							マスターさん！\n大丈夫ですか、マスターさん!!
+	ディーア							ああ、大丈夫だ……\n大丈夫だけど……ッ
+CharacterOff
+	ミラロスト	笑い						もう降参？\nそれともまた追いかけっこする？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+StopBgm
+	ディーア							くっ……
+Bgm	絶望
+	ディーア							考えろ……何か策があるはずだ……\n何か……
+	バハムート							…………マスターさん
+	ディーア							待ってろバハムート、\n今考えてるから……
+	バハムート							…………やっぱり、\nバハムートちゃんが犠牲になるしか\nないですよ
+	ディーア	怒り2						……それじゃ解決にならないって\n言ったろ
+	ディーア	悔しい2						オレは絶対に二人とも\n救ってみせる……\n絶対に……!!
+	ディーア							絶対に……ッ!!
+	バハムート							…………やっぱり、だめですよ
+	バハムート							このままだと、みんな……\n……みんな、死んじゃいますよ
+	バハムート							イザナギも、オメガもミラちゃんも\nクランさんや、リディちゃんだって
+	バハムート							マスターさんの大切な人……全部
+CharacterOff
+Param	character_grayout=false
+	ミラロスト	ニヤリ						…………
+Wait						.2
+Se	光1
+	アネセサリロゴ		エフェクト表			2
+	白背景		エフェクト表2			3
+Wait						2
+CharacterOff
+Param	character_grayout=true
+	バハムート	悔しい						…………それでも、いいんですか？
+	ディーア	悔しい2						………………
+	バハムート	悔しい						<size=40>いいんですか、\nマスターさん!!</size>
+	ディーア	黒2						…………ッ
+	ディーア	本気2						くっ……ああああ……ッ!!!!
+StopBgm
+Se	突1
+FadeOut	red					.1
+CharacterOff						0
+Wait						1
+	バハムート	悔しい				0
+FadeIn	red					.5
+Se	闇1
+	バハムート	暴走				2		ぐっ……ああ……
+	バハムート							……マ、スター、さん
+CharacterOff
+	ミラロスト	ニヤリ						ふふ、ふふふ、あはははは!!
+Bgm	絶望
+	ミラロスト							そう！そうそうそう！\nそれだよマスターさん!!\nミラはそれが見たかったの♪
+	ミラロスト	笑い						にゃはは♪\nこれで、これでやっと<dash=2>
+StopBgm
+FadeOut	black					.1
+CharacterOff						0
+Param	character_grayout=false
+	黒背景		エフェクト表2
+	イベントスチル393A	A2	エフェクト表
+FadeIn	black					.5
+	バハムート=ミラ=ロスト	<Off>						…………ッ!?
+	バハムート=ミラ=ロスト	<Off>						な、に……？\n身体が……重く……
+CharacterOff	黒背景					2
+	バハムート=ミラ=ロスト	<Off>						…………え
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	黒2
+Bgm	Xmasボス
+	ディーア							……この手段だけは、\n取りたくなかった
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	鍛冶病院					0
+Param	character_grayout=true
+	鍛冶医クランベリー	悔しい2
+FadeIn	white					.3
+	鍛冶医クランベリー							対抗するには同等かそれ以上の\n魔力で押し返すしかないけれど……
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+Bg	遺跡A					0
+	バハムート	悔しい	2_2			0
+	ディーア	悔しい2	1_2			0
+FadeIn	white					.3
+	バハムート							……やりましょう、マスターさん\nそれしかないのなら……
+	ディーア							……それは、最後の手段だ
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff
+Param	character_grayout=false
+	イベントスチル393A		エフェクト表
+Wait						.5
+FadeIn	white					.5
+	バハムート	<Off>						ぐっ……あああ……ッ!!\nや、やっと……ッ!!
+	バハムート	<Off>						<dash=2>捕まえた、ミラちゃん!!
+Param	character_grayout=true
+CharacterOff
+	ミラロスト	悔しい						……くっ、魔術リンクを\n切るためにわざと暴走状態に……？
+	ミラロスト							でも、その程度の魔力で何が<dash=2>
+StopBgm						0
+CharacterOff
+Param	character_grayout=false
+	黒背景		エフェクト表
+	イベントスチル393B	B2	エフェクト裏
+	バハムート=ミラ=ロスト	<Off>						<dash=6>え
+CharacterOff	黒背景					2
+	バハムート=ミラ=ロスト	<Off>						…………なに、を……
+Bgm	Xmasボス					5
+	バハムート=ミラ	<Off>						……ミラちゃんには無理だから
+	バハムート=ミラ=ロスト	<Off>						…………まさか、\n抑止力で魔力を打ち消して<dash=2>
+FadeOut	white					.3
+CharacterOff						0
+	イベントスチル393B	B1	エフェクト表			0
+FadeIn	white					.3
+	バハムート=ミラ	<Off>						<dash=2>抑止の器とか、世界を救うとか\n新たなる神だとか、聖竜王とか……
+	バハムート=ミラ	<Off>						ミラちゃんにはそういうの無理だから\n期待されても困るから……
+	バハムート=ミラ	<Off>						……だから、全部託すの
+	バハムート=ミラ	<Off>						ミラちゃんも竜だから！\n全部、ぜんぶ<ruby=バハムートちゃん>竜王</ruby>に託すの<dash=2>！
+Se	光3
+FadeOut	white					2
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_393_08
+EndIf
+EndScenario
+
+# E_393_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	黒背景
+FadeIn	white					.5
+Thread	*E393081
+	バハムート=ミラ	<Off>						びくぅ…！いや、やぁだ！\n助けて、助けてマスターさん!!<speed=0.5>　　</speed>	BrPage
+FadeOut	black					.1
+WaitThread	*E393081
+Bg	廃墟A_過去					0
+StopSe						0
+	　　　　　　　　　　
+Wait						1
+FadeIn	black					.1
+	<param=name>	<Off>						<dash=2>これは、思念…？\n記憶の断片……誰の……？
+	<param=name>	<Off>						……ミラ？\nいや、これは<dash=2>
+FadeOut	black					.1
+CharacterOff						0
+	　　　　　　　　　　
+Bg	黒背景					0
+Wait						1
+FadeIn	black					.1
+	　　　　　　　　　　							<color=blue><dash=2>未来がほしかった</color>
+Thread	*E393081
+	バハムート=ミラ	<Off>						やぁだ！やぁだ!!\nミラちゃんには無理！無理だからぁ！<speed=0.5>　　</speed>	BrPage
+WaitThread	*E393081
+Bg	黒背景					0
+StopSe						0
+	　　　　　　　　　　							<color=blue><dash=2>居場所がほしかった</color>
+Thread	*E393081
+	バハムート=ミラ	<Off>						どうして？\nどうしてこんなことするの…？<speed=0.9>　　</speed>	BrPage
+WaitThread	*E393081
+Bg	黒背景					0
+StopSe						0
+	　　　　　　　　　　							<color=blue><dash=2>自分が自分であるという</color>
+Thread	*E393081
+	バハムート=ミラ	<Off>						え？ また？ またするの…？\nいや！それはいやぁ！\n痛いのはもう嫌ぁぁぁ!!	BrPage
+WaitThread	*E393081
+Bg	黒背景					0
+StopSe						0
+	　　　　　　　　　　							<color=blue><dash=2>確かな証明がほしかった</color>
+Thread	*E393081
+	バハムート=ミラ	<Off>						いや、もう、いや……\nやめて……ください……<speed=0.8>　　</speed>	BrPage
+WaitThread	*E393081
+Bg	黒背景					0
+StopSe						0
+	　　　　　　　　　　							<color=blue><dash=2>だから</color>
+Thread	*E393081
+	バハムート=ミラ=ロスト	<Off>						ひっ……、いえ、大丈夫です……\nはい、わかりました……<speed=0.6>　　</speed>	BrPage
+WaitThread	*E393081
+Bg	黒背景					0
+StopSe						0
+	　　　　　　　　　　							<color=blue><dash=2>それを手に入れるためなら</color>
+Thread	*E393081
+	バハムート=ミラ=ロスト	<Off>						……………はい、わかりました<speed=1.2>　　</speed>	BrPage
+WaitThread	*E393081
+Bg	黒背景					0
+StopSe						0
+	　　　　　　　　　　							<color=blue>\n\n　　　　　　　　　<dash=2>何にでもなる</color>
+FadeOut	black					.5
+CharacterOff						0
+FadeIn	black					.1
+Se	雨
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	廃病院_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	廃村
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+StopSe
+Bg	黒背景					0
+Param	character_grayout=false
+	黒背景		エフェクト表
+	イベントスチル393D	D1	エフェクト裏
+Wait						.1
+CharacterOff	黒背景					2
+	？？？？							<dash=2>見えたか？
+	イベントスチル393D	D2
+	？？？？							<ruby=マスター>未来</ruby>を得たバハムートは、\n世界を支配しうる危険な因子だ
+CharacterOff						0
+	？？？？							……あとは、わかるな？
+	イベントスチル393C		エフェクト表
+	バハムート=ミラ=ロスト	<Off>						……ミラが
+Se	ガードブレイク
+CharacterOff						0
+Wait						.5
+	ミラロストロゴ		effect_a			1
+	バハムート=ミラ=ロスト	<Off>						<dash=2>バハムートを壊します
+CharacterOff						1
+Wait						1
+FadeOut	black					1
+CharacterOff						0
+Bg	遺跡A_過去					0
+StopBgm
+FadeIn	black					1
+	　　　　　　　　　　							<color=blue>竜王<dash=2></color>
+	　　　　　　　　　　							<color=blue>本当に神様がいるかどうかは\nしらないけれど</color>
+	　　　　　　　　　　							<color=blue>きっといるなら安定志向に違いない\nさらに言えば皮肉屋だ</color>
+	　　　　　　　　　　							<color=blue>ミラちゃんみたいな抑止力は\nそうでなければ必要ない</color>
+	　　　　　　　　　　							<color=blue>未来をつかめなかった\n竜王と聖街の伝承は</color>
+	　　　　　　　　　　							<color=blue>ともに抑止力に敗北したのだ</color>
+	　　　　　　　　　　							<color=blue>その顕現であるミラちゃん自身が\n抑止の力を持つというのだから</color>
+Bg	黒背景					0
+	バハムート=ミラ=ロスト	<Off>						<dash=2>性格わるすぎでしょ、神様
+FadeOut	black					1
+CharacterOff						0
+	雨の空		エフェクト表			0
+Wait						.5
+Se	雨	TRUE
+Se	強風	TRUE
+FadeIn	black					.1
+	バハムート=ミラ=ロスト	<Off>						「残念、これであなたの未来は\n　おしまい♪ おつかれさまぁ」
+CharacterOff						0
+StopSe						0
+	　　　　　　　　　　							<color=blue><dash=2>未来を奪った</color>
+FadeOut	black					.1
+	雨の空		エフェクト表
+Wait						.5
+Se	雨	TRUE
+Se	強風	TRUE
+FadeIn	black					.1
+	バハムート=ミラ=ロスト	<Off>						「その程度で竜王だなんて、\n　よほどマスターに恵まれなかった\n　ってことね♪ 笑える」
+CharacterOff						0
+StopSe						0
+	　　　　　　　　　　							<color=blue><dash=2>また、未来を奪った</color>
+FadeOut	black					.1
+CharacterOff						0
+	雨の空		エフェクト表			0
+Wait						.5
+Se	雨	TRUE
+Se	強風	TRUE
+FadeIn	black					.1
+	バハムート=ミラ=ロスト	<Off>						「はぁ、またそうやってあなたは\n　ビクビクおどおどして」
+	バハムート=ミラ=ロスト	<Off>						「本当に目障りよ、聖竜王」
+CharacterOff						0
+StopSe						0
+	　　　　　　　　　　							<color=blue><dash=2>またひとつ、またひとつ</color>
+	雨の空		エフェクト表			0
+	バハムート=ミラ=ロスト	<Off>						「ここもだめかぁ、はぁ……」
+CharacterOff						0
+	　　　　　　　　　　							<color=blue><dash=2>こうして世界は終わっていく</color>
+	　　　　　　　　　　							<color=blue>ミラちゃんと同じ様に、\n未来をつかめずに、終わっていく</color>
+	ミラロストロゴ		effect_d			.5
+Wait						.1
+Bgm	絶望
+	バハムート=ミラ=ロスト	<Off>						いいえ、終わらせたのは自分
+CharacterOff						2
+	バハムート=ミラ=ロスト	<Off>						自分が弱いから
+	バハムート=ミラ=ロスト	<Off>						自分が抑止の力を使えなかったから
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル392L	L2	エフェクト表
+	バハムート=ミラ=ロスト	<Off>						あの時、あの場所で
+	バハムート=ミラ=ロスト	<Off>						役割を果たせなかったから
+	イベントスチル392L	L1				0
+	バハムート=ミラ=ロスト	<Off>						世界は"こう"なってしまって
+CharacterOff						0
+	ミラロスト	絶望
+	ミラロスト							私は"こう"変わってしまって
+	ミラロスト							血に慣れて、絶望に慣れて、
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	雨の空		エフェクト表			0
+	バハムート=ミラ=ロスト	<Off>						自分と同じ顔を斃すことに慣れて、\n自分と同じモノを斃すことに慣れて、
+	バハムート=ミラ=ロスト	<Off>						自分の愛する者を斃すことに慣れた
+	バハムート=ミラ=ロスト	<Off>						全部ぜんぶ
+	バハムート=ミラ=ロスト	<Off>						<dash=2>ミラちゃんのせいだ
+	バハムート=ミラ=ロスト	<Off>						だから<dash=4>
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Param	character_grayout=true
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A
+	ディーア	本気2
+Wait						1.5
+FadeIn	black					1
+	ディーア							オメガ、イザナギ!!\n無事か!?
+CharacterOff
+	黒グラデーション		エフェクト表
+	バハムート=ミラ=ロスト	<Off>						<color=blue><dash=2>来た</color>
+CharacterOff
+	イザナギ	絶望						…………ああ\nようやく来たか、人間……
+	ディーア	悔しい2						イザナギ……!?\nその傷……!!
+CharacterOff
+	バハムート=ミラ=ロスト	<Off>						<color=blue><dash=2>うん、そう、その顔</color>
+CharacterOff
+	オメガ	絶望						マスターちゃん……？
+	ディーア	怒り2						オメガも……\n今クランさんのとこに……!!
+CharacterOff
+Param	character_grayout=false
+	イベントスチル393E		エフェクト表
+	バハムート=ミラ=ロスト	<Off>						<color=blue><dash=2>なつかしいなぁ、愛しいなぁ</color>
+	バハムート=ミラ=ロスト	<Off>						<color=blue><dash=2>今回こそ、今度こそ……</color>
+Param	character_grayout=true
+CharacterOff
+	黒グラデーション		エフェクト表
+	ミラロスト	ニヤリ拡大	エフェクト裏					あっれぇ～？\nやっと帰ってきたんだぁ
+	ミラロスト							その様子だと、ごくひらちゃんは\nダメだったみたいだねぇ
+CharacterOff
+	ディーア	悔しい2						………………お前は
+CharacterOff
+	ミラロスト	笑い拡大	エフェクト表					もー、ミラちゃん\nずっと待ってたんだよ？
+	ミラロスト	ニヤリ拡大						にゃはは♪\nおかえり、マスターさん♪
+CharacterOff
+	黒背景		エフェクト表			0
+ImageEffectOff	SpriteCamera	Sepia
+	バハムート=ミラ=ロスト	<Off>						<color=blue><dash=2>今度こそ、お願い……</color>
+	バハムート=ミラ=ロスト	<Off>						<color=blue>…………助けて</color></color>
+CharacterOff
+If	isdebug==true
+CharacterOff
+Jump	*E_393_09
+EndIf
+EndScenario
+*E393081
+Se	雨
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	廃病院_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	廃村
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	廃病院_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	廃村
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	廃病院_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	廃村
+Wait						.1
+Bg	黒背景
+ImageEffectOff	SpriteCamera	Sepia
+EndThread
+
+# E_393_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bg	遺跡A
+Param	character_grayout=false
+	ミラロストロゴ		effect_a
+	黒背景		エフェクト裏
+FadeIn	black					.5
+Se	ガードブレイク
+ImageEffect	SpriteCamera	Bloom
+CharacterOff	ミラロストロゴ					1.5
+Wait						2.5
+CharacterOff
+ImageEffectOff	SpriteCamera	Bloom
+Param	character_grayout=true
+Se	強風
+	ディーア	本気2						……!!
+	ミラ							マスターさん！
+	ディーア	通常2						あぁ、ミラ=ロストとの魔術リンクが\n完全に断ち切れたみたいだな
+	バハムート	暴走
+Shake	バハムート		x=5				NoWait
+	バハムート							ぐ、がはっ……\nあ、あああ……!!
+	ディーア	本気2						バハムート！大丈夫か！バハムート!!
+StopSe
+Bgm	絶望
+	ミラロスト	ニヤリ破損						ふふふ、あはは！あはははは！\nやってくれたね、<ruby=バハムートちゃん>竜王</ruby>…！\nそして<ruby=こっち側の私>ミラちゃん</ruby>!!
+	ミラ	泣き						はぁ、はぁ……\nこの抑止力は、そんな風に使って\nいいものじゃ……、な……い……
+	ディーア	本気2						ミラ！
+	ミラ	泣き						はぁはぁ、だい、じょうぶ……\nそれよりバハムートちゃんを……
+	ミラロスト	ニヤリ破損						やはりあなたを先に無効化すべき\nだったのね、ミラ
+	ミラロスト	悔しい破損						もっとも警戒すべきは他ならぬ\nこちらの私自身だったなんて
+	ミラ							…………
+	ミラロスト	無破損						正直言うとね？\nあなたには無理だと思ってたのよ
+	ミラロスト							いついかなる時でも\nあなたが抑止の力を使うなんて…
+	ミラロスト							ごめんね、でもあなたは私自身だから\n誰よりあなたが分かるから
+	ミラロスト	悔しい破損						それを超えてきちゃうんだもん\nやられたなぁ、まったく…
+	ミラロスト							…………本当に腹だたしい！
+	ミラ
+Tween	ミラ	PunchPosition	y=50				NoWait
+	ミラ							びくぅ！
+	ミラロスト	無破損						やめてよ、本当は大して慄いても\nいないくせに
+	ミラロスト							あなたが恐れているのは\n抑止の力を使うこと
+	ミラロスト	悔しい破損						バハムートちゃんをはじめ、\n竜王に連なるものを大切なものを\n消してしまうこと！
+	ミラロスト							そして自分自身が抑止の対象に\nなってしまうことを恐れてる
+	ミラ							ち、ちがっ……！
+	ミラロスト	ニヤリ破損						まぁ、怖がりなのは本当だけど♪
+	ミラロスト	笑い破損						ふふ、でも《目的》は達成したから\n別にいっかなぁ
+	ディーア	悔しい2						……!?
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景
+	イベントスチル393A	A1	エフェクト表			0
+Se	火事	TRUE
+Shake	イベントスチル393A		x=3 y=3 time=1000				NoWait
+Se	強風	TRUE
+Bgm	緊迫
+FadeIn	black					.3
+	バハムート=ミラ=ロスト	<Off>						バハムートちゃんは暴走するよ
+	バハムート=ミラ=ロスト	<Off>						竜王として、竜を統べる者として\n竜に連なる全てを率いて、ね
+	バハムート=ミラ=ロスト	<Off>						長らく支配者が不在だった魔界に\n竜王という絶対が降臨するの
+	バハムート=ミラ=ロスト	<Off>						おめでとう、バハムートちゃん♪
+	バハムート	<Off>						<dash=4>ッ
+FadeOut	black					.3
+Param	character_grayout=true
+StopSe
+Bg	遺跡A
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	black					.3
+	ディーア							ま、まさかお前……、\nこうなることまでが計算だったのか
+	ディーア	怒り2						本来それを止める役割だった\nミラの抑止の力を自分に割り当てて
+	ディーア							バハムートを、真の竜王に…
+	ミラロスト	ニヤリ破損						ぶっぶー、全然違うし
+	ミラロスト	笑い破損						言ったじゃん、ミラちゃんは\nバハムートちゃんを斃しにきたの
+	ミラロスト	ニヤリ破損						そういう役割、そういう兵器
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+	イベントスチル392D	D3	エフェクト表			0
+FadeIn	white					.3
+	バハムート=ミラ=ロスト	<Off>						ごくひら……、あなたたちがいう\nごくひらロストはたしかに\n作戦を失敗した
+	バハムート=ミラ=ロスト	<Off>						でもね、同時に成功もしたの
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Sepia
+	ディーア	悔しい2
+FadeIn	white					.3
+	ディーア							……そうか、そういうことか
+	ディーア	怒り2						大包平が、支配者になる未来が、\n消えたんだ……！
+	ミラロスト	ニヤリ破損						まぁ、消えたというより、\nミラちゃんたちが観測していた\n未来ではなくなったということかな
+	ミラロスト	無破損						そういう意味では、全く違うカタチで\n大包平が世界を支配する可能性も\n大いにあるわけだけど
+	ミラロスト	笑い破損						そこまで責任は取れないなぁ♪\nミラちゃんたちはただの兵器だし
+	ディーア	悔しい2						兵器……まさか、まさか…!!\nミラ=ロスト、お前…！
+	ディーア	本気2						くっ、そうか、そうだったのか\nはじめから！\nはじめから……!!
+	ミラロスト	笑い破損						さすが♪ もう気付いたんだね
+	ディーア	悔しい2						……竜王になるのは、オレなんだな
+	ミラロスト	ニヤリ破損						せいかい♪
+	ミラロスト	笑い破損						竜王の伝承をもつとはいえ、\n所詮は魔剣♪\n兵器は人にも神にもなれやしない
+	ミラロスト	ニヤリ破損						なるのはあなただよ、マスターさん
+	ミラロスト	ニヤリ破損						あなたは優しいから、\n暴走するバハムートを装備したまま\nきっと1つになることを選ぶ
+	ミラロスト	笑い破損						竜を統べる魔剣使い\n史上最強の魔竜王の誕生♪
+	ディーア	悔しい2						オレを竜王にして、\nバハムートが支配者になる未来から\nルートを変える……
+	ディーア	怒り2						それがお前の描いた作戦だったのか
+	ミラロスト	無破損						あー……、\nそれでいうとちょっと違うかな
+	ミラロスト	笑い破損						たぶん、あなたは自害するもの
+	ディーア	悔しい2						……な、なに？
+	ミラロスト	ニヤリ破損						だってそうでしょう？
+	ミラロスト							愛する魔剣たち、リディちゃん、\nお世話になっている人たち、\nその全てをあなたが壊せるわけないもの
+	ミラロスト							きっとこう考えるわ
+	ミラロスト							竜王として散ろう、と
+	ミラロスト	ニヤリ破損						きっとこうするんじゃないかしら
+StopBgm
+	ミラロスト	笑い破損						勇者ルルに斃されよう、と
+	ディーア	悔しい2						…………ミラ=ロスト!!\nお前は…！ お前は……!!!!
+Bgm	魔王バトル
+	ミラロスト	笑い破損						ふふ、あはは、あはははは♪\nあなたが"そう"なのは分かってたから
+	ミラロスト	悔しい破損						察しが良くて、知識も多く、\n軽く見えるくせに思慮深い……
+	ミラロスト	ニヤリ破損						こっちのミラの次に警戒すべきは\nどう考えても異能の魔剣使い<dash=2>\nあなただったもの、マスターさん
+	ミラロスト	ニヤリ破損						だから、利用させてもらったの
+	ミラロスト	笑い破損						というわけで、竜王の伝承は\nこれにておしまい♪
+	ミラロスト							無事に竜王バハムートは斃されて\nミラちゃんの役割は完了<dash=2>
+	ミラロスト	ニヤリ破損						おつかれさまでしたぁ♪
+StopBgm						0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	？？？？	<Off>						<dash=4>させない
+Se	光3
+Bgm	Xmasバトル
+FadeOut	white					1
+CharacterOff
+	ミラ		1_3
+	バハムート	暴走	3_3			0
+Wait						.1
+FadeIn	white					.5
+Se	光1
+	バハムート	悔しい				1.5
+Wait						2
+CharacterOff
+	ミラロスト	無破損						<dash=4>え？
+	ミラロスト	悔しい破損						あれ、なんで、なんで暴走しな……
+CharacterOff
+	バハムート	通常	3_3
+	ミラ		1_3					させないよ、ミラちゃんが\nそんなことさせない……
+CharacterOff
+	ミラロスト	驚き破損
+Shake	ミラロスト		x=5				NoWait
+	ミラロスト							抑止の力を、制御したの…？
+	ミラロスト							……!!\nまさか、そんな！
+	ミラロスト	悔しい破損						全部、全部ぜんぶ！\nここまでの流れを予測して？
+	ミラロスト							そんな、準備する時間なんて\nなかったのに…！
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							ちがうよミラ=ロスト
+	ディーア							お前は読み違えたんだ\nミラの勇気を<dash=2>
+	ディーア	本気2						それを信じて受け入れた\nバハムートの勇敢さを<dash=2>!!!
+CharacterOff
+	ミラロスト	悔しい破損						……そん、な…！
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							お前とこっちのミラは違う
+	ディーア							たしかに怖がりで弱気で臆病だけど\nずっとずっと勇敢で強い
+	ディーア	通常2						そして、そのミラの勇気を信じ、\n自分の命をあずけられるほどに
+	ディーア							オレたちのバハムートは\n偉大なる竜王なんだ
+CharacterOff
+	ミラロスト	絶望						<dash=2>ちがう、ちがうちがう！\nこんなのミラちゃんが想像していた\n未来じゃない…！
+	ミラロスト	絶望						ミラちゃんの願う未来は<dash=2>!!!
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							さっきの戦いでお前の思念……\nそして記憶が見えた
+	バハムート	通常						魔術リンクでバハムートちゃんたちが\n繋がった反作用だね
+	バハムート							……ごめんね、全部見えちゃった
+CharacterOff
+	ミラロスト	悔しい破損						……!!
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							今のお前を作った過去を\nオレは否定しない
+	ディーア	悔しい2						過去は変えられない
+	ディーア	怒り2						だが、未来は変えられる
+	ディーア							だからお前もこうやって\nここにやってきたんだ
+	ディーア	本気2						だったら！
+	ディーア	怒り2						同じ様に！…今！\n今から！未来を変えるんだ！
+	ディーア							お前ならできるよ、ミラ=ロスト！
+CharacterOff
+	ミラ							ミラちゃんも、マスターさんの\n言う通りだと思う
+	ミラ							ミラちゃんは、あなたと\n何が違うのかまではわかんない
+	ミラ							でも、ミラちゃんに出来たなら\nきっとあなたにも、できるよ！
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	バハムート							任せて下さい！\nバハムートちゃんが手伝ってあげます
+	ディーア							さぁ、ミラ=ロスト……!!
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト裏
+	ミラロスト	絶望						うるさい、うるさいうるさい!
+Bgm	絶望
+	ミラロスト	絶望						そうやって！\nいつだってそうやって！
+	ミラロスト	絶望						未来は変えられる？\n今から変えよう？
+	ミラロスト	悔しい破損						は！\n笑わせないで!!
+Bgm	魔王バトル
+	ミラロスト							私たちは魔剣！\nただの兵器!!
+	ミラロスト							兵器に未来なんてはじめからないし\nどう使われるかでしかない！
+	ミラロスト							強者の理論に弱者を巻き込まないで
+	ミラロスト							持っている者のやり方に\n持っていない者を巻き込まないで！
+	ミラロスト							決めたの…\n未来を、自分で決めたの！
+	ミラロスト	絶望						誰にも影響されない
+	ミラロスト							誰にも変えさせたりしない
+	ミラロスト	悔しい破損						自分で選んだ未来を、\nミラちゃんは自分で守る!!
+	ミラロスト							他のだれにも邪魔はさせない!!
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+Param	character_grayout=true
+Bg	遺跡A					0
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							くっ……！
+	ディーア							……どうしても、\nやり遂げないといけないのか
+CharacterOff
+	ミラロスト	悔しい破損						ずっとそう言ってるでしょ
+Se	回想
+FadeOut	white					.1
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル393E		エフェクト表
+FadeIn	white					.1
+Wait						.5
+CharacterOff						0
+	雨の空		エフェクト表			0
+Wait						.5
+FadeOut	white					.1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+FadeIn	white					.1
+	ミラロスト	絶望						……止めるなんてできない\n諦めるなんてできない!!
+Se	回想
+FadeOut	white					.1
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル393C		エフェクト表			0
+FadeIn	white					.1
+Wait						.5
+CharacterOff						0
+	イベントスチル393BG		エフェクト表			0
+Wait						.5
+FadeOut	white					.1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+FadeIn	white					.1
+	ミラロスト	絶望						そんな惨めなミラちゃんなんて\n絶対に見せてあげない!!
+	ミラロスト	悔しい破損
+Bgm	Xmasボス
+	ミラロストロゴ		effect_c
+ImageEffect	SpriteCamera	Bloom
+	黒背景		エフェクト裏			1
+Se	光2
+Tween	ミラロストロゴ	ScaleBy	x=2 y=2 time=3				NoWait
+	ミラロストロゴ							……ミラちゃんは、\n壊れるまで必要悪だから
+	ミラロストロゴ							<dash=2>そう在ることを\n選んだんだから!!
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393D)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.3
+Wait						.2
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+ImageEffectOff	SpriteCamera	Bloom
+Param	character_grayout=true
+CharacterOff						0
+Bg	遺跡A					0
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+Shake	バハムート		x=5				NoWait
+	バハムート							でも……っ
+CharacterOff
+	ミラロスト	悔しい破損						何してるの、バハムートちゃん
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							それじゃ……ミラちゃんは……
+CharacterOff
+	ミラロスト	悔しい破損						バハムートちゃんは竜王でしょ!!
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	バハムート							…………っ!!
+CharacterOff
+	ミラロスト	悔しい破損						理不尽には立ち向かうのが\n竜王でしょ？
+	ミラロスト							……世界を救うのが、\nあなたの伝承でしょ？
+	ミラロスト	笑い破損						その代わり、ミラちゃんも\n絶対に手は抜かないからさ
+	ミラロスト	ニヤリ破損						……さあ、構えなよ、\nバハムートちゃん
+CharacterOff
+Param	character_grayout=false
+	イベントスチル393G		エフェクト表
+	バハムート=ミラ=ロスト	<Off>						世界の敵が<dash=2>\n必要悪がここにいるんだから!!
+CharacterOff
+Param	character_grayout=true
+StopBgm
+	バハムート	悔しい						…………そうだね
+Bgm	風属性バトル
+	バハムート							……ミラちゃんのやったことは、\n絶対に許さない
+	バハムート							罪のない人の命を奪ったことは、\n絶対に許さない!!
+	バハムート							絶対に……絶対に
+	バハムート							この竜王が、この竜王バハムートが\n許さないから<dash=2>!!
+Se	光3
+Se	闇3
+FadeOut	white					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Param	character_grayout=false
+	イベントスチル393F		エフェクト表
+FadeIn	white					.3
+	バハムート	<Off>						『異能解放、\n　D-13遺伝子覚醒、\n　神竜回路起動』<dash=2>!!
+	バハムート	<Off>						<ruby=バハムート＝ミラ＝ロスト>聖竜王</ruby>、\n相手に取って不足なし<dash=2>!!
+	バハムート	<Off>						これが<dash=2>世界を救った、\n始原にして頂点たる竜王の力だ!!
+Se	闇3
+FadeOut	white					1
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Bloom
+	イベントスチル393G		エフェクト裏			0
+FadeIn	white					.5
+Se	闇1
+	イベントスチル393H		エフェクト表			2
+	バハムート=ミラ=ロスト	<Off>						…………にゃは♪
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Bloom
+CharacterOff						0
+	イベントスチル393I		エフェクト表			0
+FadeIn	white					.3
+	バハムート=ミラ=ロスト	<Off>						<dash=2><ruby=ロスト>対魔剣殲滅魔導兵器</ruby>LS_13428
+	バハムート=ミラ=ロスト	<Off>						…………聖竜王\nバハムート=ミラ=ロストが受けて立つ
+	バハムート=ミラ=ロスト	<Off>						かかっておいで、<ruby=バハムートちゃん>竜王</ruby>!!
+Se	闇2
+Se	光3
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_393_10
+EndIf
+EndScenario
+
+# E_393_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Se	強風	TRUE
+Bg	遺跡A
+	ミラロスト	泣き破損
+FadeIn	white					.5
+	ミラロスト							…………あぁ
+	ミラロスト	笑い破損						にゃはは……負けちゃった
+	ミラロスト	泣き破損						抑止の力も使って、\n結構本気だったんだけどなあ……
+	ミラロスト							……やっぱりバハムートちゃん\nみたいにはいかないか
+FadeOut	black					.3
+CharacterOff						0
+	バハムート	悔しい	2_2			0
+	ディーア	本気2	1_2			0
+FadeIn	black					.3
+	ディーア							…………大丈夫か、バハムート
+	バハムート							う、うん……大丈夫
+CharacterOff
+	ミラロスト	笑い破損						……にゃはは
+StopSe						2
+Bgm	凱旋
+	ミラロスト	泣き破損						……ミラ、強かったでしょ
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							…………うん、強かった\nでも、私の勝ち
+CharacterOff
+	ミラロスト	泣き破損						…………うん、ミラの負け
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							……やりたいことは、\n成し遂げられたか
+CharacterOff
+	ミラロスト	笑い破損						……うん
+	ミラロスト							……ミラちゃんは、\n最後まで役割を貫いた
+	ミラロスト	泣き破損						これでやっと、ミラちゃんは、\nこの役割から解放される……
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	悔しい2	1_2
+	バハムート							…………それなら、よかった……
+	ディーア							……本当にやり残したことは\nないのか？
+CharacterOff
+	ミラロスト	泣き破損						うん……思い残すことは……\nもう、ないかなあ
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							……そうか
+	ディーア	通常2						なら、新しい役割が必要だな
+CharacterOff
+	ミラロスト	驚き破損						…………え
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	怒り2	1_2
+	ディーア							……ロストの伝承は、\n確かにこの世界に爪痕を残した
+	バハムート							それって……
+	ディーア	通常2						……次はオレが選んでやる
+	ディーア							……いつか迎えに行くから、\nそれまで待ってろ
+CharacterOff
+	ミラロスト	泣き破損						……それが、ミラの新しい役割？
+CharacterOff
+	バハムート	悔しい	2_2
+	ディーア	通常2	1_2
+	ディーア							……ああ
+CharacterOff
+	ミラロスト	泣き破損						…………そっか
+FadeOut	white					.5
+StopSe
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル393K		エフェクト表			0
+FadeIn	white					.5
+	バハムート=ミラ=ロスト	<Off>						………………♪
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=true
+	ディーア	驚き2
+FadeIn	white					.5
+	ディーア							…………!!
+CharacterOff
+Param	character_grayout=false
+	イベントスチル393G		エフェクト表
+	バハムート=ミラ=ロスト	<Off>						…………にゃは♪
+CharacterOff						1
+FadeOut	white					1
+CharacterOff						0
+StopSe
+Se	ガードブレイク
+	　　　　　　　　　　
+Wait						3
+Param	character_grayout=true
+FadeIn	white					1
+Wait						1
+	バハムート	通常	2_2
+	ディーア	怒り2	1_2
+	バハムート							…………行っちゃったね
+	ディーア							……そうだな
+	バハムート							……ミラちゃん、なんて言ってたの？
+	ディーア	あはは2						ああ……なんというか、\n最後の最後まで<dash=2>
+StopSe						2
+FadeOut	white					2
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル393J		エフェクト表			0
+Wait						.5
+FadeIn	white					1
+	バハムート=ミラ=ロスト	<Off>						<color=blue>ああ……</color>
+	バハムート=ミラ=ロスト	<Off>						<color=blue>ミラちゃんがずっと欲しかったのは、\nその言葉だったのかもしれない</color>
+	バハムート=ミラ=ロスト	<Off>						<color=blue>…………でも、ごめんねマスターさん</color>
+	バハムート=ミラ=ロスト	<Off>						<color=blue>ミラは<dash=2>今はまだ悪者だから</color>
+FadeOut	white					.3
+CharacterOff
+	イベントスチル393K		エフェクト表
+FadeIn	white					.3
+	バハムート=ミラ=ロスト	<Off>						<color=blue>にゃは♪</color>
+	バハムート=ミラ=ロスト	<Off>						<size=20><dash=2>あなたの言うことは、\n聞いてあげない♪</size>
+FadeOut	white					1
+CharacterOff						0
+Param	character_grayout=false
+	白背景		エフェクト表			0
+FadeIn	white					.5
+	<param=name>	<Off>						<dash=2>あの子らしい、言葉だったよ
+	　　　　　　　　　　							<color=blue>\n　 ブレイブローグ×ブレイズロスト\n　 　　　　　　　　　　　　<dash=2>終</color>
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_393_11
+EndIf
+EndScenario
+
+# E_393_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Se	強風	TRUE
+Bg	遺跡A
+FadeIn	white					.5
+	ディーア	怒り2						…………待て、ミラ、バハムート
+CharacterOff
+	バハムート	通常	3_3
+	ミラ	驚き	1_3
+Tween	ミラ	PunchPosition	y=50				NoWait
+	ミラ							びくっ!?
+	バハムート							……マスターさん？
+CharacterOff
+StopSe						3
+Bgm	絶望
+	ディーア	悔しい2						オレから離れるな
+CharacterOff
+	ミラ		1_3
+	バハムート	悔しい	3_3					……え、ま、マスターさん？\nでも、ミラ=ロストはもう……
+CharacterOff
+	ディーア	怒り2						……そこにいるんだろう、ドロシー？
+CharacterOff
+Se	闇1
+	ドロシー	ニヤリ				.5		……ほう、見抜いていたか\nやるじゃないか、少年
+Bgm	緊迫
+CharacterOff
+	ミラ		1_3
+	バハムート	悔しい	3_3					……マスターさん、こいつは……？
+CharacterOff
+	ディーア	怒り2						詳しくはわからないが……\nごくひらロストは監視役と呼んでいた
+CharacterOff
+	ドロシー	ニヤリ						そうとも\n私はただの監視役さ
+	ディーア	怒り2						お前たちの目的はなんだ？\n魔剣をあんな風に改造までして……
+	ドロシー	ニヤリ						おいおい説教か？\n勘弁してくれよ
+	ドロシー	怒り						魔剣を壊すのは、\nそれが必要なことだからだ
+	ドロシー							魔剣を改造するのは、\nあれが兵器だからだ
+	ドロシー							兵器を兵器として使って何が悪い？\n兵器で兵器を壊して何が悪い？
+	ドロシー	ニヤリ						知らないなら覚えておくと良い\n戦争とはそういう戦いを\n繰り返すものだぞ、少年
+	ディーア	悔しい2						なんだと……？
+	ドロシー	怒り						まあ私情が混じっていないといえば\n嘘にはなるがね
+	ドロシー	ニヤリ						いい機会だから言っておくが、\n私は魔剣が大嫌いでね
+	ドロシー							ついでに、魔剣に使われている\nお前ら魔剣使いも大嫌いなのさ
+	ディーア	怒り2						人が魔剣に使われているだと……？
+	ドロシー	ニヤリ						自覚していなかったのかい？\nそれとも、人が魔剣を使っている\nとでも思っていたのか？
+	ディーア	怒り2						……違う、魔剣と人は共に歩むものだ
+	ドロシー	ニヤリ						<dash=4>はっ
+	ディーア	怒り2						……オレも一つだけ言っておこう
+	ディーア							魔剣を兵器として扱うお前らを、\nオレは絶対に許さない
+	ディーア							やるぞミラ、バハムート
+CharacterOff
+	バハムート	悔しい	3_3
+	ミラ		1_3					は、はいっ！
+	バハムート							うん、マスターさん!!
+CharacterOff
+	ドロシー	怒り						はぁ、ヘドが出る
+CharacterOff
+Se	闇1
+Param	character_grayout=false
+	イベントスチル393L		エフェクト表
+	魔剣研究者ドロシー	<Off>						まあいい、どうせ仕事は終わりだ\nここからは趣味の時間といこう
+	魔剣研究者ドロシー	<Off>						次こそは、\nがっかりさせてくれるなよ？
+If	isdebug==true
+CharacterOff
+Jump	*E_393_12
+EndIf
+EndScenario
+
+# E_393_12
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bgm	緊迫
+Bg	遺跡A
+	ドロシー	怒り
+FadeIn	black					.5
+	ドロシー							…………そこまでだ
+	ディーア	悔しい2						くっ……
+	ドロシー	怒り						お前……一体何のつもりだ？
+	ディーア	悔しい2						何……？
+	ドロシー	怒り						三文芝居にしたって酷い\nそのぎこちない戦い方はわざとか？
+	ディーア	悔しい2						……なんだと？
+	ドロシー							不自然に見えないとでも思ったのか？
+	ドロシー	怒り						冷静に状況を見ているかと思えば、\n感情的に大振りを繰り返す
+	ドロシー							それでいて、決定的な被弾だけは\n冷静に避け続ける
+Bgm	絶望					2
+	ドロシー	ニヤリ						……ああそうか\nそういうことか\n臭い芝居だと思ったが、お前は<dash=2>
+	ディーア	本気2						<dash=2>隙だらけだぞ、ドロシー
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Bg	遺跡A					0
+	ドロシー	怒り
+Se	ガード
+Param	character_grayout=true
+FadeOut	white					.1
+Tween	ドロシー	MoveBy	x=-50 time=0.5				NoWait
+FadeIn	white					.1
+	ドロシー							……ふん、隙などあるか馬鹿者
+CharacterOff
+	ディーア	悔しい2						ちっ……
+	ドロシー	ニヤリ						まったく、\nうちのとは大違いだな貴様は
+	ディーア	悔しい2						どういう意味だ……？
+	ドロシー	怒り						……ふん、わかっているくせに
+CharacterOff
+	バハムート	悔しい	3_3
+	ミラ		1_3					……マスターさん？
+CharacterOff
+	黒グラデーション		エフェクト表
+	ドロシー	怒り
+	？？？？							いつまでやってるんですかあ？\n仕事が終わったなら\n戻ってきてくださいよう
+	ドロシー	怒り						……ち、バレたか
+CharacterOff
+	ディーア	本気2						待て、ドロシー!!\nお前は何を知っている……!?
+	ドロシー	ニヤリ/フード						さあね\n少なくとも、これ以上お前に\n教えることなんてないよ
+Se	闇2
+CharacterOff						2
+Wait						2
+	ディーア	怒り2						…………ち
+CharacterOff
+	黒背景		エフェクト表
+	<param=name>	<Off>						魔人機関、アネセサリ……
+CharacterOff						0
+	バハムート	悔しい	3_3
+	ミラ		1_3					……マスターさん、大丈夫ですか？
+CharacterOff
+	ディーア	驚き2						あ……、ああ
+	ディーア	通常2						……帰ろう、ミラ、バハムート
+	ディーア							みんな待ってるし、\n魔剣機関に報告もしなきゃな
+CharacterOff
+	ミラ		1_3
+	バハムート	悔しい	3_3					……そうですね
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_393_01
+EndIf
+EndScenario

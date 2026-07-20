@@ -1,0 +1,2772 @@
+# Q2001_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	草原A(火事)
+Bgm	絶望					0
+Param	character_grayout=false
+	ロサ	通信通常				0
+FadeIn	black					1
+	ロサ	通信通常						改竄深度ランクA
+	ロサ	通信通常						融界指数はオーバー7
+	ロサ	通信通常						対象の虚構因子、\nまもなく世界に定着いたします
+	ロサ	通信通常						ご主人様、\n対象の速やかなる撃滅を
+CharacterOff
+	ディーア	目閉じ4						…………
+	ディーア	怒り4						かつて街を壊滅させた冥獣たちが\n再び現れた、か
+	ディーア	怒り4						世界意思め、\nこんなふざけた話をよくも
+StopBgm
+	ディーア	怒り4						……行くぞ、みんな
+FadeOut	black					1
+CharacterOff						0
+Bg	市街地C(火事)					0
+	旅人	通常				0
+Wait						1
+FadeIn	black					.3
+Bgm	バトル
+Shake	旅人		x=2				NoWait
+	旅人	通常						誰か！ 誰か助けてくれ!!\n勇者でも、魔剣使いでも……!!
+CharacterOff
+	Ω級グレイヴ型冥獣		1_2					グルルルル……！
+CharacterOff
+	旅人	通常
+Tween	旅人	PunchPosition	y=10				NoWait
+	旅人	通常						ひぃ……！
+CharacterOff
+	ディーア	本気4						撃て、イーグルフロウ！
+CharacterOff
+	イーグルフロウ	通常2						はいっ……！
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	弓2
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(青)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	市街地C(火事)					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	Ω級グレイヴ型冥獣		1_2
+Shake	Ω級グレイヴ型冥獣		x=3				NoWait
+	Ω級グレイヴ型冥獣							グォオオオオ!?
+Param	character_grayout=false
+CharacterOff
+	イーグルフロウ	通常2						しょ、初弾、命中しました！
+CharacterOff
+	ディーア	怒り4						いいぞ！\n動きを止めたら、次は<dash=2>
+CharacterOff
+	パルチザン	通常						パルが急所にゴイスーな一撃を！
+Se	突2
+FadeOut	white					.2
+CharacterOff						0
+	Ω級グレイヴ型冥獣		1_2			0
+FadeIn	white					.2
+Shake	Ω級グレイヴ型冥獣		x=2				NoWait
+	Ω級グレイヴ型冥獣							ガァ……！
+	集中線		エフェクト表			.2
+	Ω級グレイヴ型冥獣							っ……ルルォオオ！
+CharacterOff
+	パルチザン	通常
+Tween	パルチザン	PunchPosition	y=30				NoWait
+	パルチザン	通常						なっ！\nペキカンな手応えだったのに!?
+CharacterOff
+	ディーア	怒り4						矮小化されたとはいえ\n"獣"の穴埋めなだけはあるな
+	ディーア	怒り4						だが<dash=2>
+CharacterOff
+	ダークオブダーク	通常						普通に普通の、不意打ちですよー
+CharacterOff
+	Ω級グレイヴ型冥獣		1_2
+Wait						.2
+Se	闇2
+FadeOut	black					.5
+FadeIn	black					.5
+Shake	Ω級グレイヴ型冥獣		x=1				NoWait
+	Ω級グレイヴ型冥獣							ォォ…………
+CharacterOff
+	ディーア	怒り4						対象、活動停止……
+	ディーア	悔しい4						CODE:THISWAY、\n<ruby=メモライズ>伝承付記</ruby>……!!
+CharacterOff
+	ディスウェイ	通常
+Tween	ディスウェイ	PunchPosition	y=30				NoWait
+	ディスウェイ	通常						ディスウェイ♪
+Se	光2
+Se	光3
+Se	チャージ
+FadeOut	white					2
+CharacterOff						0
+	Ω級グレイヴ型冥獣					0
+FadeIn	white					1
+StopBgm
+Wait						1
+	Ω級グレイヴ型冥獣
+CharacterOff	Ω級グレイヴ型冥獣					1
+Wait						1
+CharacterOff
+	ダークオブダーク	通常						あら……\n影が無くなっちゃいましたね？\nざんねん……
+Bgm	絶望
+CharacterOff
+	ディーア	悔しい4						まずは一体
+Param	character_grayout=true
+	ディーア	悔しい4						でもロサからの情報だと、\nもう一体いるはずだ
+	ディーア	悔しい4						世界意思が魔剣殺しを感知する前に\n倒して離脱を<dash=2>
+	？？？？					0		キャアアアアア!?
+Param	character_grayout=false
+CharacterOff
+	イーグルフロウ	通常2
+Tween	イーグルフロウ	PunchPosition	y=30				NoWait
+	イーグルフロウ	通常2						ご主人、あそこです！
+CharacterOff
+	Ω級ガントレット型冥獣		1_2					オォ……!!
+CharacterOff
+	酒場のおばちゃん	通常						た、たすけて……
+CharacterOff
+	ディーア	悔しい4						距離が遠い……!!
+Selection	*Q2001_01_01							助ける
+Selection	*Q2001_01_02							助けない
+*Q2001_01_01
+	ディーア	悔しい4						でも、まだ助けられる！\n今すぐに飛び出せば……！
+	黒グラデーション		エフェクト表			.2
+	ディーア	悔しい4						でも、いいのか？
+	ディーア	悔しい4						魔力を移動に割けば、\n防御に隙が生まれてしまう
+	ディーア	悔しい4						そのせいで失敗したら<dash=2>
+CharacterOff
+	酒場のおばちゃん	通常						はやく助け<dash=4>
+Jump	*Q2001_01_03
+*Q2001_01_02
+	ディーア	悔しい4						……くっ
+	黒グラデーション		エフェクト表			1
+	ディーア	悔しい4						ダメ、だ
+	ディーア	悔しい4						ここで無理をすれば\n思わぬ結果につながることもある
+	ディーア	悔しい4						今のオレに、\nそんな失敗は許されない
+	ディーア	悔しい4						リディのためにっ……！
+CharacterOff
+	酒場のおばちゃん	通常						なんで見てるだけ<dash=2>
+Jump	*Q2001_01_03
+*Q2001_01_03
+Se	ザシュ
+FadeOut	red					.2
+	血痕B	通常	エフェクト表			0
+FadeIn	red					.2
+	酒場のおばちゃん	通常						どう、して……
+Tween	酒場のおばちゃん	MoveBy	y=-100 time=1				NoWait
+Se	倒れる
+CharacterOff	酒場のおばちゃん					.5
+Wait						2
+CharacterOff
+	ディスウェイ	通常						うぇーい？
+CharacterOff
+	ディーア	悔しい4						っ…………！
+	ディーア	目閉じ4						これが、正解だったんだ……
+	ディーア	怒り4						奴を排除して、帰るぞ
+Se	強風	TRUE				.5
+CharacterOff						0
+Bg	黒背景					0
+	ディーア	<Off>						どうしてだろう、\nこんな火の海にいるのに……
+	ディーア	<Off>						今日は風がすごく冷たいな……
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_02
+EndIf
+EndScenario
+
+# Q2001_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	大灯台					0
+Param	character_grayout=false
+	地名背景		地名背景			0
+	地名ロゴ	ダフィート	地名ロゴ			0
+	左縦線		左縦線			0
+	左横線		左横線			0
+	右縦線		右縦線			0
+	右横線		右横線			0
+FadeIn	black					1
+CharacterOff	黒背景					1
+Wait						1
+Tween	左縦線	MoveBy	y=-800 time=1.5	easeOutQuart			NoWait
+Tween	左横線	MoveBy	x=-800 time=1.5	easeOutQuart			NoWait
+Tween	右縦線	MoveBy	y=800 time=1.5	easeOutQuart			NoWait
+Tween	右横線	MoveBy	x=800 time=1.5	easeOutQuart			NoWait
+Wait						1.3
+	場所ロゴ	中立世界ユグドラシル　魔剣機関	場所ロゴ			1
+Wait						1
+	　　　　　　　　　　							　
+Tween	左縦線	MoveBy	y=-100 time=6				NoWait
+Tween	左横線	MoveBy	x=-100 time=6				NoWait
+Tween	右縦線	MoveBy	y=100 time=6				NoWait
+Tween	右横線	MoveBy	x=100 time=6				NoWait
+CharacterOff	地名ロゴ					.5
+CharacterOff	場所ロゴ					.5
+CharacterOff	左縦線					.3
+CharacterOff	左横線					.3
+CharacterOff	右縦線					.3
+CharacterOff	右横線					.3
+Wait						1.5
+CharacterOff	地名背景					1
+Wait						1.5
+Bgm	図書館
+	魔剣機関職員					.5		魔導王様！\nまたしても魔剣王が現れました！\nリーマ北東のカルム街です!!
+CharacterOff
+	魔導王ユウ	通常						被害状況は？
+CharacterOff
+	魔剣機関職員							街は壊滅的な被害を受け、\n現着したA.R.G.O.隊による\n救助活動が続いています
+CharacterOff
+	魔導王ユウ	驚き						魔剣王が、\n再び街を襲ったということかい？
+CharacterOff
+	魔剣機関職員							いえ、それが……\n今回は街に現れた冥獣を討伐したと
+	魔剣機関職員							魔剣王は冥獣を倒すと\nすぐに消えてしまったそうです
+CharacterOff
+	魔導王ユウ	驚き						冥獣の討伐？
+CharacterOff
+	魔剣機関職員	通常						はい、地元民が言うには\n突然街の中に現れた冥獣とのこと
+	魔剣機関職員	通常						ただ不思議なことに、\nどんな冥獣だったかは\nよく覚えていないそうで……
+CharacterOff
+	魔導王ユウ	悔しい						またか……
+	魔導王ユウ	悔しい						今回も彼の編成はランクA魔剣が中心\n……隱密行動のためだな
+	魔導王ユウ	悔しい						その編成も現れるたびに変えて、\n我々の追跡を避けることは徹底している
+	魔導王ユウ	ニヤリ						しかし今回も<dash=2>
+CharacterOff
+	魔剣機関職員	通常						例の未登録魔剣、\nCODE:THISWAYを使用したようです
+CharacterOff
+	魔導王ユウ	ドヤ顔						……なるほどね
+	魔導王ユウ	通常						魔剣使いを襲撃したり、\n魔導災害にも関与した疑惑も多数
+	魔導王ユウ	通常						魔剣王は暴走し、\n無軌道に破壊をしているという\n識者もいるが
+	魔導王ユウ	ニヤリ						そんなわけがない
+	魔導王ユウ	ニヤリ						<param=name>ちゃんには\n明確な目的があるよ
+	魔導王ユウ	ニヤリ						おそらく、\nあの奇妙なリディちゃんたちが\n関係しているのだろう
+	魔導王ユウ	ニヤリ						そしてなにより、\n魔剣殺しを再現するCODE:THISWAY
+	魔導王ユウ	通常						ならば背後にいるのは、\nマスターキーか？
+	魔導王ユウ	通常						いや、\nマスターキーがついているにしては\n目的が個人に依りすぎている
+	魔導王ユウ	通常						まして、\nリディちゃんを助けるためなら、\nなぜオレたちにも<dash=2>
+CharacterOff
+	魔剣機関職員							魔導王様？
+CharacterOff
+	魔導王ユウ	通常						ああ、すまない\nつい考え込んでしまった
+	魔導王ユウ	ニヤリ						まったく、\nエデンは例の件で内部が大変だし\nメルトナも不意に音信不通
+	魔導王ユウ	ニヤリ						ただでさえ\n魔界は大混乱しているというのに
+	魔導王ユウ	ニヤリ						君はなにをするつもりなんだい？\n<param=name>ちゃん
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	汗4				0
+Wait						2
+FadeIn	black					1
+Bgm	平和
+	ディーア	汗4						つかれたぁ……\nはやく休みたい……
+	ディーア	汗4						ロサ……！\nなにか食べ物とか<dash=2>
+CharacterOff
+	ロサ	拡大通常	エフェクト表					お還りくださいませ、\nご主人様
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望4	p7
+	ロサ	通常	p3b
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						いきなり辛辣!?
+	ロサ	通常						おや、なにか不満でも？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						もっとなにかあるだろ!?\nメイドさんのお出迎えなんだから！
+	ロサ	通常						それはこの\n世界図書館のクールな副メイド長\nロサのご奉仕を所望すると？
+	ロサ	通常						あれだけ\n魔剣少女を侍らせておいて、\nまだ足りないんですか？
+Tween	ロサ	MoveBy	x=-50				NoWait
+	ロサ	通常						なんてふしだらな
+	ディーア	驚き4						違うって！\nせめて笑顔での出迎えとか！
+	ロサ	通常						なるほど、承知しました
+	ロサ	通常						スマイル一回、百万ヘルです
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						高いっ！
+	ロサ	通常						そもそも私は、\nマリー様のご命令で来た派遣メイド
+	ロサ	通常						ご主人様と\n仲良くするつもりもありませんし
+	ロサ	通常						私に奉仕してほしければ、\nいつものように報酬が必要です
+	ロサ	通常						ということで、\n今回も<dash=2>
+CharacterOff
+	ロサ	拡大通常	エフェクト表					報酬の『ありがとうスタンプ』を\n押してください
+CharacterOff
+	ディーア	怪しい4	p7
+	ロサ	通常	p3b
+Tween	ディーア	MoveBy	x=-100				NoWait
+	ディーア	怪しい4						…………はい
+Se	ポップイン
+Tween	ロサ	PunchPosition	y=30				NoWait
+	ロサ	嬉しい						……にへへ♪
+	ディーア	怪しい4						スマイルは百万ヘルじゃ？
+Tween	ロサ	PunchPosition	y=30				NoWait
+	ロサ	驚き						はっ……！
+	ロサ	通常						い、今のは\nスマイルではありません！
+	ロサ	通常						「この程度で調子に乗るなよ」\nという威嚇の笑顔です
+Tween	ディーア	MoveBy	x=100				NoWait
+	ディーア	悔しい4						物騒すぎるっ!?
+	ディーア	怪しい4						でもスタンプか……
+	ロサ	驚き						な、なんですか……？
+	ディーア	怪しい4						もっと奉仕してくれたら、\nたくさんスタンプ押しちゃうんだけど
+Shake	ロサ		x=3				NoWait
+	ロサ	汗						なななっ……!!
+Tween	ロサ	PunchPosition	y=30				NoWait
+	ロサ	通常						くっ、なんて卑怯なご主人様!!
+	ロサ	通常						スタンプを人質に、\n私にあんなことやこんなことまで\nするつもりですか……!!
+	ロサ	通常						女の敵……!!
+	ディーア	絶望4						だからまだなにも言ってないって!!
+Tween	ロサ	PunchPosition	y=50				NoWait
+	ロサ	通常						言えないことを\nやらせるつもりなんですかっ!?
+	ディーア	絶望4						とにかく落ち着いてくれ！\n副メイド長!!
+StopBgm
+	ロサ	通常						むむむ……わかりました
+	ロサ	通常						こほん、では、\n無事にスタンプもいただいたので、\n今回の作戦総括です
+	ロサ	通常						端的に言って、\nこのままでは埒が明きませんね
+	ディーア	怒り4						…………やっぱりか
+Bgm	作戦会議
+	ロサ	通常						リディ様が目を覚ます兆候も\nありませんし、\n虚構の影響力はますます強まるばかり
+	ディーア	怪しい4						さすがは\n世界意思の権能と言ったところか
+	ロサ	通常						失われたものに代わり、\n矮小化した別のものを当てはめる
+	ロサ	通常						世界を生物と見立てたときの\n自己再生機能に等しいなら、\nこれほど強力なのは当然でしょう
+	ディーア	目閉じ4						そうだな、\nこのままだとオレたちは負ける
+	ディーア	目閉じ4						リディを助けられず、\nリディと共に魔剣伝承そのものが\n人間から失われる
+	ディーア	怒り4						だけどまだ……\nチェックメイトじゃない、だろ？
+	ロサ	通常						ええ、これまでは\n隱密活動が主でありましたが\n大きく動くべき時が来たのです
+	ロサ	通常						先ほど、\nマリー様から連絡がございました
+	ロサ	通常						かつてないほど、\n大規模な虚構が確認できたと
+	ロサ	通常						<ruby=スペアキー>忘れ去られた鍵師</ruby>の言う、\n例の存在が出現したとみられます
+Shake	ディーア		x=2				NoWait
+	ディーア	悔しい4						っ……!!
+	ロサ	通常						推定される改竄深度はSSランク\n融界指数はオーバー13\n危険はこれまでの比ではありません
+	ロサ	通常						いかがなさいますか、ご主人様？
+	ディーア	通常4						答えるまでもないさ、\n今すぐに出発する
+	ディーア	通常4						こんなところで\n足を止めるわけには行かない\nまだこの先には<dash=2>
+Se	回想
+Param	character_grayout=false
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場の地下					0
+	アリスリディ	通常				0
+	         		1_2
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	アリス	通常魔帝				0
+	         		1_2
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	目閉じ4				0
+	         		1_2
+FadeIn	white					.3
+	ディーア	目閉じ4						乗り越えるべき相手は、\nたくさんいるんだからな
+CharacterOff
+	ロサ	通常						では無事の帰還と、\nスタンプをお待ちしています
+CharacterOff
+	ディーア	笑い4						よし、次の目標も決まった！\n行くぞ、リ<dash=2>
+Se	マイクノイズ
+FadeOut	white					.2
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	黒背景					0
+	リディ絶望スチル		エフェクト表			0
+FadeIn	white					.2
+Wait						.5
+StopSe
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場_宿屋					0
+	ディーア	悔しい4				0
+FadeIn	white					.3
+	ディーア	悔しい4						…………っ
+	ディーア	目閉じ4						行ってくる、リディ……
+	ディーア	怒り4						ニーア=グレブ大陸、\n解放の大地メルトナへ
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+	ロサ	通常				0
+Wait						2
+FadeIn	black					.3
+	ロサ	通常						…………
+	ロサ	通常						宿にいるときだけは、\n明るく振る舞うんですね
+	ロサ	通常						<ruby=イコールズ>あのリディ様</ruby>に会うことさえ、\n避けているのに
+	ロサ	通常						本当に不器用で、変な人……
+Se	ドア開く
+CharacterOff
+	リディ	驚き2				1
+	          		1_2
+	リディ？	<Off>	1_2			1		あれぇ？\nマスターの声が聞こえたけど
+	リディ？	<Off>						もしかしてマスター、\nまたお仕事に行っちゃったの？
+CharacterOff
+	ロサ	通常						はい、せわしない方です
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_03
+EndIf
+EndScenario
+
+# Q2001_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	草原B					0
+Param	character_grayout=false
+	地名背景		地名背景			0
+	地名ロゴ	ニーア=グレブ	地名ロゴ			0
+	左縦線		左縦線			0
+	左横線		左横線			0
+	右縦線		右縦線			0
+	右横線		右横線			0
+FadeIn	black					1
+CharacterOff	黒背景					1
+Wait						1
+Tween	左縦線	MoveBy	y=-800 time=1.5	easeOutQuart			NoWait
+Tween	左横線	MoveBy	x=-800 time=1.5	easeOutQuart			NoWait
+Tween	右縦線	MoveBy	y=800 time=1.5	easeOutQuart			NoWait
+Tween	右横線	MoveBy	x=800 time=1.5	easeOutQuart			NoWait
+Wait						1.3
+	場所ロゴ	解放の大地メルトナ	場所ロゴ			1
+Wait						1
+	　　　　　　　　　　							　
+Tween	左縦線	MoveBy	y=-100 time=6				NoWait
+Tween	左横線	MoveBy	x=-100 time=6				NoWait
+Tween	右縦線	MoveBy	y=100 time=6				NoWait
+Tween	右横線	MoveBy	x=100 time=6				NoWait
+CharacterOff	地名ロゴ					.5
+CharacterOff	場所ロゴ					.5
+CharacterOff	左縦線					.3
+CharacterOff	左横線					.3
+CharacterOff	右縦線					.3
+CharacterOff	右横線					.3
+Wait						1.5
+CharacterOff	地名背景					1
+Wait						1.5
+Bgm	平和
+	ディーア	通常4						よしっ！\n国境結界を突破できたな！
+	ディーア	笑い4						シエルたちの計画通り、\n事前に国境要塞を攻略したのが\n良かったよ
+CharacterOff
+	ベルゼ	嬉しい						ふふふ、お口チャック♪
+	ベルゼ	嬉しい						その称賛はすでに想定済みですよ？
+	ベルゼ	嬉しい						せんぱいたちの作戦遂行のため、\n完全完ぺきな計画をご用意しました
+	ベルゼ	嬉しい						この後も\nリリスファミリーに全て任せて\n骨抜きになってください♪
+CharacterOff
+	ルキフェル	通常						はい♪\n幸せ以外感じないくらいに\n先輩をお世話しますね♪
+CharacterOff
+	ディーア	汗4						幸せ以外\n感じなくなるのは困るなぁ
+	ディーア	通常4						それにしても\nメルトナ、か……
+	ディーア	通常4						この風も、空気の味も、\n本当に懐かしい
+CharacterOff
+	ベルゼ	通常						この風が\n六大異変ウィクク=ルー大風穴から\n流れているんですね
+CharacterOff
+	ディーア	驚き4						あれ？\nシエルは知らなかったのか？
+	ディーア	驚き4						リリスファミリーも\n古くから活躍していた魔剣だし\n知ってるものかと
+CharacterOff
+	ベルゼ	通常						知ってはいるのですが、\n体験するのは初めてなんです
+	ベルゼ	通常						わたしが最後にメルトナに来たのは\n第一次魔王獣戦役の前
+CharacterOff
+	ディーア	驚き4						そうか！\n六大異変が発生したのは<dash=2>
+CharacterOff
+	ベルゼ	通常						魔王獣が当時の王たちの策略で\n覚醒したことが原因です
+	ベルゼ	通常						だから妹君、\n氷の魔女リリス様と遠征した時には\nまだ風は吹いていませんでした
+CharacterOff
+	ディーア	怒り4						なるほど、\n今の魔界にとって六大異変は\n当たり前のものだけど
+	ディーア	怒り4						リディが魔界に与えた影響は、\n本当に大きかったんだな
+	ベルゼ	通常						だからこそ、\n"この事態"になっているわけですから
+CharacterOff
+	ディーア	目閉じ4						おかげで、\nまだ世界意思と絶望王に抗える
+	ディーア	悔しい4						リディを取り戻す希望が、\nまだある……
+CharacterOff
+	ベルゼ	通常						せんぱい……
+CharacterOff
+	ルキフェル	通常						ふふふ♪\n怖い顔はおよしになってください♪
+	ルキフェル	嬉しい						それよりも、\n先輩とのお出かけなんですから
+	ルキフェル	嬉しい						私たちが知らないメルトナのことを\n教えてくれませんか？
+CharacterOff
+	ディーア	笑い4						そうだな
+	ディーア	通常4						メルトナと言えば\n自由と自然の国として有名なんだ
+FadeOut	black					.3
+ImageEffect	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	カジノ					0
+	煉獄王セイメイ	通常	1_2			0
+	煉獄剣ヴェルガトゥリオ	通常	2_2			0
+	         		1_3
+FadeIn	black					.3
+	ディーア	<Off>						亡き煉獄王セイメイが、\n民に自主と自治を認めていたことで\n多様な文化が花開いた地
+	ディーア	<Off>						セイメイは腑抜けの王だとか、\n引き籠もりの王だなんて陰口を\n叩かれてもいたけど
+	ディーア	<Off>						自国と民の平穏を愛し、\nいざとなれば民の先頭に立って\n外敵に抗っていた
+	ディーア	<Off>						老獪で、策略家、\nオレとツヴァイクも罠にかけられた
+	ディーア	<Off>						見た目は小さい男の子なんだけど、\n実際は何歳なんだか
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	GrayScale				0
+CharacterOff						0
+Bg	草原B					0
+	ディーア	汗4				0
+FadeIn	black					.3
+	ディーア	汗4						相棒のヴェルガトゥリオからも、\nおじいちゃんって呼ばれていたし
+CharacterOff
+	ベルゼ	通常						七罪王伝承を基盤にした、\nあらゆる罪を浄化する魔剣
+	ベルゼ	通常						原初六魔剣、\n煉獄剣ヴェルガトゥリオですね
+CharacterOff
+	ディーア	通常4						魔王戦争の中で、\n何百年以上も国の平穏を守った\n偉大な王と魔剣だよ
+StopBgm
+	ディーア	目閉じ4						そして最期には<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A(崩壊)					0
+	煉獄王セイメイ	致命傷ニヤリ				0
+	          		1_2
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原B					0
+	ディーア	目閉じ4				0
+FadeIn	white					.3
+	ディーア	目閉じ4						魔界を守るために、\n魔王獣に……
+	ディーア	目閉じ4						本当に立派な王だった
+CharacterOff
+	ルキフェル	通常						お話してくれて、\nありがとうございます、先輩
+	ルキフェル	通常						先輩にとって思い出深い土地で、\n恩人である王様なんですね
+Bgm	絶望
+CharacterOff
+	ディーア	怒り4						だけど、\n少しおかしいような気がする
+	ディーア	怒り4						メルトナの国民はみんな、\nおおらかで穏やかな様子だった
+	ディーア	怒り4						なのに<dash=2>
+CharacterOff
+	女の子	通常						ひっ……！
+Se	走る
+Tween	女の子	MoveBy	x=600 time=2				NoWait
+Wait						1
+CharacterOff
+	ディーア	驚き4						人々に活気がない……\nいや、怯えているようだ
+	ディーア	悔しい4						魔王獣戦役で、\nセイメイと多くの兵が犠牲になって\n昔と同じでいられないのはわかる
+	ディーア	悔しい4						だけどそれ以上に、\nこの国全体が重苦しい感じがする
+CharacterOff
+	ベルゼ	通常						これも、\n虚構の影響でしょうか？
+CharacterOff
+	ディーア	怒り4						まずはロサに連絡をしよう\nより詳しく敵の情報を得ないと
+Se	ホログラム
+CharacterOff
+	ロサ	通信通常						もしもし、ご主人様ですか？
+Se	マイクノイズ
+	ロサ	通信通常						こんなにお■くなる■■■、\nい■■■、なに■■……
+CharacterOff	ロサ					.5
+Wait						.5
+StopSe						0
+CharacterOff
+	ディーア	悔しい4						…………っ！
+CharacterOff
+	ベルゼ	慌て						せんぱい……!!
+Se	走る
+CharacterOff
+	メルトナ王城兵	通常	1_3			.5
+	メルトナ王城兵　	通常	2_3			.5
+	メルトナ王城兵　　	通常	3_3			.5
+	メルトナ王城兵　	通常						動くな、魔剣王!!
+CharacterOff
+	ディーア	驚き4						メルトナの兵……!!
+	ディーア	怒り4						A.R.G.O.所属じゃない、\n王城の兵たちか
+	ディーア	怒り4						まさか、\nここまで動きが早いなんて
+StopBgm
+CharacterOff
+	煉獄王セイメイ	ニヤリ				1		当然だろう？\n魔界を滅ぼした邪悪なる王が\n現れたんだから
+Bgm	緊迫
+CharacterOff
+	ディーア	驚き4						なっ……!?
+CharacterOff
+	煉獄王セイメイ	ニヤリ						やあ、久しぶりだね
+	煉獄王セイメイ	ニヤリ						魔界全ての敵、魔剣王\n<param=name>
+CharacterOff
+	ディーア	驚き4						煉獄王、セイメイ……!?
+CharacterOff
+	煉獄王セイメイ	通常						ずいぶんと\n驚いた顔をするじゃないか
+	煉獄王セイメイ	通常						我がメルトナに踏み入ったというのに\nのんびりしているものだから
+	煉獄王セイメイ	通常						こうなることを予測して、\n誘いをかけているんだと思ったよ
+CharacterOff
+	ディーア	目閉じ4						ああ、\n煉獄王セイメイが健在だったら、\nこうなると予想していた
+	ディーア	目閉じ4						煉獄王は長年をかけて\nメルトナの大地を呪物化させている
+	ディーア	悔しい4						この国は彼の血肉も同然だ
+	ディーア	悔しい4						だから<dash=2>
+	ディーア	悔しい4						こうなる可能性は予想していても、\n外れて欲しいと思っていた
+	ディーア	本気4						世界意思っ……！\nこれは許されない冒涜だぞ!!
+CharacterOff
+	煉獄王セイメイ	ニヤリ						ほう？
+	煉獄王セイメイ	通常						魔剣王が乱心したというのは\n本当らしい
+	煉獄王セイメイ	通常						世界意思などと\nわけのわからないことを\n不法入国の言い訳にするのか？
+	煉獄王セイメイ	通常						ただでさえ、\nウィクク=ルー大風穴が不安定な今
+	煉獄王セイメイ	ニヤリ						一般通過のロリコンならともかく、\n魔剣王となった君は、大きな脅威だ
+StopBgm
+	煉獄王セイメイ	ニヤリ						メルトナを守護する王として、\nその首をつなげたままにはできない
+Bgm	バトル
+	煉獄王セイメイ	通常						さあ、\n勇敢なるメルトナ兵よ
+	煉獄王セイメイ	通常						魔剣王を討ち、\n我らが大地を護ろうじゃないか
+CharacterOff
+	ベルゼ	通常						せんぱい……！
+CharacterOff
+	ディーア	本気4						ああ、行くぞ!!
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_04
+EndIf
+EndScenario
+
+# Q2001_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bg	草原B
+Bgm	バトル					0
+Param	character_grayout=false
+	メルトナ王城兵	通常				0
+Se	ザシュ
+FadeIn	white					.3
+Shake	メルトナ王城兵		x=2				NoWait
+	メルトナ王城兵	通常						ぐぁあああ……！
+CharacterOff
+	ベルゼ	嬉しい						お口チャックですよ、みなさん
+CharacterOff
+	ルキフェル	通常						ふふふ♪
+	ルキフェル	通常						先輩の幸せを邪魔する人なんて、\nここにはいませんよね？
+CharacterOff
+	メルトナ王城兵	通常						なんだこの魔剣は、\n戦うだけで心が乱されていく!?
+CharacterOff
+	煉獄王セイメイ	通常						リリスファミリーか、\n懐かしい顔だ
+	煉獄王セイメイ	通常						氷の魔女から魔剣王に鞍替えとは、\n罪深き魔剣らしい
+CharacterOff
+	ルキフェル	通常						先輩以外の誰になにを言われようと\n私には関係ありません
+	ルキフェル	通常						私は私の全てを使って、\n大切な先輩を幸せにするだけです♪
+	ルキフェル	嬉しい						それになにより、\nあなたはいったいどなたでしょう？
+CharacterOff
+	煉獄王セイメイ	ニヤリ						まったく、不敬な悪魔だ
+CharacterOff
+	メルトナ王城兵	通常						もうしわけ、ありません……\nセイメイ様……！
+CharacterOff
+	煉獄王セイメイ	通常						ああ、気にするな
+	煉獄王セイメイ	通常						敵は罪人とはいえ魔剣王で、\n手にはリリスの使い魔が握られている
+	煉獄王セイメイ	通常						君たちが敗れても仕方ないさ
+	煉獄王セイメイ	ニヤリ						だけどね<dash=2>
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	ザシュ
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393C)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	草原B					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	メルトナ王城兵	通常
+Wait						.5
+Se	ぐちゃ
+	血痕A		エフェクト表			0
+	メルトナ王城兵	通常						ごぼっ……！
+Bgm	絶望
+CharacterOff
+	煉獄王セイメイ	ニヤリ						五体満足で敗れるとは、\nなにをしている？
+	煉獄王セイメイ	ニヤリ						敵は我らが国を侵した罪人で、\nこれは祖国を守るための戦いだ
+	煉獄王セイメイ	ニヤリ						失敗は許されないし\nそんな愚か者はメルトナにいらない
+	煉獄王セイメイ	ニヤリ						肉片全てを失っても\n敵に喰らいつくくらいしろよ
+CharacterOff
+	メルトナ王城兵	通常						ひいっ……！
+CharacterOff
+	ディーア	本気4						やめろ……！
+CharacterOff
+	煉獄王セイメイ	通常						おや？\n魔剣王はなにか言いたげだな？
+CharacterOff
+	ディーア	悔しい4						その兵たちは立派に戦った！\nまして自分の兵を<dash=2>
+CharacterOff
+	煉獄王セイメイ	通常						甘いな、魔剣王
+	煉獄王セイメイ	ニヤリ						だが領土を持たぬ王に、\n国を治める責任など理解できないか
+CharacterOff
+	ディーア	悔しい4						なにっ？
+CharacterOff
+	煉獄王セイメイ	ニヤリ						僕は国を守るためなら何でもする
+	煉獄王セイメイ	ニヤリ						どんな非道も策謀も行い、\n自国のみを守護する
+	煉獄王セイメイ	ニヤリ						それが民が望む王の姿だ
+CharacterOff
+	ディーア	本気4						違うっ！
+	ディーア	悔しい4						薄っぺらい物真似で、\nセイメイの行いを穢すな!!
+	ディーア	悔しい4						確かに国を守るために\nセイメイは策略や呪術も用いた！
+	ディーア	本気4						だけどそれ以上に、\nあの人は国民を愛していた！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地A(崩壊)					0
+	煉獄王セイメイ	致命傷ニヤリ				0
+FadeIn	white					.3
+	煉獄王セイメイ	致命傷ニヤリ						僕は僕のなすべきことをする\n君は、君がなすべきことをすればいい
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原B					0
+	ディーア	悔しい4				0
+FadeIn	white					.3
+	ディーア	悔しい4						民と国を愛し抜き、\n魔王獣にも立ち向かって\n散っていったんだ!!
+	ディーア	悔しい4						姿と力を真似ても、\nお前はセイメイとは別物だ!!
+	ディーア	本気4						そうだろう、虚構伝承!!
+CharacterOff
+	煉獄王セイメイ	ニヤリ						なるほど
+CharacterOff
+	メルトナ王城兵	通常						セイメイ様が、散った……？\nなんのことだ？
+CharacterOff
+	煉獄王セイメイ	ニヤリ						妄言に耳を貸すな
+	煉獄王セイメイ	通常						メルトナの民よ\n君たちの王はここに健在だ
+	煉獄王セイメイ	通常						ニーア=グレブの主、\nメルトナ王セイメイが保証しよう
+	煉獄王セイメイ	ニヤリ						この国を乱す大罪人は、\n煉獄の炎で滅ぼし尽くすと
+StopBgm
+CharacterOff
+	ディーア	悔しい4						セイメイの散り様まで\n忘れさせたのか
+	ディーア	悔しい4						虚構の影響が\nここまで進んでいたなんて
+Bgm	魔獣バトル
+CharacterOff
+	煉獄王セイメイ	ニヤリ						もう囀るな、罪人
+Se	チャージ
+	オーラ炎		エフェクト表			1
+	煉獄王セイメイ	ニヤリ						煉獄の戸を開く\n<ruby=これなる>是成</ruby>は罪を灌ぎ、\n戒め、浄化する檻
+	煉獄王セイメイ	ニヤリ						怒れ、貪れ、妬め、驕れ、犯せ、\n求めよ、そして堕ちよ
+	煉獄王セイメイ	ニヤリ						某は洗礼の秘跡、その血に、<ruby=からだ>肉体</ruby>に、\n魂に刻まれた七度の死を律する者<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	12章スチルU		エフェクト表			0
+FadeIn	black					.3
+	煉獄王セイメイ	<Off>						我が名はメルトナ当主\n煉獄王セイメイ<dash=2>!!				スチルを使う
+	煉獄王セイメイ	<Off>						頭を垂れて懺悔せよ、\n魔剣王<dash=2>!!
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_05
+EndIf
+EndScenario
+
+# Q2001_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	red					0
+StopSound
+Bg	草原A(火事)
+Bgm	魔王バトル					0
+Param	character_grayout=false
+	ディーア	悔しい4
+Se	火3
+FadeIn	red					.3
+	オーラ炎		エフェクト表			1
+	ディーア	悔しい4						くっ……！
+CharacterOff	オーラ炎					1
+	ディーア	悔しい4						七罪王伝承を根源とした、\n罪を付与する多彩な呪術……
+	ディーア	悔しい4						そしてその罪ごと人を浄化する\n防御不可能の炎……！
+	ディーア	悔しい4						確かに本物と同等、\nいやそれよりも<dash=2>
+	ディーア	悔しい4						やはり<dash=2>
+CharacterOff
+	煉獄王セイメイ	ニヤリ						まだ形を残しているとは、\nやるじゃないか
+	煉獄王セイメイ	ニヤリ						狂気に堕ちても\n腕までは腐っていないようだ
+CharacterOff
+	ディーア	悔しい4						お前とオレが戦うのは\nこれが初めてだろ
+	ディーア	悔しい4						借り物の記憶で、\n知ったように語るんじゃない
+CharacterOff
+	ルキフェル	通常						なにより、\n先輩と私の邪魔をするだけじゃなく\n心まで惑わせるなんて許せません
+	ルキフェル	通常						幸せのお邪魔虫がブンブンと\nうるさいです
+CharacterOff
+	ベルゼ	通常						どんな状況にも\n対処する準備はできているんです
+	ベルゼ	通常						あなたは\nもうお口チャックしてください
+CharacterOff
+	煉獄王セイメイ	通常						だがいくら対処しようとも、\nここは僕の領地、僕の国
+	煉獄王セイメイ	通常						全てを煉獄王が守り、支配する
+	煉獄王セイメイ	通常						いかに氷の魔女の眷属といえど、\nメルトナで僕に敵うものか
+	煉獄王セイメイ	通常						罪と共に消え去れ
+Se	光2
+	12章スチルS1		effect_c			.5
+Tween	12章スチルS1	ScaleBy	x=5 y=5				NoWait
+Wait						.5
+Se	光2
+	12章スチルS2		effect_b			.5
+Tween	12章スチルS2	ScaleBy	x=6 y=6				NoWait
+Wait						.5
+Se	光2
+	12章スチルS3		effect_a			.5
+Tween	12章スチルS3	ScaleBy	x=7 y=7				NoWait
+Wait						.5
+Se	光3
+Se	火3
+Se	闇3
+FadeOut	white					1
+CharacterOff						0
+	          					0
+	土煙		エフェクト表			1
+FadeIn	white					.5
+Wait						2
+CharacterOff
+	煉獄王セイメイ	ニヤリ						これで<dash=2>
+Se	走る
+CharacterOff
+	ディーア	本気4				.5		今だ……!!
+CharacterOff
+	煉獄王セイメイ	驚き						なにっ!?
+CharacterOff
+	集中線		エフェクト表
+	ディーア	本気4						あと一歩……!!
+Selection	*Q2001_03_01							進む
+Selection	*Q2001_03_02							退く
+*Q2001_03_01
+StopBgm						0
+	ディーア	悔しい4						この可能性に賭けて……!!
+CharacterOff						0
+Se	マイクノイズ	TRUE
+Bg	黒背景					0
+	ディーア	<Off>						本当に？
+	ディーア	<Off>						罠の可能性はないのか？
+	ディーア	<Off>						世界意思の尖兵が\nこんな隙を見せるのか？
+	ディーア	<Off>						あまりに都合が良すぎる
+	ディーア	<Off>						よく考えろ
+	ディーア	<Off>						もし失敗したら、\nリディを助けられない
+Jump	*Q2001_03_03
+*Q2001_03_02
+	ディーア	悔しい4						いやっ、待て……
+StopBgm						0
+CharacterOff						0
+Se	マイクノイズ	TRUE
+Bg	黒背景					0
+	ディーア	<Off>						これは罠じゃないか？
+	ディーア	<Off>						世界意思の尖兵が\nこんな隙を見せるはずがない
+	ディーア	<Off>						確かにチャンスだけど\nもう失敗なんて許されない
+	ディーア	<Off>						ここは攻め込まずに\nもっと確実なチャンスを狙うべきだ
+	ディーア	<Off>						でも……\nそんなチャンスが来るのか？
+Jump	*Q2001_03_03
+												腕が痛む
+*Q2001_03_03
+StopSe
+StopBgm
+FadeOut	black					.2
+CharacterOff						0
+	痛む腕スチル	通常	エフェクト表			.5
+Se	闇1
+FadeIn	black					.2
+Wait						1
+FadeOut	black					.2
+CharacterOff						0
+Bg	草原A(火事)					0
+	ディーア	悔しい4				0
+FadeIn	black					.2
+Shake	ディーア		x=3				NoWait
+	ディーア	悔しい4						ぐっ……!!
+Bgm	魔獣バトル
+CharacterOff
+	ベルゼ	慌て						せんぱいっ!?
+CharacterOff
+	煉獄王セイメイ	ニヤリ						ハハハ……！
+CharacterOff
+	ディーア	悔しい4
+Wait						.5
+Se	光1
+Se	コインロック
+FadeOut	white					.2
+	鎖エフェクト前		エフェクト表			0
+	鎖エフェクト後ろ		エフェクト裏			0
+FadeIn	white					.2
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望4						あぁああああ!?
+CharacterOff
+	煉獄王セイメイ	ニヤリ						終わりだな、魔剣王
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ディーア	悔しい4						なんだ、この術式は……？
+	ディーア	悔しい4						体が動かない……\n力も……！
+CharacterOff
+	煉獄王セイメイ	ニヤリ						それが君の罪の重ささ
+	煉獄王セイメイ	通常						知っての通り、僕は浄罪の王
+	煉獄王セイメイ	通常						そんな罪悪感を抱えたままで\n勝てると思ったのか？
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ディーア	驚き4						罪悪、感……？
+CharacterOff
+	煉獄王セイメイ	通常						自覚もないとは愚かだな
+	煉獄王セイメイ	通常						敵を前に手をこまねく様は\n惨めな敗残兵そのものだったぞ？
+	煉獄王セイメイ	ニヤリ						あと一歩踏み込めれば、\nこの首をとれていただろうに
+	煉獄王セイメイ	ニヤリ						それとも、\nその大層な腕が傷んだとでも\n言い訳するのか？
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ディーア	悔しい4						それは……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	魔術空間(赤)					0
+	世界意思					0
+FadeIn	white					.3
+	世界意思							お前が強く在れたのは、\n鍵の力で未来を知っていたからだ
+	世界意思							犠牲を積み重ね、\n正解を知らなければ歩けない愚か者
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	全能殺しリディ	絶望				0
+	血痕B		エフェクト表			0
+FadeIn	white					.3
+	全能殺しリディ	絶望						っ…………
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原A(火事)					0
+	鎖エフェクト前		エフェクト表			0
+	鎖エフェクト後ろ		エフェクト裏			0
+	ディーア	絶望4				0
+FadeIn	white					.3
+	ディーア	絶望4						オレは、また間違えた？
+CharacterOff
+	煉獄王セイメイ	ニヤリ						懺悔の続きは、来世でするといい
+	煉獄王セイメイ	通常						さらばだ、愚かなる卑怯者よ
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	光3
+Se	闇3
+Se	弓2
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(青)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	草原A(火事)					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	土煙		エフェクト表			1
+	煉獄王セイメイ	驚き						これは……！
+Bgm	勇者バトル
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り				.5		総員攻撃!!\n魔剣王を助け出すの!!
+CharacterOff
+	メルトナ王城兵	通常						ヴェルガトゥリオ様!?
+	メルトナ王城兵	通常						出奔されたという噂は\n本当に<dash=2>
+CharacterOff
+	ディーア	悔しい4
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+Wait						.3
+CharacterOff	鎖エフェクト前		エフェクト表			.5
+CharacterOff	鎖エフェクト後ろ		エフェクト裏			.5
+Wait						.3
+	ディーア	驚き4						拘束呪術が……！
+CharacterOff
+	反乱軍兵	通常
+Tween	反乱軍兵	MoveBy	x=100 time=0				Add
+Tween	反乱軍兵	RotateTo	y=180 time=0				Add
+	反乱軍兵	通常						無理に戦うな！\n魔剣王様を保護できればいいっ!!
+CharacterOff
+	ディーア	驚き4						この兵たちは\nオレの味方をしてくれるのか？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						久しぶりね、魔剣王
+CharacterOff
+	ディーア	怒り4						ヴェルガトゥリオ……
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						悪いけど、\n悠長に話している暇はないの
+CharacterOff
+	煉獄王セイメイ	通常						久しぶりじゃないか、ヴェル
+	煉獄王セイメイ	通常						家出娘が\nようやく帰って来る気になったかな？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						ふざけた偽物の分際で\nヴェルの名を気安く呼ばないで
+	煉獄剣ヴェルガトゥリオ	怒り						いくら同じ姿、同じ声でも\nあたしの王はセイメイだけよ
+CharacterOff
+	煉獄王セイメイ	通常						まったく、困ったものだ
+	煉獄王セイメイ	通常						君の力は\n呪術で代用できるとはいえ
+	煉獄王セイメイ	通常						君が煉獄王と共にいないと、\nどうにも体裁が悪いというのに
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						くっ……
+	煉獄剣ヴェルガトゥリオ	怒り						今は退くわよ、魔剣王
+	煉獄剣ヴェルガトゥリオ	怒り						誰かっ！\n転送の魔法陣を!!
+CharacterOff
+	ディーア	悔しい4						待ってくれ！\nオレはあいつを倒さないと!!
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						この状況じゃ\nそんなの無理だってわかるでしょ!?
+Se	チャージ
+	オーラ青		エフェクト表			1
+	煉獄剣ヴェルガトゥリオ	怒り						急いでっ！
+CharacterOff	煉獄剣ヴェルガトゥリオ
+	ディーア	悔しい4						くそっ……
+CharacterOff	ディーア					1
+Wait						1
+StopBgm
+CharacterOff
+	メルトナ王城兵	通常						セイメイ様……\nヴェルガトゥリオ様はなぜ？
+CharacterOff
+	煉獄王セイメイ	通常						おそらく彼女の乱心も\n魔剣王の仕業なのだろう
+	煉獄王セイメイ	通常						メルトナの総力をあげて\n魔剣王と反逆者たちを見つけ出せ
+CharacterOff
+	メルトナ王城兵	通常						は、はい……！
+CharacterOff
+	煉獄王セイメイ	通常						さて……
+	煉獄王セイメイ	通常						もう虚構伝承の存在まで\n嗅ぎつけていたとは
+	煉獄王セイメイ	通常						魔剣王に入れ知恵をしたのは\nどこの誰かな？
+FadeOut	black					1
+CharacterOff						0
+Bg	荒野					0
+	煉獄剣ヴェルガトゥリオ	怒り				0
+Wait						2
+FadeIn	black					1
+Bgm	絶望
+	煉獄剣ヴェルガトゥリオ	怒り						ここまで来れば安心よ
+CharacterOff
+	ディーア	怒り4						あ、ああ……
+	ディーア	目閉じ4						助かったよ
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						っ……
+	煉獄剣ヴェルガトゥリオ	怒り						なによ、その覇気のない声は？
+	煉獄剣ヴェルガトゥリオ	怒り						あの情けない戦いは……!!
+CharacterOff
+	ディーア	怒り4						………………
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						あなたなら、\n魔剣王ならって思っていたのに
+Shake	煉獄剣ヴェルガトゥリオ		x=1				NoWait
+	煉獄剣ヴェルガトゥリオ	怒り						どうして\nこんなに腑抜けてしまったの？
+	煉獄剣ヴェルガトゥリオ	怒り						誇り高き煉獄王の魔剣として！
+	煉獄剣ヴェルガトゥリオ	怒り						魔剣王、\nあたしは今のあなたを認めない!!
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_06
+EndIf
+EndScenario
+
+# Q2001_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	廃墟A
+Bgm	図書館					0
+Param	character_grayout=false
+	ディーア	驚き4				0
+FadeIn	black					1
+	ディーア	驚き4						ここが、\nヴェルガトゥリオたちの拠点か？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						ヴェルについてきてくれた\nメルトナ兵がここに集まっているわ
+	煉獄剣ヴェルガトゥリオ	怒り						あの偽物は反乱軍なんて呼ぶけど、\n本当の王に忠義を尽くしてくれている\n精兵たちよ
+	煉獄剣ヴェルガトゥリオ	怒り						セイメイが手塩にかけて育てた\n後継者候補もいるわ
+CharacterOff
+	ディーア	怪しい4						確かに手練れ揃いに見えるけど……
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						装備のことは言わないで、\nヴェルたちには余裕なんてないの
+	煉獄剣ヴェルガトゥリオ	怒り						国中から追われて、\n補給もままならない
+	煉獄剣ヴェルガトゥリオ	怒り						でも偽者の暴虐を許せないから\n必死に抗ってる
+CharacterOff
+	ディーア	怒り4						だったらどうして、\nオレを助けてくれたんだ？
+	ディーア	目閉じ4						魔剣王は\n魔界を滅ぼした罪人とされている
+	ディーア	怒り4						信じられる相手じゃないだろう？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						他に、選択がなかっただけよ
+	煉獄剣ヴェルガトゥリオ	怒り						A.R.G.O.っていう\n三国協働の組織ができたけれど
+	煉獄剣ヴェルガトゥリオ	怒り						エデンもエキドナも\n無条件で救援を出してくれる\n相手じゃない
+	煉獄剣ヴェルガトゥリオ	怒り						魔剣機関も世界図書館も、\n三国の内政には不干渉を貫いている
+	黒グラデーション		エフェクト表			1
+	煉獄剣ヴェルガトゥリオ	怒り						それにセイメイは\nあなたに魔界を託していた<dash=2>
+CharacterOff
+	ディーア	怒り4						…………
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						国民の様子は見たでしょ？
+	煉獄剣ヴェルガトゥリオ	怒り						いきなり偽セイメイが現れてから、\n全てがおかしくなった
+	煉獄剣ヴェルガトゥリオ	怒り						ここにいる精鋭を除いた、\n大半の民はセイメイの最期を忘れて\nあの偽者を信じてしまってる
+	煉獄剣ヴェルガトゥリオ	怒り						煉獄王セイメイその人だって
+	煉獄剣ヴェルガトゥリオ	怒り						それで始まったのは、\nセイメイのガワだけを真似た恐怖政治
+	煉獄剣ヴェルガトゥリオ	怒り						国を守るという名目で統制は強化され\n外へ逃げることもできない
+	煉獄剣ヴェルガトゥリオ	怒り						毎日誰かが処刑されて、\n自由を愛した国民は萎縮している
+CharacterOff
+	ディーア	目閉じ4						詳しい状況は理解した
+	ディーア	怒り4						だけど一つだけ疑問がある
+	ディーア	怪しい4						なぜヴェルガトゥリオは\nアンロックされた状態でいられる？
+	ディーア	怒り4						セイメイの逝去から、\nもうずいぶん経っただろう？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						ヴェルの伝承の起源は、\n七罪王だからね
+CharacterOff
+	ディーア	目閉じ4						ああ、なるほど\nセイメイが遺した緊急手段
+	ディーア	目閉じ4						彼の最期の魔力を消費するまでは\n活動できるわけだ
+	ディーア	怒り4						だけど自力で動けるだけで、\n戦力は普通の少女と変わらない
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						だとしても、\nヴェルがいることは役に立つ
+	煉獄剣ヴェルガトゥリオ	怒り						ここのみんなが\n城からヴェルを連れ出してくれて\n反乱の旗頭になれたし
+	煉獄剣ヴェルガトゥリオ	怒り						煉獄王の象徴が、\nその王に逆らっている状況に\n国民も疑問を抱いてくれる
+	煉獄剣ヴェルガトゥリオ	怒り						それでもヴェルは\nセイメイの代わりになれてないけど
+CharacterOff
+	ディーア	怒り4						そうか、\n情報をくれてありがとう
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						ありがとう？
+Shake	煉獄剣ヴェルガトゥリオ		x=3				NoWait
+	煉獄剣ヴェルガトゥリオ	怒り						それだけしか\n言うことはないの？
+CharacterOff
+	ディーア	目閉じ4						他になにを言えって言うんだ
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						あなたは知ってるんでしょう!?
+Tween	煉獄剣ヴェルガトゥリオ	PunchPosition	y=30				NoWait
+	煉獄剣ヴェルガトゥリオ	怒り						偽セイメイの正体も、\nメルトナでなにを企んでいるかも！
+	煉獄剣ヴェルガトゥリオ	怒り						なのに、\nあなたはヴェルたちを助ける\n素振りも見せてくれない
+	煉獄剣ヴェルガトゥリオ	怒り						冷たい顔して、\n自分のことだけ考えてるっ！
+	煉獄剣ヴェルガトゥリオ	怒り						あなたが、希望だったのに
+Tween	煉獄剣ヴェルガトゥリオ	PunchPosition	y=30				NoWait
+	煉獄剣ヴェルガトゥリオ	怒り						セイメイが託した、\nあなたならって思っていたのに!!
+	煉獄剣ヴェルガトゥリオ	怒り						いったい、\nあなたになにがあったのよ!?
+Shake	煉獄剣ヴェルガトゥリオ		x=3				NoWait
+	煉獄剣ヴェルガトゥリオ	怒り						希望王に勝ったあなたは\nそんな情けない人じゃ<dash=2>
+CharacterOff
+	ディーア	悔しい4						期待に応えられなくて、\n悪かったな
+	ディーア	怒り4						でもオレだって、\nお前たちを助ける余裕はない
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						それってブリジット……\nううん、リディちゃんのため？
+CharacterOff
+	ディーア	目閉じ4						…………
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						確かに大事な人を守るために\nなにかを捨てることもある
+	煉獄剣ヴェルガトゥリオ	怒り						だけど王を名乗るなら！\nセイメイだったら民のことも<dash=2>
+StopBgm
+CharacterOff
+	ディーア	悔しい4						理想を押し付けるなよ
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						なんですって？
+Bgm	絶望
+CharacterOff
+	ディーア	悔しい4						お前がオレに求めているのは\nセイメイの代わりになることだろ？
+	ディーア	本気4						だけどオレは、\nセイメイの代わりじゃないし\n代わりになれない！
+	ディーア	悔しい4						あんな風に国も民も守り切った\n立派な王の代わりはできない
+	ディーア	悔しい4						セイメイ王は、もういないんだ
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						っ…………
+	煉獄剣ヴェルガトゥリオ	怒り						分かってるわよ、そんなこと!!
+Se	走る
+Tween	煉獄剣ヴェルガトゥリオ	MoveBy	x=-700 time=1				NoWait
+Wait						1
+CharacterOff
+	ディーア	目閉じ4						…………
+CharacterOff
+	ベルゼ	通常						せんぱい……
+CharacterOff
+	ディーア	目閉じ4						ごめんな、\nシエルもたくさんプランを\n用意してくれたのに
+	ディーア	目閉じ4						オレがあそこでためらうなんて、\n想定外だっただろ？
+CharacterOff
+	ベルゼ	通常						お口チャックです、せんぱい
+	ベルゼ	通常						自分を責めすぎたら、\n本当に動けなくなっちゃいますよ
+CharacterOff
+	ディーア	悔しい4						それでも、\nオレの失敗なのは事実じゃないか
+	ディーア	悔しい4						戦力が劣っていたわけじゃない
+	ディーア	悔しい4						あそこでちゃんと決断できれば、\nチャンスはあったんだ
+	ディーア	目閉じ4						偽のセイメイを倒して、\nヴェルガトゥリオたちにも\n迷惑をかけなかった
+	黒グラデーション		エフェクト表			2
+	ディーア	悔しい4						なのにまた失敗した
+	ディーア	絶望4						そうだよ、\nオレは怖気づいたんだ
+	ディーア	絶望4						未来を知らないだけで、\nこんなに弱くなってしまった
+	ディーア	絶望4						もうわからないんだ、\nいったいどうすれば<dash=2>
+StopBgm
+CharacterOff
+	ルキフェル	拡大嬉しい	エフェクト表					その苦しみ、\n取り除いてあげましょうか？
+Bgm	神秘
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望4	p3
+	ルキフェル	通常	p7b
+	ディーア	絶望4						りり、す……？
+	ルキフェル	通常						先輩は苦しいんですよね？\n悲しくて、辛いんですよね？
+	ルキフェル	通常						もう失敗したくないんですよね？
+	ルキフェル	嬉しい						だったら、\nこのリリスに任せてください♪
+	ルキフェル	嬉しい						私は先輩が苦しむのが嫌です
+	ルキフェル	嬉しい						完全なる幸福に包まれて、\n幸せになってもらいたいんです
+	ルキフェル	嬉しい						だから、もうやめましょう？
+	ルキフェル	嬉しい						苦しいなら、やめましょう？
+	ルキフェル	嬉しい						悲しいなら、止まりましょう？
+	ルキフェル	嬉しい						失敗したくないなら、\nなんにもしないでいいんです
+Tween	ルキフェル	MoveBy	x=-50				NoWait
+	ルキフェル	嬉しい						さあ、私の胸の中へどうぞ♪
+	ルキフェル	嬉しい						ただただ幸せだけを感じて、\n苦しいことを忘れちゃいましょう♪
+	ルキフェル	嬉しい						それができるのわかりますよね？\n今すぐあの<dash=2>
+	ディーア	絶望4						っ……
+Tween	ディーア	MoveBy	x=-50				NoWait
+	ディーア	本気4						やめろっ……！
+Shake	ルキフェル		x=2				NoWait
+	ルキフェル	照れ						ぁ……
+	ディーア	悔しい4						それでも、\nオレは……止まりたくない
+CharacterOff						0
+Bg	黒背景					0
+	ディーア	<Off>						リディを助けたいんだ……
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_07
+EndIf
+EndScenario
+
+# Q2001_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	荒野
+Bgm	雪の街					0
+Param	character_grayout=false
+	煉獄剣ヴェルガトゥリオ	怒り
+FadeIn	black					1
+	煉獄剣ヴェルガトゥリオ	怒り						わかっているわよ、か……
+	煉獄剣ヴェルガトゥリオ	怒り						そうよ、\nわかっているわよ
+	煉獄剣ヴェルガトゥリオ	怒り						もうマスターが、\nこの世にいないことなんて
+	煉獄剣ヴェルガトゥリオ	怒り						あたしは\n目の前で見届けたんだから
+	煉獄剣ヴェルガトゥリオ	怒り						でも<dash=2>
+Se	回想
+FadeOut	white					1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	カジノ					0
+	煉獄剣ヴェルガトゥリオ	通常	p7b			0
+	煉獄王セイメイ	驚き	p3			0
+FadeIn	white					1
+Param	character_grayout=false
+Wait						.5
+ImageEffectOff	SpriteCamera	Sepia				1
+Param	character_grayout=true
+	煉獄王セイメイ	驚き						またそんな\n古い恋愛小説を読んでいたのか？
+Tween	煉獄剣ヴェルガトゥリオ	PunchPosition	y=30				NoWait
+	煉獄剣ヴェルガトゥリオ	通常						古いってなによ！
+	煉獄剣ヴェルガトゥリオ	笑い						これはね、\n恋愛小説のバイブルって\n言われているの♪
+Tween	煉獄剣ヴェルガトゥリオ	PunchPosition	y=30				NoWait
+	煉獄剣ヴェルガトゥリオ	笑い						つまり！\n一番の恋愛が書かれている本！
+	煉獄剣ヴェルガトゥリオ	笑い						すっごく勉強になるんだから♪
+	煉獄王セイメイ	汗						そ、そうか……
+	煉獄王セイメイ	汗						ヴェルが良いって言うなら\nそれで良いんだけど
+	煉獄剣ヴェルガトゥリオ	笑い						ふふふ♪\n今はセイメイのお世話で大変だけど
+	煉獄剣ヴェルガトゥリオ	笑い						いつか素敵な人と恋に落ちて\nヴェルは世界一幸せになるのよ♪
+	煉獄王セイメイ	笑い						罪を束ねた果てにある浄罪の魔剣が\nずいぶんとピュアな夢を抱いたものだ
+	煉獄剣ヴェルガトゥリオ	ニヤリ						感性がよぼよぼの\nおじいちゃんセイメイと違って
+	煉獄剣ヴェルガトゥリオ	ニヤリ						女の子はいつだって、\n恋に恋する乙女なんだから♪
+	煉獄王セイメイ	ニヤリ						へー？
+	煉獄王セイメイ	ニヤリ						まだ恋人候補の名前さえも\n聞いたことがないが？
+	煉獄剣ヴェルガトゥリオ	驚き						セイメイがそれ言うー？
+Tween	煉獄剣ヴェルガトゥリオ	PunchPosition	y=30				NoWait
+	煉獄剣ヴェルガトゥリオ	驚き						セイメイがずーっと\nお城に引きこもっているから\n出会いがないのっ！
+	煉獄王セイメイ	笑い						出不精で悪かったね
+	煉獄剣ヴェルガトゥリオ	ニヤリ						それにセイメイだって\nあたしを手放す気なんてないでしょ？
+	煉獄剣ヴェルガトゥリオ	ニヤリ						もしあったら怒るけど
+	煉獄王セイメイ	通常						もちろんさ\n煉獄剣ヴェルガトゥリオがあるから\n僕はこの国の平和を守れる
+	煉獄剣ヴェルガトゥリオ	笑い						というわけでー♪\n素敵な恋愛は夢に見るだけよ♪
+	煉獄剣ヴェルガトゥリオ	笑い						「いつか」を待つのも\nけっこう楽しいんだから！
+	煉獄王セイメイ	通常						……だけどね、ヴェル
+	煉獄王セイメイ	通常						そのいつかは、\n僕らの別れは遠くないと思うよ
+	煉獄剣ヴェルガトゥリオ	怒り						どうしたのよ、いきなり？
+	煉獄王セイメイ	通常						ヴェルが言う通りに、\n僕はいささか長く生きすぎた
+	煉獄王セイメイ	通常						メルティナとして\n魔王獣を目覚めさせる愚を犯し
+	煉獄王セイメイ	通常						セイメイとしても、\nただ争いを避けて安寧に浸った
+	煉獄王セイメイ	通常						魔王戦争を膠着させたのも、\n僕なりの最善を考えた末だったけど\nどれだけの犠牲を生んだことか
+	煉獄王セイメイ	通常						そろそろ次代に\n未来を託すべき時が来たんだよ
+	煉獄王セイメイ	通常						この王の座も、\n孫娘のように可愛い魔剣のことも
+	煉獄剣ヴェルガトゥリオ	怒り						なによ、本当の本当に\nおじいちゃんみたいなこと言って
+	煉獄剣ヴェルガトゥリオ	通常						でもヴェルは想像つかないなー
+	煉獄剣ヴェルガトゥリオ	通常						四百年以上、あなたと一緒だったから\n新しいマスターって言われても
+	煉獄王セイメイ	笑い						なら感性が古く、\n人生経験だけが豊かなおじいちゃんが\nアドバイスをしよう
+	煉獄王セイメイ	通常						もし僕と別れたら<dash=2>
+StopBgm
+FadeOut	white					1
+CharacterOff						0
+Bg	荒野					0
+	煉獄剣ヴェルガトゥリオ	怒り				0
+Wait						2
+Param	character_grayout=false
+FadeIn	white					1
+Se	強風	TRUE
+	煉獄剣ヴェルガトゥリオ	怒り						せめて、\n新しいマスターに出会うまでは\n見届けてほしかった
+	煉獄剣ヴェルガトゥリオ	怒り						孫娘って言うなら、\nそういうのも大事でしょうが
+	煉獄剣ヴェルガトゥリオ	怒り						あなたはヴェルの誇りだけど、\nお別れはいきなりすぎたよ……
+Tween	煉獄剣ヴェルガトゥリオ	PunchPosition	y=30				NoWait
+	煉獄剣ヴェルガトゥリオ	怒り						ああっ、もうっ！\nこの風なんなの……！
+	黒グラデーション		エフェクト表			1
+	煉獄剣ヴェルガトゥリオ	怒り						冷たくて、\n目にしみてきちゃうじゃない
+StopSe
+FadeOut	black					.3
+CharacterOff						0
+Bg	廃墟A					0
+	ディーア	怒り4				0
+Wait						3
+FadeIn	black					.3
+Bgm	図書館
+	ディーア	怒り4						まだロサへは連絡できない、か
+CharacterOff
+	ベルゼ	通常						せんぱい、\nこれからどうしますか？
+CharacterOff
+	ディーア	怒り4						最優先は虚構の撃破だ
+	ディーア	怒り4						だけどセイメイと同等の力が使えて、\n護衛の兵もいる以上、正攻法は厳しい
+	ディーア	怒り4						単身で王城に潜入、\nそして奇襲を仕掛ける方が確実だ
+CharacterOff
+	ベルゼ	通常						せんぱいがそうしたいなら、\nいいんですけど……
+CharacterOff
+	ディーア	目閉じ4						いいんだよ、\nオレはここでも歓迎されていない
+	ディーア	目閉じ4						誰かと一緒にいても、\n守るための選択肢を選べない
+	ディーア	怒り4						それにほら、
+Param	character_grayout=true
+CharacterOff
+	反乱軍兵	通常	1_3
+	反乱軍兵 	通常	2_3
+	反乱軍兵  	通常	3_3
+	反乱軍兵	通常						おい！\n抜け駆けするなよ……！
+	反乱軍兵 	通常						お前こそ……！
+Tween	反乱軍兵  	PunchPosition	y=30				NoWait
+	反乱軍兵  	通常						静かにしろ！\n魔剣王に気づかれるぞ！
+Tween	反乱軍兵	PunchPosition	y=30				NoWait
+	反乱軍兵	通常						隊長の声が一番ウルサイですよ!?
+CharacterOff
+	ディーア	怒り4						オレに用事があるのか？
+CharacterOff
+	反乱軍兵  
+Tween	反乱軍兵  	PunchPosition	y=30				NoWait
+	反乱軍兵  	通常						わっ……!?
+CharacterOff
+	ディーア	目閉じ4						まあ、\n用事ならいくらでもあるよな
+	ディーア	怒り4						だが奇襲を企んでいるなら、\nオレも容赦しな<dash=2>
+CharacterOff
+	反乱軍兵  	通常						い、いえ！\nそんなつもりはまったくなくて！
+StopBgm
+Tween	反乱軍兵  	PunchPosition	y=30				NoWait
+	反乱軍兵  	通常						ま、魔剣王様！
+	反乱軍兵  	通常						稽古をつけてください!!
+CharacterOff
+	ディーア	驚き4						…………え？
+FadeOut	black					1
+CharacterOff						0
+	ディーア	本気4				0
+Wait						2
+FadeIn	black					1
+Bgm	平和
+	ディーア	本気4						もっと魔剣との同調を意識しろ！
+	ディーア	通常4						そのためにも、\n自分の全てを預けるくらいに\n魔剣を信頼すること
+	ディーア	笑い4						そうすれば、\n魔剣はたくさんの力をくれる！
+	ディーア	怪しい4						逆に兵器だからって\n魔剣に非道な行いをしたら
+	ディーア	怒り4						大事な戦いで、\n自分の災いとなって返ってくる
+	兵たち 	<Off>						はいっ……！\nわかりました……！
+CharacterOff
+	反乱軍兵  	通常						さすがは魔剣王様、\n皆の動きがみるみる良くなりました
+CharacterOff
+	ディーア	汗4						っていっても、\nこれは基本的なことだけどな
+CharacterOff
+	反乱軍兵  	通常						あなたの言う基本は、\n私たちのそれとはレベルが違います
+	反乱軍兵  	通常						魔剣の潜在能力を\nこれほど引き出せる魔剣使いは\n他にいないでしょう
+CharacterOff
+	ディーア	汗4						おだててもなにも出ないぞ
+	ディーア	怪しい4						それに、\nオレに教えを請うてもいいのか？
+	ディーア	怪しい4						君たちにとって、\nオレは魔界を滅ぼした罪人だろ？
+CharacterOff
+	反乱軍兵  	通常						それは、そうなんですけど
+	反乱軍兵  	通常						実はボク、\nユグドラシル攻防戦にも\n参加していたんです
+CharacterOff
+	ディーア	驚き4						魔王獣戦役の？
+CharacterOff
+	反乱軍兵  	通常						偽のセイメイ様が現れて、\n国民の多くはあの戦場さえも\n忘れていますが
+	反乱軍兵  	通常						ボクは忘れはしません
+	反乱軍兵  	通常						セイメイ様の最期を
+	反乱軍兵  	通常						そして、\nセイメイ様のように勇ましく戦った\n魔剣王様の姿を
+CharacterOff
+	ディーア	驚き4						そう、なんだ……
+CharacterOff
+	反乱軍兵  	通常						あなたと一緒に戦うと\n心強くて、励まされて……
+	反乱軍兵  	通常						どんなに辛い戦いでも\n生きて帰ろうって思えたんです
+	反乱軍兵  	通常						だから本当は、\n魔剣王様のことを信じてました
+	反乱軍兵  	通常						魔界を滅ぼしたあの黒い王は、\n魔剣王様の偽物だって
+CharacterOff
+	ディーア	目閉じ4						偽物、か
+CharacterOff
+	反乱軍兵  	通常						こうやって会えたあなたは\n魔界を滅ぼす人に見えません
+	反乱軍兵  	通常						ボクたちを助けてくれた、\n立派な王様です
+CharacterOff
+	ディーア	目閉じ4						でもオレは、\nそんなに立派な王じゃない
+	ディーア	目閉じ4						何百年も国を守り抜いた\nセイメイとは違う
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						また、\nそんなことを言ってるの？
+CharacterOff
+	ディーア	驚き4						ヴェルガトゥリオ？
+CharacterOff
+	反乱軍兵  	通常
+Tween	反乱軍兵  	PunchPosition	y=30				NoWait
+	反乱軍兵  	通常						ヴェルガトゥリオ様!?
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	ニヤリ						楽しそうだから、\nこっそり見させてもらったわ
+	煉獄剣ヴェルガトゥリオ	ニヤリ						あんなに冷たい態度だったのに、\n親切なところもあるのね？
+CharacterOff
+	ディーア	怪しい4						シエルたちにも\n休憩が必要だっただけだ
+	ディーア	怪しい4						もうすぐ出ていく
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						そう……
+StopBgm
+	煉獄剣ヴェルガトゥリオ	怒り						ならその前に、\nもうちょっと付き合って
+CharacterOff
+	ディーア	怒り4						…………
+FadeOut	black					1
+CharacterOff						0
+	煉獄剣ヴェルガトゥリオ	怒り				0
+FadeIn	black					1
+Bgm	神秘
+	煉獄剣ヴェルガトゥリオ	怒り						ごめんなさい、\nさっきは言い過ぎてしまったわ
+CharacterOff
+	ディーア	驚き4						えっ……！
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						確かにヴェルは、\nセイメイの代わりが欲しかった
+	煉獄剣ヴェルガトゥリオ	怒り						この困難な戦いで、\nヴェルたちを導く王がいて欲しかった
+	煉獄剣ヴェルガトゥリオ	怒り						あなたにとっては迷惑よね、\nヴェルたちはあなたの民じゃないのに
+CharacterOff
+	ディーア	目閉じ4						……いや、オレの方こそ
+	ディーア	目閉じ4						ヴェルガトゥリオが\nオレに憤っても仕方ないと思う
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	ニヤリ						やっぱり！
+CharacterOff
+	ディーア	怪しい4						どうしたんだ？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	ニヤリ						ずっとすかした態度をしてるから\n人が変わったと思ったけど
+	煉獄剣ヴェルガトゥリオ	ニヤリ						がんばって\nクールに見せてるだけじゃない
+CharacterOff
+	ディーア	怪しい4						からかうだけなら帰るぞ
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						ちょっとまって!!\nそういうつもりはないのよ！
+	煉獄剣ヴェルガトゥリオ	笑い						ただ、少しだけ安心したの
+	煉獄剣ヴェルガトゥリオ	笑い						全てが、\n変わったわけじゃないんだなって
+CharacterOff
+	ディーア	驚き4						ヴェルガトゥリオ……
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	通常						セイメイがいなくなってからずっと、\nこの国もヴェルも心の中に\nぽっかり穴が空いちゃってるの
+	煉獄剣ヴェルガトゥリオ	通常						それだけ、\nセイメイに頼り切ってたのね
+	煉獄剣ヴェルガトゥリオ	通常						なのに偽者まで出てきて、\nもうヴェルはどうしたらいいか\nわからなかった
+	煉獄剣ヴェルガトゥリオ	怒り						セイメイの代わりに\nみんなのリーダーみたいなことしても\nダメダメだったし
+	煉獄剣ヴェルガトゥリオ	通常						その上、\nあなたまで本当に悪人になったら\nもう終わりだって……
+	煉獄剣ヴェルガトゥリオ	通常						だからさっきのは、\nみっともない八つ当たりだったわ
+CharacterOff
+	ディーア	目閉じ4						それをオレに言って、どうするんだ
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	ニヤリ						どうもしないわよ！\n浄罪の魔剣らしく罪を認めて\nスッキリするだけ！
+	煉獄剣ヴェルガトゥリオ	笑い						だからあなたのことも、\n笑顔で送り出してあげるわ！
+CharacterOff
+	ディーア	怒り4						…………
+	ディーア	汗4						ははっ……
+	ディーア	汗4						ダメだな、\n人と関わるのは最低限にしようって\nそう思ってたのに
+	ディーア	汗4						そのあっけらかんとしたとこ見ると、\n硬い顔でいられないや
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	ニヤリ						やっと、\nあなたらしい顔になったわね
+CharacterOff
+	ディーア	怒り4						でも一緒にはいられない\nオレは可能な限りリスクなく\nあのセイメイを倒す
+	ディーア	怒り4						これ以上失敗したら、\n今度こそリディだけじゃなく\n魔剣みんなを失う
+	ディーア	怒り4						けれど……
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						けれど？
+CharacterOff
+	ディーア	汗4						稽古を求められたときに\n思い出したんだ
+	ディーア	汗4						セイメイに言われことを
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	13章スチルI		エフェクト表			0
+FadeIn	white					.3
+	煉獄王セイメイ	<Off>						語りたいことは\n全て生き様で語ったつもりだ
+	煉獄王セイメイ	<Off>						不足していることがあるとするなら、\nそうだな
+	煉獄王セイメイ	<Off>						……ヴェルを頼む\nそのためにも、キミが勝つんだ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	廃墟A					0
+	ディーア	汗4				0
+FadeIn	white					.3
+	ディーア	汗4						だからせめて、\nこれくらいはって思ったんだ
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						あのおじいちゃん、\n最後の最後まで孫扱いじゃない
+CharacterOff
+	ディーア	怒り4						そもそもオレが\n取り返しのつかないミスをしたから\nみんなまで<dash=2>
+	ディーア	悔しい4						あの偽セイメイも、\nオレがもっとしっかりしてたら\n現れることもなかった
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						…………
+CharacterOff
+	ディーア	悔しい4						なのに、\nオレはまた迷ってばかりで、\nさっきも失敗を<dash=2>
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						じゃあ、次は？
+CharacterOff
+	ディーア	驚き4						え？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						失敗したから、\n次は絶対に失敗しない？
+	煉獄剣ヴェルガトゥリオ	驚き						そんなの無理よ
+CharacterOff
+	ディーア	驚き2						無理……？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	通常						あなたが\nやたら持ち上げるセイメイも\n失敗だらけだったわ
+	煉獄剣ヴェルガトゥリオ	怒り						魔王獣を生み出して、\n魔界を滅ぼしかけちゃったし
+	煉獄剣ヴェルガトゥリオ	怒り						それで国に引きこもって\n他国からは腑抜け扱いされたしさ
+	煉獄剣ヴェルガトゥリオ	怒り						昔は魔王になるって言ってたのに、\nその夢も諦めた
+	煉獄剣ヴェルガトゥリオ	通常						ずっと見てきたヴェルに言わせれば\nセイメイは失敗王よ
+CharacterOff
+	反乱軍兵  	通常						あー、たしかに
+	反乱軍兵  	通常						対外的には\n厳格で冷酷な王に見せてましたけど\n抜けてるところもありましたね
+	反乱軍兵  	通常						宝物庫に、\n謎の魔装具を放り込んだら\n爆発してしまったり
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	笑い						あれは大変だったわね♪
+	煉獄剣ヴェルガトゥリオ	笑い						あの髪型のセイメイを\n肖像画にしておけばよかったわ♪
+	煉獄剣ヴェルガトゥリオ	通常						でもね、\nセイメイは失敗しても歩き続けた
+	煉獄剣ヴェルガトゥリオ	通常						自分にできる役目を、\n責任を果たそうとしていたの
+CharacterOff
+	ディーア	目閉じ4						そして魔王獣から\nオレたちみんなを守るために\n犠牲になった
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	通常						ううん、後を託したのよ
+	煉獄剣ヴェルガトゥリオ	通常						ヴェルやあなたに
+	煉獄剣ヴェルガトゥリオ	怒り						本当は腑抜けてたあなたのこと\n許すつもりなかった
+	煉獄剣ヴェルガトゥリオ	通常						でも、\nあなたが稽古をつけるのを見て、\nセイメイを思い出したわ
+Se	回想
+FadeOut	white					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A(崩壊)					0
+	煉獄剣ヴェルガトゥリオ		2_2			0
+	煉獄王セイメイ	致命傷	1_2			0
+FadeIn	white					.5
+	煉獄王セイメイ	致命傷						未来を担う若者たちが、\n今を必死に生きている
+	煉獄王セイメイ	致命傷						空虚な僕の人生と違って、\nそれらは価値のあるものだ
+	煉獄王セイメイ	致命傷						僕はこういう世界を守りたかったんだ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	廃墟A					0
+	煉獄剣ヴェルガトゥリオ	通常				0
+FadeIn	white					.3
+	煉獄剣ヴェルガトゥリオ	通常						セイメイはあなたを、\n未来を担う王として期待していた
+	煉獄剣ヴェルガトゥリオ	通常						じゃないと\nヴェルを頼んだなんて言わないし、\nかばったりしない
+	煉獄剣ヴェルガトゥリオ	通常						あの時のあなたは、\nみんなが憧れる最強の王だった
+CharacterOff
+	ディーア	目閉じ4						だけど、\nオレにはもう無理なんだよ
+	ディーア	悔しい4						オレがあんなに勇気を出せたのは、\n鍵の力があってのことだ
+	ディーア	悔しい4						並行世界を犠牲にして、\n未来の正解を知っていたからだ
+	ディーア	悔しい4						だけど、鍵は奪われた
+	ディーア	悔しい4						オレにはなにが正解かわからない
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						…………
+	煉獄剣ヴェルガトゥリオ	怒り						本当にそうなの？
+	煉獄剣ヴェルガトゥリオ	怒り						その並行世界がどうとか、\nヴェルは詳しく知らないけれど
+	煉獄剣ヴェルガトゥリオ	怒り						正解が見つかるまで、\n何度も何度も失敗したんでしょ？
+	煉獄剣ヴェルガトゥリオ	怒り						だったら、\nあなたが正解に辿り着けたのは\n失敗を避けたからじゃない
+	煉獄剣ヴェルガトゥリオ	怒り						失敗しても、\n諦めずに何度も挑んだからでしょ？
+CharacterOff
+	ディーア	驚き4						…………
+	ディーア	驚き4						失敗しても、か……
+	ディーア	目閉じ4						オレに、\nそんな勇気がまだあるのかな？
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_08
+EndIf
+EndScenario
+
+# Q2001_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	廃墟A					0
+Bgm	平和					0
+Param	character_grayout=false
+	ディーア	通常4				0
+FadeIn	black					1
+	ディーア	通常4						世話をしてくれてありがとう、\nそれじゃあ
+Se	歩く
+CharacterOff	ディーア					1
+Wait						3
+StopSe
+CharacterOff
+	反乱軍兵	通常						魔剣王様をあのまま行かせて、\nよかったのですか？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						仕方ないわよ、\n彼とあたしたちとでは\n守りたいものが違う
+	煉獄剣ヴェルガトゥリオ	怒り						ヴェルたちといないほうが、\n偽者を倒す可能性があるっていうなら\n引き止める理由もない
+	煉獄剣ヴェルガトゥリオ	怒り						情報をくれたら助かったけど、\nその出所も秘匿したいのでしょうね
+StopBgm
+	煉獄剣ヴェルガトゥリオ	通常						さあ、こちらも準備しましょう
+	オーラ赤		エフェクト表			3
+	煉獄剣ヴェルガトゥリオ	通常						ヴェルが動けるうちに、\n偽セイメイを倒さないと<dash=2>
+Se	チャージ
+	煉獄剣ヴェルガトゥリオ	驚き						…………え？
+Se	光3
+Se	火3
+Se	闇3
+FadeOut	white					1
+CharacterOff						0
+Bg	荒野					0
+	ディーア	怒り4				0
+Wait						5
+FadeIn	white					.5
+Bgm	絶望
+	ディーア	怒り4						…………
+CharacterOff
+	ベルゼ	通常						せんぱい、\n本当に王城へ向かうんですか？
+CharacterOff
+	ルキフェル	通常						私は先輩が行くところなら、\nどこへでも♪
+	ルキフェル	通常						シエルちゃんは\nそうじゃないんですか？
+CharacterOff
+	ベルゼ	通常						いえ、わたしはあくまで参謀
+	ベルゼ	通常						せんぱいの目的のために、\n作戦を考えることが全てです
+CharacterOff
+	ディーア	怒り4						このまま行こう
+	ディーア	怒り4						既に一度、\n攻撃に失敗しているんだ
+	ディーア	目閉じ4						ヴェルガトゥリオたちは\n心配だけど
+	ディーア	怒り4						オレにとって\n一番優先すべきはリディだ
+CharacterOff
+	ルキフェル	通常						それが先輩の幸せなら、\n私は先輩のために力を尽くします♪
+	ルキフェル	通常						でもぉ……不思議ですね？
+	ルキフェル	照れ						失敗しないのが\n先輩の幸せのはずなのに
+	ルキフェル	照れ						先輩はとっても辛そうです
+CharacterOff
+	ディーア	目閉じ4						それは<dash=2>
+Shake	Graphics		x=3 y=3				NoWait
+	ディーア	驚き4						なんだ、この揺れは!?
+CharacterOff
+	ベルゼ	慌て						反乱軍の拠点の方角です……！
+CharacterOff
+	ディーア	悔しい4						っ……！
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+Bg	廃墟A					0
+	反乱軍兵  	通常				0
+Wait						1
+FadeIn	black					1
+Wait	反乱軍兵  	通常				.3
+Se	ザシュ
+FadeOut	red					.2
+FadeIn	red					.2
+Bgm	魔獣バトル
+Shake	反乱軍兵  		x=2				NoWait
+	反乱軍兵  	通常						ぐああああっ！
+CharacterOff
+	煉獄王セイメイ	通常						一人たりとも逃がすなよ？
+	煉獄王セイメイ	通常						反乱分子は国を乱す毒だ\n除かなければ民を危うくする
+CharacterOff
+	メルトナ王城兵	通常
+Tween	メルトナ王城兵	MoveBy	x=100 time=0				Add
+Tween	メルトナ王城兵	RotateTo	y=180 time=0				Add
+	メルトナ王城兵	通常						は、はい……！
+CharacterOff
+	反乱軍兵	通常						くっ……\nセイメイ様の姿で……
+	反乱軍兵	通常						煉獄王の名を穢すな！
+CharacterOff
+	煉獄王セイメイ	ニヤリ						まったく、\nなにを言っているのやら
+	煉獄王セイメイ	ニヤリ						自国を守る最強の王、\n煉獄王セイメイを必要としたのは\nこのメルトナだろう
+	煉獄王セイメイ	ニヤリ						僕はその役割を\n忠実に果たしているだけさ
+FadeOut	black					.3
+CharacterOff						0
+Bg	荒野					0
+	ディーア	悔しい4				0
+Wait						1
+FadeIn	black					.3
+	ディーア	悔しい4						反乱軍の拠点が奇襲されたのか!?
+CharacterOff
+	ベルゼ	慌て						はい、\n敵の総数は反乱軍を上回り、\n煉獄王もいるようです
+CharacterOff
+	ディーア	怒り4						…………
+	ディーア	怒り4						早くここから離れるぞ
+	ディーア	怒り4						反乱軍を守りながら、\n虚構伝承と戦うことはできない
+	ディーア	怒り4						大軍の中に飛び込むのも、\n危険でしかない
+	ディーア	怒り4						だから<dash=2>
+Selection	*Q2001_08_01							逃げる
+*Q2001_08_01
+	ディーア	怒り4						それが正しい選択だ
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	廃墟A					0
+	反乱軍兵  	通常				0
+FadeIn	white					.3
+Param	character_grayout=false
+	反乱軍兵  	通常						だから本当は、\n魔剣王様のことを信じてました
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	荒野					0
+	ディーア	悔しい4				0
+FadeIn	white					.3
+	ディーア	悔しい4						リディを助けるために
+Selection	*Q2001_08_02							見捨てる
+*Q2001_08_02
+	ディーア	悔しい4						これまでも、そうしてきた
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	廃墟A					0
+	煉獄剣ヴェルガトゥリオ	通常				0
+FadeIn	white					.3
+Param	character_grayout=false
+	煉獄剣ヴェルガトゥリオ	通常						セイメイはあなたを、\n未来を担う王として期待していた
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	荒野					0
+	ディーア	悔しい4				0
+FadeIn	white					.3
+	ディーア	悔しい4						リディのためなら、\n他の全てを犠牲にしても……
+Selection	*Q2001_08_03							見捨てる
+*Q2001_08_03
+	ディーア	悔しい4						オレは、もう……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	廃墟A					0
+	ルキフェル	嬉しい				0
+FadeIn	white					.3
+Param	character_grayout=false
+	ルキフェル	嬉しい						失敗したくないなら、\nなんにもしないでいいんです
+FadeOut	white					.3
+CharacterOff						0
+Bg	魔術空間(赤)					0
+	全能殺しリディ	笑い				0
+FadeIn	white					.3
+	全能殺しリディ	笑い						マスターなら、\nぜったいに……みらい、を……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	荒野					0
+	ディーア	悔しい4				0
+FadeIn	white					.3
+	ディーア	悔しい4						大事なのは、リディの未来
+FadeOut	black					.5
+CharacterOff						0
+	痛む腕スチル		エフェクト表			0
+FadeIn	black					.5
+	ディーア	<Off>						オレはもうなにも失いたくない
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	悔しい4				0
+FadeIn	white					.3
+	ディーア	悔しい4						だから<dash=2>
+StopBgm
+Selection	*Q2001_08_04							見捨てる？
+*Q2001_08_04
+FadeOut	black					1
+CharacterOff						0
+Bg	廃墟A					0
+Wait						3
+	煉獄剣ヴェルガトゥリオ	怒り				1.5
+FadeIn	black					1
+Bgm	絶望
+Shake	煉獄剣ヴェルガトゥリオ		x=2				NoWait
+	煉獄剣ヴェルガトゥリオ	怒り						うぅっ……！
+CharacterOff
+	反乱軍兵  	通常						ヴェルガトゥリオ様!!
+CharacterOff
+	メルトナ王城兵	通常
+Tween	メルトナ王城兵	MoveBy	x=100 time=0				Add
+Tween	メルトナ王城兵	RotateTo	y=180 time=0				Add
+	メルトナ王城兵	通常						これで拠点にいた反逆者は\n全て捕らえました！
+CharacterOff
+	煉獄王セイメイ	ニヤリ						よくやった、メルトナの民よ
+	煉獄王セイメイ	ニヤリ						これで唯一の懸念である、\nヴェルガトゥリオを排除できる
+	煉獄王セイメイ	ニヤリ						煉獄王セイメイと配下の伝承は\n世界へと刻まれるだろう
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						はぁ、はぁ……！
+CharacterOff
+	煉獄王セイメイ	通常						どうしたんだい、ヴェル？
+	煉獄王セイメイ	通常						長い付き合いだ\n世間話くらいには付き合うよ
+StopBgm
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						それじゃあ<dash=2>
+Bgm	魔獣バトル
+Se	火3
+	オーラ蒼炎		エフェクト表			.5
+	煉獄剣ヴェルガトゥリオ	怒り						その罪深い命をもらうわっ!!
+CharacterOff
+	煉獄王セイメイ	驚き						暴走？
+	煉獄王セイメイ	驚き						なるほど自分で魔核を、\nたしかにこれなら<dash=2>
+CharacterOff
+	オーラ蒼炎		エフェクト表
+	煉獄剣ヴェルガトゥリオ	怒り						セイメイ！\nお願い、あたしに力を!!
+	煉獄剣ヴェルガトゥリオ	怒り						はぁぁああああ!!
+	オーラ赤		エフェクト表2			.5
+Se	チャージ
+Wait						.5
+FadeOut	black					.2
+CharacterOff						0
+	煉獄王セイメイ	拡大	エフェクト表			0
+FadeIn	black					.2
+	煉獄王セイメイ	拡大						やめてくれ、ヴェル
+StopBgm
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り
+Shake	煉獄剣ヴェルガトゥリオ		x=2				NoWait
+	煉獄剣ヴェルガトゥリオ	怒り						っ！
+CharacterOff
+	煉獄王セイメイ	ニヤリ						愚かだな、煉獄剣
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	ザシュ
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393C)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	廃墟A					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	煉獄剣ヴェルガトゥリオ	怒り
+Wait						.5
+Se	ぐちゃ
+	血痕A		エフェクト表			0
+	煉獄剣ヴェルガトゥリオ	怒り						ぐぅっ……！
+Bgm	絶望
+CharacterOff
+	煉獄王セイメイ	通常						君がただの兵器なら、\nこの頭蓋を叩き割れただろうに
+	煉獄王セイメイ	通常						そこまで\n煉獄王セイメイを好いてくれて\n嬉しい限りだが
+	煉獄王セイメイ	通常						浄罪の剣というには、\nあまりに純粋すぎるようだ
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						うっ……ぐすっ……！
+	煉獄剣ヴェルガトゥリオ	怒り						みんな、ごめんなさい……
+	煉獄剣ヴェルガトゥリオ	怒り						セイメイのためなのに、\nほんものじゃ、ないのに……
+Shake	煉獄剣ヴェルガトゥリオ		x=1				NoWait
+	煉獄剣ヴェルガトゥリオ	怒り						あたしには……!!
+CharacterOff
+	煉獄王セイメイ	通常						さて、\n僕にはもうひと仕事がある
+	煉獄王セイメイ	通常						後は任せたよ、メルトナの兵
+	煉獄王セイメイ	通常						反乱軍は全て処刑
+	煉獄王セイメイ	通常						ヴェルガトゥリオにも\n逆らう気がなくなるくらい\n仕置きが必要だ
+	煉獄王セイメイ	通常						魔核崩壊まで許可するから\n容赦しないでいい
+	煉獄王セイメイ	通常						裏切りの記憶を抱えたままでは、\nヴェルも可哀想だからね
+Se	フォーン
+CharacterOff	煉獄王セイメイ					1
+Wait						1
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り
+Shake	煉獄剣ヴェルガトゥリオ		x=2				NoWait
+	煉獄剣ヴェルガトゥリオ	怒り						待って……!!
+CharacterOff
+	メルトナ王城兵	通常
+Tween	メルトナ王城兵	MoveBy	x=100 time=0				Add
+Tween	メルトナ王城兵	RotateTo	y=180 time=0				Add
+	メルトナ王城兵	通常						…………終わりです
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						っ……だめ、
+	煉獄剣ヴェルガトゥリオ	怒り						あたしには\nまだ、やるべきことがある……
+	煉獄剣ヴェルガトゥリオ	怒り						このままじゃ、\nセイメイを安心させられない
+	煉獄剣ヴェルガトゥリオ	怒り						新しいマスターにも\n出会えていない
+	煉獄剣ヴェルガトゥリオ	怒り						素敵な恋だって、まだ<dash=2>
+StopBgm
+CharacterOff
+	メルトナ王城兵	通常
+Tween	メルトナ王城兵	MoveBy	x=100 time=0				Add
+Tween	メルトナ王城兵	RotateTo	y=180 time=0				Add
+	メルトナ王城兵	通常						お覚悟を!!
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	剣閃
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393D)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	黒背景					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+FadeOut	black					1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	カジノ					0
+	煉獄王セイメイ	通常				0
+FadeIn	white					2
+Bgm	結婚
+	煉獄王セイメイ	通常						もし僕と別れたら、\nこういうマスターを選ぶといい
+	煉獄王セイメイ	通常						まずは優れた魔剣使いだ
+	煉獄王セイメイ	通常						ヴェルという原初六魔剣を\n生半可な者に預けるわけにはいかない
+	煉獄王セイメイ	ニヤリ						それから、\n君を女性として丁寧に扱う者
+	煉獄王セイメイ	ニヤリ						素敵な恋がしたいなら、\n男の本質を見極めないとな
+	煉獄王セイメイ	ニヤリ						それから、\n肩書や能力も<dash=2>
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						ちょっとちょっと、\nその調子でどんどん条件出すの？
+	煉獄剣ヴェルガトゥリオ	驚き						もっとヴェルが選ぶ人を、\n信用してくれてもいいんじゃない\nおじいちゃん！
+CharacterOff
+	煉獄王セイメイ	笑い						じゃあ、あと一つだけ
+	煉獄王セイメイ	通常						諦めが悪い男だ
+	煉獄王セイメイ	通常						失敗しても、罪を背負っても
+	煉獄王セイメイ	通常						僕みたいに諦めることなく、\n未来へと歩み出せる者ならいい
+	煉獄王セイメイ	笑い						そんな王なら、\n絶望し立ち止まることがあっても\n最後はゴールにたどり着ける
+	煉獄王セイメイ	通常						大事な君を任せることができる
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	廃墟A					0
+	メルトナ王城兵					0
+Tween	メルトナ王城兵	MoveBy	x=100 time=0				Add
+Tween	メルトナ王城兵	RotateTo	y=180 time=0				Add
+Wait						2
+Se	ザシュ
+FadeIn	white					.5
+Shake	メルトナ王城兵		x=2				NoWait
+	メルトナ王城兵	通常						ぐ、あ……
+Tween	メルトナ王城兵	MoveBy	y=-100 time=1				NoWait
+CharacterOff	メルトナ王城兵					1
+Wait						.5
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						…………なんで？
+	煉獄剣ヴェルガトゥリオ	驚き						なんで、あなたが……？
+Bgm	タイトル
+CharacterOff
+	ディーア	目閉じ4						どうしてだろうな？
+	ディーア	怒り4						こんなの、\nどう考えても失敗だ
+	ディーア	怒り4						人質も多いし、周りは敵だらけ
+	ディーア	目閉じ4						こんなところに飛び込んで、\n取り返しがつかない結果になる\n可能性は高い
+	ディーア	目閉じ4						リディをただ助けるだけなら、\nこんなリスクは避けるべきだ……
+	ディーア	悔しい4						でも、\nリディがオレに託した魔界は<dash=2>
+	ディーア	悔しい4						リディが繋いでくれた未来は
+	ディーア	本気4						ヴェルや兵士のみんなもいる、\n明るい未来のはずだ！
+	ディーア	本気4						頼む！ シエル!!
+CharacterOff
+	ベルゼ	嬉しい						もちろんです、せんぱい♪
+	ベルゼ	嬉しい						ここからはお口チャック！
+	ベルゼ	嬉しい						勝利へのプランは\nすべて用意していますよ！
+CharacterOff
+	ディーア	本気4						魔剣王！\n<param=name>!!
+	ディーア	本気4						みんなを助け、\n虚構伝承を討伐する!!
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_09
+EndIf
+EndScenario
+
+# Q2001_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	廃墟A					0
+Bgm	凱旋
+Param	character_grayout=false
+	ディーア	通常4				0
+FadeIn	black					1
+	ディーア	通常4						敵兵は、これで全滅か……
+CharacterOff
+	反乱軍兵  	通常						これが、魔剣王……
+	反乱軍兵  	通常						まるでセイメイ様のようだ……
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	通常						ありがとう、\n敵兵の命も奪わないでくれて
+CharacterOff
+	ディーア	通常4						虚構の影響を受けて、\n認識が改変されているだけで\nこの国の民なんだ
+	ディーア	通常4						いたずらに傷つけたりはしないさ
+	ディーア	通常4						元凶を撃破すれば、\nその改変も元通りになる
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	通常						なによ、\nようやく話してくれる気になったの？
+CharacterOff
+	ディーア	目閉じ4						正直に言えば、\nまだ自分に確信を持てない
+	ディーア	目閉じ4						鍵を奪われて、\nオレは並行世界の運営権を失った
+	ディーア	悔しい4						自分が生んだ世界が\nどうなっているかさえも\nもうわからない
+	ディーア	悔しい4						怖いよ、どうしようもなく
+	ディーア	怒り4						この選択が間違いで、\n今度こそ全てを失ったら……
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						そっか……
+	煉獄剣ヴェルガトゥリオ	怒り						あたしも並行世界なんてわからないし\n正解だなんて保証できない
+	煉獄剣ヴェルガトゥリオ	怒り						偉そうなこと言ったくせに、\nあたしも偽セイメイを前にして\nトドメをさせなかった
+	煉獄剣ヴェルガトゥリオ	怒り						セイメイがいなくて、\n辛くて、怖い
+	煉獄剣ヴェルガトゥリオ	通常						でも、これだけは言える
+	煉獄剣ヴェルガトゥリオ	笑い						怖がってでも前に進むという決断は\nまさしく王のものよ
+	煉獄剣ヴェルガトゥリオ	通常						煉獄剣として、\nあなたの在り方を認めるわ、魔剣王
+	煉獄剣ヴェルガトゥリオ	通常						だからヴェルも兵のみんなも、\n王に後悔なんてさせない
+	煉獄剣ヴェルガトゥリオ	笑い						この選択を\n選んでよかったって笑えるように、\nあなたを全力で助けるわ
+CharacterOff
+	反乱軍兵  	通常						煉獄王様と魔剣王様のために!!
+CharacterOff
+	ディーア	笑い4						ありがとう、みんな
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	笑い						ふふ♪ あなたの顔、\nさっきよりずっとカッコいいわよ♪
+CharacterOff
+	ルキフェル	通常						それに先輩の命が失われるなんて\nありえませんよ♪
+	ルキフェル	通常						リリスファミリーが\n先輩の全てを守ってみせますから
+CharacterOff
+	ディーア	通常4						そっか、\nオレには失敗しても助けてくれる\n仲間もいたんだ……
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	通常						それで、\nこれからどうするの？
+	煉獄剣ヴェルガトゥリオ	通常						あの偽者はヴェルのことを\n唯一の懸念って呼んでいたわ
+	煉獄剣ヴェルガトゥリオ	通常						それに途中で\nどこかに消えてしまったけど
+CharacterOff
+	ディーア	怪しい4						ひと仕事、か……
+	ディーア	怒り4						おそらくそれは<dash=2>
+StopBgm
+	ディーア	驚き4						っ……！
+Wait						1
+FadeOut	black					.1
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+StopSe
+Wait						.1
+FadeIn	black					.1
+Wait						.5
+ChangeSoundVolume	Bgm	0				.4
+ChangeSoundVolume	Se	.2				.4
+Wait						.3
+ImageEffect	SpriteCamera	Bloom
+								<speed=0.1>　</speed>	BrPage
+Param	character_grayout=false
+	セイメイ攻撃スチル	A	effect_c			0
+Tween	セイメイ攻撃スチル	RotateBy	z=50 time=0.1				NoWait
+Wait						.1
+	セイメイ攻撃スチル	B				0
+ChangeSoundVolume	Bgm	1				.2
+ChangeSoundVolume	Se	1				.2
+Se	強風
+Se	風2
+Se	風3
+Wait						.1
+	セイメイ攻撃スチル	C	effect_c			0
+Wait						.1
+Tween	セイメイ攻撃スチル	RotateBy	z=2000 time=3				NoWait
+Tween	セイメイ攻撃スチル	ScaleBy	x=10 y=10 time=3.5				NoWait
+	セイメイ攻撃スチル	E				.1
+Wait						.5
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffectOff	SpriteCamera	MotionBlur
+Wait						1
+	ディーア	悔しい4				0
+StopSe
+FadeIn	white					1
+Bgm	魔獣バトル
+	ディーア	悔しい4						ぐっ……！\nなんだ、この風……!?
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						まさか……!!
+	煉獄剣ヴェルガトゥリオ	驚き						ウィクク=ルー大風穴!?
+FadeOut	black					.3
+CharacterOff						0
+Bg	洞窟A					0
+Wait						1
+	メルトナ王城兵	通常				0
+FadeIn	black					.3
+	メルトナ王城兵	通常						おやめください、セイメイ様！
+	メルトナ王城兵	通常						このまま大風穴を暴走させれば、\nメルトナ全土が壊滅します!!
+	メルトナ王城兵	通常						なぜこのような暴挙を!!
+CharacterOff
+	煉獄王セイメイ	通常						これも国を守るためだと\n何度も説明したじゃないか
+	煉獄王セイメイ	通常						それとも君たちは\nメルトナ王を信じられないのかい？
+CharacterOff
+	メルトナ王城兵	通常						っ…………
+	メルトナ王城兵	通常						ちがう……！
+	メルトナ王城兵	通常						あなたはセイメイ様ではない！
+	メルトナ王城兵	通常						ヴェルガトゥリオ様への仕打ちに\nこれまでの命令!!
+	メルトナ王城兵	通常						姿も声も、魔力と力さえ同じでも\n心はセイメイ様ではない!!
+CharacterOff
+	煉獄王セイメイ	通常						はぁ……
+	煉獄王セイメイ	ニヤリ						今さら気がついたのかい？
+	煉獄王セイメイ	ニヤリ						だが、もはや無意味だ
+	煉獄王セイメイ	ニヤリ						只人がどう足掻こうとも\nこの世界が揺らぐことはない
+	煉獄王セイメイ	ニヤリ						世界にとって人間の命など、\n取るに足らない些事なのだから
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_10
+EndIf
+EndScenario
+
+# Q2001_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	洞窟A					0
+Bgm	緊迫					0
+Param	character_grayout=false
+	煉獄剣ヴェルガトゥリオ	驚き
+Se	走る
+FadeIn	black					.5
+	煉獄剣ヴェルガトゥリオ	驚き				1		こっちよ！
+	煉獄剣ヴェルガトゥリオ	怒り						この坑道を抜ければ\n大風穴の中心に着くわ!!
+CharacterOff
+	ディーア	驚き4						大陸の反対側なのに、\nこんな短時間で来れるなんて
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	通常						六大異変の管理も、\n煉獄王としての職務だったもの
+	煉獄剣ヴェルガトゥリオ	怒り						そしてあの偽者も、\n同じルートを使ったんでしょうね
+CharacterOff
+	ディーア	怒り4						オレがヴェルたちを助けに来たと\n察知していたんだろう
+	ディーア	怒り4						オレもまとめて足止めさせ、\n活性化への最後の手順を踏んだ
+	ディーア	怒り4						ああいう術式の行使中は、\n無防備になってしまうものだからな
+CharacterOff
+	ルキフェル	通常						……先輩
+CharacterOff
+	ベルゼ	通常						目の前に……!!
+FadeOut	white					.3
+CharacterOff						0
+Bg	大風穴					0
+	ディーア	悔しい4				0
+Wait						1
+FadeIn	white					.3
+	ディーア	悔しい4						これは……!!
+CharacterOff
+	黒グラデーション		エフェクト表
+	メルトナ王城兵	通常						ヴェル、さ、ま……
+Shake	メルトナ王城兵		x=2				NoWait
+	メルトナ王城兵	通常						よかった、いきて……
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						あなたたちっ！\nいったいどうしたの!?
+CharacterOff
+	メルトナ王城兵	通常						やはり、あなたが正しかった……
+	メルトナ王城兵	通常						セイメイ様に、もうしわけ……
+Se	倒れる
+CharacterOff	メルトナ王城兵					.5
+Wait						.5
+CharacterOff
+	煉獄王セイメイ	通常						誰も彼も、\n不忠者ばかりで困るよ
+	煉獄王セイメイ	通常						僕はこんなに、\n国のために尽くしているのに
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						自分の兵まで犠牲にして、\nなにが国のためよ!!
+CharacterOff
+	煉獄王セイメイ	通常						国のためだよ
+	煉獄王セイメイ	ニヤリ						僕の目的は、\nメルトナを永久に守護することだ
+	煉獄王セイメイ	通常						魔王獣によって拓かれた\nこの六大異変も含めた\n魔王戦争の負の遺産……
+	煉獄王セイメイ	通常						その魔剣王の乱心をきっかけに\n新たな勢力も勃興している
+	煉獄王セイメイ	通常						この不安定な魔界で、\n大国を守り切るのは不可能に等しい
+	煉獄王セイメイ	ニヤリ						だからこそ、\n六大異変の力が必要なんだ
+	煉獄王セイメイ	ニヤリ						僕は六大異変を封じた\nメルティナの魂を引き継いでいる
+	煉獄王セイメイ	ニヤリ						その僕ならば、\n異変の核を掌握し風を操れる
+	煉獄王セイメイ	ニヤリ						大陸を外敵から守る、\n強大な暴風の結界をつくることも\n可能となる
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						バカなこと言わないでっ!!
+	煉獄剣ヴェルガトゥリオ	怒り						大風穴を解放したら、\n国のほとんどが吹き飛ぶわ！
+CharacterOff
+	煉獄王セイメイ	通常						国を守るためなら、\n多少の犠牲はつきものだろう？
+StopBgm
+CharacterOff
+	ディーア	怒り4						もういい、黙れよ
+CharacterOff
+	煉獄王セイメイ	ニヤリ						ふっ……♪
+Bgm	図書館
+CharacterOff
+	ディーア	怒り4						どんな手を使っても、\n外敵からメルトナを守る最強の王
+	ディーア	怒り4						それはたしかに、\nメルトナの民が思い描いた\nセイメイの虚像だろう
+	ディーア	怒り4						だけど、\nあの人は少数を切り捨てたりしない
+	ディーア	悔しい4						民を守るためなら、\n真っ先に最前線に向かう勇敢な王
+	ディーア	怒り4						それが煉獄王セイメイだ
+	ディーア	悔しい4						お前はそのセイメイの虚像を\n自分たちのために利用しているだけ
+	ディーア	怒り4						そうだろう？\n世界意思の尖兵<dash=2>
+	ディーア	怒り4						模倣情報生命、<ruby=アンダーカバー>虚構伝承</ruby>
+CharacterOff
+	虚構伝承セイメイ	笑い						ハハハハ！
+	虚構伝承セイメイ	ニヤリ						本当にっ！\nあの敗残者共は余計なことをする！
+	虚構伝承セイメイ	ニヤリ						そこまで魔剣王に期待したか！
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						模倣情報生命……
+CharacterOff
+	ディーア	怒り4						リディが受けた、\n《運命殺し》ワールドエンドの力は\n伝承の破壊
+	ディーア	怒り4						魔剣と、その力の根源である\n伝承の繋がりを断ち切る
+	ディーア	怒り4						だけど、\n伝承があったという事実は\n変わることがない
+	ディーア	怒り4						当事者が抹消された、\n歪な伝承が世界に遺されるんだ
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						でも、それは……
+CharacterOff
+	ディーア	怒り4						そう、この魔界のシステムは\nそんな記録の矛盾を許容できない
+	ディーア	怒り4						だからこそ、\n抹消された当事者に代わる虚構を\nこの世界に生み出す
+	ディーア	悔しい4						伝承の帳尻を合わせるために
+CharacterOff
+	虚構伝承セイメイ	ニヤリ						昔から繰り返されてきた、\n世界の自浄作用さ
+	虚構伝承セイメイ	ニヤリ						傷を塞ぐカサブタのようなもの
+	虚構伝承セイメイ	ニヤリ						消失対象が小規模だったなら\nちょっとした異変が現れ、\n世界に定着するだけなんだけどね
+CharacterOff
+	ディーア	怒り4						リディは例外だった
+	ディーア	目閉じ4						原初十三魔剣にして、\n二度も魔界の脅威となった魔王獣
+	ディーア	目閉じ4						そして魔剣伝承そのもの
+	ディーア	怒り4						そう都合よく、\n穴埋めできる存在なんて用意できない
+	ディーア	本気4						だから世界意思は\nお前たち虚構伝承を生みだした！
+	ディーア	悔しい4						リディの生きた足跡、\n伝承を断片化させ、\n自らの手で再現することで
+	ディーア	本気4						リディの伝承を奪うために！
+CharacterOff
+	虚構伝承セイメイ	通常						四百年前の魔王獣による\nウィクク=ルー大風穴の覚醒
+	虚構伝承セイメイ	通常						そして第二次魔王獣戦役での、\n煉獄王と多くのメルトナ兵の逝去
+	虚構伝承セイメイ	通常						魔剣殺しに代わり、\nそれを為す役者が必要だった
+	虚構伝承セイメイ	通常						セイメイとメルトナの民を抹消し、\n風穴を目覚めさせる存在が
+	虚構伝承セイメイ	ニヤリ						だから僕が生まれた
+	虚構伝承セイメイ	ニヤリ						メルトナを舞台に\nそれほどの大立ち回りを演じられる\n煉獄王セイメイとしてね
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						自分ごと、メルトナを犠牲にする!?
+	煉獄剣ヴェルガトゥリオ	怒り						そんなことしたら、\n自国を危機にさらした愚王として、\nセイメイの名が汚されるわ！
+CharacterOff
+	虚構伝承セイメイ	通常						だからどうした？
+	虚構伝承セイメイ	通常						必要なのは真実じゃない\n伝承に辻褄の合う記録だけだ
+	虚構伝承セイメイ	通常						千年も昔の王の死に様を、\n誰が正確に知っている？
+	虚構伝承セイメイ	通常						数百年程度の誤差でさえ、\n星の歴史からすれば\n瞬きの間にも劣るんだ
+	虚構伝承セイメイ	ニヤリ						世界という尺度において、\nたった一人の王の真実など\nどうでもいい
+	虚構伝承セイメイ	ニヤリ						未来ではどうせ名も忘れられるさ\n愚かなる腑抜けの王なんて
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						ふざけないでっ!!
+CharacterOff
+	ディーア	悔しい4						お前たちは、\nどれだけ人の尊厳を踏みにじるんだ
+CharacterOff
+	虚構伝承セイメイ	通常						すべては魔界を守るためさ！
+	虚構伝承セイメイ	通常						この大風穴を見てみろよ
+	虚構伝承セイメイ	通常						獣による災厄の痕
+	虚構伝承セイメイ	通常						今も流れ続ける、世界の嘆き
+	虚構伝承セイメイ	ニヤリ						傷つけば、\n治し、塞がなければいけない
+	虚構伝承セイメイ	ニヤリ						君たち人間だって、\n同じことをするじゃないか
+CharacterOff
+	ディーア	怒り4
+	虚構伝承セイメイ	<Off>	1_2					魔剣殺しの喪失を、\n君は彼女を救うだなんて\n妄執で埋めようとした
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り
+	虚構伝承セイメイ	<Off>	1_2					ヴェルは\nセイメイに代わる新たな王を\n求めていた
+CharacterOff
+	虚構伝承セイメイ	ニヤリ						この国も\n偉大な王を失ったことに耐えられず、\nそれが僕という虚像の力となった
+	虚構伝承セイメイ	ニヤリ						僕は世界を救うんだよ、\n歪となった伝承を補完した\n本物としてね
+CharacterOff
+	ディーア	本気4						させるかっ！\n風穴を覚醒させる前にお前を<dash=2>
+StopBgm
+	虚構伝承セイメイ	ニヤリ						覚醒させる前？
+	虚構伝承セイメイ	ニヤリ						とっくの昔に、\n大風穴は掌握したよ
+Se	チャージ
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+Bg	覚醒大風穴					0
+	虚構伝承セイメイ	敵				0
+FadeIn	white					1
+Bgm	魔王バトル
+	虚構伝承セイメイ	敵						とうとうこの時が来た!!				ここもスチル入れたいな!!
+	虚構伝承セイメイ	敵						ボクはやっと！\nホンモノになれる……!!
+CharacterOff
+	ディーア	悔しい4						虚構伝承が、\n大風穴の魔力と一体化した？
+CharacterOff
+	虚構伝承セイメイ	敵						六大異変とて、\n世界を構成する一要素にすぎない！
+	虚構伝承セイメイ	敵						ボクは世界を塞ぎ、世界を補完する\n新たなる世界の礎!!
+	虚構伝承セイメイ	敵						ちっぽけな人間風情が！\n世界意思に抗えるものか！
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_11
+EndIf
+EndScenario
+
+# Q2001_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	覚醒大風穴
+Bgm	魔獣バトル					0
+Param	character_grayout=false
+	ディーア	悔しい4				0
+FadeIn	black					1
+Shake	ディーア		x=2				NoWait
+	ディーア	悔しい4						この暴風、\n呪術も織り込んでいるのかっ!!
+	ディーア	悔しい4						攻撃が、届かない……！
+	ディーア	悔しい4						体のコントロールも、\n奪われて……！
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	驚き						それだけじゃないわ！\nあいつが六大異変と繋がったなら
+	煉獄剣ヴェルガトゥリオ							虚構伝承への攻撃は、\n六大異変の暴発にもつながる！
+	煉獄剣ヴェルガトゥリオ							本体だけを正確に潰さないと！
+CharacterOff
+	ディーア	悔しい4						この状況でそんなことを……？
+CharacterOff
+	虚構伝承セイメイ	敵						また間違えたな、魔剣王
+	虚構伝承セイメイ	敵						ヴェルたちを助けなければ、\nこの事態は避けられたかもしれない
+	虚構伝承セイメイ	敵						その身にまとわりついた\n罪悪感に急かされるままに
+	虚構伝承セイメイ	敵						魔剣殺しだけを考えて\n行動するべきだったんだ
+	虚構伝承セイメイ	敵						自らの罪と過ちを悔いながら、\n散るがいい
+CharacterOff
+Wait						.5
+FadeOut	black					.1
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+StopSe
+Wait						.1
+FadeIn	black					.1
+ImageEffect	SpriteCamera	Bloom
+								<speed=0.1>　</speed>	BrPage
+	セイメイ攻撃スチル	A	effect_c			0
+Wait						.1
+	セイメイ攻撃スチル	B				0
+ImageEffect	SpriteCamera	NegaPosi
+CharacterOff	セイメイ攻撃スチル
+Wait						.1
+ImageEffectOff	SpriteCamera	NegaPosi
+StopSe
+Wait						1.3
+Param	character_grayout=false
+	セイメイ攻撃スチル	A	effect_c			0
+Tween	セイメイ攻撃スチル	RotateBy	z=50 time=0.1				NoWait
+Wait						.1
+	セイメイ攻撃スチル	B				0
+ChangeSoundVolume	Bgm	1				.2
+ChangeSoundVolume	Se	1				.2
+Se	光3
+Se	風2
+Se	風3
+Wait						.1
+	セイメイ攻撃スチル	C	effect_c			0
+Wait						.1
+Tween	セイメイ攻撃スチル	RotateBy	z=2000 time=3				NoWait
+Tween	セイメイ攻撃スチル	ScaleBy	x=10 y=10 time=3.5				NoWait
+	セイメイ攻撃スチル	E				.1
+Wait						.5
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffectOff	SpriteCamera	MotionBlur
+Wait						1
+	ディーア	絶望4				0
+FadeIn	white					1
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						ぁあああああ……！
+Se	倒れる
+CharacterOff	ディーア					.5
+Wait						.5
+StopBgm
+CharacterOff
+	虚構伝承セイメイ	敵						これが世界に逆らった末路だよ
+Bgm	絶望
+CharacterOff
+	ディーア	悔しい4破損				1
+Shake	ディーア		x=3				NoWait
+	ディーア	悔しい4破損						まだ、だ……！
+CharacterOff
+	虚構伝承セイメイ	敵						悪あがきを
+	虚構伝承セイメイ	敵						だが、\nその悪あがきになんの意味がある？
+	虚構伝承セイメイ	敵						お前の命は、\n失われれば二度と回帰しない
+	虚構伝承セイメイ	敵						あの時のように\n危機を避けるほうが利口な考えだ
+	虚構伝承セイメイ	敵						見ろよ、その右手を
+CharacterOff
+	ディーア	悔しい4破損						っ……！
+CharacterOff
+	虚構伝承セイメイ	敵						震えているじゃないか
+	虚構伝承セイメイ	敵						体はあの敗北と絶望を\nしっかりと覚えているんだ
+	虚構伝承セイメイ	敵						なのにまた、\n同じ愚を繰り返すというのか？
+CharacterOff
+	ディーア	悔しい4破損						そう、だな……
+	ディーア	悔しい4破損						怖いよ、\nどうしようもなく怖い……
+	ディーア	悔しい4破損						こんな状況で、\n僅かな希望に賭けて挑むなんて\n怖くて逃げたくなる
+StopBgm
+CharacterOff
+	虚構伝承セイメイ	敵						なら<dash=2>
+Bgm	決戦
+CharacterOff
+	ディーア	本気4破損						だけど！
+	ディーア	本気4破損						それでも！\nオレは往生際が悪いんだ!!
+	ディーア	本気4破損						リディも魔界も、\n全てを諦めたくない愚か者だ!!
+	ディーア	悔しい4破損						何千、何億！\n何度も何度も間違え続けて！
+	ディーア	本気4破損						助けてくれるみんなと一緒に\n立ち上がってきたんだ!!
+	ディーア	目閉じ4破損						なのに、\n一度ゴールにたどり着いたからって\n絶望に囚われて
+	ディーア	怒り4破損						そんな当たり前のことにも\n気づけなくなってた
+	ディーア	怒り4破損						だけどもう、\n絶望して蹲ったりしない
+	ディーア	怒り4破損						ヴェルガトゥリオたちを助けたのが、\n間違いだって言ったな？
+	ディーア	本気4破損						その間違いがあるから\n正解にたどり着けるんだよ!!
+	ディーア	本気4破損						何度間違えたとしても！\n諦めずに進み続けてやるっ!!
+	ディーア	本気4破損						みんな……！\nこんな怖がりの王だけど、\n助けてくれ!!
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	通常						当たり前じゃない！
+Tween	煉獄剣ヴェルガトゥリオ	PunchPosition	y=30				NoWait
+	煉獄剣ヴェルガトゥリオ	通常						メルトナ兵のみんな！\nもう準備はできたでしょ!?
+	煉獄剣ヴェルガトゥリオ	怒り						セイメイの誇りと意思は\nあたしたちが引き継いでいくの!!
+CharacterOff
+	反乱軍兵							これ以上、\n我らの国を好きにさせるか!!
+CharacterOff
+	メルトナ王城兵							我らも、\n亡きセイメイ様のために……!!
+Se	チャージ
+	オーラ赤		エフェクト表			1
+Wait						.5
+CharacterOff	メルトナ王城兵
+	虚構伝承セイメイ	敵						っ…………！\nこれは、異変の出力が……!?
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						メルトナを舐めるんじゃないわよ、\n偽者っ！
+	煉獄剣ヴェルガトゥリオ	通常						ヴェルたちは\nずっとこの国の脅威と戦ってきた
+	煉獄剣ヴェルガトゥリオ	通常						大風穴の制御方法も、\nちゃんと受け継いできたのよ!!
+	煉獄剣ヴェルガトゥリオ	通常						そしてこのことを<dash=2>
+CharacterOff
+	ベルゼ	嬉しい						異変と直結したなら、\n異変を抑えればあなたも弱体化する
+	ベルゼ	嬉しい						わたしの立てた\n完ぺき完全なプラン通りです♪
+	ベルゼ	嬉しい						大風穴を使うとわかった時点で、\n13000通りのパターンを読んでました
+CharacterOff
+	ディーア	怒り4破損						ほら、悪あがきも役に立つものだろ？
+	ディーア	笑い4破損						おかげで\nみんなのために時間を稼げたよ
+CharacterOff
+	虚構伝承セイメイ	敵						だとしても……！
+	虚構伝承セイメイ	敵						煉獄王の呪術と暴風を前に、\n耐えられるものか!!
+	虚構伝承セイメイ	敵						誰も彼も！\n喪失と罪に囚われた愚か者が！
+CharacterOff
+	ルキフェル	拡大嬉しい	エフェクト表					あら？\n私の先輩に罪なんてありませんよ？
+CharacterOff
+	虚構伝承セイメイ
+Tween	虚構伝承セイメイ	PunchPosition	y=10				NoWait
+	虚構伝承セイメイ	敵						リリスの……!!
+CharacterOff
+Se	フォーン
+	オーラ青		エフェクト表			1
+	メルトナ兵	通常						なんだ……？\n体がだんだんと楽に？
+CharacterOff	メルトナ兵
+	ディーア	笑い4						なんにも考えないで幸せに、か♪
+CharacterOff
+	ベルゼ	嬉しい						ええ、これも計算通り♪
+	ベルゼ	嬉しい						呪術の根源が、\n魂に根ざした罪悪感なら
+	ベルゼ	嬉しい						その罪を忘れればいいんです！
+	ベルゼ	嬉しい						幸せに堕落させることにおいて、\nリリス先輩を超える悪魔はいません！
+CharacterOff
+	ルキフェル	通常						愛しい先輩♪
+	ルキフェル	嬉しい						あなたは\nこの私に全てを委ねてくれますか？
+CharacterOff
+	ディーア	本気4破損						ああっ！ 頼むリリス!!
+CharacterOff
+	ルキフェル	嬉しい
+Shake	ルキフェル		x=3				NoWait
+	ルキフェル	嬉しい						ああ、先輩♪
+	ルキフェル	嬉しい						必要としてくれて、\n私はとーっても幸せです♪
+	ルキフェル	通常						だから<dash=2>
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	ルキフェル	<Off>						今度こそあの力、使っちゃいますね♪
+Bgm	鍵師バトル
+Se	チャージ
+FadeOut	white					2
+Bg	白背景					0
+CharacterOff						0
+	ルキフェル	拡大魔王足	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	ルキフェル	拡大魔王胸	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+Bg	覚醒大風穴					0
+CharacterOff						0
+	ルキフェル	魔王				0
+	          
+FadeIn	white					.3
+	ルキフェル	魔王						愛しい先輩へ\n完全なる幸せを♪
+CharacterOff
+	虚構伝承セイメイ	敵						原初の記憶を……!!
+CharacterOff
+	ベルゼ	嬉しい						わたしたちは、\nリリスファミリーですよ？
+CharacterOff
+	ディーア	本気4破損						魂を蕩かす幸福!!\nこれで呪術は無効化される！
+	ディーア	怒り4破損						そして<dash=2>
+	ディーア	怒り4破損						ヴェルガトゥリオ、本当にいいのか？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	怒り						…………
+	煉獄剣ヴェルガトゥリオ	笑い						うん♪
+	煉獄剣ヴェルガトゥリオ	通常						セイメイと歩んだ道は\nあたしの誇り
+	煉獄剣ヴェルガトゥリオ	通常						大好きで大切な\nヴェルのおじいちゃん♪
+	煉獄剣ヴェルガトゥリオ	通常						別れは辛いけど、\nセイメイに恥じないよう、\n新しく歩きださないと
+	煉獄剣ヴェルガトゥリオ	笑い						だからお願い、マスター！
+CharacterOff
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ディーア	目閉じ4破損
+	ディーア	目閉じ4破損						<color=mk2wisp>ベリファイ、ブレイズエーテライト\nアンロック=コード：\nプライモーディアル<ruby=サーティーン>ⅩⅢ</ruby></color>
+	ディーア	本気4破損						<color=mk2wisp><dash=2>タイプ：セブンシンズ</color>
+FadeOut	red					1
+CharacterOff						0
+	ヴェル本気スチル	通常	エフェクト表			0
+Se	光3
+Se	火3
+FadeIn	red					1
+	ディーア	<Off>						煉獄剣ヴェルガトゥリオ!!				スチル!!
+CharacterOff
+	虚構伝承セイメイ	敵						くっ……!!
+CharacterOff
+	ヴェル本気スチル	通常	エフェクト表
+	煉獄剣ヴェルガトゥリオ	<Off>						マスターさえいれば、\n偽者なんかに遅れは取らない!!
+	煉獄剣ヴェルガトゥリオ	<Off>						あんたの呪術も大風穴も！\n全てヴェルが浄化してみせる!!
+	煉獄剣ヴェルガトゥリオ	<Off>						道を拓くわ、マスター！
+	煉獄剣ヴェルガトゥリオ	<Off>						何度失敗しても安心しなさい！
+	煉獄剣ヴェルガトゥリオ	<Off>						この浄罪の魔剣が、\nあなたの罪を\n何度でも禊いであげるから！
+CharacterOff
+	ディーア	怒り4破損						虚構伝承！\nお前には目的以外なにもない
+	ディーア	怒り4破損						失敗しても支えてくれる仲間も\n悔いて反省する心も
+	ディーア	悔しい4破損						お前たちから見たら\nちっぽけで失敗ばかりの人間だけど
+	ディーア	本気4破損						だからオレたちは前に進めるんだ!!
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_12
+EndIf
+EndScenario
+
+# Q2001_12
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	覚醒大風穴
+Bgm	風属性バトル					0
+Param	character_grayout=false
+	虚構伝承セイメイ	敵				0
+FadeIn	black					1
+	虚構伝承セイメイ	敵						バカの一つ覚えに、\n何度も、何度も……
+CharacterOff
+	ディーア	怒り4破損						オレは完ぺきじゃない
+	ディーア	目閉じ4破損						失敗ばかりで、\n立ち止まったり間違えもする
+	ディーア	怒り4破損						それでも……お前に届いた
+CharacterOff
+	虚構伝承セイメイ	敵						こんな、ことで<dash=2>
+	虚構伝承セイメイ	敵						ふざけるなよっ！
+	虚構伝承セイメイ	敵						ボクは世界に必要とされている！\nホンモノになるっ！
+Se	闇1
+	オーラ赤		エフェクト表			.5
+	虚構伝承セイメイ	敵						せめて、\n傷跡だけでもっ……!!
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	？？？？							そんなのあかんよ♪
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	弓2
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(赤)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	覚醒大風穴					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	虚構伝承セイメイ	敵
+Shake	虚構伝承セイメイ		x=3
+	虚構伝承セイメイ	敵						なっ……!?
+CharacterOff
+	ディーア	驚き4破損						魔力が静止した……?
+Bgm	タイトル
+	ディーア	本気4破損						今なら……!!
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ディーア	本気4破損						CODE:THISWAY！\n<ruby=メモライズ>伝承付記</ruby><全能殺しリディ>!!
+	ディーア	本気4破損						これで、\n伝承は再びリディに繋がる!!
+	ディーア	本気4破損						返してもらうぞ、世界意思!!
+CharacterOff
+	ディスウェイ	通常
+Tween	ディスウェイ	PunchPosition	y=30				NoWait
+	ディスウェイ	通常						ごーっ！ ディスウェイ!!
+StopBgm
+Se	光3
+FadeOut	white					2
+CharacterOff						0
+Bg	大風穴					0
+	ディーア	悔しい4破損				0
+FadeIn	white					2
+	ディーア	悔しい4破損						やった……
+Se	闇1
+	尖兵		エフェクト裏			3
+	ディーア	笑い4破損						これだけ大きな伝承なら、\nきっとリディの安定化にも<dash=2>
+CharacterOff
+	メルトナ兵	通常						魔剣王様！ 後ろにっ!!
+Bgm	魔獣バトル
+CharacterOff
+	尖兵		エフェクト裏
+	ディーア	驚き4破損						…………え？
+	■■■■	<Off>						<color=red>魔剣殺し、抹消</color>
+	オーラ紫		エフェクト表			1
+	ディーア	悔しい4破損						パノプテスの……!?
+	ディーア	悔しい4破損						ここまできて<dash=2>
+StopBgm						0
+CharacterOff						0
+Bg	黒背景					0
+	？？？？	<Off>						無粋だぞ、世界意思
+Se	光3
+FadeOut	white					2
+CharacterOff						0
+Bg	夢幻地平ラグナロク					0
+	ディーア	驚き4破損				0
+Wait						2
+FadeIn	white					1
+	ディーア	驚き4破損						ここは……？
+Bgm	神社
+CharacterOff
+	煉獄王セイメイ	汗						まったく、詰めが甘いな
+	煉獄王セイメイ	汗						あのままなら君、\nまたやられてしまっていたぜ？
+CharacterOff
+	ディーア	驚き4破損						煉獄王……？
+	ディーア	驚き4破損						まさか、ここは<dash=2>
+CharacterOff
+	煉獄王セイメイ	通常						そう、大風穴の神域
+	煉獄王セイメイ	通常						そして、\n僕は煉獄王メルティナ
+	煉獄王セイメイ	通常						やがてセイメイと名乗った彼が、\n神域に留めた分体だよ
+	煉獄王セイメイ	通常						ただ、あの傀儡の影響で\n外界の記憶も流れ込んでいるから\nあえてこう言おう
+	煉獄王セイメイ	ニヤリ						久しぶりだな、魔剣王
+CharacterOff
+	ディーア	通常4破損						そっか……
+	ディーア	通常4破損						また助けてくれたんですね\nありがとうございます
+CharacterOff
+	煉獄王セイメイ	通常						気にするな、\n君の方こそメルトナを救ってくれた
+	煉獄王セイメイ	通常						それに王たる者、\nそう簡単に頭を下げるんじゃない
+	煉獄王セイメイ	ニヤリ						守るべき民が見たら\n不安をいだいてしまうだろう？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	ニヤリ						なによ！\nいきなり出てきて説教なんて！
+	煉獄剣ヴェルガトゥリオ	笑い						ほんとーに\n感性がおじいちゃんなんだから！
+	煉獄剣ヴェルガトゥリオ	笑い						それにもう時代は違うんだよ？
+Tween	煉獄剣ヴェルガトゥリオ	PunchPosition	y=30				NoWait
+	煉獄剣ヴェルガトゥリオ	笑い						王様にだって親しみが必要なの♪
+StopBgm
+CharacterOff
+	煉獄王セイメイ	通常						時代が違う、か……
+	煉獄王セイメイ	通常						こんな風に話せるのもあと少し、\n最後まで老人として尋ねるとしようか
+	煉獄王セイメイ	ニヤリ						ヴェル、\n彼は良い王になると思うかい？
+	煉獄王セイメイ	ニヤリ						新しい時代へと\nこの魔界を導ける王に
+Bgm	結婚
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	通常						うーん、どうだろ？
+	煉獄剣ヴェルガトゥリオ	通常						一度落ち込むと、\nずーっと引きずるタイプみたいだし
+	煉獄剣ヴェルガトゥリオ	通常						思い詰めたら、\n後先考えずに突っ走っちゃうし
+	煉獄剣ヴェルガトゥリオ	通常						自分で抱え込んで、\nパンクしそうになってたし
+CharacterOff
+	ディーア	汗4破損						あははは……
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	通常						でもね？
+	煉獄剣ヴェルガトゥリオ	笑い						すごく諦めが悪くて、\n一度間違えても、\nまた歩き出せる男の子
+	煉獄剣ヴェルガトゥリオ	笑い						あなたみたいに、ね
+CharacterOff
+	ディーア	通常4破損						ヴェル……
+CharacterOff
+	煉獄王セイメイ	通常						ならよかった
+	煉獄王セイメイ	通常						これで僕も、\n安心して眠ることができる
+	煉獄王セイメイ	通常						わかっていると思うけれど、\n世界意思は強大だ
+	煉獄王セイメイ	通常						今回の脅威は退けられたが、\n魔剣殺しを取り戻す戦いは\n始まったばかりだろう
+	煉獄王セイメイ	通常						それでも……
+CharacterOff
+	ディーア	怒り4破損						はい！
+	ディーア	目閉じ4破損						リディがオレに託した未来は\nただリディが生きている世界じゃない
+	ディーア	怒り4破損						メルトナや他の国の人たち、\nそして魔剣が幸せになる世界だ
+	ディーア	悔しい4破損						世界意思は人類から魔剣を奪い、\nその未来をなくそうとしている……
+	ディーア	怒り4破損						魔剣王として、\n絶対に世界意思を止めてみせます
+CharacterOff
+	煉獄王セイメイ	通常						その覚悟、聞き届けたよ
+	煉獄王セイメイ	通常						そしてヴェルのことも任せた\nなにせ<dash=2>
+	煉獄王セイメイ	ニヤリ						ヴェル……\n君、もう惚れているな？
+CharacterOff
+	ディーア	驚き4破損						……へ？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	笑い						うん♪
+	煉獄剣ヴェルガトゥリオ	笑い						立派な王様で、\n女の子にも優しくできて
+	煉獄剣ヴェルガトゥリオ	笑い						それにセイメイも認める\n諦めの悪い人！
+Tween	煉獄剣ヴェルガトゥリオ	PunchPosition	y=30				NoWait
+	煉獄剣ヴェルガトゥリオ	通常						マスター！\nあなたのこと大好きよ♪
+	煉獄剣ヴェルガトゥリオ	通常						ちょっと気が早いけど、\n子どものこととかも考えないと！
+	煉獄剣ヴェルガトゥリオ	笑い						コウノトリは\n何羽くらい捕まえればいいと思う？
+CharacterOff
+	ディーア	絶望4破損						？？？？
+CharacterOff
+	煉獄王セイメイ	通常						数百年も憧れを煮詰め続けた\nピュアな子だ
+	煉獄王セイメイ	通常						ふふ♪\n断言するけど苦労するぜ？
+	煉獄王セイメイ	ニヤリ						それとヴェルを不幸にしたら\n君を祟ってやるから覚悟するように
+CharacterOff
+	ディーア	汗4破損						あはは……
+CharacterOff
+Se	通信
+	ロサ	通信慌て				1		はっ……！\nようやく通信が……!!
+Shake	ロサ		x=3				NoWait
+	ロサ	通信慌て						ごしゅじっ……ご主人様っ!?\nどうなってるんですか!?
+	ロサ	通信慌て						ずっと呼んでたのに、\nつながらなくて！
+	ロサ	通信通常						って……あれ？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	笑い	2_2_b
+	ディーア	汗4破損	1_2
+	ロサ	<Off>						…………
+CharacterOff
+	ロサ	通信通常						そういうことですか、\nまた違う女の人と……
+	ロサ	通信通常						フケツ
+Se	通信
+CharacterOff	ロサ					.5
+Wait						.5
+CharacterOff
+	ディーア	絶望4破損						ま、待ってくれ！\nこれはそういうことじゃ!?
+	ディーア	絶望4破損						誤解だーっ!!
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	笑い						なにが誤解なのよ、マスター！
+	煉獄剣ヴェルガトゥリオ	笑い						もうヴェルとあなたは\n永遠のパートナーでしょ♪
+CharacterOff
+	煉獄王セイメイ	通常						ふふふ♪\nまったく新しい時代は賑やかそうだ
+	煉獄王セイメイ	笑い						幸せにおなり、ヴェルガトゥリオ
+FadeOut	white					3
+StopBgm
+CharacterOff						0
+Bg	アリス庭園					0
+Wait						2
+	アリス	通常魔帝				1.5
+FadeIn	white					1
+Bgm	図書館
+	アリス	通常魔帝						魔剣王が\n虚構伝承を撃破したか
+	アリス	通常魔帝						この盤上において、\n初めて魔剣王が有効な手を指した
+	アリス	通常魔帝						もっとも絶望王にとっては\n予想した結果だろうがな
+	アリス	通常魔帝						帰投しろ、ハートの女王
+	アリス	通常魔帝						お茶会の準備が必要だ
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	オズアリス影スチル	通常	エフェクト表			0
+FadeIn	black					.3
+	オズアリス影スチル	通常						ふふふー♪\nお茶会、楽しみやー！
+	オズアリス影スチル	通常						みんなで<ruby=・・・・・>なかよーく</ruby>しような♪\n永遠に♪
+FadeOut	black					.3
+CharacterOff						0
+Bg	アリス庭園					0
+	アリス	通常魔帝				0
+FadeIn	black					.3
+	アリス	通常魔帝						それにしても、\nこの虚構どもの発生経路は……
+	アリス	通常魔帝						奴め、余計なことを
+FadeOut	black					1
+CharacterOff						0
+Bg	荒野					0
+	裏ディーア	通常				0
+Wait						1
+FadeIn	black					1
+	裏ディーア	通常						余計なことを、か……
+	裏ディーア	通常						それはこちらの台詞だ、\n魔帝アリス
+	裏ディーア	通常						そして魔剣王、\n貴様はわかっているのか？
+	裏ディーア	通常						貴様が行おうとしていることが\nどんな結果を招くのか
+	裏ディーア	通常						…………\n全ては世界とリディのために
+	裏ディーア	通常						出発するぞ、聖剣ルカ
+StopBgm
+FadeOut	black					1
+CharacterOff						0
+Bg	王政執務室					0
+	勇者レド	通常				0
+Wait						1
+Bgm	作戦会議					0
+FadeIn	black					1
+	勇者レド	通常						本当に出発するのか？
+CharacterOff
+	勇者レイ	拡大怒り	エフェクト表					あったりまえよっ！
+CharacterOff
+	勇者レイ	通常						魔界を脅かす魔剣王が野放しなんて\n勇者として許せない！
+	勇者レイ	蔑み						そんな私を父は許してくれないっ！
+	勇者レイ	怒り						勇者王の血を継ぐ者！\n勇者レイがこの剣に誓うわ!!
+Tween	勇者レイ	PunchPosition	y=30				NoWait
+	勇者レイ	通常						必ず魔剣王を討ち取るとね！
+StopBgm
+FadeOut	black					0
+CharacterOff						0
+	　　　　　　　　　　
+Bg	黒背景
+Wait						2
+Bgm	タイトル
+FadeIn	black					0
+	もちアマリ	通常				2
+	もちアマリ	通常2						ぴっぴー、アウトー
+	もちアマリ	通常2						今回の物語はここまでよ♪
+	もちアマリ	通常2						リコさまちゃんも\nもっと早く先を読みたいのだけど
+	もちアマリ	通常2						これ以上の干渉は\n彼にも影響が出てしまうから\nやめておきましょう
+	もちアマリ	通常2						世界意思との\nゲームは始まったばかり
+	もちアマリ	嬉しい2						待つことも\n楽しむためのスパイスになるわ
+	もちアマリ	嬉しい2						新しいページが記されるまで\n魔界の喧騒を楽しみながら\n一息をつきましょう
+	もちアマリ	通常2						それではまたね♪
+If	isdebug==true
+CharacterOff
+Jump	*Q2001_01
+EndIf
+EndScenario

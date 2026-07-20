@@ -1,0 +1,1674 @@
+# E_459_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	荒野(雨)
+Param	character_grayout=false
+	イベントスチル459E		エフェクト裏2			0
+	瞬きA		blink_a			0
+	瞬きB		blink_b			0
+Tween	瞬きA	MoveBy	y=320 time=2			Add
+Tween	瞬きB	MoveBy	y=-320 time=2			Add
+Se	大雨	TRUE				1
+Wait						.5
+FadeIn	black					1.5
+	※※※※							うぁ……ぁ…………
+Wait						.5
+Se	歩く
+	？？？？							……落ち着いて、力を抜いて\n今、<ruby=すくって>壊して</ruby>あげますから
+	　　　　　　　　　　
+Tween	瞬きA	MoveBy	y=-320 time=1.5				NoWait
+Tween	瞬きB	MoveBy	y=320 time=1.5				NoWait
+Wait						.3
+	黒背景		エフェクト表			.9
+Wait						.3
+StopSe	歩く
+	イベントスチル459F		エフェクト裏2			0
+Tween	瞬きA	MoveBy	y=320 time=2				Add
+Tween	瞬きB	MoveBy	y=-320 time=2				Add
+Wait						.5
+CharacterOff	黒背景					1
+	？？？？							……大丈夫ですよー\nすぐに楽になりますから
+Se	突1
+FadeOut	red					.1
+CharacterOff
+Se	倒れる
+	ジャガーノート	？？？？
+Param	character_grayout=true
+Wait						1
+FadeIn	red					1
+Wait						.5
+	ジャガーノート	？？？？						……………………
+	※※※※							…………たのむ、俺も……
+	※※※※							……<ruby=すくって>壊して</ruby>くれ…………
+	ジャガーノート	？？？？						……仕方ありませんねー
+Se	斬1
+FadeOut	red					.1
+Wait						.5
+FadeIn	red					1
+Se	倒れる
+Wait						.7
+	ジャガーノート							……大丈夫ですよ\nすぐに楽になりますから
+StopSe
+CharacterOff						0
+	黒背景		エフェクト表			0
+	？？？？							…………楽に、なりますから
+FadeOut	black					1
+CharacterOff						0
+Bg	黒背景					0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+	　　　　　　　　　　
+Wait						4
+FadeIn	black					1
+	　　　　　　　　　　							<dash=2>……領域展開、75%まで完了
+	　　　　　　　　　　							<ruby=ホワイトラビット>白兎</ruby>座標確認\n<dash=2>対象捕捉
+Se	魔剣入る
+	アネセサリロゴ	赤	エフェクト表			1
+Wait						1
+CharacterOff						1
+Wait						1
+	　　　　　　　　　　							浮動魔力波、全て正常\n空間座標を固定
+	　　　　　　　　　　							<dash=2>転送魔法陣、展開
+Se	光1
+	イベントスチル459H1		effect_a			1
+	イベントスチル459H2		effect_b			1
+Tween	イベントスチル459H1	RotateBy	z=5 time=100				NoWait
+Tween	イベントスチル459H2	RotateBy	z=-5 time=100				NoWait
+Wait						1
+CharacterOff						1
+Wait						1
+	黒背景		エフェクト表			0
+	ジャガーノート=ロスト	？？？？
+ImageEffectOff	SpriteCamera	Bloom
+	イベントスチル392L	L2	エフェクト裏2
+Param	character_grayout=false
+Wait						1
+Bgm	絶望
+CharacterOff	黒背景					0
+	ジャガーノート=ロスト	？？？？						…………
+	カルバノグ							いいんですかあ？
+	ジャガーノート=ロスト	？？？？						……なにがぁ？
+	カルバノグ							勝手に行ったら、またドロシーに\n怒られちゃいますよう？\nこう……『がおー!!』って
+	ジャガーノート=ロスト	？？？？						そんな怒り方しないでしょぉー
+	カルバノグ							しますよう\nカルバ見ましたもん
+	ジャガーノート=ロスト	？？？？						ふーん\n……それより、カルバこそいいのぉ？
+	カルバノグ							なにがですかあ？
+	ジャガーノート=ロスト	？？？？						カルバの力を借りるんだから、\nあなたも共犯みたいなものでしょ？
+	ジャガーノート=ロスト	？？？？						カルバの方こそ\nドロシーに怒られちゃうかもよぉ？
+	カルバノグ							共犯にされても困りますよう\nカルバはただ運ぶだけですしい
+	カルバノグ							それに、"あの人"のためになるなら\nカルバは別にいいですよう
+	ジャガーノート=ロスト	？？？？						ふぅーん……
+	カルバノグ							それじゃあ、カルバは\n離れてますねえー\n快適な魔界の旅へー、さようならあ♪
+CharacterOff						.5
+Wait						.7
+	ジャガーノート=ロスト		2_3
+	？？？？							はいはい、じゃあねぇー
+	ジャガーノート=ロスト	悔しい
+	？？？？							……"誰かのため"とか\nバカみたい
+Param	character_grayout=false
+Se	光1
+Se	光2
+	オーラ青		エフェクト表			1
+Wait						.5
+	白背景		エフェクト表2			1
+Wait						1
+CharacterOff	オーラ青
+CharacterOff	ジャガーノート=ロスト
+	　　　　　　　　　　
+Bg	夜空
+Wait						2
+Se	無
+CharacterOff	白背景					.5
+Wait						1.5
+	？？？？	<Off>						<dash=2>ああ
+	？？？？	<Off>						……懐かしいなあ、この景色
+	？？？？	<Off>						さぁさぁ<dash=2>
+StopBgm
+	黒背景		エフェクト表			0
+	？？？？							<dash=2>救われない救いたがりに、\n逢いにいくとしようかなあ♪
+FadeOut	black					1
+	イベントロゴ459		エフェクト表			0
+Bg	黒背景
+Wait						2
+FadeIn	black					1
+	イベントロゴ459							　　
+FadeOut	black					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_459_02
+EndIf
+EndScenario
+
+# E_459_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	酒場1F
+FadeIn	white					.5
+	　　　　　　　　　　							<color=blue> 　　　　中央大陸ダフィート\n 　　　　　貿易の街リーマ</color>
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							…………世界図書館に緊急招集だって
+	リディ							ふぇ？\nマスターが？
+	ディーア	通常2						ああ、さっき世界図書館から\n手紙が届いてな
+	ディーア							ロールお嬢様からの\n直々の命令みたいだ
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	笑い2						何かあったのかな……\nあ、もしかしてパーティの\nお誘いとか!?
+	ディーア	怪しい2						リディはケーキ食べたいだけだろ
+	リディ	悔しい2						むぅ、違うもん！\n確かにケーキは食べたいけど……
+	ディーア	あはは2						パーティへの招待だったら、\nきっとそう書いて送ってくると思うぞ
+	ディーア	怪しい2						それに、用事を手紙に書かずに\n呼び出すっていうことは、\nそれだけ重要な話ってことだ
+	ディーア	怒り2						……残念だけど、\nあんまり楽しい話じゃなさそうだな
+	リディ	驚き2						重要な話？
+	ディーア	怪しい2						そうだな、例えば……
+StopBgm
+CharacterOff
+Se	光1
+	オーラ青		エフェクト表			1
+Wait						1
+Se	魔剣入る
+	ロルリアンレット	通常通信				1
+Wait						1
+CharacterOff	オーラ青					1
+	ロルリアンレット							<dash=2>聞こえるかしら、魔剣使い？
+Bgm	図書館
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							わぁ！
+	ディーア							ろ、ロールお嬢様!?
+CharacterOff
+	ロルリアンレット	驚き通信						貴方達が来るまで待っている\nつもりだったけど、\n悠長に構えている余裕はなくなったわ
+	ロルリアンレット							手短に伝えるわね\n先の戦いで破壊した\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>
+	ロルリアンレット							……それと同種の反応が観測されたわ
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>……!!
+CharacterOff
+	ロルリアンレット	驚き通信						ええ、それもまた二体同時に、ね
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	リディ							二体も……
+	ディーア							ごくひらやミラの時と\n同じってことですか……
+CharacterOff
+	ロルリアンレット	驚き通信						ええ、そうなるわね
+	ロルリアンレット							本当は世界図書館で防御を固める\nつもりだったけれど……\n思ったより敵の動きが早いわ
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							それで、オレに\n連絡が来るってことは、まさか……
+CharacterOff
+	ロルリアンレット	驚き通信						ええ、そのまさかよ
+	ロルリアンレット							今回確認したロストのうち\n一体は貴方の所有する魔剣<dash=2>\nジャガーノートとみて間違いないわね
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	リディ							ジャガノちゃん……!?
+	ディーア							ジャガーノートが……\nそれで、もう一人は……？
+CharacterOff
+	ロルリアンレット	驚き通信						もう一体は正体不明ね\nそちらはいま魔剣機関が\n解析を進めているわ
+	ロルリアンレット							とにかく、早くそこから逃げなさい\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>の狙いは\n貴方達である可能性が高いわ
+	ロルリアンレット							対魔剣殲滅魔導兵器は、\n魔剣使いの天敵とも呼べる存在……
+	ロルリアンレット							前はたまたま上手くいった\nかもしれないけれど、\n今回も上手くいく保証はないわ
+	ロルリアンレット							少なくとも、真っ向から戦って\n勝てる相手ではないわね\n今のうちに<dash=2>
+CharacterOff
+StopBgm
+	ジャガーノート		2_3					<dash=2>手遅れだと思いますよー？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+Tween	リディ	PunchPosition	y=50				NoWait
+Bgm	緊迫
+	リディ							ジャガノちゃん！\nいつからそこに……？
+CharacterOff
+	ジャガーノート							最初から聞いてましたよー？\n別に隠すようなことでも\nないでしょうしー
+	ジャガーノート							それからマスターさんも\n戦う準備しておいたほうがいいですよ
+	ジャガーノート							<dash=2>もう既に、\nそこまで来ているみたいですから
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							な……っ!?
+Se	火事
+Shake	Graphics		x=5 y=5 time=1.5
+Wait						.5
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	悔しい2						な、なに……今の揺れ……!?
+	ディーア	悔しい2						近いぞ……すぐ外だ\n行くぞ、ジャガーノート!!
+CharacterOff
+	ジャガーノート							はいはい、仕方ありませんねー
+Se	走る
+FadeOut	black					.5
+StopBgm
+Bg	和風市街（夜）
+CharacterOff
+	ジャガーノート		2_2
+	ディーア	驚き2	1_2
+Wait						.5
+FadeIn	black					.5
+	ディーア							<dash=2>あれは
+FadeOut	black					.3
+CharacterOff
+Param	character_grayout=false
+	イベントスチル459A1		エフェクト表
+	イベントスチル459A2		エフェクト裏
+Wait						.5
+FadeIn	black					1
+Bgm	緊迫
+	？？？？	<Off>						<dash=2>きゃはは♪\nみぃつけた、救われたがりの\nかわいそうな救世主さん♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2	1_2
+	ジャガーノート		2_2
+	ディーア							お前は……\nジャガーノート=ロストか……!!
+Param	character_grayout=false
+CharacterOff
+	イベントスチル459A1		エフェクト表
+	イベントスチル459A2		エフェクト裏
+Wait						.1
+CharacterOff	イベントスチル459A1					1
+Wait						.5
+	ジャガーノート=ロスト	<Off>						せいかーい♪\n<ruby=・・・・>久しぶり</ruby>マスターさん♪
+	ジャガーノート=ロスト	<Off>						どうしようもない方の\nジャガーノートがぁ、\n会いに来てあげたよ♪
+If	isdebug==true
+CharacterOff
+Jump	*E_459_03
+EndIf
+EndScenario
+
+# E_459_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bgm	緊迫
+Bg	和風市街（夜）
+	ディーア	本気2	1_2
+	ジャガーノート		2_2
+FadeIn	black					.5
+	ディーア							はぁぁっ!!
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.3
+	ディーア	怒り2						今のうちに逃げるんだ!!\n……早くッ!!
+CharacterOff
+	酒場の客A		1_3					あ、ああ……!!
+Se	走る
+Tween	酒場の客A	MoveTo	x=250 time=1.5				NoWait
+Wait						.7
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+Se	突1
+FadeOut	red					.5
+CharacterOff
+Bg	和風市街（夜）
+ImageEffectOff	SpriteCamera	MotionBlur
+	酒場の客A	絶望	3_3
+Wait						.3
+FadeIn	red					.5
+Se	倒れる
+Tween	酒場の客A	MoveBy	y=-200				NoWait
+Wait						.5
+CharacterOff						.5
+Wait						.5
+	ジャガーノート=ロスト	悔しい						………………じゃまだなぁ
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	ジャガーノート		2_2
+	ディーア							くっ……
+	ジャガーノート							大丈夫ですか、マスターさん？
+	ディーア							ああ、オレは大丈夫だ\nでも……
+CharacterOff
+	酒場の客B							くそ……い、痛え……
+CharacterOff
+	酒場の客A	絶望
+Shake	酒場の客A		x=5				NoWait
+	酒場の客A							うぁ……ぐぅぅっ…………
+CharacterOff
+	ディーア	悔しい2	1_2
+	ジャガーノート		2_2
+	ディーア							くっ……\n少し待ってろ、必ず助けて<dash=2>
+CharacterOff
+StopBgm
+	酒場の客A	絶望						<dash=2>頼む……\nもういい、楽に……してくれ……
+CharacterOff
+	ディーア	怒り2	1_2
+	ジャガーノート		2_2
+Bgm	絶望
+	ディーア							…………ッ\n正気か……？
+CharacterOff
+	酒場の客A	絶望						……たのむ…………
+CharacterOff
+	ディーア	怒り2	1_2_b
+	ジャガーノート		2_2
+Se	歩く
+Tween	ジャガーノート	MoveTo	x=0	linear			Add
+	ジャガーノート							……仕方ないですねー\n楽にしてあげますよ
+StopSe
+Se	斬1
+FadeOut	red					.1
+CharacterOff						0
+	酒場の客A	絶望				0
+FadeIn	red					.5
+	酒場の客A							ああ……ありがとう…………
+CharacterOff	酒場の客A					.5
+Wait						.7
+CharacterOff
+	ディーア	悔しい2	1_2_b
+	ジャガーノート
+Tween	ジャガーノート	MoveBy	x=90				Add
+	ジャガーノート							……よかったですねー\n救われたみたいで
+	ジャガーノート		2_2
+	ディーア	怒り2	1_2					…………油断するなよ、\nジャガーノート
+	ジャガーノート							はいはい、わかってますよー\n<dash=2>次はアレを<ruby=すくわ>壊さ</ruby>ないと
+CharacterOff
+Bgm	緊迫
+	ジャガーノート=ロスト							……うわうわうわー、かわいそぉー
+	ジャガーノート=ロスト							そうやってまた\n救った気になってるんだぁ\n救えないなぁ、救われないなぁー
+CharacterOff
+	ディーア	驚き2	1_2
+	ジャガーノート		2_2
+	ジャガーノート							……救われないのは\nあなたの方じゃないんですかー？
+	ジャガーノート							<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>だか\nなんだか知らないですけどー
+	ジャガーノート							救うことをやめて\nただの"破壊兵器"に\n成り下がるなんて<dash=2>
+CharacterOff
+	ジャガーノート=ロスト							救うことをやめる？\nきゃはは♪　面白いこと言うなぁ♪
+	ジャガーノート=ロスト							そういうあなたは、\n自分が誰を救いたいのか、\n本当に理解しているの？
+CharacterOff
+	ディーア	怒り2	1_2
+	ジャガーノート		2_2
+	ジャガーノート							…………っ!?
+CharacterOff
+	ジャガーノート=ロスト	怒り						誰かのため？　誰かって誰？
+	ジャガーノート=ロスト							そもそもその"<ruby=きゅうさい>破壊</ruby>"で、\n本当に誰か救われたの？
+CharacterOff
+	ディーア	怒り2	1_2
+	ジャガーノート	悔しい	2_2
+	ジャガーノート							あなた……まさか
+CharacterOff
+	ジャガーノート=ロスト							本当はもう気付いてるんでしょぉ？
+	ジャガーノート=ロスト	怒り						<dash=2>ジャガーノートの\nやってきたことは救済じゃない
+	ジャガーノート=ロスト							救いを求める人の言いなりになって、\nただ破壊してきただけ
+	ジャガーノート=ロスト	通常						そりゃそうだよねぇ？
+	ジャガーノート=ロスト							救われたことさえないんだから、\n正しい救い方なんて知らないもんねぇ
+CharacterOff
+	ディーア	怒り2	1_2
+	ジャガーノート	悔しい	2_2
+	ジャガーノート							…………
+CharacterOff
+	ジャガーノート=ロスト							あーあ、救われないなぁ♪
+	ジャガーノート=ロスト							何を救いたいのかさえ理解していない\n<ruby=あなた>ジャガーノート</ruby>も
+	ジャガーノート=ロスト							<dash=2>"<ruby=きゅうさい>破壊</ruby>"を救済とも思っていない\n救世主に救われたその人も
+CharacterOff
+	黒グラデーション		エフェクト表
+	ジャガーノート	悔しい
+	ジャガーノート							…………っ
+CharacterOff
+	ディーア	本気2						はぁっ!!
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.2
+CharacterOff
+	ジャガーノート=ロスト							…………!!
+CharacterOff
+	ディーア	怒り2	1_2
+	ジャガーノート		2_2
+	ディーア							耳を貸すな、ジャガーノート\nそれより今は、この状況を\n切り抜けることだけを考えるんだ
+	ジャガーノート							……言われなくてもわかってますよー
+	酒場の客	<Off>						うぅ……あぁぁ…………
+	酒場の客	<Off>						たす……けて…………
+	ディーア							そのために、\nまずジャガーノート=ロストを\nなんとかする<dash=2>!!
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト表
+	ジャガーノート=ロスト	拡大	エフェクト裏					…………あーあ、そうだったなぁ\nすっかり忘れてた
+	ジャガーノート=ロスト							この世界には救いようのない\n救いたがりが、もう一人いたんだった
+CharacterOff	黒グラデーション
+Bgm	魔王バトル
+	ジャガーノート=ロスト							じゃあ教えてあげないとなぁ！\n"<ruby=きゅうさい>破壊</ruby>"されるべきは、どちらなのかを♪
+If	isdebug==true
+CharacterOff
+Jump	*E_459_04
+EndIf
+EndScenario
+
+# E_459_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	和風市街（夜）
+	ディーア	本気2	1_2
+	ジャガーノート		2_2
+FadeIn	white					.5
+	ディーア							はぁっ!!
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+	ジャガーノート	悔しい						…………
+FadeOut	black					.1
+Bg	黒背景					0
+CharacterOff						0
+FadeIn	black					.1
+	　　　　　　　　　　							そもそもその"<ruby=きゅうさい>破壊</ruby>"で、\n本当に誰か救われたの？
+FadeOut	black					.1
+CharacterOff						0
+Bg	和風市街（夜）					0
+StopSe						0
+	　　　　　　　　　　
+	黒グラデーション		エフェクト表			0
+	ジャガーノート	悔しい				0
+FadeIn	black					.1
+	ジャガーノート							………………っ
+Se	突2
+FadeOut	white					.1
+CharacterOff						0
+	ジャガーノート=ロスト					0
+FadeIn	white					.1
+Wait						1
+Se	光2
+Se	斬2
+FadeOut	white					.1
+CharacterOff						0
+	ジャガーノート	悔しい
+FadeIn	white					.1
+	ジャガーノート							ち……
+FadeOut	black					.1
+CharacterOff						0
+Bg	黒背景					0
+FadeIn	black					.1
+	　　　　　　　　　　							救われたことさえないんだから、\n正しい救い方なんて知らないもんねぇ<speed=0.5>  </speed>	BrPage
+FadeOut	black					.1
+CharacterOff						0
+Bg	和風市街（夜）					0
+StopSe
+	黒グラデーション		エフェクト表			0
+	ジャガーノート	絶望				0
+FadeIn	black					.5
+	ジャガーノート							<size=20>…………ああもう、うるさいですねー</size>
+CharacterOff
+	ディーア	本気2						ジャガーノート!!
+	ジャガーノート	悔しい						<dash=4>え
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+Bg	和風市街（夜）					0
+Param	character_grayout=true
+CharacterOff
+	ジャガーノート	悔しい
+Se	打1
+Tween	ジャガーノート	MoveBy	x=50				NoWait
+	ジャガーノート							くっ……!!
+	ディーア	悔しい2						大丈夫か、ジャガーノート!!
+	ジャガーノート	悔しい						…………これくらい余裕ですよ
+	ジャガーノート	通常						まったく、私は救済なんか\n求めてないんですけどね
+CharacterOff
+	ジャガーノート=ロスト		2_3_b
+	ディーア	あはは2						……よかった、軽口を叩く\n余裕はありそうだな
+CharacterOff
+	ジャガーノート	悔しい						<dash=4>マスターさん、後ろ!!
+CharacterOff
+	ジャガーノート=ロスト		2_3_b
+	ディーア	悔しい2						…………ッ!?
+StopBgm
+Se	打2
+FadeOut	white					.1
+Param	character_grayout=false
+CharacterOff						0
+	ジャガーノート=ロスト		2_3_b			0
+	ディーア	悔しい2				0
+FadeIn	white					.1
+	ディーア	黒2						ぐっ……
+Se	倒れる
+Tween	ディーア	MoveBy	y=-350 time=1.5				NoWait
+Wait						.2
+CharacterOff	ディーア					.5
+Param	character_grayout=true
+Wait						1
+CharacterOff
+	ジャガーノート	悔しい						マスターさん!!
+	ジャガーノート=ロスト							うわーかわいそー、\nこれは救えないなぁー♪
+Bgm	絶望
+	ジャガーノート	悔しい						……あーあ、油断しましたねー
+	ジャガーノート							……これは撤退するしか\nなさそうですけど……
+	ジャガーノート							<size=20><dash=2>逃してはもらえなさそうですね</size>
+	ジャガーノート=ロスト							……あれあれぇ？\nどうしたの？\n"<ruby=きゅうさい>破壊</ruby>"、してあげないの？
+	ジャガーノート=ロスト							かわいそうだよ？\n苦しそうだよ？\nほらぁ、<ruby=すくって>壊して</ruby>あげなきゃ♪
+	ジャガーノート=ロスト							<ruby=わたし>ジャガーノート</ruby>なら救えるんでしょ？\n痛みから、辛さから、\n救済できるんでしょぉ？
+	ジャガーノート=ロスト							<dash=2>自分にそう言い聞かせて、\n大勢<ruby=すくって>壊して</ruby>きたんでしょぉ？
+	ジャガーノート	悔しい						…………っ
+	ジャガーノート=ロスト							救っちゃいなよぉー♪\nいつものように斜に構えてさぁ♪
+	ジャガーノート=ロスト							『あなたは救われるんだ』ってさぁ♪
+	ジャガーノート	悔しい						……それはできませんねー\nマスターさんは別に\n"<ruby=きゅうさい>破壊</ruby>"を望んでませんし
+	ジャガーノート							"<ruby=きゅうさい>破壊</ruby>"を望む人を、望み通りに壊すのが\nジャガーノートの司る\n救済ですからねー
+	ジャガーノート	通常						あなたのように"<ruby=きゅうさい>破壊</ruby>"を望まない人を\n壊そうとするのは、\n品のないただの虐殺行為ですよ
+	ジャガーノート							どっちの方が救えないかは、\n一目瞭然だと思いますけどねー？
+CharacterOff
+	黒グラデーション		エフェクト表
+	ジャガーノート=ロスト	怒り						……そっか、まだわかってないんだぁ
+CharacterOff	黒グラデーション
+	ジャガーノート=ロスト							本当に救いたい人を救うことも\nできないのに、救世主を名乗る\n愚かな<ruby=わたし>ジャガーノート</ruby>……
+	ジャガーノート=ロスト	通常						ねえ、あなたが本当に救いたいのは\n自分自身でしょ？
+	ジャガーノート	悔しい						…………っ!?
+	ジャガーノート=ロスト	怒り						確かにあなたは救いたがりだけど、\n本当は自分が一番に\n救われたいと思ってる
+	ジャガーノート=ロスト	通常						そうだよね？\nだって、本当は自分のことが\n大好きだもんねぇ？
+	ジャガーノート=ロスト							自分が一番大好きで、本当は一日を\n振り返って涙するくらい優しい、\nただの女の子だもんねぇ♪
+CharacterOff
+	ジャガーノート=ロスト	拡大	エフェクト表					でも残念でしたぁ♪
+FadeOut	black					.2
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+	イベントスチル459E		エフェクト表			0
+FadeIn	black					.2
+	ジャガーノート=ロスト	<Off>						救済を謳って、\n壊して壊して壊して壊して<dash=2>
+	ジャガーノート=ロスト	<Off>						その行為が、\nあなたを救うことは永遠にない
+	ジャガーノート=ロスト	<Off>						その未来にあるのは、\n絶望に飲まれた歪な私だけ
+FadeOut	black					.5
+ImageEffectOff	SpriteCamera	GrayScale
+Param	character_grayout=true
+CharacterOff						0
+	ジャガーノート=ロスト	怒り				0
+FadeIn	black					.5
+	ジャガーノート=ロスト	怒り						救われたこともないくせに、\n誰かのための救済なんてバカみたい
+	ジャガーノート=ロスト							<dash=2>だから、私は自分のために\n行動することにしたの
+	ジャガーノート=ロスト							これは私のための<dash=2>\n"<ruby=きゅうさい>破壊</ruby>"を終わらせるための"<ruby=きゅうさい>破壊</ruby>"
+	ディーア	怒り2	2_3_b
+	ジャガーノート=ロスト	通常						誰も救わない"<ruby=きゅうさい>破壊</ruby>"を、\n今ここで終わらせてあげる！
+StopBgm
+	ディーア	怒り2						<dash=4>させない
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210E)		エフェクト裏			0
+Wait						.1
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	和風市街（夜）					0
+	ジャガーノート=ロスト	怒り				0
+Tween	ジャガーノート=ロスト	MoveBy	x=50				NoWait
+Wait						.5
+ImageEffectOff	SpriteCamera	MotionBlur
+	ジャガーノート=ロスト							…………しぶといなぁ
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	ジャガーノート	悔しい	2_2
+Bgm	緊迫
+	ジャガーノート							……マスターさん!?\nそ、そんな状態で……
+	ディーア							……こんなところで\n共倒れするよりはマシだろ？
+	ディーア	怒り2						撤退する隙を作れればいい\n<dash=2>やるぞ、ジャガーノート
+	ジャガーノート	通常						……はぁ、相変わらず\n救いようがありませんね\n私なんかさっさと<dash=2>
+	ディーア							見捨てちゃえば楽なのに、\nなんて言うなよ
+	ジャガーノート							……………………言いませんよ
+	ジャガーノート							……あーあ、仕方ないなぁ\nここまで言わせちゃったら、\n本気出すしかないかなー……っ!!
+If	isdebug==true
+CharacterOff
+Jump	*E_459_05
+EndIf
+EndScenario
+
+# E_459_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	和風市街（夜）
+	ジャガーノート=ロスト	怒り
+FadeIn	white					.5
+	ジャガーノート=ロスト							…………っ
+Se	光3
+FadeOut	white					.5
+CharacterOff						0
+	　　　　　　　　　　
+Wait						1
+FadeIn	white					.5
+StopBgm
+Wait						1
+Bgm	絶望
+	ジャガーノート=ロスト	悔しい						…………あーあ、逃げられちゃったぁ
+	ジャガーノート=ロスト							まあいっか、\nどうせ逃げたって無駄だしぃー
+	ジャガーノート=ロスト							……あれ？
+CharacterOff
+	酒場の客	<Off>						…………ぁ……
+	酒場の客	<Off>						……頼む……俺を…………
+CharacterOff
+	ジャガーノート=ロスト	悔しい						ふーん…………\nもしかして、救われたいんですかぁ？
+CharacterOff
+	酒場の客	<Off>						……ああ…………
+CharacterOff
+	ジャガーノート=ロスト	悔しい						そっかぁー
+	ジャガーノート=ロスト	通常						でも、あなた達を<ruby=すくって>壊して</ruby>も、\n私は救われないしなぁー
+Se	歩く
+CharacterOff						1
+Wait						1
+StopSe						2
+	酒場の客	<Off>						……ぁ……待って、くれ……
+	酒場の客	<Off>						たのむ…………
+FadeOut	black					1
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_459_06
+EndIf
+EndScenario
+
+# E_459_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	red					.1
+StopSound
+Bg	荒野(雨)
+Se	突1
+Param	character_grayout=false
+	黒背景		エフェクト表
+	イベントスチル459E		エフェクト裏
+Wait						1
+FadeIn	red					.5
+Wait						1
+	　　　　　　　　　　							<dash=2>また一人、"<ruby=きゅうさい>破壊</ruby>"した
+Se	大雨	TRUE				2
+CharacterOff	黒背景					1
+Wait						1.5
+Se	突1
+FadeOut	red					.1
+Wait						.5
+FadeIn	red					.5
+Wait						.5
+	　　　　　　　　　　							<dash=2>また一人、また一人
+	　　　　　　　　　　							見知った顔が、その微笑みが、\n冷たく解けて動かなくなっていく
+Se	突1
+FadeOut	red					.1
+Wait						.5
+FadeIn	red					.5
+Wait						.5
+	　　　　　　　　　　							また一人、また一人
+	　　　　　　　　　　							人々の望むように"<ruby=きゅうさい>破壊</ruby>"して、\n同じ数だけ私は孤独になった
+	　　　　　　　　　　							疲れ切った身体に、\n返り血が重くのしかかる
+	　　　　　　　　　　							歩き続けるための靴は、\nいつのまにかなくなっていた
+FadeOut	black					.5
+CharacterOff
+	イベントスチル459G		エフェクト裏			0
+FadeIn	black					.5
+	　　　　　　　　　　							<dash=2>それでも
+	　　　　　　　　　　							…………誰かが、\n救いを求めているのなら
+StopSe						1
+	黒背景		エフェクト表			1
+Wait						1
+	ディーア	<Off>						<dash=2>……今のは
+FadeOut	white					1
+CharacterOff
+	リディ	悲しい2
+Bg	研究所A
+Wait						1
+Bgm	図書館
+FadeIn	black					.5
+	リディ							……すたー、マスター!!
+	ディーア	驚き2						…………リディ？
+	リディ	泣き2						マスター……!!\nよかったぁ、無事だったぁ……
+	ディーア	あはは2						……悪い、心配かけたな
+	ロルリアンレット	驚きH						<dash=2>……目が覚めたようね？
+	ディーア	驚き2						…………ロールお嬢様
+	ロルリアンレット	驚きH						意識ははっきりしているわね
+	ディーア	悔しい2						オレは……
+	ロルリアンレット	驚きH						ジャガーノート=ロストに\nやられたと聞いたわ\nまったく、逃げろと忠告したのに
+	ディーア	驚き2						……もしかして、ロールお嬢様が\n助けてくれたんですか？
+	ロルリアンレット	通常H						世界図書館に連絡を取ったのは\nジャガーノートよ\n礼ならその子に言うといいわ
+	ディーア	驚き2						そうですか……\nありがとな、ジャガーノート
+	ジャガーノート							自分のためにやっただけですよー
+	ジャガーノート							マスターさんに何かあったら、\n困るのは私たちですからねー
+	ジャガーノート							それにほら、大勢の魔剣たちに\n責められるとか、\n考えただけでも嫌ですし
+	ディーア	あはは2						それでも助かったよ
+	ディーア	怒り2						……それで、\nジャガーノート=ロストは\nどうなったんですか？
+	ロルリアンレット	驚きH						貴方達のいた酒場から消息を\n絶って以来、観測できていないわ
+	ディーア	驚き2						観測できていない……？
+	ロルリアンレット	悪い顔H						ええ、どうやら世界図書館に対して\n妨害工作を行っている者が\nいるようね
+	ロルリアンレット							……恐らく、もう一体のロストね
+	ディーア	悔しい2						もう一体のロスト……
+	ロルリアンレット	驚きH						まあ、それは私がなんとかするわ\n貴方はジャガーノート=ロストの方に\n集中しなさい
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	イベントスチル393I		エフェクト表			0
+FadeIn	white					.3
+	ロルリアンレット	<Off>						<dash=2>もし、バハムート=ミラから\n聖竜王の力を覚醒させたのと\n同じように、
+	ロルリアンレット	<Off>						魔剣の伝承から真価を\n引き出す技術を、\n相手が持っているのだとしたら……
+	ロルリアンレット	<Off>						<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>は、\n貴方が想像しているより\nずっと危険な存在かもしれないわ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ロルリアンレット	驚きH				0
+FadeIn	white					.3
+	ロルリアンレット							……貴方のことだから\n言うだけ無駄だろうけれど\nくれぐれも、無茶はしないことね
+	ディーア	悔しい2						…………覚えておきます
+	ロルリアンレット	通常H						じゃあ、後は任せたわ
+Se	歩く
+CharacterOff						1
+Wait						1.5
+StopSe
+StopBgm
+	ディーア	悔しい2						………………
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	ジャガーノート		2_2
+Bgm	絶望
+	ジャガーノート							……"無茶する気満々"って顔ですねー
+	ディーア	驚き2						……そんな顔してたか？
+	ジャガーノート							マスターさん、今\n"どうしようもない救いたがり"\nの顔してますよ
+	ジャガーノート							どうしたんですかー？\nあの<ruby=わたし>ジャガーノート</ruby>を\n救いたくなっちゃったんですか？
+	ディーア	悔しい2						…………気を失っている間、\n夢を見たんだ
+Se	回想
+FadeOut	black					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	イベントスチル459F		エフェクト表			0
+FadeIn	black					.3
+	ディーア	<Off>						崩壊した魔界で、\n心のどこかで救いを求めながら、\nたった一人で"<ruby=きゅうさい>破壊</ruby>"を続ける誰かの夢を
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+	ジャガーノート		2_2			0
+	ディーア	悔しい2	1_2			0
+FadeIn	black					.3
+	ディーア							きっとあれは、\nジャガーノート=ロストの<dash=2>
+	ジャガーノート							それで？\nそれを見て救いたく\nなっちゃったんですかー？
+	ジャガーノート							それともまさか、\nわかり合えるかもなんて\n思っちゃいましたー？
+	ディーア							……さあな、わかり合えるか\nどうかはわからない
+	ディーア	怒り2						でも、もしその可能性があるなら……\n破壊をせずに\n救うことができるなら<dash=2>
+	ジャガーノート							無理だと思いますよー\nあれはもはや\nジャガーノートではありませんからね
+	ディーア	驚き2						……ジャガーノートじゃない？
+FadeOut	black					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Param	character_grayout=false
+	ジャガーノート	武器	エフェクト表			0
+Bg	荒野					0
+FadeIn	black					.3
+	ジャガーノート							ジャガーノートは救済の破壊神です\n破壊という特性を救済に使うことで\n成立した魔剣です
+	ジャガーノート							人に望まれて、救済として破壊を行う
+	ジャガーノート							それこそが、破壊神である\nジャガーノートが信仰され、\n存在を許された理由なんですよ
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル459A2		エフェクト表			0
+FadeIn	black					.3
+	ジャガーノート	<Off>						でも、ジャガーノート=ロストは\nそれを捨てたみたいですから
+	ジャガーノート	<Off>						人々を救うという行為を捨てて、\n破壊神の力をただの破壊の為に\n使った時点で<dash=2>
+	ジャガーノート	<Off>						ジャガーノートは冥獣や霊獣などの\n指定災害と変わらない、\n討つべき悪に変わるんです
+FadeOut	black					.5
+Bg	研究所A					0
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Param	character_grayout=true
+	ディーア	悔しい2	1_2			0
+	ジャガーノート		2_2			0
+FadeIn	black					.5
+	ジャガーノート							いずれにせよ、\n破壊するしかない存在なんです
+	ジャガーノート							<dash=2>わかり合おうとする\n必要なんてありませんよ
+	ディーア	怒り2						…………
+	ジャガーノート							それに、ジャガーノート=ロストが\n"<ruby=きゅうさい>破壊</ruby>"を求めているというのなら\n話は早いですし
+	ジャガーノート							いつもどおり、ただ<ruby=すくえ>壊せ</ruby>ば\nいいんですから
+	ディーア	悔しい2						……でも、それじゃあ\nジャガーノート=ロストは\n救えないかもしれない
+	ジャガーノート							"<ruby=きゅうさい>破壊</ruby>"した後のことなんて\n知りませんよー
+	ジャガーノート							だって、その救済を語り継ぐことが\nできるのは救う側である\n私だけですから
+	ジャガーノート							結果としてその"<ruby=きゅうさい>破壊</ruby>"が正しくても、\n間違っていても、\nそれを糾弾できる人はいませんから
+	ジャガーノート							救った側が救った気になっていれば、\nそれでいいんです
+	ジャガーノート							それに、もし残された者が、\nその死は無駄なものだったと\n言ってしまったら<dash=2>
+	ジャガーノート							この救済は間違っていたと\n思ってしまったら、その死は本当に\n無駄になってしまいます
+	ジャガーノート							だから、相手が"<ruby=きゅうさい>破壊</ruby>"を\n望んでいるのなら、\n望まれた通りに"<ruby=きゅうさい>破壊</ruby>"をする
+	ジャガーノート							それがジャガーノートの救済です
+	ディーア	怒り2						<dash=2>ああ
+Se	回想
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	和風市街（夜）					0
+	ジャガーノート=ロスト	怒り				0
+FadeIn	black					.2
+	ジャガーノート=ロスト							ジャガーノートのやってきたことは\n救済じゃない
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+Bg	研究所A					0
+CharacterOff						0
+	ジャガーノート		2_2			0
+	ディーア	怒り2	1_2			0
+FadeIn	black					.2
+	ディーア							……そしてそれが、\nジャガーノート=ロストを\n否定しないといけない理由か
+	ディーア							……でも、ジャガーノートは\nそれでいいのか？
+	ジャガーノート							なんですかそれ\nいいに決まってるじゃないですかー
+	ジャガーノート							私もマスターさんと一緒で\n救いたがりですからねー
+	ディーア	悔しい2						……でも、それじゃあ\nジャガーノートは救われないだろ
+	ジャガーノート							はい？
+	ディーア							"<ruby=きゅうさい>破壊</ruby>"を救済とも思っていない、\nとジャガーノート=ロストは\n言ってたよな
+Se	回想
+FadeOut	black					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	和風市街（夜）					0
+	ジャガーノート=ロスト					0
+FadeIn	black					.2
+	ジャガーノート=ロスト							<dash=2>"<ruby=きゅうさい>破壊</ruby>"を救済とも思っていない\n救世主に救われたその人も
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	Sepia
+Bg	研究所A					0
+CharacterOff						0
+	ジャガーノート		2_2			0
+	ディーア	悔しい2	1_2			0
+FadeIn	black					.2
+	ディーア							あの言葉が、引っかかっていたんだ
+	ディーア							いつもと同じように\nジャガーノート=ロストを<ruby=すくって>壊して</ruby>、\nそれでお前は救われるのか？
+	ディーア	怒り2						……お前は、本当は\n破壊による救済なんて<dash=2>
+	ジャガーノート							何の話ですかねー？
+	ジャガーノート							さっきも言ったとおり、\n救う側が救った気になっていれば\nいいんですよ
+	ディーア							…………そうか
+	ジャガーノート							……まあいっそ、本当に救われなく\nなったら自分で自分を救うのも\nいいかもしれないですけどねー
+	ディーア	怒り2						……ジャガーノート
+	ジャガーノート							…………冗談ですよー\nそんなに怖い顔しないでください
+	ジャガーノート							<dash=2>そもそも私は\n<ruby=すくわ>壊さ</ruby>れる気なんてありませんから
+	ディーア	あはは2						……それなら、いいけど
+CharacterOff
+StopBgm
+	黒グラデーション		エフェクト表
+	ジャガーノート=ロスト	<Off>						<dash=2>まーだそんなこと\n言ってるんだぁ
+Bgm	緊迫
+CharacterOff
+	ディーア	驚き2	1_2
+	ジャガーノート		2_2
+	ディーア							な……っ!?\nいつの間に<dash=2>
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+CharacterOff						0
+	ディーア	怒り2	1_2			0
+	ジャガーノート	悔しい	2_2			0
+Bg	研究所A					0
+Param	character_grayout=true
+Se	打1
+FadeOut	white					.1
+Tween	ジャガーノート	MoveBy	x=20				NoWait
+FadeIn	white					.1
+	ジャガーノート							くぅっ……
+	ディーア							ジャガーノート!!
+CharacterOff
+Wait						.5
+	ジャガーノート=ロスト	怒り				.5
+Wait						.5
+	ジャガーノート=ロスト							あーあ、ほんとに救えないなぁー……
+CharacterOff
+	ディーア	悔しい2	1_2
+	ジャガーノート	悔しい	2_2
+	ディーア							ジャガーノート、ロスト……!!
+FadeOut	black					.2
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル459B		エフェクト表			0
+FadeIn	black					.2
+	ジャガーノート=ロスト	<Off>						仕方ないなぁ……\n何度言ってもわからないなら
+	ジャガーノート=ロスト	<Off>						理解させてあげるしかないよねぇ
+If	isdebug==true
+CharacterOff
+Jump	*E_459_07
+EndIf
+EndScenario
+
+# E_459_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	研究所A
+	ディーア	悔しい2	1_2
+	ジャガーノート	悔しい	2_2
+FadeIn	white					.5
+	ディーア							くっ……
+	ジャガーノート							……しつこいですねー、\nあなたもとんだ救われたがりですねー
+CharacterOff
+	ジャガーノート=ロスト	怒り						あなたはそうやって\nいつまでも斜に構えたままで……
+	ジャガーノート=ロスト							……そうしていれば\n誰かが救ってくれるとでも？
+	ジャガーノート=ロスト							誰かがあなたの苦しみを\n理解してくれる日が来るとでも？
+	黒グラデーション		エフェクト表
+	ジャガーノート=ロスト	絶望						そんな日は訪れない
+	ジャガーノート=ロスト							……誰かのため、\n誰かのため、誰かのため
+CharacterOff	黒グラデーション
+	ジャガーノート=ロスト	怒り						破壊なんて望んでもいないくせに\n望まれたからといって\n"<ruby=きゅうさい>破壊</ruby>"し続ける操り人形
+	ジャガーノート=ロスト							救っても救っても救っても、\n誰も救われることなんかないと\n知りながら<dash=2>
+	ジャガーノート=ロスト							壊すことしか知らないから、\n死による救済を願う人しか\n救うことができない歪な救世主
+CharacterOff
+	ディーア	悔しい2	1_2
+	ジャガーノート	悔しい	2_2
+	ジャガーノート							………………
+CharacterOff
+StopBgm
+	ジャガーノート=ロスト	怒り						……あなたの"<ruby=きゅうさい>破壊</ruby>"は、救済じゃない
+	ジャガノロストロゴ		effect_c					　	BrPage
+ImageEffect	SpriteCamera	Bloom
+	黒背景		エフェクト裏			1
+Bgm	魔王バトル
+Se	光2
+Tween	ジャガノロストロゴ	ScaleBy	x=2 y=2 time=3				NoWait
+	ジャガノロストロゴ							なら、私が救ってあげなくちゃねぇ
+	ジャガノロストロゴ							<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>として\nかつて同じ過ちを繰り返した\nジャガーノートだったものとして！
+Se	光3
+Tween	ジャガノロストロゴ	ScaleBy	x=5 y=5 time=3				NoWait
+CharacterOff	ジャガノロストロゴ					1
+Wait						.5
+Se	闇3
+	イベントスチル459I		エフェクト裏2			0		 	BrPage
+CharacterOff	黒背景					.7
+Wait						2
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff
+	ディーア	驚き2						これは……魅了の魔術……？
+	ディーア	悔しい2						いや、違う\n魅了なんてレベルじゃない\n<dash=2>まさか!!
+FadeOut	white					.2
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	ジャガーノート=ロスト	拡大	エフェクト表			0
+	イベントスチル459I		エフェクト裏			0
+	イベントスチル459I							　	BrPage
+FadeIn	white					.2
+	イベントスチル459I							私はジャガーノートだから\nルナほど上手くは使えないけど
+	イベントスチル459I							それでも、\n<ruby=・・・・・・・・・・・・・>魔核覚醒の条件が揃っている</ruby>\n今なら<dash=2>
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff
+	ディーア	本気2
+	ディーア							見るな、ジャガーノート!!
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+	ジャガーノート	拡大	エフェクト裏			0		<dash=6>ぁ
+CharacterOff
+	ディーア	悔しい2						しまった……ッ!!
+CharacterOff						0
+	黒グラデーション		エフェクト表2			0
+	黒背景		エフェクト裏			0
+	ジャガーノート	拡大	エフェクト表			0		あ、ああ…………!!
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	黒背景
+	　　　　　　　　　　
+Wait						1
+FadeIn	black					.5
+Wait						.2
+	アネセサリロゴ	水色	エフェクト表			1
+Wait						1
+CharacterOff	アネセサリロゴ					1
+Wait						1
+Se	心拍	TRUE
+	ジャガーノート=ロスト	<Off>						<dash=2>私の記憶をあげる
+	ジャガーノート=ロスト	<Off>						思い知るといいよ\n<ruby=あなた>ジャガーノート</ruby>の信じた救済の\n果てにある地獄を
+	ジャガーノート=ロスト	<Off>						ジャガーノートが、\nいずれたどり着く未来を<dash=2>
+FadeOut	white					1
+CharacterOff						0
+StopSe
+Bg	荒野(雨)
+Param	character_grayout=false
+	黒背景		エフェクト表
+	イベントスチル459F		エフェクト裏
+Wait						3
+FadeIn	white					.1
+	　　　　　　　　　　							<dash=2>未来を、知った
+Se	大雨	TRUE
+CharacterOff	黒背景					1
+Wait						1
+	ジャガーノート	<Off>						…………大丈夫ですよ
+	ジャガーノート	<Off>						……救ってあげますから
+Se	突1
+FadeOut	red					.1
+Wait						1
+FadeIn	red					.5
+	ジャガーノート	<Off>						……楽に、なりますから
+Se	突1
+FadeOut	red					.1
+CharacterOff
+	ジャガーノート	絶望
+Wait						.5
+FadeIn	red					1
+	ジャガーノート							…………はぁ、はぁ
+	ジャガーノート							……また救っちゃいましたねえ、\nマスターさん
+	ジャガーノート							…………マスターさん？
+FadeOut	black					.2
+CharacterOff						0
+	イベントスチル459C1		エフェクト表			0
+Wait						.5
+FadeIn	black					.2
+	ジャガーノート	<Off>						………………待って、マスターさん\n行かないで……
+	ジャガーノート	<Off>						お願い、待って<dash=4>
+FadeOut	black					.1
+CharacterOff						0
+	イベントスチル459C2		エフェクト表			0
+FadeIn	black					.1
+Wait						.5
+	ジャガーノート	<Off>						………………ぁ
+	ジャガーノート	<Off>						は、あはは…………
+FadeOut	black					.1
+StopSe
+CharacterOff						0
+	黒背景		エフェクト表			0
+	イベントスチル459G		エフェクト裏
+Wait						.5
+FadeIn	black					.1
+	　　　　　　　　　　							<dash=2>"<ruby=きゅうさい>破壊</ruby>"の果てにある、\n<ruby=けつまつ>未来</ruby>を知った
+CharacterOff	黒背景					1
+Se	大雨
+Wait						1
+	ジャガーノート	<Off>						……あーあ、救えませんねー
+	黒背景		エフェクト表			0
+StopSe
+	　　　　　　　　　　							<color=red>……誰に向かって、\n言っているんだろう</color>
+Se	大雨
+Se	突1
+FadeOut	red					.1
+CharacterOff	黒背景					0
+Wait						.5
+FadeIn	red					.5
+Wait						.2
+	ジャガーノート	<Off>						……仕方ないですねー
+	黒背景		エフェクト表			0
+StopSe
+	　　　　　　　　　　							<color=red>…………何を、\n取り繕っているんだろう</color>
+Se	突1
+FadeOut	red					.1
+Wait						.5
+FadeIn	red					.5
+Wait						.5
+	　　　　　　　　　　							<color=red>見栄を張っても、取り繕っても、\nもう誰もいないのに</color>
+Se	ガードブレイク
+FadeOut	red					.1
+CharacterOff
+Param	character_grayout=false
+	イベントスチル459BG		エフェクト表
+Wait						.5
+Se	大雨	TRUE				1
+FadeIn	red					1
+	ジャガーノート	<Off>						『<dash=4>ぁ、ああああ!!!!』
+Bgm	絶望
+	　　　　　　　　　　							誰かを救いたいなんて、\n端から身の丈に合わない\n願いだったのだ
+	　　　　　　　　　　							救済を求める人々を全て救うなんて、\nたった一本の魔剣の力では\n到底不可能なことだった
+	　　　　　　　　　　							<dash=2>それでも
+	　　　　　　　　　　							それでも、何かを救えるかもしれない\nと思ってしまった
+	　　　　　　　　　　							壊すことしかできない私が、\n救うことを望んでしまった
+	　　　　　　　　　　							その結果が、この様だ
+	　　　　　　　　　　							死による救済なんて冗談じゃない\nだって死んだら全部終わりじゃないか
+	　　　　　　　　　　							みんな明るい未来があったはずなのに\nみんな希望があったはずなのに
+	　　　　　　　　　　							こんなのは、私の望んだ救済じゃない
+	　　　　　　　　　　							こんなのは<dash=2>!!
+FadeOut	black					.1
+CharacterOff
+StopSe
+	黒背景		エフェクト裏
+StopBgm
+	　　　　　　　　　　
+Wait						1
+FadeIn	black					.1
+	アネセサリロゴ	赤	エフェクト表			2
+	※※※※							<color=red>ジャガーノートの\n望んだ救済じゃない？</color>
+	※※※※							<color=red>なら、どうして救済を望んだ？</color>
+	※※※※							<color=red><ruby=おまえ>救世主</ruby>がそこにいなければ、\n人々は死による救済を\n望まなかったんじゃないのか？</color>
+	※※※※							<color=red><dash=2>お前が、\nそれを選ばせたんじゃないのか？</color>
+FadeOut	black					.1
+CharacterOff						0
+Bg	黒背景
+	　　　　　　　　　　
+Wait						1
+FadeIn	black					.1
+	ジャガーノート=ロスト	<Off>						…………それが、\n<ruby=わたし>ジャガーノート</ruby>の歩んだ道
+	ジャガーノート=ロスト	<Off>						そして、これから\n<ruby=あなた>ジャガーノート</ruby>が歩む道
+FadeOut	white					1
+CharacterOff						0
+Bgm	魔王バトル
+Bg	研究所A					0
+	黒グラデーション		エフェクト表			0
+	ジャガーノート	拡大	エフェクト裏			0
+FadeIn	white					.1
+	ジャガーノート							<dash=4>ぁ、ぁ
+CharacterOff
+	ディーア	悔しい2						マズい、魔力が制御できない<dash=2>
+	ディーア	本気2						しっかりしろ、ジャガーノート!!\n抑えるんだ……!!
+CharacterOff
+	幻想体エフェクト		エフェクト表			.5
+	ジャガーノート	絶望						………ぅ、ぁぁぁ……!!
+	暴走警告		effect_a
+Wait						.1
+Se	ガードブレイク
+Tween	暴走警告	ScaleBy	x=2 y=2 time=2				NoWait
+CharacterOff	暴走警告					1	Add
+	ジャガーノート							ああああああああああああ!!!!
+CharacterOff
+	ディーア	悔しい2						くっ……!!
+CharacterOff
+	ジャガーノート=ロスト							大丈夫ですよー\nちゃんと<ruby=すくって>壊して</ruby>あげますから
+CharacterOff
+	ジャガーノート=ロスト	拡大	エフェクト表					<dash=2>すぐ、楽になりますからぁ♪
+FadeOut	black					.1
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_459_08
+EndIf
+EndScenario
+
+# E_459_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	研究所A
+Param	character_grayout=false
+	ディーア	本気2
+FadeIn	white					.5
+	ディーア							させるか……ッ!!
+Se	斬2
+FadeOut	white					.1
+CharacterOff						0
+	ジャガーノート=ロスト	怒り				0
+FadeIn	white					.1
+	ジャガーノート=ロスト							……もー、\nほんとに救いたがりなんだから
+CharacterOff
+	ディーア	悔しい2						ジャガーノート!!\nしっかりしろ!!
+CharacterOff
+	幻想体エフェクト		エフェクト表
+	ジャガーノート	絶望						わた……し……は……
+Se	ガードブレイク
+CharacterOff						1
+	ジャガーノート	武器	エフェクト裏			1
+Wait						1.5
+CharacterOff						1
+Wait						1
+	ディーア	悔しい2						くっ……
+	ジャガーノート=ロスト							…………あーあ、あなたは\n結局そうやって目を逸らすんだぁ
+	ジャガーノート=ロスト							……ほんと、救えないなぁ
+Se	光1
+	オーラ青		エフェクト表			1
+Wait						1.5
+Param	character_grayout=true
+CharacterOff
+	ジャガーノート	武器	エフェクト裏
+	ディーア	怒り2	1_3
+Se	歩く
+Tween	ディーア	MoveTo	x=-30				NoWait
+	ディーア							……させない
+StopSe
+CharacterOff
+Param	character_grayout=false
+	ジャガーノート=ロスト	悔しい
+	オーラ青		エフェクト表
+Se	魔剣入る
+Wait						.1
+CharacterOff	オーラ青					1
+Wait						1
+	ジャガーノート=ロスト							……まだ邪魔するんだぁ\nもうジャガーノートは\n使い物にならないのに
+	ジャガーノート=ロスト	通常						あぁ、それとも"<ruby=きゅうさい>破壊</ruby>"してほしいの？　\nでも残念、あなたを救っても\n私は救われないんだよねぇ
+CharacterOff
+	ディーア	怒り2						どうしてお前は、\nそんなに<ruby=ジャガーノート>救済</ruby>を否定するんだ？
+	ディーア							お前が未来のジャガーノートだと\n言うのなら、お前だって<dash=2>
+	ジャガーノート=ロスト	怒り						どうして？\n変なこと言うなぁ
+	ジャガーノート=ロスト							あなたは、そもそもアレを\n本当に救済だと思っているの？
+	ジャガーノート=ロスト							……死は救済じゃない\nそんなもの、\n救いであっていいはずがない
+	ジャガーノート=ロスト							<ruby=わたし>ジャガーノート</ruby>だって、\nずっとそう思ってきた
+FadeOut	black					.2
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	イベントスチル459F		エフェクト表			0
+FadeIn	black					.2
+	ジャガーノート=ロスト	絶望						でもね、ジャガーノートはもう既に\n"<ruby=きゅうさい>破壊</ruby>"してしまったのよ
+	ジャガーノート=ロスト							救済としての死を求められ、\nそれに応えてしまった以上、
+	ジャガーノート=ロスト							それが救いでなかったなんて、\nもう認めるわけにはいかないの
+FadeOut	black					.2
+CharacterOff						0
+	イベントスチル459G		エフェクト表			0
+FadeIn	black					.2
+	ジャガーノート=ロスト	<Off>						だから"<ruby=きゅうさい>破壊</ruby>"し続けるしかなかった\n死が救いにならないことなんて\n本当は誰よりも知っていたのに
+	ジャガーノート=ロスト	<Off>						『私の"<ruby=きゅうさい>破壊</ruby>"は正しい\n だって"<ruby=きゅうさい>破壊</ruby>"してくれって\n 言われたんだから』
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+	ジャガーノート=ロスト	絶望				0
+FadeIn	black					.2
+	ジャガーノート=ロスト							……そうやって自分に言い聞かせて\n救った気になった
+	ジャガーノート=ロスト							そうやって"<ruby=きゅうさい>破壊</ruby>"にしがみついて、\nいつしか後に引けなくなったの
+	ジャガーノート=ロスト	怒り						……それが、\nジャガーノートの救済の正体
+	ジャガーノート=ロスト							そんな救済、\n誰も幸せにならないじゃない？\n救う側も、救われる側も、誰も……
+	ディーア	悔しい2						……だから、\nジャガーノートを壊すのか
+	ジャガーノート=ロスト							そうだよぉ
+	ジャガーノート=ロスト	絶望						そうすれば、きっと私は救われる\n"<ruby=きゅうさい>破壊</ruby>"という役割から解放される
+	ジャガーノート=ロスト	怒り						だからこれは、私の最後の"<ruby=きゅうさい>破壊</ruby>"なの
+Se	闇1
+	ジャガノロストロゴ		effect_c
+Tween	ジャガノロストロゴ	ScaleBy	x=2 y=2 time=3				NoWait
+	ジャガーノート=ロスト							"<ruby=きゅうさい>破壊</ruby>"を終わらせる"<ruby=きゅうさい>破壊</ruby>"を、\n私はこの手で成し遂げる
+	ジャガーノート=ロスト							……邪魔しないで、マスターさん
+CharacterOff
+	ディーア	目閉じ2						"<ruby=きゅうさい>破壊</ruby>"を終わらせる"<ruby=きゅうさい>破壊</ruby>"、か
+	ディーア	怒り2						…………それは、\n認めるわけにはいかないな
+	ジャガーノート=ロスト	怒り						……どうして？
+	ディーア	怒り2						……お前の言ってることも、\n間違ってないとは思うよ
+	ディーア							お前の葛藤も、後悔も、\n正しいものだと思う
+	ジャガーノート=ロスト	怒り						だったら<dash=2>!!
+StopBgm
+	ディーア	怒り2						でも、オレにはジャガーノートの\n"<ruby=きゅうさい>破壊</ruby>"を否定できない
+	ジャガーノート=ロスト	怒り						どうして……っ!!
+Bgm	凱旋
+	ディーア	悔しい2						だって、お前が抱いたその葛藤は、\nその後悔は、心から誰かを救おうと\n思った人だけが抱くものだ
+	ジャガーノート=ロスト	怒り						…………っ!?
+	ディーア	悔しい2						<dash=2>救われる人に本気で向き合って\nその人の人生を代わりに\n背負った者だけが抱く苦しみだ
+	黒グラデーション		エフェクト表
+	ディーア	怒り2						<size=20>優しすぎるんだ\nお前も、ジャガーノートも</size>
+CharacterOff	黒グラデーション
+Se	光1
+	オーラ青		エフェクト表			1
+	ディーア	通常2						<dash=2>でも、安心したよ
+Bgm	決戦
+	ディーア	目閉じ2						……ジャガーノートが\nその心を忘れていないのなら		9000-24
+CharacterOff
+	ジャガーノート=ロスト	怒り						何を……っ!?
+Se	光1
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff
+	オーラ青		エフェクト表
+	ディーア	怒り2						できることは\nまだあるはずだから<dash=2>
+Se	光3
+FadeOut	white					1
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_459_09
+EndIf
+EndScenario
+
+# E_459_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bg	荒野(雨)
+	黒背景		エフェクト表
+FadeIn	black					.5
+	　　　　　　　　　　							…………私は救った\n確かに救済した
+	　　　　　　　　　　							何があっても、\nそう言い続けなければならない
+	　　　　　　　　　　							私は救った\n救済した
+	　　　　　　　　　　							だって、それを証明できるのは\n私だけなのだから
+	　　　　　　　　　　							……なのに
+	　　　　　　　　　　							その死は無駄ではなかったと
+	　　　　　　　　　　							その"<ruby=きゅうさい>破壊</ruby>"は正しかったと
+	　　　　　　　　　　							<dash=2>今の私には、\n言うことができない
+FadeOut	black					.5
+CharacterOff
+Wait						1
+Se	大雨	TRUE				1
+FadeIn	black					1
+Wait						1
+	ジャガーノート	絶望						…………もう、いいですかね\n既にたくさんの命を"救い"ましたから
+	ジャガーノート							誰かを救いたいと願ったあの夢は、\n十分に叶えられましたから
+	ジャガーノート							……<ruby=ジャガーノート>歪な救世主</ruby>っぽくて\nいいじゃないですか
+	ジャガーノート							<dash=2>最後に、\n自分を救うというのも
+	黒背景		エフェクト表			1
+Wait						1
+	ディーア	<Off>						…………嘘だな
+CharacterOff	黒背景
+	ジャガーノート	悔しい						………………え
+CharacterOff
+Se	歩く
+	ディーア	怒り2				1
+Wait						1
+StopSe	歩く
+Wait						.5
+	ジャガーノート	悔しい						……マスター、さん？
+	ディーア	怒り2						そんなこと、\nお前は納得してないだろ
+	ジャガーノート	悔しい						…………なんですか、\nこんなところまで来ていきなり
+	ジャガーノート							……放っておいてください
+	ディーア	怒り2						……そうはいかない
+Bgm	絶望
+	ジャガーノート	絶望						嫌ですよ、救済なんて\n……もう誰も<ruby=すくい>壊し</ruby>たくない
+FadeOut	black					.2
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+	イベントスチル459A2		エフェクト表			0
+FadeIn	black					.2
+	ジャガーノート	<Off>						……ロストの言うことは\n正しいんですよ
+	ジャガーノート	<Off>						救いたい救いたいと言いながら、\n結局私は自分が救われたいだけだった
+	ジャガーノート	<Off>						私の"<ruby=きゅうさい>破壊</ruby>"は救済じゃなかった
+FadeOut	black					.2
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+	ジャガーノート	悔しい				0
+FadeIn	black					.5
+	ジャガーノート							いいじゃないですか、\n私一人<ruby=すくわ>壊さ</ruby>れたって
+	ジャガーノート							どうせ私が<ruby=すくわ>壊さ</ruby>れたところで、\n狂った破壊神がひとつ、\n魔界から消えるだけですから
+	ジャガーノート							……そっちのほうが、\nよほど良い救済ですよ
+	ディーア	怒り2						……ジャガーノート
+	ジャガーノート	絶望						…………放っておいてください
+	ディーア	怒り2						放っておけるわけないだろ\nお前は、オレの魔剣なんだから
+	ジャガーノート	悔しい						じゃあどうしろっていうんですか!?
+	ジャガーノート	絶望						何が救済かもわからないまま、\n終わりのない"<ruby=きゅうさい>破壊</ruby>"を続けろと!?
+FadeOut	black					.2
+CharacterOff						0
+	イベントスチル459BG		エフェクト表			0
+FadeIn	black					.2
+	ジャガーノート	<Off>						あの<ruby=けつまつ>未来</ruby>を知ってなお\n同じ道を歩めと!?
+	ジャガーノート	<Off>						壊して壊して壊して、\n望まれたように壊し続けて
+	ジャガーノート	<Off>						どれだけ望みを叶え続けても、\n私の望みは叶えられない
+FadeOut	black					.2
+CharacterOff						0
+	ジャガーノート	悔しい				0
+FadeIn	black					.2
+	ジャガーノート							……マスターさんも、\nあの光景を見たんでしょう？
+	ディーア	怒り2						……ああ
+	ジャガーノート	悔しい						だったら<dash=2>
+StopBgm
+	ディーア	怒り2						でもお前は、まだ誰かを救うことを\n諦めてはいないだろ？
+	ジャガーノート	悔しい						………………は？
+	ディーア	怒り2						本当に自分が救われたいだけなら、\n何も考えずに壊し続ければいいはずだ
+	ディーア	通常2						でもお前は、\n考えることをやめないじゃないか
+	ディーア							本当に誰かのためになっているのか\n本当に救済になっているのか……って\n真剣に考え続けているじゃないか
+	ジャガーノート	悔しい						…………都合の良い解釈ですよ
+	ディーア	通常2						そんなことはないさ
+	ジャガーノート	悔しい						……何を根拠に
+	ディーア	通常2						夢を諦めたやつは\nそんな顔しないからな
+	ジャガーノート	悔しい						<dash=4>ぇ
+StopSe
+Bgm	凱旋
+	ディーア	怒り2						お前の顔は、これから全てを\n投げ出して自分だけ救われようと\nする奴の顔じゃない
+	ディーア							何を犠牲にしても\n自分の意志を貫き通すと\n決めた救世主の顔だ
+	ディーア							<dash=2>違うか？　ジャガーノート
+	ジャガーノート	絶望						…………っ
+	ディーア	悔しい2						なあ……もしかして、お前は本当は\n誰かを巻き込みたくない\nだけなんじゃないか？
+	ディーア							誰も巻き込まず、あの結末を\nたった一人で背負い込むために<dash=2>
+	ジャガーノート	絶望						…………だったら、なんですか
+	ジャガーノート	悔しい						仮にそうだったとしても、\n"<ruby=きゅうさい>破壊</ruby>"の果てに待つ\n<ruby=けつまつ>未来</ruby>は変わらない
+	ジャガーノート							……私がここで"<ruby=きゅうさい>破壊</ruby>"されるのが、\n一番良いことには変わりないでしょう
+	ディーア	怒り2						<dash=2>結末を変える方法なら、\nいくらでもある
+	ジャガーノート	悔しい						…………え？
+	ディーア	悔しい2						<dash=2>確かに、救済を求める人々を\n全て救おうなんて、たった一本の\n魔剣の力では無理かもしれない
+	ディーア	怒り2						でも、魔剣使いがいれば<dash=2>\n二人でなら、できるかもしれない
+	ジャガーノート	悔しい						…………!!
+	ディーア	怒り2						迷っても、折れそうになっても、\n道を踏み外さないように\n支えてくれる相手がいればいい
+	ジャガーノート	悔しい						でも、それじゃあ……
+	ディーア	怒り2						あの<ruby=けつまつ>未来</ruby>に、オレを\n巻き込んでしまうかもしれない\n……か？
+	ジャガーノート	悔しい						………………
+	ディーア	汗2						別に巻き込まれたなんて思わないよ
+CharacterOff
+Param	character_grayout=true
+	ディーア	あはは2	1_2
+	ジャガーノート	悔しい	2_2
+	ディーア							……オレはお前のマスターなんだから\nもっと頼ってくれてもいいんだぞ？
+	ジャガーノート							…………マスターさん
+	ジャガーノート							……私は、まだ迷っています\n本当に、それでいいのかどうか
+	ディーア	通常2						……死が救済かどうかなんて、\nオレにはわからない\nきっと誰にもわからないと思う
+	ディーア	怒り2						だから、オレたちにできることは\n一つしかない
+	ディーア							……救った者の責務として、\n救ったと言い続けるしかないんだ
+StopBgm						3
+	ディーア							……ジャガーノートの\nやってきたことは、正しかったんだよ
+Param	character_grayout=false
+CharacterOff						0
+	ディーア	怒り2	1_2			0
+	ジャガーノート	悔しい	2_2			0
+Tween	ジャガーノート	MoveBy	x=-10
+Param	character_grayout=true
+	ジャガーノート							…………救われませんね
+	ディーア	あはは2						ああ……そうだな
+Bgm	風属性バトル
+	ジャガーノート							…………いいんですか？\n損な役回りですよ
+	ジャガーノート							この終わらない"<ruby=きゅうさい>破壊</ruby>"を、\nずっと続けていくことに\nなるかもしれないいんですよ
+	ジャガーノート							正しいかどうかもわからない"<ruby=きゅうさい>破壊</ruby>"を、\n迷いながら、ずっと<dash=2>
+	ディーア	通常2						もちろん、覚悟なら\nとっくにできてるよ
+	ディーア							一度背負うと決めたんだ\nやり遂げてみせるさ
+	白背景		エフェクト表			1
+Wait						1
+Param	character_grayout=false
+	ディーア							だから<dash=2>\n帰ってこい、ジャガーノート
+Se	光3
+FadeOut	white					1
+CharacterOff
+Bg	研究所A
+Param	character_grayout=true
+	ジャガーノート=ロスト	怒り
+FadeIn	white					.5
+	ジャガーノート=ロスト							何を……っ!?
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.3
+Wait						.2
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	研究所A					0
+	ジャガーノート=ロスト	怒り						な……ッ!?
+CharacterOff
+	黒グラデーション		エフェクト表			0
+	ジャガーノート	拡大	エフェクト裏			0
+	ジャガーノート							<dash=2>あーあ、本当に救われませんね
+CharacterOff
+	ジャガーノート=ロスト	怒り						…………ッ!?
+	ジャガーノート=ロスト							な、なんで……!?\nあの状態から、\nアンロックできるはずが<dash=2>
+CharacterOff
+Param	character_grayout=false
+	ディーア	怒り2	1_2
+	ジャガーノート		2_2
+	ジャガーノート							誤算でしたねー、\nジャガーノート=ロスト
+	ジャガーノート							<dash=2>あなたは知らないと思うので\nせっかくだから教えてあげます
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル459D		エフェクト表
+FadeIn	white					.5
+	ジャガーノート	<Off>						マスターさんは、とんでもない\n救いたがりなんですよ\n私なんかよりずっと<dash=2>ね
+	ジャガーノート	<Off>						あーあ、ほんと……救えないなぁ♪
+FadeOut	white					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_459_10
+EndIf
+EndScenario
+
+# E_459_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bg	研究所A
+Param	character_grayout=false
+	黒背景		エフェクト表
+FadeIn	white					.5
+	　　　　　　　　　　	<Off>						<dash=2>ジャガーノートを\n"<ruby=きゅうさい>破壊</ruby>"すれば、私は救われる
+	　　　　　　　　　　	<Off>						無邪気に救済を信じて\n破壊の限りを尽くした過去と\nその結果たどり着いたあの光景と
+	　　　　　　　　　　	<Off>						全てを"<ruby=きゅうさい>破壊</ruby>"して、\nなかったことにして
+	　　　　　　　　　　	<Off>						あの結末を否定することができれば、\nきっと私は救われる
+	　　　　　　　　　　	<Off>						…………そう、思っていたのに
+FadeOut	white					1
+CharacterOff
+	イベントスチル459D		エフェクト裏
+Bgm	結婚
+Wait						1
+FadeIn	white					1
+	　　　　　　　　　　	<Off>						……出来の悪い芝居を見ているみたい
+	　　　　　　　　　　	<Off>						こんな結末は知らない\nこんな結末はありえない
+	　　　　　　　　　　	<Off>						私に寄り添ってくれる"彼"は、\nもういないのに
+	　　　　　　　　　　	<Off>						<dash=2>ジャガーノートの攻撃には\nまだ迷いがある
+	　　　　　　　　　　	<Off>						あと三歩\nたったそれだけの距離を詰めるだけで\n私はジャガーノートを"<ruby=きゅうさい>破壊</ruby>"できる
+	　　　　　　　　　　	<Off>						……それなのに
+	　　　　　　　　　　	<Off>						どうして、動けないんだろう
+	　　　　　　　　　　	<Off>						\n\n　　　　　　　　<dash=2>ああ、そっか
+	　　　　　　　　　　	<Off>						その先の未来も顧みず、\n愚直に救済を信じて戦う\nジャガーノートも
+	　　　　　　　　　　	<Off>						同じ救済を背負って立つ\nマスターさんも
+	　　　　　　　　　　	<Off>						確かに、かつて私が憧れた\n"救世主"としての姿だ
+	白背景		エフェクト表
+	　　　　　　　　　　	<Off>						ああ、やっぱり斜に構えていたって\n良いことなんか何もない
+	　　　　　　　　　　	<Off>						……もう少し早く、\n素直になっていれば
+	　　　　　　　　　　	<Off>						<dash=2>こんな"救済"も、\nあったんだなぁ
+FadeOut	white					1
+Se	ガードブレイク
+CharacterOff						0
+Param	character_grayout=true
+	ジャガーノート		2_2			0
+	ディーア	悔しい2	1_2			0
+Wait						2
+FadeIn	white					.5
+	ディーア							…………どうして、避けなかった
+CharacterOff
+	ジャガーノート=ロスト							……さぁ、なんでかなぁ
+	ジャガーノート=ロスト							そうだなぁ……<ruby=あなた>ジャガーノート</ruby>に\n"救済"されちゃったから、かなぁ♪
+CharacterOff
+	ディーア	驚き2	1_2
+	ジャガーノート	悔しい	2_2
+	ジャガーノート							"<ruby=きゅうさい>破壊</ruby>"……？\n順番が逆じゃないですか？
+CharacterOff
+	ジャガーノート=ロスト							あなたはわからなくていいの
+	ジャガーノート=ロスト							……あなたに救った気がなくても\n救われた側が、\n救われた気になってるんだから
+	ジャガーノート=ロスト							……こんな可能性もあったんだって、\n知ることができたんだから
+FadeOut	white					1
+CharacterOff						0
+Param	character_grayout=false
+	白背景		エフェクト表			0
+	イベントスチル459D		エフェクト裏			0
+FadeIn	white					.1
+CharacterOff	白背景					3
+	　　　　　　　　　　							<dash=2>ああ、でも
+	　　　　　　　　　　							本当はもっと、救われていたかった
+	　　　　　　　　　　							いつまでも、\nあの光景を見ていたかった
+	　　　　　　　　　　							あなたの隣で救済を成す\n<ruby=わたし>ジャガーノート</ruby>を
+	　　　　　　　　　　							ずっと、ずっと<dash=2>
+FadeOut	white					1
+Wait						2
+If	isdebug==true
+CharacterOff
+Jump	*E_459_10
+EndIf
+EndScenario
+
+# E_459_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	絶望
+Bg	夜空
+FadeIn	white					.5
+	カルバノグ							またダメでしたあ……
+	カルバノグ							せめてデータ集めくらいは\n役立って欲しいですよう
+	カルバノグ							そう思いませんかあ？
+	？？？？		2_3					………………興味ない
+	カルバノグ							ふぇぇぇぇ\nそんなに睨まないでくださいよう
+	カルバノグ							ま、カルバは運ぶだけなのでえ\n別にどうでもいいんですけどお♪
+FadeOut	black					.5
+StopBgm
+CharacterOff
+Bg	研究所A
+	ププッピマリー
+Wait						2
+Bgm	図書館
+FadeIn	black					.5
+	ププッピマリー							……地下区画での戦闘、\n終了したようです
+	ロルリアンレット	驚きH						あの魔剣使いは？
+	ププッピマリー							軽い負傷は見られますが、\n戦闘に問題ないかと
+	ロルリアンレット	驚きH						そう、よかったわ\nならすぐに魔剣使いを\nここに呼びなさい
+	ププッピマリー							かしこまりました
+FadeOut	black					.5
+CharacterOff						0
+	リディ	驚き2	2_2			0
+	ディーア	驚き2	1_2			0
+FadeIn	black					.5
+	ディーア							……ロールお嬢様？\nあの、話って<dash=2>
+CharacterOff
+	ロルリアンレット	通常H						もう一体の<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>の\n正体がわかったわ
+	ロルリアンレット							かつて月に封じられた魔天狼……\nそれを封じる役目を担っていた魔剣よ
+	ロルリアンレット							何者かによって魔剣機関のデータから\n削除されていたようで、調査に\n時間がかかったけれど<dash=2>
+	ロルリアンレット							世界図書館のデータベースには\n記録が残っていたわ
+	ロルリアンレット							その魔剣の名前は<dash=2>
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							魔天狼……もしかして、\nグレイプニル……ですか？
+CharacterOff
+	ロルリアンレット	驚きH						あら、知っているのね？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							ええ、だってグレイプニルは\nオレの魔剣で<dash=2>
+CharacterOff
+StopBgm
+	ロルリアンレット	驚きH						……貴方の魔剣？
+Bgm	絶望
+	ロルリアンレット	怪しいH						……それはおかしいわね\n魔剣グレイプニルが特定の誰かに\n所有されたという記録はないわ
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							…………どういうことです？
+	ディーア	悔しい2						オレは前の賢狼事変で、\n確かにグレイプニルを……
+StopBgm
+	ディーア	驚き2						なあリディ？\nグレイプニルはオレの<dash=2>
+StopSe
+	リディ	驚き2						ほぇ？
+	ディーア	悔しい2						………………リディ？
+	黒背景		エフェクト表			0
+Se	スローモーションエンド
+	リディ							<dash=2>グレイプニル……って、だれ？<speed=1.4>　　</speed>	BrPage
+FadeOut	black					.1
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_459_11
+EndIf
+EndScenario

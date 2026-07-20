@@ -1,0 +1,2830 @@
+# E_1031_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	黒背景
+Bgm	死後の世界
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	          
+FadeIn	black					.5
+	女の子	<Off>						\n　　　　　 <color=red>どこにいったの？</color>
+	女の子	<Off>						\n　　　　　 <color=red>どこにきえたの？</color>
+Bg	廃墟A_過去					0
+Se	マイクノイズ
+Wait						.1
+StopSe						0
+Bg	子供部屋					0
+	※※※※							誰もいない部屋なのに……\n女の子の声がずーっと聞こえる……
+	※※※※							気になって探すけど、\nタンスの中にも、物陰にも、\nどこにもいない……
+ImageEffect	SpriteCamera	GrayScale
+Se	マイクノイズ	TRUE
+	女の子					0
+	          		1_2
+Wait						.3
+StopSe						0
+CharacterOff	女の子					0
+ImageEffectOff	SpriteCamera	GrayScale
+	※※※※							探しても、見つけられない……\nいるのに、いない……
+Bg	黒背景					0
+	女の子	<Off>						\n　　　　　　　　<speed=0><color=red>どこ？</speed></color><speed=0.3>　　</speed>	BrPage
+	女の子	<Off>						<size=30><color=red><speed=0>どこ？</size></color></speed><speed=0.3>　　</speed>	BrPage
+	女の子	<Off>						\n\n　　　　　　　　　　　　　<size=40><color=red><speed=0>どこ？</size></color></speed><speed=0.3>　　</speed>	BrPage
+	女の子	<Off>						　　　　　　<size=50><color=red><speed=0>どこ？</size></color></speed><speed=0.3>　　</speed>	BrPage
+	女の子	<Off>						\n\n　　　　　　　　<size=60><color=red><speed=0>どこ？</size></color></speed><speed=0.3>　　</speed>	BrPage
+Bg	子供部屋(廃墟)					0
+	※※※※							呼ばれているのに……\nその子にはたどり着けない
+	※※※※							だって……\nその子はこの世のものでは\nないから……
+	※※※※							そして待ちかねたおばけは\nオレたちにこう叫ぶんだ……
+FadeOut	red					.3
+StopBgm
+CharacterOff						0
+	おばけ1					0
+Tween	おばけ1	ScaleBy	x=2 y=2 time=0.5				NoWait
+FadeIn	red					.3
+	おばけ1							<color=red><size=40>なんで\n来てくれないのぉおおおお!!</size></color>
+StopBgm
+CharacterOff						0
+Bg	市街地A(夜)					0
+Shake	Graphics		x=10 y=10 time=1.3				Add
+	全員							<size=40>きゃあああああ!?!?</size>
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	笑い2				0
+Bgm	平和
+FadeIn	black					.3
+	ディーア	笑い2						はははは、驚きすぎだって\nそんなに怖かったのか？
+Param	character_grayout=true
+CharacterOff
+	リディ	怒り2	1_2
+	エウメニデス	慌て	2_2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						ま、マスターが\n大きな声を出すからだよ！
+Tween	エウメニデス	PunchPosition	y=30				NoWait
+	エウメニデス	慌て						そ、そうだそうだ、です！\nハデスさんがおトイレにいけなく\nなったらどうするんだ、です！
+CharacterOff
+	ペルセポネ	無表情2	2_2
+	ハデス	通常2	1_2
+Shake	ハデス		x=5 time=0.8				Add
+	ハデス	通常2						だ、だ、大丈夫です……\nお、おばけなんて怖くないです……
+CharacterOff
+	エウメニデス	慌て	2_2
+	リディ	悔しい2	1_2
+	リディ	悔しい2						ハデスちゃん、\nすごくプルプルしてるよ？
+CharacterOff
+	ハデス	通常2	1_2
+	ペルセポネ	通常2	2_2_b
+	ペルセポネ	通常2						はーちゃん、こわいこわい？\nなら、セポネをなでなでして♪\n一緒に気持ちよくなろ♪
+	ハデス	通常2						……怖くないけど、なでなでするね
+Tween	ハデス	MoveBy	x=40				NoWait
+	ハデス	嬉しい2						なーで、なーで……♪
+Tween	ペルセポネ	PunchPosition	y=20				NoWait
+	ペルセポネ	嬉しい2						うひゃう、うひゃう♪
+	ハデス	通常2						お姉ちゃん、\nやわらかくて、あったかい……
+	ペルセポネ	嬉しい2						セポネのこわいこわいも、\nどっかに行っちゃいました♪
+CharacterOff
+	エウメニデス	怒り
+Tween	エウメニデス	PunchPosition	y=30				NoWait
+	エウメニデス	怒り						ほら見ろ、です\nハデスさんが怖がった\nじゃないか、です！
+Param	character_grayout=false
+CharacterOff
+	ペルセポネ	通常2	2_2_b
+	ハデス	通常2	1_2
+Tween	ペルセポネ	MoveBy	x=-800 time=3.5				NoWait
+	ハデス	通常2						だから、\nおばけなんて怖がってないですよ\nエウメニデス
+	ディーア	怪しい2	画面外_下_b
+Tween	ディーア	MoveBy	y=2650 time=1				Add
+	ディーア	怪しい2						そーっ……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						おーばーけーだーぞー！
+Tween	ハデス	PunchPosition	y=30				NoWait
+Tween	ハデス	MoveBy	x=-50				NoWait
+	ハデス	通常2						…………きゅぅ
+Shake	ハデス		x=2 time=0.3				NoWait
+Wait						.3
+Tween	ハデス	MoveBy	y=-50				NoWait
+CharacterOff	ハデス					.3
+Wait						.5
+CharacterOff
+Param	character_grayout=true
+	エウメニデス	怒り	2_2
+	リディ	怒り2	1_2
+	リディ	怒り2						まーすーたーぁー!?
+Tween	エウメニデス	PunchPosition	y=30				NoWait
+	エウメニデス	怒り						なにやってんだ、です!?
+CharacterOff
+	ディーア	あはは2						いや、怖くないって言うから……
+CharacterOff
+	エウメニデス	怒り	2_2
+	リディ	怒り2	1_2
+	エウメニデス	怒り						覚悟はできているか、です……！
+CharacterOff
+	ディーア	驚き2						ちょっと待て！
+	ディーア	汗2						元はと言えば、\n怪談を聞きたがったのは\nみんなだろ!?
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	エウメニデス	怒り	2_2			0
+	リディ	怒り2	1_2			0
+FadeIn	white					.3
+	リディ	怒り2						怖くないから、大丈夫だもん
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	驚き2				0
+FadeIn	white					.3
+	ディーア	驚き2						って言うから、\n噂の怪談を聞かせたんだ！
+CharacterOff
+	エウメニデス	怒り	2_2
+	リディ	怒り2	1_2
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	怒り2						その前にマスターが\nからかってきたんでしょ……!?
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	あはは2				0
+FadeIn	white					.3
+	ディーア	あはは2						みんなは怖くて、\n眠れなくなっちゃうかもなー！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	エウメニデス	怒り	2_2			0
+	リディ	怒り2	1_2			0
+FadeIn	white					.3
+	リディ	怒り2						あんなこと言われたら、\n聞くしかないじゃん……！
+Tween	エウメニデス	PunchPosition	y=30				NoWait
+	エウメニデス	怒り						やっぱりご主人が悪い、です！\nバカ腕ども！\n意地悪ご主人に攻撃準備、です！
+CharacterOff
+	ハデス	通常2						ハデスもマスターさんを\n非難の目でじーっと見つめます……
+CharacterOff
+	ディーア	汗2						み、みんな、\nちょっと落ち着いて……
+	ディーア	驚き2						……って、あれ？\nペルセポネはどこに行ったんだ？
+CharacterOff
+	ハデス	通常2						え……？\nお姉ちゃんなら隣に……
+Tween	ハデス	MoveBy	x=20				NoWait
+	ハデス	通常2						……いない
+CharacterOff
+	エウメニデス	通常	2_2
+	リディ	驚き2	1_2
+	リディ	驚き2						ほんとだ！\nさっきまでそこにいたのに！
+CharacterOff
+	ハデス	通常2						たぶん、\nお散歩に行っちゃいましたね……
+CharacterOff
+	リディ	通常2	1_2
+	エウメニデス	通常	2_2
+	エウメニデス	通常						また、ですか\n相変わらず自由な人、です！
+CharacterOff
+	ハデス	通常2						仕方ないですね……\n夜も遅いですし、\nハデスは探しに行きます
+	ハデス	通常2						お姉ちゃんの場所は\nハデスならわかりますから\nザクロ、ミント、行きますよ？
+Tween	ハデス	MoveBy	x=-100				NoWait
+Wait						.4
+CharacterOff
+	ディーア	通常2						ちょっと待ってくれ、\nオレも行くよ
+	ディーア	笑い2						一人は危ないし、\nさっきおばけの話もしちゃったから
+CharacterOff
+	ハデス	悔しい2						マスターさん、言いましたよ？\nハデスは怖くありません、\n感情がありませんから……
+CharacterOff
+	ディーア	通常2						でも、二人のほうが安心だろ？
+CharacterOff
+	ハデス	通常2						…………
+	ハデス	通常2						たしかにそうですね、\nありがとうございます、マスターさん\nそれでは行きましょう
+CharacterOff
+	ディーア	笑い2						ああ！
+	ディーア	驚き2						そういえば……\n聞いたことがなかったけど、\nハデスはどうしておばけが怖いんだ？
+CharacterOff
+	ハデス	通常2						だから、怖くはないです\n会いたいとは思いませんけど
+StopBgm						0
+CharacterOff						0
+Bg	黒背景					0
+	ハデス	<Off>						だって、おばけって<dash=2>
+	          		1_2
+Wait						1
+Se	ドーン
+CharacterOff						0
+Bg	教会					0
+	ハデスロスト	敵				0
+	黒グラデーション		エフェクト表			0
+	ハデスロスト	敵						だって、おばけって\nよくわからないじゃないですか……
+Bgm	図書館
+	ハデスロスト	敵						おばけはそこにいるのに、\nどこにもいない
+	ハデスロスト	敵						カタチがあるのに、触れもしない
+	ハデスロスト	敵						変わってしまった姿で\nずーっと一人で彷徨っている……
+	ハデスロスト	敵						そんなおばけは不気味で醜い……
+	ハデスロスト	敵						だから……\nハデスは存在してはいけないんです
+	ハデスロスト	敵						ハデスを、\n終わらせないといけないんです
+CharacterOff	ハデスロスト
+	アリエッタ	影						それが\n御使いの願いである、と……
+	アリエッタ	影						わかりました……
+	アリエッタ	影						御使いの選びし道なら……\n私もお供いたしましょう……
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+Wait						.5
+	死神	<Off>						我らが神の加護の下、\n貴女の願いを叶えるために……<speed=0.7>　　</speed>	BrPage
+	イベントロゴ1031		エフェクト表			3
+Wait						6
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A(夜)					0
+Bgm	平和
+FadeIn	black					.3
+	ペルセポネ	通常2
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	通常2						はーちゃんが一人♪\nはーちゃんが二人♪\nはーちゃんがたーくさん♪
+	ペルセポネ	通常2						セポネをなでなで\nしあわせ、しあわせ♪
+Se	走る
+Tween	ペルセポネ	MoveBy	x=-800 time=2.5				NoWait
+Param	character_grayout=false
+Wait						1.5
+	ディーア	通常2	画面外_右			0
+	ハデス	通常2	画面外_右_b			0
+Tween	ハデス	MoveBy	x=-790 time=2				NoWait
+Tween	ディーア	MoveBy	x=-610 time=2				NoWait
+Wait						1.5
+Param	character_grayout=true
+	ハデス	通常2						このあたりに\nいたはずなのですが……
+	ディーア	通常2						入れ違いになったのかな？
+	ハデス	通常2						大丈夫です\nお姉ちゃんは近くにいます
+	ハデス	通常2						お姉ちゃんはハデスを\n置いてどこかに行ったりは<dash=2>
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+ChangeSoundVolume	Bgm	.1
+Se	雨	TRUE
+Se	マイクノイズ	TRUE
+CharacterOff						0
+	イベントスチル10311b		エフェクト表			0
+Bg	黒背景					0
+	？？？？	<Off>						ほんとうに？
+StopSe
+Bg	市街地A(夜)
+ImageEffectOff	SpriteCamera	GrayScale
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2	2_2
+	ハデス	通常2	1_2_b
+	ハデス	通常2						……え？
+ChangeSoundVolume	Bgm	1
+	ディーア	驚き2						どうした、ハデス？
+	ハデス	通常2						いま、声が……
+	ディーア	驚き2						オレには聞こえなかったけど……
+Param	character_grayout=false
+	ハデス	通常2						………………\nきっと、気のせいですね\n行きましょう
+Se	走る
+Tween	ハデス	MoveBy	x=-800 time=1				NoWait
+Tween	ディーア	MoveBy	x=-800 time=1				NoWait
+Wait						1
+ChangeSoundVolume	Bgm	.1
+StopSe
+Se	雨	TRUE
+Se	マイクノイズ	TRUE
+FadeOut	black					0
+Wait						.1
+ImageEffect	SpriteCamera	GrayScale
+	ハデスロスト	敵				0
+	          		2_2
+FadeIn	black					0
+Wait						.5
+FadeOut	black					0
+CharacterOff	ハデスロスト	敵				0
+ImageEffectOff	SpriteCamera	GrayScale
+Wait						.1
+StopSe						0
+FadeIn	black					0
+Wait						2
+FadeOut	black					.3
+CharacterOff						0
+Bg	墓場					0
+	ペルセポネ	通常2				0
+ChangeSoundVolume	Bgm	1
+Wait						1
+Param	character_grayout=true
+FadeIn	black					.3
+	ペルセポネ	通常2						ふんふんふーん♪
+CharacterOff
+	ディーア	汗2	p8
+	ハデス	通常2	p7b
+Se	走る
+Tween	ディーア	MoveBy	x=-135				NoWait
+Tween	ハデス	MoveBy	x=-240				NoWait
+	ハデス	通常2						お姉ちゃん、やっと見つけた……！
+CharacterOff
+	ペルセポネ	嬉しい2
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	嬉しい2						あっ！\nはーちゃんにマスターさん、\nよくセポネさんを見つけましたね♪
+CharacterOff
+	ハデス	通常2	1_2
+	ディーア	汗2	2_2
+	ディーア	汗2						まったく、かなり歩いたんだぞ？
+CharacterOff
+	ペルセポネ	通常2						それはいけません\nマスターさんにはセポネと\nはーちゃんを吸う義務を与えます♪
+CharacterOff
+	ハデス	通常2	1_2
+	ディーア	あはは2	2_2
+	ディーア	あはは2						権利じゃないんだな……
+CharacterOff
+	ペルセポネ	嬉しい2						はい♪ たくさんなでてほめて\n甘やかしてくださいね♪
+CharacterOff
+	ハデス	通常2	1_2
+	ディーア	汗2	2_2
+	ディーア	汗2						それは帰ってからな
+	ディーア	通常2						ペルセポネは\nどうしてこんな墓地に来たんだ？
+CharacterOff
+	ペルセポネ	無表情2						うーん、どうしてでしょう？\nなにかを探していたような……\nお散歩をしたかっただけのような……
+CharacterOff
+	ハデス	通常2	1_2
+	ディーア	汗2	2_2
+	ディーア	汗2						自分でもわかってないんだな……
+	ハデス	通常2						お姉ちゃんはお姉ちゃんですから
+	ハデス	通常2						マスターさん、\nお姉ちゃんも見つかりましたし、\n帰りましょ<dash=2>
+StopBgm
+	？？？？	<Off>						うぅう……！
+	ハデス	通常2						…………え？
+Bgm	絶望
+CharacterOff
+	黒グラデーション		エフェクト表
+	旅人							どうして……\nなんで逝ってしまったんだ……！
+CharacterOff	旅人
+	街の女性							あぁ、息子がいなくなったら、\n私はどうやって……！
+CharacterOff	街の女性
+	勇者A	通常	2_3
+	勇者B	通常	1_3_b
+	勇者C	通常	3_3_b
+	勇者A							ごめんなさい、ごめんなさい……
+	勇者B							うっ、うぅ……うぅうう……！
+CharacterOff
+	ハデス	通常2	1_2
+	ディーア	怒り2	2_2
+	ハデス	通常2						これは……？
+	ディーア	怒り2						……この間のロストの侵攻で\n勇者に大きな被害が出たからな\nきっと、その遺族だろう
+	ハデス	通常2						…………
+FadeOut	white					.3
+CharacterOff						0
+	          
+Param	character_grayout=false
+FadeIn	white					.3
+	ハデス	<Off>						たくさんの負の感情……\n死、喪失、魂……\nハデスの力になるもの……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	戦場跡					0
+	          		1_3
+FadeIn	white					.3
+	ハデス	<Off>						あそこと同じ……\nおばけのいる場所……
+FadeOut	white					.3
+StopBgm
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	墓場					0
+	勇者A	通常	2_3			0
+	勇者B	通常	1_3_b			0
+	勇者C	通常	3_3_b			0
+	          
+FadeIn	white					.3
+Wait						1
+Se	闇1
+	勇者A	嘲笑	2_3			0
+	勇者B	嘲笑	1_3_b			0
+	勇者C	嘲笑	3_3_b			0
+	          
+Wait						1.5
+CharacterOff
+	ハデス	通常2
+Shake	ハデス		x=2				NoWait
+	ハデス	通常2						…………っ!?
+Bgm	図書館
+CharacterOff
+Param	character_grayout=true
+	黒グラデーション		エフェクト表
+	勇者A	嘲笑	2_3
+	勇者B	嘲笑	1_3_b
+	勇者C	嘲笑	3_3_b
+	勇者A	嘲笑						ハデスだ……
+	勇者B	嘲笑						ハデスのせいだ……
+	勇者C	嘲笑						ハデスがいなければ……！
+Param	character_grayout=false
+	勇者	<Off>						ハデス、ハデス、ハデス……！
+CharacterOff						0
+Bg	黒背景					0
+	          							\n    　　　<color=red><size=60><dash=2>ハデス</size></color>				赤文字＋大
+FadeOut	white					.2
+CharacterOff						0
+Bg	墓場					0
+	ディーア	驚き2	2_2			0
+	ハデス	悲しい2	1_2			0
+Param	character_grayout=true
+FadeIn	white					.2
+Shake	ハデス		x=2				NoWait
+	ハデス	悲しい2						はぁ、はぁ……！
+	ディーア	驚き2						大丈夫か、ハデス!?
+	ハデス	通常2						い、今のは……？
+CharacterOff
+Param	character_grayout=false
+	勇者A	通常	2_3
+	勇者B	通常	1_3_b
+	勇者C	通常	3_3_b
+	勇者	<Off>						ぐすっ、うぅ……！
+CharacterOff
+	ディーア	驚き2	2_2
+	ハデス	通常2	1_2
+Param	character_grayout=true
+	ハデス	通常2						また、気のせい……？
+	ディーア	怒り2						ハデス、本当に大丈夫か……？
+	ハデス	通常2						はい……\nそれより、お姉ちゃんは……？
+	ディーア	驚き2						えっ……\nペルセポネ……？
+FadeOut	black					.3
+CharacterOff						0
+	ハデス	通常2	画面外_右_b			0
+	ペルセポネ	無表情2	画面外_右			0
+	          
+Param	character_grayout=false
+FadeIn	black					.3
+Tween	ペルセポネ	MoveBy	x=-1600 time=3.5				NoWait
+Wait						1
+Tween	ハデス	MoveBy	x=-500 time=1				NoWait
+	ハデス	通常2						お姉ちゃん、待って……！
+FadeOut	black					.3
+CharacterOff						0
+	          
+FadeIn	black					.3
+	ペルセポネ	無表情2						…………？
+StopBgm
+Se	雨	TRUE
+Se	マイクノイズ	TRUE
+CharacterOff
+	黒グラデーション		エフェクト表
+	ハデスロスト	敵						…………ペルセポネ
+FadeOut	black					1
+StopSe
+CharacterOff						0
+	ハデス	通常2	1_2			0
+	ディーア	驚き2	2_2			0
+Se	火事
+Wait						1.5
+Shake	BG		x=10 y=10 time=5				NoWait
+Param	character_grayout=true
+Bgm	魔王バトル
+FadeIn	black					1
+	ディーア	驚き2						な、なんだ!?\nこの重い魔力は……!?
+	ディーア	悔しい2						この先になにかいる……？
+	ハデス	通常2						お姉ちゃん……！
+Se	走る
+FadeOut	black					1
+CharacterOff						0
+Bg	黒背景					0
+	          
+FadeIn	black					.3
+	？？？？	<Off>						……ハデス
+FadeOut	white					1
+CharacterOff						0
+	イベントスチル10311		エフェクト表			0
+Se	チャージ
+Se	闇3
+Param	character_grayout=false
+FadeIn	white					1
+Wait						2
+CharacterOff
+Bg	墓場
+	ディーア	悔しい2
+	ディーア	悔しい2						っ……！\nなん、だ、こいつ……？
+CharacterOff
+	ハデスロスト	敵						…………
+CharacterOff
+	ハデス	通常2						わ、わかりません……\nハデスにわからない、なんて……
+CharacterOff
+	ハデスロスト	敵						…………\nおねえちゃんはここですよ
+CharacterOff
+	黒グラデーション		エフェクト表2			.5
+	ペルセポネ	目閉じ2				.5
+	オーラ紫		エフェクト表			.5
+Tween	ペルセポネ	MoveBy	x=-20				NoWait
+	          		2_3
+Wait						1
+CharacterOff
+	ディーア	本気2						ペルセポネ!!
+CharacterOff
+	ハデス	悲しい2						お姉ちゃん……!?
+CharacterOff
+	ハデスロスト	敵						………………
+CharacterOff
+	ハデス	悲しい2						あ、あなたは……\nなんなんですか……？
+	ハデス	悲しい2						ハデスにはわかりません……\nあなたが、なにか、わかりません……
+	ハデス	悲しい2						ハデスにわからないものなんて……\nまさか、そんな……
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	戦場跡					0
+	おばけA		2_3_m
+	          
+FadeIn	white					.2
+Wait						1
+CharacterOff
+ImageEffectOff	SpriteCamera	Sepia
+Bg	墓場
+	ハデスロスト	敵						おばけ……
+FadeOut	black					.3
+CharacterOff						0
+	イベントスチル10311		エフェクト表			0
+FadeIn	black					.3
+	？？？？	<Off>						そうです……おばけです\nこわいこわい、ただのおばけ……
+CharacterOff
+	ハデス	悲しい2
+Shake	ハデス		x=2				NoWait
+	ハデス	悲しい2						っ……！
+CharacterOff
+	ハデスロスト	敵						だから……\nあなたのおねえちゃんは、\nもらいます……
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト表2
+	ペルセポネ	目閉じ2
+	オーラ紫		エフェクト表
+Wait	          		2_3			.5
+CharacterOff	黒グラデーション					.5
+CharacterOff	ペルセポネ					.5
+CharacterOff	オーラ紫					.5
+Wait						1.2
+Bgm	魔獣バトル
+CharacterOff
+	ハデス	通常2						<dash=4>ぁ
+CharacterOff
+	ディーア	本気2						惑わされるな、ハデス！
+	ディーア	怒り2						お前の正体がなんだろうと、\nペルセポネは返してもらうぞ……！
+	ディーア	本気2						いくぞ、ハデス！
+CharacterOff
+	ハデス	通常2						は、はい……！
+	ハデス	通常2						天冥、開門します……！
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1031_02
+EndIf
+EndScenario
+
+# E_1031_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔獣バトル
+Bg	墓場
+	          
+FadeIn	white					.5
+ImageEffect	SpriteCamera	MotionBlur
+Se	闇3
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(紫)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=2
+Wait						.3
+Bg	墓場					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	ディーア	悔しい2	2_2
+	ハデス	悔しい2	1_2
+Shake	Graphics		x=5 y=5				NoWait
+	ハデス	悔しい2						っ……!?
+	ディーア	悔しい2						ぐっ……！
+CharacterOff
+	ハデスロスト	敵						…………
+CharacterOff
+	ディーア	悔しい2	2_2
+	ハデス	悔しい2	1_2
+	ハデス	悔しい2						マスターさん、おかしいです\nこの場所にはたくさんの魂が、\n悲劇が満ちていたのに……
+	ハデス	悔しい2						痛みも、なにもかも\nハデスの力になるはずなのに……
+	ハデス	悲しい2						なんで、\nハデスの力にならないの……？
+	ディーア	驚き2						ハデスの力が、抑えられている？
+	ハデス	悲しい2						それに、あの子……\nハデスにわからないものなんて……
+	ハデス	悲しい2						本当に、あれは……
+CharacterOff
+	ハデスロスト	敵						……むだですよ？
+CharacterOff
+	ディーア	悔しい2	2_2
+	ハデス	悲しい2	1_2
+	ハデス	悲しい2						……っ
+CharacterOff
+	ハデスロスト	敵						おばけはおばけ、\nハデスに理解できないもの……
+	ハデスロスト	敵						ハデスの罪……
+	ハデスロスト	敵						だから……
+Param	character_grayout=false
+Se	チャージ
+	オーラ紫		エフェクト表			1
+Wait						1.5
+CharacterOff
+	ディーア	驚き2	2_2
+	ハデス	悔しい2	1_2
+	オーラ紫		エフェクト表
+	ハデス	悔しい2						これは、お姉ちゃんの力を……？
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A(夜)					0
+	オーラ紫		エフェクト表			1
+Se	火事
+FadeIn	black					.3
+Wait						1
+Se	シャキーン
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.5
+Se	チャージ
+Bg	冥界					1
+Wait						1.5
+FadeOut	black					.3
+CharacterOff						0
+Bg	墓場					0
+	ハデス					0
+	ディーア	悔しい2				0
+FadeIn	black					.3
+	ディーア	悔しい2						ペルセポネを使って空間を、\nいや、魔界を塗り替えているのか!?
+CharacterOff
+	ハデスロスト	敵						<size=20>あぁ、これでハデスは……</size>
+Param	character_grayout=true
+CharacterOff
+	ハデス	悔しい2	1_2
+	ディーア	驚き2	2_2
+	ディーア	悔しい2						……え？
+Param	character_grayout=false
+CharacterOff
+	ペルセポネ	目閉じ2	p7
+	ハデスロスト	敵
+	ハデスロスト	敵						さようなら……
+	オーラ紫		エフェクト表			1
+Wait						.5
+StopBgm						.5
+CharacterOff	ペルセポネ					1
+CharacterOff	ハデスロスト					1
+Wait						1.5
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2	2_2
+	ハデス	悲しい2	1_2
+Tween	ハデス	MoveBy	x=-50				NoWait
+	ハデス	悲しい2						お姉ちゃんを、\n返してください……!!
+	ディーア	悔しい2						後を追うぞ、ハデス！
+Se	走る
+Tween	ディーア	MoveBy	x=-800 time=1.5				NoWait
+Wait						.3
+	ハデス	通常2						は、はい……！
+Bgm	絶望
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+Tween	ハデス	MoveBy	x=50				NoWait
+	ハデス	通常2						でも……\nアレが本当におばけなら……
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	戦場跡					0
+	          					0
+FadeIn	white					.3
+	ハデス	<Off>						ハデスの、罪だとしたら……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	墓場					0
+	ハデス	悲しい2	1_2			0
+FadeIn	white					.3
+	ハデス	悲しい2						ハデスは……
+Se	走る
+Tween	ハデス	MoveBy	x=-800 time=2				NoWait
+Wait						.2
+FadeOut	black					1
+Se	チャージ
+CharacterOff						0
+Bg	月夜の大地					0
+	          
+Wait						3
+StopSe
+Wait						1
+Param	character_grayout=true
+Shake	BG		x=5 y=5 time=5				NoWait
+Bgm	図書館
+FadeIn	black					.3
+	ドロシー	通常	p3					始まったか……
+	カルバノグ	通常	p7b					わあ！\nたいへんなことになってますねえ！
+	カルバノグ	通常						ねえねえ、ドロシー？\nもうちょっと見ていきませんか？\nこんなのなかなかないですよお
+	ドロシー	通常						お前のくだらない感想を聞くほど\n私は暇じゃない\nさっさと撤退するぞ
+	ドロシー	通常						こちらでの任務は完遂している\nあとはアレに任せるだけだ
+Tween	カルバノグ	MoveBy	x=-10				NoWait
+	カルバノグ	通常						本当に\n任せてもいいんですかあ……？
+	ドロシー	怒り						ふん……
+	ドロシー	通常						アレの存在は癪だが\n『死神』を冠するだけのことはある\n我々はただ傍観していればいい
+	カルバノグ	通常						わかりましたあ♪\nそれじゃあ帰りましょう♪
+	ドロシー	ニヤリ						さて、お手並み拝見といこうか\n……少年
+If	isdebug==true
+CharacterOff
+Jump	*E_1031_03
+EndIf
+EndScenario
+
+# E_1031_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	図書館
+Bg	冥界
+	          
+FadeIn	white					.5
+	ディーア	悔しい2	1_2			1		うっ……\nここは……？
+	ディーア	怒り2						あの異界の中、か……\nハデスは無事か？
+	ハデス	通常2無し	2_2			1		は、はい\nハデスはここにいます……
+	ディーア	通常2						そうか、良かった……\nそれにしてもこれは……
+Param	character_grayout=false
+CharacterOff
+	黒グラデーション		エフェクト表
+	街の人	<Off>						うぁあ……
+	勇者	<Off>						ごめんなさい……\nごめんなさい……！
+Param	character_grayout=true
+CharacterOff
+	ハデス	通常2無し	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						あれは、墓地にいた人たち……？
+	ディーア	怒り2						いや、それだけじゃないな\nあの力の規模だ……
+	ディーア	怒り2						魔界全土が\n飲み込まれていてもおかしくない
+	ハデス	通常2無し						…………
+	ハデス	悲しい2無し						この空間は……\nお姉ちゃんの力で\n作られたものだと思います
+	ディーア	怒り2						やっぱり……\nペルセポネが生み出した\nマイナス事象で……
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	魔術空間					0
+	ペルセポネ	通常2				0
+	          
+FadeIn	white					.3
+	ハデス	<Off>						お姉ちゃんは罪を吸い取り、\nマイナス事象に……\nハデスの力に変える魔剣
+CharacterOff
+Bg	戦場跡
+	ハデス	<Off>						吸い取る罪が多いほどに、\n周囲に悲劇を起こします……
+FadeOut	white					.3
+CharacterOff						0
+Bg	冥界					0
+	ディーア	怒り2	1_2			0
+	ハデス	悲しい2無し	2_2			0
+ImageEffectOff	SpriteCamera	GrayScale
+Param	character_grayout=true
+FadeIn	white					.3
+	ハデス	悲しい2無し						そのせいで昔も……
+	ディーア	驚き2						ハデス……？
+	ハデス	通常2無し						……ここには多くの災いが\n詰め込まれています\n普通の人は生きられません
+	ディーア	怒り2						ペルセポネを使った、\n疑似冥界化……
+	ディーア	怒り2						それがペルセポネを\n攫った理由なのか……？
+	ディーア	目閉じ2						……このままじゃ\n魔界中の人間が犠牲になるな
+	ハデス	通常2無し						はい……
+	ディーア	怒り2						そんなことができるアレは……
+FadeOut	black					.1
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	イベントスチル10311		エフェクト表			0
+FadeIn	black					.3
+Wait						2
+FadeOut	black					.3
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ハデス	悲しい2無し				0
+FadeIn	black					.3
+	ハデス	悲しい2無し						ほ、ほんとうに……\nおばけなんでしょうか……？
+CharacterOff
+	ディーア	怒り2						まずは、落ち着こう\nそうじゃないと\nいざというときに戦えないから
+CharacterOff
+	ハデス	通常2無し						は、はい、そうですね……
+	ハデス	通常2無し						こういう時は\nザクロとミントを吸いましょう
+Tween	ハデス	MoveBy	x=-10				NoWait
+	ハデス	通常2無し						マスターさんも、\nハデスを吸っても<dash=2>
+	ハデス	通常2無し						あれ……？
+	ハデス	通常2無し						ザクロ？ ミント？
+Shake	ハデス		x=3				NoWait
+	ハデス	悲しい2無し						いない……？\nザクロとミントも……？
+Tween	ハデス	MoveBy	x=20				NoWait
+	ハデス	悲しい2無し						ざ、ざくろ……？\nみんと……？\nみんな、どこ……!?
+Tween	ハデス	MoveBy	x=-40				NoWait
+	ハデス	悲しい2無し						あの子たちがいないと\nハデスは、ハデスは……！
+CharacterOff
+	ディーア	驚き2						ハデス、しっかりしろ……！
+StopBgm
+Se	雨	TRUE
+Se	マイクノイズ	TRUE
+CharacterOff
+Bg	黒背景
+	？？？？	<Off>						さがしものは……これですか？
+StopSe
+Bg	冥界
+	ハデスロスト	敵				1
+Wait						2
+CharacterOff
+	ハデス	悔しい2無し	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						っ……!?
+	ディーア	悔しい2						（オレたちが気づかなかった……？）
+FadeOut	black					.3
+Bgm	絶望
+Param	character_grayout=false
+CharacterOff						0
+	オーラ紫		エフェクト表			0
+	ザクロとミント	通常	エフェクト裏			0
+	          
+FadeIn	black					.3
+Se	フォーン
+Wait						2
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	悔しい2	1_2			0
+	ハデス	悔しい2無し	2_2			0
+FadeIn	black					.3
+	ハデス	悔しい2無し						ザクロ……、ミント……！
+CharacterOff
+	ハデスロスト	敵						これでまた……\nハデスはひとりぼっち……
+CharacterOff
+	ディーア	悔しい2	1_2
+	ハデス	悔しい2無し	2_2
+	ハデス	悔しい2無し						ザクロとミントを\nかえしてください……！
+CharacterOff
+	ハデスロスト	敵						……だめです、かえしません\nおばけですから
+	ハデスロスト	敵						それにあなたも……\nたくさんうばったじゃないですか……
+Param	character_grayout=false
+CharacterOff
+	イベントスチル10311		エフェクト裏
+	黒グラデーション		エフェクト表			1
+Se	死後の世界		.2									ホラーSeに替える
+	？？？？	<Off>						だから、だめ……だめ……だめ……
+ChangeSoundVolume	Se	1
+	ダメ	1	エフェクト表2			0
+Wait						.2
+	ダメ	2				0
+Wait						.2
+	ダメ	3				0
+Wait						.2
+	ダメ	4				0
+Wait						.2
+	ダメ	5				0
+Wait						2
+CharacterOff	ダメ
+	？？？？	<Off>						ほら……\nみんなもだめっていっています
+CharacterOff
+	ハデス	悲しい2無し						み、みんなって……
+CharacterOff
+	ハデスロスト	敵						…………？
+	ハデスロスト	敵						そこに、いるじゃないですか……
+Param	character_grayout=false
+CharacterOff
+Se	闇1
+	おばけB		3_5_m
+Wait						.2
+	おばけD		4_5_m
+Wait						.2
+	おばけC		2_5_m
+Wait						.2
+	おばけA		1_5_m
+Wait						.2
+	おばけE		5_5_m
+	？？？？							……ハデス
+	？？？？							ハデスだ……ハデスがいたぞ……
+CharacterOff
+	ハデス	悔しい2無し						お、おばけ……
+	ハデス	悔しい2無し						で、でも、大丈夫です……\nハデスはおばけなんて怖くありません\nハデスには感情がないから……！
+Param	character_grayout=false
+CharacterOff
+	おばけA		1_5_m
+	おばけB		2_5_m
+	おばけC		3_5_m
+	おばけD		4_5_m
+	おばけE		5_5_m
+	？？？？							うそつき……
+CharacterOff
+	ハデス	悔しい2無し						…………え？
+CharacterOff
+	ディーア	本気2						聞いたらダメだ、ハデス!!
+CharacterOff
+	ハデスロスト	敵						むだですよ……\nこの声はハデスからうまれる\nハデスの罪、なんですから
+	ハデスロスト	敵						耳をふさいでも、\n罪の声は聞こえつづける……
+StopSe
+CharacterOff	ハデスロスト					2
+Wait						2
+	ディーア	悔しい2						行かせるか……！
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	斬1
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210F)		エフェクト裏			0
+Tween	黒背景	MoveBy	x=3000 time=1
+Wait						.3
+Bg	冥界					0
+CharacterOff						0
+Wait						.5
+FadeOut	white					.1
+CharacterOff						0
+Se	ジャストガード
+	おばけA		1_3_m			0
+	おばけB		2_3_m			0
+	おばけC		3_3_m			0
+	         
+FadeIn	white					.1
+Wait						1
+CharacterOff
+	ディーア	悔しい2						くっ……！\nなんなんだ、こいつらは!?
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	おばけA		1_3_m
+	おばけB		2_3_m
+	おばけC		3_3_m
+	おばけA							あのひとを……かえして……
+	おばけB							ゆるさない……ゆるさない……
+	おばけC							しにがみ……しにがみ……
+CharacterOff
+	ハデス	悲しい2無し						っ……！
+Shake	ハデス		x=5				NoWait
+	ハデス	悲しい2無し						そ、その、ことば……は……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	遺跡A					0
+	          
+Se	雨	TRUE
+Se	マイクノイズ	TRUE
+FadeIn	white					.3
+	？？？？							あの人をかえしてよぉ……！
+	？？？？							このっ、死神……！！
+FadeOut	white					.3
+StopSe
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	冥界					0
+	ハデス	悲しい2無し				0
+	黒グラデーション		エフェクト表			0
+FadeIn	white					.3
+Shake	ハデス		x=3				NoWait
+	ハデス	悲しい2無し						っ……！\nやめて、ください……！
+	ハデス	悲しい2無し						おもい、ださせないで……！
+	ハデス	悲しい2無し						このままじゃ感情が……\nハデスの感情が……溢れて……！
+CharacterOff
+	おばけA		1_3_m
+	おばけB		2_3_m
+	おばけC		3_3_m
+	？？？？							だめ
+	？？？？							おもいだして……
+	？？？？							ちゃんとみて……
+StopBgm
+Param	character_grayout=false
+	？？？？							だってわたしたちは……
+FadeOut	black					.2
+CharacterOff						0
+	幻影ハデスA		1_3_b			0
+	幻影ハデスB		2_3			0
+	幻影ハデスC		3_3_b			0
+FadeIn	black					.2
+	ハデス？							ハデスなんだから……
+Bgm	緊迫
+CharacterOff
+	ハデス	悲しい2無し						は、ハデスが……たくさん……？
+CharacterOff
+	ディーア	悔しい2						ただの、幻影だ……！
+CharacterOff
+	ハデス	通常2無し						ちがいます……あれは……
+FadeOut	white					.3
+StopBgm
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	遺跡A					0
+	黒グラデーション		エフェクト表			0
+	ハデス	通常2無し				0
+FadeIn	white					.3
+	ハデス	通常2無し						ハデスが不幸をもたらす……
+	ハデス	通常2無し						ハデスがすべてを壊す……
+	ハデス	通常2無し						ハデスは、いらないんですね……
+FadeOut	white					.3
+StopSe
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	冥界					0
+	ハデス	通常2無し拡大	エフェクト表			0
+FadeIn	white					.3
+	ハデス	通常2無し拡大						これは……\nハデスの記憶、です……
+Se	回想
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1031_04
+EndIf
+EndScenario
+
+# E_1031_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Se	雨	TRUE
+Se	マイクノイズ	TRUE
+Bg	研究所A_過去
+ImageEffectOff	SpriteCamera	GrayScale
+Param	character_grayout=false
+	          
+FadeIn	black					0
+Bg	酒場の地下_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	研究所B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	研究所C_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	廃墟A_過去
+Wait						.1
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	市街地B2_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	戦場跡
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	black					.1
+Bg	水銀の大地
+ImageEffect	SpriteCamera	Sepia
+Wait						1
+FadeOut	white					.2
+Bg	研究所B
+CharacterOff						0
+	                    
+StopSe
+FadeIn	white					.6
+	          							最初はそう……\n楽しくて、嬉しかった……
+	ペルセポネ	嬉しい2拡大	エフェクト表			1
+	          	<Off>						目を開くといつも\nお姉ちゃんの嬉しそうな笑顔が見えた
+	ペルセポネ	嬉しい2拡大						セポネは\nはーちゃんのお姉ちゃんだから\nずーっと一緒にいるよ♪
+FadeOut	black					.3
+CharacterOff						0
+	ペルセポネ	嬉しい2	2_2			0
+	ハデス	通常2無し	1_2			0
+	          		1_3
+FadeIn	black					.3
+	          	<Off>						ハデスとお姉ちゃんと\nスイセンと……
+	          	<Off>						毎日一緒、いつでも一緒……
+	          	<Off>						笑ったり、怒ったり\nハデスの中には感情があって……
+StopBgm
+Bg	黒背景					0
+CharacterOff						0
+	          	<Off>						でも……
+Se	パリン
+Bg	戦場跡
+	兵士	<Off>						<size=40>お前たちのせいだ……！</size>
+Bgm	ロルリアンレットB
+	ペルセポネ	無表情2	2_2			1
+	          	<Off>	1_2			1		お姉ちゃんは\n罪を吸い上げ悲劇を起こす魔剣
+	ハデス	通常2無し	1_2
+	          	<Off>						ハデスは悲劇を力に変える魔剣
+	          	<Off>						恨みも、悲しみも、誰かの魂も\nハデスの中に入って……
+	          	<Off>						ハデスは役に立ちたかったのに
+	          	<Off>						ハデスたちが敵を倒すと、\nみんながハデスたちを嫌うんです
+Bg	市街地A
+CharacterOff
+	街の人	<Off>						あいつの魂を返せよ……！
+	街の人	<Off>						あんたたちは\n不幸しか起こさないんだ！
+CharacterOff
+Bg	市街地A
+	ハデス	通常2無し
+	          	<Off>						ハデスはわからなくなりました
+CharacterOff
+	ハデス	通常2無し
+Bg	廃墟A
+	          	<Off>						活躍できたら嬉しいのに、怒られる
+CharacterOff
+Bg	戦場跡
+	ハデス	通常2無し
+	          	<Off>						戦争するのが仕事なのに、罵られる
+	          	<Off>						そして……
+CharacterOff
+Bg	市街地A
+	ハデス	悲しい2無し						やめて……！\nいたい、いたい……！
+	ハデス	悲しい2無し						いやぁああああああ!!!!
+Se	チャージ
+	オーラ青		エフェクト表			.5
+Wait						.5
+FadeOut	white					1
+Se	光3
+Se	闇3
+Bg	灰の大地					0
+Wait						1
+FadeIn	white					1
+Wait						2
+CharacterOff
+	おばけA		2_3_m			.5
+	          	<Off>						ぜんぶがこわれた後……\nおばけがハデスを見ていました
+Tween	おばけA	ScaleBy	x=1.5 y=1.5 time=40				NoWait
+	          	<Off>						じーっと、見ていました
+	          	<Off>						ハデスが不幸をもたらすと\n出てくるおばけ
+	          	<Off>						ハデスの力にできない残滓……\nよくわからないもの……
+	          	<Off>						きっとあれは……ハデスの罪
+FadeOut	black					.3
+CharacterOff						0
+Bg	遺跡A					0
+	ペルセポネ	通常2	2_2			0
+	ハデス	通常2無し	1_2			0
+	          
+StopBgm
+FadeIn	black					.3
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	          	<Off>						そうして、\nハデスは感情を失くしました
+Tween	ペルセポネ	PunchPosition	x=10				NoWait
+	          	<Off>						悲しいと苦しいがなくなって、\n嬉しいも楽しいもなくなりました
+Bgm	絶望
+Tween	ペルセポネ	RotateTo	y=180				NoWait
+Wait						1
+Tween	ペルセポネ	MoveBy	x=-800 time=7				NoWait
+CharacterOff	ペルセポネ					.5
+Wait						1
+	          	<Off>						お姉ちゃんも……\nいなくなるようになりました……
+Wait						.5
+Tween	ハデス	MoveBy	x=50				NoWait
+	ハデス	通常2無し						お姉ちゃん、どこにいったの……？
+	黒背景		エフェクト表
+CharacterOff	ハデス					0
+CharacterOff	ペルセポネ					0
+Wait						1
+Bg	洋館					0
+	ペルセポネ	通常2				0
+	          
+CharacterOff	黒背景
+	          	<Off>						見つけられるけど、\nすぐにいなくなってしまう……
+	          	<Off>						きっと、\n心が痛くなって……
+	ペルセポネ	無表情2
+	          	<Off>						笑っているけれど、\n心が笑えなくて……
+CharacterOff	ペルセポネ	通常2無し				1
+Wait						1.5
+Bg	研究所B
+	          	<Off>						ハデスは\n一人ぼっちになったから……
+FadeOut	black					.3
+CharacterOff						0
+	オーラ青		エフェクト表			0
+FadeIn	black					.3
+Wait						.5
+Se	フォーン
+	ザクロとミント		エフェクト裏			2
+Wait						1.5
+FadeOut	black					.3
+CharacterOff						0
+	ハデス	通常2				0
+FadeIn	black					.3
+	ハデス	通常2						あなたたちはザクロ、ミント……\nずっと一緒にいましょうね
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ペルセポネ	嬉しい	3_3			0
+	ディーア	笑い2	1_3			0
+	ハデス	通常2	2_3			0
+	          
+FadeIn	white					.3
+	          	<Off>						やっとマスターさんと出会えて……\nお姉ちゃんとも昔みたいに……
+FadeOut	black					.3
+CharacterOff						0
+	イベントスチル10311		エフェクト表			0
+	          
+FadeIn	black					.3
+	          	<Off>						なのに、\nまたハデスは失くすのでしょうか……
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ペルセポネ	嬉しい	3_3			0
+	ディーア	笑い2	1_3			0
+	ハデス	通常2	2_3			0
+	          
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	black					.3
+	          	<Off>						ハデスには感情がありません\n悲しみもありません……
+CharacterOff	ペルセポネ					.5
+	          	<Off>						でも……\nハデスは誰かがいないと\nダメなんです……
+	ハデス	通常2無し				.5						ザクロミントなし
+	          	<Off>						一緒にいられないと\n胸が痛いんです
+CharacterOff	ディーア					.5
+	          	<Off>						一人になったら、\nおばけみたいにわからないものに\nなりそうで……
+	ハデス	悲しい2無し
+	黒グラデーション		エフェクト表
+	ハデス	悲しい2無し						おねえちゃん……！\nザクロ、ミント……！\nハデスを置いていかないで……！
+	ハデス	悲しい2無し						ハデスはもう、一人ぼっちは……！
+Bg	黒背景					1
+Param	character_grayout=true
+	          	<Off>						あぁ……\nハデスはまた罪にまみれて\n一人に……
+	ディーア	<Off>						<size=20>……デス…………！</size>				小文字
+StopBgm
+	ハデス	悲しい2無し						え…………？
+FadeOut	white					1
+Wait						.5
+Se	ガラス割れる
+CharacterOff						0
+Bg	白背景					0
+	ディーア	本気2				0
+Wait						1
+Bgm	凱旋
+FadeIn	white					1
+	ディーア	本気2						ハデス……!!
+CharacterOff
+	ハデス	通常2無し						ますたー、さん……？
+CharacterOff
+	ディーア	本気2						ハデスは一人じゃない！\nオレがハデスを一人にしない！
+	ディーア	悔しい2						オレがちゃんとそばにいる！\nペルセポネもスイセンも！\nザクロとミントもちゃんといる!!
+	ディーア	悔しい2						約束しただろ……！\nハデスとペルセポネを\n離したりしないって……！
+	ディーア	本気2						だから……!\nこんな過去に負けるな……!!
+Param	character_grayout=false
+CharacterOff
+	          	<Off>						あったかい……
+	ハデス	通常2無し
+	          	<Off>						マスターさんがハデスに\nかけてくれる圧……
+	          	<Off>						あったかい期待の証拠……
+	          	<Off>						あの時も、そうでしたね……
+FadeOut	white					.3
+CharacterOff						0
+	イベントスチル414BG	拡大手	エフェクト表			0
+FadeIn	white					.3
+	ペルセポネ	<Off>						はーちゃんは\nセポネの帰る場所だから
+	ペルセポネ	<Off>						だから、ずっと、ずーーっと\n一緒にいるよ？
+	ハデス	<Off>						またお姉ちゃんがお散歩に行っても\nハデスが探しに行きます
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ペルセポネ	嬉しい	3_3			0
+	ディーア	笑い2	1_3			0
+	ハデス	通常2	2_3			0
+	          
+FadeIn	white					.3
+	          	<Off>						そして、\nマスターさんの下に帰るって……
+FadeOut	white					.3
+Bg	白背景					0
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+	ハデス	通常2無し				0
+Bgm	風属性バトル
+FadeIn	white					.3
+	ハデス	通常2無し						そうです……\n今のハデスは一人じゃありません……\nマスターさんが一緒にいます……
+	ハデス	通常2無し						ハデスに頑張れって\n圧をかけてくれます……
+	ハデス	通常2無し						だからハデスは……
+CharacterOff	黒グラデーション
+Se	チャージ
+	オーラ青		エフェクト表			1
+	ハデス	本気2無し						マスターさん、\nハデスにたくさん……\n圧かけてください……！
+Wait						.3
+CharacterOff
+	ディーア	本気2						ああ……!\n一緒にペルセポネを連れ戻すぞ\nハデス……！
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff						0
+Bg	冥界					0
+	ディーア	怒り2	1_2			0
+	ハデス	本気2無し	2_2			0
+FadeIn	white					.3
+	ハデス	本気2無し						神々が作りし天冥の魔杖、ハデス
+	ハデス	本気2無し						ハデスは、\n大切な人たちといるから……
+CharacterOff
+	ハデス	本気2無し拡大	エフェクト表
+	ハデス	本気2無し拡大						今は一人じゃないから、\nおばけなんて怖くありません……！
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1031_05
+EndIf
+EndScenario
+
+# E_1031_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bg	冥界					0
+Bgm	Xmasバトル
+Param	character_grayout=false
+	ハデス	本気2無し				0
+FadeIn	white					.5
+	ハデス	本気2無し						みなさんの苦しみ、悲しみ……\n全てを受け止めます……
+	ハデス	本気2無し						天冥閉門……\nハデスの力になってくださいね……
+CharacterOff
+	おばけA		1_3_m
+	おばけB		2_3_m
+	おばけC		3_3_m
+	         
+Wait						1
+FadeOut	white					.2
+Se	チャージ
+Se	光2
+Se	光3
+Wait						1.5
+CharacterOff						0
+	          
+Se	ドア閉まる
+Wait						3
+StopBgm
+FadeIn	white					.2
+Wait						1
+	ハデス	通常2無し						あれはハデスの中にあった、\n記憶でした……
+Bgm	ロルリアンレットB
+	ハデス	通常2無し						でも、どうして……？
+	ハデス	通常2無し						それに<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	研究所C					0
+	ハデスロスト	敵				0
+FadeIn	white					.3
+	ハデスロスト	敵						お姉ちゃん……！\nザクロ、ミント……！
+	ハデスロスト	敵						ハデスは……\nハデスは戻りたい……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	冥界					0
+	ハデス	通常2無し				0
+FadeIn	white					.3
+	ハデス	通常2無し						これは違います……
+	ハデス	通常2無し						ハデスのものなのに、\nハデスじゃありません……
+	ハデス	悔しい2無し						…………
+	ハデス	通常2無し						……そういうことだったんですね
+CharacterOff
+	ディーア	驚き2						ハデス……？
+CharacterOff
+	ハデス	通常2無し						もう大丈夫です、マスターさん……
+FadeOut	black					.3
+CharacterOff						0
+	ザクロとミント	通常	エフェクト表			0
+	          
+FadeIn	black					.3
+Se	フォーン
+Wait						2
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	驚き2				0
+FadeIn	black					.3
+	ディーア	驚き2						ザクロ、ミント！\nどうしてここに……？
+CharacterOff
+	ハデス	通常2						あのおばけを、ハデスの過去をつくる\n核になっていたんです
+	ハデス	通常2						ザクロとミントも、\nハデスの一部ですから……\nあの子にも操れたんですね……
+	ハデス	通常2						マスターさん、行きましょう
+CharacterOff
+	ディーア	驚き2						え……？
+StopBgm
+CharacterOff
+	ハデス	通常2						ハデスには、\nあのおばけの正体がわかりました……
+If	isdebug==true
+CharacterOff
+Jump	*E_1031_06
+EndIf
+EndScenario
+
+# E_1031_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	図書館
+Bg	冥界の神殿
+Param	character_grayout=false
+	ハデスロスト	敵				0
+FadeIn	white					.5
+	ハデスロスト	敵						まだ……？\nまだ足りないの……？
+FadeOut	black					.3
+CharacterOff						0
+	ペルセポネ	目閉じ2拡大	エフェクト裏			0
+	オーラ紫		エフェクト表			0
+FadeIn	black					.3
+Wait						1.5
+FadeOut	black					.3
+CharacterOff						0
+	ハデスロスト	敵				0
+FadeIn	black					.3
+	ハデスロスト	敵						おねえちゃん……\nおねがい……はやくハデスを……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	教会					0
+	アリエッタ	影				0
+FadeIn	white					.3
+	アリエッタ	影						貴女の願いを\n叶える方法は、一つだけ……
+	アリエッタ	影						貴女のお姉さんを……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	冥界の神殿					0
+	ハデスロスト	敵				0
+FadeIn						.3
+	ハデスロスト	敵						もう、ハデスにはこれしか……！
+StopBgm
+CharacterOff
+	ハデス	通常2						だめですよ……
+Bgm	Xmasバトル
+CharacterOff
+	ハデスロスト	敵						っ……!?
+	ハデスロスト	敵						ハデス……マスターさん……\nどうして……ここに……？
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2	1_2
+	ハデス	通常2	2_2
+	ハデス	通常2						ハデスにはお姉ちゃんの場所が\nわかりますから……
+CharacterOff
+	ハデスロスト	敵						ちがいます……\nなんで、あのおばけを……
+	ハデスロスト	敵						ハデスが、\nおばけに勝てるはずがありません……\nこれまでもずっと……
+CharacterOff
+	ディーア	怒り2	1_2
+	ハデス	通常2	2_2
+	ハデス	通常2						もう、\nおばけも大丈夫なんですよ……
+	ハデス	本気2						だって、\nハデスにはお姉ちゃんがいます\nマスターさんがいます
+	ハデス	本気2						だから、\nおばけとも戦えるんです……\nハデスの罪とも向き合えるんです……
+	ハデス	悔しい2						……あなたと違って
+CharacterOff
+	ハデスロスト	敵						っ……！\nハデスと、違って……？
+CharacterOff
+	ディーア	怒り2	1_2
+	ハデス	通常2	2_2
+	ハデス	通常2						あなたが見せた幻、過去には\nハデスのものではない\n記憶が混ざっていました……
+	ハデス	通常2						ハデスだけど、\nハデスじゃない……
+	ハデス	本気2						だから分かったんです\nあなたは、ハデスの成れの果て……
+	ディーア	怒り2						あの墓地で\nハデスが力を発揮できなかったのも\nこれで説明がつく……
+	ディーア	目閉じ2						ハデスと同じ力をもつお前が\nマイナス事象を全て吸収していたから
+StopBgm
+	ディーア	怒り2						そうだな？\n…………ハデス=ロスト
+Param	character_grayout=false
+CharacterOff
+	ハデスロスト	敵						…………
+Se	ジャストガード
+	ヒビガラス		エフェクト表			0
+Wait						1
+Se	ガラス割れる
+Se	パリン
+FadeOut	white					.1
+CharacterOff	ヒビガラス					0
+	ハデスロスト	怒り				.1
+FadeIn	white					.1
+Wait						1.5
+Param	character_grayout=true
+Bgm	絶望
+CharacterOff
+	ハデス	通常2	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						ハデス=ロスト、\n今すぐにペルセポネを返して\nこの冥界を閉じてくれ
+	ディーア	悔しい2						このままだと魔界の全てが滅びる……\nこんなことは……
+CharacterOff
+	ハデスロスト	通常						できません……
+	ハデスロスト	怒り						ハデスは止まれません\nもうこれしかないんです……
+	ハデスロスト	怒り						あなたたちの言うとおりです\nハデスは、ハデスの成れの果て……
+	ハデスロスト	怒り						ハデスは……\nおばけになってしまいました\nおばけに成り果てたんです……
+	ハデスロスト	通常						だから、こうするしかない
+	ハデスロスト	本気						元のハデスに戻る方法は、\nこれしかないんです……！
+StopBgm
+CharacterOff
+	ディーア	怒り2	1_2
+	ハデス	悔しい2	2_2
+	ハデス	悔しい2						…………
+Param	character_grayout=false
+CharacterOff
+Bgm	魔王バトル
+	ハデスロスト	本気						だからお姉ちゃんは返しません
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	ハデスロスト	本気						ずっと、ハデスと\n一緒にいてもらいます……！
+	ハデスロスト	本気						あなた達が\nハデスの邪魔をするなら<dash=2>
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2	1_2
+	ハデス	通常2	2_2
+	ディーア	怒り2						来るぞ、ハデス！
+	ハデス	通常2						はい……！
+FadeOut	black					1
+Param	character_grayout=false
+Se	チャージ
+Se	闇3
+CharacterOff						0
+	イベントスチル10312		エフェクト表			0
+Wait						.5
+FadeIn	black					1
+	天冥杖ハデス=ロスト	<Off>						すべて潰して、砕いて混ぜて……\nハデスの力にしてあげます
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1031_07
+EndIf
+EndScenario
+
+# E_1031_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔獣バトル
+Bg	黒背景
+Se	闇3
+Se	チャージ
+ImageEffect	SpriteCamera	MotionBlur
+	          
+FadeIn	white					.5
+Wait						.5
+FadeOut	black					.3
+CharacterOff						0
+Bg	冥界の神殿					0
+	ディーア	悔しい2	1_2			0
+Tween	ディーア	MoveBy	x=200 time=0.5				NoWait
+FadeIn	black					.2
+	ディーア	悔しい2						くっ……！
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	ハデスロスト	本気						ぜったいに、\nお姉ちゃんは返しません……！
+	ハデスロスト	本気						ハデスには、\nもうこのお姉ちゃんしか\nいないんです……！
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	闇3
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(紫)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=2
+Wait						.3
+Bg	冥界の神殿					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	ハデス	悔しい2
+Shake	Graphics		x=5 y=5 time=1				Add
+	ハデス	悔しい2						うっ……！
+CharacterOff
+	ハデスロスト	怒り						あなたには\n他にもいるじゃないですか……！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+	ハデス	通常2	2_2			0
+	ディーア	怒り2	1_2			0
+	          
+FadeIn	white					.3
+	ハデスロスト	<Off>						マスターさんに、\nザクロに、ミント……！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ハデスロスト	怒り				0
+FadeIn	white					.3
+	ハデスロスト	怒り						みんな、みんな……\n持っているじゃないですか……！
+	ハデスロスト	怒り						だからハデスに……\nお姉ちゃんをください……！
+Se	チャージ
+	オーラ紫		エフェクト表			1
+Wait						1
+FadeOut	white					.3
+Se	光3
+Se	火事
+Se	チャージ
+Se	闇3
+CharacterOff						0
+	ハデス	悔しい2	2_2_b			0
+	ディーア	悔しい2	1_2			0
+Shake	Graphics		x=5 y=5 time=2				NoWait
+FadeIn	white					.3
+	ディーア	悔しい2						ぐぁあああ!?
+CharacterOff	ハデス					1
+CharacterOff	ディーア					1
+	土煙		エフェクト表			1
+Wait						2
+StopBgm
+CharacterOff
+	ハデスロスト	通常						ハデスはおばけ、\n全てを<ruby=ロスト>失く</ruby>したハデス……				ロストのルビ
+StopBgm
+	ハデスロスト	通常						おばけなんですから、\nただのハデスは勝てません……
+CharacterOff
+	ハデス	本気2
+	黒グラデーション		エフェクト表2
+	土煙		エフェクト表
+Wait						1
+CharacterOff	黒グラデーション					1
+CharacterOff	土煙					1
+Wait						1
+Bgm	決戦
+Param	character_grayout=true
+	ハデス	本気2						だめです……\nお姉ちゃんは渡しません……
+CharacterOff
+	ハデスロスト	驚き						どう、して……？
+CharacterOff
+	ハデス	本気2						やっと会えたんです……\n約束、してくれたんです……！
+	ハデス	本気2						ハデスとお姉ちゃんは、\nずっと一緒なんです……！
+	ハデス	本気2						おばけは怖いですけど……\n一人ぼっちはもっと嫌い……
+CharacterOff
+	ハデスロスト	驚き						怖い……嫌い……？
+CharacterOff
+	ディーア	驚き2						ハデス……
+CharacterOff
+	ハデス	本気2						ハデスは怒っています……
+CharacterOff
+	ハデス	本気2拡大	エフェクト表					あなたに、怒っているんです……
+CharacterOff
+	ディーア	驚き2						ハデスが感情を……
+Param	character_grayout=false
+CharacterOff
+	ハデス	本気2						ハデスの好きなお姉ちゃんは、\nいつも明るくて、優しくて、\n自由な人で……！
+	ハデス	本気2						どこかに行っても、帰ってきてくれる\nそんなお姉ちゃんが\n大好きなんです……！
+	ハデス	本気2						だから……！
+Se	闇3
+	オーラ青		エフェクト表			.5
+	ハデス	通常2						そう……\nこれが『怒る』ということ、\n『好き』ということ……
+CharacterOff
+	ハデスロスト	怒り						そんなことをしたら……！
+CharacterOff
+	ハデス	本気2
+	オーラ青		エフェクト表
+	ハデス	本気2						大丈夫です……！
+	ハデス	本気2						ハデスにはマスターさんがいます\nザクロとミントもいます……
+	ハデス	本気2						みんながいるから、\n大丈夫なんです……！
+	ハデス	本気2						そうですよね、マスターさん？
+CharacterOff
+	ディーア	本気2						ああ、オレがちゃんと支える！\nハデスの全部を背負って、共に戦う！
+CharacterOff
+	オーラ青		エフェクト表
+	ハデス	本気2						ハデスは一人が\n辛い、苦しい、悲しい……\nでも……！
+Se	チャージ
+FadeOut	white					1
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル10313		エフェクト表			0
+FadeIn	white					1
+	ハデス	<Off>						その全てが\nハデスの力になるんです……！
+	ハデス	<Off>						みんなを守るために、\n戦えるんです……！
+	ハデス	<Off>						だから、ハデスは負けません
+	ハデス	<Off>						おばけになったハデスさん、\n勉強になりましたね
+If	isdebug==true
+CharacterOff
+Jump	*E_1031_08
+EndIf
+EndScenario
+
+# E_1031_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	Xmasボス
+Bg	冥界の神殿
+Param	character_grayout=false
+	ディーア	怒り2	1_2			0
+	ハデス	本気2	2_2_b			0
+	          
+FadeIn	white					.5
+	ハデスロスト	<Off>						ハデスが\nマスターさんと一緒にいる
+	ハデスロスト	<Off>						ザクロとミントと一緒にいる
+CharacterOff
+	ハデスロスト	怒り						ハデスも……\nハデスも同じだったはずなのに……
+Se	回想
+FadeOut	white					0
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F					0
+CharacterOff						0
+	ペルセポネ	嬉しい2	3_3			0
+	ディーア	笑い2	1_3			0
+	ハデス	通常2	2_3			0
+	          
+FadeIn	white					0
+Wait						.5
+FadeOut	white					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	冥界の神殿					0
+	ハデスロスト	悲しい				0
+FadeIn	white					0
+	ハデスロスト	悲しい						ハデスも、\nああなりたかったのに……！
+	ハデスロスト	悲しい						ハデスは、戻りたい……！
+Se	回想
+FadeOut	white					0
+ImageEffect	SpriteCamera	Sepia
+Bg	研究所C					0
+CharacterOff						0
+	ハデスロスト	敵				0
+	          
+FadeIn	white					0
+Wait						.5
+FadeOut	white					0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	冥界の神殿					0
+	ハデスロスト	悲しい				0
+FadeIn	white					0
+	ハデスロスト	悲しい						おばけは、もういや……！\n元のハデスに戻りたい……！
+	ハデスロスト	怒り						これが、\nたった一つの方法なんです……！
+	ハデスロスト	怒り						お姉ちゃんに罪を\nハデスの罪を吸ってもらわないと！
+	ハデスロスト	本気						だから、\n近づかないで……!!
+CharacterOff
+	イベントスチル10313		エフェクト表
+	ハデス	<Off>						お姉ちゃんは、\nハデスのお姉ちゃんです……
+	ハデス	<Off>						ぜったいに、\nハデスはお姉ちゃんと離れません
+	ハデス	<Off>						ブレイズ、ドライブ……
+	ハデス	<Off>						\n　　　 <color=blue>ザクロとミントの四季再誕</color>
+CharacterOff
+	ハデスロスト	怒り						…………っ！
+Se	光3
+Se	風3
+Se	チャージ
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル10313		エフェクト表			0
+	          
+Wait						2
+StopSe						1
+Bgm	絶望
+FadeIn	white					1
+	          	<Off>						あぁ……、\nあれが……ハデス……
+	          	<Off>						やっぱり、そうだったんですね
+Bg	黒背景					0
+CharacterOff						0
+	          	<Off>						ハデスは、もう戻れない……
+	イベントスチル10311		エフェクト表
+	          	<Off>				1		こんな姿は、ハデスじゃない……
+	          	<Off>						大きな罪を背負って……\nとっくにおばけになったハデスは……
+Se	回想
+FadeOut	white					1
+StopBgm
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場1F					0
+	ペルセポネ	嬉しい2	3_3			0
+	ディーア	笑い2	1_3			0
+	ハデス	通常2	2_3			0
+	          
+Wait						1
+Param	character_grayout=false
+Bgm	図書館
+FadeIn	white					1
+	          	<Off>						ハデスも、\nあのハデスと同じだった……
+	          	<Off>						お姉ちゃんとマスターさんと、\nザクロとミントとスイセンと……
+	          	<Off>						今ならわかります\nあの時のハデスは、楽しかった……
+CharacterOff
+Bg	研究所C
+	          	<Off>						でも、\nマスターさんがいなくなって……
+	アリエッタ	影						おめでとうございます、\n貴女は祝福を授けられた……
+	アリエッタ	影						魔剣を超えた\nロストとなる祝福を……
+	アリエッタ	影						神のお役に立つこと、\nそれが選ばれた貴女の存在意義です
+FadeOut	white					.2
+Se	ザシュ
+CharacterOff						0
+	ハデス					0
+	          
+Bg	戦場跡					0
+FadeIn	white					.2
+Tween	ハデス	MoveBy	y=-50				NoWait
+Se	倒れる
+Wait						.5
+CharacterOff	ハデス
+Wait						1
+FadeOut	white					.3
+CharacterOff						0
+	ハデスロスト	悲しい				0
+	          
+FadeIn	white					.3
+	          	<Off>						ハデスは壊しました\nハデスを壊しました
+	          	<Off>						いくつもの世界を渡って、\nハデスを壊し続けた……
+	          	<Off>						いくつものハデスと\n出会って、壊して、\nハデスを吸収していく……
+CharacterOff						0
+Bg	黒背景					0
+	          	<Off>						でも、おかしいんです……
+CharacterOff
+Bg	研究所A
+	ペルセポネ	通常2
+	          		2_3
+	          	<Off>						気がつくと、\nお姉ちゃんがいなくなりました……
+CharacterOff	ペルセポネ					.5
+Wait						.8
+CharacterOff						0
+	ハデスロスト	髪飾り	エフェクト表
+	          	<Off>						ザクロとミントがいなくなりました
+	          	<Off>						ザクロとミントの声が……\nハデスの中から聞こえました
+CharacterOff						0
+Bg	黒背景					0
+	          	<Off>						ハデスをたくさん壊しました
+	幻影ハデスA		p5u			.5
+	          					.5
+	          	<Off>						ハデスの中から\nハデスの声が聞こえます
+	幻影ハデスB		p3			.5
+	幻影ハデスC		p7			.5
+	          					.5
+Wait						.5
+	          	<Off>						ハデスの中に、\nハデスが、ハデスが、ハデスが、\nハデスがハデスがハデスが……!!
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ハデスロスト	敵				0
+		<Off>						……ハデスなのに、\nハデスはハデスじゃないんです……\nハデスはハデスが壊したんですから
+	          	<Off>						だから、\nハデスはおばけ……
+	黒グラデーション		エフェクト表			.5
+	          	<Off>						もう自分がわからない\nどこにも自分がいないおばけ……
+	          	<Off>						ハデスが嫌いな、不吉の象徴\n自分さえも滅ぼした不幸の証……
+	          	<Off>						だから、\n元のハデスに戻りたかった……
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	アリエッタ	影				0
+Bg	教会					0
+FadeIn	white					.3
+	アリエッタ	影						心あるゆえの自己同一性の揺らぎ……
+	アリエッタ	影						ドロシーさんならば、\nその澱を消せばいいと言うでしょうが\n貴女の心を、私は肯定しましょう……
+	アリエッタ	影						戻れますよ
+	アリエッタ	影						貴女が背負いし業を全て、\n貴女の片割れへ、もう一振りの天冥へ
+FadeOut	white					.3
+CharacterOff						0
+	          
+Bg	戦場跡					0
+FadeIn	white					.3
+	          	<Off>						だからハデスは\nお姉ちゃんを探して、探して……！
+CharacterOff
+Wait						.1
+Bg	酒場の地下_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	研究所B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地A_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	研究所C_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	廃墟A_過去
+Wait						.1
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	市街地B2_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	戦場跡
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	black					.1
+Bg	水銀の大地
+ImageEffect	SpriteCamera	Sepia
+Wait						1
+FadeOut	black					.2
+Bg	墓場
+CharacterOff						0
+	                    
+FadeIn	black					.6
+	          	<Off>						ようやく会えて……！
+CharacterOff	ペルセポネ	通常2
+	ペルセポネ	通常2						…………？
+	ペルセポネ	通常2						あなた、は……
+CharacterOff
+	ハデスロスト	敵						…………ペルセポネ
+	          	<Off>						ちがう、そんな呼び方じゃない……\nこの人はハデスの<dash=2>
+	ハデスロスト	悲しい						おねえちゃん……！
+FadeOut	black					.3
+StopBgm
+Bg	冥界の神殿					0
+CharacterOff						0
+	イベントスチル10311		エフェクト表			0
+FadeIn	black					.3
+	          	<Off>						でも、ハデスの罪は……\nお姉ちゃんでも綺麗にできない……
+	          	<Off>						ハデスはおばけのまま……\nもう、戻れない……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+CharacterOff						0
+Bg	冥界の神殿					0
+	ハデスロスト	悲しい
+Bgm	絶望
+FadeIn	white					.3
+	ハデスロスト	悲しい						ずっと…………\nひとりのまま……
+Shake	ハデスロスト		x=2 time=0.5				NoWait
+Wait						.5
+Tween	ハデスロスト	MoveBy	y=-50				NoWait
+Wait						.3
+Se	倒れる
+CharacterOff
+Wait						1
+	ディーア	悔しい2	1_2
+	ハデス	本気2	2_2
+	ハデス	本気2						はぁ……はぁ……！
+	ディーア	悔しい2						今のうちに、ペルセポネを……！
+	ハデス	通常2						はい……！
+Se	走る
+FadeOut	black					.3
+CharacterOff						0
+	ハデス	通常2	p8b			0
+	ディーア	悔しい2	p8			0
+Wait						1
+Tween	ハデス	MoveBy	x=-135 time=1				NoWait
+Tween	ディーア	MoveBy	x=-315 time=1				NoWait
+FadeIn	black					.3
+	ディーア	悔しい2						ペルセポネ、大丈夫か……!?
+Param	character_grayout=false
+StopBgm
+CharacterOff
+	ペルセポネ	目閉じ2拡大	エフェクト裏
+	オーラ紫		エフェクト表
+	ペルセポネ	目閉じ2拡大						すぅー……すぅー……
+Param	character_grayout=true
+CharacterOff
+	ハデス	通常2	2_2
+	ディーア	汗2	1_2
+	ディーア	汗2						ね、寝てる……？
+Tween	ハデス	PunchPosition	y=30				NoWait
+	ハデス	通常2						お姉ちゃん、起きて……！
+CharacterOff
+	ペルセポネ	目閉じ2拡大	エフェクト裏
+	オーラ紫		エフェクト表
+Wait						.5
+CharacterOff	オーラ紫					.5
+Wait						.5
+	ペルセポネ	無表情2拡大	エフェクト裏			.5
+	          					.5
+Wait						2
+CharacterOff
+	ペルセポネ	無表情2						あれぇ……？\nはーちゃんとマスターさんがいます
+	ペルセポネ	通常2						まだセポネさんは寝たりないので、\n一緒にお昼寝しませんか？
+CharacterOff
+	ハデス	通常2	2_2
+	ディーア	汗2	1_2
+	ディーア	汗2						ぺ、ペルセポネ……？\n今はそんな場合じゃ……！
+CharacterOff
+	ペルセポネ	嬉しい2						あっ！\nたしかに、そうでした♪
+Se	走る
+Tween	ペルセポネ	MoveBy	x=-800 time=2				NoWait
+Wait						1
+StopBgm
+CharacterOff
+	ディーア	驚き2	1_2
+	ハデス	通常2	2_2_b
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						お、おい……？
+	ハデス	通常2						おねえちゃん……？
+FadeOut	black					.3
+CharacterOff						0
+	ハデスロスト	悲しい	p3b			0
+	ペルセポネ	通常2	p8			0
+Tween	ペルセポネ	MoveBy	x=-100 time=1				NoWait
+FadeIn	black					.3
+	ペルセポネ	通常2						えへへ♪ やっぱり♪
+	ハデスロスト	悲しい						…………ぇ
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	オーラ桃		エフェクト裏			0
+	ペルセポネ	嬉しい2拡大	エフェクト表			0
+Bgm	結婚
+FadeIn	white					.3
+	ペルセポネ	嬉しい2拡大						やっぱり、はーちゃんです♪
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+Bg	冥界の神殿					0
+	ペルセポネ	嬉しい2	p7			0
+	ハデスロスト	驚き	p3b			0
+FadeIn	white					.3
+	ハデスロスト	驚き						っ…………!?
+CharacterOff
+	ハデス	通常2	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						ペルセポネ……
+CharacterOff
+	ペルセポネ	通常2						ようやく見つけられました♪
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	嬉しい2						お散歩をしていたら、\nはーちゃんがいるーって\nわかったんですよ♪
+	ペルセポネ	無表情2						でも、セポネのはーちゃんは\nあっちにいるのに、\nこっちにもはーちゃんがいますね？
+	ペルセポネ	無表情2						はーちゃんが二人、\nちょっとこんがらがっちゃいます
+CharacterOff
+	ディーア	怒り2	1_2
+	ハデス	通常2	2_2
+	ハデス	通常2						お姉ちゃん、このハデスは<dash=2>
+CharacterOff
+	ハデスロスト	悲しい						………………ちがいます
+	ハデスロスト	悲しい						違いますよ……\nハデスは、ハデスじゃありません……\nただのおばけなんです
+	黒グラデーション		エフェクト表			1
+	ハデスロスト	悲しい						たくさん、\nハデスを壊しました\n自分のことを壊しました……
+	ハデスロスト	悲しい						それで、自分のことも\nわからなくなった、おばけ……\nだからもう<dash=2>
+CharacterOff
+	ペルセポネ	通常2拡大	エフェクト表					でも、はーちゃんは\nはーちゃんだよ♪
+CharacterOff
+	ハデスロスト	驚き	p3b
+	ペルセポネ	嬉しい2	p7
+	ハデスロスト	驚き						え……？
+Tween	ペルセポネ	MoveBy	x=-30				NoWait
+	ペルセポネ	嬉しい2						お姉ちゃんだから、\nセポネにはわかるよ♪\nはーちゃんは、はーちゃんだって♪
+	ハデスロスト	悲しい						で、でも……\nハデスはおばけに……！
+Tween	ペルセポネ	PunchPosition	y=10				NoWait
+	ペルセポネ	無表情2						うーん、マスターさん、\nおばけって怖いんですよね？
+CharacterOff
+	ディーア	通常2						……そうだな
+CharacterOff
+	ハデスロスト	驚き	p3b
+	ペルセポネ	嬉しい2	p7
+	ペルセポネ	嬉しい2						だったら、\nこんなにかわいいはーちゃんは\nおばけじゃありませんよね♪
+	ペルセポネ	通常2						おばけだとしても、\nかわいいはーちゃんなら大好きです♪
+Tween	ペルセポネ	MoveBy	x=-100				NoWait
+	ペルセポネ	通常2						ねぇねぇ\nもう一人のはーちゃん、\nセポネをなでて？
+Shake	ハデスロスト		x=2				NoWait
+	ハデスロスト	驚き						えっ、えっ……？
+	ペルセポネ	嬉しい2						はやくはやく♪
+Tween	ハデスロスト	MoveBy	x=50				NoWait
+	ハデスロスト	悲しい						う、うん……
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	嬉しい2						ひゃん♪
+	ペルセポネ	通常2						このなで心地……！\nやっぱりはーちゃんです♪\nセポネは間違えませんよ♪
+Shake	ハデスロスト		x=2				NoWait
+	ハデスロスト	悲しい						うっ、うっ……ぐすっ……
+	ペルセポネ	無表情2						あれ？\nどうしたのはーちゃん？\n泣いてるの……？
+	ペルセポネ	通常2						セポネは嬉しいのに……\nはーちゃんが二人になって♪\nたくさんなでなでしてもらえるから♪
+CharacterOff
+	ハデス	通常2						はぁ……\nもう、お姉ちゃん……
+CharacterOff
+	ハデスロスト	悲しい	1_2_b
+	ペルセポネ	通常2	2_2
+	ペルセポネ	通常2						さて、\nマスターさん、はーちゃん！
+	ペルセポネ	嬉しい2						散歩もたくさんしましたし、\n帰りましょう♪\n両手にはーちゃんでお願いします♪
+	ハデスロスト	悲しい						だ、だめ……\nハデスはお姉ちゃんと\nここにいないと
+	ハデスロスト	悲しい						おばけから戻れなくて……
+Tween	ペルセポネ	MoveBy	x=-10				NoWait
+	ペルセポネ	無表情2						えっ、そうなの……？
+	ペルセポネ	無表情2						うーん……\nあ、いいこと思いついた！
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	通常2						それなら\nセポネを半分こしよ♪
+	ペルセポネ	嬉しい2						一年の半分はこっちのはーちゃんと！\nもう半分はセポネのはーちゃんと！
+CharacterOff
+	ディーア	汗2						ぺ、ペルセポネ？\nこの冥界をなんとかしないと、\n魔界が滅んで……
+CharacterOff
+	ペルセポネ	無表情2						でも、ここがなくなったら\nはーちゃんがいなくなっちゃう\nじゃないですか！
+	ペルセポネ	通常2						セポネは約束したんです\nはーちゃんとずっと一緒だって！
+	ペルセポネ	すね顔2						マスターさんがそんなこと言うと\nセポネさんはすねてしまいますよ？\nいいんですか？
+CharacterOff
+	ディーア	驚き2						で、でもな……
+CharacterOff
+	ハデス	通常2						そんなの、だめですよ……
+CharacterOff
+	ハデスロスト	悲しい						っ…………
+CharacterOff
+	ペルセポネ	無表情2						はーちゃん……？
+CharacterOff
+	ハデス	悔しい2						お姉ちゃんは\nハデスのお姉ちゃんです\nだから……
+	ハデス	嬉しい2						半分は多すぎます、\n三分の一くらいなら……いいです
+CharacterOff
+	ハデスロスト	驚き						…………っ、ハデス、さん
+CharacterOff
+	ハデス	通常2						ハデスもわかります\n一人は嫌ですから……
+	ハデス	嬉しい2						それにお姉ちゃんは\n自由な方がいいんです
+	ハデス	嬉しい2						だから、お姉ちゃんが望むなら\n……いいです
+CharacterOff
+	ディーア	汗2						はぁ……仕方ない\nまずはこの冥界をどうするか決めよう
+	ディーア	通常2						それと一緒に、\nみんなでいられる方法を考えよう\n半分こもしなくていいように
+CharacterOff
+	ハデスロスト	驚き						マスターさんまで……
+StopBgm
+	ハデスロスト	悲しい						ハデスは…………
+CharacterOff
+	ディーア	驚き2						っ、ハデス=ロスト!!
+Param	character_grayout=false
+CharacterOff
+	アリエッタ	影	1_2_b			.5
+	ハデスロスト	驚き
+Wait						1
+	ハデスロスト	驚き						…………え？
+Se	ザシュ
+FadeOut	red					.1
+FadeIn	red					.1
+Shake	ハデスロスト		x=2				NoWait
+	ハデスロスト	悲しい						が、ぐっ…………
+Tween	ハデスロスト	MoveBy	y=-50 time=0.5				NoWait
+Wait						.5
+Se	倒れる
+CharacterOff	ハデスロスト					.5
+Bgm	絶望
+	アリエッタ	影						いけません……いけません……
+	アリエッタ	影						己の使命に背くこと……\nそれすなわち、主への冒涜……
+	アリエッタ	通常						神は望まれました\n全ての魔剣に平等あれ\n平等なる滅びあれ……と
+CharacterOff
+	アリエッタ	通常拡大	エフェクト表					神への誓いを……\n破ってはなりませんよ、\nハデス=ロストさん
+If	isdebug==true
+CharacterOff
+Jump	*E_1031_09
+EndIf
+EndScenario
+
+# E_1031_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	冥界の神殿
+	ディーア	本気2				0
+FadeIn	white					.5
+	ディーア	本気2						ハデス=ロスト……!?
+CharacterOff
+	ハデス	悔しい2	1_2
+	ペルセポネ	無表情2	2_2
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	無表情2						はーちゃん……！
+	ハデス	悔しい2						っ……！
+CharacterOff
+	ハデスロスト	悲しい
+Shake	ハデスロスト		x=2				NoWait
+	ハデスロスト	悲しい						うっ……うぅ……
+CharacterOff
+	アリエッタ	笑い						あら、貴方達は……？
+	アリエッタ	笑い						そうですか、\n貴方がドロシーさんのおっしゃってた\n魔剣使いさん……
+CharacterOff
+	ディーア	怒り2						お前も、アネセサリの……！
+CharacterOff
+	アリエッタ	笑い						私は……アリエッタ……
+	アリエッタ	笑い						神の命により、この地に舞い降りし\n使者でございます……
+CharacterOff
+	ハデスロスト	悲しい						マスターさん、その人は……！
+Shake	ハデスロスト		x=2				NoWait
+Wait						1
+Tween	ハデスロスト	MoveBy	y=-50				NoWait
+	ハデスロスト	悲しい						うぅ……！
+CharacterOff
+	ディーア	驚き2						動いたらダメだ、\nハデス=ロスト……！
+CharacterOff
+	ハデス	本気2	1_2
+	ペルセポネ	無表情2	2_2
+	ペルセポネ	無表情2						はーちゃん、大丈夫？\n痛いですか？
+CharacterOff
+	ディーア	悔しい2						どうして、ハデス=ロストを……！
+CharacterOff
+	アリエッタ	蔑み						どうして……？
+CharacterOff
+	ディーア	悔しい2						お前もドロシーのように\nこの子を兵器扱いするのか……！
+CharacterOff
+	アリエッタ	蔑み						……………………\n……………………いいえ？
+CharacterOff
+	ディーア	驚き2						なに……？
+CharacterOff
+	アリエッタ	笑い						この子は生命あるもの……\n心と感情がある、我々の同胞……
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル59314		エフェクト表			0
+FadeIn	white					.3
+	死神アリエッタ	<Off>						魔剣より脱却せしものにして、\n神より祝福を受けた御使い
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+	アリエッタ					0
+FadeIn	white					.3
+	アリエッタ	笑い						兵器などとは、思いませんよ？
+CharacterOff
+	ディーア	本気2						だったらどうして……！
+StopBgm
+CharacterOff
+	アリエッタ	笑い						それこそ愚問です\n心があるならば……
+Bgm	絶望
+	アリエッタ	通常拡大	エフェクト表
+	アリエッタ	通常拡大						我が神のため\n喜んで身を捧げるべきでしょう……？
+CharacterOff
+	ディーア	驚き2						なっ……！
+CharacterOff
+	アリエッタ	通常						ハデス=ロストさんの使命は二つ、\nロストの威光を示すことと、\nある魔剣の破壊……
+	アリエッタ	怪しい						ハデスに戻るという願いは\nそれに連なるので、神も許された……
+	アリエッタ	通常						しかし、\n最後まで使命を果たさないというなら\nそれは神への冒涜です……
+CharacterOff
+	ディーア	悔しい2						威光と、破壊……？
+CharacterOff
+	アリエッタ	通常						ええ……\n聖剣達による悲劇で場を整え\n相応しきロストを送る
+FadeOut	black					.3
+CharacterOff						0
+Bg	冥界					0
+	          
+FadeIn	black					.3
+	死神アリエッタ	<Off>						一人のロストで\nどれほどの破壊を為せるか……\nこの冥界化により推し量れました
+FadeOut	black					.3
+CharacterOff						0
+Bg	冥界の神殿					0
+	ディーア	悔しい2				0
+FadeIn	black					.3
+	ディーア	悔しい2						ずいぶんと色々教えてくれるんだな……
+CharacterOff
+	アリエッタ	笑い						誉れある使命に、\nなにを恥じることがあるのです？
+	アリエッタ	通常						ですが、\n半ばにして使命は放棄された……
+	アリエッタ	通常						聖剣を犠牲にしてでも、\n果たすべき使命であったのに……
+StopBgm
+	アリエッタ	嬉しい						ならば\n私が代行いたしましょう……
+Se	チャージ
+	オーラ赤		エフェクト表			1
+Wait						1
+Param	character_grayout=false
+Se	光2
+Bgm	魔獣バトル
+FadeOut	black					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景					0
+	アリエッタロゴ		effect_c			1
+	          
+FadeIn	black					.3
+Wait						.3
+Tween	アリエッタロゴ	ScaleBy	x=1.5 y=1.5 time=1.5				Add
+	死神アリエッタ	<Off>						全ての生命に平等を……\n平等なる滅びを……
+Wait						.2
+Se	ガラス割れる
+Tween	アリエッタロゴ	ScaleBy	x=1.5 y=1.5				NoWait
+FadeOut	white					.5
+Param	character_grayout=false
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+Bg	冥界の神殿					0
+	アリエッタ	通常拡大	エフェクト表			0
+FadeIn	white					.5
+	アリエッタ	通常拡大						私は死神アリエッタ……\nこの身は全て、<ruby=A Necessary Evil>必要悪</ruby>のために……
+	アリエッタ	嬉しい拡大						ペルセポネさんを、壊しましょう……
+CharacterOff
+	ペルセポネ	無表情2						セポネを……？
+CharacterOff
+Param	character_grayout=true
+	ハデス	本気2	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						っ……!?\nハデス、ペルセポネを守るぞ……！
+	ハデス	本気2						はいっ……！
+If	isdebug==true
+CharacterOff
+Jump	*E_1031_10
+EndIf
+EndScenario
+
+# E_1031_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔獣バトル
+Bg	冥界の神殿
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+	          
+FadeIn	white					.5
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+Bg	冥界の神殿
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	ハデス	悔しい2	2_2
+	ディーア	悔しい3	1_2
+FadeOut	white					.2
+FadeIn	white					.2
+Shake	Graphics		x=2 y=2 time=1				Add
+	ディーア	悔しい3						ぐぁああああああ!?
+Param	character_grayout=true
+	ハデス	悔しい2						っ…………！
+	ディーア	怒り3						こい、つ……
+CharacterOff
+	アリエッタ	通常						ペルセポネさんを渡しなさい……\n私では、魔剣の破壊はできませんので\n我らが地にて使命を果たします
+CharacterOff
+	ハデス	本気2	2_2
+	ディーア	悔しい3	1_2
+	ディーア	悔しい3						どうして、\nペルセポネを……！
+CharacterOff
+	アリエッタ	嬉しい						全ては高みへ登るため……
+CharacterOff
+	ハデス	本気2	2_2
+	ディーア	悔しい3	1_2
+	ディーア	驚き3						高み、だと……？
+CharacterOff
+	アリエッタ	通常						そう、我らが目的は\nロストをさらなる段階へ導くこと
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル59314		エフェクト表			0
+FadeIn	white					.3
+	アリエッタ	<Off>						祝福を受け、\n魔界全てを滅ぼしうるほど、\n御使いは高みへ至った……
+FadeOut	white					.3
+Param	character_grayout=true
+CharacterOff						0
+	アリエッタ	通常				0
+FadeIn	white					.3
+	アリエッタ	通常						しかし御使いは、ロストは\n未だに完全ではないのです……
+	アリエッタ	怪しい						以前のぎんいろさん、\nあるいはこのハデスさんのような、\nロストに比肩するイレギュラー
+	アリエッタ	通常						さらにロストを\n討ち滅ぼす可能性もまた……\nそのペルセポネさんのように
+CharacterOff
+	ハデス	本気2	2_2
+	ディーア	驚き3	1_2
+	ディーア	驚き3						ペルセポネが……？
+CharacterOff
+	アリエッタ	通常						あくまで可能性……
+	アリエッタ	蔑み						ですが、ただの一振りに\n神の御業が穢されるなど許されない
+CharacterOff
+	アリエッタ	通常拡大	エフェクト表
+	アリエッタ	通常拡大						ですから……！
+StopBgm
+CharacterOff
+	ディーア	悔しい3						まずい……！\nペルセポネ……!!
+FadeOut	white					.1
+CharacterOff						0
+Se	ジャストガード
+	          
+FadeIn	white					.1
+Wait						1
+	アリエッタ	通常						おやおや……
+CharacterOff
+	ハデスロスト	怒り
+Shake	ハデスロスト		x=3				NoWait
+	ハデスロスト	怒り						だ、ダメです……！\nおねえちゃんは、壊させません……
+CharacterOff
+	アリエッタ	蔑み						ハデス=ロストさん、ですか……
+Bgm	ロルリアンレットB
+CharacterOff
+	ハデスロスト	怒り						ハデスを、騙していたんですね？\nハデスは、ハデスさんを壊せと\n言われていたのに……
+CharacterOff
+	アリエッタ	笑い						騙してなど、おりませんよ？\n貴女は対ハデスに調整された<ruby=LS_No.13493>ロスト</ruby>\nハデスさんを壊すことは自然です……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+Param	character_grayout=false
+CharacterOff						0
+Bg	遺跡C					0
+	ペルセポネ	通常2	p7			0
+	ハデスロスト	通常	p3b			0
+	          
+FadeIn	white					.3
+	アリエッタ	<Off>						さらに姉妹だからこそ、\nペルセポネさんを壊せる可能性がある\n素晴らしいことではありませんか……
+CharacterOff	ペルセポネ					1
+	アリエッタ	<Off>						貴女が封じた魂を全て差し出せば\nペルセポネさんは重さに耐えかね、\n自壊するはずだった……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	冥界の神殿					0
+	アリエッタ	通常				0
+FadeIn	white					.3
+	アリエッタ	通常						それほどまでに献身すれば、\n貴女の願いが叶う可能性も……\nほんのわずかでもありましたのに
+CharacterOff
+	ディーア	悔しい3						ハデスの手で\n姉を壊させようなんて……！
+CharacterOff
+	アリエッタ	通常						妹の手により、\n魔剣という偽りの生から解き放たれる
+	アリエッタ	嬉しい						これほどの幸福がありましょうか？\nロストは可能性であり……\n素晴らしき祝福なのです
+StopBgm
+CharacterOff
+	ハデス	本気2						それは、\n違います……！
+CharacterOff
+	アリエッタ	蔑み						…………
+Bgm	風属性バトル
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り3	1_2
+	ハデス	本気2	2_2
+	ハデス	本気2						ぜったいに、違います……
+	ハデス	本気2						ハデスは、ハデスなら……\nそんな幸せ、いりません……
+	ハデス	本気2						ハデスは\nそんな一人ぼっちより\nみんなでいることを望みます……
+	ディーア	怒り3						ああ、そうだ……！\nロストは悲しい存在だ
+	ディーア	怒り3						自分を、大切な人を\n壊し、失わせる力……
+	ディーア	悔しい3						お前たちの手で、\nどれだけハデス=ロストが\n追い詰められたと思う？
+	ディーア	本気3						こんな悲しい力を祝福なんて嘯く、\nお前たちを絶対に認めない……！
+CharacterOff
+	ハデスロスト	驚き						ますたー、さん……
+CharacterOff
+	アリエッタ	蔑み						あぁ……\n未だ神の意志を知らぬとは、\n悲しいですね……
+	アリエッタ	通常						ですが、\n説き聞かせる時間はございません\nそろそろお黙りを……
+FadeOut	white					.2
+CharacterOff						0
+Se	連撃
+	ハデス	悔しい2	2_2			0
+	ディーア	悔しい3	1_2			0
+Wait						2
+FadeIn	white					.2
+	ディーア	悔しい3						があっ……！
+Se	倒れる
+CharacterOff						.5
+Wait						.5
+CharacterOff
+	アリエッタ	通常						傷ついた貴方達では、\n私を止めるなど……
+CharacterOff
+	ハデスロスト	悲しい				1
+Shake	ハデスロスト		x=2 time=1				Add
+	ハデスロスト	悲しい						だ、だめです……
+CharacterOff
+	アリエッタ	蔑み						まだ立つのですか……\nその執着を神に捧げればよいのに……
+	アリエッタ	蔑み						貴女は自らの願いのため、\n世界すら犠牲にしようとしていたのに\n今更、彼らを守ろうと？
+CharacterOff
+	ハデスロスト	悲しい						そうです……\nハデスは間違っていた\n最初から間違えていた……
+	ハデスロスト	悲しい						ハデスはおばけです\nハデスですらなくなったおばけ……
+	ハデスロスト	悲しい						罪を忘れて、元に戻ろうなんて……\n都合のよすぎる話です……
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ペルセポネ	通常2	p7			0
+	ハデスロスト	驚き	p3b			0
+FadeIn	white					.3
+	ハデスロスト	驚き						でもお姉ちゃんは……\nこんなハデスを、\nはーちゃんって呼んでくれたんです
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ハデスロスト	悲しい				0
+FadeIn	white					.3
+	ハデスロスト	悲しい						昔みたいに優しく……\nおばけになっても、\nお姉ちゃんでいてくれた……
+	ハデスロスト	通常						マスターさんも、\nこっちのハデスさんも同じです……
+	ハデスロスト	通常						それは、\nハデスが欲しかったものだから……
+Se	チャージ
+	オーラ紫		エフェクト表			1
+	ハデスロスト	本気						だから……\nもう、失わせません……\nそのためなら、このハデスを……！
+FadeOut	black					.2
+CharacterOff						0
+Bg	冥界
+Se	火事	TRUE
+	瓦礫		エフェクト表
+Wait						.5
+Tween	瓦礫	MoveBy	y=-1803 time=3	easeInQuad			NoWait
+FadeIn	black					.2
+Wait						2
+FadeOut	black					.2
+CharacterOff						0
+Bg	冥界の神殿					0
+	ディーア	驚き3				0
+Shake	BG		x=3 y=3 time=2				NoWait
+FadeIn	black					.2
+	ディーア	驚き3						これは……！\n冥界が閉じている……!?
+CharacterOff
+	アリエッタ	通常						なるほど、\nこれで私を封じると……？
+StopSe
+CharacterOff
+	ハデスロスト	本気
+	オーラ紫		エフェクト表
+	ハデスロスト	本気						圧縮されたマイナス事象は\n全てを引き込む奈落の坩堝……
+	ハデスロスト	本気						あなたに勝てなくても……\nハデスと一緒に閉じ込めます……！
+CharacterOff
+	アリエッタ	通常						それを成しても、\n貴女も共に永劫の責め苦に\n囚われるというのに……
+CharacterOff
+	ディーア	驚き3						なっ……!?
+CharacterOff
+	ハデスロスト	本気
+	オーラ紫		エフェクト表
+	ハデスロスト	本気						ハデスはおばけ……\nおばけはこの世界に繋がりのない、\n留まってはいけない存在です……
+	ハデスロスト	本気						最期に優しくしてもらえた、\nもう未練もありません……
+CharacterOff
+	ハデスロスト	本気拡大	エフェクト裏
+	ハデスロスト	本気拡大						だから……！
+Wait						.3
+FadeOut	white					.2
+StopBgm
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+Se	ジャストガード
+	ハデスロスト	驚き	1_2_b			0
+	ディーア	怒り3	p7			0
+Wait						.5
+Tween	ディーア	MoveBy	x=-100 time=0.5				NoWait
+Param	character_grayout=true
+FadeIn	white					.2
+	ディーア	怒り3						だめだ……!!
+ImageEffectOff	SpriteCamera	MotionBlur
+	ハデスロスト	驚き						ま、マスターさん……!?
+Bgm	凱旋
+	ディーア	悔しい3						そんなのオレは認めない!!
+	ディーア	怒り3						おばけだからって、\n一緒にいたらいけないなんて、\nそんなわけないだろ……！
+	ディーア	悔しい3						おばけだから\nずっと一人ぼっちなんて、\n悲しいだけだろ……！
+Tween	ハデスロスト	MoveBy	x=-20				NoWait
+	ハデスロスト	悲しい						でも……ハデスは……
+CharacterOff
+	ハデス	悔しい2						まったく……\nまたハデスは怒ってしまいますよ？
+	ハデス	悔しい2						ハデスは一人じゃありません……\nそして、あなたもそうです……
+CharacterOff
+	ペルセポネ	嬉しい2						おばけになっても、\nセポネはずーっと、\nはーちゃんの傍に一緒にいるよ？
+CharacterOff
+	ディーア	怒り3						一度は全てを失くしたのかもしれない\nでも、一人ぼっちなんて嘘だ……
+	ディーア	通常3						お前には\nオレたちとの繋がりができた
+	ディーア	通常3						ハデス=ロストにだって、\nお前のペルセポネとの\n繋がりがあるからここに導かれた！
+	ディーア	通常3						ハデス=ロストは\nおばけかもしれない……\nでも、オレたちの傍にいる
+	ディーア	悔しい3						だから未練がないなんて言うな\nオレたちを守るために、\n一緒に戦ってくれ……！
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル10315p		エフェクト表			0
+FadeIn	white					.3
+	ペルセポネ	<Off>						はーちゃん……♪
+FadeOut	white					.3
+CharacterOff						0
+	イベントスチル10315h		エフェクト表			0
+FadeIn	white					.3
+	ハデス	<Off>						ハデス、ロストさん
+FadeOut	white					1
+CharacterOff						0
+	イベントスチル10315		エフェクト表			0
+Bgm	結婚					0
+Wait						1
+FadeIn	white					1
+Tween	イベントスチル10315	MoveBy	y=-400 time=5
+	ハデスロスト	<Off>						あぁ……
+	ハデスロスト	<Off>						おばけなのに……\nあったかい……
+	ハデスロスト	<Off>						マスターさん、お姉ちゃん\nはーちゃんさん……
+	ハデスロスト	<Off>						ハデスは、\nちゃんとここにいますか？
+	ハデスロスト	<Off>						おばけだけど、\nそばにいて、いいんですか？
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	笑い3				0
+FadeIn	white					.3
+	ディーア	笑い3						ああ、もちろんだ……！
+	ディーア	本気3						さあ、あいつを倒すぞ……！\n永遠に閉じ込められるのは、\nお前だけで十分だ、アリエッタ！
+Param	character_grayout=true
+CharacterOff
+	ペルセポネ	通常2	p8
+	ハデスロスト	驚き	2_3_b
+	ハデス	本気2	p2
+	ハデス	本気2						ハデスが圧をかけます……！\nいっぱい圧をかけてあげますから\n負けないでください……！
+	ペルセポネ	通常2						セポネも\nろーちゃんの手を離さないからね♪
+	ハデスロスト	驚き						ろーちゃん……？
+	ペルセポネ	嬉しい2						うん♪ ロストのはーちゃんで♪\nえへへ、かわいいでしょ♪
+Param	character_grayout=false
+	ハデスロスト	嬉しい						…………うん
+Se	チャージ
+	オーラ青		エフェクト表			1
+Wait						1.5
+StopBgm
+CharacterOff
+	アリエッタ	嬉しい						おぉ……これは……！
+FadeOut	white					1
+Se	チャージ
+Se	光3
+CharacterOff						0
+	イベントスチル10314		エフェクト表			0
+Bgm	ロルリアンレットC
+FadeIn	white					.3
+	ハデスロスト	<Off>						みんなの圧が教えてくれる……\nこんなハデスでも\nここにいていいって……！
+	ハデスロスト	<Off>						ハデスも、\nみんなと一緒にいたいから……！
+	ハデスロスト	<Off>						だから、\nハデスが守ります……！
+	ハデスロスト	<Off>						<dash=2>崩壊しつづける天冥の特異点\nハデス=ロスト
+	ハデスロスト	<Off>						おばけになったとしても、\nハデスは大切な人のために……
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1031_11
+EndIf
+EndScenario
+
+# E_1031_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	決戦
+Bg	冥界の神殿
+Param	character_grayout=false
+	ディーア	本気3				0
+FadeIn	white					.5
+	ディーア	本気3						これで終わりだ、\nアリエッタ……！
+CharacterOff
+	イベントスチル10314		エフェクト表
+	ハデスロスト	<Off>						天冥、閉門……！
+CharacterOff
+	アリエッタ							あぁ、神よ……\n貴方の御業はさらなる……！
+Se	チャージ
+Se	光3
+Se	光2
+Se	連撃
+FadeOut						1.5
+Wait						1
+Se	ドア閉まる
+CharacterOff						0
+Bg	草原B					0
+	ディーア	悔しい3				0
+Wait						2.5
+StopBgm
+FadeIn						1
+	ディーア	悔しい3						はぁ……はぁ……
+	ディーア	怒り3						これで、冥界化も……？
+CharacterOff
+	ハデスロスト	通常						はい……\n全ては元に戻るはずです……
+CharacterOff
+	ディーア	笑い3						よかった……\nありがとう、ハデス=ロスト
+CharacterOff
+	ハデスロスト	嬉しい						それは……\nハデスの言葉です
+	ハデスロスト	嬉しい						そして……\nお別れの時間ですね……
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff
+	ハデス	通常2
+	ペルセポネ	無表情2
+Bgm	結婚
+	ペルセポネ	無表情2						ろーちゃん……？
+CharacterOff
+	ディーア	驚き3						ハデス=ロスト、体が……
+CharacterOff
+	ハデスロスト	通常
+	オーラ青		エフェクト表
+	ハデスロスト	通常						やっぱり無茶をしすぎましたね\nこれでハデスは本当のおばけに\nなっちゃいます……
+CharacterOff
+	ディーア	悔しい3						そんな……！
+CharacterOff
+	ハデスロスト	嬉しい
+	オーラ青		エフェクト表
+	ハデスロスト	嬉しい						でも、悲しまないでください\nだって、ハデスは悲しくないです
+	ハデスロスト	通常						感情がないからじゃなくて、\n本当に悲しくないんです
+	ハデスロスト	嬉しい						ハデスはおばけが嫌だったけど、\nそんなに嫌じゃなくなったんです
+	ハデスロスト	嬉しい						ハデスがここにいたこと、\nちゃんと分かってくれたから……
+	ハデスロスト	嬉しい						おばけでもいていいって、\n言ってくれましたから……
+	ハデスロスト	嬉しい						マスターさんとお姉ちゃんと、\nはーちゃんさんのおかげ……
+CharacterOff
+	ディーア	怒り3						ハデス=ロスト……
+CharacterOff
+	ハデスロスト	嬉しい
+	オーラ青		エフェクト表
+	ハデスロスト	嬉しい						だから、マスターさん\nまた会いに来てもいいですか？
+	ハデスロスト	嬉しい						今度こそ本当のおばけですけど\nおばけになってもマスターさんを、\nみんなを守りたいから……
+CharacterOff
+	ディーア	笑い3						…………ああ、もちろんだ
+CharacterOff
+	ペルセポネ	無表情2						ろーちゃん、\nどこかにいっちゃうの？
+CharacterOff
+	ハデスロスト	通常
+	オーラ青		エフェクト表
+	ハデスロスト	通常						うん、少しだけ……、\n少しだけお出かけしてくるね
+CharacterOff
+	ハデス	嬉しい2						……ハデスは探しに行きませんよ？\nあなたもハデスなら、\nちゃんと帰ってきてください
+	ハデス	嬉しい2						あなたの傍も\nお姉ちゃんの帰る場所ですから
+	ハデス	嬉しい2						これは圧です……
+CharacterOff
+	ハデスロスト	嬉しい
+	オーラ青		エフェクト表
+	ハデスロスト	嬉しい						はい、そうします……
+	ハデスロスト	通常						それでは、マスターさん
+FadeOut	white					.3
+CharacterOff						0
+Bg	白背景
+	イベントスチル10316		エフェクト表			0
+FadeIn	white					.3
+	ハデスロスト	<Off>						また出会えた時も\nハデスがいること確かめてくださいね
+	ディーア	<Off>						ああ……
+	ディーア	<Off>						またな、\nハデス=ロスト……
+FadeOut	white					2
+CharacterOff						0
+	          
+Bg	洞窟A					0
+Wait						2
+StopBgm
+FadeIn	white					1
+Wait						1
+Se	チャージ
+	オーラ赤		エフェクト表
+Wait						1
+FadeOut	white					.1
+CharacterOff						0
+	アリエッタ	通常				0
+Se	ガラス割れる
+Se	パリン
+FadeIn	white					.1
+Bgm	絶望
+	アリエッタ	笑い						あぁ……\nありがとう、トートネクロ……♪\n貴女のおかげですよ♪
+	アリエッタ	笑い						ふふふ、\n貴女も早く祝福を受けられると\n良いですね……
+	アリエッタ	嬉しい						ペルセポネさんは逃しましたが……\nそれにより新たな可能性が……
+	アリエッタ	嬉しい						これよりロストは、\nさらなる高みへ向かうでしょう
+	アリエッタ	嬉しい						そして……\nこの地に刻まれしロストが11本……\nあと、少しですね……
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	アリエッタ	<Off>						それでは、魔剣使いさん\nまたいずれ……
+FadeOut	black					1
+CharacterOff						0
+	          
+Bg	子供部屋					0
+Wait						3
+FadeIn	black					1
+	ディーア	<Off>						どこにいったの？
+	ディーア	<Off>						どこにきえたの？
+	ディーア	<Off>						女の子の声がずーっと聞こえる
+	ディーア	<Off>						でも、見つけられない……\nいるのに、いない
+	ディーア	<Off>						呼ばれているのに、\nその子にはたどり着けない
+	おばけA		2_3_m
+	ディーア	<Off>						だって……\nその子はこの世のものでは\nないのだから……
+CharacterOff	おばけA					1
+	ディーア	<Off>						だから女の子は\nずーっと叫んでいたけれど\n本当は寂しがりなだけだった
+	ディーア	<Off>						お話がどうなるかって？
+FadeOut	black					.3
+CharacterOff						0
+Bg	酒場1F					0
+	ディーア	笑い2				0
+Bgm	平和
+FadeIn	black					.3
+	ディーア	笑い2						最後に……\nおばけの女の子は大切な人に\n見つかって、幸せになるんだ……
+	ディーア	笑い2						おばけは怖いだけじゃなかったとさ\nめでたし、めでたし
+CharacterOff
+	エウメニデス	通常						それって、その……\nハデス=ロストさんのお話ですか？
+CharacterOff
+	ディーア	通常2						そうかも知れないし、\nそうじゃないかもしれない
+	ディーア	笑い2						でも、こういうお話の方がいいだろ？\nハッピーエンドだ
+CharacterOff
+	エウメニデス	通常						……確かにそう、ですね
+	エウメニデス	通常						ハデスさんを傷つけるなんて、\n一言言ってやろうと思ってた、ですが
+	エウメニデス	照れ						ご主人とハデスさんが\nそんなに言うなら、\nロストさんもお世話していい、です
+CharacterOff
+	ハデス	嬉しい2						ありがとうございます\nエウメニデス
+CharacterOff
+	ディーア	笑い2						そういえば\nペルセポネは今日も……？
+CharacterOff
+	ハデス	嬉しい2						はい……\nでもそろそろ夜になります\n探しに行きましょう、マスターさん
+Se	走る
+FadeOut	black					.3
+StopBgm
+Param	character_grayout=true
+CharacterOff						0
+Bg	市街地B(夕)					0
+	ディーア	通常2	1_2			0
+	ハデス	嬉しい2	2_2			0
+Wait						1
+FadeIn	black					.3
+	ハデス	嬉しい2						お姉ちゃん、見つけた……
+CharacterOff
+	ペルセポネ	通常
+Tween	ペルセポネ	PunchPosition	y=30				NoWait
+	ペルセポネ	通常2						あっ！\nはーちゃん、マスターさん！
+CharacterOff
+	ハデス	嬉しい2	2_2
+	ディーア	通常2	1_2
+	ディーア	通常2						今日はどうしたんだ？
+CharacterOff
+	ペルセポネ	通常2						えへへ♪
+Bgm	凱旋
+	ペルセポネ	嬉しい2						さっき、\nろーちゃんがいる気がしたんです♪
+CharacterOff
+	ハデス	嬉しい2	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						ハデス=ロストが……？
+CharacterOff
+	ペルセポネ	通常2						はい♪\nろーちゃんはおばけだから\nセポネたちを見てるかもしれません♪
+	ペルセポネ	通常2						それでセポネたちに\n早く会いたいって思ってますよ♪
+CharacterOff
+	ハデス	嬉しい2	2_2
+	ディーア	通常2	1_2
+	ディーア	通常2						だったら……\n早く迎えに行って、\n教えてあげないとな
+	ハデス	嬉しい2						はい、そうですね……
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル10315		エフェクト表			0
+Tween	イベントスチル10315	MoveBy	y=-400 time=0				NoWait
+FadeIn	white					.3
+	ディーア	<Off>						ハデス=ロストは\nちゃんとここにいるって
+FadeOut	white					1
+CharacterOff						0
+	イベントスチル10317		エフェクト表			0
+FadeIn	white					1
+Wait						1
+	イベントスチル10318		エフェクト表			2
+Wait						2.5
+	　　　　　　　　　　							<color=blue>\n  『ホーリー＝ロスト デイブレイク』\n　　　　　　　　　　　　　<dash=2>完</color>
+FadeOut	white					.5
+Wait						1.5
+If	isdebug==true
+CharacterOff
+Jump	*E_1031_01
+EndIf
+EndScenario

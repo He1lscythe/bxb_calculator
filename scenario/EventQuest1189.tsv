@@ -1,0 +1,826 @@
+# E_1189_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	白背景					0
+Param	character_grayout=false
+	パンツBG	通常	エフェクト表			0
+FadeIn	black					1
+	パンツのようなもの	<Off>						パタパタパタ
+Param	character_grayout=true
+CharacterOff
+	リディ	通常2	p7b
+	ディーア	汗2	p3
+Bg	酒場1F
+	ディーア	汗2						また今日も\nパンツが空を飛んでるなぁ
+	リディ	通常2						今ちょうど、\n超健全祭をやっているのにね
+	ディーア	笑い2						ただでさえ今の時期は、\n変な異変が起きやすいんだから\n超健全は無理があるよな
+	リディ	通常2						でもお祝いの最中に、\n異変だらけとか絶対に言えないし\n仕方ないんじゃない？
+	ディーア	怪しい2						じゃあ待てよ？\n今の異変だらけな魔界が超健全なら\nオレも超健全だよな？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	にやけ2						つまり！\nどんなにみんなとイチャついても\nオレは超健全♪
+	リディ	怒り2						もー、またそんなこと言って！
+	リディ	怒り2						あんまり不健全なことしてたら、\n神様に怒られちゃうよ？
+	ディーア	通常2						オレの健全さは魔界が認めたし\n魔界の神であるマスターキーとも\n戦って勝っているんだ
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						神様相手も怖くはないさ！
+	          	<Off>	3_3					コンコン！
+	リディ	驚き2						はーい？
+	？？？？	<Off>	3_3					あのぉ……\nこちらに魔剣王様がいらっしゃると\n聞いたんですけどぉ……？
+	リディ	通常2						マスター、お客さんだよ？
+	ディーア	笑い2						超健全なオレに、\nなにか相談でもあるのかな？
+	ディーア	通常2						どうぞ！ どなたで<dash=2>
+StopBgm
+FadeOut	black					.2
+CharacterOff						0
+	Gブキダス	通常				0
+	          	<Off>	1_2			0
+Param	character_grayout=false
+FadeIn	black					.2
+Se	ポップイン
+	神様？	<Off>	1_2					神様です
+CharacterOff						0
+	ディーア	拡大絶望2	エフェクト表			0
+Bgm	コメディ
+Shake	ディーア		x=5				NoWait
+	ディーア	拡大絶望2						すみませんでしたぁああああ!!
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望2	p3
+	リディ	悔しい2	p7
+Tween	リディ	PunchPosition	y=30				NoWait
+	リディ	悔しい2						ちょっとマスター！\nさっきの自信はどうしたの!?\n神様も怖くないんじゃないの!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						ブキダスさんに勝てるわけ無いだろ！
+	ディーア	絶望2						しかも金色に輝いている！\n金色は魔剣使いを絶望に染める色！
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望2						ブキダスの神様が罰しに来たなんて！\nもうオレはおしまいだ!!
+	リディ	悔しい2						で、でも怖がる前に、\nまずはお話をしてみようよ！
+	リディ	悔しい2						ブキダスさんから\nグラムちゃんの角が生えているのも\nなんだか不思議だし！
+StopBgm
+	リディ	通常2						えっと……あなたが神様なの？
+Bgm	神秘
+CharacterOff
+	Gブキダス	通常						はじめまして、\n魔剣王様、そしてリディ様
+	Gブキダス	通常						神様の名前は、\n魔顕グラム=ブキダス
+	Gブキダス	通常						魔剣を生み出すブキダスと\n魔剣の基準であるグラム様から\nなんやかんや生まれた神様です
+	Gブキダス	通常						ですが魔界ではまだまだ新参者、\nこれからよろしくお願いいたします♪
+CharacterOff
+	ディーア	驚き2	p3
+	リディ	通常2	p7
+	ディーア	怪しい2						確かに、\n神を名乗るだけのオーラがあるな……
+	リディ	笑い2						でもよかったね！\nブキダスちゃん、良い子みたいで！
+	ディーア	通常2						それでグラム=ブキダスは、\nオレにどんな用事があるんだ？
+CharacterOff
+	Gブキダス	通常						実は神様には\n魔剣王様にどうしても相談したい\n悩みごとがあるんです
+	Gブキダス	通常						この神様が生まれたのは\n素晴らしい魔界を永続化させるため\nより良い場所にすること
+	Gブキダス	通常						時には非情となり、\n世の綻びとなる不健全や非常識を\n消去することも必要です……
+	Gブキダス	通常						でもそんな必要はないはずでした\n魔界は超健全だって聞きましたから
+CharacterOff
+	ディーア	怪しい2	p3
+	リディ	通常2	p7
+	ディーア	怪しい2						ああ、確かに魔界は超健全だな
+	リディ	笑い2						超健全祭の真っ最中だもんね！
+CharacterOff
+Param	character_grayout=false
+StopBgm
+	Gブキダス	通常						ですが、\nとあるネットでの書き込みや\n本物の魔界を見て思ったのです<dash=4>
+Bgm	緊迫
+	集中線		エフェクト表
+	Gブキダス	通常						もしかして、\n魔界って不健全じゃないですか？
+CharacterOff	集中線					.3
+	Gブキダス	通常						もしそうなら消去しないと
+	Gブキダス	通常						そして本当に健全な、\n新しい魔界を創るのです……！
+CharacterOff
+	リディ	絶望2	p7
+	ディーア	絶望2	p3
+	二人	<Off>						……えっ!?
+Param	character_grayout=true
+Bgm	コメディ
+Tween	リディ	MoveBy	x=-50				NoWait
+	リディ	悔しい2						ど、どうしてそうなるの!?
+Tween	ディーア	MoveBy	x=50				NoWait
+	ディーア	絶望2						オレにもわからない!!\nでもこの雰囲気は本気だぞ!?
+	ディーア	悔しい2						と、とにかく！\nまずは誤魔化さないと!!
+Tween	ディーア	MoveBy	x=-50				NoWait
+	ディーア	汗2						そ、そんなことないぞ！\n魔界は超健全だ！
+	ディーア	汗2						そもそも魔界が不健全なら、\nこんなに長く存続していない!!
+CharacterOff
+	Gブキダス	通常						でも……
+FadeOut	black					.2
+CharacterOff						0
+	パンツ鳥	通常				0
+FadeIn	black					.2
+	パンツ鳥	通常						パタパタ！
+FadeOut	black					.2
+CharacterOff						0
+	レヴァろいど	通常				0
+FadeIn	black					.2
+	レヴァろいど	通常						レヴァダヨー
+FadeOut	black					.2
+CharacterOff						0
+	旅人	通常				0
+Tween	旅人	MoveBy	y=-100 time=0				NoWait
+FadeIn	black					.2
+	旅人	通常						<color=blue>A problem has been detected and\nTabibito has been shut down to\nprevent damage to your Makai.</color>
+CharacterOff
+	Gブキダス	通常	p3b
+	ディーア	絶望2	p7
+	Gブキダス	通常						空を飛ぶパンツや、\n魔剣のようなものやバグった人は\n常識的におかしいですし
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望2						ギクっ!?
+	Gブキダス	通常						他にも聞いた話ですと、\n魔剣使い様の中には温泉を覗いたり\nミルクをねだり甘える人がいたり
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望2						ギクギクっ！
+	Gブキダス	通常						さらにその人は、\nいきなり全裸になって逮捕されたり、\nたくさんの魔剣とイチャイチャ三昧
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						ギクギクギクっ！
+	Gブキダス	通常						もちろん魔剣王様はそのような\n不健全な方ではないと思いますが
+	Gブキダス	通常						あれ？ どうされました？\nなんだかお顔の色が良くないような？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						いいえ、超健全です！
+	ディーア	絶望2						ち、ちなみに、\nもしオレが超健全じゃなかったら\nどうなるんだ？
+Tween	Gブキダス	PunchPosition	y=30				NoWait
+	Gブキダス	通常						もし万が一に、\n魔剣王様も不健全なお方でしたら……
+	Gブキダス	通常						今の魔剣王様を消去し、\n新たに常識的な方にします♪
+	Gブキダス	通常						そんな不健全ばかりしている\n不埒なお方は念入りに♪
+Tween	ディーア	MoveBy	x=50				NoWait
+	ディーア	絶望2						ま、まずい……！\nもしそんなことになったら<dash=2>
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	市街地A					0
+	ディーア？	通常F2				0
+FadeIn	white					.3
+	ディーア？	通常F2						オレ、超きれいな主人公！
+	ディーア？	通常F2						女の子とイチャイチャなんて\nもうしない！
+Tween	ディーア？	PunchPosition	y=30				NoWait
+	ディーア？	通常F2						よーし！\n今日も魔界の平和を守るために\nがんばるぞー！
+Se	回想
+FadeOut	white					.3
+CharacterOff						0
+Bg	酒場1F					0
+	リディ	絶望2	p7			0
+	ディーア	怒り2	p3			0
+FadeIn	white					.3
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						オレがオレでなくなるっ!!
+	リディ	怒り2						でもマスターはもう少し、\n健全になったほうがいいと思う
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	悔しい2						なんのことだ!?\nオレは元々超健全だぞ!?
+	ディーア	悔しい2						オレだけじゃない！\nこの魔界の大ピンチだ!!
+	ディーア	本気2						このまま\n魔界そのものが不健全認定されたら\n今の楽しい魔界が消滅してしまう！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						魔界は超健全なのに！！！！
+	ディーア	絶望2						ご、誤解なんだグラム=ブキダス！\n魔界は本当に超健全な場所だ！
+CharacterOff
+	Gブキダス	通常						誤解、ですか？
+CharacterOff
+	ディーア	目閉じ2						例えば、\n魔剣使いは魔剣と交流し力を高める！\n全てのスキンシップは超健全！
+	ディーア	目閉じ2						温泉やミルクのこともそうだ！\n超健全！
+	ディーア	本気2						邪魔な隔たりから解き放たれた\n無垢な姿での超健全な触れ合いや、\n母性で結びつく超健全な儀式！
+	ディーア	怒り2						どれも超健全だろ？
+CharacterOff
+	Gブキダス	通常						そ、そう言われると、\n超健全なことに思えてきました！
+	Gブキダス	通常						では不健全だと思ったのは、\n神様が魔界の常識を知らないから？
+Tween	Gブキダス	PunchPosition	y=30				NoWait
+	Gブキダス	通常						新しい神様なのに、\n世間知らずだなんて情けないです！
+CharacterOff
+	リディ	絶望2	p7
+	ディーア	きらーん2	p3
+	ディーア	きらーん2						その通り！\nでも魔界に来たばかりなんだから、\n超健全を知らなくても仕方ない！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	きらーん2						超健全な魔剣王として、\nオレが魔界のことを教えてあげよう！
+CharacterOff
+	Gブキダス	通常						本当ですか♪\n魔界の常識、おわかりたいです！
+CharacterOff
+	リディ	絶望2	p7
+	ディーア	怪しい2	p3
+	ディーア	怪しい2						グラム=ブキダスが、\n世間知らずで本当に良かった……！
+	ディーア	本気2						このまま今の魔界を、\n超健全だと思い込ませてみせる！
+	ディーア	にやけ2						すべては！\nイチャイチャな日常のために！
+	リディ	絶望2						この不健全マスターは、\nなんとかした方がいいんじゃ？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						さあ！ なんでも聞いてくれ！
+CharacterOff
+	Gブキダス	通常						では魔剣王様、\n飛んでいるパンツのようなものは？
+CharacterOff
+	パンツ鳥	通常						パタパタ！
+CharacterOff
+	ディーア	目閉じ2						鳥だ
+	ディーア	怪しい2						ミズタマパンツ鳥として、\n魔界ではごく一般的で常識的な\n超健全な鳥だ
+	ディーア	怪しい2						アカやクロ、スケな亜種もいて\n煮込むと上質で超健全な出汁がでる
+CharacterOff
+	Gブキダス	通常						魔界の生態系は、\nとっても奥深いのですね……！
+Tween	Gブキダス	PunchPosition	y=30				NoWait
+	Gブキダス	通常						で、では！\n停止したまま小刻みに震えている\n旅人はいったい!?
+	Gブキダス	通常						どう見ても、バグというものでは？
+FadeOut	black					.2
+CharacterOff						0
+	旅人	通常				0
+Tween	旅人	MoveBy	y=-100 time=0				NoWait
+FadeIn	black					.2
+Shake	旅人		x=3 time=10				NoWait
+	旅人	通常						Error、Error、Error、Error!!
+CharacterOff
+	ディーア	本気2						だとしても！\nバグがあってこそ今の魔界がある！\n超健全にバグは不可欠！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						つまり！\nバグがあるのも超健全の証！
+CharacterOff
+	Gブキダス	通常						ではあそこにいる、\nレヴァンテイン様のような方も？
+CharacterOff
+	レヴァろいど	通常						レヴァダヨー
+CharacterOff
+	ディーア	笑い2						もちろん！\nレヴァろいどは超健全な人気者だ！
+Param	character_grayout=false
+StopBgm
+Se	チャージ
+CharacterOff
+	レヴァろいど	通常
+	オーラ赤		エフェクト表			1
+	レヴァろいど	通常						オマエもフィギュアにしてやろうカ？
+Bgm	バトル
+CharacterOff
+	ディーア	絶望2						……たまに暴走するけど
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						直せばノーカン！\n元に戻れば超健全なんだっ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1189_02
+EndIf
+EndScenario
+
+# E_1189_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	市街地A					0
+Param	character_grayout=false
+	レヴァろいど	通常				0
+FadeIn	black					1
+	レヴァろいど	通常						レヴァダヨー！
+CharacterOff
+	ディーア	笑い2						ほら、元に戻ったから\nなにも起こっていないのと同じ！\n超健全だ!!
+	ディーア	目閉じ2						落としたご飯も\n三秒以内に拾えばノーカンなように\n暴走もすぐ止まれば超健全！
+	ディーア	本気2						これこそが、\n超健全な魔界の常識だ!!
+CharacterOff
+	Gブキダス	通常						こ、これが魔界の常識……！
+	Gブキダス	通常						にわかには信じられませんが、\n魔剣王様ほどのお方が自信満々に\n言うのなら真実でしょう
+	Gブキダス	通常						すぐ不健全だと決めつけた神様は\n早とちりすぎたのですね！
+	Gブキダス	通常						神様、よーくおわかりました♪\nさすがは魔剣王様ですね！
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望2	p3
+	リディ	絶望2	p7
+	リディ	絶望2						どんどんグラム=ブキダスちゃんの\n常識がおかしくなってる……
+	ディーア	怪しい2						でも魔界を守るためには仕方ない
+	ディーア	笑い2						さあ次は！\nオレの超健全な魔剣を紹介しよう！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場1F					0
+	レヴァ	笑い				0
+FadeIn	black					.3
+	レヴァ	笑い						立てば紅、座れば業火♪\n歩く姿は終末戦争！
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	笑い						レヴァンテインちゃん推参だよ♪
+CharacterOff
+	ディーア	笑い2						まさに王道！\n超健全なレヴァンテイン！\nそして<dash=2>
+CharacterOff
+	魔剣グラム	通常						ブキダスとグラム因子の融合とはね\nでも本物は私一人よ？
+CharacterOff
+	ディーア	笑い2						グラム=ブキダスの元にもなった、\n超健全なグラムだ！
+CharacterOff
+	Gブキダス	通常						神様が手本にするべき、\n今の魔界の基準を作った魔剣様！
+Tween	Gブキダス	PunchPosition	y=30				NoWait
+	Gブキダス	通常						お会いできて光栄です♪
+CharacterOff
+	ディーア	笑い2						二人からもオレと魔界の\n超健全っぷりを紹介してくれ！
+CharacterOff
+	レヴァ	慌て	2_2
+	魔剣グラム	通常	1_2_b
+	レヴァ	慌て						超健全？
+	魔剣グラム	通常						あなたは優れたマスターだけど、\n超健全とまでは<dash=2>
+	ディーア	怪しい2	画面外_左
+Tween	ディーア	MoveBy	x=400 time=1				NoWait
+	ディーア	怪しい2						後でなんでもするから……！
+Tween	ディーア	MoveBy	x=-400 time=1				NoWait
+	レヴァ	通常						う、うん！\nマイマスターは超健全だと思うよ！
+	魔剣グラム	通常						魔剣を統べる王、魔剣王だもの\nおわかり？
+CharacterOff
+	Gブキダス	通常						なるほど！
+CharacterOff
+	ディーア	笑い2						ありがとう、二人とも……！
+StopBgm
+	ディーア	怪しい2						じゃあそろそろ、\n不健全疑惑も解消されたことだし、\n魔界はこの超健全なまま<dash=2>
+Bgm	コメディ
+	テストあああああ文字数こ	通常	画面外_右_b
+Tween	テストあああああ文字数こ	MoveBy	x=-500 time=1				NoWait
+	テストあああああ文字数こ	通常						へいへーい♪\n久しぶりのエイプリルフールなのに\nテストちゃんの出番なしとかマジ？
+	ディーア	絶望2						うわぁああああああ!?
+Se	ピューン
+Tween	テストあああああ文字数こ	MoveBy	x=500 time=1				NoWait
+Tween	ディーア	MoveBy	x=700 time=1				NoWait
+	テストあああああ文字数こ	通常						ちょっ、ディレクター？\n今さらお蔵入りはナシですよー!?
+CharacterOff
+	Gブキダス	通常						い、今のは？
+	ディーア	怪しい2	画面外_右_b
+Tween	ディーア	MoveBy	x=-400 time=1				NoWait
+	ディーア	怪しい2						お前はなにも見なかった
+	Gブキダス	通常						でも落書きのような<dash=2>
+	ディーア	怪しい2						リピートアフタミー\n魔界は超健全で超安全
+	Gブキダス	通常						ま、魔界は超健全で超安全
+	ディーア	笑い2						よし！\nこれでごまかせ<dash=2>
+CharacterOff
+	レビュウ	通常	画面外_右_b
+Tween	レビュウ	MoveBy	x=-700 time=1				NoWait
+	レビュウ	通常						えっちセンサーが反応中！
+	レビュウ	通常						またえっちなことをしていますね！\nマスター!!
+	レビュウ	通常						具体的には無知で純情な娘に\nあやしいことを教え込むような<dash=2>
+	ディーア	怪しい2	画面外_左
+Tween	ディーア	MoveBy	x=700 time=1				NoWait
+	ディーア	絶望2						うわぁああああああ!?
+Se	ピューン
+Tween	レビュウ	MoveBy	x=700 time=1				NoWait
+Tween	ディーア	MoveBy	x=700 time=1				NoWait
+	レビュウ	通常						な、なにをするんですか！
+	ディーア	絶望2						ノーえっち！ イエス超健全!!
+Tween	ディーア	MoveBy	x=-700 time=1
+	ディーア	絶望2						はぁ、はぁ……\nなにも!! なかった……!!
+CharacterOff
+	Gブキダス	通常						こ、これも、超健全ですか？
+CharacterOff
+	ディーア	絶望2						ああ、そうとも！\n魔界も魔剣もみんな超健ぜ<dash=2>
+CharacterOff
+	カシウス	通常2						マスター、いけないこと教えて♪
+CharacterOff
+	ネクロノミコン	通常2						魔王さま、ヌルヌルおかわりする？
+CharacterOff
+	アスモデウス=サラ	通常						お耳くちゅくちゅしましょうか？\n（ワクワク）
+CharacterOff
+	ハデス	通常2						マスターさん、\n今日もえーえすえむあーるを\n寝る前にしますか？
+	ハデス	通常2						昨日もたくさん、\n圧かけてくれましたけれど
+CharacterOff
+	ディーア	にやけ2						するーっ！
+	ディーア	絶望2						はっ……!?
+CharacterOff
+	Gブキダス	通常						いけないこと、ヌルヌル……？
+	Gブキダス	通常						超健全なはずの魔剣王様が\n魔剣様たちといかがわしいことを？
+Shake	Gブキダス		x=3				NoWait
+	Gブキダス	通常						それは不健全では？
+CharacterOff
+	ディーア	絶望2						健全です！ 超健全です！\n魔界はみんな超健全！
+	黒グラデーション		エフェクト表			.5
+	ディーア	絶望2						オレは超健全なんだ……\n誰がなにを言おうと\nオレは超健全なんだ……！
+CharacterOff	黒グラデーション
+	ディーア	悔しい2						こうなったら……！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						あーっ！！！！\nあれは超健全な規制物質!!
+CharacterOff
+	ディーア	拡大本気2	エフェクト表					超健全な魔剣王と、\nどっちが超健全か勝負だ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1189_03
+EndIf
+EndScenario
+
+# E_1189_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+Param	character_grayout=false
+	ディーア	絶望2				0
+FadeIn	black					1
+	ディーア	絶望2						はぁ、はぁ……\nオレの超健全な本気を見てくれたか？
+Shake	ディーア		x=2				NoWait
+	ディーア	絶望2						オレは規制物質よりも超健全
+	ディーア	絶望2						そして魔剣とたくさんふれあうのも\n魔界を守るためなんだ……！
+CharacterOff
+	Gブキダス	通常						は、はい……！\n魔剣王様の鬼気迫る本気を見ました
+	Gブキダス	通常						魔界を守るために、\n魔剣の皆様と親しくするのは常識
+	Gブキダス	通常						それなのに神様ったら、\nまた不健全だと誤解してしまって
+Tween	Gブキダス	PunchPosition	y=30				NoWait
+	Gブキダス	通常						やっぱり魔界は超健全ですね！
+CharacterOff
+	ディーア	汗2						よ、よし！\nそろそろ魔界の超健全さを疑うことも\nなくなっただろう？
+StopBgm
+CharacterOff
+	Gブキダス	通常						はい♪\n神様はおわかりました！
+	Gブキダス	通常						なので<dash=2>
+Se	チャージ
+Bgm	水属性バトル
+	オーラ青		エフェクト表			1
+	Gブキダス	通常						お礼として、\n超健全な新魔剣を製造いたします♪
+	Gブキダス	通常						常識をおわかった今なら、\nレヴァンテイン様やグラム様のように\n新基準となる魔剣ができるはず♪
+	Gブキダス	通常						見ていてください♪\n神様のはじめての製造を♪
+CharacterOff
+	ディーア	絶望2						ま、待て……！\n今製造しても絶対に不健ぜ<dash=2>
+CharacterOff
+	ププッピマリー	通常	画面外_右
+ImageEffect	SpriteCamera	MotionBlur
+Se	ピューン
+Tween	ププッピマリー	MoveBy	x=-600 time=1				NoWait
+	ププッピマリー	通常						今です……！\nこのお嬢様の秘密小説を触媒に!!
+Se	チャージ
+FadeOut	white					2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	白背景					0
+CharacterOff						0
+	ロルリアンテイン	拡大足	エフェクト表			0
+FadeIn	white					.3
+	ロルリアンテイン	拡大足						立てば王様、座れば可憐
+FadeOut	white					.3
+CharacterOff						0
+	ロルリアンテイン	拡大胸	エフェクト表			0
+FadeIn	white					.3
+	ロルリアンテイン	拡大胸						完全無欠のフロイライン♪
+FadeOut	white					.3
+Bg	酒場1F					0
+CharacterOff						0
+	ロルリアンテイン	嬉しい2				0
+FadeIn	white					.3
+	ロルリアンテイン	嬉しい2						ロルリアンテイン、\nブキダスさんからただいま参上！
+StopBgm
+Tween	ロルリアンテイン	PunchPosition	y=30				NoWait
+	ロルリアンテイン	慌て2						って、なによこれはぁあああ!?
+Bgm	コメディ
+CharacterOff
+	ディーア	驚き2						……へ？
+	ディーア	驚き2						その顔に声は……ロールお嬢様!?
+	ディーア	驚き2						これがグラム=ブキダスが製造した、\n新しい魔剣なのか!?
+CharacterOff
+	レヴァ	通常						わあ！\n私とおんなじ恰好をしてる♪
+CharacterOff
+	ロルリアンテイン	慌て2						ま、魔剣使い!?
+	ロルリアンテイン	怒り2						どうなっているのよ、この恰好は!?\n決めポーズと決めセリフは!?
+CharacterOff
+	ププッピマリー	通常						すばらしい……！
+CharacterOff
+	ディーア	驚き2						マリーさん、これはいったい!?
+CharacterOff
+	ププッピマリー	通常						彼女こそ、\nロールお嬢様が夢見た王道ヒロイン\n魔剣少女ロルリアンテイン
+	ププッピマリー	通常						幼い頃の愛読本、\nレヴァンテイン様主役の冒険絵本より\n理想の未来として思い描いたお姿
+	ププッピマリー	通常						それがグラム=ブキダス様の力で、\n本物の魔剣少女として成立したのです
+CharacterOff
+	ディーア	怪しい2						つまり、\n小さい頃のロール様の願望を再現した\nイミティションの一種なのか？
+	ディーア	目閉じ2						あのお嬢様が、\nレヴァの活躍に憧れていたなんて
+	ディーア	怪しい2						確かにすごく王道ヒロインだな
+CharacterOff
+	ロルリアンテイン	怒り
+Tween	ロルリアンテイン	PunchPosition	y=30				NoWait
+	ロルリアンテイン	怒り						この姿のどこが王道だっていうのよ、\nバカ魔剣使い!?
+Tween	ロルリアンテイン	PunchPosition	y=30				NoWait
+	ロルリアンテイン	怒り						鎧が大きすぎてサイズあってないし\nちょっと動くだけでズレる\nハレンチ極まりない姿じゃないの！
+CharacterOff
+	Gブキダス	通常						は、ハレンチ!?
+Shake	Gブキダス		x=2				NoWait
+	Gブキダス	通常						超健全な魔界なら、\n超健全な魔剣が製造できるはずが、\nハレンチに……？
+	Gブキダス	通常						やっぱり魔界は本当は<dash=2>
+CharacterOff
+	ディーア	絶望2						ま、まずい……！\nグラム=ブキダスが疑い出した!!
+	ディーア	本気2						ロールお嬢さ……じゃなくて！\nロルリアンテイン！
+	ディーア	笑い2						安心してくれ、すごく似合ってる!!
+	ディーア	笑い2						ちゃんと\n大事なところは隠れているから！\n超健全で超安全!!
+	ディーア	きらーん2						本音を言うと、\nその格好はすごく好みだ!!
+CharacterOff
+	ロルリアンテイン	拡大怒り	エフェクト表					本当に隠れているだけでしょう!?
+CharacterOff
+	レヴァ	通常						きゃっー♪\nロルリアンテインちゃんカワイイ！\n新しい妹ができたみたい♪
+	レヴァ	通常						コッチ向いて？ ポーズして？
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	通常						かわいくお写真をとって、\nヘルに送るの♪
+CharacterOff
+	ロルリアンテイン	怒り						ポーズなんてするわけないでしょ!?\nなにを勝手なことを<dash=2>
+StopBgm
+	オーラ赤		エフェクト表			1
+	ロルリアンテイン	通常						……って、なにこれ!?
+Bgm	キノコリオン
+Se	チャージ
+FadeOut	white					2
+Bg	白背景					0
+CharacterOff						0
+	ロルリアンテイン	拡大足	エフェクト表			0
+FadeIn	white					.3
+	ロルリアンテイン	拡大足						煌めくハートは正義のココロ！
+FadeOut	white					.3
+CharacterOff						0
+	ロルリアンテイン	拡大胸	エフェクト表			0
+FadeIn	white					.3
+	ロルリアンテイン	拡大胸						悪い悪魔は一撃必殺♪
+FadeOut	white					.3
+Bg	酒場1F					0
+CharacterOff						0
+	ロルリアンテイン	嬉しい2				0
+FadeIn	white					.3
+	ロルリアンテイン	嬉しい2						ロルリアンテインは\nぜったい負けないんだから♪
+StopBgm
+Tween	ロルリアンテイン	PunchPosition	y=30				NoWait
+	ロルリアンテイン	汗2						じゃなぁああああああい!?
+Bgm	コメディ
+	ロルリアンテイン	怒り2						なんで勝手に口が動くのよ!?
+CharacterOff
+	ププッピマリー	通常
+	オーラ光		エフェクト表
+	ププッピマリー	通常						すぅ<dash=6>
+CharacterOff
+	ディーア	驚き2						刺激が強すぎて、\nマリーさんが召されている!?
+	ディーア	怒り2						でもこの王道な振る舞いがあれば、\n超健全な製造だって、\nグラム=ブキダスをごまかせるかも？
+	ディーア	本気2						よし！ ロルリアンテイン！\nお前が王道だとわからせよう！
+CharacterOff
+	ロルリアンテイン	通常						はぁ!? ちょっと待ちなさい！\nこんな姿で街に出たら!!
+CharacterOff
+	ロルリアンテイン	拡大通常	エフェクト表					このバカ魔剣使いぃいいい!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1189_04
+EndIf
+EndScenario
+
+# E_1189_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	市街地A					0
+	ロルリアンテイン	嬉しい2				0
+FadeIn	black					1
+	ロルリアンテイン	嬉しい2						ロルリアンテイン大勝利♪\nヒロインは負けないんだから★
+Tween	ロルリアンテイン	PunchPosition	y=30				NoWait
+	ロルリアンテイン	怒り2						だからもぉおおおおお!!
+CharacterOff
+	ディーア	きらーん2						すごい……！\n本当に夢に描いたヒロインだ！
+	ディーア	笑い2						どこに見せても恥ずかしくない！\nまさに超健全！
+CharacterOff
+	ロルリアンテイン	汗2						なにが超健全よ!?
+	ロルリアンテイン	汗2						こんな素肌が丸見えの恰好なんて、\n不健全そのものじゃない！
+Tween	ロルリアンテイン	PunchPosition	y=30				NoWait
+	ロルリアンテイン	怒り2						超健全というなら、\nせめて布面積を増やしなさいよ！
+CharacterOff
+	ディーア	絶望2						それはダメだ！
+CharacterOff
+	ロルリアンテイン	怒り2						なんでよっ!?\nやっぱり不健全じゃない!!
+StopBgm
+CharacterOff
+	Gブキダス	通常						え、えっと、えっと……
+Bgm	絶望
+Shake	Gブキダス		x=2				NoWait
+	Gブキダス	通常						健全な魔剣を製造しようとしたのに、\n不健全な魔剣が創られて……？
+	Gブキダス	通常						ということは健全が不健全？\n不健全が健全？
+Tween	Gブキダス	PunchPosition	y=30				NoWait
+	Gブキダス	通常						神様、\nおわからなくなってきましたぁ！
+StopBgm
+CharacterOff
+	ディーア	本気2						大丈夫だ！
+Bgm	凱旋
+CharacterOff
+	Gブキダス	通常						魔剣王様……
+CharacterOff
+	ディーア	笑い2						ロルリアンテインは照れてるだけで\n超健全で超安全！
+	ディーア	通常2						オレが教えた通り、\nこの魔界は超健全で超安全！
+StopBgm
+	ディーア	通常2						オレを信じてくれ！\nだってオレこそが超健全な<dash=2>
+Bgm	魔獣バトル
+CharacterOff
+	勇者A	通常						街中で女の子を照れさせるという\nうらやまけしからんことをしていると\n通報を受けたが！
+Tween	勇者A	PunchPosition	y=30				NoWait
+	勇者A	通常						またお前か、魔剣王！
+	勇者A	通常						この間も裸になって逮捕されたのに、\nまだ懲りないのか！
+CharacterOff
+	ディーア	絶望2						マズいっ！
+CharacterOff
+	シャイ	通常						またシャイの出番ですかぁ!?
+CharacterOff
+	Gブキダス	通常						え……？
+Shake	Gブキダス		x=2				NoWait
+	Gブキダス	通常						魔剣王様も不健全……？
+	黒グラデーション		エフェクト表2			.5
+	Gブキダス	通常						では今までおわかった常識は？\n魔界の超健全は？
+	Gブキダス	通常						やっぱり魔界って\n不健全な場所だったのですか!?
+Param	character_grayout=false
+CharacterOff	黒グラデーション					.5
+	Gブキダス	通常						でしたら神様は、\n魔界の健全な永続化のために<dash=2>
+Se	闇1
+	オーラ赤		エフェクト表			1
+	Gブキダス	通常						フケンゼン、マッショウ……!!
+Se	火事
+CharacterOff
+Shake	Graphics		x=3 y=3				NoWait
+	ディーア	絶望2						こ、これは！\nグラム=ブキダスが暴走してる!?
+	ディーア	絶望2						そんな……\n説得できなかったっていうのか？
+StopSe
+StopBgm
+	ディーア	絶望2						このままじゃ魔界が、\n超健全な新世界になって<dash=2>
+Bgm	魔剣バトル
+	ディーア	悔しい2						っ……！
+	ディーア	本気2						いいや！ 魔界は健全だ！\n超健全なんだ!!
+	ディーア	悔しい2						去年も超健全だったし、\n今年ももちろん超健全だった！
+	ディーア	本気2						よしんば不健全だったとしても、\n超健全だ……！
+	ディーア	本気2						グラム=ブキダス！\nまだおわからせは終わってないぞ！
+	ディーア	怒り2						常識は頭で考えるのではなく、\nその場所で生きて身につけるもの！
+	ディーア	悔しい2						オレの可能性、すべてをかけて\nお前という魔剣を魔界の一員にする
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	本気2						魔界が超健全だとわかるまで、\nたくさんおわからせてやるからな！
+CharacterOff
+	集中線		エフェクト表
+	ディーア	拡大本気2	エフェクト裏					魔界はこれまでもこれからも！\n超健全です！
+If	isdebug==true
+CharacterOff
+Jump	*E_1189_05
+EndIf
+EndScenario
+
+# E_1189_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	凱旋
+Bg	市街地A					0
+Param	character_grayout=false
+	Gブキダス	通常
+FadeIn	black					1
+	Gブキダス	通常						魔剣王様、いいえマスター様……
+	Gブキダス	通常						神様はおわかりました
+Se	チャージ
+FadeOut	white					.2
+	Gブキダス	通常2
+FadeIn	white					.2
+	Gブキダス	通常2						魔界が超健全だとおわかりました！
+CharacterOff
+	ディーア	驚き2						グラム=ブキダスが！
+	ディーア	笑い2						虹色になった……！\n希望の虹色になったぞ!!
+CharacterOff
+	Gブキダス	通常2						魔界も魔剣も超健全♪
+	Gブキダス	通常2						マスター様ももちろん超健全♪\n魔界の常識人！
+	Gブキダス	通常2						たくさんの魔剣様と\nヌルヌルしたりぶつかったり、\n<color=blue>※おわからせられただけです</color>
+	Gブキダス	通常2						たくさんのマスター様を\n全身のあちこちで感じましたし\n<color=blue>※おわからせられただけです</color>
+	Gブキダス	通常2						なんだか気持ちよくなりながら、\n頭が真っ白になりましたが\n<color=blue>※おわからせられただけです</color>
+Tween	Gブキダス	PunchPosition	y=30				NoWait
+	Gブキダス	通常2						魔界が超健全だと、\n神様はおわからせられました♪
+	Gブキダス	通常2						これもすべて<dash=2>
+Bgm	ガチャ
+Se	チャージ
+FadeOut	white					2
+Bg	白背景					0
+CharacterOff						0
+	グラムブキダス	拡大足	エフェクト表			0
+	          		1_2
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	グラムブキダス	拡大胸	エフェクト表			0
+	          		1_2
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+Bg	市街地A					0
+CharacterOff						0
+	グラムブキダス	笑い				0
+	          		1_2
+FadeIn	white					.3
+	グラムブキダス	笑い						マスター様の、\n超健全なおわからせのおかげです♪
+	グラムブキダス	本気						そして神様は改めて、\n自分の常識知らずさを知りました！
+	グラムブキダス	通常						新しい常識や魔剣を創るために、\nまずは常識をおわからないと
+	グラムブキダス	本気						この姿は、\nあなたにもっとおわからせてほしい\n気持ちのあらわれです！
+Tween	グラムブキダス	PunchPosition	y=30				NoWait
+	グラムブキダス	笑い						マスター様！\nこの神様の常識の先生になって\nたくさんおわからせてください♪
+CharacterOff
+	ディーア	笑い2						もちろんだ、超健全！
+	ディーア	通常2						じゃあ超健全に宣言しよう、\nグラム=ブキダス！
+CharacterOff
+	グラムブキダス	拡大笑い	エフェクト表					不健全だなんてウソでした！
+CharacterOff
+	ディーア	拡大本気2	エフェクト表					魔界はすべて超健全だぁあああ!!
+FadeOut	white					2
+CharacterOff						0
+Bg	夏空					0
+	イベントロゴ1189		エフェクト表			3
+FadeIn	white					1
+Wait						3
+FadeOut	white					3
+CharacterOff						0
+Bg	市街地A					0
+	グラムブキダス	笑い	p3b			0
+	ディーア	にやけ2	p7			0
+Param	character_grayout=true
+FadeIn	white					1
+	ディーア	にやけ2						じゃあさっそく、\nヌルヌルイチャイチャを……
+	グラムブキダス	通常						ヌルヌルイチャイチャ？
+Se	光1
+FadeOut	white					.2
+CharacterOff	グラムブキダス					0
+	Gブキダス	通常	p3b			0
+FadeIn	white					.2
+	Gブキダス	通常						それは不健全で<dash=2>
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						おわからせ続行！
+If	isdebug==true
+CharacterOff
+Jump	*E_1189_06
+EndIf
+EndScenario
+
+# E_1189_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	コメディ
+Bg	酒場1F					0
+Param	character_grayout=false
+	ロルリアンテイン	怒り
+FadeIn	black					1
+	ロルリアンテイン	怒り						ちょっと待ちなさい！\nなに解決した気になっているの!!
+Tween	ロルリアンテイン	PunchPosition	y=30				NoWait
+	ロルリアンテイン	怒り						私の格好とか強制決めポーズとか！\nまったく解決していないわよ!?
+	ロルリアンテイン	照れ						あなたのせいで、\n街中でたくさんの人に見られたし
+Tween	ロルリアンテイン	PunchPosition	y=30				NoWait
+	ロルリアンテイン	照れ						超健全というなら、\nもっと健全にしなさいよ!!
+CharacterOff
+	ディーア	怪しい2						いやいや！\n今の魔界は超健全なんだから\nロルリアンテインも超健全！
+	ディーア	悔しい2						なにより<dash=2>
+	ディーア	拡大本気2	エフェクト表					それをなくすなんてとんでもない！
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2	p3
+	ロルリアンテイン	通常	p7b
+	ロルリアンテイン	通常						なんでよっ!?
+Tween	ロルリアンテイン	PunchPosition	y=30				NoWait
+	ロルリアンテイン	通常						こんなの恥ずかしいだけだし、\n私がイミティションだとしても、\n司書王の恥になるのは困るのよ！
+Shake	ロルリアンテイン		x=3				NoWait
+	ロルリアンテイン	照れ						元々、小さい頃に、\nちょっと本の主人公に憧れただけの\n夢見がちな設定だもの
+	ロルリアンテイン	照れ						もし姿や伝承が変えられないなら、\nいっそ封印して<dash=2>
+StopBgm
+Tween	ディーア	MoveBy	x=50				NoWait
+	ディーア	本気2						恥なわけがあるか！
+	ロルリアンテイン	本気						…………え？
+Bgm	結婚
+	ディーア	怒り2						その姿はロールお嬢様が憧れて、\n明日を生きる力になった姿
+	ディーア	怒り2						大人にとっては恥ずかしくても、\n小さい頃のお嬢様は、\nその活躍に希望を抱いたはずだ
+	ディーア	通常2						それにさ、\n本当にお嬢様がお前を隠したいとか\n思っているとしたら
+	ディーア	通常2						とっくに、\nこの酒場に乗り込んでくるはずだろ？
+	ディーア	通常2						きっと今も、\n昔の憧れを大事にしたいっていう\n気持ちがあるんじゃないか？
+Shake	ロルリアンテイン		x=2				NoWait
+	ロルリアンテイン	本気						そう、なのかしら……
+	ディーア	笑い2						なによりオレも！\nお前の姿や活躍には心が踊った
+	ディーア	通常2						お前は新しい魔剣であり、\n魔界では夢が叶うことの証明なんだ
+	ロルリアンテイン	本気						……まったく、よく口が回るわね
+	ロルリアンテイン	本気						いいわ、それに乗せられてあげる
+	ロルリアンテイン	本気						だからバカ魔剣使い、\n私を製造した責任をとりなさい
+	ディーア	通常2						もちろん！\nマスターとしてお前を支えていく
+	ディーア	笑い2						がんばろう、ロルリアンテイン！
+Param	character_grayout=false
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	ロルリアンテイン	照れ						って、だから応援されると<dash=2>
+FadeOut	white					2
+Bg	白背景					0
+CharacterOff						0
+	ロルリアンテイン	拡大嬉しい	エフェクト表			0
+FadeIn	white					.3
+	ロルリアンテイン	拡大嬉しい						ラブリーハートで、\nブレイズファイナリティ♪
+StopBgm
+	ロルリアンテイン	拡大怒り						こうなるんだからぁああああ!!
+Bgm	コメディ
+FadeOut	white					.3
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	にやけ2	p3			0
+	ロルリアンテイン	怒り	p7b			0
+FadeIn	white					.3
+Tween	ロルリアンテイン	PunchPosition	y=30				NoWait
+	ロルリアンテイン	怒り						やっぱり不健全よ、こんなの!!
+CharacterOff
+	グラムブキダス	照れ						え……？\nやっぱり魔界は不健全なんですか？
+Se	光1
+FadeOut	white					.2
+CharacterOff	グラムブキダス					0
+	Gブキダス	通常				0
+FadeIn	white					.2
+	Gブキダス	通常						でしたら健全に<dash=2>
+CharacterOff
+	ディーア	悔しい2						ま、まずい……！\nまたグラム=ブキダスが疑ってる！
+	ディーア	本気2						おわかりのおかわりの時間だ！
+	ディーア	本気2						魔界は！ 超健全です!!
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1189_01
+EndIf
+EndScenario

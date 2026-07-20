@@ -1,0 +1,729 @@
+# G_475_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+ChangeSoundVolume	Bgm	.2
+StopSound
+Bgm	緊迫
+Bg	酒場_宿屋					0
+Param	character_grayout=false
+	リナ	拡大	エフェクト裏			0
+	集中線		エフェクト表			0
+FadeIn	black					.1
+	リナ							おひかえなすって!!!!
+CharacterOff
+	如くリナ	どや顔	エフェクト表					早速ながら手前、稼業、\n仁義を発します\n失礼ですがお控えなすって
+	如くリナ							手前、<ruby=そこつもの>粗忽者</ruby>ゆえ、\n仁義前後間違いましたら\nまっぴらご容赦ねがいます！
+	如くリナ	通常						姓名の儀、発します\n姓をアラストル、名をリナ！
+	如くリナ							アラストル組おやぶんとして、\nこぶん衆を従えまして、\n理想の「くに」建国のため
+	如くリナ							<param=name>様の\n元に転がり込んだ次第でございます
+	如くリナ							稼業、駆け出しの魔剣でございますが\n万事万端お頼み申します！
+	如くリナ	ロゴ				1.5
+Se	和太鼓
+Wait						.3
+Se	和太鼓
+Wait						3
+	如くリナ	通常				1
+	　　　　　　　　　　		2_2
+Wait						1
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト裏
+	リディ	絶望2
+	リディ							…………？？？？？？
+Bgm	コメディ
+ChangeSoundVolume	Bgm	1
+CharacterOff
+	リナ	どや顔						万事万端、お頼み申します！
+	リディ	悔しい2						ば、ばんじばんたん……？\nリディには難しくて何がなんだか……
+	リナ	悲しい						むぅ、<ruby=あね>姐</ruby>さんには\n伝わりませんでしたか……
+	リディ	驚き2						うーん……\nマスターはわかった？
+ChangeSoundVolume	Bgm	.2
+CharacterOff
+	集中線		エフェクト表
+Bgm	神社
+	如くディーア	目閉じ	エフェクト裏
+	如くディーア							ありがとうござんす!!!!
+CharacterOff
+	リディ	悔しい2						ま、マスター？？？？
+	ディーア	目閉じ2						ご丁寧なるお言葉、\n申し遅れまして失礼さんにござんす
+	リナ	驚き						おぉ……!!
+CharacterOff
+	如くディーア		エフェクト表					手前、旅中の者にござんす\n名は<param=name>\n稼業、魔剣機関所属の魔剣使い
+	如くディーア							アラストル組おやぶんであらせられる\nお<ruby=あね>姐</ruby>ぇさまの\n"ますぶん"となる者にござんす
+	如くディーア	ロゴ				1.5
+Se	和太鼓
+Wait						.3
+Se	和太鼓
+Wait						3
+	如くディーア	通常				1
+	　　　　　　　　　　		2_2
+Wait						1
+CharacterOff
+	リナ							ますぶん……!!
+	ディーア	怒り2						以後、万事万端よろしくお頼申します
+StopBgm
+	リナ	笑い						さすがは\n<param=name>様！
+ChangeSoundVolume	Bgm	1
+Bgm	コメディ
+	リナ	通常						では僭越ながら\n"ますぶん"と呼ばせて頂きます！
+CharacterOff
+	如くリディ		エフェクト表					ま、ますぶん……？\nえっと……マスターとリナちゃんは\nさっきから何をしてるの……？
+StopBgm
+	如くリディ	ロゴ				1.5
+Se	和太鼓
+Wait						.3
+Se	和太鼓
+Wait						3
+	如くリディ	通常				1
+	　　　　　　　　　　		2_2
+Wait						1
+CharacterOff
+Param	character_grayout=true
+Bgm	コメディ
+	ディーア	通常2						ああ、今のは仁義と言ってな、\n古い自己紹介みたいなものだ
+	リナ	笑い
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ							はい！\n我らの身分を証明する\n大切な儀式でございます！
+	リナ	通常						ますぶんは凄腕の魔剣使いと\n聞き及んでおります！
+	リナ	どや顔						ますぶんの教えがあれば、\n手前もおやぶんとして\n強くなれるというもの！
+	こぶん
+Se	フォーン
+Tween	こぶん	PunchPosition	y=100				Add
+	こぶん							<dash=6>♪
+	リナ	通常						ますぶん！\n並びに姐さん！
+	リナ							何卒、<ruby=ゆくすえばんたんごじっこん>行末万端ご昵懇</ruby>に\nお願い申し上げます!!
+FadeOut	black					.5
+StopBgm
+CharacterOff
+Bg	酒場1F
+	　　　　　　　　　　
+Wait						1.5
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　　　　　<color=blue><dash=2>数日後<dash=2></color>
+Bgm	平和
+	リナ	拡大	エフェクト表					おつとめご苦労さんですっ！\nますぶん！
+CharacterOff
+	リナ		2_2
+	ディーア	通常2	1_2
+	ディーア							ああ、ただいまリナ\nいい子にしてたか？
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ	笑い						えへへっ♪\nもちろんでございますっ！
+	リナ	驚き						それで、本日はこのあと\nどのようなお仕事をされる予定で？
+	ディーア	あはは2						今日の任務は終わりだ\nあとはもうゆっくりするだけだな
+	リナ							本当ですかっ!?
+CharacterOff
+	リナ	笑い拡大	エフェクト表
+Bgm	コメディ
+	リナ							じゃあ、おやぶんは\nますぶんと遊<dash=2>\nいえ、特訓がしたいでございます！
+CharacterOff
+	リナ	笑い	2_2
+	ディーア	怪しい2	1_2
+	ディーア							遊びたいって言いかけたか今
+Tween	リナ	PunchPosition	y=50				NoWait
+Tween	リナ	MoveBy	x=30				NoWait
+	リナ	驚き						いえ！\n断じてそのようなことは！
+	ディーア	通常2						じゃあどんな特訓をしたいんだ？
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表
+	リナ	どや顔拡大	エフェクト裏
+	リナ							おやぶんは\nおにごっこがしたいでございます！
+CharacterOff
+Param	character_grayout=true
+	リナ	どや顔	2_2
+	ディーア	汗2	1_2
+	ディーア							遊びじゃないか、それ
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ	通常						良いではないですか！\nおやぶんは一日中\nお留守番だったのです！
+	リナ	笑い						おやぶんも、ますぶんと\n一緒になにかしたいでございますっ！
+	ディーア	汗2						わかった\nでも今日は疲れたから明日な
+Shake	リナ		x=5				Add
+	リナ	悲しい						えぇー！\n鬼ごっこしよーよー！\nおやぶんあそびたーいー！
+	ディーア	あはは2						はいはい、仕方ないな
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ	驚き						ほんと!?\nやってくれるの!?
+Tween	ディーア	MoveBy	x=-50				NoWait
+	ディーア	悔しい2						ぐわー、捕まったー\nオレの負けだー
+Tween	リナ	MoveBy	x=-50				NoWait
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ	悲しい						ねーえー！ もう！\nそういうのじゃなくてー！
+	ディーア	あはは2						わかったわかった、\nちょっと休憩してからな
+	リナ	悲しい						ほんと？\nぜったいだよ？
+	ディーア	通常2						ああ、約束するよ
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ	笑い						やったぁー♪\nますぶんありがと！
+	リナ	どや顔						聞いたかこぶんども！\n今日はますぶんが相手だぞ！
+CharacterOff
+	こぶん
+Se	フォーン
+Tween	こぶん	PunchPosition	y=100				Add
+	こぶん							<dash=6>♪
+StopBgm
+CharacterOff
+	リディ	驚き2	画面外_左
+Se	走る
+Tween	リディ	MoveTo	x=-90 time=2				NoWait
+Wait						1
+Bgm	平和
+	リディ	笑い2						あ、リナちゃんいた！
+CharacterOff
+	リナ	驚き
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ							<ruby=あね>姐</ruby>さん！\nお疲れさんですっ！
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	照れ2	2_2
+	リディ							えへへ、姉さん……♪
+	ディーア							やけに嬉しそうだな
+	リディ	笑い2						だってリディがお姉ちゃんになること\nあんまりないもん♪
+	リディ	驚き2						そうそう！\nちょうどリナちゃんにあげようと\n思ってたものがあってね……
+CharacterOff
+StopBgm
+	リナ	驚き						<ruby=あね>姐</ruby>さんからです？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	笑い2	2_2
+Bgm	都市
+	リディ							じゃん！\nリディお姉さん、\n奮発してアイス買っちゃいました♪
+CharacterOff
+	リナ	驚き						アイス!?
+	リナ							アイスとは、あの甘くて冷たい、\nあれでございますか!?
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	笑い2	2_2
+	リディ							うん！\nリナちゃん甘いの好きでしょ？
+CharacterOff
+	リナ	笑い						はい！ 大好きです！\n頂いて良いのですか!?
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	照れ2	2_2
+	リディ							もちろん！\nえへへ、用意しておくから\nリナちゃんはおてて洗ってきてね！
+CharacterOff
+	リナ	笑い						はーいっ♪
+Se	走る
+Tween	リナ	MoveBy	x=800 time=2				NoWait
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場の地下
+	リナ					0
+Param	character_grayout=false
+FadeIn	black					.5
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ	笑い						アイス、アイス～♪
+	リナ	どや顔						今日はこぶんたちとたくさん遊んだし\n姐さんと一緒にアイス食べながら\nごろごろしちゃおーっと♪
+	オーラ桃		エフェクト裏
+	リナ	笑い						えへへ、しあわせ～♪\nここに来てから\n楽しいことばっかりで<dash=2>
+FadeOut	black					.2
+StopBgm
+CharacterOff						0
+Param	character_grayout=false
+	集中線		エフェクト表
+	トライアルスチル475F		エフェクト裏			0
+FadeIn	black					.2
+Tween	トライアルスチル475F	MoveBy	y=-288				NoWait
+Shake	Graphics		x=5 y=5				Add
+	リナ	<Off>						ってこんなことしてる場合じゃない！
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場の地下					0
+	如くリナ	ロゴ	エフェクト表			0
+	リナ	笑い	2_3			0
+	オーラ桃		エフェクト裏			0
+	BeforeAfterリディ		g180-60500			0
+FadeIn	black					.1
+Tween	BeforeAfterリディ	PunchPosition	y=20				Add
+	　　　　　　　　　　							　
+Se	シーン切り替え
+	BeforeAfterリディ	After
+Tween	BeforeAfterリディ	RotateTo	y=1080 time=0.5				Add
+Tween	如くリナ	MoveTo	x=640
+Wait						.5
+FadeOut	black					.2
+CharacterOff						0
+Param	character_grayout=true
+	リナ	悲しい				0
+	黒グラデーション		エフェクト裏			0
+FadeIn	black					.2
+Shake	リナ		x=5				NoWait
+Bgm	緊迫
+	リナ							ますぶんや姐さんに\n良くしてもらううちに、\nすっかり気が抜けちゃってた……！
+	リナ							このままじゃだめ、\nおやぶんは強くならなきゃ……！
+CharacterOff	黒グラデーション
+	リナ	どや顔						……よし！
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ	通常						こぶんたち！
+	こぶん
+Tween	こぶん	PunchPosition	y=100				Add
+Se	フォーン
+	こぶん							<dash=6>？
+	リナ	通常						こうしちゃいられねえ！\nますぶんに頭ぁ下げにいくぞ！
+Se	フォーン
+	こぶん
+Tween	こぶん	PunchPosition	y=50				Add
+	こぶん							<dash=6>!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場1F
+Param	character_grayout=false
+	集中線		エフェクト表			0
+	リナ	拡大	エフェクト裏			0
+FadeIn	black					.5
+	リナ							ますぶん!!!!
+CharacterOff
+Param	character_grayout=true
+	ディーア	驚き2						リナ？\nどうしたんだ？
+	リナ							おやぶんは特訓が\nしたいでございます!!
+	ディーア	怪しい2						……<ruby=鬼ごっこ>特訓</ruby>なら、\n今からやるんじゃないのか？
+	リナ	通常
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ							それは特訓じゃありません！\n遊びでございます！
+	リナ	悲しい						……恥ずかしながらおやぶんは\nますぶんや姐さんのご厚意に\n甘えておりました
+CharacterOff
+	リナ	拡大	エフェクト表
+Tween	リナ	PunchPosition	y=20				NoWait
+	リナ							ですが！\nおやぶんがますぶんの元へ参ったのは\nおやぶんが強くなるため！
+	リナ	どや顔拡大						手前、腹ぁ括って\nお願いに参りました！
+CharacterOff
+StopBgm
+	リディ	驚き2						……あれ、リナちゃん\nアイス食べないの？
+Bgm	コメディ
+CharacterOff
+	リナ	どや顔
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ							ぴくっ
+	リナ	悲しい						し、しかし今は……
+	リディ	驚き2						こぶんさんたちの分もあるけど……
+	リナ	悲しい
+Shake	リナ		x=5				NoWait
+	リナ							ううう……\nなら、ほんのちょっとだけ……
+StopBgm
+	こぶん
+Se	フォーン
+Tween	こぶん	PunchPosition	y=100				Add
+	こぶん							<dash=6>？
+	リナ	驚き						…………っ！
+Bgm	緊迫
+	リナ	通常						いえ、なんでもありません！
+	リナ							そのアイスはおやぶんが強くなった\n折に、ご褒美として\nいただくことにしたいでございます！
+	リディ	笑い2						おぉ、それいいね！\nわかった、じゃあリナちゃんの\n名前書いておくね！
+CharacterOff
+	リナ	笑い
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ							ありがとうございます、姐さん……！
+	リナ	通常						<dash=2>おやぶん!!
+StopBgm
+CharacterOff
+	ディーア	通常2						わかった、\nじゃあ今度簡単な任務を<dash=2>
+CharacterOff
+Bgm	コメディ
+	リナ	拡大	エフェクト表					今すぐがよいです！
+Tween	リナ	ScaleBy	x=1.1 y=1.1				Add
+Tween	リナ	MoveBy	y=-38				Add
+Tween	リナ	PunchPosition	y=50				Add
+	リナ							あとチョー厳しいやつがよいです!!
+Tween	リナ	ScaleBy	x=1.1 y=1.1				NoWait
+Tween	リナ	MoveBy	y=-38				NoWait
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ							冥獣級災害くらいのやつがよいです！
+CharacterOff
+	リナ		2_2
+	ディーア	汗2	1_2
+	ディーア							冥獣なんてそんな\n都合よくいるものじゃないぞ
+	リナ	悲しい						むぅ……
+	ディーア	あはは2						わかった、\nそんなに言うなら難しいのにするか
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ	笑い						やったぁ！
+StopBgm
+	ディーア	通常2						その前にまずは魔剣としての力を\n十全に発揮できるかどうか\n試してみよう
+Tween	リナ	MoveBy	x=50				NoWait
+Bgm	絶望
+	リナ	悲しい						…………え？
+	ディーア							リナはまだ\nアンロックしたばかりだからな
+	ディーア							それに、リナはサクラメントと同じ\n"煌の十天"<dash=2>
+	ディーア							因果を捻じ曲げる奇跡を\n起こす魔剣だろう？
+Tween	リナ	MoveBy	x=20				NoWait
+Tween	リナ	PunchPosition	y=20				NoWait
+	リナ	悲しい						…………！
+	ディーア	驚き2						そんな奇跡を扱うんだ\nいきなり敵と戦うより<dash=2>\n……って、リナ？ どうした？
+	リナ	悲しい						あの……やっぱり、\n"奇跡"を、使うのですか？
+	ディーア	通常2						ああ、必要になればな
+	リナ	悲しい						…………っ
+	ディーア	驚き2						……リナ、大丈夫か？
+StopBgm
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ	驚き						……は、はいっ！\n大丈夫でございますっ！
+	リナ	通常						任せてください！\nアラストル組の力を\nますぶんに見せてあげます！
+FadeOut	black					.5
+Bg	草原A(夜)
+StopBgm
+CharacterOff
+	リナ	悲しい	2_2
+	ディーア	通常2	1_2
+Wait						.5
+FadeIn	black					.5
+Bgm	緊迫
+	ディーア							……キノコリオンの\n群生地はこのあたりだな
+	ディーア							準備はいいか、リナ？
+CharacterOff
+	リナ	通常						も、もちろんでございます！
+	こぶん
+Se	フォーン
+Tween	こぶん	PunchPosition	y=100				Add
+	こぶん							<dash=6>？
+	リナ	驚き						…………！
+	リナ	笑い						……ああ、大丈夫だ
+	リナ							おやぶんは、こぶんたちが\n平和に暮らせる「くに」を作るんだ
+	リナ							その大変さに比べれば<dash=2>
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表
+Bgm	バトル
+	リナ	拡大	エフェクト裏
+	リナ							<dash=2>これくらいの抗争、\nなんてことねえ！
+	リナ							いくぞこぶんども！\nキノコ組にカチコミだ！ かかれ!!
+CharacterOff	リナ
+	こぶん
+Se	フォーン
+Tween	こぶん	PunchPosition	y=100				Add
+	こぶん							<dash=6>!!
+FadeOut	white					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*G_475_02
+EndIf
+EndScenario
+
+# G_475_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	草原A(夜)
+CharacterOff						0
+	リナ	悲しい	2_2			0
+	ディーア	怒り2	1_2			0
+FadeIn	black					.5
+Shake	リナ		x=5				NoWait
+	リナ							…………はぁ、はぁ
+	ディーア	驚き2						……大丈夫か、リナ？
+	リナ	笑い						はい！ 大丈夫です！
+	ディーア	怒り2						……そうか
+StopBgm
+	ディーア	通常2						よし、今日はここまでにしよう
+Tween	リナ	PunchPosition	y=50				NoWait
+Bgm	絶望
+	リナ	驚き						え？\nでも、まだキノコリオンを\n倒しただけで<dash=2>
+	ディーア	通常2						ああ、それでも初戦にしては\n十分な戦果だ
+	ディーア							続きはまた今度にしよう\nもう時間も遅いしな
+Tween	リナ	MoveBy	x=50				NoWait
+	リナ	悲しい						でも……
+CharacterOff
+StopBgm
+Param	character_grayout=false
+	集中線		エフェクト表
+	こぶん
+Se	フォーン
+Tween	こぶん	PunchPosition	y=100				Add
+	こぶん							<dash=6>!!
+CharacterOff
+Param	character_grayout=true
+	リナ	驚き						……ん？\nうしろ？
+	ディーア	悔しい2						この気配、キノコリオン……？\nだが、それにしては……
+Param	character_grayout=false
+	リナ
+	キノコリオンの影		エフェクト表
+Se	火事
+Shake	Graphics		x=5 y=5				NoWait
+Tween	キノコリオンの影	MoveBy	y=1000 time=5	easeOutQuad			NoWait
+	リナ	悲しい						……な、なんかでかくない？
+CharacterOff
+Param	character_grayout=true
+Bgm	緊迫
+	キノコリオン	巨大	エフェクト表					<size=35>ノコーーーーッ!!!!</size>
+CharacterOff
+	こぶん
+Se	フォーン
+Tween	こぶん	PunchPosition	y=100				Add
+	こぶん							<dash=4>!! <dash=2>!!
+	リナ	驚き						まさか、こいつが\nキノコ組の頭<dash=2>!!
+	ディーア	悔しい2						マズいな……キノコリオンとはいえ、\nここまで魔力を溜め込んだ個体は\n珍しい
+	ディーア							今戦うのは良くないな……\nリナ、逃げるぞ！
+	リナ	悲しい						戦います！
+	ディーア	驚き2						……リナ？
+	リナ	悲しい						この程度で音を上げていたら、\nいつまで経ってもおやぶんは\n強くなれません！
+	リナ							それに、\nおやぶんはおやぶんなのです！
+	リナ							こぶん衆の前でしっぽを巻いて\n逃げることなど\nあってはならないのです！
+	キノコリオン	巨大	エフェクト裏2			3
+	黒グラデーション		エフェクト裏
+	リナ	通常						アラストル組の悲願のため、\nこぶん衆の「くに」のため……
+	リナ							おやぶんは、これ以上\n甘えるわけには<dash=2>
+CharacterOff
+	ディーア	本気2						危ない、避けろリナ<dash=2>！
+CharacterOff
+	リナ
+	キノコリオン	巨大	エフェクト裏
+Tween	キノコリオン	PunchPosition	y=5				NoWait
+	キノコリオン	巨大						ノコーーッ!!
+	リナ	悲しい						<dash=4>ぇ
+StopBgm
+FadeOut	black					0
+Se	抜刀
+Wait						.5
+Se	ジャストガード
+CharacterOff
+	キノコリオン	巨大	エフェクト裏
+Wait						1
+FadeIn	black					1
+Shake	キノコリオン		x=10				NoWait
+	キノコリオン	巨大						ノ、ノコ…………
+CharacterOff
+	リナ	悲しい	2_2
+	ディーア	悔しい2
+Shake	ディーア		x=5				NoWait
+Bgm	絶望
+	ディーア							……危なかったな
+	リナ	悲しい						ま、ますぶん……!?\nお、お怪我は<dash=2>
+Tween	ディーア	MoveTo	x=-90				NoWait
+	ディーア	悔しい2						大丈夫だ\nそれより、今は戦うべきじゃないんだ\n我慢してくれ
+Tween	リナ	MoveBy	x=50				NoWait
+	リナ	悲しい						…………っ
+	リナ							……それは、\nおやぶんが弱いからですか
+	ディーア	悔しい2						違う、そうじゃない
+	リナ							では何故<dash=2>！
+	ディーア	怒り2						奇跡の力を、\nリナが恐れているからだ
+	リナ							<dash=2>え？
+	ディーア							リナの力は因果を捻じ曲げ、\n生命を生み出す奇跡
+	ディーア							しかも、<ruby=ランクA>基準</ruby>に満たないとはいえ\n魔剣に近しい<ruby=こぶんたち>魔力結晶体</ruby>を\n生み出す力だ
+	ディーア	悔しい2						……確かに、人の手に余る\n危険な"奇跡"だよ
+	ディーア	怒り2						だからリナは、それを無意識に\n抑え込もうとしている\n……違うか？
+	リナ	悲しい						…………!!
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+Bg	酒場1F					0
+CharacterOff						0
+	ディーア	通常2	1_2			0
+	リナ	悲しい	2_2			0
+FadeIn	white					.3
+	リナ							あの……それってやっぱり、\n"奇跡"を、使うのですか？
+FadeOut	white					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	草原A(夜)					0
+CharacterOff						0
+	ディーア	怒り2				0
+FadeIn	white					.3
+	ディーア	怒り2						だから、今は戦うべきじゃない\n恐れを抱えて本気を出せないのなら\n守りたいものも守れないからな
+	黒グラデーション		エフェクト表
+	リナ	悲しい						…………そう、ですね
+	リナ							……確かに、おやぶんは\nイモを引いているのかもしれません
+	リナ							おやぶんがもっと強ければ……\nおやぶんにもっと勇気があれば、\nこんな<dash=2>
+CharacterOff
+StopBgm
+	ディーア	通常2						いや、そうじゃない\nリナは強いし、勇気もある
+	リナ	悲しい						え……？
+Bgm	凱旋
+	ディーア	通常2						リナは自分の力を正しく理解している\nそしてその力に\n責任を持とうとしている
+	ディーア							こぶんのために「くに」を\n作ろうとするのだってそうだ
+	ディーア							因果を捻じ曲げ奇跡を起こした責任、\n生命を生み出した者の責任を、\nリナは果たそうとしている
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff
+	リナ	笑い
+FadeIn	white					.3
+	リナ							<dash=2>おやぶんは、こぶんたちが\n平和に暮らせる「くに」を作るんだ
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	こぶん					0
+FadeIn	white					.3
+Se	フォーン
+Tween	こぶん	PunchPosition	y=100				Add
+	こぶん							<dash=6>♪
+	リナ	悲しい						…………っ
+	ディーア	通常2						リナは十分強いよ\nそして賢く、勇敢な女の子だ
+	ディーア	怒り2						だけど、リナは一つ勘違いをしている
+	リナ	悲しい						……え？
+	ディーア	怒り2						おやぶんとして、\nみんなを率いるのに必要なのは\n力の強さじゃない
+	ディーア							本当に必要なのは、\n仲間を信じる勇気だ
+	ディーア	悔しい2						……一人の手のひらで救える命には\n限界があるんだ
+	ディーア							そのやり方では、\nいつか大切なものを\n取りこぼしてしまう
+	ディーア	通常2						だから、共に戦う仲間が必要なんだ\nオレにも、お前にもな
+	リナ	驚き						共に戦う、仲間<dash=2>
+	ディーア	通常2						オレはリナを認めてるし、\nリナの本気を信じてる
+	ディーア							<dash=2>あとは、リナが\n一歩を踏み出せるかどうかだ
+	リナ	驚き						…………!!
+Param	character_grayout=false
+	白背景		エフェクト表			1
+Wait						1
+	リナ							…………そっか
+	リナ							おやぶんが未熟だから、\nますぶんに認めて\nもらえないのではなく
+	リナ							心を閉ざしていたのは、\nおやぶんの方だったのですね
+StopBgm
+CharacterOff	白背景					1
+StopBgm						.5
+Wait						.5
+Param	character_grayout=true
+Bgm	結婚
+	リナ	悲しい						…………そう、ですね
+	リナ							おやぶんは勘違いをしてました
+	リナ							奇跡の力は強力だから、\n他人に託すべきじゃないって思ってた
+	リナ							それに、魔剣と<ruby=こぶん>魔剣もどき</ruby>の\n「くに」づくりに協力してくれる人\nなんていないと思ってた
+	リナ	どや顔						でも、ますぶんがおやぶんを\n信じてくれるなら<dash=2>
+	リナ	通常						<dash=2>約束してくれますか
+	リナ							仁義を、人情を欠くことなく、\nこの奇跡を、こぶん達を、\n自分が正しいと信じたことに使うと
+	ディーア	笑い2						……ああ、もちろんだ
+CharacterOff
+Param	character_grayout=false
+	白背景		エフェクト表2			0
+	トライアルスチル475E		エフェクト表
+CharacterOff	白背景					.2
+	リナ							ならば<dash=2>
+	トライアルスチル475C		エフェクト表
+Bgm	風属性バトル
+	リナ							アラストル組の"奇跡"を、\nますぶんに託します！
+CharacterOff
+	ディーア	本気2						ああ……天煌の輝、\nアラストル=リナのマスターとして\n承った！
+CharacterOff
+Se	光1
+	オーラ青		エフェクト表
+	キノコリオン	巨大	エフェクト裏					<size=40>ノコーーーーッ!!!!</size>
+CharacterOff
+	ディーア	怒り2						<dash=2>ぶっつけ本番だぞ\nいけるか、リナ？
+CharacterOff
+Param	character_grayout=false
+	トライアルスチル475C		エフェクト表
+	リナ							任せてください、ますぶん！
+	トライアルスチル475B		エフェクト表
+	リナ							いくぞこぶん共！
+	トライアルスチル475A		エフェクト表
+	リナ							アラストル組の力、\nますぶんに見せてやれ！
+	トライアルスチル475D		エフェクト表
+	リナ							天煌の輝アラストル=リナ\nいざ<dash=2>!!
+FadeOut	white					1
+CharacterOff
+	　　　　　　　　　　
+Bg	酒場1F
+StopBgm						1
+Wait						3
+Param	character_grayout=false
+FadeIn	white					.5
+	　　　　　　　　　　							\n　　　　　 　<color=blue><dash=2>後日<dash=2></color>
+Bgm	都市
+	集中線		エフェクト表
+	リナ	どや顔拡大	エフェクト裏					お控えなすって!!
+CharacterOff
+	リナ	どや顔						手前、姓をアラストル、\n名をリナと申しまして！
+CharacterOff
+Param	character_grayout=true
+	ディーア	通常2	1_2
+	リディ	驚き2	2_2
+	リディ							あれ、リナちゃん何してるの？
+	ディーア	通常2						一緒に戦う仲間として、\n他の魔剣とも仲良くなって\nおきたいんだって
+	リディ	照れ2						ああ、それでもっかい\n仁義を交わしてるんだ
+	リディ	驚き2						……でも、あれ大丈夫なの？
+	ディーア	驚き2						ん？
+FadeOut	black					.3
+CharacterOff
+	フォリヴォラ	私服
+Bgm	コメディ
+FadeIn	black					.3
+	フォリヴォラ							<speed=0.1>おーーー<ruby=あーーねーー>姐</ruby>ーーーーぇーーーーさーーーーんーーーこーーーそーーーーーーー</size>
+	フォリヴォラ							<speed=0.1>おーーーーーひーーーーかーーーーえーーーなーーーすーーーってーーーーー</size>
+	リナ	驚き
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ							はわっ……
+	リナ	どや顔						て、手前、新参者にございます！\nぜひともお姐ぇさんから\nおひかえなすって……
+	フォリヴォラ	私服						<speed=0.1>てーーまーーえーー、のーーーんーーびーーーりーーーもーーーのーーにーーごーーーざーーー…………</size>
+	タケミカヅチ	私服	画面外_右
+Tween	タケミカヅチ	MoveTo	x=50				NoWait
+Wait						.5
+FadeOut	white					.1
+Se	打1
+Tween	フォリヴォラ	MoveBy	x=-800				NoWait
+FadeIn	white					.1
+	タケミカヅチ							長ーーーーいっ!!!!
+	フォリヴォラ							<speed=0.1>あーーうーーーー…………？</speed>
+CharacterOff
+	リナ	驚き
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ							た、タケミの姐さん!?
+	タケミカヅチ	私服
+Tween	タケミカヅチ	PunchPosition	y=50				NoWait
+	タケミカヅチ							仲良くなりたいならもっと\n手っ取り早い方法があるよ!!
+	リナ	驚き						手っ取り早い方法、でございますか？
+	タケミカヅチ	私服						そう、その名も<dash=2>相撲よ!!
+	リナ							すもう……？\nすもうってなに？
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表
+	タケミカヅチ	私服						それはもう、魔剣同士の真剣勝負！\n身体と身体のぶつかり合いよ！
+	タケミカヅチ							お互いにぶつかりあったほうが\nわかり合えるってもんじゃない？
+CharacterOff
+Param	character_grayout=true
+	リナ	笑い						おぉ……！\n取っ組み合いのタイマンって\nことですね！ 楽しそう……！
+	リナ	驚き						はっ！\nしかし、このあとますぶんとの\n特訓が……
+FadeOut	black					.3
+	リナ	悲しい	画面外_右
+Se	走る
+Tween	リナ	MoveTo	x=90 time=1.5				NoWait
+FadeIn	black					.3
+	リナ							ますぶーん！
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							ん、どうしたんだ？
+CharacterOff
+	リナ	悲しい						お願いがあるんだけど……\nちょっとだけタケミ姐さんと\n遊んじゃダメ……？
+CharacterOff
+	ディーア	笑い2	1_2
+	リディ	笑い2	2_2
+	ディーア							ああ、別に構わないぞ\nその代わり、その後で\n特訓もするからな
+CharacterOff
+	リナ	笑い						やったーっ♪\nますぶんありがとっ♪
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	照れ2	2_2
+	リディ							あ、そうだ！\n後でアイスもあるよ？
+CharacterOff
+	リナ	驚き
+Tween	リナ	PunchPosition	y=50				NoWait
+	リナ							そうだった！
+	リナ	笑い						えへへ、じゃあ\n特訓終わったあとに食べるね！
+Se	ピューン
+Tween	リナ	MoveBy	x=800				NoWait
+Wait						1.5
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	照れ2	2_2
+	リディ							……えへへ、\n仲良くなれたみたいでよかったね！
+	ディーア							ああ、そうだな
+FadeOut	black					.3
+CharacterOff
+	リナ	笑い
+FadeIn	black					.3
+	リナ							こぶんども！\nアラストル組の力、\nタケミ姐さんに見せてやるぞ！
+	こぶん
+Se	フォーン
+Tween	こぶん	PunchPosition	y=100				Add
+	こぶん							<dash=4>♪
+	タケミカヅチ	私服						よぉーし、\n全員まとめてかかってこーい！
+CharacterOff
+	リナ	笑い拡大	エフェクト表					かかれーっ!!
+FadeOut	white					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*G_475_01
+EndIf
+EndScenario

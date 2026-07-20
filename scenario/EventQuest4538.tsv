@@ -1,0 +1,878 @@
+# E_4538_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+Param	character_grayout=true
+	リディ	笑い2
+FadeIn	black					1
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							おっいわいー♪ おっいわいー♪\n今日はみんなでお祝ーい♪
+Tween	リディ	MoveBy	x=25				NoWait
+	リディ	照れ2						えへへ、たのしみだなぁ♪\nマスターがサプライズも用意して\nくれてるって言うし♪
+Tween	リディ	MoveBy	x=-50				NoWait
+	リディ	驚き2						どんなサプライズなんだろう？\nおいしいお菓子とか、キレイなドレス\nそれとも<dash=2>
+Tween	リディ	PunchPosition	x=25				NoWait
+	リディ	照れ2						もしかして、マスターから……！
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						って、妄想してたらダメだよね！\nリディはまだアルバイトの途中だもん
+	リディ	通常2						まずはちゃんとお仕事をして、\nそれからたくさん楽しまないと♪
+	リディ	驚き2						そろそろ次のお客さんが<dash=2>
+Se	ドア開く
+FadeOut	black					.3
+CharacterOff
+Wait						.5
+Param	character_grayout=true
+	リディ	驚き2	2_2			0
+	バールのようなもの	通常4	画面外_左			0
+FadeIn	black					.3
+Tween	バールのようなもの	MoveTo	x=-90				NoWait
+	バールのようなもの							リディちゃーん！\nやったよ、やったぁー!!
+	リディ							ばよのちゃん！\nなにか良いことがあったの？
+	バールのようなもの							うん♪\nばよの、ラジオをやってるでしょ？
+	リディ	通常2						うん！\nリディも毎回ちゃんと聞いてるよ！
+Tween	バールのようなもの	PunchPosition	y=50				NoWait
+	バールのようなもの							そのラジオで……なんと！\n特別ゲストとの対談が決定したの！
+	リディ	驚き2						特別ゲスト？
+	バールのようなもの							ふっふっふ♪\n呼ぶのがとーっても難しい、\nすごい人なんだって！
+	バールのようなもの							つまり！\nばよのはそれだけ注目されてる！\n魔界ナンバー１パーソナリティ♪
+Tween	バールのようなもの	PunchPosition	y=50				NoWait
+	バールのようなもの							この対談が成功したら\nばよのとラジオの人気も\nもっと盛り上がるはず♪
+Tween	バールのようなもの	MoveBy	x=10				NoWait
+	バールのようなもの							だからね、リディちゃん！\nばよのの練習につきあって！
+	リディ	驚き2						練習？
+	バールのようなもの							そう！\n相手からどんな質問をされても\nちゃんと答えられるように♪
+Tween	バールのようなもの	MoveBy	x=10				NoWait
+	バールのようなもの							本当に大事なチャンスなの！\nお願い！
+	リディ	通常2						うん、もちろん手伝うよ！\nリディが質問すれば良いの？
+	バールのようなもの							そうそう！\nありがちな質問をまとめておいたから\nここからお願い！
+	リディ	笑い2						はーい！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Param	character_grayout=false
+	　　　　　　　　　　
+StopBgm
+	リディ	怒り2				0
+	オンエア		エフェクト裏
+FadeIn	black					.5
+	リディ							それじゃあ、いくね？
+Se	スポットライト
+Tween	オンエア	MoveBy	y=-350 time=0.5	easeOutBounce			NoWait
+	黒グラデーション		エフェクト裏2
+Bgm	魔剣の日常
+	リディ	驚き2						まずは……\nばよのさん、あなたの趣味は？
+	バールのようなもの	通常4						ラジオとコレクション集め♪\n特に枕カバーにはこだわりがあるよ
+	リディ	通常2						へぇー！\nどんな枕カバーが好きなの？
+	バールのようなもの	通常4						えへへへぇ♪\nそれはもちろん暑い夏の間の\nマスターの使い古し<dash=2>
+	バールのようなもの							じゃなくて！\n大切な人にもらったプレゼントの\n枕カバーが大好きだよ♪
+	リディ	怒り2						もらったんじゃなくて、\nこっそり取ってきちゃったんじゃ
+	バールのようなもの	通常4						こ、細かいことはいいの！\n次の質問ちょうだい！
+	リディ	驚き2						それじゃあ……\nばよのちゃんの最近の恋愛事情で\n面白いことがあったら教えて！
+	バールのようなもの	通常4						えー？ それ聞いちゃう？\nばよのに聞いちゃうー？
+	リディ	笑い2						すごく聞いてほしそうだね……
+CharacterOff	リディ
+	集中線		エフェクト表
+	イベントスチル453804	拡大	エフェクト表					なんと！\nばよのはとうとう\nマスターのカノジョになったの！				「カノジョ」表記統一
+StopBgm
+CharacterOff	黒グラデーション
+CharacterOff	イベントスチル453804
+CharacterOff	集中線
+Se	ピューン
+Tween	オンエア	MoveBy	y=350 time=0.5	easeInBack			NoWait
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+Bgm	コメディ
+	リディ							えぇええええ!?
+CharacterOff	オンエア
+	リディ	悔しい2						ちょ、ちょっとなにそれ！\nそんなの聞いてないよ？
+	バールのようなもの	通常4						ラジオまでのオフレコ状況だから\nみんなには内緒だよ♪
+	バールのようなもの							っていうふうに\nラジオで爆弾発言したいなー！
+	バールのようなもの							ばびのが押しかけ彼女してるし\nばよのも特別ゲストとラジオの力で\n既成事実を……！
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						ラジオで間違った情報を広げたら\nだーめー！
+	リディ	悔しい2						特別ゲストさんだって、\nそんな対談になったら迷惑だよ！
+	バールのようなもの	通常4						た、たしかに……！\nすごく偉い人って聞いてるし
+	リディ	驚き2						そういえば\n特別ゲストさんってどんな人なの？
+	バールのようなもの	通常4						えーっと、\nラジオのスタッフさんからは\n当日まで内緒って言われてるけど
+	バールのようなもの							なんでも、すごく偉くて<dash=2>
+FadeOut	black					.2
+CharacterOff						0
+Bg	凍りついた神殿城					0
+FadeIn	black					.2
+	バールのようなもの	<Off>						冷たいお城の中で引きこもってて……
+	イベントスチル453801		エフェクト表			0						ティーパーティー：耳まわり
+	バールのようなもの	<Off>						眼帯をして、ウサギのお耳で……
+	イベントスチル453802		エフェクト表			0						ティーパーティー：カップまわり
+	バールのようなもの	<Off>						あとはお茶会が大好きって<dash=2>
+CharacterOff
+Param	character_grayout=true
+Bg	酒場1F
+	リディ	驚き2						それってもしかして\nアリス様のことなんじゃ……？
+	バールのようなもの	通常4						…………
+CharacterOff
+	イベントスチル453804	拡大	エフェクト表					ひぃ…………っ!?
+CharacterOff
+	リディ	驚き2	2_2
+	バールのようなもの	通常4	1_3
+Tween	バールのようなもの	MoveTo	x=-90				NoWait
+	バールのようなもの							ど、どうしようリディちゃん！\nアリス様との対談とか怖いよぉ!!				アリス様とのラジオはもう何度もやっているはずなので、\n印象に齟齬がないように調整しました。
+	バールのようなもの							きっとまた試練とか言って\n無茶振りされたりするんだぁ……!!
+	バールのようなもの							それで次の日にはきっと、\nいらない家具として\n粗大ごみに出されるんだ……
+	バールのようなもの							ありがとうリディちゃん、\n今まで楽しかった……よ……
+	リディ	悔しい2						だ、大丈夫だよ！\nちゃんとしたらアリス様だって\n怒らない……はず！
+	バールのようなもの							「はず」じゃ安心できないー！
+	バールのようなもの							うぅ……せっかく\nラジオでナンバーワンになる\nチャンスだったのに
+	リディ	悔しい2						げ、元気だして！\nそうだ、\nリディと一緒にパーティー行こうよ！				ここでパーティー会場に行く、というのを明確にしないと\nワイプ後の展開が唐突に感じるので、\n一部表現を調整しました。
+	バールのようなもの							パーティー？
+	リディ	笑い2						うんっ！\n今日はみんなでお祝いするんだって！
+	リディ	通常2						それに気分転換したら、\nアリス様を楽しませるアイディアも\n出てくるかも！
+	バールのようなもの							リディちゃん、やさしい……！
+	リディ	照れ2						えへへ♪\nでもカノジョは譲らないからね？
+FadeOut	black
+StopBgm
+CharacterOff
+Bg	カジノ
+	リディ	驚き2
+Wait						3
+Bgm	結婚
+FadeIn	black
+	リディ							わぁー♪\nここがパーティー会場なんだ♪
+	リディ	照れ2						こんなにたくさんのごちそう、\nリディ、見たこともないよ♪
+CharacterOff
+Se	歩く
+	ディーア	通常2				.5		驚いたか、リディ？
+StopSe
+CharacterOff
+	リディ	照れ2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							マスター！
+	ディーア	笑い2						このパーティーは\nリディのために開いたんだ
+	ディーア	通常2						オレの大切な相棒のために
+	リディ	照れ2						マスター……
+	ディーア	通常2						これからも\nリディと一緒に歩いていきたいんだ
+	リディ	笑い2						リディも！\nリディもおんなじ気持ちだよ♪
+	ディーア	あはは2						それじゃあ、\n主役の席はあっちだぞ！
+	ディーア	通常2						プレゼントもごちそうも\n好きなだけ楽しんでくれ、リディ♪
+FadeOut	white					.5
+CharacterOff						0
+	魔剣グラム					0
+FadeIn	white					.5
+	魔剣グラム							おめでとう
+	レヴァ							おめでとう！
+	バールのようなもの	通常4						おめでとう、リディちゃん♪
+FadeOut	white					.3
+CharacterOff						0
+Bg	黒背景					0
+Param	character_grayout=false
+	イベントスチル4538BG		エフェクト裏			0
+FadeIn	white					.3
+	リディ	<Off>						ああ、しあわせだなぁ
+	リディ	<Off>						みんながいて、\n大好きなマスターがいてくれて
+	リディ	<Off>						マスター、いつもありがとう♪
+CharacterOff						0
+	TV-1		effect_b			0
+	TV-2		effect_a			0
+Se	ホログラム
+Tween	TV-1	ScaleBy	y=0.01 time=0.1
+CharacterOff	TV-1					0
+Tween	TV-2	ScaleBy	x=0.01 y=0.1 time=0.2				NoWait
+Wait						.1
+CharacterOff	TV-2
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_4538_02
+EndIf
+EndScenario
+
+# E_4538_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+Param	character_grayout=false
+	リディ	笑い2
+FadeIn	black					1
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							おっいわいー♪ おっいわいー♪\n今日はみんなでお祝ーい♪
+Tween	リディ	MoveBy	x=15				NoWait
+	リディ	照れ2						えへへ、たのしみだなぁ♪\nマスターがサプライズも用意して\nくれてるって言うし♪
+Tween	リディ	MoveBy	x=-30				NoWait
+	リディ	驚き2						どんなサプライズなんだろう？\nおいしいお菓子とか、キレイなドレス\nそれとも<dash=2>
+Tween	リディ	MoveBy	y=15				NoWait
+	リディ	照れ2						もしかして、マスターから……！
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						って、妄想してたらダメだよね！\nリディはまだアルバイトの途中だもん
+	リディ	通常2						まずはちゃんとお仕事をして、\nそれからたくさん楽しまないと♪
+	リディ	驚き2						そろそろ次のお客さんが<dash=2>
+Se	ドア開く
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=true
+	白櫃	悲しい	画面外_右_b			0
+	リディ	驚き2	1_2			0
+Wait						.5
+FadeIn	black					.3
+Tween	白櫃	MoveTo	x=90				NoWait
+	白櫃							リディちゃん……ぐすん
+	リディ							白櫃ちゃん、どうしたの!?
+	白櫃	悲しい						私ったら、\n黒櫃ちゃんにとんでもないことを\nしちゃって……
+Shake	白櫃		x=5				NoWait
+	白櫃							もう、仲直りできないかも……
+Tween	リディ	MoveBy	x=10				NoWait
+	リディ	悔しい2						大丈夫だよ、白櫃ちゃん！\n黒櫃ちゃんならわかってくれるって
+	リディ	通常2						まずはリディに話してみて？\n黒櫃ちゃんに何をしちゃったのか
+	白櫃							ぐすん……\nリディちゃん、ありがとうございます
+Shake	白櫃		x=5				NoWait
+	白櫃							実は……
+	リディ	怒り2						うんうん！
+Tween	白櫃	PunchPosition	y=50				NoWait
+StopBgm
+	白櫃	悲しい						たくさんの人がいる前で、\n黒櫃ちゃんを\n天才って言っちゃったんです！
+Bgm	コメディ
+	リディ	驚き2						……ん？
+	白櫃							本当は変態って言うつもりだったのに\n間違えちゃって……！
+	白櫃							黒櫃ちゃんはすごい変態なのに\n天才だなんて恥ずかしい呼び方したら\n怒っちゃいますよぉ！
+	リディ	驚き2						えーっと……
+	リディ							そ、それはどうかな？\n黒櫃ちゃんもよろこんでいるかも
+	白櫃	悲しい						そんなわけありませんよぉ！
+	白櫃							あの大変態な黒櫃ちゃんを\n人前で天才なんて呼んだらダメです
+	白櫃							私がそんなふうに呼ばれたら、\n恥ずかしくてお外を歩けません
+Shake	白櫃		x=5				NoWait
+	白櫃							うぅ……\nなんであんな言い間違いを……
+Tween	リディ	MoveBy	x=-10				NoWait
+	リディ	悲しい2						たぶん、\n黒櫃ちゃんは喜んでいるよね……
+	リディ							やっと白櫃ちゃんに\n天才って呼んでもらえたとかで……
+	リディ	悔しい2						でも白櫃ちゃんは\nずっと誤解しているみたいだし\nどうしよう？
+Tween	白櫃	PunchPosition	y=50				NoWait
+	白櫃	通常						こうなったら……！
+	リディ	驚き2						ふえ？
+	白櫃							リディちゃん！\n私、決めました……！
+CharacterOff
+Param	character_grayout=false
+	集中線		エフェクト表2
+	白櫃	通常拡大	エフェクト表					黒櫃ちゃんが天才じゃなくて\nすごい変態だってわかるように
+	白櫃							変態って大きく書かれた服を\nプレゼントします……!!
+	白櫃	照れ拡大						それで私も同じ服を着て、\n黒櫃ちゃんがどんなに変態かって\nアピールするんです
+	白櫃							今すぐ作って、仲直りを<dash=2>
+CharacterOff
+Param	character_grayout=true
+	白櫃	悲しい	2_2
+	リディ	驚き2	1_2
+Tween	リディ	PunchPosition	y=50				NoWait
+Tween	リディ	MoveBy	x=-20				NoWait
+	リディ							わあああああ！\nちょっと待って、落ち着いてー！
+	リディ	怒り2						まずは深呼吸！\nはい、すーはー……！
+	白櫃							すーはー……！				むね拡大したい
+	リディ	通常2						白櫃ちゃん、安心して？
+	リディ	笑い2						黒櫃ちゃんは呼び間違えたくらいで\n白櫃ちゃんに怒ったりしないよ？
+	リディ	通常2						だって大切な妹なんだもん、\nちゃんと話し合って、謝ったら\n許してくれるはずだよ
+	リディ	照れ2						リディだって\nマスターにしょっちゅう怒ってるけど\nすぐに仲直りできるもん
+	リディ	通常2						大切な人だったら、\n相手にも気持ちは伝わってるはず♪
+	リディ	笑い2						だから白櫃ちゃん、\n黒櫃ちゃんに会いに行ってあげて
+	白櫃	驚き						リディちゃん……！
+	白櫃	嬉しい						はい、わかりました！
+	白櫃							黒櫃ちゃんとお話して、\n仲直りをしてきますね♪
+	白櫃							ありがとうございました！
+Se	走る
+Tween	白櫃	MoveBy	x=800 time=3				NoWait
+	白櫃							黒櫃ちゃーん！\n天才なんて言ってごめんなさーい！				画面外に出て
+	白櫃							黒櫃ちゃんは\nすごくすごい大変態だよぉー！
+Tween	リディ	MoveTo	x=0				NoWait
+	リディ	驚き2						……大丈夫かなぁ？
+	リディ	通常2						でも、姉妹がいるのって\nちょっとだけうらやましいかも
+	リディ	照れ2						リディも早く\n大切なみんなに会いに行こっと♪
+Se	走る
+Tween	リディ	MoveBy	x=-800 time=3				NoWait
+Wait						1.5
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+	リディ	驚き2				0
+Bg	カジノ					0
+FadeIn	black					.5
+Tween	リディ	PunchPosition	y=50				NoWait
+Bgm	結婚
+	リディ							わぁー♪\nここがパーティー会場なんだ♪
+	リディ	照れ2						こんなにたくさんのごちそう、\nリディ、見たこともないよ♪
+CharacterOff
+Se	歩く
+	ディーア	通常2				.5		驚いたか、リディ？
+StopSe
+CharacterOff
+	リディ	照れ2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							マスター！
+	ディーア	笑い2						このパーティーは\nリディのために開いたんだ
+	ディーア	通常2						オレの大切な相棒のために
+	リディ	照れ2						マスター……
+	ディーア	通常2						これからも\nリディと一緒に歩いていきたいんだ
+	リディ	笑い2						リディも！\nリディもおんなじ気持ちだよ♪
+	ディーア	あはは2						それじゃあ、\n主役の席はあっちだぞ！
+	ディーア	通常2						プレゼントもごちそうも\n好きなだけ楽しんでくれ、リディ♪
+FadeOut	white					.5
+CharacterOff						0
+	ぎんいろ					0
+FadeIn	black					.5
+	ぎんいろ							おめでとう
+	黒櫃							おめでとう！
+	白櫃	嬉しい						おめでとう、リディちゃん♪
+FadeOut	white					.3
+CharacterOff						0
+Bg	黒背景					0
+Param	character_grayout=false
+	イベントスチル4538BG		エフェクト表			0
+FadeIn	white					.3
+	リディ	<Off>						ああ、しあわせだなぁ
+	リディ	<Off>						みんながいて、\n大好きなマスターがいてくれて
+	リディ	<Off>						マスター、いつもありがとう♪
+CharacterOff						0
+	TV-1		effect_b			0
+	TV-2		effect_a			0
+Se	ホログラム
+Tween	TV-1	ScaleBy	y=0.01 time=0.1
+CharacterOff	TV-1					0
+Tween	TV-2	ScaleBy	x=0.01 y=0.1 time=0.2				NoWait
+Wait						.1
+CharacterOff	TV-2
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_4538_03
+EndIf
+EndScenario
+
+# E_4538_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+Param	character_grayout=false
+	リディ	笑い2
+FadeIn	black					1
+	リディ							おっいわいー♪ おっいわいー♪\n今日はみんなでお祝ーい♪
+	リディ	照れ2						えへへ、たのしみだなぁ♪\nマスターがサプライズも用意して\nくれてるって言うし♪
+	リディ	驚き2						どんなサプライズなんだろう？\nおいしいお菓子とか、キレイなドレス\nそれとも<dash=2>
+	リディ	照れ2						もしかして、マスターから……！
+	リディ	怒り2						って、妄想してたらダメだよね！\nリディはまだアルバイトの途中だもん
+	リディ	通常2						まずはちゃんとお仕事をして、\nそれからたくさん楽しまないと♪
+	リディ	驚き2						そろそろ次のお客さんが<dash=2>
+StopBgm
+Se	雨	TRUE
+CharacterOff						0
+	酒場ノイズ1		エフェクト表			0
+Wait						.02
+	酒場ノイズ2		エフェクト表			0
+Wait						.02
+	酒場ノイズ3		エフェクト表			0
+Wait						.02
+	酒場ノイズ4		エフェクト表			0
+Wait						.02
+	酒場ノイズ5		エフェクト表			0
+Wait						.02
+	酒場ノイズ6		エフェクト表			0
+Wait						.02
+	酒場ノイズ7		エフェクト表			0
+Wait						.02
+	酒場ノイズ8		エフェクト表			0
+Wait						.02
+	酒場ノイズ9		エフェクト表			0
+Wait						.02
+	酒場ノイズ10		エフェクト表			0
+Wait						.02
+StopSe
+CharacterOff						0
+Bgm	都市
+	司書王ロルリアンレット	通常H				0		お■ゃ■■■わ♪
+CharacterOff
+	リディ	驚き2						ろ、ロール様!?\nなんでこんなところに!?
+	司書王ロルリアンレット	驚きH						■■■■■■■■■■■\n■■■■■■■……
+	リディ	驚き2						理由がないと来ちゃダメって\nわけじゃないけど
+	リディ							ロールお嬢様は司書王だし\n用事もなくて遊びに来るなんて\n珍しいもん
+	司書王ロルリアンレット	通常H						■■♪\n■■■■■■■■■■■■
+	司書王ロルリアンレット	ドヤ顔H						■■、\n■■■■■、■■■■■■■\n■■■■■
+	司書王ロルリアンレット	照れるH						ね■、\nす■■人に■■■に■■■い■■\nっ■、■■■■■■？
+	リディ	驚き2						それって、\nもしかして恋愛相談？
+	司書王ロルリアンレット	悪い顔H						■■■■？
+	リディ
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	驚き2						う、ううん！\nリディに相談してくれて嬉しいよ！
+	リディ	通常2						でもリディもわかるなぁ\n素直になれない時ってあるもん
+	リディ	照れ2						恥ずかしかったり、\nマスターが変なことしていたり
+	リディ	笑い2						ロールお嬢様も同じなんだね？
+	司書王ロルリアンレット	驚きH						……■■
+	司書王ロルリアンレット	慌てH						■■■■■■\n■■■■も■■ヲ■■■■■■
+	司書王ロルリアンレット	怪しいH						■■ち■■たち■■■■■■■■■
+	リディ	驚き2						…………
+	リディ	通常2						でも、\nロールお嬢様が司書王だったから\nその人とも出会えたんじゃないかな
+	司書王ロルリアンレット	驚きH						……っ
+	司書王ロルリアンレット	慌てH						■■、■……\n■■■ハ■■■■■■■■■■
+	リディ	通常2						リディも同じだよ\nたくさん悲しいことがあったけれど
+	リディ							リディがリディだったから\nマスターとも出会えたんだって
+	リディ	笑い2						だから、\nロール様も落ち込まないで？
+	リディ	照れ2						その人にも\nきっと気持ちが届くときが来るよ♪
+	司書王ロルリアンレット	通常H						■■■■■、\nあ■■ノ■■■■■ナル■■■♪
+	リディ	驚き2						ええええっ！
+	リディ	悔しい2						ま、まさか\nロール様も……！
+	司書王ロルリアンレット	悪い顔H						■■■■よ、\nそ■■■■ね、■■■
+	リディ	悔しい2						むむむむ……！\n強力なライバル出現かも！
+	リディ	怒り2						でも！\nリディはマスターのことだったら\n誰にも負けないんだから！
+	リディ	笑い2						はやくマスターに会いに行こっ！
+StopBgm
+Se	雨	TRUE
+CharacterOff						0
+	酒場ノイズ1		エフェクト表			0
+Wait						.02
+	酒場ノイズ2		エフェクト表			0
+Wait						.02
+	酒場ノイズ3		エフェクト表			0
+Wait						.02
+	酒場ノイズ4		エフェクト表			0
+Wait						.02
+	酒場ノイズ5		エフェクト表			0
+Wait						.02
+	酒場ノイズ6		エフェクト表			0
+Wait						.02
+	酒場ノイズ7		エフェクト表			0
+Wait						.02
+	酒場ノイズ8		エフェクト表			0
+Wait						.02
+	酒場ノイズ9		エフェクト表			0
+Wait						.02
+	酒場ノイズ10		エフェクト表			0
+Wait						.02
+StopSe
+CharacterOff						0
+Bg	カジノ					0
+Param	character_grayout=false
+	ノイズエフェクト		エフェクト表			0
+	リディ	驚き2				0
+Bgm	結婚
+	リディ							わぁー♪\nここがパーティー会場なんだ♪
+	リディ	照れ2						こんなにたくさんのごちそう、\nリディ、見たこともないよ♪
+CharacterOff	リディ
+Se	歩く
+	ディーア	通常2						驚いたか、リディ？
+StopSe
+CharacterOff	ディーア
+	リディ	照れ2						マスター！
+	ディーア	笑い2						このパーティーは\nリディのために開いたんだ
+	ディーア	通常2						オレの大切な相棒のために
+	リディ	照れ2						マスター……
+	ディーア	通常2						これからも\nリディと一緒に歩いていきたいんだ
+	リディ	笑い2						リディも！\nリディもおんなじ気持ちだよ♪
+	ディーア	あはは2						それじゃあ、\n主役の席はあっちだぞ！
+	ディーア	通常2						プレゼントもごちそうも\n好きなだけ楽しんでくれ、リディ♪
+Se	雨	TRUE
+CharacterOff	ディーア					0
+	酒場ノイズ1		エフェクト表			0
+Wait						.02
+	酒場ノイズ2		エフェクト表			0
+Wait						.02
+	酒場ノイズ3		エフェクト表			0
+Wait						.02
+CharacterOff	酒場ノイズ3					0
+StopSe
+	アリス					0		めでたいことだな
+	鍛冶医クランベリー	通常2						おめでとう！
+	司書王ロルリアンレット	通常H						おめでたいわね
+CharacterOff						0
+StopBgm
+	黒背景		エフェクト表			0
+Bg	黒背景					0
+	リディ	<Off>						ああ、しあわせだなぁ
+	リディ	<Off>						みんながいて、\n大好きなマスターがいてくれて
+	リディ	<Off>						マスター、いつもありがとう♪
+Se	雨	TRUE
+CharacterOff						0
+	酒場ノイズ1		エフェクト表			0
+Wait						.02
+	酒場ノイズ2		エフェクト表			0
+Wait						.02
+	酒場ノイズ3		エフェクト表			0
+Wait						.02
+	酒場ノイズ4		エフェクト表			0
+Wait						.02
+	酒場ノイズ5		エフェクト表			0
+Wait						.02
+	酒場ノイズ6		エフェクト表			0
+Wait						.02
+	酒場ノイズ7		エフェクト表			0
+Wait						.02
+	酒場ノイズ8		エフェクト表			0
+Wait						.02
+	酒場ノイズ9		エフェクト表			0
+Wait						.02
+	酒場ノイズ10		エフェクト表			0
+Wait						.02
+StopSe
+CharacterOff						0
+CharacterOff						0
+	TV-1		effect_b			0
+	TV-2		effect_a			0
+Se	ホログラム
+Tween	TV-1	ScaleBy	y=0.01 time=0.1
+CharacterOff	TV-1					0
+Tween	TV-2	ScaleBy	x=0.01 y=0.1 time=0.2				NoWait
+Wait						.1
+CharacterOff	TV-2
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_4538_03
+EndIf
+EndScenario
+
+# E_4538_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	酒場1F					0
+Param	character_grayout=true
+	リディ	<Off>				0
+FadeIn	black					1
+	リディ	<Off>						おっいわいー♪ おっいわいー♪\n今日はみんなでお祝ーい♪				変な背景やBGM、ノイズを混じらせる
+	リディ	<Off>						えへへ、たのしみだなぁ♪\nマスターがサプライズも用意して\nくれてるって言うし♪
+	リディ	<Off>						どんなサプライズなんだろう？\nおいしいお菓子とか、キレイなドレス\nそれから<dash=2>
+	リディ	<Off>						もしかして、マスターから……！
+	リディ	<Off>						って、妄想してたらダメだよね！\nリディはまだアルバイトの途中だもん
+	リディ	<Off>						まずはちゃんとお仕事をして、\nそれからたくさん楽しまないと♪
+	リディ	<Off>						そろそろ次のお客さんが<dash=2>
+Se	雨
+FadeOut	white					.1
+Param	character_grayout=false
+StopBgm
+	イベントスチル453803		エフェクト表			0
+FadeIn	white					.1
+StopSe
+Wait						2
+Bgm	ロルリアンレットB
+	リディ	<Off>						……マスター？
+	ディーア	<Off>						リディ……
+	リディ	<Off>						マスター？\nそんなに落ち込んでどうしたの？
+	ディーア	<Off>						すまない……
+	ディーア	<Off>						ごめん、リディ……
+	ディーア	<Off>						オレは、また……
+	ディーア	<Off>						これまで、\nあんなにがんばってきたのに
+	ディーア	<Off>						リディのことを\n幸せにしてあげたかったのに
+	ディーア	<Off>						オレはまた失敗した
+	ディーア	<Off>						失敗した、失敗した、失敗した……
+	ディーア	<Off>						なんで、オレはこんなに……
+	リディ	<Off>						……マスター
+	ディーア	<Off>						ハハハ、\nこんな結末になるのなら、\nどうして今まで<dash=2>
+	リディ	<Off>						ダメだよ！
+	ディーア	<Off>						リディ……
+	リディ	<Off>						どんなに辛いことがあっても、\n今までのことを否定したらダメ!!
+	リディ	<Off>						それに、リディはマスターのことを\nダメだなんて思ったことないよ
+	リディ	<Off>						リディ一人だったら、\nリディはこんなに幸せになれなかった
+	リディ	<Off>						マスターが一緒にいてくれたから\nこれまでの冒険も楽しかった
+	リディ	<Off>						辛いときもあったけど、\n幸せだったの！
+	リディ	<Off>						リディはマスターを信じてるよ
+	リディ	<Off>						これからなにがあっても、\nリディはマスターが大好きだから
+	リディ	<Off>						だから落ち込まないで、\nいつもみたいに前に進もうよ！
+	ディーア	<Off>						リディ……
+	リディ	<Off>						教えて？\nいったいなにがあったの？
+	ディーア	<Off>						実は……
+StopBgm
+Se	雨	TRUE
+CharacterOff						0
+	酒場ノイズ1		エフェクト表			0
+Wait						.02
+	酒場ノイズ2		エフェクト表			0
+Wait						.02
+	酒場ノイズ3		エフェクト表			0
+Wait						.02
+	酒場ノイズ4		エフェクト表			0
+Wait						.02
+	酒場ノイズ5		エフェクト表			0
+Wait						.02
+	酒場ノイズ6		エフェクト表			0
+Wait						.02
+	酒場ノイズ7		エフェクト表			0
+Wait						.02
+	酒場ノイズ8		エフェクト表			0
+Wait						.02
+	酒場ノイズ9		エフェクト表			0
+Wait						.02
+	酒場ノイズ10		エフェクト表			0
+Wait						.02
+StopSe
+CharacterOff						0
+	ノイズエフェクト		エフェクト表			0
+	ディーア	笑い2				0
+	ディーア							またお医者さんごっこをしたことが\nE.D.E.N.にバレて\n今度こそ牢屋に入れられるかも				ここで一回緊張を緩和
+	リディ	<Off>						…………
+	リディ	<Off>						もーっ！\nマスターのバカー!!
+FadeOut
+FadeIn
+	リディ	<Off>						まったく、\nせっかくお祝いがあるのに！
+	リディ	<Off>						これで\nサプライズも変なのだったら、\nリディは怒るからね！
+	リディ	<Off>						でも……\nマスターはしかたないなぁ♪
+	リディ	<Off>						あ、もうこんな時間！\nリディもパーティーに行かないと
+Se	雨	TRUE
+CharacterOff						0
+	酒場ノイズ1		エフェクト表			0
+Wait						.04
+	酒場ノイズ2		エフェクト表			0
+Wait						.04
+	酒場ノイズ3		エフェクト表			0
+Wait						.04
+	酒場ノイズ4		エフェクト表			0
+Wait						.04
+	酒場ノイズ5		エフェクト表			0
+Wait						.04
+	酒場ノイズ6		エフェクト表			0
+Wait						.04
+	酒場ノイズ7		エフェクト表			0
+Wait						.04
+	酒場ノイズ8		エフェクト表			0
+Wait						.04
+	酒場ノイズ9		エフェクト表			0
+Wait						.04
+	酒場ノイズ10		エフェクト表			0
+Wait						.04
+	酒場ノイズ11		エフェクト表			0
+Wait						.04
+	酒場ノイズ12		エフェクト表			0
+Wait						.04
+	酒場ノイズ13		エフェクト表			0
+Wait						.04
+	酒場ノイズ14		エフェクト表			0
+Wait						.04
+	酒場ノイズ15		エフェクト表			0
+Wait						.04
+	酒場ノイズ16		エフェクト表			0
+Wait						.04
+	酒場ノイズ17		エフェクト表			0
+Wait						.04
+	酒場ノイズ18		エフェクト表			0
+Wait						.04
+	酒場ノイズ19		エフェクト表			0
+Wait						.04
+	酒場ノイズ20		エフェクト表			0
+Wait						.04
+	酒場ノイズ21		エフェクト表			0
+Wait						.04
+	酒場ノイズ22		エフェクト表			0
+Wait						.04
+	酒場ノイズ23		エフェクト表			0
+Wait						.04
+	酒場ノイズ24		エフェクト表			0
+Wait						.04
+	酒場ノイズ25		エフェクト表			0
+Wait						.04
+StopSe
+CharacterOff						0
+Param	character_grayout=false
+Bgm	絶望
+	イベントスチル4538BG		エフェクト表			0
+Bg	カジノ					0
+	リディ					0
+	リディ	<Off>						わぁー♪\nここが■■■■■会場なん■♪
+	リディ	<Off>						こん■にたくさんのごちそう、\nリ■■、見たこ■もないよ♪
+	ディーア	<Off>						驚■■か、リディ？
+	リディ	<Off>						■■■■！
+	ディーア	<Off>						この■ーテ■■は\nリ■■■ために開■た■だ
+	ディーア	<Off>						■■の大■な■■のために
+	リディ	<Off>						マスター……
+	ディーア	<Off>						これ■■も\n■ディ■■■に■いてい■た■■■
+	リディ	<Off>						リ■■も！\nリディも■■なじ■■ちだよ♪
+CharacterOff
+	ディーア	黒2						そ■じゃ■、\n■■■■はあっ■だぞ！
+	ディーア	黒2						■■■■■も■■■■も\n好きなだけ■■んでくれ、リディ♪
+FadeOut	black					.2
+FadeIn	black					.2
+	ディーア	黒2						■■■■■！
+FadeOut	black					.2
+FadeIn	black					.2
+	ディーア	黒2						■■■■■！
+FadeOut	black					.2
+FadeIn	black					.2
+	ディーア	黒2						■■■■■！
+StopBgm						2
+Se	スローモーションエンド
+Wait						2
+	黒背景		エフェクト表2			0
+	ディーア	<Off>						<dash=4>リディ!!
+CharacterOff						0
+	イベントスチル4538BG		エフェクト表			0
+	血痕A		エフェクト表2			3
+	リディ	<Off>						<speed=0.1><color=red>■あ、■あわ■だなぁ</color>
+	リディ	<Off>						<speed=0.12><color=red>みん■がい■、\n大■きなマ■ターが■■く■て</color>
+	血痕B		エフェクト表3			3
+	リディ	<Off>						<speed=0.15><color=red>マスター、■■■■■■■■♪</color>
+	リディ	<Off>						<speed=0.1><color=red>■■■■■■■■■■■■■■■■\n■■■■■■■■■■■■■■■■\n■■■■■■■■■■■■■■■■</color>				ノイズ
+	リディ	<Off>						<speed=0.0001><color=red>そ■じゃ■、\n■■■■はあっ■だぞ！	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>みん■がい■、\n大■きなマ■ターが■■く■て</color>	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>この■ーテ■■は\nリ■■■ために開■た■だ	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>わぁー♪\nここが■■■■■会場なん■♪	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■！	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>驚■■か、リディ？	BrPage
+CharacterOff						0
+	酒場ノイズ2		エフェクト表			0
+Wait						.02
+	酒場ノイズ3		エフェクト表			0
+Wait						.02
+	酒場ノイズ4		エフェクト表			0
+Wait						.02
+	酒場ノイズ5		エフェクト表			0
+Wait						.02
+	イベントスチル4538BG		エフェクト表			0
+	ノイズエフェクト		エフェクト表2			0
+	リディ	<Off>						<speed=0.0001><color=red>■あ、■あわ■だなぁ</color>	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■■！	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■■！	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>みん■がい■、\n大■きなマ■ターが■■く■て</color>	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■■も■■■■も\n好きなだけ■■んでくれ、リディ♪	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>マスター、■■■■■■■■♪</color>	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>マスター……	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■■！	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■の大■な■■のために	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>これ■■も\n■ディ■■■に■いてい■た■■■	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>これ■■も\n■ディ■■■に■いてい■た■■■	BrPage
+CharacterOff	ノイズエフェクト					0
+	酒場ノイズ6		エフェクト表			0
+Wait						.02
+	酒場ノイズ7		エフェクト表			0
+Wait						.02
+	酒場ノイズ8		エフェクト表			0
+Wait						.02
+	酒場ノイズ9		エフェクト表			0
+Wait						.02
+	イベントスチル4538BG		エフェクト表			0
+	ノイズエフェクト		エフェクト表2			0
+	リディ	<Off>						<speed=0.0001><color=red>みん■がい■、\n大■きなマ■ターが■■く■て</color>	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>こん■にたくさんのごちそう、\nリ■■、見たこ■もないよ♪	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■！	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■あ、■あわ■だなぁ</color>	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■■！	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■■■■■■■■■■■■■\n■■■■■■■■■■■■■■■■\n■■■■■■■■■■■■■■■■</color>	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>こん■にたくさんのごちそう、\nリ■■、見たこ■もないよ♪	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■■！	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>わぁー♪\nここが■■■■■会場なん■♪	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■■も■■■■も\n好きなだけ■■んでくれ、リディ♪	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>わぁー♪\nここが■■■■■会場なん■♪	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>マスター……	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>わぁー♪\nここが■■■■■会場なん■♪	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■■！	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>■■■■■！	BrPage
+	リディ	<Off>						<speed=0.0001><color=red>これ■■も\n■ディ■■■に■いてい■た■■■	BrPage
+CharacterOff	ノイズエフェクト					0
+	酒場ノイズ10		エフェクト表			0
+Wait						.02
+	酒場ノイズ11		エフェクト表			0
+Wait						.02
+	酒場ノイズ12		エフェクト表			0
+Wait						.02
+	酒場ノイズ13		エフェクト表			0
+Wait						.02
+	酒場ノイズ14		エフェクト表			0
+Wait						.02
+	酒場ノイズ15		エフェクト表			0
+Wait						.02
+	酒場ノイズ16		エフェクト表			0
+Wait						.02
+	酒場ノイズ17		エフェクト表			0
+Wait						.02
+	酒場ノイズ18		エフェクト表			0
+Wait						.02
+	酒場ノイズ1		エフェクト表			0
+Wait						.02
+	酒場ノイズ2		エフェクト表			0
+Wait						.02
+	酒場ノイズ3		エフェクト表			0
+Wait						.02
+	酒場ノイズ4		エフェクト表			0
+Wait						.02
+	酒場ノイズ5		エフェクト表			0
+Wait						.02
+	酒場ノイズ6		エフェクト表			0
+Wait						.02
+	酒場ノイズ7		エフェクト表			0
+Wait						.02
+	酒場ノイズ8		エフェクト表			0
+Wait						.02
+	酒場ノイズ9		エフェクト表			0
+Wait						.02
+	酒場ノイズ10		エフェクト表			0
+Wait						.02
+	酒場ノイズ11		エフェクト表			0
+Wait						.02
+	酒場ノイズ12		エフェクト表			0
+Wait						.02
+	酒場ノイズ13		エフェクト表			0
+Wait						.02
+	酒場ノイズ14		エフェクト表			0
+Wait						.02
+	酒場ノイズ15		エフェクト表			0
+Wait						.02
+	酒場ノイズ16		エフェクト表			0
+Wait						.02
+	酒場ノイズ17		エフェクト表			0
+Wait						.02
+	酒場ノイズ18		エフェクト表			0
+Wait						.02
+	酒場ノイズ19		エフェクト表			0
+Wait						.02
+	酒場ノイズ20		エフェクト表			0
+Wait						.02
+	酒場ノイズ21		エフェクト表			0
+Wait						.02
+	酒場ノイズ22		エフェクト表			0
+Wait						.02
+	酒場ノイズ23		エフェクト表			0
+Wait						.02
+	酒場ノイズ24		エフェクト表			0
+Wait						.02
+	酒場ノイズ25		エフェクト表			0
+Wait						.02
+	黒背景		エフェクト表			0
+Wait						1
+StopSe
+	※※※※							<color=mk2wisp><speed=0.5>・・・・・</speed>	BrPage
+	※※※※							<color=mk2wisp>記憶循環に深刻なエラーが発生\n結晶体の維持限界まで30秒				一気に黒背景
+	※※※※							<color=mk2wisp>並列時間、オールスタグネイト\n記憶循環リセット開始\n構成変数をリミットゼロに移行
+	※※※※							<color=mk2wisp>RECORD:0から\nRECORD:8728353695を再構成
+	※※※※							<color=mk2wisp>CODE:<ruby=ヴルツエル>W.U.R.Z.E.L.</ruby>\n──<ruby=リスタート>再演を開始</ruby>します</color>
+Se	ドーン
+CharacterOff	黒背景					0
+	イベントスチル4538BG2		エフェクト表_c			0
+Tween	イベントスチル4538BG2	ScaleBy	x=0.8 y=0.8 time=5	linear			NoWait
+Wait						5						BGスチルをチラ見せ
+Bg	黒背景					0
+CharacterOff						0
+	リディ	<Off>						えへへ♪\nリディはしあわせだよ♪
+CharacterOff						0
+Wait						3
+CharacterOff						0
+	TV-1		effect_b			0
+	TV-2		effect_a			0
+Se	ホログラム
+Tween	TV-1	ScaleBy	y=0.01 time=0.1
+CharacterOff	TV-1					0
+Tween	TV-2	ScaleBy	x=0.01 y=0.1 time=0.2				NoWait
+Wait						.1
+CharacterOff	TV-2
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_4538_01
+EndIf
+EndScenario

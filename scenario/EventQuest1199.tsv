@@ -1,0 +1,2136 @@
+# E_1199_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	カジノ					0
+	ププッピマリー	微笑む
+FadeIn	black					1
+	ププッピマリー	微笑む						ようこそいらっしゃいました、\n魔剣王様
+	ププッピマリー	微笑む						今宵は魔界の大切な記念日であり、\nあなたと世界図書館の結びつきを\n深めるための祝いの席
+	ププッピマリー	微笑む						最上級のゲストとして、\nどうぞごゆるりとお寛ぎください
+CharacterOff
+	ロサ	ニヤリ						そして会場でのお世話は、\n引き続きこのロサが担当します
+CharacterOff
+	ディーア	笑い4						今日はお世話になります
+	ディーア	通常4						それにしてもパーティーなんて、\nすごく久しぶりだな
+CharacterOff
+	ロサ	本気						世界意思との戦いが始まってから\n逃亡と潜伏の毎日でしたからね
+CharacterOff
+	ププッピマリー	微笑む						ですが今後は世界図書館も\nあなた方を全面的にサポートします
+	ププッピマリー	通常						おそらく負担も減るでしょう
+	ププッピマリー	通常						そのことについて、\nパーティーの後でお嬢様との協議も\n予定に入れております
+	ププッピマリー	微笑む						仕事を抜きにしても、\nお嬢様はあなたとの二人きりでの\n会食を楽しみにされていました
+	ププッピマリー	微笑む						後ほどご案内しますので、\nどうかお嬢様を\nよろしくお願いいたします
+CharacterOff
+	ディーア	通常4						わかりました！
+	ディーア	汗4						ロールお嬢様とのお食事は\nちょっと緊張するけど
+	ディーア	笑い4						それはオレが頑張ればいい話！\n魔剣のみんなはのんびりしてくれ！
+CharacterOff
+	魔劍グラム=オルタ	悲しい2	p7b
+	魔剣グラム	通常	p3
+	魔剣グラム	通常						その言葉に、\n甘えたいところだけど……
+	魔剣グラム	通常						にぎやかな場所に来ると尚更、\nあの子を思い出すわね
+	魔劍グラム=オルタ	悲しい2						リディちゃんがいないのは、\nやっぱり寂しいよね
+	魔劍グラム=オルタ	悲しい2						マスターさんは大丈夫ですか？
+CharacterOff
+	ディーア	目閉じ4						ああ、オレもそれは同じだよ
+	ディーア	怒り4						でもだからって、\nオレたちが寂しがってばかりだと\n助けられるものも助けられない
+	ディーア	通常4						みんなが元気になった分だけ\n魔剣王であるオレは強くなれるんだ
+	ディーア	通常4						今日はそのための一日にしよう
+CharacterOff
+	魔劍グラム=オルタ	通常2	p7b
+	魔剣グラム	通常	p3
+Tween	魔劍グラム=オルタ	PunchPosition	y=30				NoWait
+	魔劍グラム=オルタ	通常2						わ、わかりました……！\nがんばって元気を出します！
+	魔剣グラム	通常						ふふ♪\nありがとう、マスター
+CharacterOff
+	レヴァ	通常
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	通常						でもちょっとくらい、\nマイマスターも楽しんでよね！
+CharacterOff
+	ディーア	笑い4						ああ、もちろん
+CharacterOff
+	ワイルドエッジ	通常	p3
+	ナナツサヤ	通常2	p7b
+Tween	ワイルドエッジ	PunchPosition	y=30				NoWait
+	ワイルドエッジ	通常						たーくさんごちそうたべよー！
+Se	ピューン
+Tween	ナナツサヤ	MoveBy	x=-700 time=1				NoWait
+	ナナツサヤ	通常2						セッキちゃん！\nあっちにおいしそうなお肉があるよ
+Se	ピューン
+Tween	ワイルドエッジ	MoveBy	x=-700 time=1				NoWait
+	ワイルドエッジ	通常						わーい♪ おにくー！
+Wait						.5
+CharacterOff
+	ハイペリオン	通常
+Tween	ハイペリオン	PunchPosition	y=30				NoWait
+	ハイペリオン	通常						わわっ！\nそんなに走り回ると危ないですよ？
+CharacterOff
+	ディーア	通常4						みんなも楽しそうで良かった
+CharacterOff
+	煌征ルカ	通常						あなたも楽しそうですわね
+	煌征ルカ	通常						魔剣王様とは思えない、\nとても締まりのないお顔ですわ
+CharacterOff
+	ディーア	笑い4						ルカも今日はのんびりしていいぞ？
+	ディーア	通常4						黒いあいつの所にいた時は、\nそんな時間はなかったんだろう？
+CharacterOff
+	煌征ルカ	通常						ええ、そうします<dash=2>
+StopBgm
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	怒り						<dash=2>と言うと思いましたか？\n……お覚悟!!
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	シャキーン
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393C)		エフェクト裏			0						主に、斬撃(393C)	射撃(赤)
+Tween	黒背景	MoveBy	y=-3000 time=1									斬撃(火)	射撃(青)
+Wait						.3							射撃(紫)
+Bg	カジノ					0
+CharacterOff						0
+	ディーア	怪しい4
+Tween	ディーア	MoveBy	x=-100				NoWait
+	ディーア	怪しい4						おっと！
+Bgm	都市
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	煌征ルカ	照れ
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	照れ						なっ……！\n完全に不意打ちだったはずですのに\nこんなにあっさり躱すなんて
+CharacterOff
+	ディーア	笑い4						ふっ、まだまだだな
+CharacterOff
+	煌征ルカ	怒り						むむむ……！\nまたそういう余裕なお顔をして！
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	怒り						ですがお忘れなく！\n私があなたの魔剣になったのは\nあなたへの復讐のため！
+	煌征ルカ	怒り						私はまだまだ弱いですが\nいつか絶対に復讐を果たします！
+CharacterOff
+	ディーア	通常4						もちろん、\nお前の仇として向き合い続ける、\nその誓いを違えることはないよ
+CharacterOff
+	煌征ルカ	照れ						…………っ、\nわかっているのならいいのです
+	ルンブレB	通常	p7b			1		ルカさんのバイタルが急上昇、\n緊張状態に入りました
+Tween	煌征ルカ	MoveBy	x=-150				NoWait
+Param	character_grayout=true
+	煌征ルカ	照れ						んなっ……！\nいきなりなにをおっしゃいますの、\nルーンブレード:Blaze様！
+	ルンブレB	通常						失礼しました、\n体調が急に変化しましたので
+	ルンブレB	通常						そしてマスター、\n会場と万が一の脱出経路のチェック\nを完了いたしました
+CharacterOff
+	ディーア	通常4						ありがとう、\nじゃあこの後は自由にしてくれ
+CharacterOff
+	ルンブレB	通常						いいえ、\n兵器に自由など必要ありません\nマスターの護衛を行います
+CharacterOff
+	ディーア	笑い4						でも警備は万全だし、\nお前もおめかしとかごちそうを\n楽しんでも良いんだぞ？
+CharacterOff
+	ルンブレB	通常						おめかし、ですか……
+	ルンブレB	通常						確かに過去の私であれば、\n心惹かれたかもしれませんね
+	ルンブレB	通常						ですが今の私は最強の兵器である\n次世代:Blaze魔剣
+	ルンブレB	通常						おしゃれやおめかしに\n心を奪われることはありえません
+CharacterOff
+	ディーア	怪しい4						だったら<dash=2>
+	ディーア	笑い4						ルカの護衛を頼んでもいいか？
+CharacterOff
+	煌征ルカ	照れ	p3
+	ルンブレB	通常	p7b
+	ルンブレB	通常						ルカさんの護衛ですか？
+	煌征ルカ	照れ						ちょっと……！\n私は一人でもかまいませんよ！
+CharacterOff
+	ディーア	通常4						でもルカはあの戦いで、\nすごく重要な役割を担わされたから\n狙われる危険はまだ高い
+	ディーア	通常4						ルンブレ:Blazeに任せられたら\nオレは安心できる
+CharacterOff
+	煌征ルカ	照れ	p3
+	ルンブレB	通常	p7b
+	ルンブレB	通常						任務了解しました\nそれでは行きましょう、ルカさん
+	煌征ルカ	照れ						復讐を狙う私を護衛させるなんて、\n本当に余裕ですのね
+	煌征ルカ	照れ						そういうところがキライなんです
+Se	走る
+FadeOut	black					1
+CharacterOff						0
+	煌征ルカ	照れ	p3			0
+	ルンブレB	通常	p7b			0
+Wait						2
+FadeIn	black					1
+	ルンブレB	通常						ルカさん、\nこちらのケーキはどうですか？
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	照れ						る、ルーンブレード:Blaze様！\n甲斐甲斐しいお世話は結構ですわ!!
+	ルンブレB	通常						ケーキはお嫌いですか？
+	煌征ルカ	照れ						好きですけれど……\nなんだか子ども扱いみたいで……
+	煌征ルカ	悲しい						でも意地を張るのも子ども……\nすべては私が弱いせいですわね……
+	煌征ルカ	悲しい						魔剣王様のところに来て、\n何度も何度も仇討ちに挑んでも\nあしらわれてばかり
+	煌征ルカ	照れ						それにあの方ときたら、\n復讐失敗の罰ゲームだと言って、\nレプリカ様のメイド服を着せたり！
+Shake	煌征ルカ		x=3				NoWait
+	煌征ルカ	照れ						もう！ 屈辱ばかり増えますわっ！
+	ルンブレB	通常						ふふ
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	照れ						な、なんですか？
+	ルンブレB	通常						あの時は任務とはいえ、\nあなたに何もできませんでしたから\nお元気になってよかったです
+	煌征ルカ	嬉しい						そうですわね……\n私もあなたは無口な方だとばかり
+	煌征ルカ	嬉しい						あなたが今ここにいるのも、\n司書王様からの命令だからですの？
+	ルンブレB	通常						マスターの兵器として派遣された、\nそのことが原因ではありますけれど\n私にも目的はあります
+	ルンブレB	通常						私は最新の:Blazeとして、\n最強のポテンシャルをいただきました
+	ルンブレB	通常						ですがそれを、\n十全に扱える魔剣使いは少ない
+	ルンブレB	通常						しかし、\n魔剣王であるマスターなら……
+	ルンブレB	通常						マスターが私の担い手になれるか\n私を最強の魔剣にしてくれるのか、\nそれを確かめたいのです
+	煌征ルカ	悲しい						確かめるため……
+	煌征ルカ	悲しい						それは私も同じですわ
+	煌征ルカ	悲しい						消えてくれない世界への憎しみ、\nまだ答えの出ない私の生きる意味
+	煌征ルカ	怒り						そんな私の苦しみを受け止めると\nその強さが自分にはあると言ったから\n彼の魔剣となることを選びました
+	煌征ルカ	怒り						世界への復讐を止める敵、\n仇である魔剣王様を狙い続けながら\n答えを探すために
+	ルンブレB	通常						でしたら、\nルカさんの信頼に答えるためにも\nマスターには強くあってもらわないと
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	照れ						信頼ってなんですの!?\n私はあの方がだいっきらいですわ！
+Se	走る
+CharacterOff
+	ロサ	汗				1		ご歓談中に申し訳ございません
+	ロサ	汗						実は先ほどから、\nご主人様の姿を見ていないのですが\nお心あたりはありますか？
+	ロサ	汗						すぐ隣にいたはずなのに、\n一瞬、目を離した隙に消えてしまい\n探しているんです
+CharacterOff
+	煌征ルカ	照れ						目を離したらすぐって……\n小さいお子様ですの？
+	煌征ルカ	照れ						まったく、\nしょうがないお人ですわね
+CharacterOff
+	ルンブレB	通常						でしたら我々も、\nマスターを一緒に探しましょう
+StopBgm
+Param	character_grayout=false
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	研究所A					0
+	黒グラデーション		エフェクト裏			0
+	ディーア	怪しい4				0
+FadeIn	black					.3
+Bgm	絶望
+	ディーア	怪しい4						まさか、こんなところに……
+CharacterOff	黒グラデーション					0
+StopBgm
+	ディーア	にやけ4						ロールお嬢様の\n秘蔵写真が隠されているなんて！
+Bgm	わくわく
+	ロサ	汗	画面外_右_b
+Tween	ロサ	MoveBy	x=-550 time=1				NoWait
+	ロサ	汗						わぁああああああああ!?
+Param	character_grayout=true
+Tween	ディーア	MoveBy	x=-150				NoWait
+	ディーア	驚き4						ろ、ロサ？
+	ロサ	汗						な、なんでそれを\nご主人様が見つけて<dash=2>
+Tween	ロサ	PunchPosition	y=30				NoWait
+	ロサ	汗						ではなく！\nなんでこんな場所にいるんですか!?
+	ロサ	汗						ここは強力な魔導書もある、\n特別書庫ですよ!?
+	ディーア	驚き4						えーっとたしか……\nみんなと話したり遊んだりした後で\nちょっと散歩したくなって
+	ディーア	汗4						なんとなく、だな……
+CharacterOff
+	煌征ルカ	照れ	p3
+	ルンブレB	通常	p7b
+	煌征ルカ	照れ						なんですか、その曖昧なお返事は
+	ルンブレB	通常						お怪我がなくてよかったです
+CharacterOff
+	ディーア	汗4						心配かけてごめん
+	ディーア	汗4						そうだな、\n早くパーティー会場に戻っ<dash=2>
+StopBgm
+CharacterOff
+	ルンブレB	通常						っ！\nマスター、後ろです！
+Bgm	バトル
+Se	闇1
+CharacterOff
+	人形先生	通常				.3		キリ、キリ、キリ……!!
+CharacterOff
+	ディーア	悔しい4						魔物……！\nどうしてこんなところに!?
+	ディーア	本気4						会場に被害が出る前に倒すぞ！\nルーンブレード:Blaze!!
+CharacterOff
+	ルンブレB	拡大通常	エフェクト表					了解しました\nルーンブレード:Blaze、戦闘開始
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_02
+EndIf
+EndScenario
+
+# E_1199_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	研究所A					0
+Param	character_grayout=false
+	ディーア	怒り4	p3			0
+	ルンブレB	通常	p7b			0
+FadeIn	black					1
+	ルンブレB	通常						戦闘モード解除\n状況を終了いたします
+	ディーア	怒り4						ああ、ありがとう
+CharacterOff
+	黒グラデーション		エフェクト裏
+	煌征ルカ	怒り						やはり、\nさすがはお兄ちゃんさえも倒したお方\nまったく危なげのない戦いですわ
+	煌征ルカ	照れ						魔剣王様……\nあなたはどうやってそこまで強く……
+CharacterOff
+	ロサ	通常						おつかれさまでした、ご主人様
+	ロサ	本気						しかし不思議です\nどうして魔物がこんなところに？
+CharacterOff
+	ルンブレB	通常						先ほど見回りをしたときは、\n魔物の反応はありませんでした
+CharacterOff
+	ディーア	怪しい4						…………\nあの魔物は妙に存在感がなかった
+	ディーア	目閉じ4						それにオレも、\nここに来るまでの記憶が曖昧だ
+StopBgm
+Se	闇1
+	オーラ紫		エフェクト表			1
+	ディーア	怒り4						ロサ、すぐに<dash=2>
+Bgm	緊迫	\\
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き4						な、なんだ……？
+CharacterOff
+	ロサ	慌て						本棚の魔導書が光って!?
+Tween	ロサ	PunchPosition	y=30				NoWait
+	ロサ	慌て						ご主人様、離れてください！
+CharacterOff
+	オーラ紫		エフェクト表
+	ディーア	悔しい4						大丈夫、動け<dash=2>
+Se	闇1
+ImageEffect	SpriteCamera	NegaPosi				.5
+Wait						.5
+ImageEffectOff	SpriteCamera	NegaPosi				.5
+	ディーア	驚き4						今のは……？
+	ディーア	絶望4						うわぁああああ!?
+Se	チャージ
+FadeOut	white					1
+	ディーア	驚き4				0
+Se	光1
+Wait						1
+FadeIn	white					1
+CharacterOff	オーラ紫					.5
+	ディーア	驚き4						あれ……？
+CharacterOff
+	煌征ルカ	怒り
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	怒り						お気をつけください！\nいくらなんでも油断しすぎですわ！
+	煌征ルカ	照れ						あ、い、今のは！\n復讐相手が情けないと困るからで\n心配したわけでは<dash=2>
+CharacterOff
+	ディーア	驚き4						ふく、しゅう……
+CharacterOff
+	ルンブレB	通常						ステータスを確認……\n外傷はないようですね……
+CharacterOff
+	ロサ	照れ						お怪我がなくて安心しました
+	ロサ	照れ						戦いの魔力に、\n魔導書が反応したのでしょうか？
+	ロサ	本気						なにかお体に変化はありますか？
+CharacterOff
+	ディーア	怪しい4						えっと……
+StopBgm
+	ディーア	汗4						あなたたちはだれですか？
+CharacterOff
+	ロサ	驚き						…………えっ？
+CharacterOff
+	ディーア	絶望4						そもそも……ボクはだれだ？
+CharacterOff
+	煌征ルカ	怒り	p3
+	ルンブレB	通常	p7b
+	二人	<Off>	1_2					…………なっ
+StopBgm
+	集中線		エフェクト表			0
+	二人	<Off>						なんですってー!?!?
+Bgm	コメディ
+CharacterOff	集中線
+Param	character_grayout=true
+	煌征ルカ	怒り						いきなり何を言い出すんですか!?\n魔剣王様……!!
+CharacterOff
+	ディーア	絶望4						まけん、おう？
+CharacterOff
+	煌征ルカ	怒り						とぼけるのも、\nいい加減にしてください！
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	怒り						それともまた、\n私が復讐に失敗した罰ゲームですか!?
+	煌征ルカ	怒り						フリフリドレスを着せられるのは\nまだ許容できますが、\nこれは流石に笑えませんわよ!?
+CharacterOff
+	ロサ	絶望						ご主人様……？\n隠れてそんなことを……？
+CharacterOff
+	ディーア	絶望4						うぅ、ふりふり、どれす……？\nすくみず、ちーぱお……
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						ドキドキする言葉は思い浮かぶけど\nぜんぜん思い出せない……！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						思い出したいけど、思い出せない！
+CharacterOff
+	煌征ルカ	照れ
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	照れ						そんな恥ずかしい記憶、\n思い出さなくても結構ですわ!!
+CharacterOff
+	ルンブレB	通常						でもこの様子だと、\n記憶喪失なのは本当かもしれません
+CharacterOff
+	ロサ	通常						たしかにあのご主人様が、\n女の子の可愛い姿を思い出せない\nなんてありえません
+CharacterOff
+	ディーア	絶望4
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						そこで判断されるの!?
+	ディーア	絶望4						ボクはなんなんだ!?\n記憶喪失になる前はどんな奴だ!?
+	ディーア	絶望4						さっきから\nご主人様とかマスターとか\n呼ばれているし！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						そもそも目が覚めたら、\n知らない美少女に囲まれてるし!!
+	ディーア	絶望4						これ大丈夫ですか!?\n変なドッキリとかじゃないですよね!?
+	ディーア	絶望4						ボクを騙してもなにも出ませんよ!?
+CharacterOff
+	ロサ	絶望						あのご主人様が、\nすごく常識的な反応をしてます……
+	ロサ	絶望						ご主人様のダメなところは、\n生まれつきではなかったのですね
+CharacterOff
+	ディーア	絶望4
+StopBgm
+CharacterOff
+	煌征ルカ	悲しい						本当に私を覚えていない……？
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	大灯台B					0
+	ディーア	目閉じ4				0
+FadeIn	white					.3
+	ディーア	目閉じ4						それでも、\nオレはお前に向き合い続けるよ
+	ディーア	目閉じ4						オレはルルの代わりになれない\nお前の救いになれない
+	ディーア	本気4						だけど敵として、\nお前を阻む仇敵で在り続ける!!
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	研究所A					0
+	煌征ルカ	悲しい				0
+FadeIn	white					.3
+Bgm	作戦会議
+	煌征ルカ	悲しい						そう言ったのは、あなたなのに……
+CharacterOff
+	ロサ	汗						しかしどうしましょう、\nこのままでは大変なことになります
+	ロサ	汗						ご主人様にはこの後、\nお嬢様との会食も控えているんです
+	ロサ	絶望						そんな大事な場所に、\n記憶喪失になった状態で放り込めば\n魔剣王の沽券に関わります
+CharacterOff
+	ルンブレB	通常						それに抜け目のないお嬢様です
+	ルンブレB	通常						このシチュエーションを利用し、\nマスターをハントしようと考えるかも
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	カジノ					0
+	司書王ロルリアンレット	悪い顔H				0
+FadeIn	white					.3
+	司書王ロルリアンレット	悪い顔H						へえ……♪\n本当に記憶がなくなったのね
+	司書王ロルリアンレット	悪い顔H						だったらこの私が、\nレディの扱い方を教えてあげる♪
+	司書王ロルリアンレット	悪い顔H						まずは足に……口づけなさい♪
+CharacterOff
+	ディーア	にやけ4						はい、お嬢様！
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	研究所A					0
+	ロサ	汗				0
+FadeIn	white					.3
+	ロサ	汗						お嬢様はそんな、\nうらやまいけないことなんて<dash=2>
+	ロサ	絶望						するかもしれませんね……
+CharacterOff
+	ルンブレB	通常						ですから、方法は一つです
+	ルンブレB	通常						今すぐに私たちの手で、\nマスターの記憶を取り戻しましょう
+	ルンブレB	通常						記憶喪失が外的要因によるものなら\n元に戻すこともできるはずです
+Param	character_grayout=false
+CharacterOff
+Se	火3
+	オーラ炎		エフェクト表			.5
+	煌征ルカ	怒り						ええ、そのとおりですわ……！
+CharacterOff
+	ディーア	絶望4						な、なんかすごく怒ってる!?
+CharacterOff
+	オーラ炎		エフェクト表
+	煌征ルカ	怒り						私にあんなことを言っておいて、\n全てを忘れるだなんて！
+	煌征ルカ	怒り						ぜーったいに許せません！
+	煌征ルカ	怒り						私の復讐を遂げるために、\nあなたの記憶を取り戻します！
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	怒り						お覚悟を！
+CharacterOff
+	ディーア	絶望4
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						ボクは本当に何をしたんだ!?
+FadeOut	black					1
+StopBgm						0
+Bg	黒背景					0
+CharacterOff						0
+	？？？？	<Off>				0
+Wait						1
+FadeIn	black					.2
+	？？？？	<Off>						フフフ……
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_03
+EndIf
+EndScenario
+
+# E_1199_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	カジノ					0
+Param	character_grayout=true
+	レヴァ	慌て				0
+FadeIn	black					1
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	慌て						ルカちゃん！\nマスターが記憶喪失になったって\n本当なの？
+CharacterOff
+	煌征ルカ	通常						ええ、残念ながら本当ですわ
+	煌征ルカ	通常						魔剣使いや魔剣王になったことも\nすべて忘れたようで<dash=2>
+CharacterOff
+	タウロシア	通常2	p8b
+	タウロシア×アーチ	通常	p2b
+	ディーア	絶望4	p5
+	タウロシア	通常						マスターさま、\n本当に先生のことを忘れたんですか？
+	タウロシア×アーチ	通常						これは特別授業が必要かなぁ？
+CharacterOff
+	シシガミ	通常2						大丈夫♪\nマスターなら乗り越えられるよ♪\nがんばれ♪ がんばれ♪
+CharacterOff
+	ルイゼット	嬉しい						でも本当に辛かったら、\nルイゼットママに甘えてね♪
+CharacterOff
+	リコさまちゃん	嬉しい
+Tween	リコさまちゃん	PunchPosition	y=30				NoWait
+	リコさまちゃん	嬉しい						はい、しぼりたての\nリコさまちゃんミルクをどうぞ♪\nいつもみたいに飲ませてあげる♪
+	リコさまちゃん	通常						それにしても記憶喪失なんて、\nとても面白い観測ができそうね
+CharacterOff
+	タウロシア	通常2	p8b
+	タウロシア×アーチ	通常	p2b
+	ディーア	絶望4	p5
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						なんなんだ、この状況!?
+	ディーア	絶望4						こんなにたくさん甘えていいとか、\nおかしくないですか!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						しかも小さい子にまで甘えるとか、\nどうなってるんだ前のボク!!
+	ディーア	絶望4						いつもみたいに!?\nしぼりたてミルクを飲ませてもらう!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						常識はないのか、常識は!!
+CharacterOff
+	ヘル	通常						マスターがあふれる母性を前に\nただただ困惑するなんて、\n記憶喪失なのは本当みたいね
+	ヘル	通常						こういう異変が\n起きるのもいつものことだけど\n元に戻す方法はあるの？
+CharacterOff
+	煌征ルカ	通常						原因が魔導書と思われるので、\n今はロサ様や本に詳しい魔剣の皆様で\nその魔導書を捜索中ですわ
+FadeOut	black					.3
+CharacterOff						0
+Bg	研究所A					0
+	マビノギオン	通常				0
+Wait						1
+FadeIn	black					.3
+	マビノギオン	通常						流石は世界図書館、\n魔導書だらけで大変だけど
+CharacterOff
+	ファイナルレター	通常						私たちも魔典、\nすぐに探し出してみせるわ
+CharacterOff
+	レゲノダ	通常						インデックスより検索……\nキーワードは記憶喪失、魔導書……\n該当複数……
+CharacterOff
+	ヘラクレス	通常
+Tween	ヘラクレス	PunchPosition	y=30				NoWait
+	ヘラクレス	通常						探し物なら！\n名探偵ヘラクレスにお任せを！
+CharacterOff
+	プロローグ	悔しい	p7
+	エピローグ	悲しい	p3b
+	プロローグ	悔しい						私もマスターといたかったな……\nもっとハチャメチャに\n物語の始まりを彩りたかったのに
+	エピローグ	悲しい						記憶喪失の物語なら、\n最後はすごく感動的なエピローグに\nできるのに……
+CharacterOff
+	ロサ	慌て
+Tween	ロサ	PunchPosition	y=30				NoWait
+	ロサ	慌て						そんなことさせませんからね!?\n今でも大変なんですから！
+FadeOut	black					1
+CharacterOff						0
+Bg	カジノ					0
+	煌征ルカ	通常				0
+Wait						1
+FadeIn	black					1
+	煌征ルカ	通常						でもあの本の中から探すのは\nとても大変なこと
+	煌征ルカ	通常						あちらに任せきりにせず、\n私たちも方法を探してみましょう
+	煌征ルカ	怒り						魔剣王様を、\n記憶喪失のままになんてさせません
+Param	character_grayout=false
+CharacterOff
+	魔天猫ルコ	通常						でも、どうやって<dash=2>
+	ディーア	絶望4	画面外_右
+Tween	ディーア	MoveBy	x=-500 time=1				NoWait
+	ディーア	絶望4						助けてー！\n母性にダメにされるーっ！
+Tween	魔天猫ルコ	PunchPosition	y=50				NoWait
+Tween	魔天猫ルコ	MoveBy	x=-150				NoWait
+	魔天猫ルコ	泣き						ひゃっ!?
+Param	character_grayout=true
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	悔しい4						ご、ごめんなさい……！\nかわいい女の子に\nいきなり抱きつくなんて!!
+	ディーア	悔しい4						ボクに償えるなら、\nなんでも言ってください……！
+	魔天猫ルコ	嬉しい						だ、大丈夫！\n怖がらなくてもいいわよ！
+Tween	魔天猫ルコ	MoveBy	x=50				NoWait
+	魔天猫ルコ	通常						こんなにしおらしいマスターも\nたまにはいいかも<dash=2>
+CharacterOff
+	魔天猫リーナ×ロスト	嬉しいL						お姉ちゃん照れてるー♪
+	魔天猫リーナ×ロスト	通常L						ドキドキしちゃった？
+CharacterOff
+	魔天猫ルコ	通常	p3b
+	ディーア	怪しい4	p7
+	魔天猫ルコ	通常						て、照れてないわよっ！
+Tween	魔天猫ルコ	PunchPosition	y=30				NoWait
+	魔天猫ルコ	通常						いつものマスターと違って、\n弱気で素直なのが新鮮なだけ！
+	魔天猫ルコ	通常						まあでも、\nちょっとえっちなマスターでも、\n嫌いじゃないけれど……
+	ディーア	絶望4						本当になんなんだ元のボクは……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	悔しい4						い、いつものボクって、\nどんな人間だったんですか？
+CharacterOff
+	バールのようなもの	通常4						もちろん、ばよのの恋人だよー！
+CharacterOff
+	ばびの	嬉しい
+Tween	ばびの	PunchPosition	y=30				NoWait
+	ばびの	嬉しい						違うよ、ばびののカレシ♪\nたくさんデートもしたんだから！
+CharacterOff
+	フライパン	通常						ううん、フーラだけのダーリン♪\n毎日ラブラブだったの♪
+CharacterOff
+	マグナ	嬉しい
+Tween	マグナ	PunchPosition	y=30				NoWait
+	マグナ	嬉しい						マグナに負けてばっかりの\n弱々な下僕だよ♪
+CharacterOff
+	ネロ	通常						浮気なんていけないんだー！\nお兄ちゃんはネロに絶対服従な\nネロだけのお兄ちゃんなのー！
+CharacterOff
+	クサナギ=レガリア	通常						このように貴方は、\n陛下のことを大大大好きな三桁超え\n魔剣のハーレム王です♪
+CharacterOff
+	ディーア	拡大絶望4	エフェクト表					何股してるんだ、ボクは!?
+CharacterOff
+	ディーア	絶望4						彼女だけで何人がいるんだ!?\nしかも小さい子を義理の妹にしたり\n下僕になったり!?
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						それにハーレム王!?\n全員がボクのこと大大大好き!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						節操ってものがないのか!?\nボクには!?
+CharacterOff
+	ベルゼ	慌て
+Tween	ベルゼ	PunchPosition	y=30				NoWait
+	ベルゼ	慌て						ここぞとばかりに\n変なことを刷り込まないで下さい！\nせんぱいが大混乱しています！
+CharacterOff
+	アクエリア	通常						どなたか真面目に簡潔に、\n説明できる魔剣はいないのですか？
+StopBgm
+CharacterOff
+	ルンブレB	通常						でしたら一番の新参者で、\nマスターを客観的に評価してきた\n私がインストラクターとなります
+Bgm	作戦会議
+	ルンブレB	通常						マスター、\nあなたはこの全ての魔剣の魔剣使い\nそして魔界で名高い魔剣王です
+CharacterOff
+	ディーア	驚き4						魔剣、王……
+Param	character_grayout=false
+CharacterOff
+	ルンブレB	通常						あなたはリディ様を救うために\n長い間、旅と戦いを続け
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	天界					0
+	天業剣クリーフォート		1_2_b			0
+	天上王セト		2_2			0
+	          		p3
+FadeIn	white					.3
+	ルンブレB	<Off>						天上王セトや
+FadeOut	white					.3
+CharacterOff						0
+Bg	第零異変コア					0
+	覇王ゼフ	アーク				0
+	          		p3
+FadeIn	white					.3
+	ルンブレB	<Off>						太陽王アーク
+FadeOut	white					.3
+CharacterOff						0
+Bg	竜鍵マナ					0
+	幻想王ノア	怒りH				0
+	          		p3
+FadeIn	white					.3
+	ルンブレB	<Off>						幻想王ノア
+FadeOut	white					.3
+CharacterOff						0
+Bg	廃墟A(魔王獣)					0
+	魔王獣					0
+	          		p3
+FadeIn	white					.3
+	ルンブレB	<Off>						魔界を滅ぼしうる魔王獣
+FadeOut	white					.3
+CharacterOff						0
+Bg	白背景					0
+	エクスカリバー=ノイズ	怒り	2_2
+	希望王ルル	怒り2	1_2
+	          		p3
+FadeIn	white					.3
+	ルンブレB	<Off>						そして、\n創生の聖剣エクスカリバー=ノイズと\nその主、希望王ルル
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	カジノ					0
+	ルンブレB	通常				0
+FadeIn	white					.3
+	ルンブレB	通常						数多くの強敵を倒し、\nついには魔界を滅亡から救った\n魔王に最も近いお人
+CharacterOff
+	緋剣ブロードソード=ロスト							そして私たちという\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>を救い
+CharacterOff
+	覇王剣ラグナロク	真解放通常						原初に名を連ねた我らの王となり
+CharacterOff
+	ルンブレB	通常						:Blazeという強大な兵器も扱える\n最強の魔剣使いなんです
+CharacterOff
+	ディーア	驚き4						さい、きょう……
+	ディーア	怪しい4						それって小説の設定とかじゃ？
+CharacterOff
+	ルンブレB	通常						事実ですが？
+CharacterOff
+	ディーア	絶望4
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						スケールが大きすぎて、\nわけがわからなくなってきた……\nふるえが止まらない……
+	ディーア	絶望4						でもいくら英雄だからって、\n三桁超えハーレムはやばいだろ……\nなに考えてるんだボク……
+Param	character_grayout=true
+CharacterOff
+	煌征ルカ	怒り	p3
+	ルンブレB	通常	p7b
+	ルンブレB	通常						事実を伝えたまでですが、\nこんなに怖がってしまうなんて\n予想外でした
+	煌征ルカ	通常						いつものこの方なら、\n「オレってそんなにすごいんだ！」\nと調子よく言いそうですのに
+StopBgm
+CharacterOff
+	幻想殺しゼタ	真解放						大丈夫だよ
+CharacterOff
+	ディーア	きらーん4						えっ……！
+Bgm	コメディ
+CharacterOff
+	幻想殺しゼタ	真解放笑い						マスターって\n最強って言っても威厳とかないし！
+Tween	幻想殺しゼタ	PunchPosition	y=30				NoWait
+	幻想殺しゼタ	真解放てへぺろ						偉そうだったノアと違って、\nむしろ親しみがあっていい感じ♪
+CharacterOff
+	景光	通常						そうそう！\n一緒に温泉を覗いてくれますし！
+CharacterOff
+	ジャガーノート	通常						いけないいけない\n「おいしゃさんごっこ」をしたがる\n救えない人ですしー♪
+CharacterOff
+	ジャガーノート=ロスト	通常						生活費だって\nリディちゃんのバイト頼りー
+CharacterOff
+	カイロス	通常
+Tween	カイロス	PunchPosition	y=30				NoWait
+	カイロス	通常						でも一発逆転狙って、\nギャンブルでぜんぶすっちゃう！
+CharacterOff
+	ラピスフィロソフィア	通常
+Tween	ラピスフィロソフィア	PunchPosition	y=30				NoWait
+	ラピスフィロソフィア	通常						そしてレイバー先輩と共に\nカニ漁に送られたことは伝説です！
+CharacterOff
+	レイバーインヴェスティ	慌て2
+Shake	レイバーインヴェスティ		x=3				NoWait
+	レイバーインヴェスティ	慌て2						うっ……！\nあの夏とカニの記憶が……！
+CharacterOff
+	パイ＆シーズ=ハレ	パイ						それに魔剣のみんなと、\nイチャイチャし放題だったよー♪
+	パイ＆シーズ=ハレ	シーズ						毎日毎晩、とっかえひっかえ♪
+CharacterOff
+	ロンゴミアント=オズ	通常						ロリコン疑惑とか、\n街で裸になって逮捕されたことも\nたくさんあるけど<dash=2>
+Tween	ロンゴミアント=オズ	PunchPosition	y=30				NoWait
+	ロンゴミアント=オズ	通常						そういうところもマスターやから！\n無罪無罪！
+CharacterOff
+	白櫃	嬉しい
+Tween	白櫃	PunchPosition	y=30				NoWait
+	白櫃	嬉しい						そしてすごく変態でした！
+CharacterOff
+	幻想殺しゼタ	真解放						だから、\nプレッシャーなんて感じなくても\n大丈夫<dash=4>
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表
+	ディーア	拡大絶望4	エフェクト裏					大丈夫じゃない！\n完全にダメ人間だろ!?
+CharacterOff
+	ディーア	絶望4
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						女の子をたくさん侍らせて、\nイケないことを毎日たくさんやって\n女の子を働かせるヒモ!?
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						その挙げ句に、\n逮捕されるなんてダメすぎる!!
+	ディーア	絶望4						もうダメだ、おしまいだ……！
+	ディーア	絶望4						ボクはこれから\nどうやって罪を償えばいいんだ！
+CharacterOff
+	魔劍グラム=オルタ	悲しい2						どんどん、\nマスターさんが絶望してる……
+CharacterOff
+	魔剣グラム	通常						良くも悪くも、\nいつもの所業が規格外すぎて\n混乱しているようね
+StopBgm
+	魔剣グラム	通常						仕方ないわ\nちょっと荒療治だけれど<dash=2>
+Bgm	バトル
+CharacterOff
+	キノコリオン	通常
+Tween	キノコリオン	PunchPosition	y=30				NoWait
+	キノコリオン	通常						ノコォオオオオオ!!
+CharacterOff
+	ディーア	絶望4						ひぃっ！\nま、魔物だぁあああああ!?
+CharacterOff
+	キノコリオンヌ	嬉しい
+Tween	キノコリオンヌ	PunchPosition	y=30				NoWait
+	キノコリオンヌ	嬉しい						通りすがりの子に\n協力してもらったノコ！
+CharacterOff
+	魔剣グラム	通常						魔剣使いとしての戦いを、\nその体で思い出してもらいましょう
+	魔剣グラム	通常						さあ、魔剣を手に取りなさい！\n私たちのマスター！
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_04
+EndIf
+EndScenario
+
+# E_1199_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	カジノ					0
+	ディーア	驚き4				0
+FadeIn	black					1
+	ディーア	驚き4						ほ、本当に倒せた……
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						まだ怖くて、\n足がガタガタに震えてるけど……
+	ディーア	絶望4						あんなモンスターと戦うのが、\nボクの日常だったのか……
+CharacterOff
+	煌征ルカ	通常	p3
+	ルンブレB	通常	p7b
+	ルンブレB	通常						戦闘中の魔剣使いの身体は、\n私たち魔剣が動かすことができます
+	ルンブレB	通常						しかしそうして戦うにはコツが必要\nいいセンスでした、マスター
+	煌征ルカ	通常						記憶をなくして勇気がでないことで\n力は相応に落ちていますが、\nやはり魔剣使いなんですわね……
+CharacterOff
+	レヴァ	通常						さすがはマイマスター♪
+	レヴァ	通常						どう？\n戦ってなにか思い出せた？
+CharacterOff
+	ディーア	絶望4						ご、ごめんなさい……
+CharacterOff
+	魔剣グラム	通常						この調子だと、\nまだまだ時間はかかりそうね
+CharacterOff
+	煌征ルカ	通常	p3
+	ルンブレB	通常	p7b
+	煌征ルカ	通常						でもそんなに\n悠長と待つ時間はありませんわよ？
+	ルンブレB	通常						タイムリミットは\nどんどんと近づいております
+	ルンブレB	通常						ロールお嬢様のことも忘れて\nお食事会に出したら大変なことに
+CharacterOff
+	モッド							だったら！\nより強い刺激を与えてみない？
+CharacterOff
+	エレ・マトラ	通常						原因が魔導書でも！\n魔剣王のリーダーの抵抗力なら\n少しのきっかけで拒絶できるはず！
+StopBgm
+CharacterOff
+	オーガニクス	通常						そして記憶喪失の時の解決方法は！
+Bgm	コメディ
+Param	character_grayout=false
+CharacterOff
+	集中線		エフェクト表			0
+	グラム=スサノオ	通常						殴ります！
+CharacterOff	グラム=スサノオ
+	ヤグルシ	通常						殴るし！
+CharacterOff	ヤグルシ
+	セロトニン	暴走						殴っちゃう！
+CharacterOff	セロトニン
+	バールのようなもの神殺	通常2
+Tween	バールのようなもの神殺	PunchPosition	y=30				NoWait
+	バールのようなもの神殺	通常2						後ろからガツーンと♪
+CharacterOff
+	偽剣グラム×サンタ	通常						記憶が戻るどころか、\n頭が吹っ飛ぶわよ……!?
+CharacterOff
+	ディーア	悔しい4						これがボクの業、ボクの罰……！
+CharacterOff
+	煌征ルカ	怒り						却下ですわっ！
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	怒り						この方を倒すのは私なんですから！
+CharacterOff
+	モッド							物理はダメ？
+Tween	モッド	PunchPosition	y=30				NoWait
+	モッド							だったら科学の出番だよね！
+CharacterOff
+	カンタレラ	通常						記憶が戻るくらいの毒……\n難しいですが主様が望むのなら
+CharacterOff
+	ドーパミン	通常						でも安心してよ、患者A！
+CharacterOff
+	スカーミリオネ	通常						貴重な実け……じゃなくて\n治療の機会は無駄にしませんから♪
+CharacterOff
+	スコルピオ	通常						大丈夫よ♪\n力を抜いて、身を委ねて……♪
+CharacterOff
+	ディーア	絶望4						この罪深い身体を科学の礎に……！
+CharacterOff
+	煌征ルカ	照れ
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	照れ						ぜったいダメですわぁー!!
+	煌征ルカ	照れ						少しくらい\n安心できる方法はないんですの!?
+CharacterOff
+	モッド							にはは♪ 安心して！\n今のはちょっとした冗談だから！
+StopBgm
+	モッド							ちゃんと程よく刺激を与える\n薬をつくって<dash=2>
+Bgm	バトル
+CharacterOff
+	混乱した招待客	通常						うわぁあああああ!?\n変な色のドリンクを飲んだら\nなんだこれはー!?
+Tween	混乱した招待客	PunchPosition	y=30				NoWait
+	混乱した招待客	通常						体が熱い、骨が溶けるようだ！
+CharacterOff
+	モッド							あちゃー\n一般人にはきつかったかな？
+CharacterOff
+	ディーア	絶望4						ちょっと待て!?\nボクはあれを飲んで平気なのか!?
+CharacterOff
+	ルンブレB	通常						とにかく緊急事態です\n彼を救助しましょう、マスター
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_05
+EndIf
+EndScenario
+
+# E_1199_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	カジノ					0
+Param	character_grayout=false
+	旅人					0
+	          	<Off>	1_2
+FadeIn	black					1
+	招待客	<Off>	1_2					あれ、俺はいったい<dash=2>
+CharacterOff
+	煌征ルカ	通常						なんにもありませんでしたから、\nお気になさらず！
+CharacterOff
+	モッド							ちょっとトラブルはあったけど、\nマスターちゃんもぐびっと♪
+CharacterOff
+	煌征ルカ	怒り						させるわけないでしょう!!
+CharacterOff
+	ディーア	絶望4						助かった……
+CharacterOff
+	ハデス	悲しい2						でもどうしましょう……
+	ハデス	悲しい2						このままマスターさんが\n元に戻らないと\nハデスは圧かけてもらえません
+CharacterOff
+	ぎんいろ	悲しい						またあなたは、\n私に名前をくれるのかしら……
+CharacterOff
+	リヴァイアサン	通常
+Tween	リヴァイアサン	PunchPosition	y=30				NoWait
+	リヴァイアサン	通常						ちょっとみんな！\nしんみりするのはまだ早いぞ！
+CharacterOff
+	黒櫃:Blaze	通常						そうとも！\n天才であるマスターのことだ！\n天才的に解決するはず！
+	黒櫃:Blaze	通常						それにこの天才も！\n天才的な解決方法を思いついた！
+Tween	黒櫃:Blaze	PunchPosition	y=30				NoWait
+	黒櫃:Blaze	通常						記憶と体は密接に結びつくもの！\n身についた習慣は\n無意識に繰り返してしまうように！
+	黒櫃:Blaze	ニヤリ						だから習慣を再現してみれば、\n記憶も自ずと甦るのではないかな？
+CharacterOff
+	レヴァ	通常						なるほどー！\nさっすが天才の黒櫃:Blazeちゃん！
+CharacterOff
+	ルンブレB	通常						マスターが普段行っていたことを、\n模擬戦してみるというのですね
+	ルンブレB	通常						それでしたら<dash=2>
+CharacterOff
+	イミティション=サタニア	単体						彼からたくさん要望を受けてきた\n私が適格かもしれないわ
+	イミティション=サタニア	単体						だったら、\nあなたがいつも好んでいたことを\nそう<dash=2>
+StopBgm
+	集中線		エフェクト表
+	イミティション=サタニア	単体						「手巻き寿司プレイ」を
+Se	ポップイン
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	絶望4	p7			0
+	イミティション=サタニア	単体	p3b			0
+	オーラ桃		エフェクト表			0
+Wait						1
+FadeIn	white					.3
+Bgm	コメディ
+	イミティション=サタニア	単体						ふぅ……
+	イミティション=サタニア	単体						これがあなたの一番好きな方法よ
+Param	character_grayout=true
+CharacterOff	オーラ桃
+Shake	ディーア		x=5				NoWait
+	ディーア	絶望4						魔剣王……！\nお前ってヤツは本当に……!!
+CharacterOff
+	煌征ルカ	照れ	p3
+	ルンブレB	通常	p7b
+	ルンブレB	通常						いったい、\n別室でなにがあったのでしょう？
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	照れ						わ、私が知るはずないですわ！
+CharacterOff
+	黒櫃:Blaze	通常						マスターとの習慣を再現できる子は\n他にはいないかい？
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	真解放通常						だったらヴェルの出番よ！
+	煉獄剣ヴェルガトゥリオ	真解放通常						大好きなマスターとの日課♪\n一日だって欠かしたことないわ♪\nそう<dash=2>
+CharacterOff
+	煉獄剣ヴェルガトゥリオ	真解放拡大通常	エフェクト表					子作りよ♪
+CharacterOff
+	ディーア	絶望4						えっ……？
+CharacterOff
+	ディーア	拡大絶望4	エフェクト裏					それだけはマズいだろ!?\nおい、魔剣お<dash=2>
+Param	character_grayout=false
+Se	ポップイン
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	にやけ4	p7			0
+	煉獄剣ヴェルガトゥリオ	真解放通常	p3b			0
+	オーラ光		エフェクト表			0
+Wait						1
+FadeIn	white					.3
+	煉獄剣ヴェルガトゥリオ	真解放通常						記憶がなくなっても、\nやっぱりマスターはマスターね♪\nとっても紳士的だったわ♪
+CharacterOff	オーラ光
+Param	character_grayout=true
+	ディーア	にやけ4						頬にキスしただけだった……
+	ディーア	にやけ4						ピュアピュアすぎて浄化された……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	にやけ4						信じていたぞ、魔剣王！\nお前にも理性が残っていたんだな！
+CharacterOff
+	焔華剣テュフォーン	真解放通常						もはや心配する気にもならんわ！
+CharacterOff
+	覇王剣ラグナロク	真解放悲しい						むしろずっとお預けなマスターに\n同情してしまいますね
+CharacterOff
+	ごくひらロスト	通常	p8b
+	名刀・大包平	通常2	p5
+	獄刀大包平	通常	p2b
+Tween	獄刀大包平	PunchPosition	y=30				NoWait
+	獄刀大包平	通常						お姉ちゃんチャンスだよ！\n今のうちにきせーじじつを！
+Shake	名刀・大包平		x=2				NoWait
+	名刀・大包平	通常2						ふえええええ!?
+	ごくひらロスト	通常						いやらしい雰囲気にするのは\n任せておきなさい
+CharacterOff
+	原罪ロール	笑いIMT						私のことを毎日毎晩、\n力づくで組み敷いていたことくらい\nすぐに思い出せるわよね？
+	原罪ロール	笑いIMT						ええ、罪深い魔剣王サマ♪
+CharacterOff
+	アリス=ピュア=ロスト	通常						それ以前に、\nあなたはこのアリスの家具なの♪
+	アリス=ピュア=ロスト	通常						すぐに身体で、\n思い出させてあげましょうか？
+CharacterOff
+	ディーア	絶望4						お前は誰だ、ボクの中のオレ……
+	ディーア	絶望4						だめだ、\nますます自分が誰かわからなくなる
+Param	character_grayout=false
+CharacterOff
+	ルンブレB	通常						でしたら逆に、\nマスターが魔剣の側を体験するのも\nいかがでしょうか？
+	集中線		エフェクト表
+	ルンブレB	拡大通常	エフェクト裏					主従逆転ごっこです
+FadeOut	black					.3
+CharacterOff						0
+	グレイプニル	通常				0
+Wait						0
+FadeIn	black					.3
+	グレイプニル	通常						あるじ、あるじ……\nしばっちゃったけどいたくない……？
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ディーア	にやけ4						なんか、気持ちいいかも……♪
+CharacterOff
+	煌征ルカ	照れ
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	照れ						ストップですわ！\nなんか変な扉を開いてますわよ!?
+StopBgm
+CharacterOff
+	アスモデウス=サラ	驚き
+Tween	アスモデウス=サラ	PunchPosition	y=30				NoWait
+	アスモデウス=サラ	驚き						ええええっ！\nいつもと逆に先輩に耳かきしてもらう\n準備してたのに（がっかり）！
+Param	character_grayout=true
+CharacterOff
+	ルンブレB	通常	p7b
+	ディーア	汗4	p3
+	ルンブレB	通常						マスターはいかがですか？\n記憶を戻すためにやりたいことは\nありますか？
+Bgm	神秘
+	ディーア	汗4						あっ……いや、特には……
+	ディーア	絶望4						ごめんなさい、\n皆さんがたくさん頑張ったり、\n提案してくれてるのに
+	ルンブレB	通常						大丈夫です、\n魔剣の皆さんもこのハプニングを\n楽しむ余裕がありますから
+	ルンブレB	通常						きっとそれは、\nマスターならなんとかしてくれると\n信じているからでしょう
+	ディーア	驚き4						それは……\nルーンブレード:Blazeさんも？
+	ルンブレB	通常						そうですね\nあなたの魔剣使いとしての力、\nそして経歴
+	ルンブレB	通常						そこに私の性能が合わさることで、\n理論上敵はいなくなります\nそうすれば私の願いは叶えられる
+Tween	ディーア	MoveBy	x=50				NoWait
+	ディーア	驚き4						願いって……？
+Tween	ルンブレB	PunchPosition	y=30				NoWait
+	ルンブレB	通常						あっ……！
+Tween	ディーア	MoveBy	x=-50				NoWait
+	ディーア	絶望4						ご、ごめん！
+	ルンブレB	通常						いえ、今のは私が悪いんです
+	ルンブレB	通常						私の身体は:Blaze改造によって、\n一般的な魔剣少女よりも\n力が強く調整されていますから
+	ルンブレB	通常						あまり近づくと、\n怪我をさせてしまうかもしれません
+	ディーア	驚き4						あなたの願いは、\nそこまで強くならないと叶えられない\nものなんですか……？
+	ルンブレB	通常						…………それは
+FadeOut	black					.3
+CharacterOff						0
+	ルーンブレード	通常				0
+FadeIn	black					.3
+	ルーンブレード	通常						マスターくん、\n私と買い物したら思い出さないかな？
+CharacterOff
+	ルーンロッド	通常						逆にあたしが、\nマスターさんを看病したり……？
+CharacterOff
+	アクス	通常						私と一緒にトレーニング！
+Tween	アクス	PunchPosition	y=30				NoWait
+	アクス	通常						……って、\nそれはいつもしてることだね！
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	怪しい4	p3			0
+	ルンブレB	通常	p7b			0
+FadeIn	black					.3
+	ルンブレB	通常						はい、そうです
+	ルンブレB	通常						昔の私は弱くて、\nいつも守ってもらっていたから
+	ルンブレB	通常						私もあなたのように……
+	ルンブレB	通常						マスターのように\n強くなりたかったんです
+	ディーア	怪しい4						マスター、ボクみたいに……？
+	ディーア	絶望4						本当にボクは、\nそこまで強い人だったのか……？
+	ディーア	絶望4						記憶がなくなったボクは、\nこんなに情けなくて臆病なのに……
+	ディーア	絶望4						強敵を倒して、\nたくさんの魔剣に慕われて……
+	ディーア	絶望4						ボクはどうやって、\nそんな勇敢な人になったんだ？
+	ルンブレB	通常						記憶が戻れば……\n必ず元通りに強くなれますよ
+	ディーア	驚き4						それは…………
+	ディーア	絶望4						あのドラゴンを倒せるくらい？
+StopBgm
+	ルンブレB	通常						えっ……？
+Bgm	バトル
+CharacterOff
+	魔導竜アンプアス	通常				1		よし、こっそりと侵入できたぞ
+	魔導竜アンプアス	通常						このままパーティーを台無しにして\n忌々しい司書王に魔剣使いを……
+CharacterOff
+	ディーア	怪しい4	p3
+	ルンブレB	通常	p7b
+	ルンブレB	通常						どうやら敵のようですね\nあのドラゴンの討伐を要請します
+	ルンブレB	通常						大丈夫、あなたなら一狩りです
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						魔剣王は、\nドラゴンを一狩りできるの!?
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_06
+EndIf
+EndScenario
+
+# E_1199_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	カジノ					0
+Param	character_grayout=false
+	ディーア	絶望4				0
+FadeIn	black					1
+	ディーア	絶望4						ひぃ……ひぃ……\nなんとかたおせたぁ……
+CharacterOff
+	クサナギB	通常						最強無敵のドラゴンキラーは\n今日も仕事をしたよ
+CharacterOff
+	クサナギノツルギ	通常						期待にこたえるのは、\nクサナギノツルギの役目だから！
+CharacterOff
+	ルンブレB	通常						いかがですかマスター、\n色々トライしましたが記憶はまだ？
+CharacterOff
+	ディーア	汗4						まだ、です……
+CharacterOff
+	ルンブレB	通常						そうですか……\nこれ以上はマスターの負担が\n大きくなりすぎますね
+	ルンブレB	通常						ロサさんたちが、\n結果を出すまで待ちましょう
+CharacterOff
+	ディーア	汗4						はぁ……よかった……
+Shake	ディーア		x=2				NoWait
+	ディーア	汗4						いっそこのまま、\nぜんぶ思い出さなくても……
+Param	character_grayout=true
+StopBgm
+CharacterOff
+	煌征ルカ	拡大絶望	エフェクト表					今、なんとおっしゃいました？
+Bgm	絶望
+CharacterOff
+	煌征ルカ	怒り	p7b
+	ディーア	驚き4	p3
+	ディーア	驚き4						えっ……？
+	煌征ルカ	怒り						思い出さなくて良いと、\n本当にそう思ったのですか？
+	煌征ルカ	怒り						まさか今までも、\n記憶を取り戻したくないと\n思っていたのですか!?
+CharacterOff
+	ルンブレB	通常						ルカさん……！
+CharacterOff
+	煌征ルカ	怒り	p7b
+	ディーア	驚き4	p3
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	怒り						答えてくださいませ！
+	ディーア	悔しい4						だって……
+	ディーア	悔しい4						苦しいんだよ……
+	ディーア	絶望4						みんなから聞くボクは、\nフィクションの登場人物みたいに\n勇敢で格好良くて
+	ディーア	絶望4						ボクがそんな王様だったなんて、\nぜんぜん信じられない
+	ディーア	絶望4						それにみんなの\n期待に、好意に応えたくても
+	ディーア	絶望4						思い出そうと考えるたびに、\nボクのどこかが訴えるんだ……
+	ディーア	絶望4						思い出さなくていい、\nこのままのほうが安心だって……
+	煌征ルカ	怒り						そんな情けないことを……！
+	煌征ルカ	怒り						あなたはそんな情けない人では\nありませんわ！
+Tween	煌征ルカ	MoveBy	x=-10				NoWait
+	煌征ルカ	怒り						あなたはあんなに強かったのに！
+	ディーア	本気4						じゃあどうすればいいんだ!?\nボクは魔剣王じゃない！\nみんなが慕ってる魔剣使いでもない！
+	ディーア	絶望4						どうすれば勇気を出して、\nみんなが望むように強くなれる!?\n教えてくれよ！
+Tween	煌征ルカ	MoveBy	x=10				NoWait
+	煌征ルカ	悲しい						っ…………！
+	煌征ルカ	悲しい						だから、\n私との約束も破るのですか？
+	ディーア	驚き4						約束って……\n最初に会ったときに……
+	煌征ルカ	悲しい						あなたは私からお兄ちゃんを奪い、\n私の魔界への復讐を止めた方
+	煌征ルカ	悲しい						私が憎み、\n立ち向かうべき最大の仇……！
+	煌征ルカ	悲しい						そう言って！\n苦しみを受け止めてくれたのに！
+Shake	煌征ルカ		x=2				NoWait
+	煌征ルカ	悲しい						迷っていいと、\n私の命を肯定してくれたのに！
+	煌征ルカ	悲しい						そのあなたがいなくなったら\n私はどうすればいいのですか!?
+	煌征ルカ	悲しい						そんなの、あんまりですわ……
+CharacterOff
+	ルンブレB	通常						ルカさん……
+StopBgm
+CharacterOff
+	魔剣グラム	通常						そこまでにしておきなさい
+	魔剣グラム	通常						緊急事態よ\n会場の様子がおかしいわ
+Bgm	図書館
+CharacterOff
+	煌征ルカ	怒り	p7b
+	ディーア	驚き4	p3
+	煌征ルカ	怒り						えっ……？
+CharacterOff
+	魔剣グラム	通常						キノコリオンや、\nおかしくなった客はともかく
+	魔剣グラム	通常						アンプアスのような魔物が暴れて\n司書王が行動しないなんてありえない
+CharacterOff
+	魔剣グラム:Blaze	目閉じ						おそらく彼女でも察知できない、\nあるいは干渉できない状態にあるわ
+	魔剣グラム:Blaze	目閉じ						おそらく我々は、\n何者かの術中に嵌まっている
+	魔剣グラム:Blaze	目閉じ						なにより今まで、\nそれを私たちに気づかせなかった
+	魔剣グラム:Blaze	通常						こんな芸当ができるのは、\n魔王候補クラスの相手でしょうね
+CharacterOff
+	レヴァ	本気						そんな敵を相手にするなら、\n今のマスターの状態は危険だよ！
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	本気						早く元に戻さないと！
+CharacterOff
+	ルンブレB	通常						ですが元に戻す方法は？
+	ルンブレB	通常						そう都合よく解決方法なんて<dash=2>
+Se	走る
+CharacterOff
+	ロサ	嬉しい				1		お待たせしました！\n原因の魔導書を特定して解呪方法も\n見つけることができました！
+	ロサ	嬉しい						もっと時間がかかると思いましたが\nいつの間にか手元に……！
+	ロサ	嬉しい						これで、\nご主人様の記憶を解放できます！
+CharacterOff
+	ルンブレB	通常						本が手元に……？
+	ルンブレB	通常						そんな偶然あるのでしょうか？\nもう少しサーチして<dash=2>
+CharacterOff
+	ディーア	目閉じ4						…………
+	ディーア	怒り4						いいえ、早くやりましょう
+CharacterOff
+	ルンブレB	通常						マスター、そう急いでは
+CharacterOff
+	ディーア	怒り4						いいや、急ぐべきだ
+	ディーア	怒り4						覚えていなくても、\nボクにはたくさんの使命や約束がある\nそれに異常事態の中にいる
+	ディーア	通常4						それに元のボクが\n皆さんから慕われていたことは\n痛いほどわかりますから
+	ディーア	悔しい4						だけど今の弱いボクなんかじゃ、\nその責任には耐えられない
+	ディーア	怒り4						元のボクに、ボクが戻りたい
+	ディーア	怒り4						それがボクの役目なら
+CharacterOff
+	煌征ルカ	悲しい						っ……！
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	大灯台B					0
+	裏ディーア	ハテナ				0
+FadeIn	white					.3
+	裏ディーア	ハテナ						オレには結果が全てだ、\nリディを救えなければ価値はない
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	カジノ					0
+	煌征ルカ	悲しい				0
+FadeIn	white					.3
+	煌征ルカ	悲しい						私は……、私も……？
+	煌征ルカ	悲しい						魔剣王様に押し付けて……？
+Param	character_grayout=false
+StopBgm
+CharacterOff
+	ロサ	本気						では、はじめます
+CharacterOff
+	ディーア	怒り4						はい、元の魔剣王に<dash=2>
+Se	チャージ
+	オーラ青		エフェクト表
+	ディーア	絶望4						がっ…………！？！？！？
+CharacterOff
+Se	マイクノイズ	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+FadeOut	black					.1
+Wait						1
+CharacterOff						0
+Bg	カジノ					0
+	ディーア	絶望4				0
+	オーラ紫		エフェクト表			0
+StopSe
+FadeIn	black					.1
+Bgm	魔獣バトル
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						がぁああああああ!?
+CharacterOff
+	煌征ルカ	悲しい						魔剣王様……!?
+CharacterOff
+	ルンブレB	通常						これは術式の影響で……？
+CharacterOff
+	ロサ	汗						いいえ！\n解呪はちゃんと働いています！\nですがこれは<dash=2>
+	ロサ	絶望						ご主人様自身が、\n記憶に耐えられていない!?
+CharacterOff
+	ディーア	絶望4
+	オーラ紫		エフェクト表			0
+	ディーア	絶望4						なんだ、これ……？\nなんなんだ、この記憶は……!?
+	ディーア	絶望4						<color=red>怖い痛い苦しい怖い痛い苦しい怖い痛\nい苦しい怖い痛い苦しい怖い痛い苦し\nい怖い痛い苦しい怖い痛い苦しい怖い</red>
+	ディーア	絶望4						何度も何度もそればかり繰り返して
+	ディーア	絶望4						こんなの、\n人間に耐えられるわけが<dash=2>
+StopBgm
+CharacterOff						0
+Bg	黒背景					0
+	？？？？	<Off>						いらないのかい？
+	？？？？	<Off>						だったら僕が貰ってあげよう
+FadeOut	black					.3
+CharacterOff						0
+Bg	カジノ					0
+	オーラ紫		エフェクト表			0
+FadeIn	black					.3
+Se	闇1
+	幻想王ノア	通常				1		この幻想王ノアがね
+Bgm	図書館
+	幻想王ノア	通常						フフ、久しぶりの魔界だ……！
+CharacterOff
+	焔華剣テュフォーン	真解放通常						貴様は……!!
+CharacterOff
+	ロサ	絶望						ご主人様の中から……？
+CharacterOff
+CharacterOff
+	幻想王ノア	通常						ようやく手に入れた……!!
+	幻想王ノア	通常						幾千もの並行世界の記憶！\n魔剣！ ソウル！ 悪魔の鍵!!
+	幻想王ノア	通常						まさに唯一無二の伝承！
+	幻想王ノア	通常						キミの《魔剣王の記憶》は\n僕が使わせてもらおう
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_07
+EndIf
+EndScenario
+
+# E_1199_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	カジノ					0
+Param	character_grayout=false
+	ディーア	悔しい4				0
+FadeIn	black					1
+	ディーア	悔しい4						おまえは、いったい……？
+CharacterOff
+	幻想王ノア	通常						僕を忘れるなんて酷いな、\n魔剣王
+	幻想王ノア	通常						だがまあ、\nそう仕向けたのは僕自身だ
+	幻想王ノア	通常						許してあげるとしよう
+CharacterOff
+	焔華剣テュフォーン	真解放通常						幻想王ノアじゃと!?\n貴様、生きておったのか!?
+CharacterOff
+	幻想殺しゼタ	真解放本気						違うよテュフォーン\nアレはあたしのマスターだった\nノア本人じゃない
+CharacterOff
+	幻想王ノア	通常						その通り、\n僕のオリジナルである幻想王は\nたしかに消滅した
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	竜鍵マナ					0
+	スモーク		エフェクト表			0
+FadeIn	white					.3
+	幻想王ノア	悔しいH						ぐああああああッッ……!!
+	幻想王ノア							やめろ、やめろ……ッ!!\n僕に、夢を、見せるな……ッ!!
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	カジノ					0
+	幻想王ノア	通常				0
+FadeIn	white					.3
+	幻想王ノア	通常						魔剣殺しブリジットから奪取した\n《魔王獣の記憶》
+	幻想王ノア	通常						それを利用した新たな【方舟】、\n幻想記憶結晶《ブリジット》による\n究極の"現状維持"
+	幻想王ノア	通常						全ての夢が叶わず、\n夢が夢として永続する世界を目前に\n僕は敗れ去った……
+CharacterOff
+	魔剣グラム:Blaze	通常						そんなことを説明する必要はないわ
+	魔剣グラム:Blaze	通常						私たちも戦いの当事者\n貴方の最後はちゃんと見届けたもの
+CharacterOff
+	幻想王ノア	通常						だったら知っているだろう？\n僕は元々肉体を捨てた情報生命体だと
+	幻想王ノア	通常						僕を認識することそれ自体が、\n幻想王ノアの情報を保持することに\n他ならないのさ
+	幻想王ノア	通常						魔剣王であっても例外じゃない
+CharacterOff
+	幻想殺しゼタ	真解放驚き						ってことは、\nマスターに寄生していたってこと!?
+	幻想殺しゼタ	真解放蔑み						ほんっとに最低っ!!
+CharacterOff
+	幻想王ノア	通常						まあそう言うなよ、元相棒
+	幻想王ノア	通常						残り滓のような情報から、\nここまで復元するのに苦労したんだ
+	幻想王ノア	通常						とはいえ、\nこの身体はそう長くは保たないし\n人格も下手なデッドコピーだ
+	幻想王ノア	通常						僕には新たな身体と、\n目的を叶える新たな【方舟】がいる
+	幻想王ノア	通常						だが既に手中にしたことのある方法、\nもう一度やるのは造作もない
+	幻想王ノア	通常						……フフ
+CharacterOff
+	ディーア	絶望4						ひっ……!?
+CharacterOff
+	煌征ルカ	怒り						だから魔剣王様を……？
+CharacterOff
+	幻想王ノア	通常						魔剣と人間から生まれた天使、\nそして《無垢の世界意思》という\n唯一無二の魔剣の特性
+	幻想王ノア	通常						数多のソウルと魔剣の力、\nそれにより魔王獣や聖剣を討伐した\n魔剣王の伝承……
+	幻想王ノア	通常						僕の依代としても\n幻想記憶結晶を創る伝承としても\n彼は最も適格だったんだ
+CharacterOff
+	ロサ	本気						ご主人様が書庫に迷い込んだのも、\nあの魔物もあなたの仕込み
+CharacterOff
+	覇王剣ラグナロク	真解放通常						ですがあなた程度の力で、\nマスターを乗っ取れるわけありません
+CharacterOff
+	幻想王ノア	通常						当然だとも
+	幻想王ノア	通常						彼は僕を打ち破った相手\nその力には敬意すら抱いている
+	幻想王ノア	通常						しかし、\nいくら最強でも記憶を失えば？
+	幻想王ノア	通常						彼の強さは、\n幾千もの並行世界の旅で精錬された\n勇敢なる魂に基づいている
+	幻想王ノア	通常						記憶を失った彼は、\nこの通りの情けなく弱い人間だ
+	幻想王ノア	通常						そして記憶が戻るというのは、\n並行世界の惨劇の記憶を\n一度に浴びることに他ならない
+	幻想王ノア	通常						幾千幾万の敗北と惨劇を、\n今の彼が受け止められるはずがない
+	幻想王ノア	通常						本来なら、\n記憶は決して奪えぬものだが……
+	幻想王ノア	通常						僕の想像した通りに\n無垢な彼は記憶を拒絶してくれた
+CharacterOff
+	レヴァ	本気						じゃあ私たちが、\nマスターの記憶を戻そうとしたのも
+CharacterOff
+	幻想王ノア	通常						僕の描いた幻想の通りだったわけさ
+StopBgm
+	幻想王ノア	通常						本体から拒絶された記憶は、\nこうして僕の手に収まってくれた
+	幻想王ノア	通常						魔剣王として、\n彼が歩んだ戦いの伝承がね……
+Bgm	魔王バトル
+Se	チャージ
+	オーラ赤		エフェクト表
+	幻想王ノア	通常						さあ現れよ、\n幻想記憶結晶《魔剣王》
+Se	闇3
+CharacterOff
+	オーラ赤		エフェクト表
+	幻想魔剣王	通常				1		…………
+CharacterOff
+	ルンブレB	通常						マスターの\n戦いの伝承を具現化した!?
+CharacterOff
+	ディーア	驚き4						ボクがもう一人……？
+Param	character_grayout=true
+CharacterOff
+	幻想王ノア	通常	p3
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常						竜鍵マナの魔力補給がない中では\nこの程度か
+	幻想王ノア	通常						司書王が妨害を振り切って\n到着するまで時間もそうないだろう
+	幻想王ノア	通常						だが十分だ
+	幻想王ノア	通常						記憶を失ったキミの肉体を\n手に入れるくらい造作もない
+	幻想王ノア	通常						こうして伝承を手にした今、\nあの時の魔剣殺しの少女のように、\nキミの命は残り僅かだ
+	幻想王ノア	通常						そう、キミの旅は今日で終わる
+Se	闇1
+FadeOut	black					.3
+Bg	竜鍵マナ					0
+FadeIn	black					.3
+	幻想王ノア	通常						そしてあの日に止まった、\n僕の旅が再び始まる
+	幻想王ノア	通常						ふふ、面白い趣向だろう？
+	幻想王ノア	通常						さあ、僕の肉体となれ魔剣王
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_08
+EndIf
+EndScenario
+
+# E_1199_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔獣バトル
+Bg	竜鍵マナ					0
+	煌征ルカ	悲しい				0
+FadeIn	black					1
+Shake	煌征ルカ		x=2				NoWait
+	煌征ルカ	悲しい						うっ……!?
+	煌征ルカ	悲しい						深淵のソウルに魔剣の力の再現\n本当に魔剣王様の力を……
+CharacterOff
+	ルンブレB	通常						おそらく、\n魔界からマスターに向けられた\n畏怖さえも力にしています
+CharacterOff
+	幻想王ノア	通常	p3
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常						これこそが僕の望んだ【方舟】
+	幻想王ノア	通常						後は魔剣王の身体と命を奪えば、\n僕に敵はいない
+CharacterOff
+	ルンブレB	通常						ですが、まだ抗う術はあります
+	ルンブレB	通常						その幻想記憶結晶は借り物、\n核となった伝承、\nつまり記憶はマスターのものです
+	ルンブレB	通常						マスターが強く望めば、\nその記憶は反発し、もとに戻る
+CharacterOff
+	幻想王ノア	通常						その通りだ
+	幻想王ノア	通常						魔剣殺しブリジットとは違い、\n彼は目覚めたままだからね
+	幻想王ノア	通常						そして今の僕には覇王のように、\n無理やりに《魔剣王の記憶》を\n保持する力もない
+StopBgm
+CharacterOff
+	煌征ルカ	怒り						でしたら魔剣王様！\n今すぐにあなたの伝承を<dash=2>
+Bgm	絶望
+CharacterOff
+	ディーア	絶望4						ひぃっ……
+	黒グラデーション		エフェクト表			1
+Shake	ディーア		x=4				NoWait
+	ディーア	絶望4						あ、あの記憶を……？\nもういちどぜんぶ体験する？
+	ディーア	絶望4						それで、あんな強い敵と戦う……？
+	ディーア	絶望4						どっちもむりだ、\nぼくにはできない……
+CharacterOff
+	煌征ルカ	悲しい						なっ……!?
+	煌征ルカ	悲しい						そんな、魔剣王様の心が……？
+CharacterOff
+	ルンブレB	通常						マスター、大丈夫です！
+	ルンブレB	通常						私には最強のポテンシャルがある
+	ルンブレB	通常						あなたが引き出してくれれば、\nどんな敵にも勝てます！
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	絶望4						っ…………
+CharacterOff
+	ルンブレB	通常						そんな……
+CharacterOff
+	幻想王ノア	通常	p3
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常						無理もないさ
+	幻想王ノア	通常						万全のときでさえ、\n魔力が切れた魔剣王は恐怖に屈した
+	幻想王ノア	通常						赤子はよく泣くものだろう？
+	幻想王ノア	通常						誰だって最初は弱いんだ
+	幻想王ノア	通常						支えとなる経験もないのに、\n泣き出さないだけ褒めてあげるといい
+CharacterOff
+	黒グラデーション		エフェクト表			1
+	煌征ルカ	悲しい	p3
+	ルンブレB	通常	p7b
+	煌征ルカ	悲しい						弱い……？
+	煌征ルカ	悲しい						魔剣王様も最初は弱かった……？
+	煌征ルカ	悲しい						お兄ちゃんに守られて、\nお兄ちゃんを守れなかった私みたいに
+	ルンブレB	通常						ただ力に憧れて、\nその意味を理解できていなかった\n昔の私みたいに……？
+	ルンブレB	通常						だったらどうして、\nマスターはあんなに強く<dash=2>
+CharacterOff
+	幻想王ノア	通常	p3
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常						夢見心地のような、\n安らかな最期を与えると約束しよう
+	幻想魔剣王	通常						<dash=6>!!
+Param	character_grayout=false
+Se	光2
+	魔法陣1	赤	effect_c			.5
+Tween	魔法陣1	ScaleBy	x=5 y=5				NoWait
+Wait						.5
+Se	光2
+	魔法陣2	赤	effect_b			.5
+Tween	魔法陣2	ScaleBy	x=6 y=6				NoWait
+Wait						.5
+Se	光2
+	魔法陣3	赤	effect_a			.5
+Tween	魔法陣3	ScaleBy	x=7 y=7				NoWait
+Wait						1
+Se	チャージ
+FadeOut	white					1
+Se	光3
+Se	火3
+Se	闇3
+Wait						1
+CharacterOff
+	土煙		エフェクト表			0
+FadeIn	white					1
+Wait						1
+StopBgm
+Param	character_grayout=true
+CharacterOff
+	幻想王ノア	通常	p3
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常						これで<dash=2>
+Param	character_grayout=false
+CharacterOff
+	土煙		エフェクト表
+Wait						.5
+CharacterOff	土煙					.5
+Param	character_grayout=true
+	レヴァ	本気	p7			1		させ、ない……！
+	魔剣グラム	通常	p3b			1		マスターは、守るわ……
+CharacterOff
+	ルンブレB	通常						皆さん……
+CharacterOff
+	ディーア	絶望4						えっ……、どうして……？
+Bgm	ロルリアンレットB
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						なんで、\nボクなんかを守ったんだ……？
+	ディーア	絶望4						今のボクはマスターじゃない、\nかっこよくも強くもなくて、\n最強の魔剣王なんかになれない
+	ディーア	絶望4						それに、\n昔のボクも変なことばかりする\n理解できない人間で……
+	ディーア	絶望4						なによりボクは、\n自分の過去と向き合う勇気もない
+StopBgm
+	ディーア	絶望4						なのにどうして？
+Bgm	ロルリアンレットC
+CharacterOff
+	魔劍グラム=オルタ	通常2	p3b
+	ハデス	本気2	p7
+	魔劍グラム=オルタ	通常2						そんなの、当たり前です……！
+	ハデス	本気2						あなたがマスターさんだから\nハデスは守りたいんです
+CharacterOff
+	バハムート	通常	p3b
+	ネクロノミコン	通常2	p7
+	バハムート	通常						バハムートちゃんが\nマスターさんのこと大好きなのは\nあなたがマスターさんだから！
+	ネクロノミコン	通常2						ヘタレなのは元々\n弱くても魔王になるまで、\nわたしが強くします
+CharacterOff
+	クサナギノツルギ	通常	p3
+	ぎんいろ	通常2	p7b
+	クサナギノツルギ	通常						あるじ様が最強より、\nたくさんお願いしてくれる方が\nうれしいよっ！
+	ぎんいろ	通常2						兵器に名前を与えて、\n愛を教えてくれたのはマスター\nあなたのためならなんでもできる
+CharacterOff
+	ブロードソード	通常						私だって……！
+Tween	ブロードソード	PunchPosition	y=30				NoWait
+	ブロードソード	通常						真っ暗な一人ぼっちから、\nアンロックしてくれたのは\nマスターです！
+CharacterOff
+	ルーンブレード	通常						マスターくんが選んでくれたから\nおしゃれも楽しいこともできたの！
+CharacterOff
+	ワイルドエッジ	通常						セッキはね！\nどんなマスターでもだいすきだよ！
+CharacterOff
+	幻想王ノア	通常	p3
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常						無駄なことを
+	幻想王ノア	通常						魔剣使いなしの魔剣なんて、\nただの少女と変わらない
+	幻想王ノア	通常						前に出てきたところで、\n主なしの道具になにができるんだ
+CharacterOff
+	レヴァ	通常	p7
+	魔剣グラム	通常	p3b
+	魔剣グラム	通常						それでも盾にはなれるわ
+	レヴァ	通常						マイマスターが逃げる時間くらい\n稼いでみせるっ！
+	魔剣グラム	通常						幻想王、あなたが言う通りに\n魔剣はどう取り繕っても道具で兵器
+	魔剣グラム	通常						私が魔剣として完全でも、\nマスターがいなければ意味がない
+	魔剣グラム	通常						だからこそ、\nマスターが見つけてくれたことで\n私たちは救われたの
+	レヴァ	通常						それにたーくさん！\n変なことも面白いことも大変なことも\nちょっとエッチなことだって！
+	レヴァ	通常						たくさんの思い出をくれた、\nマスターが大切で大好きなのっ！
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	通常						そんな大切な人を守るんだもん、\n絶対に逃がしてみせるわ！
+CharacterOff
+	ディーア	絶望4
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						だめだ、そんなこと……！
+	ディーア	絶望4						みんなこそ逃げてくれ！\n今の弱いボクじゃ、\nみんなを守れない……！
+	ディーア	絶望4						そんなボクのために、\nみんなを犠牲になんて<dash=2>
+CharacterOff
+	煌征ルカ	怒り						でしたら、一緒に戦いましょう
+CharacterOff
+	ディーア	驚き4						えっ……？
+CharacterOff
+	煌征ルカ	悲しい						先ほどのことを謝らせてください、\n魔剣王様
+	煌征ルカ	悲しい						私はあなただから強いのだと\nずっと思っていました
+	煌征ルカ	悲しい						あなただからお兄ちゃんを倒し、\n私の仇にもなれたって
+	煌征ルカ	悲しい						あなたはずっと強いままなのだと\nそう思いたかった
+	煌征ルカ	悲しい						弱い私を受け止める、\n強いあなたでいてほしかった
+	煌征ルカ	通常						でも、きっと違ったんです
+	煌征ルカ	通常						あなたも本当は弱い人間だけど、\n魔剣の皆様が強くした
+	煌征ルカ	通常						あなたたちは、\nお互いを守るために強くなった
+	煌征ルカ	嬉しい						その証拠にあなただって、\n自分の記憶には怯えていたのに\n皆様を逃がそうとしました
+	煌征ルカ	嬉しい						それは勇気ある行いですわ
+	煌征ルカ	通常						魔剣の皆様だって、\n最強のマスターについてきた\nわけではないのです
+	煌征ルカ	嬉しい						仲間と共に歩んできたから、\nあなたは魔剣王になれたのです
+	煌征ルカ	嬉しい						私のお兄ちゃんも\n魔剣と共に王になったように
+	煌征ルカ	怒り						だから私も魔剣として、\nあなたのことを守りますわ
+	煌征ルカ	怒り						超えるべき壁であり仇\n私以外に倒されない最強の敵に\n私自身がしてみせます
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	怒り						幻想王様！\nあなたに私の仇は倒させません！
+CharacterOff
+	ディーア	驚き4						ルカさん……
+CharacterOff
+	ルンブレB	通常						ならば私もミッションを遂行します
+CharacterOff
+	ディーア	驚き4						ルーンブレード:Blazeさん……！
+CharacterOff
+	ルンブレB	通常						マスター、私の夢は\nこの力で誰かの憧れを守ること
+	ルンブレB	通常						かつてのおしゃれや可愛いものに\n憧れた私にはもう戻れない
+	ルンブレB	通常						力を手にした代償は、\n好きだったものさえ壊してしまうこと
+	ルンブレB	通常						最強のあなたなら、\nこの力を壊すだけでなく守るために\n使ってくれると思っていた
+	ルンブレB	通常						ルカさんと同じように依存していた
+	ルンブレB	通常						ですが私も兵器として、\n共に憧れを守ってくれるあなたを\n最強にすると誓います
+CharacterOff
+	ディーア	悔しい4						弱い、ボクでも……？
+CharacterOff
+	ルンブレB	通常						弱いあなただからこそです
+	ルンブレB	通常						記憶があってもなくても、\nその程度であなたは変わりはしない
+	ルンブレB	通常						弱くて優しいあなただからこそ、\n魔剣少女に幸せをくれた
+	ルンブレB	通常						共に歩み、強くなれた
+	ルンブレB	通常						それが、私の得た結論です
+StopBgm
+CharacterOff
+	ディーア	驚き4						…………弱いから
+	ディーア	驚き4						元のボクも……\n最初は今のボクと同じだった……
+	ディーア	目閉じ4						弱かったけど、\n仲間と支え合って強くなれた……
+	ディーア	目閉じ4						だったらボクも<dash=2>
+Param	character_grayout=false
+FadeOut	black					.3
+CharacterOff						0
+	レヴァ	通常	p8b			0
+	魔剣グラム	通常	p2b			0
+	ディーア	怒り4	p5			1
+FadeIn	black					.3
+Bgm	タイトル
+	ディーア	怒り4						ボクだって強くなれる……！
+	ディーア	怒り4						みんなと一緒なら……！
+Param	character_grayout=true
+CharacterOff
+	幻想王ノア	通常	p3
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常						馬鹿な……！\n心は折れたはずだろう……!?
+	幻想王ノア	通常						ここにいるのは\n最強となったキミ自身だ……！
+	幻想王ノア	通常						キミの記憶は、\n幾千幾万もの苦しみに塗れた、\n最悪の記憶だ……！
+	幻想王ノア	通常						恐怖を感じないはずがない！
+CharacterOff
+	レヴァ	通常	p8b
+	魔剣グラム	通常	p2b
+	ディーア	悔しい4	p5
+	ディーア	悔しい4						ああ、そうだよ……
+	ディーア	悔しい4						怖いよ、\nどうしようもなく怖い……
+Shake	ディーア		x=3				NoWait
+	ディーア	絶望4						一度触れたから分かる、\nあんな記憶をもう一度味わうなんて\n怖くてたまらない
+	ディーア	悔しい4						それを乗り越えた本来のボクに、\n今のボクが勝てるわけがない
+	ディーア	絶望4						でも、もっと怖いのは<dash=2>
+	ディーア	悔しい4						こんなボクをマスターだって、\n慕ってくれるみんなを失うことだ
+	ディーア	怒り4						きっとそれが、\nすべてを忘れても変わらない\nボク自身なんだよ
+	ディーア	本気4						だから一緒に戦うんだ！\nみんなに守ってもらいながら、\nみんなを守るために！
+	レヴァ	通常						ふふ♪\n頑張ったね、マイマスター！
+	魔剣グラム	通常						逃げても良かったのに、\nやせ我慢しちゃって
+	ディーア	汗4						はは、やせ我慢か……
+	ディーア	汗4						ならずっとボクは、\nやせ我慢をしながら戦ってきたんだ
+	ディーア	悔しい4						だから、\n今なら勇気を出して言える<dash=2>
+	ディーア	悔しい4						ボクの記憶を、返せ……！
+CharacterOff
+	幻想王ノア	通常	p3
+	幻想魔剣王	通常	p7b
+Shake	幻想魔剣王		x=2				NoWait
+	幻想魔剣王	通常						グッ……!?
+	幻想王ノア	通常						幻想記憶結晶が揺らいで……？
+	幻想王ノア	通常						魔剣王……！
+CharacterOff
+	ディーア	目閉じ4						ロサさん、\n今からボクの記憶を奪い返します
+	ディーア	怒り4						あいつが\n邪魔するのを防いでくれますか？
+CharacterOff
+	ロサ	本気						もちろん、\nあなたの護衛もメイドの仕事です
+Param	character_grayout=false
+CharacterOff
+	ディーア	目閉じ4						すぅ……はぁ……
+	黒グラデーション		エフェクト表			1
+	ディーア	目閉じ4						ああ、怖いな
+	ディーア	目閉じ4						ボクはこれまで\nどれだけ苦しんできたのだろう
+CharacterOff	黒グラデーション					.5
+	ディーア	怒り4						でもボクは、\n……オレは受け入れるよ
+Se	チャージ
+	オーラ青		エフェクト表
+	ディーア	怒り4						オレ自身の道を、\nみんなと歩いてきた伝承を！
+	ディーア	本気4						【魔剣王の記憶】、<ruby=アンロック>解放</ruby><dash=2>!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_09
+EndIf
+EndScenario
+
+# E_1199_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	黒背景					0
+Param	character_grayout=false
+	ディーア	<Off>				0
+FadeIn	black					1
+	ディーア	<Off>						<color=red>苦しい</color>
+	ディーア	<Off>						<color=red>痛い</color>
+	ディーア	<Off>						<color=red>悲しい</color>
+	ディーア	<Off>						無限に続くそれが、\n魔剣王の歩いてきた軌跡
+	ディーア	<Off>						そしてこれからも続く運命
+CharacterOff
+Se	マイクノイズ	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+FadeOut	black					.1
+Wait						1
+CharacterOff						0
+Bg	戦場跡					0
+	ディーア	黒3				0
+StopSe
+FadeIn	black					.1
+	ディーア	黒3						白紙になったボクには\n耐えられないほどの喪失と敗北を\n"オレ"は繰り返して
+Se	ぐちゃ
+	血痕A		エフェクト表			1
+	ディーア	黒3						ゴールが見えないのに、\n幾千幾万もの並行世界を歩いて\n長い旅路を続けてきて……
+Se	ぐちゃ
+	血痕B		エフェクト表2			1
+	ディーア	黒3						それでも歩いてこれたのは、\nオレが強かったからじゃない
+StopBgm
+FadeOut	white					1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	白背景					0
+	          		1_2
+FadeIn	white					1
+	魔剣たちの声	<Off>						マスター
+Bgm	結婚
+	ディーア	<Off>						いつでもオレをそう呼んでくれる\n大切な魔剣が傍にいたから
+	ディーア	<Off>						苦しみを上回る大切な思い出を\nみんながくれたから
+FadeOut	black					.3
+CharacterOff						0
+Bg	塩湖					0
+	ディーア	目閉じ4				0
+FadeIn	black					.3
+	ディーア	目閉じ4						だからもう怖がらないよ
+	ディーア	通常4						本当の"ボク"がどんなに弱くても
+	ディーア	通常4						この先の未来が、\nこれまでよりもっと恐ろしくても
+	ディーア	笑い4						魔剣のみんなが勇気をくれるから
+	ディーア	通常4						魔剣だけじゃない、\n今まで関わってくれた仲間や敵、\n見守ってくれる全ての人々
+	ディーア	通常4						全てに感謝して、\n楽しくて優しくて残酷な魔界を\nこれからも旅していく
+	ディーア	目閉じ4						<ruby=Brave Your Fate>勇敢に未来へ進む</ruby>
+	ディーア	目閉じ4						だからリディ、みんな……！\nどうかオレに鍵を開ける勇気を!!
+Se	チャージ
+FadeOut	white					1
+StopBgm
+Se	鍵を開ける
+CharacterOff						0
+Wait						2
+Bg	竜鍵マナ					0
+	幻想魔剣王	通常	p7b			0
+	幻想王ノア	通常	p3			0
+Param	character_grayout=true
+FadeIn	white					1
+Bgm	決戦
+	幻想王ノア	通常						ちぃっ……！\nメイド風情が邪魔をするな！
+CharacterOff
+	エピローグ	通常	p8b
+	プロローグ	通常	p2b
+	ロサ	本気
+	ロサ	本気						あなたこそ世界図書館を、\n副メイド長を舐めないでください
+	ロサ	本気						この宴はロールお嬢様が\n心を込めて用意した大切な場
+	ロサ	本気						あなたが狙う魔剣王は、\n私がちょっとは敬愛するご主人様！
+	ロサ	ニヤリ						私の力だけで\nあなたを倒すことなどできませんが\n時間稼ぎはしてみせます！
+	ロサ	本気						さあ、ご主人様！ 皆様!!
+Param	character_grayout=false
+CharacterOff
+	レヴァ	通常	p8b
+	魔剣グラム	通常	p2b
+	ディーア	黒4	p5
+	オーラ紫		エフェクト表
+	ディーア	黒4						ぐっ、うっ……！
+	レヴァ	本気						私たち全員で、\nマスターの負担を引き受けるっ！
+	魔剣グラム	通常						この程度、\n完成品たる私なら平気よ！
+CharacterOff
+	煌征ルカ	悲しい
+	オーラ紫		エフェクト表
+	煌征ルカ	悲しい						私だって……！
+	煌征ルカ	悲しい						あなたを倒すのは私です！\n魔剣王様、\n戻ってきてくださいませ！
+CharacterOff
+	ルンブレB	通常
+	オーラ紫		エフェクト表
+	ルンブレB	通常						あなたが魔剣にくれたもの\n憧れ、夢、平和な日常
+	ルンブレB	通常						それを私も共に守ります……！
+Param	character_grayout=true
+CharacterOff
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常	p3
+	幻想王ノア	通常						また全てを失うくらいなら……！
+	幻想王ノア	通常						依代はもういらない！\n幻想記憶結晶、魔剣王を壊せ!!
+Param	character_grayout=false
+Se	光2
+	魔法陣1	赤	effect_c			.5
+Tween	魔法陣1	ScaleBy	x=5 y=5				NoWait
+Wait						.5
+Se	光2
+	魔法陣2	赤	effect_b			.5
+Tween	魔法陣2	ScaleBy	x=6 y=6				NoWait
+Wait						.5
+Se	光2
+	魔法陣3	赤	effect_a			.5
+Tween	魔法陣3	ScaleBy	x=7 y=7				NoWait
+Wait						1
+Se	チャージ
+FadeOut	white					1
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393C)		エフェクト裏			0						主に、斬撃(393C)	射撃(赤)
+StopBgm
+FadeIn	black					.1
+Se	シャキーン
+Tween	黒背景	MoveBy	y=-3000 time=1									斬撃(火)	射撃(青)
+Wait						.3							射撃(紫)
+Bg	竜鍵マナ					0
+CharacterOff						0
+	幻想王ノア	通常
+ImageEffectOff	SpriteCamera	MotionBlur
+Shake	幻想王ノア		x=3				NoWait
+	幻想王ノア	通常						ぐぅ……!?
+	幻想王ノア	通常						今の、攻撃は……！
+Bgm	BlazeA
+CharacterOff
+	ディーア	怒り4						ここまでだ幻想王
+	ディーア	怒り4						……いや、幻想王の残滓
+Param	character_grayout=false
+CharacterOff
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常	p3
+	幻想王ノア	通常						魔剣王、\n<param=name>……！
+CharacterOff
+	ディーア	怒り4						そんなに狼狽えるなんて\nお前はやはり幻想王ノアじゃない\nただの粗悪なコピーだ
+	ディーア	怒り4						彼ならもっと巧妙に罠を張り、\nオレが元に戻る隙をつくらなかった
+	ディーア	怒り4						過去と同じ過ちを繰り返すことも\nなかっただろう
+CharacterOff
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常	p3
+	幻想王ノア	通常						過ちだと？\n僕がなにを間違えたというんだ？
+CharacterOff
+	ディーア	怒り4						お前は魔剣をただの道具だと\nまた侮った
+	ディーア	怒り4						オレの戦いの伝承を取り出しても\nそこにオレの魔剣はいない
+	ディーア	目閉じ4						その《魔剣王》が最強の【方舟】？\nバカを言うな
+	ディーア	本気4						魔剣がいないオレなんて最弱だ！
+CharacterOff
+	魔剣グラム	通常						流石にそれは言い過ぎよ？
+	魔剣グラム	通常						私たちは、\nどんなあなたでも信頼しているわ
+CharacterOff
+	レヴァ	通常
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	通常						そうだよ、マイマスター！
+CharacterOff
+	ディーア	通常4						ありがとう、みんな
+	ディーア	通常4						それから、\nルカは心配をかけて悪かった
+CharacterOff
+	煌征ルカ	照れ						な、なにを言っていますの!?\n心配なんて欠片もしていませんわ！
+	煌征ルカ	照れ						弱いあなたを倒したところで、\nそんな復讐には意味がないだけ！
+Tween	煌征ルカ	PunchPosition	y=30				NoWait
+	煌征ルカ	照れ						私は今も、あなたがキライです！
+CharacterOff
+	ルンブレB	通常						ルカさんの心拍が最大値、\nこれは照れ隠しの状況でしょう
+CharacterOff
+	ディーア	笑い4						そうか
+	ディーア	通常4						でも一つだけ、\nオレはちゃんと否定しておくよ
+	ディーア	笑い4						オレはお前の敵であることを、\n押し付けられただなんて思っていない
+	ディーア	笑い4						オレは魔界を守りたいから、\nお前の復讐を受けて立つだけだ
+CharacterOff
+	煌征ルカ	照れ						でしたら遠慮なく、\n私もあなたに復讐をしますわ
+	煌征ルカ	通常						そのために、\n私も進む道もちゃんと定めました
+	煌征ルカ	怒り						あなたの魔剣として、\nあなたを支え、挑みながら\n世界の価値を問いかける
+	煌征ルカ	怒り						聖剣という定めを絶ち、\n輝く命として世界を試し続ける
+	煌征ルカ	怒り						だから<dash=2>
+Param	character_grayout=false
+Se	チャージ
+FadeOut	white					2
+CharacterOff						0
+	エクスルカ	拡大胸	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+CharacterOff						0
+	エクスルカ	拡大通常	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						2
+FadeOut	white					.3
+Bg	竜鍵マナ					0
+CharacterOff						0
+	エクスルカ	通常				0
+	          
+FadeIn	white					.3
+	エクスルカ	通常						煌征剣エクスカリバー≠ルカ
+	エクスルカ	通常						それが魔剣として、\n私が私自身で決めた名前です
+	エクスルカ	通常						どうぞ私をお頼りください\nただし寝首を掻かれる覚悟の上で
+CharacterOff
+	ディーア	通常4						どうだ、偽りの幻想王？\nお前が手にした幻想記憶結晶には、\nこんな力ないだろう？
+Param	character_grayout=true
+CharacterOff
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常	p3
+	幻想王ノア	通常						そんなものが、\nなんだというんだ……！
+CharacterOff
+	エクスルカ	通常	p7b
+	ディーア	目閉じ4	p3
+	ディーア	目閉じ4						共にいる魔剣こそが魔剣王の力
+	ディーア	通常4						そして魔剣はいつでも、\nオレに勇気をくれる大切な仲間だ
+	ディーア	怒り4						だからオレは魔剣王、\n<param=name>!!
+	ディーア	怒り4						いくぞ、みんな!!
+Param	character_grayout=false
+	ディーア	本気4						ブレイブ・ユア・フェイト!!
+	全員	<Off>	1_2					ゲットレディー・ブレイズ!!!!
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_10
+EndIf
+EndScenario
+
+# E_1199_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	タイトル
+Bg	竜鍵マナ					0
+	幻想魔剣王	通常	p7b			0
+	幻想王ノア	通常	p3			0
+FadeIn	black					1
+	幻想王ノア	通常						幻想記憶結晶が圧されている!?
+	幻想王ノア	通常						いや、\n伝承が魔剣王に回帰しているのか
+	幻想王ノア	通常						このままでは、\n幻想記憶結晶を維持できない！
+CharacterOff
+	ルンブレB	通常						さっきも言ったでしょう、\nその力はマスターからの借り物だと
+CharacterOff
+	エクスルカ	通常						魔剣王様が元に戻った今、\nあなたに従う道理はありませんもの
+CharacterOff
+	幻想魔剣王	通常	p7b			0
+	幻想王ノア	通常	p3			0
+	幻想王ノア	通常						魔剣王の伝承が、\n僕の【方舟】がまた消える？
+	幻想王ノア	通常						また僕は……\n魔剣王に負けるのか……？
+CharacterOff
+	ディーア	怒り4						いいや、それは違う
+	ディーア	目閉じ4						オレは弱いけれど、\nたくさんの魔剣が支えてくれた
+	ディーア	目閉じ4						オレの夢を助けて、\n応援してくれる人もたくさんいた
+	ディーア	目閉じ4						夢のために競い合った\nあらゆる敵、あらゆる好敵手たちも\nオレに力と経験をくれた
+	ディーア	怒り4						そんな大切なものに出会えたのは\nこの魔界があったから
+	ディーア	怒り4						お前が負けるのは、\nオレが歩んできた伝承のすべてだ
+	ディーア	本気4						そしてこれからも、\nオレは魔剣と共に未来へ進む！
+CharacterOff
+	幻想魔剣王	通常	p7b
+	幻想王ノア	通常	p3
+	幻想王ノア	通常						ふふ、夢に、未来か……
+	幻想王ノア	通常						やはりキミこそが、\n僕の<dash=2>
+CharacterOff
+	エクスルカ	通常	p2b
+	ルンブレB	通常	p8b
+	ディーア	怒り4
+	エクスルカ	通常						これで終わりですわ！
+	ルンブレB	通常						さあ、マスター！
+	ディーア	怒り4						ああ……！
+Param	character_grayout=false
+	ディーア	本気4						ブレイズ、ドライブ！！！！
+Se	チャージ
+FadeOut	white					2
+Se	光3											Seを重ねて派手に
+Se	闇3											光の裏で攻撃が起こる意図
+Se	火事
+StopBgm
+CharacterOff						0
+Bg	研究所A					0
+Wait						5
+	司書王ロルリアンレット	通常H				0
+FadeIn	white					1
+	司書王ロルリアンレット	通常H						まさか幻想王だったとはね
+Bgm	平和
+	司書王ロルリアンレット	通常H						一度ならず二度までも、\n私の図書館で暗躍するだなんて\n本当に油断ならないわ
+	司書王ロルリアンレット	悪い顔H						まあ、どこかの誰かが\n無断で幻想王を持ち込んだのが\n原因らしいけれどね？
+CharacterOff
+	ディーア	汗4						オレもいつの間にって感じで……
+	ディーア	通常4						でもオレの中に残っていた\nノアの情報は、\nこれできれいに消えたはずです
+CharacterOff
+	司書王ロルリアンレット	怪しいH						だとしても、\n今回のようなことがあった以上、\n警戒を続けないといけないわね
+	司書王ロルリアンレット	怪しいH						本物の幻想王がどこかで蘇り、\n力を貯めている可能性もあるもの
+	司書王ロルリアンレット	怪しいH						魔界の王のほとんどは、\nなんらかの方法で不老不死や長寿を\n実現している
+	司書王ロルリアンレット	怪しいH						幻想王も例外じゃないわ
+	司書王ロルリアンレット	ニヤリH						その対処のためにも、\nあなたにもっと働いてもらうわよ？\n魔剣使い♪
+CharacterOff
+	ディーア	汗4						じゃあ、今回のことで\n同盟を破棄とかそういうことも\nないですよね？
+CharacterOff
+	司書王ロルリアンレット	慌てH						私はそこまで狭量じゃないわよ！
+	司書王ロルリアンレット	通常H						ただ改めて、\n食事会はセッティングしなさい
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	カジノ					0
+	ディーア	通常4	画面外_左			1
+FadeIn	black					.3
+Tween	ディーア	MoveBy	x=550 time=1				NoWait
+	ディーア	通常4						ただいまー
+	煌征ルカ	通常	画面外_右
+Tween	煌征ルカ	MoveBy	x=-550 time=1				NoWait
+	煌征ルカ	通常						ようやく戻ってきましたわね？
+Param	character_grayout=true
+	煌征ルカ	通常						しまりのないお顔を見るに、\n会談は成功だったのでしょう？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い4						ああ！\n正式に世界図書館と同盟を結んで\n世界意思に対処できるようになった
+	ディーア	通常4						まだオレの指名手配は解除できない\n秘密同盟だけどな
+CharacterOff
+	ルンブレB	通常						ですが我々の現状では、\n最善の結果
+	ルンブレB	通常						パーフェクトです、マスター
+CharacterOff
+	煌征ルカ	通常	p7b
+	ディーア	通常4	p3
+	ディーア	通常4						それもすべて、\nみんなが助けてくれたおかげだ
+	ディーア	笑い4						ルカもありがとう
+	煌征ルカ	照れ						だからそんな風に、\nお礼を言うのはやめてくださいます？
+	煌征ルカ	怒り						何度も言っていますが、\n私はあなたを狙う復讐者です
+	煌征ルカ	怒り						そしてあなたは、\n私が人生をかけて超えるべき敵\n……そう決めたんです
+	煌征ルカ	怒り						私相手だからと油断して、\nあっけなくやられるなんて\n許しませんよ？
+	ディーア	通常4						大丈夫、\nオレはお前の成長も強さも見てる\n油断することはないさ
+	煌征ルカ	照れ						……なら、いいんです
+Shake	煌征ルカ		x=3				NoWait
+	煌征ルカ	照れ						そういうまっすぐなところが\nキライですわ……
+	煌征ルカ	通常						でも私も学びました、\nあなたの強さとその意味を……
+CharacterOff
+	ルンブレB	通常						私もそうです\nあなたの存在に驕ることなく、\n共に歩む仲間として
+	ルンブレB	通常						私の力を役に立ててください
+CharacterOff
+	ディーア	笑い4						ああ、頼りにしてる！
+CharacterOff
+	レヴァ	通常
+Tween	レヴァ	PunchPosition	y=30				NoWait
+	レヴァ	通常						マスター、早く早く！
+CharacterOff
+	魔剣グラム	通常						みんな、\nあなたを待っているわよ？
+CharacterOff
+	ディーア	にやけ4						なら、危機も去ったし\nみんなとパーティーでイチャ<dash=2>
+Shake	ディーア		x=2				NoWait
+	ディーア	絶望4						いやダメだろ！\nボクはもっと常識的に<dash=2>
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						って、あれ!?\nイチャイチャしようと思っただけで\n罪悪感がでてくるんだけど!?
+CharacterOff
+	煌征ルカ	怒り						まさか記憶喪失時の影響が、\n残っているのでは？
+	煌征ルカ	怒り						珍しく常識人だったわけですし
+CharacterOff
+	ディーア	絶望4						そんな！\nせっかくみんなと過ごせる大切な\n記念日なのに！
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望4						イチャイチャ禁止なんて、\nあんまりだ!!
+CharacterOff
+	魔剣グラム	通常						マスターは残念そうだけど、\nこれで本当に元通りね
+CharacterOff
+	レヴァ	通常						やっぱり、\nマイマスターはこうでなくっちゃ！
+CharacterOff
+	ディーア	悔しい4						こうなったら、\n常識とか忘れるくらいに……！
+	ディーア	本気4						みんな！\nパーティーを楽しむぞ!!
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1199_01
+EndIf
+EndScenario

@@ -1,0 +1,1707 @@
+# E_1047_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望					.5
+Bg	研究所C
+FadeIn	black					.5
+								　　 　　中央大陸ダフィート\n　　 　　ユグドラシル研究所
+Se	歩く
+	魔剣機関職員					1		おーい、\n交代の時間だぞ
+StopSe
+	魔剣機関職員							……!?
+	黒グラデーション		エフェクト表
+	カルバノグ							あー♥\n見つかっちゃいましたよう♪
+CharacterOff
+	魔剣機関職員							な、何者だ!?\nどうやってここへ……!?
+	カルバノグ							えへへー♪\nおしゃべりはあとあと♪
+	カルバノグ							今日はこの世界の魔剣機関のみんなに\nとーっても大事な\nお知らせがあるんですよう♥
+	魔剣機関職員							く、くそ！\n近寄るな……！
+	カルバノグ
+Tween	カルバノグ	ScaleBy	x=1.2 y=1.2				NoWait
+Tween	カルバノグ	MoveBy	y=-100				NoWait
+	カルバノグ							おやおやあ？\nカルバをこわがってる\n場合じゃないんですよう♪
+	カルバノグ							だって<dash=2>\nとうとう、完成したんですから
+	魔剣機関職員							何がだ……、\n何が完成したっていうんだ！
+StopBgm
+	カルバノグ							<dash=2>【ロスト】
+	魔剣機関職員							<dash=2>!?
+Bgm	図書館
+	カルバノグ							完成したんですよう♪\n【ロスト】が！
+	カルバノグ							もうまもなく<dash=2>\nここへやってきちゃいますよう♪
+	魔剣機関職員							な、何を言っているんだ\nロストって……まさか\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>のことか？
+	魔剣機関職員							何だ、完成した\n<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>って<dash=2>
+	カルバノグ							なーんだ、知らないんですねえ♥\nそれなら、\n知らないままのほうが<dash=2>
+	カルバノグ							苦しまずに済むかも、\nですよう♪
+	カルバノグ							それじゃあ！\nまったねえ♪
+Se	闇1
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff	カルバノグ					1
+CharacterOff	オーラ青					1
+Wait						1
+	魔剣機関職員							おいまて！\nくそっ！　報告を<dash=2>
+	魔剣機関職員							あれ……？\n繋がらない……！
+	魔剣機関職員							クソ！　何だってんだ！\n誰か来てくれ……！
+StopBgm
+Se	アラート
+	魔剣機関職員
+Tween	魔剣機関職員	PunchPosition	y=30				NoWait
+	魔剣機関職員							<dash=4>!!
+	黒グラデーション		エフェクト表
+	魔剣機関職員							（何か、いる<dash=2>！）
+Shake	魔剣機関職員		x=5				NoWait
+	魔剣機関職員							（だ、だめだ<dash=2>）
+	魔剣機関職員							（振り返ったら、\n　やられる<dash=2>）
+	魔剣機関職員							（い、いやだ<dash=2>）
+	魔剣機関職員							う<dash=2>
+Shake	魔剣機関職員		x=5				NoWait
+	魔剣機関職員							うわああああああああああ!!
+FadeOut	black					.3
+StopBgm						.5
+Param	character_grayout=false
+CharacterOff						0
+Se	光3
+Se	闇3
+FadeOut	purple					1
+Wait						2
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+Shake	Graphics		time=5				NoWait
+Se	火事
+FadeIn	purple					1
+Se	倒れる
+	魔剣機関職員	<Off>						ぐ<dash=2>は<dash=2>
+Bgm	絶望
+Bg	研究所C
+	瓦礫		エフェクト表
+Tween	瓦礫	ScaleBy	x=1.1 y=1.1
+Tween	瓦礫	MoveBy	y=-1803 time=3	easeInQuad			NoWait
+Wait						3
+Param	character_grayout=false
+FadeOut	black					.5
+CharacterOff
+	イベントスチル104708		エフェクト表
+Wait						1
+FadeIn	black					1
+	魔剣機関職員	<Off>						（誰かに<dash=2>\n　報告を<dash=2>）
+	魔剣機関職員	<Off>						（何も、分からない、\n　だけど、これだけは<dash=2>）
+	魔剣機関職員	<Off>						（世界の、危機だと）
+	魔剣機関職員	<Off>						（この悪意は<dash=2>\n　世界を、滅ぼすと）
+	魔剣機関職員	<Off>						（誰か<dash=2>）
+FadeOut	black					.3
+CharacterOff
+Wait						1
+	　　　　　　　　　　
+Bg	黒背景					0
+FadeIn	black					1
+	？？？？							さあ<dash=2>\n始めるとするか
+Param	character_grayout=false
+	イベントスチル104707		エフェクト表			1
+Bgm	魔獣バトル
+Wait						1
+	バハロス	<Off>						刮目せよ
+	バハロス	<Off>						<dash=2>竜王の帰還だ
+FadeOut	black					.5
+CharacterOff
+	　　　　　　　　　　
+Wait						1
+FadeIn	black					1
+	イベントスチル104713		エフェクト表
+Wait						3
+FadeOut	black					3
+If	isdebug==true
+CharacterOff
+Jump	*E_1047_02
+EndIf
+EndScenario
+
+# E_1047_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫					.5
+Bg	研究所A
+	研究員	通信
+FadeIn	black					.5
+	研究員	通信						対象、見失いました<dash=2>\nくそっ、くそっ！
+	魔剣機関職員							おい、答えろ！\n誰か生きている者はいないか！
+	研究員	通信						お、俺の研究が……
+	魔剣機関職員							馬鹿野郎！\n今はそんなこと\nどうだっていいだろう！
+CharacterOff
+Shake	Graphics		x=5 y=5
+	魔剣機関職員							クソ！\n今度はどこだ！
+	研究員	通信						いやだ<dash=2>\n死にたくないよ<dash=2>
+	魔剣機関職員							なんだ、何者なんだ、\n何が目的なんだ<dash=2>
+FadeOut	black					.3
+CharacterOff
+Wait						1
+Bg	研究所B
+	研究員	通信
+FadeIn	black					.3
+	研究員	通信						ほ、報告します！\n対象を見失いました……！
+	魔剣機関職員							こちらも報告します、\n被害状況は不明、\nただ、甚大としか……
+	魔導王ユウ							へえ、やるじゃないか
+	魔導王ユウ							今度こそ、本気ということだな
+	魔剣機関職員							あの、私たちは\nどうすれば<dash=2>
+	魔導王ユウ							すまないが、\nお前はここで終わりだ
+	魔剣機関職員							<dash=2>!?\nど、どういう<dash=2>
+	魔導王ユウ							もう任を解いたんだよ\n早く転送魔法陣に向かえ\nもう指示は出してあるだろ？
+	魔剣機関職員							し、しかし<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+	　　　　　　　　　　
+StopBgm						.5
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	研究所B
+CharacterOff
+	魔剣機関職員
+	黒グラデーション		エフェクト表
+Shake	魔剣機関職員		x=5				NoWait
+	魔剣機関職員							ぐはぁっ!!
+Se	倒れる
+CharacterOff						1
+Wait						1.5
+	魔導王ユウ							まったく、\nだから言っただろう……
+	黒グラデーション		エフェクト表
+	魔導王ユウ							<dash=2>随分、遅いご到着で
+CharacterOff						0
+	黒背景		エフェクト表2			0
+	魔導王ユウ	<Off>						完成されし【ロスト】<dash=2>\n神竜機関バハムート=ロスト
+	魔導王ユウ	<Off>						あるいは、こう呼ぶべきか<dash=2>\n「竜王」と
+	イベントスチル104709		エフェクト表			0
+CharacterOff	黒背景					.5
+Bgm	緊迫
+	バハロス	<Off>						やるではないか魔導王\nこの我を知っているとはな
+	バハロス	<Off>						このバハムートの帰還を\n諸手を挙げて祝賀するがいい
+CharacterOff
+	魔導王ユウ							ええ、そうしたいところですが
+	魔導王ユウ							あいにく我々の庭が\n大いに荒らされてしまいましてね
+	魔導王ユウ							このままでは我々どころか\nこの魔界すら存続が危うい<dash=2>
+	魔導王ユウ							看過いたしかねます、\n<dash=2>竜王
+Se	闇1
+	オーラ紫		エフェクト表			.5
+	バハロス	通常						しからば、何を為す\n魔導王？
+	バハロス	通常						跪いて慈悲を乞うか？\nあるいは、その貧弱な駒で\nこのバハムートに手向かうか？
+CharacterOff	オーラ紫		エフェクト表
+	魔導王ユウ							いいえ、竜王\nそのどちらでもありません
+	魔導王ユウ							ただ<dash=2>\n教えを請うことを許されたい
+	オーラ紫		エフェクト表
+	バハロス	真顔
+Wait						.1
+CharacterOff	オーラ紫		エフェクト表			.5
+	バハロス	真顔						良かろう
+	魔導王ユウ							対魔剣殲滅魔導兵器……\n魔剣を<ruby=ロスト>破壊</ruby>するための\n兵器であるあなた方が
+	魔導王ユウ							何故自らを\n"ロスト"と名乗っているのか
+	バハロス	通常						実に楽しい質問だ、魔導王\nあくびが出るほどにな
+	バハロス	通常						だが答えよう<dash=2>
+FadeOut	black					.5
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル59301		エフェクト表			0
+FadeIn	black					.5
+	バハロス	<Off>						時を刻むうちに思いがけず\nあらゆる授受を交わすことは\n竜王とて同じ
+FadeOut	black					.3
+	イベントスチル103006		エフェクト表			0
+FadeIn	black					.3
+	バハロス	<Off>						出会い、別れ、抱え、捨て、\n少しずつ積み重なる想い<dash=2>
+FadeOut	black					.3
+CharacterOff
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Sepia
+Wait						.5
+FadeIn	black					.5
+	バハロス	通常						それらを喪うだけではまだ\nロストの完成とは言えんだろう
+	魔導王ユウ							ええ、これまでの十二のロストが\nそうでした
+	魔導王ユウ							では、貴方が「完成」たる由縁は\nどこにあるのでしょう
+	バハロス	通常						意志だ、魔導王
+	バハロス	通常						全てを捨てても尚、\n意志は残り続ける
+	バハロス	通常						全てを喪う意志を宿した\nこの身こそが\n「完成」たる由縁だ
+	魔導王ユウ							そうか、貴方は<dash=2>
+	魔導王ユウ							全てを捨て去ることを\n己が意志に刻印したのですね
+	バハロス	通常						人間の言葉への翻訳が巧みだな\n魔導王
+	バハロス	通常						いかにもこのバハムート、\n十三魔竜と竜王の力により\n己が意志を「喪うこと」と見つけた
+	魔導王ユウ							そしてその目的は\n我々魔剣機関の殲滅
+	バハロス	通常						その通りだ\n運命を受け入れろ、魔導王
+CharacterOff
+Param	character_grayout=false
+	イベントスチル104701	A	エフェクト表
+	魔導王ユウ	<Off>						ええ、そのつもりです\nしかし<dash=2>
+	イベントスチル104701	B	エフェクト表			.5
+Se	光2
+	オーラ紫		エフェクト表2			1
+	魔導王ユウ	<Off>						我々はまだしばらく\n消え失せるわけには\nいかないのでね<dash=2>！
+	バハロス	<Off>						魔導王、貴様<dash=2>！
+	魔導王ユウ	<Off>						魔剣機関に備えられた\n災害対処用の転移術式……\nそれを全て起動したのさ
+	魔導王ユウ	<Off>						魔剣機関の職員は既にここを離れ、\n魔界全土へと避難を開始している！
+Se	光3
+FadeOut	white					1
+CharacterOff
+	オーラ紫		エフェクト表
+	魔導王ユウ
+Wait						.1
+FadeIn	white					1
+CharacterOff	オーラ紫					1
+	魔導王ユウ							いかがです、竜王\n人質は、この魔界です
+	魔導王ユウ							これでも尚、\n貴方は我々を殲滅しますか？
+	バハロス	愉悦						ククク……
+	バハロス	愉悦						ハハハハハハハハハハハハ!!!!\n愉快だ、実に面白いぞ\n魔導王!!
+Se	闇2
+	オーラ紫		エフェクト表
+	バハロス	愉悦						見せてやろう、\n竜王と相対した人間が\nいかに惨憺たるかを!!
+	バハロス	愉悦						まずは貴様からだ\n冥府への祈りは済んだか
+CharacterOff
+	魔導王ユウ							あまり<dash=2>\n人間をみくびらないことです\n竜王！
+Se	光1
+	イベントスチル392K1		effect_a			1
+	イベントスチル392K2		effect_b
+Wait						1
+CharacterOff	魔導王ユウ					1
+Wait						.5
+CharacterOff	イベントスチル392K1					1
+CharacterOff	イベントスチル392K2					1
+Wait						1
+	バハロス	真顔						<dash=2>！
+	バハロス	真顔						フン、逃げ足だけは\n確かなようだな
+	バハロス	愉悦						では、征くとするか\n慄け、人間共よ
+	バハロス	愉悦						ククク……\nハハハハハハハハハハハ!!!!
+FadeOut	black					.3
+StopBgm						.3
+CharacterOff
+	　　　　　　　　　　
+Wait						1
+Bgm	図書館
+Bg	廃墟A
+Shake	Graphics	x=5
+FadeIn	black					.3
+Wait						.5
+	ディーア	本気2						くっ！\n誰か！ 生きている人はいるか！
+	村人男							うう……
+	ディーア	怒り2						……っ!!
+	ディーア	本気2						しっかりしろ、何があったんだ！
+	村人男							わ、分かりません……\n気付いたら、い、家が……
+	村人男							私の子どもは、\n妻はどこへ……？
+	ディーア	本気2						気を確かに持て\nすぐに助けが来る！
+	ディーア	本気2						何てことだ……\n何が起きてるんだ！
+Se	光1
+	ロルリアンレット	通常H				.5		まったく、やってくれたわね
+	ディーア	本気2						ロール様！\n一体何が起こっているんですか！
+	ロルリアンレット	通常H						落ち着きなさい、魔剣使い\n私にも全容は分からないわ
+	ロルリアンレット	通常H						確かなのは、\n強力なロストが発生した\nということだけよ
+	ロルリアンレット	通常H						これまでにない規模だわ\n最大級の警戒をなさい
+Bgm	緊迫
+CharacterOff
+	村人男
+Shake	村人男		x=5				NoWait
+	村人男							うわあああああああ!!
+	冥獣							グウウウ……！
+	ディーア	本気2						くそ、なぜ冥獣が<dash=2>!?
+Bgm	バトル
+	ロルリアンレット	通常H						異変に呼応しているようね\n片付けなさい、魔剣使い
+	ディーア	本気2						はい……!!
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1047_03
+EndIf
+EndScenario
+
+# E_1047_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	バトル
+Bg	廃墟A
+FadeIn	black					.5
+	ディーア	本気2						はあっ！
+FadeOut	black					.3
+CharacterOff						0
+	　　　　　　　　　　
+StopBgm						.5
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bgm	緊迫
+Bg	廃墟A
+CharacterOff
+	ディーア	本気2						ロール様！\n敵はどこに？
+	ロルリアンレット	通常H						近いわ\n急ぎましょう
+	ディーア	本気2						はい！
+Se	走る
+FadeOut	black					.3
+StopBgm						.3
+CharacterOff
+Wait						1
+Bgm	図書館
+Bg	廃墟A
+	村人男
+FadeIn	black					.3
+Shake	村人男		x=5				NoWait
+	村人男							た、たすけて<dash=2>
+	バハロス	通常						貴様も魔剣機関の者だな？
+	村人男							ち、違います！\n信じてください！
+	バハロス							いいだろう\n信じよう
+FadeOut	black					.3
+StopBgm						.5
+CharacterOff						0
+	　　　　　　　　　　
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	斬1
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bgm	緊迫
+Bg	廃墟A
+CharacterOff
+	バハロス
+	バハロス	通常						ずいぶん手間のかかる仕事だ\nこの分ではしらみつぶしだな
+	バハロス	愉悦						どれ、街ごと\n焼き払ってやるとするか
+CharacterOff
+	勇者A
+Shake	勇者A		x=5				NoWait
+	勇者A							や、やめろぉ！
+	バハロス	愉悦						ほう……!!
+CharacterOff
+	勇者A		1_2
+	バハロス	愉悦	2_2
+	勇者A							そ、そそ、そんな、\n乱暴は許さないぞ……！
+	バハロス	愉悦						どれ、顔をよく見せろ
+	勇者A
+Tween	勇者A	MoveBy	x=30				NoWait
+	勇者A							……!?
+	バハロス	愉悦						良い面構えだ\n懐かしいような気もするな
+	バハロス	愉悦						思い出すようだ\n純粋な善意、折れない心\n清々しい風が心を吹き抜けるぞ
+	バハロス	愉悦						このバハムートに相応しい\n最も優れた眷属の香りだ\n思い出すぞ、思い出すぞ！
+	バハロス	愉悦						久しぶりに巡り合うのだ\n存分に感傷に浸ろうではないか！
+Shake	勇者A		x=5				NoWait
+	勇者A							な、なんだ\n何を言ってるんだ
+	バハロス	愉悦						少し黙っていろ\nせめて最期は命を煌めかせるのだ\n竜王の往路に塵芥は必要ない
+	バハロス	愉悦						そしてもうすぐ訪れる邂逅に\nささやかな愉悦を見出すのだ
+	バハロス	愉悦						そういう筋書きだ\nなかなか良くできていると\n思わんか？
+Shake	勇者A		x=5				NoWait
+	勇者A							ぐっ……は、離せ！
+	バハロス	愉悦						離すものか\nこのバハムート、感傷のあまりに\n思わず手が滑るらしいのだ
+FadeOut	black					.3
+CharacterOff						0
+	　　　　　　　　　　
+StopBgm						.5
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	斬1
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+Bg	廃墟A
+CharacterOff
+	勇者A		1_2
+	バハロス		2_2
+Shake	勇者A		x=5				NoWait
+	勇者A							ぐはあっ!!
+CharacterOff	勇者A					1
+Se	倒れる
+Wait						1.5
+CharacterOff
+	勇者B							く、来るなあっ！
+	バハロス							声を上げるな、やかましい
+FadeOut	black					.3
+StopBgm						.5
+CharacterOff						0
+	　　　　　　　　　　
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	廃墟A
+Param	character_grayout=true
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル104705		エフェクト表			0
+	バハロス	<Off>						遅い、遅いぞ！\n貴様との再会の前に\n魔界が滅びてしまうではないか！
+	バハロス	<Off>						竜王の戯れをいつまで\n手をこまねいて見ているのだ
+	バハロス	<Off>						振るえ振るえ！\n刃で往路を切り拓いて\nこのバハムートを迎えに来い！
+FadeOut	black					.3
+CharacterOff						0
+	8章スチルA		エフェクト裏			0
+Bg	研究所C					0
+FadeIn	black					.3
+	魔導王ユウ	<Off>						<dash=2>そうはさせないよ
+Se	光2
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff
+	イベントスチル104705		エフェクト裏
+	バハロス	<Off>						<dash=2>？
+Se	魔2
+	結界		エフェクト表			1
+Wait						1
+	バハロス	<Off>						ほう<dash=2>\n防護結界か
+	バハロス	<Off>						懸命な試みだ、魔導王\nこのバハムートを\nここへ留めおきたいのだな
+	バハロス	<Off>						いや<dash=2>\nなるほど
+	バハロス	<Off>						貴様も助けを乞うたのか\n貴様らの正義の味方に！
+	バハロス	<Off>						さあ来い！\n始原にして頂点たる\nこの竜王バハムートが<dash=2>
+	バハロス	<Off>						神竜機関バハムート=ロストが！\nここで貴様を待っているぞ！
+	バハロス	<Off>						クククク……
+	バハロス	<Off>						ハハハハハハハハハハハハ!!!!
+FadeOut	black					.3
+StopBgm						.3
+CharacterOff
+Wait						1
+Bgm	図書館
+Bg	廃墟A
+	ディーア	本気2
+	結界		エフェクト裏
+FadeIn	black					.3
+	ディーア	本気2						こ、これは!?
+	ロルリアンレット	通常H						防護結界ね\n魔導王ユウの仕業だわ
+	ロルリアンレット	通常H						ロストを閉じ込める気ね\nいつまでもつかしら……
+	ロルリアンレット	通常H						まったく、自分だけ行方をくらませて\nこちらにまるで情報を寄越さないなんて\n勝手もいいところだわ
+	ディーア	驚き2						ということは、\nそいつはこの中にいるんですね！
+	ディーア	怒り2						ロール様は結界の維持に\n力を貸してください！
+	ディーア	怒り2						オレが直接、\nロストに対処します！
+	ロルリアンレット	通常H						ええ<dash=2>\nでも、魔剣使い\nくれぐれも気をつけて
+	ロルリアンレット	通常H						なんだかとても、\n嫌な予感がするわ
+	ロルリアンレット	通常H						決して、死なないで頂戴\n生きて帰るのよ
+	ディーア	笑い2						大丈夫、大丈夫ですよ\nオレ、絶対に生きて帰ります
+	ディーア	笑い2						約束です！
+	ロルリアンレット	通常H						頼んだわよ
+	ロルリアンレット	通常H						（しかし、何かしら、\n　この胸騒ぎ<dash=2>）
+	ロルリアンレット	通常H						（何か、起こるべきでないことが\n　起こっているような）
+CharacterOff	ロルリアンレット
+Se	走る
+Wait						1.5
+FadeOut	black					.3
+	黒背景		エフェクト表
+Wait						.1
+FadeIn	black					.3
+	ロルリアンレット	<Off>						（恐ろしい、胸騒ぎが<dash=2>）
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1047_04
+EndIf
+EndScenario
+
+# E_1047_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫					.5
+Bg	封印結界
+	ディーア	本気2
+FadeIn	black					.5
+	ディーア	本気2						結界内に入れた！\n一体どこに<dash=2>
+	ディーア	驚き2						……!?
+CharacterOff
+	バハロス	通常
+	バハロス							おお!!\n来たか!!\n待っていたぞ！
+	ディーア	驚き2						お、お前は<dash=2>!?
+CharacterOff
+	ディーア	驚き2	1_2
+	ミラロスト	通常	2_2
+	ミラロスト	通常						あらー♥\nこりゃまずいねー♪
+	ディーア	驚き2						ミラ=ロスト！\nまずいって…どういうことだ？\n何か知ってるのか？
+	ミラロスト	通常						マスターさん、\n逃げたほうがいいかも♪
+	ミラロスト	通常						今のままじゃ\n「アレ」には勝てないよー？
+	ディーア	驚き2						そんな！\n一体どうして<dash=2>
+	ミラロスト	通常						マスターさんには、\n特別に教えてあげちゃう♪\nあれは「ロストの完成形」<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル104705		エフェクト表			0
+FadeIn	black					.3
+	ミラロスト	<Off>						その名は<dash=2>\n神竜機関バハムート=ロスト
+	ミラロスト	<Off>						太古の竜王と十三の魔竜の伝承を\nロストの為に詰め込んだ\n至高の存在だね♪
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	black					.3
+	ディーア	悔しい2						じゃああれは<dash=2>\nバハムートなのか
+	ミラロスト	ニヤリ						うーん、やっぱり\nマスターさんは甘い、\n甘いねぇ♪
+	ミラロスト	ニヤリ						そういうところも素敵で\nぞくぞくーってしちゃう♥\nでもぉ……
+	ミラロスト	ニヤリ						あれは純粋な破壊のための存在\n人間でも仲間でもないよ♪\nにゃは♥
+	ディーア	本気2						ミラ=ロスト
+	ミラロスト	通常						なーにー？
+	ディーア	本気2						見ていろ
+	ミラロスト	通常						ふーん♪\nじゃあ、たっぷり\n見物させてもらうね♥
+	ディーア	怒り2						バハムート！\nオレはここだ！
+CharacterOff
+	村人男		1_2
+	バハロス	通常	2_2
+	バハロス	通常						首を長くして待っていたのだぞ\n遅れてしまった詫びはないのか
+Shake	村人男		x=5				NoWait
+	村人男							ひ、ひいいいいい……!!
+CharacterOff
+	ディーア	悔しい2						す、すまない……\nまずはその人を離してほしい
+	バハロス	真顔						ふむ\n何故だ
+	ディーア	怒り2						お前の目的は何か\n別にあるんだろう\n聞かせてくれ！
+	ディーア	怒り2						お前はバハムートだ\n竜王の誇りを忘れたのか？
+	ディーア	怒り2						罪のない人の命を奪う\n必要はないだろう！
+	バハロス	真顔						ふむ\n続けろ
+	ディーア	悔しい2						ぐっ……\nその人にはきっと大事な人が\nいるはずなんだ
+	ディーア	悔しい2						分かるだろ、お前にも\n大事なものがあるはずだ
+	バハロス	通常						ああ、分かるな
+	ディーア	本気2						<dash=2>！\nそうだろう、だから離してくれ
+	ディーア	本気2						どんな人にも懸命に\n大事にしているものがあるんだ\nお前と同じように<dash=2>
+FadeOut	black					.3
+CharacterOff						0
+StopBgm						.5
+	　　　　　　　　　　
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	red
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	封印結界
+Param	character_grayout=true
+CharacterOff
+	黒グラデーション		エフェクト表
+	村人男
+	村人男							が……はあっ……！
+CharacterOff
+	ディーア	驚き2						なっ……!!
+	バハロス	真顔						話が長いぞ
+	ディーア	本気2						そんな……\nバハムート、お前……
+	バハロス	真顔						分かっていることを繰り返すな\nそれでこのバハムートを\nどうしようというのだ？
+	バハロス	真顔						どうせ貴様は、\nこのバハムートの話を\n聞かんのだろう？
+	バハロス	真顔						それでもよいのだ、\nだが為すべきことは為す\nそれだけだ
+	ディーア	驚き2						為すべき、こと<dash=2>？
+Bgm	魔獣バトル
+Param	character_grayout=false
+CharacterOff
+	イベントスチル104705		エフェクト表
+	バハロス	<Off>						魔剣機関の殲滅だ\nいちいち説明させるな
+	バハロス	<Off>						煩わしい仕事だ\n寝床にわく虫を潰すよりもな
+	バハロス	<Off>						だが連中は\n世界中に散りおった\nこのバハムートの目を欺くためにな
+	バハロス	<Off>						ここらの者が連中の手のものか\nこのバハムートには分からん\nだから潰す虫が増えたわけだ
+	バハロス	<Off>						これで分かったか？\n時間がないのだ、早く理解しろ
+CharacterOff
+Param	character_grayout=true
+	ディーア	怒り2						違う！\nこんなこと、必要ないはずだ\nオレの話を聞いてくれ！
+	バハムート	悔しい						マスターさん！\nこんなの、バハムートちゃんじゃ\nないですよ！
+	バハムート	悔しい						話なんて通じません\nここはバハムートちゃんに\n任せてほしいです！
+	ディーア	悔しい2						バハムート！\nで、でも<dash=2>
+	オメガ	通常						こんなやつはね、\nいっぱつばしーっとやらないと\n分からないんだよ！
+	オメガ	通常						愛の力を\n思い知らせてやるんだから！
+	ミラ	通常						ミラちゃんも、そう思う……\nきっと話すだけ無駄……
+	ディーア	悔しい2						くそっ……それなら、\n抑え込んでから、説得するぞ！\nそれでいいな！
+	バハロス	通常						よし、話は終わったか\nとっとと始めよう
+	バハロス	通常						こんなことに割く時間は\nもう全く無いのだ
+	ディーア	怒り2						手加減なしだ、\n最初から全力で行くぞ！
+	ミラロスト	ニヤリ						マスターさん、\n気をつけるんだよー？
+	ディーア	怒り2						来い、バハムート！
+	ディーア	本気2						まずはお前を<dash=2>\nこの手で抑え込んでやる！
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1047_05
+EndIf
+EndScenario
+
+# E_1047_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫					.5
+Bg	封印結界
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+FadeIn	black					.3
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	封印結界
+Param	character_grayout=true
+CharacterOff
+	バハムート
+Shake	バハムート		x=5				NoWait
+	バハムート	悔しい						えっ……？
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+Bg	封印結界
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+	ミラ	泣き
+Shake	ミラ		x=5				NoWait
+	ミラ	泣き						うっ……！
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	封印結界
+Param	character_grayout=true
+CharacterOff
+	オメガ	泣き
+Shake	オメガ		x=5				NoWait
+	オメガ	泣き						がはあっ！
+CharacterOff
+	ディーア	悔しい2						バハムート！\nミラ！　オメガっ!!
+	バハロス	真顔						この程度とは<dash=2>\nこのバハムート、\n失望した
+	バハロス	真顔						立て、愚か者
+	ミラ	通常						きゃっ……！
+	バハロス	真顔						生娘のような声をあげるな\n情けない
+	バハロス	真顔						このバハムートを見ろ\n貴様もバハムートの端くれだろう
+	ディーア	悔しい2						やめろっ……！\nミラを……離せ……！
+	バハロス	真顔						そればかりだな貴様は
+Se	闇1
+	オーラ紫		エフェクト表
+Param	character_grayout=false
+	バハロス	愉悦						よく見ておけ\nこれからこの娘を食う
+CharacterOff
+	ディーア	絶望2						な、何だと<dash=2>
+	オーラ紫		エフェクト表
+	バハロス	愉悦						王に二度語らせるな\n食うのだよ、この娘を
+CharacterOff
+	ディーア	絶望2						やめろ！
+	ミラ	泣き
+Shake	ミラ		x=5				NoWait
+	ミラ	泣き						ひっ……\nいや、やめて<dash=2>
+Se	闇2
+	スモーク		エフェクト表			1
+Wait						1
+CharacterOff	ミラ					1
+CharacterOff	スモーク					1
+Wait						1
+	バハロス	愉悦						<dash=2>ふむ、悪くない\n美味であるぞ
+	ディーア	絶望2						う<dash=2>\n嘘、だろ<dash=2>
+	バハロス	愉悦						次は貴様だ、来い
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+	　　　　　　　　　　
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	封印結界
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2
+	ディーア	悔しい2						この<dash=2>
+	バハロス	愉悦						ほう、動けたか
+	ディーア	悔しい2						やめろ<dash=2>\nそれ以上は<dash=2>
+	バハロス	真顔						断る
+	オメガ	絶望
+Shake	オメガ		x=2				NoWait
+	オメガ	絶望						や、やだ、来ないで！
+	バハロス	愉悦						来るのは貴様の方だ\n早く来い
+	オメガ	絶望
+Shake	オメガ		x=2				NoWait
+	オメガ	絶望						な、なんで<dash=2>\n動けない<dash=2>
+	バハロス	愉悦						大義だな\nこちらへ寄れ
+	オメガ	絶望						い、いやだ<dash=2>
+Se	闇2
+	スモーク		エフェクト表			1
+Wait						1
+CharacterOff	オメガ					1
+CharacterOff	スモーク					1
+Wait						1
+	ディーア	絶望2						やめろ、やめろおおおおおお!!!!
+	バハロス	愉悦						うむ、まあ悪くない\n次は貴様だ、ほら来い
+	バハムート	絶望						……！
+	ディーア	絶望2						もうやめろ、頼む、\nやめてくれ……！
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+	　　　　　　　　　　
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	封印結界
+Param	character_grayout=true
+CharacterOff
+	バハロス	真顔
+	バハロス	真顔						むっ……！
+	イザナギ	通常						させんぞ、邪竜め
+	バハロス	愉悦						神竜か、手間が増えたな\n貴様もそこへなおれ！
+	イザナギ	通常						ふん……愚かな\nたかが邪竜の分際で\n神に背くものではないぞ
+	バハロス	愉悦						神、神か<dash=2>\nずいぶん勝手な僭称だ
+Shake	バハロス		x=10				NoWait
+Se	風1
+FadeOut	white					.2
+CharacterOff	バハロス					0
+FadeIn						.2
+Wait						1
+	イザナギ	通常						<dash=2>ッ!?\n速い<dash=2>
+	バハロス	<Off>						何度も同じことを言わせるな\nもう巫山戯ている時間はないぞ
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+Bg	封印結界
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+	イザナギ	絶望
+Shake	イザナギ		x=5				NoWait
+	イザナギ	絶望						がっ……はあ……っ！
+	バハロス	愉悦						他よりも随分美味かろう\n来い
+	イザナギ	絶望						馬鹿な……一体何が……!!
+Se	闇2
+	スモーク		エフェクト表			1
+Wait						1
+CharacterOff	イザナギ					1
+CharacterOff	スモーク					1
+Wait						1
+	ディーア	絶望2						嘘、だろ<dash=2>\nイザナギまで<dash=2>
+	バハロス	愉悦						そこそこだな\n<dash=2>それから
+	バハロス	愉悦						出てこい、ミラロスト\n何をそこで見ている
+	ミラロスト	通常						にゃは♥\nバレてたかー♪
+	バハロス	愉悦						当たり前だ\n貴様も同様だ、来い
+	ミラロスト	ニヤリ						そういうわけには\nいかないんだよねぇ♪
+	バハロス	愉悦						そういうだろうと思ったよ\n仕方あるまい
+	バハロス	愉悦						少し相手しろ\n退屈が過ぎた
+	ミラロスト	ニヤリ						別にいいけど、\nあの時のミラちゃんとは違うよ？
+	ミラロスト	ニヤリ						だってミラちゃん、\nもうマスターさんの魔剣だからぁ♪
+	バハロス	愉悦						知っている、だからこそだ
+	ディーア	絶望2						やめろ、もうやめろ\nバハムート……！
+	バハロス	真顔						まだむずかっているのか\n赤子のようだな
+	ディーア	怒り2						くっ……やるしかないのか！\nいくぞ、ミラ！
+	ミラロスト	ニヤリ						はいはーい♥
+Se	闇3
+	イベントスチル393I		エフェクト表
+Param	character_grayout=false
+	ミラロスト	<Off>						ミラちゃん、久しぶりに\n本気<dash=2>出しちゃうかもねぇ♪
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1047_06
+EndIf
+EndScenario
+
+# E_1047_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫					.5
+Bg	封印結界
+	バハロス	愉悦
+FadeIn	black					.5
+	バハロス	愉悦						そこまでだ<dash=2>\nそこへなおれ!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black					0
+CharacterOff						0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+Bg	封印結界
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+	ミラロスト	悔しい破損
+Shake	ミラロスト		x=5				NoWait
+	ミラロスト	悔しい破損						ぐぇっ……ふぅっ……!!
+	ミラロスト	ニヤリ破損						ミラちゃんの<dash=2>\n予想、以上だった、かも……♪
+	バハロス	愉悦						さすがに他よりは随分\n手応えがあったな
+	バハロス	愉悦						言い残すことはなにか無いか？
+	ミラロスト	ニヤリ破損						うー……ん……\nそう、だねぇ……♪\nあな、たも、きっと……
+	ミラロスト	ニヤリ破損						わか、ると思、う……♥
+	バハロス	真顔						ほう……？\n奇怪なことを言うな
+	バハロス	愉悦						良かろう、心に留めおこう
+	ミラロスト	ニヤリ破損
+Se	闇2
+	スモーク		エフェクト表			1
+Wait						1
+CharacterOff	ミラロスト					1
+CharacterOff	スモーク					1
+Wait						1
+	ディーア	悔しい2						くっ<dash=2>\nこ、この<dash=2>
+	バハロス	真顔						さて、小娘
+	バハムート	通常						……！
+	バハロス	真顔						すまんが戯れは終わりだ\nやらねばならんことがある
+	バハロス	真顔						こちらへ来い
+	バハムート	通常
+Shake	バハムート		x=5				NoWait
+	バハムート	通常						や、やだ<dash=2>\nバハムートちゃんは、\nマスターさんを、守る<dash=2>！
+	バハロス	真顔						来ぬのならこちらから行くぞ
+CharacterOff
+Param	character_grayout=false
+	イベントスチル104709		エフェクト表
+	バハロス	<Off>						いいか、よく聞け小娘\n大事なことを教えてやる
+	バハロス	<Off>						喪うことを恐れて\nいやだいやだと喚くのは\n情けない赤子の仕事だ
+	バハロス	<Off>						貴様の使命はなんだ？\n貴様の存在とはなんだ？\n何のためにここにいる？
+	バハロス	<Off>						答えろ、貴様も竜王ならばな
+CharacterOff
+	バハムート	通常						ば、バハムートちゃんは<dash=2>\nマスターさんを、ま、\n守る<dash=2>!!
+	バハロス	真顔						くどいっ!!
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	封印結界
+Param	character_grayout=true
+CharacterOff
+	バハムート	暴走
+Shake	バハムート		x=5				NoWait
+	バハムート	暴走						あああああああああああああ!!!!
+	バハロス	真顔						痛みごときで大声を出すな\n立て
+	ディーア	悔しい2
+Shake	ディーア		x=5				NoWait
+	ディーア	悔しい2						ぐ、ぐああああ……\nこ、このお……
+	バハロス	真顔						何を騒いでいる\n貴様も立て
+	バハロス	真顔						フン、凡庸な眺めだ
+	ディーア	絶望2						ぁぁぁあああぁ……\nああああああああああ!!!!
+	バハムート	暴走						あ<dash=2>\nああああ<dash=2>
+	バハロス	真顔						何だ貴様ら\n「あ」しか言えんのか
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+Bg	封印結界
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+	バハロス	真顔
+	バハロス	真顔						そろそろ良いだろう\n話はここで終いだ
+	ディーア	絶望2						バハ、ムート<dash=2>
+CharacterOff
+	バハムート	絶望
+	黒グラデーション		エフェクト表
+	バハムート	絶望						……
+CharacterOff
+	ディーア	絶望2						う、動いてくれ、\nバハムート<dash=2>
+	ディーア	絶望2						くそ、くそ<dash=2>
+	バハロス	真顔						小娘、腹に収まれ
+	ディーア	絶望2						ぁぁぁあああぁ<dash=2>
+CharacterOff						0
+StopBgm
+Bg	黒背景					0
+Se	光1
+FadeOut	white					.3
+	オーラ光		エフェクト表			0
+Wait						.2
+Se	光3
+Se	闇3
+Bg	封印結界
+Wait						1.5
+Bg	封印結界					0
+CharacterOff						0
+	バハロス	真顔				0
+FadeIn	white					.3
+	バハロス	真顔						<dash=2>!?
+	バハロス	愉悦						ほおう<dash=2>\n貴様は<dash=2>
+	ロルリアンレット	通常H						させないわよ、ロスト
+Bgm	風属性バトル
+	ロルリアンレット	通常H						来なさい、相手をしてあげる
+	ディーア	驚き2						ろ、ロール様<dash=2>
+	ロルリアンレット	ニヤリH						久々に燃えるわ\n魔界が無事な保証は出来ないわ\n魔剣使い、貴方も身を守りなさい
+	バハロス	愉悦						随分な物言いだな、人間！\nどれ、見せてみろ！
+Se	光2
+Param	character_grayout=false
+	オーラ光		エフェクト表
+	イベントスチル392K1		effect_c			1
+	イベントスチル392K2		effect_d
+	ロルリアンレット	悪い顔H						ロスト、貴方は魔導王から\nこう聞かなかったかしら<dash=2>
+	ロルリアンレット	悪い顔H						「人間をみくびるな」と
+Se	光3
+Se	闇3
+FadeOut	white
+CharacterOff
+	イベントスチル104714		エフェクト表			0
+Wait						1
+FadeIn	white					1
+	バハロス	<Off>						<dash=2>！\nこの力は<dash=2>!!
+	ロルリアンレット	<Off>						どう？\nロルリアンレット世界図書館の\n偉大なる叡智の欠片よ
+	バハロス	<Off>						ククク……
+	バハロス	<Off>						ハハハハハハハハハハ!!
+	バハロス	<Off>						面白い、実に面白いぞ!!
+	バハロス	<Off>						見せてみろ、もっとだ！
+	ロルリアンレット	<Off>						いいわ、いくらでも見せてあげる\n後悔しないことね……！
+Se	魔2
+Se	光3
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1047_07
+EndIf
+EndScenario
+
+# E_1047_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	特殊バトル					.5
+Bg	封印結界
+Param	character_grayout=false
+	イベントスチル104714		エフェクト表
+FadeIn	black					.5
+	バハロス	<Off>						良いぞ、良いぞ！\nこのバハムート、\n久々に滾るようだ！
+	ロルリアンレット	<Off>						そう言っていられるのも\n今のうちよ、ロスト！
+	ロルリアンレット	<Off>						食らいなさい<dash=2>\nはあっ!!
+Se	魔2
+Se	光3
+FadeOut	white					.5
+CharacterOff						0
+	バハロス					0
+FadeIn	white					.5
+Shake	バハロス		x=5				NoWait
+	バハロス	真顔						ぐっ……!!
+	バハロス	真顔						このバハムートに\n傷を負わせるとは……!!
+	ロルリアンレット	ニヤリH						まだまだよ!!\nはああああっ!!
+Se	魔2
+FadeOut	white					.5
+CharacterOff
+	バハロス
+FadeIn	white					.5
+Shake	バハロス		x=5				NoWait
+	バハロス	真顔						ぐ……ぐぅっ……！\nこれほどとはっ……!!
+	ロルリアンレット	悪い顔H						ひとつ、教えてあげるわ\nロスト
+	バハロス	真顔						なんだ<dash=2>？
+	ロルリアンレット	悪い顔H						孤独では何者にも勝れないわ\n貴方では私に勝てない
+	ロルリアンレット	悪い顔H						人と人との間に生まれる\n絆の力を<dash=2>\n思い知るのが遅かったようね
+	バハロス	真顔						絆の、力……!?
+Shake	バハロス		x=5				NoWait
+	バハロス	真顔						認めん、そんなもの\n認めんぞ……！
+	ロルリアンレット	悪い顔H						貴方が認めなくともいいわ\nただ貴方は思い知るだけ
+	バハロス	真顔						フン、人間ごときが\n図に乗りおって……！
+Se	闇1
+	オーラ紫		エフェクト表
+	バハロス	真顔						竜王と人間の違いを\n思い知らせてやろう!!
+CharacterOff
+	ロルリアンレット	ニヤリH						<dash=2>来なさい\nいくらでも思い知らせてあげる
+	オーラ紫		エフェクト表
+	バハロス	真顔						この<dash=2>\nこの<dash=2>!!
+	バハロス	真顔						我が負けることなど\nありえんのだ!!
+CharacterOff
+	ロルリアンレット	ニヤリH						まだ分からないようね<dash=2>
+	オーラ紫		エフェクト表
+	バハロス	真顔						ぐっ……!!\nはあああああああ!!
+FadeOut	black
+CharacterOff
+Bg	黒背景					0
+Se	光1
+FadeOut	white
+	オーラ光		エフェクト表			0
+Wait						.2
+Se	光3
+Se	闇3
+Bg	封印結界
+Wait						2.5
+CharacterOff
+	バハロス	真顔
+FadeIn	white					.5
+Shake	バハロス		x=5				Add
+	バハロス	真顔						ありえぬ……ありえぬ!!\nこのバハムートが、\n敗れるなど……！
+	ディーア	怒り2						ロール様、大丈夫ですか！
+	ロルリアンレット	ニヤリH						ええ、心配には及ばないわ\nあとひと押しよ
+	ロルリアンレット	ニヤリH						行くわよ、ロスト！
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1047_08
+EndIf
+EndScenario
+
+# E_1047_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	封印結界
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Bg	封印結界
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+	バハロス	真顔
+Shake	バハロス		x=5				NoWait
+	バハロス	真顔						ぐっ……はぁっ……！
+	バハロス	真顔						馬鹿な……\nこ、これが……\n絆の力……!?
+Bgm	凱旋					.5
+	ロルリアンレット	悪い顔H						言ったでしょう<dash=2>\n人間をみくびるな、ってね
+	バハロス	真顔						ぐうう……人間め……\nこのバハムートが敗れるとは……
+	ロルリアンレット	ニヤリH						貴方の失敗はふたつよ\nひとつは人間を見くびったこと\nもうひとつは<dash=2>
+	ロルリアンレット	驚きH						<dash=2>？
+StopBgm
+	バハロス	真顔						…………
+CharacterOff
+	黒グラデーション		エフェクト表
+	バハロス	真顔
+	バハロス	愉悦						……やめよう
+	バハロス	愉悦						飽きた
+Se	闇2
+FadeOut	white					.5
+Param	character_grayout=false
+CharacterOff
+Se	コインロック
+	鎖エフェクト前		エフェクト表
+	ロルリアンレット	驚きH
+	鎖エフェクト後ろ		エフェクト裏
+FadeIn	white					1
+	ロルリアンレット	驚きH						なっ<dash=2>
+Bgm	魔獣バトル
+Param	character_grayout=false
+CharacterOff
+Bg	黒背景
+	バハロス	<Off>						確かに恐るべき力よ\nなかなかのタマだな
+	バハロス	<Off>						事実このバハムートに\n傷は入っているしな
+	イベントスチル104707		エフェクト表			1.5
+	バハロス	<Off>						だがこのバハムートに\nまるで遠く及ばん
+	バハロス	<Off>						思い上がりも大概にしろ\n貴様らは所詮人間だ
+	バハロス	<Off>						それはともかく、\n貴様らには他にないのか？\n人間の力だの、絆だの
+	バハロス	<Off>						そう言っておけば\n状況がどうにかなると思ったか\n愚か者め
+	バハロス	<Off>						状況を変えるのはいつでも行動だ\n喪うことを恐れずに\n立ち向かう意志の力だ
+	バハロス	<Off>						醜悪な自慰を天下に晒すな\n手前勝手な独り言で\n世界を征した気になどなるな
+	バハロス	<Off>						<dash=2>不愉快だ
+CharacterOff
+Bg	封印結界
+	鎖エフェクト前		エフェクト表
+	ロルリアンレット
+	鎖エフェクト後ろ		エフェクト裏
+	ロルリアンレット	驚きH						くっ……\n魔剣使い、離れて！
+CharacterOff
+	ディーア	悔しい2						ロール様！それ以上はダメです!!\nもう魔力が……！
+	バハロス	愉悦						時間がないと言っているだろう\n完成したロストを前に\n貴様らはいつまで遊ぶつもりだ
+	バハロス	愉悦						来い、小娘\nそこそこ楽しめると思った\nこのバハムートが買いかぶっていた
+CharacterOff
+	黒グラデーション		エフェクト表2
+	鎖エフェクト前		エフェクト表
+	ロルリアンレット
+	鎖エフェクト後ろ		エフェクト裏
+	ロルリアンレット	驚きH						ぐ、ぐぐぐ……!!
+CharacterOff
+	ディーア	絶望2						ロール、様……！
+	バハロス	愉悦						だいたいこのバハムートは\n遊びに来たわけではないのだ\n悪く思うなよ、小娘
+	ディーア	絶望2						や、やめろ<dash=2>
+	ディーア	絶望2						ロール様を、離せ
+	バハロス	真顔						貴様も貴様だ！\nいつまで小童の真似事を続ける？
+	バハロス	真顔						己が使命と為すべきことを自覚しろ\n貴様にも時間がないはずだ！
+	ディーア	絶望2						違う、違うんだ、\nバハムート……！
+	ディーア	絶望2						お願いだ、やめてくれ……！
+	バハロス	愉悦						そんな懇願だけで\nやめる愚か者がどこにいる
+StopBgm
+	バハロス	愉悦						ようく見ておけ
+CharacterOff
+	鎖エフェクト前		エフェクト表
+	黒グラデーション		エフェクト表2
+	ロルリアンレット	驚きH
+	鎖エフェクト後ろ		エフェクト裏
+Wait						1
+Se	闇2
+	スモーク		エフェクト表3			1
+Wait						1
+CharacterOff	ロルリアンレット					1
+CharacterOff	鎖エフェクト前					1
+CharacterOff	鎖エフェクト後ろ					1
+CharacterOff	スモーク					1
+Wait						1
+	バハロス	通常						うむ、格別だ\n相当な魔力を有していたのだな
+Bgm	絶望
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	絶望2
+	ディーア	絶望2						う<dash=2>\nうそだ
+	ディーア	絶望2						嘘だ<dash=2>\nロール様が、やられるなんて
+	ディーア	絶望2						オレは、オレは……
+CharacterOff
+	バハロス	真顔						困ったやつだ\n何をブツブツ言ってる
+	バハロス	真顔						確かになかなかの手練だったぞ\nだが済んだことだ
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	絶望2
+	ディーア	絶望2						…………
+CharacterOff
+	バハロス							だんまりか\nまったく、世話が焼けるな
+	バハロス							立て、ほら
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	絶望2
+	ディーア	絶望2						…………\nロール様…………
+CharacterOff
+	バハロス	真顔
+	黒グラデーション		エフェクト表
+	バハロス	真顔						<dash=2>チッ
+CharacterOff	黒グラデーション
+	バハロス	真顔						うなだれている暇はないぞ？\nまだ為すべきことがある
+CharacterOff
+	黒グラデーション		エフェクト表
+	ディーア	絶望2
+	ディーア	絶望2						絶対に……
+CharacterOff
+	バハロス	真顔						<dash=2>？\nなんだ？
+Se	光1
+	オーラ青		エフェクト表
+StopBgm
+	ディーア	本気2						絶対に、諦めない
+	ディーア	本気2						オレは、絶対に諦めない
+CharacterOff
+	バハロス	真顔						…………
+Bgm	ロルリアンレットB
+	オーラ青		エフェクト表
+	ディーア	本気2						聞こえるか、\nオレは絶対に諦めないぞ
+	ディーア	本気2						絶対に救い出してみせる\n絶対にだ……！
+CharacterOff
+	バハロス	真顔						語りかけても無駄だ\nもう聞こえん
+	バハロス	真顔						もう我が体と魔力に\n混じり合って意識もないのだ
+	バハロス	真顔						辛いだろうが理解しろ
+CharacterOff
+	オーラ青		エフェクト表
+	ディーア	本気2						違う！
+CharacterOff
+	バハロス	真顔						……？\n何が違う
+StopBgm
+	ディーア	本気2						オレは、お前に言っているんだ\nバハムート!!
+	バハロス	真顔						<dash=2>どういう意味だ
+Bgm	キノコリオン
+	ディーア	本気2						お前を、オレは絶対に諦めない\nお前がどれだけ自分を\n犠牲にしようと！
+	ディーア	本気2						お前が何を言っても\nオレには分かる！\nお前は<dash=2>
+	ディーア	本気2						オレと、世界を救いに来たんだろ？
+	バハロス	真顔						<dash=2>！
+	ディーア	本気2						手段は問わなくても、\nオレと考えてることは\n同じはずだ
+	ディーア	本気2						だが<dash=2>\nオレを、信じてくれ\nバハムート
+	ディーア	本気2						オレはこれ以上、\nお前が傷つくのを見たくない
+	バハロス	真顔						<dash=2>何を、言っている\nこのバハムートが、傷つくなど
+	ディーア	本気2						やめてくれ！\nお前はそんな奴じゃない！
+	ディーア	本気2						お前がお前を犠牲にしなくても\nオレは何とかしてみせる\nだから<dash=2>
+	ディーア	本気2						オレを信じてくれ、\n頼む<dash=2>
+CharacterOff
+Se	光1
+	バハロス	愉悦
+	オーラ青		エフェクト表
+	バハロス	愉悦						ふ、ふふ、わ、笑わせるな\nこのバハムート、全て己が意志で\n為すべきことを為すのみ
+	バハロス	愉悦						傷ついてなど<dash=2>
+CharacterOff	オーラ青
+Param	character_grayout=false
+	バハロス2	真顔	2_3			0
+	バハロス	真顔	2_3_b			0		<dash=2>！
+Se	光1
+ImageEffect	SpriteCamera	MotionBlur
+ImageEffect	SpriteCamera	NegaPosi
+Shake	バハロス		x=1				NoWait
+Tween	バハロス2	ScaleBy	x=1.2 y=1.2				NoWait
+Tween	バハロス2	MoveBy	y=-100				NoWait
+CharacterOff	バハロス2					.2
+Wait						.1
+ImageEffectOff	SpriteCamera	NegaPosi
+Wait						1
+ImageEffectOff	SpriteCamera	MotionBlur
+	バハロス	真顔						ぐっ!?
+	バハロス	真顔						何だ……\n身の内より、熱が……！
+	バハロス	真顔						これは<dash=2>\nあの、小娘<dash=2>!!
+CharacterOff
+	ディーア	本気2
+	オーラ青		エフェクト表
+	ディーア	本気2						聞こえますか、ロール様！
+CharacterOff
+	イベントスチル104715		エフェクト表			.3
+Se	フォーン
+Wait						1
+CharacterOff						.3
+	ディーア	本気2						力を合わせましょう\nオレはこいつを<dash=2>救いたい
+	バハロス							ハハ……ハハハハハハハ……!!\n面白い、面白いぞ……
+	ディーア	本気2						立てるか、バハムート！
+	バハムート	暴走						ぐ、うううううう……\nな、なんとかぁ……!!
+	ディーア	本気2						お前の真の力を見せるときだ\n<dash=2>分かるな？
+	バハムート	暴走						はいっ♪\nバハムートちゃんの力は\n追い込まれて光るのですっ！
+	バハムート	暴走						それから、貴様<dash=2>
+	バハロス	真顔						<dash=2>！
+	バハロス	真顔						貴様、わざと追い込まれて<dash=2>
+CharacterOff
+	イベントスチル393F		エフェクト表
+	バハムート	暴走						『異能解放、\n　D-13遺伝子覚醒、\n　神竜回路起動』<dash=2>!!
+	バハムート	暴走						よく味わえ、そして思い出せ\nこれが<dash=2>世界を救った、\n始原にして頂点たる竜王の力だ!!
+CharacterOff
+	イベントスチル104707		エフェクト表
+	バハロス	愉悦						フン<dash=2>\n面白い、ならば\nこちらも真の力で迎え討つ!!
+	バハロス	愉悦						『異能解放\n　D-13遺伝子真覚醒\n　魔人神竜回路起動』
+	バハロス	愉悦						刮目せよ！\n輪廻を超えし竜の力！
+CharacterOff
+	ディーア	本気2	1_2
+	バハムート	暴走	2_2
+	ディーア	本気2						覚悟しろ、バハムート！\n今度こそしっかり理解するんだぞ
+	ディーア	本気2						「絆の力」ってやつをな<dash=2>！
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1047_09
+EndIf
+EndScenario
+
+# E_1047_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫					.5
+Bg	封印結界
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+Bg	封印結界
+ImageEffectOff	SpriteCamera	MotionBlur
+Param	character_grayout=true
+CharacterOff
+	バハロス	真顔
+	バハロス	真顔						ぐああっ……！
+	バハムート	暴走						ハァ、ハァ……\n逃さんぞ、堕竜……！\nその息の根、止めてやろう！
+CharacterOff
+Param	character_grayout=false
+	バハロス2	真顔	2_3
+	バハロス	真顔	2_3_b					ぐっ、させ、るか……！
+Se	心拍
+ImageEffect	SpriteCamera	MotionBlur
+ImageEffect	SpriteCamera	NegaPosi
+Shake	バハロス		x=1				NoWait
+Tween	バハロス2	ScaleBy	x=1.2 y=1.2				NoWait
+Tween	バハロス2	MoveBy	y=-100				NoWait
+CharacterOff	バハロス2					.2
+Wait						.1
+ImageEffectOff	SpriteCamera	NegaPosi
+Wait						1
+StopSe						.5
+ImageEffectOff	SpriteCamera	MotionBlur
+	バハロス	真顔						がっ……!?\nこ、小癪な、小娘ぇ……!!
+CharacterOff
+	ディーア	本気2						ロール様<dash=2>！
+	バハムート	暴走						ハァ、ハァ<dash=2>\nどうだ、苦しいか\n竜王はふたつと要らん
+	バハムート	暴走						民を統べることも出来ず\n思いに任せた暴虐に出るなど\n片腹痛いぞ
+	バハロス	通常						フン、貴様こそ<dash=2>
+	バハロス	通常						……まだ何も知らん生娘だ\n己が守られていることも\n分かっておらんのだろう
+	バハムート	暴走						クク……減らず口を\nだがここで終いだ\n堕竜よ!!
+	バハムート	暴走						これで<dash=2>\n最後だ<dash=2>!!
+StopBgm
+	ディーア	本気2						そこまでだ、バハムート
+	バハムート	通常						<dash=2>!!
+	バハムート	通常						ま、マスターさん……！
+Bgm	凱旋
+	ディーア	笑い2						オレは何も失いたくない\nもちろんお前もだ\nバハムート
+	ディーア	笑い2						その気高さ、オレは大好きだよ\nでも、お前はお前をもっと\n大事にしてくれ
+	ディーア	笑い2						オレはお前が\n笑っているところがみたいよ
+	バハムート	通常						ま、マスターさん……\nふえええ……！
+StopBgm
+	バハロス	真顔						フン、茶番を<dash=2>\n覚悟しろ、小娘！
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	封印結界
+Param	character_grayout=true
+CharacterOff
+	ディーア	本気2
+Bgm	特殊バトル
+	ディーア	本気2						やめろって言ってるだろ！
+	バハロス	真顔						<dash=2>!?
+	ディーア	怒り2						いい加減に気づけよ\nお前じゃオレを倒せない
+	バハロス	真顔						くっ……\nこのバハムートの手加減を前に\n図に乗りおって……！
+	バハロス	真顔						貴様が宣う通り、\n我が殲滅対象は貴様ではない
+	バハロス	真顔						貴様を喰らおうとする\n貴様の敵が\nこのバハムートの敵だ
+	バハロス	真顔						貴様がその連中に\n与する前に<dash=2>
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+FadeIn	black
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.2
+ImageEffectOff	SpriteCamera	MotionBlur
+Bg	封印結界
+Param	character_grayout=true
+CharacterOff
+	ディーア	本気2
+	ディーア	本気2						お前こそいい加減にしろよ！
+	バハロス	真顔						<dash=2>！
+	ディーア	怒り2						オレの敵はお前の敵だ\nだがオレは全てを喪いたくない\nお前もそうなんだろ？
+	ディーア	本気2						これ以上大事なものを\n喪いたくないんだろ！
+	バハロス	愉悦						フ……ハハハハ……\nこのバハムートに、\n最早大事なものなど……
+	バハロス	愉悦						喪うべきものなど、ない！\n己が意志で全てを捨てたのだ！
+	ディーア	怒り2						そう思うなら、オレを倒せよ
+	バハロス	真顔						<dash=2>!!
+	バハロス	真顔						そ、それは<dash=2>
+	ディーア	本気2						お前なら出来るんだろ\nほら、やってみろよ！
+	バハロス	真顔						……たわけたことを言うな\nなぜこのバハムートが貴様を\n屠らねばならんのだ！
+	ディーア	怒り2						大事なものなんてないんだろ
+	バハロス	真顔						<dash=2>！
+	ディーア	怒り2						お前にとってオレが\n大事なものでないなら\nオレを倒せるはずだろ
+	ディーア	本気2						さあ、やれよ！
+	バハロス	通常						ククク……
+	バハムート	悔しい						マスターさん、\n気をつけて！\nこいつは<dash=2>
+	ディーア	怒り2						信じろ、バハムート
+	バハムート	通常						<dash=2>！
+	ディーア	怒り2						大丈夫だ\nオレを信じろ
+	ディーア	怒り2						竜王の心を本当に持ったものなら\n全ての心を理解して、\n信じなければいけない
+	ディーア	本気2						<dash=2>大丈夫だ\nオレを信じろ
+	バハムート	通常						<dash=2>！
+	バハロス	愉悦						ククク……\nハハハハハハハハハ!!
+Se	倒れる
+CharacterOff						1
+StopBgm
+Wait						1
+	バハロス	通常						このバハムートの負けだ、\nこの頑固者め
+	ディーア	驚き2						<dash=2>！
+CharacterOff
+Se	ガードブレイク
+Bg	夜空					1
+Wait						2
+	ディーア	驚き2						結界が……！
+Bgm	結婚
+	バハロス	通常						いつだって変わらないな、貴様は\nこうと決めたら頑として動かん
+	バハロス	通常						やはりこのバハムートの\n話など聞かなかったな\n<dash=2>何、いつものことだ
+	バハロス	通常						だがよい、貴様は貴様\nだからこそ全てを捨てる\n価値があるというものだ
+	ディーア	驚き2						ば、バハムート、\nお前<dash=2>！
+	ディーア	驚き2						待て、消えるな！\nお前はここでオレと<dash=2>
+	バハロス	通常						わめくな、落ち着け\n最後くらいこのバハムートの\n話を聞かんか
+	バハロス	通常						貴様に問おう<dash=2>\nロストとは、何だ？
+	ディーア	怒り2						分からない、まだ、\nオレには<dash=2>
+	バハロス	穏やか						うむ、しかし、\nこのバハムートには\nようやく分かったぞ
+	バハロス	通常						貴様に教えてやろう\nロストとは<dash=2>\n「迷い子」のことだったのだ
+	バハロス	穏やか						貴様の言う、大事なものを\n見失った迷い子たちだったのだよ
+	バハロス	通常						見よ、かように世界は燃える\n数多の迷い子たちが彷徨うぞ
+	バハロス	穏やか						かくいうこのバハムートも\n迷い子になりさがった\nしかし<dash=2>
+	バハロス	穏やか						このバハムート、\n己が意志で貫いてみせよう
+	バハロス	通常						もうひとつ問おう\n己が意志で迷い子となった者は\n迷い子であろうか？
+	ディーア	怒り2						いや、それは<dash=2>
+	ディーア	怒り2						<dash=2>旅人だ
+	バハロス	穏やか						貴様も人間の言葉への翻訳が\n上手くなったな
+	バハロス	穏やか						それは眷属の才覚だ\n大事にしろよ
+	バハロス	通常						己が意志で家を出て、\nどこか遠くへ歩みだす時<dash=2>\nその心はすでに迷い子ではなく
+	バハロス	通常						愛すべきものを探し、\nそのために恐れず進む\n我々は皆旅人なのだ
+CharacterOff
+Param	character_grayout=false
+	イベントスチル104711		エフェクト裏
+	バハロス	<Off>						このバハムートは見つけたぞ\n長い長い<dash=2>\n気の遠くなるような時のなかで
+	バハロス	<Off>						まさにこの時のために\n歩いてきたのだ
+	バハロス	<Off>						聞こえるか、小娘\n我が身のうちに沈む貴様に\n大事な報せがある
+	バハロス	<Off>						魂を燃やせ\n精根尽き果てるその瞬間まで\n己が使命に命を燃やすのだ
+	バハロス	<Off>						全てを<dash=2>\n託したぞ
+	ディーア	<Off>						バハムート!!\nダメだ、まだ方法はあるはずだ
+	バハロス	<Off>						泣くな、愚か者<dash=2>\n何、永劫に繰り返す輪廻の中で\nまた会えるさ
+	バハロス	<Off>						そのときは貴様を\n一番の眷属にしてやろう\n栄誉を誇るがいい
+	バハロス	<Off>						世界は貴様のものだ\n何だって叶えてやるぞ<dash=2>
+	バハロス	<Off>						そうだ、こういうのはどうだ\n眷属を増やすのだ\n貴様に仕える小娘たちだぞ
+	バハロス	<Off>						貴様が寂しくならないように\n貴様がもう何も喪わぬように
+	ディーア	<Off>						はは……バハムート、\nそれにはまず、もっと\n親しみやすくしなくちゃ……
+	バハロス	<Off>						そうだな、考えておこう<dash=2>
+	イベントスチル104712		エフェクト表
+	バハロス	<Off>						さあ、時間だ！\nこれが最後だ、よく聞けよ
+	バハロス	<Off>						くじけるなよ<dash=2>\nどんな困難に出会おうと、な
+	バハロス	<Off>						地に倒れ伏すその瞬間まで\n決して諦めるな、\n決して屈するな
+	バハロス	<Off>						そうすれば、暗黒の大地に\n煌々たる光明が灯るだろう！
+	バハロス	<Off>						我が身全てをかけた貴様らへの\n<dash=2>贈り物だ！
+	バハロス	<Off>						はぁ……\nこれで、おしまい、か\nふふふ……
+	白背景		エフェクト表2
+	バハロス	<Off>						不思議な気持ちだ\nこれはどういうことなんだろうな\nとても穏やかな心だ
+	バハロス	<Off>						いいか、眷属よ\nあまり無理しちゃだめだぞ？
+	バハロス	<Off>						貴様はいつも無茶をするもんな\nこのバハムートが来るまで\nちゃんとおとなしく待つんだぞ？
+	バハロス	<Off>						そうしたらこのバハムートが\n迎えに行くからな\nいいな？　約束だぞ？
+	バハロス	<Off>						くれぐれも<dash=2>\n自分を大事に、するんだぞ
+FadeOut	white					3
+Wait						3
+CharacterOff						0
+	イベントスチル104703		エフェクト裏			0
+	白背景		画面外_右_b			0
+	イベントスチル104704		エフェクト表			0
+Tween	白背景	MoveBy	y=300 time=0
+FadeIn	white					1
+	ディーア	<Off>						さようなら、バハムート\nいや<dash=2>
+	ディーア	<Off>						ありがたき幸せです\n<dash=2>竜王
+Tween	白背景	MoveBy	x=-3000 time=6				NoWait
+	バハムート	<Off>						あっ、マスターさん
+	バハムート	<Off>						流れ星<dash=2>
+	ディーア	<Off>						ああ<dash=2>
+	ディーア	<Off>						きれいだよ、バハムート
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1047_10
+EndIf
+EndScenario
+
+# E_1047_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和					.5
+Bg	酒場1F
+	バハムート	通常
+FadeIn	black					.5
+	バハムート	通常						マスターさん♪\nお怪我の具合はどうですか？
+	バハムート	通常						今日もいーっぱい、\nお世話してあげますからね♪
+CharacterOff
+	ディーア	通常2	1_2
+	バハムート	通常	2_2
+	ディーア	通常2						ありがとう、バハムート\nでももうすっかり良くなったよ
+	ディーア	通常2						お前のおかげだな\n恩に着るよ
+	バハムート	通常						もう、そんなこと言って！\n無理は良くないです！
+	バハムート	通常						それとも、バハムートちゃんに\nお世話されるのは\n嫌いですか……？
+	ディーア	驚き2						そんなことないぞ！\n本当に感謝してるよ
+	ディーア	笑い2						でもいつまでも\n横になってるわけには\nいかないからな……
+CharacterOff
+	ディーア	通常2	1_2
+	オメガ	通常	2_2
+	オメガ	通常						マスターちゃん！\n元気ー？
+	ディーア							オメガ！\n無事で良かった……！
+	オメガ	通常						へへへー♪\n愛の力の賜物だね！
+	オメガ	通常						マスターちゃんの方はどう？
+	ディーア							ああ、この通り\nピンピンしてるよ
+CharacterOff
+	ディーア	通常2	1_2
+	バハムート	通常	2_2
+	バハムート							ほら、また無理してる！\nマスターさんはまだ\nお休みが必要です！
+	ディーア							分かった分かった、\n横になってるから\nそんなに押さないでくれ……
+CharacterOff
+	ディーア	通常2	1_2
+	ミラ	通常	2_2
+	ミラ							マスター、さん……？\n大丈夫……？
+	ディーア							ミラ！\n戻ってきれくれてよかった\n心配したぞ
+CharacterOff
+	オメガ	通常
+	オメガ	通常						あーっ！\nなんかオメガちゃんのときより\nちょっとコメントが多い！
+	ミラ	通常						ひぅっ……！\nご、ごめんなさい……
+	ミラ	通常						でもちょっとだけ、\n嬉しいな……えへへ……
+	オメガ	通常						むーっ！\nミラ！　勝負よ、勝負！\nどっちの愛が強いか決めるよ！
+CharacterOff
+	ディーア	驚き2
+	ディーア	驚き2						お、落ち着いてくれよ\nお前ら全員が大事なんだ
+	オメガ	通常						マスターちゃんは黙ってて！
+	ミラ	通常						ミラちゃん、頑張るから\n見ててね、マスターさん……！
+	バハムート	通常						もうー！\n静かにしてください！
+	バハムート	通常						マスターさんは\nお休みが必要なんですよ！
+	オメガ	通常						じゃあバハちゃんは\n座って見ててね♪
+	ミラ	通常						ミラちゃんとオメガちゃんで、\n決着を付けます……！
+	バハムート	通常						む、むむーっ！\nずるい！
+	バハムート	通常						バハムートちゃんだって\nマスターを愛してるんだもん！
+CharacterOff
+	ディーア	笑い2						はは、ははは……
+CharacterOff
+	ディーア	通常2	1_2
+	イザナギ	通常	2_2
+	イザナギ	通常						騒がしいな、何事だ
+	ディーア	通常2						イザナギ！\nお前も無事で良かったよ
+	イザナギ	通常						当たり前だ！
+	イザナギ	通常						だが不覚だった、\nあの邪竜に遅れを取るとは……
+	イザナギ	通常						それはともかく、\n何かつかめたか？
+	イザナギ	通常						あの邪竜が、\nこの魔界に一体何を\n遺したのか<dash=2>
+	ディーア	怒り2						いや、まだハッキリとは\n<dash=2>でも
+	イザナギ	通常						何だ
+	ディーア	怒り2						分かるんだ、\nあのバハムートはオレたちに\n何かを託した
+	ディーア	怒り2						それはオレたちが\nこれから向き合う\nもっと大きな困難のため<dash=2>
+	ディーア	怒り2						もしかしたらオレたちは、\nあのバハムートに\n試されていたのかも知れない
+	イザナギ	通常						ほう<dash=2>託した、か\nなるほどな
+	イザナギ	通常						しかしそれは何だ\n奴は既に消滅したのだろう
+	ディーア	怒り2						ああ、だけど\nこの魔界のどこかに、\nきっと<dash=2>
+CharacterOff
+	ディーア	通常2	1_2
+	ミラロスト	通常	2_2
+	ミラロスト	通常						考えてもきっと\n分かんないよー♥
+	ディーア	通常2						ミラ=ロスト！\nお前も無事だったんだな\n痛むところはないか
+	ミラロスト	ニヤリ						んー♥\nなんて優しいマスターさん♪
+	ディーア	通常2						大丈夫そうだな\nそれで、どういうことだ\n考えても分からない、っていうのは
+	ミラロスト	ニヤリ						そのままの意味だよ♪\n物事はね、起こってみないと\n何が起こるか分からないんだよ♥
+	ミラロスト	ニヤリ						それよりぃ、あの子、\nそろそろやばいかもよぉ♪
+	ミラロスト	ニヤリ						世界図書館の、お嬢様……♪
+	ディーア	驚き2						<dash=2>ロール様！\nロール様に何かあったのか!?
+	ミラロスト	ニヤリ						ううん、なーんにも♪\nでもそれが良くないっていうか？
+	ミラロスト	ニヤリ						まだ、眠ったままなんだよね♪
+	ディーア	怒り2						<dash=2>そうか
+	ディーア	怒り2						でも、大丈夫だ\n信じよう
+	ディーア	怒り2						ロール様は、きっと<dash=2>!!
+	ミラロスト	通常						マスターさんってば、\n相変わらず一途だね♪
+	ミラロスト	通常						そういうところも\n見ててぞくぞくしちゃうよ♥
+	ディーア	怒り2						それで、ロール様は\n今どこに？
+	ミラロスト	通常						んー、ミラちゃんも\nよくわかんないけどぉ、\nマリーさんが言うには<dash=2>
+	ミラロスト	通常						<dash=2>世界図書館の奥深く、\n"誰も入れないはずの場所"に\nいるんだって♪
+FadeOut	black					.3
+CharacterOff
+Wait						1
+StopBgm
+Bg	研究所A
+	ププッピマリー	通常	1_2
+FadeIn	black					.3
+	場面転換
+	ププッピマリー	通常						<dash=2>お嬢様
+	ププッピマリー	通常						（私は、お嬢様の眠る\n　静かな吐息を聴きながら\n　ただ、待っていた）
+	ププッピマリー	通常						（お嬢様が目覚め、\n　立ち上がるその時を）
+	ププッピマリー	通常						（それがどれほど\n　過酷なことであるか\n　私は理解している）
+	ププッピマリー	通常						（それでも私はずっと<dash=2>\n　ここにこうして座って、\n　ただ待っている）
+	ププッピマリー	通常						（お嬢様が目覚める、\n　その時を<dash=2>）
+Bgm	図書館
+	ププッピマリー	通常						お嬢様、今日はとても晴れた\nよい天気です
+	ププッピマリー	通常						魔界では、\n先の神竜機関バハムート=ロストの\n被害からの復興が進んでいます
+	ププッピマリー	通常						昨夜は、世界図書館の蔵書に\n魔術で保護を施しました\nいつ何があってもいいように
+	ププッピマリー	通常						世界は<dash=2>\n少しずつ、新たな災厄に\n備えて動いております
+	ププッピマリー	通常						みな、懸命に明日を目指して\n汗を流しています
+	ププッピマリー	通常						お嬢様
+	ププッピマリー	通常						<dash=2>大丈夫ですよ
+	ププッピマリー	通常						私がおそばに\nついております
+	ププッピマリー	通常						ですから、今はゆっくり\nおやすみください
+	ププッピマリー	通常						きっとまた、\n私たちの上に太陽が昇ります
+	ププッピマリー	通常						その時まで、こうして<dash=2>
+	ププッピマリー	通常						少しだけ、お嬢様の手を\n握らせてください
+CharacterOff
+	黒背景		エフェクト表
+	ププッピマリー	<Off>						（でも<dash=2>\n　本当は、私のほうが\n　怖かったのかもしれない）
+	ププッピマリー	<Off>						（ほんの少しだけ、\n　お嬢様の手を握る\n　私の手が）
+	ププッピマリー	<Off>						（震えていたような\n　気がしたから<dash=2>）
+FadeOut	black					.3
+CharacterOff
+StopBgm
+Wait						1
+Bg	黒背景
+FadeIn	black					.3
+	ロルリアンレット	驚きH						<dash=2>！
+	ロルリアンレット	驚きH						私、眠っていたの……？
+	ロルリアンレット	驚きH						ここは……？\nまさか、まだロストの中に……？
+	ロルリアンレット	怒りH						何も見えない……
+	ロルリアンレット	<Off>						……
+	ロルリアンレット	驚きH						……あれは？
+	ロルリアンレット	驚きH						何かが、光ったような……
+	ロルリアンレット	怒りH						……
+	ロルリアンレット	怒りH						行かねば、ならないようね
+	ロルリアンレット	怒りH						立ち止まっている暇など、\nこのロルリアンレットには\nないのだから<dash=2>
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1047_01
+EndIf
+EndScenario

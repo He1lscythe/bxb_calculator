@@ -1,0 +1,2385 @@
+# E_395_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bg	黒背景
+Param	character_grayout=false
+	イベントスチル392L	L2	エフェクト裏
+Wait						1
+FadeIn	black					1.5
+	？？？？							……本当にいいのね？
+	？？？？							ああ、構わない
+	？？？？							尊い犠牲だ\nせめて笑顔で見送ってやろう
+	？？？？							ハ、血も涙もないな\n泣き虫の面影はどこへやらだ
+	？？？？							そんなものはとうに枯れたよ
+	？？？？							<dash=2>安いものさ\nこれで、全てが報われるのであれば
+	黒背景		エフェクト表			2
+Wait						2
+	イベントスチル392L	L1	エフェクト裏			0
+Wait						.2
+CharacterOff	黒背景					2
+Wait						5
+FadeOut	black					2
+CharacterOff
+Bg	草原A(夜)
+	ミラロスト	笑い	2_3
+	？？？？
+Wait						2
+Bgm	緊迫
+FadeIn	black					.5
+	？？？？							にゃははー♪\n一生懸命逃げちゃって、かわいー♪
+CharacterOff						0
+Param	character_grayout=true
+Bg	黒背景					0
+Wait						.2
+Se	斬1
+	斬撃(39201A)		lost1			.1
+Wait						.1
+CharacterOff						.1
+Wait						.3
+Se	斬1
+	斬撃(39201B)		lost2			.1
+Wait						.1
+CharacterOff						.1
+Wait						.3
+Bg	草原A(夜)					0
+ImageEffect	SpriteCamera	MotionBlur
+	ディーア	悔しい2	画面外_右			0
+Se	雨
+Wait						.1
+StopSe						1.5
+Tween	ディーア	MoveTo	x=0	easeOutQuart
+	ディーア							ぐっ……
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	ディーア	悔しい2	1_2
+	バハムート	絶望	2_2
+	バハムート	絶望						ま……すたー……さん……
+	ディーア	怒り2						しっかりしろバハムート！
+	バハムート	絶望						……くっ……ぁぁ……
+	ディーア	悔しい2						く……っ!!
+	ディーア							なんなんだ……\nなんなんだ、<ruby=・・>アレ</ruby>は……!!
+CharacterOff
+Param	character_grayout=false
+	ミラロスト	ニヤリ	2_3
+	？？？？							まだ諦めないのー？\nもしかして、本当に逃げきれると\n思ってる？
+CharacterOff
+Param	character_grayout=true
+	バハムート	絶望	2_2
+	ディーア	悔しい2	1_2					……お前は何だ？\nミラなのか？\nなんのためにこんな<dash=2>
+Se	打1
+FadeOut	white					.1
+FadeIn	white					.1
+Tween	ディーア	MoveBy	y=-50				NoWait
+Wait						.5
+Se	倒れる
+	ディーア							ぐっ……
+CharacterOff
+Param	character_grayout=false
+	ミラロスト	無	2_3
+	ミラ？	<Off>						うるさいなあ
+Param	character_grayout=true
+CharacterOff
+	バハムート	絶望	2_2
+	ディーア	悔しい2	1_2					はぁ……はぁ……
+CharacterOff
+Param	character_grayout=false
+	ミラロスト	ニヤリ	2_3
+	ミラ？	<Off>						ふぅん……まだ頑張るんだ
+	ミラ？	<Off>						もう<ruby=バハムートちゃん>そのお荷物</ruby>\n捨てちゃえばいいじゃん\nそしたらあなただけは助かるよ？
+Param	character_grayout=true
+CharacterOff
+	バハムート	絶望	2_2
+	ディーア	怒り2	1_2					そんなこと、できるわけが……!!
+CharacterOff
+Param	character_grayout=false
+	ミラロスト	笑い	2_3
+	ミラ？	<Off>						そっか、じゃあさよならだね\nばいばーい♪
+Se	光2
+	オーラ青		エフェクト表			2
+Wait						1.5
+Param	character_grayout=true
+CharacterOff						0
+	バハムート	絶望	2_2
+	ディーア	悔しい2	1_2					くっ……
+Se	走る
+Tween	バハムート	MoveBy	x=-800 time=2.5				NoWait
+Se	走る
+Tween	ディーア	MoveBy	x=-800 time=2.5				NoWait
+Wait						1.5
+Param	character_grayout=false
+	ミラロスト	笑い	2_3
+	ミラ？	<Off>						…………ふふ♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+Param	character_grayout=true
+StopBgm
+CharacterOff
+Bg	神社（夜）
+CharacterOff
+	ディーア	悔しい2	1_2
+	バハムート	絶望	2_2
+Wait						1
+Bgm	絶望
+FadeIn	black					1
+Shake	バハムート		x=5				NoWait
+	バハムート							ますたー……さん……\nごくひらちゃん、\nにげきれた……かな……
+	ディーア	怒り2						大丈夫、きっと大丈夫だ\nだからしっかりしろ……!!\nすぐにクランさんのところに……
+Shake	バハムート		x=5				NoWait
+	バハムート	絶望						ううん……\nバハムートちゃんのことは\nここに置いて……
+	バハムート							そしたら、ますたーさんだけでも……
+	ディーア	怒り2						それはダメだ!!
+	ディーア	悔しい2						なにか方法があるはずなんだ……\nこの状況を抜け出す方法が……
+CharacterOff
+	獄刀大包平	破損						……だんな、さま？
+CharacterOff
+	ディーア	驚き2
+	バハムート	絶望						…………!?
+	ディーア	通常2						ああ、ごくひら！\nよかった、無事だったか！
+CharacterOff
+	獄刀大包平	破損
+Shake	獄刀大包平		x=5
+	獄刀大包平							…………ぁ……
+Tween	獄刀大包平	MoveTo	y=-800				NoWait
+Se	倒れる
+Wait						.5
+	ディーア	絶望2						…………え
+	ディーア	悔しい2						お、おい！\nしっかりしろ!!
+	？？？？		2_3					"ああ、旦那さま！\n よかった、無事だったんですね"
+	ディーア	絶望2						…………は？
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル392A	A1	エフェクト表			0
+Wait						1.5
+	ディーア	<Off>						…………おま、えは……
+CharacterOff
+Param	character_grayout=true
+	ミラロスト	ニヤリ	2_3_b
+	バハムート	悔しい	2_3					だめです、マスターさ……
+FadeOut	red					.1
+Se	突1
+FadeIn	red					.1
+	バハムート	絶望
+Shake	バハムート		x=10
+Tween	バハムート	MoveBy	y=-800				NoWait
+Wait						.5
+Se	倒れる
+Param	character_grayout=false
+	ミラロスト	笑い	2_3
+	ミラ？	<Off>						……にゃは♪
+CharacterOff
+Param	character_grayout=true
+StopBgm
+	ディーア	悔しい2						………………まさか
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル392A	A4	エフェクト裏			0
+	？？？？							それじゃあ<dash=2>さよならね
+Wait						1
+	黒背景		エフェクト表			0
+	イベントスチル392A	A2	エフェクト裏			0
+Wait						.1
+CharacterOff	黒背景					0
+Wait						.5
+Se	スローモーションエンド
+	イベントスチル392A	A3				1
+Wait						1
+FadeOut	black					.1
+StopBgm						0
+CharacterOff
+Bg	酒場の地下
+	瞬きA		blink_a
+	瞬きB		blink_b
+Wait						1
+	名刀・大包平		b1			0
+FadeIn	black					1	Add
+Tween	瞬きA	MoveBy	y=325 time=2	easeInCirc			Add
+Tween	瞬きB	MoveBy	y=-325 time=2	easeInCirc
+	名刀・大包平							……さま、だんな様ー
+	名刀・大包平							だんな様ー？\n起きてくださいよー
+CharacterOff
+	ディーア	悔しい2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							…………ッ!?
+CharacterOff
+Bgm	絶望					3
+	名刀・大包平		b1
+Tween	名刀・大包平	PunchPosition	y=50				NoWait
+	名刀・大包平							ひゃあっ!?
+	名刀・大包平							び、びっくりしたぁ\n急に起きないで下さい……
+	名刀・大包平							そんなことよりだんな様、\nロールお嬢様からお手紙が<dash=2>
+	名刀・大包平							……だんな様？
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	ディーア	悔しい2						…………\nい、今のは…………
+CharacterOff						0
+StopBgm
+Param	character_grayout=true
+	黒背景		エフェクト表			0
+Wait						1.5
+	ディーア	<Off>						…………夢、か？
+FadeOut	black					.5
+StopBgm
+CharacterOff
+Bg	研究所A
+	　　　　　　　　　　
+Wait						3
+Bgm	図書館
+FadeIn	black					.5
+	　　　　　　　　　　							\n　　   　<color=blue><dash=2>世界図書館<dash=2></color>
+	ロルリアンレット	怪しいH						<dash=2>魔剣はすべて預けたかしら？
+	ディーア	汗2						ええ、エントランスで\nマリーさんに預けましたけど……
+	ロルリアンレット	通常H						よろしい、では始めましょう
+	ディーア	怪しい2						えっと、ロールお嬢様……？\nこれは一体……
+	ロルリアンレット	ニヤリH						初めに警告しておくわ、魔剣使い\n間違っても抵抗しようなどとは\n思わないことね
+	ロルリアンレット							もし貴方が僅かでも抵抗する素振りを\n見せたら、私はその瞬間に容赦なく\n貴方の頭を吹き飛ばすわ
+	ディーア	汗2						は、はい……わかっています\nええと、それより\nなんでオレが尋問を……？
+	ロルリアンレット	驚きH						あら、呼び出された理由に\n心当たりはないかしら？
+	ディーア	悔しい2						ない……と、思いますけど……
+	ロルリアンレット	驚きH						そう、まあいいわ\n質問に答えなさい、魔剣使い
+	ロルリアンレット							近頃、魔界を騒がせている事件の\nことは知っているかしら？
+	ディーア	悔しい2						……何者かが魔剣使いを次々に\n襲撃している、という話ですか
+	ロルリアンレット	通常H						ええ、昨日はE.D.E.N.の\n大勇者クラスも襲撃を受けたようね
+	ディーア	驚き2						大勇者まで襲撃を……
+	ロルリアンレット	驚きH						現場に魔剣使いの痕跡はなく、\n残っていたのは凶器に使われた魔剣の\n残留魔力のみ……
+	ディーア	悔しい2						……犯人は、相当の手練ですね
+	ロルリアンレット	驚きH						ええ、これほどの腕を持つ者は\n魔界でもそう数はいないでしょうね
+	ディーア	驚き2						……でも、相手の使う魔剣が\nわかったのなら、\n犯人も特定できたのでは？
+	ロルリアンレット	ニヤリH						それは今マリーが調査しているわ\nもうじき終わる頃でしょう<dash=2>ほら
+CharacterOff
+	ププッピマリー		画面外_右
+Se	走る
+Tween	ププッピマリー	MoveTo	x=90
+	ププッピマリー							ロールお嬢様、\n当該魔剣の検査が終了致しました\nこちらが検査結果になります
+CharacterOff
+	ロルリアンレット	通常H						ご苦労だったわねマリー
+StopBgm
+	ディーア	悔しい2						……まさか
+	ロルリアンレット	ニヤリH						そう、そのまさかよ
+	ロルリアンレット	悪い顔H						<dash=2>禁式･獄刀大包平
+	ロルリアンレット							現場に残留していた魔力が、\n貴方の所有する魔剣に\n酷似していたのだけれど<dash=2>
+	ディーア	怒り2						…………ッ!?
+CharacterOff
+Bgm	緊迫
+	ロルリアンレット	ニヤリH						<dash=2>心当たりがないのなら、\n質問を変えましょう
+	ロルリアンレット	悪い顔H						<param=name>、\nあなたは昨日の夜、\nどこで何をしていたのかしら？
+	ディーア	悔しい2						ええと……待って下さい\nそれじゃあまるで……
+	ロルリアンレット	ニヤリH						質問に答えなさい魔剣使い\nそれとも、なにか答えられないような\nことをしていたのかしら？
+	ディーア	怒り2						昨日は……\n魔剣たちと一日中任務に出ていました
+	ロルリアンレット	悪い顔H						あなたの魔剣以外で、\nそれを証明できる人はいるかしら？
+	ディーア	悔しい2						それは…………ッ
+	ロルリアンレット	悪い顔H						……あら、いないのかしら\nあなたの無実を、証明できる者は
+	ププッピマリー		3_3					……お嬢様
+	ロルリアンレット	怪しいH						何かしらマリー
+	ププッピマリー							少々、お遊びが過ぎるかと\n<param=name>様が\n困惑しております
+CharacterOff
+	ディーア	驚き2						……え？
+CharacterOff
+	ププッピマリー		3_3
+Bgm	図書館
+	ロルリアンレット	驚きH						はぁ……何よつまらないわね\n少しくらいいいじゃない
+CharacterOff
+	ディーア	悔しい2						えっと……ロールお嬢様？
+CharacterOff
+	ププッピマリー		3_3
+	ロルリアンレット	悪い顔H						言ったでしょう？\n貴方の使う魔剣の魔力と\n"酷似している"と
+CharacterOff
+	ディーア	驚き2						酷似……\nもしかして……完全に一致した\nわけではない……？
+CharacterOff
+	ロルリアンレット	驚きH
+	ププッピマリー		3_3					ええ、現場に残留していた魔力の\n組成には、無理やり改造したと\n思われる形跡がありました
+	ロルリアンレット							でも、貴方の魔剣に改造を施した\n形跡は見受けられなかった
+	ロルリアンレット							少なくとも、現時点では\n貴方が犯人という線はなさそうね
+CharacterOff
+	ディーア	汗2						よ、よかった……
+CharacterOff
+	ププッピマリー		3_3
+	ロルリアンレット	驚きH						良くないわよ、\nおかげで振り出しに戻ったわ
+	ロルリアンレット							いっそのこと貴方が犯人だったら\n楽だったのに
+CharacterOff
+	ディーア	あはは2						そう言わないでくださいよ……
+CharacterOff
+	ププッピマリー		3_3
+	ロルリアンレット	驚きH						……とはいえ、貴方への嫌疑が\n完全に晴れたわけではないわ
+CharacterOff
+	ディーア	驚き2						……え？
+CharacterOff
+	ププッピマリー		3_3
+	ロルリアンレット	悪い顔H						当然でしょう？\n魔界に同一の魔剣は二つと\n存在しないもの
+	ロルリアンレット							これだけ特徴が似ている魔剣を\n所有しているのだから、\n貴方を疑うのは当たり前だわ
+CharacterOff
+	ディーア	悔しい2						……確かに、理には適っていますけど
+CharacterOff
+	ププッピマリー		3_3
+	ロルリアンレット	驚きH						今後、事態が収束するまで\n貴方の行動は常に\n監視されていると思いなさい
+	ロルリアンレット							くれぐれも迂闊な行動は取らないこと\nただでさえ貴方は\n目立つのだから
+CharacterOff
+	ディーア	怒り2						……わかりました\n肝に銘じておきます
+CharacterOff
+	ロルリアンレット	通常H						よろしい\nさあマリー、お客様がお帰りよ
+CharacterOff
+	ププッピマリー							お見送りします\nどうぞこちらへ
+FadeOut	black					.5
+StopBgm
+CharacterOff
+	ロルリアンレット	驚きH
+Wait						1
+FadeIn	black					.5
+	ロルリアンレット							…………はぁ\n厄介なことになってきたわね
+Bgm	絶望
+	ププッピマリー							……お嬢様
+	ロルリアンレット	通常H						ああ、彼は帰ったかしら？
+	ププッピマリー							ええ\n……お伝えしなくて\nよろしかったのですか？
+	ププッピマリー							大勇者を襲った犯人は、\n"<param=name>様を\n探している"、と
+	ロルリアンレット	怪しいH						……疑いが晴れていない以上、\n情報を与えるべきではないわ
+	ロルリアンレット							……それに、もう十分警告はしたもの
+FadeOut	black					.5
+StopBgm
+CharacterOff
+Bg	草原A(夜)
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+Wait						1
+Bgm	平和
+FadeIn	black					.5
+	名刀・大包平							だんな様、ロールお嬢様と\n何の話をしていたんですか？
+CharacterOff
+	ディーア	汗2						別に大した話じゃないよ、\n最近物騒だから気をつけろってさ
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+Tween	獄刀大包平	PunchPosition	y=50				NoWait
+	獄刀大包平							ホントですかぁ……？\nなんかあやしい……
+CharacterOff
+	ディーア	あはは2						本当だってば\n魔剣使いを襲う悪い人が\n最近多いんだって
+	ディーア	通常2						二人も、あんまり勝手に\n出歩かないように気をつけるんだぞ
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	名刀・大包平							は、はいっ
+Tween	獄刀大包平	PunchPosition	y=50				NoWait
+	獄刀大包平							えー、旦那様とお姉ちゃんがいれば、\nぜったい大丈夫ですよぉー
+	名刀・大包平							えぇ……そうかなぁ……
+CharacterOff
+	ディーア	悔しい2						ごくひら、ちゃんと\n気をつけないとダメだぞ？\n油断してると痛い目に遭うからな
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	獄刀大包平							えぇー、油断してるわけじゃ\nないですけどぉ……
+	獄刀大包平							あ、そうだ！お姉ちゃんがわるい人\nやっつけたら、デンセツに<dash=2>
+StopBgm
+FadeOut	black					.1
+FadeIn	black					.1
+Se	火事
+Shake	Graphics		x=10 y=10				NoWait
+Wait						.5
+Bgm	緊迫
+	名刀・大包平							きゃっ……!?
+Tween	獄刀大包平	PunchPosition	y=50				NoWait
+	獄刀大包平							な、なんですか今の……？
+CharacterOff
+	ディーア	悔しい2						魔力反応……あっちの方からだ……!!
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	名刀・大包平							もしかして、その"事件"の……？
+CharacterOff
+	ディーア	悔しい2						かもしれないな……行ってみよう
+Se	回想
+FadeOut	black					.1
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+Param	character_grayout=false
+	ミラロスト	笑い	2_3			0
+FadeIn	black					.1
+Wait						.2
+CharacterOff						0
+Param	character_grayout=true
+	イベントスチル392A	A1	エフェクト表			0
+Wait						.2
+FadeOut	black					.1
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	black					.1
+	ディーア	悔しい2						…………？
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	獄刀大包平							旦那様？
+	名刀・大包平							だんな様、どうしたの？
+CharacterOff
+	ディーア	怒り2						……いや、気のせいだ　早く行こう！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff
+Bg	神社（夜）
+	ディーア	驚き2
+Wait						.5
+Bgm	絶望
+FadeIn	black					.5
+	ディーア							ここは……
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	獄刀大包平							知ってるの？
+CharacterOff
+	ディーア	悔しい2						……ああ……なんか、嫌な予感がする
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+Tween	名刀・大包平	PunchPosition	y=50				NoWait
+	名刀・大包平							……だんな様、あれ!!
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	男勇者
+Shake	男勇者		x=10 y=0				Add
+	男勇者							くっ……
+Tween	男勇者	MoveBy	y=-100				NoWait
+Wait						.4
+Se	倒れる
+Wait						.6
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	名刀・大包平							勇者さん……!?
+CharacterOff
+	ディーア	悔しい2						おい、大丈夫か!?
+CharacterOff
+Param	character_grayout=false
+	イベントスチル392A	A1	エフェクト裏
+	？？？？		2_3					……ほんとだ、ミラちゃんの\n言った通りだった
+	？？？？		2_3					わざわざ探さなくても、\nこうすればすぐに見つかるって
+Se	斬1
+FadeOut	white					.1
+CharacterOff						0
+Param	character_grayout=false
+	黒グラデーション		エフェクト表
+	男勇者					0
+FadeIn	black					.1
+	男勇者							ぐっ……
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						やめろ!!
+FadeOut	black					.1
+Se	突1
+CharacterOff
+StopBgm
+	ごくひらロスト		2_3
+	黒グラデーション		エフェクト表
+Wait						.5
+FadeIn	black					1
+CharacterOff	黒グラデーション					1
+	？？？？							…………こんばんは、魔剣使いさん
+CharacterOff
+Bgm	緊迫
+Param	character_grayout=true
+	ディーア	怒り2						…………ッ!?
+Se	回想
+FadeOut	black					.1
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	イベントスチル392A	A4	エフェクト表			0
+FadeIn	black					.1
+Wait						.5
+FadeOut	black					.1
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+	ディーア	悔しい2				0
+FadeIn	black					.1
+	ディーア							お前は……獄刀、大包平……？
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	獄刀大包平							…………え？
+	名刀・大包平							ど、どういう……こと……？
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	拡大	エフェクト表
+	獄刀大包平？	<Off>						……やっと会えたね
+	獄刀大包平？	<Off>						そして<dash=2>さよなら、お姉ちゃん
+If	isdebug==true
+CharacterOff
+Jump	*E_395_02
+EndIf
+EndScenario
+
+# E_395_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bgm	緊迫
+Bg	神社（夜）
+ImageEffect	SpriteCamera	Bloom
+	黒背景		エフェクト裏
+FadeIn	black					.5
+Wait						.5
+Se	剣閃
+	斬撃(39210D)		エフェクト表			0
+Wait						.2
+CharacterOff	斬撃(39210D)					0
+Wait						.3
+Se	剣閃
+	斬撃(39210F)		エフェクト表			0
+Wait						.2
+CharacterOff						0
+Wait						.2
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Bloom
+ImageEffect	SpriteCamera	MotionBlur
+	ディーア	悔しい2	画面外_右
+Se	雨
+Tween	ディーア	MoveTo	x=0 time=1.5				NoWait
+StopSe						1
+Wait						1
+	ディーア							くっ……!!
+ImageEffectOff	SpriteCamera	MotionBlur
+	ディーア	本気2						お前……\nお前、ごくひらだろ!?
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+Tween	名刀・大包平	PunchPosition	y=50				NoWait
+	名刀・大包平							だ、だんな様!?\n何を言って……
+	名刀・大包平							たしかにそっくりだけど、\nごくひらちゃんはここに……
+	獄刀大包平							どうなってるの……？
+CharacterOff
+	ディーア	悔しい2						オレにもわからない……\nでも、あれは……
+Se	回想
+FadeOut	black					.1
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	研究所A					0
+	ププッピマリー		3_3			0
+	ロルリアンレット	驚きH				0
+FadeIn	black					.1
+	ロルリアンレット							現場に残留していた魔力が、\n貴方の所有する魔剣に\n酷似していたのだけれど<dash=2>
+FadeOut	black					.1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	神社（夜）					0
+	ディーア	悔しい2				0
+FadeIn	black					.1
+	ディーア							酷似、なんてものじゃない
+	ディーア	怒り2						確かに改造の痕跡はあるが、\nこの魔力は完全に同一……\n間違いなく、獄刀大包平だ
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	無
+	獄刀大包平？	<Off>						…………
+CharacterOff
+Param	character_grayout=true
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	名刀・大包平							で、でもそんなはずは……
+	獄刀大包平							そうです、それに\nもしあれが私なら……
+CharacterOff
+	ディーア	悔しい2						ああ……\n魔剣使いがいないと、おかしい
+CharacterOff
+	獄刀大包平		1_2_b
+	名刀・大包平		b1 2					暴走してるようには\n見えないですし……
+CharacterOff
+	ディーア	悔しい2						くっ……\nせめて正体さえわかれば……
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	無
+	獄刀大包平？	<Off>						……ふん
+Param	character_grayout=true
+CharacterOff
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210F)		エフェクト裏			0
+Wait						.1
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.3	linear
+Wait						.5
+CharacterOff
+Bg	神社（夜）					0
+	ディーア	悔しい2						くっ……
+	ディーア	驚き2						魔剣……自律戦闘……\nもしや、《<ruby=ドール>自律魔導人形</ruby>》か……？
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	無
+	獄刀大包平？	<Off>						《<ruby=ドール>自律魔導人形</ruby>》？\nふん、あなたの目は節穴かしら
+	獄刀大包平？	<Off>						あんな不完全な兵器と\n勘違いされるなんて\n不愉快極まりないわ
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2						《<ruby=ドール>自律魔導人形</ruby>》でもない……？\nそれならお前は一体……
+	ディーア	悔しい2						考えろ……\nあらゆる可能性を考えるんだ……
+	ディーア	怒り2						…………まさか
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	名刀・大包平							だんな様？
+CharacterOff
+	ディーア	悔しい2						お前は……未来……\nあるいは並行世界の<dash=2>!?
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト
+	獄刀大包平？	<Off>						ふふ、面白いことを考えるのね
+	獄刀大包平？	<Off>						ああ……でも確かに、\nそういう言い方もあるかしら
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	名刀・大包平							じゃあ、あなたは本当に……\nごくひらちゃん、なの……？
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	怒り
+	獄刀大包平？	<Off>						その名前で呼ばないでもらえるかしら
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	名刀・大包平							ひっ……!?
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	怒り
+	獄刀大包平？	<Off>						……随分と舐められたものね\n私をそんな情けない奴と\n一緒にしないで
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	獄刀大包平							なっ……!!\n私は情けなくなんかないですっ！
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト
+	獄刀大包平？	<Off>						ふぅん、そうかしら？\n自分に自信がないからって、\nお姉ちゃんの影に隠れてこそこそして
+	獄刀大包平？	<Off>						今だってほら……\n腰が引けちゃってるじゃない
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	獄刀大包平							そ、そんなこと…………
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	怒り
+	獄刀大包平？	<Off>						残念だけれどあなたには興味ないの\nあなたが伝説になることは\n永劫ないのだから
+Se	斬2
+FadeOut	white					.1
+CharacterOff						0
+Param	character_grayout=true
+	獄刀大包平		1_2_b			0
+	名刀・大包平		b1 2			0
+ImageEffect	SpriteCamera	MotionBlur
+Tween	名刀・大包平	MoveTo	x=0				NoWait
+FadeIn	white					.1
+Se	ガード
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.8
+	名刀・大包平							…………あなたは、一体なんなの？
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	怒り
+	獄刀大包平？	<Off>						……あら、妹を庇うのね\n罪滅ぼしのつもりかしら？
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2_b
+	名刀・大包平							<dash=4>え
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	怒り
+	獄刀大包平？	<Off>						そうやって振る舞えば、\nお姉ちゃんらしいとでも\n思ったの？
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							そんなつもりじゃ……っ
+CharacterOff
+	ディーア	本気2						包平、耳を貸すな！
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							で、でも……っ!!
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト
+	獄刀大包平？	<Off>						浅はかな発想だわ\nまさに名刀･大包平らしい
+	獄刀大包平？	<Off>						形のない伝説を追い求めて、\n上辺だけを塗り固めて……
+	ごくひらロスト	無
+	獄刀大包平？	<Off>						……あなたはいつもそう
+	獄刀大包平？	<Off>						滑稽ね、本当のあなたは\n妹が地獄に送られたって\n気にも留めないくせに
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							…………っ!!
+	獄刀大包平							…………お姉ちゃん？
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	無
+	獄刀大包平？	<Off>						あなたが伝説を求めるのは、\n妹を見捨てたという過去から\n目を背けるためでしょう？
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							……わ、わた……わたしは……
+	獄刀大包平							ど、どうしてそんなこと言うの……？\nお姉ちゃんを悪く言わないで……!!
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	怒り
+	獄刀大包平？	<Off>						あなたも姉に負けず劣らず\n頭が悪いのね
+	ごくひらロスト	通常
+	獄刀大包平？	<Off>						こんな魔剣、\n庇う価値なんてないでしょうに
+CharacterOff
+Param	character_grayout=true
+	獄刀大包平
+	獄刀大包平							……それ以上言ったら\nほんとに許さない
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト
+	獄刀大包平？	<Off>						ですってよ？
+CharacterOff
+	名刀・大包平		b1
+Shake	名刀・大包平		x=5				Add
+	名刀・大包平							………………っ
+CharacterOff
+	ごくひらロスト	無
+	獄刀大包平？	<Off>						は、本当に……情けない
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.1
+CharacterOff						0
+Param	character_grayout=true
+ImageEffect	SpriteCamera	MotionBlur
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+Tween	獄刀大包平	MoveTo	x=0				NoWait
+Se	ガード
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.7
+	獄刀大包平							お姉ちゃんは私が守る……!!\n私が……!!
+CharacterOff
+Param	character_grayout=false
+	ごくひらロスト	無
+	獄刀大包平？	<Off>						……そう\nなら私はあなたを壊して\n名刀･大包平も破壊するわ
+CharacterOff
+	ごくひらロスト	拡大	エフェクト表					対魔剣殲滅魔導兵器LS_No.13471\n禁式･獄刀大包平=ロスト
+	ごくひらロスト							それが私の名前\nそれが私の役割
+	ごくひらロスト							<dash=2>私はそのために造られた\n兵器だもの
+If	isdebug==true
+CharacterOff
+Jump	*E_395_03
+EndIf
+EndScenario
+
+# E_395_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bgm	絶望
+Bg	神社（夜）
+	黒グラデーション		エフェクト表
+	ごくひらロスト	無
+FadeIn	black					.5
+	ごくひらロスト							<color=blue>…………おかしい\n手数も威力も\nこっちが上回っているはずなのに</color>
+	ごくひらロスト							<color=blue>……どうして攻めきれない？</color>
+CharacterOff	黒グラデーション
+Bgm	緊迫
+	ごくひらロスト	無						…………ふん
+	獄刀大包平							たぁぁぁっ!!
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+	獄刀大包平							お姉ちゃん、しっかりして……!!
+CharacterOff
+	名刀・大包平		b1					……わ、わたし……
+CharacterOff
+	ごくひらロスト	無						……いい加減目障りよ
+CharacterOff						0
+Bg	黒背景
+	黒背景		エフェクト表			0
+	斬撃(39210F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.2	linear
+Wait						.5
+Bg	神社（夜）
+CharacterOff						0
+	ごくひらロスト	驚き						<dash=2>ッ、外した!?
+	黒グラデーション		エフェクト表
+	ごくひらロスト	悔しい						<color=blue>くっ……\n身体が思うように動かない……</color>
+CharacterOff	黒グラデーション
+	ごくひらロスト							ちっ……面倒くさいわね
+CharacterOff
+Param	character_grayout=false
+	イベントスチル392A	A4	エフェクト裏
+	禁式･獄刀大包平=ロスト	<Off>						いっそのこと、全員壊してしまえば\n解決するかしら
+CharacterOff
+	ディーア	悔しい2						…………ッ!?
+	ディーア	怒り2						マズい、避けきれない<dash=2>!!
+CharacterOff
+	イベントスチル392A	A1	エフェクト裏			0
+Se	闇1
+	イベントスチル392A	A2				1
+	禁式･獄刀大包平=ロスト	<Off>						邪魔するのが悪いのよ\n<dash=2>三人まとめて破壊してあげる
+Se	闇2
+	イベントスチル392A	A3				1.5
+Wait						1.5
+Param	character_grayout=true
+CharacterOff						0
+	黒背景		エフェクト裏			0
+StopBgm
+	ロルリアンレット	<Off>						<dash=2>迂闊な行動はするなと\nあれほど忠告したのに、\nどうやら無駄だったようね
+CharacterOff
+	ごくひらロスト	驚き						……ッ!?
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+	ロルリアンレット	驚きH				0
+Wait						.2
+Bgm	緊迫
+FadeIn	white					.5
+	ロルリアンレット							…………ふん
+	ディーア	驚き2						ロールお嬢様!!
+	ロルリアンレット	驚きH						随分と手こずっているじゃない\n貴方らしくもない
+	ごくひらロスト	悔しい						……お前は
+	ロルリアンレット	ドヤ顔H						あら、司書王に向かって\nお前だなんて、\n随分と偉くなったものね、獄刀？
+	ロルリアンレット	悪い顔H						それとも<dash=2>\n命が惜しくないのかしら？
+	ごくひらロスト	怒り						……今更命なんて惜しくないわ\n邪魔するなら、\n力づくで倒すまで……!!
+CharacterOff
+Param	character_grayout=false
+	イベントスチル392B	B1	エフェクト裏
+StopBgm
+	ロルリアンレット	<Off>						悪いけれど、あなたと戦う気はないの
+Bgm	魔王バトル
+	ロルリアンレット	<Off>						いま彼らを失うわけには\nいかないもの
+Se	光1
+	イベントスチル392B	B3				1
+Wait						1
+CharacterOff						0
+	黒背景		エフェクト表			0
+ImageEffect	SpriteCamera	Bloom
+	イベントスチル392M		エフェクト裏			0
+	イベントスチル392K1		effect_a
+	イベントスチル392K2		effect_b
+Wait						.3
+Se	光2
+Se	光1
+Tween	イベントスチル392K1	RotateBy	z=10 time=100				NoWait
+Tween	イベントスチル392K2	RotateBy	z=-10 time=100				NoWait
+Wait						.1
+Tween	イベントスチル392M	ScaleBy	x=0.8 y=0.8 time=0.3				NoWait
+CharacterOff	黒背景					.2
+Wait						.5
+Se	光1
+Se	光3
+FadeOut	white					1.5
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Bloom
+	ごくひらロスト	怒り				0
+	白カーテン20A		エフェクト表			0
+FadeIn	white					.1
+	ごくひらロスト							くっ……
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39205A)		エフェクト裏			0
+Wait						.1
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.5				NoWait
+Wait						1
+CharacterOff						0
+Bg	神社（夜）
+	ごくひらロスト	驚き						………………!!
+StopBgm						1.5
+CharacterOff
+Se	光1
+	オーラ青		エフェクト表
+Wait						.1
+CharacterOff	オーラ青					1.5
+Param	character_grayout=true
+Wait						2
+	ごくひらロスト	悔しい						…………ちっ
+CharacterOff
+	ミラロスト					.5
+Bgm	絶望
+	ミラロスト	笑い						<dash=2>にゃはは♪\n逃げられちゃったねー♪
+CharacterOff
+	ごくひらロスト	無						……ミラ\nずっと見てたの？
+CharacterOff
+	ごくひらロスト	無	1_3
+	ミラロスト	笑い	3_3_b					うん、面白そうだったから\n物陰からねー♪
+	ごくひらロスト							……趣味悪いわね
+Tween	ミラロスト	PunchPosition	y=50				NoWait
+	ミラロスト	驚き						うわひどっ！\nミラちゃんちょっと傷ついたー！
+	ごくひらロスト	怒り						…………ふん
+	ミラロスト	ニヤリ						ところでごくひらちゃん\n<dash=2>あんまりやる気なかった\nみたいだけど
+	ごくひらロスト	無						……何のことかしら
+	ミラロスト	笑い						だってずいぶんと楽しそうに\n遊んでたじゃん
+	ミラロスト	通常						……そんなに会えて嬉しかった？
+	ごくひらロスト	怒り						…………そんなこと
+	ミラロスト	笑い						にゃはは♪\nごくひらちゃんは真面目だなぁ♪
+	ごくひらロスト	無						ミラが適当すぎるだけよ\n<dash=2>私たちは兵器だもの\nあれに特別な感情などないわ
+CharacterOff
+Param	character_grayout=false
+	ドロシー	怒り/フード				.7
+	？？？？		2_3					そうとも、貴様らは兵器だ
+Param	character_grayout=true
+CharacterOff
+Se	闇1
+	ミラロスト	悔しい						<size=20>うわ、面倒くさいのがきた……</size>
+CharacterOff	ミラロスト					1
+Wait						1
+CharacterOff
+Param	character_grayout=false
+	ドロシー	怒り/フード
+	？？？？		2_3					……ふん、じゃじゃ馬め
+CharacterOff
+Param	character_grayout=true
+	ごくひらロスト	怒り						……ドロシー
+	ドロシー	怒り/フード						与えられた命令を全うする……\n兵器にそれ以外の機能は必要ない
+	ごくひらロスト	無						…………
+	ドロシー	怒り/フード						名刀･大包平を破壊すること\nそれが、お前に与えられた\n命令だったはずだが？
+	ごくひらロスト	無						……わかっているわ
+	ドロシー	怒り/フード						ではなぜ仕留めなかった？
+	ごくひらロスト	怒り						……ロルリアンレットの介入は\n想定外だったわ
+	ドロシー	怒り/フード						ガキの言い訳は聞きたくないんだ\n兵器なら兵器らしく\n聞かれたことだけに答えろよ
+	ドロシー							お前の性能ならば、\nロルリアンレットが介入する前に\n名刀･大包平を破壊できたはずだ
+	ごくひらロスト	悔しい						それは…………
+	ドロシー	怒り/フード						お前がどうしてもと言うから\n連れてきたが……\n所詮ロストなどこの程度か
+	ドロシー							命令に従えない兵器は必要ない\nわかっているな？
+	ごくひらロスト	無						……はい
+	ドロシー	ニヤリ/フード						完璧な兵器で在りたいのなら<dash=2>
+	ドロシー	怒り/フード						……次は仕留めろ\n二度目はないぞ
+	ごくひらロスト	悔しい						…………了解
+If	isdebug==true
+CharacterOff
+Jump	*E_395_04
+EndIf
+EndScenario
+
+# E_395_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	図書館
+Bg	研究所A
+FadeIn	white					.5
+	ディーア	悔しい2						……本当に助かりました
+	ディーア							あのまま戦っていたら危なかった\nきっとオレも、包平もごくひらも……
+	ロルリアンレット	驚きH						礼はいらないわ
+	ロルリアンレット	怪しいH						それよりもあの魔剣……\nいえ、<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>\nとかいったかしら
+	ロルリアンレット							まさか本当に\n禁式･獄刀大包平そのものとはね
+	ディーア	怪しい2						複数本存在する同一の魔剣、\nそして魔剣を自律戦闘可能な兵器\nとして改造する技術……
+	ディーア							仮説ですけど……\n並行世界から来たか、あるいは\n未来から来たとしか説明が……
+	ロルリアンレット	驚きH						いえ、おそらくその両方でしょうね
+	ディーア	驚き2						……両方？
+	ロルリアンレット	驚きH						そういう能力を持つ人間や\n魔剣がいてもおかしくはないわ
+	ロルリアンレット							まあ少なくともこの世界の代物では\nないことだけは確実ね
+	ロルリアンレット	怪しいH						どれだけ時が経とうと、\n私やアリスがあんなものを\n許容するはずがないもの
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+StopBgm
+	名刀・大包平							……やっぱり、あれは本当に、\nごくひらちゃん……なんですね
+	獄刀大包平							…………お姉ちゃん、大丈夫？
+	名刀・大包平							……きっと、ごくひらちゃんが\nああなったのは……私のせいです
+CharacterOff
+	ディーア	驚き2						……包平？
+Se	回想
+FadeOut	black					.1
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	神社（夜）					0
+	ごくひらロスト	無				0
+FadeIn	black					.1
+	ごくひらロスト							あなたが伝説を求めるのは、\n妹を見捨てたという過去から\n目を背けるためでしょう？
+FadeOut	black					.1
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	研究所A					0
+	名刀・大包平		b1 2			0
+	獄刀大包平		1_2			0
+FadeIn	black					.1
+	名刀・大包平							きっとごくひらちゃんは、\n私が不甲斐ないせいで……
+	獄刀大包平							ち、違うよお姉ちゃん!!\nお姉ちゃんはふがいなくなんか……!!
+CharacterOff
+	ディーア	通常2						ああ、包平は十分やってるさ
+	ディーア	怪しい2						そういえばさっき戦ったときも、\nあの子の剣には迷いがあった……
+	ディーア							あのごくひらも、きっとなにか\nやむを得ない事情があるんだ
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							そう、なのかな……
+CharacterOff
+	ディーア	通常2						そうさ\nそれに、ごくひらが包平を壊したい\nほど恨むことなんて、想像できるか？
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	獄刀大包平							そうだよ、お姉ちゃん！\n私はそんなこと思ってないもん！
+	名刀・大包平							…………でも、私は……
+CharacterOff
+	ロルリアンレット	ニヤリH						恨まれることに\n心当たりはあるのでしょう？
+CharacterOff
+	ディーア	驚き2						……ロールお嬢様？
+CharacterOff
+	ロルリアンレット	驚きH						数多の伝承の例に漏れず、\n名刀･大包平の伝承も世界図書館にも\n貯蔵されているもの
+	ロルリアンレット	ニヤリH						少し考えれば想像がつくわ
+FadeOut	black					.5
+CharacterOff						0
+Bgm	絶望
+Bg	魔術空間					0
+Param	character_grayout=false
+	イベントスチル392J	J1	エフェクト表			0
+FadeIn	black					.5
+	ロルリアンレット	<Off>						曰く、名刀･大包平には対になる\n裏打ちの太刀が存在する
+	ロルリアンレット	<Off>						安定した性能を発揮し、\n名刀と称された大包平に対し
+	ロルリアンレット	<Off>						極めて不安定であり、\n人の手に余る性能を有した大包平
+	ロルリアンレット	<Off>						裏打ちの大包平は、人が持てば\nたちまち暴走してしまう危険な\n魔剣だったらしいわね
+	ロルリアンレット	<Off>						人々は名刀の大包平を手元に残し、\n一方で裏打ちの大包平の処遇に\n頭を悩ませた
+Se	回想
+FadeOut	black					.1
+CharacterOff						0
+	イベントスチル392J	J2	エフェクト裏			0
+Bg	戦場跡					0
+	黒グラデーション		エフェクト表			0
+FadeIn	black					.1
+	ロルリアンレット	<Off>						そこで扱いきれない裏打ちの大包平を\n獄刀と称して、地獄に奉納することで\n難を逃れようとしたそうよ
+	ロルリアンレット	<Off>						……それから、この世界図書館で\n冥界の門が開くまで、獄刀大包平は\nたった一人で地獄に放置された
+FadeOut	black					1.5
+CharacterOff						0
+Param	character_grayout=true
+Bg	研究所A					0
+	名刀・大包平		b1 2			0
+	獄刀大包平		1_2			0
+FadeIn	black					.5
+	獄刀大包平							…………
+CharacterOff
+	ロルリアンレット	ニヤリH						普通ならこう思うでしょうね\n"なんで私だけこんな目に"と
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							…………っ!!
+	獄刀大包平							そ、そんなこと、私は……
+CharacterOff
+	ロルリアンレット	ニヤリH						思っていないと言い切れるかしら？\nそれを証明できるかしら？
+	ロルリアンレット							名刀･大包平は、その言葉を\n信じることができないようだけれど
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							…………っ
+CharacterOff
+Param	character_grayout=false
+	ロルリアンレット	驚きH	2_3_b					それから、こんなものもあるわね
+Se	光1
+	オーラ青		エフェクト表			.7
+	イベントスチル392N					.7
+CharacterOff	オーラ青					1
+Wait						1.7
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							それは……
+CharacterOff
+Param	character_grayout=false
+	イベントスチル392N		2_3
+	ロルリアンレット	驚きH						大罪紋<dash=2>七罪王研究の副産物よ
+	ロルリアンレット							魔剣の伝承に最も適した罪の力を用い\n伝承の解釈を歪めることで、\n限定的に出力を制御する魔術紋……
+	ロルリアンレット							そして、名刀･大包平に充てがわれた\n大罪は"怠惰"よ\n……つまりこういう解釈もできるわね
+	ロルリアンレット	ニヤリH						妹を地獄に送り、自分は地上に\n残りながらも妹を救おうとは\nしなかった<dash=2>
+	ロルリアンレット	悪い顔H						そんな魔剣、恨まれて当然だわ
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							…………っ
+	獄刀大包平							<dash=2>そんなの、違いますっ!!
+CharacterOff
+	ロルリアンレット	ニヤリH						…………あら、\n私が間違っていると言いたいの？
+CharacterOff
+	獄刀大包平
+Shake	獄刀大包平		x=5				Add
+	獄刀大包平							ま、まちがっています……!!\nただ、お姉ちゃんは、\nお姉ちゃんなりの理由があって……
+	ロルリアンレット	ニヤリH						それはあなたが\nそう思いたいだけではなくて？
+	ロルリアンレット							本当はすべてをあなたに押し付けて\n忘れたかったのかもしれないわよ
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							そ、そんなこと……
+Tween	獄刀大包平	PunchPosition	y=50				NoWait
+	獄刀大包平							い、いいえ！\nお姉ちゃんは……!!
+Shake	獄刀大包平		x=5				NoWait
+	獄刀大包平							お、お姉ちゃんは、\n私を見捨てたりなんて\nしてません……!!
+CharacterOff
+	ロルリアンレット	怪しいH						……どうして\nそう言い切れるのかしら？
+	獄刀大包平
+Shake	獄刀大包平		x=5				NoWait
+	獄刀大包平							だ、だってお姉ちゃんは……!!\nロールお嬢様から見たら頼りない\nお姉ちゃんかもしれないけど……
+	獄刀大包平							お姉ちゃんは本当は\n強くてかっこいいんです……!!
+CharacterOff
+	名刀・大包平		b1					…………ごくひらちゃん
+CharacterOff
+	獄刀大包平							誰よりも強くて、\n誰よりも優しいんです……!!
+	獄刀大包平							誰よりも優しいから……\n今も一人で悩んでるんです……
+Shake	獄刀大包平		x=5				NoWait
+	獄刀大包平							私はそんなこと気にしてないのに……\nじれったいけど、\nだいすきだからわかるんです……っ!!
+	獄刀大包平							それに……それに、\nお姉ちゃんは、そのために……
+	ディーア	悔しい2						……ロールお嬢様\nそれ以上は、黙ってみていられません
+	ロルリアンレット	怪しいH						…………
+	ディーア	怒り2						包平は、妹のことを見捨てるような\nことは、絶対に……
+StopBgm
+	ロルリアンレット	驚きH						はいはい、そんなことは\nわかってるわよ
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							…………え？
+CharacterOff
+Bgm	図書館
+	ロルリアンレット	驚きH						今のは全ての物事を\nネガティブに捉えた場合の<ruby=シミュレーション>想定</ruby>
+	ロルリアンレット	通常H						つまりはただの可能性の話よ\n最初に言ったでしょう、想像だと
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							……な……なんで、そんなことを
+CharacterOff
+	ロルリアンレット	ニヤリH						あら、まだわからないかしら？\n代わりに証明してあげたのよ、\nその子の言葉に嘘偽りはないと
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+Tween	獄刀大包平	PunchPosition	y=50				NoWait
+	獄刀大包平							…………っ!!
+CharacterOff
+	ディーア	汗2						はぁ……ロールお嬢様も人が悪い\nどうなることかと思いましたよ……
+CharacterOff
+	名刀・大包平		b1					……だ、だんな様？\nどういうこと……？
+CharacterOff
+	ディーア	通常2						ごくひらは今、\n包平の名誉を守るためだけに、\nロールお嬢様に逆らったんだ
+	ディーア							……司書王、ロルリアンレットにな
+CharacterOff
+	ロルリアンレット	通常H						この魔界で王を名乗るものに逆らう\n意味が、わからないあなたでは\nないでしょう
+	ロルリアンレット	ドヤ顔H						獄刀大包平は自分の姉の名誉を\n自分の命よりも優先したの
+CharacterOff
+	名刀・大包平		b1
+Tween	名刀・大包平	PunchPosition	y=50				NoWait
+	名刀・大包平							…………!!
+CharacterOff
+	ロルリアンレット	通常H						それほどまでに想ってくれている人が\nいるのだから、不甲斐ないだなんて\n自分を責めるのはやめなさい
+	ロルリアンレット							それはあなたを想う人を\n侮辱する行為でもあるわ
+CharacterOff
+	名刀・大包平		b1					ロールお嬢様……
+CharacterOff
+	ディーア	通常2						……そうだな、一人で抱え込まずに、\n誰かを頼ればいい
+	ディーア	あはは2						せっかく姉妹なんだからさ、\n二人で足りない部分を\n補い合えばいいんだよ
+	ディーア	通常2						二人で足りない部分は、\nオレも手伝うしさ
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							だんな様も……
+	獄刀大包平							そうだよ！\nね、お姉ちゃん！
+	名刀・大包平							足りない部分を補い合って……\n……うん、そうですねっ
+	名刀・大包平							……ありがとう、ごくひらちゃん
+	獄刀大包平							ううん、お姉ちゃんのためだもん\nこれくらいは別に……\nえへへ……
+FadeOut	black					.5
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	black					.5
+	ロルリアンレット	怪しいH						はぁ……司書王に逆らうことを\n"これくらい"呼ばわりなんて……\n本当にわかってるのかしら？
+	ディーア	あはは2						あはは……\nあとでよく言っておきます……
+	ディーア	通常2						それから……ありがとうございます\nロールお嬢様
+	ロルリアンレット	驚きH						礼を言われる筋合いはないわ
+	ロルリアンレット	怪しいH						一人でグズグズしているのを見るのが\n嫌だっただけよ\n<dash=2>誰かを思い出すからね
+	ディーア	通常2						それでも、助かりましたから
+	ロルリアンレット	驚きH						……そう
+StopBgm
+Se	アラート	TRUE
+FadeOut	red					.4
+CharacterOff						0
+	ディーア	驚き2				0
+FadeIn	red					.4
+Wait						.2
+FadeOut	red					.4
+FadeIn	red					.4
+Wait						.2
+FadeOut	red					.4
+CharacterOff						0
+	ロルリアンレット	怪しいH				0
+FadeIn	red					.4
+StopSe
+Bgm	緊迫
+	世界図書館職員	<Off>						ロルリアンレットお嬢様！\n報告でございます！
+	ロルリアンレット	怪しいH						……何かしら
+	世界図書館職員	<Off>						世界図書館に急速に接近する\n魔力反応があります
+	世界図書館職員	<Off>						おそらく、例の\n対魔剣殲滅魔導兵器かと
+CharacterOff
+	ディーア	悔しい2						……ここを嗅ぎつけたみたいですね
+	ロルリアンレット	驚きH						司書王が自ら出向いて\nあんなに堂々とやりあったのだから\n当然でしょう
+	ディーア	怒り2						よし……包平、ごくひら！\n今度こそ迎え撃つぞ
+CharacterOff
+Param	character_grayout=false
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	二人							はいっ!!
+CharacterOff
+Param	character_grayout=true
+	ロルリアンレット	驚きH						……一つだけ忠告をしておくわ、\n今度はちゃんと聞いておきなさい
+	ロルリアンレット							くれぐれも深追いはしないこと\nあれを無理に倒す必要はないわ
+	ディーア	驚き2						……え？
+	ロルリアンレット	ニヤリH						魔剣使いなしで自律駆動する兵器など\nどうせ長持ちはしないもの
+	ロルリアンレット							放っておけば自壊するわ\n貴方はそれまで耐え凌げばいい
+	ディーア	怒り2						……わかりました、覚えておきます
+FadeOut	black					.5
+StopBgm
+CharacterOff
+	ごくひらロスト	無
+Bg	宇宙
+Wait						2
+Bgm	絶望
+Se	強風	TRUE
+FadeIn	black					.5
+	ごくひらロスト							…………あれが、世界図書館
+	ごくひらロスト	悔しい						…………
+Se	回想
+FadeOut	black					.1
+ImageEffect	SpriteCamera	Sepia
+Bg	神社（夜）					0
+	ドロシー	怒り/フード				0
+FadeIn	black					.1
+	ドロシー							……次は仕留めろ\n二度目はないぞ
+FadeOut	black					.1
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	宇宙					0
+	ごくひらロスト	絶望				0
+FadeIn	black					.1
+	ごくひらロスト							……私は兵器\n私情なんて必要ない
+	ごくひらロスト	怒り						…………私は、お姉ちゃんを壊して、\n完璧な兵器になるんだ
+StopSe
+If	isdebug==true
+CharacterOff
+Jump	*E_395_05
+EndIf
+EndScenario
+
+# E_395_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bgm	緊迫
+Bg	神社（夜）
+	ごくひらロスト	怒り
+FadeIn	black					.5
+	ごくひらロスト							くっ……
+CharacterOff						0
+Bg	黒背景
+	黒背景		エフェクト表
+	斬撃(39210B)		エフェクト裏
+Wait						.1
+Se	斬2
+Tween	黒背景	MoveBy	x=-3000 time=0.5				NoWait
+Wait						.7
+CharacterOff						0
+Bg	神社（夜）					0
+	ごくひらロスト	悔しい				0
+	ごくひらロスト							しつっこいわね……!!
+CharacterOff
+	名刀・大包平		b1					あなたこそ……っ
+CharacterOff
+	ごくひらロスト	悔しい						あなたを見ていると\n本当にイライラするわ……っ!!
+CharacterOff
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景
+	黒背景		エフェクト表
+	斬撃(39205A)		エフェクト裏
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.5				NoWait
+Wait						1.2
+Se	斬2
+	斬撃(39205B)		lost1
+CharacterOff	黒背景
+Wait						.2
+Se	斬2
+	斬撃(39205C)		lost2
+Wait						.2
+Se	斬2
+	斬撃(39205D)		lost3
+Wait						.3
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Bloom
+	黒背景		エフェクト表			0
+CharacterOff						0
+Bg	神社（夜）					0
+	獄刀大包平							あなたにお姉ちゃんは傷つけさせない
+	獄刀大包平							お姉ちゃんの邪魔をするなら、\nあなた斬っちゃうね
+CharacterOff						0
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210H)		エフェクト裏			0
+Wait						.1
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	神社（夜）					0
+Param	character_grayout=true
+	獄刀大包平							外した……!!
+CharacterOff
+ImageEffectOff	SpriteCamera	MotionBlur
+	ごくひらロスト	悔しい	画面外_左
+Se	雨
+Tween	ごくひらロスト	MoveTo	x=0				NoWait
+StopSe						.8
+Wait						.8
+	ごくひらロスト							ちっ……
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+ImageEffectOff	SpriteCamera	MotionBlur
+CharacterOff
+	名刀・大包平
+	獄刀大包平		1_2_b
+	名刀・大包平		b1					ごくひらちゃん!!
+Se	ガード
+FadeOut	white					.1
+CharacterOff						0
+	名刀・大包平		b1			0
+	獄刀大包平		1_3			0
+FadeIn	white					.1
+	獄刀大包平							お姉ちゃん……！
+	名刀・大包平							大丈夫だよ、ごくひらちゃん！
+	名刀・大包平							ごくひらちゃんは\n私が守るから……っ!!
+CharacterOff
+	ごくひらロスト	怒り						<dash=2>隙を見せたわね
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							え<dash=2>
+Tween	獄刀大包平	MoveTo	x=0				NoWait
+	獄刀大包平							させない……!!
+Se	ガード
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.3
+CharacterOff
+	ごくひらロスト	悔しい						くっ……
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	獄刀大包平							絶対に、あなたなんかに……\n私自身なんかに、お姉ちゃんの\nデンセツを邪魔させない……っ!!
+CharacterOff
+Bgm	絶望
+	ごくひらロスト	絶望						……っ、まだそうやって
+	ごくひらロスト	絶望						伝説、伝説伝説……\n聞き飽きたわよ、そんなの
+	ごくひらロスト	絶望						伝説を追い求めて、\n伝説になろうと足掻いて
+	ごくひらロスト	絶望						その結果何を得たのかしら？\n名刀･大包平は、獄刀大包平は\n報われたことがあったかしら？
+	ごくひらロスト	悔しい						何もなかった\n何も得られなかった\nいつだって口先だけだったじゃない
+	ごくひらロスト	怒り						……獄刀大包平、\nあなただって\n気付いているんでしょう？
+	ごくひらロスト	怒り						名刀･大包平は\n獄刀大包平のことなんて見ていないわ
+	ごくひらロスト	自嘲						あなたのお姉ちゃんは、あなたより\nよくわからない"デンセツ"のほうが\n大切なんですって
+	獄刀大包平							……嘘だ
+	ごくひらロスト	自嘲						…………はぁ？
+	獄刀大包平							どうして嘘をつくの？\nどうして自分を傷つけようとするの？
+	獄刀大包平							あなただって獄刀大包平なら、\nお姉ちゃんのことを誰より\n信じているはずなのに<dash=2>
+	獄刀大包平							お姉ちゃんはデンセツの魔剣だって、\n誰より信じてるはずなのに!!
+	ごくひらロスト	悔しい						…………っ
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							……確かに、\n私は頼りないお姉ちゃんだったよね
+	獄刀大包平							お姉ちゃん……？
+CharacterOff
+	ごくひらロスト	悔しい						……っ、ええそうよ\nあなたはいつだって<dash=2>
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							でももう逃げないって決めたの
+CharacterOff
+	ごくひらロスト	自嘲						…………は
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							……私の伝説は私だけのものじゃない\nごくひらちゃんがいないと\n成立しないから
+	名刀・大包平							私の伝説は<dash=2>\n二人で一緒に作るんだから……!!
+CharacterOff
+	ごくひらロスト	絶望						…………っ
+Se	回想
+FadeOut	black					.1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ドロシー	怒り/フード				0
+FadeIn	black					.1
+	ドロシー							与えられた命令を全うする\nそれ以外の機能は必要ない
+FadeOut	black					.1
+CharacterOff						0
+	ごくひらロスト	絶望				0
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	black					.1
+StopBgm
+	ごくひらロスト							…………うるさい、\nうるさいうるさいうるさい!!
+	ごくひらロスト							伝説なんていらない、必要ない!!\n全部、全部だいきらい……!!
+CharacterOff
+	ディーア	本気2						……マズい、伏せろ!!
+CharacterOff
+Param	character_grayout=false
+	イベントスチル392A	A1	エフェクト表
+Bgm	Xmasボス
+	禁式･獄刀大包平=ロスト	<Off>						私は兵器よ……\n与えられた使命を全うする、\nそれ以外の機能は……必要ない!!
+	イベントスチル392A	A3
+	禁式･獄刀大包平=ロスト	<Off>						私は<dash=2>\nそのために造られたんだから!!
+	ディーア	<Off>						ブレイズドライブ……!!
+CharacterOff						0
+Se	スローモーションエンド
+	ごくひらロスト	悔しい拡大	エフェクト表					禁式<dash=2>
+CharacterOff						0
+	イベントスチル392O		エフェクト表			0
+Tween	イベントスチル392O	MoveBy	y=-1039 time=0.2	linear			NoWait
+	禁式･獄刀大包平=ロスト	<Off>						有慚満月<dash=2>!!
+FadeOut	black					2
+If	isdebug==true
+CharacterOff
+Jump	*E_395_06
+EndIf
+EndScenario
+
+# E_395_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bgm	絶望
+Bg	神社（夜）
+FadeIn	black					.5
+	ディーア	怒り2						…………
+	ごくひらロスト	怒り						……どうして
+	ごくひらロスト	悔しい						…………どうして刀を下ろすの
+	ディーア	悔しい2						もう、終わりにしよう、ごくひら
+	ごくひらロスト	悔しい						……その名前で呼ばないで\n私は獄刀大包平じゃない
+	ごくひらロスト	怒り						私は<dash=2>ロストよ
+	ディーア	怒り2						いや、お前は獄刀大包平だ
+	ディーア							戦ってるとわかるんだよ\n考え方は違っても、\n根本はちゃんとごくひらだ
+	ごくひらロスト	悔しい						知ったような口を……
+	ディーア	怒り2						知ったような口を利く権利は\nあると思うけどな
+	ディーア	通常2						オレはごくひらのマスターだ\n包平ほどじゃないけど、ごくひらの\nことは知っているつもりだよ
+	ディーア	悔しい2						……お前がなんのために戦って、\n何で包平を壊そうとするのかは\n知らない
+	ディーア	怒り2						……でも、お前はそんな生き方を\n好むやつじゃないはずだ
+	ディーア							兵器なんて……\nそんな在り方を望むはずがないんだ
+	ディーア	悔しい2						なあ、それは本当に\nお前がやりたいことなのか？
+	ごくひらロスト	自嘲						…………うるさいわね\nやりたいことなんて……ないわ
+	ごくひらロスト	怒り						私は兵器よ\n命じられたままに動き、\n命じられたように敵を倒す
+	ディーア	悔しい2						……違う、そうじゃないはずだ
+	ごくひらロスト	悔しい						違わないわ！\nこれが……これが私の生き方なの！
+	ディーア	怒り2						……違う\nだってお前は、\n今も迷っているんだろう？
+	ごくひらロスト	悔しい						…………っ
+	ディーア	悔しい2						その葛藤は、その苦しみや怒りは、\nお前が望まない生き方をしている\nせいじゃないのか？
+StopBgm
+	ディーア	通常2						……そんなのはもうやめにしよう\nやめて、オレの元に来ればいい
+	ごくひらロスト	驚き						…………え？
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	獄刀大包平							旦那様……
+CharacterOff
+Bgm	凱旋
+	ごくひらロスト	自嘲						……そんなの無理よ\n私には……できないわ
+	ディーア	通常2						大丈夫さ\n一人で抱え込むことはないんだ
+	ディーア							辛いことも悩み事も、\n全部みんなで解決すればいい
+	ディーア							包平とごくひらにできるんだから<dash=2>\nオレは、お前にもできるって信じてる
+	ごくひらロスト	悲しい						…………っ
+	ごくひらロスト							わ、私は…………
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							そうしよう、ごくひらちゃん
+CharacterOff
+	ごくひらロスト	悲しい						…………
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							……あ、でもごくひらちゃんだと\nわかりづらいから……\nごくひらロストちゃん……かな？
+CharacterOff
+	ディーア	あはは2						そうだな、それならわかりやすい
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							……ごくひらちゃんも、いいよね？
+	獄刀大包平							……まあ、いいですけど
+	獄刀大包平							言っておきますけど、\nお姉ちゃんは絶対譲らないからね！
+CharacterOff
+	ディーア	通常2						……どうかな\n今のまま戦い続けるより、\nずっといい選択肢だと思うんだけど
+StopBgm
+	ごくひらロスト	絶望						<size=20>…………もっと早くそれを選べたら、\nどれほどよかったかしら</size>
+	ディーア	驚き2						……え？
+Bgm	絶望
+	ごくひらロスト	絶望						でも、そんなのはできない\nだって私は……
+	ごくひらロスト	悔しい						これしかないの\n私にはこれしか……っ!!
+	ディーア	怒り2						待て、ごくひらロスト!!
+	ごくひらロスト	悔しい						<dash=2>次にあった時は絶対に破壊する\n覚えておきなさい
+Se	走る
+Tween	ごくひらロスト	MoveTo	x=800 time=2.5				NoWait
+Wait						1.5
+FadeOut	black					.5
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	black					.5
+	ディーア	悔しい2						……ダメだったか
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							……分かってくれると、\n思ったんですけど
+	獄刀大包平							……ううん、あれはきっと分かってる
+CharacterOff
+	ディーア	驚き2						ごくひら？
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	獄刀大包平							……うん、私だからわかる
+	獄刀大包平							……なんだか、ジッカン？が\nなかったけど……\nあの子は、本当に私なんだね
+FadeOut	black					1
+StopBgm
+CharacterOff
+Bg	草原A(夜)					0
+	ごくひらロスト	悔しい
+Wait						2
+Bgm	絶望
+Se	強風
+FadeIn	black					1
+	ごくひらロスト							…………っ
+Se	回想
+FadeOut	black					.1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	神社（夜）					0
+	ディーア	通常2				0
+FadeIn	black					.1
+	ディーア							……そんなのはもうやめにしよう\nやめて、オレの元に来ればいい
+FadeOut	black					.1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原A(夜)					0
+	ごくひらロスト	絶望				0
+FadeIn	black					.1
+	ごくひらロスト							……そんなこと、できないわよ
+	ごくひらロスト	悲しい						私は兵器だから……\nお姉ちゃんを破壊するためだけの\n兵器だから
+	ごくひらロスト							壊すことが、\n私が造られた理由だから……
+	ごくひらロスト	絶望						…………っ、じゃあ、なんで\nなんで私は逃げてるの？
+Se	回想
+FadeOut	black					.1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Param	character_grayout=false
+Bg	神社（夜）					0
+	ディーア	悔しい2	2_3			0
+	　　　　　　　　　　
+FadeIn	black					.1
+Wait						1
+FadeOut	black					.1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原A(夜)					0
+	ごくひらロスト	絶望				0
+Param	character_grayout=true
+FadeIn	black					.1
+	ごくひらロスト							……敵は武装解除してたのに\n奇襲すれば、カンタンに\n倒せたはずなのに
+	ごくひらロスト	悲しい						わかんない……どうして……っ
+	ごくひらロスト	怒り						……そ、そうだ\n今からでも<dash=2>!!
+StopSe
+StopBgm
+CharacterOff						0
+Bg	黒背景
+	黒背景		エフェクト表			0
+	斬撃(39210F)		エフェクト裏			0
+Wait						.2
+Se	剣閃
+Tween	黒背景	MoveBy	x=3000 time=0.5	linear
+Wait						.5
+Bg	草原A(夜)
+CharacterOff						0
+	ごくひらロスト	驚き						<dash=2>っ!?
+FadeOut	red					.1
+Se	突1
+	ごくひらロスト	悔しい
+Wait						.7
+FadeIn	black					.5
+Shake	ごくひらロスト		x=10				Add
+	ごくひらロスト							ぐっ……
+Tween	ごくひらロスト	MoveBy	y=-800				NoWait
+Wait						.6
+Se	倒れる
+Wait						.5
+Bgm	絶望
+	ドロシー	怒り/フード						おいおい、どうした浮かれ足で\nまるでデート帰りの乙女じゃないか
+	ごくひらロスト	悔しい						…………っ、ドロシー
+	ドロシー	ニヤリ/フード						<dash=2>ハ、マジかお前
+	ドロシー	怒り/フード						あんな甘言に揺らいでるのか？\n勘弁してくれよ
+	ごくひらロスト	悔しい						ちが……私、は……
+	ドロシー	ニヤリ/フード						まさか、"こっちのお姉ちゃんとなら\n幸せになれるかもしれない"とか、\n……本気で考えたのか？
+	ごくひらロスト	悲しい						…………っ
+	ドロシー	怒り/フード						兵器が聞いて呆れる\nロストが何かを得ようとするとか、\nこれは一体何の茶番だ？
+	ごくひらロスト	悔しい						……次は、次こそは\n絶対に仕留めるから
+	ごくひらロスト	怒り						次は、絶対にお姉ちゃんを<dash=2>
+FadeOut	purple					.1
+Param	character_grayout=false
+Se	闇1
+Se	コインロック
+	鎖エフェクト後ろ		エフェクト裏			0
+FadeIn	purple					.1
+Wait						.3
+FadeOut	purple					.1
+Se	闇1
+Se	コインロック
+	鎖エフェクト前		エフェクト表			0
+FadeIn	purple					.1
+	ごくひらロスト	悔しい						…………ぐっ……ドロシー……？
+CharacterOff
+StopBgm
+	ドロシー	怒り/フード						<dash=2>これだからガキの子守は嫌いなんだ\n二度目はないと言ったはずだぞ
+CharacterOff
+	ドロシー	ニヤリ拡大	エフェクト表					命令に従えない欠陥品ならば必要ない　\nまして敵の思想に\n汚染された兵器など、な
+FadeOut	red					.1
+Se	斬1
+Se	ガードブレイク
+Wait						2
+If	isdebug==true
+CharacterOff
+Jump	*E_395_07
+EndIf
+EndScenario
+
+# E_395_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bgm	絶望
+Bg	神社（夜）
+	黒グラデーション		エフェクト表
+	ごくひらロスト	悲しい破損
+FadeIn	black					.5
+	ごくひらロスト	悲しい破損						…………はぁ、はぁ…………
+Tween	ごくひらロスト	MoveBy	y=-100
+Se	倒れる
+Wait						.5
+Se	回想
+FadeOut	black					.1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Param	character_grayout=false
+Bg	草原A(夜)					0
+	鎖エフェクト前		エフェクト表			0
+	鎖エフェクト後ろ		エフェクト裏			0
+	ごくひらロスト	悔しい				0
+FadeIn	black					.1
+Wait						.5
+Se	斬1
+Se	ガードブレイク
+FadeOut	red					.1
+	ごくひらロスト	悔しい破損
+CharacterOff	鎖エフェクト前					2
+CharacterOff	鎖エフェクト後ろ					2
+FadeIn	black					1.2
+Shake	ごくひらロスト		x=10
+Tween	ごくひらロスト	MoveBy	y=-50
+Se	倒れる
+	ごくひらロスト							…………っ
+Se	走る
+Tween	ごくひらロスト	MoveBy	x=800 time=3
+	ドロシー	怒り/フード/武器						…………ふん、まあいい
+	ドロシー	ニヤリ/フード/武器						あの傷ならどうせすぐに\n息絶える<dash=2>\n持って数分だろうさ
+CharacterOff	ドロシー					1
+Wait						1.5
+FadeOut	black					.1
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	神社（夜）					0
+	ごくひらロスト	悔しい破損				0
+FadeIn	black					.5
+	ごくひらロスト							…………ぐっ……
+Param	character_grayout=false
+	ごくひらロスト	悔しい破損						……私は……欠陥品……？\n兵器、じゃない……？
+	ごくひらロスト	悲しい破損						それなら、私はなんで……\n何のために……
+	ごくひらロスト							お姉ちゃんに刃まで向けて……\n私は……
+	黒背景		エフェクト表			2
+Wait						2
+	ディーア	悔しい2						…………ごくひらロスト
+CharacterOff	黒背景					.5
+Wait						1.5
+	ごくひらロスト	悔しい破損						あな……たは……
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							その傷……!!
+CharacterOff
+	ごくひらロスト	自嘲破損						…………ふ
+	ごくひらロスト							……皮肉なものね、\n私を看取るのがあなたたちなんて
+	ごくひらロスト							無様だと笑いに来たのかしら？\nそれとも、私は選択を誤ったと\n糾弾しに来たのかしら？
+StopBgm
+	ディーア	怒り2						…………念の為、\n持っておいてよかった
+Se	光1
+FadeOut	lime					.1
+CharacterOff						0
+	ごくひらロスト	悲しい破損				0
+FadeIn	lime					.5
+	ごくひらロスト	驚き				1.5
+Wait						.7
+	ごくひらロスト							………………は？
+	ディーア	通常2						……応急エメラルドだよ
+	ディーア	あはは2						よかった、自律駆動するように改造\nされてるとはいえ、元が魔剣なら\n効果はあるんだな
+	ごくひらロスト	驚き						…………あな、た
+Bgm	絶望
+	ごくひらロスト	怒り						……何を、しているの？\n私は敵よ……？
+	ごくひらロスト	悔しい						私は……あなたたちを\n殺そうとした……なのに……
+	ごくひらロスト	自嘲						……どうして、私を壊さないの？
+	ごくひらロスト							……もう、私にはなにもないのに
+	ごくひらロスト	絶望						兵器じゃないなら、私は何……？\n兵器でもない、アネセサリでもない、\n魔剣でもないなら……
+Bgm	凱旋
+	ディーア	怒り2						お前は獄刀大包平だ\n……助ける理由も、\nそれだけで十分だろう
+	ごくひらロスト	悲しい						…………っ\nわからない……
+	ごくひらロスト							……全部なくしたの\nもうなにもないのよ
+	ごくひらロスト							<dash=2>いっそのこと、\n壊してほしかった
+	ごくひらロスト	悔しい						お姉ちゃんを壊そうとした\nあなたの命だって奪おうともした\nなのに今更……!!
+	ごくひらロスト	絶望						今更救われたって、\n私はどうやって\n生きればいいのよ……!!
+	ディーア	怒り2						……それなら、好きにすればいい
+	ごくひらロスト	自嘲						…………は\n……無責任なことを言うのね
+	ディーア	悔しい2						ああ、確かに無責任かもな\nだけど……今のお前なら\nそれが選べるんだろ？
+	ディーア	怒り2						自分がやりたいと思ったことを、\n自分が選びたいと思った道を、\n今度こそ自分で選ぶんだ
+	ごくひらロスト	悲しい						私が、やりたいこと……
+	ごくひらロスト							そ、そんなの、ない……\nだって私は……ずっと兵器として……
+	ごくひらロスト	絶望						お姉ちゃんを、壊すために……
+Se	回想
+StopBgm
+CharacterOff
+	イベントスチル392L	L1	エフェクト表			0
+Wait						1
+CharacterOff
+	ごくひらロスト	悲しい						………………ぁ
+	ごくひらロスト	絶望						<dash=2>そうよ\nずっとそのために生きてきた
+Bgm	絶望
+	ごくひらロスト							ずっと助けに来てほしかった
+	ごくひらロスト							ずっとひとりぼっちで、待ってたのに
+CharacterOff
+	名刀・大包平		b1					…………ごくひらロストちゃん
+CharacterOff
+	ごくひらロスト	絶望						お姉ちゃんが助けに来てくれるって\n地獄の底まで、迎えに来てくれるって
+	ごくひらロスト							……そう信じてたのに
+	ディーア	怒り2						…………
+	ごくひらロスト	絶望						伝説なんてどうだってよかった\n私は、もっとお姉ちゃんに\n私を見てほしかった
+	ごくひらロスト	悲しい						……ひとりぼっちは、嫌だったの
+FadeOut	black					.1
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	イベントスチル392L	L2	エフェクト表			0
+	？？？？		2_3			0
+FadeIn	black					.1
+	？？？？							<dash=2>名刀･大包平がいなければ、\n伝説になるのはお前の方だったのにな
+FadeOut	black					.1
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+	黒グラデーション		エフェクト表
+	ごくひらロスト	悔しい				0
+FadeIn	black					.1
+	ごくひらロスト							……そうだ、そうだった\nお姉ちゃんさえいなければ
+CharacterOff
+	名刀・大包平		b1 2
+	ディーア	怒り2	1_2					……包平、やるぞ
+	名刀・大包平							…………だんな様、でも
+	ディーア							……いいから、構えろ
+	名刀・大包平							…………はい
+CharacterOff
+Bgm	Xmasボス
+	ごくひらロスト	悔しい						<dash=2>そうよ、これしかないの
+	ごくひらロスト							始めから私には、これしか……ッ!!
+Se	光2
+FadeOut	white					.5
+CharacterOff						0
+Bg	黒背景
+	イベントスチル392G	G1	エフェクト表			0
+FadeIn	white					.1
+Tween	イベントスチル392G	MoveBy	x=-640 time=0.7	linear
+FadeOut	white					.1
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル392G	G2	エフェクト表
+FadeIn	white					.1
+	禁式･獄刀大包平=ロスト	<Off>						私は……ッ!!\n対魔剣殲滅魔導兵器LS_No.13471\n禁式･獄刀大包平=ロスト<dash=2>!!
+	禁式･獄刀大包平=ロスト	<Off>						それが私の名前!!\nそれが……それだけが、\nずっと私の役割だった!!
+FadeOut	black					.1
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル392H	H1	エフェクト表
+Wait						.5
+Bg	神社（夜）
+Bgm	和の国ボス
+FadeIn	black					.5
+	イベントスチル392H	H2				.5
+	名刀・大包平	<Off>						…………なら、\nそれを受け止めるのが私の役目
+Se	闇3
+	イベントスチル392H	H3				1
+	名刀・大包平	<Off>						魔剣使い\n<param=name>が魔剣\n<dash=2>名刀･大包平
+	名刀・大包平	<Off>						……私は、もう逃げないから
+CharacterOff						0
+	イベントスチル392G	G2	エフェクト表
+	禁式･獄刀大包平=ロスト	<Off>						…………さあ
+	禁式･獄刀大包平=ロスト	<Off>						……全部終わらせよう、お姉ちゃん
+FadeOut	white					2
+If	isdebug==true
+CharacterOff
+Jump	*E_395_08
+EndIf
+EndScenario
+
+# E_395_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bg	黒背景
+Param	character_grayout=false
+FadeIn	black					.5
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>お姉ちゃんの求める伝説とは、\n人々を守る力だ</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>人々を守り、語り継がれてこそ、\n初めて名刀･大包平は伝説となる</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>だから<dash=2>禁式･獄刀大包平は、\n伝説にはなり得ない</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>語り継ぐ人どころか、使い手さえも\n傷付け、制御できずに\n全てを壊してしまう獄刀大包平は<dash=2></color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue><dash=2>姉のような伝説には、\n決してなり得ない</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>だから、"獄刀大包平"の役割は、\nいつも同じだ</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>伝説にはなれないのなら、\nせめて<dash=2></color>
+	禁式･獄刀大包平=ロスト	<Off>						\n\n　　<color=blue><dash=2>お姉ちゃんの伝説の礎となろう</color>
+	黒背景		エフェクト表
+Bgm	Xmasボス
+Se	強風
+CharacterOff						0
+	イベントスチル392G	G1	エフェクト裏			0
+Tween	イベントスチル392G	MoveBy	x=-640 time=0.7	linear
+FadeOut	white					.1
+CharacterOff						0
+	イベントスチル392G	G2	エフェクト裏
+FadeIn	white					.1
+	禁式･獄刀大包平=ロスト	<Off>						対魔剣殲滅魔導兵器LS_No.13471\n禁式･獄刀大包平=ロスト<dash=2>!!
+	禁式･獄刀大包平=ロスト	<Off>						それが私の名前!!\nそれが……それだけが、\nずっと私の役割だった!!
+StopSe	強風
+Se	スローモーションエンド
+Wait						1.3
+CharacterOff						0
+StopBgm						0
+Wait						3
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue><dash=2>お姉ちゃんの目に、\n私は悪者として映っただろうか</color>
+	イベントスチル392A	A3	エフェクト表			0
+Wait						.5
+CharacterOff						0
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>倒すべき悪として、映っただろうか</color>
+	イベントスチル392I		エフェクト表			0
+Wait						.5
+CharacterOff						0
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>これでいい、これでいいんだ</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>人々を脅かす悪者の\n獄刀大包平=ロストは、\n名刀･大包平によって退治される</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>……<ruby=おねえちゃん>名刀･大包平</ruby>は、\n<ruby=だんなさま>大切な人</ruby>を守って、\n伝説になる</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>これが私のやるべきこと</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>ロストとして生まれて、\n全てを失った私が、\nただひとつ残せるもの</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>私が選んだ、\n<ruby=A Necessary Evil>必要悪</ruby>としての役割だ</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>あとは、お姉ちゃんが私を壊せばいい</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>……これで、いいんだ</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>これで……夢にまで見た、\n名刀･大包平の伝説は完成する<dash=2></color>
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+	白背景		エフェクト表			0
+	イベントスチル392BG		エフェクト裏			0
+Wait						2
+FadeIn	black					.1
+	禁式･獄刀大包平=ロスト	<Off>						…………え……？
+CharacterOff	白背景					1
+Bgm	凱旋
+	名刀・大包平	<Off>						…………やっと、届いた
+	禁式･獄刀大包平=ロスト	<Off>						どうして……
+	名刀・大包平	<Off>						ずっと、一人にして……\n寂しい思いをさせたよね
+	名刀・大包平	<Off>						ごめんね、ごくひらロストちゃん
+	禁式･獄刀大包平=ロスト	<Off>						…………どう、して……そんな……
+	禁式･獄刀大包平=ロスト	<Off>						わかんない……わかんない……っ\nお姉ちゃんも、旦那さまも……\n私は敵なのに……っ
+	禁式･獄刀大包平=ロスト	<Off>						お姉ちゃんが私を壊さないなら、\n私がお姉ちゃんを壊しちゃうよ？\nそれでもいいの!?
+	名刀・大包平	<Off>						……ごくひらロストちゃんが、\nそれで報われるなら
+	禁式･獄刀大包平=ロスト	<Off>						……っ、どうして……っ
+	禁式･獄刀大包平=ロスト	<Off>						どうして!?\n私を壊せば、お姉ちゃんは\n伝説になれるのに!!
+	禁式･獄刀大包平=ロスト	<Off>						……伝説になりたかったんでしょ？
+	禁式･獄刀大包平=ロスト	<Off>						みんなを守って、悪者をやっつけて、\nお姉ちゃんは伝説になれるんだよ!?
+	名刀・大包平	<Off>						……ねえ、ごくひらロストちゃん
+	名刀・大包平	<Off>						私はね、そんな伝説ならいらないの
+	名刀・大包平	<Off>						私が伝説を作りたかったのはね　\nごくひらちゃんを\n助けに行けなかったから
+	禁式･獄刀大包平=ロスト	<Off>						…………ぇ
+	名刀・大包平	<Off>						地獄でひとりぼっちの\nごくひらちゃんを、\n助けに行く力が欲しかったから
+	名刀・大包平	<Off>						……もう二度と、\n寂しい思いはさせたくなかったから
+	名刀・大包平	<Off>						そのために、だんな様と一緒に\n頑張ってきたの
+	名刀・大包平	<Off>						伝説を作って、ちゃんと<ruby=ごくひらちゃん>大切な人</ruby>を\n守れるようなすごい魔剣になろうって
+	名刀・大包平	<Off>						……確かにロールお嬢様の言う通り、\n私の大罪は"怠惰"だけど
+	名刀・大包平	<Off>						でもそれは、私が背負うって決めたの
+	名刀・大包平	<Off>						ちゃんと背負って<dash=2>\nもし次があれば、次こそは絶対に、\n寂しい思いはさせないって
+	名刀・大包平	<Off>						今度こそ……絶対に
+	禁式･獄刀大包平=ロスト	<Off>						おねえ……ちゃん……
+CharacterOff
+Bg	神社（夜）
+Param	character_grayout=true
+	ごくひらロスト	悲しい	1_2
+	名刀・大包平		b1 2					……でも、やっぱりダメだったね
+	名刀・大包平							私、またごくひらちゃんに\n辛い思いさせちゃって……
+	名刀・大包平							……ごめんね、ごめんね……!!
+	ごくひらロスト	悲しい						………………っ
+	ごくひらロスト	自嘲						…………ばかだなぁ、お姉ちゃんは
+	ごくひらロスト	絶望						<dash=2>せっかく\n伝説になれるチャンスだったのに
+StopBgm
+Tween	ごくひらロスト	MoveTo	x=0 time=0.5	linear			NoWait
+Wait						.5
+Se	打1
+Tween	名刀・大包平	PunchPosition	y=30 time=0.7				NoWait
+Tween	名刀・大包平	MoveBy	x=100 time=0.7				Add
+	名刀・大包平							…………え
+Se	斬2
+FadeOut	red					.1
+	ごくひらロスト	悲しい破損
+Wait						.8
+FadeIn	red					.7
+Shake	ごくひらロスト		x=10				Add
+	ごくひらロスト							くっ……
+Tween	ごくひらロスト	MoveBy	y=-800				NoWait
+Wait						.5
+Se	倒れる
+Wait						.5
+CharacterOff
+Bgm	緊迫
+	ディーア	悔しい2						な……っ!!
+CharacterOff
+	名刀・大包平		b1					ごくひらロストちゃん……!?
+CharacterOff
+	ドロシー	怒り/武器				.5
+	ドロシー							…………まったく
+	ドロシー							だからガキの相手は嫌いなんだ
+If	isdebug==true
+CharacterOff
+Jump	*E_395_09
+EndIf
+EndScenario
+FadeOut	black					.5
+FadeIn	black					.5
+
+# E_395_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	神社（夜）
+	ごくひらロスト	悲しい破損	2_2
+	ディーア	怒り2	1_2
+FadeIn	white					.5
+ImageEffect	SpriteCamera	MotionBlur
+	ディーア							おい、しっかりしろ!!\n大丈夫か!?
+	ごくひらロスト							だんなさま……だめ、にげて……
+CharacterOff
+	ドロシー	怒り/武器	2_3_b
+	ドロシー							邪魔だ
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.5
+CharacterOff
+	名刀・大包平		b1					だんな様……っ!?
+CharacterOff
+ImageEffectOff	SpriteCamera	MotionBlur
+	ディーア	悔しい2						うっ……ぐ……
+	ディーア							そんな……\n魔剣もアンロックせずに……
+CharacterOff
+	ごくひらロスト	悲しい破損	2_2
+	ドロシー	怒り/武器	1_2					ああ……面倒くさい\nしっかりとトドメを\n刺しておくべきだった
+CharacterOff
+	ディーア	悔しい2						お前は……何者だ……？
+CharacterOff
+	ごくひらロスト	悲しい破損	2_2
+	ドロシー	ニヤリ/武器	1_2					自己紹介はいらないだろう、少年？\nお前は私のことを<ruby=・・・・・>知っている</ruby>はずだ
+CharacterOff
+	ディーア	怒り2						なんだと……？
+CharacterOff
+	ドロシー	ニヤリ/武器	1_2_b
+	ごくひらロスト	悔しい破損	2_2					ドロシー……あなたは……
+Se	打1
+FadeOut	white					.1
+FadeIn	white					.1
+Tween	ごくひらロスト	MoveBy	y=-40				NoWait
+Wait						.3
+Se	倒れる
+	ごくひらロスト	悲しい破損						ぐっ……
+	ドロシー	怒り/武器	1_2					騒ぐな、私が話している最中だぞ？
+CharacterOff
+	ディーア	怒り2						…………下がれ\nその子に、手を出すな
+	ドロシー	ニヤリ/武器						ほう、威勢がいいな\nだがそんなボロボロの状態で\n何ができる？
+	ディーア	悔しい2						…………ッ
+	ドロシー	ニヤリ/武器						……ふん、まあいい\n壊しやすいに越したことはないからな
+	ディーア	怒り2						なんだと……？
+	ドロシー	怒り/武器						使えない兵器の代わりを\n務めるのは癪に障るが……\nまあこれも仕事だ
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							…………ひっ!?
+CharacterOff
+	ドロシー	ニヤリ拡大	エフェクト表					お手並み拝見だ\nせいぜい足掻いて見せな、少年<dash=2>!!
+If	isdebug==true
+CharacterOff
+Jump	*E_395_10
+EndIf
+EndScenario
+
+# E_395_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	緊迫
+Bg	黒背景
+FadeIn	white					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(39210E)		エフェクト裏			0
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	神社（夜）					0
+Param	character_grayout=true
+	ドロシー	怒り/武器
+Tween	ドロシー	MoveTo	x=100				NoWait
+Wait						.5
+	ドロシー							…………ふん
+CharacterOff
+ImageEffectOff	SpriteCamera	MotionBlur
+	ディーア	悔しい2						くっ……攻撃が当たらない……っ!?
+	ドロシー	怒り/武器						おいおい期待ハズレだな\n……これは報告もいらないか？
+	ディーア	本気2						くっ……\nはぁぁっ!!
+	ドロシー	ニヤリ/武器						そうそう、一つ教えてやる\n<dash=2>お前、さっきから隙だらけだぞ
+	ディーア	悔しい2						はっ……!?
+	ドロシー	ニヤリ/武器
+Wait						.2
+Se	打1
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.2
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+	ディーア	悔しい2	画面外_右			0
+Se	雨
+Tween	ディーア	MoveTo	x=0	easeOutQuart
+Wait						.1
+StopSe						1.5
+Wait						.2
+	ディーア							ぐっ……はぁっ……
+CharacterOff
+ImageEffectOff	SpriteCamera	MotionBlur
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	獄刀大包平							旦那様……っ!!
+CharacterOff
+Bgm	絶望
+	ドロシー	怒り/武器						これは私が買いかぶりすぎたか……
+CharacterOff
+	ごくひらロスト	悔しい破損
+Shake	ごくひらロスト		x=5				Add
+	ごくひらロスト	悔しい						……行かせない
+	ドロシー	怒り/武器						……あ？
+	ごくひらロスト	悔しい破損						…………三人とも、逃げて\nここは、私に任せて……
+	ディーア	悔しい2						無茶だ、そんな傷で戦ったら……
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							そ、そうだよ\nごくひらロストちゃん……!!
+	獄刀大包平							…………っ
+CharacterOff
+	ごくひらロスト	悲しい破損						……獄刀大包平
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	獄刀大包平							…………!!
+CharacterOff
+	ごくひらロスト	自嘲破損						あなたのやるべきことが何か……\nあなたならわかるでしょう
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	獄刀大包平							…………でも
+CharacterOff
+	ごくひらロスト	悔しい破損						早く、しなさい……!!
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	獄刀大包平							…………うん、ごめんね
+	獄刀大包平							……旦那様、お姉ちゃん、逃げよう!!
+	名刀・大包平							ごくひらちゃん!?
+CharacterOff
+	ディーア	悔しい2						そんなこと……!!\nごくひらはそれでいいのか……!?
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	獄刀大包平							わかんない……わかんないけど……
+	獄刀大包平							私があの子だったら、きっと\n同じことをすると思うから……!!
+FadeOut	black					1
+CharacterOff
+	ごくひらロスト	悔しい破損
+Wait						.5
+FadeIn	black					.5
+Wait						1
+StopBgm
+Se	強風	TRUE
+	ドロシー	怒り/武器						……アホか、お前
+	ごくひらロスト	悔しい破損						…………なんとでも言えばいいわ
+	ごくひらロスト							あなたは所詮監視役……\n私を処分できれば、それで話は\n済むはずだもの
+	ドロシー	ニヤリ/武器						ハ、兵器風情が\n大口を叩くようになったな
+	ごくひらロスト	自嘲破損						…………はっ
+Se	光2
+FadeOut	white					.5
+CharacterOff
+Param	character_grayout=false
+	イベントスチル392D	D2	エフェクト表
+FadeIn	white					.5
+	禁式･獄刀大包平=ロスト	<Off>						<dash=2>私は、兵器じゃないわ\nそんな無機質な呼び方を\nしないでもらえるかしら
+	禁式･獄刀大包平=ロスト	<Off>						お姉ちゃんから名付けてもらったの\n私は<dash=2>ごくひらロストよ
+CharacterOff
+Param	character_grayout=true
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							ごくひらロストちゃん<dash=2>!!
+Tween	獄刀大包平	MoveBy	x=20 time=0.5				NoWait
+	獄刀大包平							お姉ちゃん、ダメ……!!
+StopBgm
+CharacterOff
+	黒背景		エフェクト表
+Wait						1
+	禁式･獄刀大包平=ロスト	<Off>						…………はぁ
+CharacterOff	禁式･獄刀大包平=ロスト
+Param	character_grayout=false
+Bgm	凱旋
+	イベントスチル392C	C1	エフェクト裏			0
+Wait						1
+CharacterOff	黒背景					1
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue><dash=2>ほんと、バカだなぁ</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>私なんて捨てて逃げればいいのに、\nいつまでも私を妹扱いして</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>……いつまでも、\n私のことばっかり心配して</color>
+StopSe
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル392BG		エフェクト裏
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>きっと、私がどれだけ\n救われたかなんて、お姉ちゃんが\n知ることはないんだろうな</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue><dash=2>そう、ずっと前からそうだった\n伝説になることばっかりに囚われて\nいつまで経っても気付かない</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>私の中ではもう、\nお姉ちゃんはとっくに伝説なのに</color>
+Se	回想
+FadeOut	black					.1
+CharacterOff						0
+Bg	神社（夜）					0
+	ディーア	悔しい2				0
+FadeIn	black					.1
+	ディーア							なあ、それは本当に\nお前がやりたいことなのか？
+FadeOut	black					.1
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	黒背景					0
+	イベントスチル392C	C2	エフェクト裏			0
+Se	強風	TRUE
+FadeIn	black					.8
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue><dash=2>本当に私がやりたいこと</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>ロストとして造られた私には、\nそれを願う自由がなかった</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>だから、私にやりたいことなんて\nなかった</color>
+FadeOut	white					.5
+	イベントスチル392F		エフェクト裏			0
+FadeIn	white					.5
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>でも、今はね<dash=2>\n一つだけあるの</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue>本当はずっと寂しかった\nお姉ちゃんと、\nずっと一緒にいたかった</color>
+	禁式･獄刀大包平=ロスト	<Off>						<color=blue><dash=2>あの二人のようになりたかった</color>
+	イベントスチル392C	C2	エフェクト裏
+StopBgm						2
+	禁式･獄刀大包平=ロスト	<Off>						でもそれは、\n私が望んでいいものじゃない
+	禁式･獄刀大包平=ロスト	<Off>						それは私じゃなくて、\n獄刀大包平のものだから
+	イベントスチル392C	C3
+	禁式･獄刀大包平=ロスト	<Off>						そして、私が誰であっても、\nお姉ちゃんに刃を向けた罪は消えない
+Bgm	風属性バトル
+	禁式･獄刀大包平=ロスト	<Off>						<dash=2>私のやることは、変わらない
+	禁式･獄刀大包平=ロスト	<Off>						……さようなら、お姉ちゃん
+Se	光3
+FadeOut	white					.1
+	イベントスチル392D	D3	エフェクト裏
+FadeIn	white					1
+	禁式･獄刀大包平=ロスト	<Off>						私は、あなたの伝説の礎になる
+	禁式･獄刀大包平=ロスト	<Off>						お姉ちゃんのジャマするなら\n斬っちゃうね
+CharacterOff
+Bg	神社（夜）					0
+	ドロシー	ニヤリ拡大	エフェクト裏					…………
+	白背景		エフェクト表			2
+Wait						1
+CharacterOff
+	イベントスチル392C	C3	エフェクト裏
+	禁式･獄刀大包平=ロスト	<Off>						禁式<dash=2>ッ
+FadeOut	white					.5
+CharacterOff						0
+	イベントスチル392A	A3	エフェクト裏			0
+FadeIn	white					.1
+Wait						.2
+	イベントスチル392L	L1	エフェクト裏
+Wait						.2
+CharacterOff
+	ミラロスト	笑い	2_2
+	ごくひらロスト	無	1_2
+	　　　　　　　　　　
+Wait						.2
+CharacterOff
+	イベントスチル392BG		エフェクト裏
+Wait						.2
+	イベントスチル392I		エフェクト裏
+Wait						.2
+	イベントスチル392E		エフェクト裏
+Wait						.7
+	イベントスチル392F		エフェクト裏
+Wait						.7
+FadeOut	white					1
+CharacterOff						0
+	イベントスチル392D	D3	エフェクト裏			0
+FadeIn	white					.1
+	禁式･獄刀大包平=ロスト	<Off>						<dash=2>無慙、新月!!
+StopSe
+FadeOut						1.4	NoWait
+Se	スローモーションエンド
+Se	光1
+Se	剣閃
+	斬撃(39210A)		lost1			0
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(39210B)		lost2			0
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(39210C)		lost3			0
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(39210D)		lost4			0
+Wait						.15
+Se	光1
+Se	剣閃
+	斬撃(39210E)		lost5			0
+Wait						.15
+Se	光2
+Se	剣閃
+	斬撃(39210F)		lost6			0
+Wait						.15
+Se	光3
+Se	剣閃
+	斬撃(39210G)		lost7			0
+Wait						.15
+Se	光3
+Se	剣閃
+	斬撃(39210H)		lost8			0
+Wait						3
+If	isdebug==true
+CharacterOff
+Jump	*E_395_11
+EndIf
+EndScenario
+
+# E_395_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					.1
+StopSound
+Bg	神社（昼）
+Se	剣閃
+Wait						1
+Se	倒れる
+Wait						1
+FadeIn	black					.5
+	ごくひらロスト	自嘲破損						…………ふふ
+	ごくひらロスト							わたしの……勝ちね、ドロシー……
+Se	ガードブレイク
+CharacterOff	ごくひらロスト					2
+Wait						2
+	ドロシー	怒り/武器						…………チッ、\n本当に手間のかかる……
+	ドロシー	怒り						……少年は逃げおおせたか
+CharacterOff
+Wait						.5
+	ドロシー	ニヤリ/フード						まあいい、及第点だ\nふふ……\nだがここからが本番だぞ、少年
+FadeOut	black					1
+Bg	草原A
+	ディーア	悔しい2
+Wait						1
+Bgm	絶望
+FadeIn	black					1
+	ディーア							はぁ……はぁ……
+	ディーア							くっ……助けられなかった……
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	獄刀大包平							…………ごめんなさい\n私が、旦那様とお姉ちゃんを\n無理やり止めたから……
+CharacterOff
+	ディーア	悔しい2						……ごくひらが謝ることじゃない
+	ディーア	怒り2						どのみち逃げるしかなかった\n……それにごくひらロストのおかげで\n最悪の展開だけは免れた
+	ディーア	悔しい2						だけど……\nオレにもっと力があれば……
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							…………
+CharacterOff
+	バハムート	悔しい						<dash=2>さん、マスターさんっ!!
+CharacterOff
+	ディーア	驚き2						……バハムート？
+	ディーア	悔しい2						どうしたんだ、そんなに慌てて……
+CharacterOff
+	バハムート	悔しい						オメガちゃんが、イザナギが……!!\n大変なことに……っ!!
+	バハムート							はやく、早く来て……っ!!
+CharacterOff
+	名刀・大包平		b1 2
+	獄刀大包平		1_2
+	名刀・大包平							…………ま、まさか
+	獄刀大包平							旦那様、それってもしかして……
+CharacterOff
+	ディーア	本気2						ああ、急ぐぞ!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	市街地A
+	イザナギ	絶望
+Wait						1
+Bgm	緊迫
+FadeIn	black					.5
+	イザナギ							…………ああ\nようやく来たか、人間……
+	ディーア	悔しい2						イザナギ……!?\nその傷……!!
+	オメガ	絶望						マスターちゃん……？
+	ディーア	怒り2						オメガも……\n今クランさんのとこに……!!
+	オメガ	絶望						気をつけて……まだ、近くに……
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？	<Off>						あっれぇ～？\nやっと帰ってきたんだぁ
+	？？？？	<Off>						その様子だと、ごくひらちゃんは\nダメだったみたいだねぇ
+CharacterOff
+	ディーア	悔しい2						………………お前は
+CharacterOff
+	ミラロスト	笑い拡大	エフェクト表					もー、ミラちゃん\nずっと待ってたんだよ？
+	ミラロスト	ニヤリ拡大	エフェクト表					にゃはは♪\nおかえり、マスターさん♪
+If	isdebug==true
+CharacterOff
+Jump	*E_395_01
+EndIf
+EndScenario

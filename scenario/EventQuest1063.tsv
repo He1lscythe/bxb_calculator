@@ -1,0 +1,1086 @@
+# E_1063_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	光属性バトル
+Bg	魔導コロシアム					0
+Param	character_grayout=false
+	リディ	アイドル	2_3			0
+	ぎんいろ	アイドル	1_3			0
+	バステト	アイドル	3_3			0
+	 
+FadeIn	black					.5
+	 							アイドル、それは理想の具現
+CharacterOff
+	バステト×フェイク	通常
+	 							アイドル、それは輝きの偶像
+CharacterOff
+	シュムハザ	アイドル
+	 							アイドル、それは永遠の憧れ
+CharacterOff
+	イベントスチル10633		エフェクト表
+	 							今、綺羅星のごときアイドルが集い\nその輝きで魔界を照らす……！
+FadeOut	white					.3
+CharacterOff						0
+	イベントロゴ1063		エフェクト表			0
+FadeIn	white					.3
+								サマーフェスタ、開幕!!
+FadeOut	white					.3
+CharacterOff						0
+	カモミール	拡大嬉しい	エフェクト裏			0
+	オーラ桃		エフェクト表			0
+FadeIn	white					.3
+	カモミール							ぜったいカミィが一番なんだから♪\nえへへ♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1063_01
+EndIf
+EndScenario
+
+# E_1063_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	ウイニングラン
+Bg	魔導コロシアム					0
+	ぎんいろ	アイドル	1_3			0
+	バステト	アイドル	3_3			0
+	リディ	アイドル	2_3			0
+FadeIn	white					.5
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	アイドル						みんなー！\n今日は会いに来てくれてありがとー♪
+	ぎんいろ	アイドル						でも、\nまだまだここから……でしょ？
+Tween	バステト	PunchPosition	y=50				NoWait
+	バステト	アイドル						にゃはは♪\n最後までついてきてほしいにゃ！
+Param	character_grayout=false
+	リディ	アイドル						じゃあ次の曲、いっくよー！
+	集中線		エフェクト表
+	ファン							ワァアアアアアア!!
+FadeOut	white					.5
+CharacterOff						0
+StopBgm
+Bg	市街地D					0
+	ディーア	驚き2	2_2			0
+	カモミール	嬉しい	1_2			0
+Param	character_grayout=true
+Wait						1
+FadeIn	white					.5
+Se	ガヤA	TRUE
+Bgm	平和
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	通常						わぁー♪\nここがサマフェス会場の街なんだ♪\nカミィ、ワクワクしてきたかも♪
+	ディーア	驚き2						リーマ・アイドルサマーフェスタか
+	ディーア	通常2						魔界中からアイドルが集まる、\n一年に一度の祭典って聞いたけど、\nファンの数がスゴイな……！
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	嬉しい						そんなの当然かも♪\nだって、サマフェスは\nナンバーワンアイドルを決めるお祭！
+Tween	カモミール	MoveBy	x=20				NoWait
+	カモミール	通常						ファンのみんなも\n推しを応援するために大集合なの♪
+	ディーア	笑い2						なるほど、\nだからこそ、この熱気なんだな！
+	カモミール	嬉しい						しかも今年は特別かも♪
+StopSe
+FadeOut	white					.3
+Param	character_grayout=false
+CharacterOff						0
+Bg	魔導コロシアム					0
+	ぎんいろ	アイドル	1_3			0
+	バステト	アイドル	3_3			0
+	リディ	アイドル	2_3			0
+	          
+FadeIn	white					.3
+	カモミール	<Off>						伝説のアイドル\n『ソードガールズ』に
+FadeOut	white					.3
+CharacterOff						0
+Bg	神界改					0
+	魔剣グラム	通常	p5b			0
+	レヴァ	通常	p2			0
+	ダインスレイフ	通常	p8			0
+	          
+FadeIn	white					.3
+	カモミール	<Off>						クリスマスツアーを成功させた\n『北欧神話』！
+FadeOut	white					.3
+CharacterOff						0
+Bg	海岸					0
+	バステト×フェイク	通常				0
+	          
+FadeIn	white					.3
+	カモミール	<Off>						幻のアイドル、テトにゃんも\n復活するかも♪
+FadeOut	white					.3
+CharacterOff						0
+Bg	大灯台B					0
+	シュムハザ	アイドル				0
+	          
+FadeIn	white					.3
+	カモミール	<Off>						さらにさらに、\n人気急上昇のシュムハザちゃんも\n出場するんだよ！
+FadeOut	white					.3
+CharacterOff						0
+Bg	市街地D					0
+	カモミール	通常	1_2			0
+	ディーア	笑い2	2_2			0
+Param	character_grayout=true
+FadeIn	white					.3
+	ディーア	笑い2						そして、\nここにも<dash=2>
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	嬉しい						そうっ！ 期待の超新星！\nポジティブアイドル、\nカモミールも登場なの♪
+	カモミール	嬉しい						カミィも\n伝説を作っちゃうかも♪
+	ディーア	通常2						今日まで街角でミニライブしたり、\n手渡し即売会やったり、\nマカインスタに、魔界ちゅーぶに
+	ディーア	汗2						マネージャー役のオレも、\nけっこう大変だったな……
+Tween	カモミール	MoveBy	x=20				NoWait
+	カモミール	嬉しい						えへへ♪\nたくさん頑張ってきたよね♪
+	カモミール	本気						ここで勝ってカミィは<dash=2>
+Se	回想
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	荒野					0
+	カモミール	蛇	エフェクト表			0
+	          
+FadeIn	white					.3
+Wait						1.5
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	市街地D					0
+	ディーア	笑い2	2_2			0
+	カモミール	本気	1_2			0
+Param	character_grayout=true
+FadeIn	white					.3
+	カモミール	本気						そう、カミィは\n本物のアイドルに……
+	ディーア	驚き2						カモミール？
+	カモミール	通常						う、ううん！\nなんでもないかも♪
+	カモミール	嬉しい						あっ！\nあっちにリアちゃんいたかも♪\n挨拶してくるかもー！
+Se	走る
+Tween	カモミール	MoveBy	x=-600 time=1				NoWait
+Wait						.5
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地A					0
+	マトリカリア	通常	p3b			0
+	カモミール	嬉しい	p7			0
+FadeIn	black					.3
+	カモミール	嬉しい						リアちゃーん、\n今日も二番目にカワイイかも♪
+Tween	マトリカリア	PunchPosition	y=30				NoWait
+	マトリカリア	通常						はぁ!?\nリアはいっちばーん、なの！
+FadeOut	black					.3
+CharacterOff						0
+Bg	市街地D					0
+	ディーア	通常2				0
+FadeIn	black					.3
+	ディーア	通常2						ふぅ……、\nそれにしてもスゴイお祭だな
+	？？？？							…………\nずいぶん騒がしいところね\nもう帰ってもいいかしら？
+	ディーア	汗2						そう言うなって\nここならお前の探しものも\n見つかるかもしれないだろ？
+	ディーア	通常2						サタニア
+CharacterOff
+	魔剣サタニア	通常2				1
+Wait						1
+	魔剣サタニア	通常2						無理やり連れてきたと思ったら\nそれが目的なの、魔鍵使い
+	魔剣サタニア	通常2						悪いけれど、\nこんなところで見つかるとは……
+CharacterOff
+	ディーア	通常2						可能性はあるさ\nサタニアもこんな場所は初めてだろ？
+	ディーア	笑い2						ほら、ファンの人達も個性的だし\nいい勉強にはなるさ
+CharacterOff
+	魔剣サタニア	通常2						個性的、ね……
+FadeOut	black					.3
+CharacterOff						0
+	ファン1		1_2			0
+	ファン2		2_2			0
+FadeIn	black					.3
+Tween	ファン1	MoveBy	x=30				NoWait
+	ファン1							キラメキスターズ、\nウルスラちゃん推しです\n名刺どうぞ
+	ファン2							すごい凝ったデザインですね……！\nあ、私はヨル様推しです！
+FadeOut	black					.3
+CharacterOff						0
+	ファン3		1_2			0
+	ファン4		2_2			0
+FadeIn	black					.3
+	ファン3							C.E.L.T.のピンバッジで\n鎧を作るなんて……！
+	ファン4							そっちのレトロニカ箱推し法被も\nいかしてるぞ……！
+FadeOut	black					.3
+CharacterOff						0
+	ファン5		1_3			0
+	ファン6		2_3			0
+	ファン7		3_3
+Param	character_grayout=false
+FadeIn	black					.3
+Tween	ファン6	PunchPosition	y=50				NoWait
+	ファン6							よろず屋マタタビー!!
+Tween	ファン5	PunchPosition	y=50				NoWait
+Tween	ファン7	PunchPosition	y=50				NoWait
+	ファン	<Off>						ありがとー!!
+Tween	ファン6	PunchPosition	y=50				NoWait
+	ファン6							ブライダル専門店･ハッピーベアー!!
+Tween	ファン5	PunchPosition	y=50				NoWait
+Tween	ファン7	PunchPosition	y=50				NoWait
+	ファン	<Off>						ありがとー!! ありがとー!!
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	通常2	1_2			0
+	魔剣サタニア	通常2	2_2			0
+Param	character_grayout=true
+FadeIn	black					.3
+	魔剣サタニア	通常2						人間はこういう時、名刺を配ったり\nスポンサーの名前を叫ぶの？
+	ディーア	通常2						楽しそうだろ？
+	魔剣サタニア	通常2						なんとも思わないけれど、\n……すごい熱だけは伝わるわ
+	ディーア	笑い2						その熱が\nアイドルとファンの愛なんだ
+	ディーア	通常2						アイドルは愛を贈るために、\nファンも愛を受け取るために、\nどちらも真剣になってる
+Tween	魔剣サタニア	MoveBy	x=-20				NoWait
+	魔剣サタニア	通常2						愛、ね……わかったわ\n今日だけは口車に乗ってあげる
+	ディーア	笑い2						ああ、助かるよ
+	ディーア	通常2						そろそろカモミールも\n帰って来る頃だな
+CharacterOff
+	カモミール	本気	画面外_左
+Tween	カモミール	MoveBy	x=600 time=3				NoWait
+	カモミール	本気						うぅ、また喧嘩しちゃった……\nけど、カミィのステージを見たら\nリアちゃんも……！
+CharacterOff
+	ディーア	通常2	1_2
+	魔剣サタニア	通常2	2_2
+	ディーア	通常2						カモミール、\nたしか、そろそろ時間だったよな？
+CharacterOff
+	カモミール	通常
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	通常						あっ、その通りかも！
+CharacterOff
+	ディーア	通常2	1_2
+	魔剣サタニア	通常2	2_2
+	魔剣サタニア	通常2						……時間？
+	ディーア	通常2						今日はカモミールのファンが\n応援に来てくれてるんだよな？
+CharacterOff
+	カモミール	嬉しい						そうなのっ♪\nカミィの歌とダンスに合わせて\nキラキラーって♪
+	カモミール	通常						だから、みんなに挨拶に行くのに\nついてきてほしいかも♪
+CharacterOff
+	ディーア	笑い2	1_2
+	魔剣サタニア	通常2	2_2
+	ディーア	笑い2						でも、直接会いに行くなんて\nすごいファンサービスだな
+CharacterOff
+	カモミール	嬉しい						だって、\nファンはアイドルの命かも♪
+	カモミール	通常						カミィを愛してくれるみんなに\n今日もしびれてって、お願いするの♪
+	カモミール	嬉しい						ほらほら、早く行こっ♪
+	wipe		wipe_start			0
+Se	走る
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff						0
+Bg	森林A					0
+	ディーア	怪しい2	2_2			0
+	カモミール	本気	1_2			0
+FadeIn	black					.3
+	カモミール	本気						あれ……？\nここで待ってるって聞いたけど……
+	ディーア	怪しい2						それにしては静かすぎるぞ？\n人の気配がしないし……
+CharacterOff
+	魔剣サタニア	通常2						……魔鍵使い
+CharacterOff
+	カモミール	通常	1_2
+	ディーア	驚き2	2_2
+	ディーア							いったいどうし<dash=2>
+Bgm	絶望
+CharacterOff
+	ファン1		1_3
+	ファン2		3_3
+Shake	ファン1		x=10				NoWait
+	ファン1							ああ、ワル様……♪\n人生をかけて貴方を推します……！
+Shake	ファン2		x=10				NoWait
+	ファン2							うわぁああああ！\nこっち向いてー！ 認知してー！
+CharacterOff
+	カモミール	本気	1_2
+	ディーア	驚き2	2_2
+	ディーア	驚き2						あの人達はいったい……？
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	本気						マスターくん！\nあれ、みんなカミィのファンかも!?\nなんでおかしくなってるの!?
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							ふふふふ♪\n残念でした……
+CharacterOff
+	カモミール	本気	1_2
+	ディーア	怒り2	2_2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	怒り2						誰だ……！
+Bgm	緊迫
+CharacterOff
+	魔物1063					1		この人間達はもう私のファンよ？\nこの私、ワル=イデスのね♪
+Bgm	バトル
+CharacterOff
+	カモミール	本気	1_2
+	ディーア	悔しい2	2_2
+	カモミール	本気						ま、魔物かも!?
+	ディーア	悔しい2						なんで魔物がここに……！
+CharacterOff
+	魔剣サタニア	通常2						魔鍵使い、彼らは洗脳されているわ\n魅了……いえ、呪術に近いのかしら？
+CharacterOff
+	カモミール	本気	1_2
+	ディーア	悔しい2	2_2
+	ディーア	悔しい2						人を操る魔物か……!!
+Shake	カモミール		x=5				NoWait
+	カモミール	本気						しかもカミィのファンを！\nそんなのぜったい許せないかも……！
+CharacterOff
+	魔物1063							あら♪\nだったらどうするの？
+CharacterOff
+	カモミール	本気	1_2
+	ディーア	悔しい2	2_2
+	ディーア	本気2						決まってる！\nおまえを倒して、解放するだけだ！\n行くぞ、カモミール！
+	カモミール	本気						うん、マスターくんお願いっ！\nみんなを取り戻して、\nサマフェスに行くのっ！
+Param	character_grayout=false
+CharacterOff
+	オーラ青		エフェクト表
+	カモミール	拡大通常	エフェクト裏
+	カモミール	拡大通常						さあ、\nカミィがしびれさせてあげる！
+If	isdebug==true
+CharacterOff
+Jump	*E_1063_03
+EndIf
+EndScenario
+
+# E_1063_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	森林A					0
+	カモミール	本気	1_2			0
+	ディーア	悔しい2	2_2			0
+FadeIn	white					.5
+	ディーア	悔しい2						くっ……！\n力はたいしたことないのに！
+CharacterOff
+	魔物1063		p5b
+	ファン1		p8
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ファン1	MoveBy	x=-200				NoWait
+	ファン1							ワル様のためなら……！
+Se	打1
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	MotionBlur
+FadeIn	white					.2
+Shake	ファン1		x=5				NoWait
+	ファン1							へぶぅ……!?
+CharacterOff
+	カモミール	本気						ファンクラブ一号さん!?
+CharacterOff
+	ファン1
+Shake	ファン1		x=5				NoWait
+	ファン1							うぅぅ……\n推しを守れるなら本望……！
+Tween	ファン1	MoveBy	y=-100				NoWait
+Se	倒れる
+CharacterOff						.5
+Wait						1
+CharacterOff
+	ディーア	悔しい2	2_2
+	カモミール	悔しい	1_2
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	悔しい						そんな、\nファンクラブ一号さんまで……！
+Tween	カモミール	MoveBy	x=20				NoWait
+	カモミール	慌て						だめ、マスターくん！\nこれじゃあ、ちゃんと戦えないかも！
+	ディーア	悔しい2						くっ……！\nおまえの目的はなんなんだ！
+CharacterOff
+	魔物1063							……目的？
+CharacterOff
+	ディーア	悔しい2	2_2
+	カモミール	本気	1_2
+	ディーア	本気2						ああ、\nどうして彼らを洗脳するんだ！
+Param	character_grayout=false
+CharacterOff
+	魔物1063							そんなの決まってるじゃない\n私も<dash=2>
+StopBgm
+	集中線		エフェクト表
+	魔物1063							私もサマフェスに出たいからよ!!!!
+CharacterOff
+	ディーア	驚き2	2_2
+	カモミール	悔しい	1_2
+	二人							………………へ？
+Bgm	コメディ
+CharacterOff
+	魔物1063
+Shake	魔物1063		x=5				NoWait
+	魔物1063							私だって！\nキラキラなアイドルになりたいの！
+Tween	魔物1063	PunchPosition	y=30				NoWait
+	魔物1063							ほら見てよ！\nこのスリムな体にツヤツヤなお肌！\n魅力がいっぱいでしょ!?
+	魔物1063							なのに、誰もファンにならないから\nこうするしかないのッ!!
+Tween	魔物1063	PunchPosition	y=30				NoWait
+	魔物1063							集まった人間を全員ファンにして\nトップアイドルになってやる……！
+Param	character_grayout=true
+CharacterOff
+	ディーア	絶望2	1_2
+	魔剣サタニア	通常2	2_2
+	魔剣サタニア	通常2						奇妙な生態の魔物ね\n興味深いわ
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	絶望2						感心してる場合か！\nフェス会場に行かせたら大変だぞ!?
+StopBgm
+Param	character_grayout=false
+CharacterOff
+	カモミール	本気						フェスに出たい気持ちは、\nカミィにも分かるかも……				 
+	集中線		エフェクト表
+	カモミール	本気						でも、カミィのファンは渡さない！\nカミィをキラキラにしてくれる、\n大切な人たちなんだから！
+Bgm	特殊バトル
+CharacterOff	集中線
+Param	character_grayout=true
+	アクケルテ	<Off>						そのアピール、いいわねっ！
+CharacterOff
+	魔剣サタニア	通常2	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						……え？
+Param	character_grayout=false
+CharacterOff
+	アクケルテ	マネージャー				1		アイドルの熱い戦い、\nこれすなわち、ビジネスチャンス！
+	集中線		エフェクト表			0
+	アクケルテ	マネージャー						このライブバトル、\nアクケルテがプロデュースするわっ♪
+Param	character_grayout=true
+CharacterOff
+	魔剣サタニア	通常2	2_2
+	ディーア	驚き2	1_2
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						アクケルテ!?\nなんでアクケルテが!?
+CharacterOff
+	カモミール	本気						違うよ、マスターくん\nこの人は……プロデューサーA.K.!!
+CharacterOff
+	ディーア	驚き2	1_2
+	魔剣サタニア	通常2	2_2
+Shake	魔剣サタニア		x=2				NoWait
+	魔剣サタニア	通常2						プロデューサーA.K.ですって……！
+Tween	ディーア	MoveBy	x=20				NoWait
+	ディーア	驚き2						知っているのか、サタニア!?
+	魔剣サタニア	通常2						太陽聖域で聞いたことがあるわ
+	魔剣サタニア	通常2						卓越したビジネスセンスと\n斬新なアイデアをもつ、\n名プロデューサーがいると
+CharacterOff
+	アクケルテ	マネージャー						話は聞いたわ、カミィさん！\nアイドル同士の戦いなら方法は一つ！\nアイドル力でぶつかり合うのよっ♪
+CharacterOff
+	魔剣サタニア	通常2	2_2
+	ディーア	驚き2	1_2
+	ディーア	汗2						アイドル、力……？
+CharacterOff
+	アクケルテ	マネージャー						歌で、ダンスで、自分の魅力で！\nファンの心を取り戻すの♪
+CharacterOff
+	ディーア	汗2	1_2
+	魔剣サタニア	通常2	2_2
+	魔剣サタニア	通常2						なるほど、魅了には魅了\n呪詛返しとしては正しい方法ね
+	ディーア	怪しい2						そんなしっかりした理屈じゃ\nないと思うぞ……？
+CharacterOff
+	カモミール	本気						そっか、\nアイドルのカミィなら……！\nそれができるかも！
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	本気						もう一回、カミィのファンに！
+CharacterOff
+	カモミール	拡大通常	エフェクト表					みんな、\nカミィにしびれてほしいかも♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1063_04
+EndIf
+EndScenario
+
+# E_1063_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	特殊バトル
+Bg	森林A					0
+Param	character_grayout=false
+	カモミール	嬉しい				0
+	          
+FadeIn	white					.5
+Se	チャージ
+	オーラ桃		エフェクト裏			1
+	カモミール	嬉しい						みんな、\n目を覚ましてほしいかも♪
+CharacterOff	カモミール
+	ファン1							…………ふわぁ？
+CharacterOff	オーラ桃
+Shake	ファン1		x=10				NoWait
+	ファン1							うぉおおおお!?\nカミィちゃん、カミィちゃん\nカミィちゃーん!!
+CharacterOff
+Param	character_grayout=true
+	魔剣サタニア	通常2	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						ほんとに洗脳が解けた！
+	魔剣サタニア	通常2						……行動は変わらない気がするけど
+CharacterOff
+	魔物1063							くぅっ……！\nせっかくファンにしたのに……！
+CharacterOff
+	カモミール	嬉しい						やっぱりカミィはトップアイドル♪\n魔物さんには負けないかも♪
+CharacterOff
+	魔物1063							まだよ……！\nもう一回私のファンにするわ！
+Param	character_grayout=false
+Bgm	魔獣バトル
+	オーラ赤		エフェクト裏			1
+	魔物1063							<dash=4>♪
+Param	character_grayout=true
+CharacterOff
+	魔剣サタニア	通常2	2_2
+	ディーア	悔しい2	1_2
+	魔剣サタニア	通常2						これは……！\n暗く淀んでいるけれど、\n心の奥を揺らす歌……！
+CharacterOff
+	アクケルテ	マネージャー						魔物さんのアイドル力もすごいわっ♪\nなかなかのボーカルアピールね！
+StopBgm						1
+Param	character_grayout=false
+CharacterOff
+	カモミール	本気
+	カモミール	通常						でも、\n歌ならカミィが負けないかも♪
+Bgm	インフォメーション
+	カモミール	嬉しい						<dash=4>♪
+	オーラ青		エフェクト裏			1
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	ディーア	悔しい2	1_2
+	魔剣サタニア	通常2	2_2
+	魔剣サタニア	通常2						ああ、見えるわ\n草原を吹き抜ける、\n澄み渡った風が……
+	魔剣サタニア	通常2						この気持ちはいったい……！
+	ディーア	怪しい2						すごい……\n曲がサタニアの心も動かしてる……
+StopBgm						1
+CharacterOff
+	アクケルテ	マネージャー						二人ともやる気十分ねっ！\nそれじゃあアピールタイムにいくわっ
+Bgm	キノコリオン
+	アクケルテ	マネージャー						カミィちゃん、\n意気込みはどう？
+CharacterOff
+	カモミール	通常						もちろん、魔物さんより\nカミィのほうがキラキラだって、\n証明してみせるかもっ♪
+CharacterOff
+	アクケルテ	マネージャー						…………なるほどね
+Tween	アクケルテ	PunchPosition	y=30				NoWait
+	アクケルテ	マネージャー						わかったわ！\nそれじゃあ、歌唱対決スタートよ♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1063_05
+EndIf
+EndScenario
+
+# E_1063_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	平和
+Bg	森林A					0
+Param	character_grayout=false
+	アクケルテ	マネージャー				0
+	          
+FadeIn	white					.5
+	アクケルテ							対決の結果は……！
+CharacterOff
+	カモミール	本気	p7
+	魔物1063		p3b
+	二人							ごくりっ……！
+CharacterOff
+	アクケルテ	マネージャー
+	集中線		エフェクト表
+	アクケルテ	マネージャー						引き分け！\n洗脳効果は抜きにしても、\nどっちの歌も素晴らしかったわ！
+Param	character_grayout=true
+CharacterOff
+	魔物1063		p3b
+	カモミール	本気	p7
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	本気						もーっ！\nそれなら次かも、次！
+Shake	魔物1063		x=5				NoWait
+	魔物1063							今度こそ、私が勝つ！
+StopBgm
+CharacterOff
+	アクケルテ	マネージャー						それじゃあ、次に行くわ！
+Bgm	コメディ
+	アクケルテ	マネージャー						アイドルはバラエティも熟してこそ！\n狙え高視聴率！ 食レポ勝負よ♪
+CharacterOff
+	ディーア	絶望2	画面外_右
+Se	走る
+Tween	ディーア	MoveBy	x=-600				NoWait
+	ディーア	絶望2						はぁ……はぁ……！\nふ、ふたりのリクエスト、\n買ってきたぞ……!!
+Param	character_grayout=false
+CharacterOff
+	カモミール	嬉しい						ありがとう、マスターくん♪
+	カモミール	嬉しい						それじゃあ、あーん♥
+	オーラ桃		エフェクト裏
+	カモミール	嬉しい						うーん♪\nとーってもオイシイかも♪
+CharacterOff
+	カモミール	拡大嬉しい	エフェクト表					この生レバー♥
+	カモミール	拡大通常						舌触りが良くて、生臭さもないかも♪\nこれは王様の味かも♪
+CharacterOff
+	魔物1063							うふふ♪\n噛みしめるほどに味がとろけて\n力がわく♪
+	集中線		エフェクト表
+	魔物1063							これが生肉の魅力ね♪
+Param	character_grayout=true
+CharacterOff
+	ディーア	汗2	1_2
+	魔剣サタニア	通常2	2_2
+	魔剣サタニア	通常2						なるほど、\nアイドルは生が好きなのね
+	ディーア							サタニア、\nそのまとめ方はちょっと……
+CharacterOff
+	カモミール	拡大嬉しい	エフェクト表					ファンのみんなも！\nカミィの食レポ、\n盛り上げてほしいかもっ！
+If	isdebug==true
+CharacterOff
+Jump	*E_1063_06
+EndIf
+EndScenario
+
+# E_1063_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	バトル
+Bg	森林A					0
+	アクケルテ	マネージャー				0
+	          
+FadeIn	white					.5
+	アクケルテ	マネージャー						これも同点っ！
+CharacterOff
+	カモミール	慌て						そんなー、かもっ！
+CharacterOff
+	アクケルテ	マネージャー						まだまだ続けるわっ♪
+	アクケルテ	マネージャー						ファンを盛り上げて！\nMC対決よ♪
+CharacterOff
+	カモミール	通常						カミィのいいとこ、\n十個教えてほしいかも♪
+CharacterOff
+Param	character_grayout=false
+	ファン1		p3
+	ファン2		p5b
+	ファン3		p7
+	ファン	<Off>						やさしい！ かわいい！\n生きてるだけで全てが尊い!!
+CharacterOff
+	カモミール	通常						十個って言ったのにー♪\nでも嬉しいから、ご褒美かも♪
+	オーラ桃		エフェクト裏
+	カモミール	拡大嬉しい	エフェクト表					ちゅっ♥
+CharacterOff
+	ファン1		p3
+	ファン2		p5b
+	ファン3		p7
+	ファン	<Off>						カミィちゃん、神ぃ……！
+CharacterOff
+	魔物1063							後ろの方まで見えてるわ！\nせーので、ウェーブを作るの！
+Tween	魔物1063	PunchPosition	y=30				NoWait
+	魔物1063							せーのっ！
+CharacterOff
+	ファン2		p3
+	ファン3		p5b
+	ファン1		p7
+	ファン							おおおおおおお！
+Tween	ファン2	PunchPosition	y=100				NoWait
+Wait						.2
+Tween	ファン3	PunchPosition	y=100				NoWait
+Wait						.2
+Tween	ファン1	PunchPosition	y=100				NoWait
+Wait						1
+Param	character_grayout=true
+CharacterOff
+	ディーア	怪しい2	1_2
+	魔剣サタニア	通常2	2_2
+	魔剣サタニア	通常2						あれは、\nE.D.E.N.黎明期の儀礼式……\nこんな形で残っていたのね……
+	ディーア	本気2						そんなに由緒正しかったのか!?
+CharacterOff
+	アクケルテ	マネージャー						うーん、同点！
+CharacterOff
+Bg	夏空
+	アクケルテ	<Off>						ダンス対決！
+	アクケルテ	<Off>						同点！
+	アクケルテ	<Off>						ポーズ対決！
+	アクケルテ	<Off>						<size=40>同点！</size>
+	アクケルテ	<Off>						<size=50>同点！！</size>
+	アクケルテ	<Off>						<size=60>同点！！！！</size>
+FadeOut	black					.3
+StopBgm
+CharacterOff						0
+	カモミール	悔しい	p7			0
+	魔物1063		p3b			0
+Bg	森林A					0
+FadeIn	black					.3
+	魔物1063							はぁ……はぁ……
+	カモミール	悔しい						ふぅ……ふぅ……
+Bgm	図書館
+Tween	カモミール	PunchPosition	y=10				NoWait
+	カモミール	本気						なんで魔物が\nカミィと張り合えるの……！
+Param	character_grayout=true
+CharacterOff
+	アクケルテ	マネージャー	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						アクケルテ、大丈夫なのか？\nこのままじゃ……
+Tween	アクケルテ	MoveBy	x=-10				NoWait
+	アクケルテ	マネージャー						大丈夫よ、マスターさん
+	アクケルテ	マネージャー						確かに、技術は同じくらいだわ
+	アクケルテ	マネージャー						でも、カミィさんは、\nまだ気づいていないだけなのよ
+	ディーア	驚き2						気づいていない？
+	アクケルテ	マネージャー						ええ、ビジネスと同じ\nアイドルにはアイドルの戦い方\nがあるのよ
+CharacterOff
+	魔剣サタニア	通常2						……アイドルと、ファン
+	魔剣サタニア	通常2						不思議ね……\nお互いを求めるあり方は……
+CharacterOff
+	カモミール	悔しい						カミィはぜったいに勝たないと……\nまた、あんな……
+Se	回想
+FadeOut	white					.2
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	荒野					0
+	カモミール	蛇	エフェクト表			0
+	          
+FadeIn	white					.2
+Wait						1
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	森林A					0
+	カモミール	悔しい				0
+Param	character_grayout=true
+FadeIn	white					.2
+	カモミール	悔しい						あんなカミィには……
+CharacterOff
+	魔物1063							………………あんな？
+	魔物1063							ああ、そうか\nそういうことなのね
+CharacterOff
+	カモミール	本気						えっ……？
+CharacterOff
+	魔物1063							あなたも偽物なのね\nカモミール♪
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1063_07
+EndIf
+EndScenario
+
+# E_1063_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	図書館
+Bg	森林A					0
+Param	character_grayout=false
+	カモミール	絶望				0
+	          
+FadeIn	white					.5
+Shake	カモミール		x=5				NoWait
+	カモミール	絶望						か、カミィが偽物……!?\nなに言ってるかわからないかも!!
+CharacterOff
+	魔物1063							あなたからは同じ匂いがするの\n私と同じ、偽物だって
+CharacterOff
+	カモミール	悔しい
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	悔しい						ち、ちがう……！
+CharacterOff
+	魔物1063							違わないわよ\nあなたも思っていたんでしょう？
+	魔物1063							『私はどうしてこんなに醜いの』\nって……♪
+CharacterOff
+	カモミール	絶望						そ、それは……
+CharacterOff
+	魔物1063							どうやって\nカワイクなったのか知らないけど\n私と中身は同じよ
+	魔物1063							キラキラしてるってファンを騙して\n自分を崇めさせてるだけ
+CharacterOff
+	カモミール	絶望						っ、そんなことない……！
+StopBgm
+	黒グラデーション		エフェクト表
+	カモミール							（で、でも……\n　本当の私は……）
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Bg	草原B					0
+	カモミール	蛇	エフェクト表			0
+Bgm	絶望
+FadeIn	white					.3
+	カモミール	蛇						なんでリアちゃんは\nそんなに可愛くいられるの……？
+CharacterOff
+	マトリカリア	通常						リアはがんばってるからなー♪
+Tween	マトリカリア	PunchPosition	y=30				NoWait
+	マトリカリア							このお花もそうだよ♪\nがんばって、可愛くなってるの
+CharacterOff
+	カモミール	蛇	エフェクト表					お花……\n頑張れば私みたいなバケモノも……
+	カモミール	蛇						キラキラに……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	森林A					0
+	カモミール	絶望				0
+	黒グラデーション		エフェクト表			0
+FadeIn	white					.3
+	カモミール							カミィ、は……
+CharacterOff
+	魔物1063							図星ね\nあなたに私を否定はできないのよ
+	魔物1063							さあ、道を開けなさい！\n技術も中身も同じなら、\n私のほうがファンをうまく騙せるわ！
+CharacterOff
+	カモミール	絶望						（カミィは……わたしは……）
+StopBgm
+Param	character_grayout=true
+CharacterOff
+	魔剣サタニア	通常2	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						それは違うぞワル=イデス
+	ディーア	怒り2						カモミールとお前は違う\n……お前にはファンへの愛がない
+Bgm	神秘
+	ディーア	怒り2						どれだけ技術があっても、\nみんなのために努力するという\n気持ちがない
+	ディーア	目閉じ2						だからお前は、最後の最後で、\n洗脳という楽な手段をとったんだ
+CharacterOff
+	魔物1063							なんですって……？
+CharacterOff
+	魔剣サタニア	通常2	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						あれだけ技術を磨いたのに、\nお前はファンも自分も、\n信じられなかったんだよ
+	ディーア	怒り2						相手へ歩み寄ろうとしないなら、\n愛をもらえるはずもないさ
+	魔剣サタニア	通常2						愛……不思議なもの……
+FadeOut	white					.3
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+Bg	7章背景1					0
+	魔剣ジュビテリア	笑い2	1_2_b			0
+	木天のツヴァイク		2_2			0
+	          
+FadeIn	white					.3
+	魔剣サタニア	<Off>						儚い命しか持たない人間なのに\n家族の、友人の、主のために、\n時に命まで尽くそうとする
+FadeOut	white					.3
+CharacterOff						0
+Bg	王政執務室					0
+	勇者王シドウ					0
+	          
+FadeIn	white					.3
+	魔剣サタニア	<Off>						魔剣の私に……\nその心まではまだ分からない
+FadeOut	white					.3
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	森林A					0
+	ディーア	怒り2	1_2			0
+	魔剣サタニア	通常2	2_2			0
+FadeIn	white					.3
+	魔剣サタニア	通常2						けど、この子は魔剣でありながら、\n人に寄り添う努力をしているのね
+	ディーア	通常2						オレはカモミールの努力を知ってる
+	ディーア	本気2						昔の姿がなんだ！\n今の努力がみんなに認められたから\nアイドルとして輝いているんだ
+StopBgm
+CharacterOff
+	カモミール	悔しい						マスターくん……
+CharacterOff
+	魔剣サタニア	通常2	2_2
+	ディーア	本気2	1_2
+	ディーア	笑い2						過去がどうであれ、\n今のカモミールはアイドルさ！\nそうだろ、ファンのみんな！
+Bgm	ウイニングラン
+CharacterOff
+	ファン1		p3
+	ファン2		p5b
+	ファン3		p7
+	ファン1							そうだよっ！\nカミィちゃんががんばってると\n俺達も元気が出るんだ！
+Tween	ファン2	PunchPosition	y=30				NoWait
+	ファン2							努力してるのも尊い！
+	ファン3							いや、努力してるから尊い！
+CharacterOff
+	カモミール	本気						ファンのみんな……！
+	カモミール	嬉しい						そっか、カミィががんばったのは\nウソじゃないもんね
+	カモミール	本気						みんなが、\nそんなカミィのこと応援して\nアイドルにしてくれた
+CharacterOff
+	魔剣サタニア	通常2	2_2
+	ディーア	通常2	1_2
+	ディーア	通常2						アイドルがファンを、\nファンがアイドルを……
+	ディーア	笑い2						そうやって\nみんなで幸せになるのが\nアイドルの尊さだ！
+CharacterOff
+	カモミール	嬉しい						うんっ……！\nだったら、カミィは！
+CharacterOff
+	アクケルテ	マネージャー						気づいたのね、カミィさん\nアイドルの本当の力に
+CharacterOff
+	カモミール	嬉しい						アクケルテちゃん……！
+CharacterOff
+	アクケルテ	マネージャー						今ならアイドルとして、\n本気を出せるはずよ♪
+CharacterOff
+	魔物1063
+Shake	魔物1063		x=5				NoWait
+	魔物1063							っ……！\n本気で私を倒すつもり……!?
+CharacterOff
+	アクケルテ	マネージャー						違うわ♪\nさっきまではただのコンペ！\nだから互角だったの
+Tween	アクケルテ	PunchPosition	y=30				NoWait
+	アクケルテ	マネージャー						でも、アイドルの本当の戦いは\nパフォーマンスよ！
+Param	character_grayout=false
+CharacterOff
+	カモミール	嬉しい
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	嬉しい						そうっ！\n愛を贈って幸せを作るのが\nアイドルの戦いかも♪
+	カモミール	本気						カミィの前に苦しんでる人がいる！\n努力を諦めちゃった人がいる！
+Se	チャージ
+	オーラ青		エフェクト裏			.5
+	カモミール	嬉しい						そんな子も\n笑顔にするのがアイドルだから！
+StopBgm
+CharacterOff
+	魔物1063							な、なんなの、この輝きは!?
+Se	光1
+FadeOut	white					.3
+CharacterOff						0
+	カモミール	アイドル				0
+Bgm	光属性バトル
+FadeIn	white					.3
+	カモミール	アイドル						魔界に輝く一輪花！\n貴方のハートもしびれちゃうかも♪
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	アイドル						ポジティブアイドル、\nカモミールです♥
+	カモミール	アイドル						これが本当の\nアイドルのカミィかも♪
+CharacterOff
+	カモミール	拡大アイドル	エフェクト表					魔物さんも、\nカミィのファンにしてあげる♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1063_08
+EndIf
+EndScenario
+
+# E_1063_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	光属性バトル
+Bg	森林A					0
+Param	character_grayout=false
+	カモミール	アイドル				0
+	オーラ桃		エフェクト裏
+FadeIn	white					.5
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール							さあ、もっともーっと\nカミィにしびれて♪
+	カモミール							あなたのことも\n幸せにしてあげるかも♪
+CharacterOff
+	魔物1063							ああ、どうして胸が熱くなるの……？
+	魔物1063							あの子も同じはずなのに、\nなんで私と違うの……？
+	魔物1063							あんなにキラキラになれるの……
+Shake	魔物1063		x=5				NoWait
+	魔物1063							これが本当のアイドル……\n私にも、あの子は愛を贈ってくれてる
+	魔物1063							努力すれば、私でも輝けるって……
+	魔物1063							私も、洗脳なんかじゃなくて\nちゃんと努力したら……
+CharacterOff
+	カモミール	アイドル
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	アイドル						もちろん！\nカミィみたいに輝けるよ♪
+	カモミール	アイドル						だって、アイドルは努力しても\nカワイイんだから♪
+CharacterOff
+	魔物1063
+Shake	魔物1063		x=5				NoWait
+	魔物1063							ああ……\nカミィ、ちゃん……！
+CharacterOff
+	カモミール	拡大アイドル	エフェクト表					それじゃあ、最後の曲かも♪\n魔物さんも応援してね♥
+FadeOut	white					1
+StopBgm
+CharacterOff						0
+Bg	魔導コロシアム					0
+	シュムハザ	アイドル				0
+Wait						2
+Param	character_grayout=true
+FadeIn	white					.3
+Bgm	平和
+	シュムハザ	アイドル						うふふ♪\nみんな、私の歌で元気になってね
+	ファン	<Off>						ワアアアアア！
+	シュムハザ	アイドル						よしよし、いいこいいこ♪
+	ファン	<Off>						ママぁー！！！！
+FadeOut	black					.3
+CharacterOff						0
+	カモミール	アイドル	2_2			0
+	ディーア	笑い2	1_2			0
+FadeIn	black					.3
+	ディーア	笑い2						ふぅ……！\nようやく次が出番か！\n間に合ってよかったなカモミール
+	カモミール	アイドル						うんっ、これもマスターくんや\nみんなのおかげかも！
+CharacterOff
+	アクケルテ	マネージャー						カミィちゃん、よかったら\n私のレッスンを受けに来て♪
+	アクケルテ	マネージャー						キミならもっとビジネス……\nじゃなくて、上を目指せるわ！
+CharacterOff
+	ディーア	笑い2	1_2
+	カモミール	アイドル	2_2
+Tween	カモミール	PunchPosition	y=30				NoWait
+	カモミール	アイドル						ほんと!? 嬉しいかもー♪
+	ディーア	笑い2						そんなに元気なら\n心配なさそうだな！
+	ディーア	通常2						ほら、出番だ！\nファンのみんなが待ってるぞ！
+StopBgm
+	カモミール	アイドル						うんっ、行ってくるね♪
+FadeOut	white					1
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル10631		エフェクト表			0
+Tween	イベントスチル10631	MoveBy	y=-610 time=20				NoWait
+Bgm	ウイニングラン
+FadeIn	white					1
+	カモミール	<Off>						みんなー♪\nカミィのためにありがとうかもー♪
+	カモミール	<Off>						ポジティブアイドル、カモミール！\nみんな、みーんなしびれちゃえ♪
+	ファン	<Off>						わぁあああああああ！
+	ファン	<Off>						カミィちゃーん！ 大好きだー!!
+CharacterOff
+	魔物1063
+Shake	魔物1063	x=20 time=20					NoWait
+	魔物1063							カミィちゃーん！\n私の光ー！ 一生推すわー!!
+	観客	<Off>						ま、魔物まで応援に来てるなんて\nあのアイドル、すごいな……！
+	観客	<Off>						ああ、あの子なら\nトップアイドルにも……！
+CharacterOff
+	カモミール	アイドル						えへへ、\nみんなだいすきかも♥
+Se	チャージ
+	オーラ桃		エフェクト裏			.2
+Wait						.3
+Param	character_grayout=true
+CharacterOff
+	ファン1		p3
+	ファン2		p5b
+	ファン3		p7
+Se	ピューン
+	ファン1							はぅっ……！
+	ファン3							尊すぎて言葉がでない……！
+Tween	ファン2	PunchPosition	y=30				NoWait
+	ファン2							応援するぞ！
+Param	character_grayout=false
+	集中線		エフェクト表
+	ファン							カミィ、カミィ、カミィ！
+Param	character_grayout=true
+CharacterOff
+	ディーア	笑い2	1_2
+	魔剣サタニア	通常2	2_2
+	魔剣サタニア	通常2						やっぱり心は不思議なものね
+	魔剣サタニア	通常2						魔剣が人を\n人が魔剣を愛して
+	魔剣サタニア	通常2						そして、あの魔物まで変えるなんて
+Tween	ディーア	MoveBy	x=20				NoWait
+	ディーア	笑い2						でも、\nそれが心の面白いところだよ
+	ディーア	通常2						サタニアなら、\nいつかきっと分かるはずさ
+	魔剣サタニア	通常2						……そうだといいわね
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	笑い2						ほら！ カミィがこっちにも\nファンサしてくれてるぞ！
+FadeOut	white					.2
+CharacterOff						0
+	イベントスチル10632		エフェクト表			0
+Param	character_grayout=false
+FadeIn	white					.2
+	カモミール	<Off>						マスターくん♪\nカミィを推してくれて、\nありがとうかも♪
+	カモミール	<Off>						みんなー！\nとってもだーいすき、かも♥
+FadeOut	white					1
+CharacterOff						0
+	イベントロゴ1063		エフェクト表			0
+FadeIn						1
+Wait						3
+FadeOut	white					1
+CharacterOff						0
+Bg	魔導コロシアム					0
+	魔剣サタニア	通常2	2_2			0
+	ディーア	通常2	1_2			0
+Param	character_grayout=true
+StopBgm
+FadeIn	white					1
+	ディーア	通常2						サタニア、\nこの後はどうするんだ？
+	魔剣サタニア	通常2						別になんの予定もないわ……\n今の私は<dash=2>
+CharacterOff
+	リディ	通常2	画面外_左
+Se	走る
+Tween	リディ	MoveBy	x=600 time=1				NoWait
+Wait						.3
+Bgm	絶望
+	リディ	通常2						あっ、マスター！\nここに<dash=2>って、あれ？
+CharacterOff
+	魔剣サタニア	通常2	2_2
+	ディーア	驚き2	1_2
+	ディーア							リディ、どうしたんだ？
+CharacterOff
+	リディ	驚き2						う、ううん……
+	リディ	驚き2						マスター、\n今、誰とお話していたの？
+Param	character_grayout=false
+CharacterOff
+	魔剣サタニア	通常2	2_2
+	ディーア	通常2	1_2
+	リディ	<Off>						他に誰もいないよ？
+CharacterOff	魔剣サタニア					2
+Param	character_grayout=true
+	ディーア	笑い2						………………\nいいや、ただの独り言だよ
+Se	ドーン
+CharacterOff						0
+Bg	黒背景					0
+	 							<color=blue>\nフェイク/アイドル・サマーフェスタ　　　\n　　　　　　　　　　　  <dash=2>完</color>
+	 							<color=blue>To be continued …?</color>
+If	isdebug==true
+CharacterOff
+Jump	*E_1063_01
+EndIf
+EndScenario

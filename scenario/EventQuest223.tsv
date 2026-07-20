@@ -1,0 +1,2016 @@
+# E_223_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="1話"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	ガヤA_BGM
+Bg	教会内部
+	ディーア	驚き2	2_3
+FadeIn	white					.5
+	ディーア		2_3					……どう、なっているんだ？
+CharacterOff
+	リディ	悔しい2	2_3					ゆ、夢でも見てるのかな……？
+CharacterOff
+	勇者カーセム	大	2_3_y					どうした、<param=name>？\nほら、次の授業に行くぞ
+CharacterOff
+	ディーア	驚き2	2_3					あ、ああ……\n君は確か……カーセム？
+CharacterOff
+	勇者カーセム	大	2_3_y					どうしたんだ、急にそんな\n他人行儀になって……\nほら、もう授業始まるぞ
+CharacterOff
+	ディーア	汗2	2_3					あ、ああ…えっと、\n次の授業はなんだっけ？
+CharacterOff
+	勇者カーセム	大	2_3_y					次は模擬戦闘訓練だ、忘れたのか？\n今日は負けないからな！
+	勇者カーセム	大						先行ってるぜ！逃げんなよ？
+Se	走る
+Tween	勇者カーセム	MoveTo	x=700
+CharacterOff	勇者カーセム
+	ディーア	汗2	2_3					……どう、なってるんだ？
+FadeOut	white					.5
+CharacterOff
+Wait						.5
+Bg	酒場1F
+Bgm	平和
+	　　　　　　　　　　
+FadeIn	white					.5
+	　　　　　　　　　　							\n<dash=2>22時間前
+	　　　　　　　　　　							\n貿易の街リーマ - 酒場
+	ディーア	通常2	1_2
+	リディ	驚き2	2_2
+	リディ							マスター！お手紙届いてるよ！
+	ディーア							手紙？魔剣機関からの依頼？
+	リディ	驚き2						うーん、差出人とか書いてないね、\n誰かのイタズラかな？
+	ディーア	怪しい2						魔界じゃ珍しくもないけど……\nとりあえず開けてみるか
+	リディ	悔しい2						……危なくない？\nなんか、変な手紙とか……
+	ディーア	通常2						魔力は感じないし、多分大丈夫だ\n開けた途端に酒場が吹っ飛ぶ\nようなことはないよ
+	リディ	驚き2						ええっ!?ほ、ほんとに!?\nほんとに大丈夫!?
+	ディーア	笑い2						よっと、なになに……？
+	リディ	悔しい2						わああ！開けちゃったぁ!!\n……何も起きない？
+	リディ	怒り2						はぁぁ、よかったぁ……\nもう、びっくりさせないでよ！
+	ディーア	驚き2						…………
+	リディ	驚き2						ふぇ？\nマスター、どうしたの？
+	ディーア	悔しい2						……この手紙、任務の依頼だ\n内容は……
+	ディーア							『勇リオハルト学園に潜入して、\n極秘裏に討滅作戦を開始する』
+	リディ	驚き2						討滅作戦……？
+	ディーア	怒り2						『霊獣モデュレイト=エクスを\n討滅せよ』
+FadeOut	black					.1
+StopBgm						1
+CharacterOff
+Se	シナリオスタート
+	　　　　　　　　　　
+Bg	イベントスチル22301
+FadeIn	black					1
+Wait						3
+FadeOut	black					1
+CharacterOff
+Bgm	作戦会議
+Bg	教会前
+FadeIn	black					.5
+	　　　　　　　　　　							\n<dash=2>1時間前
+	　　　　　　　　　　							\n勇リオハルト学園 - 正門前
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							ここが勇リオハルト学園……\nE.D.E.N.の勇者学校か
+	リディ	照れ2						すごーい、広い！\n広いよ、マスター！
+	ディーア	怪しい2						こらこら、あんまりはしゃぐなよ\n今回は隠密に潜入しないと\nいけない作戦なんだから…
+	リディ	笑い2						はーい♪
+	ディーア	怪しい2						それにしても、静かだな……\n本当に討滅作戦を展開する程の\n敵がここにいるのか？
+	リディ	通常2						外から見ると、普通の平和な\n学校だよね？
+	リディ	驚き2						あっ、ねぇマスター！\n誰かこっちに来るよ！
+	ディーア	怒り2						ヤバい、隠れなきゃ<dash=2>！
+CharacterOff
+	先生							おい、キミたち！
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	リディ							ひゃあ！バレた！
+	ディーア							チッ、幸先が悪いな…！
+CharacterOff
+	先生							何してるんだ、遅刻だぞ遅刻！
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							へ？
+	リディ							ち、遅刻？
+CharacterOff
+	先生		2_3					何を呆けているんだ、\n早く教室に行きなさい！
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	驚き2	2_2
+	ディーア	汗2						あっ、は、はーい！
+	リディ	驚き2						ねえ、もしかしてバレてない？
+	ディーア	怪しい2						かもな…それか、依頼人が\n手を回してくれていたのかも
+	ディーア	怒り2						それにしても、\nこんな学園で霊獣の討滅か…
+	ディーア	悔しい2						この根回しといい、内容といい……\n相手はもしかしたら\nそこそこ大きな組織かもな
+CharacterOff
+	先生		2_3					こら、いつまでそこにいるんだ！
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							あっ、今いきまーす！
+	リディ							ごめんなさーいっ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+Bg	教会内部
+ImageEffectOff	SpriteCamera	Sepia
+Bgm	ガヤA_BGM
+	　　　　　　　　　　
+Wait						.5
+FadeIn	black					.5
+								\n勇リオハルト学園 - 第245-B教室
+CharacterOff
+	勇者カーセム	大	2_3_y					遅かったじゃないか、<param=name>
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア	本気2						お前……!?
+	リディ	驚き2						あれ、どこかで見覚えが……
+	ディーア	悔しい2						クレイドール事件の時に、\n遺跡の中に居た奴だ……
+	リディ	驚き2						ああ、あの時の……
+	リディ	悲しい2						でもあの人は確か……
+	ディーア	驚き2						あれ、オレ名前教えたっけ？
+CharacterOff
+	勇者カーセム	大	2_3_y					何言ってるんだ？\n<param=name>だろ、\n寝ぼけてるのか？
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	悔しい2	2_2
+	ディーア							……どう、なっているんだ？
+	リディ							ゆ、夢でも見てるのかな……？
+CharacterOff
+	勇者カーセム	大	2_3_y					どうした、<param=name>？\nほら、次の授業に行くぞ
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	悔しい2	2_2
+	ディーア							あ、ああ……\n君は確か……カーセム？
+CharacterOff
+	勇者カーセム	大	2_3_y					どうしたんだ、急にそんな\n他人行儀になって……\nほら、もう授業始まるぞ
+CharacterOff
+	ディーア	あはは2	1_2
+	リディ	悔しい2	2_2
+	ディーア							あ、ああ…えっと、\n次の授業はなんだっけ？
+CharacterOff
+	勇者カーセム	大	2_3_y					次は模擬戦闘訓練だ、忘れたのか？\n今日は負けないからな！
+	勇者カーセム	大						先行ってるぜ！逃げんなよ？
+Se	走る
+Tween	勇者カーセム	MoveTo	x=700
+CharacterOff	勇者カーセム
+	ディーア	驚き2						あっ、カーセム、教室の場所……！
+CharacterOff
+	勇者ニテ	大	2_3_y					B棟地下室の闘技場だぜ！\nなあ、お前本当にどうしたんだ？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							お前……！無事だったのか!?
+CharacterOff
+	勇者ニテ	大	2_3_y					へん！この勇者ニテ様には\n模擬戦の傷なんて……いてて
+CharacterOff
+	ディーア	怪しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							……模擬戦？
+CharacterOff
+	勇者ニテ	大	2_3_y					昨日お前にやられたやつだよ！\nでも、手加減はいらないからな！\n今日も全力で来いよ！
+	勇者ニテ	大						おっと、早く行かないとブラム先生\nに怒られる！
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア	驚き2						ブラム先生……？\nって、まさか……
+	リディ	悔しい2						ねえマスター、どうなってるの……？
+	ディーア	悔しい2						オレにもわからない……
+	ディーア	通常2						でも、霊獣モデュレイト=エクスを\n見つけるには、この状況は\n都合がいいかもしれない
+	ディーア	通常2						とりあえず、彼らに合わせておこう
+	リディ	通常2						うん、わかった！
+	ディーア	怒り2						リディ、絶対に\nオレの側を離れるなよ
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+Bgm	緊迫
+Bg	魔導コロシアム
+Wait						.5
+	　　　　　　　　　　
+FadeIn	black					.5
+	　　　　　　　　　　							\n勇リオハルト学園 - B棟地下闘技場
+	ディーア	驚き2	2_2
+	ブラム		1_2					揃ったな、お前たち
+	ディーア							ブラムさん<dash=2>!?
+	ブラム							どうした、何を驚いている？\nオレの顔になにかついているか
+	ディーア	悔しい2						いえ……
+CharacterOff	ブラム
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2					な、なんで太陽聖域がここに…!?
+	ディーア	怪しい2						わからない……けど、\n教師って言ってたよな……
+CharacterOff
+	ブラム		2_3					さて、今回も二つ上の学年から\n指導役が付くことになる
+CharacterOff
+	勇者キート	名前のみ	2_3					俺はキート、今回の指導役だ
+CharacterOff
+	ディーア	怪しい2	2_2
+	勇者カーセム	大	1_2_y
+	ディーア							なあ、模擬戦闘って\n上の学年も参加するのか？
+	勇者カーセム	大						流石に参加はしないだろ、\n向こうも授業だよ\n下っ端を束ねるための練習さ
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	笑い2	2_2
+	ディーア							なるほど……
+	リディ							すごい、本当に学校って感じ！
+CharacterOff
+	勇者キート	名前のみ	2_3					そこ、俺が話している間に喋るとは\nどういうつもりだ？
+CharacterOff
+	ディーア	驚き2	2_3					へ？オレ？
+CharacterOff
+	勇者キート	名前のみ	2_3					俺の手元に魔剣があれば、\n貴様の首は飛んでいたぞ
+CharacterOff
+	ディーア	汗2	2_3					はぁ……すみません
+CharacterOff
+	勇者キート	名前のみ	2_3					<param=name>、立て
+CharacterOff
+	ディーア	驚き2	2_3					は、はい
+CharacterOff
+	ブラム		1_3
+	勇者キート	名前のみ	2_3					カリキュラム変更だ、\n本日は一対多の模擬戦闘訓練を行う
+	勇者ノミヤ	大	3_3_y
+Tween	勇者ノミヤ	RotateTo	y=180 time=0
+	勇者ノミヤ	大	3_3_y					待ってください、そんな急な変更…！
+	勇者キート	名前のみ						先輩の指示には、従うものだぞ？
+	勇者ノミヤ	大						ブラム先生！
+	ブラム							今日の指導役はキートだ\n判断は全て委ねる
+	勇者ノミヤ	大						…………ッ！
+	勇者キート	名前のみ						アテック、ザサ、ギリルム\n相手をしてやれ
+CharacterOff
+	勇者ギブル	大	1_3_by
+	男勇者	大	3_3_by
+Tween	男勇者	RotateTo	y=180 time=0				NoWait
+	勇者ニテ	大	2_2_y
+Tween	勇者ニテ	RotateTo	y=180 time=0
+	勇者ノミヤ	大	1_2_y
+	勇者ノミヤ	大						<param=name>、\n無理しなくていいんだぞ
+	勇者ニテ	大						こいつなら大丈夫だろ
+	勇者ノミヤ	大						ニテ……！
+	勇者ニテ	大						まあ見てなって
+FadeOut	black					.5
+CharacterOff
+Bgm	勇者バトル					2
+	勇者ザサ	大	1_3_y
+	勇者ギリルム	大	3_3_y
+	勇者アテック	大	2_3_y
+FadeIn	black					.5
+	勇者アテック	大						お前のことは前から\n気に食わなかったんだ、\nいい機会をもらったぜ
+CharacterOff
+	ディーア	悔しい2	2_3					……奇遇だな、\nオレもお前のことは苦手だよ
+CharacterOff
+	勇者ギリルム	大	3_3_y
+	勇者アテック	大	2_3_y
+	勇者ザサ	大	1_3_y
+	勇者ザサ	大						ここなら多少怪我したって\n問題ないからな、覚悟しとけよ？
+	勇者ギリルム	大						ギブアップは、認めないヨ？
+CharacterOff
+	勇者キート	名前のみ	2_3					では、第一戦目<dash=2><ruby=はじめ>開始</ruby>！
+If	isdebug==true
+CharacterOff
+Jump	*E_223_02
+EndIf
+EndScenario
+
+# E_223_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="弐話"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bg	市街地C
+FadeIn	black					.1
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	black					.1
+Wait						1
+FadeIn	black					.1
+Bg	市街地C
+Bgm	台風_BGM
+	　　　　　　　　　　							\n勇リオハルト学園 - 中庭
+	ディーア	悔しい2	2_3					……………………はぁ
+CharacterOff
+	ライオンハート		2_3					なーーーにしてんのっ！
+Bgm	平和
+CharacterOff
+	ディーア	怪しい2	2_3					ん……？
+CharacterOff
+	ライオンハート		2_3					やっほ、お兄ちゃん！
+CharacterOff
+	ディーア	驚き2	2_3					……魔剣、ライオンハート
+CharacterOff
+	ライオンハート		2_3					サボり？\nお兄ちゃん悪い人だー！
+	ライオンハート							せんにゅー作戦？\nとかなんとかで目立たない方が\n良いんじゃなかったの？
+CharacterOff
+	ディーア	汗2	2_3					居なければ目立たないだろ
+CharacterOff
+	ライオンハート		2_3					余計目立つよ！
+	ライオンハート							もう、別に逃げることないのに\nさっきの模擬戦、あれは\n絶対あの子たちが悪かったよ
+CharacterOff
+	ディーア	汗2	2_3					だとしても、ちょっと\nやりすぎちゃったしな……
+CharacterOff
+	ライオンハート	破損1	2_3					へぇー、戻る勇気がないんだ？\nいくじなしー！
+CharacterOff
+	ディーア	怪しい2	2_3					別にそういうわけじゃないさ
+	ディーア	通常2						まあとりあえず座りなよ、\n風が気持ちいい
+CharacterOff
+	ライオンハート		2_3					隣いいの!?やったぁー♪
+CharacterOff
+	ライオンハート		1_2_b
+	ディーア	通常2	2_2
+	ライオンハート							ところで、お兄ちゃんの\n"探し物"は見つかったの？
+	ディーア	怪しい2						うーん、見つかったような\n見つかってないような……
+	ライオンハート	破損1						どっちだよぅ
+	ディーア	通常2						それらしき気配は見つけたけどな\nまずは怪しまれないように\n調査するところからだ
+	ライオンハート							怪しまれないようにって、\n誰に？
+	ディーア	悔しい2						今回の黒幕……ってところかな\nオレも詳しくは知らないんだ
+	ライオンハート							お兄ちゃんはなんで\nそんなことしてるの？
+	ディーア	通常2						依頼があったんだ\nこの学園に起きる事件を\n未然に防いで欲しいんだって
+	ライオンハート							事件？\nそんなの起きるの？
+	ディーア	汗2						さあ、でも変な気配はずっと\nあるんだ\n何か、歪な魔力が……
+	ディーア	悔しい2						多分、この学園のどこかに\n潜んでいるんだと思う
+	ライオンハート	破損1						そっかぁ……\nあんまりこの学園でそういうの\nしないでほしいんだけどなぁ
+	ライオンハート	通常						ていうかその依頼の話、\n私に言っちゃっていいの？
+	ディーア	怪しい2						……他の人に言う気か？
+	ライオンハート							にははー♪言っちゃおうかなー♪
+	ディーア	怪しい2						そうかぁ……それじゃあもう\nここには居られなくなるな
+	ライオンハート	破損1						ええーっ！それはやだー！
+	ディーア	通常2						まあ、そこらへんは\n別に心配してないけどな
+	ライオンハート							じゃあ、それが見つかるまでは\nここには居られるんだねっ！
+	ディーア	あはは2						オレはそろそろ帰りたいけどな
+	ライオンハート	破損1						えーっ！まだここに来てから\n全然経ってないじゃん！
+	ディーア	汗2						そりゃ君からしたらそうだけどさ
+	ライオンハート							卒業まで居ればいいのに\nそしたら…
+	ディーア	怪しい2						そのアルバムに名前が載る？
+	ライオンハート							そう！\nお兄ちゃんもこのアルバムに\n入れてあげるっ！
+	ライオンハート							すごいんだからね！\n今までの卒業生、全員\n載ってるんだから！
+	ディーア	怪しい2						それ、そんなにすごいものなのか？
+	ライオンハート	破損1						あーっ、信じてない！\nほんとにすごいんだよ！\n私の宝物なんだから♪
+	ライオンハート	通常						それに、もうすぐあの日だから\nそこまでは居てもらわないと♪
+	ディーア	驚き2						あの日？
+	ライオンハート	破損1						あーっ、忘れたフリしてる！\nずるーい！
+	ディーア	汗2						いや、本当にわからないんだけど…
+	ライオンハート	通常						ホワイトデーだよ、ホワイトデー！\nふふん、お兄ちゃんがどんなもの\nくれるのか楽しみだなぁ♪
+	ディーア	驚き2						ホワイトデー!?\nバレンタインに何も\nもらってないはずだけど!?
+	ライオンハート							細かいことは気にしないでさぁ♪\nそーだ、アップルパイ作ってよ！\n私あれ大好きなんだ！
+	ディーア	汗2						アップルパイなんて\n作ったことないぞ？
+	ライオンハート							じゃあ私が第一号だ！\nにははっ♪変な味だったら\n指さして笑ってあげよっと
+	ディーア	怪しい2						笑うんだったら作りません
+	ライオンハート							えー！いいじゃーん！\nあ、そうだ！\nじゃあ私が作ってあげる♪
+	ディーア	驚き2						君が？料理を？
+	ライオンハート	破損1						あ～、疑ってるなぁ？\nすっごい美味しいんだからぁ！
+	ディーア	怪しい2						ほんとかなぁ……
+	ライオンハート	破損1						もー怒った！\nお兄ちゃんに絶対美味しいって\n言わせるから！
+	ディーア	あはは2						あはは、楽しみにしておくよ
+CharacterOff
+	勇者カーセム	大	1_2_y					あっ、いた！\nおーい、<param=name>！
+CharacterOff
+	ライオンハート	破損1	1_2_b
+	ディーア	悔しい2	2_2
+	ディーア							っと、サボりがバレたか…
+	ライオンハート							そりゃあ、毎回中庭にいたらねー
+CharacterOff
+	ディーア	通常2	2_2
+	勇者カーセム	大	1_2_y					ブラム先生、静かに怒ってたぞ？\n次は必ず首根っこ捕まえて\n連れてこいだってさ
+	ディーア	汗2						厳しいなぁ…
+	勇者カーセム	大						甘いほうさ、転入生だからね
+	ディーア	通常2						次の授業は？
+	勇者カーセム	大						後輩と組んで討伐訓練、\n3時間コース
+	ディーア	汗2						うっわぁ……
+CharacterOff
+	ディーア	汗2	2_2
+	ライオンハート		1_2_b
+	ライオンハート							行かなきゃだよ、お兄ちゃん！
+	ディーア	汗2						君は本当に好きだな、訓練とか\n演習とか……
+CharacterOff
+	勇者カーセム	大	1_2_y					何言ってんだ、\n俺だって好きじゃないよ
+CharacterOff
+	ライオンハート		1_2_b
+	ディーア	驚き2	2_2
+	ディーア							いや、お前じゃなくてさ
+	ライオンハート							私は大好き！\n付いていっていいよね！\nダメって言われても行くけど！
+	ディーア	汗2						まあいいか……\n怒られないうちに行くとしよう
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+Bg	森林A
+	　　　　　　　　　　
+Wait						.5
+FadeIn	black					.5
+	　　　　　　　　　　							\n勇リオハルト学園 - 演習林
+CharacterOff
+	ライオンハート		1_2_b
+	ディーア	怪しい2	2_2
+	ディーア	怪しい2						それにしても、\nなんで君はこういうのに\n付いて来たがるんだ？
+	ライオンハート							んー？\nそれはねぇ、勇気が大好きだから！
+	ディーア	驚き2						勇気が大好き？
+	ライオンハート							うんっ、みんなの勇気が大好き！
+	ライオンハート							それを見るのも好きだし、\n誰かの勇気を奮い立たせるのも好き\nだから私、この学園にいるんだよ♪
+	ディーア	怪しい2						勇気かぁ…
+CharacterOff
+	勇者ナルティズ	大	2_2_y
+	勇者ノミヤ	大	1_2_y
+	勇者ノミヤ	大						勇者になる以上、勇気は何より\n大切なものだぞ
+	勇者ナルティズ	大						そうですよ！
+CharacterOff
+	ディーア	驚き2	2_3					おぉ、ナルティズ……ノミヤ……
+CharacterOff
+	勇者ノミヤ	大	1_2_y					勇気がなければ、正しく在ることも\n勇敢であることもできない
+	勇者ノミヤ	大						人々を救い正義を行う勇者にとって\nそれは致命的だからな
+CharacterOff
+	勇者ギリルム	大	2_3_y					ふん、勇気だなんてくだらないネ\nそういうのは、弱いやつが\n夢を見る時に使う言葉だヨ
+CharacterOff
+	ディーア	悔しい2	2_3					…………！
+CharacterOff
+	ディーア	怪しい2	2_2
+	ライオンハート		1_2_b
+	ライオンハート							にしし、別に今のは\n本心じゃないと思うよ
+	ライオンハート							この子にもちゃんと\n立派な勇気はあるもん♪
+CharacterOff
+	勇者ノミヤ	大	2_2_y
+	ディーア	怪しい2	1_2					オレ、いざという時に\n背中を預けるなら\nお前みたいなやつがいいよ
+	勇者ノミヤ	大						俺もあいつはごめんだな
+CharacterOff
+	勇者カーセム	大	1_2_y
+	勇者カーセム	大						さて、魔物の出現予測地点は\nこのあたりだけど……
+CharacterOff
+	魔物		2_3					グオオオオオッ!!
+CharacterOff
+	勇者ギリルム	大	1_2_y
+Tween	勇者ギリルム	RotateTo	y=180 time=0
+	勇者ニテ	大	3_3_y
+	勇者カーセム	大	2_3_y
+	勇者カーセム	大						っと、散開！\n俺の作戦通りに行くぞ！
+Tween	勇者カーセム	RotateTo	y=180
+	勇者カーセム	大						ノミヤとニテは左、ギリルムと<param=name>は右だ！
+	勇者ギリルム	大						チッ……面倒くさいけど\n仕方ないネ……
+Se	走る
+Tween	勇者ギリルム	MoveTo	x=-700
+	勇者ニテ	大						俺も勇者らしく\n正面から行きたかった！
+Se	走る
+Tween	勇者ニテ	MoveTo	x=700
+CharacterOff
+	勇者ナルティズ	大	1_2_y
+Tween	勇者ナルティズ	RotateTo	y=180 time=0
+	勇者カーセム	大	2_2_y
+	勇者カーセム	大	2_2_y					ナルティズは俺と正面で陽動だ！
+	勇者ナルティズ	大						はい、先輩！
+	勇者カーセム	大						よし、行くぞ！
+CharacterOff
+	ライオンハート		1_2_b
+	ディーア	怒り2	2_2
+	ディーア							おうっ！
+	ライオンハート							おーっ♪
+If	isdebug==true
+CharacterOff
+Jump	*E_223_03
+EndIf
+EndScenario
+
+# E_223_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="3話"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	平和
+Bg	酒場1F
+FadeIn	white					.5
+								\n宗教国家エデン - 宿屋
+CharacterOff
+	ディーア	汗2	1_2
+	リディ	悲しい2	2_2
+	ディーア							疲れたぁ……！
+	リディ							リディも疲れたぁ……
+	ディーア	怪しい2						潜入っていったって、\nわざわざ授業とか訓練とか\n受ける必要あるのかなあ？
+	リディ	悔しい2						でも、怪しまれるとよくないし……
+	ディーア	怪しい2						それもそうか……
+	ディーア	通常2						さて、とりあえず明日は\n霊獣を探しにいかないとな
+	リディ	通常2						うん、そだね……
+	リディ	悲しい2						ふぁ……おやすみ……
+FadeOut	black					1
+CharacterOff
+	　　　　　　　　　　
+Bg	魔導コロシアム
+Bgm	勇者バトル
+Wait						2
+FadeIn	black					1
+	　　　　　　　　　　							\n勇リオハルト学園 - E棟地下闘技場
+	勇者カーセム	大	3_3_y
+Tween	勇者カーセム	RotateTo	y=180 time=0
+	勇者ニテ	大	1_3_y
+	ディーア	怒り2	2_3
+	ディーア	怒り2						ふっ！
+FadeOut	white					.1
+Se	斬1
+FadeIn	white					.1
+	勇者ニテ	大						ぐっ
+CharacterOff	勇者ニテ					1
+	ディーア	本気2	2_3					せいっ!!
+FadeOut	white					.1
+Se	斬2
+FadeIn	white					.1
+	勇者カーセム	大						ぐわっ！
+CharacterOff	勇者カーセム					.5
+	ディーア	本気2	2_3					次ッ!!
+FadeOut	black					.5
+CharacterOff
+	リディ	怒り2	2_2
+	ディーア	笑い2	1_2
+Wait						.5
+Bgm	平和
+FadeIn	black					.5
+	ディーア							よし、また全勝！
+	リディ							もう、今日はちゃんと探すって\n言ってたのに！
+	ディーア	汗2						いやぁ、人とこうして手合わせする\n機会ってなかなかないから、つい…
+CharacterOff
+	ディーア	驚き2	2_2
+	勇者ノミヤ	大	1_2_y
+	勇者ノミヤ	大						やっぱり強いな、\n<param=name>
+	勇者ノミヤ	大						どんな訓練を積んだら、そんなに\n強くなれるんだ？
+	ディーア	驚き2						ノミヤ……
+	ディーア	怒り2						お前は、強くなりたいのか？
+Bgm	凱旋
+	勇者ノミヤ	大						もちろんだ！\n……俺には夢があってな
+	ディーア	驚き2						夢？
+	勇者ノミヤ	大						ああ、俺は正義の勇者になりたい
+	ディーア	怪しい2						……正義の勇者、か
+	勇者ノミヤ	大						ああ、どんな絶望からでも\n希望を見いだせるような、\n強くて正しい正義の勇者だ
+	勇者ノミヤ	大						そうなりたくて、\n俺はこの学園に入ったのさ
+	ディーア	悔しい2						……そうか
+	勇者ノミヤ	大						……笑わないんだな、\n<param=name>は
+	ディーア	驚き2						え？
+	勇者ノミヤ	大						いつもは笑いながら、\n冗談交じりに話すんだが……\nこんなに風に喋ったのは初めてさ
+	ディーア	悔しい2						……笑えるわけないさ\nそれに、他人が\n笑っていいものでもないよ
+	ディーア	怒り2						……それが、お前の\n進みたかった道なんだな
+	勇者ノミヤ	大						『進みたい道』だ、\n端からできないように言うなよ
+	ディーア	怒り2						……そうだったな、悪い
+	勇者ノミヤ	大						さ、次の授業の準備をしよう！\nお前の強さの秘訣、\n今度教えてくれよ！
+Se	走る
+Tween	勇者ノミヤ	MoveTo	x=700
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	リディ							……マスター
+	ディーア							うん、わかってる
+	ディーア							何が起きてるのかはわからないけど\n……あれはオレたちの知っている\nノミヤじゃない
+	ディーア	怒り2						アテックもザサもギリルムも、\nあの時とは違うんだ
+	ディーア	汗2						……なんでオレを目の敵に\nするのかは、わからないけど
+	リディ	驚き2						でも、幻とかでもなさそうだよ？
+	ディーア	怪しい2						そうだな…変な魔力はずっと\n感じてるけど、結界でもなさそうだ
+	リディ	照れ2						別の世界に迷い込んだ！なーんて…
+	ディーア	怒り2						……あながち間違いじゃないかもな
+	リディ	驚き2						ほぇ？どういうこと？
+	ディーア	怒り2						いや……なんでもない
+	勇者ノミヤ	大	画面外_右					おーい、<param=name>！\n早く次の授業行くぞ！
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							すぐ行く！先に行っててくれ！
+	ディーア	通常2						……さて、ノミヤには悪いけど\nそろそろ霊獣モデュレイト=エクスを\n探しに行くか
+	リディ	笑い2						うんっ！\nでも、どこを探せばいいのかな…
+	ディーア	通常2						確か、中庭の隅に地下に降りる\n隠し階段があった\n多分そこから地下に行くんだろう
+	リディ	驚き2						ほんと!?\nいつの間に見つけたの？
+	ディーア	通常2						授業の後に偶然見つけたんだ\n微かに感じる異様な魔力の跡を\n辿ってたら、そこにたどり着いた
+	リディ	悔しい2						じゃあ、そこに\n霊獣モデュレイト=エクスが…！
+	ディーア	悔しい2						かもしれないな、行ってみよう！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+StopBgm	　　　　　　　　　　
+Bg	宝石鉱山
+Bgm	絶望
+FadeIn	black					.5
+	　　　　　　　　　　							\n勇リオハルト学園 - 地下封鎖区画
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	リディ							地下にこんな場所が……
+	ディーア	怪しい2						長いこと使われていない\nみたいだな
+	リディ	悔しい2						な、なんか薄気味悪い…
+CharacterOff
+	勇者カーセム	大	2_3_y					何やってるんだ、\n<param=name>
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア	悔しい2						ッ!?
+CharacterOff
+	勇者カーセム	大	2_3_y					授業に行こうぜ
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア	驚き2						お前……なんでここに
+CharacterOff
+	勇者カーセム	大	2_3_y
+	勇者ニテ	大	3_3_y
+	勇者ノミヤ	大	1_3_y
+	勇者ノミヤ	大						授業に行こうぜ
+	勇者カーセム	大						ここに来ちゃダメだよ
+	勇者ニテ	大						ちゃんと授業に行かなきゃ
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	リディ							マスター、なんか怖い……
+CharacterOff
+Param	character_grayout=false
+	勇者カーセム	大	2_3_y
+	勇者ニテ	大	3_3_y
+	勇者ノミヤ	大	1_3_y
+Se	闇1
+	幻想体エフェクト		エフェクトBG			3
+	勇者ノミヤ	大						授業に戻ロう
+	勇者カーセム	大						戻ろウ
+	勇者ニテ	大						……カエレ
+	　　　　　　　　　　
+Wait						3
+CharacterOff
+Bgm	緊迫
+Param	character_grayout=true
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						<dash=2>ッ!?
+	ディーア							幻想体、だと……!?
+	リディ	驚き2						て、敵!?
+	ディーア							気付けなかった……!?\n普通の幻想体ならすぐに\nわかるはずなのに……！
+	リディ	悔しい2						も、もしかして今まで会った\n人たちも幻想体だったの……!?
+	ディーア							わからない……\nだけど、幻想体にしては\nあまりにも精巧すぎる……！
+	リディ	驚き2						ど、どういうこと？\nでも幻想体なんだよね？
+	ディーア	悔しい2						あれくらい精巧な幻想体を作るのも\n理論上は可能だけど…
+	ディーア							細胞レベルでの再現……それには\n膨大な魔力が必要なんだ
+	ディーア							とりあえず形を整えただけでも\n十分に幻想体として機能はするから\nそんなことをする必要はないはず…
+CharacterOff
+Param	character_grayout=false
+	勇者ノミヤ	大	1_3_y
+	勇者カーセム	大	2_3_y
+	勇者ニテ	大	3_3_y
+	幻想体エフェクト		エフェクトBG
+	勇者ノミヤ	大						モドレ……
+	勇者カーセム	大						クル……ナ……
+	勇者ニテ	大						カエレ……
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	リディ							か、考えてる場合じゃないよ\nマスター！
+	ディーア							くっ……\nこいつらをなんとかするのが先か！\n<ruby=アンロック>魔剣解放</ruby><dash=2>!!
+If	isdebug==true
+CharacterOff
+Jump	*E_223_04
+EndIf
+EndScenario
+
+# E_223_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="肆話"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+	　　　　　　　　　　
+FadeIn	black					.1
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	black					.1
+Bg	学校図書館
+Bgm	絶望
+Wait						1
+FadeIn	black					.1
+	　　　　　　　　　　							\n勇リオハルト学園 - 資料庫
+CharacterOff
+	火天のブラム		2_3					順調そうだな、魔剣使い
+CharacterOff
+	ディーア	怒り2	2_3					……そろそろ目的を\n説明してくれないか？
+CharacterOff
+	火天のブラム		2_3					魔界に複数存在するエクスカリバーの\n贋作のうち、勇リオハルト学園に\n眠る失敗作……
+	火天のブラム							それの回収、不可能ならば破壊\nそれが潜入作戦の目的だ
+CharacterOff
+	ディーア	怒り2	2_3					それを使って、何をするつもりだ？
+CharacterOff
+	火天のブラム		2_3					それ以上は依頼に関係のないことだ
+CharacterOff
+	ディーア	悔しい2	2_3					……約束は守って\nもらえるんだろうな
+CharacterOff
+	火天のブラム		2_3					当然だ
+	火天のブラム							……それから、明日の午前中に\n学園の地下へ潜れ\n道は魔力を辿ればわかるはずだ
+	火天のブラム							この作戦は、アークの望みでもある\n頼んだぞ、魔鍵使い
+CharacterOff
+	ディーア	怒り2	2_3					…………
+Se	走る
+Tween	ディーア	MoveTo	x=700 time=2
+CharacterOff
+	火天のブラム		1_2
+	？？？？							……いいんすか？\nアークはそんなこと言ってないでしょ
+	火天のブラム							お前には関係のないことだ
+	木天のツヴァイク		2_2
+Tween	木天のツヴァイク	RotateTo	y=180 time=0
+	木天のツヴァイク							そっすか
+	木天のツヴァイク							本当に良かったんすか、\nこんなことしちゃって
+	火天のブラム							……他にも手はあったんだがな\n今回は奴を信じてみるとしよう
+	木天のツヴァイク							……そんなもんすかね
+Tween	木天のツヴァイク	RotateTo	y=0
+Tween	木天のツヴァイク	MoveTo	x=700 time=2
+CharacterOff	木天のツヴァイク
+	火天のブラム		2_3					ふぅ……
+	火天のブラム							シドウ……お前は本当にそれで\nいいのか？
+FadeOut	black					1
+CharacterOff
+Bg	市街地C
+Bgm	平和
+	　　　　　　　　　　
+Wait						1
+FadeIn	black					.1
+	　　　　　　　　　　							\n勇リオハルト学園 - 中庭
+	ライオンハート		2_3					お兄ちゃん!!
+CharacterOff
+	ライオンハート		1_2_b
+	ディーア	驚き2	2_2
+	ディーア							……ライオンハート
+	ライオンハート							なにしてんのー？\n今日は朝早いねっ！
+	ディーア	あはは2						ちょっと用事があってね
+	ライオンハート							例の探しもの？
+	ディーア	通常2						ああ、そろそろ見つかりそうでさ
+	ライオンハート							ふぅーん、そうなんだ…
+	ライオンハート							ねーねー、どこにあるの？\n私もついてく！
+	ディーア	汗2						いや、オレ一人で行くよ\n危ないかもしれないしな
+	ライオンハート							えーーー！\nやだーーー私も行くーー!!
+	ディーア	怪しい2						そんなこと言われても……
+	ライオンハート	破損1						行くったら行くーー！
+	ディーア	怪しい2						……仕方ないな
+	ライオンハート							ほんと!?やたーーっ！
+	ライオンハート	破損1						あっ、ちょ、お兄ちゃん、\n襟引っ張らないで！やーー!!
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff
+Bg	宝石鉱山
+Bgm	平和
+StopBgm	　　　　　　　　　　					20
+Wait						1
+FadeIn	black					.5
+	　　　　　　　　　　							\n勇リオハルト学園 - 地下封鎖区画
+CharacterOff
+	ライオンハート		1_2_b
+	ディーア	驚き2	2_2
+	ライオンハート	破損1						んしょ……んしょ……\nハシゴばっかりじゃん！\n階段とかないのかな……
+	ディーア	驚き2						そのアルバム、ずっと持ってると\n邪魔じゃないか？
+	ライオンハート							邪魔じゃないよ！\n私の宝物だもん！えへへ！
+	ライオンハート							勇気あふれる勇者になって、\nこの学園を卒業した人たちが\nみんな載ってるからね！
+	ライオンハート							私もたまに勇気もらったりするの！\nまあ私の方が誰より\n勇気あるけどね！
+	ディーア	汗2						まあ、そこらの勇者には\n負けなさそうだよな
+	ライオンハート							そりゃもちろん！\nライオンハートですので！にはは♪
+	ライオンハート	破損1						…………
+	ライオンハート	通常						……ねえ、お兄ちゃん
+	ディーア	驚き2						ん？
+	ライオンハート	破損1						事件を解決したら、お兄ちゃんは\n勇者学園にはもう\n来なくなるんだよね
+	ディーア	通常2						……そうなるな
+	ライオンハート							じゃあさ、たまに遊びに来てよ\n私のアルバムに、お兄ちゃんのこと\n書いておいてあげるからさ
+	ディーア	怪しい2						そんなことしていいのか？
+	ライオンハート							大丈夫！最後の方のメモ欄の\n端っことかだから！
+	ディーア	汗2						いいよ別に…
+	ライオンハート							むー、光栄なことなんだぞー！
+	ディーア	汗2						はいはい……じゃあ、端っこにね
+	ライオンハート							にひひー♪色々書いちゃおーっと
+	ディーア	怪しい2						変なこと書いたらライオンハートの\n顔にも落書きするからな
+	ライオンハート	破損1						ふぇっ!?や、やーーだーーー！\n書かない！変なこと書かない！\nだ、だいじょーぶだから！
+	ディーア	あはは2						あはは……
+	ディーア	悔しい2						……
+	ライオンハート	破損1						次で最下層、みたいだね\nここが目的の場所なの？
+	ディーア	悔しい2						変だな、それにしては結界が\n薄すぎる……
+	ディーア							まるで壊してくれと\n言わんばかりに<dash=2>
+	ライオンハート	破損1						どーする？罠かもよ？
+	ディーア	怒り2						いや……突破する\nちょっと離れててくれよ<dash=2>
+FadeOut	black					.5
+Se	闇3
+Se	光3
+Se	ガードブレイク
+Se	火事
+Bg	遺跡C
+Wait						3
+Bgm	絶望					3
+FadeIn	black					1.5
+	ディーア	驚き2						ここが……\nブラムさんが言ってた場所……？
+FadeOut	black					.1
+CharacterOff
+	エクスカリバー？　　　　	武器状態	1_3
+	エクスカリバー？　	武器状態	2_4
+	エクスカリバー？　　	武器状態	3_4_b
+	エクスカリバー？　　　	武器状態	3_3
+Tween	エクスカリバー？　　　　	RotateTo	z=-20 time=0				NoWait
+Tween	エクスカリバー？　	RotateTo	z=15 time=0				NoWait
+Tween	エクスカリバー？　　	RotateTo	z=-6 time=0				NoWait
+Tween	エクスカリバー？　　　	RotateTo	z=10 time=0				NoWait
+	　　　　　　　　　　
+Wait						.5
+FadeIn	black					1
+Wait						2
+CharacterOff
+	ディーア	驚き2	2_3					これは……\n廃棄された魔剣……？
+CharacterOff
+	ライオンハート	破損1	2_3					この魔剣…なんとなく、\n汎用型エクスカリバーに似てない？
+CharacterOff
+	ディーア	怪しい2	2_3					言われてみれば、確かに\n似てるな…
+CharacterOff
+	ライオンハート	破損1	2_3					まさか……
+CharacterOff
+	ディーア	驚き2	2_3					ライオンハート？
+CharacterOff
+	エクスカリバー？　　　　	武器状態	1_3
+	エクスカリバー？　	武器状態	2_4
+	エクスカリバー？　　	武器状態	3_4_b
+	エクスカリバー？　　　	武器状態	3_3
+Tween	エクスカリバー？　　　　	RotateTo	z=-20 time=0				NoWait
+Tween	エクスカリバー？　	RotateTo	z=15 time=0				NoWait
+Tween	エクスカリバー？　　	RotateTo	z=-6 time=0				NoWait
+Tween	エクスカリバー？　　　	RotateTo	z=10 time=0				NoWait
+	エクスカリバー？	通常	2_3
+	エクスカリバー？							……そうはさせませんよ、ブラム
+CharacterOff
+	ディーア	驚き2	2_3					……うそ……だろ……？
+	ディーア	怒り2						あの魔剣は……!!
+CharacterOff
+	エクスカリバー？　　　　	武器状態	1_3
+	エクスカリバー？　	武器状態	2_4
+	エクスカリバー？　　	武器状態	3_4_b
+	エクスカリバー？　　　	武器状態	3_3
+Tween	エクスカリバー？　　　　	RotateTo	z=-20 time=0				NoWait
+Tween	エクスカリバー？　	RotateTo	z=15 time=0				NoWait
+Tween	エクスカリバー？　　	RotateTo	z=-6 time=0				NoWait
+Tween	エクスカリバー？　　　	RotateTo	z=10 time=0				NoWait
+	エクスカリバー？	通常	2_3
+	エクスカリバー？							…………
+CharacterOff	エクスカリバー？	通常				2
+	幻想体エフェクト		エフェクトBG			2
+Wait						2
+CharacterOff
+	ディーア	本気2	2_3					ちょ、待て……！
+CharacterOff
+	ライオンハート	破損1	2_3					まってお兄ちゃん、\n後ろ!!
+CharacterOff
+	ディーア	悔しい2	2_3					……ッ!?
+FadeOut	black					.1
+CharacterOff
+	エクスカリバー？　　　　	武器状態	1_3
+	エクスカリバー？　	武器状態	2_4
+	エクスカリバー？　　	武器状態	3_4_b
+	エクスカリバー？　　　	武器状態	3_3
+Tween	エクスカリバー？　　　　	RotateTo	z=-20 time=0				NoWait
+Tween	エクスカリバー？　	RotateTo	z=15 time=0				NoWait
+Tween	エクスカリバー？　　	RotateTo	z=-6 time=0				NoWait
+Tween	エクスカリバー？　　　	RotateTo	z=10 time=0				NoWait
+	幻想体エフェクト		エフェクトBG
+Shake	Graphics	x=5 y=5 time=3.5
+Se	火事
+FadeIn	black					.5
+Wait						2
+FadeOut	white					.5
+Se	光3
+CharacterOff
+	霊獣モデュレイト=エクス		2_3
+	オーラ青		エフェクト表
+CharacterOff	オーラ青					2
+Wait						.5
+Bgm	緊迫					3
+FadeIn	white					1
+	霊獣モデュレイト=エクス							<color=blue>CODE:WHITE-ALBUM<dash=2>起動</color>
+CharacterOff
+	ディーア	怒り2	2_3					何故ここに霊獣が……!?
+CharacterOff
+	ライオンハート	破損1	2_3					……やっぱり、このアルバムを\n消したいんだね、あなたは……
+CharacterOff
+	ディーア	悔しい2	2_3					それって、どういう…
+CharacterOff
+	霊獣モデュレイト=エクス		2_3					<color=blue>初期化………………実行</color>
+	スモーク		エフェクト表			1
+Se	闇1
+Wait						1
+CharacterOff	霊獣モデュレイト=エクス
+	ディーア	本気2	2_3					この魔力……マズい！
+FadeOut	black					.5
+CharacterOff
+Bg	教会内部
+	勇者ギブル	大	1_3_by
+	勇者ラノル	大	3_3_by
+Tween	勇者ラノル	RotateTo	y=180 time=0				Add
+	勇者ノミヤ	大	2_2_y
+Tween	勇者ノミヤ	RotateTo	y=180 time=0
+	勇者カーセム	大	1_2_y
+Wait						.5
+FadeIn	black					.5
+	勇者カーセム	大						なあ、ノミヤ…
+	勇者ノミヤ	大						ん？どうした？
+	勇者カーセム	大						そういえば、\nまた<param=name>が…
+	スモーク		エフェクト表			1
+Se	闇1
+Wait						1
+	勇者ノミヤ	大						な、なんだ!?
+	勇者ラノル	大						グッ……ああああ……
+CharacterOff	勇者ラノル					.5
+	勇者ギブル	大						魔力が……息が……！
+CharacterOff	勇者ギブル					.5
+Tween	勇者ノミヤ	RotateTo	y=0 time=0
+	勇者ノミヤ	大						おい、どうした！大丈夫か！
+Tween	勇者カーセム	RotateTo	y=180 time=0
+	勇者カーセム	大						な、何が起きてるんだ!?
+	勇者ノミヤ	大						おい、どうしたんだよ！\nしっかりしろ！
+	勇者カーセム	大						ダメだ、息をしてない……
+	勇者ノミヤ	大						クソ……みんなダメか……？
+	勇者カーセム	大						どこかに生存者はいないか!?
+FadeOut	black					.5
+	　　　　　　　　　　
+CharacterOff
+Bg	魔導コロシアム
+FadeIn	black					.5
+	勇者キート	名前のみ	2_3					次の演習は集団戦だ
+	勇者キート	名前のみ	2_3					六人一組でグループを……ん？
+	スモーク		エフェクト表			1
+Se	闇1
+Wait						1
+CharacterOff
+	勇者ノミヤ	大	画面外_右y
+Tween	勇者ノミヤ	RotateTo	y=180 time=0
+Se	走る
+Tween	勇者ノミヤ	MoveTo	x=-90
+	勇者カーセム	大	画面外_右y
+Tween	勇者カーセム	RotateTo	y=180 time=0				Add
+Se	走る
+Tween	勇者カーセム	MoveTo	x=90				NoWait
+	勇者ノミヤ	大	1_2_y
+Tween	勇者ノミヤ	RotateTo	y=180 time=0
+	勇者ノミヤ	大						みんな、ここは危険だ！\n早く逃げ<dash=2>
+CharacterOff
+	スモーク		エフェクト表
+	勇者ギブル	大	1_3_by
+	勇者アテック	大	2_4_y
+	勇者ザサ	大	3_4_y
+	男勇者	大	3_3_by
+Tween	勇者ザサ	RotateTo	y=180 time=0				NoWait
+Tween	男勇者	RotateTo	y=180 time=0				NoWait
+	勇者アテック	大	2_4_y
+	勇者アテック	大						ガッ……うあああ……
+CharacterOff	勇者アテック					.5
+	勇者ザサ	大						うぐぅっ……
+CharacterOff	勇者ザサ					.5
+CharacterOff	男勇者					.7
+CharacterOff	勇者ギブル					1.2
+	勇者キート	名前のみ	2_3					な、なんだこれは!?
+	勇者キート	名前のみ	2_3					ぐっ……あああああ！
+CharacterOff
+	スモーク		エフェクト表			1
+	勇者カーセム	大	2_2_y
+	勇者ノミヤ	大	1_2_y
+Tween	勇者ノミヤ	RotateTo	y=180 time=0				Add
+Tween	勇者カーセム	RotateTo	y=180 time=0
+	勇者カーセム	大						遅かった……!!
+	勇者ノミヤ	大						オレたち以外にはもう……
+	勇者カーセム	大						くそう……くそ……
+CharacterOff	勇者カーセム					1
+Tween	勇者ノミヤ	RotateTo	y=0 time=0
+	勇者ノミヤ	大						カーセム！しっかりしろ！\nぐっ……
+	勇者ノミヤ	大						こんなところで死ねるか……\nオレは……絶対に……
+	勇者ノミヤ	大						正義の……勇者に…………
+	勇者ノミヤ	大						死にたく……死にたくない……
+CharacterOff						2
+Wait						1
+FadeOut	black					.1
+CharacterOff
+StopBgm
+Bg	遺跡C
+	ライオンハート	破損2	2_3
+Wait						3
+FadeIn	black					3	NoWait 
+	ライオンハート	破損2						……い……ちゃん……<speed=1>　　</speed>	BrPage 
+FadeOut						.1
+Wait						1.9
+FadeIn						1
+	ライオンハート	破損2	2_3					……ちゃん、お兄ちゃん！
+CharacterOff
+	ディーア	悔しい2	2_3					ライオンハート……？
+CharacterOff
+	ライオンハート	破損2	2_3					よかった、生きてた……！
+CharacterOff
+	ディーア	悔しい2	2_3					何が……あった……？
+CharacterOff
+Bgm	絶望
+	ライオンハート	破損2	2_3					わかんない……あの霊獣が、\n何かしたみたい……
+CharacterOff
+	ディーア	悔しい2	2_3					体中の魔力がおかしくなってる…
+	ディーア							無理に魔力を使えば……\nぐっ……ああ……
+CharacterOff
+	ライオンハート	破損2	2_3					お兄ちゃん!!
+CharacterOff
+	ディーア	悔しい2	2_3					……ライオンハート、\n君はまだ戦えるか？
+CharacterOff
+	ライオンハート	破損2	2_3					無理だよ！お兄ちゃんが無理だよ！
+	ライオンハート							魔力の波が混乱してる…\n生きてるのが奇跡なくらいだよ！
+	ライオンハート							今だって、立ち上がるのが\nやっとなのに……！
+CharacterOff
+	ディーア	悔しい2	2_3					無理……？
+	ディーア							ライオンハートのくせに\n勝ち筋が見えてないのか？
+CharacterOff
+	ライオンハート	破損2	2_3					……っ
+CharacterOff
+	ディーア	怒り2	2_3					オレは勝ち筋が見えたぞ\n確かに独りじゃ無理かもしれないが\nお前がいれば……！
+CharacterOff
+Bgm	魔王バトル
+	ライオンハート		2_3					……！\nわかった、お兄ちゃん……\n無理は、しないでね
+CharacterOff
+	ディーア	悔しい2
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			1
+	オーラ青							魔核エーテライト認識\nコード：アンロック…否認、警告\nシステム：ブレイブソード…エラー
+Se	無
+Se	ボス殺
+	ディーア	悔しい2	2_3					ぐっ……ぁあ……ッ!!
+CharacterOff
+	ライオンハート	破損2	2_3					やっぱり無理だって！\nその体じゃ、きっともたないよ！
+CharacterOff
+	ディーア	悔しい2	2_3					それでも……\n可能性が……ゼロじゃないなら
+	ディーア							お前がいれば、絶対に\nできるはずだろ！
+	ディーア	本気2						魔力結晶体<dash=2>再構築ッ！
+	オーラ青							魔核エーテライト<ruby=リロード>再認識</ruby>\nコード：アンロック承認\nシステム：ブレイブソード展開
+	ディーア							<dash=2><ruby=アンロック>強制解放</ruby>ッ!!
+Se	光3
+FadeOut	white					2
+Param	character_grayout=true
+If	isdebug==true
+CharacterOff
+Jump	*E_223_05
+EndIf
+EndScenario
+
+# E_223_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="5話"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	凱旋
+Bg	遺跡C
+	ディーア	悔しい2	2_3
+FadeIn	white					.5
+	ディーア	悔しい2	2_3					はぁ……はぁ……勝った……
+CharacterOff
+	ライオンハート		2_3					やったぁーっ！\nやるじゃんお兄ちゃん！
+CharacterOff
+	ディーア	汗2	2_3					これで、なんとか一件落着か……
+StopBgm						2
+CharacterOff
+	ライオンハート		2_3					よかったぁ、もう一時は\nどうなるかと思ったよー
+CharacterOff
+	ディーア	汗2	2_3					…………
+CharacterOff
+	ライオンハート							上にいる勇者さんたちのことも\n気になるし、早く上に上がろっ！
+CharacterOff
+	ディーア	汗2	2_3					…………
+CharacterOff
+	ライオンハート							お兄ちゃんの怪我も\n見てもらわなくっちゃ！
+CharacterOff
+	ディーア	汗2	2_3					…………
+CharacterOff
+	ライオンハート	破損1						……お兄ちゃん？
+CharacterOff
+	霊獣モデュレイト=エクス		2_3					……愚かな小娘だ\n昔の自分を思い出す
+	霊獣モデュレイト=エクス							……貴様の主なら、そこで\n既に息絶えておるわ
+CharacterOff
+Bgm	絶望
+	ライオンハート	破損2	2_3					……え？
+CharacterOff
+	ディーア	黒2	2_3
+Wait						1
+CharacterOff
+	ライオンハート	破損2	2_3					お兄ちゃん!?お兄ちゃん!!
+CharacterOff
+	霊獣モデュレイト=エクス		2_3					手間をかけさせてくれる……\nよもや、この学園にこれ程の\n力を持つ勇者がいるとはな
+CharacterOff
+	ライオンハート	破損2	2_3					お兄ちゃん！起きて！\n目を覚まして！お願い…！\nお願いだから……！
+	ライオンハート	破損2						そうだ、勇者の子たちに助けを……
+CharacterOff
+	霊獣モデュレイト=エクス		2_3					既に遅い、ということは\nお前もわかっているのだろう？
+CharacterOff
+	ライオンハート	破損2	2_3					…………ッ！
+CharacterOff
+	霊獣モデュレイト=エクス		2_3					これで、我が復讐は完成する……
+	霊獣モデュレイト=エクス							ライオンハート……貴様はそこで\n魔力が尽きるのを待つがいい
+	霊獣モデュレイト=エクス							主を失った魔剣など……\n相手にする気にもならん
+CharacterOff
+	ライオンハート	破損2	2_3					この……この……
+	ライオンハート	破損2						霊獣<dash=2>ッ!!
+	　　　　　　　　　　
+CharacterOff
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	black					.1
+Wait						1
+CharacterOff
+Bg	宝石鉱山
+	　　　　　　　　　　
+Wait						3
+FadeIn	black					.1
+	　　　　　　　　　　							\n勇リオハルト学園 - 地下封鎖区画
+CharacterOff
+Param	character_grayout=false
+	勇者ノミヤ	大	1_3_y
+	勇者カーセム	大	2_3_y
+	勇者ニテ	大	3_3_y
+	幻想体エフェクト		エフェクトBG
+Wait						1
+Se	闇2
+CharacterOff	幻想体エフェクト					3
+CharacterOff						2
+Wait						3
+	ディーア	怒り2	2_3					ふぅ……もう、いないよな？
+CharacterOff
+	リディ	悔しい2	2_3					ねえ、さっきの勇者たち、\n来るな、戻れって\nずっと言ってたけど……
+CharacterOff
+	ディーア	悔しい2	2_3					ああ、気になるな……\nたぶん、この先に\n霊獣モデュレイト=エクスがいるんだ
+	ディーア							なんとなく……そんな気がする
+CharacterOff
+	リディ	驚き2	2_3					ねえ、マスター、さっきから\nスイスイ歩いていくけど……\nここ、知ってるの？
+CharacterOff
+	ディーア	通常2	2_3					いや、来たことはないはずだ\nなんでだったかな……\nでも……
+	ディーア	怪しい2						確か、ここに結界が……
+	ディーア	通常2						あった、ここだ
+CharacterOff
+	リディ	驚き2	2_3					この結界……壊れてる？
+CharacterOff
+	ディーア	悔しい2	2_3					嫌な予感がする……行こう!!
+FadeOut	black					.5
+Bg	遺跡C
+CharacterOff
+Wait						1
+FadeIn	black					.5
+	リディ	悔しい2	2_3					……なんか、変な匂いする
+CharacterOff
+	ディーア	悔しい2	2_3					……ッ!?
+CharacterOff
+	リディ	驚き2	2_3					ふぇ？どうしたの？
+CharacterOff
+	ディーア	怒り2	2_3					……リディ、見ない方がいい
+CharacterOff
+	リディ	悔しい2	2_3					う、うん、わかった
+CharacterOff
+	ディーア	悔しい2	2_3					勇者の制服……\n原型も留めないほどに\n破壊された遺体……
+	ディーア							ここでも戦闘があったのか……
+CharacterOff
+	リディ	驚き2	2_3					ねえねえ、本が落ちてる！
+CharacterOff
+	ディーア	驚き2	2_3					本？
+CharacterOff
+	リディ	驚き2	2_3					うん！真っ白な本！\n……何も書いてないや
+CharacterOff
+	ディーア	怪しい2	2_3					本当だ……何かのアルバムにも\n見えるけど、真っ白だな
+CharacterOff
+	リディ	驚き2	2_3					あれ、最後に何か書いてある
+CharacterOff
+	ディーア	驚き2	2_3					……なんだ、これ\n落書き？
+CharacterOff
+	リディ	悔しい2	2_3					お兄ちゃんって書いてあるけど…
+CharacterOff
+	ディーア	悔しい2	2_3					ここに来た誰かの持ち物\nだったのかな
+	ディーア	驚き2						ん？あれは……
+Se	走る
+Tween	ディーア	MoveTo	x=700
+CharacterOff
+	リディ	驚き2	2_3					マスター？
+Se	走る
+Tween	リディ	MoveTo	x=700
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff	wipe
+	ライオンハート	武器状態	2_3
+	　　　　　　　　　　
+Param	character_grayout=false
+FadeIn	black					.5
+Wait						2
+CharacterOff
+	リディ	驚き2	2_3					あ、魔剣……
+CharacterOff
+	ディーア	驚き2	2_3					こんなところに落ちてるなんて……
+	ディーア	怪しい2						この魔剣……見覚えがある
+CharacterOff
+	リディ	通常2	2_3					マスター、アンロックできないの？
+CharacterOff
+	ディーア	通常2	2_3					よし、やってみるか
+FadeOut	white					.1
+Se	光3
+	オーラ青		エフェクト表
+FadeIn	white					.5
+	※※※※							魔核エーテライト認識\nコード：アンロック……
+FadeOut	white					1
+Se	光2
+Bg	白背景
+ImageEffect	SpriteCamera	MotionBlur
+Tween	ディーア	ShakePosition	time=20 x=5 y=5				NoWait
+Se	火事	TRUE
+Wait						.5
+FadeIn	white					1
+	ディーア	驚き2	2_3					な、なんだ……!?
+Se	光3
+	ディーア	悔しい2						魔力が逆流して……\nぐっ……ああああああああッ!!
+FadeOut	black					.1
+CharacterOff
+ImageEffectOff	SpriteCamera	MotionBlur
+StopSe
+StopBgm
+Wait						.5
+FadeIn	black					.1
+	　　　　　　　　　　
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	white					.1
+Wait						1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff
+Bg	戦場跡
+	モモ	通常	p3
+	ディーア	悔しい2	p6u
+	リディ	絶望2	p8b
+Tween	モモ	ScaleTo	x=1.1 y=1.1 time=0			Add
+Tween	モモ	MoveBy	y=-100 time=0
+FadeIn	white					.1
+	モモ	通常						さてさて、元気だったかな？\n《ナレハテ》の魔鍵使い
+	ディーア	怒り2						…だ、誰だ…お前は…！
+	モモ							おや、ボクを覚えてないのかい？\nエンスージアクレイスとはいえ、\n流石に記憶が希薄化しすぎだなぁ
+	モモ	笑い						まぁ、それも代償だ、仕方ない
+FadeOut	white					.5
+FadeIn	white					.5
+	モモ	笑い						やっぱり覚えていないんだねぇ\nそもそも、ボクに会えたのは\nコレで一体何人目だったっけ？
+	モモ	通常						流石に増えすぎてもうボクも\n把握しきれてないんだよ
+	モモ	笑い						とはいえ、ブリジットを救うため\nよくぞボクまでたどり着いた！
+	モモ							超多重並行世界のひとかけらにしては\n最も成功した例じゃないかな？
+	ディーア	本気2						何を言っている…？\nお前はなんなんだ…！\nお前は…一体何者なんだ…！
+FadeOut	white					.1
+CharacterOff
+FadeIn	white					.1
+	　　　　　　　　　　
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	white					.1
+ImageEffect	SpriteCamera	Sepia
+FadeIn	white					.1
+Bg	戦場跡
+	ディーア	怒り2	p6u
+	白リディ	通常	p3
+	リディ	絶望2	p8b
+Tween	白リディ	ScaleTo	x=-1.1 y=1.1 time=0
+	白リディ	照れ						でも、あなたが止めた――
+	白リディ	笑い						今回はケルベリルの策略がハマった
+	白リディ	通常						次回はそうじゃないかもしれない\nでも必ずまた誰かの活躍で\n世界は守られるようになっている<speed=5>　　</speed>
+	白リディ	照れ						世界とは、聖杯とはそういうものよ
+FadeOut	white					.1
+CharacterOff
+FadeIn	white					.1
+	　　　　　　　　　　
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	white					.1
+CharacterOff
+Bg	白背景
+	※※※※
+ImageEffectOff	SpriteCamera	Sepia
+Wait						.5
+FadeIn	white					1
+	※※※※							<speed=0.1><dash=2>あなたたちの記憶の中から\n絶望を《修繕》しましょう</speed>
+	　　　　　　　　　　
+	　　　　　　　　　　
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	white					.1
+Wait						1
+CharacterOff
+	ライオンハート		1_2_b
+	ディーア	驚き2	2_2
+Bg	市街地C
+ImageEffect	SpriteCamera	Sepia
+Wait						.5
+FadeIn	white					.1
+	ライオンハート							細かいことは気にしないでさぁ♪\nそーだ、アップルパイ作ってよ！\n私あれ大好きなんだ！
+	ディーア	汗2						アップルパイなんて\n作ったことないぞ？
+	ライオンハート							じゃあ私が第一号だ！\nにははっ♪変な味だったら\n指さして笑ってあげよっと
+	ディーア	怪しい2						笑うんだったら作りません
+	ライオンハート							えー！いいじゃーん！\nあ、そうだ！\nじゃあ私が作ってあげる♪
+	ディーア	驚き2						君が？料理を？
+	ライオンハート	破損1						あ～、疑ってるなぁ？\nすっごい美味しいんだからぁ！
+CharacterOff
+	　　　　　　　　　　
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	white
+CharacterOff
+ImageEffect	SpriteCamera	Sepia
+Bg	森林A
+	　　　　　　　　　　
+	ライオンハート		1_2_b
+	ディーア	驚き2	2_2
+Wait						.5
+FadeIn	white					.5
+	ライオンハート							それはねぇ、勇気が大好きだから！
+	ディーア	驚き2						勇気が大好き？
+	ライオンハート							うんっ、みんなの勇気が大好き！
+	ライオンハート							それを見るのも好きだし、\n誰かの勇気を奮い立たせるのも好き\nだから私、この学園にいるんだよ♪
+FadeOut	black 					.1
+CharacterOff
+BgOff
+StopBgm
+Wait						.5
+FadeIn	black 					.1
+	ディーア	<Off>						<dash=2>知っている
+	ディーア	<Off>						どこか遠く、遥か昔、あるいは未来…\nいつのことかも、もうわからない
+	ディーア	<Off>						でも、オレはこの光景を知っている
+FadeOut	black 					.1
+Bg	市街地C
+	　　　　　　　　　　
+FadeIn	black					.1
+CharacterOff
+	ライオンハート		1_2_b
+	ディーア	怪しい2	2_2
+	ライオンハート							卒業まで居ればいいのに\nそしたら…
+	ディーア	怪しい2						そのアルバムに名前が載る？
+	ライオンハート							そう！\nお兄ちゃんもこのアルバムに\n入れてあげるっ！
+FadeOut	black					.1
+BgOff
+CharacterOff
+	　　　　　　　　　　
+FadeIn	black					.1
+	ディーア	<Off>						この結末を<dash=2>知っている
+Se	火事
+StopSe						3
+FadeOut	black					.1
+CharacterOff
+BgOff
+Wait						.5
+FadeIn	black					1
+	ディーア	<Off>						(う……ぅ……)
+	ディーア	<Off>						(ライオンハート……？)
+Shake	Graphics		time=100 x=5 y=5				NoWait
+Bg	遺跡C					2
+Se	火事	TRUE
+	ライオンハート					2
+Wait						2
+Bgm	凱旋					5
+CharacterOff
+	霊獣モデュレイト=エクス		2_3					……貴様、何を……!?
+CharacterOff
+	ライオンハート		2_3					私の魔力を流し込んだの、\nこれで少しだけ、\nあなたを乗っ取れる
+	ライオンハート							六大魔剣、エクスカリバーの\n世界を滅ぼしうる魔力……\nここには不要なものだから
+	ライオンハート							その魔力……\n"無駄遣い"させてあげる
+CharacterOff
+	霊獣モデュレイト=エクス		2_3					馬鹿な……無謀すぎる！
+CharacterOff
+	ライオンハート		2_3					無謀なんかじゃない！
+	ライオンハート							これは……\n<size=40>勇敢って言うんだよっ!!</size>
+Se	光3
+	勇者ギブル		1_3_by			.5
+	勇者アテック		2_4_y			.5
+	勇者ラノル		3_4_by			.5
+	男勇者		3_3_by			.5
+Tween	勇者ラノル	RotateTo	y=180 time=0				NoWait
+Tween	男勇者	RotateTo	y=180 time=0				NoWait
+	幻想体エフェクト		エフェクトBG			1
+Wait						1.5
+CharacterOff
+	霊獣モデュレイト=エクス		2_3					幻想体……！\n貴様、私の魔力を……！
+CharacterOff
+	ライオンハート	破損2	2_3					ごめんね、お兄ちゃん
+	ライオンハート	破損2						私、弱い魔剣だね……\n魔剣なのに、お兄ちゃんのこと\n守ってあげられなかった
+	ライオンハート	破損1						でも代わりに、\n今度はちゃんと守るから
+	ライオンハート							お兄ちゃんが生きたこの世界を、\nお兄ちゃんが生きた証拠を\n私が守るから
+	ライオンハート							心配いらないよ\nだって<dash=2>
+	ライオンハート							だって、絶望から世界を救うのは、\nいつだって勇者の役目なんだから！
+CharacterOff
+	霊獣モデュレイト=エクス		2_3					そのアルバム……！\nそうか、これほどに精巧な\n幻想体を作れるのは……！
+	霊獣モデュレイト=エクス							だが、そのアルバムの魔力を媒体\nとして使えるのは一度きり……！
+CharacterOff
+	ライオンハート		2_3					そーだね、内容は消えちゃう\n結局はあの人の思い通り……\nでもそんなの関係ない
+	ライオンハート							大丈夫、みんなの勇気は私の中にあるよ\n見えなくなっても、忘れちゃっても、\n絶対になくなったりしないから
+	ライオンハート							みんなの勇気が、私の心の中に……\n私の魔核に刻み込まれて、\nいつだって私に勇気をくれるの
+	ライオンハート							だから<dash=4>
+	ライオンハート							みんなの勇気を、私に貸して
+FadeOut	white
+Se	光3
+Wait						2
+StopSe						.5
+	　　　　　　　　　　
+Shake	Graphics		time=1 x=0 y=0				NoWait
+BgOff
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff
+BgOff
+StopBgm						1
+Wait						1
+FadeIn	white					1
+	ディーア	<Off>						たった一つ、オレにできること
+	ディーア	<Off>						この最悪な状況を打開して、\nみんなを救い出せる\nたった一つの方法
+	ディーア	黒2						………………モモ
+	ディーア	黒2						……頼む…………
+	ディーア	黒2						霊獣モデュレイト=エクスの\n<color=mk2impo>《討滅作戦》</color>を…………
+CharacterOff						3
+Bg	白背景					3
+Wait						3
+	モモ	<Off>
+	モモ	<Off>						……しょうがないなぁ
+FadeOut	black					1
+Se	カギ閉める
+CharacterOff
+Bg	遺跡C
+Wait	　　　　　　　　　　					2
+FadeIn	black					.1
+	リディ	悔しい2	2_3					マスター!?マスター!!
+CharacterOff
+	ディーア	驚き2	2_3					あ、ああ……リディ？
+CharacterOff
+	リディ	悔しい2	2_3					もう、なにぼーっとしてるの？
+	リディ							その魔剣、\nアンロックするんでしょ？
+CharacterOff
+	ディーア	驚き2	2_3					え？\nいや、今アンロックした\nはずじゃ……あれ？
+CharacterOff
+	ライオンハート	武器状態	2_3
+Wait						.7
+CharacterOff
+	ディーア	悔しい2	2_3					もう一度……魔剣、解放！
+	ディーア	驚き2						……あれ？
+CharacterOff
+	リディ	悔しい2	2_3					もう、ふざけてる場合じゃないのに！
+CharacterOff
+	ディーア	驚き2	2_3					本当にアンロックできないんだって！
+CharacterOff
+	ライオンハート		2_3					おにーちゃんっ！
+CharacterOff
+	ディーア	通常2	2_3					ライオンハート!!
+CharacterOff
+Bgm	絶望
+	幻想体エフェクト		エフェクトBG
+	ライオンハート		2_3					にへへ……私、失敗しちゃった
+CharacterOff
+	ディーア	悔しい2	2_3					嘘、だろ……？
+CharacterOff
+	リディ	悔しい2	2_3					暴走してる……？
+CharacterOff
+	ディーア	悔しい2	2_3					ああ、それも……\nあまりにも手遅れすぎる
+CharacterOff
+	リディ	悔しい2	2_3					ど、どうしよう……マスター……！
+CharacterOff
+	ディーア	悔しい2	2_3					今考えてる……！
+CharacterOff
+	幻想体エフェクト		エフェクトBG
+	ライオンハート	破損1	2_3					だから来ないでって言ったのにー\n勇者さんたちの言うこと\nぜんぜん聞かないじゃん！
+CharacterOff
+	ディーア	悔しい2	2_3					……あのまま霊獣の魔力を\n使い続けて、暴走……\nいや、同化したのか
+CharacterOff
+	幻想体エフェクト		エフェクトBG
+	ライオンハート		2_3					えへ、正解♪\n……そういうお兄ちゃんは、\n本当にお兄ちゃん？
+	ライオンハート							私の知ってるお兄ちゃんは……\n"そこ"にいるんだけど
+CharacterOff
+	ディーア	怪しい2	2_3					……このアルバムさ
+CharacterOff
+	幻想体エフェクト		エフェクトBG
+	ライオンハート		2_3					ん？
+CharacterOff
+	ディーア	怪しい2	2_3					メモ欄……変なこと書くなって、\n言っただろ？
+CharacterOff
+	幻想体エフェクト		エフェクトBG
+	ライオンハート		2_3					あはは！本当にお兄ちゃんだ。\nごめんね！こうなってから\n暇だったからついさー♪
+	ライオンハート							でも、同じ人なのに、\n違う人みたい。変なの♪
+CharacterOff
+	ディーア	悔しい2	2_3					オレだってよくわかってないんだ\n……なんで、君を知ってるのかも、\nなんでここにいるのかも
+CharacterOff
+	幻想体エフェクト		エフェクトBG
+	ライオンハート		2_3					でもお兄ちゃんは\nお兄ちゃんだよねっ！\nなんとなくわかるよ！
+	ライオンハート							ねえ、本当にお兄ちゃんならさ……\nひとつ、お願いがあるんだけど
+CharacterOff
+	ディーア	悔しい2	2_3					…………
+	ディーア	怒り2						<ruby=アンロック>魔剣解放</ruby>
+Se	光3
+	オーラ青		エフェクト表
+	オーラ青					2
+Wait						2
+CharacterOff
+	幻想体エフェクト		エフェクトBG
+	ライオンハート	破損1	2_3					……聞く気無いじゃん、もう
+	ライオンハート							逃げてよ……\nお願いだから、逃げてよぉ……！
+	ライオンハート	破損2						わかってるくせに！\nもう制御できないんだよっ！\nいっぱいいっぱいなんだよっ！
+	ライオンハート							魔力を抑え込むのも、\n暴走を抑えるのも、もう！
+CharacterOff
+	ディーア	悔しい2	2_3					逃げる、か……それはできないな
+CharacterOff
+	幻想体エフェクト		エフェクトBG
+	ライオンハート	破損2	2_3					お兄ちゃん！
+CharacterOff
+	ディーア	通常2	2_3					だって、アルバムに\n名前書かれちゃったしさ
+CharacterOff
+	幻想体エフェクト		エフェクトBG
+	ライオンハート	破損2	2_3					え……？
+CharacterOff
+	ディーア	通常2	2_3					勇気ある勇者しか、書かれない\nアルバムなんだろ？
+	ディーア	怒り2						そこに載ったなら……\nオレも勇気を出して\n立ち向かわなきゃ
+	ディーア	通常2						それに、そういうの好きだろ？
+CharacterOff
+	幻想体エフェクト		エフェクトBG
+	ライオンハート	破損2	2_3					……ッ！
+	ライオンハート							……そりゃ好きだよ！\nもちろん大好きだよ！
+	ライオンハート							私、人間の勇気が好き\n胸が熱くなるような、\n勇気が燃え上がる瞬間が大好き
+	ライオンハート							だから、お兄ちゃんががこうして\n来てくれたことがうれしい\nたまらなく嬉しいの
+	ライオンハート							お兄ちゃんのその勇気も、\nその覚悟も、私は好きだよ\n大好きだよ！
+	ライオンハート							でも……でもね、お兄ちゃん
+	ライオンハート							お兄ちゃんのやろうとしてる\nことは、いくらなんでも\n無謀すぎるよ！
+	ライオンハート							私、霊獣と同化したんだよ？\n無理だよ、無謀だよ！\n魔剣使い一人でどうにかなるわけ…
+CharacterOff
+Bgm	Xmasボス					3
+	ディーア	通常2	2_3					……これは無謀なんかじゃない
+CharacterOff
+	幻想体エフェクト		エフェクトBG
+	ライオンハート	破損2	2_3					……っ
+CharacterOff
+	ディーア	怒り2	2_3					君に会うのは初めてだけど、\nなんとなくわかる\n君だったらこう言うだろ？
+	ディーア	悔しい2						これは無謀なんかじゃない\n勇敢っていうんだっ！
+CharacterOff
+	幻想体エフェクト		エフェクトBG
+	ライオンハート	破損2	2_3_b					わかった、もう知らない！\n\n……お兄ちゃんのばか
+Se	闇3
+CharacterOff	ライオンハート					3
+CharacterOff	幻想体エフェクト					2
+	ライオンハート	暴走	2_3			2
+Wait						3
+FadeOut	white					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_223_06
+EndIf
+EndScenario
+
+# E_223_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="7話"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	凱旋
+Bg	遺跡C
+	ライオンハート		2_3
+FadeIn	white					.5
+	ライオンハート		2_3					……すごいね、お兄ちゃんは
+	ライオンハート		2_3					霊獣と同化した魔剣なんて、\nふつう一人で倒せるもの\nじゃないのに
+	ライオンハート		2_3					まさか、同化した霊獣の\n核だけを砕くなんて……
+CharacterOff
+	ディーア	あはは2	2_3					……無謀じゃなかっただろ？
+CharacterOff
+	ライオンハート		2_3					うん、えへへ、勇敢だったね
+CharacterOff
+	ディーア	通常2	2_3					これで、やっと帰れる
+	ディーア	通常2	2_3					酒場に戻ったら、聞きたいことも\n話したいこともたくさんある
+	ディーア	通常2	2_3					アップルパイの約束だってあるしな
+StopBgm						2
+	ディーア	通常2	2_3					だから……\nさあ、一緒に帰ろう、\nライオンハート
+CharacterOff
+	ライオンハート		2_3					……うんっ、うん！
+	ライオンハート		2_3					そうだねっ！\n私も、お兄ちゃんとやりたいこと\n話したいこと、たくさんある！
+	ライオンハート	破損1	2_3					でも……ごめんね
+	ライオンハート	通常	2_3_b					約束、守れそうにないや
+Bgm	絶望
+Se	闇3
+CharacterOff	ライオンハート					3
+	ライオンハート	暴走	2_3			2
+	幻想体エフェクト		エフェクトBG			3
+Wait						3
+CharacterOff
+	ディーア	悔しい2	2_3					…………ッ!?
+CharacterOff
+	エクスカリバー？　　　　	武器状態	1_3
+	エクスカリバー？　	武器状態	2_4
+	エクスカリバー？　　	武器状態	3_4_b
+	エクスカリバー？　　　	武器状態	3_3
+Tween	エクスカリバー？　　　　	RotateTo	z=-20 time=0				NoWait
+Tween	エクスカリバー？　	RotateTo	z=15 time=0				NoWait
+Tween	エクスカリバー？　　	RotateTo	z=-6 time=0				NoWait
+Tween	エクスカリバー？　　　	RotateTo	z=10 time=0				NoWait
+	ライオンハート	暴走	2_3
+	霊獣モデュレイト=エクス	<Off>						アア……ア……
+	霊獣モデュレイト=エクス	<Off>						マダ……死…ナイ……
+CharacterOff
+	ディーア	驚き2	2_3					霊獣の残滓……
+	ディーア	悔しい2	2_3					違う……こいつら、全部霊獣か！
+CharacterOff
+	エクスカリバー？　　　　	武器状態	1_3
+	エクスカリバー？　	武器状態	2_4
+	エクスカリバー？　　	武器状態	3_4_b
+	エクスカリバー？　　　	武器状態	3_3
+Tween	エクスカリバー？　　　　	RotateTo	z=-20 time=0				NoWait
+Tween	エクスカリバー？　	RotateTo	z=15 time=0				NoWait
+Tween	エクスカリバー？　　	RotateTo	z=-6 time=0				NoWait
+Tween	エクスカリバー？　　　	RotateTo	z=10 time=0				NoWait
+	ライオンハート	暴走	2_3
+	オーラ青		エフェクト表			2
+Se	光3
+Wait						2
+	ライオンハート		2_3					……大丈夫だよ、お兄ちゃん
+	ライオンハート		2_3					この霊獣は全部私に繋がってる\n……だから、こうすれば
+CharacterOff
+	ディーア	悔しい2	2_3					ライオンハート、まさか……
+CharacterOff
+	オーラ青		エフェクト表
+	ライオンハート	暴走	2_3					主核を砕けば、\n全部解決するんだよ
+	ライオンハート							……全ての魔核を破壊しても\n私の核がある限りこの霊獣は\n止まらない……
+	ライオンハート		2_3					だから、ごめんね\nさよなら、おにーちゃん
+CharacterOff
+	ディーア	悔しい2	2_3					やめろ……\nそれは、そんなのは……
+CharacterOff
+	オーラ青		エフェクト表
+	ライオンハート		2_3					無謀じゃないよ
+	ライオンハート		2_3					私一人の犠牲で、お兄ちゃんも、\nこの世界さえ救えるんだから
+	ライオンハート		2_3					だからこれは、勇敢っていうんだ
+CharacterOff
+	ディーア	本気2	2_3					<size=40>やめろ<dash=2>ッ!!</size>
+FadeOut	black					.1
+CharacterOff
+Se	突1
+Se	ガードブレイク
+BgOff
+StopBgm						1
+	ディーア	悔しい2	2_3
+Bg	魔術空間
+Wait						2
+FadeIn	white					2
+Bgm	凱旋					20
+	ディーア	悔しい2						…………止められなかった
+	ディーア	悔しい2						復活した霊獣をみた時、\nすぐにわかってしまった
+	ディーア	悔しい2						……こうするのが、\n最善だってことが
+	ディーア	悔しい2						正しいと思ってしまった\nそれしかないと思ってしまった
+	ディーア	悔しい2						だから、動けなかったんだ\n助けなければいけなかったのに
+	ディーア	絶望2						……考えれば、もっと方法は\nあったかもしれないのに
+	ライオンハート	<Off>						お兄ちゃんが\n気に病むことはないよ
+	ライオンハート	<Off>						私がそうすることを\n選んだんだから
+	ディーア	悔しい2						でも<dash=2>ッ!!
+	ライオンハート	<Off>						仕方ないよ、私だって\n思いつかなかったもん
+	ライオンハート	<Off>						でも、これでよかったんだよ
+	ディーア	悔しい2						まだ……まだ、クランさんの\nところに連れていけば……！
+	ディーア							腕のいい鍛冶医師がいるんだ！\n急いであの人に頼めば<dash=2>
+	ライオンハート	<Off>						お兄ちゃん
+	ライオンハート	<Off>						もう、わかってるくせに
+	ライオンハート	<Off>						魔核が砕け散っちゃったんだから、\n修理なんてできっこないんだよ
+	ライオンハート	<Off>						だから、ここでお別れなんだ\nお別れなんだよ、お兄ちゃん
+	ディーア	悔しい2						ライオンハート……
+	ライオンハート	<Off>						大丈夫、お兄ちゃんは\n割り切って前に進める人だよ
+	ライオンハート	<Off>						前に進む勇気を\n持ってる人だよ
+	ライオンハート	<Off>						だから前を向いて、\nお兄ちゃん
+	ライオンハート	<Off>						それも、私の大好きな\nお兄ちゃんの勇気だから
+	ディーア	怒り2						…………
+	ライオンハート	<Off>						にひひ♪今の言葉は\nお兄ちゃんへのプレゼントね♪
+	ディーア	怒り2						…………
+	ライオンハート	<Off>						もー、そんな顔しないでよ
+	ライオンハート	<Off>						大丈夫だよ、きっといつか\nまた会えるから
+	ライオンハート	<Off>						お兄ちゃんが私のことを\n忘れないでいてくれれば、\nきっといつかまた会えるから
+	ライオンハート	<Off>						だから……
+	ライオンハート	<Off>						…………忘れないでね
+	ディーア	怒り2						……ああ、覚えておくよ
+	ディーア							今の言葉も、お前のことも……
+	ディーア	悔しい2						……忘れないよ\nきっと、一生忘れない
+	ディーア							お前という魔剣が\n世界を救ったことを\n絶対に忘れない
+	ディーア	通常2						そして……\nいつかその時が来たら<dash=2>
+	ライオンハート	<Off>						えへへ、楽しみにしてるねっ！
+	ライオンハート	<Off>						…………またね、お兄ちゃん
+	ディーア	通常2	2_3					ああ……また、きっと……
+FadeOut	white					2
+Bg	遺跡C
+	ディーア		2_3
+StopBgm
+Wait						1
+FadeIn	white					.1
+	ディーア	悔しい2	2_3					………………
+CharacterOff
+	ライオンハート		2_3					………………
+CharacterOff						1
+Se	敵スキル発動
+	ライオンハート	武器状態	2_3			1
+Wait						1
+CharacterOff						2
+Wait						2
+	リディ	悔しい2	2_3					……勝った、の？
+CharacterOff
+	ディーア	悔しい2	2_3					……これが勝ちだとは、\n思いたくないな
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+Bgm	凱旋					10
+	リディ							……仕方ないよ、\nそうするしかなかったんだもん
+	ディーア	通常2						……ありがとな、リディ
+	リディ	照れ2						ふぇ!?\nう、うん……どういたしまして
+FadeOut	black					.7
+CharacterOff
+Bg	教会前
+	ディーア	通常2	1_2
+	リディ	通常2	2_2
+Wait						3
+FadeIn	black					.5
+	ディーア							……ずっと前に、\n廃校になってたんだな
+	リディ							変だね、来たときはそんなこと\n全然書いてなかったのに
+	リディ							ここに、みんな居たのかな
+	ディーア	あはは2						さあ？それはどうだろうな
+FadeOut	black					.5
+CharacterOff
+Bg	塩湖
+FadeIn	black					.5
+	ディーア	<Off>						もし、また会えたら、\nその時は何を話そう
+	ディーア	<Off>						「君はきっと知らないと思うけど、\nオレは君と約束したんだ」
+	ディーア	<Off>						そんなことを言って、\nアルバムのお返しを渡そうか\n<dash=2>そうだ
+	ディーア	<Off>						帰ったら\nアップルパイを焼こう\n目が覚めたら、一番に君にあげよう
+	ディーア	<Off>						きっと君は下手くそだって\n笑うんだろうけど、今はそれが\nどうしようもなく楽しみなんだ
+FadeOut	white					.5
+CharacterOff
+	　　　　　　　　　　
+Bg	イベントスチル22301
+FadeIn	white					1
+	　　　　　　　　　　							<dash=2>勇気の詰まったホワイトアルバム\n\n　　　　　　　　-完-
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_223_01
+EndIf
+EndScenario

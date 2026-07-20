@@ -1,0 +1,482 @@
+# G_369_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bg	酒場1F
+Param	character_grayout=false
+	ライオンハート	サンタ	2_2
+	ルディ		1_2
+Tween	ライオンハート	MoveTo	y=-713 time=0.1				Add
+Tween	ルディ	MoveTo	y=-800 time=0.1
+	黒グラデーション		エフェクト表
+FadeIn	white					.5
+Tween	ライオンハート	PunchPosition	y=50				NoWait
+	ライオンハート							…………よし、みんな寝たよっ♪
+Tween	ルディ	PunchPosition	y=50				NoWait
+	ルディ							…………今のうち、ですねっ！
+CharacterOff	黒グラデーション
+Tween	ライオンハート	MoveTo	y=-350 time=1.5	easeOutBack			Add
+Tween	ルディ	MoveTo	y=-350 time=1.5	easeOutBack
+Param	character_grayout=true
+Bgm	都市
+	ルディ		1_2_b
+	ライオンハート							にははっ！\n作戦開始だぁっ♪
+	ルディ		1_2					ちょ、ちょっとライオンハートさん！\n静かにしないとみんな\n起きちゃいます！
+	ルディ		1_2_b
+	ライオンハート							大丈夫大丈夫♪\nそんなことより、早く準備しちゃお♪
+	ルディ		1_2					もちろんっ♪\nルディに任せてください！
+	ルディ							ご主人に最高のクリスマスを\nプレゼントしちゃいますからっ！
+	ルディ		1_2_b
+	ライオンハート							よし、私も今のうちに\nプレゼントの準備しちゃおーっと
+	ライオンハート							……アップルパイ、\nあと何枚焼けばいいかなぁ？
+	ルディ		1_2
+Tween	ルディ	PunchPosition	y=50				NoWait
+	ルディ							まだ焼くんですかっ!?
+	ルディ		1_2_b
+	ライオンハート							たくさんあったほうがいいじゃーん♪
+CharacterOff
+	ルディ							確かにそのとおりですねっ！\nそれじゃ、ルディも\n張り切ってたくさん……っ!!
+Se	チャージ
+FadeOut	white					.5
+Param	character_grayout=false
+	白カーテン20A		エフェクト表
+FadeIn	white					.5
+Wait						.5
+CharacterOff
+	ライオンハート	サンタ						おぉ……!!魔力が集まってきた!!\nすごーい！きれーっ！
+CharacterOff
+	白カーテン20A		エフェクト表
+	ルディ							ふふん、聖夜の聖獣は\n伊達じゃないのですよっ！
+	ルディ							私が居るところが即ち\n"聖夜"なのですから！
+Se	チャージ
+	白カーテン20B		エフェクト裏			.2
+Wait						.7
+Se	チャージ
+Wait						.7
+Se	チャージ
+Wait						.7
+StopSe
+CharacterOff
+StopBgm						.5
+	黒グラデーション		エフェクト表
+	？？？？							<dash=4>ガタッ
+CharacterOff
+	白カーテン20A		エフェクト表
+	白カーテン20B		エフェクト裏
+	ルディ
+Wait						.1
+CharacterOff	白カーテン20A					.4	NoWait
+CharacterOff	白カーテン20B					.4	NoWait
+	ルディ							<dash=4>っ!?
+CharacterOff
+Bgm	絶望
+	ライオンハート	サンタ						…………えっ、何？
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							…………ガサガサッ
+CharacterOff
+Param	character_grayout=true
+	ルディ		1_2_b
+	ライオンハート	サンタ	2_2					お、おばけ……？
+	ルディ	泣き	1_2					おばけぇっ!?
+	ルディ		1_2_b
+	ライオンハート							にひひ♪ルディちゃん！\nちょっと様子見てきてよ！
+	ルディ		1_2
+Tween	ルディ	PunchPosition	y=50				NoWait
+	ルディ							えぇっ、ルディですか!?
+	ルディ		1_2_b
+	ライオンハート							大丈夫、ルディちゃんならできるよ！
+	ルディ	通常	1_2					ふ、ふふん！\nそこまで言われたら\nしょうがないですねっ！
+CharacterOff
+	ルディ							お、お、おばけさーん……\nルディとお話しませんかー……？
+CharacterOff
+Param	character_grayout=false
+	黒グラデーション
+	？？？？							…………コ……
+CharacterOff
+Param	character_grayout=true
+	ルディ							……コ？
+CharacterOff
+StopBgm
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=100 time=2				NoWait
+	キノコリオン							ノコーーーーーーーーッッッッ!!!!
+CharacterOff
+Bgm	コメディ
+	ライオンハート	サンタ	2_2
+	ルディ	泣き	1_2
+Tween	ルディ	PunchPosition	y=50				NoWait
+	ルディ							うひゃあああっ!?
+	ルディ		1_2_b
+	ライオンハート							あ、ちょっとルディちゃん！しーっ！\nそんな大声出したら……
+CharacterOff
+	ディーア	本気2	画面外_右
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=2				NoWait
+Wait						1
+	ディーア							どうした!?\n何事だ!?
+CharacterOff
+	ライオンハート	サンタ	2_2
+	ルディ	泣き	1_2_b
+	ライオンハート							あちゃー…………
+	ルディ		1_2					お、おばけさんが……っ!!
+CharacterOff
+	ディーア	怪しい2						おばけ……？
+CharacterOff
+	キノコリオン
+Tween	キノコリオン	PunchPosition	y=100 time=2				NoWait
+	キノコリオン							<size=40>ノコーーーーッ!!!!</size>
+CharacterOff
+	ディーア	驚き2						キノコリオン!?
+CharacterOff
+	ライオンハート	サンタ						ああもう仕方ない！\n手伝って、お兄ちゃん!!
+CharacterOff
+	ディーア	汗2						ええと……よくわかんないけど\nわかった！いくぞルディ！
+CharacterOff
+	ルディ							……え？\nあれ、ご主人!?
+	ディーア	本気2						来るぞルディ!!
+	ルディ
+Tween	ルディ	PunchPosition	y=50				NoWait
+	ルディ							え、あ、はいっ!?
+If	isdebug==true
+CharacterOff
+Jump	*G_369_02
+EndIf
+EndScenario
+
+# G_369_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					.1
+StopSound
+Bgm	コメディ
+Bg	酒場1F
+	ルディ	泣き
+FadeIn	white					.5
+Shake	ルディ		x=10				NoWait
+	ルディ							びええええええ…………っ!!
+CharacterOff
+	ライオンハート	サンタ	2_2
+	ディーア	汗2	1_2					…………ごめんって、\nそんなに泣くなよ
+CharacterOff
+	ルディ	泣き						えぐ、えぐ……ぐすっ……\nご主人はわるくないんでずぅぅぅ……
+CharacterOff
+	ライオンハート	サンタ	2_2
+	ディーア	あはは2	1_2					…………そんなにおばけが\n怖かったのか？
+	ライオンハート							いや、そういうわけじゃないと\n思うなぁ……
+	ディーア	驚き2						じゃあなんでこんなに泣いてるんだ？
+	ディーア	怪しい2						そういえばライオンハートも\nサンタの格好してるし……\n一体何をしてたんだ？
+	ライオンハート							えっと、それは……\nお兄ちゃん、耳貸してっ！
+FadeOut	black					.5
+	ディーア	驚き2
+FadeIn	black					.5
+	ディーア							オレを驚かそうとおもって\n内緒で"聖夜"をプレゼントしようと\nしてた？
+	ディーア	汗2						で、役に立てなくて……\nってことか……
+CharacterOff
+	ルディ	泣き
+Shake	ルディ		x=10				NoWait
+	ルディ							えぐえぐ……ライオンハートちゃん\n……ごめんなさいぃ……ぐすっ……
+	ルディ							るでぃ、やくたたず\nでしだよねぇ……っ
+CharacterOff
+	ライオンハート	サンタ	2_2
+	ディーア	驚き2	1_2
+	ライオンハート							いやいやいや！\nそんなことないからっ！
+	ライオンハート							ちょっとお兄ちゃん！\nなんで起きてきたの！
+	ディーア	汗2						いや、だって物音がしたがら……
+CharacterOff
+	ルディ	泣き
+Shake	ルディ		x=10				NoWait
+	ルディ							ごべんなざいいぃぃぃ……
+CharacterOff
+	ライオンハート	サンタ	2_2
+	ディーア	驚き2	1_2					あああルディが悪いんじゃなくて！
+CharacterOff
+	ルディ	泣き						えぐ……ぐすん……
+CharacterOff
+	ライオンハート	サンタ	2_2
+	ディーア	驚き2	1_2					……でもライオンハート、\nクリスマスってまだ先<dash=2>
+Tween	ライオンハート	PunchPosition	x=-50				NoWait
+	ライオンハート							ああああああ!!!!\nバカお兄ちゃん!!!!
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							むぐっ!?
+Tween	ライオンハート	MoveBy	x=-20
+	ライオンハート							<size=20>よけーなこと言わないのっ！\n……どうせクリスマス当日は他の子\nたちも来て忙しくなるんだから！</size>
+	ライオンハート							<size=20>ちょっとくらい\n早めでもいいでしょーっ！</size>
+	ディーア	怪しい2						<size=20>確かにそうだな……</size>
+CharacterOff
+	ディーア	通常2						よし
+	ライオンハート	サンタ						え、ちょっとお兄ちゃん？
+CharacterOff
+	ルディ	泣き	2_2
+	ディーア	通常2	1_2
+Shake	ルディ		x=10				NoWait
+	ルディ							えぐえぐ……ごめんなさいご主人……\nびっくりさせてあげようと\nおもったんでずけどぉ……ぐすん……
+	ルディ							"聖夜"を作って……喜んでもらおうと\nおもったんでずけどぉ……\nえぐえぐ……
+StopBgm						1
+	ディーア	あはは2						何言ってるんだ、サプライズなら\n大成功じゃないか
+	ルディ							……ふぇ……？
+	ディーア	通常2						だってオレ、結構びっくりしたしな
+	ルディ							……どうして……ですか……？
+Bgm	凱旋
+	ディーア	あはは2						オレのために色々計画して\nこっそり頑張ってくれたんだろ？\nそりゃびっくりするさ
+	ディーア	笑い2						それに嬉しいよ\nありがとな、ルディ
+	ルディ							うぇぇぇ……ごしゅじんん……\nそーゆーのはずるいれすぅ……!!
+	ディーア	汗2						ああわかったわかった、\nわかったから泣くなって！
+	ルディ							ぐすん……泣き止みまじたぁ……\nひっく……
+CharacterOff
+	ライオンハート	サンタ						まだ泣いてるじゃんもー……
+CharacterOff
+	ルディ	泣き	2_2
+	ディーア	通常2	1_2
+	ディーア							そんなことよりほら、\nまだ終わりじゃないんだろ？
+	ルディ							……え？
+	ディーア	笑い2						楽しみだなぁ！\nルディとライオンハートが用意\nしてくれたプレゼントなんて！
+	ディーア							きっとオレが本当に\nびっくりするくらい素敵なものを\n考えてくれたんだろうなー！
+	ルディ							え、ええっ!?
+	ディーア	通常2						ケリュネイア=ルディの創り出す\n"聖夜"<dash=2>一度見てみたかったんだ\n……見せてくれるんだろ？
+Tween	ルディ	PunchPosition	y=50				NoWait
+	ルディ							…………っ!!
+	ルディ							ふ、ふふん！もちろんですっ！\nもっともっと期待してくれても\nいいですよっ！
+CharacterOff
+	ライオンハート	サンタ						にひひ♪\nお兄ちゃん、びっくりして\nひっくり返っちゃうかもねっ♪
+CharacterOff
+	ディーア	笑い2						はは、そりゃ本当に楽しみだな！
+	ルディ							じゃあ早速行きましょうっ♪\nはやくはやくっ♪
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	草原A(夜)
+Bgm	雪の街
+	ディーア	驚き2
+Wait						1
+FadeIn	black					.5
+	ディーア							……ここは？
+	ルディ							町外れの丘ですよっ！\nほら、ここなら街中を\n見渡せるんですっ！
+	ルディ							さあご主人、見ててくださいっ！\n瞬きしたらダメですよっ！
+FadeOut	black					.5
+Bg	雪の街_空
+Wait						1
+FadeIn	black					.5
+	ルディ							<size=20>ご主人は、ルディに期待してくれてますっ</size>
+	ルディ							<size=20>ふふん♪\n役に立つとこをお見せするチャンスです！</size>
+StopBgm						1
+FadeOut	black					.5
+CharacterOff
+Bg	黒背景
+ImageEffect	SpriteCamera	Bloom
+Param	character_grayout=false
+Wait						.5
+FadeIn	black					.5
+	ルディ	右手	エフェクト裏
+Wait						.5
+Se	火1
+	ルディ右炎		エフェクト表			1
+Wait						1
+StopSe
+CharacterOff
+Wait						.3
+	ルディ	左手	エフェクト裏
+Wait						.5
+Se	火1
+	ルディ左炎		エフェクト表			1
+Wait						1
+CharacterOff
+Wait						.5
+ImageEffectOff	SpriteCamera	Bloom
+Param	character_grayout=true
+Se	火2
+Bg	雪の街_空					.5	NoWait
+	ルディ	拡大2	エフェクト表					<ruby=せーや>聖夜</ruby>、<ruby=こーりん>降臨</ruby>っ♪
+Se	光3
+FadeOut	white					1
+Bg	黒背景
+CharacterOff
+	聖夜	A	エフェクト裏
+Tween	聖夜	MoveTo	x=609
+Wait						.1
+FadeIn	black					.5
+Wait						.5
+	聖夜	B				0
+Wait						.1
+	聖夜	A				0
+Wait						.3
+	聖夜	B				.1
+Wait						.1
+	聖夜	C				.3
+Wait						.5
+Bgm	Xmasバトル
+Tween	聖夜	MoveBy	y=-288 time=1.5	easeInOutSine			NoWait
+Wait						1.5
+	聖夜	D				.5
+Wait						.5
+	聖夜	E				.7	NoWait
+Wait						.1
+Tween	聖夜	MoveTo	x=-609 time=2	easeInOutSine			NoWait
+Wait						2
+	聖夜	F				.5
+Wait						.7
+	聖夜	G				1.5	NoWait
+Tween	聖夜	MoveTo	x=185 y=-84 time=2	easeInOutSine			NoWait
+Wait						1.7
+	聖夜	H				.5
+Wait						1.3
+	聖夜	I				1
+Wait						.5
+ZoomCamera	SpriteCamera	.8				1.5	Add
+FadeOut	white					1
+CharacterOff
+Bg	雪の街_空
+	ルディ	拡大	エフェクト裏
+ZoomCamera	SpriteCamera	1				.1
+Wait						.5
+FadeIn	black					.3
+	ルディ							さあ、行きましょうっ♪
+FadeOut	black					.5
+Bg	市街地A(Xmas)
+CharacterOff
+	ライオンハート	サンタ	2_2
+	ディーア	通常2	1_2
+FadeIn	black					.5
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							おぉ……街に光が……!!
+CharacterOff
+	ルディ
+Tween	ルディ	PunchPosition	y=50				NoWait
+	ルディ							どうですかどうですかっ♪
+	ルディ							綺麗でしょうっ♪\nもっともっとできますよっ♪
+CharacterOff
+	ライオンハート	サンタ	2_2
+	ディーア	嬉しい2	1_2
+	ディーア							あぁ……!!\nすごく綺麗だ……!!
+Tween	ライオンハート	PunchPosition	y=50				NoWait
+	ライオンハート							すごーいっ！\n世界がキラキラしてるっ！
+CharacterOff
+	ルディ							えっへんっ♪\nこれがルディの"聖夜"ですよっ♪
+CharacterOff
+	ディーア	嬉しい2						すごい……\n本当に綺麗だ……
+CharacterOff
+	ライオンハート	サンタ	2_2
+	ルディ		1_2_b
+	ライオンハート							ふっふーん♪\nお兄ちゃんびっくりしてるっ！\n大成功だぁー♪
+	ルディ		1_2					やりましたね、\nライオンハートちゃんっ♪
+	ルディ							どうですか、ご主人っ!?\nルディ、お役に立てましたか!?
+CharacterOff
+	ディーア	あはは2						ああ、最高のクリスマスになったよ\nありがとうな！
+	ルディ							ふふん、どういたしましてっ♪
+	ルディ							…………それと、こちらこそ\nありがとうございますっ
+	ディーア	驚き2						え？\nいやいや、オレは何も……
+	ルディ							そんなことないですっ！\nだって、失敗しちゃった時は\nどうしようかと思って……
+	ルディ							でも、成功させられたのはご主人が\n手を差し伸べてくれたおかげですっ！
+	ディーア	あはは2						そりゃまあ、せっかくの\nクリスマスだからな\n今日くらいはみんな笑顔でなくちゃ
+	ディーア	通常2						そんな日に泣いてる子がいたら、\n放ってはおけないさ
+	ルディ							う……そういわれると\nちょっと恥ずかしいですね……
+	ディーア	あはは2						あはは！\n泣いてるルディも可愛かったぞ
+	ルディ
+Tween	ルディ	PunchPosition	y=50				NoWait
+	ルディ							えへへ……♪
+FadeOut	black					.5
+CharacterOff
+	ライオンハート	サンタ	2_2
+	ルディ		1_2_b
+Wait						1
+FadeIn	black					.5
+	ライオンハート							それにしても本当に綺麗だねーっ！
+	ルディ		1_2					はいっ！\n今日は上手くできました！
+CharacterOff
+	ディーア	驚き2						今日は？
+StopBgm						3
+	ルディ							はい、ええと……\nいつもはクリスマス当日は\n上手くいかない事が多いんです
+	ルディ							……でも、なんで今日は\n上手くいったんでしょう？
+FadeOut	black					.5
+CharacterOff
+Bg	酒場1F
+ImageEffect	SpriteCamera	Sepia
+	ライオンハート	サンタ	2_2
+	ディーア	驚き2	1_2
+Se	回想
+FadeIn	black					.5
+	ディーア							……でもライオンハート、\nクリスマスってまだ先<dash=2>
+Tween	ライオンハート	PunchPosition	x=-50				NoWait
+	ライオンハート							ああああああ!!!!\nバカお兄ちゃん!!!!
+Tween	ディーア	PunchPosition	y=50				NoWait
+Se	回想
+FadeOut	black					.5
+Bg	市街地A(Xmas)
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff
+	ライオンハート	サンタ	2_2
+	ディーア	通常2	1_2
+FadeIn	black					.5
+	ライオンハート							な、なんでだろうね……？
+	ディーア							あー……\nどうしてだろうな……？
+Bgm	雪の街
+	ライオンハート							ああああっ！\nそーいえばアップルパイ\n置きっぱなしだったっ！
+	ライオンハート							ルディちゃん！\n帰ろ！
+CharacterOff
+	ルディ							え？あ、はいっ！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+CharacterOff
+Bg	酒場1F
+StopBgm
+	黒グラデーション		エフェクト表
+	ディーア	怪しい2
+Wait						.5
+FadeIn	black					.5
+	ディーア							<size=20>ただいまー……</size>
+	ルディ							<size=20>ただいまでーす……</size>
+	ライオンハート	サンタ						<size=20>ただいまーっ……</size>
+Se	無
+CharacterOff
+Bgm	平和
+	ディーア	驚き2
+Tween	ディーア	PunchPosition	y=50				NoWait
+	ディーア							うわぁっ!!
+	リディ	驚き2						あ、マスター！\nルディちゃんも\nライオンハートちゃんも！
+	ディーア	驚き2						リディ、起きてたのか？
+	リディ	怒り2
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ	怒り2						さっき目が覚めたら\n誰も居なかったの！
+	リディ	怒り2						もう、こんな遅くにどこ行ってたの？\n心配したんだよ！
+	ディーア	あはは2						ああ、ごめんごめん……\nちょっと散歩にな
+	ディーア	通常2						ルディがクリスマスのプレゼントに\n"聖夜"を見せてくれたんだ
+	ライオンハート	サンタ
+Tween	ライオンハート	PunchPosition	y=50				NoWait
+	ライオンハート							あっ、お兄ちゃ……
+CharacterOff
+StopBgm						.5
+	リディ	驚き2						クリスマス？\n……って、まだ先じゃなかったっけ？
+CharacterOff
+	ルディ	泣き						…………え？
+	ライオンハート	サンタ						あちゃー…………
+	ルディ	泣き
+Shake	ルディ		x=10				NoWait
+Bgm	絶望
+	ルディ							………………あれ、ルディ、\nもしかして日付……間違え……？
+	ディーア	驚き2						…………あっ
+FadeOut	black					.1
+	ルディ	泣き
+Wait						2
+Bgm	コメディ
+FadeIn	black					.1
+Shake	ルディ		x=10				NoWait
+	ルディ							びええええ……っ！
+	ルディ							ルディは……また……またぁ……っ！\nぐすん……やくたたずでぇ……
+	ライオンハート	サンタ						ああもう、大丈夫だってばぁ！
+	リディ	悔しい2						どどどど、どうしようマスター!?\nリディなんか悪いこと\n言っちゃったかな!?
+	ディーア	汗2						あーいや、これは事故だ！\n仕方ない！
+	ルディ	泣き
+Shake	ルディ		x=10				NoWait
+	ルディ							えぐえぐ……びえええ……\nやくたたずでごべんなざいいぃぃ……
+	ディーア	汗2						ああもう、ルディは\n悪くないから<dash=2>っ!!
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*G_369_01
+EndIf
+EndScenario

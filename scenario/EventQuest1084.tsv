@@ -1,0 +1,1255 @@
+# E_1084_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	研究所A					0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+	インウィディア					0
+Se	回想
+FadeIn	white					.5
+	インウィディア							兄さんの匂い……\nこの建物の、地下からするの……
+FadeOut	white					.3
+CharacterOff						0
+Bg	凍りついた神殿城					0
+	アリス					0
+FadeIn	white					.3
+	アリス							あの<ruby=フロイライン>お嬢さん</ruby>は、"母親"が読んでくれた\n"たった一冊の本"を\n探し続けているのだ
+	アリス							世界図書館は、その\n"たった一冊の本"を探し続ける中で\n生まれた"副産物"にすぎない
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	目閉じ2				0
+FadeIn	white					.3
+	ディーア	目閉じ2						あの時のインウィディアの言葉に、\nアリス様がくれたヒント……
+	ディーア	怒り2						オレはロール様は魔界を守ろうとして\nいるんだと思っていた
+	ディーア	怒り2						:Blazeシリーズをつくったのも、\n七罪王との戦いに協力してくれたのも
+	ディーア	怒り2						だけど<dash=2>
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	研究所A					0
+	司書王ロルリアンレット	苦しい悪い顔H				0
+FadeIn	white					.3
+	司書王ロルリアンレット	苦しい悪い顔H						<dash=2>覚悟を決めたからよ
+	司書王ロルリアンレット	苦しい悪い顔H						あるものを得るために、\nあるものを捨てる、その覚悟を
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+Bg	酒場の地下					0
+	ディーア	目閉じ2				0
+FadeIn	white					.3
+	ディーア	目閉じ2						…………
+	ディーア	怒り2						元々、企みの多い人だ\n無条件に信じているわけじゃない
+	ディーア	怒り2						かといってオレには\nロール様が悪い人だとも思えない
+	ディーア	目閉じ2						どちらにせよロール様が\n真の目的を隠しているのなら、\n確かめないといけないな
+	ディーア	怒り2						……ロールピュア
+CharacterOff
+	サンタピュア	通常						魔剣使ぃさん、呼んだ……？
+CharacterOff
+	ディーア	笑い2						突然ごめんな、\n実はアリス様からロールお嬢様が\n探している本の話を聞いたんだ
+	ディーア	通常2						ロールピュアなら、\nその本のことを知っているかなって
+CharacterOff
+	サンタピュア	驚き						"大きな私"が探してぃる本……？
+	サンタピュア	通常						ぇぇと、その……\nもしかしたら、なんだけど……
+CharacterOff
+	ディーア	通常2						それで大丈夫だよ\n今はヒントがほしいんだ
+CharacterOff
+	サンタピュア	通常						七人の、王様……
+CharacterOff
+	ディーア	驚き2						え……？
+StopBgm
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	イベントロゴ10841		エフェクト表			0
+FadeIn	black					.3
+	サンタピュア	<Off>						七人の、わるぃ王様の本だと思ぅ……
+Wait						.5
+Param	character_grayout=true
+FadeOut	black					0
+Bg	荒野					0
+CharacterOff						0
+	ディーア	通常2	1_2			0
+	ハデスロスト	通常	2_2			0
+Wait						1
+FadeIn	black					.3
+Bgm	平和
+	ハデスロスト	通常						なるほど、\nつまりロルリアンレットさんが\n探していた本は
+	ディーア	通常2						ああ、\n七罪王に関係する本みたいなんだ
+	ディーア	怪しい2						ただ七罪王の話自体は、\n魔界で広く知られている内容だ
+	ディーア	怒り2						本もたくさんあるし\nロール様のお母さんが読み聞かせても\n不思議じゃない
+	ディーア	怒り2						でもその本を探すために\n世界図書館が作られたというなら\n話は別だ
+	ディーア	怒り2						ロール様には七罪王に固執する\n深い理由があるんだと思う
+	ハデスロスト	通常						だからマスターさんからも\n七罪王を調べてみるんですね？
+	ディーア	怒り2						ああ、何度か戦ったけれど\nオレは彼らについて詳しいことを\n知らない
+	ディーア	怒り2						どうして復活したのか\nどうして魔界へ復讐を企んでいるのか\nそもそも彼らは何者なのか
+	ディーア	目閉じ2						それを知った先にロール様の目的も\n分かるかもしれないからな……
+	ディーア	通常2						今向かっているのも、\n七罪王との関わりが伝わる土地なんだ
+	ハデスロスト	通常						でも……どうして\nおばけのハデスが必要なんですか？
+	ハデスロスト	通常						ハデスにできるのは\nマスターさんを守ることだけです
+	ハデスロスト	通常						はーちゃんさんみたいに\n……ちゃんとした魔剣の方が\nお役に立てると思いますよ？
+Tween	ハデスロスト	MoveBy	x=30				NoWait
+	ハデスロスト	悲しい						ハデスは\n元<ruby=ロスト>対魔剣殲滅魔導兵器</ruby>ですし……
+	ディーア	笑い2						ハデス=ロストだって\n今はちゃんとオレの魔剣だよ
+	ディーア	通常2						それにハデス=ロストは\nマイナス事象として罪を認識できるし\nその範囲はハデスより広い
+	ディーア	通常2						彼らの言う"罪"とは解釈が違っても\n七罪王の痕跡を見つけられるかもって\n思ってな
+Tween	ハデスロスト	MoveBy	x=-15				NoWait
+	ハデスロスト	通常						……おばけのハデスを、\n信じてくれるんですね、マスターさん
+Tween	ディーア	MoveBy	x=10				NoWait
+	ディーア	通常2						ああ、もちろんだ
+	ハデスロスト	通常						……わかりました、\nハデスはおばけですけれど\nお役に立てるように頑張ります
+	ディーア	笑い2						ありがとう
+	ディーア	通常2						さて、そろそろ\n目的の街につくはずだけど……
+StopBgm
+	？？？？	<Off>						……ゃめて
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						あれは……？
+Bgm	絶望
+CharacterOff
+	ならず者		1_3
+	ルークスリア	照れ町娘	2_2
+	ルークスリア	照れ町娘						うぅ……！\nもぅ、離してよ……
+	ならず者							女の子の一人旅なんて危ないだろ？\nつきっきりで護衛してやるって！
+	ならず者							ひひひ、宿の中もベッドの中も\nつきっきりでな……！
+	ルークスリア	照れ町娘						ぁたしは、ひとりで平気だから……
+	ならず者							親切で言ってるんだぞ？\nこうなったら、\nどれだけ危ないか体に<dash=2>
+Bgm	バトル
+CharacterOff
+	ディーア	本気2						おい、やめろっ！
+CharacterOff
+	ならず者		1_3
+	ルークスリア	照れ町娘	2_2
+	ルークスリア	照れ町娘						ぇ……キミは……？
+Tween	ならず者	PunchPosition	y=30				NoWait
+	ならず者							なんだ、お前!?
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						その子は嫌がっているし、\n本当に護衛が必要ならオレがやる
+	ディーア	本気2						お前みたいな弱みにつけこむ\nやつには任せられない
+CharacterOff
+	ならず者							言わせておけば……！\n後悔するなよ！
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						いくぞ、ハデス=ロスト！
+CharacterOff
+	ハデスロスト	本気拡大	エフェクト表					はい……\nハデスがマスターさんを守ります
+If	isdebug==true
+CharacterOff
+Jump	*E_1084_02
+EndIf
+EndScenario
+
+# E_1084_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	平和
+Bg	荒野					0
+Param	character_grayout=false
+	ならず者					0
+FadeIn	black					.5
+	ならず者							くっ……なんで、\nこんな強いやつがここに……！
+Se	走る
+Tween	ならず者	MoveBy	x=1200 time=2				NoWait
+Wait						1
+CharacterOff
+	ディーア	通常2	1_2
+	ハデスロスト	通常	2_2
+	オーラ紫		エフェクト表
+	ハデスロスト	通常						天冥、閉門……
+CharacterOff	オーラ紫					.3
+Wait						.2
+Param	character_grayout=true
+	ディーア	通常2						ありがとう、ハデス=ロスト
+	ディーア	汗2						でも力を出し過ぎじゃなかったか？\nそんな無理しなくて大丈夫だぞ？
+	ハデスロスト	通常						無理ではありません\nそれにハデスはマスターさんを\n守れればそれでいいんです
+	ハデスロスト	通常						……これくらいが\nハデスにはちょうどいいんです
+	ディーア	汗2						でも<dash=4>
+	ハデスロスト	通常						それよりマスターさん、\nあの人がこっちをみていますよ……？
+CharacterOff
+	ルークスリア	照れ町娘						ぁ、そ、その……
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	通常2	1_2
+	ディーア	通常2						大丈夫だったか？
+	ディーア	驚き2						って、キミはたしか……
+CharacterOff
+	ルークスリア	照れ町娘						ぅん、また会えたね、\n魔剣使いさん……
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	通常2	1_2
+	ディーア	通常2						そうだ、たしかルゥだよな？\n少し前に街で会って、\nあの時も勇者に絡まれてたっけ
+CharacterOff
+	ルークスリア	照れ町娘						ぁたし、そういうのよくあるの……\nわるい勇者とか、冒険者とか……\nいけない人がキちゃうの……
+	ルークスリア	照れ町娘						今日も、\n街に戻ろぅと思ってただけなのに……
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						そっか、それは大変だな……
+	ディーア	通常2						だったら、\nオレたちが家に送っていこうか？
+CharacterOff
+	ルークスリア	照れ町娘						ぃいの……？
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	通常2	1_2
+	ディーア	笑い2						もちろん\nルゥが信用してくれるならだけど
+CharacterOff
+	ルークスリア	照れ町娘						ぁう…………
+	ルークスリア	照れ2町娘						うん、だいじょぅぶ……\nキミを信じるね……
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						っ……
+	ディーア	汗2						（なんだかドキドキする子だな……）
+	ディーア	通常2						それじゃあ出発しよう\n歩きながら街のおいしいお店とか\n教えてくれないか？
+CharacterOff
+	ルークスリア	照れ2町娘						………ぅん
+StopBgm
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true time=1.2	linear
+FadeOut	black					.1
+CharacterOff						0
+Bg	酒場_カフェ					0
+	ルークスリア	照れ町娘	1_2			0
+	ディーア	通常2	2_2			0
+FadeIn	black					.3
+Bgm	魔剣の日常
+	ディーア	笑い2						ふぅ……\nごちそうさま！
+	ディーア	笑い2						ありがとう、\nいいお店を紹介してくれて
+Tween	ルークスリア	MoveBy	x=-10				NoWait
+	ルークスリア	照れ町娘						ぁたしこそ……お礼、だから……
+	ルークスリア	照れ町娘						ぉ父さんが、\nココ、美味しいって言ってて……
+	ディーア	通常2						ルゥのお父さんは学者さんだっけ？
+	ルークスリア	照れ町娘						ぅん……\nぃろんなとこ、一緒に旅してるの……
+	ルークスリア	照れ町娘						この街には、\nえっとたしか……七罪<dash=2>
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						七罪王!?
+	ルークスリア	照れ2町娘						っ……\n顔、ちかぃよ……？
+	ディーア	汗2						ご、ごめんっ！ つい驚いて……
+	ディーア	通常2						実はオレたちも七罪王を調べるために\nこの街に来たんだ
+	ディーア	通常2						よければルゥのお父さんに\n会わせてくれないか？
+	ルークスリア	照れ町娘						ぇー……デモどうしよっかな\nぉ父さん、\n今日はもどってこないし……
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	通常2						そこをなんとか……！
+Tween	ルークスリア	MoveBy	x=20				NoWait
+	ルークスリア	照れ町娘						……ぁたしでよかったら、\n遺跡、案内するけど？
+	ディーア	笑い2						ほんとうか!?\nありがとうな、ルゥ……！
+Tween	ルークスリア	MoveBy	x=-30				NoWait
+	ルークスリア	照れ町娘						ぅん……\nキミのぉ願いなら……いい、よ
+	ディーア	笑い2						それじゃあ、善は急げだ\n今から出発しよう！
+FadeOut	black					.3
+CharacterOff						0
+Bg	廃墟A					0
+	ルークスリア	通常町娘				0
+Wait						1
+FadeIn	black					.3
+	ルークスリア	通常町娘						ぉまたせ、ココだよ……\n七罪王のいせき……
+	ルークスリア	通常町娘						昔もココに\n七罪王を調べてる研究者さんが\nぃたらしいの……
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						でも、これだけ朽ちていたら\nめぼしいものは遺ってないかもな
+Tween	ハデスロスト	MoveBy	x=30				NoWait
+	ハデスロスト	通常						…………\nマスターさん、あっちです
+	ディーア	驚き2						ハデス=ロスト……？
+	ハデスロスト	通常						ここ辺りから罪の気配がします……
+CharacterOff
+	ルークスリア	通常町娘						ぇ……？\nココ、なにもなぃよ……？
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	目閉じ2	1_2
+	ディーア	目閉じ2						いやハデス=ロストの言う通り、\nかすかに魔力を感じる
+	ディーア	怒り2						これは……結界か？
+CharacterOff
+	ルークスリア	本気町娘						…………
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	通常2	1_2
+	ディーア	通常2						複雑な構築式だけど、\nオレたちなら破れそうだな
+	ディーア	通常2						ハデス=ロスト、行けるか？
+	ハデスロスト	通常						はい、どんなところでも\nマスターさんをお守りします
+	ディーア	怒り2						ルゥは……
+CharacterOff
+	ルークスリア	通常町娘						ぁたしも、行ってみたい……\nぉ父さんにいい報告できるかも\nしれないし……
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	通常2	1_2
+StopBgm
+	ディーア	怒り2						わかった\nでも、なにが待っているかわからない\n気をつけて進むぞ
+Se	光1
+FadeOut	black					.3
+CharacterOff						0
+Bg	神殿B					0
+	ハデスロスト	通常	2_2			0
+	ディーア	怪しい2	1_2			0
+Wait						2
+FadeIn	black					.3
+Bgm	図書館
+	ディーア	怪しい2						地下にこんな広い空間があるなんて\n七罪王を祀る祭事場か？
+	ハデスロスト	通常						ちょっと、暗いですね……
+	ディーア	驚き2						大丈夫か、ハデス=ロスト？\n確かにおばけが出そうな雰囲気だけど
+	ハデスロスト	通常						なんのことですか？
+	ハデスロスト	通常						むしろハデスがおばけなので、\n怖いわけないです……ほんとです……
+	ディーア	汗2						ちょっとだけ震えているけど、\n言わないほうがいいな……
+CharacterOff
+	ディーア	驚き2	画面外_右
+	ルークスリア	通常町娘	1_2
+	ルークスリア	通常町娘						魔剣使いさん、こっち……\nなにかある……
+Tween	ディーア	MoveBy	x=-610				NoWait
+Wait						1
+	ディーア	驚き2						これは……\n例の研究者が残した資料か？
+	ルークスリア	通常町娘						これ、なにか書いてあるね……
+	ディーア	通常2						こっちは研究レポートだな\nどうやら手広く調べてたみたいだが
+	ディーア	怪しい2						……『人工魔導生命』？\n『原初六魔剣の潜在因子と開放』？
+Tween	ディーア	PunchPosition	y=30				NoWait
+	ディーア	驚き2						いやいや、\nこんなの一個人の研究じゃないぞ？\nそれにこの署名<dash=2>
+CharacterOff
+	ハデスロスト	通常						マスターさん？
+CharacterOff
+	ディーア	笑い2						ハデス=ロスト、\nさっそく当たりを引いたみたいだ
+	ディーア	通常2						このレポートの主は、\nあの魔導生命研究所の一員だよ
+CharacterOff
+	ハデスロスト	通常						それってたしか……
+CharacterOff
+	ディーア	通常2						かつて存在したとされる\n魔核研究の一大拠点だ
+	ディーア	通常2						あらゆる叡智が結集して、\n魔導生命、特に魔核の\n真髄までを解明したと伝わってる
+	ディーア	通常2						この人がそこの研究員なら\n七罪王について何かをつかんでいても\nおかしくない
+	ディーア	怪しい2						それにこの資料は魔剣の強化にも……\n伝承への理解が……魔……化……\nなるほどな……
+CharacterOff
+	ルークスリア	照れ町娘						真剣なカオ……かっこいいかも……
+CharacterOff
+	ハデスロスト	通常	2_2
+	ディーア	笑い2	1_2
+	ディーア	笑い2						よしっ！\nこの資料をもらっていこう\nちゃんと調べればきっと<dash=2>
+StopBgm
+	ディーア	怒り2						っ……誰だ
+CharacterOff
+	アリエッタ	影
+Bgm	絶望
+	？？？？		1_2					フフフフ♪\nやはり、気づきましたか……
+CharacterOff
+	ハデスロスト	驚き	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						この声は……！
+CharacterOff
+	アリエッタ	通常						お久しぶりです、魔剣使いさん\nそれに……ハデス=ロストさん♪
+CharacterOff
+	ハデスロスト	驚き	2_2
+	ディーア	怒り2	1_2
+Shake	ハデスロスト		x=2				NoWait
+	ハデスロスト	驚き						っ…………！
+Param	character_grayout=false
+Se	回想
+FadeOut	white					.2
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	冥界の神殿					0
+	アリエッタ	影	1_2_b			0
+	ハデスロスト	驚き				0
+	          		2_2
+FadeIn	white					.2
+Wait						1
+FadeOut	white					.2
+CharacterOff						0
+	アリエッタ	通常拡大	エフェクト表			0
+FadeIn	white					.2
+	アリエッタ	通常拡大	エフェクト表					神への誓いを……\n破ってはなりませんよ、\nハデス=ロストさん
+FadeOut	white					.2
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+CharacterOff						0
+Bg	神殿B					0
+	ハデスロスト	驚き	2_2			0
+	ディーア	怒り2	1_2			0
+FadeIn	white					.2
+	ディーア	怒り2						アリエッタ、\nどうしてここに……！
+CharacterOff
+	アリエッタ	笑い						私も貴方の持つ\n資料に興味があるのですよ
+	アリエッタ	笑い						魔剣という生命への探究……\n新たな神の御使いを生むための智慧
+	アリエッタ	怪しい						それが私には必要なのです
+StopBgm
+CharacterOff
+	アリエッタ	嬉しい拡大	エフェクト表					どうか抵抗せず、\n渡してはくれませんか？
+Bgm	魔獣バトル
+CharacterOff
+	ハデスロスト	怒り	2_2
+	ディーア	怒り2	1_2
+	ディーア	怒り2						ふざけるなっ！\nまたサタニアの時のように\n実験を企んでいるんだろう……！
+	ディーア	本気2						そんなこと許さない！\nハデス=ロスト、行けるか？
+	ハデスロスト	本気						は、はい……！\n誰が相手でも、\nマスターさんを守ります……！
+If	isdebug==true
+CharacterOff
+Jump	*E_1084_03
+EndIf
+EndScenario
+
+# E_1084_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔獣バトル
+Bg	神殿B					0
+	アリエッタ	通常				0
+FadeIn	black					.5
+	アリエッタ	通常						覚えていらっしゃいますか、\nハデス=ロストさん？
+	アリエッタ	怪しい						機関にいた時の貴女と私は\nそれはもう縁が深かった……
+CharacterOff
+	ディーア	怒り2	1_2
+	ハデスロスト	怒り	2_2
+	ハデスロスト							……ハデスは覚えていません
+CharacterOff
+	アリエッタ	通常						ですが、\n私は昨日のように覚えていますよ？
+	アリエッタ	嬉しい						ハデス=ロストさんが\nこの魔界を冥府と化した日のことを
+CharacterOff
+	ディーア	怒り2	1_2
+	ハデスロスト	悲しい	2_2
+	ハデスロスト	悲しい						……っ、それは
+	ディーア	本気2						それはお前がハデス=ロストを騙して\nさせたことだろう……！
+CharacterOff
+	アリエッタ	嬉しい						あの時の貴女は輝いていた\n正しく神の御使いとして\n振る舞っていた
+	アリエッタ	蔑み						だというのに今は……\nああ、なんと嘆かわしい……
+	アリエッタ	蔑み						そんなに\n弱くなってしまうだなんて……
+CharacterOff
+	ディーア	怒り2	1_2
+	ハデスロスト	悲しい	2_2
+	ディーア	怒り2						なんだと……!?
+CharacterOff
+	アリエッタ	蔑み						ロストは、魔剣という歪な不死に\n人と平等の最期を与える聖なる存在
+	アリエッタ	蔑み						貴女はそこまで到達できたのに、\n自ら魔剣へと堕落した……\n嘆かずにいられましょうか
+	アリエッタ	通常						いかがですか、\nハデス=ロストさん？
+	アリエッタ	通常						我が神の御心は広いのです\nもう一度、\n神へその身を委ねてみませんか？
+	アリエッタ	笑い						そうすればロストに戻るだけでなく\nサタニアさんのような、\n新たな力も私がお渡ししましょう
+CharacterOff
+	ディーア	怒り2	1_2
+	ハデスロスト	本気	2_2
+	ハデスロスト	本気						ハデスがマスターさんから\n離れるなんて\nそんなこと、ありえません……
+	ディーア	怒り2						ああ！\nハデス=ロストはオレの魔剣だ！\nお前なんかに渡すものか！
+	ハデスロスト	本気						それに、\nあなたには一度勝っています、\n今度もハデスが<dash=2>
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	闇1
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(紫)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	神殿B					0
+CharacterOff						0
+	アリエッタ	笑い						ああ、これは\n痛いところをつかれてしまいました
+	アリエッタ	嬉しい						ですが、\nこれなら……どうでしょう♪
+Param	character_grayout=true
+Se	光1
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						.4
+CharacterOff
+	ディーア	驚き2	1_2
+	ハデスロスト	驚き	2_2
+	ディーア							なっ……!?
+	ハデスロスト	驚き						ハデスの攻撃がかき消された……？
+CharacterOff
+	アリエッタ	笑い						なぜ貴女は\nこのように考えないのでしょう？
+	アリエッタ	笑い						一度敗れているからこそ、\n敵は対抗策を持っているのでは、と
+	アリエッタ	嬉しい						この死神アリエッタに、\n二度も同じ手が通じると\n思わないことです
+CharacterOff
+	ディーア	悔しい2	1_2
+	ハデスロスト	驚き	2_2
+	ディーア	悔しい2						ハデス=ロストの力が効かない!?
+CharacterOff
+	アリエッタ	嬉しい拡大	エフェクト表					では、死神らしく……\n刈り取らせていただきましょう♪
+If	isdebug==true
+CharacterOff
+Jump	*E_1084_04
+EndIf
+EndScenario
+
+# E_1084_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔獣バトル
+Bg	神殿B					0
+	ハデスロスト	驚き	2_2			0
+	ディーア	悔しい2	1_2			0
+FadeIn	black					.5
+	ディーア	悔しい2						くっ……！\nなんで、ハデス=ロストの攻撃が\n弾かれるんだ!?
+CharacterOff
+	アリエッタ	蔑み						私は元より死霊使い、\n戦いの跡地より情報を抜き出すなど\n造作もないこと
+	アリエッタ	嬉しい						なによりハデス=ロストさんと私は\nふかぁい付き合いですから♪
+	アリエッタ	嬉しい						その身をこの爪でえぐったことも、\n貴女の伝承に刻まれているでしょう？
+CharacterOff
+	ハデスロスト	驚き	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						くっ……！\nこうなったら、他の魔剣を<dash=2>
+CharacterOff
+	アリエッタ	嬉しい						そのような隙を与えるとでも？
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	剣閃
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	神殿B					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	ルークスリア	照れ町娘
+Tween	ルークスリア	PunchPosition	y=30				NoWait
+	ルークスリア	照れ町娘						きゃぁ……!?
+Param	character_grayout=true
+CharacterOff
+	ハデスロスト	本気	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						ルゥ……!!
+	ディーア	悔しい2						この子は無関係な人間だぞ……！
+CharacterOff
+	アリエッタ	笑い						おや、そうでしたか\nですが戦いの場である以上、\n覚悟はしているものかと
+Param	character_grayout=false
+CharacterOff
+	ハデスロスト	本気	2_2
+	ディーア	悔しい2	1_2
+	黒グラデーション		エフェクト表
+	ディーア	悔しい2						どうする……？
+	ディーア	悔しい2						あいつの言う通り、\n魔剣を入れ替える余裕はない
+	ディーア	悔しい2						でも、このままじゃ……
+CharacterOff	黒グラデーション
+Param	character_grayout=true
+	ハデスロスト	本気						……マスターさん、大丈夫です
+	ディーア	驚き2						ハデス=ロスト？
+	ハデスロスト	本気						今の力が通じないなら、\nもっと力を強くすればいいだけ
+	ハデスロスト	本気						ハデスに、\nもっともっと圧かけてください……
+Tween	ディーア	PunchPosition	y=20				NoWait
+	ディーア	悔しい2						今以上って……！\nそんなことをすれば、\nお前の体がもたないぞ！
+	ハデスロスト	本気						ハデスはおばけです\n痛みも苦しみも、感情も\nハデスにはありません
+	ハデスロスト	本気						それよりも、\nマスターさんを守れないほうが\nダメです……
+	ハデスロスト	本気						ハデスは、\nマスターさんのおかげで\n救われたんですから
+CharacterOff
+	アリエッタ	通常						ふふ、救われたですか……
+	アリエッタ	通常						それにしては貴女の不安と焦りが\n手にとるようにわかりますよ？
+CharacterOff
+	ハデスロスト	本気						あなたはハデスを騙しただけです\nハデスのことが分かるわけ<dash=2>
+StopBgm
+CharacterOff
+	アリエッタ	嬉しい						貴女は怖れている
+CharacterOff
+	ハデスロスト	驚き						っ……！
+FadeOut	white					.3
+Param	character_grayout=false
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	冥界の神殿					0
+	ハデスロスト	敵				0
+	　　　　　　　　　　		1_2
+FadeIn	white					.3
+Bgm	絶望					0
+	アリエッタ	<Off>	1_2					貴女は感情を持たないと言いながら\nいつも恐怖に苛まれてきた
+	アリエッタ	<Off>						自分が自分でなくなる恐怖\n貴女の言葉では……おばけ、ですか
+	アリエッタ	<Off>						確かに自分の存在確立のために\n自身を壊し、姉を必死に求める姿は\n幽鬼のようではありましたね
+FadeOut	white					.2
+Param	character_grayout=true
+CharacterOff						0
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	神殿B					0
+	ディーア	悔しい2	1_2			0
+	ハデスロスト	悲しい	2_2			0
+FadeIn	white					.2
+	ハデスロスト	悲しい						でも、もうハデスは違います……\nハデスはマスターさんの魔<dash=2>
+CharacterOff
+	アリエッタ	嬉しい						まさか貴女が\n普通の魔剣として生きられるとでも？
+CharacterOff
+	ハデスロスト	悲しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア							なにを言ってる！\nハデス=ロストはオレの魔剣だ……！
+CharacterOff
+	アリエッタ	通常						フフフフ♪\n自覚はあるはずですよ？
+	アリエッタ	通常						魔剣から進化したロストを\n魔剣に戻すなど、歪なことでしかない
+	アリエッタ	通常						その結果、\n貴女はとーっても弱くなった
+CharacterOff
+	ディーア	悔しい2	1_2
+	ハデスロスト	悲しい	2_2
+	ハデスロスト	悲しい						そんなこと、ありません……\nハデスはマスターさんと一緒に……！
+	ディーア	本気2						そうだ！\nハデス=ロストはオレたちを守るため\n頑張ってきた！ 強くなった！
+CharacterOff
+	アリエッタ	蔑み						おやおや、\nマスターへの愛や気持ちがあれば\n強くなれるとでも？
+	アリエッタ	蔑み						ドロシーさんの言葉を借りるなら、\n兵器に感情などいらない
+	アリエッタ	蔑み						私は貴女の感情を肯定しますが、\nそれでもその感情が\n強さに繋がるはずなどない……
+	アリエッタ	嬉しい						むしろ逆でしょう……？
+Param	character_grayout=false
+CharacterOff
+	ハデスロスト	通常
+	          		1_2
+	アリエッタ	<Off>	3_3					貴女たち、\n元ロストの魔剣たちを構成する伝承は\nその魔剣使いさんとの戦いの記録
+	アリエッタ	<Off>						故にその身は知っている！\n兵器として何を為したのかを！\n主を傷つけ絶望させたことを！
+	アリエッタ	<Off>						貴女は主を傷つけた伝承を持つ\n歪な魔剣でしかないのです……！
+	ハデスロスト	悲しい						っ…………！
+	ハデスロスト	悲しい						は、ハデスは……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	イベントスチル10312		エフェクト表			0
+FadeIn	white					.3
+	天冥杖ハデス=ロスト	本気						あなたたちが\nハデスの邪魔をするなら<dash=2>
+	天冥杖ハデス=ロスト	<Off>						すべて潰して、砕いて混ぜて……\nハデスの力にしてあげます
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia				0
+CharacterOff						0
+	ディーア	怒り2	1_2			0
+	ハデスロスト	悲しい	2_2			0
+Param	character_grayout=true
+FadeIn	white					.3
+Shake	ハデスロスト		x=3 time=2				NoWait
+	ハデスロスト	悲しい						ち、違います……！\nハデスはマスターさんを守ることが
+CharacterOff
+	アリエッタ	嬉しい						フフフフ、怖いでしょう？\n自分が魔剣になれないと自覚するのは
+	アリエッタ	嬉しい						救われたはずなのに、\nずーっと恐怖が増すばかり
+	アリエッタ	嬉しい						ハデスやペルセポネのようになれない\n普通の魔剣ではいられない悲しみを\n貴女は背負っている！
+CharacterOff
+	アリエッタ	嬉しい拡大	エフェクト表					だから貴女は弱いっ！
+Bgm	緊迫
+CharacterOff
+	ハデスロスト	悲しい	2_2
+	ディーア	怒り2	1_2
+	ディーア	本気2						ハデス=ロスト！\nもう、あいつの話は聞くなっ！
+	ディーア	本気2						オレはお前を信じている\n絶対にお前を使いこなして、\nあいつを倒してみせる！
+	ディーア	悔しい2						だから……！
+	ハデスロスト	悲しい						マスターさん、お願いします……
+	ハデスロスト	悲しい						ハデスがマスターさんを守ります\nハデスがどうなっても守ります
+CharacterOff
+	ハデスロスト	本気拡大	エフェクト表					だから、だからもっと……！\nハデスに、圧かけてください……！
+If	isdebug==true
+CharacterOff
+Jump	*E_1084_05
+EndIf
+EndScenario
+
+# E_1084_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	神殿B					0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	MotionBlur
+	          
+FadeIn	black					.5
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(紫)		エフェクト裏			0
+Se	闇1
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.3
+Bg	神殿B
+CharacterOff
+	アリエッタ	通常
+Tween	アリエッタ	MoveBy	x=50				NoWait
+	アリエッタ	通常						確かに見事な攻撃ですね
+ImageEffectOff	SpriteCamera	MotionBlur
+	アリエッタ	通常						貴女に与えられた\n<ruby=マルチロックオンシステム>多層式魔導照準機構</ruby>
+	アリエッタ	通常						神に仇なす者を、魔剣を、ハデスを\n一瞬の内に殲滅する力
+	アリエッタ	通常						ですがそれは\n主も傷つけかねない諸刃の剣……！
+Param	character_grayout=false
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	剣閃
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	神殿B					0
+CharacterOff						0
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	MotionBlur
+	ハデスロスト	悲しい	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						くっ……!?
+Param	character_grayout=false
+CharacterOff
+	アリエッタ	通常						そして御使いであった時と比べれば\nあまりにみすぼらしい威力！
+Se	チャージ
+	オーラ赤		エフェクト表			1
+	アリエッタ	嬉しい						あの時の力はどうしました!?\n魔界全てを飲み込むほどの力は!?\n渇望は!?
+CharacterOff
+	ディーア	驚き2						まだ力が上がるのか!?
+CharacterOff
+	アリエッタ	通常						私の四肢も、\nかの王から模倣した魔導生機体技術で\n強化されましたからね
+	アリエッタ	笑い						こわがりのおばけさんには、\n負けませんよ？
+CharacterOff
+	黒グラデーション		エフェクト表
+	ハデスロスト	悲しい
+	ハデスロスト	悲しい						（だめ、です……\n　ハデスはマスターさんを\n　守らないといけないのに……）
+	ハデスロスト	悲しい						（それしかできないのに……）
+	ハデスロスト	悲しい						（それもできなかったら、\n　ハデスは魔剣でいられない……）
+Se	闇1
+CharacterOff	黒グラデーション
+	オーラ紫		エフェクト表			.5
+	ハデスロスト	本気						だから……！\nたとえハデスが壊れても……!!
+CharacterOff
+	ディーア	悔しい2						ハデス=ロスト、よせ……！\nこれ以上は\nお前の魔核が耐えきれない……！
+CharacterOff
+	ハデスロスト	悲しい拡大	エフェクト表
+	ハデスロスト	悲しい拡大						ハデスは、\nマスターさんを守らないと……！
+StopBgm
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	光1
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(紫)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	神殿B					0
+CharacterOff						0
+	ルークスリア	照れ町娘						きゃああああああ!?
+CharacterOff
+	ディーア	驚き2						ルゥ、あぶな<dash=2>
+CharacterOff						0
+ImageEffect	SpriteCamera	MotionBlur
+Se	光1
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	射撃(紫)		エフェクト裏			0
+Tween	黒背景	MoveBy	y=-3000 time=1
+Wait						.3
+Bg	神殿B					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	ディーア	悔しい3
+	土煙		エフェクト表
+	ディーア	悔しい3						ぐぁあああああ!?
+CharacterOff
+	ハデスロスト	驚き						ますたー、さん……？
+	ハデスロスト	悲しい						は、ハデスの攻撃が……？
+Bgm	絶望
+CharacterOff
+	アリエッタ	嬉しい						これで伝承に伝わる通りですね\nハデス=ロストさん？
+	アリエッタ	嬉しい						貴女はまた……自分の主を傷つけた
+CharacterOff
+	ハデスロスト	悲しい
+	ハデスロスト	悲しい						ハデスがマスターさんを……？
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	悔しい3				0
+FadeIn	white					.2
+	ハデスロスト	<Off>	1_2					マスターさんを……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	ハデスロスト	悲しい				0
+FadeIn	white					.3
+	ハデスロスト	悲しい						ぁ、あぁ……
+Se	チャージ
+	オーラ紫		エフェクト表			.5
+	ハデスロスト	悲しい						アァアアああああああああああ!!
+Se	闇3
+FadeOut	black					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1084_06
+EndIf
+EndScenario
+
+# E_1084_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	神殿B					0
+Param	character_grayout=false
+	アリエッタ	通常
+FadeIn	black					.5
+	アリエッタ	通常						主ごと冥府に引きこもるとは……
+	アリエッタ	通常						フフフフ、\nあの資料は必要でしたのに\nどういたしましょう？
+FadeOut	black					.3
+CharacterOff						0
+Bg	魔術空間B					0
+	ハデスロスト	驚き				0
+Wait						1
+FadeIn	black					.3
+	ハデスロスト	驚き						ここ、は……？
+	ハデスロスト	悲しい						あぁ……\nハデスはまた、繰り返したんですね
+	ハデスロスト	悲しい						こんな冥界を作り出して……\nマスターさんまで……
+	ハデスロスト	悲しい						ハデスは、\nやっぱり悪いおばけなんですね……
+	ハデスロスト	悲しい						醜い、どこにも居場所がない\nおばけ……
+Se	回想
+FadeOut	white					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+	イベントスチル10312		エフェクト表			0
+FadeIn	white					.3
+	ハデスロスト	<Off>						ロストだった頃と\nなんにも変わらないバケモノ……
+	ハデスロスト	<Off>						そんなハデスでいたくなくて、\n他のハデスを、お姉ちゃんを、\nマスターさんを傷つけて……
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	酒場1F					0
+	ハデス	通常2	1_3			0
+	ペルセポネ	通常2	3_3			0
+	ディーア	笑い2	2_3			0
+	          					0
+FadeIn	white					.3
+	ハデスロスト	<Off>	p3b					でも、マスターさんたちに\n助けてもらえたから
+	ハデスロスト	<Off>						ハデスがここにいるって、\n確かめてもらえたから……
+FadeOut	white					.3
+CharacterOff						0
+Bg	魔術空間B					0
+	ハデスロスト	悲しい				0
+FadeIn	white					.3
+	ハデスロスト	悲しい						ハデスはちゃんと、\n魔剣になりたいって思ったんです
+	ハデスロスト	悲しい						はーちゃんさんやお姉ちゃんみたいに\nマスターさんを守りたいって……
+	ハデスロスト	悲しい						マスターさんのために\nハデスはいいおばけになりたかった
+	ハデスロスト	悲しい						いつか消えるのなら、\nマスターさんのために消えたかった
+	ハデスロスト	悲しい						でも、違ったんです……\nハデスはけっきょくダメでした……
+	ハデスロスト	悲しい						マスターさんたちと一緒にいると\n胸が温かくなります
+	ハデスロスト	悲しい						でも次の瞬間に、\n胸の奥がずきって痛むんです……
+FadeOut	black					.3
+CharacterOff						0
+Bg	黒背景					0
+	幻影ハデスA		1_3			0
+	幻影ハデスB		2_3			0
+	幻影ハデスC		3_3			0
+	          
+FadeIn	black					.3
+	ハデスロスト	<Off>	1_2					ハデスが壊した、\nたくさんのハデスがじっと見てます
+	ハデスロスト	<Off>						ハデスだけ、\n幸せになるのかって
+	ハデスロスト	<Off>						お姉ちゃんをさらったこと、\nはーちゃんさんを怖がらせたこと\nマスターさんを傷つけたこと
+	ハデスロスト	<Off>						全部を思い出してしまいます
+FadeOut	black					.3
+CharacterOff						0
+Bg	魔術空間B					0
+	ハデスロスト	悲しい				0
+FadeIn	black					.3
+	ハデスロスト	悲しい						あの人が言った通り\nハデスの体はいやな記憶から……\n伝承からできているから
+	ハデスロスト	悲しい						きっと、\nこの痛みは消えません
+	ハデスロスト	悲しい						またマスターさんを\n傷つけてしまいます……
+	黒グラデーション		エフェクト表			1
+	ハデスロスト	悲しい						だったらもうハデスは、\n消えたほうがいいんです……
+	ハデスロスト	悲しい						おばけみたいに、\nどこかに消えたほうが……
+StopBgm
+CharacterOff
+	ルークスリア	本気
+	黒グラデーション		エフェクト表
+	？？？？？	<Off>	1_2					そぅ……ぁなたは、\n愛に満ちているのね……？
+CharacterOff
+	ハデスロスト	驚き						ぇ…………？
+Bgm	図書館
+CharacterOff
+	ルークスリア	本気
+	黒グラデーション		エフェクト表
+	？？？？？	<Off>	1_2					くるしぃ、かなしぃ……\nあのヒトに愛してほしぃって……
+	？？？？？	<Off>						ずーっと\nシクシク泣いてぃるのね……
+	？？？？？	<Off>						とってもわかるわ、\nぁなたはぁたしとおなじ……
+CharacterOff
+	ハデスロスト	驚き						……ハデスには\nよくわかりません……\nあなたがなにを言っているのか
+	ハデスロスト	驚き						感情を封じたから\nわかりません
+	ハデスロスト	驚き						この気持ちが……\n苦しさが、愛、なんですか？\nこんなことが……？
+CharacterOff
+	ルークスリア	本気
+	黒グラデーション		エフェクト表
+	？？？？？	<Off>	1_2					愛しているから、くるしいの……\n好きだから、かなしくなるの……
+	？？？？？	<Off>						それはタダの兵器にはない……\n魔剣らしいこと……
+	？？？？？	<Off>						ぁの人は……死神さんは\n間違っている……
+	？？？？？	<Off>						ぁなたはとっても魔剣らしい……
+CharacterOff
+	ハデスロスト	悲しい						…………\n今さらこの気持ちがわかっても\n意味がありません
+	ハデスロスト	悲しい						ハデスはマスターさんを傷つけた\nこれからもきっと傷つける\nだから<dash=2>
+CharacterOff
+	ルークスリア	本気
+	黒グラデーション		エフェクト表
+	？？？？？	<Off>	1_2					……そぅ\n愛は罪と表裏一体だからね……
+	？？？？？	<Off>						でも、ぁなたの主は……\nどぅかな……？
+StopBgm
+CharacterOff	ルークスリア					.5
+Wait						.5
+CharacterOff
+	ハデスロスト	悲しい						今の人は……
+Bgm	神秘
+CharacterOff
+	ディーア	本気3						ハデス=ロスト……！\nよかったやっと見つけ<dash=2>
+CharacterOff
+	ハデスロスト	悲しい						っ……！\nダメです、近づかないでください
+	ハデスロスト	悲しい						ハデスは、\nマスターさんを傷つける\n悪いおばけです
+CharacterOff
+	ディーア	本気3						そんなことないっ！
+	ディーア	悔しい3						それに……\n本当に悪いのはオレだ
+	ディーア	悔しい3						……ごめんな、ハデス=ロスト
+	ディーア	悔しい3						お前が苦しんでいたこと、\n気づいてやれなかった
+	ディーア	悔しい3						マスターとして\nお前を支えることが出来なかった
+	ディーア	怒り3						仲間になってくれたから、\n一緒にいられたから\nそれで大丈夫だって安心してた
+	ディーア	怒り3						お前に頼りすぎてしまったんだ
+CharacterOff
+	ハデスロスト	悲しい
+Shake	ハデスロスト		x=3				NoWait
+	ハデスロスト	悲しい						ち、ちがいます……\n悪いのは、ハデスなんです……
+	ハデスロスト	悲しい						ハデスはマスターさんを\n傷つける存在なのに……\nそれなのに魔剣でいたくて……
+	ハデスロスト	悲しい						そんな自分がイヤなのに、\nマスターさんから離れたくなくて……
+	ハデスロスト	悲しい						きっとハデスは\nずっとこうなんです……
+	ハデスロスト	悲しい						マスターさんを傷つけた魔剣として\n生きないとだめなんです
+CharacterOff
+	ディーア	目閉じ3						…………
+	ディーア	怒り3						そうかもしれないな
+	ディーア	怒り3						アリエッタの言う通り\nハデス=ロストとしての伝承は\nオレたちとの戦いの記録
+	ディーア	怒り3						ハデス=ロストが犯した過ちは\n消えてくれない
+CharacterOff
+	ハデスロスト	悲しい						はい、だから<dash=2>
+Bgm	結婚
+CharacterOff
+	ディーア	本気3						でも、だからこそ、\nハデス=ロストは強くなれる……！
+	ディーア	怒り3						魔剣として……！
+CharacterOff
+	ハデスロスト	驚き						…………っ
+CharacterOff
+	ディーア	通常3						たとえ過去の出来事や事実は\n変えられなくても\nオレたちには心がちゃんとある
+	ディーア	通常3						心の捉え方で\nただの事実を罪にも希望にもできる
+	ディーア	通常3						だってお前にとっては\n苦くて忘れたい記憶でも
+	ディーア	笑い3						オレにとってはお前と出会えた\n大切な記憶なんだから
+	ディーア	通常3						それはお前も同じだろ？
+	ディーア	笑い3						お前はオレを傷つけただけじゃない\nオレたちはわかりあって、助け合えた
+	ディーア	笑い3						あの出来事がなければ、\nハデス=ロストと一緒にいることは\nできなかった
+	ディーア	通常3						だからハデス=ロストは\nこんなに必死にオレたちを守ろうと\nしてくれる
+CharacterOff
+	ハデスロスト	驚き						あの出来事があったから、\nハデスは魔剣でいられる……？
+CharacterOff
+	ディーア	通常3						……そうだ、\nこの伝承は決して罪でも枷でもない\nロストであった過去も、名前も
+	ディーア	通常3						<ruby=ロスト>失って傷ついた</ruby>からこそ\nもっと強くなれる、優しくなれる
+	ディーア	通常3						それがハデス=ロストが持ってる\n魔剣としての強さだよ
+CharacterOff
+	ハデスロスト	驚き						ハデスの、つよさ……
+	ハデスロスト	悲しい						でも、今のハデスでは\nあの人には勝てません……\nマスターさんを守れません……
+CharacterOff
+	ディーア	通常3						だったらオレと一緒に\nもっと強くなろう
+CharacterOff
+	ディーア	笑い3						ほら、手を出して……
+	ディーア	通常3						オレがこうやって\nハデス=ロストの存在を確かめる
+	ディーア	笑い3						ハデス=ロストはちゃんとここにいる\n悪いおばけじゃない
+	ディーア	目閉じ3						だからハデス=ロストも\nもう一度、思い出してくれ\n自分が魔剣になったときの気持ちを
+CharacterOff
+	ハデスロスト	驚き						……ハデスが魔剣になった時
+	ハデスロスト	驚き						それは製造された時……？\nいいえ、ちがいます
+	ハデスロスト	通常						それは、あの時
+Se	回想
+FadeOut	white					1
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	イベントスチル10315		エフェクト表			0
+Bgm	結婚					0
+Wait						1
+FadeIn	white					1
+Tween	イベントスチル10315	MoveBy	y=-400 time=10				NoWait
+	ハデスロスト	<Off>						マスターさんとお姉ちゃんと\nはーちゃんさんと\n手をつないで、確かめてもらって
+	ハデスロスト	<Off>						そしてハデスもあの時、\n約束をしました
+	ハデスロスト	<Off>						次に出会えたら、\nマスターさんを守りたいって\n例えおばけでも……守護霊みたいに
+	ハデスロスト	<Off>						それが\nハデス=ロストという魔剣の<ruby=オリジン>伝承</ruby>
+FadeOut	white					.3
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+CharacterOff						0
+	ハデスロスト	驚き	2_2			0
+	ディーア	笑い3	1_2			0
+FadeIn	white					.3
+	ディーア	笑い3						オレは\nお前の痛みを感じられないけど、\n一緒に背負うことはできる
+	ディーア	笑い3						マスターとして……
+	ハデスロスト	嬉しい						そしてハデスは魔剣として
+	ハデスロスト	嬉しい						この痛みも過去もなにもかも、\nハデスの力に代えて……！
+StopBgm
+Param	character_grayout=false
+Se	チャージ
+	オーラ青		エフェクト表			.5
+	ディーア	本気3						ああ、一緒にいくぞ……！\n<ruby=アンロック>魔剣開放</ruby>!!
+FadeOut	white					1
+CharacterOff						0
+Bg	神殿B					0
+	ルークスリア	どや町娘				0
+Wait						1
+FadeIn	white					1
+	ルークスリア	どや町娘						…………フフ、\nこれが魔王の……
+CharacterOff
+	アリエッタ	嬉しい						どうやって出てきたかと思えば……\n見慣れない姿ですね？
+Bgm	タイトル
+FadeOut	white					1
+CharacterOff						0
+Bg	白背景					0
+	ハデスロスト	拡大魔王尻	エフェクト表			2
+	          
+FadeIn						1
+	ディーア	<Off>						オレたちを先に通したのが失策だな\nアリエッタ
+FadeOut	white					.3
+CharacterOff						0
+	ハデスロスト	拡大魔王胸	エフェクト表			0
+	          
+FadeIn	white					.3
+	ディーア	<Off>						オレはあの資料から知れたんだ\n魔剣のさらなる可能性を
+FadeOut	white					.3
+CharacterOff						0
+	ハデスロスト	拡大魔王顔	エフェクト表			0
+	          
+FadeIn	white					.3
+	ディーア	<Off>						ハデス=ロストの\n伝承、その最奥に眠っている……
+FadeOut	white					.3
+Bg	神殿B					0
+CharacterOff						0
+	ハデスロスト	魔王エフェクト	エフェクト表			0
+	          
+FadeIn	white					.3
+	ディーア	<Off>						『原初六魔剣の起源覚醒』
+CharacterOff
+	ディーア	怒り3
+	ディーア	怒り3						これはハデス=ロストの\n魔剣としての始まり、\nその気持ちの結晶……
+	ディーア	本気3						ハデス=ロストが自分と向き合い\n成長した結果だ！
+CharacterOff
+	ハデスロスト	魔王						今度こそ誓います、マスターさん
+	ハデスロスト	魔王						マスターさんを、\n降りかかる全てから守ります
+	ハデスロスト	魔王						だから……
+CharacterOff
+	ハデスロスト	拡大魔王顔	エフェクト表					ハデス=ロストに\nもっと圧かけてください
+If	isdebug==true
+CharacterOff
+Jump	*E_1084_07
+EndIf
+EndScenario
+
+# E_1084_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	風属性バトル
+Bg	神殿B					0
+Param	character_grayout=false
+	ハデスロスト	魔王	2_2			0
+	ディーア	本気3	1_2			0
+FadeIn	black					.5
+	ディーア	本気3						これで終わりだ、アリエッタ……!!
+	ハデスロスト	魔王						天冥、開門……！
+Se	チャージ
+	オーラ紫		エフェクト表			.3
+Wait						1
+FadeOut	white					.5
+CharacterOff						0
+Se	光1					0
+Se	光3					0
+Se	闇3					0
+	アリエッタ	嬉しい				0
+	土煙		エフェクト表			0
+FadeIn	white					.5
+Shake	アリエッタ		x=5 y=3				NoWait
+	アリエッタ	嬉しい						くっ……！
+CharacterOff	土煙					2
+	アリエッタ	嬉しい						なるほど、\nハデス=ロストの魔剣としての覚醒\nこれはパターンにはなかったですね
+	アリエッタ	嬉しい						全ての魔剣に眠る原初六魔剣の因子\nそれが目覚めた魔装……
+	アリエッタ	嬉しい						その身を切り開きたいほど\n興味深いですが……
+	アリエッタ	嬉しい						ふふ、\n全て約定どおりとはいきませんか……
+	アリエッタ	通常						ではまた、次の機会に……
+StopBgm
+CharacterOff
+	ハデスロスト	魔王	2_2
+	ディーア	本気3	1_2
+	ディーア							待て……！
+Param	character_grayout=false
+CharacterOff
+	アリエッタ	通常
+Wait						1
+Se	光1											転送エフェクト
+CharacterOff	アリエッタ					1.5						エフェクト回転の裏でドロシーたちが消える
+	イベントスチル459H1		effect_a			1
+	イベントスチル459H2		effect_b			1
+Tween	イベントスチル459H1	RotateBy	z=5 time=100				NoWait
+Tween	イベントスチル459H2	RotateBy	z=-5 time=100				NoWait
+Wait						2
+Param	character_grayout=true
+CharacterOff
+	ハデスロスト	魔王	2_2
+	ディーア	悔しい3	1_2
+	ディーア	悔しい3						不気味なやつだ……
+Bgm	平和
+	ハデスロスト	魔王						でも、\nおわり、ましたね……
+Se	光1
+FadeOut	black					.3
+	ハデスロスト	通常				0
+FadeIn	black					.3
+	ディーア	驚き3						ハデス=ロスト、大丈夫か？
+	ハデスロスト	通常						ごめんなさい……\n今は体が動かせないみたいです……
+	ディーア	笑い3						あれだけの力を出したんだから\n仕方ないさ
+	ディーア	通常3						今はゆっくり休んでくれ
+	ディーア	通常3						これからもお前には\n魔剣として支えてほしいんだから
+	ハデスロスト	嬉しい						…………はい、\nもちろんですマスターさん
+CharacterOff
+	ルークスリア	照れ町娘						ぉわった、の……？
+CharacterOff
+	ディーア	通常3						ああ、あいつは撤退した\nあとはこの資料を持ち帰って<dash=2>
+StopBgm
+Se	光1
+FadeOut	white					.2
+ImageEffect	SpriteCamera	MotionBlur
+FadeIn	white					.2
+	ディーア	怒り3
+Tween	ディーア	MoveBy	x=-90				NoWait
+	ディーア	怒り3						っ…………
+Bgm	絶望
+CharacterOff
+ImageEffectOff	SpriteCamera	MotionBlur
+	ルークスリア	どや町娘						ふぅん……\nよけるんだ……
+CharacterOff
+	ディーア	怒り3						ルゥ……
+CharacterOff
+	ルークスリア	どや町娘						そぅじゃない、でしょ……？\n魔剣使い
+CharacterOff
+	ディーア	怒り3						そうだな……七罪王
+CharacterOff
+	ルークスリア	どや町娘						いつから、気づいてたの？
+CharacterOff
+	ディーア	怒り3						冥府の中でのお前の魔力反応だ\nあんな異質な魔力、\n七罪王以外にはありえない
+	ディーア	怒り3						オレたちに悟らせないために\n薄く結界を張っていたみたいだが、\nあそこでは解けていた
+CharacterOff
+	ルークスリア	どや町娘						フフ……\nぁの状況でとっても冷静だったんだ
+	ルークスリア	どや町娘						ぁたし、抜け目のない人は\nスキよ……
+CharacterOff
+	ディーア	怒り3						目的はこの資料か
+CharacterOff
+	ルークスリア	どや町娘						そして、\nぉ嬢サマの手駒である\nキミの排除……
+	ルークスリア	どや町娘						ココはぁたしたちを祀る場所じゃない\nぁたしたちを倒そうとした奴らの\n神殿……
+	ルークスリア	本気町娘						キミがいないと、\nぁたしはココに入れなかった……
+CharacterOff
+	ディーア	怒り3						戦う以外の選択肢は？
+CharacterOff
+	ルークスリア	どや町娘						アハハハハ……！
+Bgm	魔王バトル
+CharacterOff
+	ディーア	怒り3	1_2					仕方ないか……！\nノートゥング、頼む！
+Se	光1
+	ノートゥング	通常3	2_2			.2		はーい♪\nおまたせー♪
+Tween	ノートゥング	PunchPosition	y=30				NoWait
+	ノートゥング	驚き3						って、ちょっとマスター！\nなんでこんな修羅場に\nノーちゃん連れてきたの!?
+	ディーア	驚き3						それより今は、\nあの子を止めないと！
+Param	character_grayout=false
+CharacterOff
+	ルークスリア	本気町娘
+	オーラ赤		エフェクト表
+	ルークスリア	本気町娘						七罪王……【色欲】の王……\n罪名は『撒き散らす純情』
+Se	闇1
+FadeOut	white					.2
+	ルークスリア	本気				0
+FadeIn	white					.2
+	ルークスリア	本気						ぁたしは\n色欲のルークスリア……！
+CharacterOff
+	ノートゥング	驚き3	2_2
+	ディーア	本気2	1_2
+	ディーア	本気2						いくぞっ!!
+FadeOut	white					1
+If	isdebug==true
+CharacterOff
+Jump	*E_1084_08
+EndIf
+EndScenario
+
+# E_1084_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	魔王バトル
+Bg	神殿B					0
+	ノートゥング	驚き3	2_2			0
+	ディーア	悔しい3	1_2			0
+FadeIn	black					.5
+	ディーア	悔しい3						なんだ、この魔力の質感は……!?
+	ディーア	悔しい3						あまくて、\n体にまとわりつくような……！
+	ディーア	絶望3						あの子に目を……\n合わせられない……！
+Param	character_grayout=false
+CharacterOff
+	オーラ赤		エフェクト裏
+	ルークスリア	本気
+	ルークスリア	本気						ふぅ……ん､\nキミも…目を………､\nそら……す……ん……だぁ
+Param	character_grayout=true
+CharacterOff
+	ノートゥング	驚き3	2_2
+	ディーア	悔しい3	1_2
+Shake	ノートゥング		x=2				NoWait
+	ノートゥング	驚き3						ま、マスター……！\n私も、体がヘンに……！
+	ディーア	驚き3						これは感情の……色欲の暴走!?
+Param	character_grayout=false
+CharacterOff
+	オーラ赤		エフェクト裏
+	ルークスリア	本気
+	ルークスリア	笑い						ほぉら、見て……？\nルゥを……見て……?
+Se	チャージ
+	ルークスリア	笑い						さあ、一緒に堕ちましょぅ？
+CharacterOff
+	ディーア	絶望3						ぐぅうううう……！\nダメだ、抵抗できない……！\n思考が溶かされる……！
+	ディーア	絶望3						なにか、なにか方法は……？
+	？？？？	<Off>	1_2					方法なら、ありますよ♪
+	ディーア	驚き3						っ、この声……\nいったいだれが……？
+FadeOut	black					.3
+ImageEffect	SpriteCamera	GrayScale
+CharacterOff						0
+Bg	魔術空間					0
+	ノートB	拡大通常2	エフェクト裏			0
+	黒グラデーション		エフェクト表			0
+FadeIn	black					.3
+	？？？？	<Off>						マスターさん、\nさあ、あの言葉を言って
+	？？？？	<Off>						魂の熱を思い出して、\n私を使いこなしてください♪
+FadeOut	black					.3
+Param	character_grayout=false
+ImageEffectOff	SpriteCamera	GrayScale
+StopBgm
+CharacterOff						0
+Bg	神殿B					0
+	ディーア	本気3				0
+FadeIn	black					.3
+	ディーア	本気3						そう、そうだ……！\n<ruby=コード>起動呪文は</ruby>……！
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+Bg	黒背景
+Param	character_grayout=false
+	イベントスチル1048N	N1	エフェクト裏			0
+	黒背景		エフェクト表			0
+Se	火2
+Tween	黒背景	MoveBy	x=1500 time=2				NoWait
+	？？？？	<Off>						:Blazeシステム起動♪
+Se	火3
+	イベントスチル1048N	N2				2
+Wait						2.5
+ImageEffectOff	SpriteCamera	Bloom
+FadeOut	white					1
+CharacterOff						0
+	ノートB	拡大通常	エフェクト表			0
+Bgm	BlazeA
+FadeIn	white					1
+	ノートB	拡大通常	エフェクト表			0		強くてかわいい完全な兵器\nノートゥング:Blaze♪
+FadeOut	white					1
+CharacterOff						0
+Bg	神殿B					0
+	ノートB	本気				0
+FadeIn	white					1
+	ノートB	本気						かわいく活躍してみせます♪
+		<Off>						<color=blue>Blaze Lust Labyrinth\n　　　　　　　　To Be Continued……</color>
+If	isdebug==true
+CharacterOff
+Jump	*E_1084_01
+EndIf
+EndScenario

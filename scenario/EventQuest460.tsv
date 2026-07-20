@@ -1,0 +1,1846 @@
+# E_460_01
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bg	草原A(夜)
+Param	character_grayout=false
+	ジャガノロストロゴ		effect_a			0
+	黒背景		エフェクト裏
+FadeIn	black					.5
+Wait						1
+Se	ガードブレイク
+ImageEffect	SpriteCamera	Bloom
+CharacterOff	ジャガノロストロゴ					2
+Wait						3
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff	黒背景					2
+Se	強風	TRUE				2
+Param	character_grayout=true
+Wait						3
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							…………そう\n終わったんだ、ジャガーノート
+CharacterOff
+	グレイプニル	驚き						ぁ、あ…………
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							…………ふん
+CharacterOff
+	グレイプニル	驚き
+Se	光1
+	オーラ青		エフェクト表			1.5
+Wait						2
+FadeOut	white					.1
+Param	character_grayout=false
+CharacterOff						0
+Se	コインロック
+	グレロストチェーン3		エフェクト表			0
+	オーラ青		エフェクト表2			0
+	グレイプニル	驚き				0
+Wait						.1
+CharacterOff	オーラ青					1
+FadeIn	white					.1
+Shake	グレイプニル		x=5				NoWait
+	グレイプニル	絶望						くぅっ……
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル46001		エフェクト表			0
+FadeIn	white					.5
+	？？？？							……世界を壊す、魔天の獣
+CharacterOff
+	グレロストチェーン3		エフェクト表
+Se	コインロック
+	グレイプニル	絶望
+Shake	グレイプニル		x=5				NoWait
+	グレイプニル							…………ぁ
+CharacterOff
+	イベントスチル46001		エフェクト表
+	？？？？	<Off>						この世界は、絶対に変えさせない
+StopBgm
+	イベントスチル46001		エフェクト表			0
+	？？？？					0		<dash=2>だから、グレが破壊する
+Se	スローモーションエンド
+Wait						1.82
+FadeOut	black					0
+StopSe
+CharacterOff						0
+Bg	研究所A					0
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+ImageEffectOff	SpriteCamera	Bloom
+Wait						3
+Bgm	絶望
+FadeIn	black					.5
+	リディ							<dash=2>グレイプニル……って、だれ？
+	ディーア	悔しい2						なん、だって……？
+	リディ							マスター、そんな子持ってたっけ……
+Tween	リディ	PunchPosition	y=50				NoWait
+	リディ							あっ、もしかして、またどこかで\n見つけた子を勝手に連れてきた、\nとか<dash=2>
+	ディーア	怒り2						………………冗談だよな？
+	リディ	悔しい2						…………って、マスター？\nど、どうしたの？
+	ディーア	悔しい2						……グレイプニルを知らない？\nいや、そんなはずはない
+	ディーア	怒り2						思い出してくれ、ほら……\n前にお月見で<dash=2>
+	リディ	驚き2						お月見？\n……ああ、確かマスターと\n二人でお月見したよね？
+	ディーア	絶望2						…………え
+	リディ							その時、何かあったっけ……？
+	ディーア	悔しい2						賢狼事変だよ！
+FadeOut	black					.2
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	大橋（夜）
+FadeIn	black					.2
+	ディーア	<Off>						月が盗まれて、オレたちは月を\n取り戻すために戦って、それで<dash=2>
+	リディ	<Off>						けんろう、じへん…………
+FadeOut	black					.2
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	ディーア	悔しい2	1_2			0
+	リディ	驚き2	2_2			0
+Bg	研究所A					0
+FadeIn	black					.2
+	リディ							…………ぁ、そうだ……\nグレちゃん……
+	ディーア							思い出したか!?
+	リディ	悲しい2						あれ？\nリディ、どうして\n忘れてたんだろう……
+	ディーア	悔しい2						まさか、これも\nグレイプニル=ロストが……？
+CharacterOff
+	ロルリアンレット	驚きH						そう考えるのが妥当でしょうね
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	リディ							…………ってことは、\nみんなグレちゃんのこと\n忘れちゃってるの……？
+	リディ							リディだけじゃなくて、みんな……
+CharacterOff
+	ロルリアンレット	驚きH						……ええ、私も含めて\nおそらく魔界中の全員、ね
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	泣き2	2_2
+	リディ							……そんなのやだ、だって<dash=2>\nグレちゃんも、大切な仲間なのに……
+	ディーア							…………っ
+	ディーア	怒り2						……それより、\nこのままだとグレイプニルが危ない
+	ディーア							今はグレイプニルの安全を\n確保するのが最優先だ
+CharacterOff
+	ロルリアンレット	驚きH						そうね、この間に攻撃を\n仕掛けられたら、\n対抗する術がないもの
+	ロルリアンレット							魔剣グレイプニルは今どこに？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア							リーマ郊外の宿屋で\n待機しているはずです……\nすぐに迎えに<dash=2>
+	　　　　　　　　　　							　	BrPage
+StopBgm
+Se	アラート	TRUE
+FadeOut	red					.4
+	リディ	驚き2
+	ディーア	驚き2
+FadeIn	red					.4
+Wait						.2
+FadeOut	red					.4
+FadeIn	red					.4
+Wait						.2
+FadeOut	red					.4
+	ディーア	悔しい2
+FadeIn	red					.4
+StopSe
+Bgm	緊迫
+	リディ	悔しい2
+	ディーア							な、なんだ……!?
+CharacterOff
+	世界図書館職員	<Off>						ロルリアンレットお嬢様!!\n報告します!!
+	世界図書館職員	<Off>						リーマ郊外の上空にて、\n強力な魔力反応を確認しました!!
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							リーマ郊外……!!
+CharacterOff
+	ロルリアンレット	悪い顔H						…………この魔力の波形、\nグレイプニル=ロストで\n間違いないわね
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悔しい2	2_2
+	ディーア							ロールお嬢様!!
+CharacterOff
+	ロルリアンレット	悪い顔H						すぐに向かいなさい、魔剣使い\n事態は一刻を争うわ
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							わかってます\nオレがなんとかしてみせます……!!
+FadeOut	black					.5
+StopBgm
+CharacterOff
+Bg	草原A(夜)
+	ディーア	怒り2	画面外_左
+Wait						3
+Se	強風	TRUE
+Se	走る
+Tween	ディーア	MoveTo	x=0 time=2				NoWait
+FadeIn	black					.5
+Wait						1
+	ディーア							……魔力源はこのあたりのはずだ\nグレイプニル=ロストはどこに……？
+Se	光1
+Param	character_grayout=false
+	オーラ青		エフェクト表			1
+Wait						1
+CharacterOff	オーラ青					1
+Wait						.5
+	ディーア	怒り2						なんだ……？\nこの感じ、前にもどこかで……
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？	<Off>						………………ぁ
+CharacterOff
+	ディーア	驚き2						グレイプニル!?
+CharacterOff
+StopSe
+Bgm	絶望
+Param	character_grayout=false
+Se	コインロック
+	グレロストチェーン3		エフェクト表
+	グレイプニル	絶望						………………
+CharacterOff
+	ディーア	悔しい2						グレイプニル……!!\n一体何が……
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							…………あるじ？
+CharacterOff
+	ディーア	怒り2						<dash=4>その声\nお前、は……!!
+CharacterOff
+	グレイプニル=ロスト	驚き
+	？？？？	<Off>	エフェクト表					あるじ……なんで、ここに……？
+	グレイプニル=ロスト	悲しい
+	？？？？		エフェクト表					おぼえて、ない……はずなのに……
+CharacterOff
+	ディーア	怒り2						グレイプニル=ロスト…………!!
+	ディーア							<dash=2>お前　グレイプニルに、何を
+CharacterOff
+	グレイプニル	拘束	1_2_b
+	グレイプニル=ロスト	驚き	2_2
+Tween	グレイプニル=ロスト	PunchPosition	y=50				NoWait
+	グレイプニル=ロスト							…………っ!?
+	グレイプニル=ロスト	悲しい						ち、ちがう……
+	グレイプニル=ロスト							なんで……？\n忘れさせた、はず、なのに
+Se	光2
+	オーラ青		エフェクト表			1
+	グレイプニル=ロスト	絶望
+Tween	オーラ青	ScaleBy	x=1.1 y=1.1				Add
+	グレイプニル=ロスト							<dash=2>なら、もう一回……
+CharacterOff
+	ディーア	本気2						逃がすか……ッ!!
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.2
+CharacterOff
+	オーラ青		エフェクト表
+	グレイプニル	拘束	1_2_b
+	グレイプニル=ロスト	驚き	2_2
+Tween	グレイプニル=ロスト	PunchPosition	y=50				NoWait
+CharacterOff	オーラ青					.5
+	グレイプニル=ロスト							<dash=4>ッ!?
+	オーラ青					1
+Se	光3
+FadeOut	white					1
+CharacterOff	グレイプニル=ロスト					0
+CharacterOff	グレイプニル					0
+CharacterOff	オーラ青					1.5
+FadeIn	white					.5
+Wait						1
+CharacterOff
+	ディーア	悔しい2						………………ッ\nグレイプニル……!!
+	ディーア	絶望2						<dash=4>逃げ、られた……？
+	ディーア	驚き2
+	オーラ青		エフェクト表			2
+Wait						1
+CharacterOff	オーラ青					1
+Wait						1
+	ディーア	悔しい2						…………まだ、魔力の繋がりは\n消えていない
+	オーラ青					.5
+	ディーア	目閉じ2						それなら、この魔力を辿れば<dash=2>
+Se	光1
+FadeOut	white					.3
+Wait						.2
+FadeIn	white					.3
+CharacterOff	オーラ青					1
+Wait						1
+	ディーア	悔しい2						くっ、ダメか……
+	ディーア	怒り2						魔力の流れを追っても、\n途中で途切れてしまう……
+	ディーア	悔しい2						くっ……\nグレイプニル=ロスト……!!
+FadeOut	black					.5
+If	isdebug==true
+CharacterOff
+Jump	*E_460_02
+EndIf
+EndScenario
+
+# E_460_02
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bg	酒場1F
+FadeIn	white					.5
+	　　　　　　　　　　							<color=blue>　　　　　貿易の街　リーマ\n　　　　旅酒場「魔王と竜王」</color>
+Bgm	絶望
+	ディーア	絶望2						どういう、ことだ…………？
+	リディ	驚き2						ど、どういうことって\n言われても…………
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア							グレイプニルだよ！\nさっき思い出したじゃないか！
+	リディ							し、知らないよ……？\nどうしたの、マスター……？
+	ディーア	悔しい2						ほら、賢狼事変の……
+	リディ	悔しい2						けんろうじへん……？\nうーん……
+	リディ	笑い2						あ、もしかしてまたどこかで見つけた\n子を勝手に連れてきた、とか<dash=2>
+	ディーア	絶望2						…………うそ、だろ
+	リディ	驚き2						……って、マスター？
+	ディーア							また記憶が薄れている……？
+	ディーア							…………まさか
+Se	回想
+FadeOut	black					.3
+CharacterOff						0
+ImageEffect	SpriteCamera	Sepia
+Bg	草原A(夜)					0
+	グレイプニル=ロスト	絶望				0
+FadeIn	black					.3
+	グレイプニル=ロスト							<dash=2>なら、もう一回……
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	悔しい2	1_2			0
+	リディ	驚き2	2_2			0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	酒場1F					0
+FadeIn	black					.3
+	ディーア							……グレイプニル=ロストが、\nまた<dash=2>
+	リディ	悲しい2
+	ディーア							……そうだ、スレなら<dash=2>
+FadeOut	black					.5
+CharacterOff						0
+Bg	酒場の地下					0
+	スレイプニル					0
+Wait						.5
+FadeIn	black					.5
+	スレイプニル							グレイプニルですか……？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+	ディーア							ああ、スレの幼馴染の……
+CharacterOff
+	スレイプニル							えと……存在は知ってるです\nでも、魔剣少女として\n会ったことはないと思う、です
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア							…………そんな
+	ディーア	怒り2						どんな些細なことでもいい、\n他になにか覚えてることは<dash=2>
+CharacterOff
+	スレイプニル							うーん……心当たりない、です
+CharacterOff
+	ディーア	絶望2	1_2
+	リディ	悲しい2	2_2
+	ディーア							…………そうか
+	ディーア							……いや、知らないならいいんだ
+Tween	ディーア	MoveTo	x=-800 time=3				NoWait
+Wait						1
+CharacterOff	ディーア					.5
+Wait						1.5
+	リディ
+	スレイプニル		1_2_b					…………だんな様、\nなんだか元気ない、です
+	リディ							うん……どうしちゃったんだろうね
+	スレイプニル							その、グレイプニルって子……\nスレと、仲良しだったのです？
+	リディ							……わかんない\nリディも、覚えてないの
+	スレイプニル							もしそうだとしたら……
+	スレイプニル							……寂しい、ですね
+	リディ							うん……そうだね
+FadeOut	black					.5
+StopBgm
+CharacterOff
+Bg	草原A(夜)
+	ディーア	悔しい2
+Wait						2
+Bgm	絶望
+FadeIn	black					.5
+	ディーア							……このままじゃマズい
+	ディーア	怒り2						早く、グレイプニルを\n取り戻さないと\n……取り返しのつかないことになる
+	ディーア	悔しい2						でも、どうすれば……
+Se	回想
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+Bg	白背景					0
+CharacterOff						0
+	グレイプニル	恍惚				0
+FadeIn	white					.2
+	グレイプニル							■■■、■■■<dash=2>
+FadeOut	white					.2
+CharacterOff						0
+Bg	草原A(夜)					0
+	ディーア	絶望2				0
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	white					.2
+	ディーア							<dash=4>な
+	ディーア	悔しい2						まさか、オレの記憶も\n薄れかかっている……？
+	ディーア							くっ…………!!
+Se	回想
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	ディーア	悔しい2	1_2			0
+	リディ	悲しい2	2_2			0
+Bg	研究所A					0
+FadeIn	white					.2
+	リディ							…………ってことは、\nみんなグレちゃんのこと\n忘れちゃってるの……？
+	リディ							リディだけじゃなくて、みんな……
+CharacterOff
+	ロルリアンレット	驚きH						……ええ、私も含めて\nおそらく魔界中の全員、ね
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	泣き2	2_2
+	リディ							……そんなのやだ、だって<dash=2>\nグレちゃんも、大切な仲間なのに……
+FadeOut	white					.2
+Bg	草原A(夜)					0
+CharacterOff						0
+	ディーア	悔しい2				0
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	white					.2
+	ディーア							そんなの……絶対に……
+	ディーア							いや、オレはまだ忘れていない……\nグレイプニルはオレの魔剣だ……
+	ディーア							……強く意志を持ち続けるんだ\nそうすれば、こんな魔術だって<dash=2>
+Se	回想
+FadeOut	white					.2
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+Param	character_grayout=false
+Bg	白背景					0
+	グレイプニル	恍惚				0
+Tween	グレイプニル	ScaleBy	x=0.8 y=0.8 time=0
+Tween	グレイプニル	MoveBy	y=100 time=0
+Tween	グレイプニル	ScaleBy	x=0.5 y=0.5 time=100				NoWait
+Tween	グレイプニル	MoveBy	y=250 time=100				NoWait
+FadeIn	white					.2
+	グレイプニル							■■■■■■■<dash=2>
+	ディーア	<Off>						<dash=4>ぁ
+FadeOut	white					.2
+CharacterOff						0
+Bg	草原A(夜)					0
+	ディーア	絶望2				0
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Sepia
+FadeIn	white					.2
+	ディーア							<dash=2>グレイプニル……
+CharacterOff
+StopBgm
+	リディ	悲しい2						……やっと見つけた
+	ディーア	悔しい2						<dash=6>ッ!?
+	ディーア	驚き2						…………リディ？
+	リディ	悲しい2						……もう、探したんだよ？
+	ディーア	悔しい2						…………っ
+	ディーア							……そうか、\nごめんな、リディ
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	照れ2	2_2
+	リディ							ううん、気にしないで
+	リディ	悲しい2						…………それより、\nマスターは大丈夫？
+	リディ							……みんな、心配してるよ？
+	ディーア	悔しい2						……ああ、オレは大丈夫だ\nでも、グレイプニルが……
+	リディ	通常2						…………そっか
+FadeOut	black					.5
+CharacterOff						0
+	　　　　　　　　　　
+Bg	宇宙					0
+Wait						.5
+Bgm	神秘					1.5
+FadeIn	black					.5
+	リディ	<Off>						……大切な子だったんだね、その子
+	ディーア	<Off>						…………え？
+	リディ	<Off>						だって、いまのマスター\nすごく辛そうだもん
+	ディーア	<Off>						…………ああ\nオレの、大切な魔剣だ
+	リディ	<Off>						……その子、どんな子だったの？
+	ディーア	<Off>						……グレイプニルか？\nえっと……
+	ディーア	<Off>						そうだな……しっぽを振っては\n変なお願いをして甘えてくる、\n変わった子だよ
+	ディーア	<Off>						……そうだ、\n『あるじあるじ』って言って\n駆け寄ってきてさ
+	リディ	<Off>						あ、マスターそういう子好きそう
+	ディーア	<Off>						……そんな風に思われてたのか
+	リディ	<Off>						えへへ、でも当たりでしょ\n……それで？
+	ディーア	<Off>						ああ……賢狼事変っていう事件で、\n出会ったんだ
+	ディーア	<Off>						……大変な夜だった\nいろんな事があった夜だった
+	ディーア	<Off>						お月見しようと思って\n空を見上げたら、月が盗まれてさ
+	リディ	<Off>						お月さまが？\n盗めるの!?\nあんなに大きいのに!?
+	ディーア	<Off>						いや、月そのものを盗んだわけじゃ\nなかったんだ
+	ディーア	<Off>						確か、それもグレイプニルが\nやったことでさ……
+	ディーア	<Off>						月の光だけを、\n亜空間に転送して…………
+FadeOut	black					.2
+Bg	草原A(夜)					0
+CharacterOff						0
+	ディーア	驚き2	1_2			0
+	リディ	驚き2	2_2			0
+FadeIn	black					.2
+	ディーア							<dash=4>そうだ
+	リディ							マスター？
+	ディーア	悔しい2						……『月光』を隠した亜空間だ\nどうして気が付かなかった……!!
+	リディ							なにか思い出したの？
+	ディーア	怒り2						ああ、かつてグレイプニルが\n月の光を隠した亜空間……
+	ディーア	悔しい2						『月光』の魔力を遮断できるほどの\n大規模な亜空間なら、魔力の追跡が\nできないことも納得できる……!!
+	リディ							じゃあ、そこに\nグレイプニルちゃんが……？
+	ディーア	怒り2						ああ、その可能性が高い
+	ディーア	悔しい2						グレイプニルを餌にしてオレを\n誘い込もうとしている可能性も\nあるけど……
+	ディーア	怒り2						それでも、もう手段を選んでいる\n余裕はない
+	ディーア	通常2						ありがとう、リディ\n助かったよ
+	リディ	照れ2						うん！\nマスター、もう大丈夫？
+	ディーア	怒り2						ああ……!!\n待ってろ、グレイプニル……\n今助けに行く……!!
+If	isdebug==true
+CharacterOff
+Jump	*E_460_03
+EndIf
+EndScenario
+
+# E_460_03
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	絶望
+Bg	夜空
+	カルバノグ
+FadeIn	black					.5
+	カルバノグ							……彼、気づいたみたいですよう♪
+CharacterOff
+	黒グラデーション		エフェクト表
+	？？？？							……そうだろうな
+	？？？？							記憶の封印も、所詮は自分に\n掛けられた魔術を解析して\n真似ただけの紛い物だ
+	？？？？							グレイプニル=ロストの力では、\nあの程度が限界だろうさ
+CharacterOff
+	カルバノグ							……それにしてもお、\n今更手伝いにくるなんてえ
+	カルバノグ							ドロシーも見に来たく\nなっちゃったんですかあ？
+CharacterOff
+	黒グラデーション		エフェクト表
+Wait						.5
+CharacterOff	黒グラデーション					.5
+Se	歩く
+	ドロシー	怒り/フード				1
+Wait						1
+	ドロシー	怒り				.5
+Wait						.5
+StopSe	歩く
+	ドロシー							ふん、そんなわけあるか\nただ命じられただけだ
+CharacterOff
+	カルバノグ							なにをですう？
+	ドロシー	怒り						いつもどおりさ\n上手くやれそうなら放っておけ、\nダメならなんとかしろってな
+	ドロシー							ったく世話が焼ける\nわざわざ<ruby=ミーミル>叡智保全統制</ruby>局まで\n足を運ばせやがって
+	カルバノグ							なあんだあ、\n遊びに来たのかと思いましたよう
+	ドロシー	怒り						アホか……\nところで、お前こそ、\nやけに楽しんでいるように見えるが？
+	カルバノグ							そうですかあ？\nカルバはいつもこんな感じですよう？
+	カルバノグ							カルバは運ぶだけのウサギなのでえ、\n別に作戦の失敗とか成功とか\n興味ないですしい♪
+	ドロシー	怒り						…………ふん
+	ドロシー	通常						それより、あのお嬢様<dash=2>\n既に気づいているようだぞ
+	カルバノグ							多分最初から全部バレてますよう？
+	カルバノグ							でも、あんまり\n動く気はないみたいですしい
+	ドロシー	ニヤリ						だろうな
+	ドロシー							世界図書館は、魔天狼に匹敵する\nものを隠している
+	ドロシー							魔力のバランスが不安定な今、\n迂闊に動くことは避けたいだろう
+	ドロシー	怒り						まあ、どんな思惑があるかは\n知らないが……
+	ドロシー							あちらが不干渉を\n貫いてくれるのであれば、それでいい
+	黒背景		エフェクト表
+	ドロシー							ああ、それから<dash=2>
+	ドロシー							<dash=2>お前宛に、\nひとつ託されたものがある
+FadeOut	black					1.5
+StopBgm
+CharacterOff						0
+Bg	大橋（夜）					0
+	ディーア	悔しい2				0
+Param	character_grayout=false
+Wait						2
+Se	強風	TRUE
+FadeIn	black					.5
+	ディーア							…………ここだ\nやっとたどり着いた
+Se	光1
+	オーラ青		エフェクト表			.5
+	ディーア	怒り2						待ってろ、グレイプニル……\n今助けるからな
+StopSe
+Se	光3
+FadeOut	white					.5
+CharacterOff
+Bg	月夜の大地
+	　　　　　　　　　　
+Wait						1.5
+Bgm	絶望
+FadeIn	white					1
+Wait						1.5
+	グレイプニル=ロスト	冷酷						………………
+CharacterOff
+	グレロストチェーン3		エフェクト表
+	グレイプニル	絶望						…………っ、ぁ
+Se	コインロック
+Tween	グレイプニル	PunchPosition	x=5				NoWait
+	グレイプニル							くぅっ…………
+CharacterOff
+	ディーア	怒り2						<dash=4>グレイプニル!!
+CharacterOff
+Bgm	緊迫
+	グレイプニル=ロスト	驚き						…………っ!?
+	グレイプニル=ロスト	悲しい						…………ぁ、あるじ……
+CharacterOff
+Param	character_grayout=false
+	ディーア	悔しい2						見つけたぞ、\nグレイプニル=ロスト……!!
+	オーラ青		エフェクト表
+	ディーア	怒り2						<ruby=アンロック>魔剣、解放</ruby><dash=2>!!
+Se	魔剣入る
+FadeOut	white					.3
+FadeIn	white					.5
+Wait						.2
+CharacterOff
+	グレイプニル=ロスト	驚き						…………ぇ
+Shake	グレイプニル=ロスト		x=5				NoWait
+	グレイプニル=ロスト	悲しい						……ぁ、ちがう、ちがうの……\nグレ、は……
+	ディーア	本気2						グレイプニルは\n返してもらう<dash=2>!!
+If	isdebug==true
+CharacterOff
+Jump	*E_460_04
+EndIf
+EndScenario
+
+# E_460_04
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	月夜の大地
+	グレイプニル=ロスト	悲しい
+FadeIn	black					.5
+	グレイプニル=ロスト							…………っ
+StopBgm						5
+	ディーア	驚き2						………………お前
+	グレイプニル=ロスト	泣き
+Shake	グレイプニル=ロスト		x=5				NoWait
+	グレイプニル=ロスト							や、やだ……あるじ……
+	ディーア	悔しい2						お前、どうして戦おうとしない……？
+	グレイプニル=ロスト	泣き
+Shake	グレイプニル=ロスト		x=5				NoWait
+	グレイプニル=ロスト	泣き						いや……あるじと\nたたかいたくない……いやぁ……
+Bgm	絶望
+	ディーア	悔しい2						戦いたくない……？\nどういうことだ……？
+	ディーア							グレイプニルを破壊しなかったのは、\nオレを誘い込むためじゃ\nなかったのか……？
+	グレイプニル=ロスト	泣き						……ちがうの、ちがう……\nあれ、あの……あれ……
+	ディーア	悔しい2						…………まさか
+FadeOut	white					.2
+Param	character_grayout=false
+CharacterOff						0
+	グレイプニル	絶望				0
+	グレロストチェーン3		エフェクト表			0
+FadeIn	white					.2
+Se	コインロック
+Shake	グレイプニル		x=5				NoWait
+	グレイプニル							…………うぅ\n……あ……
+CharacterOff						0
+	イベントスチル46006		エフェクト表			0
+Shake	イベントスチル46006		x=5				NoWait
+	グレイプニル	<Off>						ぁぁぁぁ…………
+FadeOut	white					.2
+CharacterOff						0
+Param	character_grayout=true
+	ディーア	悔しい2				0
+FadeIn	white					.2
+	ディーア							グレイプニル……？\nこの魔力、まさか<dash=2>
+Se	回想
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+	イベントスチル46007		エフェクト表			0
+FadeIn	black					.3
+	ディーア	怒り2						<dash=2>賢狼、の……？
+FadeOut	black					.3
+Param	character_grayout=true
+ImageEffectOff	SpriteCamera	Sepia
+CharacterOff						0
+	グレイプニル=ロスト	悲しい				0
+FadeIn	black					.3
+	グレイプニル=ロスト							……そう\n…………もう、覚醒しかけてる
+	グレイプニル=ロスト							グレたち、ロストがきたから……\nロストが、バランスを乱したから……
+	ディーア	悔しい2						…………まさか、グレイプニルに\n封印した賢狼の力が活性化して<dash=2>
+	グレイプニル=ロスト	悲しい						……こっちのグレは、もう、\nこれ以上もたない
+	グレイプニル=ロスト	通常						だからね、あるじ、グレは……
+	ディーア	悔しい2						…………なるほどな
+	ディーア	怒り2						だから、活性化した魔力を\n放出してから、グレイプニルを\n破壊して魔天狼を再起不能にする
+	ディーア							それが、お前の立てた作戦<dash=2>\nこの亜空間はそのためのものか
+	グレイプニル=ロスト							…………そう、そう！\nだから<dash=2>
+CharacterOff
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表			.5
+	ディーア	目閉じ2						…………アンロック
+Se	魔剣入る
+CharacterOff	オーラ青					1
+Wait						1
+CharacterOff
+Param	character_grayout=true
+	グレイプニル=ロスト	驚き						………………ぇ
+	グレイプニル=ロスト	悲しい						……ぁ、あるじ……？\nな、なんで……？
+	ディーア	怒り2						グレイプニルはオレの魔剣だ
+	ディーア	悔しい2						どんな理由があるにせよ\nそれを壊すっていうなら、\nオレは許すわけにはいかない
+	グレイプニル=ロスト	泣き						や、いや……\nど、どうして……あるじ……？\nだってグレ、あるじのために……
+	ディーア	怒り2						悪いが、グレイプニルは\n返してもらうぞ
+	グレイプニル=ロスト	泣き						あ、あるじ……なんで、なんで？
+	グレイプニル=ロスト	泣き						グレは、いないほうがいいのに？\nその方が、あるじのためなのに……？
+	ディーア	悔しい2						なんだって……？
+	グレイプニル=ロスト	泣き						だって、だって……\nグレがいると、あるじに、\n迷惑かかる……
+	グレイプニル=ロスト							グレは……\nあるじの、だいすきな魔界を、\n壊しちゃうかもしれない、から……
+	ディーア	驚き2						グレイプニル=ロスト……
+	グレイプニル=ロスト	泣き						グレは、グレはね　あるじの、\nだいすきな魔界を、壊したくない……
+	グレイプニル=ロスト							グレは、絶対に、変えさせない……\nこの世界を変えさせたくない……
+	ディーア	悔しい2						…………本気で言ってるのか
+	グレイプニル=ロスト	悲しい						うん……グレは、ほんき\nグレがいなければ、魔天狼が、\n世界を壊すことも、ない
+	ディーア	悔しい2						だからといって、\nそれでグレイプニルを壊すなんて……
+	ディーア	怒り2						だいたい、お前も知ってるだろう？
+	ディーア							オレは一度賢狼を倒してる\n何度復活しようと、\nオレがまた封印すれば<dash=2>
+	グレイプニル=ロスト	悲しい						……あるじ、賢狼はね<dash=2>\n今も、グレの中に眠ってる
+	グレイプニル=ロスト							あるじなら、わかるでしょ\nそれが、どれだけ危ないか……
+	グレイプニル=ロスト	通常						賢狼は、グレの中で覚醒する\n魔天狼は、グレを食い破って、\nグレの身体を使って、目をさます
+	ディーア	悔しい2						…………!!
+	グレイプニル=ロスト	悲しい						あのときとは、ちがう
+	グレイプニル=ロスト							……今度は、グレは、\n……あるじを、助けられない
+	グレイプニル=ロスト							グレは、あるじの力には\nなれないんだよ
+	グレイプニル=ロスト	通常						だから、グレは、\nこっちのグレイプニルを壊す
+Se	回想
+FadeOut	black					.2
+CharacterOff						0
+Param	character_grayout=false
+Bg	草原A(夜)					0
+ImageEffect	SpriteCamera	GrayScale
+	グレイプニル	通常				0
+FadeIn	black					.2
+	グレイプニル=ロスト	<Off>						これは、こっちのグレも、\n認めてくれたこと
+	ディーア	<Off>						グレイプニルが……!?\nそんなはずない
+	ディーア	<Off>						どうしてグレイプニルが……
+FadeOut	black					.2
+CharacterOff						0
+	グレイプニル=ロスト	悲しい				0
+Bg	月夜の大地					0
+ImageEffectOff	SpriteCamera	GrayScale
+Param	character_grayout=true
+FadeIn	black					.2
+	グレイプニル=ロスト							……あるじ
+	グレイプニル=ロスト							グレはね、あるじが好き\nあるじのいる、世界が好き\nあるじの好きな、魔界が好き
+	グレイプニル=ロスト							だから、変わらない世界で、\n今のあるじが、\nずっと笑顔でいられるなら
+	グレイプニル=ロスト	通常						<dash=2>そこに、\nグレがいる必要は、ない
+	ディーア	怒り2						……それで、本当に\nオレが幸せになると思っているのか
+	グレイプニル=ロスト							……うん\nあるじは、幸せでいられる
+	ディーア	悔しい2						そんなはずない\nだって、そこには\nグレイプニルがいないじゃないか
+	ディーア							……大切な誰かを切り捨てて得た\n幸せなんて、オレはいらない
+	ディーア	怒り2						それを選ぶくらいなら、\nオレは魔天狼と戦う未来を選ぶ
+	グレイプニル=ロスト							…………あるじ
+	ディーア	通常2						変わっても大丈夫さ\nその時は、そこでまた笑って\n暮らせるようにすればいい
+StopBgm
+	グレイプニル=ロスト	絶望
+Shake	グレイプニル=ロスト		x=5				NoWait
+	グレイプニル=ロスト							<dash=2>……グレも、そう思ってた\nあるじは変わらないって\n世界が変わっても大丈夫って
+	グレイプニル=ロスト							でも違った　違うことになった\n違っちゃった……
+	ディーア	驚き2						グレイプニル=ロスト……？
+Se	回想
+Bgm	絶望
+FadeOut	black					.2
+CharacterOff						0
+ImageEffect	SpriteCamera	GrayScale
+	　　　　　　　　　　
+Bg	墓場					0
+FadeIn	black					.2
+	グレイプニル=ロスト	<Off>						もう、あの日は二度と来ない……！\nグレのだいすきなあるじは、\nいなくなっちゃった……
+	グレイプニル=ロスト	<Off>						あるじの、笑った顔も、うれしい顔も\n怒った顔も、寂しい顔も……！
+FadeOut	black					.2
+CharacterOff						0
+	グレイプニル=ロスト	絶望				0
+Bg	月夜の大地					0
+ImageEffectOff	SpriteCamera	GrayScale
+FadeIn	black					.2
+	グレイプニル=ロスト							もう…………\nぜんぶ、見れなくなっちゃった……
+	グレイプニル=ロスト							見れなく…………\nなっちゃったの…………
+	ディーア	悔しい2						………………
+	グレイプニル=ロスト	悲しい						あるじの、言う通り……\n変わった先の未来で\n笑顔で、暮らせるかもしれない
+	グレイプニル=ロスト							でも、そうならないかも、しれない\nグレを壊す理由なんて、\nそれだけで十分
+	グレイプニル=ロスト	冷酷						だから<dash=2>\nグレは、あるじの、笑顔を守る
+	グレイプニル=ロスト							グレは、そのために<dash=2>
+StopBgm
+	ディーア	悔しい2						…………そうやって、グレイプニルを\n失った世界で生きていくなんて
+	ディーア	怒り2						……オレは、きっと笑えないよ
+	グレイプニル=ロスト	悲しい						…………あるじ
+Bgm	凱旋					5
+	ディーア	悔しい2						そんな未来を選んだら、\nオレはきっと、ずっと後悔し続ける
+	ディーア							そんなの、\nグレイプニル=ロストだって\nわかってるだろ
+	グレイプニル=ロスト	悲しい						………………
+	ディーア	悔しい2						確かに、未来には\n何があるかわからない
+	ディーア							グレイプニル=ロストの言うように、\n何もかも失うかもしれない
+	ディーア	怒り2						でも、幸せになる未来だって必ずある\nオレたちは、それを掴むために\n生きて、戦ってるんだから
+	グレイプニル=ロスト	驚き						<dash=4>ぁ
+Se	回想
+FadeOut	white					1
+CharacterOff						0
+Param	character_grayout=false
+ImageEffect	SpriteCamera	Sepia
+	イベントスチル46008		エフェクト裏			0
+FadeIn	white					.5
+Wait						1
+	白背景		エフェクト表			1
+Wait						.5
+	グレイプニル=ロスト	<Off>						あるじ…………<dash=2>
+FadeOut	black					.1
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+Param	character_grayout=true
+	黒背景		エフェクト裏			0
+StopBgm
+FadeIn	black					.1
+	ドロシー	<Off>						<dash=4>やれ
+	カルバノグ	<Off>						任されましたよう♪
+Se	ガードブレイク
+	イベントスチル46009		エフェクト表			.5
+Wait						.5
+CharacterOff	イベントスチル46009					1
+Wait						1
+Bgm	緊迫
+CharacterOff
+	グレイプニル=ロスト	驚き						…………ッ!?
+	ディーア	驚き2						……グレイプニル=ロスト？
+	グレイプニル=ロスト	悲しい						……なんで？\nそんなはずない……\n賢狼の魔力は放出してたはず<dash=2>
+	グレイプニル=ロスト	冷酷						<dash=2>まさか、"あいつ"が
+Se	火事
+CharacterOff
+	ディーア	悔しい2
+Shake	Graphics	time=50					NoWait
+	ディーア							なんだ、この揺れ……\nそれに……この魔力……？
+	ディーア	怒り2						まさか<dash=2>
+Se	光3
+	白背景		エフェクト表			1
+StopBgm
+Wait						1.3
+FadeOut	black					.5
+CharacterOff						0
+Bg	黒背景					0
+Bg	月夜の大地					0
+	　　　　　　　　　　					0
+	黒背景		エフェクト表
+Wait						2
+FadeIn	black					.5
+	賢狼	？						<dash=2>ふぅん、そうかそうか
+Bgm	魔王バトル
+	賢狼	？						まさか、"また"キミたちとは！
+CharacterOff
+	グレイプニル=ロスト	驚き						…………その、声
+	ディーア	悔しい2						…………賢、狼
+FadeOut	white					.1
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル46002		エフェクト表
+FadeIn	white					.1
+	賢狼	<Off>						いつかの夜以来だね\nグレイプニル、そして魔剣使い<dash=2>!!
+	賢狼	<Off>						ククク、アハハハハハハ!!
+FadeOut	black					.1
+Wait						1
+If	isdebug==true
+CharacterOff
+Jump	*E_460_05
+EndIf
+EndScenario
+
+# E_460_05
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔王バトル
+Bg	月夜の大地
+	ディーア	悔しい2
+FadeIn	white					.5
+	ディーア							くっ……
+CharacterOff
+	賢狼	拡大	エフェクト表					<dash=2>前はよくもやってくれたね\n道具とニンゲンの分際で\nこのボクを再封印するなんて
+	賢狼							だが敗北は認めよう\nボクは確かに、\nキミたちの力を見誤っていた
+	賢狼							どうやら、\n認識を改める必要がありそうだ
+Param	character_grayout=false
+	オーラ青					1
+Wait						.5
+Se	光1
+FadeOut	white					.3
+CharacterOff						0
+	ディーア	悔しい2				0
+Shake	ディーア		x=5				NoWait
+FadeIn	white					.3
+Param	character_grayout=true
+	ディーア							くっ……なんて魔力だ……
+CharacterOff
+	賢狼							フフフ、苦しいかい？\nそうだろうね
+	賢狼							キミが魔界を愛するならば、\nボクの魔力はキミにとって\n毒となるはずだ
+	賢狼							もはや御託なんて必要ない
+	賢狼							腐りきったこの魔界を破壊する<dash=2>\nボクの力は、純然たる憎悪から\n生まれた魔力なのだから
+Se	コインロック
+	グレイプニル=ロスト	怒り						賢狼……ッ!!
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393E)		エフェクト裏			0
+Wait						.1
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+ImageEffectOff	SpriteCamera	MotionBlur
+Wait						.5
+CharacterOff						0
+Param	character_grayout=true
+Bg	月夜の大地					0
+	賢狼	怪しい				0
+Tween	賢狼	MoveBy	x=50				NoWait
+Wait						.2
+	賢狼							…………ふん
+	グレイプニル=ロスト	冷酷						あるじに、手を出したら許さない
+	賢狼							前も言ったろう？\nボクが壊すのはキミの主じゃない\nこの魔界そのものさ
+	賢狼	怪しい						それにしても、キミも随分と\nみすぼらしくなったものだね、\nグレイプニル
+	賢狼							このボクの身体、そしてキミの\nその魔剣を壊す力……\nふぅん、そういうことか
+	賢狼	通常						ああ、全て理解した\nフフフ、これは滑稽だ!!
+	賢狼							幾年月もの間成長せず、\n変化もしなかったキミが、\nこんな簡単に変質するなんて
+	賢狼							ククク、アハハハ!!!!
+	ディーア	悔しい2						…………何を言っている？
+	賢狼							キミは知らなくていいことさ\nだってそうだろう？
+	賢狼							キミの冒険は今、\nここで終わるんだから
+	グレイプニル=ロスト	怒り						…………ッ
+ImageEffect	SpriteCamera	MotionBlur
+Param	character_grayout=false
+CharacterOff						0
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.1
+Se	斬2
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+ImageEffectOff	SpriteCamera	MotionBlur
+Wait						.5
+CharacterOff						0
+Param	character_grayout=true
+Bg	月夜の大地					0
+	賢狼	怪しい				0
+Tween	賢狼	MoveBy	x=-50				NoWait
+Wait						.5
+	賢狼							学ばないなあ、\n蒼月鉄鎖のグレイプニル
+	グレイプニル=ロスト	怒り						…………速い……っ
+	賢狼							殺気の隠し方も知らないのかい？\n無邪気なのはキミの取り柄でも\nあったのだけれどね
+	賢狼							破壊衝動……\nいや、そうすべきと植え付けられた\n使命感と言ったほうが正しいか
+	賢狼							そんなものに囚われてしまうなんて\n本当にキミも堕ちたものだ
+	賢狼							確かに、かつてのボクはキミを尊敬し\n畏怖さえしていたとも
+	賢狼	怪しい						だけど今のキミにその価値はないな\nかつてのキミのほうが\nまだクレバーだった
+	グレイプニル=ロスト	怒り						…………うるさい、\nそんなの、知らない
+	賢狼	怪しい						理解できなかったかな\nキミは目障りだと言ったんだ
+CharacterOff
+Param	character_grayout=false
+	賢狼	拡大	エフェクト裏					<dash=2>下がれよ\n醜いぞ、イヌ!!
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+	グレイプニル=ロスト	怒り
+Wait						.5
+Shake	Graphics						NoWait
+FadeIn	white					.5
+Tween	グレイプニル=ロスト	MoveBy	x=20				NoWait
+	グレイプニル=ロスト							くぅっ……!!
+	ディーア	悔しい2						グレイプニル=ロスト!!
+	賢狼							さあ、始めようか、魔剣使い\n世界の命運を賭けた戦いとやらを
+	賢狼							<dash=2>まあ、魔界が滅びるのは\n確定しているのだけれど、ね!!
+If	isdebug==true
+CharacterOff
+Jump	*E_460_05
+EndIf
+EndScenario
+
+# E_460_06
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	緊迫
+Bg	月夜の大地
+	ディーア	悔しい2
+FadeIn	white					.5
+	ディーア	悔しい2						くっ…………
+	グレイプニル=ロスト	冷酷						…………下がって、あるじ
+Se	斬2
+FadeOut	white					.1
+FadeIn	white					.1
+Wait						.2
+	ディーア	驚き2						グレイプニル=ロスト……
+	賢狼	怪しい						……ふぅん？\n解せないなあ、どうして彼を庇う？
+	賢狼							そんな身体にされてまで、\n彼を庇う理由なんかないだろう
+	グレイプニル=ロスト	冷酷						あるじは、"あるじ"だから\n理由なんてそれで十分
+	賢狼							アハハハ！\nまったくもってロジカルじゃないな
+	賢狼	怪しい						魔剣使い、キミもキミだ
+	賢狼	通常						そいつはキミの大好きな\nグレイプニルを\n壊そうとしているんだろう？
+	賢狼							後ろから一思いにやってしまえよ\n簡単じゃないか
+	ディーア	怒り2						………………っ
+	賢狼	怪しい						……やれやれ、\nこれはもうどうしようもないな
+	ディーア	悔しい2						グレイプニル=ロスト……
+	グレイプニル=ロスト	怒り						……来ないで、あるじ\n賢狼は、グレがなんとかする
+	ディーア	悔しい2						なんとかするって、そんな\n……無茶だ
+	ディーア							賢狼をグレイプニルの\n身体に戻すには、\n一度無力化しないと<dash=2>
+StopBgm
+	グレイプニル=ロスト	悲しい						だいじょうぶ
+	グレイプニル=ロスト							賢狼は、まだ完全に\n覚醒したわけじゃない
+	グレイプニル=ロスト							なら、別の器に再封印して、\n壊せばいい
+Bgm	絶望
+	ディーア	悔しい2						お前……まさか、自分を<dash=2>
+	賢狼	怪しい						いい加減目を覚ましなよ、魔剣使い\nそいつが何を言ってるのか\n正しく理解しているのかい？
+FadeOut	black					.2
+Param	character_grayout=false
+CharacterOff						0
+Bg	白背景					0
+	イベントスチル46010		effect_c			0
+Wait						.2
+FadeIn	black					.2
+	賢狼	<Off>						グレイプニルの身体は\nボクが使っている
+Tween	イベントスチル46010	ScaleBy	x=0.34 y=0.34 time=2	linear			Add
+	賢狼	<Off>						それを封印して器を壊すということは\n二人の<ruby=じぶん>グレイプニル</ruby>を同時に\n始末するということだ
+Se	ガードブレイク
+FadeOut	white					.1
+CharacterOff						0
+	イベントスチル46011		effect_c			0
+FadeIn	white					.1
+	賢狼	<Off>						ボクを封印するとか言いながら、\n結局そいつはグレイプニルを\n壊したいだけなのさ
+FadeOut	black					.2
+CharacterOff						0
+Bg	月夜の大地					0
+Param	character_grayout=true
+	賢狼	拡大	エフェクト表			0
+Wait						.2
+FadeIn	black					.2
+	賢狼							いやはや全く、醜いにも程があるね\n自己犠牲の皮を被れば\n美しく見えるとでも思ったのかい？
+CharacterOff
+	ディーア	悔しい2						…………グレイプニル=ロスト
+	グレイプニル=ロスト	驚き						ち、ちがうの、あるじ……
+	グレイプニル=ロスト	悲しい						……あるじが、グレのいない世界は、\nいやって、思ってくれたのはわかった
+	グレイプニル=ロスト							でも、グレは、\nあるじのいる世界を守りたい
+	グレイプニル=ロスト	絶望						だから、もう、\nグレにできることは、これしか……
+Param	character_grayout=false
+	賢狼	怪しい						じれったいなぁ……
+Se	光1
+	オーラ青		エフェクト表
+	賢狼	通常						もういいや、\nここで仲良く滅びなよ<dash=2>
+Se	光3
+StopBgm						1
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff
+	ディーア	怒り2
+	グレイプニル=ロスト	驚き	2_3_b
+	黒背景		エフェクト表
+Wait						.5
+FadeIn	white					.1
+	ディーア							……させない
+CharacterOff	黒背景
+Se	ジャストガード
+	グレイプニル=ロスト							………………ぇ
+CharacterOff
+	賢狼	怪しい						…………はぁ？
+CharacterOff
+	グレイプニル=ロスト	驚き	2_2
+	ディーア	怒り2	1_2
+	グレイプニル=ロスト							あ、るじ……？
+Se	強風	TRUE				1
+	ディーア							…………まったく、\nどうしてお前たちはそうなんだ
+	ディーア							どうして自分だけで考えて、\nオレに相談してくれないんだ
+	ディーア							お前なんかいない方がいいなんて、\nオレが言ったか？
+	ディーア							賢狼を封印するのに\nお前を犠牲にしたいなんて、\nオレが言ったか？
+	グレイプニル=ロスト	驚き						……………ある、じ
+	ディーア	悔しい2						……だいたい、\n一人で戦うなんて無茶すぎる
+	ディーア							この亜空間を維持するのだって、\n相当な魔力が必要だったはずだ……
+	ディーア							もう魔力もほとんど\n残ってないんだろう？
+	グレイプニル=ロスト	悲しい						……でも
+StopSe
+Bgm	団体戦
+	ディーア	怒り2						共闘だ、グレイプニル=ロスト
+	グレイプニル=ロスト	驚き						<dash=4>ぇ
+Se	武器魔力回復
+FadeOut	lime					.2
+FadeIn	lime					.7
+	グレイプニル=ロスト	驚き						<dash=2>ぁ、あったかい……\nこれ、これ……あるじの……？
+	グレイプニル=ロスト	悲しい						ど、どうして……？\nあるじ、どうして……？
+	ディーア	怒り2						力を貸せ、グレイプニル=ロスト\nオレと一緒に戦うんだ
+	グレイプニル=ロスト	驚き						<dash=6>ッ!!!!
+	グレイプニル=ロスト	驚き						い、いいの……グレ、ロストだよ？\nあるじの、敵……だよ……？
+	グレイプニル=ロスト							あるじと、\nいっしょにたたかって……\nいいの……？
+	ディーア	通常2						構わないさ\n……オレの方こそ、ごめんな
+	ディーア	悔しい2						ロストと聞いて、お前を敵だと\n思いこんでた
+	ディーア							……お前の根っこは\n何も変わっていないのにな
+Tween	グレイプニル=ロスト	PunchPosition	y=50				NoWait
+	グレイプニル=ロスト	泣き						あるじ…………っ！
+	ディーア	怒り2						さあ、グレイプニルを取り返すぞ\n……あいつも一回\n叱ってやらなきゃいけないしな
+	グレイプニル=ロスト	泣き						……はぁぁ……っ、\nあるじ、あるじ……！\nありがとう、あるじ……!!
+Tween	グレイプニル=ロスト	PunchPosition	y=50				NoWait
+	グレイプニル=ロスト							グレ、がんばる……\nあるじの、あるじのために\nがんばる……っ!!
+CharacterOff
+	賢狼	怪しい						…………はぁ、本当に下らない
+FadeOut	white					.1
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル46002		エフェクト表
+FadeIn	white					1
+	賢狼	<Off>						やはりこの魔界は\n一度キレイにしたほうが良さそうだ
+FadeOut	white					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_460_07
+EndIf
+EndScenario
+
+# E_460_07
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	絶望
+Bg	月夜の大地
+	賢狼	驚き拡大	エフェクト表
+FadeIn	white					.5
+	賢狼							<dash=4>な
+CharacterOff
+	グレイプニル=ロスト	冷酷	2_2
+	ディーア	怒り2	1_2
+	グレイプニル=ロスト							……甘く見ないで
+CharacterOff
+Param	character_grayout=false
+	グレロストチェーン3		エフェクト表
+Se	コインロック
+	賢狼	怪しい
+Shake	賢狼		x=5				NoWait
+	賢狼							ぐぅぅぅっ……\nこの、イヌ……ッ!!
+Param	character_grayout=true
+CharacterOff
+	グレイプニル=ロスト	冷酷	2_2
+	ディーア	怒り2	1_2
+	グレイプニル=ロスト							……動かないで
+CharacterOff
+Param	character_grayout=false
+	グレロストチェーン3		エフェクト表
+	賢狼	怪しい
+Se	コインロック
+Shake	賢狼		x=5				NoWait
+	賢狼							くっ…………\nなんだ、お前……\nそんな力を、どうしてお前が……
+	賢狼							……ああそうか、<ruby=ボク>賢狼</ruby>の力と\n<ruby=グレイプニル>蒼月鉄鎖</ruby>の力<dash=2>
+	賢狼							……それの並行励起に\n成功していたのか
+CharacterOff
+Param	character_grayout=true
+	グレイプニル=ロスト	嬉しい	2_2
+	ディーア	怒り2	1_2
+	グレイプニル=ロスト							……今までは亜空間の維持に\n魔力を割いてたけど\nあるじがいれば……！
+CharacterOff
+Param	character_grayout=false
+	グレロストチェーン3		エフェクト表
+StopBgm
+	賢狼	怪しい						…………そうかそうか
+	賢狼							……つまりキミは、\nボクを相手にして\n手加減をしていたと言うわけか
+Bgm	魔王バトル
+	賢狼	通常						ククク、アハハハハ！
+	賢狼							キミたちは、一体どこまで\nボクをコケにすれば気が済むんだ!!
+	賢狼	怪しい						冗談じゃない、\nボクは賢狼だ！\n魔天狼だ！
+	賢狼							それが、こんな道具と\nニンゲンなんかに<dash=2>
+	賢狼							こんなことがあっていいはずがない!!\nそんなもの、\nボクは絶対に認めな<dash=2>
+StopSe
+StopBgm
+CharacterOff
+	黒グラデーション		エフェクト表
+	リーナ=ロスト							……残念ですが、そこまでです
+ImageEffect	SpriteCamera	MotionBlur
+CharacterOff
+Bg	黒背景					0
+	黒背景		エフェクト表			0
+	斬撃(393F)		エフェクト裏			0
+Wait						.1
+Se	剣閃
+Tween	黒背景	MoveBy	y=-3000 time=0.5
+Wait						.5
+CharacterOff						0
+Bg	月夜の大地					0
+CharacterOff						0
+ImageEffectOff	SpriteCamera	MotionBlur
+	グレロストチェーン3		エフェクト表			0
+	賢狼	驚き				0
+Wait						.1
+Se	ガードブレイク
+CharacterOff	グレロストチェーン3					1
+Shake	賢狼		x=5				Add
+	賢狼							な………ッ!?
+Se	闇1
+	幻想体エフェクト		エフェクト表			1
+Wait						1.5
+Se	倒れる
+Tween	賢狼	MoveBy	y=-800 time=4				NoWait
+Wait						1
+CharacterOff	賢狼					.5
+Wait						1
+CharacterOff
+Param	character_grayout=true
+	グレイプニル=ロスト	驚き	2_2
+	ディーア	悔しい2	1_2
+	ディーア							なん、だと……!?
+CharacterOff
+	黒グラデーション		エフェクト表
+Bgm	絶望
+	カルバノグ							あーあ、がっかりですよう
+CharacterOff
+	グレイプニル=ロスト	驚き	2_2
+	ディーア	悔しい2	1_2
+	ディーア							お前、は……\nカル、バノグ……？
+CharacterOff
+	カルバノグ							魔天狼っていうくらいですからあ\nもうちょっと頑張ってくれると\nおもったんですけどお
+	カルバノグ							まあいいですよう
+	カルバノグ							どうせ失敗すると思ってましたしい\nランクSロストのデータも\nだいたい揃いましたしい♪
+	カルバノグ							あとはあ、ちょーっと実験台になって\nもらえればあ♪
+CharacterOff
+	幻想体エフェクト		エフェクト表
+	賢狼	驚き
+Se	火事
+Shake	賢狼		x=5 y=5 time=10				NoWait
+Bgm	緊迫
+	賢狼							…………くっ………ぐ、ああああ!!!!
+CharacterOff
+	グレイプニル=ロスト	驚き	2_2
+	ディーア	悔しい2	1_2
+	グレイプニル=ロスト							賢狼……!?
+CharacterOff
+	黒グラデーション		エフェクト表
+	賢狼	驚き拡大	エフェクト裏
+Se	火事
+Shake	賢狼		x=5 y=5 time=10				NoWait
+	賢狼							これは……この力は……\nくっ、ぐうううっ…………
+CharacterOff
+	グレイプニル=ロスト	怒り	2_2
+	ディーア	悔しい2	1_2
+	ディーア							な、何が起きている……？
+	グレイプニル=ロスト							…………まさか
+CharacterOff
+	カルバノグ							<dash=2>それではあ、\n"あの人"の意思決定を\nみなさんにお伝えしますねえ♪
+	カルバノグ							残念ながらこちらの魔界は廃棄、\n賢狼とともにお別れだそうですよう
+CharacterOff
+	グレイプニル=ロスト	怒り	2_2
+	ディーア	悔しい2	1_2
+	ディーア							なんだと……？
+	グレイプニル=ロスト							…………運ぶだけ、って\n言ってたくせに
+CharacterOff
+	カルバノグ							運ぶだけとはいいましたけどお、\nたまにはこういうのも運ぶんですよう\n<dash=2>絶望、とかねえ♪
+	カルバノグ							それじゃ、後はお願いしますねえ♪\n<dash=4><ruby=まがかみ>"猫"</ruby>さん♪
+CharacterOff	カルバノグ					.5
+Wait						.5
+	黒グラデーション		エフェクト表			.5
+	リーナ=ロスト					.5
+	？？？？		1_2			0
+Wait						1
+FadeOut	black					.2
+CharacterOff						0
+	幻想体エフェクト		エフェクト表			0
+	賢狼	驚き				0		 	BrPage
+FadeIn	black					.2
+Shake	賢狼		x=5				Add
+	賢狼							<dash=2>やめ、やめろ……
+CharacterOff						0
+	黒グラデーション		エフェクト表			0
+	賢狼	驚き拡大	エフェクト裏			0
+Shake	賢狼		x=5 time=5				NoWait
+	賢狼							ぐっ、あ、ああああああああ!!!!
+Se	闇3
+FadeOut	white					2
+CharacterOff						0
+Bg	白背景
+ImageEffect	SpriteCamera	MotionBlur
+ImageEffect	SpriteCamera	Bloom
+	リーナ=ロスト	シルエット
+	　　　　　　　　　　		2_2
+Param	character_grayout=false
+Wait						.5
+FadeIn	white					.5
+Wait						1
+Se	光1
+	アネセサリロゴ	黒中央	effect_c
+Tween	アネセサリロゴ	ScaleBy	x=2 y=2 time=2				NoWait
+Wait						1.5
+Se	光2
+CharacterOff						1
+Wait						1.5
+Se	火事	TRUE
+	賢狼	シルエット				.5
+Shake	賢狼		time=3.5				NoWait
+Wait						2
+	イベントスチル46012		effect_a			.5
+Se	光3
+Tween	イベントスチル46012	ScaleBy	x=30 y=30 time=2
+Wait						.5
+FadeOut	black					.5
+ImageEffectOff	SpriteCamera	MotionBlur
+ImageEffectOff	SpriteCamera	Bloom
+CharacterOff						0
+StopSe
+Bg	月夜の大地
+	イベントスチル46003		エフェクト表
+Wait						2
+Bgm	魔王バトル
+FadeIn	black					1
+Wait						1
+	賢狼？							…………ア、アハハハ!!
+CharacterOff
+Param	character_grayout=true
+	グレイプニル=ロスト	驚き	2_2
+	ディーア	絶望2	1_2
+	ディーア							…………この力は、まさか……
+	ディーア	悔しい2						魔天、狼<dash=2>!!
+If	isdebug==true
+CharacterOff
+Jump	*E_460_08
+EndIf
+EndScenario
+
+# E_460_08
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	魔王バトル
+Bg	月夜の大地
+Param	character_grayout=false
+	イベントスチル46003		エフェクト表			0
+FadeIn	white					.5
+	魔天狼	<Off>						アハハハハ!!　アハハハハ!!!!\nコワれろ、コワれてシマエ!!
+Se	光3
+Se	火1
+FadeOut	white					1
+Param	character_grayout=true
+CharacterOff						0
+	　　　　　　　　　　
+Shake	Graphics		time=2				NoWait
+Se	火事
+FadeIn	white					.5
+Wait						1.5
+CharacterOff
+	グレイプニル=ロスト	怒り
+	グレイプニル=ロスト							あるじ、あぶない<dash=2>!!
+Se	光3
+FadeOut	white					.7
+CharacterOff						0
+	グレイプニル=ロスト	悲しい	2_2			0
+	ディーア	悔しい2	1_2_b			0
+FadeIn	white					.5
+FadeOut	white					.1
+Se	打1
+Tween	グレイプニル=ロスト	MoveBy	x=30				NoWait
+FadeIn	white					.1
+	グレイプニル=ロスト							くぅっ……!!
+	ディーア	悔しい2	1_2					グレイプニル=ロスト!!
+	ディーア	怒り2						くっ……これは、賢狼の魔力が\n暴走しているのか……
+CharacterOff
+	魔天狼							アハハ!!　アハハハハ!!!!
+Se	光3
+Se	火1
+FadeOut	white					.5
+Se	火事
+Shake	Graphics					2	NoWait
+CharacterOff						0
+FadeIn	white					.5
+Wait						1.5
+CharacterOff
+	グレイプニル=ロスト	驚き	2_2
+	ディーア	悔しい2	1_2
+	ディーア							結界が崩壊していく……\nこのままじゃ、魔界が……!!
+Se	回想
+FadeOut	black					.3
+ImageEffect	SpriteCamera	Sepia
+CharacterOff						0
+	賢狼					0
+FadeIn	black					.3
+	賢狼							腐りきったこの魔界を破壊する<dash=2>\nボクの力は、純然たる憎悪から\n生まれた魔力なのだから
+FadeOut	black					.3
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Sepia
+	グレイプニル=ロスト	怒り	2_2			0
+	ディーア	悔しい2	1_2			0
+FadeIn	black					.3
+	ディーア							これが、魔界の崩壊を齎す、\n魔天狼の力<dash=2>
+	グレイプニル=ロスト							……でも、暴走してるなら\n賢狼の知力は、下がってる、はず
+	グレイプニル=ロスト	怒り						今なら、勝てる……っ！
+Se	走る
+Tween	グレイプニル=ロスト	MoveBy	x=-1000 time=3				NoWait
+	ディーア	本気2						グレイプニル=ロスト!?\n危ない、下がれ!!
+CharacterOff
+	魔天狼							アハハハハ!!
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+Se	走る
+	グレイプニル=ロスト	冷酷	2_2			0
+FadeIn	white					.1
+Tween	グレイプニル=ロスト	MoveTo	x=0				Add
+Wait						.5
+	グレイプニル=ロスト	驚き						<dash=4>ぇ
+Se	光3
+FadeOut	white					1
+Se	ガードブレイク
+	グレイプニル=ロスト	怒り破損
+Shake	Graphics		x=5 y=5				NoWait
+FadeIn	white					.5
+Wait						.5
+Tween	グレイプニル=ロスト	MoveBy	x=30				NoWait
+	グレイプニル=ロスト							くぅっ……!!
+CharacterOff
+	ディーア	本気2						大丈夫か!?\n今そっちに<dash=2>
+CharacterOff
+Param	character_grayout=false
+	魔天狼	暴走拡大	エフェクト裏
+	魔天狼							滅ベ、ニンゲン<dash=2>!!!!
+StopBgm
+Se	光2
+	白背景		エフェクト表			2
+Wait						1
+CharacterOff
+	ディーア	悔しい2						<dash=4>な
+Se	光2
+	白背景		エフェクト表			1
+Wait						.5
+CharacterOff
+StopSe
+	グレイプニル=ロスト	驚き破損						あるじ<dash=2>!!
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+	ディーア	黒2
+Wait						2
+Se	火事
+Shake	Graphics		time=1.5				NoWait
+FadeIn	white					1
+Se	強風	TRUE
+Wait						1
+Se	倒れる
+Tween	ディーア	MoveBy	y=-300 time=2				NoWait
+Wait						.5
+CharacterOff						.5
+Wait						1
+CharacterOff
+	グレイプニル=ロスト	驚き破損						…………ぁ
+	グレイプニル=ロスト							ぅ、うそでしょ……\nあるじ……あるじ……？
+Bgm	絶望
+CharacterOff
+	グレイプニル=ロスト	驚き破損	2_2
+	ディーア	黒2	1_2
+Tween	グレイプニル=ロスト	PunchPosition	x=10				NoWait
+	グレイプニル=ロスト							…………ねえ、おきて、あるじ
+	グレイプニル=ロスト	泣き破損						あるじ、あるじ…………
+	グレイプニル=ロスト							……や、いや\n……そんなのいや……!!
+	グレイプニル=ロスト							いやぁ…………!!
+FadeOut	black					.5
+StopSe
+CharacterOff						0
+Bg	夜空
+	カルバノグ
+Wait						1.5
+FadeIn	black					.5
+	カルバノグ							…………決着、ついたみたいですねえ
+	カルバノグ							それじゃあ、さようならあ♪
+CharacterOff						1
+Wait						1
+FadeOut	black					.5
+Bg	月夜の大地
+CharacterOff						0
+Param	character_grayout=false
+Wait						2
+	イベントスチル46003		エフェクト表
+Shake	イベントスチル46003		x=3 y=3 time=30				NoWait
+FadeIn	black					.5
+	魔天狼	<Off>						アハハ、アハハハハ!!!!
+	魔天狼	<Off>						コワれてシまエ……\nコワれロ<dash=2>!!!!
+Se	光3
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+Shake	Graphics		time=2				NoWait
+Wait						.5
+FadeIn	black					.5
+Wait						2
+CharacterOff
+	グレイプニル=ロスト	泣き破損
+	グレイプニル=ロスト							…………ねぇ、あるじ
+	グレイプニル=ロスト							……あるじが、\nいっしょに戦おうって、\n言ってくれたときね
+	グレイプニル=ロスト							グレ、うれしくて、\n……すごくうれしくて……っ
+Se	回想
+FadeOut	black					.3
+CharacterOff						0
+Bg	墓場
+ImageEffect	SpriteCamera	GrayScale
+FadeIn	black					.3
+	グレイプニル=ロスト	<Off>						もう、あんな想いしなくて\nいいんだって
+	グレイプニル=ロスト	<Off>						あんな寂しい想い、\nしなくていいんだって
+FadeOut	black					.3
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	月夜の大地
+CharacterOff						0
+	グレイプニル=ロスト	泣き破損				0
+FadeIn	black					.3
+	グレイプニル=ロスト							あるじの魔力が、あったかくて
+	グレイプニル=ロスト							……すごく、なつかしくて……っ\nうれしくて……っ
+Shake	グレイプニル=ロスト		x=5				NoWait
+	グレイプニル=ロスト							だから……\nグレ、あるじとなら\nできるかもって……
+	グレイプニル=ロスト							……こっちのグレを、取り戻して\n魔天狼も、倒して……
+	グレイプニル=ロスト							ぜんぶ、できるかもって……\nおもっちゃった……
+	グレイプニル=ロスト							……勝てるかもって、\nまいあがっちゃった……
+	グレイプニル=ロスト							……だから、だから、あるじまで、\nグレに気を取られて……っ
+Shake	グレイプニル=ロスト		x=5				NoWait
+	グレイプニル=ロスト							……ごめんなさい、\nごめんなさい……!!
+	グレイプニル=ロスト	絶望破損						グレの……\nグレの、せいだ……
+	グレイプニル=ロスト							グレは、あるじに\n幸せでいてほしかっただけなのに……
+	グレイプニル=ロスト							こんどこそ、守るって\n決めたはずなのに……
+	グレイプニル=ロスト							グレが、欲張ったから……\n幸せになりたいって、\nおもったから……
+	グレイプニル=ロスト	泣き破損						グレのせい、だ……\nごめんなさい、\nごめんなさい、あるじ…………
+CharacterOff
+	ディーア	黒2						<dash=6>ぁ
+StopBgm
+CharacterOff
+	グレイプニル=ロスト	驚き破損	2_2
+	ディーア	黒2	1_2
+	グレイプニル=ロスト							…………あるじ!?
+Tween	グレイプニル=ロスト	PunchPosition	y=30				NoWait
+Tween	グレイプニル=ロスト	MoveBy	x=-20				NoWait
+	グレイプニル=ロスト							いきてる、いきてる……？
+	ディーア							<dash=2>ぐれ、い……ぷ……\nに……る……
+	グレイプニル=ロスト	泣き破損						はあぁぁぁぁぁぁ…………
+	グレイプニル=ロスト	嬉しい破損						あるじ、あるじ……\nよかったぁ……\n生きてる、生きてる……
+Tween	グレイプニル=ロスト	MoveBy	x=20				NoWait
+	グレイプニル=ロスト							それなら、大丈夫
+FadeOut	white					.2
+CharacterOff
+Param	character_grayout=false
+Se	光1
+	オーラ青		エフェクト表
+Bgm	凱旋
+FadeIn	white					.2
+	グレイプニル=ロスト	嬉しい破損						うん……大丈夫だよ、あるじ
+	グレロストロゴ		effect_c
+	グレイプニル=ロスト							グレがいっしょだから
+	グレイプニル=ロスト							<dash=2>グレが、助けるから
+Se	光3
+Tween	グレロストロゴ	ScaleBy	x=2 y=2 time=2				NoWait
+FadeOut	white					1
+Wait						2
+If	isdebug==true
+CharacterOff
+Jump	*E_460_09
+EndIf
+EndScenario
+
+# E_460_09
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	神秘
+Bg	宇宙
+FadeIn	black					2
+Wait						2
+	ディーア	<Off>						<dash=8>……
+	グレイプニル=ロスト	<Off>						…………あるじ、あるじ
+	グレイプニル=ロスト	<Off>						……よかった、生きてて
+	ディーア	<Off>						…………グレイプニル？
+	グレイプニル=ロスト	<Off>						………………っ
+	グレイプニル=ロスト	悲しい				1
+Wait						1
+	グレイプニル=ロスト	通常						……ううん、グレは、ロストの方\nグレイプニル=ロスト
+	ディーア	<Off>						…………ここは
+	グレイプニル=ロスト							……あるじの、こころのなか
+	ディーア	<Off>						…………ああ、そうか\n……オレは、賢狼に<dash=2>
+	グレイプニル=ロスト	悲しい						……ごめんなさい、あるじ
+	ディーア	<Off>						……なんで、謝る
+	グレイプニル=ロスト	悲しい						あるじを、傷つけちゃったから\nグレが、守れなかったから
+	ディーア	<Off>						…………気にするな
+	ディーア	<Off>						オレの方こそ、謝らなくちゃ
+	グレイプニル=ロスト	驚き						…………え、なんで？
+	ディーア	<Off>						オレの知らないところで、\nお前はたくさん傷ついていたんだろ
+	ディーア	<Off>						……オレは、それに\n気づいてやれなかった
+	ディーア	<Off>						オレは、マスター失格だな
+	グレイプニル=ロスト	驚き						ううん、ううん……！\nちがう、そんなことない……
+	グレイプニル=ロスト	嬉しい						あるじは、\nマスター失格なんかじゃない
+	グレイプニル=ロスト							だって、グレは……\nあるじが、グレイプニルのこと\n大切にしてくれてるって、知ってる
+	ディーア	<Off>						…………グレイプニル
+	グレイプニル=ロスト	悲しい						……だから、ごめんなさい
+	ディーア	<Off>						…………え？
+	グレイプニル=ロスト	悲しい						グレはもうグレイプニルじゃないけど……それでも、\nあるじはやさしいから
+	グレイプニル=ロスト							グレがこうしたら、きっと、\nあるじは、悲しむから
+	グレイプニル=ロスト	通常						…………だから、\nごめんなさい、あるじ
+	ディーア	<Off>						<dash=4>お前、何を……
+Se	光2
+FadeOut	white					.5
+CharacterOff						0
+ImageEffect	SpriteCamera	Bloom
+	グレイプニル=ロスト					0
+	グレロストロゴ		effect_c			0		　	BrPage
+FadeIn	white					.5
+Tween	グレロストロゴ	ScaleBy	x=2 y=2 time=5				NoWait
+	グレロストロゴ							グレの力を、あるじに託す
+	グレロストロゴ							きっと、そう長持ちはしない……\nでも、それでも、\n神と並び立つ魔天狼の力だから
+	グレロストロゴ							あるじの傷を癒やして、\n暴走した魔天狼を封じ込めるくらいは\nできるはずだから
+	ディーア	<Off>						…………それじゃあ、お前は
+	グレイプニル=ロスト	笑い
+	グレロストロゴ							グレのことは、気にしないで
+	グレロストロゴ							グレは元々、この世界にいた\nグレイプニルじゃないから
+	グレロストロゴ							……全部、元に戻るだけだから
+Se	ガードブレイク
+CharacterOff	グレロストロゴ					2
+Wait						1
+FadeOut	white					1
+CharacterOff						0
+ImageEffectOff	SpriteCamera	Bloom
+	グレイプニル=ロスト	笑い
+	　　　　　　　　　　		1_2					　	BrPage
+Wait						1
+FadeIn	black					.5
+	ディーア	<Off>						…………消えるって、いうのか
+	グレイプニル=ロスト	通常						………………うん
+	ディーア	<Off>						どうして、そんな<dash=2>\nそんなことしなくたって!!
+	グレイプニル=ロスト	悲しい						あるじも、わかってるでしょ\nこうするしか、ないって
+	ディーア	<Off>						…………ッ
+	ディーア	<Off>						でも、それじゃお前は<dash=2>
+	ディーア	<Off>						…………お前は、\n報われないじゃないか
+	ディーア	<Off>						お前が、オレのために\n戦ってくれたのなら\nオレにはその想いに応える義務がある
+	ディーア	<Off>						お前を犠牲にするなんて……\nそんなの……
+	グレイプニル=ロスト	通常						…………じゃあ、あるじは、\nどっちが大事？
+	ディーア	<Off>						…………ぇ
+	グレイプニル=ロスト							グレと、こっちのグレイプニルと
+	グレイプニル=ロスト							あるいは、グレと、\nこっちの魔界<dash=2>\nそれから、リディちゃんと
+	ディーア	<Off>						………………ッ
+	ディーア	<Off>						…………そんな聞き方は、卑怯だ
+	グレイプニル=ロスト							……でも、あるじは正しい
+	ディーア	<Off>						…………正しいわけあるか
+	ディーア	<Off>						……オレが、弱いだけだ\nオレに、お前を救う力がないだけだ\nこんな選択が正しくてたまるか
+	グレイプニル=ロスト							……ううん、そんなことない\nあるじは、正しい\n弱くなんて、ない
+	ディーア	<Off>						そんなこと…………
+	グレイプニル=ロスト	悲しい						……そうだよね\nあるじは、やさしいから
+	グレイプニル=ロスト	悲しい						グレが何を言っても\nきっと、後悔してくれる\nきっと、そうやって悲しんでくれる
+	グレイプニル=ロスト	冷酷						…………それは、辛いこと、だよね
+	ディーア	<Off>						………………お前、何を
+	グレイプニル=ロスト	冷酷						…………なら、最初から\n出会わなかったことにすればいい
+	グレイプニル=ロスト							ぜんぶ、ぜんぶ、忘れちゃえばいい
+	グレイプニル=ロスト	笑い						心配しないで、あるじ\nグレは、あるじを悲しませたりしない
+	ディーア	<Off>						<dash=4>な
+	グレイプニル=ロスト	通常						あるじは、ちょっと不思議だから、\nしばらくは覚えてるかもしれない……
+	グレイプニル=ロスト							でも、大丈夫\nきっと、すぐに忘れられる
+	グレイプニル=ロスト							忘れちゃえば、悲しむことも\n後悔することも、ないから
+	ディーア	<Off>						やめろ……
+	グレイプニル=ロスト	冷酷						魔天狼には、その力がある\n一度でだめなら、\n何度でも、何度でも<dash=2>
+	ディーア	<Off>						やめろ!!
+	ディーア	<Off>						忘れるなんて……忘れれば幸せなんて\nそんなわけないだろう……!!
+	ディーア	<Off>						忘れるなんて冗談じゃない\nむしろ、オレはもっとお前を知りたい
+	ディーア	<Off>						……どんな道を歩んできたのか\n何を考えて、\nどうしてお前はそうなったのか
+	ディーア	<Off>						まだ、知らないことがたくさんある\nオレは<dash=2>
+	グレイプニル=ロスト	笑い						<dash=2>あるじは、知らなくていい\n知っても、辛いだけだから
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル460BG		エフェクト表			0
+FadeIn	white					.5
+	グレイプニル=ロスト	<Off>						その代わり、グレが知ってる\nグレが、覚えてる
+	グレイプニル=ロスト	<Off>						あるじの笑った顔も、困った顔も
+	グレイプニル=ロスト	<Off>						あるじの手の大きさも、\nグレの頭を、なでてくれる感触も
+	グレイプニル=ロスト	<Off>						あるじがグレを呼ぶ声も、\n困った時の笑い方も
+	グレイプニル=ロスト	<Off>						怒ってって、お願いしたときの、\nちょっと低くなった、優しい声も
+	グレイプニル=ロスト	<Off>						……全部、グレが覚えてる\nあるじの代わりに、\nグレが、ずっと覚えてる
+	ディーア	<Off>						<dash=2>グレイプニル=ロスト
+	グレイプニル=ロスト	<Off>						だから\n<dash=2>さようなら、あるじ
+	グレイプニル=ロスト	<Off>						グレのだいすきなあるじに、\n最後にもう一度会えて、うれしかった
+	グレイプニル=ロスト	<Off>						グレのだいすきな笑顔を、\nもう一度見れて\n<dash=2>うれしかった
+	ディーア	<Off>						待て、待ってくれ<dash=2>
+	白背景		エフェクト表2			2
+Wait						2
+	ディーア	<Off>						グレイプニル、ロス……<dash=4>
+FadeOut	white					1
+CharacterOff
+Bg	月夜の大地
+	　　　　　　　　　　
+Wait						3
+StopBgm
+Wait						1.5
+FadeIn	white					.1
+Bgm	魔王バトル
+	魔天狼							アハハハ、アハハハハハ!!!!!!
+	魔天狼							滅ビロ、朽チロ<dash=2>!!
+Se	光3
+Se	火1
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+Shake	Graphics		time=2				NoWait
+Se	火事
+FadeIn	white					.5
+Wait						1.5
+CharacterOff
+	ディーア	絶望2						グレイ、プ、ニル……？\n…………オレ、は……
+	ディーア	悔しい2						……………………ッ!!
+CharacterOff
+	魔天狼							…………アアアア!!!!
+Se	光3
+Se	火1
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+Shake	Graphics		time=2				NoWait
+Se	火事
+FadeIn	white					.5
+Wait						1.5
+CharacterOff
+	ディーア	目閉じ2						…………ああ、そうだ\nそうだった\nオレは<dash=2>!!
+	ディーア	怒り2						<dash=4><ruby=アンロック>魔力、解放</ruby>
+Se	光3
+FadeOut	lime					1
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル46004		エフェクト表			0
+Wait						.5
+FadeIn	white					.5
+	魔天狼	<Off>						<dash=4>……ガッ!?
+	ディーア	<Off>						…………実体のない\n魔剣のようなもの、か\nよかった、これなら戦えそうだ
+CharacterOff
+	イベントスチル46003		エフェクト表
+	魔天狼	<Off>						グッ……アアアアアア!!!!
+CharacterOff
+	イベントスチル46004		エフェクト表
+Bgm	決戦
+	ディーア	<Off>						さあ、勝負だ
+	ディーア	<Off>						<dash=2>かかって来いよ、魔天狼
+	ディーア	<Off>						オレたちが、相手になってやる<dash=2>!!
+If	isdebug==true
+CharacterOff
+Jump	*E_460_10
+EndIf
+EndScenario
+
+# E_460_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bgm	結婚
+Bg	白背景
+Param	character_grayout=false
+	白背景		エフェクト表			0
+FadeIn	white					.5
+	グレイプニル=ロスト	<Off>						…………グレは、\nあるじが大好きだから
+	グレイプニル=ロスト	<Off>						あるじのためならなんだってできる
+	グレイプニル=ロスト	<Off>						それは、ロストになっても、\nずっと変わらない
+	グレイプニル=ロスト	<Off>						<dash=2>あるじの大好きな魔界に、\nグレイプニルは必要ない
+	グレイプニル=ロスト	<Off>						あるじの幸せのためなら、\nグレが救われなくたって、\n別に構わない
+	グレイプニル=ロスト	<Off>						……そう思っていた、はずなのに
+	グレイプニル=ロスト	<Off>						……結局、グレが救われちゃった
+	グレイプニル=ロスト	<Off>						二度と会えないって\n二度と笑ってくれないって\n……そう、思ってたのに
+	グレイプニル=ロスト	<Off>						……もう一度、あるじに会えて
+	グレイプニル=ロスト	<Off>						緊張して、ちゃんとしゃべれない\nグレの言葉を、\nちゃんとわかってくれて
+	グレイプニル=ロスト	<Off>						あるじと、もう一度、\n一緒に戦えて
+	グレイプニル=ロスト	<Off>						あるじが、グレのために、\n悲しんでくれて
+	グレイプニル=ロスト	<Off>						あぁ……夢みたいな、時間だった
+	グレイプニル=ロスト	<Off>						<dash=2>ありがとう、あるじ\nグレの夢を、叶えてくれて
+	グレイプニル=ロスト	<Off>						さようなら、あるじ
+	グレイプニル=ロスト	<Off>						ぐれは、ぐれは……
+	グレイプニル=ロスト	<Off>						あるじのことが、\nだいすきでした<dash=2>
+	イベントスチル460BG		エフェクト裏			0
+CharacterOff	白背景					2
+Wait						2.5
+FadeOut	white					1
+CharacterOff						0
+StopBgm
+	　　　　　　　　　　
+Bg	月夜の大地
+Wait						1
+Se	強風	TRUE
+FadeIn	white					.5
+Se	光3
+Se	火1
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+Shake	Graphics		time=2				NoWait
+Se	火事
+FadeIn	white					.5
+Wait						1.5
+CharacterOff
+	　　　　　　　　　　							<dash=2>暖かな魔力が、\n全身を巡っている
+	　　　　　　　　　　							まるで最初からそこに\nあったかのように、優しく溶けて
+	　　　　　　　　　　							挫けそうになる心を、\n勇気づけてくれる
+Se	光3
+Se	火1
+FadeOut	white					1
+CharacterOff						0
+	　　　　　　　　　　
+Shake	Graphics		time=2				NoWait
+Se	火事
+FadeIn	white					.5
+Wait						1.5
+CharacterOff
+	　　　　　　　　　　							傷を負えば、慌てたように跳ね回って\nすぐにそれを癒やしてくれる
+	　　　　　　　　　　							そんな、月の明かりのような、\n暖かい魔力
+FadeOut	white					.5
+CharacterOff						0
+StopSe
+	イベントスチル46004		エフェクト表
+Bgm	風属性バトル
+Wait						.5
+Shake	イベントスチル46004		x=3 y=3 time=50				NoWait
+FadeIn	white					.5
+	ディーア	<Off>						<dash=2>終わりだ、魔天狼!!
+	魔天狼	<Off>						ガ、ァァ……<dash=2>
+Se	光3
+FadeOut	white					1.5
+CharacterOff						0
+Bg	白背景					0
+Wait						1
+FadeIn						.1
+	グレイプニル	<Off>						<dash=2>ぁ
+	グレイプニル	<Off>						ある、じ……？
+	ディーア	<Off>						<dash=2>捕まえた！
+	ディーア	<Off>						帰ってこい、グレイプニル<dash=2>!!
+	グレイプニル	<Off>						<dash=6>あ……あるじ、だ
+Se	光3
+StopBgm						3
+FadeOut	white					1
+CharacterOff						0
+Bg	宇宙					0
+Param	character_grayout=true
+	　　　　　　　　　　
+Wait						5
+Bgm	穏やか					3
+	グレイプニル	驚き拡大	エフェクト表
+FadeIn	white					1
+Wait						2
+	グレイプニル							…………あるじ、あるじだ
+	グレイプニル							……あるじ、ぼろぼろ\nなんで？
+	ディーア	<Off>						………………あのなあ
+	ディーア	<Off>						……バカか、お前
+	グレイプニル	嬉しい拡大						えへへ……\nあるじのその顔、しゅき
+	ディーア	<Off>						……酷い目にあったんだぞ、オレ達は
+	グレイプニル	拡大						うん、ごめんなさい
+	ディーア	<Off>						…………良かった、無事で\n本当に、よかった
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	イベントスチル46005		エフェクト表
+Wait						.5
+FadeIn	white					1
+	ディーア	<Off>						……帰ろう、グレイプニル
+	グレイプニル	<Off>						<dash=2>うん、あるじ！
+FadeOut	white					1
+CharacterOff						0
+Bg	白背景
+	イベントロゴ460		エフェクト表
+Wait						1
+FadeIn	white					1
+	イベントロゴ460							<color=blue>\n　　　 ロストインデスパレード\n　　　　　　　　　　　　　　<dash=2>完</color>
+FadeOut	white					1
+Wait						2
+If	isdebug==true
+CharacterOff
+Jump	*E_460_01
+EndIf
+EndScenario

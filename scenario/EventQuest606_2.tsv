@@ -1,0 +1,999 @@
+# E_606_10
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	廃病院
+	ドムドム					0
+FadeIn	black					.2
+Se	斬1
+FadeOut	white					.2
+FadeIn	white					.2
+Wait						.2
+Se	打1
+CharacterOff						0
+FadeOut	white					.2
+	ディーア	本気2	1_2			0
+	ユノ	怒り	2_2			0
+FadeIn	white					.2
+	ディーア	悔しい2						くっ……
+	ユノ	怒り						兄さんに、近づかないで！
+Se	斬2
+FadeOut	white					.2
+CharacterOff						0
+StopBgm
+	ドムドム					0
+Wait						.3
+FadeIn	white					.2
+Tween	ドムドム	ShakePosition	x=5				Add
+	ドムドム							キュゥゥ…………
+Tween	ドムドム	MoveBy	y=-800				NoWait
+Wait						.2
+Se	倒れる
+Wait						.3
+CharacterOff						.5
+Wait						.7
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	通常2	2_2
+	ディーア	通常2						ありがとうユノ、助かったよ
+CharacterOff
+	ユノ	切ない						兄さん大丈夫？\nどこもケガしてない？
+CharacterOff
+	ディーア	通常2	1_2
+	リディ	通常2	2_2
+	ディーア							ああ、おかげで無事だ
+CharacterOff
+	ユノ	嬉しい						ほんとに？\nよかった……
+Bgm	絶望
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	ディーア	悔しい2						……しかしこのアジト、\n倒しても倒しても魔物が\n湧いてくるな
+	リディ	驚き2						みんな、どこから来てるんだろ
+CharacterOff
+	ユノ	通常						たぶん、向こうの方じゃない？
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア							……どうしてそう思うんだ？
+CharacterOff
+	ユノ	切ない						どうしてって、\nさっき倒した魔物も、\n向こうの方から出てきたし
+	ユノ							あっ、ほら！\nあそこ！
+FadeOut	black					.3
+CharacterOff						0
+	魔剣医師長X		1_3			0
+	黒グラデーション		エフェクト表			0
+Tween	魔剣医師長X	MoveTo	x=500 time=2	linear			NoWait
+Se	歩く
+FadeIn	black					.3
+Wait						1.3
+FadeOut	black					.3
+StopSe
+CharacterOff						0
+	ユノ	切ない				0
+FadeIn	black					.3
+Tween	ユノ	PunchPosition	y=50				Add
+	ユノ	通常						また誰かいたよ！\nいってみよ、兄さん？
+Se	走る
+Tween	ユノ	MoveBy	x=-800 time=2				NoWait
+Wait						1
+CharacterOff
+	ディーア	驚き2	1_2
+	リディ	驚き2	2_2
+	ディーア	本気2						ユノ、ちょっと待て！\nここは少し様子を見てから……
+FadeOut	black					.3
+CharacterOff						0
+	ユノ	嬉しい	2_2			0
+FadeIn	black					.3
+	ユノ	嬉しい						見て兄さん、\nこの建物すごく広いみたい！\n元々何に使われてたんだろ？
+StopBgm
+	魔剣医師長X	?	1_2_b			.5		まさかサンプルが\n自ら足を運んでくるとはな
+Bgm	緊迫
+Tween	ユノ	MoveBy	x=30				NoWait
+	ユノ	切ない						……え？
+	魔剣医師長X							この魔剣を捕えろ！
+CharacterOff
+Param	character_grayout=false
+	魔剣医師A		1_2
+	魔剣医師B		2_2
+	魔剣医師	<Off>						承知しました
+FadeOut	black					.3
+CharacterOff
+	魔剣医師A		1_3			0
+	魔剣医師B		3_3			0
+	ユノ	切ない2	2_3_b			0
+Param	character_grayout=true
+FadeIn	black					.3
+	ユノ	切ない2						なに、ちょっと……やめて！
+CharacterOff
+	ディーア	本気2						お前ら何やってるんだ！\n今すぐユノから離れろ！
+	魔剣医師長X							ハッ、従う理由がないな\n我々はこの魔剣以外に用はない
+	魔剣医師長X							魔剣は実験室へ連れていけ\nこの男はさっさと片付けろ
+CharacterOff
+	魔剣医師A		1_3
+	魔剣医師B		3_3
+	ユノ	切ない2	2_3_b
+	魔剣医師A							は、ただちに
+CharacterOff
+	ディーア	本気2						実験室？\nお前ら……ユノに何する気だ！
+	魔剣医師長X							……"ユノ"か\nこの歪な魔剣には\n似つかわしくない名前だな
+	ディーア	悔しい2						なんだと……
+	魔剣医師長X							我々に与えられた時間は有限だ\n貴様の無駄話に付き合う暇はない
+Se	歩く
+CharacterOff						1
+Wait						1.3
+StopSe
+	ディーア	本気2						おい、待て!!
+	ユノ	<Off>						兄さん!!
+	ディーア	悔しい2						行かせるか……っ！
+CharacterOff
+Param	character_grayout=false
+	魔剣医師A		1_3
+	魔剣医師B		3_3
+Tween	魔剣医師A	MoveTo	x=-90 time=0.7				Add
+Tween	魔剣医師B	MoveTo	x=90 time=0.7				Add
+	魔剣医師	<Off>						お引き取りください\nドクターは大変多忙です
+CharacterOff
+Se	光1
+	オーラ青		エフェクト表			.5
+	ディーア	本気2						ユノを返せ！\nそこをどかないなら、\nお前ら全員倒して進む！
+CharacterOff
+Bgm	バトル
+	魔剣医師A		1_2
+	魔剣医師B		2_2
+	魔剣医師	<Off>						……魔剣の<ruby=アンロック>解放</ruby>を確認、\n排除します
+CharacterOff
+	ディーア	悔しい2						こいつら……\n待ってろユノ、すぐ行くからな！
+If	isdebug==true
+CharacterOff
+Jump	*E_606_11
+EndIf
+EndScenario
+
+# E_606_11
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	black					0
+StopSound
+Bgm	緊迫
+Bg	廃病院
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+FadeIn	black					.5
+	ディーア	悔しい2						こっちに向かってきた奴らは倒したが\nユノを連れ去った奴は見失ったか……
+	リディ	悲しい2						ユノちゃん、どこまで\n連れてかれちゃったんだろ……
+	ディーア	本気2						ユノ！\n聞こえるか？\n聞こえたら返事をしてくれ！
+FadeOut	black					.3
+CharacterOff						0
+	　　　　　　　　　　
+FadeIn	black					.3
+Wait						1
+FadeOut	black					.3
+CharacterOff						0
+	ディーア	悔しい2	1_2			0
+	リディ	驚き2	2_2			0
+FadeIn	black					.3
+	ディーア	悔しい2						……くっ、だめか
+	リディ	驚き2						マスター！\n向こうのほうにおっきい扉があるよ！
+	ディーア	本気2						……あれが実験室か？\nとにかく、行ってみよう
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff
+Bg	研究所C2
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+Wait						1
+Se	強風	TRUE
+FadeIn	black					.5
+	ディーア	悔しい2						ここは……
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+	ドムドム		1_3			0
+	カプカプ		3_3			0
+	ショコラゴーレム		2_3_b			0
+	　　　　　　　　　　
+FadeIn	black					.3
+Se	闇1
+	スモーク		エフェクト表			1
+Wait						1.5
+StopSe
+Bgm	緊迫
+Param	character_grayout=true
+CharacterOff
+	リディ	驚き2	2_2
+	ディーア	悔しい2	1_2
+	リディ	驚き2						お菓子の魔物がいっぱいだよ！
+	ディーア	悔しい2						どうやら、街に現れた魔物は\nここで作られてたみたいだな……
+	リディ	驚き2						あ、マスター見て！
+FadeOut	black					.3
+CharacterOff						0
+Param	character_grayout=false
+	ユノ	切ない				0
+	鎖エフェクト前		エフェクト表			0
+	鎖エフェクト後ろ		エフェクト裏			0
+FadeIn	black					.3
+Se	コインロック
+	ユノ	切ない						兄さん！
+CharacterOff
+Param	character_grayout=true
+	ディーア	本気2	1_2
+	リディ	悲しい2	2_2
+	ディーア	本気2						ユノ！
+	リディ	悲しい2						ユノちゃん！\nどうしよう、あんなに縛られて……
+	ディーア	悔しい2						待ってろユノ、\n今すぐそっちに行く！
+CharacterOff
+Se	歩く
+	黒グラデーション		エフェクト表
+StopBgm
+	魔剣医師長X					.7		足止めもろくにできんとは\nまったく、使い物にならん連中だ
+StopSe
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悲しい2	2_2
+	ディーア	本気2						お前は！
+CharacterOff
+Bgm	絶望
+	魔剣医師長X							しかし迷惑なものだな\n私はこの貴重なサンプルの研究で\n忙しいというのに
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悲しい2	2_2
+	リディ	悲しい2						マスター、この人なんだか怖いよ……
+	ディーア	本気2						お前……\n人や魔剣を何だと思ってるんだ！
+CharacterOff
+	魔剣医師長X							全て研究対象だ\nそれ以上でも以下でもない
+	ディーア	悔しい2						研究対象だと？
+CharacterOff
+	魔剣医師長X							そうとも\n貴様の方こそ\nこの魔剣の価値を理解しているのか？
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア	悔しい2						ユノの、価値……？
+CharacterOff
+	魔剣医師長X							ああ、そうだ
+	魔剣医師長X							私はここで、人体はじめ\nあらゆる物質の内部構造を研究し、\n魔剣を生み出す研究を続けてきた
+CharacterOff
+	ユノ	照れ
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	魔剣医師長X	<Off>						そして、その研究を進めるために\nこの上なく重要なサンプルが、\n貴様が持ちこんだこの魔剣なのだ
+Se	コインロック
+	ユノ	照れ						…………っ
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	驚き2	2_2
+	リディ	驚き2						ユノちゃんが……？
+CharacterOff
+	魔剣医師長X							本当に何も知らんのか？\nでは教えてやろう\nこの魔剣は……
+CharacterOff
+Param	character_grayout=false
+	ユノ	切ない2
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ユノ	切ない2						いやっ！ やめて！\n嘘！ 全部嘘だから!!
+CharacterOff
+	魔剣医師長X							やかましい！
+Se	打1
+FadeOut	white					.1
+CharacterOff
+	ユノ	泣き2				0
+	鎖エフェクト前		エフェクト表			0
+	鎖エフェクト後ろ		エフェクト裏			0
+FadeIn	white					.1
+Shake	ユノ		x=5				NoWait
+	ユノ	泣き2						痛っ……
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悲しい2	2_2
+	ディーア	本気2						おい！ やめろ！\nいますぐユノから離れろ！
+	リディ	悲しい2						ひどい……
+CharacterOff
+	魔剣医師長X							ひどい？\nこのサンプルの禍々しさを知らんから\n貴様らはそんな口が利けるのだ
+	魔剣医師長X							いい機会だ、貴様らに教えてやろう！\nこのサンプルはな、生身の人間を\nベースにつくられているのだ！
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア	悔しい2						……生身の、人間？
+CharacterOff
+	魔剣医師長X							ああ、そうだ
+FadeOut	black					.5
+ImageEffect	SpriteCamera	Sepia
+Param	character_grayout=false
+CharacterOff						0
+Bg	研究所B_過去					0
+FadeIn	black					.5
+	魔剣医師長X	<Off>						かつてこの魔界には、その教義のため\nあらゆる手段をもって魔剣を改造し、\n強化しようとする教団が存在した
+	トライアルスチル380	足元	エフェクト表			0
+Wait						.3
+CharacterOff						0
+	魔剣医師長X	<Off>						その教団は人から魔剣を作る研究にも\n取り組んでいたが、教義を危険視した\n魔剣機関によって滅ぼされてしまった
+	トライアルスチル380	顔	エフェクト表			0
+Wait						.3
+CharacterOff						0
+	魔剣医師長X	<Off>						私はその教団が遺した記録を読み、\n数十年かかってやっと、その魔術の\n一部を自らのものにしたのだ
+FadeOut	black					.3
+Param	character_grayout=true
+CharacterOff
+	ディーア	本気2	1_2			0
+	リディ	悲しい2	2_2			0
+ImageEffectOff	SpriteCamera	Sepia
+Bg	研究所C2					0
+FadeIn	black					.3
+	ディーア	本気2						いったい何の話だ？\nそんな教団、ユノとは関係……
+CharacterOff
+	魔剣医師長X							この魔剣には、\nその滅んだはずの教団が\n用いていた魔術が使われている
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア	悔しい2						何……？
+CharacterOff
+	魔剣医師長X							それも……こいつに使われているのは\n記録にあった魔術を発展させたような\nおそろしく高度な魔術だ
+	魔剣医師長X							つまりこいつは……この世界に\nあるはずのない魔術でつくられた、\nいわば悪魔の魔剣なのだよ！
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア	悔しい2						そんな、ことが……
+CharacterOff
+Param	character_grayout=false
+	ユノ
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+Se	コインロック
+	ユノ	切ない2						兄さん、信じないで！\nこの人の言っていることは、\nみんなデタラメだから！
+CharacterOff
+Param	character_grayout=true
+	ディーア	本気2	1_2
+	リディ	悲しい2	2_2
+	ディーア	本気2						……ユノの言う通りだ\nお前が話したことには何の証拠もない\nただの都合の良い妄想だ！
+CharacterOff
+	魔剣医師長X							ふむ……そこまで言うのであれば\nこの場で確かめてやろう
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア							確かめる？
+CharacterOff
+Bgm	緊迫
+	魔剣医師長X							なに、簡単なことだ\nこの魔剣を解剖してやればいい
+CharacterOff
+	ユノ
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ユノ	切ない2						解、剖……
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悲しい2	2_2
+	ディーア	本気2						ふざけるな！\nそんなこと、絶対にさせない！
+CharacterOff
+	魔剣医師長X							するかしないかは、私が決めることだ\nではな
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悲しい2	2_2
+	ディーア	本気2						どこへ行く！
+CharacterOff
+Param	character_grayout=false
+	魔剣医師長X		2_3_b					私はこのサンプルと研究室へ向かう\n貴様らに邪魔はさせない
+Se	闇1
+Se	闇1
+	カプカプ		1_3			.5
+	ドムドム		3_3			.7
+	魔剣医師長X							さあ行け\n失敗作でも時間稼ぎくらいは\nできるだろう
+CharacterOff	魔剣医師長X					1
+Tween	カプカプ	MoveBy	x=50				NoWait
+Tween	ドムドム	MoveBy	x=-50				NoWait
+Wait						1
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア	悔しい2						くっ……逃がすか！
+If	isdebug==true
+CharacterOff
+Jump	*E_606_12
+EndIf
+EndScenario
+
+# E_606_12
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bg	研究所C2
+Bgm	緊迫
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	通常2	2_2
+FadeIn	white					.5
+	ディーア	本気2						よし、魔物は片付けたぞ！\n早くユノのところに……
+	リディ	驚き2						マスター、こっちだよ！\nこの先が洞窟につながってるみたい！
+	ディーア	悔しい2						早くしないとユノが危ない、\n急ごう！
+	wipe		wipe_start			0
+Tween	wipe	MoveTo	x=-800 islocal=true	linear
+FadeOut	black					.1
+StopBgm
+CharacterOff
+Bg	研究所B
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+Wait						.5
+Bgm	絶望
+FadeIn	black					.5
+	ディーア							なんだ、ここは
+	リディ	悲しい2						マスター、怖いよ……
+	ユノ	<Off>						いやぁっ!!
+	ディーア	悔しい2						ユノの声だ……
+	ディーア	本気2						ユノ！助けに来たぞ！\nどこにいるんだ!?
+CharacterOff
+CharacterOff
+	魔剣医師長X							また来たのか\n本当にしつこい連中だな
+CharacterOff
+Param	character_grayout=false
+	ユノ	照れ
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ユノ							兄さん……
+Param	character_grayout=true
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悲しい2	2_2
+	ディーア	本気2						ユノ！いますぐ行く！
+CharacterOff
+Param	character_grayout=false
+	ユノ	泣き
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ユノ	泣き						来ないで兄さん、来ちゃだめ！
+CharacterOff
+Param	character_grayout=true
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア	悔しい2						ユノ？\nどうして……
+CharacterOff
+	魔剣医師長X							貴様が遅すぎたということだ
+	魔剣医師長X							サンプルの調査準備は万端だ\nあとは仕上げに、魔核へメスを\n下ろしてやるだけでいい
+	魔剣医師長X							どれだけ急ごうが、\n人間の足では間に合わん
+	魔剣医師長X							魔核を解剖すれば、\nこの魔剣の正体は必ずや明らかになる
+CharacterOff
+	ディーア	本気2	1_2
+	リディ	悲しい2	2_2
+	ディーア	本気2						……そんなこと、絶対にさせない！
+CharacterOff
+Param	character_grayout=false
+	ユノ	泣き
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ユノ	泣き						違うの兄さん！もういいの！
+	ユノ	泣き						あたしのことはもういいから……\n早く……早くここから離れて！
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悔しい2	2_2
+Param	character_grayout=true
+	ディーア	悔しい2						ユノ……？\nそんなこと、できるわけないだろ？
+CharacterOff
+	魔剣医師長X							なるほど、よほど知られたくない\n過去があるようだな
+	魔剣医師長X							ますます気に入った\nさっそく解剖をはじめるとしよう
+CharacterOff
+	ディーア	悔しい2	1_2
+	リディ	悲しい2	2_2
+	ディーア	本気2						やめろぉぉぉぉぉ!!
+CharacterOff
+Param	character_grayout=false
+	ユノ	泣き
+	鎖エフェクト前		エフェクト表
+	鎖エフェクト後ろ		エフェクト裏
+	ユノ	泣き						いやぁぁぁぁぁぁぁぁぁぁ!!
+Se	光1
+	オーラ青		エフェクト表2			1.5
+Wait						1.87
+StopBgm
+CharacterOff						0
+	　　　　　　　　　　					0
+Se	雨	TRUE
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffectOff	SpriteCamera	GrayScale
+Bg	遺跡C_過去					0
+Wait						.1
+Bg	山岳B_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	魔術空間_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	宝石鉱山_過去
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+ImageEffect	SpriteCamera	GrayScale
+Bg	教会内部
+Wait						.1
+ImageEffectOff	SpriteCamera	GrayScale
+ImageEffect	SpriteCamera	Sepia
+Bg	市街地C
+Wait						.1
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+ImageEffectOff	SpriteCamera	Sepia
+StopSe						.5
+FadeOut	black					0
+CharacterOff						0
+Bg	黒背景					0
+	　　　　　　　　　　
+Wait						1.5
+ImageEffect	SpriteCamera	Sepia
+FadeIn	black					0
+CharacterOff
+	※※※※							どうしても、この魔剣使いを\n救いたいというのなら<dash=2>
+Se	回想
+FadeOut	black					0
+CharacterOff						0
+	　　　　　　　　　　
+Bg	山岳A
+Wait						.5
+FadeIn	black					0
+	リディ	通常2						ユノちゃんとマスターって、\nほんとによく似てるよね！\n兄妹みたい！
+	角なしユノ	切ない						じゃあ……あたし、\n兄さんって呼んでもいい？
+	ディーア(隠遁)							ああ、もちろん
+FadeOut	white					.3
+CharacterOff						0
+	　　　　　　　　　　
+Bg	子供部屋(バレンタイン)					0
+FadeIn	white					.3
+	兵士	通常2	1_2					あの二人の居場所はどこだ！\nさっさと吐け!!
+CharacterOff
+	角なしユノ	泣き						知らない……\nあたし、ほんとに知らないんです……
+CharacterOff
+	兵士	通常2	1_2					嘘をつけ！\nお前はあの男の妹なんだろ？
+CharacterOff
+	角なしユノ	泣き						あたしは……
+FadeOut	black					0
+CharacterOff						0
+StopBgm
+Bg	研究所B					0
+Wait						1
+FadeIn	black					0
+	※※※※							<dash=2>1つだけ方法がある
+	角なしユノ	泣き						……ほんとう、ですか
+	※※※※							ああ\nただし、条件がある
+	※※※※							その方法を実行すれば\n君はもう<dash=2>\n人間には戻れない
+	角なしユノ	泣き						そんな……
+	黒背景		エフェクト表			0
+	※※※※							この男を、救いたいんだろう？
+FadeOut	black					0
+ImageEffectOff	SpriteCamera	Sepia
+StopBgm
+Bg	研究所B
+Param	character_grayout=false
+	オーラ青		エフェクト表
+	魔剣医師長X
+Wait						1
+Shake	魔剣医師長X		x=5				NoWait
+Bgm	絶望
+FadeIn	black					.3
+CharacterOff	オーラ青					1
+	魔剣医師長X							ぐぅっ……
+CharacterOff
+Param	character_grayout=true
+	ディーア	絶望2	1_2
+	リディ	悲しい2	2_2
+	ディーア	絶望2						なんだ、今の光景は……
+	リディ	悲しい2						マスター、大丈夫？
+	ディーア	悔しい2						ああ、なんとか……\nあいつは？
+	リディ	悲しい2						わからない……\nユノちゃんの身体に触れてから\nみんな倒れちゃって……
+	ディーア	怒り2						あいつが魔核に触れた反動で……\nユノの記憶が、流れこんだのか
+	ディーア	本気2						……とにかく、\n今がユノを取り返すチャンスだ
+Se	走る
+Tween	ディーア	MoveBy	x=800 time=2				NoWait
+Wait						.7
+FadeOut	black					.3
+CharacterOff						0
+	ユノ	泣き	2_2			0
+	ディーア	本気2	画面外_左			0
+Tween	ディーア	MoveTo	x=-90				NoWait
+Se	走る
+FadeIn	black					.3
+Wait						.5
+	ディーア	本気2						ユノ！\n大丈夫か
+	ユノ	泣き						兄さん……みた、の……？
+	ディーア	悔しい2						それは……
+CharacterOff
+StopBgm
+	魔剣医師長X							クックックック\nそうか、そういうことだったのか\nこれは……信じがたい発見だぞ！
+Bgm	緊迫
+	魔剣医師長X							この魔剣は、私の想像を遥かに超えて\n有用なサンプルだったようだ！
+	魔剣医師長X							その魔剣は必ず、\n余すところなく解剖してやる！
+CharacterOff
+	ユノ	泣き	2_2
+	ディーア	悔しい2	1_2
+Tween	ディーア	MoveBy	x=90				NoWait
+	ディーア	本気2						こいつ……\nユノ！俺の後ろに隠れてろ！
+CharacterOff
+	魔剣医師長X							もっとだ！\nもっと真理を見せろ！
+CharacterOff
+	ユノ	泣き	2_2
+	ディーア	本気2
+	ディーア	本気2						お前の好きには、絶対にさせない！\n<ruby=アンロック>魔剣解放</ruby><dash=2>!!
+If	isdebug==true
+CharacterOff
+Jump	*E_606_13
+EndIf
+EndScenario
+
+# E_606_13
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bg	研究所B
+Bgm	緊迫
+	魔剣医師長X
+FadeIn	white					.5
+Shake	魔剣医師長X		x=5				Add
+	魔剣医師長X							ぐ……私は、こんなところで……
+StopBgm						1
+Tween	魔剣医師長X	MoveBy	y=-800				NoWait
+Wait						.2
+Se	倒れる
+Wait						.3
+CharacterOff						.5
+Wait						.7
+CharacterOff
+	ユノ	切ない	2_2
+	ディーア	悔しい2	1_2
+Tween	ディーア	MoveBy	x=50				NoWait
+	ディーア	悔しい2						ユノ！\n大丈夫か？
+	ユノ	悲しい						兄さん……
+	ディーア	本気2						早くここから出よう！\nクランさんならその傷もすぐ治せる！
+Tween	ユノ	MoveBy	x=30				NoWait
+	ユノ	悲しい						……いいの兄さん\n私のことは……ここに置いていって
+	ディーア	絶望2						ユノ？\nどうしてそんなこと……
+	ユノ	照れ						だって兄さん、見たんでしょう？\n私の、昔の記憶
+	ディーア	悔しい2						それは……
+Bgm	凱旋
+	ユノ	照れ						噓つきで、ごめんね
+	ユノ	泣き2						あたし……ずっと、\n兄さんの本当の妹になりたかったの
+	ユノ	泣き2						妹みたいに大事に扱ってもらえる、\nリディちゃんのことが羨ましかった
+	ユノ	泣き						「兄さん」って呼び続けたら、\nいつか本当の兄妹になれるかもって、\nそんな夢みたいなこと思ってたの
+	ディーア	驚き2						ユノ……
+	ユノ	泣き笑い						でもね、夢みたいなことも、\n少しだけ叶ったんだよ？
+Tween	ユノ	MoveBy	x=-30
+	ユノ	泣き笑い						だってあたしには、兄さんの血が……
+StopBgm
+Se	突1
+FadeOut	red					.1
+	魔剣医師長X		2_3_b			0
+FadeIn	red					.5
+	ユノ	泣き						……え？
+	ディーア	絶望2						かはッ
+Tween	ディーア	MoveBy	y=-800				NoWait
+Wait						.2
+Se	倒れる
+Wait						.3
+CharacterOff	ディーア					.5
+Bgm	絶望
+	魔剣医師長X							貴重なサンプルは渡さん……\nどんな手を使ってでも、取り戻す
+CharacterOff
+	ディーア	悔しい2
+Shake	ディーア		x=5				NoWait
+	ディーア							お前、なんで……\n倒したはずじゃ……
+CharacterOff
+	魔剣医師長X							言っただろう、\n私にとってあらゆるものは研究対象だ
+	魔剣医師長X							そしてそれは、\n自分自身さえも例外ではない
+	魔剣医師長X							自らの肉体に研究と改造を施した結果\n私は強力な自己治癒能力を得たのだ
+CharacterOff
+	ユノ	泣き	2_2
+	ディーア	悔しい2	1_2
+Tween	ユノ	MoveBy	x=-50				NoWait
+	ユノ	泣き						兄さん、ねえ、兄さん！\nどうしよう、すごい血……
+CharacterOff
+Param	character_grayout=false
+	魔剣医師長X							どうやら貴様の魔力……\nこのサンプルと無関係ではないらしい
+	魔剣医師長X							貴様の肉体には\n何ら興味がなかったが<dash=2>
+Se	闇1
+	魔剣医師A		1_3			.5
+	魔剣医師B		3_3			.5
+	魔剣医師長X							事情が変わった\n貴様らまとめて解剖してやるとしよう
+CharacterOff
+Param	character_grayout=true
+	ユノ	泣き	2_2
+	ディーア	悔しい2	1_2
+	ディーア	悔しい2						くそッ、まだこんなに……
+	ユノ	泣き						兄さん、早く逃げて！\nこいつらはあたしが食い止めるから！
+	ディーア	本気2						でも、それじゃあユノが……
+	ユノ	泣き						あたしはいいの！\nユノは……本当の妹じゃないし、\n嘘ばっかりの、悪い子だから
+	ユノ	泣き2						だから……あたしには、兄さんに\n守ってもらう価値なんてないの
+	ディーア	本気2						……それは違う
+	ユノ	泣き						え？
+	ディーア	悔しい2						ユノ……お前は俺の、妹だ
+	ユノ	泣き						兄、さん？
+	ディーア	目閉じ2						ユノ……過去のお前に、\n何があったかは知らない
+	ディーア	悔しい2						でも……お前が俺を\n本当に大切に思ってくれていたことはあの記憶からも伝わってきた
+	ディーア	怒り2						血がつながっているかいないかは……\n今は、関係ない
+	ディーア	悔しい2						心がつながっていたら……\n俺たちは、兄妹なんだ
+	ユノ	泣き2						……っ
+Se	回想
+FadeOut	white					.5
+ChangeSoundVolume	Bgm	0
+ImageEffect	SpriteCamera	Sepia
+Bg	山岳A					0
+CharacterOff						0
+FadeIn	white					.5
+	角なしユノ	切ない						じゃあ……あたし、\n兄さんって呼んでもいい？
+	ディーア(隠遁)							<dash=2>ああ、もちろん
+FadeOut	white					.5
+ImageEffectOff	SpriteCamera	Sepia
+Bg	研究所B
+CharacterOff						0
+	ユノ	泣き	2_2			0
+	ディーア	悔しい2	1_2			0
+	　　　　　　　　　　
+ChangeSoundVolume	Bgm	1
+FadeIn	white					.3
+	ユノ	泣き						兄さん……
+CharacterOff
+	魔剣医師長X		2_3_b					別れの挨拶は済んだか？\nそれでは<ruby=オペ>執刀</ruby>を開始するとしよう
+CharacterOff
+Se	闇2
+Param	character_grayout=false
+	ショコラゴーレム		2_3_b			.5
+	魔剣医師A		1_3
+	魔剣医師B		3_3
+	ショコラゴーレム							グォォォオオオ……
+CharacterOff
+Param	character_grayout=true
+	ユノ	泣き	2_2
+	ディーア	悔しい2	1_2
+	ユノ	泣き						すごい数……
+	ディーア	悔しい2	1_2_b
+Tween	ユノ	MoveBy	x=-50				NoWait
+	ユノ	泣き2						でも、大丈夫……\nひとりでも、怖くない\nだってあたしは……
+	ユノ	泣き笑い						兄さんの、妹だから
+	黒グラデーション		エフェクト表
+StopBgm
+	？？？？							よく言いましたね、刻鳴鐘ユノ
+CharacterOff	黒グラデーション
+	ユノ	泣き	2_2
+	ディーア	悔しい2	1_2
+	ユノ							……え？
+FadeOut	white					.5
+Bgm	風属性バトル
+CharacterOff
+Param	character_grayout=false
+	ジョーカー		1_2			0
+	デュエル		2_2			0
+FadeIn	white					.3
+	ジョーカー							あなたひとりに\nかっこつけさせはしないわ！
+CharacterOff
+	ひのきのぼう		1_3_b
+	テレプシコーラ		3_3
+	テレプシコーラ							兄さまのピンチは、\n私たちが救いますわ！
+CharacterOff
+Param	character_grayout=true
+	ユノ	切ない	2_2
+	ディーア	悔しい2	1_2
+	ユノ	切ない						どうして、ここに……
+CharacterOff
+Param	character_grayout=false
+	ナターシャ		1_3_b
+	ライオンハート		3_3
+	ライオンハート							クランさんがこの場所を\n私たちに教えてくれたの！
+CharacterOff
+	高電圧可変弩		3_3_b
+	ハッピーエンド		1_3
+	ハッピーエンド							お兄ちゃんのピンチは、\n私たちのピンチだもん！
+CharacterOff
+	エリス		1_2_b
+	グラーキの黙示録		2_2
+	エリス							私たちのことも忘れないでね、\nお兄ちゃん♥
+CharacterOff
+	ユノ	切ない	2_2
+	ディーア	驚き2	1_2
+Param	character_grayout=true
+	ディーア	驚き2						みんな……
+CharacterOff
+	ノーネーム	通常						刻鳴鐘ユノ\nあなたはもう一人ではありません\n私たちはみな、マスターの妹ですから
+CharacterOff
+	ユノ	泣き笑い						……うん！
+CharacterOff
+	魔剣医師長X							なんだ、貴様らは……
+CharacterOff
+	ユノ	本気	2_2
+	ディーア	悔しい2	1_2
+	ユノ	本気						見ててね兄さん\n今度こそ……\nあたしが兄さんを守るから！
+FadeOut	white					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_606_14
+EndIf
+EndScenario
+
+# E_606_14
+Command	Arg1	Arg2	Arg3	Arg4	Arg5	Arg6	WaitType	Text	PageCtrl	Voice	WindowType
+Param	quest_name="クエスト名"
+ShowMessageWindow
+FadeOut	white					0
+StopSound
+Bg	研究所B
+	魔剣医師長X
+FadeIn	white					.5
+Shake	魔剣医師長X		x=5				Add
+	魔剣医師長X							ぐぅぅ……なぜだ……\n私の改造した身体は\n永久不滅のはず……
+Tween	魔剣医師長X	MoveBy	y=-800				NoWait
+Wait						.2
+Se	倒れる
+Wait						.3
+CharacterOff						.5
+Wait						.7
+CharacterOff
+	ユノ	切ない	2_2
+	ディーア	悔しい2	1_2
+Tween	ユノ	MoveBy	x=-50				NoWait
+	ユノ	切ない						兄さん、大丈夫？
+	ディーア	通常2						ああ……\n血も止まった、じき治るよ
+	ユノ	泣き						よかった……
+	ディーア	笑い2						さあ、酒場に帰ろう
+	ユノ	泣き笑い						うん！
+CharacterOff
+FadeOut	black					.5
+StopSound
+Bg	酒場_カフェ					0
+	ひのきのぼう
+Wait						1
+Bgm	和の国の町
+FadeIn	black					.5
+	ひのきのぼう							兄さま、まだチョコもらってないの？\nじゃあ……べ、べつに兄さまのために\n作ったんじゃないからね！
+	ナターシャ							チョコレートをどうぞ、兄さま\nきっとミルクティーと合いますわ
+	テレプシコーラ							私からは、チョコとダンスを♪\nテレプシコーラ、\n舞わせていただきますわ♪
+CharacterOff
+	ノーネーム	通常	2_2
+	ディーア	笑い2	1_2
+	ディーア							みんな、ありがとう\n美味しく食べさせてもらうよ
+	ノーネーム							妹ハーレムは、今日も健在ですね
+	ディーア	怪しい2						の、ノーネーム\nその言葉を使うときは、注意して……
+	ノーネーム							ハーレムごっこもいいですが\n今あなたの言葉が必要な方が\nあそこにいるみたいですよ？
+CharacterOff
+	ユノ	切ない						…………
+CharacterOff
+	ノーネーム	通常	2_2
+	ディーア	驚き2	1_2
+	ディーア	驚き2						そうだった\nありがとう、ノーネーム！
+Se	走る
+Tween	ディーア	MoveBy	x=500 time=1.5				NoWait
+Wait						.5
+FadeOut	black					.5
+CharacterOff						0
+	ユノ	切ない	2_2			0
+	ディーア	驚き2	1_2			0
+StopBgm
+FadeIn	black					.5
+	ディーア	驚き2						ユノ！
+	ユノ	切ない						……兄さん
+	ディーア	通常2						今、少しだけいいか
+	ユノ	切ない						う、うん
+	ディーア	通常2						あの時にみた、ユノのことだけど
+Tween	ユノ	MoveBy	x=30				NoWait
+	ユノ	切ない						あっ……
+Bgm	凱旋
+	ディーア	通常2						俺なりに、いろいろ考えたんだ
+	ディーア	目閉じ2						たぶん、\nこうなんじゃないかと思うことはある
+	ディーア	通常2						でも、それを伝えても、\nきっとユノは困ると思うんだ
+	ディーア	笑い2						それに、俺にとって一番大切なのは、\n今ユノが、俺の妹だってことだけだ
+	ディーア	通常2						だから、俺からはこれ以上聞かない\nもし……ユノがいつか話たくなったら\n聞かせてくれ
+	ユノ	切ない						……ありがと、兄さん
+	ディーア	通常2						そうだユノ、これから\n買い物に付き合ってくれないか？\n少しお願いしたいことがあって……
+	ユノ	切ない						兄さん……
+Tween	ユノ	MoveBy	x=-30				NoWait
+	ユノ	泣き						ごめんなさい!!
+	ディーア	驚き2						ど、どうした？\nそんなに嫌だったか、\n俺と買い物に行くの……
+	ユノ	泣き2						違うの、兄さん
+	ユノ	泣き						あたし今朝、\n手作りのチョコ持ってきてたでしょ？
+	ディーア	驚き2						ああ、そうだったな
+	ユノ	泣き2						あのチョコ……\n戦ってる間に、魔物に\n潰されちゃったの……
+	ユノ	泣き						あたしも、兄さんにちゃんとチョコ\n食べてほしかったのに……
+	ディーア	笑い2						なんだ、そういうことか
+	ユノ	泣き						なんだって……
+	ディーア	通常2						お願いってのは、実はそのことなんだ
+	ユノ	切ない						え？
+	ディーア	照れ2						はじめに持ってきてくれたチョコ、\nドタバタしてる間に\nもらい損ねちゃっただろ？
+	ディーア	照れ2						だから、買い出しとか……\n必要だったら手伝うから、\nまた俺にチョコを作ってくれないか？
+	ユノ	泣き						兄さん……
+	ディーア	あはは2						ダメ、かな
+	ユノ	泣き						ううん、ダメじゃない
+Tween	ユノ	MoveBy	x=-30				NoWait
+	ユノ	泣き笑い						兄さんのためなら、\nあたし、なんでもつくるよ？
+	ディーア	嬉しい2						ユノ……
+CharacterOff
+	ユノ	拡大切ない	エフェクト表					でも……\n作ったチョコは、残さず食べてね？
+	ユノ	拡大切ない						ぜんぶ、本命だから
+CharacterOff
+	ユノ	切ない	2_2
+	ディーア	照れ2	1_2
+	ディーア	汗2						それは、もちろん
+StopBgm
+	？？？？							あ、お兄ちゃん！
+CharacterOff
+Bgm	都市
+	オグン
+Tween	オグン	PunchPosition	y=50				NoWait
+	オグン							にぃに、チョコだよー！\nオグンのお面の形に作ったんだよ♪\nかわいいでしょー♪
+CharacterOff
+	デュエル		2_2
+	ジョーカー		1_2
+	ジョーカー							ねぇ、お兄ーちゃん♪\nジョカね、手作りのチョコ、\nつくってきたんだー♪
+	デュエル							さぁにぃに、私もチョコを\n作ってきたから食べなさい！\nどっちが美味しいか勝負よ！
+CharacterOff
+	ユノ	切ない	2_2
+	ディーア	あはは2	1_2
+	ディーア	あはは2						み、みんなありがとな\nちょっと形が怖いのもあるけど\nみんな美味しそうだ
+CharacterOff
+	ライオンハート
+	ライオンハート							ねぇお兄ちゃん、チョコほしい？\nいいよ、あげる！\n勇気のたっぷり詰まったチョコだよ♪
+	ハッピーエンド							お兄ちゃん、チョコどうぞ♪\n食べたらきっと、気持ちよくなって\n最強に最高な最後を迎えちゃうよ♪
+CharacterOff
+	ユノ	切ない	2_2
+	ディーア	あはは2	1_2
+	ディーア	あはは2						そ、それはすごいけど……\nいったい、何が入ってるんだ？
+CharacterOff
+	高電圧可変弩
+Tween	高電圧可変弩	PunchPosition	y=50				NoWait
+	高電圧可変弩							お兄ちゃん！\nあたしの手作りチョコどーぞ★\n高電圧の電池入りだよ★
+CharacterOff
+	エリス
+	エリス							手作りチョコだよ、お兄ちゃん♥\n崩れ去る信頼、疑い合う絶望を\nイメージして作ったの♥
+	グラーキの黙示録							お兄ちゃん♥\n私の気持ち入りチョコだよぉ♥\n何が入ってるかは、秘密♥
+FadeOut	white					.3
+CharacterOff
+Param	character_grayout=false
+	オーラ桃		エフェクト裏			0
+	イベントスチル606B		エフェクト表			0
+FadeIn	white					.3
+	イベントスチル606B							にぃに！
+	イベントスチル606C		エフェクト表					お兄さま！
+	イベントスチル606D		エフェクト表					お兄ちゃん！
+	イベントスチル606E		エフェクト表					お兄ちゃん!!
+Param	character_grayout=true
+CharacterOff
+	ディーア	驚き2						待て、みんな順番にもらうから！\n一気に来るな、走るなって！
+CharacterOff
+	ユノ	切ない						待って、兄さん、買い出しはー？
+	ディーア	本気2						必ず行く！\nちょっとだけ待っててくれ、な！
+Se	走る
+StopBgm						1
+Tween	ディーア	MoveBy	x=600 time=1.5				NoWait
+Wait						.5
+CharacterOff
+Wait						.5
+	ユノ	怒り						もう……
+	ユノ	照れ						…………しょうがないなぁ
+FadeOut	white					.5
+CharacterOff						0
+Param	character_grayout=false
+	オーラ桃		エフェクト裏2
+	イベントスチル606A		エフェクト裏			0
+Bgm	結婚
+FadeIn	white					.3
+	イベントスチル606A							…………
+	白背景		エフェクト表			1
+Wait						1
+	ユノ							……大好きだよ、お兄ちゃん
+Wait						.5
+	イベントロゴ606		エフェクト表2			1
+Wait						1
+	イベントロゴ606							<color=blue>\n　　スイート･シスター･パラダイス\n　　　　　　　 ─完─</color>
+FadeOut	white					1
+Wait						.5
+If	isdebug==true
+CharacterOff
+Jump	*E_606_10
+EndIf
+EndScenario
