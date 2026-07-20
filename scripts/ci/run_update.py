@@ -40,6 +40,7 @@ import revise_safety  # noqa: E402
 import cdn  # noqa: E402
 import sync_icons  # noqa: E402
 import sync_npc_motions  # noqa: E402
+import sync_scenario  # noqa: E402
 
 M2B = PROJECT_ROOT / "scripts" / "master_to_business"
 DATA = PROJECT_ROOT / "data"
@@ -138,6 +139,26 @@ def module_c(manifest) -> dict:
     }
 
 
+def module_scenario(session) -> dict:
+    """Scenario: utage3_scenario_version 变化 → 下载+解密 scenario.mu3 → 存 unity3d 累积 + 抽每本 TSV
+    到 data/master-tables 的 scenario/。版本从 login 响应取;失败优雅降级 (不阻塞、不致命)。"""
+    print("== 模块 Scenario: utage3_scenario_version → unity3d + TSV ==")
+    ver = session.login_resp.get("utage3_scenario_version")
+    if not ver:
+        print("  login 响应无 utage3_scenario_version、跳过")
+        return {"scenario_status": "none", "scenario_version": None}
+    root = mta.master_tables_root()
+    res = sync_scenario.sync(ver, root)
+    if res["status"] == "archived":
+        tail = f" ({res['size']:,} bytes, {res.get('tsv', 0)} TSV)"
+    elif res.get("error"):
+        tail = f" — {res['error']}"
+    else:
+        tail = ""
+    print(f"  scenario {ver}: {res['status']}{tail}")
+    return {"scenario_status": res["status"], "scenario_version": ver}
+
+
 def snapshot_revise_base() -> dict:
     """build 前把现版 revise (= data-staging 版、CI 已 checkout 进 working tree) 存副本。"""
     tmp = Path(tempfile.mkdtemp(prefix="revise_base_"))
@@ -170,6 +191,7 @@ def main():
     if not only_p1:
         summary.update(module_b(revise_base))
         summary.update(module_c(manifest))  # asset_version 失败 → 致命 (不再吞错降级)
+        summary.update(module_scenario(session))  # scenario .mu3 归档 (降级、不致命)
 
     out = Path(os.environ.get("RUNNER_TEMP", tempfile.gettempdir())) / "ci_update_summary.json"
     out.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")

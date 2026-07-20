@@ -7,6 +7,7 @@ name: update-database
 #   main           : data/*.json (6 表) + _npc_motions.json + icons/ (新实体的图)  → 触发 sync→data-staging + Pages
 #   data-staging   : crystal_revise.json + bg_revise.json (带字段级安全检查)
 #   data/master-tables : master_data/<JST日期>/ + asset_version/<ver>/ 快照 + changelog + 索引
+#                        + scenario/scenario-<ver>.unity3d (utage3_scenario_version 变化时下载 .mu3→Rijndael-256 解密→UnityFS 归档)
 #
 # 模块 C (icons + 增量 npc-motion): 经无鉴权 CDN (version_lz4 manifest + package_lz4 .dat) + UnityPy 解。
 # 全量 npc-motion 重生 / 重绘图强刷仍走本地 (新动作罕见、重绘更罕见)。
@@ -93,6 +94,8 @@ jobs:
           if [ -f "$F" ]; then
             echo "snapshot_status=$(jq -r '.snapshot_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
             echo "asset_version_status=$(jq -r '.asset_version_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
+            echo "scenario_status=$(jq -r '.scenario_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
+            echo "scenario_version=$(jq -r '.scenario_version // ""' "$F")" >> "$GITHUB_OUTPUT"
             echo "revise_safe=$(jq -r '.revise_safe // false' "$F")" >> "$GITHUB_OUTPUT"
             echo "revise_changed=$(jq -r '(.revise_changed // []) | length' "$F")" >> "$GITHUB_OUTPUT"
           else
@@ -116,6 +119,27 @@ jobs:
           git commit -m "data(master-tables): snapshot $(date -u +%FT%TZ) (API auto)"
           git pull --rebase origin data/master-tables || true
           git push origin HEAD:data/master-tables
+
+      # scenario .mu3 (utage3_scenario_version 变化时) → data/master-tables 的 scenario/
+      # 独立于 master_data 快照 (scenario 版本单独跳);上面 snapshot 步若同轮也归档了会顺带 git add -A 提交、此处即 no-op
+      - name: Commit scenario (.mu3) → data/master-tables
+        if: steps.sum.outputs.scenario_status == 'archived'
+        working-directory: _mt
+        run: |
+          git add scenario/ 2>/dev/null || true
+          if git diff --cached --quiet; then echo "scenario 无变更 (已随快照提交)"; exit 0; fi
+          git commit -m "data(master-tables): scenario ${{ steps.sum.outputs.scenario_version }} $(date -u +%FT%TZ)"
+          git pull --rebase origin data/master-tables || true
+          git push origin HEAD:data/master-tables
+
+      # scenario 新版 → 发频道一条消息 (#scenario、只报版本号)
+      - name: Notify Telegram (scenario)
+        if: steps.sum.outputs.scenario_status == 'archived'
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/ci/notify.py scenario "${{ steps.sum.outputs.scenario_version }}"
 
       # master_data changelog → Telegraph 文章 → 发频道
       - name: Notify Telegram (master_data changelog)
