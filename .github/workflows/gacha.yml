@@ -100,7 +100,7 @@ jobs:
           B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
           JST=$(TZ=Asia/Tokyo date +%F)
           [ -f "results-${{ matrix.shard }}.csv" ] && aws s3 cp "results-${{ matrix.shard }}.csv" "$B/results/gacha/shard-${{ matrix.shard }}.csv" --endpoint-url "$E" || true
-          aws s3 cp "shard-${{ matrix.shard }}.log" "$B/logs/${JST}/gacha-shard${{ matrix.shard }}.log" --endpoint-url "$E" || true
+          aws s3 cp "shard-${{ matrix.shard }}.log" "$B/accounts/yuu/logs/${JST}/gacha-shard${{ matrix.shard }}.log" --endpoint-url "$E" || true
 
   aggregate:
     needs: run
