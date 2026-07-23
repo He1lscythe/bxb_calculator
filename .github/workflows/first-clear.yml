@@ -96,8 +96,8 @@ jobs:
         run: |
           B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
           JST=$(TZ=Asia/Tokyo date +%F)
-          [ -f "results-${{ matrix.shard }}.csv" ] && aws s3 cp "results-${{ matrix.shard }}.csv" "$B/logs/${JST}/first-clear-shard${{ matrix.shard }}.csv" --endpoint-url "$E" || true
-          aws s3 cp "shard-${{ matrix.shard }}.log" "$B/logs/${JST}/first-clear-shard${{ matrix.shard }}.log" --endpoint-url "$E" || true
+          [ -f "results-${{ matrix.shard }}.csv" ] && aws s3 cp "results-${{ matrix.shard }}.csv" "$B/accounts/yuu/logs/${JST}/first-clear-shard${{ matrix.shard }}.csv" --endpoint-url "$E" || true
+          aws s3 cp "shard-${{ matrix.shard }}.log" "$B/accounts/yuu/logs/${JST}/first-clear-shard${{ matrix.shard }}.log" --endpoint-url "$E" || true
 
   cleanup-old-runs:
     runs-on: ubuntu-latest
