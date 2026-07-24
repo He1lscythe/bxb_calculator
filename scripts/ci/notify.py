@@ -31,6 +31,26 @@ def tg(method, **payload):
     return r.json()
 
 
+def unpin_linked_forward(channel_msg_id=None, tries=5, delay=2.0):
+    """频道发帖后会被自动转发进「关联讨论群」并自动置顶 → 把该自动转发帖 unpin 掉。
+    讨论群 id 由 getChat(频道).linked_chat_id 自动解析(不硬编码);只 unpin is_automatic_forward
+    的帖(绝不碰手动置顶);自动转发有延迟 → 轮询几次,命中即返回。"""
+    import time
+    group = (tg("getChat", chat_id=TG_CHAT).get("result") or {}).get("linked_chat_id")
+    if not group:
+        print("  频道无关联讨论群(无 linked_chat_id),跳过 unpin")
+        return
+    for _ in range(tries):
+        time.sleep(delay)
+        pm = (tg("getChat", chat_id=group).get("result") or {}).get("pinned_message")
+        if pm and pm.get("is_automatic_forward"):
+            r = tg("unpinChatMessage", chat_id=group, message_id=pm["message_id"])
+            print(f"  讨论群 unpin 自动置顶(群msg {pm['message_id']} ← 频道msg {channel_msg_id}):",
+                  "ok" if r.get("ok") else r.get("description"))
+            return
+    print("  未发现自动置顶的转发帖(转发延迟/未置顶?),跳过 unpin")
+
+
 def _load_tg_index():
     if INDEX_PATH and INDEX_PATH.is_file():
         try:
@@ -226,6 +246,8 @@ def notify_master_data(target: str | None = None):
     msg = f"📊 master_data 更新 {folder.name}\n{url}\n#master_data"
     j = tg("sendMessage", chat_id=TG_CHAT, text=msg, disable_web_page_preview=False)
     print("master_data 通知:", "ok" if j.get("ok") else j.get("description"), "|", url)
+    if j.get("ok"):
+        unpin_linked_forward(j["result"].get("message_id"))
 
 
 def _r2_client():
@@ -344,6 +366,8 @@ def notify_asset_version(target_v=None):
         return
     j = tg("sendMessage", chat_id=TG_CHAT, text=f"🖼 asset_version {new_v}（新增 {len(imgs_added)} / 调整 {len(imgs_mod)}，共 {len(imgs)} 图）\n{page}\n#asset_version")
     print("asset_version 通知:", "ok" if j.get("ok") else j.get("description"), "|", page)
+    if j.get("ok"):
+        unpin_linked_forward(j["result"].get("message_id"))
 
 
 def notify_scenario(version, summary_path=None):
@@ -370,6 +394,8 @@ def notify_scenario(version, summary_path=None):
     lines.append("#scenario")
     j = tg("sendMessage", chat_id=TG_CHAT, text="\n".join(lines), disable_web_page_preview=True)
     print("scenario 通知:", "ok" if j.get("ok") else j.get("description"))
+    if j.get("ok"):
+        unpin_linked_forward(j["result"].get("message_id"))
 
 
 def main():
