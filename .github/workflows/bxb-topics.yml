@@ -142,6 +142,7 @@ jobs:
               for (const p of slug.split('_')) { if (/^\d/.test(p) || /^[A-Z]/.test(p)) break; keep.push(p); }
               return '#' + (keep.join('_') || 'topic');
             };
+            let sent = 0;
             for (const c of (data.changes || [])) {
               const prefix = c.type === 'new' ? '🆕 [新公告]' : '✏️ [修改]';
               let text = `${prefix} ${c.title}\n${c.url_official}`;
@@ -154,6 +155,27 @@ jobs:
               });
               const j = await r.json();
               if (!j.ok) core.warning(`telegram sendMessage 失败 (${c.title}): ${j.description}`);
+              else sent++;
+            }
+            // 频道帖会被自动转发进关联讨论群并置顶 → 排空 is_automatic_forward 的置顶(保留手动置顶)
+            if (sent) {
+              const tgApi = (m, b) => fetch(`https://api.telegram.org/bot${TG_TOKEN}/${m}`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b),
+              }).then(r => r.json());
+              const gc = await tgApi('getChat', { chat_id: TG_CHAT });
+              const grp = gc.ok && gc.result.linked_chat_id;
+              if (grp) {
+                const sleep = ms => new Promise(r => setTimeout(r, ms));
+                for (let i = 0, quiet = 0; i < 15 && quiet < 3; i++) {
+                  await sleep(2000);
+                  const g = await tgApi('getChat', { chat_id: grp });
+                  const pm = g.ok && g.result.pinned_message;
+                  if (pm && pm.is_automatic_forward) {
+                    await tgApi('unpinChatMessage', { chat_id: grp, message_id: pm.message_id });
+                    quiet = 0;
+                  } else { quiet++; }
+                }
+              }
             }
 
   # 图床先行探测: event/campaign/gacha 的 title 图常先于公告上线。
@@ -205,6 +227,7 @@ jobs:
               method: 'POST', headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(body),
             }).then(r => r.json());
+            let sent = 0;
             for (const h of (data.hits || [])) {
               const imgs = (h.images && h.images.length) ? h.images : (h.url ? [h.url] : []);
               if (!imgs.length) continue;
@@ -220,6 +243,24 @@ jobs:
                 });
                 const j = await api('sendMediaGroup', { chat_id: TG_CHAT, media: group });
                 if (!j.ok) core.warning(`sendMediaGroup 失败 id=${h.id}: ${j.description}`);
+                else sent++;
                 first = false;
+              }
+            }
+            // 频道帖会被自动转发进关联讨论群并置顶 → 排空 is_automatic_forward 的置顶(保留手动置顶)
+            if (sent) {
+              const gc = await api('getChat', { chat_id: TG_CHAT });
+              const grp = gc.ok && gc.result.linked_chat_id;
+              if (grp) {
+                const sleep = ms => new Promise(r => setTimeout(r, ms));
+                for (let i = 0, quiet = 0; i < 15 && quiet < 3; i++) {
+                  await sleep(2000);
+                  const g = await api('getChat', { chat_id: grp });
+                  const pm = g.ok && g.result.pinned_message;
+                  if (pm && pm.is_automatic_forward) {
+                    await api('unpinChatMessage', { chat_id: grp, message_id: pm.message_id });
+                    quiet = 0;
+                  } else { quiet++; }
+                }
               }
             }
