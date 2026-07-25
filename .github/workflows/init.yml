@@ -81,6 +81,16 @@ jobs:
             --exclude ".git/*" --exclude "scripts/_boot.py" \
             --exclude "data/*" --exclude "outputs/*" \
             --exclude "*.pyc" --exclude "*/__pycache__/*"
+      - name: Fetch WARP pool from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          mkdir -p warp_pool
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/warp/" warp_pool/ --recursive --endpoint-url "${{ secrets.R2_ENDPOINT }}" || true
+          chmod +x bin/wireproxy 2>/dev/null || true
+          echo "warp pool: $(ls warp_pool/*.conf 2>/dev/null | wc -l) configs"
       - run: pip install -r requirements-daily.txt
       - name: Stagger start (shard×60s + 随机 0-15s)
         run: |
@@ -92,6 +102,9 @@ jobs:
           BXB_BOOTSTRAP_KEY: ${{ secrets.BXB_BOOTSTRAP_KEY }}
           BXB_APP_VERSION: ${{ vars.BXB_APP_VERSION }}
           BXB_UNITY_VERSION: ${{ vars.BXB_UNITY_VERSION }}
+          BXB_WARP_POOL_DIR: warp_pool
+          BXB_WIREPROXY_BIN: bin/wireproxy
+          BXB_WARP_BURNED: warp_burned.txt
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
@@ -121,6 +134,19 @@ jobs:
               --concurrency "$CONC" --total-rate "$PER_RATE" \
               --platform "${{ inputs.platform }}" \
               --max-wait "$MW" --max-runtime "$MR" > "shard-${{ matrix.shard }}.log" 2>&1
+          fi
+      - name: Delete burned WARP configs from R2
+        if: always()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          if [ -s warp_burned.txt ]; then
+            B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+            while read -r f; do
+              [ -n "$f" ] && aws s3 rm "$B/warp/$f" --endpoint-url "$E" || true
+            done < warp_burned.txt
           fi
       - name: Upload shard state + accounts part + log to R2
         if: always()
