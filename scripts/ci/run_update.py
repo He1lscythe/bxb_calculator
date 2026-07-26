@@ -33,8 +33,9 @@ from pathlib import Path
 CI_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = CI_DIR.parents[1]
 sys.path.insert(0, str(CI_DIR))
+sys.path.insert(0, str(PROJECT_ROOT))   # 让 import scripts.api_client 解析(workflow 从 R2 取 api_client/ratelimit 进 scripts/)
 
-import maken2_api  # noqa: E402
+import scripts.api_client as api_client  # noqa: E402  (R2 单一真源游戏客户端;原 maken2_api 退役)
 import master_tables_archive as mta  # noqa: E402
 import revise_safety  # noqa: E402
 import cdn  # noqa: E402
@@ -174,10 +175,57 @@ def snapshot_revise_base() -> dict:
     return base
 
 
+def _warp_pool():
+    """可选 WARP 出口兜底(直连被封时切):需 workflow 已 fetch warp_pool.py + wireproxy + 配置池就位。
+    未配置 BXB_WARP_POOL_DIR / 无配置 / 取不到 warp_pool 模块 → 返回 (None, None),退化为纯直连。"""
+    pool_dir = os.environ.get("BXB_WARP_POOL_DIR")
+    if not pool_dir or not os.path.isdir(pool_dir):
+        return None, None
+    try:
+        import warp_pool  # workflow 从 R2 routines/daily/warp_pool.py 取到 scripts/ci/(CI_DIR 已在 sys.path)
+    except ImportError:
+        return None, None
+    if not any(f.endswith(".conf") for f in os.listdir(pool_dir)):
+        return None, None
+    pool = warp_pool.WarpPool(pool_dir, os.environ.get("BXB_WIREPROXY_BIN", "bin/wireproxy"),
+                              os.environ.get("BXB_WARP_BURNED", "warp_burned.txt"))
+    return warp_pool, pool
+
+
+class _ApiSession:
+    """适配层:让 module_a_d(session.get_master_data) / module_scenario(session.login_resp) 复用 R2 的 api_client。
+    login_resp = GetHomeMyData(含 utage3_scenario_version);master_data 经 api_client.get 取。"""
+
+    def __init__(self, sid, skey, home):
+        self.session_id, self.key, self.login_resp = sid, skey, home
+
+    def get_master_data(self) -> dict:
+        d, st = api_client.get("/master_data", self.session_id, self.key)
+        if not isinstance(d, dict) or not d.get("master_data_version"):
+            keys = list(d)[:6] if isinstance(d, dict) else type(d).__name__
+            raise RuntimeError(f"/master_data 未正确返回 (status={st}, keys={keys})")
+        return d
+
+
+def _connect() -> _ApiSession:
+    """login + GetHomeMyData。scenario_version 从 home 取(login 也带,但走 home 与账号自动化一致)。"""
+    uk = os.environ.get("BXB_UNIQUE_KEY")
+    if not uk:
+        raise SystemExit("缺 BXB_UNIQUE_KEY (GitHub Actions secret)")
+    sid, skey, _name = api_client.login(uk, platform=2)
+    home, st = api_client.get("/my/data?home=1", sid, skey)
+    if not isinstance(home, dict) or home.get("error_reason"):
+        et = home.get("error_type") if isinstance(home, dict) else home
+        raise RuntimeError(f"GetHomeMyData 失败 (status={st}, {et})")
+    return _ApiSession(sid, skey, home)
+
+
 def main():
     only_p1 = "--phase1" in sys.argv
-    session = maken2_api.login()
-    print(f"login ok: user_id={session.login_resp.get('user_id')}\n")
+    wp, pool = _warp_pool()
+    # login+home 是首个且致命的游戏 API;直连出口被封 → 切 WARP 重试(成功后 env 代理留存、master_data 同走 WARP)
+    session = wp.with_warp_retry(pool, _connect, log=print) if pool else _connect()
+    print(f"login ok: id={session.login_resp.get('id')} name={session.login_resp.get('name')!r}\n")
 
     revise_base = snapshot_revise_base()  # build 前快照 (安全检查基准)
 
@@ -195,6 +243,8 @@ def main():
         summary.update(module_c(manifest))  # asset_version 失败 → 致命 (不再吞错降级)
         summary.update(module_scenario(session))  # scenario .mu3 归档 (降级、不致命)
 
+    if pool:
+        pool.stop()
     out = Path(os.environ.get("RUNNER_TEMP", tempfile.gettempdir())) / "ci_update_summary.json"
     out.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
     print("\n== 完成 ==")

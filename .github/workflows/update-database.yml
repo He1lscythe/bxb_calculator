@@ -66,6 +66,21 @@ jobs:
       - name: Install deps
         run: pip install -r scripts/ci/requirements.txt
 
+      - name: Fetch R2 api_client + WARP pool
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          aws s3 cp "$B/routines/scripts/api_client.py" scripts/api_client.py --endpoint-url "$E"
+          aws s3 cp "$B/routines/scripts/ratelimit.py" scripts/ratelimit.py --endpoint-url "$E"
+          aws s3 cp "$B/routines/daily/warp_pool.py" scripts/ci/warp_pool.py --endpoint-url "$E"
+          mkdir -p bin warp_pool
+          aws s3 cp "$B/routines/bin/wireproxy" bin/wireproxy --endpoint-url "$E" && chmod +x bin/wireproxy
+          aws s3 cp "$B/warp/" warp_pool/ --recursive --endpoint-url "$E" || true
+          echo "warp pool: $(ls warp_pool/*.conf 2>/dev/null | wc -l) configs"
+
       - name: Run update (模块 A+B+D)
         id: run
         env:
@@ -75,6 +90,9 @@ jobs:
           BXB_UNITY_VERSION: ${{ vars.BXB_UNITY_VERSION }}
           BXB_MASTER_TABLES: ${{ github.workspace }}/_mt
           RUNNER_TEMP: ${{ runner.temp }}
+          BXB_WARP_POOL_DIR: warp_pool
+          BXB_WIREPROXY_BIN: bin/wireproxy
+          BXB_WARP_BURNED: warp_burned.txt
         run: |
           set +e
           python scripts/ci/run_update.py
@@ -85,6 +103,20 @@ jobs:
           if [ "$rc" -ne 0 ] && [ "$rc" -ne 3 ]; then
             echo "::error::run_update 致命失败 (rc=$rc): login / master_data / asset_version 未成功"
             exit "$rc"
+          fi
+
+      - name: Delete burned WARP configs from R2
+        if: always()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          if [ -s warp_burned.txt ]; then
+            B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+            while read -r f; do
+              [ -n "$f" ] && aws s3 rm "$B/warp/$f" --endpoint-url "$E" || true
+            done < warp_burned.txt
           fi
 
       - name: Load summary
