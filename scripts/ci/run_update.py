@@ -35,7 +35,7 @@ PROJECT_ROOT = CI_DIR.parents[1]
 sys.path.insert(0, str(CI_DIR))
 sys.path.insert(0, str(PROJECT_ROOT))   # 让 import scripts.api_client 解析(workflow 从 R2 取 api_client/ratelimit 进 scripts/)
 
-import scripts.api_client as api_client  # noqa: E402  (R2 单一真源游戏客户端;原 maken2_api 退役)
+import scripts.api_client as api_client  # noqa: E402  (R2 单一真源游戏客户端,与账号自动化同一份)
 import master_tables_archive as mta  # noqa: E402
 import revise_safety  # noqa: E402
 import cdn  # noqa: E402
