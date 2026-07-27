@@ -44,9 +44,30 @@ WINDOW_IDS = 40       # 全量安全网窗口(每日 / need_window)
 RECENT_WINDOW = 15   # 每小时小窗口:重爬最近 N 条比 hash,抓 silent edit(RSS pubDate 不变的暗改)
 
 
+def _warp_pool():
+    pool_dir = os.environ.get("BXB_WARP_POOL_DIR")
+    if not pool_dir or not os.path.isdir(pool_dir):
+        return None, None
+    try:
+        import warp_pool
+    except ImportError:
+        return None, None
+    if not any(f.endswith(".conf") for f in os.listdir(pool_dir)):
+        return None, None
+    pool = warp_pool.WarpPool(pool_dir, os.environ.get("BXB_WIREPROXY_BIN", "bin/wireproxy"),
+                              os.environ.get("BXB_WARP_BURNED", "warp_burned.txt"))
+    return warp_pool, pool
+
+
 def fetch_rss():
-    resp = requests.get(RSS_URL, headers=HEADERS, timeout=15)
-    resp.raise_for_status()
+    wp, pool = _warp_pool()
+
+    def _get():
+        resp = requests.get(RSS_URL, headers=HEADERS, timeout=15)
+        resp.raise_for_status()
+        return resp
+
+    resp = wp.with_warp_retry(pool, _get, log=print) if pool else _get()
     soup = BeautifulSoup(resp.text, "xml")
     items = []
     for it in soup.find_all("item"):
