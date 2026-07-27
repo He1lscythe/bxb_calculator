@@ -44,10 +44,39 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
+      - name: Fetch WARP pool from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          aws s3 cp "$B/routines/daily/warp_pool.py" scripts/warp_pool.py --endpoint-url "$E" || true
+          mkdir -p bin warp_pool
+          aws s3 cp "$B/routines/bin/wireproxy" bin/wireproxy --endpoint-url "$E" && chmod +x bin/wireproxy || true
+          aws s3 cp "$B/warp/" warp_pool/ --recursive --endpoint-url "$E" || true
+          echo "warp pool: $(ls warp_pool/*.conf 2>/dev/null | wc -l) configs"
       - id: poll
+        env:
+          BXB_WARP_POOL_DIR: warp_pool
+          BXB_WIREPROXY_BIN: bin/wireproxy
+          BXB_WARP_BURNED: warp_burned.txt
         run: >
           python scripts/poll.py --check
           --dispatch "${{ inputs.mode == 'window' && 'window' || '' }}"
+      - name: Delete burned WARP configs from R2
+        if: always()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          if [ -s warp_burned.txt ]; then
+            B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+            while read -r f; do
+              [ -n "$f" ] && aws s3 rm "$B/warp/$f" --endpoint-url "$E" || true
+            done < warp_burned.txt
+          fi
 
   crawl:
     needs: check
@@ -82,8 +111,37 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
 
+      - name: Fetch WARP pool from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          aws s3 cp "$B/routines/daily/warp_pool.py" scripts/warp_pool.py --endpoint-url "$E" || true
+          mkdir -p bin warp_pool
+          aws s3 cp "$B/routines/bin/wireproxy" bin/wireproxy --endpoint-url "$E" && chmod +x bin/wireproxy || true
+          aws s3 cp "$B/warp/" warp_pool/ --recursive --endpoint-url "$E" || true
+          echo "warp pool: $(ls warp_pool/*.conf 2>/dev/null | wc -l) configs"
       - name: Crawl
+        env:
+          BXB_WARP_POOL_DIR: warp_pool
+          BXB_WIREPROXY_BIN: bin/wireproxy
+          BXB_WARP_BURNED: warp_burned.txt
         run: python scripts/poll.py --execute --mode "${{ needs.check.outputs.mode }}"
+      - name: Delete burned WARP configs from R2
+        if: always()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          if [ -s warp_burned.txt ]; then
+            B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+            while read -r f; do
+              [ -n "$f" ] && aws s3 rm "$B/warp/$f" --endpoint-url "$E" || true
+            done < warp_burned.txt
+          fi
       - name: Build Topics.html
         run: python scripts/build_topics.py
       - name: Fix comic links
