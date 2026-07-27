@@ -106,7 +106,6 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 
 | 脚本 | 用途 |
 |---|---|
-| [maken2_api.py](../scripts/ci/maken2_api.py) | 游戏 API 客户端: `login` (设备指纹 + 静态 bootstrap key) → session → `get_master_data` (X-Session 头) / `get_asset_version`。maken2 AES-256-CBC+gzip+msgpack。凭据走 env `BXB_UNIQUE_KEY`/`BXB_BOOTSTRAP_KEY` (GitHub secrets) |
 | [master_tables_archive.py](../scripts/ci/master_tables_archive.py) | master dict → `master_data/<JST日期>/` 快照 (split + 派生 weapon_innate_skills/arts/effects) + changelog + 索引。port 自 unpacking split_tables/build_skill_id_index/update_master_tables |
 | [diff_master_tables.py](../scripts/ci/diff_master_tables.py) | changelog 引擎 (整体 port 自 unpacking;CI 版加"空字段归一"——API 省略空字段、避免与 ADB 版 schema 差异误报全表) |
 | [revise_safety.py](../scripts/ci/revise_safety.py) | revise 字段级安全检查 (防用户手填字段被冲、丢条目/字段则中止提交) |
