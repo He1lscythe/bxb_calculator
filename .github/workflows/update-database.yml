@@ -30,14 +30,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: main
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout data/master-tables (归档目标 + changelog baseline)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: data/master-tables
           path: _mt
@@ -45,7 +45,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout data-staging (revise 提交目标)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: data-staging
           path: _ds
@@ -59,7 +59,7 @@ jobs:
             data/crystal_revise.json data/bg_revise.json || \
             echo "WARN: data-staging revise 取失败、用空基准"
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 

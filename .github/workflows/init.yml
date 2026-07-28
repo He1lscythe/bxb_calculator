@@ -67,7 +67,7 @@ jobs:
       matrix:
         shard: ${{ fromJSON(needs.prepare.outputs.matrix) }}
     steps:
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.11"
       - name: Fetch routines code from R2
@@ -171,7 +171,7 @@ jobs:
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.11"
       - name: Build accounts.csv from state (done set = 权威源,不依赖 existing,结构上不可能覆盖丢号)

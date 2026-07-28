@@ -31,21 +31,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: main
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout data/master-tables
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: data/master-tables
           path: _mt
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
