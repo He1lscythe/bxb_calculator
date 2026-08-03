@@ -24,6 +24,7 @@ jobs:
       matrix: ${{ steps.gen.outputs.matrix }}
       shards: ${{ steps.gen.outputs.shards }}
       total_rate: ${{ steps.gen.outputs.total_rate }}
+      jst: ${{ steps.gen.outputs.jst }}
     steps:
       - id: gen
         run: |
@@ -32,6 +33,7 @@ jobs:
           echo "shards=$N"      >> "$GITHUB_OUTPUT"
           echo "total_rate=$TR" >> "$GITHUB_OUTPUT"
           echo "matrix=[$(seq -s, 0 $((N-1)))]" >> "$GITHUB_OUTPUT"
+          echo "jst=$(TZ=Asia/Tokyo date +%F)" >> "$GITHUB_OUTPUT"
 
   run:
     needs: prepare
@@ -75,7 +77,7 @@ jobs:
         run: |
           B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
           aws s3 cp "$B/accounts/yuu/accounts.csv" accounts.csv --endpoint-url "$E"
-          JST=$(TZ=Asia/Tokyo date +%F)
+          JST="${{ needs.prepare.outputs.jst }}"
           if aws s3 cp "$B/accounts/yuu/runstate/${JST}/daily-${{ inputs.time_point }}.csv" outcome.csv --endpoint-url "$E" 2>/dev/null; then
             echo "re-run: hit runstate/${JST}/daily-${{ inputs.time_point }}.csv"
             python -m daily.select_failed --accounts accounts.csv --outcome outcome.csv --out run_accounts.csv
@@ -129,12 +131,12 @@ jobs:
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
         run: |
           B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
-          JST=$(TZ=Asia/Tokyo date +%F)
+          JST="${{ needs.prepare.outputs.jst }}"
           [ -f "results-${{ matrix.shard }}.csv" ] && aws s3 cp "results-${{ matrix.shard }}.csv" "$B/results/tp${{ inputs.time_point }}/shard-${{ matrix.shard }}.csv" --endpoint-url "$E" || true
           aws s3 cp "shard-${{ matrix.shard }}.log" "$B/accounts/yuu/logs/${JST}/tp${{ inputs.time_point }}-shard${{ matrix.shard }}.log" --endpoint-url "$E" || true
 
   aggregate:
-    needs: run
+    needs: [prepare, run]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
@@ -160,7 +162,7 @@ jobs:
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
         run: |
           B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
-          JST=$(TZ=Asia/Tokyo date +%F)
+          JST="${{ needs.prepare.outputs.jst }}"
           mkdir -p merged_results
           aws s3 cp "$B/results/tp${{ inputs.time_point }}/" merged_results/ --recursive --endpoint-url "$E" || true
           aws s3 cp "$B/accounts/yuu/accounts.csv" accounts.csv --endpoint-url "$E"
@@ -173,7 +175,7 @@ jobs:
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
         run: |
           B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
-          JST=$(TZ=Asia/Tokyo date +%F)
+          JST="${{ needs.prepare.outputs.jst }}"
           [ -f prior.csv ] && P="--prior prior.csv" || P=""
           python -m daily.outcome --results-dir merged_results --out outcome.csv $P
           aws s3 cp outcome.csv "$B/accounts/yuu/runstate/${JST}/daily-${{ inputs.time_point }}.csv" --endpoint-url "$E"
