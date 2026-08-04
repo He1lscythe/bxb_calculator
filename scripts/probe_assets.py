@@ -23,7 +23,9 @@ CDN 行为: 存在=200，不存在=403 (R2 后端，非 404)。
 """
 import glob
 import json
+import os
 import re
+import time
 from datetime import datetime, timedelta
 
 import requests
@@ -34,7 +36,10 @@ ASSET_BASE = "https://bxb-asset.grimoire.codes/images/topics"
 PROBE_STATE = STATE_DIR / "asset_probe.json"
 PROBE_HITS = STATE_DIR / "probe_hits.json"
 
-WINDOW = 3          # 每条线向后扫的 id 数
+WINDOW = 5          # 每条线向后扫的 id 数
+BACKFILL = int(os.environ.get("PROBE_BACKFILL", 5))   # floor 以下回补的 id 数(PROBE_BACKFILL 可临时加大做深度回补)
+                    # 上架顺序不严格按 id(如 838 先于 837),
+                    # floor 单调前进会永久跳过后出的空洞 → 每轮重扫 [floor-BACKFILL, floor] 里不在 found 的 id
 LOOKBACK_DAYS = 200  # 归档锚点只看近 N 天的页 (排除已废的旧 id 段)
 ID_CAP = 100000      # 排除 date 型(8 位)/特殊大 id
 
@@ -58,14 +63,59 @@ def gacha_candidates(i):
     ]
 
 
-def url_exists(path):
-    try:
-        r = requests.get(f"{ASSET_BASE}/{path}", headers=HEADERS, timeout=15, stream=True)
-        ok = r.status_code == 200
-        r.close()
-        return ok
-    except requests.RequestException:
+class ProbeUnavailable(Exception):
+    pass
+
+
+_warp = [None, None, False]      # [module, pool, 已尝试过]
+
+
+# 直连持续失败时切 WARP 代理(workflow 就位配置才有);切不了返回 False
+def _switch_warp():
+    if _warp[2]:
+        return _warp[1] is not None
+    _warp[2] = True
+    pool_dir = os.environ.get("BXB_WARP_POOL_DIR")
+    if not pool_dir or not os.path.isdir(pool_dir):
         return False
+    try:
+        import warp_pool
+    except ImportError:
+        return False
+    if not any(f.endswith(".conf") for f in os.listdir(pool_dir)):
+        return False
+    pool = warp_pool.WarpPool(pool_dir, os.environ.get("BXB_WIREPROXY_BIN", "bin/wireproxy"),
+                             os.environ.get("BXB_WARP_BURNED", "warp_burned.txt"))
+    if not pool.pick_and_start():
+        return False
+    warp_pool._set_env_proxy(pool.proxy_url)
+    _warp[0], _warp[1] = warp_pool, pool
+    print(f"::warning::图床直连失败 → 切 WARP {pool.proxy_url}")
+    return True
+
+
+# 200=存在 / 403/404=不存在 / 持续网络失败 → 抛 ProbeUnavailable(不可与"不存在"混为一谈)
+def url_exists(path, tries=3):
+    last, attempt, warped = None, 0, False
+    while True:
+        attempt += 1
+        try:
+            r = requests.get(f"{ASSET_BASE}/{path}", headers=HEADERS, timeout=15, stream=True)
+            code = r.status_code
+            r.close()
+            if code == 200:
+                return True
+            if code in (403, 404):
+                return False
+            last = f"HTTP {code}"
+        except requests.RequestException as e:
+            last = f"{type(e).__name__}: {e}"
+        if attempt >= tries:
+            if not warped and _switch_warp():   # 切 WARP 后重新给满次数
+                warped, attempt, last = True, 0, None
+                continue
+            raise ProbeUnavailable(f"{path}: {last}")
+        time.sleep(2 * attempt)
 
 
 def _series(path_fmts, cap=40):
@@ -157,24 +207,42 @@ def probe_seq(name, cats, cand_fn, state):
         return []
     found = set(s["found"])
     new_hits = []
+    new_floor = s.get("floor", 0)
     print(f"{name}: anchor={anchor} (archive_recent={arch}, floor={s.get('floor', 0)}) "
           f"→ 扫 {anchor + 1}..{anchor + WINDOW}")
-    for off in range(1, WINDOW + 1):
-        j = anchor + off
-        for cat, path in cand_fn(j):
-            if url_exists(path):
-                url = f"{ASSET_BASE}/{path}"
-                if j not in found:
-                    found.add(j)
-                    imgs = enumerate_images(cat, j)
-                    new_hits.append({"sequence": name, "category": cat,
-                                     "id": j, "url": url, "images": imgs,
-                                     "ts": now_jst_str()})
-                    print(f"  ★ 命中 {cat} id={j}: {len(imgs)} 张图 {imgs[:1]}")
-                else:
-                    print(f"  · 已知 {cat} id={j} (已报过)")
-                s["floor"] = max(s.get("floor", 0), j)
-                break  # 该 id 已确认存在、不再试其它候选
+    # 前向窗口 + floor 以下的空洞回补(空洞只在已跟踪范围内取,避免扫远古 id)
+    scan = [anchor + off for off in range(1, WINDOW + 1)]
+    if found:
+        lo = max(min(found), new_floor - BACKFILL + 1)
+        holes = [j for j in range(lo, new_floor + 1) if j not in found]
+        if holes:
+            print(f"  回补空洞: {holes}")
+            scan += holes
+    try:
+        for j in scan:
+            for cat, path in cand_fn(j):
+                if url_exists(path):
+                    url = f"{ASSET_BASE}/{path}"
+                    if j not in found:
+                        found.add(j)
+                        try:
+                            imgs = enumerate_images(cat, j)
+                        except ProbeUnavailable as e:
+                            imgs = [url]
+                            print(f"::warning::{name} id={j} 枚举中断({e})、只记 title 图")
+                        new_hits.append({"sequence": name, "category": cat,
+                                         "id": j, "url": url, "images": imgs,
+                                         "ts": now_jst_str()})
+                        print(f"  ★ 命中 {cat} id={j}: {len(imgs)} 张图 {imgs[:1]}")
+                    else:
+                        print(f"  · 已知 {cat} id={j} (已报过)")
+                    new_floor = max(new_floor, j)
+                    break  # 该 id 已确认存在、不再试其它候选
+    except ProbeUnavailable as e:
+        # 网络失败 ≠ 图不存在:本轮该序列不可信 → floor/found 一律不动,避免把 id 段永久跳过
+        print(f"::warning::{name} 探测不可信({e})→ 本轮不更新 floor/found")
+        return []
+    s["floor"] = new_floor
     s["found"] = sorted(found)
     return new_hits
 
@@ -191,6 +259,8 @@ def main():
         json.dumps({"generated_at": now_jst_str(), "hits": hits}, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+    if _warp[1]:
+        _warp[1].stop()
     print(f"探测完成: {len(hits)} 个新命中")
 
 
