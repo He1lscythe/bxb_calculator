@@ -108,6 +108,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [revise_safety.py](../scripts/ci/revise_safety.py) | revise 字段级安全检查 (防用户手填字段被冲、丢条目/字段则中止提交) |
 | [图标同步.py](../scripts/ci/图标同步.py) | manifest 驱动: 缺失 icon → 下 .dat → extract → copy_images。重建结果与本地 copy_images 逐字节一致 |
 | [动作同步.py](../scripts/ci/动作同步.py) | 增量补 `_npc_motions.json` (manifest npc-motion vs 基线、只下缺的) |
+| [build_rarity4_ids.py](../scripts/ci/build_rarity4_ids.py) | 快照的 `weapons.json` → `rarity==4` 的 `base_id` 去重清单(一把魔剑多个进化形态 `id=base_id*100+n`,必须按 base_id 去重)。与现版对比,**只在有新增时**才写 `--out`(无新增不写文件 → 调用方 `[ -f ]` 跳过上传);只减不增 → `::warning::` 拒绝更新。新增会打 `::notice::` 带魔剑名 |
 | [
 
 
