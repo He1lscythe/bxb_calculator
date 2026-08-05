@@ -125,6 +125,7 @@ jobs:
           F="${{ runner.temp }}/ci_update_summary.json"
           if [ -f "$F" ]; then
             echo "snapshot_status=$(jq -r '.snapshot_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
+            echo "snapshot_folder=$(jq -r '.snapshot_folder // ""' "$F")" >> "$GITHUB_OUTPUT"
             echo "asset_version_status=$(jq -r '.asset_version_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
             echo "scenario_status=$(jq -r '.scenario_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
             echo "scenario_version=$(jq -r '.scenario_version // ""' "$F")" >> "$GITHUB_OUTPUT"
@@ -151,6 +152,23 @@ jobs:
           git commit -m "data(master-tables): snapshot $(date -u +%FT%TZ) (API auto)"
           git pull --rebase origin data/master-tables || true
           git push origin HEAD:data/master-tables
+
+      - name: Refresh rarity4 ids on R2
+        if: steps.sum.outputs.snapshot_status == 'archived'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          K="$B/routines/data/rarity4_base_ids.json"
+          aws s3 cp "$K" old_rarity4.json --endpoint-url "$E" || true
+          python scripts/ci/build_rarity4_ids.py \
+            --snapshot-dir "${{ steps.sum.outputs.snapshot_folder }}" \
+            --old old_rarity4.json --out new_rarity4.json
+          if [ -f new_rarity4.json ]; then
+            aws s3 cp new_rarity4.json "$K" --endpoint-url "$E"
+          fi
 
       # scenario .mu3 (utage3_scenario_version 变化时) → data/master-tables 的 scenario/
       # 独立于 master_data 快照 (scenario 版本单独跳);上面 snapshot 步若同轮也归档了会顺带 git add -A 提交、此处即 no-op
