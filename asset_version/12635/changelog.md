@@ -1,0 +1,19 @@
+# asset_version changelog: 12631 → 12635
+
+## 总览
+
+| 新增 | 删除 | 调整 |
+|---:|---:|---:|
+| 3 | 0 | 3 |
+
+## 新增 (3)
+
+- `item-icon-12072` (20,613 B) md5=8429d32d…
+- `item-icon-8829` (20,201 B) md5=270c8ce4…
+- `item-icon-91272` (20,109 B) md5=fec6e46a…
+
+## 调整 (3)
+
+- `enemy-npc-motion-830` (4,376,913 B) md5=65cb3e56…
+- `npc-motion-830` (1,772,910 B) md5=db3e484f…
+- `weapon-atlas-140103` (2,285,206 B) md5=72e139a8…
