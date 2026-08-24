@@ -33,7 +33,7 @@ const resolveIncludes = (text, stack = []) => {
     let content;
     try {
       content = fs.readFileSync(fragPath, 'utf8');
-    } catch (e) {
+    } catch {
       throw new Error(
         `partial not found: ${fragPath} (referenced from ${stack[stack.length - 1] || 'top'})`,
       );
