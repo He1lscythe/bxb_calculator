@@ -30,7 +30,7 @@ function _bgSkillToEffect(sk) {
   return eff;
 }
 
-export function bgToWiki(b) {
+function bgToWiki(b) {
   const effects = (b.skills || []).map(_bgSkillToEffect).filter(Boolean);
   // effect_text: 汇总各 skill description (wiki bg 一句话、master 多 skill 拼接)
   const effect_text = (b.skills || [])

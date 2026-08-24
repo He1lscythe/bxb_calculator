@@ -104,7 +104,6 @@
       import { Nav, updateReviseBar } from '../js/nav.js';
       import { state } from '../js/soul-state.js';
       import { escHtml, fmtBairitu, parseBairituVal, hideLoading } from '../js/utils.js';
-      import { deepApply } from '../shared/revise-core.js';
       import {
         initFilterToggles,
         toggleFilter,
@@ -136,7 +135,9 @@
       // ===== DATA LOAD (master schema → wiki adapter) =====
       // view-only: souls.json 来自 master_tables (master schema)、
       // 通过 adapter 转成旧 wiki shape 喂给 soul-render/soul-filter/utils module、UI 1:1 wiki 不变。
-      // souls_extra / souls_revise / souls_check 在 仓库不再维护、fetch 失败 fallback []。
+      // 下面这批 optional fetch 的实际状态 (2026-08-24 核对、别再笼统写「不再维护」):
+      //   soul_revise.json         — main 里 gitignored,但**活在 data-staging 分支**、仍在维护
+      //   souls_extra / souls_check — 无任何分支产出、真的已废弃 (fetch 失败 fallback [])
       // 同时 fetch soul_revise.json (含 tags 等 user 编辑字段)
       document.addEventListener('DOMContentLoaded', () => {
         initFilterToggles();

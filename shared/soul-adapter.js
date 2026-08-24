@@ -92,7 +92,7 @@ function _soulSkillToWiki(sk) {
   };
 }
 
-export function soulToWiki(s) {
+function soulToWiki(s) {
   // 屏蔽 6 位 id soul (placeholder 无技能、~42 个、其中 1 个有 skills 接受丢失)
   if (s.id != null && s.id >= 100000) return null;
   const skills = (s.skills || []).map(_soulSkillToWiki).filter(Boolean);
