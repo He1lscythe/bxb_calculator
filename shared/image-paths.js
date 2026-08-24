@@ -19,17 +19,17 @@ export const masouIcon = (costumeId) => `${BASE}/masou/${costumeId}.png`;
 export const bgIcon = (pictureId) => `${BASE}/bg/${pictureId}.png`;
 export const soulIcon = (textureId) => `${BASE}/soul/${textureId}.png`;
 
-// crystal multi-suffix: 优先 _1、img onerror 时 fallback _2
-export const crystalIcon = (materialId, suffix = 1) =>
-  `${BASE}/crystal/${materialId}_${suffix}.png`;
+// 注: 曾有 crystalIcon (multi-suffix `{id}_{N}.png`、onerror fallback _2) — 已删。
+// D:/bxb 重解后无 _N 源、cascade 不再需要;crystal 图标路径现在由
+// shared/crystal-spec.js 直接拼 `../icons/crystal/{id}.png`。
 
 // chara icon 叠层资源 (尺寸都跟 chara icon 100×100 配合好):
 // - marriage 框 100×100 (=base)、level 1/2/3 红→粉→金渐变
 // - weapon_type_42 42×42 (左上角)
 // - element_list 33×33 (右上角)
-export const marriageOverlay = (level = 2) => `${BASE}/_misc/marriage_${level}.png`;
-export const weaponTypeIcon = (weaponTypeId) => `${BASE}/_app_icons/icon_weapon_type_42_${weaponTypeId}.png`;
-export const elementIcon = (elementId) => `${BASE}/_app_icons/icon_element_list_${elementId}.png`;
+const marriageOverlay = (level = 2) => `${BASE}/_misc/marriage_${level}.png`;
+const weaponTypeIcon = (weaponTypeId) => `${BASE}/_app_icons/icon_weapon_type_42_${weaponTypeId}.png`;
+const elementIcon = (elementId) => `${BASE}/_app_icons/icon_element_list_${elementId}.png`;
 
 // chara icon 叠层 HTML 生成器 — 4 层 z-index: base / marriage / type / element
 // 用法:
@@ -63,10 +63,6 @@ export const charaIconStack = ({
   return `<div class="${className}">${layers.join('')}</div>`;
 };
 
-// 通用 <img> 标签生成器、含 onerror text fallback
-// 用法:
-//   container.innerHTML = imgWithFallback(charaIcon(100101), name);
-export const imgWithFallback = (src, alt = '') => {
-  const safe = String(alt).replace(/"/g, '&quot;');
-  return `<img src="${src}" loading="lazy" alt="${safe}" onerror="this.style.display='none'" class="icon">`;
-};
+// 注: 曾有 imgWithFallback (通用 <img> 生成器 + onerror 隐藏) — 0 callsite,已删。
+// 各 viewer 自己拼 <img>(通常还要带 data-src 走 shared/lazy-img.js 的容器内懒加载,
+// 这个助手写死 loading="lazy" 反而不适用)。

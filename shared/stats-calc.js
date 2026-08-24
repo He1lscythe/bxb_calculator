@@ -612,12 +612,12 @@ function emblemLvMaxLocal(rarity) {
 const _OTHER_SOURCES = new Set(['chara_skill', 'bd_skill', 'crystal', 'bg', 'soul', 'chara_meta', 'soul_affinity', 'omoide_mul', 'enemy_buff']);
 
 // HpCheck 普通攻击表 (unpacking §3.5.3): tier 0..3
-export const LP_TIER_NORMAL = [1.0, 1.1, 1.5, 2.0];
+const LP_TIER_NORMAL = [1.0, 1.1, 1.5, 2.0];
 // LpCheck Blaze 攻击表 (unpacking §3.5.4): tier 0..3
-export const LP_TIER_BLAZE = [1.0, 1.3, 2.0, 5.0];
+const LP_TIER_BLAZE = [1.0, 1.3, 2.0, 5.0];
 
 // trace step 的来源标签 (skill/装备名@slot、fallback source key)
-export const traceSrcLabel = (e) =>
+const traceSrcLabel = (e) =>
   `${e._src_name || e._src_label || e._source}@S${(e._src_slot ?? 0) + 1}`;
 
 // applyStaged(base, parameter, effects, opts):
@@ -1313,8 +1313,8 @@ export function computeStatsBlaze(chara, tr, slotIdx, ctx) {
   return _computeImpl(chara, tr, slotIdx, ctx, true);
 }
 
-// 兼容旧导出 (UI 侧若直接用)
-export const _STAT_KEYS = ['HP', '攻撃力', '防御力', 'ブレイク力'];
+// 注: 曾有 `_STAT_KEYS = ['HP','攻撃力','防御力','ブレイク力']` 兼容导出 — 0 callsite,已删。
+// UI 侧的 stat 顺序现在由各页面自己的 STAT_LABELS / tab 定义决定 (见 js/render.js renderStats)。
 
 // ============================================================
 // PAD step 3 Defense chain — 公式映射 (unpacking 19_defense.md §19.12)

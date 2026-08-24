@@ -241,7 +241,6 @@
         hideLoading,
         min,
         fmtNum,
-        ctPfx,
       } from '../js/utils.js';
       import { deepApply } from '../shared/revise-core.js';
       // omoide_templates 已删除 (用户决策: omoide 数据走 Frida 抓包、走 chara._omoide_slots、不用 templates)
@@ -254,21 +253,17 @@
       import { adaptMasouList } from '../shared/masou-adapter.js';
       import { adaptBgList } from '../shared/bg-adapter.js';
       // ===== stats-calc (4-stage) =====
+      // 只 import 本页真用到的;stat 计算全走 computeStats 一个入口 (baseStats /
+      // collectEffects / applyStaged / conditionFactor / repelRate / _STAT_KEYS 都是它内部的环节、
+      // 本页不直接调 —— 曾经 import 过、后来改成走 computeStats、import 忘了摘)
       import {
         computeStats,
-        baseStats,
-        collectEffects,
-        applyStaged,
-        conditionFactor,
         baseParameter,
-        repelRate,
         mkTr,
         AWAKENING_MAX as AWAKENING_MAX_TBL,
         AWAKENING_FULL_MULT as AWAKENING_MULT_TBL,
-        _STAT_KEYS,
       } from '../shared/stats-calc.js';
       import {
-        SOUL_AWK_MAX,
         EMBLEM_RARITY_LV_MAX,
         CRYSTAL_RARITY_LV_MAX,
         charaLvParams,
@@ -283,8 +278,6 @@
         crystalEffectiveValue,
         resolveCharaSkills as _resolveCharaSkills,
         resolveSoulSkills as _resolveSoulSkills,
-        parseHit as _parseHit,
-        parseAff as _parseAff,
         BLAZE_GAUGE_POINTS_BASE_A,
       } from '../shared/hensei-helpers.js';
       import { simulateGuildScore, computeGuildScore, GUILD_BATTLE_SECONDS } from '../shared/guild-score.js';
@@ -2093,6 +2086,11 @@
       };
       // 各 slot の最新 computeStats 結果を保持（trace modal 用、IS_LOCAL_DEV のみ意味あり）
       const _lastTrace = [null, null, null];
+      // e2e 测试 / 调试用的暴露口。DOM 上的显示值是整形过的(転速是 "N.N · Nfr" 字符串、
+      // 攻速显示帧数、且有 2fr 下限会贴底),没法用来验倍率关系 → 测试改读这里的生值
+      // (r.stats / r.speed.latestRecover / r.motionSpeed.speeds)。
+      // 数组是原地更新、所以引用稳定。
+      window.__lastStats = _lastTrace;
 
       // stats-calc.js computeStats 用 ctx — 数据集 + 队伍状态 + helper / 常量 を 1 つの object に。
       // 函数調用時に fresh build（state mutable のため snapshot）、helper 引用は closure scope 経由。

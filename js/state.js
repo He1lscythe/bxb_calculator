@@ -50,5 +50,3 @@ export const state = {
   charaCheckEnabled: false,
   charaCheck: new Set(),
 };
-
-export const OMOIDE_KEYS = new Set(['omoide', 'omoide_template', 'omoide_rarity']);

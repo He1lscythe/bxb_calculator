@@ -268,8 +268,12 @@
       // ===== DATA LOAD (master schema → wiki adapter) =====
       // view-only: characters.json / masou.json 来自 master_tables (master schema)、
       // 通过 adapter 转成旧 wiki shape 喂给 render/filter/utils module、UI 1:1 wiki 不变。
-      // characters_extra / characters_revise / masou_extra / masou_revise / omoide_revise /
-      // omoide_templates / senzai_table / characters_check 在 仓库不再维护、fetch 失败 fallback []。
+      // 下面这批 optional fetch 的实际状态 (2026-08-24 核对、别再笼统写「不再维护」):
+      //   senzai_table.json          — main 里 tracked、**仍在维护** (icon 対照表见 docs/senzai_icon_table.md)
+      //   chara_revise / masou_revise — main 里 gitignored,但**活在 data-staging 分支**、仍在维护
+      //   characters_extra / masou_extra / omoide_revise / omoide_templates / characters_check
+      //                              — 无任何分支产出、真的已废弃 (fetch 失败 fallback [] / {})
+      // 全部 optional: 缺失不阻塞页面,所以 fetch 一律带 fallback。
       fetch('../data/senzai_table.json')
         .then((r) => (r.ok ? r.json() : {}))
         .then((d) => { state.SENZAI_TABLE = d; })

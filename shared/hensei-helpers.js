@@ -7,7 +7,7 @@
 // 等级 / 觉醒 / 熟度 — master 字段直读、表只用于 UI fallback
 // ============================================================
 // soul 觉醒上限 (按 rarity)
-export const SOUL_AWK_MAX = { 1: 13, 2: 11, 3: 9, 4: 7, 5: 5 };
+const SOUL_AWK_MAX = { 1: 13, 2: 11, 3: 9, 4: 7, 5: 5 };
 
 // emblem level cap (跟 rarity)
 export const EMBLEM_RARITY_LV_MAX = { 1: 25, 2: 40, 3: 55, 4: 1 };
@@ -17,19 +17,19 @@ export const CRYSTAL_RARITY_LV_MAX = { 1: 10, 2: 30, 3: 80, 4: 120, 5: 160, 6: 2
 
 // chara 熟度 / lv 表 — master 直读优先、表只作 UI fallback (若 master 没数据)
 // master 字段: state.stats.{max_mature, initial_max_level, max_max_level}
-export const JUKUDO_MAX_TBL = {
+const JUKUDO_MAX_TBL = {
   4: { '通常': 60, '改造': 99, '極弐': 99 },
   3: { '通常': 50, '改造': 90, '極弐': 90 },
   2: { '通常': 40, '改造': 70 },
   1: { '通常': 30, '改造': 50 },
 };
-export const LEVEL_MAX_TBL = {
+const LEVEL_MAX_TBL = {
   4: { '通常': 250, '改造': 255, '極弐': 260 },
   3: { '通常': 230, '改造': 240 },
   2: { '通常': 200 },
   1: { '通常': 150 },
 };
-export const LEVEL_1JUK_TBL = {
+const LEVEL_1JUK_TBL = {
   4: { '通常': 60, '改造': 70, '極弐': 80 },
   3: { '通常': 50, '改造': 60 },
   2: { '通常': 40, '改造': 45 },
@@ -55,7 +55,7 @@ export const charaLvParams = (chara, state) => {
 // Frida 抓 data/omoide/{base_id}.json 时 weapon_skills[].value_scaling 字段全 0 / null。
 // description 含「熟度UPにつれて...」字样的 skill 真实 scaling = 0.003 / 熟度 (见 docs/hensei_calc.md)。
 // 这是 Frida 数据 gap、不是 game data 真值 0。fallback 应只对「描述含熟度」的 skill 生效。
-export const OMOIDE_FALLBACK_SCALING = 0.003;
+const OMOIDE_FALLBACK_SCALING = 0.003;
 
 export function omoideEffectiveScaling(sk) {
   if (!sk) return 0;
@@ -307,12 +307,12 @@ export const BLAZE_GAUGE_POINTS_BASE_A = [
 
 // IDEAL 表 (A 表去掉所有 ±1 修正): flat = 100 (i<9)、生长段 = 140·(i-8) (i≥9)
 // 「有 BlazeGaugePointRate soul」pipeline 用此表: `floor(IDEAL[i] × Π chara_skill × Π (soul_value × L(lv)))`
-export const BLAZE_GAUGE_POINTS_BASE_IDEAL = Array.from({ length: 61 }, (_, i) => (i < 9 ? 100 : 140 * (i - 8)));
+const BLAZE_GAUGE_POINTS_BASE_IDEAL = Array.from({ length: 61 }, (_, i) => (i < 9 ? 100 : 140 * (i - 8)));
 
 // 魂等级补正 L(level) (unpacking §1.3.3.5)
 //   只附在魂上 (魔剣 skill 不带)、Lv1 = 1.01、Lv2+ 系数 (线性/指数/查表) 未知
 //   当前简化: 所有 lv 用 1.01 (Lv1 值近似)
-export function blazeGaugeSoulLevelMult(_lv) { return 1.01; }
+function blazeGaugeSoulLevelMult(_lv) { return 1.01; }
 
 // bdCapFromBlazeGauge — cumsum 反查 totalGauge points 在数组中能到第几 level (小数允许)
 //   blazeGaugePoints[i] = level i → i+1 升级 需要的 points (不是累计)
@@ -405,15 +405,5 @@ export function parseHit(s) {
   return Number.isFinite(v) ? v : 0;
 }
 
-export function parseAff(s) {
-  if (s == null) return 1;
-  if (typeof s === 'number') return Number.isFinite(s) ? s : 1;
-  const t = String(s).trim();
-  if (t === '') return 1;
-  if (t.includes('/')) {
-    const [n, d] = t.split('/').map(parseFloat);
-    return Number.isFinite(n) && Number.isFinite(d) && d !== 0 ? n / d : 1;
-  }
-  const v = parseFloat(t);
-  return Number.isFinite(v) ? v : 1;
-}
+// 注: 曾有 parseAff(s) — parseHit 的姊妹函数、差别只是空值/非法值 fallback 返 1 而非 0
+// (给「倍率」类字段用)。0 callsite,已删;需要时从 git 历史取回。

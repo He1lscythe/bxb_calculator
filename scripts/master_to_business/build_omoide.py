@@ -15,8 +15,13 @@ import stat
 import sys
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-SRC_DIR = Path("F:/OneDrive - Northeastern University/Game/BxB/unpacking/outputs/memory_slot/summary")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from paths import PROJECT_ROOT, UNPACKING_DIR  # noqa: E402
+
+# unpacking/ 与本 repo 同级、由 paths.UNPACKING_DIR 统一解析 (env BXB_UNPACKING 可覆盖)。
+# 不再各自硬编码开发机绝对路径 —— 换机器 / 换盘符就失效。
+SRC_DIR = UNPACKING_DIR / "outputs" / "memory_slot" / "summary"
 DEST_DIR = PROJECT_ROOT / "data" / "omoide"
 
 

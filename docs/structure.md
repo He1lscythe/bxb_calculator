@@ -1,8 +1,12 @@
 # 项目结构
 
-按解包 `master_tables/` 重建的项目结构、`refactor/unpacking-source` branch (长期独立、永不 merge 回 main)。
+> 文档索引: [docs/README.md](README.md)
 
-**baseline**: npm test 135/135 全绿、5 类 image 覆盖率 100% (chara/masou/crystal/bg/soul)。
+按解包 `master_tables/` 重建的项目结构。当前在 `main` branch
+(历史上的 `refactor/unpacking-source` 重构分支已完成并成为 main、该分支不再存在)。
+
+**baseline**: `npm test` 301/301 全绿、`npm run lint` 0 problem、5 类 image 覆盖率 100%
+(chara/masou/crystal/bg/soul)。
 
 ---
 
@@ -133,7 +137,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [guild-score.js](../shared/guild-score.js) | ギルバト 40s ダメージ/スコア模拟 (`simulateGuildScore` 高频重叠 loop + 6 档波动率均值、開始秒=剩余输出窗口、`computeGuildScore` 基礎×難易度×結界2.6 换算、纯函数、见 hensei_calc.md) |
 | [revise-core.js](../shared/revise-core.js) | sparse diff core (`computeDiff` 三参含撤回 + `deepApply` + tombstone null)。数组 (2026-06-19):带 id 对象数组 (weapon_skills/soul.skills) 按 **id** 局部 patch (robust 到重排);标量数组 (tags)/无 id 数组 (masou effects) 整组替换;已弃用 index 稀疏 |
 | [save-client.js](../shared/save-client.js) | POST /save 路由 (local `start.py:8787` / Vercel `/api/save.js`) + toast 反馈 |
-| [chara-adapter.js](../shared/chara-adapter.js) / [soul-adapter.js](../shared/soul-adapter.js) / [crystal-adapter.js](../shared/crystal-adapter.js) / [masou-adapter.js](../shared/masou-adapter.js) | master → wiki shape adapter (含 `deepApply(master, revise)` wrap) |
+| [chara-adapter.js](../shared/chara-adapter.js) / [soul-adapter.js](../shared/soul-adapter.js) / [crystal-adapter.js](../shared/crystal-adapter.js) / [masou-adapter.js](../shared/masou-adapter.js) / [bg-adapter.js](../shared/bg-adapter.js) | master → wiki shape adapter (含 `deepApply(master, revise)` wrap)。bg 是 view-only、其 adapter 只做形状转换、无 revise 通路 |
 | [image-paths.js](../shared/image-paths.js) | master id → `icons/` 相对路径 + `charaIconStack` 叠层 helper (marriage 框 + element + weapon_type、含 `lazy: 'native'\|'io'` 选项) |
 | [virtual-list.js](../shared/virtual-list.js) | 简单 virtual scrolling、屏幕外 row 不在 DOM、用在 cr-list / bg-list (2063+506 expand all 不卡) + hensei 实体选择器 #em-list (5 类型共用、crystal 2063 行秒开) |
 | [lazy-img.js](../shared/lazy-img.js) | IntersectionObserver-based img lazy、`setupLazyImg(scrollRoot)` swap `data-src→src`、适用自定义 scroll 容器 (native HTML5 lazy 只看 document viewport、容器 scroll 失效) |
@@ -141,7 +145,11 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [parameter-class.js](../shared/parameter-class.js) | PARAMETER_CLASS (35 类効果分类) + PARAMETER_CLASS_LABEL/SHORT |
 | [filter-core.js](../shared/filter-core.js) | viewer filter 通用 utility (applySpec / renderSpecFilters / sort / reset) |
 | [chara-spec.js](../shared/chara-spec.js) / [soul-spec.js](../shared/soul-spec.js) / [crystal-spec.js](../shared/crystal-spec.js) / [bg-spec.js](../shared/bg-spec.js) | 4 viewer 各自 filter spec (facet / sort options) |
-| [data-loader.js](../shared/data-loader.js) | fetch data/*.json (cache + loadAll) |
+
+> ⚠ 曾计划的 `shared/data-loader.js` (统一 fetch data/*.json + cache + loadAll) **从未落地**、文件不存在。
+> 实际 data fetch 是**各页面 inline** 的:`pages_src/{characters,souls,crystals,bladegraphs,hensei}.html`
+> 各自 `fetch('../data/*.json')`,另有 [omoide-view.js](../js/omoide-view.js) 的 omoide 懒加载。
+> 要集中化就得先建这个模块。
 
 ---
 
@@ -155,11 +163,18 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | `js/utils.js` | DOM / 字符串 / 数字格式 utility |
 | `js/state.js` | 全局 state (allCharas / allSouls / 各 reviseData / sessionReviseIds 等) |
 | `js/render.js` | chara list/render (主 viewer) |
-| `js/edit.js` / `chara-edit.js` | chara edit modal (tags + skills value_scaling + masou_overrides) |
-| `js/soul-render.js` / `soul-edit.js` | soul viewer + tags edit |
-| `js/cr-list.js` / `cr-edit.js` / `cr-state.js` | crystal viewer + inline 8 字段 edit |
-| `js/bg-list.js` / `bg-edit.js` | bladegraph viewer + edit module (用户决策保留、HTML 暂不暴露按钮) |
+| `js/chara-edit.js` | chara edit modal (tags + skills value_scaling + 嵌入 masou_overrides) |
+| `js/filter.js` | chara viewer filter / sort 接线 (走 `shared/filter-core.js` + `chara-spec.js`) |
+| `js/soul-render.js` / `soul-edit.js` / `soul-filter.js` / `soul-state.js` | soul viewer 渲染 + tags edit + filter + 独立 state |
+| `js/cr-list.js` / `cr-edit.js` / `cr-state.js` | crystal viewer + inline 8 字段 edit + 独立 state |
+| `js/bg-list.js` / `bg-state.js` | bladegraph viewer (**view-only**) + 独立 state |
 | `js/omoide-view.js` | omoide picker modal (hensei + chara 详情页用) |
+
+> ⚠ **`js/bg-edit.js` 已删、bg edit 不复活** —— 见 [bladegraphs.html:97](../pages_src/bladegraphs.html#L97):
+> 「master 数据 100% 准确、无 server-fold 字段需补」。页面里 `enterEditMode / cancelEdit / saveEdit /
+> saveRevise / reRenderBgEdit` 全是 `_noop` stub;`bg-state.js` 仍留 `editingId` 字段与
+> `_ensureBgOriginal` 懒克隆 helper 作为将来复活的脚手架(bladegraphs.html:140-141),当前无消费方。
+> 同理 `js/edit.js` 从不存在,chara edit 全在 `js/chara-edit.js`。
 
 hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内、调用 `shared/stats-calc.js`。
 
@@ -168,7 +183,10 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 ## data/ — 业务 JSON
 
 **Master 数据** (build_*.py 输出):
-- `characters.json` (654 chara) / `souls.json` (488) / `crystals.json` (2063) / `bladegraphs.json` (506) / `masou.json` (712) / `senzai_table.json` / `motions.json`
+- `characters.json` (654 chara) / `souls.json` (488) / `crystals.json` (2063) / `bladegraphs.json` (506) / `masou.json` (712) / `senzai_table.json`
+  - ⚠ 没有 `data/motions.json`。motion 数据是 `build_characters.py` **inline 进 characters.json** 的:
+    段时长 `states[].motion_durations` 来自 `data/_npc_motions.json`、モーション名来自 master 的
+    `attack_motions.json`。消费方 [stats-calc.js `_computeMotionSpeed`](../shared/stats-calc.js)。
 - `guildtitles.json` / `guildemblems.json` (手工维护、无 build script)
 - `omoide/{base_id}.json` (638 file、Frida 抓、2026-06-09 起入 git tracked)
 
