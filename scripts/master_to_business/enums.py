@@ -1,9 +1,10 @@
 """master_tables enum 完整定义 — 全部按  (parameter) 体系。
 
 参考:
-- F:/.../ (跨表合并 105 项 enum)
-- F:/.../ ( vs  区别)
-- F:/.../ (HP-curve / Break gate)
+- ../
+- ../ ( vs  区别)
+- ../ (HP-curve / Break gate)
+  (见 paths.py ASSETS_DIR)
 
 关键设计:
 - master_tables 用  (91 项 parameter)、 runtime 用  (87 项)
