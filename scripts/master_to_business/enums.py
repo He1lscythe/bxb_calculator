@@ -1,9 +1,10 @@
 """master_tables enum 完整定义 — 全部按 #JS (JobSkill.Parameter) 体系。
 
 参考:
-- F:/.../unpacking/table.md (跨表合并 105 项 enum)
-- F:/.../unpacking/HOWTO_battle/11_parameters.md (#JS vs #BE 区别)
-- F:/.../unpacking/HOWTO_battle/02_psv_gates.md (HP-curve / Break gate)
+- ../unpacking/outputs/table.md (跨表合并 105 项 enum)
+- ../unpacking/docs/HOWTO_battle/11_parameters.md (#JS vs #BE 区别)
+- ../unpacking/docs/HOWTO_battle/02_psv_gates.md (HP-curve / Break gate)
+  (unpacking/ 与本 repo 同级、见 paths.py UNPACKING_DIR)
 
 关键设计:
 - master_tables 用 #JS (91 项 JobSkill.Parameter)、BattleEngine runtime 用 #BE (87 项)
