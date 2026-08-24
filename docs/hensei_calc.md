@@ -1,5 +1,7 @@
 # Hensei Calc 4-Stage Pipeline 设计
 
+> 文档索引: [docs/README.md](README.md)
+
 编成 (hensei) stat 计算流水线设计文档。最终 stat 值 = base 经 4 stage 顺序 apply 后得出。
 
 ## 整体流程
@@ -26,7 +28,7 @@ collection: 遍历 3 slot、给每个 effect 打 source tag
 
 - 等级公式: `max × (1 - (max_max_level - lv) / (max_max_level - 1) × initial / max)`
 - 熟度 → 等级上限: `min(max_max_level, initial_max_level + (mature - 1) × 5)`
-- **觉醒倍率内嵌** (`MAX_AWAKENING` / `AWAKENING_FULL_MULT`): 满觉醒倍率**按属性区分**（HP / 攻 / 防 / BK）:
+- **觉醒倍率内嵌** (`AWAKENING_MAX` / `AWAKENING_FULL_MULT`): 满觉醒倍率**按属性区分**（HP / 攻 / 防 / BK）:
   - SS 9 段觉醒满 → HP ×1.33 / 攻 ×1.43 / 防 ×1.28 / BK ×1.46
   - S 14 段 → HP ×1.34 / 攻 ×2.42 / 防 ×1.26 / BK ×1.54
   - AA 36 段 → HP ×1.82 / 攻 ×4.45 / 防 ×1.63 / BK ×1.31

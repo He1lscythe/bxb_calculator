@@ -14,8 +14,13 @@ import stat
 import sys
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-SRC_DIR = Path("F:/bxb")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from paths import PROJECT_ROOT, ASSETS_DIR  # noqa: E402
+
+# 由 paths.ASSETS_DIR 统一解析 (env BXB_ASSETS 可覆盖)。
+# 不再各自硬编码开发机绝对路径 —— 换机器 / 换盘符就失效。
+SRC_DIR = ASSETS_DIR / "outputs" / "memory_slot" / "summary"
 DEST_DIR = PROJECT_ROOT / "data" / "omoide"
 
 

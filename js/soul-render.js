@@ -13,8 +13,8 @@ import {
 import { escHtml, fmtBairitu, fmtAff, min } from './utils.js';
 import { setupLazyImg } from '../shared/lazy-img.js';
 
-export const AFF_LABEL = { '-2': '超苦手', '-1': '苦手', 0: '普通', 1: '得意', 2: '超得意' };
-export const AFF_CLS = { '-2': 'aff-m2', '-1': 'aff-m1', 0: 'aff-0', 1: 'aff-1', 2: 'aff-2' };
+const AFF_LABEL = { '-2': '超苦手', '-1': '苦手', 0: '普通', 1: '得意', 2: '超得意' };
+const AFF_CLS = { '-2': 'aff-m2', '-1': 'aff-m1', 0: 'aff-0', 1: 'aff-1', 2: 'aff-2' };
 const AFF_CELL = {
   '-2': 'aff-cell-m2',
   '-1': 'aff-cell-m1',
@@ -188,7 +188,7 @@ const renderAffinityView = (s) => {
     </div>`;
 };
 
-export const _deletedSet = (s) => {
+const _deletedSet = (s) => {
   return new Set(Array.isArray(s && s._deleted_skills) ? s._deleted_skills : []);
 };
 

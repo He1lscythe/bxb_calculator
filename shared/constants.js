@@ -130,12 +130,9 @@ const ELEM_CSS_VAR = {
   6: '--none',
 };
 
-// 潜在開放（魔剣 omoide）熟度阈值，40 段
-export const OMOIDE_THRESHOLDS = [
-  10, 200, 400, 700, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 9000, 11000, 13000, 15000, 18000,
-  21000, 24000, 27000, 30000, 33000, 36000, 39000, 42000, 45000, 48000, 51000, 54000, 57000, 60000,
-  63000, 66000, 69000, 72000, 75000, 78000, 81000, 84000, 87000, 90000,
-];
+// 注: 曾有 OMOIDE_THRESHOLDS (40 段熟度阈值硬编码表) — 已删。
+// omoide 阈值现在一律从数据读: data/omoide/{base_id}.json 的 slots[].memory_slot.affection_threshold
+// (逐魔剣可不同、硬编码表反而会漂移)。消费方见 js/omoide-view.js _renderBody。
 
 // =====================================================================
 // UI 渲染助手
@@ -222,29 +219,6 @@ export function renderElementFilterToggles(field, opts) {
   return renderFilterToggles(field, ELEMENT, opts);
 }
 
-// 编辑模式 single-select dropdown
-export function renderEditSelect(map, currentVal, onchangeExpr, opts) {
-  opts = opts || {};
-  const cls = opts.cls || 'edit-select';
-  return (
-    '<select class="' +
-    cls +
-    '" onchange="' +
-    onchangeExpr +
-    '">' +
-    _pickKeys(map, opts)
-      .map(function (k) {
-        return (
-          '<option value="' +
-          k +
-          '"' +
-          (currentVal == k ? ' selected' : '') +
-          '>' +
-          map[k] +
-          '</option>'
-        );
-      })
-      .join('') +
-    '</select>'
-  );
-}
+// 注: 曾有 renderEditSelect (编辑模式 single-select dropdown 生成器) — 0 callsite,已删。
+// 各 edit module (chara-edit / cr-edit / soul-edit) 都自己拼 <select>、没走这个通用助手。
+// 需要时从 git 历史取回;它依赖的 _pickKeys 仍被 renderFilterToggles 使用、保留。
