@@ -44,7 +44,7 @@ export const submitRevise = async (body) => {
   let json;
   try {
     json = await res.json();
-  } catch (_) {
+  } catch {
     json = {};
   }
   if (!res.ok) throw new Error(json.error || `HTTP ${res.status}`);

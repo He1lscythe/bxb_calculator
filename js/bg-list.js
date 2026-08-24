@@ -310,7 +310,7 @@ export const scopeLabel = (e) => {
 
 export const renderDetailBody = (c) => {
   const effRows = (c.effects || [])
-    .map(function (e, i) {
+    .map(function (e) {
       // 効果 tag: parameter class (跟 filter 一致)
       const _cls = e._parameter ? classifyParameter(e._parameter) : null;
       const bTags = _cls
