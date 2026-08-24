@@ -335,6 +335,21 @@ test('computeStats: chara_meta marriage ×1.05', () => {
   // base 13000 × 1.05 = 13650
   assert.strictEqual(r.stats['攻撃力'], 13650);
 });
+test('computeStats: 結婚倍率也吃 転速 (schema.md §結婚 攻防HP BK speed 5 项)', () => {
+  const c = mockChara();
+  const mk = (marriage) => {
+    const ctx = buildCtx([{
+      chara: c, tr: { ...mkTr(), level: 250, jukudo: 60, marriage },
+    }, null, null]);
+    return computeStats(c, ctx.team[0].tr, 0, ctx).speed.latestRecover;
+  };
+  const plain = mk(0);
+  assert.ok(plain > 0, `未結婚 転速 应 > 0、got ${plain}`);
+  // Speed 不走 applyStaged、結婚倍率进 _computeSpeed 的 Mul 池
+  // (无 soul → partnerFactor 1.0、无 Add → latestRecover = mult × base.Speed)
+  assert.ok(Math.abs(mk(1) - plain * 1.03) < 1e-9, `花無: expected ${plain * 1.03}, got ${mk(1)}`);
+  assert.ok(Math.abs(mk(2) - plain * 1.05) < 1e-9, `花有: expected ${plain * 1.05}, got ${mk(2)}`);
+});
 test('computeStats: chara_meta LP 危機 ×1.5', () => {
   const c = mockChara();
   const slots = [{
@@ -583,6 +598,39 @@ test('omoide Add → stage 1、Mul → stage 3 (用户 picks 2 slot)', () => {
   // stage 3 other Mul (slot 1 picked 902、omoide_mul): ×1.5 = 20250
   // stage 4 (无 Add): 20250、ceil 20250
   assert.strictEqual(r.stats['攻撃力'], 20250);
+});
+
+// 転速 の omoide Add は server-fold 段 (01_setup.md §1.1.2 `speed = speed + Σ slot_speed_add`)
+test('転速: omoide Speed Add 折进 recover (Mul 之前) + server-fold floor', () => {
+  const c = mockChara();   // base.Speed = max_speed = 22 (lv250/熟度60 → t=1)
+  c._omoide_slots = [
+    { affection_threshold: 10, weapon_skills: [{ id: 901, parameter: 'Speed', math_type: 'Addition', value: 10.5, range: 'Single' }] },
+    { affection_threshold: 20, weapon_skills: [{ id: 902, parameter: 'Speed', math_type: 'Multiply', value: 1.5, range: 'Single' }] },
+  ];
+  const ctx = buildCtx([{
+    chara: c, tr: { ...mkTr(), level: 250, jukudo: 60, affinity: 100, omoide_picks: { 0: 901, 1: 902 } },
+  }, null, null]);
+  const r = computeStats(c, ctx.team[0].tr, 0, ctx);
+  // server-fold: floor(22 + 10.5) = 32   ← Add 在 Mul 之前、且取整
+  // client:      addAcc 0 + partner 1.0 × mul 1.5 × 32 = 48
+  // 反例: 旧实现(Add 在最后) = 10.5 + 1.5×22 = 43.5;不 floor = 32.5×1.5 = 48.75
+  assert.strictEqual(r.speed.latestRecover, 48);
+});
+test('転速: 非 omoide 的 Speed Add 仍留在 client 段 (Mul 之后)', () => {
+  const c = mockChara();
+  c._master.states['通常'].weapon_skills = [
+    { id: 90010, name: 'spd', parameter: 'Speed', math_type: 'Addition', value: 10, range: 'Single' },
+  ];
+  c._omoide_slots = [
+    { affection_threshold: 10, weapon_skills: [{ id: 903, parameter: 'Speed', math_type: 'Multiply', value: 1.5, range: 'Single' }] },
+  ];
+  const ctx = buildCtx([{
+    chara: c, tr: { ...mkTr(), level: 250, jukudo: 60, affinity: 100, omoide_picks: { 0: 903 } },
+  }, null, null]);
+  const r = computeStats(c, ctx.team[0].tr, 0, ctx);
+  // recover = floor(22) = 22 (无 omoide Add)、chara_skill Add 走 addAcc
+  // 10 + 1.0 × 1.5 × 22 = 43   (若误折进 recover → floor(32)×1.5 = 48)
+  assert.strictEqual(r.speed.latestRecover, 43);
 });
 
 test('omoide picks 为空 → 不激活任何 omoide buff', () => {

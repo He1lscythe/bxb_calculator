@@ -1,7 +1,7 @@
 // js/render.js
 import { state } from './state.js';
 import { RARITY, ELEMENT, WEAPON, ELEM_COLOR, CHARA_TAG } from '../shared/constants.js';
-import { hasOmoide, fmt, fmtBairitu, renderRightTags, escHtml, min } from './utils.js';
+import { fmt, fmtBairitu, renderRightTags, escHtml, min } from './utils.js';
 import { CHARA_SPEC } from '../shared/chara-spec.js';
 import { charaIconStack } from '../shared/image-paths.js';
 
@@ -317,7 +317,7 @@ const renderStateContent = (sectionState, stateLabel, chara) => {
   // --- Stats ---
   if (sectionState.stats) {
     parts.push(
-      `<div class="section"><div class="section-title">ステータス</div>${renderStats(sectionState.stats, stateLabel)}</div>`,
+      `<div class="section"><div class="section-title">ステータス</div>${renderStats(sectionState.stats)}</div>`,
     );
   }
 
@@ -347,7 +347,7 @@ const renderStateContent = (sectionState, stateLabel, chara) => {
   return parts.join('') || '<div class="no-results">データなし</div>';
 };
 
-const renderStats = (stats, stateLabel) => {
+const renderStats = (stats) => {
   const STAT_LABELS = {
     HP: 'HP',
     攻撃力: '攻撃力',
