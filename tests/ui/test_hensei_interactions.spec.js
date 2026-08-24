@@ -21,7 +21,10 @@ async function setupSlot0WithChara(page, id) {
   await page.waitForTimeout(800);
 }
 
-// 读 slot stat (cell idx: 1=攻撃力max 2=min 3=防御力 4=HP 5=BK 6=Hit数 7=ダメ上限)
+// 读 slot stat — cell idx 跟 hensei.html 的显示顺序一致:
+//   1=攻撃力max 2=攻撃力min 3=防御力 4=HP 5=BK 6=Hit数 7=転速 8=攻速 9=ダメ上限
+// (転速/攻速 是后来插进 6 和 9 之间的、ダメ上限 从 7 挪到 9;7/8 的文本不是纯整数,
+//  用下面的 readStatText 读原文)
 async function readStat(page, slot, idx) {
   const txt = await page
     .locator(`#slot-${slot} .stats-cell:nth-child(${idx}) .stats-val`)
@@ -148,23 +151,45 @@ test('chara_meta: MP 滿 → 空 (slider=0) → 攻撃力 ×(1/21) (§3.9.1 mp_r
 // ============================================================
 // chara base (5): state / level / 熟度 / 觉醒 / HP%
 // ============================================================
-test('chara base: state 通常 → 改造 → base stat 切换', async ({ page }) => {
+// 1001 レヴァンテイン=ヘル 有 通常(100101) / 改造(100102) 两个 state。
+// 只切 state、**不动 jukudo/level** —— 否则 stat 变化可能来自等级而非 state 切换、测不出东西。
+test('chara base: state 通常 → 改造 → 4 项 base stat 全部切换 (lv/熟度 固定)', async ({ page }) => {
   await waitHenseiReady(page);
   await setupSlot0WithChara(page, 100101);
+
+  // 前提: 该 chara 真有改造 state (否则整个测试无意义、显式失败而不是静默通过)。
+  // 注: slot.chara 存的是 wiki id (number)、chara 对象在 state.allCharas 里按 id 查。
+  const states = await page.evaluate(() => {
+    const id = window.state.team[0].chara;
+    const c = (window.state.allCharas || []).find((x) => x.id === id);
+    return Object.keys(c?.states || {});
+  });
+  expect(states, `1001 应同时有 通常/改造、实际: ${states}`).toEqual(expect.arrayContaining(['通常', '改造']));
+
   await setTr(page, 0, 'state', '通常');
   await setTr(page, 0, 'jukudo', 60);
   await setTr(page, 0, 'level', 250);
-  const normal = await readStat(page, 0, 1);
-  // 切到改造 (1001 应该有改造 state)
-  const hasKaizo = await page.evaluate((id) => {
-    const c = window.state?.team?.[0] ? window.state.team[0] : null;
-    return true; // 假设有、若没的话 stat 不变 test fail
-  });
+  const normal = await page.evaluate(() => ({ ...window.__lastStats[0].stats }));
+
+  // 只改 state,jukudo/level 保持 60/250
   await setTr(page, 0, 'state', '改造');
-  await setTr(page, 0, 'jukudo', 99);
-  await setTr(page, 0, 'level', 255);
-  const kaizo = await readStat(page, 0, 1);
-  expect(kaizo).not.toBe(normal);
+  const kaizo = await page.evaluate(() => ({ ...window.__lastStats[0].stats }));
+  const tr = await page.evaluate(() => {
+    const t = window.state.team[0].tr;
+    return { state: t.state, jukudo: t.jukudo, level: t.level };
+  });
+  expect(tr, 'jukudo/level 必须没被动过').toEqual({ state: '改造', jukudo: 60, level: 250 });
+
+  // 改造 = 上位 variant、4 项 base stat 都应变化 (且更高)
+  for (const k of ['攻撃力', '防御力', 'HP', 'ブレイク力']) {
+    expect(kaizo[k], `${k}: 改造 ${kaizo[k]} 应 ≠ 通常 ${normal[k]}`).not.toBe(normal[k]);
+    expect(kaizo[k], `${k}: 改造 ${kaizo[k]} 应 > 通常 ${normal[k]}`).toBeGreaterThan(normal[k]);
+  }
+
+  // 切回通常 → 复原 (无残留 state)
+  await setTr(page, 0, 'state', '通常');
+  const back = await page.evaluate(() => ({ ...window.__lastStats[0].stats }));
+  expect(back).toEqual(normal);
 });
 
 test('chara base: level 1 → max 单调递增', async ({ page }) => {
@@ -284,17 +309,58 @@ test('FellDown_Attack 触发 (chara 107701 slot 0、另一 slot chara hp=0 → �
 // ============================================================
 // BD ON
 // ============================================================
-test('bd_skill: BD OFF → ON → 含 stat buff 的 BD chara stat 变', async ({ page }) => {
+// 1617 鳳凰円文螺鈿黒櫃:Blaze (通常 = variant 161701) 的 bd_skill 有 4 条 effect、
+// 全是 Multiply ×50.0、target Player / range All、additional_value 0 (故 bd_count 不影响倍率):
+//   Speed / Attack / MotionSpeed / GuardBreak
+// 该 chara 自身只有一条 Speed Multiply ×13 的被动 — 乘算、前后同乘 → 不破坏「精确 50 倍」关系;
+// 4 个 parameter 上都没有 Addition,所以比值应严格 = 50。
+//
+// 注意不能读 DOM: 転速 cell 是 "N.N · Nfr" 整形字符串、攻速 cell 显示的是**帧数**
+// (max(2, ceil(dur×60/spd)+1)、非线性且有 2fr 下限、×50 后直接贴底) → 必须读
+// window.__lastStats[slot] 的生值 (r.stats / r.speed.latestRecover / r.motionSpeed.speeds)。
+test('bd_skill: BD OFF → ON → 攻撃力/ブレイク力/攻速/転速 四项精确 ×50 (chara 1617)', async ({ page }) => {
   await waitHenseiReady(page);
-  await setupSlot0WithChara(page, 100101);
-  const before = await readStat(page, 0, 1);
+  await setupSlot0WithChara(page, 161701);
+
+  const snap = () =>
+    page.evaluate(() => {
+      const r = window.__lastStats[0];
+      return {
+        atk: r.stats['攻撃力'],
+        bk: r.stats['ブレイク力'],
+        spd: r.speed.latestRecover,
+        ms: r.motionSpeed.speeds.slice(),
+      };
+    });
+
+  const before = await snap();
+  // 前提: 基线必须非零,否则 ×50 断言退化成 0===0 恒真
+  expect(before.atk, 'base 攻撃力').toBeGreaterThan(0);
+  expect(before.bk, 'base ブレイク力').toBeGreaterThan(0);
+  expect(before.spd, 'base 転速').toBeGreaterThan(0);
+  before.ms.forEach((v, i) => expect(v, `base 攻速${i + 1}`).toBeGreaterThan(0));
+
   await setTr(page, 0, 'bd_on', true);
-  const after = await readStat(page, 0, 1);
-  // 1001 BD effects 可能含 / 不含 Attack mul、只验证 ≠ before (兼容两种情况)
-  // 若相等说明 BD 没 stat buff、test pass (符合实际)
-  // 若 BD 有 Attack buff、应该变化
-  // 这里只断 "不报错"、不限制 N 倍
-  expect(typeof after).toBe('number');
+  const after = await snap();
+
+  // 攻撃力 / ブレイク力 走 applyStaged、**出口有 ceil**,而 ceil 是在 ×50 之后才施加的:
+  //   before = ceil(P)、after = ceil(50·P)   (P = 未取整的中间值)
+  // 所以严格 50 倍不成立,精确关系是 before×50 − 50 < after ≤ before×50。
+  // (实测 1617: P=29977.58 → before=29978、after=ceil(1498879.0)=1498879,差 21)
+  for (const [k, b, a] of [['攻撃力', before.atk, after.atk], ['ブレイク力', before.bk, after.bk]]) {
+    expect(a, `${k} ${b} → ${a} 应 ≤ ${b}×50`).toBeLessThanOrEqual(b * 50);
+    expect(a, `${k} ${b} → ${a} 应 > ${b}×50−50`).toBeGreaterThan(b * 50 - 50);
+    expect(a / b, `${k} 比值`).toBeCloseTo(50, 1);
+  }
+  // 転速 / 攻速 是纯浮点 fold、无取整环节 → 严格 50 倍
+  expect(after.spd / before.spd, `転速 ${before.spd} → ${after.spd}`).toBeCloseTo(50, 6);
+  after.ms.forEach((v, i) =>
+    expect(v / before.ms[i], `攻速${i + 1} ${before.ms[i]} → ${v}`).toBeCloseTo(50, 6),
+  );
+
+  // 关掉 BD → 复原
+  await setTr(page, 0, 'bd_on', false);
+  expect(await snap()).toEqual(before);
 });
 
 // ============================================================
