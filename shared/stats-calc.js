@@ -2,11 +2,16 @@
 //
 // 按 docs/hensei_calc.md 设计:
 //   base = lv × 熟度 × 觉醒  (内嵌)
-//   Stage 1: omoide Add
-//   Stage 2: masou Add → masou Mul → floor
-//   Stage 3: other Mul  (chara_skill / crystal / bg / soul / chara_meta)
-//   Stage 4: other Add  → ceil
+//   s1:  omoide Add
+//   s2:  masou Add → masou Mul → server-fold floor
+//   s3:  × LP tier
+//   s4:  other Mul  (非soul → soul → bd)
+//   s5:  other Add  (同上分类) → 出口 ceil
 //   Repel_Percent: 独立 status 回避率通道
+//
+// ⚠ 上面 stage 只对 HP / Attack / Defense / GuardBreak 四项生效 (只有这 4 项调 applyStaged)。
+//   Speed / MotionSpeed / HitCount / DamageLimitBreak 各走独立函数、不适用 stage 映射。
+//   Speed 有自己的两段结构 (omoide Add 在 server-fold 段、Mul 之前) — 见 _computeSpeed 注释。
 //
 // Effect 来源 (_source):
 //   omoide      — chara omoide memory slot effect (Frida 抓包、按 affection_threshold gate)
@@ -127,7 +132,6 @@ export function baseStats(charaWiki, tr) {
   if (!stateData) return null;
   const stats = stateData.stats || {};
   const cap = maxLevelAtMature(stateData, tr.jukudo || 1);
-  const awkMax = AWAKENING_MAX[m.rarity] || 9;
   const effLv = Math.min(tr.level || 1, cap + (tr.awakening || 0) * 5);
   const max_max_level = stats.max_max_level;
   // base stat 已经在 server-fold (chara 创建时) 完成 floor 取整 (unpacking 01_setup.md §1.5)
@@ -449,7 +453,9 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     if (i === targetSlotIdx) {
       const marriageMult = [1.0, 1.03, 1.05][trSlot.marriage] || 1;
       if (marriageMult !== 1) {
-        for (const attr of ['Attack', 'Defense', 'HP', 'GuardBreak']) {
+        // 結婚倍率作用 5 项 (schema.md §結婚: 攻防 HP BK speed)。Speed 不走 applyStaged、
+        // 由 _computeSpeed 的 Mul 池消费 (2026-06-02 abf7767d 只落了 docs、代码这半补上)
+        for (const attr of ['Attack', 'Defense', 'HP', 'GuardBreak', 'Speed']) {
           collected.push({
             _source: 'chara_meta', _src_slot: i, _src_name: '結婚',
             parameter: attr, base_parameter: attr,
@@ -1078,9 +1084,17 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
 // ============================================================
 // unpacking §7.6.1:
 //   latestRecover = add_acc + (PartnerLevel/100 + 1) × mul_acc × recover
-//   - recover    = chara base speed (按 lv 缩放、base.Speed)
+//   - recover    = WeaponData ObscuredFloat = **server 推的 speed**、不是裸曲线值。
+//                  01_setup.md §1.1.2: `speed = speed + Σ slot_speed_add`、slot Add 来源 =
+//                  `UserWeaponMemorySlot[].weapon_skill` (= omoide 记憶結晶槽)。
+//                  → omoide 的 Speed Add 属于 server-fold 段、必须在 mul_acc **之前**折进 recover,
+//                    并按 §1.1.2 汇总表 (speed 同 attack 路径、server push int) 取 floor。
+//                  masou/costume 不进此段: 「speed 同 attack 含 costume_Mul」只是间接推导,
+//                    而 HOWTO_hp_calc.md 明写「Attack 那个 costume Mul 还没反编译验证」,
+//                    且 HOWTO_weapon_skills_order.md 实测 costume 以 PSV entry (block 5 `-7`)
+//                    留在 client 数组里 → 仍走下面的 mul_acc / add_acc 池。
 //   - mul_acc    = Σ Speed Mul fold (init 1.0、含 Vitality/RemHP/Break/FellDown_Speed × HP-curve factor)
-//   - add_acc    = Σ Speed Add fold (init 0.0)
+//   - add_acc    = PSV(Speed, Add) fold (init 0.0) —— client passive skill 池、**不含 omoide**
 //   - PartnerLevel = 装的 soul lv (未装 → 0、factor = 1.0)
 // returns { latestRecover, cooldownFrames, setFrames }
 // unpacking §8.6.2 条件 B:
@@ -1090,18 +1104,41 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
 // setFrames = 1 (§8.6 frame 8 Begin→IsWait set、Speed 系一部分、固定)
 // 注: §8.6 总 10 帧含 2fr Unity BT 调度 (Combo→Begin + 起手)、跟 chara 无关、不计入此函数
 function _computeSpeed(chara, tr, slotIdx, ctx, effects, base, traceStage = null) {
-  const recover = base.Speed;
   let mulAcc = 1;
   let addAcc = 0;
-  // trace 链 (实际计算保持 fold 不动、链是等价重演: recover → ×mul... → ×partner → +add...)
-  let tCur = recover;
+  // trace 链: base.Speed → +omoide Add... → floor → ×mul... → ×partner → +add...
+  let tCur = base.Speed;
+  // ── server-fold 段: recover = floor(base.Speed + Σ omoide Speed Add) ──
+  let recover = base.Speed;
+  for (const e of effects) {
+    if (e.base_parameter !== 'Speed') continue;
+    if (e._source !== 'omoide') continue;         // omoide Mul 是 _source='omoide_mul'、留给 mul_acc
+    if (e.math_type !== 'Addition') continue;
+    const a = e.value * (e.condition_factor ?? 1);
+    recover += a;
+    if (traceStage && a !== 0) {
+      const b = tCur;
+      tCur += a;
+      traceStage.steps.push({ src: traceSrcLabel(e), stat: '転速', op: 'add', val: a, before: b, after: tCur });
+    }
+  }
+  {
+    const b = recover;
+    recover = Math.floor(recover);               // server push int (01_setup.md §1.1.2 汇总表)
+    if (traceStage && recover !== b) {
+      traceStage.steps.push({ src: 'server-fold floor', stat: '転速', op: 'floor', val: null, before: b, after: recover });
+    }
+    tCur = recover;
+  }
+  // ── client 段: PSV Mul → partner → PSV Add ──
   for (const e of effects) {
     if (e.base_parameter !== 'Speed') continue;
     if (e._source === 'enemy_break') continue;  // Enemy_BreakSpeed 不进 Speed 池 (master 无数据)
     const cf = e.condition_factor ?? 1;
     // 跟 applyStaged 公式一致: Mul 用 1+(v-1)×cf 渐进激活、Add 直接 ×cf
     if (e.math_type === 'Multiply') {
-      const f = 1 + (e.value - 1) * cf;
+      // 倍率先 round 到 5 位小数 (同 applyStaged s4 的兜底、覆盖 chara_meta 等非 pushEff 来源)
+      const f = 1 + (_round5(e.value) - 1) * cf;
       mulAcc *= f;
       if (traceStage && f !== 1) {
         const b = tCur;
@@ -1122,6 +1159,7 @@ function _computeSpeed(chara, tr, slotIdx, ctx, effects, base, traceStage = null
   for (const e of effects) {
     if (e.base_parameter !== 'Speed') continue;
     if (e._source === 'enemy_break') continue;
+    if (e._source === 'omoide') continue;       // 已在上面的 server-fold 段折进 recover
     const cf = e.condition_factor ?? 1;
     if (e.math_type === 'Addition') {
       const a = e.value * cf;

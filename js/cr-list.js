@@ -17,7 +17,7 @@ import {
 import { FilterCore } from '../shared/filter-core.js';
 import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
 import { crystalShowWeightRange, crystalShowPurityRange } from '../shared/hensei-helpers.js';
-import { escHtml, fmt, fmtLarge } from './utils.js';
+import { escHtml, fmtLarge } from './utils.js';
 import { VirtualList } from '../shared/virtual-list.js';
 
 let _vlist = null;
@@ -333,40 +333,9 @@ export const scopeLabel = (e) => {
   return '';
 };
 
-const renderEffLine = (e) => {
-  // 効果 tag: parameter class (跟 filter 一致)
-  const _cls = e._parameter ? classifyParameter(e._parameter) : null;
-  const bTags = _cls
-    ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[_cls] || _cls) + '</span>'
-    : '';
-  const scopeStr = scopeLabel(e) ? '<span class="eff-scope">' + scopeLabel(e) + '</span>' : '';
-  const condStr = e.condition
-    ? '<span class="eff-cond">' + (CONDITION[e.condition] || '') + '</span>'
-    : '';
-  let bStr = '';
-  if (e.bairitu_init != null || e.bairitu != null) {
-    const unit = e.calc_type === 1 ? '' : '倍';
-    const mn = e.bairitu_init,
-      mx = e.bairitu;
-    // addition 负值不再前缀 '+' (避免 '+-x')
-    const pfx = e.calc_type === 1 ? ((mn != null ? mn : mx) < 0 ? '' : '+') : '×';
-    const num =
-      mn != null && mx != null && mn !== mx
-        ? fmt(mn) + '<span class="sep">～</span>' + fmt(mx)
-        : fmt(mn != null ? mn : mx);
-    bStr =
-      '<span class="eff-pfx">' +
-      pfx +
-      '</span><span class="eff-bairitu">' +
-      num +
-      '</span>' +
-      (unit ? '<span class="eff-unit">' + unit + '</span>' : '');
-  }
-  return '<div class="eff-line">' + bTags + scopeStr + condStr + bStr + '</div>';
-};
-
+// 注: 旧的 renderEffLine (detail body 内逐 effect 渲染) 已随「body 不重复効果量」的设计移除,
+//     効果 tag / bairitu 现在只在 row-hd 显示 (见下面 fields 的注释)。
 export const renderDetailBody = (c) => {
-  const effRows = (c.effects || []).map(renderEffLine).join('');
 
   const fields = [];
   // row-hd 已显示 effect tag + bairitu、body 不重复効果量、改放 master.description (in-game 长文)

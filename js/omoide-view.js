@@ -93,7 +93,7 @@ export const openLatentModal = async (wikiId) => {
     try {
       const r = await fetch(`../data/omoide/${baseId}.json`);
       if (r.ok) omoideData = await r.json();
-    } catch (_) {
+    } catch {
       omoideData = null;
     }
     c._omoide_data = omoideData;

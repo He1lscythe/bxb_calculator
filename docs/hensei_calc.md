@@ -36,6 +36,10 @@ collection: 遍历 3 slot、给每个 effect 打 source tag
 
 omoide memory slot 加成走 stage 1、不参与 base 计算。
 
+> ⚠ **下面整套 stage 表只对 HP / 攻撃力 / 防御力 / ブレイク力 四项生效**(只有这 4 项调 `applyStaged`)。
+> `転速` / `攻速` / `Hit` / `ダメ上限` 走各自独立函数、**不适用 stage 映射** —— 见
+> [その他 panel 値](#その他-panel-値-4-stat-以外)。転速里 omoide Add 有自己的位置(server-fold 段、Mul 之前)。
+
 ## Stage 表 (跟 trace stage key 一致)
 
 | stage | source | math_type 过滤 | 含义 |
@@ -257,10 +261,31 @@ clamp(repel_rate, 0, 100)
 | Hit1-3 | 战前 server-fold:按 `orderServerFold` 顺序逐 effect、每步 `cur = trunc(cur op val)` + **每步 clamp ≥1**(顺序敏感、见上节)、终 `max(1)` | `_computeImpl` hits loop |
 | フルヒット攻撃力 | `floor(Attack × Σhits)` | 同上 |
 | ダメ上限 | `floor(2^31-1 × ΠMul + ΣAdd)` DamageLimitBreak 池、单 loop 按 effects 顺序 | 同上 |
-| 転速 | `latestRecover = ΣAdd + (soul_lv/100+1) × ΠMul × base.Speed`、cooldown = `max(1, ceil(6000/recover))` fr。`base.Speed` **不含觉醒段**(熟度 cap 处封顶) | `_computeSpeed` |
+| 転速 | **两段**:① server-fold `recover = floor(base.Speed + Σ omoide Speed Add)` ② client `latestRecover = Σ其他Add + (soul_lv/100+1) × ΠMul × recover`。cooldown = `max(1, ceil(6000/latestRecover))` fr。`base.Speed` **不含觉醒段**(熟度 cap 处封顶) | `_computeSpeed` |
 | 攻速 1-3 | `motion_speed_i × ΠMul + ΣAdd`、帧 = `1 + max(1, ceil(dur/spd × 60))` | `_computeMotionSpeed` |
 | BD上限 max | `max(9, floor((9 + Σadd) × Πmul))` BlazeGaugeMaxLevel 池 | `_computeImpl` |
 | 初期BD | BlazeGauge Add (mode 1 直接 / mode 2 队伍属性 count) → cumsum 反查 level | `computeBlazeGaugePoints` + `bdCapFromBlazeGauge` |
+
+### 転速 两段的依据 (2026-08-23 修正)
+
+`07_speed.md §7.6.1` 的 `latestRecover = add_acc + (PartnerLevel/100+1) × mul_acc × recover`
+里三个量各有明确出处(汇编硬证据 `0x1B1A3AC~0x1B1A3F8`):
+
+- **`recover` = `WeaponData ObscuredFloat` = server 推的 `speed` 字段**、不是裸曲线值。
+  `01_setup.md §1.1.2`: `speed = speed + Σ slot_speed_add`,并注明 slot Add 来源 =
+  `UserWeaponMemorySlot[].weapon_skill` —— 即 **omoide 记憶結晶槽**。
+  → omoide 的 Speed Add 属 server-fold 段、在 `mul_acc` **之前**;§1.1.2 汇总表列 speed
+  「同 attack 路径 fold、server push int」→ 取 `floor`。
+- **`add_acc` = `PSV(Speed, Add)` fold** = client passive skill 池、**不含 omoide**。
+- **masou/costume 不进 server-fold 段**:`§1.1.3` 只在 `attack` 行写了 `costume_Mul`、speed 行是
+  「同 attack」的间接推导;而 `HOWTO_hp_calc.md` 明写「**Attack 那个 costume Mul 还没反编译验证**」,
+  且 `HOWTO_weapon_skills_order.md` 实测 costume 是 server 拼给 client 的 `weapon_skills[]`
+  **block 5 (`-7`)**、仍在 client PSV 数组里(对照:被 server 折走的 marriage HP 那条 `70104`
+  就**不在** client 数组里)。→ masou 保持走 `mul_acc` / `add_acc`。
+
+> 影响面: omoide 数据里 `Speed`+`Addition` 共 **15,233** 条(涉 647 个魔剣、「スピードUP」系),
+> 是転速最普遍的加成来源;旧实现把它们放在乘法外面,每点被少算 `(mul_acc − 1)` 倍。
+> 对照 `Speed`+`Multiply` 只有 143 条。
 
 ---
 
@@ -364,7 +389,7 @@ console 输入 `window.__DEBUG_STATS = true` → 切控件时输出：
   `cur = trunc(cur op effVal); if cur<=0: cur=1` 逐 effect、终值 `max(1, cur)`
   例: base 3、soul Add +6 (×1.8 等级) → floor(3+10.8)=13 → 下一 effect 从 13 起
 - soul HitCount `values=[a,b,c]` 数组: 每段 × soulMultiplier (跟单值路径一致吃等级加成)
-- omoide Mul → stage 3
+- omoide Mul → s4a (4 stat);転速 里 omoide Add 走 server-fold 段、omoide Mul 走 `mul_acc`
 - omoide `value_scaling`: master/Frida 抓包多为空。description 含「熟度UPにつれて…」字样的 skill 实测真实 scaling = **0.003 / 熟度** (`OMOIDE_FALLBACK_SCALING`、`shared/hensei-helpers.js` `omoideEffectiveScaling`);effect value = `value + 0.003 × (熟度-1)`
 
 ---
@@ -395,13 +420,14 @@ trace = {
 | s8_enemy_mods | 属性相性/難度/有利武器/BD cap (逐因子、链尾=ceil 后显示值) |
 | s9_hits | Hit1-3 逐 effect 序贯 (每步 floor、after=floor 后值) + max(1) 终步 |
 | s10_damage_limit | DamageLimitBreak fold + floor 终步 |
-| s11_speed | 転速: recover → ×Mul链 → ×partner → +Add链 (fold 等价重演) |
+| s11_speed | 転速: base.Speed → +omoide Add链 → floor (server-fold) → ×Mul链 → ×partner → +其他Add链 |
 | s12_motion | 攻速1-3: motion_speed_i → ×Mul链 → +Add链 |
 
 - step.stat ∈ { 攻撃力/防御力/HP/ブレイク力/Hit1-3/ダメ上限/転速/攻速1-3 }、UI 按 tab filter
 - UI tab 只渲染相关 stage: 攻撃力等 4 stat → s1-s8; Hit → s9; ダメ上限 → s10; 転速 → s11; 攻速 → s12
 - step.src = `{skill/装备名}@S{slot}` (collectEffects 的 `_src_name`)
-- speed/motion 实际计算保持 fold (输出 bit 一致)、trace 链为数学等价重演 (Mul 全在 Add 前)
+- speed/motion 实际计算保持 fold (输出 bit 一致)、trace 链为数学等价重演。転速: omoide Add 与 floor
+  是真实顺序(server-fold 段、不可交换);floor 之后的 Mul / 其他 Add 才是等价重演 (Mul 全在 Add 前)
 - 单测: `tests/unit/test_stats_trace.mjs` (gate / on-off 一致 / 各链尾 == 输出 / 链连续性)
 
 ---
