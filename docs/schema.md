@@ -1,10 +1,14 @@
 # Schema — 按解包 master_tables 设计
 
-> **Status**: 当前规范 (Phase 0-8 重构完成、npm test 135/135)
+> 文档索引: [docs/README.md](README.md)
 >
-> **Scope**: refactor/unpacking-source branch 限定、永不 merge 回 main
+> **Status**: 当前规范 (Phase 0-8 重构完成、`npm test` 301/301)
 >
-> **Data source**: `F:/OneDrive - Northeastern University/Game/BxB/unpacking/master_tables/<latest>/`
+> **Scope**: 已是 `main` 的规范 (历史上的 `refactor/unpacking-source` 分支已完成并成为 main)
+>
+> **Data source**: `<BXB_ROOT>/master_tables/master_data/<latest>/` —— `master_tables/` 与本 repo
+> (`bxb_wiki/`) 同级、是 crawl 仓库 `data/master-tables` branch 的 git worktree。路径一律相对
+> repo 推 (`PROJECT_ROOT.parent`)、不写死盘符;CI 经 env `BXB_MASTER_TABLES` 覆盖。
 > 详见 [scripts/master_to_business/paths.py](../scripts/master_to_business/paths.py)
 
 ---

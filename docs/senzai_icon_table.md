@@ -1,5 +1,12 @@
 # 潜在開放 Icon 一覧
 
+> 文档索引: [docs/README.md](README.md)
+>
+> `data/senzai_table.json` 的 icon id → 効果 対照表 (**仍在维护**)。
+> 消费方: `pages_src/characters.html` / `pages_src/hensei.html` fetch 后注入 `state.SENZAI_TABLE`。
+> hensei 的 omoide picker 另有一条独立通路 (`data/omoide/{base_id}.json`、Frida 抓、按 slot 索引),
+> 两者并存、不互相取代 —— 见 [js/omoide-view.js](../js/omoide-view.js) 头注释。
+
 | icon | 効果名 | 詳細 | 倍率 | 熟度補正 | 算法 | 分類 |
 |------|--------|------|------|----------|------|------|
 | 1 | 攻撃力UP[★] | 自身の攻撃力が140上昇 | 140 |  | + | 攻撃力 |
