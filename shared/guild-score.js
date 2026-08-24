@@ -14,7 +14,7 @@ export const GUILD_HIT_INTERVAL = 0.15;
 export const DAMAGE_RANDOM_RATES = [1.0, 0.99, 0.98, 0.97, 0.96, 0.95];
 // ギルドスコア换算常量: 結界ボーナス固定 2.6、難易度ボーナス N/H/L = 1/5/10
 export const GUILD_BARRIER_BONUS = 2.6;
-export const GUILD_DIFF_BONUS = { Normal: 1, Hard: 5, Lunatic: 10 };
+const GUILD_DIFF_BONUS = { Normal: 1, Hard: 5, Lunatic: 10 };
 
 const FPS = 60;
 

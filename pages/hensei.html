@@ -241,7 +241,6 @@
         hideLoading,
         min,
         fmtNum,
-        ctPfx,
       } from '../js/utils.js';
       import { deepApply } from '../shared/revise-core.js';
       // omoide_templates 已删除 (用户决策: omoide 数据走 Frida 抓包、走 chara._omoide_slots、不用 templates)
@@ -254,21 +253,17 @@
       import { adaptMasouList } from '../shared/masou-adapter.js';
       import { adaptBgList } from '../shared/bg-adapter.js';
       // ===== stats-calc (4-stage) =====
+      // 只 import 本页真用到的;stat 计算全走 computeStats 一个入口 (baseStats /
+      // collectEffects / applyStaged / conditionFactor / repelRate / _STAT_KEYS 都是它内部的环节、
+      // 本页不直接调 —— 曾经 import 过、后来改成走 computeStats、import 忘了摘)
       import {
         computeStats,
-        baseStats,
-        collectEffects,
-        applyStaged,
-        conditionFactor,
         baseParameter,
-        repelRate,
         mkTr,
         AWAKENING_MAX as AWAKENING_MAX_TBL,
         AWAKENING_FULL_MULT as AWAKENING_MULT_TBL,
-        _STAT_KEYS,
       } from '../shared/stats-calc.js';
       import {
-        SOUL_AWK_MAX,
         EMBLEM_RARITY_LV_MAX,
         CRYSTAL_RARITY_LV_MAX,
         charaLvParams,
@@ -283,8 +278,6 @@
         crystalEffectiveValue,
         resolveCharaSkills as _resolveCharaSkills,
         resolveSoulSkills as _resolveSoulSkills,
-        parseHit as _parseHit,
-        parseAff as _parseAff,
         BLAZE_GAUGE_POINTS_BASE_A,
       } from '../shared/hensei-helpers.js';
       import { simulateGuildScore, computeGuildScore, GUILD_BATTLE_SECONDS } from '../shared/guild-score.js';

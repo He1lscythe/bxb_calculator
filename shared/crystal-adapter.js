@@ -34,7 +34,7 @@ function _crystalToWikiEffect(c) {
   return eff;
 }
 
-export function crystalToWiki(c) {
+function crystalToWiki(c) {
   // NoEffect 不过滤 (用户决策、归到「その他」类)、但生成 placeholder effect 避免 render 报空
   const eff = c.parameter === 'NoEffect' ? null : _crystalToWikiEffect(c);
   return {

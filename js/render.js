@@ -281,7 +281,7 @@ export const switchState = (id, stateLabel, container) => {
   });
 };
 
-export const _deletedSkillSet = (c) => {
+const _deletedSkillSet = (c) => {
   return new Set(Array.isArray(c && c._deleted_skills) ? c._deleted_skills : []);
 };
 

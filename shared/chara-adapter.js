@@ -302,7 +302,7 @@ function _bdSkillToWiki(bd, cost) {
   };
 }
 
-export function charaToWiki(c) {
+function charaToWiki(c) {
   const masterStates = c.states || {};
   // wiki id = state '通常' variant_id (6 位)、缺则 fallback 改造 / 極弐 / base*100
   const primary = masterStates['通常'] || masterStates['改造'] || masterStates['極弐'] || Object.values(masterStates)[0];

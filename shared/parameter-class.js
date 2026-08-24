@@ -134,15 +134,10 @@ export const PARAMETER_CLASS_SHORT = {
   35: '他',
 };
 
-// 条件 (発動) 6 类 enum
-export const COND_TRIGGER = {
-  NORMAL: 0,
-  VITALITY: 1,        // Vitality_*
-  REMHP: 2,           // RemHP_*
-  BREAK: 3,           // Break_*
-  FELLDOWN: 4,        // FellDown_*
-  ENEMY_BREAK: 5,     // Enemy_Break*
-};
+// 条件 (発動) 6 类。id 语义 (曾有 COND_TRIGGER 符号 enum、0 callsite 已删、语义留在此处):
+//   0 NORMAL / 1 VITALITY (Vitality_*) / 2 REMHP (RemHP_*) / 3 BREAK (Break_*)
+//   4 FELLDOWN (FellDown_*) / 5 ENEMY_BREAK (Enemy_Break*)
+// 判定见下面 conditionTrigger()、显示名见 COND_TRIGGER_LABEL。
 export const COND_TRIGGER_LABEL = {
   0: '通常',
   1: '逆窮鼠',
@@ -161,12 +156,10 @@ export function conditionTrigger(p) {
   return 0;
 }
 
-// 条件 (対象) 3 类 — 属性/武器限定 走顶层 f-element / f-weapon 过滤、不在 scope 里重复
-export const SCOPE_TAG = {
-  SELF: 1,
-  SET: 2,
-  CHARA: 3,
-};
+// 条件 (対象) 3 类 — 属性/武器限定 走顶层 f-element / f-weapon 过滤、不在 scope 里重复。
+// id 语义 (曾有 SCOPE_TAG 符号 enum、0 callsite 已删、语义留在此处):
+//   1 SELF / 2 SET (装備セット) / 3 CHARA (キャラ限定)
+// 判定见下面 crystalScopeTags / bgScopeTags、显示名见 SCOPE_LABEL。
 export const SCOPE_LABEL = {
   1: '自身',
   2: '装備セット',
