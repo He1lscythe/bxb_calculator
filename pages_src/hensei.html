@@ -2025,6 +2025,11 @@
       };
       // 各 slot の最新 computeStats 結果を保持（trace modal 用、IS_LOCAL_DEV のみ意味あり）
       const _lastTrace = [null, null, null];
+      // e2e 测试 / 调试用的暴露口。DOM 上的显示值是整形过的(転速是 "N.N · Nfr" 字符串、
+      // 攻速显示帧数、且有 2fr 下限会贴底),没法用来验倍率关系 → 测试改读这里的生值
+      // (r.stats / r.speed.latestRecover / r.motionSpeed.speeds)。
+      // 数组是原地更新、所以引用稳定。
+      window.__lastStats = _lastTrace;
 
       // stats-calc.js computeStats 用 ctx — 数据集 + 队伍状态 + helper / 常量 を 1 つの object に。
       // 函数調用時に fresh build（state mutable のため snapshot）、helper 引用は closure scope 経由。
