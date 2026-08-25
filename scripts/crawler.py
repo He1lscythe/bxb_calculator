@@ -561,6 +561,75 @@ def crawl_new(state, versions, rss_items, r2_needed):
     return changes
 
 
+def archived_ids():
+    """已存档的全部 id 集合（按 canonical 文件名枚举）。"""
+    ids = set()
+    for p in glob.glob(str(HTML_DIR / "[0-9]*.html")):
+        m = re.match(r"(\d+)_\d{8}\.html$", os.path.basename(p))
+        if m:
+            ids.add(int(m.group(1)))
+    return ids
+
+
+def missing_ids(latest_id, window):
+    """latest_id 往前 window 个 id 里、尚未存档的那些（升序）。
+
+    官方**预分配 id、乱序发布**：爬到某个 id 时它可能还没上线,crawl_new 记一次 miss 就继续
+    往前走、latest_id 越过它,此后再不回头 —— 而 recent_ids() 只枚举**已存档文件**,
+    安全网窗口同样看不见它。这个函数就是用来把这类空洞找出来重探的。
+    """
+    if not latest_id:
+        return []
+    have = archived_ids()
+    lo = max(1, latest_id - window + 1)
+    return [i for i in range(lo, latest_id + 1) if i not in have]
+
+
+def backfill_ids(ids, state, versions, rss_items, r2_needed):
+    """补档指定 id（用于 missing_ids 找出的空洞）。返回 changes 列表。
+
+    跟 crawl_new 的单 id 处理逻辑一致,区别只有三点:
+      - 吃一个显式 id 列表、不从 latest_id 往前走
+      - 不推进 state["latest_id"]（这些 id 本来就在它下面）
+      - 匹配上 RSS item 时,顺带把 state["rss"][slug]["id"] 从 None 修正为真实 id
+    """
+    changes = []
+    used_slugs = {v.get("slug") for v in versions.values() if v.get("slug")}
+    for i in ids:
+        result = fetch_topic(i)
+        if result is None:
+            continue                       # 仍未上线（或是真空洞）,下轮再探
+        fresh_raw, base_url = result
+        soup = BeautifulSoup(fresh_raw, "lxml")
+        # 日期上下文取前一个 id 的存档页；取不到就退回该页自身的 MM/DD 配当前年份
+        year, month, day, hhmm = prev_date_context(i - 1)
+        year, month, day, hhmm = infer_datetime(soup, year, month, day, hhmm)
+        canonical = canonical_name(i, f"{year:04d}{month:02d}{day:02d}")
+
+        title_a = soup.find("a", class_="title_text")
+        title = title_a.get_text(strip=True) if title_a else ""
+        item = _match_rss_item(title, f"{month:02d}/{day:02d} {hhmm}", rss_items, used_slugs)
+        if item:
+            used_slugs.add(item["slug"])
+            slug, ts, ts_source = item["slug"], item["jst_ts"], "rss"
+            state["rss"][slug] = {"pubDate": item["pubdate_raw"], "id": i}
+        else:
+            slug, ts, ts_source = None, f"{year:04d}/{month:02d}/{day:02d} {hhmm}:00", "page_time"
+
+        versions[str(i)] = {
+            "slug": slug,
+            "canonical": canonical,
+            "versions": [{"ts": ts, "file": canonical,
+                          "hash": body_hash(fresh_raw), "ts_source": ts_source}],
+        }
+        r2_needed |= process_page(soup, base_url)
+        write_page(HTML_DIR / canonical, soup)
+        changes.append({"id": i, "type": "new", "title": title,
+                        "canonical": canonical, "ts": ts, "slug": slug})
+        print(f"  补档 topic {i}（slug={slug}）：{title}")
+    return changes
+
+
 def recent_ids(n=40):
     """已存档的最近 n 个 id（按文件名枚举，跳过 id 空洞）。"""
     ids = set()

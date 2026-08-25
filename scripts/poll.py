@@ -27,9 +27,11 @@ from common import (
     save_versions,
 )
 from crawler import (
+    backfill_ids,
     crawl_new,
     extract_edit_note,
     find_canonical,
+    missing_ids,
     recent_ids,
     recrawl,
     stage_r2_assets,
@@ -42,6 +44,7 @@ CRON_DAILY = "5 7 * * *"  # 16:05 JST 安全网
 WINDOW_HOURS = 5
 WINDOW_IDS = 40       # 全量安全网窗口(每日 / need_window)
 RECENT_WINDOW = 15   # 每小时小窗口:重爬最近 N 条比 hash,抓 silent edit(RSS pubDate 不变的暗改)
+HOLE_SCAN_WINDOW = 120  # 空洞重探窗口:latest_id 往前 N 个 id 里、没存档的都重探一次
 
 
 def _warp_pool():
@@ -177,11 +180,25 @@ def do_execute(mode):
             changes.append({**c,
                             "url_official": f"{SITE}/topics/{c['id']}",
                             "mirror": f"html/{c['canonical']}"})
-        # 爬完仍未匹配上的 slug 记为 id 未知，防止每轮重复触发全量扫描
+        # 爬完仍未匹配上的 slug 记为 id 未知，防止每轮重复触发全量扫描。
+        # 注意 id=None **不是**终态:下面第 1b 步的空洞重探会在该 id 上线后把它修正回真实 id。
         for it in rss_items:
             if it["slug"] not in state["rss"]:
                 state["rss"][it["slug"]] = {"pubDate": it["pubdate_raw"], "id": None}
                 need_window = True
+
+    # 1b) 空洞重探:官方**预分配 id、乱序发布** —— crawl_new 走到尚未上线的 id 只记一次 miss
+    #     就继续往前,latest_id 越过它后再不回头;recent_ids() 只枚举已存档文件、安全网也看不见。
+    #     (实例:4777/4778 于 8/14 被跨过,分别在 8/15、8/24 才上线;4742 同理)
+    #     所以每轮都把 latest_id 往前 HOLE_SCAN_WINDOW 内的空洞重探一遍。
+    #     真空洞(如 4732)每轮多一个请求,可忽略;一旦上线就会被补档并修正对应 slug 的 id。
+    holes = missing_ids(state["latest_id"], HOLE_SCAN_WINDOW)
+    if holes:
+        print(f"  id 空洞重探（{len(holes)} 个）：{holes}")
+        for c in backfill_ids(holes, state, versions, rss_items, r2_needed):
+            changes.append({**c,
+                            "url_official": f"{SITE}/topics/{c['id']}",
+                            "mirror": f"html/{c['canonical']}"})
 
     # 2) 已知 slug 的 pubDate 变化 → 定向重爬
     rss_ts_by_id = {}
