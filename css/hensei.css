@@ -237,6 +237,22 @@ body{height:auto;overflow-y:auto;}
 .em-item.active{background:#1e2d5a;border-left:3px solid var(--accent);padding-left:9px;}
 .sort-val{font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0;padding:1px 6px;border-radius:4px;background:rgba(91,127,255,.12);border:1px solid rgba(91,127,255,.3);}
 .stats-panel{margin-top:6px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:3px 2px;}
+/* stats 説明トグル: ? タグ + 1 行の説明。
+   開閉状態は JS 側 _statsHelpOpen[] が持ち、_statsInner が .stats-help に help-open を書き出す
+   (setTrField → renderSlot は .stats-panel ごと作り直すので DOM class では保持できない)。 */
+.stats-help-bar{display:flex;justify-content:flex-end;padding:0 4px 2px;}
+.stats-help-btn{display:inline-flex;align-items:center;gap:3px;font-size:10px;line-height:1;
+  padding:2px 6px;border-radius:9px;border:1px solid var(--border);background:var(--bg2);
+  color:var(--text2);cursor:pointer;}
+.stats-help-btn:hover{border-color:var(--accent);color:var(--accent);}
+.stats-help-btn .qm{display:inline-flex;align-items:center;justify-content:center;
+  width:12px;height:12px;border-radius:50%;border:1px solid currentColor;font-size:9px;font-weight:700;}
+.stats-help.help-open .stats-help-btn{border-color:var(--accent);color:var(--accent);}
+.stats-help-note{display:none;}
+.stats-help.help-open .stats-help-note{display:block;margin:0 4px 4px;padding:5px 7px;
+  background:var(--bg2);border:1px solid var(--border);border-radius:4px;
+  font-size:10px;line-height:1.5;color:var(--text2);}
+.stats-help-note .hl{color:#ffd040;font-weight:700;}
 .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;}
 .stats-cell{display:flex;justify-content:space-between;font-size:11px;padding:2px 4px;background:var(--bg2);border-radius:4px;min-width:0;}
 .stats-cell .stats-val{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;}

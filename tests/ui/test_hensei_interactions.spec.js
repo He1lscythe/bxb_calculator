@@ -811,3 +811,29 @@ test('bxb1 往返: mainSlot 保留', async ({ page }) => {
   await page.waitForTimeout(300);
   expect(await page.evaluate(() => window.state.mainSlot)).toBe(1);
 });
+
+// ============================================================
+// stats 説明トグル
+// ============================================================
+test('stats 説明: ? タグで 1 行説明を開閉、stat 再計算をまたいで状態が残る', async ({ page }) => {
+  await waitHenseiReady(page);
+  await setupSlot0WithChara(page, 100101);
+  const btn = page.locator('#stats-panel-0 .stats-help-btn');
+  const note = page.locator('#stats-help-note-0');
+
+  await expect(btn).toBeVisible();
+  await expect(note).toBeHidden();                      // 初期は閉じている
+
+  await btn.click();
+  await expect(note).toBeVisible();
+  await expect(note).toContainText('黄色');
+  expect(await btn.getAttribute('aria-expanded')).toBe('true');
+
+  // setTrField → renderSlot(si) は .stats-panel ごと作り直す。開閉状態は DOM class ではなく
+  // module 側 _statsHelpOpen[] が持ち _statsInner が書き出す → 再構築後も開いたまま。
+  await setTr(page, 0, 'bd_on', true);
+  await expect(note).toBeVisible();
+
+  await btn.click();
+  await expect(note).toBeHidden();
+});

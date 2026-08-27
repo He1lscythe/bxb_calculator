@@ -2053,6 +2053,10 @@
         traceEnabled: IS_LOCAL_DEV,   // dev 才生成 trace (stat-trace modal 用)、Pages 0 开销
       });
 
+      // stats 説明トグルの開閉状態。setTrField → renderSlot(si) は .stats-panel ごと作り直すので
+      // DOM の class では保持できない → module 側に持って _statsInner が毎回書き出す。
+      const _statsHelpOpen = [false, false, false];
+
       export const _statsInner = (i, chara) => {
         if (!chara) {
           _lastTrace[i] = null;
@@ -2119,7 +2123,31 @@
           `<div class="stats-cell"${ck('攻速')}><span class="stats-key">攻速</span><span class="stats-val">${msMissing ? `×[${msSpeeds.map((v) => v.toFixed(2)).join(', ')}] (時間データ不明)` : `[${_msSeg}] <span${yMs}>計 ${_msTotal}fr</span>`}</span></div>`,
           `<div class="stats-cell"${ck('ダメ上限')}><span class="stats-key">ダメ上限</span><span class="stats-val">${_fmtStat(Math.ceil(dl))}</span></div>`,
         ].join('');
-        return `<div class="stats-grid">${cells}</div>`;
+        // 説明トグル: 黄字 = 上限到達。黄字が付く条件は 3 種あるが、
+        // どれも「これ以上バフを積んでも数値は改善しない」で意味が揃うので 1 行にまとめる —
+        //   攻撃力max/min → aMax/aMin >= dl (ダメージ上限で頭打ち)
+        //   転速         → cooldown+set <= 2fr (フレーム下限 = 最速)
+        //   攻速         → 各段 2fr 下限;計 fr は全段が下限のときだけ
+        const hOpen = _statsHelpOpen[i];
+        const help =
+          `<div class="stats-help${hOpen ? ' help-open' : ''}">` +
+          `<div class="stats-help-bar">` +
+          `<button type="button" class="stats-help-btn" onclick="toggleStatsHelp(${i})"` +
+          ` aria-expanded="${hOpen}" aria-controls="stats-help-note-${i}">` +
+          `<span class="qm">?</span>説明</button></div>` +
+          `<div class="stats-help-note" id="stats-help-note-${i}">` +
+          `数値が上限に到達すると<span class="hl">黄色</span>に変わります。</div></div>`;
+        return `${help}<div class="stats-grid">${cells}</div>`;
+      };
+      // 説明の開閉。stat を再計算せず class だけ差し替え、状態は _statsHelpOpen に残す
+      // (次に renderSlot / refreshStatsPanel が走っても _statsInner が同じ状態を書き出す)。
+      export const toggleStatsHelp = (i) => {
+        const open = !_statsHelpOpen[i];
+        _statsHelpOpen[i] = open;
+        const box = document.querySelector(`#stats-panel-${i} .stats-help`);
+        if (!box) return;
+        box.classList.toggle('help-open', open);
+        box.querySelector('.stats-help-btn')?.setAttribute('aria-expanded', String(open));
       };
       export const refreshStatsPanel = (i) => {
         const el = document.getElementById('stats-panel-' + i);
@@ -3871,6 +3899,7 @@
         closeStatTrace,
         setStatTraceTab,
         toggleStatTraceStage,
+        toggleStatsHelp,
       });
     </script>
   </body>
