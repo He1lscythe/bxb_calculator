@@ -844,3 +844,81 @@ test('stats 説明: ? タグで popover 開閉 (body 直下 / 再クリックで
   await page.locator('#slot-0 .stats-grid').click();    // 点外面 = 关闭
   await expect(pop).toHaveCount(0);
 });
+
+// ============================================================
+// import: read url (共享 URL → 编成)
+// ============================================================
+// 短链 key → bxb1 串的反查走 /share 端点。本地 serve.js 没有它(那是 start.py 的镜像)、
+// 生产是 Vercel /api/share → 用 route 伪造响应,body 里的 bxb1 串由页面自己导出得来,
+// 所以这个测试不依赖任何外部服务、也不硬编码 hash。
+test('import read url: 共享 URL / 片段 / 裸 key 都能读回编成', async ({ page }) => {
+  const errs = [];
+  page.on('pageerror', (e) => errs.push(e.message));
+  await waitHenseiReady(page);
+  await setupSlot0WithChara(page, 100101);
+  await page.evaluate(() => window.setScoreMainSlot(1));
+
+  // 先拿一份真实导出码,当作短链反查的返回值
+  const code = await page.evaluate(async () => {
+    await window.openIoModal();
+    return document.getElementById('io-export-str').value;
+  });
+  expect(code).toMatch(/^bxb1:/);
+  await page.route('**/share?k=*', (route) =>
+    route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ hash: code }) }));
+
+  // 按钮顺序: read url 在最左
+  expect(await page.locator('#io-import-str ~ .io-btns .io-btn').allTextContents())
+    .toEqual(['read url', 'read code', 'file']);
+
+  // 三种写法都该被接受: 整条 URL / 只有片段 / 裸 key
+  for (const v of [
+    'https://he1lscythe.github.io/bxb_calculator/pages/hensei.html#s:HvICtlZCCb',
+    '#s:HvICtlZCCb',
+    's:HvICtlZCCb',
+  ]) {
+    await page.evaluate(() => window.setScoreMainSlot(2));   // 先破坏状态
+    await page.evaluate(() => window.openIoModal());
+    await page.fill('#io-import-str', v);
+    await page.click('.io-btn:has-text("read url")');
+    await page.waitForTimeout(400);
+    expect(await page.locator('#io-msg').textContent(), `输入 ${v}`).toContain('loaded');
+    expect(await page.evaluate(() => window.state.mainSlot), `输入 ${v}`).toBe(1);
+  }
+
+  // 不含 s:/bxb1: 的 URL → 明确报错,不静默
+  await page.evaluate(() => window.openIoModal());
+  await page.fill('#io-import-str', 'https://example.com/x.html#foo');
+  await page.click('.io-btn:has-text("read url")');
+  await page.waitForTimeout(300);
+  expect(await page.locator('#io-msg').textContent()).toContain('load failed');
+
+  expect(errs, errs.join('\n')).toHaveLength(0);
+});
+
+// 页面加载时的 #hash 自动载入 —— 和 read url 共用 _configFromFragment,重构后要守住
+test('import read url: 直接带 #s: 打开页面 → 自动载入 + 清掉 hash', async ({ page }) => {
+  await waitHenseiReady(page);
+  await setupSlot0WithChara(page, 100101);
+  await page.evaluate(() => window.setScoreMainSlot(1));
+  const code = await page.evaluate(async () => {
+    await window.openIoModal();
+    return document.getElementById('io-export-str').value;
+  });
+
+  await page.route('**/share?k=*', (route) =>
+    route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ hash: code }) }));
+  // goto 到「只有 fragment 不同」的同一 URL 是**同文档导航**、页面不会重新初始化 →
+  // autoload 不会跑,断言会变成拿前面自己设的状态、假通过。必须 reload 强制真实重载。
+  await page.goto('/pages/hensei.html#s:HvICtlZCCb');
+  await page.reload();
+  await page.waitForFunction(() => {
+    const l = document.getElementById('loading');
+    return l && getComputedStyle(l).display === 'none';
+  }, { timeout: 30000 });
+  await page.waitForTimeout(1200);
+
+  expect(await page.evaluate(() => window.state.team[0].chara)).toBe(100101);
+  expect(await page.evaluate(() => window.state.mainSlot)).toBe(1);
+  expect(await page.evaluate(() => location.hash)).toBe('');   // 用完清掉、避免 reload 重复应用
+});
