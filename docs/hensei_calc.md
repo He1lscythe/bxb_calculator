@@ -125,6 +125,10 @@ v = ceil(v)                                           出口 ceil (caller get_Da
   1/2/3号位 bg → 1/2/3号位 魂(soul)
 ```
 
+> 上面「他 slot 的 costume」这一段现在基本空转 —— masou effect 缺省 `range='Single'`
+> (2026-08-28,见下节),只有 3 件全队魔王装的 11 条 effect 会真的从别的 slot 进来。
+> `orderServerFold` 的位次保留不变、以防将来又发现别的全队 costume。
+
 > ⚠ caveat: server 数组的精确 block 顺序文档本身标注「推测、未验证」(weapon_skills_order.md);hensei 是从多 wiki 源自己收集的、按此顺序**尽量贴近**、非逐位精确。HP 的 slot 顺序效应也是实测推算。
 > 实现: `serverFoldHP()` (HP)、`_computeImpl` hits loop (HitCount) 都调 `orderServerFold(list, targetSlotIdx)`。trace 里 HP 走独立 stage `s_hp_fold`。
 
@@ -255,6 +259,41 @@ clamp(repel_rate, 0, 100)
 - soul: 收集时 `value × soulMultiplier(rarity, soul_lv)` 一刀切 (所有 math_type、Multiply 直乘是游戏行为、2026-06-10 用户实测确认 ×1.45 → lv50 ×2.175)、
   HitCount `values=[a,b,c]` 数组每段同样 × soulMultiplier (`stageMult` 路径)
 - crystal: 收集时 `crystalEffectiveValue(cr, cfg)` (lv/weight/purity 三参公式)
+- masou: 收集时补 `range: eff.range || 'Single'` — 见下节
+
+### masou (costume) 的 range 缺省 (2026-08-28 修正)
+
+`masou.json` 的 effect **没有 `range` 字段**(1200 条 effect 全无、master 就不给)。而
+`_effectApplies` 只拦 `range === 'Single'`,`undefined` 一路放行 —— 所以不兜底时**每条
+costume effect 都是全队生效**。魔装是穿在单把魔剣上的外观装备,`effect_text` 绝大多数是
+「攻撃力5%UP」这种不带范围词的裸描述(1200 条里 1183 条如此)= 自身,所以缺省反了。
+
+修法两半:
+
+1. `collectEffects` 的 masou 分支补 `range: eff.range || 'Single'`(跟 crystal 的
+   `cr._master.range || 'Single'` 同一套兜底)。
+2. [build_masou_aux.py](../scripts/master_to_business/build_masou_aux.py) 扫 `effect_text`,
+   含「味方全体」→ 往 `masou_revise.json` 注入 `effects[].range = 'All'`。命中 11 条、
+   集中在 3 件魔王装:
+
+   | masou id | 魔剣 | 全队 effect |
+   |---|---|---|
+   | 1494704 | 1494 | 攻撃力×1.75 / 被弾率×0.5 / 麻痺完全回避 |
+   | 1502704 | 1502 | 攻撃力×1.75 / BDコスト-1 / ダメ上限+10億 / 麻痺完全回避 |
+   | 1570704 | 1570 | 攻撃力×1.75 / BDコスト-1 / HP大回復 / 即死完全回避 |
+
+   (另有 6 条明写「自身の」的 `Vitality_*`/`RemHP_*`,缺省已是 Single、不写 revise。
+   「全属性」「パーティ」「チーム」在 masou 文本里 0 命中,不入规则。)
+
+⚠ masou effects 无 id → `deepApply` 对它是**整组替换**([revise-core.js](../shared/revise-core.js) `deepApply`)。
+所以脚本写回时以**已有 revise 的 effects 为基**(那里面有人工编辑过的 `value_scaling`)、
+按 index 对应前先校验 parameter 序列跟 master 一致,不一致则跳过并告警。脚本幂等、
+文本不再命中时会自动清掉过期的 `range`。
+
+UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的魔剣没有自己的魔装、
+不该白占一行空 label,但队友装上全队魔王装时本槽会收到 masou effect、这时要把容器开出来。
+`renderSlot` 的条件是 `chara && (charaMasouList.length || masouPanel)`,
+`refreshEffPanels` 用 `_needMasouSection` 比对、不一致时重建该槽。
 
 ### 装备面板的显示 (`col{i}c` 魔剣 / `col{i}s` ソウル / `col{i}b` 心象結晶 / `col{i}m` 魔装 / `col{i}r` 記憶結晶)
 
@@ -349,7 +388,7 @@ clamp(repel_rate, 0, 100)
 |---|---|---|---|
 | `omoide` | s1 (Add) | Addition | tr.omoide_picks 选中的 memory slot |
 | `omoide_mul` | s4a (Mul) | Multiply | omoide source 的 Mul effect |
-| `masou` (静的) | s2a (Add) → s2b (Mul) | Add or Mul | 装备 masou.effects、parameter 无 HP-curve 前缀 (server-fold 可) |
+| `masou` (静的) | s2a (Add) → s2b (Mul) | Add or Mul | 装备 masou.effects、parameter 无 HP-curve 前缀 (server-fold 可)。缺省只作用自身 —— 见下节 |
 | `masou` (動的) | s4a / s5a | Mul / Add | parameter 含 Vitality_/RemHP_/Break_/FellDown_ 前缀 — client 动态值、不能 server-fold (2026-06-10 用户决策) |
 | **LP tier** | **s3 (× Attack)** | Multiply | `opts.lpMult` 入口决定 (computeStats HpCheck / computeStatsBlaze LpCheck) |
 | `chara_skill` | s4a (Mul) / s5a (Add) | Mul / Add | chara state.weapon_skills |
