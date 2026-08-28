@@ -1105,3 +1105,63 @@ test('装備パネル: 表示行 (発動中) の数 == 計算が使う装備 eff
   expect(calc).toBeGreaterThan(5);
   expect(panel).toBe(calc);
 });
+
+// ============================================================
+// 魔装 (costume) 的 range
+// ============================================================
+// masou master effect 没有 range 字段 (masou.json 1200 条全无) → stats-calc 兜底成 'Single'。
+// 真正全队的 11 条 (effect_text 含「味方全体」) 由 build_masou_aux.py 注入 range:'All' 进
+// masou_revise.json。所以本测试依赖 revise 数据 (CI 从 data-staging fetch;本地缺 revise 会红)。
+test('魔装 range: 普通魔装は自身のみ / 全队魔王装 (味方全体) は他槽にも効く', async ({ page }) => {
+  await waitHenseiReady(page);
+
+  // base_id → variant id (chara wiki shape 的 id 是 6 位 variant)
+  const variantOf = (base) =>
+    page.evaluate((b) => window.state.allCharas.find((x) => x._master?.id === b)?.id ?? null, base);
+  const readSlot0 = () =>
+    page.evaluate(() => ({
+      atk: window.__lastStats[0].stats['攻撃力'],
+      dl: window.__lastStats[0].damageLimit,
+    }));
+  // slot2 に costume を着せて slot0 への影響を測る
+  const wear = async (masouId) => {
+    await page.evaluate((id) => window.setMasou(2, id), masouId);
+    await page.waitForTimeout(300);
+    return readSlot0();
+  };
+  const crossRows = () =>
+    page.evaluate(() => {
+      const el = document.getElementById('col0m');
+      if (!el) return null;
+      return [...el.querySelectorAll('.skill-item.eff-cross')].map(
+        (r) => r.querySelector('.tag-val')?.textContent,
+      );
+    });
+
+  // slot0 = 169701 (base 1697、自分の魔装なし → 魔装 section は動的に生える側)
+  // slot2 = 1001 レヴァンテイン=ヘル (1001011 魔装《晴着》= 攻撃力13%UP、range なし)
+  await setupSlotWithChara(page, 0, 169701);
+  await setupSlotWithChara(page, 2, await variantOf(1001));
+  const plainBefore = await readSlot0();
+  const plainAfter = await wear(1001011);
+  expect(plainAfter.atk).toBe(plainBefore.atk);          // 自身のみ → 他槽は不変
+  expect(await crossRows()).toBeNull();                  // 魔装 section すら生えない
+
+  // slot2 を 1502 神菓王ザッハトルテ に替えて 1502704 魔王装 (味方全体 4 効果) を着せる
+  await setupSlotWithChara(page, 2, await variantOf(1502));
+  const teamBefore = await readSlot0();
+  const teamAfter = await wear(1502704);
+  expect(teamAfter.atk).toBeGreaterThan(teamBefore.atk);                 // 味方全体の攻撃力1.75倍
+  expect(teamAfter.dl).toBe(teamBefore.dl + 1000000000);                 // ダメージ上限+10億
+  // slot0 は自分の魔装を持たないが、他槽の全队魔王装を受けるので section が生えて 4 行出る
+  const rows = await crossRows();
+  expect(rows).not.toBeNull();
+  expect(rows.length).toBe(4);
+  expect(rows).toContain('+10億');
+
+  // 外すと section も消える (存在性が内容に追従)
+  await page.evaluate(() => window.setMasou(2, null));
+  await page.waitForTimeout(300);
+  expect(await crossRows()).toBeNull();
+  expect((await readSlot0()).atk).toBe(teamBefore.atk);
+});
