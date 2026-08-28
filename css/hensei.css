@@ -129,6 +129,12 @@ body{height:auto;overflow-y:auto;}
 .eftags{display:flex;flex-wrap:wrap;gap:5px;align-items:center;}
 /* bunrui-tag / scope-tag / cond-tag は shared.css と統一（characters/soul と同じ視覚）。 */
 .tag-val{font-size:13px;font-weight:700;color:#ffe066;padding:0 4px;}
+/* 从别的号位飞过来的技能（range=All 命中本 slot）— 左边线改橙色、跟自己的区分开 */
+.skill-item.eff-cross{border-left-color:rgba(255,168,72,.75);}
+.src-slot-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 5px;margin-right:5px;border-radius:4px;background:rgba(255,168,72,.18);color:#ffa848;border:1px solid rgba(255,168,72,.4);white-space:nowrap;vertical-align:middle;}
+/* 发动条件没满足的行（破損 / 倒れ / 敵BK / 同編成 等）— 不删掉、只调淡 */
+.skill-item.eff-off,.cr-eff-row.eff-off{opacity:.4;}
+.skill-item.eff-off .tag-val,.cr-eff-row.eff-off .tag-val{color:var(--text2);text-decoration:line-through;}
 
 /* collapsible detail panels */
 .detail-wrap{display:none;}
@@ -180,6 +186,9 @@ body{height:auto;overflow-y:auto;}
 .cr-eff-row{display:flex;align-items:flex-start;gap:6px;padding:4px 0;border-bottom:1px solid rgba(46,50,80,.6);}
 .cr-eff-row:last-child{border-bottom:none;}
 .cr-eff-name{font-size:10px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px;flex-shrink:0;}
+/* 别的号位的結晶（range=All）那行要塞「N号位」徽章、名字栏放宽一点 */
+.cr-eff-row.eff-cross{border-left:2px solid rgba(255,168,72,.75);padding-left:5px;}
+.cr-eff-row.eff-cross .cr-eff-name{max-width:140px;}
 .cr-eff-tags{display:flex;flex-wrap:wrap;gap:3px;flex:1;}
 
 /* ===== ENTITY MODAL (z-index 2000) ===== */
