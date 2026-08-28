@@ -245,7 +245,7 @@ clamp(repel_rate, 0, 100)
 ## 实现
 
 实际实现在 [shared/stats-calc.js](../shared/stats-calc.js):
-- `collectEffects(team, targetSlotIdx, ctx)` — 3 slot 全 source 收集进 effects[] 池、附 `_source` / `_src_slot` / `_src_name` (trace 显示)、
+- `collectEffects(team, targetSlotIdx, ctx, opts)` — 3 slot 全 source 收集进 effects[] 池、附 `_source` / `_origin` (装备出处、见下节) / `_src_slot` / `_src_name` (trace 显示)、
   按 `range` + element/weapon/chara 限定决定命中 (`_effectApplies`):
   - **`element_condition` / `weapon_type_condition`**(souls「X属性装備で…」)= 判**装备者(source/equipper)**自身属性·武器、不命中整条不激活 (range=All 时看装备者而非接收方、2026-06-19 扫描确认: souls 全用 *_condition、weapons 全用 target_*)。
   - **`target_element_id` / `weapon_type_id`**(weapons/crystals「X属性の味方…」)= 判**接收方(target)**过滤 (+ `extra_element_id` 扩展接收)。
@@ -255,6 +255,27 @@ clamp(repel_rate, 0, 100)
 - soul: 收集时 `value × soulMultiplier(rarity, soul_lv)` 一刀切 (所有 math_type、Multiply 直乘是游戏行为、2026-06-10 用户实测确认 ×1.45 → lv50 ×2.175)、
   HitCount `values=[a,b,c]` 数组每段同样 × soulMultiplier (`stageMult` 路径)
 - crystal: 收集时 `crystalEffectiveValue(cr, cfg)` (lv/weight/purity 三参公式)
+
+### 装备面板的显示 (`col{i}c` 魔剣 / `col{i}s` ソウル / `col{i}b` 心象結晶 / `col{i}m` 魔装 / `col{i}r` 記憶結晶)
+
+各装备 section 下 `▶` 展开的那块 (2026-08-28 起) 不再直读静态 master 值、而是**复用同一条 `collectEffects`**、
+走 `{ forDisplay: true }` 单独收一遍 (`hensei.html` `_panelEffects`)。计算路径 (`computeStats`) 走默认 opts、不受影响。
+
+- **倍率是解算后的值**:熟度 (`value_scaling × jukudo`) / ソウル Lv (`soulMultiplier`) / 結晶 lv·重量·純度
+  (`crystalEffectiveValue`) 已折进 `value`;HP 曲线 (`Vitality_`/`RemHP_`/`Break_`) 和「Xと同編成で」这类
+  条件折进 `condition_factor`。面板按跟 `applyStaged` 一致的式子展开 (`Mul → 1+(v-1)×cf`、`Add → v×cf`),
+  所以**面板上的数字就是计算真正用的数字**(测试 `装備パネル: 表示行 (発動中) の数 == 计算が使う装備 effect の数` 锁死)。
+- **跨 slot 技能落到目标 slot**:`collectEffects` 本来就按 `range` + 属性/武器/魔剣限定 判过命中,
+  所以 `range=All` 的技能只要打到本 slot、就出现在本 slot 对应面板里 (橙色左边线 + 「N号位」徽章 + 効果文)。
+  例:1680「長剣の魔剣のヒット数を2.5倍にする」在同队有長剣时、会出现在那个長剣的 `魔剣` 面板。
+- **未发动的行不消失**:`forDisplay` 下 `condition_factor === 0` 的 effect 打 `_inactive` 保留、
+  用取消线 + 条件 tag 显示「发动了会是这个值」(否则条件一变整行凭空消失、看不出魔剣有这技能)。
+  `Rise_AttackRate` 放大器的 meta-pass 会跳过 `_inactive`、保证面板跟计算同步。
+- **`_origin`**:面板归类用的装备出处。等于 `_source`,但 `omoide_mul` 折回 `omoide`、
+  且在 `Enemy_Break*` 把 `_source` 覆写成 `enemy_break` **之前**取值 —— 否则所有 `Enemy_Break*`
+  技能 (chara skill 和結晶都有) 会从自己的装备面板里消失。
+- 任一 slot 变动都要刷 3 个 slot 的面板 (`refreshEffPanels`,挂在 `refreshAllStats` 里)。它只换
+  `.detail-wrap` 的 innerHTML + `▶` 的显隐、不重建整个 slot,所以已展开的面板不会被合回去。
 
 ## その他 panel 値 (4 stat 以外)
 
