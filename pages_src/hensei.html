@@ -600,10 +600,24 @@
       const _panelToggle = (i, kind, html) =>
         `<button class="detail-toggle" id="tog${i}${kind}" onclick="toggleDetail('col${i}${kind}',this)"${html ? '' : ' style="display:none"'}>▶</button>`;
       const _panelWrap = (i, kind, html) => `<div class="detail-wrap" id="col${i}${kind}">${html}</div>`;
+      // 魔装 section 该不该存在 (见 renderSlot 内同名注释): 本魔剣有魔装可选、或队友的全队魔王装
+      // 打到本槽。跟 renderSlot 的条件必须一致、否则 refreshEffPanels 会反复重建。
+      const _needMasouSection = (i, effs) => {
+        const ch = allCharas.find((x) => x.id === team[i]?.chara);
+        if (!ch) return false;
+        if ((masouByChara[ch._master?.id ?? ch.id] || []).length) return true;
+        return _panelRows(effs, i, 'm').length > 0;
+      };
       // 任一 slot 的装备/练度变了 → 3 个 slot 的面板都要重算 (range=All 的技能会跨 slot 生效)
       export const refreshEffPanels = () => {
         for (let i = 0; i < 3; i++) {
           const effs = _panelEffects(i);
+          // 魔装 section 的有无跟内容联动 → 不一致时重建整槽 (renderSlot 会自己算好 5 个面板)。
+          // 只在队友装上/卸下全队魔王装那一瞬发生;renderSlot 不回调本函数、无递归。
+          if (_needMasouSection(i, effs) !== !!document.getElementById(`col${i}m`)) {
+            renderSlot(i);
+            continue;
+          }
           for (const kind of ['c', 's', 'b', 'm', 'r']) {
             const wrap = document.getElementById(`col${i}${kind}`);
             if (!wrap) continue;
@@ -3439,17 +3453,24 @@
         const masouIcon = masou
           ? `<img class="equip-icon" loading="lazy" src="../icons/masou/${masou.id}.png" onerror="this.style.visibility='hidden'" alt="">`
           : `<div class="equip-icon-empty"></div>`;
-        const masouSection =
-          chara && charaMasouList.length
-            ? `
-      <div class="equip-section">
-        <div class="equip-label">魔装${_panelToggle(i, 'm', masouPanel)}</div>
+        // 魔装 section 是唯一「存在性动态」的一块 (ソウル/心象結晶/記憶結晶 只要有魔剣就渲染):
+        // 216/657 的魔剣压根没有自己的魔装、不该白占一行空 label。但队友装上全队魔王装
+        // (味方全体、range=All) 时本槽会收到 masou effect、这时就得把容器开出来装。
+        // 判定跟 _needMasouSection 共用一套、refreshEffPanels 靠它决定要不要重建本槽。
+        const masouPicker = charaMasouList.length
+          ? `
         <div class="equip-row">${masouIcon}<div class="picker-wrap">
           <div class="picker-row">
             <button class="picker-btn ${masou ? 'has-val' : 'empty'}" onclick="openEM(${i},'masou')">${masou ? escHtml(masou.name) : 'なし'}</button>
             ${masou ? `<button class="em-detail-btn" onclick="openDetailModal(${masou.id},'masou',false)">詳細</button>` : ''}
           </div>
-        </div></div>
+        </div></div>`
+          : '';
+        const masouSection =
+          chara && (charaMasouList.length || masouPanel)
+            ? `
+      <div class="equip-section">
+        <div class="equip-label">魔装${_panelToggle(i, 'm', masouPanel)}</div>${masouPicker}
         ${_panelWrap(i, 'm', masouPanel)}
       </div>`
             : '';

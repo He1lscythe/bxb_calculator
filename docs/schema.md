@@ -34,6 +34,7 @@ server-fold 字段 (非 master 直给、走 `*_revise.json`):
 - crystal: `max_value` / `M_L_max` / `M_W_max` / `M_P_max` / `min_weight` / `max_weight` / `min_purity` / `max_purity` / `weight_step` / `purity_step` (slider 刻度)、`range` (`'All'` 缺省 Single、build_crystal_aux 扫 desc 同装備セット 注入)、`weapon_base_id` (int、build_crystal_aux 扫 name 純真/秘録 + 反查 characters.json 注入、含 41 项 OVERRIDE dict 处理 nickname/缩写/substring 多候选;chara≡魔剣 base id、跟 soul 统一字段名;stats-calc 按装备者判)
 - bg: `weapon_base_id` (int、build_bg_aux 扫 desc [Xのみ] + element_id/weapon_type_id=0 注入、共用 OVERRIDE dict)
 - chara skill / masou skill: `value_scaling` (每熟度增量)
+- masou: `effects[].range` (`'All'` 缺省 Single、build_masou_aux 扫 effect_text 味方全体 注入 —— masou master effect **没有** range 字段、1200 条全无,不兜底就会被 stats-calc 当全队;真全队的只有 11 条、集中在 3 件魔王装 1494/1502/1570)。⚠ masou effects 无 id → revise 是**整组替换**,patch 必须写全整个 effects 数组
 - chara: `tags` (14 种特性 enum)
 
 ### 1.3 id 体系

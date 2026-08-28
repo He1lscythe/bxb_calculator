@@ -5,7 +5,7 @@ name: update-database
 #
 # 提交去向 (3 branch):
 #   main           : data/*.json (6 表) + _npc_motions.json + icons/ (新实体的图)  → 触发 sync→data-staging + Pages
-#   data-staging   : crystal_revise.json + bg_revise.json (带字段级安全检查)
+#   data-staging   : crystal_revise.json + bg_revise.json + masou_revise.json (带字段级安全检查)
 #   data/master-tables : master_data/<JST日期>/ + asset_version/<ver>/ 快照 + changelog + 索引
 #                        + scenario/scenario-<ver>.unity3d (utage3_scenario_version 变化时下载 .mu3→Rijndael-256 解密→UnityFS 归档)
 #
@@ -56,7 +56,7 @@ jobs:
         run: |
           git fetch origin data-staging
           git checkout origin/data-staging -- \
-            data/crystal_revise.json data/bg_revise.json || \
+            data/crystal_revise.json data/bg_revise.json data/masou_revise.json || \
             echo "WARN: data-staging revise 取失败、用空基准"
 
       - uses: actions/setup-python@v7
@@ -236,9 +236,9 @@ jobs:
           git add data/characters.json data/souls.json data/crystals.json \
                   data/bladegraphs.json data/masou.json data/senzai_table.json \
                   data/_npc_motions.json icons/ 2>/dev/null || true
-          # crystal/bg_revise 被上面「Fetch 现版 revise」步骤的 git checkout 顺带 staged 进 index 了;
+          # crystal/bg/masou_revise 被上面「Fetch 现版 revise」步骤的 git checkout 顺带 staged 进 index 了;
           # 它们是 data-staging-only (main 不跟踪 revise)、从 main 提交里 reset 掉、避免被裸 commit 扫进来
-          git reset -q HEAD data/crystal_revise.json data/bg_revise.json 2>/dev/null || true
+          git reset -q HEAD data/crystal_revise.json data/bg_revise.json data/masou_revise.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "data/icons 无变更"; exit 0
           fi
@@ -251,8 +251,8 @@ jobs:
         if: steps.sum.outputs.revise_safe == 'true' && steps.sum.outputs.revise_changed != '0'
         working-directory: _ds
         run: |
-          cp ../data/crystal_revise.json ../data/bg_revise.json data/
-          git add data/crystal_revise.json data/bg_revise.json
+          cp ../data/crystal_revise.json ../data/bg_revise.json ../data/masou_revise.json data/
+          git add data/crystal_revise.json data/bg_revise.json data/masou_revise.json
           if git diff --cached --quiet; then echo "revise 无变更"; exit 0; fi
           git commit -m "data(revise): 入手方法/range refresh $(date -u +%FT%TZ)"
           git pull --rebase origin data-staging || true

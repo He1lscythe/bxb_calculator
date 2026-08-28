@@ -45,7 +45,7 @@ import sync_scenario  # noqa: E402
 
 M2B = PROJECT_ROOT / "scripts" / "master_to_business"
 DATA = PROJECT_ROOT / "data"
-REVISE_FILES = ("crystal_revise.json", "bg_revise.json")  # build/aux 会改的
+REVISE_FILES = ("crystal_revise.json", "bg_revise.json", "masou_revise.json")  # build/aux 会改的
 
 
 def _run(script: str, *args, optional=False):
@@ -86,6 +86,9 @@ def module_b(revise_base: dict) -> dict:
     _run("fetch_wiki_acquisition.py", optional=True)  # altema HTTP、失败不致命
     _run("build_crystal_aux.py", optional=True)
     _run("build_bg_aux.py", optional=True)
+    # masou effects[].range (味方全体 → All)。注意 revise_safety 只查顶层字段,
+    # 看不见 effects 内部 —— 该脚本自己以已有 revise.effects 为基 + 校验 parameter 序列。
+    _run("build_masou_aux.py", optional=True)
 
     safe = True
     changed = []

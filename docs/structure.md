@@ -81,9 +81,12 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [build_senzai.py](../scripts/master_to_business/build_senzai.py) | `data/_memory_slot_skills.json` | `data/senzai_table.json` |
 | [build_souls.py](../scripts/master_to_business/build_souls.py) | `jobs.json` | `data/souls.json` |
 | [build_crystals.py](../scripts/master_to_business/build_crystals.py) | `materials.json` + `_wiki_aux.json` | `data/crystals.json` + `data/crystal_revise.json` + audit |
+| [build_crystal_aux.py](../scripts/master_to_business/build_crystal_aux.py) | `data/crystals.json` + `data/characters.json` | `data/crystal_revise.json` (注入 `range` / `weapon_base_id`) |
 | [build_bladegraphs.py](../scripts/master_to_business/build_bladegraphs.py) | `pictures.json` | `data/bladegraphs.json` |
+| [build_bg_aux.py](../scripts/master_to_business/build_bg_aux.py) | `data/bladegraphs.json` + `data/characters.json` | `data/bg_revise.json` (注入 `weapon_base_id`) |
 | [build_characters.py](../scripts/master_to_business/build_characters.py) | `weapons.json` + `weapon_innate_skills.json` + `_wiki_aux.json` | `data/characters.json` |
 | [build_masou.py](../scripts/master_to_business/build_masou.py) | `weapon_costumes.json` + `_wiki_aux.json` | `data/masou.json` |
+| [build_masou_aux.py](../scripts/master_to_business/build_masou_aux.py) | `data/masou.json` | `data/masou_revise.json` (注入 `effects[].range`) |
 | [build_omoide.py](../scripts/master_to_business/build_omoide.py) | `unpacking/draft/out/memory_slot/summary/*.json` (Frida 抓) | `data/omoide/{base_id}.json` |
 | [build_all.py](../scripts/master_to_business/build_all.py) | 上面全部 | 跑全套 + 错误报告 |
 
