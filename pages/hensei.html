@@ -222,7 +222,7 @@
       import { SOUL_SPEC } from '../shared/soul-spec.js';
       import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
       import { BG_SPEC } from '../shared/bg-spec.js';
-      import { PARAMETER_CLASS_LABEL, PARAMETER_CLASS_SHORT, COND_TRIGGER_LABEL, SCOPE_LABEL, classifyParameter } from '../shared/parameter-class.js';
+      import { PARAMETER_CLASS_LABEL, PARAMETER_CLASS_SHORT, COND_TRIGGER_LABEL, SCOPE_LABEL, classifyParameter, conditionTrigger } from '../shared/parameter-class.js';
       // hensei badge helper: _parameter(s) → PARAMETER_CLASS_SHORT
       const _efBadges = (ef) => {
         const paramList = Array.isArray(ef._parameters)
@@ -237,7 +237,6 @@
         escHtml,
         fmtLarge,
         fmtBairitu,
-        fmtHitStages,
         fmtAff,
         hideLoading,
         min,
@@ -254,11 +253,13 @@
       import { adaptMasouList } from '../shared/masou-adapter.js';
       import { adaptBgList } from '../shared/bg-adapter.js';
       // ===== stats-calc (4-stage) =====
-      // 只 import 本页真用到的;stat 计算全走 computeStats 一个入口 (baseStats /
-      // collectEffects / applyStaged / conditionFactor / repelRate / _STAT_KEYS 都是它内部的环节、
-      // 本页不直接调 —— 曾经 import 过、后来改成走 computeStats、import 忘了摘)
+      // stat 计算全走 computeStats 一个入口 (baseStats / applyStaged / conditionFactor / repelRate
+      // 都是它内部的环节、本页不直接调)。
+      // collectEffects 是例外: 装备面板要显示**解算后**的倍率、且要知道他 slot 的技能打不打到本 slot,
+      // 走 { forDisplay: true } 单独收一遍 (跟计算路径互不影响、见 _panelEffects)。
       import {
         computeStats,
+        collectEffects,
         baseParameter,
         mkTr,
         AWAKENING_MAX as AWAKENING_MAX_TBL,
@@ -286,7 +287,6 @@
       const _parseScaling = () => 0;
       // addition 倍率显示: 负值不再前缀 '+' (避免 '+-x');非负才加 '+'。乘算/终乘符号照旧。
       const _addP = (v) => (+v < 0 ? '' : '+');
-      const _crystalEffectiveBairitu = (cr, cfg) => crystalEffectiveValue(cr, cfg);
       // popover 实时倍率串: crystalEffectiveValue (随 lv/weight/purity 联动)、round 到 3 位小数 + calc_type 前缀
       const _crBairituStr = (cr, cfg) => {
         const v = Math.round(crystalEffectiveValue(cr, cfg) * 1000) / 1000;
@@ -519,35 +519,6 @@
         return n;
       };
 
-      export const fmtVal = (ef) => {
-        const bunrui = ef.bunrui || [];
-        const isHitOnly = bunrui.length === 1 && bunrui[0] === 7;
-        if (isHitOnly) return fmtHitStages(ef);
-        let v = '';
-        if (ef.bairitu != null && ef.bairitu !== 0) {
-          const sc = ef.bairitu_scaling;
-          // ct: 0=×, 1=+, 2=+(終), 3=×(終)
-          const ct = ef.calc_type ?? 0;
-          const pfx = ct === 1 ? _addP(ef.bairitu) : ct === 2 ? (ef.bairitu < 0 ? '(終)' : '+(終)') : ct === 3 ? '×(終)' : 'x';
-          const isAddCt = ct === 1 || ct === 2;
-          // inner: 加算は単値、乗算は init〜max 範囲対応
-          let inner;
-          if (!isAddCt) {
-            const lo = ef.bairitu_init,
-              hi = ef.bairitu;
-            inner = lo != null && lo !== hi ? fmtLarge(lo) + '〜' + fmtLarge(hi) : fmtLarge(hi);
-          } else {
-            inner = fmtLarge(ef.bairitu);
-          }
-          // sc あり → 括弧で括って "+(v + sc * 熟度)"。なし → 単に "+v"。
-          v = pfx + (sc ? '(' + inner + ' + ' + sc + ' * 熟度)' : inner);
-        }
-        if (bunrui.includes(7)) {
-          const hitStr = fmtHitStages(ef);
-          if (hitStr) v += (v ? ' / ' : '') + hitStr;
-        }
-        return v;
-      };
       // scope tag のスタイル/略称は utils.js / soul-render.js と統一（自/全/X/X·自/X·全）。
       export const fmtScopeTag = (ef) => {
         const elStr =
@@ -576,82 +547,137 @@
         if (ef.range === 'All') return '<span class="scope-tag scope-all">全</span>';
         return '<span class="scope-tag scope-self">自</span>';
       };
-      export const renderEfRow = (ef) => {
-        const btags = _efBadges(ef);
-        const cond = ef.condition
-          ? `<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition]}</span>`
-          : '';
-        return `<div class="eftags">${btags}<span class="tag-val">${fmtVal(ef)}</span>${fmtScopeTag(ef)}${cond}</div>`;
+
+      // ===== 装备面板 (col{i}c 魔剣 / col{i}s ソウル / col{i}b 心象結晶 / col{i}m 魔装 / col{i}r 記憶結晶) =====
+      // 面板不再直读静态 master 值、改成走 collectEffects(forDisplay) 的**解算后**结果。带来两点:
+      //   1) 倍率随控件实时变 —— 熟度 / ソウル Lv / 結晶 lv·重量·純度 都已折进 value,
+      //      HP 曲线 (Vitality_/RemHP_/Break_) 和「同編成で」这类条件折进 condition_factor;
+      //   2) collectEffects 已按 range / 属性·武器·魔剣限定 判过命中 → **他 slot 的技能只要打到本
+      //      slot 就会出现在本 slot 对应面板里** (带「N号位」徽章)。反之本 slot 打不到的不显示。
+      // _origin → 面板 kind。一个 kind 可收多个 source (魔剣 收 chara_skill + BD、ソウル 收技能 + 相性)。
+      const PANEL_SOURCES = {
+        c: ['chara_skill', 'bd_skill'],
+        s: ['soul', 'soul_affinity'],
+        b: ['bg'],
+        m: ['masou'],
+        r: ['crystal'],
       };
-      // _resolveCharaSkills / _resolveSoulSkills import 自 stats-calc.js。
-      export const renderSkillsPanel = (skills) => {
-        if (!skills?.length) return '';
-        const rows = skills
-          .map((sk) => {
-            const efrows = (sk.effects || [])
-              .filter((ef) => !(ef.bunrui || []).includes(16))
-              .map(renderEfRow)
-              .join('');
-            if (!efrows) return '';
-            return `<div class="skill-item">${efrows}</div>`;
-          })
-          .filter(Boolean)
-          .join('');
-        return rows ? '<div class="skills-panel">' + rows + '</div>' : '';
+      // 倍率显示前 round 到 5 位小数 (跟 stats-calc 的 _round5 同精度、避免面板出现 3.7467599999)
+      const _r5 = (x) => Math.round((Number(x) || 0) * 1e5) / 1e5;
+      // 解算后的显示值。condition_factor 用跟 applyStaged 完全一致的式子折进去:
+      //   Multiply → 1+(v-1)×cf   Addition → v×cf   Repel_Percent → v×cf 作 % 显示
+      //   hit 系 → _stages[] 逐段 (3 段同值则折成一个)
+      const _effValStr = (e) => {
+        // 未发动 (_inactive) 的行按 cf=1 显示「发动了会是这个值」。照 cf=0 出会全变成
+        // ×1 / +0、看不出这是什么技能。无效状态靠取消线 + 条件 tag 表达。
+        const cf = e._inactive ? 1 : (e.condition_factor ?? 1);
+        const one = (v) => (e.math_type === 'Multiply' ? '×' + fmtLarge(_r5(v), 3) : _addP(v) + fmtLarge(v, 3));
+        if (Array.isArray(e._stages)) {
+          const st = e._stages.map((v) => (Number(v) || 0) * cf);
+          if (st[0] === st[1] && st[1] === st[2]) return one(st[0]);
+          return st.map((v, i) => (v ? `${i + 1}撃${one(v)}` : null)).filter(Boolean).join(' ');
+        }
+        if (e.math_type === 'Multiply') return one(1 + (_r5(e.value) - 1) * cf);
+        if (e.math_type === 'Repel_Percent') return fmtLarge(_r5(e.value * cf), 3) + '%';
+        return one(e.value * cf);
       };
-      export const renderBgPanel = (bg) => {
-        if (!bg) return '';
-        return `<div class="skills-panel"><div class="skill-item"><div class="skill-eftxt">${escHtml(bg.effect_text || '')}</div>${(bg.effects || []).map(renderEfRow).join('')}</div></div>`;
+      // tag 行: [分類][解算後倍率][scope][発動条件]
+      const _effTagRow = (e) => {
+        const cls = classifyParameter(e.parameter);
+        const btag = `<span class="bunrui-tag">${PARAMETER_CLASS_SHORT[cls] || cls}</span>`;
+        const raw = e._raw || {};
+        // fmtScopeTag 吃 wiki shape → 从 master 字段搭个壳。souls 用 *_condition (判装备者)、
+        // weapons/crystals 用 target_element_id / weapon_type_id (判接收方) —— 显示上都是「限」。
+        const scope = fmtScopeTag({
+          range: raw.range,
+          element: raw.target_element_id || raw.element_condition || null,
+          weapon: raw.weapon_type_id || raw.weapon_type_condition || null,
+          weapon_base_id: raw.weapon_base_id || null,
+        });
+        const ct = conditionTrigger(e.parameter);
+        const cond = ct ? `<span class="cond-tag cond-${ct}">${COND_TRIGGER_LABEL[ct]}</span>` : '';
+        return `<div class="eftags">${btag}<span class="tag-val">${_effValStr(e)}</span>${scope}${cond}</div>`;
       };
-      export const renderMasouPanel = (m) => {
-        if (!m) return '';
-        // masou.effects 是 master shape ({parameter, math_type, value, value_scaling, effect_text})、
-        // renderEfRow 期待 wiki shape — inline 转换 (masou 无 element/weapon/range 限定、固定自身)
-        const rows = (m.effects || [])
-          .map((e) => {
-            if (!e || e.parameter === 'NoEffect') return '';
-            const ef = {
-              _parameter: e.parameter,
-              bairitu: e.value,
-              bairitu_scaling: e.value_scaling || 0,
-              calc_type: e.math_type === 'Addition' ? 1 : 0,
-              condition: 0,
-            };
-            const txt = e.effect_text ? `<div class="skill-eftxt">${escHtml(e.effect_text)}</div>` : '';
-            return `<div class="skill-item">${txt}${renderEfRow(ef)}</div>`;
-          })
-          .filter(Boolean)
-          .join('');
-        return rows ? `<div class="skills-panel">${rows}</div>` : '';
+      // 心象結晶 / 魔装 面板改造前就是「効果文 + tag」两行、保持原样;魔剣 / ソウル 原来只有 tag
+      // 一行、也保持原样 (条数多、每条加一行効果文会把 slot 拉得太长, 効果文走 title 悬浮)。
+      const PANEL_SHOW_DESC = new Set(['b', 'm']);
+      // 一行 effect。他 slot 来的一律多一行「N号位 + 効果文」—— 这些是新冒出来的行、
+      // 不写清出处根本认不出是哪个技能。
+      const _effRow = (e, si, showDesc) => {
+        const cross = (e._src_slot ?? si) !== si;
+        const desc = e._src_name || '';
+        const cls = 'skill-item' + (e._inactive ? ' eff-off' : '') + (cross ? ' eff-cross' : '');
+        const head =
+          cross || (showDesc && desc)
+            ? `<div class="skill-eftxt">${cross ? `<span class="src-slot-tag">${(e._src_slot ?? 0) + 1}号位</span>` : ''}${escHtml(desc)}</div>`
+            : '';
+        const tip = desc ? ` title="${escHtml(desc)}"` : '';
+        return `<div class="${cls}"${tip}>${head}${_effTagRow(e)}</div>`;
       };
-      // crystal effect 倍率: crystalEffectiveValue(cr, cfg) (cfg.lv 在 initial → max 线性插值)。
-      export const renderCrystalEffList = (cfgs) => {
-        // cfgs: [{id, weight, purity}, ...] or null。weight/purity 衰减後 effective bairitu を表示。
-        const items = (cfgs || [])
-          .filter(Boolean)
-          .map((cfg) => {
-            const cr = allCrystals.find((x) => x.id === cfg.id);
-            return cr ? { cr, cfg } : null;
-          })
-          .filter(Boolean);
-        if (!items.length) return '';
+      // effs: _panelEffects(si) 的解算结果。本 slot 的排前面 (顺序 = master skill 顺序、跟改造前一致)、
+      // 他 slot 的按 slot 升序排后面。
+      const _panelRows = (effs, si, kind) => {
+        const want = PANEL_SOURCES[kind] || [];
+        const list = (effs || []).filter((e) => want.includes(e._origin ?? e._source));
+        const own = list.filter((e) => (e._src_slot ?? si) === si);
+        const other = list
+          .filter((e) => (e._src_slot ?? si) !== si)
+          .sort((a, b) => (a._src_slot ?? 0) - (b._src_slot ?? 0));
+        return [...own, ...other];
+      };
+      export const renderEffPanel = (effs, si, kind) => {
+        const rows = _panelRows(effs, si, kind);
+        if (!rows.length) return '';
+        const showDesc = PANEL_SHOW_DESC.has(kind);
+        return `<div class="skills-panel">${rows.map((e) => _effRow(e, si, showDesc)).join('')}</div>`;
+      };
+      // 記憶結晶 面板单独一套排版: 结晶名短、沿用原来的「名前 | tag」两列紧凑行。
+      export const renderCrystalEffPanel = (effs, si) => {
+        const rows = _panelRows(effs, si, 'r');
+        if (!rows.length) return '';
         return (
           '<div class="cr-eff-list">' +
-          items
-            .map(({ cr, cfg }) => {
-              const tags = (cr.effects || [])
-                .map((ef) => {
-                  const btags = _efBadges(ef);
-                  const eff = _crystalEffectiveBairitu(cr, cfg, ef);
-                  const val = (ef.calc_type === 1 ? _addP(eff) : 'x') + fmtLarge(eff, 3);
-                  return btags + `<span class="tag-val">${val}</span>`;
-                })
-                .join(' ');
-              return `<div class="cr-eff-row"><span class="cr-eff-name" title="${escHtml(cr.name)}">${escHtml(cr.name)}</span><div class="cr-eff-tags">${tags}</div></div>`;
+          rows
+            .map((e) => {
+              const cross = (e._src_slot ?? si) !== si;
+              const badge = cross ? `<span class="src-slot-tag">${(e._src_slot ?? 0) + 1}号位</span>` : '';
+              const cls = 'cr-eff-row' + (e._inactive ? ' eff-off' : '') + (cross ? ' eff-cross' : '');
+              const nm = escHtml(e._src_name || '');
+              return `<div class="${cls}"><span class="cr-eff-name" title="${nm}">${badge}${nm}</span><div class="cr-eff-tags">${_effTagRow(e)}</div></div>`;
             })
             .join('') +
           '</div>'
         );
+      };
+      // 面板用的解算结果。跟计算路径分开走一次 (forDisplay: 保留 factor 0 的未发动条目 + 带 _raw),
+      // computeStats 那条链完全不受影响。
+      const _panelEffects = (i) => {
+        if (!team[i]?.chara) return [];
+        return collectEffects(team, i, _buildStatsCtx(), { forDisplay: true });
+      };
+      // ▶ 折叠按钮 / detail-wrap 容器。**面板空的时候也照样把 DOM 出出来**、只是把按钮藏起来 ——
+      // 因为他 slot 换装备可能让本来空的面板长出内容 (或反过来), refreshEffPanels 只改 innerHTML
+      // 和按钮的 display, 不重建整个 slot, 这样已经展开的面板不会被合回去。
+      const _panelToggle = (i, kind, html) =>
+        `<button class="detail-toggle" id="tog${i}${kind}" onclick="toggleDetail('col${i}${kind}',this)"${html ? '' : ' style="display:none"'}>▶</button>`;
+      const _panelWrap = (i, kind, html) => `<div class="detail-wrap" id="col${i}${kind}">${html}</div>`;
+      // 任一 slot 的装备/练度变了 → 3 个 slot 的面板都要重算 (range=All 的技能会跨 slot 生效)
+      export const refreshEffPanels = () => {
+        for (let i = 0; i < 3; i++) {
+          const effs = _panelEffects(i);
+          for (const kind of ['c', 's', 'b', 'm', 'r']) {
+            const wrap = document.getElementById(`col${i}${kind}`);
+            if (!wrap) continue;
+            const html = kind === 'r' ? renderCrystalEffPanel(effs, i) : renderEffPanel(effs, i, kind);
+            wrap.innerHTML = html;
+            const tog = document.getElementById(`tog${i}${kind}`);
+            if (tog) tog.style.display = html ? '' : 'none';
+            if (!html && wrap.classList.contains('open')) {
+              wrap.classList.remove('open');
+              if (tog) tog.textContent = '▶';
+            }
+          }
+        }
       };
 
       // ===== TEAM =====
@@ -1091,12 +1117,10 @@
           const pMax = m.max_purity ?? 100;
           cfg.purity = Math.max(pMin, Math.min(pMax, n));
         }
-        const col = document.getElementById('col' + si + 'r');
-        if (col) col.innerHTML = renderCrystalEffList(team[si].crystals);
         // popover name 右侧实时倍率跟 slider 联动
         const bEl = document.getElementById('pop-bairitu-' + si + '-' + ci);
         if (bEl && cr) bEl.textContent = _crBairituStr(cr, cfg);
-        refreshAllStats();
+        refreshAllStats();   // 内含 refreshEffPanels: 結晶面板的倍率随 lv/重量/純度 一起动
       };
 
       // ===== 結晶 重量/純度 popover（⚙ 触发，浮在 slot-card 正上方）=====
@@ -1215,14 +1239,17 @@
         cfg.weight = m.max_weight ?? 100;
         cfg.purity = m.max_purity ?? 100;
         cfg.lv = cryLvMax(cr);
-        const col = document.getElementById('col' + si + 'r');
-        if (col) col.innerHTML = renderCrystalEffList(team[si].crystals);
-        refreshAllStats();
+        refreshAllStats();   // 内含 refreshEffPanels: 結晶面板回到 max 对应的倍率
+        // popover name 右侧的实时倍率也要跟着回到 max
+        const bEl = document.getElementById('pop-bairitu-' + si + '-' + ci);
+        if (bEl && cr) bEl.textContent = _crBairituStr(cr, cfg);
         // popover 内 slider/number 也同步重置到各自的 max
+        // (原来这里写的是 `kind === 'lv' ? maxLv : 100`, maxLv 是 openCrystalDimPopover 的局部
+        //  变量、在本函数里未定义 → 点「リセット」必抛 ReferenceError。改读 cfg / master 上限。)
         if (_crystalPopEl) {
           _crystalPopEl.querySelectorAll('.pop-row').forEach((row) => {
             const kind = row.getAttribute('data-kind');
-            const resetVal = kind === 'lv' ? maxLv : 100;
+            const resetVal = kind === 'lv' ? cfg.lv : kind === 'weight' ? cfg.weight : cfg.purity;
             row.querySelectorAll('input').forEach((inp) => {
               inp.value = resetVal;
             });
@@ -2334,6 +2361,7 @@
 
       export const refreshAllStats = () => {
         for (let i = 0; i < 3; i++) refreshStatsPanel(i);
+        refreshEffPanels();   // 装备面板的倍率也随控件实时变 (含跨 slot 生效的技能)
         refreshBdCapMax();
       };
 
@@ -3410,6 +3438,13 @@
         const masou = chara && t.masou ? charaMasouList.find((m) => m.id === t.masou) : null;
         const nCr = crystalSlotCount(chara, i);
         const usedCr = t.crystals.filter(Boolean).length;
+        // 5 个装备面板的内容一次算出 (共用同一份解算结果、避免 5 次 collectEffects)
+        const effs = _panelEffects(i);
+        const charaSkills = renderEffPanel(effs, i, 'c');
+        const soulSkills = renderEffPanel(effs, i, 's');
+        const bgPanel = renderEffPanel(effs, i, 'b');
+        const masouPanel = renderEffPanel(effs, i, 'm');
+        const crEffHtml = renderCrystalEffPanel(effs, i);
         const eclr = chara ? ELEM_COLOR[chara.element] || '#888' : null;
         const enam = chara ? ELEMENT[chara.element] || '' : '';
         const wnam = chara ? WEAPON[chara.weapon] || '' : '';
@@ -3455,21 +3490,13 @@
             <div class="crystal-empty" title="結晶を選択" onclick="openEM(${i},'crystal',${ci})">+</div>
           </div>`;
           }).join('');
-          const crEffHtml = renderCrystalEffList(t.crystals);
           crystalHtml = `<div class="equip-section">
-      <div class="equip-label">記憶結晶 ${usedCr}/${nCr}${crEffHtml ? `<button class="detail-toggle" onclick="toggleDetail('col${i}r',this)">▶</button>` : ''}</div>
+      <div class="equip-label">記憶結晶 ${usedCr}/${nCr}${_panelToggle(i, 'r', crEffHtml)}</div>
       <div class="crystals-grid">${slots}</div>
-      ${crEffHtml ? `<div class="detail-wrap" id="col${i}r">${crEffHtml}</div>` : ''}
+      ${_panelWrap(i, 'r', crEffHtml)}
     </div>`;
         }
 
-        // chara/soul skill panel: 用 wiki adapter 输出 skills (含 effects[] 子数组)
-        // _resolveCharaSkills/_resolveSoulSkills 是 master schema (无 effects[])、renderSkillsPanel 渲染不出来
-        const charaStateData = chara?.states?.[t.tr?.state] || Object.values(chara?.states || {})[0];
-        const charaSkills = chara ? renderSkillsPanel(charaStateData?.skills || []) : '';
-        const soulSkills = soul ? renderSkillsPanel(soul.skills || []) : '';
-        const bgPanel = renderBgPanel(bg);
-        const masouPanel = renderMasouPanel(masou);
         const masouIcon = masou
           ? `<img class="equip-icon" loading="lazy" src="../icons/masou/${masou.id}.png" onerror="this.style.visibility='hidden'" alt="">`
           : `<div class="equip-icon-empty"></div>`;
@@ -3477,21 +3504,21 @@
           chara && charaMasouList.length
             ? `
       <div class="equip-section">
-        <div class="equip-label">魔装${masouPanel ? `<button class="detail-toggle" onclick="toggleDetail('col${i}m',this)">▶</button>` : ''}</div>
+        <div class="equip-label">魔装${_panelToggle(i, 'm', masouPanel)}</div>
         <div class="equip-row">${masouIcon}<div class="picker-wrap">
           <div class="picker-row">
             <button class="picker-btn ${masou ? 'has-val' : 'empty'}" onclick="openEM(${i},'masou')">${masou ? escHtml(masou.name) : 'なし'}</button>
             ${masou ? `<button class="em-detail-btn" onclick="openDetailModal(${masou.id},'masou',false)">詳細</button>` : ''}
           </div>
         </div></div>
-        ${masouPanel ? `<div class="detail-wrap" id="col${i}m">${masouPanel}</div>` : ''}
+        ${_panelWrap(i, 'm', masouPanel)}
       </div>`
             : '';
         document.getElementById('slot-' + i).innerHTML = `
     <div class="slot-header"><span class="slot-num">${i + 1}号位</span>${hdrName}<button class="slot-clear-btn" onclick="clearSlot(${i})">外す</button></div>
     <div class="slot-body">
       <div class="equip-section">
-        <div class="equip-label">魔剣${charaSkills ? `<button class="detail-toggle" onclick="toggleDetail('col${i}c',this)">▶</button>` : ''}</div>
+        <div class="equip-label">魔剣${_panelToggle(i, 'c', charaSkills)}</div>
         <div class="equip-row">${charaIcon}<div class="picker-wrap">
           <div class="picker-row">
             <button class="picker-btn ${chara ? 'has-val' : 'empty'}" onclick="openEM(${i},'chara')">${chara ? escHtml(chara.name) : '魔剣を選択...'}</button>
@@ -3499,13 +3526,13 @@
           </div>
           ${chara ? `<div class="picker-sub"><span class="elem-dot" style="background:${eclr}"></span>${enam} ${wnam}</div>` : ''}
         </div></div>
-        ${charaSkills ? `<div class="detail-wrap" id="col${i}c">${charaSkills}</div>` : ''}
+        ${_panelWrap(i, 'c', charaSkills)}
       </div>
       ${renderTraining(i, chara)}
       ${chara ? renderStatsPanel(i, chara) : ''}
       ${masouSection}
       <div class="equip-section">
-        <div class="equip-label">ソウル${soulSkills ? `<button class="detail-toggle" onclick="toggleDetail('col${i}s',this)">▶</button>` : ''}</div>
+        <div class="equip-label">ソウル${_panelToggle(i, 's', soulSkills)}</div>
         <div class="equip-row">${soulIcon}<div class="picker-wrap">
           <div class="picker-row">
             <button class="picker-btn ${soul ? 'has-val' : 'empty'}" onclick="openEM(${i},'soul')">${soul ? escHtml(soul.name) : 'ソウルを選択...'}</button>
@@ -3513,17 +3540,17 @@
           </div>
         </div></div>
         ${soul ? renderSoulTraining(i, soul) : ''}
-        ${soulSkills ? `<div class="detail-wrap" id="col${i}s">${soulSkills}</div>` : ''}
+        ${_panelWrap(i, 's', soulSkills)}
       </div>
       <div class="equip-section">
-        <div class="equip-label">心象結晶${bgPanel ? `<button class="detail-toggle" onclick="toggleDetail('col${i}b',this)">▶</button>` : ''}</div>
+        <div class="equip-label">心象結晶${_panelToggle(i, 'b', bgPanel)}</div>
         <div class="equip-row">${bgIcon}<div class="picker-wrap">
           <div class="picker-row">
             <button class="picker-btn ${bg ? 'has-val' : 'empty'}" onclick="openEM(${i},'bg')">${bg ? escHtml(bg.name) : 'なし'}</button>
             ${bg ? `<button class="em-detail-btn" onclick="openDetailModal(${bg.id},'bg',false)">詳細</button>` : ''}
           </div>
         </div></div>
-        ${bgPanel ? `<div class="detail-wrap" id="col${i}b">${bgPanel}</div>` : ''}
+        ${_panelWrap(i, 'b', bgPanel)}
       </div>
       ${crystalHtml}
     </div>`;
@@ -3907,13 +3934,10 @@
         elementMatchupMult,
         mkTr,
         crystalSlotCount,
-        fmtVal,
         fmtScopeTag,
-        renderEfRow,
-        renderSkillsPanel,
-        renderBgPanel,
-        renderMasouPanel,
-        renderCrystalEffList,
+        renderEffPanel,
+        renderCrystalEffPanel,
+        refreshEffPanels,
         autoAssignSoul,
         syncCrystals,
         setTeamSize,

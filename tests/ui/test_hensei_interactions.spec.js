@@ -15,10 +15,13 @@ async function waitHenseiReady(page) {
 }
 
 // 装 chara id 到 slot si、等 omoide fetch 完
-async function setupSlot0WithChara(page, id) {
-  await page.evaluate((id) => window.setChara(0, id), id);
+async function setupSlotWithChara(page, si, id) {
+  await page.evaluate(([s, i]) => window.setChara(s, i), [si, id]);
   // 等 omoide fetch 完成 (异步 ~10-100ms) + DOM 二次 render
   await page.waitForTimeout(800);
+}
+async function setupSlot0WithChara(page, id) {
+  await setupSlotWithChara(page, 0, id);
 }
 
 // 读 slot stat — cell idx 跟 hensei.html 的显示顺序一致:
@@ -921,4 +924,184 @@ test('import read url: 直接带 #s: 打开页面 → 自动载入 + 清掉 hash
   expect(await page.evaluate(() => window.state.team[0].chara)).toBe(100101);
   expect(await page.evaluate(() => window.state.mainSlot)).toBe(1);
   expect(await page.evaluate(() => location.hash)).toBe('');   // 用完清掉、避免 reload 重复应用
+});
+
+// ============================================================
+// 装備パネル (col{i}c 魔剣 / col{i}s ソウル / col{i}r 記憶結晶 …)
+// ============================================================
+// 面板不读静态 master 值、而是 collectEffects({forDisplay:true}) 的**解算后**结果:
+//   倍率跟着 熟度 / ソウル Lv / 結晶 lv·重量·純度 / HP 曲线走,
+//   range=All 打到别的 slot 的技能**也会出现在那个 slot 的面板里** (带「N号位」徽章)。
+
+// 读面板里的行: [{ val, srcSlot, cross, off, txt }]
+async function readPanel(page, slot, kind) {
+  return page.evaluate(
+    ([s, k]) => {
+      const el = document.getElementById(`col${s}${k}`);
+      if (!el) return null;
+      return [...el.querySelectorAll('.skill-item, .cr-eff-row')].map((r) => ({
+        val: r.querySelector('.tag-val')?.textContent || '',
+        srcSlot: r.querySelector('.src-slot-tag')?.textContent || '',
+        cross: r.classList.contains('eff-cross'),
+        off: r.classList.contains('eff-off'),
+        txt: (r.querySelector('.skill-eftxt') || r.querySelector('.cr-eff-name'))?.textContent || '',
+      }));
+    },
+    [slot, kind],
+  );
+}
+
+test('装備パネル: 他 slot の range=All 技能が対象 slot に出る (1680 の「長剣のヒット数2.5倍」→ 長剣 slot)', async ({ page }) => {
+  await waitHenseiReady(page);
+  // 1680 按武器种分了 3 条 (大剣 / 長剣 / 拳闘) HitCount ×2.5 的 range=All 技能
+  await setupSlot0WithChara(page, 168001);
+  await setupSlotWithChara(page, 1, 169701);   // 169701 = 長剣
+
+  const own = await readPanel(page, 0, 'c');
+  expect(own.every((r) => !r.cross)).toBe(true);          // 本 slot 自己的不带徽章
+
+  const cross = (await readPanel(page, 1, 'c')).filter((r) => r.cross);
+  expect(cross.length).toBeGreaterThan(0);
+  expect(cross.every((r) => /^\d+号位$/.test(r.srcSlot))).toBe(true);
+  // 長剣 限定的 ×2.5 落到 長剣 那个 slot
+  expect(cross.some((r) => r.val === '×2.5' && r.txt.includes('長剣'))).toBe(true);
+  // 大剣 / 拳闘 限定的不落 (weapon_type_id 跟接收方不一致)
+  expect(cross.some((r) => r.txt.includes('大剣') || r.txt.includes('拳闘'))).toBe(false);
+});
+
+test('装備パネル: 倍率が熟度 / HP / ソウル Lv / 結晶 lv に追従する', async ({ page }) => {
+  await waitHenseiReady(page);
+  await setupSlot0WithChara(page, 169701);   // 带 value_scaling 的技能 (×2.98 + 熟度)
+
+  await setTr(page, 0, 'jukudo', 1);
+  const jk1 = (await readPanel(page, 0, 'c'))[0].val;
+  await setTr(page, 0, 'jukudo', 99);
+  const jk99 = (await readPanel(page, 0, 'c'))[0].val;
+  expect(jk1).not.toBe(jk99);
+  expect(jk99).not.toContain('熟度');       // 是解算值、不是原始的 "+ sc * 熟度" 公式
+
+  // Vitality_ (逆窮鼠) 按 HP% 线性生效
+  const vitVals = async () =>
+    (await page.evaluate(() =>
+      [...document.querySelectorAll('#col0c .skill-item')]
+        .filter((r) => r.querySelector('.cond-tag')?.textContent === '逆窮鼠')
+        .map((r) => r.querySelector('.tag-val')?.textContent),
+    ));
+  await setTr(page, 0, 'hp', 100);
+  const hp100 = await vitVals();
+  await setTr(page, 0, 'hp', 50);
+  const hp50 = await vitVals();
+  expect(hp100.length).toBeGreaterThan(0);
+  expect(hp100).not.toEqual(hp50);
+
+  // ソウル Lv
+  await page.evaluate(() => window.setSoul(0, 1508));
+  await page.waitForTimeout(200);
+  await page.evaluate(() => window.setSoulLv(0, 1));
+  await page.waitForTimeout(100);
+  const sl1 = (await readPanel(page, 0, 's')).map((r) => r.val).join('|');
+  await page.evaluate(() => window.setSoulLv(0, 75));
+  await page.waitForTimeout(100);
+  const sl75 = (await readPanel(page, 0, 's')).map((r) => r.val).join('|');
+  expect(sl1).not.toBe(sl75);
+
+  // 結晶 lv (120101: Attack Mul init=1.01 max=1.22)
+  await page.evaluate(() => window.setCrystal(0, 0, 120101));
+  await page.waitForTimeout(200);
+  await page.evaluate(() => window.setCrystalDim(0, 0, 'lv', 1));
+  await page.waitForTimeout(100);
+  const cr1 = (await readPanel(page, 0, 'r')).map((r) => r.val).join('|');
+  await page.evaluate(() => window.setCrystalDim(0, 0, 'lv', 20));
+  await page.waitForTimeout(100);
+  const cr20 = (await readPanel(page, 0, 'r')).map((r) => r.val).join('|');
+  expect(cr1).not.toBe(cr20);
+});
+
+test('装備パネル: 未発動条件の行は消えずに薄く残る (敵BK OFF → 敵ブレイク状態 行)', async ({ page }) => {
+  await waitHenseiReady(page);
+  await setupSlot0WithChara(page, 107701);   // 带 Enemy_BreakAttack
+  await page.evaluate(() => window.setEnemyBk(false));
+  await page.waitForTimeout(120);
+  const off = await readPanel(page, 0, 'c');
+  const bkRow = off.filter((r) => r.off);
+  expect(bkRow.length).toBeGreaterThan(0);
+  // 加取消线、显示「发动了会是这个值」(不压成 ×1 / +0)
+  expect(bkRow.every((r) => r.val && r.val !== '+0' && r.val !== '×1')).toBe(true);
+
+  await page.evaluate(() => window.setEnemyBk(true));
+  await page.waitForTimeout(120);
+  const on = await readPanel(page, 0, 'c');
+  expect(on.filter((r) => r.off).length).toBeLessThan(bkRow.length);
+});
+
+test('装備パネル: ▶ の表示は中身に追従、他 slot 変更でも展開状態が残る', async ({ page }) => {
+  await waitHenseiReady(page);
+  await setupSlot0WithChara(page, 168001);
+  await setupSlotWithChara(page, 1, 169701);
+
+  const state = await page.evaluate(() => {
+    const o = {};
+    for (let i = 0; i < 3; i++)
+      for (const k of ['c', 's', 'b', 'm', 'r']) {
+        const t = document.getElementById(`tog${i}${k}`);
+        const w = document.getElementById(`col${i}${k}`);
+        if (t && w) o[`${i}${k}`] = { hidden: t.style.display === 'none', empty: !w.innerHTML };
+      }
+    return o;
+  });
+  expect(Object.keys(state).length).toBeGreaterThan(0);
+  for (const [k, s] of Object.entries(state)) expect(s.hidden, k).toBe(s.empty);
+
+  // 展开着去动别的 slot 也不该合上 (refreshEffPanels 只换 innerHTML)
+  await page.evaluate(() => document.getElementById('col1c').classList.add('open'));
+  await setTr(page, 0, 'jukudo', 50);
+  expect(await page.evaluate(() => document.getElementById('col1c').classList.contains('open'))).toBe(true);
+
+  // ★ refreshEffPanels 真正吃劲的地方: slot0 插一个 range=All 的結晶, 没跑 renderSlot 的
+  //   slot1 的 記憶結晶 面板会从 空 → 有内容。▶ 也得在这里放出来、否则根本点不开。
+  //   32010325 ダ=ンベル = Attack Multiply / range=All / 无属性·武器·魔剣 限定
+  const tog1r = async () =>
+    page.evaluate(() => {
+      const t = document.getElementById('tog1r');
+      const w = document.getElementById('col1r');
+      return { hidden: t?.style.display === 'none', empty: !w?.innerHTML };
+    });
+  expect(await tog1r()).toEqual({ hidden: true, empty: true });
+  await page.evaluate(() => window.setCrystal(0, 0, 32010325));
+  await page.waitForTimeout(250);
+  expect(await tog1r()).toEqual({ hidden: false, empty: false });
+  await page.evaluate(() => window.setCrystal(0, 0, null));
+  await page.waitForTimeout(250);
+  expect(await tog1r()).toEqual({ hidden: true, empty: true });
+});
+
+test('装備パネル: 表示行 (発動中) の数 == 計算が使う装備 effect の数', async ({ page }) => {
+  await waitHenseiReady(page);
+  await setupSlot0WithChara(page, 168001);
+  await setupSlotWithChara(page, 1, 169701);
+  await page.evaluate(() => {
+    window.setSoul(0, 1508);
+    window.setCrystal(0, 0, 120101);
+  });
+  await page.waitForTimeout(400);
+
+  const { panel, calc } = await page.evaluate(() => {
+    const KIND = { chara_skill: 'c', bd_skill: 'c', soul: 's', soul_affinity: 's', bg: 'b', masou: 'm', crystal: 'r' };
+    let calc = 0;
+    for (let i = 0; i < 3; i++)
+      for (const e of window.__lastStats?.[i]?.effects || [])
+        if (KIND[e._origin ?? e._source]) calc++;
+    let panel = 0;
+    for (let i = 0; i < 3; i++)
+      for (const k of ['c', 's', 'b', 'm', 'r']) {
+        const el = document.getElementById(`col${i}${k}`);
+        if (!el) continue;
+        panel += [...el.querySelectorAll('.skill-item, .cr-eff-row')].filter(
+          (r) => !r.classList.contains('eff-off'),
+        ).length;
+      }
+    return { panel, calc };
+  });
+  expect(calc).toBeGreaterThan(5);
+  expect(panel).toBe(calc);
 });
