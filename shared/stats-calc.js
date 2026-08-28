@@ -264,7 +264,13 @@ const _RISE_AMP_SOURCES = new Set(['chara_skill', 'crystal', 'bg', 'soul']);
 // ============================================================
 // 收集 effects (3 slot 所有 source、target = targetSlot)
 // ============================================================
-export function collectEffects(team, targetSlotIdx, ctx) {
+// opts.forDisplay — 只给 UI 装备面板用 (hensei renderSlot)、**不要用于计算**:
+//   1) condition_factor === 0 的 effect 不再丢弃、而是打 _inactive=true 保留 (面板要显示
+//      破損 / 倒れ / 敵BK 这类未发动条目、否则条件一变整行就凭空消失);
+//   2) 每条挂 _raw = 原 master effect (面板画 tag 需要 range / 属性·武器·魔剣限定 / description)。
+// 默认 false → 行为跟改造前完全一致 (computeStats 走的就是默认路径)。
+export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
+  const forDisplay = !!opts.forDisplay;
   const collected = [];
   // 反查所有 slot 拿真实对象
   const resolvedTeam = team.map((s) => _resolveSlot(s, ctx) || { tr: null, chara: null, soul: null, bg: null, masou: null, crystals: [] });
@@ -280,6 +286,9 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     if (!raw || raw.parameter === 'NoEffect') return;
     if (!_effectApplies(raw, targetChara, srcChara, srcSlot, targetSlotIdx)) return;
     const param = raw.parameter;
+    // _origin = 装备出处 (决定归到哪个装备面板)。必须在下面 enemy_break 覆写之前定下来。
+    // omoide_mul 只是为了分 stage 派生出来的 source、折回 omoide。
+    const origin = source === 'omoide_mul' ? 'omoide' : source;
     // Enemy_Break_* parameter 强制 _source='enemy_break'、不论原 source、走 stage 5 独立 (unpacking §3.7 step 47/48)
     if (param && param.startsWith('Enemy_Break')) source = 'enemy_break';
     // HP-curve (Vitality/RemHP/Break) factor 用 TARGET 自身 HP (tr=目标 slot 的 tr);
@@ -299,7 +308,8 @@ export function collectEffects(team, targetSlotIdx, ctx) {
         factor = resolvedTeam.some((s) => s?.chara?._master?.id === _ov.wbid) ? 1 : 0;
       }
     }
-    if (factor === 0) return;
+    // 条件不成立 → 计算路径直接丢弃;forDisplay 下改成打 _inactive 保留 (面板显示为未发动)。
+    if (factor === 0 && !forDisplay) return;
     // chara skill: value_scaling × jukudo 熟度成长
     // omoide source 走 omoideEffectiveScaling fallback (value_scaling 空时走实测 fallback、见 docs/hensei_calc.md)
     const srcJk = team[srcSlot]?.tr?.jukudo || 1;
@@ -316,6 +326,7 @@ export function collectEffects(team, targetSlotIdx, ctx) {
     if (raw.math_type === 'Multiply') value = _round5(value);
     const entry = {
       _source: source,
+      _origin: origin,
       _src_slot: srcSlot,
       // trace 显示用: description (效果文) 优先、fallback name
       _src_name: opts.srcName || raw.description || raw.name || null,
@@ -325,6 +336,10 @@ export function collectEffects(team, targetSlotIdx, ctx) {
       value,
       condition_factor: factor,
     };
+    if (forDisplay) {
+      entry._raw = raw;
+      if (factor === 0) entry._inactive = true;
+    }
     // HitCount / AttackCount: 携带逐段 stages 数组 (master values [v0,v1,v2] 或 broadcast value)
     // opts.stageMult: soul 等级倍率 (values 数组路径不走 valueOverride、单独乘;单值路径 value 已 scaled)
     if (entry.base_parameter === 'HitCount' || entry.base_parameter === 'AttackCount' || entry.base_parameter === 'HitCountKeepDamage') {
@@ -346,10 +361,11 @@ export function collectEffects(team, targetSlotIdx, ctx) {
       const A = (tState?.hit_counts || []).reduce((s, x) => s + (x || 0), 0);
       if (A > 0 && A + B > 0) {
         collected.push({
-          _source: source, _src_slot: srcSlot,
+          _source: source, _origin: origin, _src_slot: srcSlot,
           _src_name: `${entry._src_name || 'KeepDamage'} (减攻 A/(A+B))`,
           parameter: 'Attack', base_parameter: 'Attack',
           math_type: 'Multiply', value: _round5(A / (A + B)), condition_factor: factor,
+          ...(forDisplay ? { _raw: raw, ...(factor === 0 ? { _inactive: true } : {}) } : {}),
         });
       }
     }
@@ -573,7 +589,10 @@ export function collectEffects(team, targetSlotIdx, ctx) {
   //     把目标「自身 loadout」(_src_slot===target) 的 Attack 系 (base_parameter==='Attack') 增益 ×V。
   //     source 限 chara_skill/crystal/bg/soul (排除 omoide「潜在Skill除く」/ chara_meta / soul_affinity / enemy_buff)。
   //     目前仅 1508 蒼き悪竜の渇欲 / 1530 もちもち (均 ×2.5)。
-  const _rise = collected.find((e) => e.parameter === 'Rise_AttackRate' && e._src_slot === targetSlotIdx);
+  // 排除 _inactive: forDisplay 保留下来的未发动条目若被当成放大器、面板就会跟计算结果对不上
+  const _rise = collected.find(
+    (e) => e.parameter === 'Rise_AttackRate' && e._src_slot === targetSlotIdx && !e._inactive,
+  );
   if (_rise) {
     const V = _rise.value || 1;
     for (const e of collected) {

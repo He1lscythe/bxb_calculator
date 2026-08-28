@@ -172,6 +172,10 @@ a {
 .cond-2 { background: rgba(255,80,80,.18);  color: #ff6060; border: 1px solid rgba(255,80,80,.35); }
 .cond-3 { background: rgba(160,80,255,.18); color: #b060ff; border: 1px solid rgba(160,80,255,.35); }
 .cond-4 { background: rgba(255,130,40,.18); color: #ff9060; border: 1px solid rgba(255,130,40,.35); }
+/* cond-5 = COND_TRIGGER_LABEL 的「敵ブレイク状態」(Enemy_Break*)。注意 hensei 的装备面板走
+   parameter-class.js 的 conditionTrigger (0..5、4=倒れ / 5=敵BK)，其它 viewer 走 constants.js
+   的 CONDITION (0..4、4=敵BK) —— 两套 enum 在 4 上语义不同，只是共用配色，不影响功能。 */
+.cond-5 { background: rgba(80,200,255,.18); color: #50c8ff; border: 1px solid rgba(80,200,255,.35); }
 
 /* ----- badge base ----- */
 .badge { font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; white-space: nowrap; }
