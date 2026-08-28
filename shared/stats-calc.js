@@ -460,9 +460,19 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
     }
 
     // 6. masou (slot.masou 是 single object、不是 array)
+    // ⚠ masou master effect **没有 range 字段** (masou.json 1200 条全无) → 必须像 crystal 那样兜底成
+    //   'Single'。不兜底的话 _effectApplies 只拦 range==='Single'、undefined 一路放行 = 全队生效,
+    //   而魔装是穿在单把魔剣上的外观装备、effect_text 绝大多数是「攻撃力5%UP」这种裸描述 = 自身。
+    //   真正全队的只有 11 条 (effect_text 含「味方全体」、集中在 3 件魔王装 1494/1502/1570),
+    //   由 scripts/master_to_business/build_masou_aux.py 注入 range:'All' 进 masou_revise。
+    //   (2026-08-28 修:此前 1189 条自身 effect 被误算成全队、队友白吃 costume 加成)
     const masouObj = Array.isArray(slot.masou) ? slot.masou : (slot.masou ? [slot.masou] : []);
     for (const ms of masouObj) {
-      for (const eff of ms?.effects || []) pushEff(slot.chara, i, 'masou', eff, { srcName: eff.effect_text || ms.name });
+      for (const eff of ms?.effects || []) {
+        pushEff(slot.chara, i, 'masou', { ...eff, range: eff.range || 'Single' }, {
+          srcName: eff.effect_text || ms.name,
+        });
+      }
     }
 
     // 7. chara_meta: 結婚 / 燃心 / LP / MP 装備 — 只对 target slot 自身
