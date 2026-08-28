@@ -163,8 +163,9 @@
           </div>
           <div class="io-sec">
             <div class="io-label">import</div>
-            <textarea id="io-import-str" class="io-ta" rows="3" placeholder="paste code (bxb1:...) here"></textarea>
+            <textarea id="io-import-str" class="io-ta" rows="3" placeholder="paste url (...#s:xxxx) or code (bxb1:...) here"></textarea>
             <div class="io-btns">
+              <button class="io-btn" onclick="ioImportUrl()" title="共有 URL (…#s:xxxx) を貼って読み込み">read url</button>
               <button class="io-btn" onclick="ioImportString()">read code</button>
               <button class="io-btn" onclick="triggerImportHensei()">file</button>
             </div>
@@ -313,6 +314,22 @@
       const _SHARE_API = 'https://bxb-calculator.vercel.app/api/share';
       const _shareEndpoint = () => (IS_LOCAL_DEV ? '/share' : _SHARE_API);
 
+      // URL 片段 → 编成配置对象。两种形态:
+      //   s:<key>      短链 → GET 短链 API 反查回 bxb1 串再解码
+      //   bxb0:/bxb1:  旧的长 hash → 直接解码
+      // 页面加载时的 #hash 自动载入 和 import 的 read url 共用这一条路径,避免两处逻辑漂移。
+      const _configFromFragment = async (frag) => {
+        const h = decodeURIComponent(String(frag || '').trim().replace(/^#/, ''));
+        const sm = h.match(/^s:([A-Za-z0-9_-]{1,16})$/);
+        if (sm) {
+          const r = await fetch(_shareEndpoint() + '?k=' + encodeURIComponent(sm[1]));
+          if (!r.ok) throw new Error(`短縮リンクが見つかりません (HTTP ${r.status})`);
+          return _decodeHensei((await r.json()).hash);
+        }
+        if (/^bxb[01]:/.test(h)) return _decodeHensei(h);
+        throw new Error('#s:… / #bxb1:… が含まれていません');
+      };
+
       // ELEMENT / ELEM_COLOR / WEAPON / RARITY / BUNRUI / BUNRUI_SHORT / CONDITION /
       // CHARA_TAG 来自 shared/constants.js
 
@@ -452,18 +469,12 @@
             updateMobVisible();
             hideLoading();
             // URL #hash 分享码 → 自动载入配置 (用完清掉 hash、避免 reload 重复应用)
-            const _h = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+            const _h = (location.hash || '').replace(/^#/, '');
             const _clearHash = () => history.replaceState(null, '', location.pathname + location.search);
-            const _sm = _h.match(/^s:([A-Za-z0-9_-]{1,16})$/);
-            if (_sm) {
-              // 短链 #s:<key> → GET 反查回 bxb1 串再解码;失败留住 hash、静默
-              fetch(_shareEndpoint() + '?k=' + encodeURIComponent(_sm[1]))
-                .then((r) => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
-                .then((j) => _decodeHensei(j.hash))
-                .then((o) => { _applyHenseiConfig(o); _clearHash(); })
-                .catch(() => {});
-            } else if (/^bxb[01]:/.test(_h)) {
-              _decodeHensei(_h)
+            if (_h) {
+              // 解析走 _configFromFragment (import 的 read url 同一条路径)。
+              // 失败留住 hash、静默 —— 无关的 #anchor 也会走到这里、不该报错扰民。
+              _configFromFragment(_h)
                 .then((o) => { _applyHenseiConfig(o); _clearHash(); })
                 .catch(() => {});
             }
@@ -866,6 +877,20 @@
         if (!s) { _ioMsg('paste a code first'); return; }
         try { _applyHenseiConfig(await _decodeHensei(s)); _ioMsg('loaded ✓'); setTimeout(closeIoModal, 500); }
         catch (e) { _ioMsg('load failed: ' + e.message); }
+      };
+      // read url: 贴共享 URL (…#s:xxxx / …#bxb1:…) 读回编成。
+      // 宽松接受: 整条 URL / 只有 #以后的片段 / 甚至裸的 s:xxxx、bxb1:… 都能吃
+      // (第一个 # 之后即片段;没有 # 就把整串当片段)。
+      export const ioImportUrl = async () => {
+        const raw = (document.getElementById('io-import-str')?.value || '').trim();
+        if (!raw) { _ioMsg('paste a url first'); return; }
+        const i = raw.indexOf('#');
+        const frag = i >= 0 ? raw.slice(i + 1) : raw;
+        try {
+          _applyHenseiConfig(await _configFromFragment(frag));
+          _ioMsg('loaded ✓');
+          setTimeout(closeIoModal, 500);
+        } catch (e) { _ioMsg('load failed: ' + e.message); }
       };
       export const triggerImportHensei = () => document.getElementById('hensei-import-file')?.click();
       export const importHenseiFile = (input) => {
@@ -3902,6 +3927,7 @@
         copyIoString,
         copyIoUrl,
         ioDownloadJson,
+        ioImportUrl,
         ioImportString,
         triggerImportHensei,
         importHenseiFile,
