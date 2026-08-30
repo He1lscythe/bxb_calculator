@@ -1,14 +1,14 @@
 // js/soul-render.js
 import { state } from './soul-state.js';
 import {
-  PARAMETER_CLASS_SHORT,
-  COND_TRIGGER_LABEL,
-  classifyParameter,
-  conditionTrigger,
-} from '../shared/parameter-class.js';
+  effectParams,
+  effectScope,
+  effectCondition,
+  paramBadgesHtml,
+  scopeTagHtml,
+  condTagHtml,
+} from '../shared/effect-tags.js';
 import {
-  ELEMENT,
-  WEAPON,
   ELEMS_ORDER,
   WEAPONS_ORDER,
   SOUL_TAG,
@@ -227,65 +227,13 @@ const renderSkillsView = (skills, soul) => {
     </div>`;
 };
 
-const fmtElem = (v) => {
-  if (v == null) return null;
-  const ids = Array.isArray(v) ? v : [v];
-  return ids
-    .map(function (id) {
-      return ELEMENT[id] || id;
-    })
-    .join('/');
-};
-
-const fmtType = (v) => {
-  if (v == null) return null;
-  const ids = Array.isArray(v) ? v : [v];
-  return ids
-    .map(function (id) {
-      return WEAPON[id] || id;
-    })
-    .join('/');
-};
-
+// scope 和 発動条件 都相同的 effect 合成一组 tag。两者都走共用实现,所以
+// FellDown_/Enemy_Break* 不会像旧的 e.condition 那样塌成 0、跟别的条件混进同一组。
 const _ctxKey = (e) => {
-  const elem = Array.isArray(e.element)
-    ? e.element.slice().sort().join(',')
-    : e.element != null
-      ? String(e.element)
-      : '';
-  const type = Array.isArray(e.weapon)
-    ? e.weapon.slice().sort().join(',')
-    : e.weapon != null
-      ? String(e.weapon)
-      : '';
-  // 発動条件 也换成 conditionTrigger 判 —— 用 e.condition 的话 FellDown_/Enemy_Break* 会塌成 0、
-  // 条件不同的 effect 被并进同一组
-  return [e.range || '', elem, type, conditionTrigger(e._parameter)].join('|');
+  const sc = effectScope(e);
+  return [sc.kind, sc.label, effectCondition(e)?.id ?? 0].join('|');
 };
 
-const _renderScopeTag = (e) => {
-  // 直读 master 字段、不再用 scope enum
-  // 魔剣限定 (weapon_base_id) > element/weapon 限定 ("限" + 详细 label) > range 的 全 / 自
-  if (e.weapon_base_id) return '<span class="scope-tag scope-lim">キャラ限</span>';
-  if (e.element || e.weapon) {
-    const parts = [];
-    const el = fmtElem(e.element);
-    if (el) parts.push(el);
-    const ty = fmtType(e.weapon);
-    if (ty) parts.push(ty);
-    return '<span class="scope-tag scope-lim">' + (parts.join('·') || '限') + '</span>';
-  }
-  if (e.range === 'All') return '<span class="scope-tag scope-all">全</span>';
-  return '<span class="scope-tag scope-self">自</span>';
-};
-
-const _renderCondTag = (e) => {
-  // 统一走 conditionTrigger(master parameter) —— 跟 filter 的 condition_trigger 同一套 enum。
-  // 旧的 e.condition 里 FellDown_ 落 0、Enemy_Break* 根本不在表里,条件就这么丢了。
-  const ct = conditionTrigger(e._parameter);
-  if (!ct) return '';
-  return '<span class="cond-tag cond-' + ct + '">' + (COND_TRIGGER_LABEL[ct] || '') + '</span>';
-};
 
 export const renderRightTags = (sk) => {
   const groups = []; // [{key, ctx, params: []}]
@@ -301,20 +249,14 @@ export const renderRightTags = (sk) => {
       g = { key: key, ctx: e, params: [] };
       groups.push(g);
     }
-    if (Array.isArray(e._parameters)) {
-      e._parameters.forEach((p) => g.params.push(p));
-    } else if (e._parameter) {
-      g.params.push(e._parameter);
-    }
+    effectParams(e).forEach((p) => g.params.push(p));
   });
   let tags = '';
   groups.forEach(function (g) {
-    g.params.forEach(function (p) {
-      const cls = classifyParameter(p);
-      tags += '<span class="bunrui-tag">' + (PARAMETER_CLASS_SHORT[cls] || cls) + '</span>';
-    });
-    tags += _renderScopeTag(g.ctx);
-    tags += _renderCondTag(g.ctx);
+    // 分類 tag 把这一组里所有 parameter 都出出来 (scope / 条件 每组只出一个)
+    tags += g.params.map((p) => paramBadgesHtml({ _parameter: p })).join('');
+    tags += scopeTagHtml(g.ctx);
+    tags += condTagHtml(g.ctx);
   });
   return '<div class="skill-tags-right">' + tags + '</div>';
 };

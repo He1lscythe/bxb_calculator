@@ -160,17 +160,15 @@
       import { SOUL_SPEC } from '../shared/soul-spec.js';
       import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
       import { BG_SPEC } from '../shared/bg-spec.js';
-      import { PARAMETER_CLASS_LABEL, PARAMETER_CLASS_SHORT, COND_TRIGGER_LABEL, SCOPE_LABEL, classifyParameter, conditionTrigger } from '../shared/parameter-class.js';
-      // hensei badge helper: _parameter(s) → PARAMETER_CLASS_SHORT
-      const _efBadges = (ef) => {
-        const paramList = Array.isArray(ef._parameters)
-          ? ef._parameters
-          : (ef._parameter ? [ef._parameter] : []);
-        return paramList.map((p) => {
-          const cls = classifyParameter(p);
-          return `<span class="bunrui-tag">${PARAMETER_CLASS_SHORT[cls] || cls}</span>`;
-        }).join('');
-      };
+      import { PARAMETER_CLASS_LABEL, COND_TRIGGER_LABEL, SCOPE_LABEL } from '../shared/parameter-class.js';
+      import {
+        effectCondition,
+        paramBadgesHtml,
+        scopeTagHtml,
+        condTagHtml,
+        effectTagsHtml,
+        normalizeMasterEffect,
+      } from '../shared/effect-tags.js';
       import {
         escHtml,
         fmtLarge,
@@ -457,34 +455,8 @@
         return n;
       };
 
-      // scope tag のスタイル/略称は utils.js / soul-render.js と統一（自/全/X/X·自/X·全）。
-      export const fmtScopeTag = (ef) => {
-        const elStr =
-          ef.element != null
-            ? []
-                .concat(ef.element)
-                .map((e) => ELEMENT[e] || e)
-                .join('/')
-            : '';
-        const tyStr =
-          ef.weapon != null
-            ? []
-                .concat(ef.weapon)
-                .map((t) => WEAPON[t] || t)
-                .join('/')
-            : '';
-        const parts = [elStr, tyStr].filter(Boolean);
-        const lim = parts.join('·');
-        // 直读 master range / element / weapon / weapon_base_id (adapter 已不再注入 eff.scope)
-        if (ef.weapon_base_id) {
-          return '<span class="scope-tag scope-lim">キャラ限</span>';
-        }
-        if (ef.element != null || ef.weapon != null) {
-          return '<span class="scope-tag scope-lim">' + (lim || '限') + '</span>';
-        }
-        if (ef.range === 'All') return '<span class="scope-tag scope-all">全</span>';
-        return '<span class="scope-tag scope-self">自</span>';
-      };
+      // scope tag 的判定/略称全在 shared/effect-tags.js —— viewer 侧用的是同一份
+      export const fmtScopeTag = scopeTagHtml;
 
       // ===== 装备面板 (col{i}c 魔剣 / col{i}s ソウル / col{i}b 心象結晶 / col{i}m 魔装 / col{i}r 記憶結晶) =====
       // 面板不再直读静态 master 值、改成走 collectEffects(forDisplay) 的**解算后**结果。带来两点:
@@ -521,20 +493,9 @@
       };
       // tag 行: [分類][解算後倍率][scope][発動条件]
       const _effTagRow = (e) => {
-        const cls = classifyParameter(e.parameter);
-        const btag = `<span class="bunrui-tag">${PARAMETER_CLASS_SHORT[cls] || cls}</span>`;
-        const raw = e._raw || {};
-        // fmtScopeTag 吃 wiki shape → 从 master 字段搭个壳。souls 用 *_condition (判装备者)、
-        // weapons/crystals 用 target_element_id / weapon_type_id (判接收方) —— 显示上都是「限」。
-        const scope = fmtScopeTag({
-          range: raw.range,
-          element: raw.target_element_id || raw.element_condition || null,
-          weapon: raw.weapon_type_id || raw.weapon_type_condition || null,
-          weapon_base_id: raw.weapon_base_id || null,
-        });
-        const ct = conditionTrigger(e.parameter);
-        const cond = ct ? `<span class="cond-tag cond-${ct}">${COND_TRIGGER_LABEL[ct]}</span>` : '';
-        return `<div class="eftags">${btag}<span class="tag-val">${_effValStr(e)}</span>${scope}${cond}</div>`;
+        // collectEffects 的解算结果是 master shape → 先归一成 wiki shape 再交给共用实现
+        const w = normalizeMasterEffect(e._raw, e.parameter);
+        return `<div class="eftags">${paramBadgesHtml(w)}<span class="tag-val">${_effValStr(e)}</span>${scopeTagHtml(w)}${condTagHtml(w)}</div>`;
       };
       // 心象結晶 / 魔装 面板改造前就是「効果文 + tag」两行、保持原样;魔剣 / ソウル 原来只有 tag
       // 一行、也保持原样 (条数多、每条加一行効果文会把 slot 拉得太长, 効果文走 title 悬浮)。
@@ -3058,11 +3019,8 @@
       export const renderDMBg = (b) => {
         const effRows = (b.effects || [])
           .map((ef) => {
-            const btags = _efBadges(ef);
-            const _ct = conditionTrigger(ef._parameter);
-            const cond = _ct
-              ? `<span class="cond-tag cond-${_ct}">${COND_TRIGGER_LABEL[_ct] || ''}</span>`
-              : '';
+            const btags = paramBadgesHtml(ef);
+            const cond = condTagHtml(ef);
             const sl = _bgScopeLabel(ef);
             const scope = sl ? `<span class="scope-tag scope-lim">${escHtml(sl)}</span>` : '';
             const val =
@@ -3101,7 +3059,7 @@
           .map((e) => {
             if (!e || e.parameter === 'NoEffect') return '';
             const ef = { _parameter: e.parameter, bairitu: e.value, calc_type: e.math_type === 'Addition' ? 1 : 0 };
-            const btags = _efBadges(ef);
+            const btags = paramBadgesHtml(ef);
             const sc = e.value_scaling
               ? `<span style="color:var(--text2);font-size:11px"> (+${e.value_scaling}×熟度)</span>`
               : '';
@@ -3148,15 +3106,15 @@
             } else {
               range = pfx + fmtLarge(mn ?? mx);
             }
-            const btags = _efBadges(ef);
+            const btags = paramBadgesHtml(ef);
             const scopeTag = fmtScopeTag(ef);
             fields.push([
               '効果量',
               `<div class="bgdm-eff-line">${btags}${scopeTag}<span class="tag-val">${range}</span></div>`,
             ]);
           }
-          const _ct = conditionTrigger(ef._parameter);
-          if (_ct) fields.push(['発動条件', escHtml(COND_TRIGGER_LABEL[_ct] || String(_ct))]);
+          const _c = effectCondition(ef);
+          if (_c) fields.push(['発動条件', escHtml(_c.label)]);
         });
         if (c['特殊条件']) fields.push(['特殊条件', escHtml(c['特殊条件'])]);
         if (c['対象']) fields.push(['対象', escHtml(c['対象'])]);
@@ -3291,26 +3249,8 @@
       };
 
       export const dmRightTags = (s) => {
-        let tags = '';
-        (s.effects || []).forEach((e) => {
-          tags += _efBadges(e);
-          // 直读 master range / element / weapon / weapon_base_id (adapter 已不再注入 eff.scope)
-          if (e.weapon_base_id) {
-            tags += `<span class="scope-tag scope-lim">キャラ限</span>`;
-          } else if (e.element != null || e.weapon != null) {
-            const lim =
-              e.element != null
-                ? ELEMENT[[].concat(e.element)[0]] || '限'
-                : WEAPON[[].concat(e.weapon)[0]] || '限';
-            tags += `<span class="scope-tag scope-lim">${lim}</span>`;
-          } else if (e.range === 'All') {
-            tags += `<span class="scope-tag scope-all">全</span>`;
-          } else {
-            tags += `<span class="scope-tag scope-self">自</span>`;
-          }
-          const _ct = conditionTrigger(e._parameter);
-          if (_ct) tags += `<span class="cond-tag cond-${_ct}">${COND_TRIGGER_LABEL[_ct] || ''}</span>`;
-        });
+        // 判定は shared/effect-tags.js (viewer 的 renderRightTags 用的同一份)、外壳只是 class 不同
+        const tags = (s.effects || []).map(effectTagsHtml).join('');
         return `<div class="dm-skill-tags">${tags}</div>`;
       };
 

@@ -145,7 +145,8 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [virtual-list.js](../shared/virtual-list.js) | 简单 virtual scrolling、屏幕外 row 不在 DOM、用在 cr-list / bg-list (2063+506 expand all 不卡) + hensei 实体选择器 #em-list (5 类型共用、crystal 2063 行秒开) |
 | [lazy-img.js](../shared/lazy-img.js) | IntersectionObserver-based img lazy、`setupLazyImg(scrollRoot)` swap `data-src→src`、适用自定义 scroll 容器 (native HTML5 lazy 只看 document viewport、容器 scroll 失效) |
 | [constants.js](../shared/constants.js) | PARAMETER (91) / MATH_TYPE / RANGE / ELEMENT / WEAPON / CONDITION 等 enum |
-| [parameter-class.js](../shared/parameter-class.js) | PARAMETER_CLASS (35 类効果分类) + PARAMETER_CLASS_LABEL/SHORT |
+| [parameter-class.js](../shared/parameter-class.js) | PARAMETER_CLASS (35 类効果分类) + PARAMETER_CLASS_LABEL/SHORT + `conditionTrigger` / COND_TRIGGER_LABEL (発動条件 0..5) + `crystalScopeTags` / `bgScopeTags` / SCOPE_LABEL |
+| [effect-tags.js](../shared/effect-tags.js) | 効果 tag (分類 / scope / 発動条件) 的**唯一实现**。语义层 `effectParams` / `effectScope` / `effectCondition` / `effectScopeLongLabel` + HTML 层 `paramBadgesHtml` / `scopeTagHtml` / `condTagHtml` / `effectTagsHtml` + `normalizeMasterEffect` (hensei 的 master shape → wiki shape)。characters / souls / crystals / bladegraphs / hensei 全走这一份 —— 以前各有拷贝、漂出过两套条件 enum 和三种 scope 覆盖 |
 | [filter-core.js](../shared/filter-core.js) | viewer filter 通用 utility (applySpec / renderSpecFilters / sort / reset) |
 | [chara-spec.js](../shared/chara-spec.js) / [soul-spec.js](../shared/soul-spec.js) / [crystal-spec.js](../shared/crystal-spec.js) / [bg-spec.js](../shared/bg-spec.js) | 4 viewer 各自 filter spec (facet / sort options) |
 
