@@ -12,8 +12,8 @@ import {
   COND_TRIGGER_LABEL,
   SCOPE_LABEL,
   classifyParameter,
-  conditionTrigger,
 } from '../shared/parameter-class.js';
+import { effectCondition, effectScopeLongLabel } from '../shared/effect-tags.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
 import { crystalShowWeightRange, crystalShowPurityRange } from '../shared/hensei-helpers.js';
@@ -127,10 +127,10 @@ const crystalWeapon = (c) => {
   return e ? e.weapon : 0;
 };
 
-// 発動条件: 跟 CRYSTAL_SPEC.filters.condition_trigger 同源 (都是 conditionTrigger(c.parameter))。
+// 発動条件: 走 shared/effect-tags.js、跟 CRYSTAL_SPEC.filters.condition_trigger 同源。
 // 原来读 effects[0].condition (adapter 映射)、FellDown_ 落 0 且 Enemy_Break* 不在表里 →
 // filter 能按「倒れ」「敵ブレイク状態」筛出来、行上却一个条件 badge 都不显示。
-const crystalCondition = (c) => conditionTrigger(c.parameter);
+const crystalCondition = (c) => effectCondition((c.effects || [])[0])?.id ?? 0;
 
 export const applyFilters = () => {
   const q = document.getElementById('search').value.trim();
@@ -331,15 +331,8 @@ export const toggleExpand = (id) => {
   if (_vlist) _vlist.invalidateRow(id);
 };
 
-export const scopeLabel = (e) => {
-  // 直读 element / weapon (adapter 已不再注入 eff.scope)
-  if (e.element) return (ELEMENT[e.element] || '') + '属性のみ';
-  if (e.weapon != null) {
-    const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
-    return t.map((v) => WEAPON[v] || v).join('/') + 'のみ';
-  }
-  return '';
-};
+// 展开详情用的长格式 scope label (「火属性のみ」)。判定在 shared/effect-tags.js
+export const scopeLabel = effectScopeLongLabel;
 
 // 注: 旧的 renderEffLine (detail body 内逐 effect 渲染) 已随「body 不重复効果量」的设计移除,
 //     効果 tag / bairitu 现在只在 row-hd 显示 (见下面 fields 的注释)。

@@ -10,10 +10,10 @@ import {
   PARAMETER_CLASS_LABEL,
   PARAMETER_CLASS_SHORT,
   COND_TRIGGER_LABEL,
-  conditionTrigger,
   SCOPE_LABEL,
   classifyParameter,
 } from '../shared/parameter-class.js';
+import { effectCondition, effectScopeLongLabel } from '../shared/effect-tags.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { BG_SPEC } from '../shared/bg-spec.js';
 import { escHtml, ctPfx, fmtNum, fmtLarge } from './utils.js';
@@ -210,7 +210,7 @@ export const renderRowHd = (c) => {
   const cond =
     (c.effects || [])
       .map(function (e) {
-        return conditionTrigger(e._parameter);
+        return effectCondition(e)?.id ?? 0;
       })
       .find(function (v) {
         return v > 0;
@@ -299,15 +299,8 @@ export const toggleExpand = (id) => {
   if (_vlist) _vlist.invalidateRow(id);
 };
 
-export const scopeLabel = (e) => {
-  // 直读 element / weapon (adapter 已不再注入 eff.scope)
-  if (e.element) return (ELEMENT[e.element] || '') + '属性のみ';
-  if (e.weapon != null) {
-    const t = Array.isArray(e.weapon) ? e.weapon : [e.weapon];
-    return t.map((v) => WEAPON[v] || v).join('/') + 'のみ';
-  }
-  return '';
-};
+// 展开详情用的长格式 scope label (「火属性のみ」)。判定在 shared/effect-tags.js
+export const scopeLabel = effectScopeLongLabel;
 
 export const renderDetailBody = (c) => {
   const effRows = (c.effects || [])
@@ -317,8 +310,8 @@ export const renderDetailBody = (c) => {
       const bTags = _cls
         ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[_cls] || _cls) + '</span>'
         : '';
-      const _ct = conditionTrigger(e._parameter);
-      const condStr = _ct ? '<span class="eff-cond">' + (COND_TRIGGER_LABEL[_ct] || '') + '</span>' : '';
+      const _c = effectCondition(e);
+      const condStr = _c ? '<span class="eff-cond">' + _c.label + '</span>' : '';
       const scopeStr = scopeLabel(e) ? '<span class="eff-scope">' + scopeLabel(e) + '</span>' : '';
       const bStr =
         e.bairitu != null
