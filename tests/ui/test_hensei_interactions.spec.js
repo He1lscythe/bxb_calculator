@@ -884,9 +884,11 @@ test('import read url: 共享 URL / 片段 / 裸 key 都能读回编成', async 
     await page.evaluate(() => window.openIoModal());
     await page.fill('#io-import-str', v);
     await page.click('.io-btn:has-text("read url")');
-    await page.waitForTimeout(400);
-    expect(await page.locator('#io-msg').textContent(), `输入 ${v}`).toContain('loaded');
+    await expect(page.locator('#io-msg'), `输入 ${v}`).toContainText('loaded');
     expect(await page.evaluate(() => window.state.mainSlot), `输入 ${v}`).toBe(1);
+    // ioImportUrl 成功后排了 setTimeout(closeIoModal, 500)。不等它落地就进下一轮的话,
+    // 这个悬挂的 timer 会把下一轮刚打开的 modal 关掉 → 随机失败。等 modal 真关上再继续。
+    await expect(page.locator('#io-modal')).not.toHaveClass(/\bopen\b/);
   }
 
   // 不含 s:/bxb1: 的 URL → 明确报错,不静默

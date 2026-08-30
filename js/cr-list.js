@@ -3,7 +3,6 @@ import { state } from './cr-state.js';
 import {
   ELEMENT,
   WEAPON,
-  CONDITION,
   renderFilterToggles,
   renderElementFilterToggles,
 } from '../shared/constants.js';
@@ -13,6 +12,7 @@ import {
   COND_TRIGGER_LABEL,
   SCOPE_LABEL,
   classifyParameter,
+  conditionTrigger,
 } from '../shared/parameter-class.js';
 import { FilterCore } from '../shared/filter-core.js';
 import { CRYSTAL_SPEC, crystalImageSrc } from '../shared/crystal-spec.js';
@@ -127,9 +127,10 @@ const crystalWeapon = (c) => {
   return e ? e.weapon : 0;
 };
 
-const crystalCondition = (c) => {
-  return ((c.effects || [])[0] || {}).condition || 0;
-};
+// 発動条件: 跟 CRYSTAL_SPEC.filters.condition_trigger 同源 (都是 conditionTrigger(c.parameter))。
+// 原来读 effects[0].condition (adapter 映射)、FellDown_ 落 0 且 Enemy_Break* 不在表里 →
+// filter 能按「倒れ」「敵ブレイク状態」筛出来、行上却一个条件 badge 都不显示。
+const crystalCondition = (c) => conditionTrigger(c.parameter);
 
 export const applyFilters = () => {
   const q = document.getElementById('search').value.trim();
@@ -232,7 +233,12 @@ export const renderRowHd = (c) => {
   const bt = _cls
     ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[_cls] || _cls) + '</span>'
     : '';
-  const bc = cond ? '<span class="badge bunrui-sm">' + (CONDITION[cond] || cond) + '</span>' : '';
+  const bc = cond
+    ? '<span class="badge bunrui-sm">' + (COND_TRIGGER_LABEL[cond] || cond) + '</span>'
+    : '';
+  // キャラ限 (weapon_base_id、純真/秘録記憶 反查注入)。scope filter 早就能筛「キャラ限定」、
+  // 但行上一直没标 —— 跟 bg-list 的 badge scope5 对齐。
+  const s5b = c.weapon_base_id ? '<span class="badge scope5">キャラ限</span>' : '';
   const bairitu = fmtRowBairitu(c);
   const expandBtn =
     '<button class="expand-btn" onclick="event.stopPropagation();toggleExpand(' +
@@ -254,6 +260,7 @@ export const renderRowHd = (c) => {
     rb +
     eb +
     wb +
+    s5b +
     '</div>' +
     checkCb +
     '<div class="row-name">' +
@@ -278,6 +285,7 @@ export const renderRowHd = (c) => {
     '<div class="bg-row-right">' +
     eb +
     wb +
+    s5b +
     bc +
     bt +
     bairitu +
