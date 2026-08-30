@@ -149,7 +149,6 @@
         ELEMENT,
         WEAPON,
         RARITY,
-        CONDITION,
         CHARA_TAG,
         CHARA_TAG_COLOR,
         SOUL_TAG,
@@ -269,7 +268,7 @@
         throw new Error('#s:… / #bxb1:… が含まれていません');
       };
 
-      // ELEMENT / ELEM_COLOR / WEAPON / RARITY / BUNRUI / BUNRUI_SHORT / CONDITION /
+      // ELEMENT / ELEM_COLOR / WEAPON / RARITY /
       // CHARA_TAG 来自 shared/constants.js
 
       let allCharas = [],
@@ -3060,8 +3059,9 @@
         const effRows = (b.effects || [])
           .map((ef) => {
             const btags = _efBadges(ef);
-            const cond = ef.condition
-              ? `<span class="cond-tag cond-${ef.condition}">${CONDITION[ef.condition] || ''}</span>`
+            const _ct = conditionTrigger(ef._parameter);
+            const cond = _ct
+              ? `<span class="cond-tag cond-${_ct}">${COND_TRIGGER_LABEL[_ct] || ''}</span>`
               : '';
             const sl = _bgScopeLabel(ef);
             const scope = sl ? `<span class="scope-tag scope-lim">${escHtml(sl)}</span>` : '';
@@ -3155,8 +3155,8 @@
               `<div class="bgdm-eff-line">${btags}${scopeTag}<span class="tag-val">${range}</span></div>`,
             ]);
           }
-          if (ef.condition)
-            fields.push(['発動条件', escHtml(CONDITION[ef.condition] || String(ef.condition))]);
+          const _ct = conditionTrigger(ef._parameter);
+          if (_ct) fields.push(['発動条件', escHtml(COND_TRIGGER_LABEL[_ct] || String(_ct))]);
         });
         if (c['特殊条件']) fields.push(['特殊条件', escHtml(c['特殊条件'])]);
         if (c['対象']) fields.push(['対象', escHtml(c['対象'])]);
@@ -3308,8 +3308,8 @@
           } else {
             tags += `<span class="scope-tag scope-self">自</span>`;
           }
-          if (e.condition)
-            tags += `<span class="cond-tag cond-${e.condition}">${CONDITION[e.condition] || ''}</span>`;
+          const _ct = conditionTrigger(e._parameter);
+          if (_ct) tags += `<span class="cond-tag cond-${_ct}">${COND_TRIGGER_LABEL[_ct] || ''}</span>`;
         });
         return `<div class="dm-skill-tags">${tags}</div>`;
       };

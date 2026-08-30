@@ -1,6 +1,11 @@
 // js/utils.js
-import { ELEMENT, WEAPON, CONDITION } from '../shared/constants.js';
-import { PARAMETER_CLASS_SHORT, classifyParameter } from '../shared/parameter-class.js';
+import { ELEMENT, WEAPON } from '../shared/constants.js';
+import {
+  PARAMETER_CLASS_SHORT,
+  COND_TRIGGER_LABEL,
+  classifyParameter,
+  conditionTrigger,
+} from '../shared/parameter-class.js';
 
 export const hasOmoide = (c) => {
   return (
@@ -21,25 +26,27 @@ export const renderRightTags = (s) => {
       const cls = classifyParameter(p);
       tags += '<span class="bunrui-tag">' + (PARAMETER_CLASS_SHORT[cls] || cls) + '</span>';
     });
-    // 直读 master range / element / weapon (adapter 已不再注入 eff.scope)
-    if (e.element != null || e.weapon != null) {
-      const lim =
-        e.element != null
-          ? ELEMENT[e.element] || e.element
-          : WEAPON[e.weapon] || e.weapon;
-      tags += '<span class="scope-tag scope-lim">' + lim + '</span>';
+    // 直读 master range / element / weapon / weapon_base_id (adapter 已不再注入 eff.scope)
+    if (e.weapon_base_id) {
+      tags += '<span class="scope-tag scope-lim">キャラ限</span>';
+    } else if (e.element != null || e.weapon != null) {
+      // 属性と武器が両方付く effect は「火·太刀」のように両方出す (soul-render.js / hensei の
+      // fmtScopeTag と同じ)。以前は element だけ見て weapon を落としていた。
+      const one = (v, map) =>
+        v == null ? null : (Array.isArray(v) ? v : [v]).map((id) => map[id] || id).join('/');
+      const lim = [one(e.element, ELEMENT), one(e.weapon, WEAPON)].filter(Boolean).join('·');
+      tags += '<span class="scope-tag scope-lim">' + (lim || '限') + '</span>';
     } else if (e.range === 'All') {
       tags += '<span class="scope-tag scope-all">全</span>';
     } else {
       tags += '<span class="scope-tag scope-self">自</span>';
     }
-    if (e.condition)
-      tags +=
-        '<span class="cond-tag cond-' +
-        e.condition +
-        '">' +
-        (CONDITION[e.condition] || '') +
-        '</span>';
+    // 発動条件: master parameter 的前缀直判 (conditionTrigger)、跟 filter 的 condition_trigger
+    // 同一套 enum。旧的 e.condition 走 adapter 映射、FellDown_ 落 0 且 Enemy_Break* 不在表里,
+    // 那 141 条的条件会整个看不见 —— 已弃用。
+    const ct = conditionTrigger(paramList[0]);
+    if (ct)
+      tags += '<span class="cond-tag cond-' + ct + '">' + (COND_TRIGGER_LABEL[ct] || '') + '</span>';
   });
   return '<div class="skill-tags-right">' + tags + '</div>';
 };

@@ -3,7 +3,6 @@ import { state } from './bg-state.js';
 import {
   ELEMENT,
   WEAPON,
-  CONDITION,
   renderFilterToggles,
   renderElementFilterToggles,
 } from '../shared/constants.js';
@@ -11,6 +10,7 @@ import {
   PARAMETER_CLASS_LABEL,
   PARAMETER_CLASS_SHORT,
   COND_TRIGGER_LABEL,
+  conditionTrigger,
   SCOPE_LABEL,
   classifyParameter,
 } from '../shared/parameter-class.js';
@@ -205,17 +205,18 @@ export const renderRowHd = (c) => {
     .filter((cls) => cls && !_seen.has(cls) && _seen.add(cls))
     .map((cls) => '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[cls] || cls) + '</span>')
     .join('');
-  // first non-zero condition
+  // 第一个非 0 的発動条件。走 conditionTrigger(master parameter)、跟 BG_SPEC.filters
+  // .condition_trigger 同源;旧的 e.condition 会把 FellDown_ 落成 0、Enemy_Break* 也不在表里。
   const cond =
     (c.effects || [])
       .map(function (e) {
-        return e.condition || 0;
+        return conditionTrigger(e._parameter);
       })
       .find(function (v) {
         return v > 0;
       }) || 0;
   const cb = cond
-    ? '<span class="cond-tag cond-' + cond + '">' + (CONDITION[cond] || '') + '</span>'
+    ? '<span class="cond-tag cond-' + cond + '">' + (COND_TRIGGER_LABEL[cond] || '') + '</span>'
     : '';
   const bairitu = fmtRowBairitu(c);
   const expandBtn =
@@ -316,9 +317,8 @@ export const renderDetailBody = (c) => {
       const bTags = _cls
         ? '<span class="badge bunrui-sm">' + (PARAMETER_CLASS_SHORT[_cls] || _cls) + '</span>'
         : '';
-      const condStr = e.condition
-        ? '<span class="eff-cond">' + (CONDITION[e.condition] || '') + '</span>'
-        : '';
+      const _ct = conditionTrigger(e._parameter);
+      const condStr = _ct ? '<span class="eff-cond">' + (COND_TRIGGER_LABEL[_ct] || '') + '</span>' : '';
       const scopeStr = scopeLabel(e) ? '<span class="eff-scope">' + scopeLabel(e) + '</span>' : '';
       const bStr =
         e.bairitu != null
