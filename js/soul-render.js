@@ -1,10 +1,14 @@
 // js/soul-render.js
 import { state } from './soul-state.js';
-import { PARAMETER_CLASS_SHORT, classifyParameter } from '../shared/parameter-class.js';
+import {
+  PARAMETER_CLASS_SHORT,
+  COND_TRIGGER_LABEL,
+  classifyParameter,
+  conditionTrigger,
+} from '../shared/parameter-class.js';
 import {
   ELEMENT,
   WEAPON,
-  CONDITION,
   ELEMS_ORDER,
   WEAPONS_ORDER,
   SOUL_TAG,
@@ -254,12 +258,15 @@ const _ctxKey = (e) => {
     : e.weapon != null
       ? String(e.weapon)
       : '';
-  return [e.range || '', elem, type, e.condition || 0].join('|');
+  // 発動条件 也换成 conditionTrigger 判 —— 用 e.condition 的话 FellDown_/Enemy_Break* 会塌成 0、
+  // 条件不同的 effect 被并进同一组
+  return [e.range || '', elem, type, conditionTrigger(e._parameter)].join('|');
 };
 
 const _renderScopeTag = (e) => {
   // 直读 master 字段、不再用 scope enum
-  // element/weapon 限定: 标 "限" + 详细 label; 否则按 range 标 全 / 自
+  // 魔剣限定 (weapon_base_id) > element/weapon 限定 ("限" + 详细 label) > range 的 全 / 自
+  if (e.weapon_base_id) return '<span class="scope-tag scope-lim">キャラ限</span>';
   if (e.element || e.weapon) {
     const parts = [];
     const el = fmtElem(e.element);
@@ -273,10 +280,11 @@ const _renderScopeTag = (e) => {
 };
 
 const _renderCondTag = (e) => {
-  if (!e.condition) return '';
-  return (
-    '<span class="cond-tag cond-' + e.condition + '">' + (CONDITION[e.condition] || '') + '</span>'
-  );
+  // 统一走 conditionTrigger(master parameter) —— 跟 filter 的 condition_trigger 同一套 enum。
+  // 旧的 e.condition 里 FellDown_ 落 0、Enemy_Break* 根本不在表里,条件就这么丢了。
+  const ct = conditionTrigger(e._parameter);
+  if (!ct) return '';
+  return '<span class="cond-tag cond-' + ct + '">' + (COND_TRIGGER_LABEL[ct] || '') + '</span>';
 };
 
 export const renderRightTags = (sk) => {

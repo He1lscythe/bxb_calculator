@@ -117,8 +117,10 @@ export const SOUL_TAG_COLOR = {
   8: '#cc7733', // BDHIT — rust orange
 };
 
-// effects[].condition：1=逆窮鼠(HP高) / 2=窮鼠(HP低) / 3=破損状態 / 4=敵ブレイク中
-export const CONDITION = { 0: 'なし', 1: '逆窮鼠', 2: '窮鼠', 3: '破損', 4: '敵ブレイク状態' };
+// 注: 旧的 CONDITION (0..4、adapter 产出的 effects[].condition) 已删 —— 0 callsite。
+// 発動条件的显示和 filter 现在统一走 parameter-class.js 的 conditionTrigger(master parameter)
+// + COND_TRIGGER_LABEL (0..5、多出「倒れ」和「敵ブレイク状態」两档)。旧表把 FellDown_ 映射成 0、
+// Enemy_Break* 根本不在表里,那 141 条 effect 的条件在 viewer 上整个看不见。
 
 // 元素 → CSS 颜色变量名（用于 filter 按钮 inline style.color）
 const ELEM_CSS_VAR = {
@@ -172,7 +174,7 @@ function _pickKeys(map, opts) {
 
 // 渲染一行 filter toggle 按钮（class .ftog，配合各页 toggleFilter(field,key,btn)）
 //   field      : toggleFilter 的字段名
-//   map        : 数据 const（如 ELEMENT / WEAPON / BUNRUI_SHORT / CONDITION）
+//   map        : 数据 const（如 ELEMENT / WEAPON / COND_TRIGGER_LABEL）
 //   opts.skip  : 跳过的 key 数组（如 [0]）
 //   opts.only  : 仅渲染这些 key
 //   opts.attr  : (key) => 附加属性串（含前导空格），如 ' style="color:var(--fire)"'
