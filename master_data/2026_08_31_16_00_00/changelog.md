@@ -1,0 +1,182 @@
+# master_data changelog: 2026_08_28_16_00_00 → 2026_08_31_16_00_00
+
+## 总览
+
+| 表 | 新增 | 删除 | 调整 |
+|---|---:|---:|---:|
+| weapons | 0 | 0 | 13 |
+
+## weapons
+
+### 调整 (13)
+
+- [`114801`](weapons.json#L59183) パイ＆シーズ
+  - base_name: パイ＆シーズ (costume: 魔装)
+  - element=水(2) / type=大剣(2) / rarity=S(3) / cv=佳村はるか
+  - max stats: HP=6900 / ATK=3000 / DEF=6200 / SPD=19 / BREAK=1050
+  - hit_counts=[2, 2, 4] (3段)  motion_speed=[4.0/4.0/1.0]  mp=169
+  - three_size=2人とも72/56/76 / initial_slot=3
+  - BD: 双魚狂宴アルレシア (arts_id=148)
+    - description: 敵全体に超強力な35連ダメージ＆数秒だけ時を止める
+    - cost=6 / hit_count=35 / value=3.18857 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 全属性の魔剣の行動速度がかなりアップ
+    - **新增: MotionSpeed Multiply ×1.15 — 全属性の魔剣の攻撃モーションが少し加速**
+- [`114802`](weapons.json#L59340) パイ＆シーズ【極】
+  - base_name: パイ＆シーズ (costume: 極魔装)
+  - element=水(2) / type=大剣(2) / rarity=S(3) / cv=佳村はるか
+  - max stats: HP=9000 / ATK=3900 / DEF=8100 / SPD=19 / BREAK=1370
+  - hit_counts=[3, 2, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=169
+  - three_size=2人とも72/56/76 / initial_slot=4
+  - BD: 双魚狂宴アルレシア (arts_id=148)
+    - description: 敵全体に超強力な35連ダメージ＆数秒だけ時を止める
+    - cost=6 / hit_count=35 / value=3.18857 / additional_value=0.0
+  - innate skills (3):
+    - Speed Multiply ×1.25 — 全属性の魔剣の行動速度がかなりアップ
+    - **新增: MotionSpeed Multiply ×1.3 — 全属性の魔剣の攻撃モーションが加速**
+    - **新增: HitCount Addition +1.0 — 全属性の魔剣の1撃目2撃目3撃目のヒット数を+1する**
+- [`121201`](weapons.json#L85752) ヘルファイアワークス
+  - base_name: ヘルファイアワークス (costume: 魔装)
+  - element=火(1) / type=魔典(11) / rarity=S(3) / cv=星谷美緒
+  - max stats: HP=5900 / ATK=2800 / DEF=5000 / SPD=30 / BREAK=2800
+  - hit_counts=[4, 4, 10] (3段)  motion_speed=[3.0/2.0/1.0]  mp=260
+  - three_size=71/55/69 / initial_slot=1
+  - BD: 魔に咲け一輪の大華火 (arts_id=212)
+    - description: 敵全体に超強力な37連ダメージ＆20秒ブレイク力2倍
+    - cost=6 / hit_count=37 / value=3.02 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 火属性の魔剣の攻撃力が大幅にアップ
+    - **新增: MotionSpeed Multiply ×1.3 — 火属性の魔剣の攻撃モーションが加速**
+- [`121202`](weapons.json#L85909) ヘルファイアワークス【極】
+  - base_name: ヘルファイアワークス (costume: 極魔装)
+  - element=火(1) / type=魔典(11) / rarity=S(3) / cv=星谷美緒
+  - max stats: HP=7670 / ATK=3640 / DEF=6500 / SPD=30 / BREAK=3640
+  - hit_counts=[5, 4, 13] (3段)  motion_speed=[3.0/2.0/1.0]  mp=260
+  - three_size=71/55/69 / initial_slot=2
+  - BD: 魔に咲け一輪の大華火 (arts_id=212)
+    - description: 敵全体に超強力な37連ダメージ＆20秒ブレイク力2倍
+    - cost=6 / hit_count=37 / value=3.02 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.75 — 火属性の魔剣の攻撃力が絶大にアップ
+    - **新增: MotionSpeed Multiply ×1.5 — 火属性の魔剣の攻撃モーションがかなり加速**
+- [`121203`](weapons.json#L86066) ヘルファイアワークス【極弐】
+  - base_name: ヘルファイアワークス (costume: 極弐魔装)
+  - element=火(1) / type=魔典(11) / rarity=S(3) / cv=星谷美緒
+  - max stats: HP=11130 / ATK=6560 / DEF=9430 / SPD=32 / BREAK=4740
+  - hit_counts=[6, 5, 13] (3段)  motion_speed=[2.8/2.2/1.2]  mp=286
+  - three_size=71/55/71 / initial_slot=3
+  - BD: 地獄に花咲く紅蓮の業華 (arts_id=10212)
+    - description: 敵全体に超強力な37連ダメージ＆20秒ブレイク力2倍
+    - cost=6 / hit_count=37 / value=3.02 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.75 — 火属性の魔剣の攻撃力が絶大にアップ
+    - **新增: MotionSpeed Multiply ×2.0 — 火属性の魔剣の攻撃モーションが大幅に加速**
+    - **删除: MotionSpeed Multiply ×1.5 — 火属性の魔剣の攻撃モーションがかなり加速**
+- [`124401`](weapons.json#L99112) 神器アイギス
+  - base_name: 神器アイギス (costume: 魔装)
+  - element=光(4) / type=戦斧(7) / rarity=S(3) / cv=高橋李依
+  - max stats: HP=10820 / ATK=5550 / DEF=4500 / SPD=28 / BREAK=1700
+  - hit_counts=[5, 5, 5] (3段)  motion_speed=[3.0/3.0/2.0]  mp=108
+  - three_size=ちょｗｗ見ないでｗｗｗｗ / initial_slot=2
+  - BD: 神魔蒼鏡アイズオブヘヴン (arts_id=244)
+    - description: 敵全体に超強力な21連ダメージ＆邪眼で敵時間を停止
+    - cost=7 / hit_count=21 / value=6.0 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 光属性の魔剣の攻撃力が大幅にアップ
+    - **新增: InstantDeath Repel_Percent ×50.0 — 即死特性の攻撃を確率で回避する**
+- [`124402`](weapons.json#L99269) 神器アイギス【極】
+  - base_name: 神器アイギス (costume: 極魔装)
+  - element=光(4) / type=戦斧(7) / rarity=S(3) / cv=高橋李依
+  - max stats: HP=14070 / ATK=7220 / DEF=5850 / SPD=28 / BREAK=2210
+  - hit_counts=[6, 5, 8] (3段)  motion_speed=[3.0/3.0/2.0]  mp=108
+  - three_size=ちょｗｗ見ないでｗｗｗｗ / initial_slot=3
+  - BD: 神魔蒼鏡アイズオブヘヴン (arts_id=244)
+    - description: 敵全体に超強力な21連ダメージ＆邪眼で敵時間を停止
+    - cost=7 / hit_count=21 / value=6.0 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.75 — 光属性の魔剣の攻撃力が絶大にアップ
+    - **新增: InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する**
+    - **新增: DamageLimitBreak Addition +700000000.0 — 光属性の魔剣のダメージ上限が7億アップ**
+- [`124403`](weapons.json#L99445) 神器アイギス【極弐】
+  - base_name: 神器アイギス (costume: 極弐魔装)
+  - element=光(4) / type=戦斧(7) / rarity=S(3) / cv=高橋李依
+  - max stats: HP=17070 / ATK=9260 / DEF=7080 / SPD=28 / BREAK=2630
+  - hit_counts=[7, 6, 8] (3段)  motion_speed=[3.0/2.0/1.2]  mp=115
+  - three_size=いやｗｗ見ないでってばｗｗｗｗ / initial_slot=4
+  - BD: 神蛇煌盾インサイトオブエリュシオン (arts_id=10244)
+    - description: 敵全体に超強力な21連ダメージ＆邪眼で敵時間を停止
+    - cost=7 / hit_count=21 / value=6.0 / additional_value=0.0
+  - innate skills (3):
+    - **新增: Attack Multiply ×1.74232 — 光属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】**
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - **新增: DamageLimitBreak Addition +700000000.0 — 光属性の魔剣のダメージ上限が7億アップ**
+    - **删除: Attack Multiply ×1.75 — 光属性の魔剣の攻撃力が絶大にアップ**
+- [`130602`](weapons.json#L127823) 不知火検校【極】
+  - base_name: 不知火検校 (costume: 極魔装)
+  - element=闇(5) / type=投擲(9) / rarity=S(3) / cv=石原夏織
+  - max stats: HP=11960 / ATK=9750 / DEF=5980 / SPD=31 / BREAK=1630
+  - hit_counts=[3, 4, 8] (3段)  motion_speed=[3.0/3.0/1.0]  mp=150
+  - three_size=75/55/76 / initial_slot=2
+  - BD: 煌月惨萃三千世界 (arts_id=306)
+    - description: 敵全体に超強力な33連ダメージ＆一瞬だけ攻撃力2倍
+    - cost=6 / hit_count=33 / value=3.5 / additional_value=0.0
+  - innate skills (3):
+    - GuardBreak Multiply ×1.75 — 闇属性の魔剣が絶大にガードブレイクしやすく
+    - Attack Multiply ×1.25 — 闇属性の魔剣の攻撃力がかなりアップ
+    - **新增: Enemy_BreakAttack Multiply ×3.0 — ブレイク時に闇属性の魔剣の攻撃力が3倍**
+- [`131701`](weapons.json#L131381) ヴァジュラ
+  - base_name: ヴァジュラ (costume: 魔装)
+  - element=光(4) / type=杖棒(4) / rarity=S(3) / cv=木戸衣吹
+  - max stats: HP=9800 / ATK=5700 / DEF=4500 / SPD=29 / BREAK=950
+  - hit_counts=[6, 6, 9] (3段)  motion_speed=[3.0/3.0/1.0]  mp=220
+  - three_size=77/56/74 / **initial_slot=2 → 3**
+  - BD: 天雷デーヴァラージャ (arts_id=317)
+    - description: 敵全体に超強力な69連ダメージ＆一瞬だけスピード狂化
+    - cost=7 / hit_count=69 / value=2.3 / additional_value=0.0
+  - innate skills (2):
+    - Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ
+    - **新增: Mez Repel_Percent ×50.0 — 麻痺の発生を確率で回避する**
+- [`131702`](weapons.json#L131538) ヴァジュラ【極】
+  - base_name: ヴァジュラ (costume: 極魔装)
+  - element=光(4) / type=杖棒(4) / rarity=S(3) / cv=木戸衣吹
+  - max stats: HP=12740 / ATK=7410 / DEF=5850 / SPD=29 / BREAK=1240
+  - hit_counts=[7, 6, 12] (3段)  motion_speed=[3.0/3.0/1.0]  mp=220
+  - three_size=77/56/74 / **initial_slot=3 → 4**
+  - BD: 天雷デーヴァラージャ (arts_id=317)
+    - description: 敵全体に超強力な69連ダメージ＆一瞬だけスピード狂化
+    - cost=7 / hit_count=69 / value=2.3 / additional_value=0.0
+  - innate skills (3):
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - **新增: DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ**
+    - **新增: Mez Repel_Percent ×100.0 — 麻痺の発生を完全回避する**
+- [`163101`](weapons.json#L255461) 魔弾シーダー
+  - base_name: 魔弾シーダー (costume: 魔装)
+  - element=水(2) / type=連弩(6) / rarity=S(3) / cv=稲垣好
+  - max stats: HP=9850 / ATK=1420 / DEF=3700 / SPD=28 / BREAK=2470
+  - hit_counts=[12, 13, 10] (3段)  motion_speed=[2.0/2.4/1.2]  mp=340
+  - three_size=89/60/87 / initial_slot=4
+  - BD: 散華粉塵バレットシーダー (arts_id=631)
+    - description: 敵全体に超絶強力な150連ダメージ＆1waveの間攻撃全体化しサファイア量2倍
+    - cost=9 / hit_count=150 / value=5.0 / additional_value=0.0
+  - innate skills (2):
+    - BlazeAttack Multiply ×2.493 — 水属性の魔剣のB.D.攻撃力が大幅にアップ【熟度UPにつれてさらに効果値UP】
+    - Attack Multiply ×1.25 — 水属性の魔剣の攻撃力がかなりアップ
+- [`163102`](weapons.json#L255630) 魔弾シーダー【極】
+  - base_name: 魔弾シーダー (costume: 極魔装)
+  - element=水(2) / type=連弩(6) / rarity=S(3) / cv=稲垣好
+  - max stats: HP=12800 / ATK=1840 / DEF=4800 / SPD=28 / BREAK=3210
+  - hit_counts=[13, 13, 13] (3段)  motion_speed=[2.0/2.4/1.2]  mp=340
+  - three_size=89/60/87 / initial_slot=5
+  - BD: 散華粉塵バレットシーダー (arts_id=631)
+    - description: 敵全体に超絶強力な150連ダメージ＆1waveの間攻撃全体化しサファイア量2倍
+    - cost=9 / hit_count=150 / value=5.0 / additional_value=0.0
+  - innate skills (3):
+    - BlazeAttack Multiply ×2.989 — 水属性の魔剣のB.D.攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - **新增: DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ**
+
+---
+
+★ 跳过的 derived 表(非 local-master.dat 产物,需 server response 聚合):
+- `memory_slot_skills.json`
+- `npc_motions.json`
