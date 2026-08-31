@@ -11,7 +11,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet"/>
   <link href="css/application-8b5a79c93669c65fd3c25248879bc4eb50b055b177681c54b3789c39c3959504.css" media="all" rel="stylesheet"/>
   <meta content="authenticity_token" name="csrf-param"/>
-  <meta content="MiCp0/Brz5eauaGuO7iO6PC7DYRWiPKhdKLKcJznxYZmYatnCU0jhBu5R37CH9a/EGKxgZTiRUcRzGBDBkEIpA==" name="csrf-token"/>
+  <meta content="csnRMnpeF8QGe2zFAyPaWsCFe05H0Q35xKuqNa8Ua4bAvVZ0UtsB5cxv7qiMVcd26+77wxtKFM0il4QzkVT8OQ==" name="csrf-token"/>
   <script src="js/jquery.min.js">
   </script>
   <script src="js/jquery-migrate.min.js">
@@ -37,6 +37,14 @@
       <a class="title_text">
        【四コマ劇場】最新話更新 第585話を公開!!【っくしゅんっ！】
       </a>
+      <select class="version_select" onchange="if(this.value)bxbSwitchVersion(this.value)" style="margin-left:8px;max-width:200px">
+       <option selected="selected" value="./04759_20260729.html">
+        2026/08/31 16:09:12
+       </option>
+       <option value="./04759_20260729_v20260729190000.html">
+        2026/07/29 19:00:00
+       </option>
+      </select>
      </div>
      <div class="category">
       <img alt="List news" class="img-responsive" src="assets/list_news-da0d0f085855b72c1240fe1d67834603168d8a826d1078824cbab09ea0d052c6.png"/>
@@ -228,7 +236,7 @@
                </span>
                <br/>
                <div style="padding-left:14px;">
-                敵全体に超絶強力な99連ダメージ＆1waveの間攻撃全体化しサファイア量2倍
+                敵全体に超絶強力な150連ダメージ＆1waveの間攻撃全体化しサファイア量2倍
                </div>
               </div>
               <div class="ma_data">
@@ -402,7 +410,7 @@
                </span>
                <br/>
                <div style="padding-left:14px;">
-                敵全体に超絶強力な99連ダメージ＆1waveの間攻撃全体化しサファイア量2倍
+                敵全体に超絶強力な150連ダメージ＆1waveの間攻撃全体化しサファイア量2倍
                </div>
               </div>
               <div class="ma_data">
@@ -426,6 +434,17 @@
                <br/>
                <div style="padding-left:14px; margin-bottom:4px;">
                 水属性の魔剣の攻撃力が大幅にアップ
+                <br/>
+               </div>
+               <span class="b gtext67">
+                スキル：
+               </span>
+               <span class="w_data skillname">
+                拡散の魔弾
+               </span>
+               <br/>
+               <div style="padding-left:14px; margin-bottom:4px;">
+                自身のダメージ上限が10億アップ
                 <br/>
                </div>
               </div>
@@ -642,6 +661,20 @@ gtag('config', 'G-C5DZFTSEB3');
     return false;
   });
 });
+  </script>
+  <script id="version-switcher-js">
+   function bxbSwitchVersion(u){
+  fetch(u).then(function(r){return r.text();}).then(function(t){
+    var d = new DOMParser().parseFromString(t, "text/html");
+    var nb = d.querySelector(".news_body");
+    var cur = document.querySelector(".news_body");
+    if (nb && cur) { cur.replaceWith(document.importNode(nb, true)); }
+    var tm = d.querySelector(".news_heading .time");
+    var ct = document.querySelector(".news_heading .time");
+    if (tm && ct) { ct.replaceWith(document.importNode(tm, true)); }
+    if (window.twttr && twttr.widgets && twttr.widgets.load) { twttr.widgets.load(); }
+  });
+}
   </script>
  </body>
 </html>
