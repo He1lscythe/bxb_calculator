@@ -129,7 +129,7 @@ const crystalWeapon = (c) => {
 
 // 発動条件: 走 shared/effect-tags.js、跟 CRYSTAL_SPEC.filters.condition_trigger 同源。
 // 原来读 effects[0].condition (adapter 映射)、FellDown_ 落 0 且 Enemy_Break* 不在表里 →
-// filter 能按「倒れ」「敵ブレイク状態」筛出来、行上却一个条件 badge 都不显示。
+// filter 能按「倒れ」「敵BK状態」筛出来、行上却一个条件 badge 都不显示。
 const crystalCondition = (c) => effectCondition((c.effects || [])[0])?.id ?? 0;
 
 export const applyFilters = () => {

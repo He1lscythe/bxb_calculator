@@ -68,7 +68,7 @@ test('effectScope: element/weapon = 0 是 master 的「未设定」→ 当作无
 });
 
 // ============================================================
-// effectCondition — master parameter 前缀直判、含 4 倒れ / 5 敵ブレイク状態
+// effectCondition — master parameter 前缀直判、含 4 倒れ / 5 敵BK状態
 // ============================================================
 test('effectCondition: HP 曲线 3 档', () => {
   assert.deepStrictEqual(effectCondition({ _parameter: 'Vitality_Attack' }), { id: 1, label: '逆窮鼠' });
@@ -76,16 +76,16 @@ test('effectCondition: HP 曲线 3 档', () => {
   assert.deepStrictEqual(effectCondition({ _parameter: 'Break_Attack' }), { id: 3, label: '破損' });
 });
 
-test('effectCondition: ★ FellDown_ → 倒れ / Enemy_Break* → 敵ブレイク状態', () => {
+test('effectCondition: ★ FellDown_ → 倒れ / Enemy_Break* → 敵BK状態', () => {
   // 旧的 e.condition 路径下这两类会落 0、条件在 viewer 上整个看不见 (141 条)
   assert.deepStrictEqual(effectCondition({ _parameter: 'FellDown_Attack' }), { id: 4, label: '倒れ' });
   assert.deepStrictEqual(effectCondition({ _parameter: 'Enemy_BreakAttack' }), {
     id: 5,
-    label: '敵ブレイク状態',
+    label: '敵BK状態',
   });
   assert.deepStrictEqual(effectCondition({ _parameter: 'Enemy_BreakDamageLimitBreak' }), {
     id: 5,
-    label: '敵ブレイク状態',
+    label: '敵BK状態',
   });
 });
 
@@ -121,7 +121,7 @@ test('condTagHtml: cond-N 的 N 跟 effectCondition 的 id 一致', () => {
   );
   assert.strictEqual(
     condTagHtml({ _parameter: 'Enemy_BreakAttack' }),
-    '<span class="cond-tag cond-5">敵ブレイク状態</span>',
+    '<span class="cond-tag cond-5">敵BK状態</span>',
   );
   assert.strictEqual(condTagHtml({ _parameter: 'Attack' }), '');
 });

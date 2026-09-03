@@ -1019,7 +1019,7 @@ test('装備パネル: 倍率が熟度 / HP / ソウル Lv / 結晶 lv に追従
   expect(cr1).not.toBe(cr20);
 });
 
-test('装備パネル: 未発動条件の行は消えずに薄く残る (敵BK OFF → 敵ブレイク状態 行)', async ({ page }) => {
+test('装備パネル: 未発動条件の行は消えずに薄く残る (敵BK OFF → 敵BK状態 行)', async ({ page }) => {
   await waitHenseiReady(page);
   await setupSlot0WithChara(page, 107701);   // 带 Enemy_BreakAttack
   await page.evaluate(() => window.setEnemyBk(false));
