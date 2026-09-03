@@ -1,7 +1,7 @@
 // tests/ui/test_effect_tags.spec.js — 効果 tag (分類 / scope / 発動条件) 的跨页面一致性
 //
 // 発動条件 tag 统一走 parameter-class.js 的 conditionTrigger(master parameter) + COND_TRIGGER_LABEL
-// (0..5、含「倒れ」「敵ブレイク状態」),跟各 spec 的 condition_trigger filter 同一套 enum。
+// (0..5、含「倒れ」「敵BK状態」),跟各 spec 的 condition_trigger filter 同一套 enum。
 // 改造前显示侧读的是 adapter 产出的 e.condition (0..4):FellDown_ 被映射成 0、Enemy_Break* 不在
 // 表里也落 0 → 全库 41 条 FellDown_ + 100 条 Enemy_Break* 的条件在 viewer 上整个看不见,
 // 而 crystals/bladegraphs 的 filter 早就能按这两档筛 —— 同一个页面里筛得出来却不标。
@@ -35,7 +35,7 @@ async function rowBadges(page, limit = 5) {
 
 test.describe('効果 tag', () => {
   // ★ 核心回归: filter 能筛出来的条件,行上必须标得出来
-  for (const label of ['破損', '窮鼠', '倒れ', '敵ブレイク状態']) {
+  for (const label of ['破損', '窮鼠', '倒れ', '敵BK状態']) {
     test(`crystals: condition_trigger filter「${label}」→ 行にも同じ条件 badge`, async ({ page }) => {
       const errs = [];
       page.on('pageerror', (e) => errs.push(e.message));
@@ -63,7 +63,7 @@ test.describe('効果 tag', () => {
     expect(bg).not.toBe('rgba(0, 0, 0, 0)');
   });
 
-  test('characters: 詳細パネルに 倒れ / 敵ブレイク状態 が出る (chara 107701)', async ({ page }) => {
+  test('characters: 詳細パネルに 倒れ / 敵BK状態 が出る (chara 107701)', async ({ page }) => {
     const errs = [];
     page.on('pageerror', (e) => errs.push(e.message));
     await page.goto('/pages/characters.html');
@@ -74,7 +74,7 @@ test.describe('効果 tag', () => {
       ...new Set([...document.querySelectorAll('#chara-detail .cond-tag')].map((x) => x.textContent)),
     ]);
     expect(cond).toContain('倒れ');
-    expect(cond).toContain('敵ブレイク状態');
+    expect(cond).toContain('敵BK状態');
     expect(errs, errs.join('\n')).toHaveLength(0);
   });
 

@@ -119,7 +119,7 @@ export const SOUL_TAG_COLOR = {
 
 // 注: 旧的 CONDITION (0..4、adapter 产出的 effects[].condition) 已删 —— 0 callsite。
 // 発動条件的显示和 filter 现在统一走 parameter-class.js 的 conditionTrigger(master parameter)
-// + COND_TRIGGER_LABEL (0..5、多出「倒れ」和「敵ブレイク状態」两档)。旧表把 FellDown_ 映射成 0、
+// + COND_TRIGGER_LABEL (0..5、多出「倒れ」和「敵BK状態」两档)。旧表把 FellDown_ 映射成 0、
 // Enemy_Break* 根本不在表里,那 141 条 effect 的条件在 viewer 上整个看不见。
 
 // 元素 → CSS 颜色变量名（用于 filter 按钮 inline style.color）

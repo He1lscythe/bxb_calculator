@@ -129,7 +129,7 @@ export const PARAMETER_CLASS_SHORT = {
   30: '割合',
   31: 'BD限',
   32: '回復',
-  33: '敵BK',
+  33: '敵BK攻',
   34: '自殺',
   35: '他',
 };
@@ -144,7 +144,7 @@ export const COND_TRIGGER_LABEL = {
   2: '窮鼠',
   3: '破損',
   4: '倒れ',
-  5: '敵ブレイク状態',
+  5: '敵BK状態',
 };
 export function conditionTrigger(p) {
   if (!p) return 0;
