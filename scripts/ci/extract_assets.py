@@ -4,7 +4,7 @@
     · luma/chroma 配对 → YCoCg 合成单张 RGBA(<base>_luminance + <base>_chrominance)
     · 忽略 Sprite(其 .image 本 UnityPy 版本抛错)→ 导其 backing/独立 Texture2D(同一图、无冗余)
     · 退化贴图(≤4×4 占位 / 全透明 / 纯单色)→ 跳过(npc-motion dummy 等)→ 无图则返回 []
-  单输出 → <out>/<cat>/<id>.png;多输出 → <out>/<cat>/<id>/<对象名>.png。布局与 D:/bxb 一致 → 给 copy_images 当源。
+  单输出 → <out>/<cat>/<id>.png;多输出 → <out>/<cat>/<id>/<对象名>.png。布局与 `<assets>` 一致 → 给 copy_images 当源。
 - parse_npc_motion: npc-motion-*.dat → {clip_name: {fps, frames, duration}} (攻速时长)。
 依赖 UnityPy + Pillow + numpy。
 """

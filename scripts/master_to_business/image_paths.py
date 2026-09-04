@@ -1,6 +1,6 @@
 """image_paths.py — master id → 本地 icon path 解析。
 
-资源位置: bxb_wiki/icons/ (从 D:\bxb 拷过来、见 copy_images.py)。
+资源位置: bxb_wiki/icons/ (从 `<assets>` 拷过来、见 copy_images.py)。
 bxb_wiki/icons/ 在 .gitignore 排除、~150MB 不入 git。
 
 命名规则:
