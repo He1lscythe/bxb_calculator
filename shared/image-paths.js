@@ -1,6 +1,6 @@
 // shared/image-paths.js — master id → icons/ 相对路径
 //
-// 资源位置: crawl/icons/ (从 D:\bxb 拷过来、见 scripts/master_to_business/copy_images.py)
+// 资源位置: crawl/icons/ (从解包资源目录拷过来、见 scripts/master_to_business/copy_images.py)
 // .gitignore 排除、~150MB 不入 git
 //
 // 命名规则:
@@ -20,7 +20,7 @@ export const bgIcon = (pictureId) => `${BASE}/bg/${pictureId}.png`;
 export const soulIcon = (textureId) => `${BASE}/soul/${textureId}.png`;
 
 // 注: 曾有 crystalIcon (multi-suffix `{id}_{N}.png`、onerror fallback _2) — 已删。
-// D:/bxb 重解后无 _N 源、cascade 不再需要;crystal 图标路径现在由
+// 资源重解后无 _N 源、cascade 不再需要;crystal 图标路径现在由
 // shared/crystal-spec.js 直接拼 `../icons/crystal/{id}.png`。
 
 // chara icon 叠层资源 (尺寸都跟 chara icon 100×100 配合好):

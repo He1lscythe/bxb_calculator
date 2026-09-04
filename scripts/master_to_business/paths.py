@@ -13,19 +13,27 @@
     ├── unpacking/       ← Frida 抓包 / 解包产物 (跨 repo)
     └── master_tables/   ← git worktree of data/master-tables
 
-历史上这里写死过开发机绝对路径 (`F:/OneDrive - .../Game/BxB`),换机器 / OneDrive 换盘符
-就整批 build script 挂掉。现在一律相对 `PROJECT_ROOT` 推。
+历史上这里写死过开发机绝对路径,换机器就整批 build script 挂掉。现在一律相对
+`PROJECT_ROOT` 推。
+
+## 解包资源目录 `<assets>`
+
+图标/motion 的源资源(`<assets>/weapon/`、`<assets>/_dat_cache/assets/` 等)在仓库外、
+路径机器相关,由 `assets_dir()` 解析、tracked 代码里一律写 `<assets>` 占位。
 
 ## env 覆盖
 
 - `BXB_MASTER_TABLES` — master_tables **工作树根**(脚本自己拼 `/master_data`)。
   CI 指向 checkout 目录(见 .github/workflows/update-database.yml);本地不设即用上面的布局。
 - `BXB_UNPACKING` — unpacking 根,同理。
+- `BXB_ASSETS_DIR` — `<assets>` 根。CI 由 sync_icons 指向解包临时目录;
+  本地不设则读 `_local_paths.json`(untracked)的 `assets_dir`。
 
 `MASTER_DIR` / `MASTER_TABLES_DIR` 是**惰性**属性 (PEP 562 `__getattr__`):只在真被访问时
 才解析、找不到才抛 FileNotFoundError。这样只需要 `unpacking/` 的脚本(如 build_omoide)
 能安全 import 本模块,不会被 master_tables 缺失连带打死。
 """
+import json
 import os
 import re
 from functools import lru_cache
@@ -43,6 +51,31 @@ _MT_ROOT = Path(os.environ.get("BXB_MASTER_TABLES") or (BXB_ROOT / "master_table
 
 # 日期文件夹命名 YYYY_MM_DD 或 YYYY_MM_DD_HH_MM_SS (新版含时间戳)
 _DATE_FOLDER_RE = re.compile(r"^\d{4}_\d{2}_\d{2}(_\d{2}_\d{2}_\d{2})?$")
+
+# 本机路径配置 (untracked、见 docs/local_env.md)
+_LOCAL_PATHS = PROJECT_ROOT / "_local_paths.json"
+
+
+@lru_cache(maxsize=1)
+def assets_dir() -> Path:
+    """返回 `<assets>` 解包资源根 Path。
+
+    env BXB_ASSETS_DIR > `_local_paths.json` 的 `assets_dir`。
+
+    Raises:
+        FileNotFoundError: 两者都没配
+    """
+    env = os.environ.get("BXB_ASSETS_DIR")
+    if env:
+        return Path(env)
+    if _LOCAL_PATHS.is_file():
+        v = json.loads(_LOCAL_PATHS.read_text(encoding="utf-8")).get("assets_dir")
+        if v:
+            return Path(v)
+    raise FileNotFoundError(
+        "<assets> 资源目录未配置。设 env BXB_ASSETS_DIR、"
+        f'或在 {_LOCAL_PATHS.name} 写 {{"assets_dir": "<解包资源根>"}}'
+    )
 
 
 def master_tables_dir() -> Path:
@@ -104,6 +137,11 @@ if __name__ == "__main__":
     print(f"PROJECT_ROOT   = {PROJECT_ROOT}")
     print(f"BXB_ROOT       = {BXB_ROOT}")
     print(f"UNPACKING_DIR  = {UNPACKING_DIR}  (exists={UNPACKING_DIR.is_dir()})")
+    try:
+        ad = assets_dir()
+        print(f"ASSETS_DIR     = {ad}  (exists={ad.is_dir()})")
+    except FileNotFoundError as e:
+        print(f"ASSETS_DIR     = <未配置>\n{e}")
     try:
         md = latest_master_dir()
         print(f"MASTER_DIR     = {md}")

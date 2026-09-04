@@ -1,19 +1,21 @@
-"""copy_images.py — 一次性从 D:\bxb 把图片拷到 bxb_wiki/icons/
+"""copy_images.py — 一次性从 `<assets>` 把图片拷到 bxb_wiki/icons/
+
+`<assets>` = 解包资源根、由 paths.assets_dir() 解析 (env BXB_ASSETS_DIR / _local_paths.json)。
 
 源 → 目标:
-- chara : D:/bxb/weapon/stand/s/{6位}.png → bxb_wiki/icons/chara/{variant_id}.png    (~1106 file)
-- masou : D:/bxb/weapon/stand/s/{7位}.png → bxb_wiki/icons/masou/{wc_id}.png         (~622 file)
-- crystal: D:/bxb/materia/icon/{id}_{N}.png → bxb_wiki/icons/crystal/{id}_{N}.png    (~3348 file)
-- bg    : D:/bxb/picture/m/{id}.png → bxb_wiki/icons/bg/{pic_id}.png                  (~499 file)
-- soul  : D:/bxb/npc/stand/m/{texture_id}.png → bxb_wiki/icons/soul/{texture_id}.png  (~478 file)
-- misc  : D:/bxb/_misc/marriage_*.png → bxb_wiki/icons/_misc/                          (3 file)
-- app_icons: D:/bxb/_app_icons/icon_weapon_type_42_*.png + icon_element_list_*.png  (~18 file)
+- chara : <assets>/weapon/stand/s/{6位}.png → bxb_wiki/icons/chara/{variant_id}.png    (~1106 file)
+- masou : <assets>/weapon/stand/s/{7位}.png → bxb_wiki/icons/masou/{wc_id}.png         (~622 file)
+- crystal: <assets>/materia/icon/{id}_{N}.png → bxb_wiki/icons/crystal/{id}_{N}.png    (~3348 file)
+- bg    : <assets>/picture/m/{id}.png → bxb_wiki/icons/bg/{pic_id}.png                  (~499 file)
+- soul  : <assets>/npc/stand/m/{texture_id}.png → bxb_wiki/icons/soul/{texture_id}.png  (~478 file)
+- misc  : <assets>/_misc/marriage_*.png → bxb_wiki/icons/_misc/                          (3 file)
+- app_icons: <assets>/_app_icons/icon_weapon_type_42_*.png + icon_element_list_*.png  (~18 file)
              → bxb_wiki/icons/_app_icons/   (chara icon 叠层用)
 
 总 ~6000 file、~150 MB。bxb_wiki/icons/ 在 .gitignore 排除 (跟 omoide_icon/ 同策略)。
 
 设计:
-- 不依赖 master_tables (源/目标按 D:\bxb 文件命名直接拷、master 不参与)
+- 不依赖 master_tables (源/目标按 `<assets>` 文件命名直接拷、master 不参与)
 - 已存在 → skip (再跑不重复拷)
 - 报告 cover 统计
 
@@ -22,19 +24,22 @@
   python scripts/master_to_business/copy_images.py --force   # 覆盖已存在
 """
 import json
-import os
 import re
 import shutil
 import struct
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from paths import assets_dir  # noqa: E402
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 ICONS_DIR = PROJECT_ROOT / "icons"
 DATA_DIR = PROJECT_ROOT / "data"
 
-# 本地默认 D:/bxb;CI 经 env BXB_ASSETS_DIR 指向解包临时目录 (sync_icons 下载+extract 落点)
-DBXB = Path(os.environ.get("BXB_ASSETS_DIR", "D:/bxb"))
+# CI 经 env BXB_ASSETS_DIR 指向解包临时目录 (sync_icons 下载+extract 落点)
+DBXB = assets_dir()
 
 
 def _png_size(p: Path):
@@ -79,7 +84,7 @@ def main():
     if not DBXB.is_dir():
         print(f"ERROR: source {DBXB} 不存在")
         sys.exit(1)
-    print(f"copy_images: D:\\bxb → {ICONS_DIR}")
+    print(f"copy_images: {DBXB} → {ICONS_DIR}")
     print(f"force overwrite: {force}\n")
 
     # 1. chara: weapon/stand/s 6 位
@@ -141,7 +146,7 @@ def main():
 
     # 3. crystal: materia/icon/{id}.png → crystal/{id}.png
     #    extract_assets/parse_unity_dat_v4 已 Sprite-only → materia-icon 单张无后缀 {id}.png;
-    #    旧 {id}_{N} cascade 不再需要 (D:/bxb 重解后无 _N 源)。
+    #    旧 {id}_{N} cascade 不再需要 (`<assets>` 重解后无 _N 源)。
     src = DBXB / "materia/icon"
     dest = ICONS_DIR / "crystal"
     print(f"\n=== crystal ({dest}) ===")
@@ -189,7 +194,7 @@ def main():
     print(f"  copied {c}, filtered {fi}, skipped existing {sk}")
 
     # 5b. soul fallback: npc/stand/m 缺的 (低 ★ 初始 job id=1/2/6/8/9/10/12)
-    # 扫 D:/bxb/npc/{id+1000}_{1..7}.png、找分辨率 148×196 的 banner、命名为 {id:04d}.png
+    # 扫 <assets>/npc/{id+1000}_{1..7}.png、找分辨率 148×196 的 banner、命名为 {id:04d}.png
     src_npc = DBXB / "npc"
     souls_file = DATA_DIR / "souls.json"
     fb_copied = 0
