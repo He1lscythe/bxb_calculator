@@ -36,6 +36,19 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 - sparse diff core: [shared/revise-core.js](../shared/revise-core.js) (`computeDiff` / `deepApply` / 撤回 / tombstone null)
 - 一次性 wiki 提取产物: `data/_wiki_aux.json` (含 `crystal_max_value` / `chara_tags` / `chara_skill_value_scaling` / `masou_value_scaling`、永不重跑)
 
+### 仓库外路径约定
+
+仓库内不写开发机绝对路径。跨 repo / 机器相关的位置都经
+[paths.py](../scripts/master_to_business/paths.py) 解析、文档与注释里用占位符指代:
+
+| 占位符 | 含义 | 解析顺序 |
+|---|---|---|
+| `master_tables/` | master JSON (git worktree) | env `BXB_MASTER_TABLES` → `<repo 上一级>/master_tables` |
+
+| `<assets>` | 图片/motion 资源根 | env `BXB_ASSETS_DIR` → `_local_paths.json` 的 `assets_dir` |
+
+`_local_paths.json` 与 `docs/local_env.md` 都 untracked、只记本机实际位置;CI 一律走 env。
+
 ---
 
 ## 目录结构
@@ -49,7 +62,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [pages_src/](../pages_src/) | HTML 源 (5 viewer + 攻略 iframe 包装页 `dungeon_yggdrasil.html` + `_loading.html` partial) |
 | pages/ | build 产物 (已 tracked、deploy 用)。另含静态拷入的 `dungeon_map.html` (攻略地图、自包含单文件、非 build 产物;更新时直接覆盖、wrapper 用 iframe 嵌它) |
 | [data/](../data/) | 业务 JSON (master + revise + audit + wiki_aux + derived _*) |
-| icons/ | 本地图标资源 (.gitignore 排除、`copy_images.py` 从 D:/bxb 拷) |
+| icons/ | 本地图标资源 (.gitignore 排除、`copy_images.py` 从 `<assets>` 拷) |
 | omoide_icon/ | omoide icon (.gitignore 排除) |
 | [docs/](../docs/) | 项目文档 |
 | [tests/unit/](../tests/unit/) | 单测 (npm test 135/135) |
@@ -93,10 +106,10 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 
 | 模块 | 用途 |
 |---|---|
-| [paths.py](../scripts/master_to_business/paths.py) | 自动 detect 最新 `master_tables/` + 提供 `master_file()` helper |
+| [paths.py](../scripts/master_to_business/paths.py) | 自动 detect 最新 `master_tables/` + 提供 `master_file()` / `assets_dir()` helper |
 | [enums.py](../scripts/master_to_business/enums.py) | 91 項 parameter / 3 math_type / 各 enum 映射 |
-| [image_paths.py](../scripts/master_to_business/image_paths.py) | master id → D:/bxb 本地 image path 反查 |
-| [copy_images.py](../scripts/master_to_business/copy_images.py) | 数据更新时拷 D:/bxb → `icons/` (含 soul 7 张 fallback 段) |
+| [image_paths.py](../scripts/master_to_business/image_paths.py) | master id → `icons/` 本地 image path 反查 |
+| [copy_images.py](../scripts/master_to_business/copy_images.py) | 数据更新时拷 `<assets>` → `icons/` (含 soul 7 张 fallback 段) |
 | [gen_motion_table.py](../scripts/master_to_business/gen_motion_table.py) | `characters.json` → `docs/motion_table.md` (master 改 motion_id 后重跑) |
 | [fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) | 抓 altema wiki「入手方法」字段、patch 进 `data/crystals.json` (字段 `入手方法`) + `data/bladegraphs.json` (字段 `acquisition`)、按 name 匹配 |
 
@@ -231,7 +244,7 @@ python scripts/master_to_business/build_all.py
 # 3. wiki 抓「入手方法」、patch 进 data/crystals.json + data/bladegraphs.json
 python scripts/master_to_business/fetch_wiki_acquisition.py
 
-# 4. (按需) 拷 D:/bxb 图标 → icons/ (含 soul 7 张 fallback)
+# 4. (按需) 拷 <assets> 图标 → icons/ (含 soul 7 张 fallback)
 python scripts/master_to_business/copy_images.py
 
 # 5. (按需) chara master 改 motion_id 后重新生成 motion table

@@ -3,7 +3,7 @@
 每次数据更新 workflow:
 1. python scripts/master_to_business/build_all.py            # master → data/*.json
 2. python scripts/master_to_business/fetch_wiki_acquisition.py  # 本脚本、wiki → patch 入手方法
-3. python scripts/master_to_business/copy_images.py          # (按需) D:/bxb → icons/
+3. python scripts/master_to_business/copy_images.py          # (按需) <assets> → icons/
 
 字段命名 (沿用 viewer 既有 read 端):
 - crystal: '入手方法' 日文 key (cr-list.js L367 用此 key 读)

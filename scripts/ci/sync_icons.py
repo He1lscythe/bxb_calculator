@@ -2,7 +2,7 @@
 
 manifest 驱动: 扫 manifest 里图标类资源 (weapon-stand-s / weapon-damage-s / materia-icon /
 picture-m / picture-ll / npc-stand-m),推出 copy_images 会产的 icon 路径,只对**缺失**的下载 +
-extract 到临时 D:/bxb 布局目录 → 调 copy_images (BXB_ASSETS_DIR=临时) 落到 icons/。
+extract 到临时 `<assets>` 布局目录 → 调 copy_images (BXB_ASSETS_DIR=临时) 落到 icons/。
 失败/无依赖优雅降级、不阻塞数据更新。重绘 (同 id 换图) 不覆盖、属罕见、本地强刷。
 """
 import os

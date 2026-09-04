@@ -1,7 +1,10 @@
 """Dump every npc-motion-<id>.dat into a lookup-friendly JSON.
 
 
-按需手动跑 (Stage 1 orchestrator 报 weapons.json changed 时触发)。
+按需手动跑。日常不需要: update-database 每轮由 scripts/ci/动作同步.py 从 CDN
+增量补新 motion,本脚本只用于拿本地全量 .dat 重建基线。
+
+源 = `<assets>/assets/` (`<assets>` 见 paths.assets_dir())。
 
 Unified parser — works for both asset formats present:
   - "SmoothMoves" files (313): have BoneAnimationData with full bone keyframes
@@ -35,9 +38,14 @@ from collections import OrderedDict
 from pathlib import Path
 
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from paths import assets_dir  # noqa: E402
+
 sys.stdout.reconfigure(encoding='utf-8')
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+ASSETS = assets_dir() / 'assets' / 'assets'
 OUT = PROJECT_ROOT / "data" / "_npc_motions.json"
 
 
