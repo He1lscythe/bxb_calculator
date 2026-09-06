@@ -15,7 +15,7 @@ on:
         default: ""
       tasks:
         required: false
-        default: "1,2,3,4,5,6,7,8"
+        default: "1,2,3,4,5,6,7,8,9"
 
 jobs:
   prepare:
@@ -58,6 +58,14 @@ jobs:
             --exclude ".git/*" --exclude "scripts/_boot.py" \
             --exclude "data/*" --exclude "outputs/*" \
             --exclude "*.pyc" --exclude "*/__pycache__/*"
+      - name: Fetch rarity4 ref from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          mkdir -p data
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/routines/data/rarity4_base_ids.json" data/rarity4_base_ids.json --endpoint-url "${{ secrets.R2_ENDPOINT }}" || true
       - name: Fetch WARP pool from R2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
