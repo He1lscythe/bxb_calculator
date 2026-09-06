@@ -1,0 +1,128 @@
+name: bxb-ticket-change
+
+on:
+  workflow_dispatch:
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.gen.outputs.matrix }}
+      shards: ${{ steps.gen.outputs.shards }}
+      total_rate: ${{ steps.gen.outputs.total_rate }}
+      jst: ${{ steps.gen.outputs.jst }}
+    steps:
+      - id: gen
+        run: |
+          N="${{ vars.BXB_RUN_SHARDS }}"; N="${N:-16}"
+          TR="${{ vars.BXB_RUN_TOTAL_RATE }}"; TR="${TR:-8}"
+          echo "shards=$N"      >> "$GITHUB_OUTPUT"
+          echo "total_rate=$TR" >> "$GITHUB_OUTPUT"
+          echo "matrix=[$(seq -s, 0 $((N-1)))]" >> "$GITHUB_OUTPUT"
+          echo "jst=$(TZ=Asia/Tokyo date +%F)" >> "$GITHUB_OUTPUT"
+
+  run:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix:
+        shard: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+    steps:
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - name: Fetch routines code from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/routines/" . --recursive \
+            --endpoint-url "${{ secrets.R2_ENDPOINT }}" \
+            --exclude ".git/*" --exclude "scripts/_boot.py" \
+            --exclude "data/*" --exclude "outputs/*" \
+            --exclude "*.pyc" --exclude "*/__pycache__/*"
+      - name: Fetch WARP pool from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          mkdir -p warp_pool
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/warp/" warp_pool/ --recursive --endpoint-url "${{ secrets.R2_ENDPOINT }}" || true
+          chmod +x bin/wireproxy 2>/dev/null || true
+          echo "warp pool: $(ls warp_pool/*.conf 2>/dev/null | wc -l) configs"
+      - run: pip install -r requirements-daily.txt
+      - name: Fetch accounts from R2 (private)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: >
+          aws s3 cp "s3://${{ vars.R2_ACCOUNTS_BUCKET }}/accounts/yuu/accounts.csv" accounts.csv
+          --endpoint-url "${{ secrets.R2_ENDPOINT }}"
+      - name: Stagger start (shard×60s + 随机 0-15s)
+        run: |
+          sleep $(( ${{ matrix.shard }} * 60 ))
+          sleep $(( RANDOM % 16 ))
+      - name: Run shard
+        env:
+          PYTHONUNBUFFERED: "1"
+          BXB_BOOTSTRAP_KEY: ${{ secrets.BXB_BOOTSTRAP_KEY }}
+          BXB_APP_VERSION: ${{ vars.BXB_APP_VERSION }}
+          BXB_UNITY_VERSION: ${{ vars.BXB_UNITY_VERSION }}
+          BXB_WARP_POOL_DIR: warp_pool
+          BXB_WIREPROXY_BIN: bin/wireproxy
+          BXB_WARP_BURNED: warp_burned.txt
+        run: |
+          N="${{ needs.prepare.outputs.shards }}"
+          TR="${{ needs.prepare.outputs.total_rate }}"
+          CONC="${{ vars.BXB_RUN_CONCURRENCY }}"; CONC="${CONC:-8}"
+          python -m daily.ticket_change \
+            --shard ${{ matrix.shard }}/$N \
+            --accounts-file accounts.csv \
+            --concurrency "$CONC" --rate 3.0 --total-rate "$TR" \
+            --out "results-${{ matrix.shard }}.csv" > "shard-${{ matrix.shard }}.log" 2>&1
+      - name: Delete burned WARP configs from R2
+        if: always()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          if [ -s warp_burned.txt ]; then
+            B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+            while read -r f; do
+              [ -n "$f" ] && aws s3 rm "$B/warp/$f" --endpoint-url "$E" || true
+            done < warp_burned.txt
+          fi
+      - name: Upload results + log to R2 (private)
+        if: always()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+        run: |
+          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
+          JST="${{ needs.prepare.outputs.jst }}"
+          [ -f "results-${{ matrix.shard }}.csv" ] && aws s3 cp "results-${{ matrix.shard }}.csv" "$B/accounts/yuu/logs/${JST}/ticket-change-shard${{ matrix.shard }}.csv" --endpoint-url "$E" || true
+          aws s3 cp "shard-${{ matrix.shard }}.log" "$B/accounts/yuu/logs/${JST}/ticket-change-shard${{ matrix.shard }}.log" --endpoint-url "$E" || true
+
+  cleanup-old-runs:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Delete previous ticket-change runs (keep current)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate "/repos/${{ github.repository }}/actions/workflows/ticket-change.yml/runs?per_page=100" \
+            --jq '.workflow_runs[].id' | while read -r id; do
+              [ "$id" = "${{ github.run_id }}" ] && continue
+              echo "delete run $id"
+              gh api -X DELETE "/repos/${{ github.repository }}/actions/runs/$id" || true
+            done
