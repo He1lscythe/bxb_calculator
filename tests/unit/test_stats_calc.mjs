@@ -237,19 +237,63 @@ test('applyStaged: filter by base_parameter (不同 stat 不串)', () => {
 // ============================================================
 // 4. repelRate — 独立通道
 // ============================================================
-test('repelRate: sum Repel_Percent、cap 100', () => {
-  const eff = [
-    { _source: 'soul', base_parameter: 'Mez', math_type: 'Repel_Percent', value: 50, condition_factor: 1 },
-    { _source: 'crystal', base_parameter: 'Mez', math_type: 'Repel_Percent', value: 70, condition_factor: 1 },
-  ];
-  assert.strictEqual(repelRate(eff, 'Mez'), 100);  // cap
+// 独立概率 OR: rate = (1 − Π(1 − min(v,100)/100)) × 100
+// (unpacking 11_parameters.md §11.4 Compute @ 0x146D028 —— 不是线性累加)
+const _mez = (...vals) =>
+  vals.map((v, i) => ({
+    _source: i ? 'crystal' : 'soul',
+    base_parameter: 'Mez',
+    math_type: 'Repel_Percent',
+    value: v,
+    condition_factor: 1,
+  }));
+const _near = (got, want, msg) =>
+  assert.ok(Math.abs(got - want) < 1e-9, `${msg}: expected ${want}, got ${got}`);
+
+test('repelRate: 单条 = 原值', () => {
+  _near(repelRate(_mez(50), 'Mez'), 50, '50');
+  _near(repelRate(_mez(10), 'Mez'), 10, '10');
 });
-test('repelRate: 50 + 30 = 80', () => {
-  const eff = [
-    { _source: 'soul', base_parameter: 'Mez', math_type: 'Repel_Percent', value: 50, condition_factor: 1 },
-    { _source: 'crystal', base_parameter: 'Mez', math_type: 'Repel_Percent', value: 30, condition_factor: 1 },
-  ];
-  assert.strictEqual(repelRate(eff, 'Mez'), 80);
+test('repelRate: 50 & 50 → 75 (线性累加会算成 100)', () => {
+  _near(repelRate(_mez(50, 50), 'Mez'), 75, '50&50');
+});
+test('repelRate: 10 & 10 → 19 (线性累加会算成 20)', () => {
+  _near(repelRate(_mez(10, 10), 'Mez'), 19, '10&10');
+});
+test('repelRate: 50 & 30 → 65 (线性累加会算成 80)', () => {
+  _near(repelRate(_mez(50, 30), 'Mez'), 65, '50&30');
+});
+test('repelRate: 有一条 100 → 饱和 100', () => {
+  assert.strictEqual(repelRate(_mez(100, 50), 'Mez'), 100);
+  assert.strictEqual(repelRate(_mez(50, 100), 'Mez'), 100);
+});
+test('repelRate: v > 100 clamp 到 100', () => {
+  assert.strictEqual(repelRate(_mez(150), 'Mez'), 100);
+});
+test('repelRate: 负值 / null 不贡献', () => {
+  _near(repelRate(_mez(-30, 50), 'Mez'), 50, '负值');
+  _near(repelRate(_mez(null, 50), 'Mez'), 50, 'null');
+});
+test('repelRate: condition_factor 衰减、cf=0 不发动', () => {
+  const half = _mez(50);
+  half[0].condition_factor = 0.5;                       // 50 × 0.5 = 25%
+  _near(repelRate(half, 'Mez'), 25, 'cf 0.5');
+  const off = _mez(50, 50);
+  off[0].condition_factor = 0;
+  _near(repelRate(off, 'Mez'), 50, 'cf 0 → 只剩另一条');
+});
+test('repelRate: OR 与顺序无关 + 别的 parameter 不混入', () => {
+  _near(repelRate(_mez(80, 10, 50), 'Mez'), repelRate(_mez(50, 80, 10), 'Mez'), '顺序');
+  const mixed = [..._mez(50), { base_parameter: 'Stun', math_type: 'Repel_Percent', value: 50, condition_factor: 1 }];
+  _near(repelRate(mixed, 'Mez'), 50, '只算 Mez');
+  _near(repelRate(mixed, 'Stun'), 50, '只算 Stun');
+});
+test('repelRate: 无命中 → 0', () => {
+  assert.strictEqual(repelRate([], 'Mez'), 0);
+  assert.strictEqual(
+    repelRate([{ base_parameter: 'Mez', math_type: 'Multiply', value: 50, condition_factor: 1 }], 'Mez'),
+    0,
+  );
 });
 
 // ============================================================
