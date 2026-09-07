@@ -72,6 +72,34 @@
 <div id="loading-screen"></div>
 
 
+    <!-- 倍率式の説明 (潜在開放と同じ中央 modal。中身は crystalEffectiveValue と同一の式) -->
+    <div id="cr-help-modal">
+      <div class="ce-modal-overlay" onclick="closeCrystalHelp()"></div>
+      <div class="ce-modal-content" style="width: min(560px, 94vw)">
+        <div class="ce-modal-header">
+          <div class="ce-modal-title"><span class="ce-modal-name">結晶の倍率計算</span></div>
+          <button class="ce-modal-close" onclick="closeCrystalHelp()">×</button>
+        </div>
+        <div class="ce-modal-body">
+          <div class="cr-help">
+            <div class="top">効果値 = <b>初期値</b> × M(Lv) × M(重量) × M(純度)</div>
+            <span class="f">M(Lv) &nbsp;= 1 + (Lv倍率 − 1) × (Lv − 1) ÷ (最大Lv − 1)</span>
+            <span class="f">M(重量) = 1 + (重量倍率 − 1) × (重量 − min) ÷ (max − min)</span>
+            <span class="f">M(純度) = 1 + (純度倍率 − 1) × (純度 − min) ÷ (max − min)</span>
+            <ul>
+              <li>倍率が未設定の次元は <span class="hl">×1</span>(効果なし)</li>
+              <li>min = max の次元は常に最大倍率(重量/純度が固定の結晶)</li>
+              <li>最大Lv = 1 の結晶は M(Lv) = 1</li>
+            </ul>
+            <div class="note">
+              3 つの倍率がすべて未設定の結晶は、最大値まで Lv 線形補間:
+              <span class="f">効果値 = 初期値 + (最大値 − 初期値) × (Lv − 1) ÷ (最大Lv − 1)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="page-wrap">
       <div id="content">
         <div id="filters">
@@ -87,8 +115,8 @@
               type="button"
               class="stats-help-btn"
               id="cr-help-btn"
-              onclick="toggleCrystalHelp(this)"
-              aria-expanded="false"
+              onclick="openCrystalHelp()"
+              aria-haspopup="dialog"
             >
               <span class="qm">?</span>説明
             </button>
@@ -162,8 +190,6 @@
         fmt,
         parseBairituVal,
         hideLoading,
-        min,
-        toggleHelpPopover,
       } from '../js/utils.js';
       import {
         initFilterToggles,
@@ -189,21 +215,18 @@
 
       Nav.init();
 
-      // 倍率式の説明。中身は shared/hensei-helpers.js の crystalEffectiveValue と同一
-      const CR_HELP = min`
-        効果値 = <b>初期値</b> × M<sub>Lv</sub> × M<sub>重量</sub> × M<sub>純度</sub>
-        <span class="f">M(Lv) = 1 + (Lv倍率 − 1) × (Lv − 1) ÷ (最大Lv − 1)</span>
-        <span class="f">M(重量) = 1 + (重量倍率 − 1) × (重量 − min) ÷ (max − min)</span>
-        <span class="f">M(純度) = 1 + (純度倍率 − 1) × (純度 − min) ÷ (max − min)</span>
-        <span class="note">
-        ・各倍率が未設定の次元は <span class="hl">×1</span>(効果なし)
-        <br />・min = max の次元は常に最大倍率(重量/純度が固定の結晶)
-        <br />・最大Lv = 1 の結晶は M(Lv) = 1
-        <br />・3 倍率すべて未設定なら
-        <span class="f">効果値 = 初期値 + (最大値 − 初期値) × (Lv − 1) ÷ (最大Lv − 1)</span>
-        </span>`;
-      const toggleCrystalHelp = (btn) =>
-        toggleHelpPopover(btn, CR_HELP, 'cr-help-note', 'wide');
+      // 中身は静的 markup (#cr-help-modal)。潜在開放と同じ overlay + × で閉じる
+      const openCrystalHelp = () => {
+        const m = document.getElementById('cr-help-modal');
+        if (!m) return;
+        m.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      };
+      const closeCrystalHelp = () => {
+        const m = document.getElementById('cr-help-modal');
+        if (m) m.style.display = 'none';
+        document.body.style.overflow = '';
+      };
 
       // ===== DATA LOAD (master schema → wiki adapter) =====
       // 同时 fetch crystal_revise.json (含 max_value 等 server-fold 字段)
@@ -236,7 +259,8 @@
         resetFilters,
         toggleFilters,
         toggleExpand,
-        toggleCrystalHelp,
+        openCrystalHelp,
+        closeCrystalHelp,
         updateReviseBar,
         escHtml,
         fmt,
