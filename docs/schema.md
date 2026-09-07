@@ -91,12 +91,12 @@ server-fold 字段 (非 master 直给、走 `*_revise.json`):
 **没有 wiki 推断的 "最终加算 / 最终乗算"**。游戏实际计算 pipeline 不区分"最终"阶段、只分 Mul 池 + Add 池 (50 步 EAD 内累积)。
 
 > ⚠ 老文档里的 **`Reduce100`** 就是现在的 `Repel_Percent`(同一个 math=3 槽位、旧名)。
-> BE 侧 enum 是 `None=0 / Addition=1 / Multiply=2 / Repel_Percent=3`,**跟 #JS 的 Mul/Add 编号互换**;
-> 真实合并式是独立概率 OR:`(1 − Π(1 − p_i)) × 100`、`p_i = clamp(v_i, 0, 100) / 100`
-> ([11_parameters.md §11.4](../../unpacking/docs/HOWTO_battle/11_parameters.md))。
+> BE 侧 enum 是 `None=0 / Addition=1 / Multiply=2 / Repel_Percent=3`,**跟 #JS 的 Mul/Add 编号互换**。
+> 合并式是独立概率 OR:`(1 − Π(1 − p_i)) × 100`、`p_i = clamp(v_i, 0, 100) / 100`
+> ([11_parameters.md §11.4](../../unpacking/docs/HOWTO_battle/11_parameters.md));`repelRate` 已按此实现,
+> 见 [hensei_calc.md](hensei_calc.md#repel_percent-独立通道)。
 > 命中的 parameter 只有 6 个 proc-rate 类:`Mez` / `Stun` / `InstantDeath` / `BlazeAbsorb` /
-> `RateDamage` / `BlazeLockPurge`。**hensei 目前用的是简化的线性累加 + clamp**、见
-> [hensei_calc.md](hensei_calc.md#repel_percent-独立通道)。
+> `RateDamage` / `BlazeLockPurge`。
 
 ### 2.3 RANGE
 

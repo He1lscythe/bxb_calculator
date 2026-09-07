@@ -231,25 +231,28 @@ final_damage = clamp(Total, 0, limitMaxDamage)
 `Repel_Percent` 不影响 stat 数值、是 status 回避率。命中的 parameter 只有 6 个 proc-rate 类:
 `Mez` / `Stun` / `InstantDeath` / `BlazeAbsorb` / `RateDamage` / `BlazeLockPurge`。
 
-**hensei 现在的实现** (`repelRate`、线性累加):
+**独立概率 OR 合并** (`repelRate`、跟游戏一致 —— [11_parameters.md §11.4](../../unpacking/docs/HOWTO_battle/11_parameters.md)
+的 `Compute @ 0x146D028` 反编译):
 
 ```
-repel_rate(status) = min(100, Σ(value × condition_factor))
+p_i        = min(value_i × condition_factor_i, 100) / 100      # value < 0 → 该条不贡献
+repel_rate = (1 − Π(1 − p_i)) × 100
 ```
 
-例: `Mez Repel_Percent 50` 表示 50% 几率全免疫麻痺。
+例: 单条 `Mez Repel_Percent 50` = 50% 免疫麻痺;两条 50% 叠加 = **75%**(不是 100%)、
+两条 10% = 19%、任一条 100% → 饱和 100%。
 
-> ⚠ **这是简化式、跟游戏不一致**。真实合并是独立概率 OR
-> ([11_parameters.md §11.4](../../unpacking/docs/HOWTO_battle/11_parameters.md)、
-> `Compute @ 0x146D028` 反编译):
->
-> ```
-> repel_rate = (1 − Π(1 − p_i)) × 100 ,  p_i = clamp(value_i, 0, 100) / 100
-> ```
->
-> 单条 effect 时两者相同,**2 条以上就会偏高**:两个 50% 线性算 100%、真实是 75%。
-> 目前只在 UI 显示回避率、不参与 stat / 伤害,所以偏差没有扩散;要修就是把 `repelRate`
-> 换成上面的 OR 式(顺带 `condition_factor` 应作用在 `p_i` 上)。
+> ⚠ **不是线性累加**。`Compute` 的 `DefaultValue = 0`、逐条 pairwise 合并;OR 满足交换/结合律,
+> 所以实现里直接连乘 `Π(1 − p_i)`、跟 fold 顺序无关。
+> 2026-09-07 之前这里写的是 `min(100, Σ value × cf)` —— 单条时一样、2 条以上偏高(两个 50% 算成 100%),已改。
+> `condition_factor` 先乘进 value 再 clamp,所以 gate 没发动 (cf=0) 的那条自然不贡献。
+> 游戏侧是 float32(`s` 寄存器),这里跟 pipeline 其余部分一致用 double、差 ~1e-7,不到显示精度。
+
+命中的 parameter 就是那 6 个 proc-rate 类,`data/` 里实测 594 条:
+`BlazeAbsorb` 190 / `InstantDeath` 182 / `Mez` 140 / `Stun` 52 / `RateDamage` 26 / `BlazeLockPurge` 4
+(其中 404 条 value=100 即完全回避、36 条 value=null)。
+
+> ℹ `repelRate` 目前**已实现但还没接进 UI** —— 全仓库只有单测调它,hensei 面板还没有回避率这一行。
 
 ## 删除的 enum
 

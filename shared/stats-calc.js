@@ -839,13 +839,24 @@ export function serverFoldHitCount(baseHits, effects, targetSlotIdx, stHits = nu
 // ============================================================
 // Repel_Percent 独立通道 — 不影响 stat
 // ============================================================
+// 独立概率 OR 合并 (unpacking 11_parameters.md §11.4、`Compute @ 0x146D028` 反编译):
+//   p_i    = min(v_i, 100) / 100
+//   factor = v_i >= 0 ? 1 − p_i : 1        // 负值短路成"完全不 proc" (fcsel ... pl)
+//   rate   = (1 − Π factor) × 100
+// `DefaultValue = 0` + 逐条 pairwise Compute;OR 满足交换/结合律 → 直接连乘等价。
+// 例: 50 & 50 → 75 (不是 100)、10 & 10 → 19、任一条 100 → 饱和 100。
+// cf (HP-curve / gate) 先乘进 value 再 clamp,cf=0 那条就不贡献。
+// 游戏侧是 float32 (s 寄存器),这里跟 pipeline 其余部分一致用 double、差 ~1e-7 不到显示精度。
 export function repelRate(effects, parameter) {
-  return Math.min(
-    100,
-    effects
-      .filter((e) => e.base_parameter === parameter && e.math_type === 'Repel_Percent')
-      .reduce((s, e) => s + e.value * (e.condition_factor ?? 1), 0),
-  );
+  let miss = 1;
+  for (const e of effects) {
+    if (e.base_parameter !== parameter || e.math_type !== 'Repel_Percent') continue;
+    const v = e.value * (e.condition_factor ?? 1);
+    if (!(v >= 0)) continue; // 负值 / NaN 短路 = 完全不 proc (null → 0、factor 1、结果一样)
+    miss *= 1 - Math.min(v, 100) / 100;
+    if (miss === 0) return 100; // 有一条 100% → 饱和、后面不用算
+  }
+  return (1 - miss) * 100;
 }
 
 // ============================================================
