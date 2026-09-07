@@ -184,6 +184,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | `js/filter.js` | chara viewer filter / sort 接线 (走 `shared/filter-core.js` + `chara-spec.js`) |
 | `js/soul-render.js` / `soul-edit.js` / `soul-filter.js` / `soul-state.js` | soul viewer 渲染 + tags edit + filter + 独立 state |
 | `js/cr-list.js` / `cr-edit.js` / `cr-state.js` | crystal viewer + inline 8 字段 edit + 独立 state |
+| `js/cr-sim.js` | 結晶倍率シミュレータ modal (⚙ から Lv/重量/純度/残HP を動かす、計算は crystalEffectiveValue + conditionFactor をそのまま呼ぶ) |
 | `js/bg-list.js` / `bg-state.js` | bladegraph viewer (**view-only**) + 独立 state |
 | `js/omoide-view.js` | omoide picker modal (hensei + chara 详情页用) |
 

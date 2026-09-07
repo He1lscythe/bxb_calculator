@@ -42,6 +42,7 @@ import {
   omoideEffectiveScaling,
   parseHit,
 } from './hensei-helpers.js';
+import { conditionFactor, HP_CURVE_PFX as _HP_CURVE_PFX } from './parameter-class.js';
 
 // 倍率四舍五入到 5 位小数 (复刻游戏精度): ×1.894815 → ×1.89482 再乘算
 const _round5 = (x) => Math.round((Number(x) || 0) * 1e5) / 1e5;
@@ -153,28 +154,14 @@ export function baseStats(charaWiki, tr) {
 // HP-curve / Break gate / FellDown / Enemy_Break factor
 // 按 docs/hensei_calc.md 的 wiki 线性公式
 // ============================================================
-// parameter 有 HP-curve prefix 时、按 **接收方(target)自身 HP** 算 factor (该 buff 应用到谁就看谁的 HP;
+// HP-curve factor 用 **接收方(target)自身 HP** (该 buff 应用到谁就看谁的 HP;
 // range=All 的 HP-curve buff 从别 slot 来时、用 target 的 HP 而非 source 的)。
-//   Vitality_*  → factor = hp_pct / 100
-//   RemHP_*     → factor = (100 - hp_pct) / 100
-//   Break_*     → factor = 1 if hp_pct <= 50 else 0  (unpacking §2.3: IsBreak = HpRate ≤ 0.5 含等号)
-//   FellDown_*  → factor = 1 if 任一队友 hp=0 else 0
-//   Enemy_Break*→ factor = 1 if enemy.bk else 0
-// 无 prefix → factor = 1
-export function conditionFactor(parameter, hpPct, anyTeammateZero, enemyBk) {
-  if (!parameter) return 1;
-  if (parameter.startsWith('Vitality_')) return Math.max(0, Math.min(1, hpPct / 100));
-  if (parameter.startsWith('RemHP_')) return Math.max(0, Math.min(1, (100 - hpPct) / 100));
-  if (parameter.startsWith('Break_')) return hpPct <= 50 ? 1 : 0;
-  if (parameter.startsWith('FellDown_')) return anyTeammateZero ? 1 : 0;
-  if (parameter.startsWith('Enemy_Break')) return enemyBk ? 1 : 0;
-  return 1;
-}
+// 实现在 shared/parameter-class.js (結晶ページの倍率シミュレータと共用) — 此处 re-export 保持既有 import 路径
+export { conditionFactor };
 
 // strip HP-curve prefix + Enemy_Break prefix 得 base parameter
 // Enemy_BreakAttack → Attack (本质是 Attack 倍率、走 stage 5 独立 enemy_break source)
 // Enemy_BreakDefense / Enemy_BreakSpeed 等同理
-const _HP_CURVE_PFX = ['Vitality_', 'RemHP_', 'Break_', 'FellDown_'];
 export function baseParameter(p) {
   if (!p) return p;
   for (const pfx of _HP_CURVE_PFX) if (p.startsWith(pfx)) return p.slice(pfx.length);
