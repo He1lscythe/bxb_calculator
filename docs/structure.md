@@ -2,11 +2,10 @@
 
 > 文档索引: [docs/README.md](README.md)
 
-按 `master_tables/` 重建的项目结构。当前在 `main` branch
-(历史上的 `refactor/unpacking-source` 重构分支已完成并成为 main、该分支不再存在)。
+按 `master_tables/` 重建的项目结构。
 
-**baseline**: `npm test` 301/301 全绿、`npm run lint` 0 problem、5 类 image 覆盖率 100%
-(chara/masou/crystal/bg/soul)。
+**baseline** (2026-09-07): `npm test` 319/319 全绿、`npx playwright test` 93/93、
+`npm run lint` 0 problem、5 类 image 覆盖率 100% (chara/masou/crystal/bg/soul)。
 
 ---
 
@@ -16,7 +15,7 @@
 BxB/master_tables/master_data/<latest>/*.json   (外部源数据、ground truth、git worktree)
     │
     ▼
-scripts/master_to_business/build_*.py            (8 个 build script、详见下方)
+scripts/master_to_business/build_*.py            (12 个 build_*.py、含 build_all 编排、详见下方)
     │
     ▼
 data/*.json    (业务 JSON: master + revise + audit)
@@ -66,9 +65,13 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | icons/ | 本地图标资源 (.gitignore 排除、`copy_images.py` 从 `<assets>` 拷) |
 | omoide_icon/ | omoide icon (.gitignore 排除) |
 | [docs/](../docs/) | 项目文档 |
-| [tests/unit/](../tests/unit/) | 单测 (npm test 135/135) |
-| [tests/ui/](../tests/ui/) | Playwright e2e 测试 |
-| audit/ | `audit_dead_code.mjs` 输出 (.gitignore 排除) |
+| [api/](../api/) | Vercel serverless function (`save.js` revise 落 data-staging + PR、`share.js` 短链 KV) |
+| [css/](../css/) | 各 viewer 样式 + `base.css` / `shared.css` / `nav.css` |
+| [cloudflare/](../cloudflare/) | `dispatch-worker/` —— 用 CF Cron Trigger 可靠触发 GitHub `workflow_dispatch` (GitHub 原生 schedule 高峰会丢跑)。只有 `wrangler.toml` tracked、`src/worker.js` 与其 `README.md` 都 gitignored (只在本机) |
+| [tests/unit/](../tests/unit/) | 单测 (`npm test`、14 file / 319 case) |
+| [tests/ui/](../tests/ui/) | Playwright e2e (`npx playwright test`、6 file / 93 case) |
+| audit/ | `audit_dead_code.mjs` 输出 + `crystal_factors/` 反推脚本 (.gitignore 排除) |
+| draft/ | 本机一次性脚本 (.gitignore 排除) |
 | `../master_tables/` | master_tables (bxb_wiki 仓库 `master_tables` branch 的 git worktree、跟 bxb_wiki 同级、`BxB/master_tables/`) |
 | `../data_staging/` | data-staging branch 的常驻 git worktree (2026-06-10 建、跟 bxb_wiki 同级)。revise 同步 / main→data-staging 本地 merge 都在这里做 (`*_revise.json` 在 main gitignored、data-staging tracked — 此 worktree 是它们的 git 归宿) |
 
@@ -108,7 +111,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | 模块 | 用途 |
 |---|---|
 | [paths.py](../scripts/master_to_business/paths.py) | 自动 detect 最新 `master_tables/` + 提供 `master_file()` / `assets_dir()` helper |
-| [enums.py](../scripts/master_to_business/enums.py) | 91 項 parameter / 3 math_type / 各 enum 映射 |
+| [enums.py](../scripts/master_to_business/enums.py) | 91 項 parameter / 5 math_type / 3 range / TARGET_ELEMENT / TARGET_WEAPON_TYPE 等 master enum 映射 (**JS 侧的 `shared/constants.js` 不含这些**) |
 | [image_paths.py](../scripts/master_to_business/image_paths.py) | master id → `icons/` 本地 image path 反查 |
 | [copy_images.py](../scripts/master_to_business/copy_images.py) | 数据更新时拷 `<assets>` → `icons/` (含 soul 7 张 fallback 段) |
 | [gen_motion_table.py](../scripts/master_to_business/gen_motion_table.py) | `characters.json` → `docs/motion_table.md` (master 改 motion_id 后重跑) |
@@ -117,6 +120,9 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 ### scripts/ci/ — 云端自动更新数据库 (GitHub Actions)
 
 `.github/workflows/update-database.yml` 每天 JST 16:01 + 00:01 跑、
+**它只有 `workflow_dispatch`、没有 GitHub `schedule`** —— 原生 cron 高峰会丢跑,定时改由
+`cloudflare/dispatch-worker` 的 CF Cron Trigger 调 dispatch API
+(UTC 07:01 / 15:01 = JST 16:01 / 00:01)。本仓库其余 workflow 同理、全是 dispatch-only。
 
 手动重发 workflow `repost-通知渠道.yml`(渲染/合成逻辑更新后重生成历史页;走 通知索引 → `editPage` 原地更新、URL 不变、不重发频道)。输入 `kind` 二选一 + `target`(留空=最新):
 - `kind=asset-version` — 图册重发(`target`=asset_version 号)
@@ -141,17 +147,17 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 
 | 模块 | 用途 |
 |---|---|
-| [stats-calc.js](../shared/stats-calc.js) | hensei 7-stage stat 计算 (HP-curve / Break gate / 4 stage apply / DLB cap / Speed / MotionSpeed / enemy mods)、`ctx.traceEnabled` 时返回 dev trace (stat-trace modal 数据源、见 hensei_calc.md) |
+| [stats-calc.js](../shared/stats-calc.js) | hensei stat 计算 —— `applyStaged` 的 s1〜s8 stage 链 (HP-curve / Break gate / server-fold floor / LP / DLB cap / Speed / MotionSpeed / enemy mods)、`ctx.traceEnabled` 时返回 dev trace (stat-trace modal 数据源)。stage 清单见 [hensei_calc.md](hensei_calc.md) |
 | [hensei-helpers.js](../shared/hensei-helpers.js) | UI 用 lv/觉醒/熟度参数 (`charaLvParams` master 直读 states.stats、硬编码表仅 fallback) + soulMultiplier / crystalEffectiveValue / crystalMaxBairitu / BlazeGauge 系统 |
 | [guild-score.js](../shared/guild-score.js) | ギルバト 40s ダメージ/スコア模拟 (`simulateGuildScore` 高频重叠 loop + 6 档波动率均值、開始秒=剩余输出窗口、`computeGuildScore` 基礎×難易度×結界2.6 换算、纯函数、见 hensei_calc.md) |
 | [revise-core.js](../shared/revise-core.js) | sparse diff core (`computeDiff` 三参含撤回 + `deepApply` + tombstone null)。数组 (2026-06-19):带 id 对象数组 (weapon_skills/soul.skills) 按 **id** 局部 patch (robust 到重排);标量数组 (tags)/无 id 数组 (masou effects) 整组替换;已弃用 index 稀疏 |
 | [save-client.js](../shared/save-client.js) | POST /save 路由 (local `start.py:8787` / Vercel `/api/save.js`) + toast 反馈 |
 | [chara-adapter.js](../shared/chara-adapter.js) / [soul-adapter.js](../shared/soul-adapter.js) / [crystal-adapter.js](../shared/crystal-adapter.js) / [masou-adapter.js](../shared/masou-adapter.js) / [bg-adapter.js](../shared/bg-adapter.js) | master → wiki shape adapter (含 `deepApply(master, revise)` wrap)。bg 是 view-only、其 adapter 只做形状转换、无 revise 通路 |
 | [image-paths.js](../shared/image-paths.js) | master id → `icons/` 相对路径 + `charaIconStack` 叠层 helper (marriage 框 + element + weapon_type、含 `lazy: 'native'\|'io'` 选项) |
-| [virtual-list.js](../shared/virtual-list.js) | 简单 virtual scrolling、屏幕外 row 不在 DOM、用在 cr-list / bg-list (2063+506 expand all 不卡) + hensei 实体选择器 #em-list (5 类型共用、crystal 2063 行秒开) |
+| [virtual-list.js](../shared/virtual-list.js) | 简单 virtual scrolling、屏幕外 row 不在 DOM、用在 cr-list / bg-list (2100+518 expand all 不卡) + hensei 实体选择器 #em-list (5 类型共用、crystal 2100 行秒开) |
 | [lazy-img.js](../shared/lazy-img.js) | IntersectionObserver-based img lazy、`setupLazyImg(scrollRoot)` swap `data-src→src`、适用自定义 scroll 容器 (native HTML5 lazy 只看 document viewport、容器 scroll 失效) |
-| [constants.js](../shared/constants.js) | PARAMETER (91) / MATH_TYPE / RANGE / ELEMENT / WEAPON / CONDITION 等 enum |
-| [parameter-class.js](../shared/parameter-class.js) | PARAMETER_CLASS (35 类効果分类) + PARAMETER_CLASS_LABEL/SHORT + `conditionTrigger` / COND_TRIGGER_LABEL (発動条件 0..5) + `crystalScopeTags` / `bgScopeTags` / SCOPE_LABEL |
+| [constants.js](../shared/constants.js) | **前端 UI enum**: ELEMENT / ELEM_COLOR / ELEMS_ORDER / WEAPON / WEAPONS_ORDER / RARITY / CHARA_TAG (14) / SOUL_TAG (8) + `renderFilterToggles` / `renderElementFilterToggles`。⚠ PARAMETER (91) / MATH_TYPE (5) / RANGE 这些 master enum **不在这里**、只在 Python 侧 [enums.py](../scripts/master_to_business/enums.py) |
+| [parameter-class.js](../shared/parameter-class.js) | `classifyParameter` (master parameter → 35 类効果分类 int) + PARAMETER_CLASS_LABEL/SHORT + `conditionTrigger` / COND_TRIGGER_LABEL (発動条件 0..5) + `crystalScopeTags` / `bgScopeTags` / SCOPE_LABEL + **`HP_CURVE_PFX` / `conditionFactor`** (残HP 条件係数、`stats-calc.js` re-export 保持旧 import 路径;結晶頁只为 5 行函数不必拉 1300 行的 stats-calc) |
 | [effect-tags.js](../shared/effect-tags.js) | 効果 tag (分類 / scope / 発動条件) 的**唯一实现**。语义层 `effectParams` / `effectScope` / `effectCondition` / `effectScopeLongLabel` + HTML 层 `paramBadgesHtml` / `scopeTagHtml` / `condTagHtml` / `effectTagsHtml` + `normalizeMasterEffect` (hensei 的 master shape → wiki shape)。characters / souls / crystals / bladegraphs / hensei 全走这一份 —— 以前各有拷贝、漂出过两套条件 enum 和三种 scope 覆盖 |
 | [filter-core.js](../shared/filter-core.js) | viewer filter 通用 utility (applySpec / renderSpecFilters / sort / reset) |
 | [chara-spec.js](../shared/chara-spec.js) / [soul-spec.js](../shared/soul-spec.js) / [crystal-spec.js](../shared/crystal-spec.js) / [bg-spec.js](../shared/bg-spec.js) | 4 viewer 各自 filter spec (facet / sort options) |
@@ -194,12 +200,12 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 ## data/ — 业务 JSON
 
 **Master 数据** (build_*.py 输出):
-- `characters.json` (654 chara) / `souls.json` (488) / `crystals.json` (2063) / `bladegraphs.json` (506) / `masou.json` (712) / `senzai_table.json`
+- `characters.json` (657 chara) / `souls.json` (496) / `crystals.json` (2100) / `bladegraphs.json` (518) / `masou.json` (722) / `senzai_table.json` (209) — 件数随 master 每日更新增长、这里只记 2026-09-07 的量级
   - ⚠ 没有 `data/motions.json`。motion 数据是 `build_characters.py` **inline 进 characters.json** 的:
     段时长 `states[].motion_durations` 来自 `data/_npc_motions.json`、モーション名来自 master 的
     `attack_motions.json`。消费方 [stats-calc.js `_computeMotionSpeed`](../shared/stats-calc.js)。
 - `guildtitles.json` / `guildemblems.json` (手工维护、无 build script)
-- `omoide/{base_id}.json` (638 file、实测、2026-06-09 起入 git tracked)
+- `omoide/{base_id}.json` (647 file、实测、2026-06-09 起入 git tracked)
 
 **Revise** (用户编辑产物、4 bucket):
 - `chara_revise.json` / `soul_revise.json` / `crystal_revise.json` / `masou_revise.json`
@@ -217,15 +223,15 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 | `python scripts/start.py` | 本地 dev server (端口 8787) + `POST /save` endpoint 写回 `data/*_revise.json` |
 | `node scripts/serve.js` | 纯静态 dev server (不含 /save) |
 | `node scripts/build.js` | 全量 build (`pages_src/` + fragments → `pages/`)、用户开 `--watch` 模式自动重 build |
-| `npm test` | 264/264 单测 (tests/unit/) |
-| `npx playwright test` | UI e2e (tests/ui/、5 viewer 渲染 + hensei 装备联动) |
+| `npm test` | 319/319 单测 (tests/unit/、14 file) |
+| `npx playwright test` | 93/93 UI e2e (tests/ui/、6 file): hensei 装备联动 57 / edit flow 14 / 効果 tag 8 / 結晶 UI 8 / 結晶 virtual list 3 / 短链 3 |
 
 **保存流程**:
 1. viewer edit mode → `computeDiff(orig, edit, prev)` → 入 `state.reviseData[id]` + `sessionReviseIds.add`
 2. 顶部 revise bar 显示 "未保存 N 条修正"、点 "保存" → `submitRevise(body)` POST /save
 3. local: `start.py` deep merge 入 `data/*_revise.json` + 写盘
 4. Vercel 生产: `/api/save.js` 推 `data-staging` branch + 自动 PR
-5. `data-staging` branch 单向积累、不合回 main (本 branch 是 refactor/unpacking-source、user memory 决策)
+5. `data-staging` branch **单向积累、永不合回 main** (main → data-staging 同步代码 OK、反向禁止;`*_revise.json` 故意只活在 data-staging)
 
 **数值输入分式支持 (2026-06-20)**: edit mode 的 `value_scaling` (chara skill / masou) 和 crystal `max_value` / `M_L/W/P_max` **既接受分式字符串 (`"5/1.13"`) 也接受小数/整数**。分式存 string、小数/整数存 number (`parseBairituVal`);hensei 计算时由 `parseHit` / `parseFactor` / chara-adapter `_parseFrac` 展开成数字。测试见 [tests/unit/test_fraction_support.mjs](../tests/unit/test_fraction_support.mjs)(覆盖所有消费点)。
 
