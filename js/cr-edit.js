@@ -106,11 +106,16 @@ const _renderEditBody = (c) => {
   const desc = escHtml(m.description || '');
 
   const roEffect = desc
-    ? `<div class="field-row"><div class="field-key">効果</div><div class="field-val edit-ro">${desc}</div></div>`
+    ? `<div class="field-row"><div class="field-key">説明</div><div class="field-val edit-ro">${desc}</div></div>`
     : '';
-  const roMeta = `<div class="field-row"><div class="field-key">parameter</div><div class="field-val edit-ro">${param} <span style="color:var(--text2)">/ ${math}</span></div></div>` +
-    `<div class="field-row"><div class="field-key">初期値</div><div class="field-val edit-ro">${initV}</div></div>` +
-    `<div class="field-row"><div class="field-key">max_level</div><div class="field-val edit-ro">${lvMax}</div></div>`;
+  // 3 つを 1 行に (窄屏では 効果 が改行して 初期値/最大Lv が並ぶ — css/crystals.css)
+  const roItem = (k, v) =>
+    `<div class="ro-item"><span class="field-key">${k}</span><span class="edit-ro">${v}</span></div>`;
+  const roMeta = `<div class="field-row ro-meta">` +
+    roItem('効果', `${param} <span style="color:var(--text2)">/ ${math}</span>`) +
+    roItem('初期値', initV) +
+    roItem('最大Lv', lvMax) +
+    `</div>`;
 
   // 顶层 server-fold 字段 — 8 个 input 全合并成 1 行
   const fieldsSec = `<div class="skill-edit-meta" style="margin-top:8px">` +
@@ -119,7 +124,7 @@ const _renderEditBody = (c) => {
 
   // id 左 + 保存/キャンセル 右 同行
   const topBar = `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:3px 0 8px">` +
-    `<span style="font-size:11px;color:var(--text2)">id=${c.id}</span>` +
+    `<span style="font-size:11px;color:var(--text2)">id = ${c.id}</span>` +
     `<div class="edit-actions" style="margin:0">` +
     `<button class="btn-save" onclick="saveEdit()">保存</button>` +
     `<button class="btn-cancel" onclick="cancelEdit()">キャンセル</button>` +

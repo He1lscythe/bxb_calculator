@@ -39,6 +39,19 @@
 .crystal-icon { width: 84px; height: 84px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); background: var(--bg3); }
 .btn-edit { background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 4px 0; font-size: 11px; cursor: pointer; width: 84px; }
 .btn-edit:hover { background: rgba(91,127,255,.1); }
+/* ⚙ (倍率シミュレータ) を 修正 の左に同じ行で並べる。
+   2 つ合わせて上の .crystal-icon と同じ 84px に収める —— ⚙ は自然幅、修正 が残りを埋める。 */
+.cr-body-actions { display: flex; align-items: stretch; gap: 6px; width: 84px; }
+.cr-body-actions .btn-edit { width: auto; flex: 1; min-width: 0; }
+/* ⚙ は 13px → 17px (約 +30%) */
+.btn-gear { flex-shrink: 0; background: transparent; color: var(--text2); border: 1px solid var(--border); border-radius: 6px; padding: 4px 6px; font-size: 17px; line-height: 1; cursor: pointer; }
+.btn-gear:hover { border-color: var(--accent); color: var(--accent); background: rgba(91,127,255,.1); }
+
+/* 倍率シミュレータ modal 本文 */
+.sim-desc { font-size: 11px; line-height: 1.5; color: var(--text2); white-space: pre-wrap; padding-bottom: 8px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+.sim-out { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border); }
+.sim-line { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 12px; color: var(--text2); padding: 2px 0; }
+.sim-line b { font-size: 15px; color: #ffd040; }
 
 .eff-line { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
 .eff-line:last-child { margin-bottom: 0; }
@@ -69,4 +82,7 @@
   .cr-row-mobile  { display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0; justify-content: space-between; }
   /* 窄屏 field-key 砍窄、长 label (入手方法等) 自动 wrap */
   .field-key { width: 24px; min-width: 24px; }
+  /* 修正の読み取り専用メタ: 効果 だけ 1 行占め → 初期値 / 最大Lv が並ぶ */
+  .ro-meta .ro-item:first-child { flex: 1 0 100%; }
+  .ro-meta .ro-item .field-key { width: auto; min-width: 0; }
 }

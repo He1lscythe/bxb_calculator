@@ -39,6 +39,18 @@
       </div>
     </div>
 
+    <!-- 倍率シミュレータ (⚙ から。Lv/重量/純度/残HP を動かして効果値を見る) -->
+    <div id="cr-sim-modal">
+      <div class="ce-modal-overlay" onclick="closeCrSim()"></div>
+      <div class="ce-modal-content" style="width: min(460px, 94vw)">
+        <div class="ce-modal-header">
+          <div class="ce-modal-title"><span class="ce-modal-name" id="cr-sim-title"></span></div>
+          <button class="ce-modal-close" onclick="closeCrSim()">×</button>
+        </div>
+        <div class="ce-modal-body" id="cr-sim-body"></div>
+      </div>
+    </div>
+
     <div id="page-wrap">
       <div id="content">
         <div id="filters">
@@ -151,6 +163,7 @@
         cancelRevise,
         setCrField,
       } from '../js/cr-edit.js';
+      import { openCrSim, closeCrSim, setCrSim } from '../js/cr-sim.js';
 
       Nav.init();
 
@@ -200,6 +213,9 @@
         toggleExpand,
         openCrystalHelp,
         closeCrystalHelp,
+        openCrSim,
+        closeCrSim,
+        setCrSim,
         updateReviseBar,
         escHtml,
         fmt,
