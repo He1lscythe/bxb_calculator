@@ -2,9 +2,7 @@
 
 > 文档索引: [docs/README.md](README.md)
 >
-> **Status**: 当前规范 (Phase 0-8 重构完成、`npm test` 301/301)
->
-> **Scope**: 已是 `main` 的规范 (历史上的 `refactor/unpacking-source` 分支已完成并成为 main)
+> **Status**: 当前规范 (`npm test` 319/319 @ 2026-09-07)
 >
 > **Data source**: `<BXB_ROOT>/master_tables/master_data/<latest>/` —— `master_tables/` 与本 repo
 > (`bxb_wiki/`) 同级、是 crawl 仓库 `data/master-tables` branch 的 git worktree。路径一律相对
@@ -26,7 +24,7 @@
 详见 [scripts/master_to_business/enums.py](../scripts/master_to_business/enums.py):
 
 - `parameter`: 91 项 (#JS JobSkill.Parameter)
-- `math_type`: 3 项 (`Multiply` / `Addition` / `Set`)
+- `math_type`: **5 项** — `Multiply` (0) / `Addition` (1) / `Set` (2) / `Repel_Percent` (3) / `None` (4)
 - `range`: 3 项 (`All` / `Single` / `None`)
 - 条件字段拆分: HP-curve prefix (`Vitality_` / `RemHP_`) + Break gate prefix (`Break_`) + 结构化条件字段 (`element_id` / `weapon_type_id` / `conditional_parameter` 等)
 
@@ -47,7 +45,7 @@ server-fold 字段 (非 master 直给、走 `*_revise.json`):
 | crystal | `materials.id` | 同 |
 | bladegraph | `pictures.id` | 同 |
 | masou | `weapon_costumes.id` | 同 |
-| omoide icon | `memory_slot_skills.key` (5 位字符串) | senzai_table key 类型变 string |
+| omoide skill | `memory_slot_skills.key` (**8 位数字字符串**、如 `"10000001"`) | `senzai_table.json` 的 key、类型是 string 不是 int |
 
 ---
 
@@ -75,14 +73,30 @@ server-fold 字段 (非 master 直给、走 `*_revise.json`):
 | 78-87 | BD / EXP / 掉落 | AnyElement / BlazeGauge / EventDropRate / MaterialExp 等 |
 | 88-90 | Prayer / Rise_AttackRate / Rise_DefenseRate | 祈祷 / 攻防效果放大 |
 
-完整含义对照: [unpacking/table.md L228-345](../../unpacking/table.md)
-战斗 stage 引用: [unpacking/HOWTO_battle/03_ead.md §3.2](../../unpacking/HOWTO_battle/03_ead.md)
+完整含义对照: [unpacking/outputs/table.md L228-345](../../unpacking/outputs/table.md)
+战斗 stage 引用: [unpacking/docs/HOWTO_battle/03_ead.md §3.2](../../unpacking/docs/HOWTO_battle/03_ead.md)
 
 ### 2.2 MATH_TYPE
 
-3 项 — `Multiply` (0) / `Addition` (1) / `Set` (2)。
+**5 项** ([enums.py `MATH_TYPE`](../scripts/master_to_business/enums.py)):
+
+| id | 名前 | hensei での扱い |
+|---|---|---|
+| 0 | `Multiply` | Mul 池 (`v *= 1 + (value − 1) × cf`) |
+| 1 | `Addition` | Add 池 (`v += value × cf`) |
+| 2 | `Set` | **skip** — chara 端 master 无、UI 不渲染 |
+| 3 | `Repel_Percent` | status 回避率、独立通道、不进 stat pipeline (见 [hensei_calc.md](hensei_calc.md#repel_percent-独立通道)) |
+| 4 | `None` | **skip** |
 
 **没有 wiki 推断的 "最终加算 / 最终乗算"**。游戏实际计算 pipeline 不区分"最终"阶段、只分 Mul 池 + Add 池 (50 步 EAD 内累积)。
+
+> ⚠ 老文档里的 **`Reduce100`** 就是现在的 `Repel_Percent`(同一个 math=3 槽位、旧名)。
+> BE 侧 enum 是 `None=0 / Addition=1 / Multiply=2 / Repel_Percent=3`,**跟 #JS 的 Mul/Add 编号互换**;
+> 真实合并式是独立概率 OR:`(1 − Π(1 − p_i)) × 100`、`p_i = clamp(v_i, 0, 100) / 100`
+> ([11_parameters.md §11.4](../../unpacking/docs/HOWTO_battle/11_parameters.md))。
+> 命中的 parameter 只有 6 个 proc-rate 类:`Mez` / `Stun` / `InstantDeath` / `BlazeAbsorb` /
+> `RateDamage` / `BlazeLockPurge`。**hensei 目前用的是简化的线性累加 + clamp**、见
+> [hensei_calc.md](hensei_calc.md#repel_percent-独立通道)。
 
 ### 2.3 RANGE
 
@@ -98,7 +112,7 @@ wiki 5 值 `condition` enum 在 master 拆成多字段：
 
 | parameter prefix | 含义 | runtime 公式 |
 |---|---|---|
-| `Vitality_*` | 浑身 (HP 多越强) | `scale = clamp(HpRate, 0, 1)` 详 [02_psv_gates.md](../../unpacking/HOWTO_battle/02_psv_gates.md) |
+| `Vitality_*` | 浑身 (HP 多越强) | `scale = clamp(HpRate, 0, 1)` 详 [02_psv_gates.md](../../unpacking/docs/HOWTO_battle/02_psv_gates.md) |
 | `RemHP_*` | 背水 (HP 少越强) | `scale = clamp(1 - HpRate, 0, 1)` 同上 |
 | `Break_*` | 破損 | hard gate `IsBreak`、整段跳 |
 | `FellDown_*` | 队友倒地 | hard gate `Hp == 0` |
@@ -143,7 +157,7 @@ wiki 5 值 `condition` enum 在 master 拆成多字段：
 
 ---
 
-## 3. 业务 JSON schema (Phase 2 起填)
+## 3. 业务 JSON schema
 
 ### 3.1 characters.json
 
@@ -170,7 +184,7 @@ wiki 5 值 `condition` enum 在 master 拆成多字段：
   "hit_rate_rank": 0,
   "evade_rate_rank": 0,
   "weapon_arts_id": 691,
-  "omoide": [],                     // Phase 8 抓包后填、留空 = view-only 不展示
+  "omoide": [],                     // 留空 = view-only 不展示 (实际数据在 data/omoide/{base_id}.json)
   "profile": {                      // 角色 profile (age/cv/height/...)、跨 state 不变
     "age": "27歳", "cv": "...", "height": "...", "weight": "...",
     "three_size": "72/51/75", "three_size_b": 72, "three_size_w": 51, "three_size_h": 75,
@@ -236,34 +250,34 @@ wiki 5 值 `condition` enum 在 master 拆成多字段：
 }
 ```
 
-### 3.2 souls.json (Phase 2)
+### 3.2 souls.json
 
 `jobs.json` → souls。
 - id = jobs.id
 - job_abilities (data_type=Element / WeaponType) → element_affinity / weapon_affinity (含 positive/negative value)
 - job_skills → 直接透传 (parameter / math_type / value / range / element_condition 等)
 
-### 3.3 crystals.json (Phase 2)
+### 3.3 crystals.json
 
 `materials.json` + `material_parameter_ranks.json` → crystals。
 - initial_value / max_level / parameter 等直接透传
 - material_parameter_ranks 提供 level → value 强化曲线
 
-### 3.4 bladegraphs.json (Phase 2)
+### 3.4 bladegraphs.json
 
 `pictures.json` → bladegraphs。
 - picture_skills 直接透传
 
-### 3.5 masou.json (Phase 2)
+### 3.5 masou.json
 
 `weapon_costumes.json` → masou。
 - weapon_base_id 关联到 chara id
 - weapon_costume_effects → effects
 
-### 3.6 senzai_table.json (Phase 2)
+### 3.6 senzai_table.json
 
 `memory_slot_skills.json` → senzai_table。
-- key = memory_slot_skills 的 string key (如 "10000001")
+- key = memory_slot_skills 的 8 位 string key (如 `"10000001"`)、当前 209 条
 - value = {name, parameter, math_type, value, description, category_for_memory_slot}
 
 ---
@@ -291,7 +305,7 @@ final damage
 | `defense` | 同 attack | — | 同 attack | ✗ 半成品 |
 | `speed` | 同 attack (无 BH multiplier) | — | 同 attack + SpeedSkill + UpdateLatestRecover | ✗ 半成品 |
 | `break_value` | 同 attack | — | ✓ 走 PSV `GuardBreak` 池 | ✗ 半成品 |
-| **`hit_counts'[]`** | — | ✓ **战前 DeckHitCount 顺序累积 + int 截断**（[01_setup.md §1.4](../../unpacking/HOWTO_battle/01_setup.md)）| ✗ 战斗中不重算 | — |
+| **`hit_counts'[]`** | — | ✓ **战前 DeckHitCount 顺序累积 + int 截断**（[01_setup.md §1.4](../../unpacking/docs/HOWTO_battle/01_setup.md)）| ✗ 战斗中不重算 | — |
 | **`motion_speed`** | — | — | ✓ base master `motion_speed1/2/3` × Fighter.BoostAttackSpeed(PSV MotionSpeed=8) | — |
 | per-hit damage | — | — | ✓ 50 步 EAD/PAD/EBD/PBD d8 累积 | — |
 
@@ -307,7 +321,7 @@ final damage
 
 `HitCount / AttackCount / WeaponArtsHitCount` 都走类 2 顺序累积、共用 `JobSkillExtensions.HitCount @ 0x34A974C`。
 
-### Server-fold 公式 ([01_setup.md §1.1.1-1.1.2](../../unpacking/HOWTO_battle/01_setup.md))
+### Server-fold 公式 ([01_setup.md §1.1.1-1.1.2](../../unpacking/docs/HOWTO_battle/01_setup.md))
 
 **attack/defense/speed/break_value**（半成品、客户端在战斗中加动态部分）:
 
@@ -326,7 +340,7 @@ max_hp = (max_hp_base + Σ_HP_Add_from_earlier_slots) × Π_HP_Mul + Σ_HP_Add_f
 
 理由：`JobSkill.Parameter.HP=74` 在 `BattleEngine.Skill.Parameter` enum 里没对应、客户端 PSV 列表无 HP 类 entry、必须 server 一次性 fold 完。
 
-**BH (Burning Heart) 离散梯度** ([01_setup.md L53](../../unpacking/HOWTO_battle/01_setup.md)):
+**BH (Burning Heart) 离散梯度** ([01_setup.md L53](../../unpacking/docs/HOWTO_battle/01_setup.md)):
 
 | BH 把数 | multiplier |
 |---|---|
@@ -337,7 +351,7 @@ max_hp = (max_hp_base + Σ_HP_Add_from_earlier_slots) × Π_HP_Mul + Σ_HP_Add_f
 
 **docs 注明"闲置时随时间衰减、精确衰减率未量化"** — 衰减公式没公开。
 
-### Server push 的 8-block PSV 池 ([01_setup.md §1.1.4](../../unpacking/HOWTO_battle/01_setup.md))
+### Server push 的 8-block PSV 池 ([01_setup.md §1.1.4](../../unpacking/docs/HOWTO_battle/01_setup.md))
 
 进副本时 server 推 `user_weapon.weapon.weapon_skills[]` 按 8 block 优先级追加：
 
@@ -354,7 +368,7 @@ max_hp = (max_hp_base + Σ_HP_Add_from_earlier_slots) × Π_HP_Mul + Σ_HP_Add_f
 
 block 顺序对 `Multiply` / `Addition` 池**数学等价**（结合律 + 交换律），对 `Reduce100` (math_type=3) / stack 上限 / 优先级 skill **不等价**。
 
-### 数据流（4 个 master view）([01_setup.md §1.1.2 表](../../unpacking/HOWTO_battle/01_setup.md))
+### 数据流（4 个 master view）([01_setup.md §1.1.2 表](../../unpacking/docs/HOWTO_battle/01_setup.md))
 
 | view 来源 | attack 含义 | slot Add 折叠 | BH 倍率 |
 |---|---|---|---|
@@ -369,7 +383,7 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。简化：不复刻 
 
 ---
 
-## 3.7 hensei 基础属性 base 计算（简化版、Phase 3 前端复刻）
+## 3.7 hensei 基础属性 base 计算（简化版）
 
 ### 输入字段（全部来自 master `weapons.json`、每个 variant 各自查）
 
@@ -470,20 +484,22 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。简化：不复刻 
 | 結婚（花无）| ×1.03 | +1 | +3 |
 | 結婚（花有）| ×1.05 | +1 | +3 |
 
-**LP**（剩余 LP / 总 LP、`max_lp` 来自 master + 結婚加成）：
+**LP**（剩余 LP / 总 LP、`max_lp` 来自 master + 結婚加成）：**4 档**、仅作用攻撃力
 
-- 正常（> 1/2 LP）×1.0
-- 低 LP（≤ 1/2 LP）×1.1
-- 危機（≤ 1/4 LP）×1.5
-- 仅作用攻撃力
+| tier | UI | 普通攻击 (`LP_TIER_NORMAL`) | Blaze (`LP_TIER_BLAZE`) |
+|---|---|---|---|
+| 0 | `½↑` 正常 (> 1/2 LP) | ×1.0 | ×1.0 |
+| 1 | `½↓` 低 LP (≤ 1/2 LP) | ×1.1 | ×1.3 |
+| 2 | `¼↓` 危機 (≤ 1/4 LP) | ×1.5 | ×2.0 |
+| 3 | `0` LP 尽 | ×2.0 | ×5.0 |
 
 ---
 
-## 4. 计算 pipeline 参考 (Phase 3 前端 hensei calc)
+## 4. 计算 pipeline 参考 (前端 hensei calc)
 
 ### 4.1 50 步 EAD / PAD / EBD / PBD
 
-详见 [unpacking/HOWTO_battle/03_ead.md §3.2](../../unpacking/HOWTO_battle/03_ead.md) — 完整 50 步 d8 累积器、含 gate / Mul 池 / Add 池 / BD 链。
+详见 [unpacking/docs/HOWTO_battle/03_ead.md §3.2](../../unpacking/docs/HOWTO_battle/03_ead.md) — 完整 50 步 d8 累积器、含 gate / Mul 池 / Add 池 / BD 链。
 
 简表：
 
@@ -500,7 +516,7 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。简化：不复刻 
 
 后 step 50 直接 `ceil` → `BattleDamage.Total` → DamageLimitBreak clamp → 输出。
 
-### 4.2 HP-curve scale 公式（Phase 3 前端复刻）
+### 4.2 HP-curve scale 公式（前端复刻）
 
 - `RemHpSkillRate @ 0x19485CC` — 待 Frida 实测精确公式
 - `VitalitySkillRate @ 0x19486F0` — 同
@@ -510,7 +526,7 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。简化：不复刻 
 
 - IsBlaze gate: EAD step 1-4 + 26-37 (全 Blaze 链) 在 `IsBlaze=true` 才激活
 - IsBreak gate: EAD step 25 / 46 (Break Mul/Add) 在 `IsBreak=true` 才激活
-- 详 [02_psv_gates.md §2.2](../../unpacking/HOWTO_battle/02_psv_gates.md)
+- 详 [02_psv_gates.md §2.2](../../unpacking/docs/HOWTO_battle/02_psv_gates.md)
 
 ---
 
@@ -518,12 +534,12 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。简化：不复刻 
 
 | 主题 | 链接 |
 |---|---|
-| #JS vs #BE 偏移 / sentinel | [unpacking/HOWTO_battle/11_parameters.md](../../unpacking/HOWTO_battle/11_parameters.md) |
-| EAD 50 步反编译 | [unpacking/HOWTO_battle/03_ead.md](../../unpacking/HOWTO_battle/03_ead.md) |
-| EBD (敵端破甲) | [04_ebd.md](../../unpacking/HOWTO_battle/04_ebd.md) |
-| PAD (玩家端攻) | [05_pad.md](../../unpacking/HOWTO_battle/05_pad.md) |
-| PBD (玩家端破甲) | [06_pbd.md](../../unpacking/HOWTO_battle/06_pbd.md) |
-| Damage clamp / DamageLimitBreak | [09_damage_clamp.md](../../unpacking/HOWTO_battle/09_damage_clamp.md) |
-| 战斗 setup | [01_setup.md](../../unpacking/HOWTO_battle/01_setup.md) |
-| RVA 表 | [A_rva_table.md](../../unpacking/HOWTO_battle/A_rva_table.md) |
+| #JS vs #BE 偏移 / sentinel | [unpacking/docs/HOWTO_battle/11_parameters.md](../../unpacking/docs/HOWTO_battle/11_parameters.md) |
+| EAD 50 步反编译 | [unpacking/docs/HOWTO_battle/03_ead.md](../../unpacking/docs/HOWTO_battle/03_ead.md) |
+| EBD (敵端破甲) | [04_ebd.md](../../unpacking/docs/HOWTO_battle/04_ebd.md) |
+| PAD (玩家端攻) | [05_pad.md](../../unpacking/docs/HOWTO_battle/05_pad.md) |
+| PBD (玩家端破甲) | [06_pbd.md](../../unpacking/docs/HOWTO_battle/06_pbd.md) |
+| Damage clamp / DamageLimitBreak | [09_damage_clamp.md](../../unpacking/docs/HOWTO_battle/09_damage_clamp.md) |
+| 战斗 setup | [01_setup.md](../../unpacking/docs/HOWTO_battle/01_setup.md) |
+| RVA 表 | [A_rva_table.md](../../unpacking/docs/HOWTO_battle/A_rva_table.md) |
 
