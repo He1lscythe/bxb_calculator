@@ -33,6 +33,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 **关键模块**:
 - master 数据来源: [scripts/master_to_business/paths.py](../scripts/master_to_business/paths.py) 自动 detect `BxB/master_tables/master_data/` 下最新日期文件夹 (git worktree、`data/master-tables` branch)
 - 4 bucket revise: `chara_revise.json` (tags + skill value_scaling) / `soul_revise.json` (tags) / `crystal_revise.json` (max_value / M_L/W/P_max / min_max weight/purity) / `masou_revise.json` (skill value_scaling)
+  - `M_L_max` / `M_W_max` / `M_P_max` **不填 1** — 缺省即 1 (`parseFactor(null)=1`)，显式写 1 反而让 `crystalDimAvailability` 判成「该维度可调」、⚙ 里多出一条拖不动的滑条。cr-edit 里 `def: 1` 只是 placeholder、不会落盘
 - sparse diff core: [shared/revise-core.js](../shared/revise-core.js) (`computeDiff` / `deepApply` / 撤回 / tombstone null)
 - 一次性 wiki 提取产物: `data/_wiki_aux.json` (含 `crystal_max_value` / `chara_tags` / `chara_skill_value_scaling` / `masou_value_scaling`、永不重跑)
 
