@@ -358,6 +358,7 @@ export const renderDetailBody = (c) => {
   const factorHtml = (label, v) =>
     `<span style="margin-right:10px"><span style="color:var(--text2)">${label}</span> ${v}</span>`;
   const factorRow =
+    factorHtml('初期値', fmtLarge(m.initial_value, 3)) +
     factorHtml('Lv', factorVal(m.M_L_max, 1)) +
     factorHtml('重量', factorVal(m.M_W_max, 1)) +
     factorHtml('純度', factorVal(m.M_P_max, 1)) +
