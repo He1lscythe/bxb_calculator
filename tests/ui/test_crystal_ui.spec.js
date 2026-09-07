@@ -102,3 +102,107 @@ test('結晶 因子行: 先頭に初期値', async ({ page }) => {
   });
   expect(txt).toContain('初期値 ' + expected);
 });
+
+const open = async (page) => {
+  await page.goto('/pages/crystals.html');
+  await page.waitForFunction(() => window.state?.allCrystals?.length > 0);
+};
+
+// 三因子ぜんぶ設定済み + RemHP_* の結晶を探す (残HP が効くケース)
+const findRemHp = (page) =>
+  page.evaluate(() => {
+    const c = window.state.allCrystals.find(
+      (x) => (x._master?.parameter || '').startsWith('RemHP_')
+        && x._master?.M_L_max != null && (x._master?.max_level || 1) > 1,
+    );
+    return c ? c.id : null;
+  });
+
+test('修正: id = の等号前後にスペース / ラベル 説明・効果・最大Lv', async ({ page }) => {
+  await open(page);
+  const id = await page.locator('.crystal-row').first().evaluate((el) => +el.id.replace('row-', ''));
+  await page.evaluate((i) => window.enterEditMode(i), id);
+  const body = page.locator(`#row-${id}`);
+  await expect(body).toBeVisible();
+  const txt = await body.innerText();
+  expect(txt).toContain('id = ' + id);
+  expect(txt).not.toContain('id=' + id);
+  expect(txt).toContain('最大Lv');
+  expect(txt).not.toContain('max_level');
+  expect(txt).not.toContain('parameter');
+});
+
+test('修正: 効果 / 初期値 / 最大Lv が 1 行 (desktop) → 窄屏では 2 行', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await open(page);
+  const id = await page.locator('.crystal-row').first().evaluate((el) => +el.id.replace('row-', ''));
+  await page.evaluate((i) => window.enterEditMode(i), id);
+  const items = page.locator(`#row-${id} .ro-meta .ro-item`);
+  await expect(items).toHaveCount(3);
+  const tops = await items.evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().top)));
+  expect(new Set(tops).size).toBe(1);            // desktop: 3 つ同じ行
+
+  await page.setViewportSize({ width: 390, height: 780 });
+  await page.waitForTimeout(150);
+  const tops2 = await items.evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().top)));
+  expect(new Set(tops2).size).toBe(2);           // 窄屏: 効果 が 1 行 + 初期値/最大Lv が 1 行
+  expect(tops2[1]).toBe(tops2[2]);               // 初期値 と 最大Lv は同じ行
+});
+
+test('⚙ は 修正 の左・同じ行', async ({ page }) => {
+  await open(page);
+  await page.locator('.crystal-row .crystal-row-hd').first().click();
+  const row = page.locator('.crystal-row.expanded').first();
+  const gear = row.locator('.btn-gear');
+  const edit = row.locator('.btn-edit');
+  await expect(gear).toBeVisible();
+  expect(await gear.evaluate((el) => getComputedStyle(el).fontSize)).toBe('17px');
+  const [g, e] = [await gear.boundingBox(), await edit.boundingBox()];
+  expect(g.x + g.width).toBeLessThanOrEqual(e.x + 1);                       // 左
+  expect(Math.abs(g.y + g.height / 2 - (e.y + e.height / 2))).toBeLessThan(3); // 同じ行
+
+  // ⚙ + 修正 を合わせた幅 = 上の icon と同じ (左右も揃う)
+  const icon = row.locator('.crystal-icon');
+  const [i, box] = [await icon.boundingBox(), await row.locator('.cr-body-actions').boundingBox()];
+  expect(Math.abs(box.width - i.width)).toBeLessThan(1.5);
+  expect(Math.abs(box.x - i.x)).toBeLessThan(1.5);
+  expect(Math.abs(box.x + box.width - (i.x + i.width))).toBeLessThan(1.5);
+});
+
+test('⚙ modal: Lv/重量/純度/HP を動かすと効果値が変わる', async ({ page }) => {
+  await open(page);
+  const id = await findRemHp(page);
+  test.skip(!id, 'RemHP_* の三因子結晶が無い');
+  await page.evaluate((i) => window.openCrSim(i), id);
+
+  const modal = page.locator('#cr-sim-modal');
+  await expect(modal).toBeVisible();
+  await expect(page.locator('#cr-sim-title')).not.toHaveText('');
+  const out = page.locator('#cr-sim-out');
+  await expect(out).toContainText('効果値');
+  await expect(out).toContainText('残HP 適用後');   // RemHP_* なので出る
+  await expect(out).toContainText('条件係数');
+  expect(await out.locator('.sim-note').count()).toBe(0);   // note 行は出さない
+
+  // HP=100 → RemHP 係数 0 なので「残HP 適用後」は ×1 (or +0)
+  const hpRow = modal.locator('.pop-row[data-kind="hp"] input[type=number]');
+  await expect(hpRow).toHaveValue('100');
+
+  // Lv を 1 に落とすと効果値が下がる
+  const before = await out.innerText();
+  const lvRow = modal.locator('.pop-row[data-kind="lv"] input[type=number]');
+  await lvRow.fill('1');
+  await lvRow.dispatchEvent('input');
+  await expect(out).not.toHaveText(before);
+
+  // HP を 0 にすると 残HP 適用後 = 効果値 (係数 1)
+  await hpRow.fill('0');
+  await hpRow.dispatchEvent('input');
+  const t = await out.innerText();
+  const nums = [...t.matchAll(/[×+]([\d.]+)/g)].map((m) => m[1]);
+  expect(nums.length).toBeGreaterThanOrEqual(2);
+  expect(nums[0]).toBe(nums[1]);                  // 係数 1 → 一致
+
+  await modal.locator('.ce-modal-close').click();
+  await expect(modal).toBeHidden();
+});
