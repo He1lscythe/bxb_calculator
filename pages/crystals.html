@@ -83,6 +83,15 @@
               placeholder="🔍 結晶名で検索..."
               oninput="applyFilters()"
             />
+            <button
+              type="button"
+              class="stats-help-btn"
+              id="cr-help-btn"
+              onclick="toggleCrystalHelp(this)"
+              aria-expanded="false"
+            >
+              <span class="qm">?</span>説明
+            </button>
             <span id="crystal-count-mob"></span>
           </div>
           <!-- Mobile-only toolbar: toggle + action buttons -->
@@ -148,7 +157,14 @@
     <script type="module">
       import { Nav, updateReviseBar } from '../js/nav.js';
       import { state } from '../js/cr-state.js';
-      import { escHtml, fmt, parseBairituVal, hideLoading } from '../js/utils.js';
+      import {
+        escHtml,
+        fmt,
+        parseBairituVal,
+        hideLoading,
+        min,
+        toggleHelpPopover,
+      } from '../js/utils.js';
       import {
         initFilterToggles,
         toggleFilters,
@@ -172,6 +188,22 @@
       } from '../js/cr-edit.js';
 
       Nav.init();
+
+      // 倍率式の説明。中身は shared/hensei-helpers.js の crystalEffectiveValue と同一
+      const CR_HELP = min`
+        効果値 = <b>初期値</b> × M<sub>Lv</sub> × M<sub>重量</sub> × M<sub>純度</sub>
+        <span class="f">M(Lv) = 1 + (Lv倍率 − 1) × (Lv − 1) ÷ (最大Lv − 1)</span>
+        <span class="f">M(重量) = 1 + (重量倍率 − 1) × (重量 − min) ÷ (max − min)</span>
+        <span class="f">M(純度) = 1 + (純度倍率 − 1) × (純度 − min) ÷ (max − min)</span>
+        <span class="note">
+        ・各倍率が未設定の次元は <span class="hl">×1</span>(効果なし)
+        <br />・min = max の次元は常に最大倍率(重量/純度が固定の結晶)
+        <br />・最大Lv = 1 の結晶は M(Lv) = 1
+        <br />・3 倍率すべて未設定なら
+        <span class="f">効果値 = 初期値 + (最大値 − 初期値) × (Lv − 1) ÷ (最大Lv − 1)</span>
+        </span>`;
+      const toggleCrystalHelp = (btn) =>
+        toggleHelpPopover(btn, CR_HELP, 'cr-help-note', 'wide');
 
       // ===== DATA LOAD (master schema → wiki adapter) =====
       // 同时 fetch crystal_revise.json (含 max_value 等 server-fold 字段)
@@ -204,6 +236,7 @@
         resetFilters,
         toggleFilters,
         toggleExpand,
+        toggleCrystalHelp,
         updateReviseBar,
         escHtml,
         fmt,
