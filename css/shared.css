@@ -248,7 +248,7 @@ a {
 
 /* ============ Phase 7 Session 3: v2 edit modal (chara / soul) + omoide view-only ============ */
 /* 全屏 overlay + 居中 panel、跟 latent-modal 同视觉风格 */
-#chara-edit-modal, #soul-edit-modal {
+#chara-edit-modal, #soul-edit-modal, #cr-help-modal {
   display: none; position: fixed; inset: 0; z-index: 1100;
   align-items: center; justify-content: center;
 }
@@ -380,8 +380,16 @@ a {
 .stats-help-popover::after{bottom:-7px;left:var(--arrow-x,50%);transform:translateX(-50%);
   border-left:7px solid transparent;border-right:7px solid transparent;border-top:7px solid var(--bg2);}
 .stats-help-popover .hl{color:#ffd040;font-weight:700;}
-/* 結晶の倍率式 popover: 幅を広く + 式は等幅 */
-.stats-help-popover.wide{max-width:380px;}
-.stats-help-popover .f{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-  color:var(--text);margin:3px 0;font-size:10px;}
-.stats-help-popover .note{display:block;margin-top:5px;padding-top:5px;border-top:1px solid var(--border);}
+
+/* 結晶の倍率式 modal 本文 (#cr-help-modal、ce-modal を流用)。
+   検索欄は画面最上部にあるので popover を上に浮かせると画面外に出る → 中央 modal にした。 */
+.cr-help{font-size:12px;line-height:1.7;color:var(--text2);}
+.cr-help .top{font-size:13px;color:var(--text);}
+.cr-help .top b{color:var(--accent);}
+.cr-help .f{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:var(--text);background:var(--bg3);border:1px solid var(--border);border-radius:6px;
+  padding:6px 9px;margin:6px 0;font-size:11px;overflow-x:auto;white-space:nowrap;}
+.cr-help ul{margin:8px 0 0;padding-left:1.25em;}
+.cr-help li{margin:3px 0;}
+.cr-help .hl{color:#ffd040;font-weight:700;}
+.cr-help .note{margin-top:10px;padding-top:8px;border-top:1px solid var(--border);}
