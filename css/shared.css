@@ -120,6 +120,11 @@ a {
 }
 .edit-num-sm:focus { outline: none; border-color: #8aabff; }
 .edit-ro { font-size: 12px; color: var(--text2); padding: 4px 0; line-height: 1.5; }
+/* 修正の読み取り専用メタ (効果 / 初期値 / 最大Lv) を 1 行に。窄屏の折り返しは crystals.css */
+.ro-meta { flex-wrap: wrap; gap: 6px 18px; }
+.ro-meta .ro-item { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+.ro-meta .ro-item .field-key { padding-top: 0; min-width: 0; }
+.ro-meta .ro-item .edit-ro { padding: 0; color: var(--text); }
 .edit-actions { display: flex; gap: 8px; margin-bottom: 12px; }
 .field-label { font-size: 11px; color: var(--text2); margin: 6px 0 3px; }
 .field-label:first-child { margin-top: 0; }
@@ -248,7 +253,10 @@ a {
 
 /* ============ Phase 7 Session 3: v2 edit modal (chara / soul) + omoide view-only ============ */
 /* 全屏 overlay + 居中 panel、跟 latent-modal 同视觉风格 */
-#chara-edit-modal, #soul-edit-modal, #cr-help-modal {
+/* ⚠ body は display:flex なので、この display:none を忘れると modal が
+   #page-wrap と横並びの flex item になってページ幅を食う (実測 390px 視口で content 176px)。
+   新しい modal を足すときは必ずここに id を追加する。 */
+#chara-edit-modal, #soul-edit-modal, #cr-help-modal, #cr-sim-modal {
   display: none; position: fixed; inset: 0; z-index: 1100;
   align-items: center; justify-content: center;
 }
@@ -393,3 +401,11 @@ a {
 .cr-help li{margin:3px 0;}
 .cr-help .hl{color:#ffd040;font-weight:700;}
 .cr-help .note{margin-top:10px;padding-top:8px;border-top:1px solid var(--border);}
+
+/* Lv/重量/純度 スライダー行 — hensei の crystal-dim-popover と結晶ページの倍率シミュレータで共用 */
+.pop-row{display:flex;align-items:center;gap:6px;margin:4px 0;}
+.pop-row label{flex-shrink:0;width:24px;color:var(--text2);}
+.pop-row input[type="range"]{flex:1;min-width:80px;}
+.pop-row input[type="number"]{width:56px;padding:3px 6px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:11px;text-align:right;}
+.pop-row input:focus{border-color:var(--accent);outline:none;}
+.pop-row .pop-unit{color:var(--text2);font-size:10px;flex-shrink:0;width:14px;}

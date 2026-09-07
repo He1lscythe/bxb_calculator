@@ -386,9 +386,14 @@ export const renderDetailBody = (c) => {
     '<img class="crystal-icon" loading="lazy" src="' +
     crystalImageSrc(c) +
     '" onerror="this.style.display=\'none\'" alt="">' +
+    '<div class="cr-body-actions">' +
+    '<button class="btn-gear" title="倍率シミュレータ" onclick="openCrSim(' +
+    c.id +
+    ')">⚙</button>' +
     '<button class="btn-edit" onclick="enterEditMode(' +
     c.id +
     ')">修正</button>' +
+    '</div>' +
     '</div>'
   );
 };

@@ -1,7 +1,8 @@
 // shared/parameter-class.js — master #JS parameter → 35 类业务分类
 // 整数 enum、跟 wiki bunrui 同套思路、UI 可用 renderFilterToggles (int key)
 
-const _HP_CURVE_PFX = ['Vitality_', 'RemHP_', 'Break_', 'FellDown_'];
+export const HP_CURVE_PFX = ['Vitality_', 'RemHP_', 'Break_', 'FellDown_'];
+const _HP_CURVE_PFX = HP_CURVE_PFX;
 
 // master parameter name (string) → 业务 class id (int)
 // HP-curve prefix strip + Sapphire→SapphireDrop 合并 (业务命名一致)
@@ -146,6 +147,23 @@ export const COND_TRIGGER_LABEL = {
   4: '倒れ',
   5: '敵BK状態',
 };
+// parameter の発動条件を係数化。docs/hensei_calc.md の線形式。
+//   Vitality_*  → hp_pct / 100
+//   RemHP_*     → (100 - hp_pct) / 100
+//   Break_*     → hp_pct <= 50 ? 1 : 0   (unpacking §2.3: IsBreak = HpRate ≤ 0.5 含等号)
+//   FellDown_*  → 味方に hp=0 が居れば 1
+//   Enemy_Break*→ 敵 BK 中なら 1
+// prefix なし → 1。stats-calc / 結晶ページの倍率シミュレータで共用。
+export function conditionFactor(parameter, hpPct, anyTeammateZero, enemyBk) {
+  if (!parameter) return 1;
+  if (parameter.startsWith('Vitality_')) return Math.max(0, Math.min(1, hpPct / 100));
+  if (parameter.startsWith('RemHP_')) return Math.max(0, Math.min(1, (100 - hpPct) / 100));
+  if (parameter.startsWith('Break_')) return hpPct <= 50 ? 1 : 0;
+  if (parameter.startsWith('FellDown_')) return anyTeammateZero ? 1 : 0;
+  if (parameter.startsWith('Enemy_Break')) return enemyBk ? 1 : 0;
+  return 1;
+}
+
 export function conditionTrigger(p) {
   if (!p) return 0;
   if (p.startsWith('Vitality_')) return 1;
