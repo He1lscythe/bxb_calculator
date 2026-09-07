@@ -1,3 +1,4 @@
+// tests/ui/test_crystal_ui.spec.js — 結晶ページの UI 細部 (説明 modal / 因子行)
 import { test, expect } from '@playwright/test';
 
 test('結晶 説明: ? で中央 modal 開閉 / 画面内に収まる', async ({ page }) => {
@@ -67,4 +68,37 @@ test('結晶 説明: 検索入力は壊れていない', async ({ page }) => {
   const before = await page.locator('#crystal-count').textContent();
   await page.fill('#search', 'アタック');
   await expect(page.locator('#crystal-count')).not.toHaveText(before);
+});
+
+test('結晶 因子行: 先頭に初期値', async ({ page }) => {
+  await page.goto('/pages/crystals.html');
+  await page.waitForFunction(() => window.state?.allCrystals?.length > 0);
+
+  // 適当な 1 件を展開
+  await page.locator('.crystal-row .crystal-row-hd').first().click();
+  const row = page.locator('.crystal-row.expanded').first();
+  await expect(row).toBeVisible();
+
+  // 因子 の field-row を取る
+  const val = row.locator('.field-row', { has: page.locator('.field-key', { hasText: '因子' }) })
+    .locator('.field-val');
+  await expect(val).toBeVisible();
+  const txt = (await val.innerText()).replace(/\s+/g, ' ').trim();
+
+  // 初期値 が先頭 + Lv より前
+  expect(txt.startsWith('初期値')).toBe(true);
+  expect(txt.indexOf('初期値')).toBeLessThan(txt.indexOf('Lv'));
+
+  // 値は master の initial_value と一致 (fmtLarge 3 桁)
+  const expected = await row.evaluate((el) => {
+    const id = +el.id.replace('row-', '');   // .crystal-row の id は row-<id>
+    const c = window.state.allCrystals.find((x) => x.id === id);
+    const n = c?._master?.initial_value;
+    if (n == null) return '-';
+    const a = Math.abs(n);
+    if (a >= 1e8) return parseFloat((n / 1e8).toFixed(3)) + '億';
+    if (a >= 1e4) return parseFloat((n / 1e4).toFixed(3)) + '万';
+    return Number.isInteger(n) ? String(n) : parseFloat(n.toFixed(3)).toString();
+  });
+  expect(txt).toContain('初期値 ' + expected);
 });
