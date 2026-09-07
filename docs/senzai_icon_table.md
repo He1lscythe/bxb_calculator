@@ -2,10 +2,18 @@
 
 > 文档索引: [docs/README.md](README.md)
 >
-> `data/senzai_table.json` 的 icon id → 効果 対照表 (**仍在维护**)。
-> 消费方: `pages_src/characters.html` / `pages_src/hensei.html` fetch 后注入 `state.SENZAI_TABLE`。
-> hensei 的 omoide picker 另有一条独立通路 (`data/omoide/{base_id}.json`、Frida 抓、按 slot 索引),
-> 两者并存、不互相取代 —— 见 [js/omoide-view.js](../js/omoide-view.js) 头注释。
+> **旧 wiki** 的 latent icon id (1〜95) → 効果 対照表、86 行。历史资料、不再增长。
+>
+> ⚠ 它**不是** `data/senzai_table.json` 的索引表。那个文件是 209 条、key 是
+> `memory_slot_skills` 的 8 位字符串 (`"10000001"`)、字段 `{name, parameter, math_type,
+> value, description, category_for_memory_slot}`,**没有 icon 字段**,跟本表的 1〜95 是两套编号。
+>
+> 现在 omoide「潜在開放」的实际数据源是 `data/omoide/{base_id}.json`
+> (Frida 抓、按 slot 索引) —— 见 [js/omoide-view.js](../js/omoide-view.js) 头注释。
+>
+> ⚠ `data/senzai_table.json` 目前是**死数据**: `characters.html` / `hensei.html` 各 fetch 一次
+> 并注入 `state.SENZAI_TABLE` / hensei ctx,但全仓库没有任何地方**读**它
+> (`grep SENZAI` 只剩赋值和一条描述旧实现的注释)。要么接回消费方、要么把这条 fetch 删掉。
 
 | icon | 効果名 | 詳細 | 倍率 | 熟度補正 | 算法 | 分類 |
 |------|--------|------|------|----------|------|------|

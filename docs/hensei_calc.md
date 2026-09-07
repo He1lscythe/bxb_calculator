@@ -1,8 +1,9 @@
-# Hensei Calc 4-Stage Pipeline 设计
+# Hensei Calc Stage Pipeline 设计
 
 > 文档索引: [docs/README.md](README.md)
 
-编成 (hensei) stat 计算流水线设计文档。最终 stat 值 = base 经 4 stage 顺序 apply 后得出。
+编成 (hensei) stat 计算流水线设计文档。最终 stat 值 = base 经 **s1〜s8** 顺序 apply 后得出
+(下面的 [Stage 表](#stage-表-跟-trace-stage-key-一致) 是唯一权威清单、跟 trace stage key 同名)。
 
 ## 整体流程
 
@@ -17,7 +18,7 @@ collection: 遍历 3 slot、给每个 effect 打 source tag
        ↓
 { source, parameter, math_type, value, condition_factor }
        ↓
-分 4 stage、按 stage 顺序 apply
+分 s1〜s8 stage、按 stage 顺序 apply
        ↓
    final stat
 ```
@@ -65,7 +66,7 @@ omoide memory slot 加成走 stage 1、不参与 base 计算。
 s4/s5 的执行顺序 = trace 显示顺序 (2026-06-10 用户决策): 非 soul (slot 升序) → soul (slot 升序)、
 逐 effect apply (`shared/stats-calc.js applyStaged`)。
 
-## Apply 公式 (7-stage + ceil、unpacking 03_ead.md 校准 2026-06-06)
+## Apply 公式 (s1〜s8 + ceil、unpacking 03_ead.md 校准 2026-06-06)
 
 按 unpacking §3.3 EAD 53 step RVA 顺序简化、保留 hensei UI 关心的部分:
 
@@ -216,7 +217,7 @@ factor=0 时不衰减 (×1)、factor=1 时全量 (×value)。
 
 hensei viewer **只显示 stat (Attack / Defense / HP / BK)**、不算伤害输出、所以 DLB cap 不进 stats-calc。
 
-如果未来加伤害预估面板、再按 unpacking [09_damage_clamp.md §9.5](../../unpacking/HOWTO_battle/09_damage_clamp.md#95-updatelimitmaxdamage--0x1943078--核心公式) 实现：
+如果未来加伤害预估面板、再按 unpacking [09_damage_clamp.md §9.5](../../unpacking/docs/HOWTO_battle/09_damage_clamp.md#95-updatelimitmaxdamage--0x1943078--核心公式) 实现：
 
 ```
 limitMaxDamage = floor((2^31 - 1) × multiply + addition)
@@ -227,14 +228,28 @@ final_damage = clamp(Total, 0, limitMaxDamage)
 
 ## Repel_Percent 独立通道
 
-`Repel_Percent` 不影响 stat 数值、是 status 回避率：
+`Repel_Percent` 不影响 stat 数值、是 status 回避率。命中的 parameter 只有 6 个 proc-rate 类:
+`Mez` / `Stun` / `InstantDeath` / `BlazeAbsorb` / `RateDamage` / `BlazeLockPurge`。
+
+**hensei 现在的实现** (`repelRate`、线性累加):
 
 ```
-repel_rate(status) = Σ(value × condition_factor for effect.parameter matches status)
-clamp(repel_rate, 0, 100)
+repel_rate(status) = min(100, Σ(value × condition_factor))
 ```
 
-例: `Mez Repel_Percent 50` 表示 50% 几率全免疫麻痺。多 effect 累加、cap 100%。
+例: `Mez Repel_Percent 50` 表示 50% 几率全免疫麻痺。
+
+> ⚠ **这是简化式、跟游戏不一致**。真实合并是独立概率 OR
+> ([11_parameters.md §11.4](../../unpacking/docs/HOWTO_battle/11_parameters.md)、
+> `Compute @ 0x146D028` 反编译):
+>
+> ```
+> repel_rate = (1 − Π(1 − p_i)) × 100 ,  p_i = clamp(value_i, 0, 100) / 100
+> ```
+>
+> 单条 effect 时两者相同,**2 条以上就会偏高**:两个 50% 线性算 100%、真实是 75%。
+> 目前只在 UI 显示回避率、不参与 stat / 伤害,所以偏差没有扩散;要修就是把 `repelRate`
+> 换成上面的 OR 式(顺带 `condition_factor` 应作用在 `p_i` 上)。
 
 ## 删除的 enum
 
@@ -366,9 +381,9 @@ UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的
 | **chara HP%** slider | `tr.hp` | HP-curve factor (Vitality/RemHP linear、Break < 50%) | ✅ |
 | **結婚** toggle | `tr.marriage` | 5 项 stat × {1.0/1.03/1.05}、結晶 slot +1 (state 内 initial_slot+1) | ✅ |
 | **燃心** toggle | `tr.moeshin` | 攻撃力 × 1.3 | ✅ |
-| **LP** 档 | `tr.lp` | 攻撃力 × {1.0/1.1/1.5} | ✅ |
+| **LP** 档 | `tr.lp` | 4 档 (UI `½↑`/`½↓`/`¼↓`/`0` = tier 0/1/2/3): 攻撃力 × `LP_TIER_NORMAL = [1.0, 1.1, 1.5, 2.0]`;Blaze 入口用 `LP_TIER_BLAZE = [1.0, 1.3, 2.0, 5.0]` | ✅ |
 | **MP** slider [0, `_master.mp`] | `tr.mp` (null=満) | 攻撃力 / ブレイク力 × MP rate (unpacking §3.9.1): `mp_ratio = mp / _master.mp`;`mp_ratio < 0.5 → 1 − (20/21)·√(1 − 2·mp_ratio)`、`≥ 0.5 → 1.0`。境界 ratio 0 → 1/21、ratio 0.5 → 1.0 (旧 have_mp toggle 两端的泛化) | ✅ |
-| **BD ON/OFF** toggle | `tr.bd_on` | ON → `bd_skill.effects[]` 当普通 buff 加入 stat、倍率 = `value + additional_value × bd_count`。不影响 IsBlaze gate / BD 伤害公式 (Phase 8) | ✅ |
+| **BD ON/OFF** toggle | `tr.bd_on` | ON → `bd_skill.effects[]` 当普通 buff 加入 stat、倍率 = `value + additional_value × bd_count`。不影响 IsBlaze gate / BD 伤害公式 (未实装) | ✅ |
 | **BD 条数** input (仅 bd_on 时显示) | `tr.bd_count` | bd_skill effect 的 `additional_value × bd_count`。默认 `bd_skill.cost`、范围 0..bdCapMax | ✅ |
 | **soul level** slider | `tr.soul_lv` | 所有 soul effect `value × soulMultiplier(rarity, lv)` (表: lv≤r×10 → 1+0.01lv; 之后到 75 渐进 +0.3/+0.1)。Multiply 直乘 (×1.45 → lv50 ×2.175、游戏行为)、HitCount values 数组同样缩放 | ✅ |
 | **soul 觉醒** slider | `tr.soul_awakening` | soul max_lv += 5 × soul_awakening (cap 75) | ✅ |
@@ -379,7 +394,7 @@ UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的
 | **秘録記憶 装備** | `crystals[]` 内容 | 自分の `weapon_base_id` 一致の秘録記憶装備中 → 結晶枠 +1 (desc `[結晶枠+1(上限1)]`、複数でも +1)。`crystalSlotCount` 判定、外すと `syncCrystals` が固定点まで收敛 (slice が秘録本体を外す連鎖対応) | ✅ |
 | **target slot** 切换 (1/2/3) | (UI、不存 tr) | 改算哪个 slot 的 stat、跨 slot range='All' buff 仍来自其他 slot | ✅ |
 | **omoide picks** (memory slot) | `tr.omoide_picks` | omoide source effect (Add → s1、Mul → s4a)、`_omoide_slots` Frida 抓包数据 + affection_threshold gate | ✅ |
-| **enemy element** | `ctx.enemy.element` | 元素相性倍率参考、影响显示 (实际伤害公式 Phase 8) | UI only |
+| **enemy element** | `ctx.enemy.element` | 元素相性倍率参考、影响显示 (实际伤害公式未实装) | UI only |
 | **enemy break** | `ctx.enemy.bk` | Enemy_Break parameter factor = 1 if true | ✅ |
 
 ### Source → Stage 映射 (跟 trace stage key 一致)
@@ -417,7 +432,10 @@ console 输入 `window.__DEBUG_STATS = true` → 切控件时输出：
 2. read base stat (`#slot-{N} .stats-cell:nth-child(M) .stats-val`、M=1 攻撃力max)
 3. 改控件 → assert stat 数值变化方向 + 量级合理 (e.g. LP 档从 0→2 攻撃力 should ×1.5)
 
-[tests/ui/test_hensei_interactions.spec.js](../tests/ui/test_hensei_interactions.spec.js) **Phase 6.6 完整实施 (29/29 pass)**:
+[tests/ui/test_hensei_interactions.spec.js](../tests/ui/test_hensei_interactions.spec.js) 当前 **57 case**
+(全 suite 93 case / 6 file、`npx playwright test` 一把跑)。下面的 group 表是 **早期 29 case 的
+基线快照**、之后新增的 case (装備パネル / import-export / 短链 / 魔装 range / omoide 懒加载 等) 没往表里加
+—— 权威清单看 `npx playwright test --list`,这张表只用来看「哪个控件当初是靠哪个 fixture 锁住的」:
 
 **HP-curve / condition gate × stat 覆盖矩阵** (master 数据决定可测组合):
 
@@ -444,7 +462,7 @@ console 输入 `window.__DEBUG_STATS = true` → 切控件时输出：
 
 跑测：`npx playwright test tests/ui/test_hensei_interactions.spec.js`
 
-测试公式校准依据 (Phase 6.1 Step 0):
+测试公式校准依据:
 - soul effect: `soulMultiplier(rarity, lv)` × `effect.value` (v1 main:js/stats-calc.js L210)
 - LP: 4 档 `[1.0, 1.1, 1.5, 2.0]` 普通 / `[1.0, 1.3, 2.0, 5.0]` Blaze (unpacking §3.8)
 - HitCount: 逐段、逐 effect 序贯、按 `orderServerFold`(server 拼接顺序、不分组 Mul/Add)、每步 `cur = trunc(cur op val)` + **每步 clamp ≥1** (2026-06-19 用户确认、unpacking 17_hitcount §17.2.1/§17.8.3、替代旧 Mul-then-Add 分组):
