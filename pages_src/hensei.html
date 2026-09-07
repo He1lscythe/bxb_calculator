@@ -177,6 +177,8 @@
         hideLoading,
         min,
         fmtNum,
+        toggleHelpPopover,
+        closeHelpPopover,
       } from '../js/utils.js';
       import { deepApply } from '../shared/revise-core.js';
       // omoide_templates 已删除 (用户决策: omoide 数据走 Frida 抓包、走 chara._omoide_slots、不用 templates)
@@ -2157,57 +2159,12 @@
           `<span class="qm">?</span>説明</button></div>`;
         return `${help}<div class="stats-grid">${cells}</div>`;
       };
-      // 説明 popover。生成在 body 直下再绝对定位 —— 放在 .stats-panel 内部会被祖先裁切
-      // (3 slot 横排 / 移动端窄屏)。方式和几何都对齐结晶的 crystal-dim-popover:
-      // 箭头朝下、气泡浮在触发点上方,这样不会盖住它正在解释的那些 stats 数值。
-      let _statsHelpEl = null;
-      let _statsHelpHandler = null;
-      export const closeStatsHelp = () => {
-        document.querySelectorAll('.stats-help-btn.on').forEach((b) => {
-          b.classList.remove('on');
-          b.setAttribute('aria-expanded', 'false');
-        });
-        if (_statsHelpEl) { _statsHelpEl.remove(); _statsHelpEl = null; }
-        if (_statsHelpHandler) {
-          document.removeEventListener('click', _statsHelpHandler);
-          _statsHelpHandler = null;
-        }
-      };
+      // 几何/裁切/外部点击关闭都在 utils.toggleHelpPopover 里,结晶列表共用同一套
+      export const closeStatsHelp = closeHelpPopover;
       export const toggleStatsHelp = (i, btnEl) => {
         const btn = btnEl || document.getElementById('stats-help-btn-' + i);
-        const wasOpen = !!_statsHelpEl && btn?.classList.contains('on');
-        closeStatsHelp();                       // 同时只开一个;第二次点同一个 = 关闭
-        if (wasOpen || !btn) return;
-
-        const pop = document.createElement('div');
-        pop.className = 'stats-help-popover';
-        pop.id = 'stats-help-note-' + i;
-        pop.setAttribute('role', 'tooltip');
-        pop.innerHTML = '数値が上限に到達すると<span class="hl">黄色</span>に変わります。';
-        document.body.appendChild(pop);
-        _statsHelpEl = pop;
-        btn.classList.add('on');
-        btn.setAttribute('aria-expanded', 'true');
-
-        const r = btn.getBoundingClientRect();
-        const popW = pop.offsetWidth;
-        const popH = pop.offsetHeight;
-        const margin = 8;
-        // 横向: 对齐 ? 按钮中心,并夹住不让它溢出视口
-        let left = r.left + r.width / 2 - popW / 2 + window.scrollX;
-        left = Math.max(margin, Math.min(left, window.innerWidth - margin - popW));
-        pop.style.left = left + 'px';
-        pop.style.top = r.top - popH - 10 + window.scrollY + 'px';
-        // 夹过之后箭头仍然指向 ? 按钮(而不是气泡中心)
-        const arrowX = r.left + r.width / 2 - left + window.scrollX;
-        pop.style.setProperty('--arrow-x', Math.max(12, Math.min(popW - 12, arrowX)) + 'px');
-
-        setTimeout(() => {                      // 避免把「打开它的这一次点击」也当成外部点击
-          _statsHelpHandler = (e) => {
-            if (!pop.contains(e.target) && e.target !== btn && !btn.contains(e.target)) closeStatsHelp();
-          };
-          document.addEventListener('click', _statsHelpHandler);
-        }, 0);
+        toggleHelpPopover(btn, '数値が上限に到達すると<span class="hl">黄色</span>に変わります。',
+                          'stats-help-note-' + i);
       };
       export const refreshStatsPanel = (i) => {
         const el = document.getElementById('stats-panel-' + i);

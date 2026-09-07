@@ -361,3 +361,27 @@ a {
   .ce-skill-row { grid-template-columns: 1fr; gap: 4px; }
   .ce-skill-scaling { justify-self: stretch; }
 }
+
+/* ? 説明徽章 + popover — hensei 的 stats 説明与結晶列表共用 (js/utils.js toggleHelpPopover)。
+   popover 生成在 document.body 直下再绝对定位:放在触发点容器内会被祖先裁切。 */
+.stats-help-btn{display:inline-flex;align-items:center;gap:3px;font-size:10px;line-height:1;
+  padding:2px 6px;border-radius:9px;border:1px solid var(--border);background:var(--bg2);
+  color:var(--text2);cursor:pointer;}
+.stats-help-btn:hover,.stats-help-btn.on{border-color:var(--accent);color:var(--accent);}
+.stats-help-btn .qm{display:inline-flex;align-items:center;justify-content:center;
+  width:12px;height:12px;border-radius:50%;border:1px solid currentColor;font-size:9px;font-weight:700;}
+/* 箭头朝下 = popover 浮在触发点上方(与 .crystal-dim-popover 同一套几何) */
+.stats-help-popover{position:absolute;background:var(--bg2);border:1px solid var(--border);
+  border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.5);padding:7px 10px;z-index:3500;
+  font-size:10px;line-height:1.5;color:var(--text2);max-width:260px;}
+.stats-help-popover::before,.stats-help-popover::after{content:'';position:absolute;width:0;height:0;}
+.stats-help-popover::before{bottom:-8px;left:var(--arrow-x,50%);transform:translateX(-50%);
+  border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid var(--border);}
+.stats-help-popover::after{bottom:-7px;left:var(--arrow-x,50%);transform:translateX(-50%);
+  border-left:7px solid transparent;border-right:7px solid transparent;border-top:7px solid var(--bg2);}
+.stats-help-popover .hl{color:#ffd040;font-weight:700;}
+/* 結晶の倍率式 popover: 幅を広く + 式は等幅 */
+.stats-help-popover.wide{max-width:380px;}
+.stats-help-popover .f{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:var(--text);margin:3px 0;font-size:10px;}
+.stats-help-popover .note{display:block;margin-top:5px;padding-top:5px;border-top:1px solid var(--border);}
