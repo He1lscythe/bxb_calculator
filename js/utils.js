@@ -164,6 +164,62 @@ export const hideLoading = () => {
   setTimeout(() => el.remove(), 300);
 };
 
+// ? 説明 popover — hensei 的 stats 説明与結晶列表共用。
+// popover 生成在 document.body 直下再绝对定位:放在触发点的容器内部会被祖先裁切
+// (hensei 3 slot 横排 / 移动端窄屏)。几何与 .crystal-dim-popover 一致 ——
+// 箭头朝下、气泡浮在触发点上方,这样不会盖住它正在解释的内容。
+let _helpEl = null;
+let _helpHandler = null;
+
+export const closeHelpPopover = () => {
+  document.querySelectorAll('.stats-help-btn.on').forEach((b) => {
+    b.classList.remove('on');
+    b.setAttribute('aria-expanded', 'false');
+  });
+  if (_helpEl) { _helpEl.remove(); _helpEl = null; }
+  if (_helpHandler) {
+    document.removeEventListener('click', _helpHandler);
+    _helpHandler = null;
+  }
+};
+
+// 同时只开一个;第二次点同一个按钮 = 关闭。extraCls: 追加 class (如 'wide')
+export const toggleHelpPopover = (btn, html, id, extraCls) => {
+  const wasOpen = !!_helpEl && btn?.classList.contains('on');
+  closeHelpPopover();
+  if (wasOpen || !btn) return;
+
+  const pop = document.createElement('div');
+  pop.className = extraCls ? 'stats-help-popover ' + extraCls : 'stats-help-popover';
+  if (id) pop.id = id;
+  pop.setAttribute('role', 'tooltip');
+  pop.innerHTML = html;
+  document.body.appendChild(pop);
+  _helpEl = pop;
+  btn.classList.add('on');
+  btn.setAttribute('aria-expanded', 'true');
+
+  const r = btn.getBoundingClientRect();
+  const popW = pop.offsetWidth;
+  const popH = pop.offsetHeight;
+  const margin = 8;
+  // 横向: 对齐 ? 按钮中心,并夹住不让它溢出视口
+  let left = r.left + r.width / 2 - popW / 2 + window.scrollX;
+  left = Math.max(margin, Math.min(left, window.innerWidth - margin - popW));
+  pop.style.left = left + 'px';
+  pop.style.top = r.top - popH - 10 + window.scrollY + 'px';
+  // 夹过之后箭头仍然指向 ? 按钮(而不是气泡中心)
+  const arrowX = r.left + r.width / 2 - left + window.scrollX;
+  pop.style.setProperty('--arrow-x', Math.max(12, Math.min(popW - 12, arrowX)) + 'px');
+
+  setTimeout(() => {                      // 避免把「打开它的这一次点击」也当成外部点击
+    _helpHandler = (e) => {
+      if (!pop.contains(e.target) && e.target !== btn && !btn.contains(e.target)) closeHelpPopover();
+    };
+    document.addEventListener('click', _helpHandler);
+  }, 0);
+};
+
 // Tagged template helper: 把多行可读的 HTML 模板字符串运行时压缩
 // 用法：min`<div>\n  <span>${x}</span>\n</div>` → "<div><span>...</span></div>"
 // 只清除"换行+紧跟空白"，单个空格保留（inline 元素间空白有语义）。
