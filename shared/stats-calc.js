@@ -1,4 +1,4 @@
-// shared/stats-calc.js — Hensei 4-stage 计算
+// shared/stats-calc.js — Hensei stat 计算 (s1〜s8 stage 链)
 //
 // 按 docs/hensei_calc.md 设计:
 //   base = lv × 熟度 × 觉醒  (内嵌)
@@ -6,7 +6,10 @@
 //   s2:  masou Add → masou Mul → server-fold floor
 //   s3:  × LP tier
 //   s4:  other Mul  (非soul → soul → bd)
-//   s5:  other Add  (同上分类) → 出口 ceil
+//   s5:  other Add  (同上分类)
+//   s6:  Enemy_Break Mul → Add  (gate enemy.bk)
+//   s7:  × 3 inline (enemy.bk) → 出口 ceil
+//   s8:  enemy mods (属性相性 / 難度 / 有利武器 / BD cap) → ceil
 //   Repel_Percent: 独立 status 回避率通道
 //
 // ⚠ 上面 stage 只对 HP / Attack / Defense / GuardBreak 四项生效 (只有这 4 项调 applyStaged)。
