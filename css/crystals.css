@@ -82,7 +82,10 @@
   .cr-row-mobile  { display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0; justify-content: space-between; }
   /* 窄屏 field-key 砍窄、长 label (入手方法等) 自动 wrap */
   .field-key { width: 24px; min-width: 24px; }
-  /* 修正の読み取り専用メタ: 効果 だけ 1 行占め → 初期値 / 最大Lv が並ぶ */
+  /* 修正の読み取り専用メタ: 効果 だけ 1 行占め → 初期値 / 最大Lv が 50/50 で並ぶ
+     (2 つとも flex:1 1 0 のまま 2 行目に残るので等分は自動) */
   .ro-meta .ro-item:first-child { flex: 1 0 100%; }
-  .ro-meta .ro-item .field-key { width: auto; min-width: 0; }
+  /* 効果 の key は 説明 と同じ 24px を継ぐ (揃える対象)。
+     初期値 / 最大Lv は 3 文字あって 24px では折り返すので自然幅にする。 */
+  .ro-meta .ro-item:not(:first-child) .field-key { width: auto; min-width: 0; }
 }
