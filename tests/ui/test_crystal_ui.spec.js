@@ -149,6 +149,61 @@ test('修正: 効果 / 初期値 / 最大Lv が 1 行 (desktop) → 窄屏では
   expect(tops2[1]).toBe(tops2[2]);               // 初期値 と 最大Lv は同じ行
 });
 
+// 「3 つが詰まって見える」対策: desktop は 1/3 ずつ、窄屏の 2 行目は 50/50。
+// あわせて 説明 と 効果 の field-key 幅を揃えて値の左端を一直線にする。
+test('修正 ro-meta: desktop 3 等分 / 窄屏 2 行目は 50/50 / 説明・効果 の左端が揃う', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await open(page);
+  const id = await page.locator('.crystal-row').first().evaluate((el) => +el.id.replace('row-', ''));
+  await page.evaluate((i) => window.enterEditMode(i), id);
+
+  const geo = () =>
+    page.evaluate((i) => {
+      const body = document.querySelector(`#row-${i} .crystal-edit-body`);
+      const b = (el) => {
+        const r = el.getBoundingClientRect();
+        return { x: r.x, w: r.width };
+      };
+      const meta = body.querySelector('.ro-meta');
+      const descRow = [...body.querySelectorAll('.field-row')].find((e) => !e.classList.contains('ro-meta'));
+      return {
+        meta: b(meta),
+        descKey: b(descRow.querySelector('.field-key')),
+        descVal: b(descRow.querySelector('.field-val')),
+        items: [...meta.querySelectorAll('.ro-item')].map((it) => ({
+          box: b(it),
+          key: b(it.querySelector('.field-key')),
+          val: b(it.querySelector('.edit-ro')),
+        })),
+      };
+    }, id);
+
+  const d = await geo();
+  // 3 等分 (gap 込みで残り幅を均等割り、x も等間隔)
+  const ws = d.items.map((it) => it.box.w);
+  expect(Math.max(...ws) - Math.min(...ws)).toBeLessThan(1.5);
+  const step1 = d.items[1].box.x - d.items[0].box.x;
+  const step2 = d.items[2].box.x - d.items[1].box.x;
+  expect(Math.abs(step1 - step2)).toBeLessThan(1.5);
+  // 説明 と 効果: key 幅も、値の左端も揃う
+  expect(Math.abs(d.items[0].key.w - d.descKey.w)).toBeLessThan(0.5);
+  expect(Math.abs(d.items[0].key.x - d.descKey.x)).toBeLessThan(0.5);
+  expect(Math.abs(d.items[0].val.x - d.descVal.x)).toBeLessThan(0.5);
+
+  await page.setViewportSize({ width: 390, height: 780 });
+  await page.waitForTimeout(150);
+  const m = await geo();
+  expect(Math.abs(m.items[0].box.w - m.meta.w)).toBeLessThan(1.5);          // 効果 は 1 行占め
+  expect(Math.abs(m.items[1].box.w - m.items[2].box.w)).toBeLessThan(1.5);  // 50/50
+  expect(m.items[1].box.w).toBeLessThan(m.meta.w * 0.55);
+  expect(m.items[1].box.w).toBeGreaterThan(m.meta.w * 0.45);
+  expect(Math.abs(m.items[0].key.w - m.descKey.w)).toBeLessThan(0.5);       // 効果 key = 説明 key
+  expect(Math.abs(m.items[0].val.x - m.descVal.x)).toBeLessThan(0.5);
+  // 初期値 / 最大Lv の key は 3 文字ぶんの自然幅 (24px 固定だと折り返す)
+  expect(m.items[1].key.w).toBeGreaterThan(m.descKey.w);
+  expect(m.items[2].key.w).toBeGreaterThan(m.descKey.w);
+});
+
 test('⚙ は 修正 の左・同じ行', async ({ page }) => {
   await open(page);
   await page.locator('.crystal-row .crystal-row-hd').first().click();
