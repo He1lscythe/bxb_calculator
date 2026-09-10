@@ -1,0 +1,4417 @@
+# master_data changelog: 2026_09_08_16_00_00 → 2026_09_10_16_00_00
+
+## 总览
+
+| 表 | 新增 | 删除 | 调整 |
+|---|---:|---:|---:|
+| weapons | 0 | 0 | 320 |
+| materials | 3 | 0 | 0 |
+| items | 2 | 0 | 0 |
+| jobs | 1 | 0 | 0 |
+| scenarios | 10 | 0 | 0 |
+
+## weapons
+
+### 调整 (315)
+
+- [`100101`](weapons.json#L3) レヴァンテイン=ヘル
+  - base_name: レヴァンテイン=ヘル (costume: 魔装)
+  - element=火(1) / type=大剣(2) / rarity=SS(4) / cv=綾瀬有
+  - max stats: HP=12000 / ATK=12000 / DEF=11000 / SPD=13 / BREAK=1700
+  - hit_counts=[2, 3, 4] (3段)  motion_speed=[4.0/4.0/1.0]  mp=230
+  - three_size=87/57/83 / initial_slot=3
+  - BD: ワールドエンドブレイズ (arts_id=1)
+    - description: 敵全体に超絶強力な16連ダメージ＆攻撃力20%UP
+    - cost=3 / hit_count=16 / value=5.1 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.74232 — 火属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - HitCount Addition +5.0 — 火属性の魔剣の1撃目2撃目3撃目のヒット数を+5する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`100102`](weapons.json#L198) レヴァンテイン=ヘル【極】
+  - base_name: レヴァンテイン=ヘル (costume: 極魔装)
+  - element=火(1) / type=大剣(2) / rarity=SS(4) / cv=綾瀬有
+  - max stats: HP=16250 / ATK=15600 / DEF=14300 / SPD=13 / BREAK=2210
+  - hit_counts=[3, 3, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=230
+  - three_size=87/57/83 / initial_slot=4
+  - BD: ワールドエンドブレイズ (arts_id=1)
+    - description: 敵全体に超絶強力な16連ダメージ＆攻撃力20%UP
+    - cost=3 / hit_count=16 / value=5.1 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×2.0 — 火属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - HitCount Addition +6.0 — 火属性の魔剣の1撃目2撃目3撃目のヒット数を+6する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`100401`](weapons.json#L1316) リヴァイアサン
+  - base_name: リヴァイアサン (costume: 魔装)
+  - element=水(2) / type=騎槍(8) / rarity=S(3) / cv=木村珠莉
+  - max stats: HP=8325 / ATK=6200 / DEF=8500 / SPD=12 / BREAK=4700
+  - hit_counts=[1, 2, 2] (3段)  motion_speed=[4.0/4.0/1.0]  mp=109
+  - three_size=84/56/82 / initial_slot=4
+  - BD: タイダルウェイブ (arts_id=4)
+    - description: 敵全体に超強力な20連ダメージ＆敵を強制ブレイク
+    - cost=2 / hit_count=20 / value=1.845 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`100402`](weapons.json#L1473) リヴァイアサン【極】
+  - base_name: リヴァイアサン (costume: 極魔装)
+  - element=水(2) / type=騎槍(8) / rarity=S(3) / cv=木村珠莉
+  - max stats: HP=10822 / ATK=8060 / DEF=11050 / SPD=12 / BREAK=6110
+  - hit_counts=[2, 2, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=109
+  - three_size=84/56/82 / initial_slot=5
+  - BD: タイダルウェイブ (arts_id=4)
+    - description: 敵全体に超強力な20連ダメージ＆敵を強制ブレイク
+    - cost=2 / hit_count=20 / value=1.845 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`100403`](weapons.json#L1630) リヴァイアサン【極弐】
+  - base_name: リヴァイアサン (costume: 極弐魔装)
+  - element=水(2) / type=騎槍(8) / rarity=S(3) / cv=木村珠莉
+  - max stats: HP=14070 / ATK=9880 / DEF=14370 / SPD=14 / BREAK=8450
+  - hit_counts=[3, 3, 5] (3段)  motion_speed=[4.0/4.0/2.0]  mp=122
+  - three_size=84/56/82 / initial_slot=6
+  - BD: ジェネシスフラッド (arts_id=10004)
+    - description: 敵全体に超強力な20連ダメージ＆敵を強制ブレイク
+    - cost=2 / hit_count=20 / value=1.845 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`101701`](weapons.json#L6575) フラガラッハ
+  - base_name: フラガラッハ (costume: 魔装)
+  - element=火(1) / type=長剣(1) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=4700 / ATK=1359 / DEF=4000 / SPD=23 / BREAK=1200
+  - hit_counts=[2, 3, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=95
+  - three_size=84/55/84 / initial_slot=2
+  - BD: ヒートアップダンス (arts_id=17)
+    - description: 敵全体に強力な18連ダメージ
+    - cost=1 / hit_count=18 / value=0.833333 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 火属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`101702`](weapons.json#L6719) フラガラッハ【極】
+  - base_name: フラガラッハ (costume: 極魔装)
+  - element=火(1) / type=長剣(1) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=6110 / ATK=1800 / DEF=5200 / SPD=23 / BREAK=1560
+  - hit_counts=[3, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=95
+  - three_size=84/55/84 / initial_slot=2
+  - BD: ヒートアップダンス (arts_id=17)
+    - description: 敵全体に強力な18連ダメージ
+    - cost=1 / hit_count=18 / value=0.833333 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 火属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`101703`](weapons.json#L6863) フラガラッハ【極弐】
+  - base_name: フラガラッハ (costume: 極弐魔装)
+  - element=火(1) / type=長剣(1) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=7950 / ATK=2340 / DEF=6760 / SPD=27 / BREAK=2030
+  - hit_counts=[4, 4, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=104
+  - three_size=86/55/86 / initial_slot=3
+  - BD: ダイナミックフィナーレ (arts_id=10017)
+    - description: 敵全体に強力な18連ダメージ＆一瞬だけスピード狂化
+    - cost=1 / hit_count=18 / value=0.833333 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 火属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`101901`](weapons.json#L7408) クランラナルド紅書
+  - base_name: クランラナルド紅書 (costume: 魔装)
+  - element=火(1) / type=魔典(11) / rarity=AA(2) / cv=慶長佑香
+  - max stats: HP=4500 / ATK=2634 / DEF=4500 / SPD=35 / BREAK=661
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=98
+  - three_size=70/52/72 / initial_slot=4
+  - BD: 灼華炎舞陣 (arts_id=19)
+    - description: 敵全体に強力な16連ダメージ
+    - cost=3 / hit_count=16 / value=2.90625 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.1 — 火属性の魔剣の防御力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`101902`](weapons.json#L7552) クランラナルド紅書【極】
+  - base_name: クランラナルド紅書 (costume: 極魔装)
+  - element=火(1) / type=魔典(11) / rarity=AA(2) / cv=慶長佑香
+  - max stats: HP=5850 / ATK=3500 / DEF=5850 / SPD=35 / BREAK=840
+  - hit_counts=[3, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=98
+  - three_size=70/52/72 / initial_slot=4
+  - BD: 灼華炎舞陣 (arts_id=19)
+    - description: 敵全体に強力な16連ダメージ
+    - cost=3 / hit_count=16 / value=2.90625 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.1 — 火属性の魔剣の防御力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`101903`](weapons.json#L7696) クランラナルド紅書【極弐】
+  - base_name: クランラナルド紅書 (costume: 極弐魔装)
+  - element=火(1) / type=魔典(11) / rarity=AA(2) / cv=慶長佑香
+  - max stats: HP=7610 / ATK=4550 / DEF=7610 / SPD=35 / BREAK=1100
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=108
+  - three_size=70/52/72 / initial_slot=5
+  - BD: 凰華灼媛天舞陣 (arts_id=10019)
+    - description: 敵全体に超強力な19連ダメージ＆1wave中、攻撃力10%UP
+    - cost=3 / hit_count=19 / value=2.90625 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.25 — 火属性の魔剣の防御力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`102201`](weapons.json#L8629) フロストリーパー
+  - base_name: フロストリーパー (costume: 魔装)
+  - element=水(2) / type=大鎌(12) / rarity=AA(2) / cv=中川亜紀子
+  - max stats: HP=4500 / ATK=2320 / DEF=4000 / SPD=16 / BREAK=1600
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=119
+  - three_size=80/57/81 / initial_slot=3
+  - BD: フロストエッジ (arts_id=22)
+    - description: 敵全体に強力な14連ダメージ
+    - cost=1 / hit_count=14 / value=1.07143 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.1 — 水属性の魔剣の防御力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`102202`](weapons.json#L8773) フロストリーパー【極】
+  - base_name: フロストリーパー (costume: 極魔装)
+  - element=水(2) / type=大鎌(12) / rarity=AA(2) / cv=中川亜紀子
+  - max stats: HP=5850 / ATK=3010 / DEF=5200 / SPD=16 / BREAK=2080
+  - hit_counts=[3, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=119
+  - three_size=80/57/81 / initial_slot=3
+  - BD: フロストエッジ (arts_id=22)
+    - description: 敵全体に強力な14連ダメージ
+    - cost=1 / hit_count=14 / value=1.07143 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.1 — 水属性の魔剣の防御力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`102203`](weapons.json#L8917) フロストリーパー【極弐】
+  - base_name: フロストリーパー (costume: 極弐魔装)
+  - element=水(2) / type=大鎌(12) / rarity=AA(2) / cv=中川亜紀子
+  - max stats: HP=7610 / ATK=3920 / DEF=6760 / SPD=21 / BREAK=2710
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[3.0/2.0/1.2]  mp=130
+  - three_size=80/57/81 / initial_slot=4
+  - BD: アイシクルディバイド (arts_id=10022)
+    - description: 敵全体に強力な14連ダメージ＆一瞬だけスピード狂化
+    - cost=1 / hit_count=14 / value=1.07143 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.25 — 水属性の魔剣の防御力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103201`](weapons.json#L12566) ミストルテイン
+  - base_name: ミストルテイン (costume: 魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=ささきのぞみ
+  - max stats: HP=8200 / ATK=4000 / DEF=7500 / SPD=13 / BREAK=4000
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=111
+  - three_size=82/57/83 / initial_slot=1
+  - BD: リベリオンアスク (arts_id=32)
+    - description: 敵全体に超強力な19連ダメージ＆wave中、攻撃力UP
+    - cost=3 / hit_count=19 / value=2.93684 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 風属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103202`](weapons.json#L12723) ミストルテイン【極】
+  - base_name: ミストルテイン (costume: 極魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=ささきのぞみ
+  - max stats: HP=10660 / ATK=5200 / DEF=9750 / SPD=13 / BREAK=5200
+  - hit_counts=[3, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=111
+  - three_size=82/57/83 / initial_slot=2
+  - BD: リベリオンアスク (arts_id=32)
+    - description: 敵全体に超強力な19連ダメージ＆wave中、攻撃力UP
+    - cost=3 / hit_count=19 / value=2.93684 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 風属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103203`](weapons.json#L12880) ミストルテイン【極弐】
+  - base_name: ミストルテイン (costume: 極弐魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=ささきのぞみ
+  - max stats: HP=13860 / ATK=7540 / DEF=15600 / SPD=15 / BREAK=8320
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[1.2/1.9/1.6]  mp=122
+  - three_size=83/57/83 / initial_slot=3
+  - BD: フェイタリティディサイド (arts_id=10032)
+    - description: 敵全体に超強力な19連ダメージ＆wave中、攻撃力UP
+    - cost=3 / hit_count=19 / value=2.93684 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.5 — 風属性の魔剣の行動速度が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103301`](weapons.json#L13037) 風魔手裏剣
+  - base_name: 風魔手裏剣 (costume: 魔装)
+  - element=風(3) / type=投擲(9) / rarity=AA(2) / cv=小澤亜李
+  - max stats: HP=4200 / ATK=450 / DEF=4000 / SPD=58 / BREAK=500
+  - hit_counts=[5, 7, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=49
+  - three_size=74/55/72 / initial_slot=2
+  - BD: アンコールいくよー★ (arts_id=33)
+    - description: 敵全体に強力な20連ダメージ
+    - cost=2 / hit_count=20 / value=1.5375 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 風属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103302`](weapons.json#L13181) 風魔手裏剣【極】
+  - base_name: 風魔手裏剣 (costume: 極魔装)
+  - element=風(3) / type=投擲(9) / rarity=AA(2) / cv=小澤亜李
+  - max stats: HP=5460 / ATK=580 / DEF=5200 / SPD=58 / BREAK=650
+  - hit_counts=[6, 7, 13] (3段)  motion_speed=[4.0/4.0/1.0]  mp=49
+  - three_size=74/55/72 / initial_slot=2
+  - BD: アンコールいくよー★ (arts_id=33)
+    - description: 敵全体に強力な20連ダメージ
+    - cost=2 / hit_count=20 / value=1.5375 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 風属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103303`](weapons.json#L13325) 風魔手裏剣【極弐】
+  - base_name: 風魔手裏剣 (costume: 極弐魔装)
+  - element=風(3) / type=投擲(9) / rarity=AA(2) / cv=小澤亜李
+  - max stats: HP=7100 / ATK=760 / DEF=6760 / SPD=60 / BREAK=850
+  - hit_counts=[7, 8, 13] (3段)  motion_speed=[4.0/4.0/1.0]  mp=52
+  - three_size=76/55/72 / initial_slot=3
+  - BD: 恋のブレイズドライブRemix (arts_id=10033)
+    - description: 敵全体に超強力な20連ダメージ＆スピード10%UP
+    - cost=2 / hit_count=20 / value=1.8 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 風属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103601`](weapons.json#L14258) チェーンソウ
+  - base_name: チェーンソウ (costume: 魔装)
+  - element=光(4) / type=大剣(2) / rarity=AA(2) / cv=村川梨衣
+  - max stats: HP=4200 / ATK=2711 / DEF=3500 / SPD=13 / BREAK=608
+  - hit_counts=[2, 3, 4] (3段)  motion_speed=[4.0/4.0/1.0]  mp=129
+  - three_size=75/56/75 / initial_slot=2
+  - BD: code:フライデイナイト (arts_id=36)
+    - description: 敵全体に強力な16連ダメージ
+    - cost=1 / hit_count=16 / value=0.9375 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 光属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103602`](weapons.json#L14402) チェーンソウ【極】
+  - base_name: チェーンソウ (costume: 極魔装)
+  - element=光(4) / type=大剣(2) / rarity=AA(2) / cv=村川梨衣
+  - max stats: HP=5460 / ATK=3530 / DEF=4550 / SPD=13 / BREAK=790
+  - hit_counts=[3, 3, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=129
+  - three_size=75/56/75 / initial_slot=2
+  - BD: code:フライデイナイト (arts_id=36)
+    - description: 敵全体に強力な16連ダメージ
+    - cost=1 / hit_count=16 / value=0.9375 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 光属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103603`](weapons.json#L14546) チェーンソウ【極弐】
+  - base_name: チェーンソウ (costume: 極弐魔装)
+  - element=光(4) / type=大剣(2) / rarity=AA(2) / cv=村川梨衣
+  - max stats: HP=7100 / ATK=4590 / DEF=5920 / SPD=17 / BREAK=1030
+  - hit_counts=[4, 4, 7] (3段)  motion_speed=[4.0/4.0/2.5]  mp=137
+  - three_size=77/56/75 / initial_slot=3
+  - BD: code:フライデイ･ザ･サーティン (arts_id=10036)
+    - description: 敵全体に超強力な16連ダメージ＆敵を強制ブレイク
+    - cost=1 / hit_count=16 / value=1.13 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 光属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103901`](weapons.json#L15479) 覗き竜景光
+  - base_name: 覗き竜景光 (costume: 魔装)
+  - element=光(4) / type=太刀(3) / rarity=S(3) / cv=五十嵐由佳
+  - max stats: HP=7500 / ATK=4300 / DEF=6000 / SPD=26 / BREAK=3900
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=137
+  - three_size=90/58/88 / initial_slot=3
+  - BD: 小竜天晴之太刀 (arts_id=39)
+    - description: 敵全体に超強力な12連ダメージ＆2waveだけスピードUP
+    - cost=3 / hit_count=12 / value=4.65 / additional_value=0.0
+  - innate skills (3):
+    - Speed Multiply ×1.5 — 光属性の魔剣の行動速度が大幅にアップ
+    - MotionSpeed Multiply ×1.3 — 光属性の魔剣の攻撃モーションが加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103902`](weapons.json#L15655) 覗き竜景光【極】
+  - base_name: 覗き竜景光 (costume: 極魔装)
+  - element=光(4) / type=太刀(3) / rarity=S(3) / cv=五十嵐由佳
+  - max stats: HP=9800 / ATK=5590 / DEF=7800 / SPD=26 / BREAK=5070
+  - hit_counts=[3, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=137
+  - three_size=90/58/88 / initial_slot=4
+  - BD: 小竜天晴之太刀 (arts_id=39)
+    - description: 敵全体に超強力な12連ダメージ＆2waveだけスピードUP
+    - cost=3 / hit_count=12 / value=4.65 / additional_value=0.0
+  - innate skills (4):
+    - Speed Multiply ×1.5 — 光属性の魔剣の行動速度が大幅にアップ【熟度UPにつれてさらに効果値UP】
+    - MotionSpeed Multiply ×1.5 — 光属性の魔剣の攻撃モーションがかなり加速
+    - HitCount Addition +1.0 — 光属性の魔剣の1撃目2撃目3撃目のヒット数を+1する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`103903`](weapons.json#L15850) 覗き竜景光【極弐】
+  - base_name: 覗き竜景光 (costume: 極弐魔装)
+  - element=光(4) / type=太刀(3) / rarity=S(3) / cv=五十嵐由佳
+  - max stats: HP=11760 / ATK=8200 / DEF=9360 / SPD=26 / BREAK=7250
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=150
+  - three_size=90/58/88 / initial_slot=5
+  - BD: 昇竜烈晴煌乃太刀 (arts_id=10039)
+    - description: 敵全体に超強力な22連ダメージ＆2waveだけスピードUP
+    - cost=2 / hit_count=22 / value=1.92188 / additional_value=0.0
+  - innate skills (4):
+    - Speed Multiply ×1.75 — 光属性の魔剣の行動速度が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - MotionSpeed Multiply ×2.0 — 光属性の魔剣の攻撃モーションが大幅に加速
+    - HitCount Addition +2.0 — 光属性の魔剣の1撃目2撃目3撃目のヒット数を+2する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`104201`](weapons.json#L16873) トリスタン
+  - base_name: トリスタン (costume: 魔装)
+  - element=光(4) / type=連弩(6) / rarity=AA(2) / cv=山川琴美
+  - max stats: HP=4500 / ATK=1600 / DEF=4500 / SPD=11 / BREAK=2300
+  - hit_counts=[3, 4, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=188
+  - three_size=87/56/87 / initial_slot=2
+  - BD: メロディアスフェイト (arts_id=42)
+    - description: 敵全体に強力な19連ダメージ
+    - cost=2 / hit_count=19 / value=1.61842 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 光属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`104202`](weapons.json#L17017) トリスタン【極】
+  - base_name: トリスタン (costume: 極魔装)
+  - element=光(4) / type=連弩(6) / rarity=AA(2) / cv=山川琴美
+  - max stats: HP=5850 / ATK=2080 / DEF=5850 / SPD=11 / BREAK=2990
+  - hit_counts=[4, 4, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=188
+  - three_size=87/56/87 / initial_slot=2
+  - BD: メロディアスフェイト (arts_id=42)
+    - description: 敵全体に強力な19連ダメージ
+    - cost=2 / hit_count=19 / value=1.61842 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 光属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`104203`](weapons.json#L17161) トリスタン【極弐】
+  - base_name: トリスタン (costume: 極弐魔装)
+  - element=光(4) / type=連弩(6) / rarity=AA(2) / cv=山川琴美
+  - max stats: HP=7610 / ATK=2710 / DEF=7610 / SPD=15 / BREAK=3890
+  - hit_counts=[5, 5, 8] (3段)  motion_speed=[3.0/3.0/1.1]  mp=224
+  - three_size=88/57/89 / initial_slot=3
+  - BD: 終曲独唱リーベストート (arts_id=10042)
+    - description: 敵全体に強力な19連ダメージ＆攻撃力15%UP
+    - cost=2 / hit_count=19 / value=1.61842 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 光属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`104501`](weapons.json#L18094) デュランダル
+  - base_name: デュランダル (costume: 魔装)
+  - element=闇(5) / type=長剣(1) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=4500 / ATK=1600 / DEF=4000 / SPD=20 / BREAK=470
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=92
+  - three_size=78/55/80 / initial_slot=2
+  - BD: インフェクトアーチ (arts_id=45)
+    - description: 敵全体に強力な14連ダメージ
+    - cost=2 / hit_count=14 / value=2.19643 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.1 — 闇属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`104502`](weapons.json#L18238) デュランダル【極】
+  - base_name: デュランダル (costume: 極魔装)
+  - element=闇(5) / type=長剣(1) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=5850 / ATK=2080 / DEF=5200 / SPD=20 / BREAK=620
+  - hit_counts=[3, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=92
+  - three_size=78/55/80 / initial_slot=2
+  - BD: インフェクトアーチ (arts_id=45)
+    - description: 敵全体に強力な14連ダメージ
+    - cost=2 / hit_count=14 / value=2.19643 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.1 — 闇属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`104503`](weapons.json#L18382) デュランダル【極弐】
+  - base_name: デュランダル (costume: 極弐魔装)
+  - element=闇(5) / type=長剣(1) / rarity=AA(2) / cv=木村珠莉
+  - max stats: HP=7610 / ATK=3330 / DEF=6760 / SPD=25 / BREAK=1000
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[3.0/3.0/1.0]  mp=102
+  - three_size=78/55/80 / initial_slot=3
+  - BD: フローレスライズエッジ (arts_id=10045)
+    - description: 敵全体に強力な14連ダメージ＆スピード20%UP
+    - cost=2 / hit_count=14 / value=2.19643 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.25 — 闇属性の魔剣がかなりガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`104601`](weapons.json#L18539) シャドウゲイト
+  - base_name: シャドウゲイト (costume: 魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=AA(2) / cv=中島沙樹
+  - max stats: HP=4700 / ATK=3500 / DEF=4300 / SPD=15 / BREAK=2600
+  - hit_counts=[1, 2, 2] (3段)  motion_speed=[4.0/4.0/1.0]  mp=116
+  - three_size=85/55/82 / initial_slot=3
+  - BD: アンフェアブロッサム (arts_id=46)
+    - description: 敵全体に強力な13連ダメージ
+    - cost=2 / hit_count=13 / value=2.36538 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.1 — 闇属性の魔剣の防御力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`104602`](weapons.json#L18683) シャドウゲイト【極】
+  - base_name: シャドウゲイト (costume: 極魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=AA(2) / cv=中島沙樹
+  - max stats: HP=6110 / ATK=4550 / DEF=5590 / SPD=15 / BREAK=3380
+  - hit_counts=[2, 2, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=116
+  - three_size=85/55/82 / initial_slot=3
+  - BD: アンフェアブロッサム (arts_id=46)
+    - description: 敵全体に強力な13連ダメージ
+    - cost=2 / hit_count=13 / value=2.36538 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.1 — 闇属性の魔剣の防御力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`104603`](weapons.json#L18827) シャドウゲイト【極弐】
+  - base_name: シャドウゲイト (costume: 極弐魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=AA(2) / cv=中島沙樹
+  - max stats: HP=7950 / ATK=7090 / DEF=7270 / SPD=18 / BREAK=5250
+  - hit_counts=[3, 3, 5] (3段)  motion_speed=[3.0/3.0/1.0]  mp=122
+  - three_size=85/55/82 / initial_slot=4
+  - BD: アンフェアブロッサムレイド (arts_id=10046)
+    - description: 敵全体に超強力な13連ダメージ＆自分モーション加速
+    - cost=2 / hit_count=13 / value=3.23 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.25 — 闇属性の魔剣の防御力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`105001`](weapons.json#L20148) ハンターシャフト
+  - base_name: ハンターシャフト (costume: 魔装)
+  - element=闇(5) / type=連弩(6) / rarity=AA(2) / cv=佐藤利奈
+  - max stats: HP=4200 / ATK=2200 / DEF=4000 / SPD=11 / BREAK=1620
+  - hit_counts=[3, 4, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=199
+  - three_size=84/57/83 / initial_slot=3
+  - BD: サイレントショット (arts_id=50)
+    - description: 敵全体に強力な18連ダメージ
+    - cost=1 / hit_count=18 / value=0.833333 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 闇属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`105002`](weapons.json#L20292) ハンターシャフト【極】
+  - base_name: ハンターシャフト (costume: 極魔装)
+  - element=闇(5) / type=連弩(6) / rarity=AA(2) / cv=佐藤利奈
+  - max stats: HP=5460 / ATK=2860 / DEF=5200 / SPD=11 / BREAK=2106
+  - hit_counts=[4, 4, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=199
+  - three_size=84/57/83 / initial_slot=3
+  - BD: サイレントショット (arts_id=50)
+    - description: 敵全体に強力な18連ダメージ
+    - cost=1 / hit_count=18 / value=0.833333 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 闇属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`105003`](weapons.json#L20436) ハンターシャフト【極弐】
+  - base_name: ハンターシャフト (costume: 極弐魔装)
+  - element=闇(5) / type=連弩(6) / rarity=AA(2) / cv=佐藤利奈
+  - max stats: HP=7100 / ATK=3720 / DEF=6760 / SPD=15 / BREAK=2740
+  - hit_counts=[5, 5, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=205
+  - three_size=86/57/83 / initial_slot=4
+  - BD: サウンドレスモアサイレンス (arts_id=10050)
+    - description: 敵全体に超強力な18連ダメージ＆自分モーション加速
+    - cost=1 / hit_count=18 / value=1.0 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.1 — 闇属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`105101`](weapons.json#L20593) ネクロノミコン
+  - base_name: ネクロノミコン (costume: 魔装)
+  - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=浜崎奈々
+  - max stats: HP=8200 / ATK=6750 / DEF=8500 / SPD=43 / BREAK=1400
+  - hit_counts=[3, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=97
+  - three_size=72/55/78 / initial_slot=4
+  - BD: ニャルラトホテプ (arts_id=51)
+    - description: 敵全体に超強力な15連ダメージ＆自分HP回復
+    - cost=2 / hit_count=15 / value=2.46 / additional_value=0.0
+  - innate skills (3):
+    - Vitality_Attack Multiply ×1.3 — 残HPが多いほど攻撃力がかなりアップ
+    - Defense Multiply ×1.5 — 闇属性の魔剣の防御力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`105102`](weapons.json#L20769) ネクロノミコン【極】
+  - base_name: ネクロノミコン (costume: 極魔装)
+  - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=浜崎奈々
+  - max stats: HP=10660 / ATK=8775 / DEF=11050 / SPD=43 / BREAK=1820
+  - hit_counts=[4, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=97
+  - three_size=72/55/78 / initial_slot=5
+  - BD: ニャルラトホテプ (arts_id=51)
+    - description: 敵全体に超強力な15連ダメージ＆自分HP回復
+    - cost=2 / hit_count=15 / value=2.46 / additional_value=0.0
+  - innate skills (4):
+    - Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ
+    - Defense Multiply ×1.75 — 闇属性の魔剣の防御力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`105103`](weapons.json#L20964) ネクロノミコン【極弐】
+  - base_name: ネクロノミコン (costume: 極弐魔装)
+  - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=浜崎奈々
+  - max stats: HP=12800 / ATK=15900 / DEF=13260 / SPD=43 / BREAK=2190
+  - hit_counts=[5, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=107
+  - three_size=74/56/79 / initial_slot=6
+  - BD: 名状し難き這い寄る混沌 (arts_id=10051)
+    - description: 敵全体に超強力な20連ダメージ＆自分HP回復
+    - cost=2 / hit_count=20 / value=2.46 / additional_value=0.0
+  - innate skills (4):
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - Defense Multiply ×1.74232 — 闇属性の魔剣の防御力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`105801`](weapons.json#L23487) ファイアフライ
+  - base_name: ファイアフライ (costume: 魔装)
+  - element=火(1) / type=連弩(6) / rarity=A(1) / cv=慶長佑香
+  - max stats: HP=2800 / ATK=550 / DEF=1000 / SPD=13 / BREAK=500
+  - hit_counts=[5, 7, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=185
+  - three_size=83/56/81 / initial_slot=1
+  - BD: レッドゾーン (arts_id=58)
+    - description: 敵全体に13連ダメージ
+    - cost=1 / hit_count=13 / value=0.769231 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.05 — 火属性の魔剣のHPが少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`105802`](weapons.json#L23631) ファイアフライ【極】
+  - base_name: ファイアフライ (costume: 極魔装)
+  - element=火(1) / type=連弩(6) / rarity=A(1) / cv=慶長佑香
+  - max stats: HP=3640 / ATK=710 / DEF=1300 / SPD=13 / BREAK=650
+  - hit_counts=[6, 7, 12] (3段)  motion_speed=[4.0/4.0/1.0]  mp=185
+  - three_size=83/56/81 / initial_slot=1
+  - BD: レッドゾーン (arts_id=58)
+    - description: 敵全体に13連ダメージ
+    - cost=1 / hit_count=13 / value=0.769231 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.05 — 火属性の魔剣のHPが少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`105803`](weapons.json#L23775) ファイアフライ【極弐】
+  - base_name: ファイアフライ (costume: 極弐魔装)
+  - element=火(1) / type=連弩(6) / rarity=A(1) / cv=慶長佑香
+  - max stats: HP=4740 / ATK=1620 / DEF=3090 / SPD=16 / BREAK=1250
+  - hit_counts=[7, 8, 12] (3段)  motion_speed=[4.0/4.0/1.0]  mp=190
+  - three_size=83/56/81 / initial_slot=3
+  - BD: 超全開レッドゾーン (arts_id=10058)
+    - description: 敵全体に強力な13連ダメージ＆敵を強制ブレイク
+    - cost=1 / hit_count=13 / value=1.2 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 火属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`106601`](weapons.json#L26648) クロスボウ
+  - base_name: クロスボウ (costume: 魔装)
+  - element=水(2) / type=連弩(6) / rarity=A(1) / cv=菅谷弥生
+  - max stats: HP=2800 / ATK=1400 / DEF=700 / SPD=12 / BREAK=535
+  - hit_counts=[3, 4, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=194
+  - three_size=80/56/80 / initial_slot=1
+  - BD: スプラッシュシュート (arts_id=66)
+    - description: 敵全体に7連ダメージ
+    - cost=1 / hit_count=7 / value=1.42857 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.05 — 水属性の魔剣のHPが少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`106602`](weapons.json#L26792) クロスボウ【極】
+  - base_name: クロスボウ (costume: 極魔装)
+  - element=水(2) / type=連弩(6) / rarity=A(1) / cv=菅谷弥生
+  - max stats: HP=3640 / ATK=1820 / DEF=910 / SPD=12 / BREAK=680
+  - hit_counts=[4, 4, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=194
+  - three_size=80/56/80 / initial_slot=1
+  - BD: スプラッシュシュート (arts_id=66)
+    - description: 敵全体に7連ダメージ
+    - cost=1 / hit_count=7 / value=1.42857 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.05 — 水属性の魔剣のHPが少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`106603`](weapons.json#L26936) クロスボウ【極弐】
+  - base_name: クロスボウ (costume: 極弐魔装)
+  - element=水(2) / type=連弩(6) / rarity=A(1) / cv=菅谷弥生
+  - max stats: HP=7800 / ATK=3350 / DEF=3050 / SPD=14 / BREAK=750
+  - hit_counts=[5, 5, 9] (3段)  motion_speed=[3.0/2.0/1.0]  mp=205
+  - three_size=80/56/80 / initial_slot=2
+  - BD: ハイドロスプラッシュシュート (arts_id=10066)
+    - description: 敵全体に強力な8連ダメージ＆数秒防御力1.3倍
+    - cost=1 / hit_count=8 / value=2.0 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 水属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`106701`](weapons.json#L27093) 氷霜の書
+  - base_name: 氷霜の書 (costume: 魔装)
+  - element=水(2) / type=魔典(11) / rarity=A(1) / cv=田澤茉純
+  - max stats: HP=3000 / ATK=550 / DEF=1100 / SPD=45 / BREAK=420
+  - hit_counts=[3, 4, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=96
+  - three_size=83/58/82 / initial_slot=1
+  - BD: ブリザードルーム (arts_id=67)
+    - description: 敵全体に8連ダメージ
+    - cost=2 / hit_count=8 / value=2.5625 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 水属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`106702`](weapons.json#L27237) 氷霜の書【極】
+  - base_name: 氷霜の書 (costume: 極魔装)
+  - element=水(2) / type=魔典(11) / rarity=A(1) / cv=田澤茉純
+  - max stats: HP=3900 / ATK=720 / DEF=1430 / SPD=45 / BREAK=550
+  - hit_counts=[4, 4, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=96
+  - three_size=83/58/82 / initial_slot=1
+  - BD: ブリザードルーム (arts_id=67)
+    - description: 敵全体に8連ダメージ
+    - cost=2 / hit_count=8 / value=2.5625 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 水属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`106703`](weapons.json#L27381) 氷霜の書【極弐】
+  - base_name: 氷霜の書 (costume: 極弐魔装)
+  - element=水(2) / type=魔典(11) / rarity=A(1) / cv=田澤茉純
+  - max stats: HP=5070 / ATK=3690 / DEF=2500 / SPD=55 / BREAK=720
+  - hit_counts=[5, 5, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=107
+  - three_size=84/58/82 / initial_slot=3
+  - BD: ブリザードテリトリー (arts_id=10067)
+    - description: 敵全体に強力な8連ダメージ＆防御力10%UP
+    - cost=2 / hit_count=8 / value=3.8 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.1 — 水属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107101`](weapons.json#L28702) 小太刀
+  - base_name: 小太刀 (costume: 魔装)
+  - element=風(3) / type=太刀(3) / rarity=A(1) / cv=鈴木絵理
+  - max stats: HP=2800 / ATK=400 / DEF=700 / SPD=27 / BREAK=400
+  - hit_counts=[2, 3, 4] (3段)  motion_speed=[4.0/4.0/1.0]  mp=129
+  - three_size=73/53/75 / initial_slot=1
+  - BD: 旋風閃 (arts_id=71)
+    - description: 敵全体に5連ダメージ
+    - cost=1 / hit_count=5 / value=2.0 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.05 — 風属性の魔剣が少しガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107102`](weapons.json#L28846) 小太刀【極】
+  - base_name: 小太刀 (costume: 極魔装)
+  - element=風(3) / type=太刀(3) / rarity=A(1) / cv=鈴木絵理
+  - max stats: HP=3640 / ATK=520 / DEF=910 / SPD=27 / BREAK=520
+  - hit_counts=[3, 3, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=129
+  - three_size=73/53/75 / initial_slot=1
+  - BD: 旋風閃 (arts_id=71)
+    - description: 敵全体に5連ダメージ
+    - cost=1 / hit_count=5 / value=2.0 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.05 — 風属性の魔剣が少しガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107103`](weapons.json#L28990) 小太刀【極弐】
+  - base_name: 小太刀 (costume: 極弐魔装)
+  - element=風(3) / type=太刀(3) / rarity=A(1) / cv=鈴木絵理
+  - max stats: HP=4900 / ATK=3260 / DEF=2200 / SPD=36 / BREAK=1220
+  - hit_counts=[4, 4, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=139
+  - three_size=75/53/75 / initial_slot=3
+  - BD: 煉獄旋風閃 (arts_id=10071)
+    - description: 敵全体に強力な5連ダメージ＆攻撃力10%UP
+    - cost=1 / hit_count=5 / value=3.0 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.1 — 風属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107201`](weapons.json#L29147) クレセントランス
+  - base_name: クレセントランス (costume: 魔装)
+  - element=風(3) / type=騎槍(8) / rarity=A(1) / cv=千本木彩花
+  - max stats: HP=3200 / ATK=2400 / DEF=1100 / SPD=12 / BREAK=700
+  - hit_counts=[1, 2, 2] (3段)  motion_speed=[4.0/4.0/1.0]  mp=117
+  - three_size=71/52/74 / initial_slot=1
+  - BD: カルネージムーン (arts_id=72)
+    - description: 敵全体に7連ダメージ
+    - cost=1 / hit_count=7 / value=1.42857 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.05 — 風属性の魔剣の防御力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107202`](weapons.json#L29291) クレセントランス【極】
+  - base_name: クレセントランス (costume: 極魔装)
+  - element=風(3) / type=騎槍(8) / rarity=A(1) / cv=千本木彩花
+  - max stats: HP=4160 / ATK=3120 / DEF=1430 / SPD=12 / BREAK=910
+  - hit_counts=[2, 2, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=117
+  - three_size=71/52/74 / initial_slot=1
+  - BD: カルネージムーン (arts_id=72)
+    - description: 敵全体に7連ダメージ
+    - cost=1 / hit_count=7 / value=1.42857 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.05 — 風属性の魔剣の防御力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107203`](weapons.json#L29435) クレセントランス【極弐】
+  - base_name: クレセントランス (costume: 極弐魔装)
+  - element=風(3) / type=騎槍(8) / rarity=A(1) / cv=千本木彩花
+  - max stats: HP=5410 / ATK=6240 / DEF=2290 / SPD=15 / BREAK=1190
+  - hit_counts=[3, 3, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=125
+  - three_size=71/52/74 / initial_slot=3
+  - BD: ジェノサイドルナ (arts_id=10072)
+    - description: 敵全体に強力な7連ダメージ＆スピード10%UP
+    - cost=1 / hit_count=7 / value=2.5 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.1 — 風属性の魔剣の防御力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107301`](weapons.json#L29592) ホークアイ
+  - base_name: ホークアイ (costume: 魔装)
+  - element=風(3) / type=戦斧(7) / rarity=A(1) / cv=田口宏子
+  - max stats: HP=3000 / ATK=800 / DEF=1000 / SPD=17 / BREAK=600
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=132
+  - three_size=73/55/78 / initial_slot=1
+  - BD: ブラストファング (arts_id=73)
+    - description: 敵全体に8連ダメージ
+    - cost=2 / hit_count=8 / value=2.5625 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 風属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107302`](weapons.json#L29736) ホークアイ【極】
+  - base_name: ホークアイ (costume: 極魔装)
+  - element=風(3) / type=戦斧(7) / rarity=A(1) / cv=田口宏子
+  - max stats: HP=3900 / ATK=1040 / DEF=1300 / SPD=17 / BREAK=780
+  - hit_counts=[3, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=132
+  - three_size=73/55/78 / initial_slot=1
+  - BD: ブラストファング (arts_id=73)
+    - description: 敵全体に8連ダメージ
+    - cost=2 / hit_count=8 / value=2.5625 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 風属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107303`](weapons.json#L29880) ホークアイ【極弐】
+  - base_name: ホークアイ (costume: 極弐魔装)
+  - element=風(3) / type=戦斧(7) / rarity=A(1) / cv=田口宏子
+  - max stats: HP=5070 / ATK=3520 / DEF=2350 / SPD=26 / BREAK=2240
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[2.0/1.6/1.7]  mp=141
+  - three_size=72/55/78 / initial_slot=3
+  - BD: メガブラストファング (arts_id=10073)
+    - description: 敵全体に強力な8連ダメージ＆攻撃力10%UP
+    - cost=2 / hit_count=8 / value=3.8 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.1 — 風属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107401`](weapons.json#L30037) イーグルフロウ
+  - base_name: イーグルフロウ (costume: 魔装)
+  - element=風(3) / type=弓矢(5) / rarity=A(1) / cv=中里望
+  - max stats: HP=3000 / ATK=600 / DEF=900 / SPD=21 / BREAK=992
+  - hit_counts=[3, 5, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=95
+  - three_size=78/57/76 / initial_slot=1
+  - BD: トルネードクロウ (arts_id=74)
+    - description: 敵全体に6連ダメージ
+    - cost=2 / hit_count=6 / value=3.41667 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.05 — 風属性の魔剣のHPが少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107402`](weapons.json#L30181) イーグルフロウ【極】
+  - base_name: イーグルフロウ (costume: 極魔装)
+  - element=風(3) / type=弓矢(5) / rarity=A(1) / cv=中里望
+  - max stats: HP=3900 / ATK=780 / DEF=1170 / SPD=21 / BREAK=1280
+  - hit_counts=[4, 5, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=95
+  - three_size=78/57/76 / initial_slot=1
+  - BD: トルネードクロウ (arts_id=74)
+    - description: 敵全体に6連ダメージ
+    - cost=2 / hit_count=6 / value=3.41667 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.05 — 風属性の魔剣のHPが少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`107403`](weapons.json#L30325) イーグルフロウ【極弐】
+  - base_name: イーグルフロウ (costume: 極弐魔装)
+  - element=風(3) / type=弓矢(5) / rarity=A(1) / cv=中里望
+  - max stats: HP=5000 / ATK=2120 / DEF=2200 / SPD=30 / BREAK=2540
+  - hit_counts=[5, 6, 9] (3段)  motion_speed=[3.0/2.0/1.0]  mp=102
+  - three_size=78/57/76 / initial_slot=3
+  - BD: エルトルネードクロウズ (arts_id=10074)
+    - description: 敵全体に強力な6連ダメージ＆防御力10%UP
+    - cost=2 / hit_count=6 / value=5.0 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 風属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`108101`](weapons.json#L32970) ゲイボルグ
+  - base_name: ゲイボルグ (costume: 魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=清和祐子
+  - max stats: HP=8100 / ATK=5800 / DEF=9900 / SPD=24 / BREAK=1600
+  - hit_counts=[2, 3, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=131
+  - three_size=87/57/82 / initial_slot=4
+  - BD: 魔天竜刃嵐獄衝 (arts_id=81)
+    - description: 敵全体に超強力な24連ダメージ＆スピード30%UP
+    - cost=3 / hit_count=24 / value=2.325 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 風属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`108102`](weapons.json#L33127) ゲイボルグ【極】
+  - base_name: ゲイボルグ (costume: 極魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=清和祐子
+  - max stats: HP=10600 / ATK=7600 / DEF=12900 / SPD=24 / BREAK=2100
+  - hit_counts=[3, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=131
+  - three_size=87/57/82 / initial_slot=5
+  - BD: 魔天竜刃嵐獄衝 (arts_id=81)
+    - description: 敵全体に超強力な24連ダメージ＆スピード30%UP
+    - cost=3 / hit_count=24 / value=2.325 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 風属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`108103`](weapons.json#L33284) ゲイボルグ【極弐】
+  - base_name: ゲイボルグ (costume: 極弐魔装)
+  - element=風(3) / type=騎槍(8) / rarity=S(3) / cv=清和祐子
+  - max stats: HP=13780 / ATK=9880 / DEF=16770 / SPD=28 / BREAK=2730
+  - hit_counts=[4, 4, 6] (3段)  motion_speed=[3.2/3.2/1.2]  mp=137
+  - three_size=87/57/82 / initial_slot=6
+  - BD: 疾風怒濤･魔天嵐竜槍 (arts_id=10081)
+    - description: 敵全体に超強力な24連ダメージ＆スピード30%UP
+    - cost=3 / hit_count=24 / value=2.325 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 風属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`108201`](weapons.json#L33441) アガートラーム
+  - base_name: アガートラーム (costume: 魔装)
+  - element=光(4) / type=大剣(2) / rarity=S(3) / cv=永野愛
+  - max stats: HP=9200 / ATK=3000 / DEF=8900 / SPD=18 / BREAK=700
+  - hit_counts=[3, 6, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=160
+  - three_size=90/57/84 / initial_slot=4
+  - BD: レザレクトアージェント (arts_id=82)
+    - description: 敵全体に超強力な23連ダメージ＆3wave攻撃力15%UP
+    - cost=4 / hit_count=23 / value=3.36522 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.25 — 全属性の魔剣の攻撃力がかなりアップ
+    - MotionSpeed Multiply ×1.3 — 全属性の魔剣の攻撃モーションが加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`108202`](weapons.json#L33617) アガートラーム【極】
+  - base_name: アガートラーム (costume: 極魔装)
+  - element=光(4) / type=大剣(2) / rarity=S(3) / cv=永野愛
+  - max stats: HP=11900 / ATK=3900 / DEF=11500 / SPD=18 / BREAK=910
+  - hit_counts=[4, 6, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=160
+  - three_size=90/57/84 / initial_slot=5
+  - BD: レザレクトアージェント (arts_id=82)
+    - description: 敵全体に超強力な23連ダメージ＆3wave攻撃力15%UP
+    - cost=4 / hit_count=23 / value=3.36522 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.5 — 全属性の魔剣の攻撃力が大幅にアップ
+    - MotionSpeed Multiply ×1.5 — 全属性の魔剣の攻撃モーションがかなり加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`108203`](weapons.json#L33793) アガートラーム【極弐】
+  - base_name: アガートラーム (costume: 極弐魔装)
+  - element=光(4) / type=大剣(2) / rarity=S(3) / cv=永野愛
+  - max stats: HP=15470 / ATK=5070 / DEF=14950 / SPD=20 / BREAK=1190
+  - hit_counts=[5, 7, 10] (3段)  motion_speed=[2.0/2.0/1.2]  mp=176
+  - three_size=92/57/85 / initial_slot=6
+  - BD: 聖光携えし銀の導手 (arts_id=10082)
+    - description: 敵全体に超強力な23連ダメージ＆3wave攻撃力15%UP
+    - cost=4 / hit_count=23 / value=3.36522 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - MotionSpeed Multiply ×2.0 — 全属性の魔剣の攻撃モーションが大幅に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`108701`](weapons.json#L35599) 雪月花
+  - base_name: 雪月花 (costume: 魔装)
+  - element=水(2) / type=太刀(3) / rarity=AA(2) / cv=末柄里恵
+  - max stats: HP=4000 / ATK=1260 / DEF=3750 / SPD=14 / BREAK=450
+  - hit_counts=[3, 3, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=63
+  - three_size=82/55/79 / initial_slot=1
+  - BD: 狂華酔月舞雪ひらり (arts_id=87)
+    - description: 敵全体に強力な9連ダメージ＆攻撃力+100
+    - cost=3 / hit_count=9 / value=5.16667 / additional_value=0.0
+  - innate skills (2):
+    - GuardDefense Multiply ×0.975 — 水属性の魔剣のガード時の防御力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`108702`](weapons.json#L35756) 雪月花【極】
+  - base_name: 雪月花 (costume: 極魔装)
+  - element=水(2) / type=太刀(3) / rarity=AA(2) / cv=末柄里恵
+  - max stats: HP=5200 / ATK=1700 / DEF=4900 / SPD=14 / BREAK=600
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=63
+  - three_size=82/55/79 / initial_slot=2
+  - BD: 狂華酔月舞雪ひらり (arts_id=87)
+    - description: 敵全体に強力な9連ダメージ＆攻撃力+100
+    - cost=3 / hit_count=9 / value=5.16667 / additional_value=0.0
+  - innate skills (2):
+    - GuardDefense Multiply ×0.975 — 水属性の魔剣のガード時の防御力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`108703`](weapons.json#L35913) 雪月花【極弐】
+  - base_name: 雪月花 (costume: 極弐魔装)
+  - element=水(2) / type=太刀(3) / rarity=AA(2) / cv=末柄里恵
+  - max stats: HP=6200 / ATK=3300 / DEF=5500 / SPD=16 / BREAK=600
+  - hit_counts=[5, 4, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=70
+  - three_size=85/55/79 / initial_slot=3
+  - BD: 花酊泛月淡雪の如く (arts_id=10087)
+    - description: 敵全体に強力な9連ダメージ＆攻撃力10%UP
+    - cost=3 / hit_count=9 / value=5.16667 / additional_value=0.0
+  - innate skills (2):
+    - GuardDefense Multiply ×0.875 — 水属性の魔剣のガード時の防御力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`109301`](weapons.json#L38062) アルペジオ
+  - base_name: アルペジオ (costume: 魔装)
+  - element=光(4) / type=連弩(6) / rarity=AA(2) / cv=髙橋ミナミ
+  - max stats: HP=4300 / ATK=1800 / DEF=4000 / SPD=17 / BREAK=1400
+  - hit_counts=[6, 6, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=101
+  - three_size=85/55/79 / initial_slot=2
+  - BD: コズミックレーザー (arts_id=93)
+    - description: 敵全体に強力な16連ダメージ
+    - cost=2 / hit_count=16 / value=1.92188 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.1 — 光属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`109302`](weapons.json#L38206) アルペジオ【極】
+  - base_name: アルペジオ (costume: 極魔装)
+  - element=光(4) / type=連弩(6) / rarity=AA(2) / cv=髙橋ミナミ
+  - max stats: HP=5600 / ATK=2400 / DEF=5200 / SPD=17 / BREAK=1900
+  - hit_counts=[7, 6, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=101
+  - three_size=85/55/79 / initial_slot=2
+  - BD: コズミックレーザー (arts_id=93)
+    - description: 敵全体に強力な16連ダメージ
+    - cost=2 / hit_count=16 / value=1.92188 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.1 — 光属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`109303`](weapons.json#L38350) アルペジオ【極弐】
+  - base_name: アルペジオ (costume: 極弐魔装)
+  - element=光(4) / type=連弩(6) / rarity=AA(2) / cv=髙橋ミナミ
+  - max stats: HP=7280 / ATK=3120 / DEF=6760 / SPD=19 / BREAK=2470
+  - hit_counts=[8, 7, 9] (3段)  motion_speed=[3.0/3.0/1.2]  mp=122
+  - three_size=85/55/79 / initial_slot=3
+  - BD: アステロイドブラスター (arts_id=10093)
+    - description: 敵全体に強力な16連ダメージ＆攻撃力10%UP
+    - cost=2 / hit_count=16 / value=1.92188 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.25 — 光属性の魔剣がかなりガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`109801`](weapons.json#L40085) ディアボリカ
+  - base_name: ディアボリカ (costume: 魔装)
+  - element=闇(5) / type=大剣(2) / rarity=AA(2) / cv=和氣あず未
+  - max stats: HP=4300 / ATK=520 / DEF=5200 / SPD=26 / BREAK=520
+  - hit_counts=[9, 4, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=99
+  - three_size=触らないでよ！ / initial_slot=2
+  - BD: フォビドゥンクラスタ (arts_id=98)
+    - description: 敵全体に強力な24連ダメージ
+    - cost=2 / hit_count=24 / value=1.28125 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.1 — 闇属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`109802`](weapons.json#L40229) ディアボリカ【極】
+  - base_name: ディアボリカ (costume: 極魔装)
+  - element=闇(5) / type=大剣(2) / rarity=AA(2) / cv=和氣あず未
+  - max stats: HP=5600 / ATK=700 / DEF=6800 / SPD=26 / BREAK=700
+  - hit_counts=[10, 4, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=99
+  - three_size=触らないでよ！ / initial_slot=2
+  - BD: フォビドゥンクラスタ (arts_id=98)
+    - description: 敵全体に強力な24連ダメージ
+    - cost=2 / hit_count=24 / value=1.28125 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 闇属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`109803`](weapons.json#L40373) ディアボリカ【極弐】
+  - base_name: ディアボリカ (costume: 極弐魔装)
+  - element=闇(5) / type=大剣(2) / rarity=AA(2) / cv=和氣あず未
+  - max stats: HP=7280 / ATK=1120 / DEF=8840 / SPD=30 / BREAK=1120
+  - hit_counts=[11, 5, 10] (3段)  motion_speed=[3.0/3.0/1.0]  mp=105
+  - three_size=触らないでよ！ / initial_slot=3
+  - BD: フォビドゥンブランチグラスハート (arts_id=10098)
+    - description: 敵全体に強力な24連ダメージ＆防御力10%UP
+    - cost=2 / hit_count=24 / value=1.28125 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 闇属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`110901`](weapons.json#L44488) ソウルコレクター
+  - base_name: ソウルコレクター (costume: 魔装)
+  - element=闇(5) / type=長剣(1) / rarity=AA(2) / cv=稲川英里
+  - max stats: HP=5700 / ATK=1400 / DEF=4300 / SPD=22 / BREAK=600
+  - hit_counts=[4, 5, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=148
+  - three_size=69/55/71 / initial_slot=2
+  - BD: 吸魂ソウルキャッチャー (arts_id=109)
+    - description: 敵全体に強力な19連ダメージ
+    - cost=3 / hit_count=19 / value=2.44737 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 闇属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`110902`](weapons.json#L44632) ソウルコレクター【極】
+  - base_name: ソウルコレクター (costume: 極魔装)
+  - element=闇(5) / type=長剣(1) / rarity=AA(2) / cv=稲川英里
+  - max stats: HP=7500 / ATK=1900 / DEF=5600 / SPD=22 / BREAK=800
+  - hit_counts=[5, 5, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=148
+  - three_size=69/55/71 / initial_slot=2
+  - BD: 吸魂ソウルキャッチャー (arts_id=109)
+    - description: 敵全体に強力な19連ダメージ
+    - cost=3 / hit_count=19 / value=2.44737 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 闇属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`110903`](weapons.json#L44776) ソウルコレクター【極弐】
+  - base_name: ソウルコレクター (costume: 極弐魔装)
+  - element=闇(5) / type=長剣(1) / rarity=AA(2) / cv=稲川英里
+  - max stats: HP=9750 / ATK=2470 / DEF=7280 / SPD=24 / BREAK=1040
+  - hit_counts=[6, 6, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=163
+  - three_size=72/55/74 / initial_slot=3
+  - BD: 魂縛フォーカスロック (arts_id=10109)
+    - description: 敵全体に強力な19連ダメージ＆敵が数秒だけ動けなくなる
+    - cost=3 / hit_count=19 / value=2.44737 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.25 — 闇属性の魔剣のHPがかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`111601`](weapons.json#L47198) バールのようなもの神殺
+  - base_name: バールのようなもの神殺 (costume: 魔装)
+  - element=光(4) / type=大剣(2) / rarity=SS(4) / cv=末柄里恵
+  - max stats: HP=14800 / ATK=32940 / DEF=12000 / SPD=20 / BREAK=120
+  - hit_counts=[5, 4, 7] (3段)  motion_speed=[2.4/1.9/1.3]  mp=366
+  - three_size=91/53/73 / initial_slot=3
+  - BD: 瞑狂死酔スレイゴッド (arts_id=116)
+    - description: 敵全体に超絶強力な42連ダメージ＆数秒間攻撃力1.5倍
+    - cost=6 / hit_count=42 / value=4.28429 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.74232 — 光属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - JustGuard_Sapphire Multiply ×4.0 — ジャストガード時のサファイアの量がかなり増加
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`111602`](weapons.json#L47412) バールのようなもの神殺【極】
+  - base_name: バールのようなもの神殺 (costume: 極魔装)
+  - element=光(4) / type=大剣(2) / rarity=SS(4) / cv=末柄里恵
+  - max stats: HP=19240 / ATK=42800 / DEF=15600 / SPD=20 / BREAK=160
+  - hit_counts=[6, 4, 10] (3段)  motion_speed=[2.4/1.9/1.3]  mp=366
+  - three_size=91/53/73 / initial_slot=4
+  - BD: 瞑狂死酔スレイゴッド (arts_id=116)
+    - description: 敵全体に超絶強力な42連ダメージ＆数秒間攻撃力1.5倍
+    - cost=6 / hit_count=42 / value=4.28429 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - RemHP_Attack Multiply ×2.6 — 残HPが少ないほど攻撃力が超絶大にアップ
+    - JustGuard_Sapphire Multiply ×6.0 — ジャストガード時のサファイアの量が大幅に増加
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`111701`](weapons.json#L47626) バールのようなもの
+  - base_name: バールのようなもの (costume: 魔装)
+  - element=闇(5) / type=大剣(2) / rarity=S(3) / cv=末柄里恵
+  - max stats: HP=8300 / ATK=1200 / DEF=6200 / SPD=21 / BREAK=3200
+  - hit_counts=[5, 6, 4] (3段)  motion_speed=[4.0/4.0/1.0]  mp=300
+  - three_size=72/53/73 / initial_slot=4
+  - BD: 絶体絶命致命傷エンド (arts_id=117)
+    - description: 敵全体に強力な15連ダメージ＆味方HP回復
+    - cost=4 / hit_count=15 / value=4.7 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.5 — 闇属性の魔剣が大幅にガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`111702`](weapons.json#L47783) バールのようなもの【極】
+  - base_name: バールのようなもの (costume: 極魔装)
+  - element=闇(5) / type=大剣(2) / rarity=S(3) / cv=末柄里恵
+  - max stats: HP=10790 / ATK=1560 / DEF=8060 / SPD=21 / BREAK=4160
+  - hit_counts=[6, 6, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=300
+  - three_size=72/53/73 / initial_slot=5
+  - BD: 絶体絶命致命傷エンド (arts_id=117)
+    - description: 敵全体に強力な15連ダメージ＆味方HP回復
+    - cost=4 / hit_count=15 / value=4.7 / additional_value=0.0
+  - innate skills (4):
+    - GuardBreak Multiply ×1.5 — 闇属性の魔剣が大幅にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×5.0 — ブレイク時に自身の攻撃力が5倍にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`111703`](weapons.json#L47978) バールのようなもの【極弐】
+  - base_name: バールのようなもの (costume: 極弐魔装)
+  - element=闇(5) / type=大剣(2) / rarity=S(3) / cv=末柄里恵
+  - max stats: HP=14030 / ATK=2030 / DEF=10480 / SPD=25 / BREAK=5410
+  - hit_counts=[7, 7, 7] (3段)  motion_speed=[3.0/2.0/1.0]  mp=305
+  - three_size=74/53/73 / initial_slot=6
+  - BD: 絶体絶望ハッピーエンドガール (arts_id=10117)
+    - description: 敵全体に強力な15連ダメージ＆味方HP回復
+    - cost=4 / hit_count=15 / value=4.7 / additional_value=0.0
+  - innate skills (4):
+    - GuardBreak Multiply ×1.75 — 闇属性の魔剣が絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×5.0 — ブレイク時に自身の攻撃力が5倍にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`111801`](weapons.json#L48173) 打ち出の小鎚=原罪
+  - base_name: 打ち出の小鎚=原罪 (costume: 魔装)
+  - element=水(2) / type=投擲(9) / rarity=SS(4) / cv=諏訪彩花
+  - max stats: HP=12800 / ATK=6860 / DEF=12200 / SPD=28 / BREAK=1620
+  - hit_counts=[4, 1, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=210
+  - three_size=66/54/66 / initial_slot=2
+  - BD: 神々屠りし法師の原罪 (arts_id=118)
+    - description: 敵全体に超絶強力な16連ダメージ＆5wave攻撃力15%UP＆敵を強制ブレイク
+    - cost=5 / hit_count=16 / value=12.2085 / additional_value=0.0
+  - innate skills (5):
+    - GuardBreak Multiply ×1.75 — 水属性の魔剣が絶大にガードブレイクしやすく
+    - RemHP_Attack Multiply ×2.1 — 水属性の味方全体が、残HPが少ないほど攻撃力が絶大にアップ
+    - SapphireDrop Multiply ×2.0 — 自分の獲得するサファイアの量がかなり増加
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に水属性の魔剣の攻撃力3.5倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`111802`](weapons.json#L48399) 打ち出の小鎚=原罪【極】
+  - base_name: 打ち出の小鎚=原罪 (costume: 極魔装)
+  - element=水(2) / type=投擲(9) / rarity=SS(4) / cv=諏訪彩花
+  - max stats: HP=16640 / ATK=8918 / DEF=15900 / SPD=28 / BREAK=2106
+  - hit_counts=[5, 1, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=210
+  - three_size=66/54/66 / initial_slot=3
+  - BD: 神々屠りし法師の原罪 (arts_id=118)
+    - description: 敵全体に超絶強力な16連ダメージ＆5wave攻撃力15%UP＆敵を強制ブレイク
+    - cost=5 / hit_count=16 / value=12.2085 / additional_value=0.0
+  - innate skills (5):
+    - GuardBreak Multiply ×2.0 — 水属性の魔剣が超絶大にガードブレイクしやすく
+    - RemHP_Attack Multiply ×2.4 — 水属性の味方全体が、残HPが少ないほど攻撃力が超絶大にアップ
+    - SapphireDrop Multiply ×3.0 — 自分の獲得するサファイアの量が大幅に増加
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に水属性の魔剣の攻撃力3.5倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`111901`](weapons.json#L48625) 打ち出の小鎚
+  - base_name: 打ち出の小鎚 (costume: 魔装)
+  - element=水(2) / type=投擲(9) / rarity=S(3) / cv=諏訪彩花
+  - max stats: HP=7600 / ATK=2400 / DEF=7200 / SPD=26 / BREAK=1600
+  - hit_counts=[3, 2, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=192
+  - three_size=68/55/66 / initial_slot=3
+  - BD: 欲も願いも大きくなあれ (arts_id=119)
+    - description: 敵全体に超強力な13連ダメージ＆敵を数秒だけ麻痺
+    - cost=5 / hit_count=13 / value=7.61538 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.25 — 水属性の魔剣のHPがかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`111902`](weapons.json#L48782) 打ち出の小鎚【極】
+  - base_name: 打ち出の小鎚 (costume: 極魔装)
+  - element=水(2) / type=投擲(9) / rarity=S(3) / cv=諏訪彩花
+  - max stats: HP=9900 / ATK=3120 / DEF=9400 / SPD=26 / BREAK=2080
+  - hit_counts=[4, 2, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=192
+  - three_size=68/55/66 / initial_slot=4
+  - BD: 欲も願いも大きくなあれ (arts_id=119)
+    - description: 敵全体に超強力な13連ダメージ＆敵を数秒だけ麻痺
+    - cost=5 / hit_count=13 / value=7.61538 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.25 — 水属性の魔剣のHPがかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`111903`](weapons.json#L48939) 打ち出の小鎚【極弐】
+  - base_name: 打ち出の小鎚 (costume: 極弐魔装)
+  - element=水(2) / type=投擲(9) / rarity=S(3) / cv=諏訪彩花
+  - max stats: HP=12870 / ATK=5000 / DEF=12220 / SPD=29 / BREAK=2710
+  - hit_counts=[5, 3, 10] (3段)  motion_speed=[2.4/2.4/1.4]  mp=211
+  - three_size=69/55/66 / initial_slot=5
+  - BD: 大望叶えし小鎚の一振 (arts_id=10119)
+    - description: 敵全体に超強力な13連ダメージ＆敵を数秒だけ麻痺
+    - cost=5 / hit_count=13 / value=7.61538 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.5 — 水属性の魔剣のHPが大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`112001`](weapons.json#L49096) カラドボルグ=エア
+  - base_name: カラドボルグ=エア (costume: 魔装)
+  - element=風(3) / type=長剣(1) / rarity=SS(4) / cv=立花理香
+  - max stats: HP=15000 / ATK=12300 / DEF=12180 / SPD=20 / BREAK=5800
+  - hit_counts=[3, 4, 5] (3段)  motion_speed=[3.0/3.0/2.0]  mp=381
+  - three_size=103/60/87 / initial_slot=3
+  - BD: 絶望蹂躙棄胎ロストエア (arts_id=120)
+    - description: 敵全体に超絶強力な27連ダメージ＆敵を40秒麻痺
+    - cost=8 / hit_count=27 / value=8.04444 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - HP Multiply ×1.75 — 全属性の魔剣のHPが絶大にアップ
+    - Vitality_Attack Multiply ×1.3 — 味方全体が、残HPが多いほど攻撃力がかなりアップ
+    - Heal Addition +500.0 — 味方全体が、非行動時にHPが徐々に大回復
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`112002`](weapons.json#L49310) カラドボルグ=エア【極】
+  - base_name: カラドボルグ=エア (costume: 極魔装)
+  - element=風(3) / type=長剣(1) / rarity=SS(4) / cv=立花理香
+  - max stats: HP=19500 / ATK=15990 / DEF=15900 / SPD=20 / BREAK=7540
+  - hit_counts=[4, 4, 8] (3段)  motion_speed=[3.0/3.0/2.0]  mp=381
+  - three_size=103/60/87 / initial_slot=4
+  - BD: 絶望蹂躙棄胎ロストエア (arts_id=120)
+    - description: 敵全体に超絶強力な27連ダメージ＆敵を40秒麻痺
+    - cost=8 / hit_count=27 / value=8.04444 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ
+    - HP Multiply ×2.0 — 全属性の魔剣のHPが超絶大アップ
+    - Vitality_Attack Multiply ×1.7 — 味方全体が、残HPが多いほど攻撃力が大幅にアップ
+    - Heal Addition +500.0 — 味方全体が、非行動時にHPが徐々に大回復
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`112401`](weapons.json#L50602) ヘカトンケイル
+  - base_name: ヘカトンケイル (costume: 魔装)
+  - element=風(3) / type=拳闘(10) / rarity=S(3) / cv=清都ありさ
+  - max stats: HP=14000 / ATK=3000 / DEF=3300 / SPD=36 / BREAK=500
+  - hit_counts=[4, 6, 16] (3段)  motion_speed=[4.0/4.0/1.0]  mp=192
+  - three_size=97/64/84 / initial_slot=2
+  - BD: ハンドレッドガントレット (arts_id=124)
+    - description: 敵全体に超絶強力な33連ダメージ＆数秒だけ時間を停止
+    - cost=9 / hit_count=33 / value=7.09091 / additional_value=0.0
+  - innate skills (2):
+    - Break_Attack Multiply ×2.5 — 自身が破損状態になると攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`112402`](weapons.json#L50759) ヘカトンケイル【極】
+  - base_name: ヘカトンケイル (costume: 極魔装)
+  - element=風(3) / type=拳闘(10) / rarity=S(3) / cv=清都ありさ
+  - max stats: HP=18200 / ATK=3900 / DEF=4290 / SPD=36 / BREAK=650
+  - hit_counts=[5, 6, 19] (3段)  motion_speed=[4.0/4.0/1.0]  mp=192
+  - three_size=97/64/84 / initial_slot=3
+  - BD: ハンドレッドガントレット (arts_id=124)
+    - description: 敵全体に超絶強力な33連ダメージ＆数秒だけ時間を停止
+    - cost=9 / hit_count=33 / value=7.09091 / additional_value=0.0
+  - innate skills (2):
+    - Break_Attack Multiply ×3.3 — 自身が破損状態になると攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`112501`](weapons.json#L50916) サフラン色の死
+  - base_name: サフラン色の死 (costume: 魔装)
+  - element=闇(5) / type=弓矢(5) / rarity=S(3) / cv=上田麗奈
+  - max stats: HP=6420 / ATK=3150 / DEF=7400 / SPD=38 / BREAK=1080
+  - hit_counts=[6, 6, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=200
+  - three_size=78/59/74 / initial_slot=4
+  - BD: 神核を穿くﾛ自夫藍の花 (arts_id=125)
+    - description: 敵全体に超強力な36連ダメージ＆数秒だけ時を止める
+    - cost=3 / hit_count=36 / value=1.75 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.5 — 闇属性の魔剣の攻撃力が大幅にアップ
+    - Vitality_Attack Multiply ×1.3 — 残HPが多いほど攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`112502`](weapons.json#L51092) サフラン色の死【極】
+  - base_name: サフラン色の死 (costume: 極魔装)
+  - element=闇(5) / type=弓矢(5) / rarity=S(3) / cv=上田麗奈
+  - max stats: HP=8350 / ATK=4100 / DEF=9620 / SPD=38 / BREAK=1410
+  - hit_counts=[7, 6, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=200
+  - three_size=78/59/74 / initial_slot=5
+  - BD: 神核を穿くﾛ自夫藍の花 (arts_id=125)
+    - description: 敵全体に超強力な36連ダメージ＆数秒だけ時を止める
+    - cost=3 / hit_count=36 / value=1.75 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.75 — 闇属性の魔剣の攻撃力が絶大にアップ
+    - Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`112503`](weapons.json#L51287) サフラン色の死【極弐】
+  - base_name: サフラン色の死 (costume: 極弐魔装)
+  - element=闇(5) / type=弓矢(5) / rarity=S(3) / cv=上田麗奈
+  - max stats: HP=10860 / ATK=5330 / DEF=12510 / SPD=40 / BREAK=1840
+  - hit_counts=[8, 7, 9] (3段)  motion_speed=[2.8/2.8/1.4]  mp=221
+  - three_size=83/61/80 / initial_slot=6
+  - BD: 神髄を拐かす真紫のﾛ自夫藍 (arts_id=10125)
+    - description: 敵全体に超強力な36連ダメージ＆数秒だけ時を止める
+    - cost=3 / hit_count=36 / value=1.75 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.74232 — 闇属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`113001`](weapons.json#L53480) アクエリア
+  - base_name: アクエリア (costume: 魔装)
+  - element=水(2) / type=連弩(6) / rarity=S(3) / cv=山村響
+  - max stats: HP=7200 / ATK=3100 / DEF=4500 / SPD=18 / BREAK=1600
+  - hit_counts=[6, 7, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=140
+  - three_size=89/55/74 / initial_slot=4
+  - BD: サダルメリク･ノア (arts_id=130)
+    - description: 敵全体に超強力な22連ダメージ＆自分HP回復
+    - cost=3 / hit_count=22 / value=2.53636 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - Raise Multiply ×0.5 — 戦闘不能になっても1度だけ破損状態で復活できる
+    - GuardDefense Multiply ×0.975 — 水属性の魔剣のガード時の防御力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`113002`](weapons.json#L53675) アクエリア【極】
+  - base_name: アクエリア (costume: 極魔装)
+  - element=水(2) / type=連弩(6) / rarity=S(3) / cv=山村響
+  - max stats: HP=9300 / ATK=4030 / DEF=5800 / SPD=18 / BREAK=2080
+  - hit_counts=[7, 7, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=140
+  - three_size=89/55/74 / initial_slot=5
+  - BD: サダルメリク･ノア (arts_id=130)
+    - description: 敵全体に超強力な22連ダメージ＆自分HP回復
+    - cost=3 / hit_count=22 / value=2.53636 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.75 — 水属性の魔剣の攻撃力が絶大にアップ
+    - Raise Multiply ×1.0 — 戦闘不能になっても1度だけ完全復活できる
+    - GuardDefense Multiply ×0.95 — 水属性の魔剣のガード時の防御力がアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`113003`](weapons.json#L53889) アクエリア【極弐】
+  - base_name: アクエリア (costume: 極弐魔装)
+  - element=水(2) / type=連弩(6) / rarity=S(3) / cv=山村響
+  - max stats: HP=12090 / ATK=5240 / DEF=7540 / SPD=20 / BREAK=2710
+  - hit_counts=[8, 8, 10] (3段)  motion_speed=[3.8/3.8/1.2]  mp=154
+  - three_size=89/55/77 / initial_slot=6
+  - BD: サダルスウド･ワイプアウト (arts_id=10130)
+    - description: 敵全体に超強力な22連ダメージ＆自分HP回復
+    - cost=3 / hit_count=22 / value=2.53636 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.74232 — 水属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Raise Multiply ×1.0 — 戦闘不能になっても1度だけ完全復活できる
+    - GuardDefense Multiply ×0.95 — 水属性の魔剣のガード時の防御力がアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`113801`](weapons.json#L56923) アルスマグナ
+  - base_name: アルスマグナ (costume: 魔装)
+  - element=水(2) / type=杖棒(4) / rarity=S(3) / cv=稲川英里
+  - max stats: HP=8200 / ATK=1200 / DEF=8500 / SPD=21 / BREAK=1200
+  - hit_counts=[4, 7, 8] (3段)  motion_speed=[4.0/4.0/1.0]  mp=108
+  - three_size=72/55/78 / initial_slot=2
+  - BD: パーフェクトカリキュレイト (arts_id=138)
+    - description: 敵全体に超強力な16連ダメージ＆攻撃力+300
+    - cost=3 / hit_count=16 / value=3.4875 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.25 — 水属性の魔剣のHPがかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`113802`](weapons.json#L57080) アルスマグナ【極】
+  - base_name: アルスマグナ (costume: 極魔装)
+  - element=水(2) / type=杖棒(4) / rarity=S(3) / cv=稲川英里
+  - max stats: HP=10700 / ATK=1600 / DEF=11100 / SPD=21 / BREAK=1600
+  - hit_counts=[5, 7, 11] (3段)  motion_speed=[4.0/4.0/1.0]  mp=108
+  - three_size=72/55/78 / initial_slot=3
+  - BD: パーフェクトカリキュレイト (arts_id=138)
+    - description: 敵全体に超強力な16連ダメージ＆攻撃力+300
+    - cost=3 / hit_count=16 / value=3.4875 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.25 — 水属性の魔剣のHPがかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`114101`](weapons.json#L58065) ブリューナク
+  - base_name: ブリューナク (costume: 魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=S(3) / cv=山村響
+  - max stats: HP=10800 / ATK=5610 / DEF=3080 / SPD=41 / BREAK=700
+  - hit_counts=[3, 6, 9] (3段)  motion_speed=[2.0/3.0/1.0]  mp=230
+  - three_size=81/59/78 / initial_slot=2
+  - BD: 黒雷イーリス=ブロンテ (arts_id=141)
+    - description: 敵全体に超強力な27連ダメージ＆90秒間、味方の攻撃力･ﾓｰｼｮﾝ速度･ｽﾋﾟｰﾄﾞが3.5倍
+    - cost=5 / hit_count=27 / value=4.6 / additional_value=0.0
+  - innate skills (4):
+    - Wave_BlazeUP Addition +200.0 — Wave経過ごとにブレイズゲージがかなり回復する
+    - HP Multiply ×1.1 — 全属性の魔剣のHPがアップ
+    - Defense Multiply ×1.1 — 全属性の魔剣の防御力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`114102`](weapons.json#L58284) ブリューナク【極】
+  - base_name: ブリューナク (costume: 極魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=S(3) / cv=山村響
+  - max stats: HP=14040 / ATK=7300 / DEF=4010 / SPD=41 / BREAK=910
+  - hit_counts=[4, 6, 12] (3段)  motion_speed=[2.0/3.0/1.0]  mp=230
+  - three_size=81/59/78 / initial_slot=3
+  - BD: 黒雷イーリス=ブロンテ (arts_id=141)
+    - description: 敵全体に超強力な27連ダメージ＆90秒間、味方の攻撃力･ﾓｰｼｮﾝ速度･ｽﾋﾟｰﾄﾞが3.5倍
+    - cost=5 / hit_count=27 / value=4.6 / additional_value=0.0
+  - innate skills (4):
+    - Wave_BlazeUP Addition +350.0 — Wave経過ごとにブレイズゲージが大幅に回復する
+    - HP Multiply ×1.25 — 全属性の魔剣のHPがかなりアップ
+    - Defense Multiply ×1.25 — 全属性の魔剣の防御力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`114103`](weapons.json#L58503) ブリューナク【極弐】
+  - base_name: ブリューナク (costume: 極弐魔装)
+  - element=闇(5) / type=騎槍(8) / rarity=S(3) / cv=山村響
+  - max stats: HP=14750 / ATK=9490 / DEF=4220 / SPD=45 / BREAK=960
+  - hit_counts=[5, 7, 12] (3段)  motion_speed=[2.5/2.5/1.0]  mp=234
+  - three_size=83/59/79 / initial_slot=4
+  - BD: 獄黑雷ケイオス=ブロンテ (arts_id=10141)
+    - description: 敵全体に超強力な27連ダメージ＆90秒間、味方の攻撃力･ﾓｰｼｮﾝ速度･ｽﾋﾟｰﾄﾞが7倍
+    - cost=5 / hit_count=27 / value=4.6 / additional_value=0.0
+  - innate skills (4):
+    - Wave_BlazeUP Addition +600.0 — Wave経過ごとにブレイズゲージが絶大に回復する
+    - HP Multiply ×1.5 — 全属性の魔剣のHPが大幅にアップ
+    - Defense Multiply ×1.5 — 全属性の魔剣の防御力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`115601`](weapons.json#L64040) ミッドナイト
+  - base_name: ミッドナイト (costume: 魔装)
+  - element=闇(5) / type=拳闘(10) / rarity=AA(2) / cv=せきしほ
+  - max stats: HP=5000 / ATK=550 / DEF=2900 / SPD=48 / BREAK=680
+  - hit_counts=[3, 3, 6] (3段)  motion_speed=[3.0/3.0/1.0]  mp=36
+  - three_size=74/56/73 / initial_slot=1
+  - BD: サイレントマーダー (arts_id=156)
+    - description: 敵全体に強力な24連ダメージ＆敵を強制ブレイク
+    - cost=3 / hit_count=24 / value=1.9375 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 闇属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`115602`](weapons.json#L64197) ミッドナイト【極】
+  - base_name: ミッドナイト (costume: 極魔装)
+  - element=闇(5) / type=拳闘(10) / rarity=AA(2) / cv=せきしほ
+  - max stats: HP=6500 / ATK=720 / DEF=3770 / SPD=48 / BREAK=890
+  - hit_counts=[4, 3, 9] (3段)  motion_speed=[3.0/3.0/1.0]  mp=36
+  - three_size=74/56/73 / initial_slot=2
+  - BD: サイレントマーダー (arts_id=156)
+    - description: 敵全体に強力な24連ダメージ＆敵を強制ブレイク
+    - cost=3 / hit_count=24 / value=1.9375 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 闇属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`115603`](weapons.json#L64354) ミッドナイト【極弐】
+  - base_name: ミッドナイト (costume: 極弐魔装)
+  - element=闇(5) / type=拳闘(10) / rarity=AA(2) / cv=せきしほ
+  - max stats: HP=8450 / ATK=1030 / DEF=4910 / SPD=52 / BREAK=1160
+  - hit_counts=[5, 4, 9] (3段)  motion_speed=[3.0/3.0/1.0]  mp=45
+  - three_size=74/56/73 / initial_slot=3
+  - BD: ノイズレスエクスキューション (arts_id=10156)
+    - description: 敵全体に強力な24連ダメージ＆敵を強制ブレイク
+    - cost=3 / hit_count=24 / value=1.9375 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.5 — 闇属性の魔剣の行動速度が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`117001`](weapons.json#L69462) イステの歌
+  - base_name: イステの歌 (costume: 魔装)
+  - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=赤﨑千夏
+  - max stats: HP=7650 / ATK=7800 / DEF=8800 / SPD=40 / BREAK=2800
+  - hit_counts=[2, 3, 2] (3段)  motion_speed=[4.0/4.0/1.0]  mp=121
+  - three_size=79/59/80 / initial_slot=2
+  - BD: 狡猥に響け全能の歌声 (arts_id=170)
+    - description: 敵全体に超強力な19連ダメージ＆敵を数秒だけ麻痺＆60秒間、味方の攻撃力･ﾓｰｼｮﾝ速度･ｽﾋﾟｰﾄﾞが3.5倍
+    - cost=3 / hit_count=19 / value=2.93684 / additional_value=0.0
+  - innate skills (3):
+    - Wave_BlazeUP Addition +200.0 — Wave経過ごとにブレイズゲージがかなり回復する
+    - BlazeAttack Multiply ×2.0 — 闇属性の魔剣のB.D.攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`117002`](weapons.json#L69674) イステの歌【極】
+  - base_name: イステの歌 (costume: 極魔装)
+  - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=赤﨑千夏
+  - max stats: HP=9950 / ATK=10140 / DEF=11440 / SPD=40 / BREAK=3640
+  - hit_counts=[3, 3, 5] (3段)  motion_speed=[4.0/4.0/1.0]  mp=121
+  - three_size=79/59/80 / initial_slot=3
+  - BD: 狡猥に響け全能の歌声 (arts_id=170)
+    - description: 敵全体に超強力な19連ダメージ＆敵を数秒だけ麻痺＆60秒間、味方の攻撃力･ﾓｰｼｮﾝ速度･ｽﾋﾟｰﾄﾞが3.5倍
+    - cost=3 / hit_count=19 / value=2.93684 / additional_value=0.0
+  - innate skills (4):
+    - Wave_BlazeUP Addition +350.0 — Wave経過ごとにブレイズゲージが大幅に回復する
+    - BlazeAttack Multiply ×2.0 — 闇属性の魔剣のB.D.攻撃力がかなりアップ
+    - GuardBreak Multiply ×1.1 — 闇属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`117003`](weapons.json#L69905) イステの歌【極弐】
+  - base_name: イステの歌 (costume: 極弐魔装)
+  - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=赤﨑千夏
+  - max stats: HP=12940 / ATK=13190 / DEF=14880 / SPD=46 / BREAK=4740
+  - hit_counts=[4, 4, 5] (3段)  motion_speed=[3.0/3.0/1.1]  mp=134
+  - three_size=79/59/80 / initial_slot=4
+  - BD: =絶奏さるる生ける影= (arts_id=10170)
+    - description: 敵全体に超強力な19連ダメージ＆敵を数秒だけ麻痺＆60秒間、味方の攻撃力･ﾓｰｼｮﾝ速度･ｽﾋﾟｰﾄﾞが7倍
+    - cost=3 / hit_count=19 / value=2.93684 / additional_value=0.0
+  - innate skills (4):
+    - Wave_BlazeUP Addition +600.0 — Wave経過ごとにブレイズゲージが絶大に回復する
+    - BlazeAttack Multiply ×2.5 — 闇属性の魔剣のB.D.攻撃力が大幅にアップ
+    - GuardBreak Multiply ×1.25 — 闇属性の魔剣がかなりガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`117301`](weapons.json#L70964) 霊刀フツノミタマ
+  - base_name: 霊刀フツノミタマ (costume: 魔装)
+  - element=火(1) / type=太刀(3) / rarity=S(3) / cv=石上静香
+  - max stats: HP=7200 / ATK=3500 / DEF=7300 / SPD=12 / BREAK=1100
+  - hit_counts=[3, 3, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=208
+  - three_size=88/58/79 / initial_slot=2
+  - BD: 紅霊零式｢豊布都之神雷｣ (arts_id=173)
+    - description: 敵全体に超強力な20連ダメージ＆数秒だけ時を止める
+    - cost=4 / hit_count=20 / value=4.2 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 全属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`117302`](weapons.json#L71121) 霊刀フツノミタマ【極】
+  - base_name: 霊刀フツノミタマ (costume: 極魔装)
+  - element=火(1) / type=太刀(3) / rarity=S(3) / cv=石上静香
+  - max stats: HP=9400 / ATK=4550 / DEF=9500 / SPD=12 / BREAK=1430
+  - hit_counts=[3, 3, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=208
+  - three_size=88/58/79 / initial_slot=3
+  - BD: 紅霊零式｢豊布都之神雷｣ (arts_id=173)
+    - description: 敵全体に超強力な20連ダメージ＆数秒だけ時を止める
+    - cost=4 / hit_count=20 / value=4.2 / additional_value=0.0
+  - innate skills (2):
+    - HP Multiply ×1.1 — 全属性の魔剣のHPがアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`117801`](weapons.json#L72843) オーア=ドラグ
+  - base_name: オーア=ドラグ (costume: 魔装)
+  - element=光(4) / type=拳闘(10) / rarity=SS(4) / cv=山下七海
+  - max stats: HP=14990 / ATK=13990 / DEF=13990 / SPD=20 / BREAK=10990
+  - hit_counts=[2, 3, 4] (3段)  motion_speed=[3.0/3.0/2.0]  mp=334
+  - three_size=70/57/72 / initial_slot=2
+  - BD: 約束された黄金の頂点 (arts_id=178)
+    - description: 敵全体に超絶強力な29連ダメージ＆数秒だけ全敵が跪く
+    - cost=8 / hit_count=29 / value=8.30621 / additional_value=0.0
+  - innate skills (5):
+    - GuardBreak Multiply ×1.5 — 全属性の魔剣が大幅にガードブレイクしやすく
+    - RemHP_Attack Multiply ×2.1 — 光属性の味方全体が、残HPが少ないほど攻撃力が絶大にアップ
+    - AllTarget Multiply ×1.0 — 攻撃力を下げずに全魔剣の攻撃範囲が敵全体になる
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に光属性の魔剣の攻撃力が3.5倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`117802`](weapons.json#L73057) オーア=ドラグ【極】
+  - base_name: オーア=ドラグ (costume: 極魔装)
+  - element=光(4) / type=拳闘(10) / rarity=SS(4) / cv=山下七海
+  - max stats: HP=19490 / ATK=18190 / DEF=18190 / SPD=20 / BREAK=14290
+  - hit_counts=[3, 3, 7] (3段)  motion_speed=[3.0/3.0/2.0]  mp=334
+  - three_size=70/57/72 / initial_slot=3
+  - BD: 約束された黄金の頂点 (arts_id=178)
+    - description: 敵全体に超絶強力な29連ダメージ＆数秒だけ全敵が跪く
+    - cost=8 / hit_count=29 / value=8.30621 / additional_value=0.0
+  - innate skills (5):
+    - GuardBreak Multiply ×1.75 — 全属性の魔剣が絶大にガードブレイクしやすく
+    - RemHP_Attack Multiply ×2.4 — 光属性の味方全体が、残HPが少ないほど攻撃力が超絶大にアップ
+    - AllTarget Multiply ×1.0 — 攻撃力を下げずに全魔剣の攻撃範囲が敵全体になる
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に光属性の魔剣の攻撃力が3.5倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`118001`](weapons.json#L73685) 魔劍グラム=オルタ
+  - base_name: 魔劍グラム=オルタ (costume: 魔装)
+  - element=闇(5) / type=大剣(2) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=16000 / ATK=11800 / DEF=9999 / SPD=30 / BREAK=6660
+  - hit_counts=[1, 3, 6] (3段)  motion_speed=[4.0/4.0/1.5]  mp=299
+  - three_size=72/55/73 / initial_slot=2
+  - BD: 不完全世界ファーヴニル (arts_id=180)
+    - description: 敵全体に超絶強力な20連ダメージ＆2waveブレイク30%UP
+    - cost=7 / hit_count=20 / value=9.5 / additional_value=0.0
+  - innate skills (6):
+    - Wave_Heal Multiply ×0.1 — Wave経過ごとに自身のHPが自動回復する
+    - Attack Multiply ×1.74232 — 闇属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Attack Multiply ×2.0 — 闇属性の味方全体が、残HPが多いほど攻撃力が絶大にアップ
+    - GuardBreak Multiply ×1.75 — 闇属性の魔剣が絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に闇属性の魔剣の攻撃力が3.5倍アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`118002`](weapons.json#L73918) 魔劍グラム=オルタ【極】
+  - base_name: 魔劍グラム=オルタ (costume: 極魔装)
+  - element=闇(5) / type=大剣(2) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=20800 / ATK=15340 / DEF=13000 / SPD=30 / BREAK=8660
+  - hit_counts=[2, 3, 9] (3段)  motion_speed=[4.0/4.0/1.5]  mp=299
+  - three_size=72/55/73 / initial_slot=3
+  - BD: 不完全世界ファーヴニル (arts_id=180)
+    - description: 敵全体に超絶強力な20連ダメージ＆2waveブレイク30%UP
+    - cost=7 / hit_count=20 / value=9.5 / additional_value=0.0
+  - innate skills (6):
+    - Wave_Heal Multiply ×0.1 — Wave経過ごとに自身のHPが自動回復する
+    - Attack Multiply ×2.0 — 闇属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Attack Multiply ×2.3 — 闇属性の味方全体が、残HPが多いほど攻撃力が超絶大にアップ
+    - GuardBreak Multiply ×2.0 — 闇属性の魔剣が超絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に闇属性の魔剣の攻撃力が3.5倍アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`118101`](weapons.json#L74151) 魔剣グラム
+  - base_name: 魔剣グラム (costume: 魔装)
+  - element=闇(5) / type=大剣(2) / rarity=S(3) / cv=日高里菜
+  - max stats: HP=9990 / ATK=11000 / DEF=6660 / SPD=32 / BREAK=3000
+  - hit_counts=[1, 3, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=300
+  - three_size=72/55/73 / initial_slot=2
+  - BD: 完全世界エイヴィヒカイト (arts_id=181)
+    - description: 敵全体に超絶強力な22連ダメージ＆一瞬だけスピード狂化
+    - cost=5 / hit_count=22 / value=6.0 / additional_value=0.0
+  - innate skills (3):
+    - InstantDeath Repel_Percent ×50.0 — 即死特性の攻撃を確率で回避する
+    - Attack Multiply ×1.25 — 全属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`118102`](weapons.json#L74327) 魔剣グラム【極】
+  - base_name: 魔剣グラム (costume: 極魔装)
+  - element=闇(5) / type=大剣(2) / rarity=S(3) / cv=日高里菜
+  - max stats: HP=12990 / ATK=14300 / DEF=8660 / SPD=32 / BREAK=3900
+  - hit_counts=[2, 3, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=300
+  - three_size=72/55/73 / initial_slot=3
+  - BD: 完全世界エイヴィヒカイト (arts_id=181)
+    - description: 敵全体に超絶強力な22連ダメージ＆一瞬だけスピード狂化
+    - cost=5 / hit_count=22 / value=6.0 / additional_value=0.0
+  - innate skills (3):
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - Attack Multiply ×1.5 — 全属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`118103`](weapons.json#L74503) 魔剣グラム【極弐】
+  - base_name: 魔剣グラム (costume: 極弐魔装)
+  - element=闇(5) / type=大剣(2) / rarity=S(3) / cv=日高里菜
+  - max stats: HP=14290 / ATK=15020 / DEF=9530 / SPD=35 / BREAK=4100
+  - hit_counts=[3, 4, 9] (3段)  motion_speed=[3.0/2.0/1.2]  mp=313
+  - three_size=72/55/73 / initial_slot=4
+  - BD: 真完全世界アルメヒティヒ (arts_id=10181)
+    - description: 敵全体に超強力な22連ダメージ＆一瞬だけスピード狂化
+    - cost=5 / hit_count=22 / value=5.5 / additional_value=0.0
+  - innate skills (3):
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`119701`](weapons.json#L81872) グロリオーサ
+  - base_name: グロリオーサ (costume: 魔装)
+  - element=火(1) / type=弓矢(5) / rarity=S(3) / cv=今村彩夏
+  - max stats: HP=9730 / ATK=8050 / DEF=4820 / SPD=31 / BREAK=4100
+  - hit_counts=[2, 3, 5] (3段)  motion_speed=[3.0/3.0/3.0]  mp=250
+  - three_size=89/58/90 / initial_slot=2
+  - BD: 栄光燃焼グローリーリリィ (arts_id=197)
+    - description: 敵全体に超強力な51連ダメージ＆数秒間イニシアチブを取る
+    - cost=6 / hit_count=51 / value=2.4 / additional_value=0.0
+  - innate skills (2):
+    - Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`119702`](weapons.json#L82029) グロリオーサ【極】
+  - base_name: グロリオーサ (costume: 極魔装)
+  - element=火(1) / type=弓矢(5) / rarity=S(3) / cv=今村彩夏
+  - max stats: HP=12650 / ATK=10470 / DEF=6270 / SPD=31 / BREAK=5330
+  - hit_counts=[3, 3, 8] (3段)  motion_speed=[3.0/3.0/3.0]  mp=250
+  - three_size=89/58/90 / initial_slot=3
+  - BD: 栄光燃焼グローリーリリィ (arts_id=197)
+    - description: 敵全体に超強力な51連ダメージ＆数秒間イニシアチブを取る
+    - cost=6 / hit_count=51 / value=2.4 / additional_value=0.0
+  - innate skills (2):
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`119703`](weapons.json#L82186) グロリオーサ【極弐】
+  - base_name: グロリオーサ (costume: 極弐魔装)
+  - element=火(1) / type=弓矢(5) / rarity=S(3) / cv=今村彩夏
+  - max stats: HP=16450 / ATK=13620 / DEF=8160 / SPD=34 / BREAK=6930
+  - hit_counts=[4, 4, 8] (3段)  motion_speed=[2.8/2.8/2.4]  mp=275
+  - three_size=95/58/91 / initial_slot=4
+  - BD: オナーオブ･グローリーフレア (arts_id=10197)
+    - description: 敵全体に超強力な51連ダメージ＆数秒間イニシアチブを取る
+    - cost=6 / hit_count=51 / value=2.4 / additional_value=0.0
+  - innate skills (3):
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`120701`](weapons.json#L85943) ルルイエ異本
+  - base_name: ルルイエ異本 (costume: 魔装)
+  - element=光(4) / type=魔典(11) / rarity=S(3) / cv=冨岡美沙子
+  - max stats: HP=8200 / ATK=3250 / DEF=8400 / SPD=30 / BREAK=3250
+  - hit_counts=[4, 2, 4] (3段)  motion_speed=[4.0/4.0/1.0]  mp=130
+  - three_size=77/58/70 / initial_slot=3
+  - BD: 絶界の非ユークリッド (arts_id=207)
+    - description: 敵全体に超強力な26連ダメージ＆スピード50%UP
+    - cost=3 / hit_count=26 / value=2.2 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 光属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`120702`](weapons.json#L86100) ルルイエ異本【極】
+  - base_name: ルルイエ異本 (costume: 極魔装)
+  - element=光(4) / type=魔典(11) / rarity=S(3) / cv=冨岡美沙子
+  - max stats: HP=10700 / ATK=4300 / DEF=11000 / SPD=30 / BREAK=4300
+  - hit_counts=[5, 2, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=130
+  - three_size=77/58/70 / initial_slot=4
+  - BD: 絶界の非ユークリッド (arts_id=207)
+    - description: 敵全体に超強力な26連ダメージ＆スピード50%UP
+    - cost=3 / hit_count=26 / value=2.2 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.5 — 光属性の魔剣の攻撃力が大幅にアップ
+    - HitCount Addition +1.0 — 魔典の魔剣の1撃目2撃目3撃目のヒット数を+1する
+    - DamageLimitBreak Addition +600000000.0 — 魔典の魔剣のダメージ上限が6億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`120703`](weapons.json#L86295) ルルイエ異本【極弐】
+  - base_name: ルルイエ異本 (costume: 極弐魔装)
+  - element=光(4) / type=魔典(11) / rarity=S(3) / cv=冨岡美沙子
+  - max stats: HP=13910 / ATK=5590 / DEF=14300 / SPD=32 / BREAK=5590
+  - hit_counts=[6, 3, 7] (3段)  motion_speed=[3.5/2.5/1.1]  mp=142
+  - three_size=77/58/72 / initial_slot=5
+  - BD: 冥獄のメイルシュトローム (arts_id=10207)
+    - description: 敵全体に超強力な26連ダメージ＆スピード50%UP
+    - cost=3 / hit_count=26 / value=2.2 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.75 — 光属性の魔剣の攻撃力が絶大にアップ
+    - HitCount Addition +1.0 — 魔典の魔剣の1撃目2撃目3撃目のヒット数を+1する
+    - DamageLimitBreak Addition +600000000.0 — 魔典の魔剣のダメージ上限が6億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`122701`](weapons.json#L94317) フォーマルハウト
+  - base_name: フォーマルハウト (costume: 魔装)
+  - element=光(4) / type=戦斧(7) / rarity=S(3) / cv=長江里加
+  - max stats: HP=10000 / ATK=3000 / DEF=4000 / SPD=30 / BREAK=1000
+  - hit_counts=[3, 4, 6] (3段)  motion_speed=[2.5/1.6/1.5]  mp=198
+  - three_size=85/53/80 / initial_slot=1
+  - BD: 夜喰ファム･アル･フート (arts_id=227)
+    - description: 敵全体に超強力な21連ダメージ＆攻撃力25%UP
+    - cost=6 / hit_count=21 / value=5.31429 / additional_value=0.0
+  - innate skills (2):
+    - BlazeAttack Multiply ×2.0 — 光属性の魔剣のB.D.攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`122702`](weapons.json#L94474) フォーマルハウト【極】
+  - base_name: フォーマルハウト (costume: 極魔装)
+  - element=光(4) / type=戦斧(7) / rarity=S(3) / cv=長江里加
+  - max stats: HP=13000 / ATK=3900 / DEF=5200 / SPD=30 / BREAK=1300
+  - hit_counts=[4, 4, 9] (3段)  motion_speed=[2.5/1.6/1.5]  mp=198
+  - three_size=85/53/80 / initial_slot=2
+  - BD: 夜喰ファム･アル･フート (arts_id=227)
+    - description: 敵全体に超強力な21連ダメージ＆攻撃力25%UP
+    - cost=6 / hit_count=21 / value=5.31429 / additional_value=0.0
+  - innate skills (2):
+    - BlazeAttack Multiply ×2.5 — 光属性の魔剣のB.D.攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`122703`](weapons.json#L94631) フォーマルハウト【極弐】
+  - base_name: フォーマルハウト (costume: 極弐魔装)
+  - element=光(4) / type=戦斧(7) / rarity=S(3) / cv=長江里加
+  - max stats: HP=19500 / ATK=7020 / DEF=6760 / SPD=33 / BREAK=2080
+  - hit_counts=[5, 5, 9] (3段)  motion_speed=[2.5/1.6/1.5]  mp=218
+  - three_size=88/53/80 / initial_slot=3
+  - BD: 夜喰煌星･フォーマルハウト (arts_id=10227)
+    - description: 敵全体に超強力な21連ダメージ＆攻撃力25%UP
+    - cost=6 / hit_count=21 / value=5.31429 / additional_value=0.0
+  - innate skills (2):
+    - BlazeAttack Multiply ×3.0 — 光属性の魔剣のB.D.攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`123701`](weapons.json#L98718) ジャメヴ
+  - base_name: ジャメヴ (costume: 魔装)
+  - element=火(1) / type=長剣(1) / rarity=S(3) / cv=石川由依
+  - max stats: HP=11200 / ATK=1840 / DEF=3900 / SPD=36 / BREAK=480
+  - hit_counts=[4, 4, 7] (3段)  motion_speed=[2.0/2.0/1.0]  mp=124
+  - three_size=71/55/73 / initial_slot=1
+  - BD: ジャメヴワールド (arts_id=237)
+    - description: 敵全体に超強力な23連ダメージ＆敵が数秒だけ戸惑う
+    - cost=3 / hit_count=23 / value=2.42609 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×1.25 — 火属性の魔剣の攻撃力がかなりアップ
+    - GuardBreak Multiply ×1.1 — 火属性の魔剣がガードブレイクしやすく
+    - Defense Multiply ×1.1 — 火属性の魔剣の防御力がアップ
+    - HP Multiply ×1.1 — 火属性の魔剣のHPがアップ
+    - GuardDefense Multiply ×0.95 — 火属性の魔剣のガード時の防御力がアップ
+    - Speed Multiply ×1.1 — 火属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`123702`](weapons.json#L98970) ジャメヴ【極】
+  - base_name: ジャメヴ (costume: 極魔装)
+  - element=火(1) / type=長剣(1) / rarity=S(3) / cv=石川由依
+  - max stats: HP=14560 / ATK=2400 / DEF=5070 / SPD=36 / BREAK=630
+  - hit_counts=[5, 4, 10] (3段)  motion_speed=[2.0/2.0/1.0]  mp=124
+  - three_size=71/55/73 / initial_slot=2
+  - BD: ジャメヴワールド (arts_id=237)
+    - description: 敵全体に超強力な23連ダメージ＆敵が数秒だけ戸惑う
+    - cost=3 / hit_count=23 / value=2.42609 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×1.5 — 火属性の魔剣の攻撃力が大幅にアップ
+    - GuardBreak Multiply ×1.25 — 火属性の魔剣がかなりガードブレイクしやすく
+    - Defense Multiply ×1.25 — 火属性の魔剣の防御力がかなりアップ
+    - HP Multiply ×1.25 — 火属性の魔剣のHPがかなりアップ
+    - GuardDefense Multiply ×0.875 — 火属性の魔剣のガード時の防御力がかなりアップ
+    - Speed Multiply ×1.25 — 火属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`123703`](weapons.json#L99222) ジャメヴ【極弐】
+  - base_name: ジャメヴ (costume: 極弐魔装)
+  - element=火(1) / type=長剣(1) / rarity=S(3) / cv=石川由依
+  - max stats: HP=18930 / ATK=3120 / DEF=6600 / SPD=38 / BREAK=820
+  - hit_counts=[6, 5, 10] (3段)  motion_speed=[2.2/2.2/1.4]  mp=137
+  - three_size=71/55/73 / initial_slot=3
+  - BD: イニシャライズディメンション (arts_id=10237)
+    - description: 敵全体に超強力な23連ダメージ＆敵が数秒だけ戸惑う
+    - cost=3 / hit_count=23 / value=2.42609 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×1.75 — 火属性の魔剣の攻撃力が絶大にアップ
+    - GuardBreak Multiply ×1.5 — 火属性の魔剣が大幅にガードブレイクしやすく
+    - Defense Multiply ×1.25 — 火属性の魔剣の防御力がかなりアップ
+    - HP Multiply ×1.25 — 火属性の魔剣のHPがかなりアップ
+    - GuardDefense Multiply ×0.875 — 火属性の魔剣のガード時の防御力がかなりアップ
+    - Speed Multiply ×1.5 — 火属性の魔剣の行動速度が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`123801`](weapons.json#L99474) アストレイム
+  - base_name: アストレイム (costume: 魔装)
+  - element=火(1) / type=騎槍(8) / rarity=S(3) / cv=佐々木未来
+  - max stats: HP=11800 / ATK=3850 / DEF=3600 / SPD=39 / BREAK=1100
+  - hit_counts=[5, 8, 8] (3段)  motion_speed=[1.0/4.0/4.0]  mp=180
+  - three_size=83/57/80 / initial_slot=2
+  - BD: 白雪紅染ペインフォーチュン (arts_id=238)
+    - description: 敵全体に超強力な36連ダメージ＆数秒だけ敵を縛る
+    - cost=5 / hit_count=36 / value=2.75 / additional_value=0.0
+  - innate skills (3):
+    - FellDown_Attack Multiply ×2.5 — 同セットの魔剣が倒されると自攻撃力がかなりアップ
+    - GuardBreak Multiply ×1.25 — 火属性の魔剣がかなりガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`123802`](weapons.json#L99650) アストレイム【極】
+  - base_name: アストレイム (costume: 極魔装)
+  - element=火(1) / type=騎槍(8) / rarity=S(3) / cv=佐々木未来
+  - max stats: HP=15340 / ATK=5010 / DEF=4680 / SPD=39 / BREAK=1430
+  - hit_counts=[6, 8, 11] (3段)  motion_speed=[1.0/4.0/4.0]  mp=180
+  - three_size=83/57/80 / initial_slot=3
+  - BD: 白雪紅染ペインフォーチュン (arts_id=238)
+    - description: 敵全体に超強力な36連ダメージ＆数秒だけ敵を縛る
+    - cost=5 / hit_count=36 / value=2.75 / additional_value=0.0
+  - innate skills (3):
+    - FellDown_Attack Multiply ×3.3 — 同セットの魔剣が倒されると自攻撃力が大幅にアップ
+    - GuardBreak Multiply ×1.5 — 火属性の魔剣が大幅にガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`123803`](weapons.json#L99826) アストレイム【極弐】
+  - base_name: アストレイム (costume: 極弐魔装)
+  - element=火(1) / type=騎槍(8) / rarity=S(3) / cv=佐々木未来
+  - max stats: HP=19950 / ATK=7270 / DEF=6090 / SPD=42 / BREAK=1860
+  - hit_counts=[7, 9, 11] (3段)  motion_speed=[1.2/3.8/3.4]  mp=198
+  - three_size=84/57/81 / initial_slot=4
+  - BD: 乱雪深紅トラジディワールド (arts_id=10238)
+    - description: 敵全体に超強力な36連ダメージ＆数秒だけ敵を縛る
+    - cost=5 / hit_count=36 / value=2.75 / additional_value=0.0
+  - innate skills (3):
+    - FellDown_Attack Multiply ×5.0 — 同セットの魔剣が倒されると自攻撃力が絶大にアップ
+    - GuardBreak Multiply ×1.75 — 火属性の魔剣が絶大にガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`125101`](weapons.json#L105045) カタストロフ=イデア
+  - base_name: カタストロフ=イデア (costume: 魔装)
+  - element=風(3) / type=杖棒(4) / rarity=SS(4) / cv=久野美咲
+  - max stats: HP=15000 / ATK=5600 / DEF=6660 / SPD=22 / BREAK=1360
+  - hit_counts=[10, 10, 13] (3段)  motion_speed=[2.0/2.0/2.0]  mp=666
+  - three_size=63/50/64 / initial_slot=2
+  - BD: 最後の審判の最後は大円団 (arts_id=251)
+    - description: 敵全体に超絶強力な44連ダメージ＆数秒だけ攻撃力2倍
+    - cost=9 / hit_count=44 / value=6.20455 / additional_value=0.0
+  - innate skills (5):
+    - Wave_BlazeUP Addition +200.0 — Wave経過ごとにブレイズゲージがかなり回復する
+    - Speed Multiply ×1.5 — 全属性の魔剣の行動速度が大幅にアップ
+    - Attack Multiply ×13.0 — 杖棒の魔剣の攻撃力が13倍
+    - Raise Multiply ×1.0 — 杖棒の魔剣が戦闘不能になっても3回完全復活できる
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`125102`](weapons.json#L105259) カタストロフ=イデア【極】
+  - base_name: カタストロフ=イデア (costume: 極魔装)
+  - element=風(3) / type=杖棒(4) / rarity=SS(4) / cv=久野美咲
+  - max stats: HP=19500 / ATK=7280 / DEF=8660 / SPD=22 / BREAK=1770
+  - hit_counts=[11, 10, 16] (3段)  motion_speed=[2.0/2.0/2.0]  mp=666
+  - three_size=63/50/64 / initial_slot=3
+  - BD: 最後の審判の最後は大円団 (arts_id=251)
+    - description: 敵全体に超絶強力な44連ダメージ＆数秒だけ攻撃力2倍
+    - cost=9 / hit_count=44 / value=6.20455 / additional_value=0.0
+  - innate skills (5):
+    - Wave_BlazeUP Addition +350.0 — Wave経過ごとにブレイズゲージが大幅に回復する
+    - Speed Multiply ×1.75 — 全属性の魔剣の行動速度が絶大にアップ
+    - Attack Multiply ×13.0 — 杖棒の魔剣の攻撃力が13倍
+    - Raise Multiply ×1.0 — 杖棒の魔剣が戦闘不能になっても3回完全復活できる
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`125401`](weapons.json#L106434) ハイペリオン
+  - base_name: ハイペリオン (costume: 魔装)
+  - element=火(1) / type=連弩(6) / rarity=S(3) / cv=山本希望
+  - max stats: HP=11000 / ATK=9600 / DEF=4550 / SPD=32 / BREAK=1300
+  - hit_counts=[3, 4, 4] (3段)  motion_speed=[3.0/3.0/3.0]  mp=190
+  - three_size=104/66/91 / initial_slot=2
+  - BD: ゴッドメイドフレア (arts_id=254)
+    - description: 敵全体に超強力な44連ダメージ＆15秒ﾓｰｼｮﾝ50%高速化
+    - cost=7 / hit_count=44 / value=3.0 / additional_value=0.0
+  - innate skills (3):
+    - JustGuard_MinDamage Multiply ×0.07 — 火属性でジャストガード時に魔導バリアをかなり強化
+    - BlazeAttack Multiply ×2.0 — 火属性の魔剣のB.D.攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`125402`](weapons.json#L106610) ハイペリオン【極】
+  - base_name: ハイペリオン (costume: 極魔装)
+  - element=火(1) / type=連弩(6) / rarity=S(3) / cv=山本希望
+  - max stats: HP=14300 / ATK=12480 / DEF=5920 / SPD=32 / BREAK=1690
+  - hit_counts=[4, 4, 7] (3段)  motion_speed=[3.0/3.0/3.0]  mp=190
+  - three_size=104/66/91 / initial_slot=3
+  - BD: ゴッドメイドフレア (arts_id=254)
+    - description: 敵全体に超強力な44連ダメージ＆15秒ﾓｰｼｮﾝ50%高速化
+    - cost=7 / hit_count=44 / value=3.0 / additional_value=0.0
+  - innate skills (3):
+    - JustGuard_MinDamage Multiply ×0.025 — 火属性でジャストガード時に魔導バリアを大幅に強化
+    - BlazeAttack Multiply ×2.5 — 火属性の魔剣のB.D.攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`125403`](weapons.json#L106786) ハイペリオン【極弐】
+  - base_name: ハイペリオン (costume: 極弐魔装)
+  - element=火(1) / type=連弩(6) / rarity=S(3) / cv=山本希望
+  - max stats: HP=18590 / ATK=16230 / DEF=7700 / SPD=36 / BREAK=2200
+  - hit_counts=[5, 5, 7] (3段)  motion_speed=[3.0/3.0/3.0]  mp=210
+  - three_size=107/66/91 / initial_slot=4
+  - BD: ディバインメガプロミネンス (arts_id=10254)
+    - description: 敵全体に超強力な44連ダメージ＆15秒ﾓｰｼｮﾝ50%高速化
+    - cost=7 / hit_count=44 / value=3.0 / additional_value=0.0
+  - innate skills (3):
+    - JustGuard_MinDamage Multiply ×0.025 — 火属性でジャストガード時に魔導バリアを大幅に強化
+    - BlazeAttack Multiply ×3.0 — 火属性の魔剣のB.D.攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`126101`](weapons.json#L109769) ドラウプニル
+  - base_name: ドラウプニル (costume: 魔装)
+  - element=光(4) / type=弓矢(5) / rarity=S(3) / cv=花守ゆみり
+  - max stats: HP=8800 / ATK=6500 / DEF=6950 / SPD=32 / BREAK=350
+  - hit_counts=[5, 7, 10] (3段)  motion_speed=[3.0/3.0/1.0]  mp=170
+  - three_size=67/54/66 / initial_slot=2
+  - BD: 滴り落ちる8つの雫 (arts_id=261)
+    - description: 敵全体に超強力な30連ダメージ＆10秒間サファイア量UP
+    - cost=6 / hit_count=30 / value=3.72 / additional_value=0.0
+  - innate skills (3):
+    - RemHP_Attack Multiply ×1.3 — 残HPが少ないほど攻撃力がかなりアップ
+    - JustGuard_Sapphire Multiply ×4.0 — ジャストガード時のサファイアの量がかなり増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`126102`](weapons.json#L109945) ドラウプニル【極】
+  - base_name: ドラウプニル (costume: 極魔装)
+  - element=光(4) / type=弓矢(5) / rarity=S(3) / cv=花守ゆみり
+  - max stats: HP=11440 / ATK=8450 / DEF=9040 / SPD=32 / BREAK=460
+  - hit_counts=[6, 7, 13] (3段)  motion_speed=[3.0/3.0/1.0]  mp=170
+  - three_size=67/54/66 / initial_slot=3
+  - BD: 滴り落ちる8つの雫 (arts_id=261)
+    - description: 敵全体に超強力な30連ダメージ＆10秒間サファイア量UP
+    - cost=6 / hit_count=30 / value=3.72 / additional_value=0.0
+  - innate skills (3):
+    - RemHP_Attack Multiply ×1.8 — 残HPが少ないほど攻撃力が大幅にアップ
+    - JustGuard_Sapphire Multiply ×6.0 — ジャストガード時のサファイアの量が大幅に増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`126103`](weapons.json#L110121) ドラウプニル【極弐】
+  - base_name: ドラウプニル (costume: 極弐魔装)
+  - element=光(4) / type=弓矢(5) / rarity=S(3) / cv=花守ゆみり
+  - max stats: HP=14880 / ATK=10990 / DEF=11760 / SPD=35 / BREAK=600
+  - hit_counts=[7, 8, 13] (3段)  motion_speed=[2.0/3.0/1.0]  mp=188
+  - three_size=67/54/66 / initial_slot=4
+  - BD: 九夜八雫の黄金神槌 (arts_id=10261)
+    - description: 敵全体に超強力な30連ダメージ＆10秒間サファイア量UP
+    - cost=6 / hit_count=30 / value=3.72 / additional_value=0.0
+  - innate skills (3):
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - JustGuard_Sapphire Multiply ×6.0 — ジャストガード時のサファイアの量が大幅に増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`126201`](weapons.json#L110297) ランペイジ
+  - base_name: ランペイジ (costume: 魔装)
+  - element=光(4) / type=太刀(3) / rarity=AA(2) / cv=吉岡茉祐
+  - max stats: HP=7880 / ATK=1960 / DEF=1950 / SPD=45 / BREAK=180
+  - hit_counts=[6, 6, 7] (3段)  motion_speed=[3.0/3.0/1.0]  mp=91
+  - three_size=やわらか！/キュッ！/ぷりん！ / initial_slot=3
+  - BD: ラストサムライMkⅡ (arts_id=262)
+    - description: 敵全体に強力な33連ダメージ＆3wave攻撃力13%UP
+    - cost=4 / hit_count=33 / value=1.95455 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 光属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`126202`](weapons.json#L110454) ランペイジ【極】
+  - base_name: ランペイジ (costume: 極魔装)
+  - element=光(4) / type=太刀(3) / rarity=AA(2) / cv=吉岡茉祐
+  - max stats: HP=10250 / ATK=2550 / DEF=2540 / SPD=45 / BREAK=240
+  - hit_counts=[7, 6, 10] (3段)  motion_speed=[3.0/3.0/1.0]  mp=91
+  - three_size=やわらか！/キュッ！/ぷりん！ / initial_slot=4
+  - BD: ラストサムライMkⅡ (arts_id=262)
+    - description: 敵全体に強力な33連ダメージ＆3wave攻撃力13%UP
+    - cost=4 / hit_count=33 / value=1.95455 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 光属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`126203`](weapons.json#L110611) ランペイジ【極弐】
+  - base_name: ランペイジ (costume: 極弐魔装)
+  - element=光(4) / type=太刀(3) / rarity=AA(2) / cv=吉岡茉祐
+  - max stats: HP=13330 / ATK=3830 / DEF=3310 / SPD=48 / BREAK=320
+  - hit_counts=[8, 7, 10] (3段)  motion_speed=[3.0/2.0/1.2]  mp=99
+  - three_size=やわらか!!/キュキュッ！/ぷりんッ！ / initial_slot=5
+  - BD: 超･ラストサムライMkX (arts_id=10262)
+    - description: 敵全体に強力な33連ダメージ＆3wave攻撃力13%UP
+    - cost=4 / hit_count=33 / value=1.95455 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.75 — 光属性の魔剣の攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`128901`](weapons.json#L122929) ジェミニア
+  - base_name: ジェミニア (costume: 魔装)
+  - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=久野美咲
+  - max stats: HP=12000 / ATK=4020 / DEF=4200 / SPD=34 / BREAK=720
+  - hit_counts=[6, 7, 9] (3段)  motion_speed=[2.0/2.0/1.0]  mp=222
+  - three_size=74/60/78 / initial_slot=2
+  - BD: 鏡写しのカストルポルクス (arts_id=289)
+    - description: 敵全体に超強力な22連ダメージ＆敵が数秒だけ見惚れる
+    - cost=2 / hit_count=22 / value=1.67727 / additional_value=0.0
+  - innate skills (3):
+    - HP Multiply ×1.25 — 闇属性の魔剣のHPがかなりアップ
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`128902`](weapons.json#L123105) ジェミニア【極】
+  - base_name: ジェミニア (costume: 極魔装)
+  - element=闇(5) / type=魔典(11) / rarity=S(3) / cv=久野美咲
+  - max stats: HP=15600 / ATK=5230 / DEF=5460 / SPD=34 / BREAK=940
+  - hit_counts=[7, 7, 12] (3段)  motion_speed=[2.0/2.0/1.0]  mp=222
+  - three_size=74/60/78 / initial_slot=3
+  - BD: 鏡写しのカストルポルクス (arts_id=289)
+    - description: 敵全体に超強力な22連ダメージ＆敵が数秒だけ見惚れる
+    - cost=2 / hit_count=22 / value=1.67727 / additional_value=0.0
+  - innate skills (3):
+    - HP Multiply ×1.5 — 闇属性の魔剣のHPが大幅にアップ
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`129101`](weapons.json#L123809) 天刀ムラマサ=オボロ
+  - base_name: 天刀ムラマサ=オボロ (costume: 魔装)
+  - element=水(2) / type=太刀(3) / rarity=SS(4) / cv=潘めぐみ
+  - max stats: HP=16850 / ATK=5210 / DEF=6210 / SPD=19 / BREAK=512
+  - hit_counts=[9, 6, 17] (3段)  motion_speed=[2.0/3.0/2.0]  mp=629
+  - three_size=76/55/73 / initial_slot=3
+  - BD: 天獄朧 (arts_id=291)
+    - description: 敵全体に超絶強力な66連ダメージ＆数秒だけ攻撃力2倍
+    - cost=9 / hit_count=66 / value=4.3 / additional_value=0.0
+  - innate skills (6):
+    - AllTarget Multiply ×0.8 — 攻撃力はやや下がるが自分の攻撃範囲が敵全体になる
+    - RemHP_Speed Multiply ×1.8 — 残HPが少ないほどスピードが大幅にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - MotionSpeed Multiply ×2.0 — 太刀の魔剣の攻撃モーションが2倍に加速
+    - RemHP_Attack Multiply ×1.3 — 残HPが少ないほど攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`129102`](weapons.json#L124042) 天刀ムラマサ=オボロ【極】
+  - base_name: 天刀ムラマサ=オボロ (costume: 極魔装)
+  - element=水(2) / type=太刀(3) / rarity=SS(4) / cv=潘めぐみ
+  - max stats: HP=21910 / ATK=6780 / DEF=8080 / SPD=19 / BREAK=670
+  - hit_counts=[10, 6, 20] (3段)  motion_speed=[2.0/3.0/2.0]  mp=629
+  - three_size=76/55/73 / initial_slot=4
+  - BD: 天獄朧 (arts_id=291)
+    - description: 敵全体に超絶強力な66連ダメージ＆数秒だけ攻撃力2倍
+    - cost=9 / hit_count=66 / value=4.3 / additional_value=0.0
+  - innate skills (6):
+    - AllTarget Multiply ×1.0 — 攻撃力を下げずに自分の攻撃範囲が敵全体になる
+    - RemHP_Speed Multiply ×2.25 — 残HPが少ないほどスピードが絶大にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - MotionSpeed Multiply ×2.0 — 太刀の魔剣の攻撃モーションが2倍に加速
+    - RemHP_Attack Multiply ×1.8 — 残HPが少ないほど攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`129501`](weapons.json#L125607) 魔砲姫君バベル=ペルソナ
+  - base_name: 魔砲姫君バベル=ペルソナ (costume: 魔装)
+  - element=風(3) / type=弓矢(5) / rarity=SS(4) / cv=大西沙織
+  - max stats: HP=11860 / ATK=7700 / DEF=8950 / SPD=21 / BREAK=360
+  - hit_counts=[8, 8, 15] (3段)  motion_speed=[2.0/3.0/1.0]  mp=430
+  - three_size=83/57/82 / initial_slot=3
+  - BD: 第零偏在リバースバベル (arts_id=295)
+    - description: 敵全体に超絶強力な36連ダメージ＆1wave攻撃全体化
+    - cost=9 / hit_count=36 / value=8.325 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 風属性の魔剣の攻撃力が超絶大アップ
+    - Speed Multiply ×1.75 — 風属性の魔剣の行動速度が絶大にアップ
+    - HP Multiply ×1.5 — 風属性の魔剣のHPが大幅にアップ
+    - DamageLimitBreak Addition +2500000000.0 — 風属性の魔剣のダメージ上限が25億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`129502`](weapons.json#L125821) 魔砲姫君バベル=ペルソナ【極】
+  - base_name: 魔砲姫君バベル=ペルソナ (costume: 極魔装)
+  - element=風(3) / type=弓矢(5) / rarity=SS(4) / cv=大西沙織
+  - max stats: HP=15420 / ATK=10010 / DEF=11640 / SPD=21 / BREAK=470
+  - hit_counts=[9, 8, 18] (3段)  motion_speed=[2.0/3.0/1.0]  mp=430
+  - three_size=83/57/82 / initial_slot=4
+  - BD: 第零偏在リバースバベル (arts_id=295)
+    - description: 敵全体に超絶強力な36連ダメージ＆1wave攻撃全体化
+    - cost=9 / hit_count=36 / value=8.325 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 風属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - Speed Multiply ×2.0 — 風属性の魔剣の行動速度が超絶大アップ
+    - HP Multiply ×1.75 — 風属性の魔剣のHPが絶大にアップ
+    - DamageLimitBreak Addition +2500000000.0 — 風属性の魔剣のダメージ上限が25億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`130501`](weapons.json#L130159) ファイナルレター
+  - base_name: ファイナルレター (costume: 魔装)
+  - element=光(4) / type=魔典(11) / rarity=S(3) / cv=近藤玲奈
+  - max stats: HP=8200 / ATK=3150 / DEF=5900 / SPD=30 / BREAK=880
+  - hit_counts=[3, 6, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=205
+  - three_size=62/53/62 / initial_slot=2
+  - BD: 終演･D･オーケストラ (arts_id=305)
+    - description: 敵全体に超強力な36連ダメージ＆数秒間防御力1.3倍
+    - cost=6 / hit_count=36 / value=3.1 / additional_value=0.0
+  - innate skills (3):
+    - RemHP_Attack Multiply ×1.3 — 残HPが少ないほど攻撃力がかなりアップ
+    - RemHP_Speed Multiply ×1.2 — 残HPが少ないほどスピードがアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`130502`](weapons.json#L130335) ファイナルレター【極】
+  - base_name: ファイナルレター (costume: 極魔装)
+  - element=光(4) / type=魔典(11) / rarity=S(3) / cv=近藤玲奈
+  - max stats: HP=10660 / ATK=4100 / DEF=7670 / SPD=30 / BREAK=1150
+  - hit_counts=[4, 6, 12] (3段)  motion_speed=[4.0/4.0/1.0]  mp=205
+  - three_size=62/53/62 / initial_slot=3
+  - BD: 終演･D･オーケストラ (arts_id=305)
+    - description: 敵全体に超強力な36連ダメージ＆数秒間防御力1.3倍
+    - cost=6 / hit_count=36 / value=3.1 / additional_value=0.0
+  - innate skills (4):
+    - RemHP_Attack Multiply ×1.8 — 残HPが少ないほど攻撃力が大幅にアップ
+    - RemHP_Speed Multiply ×1.3 — 残HPが少ないほどスピードがかなりアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`130503`](weapons.json#L130530) ファイナルレター【極弐】
+  - base_name: ファイナルレター (costume: 極弐魔装)
+  - element=光(4) / type=魔典(11) / rarity=S(3) / cv=近藤玲奈
+  - max stats: HP=13860 / ATK=5330 / DEF=9980 / SPD=39 / BREAK=1500
+  - hit_counts=[5, 7, 12] (3段)  motion_speed=[4.0/4.0/2.0]  mp=232
+  - three_size=62/53/62 / initial_slot=4
+  - BD: 終に至りし天籟奏曲 (arts_id=10305)
+    - description: 敵全体に超強力な36連ダメージ＆数秒間防御力1.3倍
+    - cost=6 / hit_count=36 / value=3.1 / additional_value=0.0
+  - innate skills (4):
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - RemHP_Speed Multiply ×1.8 — 残HPが少ないほどスピードが大幅にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`130901`](weapons.json#L131058) バステト×フェイク
+  - base_name: バステト×フェイク (costume: 魔装)
+  - element=闇(5) / type=連弩(6) / rarity=S(3) / cv=高橋李依
+  - max stats: HP=13600 / ATK=3400 / DEF=3200 / SPD=20 / BREAK=500
+  - hit_counts=[10, 5, 10] (3段)  motion_speed=[4.0/3.0/1.0]  mp=380
+  - three_size=91/55/80 / initial_slot=1
+  - BD: 愛玩パラノイアデス (arts_id=309)
+    - description: 敵全体に超強力な39連ダメージ＆敵を22秒だけ麻痺
+    - cost=6 / hit_count=39 / value=3.0 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.5 — 闇属性の魔剣の攻撃力が大幅にアップ
+    - AllTarget Multiply ×0.6 — 攻撃力は下がるが自分の攻撃範囲が敵全体になる
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`130902`](weapons.json#L131234) バステト×フェイク【極】
+  - base_name: バステト×フェイク (costume: 極魔装)
+  - element=闇(5) / type=連弩(6) / rarity=S(3) / cv=高橋李依
+  - max stats: HP=17680 / ATK=4420 / DEF=4160 / SPD=20 / BREAK=650
+  - hit_counts=[11, 5, 13] (3段)  motion_speed=[4.0/3.0/1.0]  mp=380
+  - three_size=91/55/80 / initial_slot=2
+  - BD: 愛玩パラノイアデス (arts_id=309)
+    - description: 敵全体に超強力な39連ダメージ＆敵を22秒だけ麻痺
+    - cost=6 / hit_count=39 / value=3.0 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.75 — 闇属性の魔剣の攻撃力が絶大にアップ
+    - AllTarget Multiply ×0.8 — 攻撃力はやや下がるが自分の攻撃範囲が敵全体になる
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`131201`](weapons.json#L132271) ニルヴァーナ=カルマ
+  - base_name: ニルヴァーナ=カルマ (costume: 魔装)
+  - element=水(2) / type=大鎌(12) / rarity=SS(4) / cv=三上枝織
+  - max stats: HP=12500 / ATK=11300 / DEF=6050 / SPD=24 / BREAK=2600
+  - hit_counts=[6, 6, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=620
+  - three_size=98/54/72 / initial_slot=3
+  - BD: 無欲の果ての常楽我浄 (arts_id=312)
+    - description: 敵全体に超絶強力な73連ダメージ＆15秒攻撃全体化(減無)
+    - cost=9 / hit_count=73 / value=4.0 / additional_value=0.0
+  - innate skills (5):
+    - RemHP_Attack Multiply ×1.8 — 残HPが少ないほど攻撃力が大幅にアップ
+    - BlazeAttack Multiply ×2.0 — 水属性の魔剣のB.D.攻撃力がかなりアップ
+    - RemHP_Attack Multiply ×2.0 — 残HPが少ないほど攻撃力がアップ（最大2倍）
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`131202`](weapons.json#L132485) ニルヴァーナ=カルマ【極】
+  - base_name: ニルヴァーナ=カルマ (costume: 極魔装)
+  - element=水(2) / type=大鎌(12) / rarity=SS(4) / cv=三上枝織
+  - max stats: HP=16250 / ATK=14690 / DEF=7870 / SPD=24 / BREAK=3380
+  - hit_counts=[7, 6, 12] (3段)  motion_speed=[4.0/4.0/1.0]  mp=620
+  - three_size=98/54/72 / initial_slot=4
+  - BD: 無欲の果ての常楽我浄 (arts_id=312)
+    - description: 敵全体に超絶強力な73連ダメージ＆15秒攻撃全体化(減無)
+    - cost=9 / hit_count=73 / value=4.0 / additional_value=0.0
+  - innate skills (5):
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - BlazeAttack Multiply ×2.5 — 水属性の魔剣のB.D.攻撃力が大幅にアップ
+    - RemHP_Attack Multiply ×2.0 — 残HPが少ないほど攻撃力がアップ（最大2倍）
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`131301`](weapons.json#L132699) ニルヴァーナ
+  - base_name: ニルヴァーナ (costume: 魔装)
+  - element=水(2) / type=大鎌(12) / rarity=S(3) / cv=三上枝織
+  - max stats: HP=8800 / ATK=6300 / DEF=4400 / SPD=27 / BREAK=560
+  - hit_counts=[5, 5, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=270
+  - three_size=71/54/70 / initial_slot=2
+  - BD: 強欲の果ての極楽浄土 (arts_id=313)
+    - description: 敵全体に超強力な54連ダメージ＆数秒だけ敵が無欲になる
+    - cost=7 / hit_count=54 / value=2.6 / additional_value=0.0
+  - innate skills (4):
+    - MotionSpeed Multiply ×1.5 — 水属性の魔剣の攻撃モーションがかなり加速
+    - HP Multiply ×1.25 — 水属性の魔剣のHPがかなりアップ
+    - Speed Multiply ×1.1 — 水属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`131302`](weapons.json#L132894) ニルヴァーナ【極】
+  - base_name: ニルヴァーナ (costume: 極魔装)
+  - element=水(2) / type=大鎌(12) / rarity=S(3) / cv=三上枝織
+  - max stats: HP=11440 / ATK=8190 / DEF=5720 / SPD=27 / BREAK=730
+  - hit_counts=[6, 5, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=270
+  - three_size=71/54/70 / initial_slot=3
+  - BD: 強欲の果ての極楽浄土 (arts_id=313)
+    - description: 敵全体に超強力な54連ダメージ＆数秒だけ敵が無欲になる
+    - cost=7 / hit_count=54 / value=2.6 / additional_value=0.0
+  - innate skills (5):
+    - MotionSpeed Multiply ×2.0 — 水属性の魔剣の攻撃モーションが大幅に加速
+    - HP Multiply ×1.5 — 水属性の魔剣のHPが大幅にアップ
+    - Speed Multiply ×1.25 — 水属性の魔剣の行動速度がかなりアップ
+    - HitCount Addition +1.0 — 水属性の魔剣の1撃目2撃目3撃目のヒット数を+1する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`131303`](weapons.json#L133108) ニルヴァーナ【極弐】
+  - base_name: ニルヴァーナ (costume: 極弐魔装)
+  - element=水(2) / type=大鎌(12) / rarity=S(3) / cv=三上枝織
+  - max stats: HP=14880 / ATK=10650 / DEF=7440 / SPD=29 / BREAK=950
+  - hit_counts=[7, 6, 10] (3段)  motion_speed=[3.0/3.0/1.2]  mp=297
+  - three_size=71/54/70 / initial_slot=4
+  - BD: 煩悩滅除《ニルヴァーナ》 (arts_id=10313)
+    - description: 敵全体に超強力な54連ダメージ＆数秒だけ敵が無欲になる
+    - cost=7 / hit_count=54 / value=2.6 / additional_value=0.0
+  - innate skills (5):
+    - MotionSpeed Multiply ×1.995 — 水属性の魔剣の攻撃モーションが大幅に加速【熟度UPにつれてさらに効果値UP】
+    - HP Multiply ×1.75 — 水属性の魔剣のHPが絶大にアップ
+    - Speed Multiply ×1.5 — 水属性の魔剣の行動速度が大幅にアップ
+    - HitCount Addition +2.0 — 水属性の魔剣の1撃目2撃目3撃目のヒット数を+2する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`131501`](weapons.json#L133712) ヴェロニカ
+  - base_name: ヴェロニカ (costume: 魔装)
+  - element=風(3) / type=戦斧(7) / rarity=S(3) / cv=石川由依
+  - max stats: HP=12400 / ATK=10820 / DEF=3100 / SPD=19 / BREAK=1550
+  - hit_counts=[4, 3, 3] (3段)  motion_speed=[2.0/3.0/1.0]  mp=260
+  - three_size=112/57/88 / initial_slot=2
+  - BD: ブレイブリーラヴソング (arts_id=315)
+    - description: 敵全体に超強力な29連ダメージ＆自分HP完全回復
+    - cost=8 / hit_count=29 / value=6.2069 / additional_value=0.0
+  - innate skills (3):
+    - Wave_BlazeUP Addition +100.0 — Wave経過ごとにブレイズゲージが回復する
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`131502`](weapons.json#L133888) ヴェロニカ【極】
+  - base_name: ヴェロニカ (costume: 極魔装)
+  - element=風(3) / type=戦斧(7) / rarity=S(3) / cv=石川由依
+  - max stats: HP=16120 / ATK=14070 / DEF=4030 / SPD=19 / BREAK=2020
+  - hit_counts=[5, 3, 6] (3段)  motion_speed=[2.0/3.0/1.0]  mp=260
+  - three_size=112/57/88 / initial_slot=3
+  - BD: ブレイブリーラヴソング (arts_id=315)
+    - description: 敵全体に超強力な29連ダメージ＆自分HP完全回復
+    - cost=8 / hit_count=29 / value=6.2069 / additional_value=0.0
+  - innate skills (3):
+    - Wave_BlazeUP Addition +200.0 — Wave経過ごとにブレイズゲージがかなり回復する
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`131503`](weapons.json#L134064) ヴェロニカ【極弐】
+  - base_name: ヴェロニカ (costume: 極弐魔装)
+  - element=風(3) / type=戦斧(7) / rarity=S(3) / cv=石川由依
+  - max stats: HP=20960 / ATK=18300 / DEF=5240 / SPD=21 / BREAK=2630
+  - hit_counts=[6, 4, 6] (3段)  motion_speed=[2.0/3.0/1.2]  mp=288
+  - three_size=115/57/90 / initial_slot=4
+  - BD: フェイスフルカンタービレ (arts_id=10315)
+    - description: 敵全体に超強力な29連ダメージ＆自分HP完全回復
+    - cost=8 / hit_count=29 / value=6.2069 / additional_value=0.0
+  - innate skills (3):
+    - Wave_BlazeUP Addition +350.0 — Wave経過ごとにブレイズゲージが大幅に回復する
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`132801`](weapons.json#L138412) 輝杖ロンズデーライト
+  - base_name: 輝杖ロンズデーライト (costume: 魔装)
+  - element=光(4) / type=杖棒(4) / rarity=S(3) / cv=咲々木瞳
+  - max stats: HP=8500 / ATK=4300 / DEF=9800 / SPD=30 / BREAK=1700
+  - hit_counts=[2, 2, 7] (3段)  motion_speed=[3.0/3.0/2.0]  mp=100
+  - three_size=89/57/86 / initial_slot=1
+  - BD: 超々圧縮光鉱鏡反衝 (arts_id=328)
+    - description: 敵全体に超絶強力な40連ダメージ＆スピード30%UP
+    - cost=7 / hit_count=40 / value=4.55 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×1.3 — 光属性の魔剣の攻撃モーションが加速
+    - Speed Multiply ×1.25 — 光属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`132802`](weapons.json#L138588) 輝杖ロンズデーライト【極】
+  - base_name: 輝杖ロンズデーライト (costume: 極魔装)
+  - element=光(4) / type=杖棒(4) / rarity=S(3) / cv=咲々木瞳
+  - max stats: HP=11050 / ATK=5590 / DEF=12740 / SPD=30 / BREAK=2210
+  - hit_counts=[3, 2, 10] (3段)  motion_speed=[3.0/3.0/2.0]  mp=100
+  - three_size=89/57/86 / initial_slot=2
+  - BD: 超々圧縮光鉱鏡反衝 (arts_id=328)
+    - description: 敵全体に超絶強力な40連ダメージ＆スピード30%UP
+    - cost=7 / hit_count=40 / value=4.55 / additional_value=0.0
+  - innate skills (4):
+    - MotionSpeed Multiply ×1.5 — 光属性の魔剣の攻撃モーションがかなり加速
+    - Speed Multiply ×1.5 — 光属性の魔剣の行動速度が大幅にアップ
+    - HitCount Addition +1.0 — 光属性の魔剣の1撃目2撃目3撃目のヒット数を+1する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`132803`](weapons.json#L138783) 輝杖ロンズデーライト【極弐】
+  - base_name: 輝杖ロンズデーライト (costume: 極弐魔装)
+  - element=光(4) / type=杖棒(4) / rarity=S(3) / cv=咲々木瞳
+  - max stats: HP=14370 / ATK=10070 / DEF=16570 / SPD=33 / BREAK=2880
+  - hit_counts=[4, 3, 10] (3段)  motion_speed=[2.0/2.2/1.6]  mp=110
+  - three_size=89/57/86 / initial_slot=3
+  - BD: 究極圧縮六砲晶煌浄 (arts_id=10328)
+    - description: 敵全体に超絶強力な40連ダメージ＆スピード30%UP
+    - cost=7 / hit_count=40 / value=4.55 / additional_value=0.0
+  - innate skills (4):
+    - MotionSpeed Multiply ×2.0 — 光属性の魔剣の攻撃モーションが大幅に加速
+    - Speed Multiply ×1.75 — 光属性の魔剣の行動速度が絶大にアップ
+    - HitCount Addition +2.0 — 光属性の魔剣の1撃目2撃目3撃目のヒット数を+2する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`133101`](weapons.json#L139863) セイレーン
+  - base_name: セイレーン (costume: 魔装)
+  - element=水(2) / type=騎槍(8) / rarity=AA(2) / cv=高田憂希
+  - max stats: HP=4800 / ATK=1600 / DEF=4570 / SPD=30 / BREAK=3760
+  - hit_counts=[4, 4, 4] (3段)  motion_speed=[3.0/3.0/3.0]  mp=75
+  - three_size=76/58/77 / initial_slot=2
+  - BD: テンプテーションサイレン (arts_id=331)
+    - description: 敵全体に強力な30連ダメージ＆敵が数秒だけ聞き惚れる
+    - cost=4 / hit_count=30 / value=2.15 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.1 — 水属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`133102`](weapons.json#L140020) セイレーン【極】
+  - base_name: セイレーン (costume: 極魔装)
+  - element=水(2) / type=騎槍(8) / rarity=AA(2) / cv=高田憂希
+  - max stats: HP=6240 / ATK=2080 / DEF=5950 / SPD=30 / BREAK=4890
+  - hit_counts=[5, 4, 7] (3段)  motion_speed=[3.0/3.0/3.0]  mp=75
+  - three_size=76/58/77 / initial_slot=2
+  - BD: テンプテーションサイレン (arts_id=331)
+    - description: 敵全体に強力な30連ダメージ＆敵が数秒だけ聞き惚れる
+    - cost=4 / hit_count=30 / value=2.15 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.25 — 水属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`133103`](weapons.json#L140177) セイレーン【極弐】
+  - base_name: セイレーン (costume: 極弐魔装)
+  - element=水(2) / type=騎槍(8) / rarity=AA(2) / cv=高田憂希
+  - max stats: HP=8120 / ATK=3400 / DEF=7740 / SPD=35 / BREAK=5930
+  - hit_counts=[6, 5, 7] (3段)  motion_speed=[3.0/3.0/3.0]  mp=80
+  - three_size=79/58/78 / initial_slot=3
+  - BD: 絶唱ファシネーションサイレン (arts_id=10331)
+    - description: 敵全体に強力な30連ダメージ＆敵が数秒だけ聞き惚れる
+    - cost=4 / hit_count=30 / value=2.15 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.5 — 水属性の魔剣の行動速度が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`134401`](weapons.json#L143384) ムーンファルクス
+  - base_name: ムーンファルクス (costume: 魔装)
+  - element=闇(5) / type=長剣(1) / rarity=AA(2) / cv=豊田萌絵
+  - max stats: HP=5500 / ATK=1900 / DEF=5200 / SPD=31 / BREAK=510
+  - hit_counts=[4, 4, 8] (3段)  motion_speed=[3.0/3.0/2.0]  mp=90
+  - three_size=73/56/71 / initial_slot=2
+  - BD: ムーンシェイドムーン (arts_id=344)
+    - description: 敵全体に強力な23連ダメージ＆自分モーション加速
+    - cost=3 / hit_count=23 / value=2.02174 / additional_value=0.0
+  - innate skills (4):
+    - Mez Repel_Percent ×10.0 — 麻痺の発生を低確率で回避する
+    - Stun Repel_Percent ×10.0 — スタンの発生を低確率で回避する
+    - RubyDrop Multiply ×1.5 — 自分が攻撃した時のルビーの量が少し増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`134402`](weapons.json#L143579) ムーンファルクス【極】
+  - base_name: ムーンファルクス (costume: 極魔装)
+  - element=闇(5) / type=長剣(1) / rarity=AA(2) / cv=豊田萌絵
+  - max stats: HP=7150 / ATK=2470 / DEF=6760 / SPD=31 / BREAK=670
+  - hit_counts=[5, 4, 11] (3段)  motion_speed=[3.0/3.0/2.0]  mp=90
+  - three_size=73/56/71 / initial_slot=2
+  - BD: ムーンシェイドムーン (arts_id=344)
+    - description: 敵全体に強力な23連ダメージ＆自分モーション加速
+    - cost=3 / hit_count=23 / value=2.02174 / additional_value=0.0
+  - innate skills (4):
+    - Mez Repel_Percent ×50.0 — 麻痺の発生を確率で回避する
+    - Stun Repel_Percent ×50.0 — スタンの発生を確率で回避する
+    - RubyDrop Multiply ×2.0 — 自分が攻撃した時のルビーの量がかなり増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`134403`](weapons.json#L143774) ムーンファルクス【極弐】
+  - base_name: ムーンファルクス (costume: 極弐魔装)
+  - element=闇(5) / type=長剣(1) / rarity=AA(2) / cv=豊田萌絵
+  - max stats: HP=10080 / ATK=2620 / DEF=8560 / SPD=35 / BREAK=850
+  - hit_counts=[6, 5, 11] (3段)  motion_speed=[3.0/3.0/1.2]  mp=97
+  - three_size=73/56/71 / initial_slot=3
+  - BD: フルシェイドポーラーナイト (arts_id=10344)
+    - description: 敵全体に強力な23連ダメージ＆自分モーション加速
+    - cost=3 / hit_count=23 / value=2.02174 / additional_value=0.0
+  - innate skills (4):
+    - Mez Repel_Percent ×100.0 — 麻痺の発生を完全回避する
+    - Stun Repel_Percent ×100.0 — スタンの発生を完全回避する
+    - RubyDrop Multiply ×3.0 — 自分が攻撃した時のルビーの量が大幅に増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`134801`](weapons.json#L144678) ウルスラ
+  - base_name: ウルスラ (costume: 魔装)
+  - element=光(4) / type=弓矢(5) / rarity=S(3) / cv=西明日香
+  - max stats: HP=11000 / ATK=5980 / DEF=11000 / SPD=29 / BREAK=1170
+  - hit_counts=[6, 4, 6] (3段)  motion_speed=[2.0/3.0/1.0]  mp=230
+  - three_size=79/57/78 / initial_slot=2
+  - BD: 機械仕掛けの士翼天乱 (arts_id=348)
+    - description: 敵全体に超強力な39連ダメージ＆数秒間防御力1.3倍
+    - cost=5 / hit_count=39 / value=2.6 / additional_value=0.0
+  - innate skills (3):
+    - HP Multiply ×1.5 — 光属性の魔剣のHPが大幅にアップ
+    - Defense Multiply ×1.25 — 光属性の魔剣の防御力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`134802`](weapons.json#L144854) ウルスラ【極】
+  - base_name: ウルスラ (costume: 極魔装)
+  - element=光(4) / type=弓矢(5) / rarity=S(3) / cv=西明日香
+  - max stats: HP=14300 / ATK=7780 / DEF=14300 / SPD=29 / BREAK=1530
+  - hit_counts=[7, 4, 9] (3段)  motion_speed=[2.0/3.0/1.0]  mp=230
+  - three_size=79/57/78 / initial_slot=3
+  - BD: 機械仕掛けの士翼天乱 (arts_id=348)
+    - description: 敵全体に超強力な39連ダメージ＆数秒間防御力1.3倍
+    - cost=5 / hit_count=39 / value=2.6 / additional_value=0.0
+  - innate skills (3):
+    - HP Multiply ×1.75 — 光属性の魔剣のHPが絶大にアップ
+    - Defense Multiply ×1.5 — 光属性の魔剣の防御力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`134803`](weapons.json#L145030) ウルスラ【極弐】
+  - base_name: ウルスラ (costume: 極弐魔装)
+  - element=光(4) / type=弓矢(5) / rarity=S(3) / cv=西明日香
+  - max stats: HP=15600 / ATK=8320 / DEF=15830 / SPD=33 / BREAK=1730
+  - hit_counts=[8, 5, 9] (3段)  motion_speed=[3.0/3.0/1.0]  mp=253
+  - three_size=79/57/78 / initial_slot=4
+  - BD: 機械仕掛けの天翼 (arts_id=10348)
+    - description: 敵全体に超強力な39連ダメージ＆30秒防御力30%UP
+    - cost=5 / hit_count=39 / value=2.6 / additional_value=0.0
+  - innate skills (3):
+    - HP Multiply ×1.75 — 光属性の魔剣のHPが絶大にアップ
+    - Defense Multiply ×1.75 — 光属性の魔剣の防御力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`137201`](weapons.json#L153489) アル=アジフ
+  - base_name: アル=アジフ (costume: 魔装)
+  - element=光(4) / type=魔典(11) / rarity=SS(4) / cv=浜崎奈々
+  - max stats: HP=12000 / ATK=15000 / DEF=8000 / SPD=22 / BREAK=1300
+  - hit_counts=[3, 3, 12] (3段)  motion_speed=[2.0/2.0/1.2]  mp=720
+  - three_size=74/55/79 / initial_slot=3
+  - BD: 久遠に這い臥せ無貌の神々 (arts_id=372)
+    - description: 敵全体に超絶強力な53連ダメージ＆自分HP回復
+    - cost=8 / hit_count=53 / value=3.96 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ
+    - MotionSpeed Multiply ×2.0 — 光属性の魔剣の攻撃モーションが大幅に加速
+    - SapphireDrop Multiply ×2.0 — 自分の獲得するサファイアの量がかなり増加
+    - DamageLimitBreak Addition +2500000000.0 — 光属性の魔剣のダメージ上限が25億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`137202`](weapons.json#L153703) アル=アジフ【極】
+  - base_name: アル=アジフ (costume: 極魔装)
+  - element=光(4) / type=魔典(11) / rarity=SS(4) / cv=浜崎奈々
+  - max stats: HP=15600 / ATK=19500 / DEF=10400 / SPD=22 / BREAK=1690
+  - hit_counts=[4, 3, 15] (3段)  motion_speed=[2.0/2.0/1.2]  mp=720
+  - three_size=74/55/79 / initial_slot=4
+  - BD: 久遠に這い臥せ無貌の神々 (arts_id=372)
+    - description: 敵全体に超絶強力な53連ダメージ＆自分HP回復
+    - cost=8 / hit_count=53 / value=3.96 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - MotionSpeed Multiply ×2.33 — 光属性の魔剣の攻撃モーションが絶大に加速
+    - SapphireDrop Multiply ×3.0 — 自分の獲得するサファイアの量が大幅に増加
+    - DamageLimitBreak Addition +2500000000.0 — 光属性の魔剣のダメージ上限が25億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`137901`](weapons.json#L156465) ダークオブダーク
+  - base_name: ダークオブダーク (costume: 魔装)
+  - element=闇(5) / type=投擲(9) / rarity=A(1) / cv=森永千才
+  - max stats: HP=3500 / ATK=2000 / DEF=1000 / SPD=18 / BREAK=300
+  - hit_counts=[1, 2, 3] (3段)  motion_speed=[4.0/4.0/1.0]  mp=122
+  - three_size=78/55/78 / initial_slot=1
+  - BD: コールオブダークネス (arts_id=379)
+    - description: 敵全体に6連ダメージ＆10秒スピード20%UP
+    - cost=4 / hit_count=6 / value=7.16667 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.15 — 闇属性の魔剣の攻撃モーションが少し加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`137902`](weapons.json#L156622) ダークオブダーク【極】
+  - base_name: ダークオブダーク (costume: 極魔装)
+  - element=闇(5) / type=投擲(9) / rarity=A(1) / cv=森永千才
+  - max stats: HP=4550 / ATK=2600 / DEF=1300 / SPD=18 / BREAK=390
+  - hit_counts=[2, 2, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=122
+  - three_size=78/55/78 / initial_slot=1
+  - BD: コールオブダークネス (arts_id=379)
+    - description: 敵全体に6連ダメージ＆10秒スピード20%UP
+    - cost=4 / hit_count=6 / value=7.16667 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.15 — 闇属性の魔剣の攻撃モーションが少し加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`137903`](weapons.json#L156779) ダークオブダーク【極弐】
+  - base_name: ダークオブダーク (costume: 極弐魔装)
+  - element=闇(5) / type=投擲(9) / rarity=A(1) / cv=森永千才
+  - max stats: HP=5920 / ATK=4680 / DEF=1690 / SPD=21 / BREAK=510
+  - hit_counts=[3, 3, 6] (3段)  motion_speed=[3.0/4.0/1.2]  mp=136
+  - three_size=78/55/78 / initial_slot=3
+  - BD: フォーリントゥザダークネス (arts_id=10379)
+    - description: 敵全体に強力な6連ダメージ＆10秒スピード20%UP
+    - cost=4 / hit_count=6 / value=10.17 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.3 — 闇属性の魔剣の攻撃モーションが加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`138801`](weapons.json#L160006) ルビカンテ
+  - base_name: ルビカンテ (costume: 魔装)
+  - element=火(1) / type=大剣(2) / rarity=S(3) / cv=青木瑠璃子
+  - max stats: HP=11000 / ATK=4800 / DEF=5100 / SPD=25 / BREAK=1800
+  - hit_counts=[2, 3, 7] (3段)  motion_speed=[2.5/2.0/1.2]  mp=160
+  - three_size=97/62/81 / initial_slot=2
+  - BD: 狂える赫きファンローグ (arts_id=388)
+    - description: 敵全体に超強力な42連ダメージ＆数秒間攻撃力1.5倍
+    - cost=5 / hit_count=42 / value=2.35714 / additional_value=0.0
+  - innate skills (2):
+    - RemHP_Attack Multiply ×1.8 — 残HPが少ないほど攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`138802`](weapons.json#L160163) ルビカンテ【極】
+  - base_name: ルビカンテ (costume: 極魔装)
+  - element=火(1) / type=大剣(2) / rarity=S(3) / cv=青木瑠璃子
+  - max stats: HP=14300 / ATK=6240 / DEF=6630 / SPD=25 / BREAK=2340
+  - hit_counts=[3, 3, 10] (3段)  motion_speed=[2.5/2.0/1.2]  mp=160
+  - three_size=97/62/81 / initial_slot=3
+  - BD: 狂える赫きファンローグ (arts_id=388)
+    - description: 敵全体に超強力な42連ダメージ＆数秒間攻撃力1.5倍
+    - cost=5 / hit_count=42 / value=2.35714 / additional_value=0.0
+  - innate skills (2):
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`138803`](weapons.json#L160320) ルビカンテ【極弐】
+  - base_name: ルビカンテ (costume: 極弐魔装)
+  - element=火(1) / type=大剣(2) / rarity=S(3) / cv=青木瑠璃子
+  - max stats: HP=18590 / ATK=8120 / DEF=8620 / SPD=28 / BREAK=3050
+  - hit_counts=[4, 4, 10] (3段)  motion_speed=[2.5/2.0/1.2]  mp=176
+  - three_size=98/61/82 / initial_slot=4
+  - BD: 狂気白熱ソロファンクラブ (arts_id=10388)
+    - description: 敵全体に超強力な42連ダメージ＆数秒間攻撃力1.5倍
+    - cost=5 / hit_count=42 / value=2.35714 / additional_value=0.0
+  - innate skills (3):
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - MotionSpeed Multiply ×1.5 — 火属性の魔剣の攻撃モーションがかなり加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`140501`](weapons.json#L166029) 禁式･数珠丸恒次
+  - base_name: 禁式･数珠丸恒次 (costume: 魔装)
+  - element=風(3) / type=太刀(3) / rarity=S(3) / cv=青山吉能
+  - max stats: HP=8800 / ATK=6950 / DEF=8800 / SPD=32 / BREAK=860
+  - hit_counts=[3, 3, 3] (3段)  motion_speed=[3.0/4.0/1.0]  mp=160
+  - three_size=見ての通りの大きさでございます / initial_slot=2
+  - BD: 禁式･楽土法蓮華 (arts_id=405)
+    - description: 敵全体に超強力な31連ダメージ＆20秒ブレイク力2倍
+    - cost=4 / hit_count=31 / value=2.49677 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.5 — 風属性の魔剣の攻撃力が大幅にアップ
+    - MotionSpeed Multiply ×1.3 — 風属性の魔剣の攻撃モーションが加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`140502`](weapons.json#L166205) 禁式･数珠丸恒次【極】
+  - base_name: 禁式･数珠丸恒次 (costume: 極魔装)
+  - element=風(3) / type=太刀(3) / rarity=S(3) / cv=青山吉能
+  - max stats: HP=11440 / ATK=9040 / DEF=11440 / SPD=32 / BREAK=1120
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[3.0/4.0/1.0]  mp=160
+  - three_size=見ての通りの大きさでございます / initial_slot=3
+  - BD: 禁式･楽土法蓮華 (arts_id=405)
+    - description: 敵全体に超強力な31連ダメージ＆20秒ブレイク力2倍
+    - cost=4 / hit_count=31 / value=2.49677 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.75 — 風属性の魔剣の攻撃力が絶大にアップ
+    - MotionSpeed Multiply ×1.5 — 風属性の魔剣の攻撃モーションがかなり加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`140901`](weapons.json#L167623) 水遁風魔手裏剣
+  - base_name: 水遁風魔手裏剣 (costume: 魔装)
+  - element=水(2) / type=投擲(9) / rarity=AA(2) / cv=小澤亜李
+  - max stats: HP=4100 / ATK=1000 / DEF=3700 / SPD=30 / BREAK=1250
+  - hit_counts=[7, 5, 12] (3段)  motion_speed=[4.0/4.0/1.0]  mp=69
+  - three_size=72/55/71 / initial_slot=2
+  - BD: 恋のブレイズドライブRemix (arts_id=409)
+    - description: 敵全体に強力な16連ダメージ＆敵を強制ブレイク
+    - cost=4 / hit_count=16 / value=4.03125 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.1 — 水属性の魔剣がガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`140902`](weapons.json#L167780) 水遁風魔手裏剣【極】
+  - base_name: 水遁風魔手裏剣 (costume: 極魔装)
+  - element=水(2) / type=投擲(9) / rarity=AA(2) / cv=小澤亜李
+  - max stats: HP=5330 / ATK=1300 / DEF=4810 / SPD=30 / BREAK=1630
+  - hit_counts=[8, 5, 15] (3段)  motion_speed=[4.0/4.0/1.0]  mp=69
+  - three_size=72/55/71 / initial_slot=2
+  - BD: 恋のブレイズドライブRemix (arts_id=409)
+    - description: 敵全体に強力な16連ダメージ＆敵を強制ブレイク
+    - cost=4 / hit_count=16 / value=4.03125 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.25 — 水属性の魔剣がかなりガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`140903`](weapons.json#L167937) 水遁風魔手裏剣【極弐】
+  - base_name: 水遁風魔手裏剣 (costume: 極弐魔装)
+  - element=水(2) / type=投擲(9) / rarity=AA(2) / cv=小澤亜李
+  - max stats: HP=6550 / ATK=1600 / DEF=6000 / SPD=33 / BREAK=2030
+  - hit_counts=[9, 6, 15] (3段)  motion_speed=[3.0/3.0/1.2]  mp=78
+  - three_size=72/55/71 / initial_slot=3
+  - BD: 恋のブレイズドライブLive Arrange!! (arts_id=10409)
+    - description: 敵全体に強力な16連ダメージ＆敵を強制ブレイク
+    - cost=3 / hit_count=16 / value=3.0 / additional_value=0.0
+  - innate skills (2):
+    - GuardBreak Multiply ×1.5 — 水属性の魔剣が大幅にガードブレイクしやすく
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`141401`](weapons.json#L169859) 流星刀
+  - base_name: 流星刀 (costume: 魔装)
+  - element=闇(5) / type=太刀(3) / rarity=AA(2) / cv=百田絵理花
+  - max stats: HP=4000 / ATK=4400 / DEF=5950 / SPD=36 / BREAK=1200
+  - hit_counts=[2, 2, 4] (3段)  motion_speed=[3.0/3.0/2.0]  mp=75
+  - three_size=へぇ/そう/すごいわね / initial_slot=2
+  - BD: 名前？勝手に決めていいわ (arts_id=414)
+    - description: 敵全体に強力な24連ダメージ＆敵を強制ブレイク
+    - cost=3 / hit_count=24 / value=2.2 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.25 — 闇属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`141402`](weapons.json#L170016) 流星刀【極】
+  - base_name: 流星刀 (costume: 極魔装)
+  - element=闇(5) / type=太刀(3) / rarity=AA(2) / cv=百田絵理花
+  - max stats: HP=5200 / ATK=5720 / DEF=7740 / SPD=36 / BREAK=1560
+  - hit_counts=[3, 2, 7] (3段)  motion_speed=[3.0/3.0/2.0]  mp=75
+  - three_size=へぇ/そう/すごいわね / initial_slot=2
+  - BD: 名前？勝手に決めていいわ (arts_id=414)
+    - description: 敵全体に強力な24連ダメージ＆敵を強制ブレイク
+    - cost=3 / hit_count=24 / value=2.2 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 闇属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`141403`](weapons.json#L170173) 流星刀【極弐】
+  - base_name: 流星刀 (costume: 極弐魔装)
+  - element=闇(5) / type=太刀(3) / rarity=AA(2) / cv=百田絵理花
+  - max stats: HP=6760 / ATK=7440 / DEF=10070 / SPD=40 / BREAK=2030
+  - hit_counts=[4, 3, 7] (3段)  motion_speed=[3.5/3.5/1.5]  mp=85
+  - three_size=へぇ/そう/しらなかった / initial_slot=3
+  - BD: 残念だけれど、興味ないの (arts_id=10414)
+    - description: 敵全体に強力な24連ダメージ＆敵を強制ブレイク
+    - cost=3 / hit_count=24 / value=2.2 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.75 — 闇属性の魔剣の攻撃力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`141501`](weapons.json#L170330) 甕破り一文字
+  - base_name: 甕破り一文字 (costume: 魔装)
+  - element=火(1) / type=太刀(3) / rarity=AA(2) / cv=石原夏織
+  - max stats: HP=3200 / ATK=3800 / DEF=4650 / SPD=28 / BREAK=950
+  - hit_counts=[2, 4, 6] (3段)  motion_speed=[4.0/4.0/1.0]  mp=65
+  - three_size=63/53/67 / initial_slot=2
+  - BD: 一刀流奥義夢想剣 (arts_id=415)
+    - description: 敵全体に強力な28連ダメージ＆防御力10%UP
+    - cost=4 / hit_count=28 / value=2.30357 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.25 — 火属性の魔剣の防御力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`141502`](weapons.json#L170487) 甕破り一文字【極】
+  - base_name: 甕破り一文字 (costume: 極魔装)
+  - element=火(1) / type=太刀(3) / rarity=AA(2) / cv=石原夏織
+  - max stats: HP=4160 / ATK=4940 / DEF=6050 / SPD=28 / BREAK=1240
+  - hit_counts=[3, 4, 9] (3段)  motion_speed=[4.0/4.0/1.0]  mp=65
+  - three_size=63/53/67 / initial_slot=2
+  - BD: 一刀流奥義夢想剣 (arts_id=415)
+    - description: 敵全体に強力な28連ダメージ＆防御力10%UP
+    - cost=4 / hit_count=28 / value=2.30357 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.5 — 火属性の魔剣の防御力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`141503`](weapons.json#L170644) 甕破り一文字【極弐】
+  - base_name: 甕破り一文字 (costume: 極弐魔装)
+  - element=火(1) / type=太刀(3) / rarity=AA(2) / cv=石原夏織
+  - max stats: HP=5410 / ATK=6430 / DEF=7870 / SPD=31 / BREAK=1620
+  - hit_counts=[4, 5, 9] (3段)  motion_speed=[4.0/4.0/1.2]  mp=74
+  - three_size=63/53/67 / initial_slot=3
+  - BD: 一刀流極意･五天夢想剣 (arts_id=10415)
+    - description: 敵全体に強力な28連ダメージ＆防御力10%UP
+    - cost=4 / hit_count=28 / value=2.30357 / additional_value=0.0
+  - innate skills (2):
+    - Defense Multiply ×1.75 — 火属性の魔剣の防御力が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`141601`](weapons.json#L170801) シュヴァルツ×ヴァイス
+  - base_name: シュヴァルツ×ヴァイス (costume: 魔装)
+  - element=闇(5) / type=投擲(9) / rarity=S(3) / cv=五十嵐由佳
+  - max stats: HP=9720 / ATK=8000 / DEF=4800 / SPD=29 / BREAK=500
+  - hit_counts=[3, 4, 5] (3段)  motion_speed=[3.0/3.0/2.0]  mp=230
+  - three_size=87(？)/58/85 / initial_slot=2
+  - BD: ダークアウトブレイク (arts_id=416)
+    - description: 敵全体に超強力な39連ダメージ＆1waveヒット数が+3
+    - cost=4 / hit_count=39 / value=1.98462 / additional_value=0.0
+  - innate skills (3):
+    - Speed Multiply ×1.25 — 闇属性の魔剣の行動速度がかなりアップ
+    - BlazeAbsorb Repel_Percent ×10.0 — 勇気分解の発生を低確率で回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`141602`](weapons.json#L170977) シュヴァルツ×ヴァイス【極】
+  - base_name: シュヴァルツ×ヴァイス (costume: 極魔装)
+  - element=闇(5) / type=投擲(9) / rarity=S(3) / cv=五十嵐由佳
+  - max stats: HP=12640 / ATK=10400 / DEF=6240 / SPD=29 / BREAK=650
+  - hit_counts=[4, 4, 8] (3段)  motion_speed=[3.0/3.0/2.0]  mp=230
+  - three_size=87(？)/58/85 / initial_slot=3
+  - BD: ダークアウトブレイク (arts_id=416)
+    - description: 敵全体に超強力な39連ダメージ＆1waveヒット数が+3
+    - cost=4 / hit_count=39 / value=1.98462 / additional_value=0.0
+  - innate skills (3):
+    - Speed Multiply ×1.5 — 闇属性の魔剣の行動速度が大幅にアップ
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`141603`](weapons.json#L171153) シュヴァルツ×ヴァイス【極弐】
+  - base_name: シュヴァルツ×ヴァイス (costume: 極弐魔装)
+  - element=闇(5) / type=投擲(9) / rarity=S(3) / cv=五十嵐由佳
+  - max stats: HP=16440 / ATK=13520 / DEF=8120 / SPD=32 / BREAK=850
+  - hit_counts=[5, 5, 8] (3段)  motion_speed=[2.8/3.0/2.0]  mp=251
+  - three_size=99(？)/58/87 / initial_slot=4
+  - BD: ホッフヌングクリンゲ (arts_id=10416)
+    - description: 敵全体に超強力な39連ダメージ＆1waveヒット数が+3
+    - cost=4 / hit_count=39 / value=1.98462 / additional_value=0.0
+  - innate skills (3):
+    - Speed Multiply ×1.75 — 闇属性の魔剣の行動速度が絶大にアップ
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`142901`](weapons.json#L176547) コード:デジャヴ
+  - base_name: コード:デジャヴ (costume: 魔装)
+  - element=風(3) / type=戦斧(7) / rarity=S(3) / cv=清和祐子
+  - max stats: HP=6200 / ATK=7200 / DEF=4800 / SPD=34 / BREAK=500
+  - hit_counts=[3, 5, 8] (3段)  motion_speed=[3.0/3.0/1.0]  mp=132
+  - three_size=67/55/67 / initial_slot=1
+  - BD: CODE:完全帰着必敗理論 (arts_id=429)
+    - description: 敵全体に超強力な40連ダメージ＆20秒ﾓｰｼｮﾝ20%高速化
+    - cost=5 / hit_count=40 / value=2.475 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.5 — 風属性の魔剣の行動速度が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`142902`](weapons.json#L176704) コード:デジャヴ【極】
+  - base_name: コード:デジャヴ (costume: 極魔装)
+  - element=風(3) / type=戦斧(7) / rarity=S(3) / cv=清和祐子
+  - max stats: HP=8060 / ATK=9360 / DEF=6240 / SPD=34 / BREAK=650
+  - hit_counts=[4, 5, 11] (3段)  motion_speed=[3.0/3.0/1.0]  mp=132
+  - three_size=67/55/67 / initial_slot=2
+  - BD: CODE:完全帰着必敗理論 (arts_id=429)
+    - description: 敵全体に超強力な40連ダメージ＆20秒ﾓｰｼｮﾝ20%高速化
+    - cost=5 / hit_count=40 / value=2.475 / additional_value=0.0
+  - innate skills (2):
+    - Speed Multiply ×1.75 — 風属性の魔剣の行動速度が絶大にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`142903`](weapons.json#L176861) コード:デジャヴ【極弐】
+  - base_name: コード:デジャヴ (costume: 極弐魔装)
+  - element=風(3) / type=戦斧(7) / rarity=S(3) / cv=清和祐子
+  - max stats: HP=10480 / ATK=12170 / DEF=8120 / SPD=37 / BREAK=850
+  - hit_counts=[5, 6, 11] (3段)  motion_speed=[2.4/2.4/1.0]  mp=145
+  - three_size=67/55/67 / initial_slot=3
+  - BD: CODE:必然帰結絶対定理 (arts_id=10429)
+    - description: 敵全体に超強力な40連ダメージ＆20秒ﾓｰｼｮﾝ20%高速化
+    - cost=5 / hit_count=40 / value=2.475 / additional_value=0.0
+  - innate skills (3):
+    - Speed Multiply ×1.75 — 風属性の魔剣の行動速度が絶大にアップ
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`143001`](weapons.json#L177037) サイレントナイト
+  - base_name: サイレントナイト (costume: 魔装)
+  - element=火(1) / type=弓矢(5) / rarity=S(3) / cv=加隈亜衣
+  - max stats: HP=9650 / ATK=3100 / DEF=5700 / SPD=33 / BREAK=900
+  - hit_counts=[8, 9, 12] (3段)  motion_speed=[4.0/4.0/1.0]  mp=220
+  - three_size=80/58/85 / initial_slot=1
+  - BD: エバーラストサイレントナイト (arts_id=430)
+    - description: 敵全体に超強力な70連ダメージ＆数秒間敵が静かになる
+    - cost=8 / hit_count=70 / value=2.1 / additional_value=0.0
+  - innate skills (5):
+    - BlazeAttack Multiply ×2.0 — 火属性の魔剣のB.D.攻撃力がかなりアップ
+    - Defense Multiply ×1.1 — 火属性の魔剣の防御力がアップ
+    - HP Multiply ×1.1 — 火属性の魔剣のHPがアップ
+    - Speed Multiply ×1.1 — 火属性の魔剣の行動速度がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`143002`](weapons.json#L177251) サイレントナイト【極】
+  - base_name: サイレントナイト (costume: 極魔装)
+  - element=火(1) / type=弓矢(5) / rarity=S(3) / cv=加隈亜衣
+  - max stats: HP=12550 / ATK=4030 / DEF=7410 / SPD=33 / BREAK=1170
+  - hit_counts=[9, 9, 15] (3段)  motion_speed=[4.0/4.0/1.0]  mp=220
+  - three_size=80/58/85 / initial_slot=2
+  - BD: エバーラストサイレントナイト (arts_id=430)
+    - description: 敵全体に超強力な70連ダメージ＆数秒間敵が静かになる
+    - cost=8 / hit_count=70 / value=2.1 / additional_value=0.0
+  - innate skills (5):
+    - BlazeAttack Multiply ×2.5 — 火属性の魔剣のB.D.攻撃力が大幅にアップ
+    - Defense Multiply ×1.25 — 火属性の魔剣の防御力がかなりアップ
+    - HP Multiply ×1.25 — 火属性の魔剣のHPがかなりアップ
+    - Speed Multiply ×1.25 — 火属性の魔剣の行動速度がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`143003`](weapons.json#L177465) サイレントナイト【極弐】
+  - base_name: サイレントナイト (costume: 極弐魔装)
+  - element=火(1) / type=弓矢(5) / rarity=S(3) / cv=加隈亜衣
+  - max stats: HP=16320 / ATK=5240 / DEF=9640 / SPD=35 / BREAK=1530
+  - hit_counts=[10, 10, 15] (3段)  motion_speed=[2.0/2.0/1.2]  mp=240
+  - three_size=83/58/86 / initial_slot=3
+  - BD: エコーリングリンガディンドン (arts_id=10430)
+    - description: 敵全体に超強力な70連ダメージ＆数秒間敵が静かになる
+    - cost=8 / hit_count=70 / value=2.1 / additional_value=0.0
+  - innate skills (5):
+    - BlazeAttack Multiply ×3.0 — 火属性の魔剣のB.D.攻撃力が絶大にアップ
+    - Defense Multiply ×1.5 — 火属性の魔剣の防御力が大幅にアップ
+    - HP Multiply ×1.5 — 火属性の魔剣のHPが大幅にアップ
+    - Speed Multiply ×1.5 — 火属性の魔剣の行動速度が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`143401`](weapons.json#L178987) 雷切丸
+  - base_name: 雷切丸 (costume: 魔装)
+  - element=風(3) / type=太刀(3) / rarity=AA(2) / cv=浜崎奈々
+  - max stats: HP=6000 / ATK=1660 / DEF=3500 / SPD=47 / BREAK=160
+  - hit_counts=[5, 7, 12] (3段)  motion_speed=[3.0/3.0/3.0]  mp=115
+  - three_size=75/55/74 / initial_slot=2
+  - BD: 千鳥一閃雷切丸 (arts_id=434)
+    - description: 敵全体に強力な32連ダメージ＆敵を強制ブレイク
+    - cost=5 / hit_count=32 / value=2.39 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.5 — 風属性の魔剣の攻撃モーションがかなり加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`143402`](weapons.json#L179144) 雷切丸【極】
+  - base_name: 雷切丸 (costume: 極魔装)
+  - element=風(3) / type=太刀(3) / rarity=AA(2) / cv=浜崎奈々
+  - max stats: HP=7800 / ATK=2160 / DEF=4550 / SPD=47 / BREAK=210
+  - hit_counts=[6, 7, 15] (3段)  motion_speed=[3.0/3.0/3.0]  mp=115
+  - three_size=75/55/74 / initial_slot=3
+  - BD: 千鳥一閃雷切丸 (arts_id=434)
+    - description: 敵全体に強力な32連ダメージ＆敵を強制ブレイク
+    - cost=5 / hit_count=32 / value=2.39 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×2.0 — 風属性の魔剣の攻撃モーションが大幅に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`143403`](weapons.json#L179301) 雷切丸【極弐】
+  - base_name: 雷切丸 (costume: 極弐魔装)
+  - element=風(3) / type=太刀(3) / rarity=AA(2) / cv=浜崎奈々
+  - max stats: HP=10140 / ATK=2810 / DEF=5920 / SPD=53 / BREAK=280
+  - hit_counts=[7, 8, 15] (3段)  motion_speed=[3.2/3.0/3.2]  mp=122
+  - three_size=75/55/74 / initial_slot=4
+  - BD: 神鳴征刃･雷切ノ太刀 (arts_id=10434)
+    - description: 敵全体に強力な32連ダメージ＆敵を強制ブレイク
+    - cost=5 / hit_count=32 / value=2.39 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×2.33 — 風属性の魔剣の攻撃モーションが絶大に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`143801`](weapons.json#L180795) 冥桃華ひな=みやび
+  - base_name: 冥桃華ひな=みやび (costume: 魔装)
+  - element=闇(5) / type=太刀(3) / rarity=SS(4) / cv=伊藤美来
+  - max stats: HP=13333 / ATK=10200 / DEF=8440 / SPD=27 / BREAK=3800
+  - hit_counts=[6, 7, 17] (3段)  motion_speed=[4.0/4.0/1.0]  mp=553
+  - three_size=99/56/80 / initial_slot=3
+  - BD: 優婉嫺雅失恋遊戯 (arts_id=438)
+    - description: 敵全体に超絶強力な75連ダメージ＆15秒ブレイク力5倍
+    - cost=7 / hit_count=75 / value=2.6 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 闇属性の魔剣の攻撃力が超絶大アップ
+    - MotionSpeed Multiply ×2.0 — 闇属性の魔剣の攻撃モーションが大幅に加速
+    - BlazeGaugeMaxLevel Addition +4.0 — BDゲージの最大値がアップ
+    - DamageLimitBreak Addition +2500000000.0 — 闇属性の魔剣のダメージ上限が25億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`143802`](weapons.json#L181009) 冥桃華ひな=みやび【極】
+  - base_name: 冥桃華ひな=みやび (costume: 極魔装)
+  - element=闇(5) / type=太刀(3) / rarity=SS(4) / cv=伊藤美来
+  - max stats: HP=17340 / ATK=13260 / DEF=10980 / SPD=27 / BREAK=4940
+  - hit_counts=[7, 7, 20] (3段)  motion_speed=[4.0/4.0/1.0]  mp=553
+  - three_size=99/56/80 / initial_slot=4
+  - BD: 優婉嫺雅失恋遊戯 (arts_id=438)
+    - description: 敵全体に超絶強力な75連ダメージ＆15秒ブレイク力5倍
+    - cost=7 / hit_count=75 / value=2.6 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 闇属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - MotionSpeed Multiply ×2.33 — 闇属性の魔剣の攻撃モーションが絶大に加速
+    - BlazeGaugeMaxLevel Addition +6.0 — BDゲージの最大値がかなりアップ
+    - DamageLimitBreak Addition +2500000000.0 — 闇属性の魔剣のダメージ上限が25億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`144101`](weapons.json#L181970) イミティション=ロール
+  - base_name: イミティション=ロール (costume: 魔装)
+  - element=闇(5) / type=魔典(11) / rarity=SS(4) / cv=加隈亜衣
+  - max stats: HP=12000 / ATK=19000 / DEF=11000 / SPD=23 / BREAK=800
+  - hit_counts=[5, 5, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=513
+  - three_size=いい度胸ね､魔剣使い？ / initial_slot=3
+  - BD: 完全摸倣非認識世界 (arts_id=441)
+    - description: 敵全体に超強力な55連ダメージ＆自分HP回復
+    - cost=6 / hit_count=55 / value=2.6 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.74232 — 闇属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - Vitality_MotionSpeed Multiply ×3.0 — 残HPが多いほどモーション速度が絶大に加速(最大3倍)
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`144102`](weapons.json#L182184) イミティション=ロール【極】
+  - base_name: イミティション=ロール (costume: 極魔装)
+  - element=闇(5) / type=魔典(11) / rarity=SS(4) / cv=加隈亜衣
+  - max stats: HP=15600 / ATK=24700 / DEF=14300 / SPD=23 / BREAK=1040
+  - hit_counts=[6, 5, 13] (3段)  motion_speed=[4.0/4.0/1.0]  mp=513
+  - three_size=いい度胸ね､魔剣使い？ / initial_slot=4
+  - BD: 完全摸倣非認識世界 (arts_id=441)
+    - description: 敵全体に超強力な55連ダメージ＆自分HP回復
+    - cost=6 / hit_count=55 / value=2.6 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 闇属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Attack Multiply ×2.55 — 残HPが多いほど攻撃力が超絶大にアップ
+    - Vitality_MotionSpeed Multiply ×3.0 — 残HPが多いほどモーション速度が絶大に加速(最大3倍)
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`144401`](weapons.json#L183178) 呪咒乃飾
+  - base_name: 呪咒乃飾 (costume: 魔装)
+  - element=闇(5) / type=投擲(9) / rarity=S(3) / cv=尾崎由香
+  - max stats: HP=8800 / ATK=5250 / DEF=3400 / SPD=28 / BREAK=710
+  - hit_counts=[3, 5, 7] (3段)  motion_speed=[4.0/4.0/1.0]  mp=180
+  - three_size=77/56/77 / initial_slot=1
+  - BD: 櫛に流るる黒髪の誇りの春の美しき哉 (arts_id=444)
+    - description: 敵全体に超強力な30連ダメージ＆一瞬だけ攻撃力2倍
+    - cost=5 / hit_count=30 / value=3.3 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.25 — 闇属性の魔剣の攻撃力がかなりアップ
+    - JustGuard_MinDamage Multiply ×0.5 — 闇属性でジャストガード時に魔導バリアを少し強化
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`144402`](weapons.json#L183354) 呪咒乃飾【極】
+  - base_name: 呪咒乃飾 (costume: 極魔装)
+  - element=闇(5) / type=投擲(9) / rarity=S(3) / cv=尾崎由香
+  - max stats: HP=11440 / ATK=6830 / DEF=4420 / SPD=28 / BREAK=930
+  - hit_counts=[4, 5, 10] (3段)  motion_speed=[4.0/4.0/1.0]  mp=180
+  - three_size=77/56/77 / initial_slot=2
+  - BD: 櫛に流るる黒髪の誇りの春の美しき哉 (arts_id=444)
+    - description: 敵全体に超強力な30連ダメージ＆一瞬だけ攻撃力2倍
+    - cost=5 / hit_count=30 / value=3.3 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.5 — 闇属性の魔剣の攻撃力が大幅にアップ
+    - JustGuard_MinDamage Multiply ×0.2 — 闇属性でジャストガード時に魔導バリアを強化
+    - DamageLimitBreak Addition +700000000.0 — 闇属性の魔剣のダメージ上限が7億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`144403`](weapons.json#L183549) 呪咒乃飾【極弐】
+  - base_name: 呪咒乃飾 (costume: 極弐魔装)
+  - element=闇(5) / type=投擲(9) / rarity=S(3) / cv=尾崎由香
+  - max stats: HP=17160 / ATK=8880 / DEF=6630 / SPD=30 / BREAK=1210
+  - hit_counts=[5, 6, 10] (3段)  motion_speed=[2.4/2.4/1.2]  mp=199
+  - three_size=77/56/77 / initial_slot=3
+  - BD: 簪を挿せる乙女の面影に思ひの底に春来たれり (arts_id=10444)
+    - description: 敵全体に超強力な30連ダメージ＆一瞬だけ攻撃力2倍
+    - cost=5 / hit_count=30 / value=3.3 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×1.75 — 闇属性の魔剣の攻撃力が絶大にアップ
+    - JustGuard_MinDamage Multiply ×0.2 — 闇属性でジャストガード時に魔導バリアを強化
+    - DamageLimitBreak Addition +700000000.0 — 闇属性の魔剣のダメージ上限が7億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`144501`](weapons.json#L183744) ミョルニル=マグナ
+  - base_name: ミョルニル=マグナ (costume: 魔装)
+  - element=風(3) / type=連弩(6) / rarity=SS(4) / cv=高野麻里佳
+  - max stats: HP=12300 / ATK=20900 / DEF=10500 / SPD=30 / BREAK=3000
+  - hit_counts=[5, 6, 10] (3段)  motion_speed=[2.0/2.0/1.0]  mp=410
+  - three_size=62/53/68 / initial_slot=3
+  - BD: 神さえ凌駕せし偉大なる真理 (arts_id=445)
+    - description: 敵全体に超絶強力な80連ダメージ＆数秒間攻撃力1.5倍
+    - cost=8 / hit_count=80 / value=2.625 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×1.75 — 風属性の魔剣の攻撃力が絶大にアップ
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - AnyElement Multiply ×1.0 — 水属性を対象とした他魔剣からのスキル効果を受けられる
+    - Speed Multiply ×20.0 — 自身のスピードが20倍
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`144502`](weapons.json#L183977) ミョルニル=マグナ【極】
+  - base_name: ミョルニル=マグナ (costume: 極魔装)
+  - element=風(3) / type=連弩(6) / rarity=SS(4) / cv=高野麻里佳
+  - max stats: HP=15990 / ATK=27170 / DEF=13650 / SPD=30 / BREAK=3900
+  - hit_counts=[6, 6, 13] (3段)  motion_speed=[2.0/2.0/1.0]  mp=410
+  - three_size=62/53/68 / initial_slot=4
+  - BD: 神さえ凌駕せし偉大なる真理 (arts_id=445)
+    - description: 敵全体に超絶強力な80連ダメージ＆数秒間攻撃力1.5倍
+    - cost=8 / hit_count=80 / value=2.625 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 風属性の魔剣の攻撃力が超絶大アップ
+    - Vitality_Attack Multiply ×2.55 — 残HPが多いほど攻撃力が超絶大にアップ
+    - AnyElement Multiply ×1.0 — 水属性を対象とした他魔剣からのスキル効果を受けられる
+    - Speed Multiply ×20.0 — 自身のスピードが20倍
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`144801`](weapons.json#L185114) 魔研グラム=モッド
+  - base_name: 魔研グラム=モッド (costume: 魔装)
+  - element=風(3) / type=弓矢(5) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=14000 / ATK=7000 / DEF=10500 / SPD=20 / BREAK=1500
+  - hit_counts=[5, 7, 12] (3段)  motion_speed=[2.5/2.0/1.5]  mp=388
+  - three_size=90/58/79 / initial_slot=2
+  - BD: 不適合世界ワイズマン (arts_id=448)
+    - description: 敵全体に超絶強力な63連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=8 / hit_count=63 / value=3.8 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.75 — 風属性の魔剣の攻撃力が絶大にアップ
+    - MotionSpeed Multiply ×1.3 — 全属性の魔剣の攻撃モーションが加速
+    - RemHP_Attack Multiply ×1.8 — 風属性の味方全体が、残HPが少ないほど攻撃力が大幅にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 風属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`144802`](weapons.json#L185328) 魔研グラム=モッド【極】
+  - base_name: 魔研グラム=モッド (costume: 極魔装)
+  - element=風(3) / type=弓矢(5) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=18200 / ATK=9100 / DEF=13650 / SPD=20 / BREAK=1950
+  - hit_counts=[6, 7, 15] (3段)  motion_speed=[2.5/2.0/1.5]  mp=388
+  - three_size=90/58/79 / initial_slot=3
+  - BD: 不適合世界ワイズマン (arts_id=448)
+    - description: 敵全体に超絶強力な63連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=8 / hit_count=63 / value=3.8 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 風属性の魔剣の攻撃力が超絶大アップ
+    - MotionSpeed Multiply ×1.5 — 全属性の魔剣の攻撃モーションがかなり加速
+    - RemHP_Attack Multiply ×2.1 — 風属性の味方全体が、残HPが少ないほど攻撃力が絶大にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 風属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`145101`](weapons.json#L186365) インサイドフィクション
+  - base_name: インサイドフィクション (costume: 魔装)
+  - element=火(1) / type=大剣(2) / rarity=S(3) / cv=木村千咲
+  - max stats: HP=5800 / ATK=7680 / DEF=3500 / SPD=24 / BREAK=450
+  - hit_counts=[2, 3, 7] (3段)  motion_speed=[2.0/2.0/1.5]  mp=248
+  - three_size=66/56/66 / initial_slot=1
+  - BD: 妄リニ乱レ想ヒ懐ワレ (arts_id=451)
+    - description: 敵全体に超強力な73連ダメージ＆一瞬だけスピード狂化
+    - cost=6 / hit_count=73 / value=2.0 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.25 — 火属性の魔剣の攻撃力がかなりアップ
+    - MotionSpeed Multiply ×1.3 — 火属性の魔剣の攻撃モーションが加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`145102`](weapons.json#L186541) インサイドフィクション【極】
+  - base_name: インサイドフィクション (costume: 極魔装)
+  - element=火(1) / type=大剣(2) / rarity=S(3) / cv=木村千咲
+  - max stats: HP=7540 / ATK=9990 / DEF=4550 / SPD=24 / BREAK=590
+  - hit_counts=[3, 3, 10] (3段)  motion_speed=[2.0/2.0/1.5]  mp=248
+  - three_size=66/56/66 / initial_slot=2
+  - BD: 妄リニ乱レ想ヒ懐ワレ (arts_id=451)
+    - description: 敵全体に超強力な73連ダメージ＆一瞬だけスピード狂化
+    - cost=6 / hit_count=73 / value=2.0 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.5 — 火属性の魔剣の攻撃力が大幅にアップ
+    - MotionSpeed Multiply ×1.5 — 火属性の魔剣の攻撃モーションがかなり加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`146701`](weapons.json#L192463) 神竜イザナギ
+  - base_name: 神竜イザナギ (costume: 魔装)
+  - element=闇(5) / type=弓矢(5) / rarity=SS(4) / cv=竹達彩奈
+  - max stats: HP=14500 / ATK=16500 / DEF=11600 / SPD=23 / BREAK=3000
+  - hit_counts=[4, 8, 8] (3段)  motion_speed=[1.8/1.5/1.0]  mp=620
+  - three_size=79/54/74 / initial_slot=3
+  - BD: 神世七代天地開闢 (arts_id=467)
+    - description: 敵全体に超絶強力な60連ダメージ＆15秒攻撃全体化(減無)
+    - cost=8 / hit_count=60 / value=3.5 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×1.5 — 全属性の魔剣の攻撃力が大幅にアップ
+    - Vitality_Attack Multiply ×1.3 — 残HPが多いほど攻撃力がかなりアップ
+    - HitCount Addition +7.951 — 自身の1撃目2撃目3撃目のヒット数を+8する【熟度21,41,60,80,99をそれぞれ超えると+1ずつ効果値UP】
+    - Vitality_MotionSpeed Multiply ×3.0 — 弓矢の味方全体が、残HPが多いほどモーションが絶大に加速(最大3倍)
+    - DamageLimitBreak Addition +1300000000.0 — 自身のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`146702`](weapons.json#L192696) 神竜イザナギ【極】
+  - base_name: 神竜イザナギ (costume: 極魔装)
+  - element=闇(5) / type=弓矢(5) / rarity=SS(4) / cv=竹達彩奈
+  - max stats: HP=18850 / ATK=21450 / DEF=15080 / SPD=23 / BREAK=3900
+  - hit_counts=[5, 8, 11] (3段)  motion_speed=[1.8/1.5/1.0]  mp=620
+  - three_size=79/54/74 / initial_slot=4
+  - BD: 神世七代天地開闢 (arts_id=467)
+    - description: 敵全体に超絶強力な60連ダメージ＆15秒攻撃全体化(減無)
+    - cost=8 / hit_count=60 / value=3.5 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - Vitality_Attack Multiply ×1.8 — 残HPが多いほど攻撃力が大幅にアップ
+    - HitCount Addition +7.951 — 自身の1撃目2撃目3撃目のヒット数を+8する【熟度21,41,60,80,99をそれぞれ超えると+1ずつ効果値UP】
+    - Vitality_MotionSpeed Multiply ×3.0 — 弓矢の味方全体が、残HPが多いほどモーションが絶大に加速(最大3倍)
+    - DamageLimitBreak Addition +1300000000.0 — 自身のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`147201`](weapons.json#L194527) 祈剣マカブイン×ミサ
+  - base_name: 祈剣マカブイン×ミサ (costume: 魔装)
+  - element=光(4) / type=騎槍(8) / rarity=S(3) / cv=山本希望
+  - max stats: HP=8900 / ATK=6800 / DEF=6000 / SPD=28 / BREAK=1200
+  - hit_counts=[3, 3, 6] (3段)  motion_speed=[2.0/2.0/1.2]  mp=273
+  - three_size=気になるなら測ってもいいよ♪ / initial_slot=2
+  - BD: TSUISEKIラヴソングナイト (arts_id=472)
+    - description: 敵全体に超強力な33連ダメージ＆敵を強制ブレイク
+    - cost=6 / hit_count=33 / value=4.12 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.5 — 光属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`147202`](weapons.json#L194684) 祈剣マカブイン×ミサ【極】
+  - base_name: 祈剣マカブイン×ミサ (costume: 極魔装)
+  - element=光(4) / type=騎槍(8) / rarity=S(3) / cv=山本希望
+  - max stats: HP=11570 / ATK=8840 / DEF=7800 / SPD=28 / BREAK=1560
+  - hit_counts=[4, 3, 9] (3段)  motion_speed=[2.0/2.0/1.2]  mp=273
+  - three_size=気になるなら測ってもいいよ♪ / initial_slot=3
+  - BD: TSUISEKIラヴソングナイト (arts_id=472)
+    - description: 敵全体に超強力な33連ダメージ＆敵を強制ブレイク
+    - cost=6 / hit_count=33 / value=4.12 / additional_value=0.0
+  - innate skills (3):
+    - Attack Multiply ×1.75 — 光属性の魔剣の攻撃力が絶大にアップ
+    - Enemy_BreakAttack Multiply ×3.0 — ブレイク時に光属性の魔剣の攻撃力が3倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`147401`](weapons.json#L195360) フラクシヌス=ルクス
+  - base_name: フラクシヌス=ルクス (costume: 魔装)
+  - element=光(4) / type=戦斧(7) / rarity=SS(4) / cv=指出毬亜
+  - max stats: HP=6000 / ATK=21000 / DEF=12000 / SPD=25 / BREAK=6000
+  - hit_counts=[2, 4, 8] (3段)  motion_speed=[2.2/2.0/1.0]  mp=1500
+  - three_size=73/58/75 / initial_slot=4
+  - BD: 最後の晩餐は世界樹の麓で (arts_id=474)
+    - description: 敵全体に超絶強力な13連ダメージ＆与ﾀﾞﾒ分自身HP回復
+    - cost=9 / hit_count=13 / value=18.0 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×3.0 — 魔力が最大まで補給されていないと、怒りで攻撃力3倍UP
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - AllTarget Multiply ×0.8 — 攻撃力はやや下がるが自分の攻撃範囲が敵全体になる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - MaterialExp Multiply ×1.2 — 自身の獲得記憶結晶経験値が1.2倍UP
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`147402`](weapons.json#L195593) フラクシヌス=ルクス【極】
+  - base_name: フラクシヌス=ルクス (costume: 極魔装)
+  - element=光(4) / type=戦斧(7) / rarity=SS(4) / cv=指出毬亜
+  - max stats: HP=10000 / ATK=31000 / DEF=16000 / SPD=25 / BREAK=8000
+  - hit_counts=[3, 4, 11] (3段)  motion_speed=[2.2/2.0/1.0]  mp=1500
+  - three_size=73/58/75 / initial_slot=5
+  - BD: 最後の晩餐は世界樹の麓で (arts_id=474)
+    - description: 敵全体に超絶強力な13連ダメージ＆与ﾀﾞﾒ分自身HP回復
+    - cost=9 / hit_count=13 / value=18.0 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×3.0 — 魔力が最大まで補給されていないと、怒りで攻撃力3倍UP
+    - Vitality_Attack Multiply ×2.55 — 残HPが多いほど攻撃力が超絶大にアップ
+    - AllTarget Multiply ×1.0 — 攻撃力を下げずに自分の攻撃範囲が敵全体になる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - MaterialExp Multiply ×1.2 — 自身の獲得記憶結晶経験値が1.2倍UP
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`148301`](weapons.json#L199261) 未来ヲ斬跋スル刃
+  - base_name: 未来ヲ斬跋スル刃 (costume: 魔装)
+  - element=闇(5) / type=大鎌(12) / rarity=SS(4) / cv=茅野愛衣
+  - max stats: HP=10000 / ATK=20250 / DEF=8000 / SPD=30 / BREAK=9000
+  - hit_counts=[3, 3, 5] (3段)  motion_speed=[2.0/2.0/1.2]  mp=550
+  - three_size=77/60/76 / initial_slot=2
+  - BD: E.O.L.強制終了確定未来 (arts_id=483)
+    - description: 敵全体に超絶強力な50連ダメージ＆数秒だけブレイク力10倍
+    - cost=8 / hit_count=50 / value=4.2 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×1.74232 — 闇属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - InstantDeath Repel_Percent ×100.0 — 闇属性の魔剣が即死特性の攻撃を完全回避
+    - BlazeAbsorb Repel_Percent ×100.0 — 闇属性の魔剣が勇気分解の発生を完全回避
+    - Mez Repel_Percent ×100.0 — 闇属性の魔剣が麻痺の発生を完全回避
+    - Stun Repel_Percent ×100.0 — 闇属性の魔剣がスタンの発生を完全回避する
+    - RateDamage Repel_Percent ×100.0 — 闇属性の魔剣が割合ダメージ攻撃を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`148302`](weapons.json#L199513) 未来ヲ斬跋スル刃【極】
+  - base_name: 未来ヲ斬跋スル刃 (costume: 極魔装)
+  - element=闇(5) / type=大鎌(12) / rarity=SS(4) / cv=茅野愛衣
+  - max stats: HP=13000 / ATK=26330 / DEF=10400 / SPD=30 / BREAK=11700
+  - hit_counts=[4, 3, 8] (3段)  motion_speed=[2.0/2.0/1.2]  mp=550
+  - three_size=77/60/76 / initial_slot=3
+  - BD: E.O.L.強制終了確定未来 (arts_id=483)
+    - description: 敵全体に超絶強力な50連ダメージ＆数秒だけブレイク力10倍
+    - cost=8 / hit_count=50 / value=4.2 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 闇属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - InstantDeath Repel_Percent ×100.0 — 闇属性の魔剣が即死特性の攻撃を完全回避
+    - BlazeAbsorb Repel_Percent ×100.0 — 闇属性の魔剣が勇気分解の発生を完全回避
+    - Mez Repel_Percent ×100.0 — 闇属性の魔剣が麻痺の発生を完全回避
+    - Stun Repel_Percent ×100.0 — 闇属性の魔剣がスタンの発生を完全回避する
+    - RateDamage Repel_Percent ×100.0 — 闇属性の魔剣が割合ダメージ攻撃を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`148701`](weapons.json#L200869) フレスベルグ
+  - base_name: フレスベルグ (costume: 魔装)
+  - element=風(3) / type=大鎌(12) / rarity=SS(4) / cv=金元寿子
+  - max stats: HP=13100 / ATK=8700 / DEF=9800 / SPD=23 / BREAK=1300
+  - hit_counts=[4, 8, 10] (3段)  motion_speed=[2.5/2.0/1.2]  mp=580
+  - three_size=90/56/80 / initial_slot=2
+  - BD: 凶喰ヴァルキュリア･イグノア (arts_id=487)
+    - description: 敵全体に超絶強力な80連ダメージ＆13秒間5000ずつ味方HP回復
+    - cost=8 / hit_count=80 / value=2.7 / additional_value=0.0
+  - innate skills (5):
+    - SuicideAttack Addition +0.0 — 修理時間を絶大に短縮化する
+    - DamageLimitBreak Addition +1000000000.0 — 風属性の魔剣のダメージ上限が10億アップ
+    - MotionSpeed Multiply ×2.33 — 風属性の魔剣の攻撃モーションが絶大に加速
+    - Random_Attack Multiply ×1.5 — 一定の割合で大ダメージが発動
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`148702`](weapons.json#L201083) フレスベルグ【極】
+  - base_name: フレスベルグ (costume: 極魔装)
+  - element=風(3) / type=大鎌(12) / rarity=SS(4) / cv=金元寿子
+  - max stats: HP=17030 / ATK=11310 / DEF=12740 / SPD=23 / BREAK=1690
+  - hit_counts=[5, 8, 13] (3段)  motion_speed=[2.5/2.0/1.2]  mp=580
+  - three_size=90/56/80 / initial_slot=3
+  - BD: 凶喰ヴァルキュリア･イグノア (arts_id=487)
+    - description: 敵全体に超絶強力な80連ダメージ＆13秒間5000ずつ味方HP回復
+    - cost=8 / hit_count=80 / value=2.7 / additional_value=0.0
+  - innate skills (5):
+    - SuicideAttack Addition +0.0 — 修理時間を絶大に短縮化する
+    - DamageLimitBreak Addition +1000000000.0 — 風属性の魔剣のダメージ上限が10億アップ
+    - MotionSpeed Multiply ×2.66 — 風属性の魔剣の攻撃モーションが超絶大に加速
+    - Random_Attack Multiply ×1.5 — かなりの割合で大ダメージが発動
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`149401`](weapons.json#L203442) 天斧セレネ
+  - base_name: 天斧セレネ (costume: 魔装)
+  - element=水(2) / type=戦斧(7) / rarity=SS(4) / cv=河野ひより	
+  - max stats: HP=14000 / ATK=12200 / DEF=14000 / SPD=22 / BREAK=3450
+  - hit_counts=[4, 7, 9] (3段)  motion_speed=[1.5/1.5/1.3]  mp=666
+  - three_size=101/54/86 / initial_slot=2
+  - BD: あなたが落としたのは夜を照らす美しき斧ですか (arts_id=494)
+    - description: 敵全体に超絶強力な33連ダメージ＆15秒攻撃全体化(減無)
+    - cost=6 / hit_count=33 / value=4.75 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×13.0 — 戦斧の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 大剣の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 杖棒の魔剣の攻撃力が13倍アップ
+    - Defense Multiply ×1.5 — 全属性の魔剣の防御力が大幅にアップ
+    - MotionSpeed Multiply ×2.0 — 全属性の魔剣の攻撃モーションが大幅に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`149402`](weapons.json#L203675) 天斧セレネ【極】
+  - base_name: 天斧セレネ (costume: 極魔装)
+  - element=水(2) / type=戦斧(7) / rarity=SS(4) / cv=河野ひより	
+  - max stats: HP=18200 / ATK=15860 / DEF=18200 / SPD=22 / BREAK=4490
+  - hit_counts=[5, 7, 12] (3段)  motion_speed=[1.5/1.5/1.3]  mp=666
+  - three_size=101/54/86 / initial_slot=3
+  - BD: あなたが落としたのは夜を照らす美しき斧ですか (arts_id=494)
+    - description: 敵全体に超絶強力な33連ダメージ＆15秒攻撃全体化(減無)
+    - cost=6 / hit_count=33 / value=4.75 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×13.0 — 戦斧の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 大剣の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 杖棒の魔剣の攻撃力が13倍アップ
+    - Defense Multiply ×1.75 — 全属性の魔剣の防御力が絶大にアップ
+    - MotionSpeed Multiply ×2.33 — 全属性の魔剣の攻撃モーションが絶大に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`150201`](weapons.json#L206910) 神菓王ザッハトルテ
+  - base_name: 神菓王ザッハトルテ (costume: 魔装)
+  - element=闇(5) / type=杖棒(4) / rarity=SS(4) / cv=木野日菜
+  - max stats: HP=12000 / ATK=10000 / DEF=7700 / SPD=22 / BREAK=5000
+  - hit_counts=[2, 4, 10] (3段)  motion_speed=[2.5/2.5/1.1]  mp=832
+  - three_size=66/49/62 / initial_slot=3
+  - BD: ゴッドオブスイーツパラダイス (arts_id=502)
+    - description: 敵全体に超絶強力な200連ダメージ＆味方HP回復
+    - cost=7 / hit_count=200 / value=1.52 / additional_value=0.0
+  - innate skills (6):
+    - Heal Addition +500.0 — 味方全体が、非行動時にHPが徐々に大回復
+    - Vitality_Attack Multiply ×1.69643 — 味方全体が、残HPが多いほど攻撃力が大幅にアップ【熟度UPにつれてさらに効果値UP】
+    - BlazeAttack Multiply ×3.0 — 闇属性の魔剣のB.D.攻撃力が絶大にアップ
+    - BlazeGaugePointRate Multiply ×0.5 — B.D.ｹﾞｰｼﾞの上昇効率2倍
+    - Vitality_MotionSpeed Multiply ×2.33 — 全属性の味方全体が、残HPが多いほどモーション速度が大幅に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`150202`](weapons.json#L207143) 神菓王ザッハトルテ【極】
+  - base_name: 神菓王ザッハトルテ (costume: 極魔装)
+  - element=闇(5) / type=杖棒(4) / rarity=SS(4) / cv=木野日菜
+  - max stats: HP=15600 / ATK=13000 / DEF=10010 / SPD=22 / BREAK=6500
+  - hit_counts=[3, 4, 13] (3段)  motion_speed=[2.5/2.5/1.1]  mp=832
+  - three_size=66/49/62 / initial_slot=4
+  - BD: ゴッドオブスイーツパラダイス (arts_id=502)
+    - description: 敵全体に超絶強力な200連ダメージ＆味方HP回復
+    - cost=7 / hit_count=200 / value=1.52 / additional_value=0.0
+  - innate skills (6):
+    - Heal Addition +500.0 — 味方全体が、非行動時にHPが徐々に大回復
+    - Vitality_Attack Multiply ×1.99643 — 味方全体が、残HPが多いほど攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - BlazeAttack Multiply ×3.5 — 闇属性の魔剣のB.D.攻撃力が超絶大アップ
+    - BlazeGaugePointRate Multiply ×0.5 — B.D.ｹﾞｰｼﾞの上昇効率2倍
+    - Vitality_MotionSpeed Multiply ×2.66 — 全属性の味方全体が、残HPが多いほどモーション速度が絶大に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`150901`](weapons.json#L209873) 禁式･獄刀大包平=ロスト
+  - base_name: 禁式･獄刀大包平=ロスト (costume: 魔装)
+  - element=無(6) / type=太刀(3) / rarity=SS(4) / cv=井澤詩織
+  - max stats: HP=5800 / ATK=23000 / DEF=9120 / SPD=61 / BREAK=3500
+  - hit_counts=[5, 6, 7] (3段)  motion_speed=[1.8/1.5/1.0]  mp=570
+  - three_size=66/53/69 / initial_slot=3
+  - BD: 禁式･有慚満月 (arts_id=509)
+    - description: 敵全体に超絶強力な38連ダメージ＆敵を強制ブレイク＆5秒間時を止める
+    - cost=5 / hit_count=38 / value=3.44 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×2.0 — 自身の攻撃力が2倍アップ
+    - Raise Multiply ×0.03 — 戦闘不能になっても3回HP3%で復活できる
+    - SapphireDrop Multiply ×1.5 — 味方の獲得するサファイアの量が少し増加
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`150902`](weapons.json#L210137) 禁式･獄刀大包平=ロスト【極】
+  - base_name: 禁式･獄刀大包平=ロスト (costume: 極魔装)
+  - element=無(6) / type=太刀(3) / rarity=SS(4) / cv=井澤詩織
+  - max stats: HP=7540 / ATK=29900 / DEF=11860 / SPD=61 / BREAK=4550
+  - hit_counts=[6, 6, 10] (3段)  motion_speed=[1.8/1.5/1.0]  mp=570
+  - three_size=66/53/69 / initial_slot=4
+  - BD: 禁式･有慚満月 (arts_id=509)
+    - description: 敵全体に超絶強力な38連ダメージ＆敵を強制ブレイク＆5秒間時を止める
+    - cost=5 / hit_count=38 / value=3.44 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×2.0 — 自身の攻撃力が2倍アップ
+    - Raise Multiply ×0.03 — 戦闘不能になっても3回HP3%で復活できる
+    - SapphireDrop Multiply ×2.0 — 味方の獲得するサファイアの量がかなり増加
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`151301`](weapons.json#L211647) 白き悪魔ストラーフ
+  - base_name: 白き悪魔ストラーフ (costume: 魔装)
+  - element=光(4) / type=投擲(9) / rarity=S(3) / cv=雨宮夕夏
+  - max stats: HP=11500 / ATK=10900 / DEF=10460 / SPD=18 / BREAK=5240
+  - hit_counts=[1, 2, 1] (3段)  motion_speed=[2.0/1.5/1.0]  mp=230
+  - three_size=見れば分かるでしょっ!? / initial_slot=3
+  - BD: 白き閃光のグラナータ (arts_id=513)
+    - description: 敵全体に超強力な13連ダメージ＆敵を強制ブレイクし、攻撃力+400
+    - cost=5 / hit_count=13 / value=7.4 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×1.5 — 光属性の魔剣の攻撃モーションがかなり加速
+    - Attack Multiply ×1.1 — 光属性の魔剣の攻撃力がアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`151302`](weapons.json#L211835) 白き悪魔ストラーフ【極】
+  - base_name: 白き悪魔ストラーフ (costume: 極魔装)
+  - element=光(4) / type=投擲(9) / rarity=S(3) / cv=雨宮夕夏
+  - max stats: HP=14950 / ATK=14170 / DEF=13600 / SPD=18 / BREAK=6820
+  - hit_counts=[2, 2, 4] (3段)  motion_speed=[2.0/1.5/1.0]  mp=230
+  - three_size=見れば分かるでしょっ!? / initial_slot=4
+  - BD: 白き閃光のグラナータ (arts_id=513)
+    - description: 敵全体に超強力な13連ダメージ＆敵を強制ブレイクし、攻撃力+400
+    - cost=5 / hit_count=13 / value=7.4 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×2.0 — 光属性の魔剣の攻撃モーションが大幅に加速
+    - Attack Multiply ×1.25 — 光属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`151303`](weapons.json#L212023) 白き悪魔ストラーフ【極弐】
+  - base_name: 白き悪魔ストラーフ (costume: 極弐魔装)
+  - element=光(4) / type=投擲(9) / rarity=S(3) / cv=雨宮夕夏
+  - max stats: HP=19440 / ATK=18430 / DEF=17680 / SPD=21 / BREAK=8870
+  - hit_counts=[3, 3, 4] (3段)  motion_speed=[1.8/1.8/1.2]  mp=253
+  - three_size=見れば分かるでしょっ!? / initial_slot=5
+  - BD: 白閃膨張グランデグラナータ (arts_id=10513)
+    - description: 敵全体に超強力な13連ダメージ＆敵を強制ブレイクし、攻撃力+400
+    - cost=5 / hit_count=13 / value=7.4 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×2.33 — 光属性の魔剣の攻撃モーションが絶大に加速
+    - Attack Multiply ×1.5 — 光属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`151401`](weapons.json#L212211) 冷たく輝くアルマース
+  - base_name: 冷たく輝くアルマース (costume: 魔装)
+  - element=水(2) / type=大剣(2) / rarity=SS(4) / cv=岩井映美里
+  - max stats: HP=13050 / ATK=12310 / DEF=12400 / SPD=40 / BREAK=800
+  - hit_counts=[7, 2, 9] (3段)  motion_speed=[2.5/1.8/1.0]  mp=530
+  - three_size=77/58/79 / initial_slot=2
+  - BD: ラ･グラース･ルミエール (arts_id=514)
+    - description: 敵全体に消費ゲージ数に応じた150連ダメージ＆消費ゲージに応じて攻撃力UP＆一瞬だけブレイク力5倍
+    - cost=1 / hit_count=150 / value=0.15 / additional_value=33.0
+  - innate skills (5):
+    - BlazeAttack Multiply ×3.0 — 水属性の魔剣のB.D.攻撃力が絶大にアップ
+    - SapphireDrop Multiply ×1.5 — 自分の獲得するサファイア量が少し増加
+    - BlazeGaugeMaxLevel Addition +6.0 — BDゲージの最大値がかなりアップ
+    - WeaponArtsHitCount Addition +50.0 — 水属性の魔剣のB.D.ヒット数を+50する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`151402`](weapons.json#L212437) 冷たく輝くアルマース【極】
+  - base_name: 冷たく輝くアルマース (costume: 極魔装)
+  - element=水(2) / type=大剣(2) / rarity=SS(4) / cv=岩井映美里
+  - max stats: HP=16970 / ATK=16010 / DEF=16120 / SPD=40 / BREAK=1040
+  - hit_counts=[8, 2, 12] (3段)  motion_speed=[2.5/1.8/1.0]  mp=530
+  - three_size=77/58/79 / initial_slot=3
+  - BD: ラ･グラース･ルミエール (arts_id=514)
+    - description: 敵全体に消費ゲージ数に応じた150連ダメージ＆消費ゲージに応じて攻撃力UP＆一瞬だけブレイク力5倍
+    - cost=1 / hit_count=150 / value=0.15 / additional_value=33.0
+  - innate skills (5):
+    - BlazeAttack Multiply ×3.5 — 水属性の魔剣のB.D.攻撃力が超絶大アップ
+    - SapphireDrop Multiply ×2.0 — 自分の獲得するサファイアの量がかなり増加
+    - BlazeGaugeMaxLevel Addition +8.0 — BDゲージの最大値が大幅にアップ
+    - WeaponArtsHitCount Addition +50.0 — 水属性の魔剣のB.D.ヒット数を+50する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`151701`](weapons.json#L213481) 天煌の焔サクラメント
+  - base_name: 天煌の焔サクラメント (costume: 魔装)
+  - element=火(1) / type=杖棒(4) / rarity=SS(4) / cv=高橋花林
+  - max stats: HP=9000 / ATK=21500 / DEF=9000 / SPD=26 / BREAK=900
+  - hit_counts=[2, 4, 8] (3段)  motion_speed=[2.2/2.0/1.0]  mp=777
+  - three_size=72/55/72 / initial_slot=3
+  - BD: 煌の十天･虚ろなる神の秘跡再演 (arts_id=517)
+    - description: 敵全体に超絶強力な37連ダメージ＆数秒間攻撃力2倍
+    - cost=7 / hit_count=37 / value=5.0 / additional_value=0.0
+  - innate skills (6):
+    - JustGuard_Heal Addition +2000.0 — ジャストガード時に自分のHPを2000回復
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - Vitality_Speed Multiply ×3.5 — 残HPが多いほどスピードが超絶大にアップ
+    - RemHP_Speed Multiply ×0.1 — 味方全体が、残HPが少ないほどスピード超絶大にダウン
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`151702`](weapons.json#L213714) 天煌の焔サクラメント【極】
+  - base_name: 天煌の焔サクラメント (costume: 極魔装)
+  - element=火(1) / type=杖棒(4) / rarity=SS(4) / cv=高橋花林
+  - max stats: HP=11700 / ATK=27950 / DEF=11700 / SPD=26 / BREAK=1170
+  - hit_counts=[3, 4, 11] (3段)  motion_speed=[2.2/2.0/1.0]  mp=777
+  - three_size=72/55/72 / initial_slot=4
+  - BD: 煌の十天･虚ろなる神の秘跡再演 (arts_id=517)
+    - description: 敵全体に超絶強力な37連ダメージ＆数秒間攻撃力2倍
+    - cost=7 / hit_count=37 / value=5.0 / additional_value=0.0
+  - innate skills (6):
+    - JustGuard_Heal Addition +2000.0 — ジャストガード時に自分のHPを2000回復
+    - Vitality_Attack Multiply ×2.55 — 残HPが多いほど攻撃力が超絶大にアップ
+    - Vitality_Speed Multiply ×3.5 — 残HPが多いほどスピードが超絶大にアップ
+    - RemHP_Speed Multiply ×0.1 — 味方全体が、残HPが少ないほどスピード超絶大にダウン
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`152401`](weapons.json#L216209) グレイプニル=ロスト
+  - base_name: グレイプニル=ロスト (costume: 魔装)
+  - element=風(3) / type=大剣(2) / rarity=SS(4) / cv=本渡楓
+  - max stats: HP=16000 / ATK=13000 / DEF=9200 / SPD=39 / BREAK=400
+  - hit_counts=[5, 3, 12] (3段)  motion_speed=[2.0/2.0/1.0]  mp=650
+  - three_size=72/56/76 / initial_slot=3
+  - BD: 天狼神鎖《蒼月世界》 (arts_id=524)
+    - description: 敵全体に超強力な27連ダメージ＆30秒攻撃力30%UP
+    - cost=7 / hit_count=27 / value=6.8 / additional_value=0.0
+  - innate skills (9):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - HitCount Addition +13.0 — 自身の1撃目2撃目3撃目のヒット数を+13する
+    - RemHP_Attack Multiply ×2.25 — 残HPが少ないほど攻撃力が絶大にアップ
+    - InstantDeath Repel_Percent ×50.0 — 即死特性の攻撃を確率で回避する
+    - BlazeAbsorb Repel_Percent ×50.0 — 勇気分解の発生を確率で回避する
+    - Stun Repel_Percent ×50.0 — スタンの発生を確率で回避する
+    - Mez Repel_Percent ×50.0 — 麻痺の発生を確率で回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`152402`](weapons.json#L216499) グレイプニル=ロスト【極】
+  - base_name: グレイプニル=ロスト (costume: 極魔装)
+  - element=風(3) / type=大剣(2) / rarity=SS(4) / cv=本渡楓
+  - max stats: HP=20800 / ATK=16900 / DEF=11960 / SPD=39 / BREAK=520
+  - hit_counts=[6, 3, 15] (3段)  motion_speed=[2.0/2.0/1.0]  mp=650
+  - three_size=72/56/76 / initial_slot=4
+  - BD: 天狼神鎖《蒼月世界》 (arts_id=524)
+    - description: 敵全体に超強力な27連ダメージ＆30秒攻撃力30%UP
+    - cost=7 / hit_count=27 / value=6.8 / additional_value=0.0
+  - innate skills (9):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - HitCount Addition +13.0 — 自身の1撃目2撃目3撃目のヒット数を+13する
+    - RemHP_Attack Multiply ×2.6 — 残HPが少ないほど攻撃力が超絶大にアップ
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - BlazeAbsorb Repel_Percent ×100.0 — 勇気分解の発生を完全回避する
+    - Stun Repel_Percent ×100.0 — スタンの発生を完全回避する
+    - Mez Repel_Percent ×100.0 — 麻痺の発生を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`152701`](weapons.json#L217843) 禁式･三日月宗近=月影
+  - base_name: 禁式･三日月宗近=月影 (costume: 魔装)
+  - element=水(2) / type=太刀(3) / rarity=SS(4) / cv=奥野香耶
+  - max stats: HP=11000 / ATK=21400 / DEF=7000 / SPD=21 / BREAK=700
+  - hit_counts=[3, 3, 8] (3段)  motion_speed=[2.0/2.0/1.2]  mp=627
+  - three_size=78/58/79 / initial_slot=2
+  - BD: 滅宵･烈苛月輪【酷薄】 (arts_id=527)
+    - description: 敵全体に超絶強力な45連ダメージ＆wave中、スピード1.5倍
+    - cost=8 / hit_count=45 / value=4.66667 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×13.0 — 太刀の魔剣の攻撃力が13倍
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - HP Multiply ×1.5 — 全属性の魔剣のHPが大幅にアップ
+    - InstantDeath Repel_Percent ×50.0 — 即死特性の攻撃を確率で回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`152702`](weapons.json#L218057) 禁式･三日月宗近=月影【極】
+  - base_name: 禁式･三日月宗近=月影 (costume: 極魔装)
+  - element=水(2) / type=太刀(3) / rarity=SS(4) / cv=奥野香耶
+  - max stats: HP=14300 / ATK=27820 / DEF=9100 / SPD=21 / BREAK=910
+  - hit_counts=[4, 3, 11] (3段)  motion_speed=[2.0/2.0/1.2]  mp=627
+  - three_size=78/58/79 / initial_slot=3
+  - BD: 滅宵･烈苛月輪【酷薄】 (arts_id=527)
+    - description: 敵全体に超絶強力な45連ダメージ＆wave中、スピード1.5倍
+    - cost=8 / hit_count=45 / value=4.66667 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×13.0 — 太刀の魔剣の攻撃力が13倍
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ
+    - HP Multiply ×1.75 — 全属性の魔剣のHPが絶大にアップ
+    - InstantDeath Repel_Percent ×100.0 — 即死特性の攻撃を完全回避する
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`153201`](weapons.json#L219679) サフィンの篝火
+  - base_name: サフィンの篝火 (costume: 魔装)
+  - element=火(1) / type=弓矢(5) / rarity=SS(4) / cv=首藤志奈
+  - max stats: HP=11000 / ATK=15000 / DEF=7500 / SPD=31 / BREAK=2300
+  - hit_counts=[4, 5, 7] (3段)  motion_speed=[2.0/2.0/1.0]  mp=600
+  - three_size=70/55/67 / initial_slot=2
+  - BD: 融解領域エフェメラルボーダー (arts_id=532)
+    - description: 敵全体に超強力な30連ダメージ＆敵を強制ブレイク
+    - cost=6 / hit_count=30 / value=4.34 / additional_value=0.0
+  - innate skills (7):
+    - RemHP_Attack Multiply ×2.1 — 火属性の味方全体が、残HPが少ないほど攻撃力が絶大にアップ
+    - Attack Multiply ×1.5 — 火属性の魔剣の攻撃力が大幅にアップ
+    - Speed Multiply ×1.5 — 火属性の魔剣の行動速度が大幅にアップ
+    - Vitality_Speed Multiply ×0.005 — 自身の行動速度が超絶大にダウン
+    - RemHP_Speed Multiply ×2.25 — 残HPが少ないほど行動速度が超絶大にアップ(最大2.25倍)
+    - DamageLimitBreak Addition +1000000000.0 — 火属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`153202`](weapons.json#L219931) サフィンの篝火【極】
+  - base_name: サフィンの篝火 (costume: 極魔装)
+  - element=火(1) / type=弓矢(5) / rarity=SS(4) / cv=首藤志奈
+  - max stats: HP=15000 / ATK=20000 / DEF=10000 / SPD=31 / BREAK=3000
+  - hit_counts=[5, 5, 10] (3段)  motion_speed=[2.0/2.0/1.0]  mp=600
+  - three_size=70/55/67 / initial_slot=3
+  - BD: 融解領域エフェメラルボーダー (arts_id=532)
+    - description: 敵全体に超強力な30連ダメージ＆敵を強制ブレイク
+    - cost=6 / hit_count=30 / value=4.34 / additional_value=0.0
+  - innate skills (7):
+    - RemHP_Attack Multiply ×2.4 — 火属性の味方全体が、残HPが少ないほど攻撃力が超絶大にアップ
+    - Attack Multiply ×1.75 — 火属性の魔剣の攻撃力が絶大にアップ
+    - Speed Multiply ×1.75 — 火属性の魔剣の行動速度が絶大にアップ
+    - Vitality_Speed Multiply ×0.005 — 自身の行動速度が超絶大にダウン
+    - RemHP_Speed Multiply ×2.25 — 残HPが少ないほど行動速度が超絶大にアップ(最大2.25倍)
+    - DamageLimitBreak Addition +1000000000.0 — 火属性の魔剣のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`154101`](weapons.json#L223379) 丑王アコ
+  - base_name: 丑王アコ (costume: 魔装)
+  - element=火(1) / type=騎槍(8) / rarity=SS(4) / cv=鬼頭明里
+  - max stats: HP=13000 / ATK=12940 / DEF=10940 / SPD=45 / BREAK=3070
+  - hit_counts=[6, 7, 10] (3段)  motion_speed=[2.0/1.8/1.1]  mp=760
+  - three_size=82/61/79 / initial_slot=3
+  - BD: 招炎喚雷禍にして滅さず (arts_id=541)
+    - description: 敵全体に超強力な34連ダメージ＆敵が数秒だけ世界平和になる
+    - cost=7 / hit_count=34 / value=4.32353 / additional_value=0.0
+  - innate skills (4):
+    - MotionSpeed Multiply ×2.325 — 全属性の魔剣の攻撃モーションが絶大に加速【熟度UPにつれてさらに効果値UP】
+    - Attack Multiply ×7.0 — 自身の攻撃力が7倍にアップ
+    - DamageLimitBreak Addition +3200000000.0 — 自身のダメージ上限が32億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`154102`](weapons.json#L223574) 丑王アコ【極】
+  - base_name: 丑王アコ (costume: 極魔装)
+  - element=火(1) / type=騎槍(8) / rarity=SS(4) / cv=鬼頭明里
+  - max stats: HP=16900 / ATK=16820 / DEF=14230 / SPD=45 / BREAK=4000
+  - hit_counts=[7, 7, 13] (3段)  motion_speed=[2.0/1.8/1.1]  mp=760
+  - three_size=82/61/79 / initial_slot=4
+  - BD: 招炎喚雷禍にして滅さず (arts_id=541)
+    - description: 敵全体に超強力な34連ダメージ＆敵が数秒だけ世界平和になる
+    - cost=7 / hit_count=34 / value=4.32353 / additional_value=0.0
+  - innate skills (4):
+    - MotionSpeed Multiply ×2.652 — 全属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値UP】
+    - Attack Multiply ×7.0 — 自身の攻撃力が7倍にアップ
+    - DamageLimitBreak Addition +3200000000.0 — 自身のダメージ上限が32億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`154301`](weapons.json#L224197) ぎんいろ=ロスト
+  - base_name: ぎんいろ=ロスト (costume: 魔装)
+  - element=水(2) / type=魔典(11) / rarity=SS(4) / cv=山下七海
+  - max stats: HP=10000 / ATK=13800 / DEF=11000 / SPD=45 / BREAK=1300
+  - hit_counts=[9, 8, 13] (3段)  motion_speed=[1.2/1.8/1.0]  mp=620
+  - three_size=70/57/72 / initial_slot=3
+  - BD: 殲滅領域《白銀絶華》 (arts_id=543)
+    - description: 敵全体に超絶強力な92連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=8 / hit_count=92 / value=2.28261 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Defense Multiply ×1.75 — 全属性の魔剣の防御力が絶大にアップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - HitCount Addition +6.0 — 魔典の魔剣の1撃目2撃目3撃目のヒット数を+6する
+    - Speed Multiply ×3.0 — 魔典の魔剣のスピードが3倍アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`154302`](weapons.json#L224449) ぎんいろ=ロスト【極】
+  - base_name: ぎんいろ=ロスト (costume: 極魔装)
+  - element=水(2) / type=魔典(11) / rarity=SS(4) / cv=山下七海
+  - max stats: HP=13000 / ATK=17940 / DEF=14300 / SPD=45 / BREAK=1690
+  - hit_counts=[10, 8, 16] (3段)  motion_speed=[1.2/1.8/1.0]  mp=620
+  - three_size=70/57/72 / initial_slot=4
+  - BD: 殲滅領域《白銀絶華》 (arts_id=543)
+    - description: 敵全体に超絶強力な92連ダメージ＆30秒ﾓｰｼｮﾝ30%高速化
+    - cost=8 / hit_count=92 / value=2.28261 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Defense Multiply ×2.0 — 全属性の魔剣の防御力が超絶大アップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - HitCount Addition +6.0 — 魔典の魔剣の1撃目2撃目3撃目のヒット数を+6する
+    - Speed Multiply ×3.0 — 魔典の魔剣のスピードが3倍アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`155301`](weapons.json#L230905) 聖女グラム=オルタ=ロスト
+  - base_name: 聖女グラム=オルタ=ロスト (costume: 魔装)
+  - element=無(6) / type=騎槍(8) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=10100 / ATK=29000 / DEF=6100 / SPD=37 / BREAK=4000
+  - hit_counts=[3, 3, 5] (3段)  motion_speed=[2.0/2.0/1.2]  mp=710
+  - three_size=72/55/74 / initial_slot=3
+  - BD: 完全世界アインザムカイト (arts_id=553)
+    - description: 敵全体に超絶強力な28連ダメージ＆60秒攻撃力20%UP
+    - cost=9 / hit_count=28 / value=9.75 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×1.5 — 全属性の魔剣の攻撃力が大幅にアップ
+    - Attack Multiply ×13.0 — 大剣の魔剣の攻撃力が13倍
+    - Attack Multiply ×13.0 — 騎槍の魔剣の攻撃力が13倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`155302`](weapons.json#L231138) 聖女グラム=オルタ=ロスト【極】
+  - base_name: 聖女グラム=オルタ=ロスト (costume: 極魔装)
+  - element=無(6) / type=騎槍(8) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=13130 / ATK=37700 / DEF=7930 / SPD=37 / BREAK=5200
+  - hit_counts=[4, 3, 8] (3段)  motion_speed=[2.0/2.0/1.2]  mp=710
+  - three_size=72/55/74 / initial_slot=4
+  - BD: 完全世界アインザムカイト (arts_id=553)
+    - description: 敵全体に超絶強力な28連ダメージ＆60秒攻撃力20%UP
+    - cost=9 / hit_count=28 / value=9.75 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - Attack Multiply ×13.0 — 大剣の魔剣の攻撃力が13倍
+    - Attack Multiply ×13.0 — 騎槍の魔剣の攻撃力が13倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`155801`](weapons.json#L233050) 天冥封エウメニデス
+  - base_name: 天冥封エウメニデス (costume: 魔装)
+  - element=闇(5) / type=拳闘(10) / rarity=SS(4) / cv=藤田茜
+  - max stats: HP=12000 / ATK=17500 / DEF=12500 / SPD=36 / BREAK=2700
+  - hit_counts=[5, 3, 8] (3段)  motion_speed=[1.0/2.0/1.2]  mp=660
+  - three_size=64/50/68 / initial_slot=3
+  - BD: エリーニュスの誘掖と断罪 (arts_id=558)
+    - description: 敵全体に超絶強力な66連ダメージ＆10秒間時を止めて攻撃力2倍
+    - cost=8 / hit_count=66 / value=3.18 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.5 — 拳闘の魔剣の攻撃力が2.5倍アップ
+    - MotionSpeed Multiply ×3.0 — 拳闘の魔剣の攻撃モーションが3倍に加速
+    - GuardBreak Multiply ×1.75 — 全属性の魔剣が絶大にガードブレイクしやすく
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`155802`](weapons.json#L233276) 天冥封エウメニデス【極】
+  - base_name: 天冥封エウメニデス (costume: 極魔装)
+  - element=闇(5) / type=拳闘(10) / rarity=SS(4) / cv=藤田茜
+  - max stats: HP=15600 / ATK=22750 / DEF=16250 / SPD=36 / BREAK=3510
+  - hit_counts=[6, 3, 11] (3段)  motion_speed=[1.0/2.0/1.2]  mp=660
+  - three_size=64/50/68 / initial_slot=4
+  - BD: エリーニュスの誘掖と断罪 (arts_id=558)
+    - description: 敵全体に超絶強力な66連ダメージ＆10秒間時を止めて攻撃力2倍
+    - cost=8 / hit_count=66 / value=3.18 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.5 — 拳闘の魔剣の攻撃力が2.5倍アップ
+    - MotionSpeed Multiply ×3.0 — 拳闘の魔剣の攻撃モーションが3倍に加速
+    - GuardBreak Multiply ×2.0 — 全属性の魔剣が超絶大にガードブレイクしやすく
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`156101`](weapons.json#L234358) 天煌の輝アラストル=リナ
+  - base_name: 天煌の輝アラストル=リナ (costume: 魔装)
+  - element=光(4) / type=長剣(1) / rarity=SS(4) / cv=小岩井ことり
+  - max stats: HP=9000 / ATK=16000 / DEF=9000 / SPD=42 / BREAK=2200
+  - hit_counts=[8, 3, 8] (3段)  motion_speed=[1.5/1.8/1.0]  mp=514
+  - three_size=70/58/72 / initial_slot=2
+  - BD: 煌の十天･歪なる神の降誕再祚 (arts_id=561)
+    - description: 敵全体に超絶強力な26連ダメージ＆敵を強制ブレイク
+    - cost=3 / hit_count=26 / value=3.0 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×1.74232 — 光属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×1.75 — 光属性の魔剣が絶大にガードブレイクしやすく
+    - Vitality_Attack Multiply ×2.0 — 光属性の味方全体が、残HPが多いほど攻撃力が絶大にアップ
+    - PlayerHit Multiply ×1.3 — 光属性の魔剣の命中率がアップ
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に光属性の魔剣の攻撃力が3.5倍アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`156102`](weapons.json#L234591) 天煌の輝アラストル=リナ【極】
+  - base_name: 天煌の輝アラストル=リナ (costume: 極魔装)
+  - element=光(4) / type=長剣(1) / rarity=SS(4) / cv=小岩井ことり
+  - max stats: HP=11700 / ATK=20800 / DEF=11700 / SPD=42 / BREAK=2860
+  - hit_counts=[9, 3, 11] (3段)  motion_speed=[1.5/1.8/1.0]  mp=514
+  - three_size=70/58/72 / initial_slot=3
+  - BD: 煌の十天･歪なる神の降誕再祚 (arts_id=561)
+    - description: 敵全体に超絶強力な26連ダメージ＆敵を強制ブレイク
+    - cost=3 / hit_count=26 / value=3.0 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×2.0 — 光属性の魔剣が超絶大にガードブレイクしやすく
+    - Vitality_Attack Multiply ×2.3 — 光属性の味方全体が、残HPが多いほど攻撃力が超絶大にアップ
+    - PlayerHit Multiply ×1.3 — 光属性の魔剣の命中率がアップ
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に光属性の魔剣の攻撃力が3.5倍アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`156401`](weapons.json#L235704) 天冥杖ハデス=ロスト
+  - base_name: 天冥杖ハデス=ロスト (costume: 魔装)
+  - element=闇(5) / type=連弩(6) / rarity=SS(4) / cv=大野柚布子
+  - max stats: HP=10500 / ATK=20000 / DEF=12500 / SPD=44 / BREAK=1500
+  - hit_counts=[4, 3, 10] (3段)  motion_speed=[2.0/1.8/1.2]  mp=444
+  - three_size=60/47/65 / initial_slot=3
+  - BD: 凡テハ儚キ四季衰滅 (arts_id=564)
+    - description: 敵全体に超強力な44連ダメージ＆数秒だけ攻撃力44%UP
+    - cost=6 / hit_count=44 / value=2.96 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - AllTarget Multiply ×0.8 — 攻撃力はやや下がるが自分の攻撃範囲が敵全体になる
+    - BlazeGaugeMaxLevel Addition +6.0 — BDゲージの最大値がかなりアップ
+    - AnyElement Multiply ×1.0 — 無属性を対象とした他魔剣からのスキル効果を受けられる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`156402`](weapons.json#L235956) 天冥杖ハデス=ロスト【極】
+  - base_name: 天冥杖ハデス=ロスト (costume: 極魔装)
+  - element=闇(5) / type=連弩(6) / rarity=SS(4) / cv=大野柚布子
+  - max stats: HP=13650 / ATK=26000 / DEF=16250 / SPD=44 / BREAK=1950
+  - hit_counts=[5, 3, 13] (3段)  motion_speed=[2.0/1.8/1.2]  mp=444
+  - three_size=60/47/65 / initial_slot=4
+  - BD: 凡テハ儚キ四季衰滅 (arts_id=564)
+    - description: 敵全体に超強力な44連ダメージ＆数秒だけ攻撃力44%UP
+    - cost=6 / hit_count=44 / value=2.96 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - AllTarget Multiply ×1.0 — 攻撃力を下げずに自分の攻撃範囲が敵全体になる
+    - BlazeGaugeMaxLevel Addition +8.0 — BDゲージの最大値が大幅にアップ
+    - AnyElement Multiply ×1.0 — 無属性を対象とした他魔剣からのスキル効果を受けられる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`156601`](weapons.json#L236670) マトリカリア
+  - base_name: マトリカリア (costume: 魔装)
+  - element=水(2) / type=大鎌(12) / rarity=SS(4) / cv=富田美憂
+  - max stats: HP=10200 / ATK=12900 / DEF=9000 / SPD=30 / BREAK=6200
+  - hit_counts=[2, 5, 7] (3段)  motion_speed=[3.0/2.2/1.1]  mp=460
+  - three_size=60/55/67 / initial_slot=2
+  - BD: 少女劇毒【Paralytic Girlish Poison】 (arts_id=566)
+    - description: 敵全体に超絶強力な40連ダメージ＆敵を数秒だけ麻痺
+    - cost=7 / hit_count=40 / value=4.6 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×13.0 — 大鎌の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 戦斧の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 拳闘の魔剣の攻撃力が13倍アップ
+    - HP Multiply ×1.5 — 全属性の魔剣のHPが大幅にアップ
+    - MotionSpeed Multiply ×2.0 — 全属性の魔剣の攻撃モーションが大幅に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`156602`](weapons.json#L236903) マトリカリア【極】
+  - base_name: マトリカリア (costume: 極魔装)
+  - element=水(2) / type=大鎌(12) / rarity=SS(4) / cv=富田美憂
+  - max stats: HP=13260 / ATK=16770 / DEF=11700 / SPD=30 / BREAK=8060
+  - hit_counts=[3, 5, 10] (3段)  motion_speed=[3.0/2.2/1.1]  mp=460
+  - three_size=60/55/67 / initial_slot=3
+  - BD: 少女劇毒【Paralytic Girlish Poison】 (arts_id=566)
+    - description: 敵全体に超絶強力な40連ダメージ＆敵を数秒だけ麻痺
+    - cost=7 / hit_count=40 / value=4.6 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×13.0 — 大鎌の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 戦斧の魔剣の攻撃力が13倍アップ
+    - Attack Multiply ×13.0 — 拳闘の魔剣の攻撃力が13倍アップ
+    - HP Multiply ×1.75 — 全属性の魔剣のHPが絶大にアップ
+    - MotionSpeed Multiply ×2.33 — 全属性の魔剣の攻撃モーションが絶大に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`157001`](weapons.json#L238382) 麒麟円文螺鈿白櫃
+  - base_name: 麒麟円文螺鈿白櫃 (costume: 魔装)
+  - element=無(6) / type=魔典(11) / rarity=SS(4) / cv=近藤玲奈
+  - max stats: HP=13500 / ATK=14840 / DEF=10400 / SPD=41 / BREAK=3850
+  - hit_counts=[5, 5, 9] (3段)  motion_speed=[1.8/1.8/1.0]  mp=540
+  - three_size=93/59/82 / initial_slot=3
+  - BD: 欠して刎ねぬ彩大限の棺たれ (arts_id=570)
+    - description: 敵全体に超強力な49連ダメージ＆味方HP回復
+    - cost=8 / hit_count=49 / value=2.95 / additional_value=0.0
+  - innate skills (4):
+    - HitCount Addition +4.0 — 全属性の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - Speed Multiply ×1.75 — 全属性の魔剣の行動速度が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`157002`](weapons.json#L238577) 麒麟円文螺鈿白櫃【極】
+  - base_name: 麒麟円文螺鈿白櫃 (costume: 極魔装)
+  - element=無(6) / type=魔典(11) / rarity=SS(4) / cv=近藤玲奈
+  - max stats: HP=17550 / ATK=19300 / DEF=13520 / SPD=41 / BREAK=5010
+  - hit_counts=[6, 5, 12] (3段)  motion_speed=[1.8/1.8/1.0]  mp=540
+  - three_size=93/59/82 / initial_slot=4
+  - BD: 欠して刎ねぬ彩大限の棺たれ (arts_id=570)
+    - description: 敵全体に超強力な49連ダメージ＆味方HP回復
+    - cost=8 / hit_count=49 / value=2.95 / additional_value=0.0
+  - innate skills (4):
+    - HitCount Addition +4.0 — 全属性の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ
+    - Speed Multiply ×2.0 — 全属性の魔剣の行動速度が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`157201`](weapons.json#L239200) バロックフロート
+  - base_name: バロックフロート (costume: 魔装)
+  - element=光(4) / type=杖棒(4) / rarity=S(3) / cv=天城サリー
+  - max stats: HP=6600 / ATK=2900 / DEF=7700 / SPD=31 / BREAK=700
+  - hit_counts=[4, 6, 10] (3段)  motion_speed=[2.5/2.5/1.1]  mp=222
+  - three_size=フラウの方が大きいよ/57/80 / initial_slot=2
+  - BD: 極激の旋律【ディ･モルト･ヴィヴァーチェ】 (arts_id=572)
+    - description: 敵全体に超強力な76連ダメージ＆30秒ブレイク力1.3倍
+    - cost=7 / hit_count=76 / value=1.66 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×2.0 — 光属性の魔剣の攻撃モーションが大幅に加速
+    - MotionSpeed Multiply ×1.3 — 光属性の魔剣の攻撃モーションが加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`157202`](weapons.json#L239376) バロックフロート【極】
+  - base_name: バロックフロート (costume: 極魔装)
+  - element=光(4) / type=杖棒(4) / rarity=S(3) / cv=天城サリー
+  - max stats: HP=8580 / ATK=3770 / DEF=10010 / SPD=31 / BREAK=910
+  - hit_counts=[5, 6, 13] (3段)  motion_speed=[2.5/2.5/1.1]  mp=222
+  - three_size=フラウの方が大きいよ/57/80 / initial_slot=3
+  - BD: 極激の旋律【ディ･モルト･ヴィヴァーチェ】 (arts_id=572)
+    - description: 敵全体に超強力な76連ダメージ＆30秒ブレイク力1.3倍
+    - cost=7 / hit_count=76 / value=1.66 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×2.33 — 光属性の魔剣の攻撃モーションが絶大に加速
+    - MotionSpeed Multiply ×1.5 — 光属性の魔剣の攻撃モーションがかなり加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`157203`](weapons.json#L239552) バロックフロート【極弐】
+  - base_name: バロックフロート (costume: 極弐魔装)
+  - element=光(4) / type=杖棒(4) / rarity=S(3) / cv=天城サリー
+  - max stats: HP=11160 / ATK=5470 / DEF=13020 / SPD=34 / BREAK=1190
+  - hit_counts=[6, 7, 13] (3段)  motion_speed=[2.5/2.5/1.1]  mp=244
+  - three_size=フラウの方が大きいよ/57/80 / initial_slot=4
+  - BD: 響心の協奏【ヴィヴァーチェ・コン・フオーコ】 (arts_id=10572)
+    - description: 敵全体に超強力な76連ダメージ＆30秒ブレイク力1.3倍
+    - cost=7 / hit_count=76 / value=1.66 / additional_value=0.0
+  - innate skills (3):
+    - MotionSpeed Multiply ×2.33 — 光属性の魔剣の攻撃モーションが絶大に加速
+    - MotionSpeed Multiply ×2.0 — 光属性の魔剣の攻撃モーションが大幅に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`157701`](weapons.json#L241364) 魔剣グラム:Blaze
+  - base_name: 魔剣グラム:Blaze (costume: 魔装)
+  - element=火(1) / type=大剣(2) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=14600 / ATK=22000 / DEF=6600 / SPD=31 / BREAK=1000
+  - hit_counts=[5, 2, 17] (3段)  motion_speed=[2.2/2.0/1.2]  mp=1200
+  - three_size=72/55/73 / initial_slot=4
+  - BD: 焔獄世界ライデンシャフト (arts_id=577)
+    - description: 敵全体に消費ゲージ数に応じた88連ダメージ＆10秒間サファイア量2倍
+    - cost=1 / hit_count=88 / value=0.15 / additional_value=39.0
+  - innate skills (6):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - HitCount Addition +4.0 — 火属性の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - Attack Multiply ×2.5 — 自身の攻撃力が2.5倍アップ
+    - GuardBreak Multiply ×2.5 — 自身のブレイク力が2.5倍アップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`157702`](weapons.json#L241597) 魔剣グラム:Blaze【極】
+  - base_name: 魔剣グラム:Blaze (costume: 極魔装)
+  - element=火(1) / type=大剣(2) / rarity=SS(4) / cv=日高里菜
+  - max stats: HP=18980 / ATK=28600 / DEF=8580 / SPD=31 / BREAK=1300
+  - hit_counts=[6, 2, 20] (3段)  motion_speed=[2.2/2.0/1.2]  mp=1200
+  - three_size=72/55/73 / initial_slot=5
+  - BD: 焔獄世界ライデンシャフト (arts_id=577)
+    - description: 敵全体に消費ゲージ数に応じた88連ダメージ＆10秒間サファイア量2倍
+    - cost=1 / hit_count=88 / value=0.15 / additional_value=39.0
+  - innate skills (6):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - HitCount Addition +4.0 — 火属性の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - Attack Multiply ×2.5 — 自身の攻撃力が2.5倍アップ
+    - GuardBreak Multiply ×2.5 — 自身のブレイク力が2.5倍アップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`158201`](weapons.json#L243504) 妖刀ムラマサ=ロスト
+  - base_name: 妖刀ムラマサ=ロスト (costume: 魔装)
+  - element=水(2) / type=弓矢(5) / rarity=SS(4) / cv=潘めぐみ
+  - max stats: HP=18600 / ATK=8600 / DEF=12800 / SPD=26 / BREAK=880
+  - hit_counts=[6, 9, 17] (3段)  motion_speed=[2.0/1.6/1.0]  mp=668
+  - three_size=76/55/73 / initial_slot=2
+  - BD: 夢幻ノ紐帯《天獄桜雨》 (arts_id=582)
+    - description: 敵全体に超絶強力な66連ダメージ＆数秒間防御力3倍
+    - cost=9 / hit_count=66 / value=4.14 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 水属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 水属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - SapphireDrop Multiply ×0.3 — 味方全体の獲得するサファイア量が絶大に減少
+    - Attack Multiply ×13.0 — 太刀の魔剣の攻撃力が13倍
+    - Attack Multiply ×13.0 — 弓矢の魔剣の攻撃力が13倍
+    - Attack Multiply ×13.0 — 杖棒の魔剣の攻撃力が13倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`158202`](weapons.json#L243756) 妖刀ムラマサ=ロスト【極】
+  - base_name: 妖刀ムラマサ=ロスト (costume: 極魔装)
+  - element=水(2) / type=弓矢(5) / rarity=SS(4) / cv=潘めぐみ
+  - max stats: HP=24180 / ATK=11180 / DEF=16640 / SPD=26 / BREAK=1150
+  - hit_counts=[7, 9, 20] (3段)  motion_speed=[2.0/1.6/1.0]  mp=668
+  - three_size=76/55/73 / initial_slot=3
+  - BD: 夢幻ノ紐帯《天獄桜雨》 (arts_id=582)
+    - description: 敵全体に超絶強力な66連ダメージ＆数秒間防御力3倍
+    - cost=9 / hit_count=66 / value=4.14 / additional_value=0.0
+  - innate skills (7):
+    - Attack Multiply ×2.0 — 水属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 水属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - SapphireDrop Multiply ×0.3 — 味方全体の獲得するサファイア量が絶大に減少
+    - Attack Multiply ×13.0 — 太刀の魔剣の攻撃力が13倍
+    - Attack Multiply ×13.0 — 弓矢の魔剣の攻撃力が13倍
+    - Attack Multiply ×13.0 — 杖棒の魔剣の攻撃力が13倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`158701`](weapons.json#L245397) 緋剣ブロードソード=ロスト
+  - base_name: 緋剣ブロードソード=ロスト (costume: 魔装)
+  - element=火(1) / type=長剣(1) / rarity=SS(4) / cv=市川ひかる
+  - max stats: HP=13800 / ATK=12000 / DEF=6200 / SPD=25 / BREAK=3400
+  - hit_counts=[7, 4, 5] (3段)  motion_speed=[2.0/1.8/1.0]  mp=560
+  - three_size=83/58/83 / initial_slot=3
+  - BD: 刻閃･ヘルエンズディヴェイト (arts_id=587)
+    - description: 敵全体に超強力な31連ダメージ＆20秒間攻撃力と防御力30%UP
+    - cost=6 / hit_count=31 / value=4.5 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に火属性の魔剣の攻撃力が3.5倍アップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`158702`](weapons.json#L245623) 緋剣ブロードソード=ロスト【極】
+  - base_name: 緋剣ブロードソード=ロスト (costume: 極魔装)
+  - element=火(1) / type=長剣(1) / rarity=SS(4) / cv=市川ひかる
+  - max stats: HP=17940 / ATK=15600 / DEF=8060 / SPD=25 / BREAK=4420
+  - hit_counts=[8, 4, 8] (3段)  motion_speed=[2.0/1.8/1.0]  mp=560
+  - three_size=83/58/83 / initial_slot=4
+  - BD: 刻閃･ヘルエンズディヴェイト (arts_id=587)
+    - description: 敵全体に超強力な31連ダメージ＆20秒間攻撃力と防御力30%UP
+    - cost=6 / hit_count=31 / value=4.5 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に火属性の魔剣の攻撃力が3.5倍アップ
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`159001`](weapons.json#L246705) 名刀･大包平:Blaze
+  - base_name: 名刀･大包平:Blaze (costume: 魔装)
+  - element=風(3) / type=太刀(3) / rarity=SS(4) / cv=井澤詩織
+  - max stats: HP=14900 / ATK=19400 / DEF=6900 / SPD=44 / BREAK=1050
+  - hit_counts=[4, 4, 11] (3段)  motion_speed=[2.0/2.0/1.2]  mp=970
+  - three_size=67/53/69 / initial_slot=3
+  - BD: 至伝一閃 -Blaze of Legend- (arts_id=590)
+    - description: 敵全体に超絶強力な190連ダメージ＆2waveヒット数がそれぞれ+3＆30秒間時を止める
+    - cost=9 / hit_count=190 / value=2.1 / additional_value=0.0
+  - innate skills (6):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - RemHP_Attack Multiply ×4.0 — 残HPが少ないほど攻撃力アップ(最大4倍)
+    - Raise Multiply ×0.03 — 戦闘不能になっても5回HP3%で復活できる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - MotionSpeed Multiply ×2.33 — 風属性の魔剣の攻撃モーションが絶大に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`159002`](weapons.json#L246950) 名刀･大包平:Blaze【極】
+  - base_name: 名刀･大包平:Blaze (costume: 極魔装)
+  - element=風(3) / type=太刀(3) / rarity=SS(4) / cv=井澤詩織
+  - max stats: HP=19370 / ATK=25220 / DEF=8970 / SPD=44 / BREAK=1370
+  - hit_counts=[5, 4, 14] (3段)  motion_speed=[2.0/2.0/1.2]  mp=970
+  - three_size=67/53/69 / initial_slot=4
+  - BD: 至伝一閃 -Blaze of Legend- (arts_id=590)
+    - description: 敵全体に超絶強力な190連ダメージ＆2waveヒット数がそれぞれ+3＆30秒間時を止める
+    - cost=9 / hit_count=190 / value=2.1 / additional_value=0.0
+  - innate skills (6):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - RemHP_Attack Multiply ×4.0 — 残HPが少ないほど攻撃力アップ(最大4倍)
+    - Raise Multiply ×0.03 — 戦闘不能になっても5回HP3%で復活できる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - MotionSpeed Multiply ×2.66 — 風属性の魔剣の攻撃モーションが超絶大に加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`159401`](weapons.json#L248099) マタゴット=ノラ
+  - base_name: マタゴット=ノラ (costume: 魔装)
+  - element=風(3) / type=投擲(9) / rarity=SS(4) / cv=星谷美緒
+  - max stats: HP=11200 / ATK=15200 / DEF=12000 / SPD=26 / BREAK=2600
+  - hit_counts=[2, 4, 14] (3段)  motion_speed=[2.0/1.8/1.4]  mp=560
+  - three_size=99/58/84 / initial_slot=2
+  - BD: メタモルキャットパラダイム (arts_id=594)
+    - description: 敵全体に超絶強力な54連ダメージ＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度とスピードが30倍
+    - cost=8 / hit_count=54 / value=3.89 / additional_value=0.0
+  - innate skills (5):
+    - MotionSpeed Multiply ×2.325 — 風属性の魔剣の攻撃モーションが絶大に加速【熟度UPにつれてさらに効果値UP】
+    - Speed Multiply ×1.75 — 風属性の魔剣の行動速度が絶大にアップ
+    - GuardBreak Multiply ×1.25 — 風属性の魔剣がかなりガードブレイクしやすく
+    - Attack Multiply ×1.25 — 風属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`159402`](weapons.json#L248337) マタゴット=ノラ【極】
+  - base_name: マタゴット=ノラ (costume: 極魔装)
+  - element=風(3) / type=投擲(9) / rarity=SS(4) / cv=星谷美緒
+  - max stats: HP=14560 / ATK=19760 / DEF=15600 / SPD=26 / BREAK=3380
+  - hit_counts=[3, 4, 17] (3段)  motion_speed=[2.0/1.8/1.4]  mp=560
+  - three_size=99/58/84 / initial_slot=3
+  - BD: メタモルキャットパラダイム (arts_id=594)
+    - description: 敵全体に超絶強力な54連ダメージ＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度とスピードが30倍
+    - cost=8 / hit_count=54 / value=3.89 / additional_value=0.0
+  - innate skills (5):
+    - MotionSpeed Multiply ×2.652 — 風属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値UP】
+    - Speed Multiply ×2.0 — 風属性の魔剣の行動速度が超絶大アップ
+    - GuardBreak Multiply ×1.5 — 風属性の魔剣が大幅にガードブレイクしやすく
+    - Attack Multiply ×1.5 — 風属性の魔剣の攻撃力が大幅にアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`159701`](weapons.json#L249393) 清香のカモミール
+  - base_name: 清香のカモミール (costume: 魔装)
+  - element=風(3) / type=大鎌(12) / rarity=SS(4) / cv=山崎エリイ
+  - max stats: HP=14400 / ATK=19700 / DEF=11800 / SPD=29 / BREAK=2300
+  - hit_counts=[5, 2, 6] (3段)  motion_speed=[2.2/2.0/1.1]  mp=450
+  - three_size=70/52/68 / initial_slot=3
+  - BD: 少女偶話【Paralyze Idola Basil-Risk】 (arts_id=597)
+    - description: 敵全体に超絶強力な39連ダメージ＆敵を数秒だけ麻痺させて味方のHP回復
+    - cost=9 / hit_count=39 / value=7.0 / additional_value=0.0
+  - innate skills (6):
+    - WeaponArtsCost Addition +-2.0 — 戦闘時に編成魔剣全てのB.D.コストを-2
+    - WeaponArtsHitCount Addition +20.0 — 味方全体のB.D.ヒット数が＋20
+    - WeaponArtsHitCount Multiply ×1.5 — 味方全体のB.D.ヒット数がさらに50%アップ
+    - MotionSpeed Multiply ×2.325 — 全属性の魔剣の攻撃モーションが絶大に加速【熟度UPにつれてさらに効果値UP】
+    - SapphireDrop Multiply ×1.5 — 自分の獲得するサファイア量が少し増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`159702`](weapons.json#L249638) 清香のカモミール【極】
+  - base_name: 清香のカモミール (costume: 極魔装)
+  - element=風(3) / type=大鎌(12) / rarity=SS(4) / cv=山崎エリイ
+  - max stats: HP=18720 / ATK=25610 / DEF=15340 / SPD=29 / BREAK=2990
+  - hit_counts=[6, 2, 9] (3段)  motion_speed=[2.2/2.0/1.1]  mp=450
+  - three_size=70/52/68 / initial_slot=4
+  - BD: 少女偶話【Paralyze Idola Basil-Risk】 (arts_id=597)
+    - description: 敵全体に超絶強力な39連ダメージ＆敵を数秒だけ麻痺させて味方のHP回復
+    - cost=9 / hit_count=39 / value=7.0 / additional_value=0.0
+  - innate skills (6):
+    - WeaponArtsCost Addition +-2.0 — 戦闘時に編成魔剣全てのB.D.コストを-2
+    - WeaponArtsHitCount Addition +20.0 — 味方全体のB.D.ヒット数が＋20
+    - WeaponArtsHitCount Multiply ×1.5 — 味方全体のB.D.ヒット数がさらに50%アップ
+    - MotionSpeed Multiply ×2.652 — 全属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値UP】
+    - SapphireDrop Multiply ×2.0 — 自分の獲得するサファイアの量がかなり増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`160101`](weapons.json#L250711) イミティション=サタニア
+  - base_name: イミティション=サタニア (costume: 魔装)
+  - element=風(3) / type=長剣(1) / rarity=SS(4) / cv=長縄まりあ
+  - max stats: HP=18600 / ATK=16000 / DEF=8800 / SPD=48 / BREAK=3600
+  - hit_counts=[2, 2, 3] (3段)  motion_speed=[1.7/1.8/1.1]  mp=820
+  - three_size=76/55/78 / initial_slot=3
+  - BD: 荒ぶる土塊の祈り【クレイドール･パイエティ】 (arts_id=601)
+    - description: 敵全体に超強力な62連ダメージ＆30秒間、自身のHPが徐々に回復
+    - cost=6 / hit_count=62 / value=2.1 / additional_value=0.0
+  - innate skills (7):
+    - HitCount Addition +9.951 — 自身の1撃目2撃目3撃目のヒット数を+10する【熟度21,41,60,80,99をそれぞれ超えると+1ずつ効果値UP】
+    - Vitality_MotionSpeed Multiply ×2.66 — 残HPが多いほどモーション速度が超絶大に加速(最大2.66倍)【熟度UPで効果値が大幅UP(最大3.9倍)】
+    - Vitality_Attack Multiply ×3.0 — 長剣の味方全体が、残HPが多いほど攻撃力がアップ(最大3倍)
+    - Heal Addition +200.0 — 非行動時に自身のHPが徐々に回復
+    - Enemy_BreakAttack Multiply ×2.5 — ブレイク時に長剣の魔剣の攻撃力が2.5倍
+    - DamageLimitBreak Addition +1300000000.0 — 自身のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`160102`](weapons.json#L250963) イミティション=サタニア【極】
+  - base_name: イミティション=サタニア (costume: 極魔装)
+  - element=風(3) / type=長剣(1) / rarity=SS(4) / cv=長縄まりあ
+  - max stats: HP=24180 / ATK=20800 / DEF=11440 / SPD=48 / BREAK=4680
+  - hit_counts=[2, 3, 6] (3段)  motion_speed=[1.7/1.8/1.1]  mp=820
+  - three_size=76/55/78 / initial_slot=4
+  - BD: 荒ぶる土塊の祈り【クレイドール･パイエティ】 (arts_id=601)
+    - description: 敵全体に超強力な62連ダメージ＆30秒間、自身のHPが徐々に回復
+    - cost=6 / hit_count=62 / value=2.1 / additional_value=0.0
+  - innate skills (7):
+    - HitCount Addition +9.951 — 自身の1撃目2撃目3撃目のヒット数を+10する【熟度21,41,60,80,99をそれぞれ超えると+1ずつ効果値UP】
+    - Vitality_MotionSpeed Multiply ×2.66 — 残HPが多いほどモーション速度が超絶大に加速(最大2.66倍)【熟度UPで効果値が大幅UP(最大3.9倍)】
+    - Vitality_Attack Multiply ×3.0 — 長剣の味方全体が、残HPが多いほど攻撃力がアップ(最大3倍)
+    - Heal Addition +200.0 — 非行動時に自身のHPが徐々に回復
+    - Enemy_BreakAttack Multiply ×2.5 — ブレイク時に長剣の魔剣の攻撃力が2.5倍
+    - DamageLimitBreak Addition +1300000000.0 — 自身のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`160201`](weapons.json#L251215) 聖邪剣クラレント:Blaze
+  - base_name: 聖邪剣クラレント:Blaze (costume: 魔装)
+  - element=光(4) / type=大剣(2) / rarity=SS(4) / cv=長江里加
+  - max stats: HP=17690 / ATK=22000 / DEF=6150 / SPD=28 / BREAK=5800
+  - hit_counts=[3, 5, 9] (3段)  motion_speed=[2.0/2.0/1.0]  mp=1300
+  - three_size=100/63/82 / initial_slot=3
+  - BD: EVIL BLAZE《凱旋せし仇約の煌》 (arts_id=602)
+    - description: 敵全体に消費ゲージ数に応じた100連ダメージ＆20秒間ﾓｰｼｮﾝ速度2倍＆敵を強制ブレイク
+    - cost=5 / hit_count=100 / value=0.9 / additional_value=20.0
+  - innate skills (5):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - DamageLimitBreak Addition +1500000000.0 — 自身のダメージ上限が15億アップ【熟度UPにつれてさらに効果値がUP】
+    - Vitality_Attack Multiply ×3.0 — 残HPが多いほど攻撃力がアップ(最大3倍)
+    - Enemy_BreakAttack Multiply ×7.0 — ブレイク時に自身の攻撃力が7倍アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`160202`](weapons.json#L251441) 聖邪剣クラレント:Blaze【極】
+  - base_name: 聖邪剣クラレント:Blaze (costume: 極魔装)
+  - element=光(4) / type=大剣(2) / rarity=SS(4) / cv=長江里加
+  - max stats: HP=23000 / ATK=28600 / DEF=8000 / SPD=28 / BREAK=7540
+  - hit_counts=[4, 5, 12] (3段)  motion_speed=[2.0/2.0/1.0]  mp=1300
+  - three_size=100/63/82 / initial_slot=4
+  - BD: EVIL BLAZE《凱旋せし仇約の煌》 (arts_id=602)
+    - description: 敵全体に消費ゲージ数に応じた100連ダメージ＆20秒間ﾓｰｼｮﾝ速度2倍＆敵を強制ブレイク
+    - cost=5 / hit_count=100 / value=0.9 / additional_value=20.0
+  - innate skills (5):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - DamageLimitBreak Addition +1500000000.0 — 自身のダメージ上限が15億アップ【熟度UPにつれてさらに効果値がUP】
+    - Vitality_Attack Multiply ×3.0 — 残HPが多いほど攻撃力がアップ(最大3倍)
+    - Enemy_BreakAttack Multiply ×7.0 — ブレイク時に自身の攻撃力が7倍アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`160401`](weapons.json#L252133) 夢幻クロウリー
+  - base_name: 夢幻クロウリー (costume: 魔装)
+  - element=火(1) / type=魔典(11) / rarity=S(3) / cv=若山詩音
+  - max stats: HP=8600 / ATK=8800 / DEF=4200 / SPD=37 / BREAK=1400
+  - hit_counts=[2, 4, 6] (3段)  motion_speed=[2.0/2.0/1.3]  mp=360
+  - three_size=75/58/77 / initial_slot=3
+  - BD: グランド･ナイト･イリュージョン (arts_id=604)
+    - description: 敵全体に超強力な55連ダメージ＆1waveサファイア量1.3倍
+    - cost=5 / hit_count=55 / value=1.8 / additional_value=0.0
+  - innate skills (3):
+    - HitCount Addition +3.0 — 火属性の魔剣の1撃目2撃目3撃目のヒット数を+3する
+    - RubyDrop Multiply ×2.0 — 味方が攻撃した時のルビーの量がかなり増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`160402`](weapons.json#L252309) 夢幻クロウリー【極】
+  - base_name: 夢幻クロウリー (costume: 極魔装)
+  - element=火(1) / type=魔典(11) / rarity=S(3) / cv=若山詩音
+  - max stats: HP=11180 / ATK=11440 / DEF=5460 / SPD=37 / BREAK=1820
+  - hit_counts=[3, 4, 9] (3段)  motion_speed=[2.0/2.0/1.3]  mp=360
+  - three_size=75/58/77 / initial_slot=4
+  - BD: グランド･ナイト･イリュージョン (arts_id=604)
+    - description: 敵全体に超強力な55連ダメージ＆1waveサファイア量1.3倍
+    - cost=5 / hit_count=55 / value=1.8 / additional_value=0.0
+  - innate skills (3):
+    - HitCount Addition +4.0 — 火属性の魔剣の1撃目2撃目3撃目のヒット数を+4する
+    - RubyDrop Multiply ×3.0 — 味方が攻撃した時のルビーの量が大幅に増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`160601`](weapons.json#L252875) 司書王使･吽形
+  - base_name: 司書王使･吽形 (costume: 魔装)
+  - element=闇(5) / type=太刀(3) / rarity=S(3) / cv=白砂沙帆
+  - max stats: HP=9470 / ATK=7340 / DEF=6620 / SPD=30 / BREAK=1670
+  - hit_counts=[6, 4, 2] (3段)  motion_speed=[2.0/2.0/1.2]  mp=230
+  - three_size=68/53/74 / initial_slot=2
+  - BD: 吽形終擊･阿吽之太刀 (arts_id=606)
+    - description: 敵全体に超強力な43連ダメージ＆一瞬だけ敵の動きを止める
+    - cost=5 / hit_count=43 / value=2.5 / additional_value=0.0
+  - innate skills (5):
+    - MotionSpeed Multiply ×1.995 — 全属性の魔剣の攻撃モーションが大幅に加速【熟度UPにつれてさらに効果値UP】
+    - MotionSpeed Multiply ×2.0 — 闇属性の魔剣の攻撃モーションが大幅に加速
+    - MotionSpeed Multiply ×2.0 — 光属性の魔剣の攻撃モーションが大幅に加速
+    - HitCount Addition +1.0 — 司書王使･阿形と同編成で、味方全体の1撃目2撃目3撃目のヒット数が+1
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`160602`](weapons.json#L253089) 司書王使･吽形【極】
+  - base_name: 司書王使･吽形 (costume: 極魔装)
+  - element=闇(5) / type=太刀(3) / rarity=S(3) / cv=白砂沙帆
+  - max stats: HP=12300 / ATK=9530 / DEF=8600 / SPD=30 / BREAK=2170
+  - hit_counts=[7, 5, 3] (3段)  motion_speed=[2.0/2.0/1.2]  mp=230
+  - three_size=68/53/74 / initial_slot=3
+  - BD: 吽形終擊･阿吽之太刀 (arts_id=606)
+    - description: 敵全体に超強力な43連ダメージ＆一瞬だけ敵の動きを止める
+    - cost=5 / hit_count=43 / value=2.5 / additional_value=0.0
+  - innate skills (5):
+    - MotionSpeed Multiply ×2.325 — 全属性の魔剣の攻撃モーションが絶大に加速【熟度UPにつれてさらに効果値UP】
+    - MotionSpeed Multiply ×2.33 — 闇属性の魔剣の攻撃モーションが絶大に加速
+    - MotionSpeed Multiply ×2.33 — 光属性の魔剣の攻撃モーションが絶大に加速
+    - HitCount Addition +1.0 — 司書王使･阿形と同編成で、味方全体の1撃目2撃目3撃目のヒット数が+1
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`161601`](weapons.json#L256317) 麒麟円文螺鈿白櫃=ロスト
+  - base_name: 麒麟円文螺鈿白櫃=ロスト (costume: 魔装)
+  - element=光(4) / type=魔典(11) / rarity=SS(4) / cv=近藤玲奈
+  - max stats: HP=10000 / ATK=12940 / DEF=11170 / SPD=22 / BREAK=1500
+  - hit_counts=[5, 6, 10] (3段)  motion_speed=[2.0/1.8/1.1]  mp=445
+  - three_size=64/56/58 / initial_slot=3
+  - BD: 【麒麟戦塵】欠して御せぬ獄彩色の棺たれ (arts_id=616)
+    - description: 敵全体に消費ゲージ数に応じた58連ダメージ＆自分HP回復＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度が30倍
+    - cost=4 / hit_count=58 / value=0.013 / additional_value=30.0
+  - innate skills (4):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 光属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - BlazeGauge Addition +150.0 — バトル開始時に、光属性魔剣の数に応じてブレイズゲージが上昇する(最大4.5ゲージ)
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`161602`](weapons.json#L256536) 麒麟円文螺鈿白櫃=ロスト【極】
+  - base_name: 麒麟円文螺鈿白櫃=ロスト (costume: 極魔装)
+  - element=光(4) / type=魔典(11) / rarity=SS(4) / cv=近藤玲奈
+  - max stats: HP=13000 / ATK=16820 / DEF=14520 / SPD=22 / BREAK=1940
+  - hit_counts=[6, 6, 13] (3段)  motion_speed=[2.0/1.8/1.1]  mp=445
+  - three_size=64/56/58 / initial_slot=4
+  - BD: 【麒麟戦塵】欠して御せぬ獄彩色の棺たれ (arts_id=616)
+    - description: 敵全体に消費ゲージ数に応じた58連ダメージ＆自分HP回復＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度が30倍
+    - cost=4 / hit_count=58 / value=0.013 / additional_value=30.0
+  - innate skills (4):
+    - Attack Multiply ×2.0 — 光属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 光属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - BlazeGauge Addition +150.0 — バトル開始時に、光属性魔剣の数に応じてブレイズゲージが上昇する(最大4.5ゲージ)
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`161901`](weapons.json#L257745) 天煌の冥ミステリオン
+  - base_name: 天煌の冥ミステリオン (costume: 魔装)
+  - element=闇(5) / type=大鎌(12) / rarity=SS(4) / cv=秋奈
+  - max stats: HP=11700 / ATK=20720 / DEF=8970 / SPD=22 / BREAK=5560
+  - hit_counts=[2, 4, 8] (3段)  motion_speed=[2.0/2.0/1.0]  mp=777
+  - three_size=90/51/71 / initial_slot=2
+  - BD: 煌の十天･朧なる神の秘儀再臨 (arts_id=619)
+    - description: 敵全体に超絶強力な7連ダメージ＆77秒間、自身のHPが徐々に回復
+    - cost=7 / hit_count=7 / value=27.0 / additional_value=0.0
+  - innate skills (6):
+    - HitCount Addition +1.951 — 闇属性の味方全体の1～3撃目ヒット数を+2する【熟度21,41,60,80,99でさらに+1(最大+7)】
+    - MotionSpeed Multiply ×2.325 — 闇属性の魔剣の攻撃モーションが絶大に加速【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×1.75 — 闇属性の魔剣が絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に闇属性の魔剣の攻撃力が3.5倍アップ
+    - MotionSpeed Multiply ×0.2 — 火属性の魔剣のモーション速度が超絶大にダウン
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`161902`](weapons.json#L257978) 天煌の冥ミステリオン【極】
+  - base_name: 天煌の冥ミステリオン (costume: 極魔装)
+  - element=闇(5) / type=大鎌(12) / rarity=SS(4) / cv=秋奈
+  - max stats: HP=15200 / ATK=26930 / DEF=11650 / SPD=22 / BREAK=7220
+  - hit_counts=[3, 4, 11] (3段)  motion_speed=[2.0/2.0/1.0]  mp=777
+  - three_size=90/51/71 / initial_slot=3
+  - BD: 煌の十天･朧なる神の秘儀再臨 (arts_id=619)
+    - description: 敵全体に超絶強力な7連ダメージ＆77秒間、自身のHPが徐々に回復
+    - cost=7 / hit_count=7 / value=27.0 / additional_value=0.0
+  - innate skills (6):
+    - HitCount Addition +1.951 — 闇属性の味方全体の1～3撃目ヒット数を+2する【熟度21,41,60,80,99でさらに+1(最大+7)】
+    - MotionSpeed Multiply ×2.652 — 闇属性の魔剣の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×2.0 — 闇属性の魔剣が超絶大にガードブレイクしやすく
+    - Enemy_BreakAttack Multiply ×3.5 — ブレイク時に闇属性の魔剣の攻撃力が3.5倍アップ
+    - MotionSpeed Multiply ×0.2 — 火属性の魔剣のモーション速度が超絶大にダウン
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`162001`](weapons.json#L258211) ネクロノミコン=ロスト
+  - base_name: ネクロノミコン=ロスト (costume: 魔装)
+  - element=火(1) / type=魔典(11) / rarity=SS(4) / cv=浜崎奈々
+  - max stats: HP=10000 / ATK=15120 / DEF=11640 / SPD=21 / BREAK=1170
+  - hit_counts=[4, 2, 3] (3段)  motion_speed=[1.7/1.7/1.2]  mp=331
+  - three_size=77/55/79 / initial_slot=3
+  - BD: 【The Outer God】果しなき魔王の呼び声 (arts_id=620)
+    - description: 敵全体に超絶強力な20連ダメージ＆自分HP回復＆1waveの間、味方のHPが徐々に回復し防御力130%UP
+    - cost=9 / hit_count=20 / value=13.65 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×1.75 — 全属性の魔剣の攻撃力が絶大にアップ
+    - Raise Multiply ×1.0 — 魔典の魔剣が戦闘不能になっても2回完全復活できる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`162002`](weapons.json#L258468) ネクロノミコン=ロスト【極】
+  - base_name: ネクロノミコン=ロスト (costume: 極魔装)
+  - element=火(1) / type=魔典(11) / rarity=SS(4) / cv=浜崎奈々
+  - max stats: HP=13000 / ATK=19650 / DEF=15130 / SPD=21 / BREAK=1520
+  - hit_counts=[5, 2, 6] (3段)  motion_speed=[1.7/1.7/1.2]  mp=331
+  - three_size=77/55/79 / initial_slot=4
+  - BD: 【The Outer God】果しなき魔王の呼び声                                   (arts_id=620)
+    - description: 敵全体に超絶強力な20連ダメージ＆自分HP回復＆1waveの間、味方のHPが徐々に回復し防御力130%UP
+    - cost=9 / hit_count=20 / value=13.65 / additional_value=0.0
+  - innate skills (6):
+    - Attack Multiply ×2.0 — 自身の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値が大幅UP】
+    - MotionSpeed Multiply ×2.66 — 自身の攻撃モーションが超絶大に加速【熟度UPにつれてさらに効果値が大幅UP】
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ
+    - Raise Multiply ×1.0 — 魔典の魔剣が戦闘不能になっても2回完全復活できる
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`163101`](weapons.json#L261465) 魔弾シーダー
+  - base_name: 魔弾シーダー (costume: 魔装)
+  - element=水(2) / type=連弩(6) / rarity=S(3) / cv=稲垣好
+  - max stats: HP=9850 / ATK=1420 / DEF=3700 / SPD=28 / BREAK=2470
+  - hit_counts=[12, 13, 10] (3段)  motion_speed=[2.0/2.4/1.2]  mp=340
+  - three_size=89/60/87 / initial_slot=4
+  - BD: 散華粉塵バレットシーダー (arts_id=631)
+    - description: 敵全体に超絶強力な150連ダメージ＆1waveの間攻撃全体化しサファイア量2倍
+    - cost=9 / hit_count=150 / value=5.0 / additional_value=0.0
+  - innate skills (3):
+    - BlazeAttack Multiply ×2.493 — 水属性の魔剣のB.D.攻撃力が大幅にアップ【熟度UPにつれてさらに効果値UP】
+    - Attack Multiply ×1.25 — 水属性の魔剣の攻撃力がかなりアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`163102`](weapons.json#L261653) 魔弾シーダー【極】
+  - base_name: 魔弾シーダー (costume: 極魔装)
+  - element=水(2) / type=連弩(6) / rarity=S(3) / cv=稲垣好
+  - max stats: HP=12800 / ATK=1840 / DEF=4800 / SPD=28 / BREAK=3210
+  - hit_counts=[13, 13, 13] (3段)  motion_speed=[2.0/2.4/1.2]  mp=340
+  - three_size=89/60/87 / initial_slot=5
+  - BD: 散華粉塵バレットシーダー (arts_id=631)
+    - description: 敵全体に超絶強力な150連ダメージ＆1waveの間攻撃全体化しサファイア量2倍
+    - cost=9 / hit_count=150 / value=5.0 / additional_value=0.0
+  - innate skills (4):
+    - BlazeAttack Multiply ×2.989 — 水属性の魔剣のB.D.攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Attack Multiply ×1.5 — 水属性の魔剣の攻撃力が大幅にアップ
+    - DamageLimitBreak Addition +1000000000.0 — 自身のダメージ上限が10億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`163601`](weapons.json#L262500) ルミナスソード
+  - base_name: ルミナスソード (costume: 魔装)
+  - element=光(4) / type=長剣(1) / rarity=A(1) / cv=飯沼南実
+  - max stats: HP=2540 / ATK=1020 / DEF=700 / SPD=45 / BREAK=90
+  - hit_counts=[4, 3, 11] (3段)  motion_speed=[2.6/2.4/1.2]  mp=21
+  - three_size=61/50/66 / initial_slot=1
+  - BD: 【試用版】ルミナスブレイザー (arts_id=636)
+    - description: 敵全体に10連ダメージ＆数秒だけスピード暴走
+    - cost=2 / hit_count=10 / value=2.05 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.15 — 光属性の魔剣の攻撃モーションが少し加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`163602`](weapons.json#L262657) ルミナスソード【極】
+  - base_name: ルミナスソード (costume: 極魔装)
+  - element=光(4) / type=長剣(1) / rarity=A(1) / cv=飯沼南実
+  - max stats: HP=3300 / ATK=1320 / DEF=900 / SPD=45 / BREAK=110
+  - hit_counts=[5, 3, 14] (3段)  motion_speed=[2.6/2.4/1.2]  mp=21
+  - three_size=61/50/66 / initial_slot=1
+  - BD: 【試用版】ルミナスブレイザー (arts_id=636)
+    - description: 敵全体に10連ダメージ＆数秒だけスピード暴走
+    - cost=2 / hit_count=10 / value=2.05 / additional_value=0.0
+  - innate skills (2):
+    - MotionSpeed Multiply ×1.15 — 光属性の魔剣の攻撃モーションが少し加速
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`166001`](weapons.json#L266438) 神劍クサナギノツルギ:Blaze
+  - base_name: 神劍クサナギノツルギ:Blaze (costume: 魔装)
+  - element=闇(5) / type=太刀(3) / rarity=SS(4) / cv=潘めぐみ
+  - max stats: HP=14660 / ATK=21390 / DEF=13870 / SPD=38 / BREAK=3940
+  - hit_counts=[4, 4, 8] (3段)  motion_speed=[2.0/1.6/1.1]  mp=1190
+  - three_size=75/56/70 / initial_slot=3
+  - BD: 天威草薙･八魔断ノ竜滅 (arts_id=660)
+    - description: 敵全体に超強力な48連ダメージ＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度が30倍
+    - cost=4 / hit_count=48 / value=1.88 / additional_value=0.0
+  - innate skills (6):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - DamageLimitBreak Addition +1000000000.0 — 闇属性の魔剣のダメージ上限が10億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGauge Addition +150.0 — バトル開始時に、闇属性魔剣の数に応じてブレイズゲージが上昇する(最大4.5ゲージ)
+    - Attack Multiply ×1.74232 — 闇属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×13.0 — 闇属性の魔剣のブレイク力が13倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`166002`](weapons.json#L266683) 神劍クサナギノツルギ:Blaze【極】
+  - base_name: 神劍クサナギノツルギ:Blaze (costume: 極魔装)
+  - element=闇(5) / type=太刀(3) / rarity=SS(4) / cv=潘めぐみ
+  - max stats: HP=19050 / ATK=27800 / DEF=18030 / SPD=38 / BREAK=5110
+  - hit_counts=[5, 4, 11] (3段)  motion_speed=[2.0/1.6/1.1]  mp=1190
+  - three_size=75/56/70 / initial_slot=4
+  - BD: 天威草薙･八魔断ノ竜滅 (arts_id=660)
+    - description: 敵全体に超強力な48連ダメージ＆wave中、味方の攻撃力とﾓｰｼｮﾝ速度が30倍
+    - cost=4 / hit_count=48 / value=1.88 / additional_value=0.0
+  - innate skills (6):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - DamageLimitBreak Addition +1000000000.0 — 闇属性の魔剣のダメージ上限が10億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGauge Addition +150.0 — バトル開始時に、闇属性魔剣の数に応じてブレイズゲージが上昇する(最大4.5ゲージ)
+    - Attack Multiply ×2.0 — 闇属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - GuardBreak Multiply ×13.0 — 闇属性の魔剣のブレイク力が13倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`166201`](weapons.json#L267380) パドリングブレード
+  - base_name: パドリングブレード (costume: 魔装)
+  - element=水(2) / type=杖棒(4) / rarity=A(1) / cv=朝井彩加
+  - max stats: HP=3240 / ATK=1200 / DEF=1200 / SPD=28 / BREAK=410
+  - hit_counts=[3, 3, 8] (3段)  motion_speed=[2.4/2.2/1.2]  mp=100
+  - three_size=72/54/74 / initial_slot=1
+  - BD: 奥義･一刀波断 (arts_id=662)
+    - description: 敵全体に16連ダメージ＆5秒間攻撃力30%UP
+    - cost=2 / hit_count=16 / value=1.8 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 水属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`166202`](weapons.json#L267537) パドリングブレード【極】
+  - base_name: パドリングブレード (costume: 極魔装)
+  - element=水(2) / type=杖棒(4) / rarity=A(1) / cv=朝井彩加
+  - max stats: HP=4200 / ATK=1560 / DEF=1560 / SPD=28 / BREAK=530
+  - hit_counts=[4, 3, 11] (3段)  motion_speed=[2.4/2.2/1.2]  mp=100
+  - three_size=72/54/74 / initial_slot=1
+  - BD: 奥義･一刀波断 (arts_id=662)
+    - description: 敵全体に16連ダメージ＆5秒間攻撃力30%UP
+    - cost=2 / hit_count=16 / value=1.8 / additional_value=0.0
+  - innate skills (2):
+    - Attack Multiply ×1.05 — 水属性の魔剣の攻撃力が少しアップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`166401`](weapons.json#L267970) 辰王ヒメミズチ
+  - base_name: 辰王ヒメミズチ (costume: 魔装)
+  - element=水(2) / type=長剣(1) / rarity=SS(4) / cv=前田佳織里
+  - max stats: HP=7540 / ATK=17960 / DEF=7850 / SPD=55 / BREAK=1840
+  - hit_counts=[6, 4, 10] (3段)  motion_speed=[2.0/2.0/1.2]  mp=240
+  - three_size=70/55/66 / initial_slot=3
+  - BD: 辰の御神楽【焔水流転】 (arts_id=664)
+    - description: 敵全体に超強力な67連ダメージ＆1waveの間攻撃全体化
+    - cost=4 / hit_count=67 / value=1.35 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×1.74232 — 全属性の魔剣の攻撃力が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Attack Multiply ×2.25 — 残HPが多いほど攻撃力が絶大にアップ
+    - Vitality_MotionSpeed Multiply ×2.66 — 残HPが多いほどモーション速度が絶大に加速(最大2.66倍)
+    - DamageLimitBreak Addition +3200000000.0 — 自身のダメージ上限が32億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`166402`](weapons.json#L268184) 辰王ヒメミズチ【極】
+  - base_name: 辰王ヒメミズチ (costume: 極魔装)
+  - element=水(2) / type=長剣(1) / rarity=SS(4) / cv=前田佳織里
+  - max stats: HP=9790 / ATK=23340 / DEF=10200 / SPD=55 / BREAK=2380
+  - hit_counts=[7, 4, 13] (3段)  motion_speed=[2.0/2.0/1.2]  mp=240
+  - three_size=70/55/66 / initial_slot=4
+  - BD: 辰の御神楽【焔水流転】 (arts_id=664)
+    - description: 敵全体に超強力な67連ダメージ＆1waveの間攻撃全体化
+    - cost=4 / hit_count=67 / value=1.35 / additional_value=0.0
+  - innate skills (5):
+    - Attack Multiply ×2.0 — 全属性の魔剣の攻撃力が超絶大アップ【熟度UPにつれてさらに効果値UP】
+    - Vitality_Attack Multiply ×2.55 — 残HPが多いほど攻撃力が超絶大にアップ
+    - Vitality_MotionSpeed Multiply ×2.66 — 残HPが多いほどモーション速度が絶大に加速(最大2.66倍)
+    - DamageLimitBreak Addition +3200000000.0 — 自身のダメージ上限が32億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`166901`](weapons.json#L269954) 謝意ヲ表現スル石
+  - base_name: 謝意ヲ表現スル石 (costume: 魔装)
+  - element=光(4) / type=魔典(11) / rarity=S(3) / cv=飯田ヒカル
+  - max stats: HP=10000 / ATK=2200 / DEF=12930 / SPD=55 / BREAK=830
+  - hit_counts=[3, 1, 13] (3段)  motion_speed=[1.8/1.8/1.2]  mp=130
+  - three_size=ネイキッド土下座がお望みですかぁ？ / initial_slot=3
+  - BD: DO.GE.ZA.完全降伏白旗謝罪 (arts_id=669)
+    - description: 敵様全体にささやかな99連ダメージ＆wave中、腰の角度(攻撃力)が50％ダウンし謝罪数(ヒット数)が+6
+    - cost=1 / hit_count=99 / value=0.001 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×0.2 — 味方の攻撃力が超絶大ダウン
+    - Defense Multiply ×1.5 — 全属性の魔剣の防御力が大幅にアップ
+    - RubyDrop Multiply ×2.0 — 味方が攻撃した時のルビーの量がかなり増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`166902`](weapons.json#L270161) 謝意ヲ表現スル石【極】
+  - base_name: 謝意ヲ表現スル石 (costume: 極魔装)
+  - element=光(4) / type=魔典(11) / rarity=S(3) / cv=飯田ヒカル
+  - max stats: HP=13000 / ATK=2860 / DEF=16800 / SPD=55 / BREAK=1070
+  - hit_counts=[4, 1, 16] (3段)  motion_speed=[1.8/1.8/1.2]  mp=130
+  - three_size=ネイキッド土下座がお望みですかぁ？ / initial_slot=4
+  - BD: DO.GE.ZA.完全降伏白旗謝罪 (arts_id=669)
+    - description: 敵様全体にささやかな99連ダメージ＆wave中、腰の角度(攻撃力)が50％ダウンし謝罪数(ヒット数)が+6
+    - cost=1 / hit_count=99 / value=0.001 / additional_value=0.0
+  - innate skills (4):
+    - Attack Multiply ×0.2 — 味方の攻撃力が超絶大ダウン
+    - Defense Multiply ×1.75 — 全属性の魔剣の防御力が絶大にアップ
+    - RubyDrop Multiply ×3.0 — 味方が攻撃した時のルビーの量が大幅に増加
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`167401`](weapons.json#L272252) 終幕詩篇エピローグ
+  - base_name: 終幕詩篇エピローグ (costume: 魔装)
+  - element=闇(5) / type=投擲(9) / rarity=SS(4) / cv=薄井友里
+  - max stats: HP=8080 / ATK=24280 / DEF=11930 / SPD=55 / BREAK=1660
+  - hit_counts=[3, 3, 3] (3段)  motion_speed=[2.1/2.1/1.1]  mp=100
+  - three_size=110/65/100 / initial_slot=3
+  - BD: アスティオス･エピロゴス (arts_id=674)
+    - description: 敵全体に超絶強力な120連ダメージ＆数秒だけ攻撃力とサファイア量が50%UP
+    - cost=6 / hit_count=120 / value=3.0 / additional_value=0.0
+  - innate skills (5):
+    - Speed Multiply ×0.1 — 味方全体が、スピードが0.1倍にダウン
+    - Speed Multiply ×20.0 — 常時スピード狂化
+    - WeaponArtsHitCount Addition +80.0 — 闇属性の魔剣のB.D.ヒット数を+80する
+    - AnyElement Multiply ×1.0 — 光属性を対象とした他魔剣からのスキル効果を受けられる
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`167402`](weapons.json#L272478) 終幕詩篇エピローグ【極】
+  - base_name: 終幕詩篇エピローグ (costume: 極魔装)
+  - element=闇(5) / type=投擲(9) / rarity=SS(4) / cv=薄井友里
+  - max stats: HP=10500 / ATK=31560 / DEF=15500 / SPD=55 / BREAK=2150
+  - hit_counts=[4, 3, 6] (3段)  motion_speed=[2.1/2.1/1.1]  mp=100
+  - three_size=110/65/100 / initial_slot=4
+  - BD: アスティオス･エピロゴス (arts_id=674)
+    - description: 敵全体に超絶強力な120連ダメージ＆数秒だけ攻撃力とサファイア量が50%UP
+    - cost=6 / hit_count=120 / value=3.0 / additional_value=0.0
+  - innate skills (5):
+    - Speed Multiply ×0.1 — 味方全体が、スピードが0.1倍にダウン
+    - Speed Multiply ×20.0 — 常時スピード狂化
+    - WeaponArtsHitCount Addition +80.0 — 闇属性の魔剣のB.D.ヒット数を+80する
+    - AnyElement Multiply ×1.0 — 光属性を対象とした他魔剣からのスキル効果を受けられる
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`167801`](weapons.json#L273988) ルーンブレード:Blaze
+  - base_name: ルーンブレード:Blaze (costume: 魔装)
+  - element=水(2) / type=長剣(1) / rarity=SS(4) / cv=山川琴美
+  - max stats: HP=13080 / ATK=38740 / DEF=8470 / SPD=42 / BREAK=8180
+  - hit_counts=[1, 2, 1] (3段)  motion_speed=[2.0/2.0/1.1]  mp=860
+  - three_size=78/56/76 / initial_slot=3
+  - BD: 蒼滅･レイドブルーブレイズ (arts_id=678)
+    - description: 敵全体に超絶強力な200連ダメージ＆13wave防御力13%UP
+    - cost=7 / hit_count=200 / value=1.2 / additional_value=0.0
+  - innate skills (7):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - BlazeGaugePointRate Multiply ×0.5 — B.D.ｹﾞｰｼﾞの上昇効率2倍
+    - RemHP_Attack Multiply ×3.0 — 残HPが少ないほど攻撃力アップ(最大3倍)
+    - RemHP_Attack Multiply ×3.0 — さらに残HPが少ないほど攻撃力アップ(最大3倍)
+    - RemHP_Attack Multiply ×3.0 — もっと残HPが少ないほど攻撃力アップ(最大3倍)
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`167802`](weapons.json#L274240) ルーンブレード:Blaze【極】
+  - base_name: ルーンブレード:Blaze (costume: 極魔装)
+  - element=水(2) / type=長剣(1) / rarity=SS(4) / cv=山川琴美
+  - max stats: HP=17000 / ATK=50350 / DEF=11000 / SPD=42 / BREAK=10630
+  - hit_counts=[2, 2, 4] (3段)  motion_speed=[2.0/2.0/1.1]  mp=860
+  - three_size=78/56/76 / initial_slot=4
+  - BD: 蒼滅･レイドブルーブレイズ (arts_id=678)
+    - description: 敵全体に超絶強力な200連ダメージ＆13wave防御力13%UP
+    - cost=7 / hit_count=200 / value=1.2 / additional_value=0.0
+  - innate skills (7):
+    - WeaponArtsCost Addition +0.0 — 自身のB.D.レベル上限が絶大に上昇
+    - BlazeGaugePointRate Multiply ×0.5 — B.D.ｹﾞｰｼﾞの上昇効率2倍
+    - RemHP_Attack Multiply ×3.0 — 残HPが少ないほど攻撃力アップ(最大3倍)
+    - RemHP_Attack Multiply ×3.0 — さらに残HPが少ないほど攻撃力アップ(最大3倍)
+    - RemHP_Attack Multiply ×3.0 — もっと残HPが少ないほど攻撃力アップ(最大3倍)
+    - DamageLimitBreak Addition +2000000000.0 — 自身のダメージ上限が20億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`168701`](weapons.json#L278050) 天業剣クリーフォート
+  - base_name: 天業剣クリーフォート (costume: 魔装)
+  - element=風(3) / type=戦斧(7) / rarity=SS(4) / cv=藤井ゆきよ
+  - max stats: HP=10000 / ATK=13110 / DEF=7310 / SPD=27 / BREAK=1710
+  - hit_counts=[5, 5, 13] (3段)  motion_speed=[1.7/1.8/1.2]  mp=1300
+  - three_size=108/64/90 / initial_slot=3
+  - BD: 原初の支配《The Subjugation》 (arts_id=687)
+    - description: 敵全体に消費ゲージ数に応じた150連ダメージ＆60秒間、味方の攻撃力･ﾓｰｼｮﾝ速度･ｽﾋﾟｰﾄﾞが30倍(消費ゲージ数に応じて倍率上昇)＆60秒間、敵の動きを止める
+    - cost=7 / hit_count=150 / value=0.02 / additional_value=39.0
+  - innate skills (6):
+    - DamageLimitBreak Addition +1300000000.0 — 味方全体のダメージ上限が13億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - Speed Multiply ×1.75 — 風属性の魔剣の行動速度が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - RemHP_Attack Multiply ×3.0 — 風属性の味方全体が、残HPが少ないほど攻撃力がアップ(最大3倍)
+    - BlazeAttack Multiply ×50.0 — 自身のB.D.攻撃力が50倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`168702`](weapons.json#L278319) 天業剣クリーフォート【極】
+  - base_name: 天業剣クリーフォート (costume: 極魔装)
+  - element=風(3) / type=戦斧(7) / rarity=SS(4) / cv=藤井ゆきよ
+  - max stats: HP=13000 / ATK=17040 / DEF=9500 / SPD=27 / BREAK=2220
+  - hit_counts=[6, 5, 16] (3段)  motion_speed=[1.7/1.8/1.2]  mp=1300
+  - three_size=108/64/90 / initial_slot=4
+  - BD: 原初の支配《The Subjugation》 (arts_id=687)
+    - description: 敵全体に消費ゲージ数に応じた150連ダメージ＆60秒間、味方の攻撃力･ﾓｰｼｮﾝ速度･ｽﾋﾟｰﾄﾞが30倍(消費ゲージ数に応じて倍率上昇)＆60秒間、敵の動きを止める
+    - cost=7 / hit_count=150 / value=0.02 / additional_value=39.0
+  - innate skills (6):
+    - DamageLimitBreak Addition +1300000000.0 — 味方全体のダメージ上限が13億アップ【熟度UPにつれてさらに効果値がUP】
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - Speed Multiply ×1.75 — 風属性の魔剣の行動速度が絶大にアップ【熟度UPにつれてさらに効果値UP】
+    - RemHP_Attack Multiply ×3.0 — 風属性の味方全体が、残HPが少ないほど攻撃力がアップ(最大3倍)
+    - BlazeAttack Multiply ×50.0 — 自身のB.D.攻撃力が50倍
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`169101`](weapons.json#L279930) 魔王侍女ロサ
+  - base_name: 魔王侍女ロサ (costume: 魔装)
+  - element=無(6) / type=連弩(6) / rarity=SS(4) / cv=飯田ヒカル
+  - max stats: HP=15100 / ATK=13080 / DEF=5240 / SPD=22 / BREAK=970
+  - hit_counts=[2, 3, 11] (3段)  motion_speed=[2.0/2.0/1.2]  mp=633
+  - three_size=72/51/75 / initial_slot=3
+  - BD: レジェンダリー･ブックマーク (arts_id=691)
+    - description: 敵全体に消費ゲージ数に応じた63連ダメージ＆wave中、味方の攻撃力･ﾌﾞﾚｲｸ力･ﾓｰｼｮﾝ速度が50倍
+    - cost=4 / hit_count=63 / value=0.8 / additional_value=33.0
+  - innate skills (6):
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - MotionSpeed Multiply ×13.0 — 自身のモーション速度が13倍に加速【熟度UPにつれてさらに効果値がUP(最大18倍)】
+    - BlazeAttack Multiply ×50.0 — 自身のB.D.攻撃力が50倍
+    - DamageLimitBreak Addition +1300000000.0 — 闇属性の魔剣のダメージ上限が13億アップ
+    - DamageLimitBreak Addition +1300000000.0 — 無属性の魔剣のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+- [`169102`](weapons.json#L280187) 魔王侍女ロサ【極】
+  - base_name: 魔王侍女ロサ (costume: 極魔装)
+  - element=無(6) / type=連弩(6) / rarity=SS(4) / cv=飯田ヒカル
+  - max stats: HP=19630 / ATK=17000 / DEF=6800 / SPD=22 / BREAK=1260
+  - hit_counts=[3, 3, 14] (3段)  motion_speed=[2.0/2.0/1.2]  mp=633
+  - three_size=72/51/75 / initial_slot=4
+  - BD: レジェンダリー･ブックマーク (arts_id=691)
+    - description: 敵全体に消費ゲージ数に応じた63連ダメージ＆wave中、味方の攻撃力･ﾌﾞﾚｲｸ力･ﾓｰｼｮﾝ速度が50倍
+    - cost=4 / hit_count=63 / value=0.8 / additional_value=33.0
+  - innate skills (6):
+    - BlazeGaugeMaxLevel Addition +13.0 — B.D.ゲージの最大値が13アップ
+    - MotionSpeed Multiply ×13.0 — 自身のモーション速度が13倍に加速【熟度UPにつれてさらに効果値がUP(最大18倍)】
+    - BlazeAttack Multiply ×50.0 — 自身のB.D.攻撃力が50倍
+    - DamageLimitBreak Addition +1300000000.0 — 闇属性の魔剣のダメージ上限が13億アップ
+    - DamageLimitBreak Addition +1300000000.0 — 無属性の魔剣のダメージ上限が13億アップ
+    - **新增: EventDropRate Multiply ×2.0 — ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。**
+
+### 调整 (5,技能批量·按字段聚合)
+
+#### `weapon_skills` (5 个)
+**子项新增** (5 次):
+- id=`3000023` 【イベント限定】ヒソカナルマイクLv5 — 在 5 个 id 里新增: [[`147901`](weapons.json#L197553), [`147902`](weapons.json#L197729), [`147903`](weapons.json#L197924), [`153901`](weapons.json#L222523), [`153902`](weapons.json#L222756)]
+  - description: ラップに興味を持ち、こっそり韻を踏んでみた経験により「ゴールデンマイク」の取得数が上がる。
+
+## materials
+
+### 新增 (3)
+
+- [`42010445`](materials.json#L13723) インスタントミラクル rarity=4
+  - 進む一歩一歩が確かな奇跡。[上限値:低]
+[同装備ｾｯﾄ火杖棒の攻撃力がUP]
+- [`53060024`](materials.json#L22193) 叛逆のエンジェル rarity=5
+  - 天使が上々、奇跡の煌々♪[火杖棒のみ]
+[残HP多いほどｽﾋﾟｰﾄﾞUP][上限値:超絶高]
+- [`131010028`](materials.json#L29319) ラップスターター rarity=3
+  - リズムにライドだぜ！[上限値:高]
+[ゴールデンマイクの獲得量UP]
+
+## items
+
+### 新增 (2)
+
+- [`91274`](items.json#L130717) ゴールデンマイク
+  - 「誰でもできるカンタン奇跡｣ 作戦に貢献した証。
+- [`2500047`](items.json#L165541) a.k.a.Maken-O
+  - 熱いラップバトルに挑んだ証
+
+## jobs
+
+### 新增 (1)
+
+- [`1573`](jobs.json#L199017) バイブス rarity=4
+  - rarity=4 / max_level=40
+  - job_abilities (18):
+    - WeaponType 長剣(1): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 大剣(2): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 太刀(3): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 杖棒(4): pos=1.7 / neg=1.105 (rank=s 超得意)
+    - WeaponType 弓矢(5): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 連弩(6): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 戦斧(7): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 騎槍(8): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 投擲(9): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 拳闘(10): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 魔典(11): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - WeaponType 大鎌(12): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - Element 火(1): pos=1.7 / neg=1.105 (rank=s 超得意)
+    - Element 水(2): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - Element 風(3): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - Element 光(4): pos=0.3 / neg=0.3 (rank=d 超苦手)
+    - Element 闇(5): pos=1.7 / neg=1.105 (rank=s 超得意)
+    - Element 無(6): pos=0.3 / neg=0.3 (rank=d 超苦手)
+  - job_skills (8):
+    - Speed Multiply ×1.2 — 世界を守り抜く証。装備セット全ての速度が大アップ
+    - MotionSpeed Multiply ×1.5 — 杖棒装備でモーション速度とスピード50%UP
+    - HitCount Addition +0.0 — 自身のヒット数それぞれ1にする代わりに、ダメージ上限200億UP
+    - BlazeAttack Multiply ×0.0001 — B.D.攻撃力を代償に、B.D.コスト-3
+    - Raise Multiply ×0.01 — 杖棒装備で3度だけHP1%で復活
+    - Speed Multiply ×1.5 — 杖棒装備でスピード50%UP
+    - DamageLimitBreak Addition +20000000000.0 — 自身のダメージ上限200億UP
+    - WeaponArtsCost Addition +-3.0 — B.D.コスト-3
+
+## scenarios
+
+### 新增 (10)
+
+- [`327401`](scenarios.json#L10213) 大魔界ラップバトル大会
+- [`327402`](scenarios.json#L10223) 桃髪天使がまさかの停止？
+- [`327403`](scenarios.json#L10233) 奇跡の少女
+- [`327404`](scenarios.json#L10243) 立ちふさがる四天王？
+- [`327405`](scenarios.json#L10253) ミステリアスハッカー
+- [`327406`](scenarios.json#L10263) 奇跡VSキセキ
+- [`327407`](scenarios.json#L10273) 無貌の神
+- [`327408`](scenarios.json#L10283) 煌の十天
+- [`327409`](scenarios.json#L10293) 誰でもできるカンタン奇跡
+- [`327410`](scenarios.json#L10303) 奇跡の正しい起こし方
+
+---
+
+★ 跳过的 derived 表(非 local-master.dat 产物,需 server response 聚合):
+- `memory_slot_skills.json`
+- `npc_motions.json`
