@@ -1,7 +1,7 @@
 // ===== Chara Spec =====
 // Usage: import { CHARA_SPEC } from '../shared/chara-spec.js';
 
-// hit_per_stage / scaling 値の数値化（分数字列 "1/3" 含む受け入れ、無効値は 0）
+// hit_per_stage / scaling 转成数值 (接受 "1/3" 这种分数字符串、无效值给 0)
 const _parseHit = (s) => {
   if (s == null) return 0;
   if (typeof s === 'number') return Number.isFinite(s) ? s : 0;
@@ -15,7 +15,7 @@ const _parseHit = (s) => {
   return Number.isFinite(v) ? v : 0;
 };
 
-// rarity ごとの「（改造/極弐含む）到達可能な最高熟度」。SS=99 / A=90 / B=70 / C=50
+// 每个 rarity「(含 改造/極弐) 能达到的最高熟度」。SS=99 / A=90 / B=70 / C=50
 const _RARITY_MAX_JK = { 1: 50, 2: 70, 3: 90, 4: 99 };
 
 const _bestState = (c) => {
@@ -69,7 +69,7 @@ const maxHit = (c) => {
       const hps = e.hit_per_stage || [],
         sca = e.hit_per_stage_scaling || [];
       const ht = e.hit_type ?? 0;
-      // 分母は chara rarity 由来の最高到達熟度 - 1。state に依らず最大値で評価。
+      // 分母 = 该 chara rarity 对应的最高熟度 - 1。不看 state、一律按最大值算。
       const denom = (_RARITY_MAX_JK[c.rarity] ?? 99) - 1;
       for (let k = 0; k < N; k++) {
         const baseHit = _parseHit(hps[k]);
@@ -96,8 +96,8 @@ const maxBdhit = (c) => {
     for (const e of sk.effects || []) {
       if (!(e.bunrui || []).includes(21)) continue;
       if (!_selfApplies(c, e)) continue;
-      // BD effect は name に Lv2-5 を含まないので b + jk*s 公式（jk_max 倍）。
-      // bairitu / bairitu_scaling 双方とも数値 / 分式文字列を _parseHit で解釈。
+      // BD effect 的 name 不带 Lv2-5,所以用 b + jk*s 公式 (jk_max 倍)。
+      // bairitu / bairitu_scaling 两者都可能是数值或分式字符串、统一走 _parseHit 解析。
       const denomBd = _RARITY_MAX_JK[c.rarity] ?? 99;
       const maxB = _parseHit(e.bairitu) + denomBd * _parseHit(e.bairitu_scaling);
       if (e.calc_type === 1) adders += maxB;

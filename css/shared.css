@@ -23,7 +23,7 @@
 }
 
 
-/* ----- touch responsiveness（全局・无 media query）-----
+/* ----- touch responsiveness (全局、无 media query) -----
    touch-action: manipulation → 干掉浏览器 300ms 双击缩放检测延迟（iOS Safari /
      旧 Android Chrome 上肉眼可感）。桌面无 touch，无副作用。
    -webkit-tap-highlight-color: transparent → 去掉 iOS Safari 点击时的灰色闪光，
@@ -76,8 +76,8 @@ a {
 }
 .btog.on { background: rgba(91,127,255,.25); border-color: #5b7fff; color: #7b9fff; }
 
-/* ----- CHARA_TAG（魔剣特性）badge color classes — id ごとの専用配色 -----
-   新 tag 追加時はここに .bd-sp-{id} を追加（color と CHARA_TAG_COLOR を一致させる）。 */
+/* ----- CHARA_TAG (魔剣特性) badge color classes — 每个 id 一套专用配色 -----
+   加新 tag 时在这里补 .bd-sp-{id} (color 要跟 CHARA_TAG_COLOR 对上)。 */
 .bd-sp-tag  { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; white-space: nowrap; }
 .bd-sp-1    { background: rgba(80,180,255,.2);  color: #60c0ff; border: 1px solid rgba(80,180,255,.35); }
 .bd-sp-2    { background: rgba(180,80,255,.2);  color: #c060ff; border: 1px solid rgba(180,80,255,.35); }
@@ -184,7 +184,7 @@ a {
 .cond-2 { background: rgba(255,80,80,.18);  color: #ff6060; border: 1px solid rgba(255,80,80,.35); }
 .cond-3 { background: rgba(160,80,255,.18); color: #b060ff; border: 1px solid rgba(160,80,255,.35); }
 .cond-4 { background: rgba(255,130,40,.18); color: #ff9060; border: 1px solid rgba(255,130,40,.35); }
-/* cond-5 = COND_TRIGGER_LABEL 的「敵ブレイク状態」(Enemy_Break*)。注意 hensei 的装备面板走
+/* cond-5 = COND_TRIGGER_LABEL 里的「敵ブレイク状態」(Enemy_Break*)。注意 hensei 的装备面板走
    parameter-class.js 的 conditionTrigger (0..5、4=倒れ / 5=敵BK)，其它 viewer 走 constants.js
    的 CONDITION (0..4、4=敵BK) —— 两套 enum 在 4 上语义不同，只是共用配色，不影响功能。 */
 .cond-5 { background: rgba(80,200,255,.18); color: #50c8ff; border: 1px solid rgba(80,200,255,.35); }
@@ -198,7 +198,7 @@ a {
 .badge.elem-5 { background: var(--dark);  color: #fff; border: 1px solid rgba(0,0,0,.25); }
 .badge.elem-6 { background: var(--bg3);   color: var(--text2); border: 1px solid var(--border); }
 .badge.weapon { background: var(--bg3);   color: var(--text2); border: 1px solid var(--border); }
-/* キャラ限 (weapon_base_id 注入)。原先只在 bladegraphs.css、crystals 也用了 → 提到共用 */
+/* キャラ限 (weapon_base_id 注入)。原先只在 bladegraphs.css、crystals 也要用 → 提到共用 */
 .badge.scope5 { background: rgba(170,85,255,.2); color: #cc88ff; border: 1px solid #aa55ff; font-size: 9px; }
 /* rarity badge 着色（A / AA / S / SS）—— --ss / --s / --aa / --a base.css 由来 */
 .badge.SS { background: var(--ss); color: #fff; }
@@ -230,7 +230,7 @@ a {
 .field-key  { color: var(--text2); font-size: 11px; min-width: 60px; flex-shrink: 0; padding-top: 2px; }
 .field-val  { font-size: 13px; flex: 1; line-height: 1.5; word-break: break-all; }
 
-/* mobile: 倍率テキスト幅を 30% に制限・改行許可（左の効果文を圧迫しない）*/
+/* mobile: 倍率文本宽度限到 30%、允许换行 (别挤压左边的效果文) */
 @media (max-width: 900px) {
   .skill-tags-right {
     max-width: 40%;
@@ -241,7 +241,7 @@ a {
     word-break: break-all;
     text-align: right;
   }
-  /* filter UI 长押し時のテキスト選択 / iOS コールアウト（コピー / 選択メニュー）を抑止。
+  /* 抑止 filter UI 长按时的文本选中 / iOS callout (复制 / 选择菜单)。
      対象：filter toggle (.ftog) / mobile 「絞り込み」展開ボタン / toolbar / sort dropdown など。
      検索 input (type=text) と edit-mode select は除外（編集可能性を保持）。デスクトップは元のまま選択可能。 */
   .ftog,
@@ -260,8 +260,8 @@ a {
 
 /* ============ Phase 7 Session 3: v2 edit modal (chara / soul) + omoide view-only ============ */
 /* 全屏 overlay + 居中 panel、跟 latent-modal 同视觉风格 */
-/* ⚠ body は display:flex なので、この display:none を忘れると modal が
-   #page-wrap と横並びの flex item になってページ幅を食う (実測 390px 視口で content 176px)。
+/* ⚠ body 是 display:flex,所以忘了这条 display:none 的话 modal 会
+   变成跟 #page-wrap 横向并排的 flex item、把页面宽度吃掉 (实测 390px 视口下 content 只剩 176px)。
    新しい modal を足すときは必ずここに id を追加する。 */
 #chara-edit-modal, #soul-edit-modal, #cr-help-modal, #cr-sim-modal {
   display: none; position: fixed; inset: 0; z-index: 1100;
@@ -396,7 +396,7 @@ a {
   border-left:7px solid transparent;border-right:7px solid transparent;border-top:7px solid var(--bg2);}
 .stats-help-popover .hl{color:#ffd040;font-weight:700;}
 
-/* 結晶の倍率式 modal 本文 (#cr-help-modal、ce-modal を流用)。
+/* 結晶倍率公式 modal 正文 (#cr-help-modal、复用 ce-modal)。
    検索欄は画面最上部にあるので popover を上に浮かせると画面外に出る → 中央 modal にした。 */
 .cr-help{font-size:12px;line-height:1.7;color:var(--text2);}
 .cr-help .top{font-size:13px;color:var(--text);}
@@ -409,7 +409,7 @@ a {
 .cr-help .hl{color:#ffd040;font-weight:700;}
 .cr-help .note{margin-top:10px;padding-top:8px;border-top:1px solid var(--border);}
 
-/* Lv/重量/純度 スライダー行 — hensei の crystal-dim-popover と結晶ページの倍率シミュレータで共用 */
+/* Lv/重量/純度 滑条行 — hensei 的 crystal-dim-popover 和結晶页的倍率模拟器共用 */
 .pop-row{display:flex;align-items:center;gap:6px;margin:4px 0;}
 .pop-row label{flex-shrink:0;width:24px;color:var(--text2);}
 .pop-row input[type="range"]{flex:1;min-width:80px;}

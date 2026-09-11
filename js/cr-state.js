@@ -17,7 +17,7 @@ export const state = {
     scope: new Set(),
     condition_trigger: new Set(),
   },
-  // 本地用：data/crystals_check.json 存在時に per-item check 標記を有効化
+  // 仅本地: data/crystals_check.json 存在时启用逐项 check 标记
   crystalCheckEnabled: false,
   crystalCheck: new Set(),
 };
