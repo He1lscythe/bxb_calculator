@@ -131,7 +131,13 @@ def build():
 
     # revise merge 语义 (2026-06-10 事故修正: 旧版整写、把现有 revise 的非 build 字段
     # — 入手方法 / range / weapon_base_id / weight_step / purity_step / 用户手填 min/max 等 — 全丢):
-    #   build 管的字段 (max_value / 三因子 M_L/W/P_max) 以 build 为准、其余字段从现有 revise 保留
+    #   build 管的字段 (三因子 M_L/W/P_max) 以 build 为准、其余字段从现有 revise 保留
+    #
+    # ⚠ max_value は例外で **fill-only** (2026-09-11):
+    #   ここの max_value は `_wiki_aux.json` = 2026-06-09 の一次性スナップショットが出処で、
+    #   もう新しくならない。以前は毎回これで上書きしていたので、viewer で直した値が次の
+    #   CI で巻き戻っていた (実測 1310101 ぶるーまじぇんだ が 1 → 1.1 → 1)。
+    #   live な更新は fetch_wiki_acquisition.py (altema 直読み) が担当する。
     if OUT_REVISE.is_file():
         existing_by_id = {e["id"]: e for e in json.loads(OUT_REVISE.read_text(encoding="utf-8")) if "id" in e}
         build_ids = set()
@@ -141,6 +147,8 @@ def build():
             prev = existing_by_id.get(ent["id"])
             if prev:
                 keep = {k: v for k, v in prev.items() if k not in ent}
+                if prev.get("max_value") is not None:
+                    keep["max_value"] = prev["max_value"]
                 ent = {**ent, **keep}
             merged.append(ent)
         # 现有 revise 里 build 没输出的 entry (纯用户手填、或 master 删除后的 orphan) 保留

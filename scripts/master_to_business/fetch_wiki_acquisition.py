@@ -1,22 +1,32 @@
-"""fetch_wiki_acquisition.py — 从 altema wiki 抓「入手方法」字段、patch 进 data/crystals.json + data/bladegraphs.json
+"""fetch_wiki_acquisition.py — 从 altema wiki 抓「入手方法」+ crystal「max_value」、patch 进 *_revise.json
 
 每次数据更新 workflow:
 1. python scripts/master_to_business/build_all.py            # master → data/*.json
-2. python scripts/master_to_business/fetch_wiki_acquisition.py  # 本脚本、wiki → patch 入手方法
+2. python scripts/master_to_business/fetch_wiki_acquisition.py  # 本脚本、wiki → patch revise
 3. python scripts/master_to_business/copy_images.py          # (按需) <assets> → icons/
 
-字段命名 (沿用 viewer 既有 read 端):
-- crystal: '入手方法' 日文 key (cr-list.js L367 用此 key 读)
-- bg:      'acquisition' 英文 key (bg-list.js L357 用 c.acquisition 读)
+抓的字段 (沿用 viewer 既有 read 端):
+- crystal: '入手方法' 日文 key (cr-list.js 用此 key 读) + 'max_value'
+- bg:      'acquisition' 英文 key (bg-list.js 用 c.acquisition 读)
+
+**max_value 为什么在这里抓** (2026-09-11):
+原本 max_value 只来自 `data/_wiki_aux.json` 的 crystal_max_value —— 那是 2026-06-09 的**一次性快照**,
+之后再没更新过,于是 ① 6 月后新增的結晶永远 max_value=null ② build 每轮还把这份旧值重新盖回
+revise,把用户在 viewer 里改过的值冲掉 (实测 1310101 ぶるーまじぇんだ 被 1 → 1.1 → 1 来回刷)。
+altema 的結晶页本来就在这个脚本里下载了 (抓 入手方法 用),【効果量】那一列就是
+`initial～max` 区间,取上限即 max_value —— 跟旧快照对了 947 条、946 条一致 (99.9%),
+唯一不同的是 wiki 后来自己改了的那条。所以不用新增任何 HTTP 请求、也不用改 yml
+(run_update 模块 B 每轮都会调本脚本)。
 
 按 name 反查 wiki entry、wiki 没匹配 → 不写该字段、不覆盖。
-重跑 idempotent: data/crystals.json + data/bladegraphs.json 内对应字段被覆盖。
+重跑 idempotent。
 """
 import argparse
 import html as htmlmod
 import json
 import re
 import sys
+import time
 import unicodedata
 from pathlib import Path
 
@@ -111,11 +121,60 @@ def _resolve_bg_hard(name):
     return BG_HARD_EXACT.get(name) if name else None
 
 
-def fetch_soup(url):
+# altema 偶发 403 (按 IP 限流、不是封禁) —— 隔一会儿重试就过。CI 一直能抓到,
+# 但本地连着跑几次就会撞上,所以统一加退避重试。
+def fetch_soup(url, retries=4, backoff=15):
     print(f"fetching {url} ...")
-    resp = requests.get(url, headers=HEADERS, timeout=30)
+    resp = None
+    for i in range(retries):
+        resp = requests.get(url, headers=HEADERS, timeout=30)
+        if resp.status_code == 200:
+            return BeautifulSoup(resp.text, 'html.parser')
+        print(f"  -> {resp.status_code}, retry {i + 1}/{retries}")
+        if i + 1 < retries:
+            time.sleep(backoff)
     resp.raise_for_status()
-    return BeautifulSoup(resp.text, 'html.parser')
+
+
+# 【効果量】 は 'initial～max' の区间。和数字 (億/万/千 複合) 混在。
+#   '1.13～5倍' → 5 / '3億3千万～16億5千万' → 1.65e9 / '1440万～10億8000万' → 1.08e9
+_JP_UNITS = (('億', 1e8), ('万', 1e4))
+
+
+def _jp_small(s):
+    """千 まで + 素の数字。'5千' → 5000、'8000' → 8000、'1.65倍' → 1.65"""
+    s = s.strip()
+    if not s:
+        return 0.0
+    if '千' in s:
+        head, tail = s.split('千', 1)
+        hm = re.search(r'-?\d+(?:\.\d+)?', head)
+        tm = re.search(r'-?\d+(?:\.\d+)?', tail)
+        return (float(hm.group()) if hm else 1.0) * 1000 + (float(tm.group()) if tm else 0.0)
+    m = re.search(r'-?\d+(?:\.\d+)?', s)
+    return float(m.group()) if m else 0.0
+
+
+def jp_num(s):
+    """和数字文字列 → float。数字を含まなければ None (altema の '極' 'なし' 等)"""
+    if not s:
+        return None
+    s = s.replace(',', '').replace('，', '').strip()
+    if not re.search(r'\d', s):
+        return None
+    total = 0.0
+    for unit, mul in _JP_UNITS:
+        if unit in s:
+            head, s = s.split(unit, 1)
+            total += _jp_small(head) * mul
+    return total + _jp_small(s)
+
+
+def range_upper(s):
+    """区间文字列の上限側。'1.13～5倍' → 5.0、単値ならそのまま"""
+    if not s:
+        return None
+    return jp_num(re.split(r'[～~〜]', s.split('\n')[0])[-1])
 
 
 def _row_data_contents(row):
@@ -127,7 +186,9 @@ def _row_data_contents(row):
 
 
 def crystal_acquisitions(soup):
-    """crystal page: tds[1] 用换行 + 【label】 分段、抽 fields['入手方法']"""
+    """crystal page: tds[1] 用换行 + 【label】 分段 → {normalized name: {label: text}}
+    出现过的 label: 効果 / 入手方法 / 効果量 / 上限値 / 対象 / 特殊条件。
+    (【上限値】 是 '極' 这种等级标签、**不是** max_value;数值在 【効果量】 的区间上限)"""
     out = {}
     for row in soup.find_all('tr', class_='row'):
         d = _row_data_contents(row)
@@ -151,9 +212,23 @@ def crystal_acquisitions(soup):
                 buf.append(line)
         if key is not None:
             fields[key] = '\n'.join(buf).strip()
-        nyushu = fields.get('入手方法', '').strip()
+        out[_normalize_name(name)] = fields
+    return out
+
+
+def crystal_values(soup):
+    """crystal: {name: {'入手方法': str, 'max_value': float}} (取れた field だけ入れる)"""
+    out = {}
+    for name, f in crystal_acquisitions(soup).items():
+        vals = {}
+        nyushu = (f.get('入手方法') or '').strip()
         if nyushu:
-            out[_normalize_name(name)] = nyushu
+            vals['入手方法'] = nyushu
+        mx = range_upper(f.get('効果量', ''))
+        if mx is not None:
+            vals['max_value'] = mx
+        if vals:
+            out[name] = vals
     return out
 
 
@@ -186,15 +261,25 @@ def bg_acquisitions(soup):
                 parts.append(cleaned)
         nyushu = ' '.join(parts).strip()
         if nyushu:
-            out[_normalize_name(name)] = nyushu
+            out[_normalize_name(name)] = {'acquisition': nyushu}
     return out
 
 
-def patch_revise(master_path, revise_path, acq_map, field_name, hard_resolver=None):
-    """从 master 按 name 匹配 acq_map、注入 *_revise.json 内 entry[field_name]。
+_FACTOR_KEYS = ('M_L_max', 'M_W_max', 'M_P_max')
+
+
+def patch_revise(master_path, revise_path, value_map, hard_field=None, hard_resolver=None):
+    """从 master 按 name 匹配 value_map、把各 field 注入 *_revise.json。
+    value_map: {normalized name: {field: value}}
     revise 数据跟 master 解耦、build_all 重 build master 不影响 revise (用户决策 2026-06-09)。
-    hard_resolver(name) → str|None 优先于 wiki。
-    返回 (matched_total, hard_count, wiki_count, total, sample_unmatched)"""
+    hard_resolver(name) → str|None 只对 hard_field 生效、优先于 wiki。
+
+    max_value 只在「该 entry 还没有三因子」时写:
+    三因子在的时候 `crystalEffectiveValue` 走公式、max_value 只是 fallback、写了也不影响显示,
+    而 純真記憶/秘録記憶/アビス 这些 series build_crystals 是**故意**只给因子不给 max_value 的
+    (实测若无条件写、会给 100 条这类 entry 平白加上一个用不到的 key)。
+
+    返回 (matched_total, hard_count, wiki_count, total, sample_unmatched, per_field)"""
     master = json.loads(master_path.read_text(encoding='utf-8'))
     if revise_path.is_file():
         revise = json.loads(revise_path.read_text(encoding='utf-8'))
@@ -204,6 +289,7 @@ def patch_revise(master_path, revise_path, acq_map, field_name, hard_resolver=No
 
     hard_count = 0
     wiki_count = 0
+    per_field = {}
     unmatched_sample = []
     for m_entry in master:
         mid = m_entry.get('id')
@@ -211,35 +297,46 @@ def patch_revise(master_path, revise_path, acq_map, field_name, hard_resolver=No
         if mid is None or not name:
             continue
 
+        base = _normalize_name(name)
+        found = value_map.get(base)
+        if found is None:
+            for k in _alt_keys(base):
+                found = value_map.get(k)
+                if found is not None:
+                    break
+        vals = dict(found) if found else {}
+
+        # hard rule は hard_field (入手方法 / acquisition) だけ上書き。
+        # wiki から取れた他の field (max_value) はそのまま残す —— 以前は hard 命中で
+        # wiki 参照を丸ごと飛ばしていたので、series 系 370 件は max_value を一生更新できなかった。
         hard = hard_resolver(name) if hard_resolver else None
         if hard:
-            value = hard
+            vals[hard_field] = hard
             hard_count += 1
-        else:
-            base = _normalize_name(name)
-            value = acq_map.get(base)
-            if value is None:
-                for k in _alt_keys(base):
-                    value = acq_map.get(k)
-                    if value is not None:
-                        break
-            if value is None:
-                if len(unmatched_sample) < 5:
-                    unmatched_sample.append(name)
-                continue
+        elif found is not None:
             wiki_count += 1
+
+        if not vals:
+            if len(unmatched_sample) < 5:
+                unmatched_sample.append(name)
+            continue
 
         # 写入 revise (merge: 已有 entry 加字段、没的话新建)
         if mid not in revise_by_id:
             revise_by_id[mid] = {'id': mid, 'name': name}
-        revise_by_id[mid][field_name] = value
+        target = revise_by_id[mid]
+        for field, value in vals.items():
+            if field == 'max_value' and any(target.get(k) is not None for k in _FACTOR_KEYS):
+                continue
+            target[field] = value
+            per_field[field] = per_field.get(field, 0) + 1
 
     final = sorted(revise_by_id.values(), key=lambda r: r['id'])
     revise_path.write_text(
         json.dumps(final, ensure_ascii=False, indent=2),
         encoding='utf-8',
     )
-    return hard_count + wiki_count, hard_count, wiki_count, len(master), unmatched_sample
+    return hard_count + wiki_count, hard_count, wiki_count, len(master), unmatched_sample, per_field
 
 
 def main():
@@ -250,14 +347,17 @@ def main():
 
     if not args.skip_crystal:
         cr_soup = fetch_soup(CRYSTAL_URL)
-        cr_map = crystal_acquisitions(cr_soup)
-        print(f"  wiki crystal 入手方法: {len(cr_map)} entries")
-        m, hard, wiki, t, sample = patch_revise(
+        cr_map = crystal_values(cr_soup)
+        n_mx = sum(1 for v in cr_map.values() if 'max_value' in v)
+        print(f"  wiki crystal: {len(cr_map)} entries (入手方法 あり "
+              f"{sum(1 for v in cr_map.values() if '入手方法' in v)} / 効果量→max_value あり {n_mx})")
+        m, hard, wiki, t, sample, per = patch_revise(
             DATA_DIR / "crystals.json", DATA_DIR / "crystal_revise.json",
             cr_map, '入手方法', _resolve_crystal_hard,
         )
         pct = 100 * m / t if t else 0
-        print(f"crystal: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  → data/crystal_revise.json")
+        print(f"crystal: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  "
+              f"written={per}  → data/crystal_revise.json")
         if m < t:
             print(f"  unmatched sample (前 5): {sample}")
 
@@ -265,12 +365,13 @@ def main():
         bg_soup = fetch_soup(BG_URL)
         bg_map = bg_acquisitions(bg_soup)
         print(f"  wiki bg 入手方法: {len(bg_map)} entries")
-        m, hard, wiki, t, sample = patch_revise(
+        m, hard, wiki, t, sample, per = patch_revise(
             DATA_DIR / "bladegraphs.json", DATA_DIR / "bg_revise.json",
             bg_map, 'acquisition', _resolve_bg_hard,
         )
         pct = 100 * m / t if t else 0
-        print(f"bg: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  → data/bg_revise.json")
+        print(f"bg: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  "
+              f"written={per}  → data/bg_revise.json")
         if m < t:
             print(f"  unmatched sample (前 5): {sample}")
 
