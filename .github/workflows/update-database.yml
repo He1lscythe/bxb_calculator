@@ -254,7 +254,7 @@ jobs:
           cp ../data/crystal_revise.json ../data/bg_revise.json ../data/masou_revise.json data/
           git add data/crystal_revise.json data/bg_revise.json data/masou_revise.json
           if git diff --cached --quiet; then echo "revise 无变更"; exit 0; fi
-          git commit -m "data(revise): 入手方法/range refresh $(date -u +%FT%TZ)"
+          git commit -m "data(revise): 入手方法/max_value/range refresh $(date -u +%FT%TZ)"
           git pull --rebase origin data-staging || true
           git push origin HEAD:data-staging
 
