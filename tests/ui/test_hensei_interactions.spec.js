@@ -686,7 +686,7 @@ test('enemy.emblems[0] 默认装 id=1 (guild_only=false) → 全局生效、norm
 // ============================================================
 // 秘録記憶: 自己的 weapon_base_id 对上 → 結晶枠 +1 (上限 1)
 // ============================================================
-test('秘録記憶 装着 → 結晶枠 +1、外す → 戻る、他人の秘録は無効', async ({ page }) => {
+test('秘録記憶 装上 → 結晶枠 +1、卸下 → 复原、别人的 秘録記憶 无效', async ({ page }) => {
   await waitHenseiReady(page);
   // 練刀･有里村正 (base 1519) ← 54150008 就是它自己的 秘録記憶
   const vid = await page.evaluate(() => window.state.allCharas.find((c) => c._master?.id === 1519)?.id);
@@ -818,7 +818,7 @@ test('bxb1 往返: mainSlot 保留', async ({ page }) => {
 // ============================================================
 // stats 的 説明 开关
 // ============================================================
-test('stats 説明: ? タグで popover 開閉 (body 直下 / 再クリックで閉じる / 外側クリックで閉じる)', async ({ page }) => {
+test('stats 説明: 点 ? 开关 popover (挂 body 直下 / 再点关闭 / 点外面关闭)', async ({ page }) => {
   await waitHenseiReady(page);
   await setupSlot0WithChara(page, 100101);
   const btn = page.locator('#stats-panel-0 .stats-help-btn');
@@ -953,7 +953,7 @@ async function readPanel(page, slot, kind) {
   );
 }
 
-test('装備パネル: 他 slot の range=All 技能が対象 slot に出る (1680 の「長剣のヒット数2.5倍」→ 長剣 slot)', async ({ page }) => {
+test('装備パネル: 别 slot 的 range=All 技能会出现在目标 slot (1680 的「長剣のヒット数2.5倍」→ 長剣 slot)', async ({ page }) => {
   await waitHenseiReady(page);
   // 1680 按武器种分了 3 条 (大剣 / 長剣 / 拳闘) HitCount ×2.5 的 range=All 技能
   await setupSlot0WithChara(page, 168001);
@@ -971,7 +971,7 @@ test('装備パネル: 他 slot の range=All 技能が対象 slot に出る (16
   expect(cross.some((r) => r.txt.includes('大剣') || r.txt.includes('拳闘'))).toBe(false);
 });
 
-test('装備パネル: 倍率が熟度 / HP / ソウル Lv / 結晶 lv に追従する', async ({ page }) => {
+test('装備パネル: 倍率跟着 熟度 / HP / ソウル Lv / 結晶 lv 走', async ({ page }) => {
   await waitHenseiReady(page);
   await setupSlot0WithChara(page, 169701);   // 带 value_scaling 的技能 (×2.98 + 熟度)
 
@@ -1019,7 +1019,7 @@ test('装備パネル: 倍率が熟度 / HP / ソウル Lv / 結晶 lv に追従
   expect(cr1).not.toBe(cr20);
 });
 
-test('装備パネル: 未発動条件の行は消えずに薄く残る (敵BK OFF → 敵BK状態 行)', async ({ page }) => {
+test('装備パネル: 未发动条件的行不消失、只变淡 (敵BK OFF → 敵BK状態 那行)', async ({ page }) => {
   await waitHenseiReady(page);
   await setupSlot0WithChara(page, 107701);   // 带 Enemy_BreakAttack
   await page.evaluate(() => window.setEnemyBk(false));
@@ -1036,7 +1036,7 @@ test('装備パネル: 未発動条件の行は消えずに薄く残る (敵BK O
   expect(on.filter((r) => r.off).length).toBeLessThan(bkRow.length);
 });
 
-test('装備パネル: ▶ の表示は中身に追従、他 slot 変更でも展開状態が残る', async ({ page }) => {
+test('装備パネル: ▶ 的显隐跟着内容走、改别的 slot 也保持展开状态', async ({ page }) => {
   await waitHenseiReady(page);
   await setupSlot0WithChara(page, 168001);
   await setupSlotWithChara(page, 1, 169701);
@@ -1077,7 +1077,7 @@ test('装備パネル: ▶ の表示は中身に追従、他 slot 変更でも�
   expect(await tog1r()).toEqual({ hidden: true, empty: true });
 });
 
-test('装備パネル: 表示行 (発動中) の数 == 計算が使う装備 effect の数', async ({ page }) => {
+test('装備パネル: 显示行 (発動中) 的条数 == 计算实际用到的装備 effect 条数', async ({ page }) => {
   await waitHenseiReady(page);
   await setupSlot0WithChara(page, 168001);
   await setupSlotWithChara(page, 1, 169701);
@@ -1114,7 +1114,7 @@ test('装備パネル: 表示行 (発動中) の数 == 計算が使う装備 eff
 // masou master effect 没有 range 字段 (masou.json 1200 条全无) → stats-calc 兜底成 'Single'。
 // 真正全队的 11 条 (effect_text 含「味方全体」) 由 build_masou_aux.py 注入 range:'All' 进
 // masou_revise.json。所以本测试依赖 revise 数据 (CI 从 data-staging fetch;本地缺 revise 会红)。
-test('魔装 range: 普通魔装は自身のみ / 全队魔王装 (味方全体) は他槽にも効く', async ({ page }) => {
+test('魔装 range: 普通魔装只作用自身 / 全队魔王装 (味方全体) 对别槽也生效', async ({ page }) => {
   await waitHenseiReady(page);
 
   // base_id → variant id (chara wiki shape 的 id 是 6 位 variant)

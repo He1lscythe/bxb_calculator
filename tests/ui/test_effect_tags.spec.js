@@ -51,7 +51,7 @@ test.describe('効果 tag', () => {
     });
   }
 
-  test('crystals: weapon_base_id → キャラ限 badge (scope filter と揃う)', async ({ page }) => {
+  test('crystals: weapon_base_id → キャラ限 badge (跟 scope filter 对得上)', async ({ page }) => {
     await page.goto('/pages/crystals.html');
     await page.waitForFunction(() => window.state?.allCrystals?.length > 0, { timeout: 15000 });
     await page.fill('#search', '純真記憶');
@@ -63,7 +63,7 @@ test.describe('効果 tag', () => {
     expect(bg).not.toBe('rgba(0, 0, 0, 0)');
   });
 
-  test('characters: 詳細パネルに 倒れ / 敵BK状態 が出る (chara 107701)', async ({ page }) => {
+  test('characters: 详情面板里出现 倒れ / 敵BK状態 (chara 107701)', async ({ page }) => {
     const errs = [];
     page.on('pageerror', (e) => errs.push(e.message));
     await page.goto('/pages/characters.html');
@@ -78,7 +78,7 @@ test.describe('効果 tag', () => {
     expect(errs, errs.join('\n')).toHaveLength(0);
   });
 
-  test('souls: 詳細パネルに 倒れ が出る + utils と soul-render の出力が一致', async ({ page }) => {
+  test('souls: 详情面板里出现 倒れ + utils 和 soul-render 输出一致', async ({ page }) => {
     const errs = [];
     page.on('pageerror', (e) => errs.push(e.message));
     await page.goto('/pages/souls.html');
@@ -118,7 +118,7 @@ test.describe('効果 tag', () => {
     expect(errs, errs.join('\n')).toHaveLength(0);
   });
 
-  test('bladegraphs: 一覧が描画される + 無 pageerror', async ({ page }) => {
+  test('bladegraphs: 列表能渲染 + 无 pageerror', async ({ page }) => {
     const errs = [];
     page.on('pageerror', (e) => errs.push(e.message));
     await page.goto('/pages/bladegraphs.html');
