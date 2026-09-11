@@ -80,6 +80,13 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | `../master_tables/` | master_tables (bxb_wiki 仓库 `data/master-tables` branch 的 git worktree、跟 bxb_wiki 同级、`BxB/master_tables/`) |
 | `../data_staging/` | data-staging branch 的常驻 git worktree (2026-06-10 建、跟 bxb_wiki 同级)。revise 同步 / main→data-staging 本地 merge 都在这里做 (`*_revise.json` 在 main gitignored、data-staging tracked — 此 worktree 是它们的 git 归宿) |
 
+> ⚠ **data-staging 是多来源写入**: `sync-main-to-staging`(main push 后自动 merge)、
+> `update-database`(revise 刷新)、Vercel `/api/save` 的 PR、以及本地这个 worktree 手推。
+> 所以往 data-staging 推之前一定先 `git fetch` —— 2026-09-11 就撞过一次: 本地推 revise 的同时
+> `sync-main-to-staging` 正在 merge,它 `git push` 被拒、整个 workflow 失败(它当时没有重试,
+> `update-database` 有 `git pull --rebase` 所以没事)。现已给 sync 加了「push 失败 → 重新 fetch+merge
+> → 重试」最多 5 轮;仍失败就报 error,手动 Run workflow 即可补。
+
 ---
 
 ## scripts/ — 反复使用脚本

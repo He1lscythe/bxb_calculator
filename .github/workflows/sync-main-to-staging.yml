@@ -39,4 +39,12 @@ jobs:
         run: |
           git fetch origin main
           git merge origin/main --no-edit
-          git push origin data-staging
+          for i in 1 2 3 4 5; do
+            if git push origin data-staging; then exit 0; fi
+            echo "::warning::push 被拒 (第 $i 次)、取远端后重试"
+            sleep $((i * 5))
+            git fetch origin data-staging
+            git merge origin/data-staging --no-edit || exit 1
+          done
+          echo "::error::data-staging 连续 5 次被抢先、放弃 (手动 Run workflow 重试)"
+          exit 1
