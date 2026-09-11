@@ -159,7 +159,7 @@ export function baseStats(charaWiki, tr) {
 // ============================================================
 // HP-curve factor 用 **接收方(target)自身 HP** (该 buff 应用到谁就看谁的 HP;
 // range=All 的 HP-curve buff 从别 slot 来时、用 target 的 HP 而非 source 的)。
-// 实现在 shared/parameter-class.js (結晶ページの倍率シミュレータと共用) — 此处 re-export 保持既有 import 路径
+// 实现在 shared/parameter-class.js (跟結晶页的倍率模拟器共用) — 此处 re-export 保持既有 import 路径
 export { conditionFactor };
 
 // strip HP-curve prefix + Enemy_Break prefix 得 base parameter

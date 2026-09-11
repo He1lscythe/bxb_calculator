@@ -1,7 +1,7 @@
-// js/cr-sim.js — 結晶の倍率シミュレータ modal
-// Lv / 重量 / 純度 / 残HP を動かして「その結晶が今いくらか」を見る。
-// 計算は shared/hensei-helpers.crystalEffectiveValue + parameter-class.conditionFactor
-// をそのまま呼ぶ (hensei と同一の式、ここで再実装はしない)。
+// js/cr-sim.js — 結晶倍率模拟器 modal
+// 拖 Lv / 重量 / 純度 / 残HP,看「这个結晶现在是多少」。
+// 计算直接调 shared/hensei-helpers.crystalEffectiveValue + parameter-class.conditionFactor
+// (跟 hensei 同一套式子、这里不重新实现)。
 import { state } from './cr-state.js';
 import { escHtml, fmtLarge } from './utils.js';
 import {
@@ -16,7 +16,7 @@ let _cfg = null;   // { id, lv, weight, purity, hp }
 
 const _cr = () => state.allCrystals.find((x) => x.id === _cfg?.id);
 
-// 残HP が倍率に効くのは Vitality_* / RemHP_* / Break_* 系だけ
+// 残HP 只对 Vitality_* / RemHP_* / Break_* 这几类 parameter 有影响
 const _hpParam = (m) => {
   const p = m?.parameter || '';
   if (p.startsWith('Vitality_')) return 'HP 多いほど強い';
@@ -35,7 +35,7 @@ const _row = (kind, label, min, max, step, value, unit) =>
     <span class="pop-unit">${unit}</span>
   </div>`;
 
-// 各次元の倍率 (crystalEffectiveValue の内訳を表示用に再現)
+// 各维度的倍率 (把 crystalEffectiveValue 的内部拆解复现出来、仅供显示)
 const _dimMults = (m, cfg) => {
   const lvMax = +m.max_level || 1;
   const minW = m.min_weight ?? 0;

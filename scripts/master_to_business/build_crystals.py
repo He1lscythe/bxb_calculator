@@ -133,11 +133,11 @@ def build():
     # — 入手方法 / range / weapon_base_id / weight_step / purity_step / 用户手填 min/max 等 — 全丢):
     #   build 管的字段 (三因子 M_L/W/P_max) 以 build 为准、其余字段从现有 revise 保留
     #
-    # ⚠ max_value は例外で **fill-only** (2026-09-11):
-    #   ここの max_value は `_wiki_aux.json` = 2026-06-09 の一次性スナップショットが出処で、
-    #   もう新しくならない。以前は毎回これで上書きしていたので、viewer で直した値が次の
-    #   CI で巻き戻っていた (実測 1310101 ぶるーまじぇんだ が 1 → 1.1 → 1)。
-    #   live な更新は fetch_wiki_acquisition.py (altema 直読み) が担当する。
+    # ⚠ max_value 例外、只 **fill-only** (2026-09-11):
+    #   这里的 max_value 出处是 `_wiki_aux.json` = 2026-06-09 的一次性快照、不会再更新。
+    #   以前每轮都用它覆盖,于是用户在 viewer 里改过的值会被下一次 CI 刷回去
+    #   (实测 1310101 ぶるーまじぇんだ 被刷成 1 → 1.1 → 1)。
+    #   live 更新交给 fetch_wiki_acquisition.py (直读 altema)。
     if OUT_REVISE.is_file():
         existing_by_id = {e["id"]: e for e in json.loads(OUT_REVISE.read_text(encoding="utf-8")) if "id" in e}
         build_ids = set()
