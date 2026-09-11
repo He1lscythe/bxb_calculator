@@ -1,4 +1,4 @@
-// tests/ui/test_crystal_ui.spec.js — 結晶ページの UI 細部 (説明 modal / 因子行)
+// tests/ui/test_crystal_ui.spec.js — 結晶页的 UI 细节 (説明 modal / 因子行 / 修正 / ⚙)
 import { test, expect } from '@playwright/test';
 
 test('結晶 説明: ? で中央 modal 開閉 / 画面内に収まる', async ({ page }) => {
@@ -20,25 +20,25 @@ test('結晶 説明: ? で中央 modal 開閉 / 画面内に収まる', async ({
   await expect(panel).toContainText('M(純度)');
   await expect(panel).toContainText('最大値');
 
-  // 画面内に完全に収まる (popover 版はここで上にはみ出していた)
+  // 完全收在屏幕内 (popover 版就是在这里超出了上边界)
   const vp = page.viewportSize();
   const r = await panel.boundingBox();
   expect(r.y).toBeGreaterThanOrEqual(0);
   expect(r.x).toBeGreaterThanOrEqual(0);
   expect(r.y + r.height).toBeLessThanOrEqual(vp.height + 1);
   expect(r.x + r.width).toBeLessThanOrEqual(vp.width + 1);
-  // 中央に出る (基準は実際の centering container = #cr-help-modal。
-  //  viewportSize() はスクロールバー幅を含むので直接比べると半分ずれる)
+  // 出现在正中 (基准取实际做居中的容器 = #cr-help-modal。
+  //  viewportSize() 含滚动条宽度、直接比会差半个滚动条)
   const c = await modal.boundingBox();
   expect(Math.abs(r.x + r.width / 2 - (c.x + c.width / 2))).toBeLessThan(2);
   expect(Math.abs(r.y + r.height / 2 - (c.y + c.height / 2))).toBeLessThan(2);
 
-  // × で閉じる
+  // 点 × 关闭
   await page.locator('#cr-help-modal .ce-modal-close').click();
   await expect(modal).toBeHidden();
   expect(await page.evaluate(() => document.body.style.overflow)).toBe('');
 
-  // overlay クリックで閉じる
+  // 点 overlay 关闭
   await btn.click();
   await expect(modal).toBeVisible();
   await page.locator('#cr-help-modal .ce-modal-overlay').click({ position: { x: 5, y: 5 } });
@@ -74,22 +74,22 @@ test('結晶 因子行: 先頭に初期値', async ({ page }) => {
   await page.goto('/pages/crystals.html');
   await page.waitForFunction(() => window.state?.allCrystals?.length > 0);
 
-  // 適当な 1 件を展開
+  // 随便展开一条
   await page.locator('.crystal-row .crystal-row-hd').first().click();
   const row = page.locator('.crystal-row.expanded').first();
   await expect(row).toBeVisible();
 
-  // 因子 の field-row を取る
+  // 取 因子 那一条 field-row
   const val = row.locator('.field-row', { has: page.locator('.field-key', { hasText: '因子' }) })
     .locator('.field-val');
   await expect(val).toBeVisible();
   const txt = (await val.innerText()).replace(/\s+/g, ' ').trim();
 
-  // 初期値 が先頭 + Lv より前
+  // 初期値 在最前、且排在 Lv 之前
   expect(txt.startsWith('初期値')).toBe(true);
   expect(txt.indexOf('初期値')).toBeLessThan(txt.indexOf('Lv'));
 
-  // 値は master の initial_value と一致 (fmtLarge 3 桁)
+  // 值要跟 master 的 initial_value 一致 (fmtLarge 保留 3 位)
   const expected = await row.evaluate((el) => {
     const id = +el.id.replace('row-', '');   // .crystal-row の id は row-<id>
     const c = window.state.allCrystals.find((x) => x.id === id);
@@ -108,7 +108,7 @@ const open = async (page) => {
   await page.waitForFunction(() => window.state?.allCrystals?.length > 0);
 };
 
-// 三因子ぜんぶ設定済み + RemHP_* の結晶を探す (残HP が効くケース)
+// 找一个三因子都填好 + parameter 是 RemHP_* 的結晶 (残HP 会起作用的情况)
 const findRemHp = (page) =>
   page.evaluate(() => {
     const c = window.state.allCrystals.find(
@@ -216,7 +216,7 @@ test('⚙ は 修正 の左・同じ行', async ({ page }) => {
   expect(g.x + g.width).toBeLessThanOrEqual(e.x + 1);                       // 左
   expect(Math.abs(g.y + g.height / 2 - (e.y + e.height / 2))).toBeLessThan(3); // 同じ行
 
-  // ⚙ + 修正 を合わせた幅 = 上の icon と同じ (左右も揃う)
+  // ⚙ + 修正 合起来的宽度 = 上面 icon 的宽度 (左右边也对齐)
   const icon = row.locator('.crystal-icon');
   const [i, box] = [await icon.boundingBox(), await row.locator('.cr-body-actions').boundingBox()];
   expect(Math.abs(box.width - i.width)).toBeLessThan(1.5);
@@ -239,18 +239,18 @@ test('⚙ modal: Lv/重量/純度/HP を動かすと効果値が変わる', asyn
   await expect(out).toContainText('条件係数');
   expect(await out.locator('.sim-note').count()).toBe(0);   // note 行は出さない
 
-  // HP=100 → RemHP 係数 0 なので「残HP 適用後」は ×1 (or +0)
+  // HP=100 → RemHP 系数是 0,所以「残HP 適用後」= ×1 (或 +0)
   const hpRow = modal.locator('.pop-row[data-kind="hp"] input[type=number]');
   await expect(hpRow).toHaveValue('100');
 
-  // Lv を 1 に落とすと効果値が下がる
+  // Lv 降到 1、效果值应该变小
   const before = await out.innerText();
   const lvRow = modal.locator('.pop-row[data-kind="lv"] input[type=number]');
   await lvRow.fill('1');
   await lvRow.dispatchEvent('input');
   await expect(out).not.toHaveText(before);
 
-  // HP を 0 にすると 残HP 適用後 = 効果値 (係数 1)
+  // HP 调到 0 时「残HP 適用後」= 効果値 (系数为 1)
   await hpRow.fill('0');
   await hpRow.dispatchEvent('input');
   const t = await out.innerText();

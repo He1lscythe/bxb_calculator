@@ -1,4 +1,4 @@
-// shared/guild-score.js — ギルバト 40s ダメージ/スコア模拟 (纯函数、无 DOM)
+// shared/guild-score.js — ギルバト 40s 伤害/分数模拟 (纯函数、无 DOM)
 //
 // 模型 (unpacking 03_ead.md §3.9.2 + 08_motion_speed.md §8.6 十帧模型、用户敲定的高频重叠语义):
 //   - loop 周期 P = 3段攻速帧 + 1fr(BT) + 転速(cooldown+set) + 1fr(BT)、每隔 P 就重开新 loop、
@@ -12,7 +12,7 @@
 export const GUILD_BATTLE_SECONDS = 40;
 export const GUILD_HIT_INTERVAL = 0.15;
 export const DAMAGE_RANDOM_RATES = [1.0, 0.99, 0.98, 0.97, 0.96, 0.95];
-// ギルドスコア换算常量: 結界ボーナス固定 2.6、難易度ボーナス N/H/L = 1/5/10
+// ギルドスコア 换算常量: 結界ボーナス 固定 2.6、難易度ボーナス N/H/L = 1/5/10
 export const GUILD_BARRIER_BONUS = 2.6;
 const GUILD_DIFF_BONUS = { Normal: 1, Hard: 5, Lunatic: 10 };
 
@@ -78,7 +78,7 @@ export function simulateGuildScore(input) {
   return { totalDamage, totalHits, loops, perHit };
 }
 
-// ギルドスコア换算:
+// ギルドスコア 换算:
 //   score_base = floor(totalDamage / 1e7)
 //   score = score_base × 難易度ボーナス × 結界ボーナス(2.6)
 // ×26/10 整数运算避 float 噪声 (结果最多 1 位小数)

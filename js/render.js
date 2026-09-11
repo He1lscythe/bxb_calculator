@@ -76,7 +76,7 @@ export const renderList = () => {
   }
 };
 
-// 本地 characters_check.json 写盘（走 start.py /save、本地のみ；生产無 endpoint で静默失败）
+// 本地 characters_check.json 写盘 (走 start.py /save、仅本地;生产环境没这个 endpoint、静默失败)
 const saveCharaCheck = () => {
   const ids = [...state.charaCheck].sort((a, b) => a - b);
   fetch('/save', {
@@ -87,9 +87,9 @@ const saveCharaCheck = () => {
 };
 
 export const selectChar = (id) => {
-  // 只切換 .active class，不 renderList（rebuild 653+ entry の innerHTML は遅機で 100-300ms）。
-  // list 内容変更が伴うケース（filter / sort）は applyFilters 内で renderList を別途呼ぶ。
-  // 編集後の badge 変更（rarity/element/weapon を変えた稀ケース）は反映されないが、許容。
+  // 只切 .active class、不 renderList (重建 653+ entry 的 innerHTML 在慢机上要 100-300ms)。
+  // 涉及 list 内容变化的场景 (filter / sort) 由 applyFilters 内部另外调 renderList。
+  // 编辑后 badge 的变化 (改 rarity/element/weapon 这种少见情况) 不会反映出来、可接受。
   const list = document.getElementById('char-list');
   if (list) {
     const prev = list.querySelector('.char-item.active');
@@ -183,7 +183,7 @@ export const setupStickyHeights = () => {
 };
 
 const renderBDCard = (bd) => {
-  // bd 専用 tag 列：duration + bdhit。魔剣特性 tag は chara header 側で表示する（chara.tags）。
+  // bd 专用 tag 列: duration + bdhit。魔剣特性 tag 在 chara header 那边显示 (chara.tags)。
   const durTag = bd.duration ? `<span class="bd-dur-tag">${escHtml(bd.duration)}</span>` : '';
   const hitTag = bd.bdhit && bd.bdhit > 1 ? `<span class="bd-hit-tag">${bd.bdhit}連</span>` : '';
   const rightTags = durTag + hitTag;
@@ -227,7 +227,7 @@ export const renderDetail = (c) => {
   const bdSection = c.bd_skill?.name ? renderBDCard(c.bd_skill) : '';
   // omoide 数据 lazy fetch (data/omoide/{base_id}.json)、不预先判 hasOmoide
   //   master chara.omoide=[] (无该字段)、真实数据在 Frida-抓 data/omoide/*.json、所以按钮永远显示、
-  //   modal 内 fetch 失败显示 "(なし)" — omoide-view.js 处理
+  //   modal 内 fetch 失败显示 "(なし)" — 由 omoide-view.js 处理
   const omoideBtn = `<button class="btn-latent btn-omoide" onclick="openLatentModal(${c.id})">潜在開放</button>`;
   // masou_by_chara 用 base_id (4位) 索引、chara wiki shape 的 c.id 是 variant_id (6位) → 走 _master.id
   const baseId = c._master?.id ?? c.id;

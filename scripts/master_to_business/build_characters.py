@@ -193,7 +193,7 @@ def build_bd_skill(weapon_arts, weapon_arts_suffix, wiki_scaling, warnings, ctx_
 
 
 def load_attack_motions():
-    """attack_motions.json → {id: name} map (motion_id ↔ モーション名)"""
+    """attack_motions.json → {id: name} map (motion_id ↔ モーション 名称)"""
     src = master_file("attack_motions.json")
     arr = json.loads(src.read_text(encoding="utf-8"))
     return {x["id"]: x.get("name") for x in arr}

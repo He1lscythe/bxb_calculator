@@ -34,12 +34,11 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 - 4 bucket revise: `chara_revise.json` (tags + skill value_scaling) / `soul_revise.json` (tags) / `crystal_revise.json` (max_value / M_L/W/P_max / min_max weight/purity) / `masou_revise.json` (skill value_scaling)
   - `M_L_max` / `M_W_max` / `M_P_max` **不填 1** — 缺省即 1 (`parseFactor(null)=1`)，显式写 1 反而让 `crystalDimAvailability` 判成「该维度可调」、⚙ 里多出一条拖不动的滑条。cr-edit 里 `def: 1` 只是 placeholder、不会落盘
 - sparse diff core: [shared/revise-core.js](../shared/revise-core.js) (`computeDiff` / `deepApply` / 撤回 / tombstone null)
-- wiki 提取产物: `data/_wiki_aux.json` —— **2026-06-09 的一次性快照**、不再重跑。4 个 key 现状各不相同:
+- wiki 提取产物: `data/_wiki_aux.json` —— **2026-06-09 的一次性快照**、不再重跑。3 个 key 现状各不相同 (原有的 `chara_tags` 300 条已于 2026-09-11 删除 —— 没有任何消费方,`characters.json` 的 `tags` 一直是 `[]`,真正生效的 tag 在 `chara_revise.json`):
   | key | 现状 |
   |---|---|
   | `crystal_max_value` (1220) | **已被 live 抓取接管** (2026-09-11)。[fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) 每轮从 altema 的 【効果量】 区间上限取 `max_value`;这里的快照只作 `build_crystals` 的 **fill-only** 兜底 (曾经每轮覆盖 revise、把用户改的值刷回去) |
   | `chara_skill_value_scaling` (89) | 仍是唯一来源、`build_characters` 读。altema 无对应结构化字段、只能靠 `chara_revise` 手工覆盖 |
-  | `chara_tags` (300) | **死数据** —— 没有任何消费方 (`build_characters` 只读 `chara_skill_value_scaling`、`characters.json` 的 `tags` 全是 `[]`)。真正的 tag 在 `chara_revise.json` (295 条、viewer 编辑) |
   | `masou_value_scaling` | 空 dict、预留接口、`build_masou` 读到就是 no-op |
 
 ### 仓库外路径约定
@@ -225,7 +224,7 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 - `chara_revise.json` / `soul_revise.json` / `crystal_revise.json` / `masou_revise.json`
 
 **Audit / 一次性产物**:
-- `_wiki_aux.json` — 2026-06-09 一次性 wiki 快照。`crystal_max_value` 已改由 live 抓取接管 (仅作 fill-only 兜底)、`chara_tags` 是死数据、`masou_value_scaling` 空;只有 `chara_skill_value_scaling` 还是唯一来源。详见上方「关键模块」
+- `_wiki_aux.json` — 2026-06-09 一次性 wiki 快照。`crystal_max_value` 已改由 live 抓取接管 (仅作 fill-only 兜底)、`masou_value_scaling` 空 dict;只有 `chara_skill_value_scaling` 还是唯一来源。详见上方「关键模块」
 - `_audit_crystals_null_math.json` / `_wiki_unmatched_crystals.json` — build_crystals 每轮重生的诊断输出、gitignored 不入库 (2026-07-04 起)
 
 ---

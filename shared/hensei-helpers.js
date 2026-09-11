@@ -293,7 +293,7 @@ export const ADVANTAGE_WEAPON_MULT = 2.0;
 // slider UI step=0.01 允许细滑、但公式 floor 让半 step 倍率不变 (即 n=4.5 跟 n=4 同倍率)
 export function bdCapMult(n) { return 1 + Math.floor((+n || 0) / 2) * 0.25; }
 
-// blaze_gauge_points 「A 表 base」(unpacking §1.3.3.5、力試し副本数据、61 项)
+// blaze_gauge_points 的「A 表 base」(unpacking §1.3.3.5、力試し 副本的数据、61 项)
 // 每项 = level i 升级需要的 BlazeGauge points 累计
 // 「只魔剣 skill」pipeline 用此表: `floor(A[i] × Π chara_skill_value)`
 export const BLAZE_GAUGE_POINTS_BASE_A = [

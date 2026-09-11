@@ -20,10 +20,10 @@ export const CRYSTAL_SPEC = {
   },
 };
 
-// crystal アイコン URL 解决器：
-//   cr.image 缺省 → wiki デフォルト URL
-//   cr.image = "http(s)://..." / "//..." → そのまま URL
-//   cr.image = repo 相対パス（"icons/crystal/foo.png"）→ pages/ から見て "../" 前缀
+// crystal icon URL 解析器:
+//   cr.image 缺省 → wiki 默认 URL
+//   cr.image = "http(s)://..." / "//..." → 原样当 URL
+//   cr.image = 仓库内相对路径 ("icons/crystal/foo.png") → 相对 pages/ 加 "../" 前缀
 // crystal icon: ../icons/crystal/{id}.png — copy_images.py cascade _1 → _2 → _3 → _4 后已归一化无后缀
 export const crystalImageSrc = (cr) => {
   const img = cr && cr.image;

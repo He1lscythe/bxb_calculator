@@ -60,7 +60,7 @@ export function effectCondition(eff) {
   return id ? { id, label: COND_TRIGGER_LABEL[id] || '' } : null;
 }
 
-// 展开详情用的长格式 scope label:「火属性のみ」「太刀/大剣のみ」。cr-list / bg-list 各有一份
+// 展开详情用的长格式 scope label: 如「火属性のみ」「太刀/大剣のみ」。cr-list / bg-list 各有一份
 // 一模一样的拷贝、合到这里。属性优先 (两者都有时只出属性 —— 原实现如此、保持不变)。
 export function effectScopeLongLabel(eff) {
   if (!eff) return '';

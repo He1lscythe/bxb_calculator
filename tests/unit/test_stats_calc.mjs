@@ -644,7 +644,7 @@ test('omoide Add → stage 1、Mul → stage 3 (用户 picks 2 slot)', () => {
   assert.strictEqual(r.stats['攻撃力'], 20250);
 });
 
-// 転速 の omoide Add は server-fold 段 (01_setup.md §1.1.2 `speed = speed + Σ slot_speed_add`)
+// 転速 的 omoide Add 属于 server-fold 段 (01_setup.md §1.1.2 `speed = speed + Σ slot_speed_add`)
 test('転速: omoide Speed Add 折进 recover (Mul 之前) + server-fold floor', () => {
   const c = mockChara();   // base.Speed = max_speed = 22 (lv250/熟度60 → t=1)
   c._omoide_slots = [
