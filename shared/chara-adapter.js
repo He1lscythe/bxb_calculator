@@ -151,7 +151,7 @@ function _statsToWiki(stats, hitCounts) {
   return out;
 }
 
-// motion_id → モーション 名称 (master 表无、用 attack_motion_id 数字)
+// motion_id → モーション 名称 (master 表里没有、只能用 attack_motion_id 数字)
 function _motionLabel(stateData) {
   return stateData.attack_motion_id != null ? String(stateData.attack_motion_id) : '-';
 }

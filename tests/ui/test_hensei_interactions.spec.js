@@ -684,26 +684,26 @@ test('enemy.emblems[0] 默认装 id=1 (guild_only=false) → 全局生效、norm
 });
 
 // ============================================================
-// 秘録記憶: 自分の weapon_base_id 一致 → 結晶枠 +1 (上限1)
+// 秘録記憶: 自己的 weapon_base_id 对上 → 結晶枠 +1 (上限 1)
 // ============================================================
 test('秘録記憶 装着 → 結晶枠 +1、外す → 戻る、他人の秘録は無効', async ({ page }) => {
   await waitHenseiReady(page);
-  // 練刀･有里村正 (base 1519) ← 54150008 が自分の秘録記憶
+  // 練刀･有里村正 (base 1519) ← 54150008 就是它自己的 秘録記憶
   const vid = await page.evaluate(() => window.state.allCharas.find((c) => c._master?.id === 1519)?.id);
   expect(vid).toBeTruthy();
   await page.evaluate((id) => window.setChara(0, id), vid);
   await page.waitForTimeout(800);
   const base = await page.evaluate(() => window.state.team[0].crystals.length);
   expect(base).toBeGreaterThan(0);
-  // 自分の秘録記憶 → +1
+  // 自己的 秘録記憶 → +1
   await page.evaluate(() => window.setCrystal(0, 0, 54150008));
   await page.waitForTimeout(100);
   expect(await page.evaluate(() => window.state.team[0].crystals.length)).toBe(base + 1);
-  // 外す → 戻る (固定点 sync)
+  // 卸下来 → 回到原值 (靠固定点 sync)
   await page.evaluate(() => window.setCrystal(0, 0, null));
   await page.waitForTimeout(100);
   expect(await page.evaluate(() => window.state.team[0].crystals.length)).toBe(base);
-  // 他人の秘録記憶 (七詩村正 1518 の 54150009) → 変化なし
+  // 别人的 秘録記憶 (七詩村正 1518 的 54150009) → 无变化
   await page.evaluate(() => window.setCrystal(0, 0, 54150009));
   await page.waitForTimeout(100);
   expect(await page.evaluate(() => window.state.team[0].crystals.length)).toBe(base);
@@ -816,7 +816,7 @@ test('bxb1 往返: mainSlot 保留', async ({ page }) => {
 });
 
 // ============================================================
-// stats 説明トグル
+// stats 的 説明 开关
 // ============================================================
 test('stats 説明: ? タグで popover 開閉 (body 直下 / 再クリックで閉じる / 外側クリックで閉じる)', async ({ page }) => {
   await waitHenseiReady(page);
@@ -1125,7 +1125,7 @@ test('魔装 range: 普通魔装は自身のみ / 全队魔王装 (味方全体)
       atk: window.__lastStats[0].stats['攻撃力'],
       dl: window.__lastStats[0].damageLimit,
     }));
-  // slot2 に costume を着せて slot0 への影響を測る
+  // 给 slot2 穿上 costume、量它对 slot0 的影响
   const wear = async (masouId) => {
     await page.evaluate((id) => window.setMasou(2, id), masouId);
     await page.waitForTimeout(300);
@@ -1140,7 +1140,7 @@ test('魔装 range: 普通魔装は自身のみ / 全队魔王装 (味方全体)
       );
     });
 
-  // slot0 = 169701 (base 1697、自分の魔装なし → 魔装 section は動的に生える側)
+  // slot0 = 169701 (base 1697、自己没有魔装 → 魔装 section 属于动态长出来的那种)
   // slot2 = 1001 レヴァンテイン=ヘル (1001011 魔装《晴着》= 攻撃力13%UP、range なし)
   await setupSlotWithChara(page, 0, 169701);
   await setupSlotWithChara(page, 2, await variantOf(1001));
@@ -1149,19 +1149,19 @@ test('魔装 range: 普通魔装は自身のみ / 全队魔王装 (味方全体)
   expect(plainAfter.atk).toBe(plainBefore.atk);          // 自身のみ → 他槽は不変
   expect(await crossRows()).toBeNull();                  // 魔装 section すら生えない
 
-  // slot2 を 1502 神菓王ザッハトルテ に替えて 1502704 魔王装 (味方全体 4 効果) を着せる
+  // 把 slot2 换成 1502 神菓王ザッハトルテ、给它穿 1502704 魔王装 (味方全体 4 个效果)
   await setupSlotWithChara(page, 2, await variantOf(1502));
   const teamBefore = await readSlot0();
   const teamAfter = await wear(1502704);
   expect(teamAfter.atk).toBeGreaterThan(teamBefore.atk);                 // 味方全体の攻撃力1.75倍
   expect(teamAfter.dl).toBe(teamBefore.dl + 1000000000);                 // ダメージ上限+10億
-  // slot0 は自分の魔装を持たないが、他槽の全队魔王装を受けるので section が生えて 4 行出る
+  // slot0 自己没有魔装,但会吃到别槽的全队魔王装,所以 section 会长出来、出 4 行
   const rows = await crossRows();
   expect(rows).not.toBeNull();
   expect(rows.length).toBe(4);
   expect(rows).toContain('+10億');
 
-  // 外すと section も消える (存在性が内容に追従)
+  // 卸掉后 section 也消失 (存在性跟着内容走)
   await page.evaluate(() => window.setMasou(2, null));
   await page.waitForTimeout(300);
   expect(await crossRows()).toBeNull();

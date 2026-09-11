@@ -299,7 +299,7 @@ export const toggleExpand = (id) => {
   if (_vlist) _vlist.invalidateRow(id);
 };
 
-// 展开详情用的长格式 scope label (「火属性のみ」)。判定在 shared/effect-tags.js
+// 展开详情用的长格式 scope label (如「火属性のみ」)。判定在 shared/effect-tags.js
 export const scopeLabel = effectScopeLongLabel;
 
 export const renderDetailBody = (c) => {

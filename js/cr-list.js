@@ -244,7 +244,7 @@ export const renderRowHd = (c) => {
     '<button class="expand-btn" onclick="event.stopPropagation();toggleExpand(' +
     c.id +
     ')">▾</button>';
-  // 本地 check: 名字左に checkbox。click は row 展開を発火しない。
+  // 本地 check: 名字左边放 checkbox。点它不触发行展开。
   const checkCb = state.crystalCheckEnabled
     ? '<input type="checkbox" class="crystal-check-cb" data-id="' +
       c.id +
@@ -331,7 +331,7 @@ export const toggleExpand = (id) => {
   if (_vlist) _vlist.invalidateRow(id);
 };
 
-// 展开详情用的长格式 scope label (「火属性のみ」)。判定在 shared/effect-tags.js
+// 展开详情用的长格式 scope label (如「火属性のみ」)。判定在 shared/effect-tags.js
 export const scopeLabel = effectScopeLongLabel;
 
 // 注: 旧的 renderEffLine (detail body 内逐 effect 渲染) 已随「body 不重复効果量」的设计移除,

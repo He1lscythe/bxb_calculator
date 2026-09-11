@@ -12,8 +12,8 @@ export const state = {
   sortDesc: true,
   SENZAI_TABLE: {},
   omoideTemplates: [],
-  // 魔装：data/masou.json から派生。chara_id → masou[] でグループ済み。
-  // 編集セッション中の修正は state.editData.masou_added / masou_deleted_ids で追跡。
+  // 魔装: 从 data/masou.json 派生。已按 chara_id → masou[] 分好组。
+  // 编辑会话中的改动用 state.editData.masou_added / masou_deleted_ids 追踪。
   allMasou: [], // 平の masou 配列（masou.json + extra + revise 適用後）
   masouOriginalData: {}, // masou_id → snapshot of (base + extra)、computeDiff baseline
   masouByChara: {}, // {chara_id: [masou objects]}
@@ -46,7 +46,7 @@ export const state = {
   _stickyResizeObserver: null,
   _stickyMeasureRAF: null,
 
-  // 本地用：data/characters_check.json 存在時に per-item check 標記を有効化（soul と同款）
+  // 仅本地: data/characters_check.json 存在时启用逐项 check 标记 (跟 soul 同一套)
   charaCheckEnabled: false,
   charaCheck: new Set(),
 };

@@ -45,7 +45,7 @@ test.describe('効果 tag', () => {
 
       const rows = await rowBadges(page);
       expect(rows.length, `filter「${label}」で 1 件も出ない`).toBeGreaterThan(0);
-      // 絞り込んだ条件は、出てきた全行に badge として出ていること
+      // 筛过的条件,必须在筛出来的每一行上都有对应 badge
       for (const badges of rows) expect(badges, JSON.stringify(rows)).toContain(label);
       expect(errs, errs.join('\n')).toHaveLength(0);
     });
@@ -58,7 +58,7 @@ test.describe('効果 tag', () => {
     await page.waitForTimeout(800);
     const n = await page.locator('.badge.scope5').count();
     expect(n).toBeGreaterThan(0);
-    // 样式は shared.css 側 (bladegraphs.css から移設) — 背景が付いていること
+    // 样式在 shared.css (从 bladegraphs.css 移过来的) — 确认有背景色
     const bg = await page.locator('.badge.scope5').first().evaluate((el) => getComputedStyle(el).backgroundColor);
     expect(bg).not.toBe('rgba(0, 0, 0, 0)');
   });
@@ -97,7 +97,7 @@ test.describe('効果 tag', () => {
     ]);
     expect(cond).toContain('倒れ');
 
-    // 同じ effect を 2 つの renderRightTags に食わせて出力一致を確認 (3 份实现が漂移してないこと)
+    // 同一条 effect 喂给两个 renderRightTags、确认输出一致 (防止 3 份实现漂移)
     const same = await page.evaluate(async () => {
       const utils = await import('../js/utils.js');
       const soulR = await import('../js/soul-render.js');

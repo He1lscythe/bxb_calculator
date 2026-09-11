@@ -179,7 +179,7 @@ const renderAffinityView = (s) => {
       </div>`;
   }
   const elemCells = ELEMS_ORDER.map((n) => cellHtml(n, (s.element_affinity || {})[n])).join('');
-  // 武器 grid: 6×2（12 weapons / 6 cols）。inline min-width:60px を外し grid を screen 宽以内に納める
+  // 武器 grid: 6×2 (12 weapons / 6 列)。去掉 inline 的 min-width:60px、让 grid 收在屏宽以内
   const weapCells = WEAPONS_ORDER.map((n) => cellHtml(n, (s.weapon_affinity || {})[n])).join('');
   return min`
     <div class="section">
