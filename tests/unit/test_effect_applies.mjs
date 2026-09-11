@@ -122,7 +122,7 @@ test('无任何限定: 总命中', () => {
   assert.equal(ok({ range: 'All' }, C(1, 2, 100), C(3, 4, 200), 0, 1), true);
 });
 test('装备者门槛 + 接收方过滤 都要满足', () => {
-  // 闇装備で + 風属性の味方 (假想): 装备者闇 且 接收方風 才命中
+  // 「闇装備で」+「風属性の味方」(假想组合): 装备者是闇、且接收方是風 才命中
   const eff = { range: 'All', element_condition: 5, target_element_id: 3 };
   assert.equal(ok(eff, C(3), C(5), 0, 1), true);    // 装备者闇 + 接收方風 ✓
   assert.equal(ok(eff, C(3), C(1), 0, 1), false);   // 装备者非闇 ✗

@@ -18,7 +18,7 @@ export const renderRightTags = (s) => {
 
 export const fmtNum = (v) => {
   if (typeof v === 'string') {
-    // 分式 "100000000/9" → 両側それぞれ千分位化（"100,000,000/9"）。非数値部分は原状維持。
+    // 分式 "100000000/9" → 两边各自加千分位 ("100,000,000/9")。非数字部分原样保留。
     if (v.includes('/')) {
       return v
         .split('/')
@@ -36,10 +36,10 @@ export const fmtNum = (v) => {
   return String(parseFloat(v.toFixed(4)));
 };
 
-// soul affinity の atk_effect / def_effect 表示用。
-//   - 含 `/` の文字列 → そのまま（分数表記を保持）
+// 给 soul affinity 的 atk_effect / def_effect 显示用。
+//   - 含 `/` 的字符串 → 原样返回 (保留分数写法)
 //   - 数値 / 数値文字列 → 小数 3 位四捨五入、末尾 0 除去（例 1.234 → "1.234"、1.015 → "1.015"、1 → "1"）
-//   - その他 → そのまま toString
+//   - 其他 → 直接 toString
 export const fmtAff = (v) => {
   if (v == null) return '1';
   if (typeof v === 'string') {
@@ -138,7 +138,7 @@ export const fmt = (n) => {
   return String(n);
 };
 
-// row バッジ用：大きい数字を万/億に変換。digits は小数桁数（既定 2、cr-eff-list 衰减後表示は 3）。
+// 给 row badge 用: 大数字转成 万/億。digits = 小数位数 (默认 2、cr-eff-list 衰减后显示用 3)。
 export const fmtLarge = (n, digits = 2) => {
   if (n == null) return '-';
   if (typeof n !== 'number') return String(n);

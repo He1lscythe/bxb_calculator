@@ -234,8 +234,8 @@ function _resolveSlot(slot, ctx) {
 
 // 专属条件 override: 个别魔剣技能的触发条件只在 description、master 无结构化字段 → 手动标 skill_id → 条件。
 // (这类技能极少;新增时往表加一行 + 在 pushEff 加对应 factor 分支。区别于通用 mpRate)
-//   { type:'mp_not_full' }           魔力未満で発動 (看装备者自身 MP)
-//   { type:'team_has', wbid:<base> } 「Xと同編成で」発動 (队伍任一 slot 的魔剣 base id == wbid)
+//   { type:'mp_not_full' }           魔力未満 时发动 (看装备者自身 MP)
+//   { type:'team_has', wbid:<base> } 「Xと同編成で」时发动 (队伍任一 slot 的魔剣 base id == wbid)
 const SKILL_COND_OVERRIDE = {
   60009: { type: 'mp_not_full' }, // 気高き悪食の世界樹: 魔力未満で攻撃力 ×3
   // 「Xと同編成で」: 条件只在描述、需队伍中含指定魔剣 (base id) 才激活
@@ -342,7 +342,7 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
       }
     }
     collected.push(entry);
-    // HitCountKeepDamage 第二效果「减攻」: 加 B hit 的同时 Attack ×= A/(A+B)、フルヒット保持不变。
+    // HitCountKeepDamage 第二效果「减攻」: 加 B hit 的同时 Attack ×= A/(A+B)、フルヒット 保持不变。
     //   A = 目标魔剣原始 hit_counts 之和 (characters.json、未经任何计算)、B = 本效果加 hit 总量 = Σ_stages。
     //   分类到 Attack、进 PSV 池 (applyStaged Stage 4 Mul、跟原 source 同 stage)。
     if (entry.base_parameter === 'HitCountKeepDamage') {
@@ -686,9 +686,9 @@ export function applyStaged(base, parameter, effects, opts = {}) {
 
   // Stage 1: omoide Add
   addPass('s1_omoide_add', same.filter((e) => e._source === 'omoide' && e.math_type === 'Addition'));
-  // Stage 2a: masou Add (静的のみ)
+  // Stage 2a: masou Add (只算静态的)
   addPass('s2a_masou_add', same.filter((e) => e._source === 'masou' && e.math_type === 'Addition' && !_isDynamic(e)));
-  // Stage 2b: masou Mul (静的のみ)
+  // Stage 2b: masou Mul (只算静态的)
   mulPass('s2b_masou_mul', same.filter((e) => e._source === 'masou' && e.math_type === 'Multiply' && !_isDynamic(e)));
   // Stage 2 終: server-fold floor — base + omoide + masou 都是 server 侧算的、返回整数
   {
@@ -704,7 +704,7 @@ export function applyStaged(base, parameter, effects, opts = {}) {
   }
   // Stage 4/5: other Mul / Add (chara_skill/bd_skill/crystal/bg/soul/chara_meta/soul_affinity/omoide_mul)
   // 顺序 (计算跟 trace 显示一致、stage 一级目录可见分类):
-  //   s4a 非 soul Mul (chara/crystal/bg/魔装/meta…) → s4b ソウル Mul → s5a 非 soul Add → s5b ソウル Add
+  //   s4a 非 soul Mul (chara/crystal/bg/魔装/meta…) → s4b soul Mul → s5a 非 soul Add → s5b soul Add
   //   各类内按 slot 升序 (stable sort、同 slot 内保持 collectEffects push 顺序)
   const _isSoulSrc = (e) => e._source === 'soul' || e._source === 'soul_affinity';
   const _isBd = (e) => e._source === 'bd_skill';
@@ -1011,7 +1011,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
     }
   }
 
-  // bdCapMax: BD ゲージ上限 max 計算 (简化、不沿用 wiki 旧 -1 / mul 累加设计)
+  // bdCapMax: BD ゲージ 上限的 max 计算 (简化、不沿用 wiki 旧的 -1 / mul 累加设计)
   //   bdCapMax = max(9, floor((9 + Σadd) × Π mul))
   //   base = 9 (默认上限、跟 UI 显示对齐、不再用 10-1 indexed)
   //   add 累加: Σ value × cf
@@ -1083,7 +1083,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   // Step 3: cumsum 反查 totalGauge points → bd_cap level (小数允许)
   const initialBdCap = bdCapFromBlazeGauge(blazeGaugePoints, initialBlazeGauge);
 
-  // フルヒット
+  // フルヒット 攻撃力
   const fullHit = Math.floor(stats.Attack * totalHits);
 
   return {

@@ -1,4 +1,4 @@
-// tests/unit/test_guild_score.mjs — guild-score.js ギルバト 40s ダメージ/スコア模拟单测
+// tests/unit/test_guild_score.mjs — guild-score.js 的 ギルバト 40s 伤害/分数模拟单测
 //
 // 模型: loop 周期 = 3段攻速帧 + 転速(cooldown+set) + 2fr(BT)、高频重叠 (loop 每 P 重开、
 // hit 列后台并行堆叠)、段 i 偏移 = 前面各段攻速帧累计、perHit = 6 档波动率均值 min(dl, aMax×r)、
@@ -165,7 +165,7 @@ test('全空输入 → totalDamage=0 不炸', () => {
 });
 
 // ============================================================
-// computeGuildScore: ダメージ → ギルドスコア换算
+// computeGuildScore: 伤害 → ギルドスコア 换算
 // ============================================================
 test('computeGuildScore: score_base = floor(damage/1e7)、難易度 N/H/L = 1/5/10、結界 2.6', () => {
   // 123,456,789 / 1e7 → floor = 12

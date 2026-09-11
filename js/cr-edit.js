@@ -51,7 +51,7 @@ const _DEP_KEY = {
 };
 
 // 旧 wiki cr-edit 视觉 pattern (2026-06-08 用户决策):
-// - 顶部 .edit-actions (保存 / キャンセル)
+// - 顶部 .edit-actions (保存 / キャンセル 两个按钮)
 // - 下面 .edit-ro 显示 name
 // - .field-row + .field-key + .field-val 显示只读 effect 文 / 特殊条件
 // - .field-label 作 section title、.skill-edit-meta 作 grid 容器
@@ -108,7 +108,7 @@ const _renderEditBody = (c) => {
   const roEffect = desc
     ? `<div class="field-row"><div class="field-key">説明</div><div class="field-val edit-ro">${desc}</div></div>`
     : '';
-  // 3 つを 1 行に (窄屏では 効果 が改行して 初期値/最大Lv が並ぶ — css/crystals.css)
+  // 三项放同一行 (窄屏下 効果 换行、初期値/最大Lv 并排 — 见 css/crystals.css)
   const roItem = (k, v) =>
     `<div class="ro-item"><span class="field-key">${k}</span><span class="edit-ro">${v}</span></div>`;
   const roMeta = `<div class="field-row ro-meta">` +
@@ -122,7 +122,7 @@ const _renderEditBody = (c) => {
     _EDIT_FIELDS.map(inputFor).join('') +
     `</div>`;
 
-  // id 左 + 保存/キャンセル 右 同行
+  // id 靠左 + 保存/キャンセル 靠右、同一行
   const topBar = `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:3px 0 8px">` +
     `<span style="font-size:11px;color:var(--text2)">id = ${c.id}</span>` +
     `<div class="edit-actions" style="margin:0">` +

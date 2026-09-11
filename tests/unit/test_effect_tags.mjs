@@ -148,7 +148,7 @@ test('effectScopeLongLabel: 属性优先、武器用 / 连接', () => {
 });
 
 // ============================================================
-// normalizeMasterEffect — hensei 装备面板 (collectEffects の master shape)
+// normalizeMasterEffect — hensei 装备面板 (collectEffects 用的 master shape)
 // ============================================================
 test('normalizeMasterEffect: weapons/crystals 走 target_element_id / weapon_type_id', () => {
   const w = normalizeMasterEffect(

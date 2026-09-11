@@ -102,7 +102,7 @@ export const Nav = {
 // 所有 viewer 都通过 window.state = state 暴露 — 不再 fallback 到 legacy 全局
 export const updateReviseBar = () => {
   const sr = window.state?.sessionReviseIds ?? new Set();
-  // characters ページでは masou 編集も同じ save bar をトリガする（独立 set）
+  // characters 页里 masou 的编辑也触发同一个 save bar (用独立的 set 记)
   const msr = window.state?.masouSessionReviseIds ?? new Set();
   const count = sr.size + msr.size;
   const bar = document.getElementById('revise-bar');
@@ -110,7 +110,7 @@ export const updateReviseBar = () => {
   const status = document.getElementById('revise-status');
   if (!bar || !btn) return;
   bar.style.display = count > 0 ? 'flex' : 'none';
-  // local (start.py) 直接写盘 → Save;GitHub Pages / Vercel 走 PR → Submit (提出済み)
+  // local (start.py) 直接写盘 → Save;GitHub Pages / Vercel 走 PR → Submit (已提交)
   const label = isLocalEnv() ? 'Save' : 'Submit';
   btn.textContent = count > 0 ? `${label} (${count})` : label;
   if (status) status.textContent = '';
