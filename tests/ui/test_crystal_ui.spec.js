@@ -1,7 +1,7 @@
 // tests/ui/test_crystal_ui.spec.js — 結晶页的 UI 细节 (説明 modal / 因子行 / 修正 / ⚙)
 import { test, expect } from '@playwright/test';
 
-test('結晶 説明: ? で中央 modal 開閉 / 画面内に収まる', async ({ page }) => {
+test('結晶 説明: 点 ? 开关居中 modal / 完全收在屏幕内', async ({ page }) => {
   await page.goto('/pages/crystals.html');
   await page.waitForFunction(() => window.state?.allCrystals?.length > 0);
 
@@ -45,7 +45,7 @@ test('結晶 説明: ? で中央 modal 開閉 / 画面内に収まる', async ({
   await expect(modal).toBeHidden();
 });
 
-test('結晶 説明: 狭い画面でも ? が押せて modal が収まる', async ({ page }) => {
+test('結晶 説明: 窄屏下 ? 也能点、modal 也收得住', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 780 });
   await page.goto('/pages/crystals.html');
   await page.waitForFunction(() => window.state?.allCrystals?.length > 0);
@@ -62,7 +62,7 @@ test('結晶 説明: 狭い画面でも ? が押せて modal が収まる', asyn
   expect(r.y + r.height).toBeLessThanOrEqual(780 + 1);
 });
 
-test('結晶 説明: 検索入力は壊れていない', async ({ page }) => {
+test('結晶 説明: 搜索输入没被弄坏', async ({ page }) => {
   await page.goto('/pages/crystals.html');
   await page.waitForFunction(() => window.state?.allCrystals?.length > 0);
   const before = await page.locator('#crystal-count').textContent();
@@ -70,7 +70,7 @@ test('結晶 説明: 検索入力は壊れていない', async ({ page }) => {
   await expect(page.locator('#crystal-count')).not.toHaveText(before);
 });
 
-test('結晶 因子行: 先頭に初期値', async ({ page }) => {
+test('結晶 因子行: 初期値 排在最前', async ({ page }) => {
   await page.goto('/pages/crystals.html');
   await page.waitForFunction(() => window.state?.allCrystals?.length > 0);
 
@@ -118,7 +118,7 @@ const findRemHp = (page) =>
     return c ? c.id : null;
   });
 
-test('修正: id = の等号前後にスペース / ラベル 説明・効果・最大Lv', async ({ page }) => {
+test('修正: id = 等号两侧留空格 / label 用 説明・効果・最大Lv', async ({ page }) => {
   await open(page);
   const id = await page.locator('.crystal-row').first().evaluate((el) => +el.id.replace('row-', ''));
   await page.evaluate((i) => window.enterEditMode(i), id);
@@ -132,7 +132,7 @@ test('修正: id = の等号前後にスペース / ラベル 説明・効果・
   expect(txt).not.toContain('parameter');
 });
 
-test('修正: 効果 / 初期値 / 最大Lv が 1 行 (desktop) → 窄屏では 2 行', async ({ page }) => {
+test('修正: 効果 / 初期値 / 最大Lv 桌面端 1 行 → 窄屏 2 行', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await open(page);
   const id = await page.locator('.crystal-row').first().evaluate((el) => +el.id.replace('row-', ''));
@@ -151,7 +151,7 @@ test('修正: 効果 / 初期値 / 最大Lv が 1 行 (desktop) → 窄屏では
 
 // 针对「三个挤在一起」: desktop 各占 1/3、窄屏第二行 50/50。
 // 顺带让 説明 和 効果 的 field-key 宽度一致、值的左端在一条线上。
-test('修正 ro-meta: desktop 3 等分 / 窄屏 2 行目は 50/50 / 説明・効果 の左端が揃う', async ({ page }) => {
+test('修正 ro-meta: 桌面 3 等分 / 窄屏第二行 50/50 / 説明・効果 左端对齐', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await open(page);
   const id = await page.locator('.crystal-row').first().evaluate((el) => +el.id.replace('row-', ''));
@@ -204,7 +204,7 @@ test('修正 ro-meta: desktop 3 等分 / 窄屏 2 行目は 50/50 / 説明・効
   expect(m.items[2].key.w).toBeGreaterThan(m.descKey.w);
 });
 
-test('⚙ は 修正 の左・同じ行', async ({ page }) => {
+test('⚙ 在 修正 左边、同一行', async ({ page }) => {
   await open(page);
   await page.locator('.crystal-row .crystal-row-hd').first().click();
   const row = page.locator('.crystal-row.expanded').first();
@@ -224,7 +224,7 @@ test('⚙ は 修正 の左・同じ行', async ({ page }) => {
   expect(Math.abs(box.x + box.width - (i.x + i.width))).toBeLessThan(1.5);
 });
 
-test('⚙ modal: Lv/重量/純度/HP を動かすと効果値が変わる', async ({ page }) => {
+test('⚙ modal: 拖 Lv/重量/純度/HP 效果值随之变化', async ({ page }) => {
   await open(page);
   const id = await findRemHp(page);
   test.skip(!id, 'RemHP_* の三因子結晶が無い');

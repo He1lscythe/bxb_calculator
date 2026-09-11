@@ -321,7 +321,7 @@ UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的
 - **倍率是解算后的值**:熟度 (`value_scaling × jukudo`) / ソウル Lv (`soulMultiplier`) / 結晶 lv·重量·純度
   (`crystalEffectiveValue`) 已折进 `value`;HP 曲线 (`Vitality_`/`RemHP_`/`Break_`) 和「Xと同編成で」这类
   条件折进 `condition_factor`。面板按跟 `applyStaged` 一致的式子展开 (`Mul → 1+(v-1)×cf`、`Add → v×cf`),
-  所以**面板上的数字就是计算真正用的数字**(测试 `装備パネル: 表示行 (発動中) の数 == 计算が使う装備 effect の数` 锁死)。
+  所以**面板上的数字就是计算真正用的数字**(测试 `装備パネル: 显示行 (発動中) 的条数 == 计算实际用到的装備 effect 条数` 锁死)。
 - **跨 slot 技能落到目标 slot**:`collectEffects` 本来就按 `range` + 属性/武器/魔剣限定 判过命中,
   所以 `range=All` 的技能只要打到本 slot、就出现在本 slot 对应面板里 (橙色左边线 + 「N号位」徽章 + 効果文)。
   例:1680「長剣の魔剣のヒット数を2.5倍にする」在同队有長剣时、会出现在那个長剣的 `魔剣` 面板。
