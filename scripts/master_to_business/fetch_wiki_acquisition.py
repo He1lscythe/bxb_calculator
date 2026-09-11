@@ -170,11 +170,35 @@ def jp_num(s):
     return total + _jp_small(s)
 
 
+def _range_parts(s):
+    if not s:
+        return []
+    return re.split(r'[～~〜]', s.split('\n')[0])
+
+
 def range_upper(s):
     """区间字符串的上限侧。'1.13～5倍' → 5.0;单值则原样返回"""
-    if not s:
+    parts = _range_parts(s)
+    return jp_num(parts[-1]) if parts else None
+
+
+def range_lower(s):
+    """区间字符串的下限侧。用来推 altema 跟 master 的单位比例 (见 crystal_values)"""
+    parts = _range_parts(s)
+    return jp_num(parts[0]) if parts else None
+
+
+# altema 的下限 / master 的 initial_value 超过这个倍数 → 认为 altema 用的是百分数
+SCALE_HINT = 50.0
+
+
+def num_like_revise(x):
+    """整数值写成 int —— revise 里既有的写法就是 `"max_value": 2` 而不是 `2.0`。
+    jp_num 一律返回 float,不归一化的话会把 ~150 条没动过的 entry 刷成 `2.0`、制造无意义 diff。"""
+    if x is None:
         return None
-    return jp_num(re.split(r'[～~〜]', s.split('\n')[0])[-1])
+    r = round(x, 6)
+    return int(r) if abs(r - round(r)) < 1e-9 else r
 
 
 def _row_data_contents(row):
@@ -216,19 +240,39 @@ def crystal_acquisitions(soup):
     return out
 
 
-def crystal_values(soup):
-    """crystal: {name: {'入手方法': str, 'max_value': float}} — 只放取到的 field"""
+def crystal_values(soup, init_of=None):
+    """crystal: {name: {'入手方法': str, 'max_value': float}} — 只放取到的 field
+
+    **单位换算** (2026-09-11): altema 对 `Wave_Heal` 用**百分数** (`'1～9%'`),
+    而 master 的 `initial_value` 是**分数** (`0.01`) —— 直接取上限会写成 100 倍。
+    判据用「効果量下限 ÷ master initial_value」: 实测这个比例只有两簇 ——
+    874 条 ≈1 (同单位) 和 9 条 ≈100 (全部是 Wave_Heal);其余 87 条 (DamageLimitBreak /
+    BlazeGauge) 比例在 2.8~10 之间,那是 wiki 的区间下限跟 initial_value 基准不同、
+    不是单位问题,上限本身是对的。
+    ⚠ **不能拿「带不带 %」当判据**: BlazeAbsorb / InstantDeath / Stun / Mez / RateDamage /
+      JustGuard_Heal 有 19 条也带 %,但 master 本来就存百分数 (如 init=25.0),除 100 会写错。
+    """
     out = {}
+    rescaled = []
     for name, f in crystal_acquisitions(soup).items():
         vals = {}
         nyushu = (f.get('入手方法') or '').strip()
         if nyushu:
             vals['入手方法'] = nyushu
-        mx = range_upper(f.get('効果量', ''))
+        eff = f.get('効果量', '')
+        mx = range_upper(eff)
         if mx is not None:
-            vals['max_value'] = mx
+            init = init_of(name) if init_of else None
+            lo = range_lower(eff)
+            if init and lo and init > 0 and lo / init >= SCALE_HINT:
+                mx /= 100.0
+                rescaled.append(name)
+            vals['max_value'] = num_like_revise(mx)
         if vals:
             out[name] = vals
+    if rescaled:
+        print(f"  单位换算 (altema 百分数 → master 分数、÷100): {len(rescaled)} 条"
+              f" {rescaled[:4]}{' …' if len(rescaled) > 4 else ''}")
     return out
 
 
@@ -274,10 +318,12 @@ def patch_revise(master_path, revise_path, value_map, hard_field=None, hard_reso
     revise 数据跟 master 解耦、build_all 重 build master 不影响 revise (用户决策 2026-06-09)。
     hard_resolver(name) → str|None 只对 hard_field 生效、优先于 wiki。
 
-    max_value 只在「该 entry 还没有三因子」时写:
-    三因子在的时候 `crystalEffectiveValue` 走公式、max_value 只是 fallback、写了也不影响显示,
-    而 純真記憶/秘録記憶/アビス 这些 series build_crystals 是**故意**只给因子不给 max_value 的
+    max_value 的写入条件: **已有三因子、且原本没有 max_value 的不写**。
+    三因子在的时候 `crystalEffectiveValue` 走公式、max_value 只是 fallback,而
+    純真記憶/秘録記憶/アビス 这些 series build_crystals 是**故意**只给因子不给 max_value 的
     (实测若无条件写、会给 100 条这类 entry 平白加上一个用不到的 key)。
+    但原本**就有** max_value 的要照常刷新 —— 否则 Wave_Heal 那 3 条 (有因子 + 百分数旧值)
+    的单位就永远修不了。
 
     返回 (matched_total, hard_count, wiki_count, total, sample_unmatched, per_field)"""
     master = json.loads(master_path.read_text(encoding='utf-8'))
@@ -326,7 +372,8 @@ def patch_revise(master_path, revise_path, value_map, hard_field=None, hard_reso
             revise_by_id[mid] = {'id': mid, 'name': name}
         target = revise_by_id[mid]
         for field, value in vals.items():
-            if field == 'max_value' and any(target.get(k) is not None for k in _FACTOR_KEYS):
+            if (field == 'max_value' and target.get('max_value') is None
+                    and any(target.get(k) is not None for k in _FACTOR_KEYS)):
                 continue
             target[field] = value
             per_field[field] = per_field.get(field, 0) + 1
@@ -347,7 +394,13 @@ def main():
 
     if not args.skip_crystal:
         cr_soup = fetch_soup(CRYSTAL_URL)
-        cr_map = crystal_values(cr_soup)
+        # master 的 initial_value 用来判 altema 那边的单位 (见 crystal_values)
+        _cry = json.loads((DATA_DIR / 'crystals.json').read_text(encoding='utf-8'))
+        _init = {}
+        for c in (_cry if isinstance(_cry, list) else _cry.values()):
+            if c.get('name') and c.get('initial_value') is not None:
+                _init.setdefault(_normalize_name(c['name']), c['initial_value'])
+        cr_map = crystal_values(cr_soup, _init.get)
         n_mx = sum(1 for v in cr_map.values() if 'max_value' in v)
         print(f"  wiki crystal: {len(cr_map)} entries (入手方法 あり "
               f"{sum(1 for v in cr_map.values() if '入手方法' in v)} / 効果量→max_value あり {n_mx})")
