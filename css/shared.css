@@ -120,14 +120,14 @@ a {
 }
 .edit-num-sm:focus { outline: none; border-color: #8aabff; }
 .edit-ro { font-size: 12px; color: var(--text2); padding: 4px 0; line-height: 1.5; }
-/* 修正の読み取り専用メタ (効果 / 初期値 / 最大Lv)。
-   flex: 1 1 0 で 3 等分 → 横並びなら各 1/3、窄屏で 効果 が 100% 改行すると
-   残る 2 つが自動で 50/50 になる (改行の指定は crystals.css)。
-   ⚠ gap はここで指定しない —— 下の `.field-row { gap: 10px }` が同じ詳細度でかつ後勝ち、
-      ここに書いても効かない。その 10px を ro-item 内の gap にも合わせてあるので、
-      効果 の値の左端が 説明 の値と一直線になる。
-   field-key の min-width も基底の 60px を継がせる (min-width:0 で上書きすると key 幅が
-   バラけて 説明 と揃わなくなる)。 */
+/* 修正 里的只读 meta (効果 / 初期値 / 最大Lv)。
+   flex: 1 1 0 = 三等分 → 横排时各占 1/3;窄屏下 効果 占满 100% 换行后,
+   剩下两个自动变成 50/50 (换行规则写在 crystals.css)。
+   ⚠ 别在这里写 gap —— 下面的 `.field-row { gap: 10px }` 详细度相同且更靠后、会赢,
+      写在这儿不生效。ro-item 内部的 gap 已经对齐成同样的 10px,
+      这样 効果 的值左端才跟 説明 的值在一条线上。
+   field-key 的 min-width 也要继承基底的 60px (用 min-width:0 覆盖会让 key 宽度
+   参差、跟 説明 对不齐)。 */
 .ro-meta { flex-wrap: wrap; }
 .ro-meta .ro-item { display: flex; align-items: baseline; gap: 10px; min-width: 0; flex: 1 1 0; }
 .ro-meta .ro-item .field-key { padding-top: 0; }
