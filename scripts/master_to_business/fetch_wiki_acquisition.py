@@ -136,13 +136,13 @@ def fetch_soup(url, retries=4, backoff=15):
     resp.raise_for_status()
 
 
-# 【効果量】 は 'initial～max' の区间。和数字 (億/万/千 複合) 混在。
+# 【効果量】 是 'initial～max' 区间、混着和数字 (億/万/千 复合)。
 #   '1.13～5倍' → 5 / '3億3千万～16億5千万' → 1.65e9 / '1440万～10億8000万' → 1.08e9
 _JP_UNITS = (('億', 1e8), ('万', 1e4))
 
 
 def _jp_small(s):
-    """千 まで + 素の数字。'5千' → 5000、'8000' → 8000、'1.65倍' → 1.65"""
+    """千 以下的部分 + 裸数字。'5千' → 5000、'8000' → 8000、'1.65倍' → 1.65"""
     s = s.strip()
     if not s:
         return 0.0
@@ -156,7 +156,7 @@ def _jp_small(s):
 
 
 def jp_num(s):
-    """和数字文字列 → float。数字を含まなければ None (altema の '極' 'なし' 等)"""
+    """和数字字符串 → float。不含数字则 None (altema 的 '極' 'なし' 这类)"""
     if not s:
         return None
     s = s.replace(',', '').replace('，', '').strip()
@@ -171,7 +171,7 @@ def jp_num(s):
 
 
 def range_upper(s):
-    """区间文字列の上限側。'1.13～5倍' → 5.0、単値ならそのまま"""
+    """区间字符串的上限侧。'1.13～5倍' → 5.0;单值则原样返回"""
     if not s:
         return None
     return jp_num(re.split(r'[～~〜]', s.split('\n')[0])[-1])
@@ -217,7 +217,7 @@ def crystal_acquisitions(soup):
 
 
 def crystal_values(soup):
-    """crystal: {name: {'入手方法': str, 'max_value': float}} (取れた field だけ入れる)"""
+    """crystal: {name: {'入手方法': str, 'max_value': float}} — 只放取到的 field"""
     out = {}
     for name, f in crystal_acquisitions(soup).items():
         vals = {}
@@ -306,9 +306,9 @@ def patch_revise(master_path, revise_path, value_map, hard_field=None, hard_reso
                     break
         vals = dict(found) if found else {}
 
-        # hard rule は hard_field (入手方法 / acquisition) だけ上書き。
-        # wiki から取れた他の field (max_value) はそのまま残す —— 以前は hard 命中で
-        # wiki 参照を丸ごと飛ばしていたので、series 系 370 件は max_value を一生更新できなかった。
+        # hard rule 只覆盖 hard_field (入手方法 / acquisition)、
+        # 从 wiki 取到的其他 field (max_value) 照常保留 —— 以前 hard 一命中就把整个
+        # wiki 查询短路掉,导致 series 系那 370 条的 max_value 永远更新不了。
         hard = hard_resolver(name) if hard_resolver else None
         if hard:
             vals[hard_field] = hard
