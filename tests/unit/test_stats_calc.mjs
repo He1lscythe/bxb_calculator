@@ -1,4 +1,4 @@
-// tests/unit/test_stats_calc.mjs — 4-stage 公式单测
+// tests/unit/test_stats_calc.mjs — stats-calc (s1〜s8 stage 链) 单测
 // 跑: node --test tests/unit/test_stats_calc.mjs
 import { test } from 'node:test';
 import assert from 'node:assert';
@@ -17,7 +17,7 @@ import {
   AWAKENING_MAX,
   AWAKENING_FULL_MULT,
 } from '../../shared/stats-calc.js';
-import { soulMultiplier, soulLvCap } from '../../shared/hensei-helpers.js';
+import { soulMultiplier, soulLvCap, computeBlazeGaugePoints } from '../../shared/hensei-helpers.js';
 
 // ============================================================
 // mock helpers
@@ -149,7 +149,7 @@ test('conditionFactor: Enemy_Break* hard gate', () => {
 });
 
 // ============================================================
-// 3. applyStaged — 4-stage 公式
+// 3. applyStaged — stage 链公式
 // ============================================================
 test('applyStaged: empty effects → base 不变 (但 ceil)', () => {
   const v = applyStaged(10000, 'Attack', []);
@@ -512,7 +512,7 @@ test('computeStats: soul effect × sourceMult (Mul 一刀切)', () => {
 });
 
 // ============================================================
-// 8. LP 4 档 (unpacking §3.8)
+// 8. LP 4 档 (unpacking §3.5)
 // ============================================================
 test('LP tier 3 (lp=0 残血) 普通 → ×2.0', () => {
   const c = mockChara();
@@ -536,7 +536,7 @@ test('LP tier 3 + bd_on → 仍用普通表 ×2.0 (hensei 算普通攻击、不�
 });
 
 // ============================================================
-// 9. HitCount 逐段 (unpacking §17.3)
+// 9. HitCount 逐段 (unpacking §17.2.2 server 预折叠)
 // ============================================================
 test('HitCount Add: 全段 +5 → 每段 +5、其他段 0 不参与', () => {
   const c = mockChara({
@@ -775,7 +775,7 @@ test('omoideEffectiveScaling helper: description 含「熟度」+ scaling null �
 });
 
 // ============================================================
-// 11. Stage 5: Enemy_Break (unpacking §3.7 step 47/48)
+// 11. Stage 6: Enemy_Break (unpacking §3.9 step 48/49)
 // ============================================================
 test('computeStats: Enemy_BreakAttack Mul ×2、enemy.bk=true → Attack ×2 (stage 5 单独)', () => {
   const c = mockChara({
@@ -994,7 +994,7 @@ test('Break_Speed gate by HP (HP=50 触发、HP=51 不触发)', () => {
 });
 
 // ============================================================
-// 13. MotionSpeed (攻速、unpacking §8.7)
+// 13. MotionSpeed (攻速、unpacking §8.4)
 //     effective_motion_speed_i = motion_speed_i × boost_mul_acc + boost_add_acc
 // ============================================================
 // 注: r.motionSpeed = { speeds: [m1, m2, m3], durationsMs: [ms1, ms2, ms3] }
@@ -1088,13 +1088,31 @@ test('enemy element matchup: 火 vs 水 mode=normal → ×0.5 Attack', () => {
   assert.strictEqual(r.stats['攻撃力'], 6500);
 });
 
-test('enemy element matchup: 火 vs 風 mode=normal → ×2.0 Attack + BK', () => {
+test('enemy element matchup: 火 vs 風 mode=normal → Attack ×2.0、BK 走 EBD 弱点格 ×1.5', () => {
   const c = mockChara();
   const slots = [{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null];
   const ctx = buildCtx(slots, { enemy: { element: 3, bk: false, mode: 'normal' } });
   const r = computeStats(c, ctx.team[0].tr, 0, ctx);
   assert.strictEqual(r.stats['攻撃力'], 26000);   // 13000 × 2
-  assert.strictEqual(r.stats['ブレイク力'], 2000); // 1000 × 2
+  // 1000 × 1.5 × 10 × 0.1f = 1500.0000224 → ceil 1501 (0.1f 加宽成 double 比 0.1 略大、游戏也 +1)
+  assert.strictEqual(r.stats['ブレイク力'], 1501);
+});
+
+test('EBD 4 格: 弱点 × 敵BK → ×1.8 / ×1.2 / ×1.5 / ×0.1 (04_ebd §4.6)', () => {
+  const run = (element, bk) => {
+    const c = mockChara();   // 火属性
+    const ctx = buildCtx([{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null], { enemy: { element, bk, mode: 'normal' } });
+    return computeStats(c, ctx.team[0].tr, 0, ctx).stats['ブレイク力'];
+  };
+  // 風 = 火の弱点 (rate > 1)、水 = 非弱点;base ブレイク力 1000
+  assert.strictEqual(run(3, true), Math.ceil(1000 * 1.5 * Math.fround(1.2) * 10 * Math.fround(0.1)));
+  assert.strictEqual(run(2, true), Math.ceil(1000 * Math.fround(1.2) * 10 * Math.fround(0.1)));
+  assert.strictEqual(run(3, false), Math.ceil(1000 * 1.5 * 10 * Math.fround(0.1)));
+  assert.strictEqual(run(2, false), Math.ceil(1000 * Math.fround(0.1)));
+  assert.strictEqual(run(2, false), 101, '非弱点・非BK = ×0.1 (+ 0.1f 的 ε → ceil 101)');
+  for (const [el, bk, x] of [[3, true, 1.8], [2, true, 1.2], [3, false, 1.5], [2, false, 0.1]]) {
+    assert.ok(Math.abs(run(el, bk) - 1000 * x) <= 1, `${el}/${bk} ≈ ×${x}`);
+  }
 });
 
 test('enemy element matchup: 火 vs 風 mode=guildbattle → ×15.0 Attack', () => {
@@ -1404,19 +1422,38 @@ test('initialBlazeGauge 无 BlazeGauge skill → 0', () => {
 });
 
 // ============================================================
-// 17. BlazeGaugePointRate pipeline (unpacking §1.3.3.5)
+// 17. BlazeGaugePointRate pipeline (unpacking §1.3.3.5 单一公式)
+//   pts[i] = floor(100 × F) (i<9)、floor(100 × (1.4 × k) × F) (i≥9、k = i−8)
+//   F = Π 魔剣 skill × Π (魂 value × soulMultiplier(rarity, lv))
 // ============================================================
-test('blazeGaugePoints: 无 rate skill → A 表 base 不变', () => {
+test('blazeGaugePoints: 无 rate skill → 基表 (F=1)', () => {
   const c = mockChara();
   const slots = [{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null];
   const ctx = buildCtx(slots);
   const r = computeStats(c, ctx.team[0].tr, 0, ctx);
-  assert.strictEqual(r.blazeGaugePoints[0], 100);   // A[0]
-  assert.strictEqual(r.blazeGaugePoints[9], 140);   // A[9] (生长段起点)
-  assert.strictEqual(r.blazeGaugePoints[11], 419);  // A[11] (140·3 - 1 = ±1 修正)
+  assert.strictEqual(r.blazeGaugePoints[0], 100);
+  assert.strictEqual(r.blazeGaugePoints[9], 140);   // 生长段起点
+  assert.strictEqual(r.blazeGaugePoints[11], 419);  // 1.4 × 3 = 4.1999… 的 IEEE 误差、floor 后比 420 少 1
 });
 
-test('blazeGaugePoints: 只 chara skill Mul ×0.5 → A 表 × 0.5、floor', () => {
+test('blazeGaugePoints: 单一公式的基表 == 力試し 实测的 61 项', () => {
+  // unpacking 01_setup.md §1.3.3.4 的实测数组 (F = 1)
+  const measured = [
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 140, 280, 419, 560, 700, 839, 979, 1120, 1260, 1400, 1539,
+    1679, 1820, 1959, 2100, 2240, 2379, 2520, 2660, 2800, 2940, 3079, 3219, 3359, 3500, 3640, 3779, 3919, 4059,
+    4200, 4340, 4480, 4620, 4759, 4900, 5040, 5180, 5320, 5459, 5600, 5740, 5880, 6020, 6159, 6299, 6439, 6580,
+    6719, 6859, 7000, 7139, 7280,
+  ];
+  assert.deepStrictEqual(computeBlazeGaugePoints(1, []), measured);
+});
+
+test('blazeGaugePoints: 魂的 L(level) = soulMultiplier (5★ Lv50 → ×1.5、不再恒 ×1.01)', () => {
+  const pts = computeBlazeGaugePoints(1, [{ value: 0.25, lv: 50, rarity: 5 }]);
+  assert.strictEqual(pts[0], Math.floor(100 * 0.25 * 1.5));
+  assert.strictEqual(pts[9], Math.floor(100 * 1.4 * 0.25 * 1.5));
+});
+
+test('blazeGaugePoints: 只 chara skill Mul ×0.5 → 基表 × 0.5、floor', () => {
   const c = mockChara();
   c._master.states['通常'].weapon_skills = [
     { id: 80440, parameter: 'BlazeGaugePointRate', math_type: 'Multiply', value: 0.5, range: 'Single' },
@@ -1424,13 +1461,13 @@ test('blazeGaugePoints: 只 chara skill Mul ×0.5 → A 表 × 0.5、floor', () 
   const slots = [{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null];
   const ctx = buildCtx(slots);
   const r = computeStats(c, ctx.team[0].tr, 0, ctx);
-  // floor(A[i] × 0.5): floor(100×0.5)=50、floor(140×0.5)=70、floor(419×0.5)=209
+  // floor(100×0.5)=50、floor(140×0.5)=70、floor(100×4.1999…×0.5)=209
   assert.strictEqual(r.blazeGaugePoints[0], 50);
   assert.strictEqual(r.blazeGaugePoints[9], 70);
   assert.strictEqual(r.blazeGaugePoints[11], 209);
 });
 
-test('blazeGaugePoints: 有 soul rate skill ×0.25 → 切到 IDEAL 表 (无 ±1 修正)', () => {
+test('blazeGaugePoints: soul rate skill ×0.25 (Lv1 → L=1.01)', () => {
   const c = mockChara();
   const soul = mockSoul({
     skills: [{ id: 1, parameter: 'BlazeGaugePointRate', math_type: 'Multiply', value: 0.25, range: 'Single' }],
@@ -1438,7 +1475,7 @@ test('blazeGaugePoints: 有 soul rate skill ×0.25 → 切到 IDEAL 表 (无 ±1
   const slots = [{ chara: c, soul, tr: { ...mkTr(), level: 250, jukudo: 60, soul_lv: 1 } }, null, null];
   const ctx = buildCtx(slots);
   const r = computeStats(c, ctx.team[0].tr, 0, ctx);
-  // IDEAL: i=11 → 140·3 = 420 (无 -1 修正)、× 0.25 × L(1)=1.01 = 420 × 0.2525 = 106.05 → floor 106
+  // i=11 → 100 × 4.1999… × 0.25 × 1.01 = 106.05 → floor 106 (F 带 1.01、IEEE 的 −ε 不再落到整数边界上)
   assert.strictEqual(r.blazeGaugePoints[11], Math.floor(420 * 0.25 * 1.01));
   // i=0: 100 × 0.2525 = 25.25 → floor 25
   assert.strictEqual(r.blazeGaugePoints[0], 25);
@@ -1453,7 +1490,7 @@ test('initialBdCap: cumsum 反查 totalGauge > 900 时不再是 /100 (Lv 10+ 阈
   const slots = [{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null];
   const ctx = buildCtx(slots);
   const r = computeStats(c, ctx.team[0].tr, 0, ctx);
-  // A 表 cum=[100,200,...,900 (i=8),1040 (i=9),1320 (i=10),...]
+  // 基表 cum=[100,200,...,900 (i=8),1040 (i=9),1320 (i=10),...]
   // totalGauge=1200 在 cum[9]=1040 和 cum[10]=1320 之间
   // bd_cap = 10 + (1200-1040)/280 = 10 + 0.5714... ≈ 10.571
   assert.strictEqual(r.initialBlazeGauge, 1200);
@@ -1461,7 +1498,7 @@ test('initialBdCap: cumsum 反查 totalGauge > 900 时不再是 /100 (Lv 10+ 阈
   assert.ok(r.initialBdCap > 10 && r.initialBdCap < 11, `expected 10..11、got ${r.initialBdCap}`);
 });
 
-test('blazeGaugePoints: chara ×0.5 + soul ×0.5 混合 → IDEAL × 0.5 × 0.5 × 1.01', () => {
+test('blazeGaugePoints: chara ×0.5 + soul ×0.5 混合 → F = 0.5 × 0.5 × 1.01', () => {
   const c = mockChara();
   c._master.states['通常'].weapon_skills = [
     { id: 1, parameter: 'BlazeGaugePointRate', math_type: 'Multiply', value: 0.5, range: 'Single' },
@@ -1472,7 +1509,7 @@ test('blazeGaugePoints: chara ×0.5 + soul ×0.5 混合 → IDEAL × 0.5 × 0.5 
   const slots = [{ chara: c, soul, tr: { ...mkTr(), level: 250, jukudo: 60, soul_lv: 1 } }, null, null];
   const ctx = buildCtx(slots);
   const r = computeStats(c, ctx.team[0].tr, 0, ctx);
-  // IDEAL i=0: 100 × 0.5 × 0.5 × 1.01 = 25.25 → floor 25
+  // i=0: 100 × 0.5 × 0.5 × 1.01 = 25.25 → floor 25
   assert.strictEqual(r.blazeGaugePoints[0], 25);
   // i=9: 140 × 0.2525 = 35.35 → floor 35
   assert.strictEqual(r.blazeGaugePoints[9], 35);
@@ -1638,6 +1675,172 @@ test('同編成 override (80182, range=All): 司書王使･阿形(1605)在队 �
   ]);
   const eNo = collectEffects(no.team, 1, no).filter((e) => e._source === 'chara_skill' && e.base_parameter === 'HitCount');
   assert.strictEqual(eNo.length, 0, '伙伴不在队 → 不生效');
+});
+
+// ============================================================
+// 2026-09-26 跟 unpacking docs (doccheck 后) 对齐
+// ============================================================
+const _lv250 = (over = {}) => ({ ...mkTr(), level: 250, jukudo: 60, ...over });
+const _atk = (skills, tr = _lv250(), over = {}) => {
+  const c = _charaWithSkills(skills, over);
+  const ctx = buildCtx([{ chara: c, tr }, null, null]);
+  return computeStats(c, ctx.team[0].tr, 0, ctx);
+};
+
+test('HP 曲線: 同一池先连乘再插值 (§2.4) — 两条 Vitality ×3、HP50% → ×5 (逐条会是 ×4)', () => {
+  const vit = { parameter: 'Vitality_Attack', math_type: 'Multiply', value: 3, value_scaling: 0, range: 'Single' };
+  const r = _atk([{ ...vit, id: 1 }, { ...vit, id: 2 }], _lv250({ hp: 50 }));
+  assert.strictEqual(r.stats['攻撃力'], 13000 * (1 + 0.5 * (9 - 1)));
+});
+
+test('HP 曲線: 不同 parameter 各自成池 (Vitality 和 RemHP 分开插值)', () => {
+  const r = _atk([
+    { id: 1, parameter: 'Vitality_Attack', math_type: 'Multiply', value: 3, value_scaling: 0, range: 'Single' },
+    { id: 2, parameter: 'RemHP_Attack', math_type: 'Multiply', value: 3, value_scaling: 0, range: 'Single' },
+  ], _lv250({ hp: 50 }));
+  assert.strictEqual(r.stats['攻撃力'], 13000 * 2 * 2);
+});
+
+test('FellDown: 系数 = 倒下的队友 / (出战人数 − 1) (§2.5 FellDownRate)', () => {
+  const fd = { id: 1, parameter: 'FellDown_Attack', math_type: 'Multiply', value: 2, value_scaling: 0, range: 'Single' };
+  const run = (mateHp, teamSize = 3, selfHp = 100) => {
+    const c = _charaWithSkills([fd]);
+    const ctx = buildCtx([
+      { chara: c, tr: _lv250({ hp: selfHp }) },
+      { chara: mockChara({ id: 1002 }), tr: _lv250({ hp: mateHp[0] }) },
+      { chara: mockChara({ id: 1003 }), tr: _lv250({ hp: mateHp[1] }) },
+    ]);
+    ctx.teamSize = teamSize;
+    return computeStats(c, ctx.team[0].tr, 0, ctx).stats['攻撃力'];
+  };
+  assert.strictEqual(run([0, 100]), 13000 * 1.5, '3 人里倒 1 → r = 1/2');
+  assert.strictEqual(run([0, 0]), 13000 * 2, '倒 2 → r = 1');
+  assert.strictEqual(run([100, 100]), 13000, '没人倒 → 不发动');
+  assert.strictEqual(run([0, 100], 2), 13000 * 2, '2 人编成、1 号位以外只有 1 人且倒下 → r = 1');
+  assert.strictEqual(run([0, 0], 3, 0), 13000, '自己倒下 → HpEmpty 旁路、不发动');
+});
+
+test('Rise: 只放大 is_original_skill=true (魔剣技能 + 結婚),結晶 / 魂不放大 (§3.7.3)', () => {
+  const rise = { id: 80004, parameter: 'Rise_AttackRate', math_type: 'Multiply', value: 2.5, value_scaling: 0, range: 'Single' };
+  const c = _charaWithSkills([rise]);
+  const mate = _charaWithSkills([{ id: 7, parameter: 'Attack', math_type: 'Multiply', value: 1.2, value_scaling: 0, range: 'All' }], { id: 1002 });
+  const cr = mockCrystal({ parameter: 'Attack', math_type: 'Multiply', initial_value: 1.3, max_value: 1.3, max_level: 1 });
+  const soul = mockSoul({ skills: [{ id: 9, parameter: 'Attack', math_type: 'Multiply', value: 1.1, range: 'Single' }] });
+  const ctx = buildCtx([
+    { chara: c, soul, crystals: [{ obj: cr, lv: 1 }], tr: _lv250({ marriage: 2, soul_lv: 1 }) },
+    { chara: mate, tr: _lv250() },
+    null,
+  ]);
+  const effs = collectEffects(ctx.team, 0, ctx);
+  const val = (pred) => effs.find(pred)?.value;
+  assert.ok(Math.abs(val((e) => e._source === 'chara_skill' && e._src_slot === 1) - 3.0) < 1e-9, '队友 range=All 的魔剣技能 ×2.5');
+  assert.ok(Math.abs(val((e) => e._src_name === '結婚' && e.parameter === 'Attack') - 2.625) < 1e-9, '結婚 ×2.5');
+  assert.ok(Math.abs(val((e) => e._source === 'crystal') - 1.3) < 1e-9, '結晶不放大');
+  assert.ok(Math.abs(val((e) => e._source === 'soul' && e.parameter === 'Attack') - 1.1 * soulMultiplier(5, 1)) < 1e-9, '魂不放大');
+});
+
+test('ダメ上限: Mul 池和 Add 池分开、floor(D × ΠMul + ΣAdd) 跟 effect 顺序无关 (§9.5)', () => {
+  const r = _atk([
+    { id: 1, parameter: 'DamageLimitBreak', math_type: 'Addition', value: 1e9, value_scaling: 0, range: 'Single' },
+    { id: 2, parameter: 'DamageLimitBreak', math_type: 'Multiply', value: 2, value_scaling: 0, range: 'Single' },
+  ]);
+  assert.strictEqual(r.damageLimit, Math.floor(2147483647 * 2 + 1e9));
+});
+
+test('画: 画级 element_ids / 技能级 element_id 按装备者判、不符不生效 (§1.1.4 -4)', () => {
+  const run = (charaElem) => {
+    const c = mockChara({ element_id: charaElem });
+    const bg = mockBg({
+      element_ids: [2], weapon_type_ids: [],
+      skills: [{ id: 1, parameter: 'Attack', math_type: 'Multiply', value: 1.25, value_scaling: 0, range: 'Single', element_id: 2, weapon_type_id: 0 }],
+    });
+    const ctx = buildCtx([{ chara: c, bg, tr: _lv250() }, null, null]);
+    return computeStats(c, ctx.team[0].tr, 0, ctx).stats['攻撃力'];
+  };
+  assert.strictEqual(run(1), 13000, '火属性魔剣装水限定画 → 不生效');
+  assert.strictEqual(run(2), 16250, '水属性魔剣 → ×1.25');
+});
+
+test('ソウル相性: 只乘攻撃力、不乘ブレイク力 (EBD 不查魂的相性表、§4.3.2)', () => {
+  const c = mockChara();
+  const soul = mockSoul({ element_affinity: { 1: { positive_value: 1.9, negative_value: 1.135 } } });
+  const ctx = buildCtx([{ chara: c, soul, tr: _lv250({ soul_lv: 1 }) }, null, null]);
+  const r = computeStats(c, ctx.team[0].tr, 0, ctx);
+  assert.strictEqual(r.stats['攻撃力'], Math.ceil(13000 * 1.9));
+  // 跟不装魂一样 = 1000 × EBD 非弱点・非BK 格 (×0.1f)
+  assert.strictEqual(r.stats['ブレイク力'], Math.ceil(1000 * Math.fround(0.1)));
+});
+
+test('燃心: server-fold 倍率、攻撃力和防御力都吃 (§1.1.2)', () => {
+  const r = _atk([], _lv250({ moeshin: true }));
+  assert.strictEqual(r.stats['攻撃力'], 16900);
+  assert.strictEqual(r.stats['防御力'], 6500);
+});
+
+test('MP 不足: 在 Add 池之后乘 (EAD step 50)', () => {
+  const eff = [
+    { _source: 'chara_skill', parameter: 'Attack', base_parameter: 'Attack', math_type: 'Addition', value: 1000, condition_factor: 1 },
+    { _source: 'chara_meta', parameter: 'Attack', base_parameter: 'Attack', math_type: 'Multiply', value: 0.5, condition_factor: 1, _mp: true },
+  ];
+  assert.strictEqual(applyStaged(10000, 'Attack', eff), (10000 + 1000) * 0.5);
+});
+
+test('AllTarget: ×Total 的全体化倍率、攻撃力和ブレイク力都吃 (§3.6.7 / §4.3.4)', () => {
+  const r = _atk([{ id: 1, parameter: 'AllTarget', math_type: 'Multiply', value: 0.6, value_scaling: 0, range: 'Single' }]);
+  assert.strictEqual(r.stats['攻撃力'], 7800);
+  assert.strictEqual(r.stats['ブレイク力'], Math.ceil(600 * Math.fround(0.1)));   // 1000 × 0.6、再 × EBD 格 0.1f
+});
+
+test('BD: range=Single 的転速 buff 不生效、攻速 buff 生效 (BuffSkillValue 只认 All、§13.9.7)', () => {
+  const mk = (effects) => {
+    const c = mockChara({ bd_skill: { cost: 3, effects } });
+    c._master.states['通常'].motion_speed = 1;
+    const ctx = buildCtx([{ chara: c, tr: _lv250({ bd_on: true }) }, null, null]);
+    return computeStats(c, ctx.team[0].tr, 0, ctx);
+  };
+  const base = mk([]);
+  const sp = mk([{ parameter: 'Speed', math_type: 'Multiply', value: 2, range: 'Single' }]);
+  assert.strictEqual(sp.speed.latestRecover, base.speed.latestRecover, 'Single 転速 BD 不生效');
+  const ms = mk([{ parameter: 'MotionSpeed', math_type: 'Multiply', value: 2, range: 'Single' }]);
+  assert.strictEqual(ms.motionSpeed.speeds[0], base.motionSpeed.speeds[0] * 2, 'Single 攻速 BD 走 IndividualBuff、生效');
+  const all = mk([{ parameter: 'Speed', math_type: 'Multiply', value: 2, range: 'All' }]);
+  assert.strictEqual(all.speed.latestRecover, base.speed.latestRecover * 2, 'All 転速 BD 生效');
+});
+
+test('攻速: 没有 Add 池 (Player.Update 只乘 Mul、§8.4)', () => {
+  const c = _charaWithSkills([{ id: 1, parameter: 'MotionSpeed', math_type: 'Addition', value: 1, value_scaling: 0, range: 'Single' }]);
+  c._master.states['通常'].motion_speed = 1.5;
+  const ctx = buildCtx([{ chara: c, tr: _lv250() }, null, null]);
+  assert.strictEqual(computeStats(c, ctx.team[0].tr, 0, ctx).motionSpeed.speeds[0], 1.5);
+});
+
+test('転速: 魔装 Speed Mul 折进 server 的 speed、floor 之后才进 client 段 (§1.1.2.1)', () => {
+  const c = mockChara();
+  const masou = mockMasou({ effects: [{ parameter: 'Speed', math_type: 'Multiply', value: 1.05 }] });
+  const ctx = buildCtx([{ chara: c, masou, tr: _lv250() }, null, null]);
+  // base.Speed 22 × 1.05 = 23.1 → floor 23 (旧实现在 client 段乘 → 23.1)
+  assert.strictEqual(computeStats(c, ctx.team[0].tr, 0, ctx).speed.latestRecover, 23);
+});
+
+test('魔装: Attack / Defense 以外的 parameter 不 server-fold (以 -7 走 client、§1.1.2.1)', () => {
+  const eff = [{ _source: 'masou', parameter: 'GuardBreak', base_parameter: 'GuardBreak', math_type: 'Multiply', value: 1.5, condition_factor: 1 }];
+  // 1001 × 1.5 = 1501.5:server-fold 会先 floor 成 1501、client 段则到出口才 ceil 成 1502
+  assert.strictEqual(applyStaged(1001, 'GuardBreak', eff), 1502);
+  assert.strictEqual(applyStaged(1001, 'Attack', eff.map((e) => ({ ...e, parameter: 'Attack', base_parameter: 'Attack' }))), 1501);
+});
+
+test('魂 HitCount: 属性条件按被作用的魔剣判 (server 预折叠、§17.2.2)', () => {
+  const soul = mockSoul({
+    skills: [{ id: 1, parameter: 'HitCount', math_type: 'Addition', value: 0, values: [1, 1, 1], range: 'All', element_condition: 2 }],
+  });
+  const ctx = buildCtx([
+    { chara: mockChara(), soul, tr: _lv250({ soul_lv: 1 }) },          // 装备者火属性
+    { chara: mockChara({ id: 1002, element_id: 2 }), tr: _lv250() },   // 水属性队友
+    null,
+  ]);
+  const hits = (slot) => collectEffects(ctx.team, slot, ctx).filter((e) => e._source === 'soul' && e.base_parameter === 'HitCount').length;
+  assert.strictEqual(hits(1), 1, '水属性队友吃到');
+  assert.strictEqual(hits(0), 0, '火属性装备者自己不吃');
 });
 
 console.log('\n[test_stats_calc] all tests defined');

@@ -14,6 +14,8 @@ const _NAME_TO_ID = {
   Defense: 5,
   GuardBreak: 6,
   DamageLimitBreak: 7,
+  Blaze_DamageLimitBreak: 7,        // 561 新增:只对 BD hit
+  Enemy_BreakDamageLimitBreak: 7,   // 561 新增:敵 BK 时 (条件 tag 走 conditionTrigger 的 Enemy_Break 前缀)
   BlazeAttack: 8,
   HP: 9,
   GuardDefense: 10,
@@ -151,15 +153,16 @@ export const COND_TRIGGER_LABEL = {
 //   Vitality_*  → hp_pct / 100
 //   RemHP_*     → (100 - hp_pct) / 100
 //   Break_*     → hp_pct <= 50 ? 1 : 0   (unpacking §2.3: IsBreak = HpRate ≤ 0.5 含等号)
-//   FellDown_*  → 队友里有 hp=0 就是 1
+//   FellDown_*  → 自身 hp=0 → 0;否则 = 队友倒下比例 (unpacking §2.5 PlayerList.FellDownRate)
 //   Enemy_Break*→ 敵 BK 中就是 1
 // 无 prefix → 1。stats-calc 和結晶页的倍率模拟器共用。
-export function conditionFactor(parameter, hpPct, anyTeammateZero, enemyBk) {
+// fellDownRate 传 true/false 也行 (按 1/0)。
+export function conditionFactor(parameter, hpPct, fellDownRate, enemyBk) {
   if (!parameter) return 1;
   if (parameter.startsWith('Vitality_')) return Math.max(0, Math.min(1, hpPct / 100));
   if (parameter.startsWith('RemHP_')) return Math.max(0, Math.min(1, (100 - hpPct) / 100));
   if (parameter.startsWith('Break_')) return hpPct <= 50 ? 1 : 0;
-  if (parameter.startsWith('FellDown_')) return anyTeammateZero ? 1 : 0;
+  if (parameter.startsWith('FellDown_')) return hpPct <= 0 ? 0 : Math.max(0, Math.min(1, +fellDownRate || 0));
   if (parameter.startsWith('Enemy_Break')) return enemyBk ? 1 : 0;
   return 1;
 }

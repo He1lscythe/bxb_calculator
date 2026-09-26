@@ -3,18 +3,18 @@
 // 按 docs/hensei_calc.md 设计:
 //   base = lv × 熟度 × 觉醒  (内嵌)
 //   s1:  omoide Add
-//   s2:  masou Add → masou Mul → server-fold floor
+//   s2:  masou Add → masou Mul / 燃心 → server-fold floor  (只有 Attack / Defense 类魔装是 server-fold)
 //   s3:  × LP tier
-//   s4:  other Mul  (非soul → soul → bd)
+//   s4:  other Mul  (非soul → soul → HP 曲線池 → bd)
 //   s5:  other Add  (同上分类)
-//   s6:  Enemy_Break Mul → Add  (gate enemy.bk)
+//   s6:  Enemy_Break Mul → Add  (gate enemy.bk) → MP 不足
 //   s7:  × 3 inline (enemy.bk) → 出口 ceil
 //   s8:  enemy mods (属性相性 / 難度 / 有利武器 / BD cap) → ceil
 //   Repel_Percent: 独立 status 回避率通道
 //
-// ⚠ 上面 stage 只对 HP / Attack / Defense / GuardBreak 四项生效 (只有这 4 项调 applyStaged)。
-//   Speed / MotionSpeed / HitCount / DamageLimitBreak 各走独立函数、不适用 stage 映射。
-//   Speed 有自己的两段结构 (omoide Add 在 server-fold 段、Mul 之前) — 见 _computeSpeed 注释。
+// ⚠ 上面 stage 只对 Attack / Defense / GuardBreak 三项生效 (只有这 3 项调 applyStaged)。
+//   HP (serverFoldHP) / Speed / MotionSpeed / HitCount / DamageLimitBreak 各走独立函数、不适用 stage 映射。
+//   Speed 有自己的两段结构 (omoide Add + 魔装 Mul 在 server-fold 段、floor 后才进 client Mul) — 见 _computeSpeed 注释。
 //
 // Effect 来源 (_source):
 //   omoide      — chara omoide memory slot effect (Frida 抓包、按 affection_threshold gate)
@@ -163,7 +163,7 @@ export function baseStats(charaWiki, tr) {
 export { conditionFactor };
 
 // strip HP-curve prefix + Enemy_Break prefix 得 base parameter
-// Enemy_BreakAttack → Attack (本质是 Attack 倍率、走 stage 5 独立 enemy_break source)
+// Enemy_BreakAttack → Attack (本质是 Attack 倍率、走 stage 6 独立 enemy_break source)
 // Enemy_BreakDefense / Enemy_BreakSpeed 等同理
 export function baseParameter(p) {
   if (!p) return p;
@@ -248,8 +248,8 @@ const SKILL_COND_OVERRIDE = {
   80198: { type: 'team_has', wbid: 1182 }, // 魔天猫ルコ 同編成で 味方全体ダメージ上限+2.2億
   80199: { type: 'team_has', wbid: 1528 }, // 魔天猫リーナ×ロスト 同編成で 全属性攻撃モーション加速
 };
-// Rise_AttackRate 放大器生效的 source (放大「自身 loadout 的 Attack 系增益」、排除 omoide/chara_meta/soul_affinity/enemy_buff)
-const _RISE_AMP_SOURCES = new Set(['chara_skill', 'crystal', 'bg', 'soul']);
+// range=Single 的 BD buff 只有这两类有人查 (IndividualBuff 池:Player.Update 的攻速、EAD 的伤害上限)
+const _BD_SINGLE_PARAMS = new Set(['MotionSpeed', 'DamageLimitBreak']);
 
 // ============================================================
 // 收集 effects (3 slot 所有 source、target = targetSlot)
@@ -268,23 +268,30 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
   if (!target || !target.chara) return collected;
   const targetChara = target.chara;
   const tr = target.tr;
-  const anyTeammateZero = resolvedTeam.some((s, i) => i !== targetSlotIdx && s?.tr?.hp === 0);
+  // FellDown 系数 = 倒下的队友数 / max(出战人数 − 1, 1) (unpacking §2.5 PlayerList.FellDownRate)
+  const teamSize = ctx?.teamSize ?? 3;
+  const members = resolvedTeam.filter((s, i) => i < teamSize && s?.chara);
+  const nDown = resolvedTeam.filter((s, i) => i < teamSize && i !== targetSlotIdx && s?.chara && s?.tr?.hp === 0).length;
+  const fellDownRate = nDown / Math.max(members.length - 1, 1);
   const enemyBk = ctx?.enemy?.bk || false;
 
   function pushEff(srcChara, srcSlot, source, raw, opts = {}) {
     // raw is master-shape effect: {parameter, math_type, value, value_scaling, range, element_condition, weapon_type_condition, weapon_base_id, weapon_type_id, target_element_id, ...}
     if (!raw || raw.parameter === 'NoEffect') return;
-    if (!_effectApplies(raw, targetChara, srcChara, srcSlot, targetSlotIdx)) return;
     const param = raw.parameter;
+    // 魂的 HitCount 是 server 折进 hit_counts 的、属性/武器/魔剣条件按**被作用的魔剑**判 (unpacking §17.2.2)
+    const hitParam = param === 'HitCount' || param === 'AttackCount' || param === 'HitCountKeepDamage';
+    const condChara = source === 'soul' && hitParam ? targetChara : srcChara;
+    if (!_effectApplies(raw, targetChara, condChara, srcSlot, targetSlotIdx)) return;
     // _origin = 装备出处 (决定归到哪个装备面板)。必须在下面 enemy_break 覆写之前定下来。
     // omoide_mul 只是为了分 stage 派生出来的 source、折回 omoide。
     const origin = source === 'omoide_mul' ? 'omoide' : source;
-    // Enemy_Break_* parameter 强制 _source='enemy_break'、不论原 source、走 stage 5 独立 (unpacking §3.7 step 47/48)
+    // Enemy_Break_* parameter 强制 _source='enemy_break'、不论原 source、走 stage 6 独立 (unpacking §3.9 step 48/49)
     if (param && param.startsWith('Enemy_Break')) source = 'enemy_break';
     // HP-curve (Vitality/RemHP/Break) factor 用 TARGET 自身 HP (tr=目标 slot 的 tr);
     // range=All 的 HP-curve buff 从别 slot 来时、看接收方而非 source 的 HP。
     const tgtHp = tr?.hp ?? 100;
-    let factor = conditionFactor(param, tgtHp, anyTeammateZero, enemyBk);
+    let factor = conditionFactor(param, tgtHp, fellDownRate, enemyBk);
     // 专属条件 override (条件只在描述、master 无结构化字段;仅 chara_skill 的指定 skill_id)
     const _ov = source === 'chara_skill' ? SKILL_COND_OVERRIDE[raw.id] : null;
     if (_ov) {
@@ -298,6 +305,7 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
         factor = resolvedTeam.some((s) => s?.chara?._master?.id === _ov.wbid) ? 1 : 0;
       }
     }
+    if (opts.inactive) factor = 0;
     // 条件不成立 → 计算路径直接丢弃;forDisplay 下改成打 _inactive 保留 (面板显示为未发动)。
     if (factor === 0 && !forDisplay) return;
     // chara skill: value_scaling × jukudo 熟度成长
@@ -326,6 +334,8 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
       value,
       condition_factor: factor,
     };
+    // is_original_skill = 魔剣自带技能 (Rise 放大对象、unpacking §3.7.3);結晶/画/魂/好感/魔装 都是 false
+    if (source === 'chara_skill' && raw.is_original_skill !== false) entry._orig = true;
     if (forDisplay) {
       entry._raw = raw;
       if (factor === 0) entry._inactive = true;
@@ -381,6 +391,9 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
       // BD 条数: buff 倍率/值 = value + additional_value × bdCount (默认 bdCount = bd_skill.cost、hensei UI 可调 0..bdCapMax)
       const bdCount = trSlot.bd_count != null ? trSlot.bd_count : (cMaster.bd_skill.cost ?? 0);
       for (const eff of cMaster.bd_skill.effects) {
+        // range=Single 的 BD buff 进的是 IndividualBuff 池、只有 MotionSpeed / ダメ上限 查它;
+        // 攻防 / BK / 転速 查的 BuffSkillValue 只认 range=All (unpacking §13.9.7 / §3.8.1)
+        if (eff.range === 'Single' && !_BD_SINGLE_PARAMS.has(baseParameter(eff.parameter))) continue;
         const scaled = (eff.value || 0) + (eff.additional_value || 0) * bdCount;
         pushEff(slot.chara, i, 'bd_skill', eff, {
           srcName: eff.description || cMaster.bd_skill.name || 'BD',
@@ -442,11 +455,20 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
     }
 
     // 5. bg (slot.bg._skills 或 _master.skills) — bg-level weapon_base_id 注入每个 skill
+    // 画级 element_ids / weapon_type_ids 和技能级 element_id / weapon_type_id 都按**装备者**判、
+    // 不符的 server 不下发 (unpacking §1.1.4 的 -4)。技能级 element_id 不是 target_element_id、
+    // _effectApplies 不会替我们判,只能在这里拦。
     const bgSkills = slot.bg?._skills || slot.bg?._master?.skills || [];
     const bgWeaponId = slot.bg?.weapon_base_id || null;
+    const bgM = slot.bg?._master || {};
+    const bgFit = (!bgM.element_ids?.length || bgM.element_ids.includes(cMaster.element_id))
+      && (!bgM.weapon_type_ids?.length || bgM.weapon_type_ids.includes(cMaster.weapon_type_id));
     for (const sk of bgSkills) {
+      const fit = bgFit
+        && (!sk.element_id || sk.element_id === cMaster.element_id)
+        && (!sk.weapon_type_id || sk.weapon_type_id === cMaster.weapon_type_id);
       const skWithLimit = bgWeaponId ? { ...sk, weapon_base_id: bgWeaponId } : sk;
-      pushEff(slot.chara, i, 'bg', skWithLimit, { srcName: sk.description || slot.bg?.name });
+      pushEff(slot.chara, i, 'bg', skWithLimit, { srcName: sk.description || slot.bg?.name, inactive: !fit });
     }
 
     // 6. masou (slot.masou 是 single object、不是 array)
@@ -471,20 +493,27 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
       if (marriageMult !== 1) {
         // 結婚倍率作用 5 项 (schema.md §結婚: 攻防 HP BK speed)。Speed 不走 applyStaged、
         // 由 _computeSpeed 的 Mul 池消费 (2026-06-02 abf7767d 只落了 docs、代码这半补上)
+        // 攻/防/BK/転速 那 4 条是 server 下发的 weapon_skills (70204 等)、is_original_skill=true → Rise 放大
         for (const attr of ['Attack', 'Defense', 'HP', 'GuardBreak', 'Speed']) {
           collected.push({
             _source: 'chara_meta', _src_slot: i, _src_name: '結婚',
             parameter: attr, base_parameter: attr,
             math_type: 'Multiply', value: marriageMult, condition_factor: 1,
+            _orig: true,
           });
         }
       }
+      // 燃心 (BH) 是 server 折进 attack / defense 的倍率 (floor 之前、同一个倍率),不进 client PSV
+      // (unpacking §1.1.2)。实际是 1.10–1.30 的连续值,UI 取满值 1.3。
       if (trSlot.moeshin) {
-        collected.push({
-          _source: 'chara_meta', _src_slot: i, _src_name: '燃心',
-          parameter: 'Attack', base_parameter: 'Attack',
-          math_type: 'Multiply', value: 1.3, condition_factor: 1,
-        });
+        for (const attr of ['Attack', 'Defense']) {
+          collected.push({
+            _source: 'chara_meta', _src_slot: i, _src_name: '燃心',
+            parameter: attr, base_parameter: attr,
+            math_type: 'Multiply', value: 1.3, condition_factor: 1,
+            _server_fold: true,
+          });
+        }
       }
       // LP tier 不进 effects、由 computeStats / computeStatsBlaze 入口算 lpMult 传给 applyStaged
       // (unpacking §3.5 step 4 × Total 直接层、按 IsBlaze 切表)
@@ -495,6 +524,7 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
             _source: 'chara_meta', _src_slot: i, _src_name: 'MP',
             parameter: attr, base_parameter: attr,
             math_type: 'Multiply', value: mwMult, condition_factor: 1,
+            _mp: true,
           });
         }
       }
@@ -508,14 +538,13 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
       const weapAff = slot.soul._master.weapon_affinity?.[weapId];
       const atkMul = (elemAff?.positive_value ?? 1) * (weapAff?.positive_value ?? 1);
       const defMul = (elemAff?.negative_value ?? 1) * (weapAff?.negative_value ?? 1);
+      // 破甲 (EBD) 不查魂的相性表、只查敵方属性表 (unpacking §4.3.2) → 只给攻撃力
       if (atkMul !== 1) {
-        for (const attr of ['Attack', 'GuardBreak']) {
-          collected.push({
-            _source: 'soul_affinity', _src_slot: i, _src_name: 'ソウル相性',
-            parameter: attr, base_parameter: attr,
-            math_type: 'Multiply', value: atkMul, condition_factor: 1,
-          });
-        }
+        collected.push({
+          _source: 'soul_affinity', _src_slot: i, _src_name: 'ソウル相性',
+          parameter: 'Attack', base_parameter: 'Attack',
+          math_type: 'Multiply', value: atkMul, condition_factor: 1,
+        });
       }
       if (defMul !== 1) {
         collected.push({
@@ -586,9 +615,9 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
   }
 
   // === Rise_AttackRate 放大器 (meta-pass): 目标自身有 Rise_AttackRate (魔剣固有) →
-  //     把目标「自身 loadout」(_src_slot===target) 的 Attack 系 (base_parameter==='Attack') 增益 ×V。
-  //     source 限 chara_skill/crystal/bg/soul (排除 omoide「潜在Skill除く」/ chara_meta / soul_affinity / enemy_buff)。
-  //     目前仅 1508 蒼き悪竜の渇欲 / 1530 もちもち (均 ×2.5)。
+  //     池里每条 is_original_skill=true 的 Attack 系 (base_parameter==='Attack') 增益 ×V (unpacking §3.7.2 / §3.7.3)。
+  //     true 的只有魔剣自带技能 (含队友 range=All 打过来的) 和結婚;結晶 / 画 / 魂 / 好感 / 魔装 / 公会都是 false。
+  //     Enemy_BreakAttack (step 48) 不走 Rise。目前仅 1508 蒼き悪竜の渇欲 / 1530 もちもち (均 ×2.5)。
   // 排除 _inactive: forDisplay 保留下来的未发动条目若被当成放大器、面板就会跟计算结果对不上
   const _rise = collected.find(
     (e) => e.parameter === 'Rise_AttackRate' && e._src_slot === targetSlotIdx && !e._inactive,
@@ -596,8 +625,7 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
   if (_rise) {
     const V = _rise.value || 1;
     for (const e of collected) {
-      if (e._src_slot !== targetSlotIdx) continue;
-      if (e.base_parameter !== 'Attack' || !_RISE_AMP_SOURCES.has(e._source)) continue;
+      if (e.base_parameter !== 'Attack' || !e._orig) continue;
       if (e.math_type === 'Multiply') e.value = _round5(e.value * V);  // 倍率直接 ×V (×1.2 → ×3.0)
       else if (e.math_type === 'Addition') e.value = e.value * V;
       e._rise_amp = V; // trace 标记
@@ -614,11 +642,13 @@ function emblemLvMaxLocal(rarity) {
 }
 
 // ============================================================
-// EAD pipeline apply (unpacking 03_ead.md §3.3 53 step + §3.12 取整 audit)
+// EAD pipeline apply (unpacking 03_ead.md §3.3.2 step 表 + §3.12 取整 audit)
 // ============================================================
 //
-// docs §3.12: 50 步 d8 链全程 double、0 中间 round。唯一 ceil 在 EAD 出口 caller get_Damage。
-// 故 stage 内部不做 floor/ceil、最末才 ceil。
+// docs §3.12: 50 个 d8 step + 4 个 Total 层 (step 4 / 10b / 51 / 53) 全程 double、0 中间 round。
+// 唯一 ceil 在 EAD 出口 caller get_Damage。故 stage 内部不做 floor/ceil、最末才 ceil。
+// 没模拟的:step 5 BlazeRankRate 放在 s8 (enemy.bd_cap)、step 52 RandomRate 由 guild-score 取均值、
+// step 53 DefenseDamageSkill (敌方被动) 不算。
 //
 // LP/HP tier 倍率 = step 4 (在 BlazeAttack/BD-Boost 之后、其他 Mul 之前)、× Total 直接层
 //   HpCheck (普通攻击):     [1.0, 1.1, 1.5, 2.0]  ← computeStats 用
@@ -627,7 +657,7 @@ function emblemLvMaxLocal(rarity) {
 // inline ×3 = step 51 (enemy.bk 时 Total ×= 3、跟 step 48/49 Enemy_BreakAttack 独立 gate)
 
 // omoide_mul 来自 omoide source 的 Multiply effect
-// enemy_buff = enemy bar guildTitle / emblems 的 effects (走 stage 3 Mul + stage 4 Add)
+// enemy_buff = enemy bar guildTitle / emblems 的 effects (走 s4a Mul + s5a Add)
 const _OTHER_SOURCES = new Set(['chara_skill', 'bd_skill', 'crystal', 'bg', 'soul', 'chara_meta', 'soul_affinity', 'omoide_mul', 'enemy_buff']);
 
 // HpCheck 普通攻击表 (unpacking §3.5.3): tier 0..3
@@ -639,6 +669,39 @@ const LP_TIER_BLAZE = [1.0, 1.3, 2.0, 5.0];
 const traceSrcLabel = (e) =>
   `${e._src_name || e._src_label || e._source}@S${(e._src_slot ?? 0) + 1}`;
 
+// HP 曲线池 (Vitality_ / RemHP_ / FellDown_,游戏里只有 Multiply):同一 parameter 的条目先连乘成池值 v、
+// 再按 r 往 1.0 插值 1 + r·(v − 1)(v ≤ 0 / v == 1 → 1.0)—— unpacking §2.4 / §2.5 的 SkillRate wrapper、
+// §7.4.1 VariableSkillRate。**不是逐条插值**:两条 ×3、HP 50% → 1 + 0.5×8 = 5,逐条会算成 2×2 = 4。
+// r 就是各条的 condition_factor (同一池同一个接收方 → 同一个 r)。
+const _HP_POOL_RE = /^(Vitality_|RemHP_|FellDown_)/;
+export const isHpPoolEffect = (e) => e.math_type === 'Multiply' && _HP_POOL_RE.test(e.parameter || '');
+export function hpCurvePools(list) {
+  const pools = new Map();
+  for (const e of list) {
+    if (!isHpPoolEffect(e)) continue;
+    let p = pools.get(e.parameter);
+    if (!p) pools.set(e.parameter, (p = { parameter: e.parameter, v: 1, r: e.condition_factor ?? 1, effects: [] }));
+    p.v *= _round5(e.value);
+    p.effects.push(e);
+  }
+  return [...pools.values()].map((p) => ({ ...p, factor: p.v > 0 && p.v !== 1 ? 1 + p.r * (p.v - 1) : 1 }));
+}
+const _poolLabel = (p) => `${p.parameter} 池 ×${_round5(p.v)} (${p.effects.length} 条、r=${_round5(p.r)})`;
+
+// EBD 的属性 × 敵BK 4 格 (unpacking 04_ebd §4.6-§4.7、§4.11 常数):weak = 敵方属性表对我方属性的 rate > 1.0
+//   敵BK 中:  (weak ? v×1.5 : v) × 1.2f × 10 × 0.1f   → ×1.8 / ×1.2
+//   非BK:     weak ? v×1.5 × 10 × 0.1f : v × 0.1f      → ×1.5 / ×0.1
+// 1.2f / 0.1f 是 float 字面量加宽成的 double (1.2000000476837158 / 0.10000000149011612),
+// 所以乘出来比十进制值略大、整数 × 0.1 后 ceil 会 +1 —— 游戏也一样。
+const _EBD_1_2 = Math.fround(1.2);
+const _EBD_0_1 = Math.fround(0.1);
+export function ebdCellApply(v, weak, bk) {
+  let d = v;
+  if (bk) d = (weak ? d * 1.5 : d) * _EBD_1_2 * 10;
+  else if (weak) d = d * 1.5 * 10;
+  return d * _EBD_0_1;
+}
+
 // applyStaged(base, parameter, effects, opts):
 //   opts.lpMult — LP tier 倍率 (普通/Blaze 入口决定)
 //   opts.enemyBkX3 — enemy.bk=true 时 Total ×3 (step 51 inline)
@@ -647,7 +710,13 @@ const traceSrcLabel = (e) =>
 // 逐 effect fold (非 sumAdd/prodMul 合并)、便于 trace 单步展示。浮点结合顺序差异
 // (v+(a+b) vs (v+a)+b) 由出口 _norm(1e9 round)+ceil 吸收。
 export function applyStaged(base, parameter, effects, opts = {}) {
-  const same = effects.filter((e) => e.base_parameter === parameter);
+  // AllTarget (全体化倍率) 是 Total 上的无条件一层:EAD step 10b × AllTargetRate、EBD base × AllTargetRate
+  // (unpacking §3.6.7 / §4.3.4) → 攻撃力 / ブレイク力 都吃
+  const allTargetToo = parameter === 'Attack' || parameter === 'GuardBreak';
+  const same = effects.filter(
+    (e) => e.base_parameter === parameter
+      || (allTargetToo && e.base_parameter === 'AllTarget' && e.math_type === 'Multiply'),
+  );
   const _norm = (x) => Math.round(x * 1e9) / 1e9;
   const lpMult = opts.lpMult ?? 1;
   const enemyBkX3 = opts.enemyBkX3 ? 3 : 1;
@@ -683,14 +752,19 @@ export function applyStaged(base, parameter, effects, opts = {}) {
   // HP-curve / gate 前缀 (Vitality_/RemHP_/Break_/FellDown_) 是 client 动态值、不能 server-fold —
   // masou 此类 effect 不进 s2a/s2b (server-fold 段)、改走 s4a/s5a
   const _isDynamic = (e) => /^(Vitality_|RemHP_|Break_|FellDown_)/.test(e.parameter || '');
+  // server 只把 Attack / Defense 类魔装折进 attack / defense (Speed 在 _computeSpeed、HP 在 serverFoldHP),
+  // 其余 parameter 以 -7 条目交给 client PSV (unpacking §1.1.2.1) → 走 s4a/s5a
+  const _foldParam = parameter === 'Attack' || parameter === 'Defense';
+  const _isFoldMasou = (e) => _foldParam && e._source === 'masou' && !_isDynamic(e);
+  const _isFold = (e) => _isFoldMasou(e) || e._server_fold;
 
   // Stage 1: omoide Add
   addPass('s1_omoide_add', same.filter((e) => e._source === 'omoide' && e.math_type === 'Addition'));
   // Stage 2a: masou Add (只算静态的)
-  addPass('s2a_masou_add', same.filter((e) => e._source === 'masou' && e.math_type === 'Addition' && !_isDynamic(e)));
-  // Stage 2b: masou Mul (只算静态的)
-  mulPass('s2b_masou_mul', same.filter((e) => e._source === 'masou' && e.math_type === 'Multiply' && !_isDynamic(e)));
-  // Stage 2 終: server-fold floor — base + omoide + masou 都是 server 侧算的、返回整数
+  addPass('s2a_masou_add', same.filter((e) => _isFoldMasou(e) && e.math_type === 'Addition'));
+  // Stage 2b: masou Mul + 燃心 (server-fold 的倍率)
+  mulPass('s2b_masou_mul', same.filter((e) => _isFold(e) && e.math_type === 'Multiply'));
+  // Stage 2 終: server-fold floor — base + omoide + masou + 燃心 都是 server 侧算的、返回整数
   {
     const b = v;
     v = Math.floor(v);
@@ -709,9 +783,11 @@ export function applyStaged(base, parameter, effects, opts = {}) {
   const _isSoulSrc = (e) => e._source === 'soul' || e._source === 'soul_affinity';
   const _isBd = (e) => e._source === 'bd_skill';
   const _bySlot = (arr) => [...arr].sort((a, b) => (a._src_slot ?? 0) - (b._src_slot ?? 0));
-  // others 池 = _OTHER_SOURCES + masou 动态 (HP-curve 类、不能 server-fold)
+  // others 池 = _OTHER_SOURCES + 不 server-fold 的魔装 (HP-curve 类 / Attack·Defense 以外的 parameter)
+  // HP 曲线池单独按池插值 (s4h);MP 惩罚在 Add 池和敵BK 之后 (EAD step 50 / EBD 同位置) → s6b
   const others = same.filter(
-    (e) => _OTHER_SOURCES.has(e._source) || (e._source === 'masou' && _isDynamic(e)),
+    (e) => (_OTHER_SOURCES.has(e._source) || (e._source === 'masou' && !_isFoldMasou(e)))
+      && !e._server_fold && !e._mp && !(isHpPoolEffect(e) && !_isBd(e)),
   );
   // bd_skill 战斗时生效 → 排到 Mul/Add 池最后 (soul 之后);其余非 soul → s4a/s5a、soul → s4b/s5b
   const othersNonSoul = _bySlot(others.filter((e) => !_isSoulSrc(e) && !_isBd(e)));
@@ -719,6 +795,12 @@ export function applyStaged(base, parameter, effects, opts = {}) {
   const bdEffs = _bySlot(others.filter(_isBd));
   mulPass('s4a_other_mul', othersNonSoul.filter((e) => e.math_type === 'Multiply'));
   mulPass('s4b_soul_mul', othersSoul.filter((e) => e.math_type === 'Multiply'));
+  for (const p of hpCurvePools(_bySlot(same.filter((e) => !_isBd(e) && e._source !== 'enemy_break')))) {
+    if (p.factor === 1) continue;
+    const b = v;
+    v *= p.factor;
+    _push('s4h_hp_curve', _poolLabel(p), 'mul', p.factor, b, v);
+  }
   mulPass('s4c_bd_mul', bdEffs.filter((e) => e.math_type === 'Multiply'));
   addPass('s5a_other_add', othersNonSoul.filter((e) => e.math_type === 'Addition'));
   addPass('s5b_soul_add', othersSoul.filter((e) => e.math_type === 'Addition'));
@@ -726,6 +808,14 @@ export function applyStaged(base, parameter, effects, opts = {}) {
   // Stage 6: Enemy_Break Mul → Add (step 48/49、gate enemy.bk 在 condition_factor)
   mulPass('s6_enemy_break', same.filter((e) => e._source === 'enemy_break' && e.math_type === 'Multiply'));
   addPass('s6_enemy_break', same.filter((e) => e._source === 'enemy_break' && e.math_type === 'Addition'));
+  // Stage 6b: MP 不足惩罚 (EAD step 50)
+  mulPass('s6b_mp', same.filter((e) => e._mp));
+  // Stage 7 (ブレイク力): EBD 的属性 × 敵BK 4 格净倍率 (unpacking 04_ebd §4.6-§4.7)
+  if (opts.ebd) {
+    const b = v;
+    v = ebdCellApply(v, opts.ebd.weak, opts.ebd.bk);
+    _push('s7_ebd', `破甲 ${opts.ebd.weak ? '弱点' : '非弱点'}・${opts.ebd.bk ? 'BK中' : '非BK'} (EBD)`, 'mul', v / b, b, v);
+  }
   // Stage 7: × 3 inline (step 51、enemy.bk gate、跟 step 48/49 独立)
   if (enemyBkX3 !== 1) {
     const b = v;
@@ -774,7 +864,7 @@ export function orderServerFold(list, targetSlotIdx) {
 
 // HP 战前 server-fold: 按 orderServerFold 顺序逐 effect 应用 (Mul 直乘、Add 直加、不分组)。
 // 自身/靠前 slot 的加算因排在自身乘算之前 → 落在乘算"内";靠后 slot 的加算排在之后 → 落在"外"。
-// (unpacking archive/HOWTO_hp_calc.md: max_hp = (base + Σ前置Add) × Π自身Mul + Σ后置Add、slot 顺序敏感)
+// (unpacking 01_setup.md §1.1.1 / §1.1.5: max_hp = (base + Σ前置Add) × Π自身Mul + Σ后置Add、slot 顺序敏感)
 export function serverFoldHP(base, effects, targetSlotIdx, opts = {}) {
   const ordered = orderServerFold(effects.filter((e) => e.base_parameter === 'HP'), targetSlotIdx);
   const st = opts.traceStages?.s_hp_fold;
@@ -800,9 +890,10 @@ export function serverFoldHP(base, effects, targetSlotIdx, opts = {}) {
   return out;
 }
 
-// HitCount 战前 server-fold (DeckHitCount、unpacking 17_hitcount.md §17.2.1/§17.8.3):
-//   按 orderServerFold 顺序逐 effect、每步 cur = trunc(cur op val) (战前 fcvtzs)、每步 clamp ≥1。
-//   per-step clamp 对顺序敏感、所以不分组 Mul/Add。返回各段 hit 数组。
+// HitCount 战前 server-fold (unpacking 17_hitcount.md §17.2.2):server 把编队的 HitCount 加成
+//   (魂 values × L、魔剣技能、HitCount 结晶) 预折叠进下发的 weapon.hit_counts,每条 h = max(1, trunc(h + v))。
+//   (客户端 DeckHitCount 只给 UI 用、战斗不调它。) 这里按 orderServerFold 顺序逐 effect 做同样的截断;
+//   纯正数 Add 时截断跟顺序无关,只有 Multiply 类 (抓包未出现、先后未验证) 才对顺序敏感。返回各段 hit 数组。
 export function serverFoldHitCount(baseHits, effects, targetSlotIdx, stHits = null) {
   const ordered = orderServerFold(
     effects.filter(
@@ -898,16 +989,19 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
     ? {
         s1_omoide_add: mkStage('s1_omoide_add', 'おもいで Add (Stage 1)'),
         s2a_masou_add: mkStage('s2a_masou_add', '魔装 Add (Stage 2a)'),
-        s2b_masou_mul: mkStage('s2b_masou_mul', '魔装 Mul (Stage 2b)'),
+        s2b_masou_mul: mkStage('s2b_masou_mul', '魔装 / 燃心 Mul (Stage 2b)'),
         s2c_floor: mkStage('s2c_floor', 'server-fold floor (Stage 2 終)'),
         s3_lp: mkStage('s3_lp', 'LP tier (×Total)'),
         s4a_other_mul: mkStage('s4a_other_mul', 'Mul — chara/crystal/bg/魔装…'),
         s4b_soul_mul: mkStage('s4b_soul_mul', 'Mul — ソウル'),
+        s4h_hp_curve: mkStage('s4h_hp_curve', 'Mul — HP 曲線池 (Vitality/RemHP/FellDown)'),
         s4c_bd_mul: mkStage('s4c_bd_mul', 'Mul — BD (戦闘時)'),
         s5a_other_add: mkStage('s5a_other_add', 'Add — chara/crystal/bg/魔装…'),
         s5b_soul_add: mkStage('s5b_soul_add', 'Add — ソウル'),
         s5c_bd_add: mkStage('s5c_bd_add', 'Add — BD (戦闘時)'),
         s6_enemy_break: mkStage('s6_enemy_break', 'Enemy Break (step48/49)'),
+        s6b_mp: mkStage('s6b_mp', 'MP 不足 (step50)'),
+        s7_ebd: mkStage('s7_ebd', '破甲 属性×敵BK (EBD、ブレイク力)'),
         s7_inline3: mkStage('s7_inline3', '敵BK inline ×3 (step51)'),
         s7b_ceil: mkStage('s7b_ceil', '出口 ceil'),
         s_hp_fold: mkStage('s_hp_fold', 'HP server-fold (逐 effect 顺序)'),
@@ -920,7 +1014,13 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   // step 51 inline ×3: enemy.bk=true 时 Total ×= 3 (跟 step 48/49 独立 gate)
   const enemyBkX3 = !!(ctx?.enemy?.bk);
 
-  // applyStaged 对每个 stat 跑 (LP / inline×3 只影响 Attack、其他 stat 传 opts={})
+  // applyStaged 对每个 stat 跑 (LP / inline×3 只影响 Attack、EBD 4 格只影响 GuardBreak、其他 stat 传 opts={})
+  // ブレイク力的「敌方弱我方属性」= 攻撃力那张属性相性表的倍率 > 1 (EAD step 9 / EBD 读的是同一张敌方属性表)
+  const enemy = ctx?.enemy || {};
+  const ebd = {
+    weak: elementMatchupMult(chara._master?.element_id, enemy.element, enemy.mode || 'normal') > 1,
+    bk: !!enemy.bk,
+  };
   const optsAtk = { lpMult, enemyBkX3, traceStages, statLabel: '攻撃力' };
   const stats = {
     // HP / HitCount 走战前 server-fold (orderServerFold 顺序逐 effect)、不走 EAD 分组 pipeline。
@@ -928,11 +1028,11 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
     HP: serverFoldHP(base.HP, effects, slotIdx, { traceStages }),
     Attack: applyStaged(base.Attack, 'Attack', effects, optsAtk),
     Defense: applyStaged(base.Defense, 'Defense', effects, { traceStages, statLabel: '防御力' }),
-    GuardBreak: applyStaged(base.GuardBreak, 'GuardBreak', effects, { traceStages, statLabel: 'ブレイク力' }),
+    GuardBreak: applyStaged(base.GuardBreak, 'GuardBreak', effects, { traceStages, statLabel: 'ブレイク力', ebd }),
   };
 
-  // enemy bar 硬编码倍率 (element matchup / difficulty / bkRes / advWeapons / bd_cap)
-  // guildTitle/emblems 已通过 collectEffects 走 stage 3/4、这里只处理硬编码字段
+  // enemy bar 硬编码倍率 (element matchup / difficulty / bkRes / advWeapons / bd_cap) —— 只乘攻撃力
+  // guildTitle/emblems 已通过 collectEffects 走 s4a/s5a、这里只处理硬编码字段
   const stEnemyMods = mkStage('s8_enemy_mods', '敵 mods (相性/難度等)');
   const enemyMods = _computeEnemyMods(chara, tr, ctx);
   if (enemyMods.attackMul !== 1) {
@@ -949,58 +1049,43 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
       });
     }
   }
-  if (enemyMods.bkMul !== 1) {
-    const b = stats.GuardBreak;
-    stats.GuardBreak = Math.ceil(stats.GuardBreak * enemyMods.bkMul);
-    if (stEnemyMods) {
-      const parts = enemyMods.parts.filter((p) => p.bkMul !== 1);
-      let cur = b;
-      parts.forEach((p, idx) => {
-        const before = cur;
-        cur = idx === parts.length - 1 ? stats.GuardBreak : cur * p.bkMul;
-        stEnemyMods.steps.push({ src: p.label, stat: 'ブレイク力', op: 'mul', val: p.bkMul, before, after: cur });
-      });
-    }
-  }
   const stHits = mkStage('s9_hits', 'Hit 補正');
   const stDLimit = mkStage('s10_damage_limit', 'ダメ上限 fold');
   const speed = _computeSpeed(chara, tr, slotIdx, ctx, effects, base, mkStage('s11_speed', '転速 (Speed)'));
   const motionSpeed = _computeMotionSpeed(chara, tr, effects, trace, mkStage('s12_motion', '攻速 (MotionSpeed)'));
 
-  // hits 逐段独立 (unpacking §17.3 / v1 main:js/stats-calc.js L556-576)
-  //   newHit_i = max(1, floor(base[i] × Π PSV_Mul_i + Σ PSV_Add_i))
-  //   PSV 池 = chara_skill/crystal/bg/soul/omoide/omoide_mul/masou 的 HitCount/AttackCount effect
-  //   BSV 池 = bd_on=true 时 bd_skill.effects 内对应 effect
+  // hits 逐段独立:server 预折叠 HitCount (§17.2.2) + 战斗中的 AttackCount (§17.3、master 目前 0 条)
   //   每 effect 的 _stages[i] 决定第 i 段 add/mul 的值
   const cMaster = chara._master;
   const stateData = cMaster?.states?.[tr.state] || Object.values(cMaster?.states || {})[0];
   const baseHits = Array.isArray(stateData?.hit_counts) ? stateData.hit_counts.slice(0, 3) : [0, 0, 0];
   while (baseHits.length < 3) baseHits.push(0);
   if (trace) trace.hitsBase = baseHits.slice();
-  // hits 战前 server-fold (serverFoldHitCount: orderServerFold 顺序 + 每步 trunc + 每步 clamp ≥1、
-  // unpacking 17_hitcount.md §17.2.1/§17.8.3)
+  // hits 战前 server-fold (serverFoldHitCount: orderServerFold 顺序 + 每步 trunc + 每步 clamp ≥1)
   const hits = serverFoldHitCount(baseHits, effects, slotIdx, stHits);
   const totalHits = hits.reduce((s, h) => s + h, 0);
 
-  // damageLimit — DamageLimitBreak Mul + Add 池 fold (unpacking §9.5 / wiki main:js/stats-calc.js L559-561)
-  //   damageLimit = floor(DEFAULT × ΠMul + ΣAdd)
+  // damageLimit — DamageLimitBreak Mul / Add 两个池分开 fold (unpacking §9.3 / §9.5)
+  //   damageLimit = floor(DEFAULT × ΠMul + ΣAdd)    Add 永远在 Mul 外面、跟 effect 顺序无关
   //   DEFAULT = 2^31-1 = 2,147,483,647 (BattleDamage..ctor 初始值)
-  //   effect.value 已含 condition_factor / soul sourceMult (collectEffects pre-apply)
+  //   effect.value 已含 soul sourceMult (collectEffects pre-apply);cf 按 applyStaged 同式折
   const DEFAULT_LIMIT = 2147483647;
   let damageLimit = DEFAULT_LIMIT;
-  for (const e of effects) {
-    if (e.base_parameter !== 'DamageLimitBreak') continue;
-    const cf = e.condition_factor ?? 1;
-    const v = e.value * cf;
-    const b = damageLimit;
-    if (e.math_type === 'Multiply') damageLimit *= v;
-    else if (e.math_type === 'Addition') damageLimit += v;
-    else continue;
-    if (stDLimit) {
-      stDLimit.steps.push({
-        src: traceSrcLabel(e), stat: 'ダメ上限',
-        op: e.math_type === 'Multiply' ? 'mul' : 'add', val: v, before: b, after: damageLimit,
-      });
+  const dlbEffs = effects.filter((e) => e.base_parameter === 'DamageLimitBreak');
+  for (const mt of ['Multiply', 'Addition']) {
+    for (const e of dlbEffs) {
+      if (e.math_type !== mt) continue;
+      const cf = e.condition_factor ?? 1;
+      const v = mt === 'Multiply' ? 1 + (e.value - 1) * cf : e.value * cf;
+      const b = damageLimit;
+      if (mt === 'Multiply') damageLimit *= v;
+      else damageLimit += v;
+      if (stDLimit) {
+        stDLimit.steps.push({
+          src: traceSrcLabel(e), stat: 'ダメ上限',
+          op: mt === 'Multiply' ? 'mul' : 'add', val: v, before: b, after: damageLimit,
+        });
+      }
     }
   }
   {
@@ -1029,8 +1114,8 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
 
   // ========== BlazeGauge 系统 (按 user 决策正确顺序、unpacking §1.3.3.5) ==========
   // Step 1: 先算 BlazeGaugePointRate pipeline → blaze_gauge_points 数组 (每 level 升级阈值)
-  //   chara/crystal/bg skill BlazeGaugePointRate Mul → charaSkillProd
-  //   soul skill BlazeGaugePointRate Mul → soulRates (含 lv 给 L(level) 用)
+  //   魔剣 skill BlazeGaugePointRate Mul → charaSkillProd
+  //   soul skill BlazeGaugePointRate Mul → soulRates (含 lv / rarity 给 L(level) 用)
   // Step 2: 然后累加所有 BlazeGauge points (chara skill mode 1 + mode 2)
   // Step 3: 最后用 cumsum 反查 → bd_cap level (小数允许)
   let charaSkillProd = 1;
@@ -1072,7 +1157,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
         const soulObj = allSoulsBg.find((s) => s.id === slotInfo.soul);
         for (const sk of (soulObj?._master?.skills || [])) {
           if (sk.parameter === 'BlazeGaugePointRate' && sk.math_type === 'Multiply') {
-            soulRates.push({ value: +sk.value || 1, lv: +slotInfo.tr?.soul_lv || 1 });
+            soulRates.push({ value: +sk.value || 1, lv: +slotInfo.tr?.soul_lv || 1, rarity: +soulObj._master.rarity || 1 });
           }
         }
       }
@@ -1113,17 +1198,14 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
 // Speed / MotionSpeed — unpacking 07_speed.md / 08_motion_speed.md
 // ============================================================
 // unpacking §7.6.1:
-//   latestRecover = add_acc + (PartnerLevel/100 + 1) × mul_acc × recover
+//   latestRecover = max(0, add_acc + (PartnerLevel/100 + 1) × mul_acc × recover)
 //   - recover    = WeaponData ObscuredFloat = **server 推的 speed**、不是裸曲线值。
-//                  01_setup.md §1.1.2: `speed = speed + Σ slot_speed_add`、slot Add 来源 =
-//                  `UserWeaponMemorySlot[].weapon_skill` (= omoide 记憶結晶槽)。
-//                  → omoide 的 Speed Add 属于 server-fold 段、必须在 mul_acc **之前**折进 recover,
-//                    并按 §1.1.2 汇总表 (speed 同 attack 路径、server push int) 取 floor。
-//                  masou/costume 不进此段: 「speed 同 attack 含 costume_Mul」只是间接推导,
-//                    而 HOWTO_hp_calc.md 明写「Attack 那个 costume Mul 还没反编译验证」,
-//                    且 HOWTO_weapon_skills_order.md 实测 costume 以 PSV entry (block 5 `-7`)
-//                    留在 client 数组里 → 仍走下面的 mul_acc / add_acc 池。
-//   - mul_acc    = Σ Speed Mul fold (init 1.0、含 Vitality/RemHP/Break/FellDown_Speed × HP-curve factor)
+//                  01_setup.md §1.1.2: `speed = floor((speed + Σ slot_speed_add) × Π 魔装 Speed Mul)`、
+//                  slot Add 来源 = `UserWeaponMemorySlot[].weapon_skill` (= omoide 记憶結晶槽)。
+//                  → omoide 的 Speed Add 和魔装的 Speed Mul 都属于 server-fold 段、在 mul_acc **之前**
+//                    折进 recover、再 floor (§1.1.2.1:抓包 6 例全部 floor,魔装 Speed 不以 -7 下发)。
+//   - mul_acc    = PSV/BSV(Speed, Mul) × [IsBreak] Break_Speed × VSR(HpRate, Vitality_Speed 池)
+//                  × VSR(1−HpRate, RemHP_Speed 池) × [!HpEmpty] VSR(FellDownRate, FellDown_Speed 池) (§7.4)
 //   - add_acc    = PSV(Speed, Add) fold (init 0.0) —— client passive skill 池、**不含 omoide**
 //   - PartnerLevel = 装的 soul lv (未装 → 0、factor = 1.0)
 // returns { latestRecover, cooldownFrames, setFrames }
@@ -1136,46 +1218,51 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
 function _computeSpeed(chara, tr, slotIdx, ctx, effects, base, traceStage = null) {
   let mulAcc = 1;
   let addAcc = 0;
-  // trace 链: base.Speed → +omoide Add... → floor → ×mul... → ×partner → +add...
+  // trace 链: base.Speed → +omoide Add... → ×魔装 Mul → floor → ×mul... → ×HP 曲線池 → ×partner → +add...
   let tCur = base.Speed;
-  // ── server-fold 段: recover = floor(base.Speed + Σ omoide Speed Add) ──
+  const spEffs = effects.filter((e) => e.base_parameter === 'Speed' && e._source !== 'enemy_break');
+  const _isFoldMasou = (e) => e._source === 'masou' && e.math_type === 'Multiply' && !/^(Vitality_|RemHP_|Break_|FellDown_)/.test(e.parameter || '');
+  const _step = (e, op, val) => {
+    if (!traceStage) return;
+    const b = tCur;
+    tCur = op === 'add' ? tCur + val : tCur * val;
+    traceStage.steps.push({ src: typeof e === 'string' ? e : traceSrcLabel(e), stat: '転速', op, val, before: b, after: tCur });
+  };
+  // ── server-fold 段: recover = floor((base.Speed + Σ omoide Speed Add) × Π 魔装 Speed Mul) ──
   let recover = base.Speed;
-  for (const e of effects) {
-    if (e.base_parameter !== 'Speed') continue;
-    if (e._source !== 'omoide') continue;         // omoide Mul 是 _source='omoide_mul'、留给 mul_acc
-    if (e.math_type !== 'Addition') continue;
+  for (const e of spEffs) {
+    if (e._source !== 'omoide' || e.math_type !== 'Addition') continue; // omoide Mul 是 'omoide_mul'、留给 mul_acc
     const a = e.value * (e.condition_factor ?? 1);
     recover += a;
-    if (traceStage && a !== 0) {
-      const b = tCur;
-      tCur += a;
-      traceStage.steps.push({ src: traceSrcLabel(e), stat: '転速', op: 'add', val: a, before: b, after: tCur });
-    }
+    if (a !== 0) _step(e, 'add', a);
+  }
+  for (const e of spEffs) {
+    if (!_isFoldMasou(e)) continue;
+    const f = 1 + (_round5(e.value) - 1) * (e.condition_factor ?? 1);
+    recover *= f;
+    if (f !== 1) _step(e, 'mul', f);
   }
   {
     const b = recover;
-    recover = Math.floor(recover);               // server push int (01_setup.md §1.1.2 汇总表)
+    recover = Math.floor(recover);               // server push int (01_setup.md §1.1.2 / §1.5)
     if (traceStage && recover !== b) {
       traceStage.steps.push({ src: 'server-fold floor', stat: '転速', op: 'floor', val: null, before: b, after: recover });
     }
     tCur = recover;
   }
-  // ── client 段: PSV Mul → partner → PSV Add ──
-  for (const e of effects) {
-    if (e.base_parameter !== 'Speed') continue;
-    if (e._source === 'enemy_break') continue;  // Enemy_BreakSpeed 不进 Speed 池 (master 无数据)
-    const cf = e.condition_factor ?? 1;
-    // 跟 applyStaged 公式一致: Mul 用 1+(v-1)×cf 渐进激活、Add 直接 ×cf
-    if (e.math_type === 'Multiply') {
-      // 倍率先 round 到 5 位小数 (同 applyStaged s4 的兜底、覆盖 chara_meta 等非 pushEff 来源)
-      const f = 1 + (_round5(e.value) - 1) * cf;
-      mulAcc *= f;
-      if (traceStage && f !== 1) {
-        const b = tCur;
-        tCur *= f;
-        traceStage.steps.push({ src: traceSrcLabel(e), stat: '転速', op: 'mul', val: f, before: b, after: tCur });
-      }
-    }
+  // ── client 段: PSV Mul → HP 曲線池 → partner → PSV Add ──
+  for (const e of spEffs) {
+    if (e.math_type !== 'Multiply' || _isFoldMasou(e) || isHpPoolEffect(e)) continue;
+    // 跟 applyStaged 公式一致: Mul 用 1+(v-1)×cf (Break_Speed 的 cf 是 0/1 gate)
+    // 倍率先 round 到 5 位小数 (同 applyStaged s4 的兜底、覆盖 chara_meta 等非 pushEff 来源)
+    const f = 1 + (_round5(e.value) - 1) * (e.condition_factor ?? 1);
+    mulAcc *= f;
+    if (f !== 1) _step(e, 'mul', f);
+  }
+  for (const p of hpCurvePools(spEffs)) {
+    if (p.factor === 1) continue;
+    mulAcc *= p.factor;
+    _step(_poolLabel(p), 'mul', p.factor);
   }
   const team = ctx?.team || [];
   const slot = team[slotIdx];
@@ -1186,33 +1273,26 @@ function _computeSpeed(chara, tr, slotIdx, ctx, effects, base, traceStage = null
     tCur *= partnerFactor;
     traceStage.steps.push({ src: `ソウル partner (lv${partnerLv}/100+1)`, stat: '転速', op: 'mul', val: partnerFactor, before: b, after: tCur });
   }
-  for (const e of effects) {
-    if (e.base_parameter !== 'Speed') continue;
-    if (e._source === 'enemy_break') continue;
+  for (const e of spEffs) {
     if (e._source === 'omoide') continue;       // 已在上面的 server-fold 段折进 recover
-    const cf = e.condition_factor ?? 1;
-    if (e.math_type === 'Addition') {
-      const a = e.value * cf;
-      addAcc += a;
-      if (traceStage && a !== 0) {
-        const b = tCur;
-        tCur += a;
-        traceStage.steps.push({ src: traceSrcLabel(e), stat: '転速', op: 'add', val: a, before: b, after: tCur });
-      }
-    }
+    if (e.math_type !== 'Addition') continue;
+    const a = e.value * (e.condition_factor ?? 1);
+    addAcc += a;
+    if (a !== 0) _step(e, 'add', a);
   }
-  const latestRecover = addAcc + partnerFactor * mulAcc * recover;
+  const latestRecover = Math.max(0, addAcc + partnerFactor * mulAcc * recover);
   const cooldownFrames = latestRecover > 0
     ? Math.max(1, Math.ceil(6000 / latestRecover))
     : 0;
   return { latestRecover, cooldownFrames, setFrames: 1 };
 }
 
-// unpacking §8.7:
-//   effective_motion_speed_i = motion_speed_i × boost_mul_acc + boost_add_acc
+// unpacking §8.4:
+//   effective_motion_speed_i = motion_speed_i × rate
 //   - motion_speed_1/2/3 = master state.motion_speed / motion_speed2 / motion_speed3
-//   - boost_mul_acc = Σ MotionSpeed Mul fold (init 1.0、含 HP-curve gate)
-//   - boost_add_acc = Σ MotionSpeed Add fold (init 0.0)
+//                          (魔装 MotionSpeed Mul 由 server 折进 weapon.motion_speed*、乘法等价、这里照常当 Mul)
+//   - rate = PSV/BSV(MotionSpeed, Mul) × VSR(HpRate, Vitality_MotionSpeed 池) × VSR(1−HpRate, RemHP_MotionSpeed 池)
+//            (Player.Update → Fighter.BoostAttackSpeed:**只有 Mul 池、没有 Add 池**,Addition 条目游戏不用)
 // unpacking §8.4: clip authored duration_sec (state.motion_durations) / effective → 实际段时长
 // 游戏 60fps、最终调度按帧、所以转 frames = ceil(dur/spd × 60) — 即使 40ms 也会 ceil 到 3fr
 // 返 { speeds: [effective_m1, m2, m3] 倍率, durationsFrames: [整数帧数] }
@@ -1227,46 +1307,30 @@ function _computeMotionSpeed(chara, tr, effects, trace = null, traceStage = null
   if (trace) trace.motionBase = ms.slice();
   // clip authored duration (秒、build_characters.py inline from data/_npc_motions.json)
   const durs = Array.isArray(stateData?.motion_durations) ? stateData.motion_durations : [0, 0, 0];
-  let mulAcc = 1;
-  let addAcc = 0;
-  for (const e of effects) {
-    if (e.base_parameter !== 'MotionSpeed') continue;
-    const cf = e.condition_factor ?? 1;
-    // 跟 applyStaged 公式一致
-    if (e.math_type === 'Multiply') mulAcc *= 1 + (e.value - 1) * cf;
-    else if (e.math_type === 'Addition') addAcc += e.value * cf;
+  const msEffs = effects.filter((e) => e.base_parameter === 'MotionSpeed' && e.math_type === 'Multiply');
+  // [src, factor] 列表:普通 Mul 逐条 (1+(v-1)×cf,跟 applyStaged 一致)、HP 曲線类按池
+  const factors = [];
+  for (const e of msEffs) {
+    if (isHpPoolEffect(e)) continue;
+    const f = 1 + (e.value - 1) * (e.condition_factor ?? 1);
+    if (f !== 1) factors.push([traceSrcLabel(e), f]);
   }
-  // trace 链 (等价重演、3 段各自: ms_i → ×mul... → +add...; 段 base=0 跳过)
+  for (const p of hpCurvePools(msEffs)) if (p.factor !== 1) factors.push([_poolLabel(p), p.factor]);
+  const mulAcc = factors.reduce((acc, [, f]) => acc * f, 1);
+  // trace 链 (等价重演、3 段各自: ms_i → ×mul...; 段 base=0 跳过)
   if (traceStage) {
     ms.forEach((mBase, i) => {
       if (!mBase) return;
       const stat = `攻速${i + 1}`;
       let tCur = mBase;
-      for (const e of effects) {
-        if (e.base_parameter !== 'MotionSpeed') continue;
-        const cf = e.condition_factor ?? 1;
-        if (e.math_type === 'Multiply') {
-          const f = 1 + (e.value - 1) * cf;
-          if (f === 1) continue;
-          const b = tCur;
-          tCur *= f;
-          traceStage.steps.push({ src: traceSrcLabel(e), stat, op: 'mul', val: f, before: b, after: tCur });
-        }
-      }
-      for (const e of effects) {
-        if (e.base_parameter !== 'MotionSpeed') continue;
-        const cf = e.condition_factor ?? 1;
-        if (e.math_type === 'Addition') {
-          const a = e.value * cf;
-          if (a === 0) continue;
-          const b = tCur;
-          tCur += a;
-          traceStage.steps.push({ src: traceSrcLabel(e), stat, op: 'add', val: a, before: b, after: tCur });
-        }
+      for (const [src, f] of factors) {
+        const b = tCur;
+        tCur *= f;
+        traceStage.steps.push({ src, stat, op: 'mul', val: f, before: b, after: tCur });
       }
     });
   }
-  const speeds = ms.map((v) => v * mulAcc + addAcc);
+  const speeds = ms.map((v) => v * mulAcc);
   // unpacking §8.6.2 条件 A:
   //   frames_per_segment = 1 (register) + max(1, ceil(effective_clip_seconds × 60))
   //   effective_clip_seconds = clip_dur / motion_speed
@@ -1282,7 +1346,8 @@ function _computeMotionSpeed(chara, tr, effects, trace = null, traceStage = null
 // ============================================================
 // enemy bar 硬编码倍率 (element matchup / difficulty / bkRes / advWeapons / bd_cap)
 // element / bd_cap 全局生效；difficulty / bkRes-high / advWeapons 仅 isGuildMode 生效
-// 返 { attackMul, bkMul } — 在 _computeImpl 内乘到 Attack / GuardBreak (stage 后、UI 显示前)
+// 返 { attackMul, parts } — 在 _computeImpl 内乘到 Attack (stage 后、UI 显示前)。
+// ブレイク力不在这里:EBD 的属性修正是 applyStaged 里的 4 格倍率 (s7_ebd)、只用这张表判「弱点」
 // guildTitle/emblems 不在此处、走 collectEffects 注入 enemy_buff source
 // ============================================================
 function _computeEnemyMods(chara, tr, ctx) {
@@ -1294,14 +1359,12 @@ function _computeEnemyMods(chara, tr, ctx) {
   const charaWeap = cMaster?.weapon_type_id;
 
   let attackMul = 1;
-  let bkMul = 1;
-  const parts = [];   // trace 用: 各因子明细 [{label, attackMul, bkMul}]
+  const parts = [];   // trace 用: 各因子明细 [{label, attackMul}]
 
   // #1 element matchup (全局)
   const elemMult = elementMatchupMult(charaElem, enemy.element, mode);
   attackMul *= elemMult;
-  bkMul *= elemMult;
-  if (elemMult !== 1) parts.push({ label: '属性相性', attackMul: elemMult, bkMul: elemMult });
+  if (elemMult !== 1) parts.push({ label: '属性相性', attackMul: elemMult });
 
   // #4 bkResistance × bk (bk gate)
   // 注: 普通 BK ×3 已在 stage 7 inline ×3 完成 (unpacking §3.10 step 51)、不重复
@@ -1309,28 +1372,28 @@ function _computeEnemyMods(chara, tr, ctx) {
   if (enemy.bk && isGuildMode && enemy.bkResistance === 'high') {
     const f = BK_RES_MULT.high / BK_RES_MULT.normal;  // 6/3 = 2 (额外倍率)
     attackMul *= f;
-    parts.push({ label: 'BK耐性 high (×6/×3)', attackMul: f, bkMul: 1 });
+    parts.push({ label: 'BK耐性 high (×6/×3)', attackMul: f });
   }
 
   // #3 difficulty (isGuildMode-gated)
   if (isGuildMode) {
     const f = DIFFICULTY_MULT[enemy.difficulty] ?? 1.0;
     attackMul *= f;
-    if (f !== 1) parts.push({ label: `難度 (${enemy.difficulty})`, attackMul: f, bkMul: 1 });
+    if (f !== 1) parts.push({ label: `難度 (${enemy.difficulty})`, attackMul: f });
   }
 
   // #5 advantageWeapons (isGuildMode-gated)
   if (isGuildMode && charaWeap != null && enemy.advantageWeapons?.has?.(charaWeap)) {
     attackMul *= ADVANTAGE_WEAPON_MULT;
-    parts.push({ label: '有利武器', attackMul: ADVANTAGE_WEAPON_MULT, bkMul: 1 });
+    parts.push({ label: '有利武器', attackMul: ADVANTAGE_WEAPON_MULT });
   }
 
   // #8 bd_cap (全局)
   const bdMult = bdCapMult(enemy.bd_cap);
   attackMul *= bdMult;
-  if (bdMult !== 1) parts.push({ label: `BD cap (lv${enemy.bd_cap})`, attackMul: bdMult, bkMul: 1 });
+  if (bdMult !== 1) parts.push({ label: `BD cap (lv${enemy.bd_cap})`, attackMul: bdMult });
 
-  return { attackMul, bkMul, parts };
+  return { attackMul, parts };
 }
 
 // 普通攻击 stats (HpCheck LP 表) — hensei UI 当前显示这个

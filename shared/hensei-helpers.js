@@ -293,32 +293,23 @@ export const ADVANTAGE_WEAPON_MULT = 2.0;
 // slider UI step=0.01 允许细滑、但公式 floor 让半 step 倍率不变 (即 n=4.5 跟 n=4 同倍率)
 export function bdCapMult(n) { return 1 + Math.floor((+n || 0) / 2) * 0.25; }
 
-// blaze_gauge_points 的「A 表 base」(unpacking §1.3.3.5、力試し 副本的数据、61 项)
-// 每项 = level i 升级需要的 BlazeGauge points 累计
-// 「只魔剣 skill」pipeline 用此表: `floor(A[i] × Π chara_skill_value)`
-export const BLAZE_GAUGE_POINTS_BASE_A = [
-  100, 100, 100, 100, 100, 100, 100, 100, 100,
-  140, 280, 419, 560, 700, 839, 979, 1120, 1260, 1400, 1539,
-  1679, 1820, 1959, 2100, 2240, 2379, 2520, 2660, 2800, 2940,
-  3079, 3219, 3359, 3500, 3640, 3779, 3919, 4059, 4200, 4340,
-  4480, 4620, 4759, 4900, 5040, 5180, 5320, 5459, 5600, 5740,
-  5880, 6020, 6159, 6299, 6439, 6580, 6719, 6859, 7000, 7139, 7280,
-];
-
-// IDEAL 表 (A 表去掉所有 ±1 修正): flat = 100 (i<9)、生长段 = 140·(i-8) (i≥9)
-// 「有 BlazeGaugePointRate soul」pipeline 用此表: `floor(IDEAL[i] × Π chara_skill × Π (soul_value × L(lv)))`
-const BLAZE_GAUGE_POINTS_BASE_IDEAL = Array.from({ length: 61 }, (_, i) => (i < 9 ? 100 : 140 * (i - 8)));
-
-// 魂等级补正 L(level) (unpacking §1.3.3.5)
-//   只附在魂上 (魔剣 skill 不带)、Lv1 = 1.01、Lv2+ 系数 (线性/指数/查表) 未知
-//   当前简化: 所有 lv 用 1.01 (Lv1 值近似)
-function blazeGaugeSoulLevelMult(_lv) { return 1.01; }
+// blaze_gauge_points (每 level 升级需要的 BlazeGauge points,61 项) — unpacking §1.3.3.5 的单一公式:
+//   F      = Π(魔剣 skill BlazeGaugePointRate) × Π(魂 value × L(level))
+//   pts[i] = floor(100 × F)               (i < 9)
+//   pts[i] = floor(100 × (1.4 × k) × F)   (i ≥ 9, k = i − 8)
+// F = 1 时即基表 (生长段里 419 / 839 这种比 140·k 少 1 的项是 1.4 × k 的 IEEE 误差、不是人工修正)。
+// L(level) = server 下发魂 job_skills 时乘的魂等级倍率 = soulMultiplier (Lv1 = 1.01 已由抓包确认,
+// Lv2+ 在 blaze_gauge_points 上没有单独实测)。
+const BLAZE_GAUGE_POINTS_LEN = 61;
+export const BLAZE_GAUGE_POINTS_BASE_A = Array.from({ length: BLAZE_GAUGE_POINTS_LEN }, (_, i) =>
+  i < 9 ? 100 : Math.floor(100 * (1.4 * (i - 8))),
+);
 
 // bdCapFromBlazeGauge — cumsum 反查 totalGauge points 在数组中能到第几 level (小数允许)
 //   blazeGaugePoints[i] = level i → i+1 升级 需要的 points (不是累计)
 //   cum[i] = Σ blazeGaugePoints[0..i] (累计到 Lv i+1 所需 total)
 //   找最大 N 满足 cum[N-1] ≤ totalGauge < cum[N]、bd_cap = N + (totalGauge - cum[N-1]) / pointsArr[N]
-//   例 A 表 cum=[100,200,...,900,1040,...]、totalGauge=450 → bd_cap=4 + (450-400)/100 = 4.5
+//   例 基表 cum=[100,200,...,900,1040,...]、totalGauge=450 → bd_cap=4 + (450-400)/100 = 4.5
 export function bdCapFromBlazeGauge(blazeGaugePoints, totalGauge) {
   if (!Array.isArray(blazeGaugePoints) || !blazeGaugePoints.length) return 0;
   if (!(totalGauge > 0)) return 0;
@@ -335,21 +326,17 @@ export function bdCapFromBlazeGauge(blazeGaugePoints, totalGauge) {
   return blazeGaugePoints.length;   // 全跨完
 }
 
-// computeBlazeGaugePoints — unpacking §1.3.3.5 pipeline:
-//   有 soul rate skill 时 → IDEAL 表 pipeline (A 表 ±1 修正被旁路)
-//   只 chara skill 时    → A 表 pipeline
-//   都无时               → A 表 base 不变
+// computeBlazeGaugePoints — 上面的单一公式。
+// (旧实现是「无魂走 A 表、有魂切 IDEAL 表」两条 pipeline + 魂恒 ×1.01,已被 unpacking 的单一公式取代)
 // 入参:
-//   charaSkillProd: Π chara/crystal/bg skill BlazeGaugePointRate value (Mul)
-//   soulRates:      [{value, lv}, ...] 每个含 BlazeGaugePointRate skill 的 soul (level=tr.soul_lv)
+//   charaSkillProd: Π 魔剣 skill BlazeGaugePointRate value (Mul)
+//   soulRates:      [{value, lv, rarity}, ...] 每个含 BlazeGaugePointRate skill 的 soul (lv = tr.soul_lv)
 export function computeBlazeGaugePoints(charaSkillProd, soulRates) {
-  const hasSoulRate = Array.isArray(soulRates) && soulRates.length > 0;
-  if (hasSoulRate) {
-    let prod = charaSkillProd;
-    for (const { value, lv } of soulRates) prod *= value * blazeGaugeSoulLevelMult(lv);
-    return BLAZE_GAUGE_POINTS_BASE_IDEAL.map((p) => Math.floor(p * prod));
-  }
-  return BLAZE_GAUGE_POINTS_BASE_A.map((p) => Math.floor(p * (charaSkillProd || 1)));
+  let F = charaSkillProd || 1;
+  for (const { value, lv, rarity } of soulRates || []) F *= value * soulMultiplier(rarity ?? 1, lv);
+  return Array.from({ length: BLAZE_GAUGE_POINTS_LEN }, (_, i) =>
+    Math.floor(i < 9 ? 100 * F : 100 * (1.4 * (i - 8)) * F),
+  );
 }
 
 // emblem level scaling (wiki main:js/stats-calc.js L1041-1047)

@@ -55,7 +55,10 @@ server-fold 字段 (非 master 直给、走 `*_revise.json`):
 
 ### 2.1 PARAMETER (#JS JobSkill.Parameter)
 
-完整 91 项、id 范围 0-90、None=0 是 sentinel。
+下表是 **560 (v2.5.34) 编号**:91 项、id 0-90、None=0 是 sentinel。561 (v2.5.35) 在 28 插入 `Blaze_DamageLimitBreak`、
+在 67 插入 `Enemy_BreakDamageLimitBreak`(共 93 项、0-92),插入点之后整体后移
+(换算见 [11_parameters.md §11.1.1](../../unpacking/docs/HOWTO_battle/11_parameters.md))。
+master 里 parameter 存的是名字字符串,本项目也只按名字用,编号只作对照。
 
 | id 范围 | 段 | 说明 |
 |---|---|---|
@@ -73,8 +76,8 @@ server-fold 字段 (非 master 直给、走 `*_revise.json`):
 | 78-87 | BD / EXP / 掉落 | AnyElement / BlazeGauge / EventDropRate / MaterialExp 等 |
 | 88-90 | Prayer / Rise_AttackRate / Rise_DefenseRate | 祈祷 / 攻防效果放大 |
 
-完整含义对照: [unpacking/outputs/table.md L228-345](../../unpacking/outputs/table.md)
-战斗 stage 引用: [unpacking/docs/HOWTO_battle/03_ead.md §3.2](../../unpacking/docs/HOWTO_battle/03_ead.md)
+完整含义对照: [unpacking/outputs/table.md](../../unpacking/outputs/table.md)(`scripts/tools/gen_table_md.py` 生成,JS# / BE# 为 561 编号)
+战斗 step 引用: [unpacking/docs/HOWTO_battle/03_ead.md §3.3.2](../../unpacking/docs/HOWTO_battle/03_ead.md)
 
 ### 2.2 MATH_TYPE
 
@@ -88,7 +91,7 @@ server-fold 字段 (非 master 直给、走 `*_revise.json`):
 | 3 | `Repel_Percent` | status 回避率、独立通道、不进 stat pipeline (见 [hensei_calc.md](hensei_calc.md#repel_percent-独立通道)) |
 | 4 | `None` | **skip** |
 
-**没有 wiki 推断的 "最终加算 / 最终乗算"**。游戏实际计算 pipeline 不区分"最终"阶段、只分 Mul 池 + Add 池 (50 步 EAD 内累积)。
+**没有 wiki 推断的 "最终加算 / 最终乗算"**。游戏实际计算 pipeline 不区分"最终"阶段、只分 Mul 池 + Add 池 (EAD step 链内累积)。
 
 > ⚠ 老文档里的 **`Reduce100`** 就是现在的 `Repel_Percent`(同一个 math=3 槽位、旧名)。
 > BE 侧 enum 是 `None=0 / Addition=1 / Multiply=2 / Repel_Percent=3`,**跟 #JS 的 Mul/Add 编号互换**。
@@ -112,11 +115,11 @@ wiki 5 值 `condition` enum 在 master 拆成多字段：
 
 | parameter prefix | 含义 | runtime 公式 |
 |---|---|---|
-| `Vitality_*` | 浑身 (HP 多越强) | `scale = clamp(HpRate, 0, 1)` 详 [02_psv_gates.md](../../unpacking/docs/HOWTO_battle/02_psv_gates.md) |
-| `RemHP_*` | 背水 (HP 少越强) | `scale = clamp(1 - HpRate, 0, 1)` 同上 |
-| `Break_*` | 破損 | hard gate `IsBreak`、整段跳 |
-| `FellDown_*` | 队友倒地 | hard gate `Hp == 0` |
-| `Enemy_*` | 敵端 (PSV 末段) | EBD step 47-48 / PBD 类似 |
+| `Vitality_*` | 浑身 (HP 多越强) | `r = clamp(HpRate, 0, 1)`、**池值** `P` → `1 + r(P − 1)` 详 [02_psv_gates.md §2.4](../../unpacking/docs/HOWTO_battle/02_psv_gates.md) |
+| `RemHP_*` | 背水 (HP 少越强) | `r = clamp(1 - HpRate, 0, 1)` 同上 |
+| `Break_*` | 破損 | hard gate `IsBreak` (`HpRate ≤ 0.5`)、整段跳 |
+| `FellDown_*` | 队友倒地 | 自身 `Hp == 0` → 旁路;否则 `r = 倒下的队友 / max(人数 − 1, 1)`,插值同上 (§2.5) |
+| `Enemy_*` | 敵端 | `Enemy_BreakAttack` = EAD step 48/49 (敵 BK 时);`Enemy_Attack` / `Enemy_GuardBreak` 等按敵方属性过滤 |
 
 #### 限定条件（独立字段）
 
@@ -291,7 +294,7 @@ master_tables (静态 schema)
     ↓
 server pre-fold (玩家点「开始战斗」CreateBattleSession 时一次性算)
     ↓ push user_weapon (含 fold 完的 attack/defense/speed/break_value/max_hp + 8 block weapon_skills[] PSV 池)
-client BattleEngine (战斗中 in-battle PSV 路径、EAD/PAD/EBD/PBD 50 步 d8 累积)
+client BattleEngine (战斗中 in-battle PSV 路径、EAD/PAD/EBD/PBD 累积链)
     ↓
 final damage
 ```
@@ -301,36 +304,39 @@ final damage
 | 字段 | 类 1: server pre-fold | 类 2: client 战前一次算 | 类 3: client 战斗中动态 | server push 终值? |
 |---|---|---|---|---|
 | `max_hp` | ✓ **完整**（含 element / marriage / cross-slot Add）| — | ✗ 无路径（BE PassiveSkill enum 没 HP entry）| ✓ 终值 |
-| `attack` | ✓ 静态 (slot_Add + BH + costume_Mul) | — | ✓ 动态 (element / marriage / RemHP / Vitality) | ✗ 半成品 |
-| `defense` | 同 attack | — | 同 attack | ✗ 半成品 |
-| `speed` | 同 attack (无 BH multiplier) | — | 同 attack + SpeedSkill + UpdateLatestRecover | ✗ 半成品 |
-| `break_value` | 同 attack | — | ✓ 走 PSV `GuardBreak` 池 | ✗ 半成品 |
-| **`hit_counts'[]`** | — | ✓ **战前 DeckHitCount 顺序累积 + int 截断**（[01_setup.md §1.4](../../unpacking/docs/HOWTO_battle/01_setup.md)）| ✗ 战斗中不重算 | — |
-| **`motion_speed`** | — | — | ✓ base master `motion_speed1/2/3` × Fighter.BoostAttackSpeed(PSV MotionSpeed=8) | — |
-| per-hit damage | — | — | ✓ 50 步 EAD/PAD/EBD/PBD d8 累积 | — |
+| `attack` | ✓ 静态 (slot_Add + BH + 魔装 Attack Mul、含魔王装全队倍率) | — | ✓ 动态 (element / marriage / RemHP / Vitality) | ✗ 半成品 |
+| `defense` | 同 attack (魔装 Defense Mul、BH 同一倍率) | — | 同 attack | ✗ 半成品 |
+| `speed` | slot_Add + 魔装 Speed Mul (**无 BH**) | — | SpeedSkill + UpdateLatestRecover | ✗ 半成品 |
+| `break_value` | 类比 attack (无 BH) | — | ✓ 走 PSV `GuardBreak` 池 | ✗ 半成品 |
+| **`hit_counts[]`** | ✓ **server 预折叠编队 HitCount 加成**,每条 `trunc` + ≥1([17_hitcount.md §17.2.2](../../unpacking/docs/HOWTO_battle/17_hitcount.md))| (`DeckHitCount` 只给 UI 面板 / 排序用) | 战斗中只有 `AttackCount` PSV/BSV 修正 (master 0 条) | ✓ |
+| **`motion_speed`** | ✓ 魔装 MotionSpeed Mul 折进 `weapon.motion_speed*` | — | ✓ × Fighter.BoostAttackSpeed(PSV/BSV MotionSpeed **Mul 池**、无 Add 池) | — |
+| per-hit damage | — | — | ✓ EAD/PAD/EBD/PBD 累积链 | — |
 
-### 类 2 / 类 3 关键区别
+### hit_counts vs 战斗中 stat 的关键区别
 
-| 维度 | 类 2: hit_counts 战前 | 类 3: attack/motionspeed 战斗中 |
+| 维度 | hit_counts (server 预折叠) | attack/motionspeed 战斗中 |
 |---|---|---|
-| 何时算 | deck 装好、点「进副本」前 | 每 hit 触发 EAD/PAD 时 |
-| 公式 | **顺序累积、逐 skill int 截断**（Mul/Add 混在同一序列） | **Mul 池 + Add 池分离**（结合律 + 交换律、math 等价） |
+| 何时算 | server `CreateBattleSession` 时 | 每 hit 触发 EAD/PAD 时 |
+| 公式 | **逐条 int 截断** `h = max(1, trunc(h + v))`(抓包 273/273) | **Mul 池 + Add 池分离**（池内结合律 + 交换律) |
 | 战斗中变化 | 无（固定） | 动态（HP-curve / Break gate / IsBlaze gate 等条件变化） |
-| math_type 编号 | **#JS vs #BE 反转**（JS Mul=1 / Add=2、BE Mul=2 / Add=1）| 用 BE 编号 |
-| Addition 位置策略 | **放前面累积更划算**（避免后续乘法小数被截断丢） | 池内无所谓（结合律满足）|
+| 加成来源 | 魂 HitCount `values × 魂等级倍率`(条件按**被作用的魔剣**判)/ 魔剣技能(熟度阶梯)/ HitCount 结晶 | PSV / BSV |
 
-`HitCount / AttackCount / WeaponArtsHitCount` 都走类 2 顺序累积、共用 `JobSkillExtensions.HitCount @ 0x34A974C`。
+客户端 UI 侧的 `JobSkillExtensions.HitCount @ 0x3498EE8`(561)/ `DeckHitCount` 只遍历魂的 job_skills、按 MathType 分组
+(先 Multiply 后 Addition),战斗装载不调用它。
 
 ### Server-fold 公式 ([01_setup.md §1.1.1-1.1.2](../../unpacking/docs/HOWTO_battle/01_setup.md))
 
 **attack/defense/speed/break_value**（半成品、客户端在战斗中加动态部分）:
 
 ```
-attack  = (raw_attack(含 level/mature/affection) + Σ slot_attack_add) × BH_multiplier   ← int 截断
-defense = (raw_defense + Σ slot_defense_add) × BH_multiplier                            ← int 截断
-speed   = raw_speed + Σ slot_speed_add                                                  (无 BH multiplier)
-break   = 类比 attack
+attack  = floor((raw_attack(含 level/mature/affection) + Σ slot_attack_add) × BH × Π 魔装 Attack Mul)
+defense = floor((raw_defense + Σ slot_defense_add) × BH × Π 魔装 Defense Mul)
+speed   = floor((speed + Σ slot_speed_add) × Π 魔装 Speed Mul)                         (无 BH)
+break   = 类比 attack (无 BH)
+# Π 魔装 Mul 含编队里「味方全体」魔王装的全队倍率 F = 1.75 + 0.00768 × 持有者熟度 (§1.1.2.1)
 ```
+
+取整:抓包里能区分 floor / 四舍五入的 38 个值全是 floor(evidence 2026-09-25 §5)。
 
 **max_hp**（唯一完全 server-fold、slot 顺序影响 ±24%）:
 
@@ -338,35 +344,31 @@ break   = 类比 attack
 max_hp = (max_hp_base + Σ_HP_Add_from_earlier_slots) × Π_HP_Mul + Σ_HP_Add_from_later_slots
 ```
 
-理由：`JobSkill.Parameter.HP=74` 在 `BattleEngine.Skill.Parameter` enum 里没对应、客户端 PSV 列表无 HP 类 entry、必须 server 一次性 fold 完。
+理由：`JobSkill.Parameter.HP`(561 = 76、560 = 74)在 `BattleEngine.Skill.Parameter` enum 里没对应、客户端 PSV 列表无 HP 类 entry、必须 server 一次性 fold 完。
 
-**BH (Burning Heart) 离散梯度** ([01_setup.md L53](../../unpacking/docs/HOWTO_battle/01_setup.md)):
+**BH (Burning Heart) 是连续值** ([01_setup.md §1.1.2](../../unpacking/docs/HOWTO_battle/01_setup.md)):
+`burning_heart = true` 时倍率在 **1.10 ~ 1.30** 之间(抓包 37 例都是 0.01 的整数倍、上限 1.30),同一把魔剑在连续场次间逐级变化;
+攻撃力和防御力用同一个倍率。旧文的「×1.10(2 把)→ ×1.27(3 把)→ ×1.30」离散阶梯已被推翻。随场次 / 闲置时间怎么增减未量化。
 
-| BH 把数 | multiplier |
-|---|---|
-| 0-1 | ×1.0 |
-| 2 | ×1.10 |
-| 3 | ×1.27 |
-| ≥4 | ×1.30 (饱和) |
-
-**docs 注明"闲置时随时间衰减、精确衰减率未量化"** — 衰减公式没公开。
-
-### Server push 的 8-block PSV 池 ([01_setup.md §1.1.4](../../unpacking/docs/HOWTO_battle/01_setup.md))
+### Server push 的 weapon_skills block ([01_setup.md §1.1.4](../../unpacking/docs/HOWTO_battle/01_setup.md))
 
 进副本时 server 推 `user_weapon.weapon.weapon_skills[]` 按 8 block 优先级追加：
 
 | block | 内容 | 来源 |
 |---|---|---|
-| 1 | weapon_innate Mul/Add | weapon 自带 (不含 HP / WeaponArtsCost) |
+| 1 | weapon_innate Mul/Add | weapon 自带;不在 BE 枚举里的 parameter 被滤掉 (HP / WeaponArtsCost / HitCount …) |
 | 2 | memory_slot Mul 类 | affection slot `category_for_memory_slot` 以 `Skill` 结尾 |
-| 3 | materia Attack 类 | materia parameter ∈ {Attack, Vitality_Attack, ...} |
-| 4 | marriage 4 条固定 | id 70204 (Attack) / 70304 (GuardBreak) / 70404 (Defense) / 70504 (Speed) |
-| 5 | costume / 魔装 | weapon_costume_effects |
-| 6 | guild 公会加成 | Attack Mul 1.0625 等 |
+| 3 | materia Attack 类 (`-6`) | materia parameter ∈ {Attack, Vitality_Attack, ...};HitCount 结晶不下发、折进 hit_counts |
+| 4 | marriage 4 条固定 | id 70204 (Attack) / 70304 (GuardBreak) / 70404 (Defense) / 70504 (Speed),`is_original_skill=true` |
+| 5 | costume / 魔装 (`-7`) | 只含 server 不折叠的魔装效果 (Attack / Defense / Speed / MotionSpeed / HP 不在其中);「味方全体」的 range=All |
+| 6 | guild 公会徽章 (`-1`) | `1 + (max_effect_scale − 1) × (Lv − 1) / (max_level − 1)`(Lv1 无效果,攻撃力アップⅠ 满级 1.0625) |
 | 7 | memory_slot Add 类 | `category_for_memory_slot = DamageLimitBreak` |
 | 8 | materia DLB 类 | materia DamageLimitBreak parameter |
+| — | 画 (`-4`) | 同槽位画的 `picture_skills`;画级 / 技能级属性·武器限定、经验类、限时不符的不下发 |
 
-block 顺序对 `Multiply` / `Addition` 池**数学等价**（结合律 + 交换律），对 `Reduce100` (math_type=3) / stack 上限 / 优先级 skill **不等价**。
+`is_original_skill`:weapon_innate 与 marriage 为 true(Rise 放大对象),其余 block 全 false。
+block 顺序对 `Multiply` / `Addition` 池**数学等价**（结合律 + 交换律），`Repel_Percent`(math_type=3)的 OR 合并同样顺序无关;
+只有逐步截断的聚合(HitCount)才对顺序敏感。
 
 ### 数据流（4 个 master view）([01_setup.md §1.1.2 表](../../unpacking/docs/HOWTO_battle/01_setup.md))
 
@@ -379,7 +381,8 @@ block 顺序对 `Multiply` / `Addition` 池**数学等价**（结合律 + 交换
 
 ### 对前端 hensei calc 的 implication
 
-server fold 公式 docs 完备、但 BH 衰减率未公开。简化：不复刻 server fold、不读 user_weapon raw、**沿用旧 wiki 等级公式 + master initial_/max_ 字段**（用户决定）。具体公式见 [hensei_calc.md](hensei_calc.md) Base 计算段。
+server fold 公式 docs 完备、但 BH 的变化规律未公开。简化：不读 user_weapon raw、**沿用旧 wiki 等级公式 + master initial_/max_ 字段**（用户决定）
+算 raw,再按上面的 server-fold 结构把 slot Add(好感)、魔装 Mul、燃心 折进去后 floor。具体公式见 [hensei_calc.md](hensei_calc.md) Base 计算 / Stage 表。
 
 ---
 
@@ -468,11 +471,11 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。简化：不复刻 
 
 | 状态 | 倍率 |
 |---|---|
-| BH on (默认) | ×1.3 |
-| BH off | ×1.0 |
+| BH on | ×1.3 |
+| BH off (默认) | ×1.0 |
 
-**不实现衰减**（docs §1.1.2 衰减率未公开）、UI 加 toggle、默认 on。
-作用：仅攻撃力（同 wiki "燃心" 概念、跟 server fold 的 BH multiplier 同源但简化为二态）。
+游戏里是 1.10–1.30 的连续值、变化规律未量化 → 简化成二态、on 取满值 1.3(UI toggle「燃心」、`mkTr` 默认 off)。
+作用:**攻撃力和防御力**(server fold 用同一个 BH 倍率、floor 之前乘;HP / 転速 / ブレイク力不吃)。
 
 ### 結婚 / LP (详见 [hensei_calc.md](hensei_calc.md) chara_meta source)
 
@@ -497,36 +500,44 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。简化：不复刻 
 
 ## 4. 计算 pipeline 参考 (前端 hensei calc)
 
-### 4.1 50 步 EAD / PAD / EBD / PBD
+### 4.1 EAD step 表 (561)
 
-详见 [unpacking/docs/HOWTO_battle/03_ead.md §3.2](../../unpacking/docs/HOWTO_battle/03_ead.md) — 完整 50 步 d8 累积器、含 gate / Mul 池 / Add 池 / BD 链。
+详见 [unpacking/docs/HOWTO_battle/03_ead.md §3.3.2](../../unpacking/docs/HOWTO_battle/03_ead.md) — 50 个 d8 step + 4 个直接改 Total 的层 (step 4 / 10b / 51 / 53)。
 
-简表：
+简表 (非攻防互换 = 默认路径):
 
-| step 区间 | 内容 |
+| step | 内容 |
 |---|---|
-| 1-4 | base + BlazeAttack + Blaze 倍率链 + BlazeRankRate |
-| 5-9 | ability matchup (Element/Weapon/AttackAbility) |
-| 10-25 | Defense Mul / Attack Mul / Break Mul (+ HP-curve scale + IsBreak hard gate) |
-| 26-37 | Blaze 链 (12 步、IsBlaze gate 控制) |
-| 38-46 | Defense Add / Attack Add / Break Add |
-| 47-48 | Enemy_BreakAttack Mul/Add (PSV 末段) |
-| 49 | MP 不足惩罚 (sqrt) |
-| 50 | RandomRate (×0.95~1.00 单边衰减) |
+| 1-3 | `+ BlazeAttack` / `× BeforeUsedCount × Additon` / `× Boost` —— 只有 BD hit |
+| 4 | LP tier × Total (普通 HpCheck `[1.0, 1.1, 1.5, 2.0]`、BD LpCheck `[1.0, 1.3, 2.0, 5.0]`) |
+| 5 | `BlazeRankRate = 1 + floor(剑炎槽 Count / 2) × 0.25` —— **所有 hit 都吃** |
+| 6-10 | ability matchup:魂的属性 / 武器 positive_value,敌方属性表 (server 下发) |
+| 10b | × `AllTargetRate` (全体化倍率、无条件) |
+| 17-23 | Attack Mul 主池 (含 Rise) / Random_Attack / Enemy_Attack / JG / RemHP / Vitality / FellDown |
+| 24-26 | BD buff Mul / 道具 / Break_Attack (自身 HpRate ≤ 0.5) |
+| 27-38 | Blaze 链 —— 只有 BD hit |
+| 41-47 | Attack Add 主池 / Random / Enemy / JG / BD buff Add / 道具 / Break Add |
+| 48-49 | Enemy_BreakAttack Mul / Add (敌方 break 中) |
+| 50 | MP 不足惩罚 (sqrt) |
+| 51 | × 3 (敌方 break 中) |
+| 52 | RandomRate (`{1.00 … 0.95}` 6 档均匀) |
+| 53 | DefenseDamageSkill (敌方被动:连乘 / 清零 / 每 hit 伤害上限屏障) |
 
-后 step 50 直接 `ceil` → `BattleDamage.Total` → DamageLimitBreak clamp → 输出。
+EAD 出口在 `BattleDamage.get_Damage`:先按 `[0, limitMaxDamage]` clamp、区间内再 `ceil`。
 
 ### 4.2 HP-curve scale 公式（前端复刻）
 
-- `RemHpSkillRate @ 0x19485CC` — 待 Frida 实测精确公式
-- `VitalitySkillRate @ 0x19486F0` — 同
-- 占位公式: `scale = clamp(HpRate, 0, 1)` (Vitality) / `scale = clamp(1 - HpRate, 0, 1)` (RemHP)
+- `RemHpSkillRate @ 0x193F2EC` / `VitalitySkillRate @ 0x193F410` / `FellDownSkillRate @ 0x193F530`(561)已反编译 (§2.4 / §2.5):
+  先 fold 整个池得 `P`,`r = clamp(1 − HpRate, 0, 1)`(RemHP)/ `clamp(HpRate, 0, 1)`(Vitality)/ `FellDownRate`(FellDown),
+  返回 `P > 0 && P ≠ 1 ? 1 + r(P − 1) : 1.0`。**是对池值插值一次、不是每条插值**。
+- 転速 / 攻速 走 `BattleMath.VariableSkillRate`,同一公式。
 
 ### 4.3 IsBlaze / IsBreak gate
 
-- IsBlaze gate: EAD step 1-4 + 26-37 (全 Blaze 链) 在 `IsBlaze=true` 才激活
-- IsBreak gate: EAD step 25 / 46 (Break Mul/Add) 在 `IsBreak=true` 才激活
-- 详 [02_psv_gates.md §2.2](../../unpacking/docs/HOWTO_battle/02_psv_gates.md)
+- IsBlaze gate: EAD step 1-3 + 27-38 在 `IsBlaze=true` 才跑;step 4 按 IsBlaze 选 LP 表;step 5 不受 gate
+- 自身 IsBreak (`HpRate ≤ 0.5`): EAD step 26 / 34 / 35 / 47 (Break_* 池)
+- 敌方 break: step 48 / 49 (`EnemyGuard.IsBreak` 现调)、step 51 ×3 (入参 isBreak 快照)
+- 详 [02_psv_gates.md §2.2 / §2.3](../../unpacking/docs/HOWTO_battle/02_psv_gates.md)
 
 ---
 
@@ -535,7 +546,7 @@ server fold 公式 docs 完备、但 BH 衰减率未公开。简化：不复刻 
 | 主题 | 链接 |
 |---|---|
 | #JS vs #BE 偏移 / sentinel | [unpacking/docs/HOWTO_battle/11_parameters.md](../../unpacking/docs/HOWTO_battle/11_parameters.md) |
-| EAD 50 步反编译 | [unpacking/docs/HOWTO_battle/03_ead.md](../../unpacking/docs/HOWTO_battle/03_ead.md) |
+| EAD step 表反编译 | [unpacking/docs/HOWTO_battle/03_ead.md](../../unpacking/docs/HOWTO_battle/03_ead.md) |
 | EBD (敵端破甲) | [04_ebd.md](../../unpacking/docs/HOWTO_battle/04_ebd.md) |
 | PAD (玩家端攻) | [05_pad.md](../../unpacking/docs/HOWTO_battle/05_pad.md) |
 | PBD (玩家端破甲) | [06_pbd.md](../../unpacking/docs/HOWTO_battle/06_pbd.md) |
