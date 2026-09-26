@@ -72,7 +72,6 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [docs/](../docs/) | 项目文档 |
 | [api/](../api/) | Vercel serverless function (`save.js` revise 落 data-staging + PR、`share.js` 短链 KV) |
 | [css/](../css/) | 各 viewer 样式 + `base.css` / `shared.css` / `nav.css` |
-| [cloudflare/](../cloudflare/) | `dispatch-worker/` —— 用 CF Cron Trigger 可靠触发 GitHub `workflow_dispatch` (GitHub 原生 schedule 高峰会丢跑)。只有 `wrangler.toml` tracked、`src/worker.js` 与其 `README.md` 都 gitignored (只在本机) |
 | [tests/unit/](../tests/unit/) | 单测 (`npm test`、14 file / 319 case) |
 | [tests/ui/](../tests/ui/) | Playwright e2e (`npx playwright test`、6 file / 93 case) |
 | audit/ | `audit_dead_code.mjs` 输出 + `crystal_factors/` 反推脚本 (.gitignore 排除) |
@@ -127,32 +126,34 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [image_paths.py](../scripts/master_to_business/image_paths.py) | master id → `icons/` 本地 image path 反查 |
 | [copy_images.py](../scripts/master_to_business/copy_images.py) | 数据更新时拷 `<assets>` → `icons/` (含 soul 7 张 fallback 段) |
 | [gen_motion_table.py](../scripts/master_to_business/gen_motion_table.py) | `characters.json` → `docs/motion_table.md` (master 改 motion_id 后重跑) |
-| [fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) | 抓 altema wiki → patch `crystal_revise.json` (`入手方法` + **`max_value`**) + `bg_revise.json` (`acquisition`)、按 name 匹配 (NFKC + 装飾符/accent fallback)。`max_value` 取 【効果量】 区间上限、和数字 (億/万/千 複合) 解析;**单位换算**: 「効果量下限 ÷ master `initial_value` ≥ 50」→ altema 用的是百分数而 master 用分数 (只有 `Wave_Heal` 那 9 条)、÷100 —— **不能拿「带不带 %」判**,`BlazeAbsorb`/`Mez` 等 19 条也带 % 但 master 本就存百分数;整数值写成 int (不然 `2`→`2.0` 刷出 150 行无意义 diff);**有三因子且原本没有 max_value 的不写** (那些 series 故意只给因子)、原本就有的照常刷新。403 会退避重试 4 次。CI 每轮由 `run_update` 模块 B 调 |
+| [fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) | 抓 altema wiki → patch `crystal_revise.json` (`入手方法` + **`max_value`**) + `bg_revise.json` (`acquisition`)、按 name 匹配 (NFKC + 装飾符/accent fallback)。`max_value` 取 【効果量】 区间上限、和数字 (億/万/千 複合) 解析;**单位换算**: 「効果量下限 ÷ master `initial_value` ≥ 50」→ altema 用的是百分数而 master 用分数 (只有 `Wave_Heal` 那 9 条)、÷100 —— **不能拿「带不带 %」判**,`BlazeAbsorb`/`Mez` 等 19 条也带 % 但 master 本就存百分数;整数值写成 int (不然 `2`→`2.0` 刷出 150 行无意义 diff);**有三因子且原本没有 max_value 的不写** (那些 series 故意只给因子)、原本就有的照常刷新。403 会退避重试 4 次。CI 每轮由 `run_ingest` 模块 B 调 |
 | [build_memory_slot_skills.py](../scripts/master_to_business/build_memory_slot_skills.py) | 从 omoide 数据 (`bxb_wiki/data/omoide/`) → `data/_memory_slot_skills.json` (senzai 反查表、秒级) |
 
-### scripts/ci/ — 云端自动更新数据库 (GitHub Actions)
+### scripts/ci/ — 云端数据落地 (GitHub Actions)
 
-`.github/workflows/update-database.yml` 每天 JST 16:01 + 00:01 跑、
-**它只有 `workflow_dispatch`、没有 GitHub `schedule`** —— 原生 cron 高峰会丢跑,定时改由
-`cloudflare/dispatch-worker` 的 CF Cron Trigger 调 dispatch API
-(UTC 07:01 / 15:01 = JST 16:01 / 00:01)。本仓库其余 workflow 同理、全是 dispatch-only。
+本仓库**不碰游戏 API**。master、资源、scenario 等数据由上游流水线同步,
+结果放在 R2 `pipeline/` 前缀下 (bucket = repo variable `R2_DATA_BUCKET`)。
+`.github/workflows/update-database.yml` 只把它落成 wiki 数据:只有 `workflow_dispatch`,由外部调度在上游跑完后触发
+(JST 16:01 / 00:01 那两轮之后,另有 UTC 08/16 点兜底一次;无变化时整轮无提交)。
 
-手动重发 workflow `repost-通知渠道.yml`(渲染/合成逻辑更新后重生成历史页;走 通知索引 → `editPage` 原地更新、URL 不变、不重发频道)。输入 `kind` 二选一 + `target`(留空=最新):
-- `kind=asset-version` — 图册重发(`target`=asset_version 号)
-- `kind=master-data` — changelog 重发(`target`=文件夹名如 `2026_07_08_16_00_00`;自动找前置快照重跑 `diff_master_tables.py` 重写 `changelog.md` → notify → changelog+index 回提交 master_tables)
+**R2 交接布局**:
+
+| 路径 | 内容 | 读写方向 |
+|---|---|---|
+| `pipeline/mt/` | master_tables 基准:每个文件都是 master_tables 分支对应文件的**原样副本**。只留最新两份完整快照 (master_data / asset_version 各两份),更早的只剩 `changelog.md` + `_meta.json` (索引重建用);`scenario/unity3d/` 只留最新一个 | 上游写 → 本侧整体覆盖到 `_mt` checkout (只增不删),git 只看到真变化 → 提交 master_tables |
+| `pipeline/wiki/_npc_motions.json` | npc 动作时长 | 本侧每轮发布 `data/_npc_motions.json` → 上游只追加新 motion → 本侧只合并缺的 key (已有值不覆盖,本地 `` 重建的值不会被冲) |
+| `pipeline/wiki/icons_index.txt` | `icons/` 现有 png 清单 (`<cat>/<stem>.png`) | 本侧每轮发布,上游据此判断缺哪些图标 |
+| `pipeline/wiki/assets/` | 新图标源 (`<assets>` 布局的 PNG) | 上游写 → 本侧 `copy_images` 落到 `icons/` 后删 |
 
 | 脚本 | 用途 |
 |---|---|
-| [master_tables_archive.py](../scripts/ci/master_tables_archive.py) | master dict → `master_data/<JST日期>/` 快照 (split + 派生 weapon_innate_skills/arts/effects) + changelog + 索引。port 自 unpacking split_tables/build_skill_id_index/update_master_tables |
-| [diff_master_tables.py](../scripts/ci/diff_master_tables.py) | changelog 引擎 (整体 port 自 unpacking;CI 版加"空字段归一"——API 省略空字段、避免与 API 版 schema 差异误报全表) |
+| [run_ingest.py](../scripts/ci/run_ingest.py) | 编排: npc-motion 合并 (build 前、新动作当轮进 build_characters) → A (build_memory_slot_skills + build_all → 6 表) → B (fetch_wiki + aux → revise + 安全检查) → icons (`BXB_ASSETS_DIR` 有图才跑 copy_images)。revise 不安全 → 退出码 3 |
 | [revise_safety.py](../scripts/ci/revise_safety.py) | revise 字段级安全检查 (防用户手填字段被冲、丢条目/字段则中止提交) |
-| [图标同步.py](../scripts/ci/图标同步.py) | manifest 驱动: 缺失 icon → 下 .dat → extract → copy_images。重建结果与本地 copy_images 逐字节一致 |
-| [动作同步.py](../scripts/ci/动作同步.py) | 增量补 `_npc_motions.json` (manifest npc-motion vs 基线、只下缺的) |
-| [build_rarity4_ids.py](../scripts/ci/build_rarity4_ids.py) | 快照的 `weapons.json` → `rarity==4` 的 `base_id` 去重清单(一把魔剑多个进化形态 `id=base_id*100+n`,必须按 base_id 去重)。与现版对比,**只在有新增时**才写 `--out`(无新增不写文件 → 调用方 `[ -f ]` 跳过上传);只减不增 → `::warning::` 拒绝更新。新增会打 `::notice::` 带魔剑名 |
-| [
 
+提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise/masou_revise → **data-staging** (安全检查通过且有变更);`_mt` 覆盖后的变化 (新快照 + changelog + 索引、asset_version、`scenario/`、`state/通知索引.json`)→ **master_tables**。三处提交成功后才发布 icons 清单 / npc_motions、删掉已消费的图标源 (提交失败则下轮重来)。
+`paths.py`/`copy_images.py` 都有 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向 checkout/临时目录、本地默认不变。
 
-> asset-version 流程 (2026-06-12 实测确认、`
+> master_tables 分支内容 (快照 split + 派生表、`changelog.md`、asset_version manifest、scenario `unity3d` + 每本 `{book}.tsv`) 的格式不变,只是生成端移到了上游。全量 npc-motion 重生 / 重绘图强刷仍走本地 (罕见)。
 
 ---
 
