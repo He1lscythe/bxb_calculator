@@ -353,8 +353,10 @@ test('bd_skill: BD OFF → ON → 攻撃力/ブレイク力/攻速/転速 四项
   for (const [k, b, a] of [['攻撃力', before.atk, after.atk], ['ブレイク力', before.bk, after.bk]]) {
     expect(a, `${k} ${b} → ${a} 应 ≤ ${b}×50`).toBeLessThanOrEqual(b * 50);
     expect(a, `${k} ${b} → ${a} 应 > ${b}×50−50`).toBeGreaterThan(b * 50 - 50);
-    expect(a / b, `${k} 比值`).toBeCloseTo(50, 1);
   }
+  // 比值只对攻撃力查:ブレイク力在默认敌人 (無属性・非BK) 下吃 EBD 的 ×0.1f 格、只剩几十,
+  // ceil 的 +1 在比值上就是好几个百分点 (node 复刻:35 → 1701、比值 48.6),上面两条不等式已是精确关系
+  expect(after.atk / before.atk, '攻撃力 比值').toBeCloseTo(50, 1);
   // 転速 / 攻速 是纯浮点 fold、无取整环节 → 严格 50 倍
   expect(after.spd / before.spd, `転速 ${before.spd} → ${after.spd}`).toBeCloseTo(50, 6);
   after.ms.forEach((v, i) =>

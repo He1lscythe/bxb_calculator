@@ -2,7 +2,7 @@
 
 
 去掉 subprocess/绝对路径,改成纯函数 + env 可配根目录,供 CI(无 unpacking repo)用。
-changelog 引擎复用同目录 diff_master_tables.py(从 unpacking 整体复制、canonical 源在那边)。
+changelog 引擎复用同目录 diff_master_tables.py(从 unpacking scripts/tools/ 整体复制、canonical 源在那边)。
 
 快照内容(跟本地 Stage-1 一致): split 各表 + 派生 weapon_innate_skills/weapon_arts/
 weapon_arts_effects + _meta + _index + _local-master_source + changelog.md。

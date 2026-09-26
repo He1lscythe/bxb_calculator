@@ -128,6 +128,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [copy_images.py](../scripts/master_to_business/copy_images.py) | 数据更新时拷 `<assets>` → `icons/` (含 soul 7 张 fallback 段) |
 | [gen_motion_table.py](../scripts/master_to_business/gen_motion_table.py) | `characters.json` → `docs/motion_table.md` (master 改 motion_id 后重跑) |
 | [fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) | 抓 altema wiki → patch `crystal_revise.json` (`入手方法` + **`max_value`**) + `bg_revise.json` (`acquisition`)、按 name 匹配 (NFKC + 装飾符/accent fallback)。`max_value` 取 【効果量】 区间上限、和数字 (億/万/千 複合) 解析;**单位换算**: 「効果量下限 ÷ master `initial_value` ≥ 50」→ altema 用的是百分数而 master 用分数 (只有 `Wave_Heal` 那 9 条)、÷100 —— **不能拿「带不带 %」判**,`BlazeAbsorb`/`Mez` 等 19 条也带 % 但 master 本就存百分数;整数值写成 int (不然 `2`→`2.0` 刷出 150 行无意义 diff);**有三因子且原本没有 max_value 的不写** (那些 series 故意只给因子)、原本就有的照常刷新。403 会退避重试 4 次。CI 每轮由 `run_update` 模块 B 调 |
+| [build_memory_slot_skills.py](../scripts/master_to_business/build_memory_slot_skills.py) | 从 omoide 数据 (`bxb_wiki/data/omoide/`) → `data/_memory_slot_skills.json` (senzai 反查表、秒级) |
 
 ### scripts/ci/ — 云端自动更新数据库 (GitHub Actions)
 
