@@ -190,7 +190,7 @@
       import { adaptCrystalList } from '../shared/crystal-adapter.js';
       import { adaptMasouList } from '../shared/masou-adapter.js';
       import { adaptBgList } from '../shared/bg-adapter.js';
-      // ===== stats-calc (4-stage) =====
+      // ===== stats-calc (s1〜s8 stage 链) =====
       // stat 计算全走 computeStats 一个入口 (baseStats / applyStaged / conditionFactor / repelRate
       // 都是它内部的环节、本页不直接调)。
       // collectEffects 是例外: 装备面板要显示**解算后**的倍率、且要知道他 slot 的技能打不打到本 slot,
@@ -1520,7 +1520,7 @@
     </div>`;
       };
 
-      // ===== STATS CALCULATOR (用 shared/stats-calc.js 4-stage) =====
+      // ===== STATS CALCULATOR (用 shared/stats-calc.js 的 s1〜s8 stage 链) =====
 
       // ===== ENEMY BAR (敵方/副本/工会信息) =====
       export const renderEnemyBar = () => {
@@ -2236,7 +2236,7 @@
       };
 
       // bdCapMax popup: 点 /N label 弹小窗显示 blaze_gauge_points 数组 (BD level i 升级需要的 points)
-      // 数组按 unpacking §1.3.3.5 pipeline 算 (有 BlazeGaugePointRate soul → IDEAL 表、否则 A 表)
+      // 数组按 unpacking §1.3.3.5 的单一公式算 (F = Π 魔剣 skill × Π 魂 value×L(lv)、见 hensei-helpers)
       // 取 slot 0 的 r.blazeGaugePoints (3 slot 同 team 上下文、结果一样)
       export const openBdCapMaxPopup = () => {
         const bdCapMax = _computeBdCapMax();

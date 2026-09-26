@@ -5,6 +5,9 @@
 增量补新 motion,本脚本只用于拿本地全量 .dat 重建基线。
 
 源 = `<assets>/_dat_cache/assets/npc-motion-*.dat` (`<assets>` 见 paths.assets_dir())。
+文件名兼容两种:CDN 缓存命名 `npc-motion-<id>.v<ver>.dat`(unpacking update_assets_cdn.py 现行)
+和旧命名 `npc-motion-<id>.dat`。同一 id 有多个版本时取 manifest
+(`<unpacking>/data/asset-version.json`)里的当前版本;manifest 缺失或该版本不在本地 → 取本地最大版本。
 
 Unified parser — works for both asset formats present:
   - "SmoothMoves" files (313): have BoneAnimationData with full bone keyframes
@@ -41,13 +44,48 @@ import UnityPy
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from paths import assets_dir  # noqa: E402
+from paths import assets_dir, UNPACKING_DIR  # noqa: E402
 
 sys.stdout.reconfigure(encoding='utf-8')
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 ASSETS = assets_dir() / '_dat_cache' / 'assets'
 OUT = PROJECT_ROOT / "data" / "_npc_motions.json"
+AV_JSON = UNPACKING_DIR / "data" / "asset-version.json"   # 选当前版本用(unpacking update_assets_cdn 维护)
+
+# npc-motion-<id>.v<ver>.dat(CDN 缓存命名)或 npc-motion-<id>.dat(旧命名,视作 version -1)
+MOTION_RE = re.compile(r'^npc-motion-(\d+)(?:\.v(\d+))?\.dat$')
+
+
+def load_manifest_versions():
+    """{name: version};manifest 不存在 / 读失败 → {}(改取本地最大版本)。"""
+    if not AV_JSON.is_file():
+        print(f'[manifest] {AV_JSON} 不存在 → 每个 id 取本地最大版本')
+        return {}
+    try:
+        av = json.loads(AV_JSON.read_text(encoding='utf-8'))
+        print(f'[manifest] 当前版本以 {AV_JSON} (asset version {av.get("version")}) 为准')
+        return {f['name']: f['version'] for f in av['files']}
+    except Exception as e:
+        print(f'[manifest] 读 {AV_JSON} 失败 ({e}) → 每个 id 取本地最大版本')
+        return {}
+
+
+def select_motion_files(assets, cur_ver):
+    """每个 motion id 选一个文件 → [(id, Path)](按 id 排序)。
+    manifest 当前版本的文件在本地就用它,否则取本地最大版本。"""
+    by_id = {}
+    for p in assets.glob('npc-motion-*.dat'):
+        m = MOTION_RE.match(p.name)
+        if not m:
+            continue
+        by_id.setdefault(int(m.group(1)), {})[int(m.group(2)) if m.group(2) else -1] = p
+    picked = []
+    for mid in sorted(by_id):
+        vers = by_id[mid]
+        mv = cur_ver.get(f'npc-motion-{mid}')
+        picked.append((mid, vers[mv] if mv in vers else vers[max(vers)]))
+    return picked
 
 
 def fps_by_clip_name(env):
@@ -117,17 +155,14 @@ def parse_file(f):
 
 
 def main():
-    files = sorted(ASSETS.glob('npc-motion-*.dat'),
-                   key=lambda p: int(re.match(r'npc-motion-(\d+)\.dat', p.name).group(1)))
-    print(f'Found {len(files)} npc-motion files. Parsing...')
+    files = select_motion_files(ASSETS, load_manifest_versions())
+    print(f'Found {len(files)} npc-motion ids. Parsing...')
 
     result = OrderedDict()
     errors = []
     t0 = time.time()
 
-    for i, f in enumerate(files):
-        m = re.match(r'npc-motion-(\d+)\.dat', f.name)
-        motion_id = int(m.group(1))
+    for i, (motion_id, f) in enumerate(files):
         # npc-motion-0.dat 不是真 motion、是 npc 共享 sprite atlas
         # (figure + npc_effect 纹理 + SmoothMoves atlas 元数据、无 AnimationClip/BoneAnimation)
         if motion_id == 0:
