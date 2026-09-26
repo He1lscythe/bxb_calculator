@@ -1,4 +1,4 @@
-"""extract_assets.py — .dat → PNG / npc-motion 时长。port 自 unpacking parse_unity_dat_v3 + dump_npc_motions。
+"""extract_assets.py — .dat → PNG / npc-motion 时长。port 自 unpacking scripts/tools/parse_unity_dat_v4 + dump_npc_motions。
 
 - extract_png: Texture2D/Sprite → PNG,与 parse_unity_dat_v4 同款处理:
     · luma/chroma 配对 → YCoCg 合成单张 RGBA(<base>_luminance + <base>_chrominance)
