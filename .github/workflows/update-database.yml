@@ -1,21 +1,6 @@
 name: update-database
 
-# 纯 HTTP API 拉最新 master → 重建业务 JSON → 提交。零模拟器/ADB/Frida。
-# 见 scripts/ci/run_update.py + unpacking/docs/HOWTO_api_replay.md。
-#
-# 提交去向 (3 branch):
-#   main           : data/*.json (6 表) + _npc_motions.json + icons/ (新实体的图)  → 触发 sync→data-staging + Pages
-#   data-staging   : crystal_revise.json + bg_revise.json + masou_revise.json (带字段级安全检查)
-#   data/master-tables : master_data/<JST日期>/ + asset_version/<ver>/ 快照 + changelog + 索引
-#                        + scenario/scenario-<ver>.unity3d (utage3_scenario_version 变化时下载 .mu3→Rijndael-256 解密→UnityFS 归档)
-#
-# 模块 C (icons + 增量 npc-motion): 经无鉴权 CDN (version_lz4 manifest + package_lz4 .dat) + UnityPy 解。
-# 全量 npc-motion 重生 / 重绘图强刷仍走本地 (新动作罕见、重绘更罕见)。
-
 on:
-  # 定时触发由 Cloudflare Worker (cloudflare/dispatch-worker) 调 workflow_dispatch
-  # 在 JST 16:01 / 00:01 可靠触发。GitHub schedule 已移除(高峰丢跑、不可靠)。
-  # 手动也可在 Actions 页 Run workflow。
   workflow_dispatch:
 
 concurrency:
@@ -28,6 +13,10 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: auto
     steps:
       - name: Checkout main
         uses: actions/checkout@v7
@@ -36,7 +25,7 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout data/master-tables (归档目标 + changelog baseline)
+      - name: Checkout data/master-tables
         uses: actions/checkout@v7
         with:
           ref: data/master-tables
@@ -44,7 +33,7 @@ jobs:
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout data-staging (revise 提交目标)
+      - name: Checkout data-staging
         uses: actions/checkout@v7
         with:
           ref: data-staging
@@ -52,7 +41,7 @@ jobs:
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Fetch 现版 revise from data-staging (安全检查基准)
+      - name: Fetch 现版 revise from data-staging
         run: |
           git fetch origin data-staging
           git checkout origin/data-staging -- \
@@ -66,178 +55,60 @@ jobs:
       - name: Install deps
         run: pip install -r scripts/ci/requirements.txt
 
-      - name: Fetch R2 api_client + WARP pool
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: auto
+      - name: Pull from R2
         run: |
-          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
-          aws s3 cp "$B/routines/scripts/api_client.py" scripts/api_client.py --endpoint-url "$E"
-          aws s3 cp "$B/routines/scripts/ratelimit.py" scripts/ratelimit.py --endpoint-url "$E"
-          aws s3 cp "$B/routines/daily/warp_pool.py" scripts/ci/warp_pool.py --endpoint-url "$E"
-          mkdir -p bin warp_pool
-          aws s3 cp "$B/routines/bin/wireproxy" bin/wireproxy --endpoint-url "$E" && chmod +x bin/wireproxy
-          aws s3 cp "$B/warp/" warp_pool/ --recursive --endpoint-url "$E" || true
-          echo "warp pool: $(ls warp_pool/*.conf 2>/dev/null | wc -l) configs"
+          B="s3://${{ vars.R2_DATA_BUCKET }}/pipeline"; E="${{ secrets.R2_ENDPOINT }}"
+          aws s3 cp "$B/mt/" _mt/ --recursive --endpoint-url "$E" --only-show-errors
+          aws s3 cp "$B/wiki/_npc_motions.json" "$RUNNER_TEMP/npc_motions.json" --endpoint-url "$E" --only-show-errors || true
+          mkdir -p "$RUNNER_TEMP/assets"
+          aws s3 cp "$B/wiki/assets/" "$RUNNER_TEMP/assets/" --recursive --endpoint-url "$E" --only-show-errors || true
+          echo "新图标源: $(find "$RUNNER_TEMP/assets" -type f | wc -l)"
+          git -C _mt status --short | head -50
 
-      - name: Run update (模块 A+B+D)
+      - name: Run ingest
         id: run
         env:
-          BXB_UNIQUE_KEY: ${{ secrets.BXB_UNIQUE_KEY }}
-          BXB_BOOTSTRAP_KEY: ${{ secrets.BXB_BOOTSTRAP_KEY }}
-          BXB_APP_VERSION: ${{ vars.BXB_APP_VERSION }}
-          BXB_UNITY_VERSION: ${{ vars.BXB_UNITY_VERSION }}
           BXB_MASTER_TABLES: ${{ github.workspace }}/_mt
+          BXB_NPC_MOTIONS_IN: ${{ runner.temp }}/npc_motions.json
+          BXB_ASSETS_DIR: ${{ runner.temp }}/assets
           RUNNER_TEMP: ${{ runner.temp }}
-          BXB_WARP_POOL_DIR: warp_pool
-          BXB_WIREPROXY_BIN: bin/wireproxy
-          BXB_WARP_BURNED: warp_burned.txt
         run: |
           set +e
-          python scripts/ci/run_update.py
+          python scripts/ci/run_ingest.py
           rc=$?
           set -e
           echo "rc=$rc" >> "$GITHUB_OUTPUT"
-          # rc=0 正常 / rc=3 revise 软失败 (data 已产出、仍提交);其余 (login / master_data / asset_version 致命) → workflow 失败
           if [ "$rc" -ne 0 ] && [ "$rc" -ne 3 ]; then
-            echo "::error::run_update 致命失败 (rc=$rc): login / master_data / asset_version 未成功"
+            echo "::error::run_ingest 失败 (rc=$rc)"
             exit "$rc"
-          fi
-
-      - name: Delete burned WARP configs from R2
-        if: always()
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: auto
-        run: |
-          if [ -s warp_burned.txt ]; then
-            B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
-            while read -r f; do
-              [ -n "$f" ] && aws s3 rm "$B/warp/$f" --endpoint-url "$E" || true
-            done < warp_burned.txt
           fi
 
       - name: Load summary
         id: sum
         run: |
           F="${{ runner.temp }}/ci_update_summary.json"
-          if [ -f "$F" ]; then
-            echo "snapshot_status=$(jq -r '.snapshot_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
-            echo "snapshot_folder=$(jq -r '.snapshot_folder // ""' "$F")" >> "$GITHUB_OUTPUT"
-            echo "asset_version_status=$(jq -r '.asset_version_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
-            echo "scenario_status=$(jq -r '.scenario_status // "none"' "$F")" >> "$GITHUB_OUTPUT"
-            echo "scenario_version=$(jq -r '.scenario_version // ""' "$F")" >> "$GITHUB_OUTPUT"
-            echo "revise_safe=$(jq -r '.revise_safe // false' "$F")" >> "$GITHUB_OUTPUT"
-            echo "revise_changed=$(jq -r '(.revise_changed // []) | length' "$F")" >> "$GITHUB_OUTPUT"
-          else
-            echo "snapshot_status=error" >> "$GITHUB_OUTPUT"
-          fi
+          echo "revise_safe=$(jq -r '.revise_safe // false' "$F")" >> "$GITHUB_OUTPUT"
+          echo "revise_changed=$(jq -r '(.revise_changed // []) | length' "$F")" >> "$GITHUB_OUTPUT"
 
       - name: Configure git
         run: |
           git config --global user.name "bxb-db-bot"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      # D: master_tables 快照 + changelog → data/master-tables
       - name: Commit data/master-tables
-        if: steps.sum.outputs.snapshot_status == 'archived'
         working-directory: _mt
         run: |
           git add -A
-          if git diff --cached --quiet; then
-            echo "无快照变更"; exit 0
-          fi
-          git commit -m "data(master-tables): snapshot $(date -u +%FT%TZ) (API auto)"
+          if git diff --cached --quiet; then echo "master-tables 无变更"; exit 0; fi
+          git commit -m "data(master-tables): sync $(date -u +%FT%TZ)"
           git pull --rebase origin data/master-tables || true
           git push origin HEAD:data/master-tables
 
-      - name: Refresh rarity4 ids on R2
-        if: steps.sum.outputs.snapshot_status == 'archived'
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: auto
-        run: |
-          B="s3://${{ vars.R2_ACCOUNTS_BUCKET }}"; E="${{ secrets.R2_ENDPOINT }}"
-          K="$B/routines/data/rarity4_base_ids.json"
-          aws s3 cp "$K" old_rarity4.json --endpoint-url "$E" || true
-          python scripts/ci/build_rarity4_ids.py \
-            --snapshot-dir "${{ steps.sum.outputs.snapshot_folder }}" \
-            --old old_rarity4.json --out new_rarity4.json
-          if [ -f new_rarity4.json ]; then
-            aws s3 cp new_rarity4.json "$K" --endpoint-url "$E"
-          fi
-
-      # scenario .mu3 (utage3_scenario_version 变化时) → data/master-tables 的 scenario/
-      # 独立于 master_data 快照 (scenario 版本单独跳);上面 snapshot 步若同轮也归档了会顺带 git add -A 提交、此处即 no-op
-      - name: Commit scenario (.mu3) → data/master-tables
-        if: steps.sum.outputs.scenario_status == 'archived'
-        working-directory: _mt
-        run: |
-          git add scenario/ 2>/dev/null || true
-          if git diff --cached --quiet; then echo "scenario 无变更 (已随快照提交)"; exit 0; fi
-          git commit -m "data(master-tables): scenario ${{ steps.sum.outputs.scenario_version }} $(date -u +%FT%TZ)"
-          git pull --rebase origin data/master-tables || true
-          git push origin HEAD:data/master-tables
-
-      # scenario 新版 → 发频道一条消息 (#scenario、只报版本号)
-      - name: Notify Telegram (scenario)
-        if: steps.sum.outputs.scenario_status == 'archived'
-        continue-on-error: true
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python scripts/ci/notify.py scenario "${{ steps.sum.outputs.scenario_version }}" "${{ runner.temp }}/ci_update_summary.json"
-
-      # master_data changelog → Telegraph 文章 → 发频道
-      - name: Notify Telegram (master_data changelog)
-        if: steps.sum.outputs.snapshot_status == 'archived'
-        continue-on-error: true
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          TELEGRAPH_TOKEN: ${{ secrets.TELEGRAPH_TOKEN }}
-          BXB_MASTER_TABLES: ${{ github.workspace }}/_mt
-        run: python scripts/ci/notify.py master_data
-
-      # asset_version delta → 解 PNG → 传 R2 → Telegraph 图册 → 发频道
-      - name: Notify Telegram (asset_version 图册)
-        if: steps.sum.outputs.asset_version_status == 'archived'
-        continue-on-error: true
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          TELEGRAPH_TOKEN: ${{ secrets.TELEGRAPH_TOKEN }}
-          BXB_MASTER_TABLES: ${{ github.workspace }}/_mt
-          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          R2_BUCKET: ${{ vars.R2_BUCKET }}
-          R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
-        run: python scripts/ci/notify.py asset_version
-
-      # Telegraph 索引(快照 → 页面 path 映射)→ data/master-tables;下次同快照重生 changelog 时 editPage 原地更新
-      - name: Commit telegraph index
-        if: steps.sum.outputs.snapshot_status == 'archived' || steps.sum.outputs.asset_version_status == 'archived'
-        continue-on-error: true
-        working-directory: _mt
-        run: |
-          git add state/telegraph_index.json 2>/dev/null || true
-          if git diff --cached --quiet; then echo "telegraph index 无变更"; exit 0; fi
-          git commit -m "data(master-tables): telegraph index $(date -u +%FT%TZ)"
-          git pull --rebase origin data/master-tables || true
-          git push origin HEAD:data/master-tables
-
-      # A + C: 业务表 + _npc_motions + icons → main
       - name: Commit main (data + npc_motions + icons)
         run: |
           git add data/characters.json data/souls.json data/crystals.json \
                   data/bladegraphs.json data/masou.json data/senzai_table.json \
                   data/_npc_motions.json icons/ 2>/dev/null || true
-          # crystal/bg/masou_revise 被上面「Fetch 现版 revise」步骤的 git checkout 顺带 staged 进 index 了;
-          # 它们是 data-staging-only (main 不跟踪 revise)、从 main 提交里 reset 掉、避免被裸 commit 扫进来
           git reset -q HEAD data/crystal_revise.json data/bg_revise.json data/masou_revise.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "data/icons 无变更"; exit 0
@@ -246,7 +117,6 @@ jobs:
           git pull --rebase origin main || true
           git push origin HEAD:main
 
-      # B: revise → data-staging (安全检查通过且有变更才提交;用独立 _ds checkout)
       - name: Commit data-staging (revise)
         if: steps.sum.outputs.revise_safe == 'true' && steps.sum.outputs.revise_changed != '0'
         working-directory: _ds
@@ -257,6 +127,16 @@ jobs:
           git commit -m "data(revise): 入手方法/max_value/range refresh $(date -u +%FT%TZ)"
           git pull --rebase origin data-staging || true
           git push origin HEAD:data-staging
+
+      - name: Publish icons index + npc_motions to R2
+        run: |
+          B="s3://${{ vars.R2_DATA_BUCKET }}/pipeline"; E="${{ secrets.R2_ENDPOINT }}"
+          (cd icons && find . -type f -name '*.png' | sed 's|^\./||' | LC_ALL=C sort) > "$RUNNER_TEMP/icons_index.txt"
+          aws s3 cp "$RUNNER_TEMP/icons_index.txt" "$B/wiki/icons_index.txt" --endpoint-url "$E" --only-show-errors
+          aws s3 cp data/_npc_motions.json "$B/wiki/_npc_motions.json" --endpoint-url "$E" --only-show-errors
+          (cd "$RUNNER_TEMP/assets" && find . -type f | sed 's|^\./||') | while read -r f; do
+            aws s3 rm "$B/wiki/assets/$f" --endpoint-url "$E" --only-show-errors || true
+          done
 
       - name: Revise 安全检查未过 → 告警
         if: steps.sum.outputs.revise_safe == 'false'
