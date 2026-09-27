@@ -22,7 +22,7 @@ const _baseIdOf = (c) => c?._master?.id ?? c?.id;
 const _MATH_PREFIX = { Multiply: '×', Addition: '+', Set: '=' };
 
 // 跟 wiki main fmtBairituJP 一致: 大数字缩写 (億/万) + scaling 换行
-// scaling 走 omoideEffectiveScaling fallback (实测的 value_scaling 全空、用户实测 0.003)
+// scaling 走 omoideEffectiveScaling fallback (实测: value_scaling 全空、取 0.003)
 const _fmtBairituJP = (sk) => {
   const v = sk.value;
   if (v == null || v === 0) return '';
