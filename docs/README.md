@@ -13,10 +13,3 @@
 本目录另有几份 **untracked**(.gitignore 排除、只在本机)的参考:`local_env.md`(占位符 →
 本机实际路径)、`motion_table.md`(`gen_motion_table.py` 生成)、`crystal_factor_infer.md`
 (結晶三因子反推报告)、`
-
-## 跨 repo 引用约定
-
-`schema.md` / `hensei_calc.md` 里形如 `../../ 的链接指向**另一个 repo**
-(` repo 同级、内含 实测采集 + 参考文档)。它不在本仓库里,所以这些链接在 GitHub 上
-打不开、只在本地完整签出时可用。目录布局见
-[scripts/master_to_business/paths.py](../scripts/master_to_business/paths.py) 的 docstring。

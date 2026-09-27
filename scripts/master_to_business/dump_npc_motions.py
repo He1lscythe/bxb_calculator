@@ -1,8 +1,8 @@
 """Dump every npc-motion-<id>.dat into a lookup-friendly JSON.
 
 
-按需手动跑。日常不需要: update-database 每轮由 scripts/ci/动作同步.py 从 CDN
-增量补新 motion,本脚本只用于拿本地全量 .dat 重建基线。
+按需手动跑。日常不需要: 上游流水线每轮从 CDN 增量补新 motion、update-database 经 R2 合并缺的 key
+(已有值不覆盖),本脚本只用于拿本地全量 .dat 重建基线。
 
 源 = `<assets>/assets/` (`<assets>` 见 paths.assets_dir())。
 文件名兼容两种:CDN 缓存命名 `npc-motion-<id>.v<ver>.dat`(现行版本)
