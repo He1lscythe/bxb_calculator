@@ -55,7 +55,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/assets"
           aws s3 cp "$B/wiki/assets/" "$RUNNER_TEMP/assets/" --recursive --endpoint-url "$E" --only-show-errors || true
           echo "新图标源: $(find "$RUNNER_TEMP/assets" -type f | wc -l)"
-          echo "最新快照: $(ls _mt/master_data | sort | tail -1)"
+          echo "最新快照: $(ls _mt/master_data | grep -E '^[0-9]{4}_' | sort | tail -1)"
 
       - name: Run ingest
         id: run
