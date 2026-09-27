@@ -89,7 +89,7 @@ HEADERS = {
 # 已知 section label、bg 用 <hr> + 行首【label】格式
 _KNOWN_LABELS_RE = re.compile(r'【(?:効果|発動条件|入手方法|イラスト|レア度|効果量|特殊条件|対象|上限値)】')
 
-# Crystal 系列硬规则: substring → 入手方法。优先级高于 wiki 抓取 (2026-06-09)。
+# Crystal 系列硬规则: substring → 入手方法。优先级高于 wiki 抓取。
 CRYSTAL_HARD_RULES = [
     ('純真記憶',       '純真記憶結晶交換所'),
     ('秘録記憶',       '記憶結晶ブキダス極弐'),
@@ -315,7 +315,7 @@ _FACTOR_KEYS = ('M_L_max', 'M_W_max', 'M_P_max')
 def patch_revise(master_path, revise_path, value_map, hard_field=None, hard_resolver=None):
     """从 master 按 name 匹配 value_map、把各 field 注入 *_revise.json。
     value_map: {normalized name: {field: value}}
-    revise 数据跟 master 解耦、build_all 重 build master 不影响 revise ()。
+    revise 数据跟 master 解耦、build_all 重 build master 不影响 revise。
     hard_resolver(name) → str|None 只对 hard_field 生效、优先于 wiki。
 
     max_value 的写入条件: **已有三因子、且原本没有 max_value 的不写**。

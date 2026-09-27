@@ -134,7 +134,7 @@ test('chara_meta: LP 3 + bd_on → 仍用普通表 ×2.0 (hensei 算普通攻击
   const afterBd = await readStat(page, 0, 1);
   await setTr(page, 0, 'lp', 3);
   const afterLp = await readStat(page, 0, 1);
-  //  bd_on 不切 Blaze 表、LP×2.0 跟 bd_off 时一样
+  // bd_on 不切 Blaze 表、LP×2.0 跟 bd_off 时一样
   expect(afterLp).toBeGreaterThanOrEqual(Math.ceil(afterBd * 2.0) - 5);
   expect(afterLp).toBeLessThanOrEqual(Math.ceil(afterBd * 2.0) + 5);
 });

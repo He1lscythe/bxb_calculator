@@ -67,7 +67,7 @@ omoide memory slot 加成走 stage 1、不参与 base 计算。
 | 独立 | 任何 source | `Repel_Percent` | status 回避率、独立通道、不进 stat pipeline |
 | skip | 任何 source | `None` / `Set` / `NoEffect` parameter | 跳过、不渲染、不参与 calc |
 
-s4/s5 的执行顺序 = trace 显示顺序 : 非 soul (slot 升序) → soul (slot 升序) → HP 曲線池 → BD、
+s4/s5 的执行顺序 = trace 显示顺序: 非 soul (slot 升序) → soul (slot 升序) → HP 曲線池 → BD、
 逐 effect apply (`shared/stats-calc.js applyStaged`)。Mul 之间可交换,顺序只影响 trace 的展示。
 
 ## Apply 公式 (s1〜s8 + ceil)
@@ -109,7 +109,7 @@ v = ceil(v)                                           出口 ceil (唯一 round 
 **LP tier × Total** (step 4、):
 - `computeStats` (普通攻击、UI 显示): HpCheck `[1.0, 1.1, 1.5, 2.0]` → tier 0/1/2/3
 - `computeStatsBlaze` (BD 攻击伤害、UI 暂不显示): LpCheck `[1.0, 1.3, 2.0, 5.0]`
--  **tr.bd_on 不切表**、bd_on 仅 toggle bd_skill.effects 加入 Stage 4 buff
+- **tr.bd_on 不切表**、bd_on 仅 toggle bd_skill.effects 加入 Stage 4 buff
 - 由入口函数决定 lpTier 表、`applyStaged` 接 `opts.lpMult` 参数
 
 **Enemy_BreakAttack Stage 6**:
@@ -127,7 +127,7 @@ v = ceil(v)                                           出口 ceil (唯一 round 
 **攻撃力/防御力/ブレイク力** 走 in-battle EAD pipeline (applyStaged、Mul-then-Add 分组)。
 但 **HP 和 HitCount 是战前 server 一次性 fold 的、客户端不重算**:
 
-- **HP**: `max_hp = (base + Σ前置slot的HP-Add) × Π自身HP-Mul + Σ后置slot的HP-Add`、**slot 顺序敏感** (自身/靠前 slot 的加算落在乘算"内"、靠后 slot 落在"外")。**终值 `floor` 取整** (server max_hp 为整数、base 已 floor、;唯一一次取整、中间不 round)。
+- **HP**: `max_hp = (base + Σ前置slot的HP-Add) × Π自身HP-Mul + Σ后置slot的HP-Add`、**slot 顺序敏感** (自身/靠前 slot 的加算落在乘算"内"、靠后 slot 落在"外")。**终值 `floor` 取整** (server max_hp 为整数、base 已 floor;唯一一次取整、中间不 round)。
 - **HitCount**: 战斗用的是 server 下发、**已预折叠编队 HitCount 加成**的 `weapon.hit_counts`
   (客户端的 `HitCount` 只给 deck 面板 / 排序用、战斗不调它)。server 的折法 (实测 273 / 273 吻合):
   每条加成 `h = max(1, trunc(h + v))` **各自截断**。加成来源:
@@ -179,7 +179,6 @@ HitCount 的加成全是正数 Add 时逐条截断跟顺序无关;Multiply 类 H
 
 hensei「防御力」显示 = `s10` (玩家防御吸收量、damage units) = `base × Π Mul + Σ Add`。
 
-****:
 - 只显示玩家防御值、**不算被打时最终伤害** (即不模拟 `final_damage = prevTotal × s8 + max(0, prevTotal × (1 - s8) - s10)` 公式中的 final_damage、只显示 s10)
 - **SwapAttackDefense=true 模式** (剑魂特殊玩法)**不考虑**、所有 Attack/Defense chain 按 `swap=false` (正常对战)
 
@@ -217,7 +216,7 @@ hensei「防御力」显示 = `s10` (玩家防御吸收量、damage units) = `ba
 **未实施 / 暂略**:
 - `MinDamageRate` (master `min_damage_rate` 2-5%): 保底伤害比例、计算 incoming damage 用、UI 不显示
 - `JustGuard_MinDamage` (PSV param 62): JG 时修正保底比例、同上
-- 7 phase 内部细分 (简化、数学等价无影响)
+- 7 phase 内部细分 (数学等价、无影响)
 
 `condition_factor` 在 collection 阶段算好、跟 value 配套存（`hp_pct` = **接收方 target 自身 HP%**，range=All 的 HP-curve buff 从别 slot 来时看接收方而非 source，2026-06-19 修正）：
 - HP-curve `Vitality_*`: `factor = hp_pct / 100`
@@ -561,7 +560,7 @@ console 输入 `window.__DEBUG_STATS = true` → 切控件时输出：
   例: base 3、soul Add +6 (×1.8 等级) → floor(3+10.8)=13 → 下一 effect 从 13 起
 - soul HitCount `values=[a,b,c]` 数组: 每段 × soulMultiplier (跟单值路径一致吃等级加成)
 - omoide Mul → s4a (4 stat);転速 里 omoide Add 走 server-fold 段、omoide Mul 走 `mul_acc`
-- omoide `value_scaling`: master/字段多为空。description 含「熟度UPにつれて…」字样的 skill 实测真实 scaling = **0.003 / 熟度** (`OMOIDE_FALLBACK_SCALING`、`shared/hensei-helpers.js` `omoideEffectiveScaling`);effect value = `value + 0.003 × 熟度`(不减 1、单测 `omoide scaling fallback` 锁住)
+- omoide `value_scaling`: master/字段多为空。description 含「熟度UPにつれて…」字样的 skill 实测真实 scaling = **0.003 / 熟度** (`OMOIDE_FALLBACK_SCALING`、`shared/hensei-helpers.js` `omoideEffectiveScaling`);effect value = `value + 0.003 × 熟度`(不减 1;单测 `omoide scaling fallback` 锁住)
 
 ---
 

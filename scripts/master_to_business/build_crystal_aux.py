@@ -26,7 +26,7 @@ CHARA = DATA_DIR / "characters.json"
 
 
 # 不能 NFKC 完整匹配 characters.json name 的 crystal prefix → weapon_base_id (chara≡魔剣 base id)
-# (24 单候选 substring + 8 多候选 substring  + 9 nickname/缩写)
+# (24 单候选 substring + 8 多候选 substring + 9 nickname/缩写)
 CHARA_LIMIT_ID_OVERRIDE = {
     # 24 单候选 (substring 唯一命中 chara、自动反查)
     "アコ": 1541,                   # 丑王アコ

@@ -24,7 +24,7 @@ export function isPlainObject(v) {
 
 // 全元素是 plain object 且都有 `id` → 用 id 做稳定 key 的对象数组 (weapon_skills / soul.skills)。
 // revise patch 对这类数组按 id 局部 patch (robust 到重排/增删);其余数组 (标量 tags / 无 id
-// 对象数组如 masou effects) 整组替换。:彻底替换旧的 index 稀疏编码。
+// 对象数组如 masou effects) 整组替换。
 function _isObjIdArray(arr) {
   return Array.isArray(arr) && arr.length > 0 && arr.every((e) => isPlainObject(e) && e.id != null);
 }
