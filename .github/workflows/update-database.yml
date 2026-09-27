@@ -25,14 +25,6 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout master_tables
-        uses: actions/checkout@v7
-        with:
-          ref: master_tables
-          path: _mt
-          fetch-depth: 1
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Checkout data-staging
         uses: actions/checkout@v7
         with:
@@ -58,12 +50,12 @@ jobs:
       - name: Pull from R2
         run: |
           B="s3://${{ vars.R2_DATA_BUCKET }}/pipeline"; E="${{ secrets.R2_ENDPOINT }}"
-          aws s3 cp "$B/mt/" _mt/ --recursive --endpoint-url "$E" --only-show-errors
+          aws s3 cp "$B/mt/master_data/" _mt/master_data/ --recursive --endpoint-url "$E" --only-show-errors
           aws s3 cp "$B/wiki/_npc_motions.json" "$RUNNER_TEMP/npc_motions.json" --endpoint-url "$E" --only-show-errors || true
           mkdir -p "$RUNNER_TEMP/assets"
           aws s3 cp "$B/wiki/assets/" "$RUNNER_TEMP/assets/" --recursive --endpoint-url "$E" --only-show-errors || true
           echo "新图标源: $(find "$RUNNER_TEMP/assets" -type f | wc -l)"
-          git -C _mt status --short | head -50
+          echo "最新快照: $(ls _mt/master_data | sort | tail -1)"
 
       - name: Run ingest
         id: run
@@ -94,15 +86,6 @@ jobs:
         run: |
           git config --global user.name "bxb-db-bot"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - name: Commit master_tables
-        working-directory: _mt
-        run: |
-          git add -A
-          if git diff --cached --quiet; then echo "master_tables 无变更"; exit 0; fi
-          git commit -m "data(master_tables): sync $(date -u +%FT%TZ)"
-          git pull --rebase origin master_tables || true
-          git push origin HEAD:master_tables
 
       - name: Commit main (data + npc_motions + icons)
         run: |

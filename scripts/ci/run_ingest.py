@@ -1,7 +1,7 @@
 """run_ingest.py — R2 上的游戏原始数据 → wiki 业务表 (CI 端编排、不碰游戏 API)。
 
 workflow 先做好:
-  R2 pipeline/mt/            → 覆盖到 _mt (master_tables checkout),BXB_MASTER_TABLES 指向它
+  R2 pipeline/mt/master_data/ → _mt/master_data/,BXB_MASTER_TABLES 指向 _mt
   R2 pipeline/wiki/_npc_motions.json → BXB_NPC_MOTIONS_IN
   R2 pipeline/wiki/assets/   → BXB_ASSETS_DIR (新图标源、`<assets>` 布局)
 
