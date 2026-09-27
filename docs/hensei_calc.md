@@ -90,14 +90,14 @@ v *= Π(stage 6a enemy_break Multiply × cf)            Stage 6a Enemy_BreakAtta
 v += Σ(stage 6b enemy_break Addition × cf)            Stage 6b Enemy_BreakAttack Add (step 49)
 v *= mpRate                                           Stage 6b MP 不足惩罚 (step 50)
 v *= enemyBkX3                                        Stage 7 × 3 inline (step 51、enemy.bk gate、独立 cached gate)
-v = ceil(v)                                           出口 ceil (caller 出口 、唯一 round 点)
+v = ceil(v)                                           出口 ceil (唯一 round 点)
 ```
 
 **取整位置**:
 - Stage 0 base = `floor(_baseStatRaw)` (server-fold 模拟、chara 创建时 server 已 int)
 - **Stage 2 終 floor** : base + omoide + masou + 燃心 都是 server-fold、server 返回整数 → `floor(v)`
 - Stage 3 起 (client 侧 EAD pipeline) 全程 double、0 中间 round (: )
-- 出口 ceil = caller  、client pipeline 唯一 round 点
+- 出口 ceil = client pipeline 唯一 round 点
 
 **没有模拟的 EAD step**:
 - step 5 `BlazeRankRate`(剑炎槽 Count → `1 + floor(Count/2) × 0.25`、所有 hit 都吃)= enemy bar 的 BD cap,放在 s8
