@@ -44,7 +44,7 @@ def build():
             param = e.get("parameter")
             math = e.get("math_type")
             if param and param not in PARAMETER_ALL_NAMES:
-                warnings.append(f"masou id={entry.get('id')}: param {param!r} not in ")
+                warnings.append(f"masou id={entry.get('id')}: param {param!r} not in PARAMETER")
             if math and math not in MATH_TYPE_BY_NAME:
                 warnings.append(f"masou id={entry.get('id')}: math_type {math!r}")
             # wiki scaling 查表 (key = name__param)

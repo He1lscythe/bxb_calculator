@@ -642,11 +642,11 @@ function emblemLvMaxLocal(rarity) {
 }
 
 // ============================================================
-// EAD pipeline apply ( step 表 +  取整 audit)
+// EAD pipeline apply
 // ============================================================
 //
-// docs : 4 个 Total 层 (step 4 / 10b / 51 / 53) 全程 double、0 中间 round。
-// 唯一 ceil 在 EAD 出口 caller 出口。故 stage 内部不做 floor/ceil、最末才 ceil。
+// 4 个 Total 层 (step 4 / 10b / 51 / 53) 全程 double、0 中间 round。
+// 唯一 ceil 在出口。故 stage 内部不做 floor/ceil、最末才 ceil。
 // 没模拟的:step 5 BlazeRankRate 放在 s8 (enemy.bd_cap)、step 52 RandomRate 由 guild-score 取均值、
 // step 53 DefenseDamageSkill (敌方被动) 不算。
 //
@@ -822,7 +822,7 @@ export function applyStaged(base, parameter, effects, opts = {}) {
     v *= enemyBkX3;
     _push('s7_inline3', '敵BK ×3 (step51)', 'mul', enemyBkX3, b, v);
   }
-  // 出口 ceil (caller 出口 的 )
+  // 出口 ceil
   const out = Math.ceil(_norm(v));
   if (out !== v) _push('s7b_ceil', '出口 ceil', 'ceil', null, v, out);
   return out;

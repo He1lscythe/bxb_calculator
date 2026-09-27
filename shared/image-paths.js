@@ -1,6 +1,6 @@
 // shared/image-paths.js — master id → icons/ 相对路径
 //
-// 资源位置: crawl/icons/ (从assets 目录拷过来、见 scripts/master_to_business/copy_images.py)
+// 资源位置: crawl/icons/ (从游戏 assets 目录拷过来、见 scripts/master_to_business/copy_images.py)
 // .gitignore 排除、~150MB 不入 git
 //
 // 命名规则:

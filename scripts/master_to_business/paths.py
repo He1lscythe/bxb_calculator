@@ -14,7 +14,7 @@
 历史上这里写死过开发机绝对路径,换机器就整批 build script 挂掉。现在一律相对
 `PROJECT_ROOT` 推。
 
-## assets 目录 `<assets>`
+## 游戏 assets 目录 `<assets>`
 
 图标/motion 的源资源(`<assets>/weapon/`、`<assets>/assets/` 等)在仓库外、
 路径机器相关,由 `assets_dir()` 解析、tracked 代码里一律写 `<assets>` 占位。
@@ -24,7 +24,7 @@
 - `BXB_MASTER_TABLES` — master_tables **工作树根**(脚本自己拼 `/master_data`)。
   CI 指向从 R2 拉下的目录(见 .github/workflows/update-database.yml);本地不设即用上面的布局。
 - `BXB_ASSETS` — 外部工具根,同理。
-- `BXB_ASSETS_DIR` — `<assets>` 根。CI 由 图标同步 指向assets 临时目录;
+- `BXB_ASSETS_DIR` — `<assets>` 根。CI 由 图标同步 指向 assets 临时目录;
   本地不设则读 `_local_paths.json`(untracked)的 `assets_dir`。
 
 `MASTER_DIR` / `MASTER_TABLES_DIR` 是**惰性**属性 (PEP 562 `__getattr__`):只在真被访问时
@@ -56,7 +56,7 @@ _LOCAL_PATHS = PROJECT_ROOT / "_local_paths.json"
 
 @lru_cache(maxsize=1)
 def assets_dir() -> Path:
-    """返回 `<assets>` assets 根 Path。
+    """返回 `<assets>` 根 Path。
 
     env BXB_ASSETS_DIR > `_local_paths.json` 的 `assets_dir`。
 

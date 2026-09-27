@@ -6,7 +6,7 @@
 import { deepApply } from './revise-core.js';
 //
 // 核心映射:
-//   master.parameter (91 項 enum string) → wiki.bunrui (int 1-21)
+//   master.parameter (91 项 enum string) → wiki.bunrui (int 1-21)
 //   master.math_type ('Multiply'/'Addition'/'Repel_Percent') → wiki.calc_type (0/1/2)
 //   (Set / None / NoEffect 整条 skill 跳过、不渲染)
 //   master.range ('All'/'Single'/'None') + target_element_id/weapon_type_id/weapon_base_id 直接透传到 wiki effect (不再编码 scope)
@@ -16,7 +16,7 @@ import { deepApply } from './revise-core.js';
 //   master.profile (顶层、ja-EN 双语 key) → wiki.states.{X}.profile (内嵌、日文 key)
 //   master.mp (顶层) → wiki.basic_info.保有魔力
 
-// PARAMETER (name) → wiki bunrui id
+// PARAMETER → wiki bunrui id
 // wiki BUNRUI: 1=攻撃力 2=ブレイク力 3=BD攻撃力 4=スピード 5=攻撃モーション 6=BDゲージ
 //   7=ヒット数 8=攻撃全体化 9=状態異常回避 10=HP 11=HP回復 12=防御力 13=被ダメ軽減
 //   14=サファイア 15=ルビー 16=その他 17=ダメージ上限 18=ゲージ最大値

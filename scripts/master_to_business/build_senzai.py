@@ -37,7 +37,7 @@ def build():
         math = entry.get("math_type")
 
         if param and param not in PARAMETER_ALL_NAMES:
-            warnings.append(f"key={key}: parameter {param!r} not in  PARAMETER enum")
+            warnings.append(f"key={key}: parameter {param!r} not in PARAMETER enum")
         if math and math not in MATH_TYPE_BY_NAME:
             warnings.append(f"key={key}: math_type {math!r} not in MATH_TYPE enum")
 

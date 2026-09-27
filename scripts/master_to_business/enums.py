@@ -1,19 +1,13 @@
-"""master_tables enum 完整定义 — 全部按  (parameter) 体系。
-
-参考:
-- ../
-- ../ ( vs  区别、561 插入位置 )
-- ../ (HP-curve / Break gate)
-  (见 paths.py ASSETS_DIR)
+"""master_tables enum 完整定义。
 
 关键设计:
-- master_tables 用  (parameter)、 runtime 用 ;两者只能按**名字**对应
+- 两个 enum (master 侧 / runtime 侧) 只能按名字对应，不能按编号
 - 下面 PARAMETER / PARAMETER_BE_ONLY 的数字是 **560 (v2.5.34) 编号**,只作注释/对照,代码里只用名字
   (build script 用 PARAMETER_ALL_NAMES 校验 master 的 parameter 名、输出的也是名字字符串)。
-  561 在两个枚举里各插了 2 项 (Blaze_DamageLimitBreak / Enemy_BreakDamageLimitBreak),插入点之后整体后移,
-  换算见 11_parameters.md ;新增的两项另列在 PARAMETER_561_NEW。
+  561 各插了 2 项 (Blaze_DamageLimitBreak / Enemy_BreakDamageLimitBreak),插入点之后整体后移,
+  新增的两项另列在 PARAMETER_561_NEW。
 
-不引入 wiki bunrui (21 种) 概念 — 已废弃、直接用  Parameter 原值。
+不引入 wiki bunrui (21 种) 概念 — 已废弃、直接用 Parameter 原值。
 """
 
 # ============================================================
@@ -31,10 +25,9 @@ MATH_TYPE = {
 MATH_TYPE_BY_NAME = {v: k for k, v in MATH_TYPE.items()}
 
 # ============================================================
-# Parameter  — parameter enum (560 编号、91 项含 None=0;561 新增的 2 项见 PARAMETER_561_NEW)
-# 来源: 
-# 注释 = 业务含义 (中文 from table.md 注列)
-# 注: BE-only (Enemy_BreakAttack 等 13 项) 不在此、runtime calc 时另建  映射表
+# PARAMETER — master 侧 parameter enum (560 编号、91 项含 None=0;561 新增的 2 项见 PARAMETER_561_NEW)
+# 注释 = 业务含义
+# 注: runtime-only (Enemy_BreakAttack 等 13 项) 不在此、单独列在 PARAMETER_BE_ONLY
 # ============================================================
 PARAMETER = {
     0: "None",
@@ -131,10 +124,8 @@ PARAMETER = {
 }
 
 # ============================================================
-# PARAMETER_BE_ONLY — BE# (parameter) 独有的 13 项
-# 这些不在 parameter 里、但 master 数据 / runtime 用到
-# 来源: 
-# key = 560 的 BE# (561: 33..71 各 +1、72..86 各 +2);EAD step 号按 03_ead.md  现行编号
+# PARAMETER_BE_ONLY — runtime 侧独有的 13 项 (不在 master parameter 里，但 runtime 用到)
+# key = 560 编号 (561: 33..71 各 +1、72..86 各 +2)
 # ============================================================
 PARAMETER_BE_ONLY = {
     18: "RaiseBreak",
@@ -153,7 +144,7 @@ PARAMETER_BE_ONLY = {
 }
 
 # ============================================================
-# PARAMETER_561_NEW — 561 (v2.5.35) 在  两个枚举里都新插的 2 项 (key = 561 JS#)
+# PARAMETER_561_NEW — 561 (v2.5.35) 在 master / runtime 两个枚举里都新插的 2 项 (key = 561 编号)
 # Blaze_DamageLimitBreak: 只对 BD hit 抬伤害上限 (EAD DLB-1)
 # Enemy_BreakDamageLimitBreak: 敵 BK 时抬伤害上限 (EAD DLB-2、master 1 条 = 80658「ブレイク時に自身のダメージ上限が80億アップ」)
 # ============================================================
@@ -163,7 +154,7 @@ PARAMETER_561_NEW = {
 }
 
 # ============================================================
-# PARAMETER_EXTENSION — 既不在  也不在 、master 独有 / sentinel
+# PARAMETER_EXTENSION — master 独有 / sentinel（不在 master/runtime 两个 parameter enum 里）
 # memory_slot_skills.json 独有的扩展 enum
 # ============================================================
 PARAMETER_EXTENSION = {
@@ -206,7 +197,6 @@ RANGE_NORMALIZE = {"all": "All"}  # case 修正
 #    - RemHP_*    = 背水 (HP 少越强)、HP-curve func: RemHpSkillRate
 #    - Break_*    = 破損 (HpRate ≤ 0.5)、hard gate: IsBreak
 #    - FellDown_* = 队友倒地、自身 HpEmpty 旁路 + 按全队倒下比例插值 (PlayerList.FellDownRate)
-#    详见 
 #
 # 2. 限定条件 — 独立字段
 #    - element_condition: int (target_element_id 同 enum)
@@ -359,7 +349,7 @@ EVOLVE_COUNT = {
 if __name__ == "__main__":
     print("=== enum schema summary ===")
     print(f"MATH_TYPE: {len(MATH_TYPE)} values")
-    print(f"PARAMETER: {len(PARAMETER)} values (91 項)")
+    print(f"PARAMETER: {len(PARAMETER)} values (91 项)")
     print(f"RANGE: {len(RANGE)} values (+ normalize)")
     print(f"CONDITION_FIELD_NAMES: {len(CONDITION_FIELD_NAMES)} fields (非 enum、字段名列表)")
     print(f"TARGET_ELEMENT: {len(TARGET_ELEMENT)} values")

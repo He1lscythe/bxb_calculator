@@ -35,7 +35,7 @@ function _crystalToWikiEffect(c) {
 }
 
 function crystalToWiki(c) {
-  // NoEffect 不过滤 (归到「その他」类)、但生成 placeholder effect 避免 render 报空
+  // NoEffect 归到「その他」类、生成 placeholder effect 避免 render 报空
   const eff = c.parameter === 'NoEffect' ? null : _crystalToWikiEffect(c);
   return {
     _master: c,                            // 原 master entry (hensei stats-calc 用)

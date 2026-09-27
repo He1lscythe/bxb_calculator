@@ -50,7 +50,7 @@ const _DEP_KEY = {
   max_purity:  'M_P_max',
 };
 
-// 旧 wiki cr-edit 视觉 pattern :
+// 旧 wiki cr-edit 视觉 pattern:
 // - 顶部 .edit-actions (保存 / キャンセル 两个按钮)
 // - 下面 .edit-ro 显示 name
 // - .field-row + .field-key + .field-val 显示只读 effect 文 / 特殊条件

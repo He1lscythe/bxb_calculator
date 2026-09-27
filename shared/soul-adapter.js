@@ -88,7 +88,7 @@ function _soulSkillToWiki(sk) {
     name: sk.name || '',
     effect_text: sk.description || '',
     effects: [eff],
-    _displayable: sk.displayable !== false,  //  displayable=false 时 UI 50% 透明
+    _displayable: sk.displayable !== false,  // displayable=false 时 UI 50% 透明
   };
 }
 
