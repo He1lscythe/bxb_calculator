@@ -54,6 +54,7 @@ export const charaLvParams = (chara, state) => {
 // ============================================================
 // 实测 data/omoide/{base_id}.json 时 weapon_skills[].value_scaling 字段全 0 / null。
 // description 含「熟度UPにつれて...」字样的 skill 真实 scaling = 0.003 / 熟度 (见 docs/hensei_calc.md)。
+// 这是实测数据 gap、不是 game data 真值 0。fallback 应只对「描述含熟度」的 skill 生效。
 const OMOIDE_FALLBACK_SCALING = 0.003;
 
 export function omoideEffectiveScaling(sk) {
