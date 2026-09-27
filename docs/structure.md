@@ -128,7 +128,6 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [copy_images.py](../scripts/master_to_business/copy_images.py) | 数据更新时拷 `<assets>` → `icons/` (含 soul 7 张 fallback 段) |
 | [gen_motion_table.py](../scripts/master_to_business/gen_motion_table.py) | `characters.json` → `docs/motion_table.md` (master 改 motion_id 后重跑) |
 | [fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) | 抓 altema wiki → patch `crystal_revise.json` (`入手方法` + **`max_value`**) + `bg_revise.json` (`acquisition`)、按 name 匹配 (NFKC + 装飾符/accent fallback)。`max_value` 取 【効果量】 区间上限、和数字 (億/万/千 複合) 解析;**单位换算**: 「効果量下限 ÷ master `initial_value` ≥ 50」→ altema 用的是百分数而 master 用分数 (只有 `Wave_Heal` 那 9 条)、÷100 —— **不能拿「带不带 %」判**,`BlazeAbsorb`/`Mez` 等 19 条也带 % 但 master 本就存百分数;整数值写成 int (不然 `2`→`2.0` 刷出 150 行无意义 diff);**有三因子且原本没有 max_value 的不写** (那些 series 故意只给因子)、原本就有的照常刷新。403 会退避重试 4 次。CI 每轮由 `run_ingest` 模块 B 调 |
-| [](../scripts/master_to_business/) | 从 `<assets>` 提取 npc motion 数据 → `data/_npc_motions.json` 全量基线 (日常由上游流水线增量补、经 R2 合并进来 (见下方 scripts/ci/);本脚本只在需要重建时手动跑、小时级) |
 | [build_memory_slot_skills.py](../scripts/master_to_business/build_memory_slot_skills.py) | 从 omoide 数据 (`bxb_wiki/data/omoide/`) → `data/_memory_slot_skills.json` (senzai 反查表、秒级) |
 
 ### scripts/ci/ — 云端数据落地 (GitHub Actions)
@@ -143,7 +142,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | 路径 | 内容 | 读写方向 |
 |---|---|---|
 | `pipeline/mt/` | master_tables 基准:每个文件都是上游快照存档里对应文件的**原样副本**。只留最新两份完整快照 (master_data / asset_version 各两份),更早的只剩 `changelog.md` + `_meta.json` (索引重建用);`scenario/unity3d/` 只留最新一个 | 上游写 → 本侧只拉 `master_data/` 到 `_mt` (`BXB_MASTER_TABLES` 指向它)、build 只读最新一份 |
-| `pipeline/wiki/_npc_motions.json` | npc 动作时长 | 本侧每轮发布 `data/_npc_motions.json` → 上游只追加新 motion → 本侧只合并缺的 key (已有值不覆盖,本地 `` 重建的值不会被冲) |
+| `pipeline/wiki/_npc_motions.json` | npc 动作时长 | 本侧每轮发布 `data/_npc_motions.json` → 上游只追加新 motion → 本侧只合并缺的 key (已有值不覆盖) |
 | `pipeline/wiki/icons_index.txt` | `icons/` 现有 png 清单 (`<cat>/<stem>.png`) | 本侧每轮发布,上游据此判断缺哪些图标 |
 | `pipeline/wiki/assets/` | 新图标源 (`<assets>` 布局的 PNG) | 上游写 → 本侧 `copy_images` 落到 `icons/` 后删 |
 

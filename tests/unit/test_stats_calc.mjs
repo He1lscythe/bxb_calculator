@@ -909,7 +909,7 @@ test('computeStatsBlaze: lp=1 + bd_on 不影响表选择 (bd_on 只 toggle bd_sk
 });
 
 // ============================================================
-// 12. Speed (転速、)
+// 12. Speed (転速)
 //     latestRecover = add_acc + (PartnerLevel/100 + 1) × mul_acc × recover
 // ============================================================
 function _addSpeedSkills(c, skills) {
@@ -1098,7 +1098,7 @@ test('enemy element matchup: 火 vs 風 mode=normal → Attack ×2.0、BK 走 EB
   assert.strictEqual(r.stats['ブレイク力'], 1501);
 });
 
-test('EBD 4 格: 弱点 × 敵BK → ×1.8 / ×1.2 / ×1.5 / ×0.1 ()', () => {
+test('EBD 4 格: 弱点 × 敵BK → ×1.8 / ×1.2 / ×1.5 / ×0.1', () => {
   const run = (element, bk) => {
     const c = mockChara();   // 火属性
     const ctx = buildCtx([{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null], { enemy: { element, bk, mode: 'normal' } });
@@ -1761,7 +1761,7 @@ test('画: 画级 element_ids / 技能级 element_id 按装备者判、不符不
   assert.strictEqual(run(2), 16250, '水属性魔剣 → ×1.25');
 });
 
-test('ソウル相性: 只乘攻撃力、不乘ブレイク力 (EBD 不查魂的相性表、)', () => {
+test('ソウル相性: 只乘攻撃力、不乘ブレイク力 (EBD 不查魂的相性表)', () => {
   const c = mockChara();
   const soul = mockSoul({ element_affinity: { 1: { positive_value: 1.9, negative_value: 1.135 } } });
   const ctx = buildCtx([{ chara: c, soul, tr: _lv250({ soul_lv: 1 }) }, null, null]);
@@ -1771,7 +1771,7 @@ test('ソウル相性: 只乘攻撃力、不乘ブレイク力 (EBD 不查魂的
   assert.strictEqual(r.stats['ブレイク力'], Math.ceil(1000 * Math.fround(0.1)));
 });
 
-test('燃心: server-fold 倍率、攻撃力和防御力都吃 ()', () => {
+test('燃心: server-fold 倍率、攻撃力和防御力都吃', () => {
   const r = _atk([], _lv250({ moeshin: true }));
   assert.strictEqual(r.stats['攻撃力'], 16900);
   assert.strictEqual(r.stats['防御力'], 6500);
@@ -1785,7 +1785,7 @@ test('MP 不足: 在 Add 池之后乘 (EAD step 50)', () => {
   assert.strictEqual(applyStaged(10000, 'Attack', eff), (10000 + 1000) * 0.5);
 });
 
-test('AllTarget: ×Total 的全体化倍率、攻撃力和ブレイク力都吃 ', () => {
+test('AllTarget: ×Total 的全体化倍率、攻撃力和ブレイク力都吃', () => {
   const r = _atk([{ id: 1, parameter: 'AllTarget', math_type: 'Multiply', value: 0.6, value_scaling: 0, range: 'Single' }]);
   assert.strictEqual(r.stats['攻撃力'], 7800);
   assert.strictEqual(r.stats['ブレイク力'], Math.ceil(600 * Math.fround(0.1)));   // 1000 × 0.6、再 × EBD 格 0.1f
@@ -1807,7 +1807,7 @@ test('BD: range=Single 的転速 buff 不生效、攻速 buff 生效 (BuffSkillV
   assert.strictEqual(all.speed.latestRecover, base.speed.latestRecover * 2, 'All 転速 BD 生效');
 });
 
-test('攻速: 没有 Add 池 (攻速 只乘 Mul、)', () => {
+test('攻速: 没有 Add 池 (只乘 Mul)', () => {
   const c = _charaWithSkills([{ id: 1, parameter: 'MotionSpeed', math_type: 'Addition', value: 1, value_scaling: 0, range: 'Single' }]);
   c._master.states['通常'].motion_speed = 1.5;
   const ctx = buildCtx([{ chara: c, tr: _lv250() }, null, null]);

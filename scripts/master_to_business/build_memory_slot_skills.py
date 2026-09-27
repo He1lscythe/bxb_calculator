@@ -57,7 +57,7 @@ def collect_sources():
         sources.append((str(ht_path), json.loads(ht_path.read_text(encoding='utf-8'))))
 
     # (b) 外部工具目录下的个别 HouseTop response JSON
-    _resp_root = Path(os.environ.get('BXB_RESP_ROOT', str(UNPACKING / 'outputs')))
+    _resp_root = Path(os.environ.get('BXB_RESP_ROOT', str(ASSETS_ROOT / 'outputs')))
     if _resp_root.is_dir():
         for d in sorted(_resp_root.iterdir()):
             if not d.is_dir():

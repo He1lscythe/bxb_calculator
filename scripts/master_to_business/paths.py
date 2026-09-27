@@ -134,7 +134,7 @@ def __getattr__(name):
 if __name__ == "__main__":
     print(f"PROJECT_ROOT   = {PROJECT_ROOT}")
     print(f"BXB_ROOT       = {BXB_ROOT}")
-    print(f"ASSETS_DIR  = {ASSETS_DIR}  (exists={ASSETS_DIR.is_dir()})")
+    print(f"ASSETS_DIR     = {ASSETS_DIR}  (exists={ASSETS_DIR.is_dir()})")
     try:
         ad = assets_dir()
         print(f"ASSETS_DIR     = {ad}  (exists={ad.is_dir()})")

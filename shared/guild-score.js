@@ -1,6 +1,6 @@
 // shared/guild-score.js — ギルバト 40s 伤害/分数模拟 (纯函数、无 DOM)
 //
-// 模型 ( + 十帧模型、用户敲定的高频重叠语义):
+// 模型 (十帧、高频重叠语义):
 //   - loop 周期 P = 3段攻速帧 + 1fr(BT) + 転速(cooldown+set) + 1fr(BT)、每隔 P 就重开新 loop、
 //     不等上一 loop 的 hit 列打完 — 各 loop 的 hit 在后台并行堆叠。
 //   - 段 i 的第一击在 loop 起点 + 前面各段攻速帧累计偏移处落地、之后每 hitInterval 一击。

@@ -96,7 +96,7 @@ v = ceil(v)                                           出口 ceil (唯一 round 
 **取整位置**:
 - Stage 0 base = `floor(_baseStatRaw)` (server-fold 模拟、chara 创建时 server 已 int)
 - **Stage 2 終 floor** (实测 38/38 为 floor): base + omoide + masou + 燃心 都是 server-fold、server 返回整数 → `floor(v)`
-- Stage 3 起 (client 侧 EAD pipeline) 全程 double、0 中间 round ()
+- Stage 3 起 (client 侧 EAD pipeline) 全程 double、0 中间舍入
 - 出口 ceil = client pipeline 唯一 round 点
 
 **没有模拟的 EAD step**:
@@ -129,7 +129,7 @@ v = ceil(v)                                           出口 ceil (唯一 round 
 
 - **HP**: `max_hp = (base + Σ前置slot的HP-Add) × Π自身HP-Mul + Σ后置slot的HP-Add`、**slot 顺序敏感** (自身/靠前 slot 的加算落在乘算"内"、靠后 slot 落在"外")。**终值 `floor` 取整** (server max_hp 为整数、base 已 floor;唯一一次取整、中间不 round)。
 - **HitCount**: 战斗用的是 server 下发、**已预折叠编队 HitCount 加成**的 `weapon.hit_counts`
-  (客户端的 `HitCount` 只给 deck 面板 / 排序用、战斗不调它)。server 的折法 (实测 273 / 273 吻合):
+  (HitCount 只给 deck 面板 / 排序用、战斗不调它)。server 的折法 (实测 273 / 273 吻合):
   每条加成 `h = max(1, trunc(h + v))` **各自截断**。加成来源:
   - 魂的 HitCount job_skill:`v = values[i] × 魂等级倍率`;属性 / 武器 / 魔剣条件按**被作用的魔剣**判 (跟别的魂技能按装备者判不同)
   - 魔剣的 HitCount 技能:描述带熟度阶梯的,游戏取「N + 已达阈值个数」;`chara_revise` 里给这些技能配了线性
@@ -171,7 +171,7 @@ HitCount 的加成全是正数 Add 时逐条截断跟顺序无关;Multiply 类 H
 - 例 天業剣クリーフォート bd effect `value=20.48, additional_value=1.36`,bd_count=7 → 20.48 + 1.36×7 = 30.00。
 - 游戏里这个 count 是 `BeforeBlazeCount` = use_all BD 放出瞬间的剑炎槽数;
   非 use_all 的 BD 不更新它 → 附加值不叠。master 里 `additional_value ≠ 0` 的 8 条全是 use_all,所以默认取 cost 没问题。
-- **range=Single 的 BD buff** 进的是 `IndividualBuff` 池,只有攻速 (`攻速`) 和伤害上限 (EAD prologue) 查它;
+- **range=Single 的 BD buff** 进的是 `IndividualBuff` 池,只有攻速和伤害上限 (EAD prologue) 查它;
   攻撃 / 防御 / ブレイク / 転速 查的 `BuffSkillValue` 只认 range=All。
   所以 Single 的这几类 BD buff 不算 (master 里 Speed Single 3 条;Attack / Defense / GuardBreak 没有 Single)。
 
@@ -505,7 +505,7 @@ UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的
 | HP 曲線池 | **s4h** (Mul) | Mul | 任何 source 的 `Vitality_` / `RemHP_` / `FellDown_` 同 parameter 合一池、`1 + r(Π − 1)` |
 | `enemy_break` | **s6 (Mul → Add)** | Mul / Add | parameter 前缀 `Enemy_Break_*`、gate `enemy.bk` (step 48/49) |
 | **inline ×3** | **s7 (× Attack)** | Multiply | `opts.enemyBkX3` step 51、enemy.bk gate  |
-| **EBD 4 格** | **s7_ebd (× BK)** | Multiply | 只ブレイク力:弱点 × 敵BK 的 ×1.8 / ×1.2 / ×1.5 / ×0.1 () |
+| **EBD 4 格** | **s7_ebd (× BK)** | Multiply | 只ブレイク力:弱点 × 敵BK 的 ×1.8 / ×1.2 / ×1.5 / ×0.1 |
 | enemy mods | **s8 (× Attack)** | Multiply | 属性相性 (全局)、難度/BK耐性/有利武器 (guild gate)、BD cap — `_computeEnemyMods` 硬编码倍率、stage 后乘 + ceil |
 
 ### 验证调试
