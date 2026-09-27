@@ -281,7 +281,7 @@ v *= (P > 0 && P ≠ 1) ? 1 + r × (P − 1) : 1          r = 上面的 factor (
 ## DamageLimitBreak (DLB) — 每 hit 伤害上限 (ダメ上限)
 
 面板的「ダメ上限」和ギルバト スコア 的每 hit 封顶用它;**攻撃力 stat 本身不被它 clamp**(攻撃力显示的是 clamp 前的 Total)。
-按 unpacking 09_damage_clamp.md  / :
+按 09_damage_clamp.md  / :
 
 ```
 limitMaxDamage = floor((2^31 - 1) × ΠMul + ΣAdd)        Mul 池、Add 池分开 fold,Add 永远在 Mul 外面
@@ -299,8 +299,7 @@ final_damage   = clamp(ceil(Total), 0, limitMaxDamage)
 `Repel_Percent` 不影响 stat 数值、是 status 回避率。命中的 parameter 只有 6 个 proc-rate 类:
 `Mez` / `Stun` / `InstantDeath` / `BlazeAbsorb` / `RateDamage` / `BlazeLockPurge`。
 
-**独立概率 OR 合并** (`repelRate`、跟游戏一致 —— 11_parameters.md 
-的  (参考):
+**独立概率 OR 合并** (`repelRate`、跟游戏一致 —— 11_parameters.md ):
 
 ```
 p_i        = min(value_i × condition_factor_i, 100) / 100      # value < 0 → 该条不贡献
@@ -442,7 +441,7 @@ UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的
 ### 転速 两段的依据 (2026-08-23 修正 / 2026-09-26 魔装改进 server-fold)
 
 `07_speed.md ` 的 `latestRecover = max(0, add_acc + (PartnerLevel/100+1) × mul_acc × recover)`
-里三个量各有明确出处(561 汇编 `~`):
+里三个量各有明确出处(561):
 
 - **`recover` = `WeaponData ObscuredFloat` = server 推的 `speed` 字段**、不是裸曲线值。
   ``: `speed = floor((speed + Σ slot_speed_add) × Π 魔装 Speed Mul)`,并注明 slot Add 来源 =

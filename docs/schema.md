@@ -321,7 +321,7 @@ final damage
 | 战斗中变化 | 无（固定） | 动态（HP-curve / Break gate / IsBlaze gate 等条件变化） |
 | 加成来源 | 魂 HitCount `values × 魂等级倍率`(条件按**被作用的魔剣**判)/ 魔剣技能(熟度阶梯)/ HitCount 结晶 | PSV / BSV |
 
-客户端 UI 侧的 ``(561)/ `HitCount` 只遍历魂的 job_skills、按 MathType 分组
+客户端 UI 侧的 `HitCount `HitCount` 只遍历魂的 job_skills、按 MathType 分组
 (先 Multiply 后 Addition),战斗装载不调用它。
 
 ### Server-fold 公式 (-1.1.2)
@@ -527,7 +527,7 @@ EAD 出口在 `BattleDamage.出口`:先按 `[0, limitMaxDamage]` clamp、区间�
 
 ### 4.2 HP-curve scale 公式（前端复刻）
 
-- `` / `` / ``(561):
+- `RemHpSkillRate` / `VitalitySkillRate` / `FellDownSkillRate`(561):
   先 fold 整个池得 `P`,`r = clamp(1 − HpRate, 0, 1)`(RemHP)/ `clamp(HpRate, 0, 1)`(Vitality)/ `FellDownRate`(FellDown),
   返回 `P > 0 && P ≠ 1 ? 1 + r(P − 1) : 1.0`。**是对池值插值一次、不是每条插值**。
 - 転速 / 攻速 走 `BattleMath.VariableSkillRate`,同一公式。
