@@ -125,7 +125,7 @@ v = ceil(v)                                           出口 ceil (唯一 round 
 ## HP / HitCount — 战前 server-fold (不走上面的 EAD 分组 pipeline)
 
 **攻撃力/防御力/ブレイク力** 走 in-battle EAD pipeline (applyStaged、Mul-then-Add 分组)。
-但 **HP 和 HitCount 是战前 (战斗开始时 / HitCount) server 一次性 fold 的、客户端不重算**:
+但 **HP 和 HitCount 是战前 server 一次性 fold 的、客户端不重算**:
 
 - **HP**: `max_hp = (base + Σ前置slot的HP-Add) × Π自身HP-Mul + Σ后置slot的HP-Add`、**slot 顺序敏感** (自身/靠前 slot 的加算落在乘算"内"、靠后 slot 落在"外")。**终值 `floor` 取整** (server max_hp 为整数、base 已 floor、;唯一一次取整、中间不 round)。
 - **HitCount**: 战斗用的是 server 下发、**已预折叠编队 HitCount 加成**的 `weapon.hit_counts`
@@ -269,9 +269,9 @@ v *= (P > 0 && P ≠ 1) ? 1 + r × (P − 1) : 1          r = 上面的 factor (
 - 目标自身 (魔剣固有、range=Single) 有 `Rise_AttackRate` (值 V) → 把目标池里每条带 `_orig` 的 **Attack 系**
   (`base_parameter==='Attack'`,含 `Vitality_/RemHP_/Break_/FellDown_Attack`) 增益 ×V:
   - `Multiply M → M·V` (倍率直接 ×V,例 ×1.2 → ×3.0);`Addition A → A·V`。
-- **`_orig` = `is_original_skill=true`**(战斗开始时 实测):魔剣自带技能 (`chara_skill`,**包括队友 range=All
+- **`_orig` = `is_original_skill=true`**(实测):魔剣自带技能 (`chara_skill`,**包括队友 range=All
   打过来的**,PSV 的 All 查询遍历全队、Rise 也传给了 weapon list)和**結婚** (70204)。
-  結晶 (-6) / 画 (-4) / 好感 (memory_slot) / 魔装 (-7) / 公会 (-1) 都是 false,魂的 job_skill 在 `job_skill 列表` 里恒 false →
+  結晶 (-6) / 画 (-4) / 好感 (memory_slot) / 魔装 (-7) / 公会 (-1) 都是 false,魂的 job_skill 恒 false →
   不放大。`Enemy_BreakAttack` (step 48) 不走 Rise;HitCountKeepDamage 派生的减攻条目是 wiki 自己造的,也不放大。
 - 目前仅 2 个魔剣: `1508 蒼き悪竜の渇欲` / `1530 もちもち` (均 V=2.5);它们自身无 Attack-up 技能,放大的是
   自己的結婚条目和队友打过来的魔剣 Attack 技能。(2026-09-26 之前放大的是自己装的结晶 / 魂 / BG,与游戏相反。)

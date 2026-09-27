@@ -1,6 +1,6 @@
 """copy_images.py — 一次性从 `<assets>` 把图片拷到 bxb_wiki/icons/
 
-`<assets>` = assets 根、由 paths.assets_dir() 解析 (env BXB_ASSETS_DIR / _local_paths.json)。
+`<assets>` = 游戏 assets 根、由 paths.assets_dir() 解析 (env BXB_ASSETS_DIR / _local_paths.json)。
 
 源 → 目标:
 - chara : <assets>/weapon/stand/s/{6位}.png → bxb_wiki/icons/chara/{variant_id}.png    (~1106 file)
@@ -38,7 +38,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 ICONS_DIR = PROJECT_ROOT / "icons"
 DATA_DIR = PROJECT_ROOT / "data"
 
-# CI 经 env BXB_ASSETS_DIR 指向assets 临时目录 (图标同步 下载+extract 落点)
+# CI 经 env BXB_ASSETS_DIR 指向 assets 临时目录 (图标同步 下载+extract 落点)
 DBXB = assets_dir()
 
 

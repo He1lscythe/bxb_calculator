@@ -23,7 +23,7 @@
 
 详见 [scripts/master_to_business/enums.py](../scripts/master_to_business/enums.py):
 
-- `parameter`: 91 项 (parameter)
+- `parameter`: 91 项
 - `math_type`: **5 项** — `Multiply` (0) / `Addition` (1) / `Set` (2) / `Repel_Percent` (3) / `None` (4)
 - `range`: 3 项 (`All` / `Single` / `None`)
 - 条件字段拆分: HP-curve prefix (`Vitality_` / `RemHP_`) + Break gate prefix (`Break_`) + 结构化条件字段 (`element_id` / `weapon_type_id` / `conditional_parameter` 等)
@@ -53,7 +53,7 @@ server-fold 字段 (非 master 直给、走 `*_revise.json`):
 
 详见 [scripts/master_to_business/enums.py](../scripts/master_to_business/enums.py)。本节摘要 + 链 参考文档。
 
-### 2.1 PARAMETER (parameter)
+### 2.1 PARAMETER
 
 下表是 **560 (v2.5.34) 编号**:91 项、id 0-90、None=0 是 sentinel。561 (v2.5.35) 在 28 插入 `Blaze_DamageLimitBreak`、
 在 67 插入 `Enemy_BreakDamageLimitBreak`(共 93 项、0-92),插入点之后整体后移
@@ -93,7 +93,7 @@ master 里 parameter 存的是名字字符串,本项目也只按名字用,编号
 **没有 wiki 推断的 "最终加算 / 最终乗算"**。游戏实际计算 pipeline 不区分"最终"阶段、只分 Mul 池 + Add 池 (EAD step 链内累积)。
 
 > ⚠ 老文档里的 **`Reduce100`** 就是现在的 `Repel_Percent`(同一个 math=3 槽位、旧名)。
-> BE 侧 enum 是 `None=0 / Addition=1 / Multiply=2 / Repel_Percent=3`,**跟  的 Mul/Add 编号互换**。
+> game enum 是 `None=0 / Addition=1 / Multiply=2 / Repel_Percent=3`,**跟 Mul/Add 编号互换**。
 > 合并式是独立概率 OR:`(1 − Π(1 − p_i)) × 100`、`p_i = clamp(v_i, 0, 100) / 100`
 `repelRate` 已按此实现,
 > 见 [hensei_calc.md](hensei_calc.md#repel_percent-独立通道)。
@@ -215,7 +215,7 @@ wiki 5 值 `condition` enum 在 master 拆成多字段：
         {
           "id": 80618,
           "name": "...",
-          "parameter": "Attack",     // 91 項 enum string
+          "parameter": "Attack",     // 91 项 enum string
           "math_type": "Multiply",
           "value": 1.05,
           "value_scaling": 0.0,
@@ -291,16 +291,16 @@ wiki 5 值 `condition` enum 在 master 拆成多字段：
 ```
 master_tables (静态 schema)
     ↓
-server pre-fold (玩家点「开始战斗」战斗开始时 时一次性算)
+server pre-fold (玩家点「开始战斗」时一次性算)
     ↓ push user_weapon (含 fold 完的 attack/defense/speed/break_value/max_hp + 8 block weapon_skills[] PSV 池)
-client  (战斗中 in-battle PSV 路径、EAD/PAD/EBD/PBD 累积链)
+in-battle (战斗中 EAD/PAD/EBD/PBD 累积链)
     ↓
 final damage
 ```
 
 ### 字段分工总表
 
-| 字段 | 类 1: server pre-fold | 类 2: client 战前一次算 | 类 3: client 战斗中动态 | server push 终值? |
+| 字段 | 类 1: server pre-fold | 类 2: 战前一次算 | 类 3: 战斗中动态 | server 终值? |
 |---|---|---|---|---|
 | `max_hp` | ✓ **完整**（含 element / marriage / cross-slot Add）| — | ✗ 无路径（BE PassiveSkill enum 没 HP entry）| ✓ 终值 |
 | `attack` | ✓ 静态 (slot_Add + BH + 魔装 Attack Mul、含魔王装全队倍率) | — | ✓ 动态 (element / marriage / RemHP / Vitality) | ✗ 半成品 |
@@ -315,12 +315,12 @@ final damage
 
 | 维度 | hit_counts (server 预折叠) | attack/motionspeed 战斗中 |
 |---|---|---|
-| 何时算 | server `战斗开始时` 时 | 每 hit 触发 EAD/PAD 时 |
+| 何时算 | server 战斗开始时 | 每 hit 触发 EAD/PAD 时 |
 | 公式 | **逐条 int 截断** `h = max(1, trunc(h + v))`(实测 273/273) | **Mul 池 + Add 池分离**（池内结合律 + 交换律) |
 | 战斗中变化 | 无（固定） | 动态（HP-curve / Break gate / IsBlaze gate 等条件变化） |
 | 加成来源 | 魂 HitCount `values × 魂等级倍率`(条件按**被作用的魔剣**判)/ 魔剣技能(熟度阶梯)/ HitCount 结晶 | PSV / BSV |
 
-客户端 UI 侧的 `HitCount `HitCount` 只遍历魂的 job_skills、按 MathType 分组
+`HitCount` 只遍历魂的 job_skills、按 MathType 分组
 (先 Multiply 后 Addition),战斗装载不调用它。
 
 ### Server-fold 公式
@@ -343,7 +343,7 @@ break   = 类比 attack (无 BH)
 max_hp = (max_hp_base + Σ_HP_Add_from_earlier_slots) × Π_HP_Mul + Σ_HP_Add_from_later_slots
 ```
 
-理由：`parameter.HP`(561 = 76、560 = 74)在 `parameter` enum 里没对应、客户端 PSV 列表无 HP 类 entry、必须 server 一次性 fold 完。
+理由：HP parameter(561 = 76、560 = 74)在 server 侧无对应 PSV entry、必须 server 一次性 fold 完。
 
 **BH (Burning Heart) 是连续值**:
 `burning_heart = true` 时倍率在 **1.10 ~ 1.30** 之间(实测 37 例都是 0.01 的整数倍、上限 1.30),同一把魔剑在连续场次间逐级变化;
@@ -373,10 +373,10 @@ block 顺序对 `Multiply` / `Addition` 池**数学等价**（结合律 + 交换
 
 | view 来源 | attack 含义 | slot Add 折叠 | BH 倍率 |
 |---|---|---|---|
-| `武器列表接口`（准备页） | 纯 raw 镜像 | ✗ | ✗ |
-| `战斗开始时`（点"进副本"） | base + slot + 当前 BH | ✓ | ✓ |
+| 准备页 | 纯 raw 镜像 | ✗ | ✗ |
+| 点"进副本" | base + slot + 当前 BH | ✓ | ✓ |
 | 副本结算 response | base + slot + 当前 BH | ✓ | ✓ |
-| `武器详情接口`（魔剑详情页） | `buffed_attack`、含静态 Mul 子集 | ✓ | ✓ + 静态 Mul |
+| 魔剑详情页 | `buffed_attack`、含静态 Mul 子集 | ✓ | ✓ + 静态 Mul |
 
 ### 对前端 hensei calc 的 implication
 

@@ -123,7 +123,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | 模块 | 用途 |
 |---|---|
 | [paths.py](../scripts/master_to_business/paths.py) | 自动 detect 最新 `master_tables/` + 提供 `master_file()` / `assets_dir()` helper |
-| [enums.py](../scripts/master_to_business/enums.py) | 91 項 parameter / 5 math_type / 3 range / TARGET_ELEMENT / TARGET_WEAPON_TYPE 等 master enum 映射 (**JS 侧的 `shared/constants.js` 不含这些**) |
+| [enums.py](../scripts/master_to_business/enums.py) | 91 项 parameter / 5 math_type / 3 range / TARGET_ELEMENT / TARGET_WEAPON_TYPE 等 master enum 映射 (**`shared/constants.js` 不含这些**) |
 | [image_paths.py](../scripts/master_to_business/image_paths.py) | master id → `icons/` 本地 image path 反查 |
 | [copy_images.py](../scripts/master_to_business/copy_images.py) | 数据更新时拷 `<assets>` → `icons/` (含 soul 7 张 fallback 段) |
 | [gen_motion_table.py](../scripts/master_to_business/gen_motion_table.py) | `characters.json` → `docs/motion_table.md` (master 改 motion_id 后重跑) |
