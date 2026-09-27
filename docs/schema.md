@@ -1,4 +1,4 @@
-# Schema — 按 master_tables 设计
+# Schema
 
 > 文档索引: [docs/README.md](README.md)
 >
@@ -17,7 +17,7 @@
 
 - `master_tables/*.json` 是游戏服务器下发数据、ground truth
 - 所有字段直接透传、不做 NLP 关键词分类
-- 信任 `initial_*` / `max_*` stats
+- `initial_*` / `max_*` stats 直接使用
 
 ### 1.2 核心 enum
 
@@ -40,7 +40,7 @@ server-fold 字段 (非 master 直给、走 `*_revise.json`):
 | 实体 | id 来源 | 备注 |
 |---|---|---|
 | chara | `weapons.base_id` (4 位、如 1001) | 同 base_id 多 variant 按 evolve_count 聚合到 states |
-| chara state | 内嵌 `variant_id` = `weapons.id` (6 位、如 100101) | state 内反查record |
+| chara state | 内嵌 `variant_id` = `weapons.id` (6 位、如 100101) | state 内 variant record |
 | soul | `jobs.id` (1-991237 大范围) | 不建 wiki name 反查表 |
 | crystal | `materials.id` | 同 |
 | bladegraph | `pictures.id` | 同 |
@@ -57,7 +57,7 @@ server-fold 字段 (非 master 直给、走 `*_revise.json`):
 
 下表是 **560 (v2.5.34) 编号**:91 项、id 0-90、None=0 是 sentinel。561 (v2.5.35) 在 28 插入 `Blaze_DamageLimitBreak`、
 在 67 插入 `Enemy_BreakDamageLimitBreak`(共 93 项、0-92),插入点之后整体后移
-(换算见 11_parameters.md )。
+。
 master 里 parameter 存的是名字字符串,本项目也只按名字用,编号只作对照。
 
 | id 范围 | 段 | 说明 |
@@ -76,8 +76,7 @@ master 里 parameter 存的是名字字符串,本项目也只按名字用,编号
 | 78-87 | BD / EXP / 掉落 | AnyElement / BlazeGauge / EventDropRate / MaterialExp 等 |
 | 88-90 | Prayer / Rise_AttackRate / Rise_DefenseRate | 祈祷 / 攻防效果放大 |
 
-完整含义对照: [
-战斗 step 引用:  
+完整含义对照: `scripts/tools/gen_table_md.py` 生成,JS# / BE# 为 561 编号
 
 ### 2.2 MATH_TYPE
 
@@ -96,7 +95,7 @@ master 里 parameter 存的是名字字符串,本项目也只按名字用,编号
 > ⚠ 老文档里的 **`Reduce100`** 就是现在的 `Repel_Percent`(同一个 math=3 槽位、旧名)。
 > BE 侧 enum 是 `None=0 / Addition=1 / Multiply=2 / Repel_Percent=3`,**跟  的 Mul/Add 编号互换**。
 > 合并式是独立概率 OR:`(1 − Π(1 − p_i)) × 100`、`p_i = clamp(v_i, 0, 100) / 100`
-> (11_parameters.md );`repelRate` 已按此实现,
+`repelRate` 已按此实现,
 > 见 [hensei_calc.md](hensei_calc.md#repel_percent-独立通道)。
 > 命中的 parameter 只有 6 个 proc-rate 类:`Mez` / `Stun` / `InstantDeath` / `BlazeAbsorb` /
 > `RateDamage` / `BlazeLockPurge`。
@@ -115,10 +114,10 @@ wiki 5 值 `condition` enum 在 master 拆成多字段：
 
 | parameter prefix | 含义 | runtime 公式 |
 |---|---|---|
-| `Vitality_*` | 浑身 (HP 多越强) | `r = clamp(HpRate, 0, 1)`、**池值** `P` → `1 + r(P − 1)` 详 02_psv_gates.md  |
+| `Vitality_*` | 浑身 (HP 多越强) | `r = clamp(HpRate, 0, 1)`、**池值** `P` → `1 + r(P − 1)` |
 | `RemHP_*` | 背水 (HP 少越强) | `r = clamp(1 - HpRate, 0, 1)` 同上 |
 | `Break_*` | 破損 | hard gate `IsBreak` (`HpRate ≤ 0.5`)、整段跳 |
-| `FellDown_*` | 队友倒地 | 自身 `Hp == 0` → 旁路;否则 `r = 倒下的队友 / max(人数 − 1, 1)`,插值同上 () |
+| `FellDown_*` | 队友倒地 | 自身 `Hp == 0` → 旁路;否则 `r = 倒下的队友 / max(人数 − 1, 1)`,插值同上 |
 | `Enemy_*` | 敵端 | `Enemy_BreakAttack` = EAD step 48/49 (敵 BK 时);`Enemy_Attack` / `Enemy_GuardBreak` 等按敵方属性过滤 |
 
 #### 限定条件（独立字段）
@@ -308,7 +307,7 @@ final damage
 | `defense` | 同 attack (魔装 Defense Mul、BH 同一倍率) | — | 同 attack | ✗ 半成品 |
 | `speed` | slot_Add + 魔装 Speed Mul (**无 BH**) | — | SpeedSkill + UpdateLatestRecover | ✗ 半成品 |
 | `break_value` | 类比 attack (无 BH) | — | ✓ 走 PSV `GuardBreak` 池 | ✗ 半成品 |
-| **`hit_counts[]`** | ✓ **server 预折叠编队 HitCount 加成**,每条 `trunc` + ≥1(17_hitcount.md )| (`HitCount` 只给 UI 面板 / 排序用) | 战斗中只有 `AttackCount` PSV/BSV 修正 (master 0 条) | ✓ |
+| **`hit_counts[]`** | ✓ **server 预折叠编队 HitCount 加成**,每条 `trunc` + ≥1 | (`HitCount` 只给 UI 面板 / 排序用) | 战斗中只有 `AttackCount` PSV/BSV 修正 (master 0 条) | ✓ |
 | **`motion_speed`** | ✓ 魔装 MotionSpeed Mul 折进 `weapon.motion_speed*` | — | ✓ × BoostAttackSpeed(PSV/BSV MotionSpeed **Mul 池**、无 Add 池) | — |
 | per-hit damage | — | — | ✓ EAD/PAD/EBD/PBD 累积链 | — |
 
@@ -324,7 +323,7 @@ final damage
 客户端 UI 侧的 `HitCount `HitCount` 只遍历魂的 job_skills、按 MathType 分组
 (先 Multiply 后 Addition),战斗装载不调用它。
 
-### Server-fold 公式 (-1.1.2)
+### Server-fold 公式
 
 **attack/defense/speed/break_value**（半成品、客户端在战斗中加动态部分）:
 
@@ -333,10 +332,10 @@ attack  = floor((raw_attack(含 level/mature/affection) + Σ slot_attack_add) ×
 defense = floor((raw_defense + Σ slot_defense_add) × BH × Π 魔装 Defense Mul)
 speed   = floor((speed + Σ slot_speed_add) × Π 魔装 Speed Mul)                         (无 BH)
 break   = 类比 attack (无 BH)
-# Π 魔装 Mul 含编队里「味方全体」魔王装的全队倍率 F = 1.75 + 0.00768 × 持有者熟度 ()
+# Π 魔装 Mul 含编队里「味方全体」魔王装的全队倍率 F = 1.75 + 0.00768 × 持有者熟度
 ```
 
-取整:实测里能区分 floor / 四舍五入的 38 个值全是 floor(evidence 2026-09-25 )。
+取整:实测结果全是 floor。
 
 **max_hp**（唯一完全 server-fold、slot 顺序影响 ±24%）:
 
@@ -346,11 +345,11 @@ max_hp = (max_hp_base + Σ_HP_Add_from_earlier_slots) × Π_HP_Mul + Σ_HP_Add_f
 
 理由：`parameter.HP`(561 = 76、560 = 74)在 `parameter` enum 里没对应、客户端 PSV 列表无 HP 类 entry、必须 server 一次性 fold 完。
 
-**BH (Burning Heart) 是连续值** ():
+**BH (Burning Heart) 是连续值**:
 `burning_heart = true` 时倍率在 **1.10 ~ 1.30** 之间(实测 37 例都是 0.01 的整数倍、上限 1.30),同一把魔剑在连续场次间逐级变化;
 攻撃力和防御力用同一个倍率。旧文的「×1.10(2 把)→ ×1.27(3 把)→ ×1.30」离散阶梯已被推翻。随场次 / 闲置时间怎么增减未量化。
 
-### Server push 的 weapon_skills block ()
+### Server push 的 weapon_skills block
 
 进副本时 server 推 `user_weapon.weapon.weapon_skills[]` 按 8 block 优先级追加：
 
@@ -370,7 +369,7 @@ max_hp = (max_hp_base + Σ_HP_Add_from_earlier_slots) × Π_HP_Mul + Σ_HP_Add_f
 block 顺序对 `Multiply` / `Addition` 池**数学等价**（结合律 + 交换律），`Repel_Percent`(math_type=3)的 OR 合并同样顺序无关;
 只有逐步截断的聚合(HitCount)才对顺序敏感。
 
-### 数据流（4 个 master view）(表)
+### 数据流（4 个 master view）
 
 | view 来源 | attack 含义 | slot Add 折叠 | BH 倍率 |
 |---|---|---|---|
@@ -502,7 +501,7 @@ server fold 公式 docs 完备、但 BH 的变化规律未公开。简化：不�
 
 ### 4.1 EAD step 表 (561)
 
-详见   — 4 个直接改 Total 的层 (step 4 / 10b / 51 / 53)。
+4 个直接改 Total 的层 (step 4 / 10b / 51 / 53)。
 
 简表 (非攻防互换 = 默认路径):
 
@@ -523,7 +522,7 @@ server fold 公式 docs 完备、但 BH 的变化规律未公开。简化：不�
 | 52 | RandomRate (`{1.00 … 0.95}` 6 档均匀) |
 | 53 | DefenseDamageSkill (敌方被动:连乘 / 清零 / 每 hit 伤害上限屏障) |
 
-EAD 出口在 `BattleDamage.出口`:先按 `[0, limitMaxDamage]` clamp、区间内再 `ceil`。
+EAD 出口先按 `[0, limitMaxDamage]` clamp、区间内再 `ceil`。
 
 ### 4.2 HP-curve scale 公式（前端复刻）
 
@@ -537,20 +536,5 @@ EAD 出口在 `BattleDamage.出口`:先按 `[0, limitMaxDamage]` clamp、区间�
 - IsBlaze gate: EAD step 1-3 + 27-38 在 `IsBlaze=true` 才跑;step 4 按 IsBlaze 选 LP 表;step 5 不受 gate
 - 自身 IsBreak (`HpRate ≤ 0.5`): EAD step 26 / 34 / 35 / 47 (Break_* 池)
 - 敌方 break: step 48 / 49 (`EnemyGuard.IsBreak` 现调)、step 51 ×3 (入参 isBreak 快照)
-- 详 02_psv_gates.md  / 
 
----
-
-## 5. 跨参考
-
-| 主题 | 链接 |
-|---|---|
-|  vs  偏移 / sentinel |  |
-| EAD step 表 |  |
-| EBD (敵端破甲) | .md |
-| PAD (玩家端攻) | 05_pad.md |
-| PBD (玩家端破甲) | 06_pbd.md |
-| Damage clamp / DamageLimitBreak | 09_damage_clamp.md |
-| 战斗 setup | |
-| 
 

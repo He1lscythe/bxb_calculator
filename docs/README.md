@@ -12,4 +12,4 @@
 
 本目录另有几份 **untracked**(.gitignore 排除、只在本机)的参考:`local_env.md`(占位符 →
 本机实际路径)、`motion_table.md`(`gen_motion_table.py` 生成)、`crystal_factor_infer.md`
-(結晶三因子反推报告)、`
+(結晶三因子反推报告)。

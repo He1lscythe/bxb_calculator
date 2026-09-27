@@ -10,7 +10,7 @@
 ```
 chara metadata (lv / 熟度 / 觉醒)
        ↓
-calcStat()  ←──── 觉醒倍率内嵌 (比 omoide 优先于 base)
+calcStat  ←──── 觉醒倍率内嵌 (比 omoide 优先于 base)
        ↓
    base stat
        ↓
@@ -25,7 +25,7 @@ collection: 遍历 3 slot、给每个 effect 打 source tag
 
 ## Base 计算 (stage 0)
 
-`calcStat()` ([shared/stats-calc.js](../shared/stats-calc.js)) 在进入 stage 1 之前已完成：
+`calcStat` ([shared/stats-calc.js](../shared/stats-calc.js)) 在进入 stage 1 之前已完成：
 
 - 等级公式: `max × (1 - (max_max_level - lv) / (max_max_level - 1) × initial / max)`
 - 熟度 → 等级上限: `min(max_max_level, initial_max_level + (mature - 1) × 5)`
@@ -70,16 +70,16 @@ omoide memory slot 加成走 stage 1、不参与 base 计算。
 s4/s5 的执行顺序 = trace 显示顺序 : 非 soul (slot 升序) → soul (slot 升序) → HP 曲線池 → BD、
 逐 effect apply (`shared/stats-calc.js applyStaged`)。Mul 之间可交换,顺序只影响 trace 的展示。
 
-## Apply 公式 (s1〜s8 + ceil、 校准 2026-09-26)
+## Apply 公式 (s1〜s8 + ceil)
 
-按  EAD step 表(step 4 / 10b / 51 / 53 四个 Total 层)简化、保留 hensei UI 关心的部分:
+按EAD step 表(step 4 / 10b / 51 / 53 四个 Total 层)简化、保留 hensei UI 关心的部分:
 
 ```
-v = floor(base)                                       Stage 0 base (server-fold floor、)
+v = floor(base)                                       Stage 0 base (server-fold floor)
 v += Σ(stage 1 omoide Addition × cf)                  Stage 1 omoide Add (实测 affection_threshold gate)
 v += Σ(stage 2a masou Addition × cf)
 v *= Π(stage 2b masou Multiply × cf) × 燃心           Stage 2 masou (Add → Mul) + BH
-v = floor(v)                                          Stage 2 終 server-fold floor (01_setup :floor((raw+slot)×BH×魔装Mul))
+v = floor(v)                                          Stage 2 終 server-fold floor
 v *= lpMult                                           Stage 3 × LP tier (step 4、× Total 直接层)
 v *= Π(s4a 非soul Multiply × cf)                      Stage 4a chara_skill / crystal / bg / 結婚 / omoide_mul / enemy_buff / AllTarget (slot 升序)
 v *= Π(s4b soul Multiply × cf)                        Stage 4b soul / soul_affinity (slot 升序、排非 soul 后)
@@ -96,7 +96,7 @@ v = ceil(v)                                           出口 ceil (唯一 round 
 **取整位置**:
 - Stage 0 base = `floor(_baseStatRaw)` (server-fold 模拟、chara 创建时 server 已 int)
 - **Stage 2 終 floor** : base + omoide + masou + 燃心 都是 server-fold、server 返回整数 → `floor(v)`
-- Stage 3 起 (client 侧 EAD pipeline) 全程 double、0 中间 round (: )
+- Stage 3 起 (client 侧 EAD pipeline) 全程 double、0 中间 round ()
 - 出口 ceil = client pipeline 唯一 round 点
 
 **没有模拟的 EAD step**:
@@ -117,18 +117,18 @@ v = ceil(v)                                           出口 ceil (唯一 round 
 - gate `enemy.bk=true` 时 condition_factor=1、否则 0
 - `baseParameter('Enemy_BreakAttack')` → `'Attack'` (本质是 Attack 倍率)
 
-**Stage 7 inline ×3** ( step 51):
+**Stage 7 inline ×3** (step 51):
 - enemy.bk=true 时 Total ×= 3
 - 跟 Stage 6 Enemy_BreakAttack 用**独立 gate** (cached isBreak vs fresh EnemyGuard.IsBreak)
 - 通常两 gate 等价、hensei 简化用同 `enemy.bk` flag
 
 ## HP / HitCount — 战前 server-fold (不走上面的 EAD 分组 pipeline)
 
-**攻撃力/防御力/ブレイク力** 走 in-battle EAD pipeline (applyStaged、Mul-then-Add 分组、 实证)。
+**攻撃力/防御力/ブレイク力** 走 in-battle EAD pipeline (applyStaged、Mul-then-Add 分组)。
 但 **HP 和 HitCount 是战前 (战斗开始时 / HitCount) server 一次性 fold 的、客户端不重算**:
 
-- **HP** : `max_hp = (base + Σ前置slot的HP-Add) × Π自身HP-Mul + Σ后置slot的HP-Add`、**slot 顺序敏感** (自身/靠前 slot 的加算落在乘算"内"、靠后 slot 落在"外")。**终值 `floor` 取整** (server max_hp 为整数、base 已 floor、;唯一一次取整、中间不 round)。
-- **HitCount** (): 战斗用的是 server 下发、**已预折叠编队 HitCount 加成**的 `weapon.hit_counts`
+- **HP**: `max_hp = (base + Σ前置slot的HP-Add) × Π自身HP-Mul + Σ后置slot的HP-Add`、**slot 顺序敏感** (自身/靠前 slot 的加算落在乘算"内"、靠后 slot 落在"外")。**终值 `floor` 取整** (server max_hp 为整数、base 已 floor、;唯一一次取整、中间不 round)。
+- **HitCount**: 战斗用的是 server 下发、**已预折叠编队 HitCount 加成**的 `weapon.hit_counts`
   (客户端的 `HitCount` 只给 deck 面板 / 排序用、战斗不调它)。server 的折法 (实测 273 / 273 吻合):
   每条加成 `h = max(1, trunc(h + v))` **各自截断**。加成来源:
   - 魂的 HitCount job_skill:`v = values[i] × 魂等级倍率`;属性 / 武器 / 魔剣条件按**被作用的魔剣**判 (跟别的魂技能按装备者判不同)
@@ -152,9 +152,8 @@ HitCount 的加成全是正数 Add 时逐条截断跟顺序无关;Multiply 类 H
 > (2026-08-28,见下节),只有 3 件全队魔王装的 11 条 effect 会真的从别的 slot 进来。
 > `orderServerFold` 的位次保留不变、以防将来又发现别的全队 costume。
 
-> ⚠ caveat: server 数组的 block 顺序见 (旧的  已归档);
-> hensei 是从多 wiki 源自己收集的、按此顺序**尽量贴近**、非逐位精确。HP 的 slot 顺序效应也是实测推算。
-> 实现: `serverFoldHP()` (HP)、`_computeImpl` hits loop (HitCount) 都调 `orderServerFold(list, targetSlotIdx)`。trace 里 HP 走独立 stage `s_hp_fold`。
+> ⚠ caveat: hensei 是从多 wiki 源自己收集的、按 server block 顺序**尽量贴近**、非逐位精确。HP 的 slot 顺序效应也是实测推算。
+> 实现: `serverFoldHP` (HP)、`_computeImpl` hits loop (HitCount) 都调 `orderServerFold(list, targetSlotIdx)`。trace 里 HP 走独立 stage `s_hp_fold`。
 
 ### HitCountKeepDamage (双效果、2026-06-19 用户)
 
@@ -170,31 +169,31 @@ HitCount 的加成全是正数 Add 时逐条截断跟顺序无关;Multiply 类 H
 `tr.bd_on=ON` 时 bd_skill.effects 当 buff 加入。各 effect 倍率/值 = `value + additional_value × bd_count`:
 - `bd_count` 来自 hensei BD toggle 右侧输入框(`tr.bd_count`、默认 = `bd_skill.cost`、范围 0..bdCapMax)。
 - 例 天業剣クリーフォート bd effect `value=20.48, additional_value=1.36`,bd_count=7 → 20.48 + 1.36×7 = 30.00。
-- 游戏里这个 count 是 `BeforeBlazeCount` = use_all BD 放出瞬间的剑炎槽数 ;
+- 游戏里这个 count 是 `BeforeBlazeCount` = use_all BD 放出瞬间的剑炎槽数;
   非 use_all 的 BD 不更新它 → 附加值不叠。master 里 `additional_value ≠ 0` 的 8 条全是 use_all,所以默认取 cost 没问题。
 - **range=Single 的 BD buff** 进的是 `IndividualBuff` 池,只有攻速 (`攻速`) 和伤害上限 (EAD prologue) 查它;
-  攻撃 / 防御 / ブレイク / 転速 查的 `BuffSkillValue` 只认 range=All 。
+  攻撃 / 防御 / ブレイク / 転速 查的 `BuffSkillValue` 只认 range=All。
   所以 Single 的这几类 BD buff 不算 (master 里 Speed Single 3 条;Attack / Defense / GuardBreak 没有 Single)。
 
-## Defense stat 公式 ( PAD step 3)
+## Defense stat 公式 (PAD step 3)
 
 hensei「防御力」显示 = `s10` (玩家防御吸收量、damage units) = `base × Π Mul + Σ Add`。
 
 ****:
-- 只显示玩家防御值、**不算被打时最终伤害** (即不模拟  `final_damage = prevTotal × s8 + max(0, prevTotal × (1 - s8) - s10)` 公式中的 final_damage、只显示 s10)
-- **SwapAttackDefense=true 模式** (剑魂特殊玩法、 表)**不考虑**、所有 Attack/Defense chain 按 `swap=false` (正常对战)
+- 只显示玩家防御值、**不算被打时最终伤害** (即不模拟 `final_damage = prevTotal × s8 + max(0, prevTotal × (1 - s8) - s10)` 公式中的 final_damage、只显示 s10)
+- **SwapAttackDefense=true 模式** (剑魂特殊玩法)**不考虑**、所有 Attack/Defense chain 按 `swap=false` (正常对战)
 
-简化模型跟  phase 1-5 累积公式数学等价 (mul/add 累积、phase 顺序不影响结果)、跳过 7 phase 内部细分。
+简化模型跟 phase 1-5 累积公式数学等价 (mul/add 累积、phase 顺序不影响结果)、跳过 7 phase 内部细分。
 
 **Defense stat 流经的 stage** (跟 Attack 不同点):
-- ✅ Stage 1-2 (omoide / masou Add+Mul / 燃心) 同 —— BH 对 attack 和 defense 用同一个倍率 ()
+- ✅ Stage 1-2 (omoide / masou Add+Mul / 燃心) 同 —— BH 对 attack 和 defense 用同一个倍率
 - ❌ Stage 3 LP × (LP 是 Attack 系 step 4、Defense 不接、`opts.lpMult=1` 默认)
 - ✅ Stage 4-5 (other Mul/Add) 同 — 含 `Vitality_Defense` / `RemHP_Defense`(s4h 池)/ `Break_Defense` (`baseParameter` strip → 'Defense')
 - ✅ Stage 6 `Enemy_BreakDefense` (master 实际无、兼容)
 - ❌ Stage 7 inline ×3 (是 Attack 系 step 51、Defense 不接、`opts.enemyBkX3=1` 默认)
 - ✅ 出口 ceil
 
-**ブレイク力** ( / -) = 每 hit 的破甲量:`Destruction × AllTargetRate × PSV/BSV(GuardBreak) Mul + Add`,
+**ブレイク力** = 每 hit 的破甲量:`Destruction × AllTargetRate × PSV/BSV(GuardBreak) Mul + Add`,
 × MP 惩罚,再 × **属性 × 敵BK 的 4 格净倍率**(s7_ebd),最后 ceil 一次。跟 Attack 不同:
 **不查魂的属性 / 武器相性表**(EBD 只查敌方属性表)→ `soul_affinity` 不乘ブレイク力;没有 LP、没有 BK ×3、
 没有 HP 曲線 / Break 门;s8 的敌方倍率 (相性 / 難度 / 有利武器 / BD cap) 也不乘。
@@ -206,26 +205,26 @@ hensei「防御力」显示 = `s10` (玩家防御吸收量、damage units) = `ba
 
 - 「敌方弱我方属性」= EBD 读到的敌方属性表 rate > 1.0。这跟 EAD step 9 是同一张表,hensei 用攻撃力那张相性表
   (`elementMatchupMult`,普通副本 ×2 / ×0.5、ギルバト 15 / 10 / 0.1)的倍率 > 1 来判。
-- 常数 `1.2f` / `0.1f` 是 float 字面量加宽成 double(1.2000000476837158 / 0.10000000149011612、),
+- 常数 `1.2f` / `0.1f` 是 float 字面量加宽成 double(1.2000000476837158 / 0.10000000149011612),
   所以乘出来比十进制值略大:整数 × 0.1 后 ceil 会 +1(例 1000 → 101),游戏也一样。
 - 默认敌人 (無属性・非 BK) 下是 ×0.1,所以ブレイク力显示值约为魔剣面板上的 1/10。
 - 没模拟:EBD 末尾的 RandomRate (取 1.00) 和 DefenseBreakSkill (敌方被动)。
 
-**soul_affinity 给 Defense 用 negative_value** ( phase 2 ElementDefRate × WeaponDefRate 对应):
-- Attack/BK 路径用 soul `positive_value` ( EAD step 7-8)
-- Defense 路径用 soul `negative_value` ( phase 2)
+**soul_affinity 给 Defense 用 negative_value** (phase 2 ElementDefRate × WeaponDefRate 对应):
+- Attack/BK 路径用 soul `positive_value` (EAD step 7-8)
+- Defense 路径用 soul `negative_value` (phase 2)
 
 **未实施 / 暂略**:
 - `MinDamageRate` (master `min_damage_rate` 2-5%): 保底伤害比例、计算 incoming damage 用、UI 不显示
 - `JustGuard_MinDamage` (PSV param 62): JG 时修正保底比例、同上
--  7 phase 内部细分 (简化、数学等价无影响)
+- 7 phase 内部细分 (简化、数学等价无影响)
 
 `condition_factor` 在 collection 阶段算好、跟 value 配套存（`hp_pct` = **接收方 target 自身 HP%**，range=All 的 HP-curve buff 从别 slot 来时看接收方而非 source，2026-06-19 修正）：
 - HP-curve `Vitality_*`: `factor = hp_pct / 100`
 - HP-curve `RemHP_*`: `factor = (100 - hp_pct) / 100`
 - Break gate `Break_*`: `factor = 1 if hp_pct <= 50 else 0` (IsBreak = HpRate ≤ 0.5、含等号)
 - FellDown `FellDown_*`: 自身 hp=0 → 0 (HpEmpty 旁路);否则 `factor = 倒下的队友数 / max(出战人数 − 1, 1)`
-  ( `PlayerList.FellDownRate`;出战人数 = `teamSize` 内有魔剣的 slot 数)
+  (`PlayerList.FellDownRate`;出战人数 = `teamSize` 内有魔剣的 slot 数)
 - 元素/武器/chara 限定不命中: `factor = 0`
 - 无 condition: `factor = 1`
 
@@ -235,8 +234,7 @@ v *= 1 + (value - 1) × factor
 ```
 factor=0 时不衰减 (×1)、factor=1 时全量 (×value)。
 
-**HP 曲線池 (`Vitality_` / `RemHP_` / `FellDown_`) 不是按条插值**( /  的 SkillRate wrapper、
- `VariableSkillRate`):游戏先把同一 parameter 的全部条目 (各 source、含队友 range=All) 连乘成池值 `P`,
+**HP 曲線池 (`Vitality_` / `RemHP_` / `FellDown_`) 不是按条插值**(`VariableSkillRate`):游戏先把同一 parameter 的全部条目 (各 source、含队友 range=All) 连乘成池值 `P`,
 再插值一次:
 ```
 v *= (P > 0 && P ≠ 1) ? 1 + r × (P − 1) : 1          r = 上面的 factor (同一池同一接收方、同一个 r)
@@ -264,7 +262,7 @@ v *= (P > 0 && P ≠ 1) ? 1 + r × (P − 1) : 1          r = 上面的 factor (
 
 - 新增同类 (条件只在描述的专属技能) → 表加一行 + `pushEff` 加对应 factor 分支即可。
 
-### Rise_AttackRate 放大器 (meta-pass、2026-06-23 / 2026-09-26 按 – 改)
+### Rise_AttackRate 放大器 (meta-pass、2026-06-23 / 2026-09-26)
 `Rise_AttackRate` 是元倍率「**魔剣が持つ攻撃力アップスキルを V 倍受ける(潜在Skill除く)**」。游戏在 Attack 系池
 (step 17 / 21 / 22 / 23 / 26 / 41 / 47)的 fold 循环里、**每条 `is_original_skill=true` 的条目** fold 完后 `acc ×= R`,
 即 N 条 original 就放大 `R^N`。collectEffects 收完所有 effect 后做一次 meta-pass 复刻:
@@ -281,8 +279,6 @@ v *= (P > 0 && P ≠ 1) ? 1 + r × (P − 1) : 1          r = 上面的 factor (
 ## DamageLimitBreak (DLB) — 每 hit 伤害上限 (ダメ上限)
 
 面板的「ダメ上限」和ギルバト スコア 的每 hit 封顶用它;**攻撃力 stat 本身不被它 clamp**(攻撃力显示的是 clamp 前的 Total)。
-按 09_damage_clamp.md  / :
-
 ```
 limitMaxDamage = floor((2^31 - 1) × ΠMul + ΣAdd)        Mul 池、Add 池分开 fold,Add 永远在 Mul 外面
 final_damage   = clamp(ceil(Total), 0, limitMaxDamage)
@@ -299,7 +295,7 @@ final_damage   = clamp(ceil(Total), 0, limitMaxDamage)
 `Repel_Percent` 不影响 stat 数值、是 status 回避率。命中的 parameter 只有 6 个 proc-rate 类:
 `Mez` / `Stun` / `InstantDeath` / `BlazeAbsorb` / `RateDamage` / `BlazeLockPurge`。
 
-**独立概率 OR 合并** (`repelRate`、跟游戏一致 —— 11_parameters.md ):
+**独立概率 OR 合并** (`repelRate`、跟游戏一致):
 
 ```
 p_i        = min(value_i × condition_factor_i, 100) / 100      # value < 0 → 该条不贡献
@@ -329,7 +325,7 @@ repel_rate = (1 − Π(1 − p_i)) × 100
 - **「最終加算」** (`calc_type=2`): 早期 plan 假想字段、master 没对应、彻底废弃
 - **「最終乗算」** (`calc_type=3`): 同上
 
-`utils.js` `ctPfx()` 不再覆盖 calc_type 2/3/4。adapter `_MATH_TYPE_TO_CALC` 表只保留 Multiply/Addition/Repel_Percent。
+`utils.js` `ctPfx` 不再覆盖 calc_type 2/3/4。adapter `_MATH_TYPE_TO_CALC` 表只保留 Multiply/Addition/Repel_Percent。
 
 ## 实现
 
@@ -346,7 +342,7 @@ repel_rate = (1 − Π(1 − p_i)) × 100
 - crystal: 收集时 `crystalEffectiveValue(cr, cfg)` (lv/weight/purity 三参公式)
 - masou: 收集时补 `range: eff.range || 'Single'` — 见下节
 
-### masou (costume) 的 server fold 与魔王装 (、2026-09-26 实测对照)
+### masou (costume) 的 server fold 与魔王装 (2026-09-26 实测对照)
 
 server 按 parameter 把魔装效果分两路,同一条不会两路都走:
 
@@ -411,7 +407,7 @@ UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的
   所以**面板上的数字就是计算真正用的数字**(测试 `装備パネル: 显示行 (発動中) 的条数 == 计算实际用到的装備 effect 条数` 锁死)。
   例外是 HP 曲線池:同池多条且 HP 不满时计算按池插值、面板仍逐条显示(见上面 HP 曲線池一节)。
 - **画装在不符的魔剣上**(画级 `element_ids` / `weapon_type_ids` 或技能级 `element_id` / `weapon_type_id` 跟装备者不符):
-  server 不下发 ( 的 -4),计算路径丢弃、面板显示为未发动。
+  server 不下发 (的 -4),计算路径丢弃、面板显示为未发动。
 - **限时的画技能**(`start_time` / `end_time`、如 7095「攻撃力が25%UP」9:00〜12:00,159 张画各一条):
   游戏里时段外 server 不下发;hensei **按全时段生效算**、不看时刻。
 - **跨 slot 技能落到目标 slot**:`collectEffects` 本来就按 `range` + 属性/武器/魔剣限定 判过命中,
@@ -430,27 +426,26 @@ UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的
 
 | 値 | 公式 | 实现 |
 |---|---|---|
-| Hit1-3 | server 预折叠 ():按 `orderServerFold` 顺序逐 effect、每步 `cur = trunc(cur op val)` + **每步 clamp ≥1**、终 `max(1)` | `_computeImpl` hits loop |
+| Hit1-3 | server 预折叠:按 `orderServerFold` 顺序逐 effect、每步 `cur = trunc(cur op val)` + **每步 clamp ≥1**、终 `max(1)` | `_computeImpl` hits loop |
 | フルヒット攻撃力 | `floor(Attack × Σhits)` | 同上 |
 | ダメ上限 | `floor(2^31-1 × ΠMul + ΣAdd)` DamageLimitBreak 池、Mul / Add 分池 | 同上 |
 | 転速 | **两段**:① server-fold `recover = floor((base.Speed + Σ omoide Speed Add) × Π 魔装 Speed Mul)` ② client `latestRecover = max(0, Σ其他Add + (soul_lv/100+1) × ΠMul × recover)`,ΠMul 里 Vitality/RemHP/FellDown_Speed 按池插值。cooldown = `max(1, ceil(6000/latestRecover))` fr。`base.Speed` **不含觉醒段**(熟度 cap 处封顶) | `_computeSpeed` |
-| 攻速 1-3 | `motion_speed_i × ΠMul`(**没有 Add 池**、;Vitality/RemHP_MotionSpeed 按池插值)、帧 = `1 + max(1, ceil(dur/spd × 60))` | `_computeMotionSpeed` |
+| 攻速 1-3 | `motion_speed_i × ΠMul`(**没有 Add 池**;Vitality/RemHP_MotionSpeed 按池插值)、帧 = `1 + max(1, ceil(dur/spd × 60))` | `_computeMotionSpeed` |
 | BD上限 max | `max(9, floor((9 + Σadd) × Πmul))` BlazeGaugeMaxLevel 池 | `_computeImpl` |
-| 初期BD | BlazeGauge Add (mode 1 直接 / mode 2 队伍属性 count) → 在 `blaze_gauge_points` 上 cumsum 反查 level。`blaze_gauge_points` 按  单一公式:`F = Π 魔剣 skill × Π(魂 value × soulMultiplier)`、`pts[i] = floor(100F)` (i<9) / `floor(100 × 1.4k × F)` (i≥9)。魂的 L(level) 取魂等级倍率是 实测推断,Lv1 以外没有实测 | `computeBlazeGaugePoints` + `bdCapFromBlazeGauge` |
+| 初期BD | BlazeGauge Add (mode 1 直接 / mode 2 队伍属性 count) → 在 `blaze_gauge_points` 上 cumsum 反查 level。`blaze_gauge_points` 按公式:`F = Π 魔剣 skill × Π(魂 value × soulMultiplier)`、`pts[i] = floor(100F)` (i<9) / `floor(100 × 1.4k × F)` (i≥9)。魂的 L(level) 取魂等级倍率是 实测推断,Lv1 以外没有实测 | `computeBlazeGaugePoints` + `bdCapFromBlazeGauge` |
 
 ### 転速 两段的依据 (2026-08-23 修正 / 2026-09-26 魔装改进 server-fold)
 
-`07_speed.md ` 的 `latestRecover = max(0, add_acc + (PartnerLevel/100+1) × mul_acc × recover)`
-里三个量各有明确出处(561):
+`latestRecover = max(0, add_acc + (PartnerLevel/100+1) × mul_acc × recover)` 里三个量各有明确出处(561):
 
 - **`recover` = `WeaponData ObscuredFloat` = server 推的 `speed` 字段**、不是裸曲线值。
-  ``: `speed = floor((speed + Σ slot_speed_add) × Π 魔装 Speed Mul)`,并注明 slot Add 来源 =
+  server fold 公式: `speed = floor((speed + Σ slot_speed_add) × Π 魔装 Speed Mul)`,并注明 slot Add 来源 =
   `UserWeaponMemorySlot[].weapon_skill` —— 即 **omoide 记憶結晶槽**。
   → omoide 的 Speed Add 和魔装的 Speed Mul 都属 server-fold 段、在 `mul_acc` **之前**、再 `floor`。
 - **`add_acc` = `PSV(Speed, Add)` fold** = client passive skill 池、**不含 omoide**。
-- **魔装 Speed Mul 是 server-fold**(,实测 6 例 `speed = floor((列表 speed + Σslot Add) × 魔装 Mul)` 全吻合,
+- **魔装 Speed Mul 是 server-fold**(实测 6 例 `speed = floor((列表 speed + Σslot Add) × 魔装 Mul)` 全吻合,
   魔装的 Speed 效果不以 `-7` 下发)。2026-08-23 版这里的推论(「costume 以 `-7` 留在 client 数组、所以走 `mul_acc`」)
-  依据的是现已归档的  / ,-7 只承载 server 不折的那些 parameter。
+  已废,-7 只承载 server 不折的那些 parameter。
 
 > 影响面: omoide 数据里 `Speed`+`Addition` 共 **15,233** 条(涉 647 个魔剣、「スピードUP」系),
 > 是転速最普遍的加成来源;旧实现把它们放在乘法外面,每点被少算 `(mul_acc − 1)` 倍。
@@ -495,7 +490,7 @@ UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的
 |---|---|---|---|
 | `omoide` | s1 (Add) | Addition | tr.omoide_picks 选中的 memory slot |
 | `omoide_mul` | s4a (Mul) | Multiply | omoide source 的 Mul effect |
-| `masou` (静的、Attack / Defense) | s2a (Add) → s2b (Mul) | Add or Mul | 装备 masou.effects、server 折进 attack / defense ()。缺省只作用自身 —— 见下节 |
+| `masou` (静的、Attack / Defense) | s2a (Add) → s2b (Mul) | Add or Mul | 装备 masou.effects、server 折进 attack / defense 。缺省只作用自身 —— 见下节 |
 | `masou` (其它) | s4a / s5a / s4h | Mul / Add | HP-curve 前缀 (Vitality_/RemHP_/Break_/FellDown_) 或 Attack / Defense 以外的 parameter — 以 `-7` 走 client PSV |
 | **LP tier** | **s3 (× Attack)** | Multiply | `opts.lpMult` 入口决定 (computeStats HpCheck / computeStatsBlaze LpCheck) |
 | `chara_skill` | s4a (Mul) / s5a (Add) | Mul / Add | chara state.weapon_skills |
@@ -509,8 +504,8 @@ UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的
 | `soul` | **s4b / s5b** (排非 soul 后) | Mul / Add | 装备 soul.skills (× soulMultiplier) |
 | `soul_affinity` | **s4b** (Mul) | Mul | soul 元素 + 武器 相性倍率 (固定乘、攻撃 / 防御) |
 | HP 曲線池 | **s4h** (Mul) | Mul | 任何 source 的 `Vitality_` / `RemHP_` / `FellDown_` 同 parameter 合一池、`1 + r(Π − 1)` |
-| `enemy_break` | **s6 (Mul → Add)** | Mul / Add | parameter 前缀 `Enemy_Break_*`、gate `enemy.bk` ( step 48/49) |
-| **inline ×3** | **s7 (× Attack)** | Multiply | `opts.enemyBkX3` step 51、enemy.bk gate () |
+| `enemy_break` | **s6 (Mul → Add)** | Mul / Add | parameter 前缀 `Enemy_Break_*`、gate `enemy.bk` (step 48/49) |
+| **inline ×3** | **s7 (× Attack)** | Multiply | `opts.enemyBkX3` step 51、enemy.bk gate  |
 | **EBD 4 格** | **s7_ebd (× BK)** | Multiply | 只ブレイク力:弱点 × 敵BK 的 ×1.8 / ×1.2 / ×1.5 / ×0.1 () |
 | enemy mods | **s8 (× Attack)** | Multiply | 属性相性 (全局)、難度/BK耐性/有利武器 (guild gate)、BD cap — `_computeEnemyMods` 硬编码倍率、stage 后乘 + ceil |
 
@@ -560,7 +555,7 @@ console 输入 `window.__DEBUG_STATS = true` → 切控件时输出：
 
 测试公式校准依据:
 - soul effect: `soulMultiplier(rarity, lv)` × `effect.value` (v1 main:js/stats-calc.js L210)
-- LP: 4 档 `[1.0, 1.1, 1.5, 2.0]` 普通 / `[1.0, 1.3, 2.0, 5.0]` Blaze ()
+- LP: 4 档 `[1.0, 1.1, 1.5, 2.0]` 普通 / `[1.0, 1.3, 2.0, 5.0]` Blaze
 - HitCount: 逐段、逐 effect 序贯、按 `orderServerFold`(server 拼接顺序、不分组 Mul/Add)、每步 `cur = trunc(cur op val)` + **每步 clamp ≥1** :
   `cur = trunc(cur op effVal); if cur<=0: cur=1` 逐 effect、终值 `max(1, cur)`
   例: base 3、soul Add +6 (×1.8 等级) → floor(3+10.8)=13 → 下一 effect 从 13 起
@@ -628,10 +623,10 @@ hensei 编成页 guild 模式 (`enemy.mode = guildbattle / guildbattle_special`)
 ### 模型 (高频重叠 loop)
 
 ```
-loopFrames  = (f1+f2+f3) + 1 + (cdF+setF) + 1        #  十帧模型: 3段攻速 + BT + 転速 + BT
+loopFrames  = (f1+f2+f3) + 1 + (cdF+setF) + 1        # 十帧模型: 3段攻速 + BT + 転速 + BT
 loopSeconds = loopFrames / 60                         # 最小 10fr (攻速 2+2+2 + cd1 + set1 + 2)
 offset[i]   = Σ_{j<i} f_j / 60                        # 段 i 起跑偏移 = 前面各段攻速帧累计
-perHit      = mean_{r∈{1.00..0.95}} min(dl, aMax×r)   # 波动率 6 档均匀 (03_ead.md )、每档各自吃 dl 封顶
+perHit      = mean_{r∈{1.00..0.95}} min(dl, aMax×r)   # 波动率 6 档均匀、每档各自吃 dl 封顶
 
 win = clamp(startSeconds, 0, 40)                      # 開始秒 = 剩余输出时间 = 窗口长度 (缺省=满窗口)
 for k while k×loopSeconds < win:                      # loop 每 P 重开、hit 列后台并行堆叠 (不等打完)
