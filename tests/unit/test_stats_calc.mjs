@@ -765,6 +765,7 @@ test('omoideEffectiveScaling helper: description 含「熟度」+ scaling null �
   const { omoideEffectiveScaling } = await import('../../shared/hensei-helpers.js');
   assert.strictEqual(omoideEffectiveScaling({ value_scaling: null, description: '熟度UPで効果値UP' }), 0.003);
   assert.strictEqual(omoideEffectiveScaling({ value_scaling: 0, description: '熟度' }), 0.003);
+  // 真值优先 (重新实测后)
   assert.strictEqual(omoideEffectiveScaling({ value_scaling: 0.008, description: '熟度' }), 0.008);
   // 无熟度描述 → 0
   assert.strictEqual(omoideEffectiveScaling({ value_scaling: 0, description: '攻撃力UP' }), 0);
