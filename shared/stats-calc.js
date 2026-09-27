@@ -50,7 +50,7 @@ import { conditionFactor, HP_CURVE_PFX as _HP_CURVE_PFX } from './parameter-clas
 // 倍率四舍五入到 5 位小数 (复刻游戏精度): ×1.894815 → ×1.89482 再乘算
 const _round5 = (x) => Math.round((Number(x) || 0) * 1e5) / 1e5;
 
-// MP rate (、攻撃力/ブレイク力 × rate): mp_ratio = curMp / maxMp
+// MP rate (攻撃力/ブレイク力 × rate): mp_ratio = curMp / maxMp
 //   mp_ratio < 0.5 → rate = 1 − (20/21)·√(1 − 2·mp_ratio);  否则 → 1.0
 //   curMp=null → 满 → rate 1;curMp=0 → 1/21 (跟旧 have_mp=false 一致)
 export const mpRate = (curMp, maxMp) => {
@@ -248,7 +248,7 @@ const SKILL_COND_OVERRIDE = {
   80198: { type: 'team_has', wbid: 1182 }, // 魔天猫ルコ 同編成で 味方全体ダメージ上限+2.2億
   80199: { type: 'team_has', wbid: 1528 }, // 魔天猫リーナ×ロスト 同編成で 全属性攻撃モーション加速
 };
-// range=Single 的 BD buff 只有这两类有人查 (IndividualBuff 池:攻速 的攻速、EAD 的伤害上限)
+// range=Single 的 BD buff 只有这两类有人查 (IndividualBuff 池:攻速、EAD 的伤害上限)
 const _BD_SINGLE_PARAMS = new Set(['MotionSpeed', 'DamageLimitBreak']);
 
 // ============================================================
@@ -334,7 +334,7 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
       value,
       condition_factor: factor,
     };
-    // is_original_skill = 魔剣自带技能 (Rise 放大对象、);結晶/画/魂/好感/魔装 都是 false
+    // is_original_skill = 魔剣自带技能 (Rise 放大对象);結晶/画/魂/好感/魔装 都是 false
     if (source === 'chara_skill' && raw.is_original_skill !== false) entry._orig = true;
     if (forDisplay) {
       entry._raw = raw;
@@ -392,7 +392,7 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
       const bdCount = trSlot.bd_count != null ? trSlot.bd_count : (cMaster.bd_skill.cost ?? 0);
       for (const eff of cMaster.bd_skill.effects) {
         // range=Single 的 BD buff 进的是 IndividualBuff 池、只有 MotionSpeed / ダメ上限 查它;
-        // 攻防 / BK / 転速 查的 BuffSkillValue 只认 range=All 
+        // 攻防 / BK / 転速 查的 BuffSkillValue 只认 range=All
         if (eff.range === 'Single' && !_BD_SINGLE_PARAMS.has(baseParameter(eff.parameter))) continue;
         const scaled = (eff.value || 0) + (eff.additional_value || 0) * bdCount;
         pushEff(slot.chara, i, 'bd_skill', eff, {
@@ -615,7 +615,7 @@ export function collectEffects(team, targetSlotIdx, ctx, opts = {}) {
   }
 
   // === Rise_AttackRate 放大器 (meta-pass): 目标自身有 Rise_AttackRate (魔剣固有) →
-  //     池里每条 is_original_skill=true 的 Attack 系 (base_parameter==='Attack') 增益 ×V 。
+  //     池里每条 is_original_skill=true 的 Attack 系 (base_parameter==='Attack') 增益 ×V。
   //     true 的只有魔剣自带技能 (含队友 range=All 打过来的) 和結婚;結晶 / 画 / 魂 / 好感 / 魔装 / 公会都是 false。
   //     Enemy_BreakAttack (step 48) 不走 Rise。目前仅 1508 蒼き悪竜の渇欲 / 1530 もちもち (均 ×2.5)。
   // 排除 _inactive: forDisplay 保留下来的未发动条目若被当成放大器、面板就会跟计算结果对不上
@@ -645,7 +645,7 @@ function emblemLvMaxLocal(rarity) {
 // EAD pipeline apply
 // ============================================================
 //
-// 4 个 Total 层 (step 4 / 10b / 51 / 53) 全程 double、0 中间 round。
+// EAD pipeline: 4 个 Total 层 (step 4 / 10b / 51 / 53) 全程 double、0 中间 round。
 // 唯一 ceil 在出口。故 stage 内部不做 floor/ceil、最末才 ceil。
 // 没模拟的:step 5 BlazeRankRate 放在 s8 (enemy.bd_cap)、step 52 RandomRate 由 guild-score 取均值、
 // step 53 DefenseDamageSkill (敌方被动) 不算。
@@ -711,7 +711,7 @@ export function ebdCellApply(v, weak, bk) {
 // (v+(a+b) vs (v+a)+b) 由出口 _norm(1e9 round)+ceil 吸收。
 export function applyStaged(base, parameter, effects, opts = {}) {
   // AllTarget (全体化倍率) 是 Total 上的无条件一层:EAD step 10b × AllTargetRate、EBD base × AllTargetRate
-  //  → 攻撃力 / ブレイク力 都吃
+  // → 攻撃力 / ブレイク力 都吃
   const allTargetToo = parameter === 'Attack' || parameter === 'GuardBreak';
   const same = effects.filter(
     (e) => e.base_parameter === parameter
@@ -890,9 +890,9 @@ export function serverFoldHP(base, effects, targetSlotIdx, opts = {}) {
   return out;
 }
 
-// HitCount 战前 server-fold ():server 把编队的 HitCount 加成
+// HitCount 战前 server-fold: server 把编队的 HitCount 加成
 //   (魂 values × L、魔剣技能、HitCount 结晶) 预折叠进下发的 weapon.hit_counts,每条 h = max(1, trunc(h + v))。
-//   (客户端 HitCount 只给 UI 用、战斗不调它。) 这里按 orderServerFold 顺序逐 effect 做同样的截断;
+//   (HitCount 只给 UI 用、战斗不调它。) 这里按 orderServerFold 顺序逐 effect 做同样的截断;
 //   纯正数 Add 时截断跟顺序无关,只有 Multiply 类 (实测未出现、先后未验证) 才对顺序敏感。返回各段 hit 数组。
 export function serverFoldHitCount(baseHits, effects, targetSlotIdx, stHits = null) {
   const ordered = orderServerFold(
@@ -1054,7 +1054,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   const speed = _computeSpeed(chara, tr, slotIdx, ctx, effects, base, mkStage('s11_speed', '転速 (Speed)'));
   const motionSpeed = _computeMotionSpeed(chara, tr, effects, trace, mkStage('s12_motion', '攻速 (MotionSpeed)'));
 
-  // hits 逐段独立:server 预折叠 HitCount () + 战斗中的 AttackCount (、master 目前 0 条)
+  // hits 逐段独立:server 预折叠 HitCount + 战斗中的 AttackCount (master 目前 0 条)
   //   每 effect 的 _stages[i] 决定第 i 段 add/mul 的值
   const cMaster = chara._master;
   const stateData = cMaster?.states?.[tr.state] || Object.values(cMaster?.states || {})[0];
@@ -1065,7 +1065,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   const hits = serverFoldHitCount(baseHits, effects, slotIdx, stHits);
   const totalHits = hits.reduce((s, h) => s + h, 0);
 
-  // damageLimit — DamageLimitBreak Mul / Add 两个池分开 fold 
+  // damageLimit — DamageLimitBreak Mul / Add 两个池分开 fold
   //   damageLimit = floor(DEFAULT × ΠMul + ΣAdd)    Add 永远在 Mul 外面、跟 effect 顺序无关
   //   DEFAULT = 2^31-1 = 2,147,483,647 (BattleDamage..ctor 初始值)
   //   effect.value 已含 soul sourceMult (collectEffects pre-apply);cf 按 applyStaged 同式折
@@ -1112,7 +1112,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   }
   const bdCapMax = Math.max(9, Math.floor((9 + bdAdd) * bdMul));
 
-  // ========== BlazeGauge 系统 (按 user 决策正确顺序、) ==========
+  // ========== BlazeGauge 系统 ==========
   // Step 1: 先算 BlazeGaugePointRate pipeline → blaze_gauge_points 数组 (每 level 升级阈值)
   //   魔剣 skill BlazeGaugePointRate Mul → charaSkillProd
   //   soul skill BlazeGaugePointRate Mul → soulRates (含 lv / rarity 给 L(level) 用)
@@ -1195,21 +1195,21 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
 }
 
 // ============================================================
-// Speed / MotionSpeed —  / 
+// Speed / MotionSpeed
 // ============================================================
-// :
+// 计算公式:
 //   latestRecover = max(0, add_acc + (PartnerLevel/100 + 1) × mul_acc × recover)
 //   - recover    = WeaponData ObscuredFloat = **server 推的 speed**、不是裸曲线值。
 //                  `speed = floor((speed + Σ slot_speed_add) × Π 魔装 Speed Mul)`、
 //                  slot Add 来源 = `UserWeaponMemorySlot[].weapon_skill` (= omoide 记憶結晶槽)。
 //                  → omoide 的 Speed Add 和魔装的 Speed Mul 都属于 server-fold 段、在 mul_acc **之前**
-//                    折进 recover、再 floor (:实测 6 例全部 floor,魔装 Speed 不以 -7 下发)。
+//                    折进 recover、再 floor (实测 6 例全部 floor,魔装 Speed 不以 -7 下发)。
 //   - mul_acc    = PSV/BSV(Speed, Mul) × [IsBreak] Break_Speed × VSR(HpRate, Vitality_Speed 池)
-//                  × VSR(1−HpRate, RemHP_Speed 池) × [!HpEmpty] VSR(FellDownRate, FellDown_Speed 池) ()
+//                  × VSR(1−HpRate, RemHP_Speed 池) × [!HpEmpty] VSR(FellDownRate, FellDown_Speed 池)
 //   - add_acc    = PSV(Speed, Add) fold (init 0.0) —— client passive skill 池、**不含 omoide**
 //   - PartnerLevel = 装的 soul lv (未装 → 0、factor = 1.0)
 // returns { latestRecover, cooldownFrames, setFrames }
-//  条件 B:
+// cooldown 公式:
 //   cooldownFrames = max(1, ceil(6000 / latestRecover))   //  frame 9 IsWait v=1→v=0
 //                  当 latestRecover ≥ 6000 → 1fr (progress 一帧跨 100)
 //                  注: 等价于 ceil(100 × 60 / latestRecover) 总 cooldown 时长 100/recover 秒 × 60fps
@@ -1244,7 +1244,7 @@ function _computeSpeed(chara, tr, slotIdx, ctx, effects, base, traceStage = null
   }
   {
     const b = recover;
-    recover = Math.floor(recover);               // server push int (/ )
+    recover = Math.floor(recover);               // server push int
     if (traceStage && recover !== b) {
       traceStage.steps.push({ src: 'server-fold floor', stat: '転速', op: 'floor', val: null, before: b, after: recover });
     }
@@ -1287,13 +1287,13 @@ function _computeSpeed(chara, tr, slotIdx, ctx, effects, base, traceStage = null
   return { latestRecover, cooldownFrames, setFrames: 1 };
 }
 
-// :
+// 计算公式:
 //   effective_motion_speed_i = motion_speed_i × rate
 //   - motion_speed_1/2/3 = master state.motion_speed / motion_speed2 / motion_speed3
 //                          (魔装 MotionSpeed Mul 由 server 折进 weapon.motion_speed*、乘法等价、这里照常当 Mul)
 //   - rate = PSV/BSV(MotionSpeed, Mul) × VSR(HpRate, Vitality_MotionSpeed 池) × VSR(1−HpRate, RemHP_MotionSpeed 池)
-//            (攻速 → BoostAttackSpeed:**只有 Mul 池、没有 Add 池**,Addition 条目游戏不用)
-// : clip authored duration_sec (state.motion_durations) / effective → 实际段时长
+//            (攻速:**只有 Mul 池、没有 Add 池**,Addition 条目不用)
+// 实际段时长: clip authored duration_sec (state.motion_durations) / effective
 // 游戏 60fps、最终调度按帧、所以转 frames = ceil(dur/spd × 60) — 即使 40ms 也会 ceil 到 3fr
 // 返 { speeds: [effective_m1, m2, m3] 倍率, durationsFrames: [整数帧数] }
 function _computeMotionSpeed(chara, tr, effects, trace = null, traceStage = null) {

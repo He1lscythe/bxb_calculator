@@ -467,7 +467,7 @@ test('computeStats: HP-curve Vitality_Attack hp=50 → ×0.5 衰减', () => {
 });
 
 // ============================================================
-// 7. soul lv 公式 (v1 sourceMult、)
+// 7. soul lv 公式 (v1 sourceMult)
 // ============================================================
 test('soulMultiplier: 5★ Lv1 → 1.01', () => {
   assert.strictEqual(soulMultiplier(5, 1), 1.01);
@@ -909,7 +909,7 @@ test('computeStatsBlaze: lp=1 + bd_on 不影响表选择 (bd_on 只 toggle bd_sk
 });
 
 // ============================================================
-// 12. Speed (転速、)
+// 12. Speed (転速)
 //     latestRecover = add_acc + (PartnerLevel/100 + 1) × mul_acc × recover
 // ============================================================
 function _addSpeedSkills(c, skills) {
@@ -970,7 +970,7 @@ test('Speed cooldownFrames = max(1, ceil(6000/latestRecover)) + setFrames=1 ( �
   assert.strictEqual(r.speed.setFrames, 1);
 });
 
-test('Speed cooldown 下限 1fr (latestRecover ≥ 6000 时 progress 一帧跨 100、)', () => {
+test('Speed cooldown 下限 1fr (latestRecover ≥ 6000 时 progress 一帧跨 100)', () => {
   const c = _addSpeedSkills(mockChara(), [
     { parameter: 'Speed', math_type: 'Multiply', value: 10000, range: 'Single' },  // 巨大 recover
   ]);
@@ -994,7 +994,7 @@ test('Break_Speed gate by HP (HP=50 触发、HP=51 不触发)', () => {
 });
 
 // ============================================================
-// 13. MotionSpeed (攻速、)
+// 13. MotionSpeed (攻速)
 //     effective_motion_speed_i = motion_speed_i × boost_mul_acc + boost_add_acc
 // ============================================================
 // 注: r.motionSpeed = { speeds: [m1, m2, m3], durationsMs: [ms1, ms2, ms3] }
@@ -1098,7 +1098,7 @@ test('enemy element matchup: 火 vs 風 mode=normal → Attack ×2.0、BK 走 EB
   assert.strictEqual(r.stats['ブレイク力'], 1501);
 });
 
-test('EBD 4 格: 弱点 × 敵BK → ×1.8 / ×1.2 / ×1.5 / ×0.1 ()', () => {
+test('EBD 4 格: 弱点 × 敵BK → ×1.8 / ×1.2 / ×1.5 / ×0.1', () => {
   const run = (element, bk) => {
     const c = mockChara();   // 火属性
     const ctx = buildCtx([{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null], { enemy: { element, bk, mode: 'normal' } });
@@ -1552,7 +1552,7 @@ test('orderServerFold: bd_skill 排在所有 buff 最后 (战斗时生效、在 
 });
 
 // ============================================================
-// MP rate (、2026-06-21): 攻撃力/ブレイク力 × rate
+// MP rate: 攻撃力/ブレイク力 × rate
 // ============================================================
 test('mpRate: ratio≥0.5→1、ratio 0→1/21、null→满、maxMp 0→1', () => {
   assert.strictEqual(mpRate(null, 230), 1);            // null = 满 (默认)
@@ -1761,7 +1761,7 @@ test('画: 画级 element_ids / 技能级 element_id 按装备者判、不符不
   assert.strictEqual(run(2), 16250, '水属性魔剣 → ×1.25');
 });
 
-test('ソウル相性: 只乘攻撃力、不乘ブレイク力 (EBD 不查魂的相性表、)', () => {
+test('ソウル相性: 只乘攻撃力、不乘ブレイク力 (EBD 不查魂的相性表)', () => {
   const c = mockChara();
   const soul = mockSoul({ element_affinity: { 1: { positive_value: 1.9, negative_value: 1.135 } } });
   const ctx = buildCtx([{ chara: c, soul, tr: _lv250({ soul_lv: 1 }) }, null, null]);
@@ -1771,7 +1771,7 @@ test('ソウル相性: 只乘攻撃力、不乘ブレイク力 (EBD 不查魂的
   assert.strictEqual(r.stats['ブレイク力'], Math.ceil(1000 * Math.fround(0.1)));
 });
 
-test('燃心: server-fold 倍率、攻撃力和防御力都吃 ()', () => {
+test('燃心: server-fold 倍率、攻撃力和防御力都吃', () => {
   const r = _atk([], _lv250({ moeshin: true }));
   assert.strictEqual(r.stats['攻撃力'], 16900);
   assert.strictEqual(r.stats['防御力'], 6500);
@@ -1785,13 +1785,13 @@ test('MP 不足: 在 Add 池之后乘 (EAD step 50)', () => {
   assert.strictEqual(applyStaged(10000, 'Attack', eff), (10000 + 1000) * 0.5);
 });
 
-test('AllTarget: ×Total 的全体化倍率、攻撃力和ブレイク力都吃 ', () => {
+test('AllTarget: ×Total 的全体化倍率、攻撃力和ブレイク力都吃', () => {
   const r = _atk([{ id: 1, parameter: 'AllTarget', math_type: 'Multiply', value: 0.6, value_scaling: 0, range: 'Single' }]);
   assert.strictEqual(r.stats['攻撃力'], 7800);
   assert.strictEqual(r.stats['ブレイク力'], Math.ceil(600 * Math.fround(0.1)));   // 1000 × 0.6、再 × EBD 格 0.1f
 });
 
-test('BD: range=Single 的転速 buff 不生效、攻速 buff 生效 (BuffSkillValue 只认 All、)', () => {
+test('BD: range=Single 的転速 buff 不生效、攻速 buff 生效 (BuffSkillValue 只认 All)', () => {
   const mk = (effects) => {
     const c = mockChara({ bd_skill: { cost: 3, effects } });
     c._master.states['通常'].motion_speed = 1;
@@ -1807,7 +1807,7 @@ test('BD: range=Single 的転速 buff 不生效、攻速 buff 生效 (BuffSkillV
   assert.strictEqual(all.speed.latestRecover, base.speed.latestRecover * 2, 'All 転速 BD 生效');
 });
 
-test('攻速: 没有 Add 池 (攻速 只乘 Mul、)', () => {
+test('攻速: 没有 Add 池 (只乘 Mul)', () => {
   const c = _charaWithSkills([{ id: 1, parameter: 'MotionSpeed', math_type: 'Addition', value: 1, value_scaling: 0, range: 'Single' }]);
   c._master.states['通常'].motion_speed = 1.5;
   const ctx = buildCtx([{ chara: c, tr: _lv250() }, null, null]);
@@ -1822,14 +1822,14 @@ test('転速: 魔装 Speed Mul 折进 server 的 speed、floor 之后才进 clie
   assert.strictEqual(computeStats(c, ctx.team[0].tr, 0, ctx).speed.latestRecover, 23);
 });
 
-test('魔装: Attack / Defense 以外的 parameter 不 server-fold (以 -7 走 client、)', () => {
+test('魔装: Attack / Defense 以外的 parameter 不 server-fold (以 -7 走 client)', () => {
   const eff = [{ _source: 'masou', parameter: 'GuardBreak', base_parameter: 'GuardBreak', math_type: 'Multiply', value: 1.5, condition_factor: 1 }];
   // 1001 × 1.5 = 1501.5:server-fold 会先 floor 成 1501、client 段则到出口才 ceil 成 1502
   assert.strictEqual(applyStaged(1001, 'GuardBreak', eff), 1502);
   assert.strictEqual(applyStaged(1001, 'Attack', eff.map((e) => ({ ...e, parameter: 'Attack', base_parameter: 'Attack' }))), 1501);
 });
 
-test('魂 HitCount: 属性条件按被作用的魔剣判 (server 预折叠、)', () => {
+test('魂 HitCount: 属性条件按被作用的魔剣判 (server 预折叠)', () => {
   const soul = mockSoul({
     skills: [{ id: 1, parameter: 'HitCount', math_type: 'Addition', value: 0, values: [1, 1, 1], range: 'All', element_condition: 2 }],
   });

@@ -307,7 +307,7 @@ final damage
 | `defense` | 同 attack (魔装 Defense Mul、BH 同一倍率) | — | 同 attack | ✗ 半成品 |
 | `speed` | slot_Add + 魔装 Speed Mul (**无 BH**) | — | SpeedSkill + UpdateLatestRecover | ✗ 半成品 |
 | `break_value` | 类比 attack (无 BH) | — | ✓ 走 PSV `GuardBreak` 池 | ✗ 半成品 |
-| **`hit_counts[]`** | ✓ **server 预折叠编队 HitCount 加成**,每条 `trunc` + ≥1 | (`HitCount` 只给 UI 面板 / 排序用) | 战斗中只有 `AttackCount` PSV/BSV 修正 (master 0 条) | ✓ |
+| **`hit_counts[]`** | ✓ **server 预折叠编队 HitCount 加成**,每条 `trunc` + ≥1 | (HitCount 只给 UI 面板 / 排序用) | 战斗中只有 `AttackCount` PSV/BSV 修正 (master 0 条) | ✓ |
 | **`motion_speed`** | ✓ 魔装 MotionSpeed Mul 折进 `weapon.motion_speed*` | — | ✓ × BoostAttackSpeed(PSV/BSV MotionSpeed **Mul 池**、无 Add 池) | — |
 | per-hit damage | — | — | ✓ EAD/PAD/EBD/PBD 累积链 | — |
 
@@ -320,7 +320,7 @@ final damage
 | 战斗中变化 | 无（固定） | 动态（HP-curve / Break gate / IsBlaze gate 等条件变化） |
 | 加成来源 | 魂 HitCount `values × 魂等级倍率`(条件按**被作用的魔剣**判)/ 魔剣技能(熟度阶梯)/ HitCount 结晶 | PSV / BSV |
 
-`HitCount` 只遍历魂的 job_skills、按 MathType 分组
+HitCount 只遍历魂的 job_skills、按 MathType 分组
 (先 Multiply 后 Addition),战斗装载不调用它。
 
 ### Server-fold 公式

@@ -200,8 +200,7 @@ def load_attack_motions():
 
 
 def load_npc_motion_durations():
-    """data/_npc_motions.json → {motion_id: [attack1_dur_sec, attack2, attack3]}
-    npc_motions.json 是  生成的、含 SmoothMoves clip authored duration"""
+    """data/_npc_motions.json → {motion_id: [attack1_dur_sec, attack2, attack3]}"""
     p = DATA_DIR / "_npc_motions.json"
     if not p.is_file():
         return {}

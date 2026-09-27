@@ -16,15 +16,15 @@
 
 ## 游戏 assets 目录 `<assets>`
 
-图标/motion 的源资源(`<assets>/weapon/`、`<assets>/assets/` 等)在仓库外、
-路径机器相关,由 `assets_dir()` 解析、tracked 代码里一律写 `<assets>` 占位。
+图标/motion 的源资源在仓库外、路径机器相关,
+由 `assets_dir()` 解析、tracked 代码里一律写 `<assets>` 占位。
 
 ## env 覆盖
 
 - `BXB_MASTER_TABLES` — master_tables **工作树根**(脚本自己拼 `/master_data`)。
   CI 指向从 R2 拉下的目录(见 .github/workflows/update-database.yml);本地不设即用上面的布局。
 - `BXB_ASSETS` — 外部工具根,同理。
-- `BXB_ASSETS_DIR` — `<assets>` 根。CI 由 图标同步 指向 assets 临时目录;
+- `BXB_ASSETS_DIR` — `<assets>` 根。CI 由上游流程指向 assets 临时目录;
   本地不设则读 `_local_paths.json`(untracked)的 `assets_dir`。
 
 `MASTER_DIR` / `MASTER_TABLES_DIR` 是**惰性**属性 (PEP 562 `__getattr__`):只在真被访问时
@@ -134,7 +134,7 @@ def __getattr__(name):
 if __name__ == "__main__":
     print(f"PROJECT_ROOT   = {PROJECT_ROOT}")
     print(f"BXB_ROOT       = {BXB_ROOT}")
-    print(f"ASSETS_DIR  = {ASSETS_DIR}  (exists={ASSETS_DIR.is_dir()})")
+    print(f"ASSETS_DIR     = {ASSETS_DIR}  (exists={ASSETS_DIR.is_dir()})")
     try:
         ad = assets_dir()
         print(f"ASSETS_DIR     = {ad}  (exists={ad.is_dir()})")
