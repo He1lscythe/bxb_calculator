@@ -106,7 +106,7 @@ v = ceil(v)                                           出口 ceil (唯一 round 
 - step 10b `AllTargetRate` 只算技能 / BD buff 里的 `AllTarget`,DamageImpacts 以外的写入者没有
 - 敵方属性相性 (step 9) 在游戏里是 server 下发的敌人 `enemy_abilities`、不是固定表 —— s8 的 `_computeEnemyMods` 是 wiki 沿用的硬编码表(普通副本的 ×2 / ×0.5 与 实测一致,ギルバト 的 15 / 10 / 0.1 未有实测依据)
 
-**LP tier × Total** (step 4、):
+**LP tier × Total** (step 4):
 - `computeStats` (普通攻击、UI 显示): HpCheck `[1.0, 1.1, 1.5, 2.0]` → tier 0/1/2/3
 - `computeStatsBlaze` (BD 攻击伤害、UI 暂不显示): LpCheck `[1.0, 1.3, 2.0, 5.0]`
 - **tr.bd_on 不切表**、bd_on 仅 toggle bd_skill.effects 加入 Stage 4 buff

@@ -46,7 +46,7 @@ def _resolve_max_value(name, param, initial_value, wiki_max):
 
 
 def _resolve_factors(name):
-    """特殊 series 的 3 因子 override (user 决策、2026-06-08)。
+    """特殊 series 的 3 因子 override。
     返回 dict 或 None。值可为 number 或分式字符串 'a/b' (前端 parseBairituVal 处理)"""
     if not name:
         return None

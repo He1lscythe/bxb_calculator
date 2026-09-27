@@ -38,7 +38,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 ICONS_DIR = PROJECT_ROOT / "icons"
 DATA_DIR = PROJECT_ROOT / "data"
 
-# CI 经 env BXB_ASSETS_DIR 指向 assets 临时目录 (图标同步 下载+extract 落点)
+# CI 经 env BXB_ASSETS_DIR 指向 assets 临时目录
 DBXB = assets_dir()
 
 

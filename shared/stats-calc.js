@@ -50,7 +50,7 @@ import { conditionFactor, HP_CURVE_PFX as _HP_CURVE_PFX } from './parameter-clas
 // 倍率四舍五入到 5 位小数 (复刻游戏精度): ×1.894815 → ×1.89482 再乘算
 const _round5 = (x) => Math.round((Number(x) || 0) * 1e5) / 1e5;
 
-// MP rate (、攻撃力/ブレイク力 × rate): mp_ratio = curMp / maxMp
+// MP rate (攻撃力/ブレイク力 × rate): mp_ratio = curMp / maxMp
 //   mp_ratio < 0.5 → rate = 1 − (20/21)·√(1 − 2·mp_ratio);  否则 → 1.0
 //   curMp=null → 满 → rate 1;curMp=0 → 1/21 (跟旧 have_mp=false 一致)
 export const mpRate = (curMp, maxMp) => {
@@ -1054,7 +1054,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   const speed = _computeSpeed(chara, tr, slotIdx, ctx, effects, base, mkStage('s11_speed', '転速 (Speed)'));
   const motionSpeed = _computeMotionSpeed(chara, tr, effects, trace, mkStage('s12_motion', '攻速 (MotionSpeed)'));
 
-  // hits 逐段独立:server 预折叠 HitCount () + 战斗中的 AttackCount (、master 目前 0 条)
+  // hits 逐段独立:server 预折叠 HitCount + 战斗中的 AttackCount (master 目前 0 条)
   //   每 effect 的 _stages[i] 决定第 i 段 add/mul 的值
   const cMaster = chara._master;
   const stateData = cMaster?.states?.[tr.state] || Object.values(cMaster?.states || {})[0];
@@ -1112,7 +1112,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   }
   const bdCapMax = Math.max(9, Math.floor((9 + bdAdd) * bdMul));
 
-  // ========== BlazeGauge 系统 (按 user 决策正确顺序、) ==========
+  // ========== BlazeGauge 系统 ==========
   // Step 1: 先算 BlazeGaugePointRate pipeline → blaze_gauge_points 数组 (每 level 升级阈值)
   //   魔剣 skill BlazeGaugePointRate Mul → charaSkillProd
   //   soul skill BlazeGaugePointRate Mul → soulRates (含 lv / rarity 给 L(level) 用)
