@@ -16,6 +16,7 @@
 用法: python scripts/master_to_business/build_memory_slot_skills.py
 """
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -50,15 +51,17 @@ def walk_slots(obj):
 
 def collect_sources():
     sources = []
-    # (a) aggregated house_tops.json
-    ht_path = UNPACKING / 'outputs' / 'account' / 'house_tops.json'
+    # (a) 汇总数据（路径由 BXB_HOUSE_TOPS 环境变量指定）
+    ht_path = Path(os.environ.get('BXB_HOUSE_TOPS', ''))
     if ht_path.is_file():
         sources.append((str(ht_path), json.loads(ht_path.read_text(encoding='utf-8'))))
 
-    # (b) 个別 HouseTop in 解析结果 / 解析结果
-    for d in (UNPACKING / 'outputs' / '解析结果
-              UNPACKING / 'outputs' / '解析结果
-        if d.is_dir():
+    # (b) 外部工具目录下的个别 HouseTop response JSON
+    _resp_root = Path(os.environ.get('BXB_RESP_ROOT', str(UNPACKING / 'outputs')))
+    if _resp_root.is_dir():
+        for d in sorted(_resp_root.iterdir()):
+            if not d.is_dir():
+                continue
             for jf in d.glob('*_resp.json'):
                 try:
                     j = json.loads(jf.read_text(encoding='utf-8'))
