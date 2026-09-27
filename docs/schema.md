@@ -5,7 +5,7 @@
 > **Status**: 当前规范 (`npm test` 319/319 @ 2026-09-07)
 >
 > **Data source**: `<BXB_ROOT>/master_tables/master_data/<latest>/` —— `master_tables/` 与本 repo
-> (`bxb_wiki/`) 同级、是 crawl 仓库 `master_tables` branch 的 git worktree。路径一律相对
+> (`bxb_wiki/`) 同级、是上游快照存档的 git worktree。路径一律相对
 > repo 推 (`PROJECT_ROOT.parent`)、不写死盘符;CI 经 env `BXB_MASTER_TABLES` 覆盖。
 > 详见 [scripts/master_to_business/paths.py](../scripts/master_to_business/paths.py)
 

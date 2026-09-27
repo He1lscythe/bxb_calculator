@@ -30,7 +30,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 ```
 
 **关键模块**:
-- master 数据来源: [scripts/master_to_business/paths.py](../scripts/master_to_business/paths.py) 自动 detect `BxB/master_tables/master_data/` 下最新日期文件夹 (git worktree、`master_tables` branch)
+- master 数据来源: [scripts/master_to_business/paths.py](../scripts/master_to_business/paths.py) 自动 detect `BxB/master_tables/master_data/` 下最新日期文件夹 (上游快照存档的 git worktree)
 - 4 bucket revise: `chara_revise.json` (tags + skill value_scaling) / `soul_revise.json` (tags) / `crystal_revise.json` (max_value / M_L/W/P_max / min_max weight/purity) / `masou_revise.json` (skill value_scaling)
   - `M_L_max` / `M_W_max` / `M_P_max` **不填 1** — 缺省即 1 (`parseFactor(null)=1`)，显式写 1 反而让 `crystalDimAvailability` 判成「该维度可调」、⚙ 里多出一条拖不动的滑条。cr-edit 里 `def: 1` 只是 placeholder、不会落盘
 - sparse diff core: [shared/revise-core.js](../shared/revise-core.js) (`computeDiff` / `deepApply` / 撤回 / tombstone null)
@@ -76,7 +76,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [tests/ui/](../tests/ui/) | Playwright e2e (`npx playwright test`、6 file / 93 case) |
 | audit/ | `audit_dead_code.mjs` 输出 + `crystal_factors/` 反推脚本 (.gitignore 排除) |
 | draft/ | 本机一次性脚本 (.gitignore 排除) |
-| `../master_tables/` | master_tables (bxb_wiki 仓库 `master_tables` branch 的 git worktree、跟 bxb_wiki 同级、`BxB/master_tables/`) |
+| `../master_tables/` | master_tables (上游快照存档的本地 git worktree、跟 bxb_wiki 同级、`BxB/master_tables/`) |
 | `../data_staging/` | data-staging branch 的常驻 git worktree (2026-06-10 建、跟 bxb_wiki 同级)。revise 同步 / main→data-staging 本地 merge 都在这里做 (`*_revise.json` 在 main gitignored、data-staging tracked — 此 worktree 是它们的 git 归宿) |
 
 > ⚠ **data-staging 是多来源写入**: `sync-main-to-staging`(main push 后自动 merge)、
@@ -140,7 +140,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 
 | 路径 | 内容 | 读写方向 |
 |---|---|---|
-| `pipeline/mt/` | master_tables 基准:每个文件都是 master_tables 分支对应文件的**原样副本**。只留最新两份完整快照 (master_data / asset_version 各两份),更早的只剩 `changelog.md` + `_meta.json` (索引重建用);`scenario/unity3d/` 只留最新一个 | 上游写 → 本侧整体覆盖到 `_mt` checkout (只增不删),git 只看到真变化 → 提交 master_tables |
+| `pipeline/mt/` | master_tables 基准:每个文件都是上游快照存档里对应文件的**原样副本**。只留最新两份完整快照 (master_data / asset_version 各两份),更早的只剩 `changelog.md` + `_meta.json` (索引重建用);`scenario/unity3d/` 只留最新一个 | 上游写 → 本侧只拉 `master_data/` 到 `_mt` (`BXB_MASTER_TABLES` 指向它)、build 只读最新一份 |
 | `pipeline/wiki/_npc_motions.json` | npc 动作时长 | 本侧每轮发布 `data/_npc_motions.json` → 上游只追加新 motion → 本侧只合并缺的 key (已有值不覆盖,本地 `` 重建的值不会被冲) |
 | `pipeline/wiki/icons_index.txt` | `icons/` 现有 png 清单 (`<cat>/<stem>.png`) | 本侧每轮发布,上游据此判断缺哪些图标 |
 | `pipeline/wiki/assets/` | 新图标源 (`<assets>` 布局的 PNG) | 上游写 → 本侧 `copy_images` 落到 `icons/` 后删 |
@@ -150,10 +150,10 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [run_ingest.py](../scripts/ci/run_ingest.py) | 编排: npc-motion 合并 (build 前、新动作当轮进 build_characters) → A (build_memory_slot_skills + build_all → 6 表) → B (fetch_wiki + aux → revise + 安全检查) → icons (`BXB_ASSETS_DIR` 有图才跑 copy_images)。revise 不安全 → 退出码 3 |
 | [revise_safety.py](../scripts/ci/revise_safety.py) | revise 字段级安全检查 (防用户手填字段被冲、丢条目/字段则中止提交) |
 
-提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise/masou_revise → **data-staging** (安全检查通过且有变更);`_mt` 覆盖后的变化 (新快照 + changelog + 索引、asset_version、`scenario/`、`state/通知索引.json`)→ **master_tables**。三处提交成功后才发布 icons 清单 / npc_motions、删掉已消费的图标源 (提交失败则下轮重来)。
-`paths.py`/`copy_images.py` 都有 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向 checkout/临时目录、本地默认不变。
+提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise/masou_revise → **data-staging** (安全检查通过且有变更)。两处提交成功后才发布 icons 清单 / npc_motions、删掉已消费的图标源 (提交失败则下轮重来)。
+`paths.py`/`copy_images.py` 都有 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向临时目录、本地默认不变。
 
-> master_tables 分支内容 (快照 split + 派生表、`changelog.md`、asset_version manifest、scenario `unity3d` + 每本 `{book}.tsv`) 的格式不变,只是生成端移到了上游。全量 npc-motion 重生 / 重绘图强刷仍走本地 (罕见)。
+> 快照存档 (快照 split + 派生表、`changelog.md`、asset_version manifest、scenario `unity3d` + 每本 `{book}.tsv`) 由上游生成并保存,本仓库只消费 R2 上的最新快照。全量 npc-motion 重生 / 重绘图强刷仍走本地 (罕见)。
 
 ---
 

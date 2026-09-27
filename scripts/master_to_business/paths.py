@@ -5,11 +5,11 @@
 
 ## 目录布局
 
-`master_tables/` 与本 repo (`bxb_wiki/`) **同级**、是 crawl 仓库 `master_tables` branch 的 git worktree:
+`master_tables/` 与本 repo (`bxb_wiki/`) **同级**、是上游快照存档的 git worktree:
 
     <BXB_ROOT>/
     ├── bxb_wiki/        ← 本 repo (PROJECT_ROOT)
-    └── master_tables/   ← git worktree of master_tables
+    └── master_tables/   ← 上游快照存档 (git worktree)
 
 历史上这里写死过开发机绝对路径,换机器就整批 build script 挂掉。现在一律相对
 `PROJECT_ROOT` 推。
@@ -22,7 +22,7 @@
 ## env 覆盖
 
 - `BXB_MASTER_TABLES` — master_tables **工作树根**(脚本自己拼 `/master_data`)。
-  CI 指向 checkout 目录(见 .github/workflows/update-database.yml);本地不设即用上面的布局。
+  CI 指向从 R2 拉下的目录(见 .github/workflows/update-database.yml);本地不设即用上面的布局。
 - `BXB_ASSETS` — 外部工具根,同理。
 - `BXB_ASSETS_DIR` — `<assets>` 根。CI 由 图标同步 指向assets 临时目录;
   本地不设则读 `_local_paths.json`(untracked)的 `assets_dir`。
