@@ -212,6 +212,7 @@
         crystalSliderStep,
         emblemLvMax,
         elementMatchupMult,
+        activeGuildBoss,
         soulAwkMax,
         soulLvCap,
         soulMultiplier,
@@ -278,7 +279,8 @@
         allMasou = [],
         masouByChara = {};
       let allGuildTitles = [],
-        allGuildEmblems = [];
+        allGuildEmblems = [],
+        allGuildBosses = [];
       let teamSize = 3;
       // ギルバト スコア計算 的 メイン (carry) slot — 互斥单选、默认 slot-0
       let mainSlot = 0;
@@ -293,6 +295,7 @@
         advantageWeapons: new Set(), // 1-12 武器 ID 集合（仅 ギルバト/特別版 有效）
         difficulty: 'Normal', // 'Normal' | 'Hard' | 'Lunatic'（仅 ギルバト/特別版 有效）
         guildTitle: null, // guildtitles.json 中的 id
+        guildBoss: null, // guildbosses.json 中的 id (ギルバト / 七罪王;null = 「-」不套预设)
         // 默认 4 槽: 攻撃力アップⅠ(id1) / 攻撃力アップⅡ(id4) / タキサイキア(id16) / マスタープラン(id17)、均满级
         emblems: [
           { id: 1, level: 25 },
@@ -361,6 +364,9 @@
         fetch('../data/guildemblems.json')
           .then((r) => (r.ok ? r.json() : []))
           .catch(() => []),
+        fetch('../data/guildbosses.json')
+          .then((r) => (r.ok ? r.json() : []))
+          .catch(() => []),
       ])
         .then(
           ([
@@ -376,6 +382,7 @@
             bgRev,
             gt,
             ge,
+            gb,
           ]) => {
             // master schema → wiki shape via adapter
             // 4 adapter 都接 revise (deepApply patch 到 master 再转 wiki shape)
@@ -400,6 +407,7 @@
             });
             allGuildTitles = Array.isArray(gt) ? gt : [];
             allGuildEmblems = Array.isArray(ge) ? ge : [];
+            allGuildBosses = Array.isArray(gb) ? gb : [];
             document.getElementById('loading').style.display = 'none';
             document.getElementById('slots-grid').style.display = 'grid';
             renderEnemyBar();
@@ -646,7 +654,7 @@
 
       // ===== 編成 export / import (.json 文件 + 分享码 + URL #hash、deflate-raw 压缩) =====
       // 紧凑对象: 省略 tr/enemy 默认值 + 空 slot/crystals (import 时 merge 默认补回)。
-      const _ENEMY_DEF = { element: 6, bk: false, mode: 'normal', bkResistance: 'normal', difficulty: 'Normal', guildTitle: null, bd_cap: 0 };
+      const _ENEMY_DEF = { element: 6, bk: false, mode: 'normal', bkResistance: 'normal', difficulty: 'Normal', guildTitle: null, guildBoss: null, bd_cap: 0 };
       const _DEF_EMBLEMS = [{ id: 1, level: 25 }, { id: 4, level: 40 }, { id: 16, level: 55 }, { id: 17, level: 55 }];
       const _DEF_EMBLEMS_STR = JSON.stringify(_DEF_EMBLEMS);
       const _henseiCompact = () => {
@@ -723,6 +731,7 @@
           }
           // guildTitle 校验 (失效置 null)
           if (enemy.guildTitle != null && !allGuildTitles.some((g) => g.id === enemy.guildTitle)) enemy.guildTitle = null;
+          if (enemy.guildBoss != null && !allGuildBosses.some((g) => g.id === enemy.guildBoss)) enemy.guildBoss = null;
         }
         renderEnemyBar();
         renderAll();
@@ -1522,6 +1531,27 @@
 
       // ===== STATS CALCULATOR (用 shared/stats-calc.js 的 s1〜s8 stage 链) =====
 
+      // ギルバト boss 的属性 / BK / コンボ / 出撃条件 摘要 (有利武器看按钮)
+      const _guildBossHint = (b) => {
+        const nv = b.negative_value || {};
+        const els = [1, 2, 3, 4, 5, 6];
+        let elem;
+        if (els.every((e) => +nv[e] === 15)) elem = '全属性×15';
+        else if ((b.element_cut ?? 1) !== 1) elem = `${els.filter((e) => +nv[e] === 15).map((e) => ELEMENT[e]).join('・')}のみ×15`;
+        else
+          elem = els
+            .filter((e) => +nv[e] !== 1)
+            .sort((x, y) => nv[y] - nv[x])
+            .map((e) => `${ELEMENT[e]}×${nv[e]}`)
+            .join('・');
+        const parts = [elem];
+        if (b.bk_resistance === 'high') parts.push('BK耐性 高');
+        if ((b.bk_damage_scale ?? 1) !== 1) parts.push(`BK中×${b.bk_damage_scale}`);
+        if (b.combo_cap) parts.push(`${b.combo_cap}コンボ以上無効`);
+        if (b.condition && b.condition !== 'なし') parts.push(`出撃条件 ${b.condition}`);
+        return parts.join(' / ');
+      };
+
       // ===== ENEMY BAR (敵方/副本/工会信息) =====
       export const renderEnemyBar = () => {
         const eb = document.getElementById('enemy-bar');
@@ -1537,17 +1567,43 @@
         // 2. BK状態（单按钮 toggle：あり/なし）
         const bkLabel = enemy.bk ? 'あり' : 'なし';
         const bkBtns = `<button class="eb-btn${enemy.bk ? ' on' : ''}" onclick="setEnemyBk(${!enemy.bk})">${bkLabel}</button>`;
-        // 3. mode
+        // 3. mode — 七罪王 (guildbattle_special) 不单列、由 ギルバト 下的「七罪王」按钮切
+        const isSevenSin = enemy.mode === 'guildbattle_special';
+        const selMode = isSevenSin ? 'guildbattle' : enemy.mode;
         const modeOpts = [
           ['normal', '普通'],
           ['guildbattle', 'ギルバト'],
-          ['guildbattle_special', 'ギルバト七罪王'],
           ['other', '他'],
         ]
-          .map(
-            ([v, l]) => `<option value="${v}"${enemy.mode === v ? ' selected' : ''}>${l}</option>`,
-          )
+          .map(([v, l]) => `<option value="${v}"${selMode === v ? ' selected' : ''}>${l}</option>`)
           .join('');
+        const sevenSinBtn = isGuild
+          ? `<button class="eb-btn${isSevenSin ? ' on' : ''}" onclick="setEnemySevenSin(${!isSevenSin})">七罪王</button>`
+          : '';
+        // 3b. boss 预设 (guild only、按当前副本 / 七罪王 过滤、按年分组新→旧)、「-」= 不套预设
+        let bossHtml = '';
+        if (isGuild) {
+          const byYear = new Map();
+          for (const b of allGuildBosses) {
+            if (b.mode !== enemy.mode) continue;
+            const y = String(b.name || '').slice(0, 4);
+            if (!byYear.has(y)) byYear.set(y, []);
+            byYear.get(y).push(b);
+          }
+          const groups = [...byYear.entries()]
+            .sort((a, b) => b[0].localeCompare(a[0]))
+            .map(
+              ([y, bs]) =>
+                `<optgroup label="${y}">${bs
+                  .sort((a, b) => b.id - a.id)
+                  .map((b) => `<option value="${b.id}"${enemy.guildBoss === b.id ? ' selected' : ''}>${escHtml(b.name)}</option>`)
+                  .join('')}</optgroup>`,
+            )
+            .join('');
+          const boss = activeGuildBoss(enemy, allGuildBosses);
+          const hint = boss ? _guildBossHint(boss) : '';
+          bossHtml = `<div class="eb-group"><span class="eb-label">ボス</span><select onchange="setEnemyGuildBoss(this.value)"><option value="">-</option>${groups}</select>${hint ? `<span class="eb-hint">${escHtml(hint)}</span>` : ''}</div>`;
+        }
         // 4. BK耐性 (guild only) — 单按钮 toggle：普通/高
         let bkResHtml = '';
         if (isGuild) {
@@ -1641,7 +1697,8 @@
         eb.innerHTML = `
     <div class="eb-group"><span class="eb-label">敵属性</span>${elemBtns}</div>
     <div class="eb-group"><span class="eb-label">敵BK状態</span>${bkBtns}</div>
-    <div class="eb-group"><span class="eb-label">副本</span><select onchange="setEnemyMode(this.value)">${modeOpts}</select></div>
+    <div class="eb-group"><span class="eb-label">副本</span><select onchange="setEnemyMode(this.value)">${modeOpts}</select>${sevenSinBtn}</div>
+    ${bossHtml}
     ${bkResHtml}
     ${diffHtml}
     ${advWeapHtml}
@@ -1724,6 +1781,7 @@
           return;
         }
         const r = computeStats(chara, team[mainSlot].tr, mainSlot, _buildStatsCtx());
+        const comboCap = activeGuildBoss(enemy, allGuildBosses)?.combo_cap || 0;
         const sim = simulateGuildScore({
           aMax: +r.stats['攻撃力'] || 0,
           dl: +r.damageLimit || 0,
@@ -1732,9 +1790,12 @@
           cdF: +r.speed?.cooldownFrames || 0,
           setF: +r.speed?.setFrames || 0,
           startSeconds: scoreStartSec,
+          comboCap,
         });
         const g = computeGuildScore(sim.totalDamage, enemy.difficulty);
-        carry.textContent = `メイン: ${chara.name}（${mainSlot + 1}号位）`;
+        carry.textContent =
+          `メイン: ${chara.name}（${mainSlot + 1}号位）` +
+          (comboCap ? ` / ${comboCap}コンボ以上無効: ${sim.cappedHits.toLocaleString('en-US')} hit 除外` : '');
         setV('score-v-dmg', sim.totalDamage.toLocaleString('en-US'));
         setV('score-v-score', g.score.toLocaleString('en-US'));
         setV('score-v-base', g.scoreBase.toLocaleString('en-US'));
@@ -1742,8 +1803,22 @@
         setV('score-v-barrier', '×' + g.barrierBonus);
       };
 
+      // ギルバト boss:选中 → 覆盖 敵属性 / BK耐性 / 有利武器;手动改这三项、换副本或切七罪王 → 回到「-」
+      export const setEnemyGuildBoss = (v) => {
+        const boss = v ? allGuildBosses.find((b) => b.id === +v) : null;
+        enemy.guildBoss = boss ? boss.id : null;
+        if (boss) {
+          enemy.mode = boss.mode;
+          enemy.element = boss.element;
+          enemy.bkResistance = boss.bk_resistance || 'normal';
+          enemy.advantageWeapons = new Set(boss.advantage_weapons || []);
+        }
+        renderEnemyBar();
+        refreshAllStats();
+      };
       export const setEnemyElem = (e) => {
         enemy.element = e;
+        enemy.guildBoss = null;
         renderEnemyBar();
         refreshAllStats();
       };
@@ -1752,13 +1827,21 @@
         renderEnemyBar();
         refreshAllStats();
       };
+      export const setEnemySevenSin = (on) => {
+        enemy.mode = on ? 'guildbattle_special' : 'guildbattle';
+        enemy.guildBoss = null;
+        renderEnemyBar();
+        refreshAllStats();
+      };
       export const setEnemyMode = (m) => {
         enemy.mode = m;
+        enemy.guildBoss = null;
         renderEnemyBar();
         refreshAllStats();
       };
       export const setEnemyBkRes = (r) => {
         enemy.bkResistance = r;
+        enemy.guildBoss = null;
         renderEnemyBar();
         refreshAllStats();
       };
@@ -1790,6 +1873,7 @@
       export const toggleAdvWeapon = (w) => {
         if (enemy.advantageWeapons.has(w)) enemy.advantageWeapons.delete(w);
         else enemy.advantageWeapons.add(w);
+        enemy.guildBoss = null;
         renderEnemyBar();
         refreshAllStats();
       };
@@ -2071,6 +2155,7 @@
         allBGs,
         allGuildTitles,
         allGuildEmblems,
+        allGuildBosses,
         SENZAI_TABLE,
         team,
         teamSize,
@@ -3849,6 +3934,8 @@
         setEnemyBkRes,
         setEnemyDiff,
         setEnemyGuildTitle,
+        setEnemyGuildBoss,
+        setEnemySevenSin,
         setEnemyBdCap,
         openBdCapMaxPopup,
         toggleAdvWeapon,

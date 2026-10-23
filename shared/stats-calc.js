@@ -32,6 +32,8 @@
 import {
   soulMultiplier,
   elementMatchupMult,
+  activeGuildBoss,
+  guildBossElementMult,
   DIFFICULTY_MULT,
   BK_RES_MULT,
   ADVANTAGE_WEAPON_MULT,
@@ -1018,7 +1020,7 @@ function _computeImpl(chara, tr, slotIdx, ctx, isBlaze) {
   // ブレイク力的「敌方弱我方属性」= 攻撃力那张属性相性表的倍率 > 1 (EAD step 9 / EBD 读的是同一张敌方属性表)
   const enemy = ctx?.enemy || {};
   const ebd = {
-    weak: elementMatchupMult(chara._master?.element_id, enemy.element, enemy.mode || 'normal') > 1,
+    weak: _enemyElementMult(chara._master?.element_id, enemy, ctx) > 1,
     bk: !!enemy.bk,
   };
   const optsAtk = { lpMult, enemyBkX3, traceStages, statLabel: '攻撃力' };
@@ -1350,10 +1352,17 @@ function _computeMotionSpeed(chara, tr, effects, trace = null, traceStage = null
 // ブレイク力不在这里:EBD 的属性修正是 applyStaged 里的 4 格倍率 (s7_ebd)、只用这张表判「弱点」
 // guildTitle/emblems 不在此处、走 collectEffects 注入 enemy_buff source
 // ============================================================
+// 选了 ギルバト boss 用它的 negative_value、否则走硬编码表
+function _enemyElementMult(charaElem, enemy, ctx) {
+  const boss = activeGuildBoss(enemy, ctx?.allGuildBosses);
+  return boss ? guildBossElementMult(boss, charaElem) : elementMatchupMult(charaElem, enemy.element, enemy.mode || 'normal');
+}
+
 function _computeEnemyMods(chara, tr, ctx) {
   const enemy = ctx?.enemy || {};
   const mode = enemy.mode || 'normal';
   const isGuildMode = mode === 'guildbattle' || mode === 'guildbattle_special';
+  const boss = activeGuildBoss(enemy, ctx?.allGuildBosses);
   const cMaster = chara?._master;
   const charaElem = cMaster?.element_id;
   const charaWeap = cMaster?.weapon_type_id;
@@ -1362,7 +1371,7 @@ function _computeEnemyMods(chara, tr, ctx) {
   const parts = [];   // trace 用: 各因子明细 [{label, attackMul}]
 
   // #1 element matchup (全局)
-  const elemMult = elementMatchupMult(charaElem, enemy.element, mode);
+  const elemMult = _enemyElementMult(charaElem, enemy, ctx);
   attackMul *= elemMult;
   if (elemMult !== 1) parts.push({ label: '属性相性', attackMul: elemMult });
 
@@ -1373,6 +1382,13 @@ function _computeEnemyMods(chara, tr, ctx) {
     const f = BK_RES_MULT.high / BK_RES_MULT.normal;  // 6/3 = 2 (额外倍率)
     attackMul *= f;
     parts.push({ label: 'BK耐性 high (×6/×3)', attackMul: f });
+  }
+
+  // #6 boss 的 BK 中被ダメ倍率 (七罪王 色欲のルークスリア ×0.07)
+  const bkScale = boss ? +(boss.bk_damage_scale ?? 1) : 1;
+  if (enemy.bk && bkScale !== 1) {
+    attackMul *= bkScale;
+    parts.push({ label: 'BK中被ダメ (boss)', attackMul: bkScale });
   }
 
   // #3 difficulty (isGuildMode-gated)

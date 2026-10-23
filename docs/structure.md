@@ -164,7 +164,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 |---|---|
 | [stats-calc.js](../shared/stats-calc.js) | hensei stat 计算 —— `applyStaged` 的 s1〜s8 stage 链 (HP-curve / Break gate / server-fold floor / LP / DLB cap / Speed / MotionSpeed / enemy mods)、`ctx.traceEnabled` 时返回 dev trace (stat-trace modal 数据源)。stage 清单见 [hensei_calc.md](hensei_calc.md) |
 | [hensei-helpers.js](../shared/hensei-helpers.js) | UI 用 lv/觉醒/熟度参数 (`charaLvParams` master 直读 states.stats、硬编码表仅 fallback) + soulMultiplier / crystalEffectiveValue / crystalMaxBairitu / BlazeGauge 系统 |
-| [guild-score.js](../shared/guild-score.js) | ギルバト 40s ダメージ/スコア模拟 (`simulateGuildScore` 高频重叠 loop + 6 档波动率均值、開始秒=剩余输出窗口、`computeGuildScore` 基礎×難易度×結界2.6 换算、纯函数、见 hensei_calc.md) |
+| [guild-score.js](../shared/guild-score.js) | ギルバト 40s ダメージ/スコア模拟 (`simulateGuildScore` 高频重叠 loop + 6 档波动率均值、開始秒=剩余输出窗口、`computeGuildScore` 基礎×難易度×結界2.6 换算、`comboCap` 每 loop 3 段 hit 合计封顶 (七罪王 44コンボ以上無効)、纯函数、见 hensei_calc.md) |
 | [revise-core.js](../shared/revise-core.js) | sparse diff core (`computeDiff` 三参含撤回 + `deepApply` + tombstone null)。数组 (2026-06-19):带 id 对象数组 (weapon_skills/soul.skills) 按 **id** 局部 patch (robust 到重排);标量数组 (tags)/无 id 数组 (masou effects) 整组替换;已弃用 index 稀疏 |
 | [save-client.js](../shared/save-client.js) | POST /save 路由 (local `start.py:8787` / Vercel `/api/save.js`) + toast 反馈 |
 | [chara-adapter.js](../shared/chara-adapter.js) / [soul-adapter.js](../shared/soul-adapter.js) / [crystal-adapter.js](../shared/crystal-adapter.js) / [masou-adapter.js](../shared/masou-adapter.js) / [bg-adapter.js](../shared/bg-adapter.js) | master → wiki shape adapter (含 `deepApply(master, revise)` wrap)。bg 是 view-only、其 adapter 只做形状转换、无 revise 通路 |
@@ -220,6 +220,7 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
     段时长 `states[].motion_durations` 来自 `data/_npc_motions.json`、モーション名来自 master 的
     `attack_motions.json`。消费方 [stats-calc.js `_computeMotionSpeed`](../shared/stats-calc.js)。
 - `guildtitles.json` / `guildemblems.json` (手工维护、无 build script)
+- `guildbosses.json` = ギルバト boss 预设 (2022 年起官方 topics 的开催情报整理 + 训练场实测):每期 前半 / 後半 各一条、id 降序;`id` (年月×10 + 前半1 / 後半2) / `name` (`年月-前半|後半-boss名`) / `boss` / `mode` (`guildbattle` | 七罪王 `guildbattle_special`) / `element` / `element_rule` (`guild` | `seven` | `flat`) / `negative_value` (攻击方属性 → 倍率) / `element_cut` / `bk_resistance` / `bk_damage_scale` / `advantage_weapons` / `combo_cap` / `dates` / `condition` (出撃条件)
 - `omoide/{base_id}.json` (647 file、实测、2026-06-09 起入 git tracked)
 
 **Revise** (用户编辑产物、4 bucket):

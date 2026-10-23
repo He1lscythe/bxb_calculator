@@ -7,6 +7,7 @@
 //   - 每 hit 期望伤害 = 6 档波动率 {1.00..0.95} 均匀取 min(damageLimit, aMax × r) 的均值。
 //   - startSeconds (開始秒): 还剩多少秒时开始输出 = 输出窗口长度 (40=满窗口、开幕 buff 咏唱等损耗填更小)。
 //   - 截断: timestamp < 窗口末尾的 hit 才计入。
+//   - comboCap (七罪王「44コンボ以上のダメージを無効化」):每个 loop 3 段 hit 合计超过 comboCap 的部分不计。
 // v1 固定: battleSeconds=40、hitInterval=0.15 (普通、非 Blaze 0.05)、无加时 buff。
 
 export const GUILD_BATTLE_SECONDS = 40;
@@ -19,10 +20,10 @@ const GUILD_DIFF_BONUS = { Normal: 1, Hard: 5, Lunatic: 10 };
 const FPS = 60;
 
 // input: { aMax, dl, hits: [N1,N2,N3], durF: [f1,f2,f3], cdF, setF,
-//          startSeconds?, battleSeconds?, hitInterval? }
+//          startSeconds?, battleSeconds?, hitInterval?, comboCap? }
 // 全部可从 computeStats 返回取: stats['攻撃力'] / damageLimit / hits /
 //   motionSpeed.durationsFrames / speed.cooldownFrames / speed.setFrames
-// 返 { totalDamage, totalHits, loops, perHit }
+// 返 { totalDamage, totalHits, loops, perHit, cappedHits }
 export function simulateGuildScore(input) {
   const {
     aMax = 0,
@@ -34,7 +35,9 @@ export function simulateGuildScore(input) {
     battleSeconds = GUILD_BATTLE_SECONDS,
     startSeconds = battleSeconds,
     hitInterval = GUILD_HIT_INTERVAL,
+    comboCap = 0,
   } = input || {};
+  const cap = Math.max(0, Math.floor(+comboCap || 0));
 
   const nHits = [0, 1, 2].map((i) => Math.max(0, Math.floor(+hits[i] || 0)));
 
@@ -59,23 +62,28 @@ export function simulateGuildScore(input) {
   const winSec = Math.min(Math.max(0, +startSeconds || 0), battleSeconds);
 
   let totalHits = 0;
+  let cappedHits = 0;
   let loops = 0;
   if (loopSeconds > 0) {
     for (let k = 0; k * loopSeconds < winSec; k++) {
       loops++;
       const t0 = k * loopSeconds;
+      let loopHits = 0;
       for (let i = 0; i < 3; i++) {
         if (!nHits[i]) continue;
         const start = t0 + offset[i];
         // 段 i 的 hit 在 start + h×hitInterval (h=0..N_i-1)、只数 timestamp < 窗口末尾的 (恰好落界不计)
         const nLand = Math.max(0, Math.min(nHits[i], Math.floor((winSec - start) / hitInterval - 1e-9) + 1));
-        totalHits += nLand;
+        loopHits += nLand;
       }
+      const counted = cap ? Math.min(loopHits, cap) : loopHits;
+      totalHits += counted;
+      cappedHits += loopHits - counted;
     }
   }
 
   const totalDamage = Math.floor(perHit * totalHits);
-  return { totalDamage, totalHits, loops, perHit };
+  return { totalDamage, totalHits, loops, perHit, cappedHits };
 }
 
 // ギルドスコア 换算:

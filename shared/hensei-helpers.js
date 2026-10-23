@@ -285,6 +285,19 @@ export function elementMatchupMult(srcElem, tgtElem, mode) {
   return 1.0;
 }
 
+// ギルバト boss 预设 (data/guildbosses.json):选了 boss 且 boss.mode 与当前副本一致才生效
+export const GUILD_BOSS_WEAK_NV = 15;
+export function activeGuildBoss(enemy, bosses) {
+  if (enemy?.guildBoss == null) return null;
+  const b = (bosses || []).find((x) => x.id === enemy.guildBoss);
+  return b && b.mode === enemy.mode ? b : null;
+}
+// negative_value ≠ 15 的属性再乘 element_cut (七罪王「大幅減」= 0.01、其余 1)
+export function guildBossElementMult(boss, srcElem) {
+  const nv = +boss?.negative_value?.[srcElem] || 1;
+  return nv === GUILD_BOSS_WEAK_NV ? nv : nv * (+(boss?.element_cut ?? 1));
+}
+
 // hensei enemy bar 硬编码倍率
 export const DIFFICULTY_MULT = { Normal: 1.0, Hard: 0.1, Lunatic: 0.005 };
 export const BK_RES_MULT = { normal: 3.0, high: 6.0 };
