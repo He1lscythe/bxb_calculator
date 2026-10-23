@@ -1169,3 +1169,112 @@ test('魔装 range: 普通魔装只作用自身 / 全队魔王装 (味方全体)
   expect(await crossRows()).toBeNull();
   expect((await readSlot0()).atk).toBe(teamBefore.atk);
 });
+
+// ============================================================
+// ギルバト boss 预设 (data/guildbosses.json)
+// ============================================================
+const modeSel = (page) => page.locator('#enemy-bar select[onchange^="setEnemyMode"]');
+const sevenSinBtn = (page) => page.locator('#enemy-bar button[onclick^="setEnemySevenSin"]');
+const bossSel = (page) => page.locator('#enemy-bar select[onchange^="setEnemyGuildBoss"]');
+const bossOpts = (page) => bossSel(page).locator('option').evaluateAll((os) => os.map((o) => o.value));
+
+test('副本 普通/ギルバト/他 + 七罪王 按钮只在 ギルバト 出现;ボス 下拉按 ギルバト / 七罪王 过滤、按年分组', async ({ page }) => {
+  await waitHenseiReady(page);
+  const bosses = await page.evaluate(() => fetch('../data/guildbosses.json').then((r) => r.json()));
+  const ids = (mode) => bosses.filter((b) => b.mode === mode).map((b) => String(b.id));
+  expect(await modeSel(page).locator('option').allTextContents()).toEqual(['普通', 'ギルバト', '他']);
+  await expect(sevenSinBtn(page)).toHaveCount(0);
+  await expect(bossSel(page)).toHaveCount(0);
+  await modeSel(page).selectOption('guildbattle');
+  await expect(sevenSinBtn(page)).not.toHaveClass(/\bon\b/);
+  await expect(bossSel(page)).toHaveValue('');
+  expect(await bossOpts(page)).toEqual(['', ...ids('guildbattle')]);
+  const years = await bossSel(page).locator('optgroup').evaluateAll((gs) => gs.map((g) => g.label));
+  expect(years).toEqual([...years].sort().reverse());
+  await expect(bossSel(page).locator('option[value="2026092"]')).toHaveText('2026-09-後半-"神孕む獣"マテンビョウ');
+  // 七罪王 = guildbattle_special,副本下拉仍显示 ギルバト
+  await sevenSinBtn(page).click();
+  expect(await page.evaluate(() => window.state.enemy.mode)).toBe('guildbattle_special');
+  await expect(sevenSinBtn(page)).toHaveClass(/\bon\b/);
+  await expect(modeSel(page)).toHaveValue('guildbattle');
+  expect(await bossOpts(page)).toEqual(['', ...ids('guildbattle_special')]);
+  await sevenSinBtn(page).click();
+  expect(await page.evaluate(() => window.state.enemy.mode)).toBe('guildbattle');
+  await modeSel(page).selectOption('other');
+  await expect(sevenSinBtn(page)).toHaveCount(0);
+  await expect(bossSel(page)).toHaveCount(0);
+});
+
+test('ボス 预设: 选中覆盖 属性/BK耐性/有利武器;手动改这三项 / 换副本 / 切七罪王 回「-」', async ({ page }) => {
+  await waitHenseiReady(page);
+  const enemy = () => page.evaluate(() => {
+    const e = window.state.enemy;
+    return { boss: e.guildBoss, mode: e.mode, element: e.element, bkRes: e.bkResistance, adv: [...e.advantageWeapons].sort((a, b) => a - b) };
+  });
+  const hint = page.locator('#enemy-bar .eb-hint');
+  await page.evaluate(() => window.setEnemyMode('guildbattle'));
+  await bossSel(page).selectOption('2026091');
+  expect(await enemy()).toEqual({ boss: 2026091, mode: 'guildbattle', element: 1, bkRes: 'high', adv: [] });
+  await expect(hint).toHaveText('水×15・無×10・風×0.1 / BK耐性 高 / 出撃条件 【ランク制限】S以下の魔剣1本以上');
+  await bossSel(page).selectOption('2026092');
+  expect(await enemy()).toEqual({ boss: 2026092, mode: 'guildbattle', element: 4, bkRes: 'normal', adv: [1, 8, 11] });
+  await expect(hint).toHaveText('闇×15・無×10');
+  await sevenSinBtn(page).click();
+  await bossSel(page).selectOption('2026041');
+  expect(await enemy()).toEqual({ boss: 2026041, mode: 'guildbattle_special', element: 4, bkRes: 'normal', adv: [3, 7, 8] });
+  await expect(hint).toHaveText('闇のみ×15 / 44コンボ以上無効');
+  await bossSel(page).selectOption('2026102');
+  expect(await enemy()).toEqual({ boss: 2026102, mode: 'guildbattle_special', element: 6, bkRes: 'normal', adv: [] });
+  await expect(hint).toHaveText('全属性×15 / BK中×0.07');
+  // 敵BK状態 / 難易度 不是 boss 配置 → 不回「-」
+  await page.evaluate(() => { window.setEnemyBk(true); window.setEnemyDiff('Hard'); });
+  expect((await enemy()).boss).toBe(2026102);
+  for (const act of [
+    () => window.setEnemyElem(1),
+    () => window.setEnemyBkRes('high'),
+    () => window.toggleAdvWeapon(1),
+    () => window.setEnemyMode('guildbattle'),
+    () => window.setEnemySevenSin(false),
+  ]) {
+    await page.evaluate(() => window.setEnemySevenSin(true));
+    await bossSel(page).selectOption('2026102');
+    await page.evaluate(act);
+    expect((await enemy()).boss).toBe(null);
+    await expect(hint).toHaveCount(0);
+  }
+  // 「-」= 不改配置:选回「-」后属性等保持
+  await page.evaluate(() => window.setEnemySevenSin(true));
+  await bossSel(page).selectOption('2026042');
+  await bossSel(page).selectOption('');
+  expect(await enemy()).toEqual({ boss: null, mode: 'guildbattle_special', element: 1, bkRes: 'high', adv: [2, 6, 11] });
+});
+
+test('ボス 预设: ルークスリア 攻撃力 = 全属性 ×15、BK 中再 ×3×0.07;グーラ スコア計算 显示 44 コンボ除外', async ({ page }) => {
+  await waitHenseiReady(page);
+  const id = await page.evaluate(() => window.state.allCharas.find((c) => c._master?.element_id === 1)?.id);
+  await setupSlot0WithChara(page, id);
+  // 普通ギルバト boss 跟硬编码表一致 → 套 マテンビョウ 前后攻撃力不变
+  await page.evaluate(() => { window.setEnemyMode('guildbattle'); window.setEnemyElem(4); });
+  await page.waitForTimeout(100);
+  const guildPlain = await readStat(page, 0, 1);
+  await bossSel(page).selectOption('2026092');
+  await page.waitForTimeout(100);
+  expect(await readStat(page, 0, 1)).toBe(guildPlain);
+  await page.evaluate(() => { window.setEnemySevenSin(true); window.setEnemyElem(6); });
+  await page.waitForTimeout(100);
+  const plain = await readStat(page, 0, 1);
+  await bossSel(page).selectOption('2026102');
+  await page.waitForTimeout(100);
+  const lux = await readStat(page, 0, 1);
+  const ratio = await page.evaluate(() => 15 / window.elementMatchupMult(1, 6, 'guildbattle_special'));
+  expect(Math.abs(lux - plain * ratio) / lux).toBeLessThan(0.002);
+  await page.evaluate(() => window.setEnemyBk(true));
+  await page.waitForTimeout(100);
+  const luxBk = await readStat(page, 0, 1);
+  expect(Math.abs(luxBk - lux * 3 * 0.07) / luxBk).toBeLessThan(0.002);
+  await page.evaluate(() => window.setEnemyBk(false));
+  await bossSel(page).selectOption('2026041');
+  await page.locator('#score-btn').click();
+  await page.locator('#score-body .score-run-btn').click();
+  expect(await page.locator('#score-carry').textContent()).toMatch(/44コンボ以上無効: [\d,]+ hit 除外/);
+});

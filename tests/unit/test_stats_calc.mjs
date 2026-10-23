@@ -17,7 +17,11 @@ import {
   AWAKENING_MAX,
   AWAKENING_FULL_MULT,
 } from '../../shared/stats-calc.js';
-import { soulMultiplier, soulLvCap, computeBlazeGaugePoints } from '../../shared/hensei-helpers.js';
+import { readFileSync } from 'node:fs';
+import {
+  soulMultiplier, soulLvCap, computeBlazeGaugePoints,
+  elementMatchupMult, guildBossElementMult, activeGuildBoss,
+} from '../../shared/hensei-helpers.js';
 
 // ============================================================
 // mock helpers
@@ -100,6 +104,7 @@ function buildCtx(slots, opts = {}) {
     team, allCharas, allSouls, allBGs, allMasou, allCrystals,
     allGuildTitles: opts.allGuildTitles || [],
     allGuildEmblems: opts.allGuildEmblems || [],
+    allGuildBosses: opts.allGuildBosses || [],
     enemy: opts.enemy || { element: 0, bk: false },
   };
 }
@@ -1167,6 +1172,81 @@ test('enemy bk + bkResistance high + guildbattle → 额外 ×2 (合计 ×6)', (
   const rN = computeStats(c, ctxNorm.team[0].tr, 0, ctxNorm);
   const rH = computeStats(c, ctxHigh.team[0].tr, 0, ctxHigh);
   assert.strictEqual(rH.stats['攻撃力'], rN.stats['攻撃力'] * 2);
+});
+
+// ギルバト boss 预设 (data/guildbosses.json)
+const GUILD_BOSSES = JSON.parse(readFileSync(new URL('../../data/guildbosses.json', import.meta.url), 'utf8'));
+const gb = (id) => GUILD_BOSSES.find((b) => b.id === id);
+
+test('guildbosses.json: id = 年月×10+前半1/後半2、name = 年月-前半|後半-boss、七罪王 → guildbattle_special', () => {
+  const ids = GUILD_BOSSES.map((b) => b.id);
+  assert.strictEqual(new Set(ids).size, ids.length);
+  assert.deepStrictEqual(ids, [...ids].sort((a, b) => b - a));
+  for (const b of GUILD_BOSSES) {
+    const m = b.name.match(/^(\d{4})-(\d{2})-(前半|後半)-(.+)$/);
+    assert.ok(m, b.name);
+    assert.strictEqual(b.id, +(m[1] + m[2]) * 10 + (m[3] === '前半' ? 1 : 2), b.name);
+    assert.strictEqual(m[4], b.boss, b.name);
+    assert.strictEqual(b.mode, b.boss.startsWith('"七罪王"') ? 'guildbattle_special' : 'guildbattle', b.name);
+  }
+});
+
+test('guildbosses.json: negative_value × element_cut 跟 element_rule 对应的硬编码表一致 (flat = 全 15)', () => {
+  for (const b of GUILD_BOSSES) {
+    for (let s = 1; s <= 6; s++) {
+      const want = b.element_rule === 'flat' ? 15
+        : elementMatchupMult(s, b.element, b.element_rule === 'seven' ? 'guildbattle_special' : 'guildbattle');
+      assert.strictEqual(guildBossElementMult(b, s), want, `${b.name} 属性${s}`);
+    }
+  }
+  assert.strictEqual(gb(2026102).element_rule, 'flat');
+  assert.strictEqual(gb(2026102).bk_damage_scale, 0.07);
+  assert.strictEqual(gb(2026041).combo_cap, 44);
+  assert.strictEqual(gb(2026091).bk_resistance, 'high');
+  assert.deepStrictEqual(gb(2026092).advantage_weapons, [1, 8, 11]);
+});
+
+test('activeGuildBoss: 选了 boss 且 boss.mode 与当前副本一致才生效', () => {
+  assert.strictEqual(activeGuildBoss({ mode: 'guildbattle_special', guildBoss: 2026102 }, GUILD_BOSSES), gb(2026102));
+  assert.strictEqual(activeGuildBoss({ mode: 'guildbattle', guildBoss: 2026092 }, GUILD_BOSSES), gb(2026092));
+  assert.strictEqual(activeGuildBoss({ mode: 'guildbattle_special', guildBoss: null }, GUILD_BOSSES), null);
+  assert.strictEqual(activeGuildBoss({ mode: 'guildbattle', guildBoss: 2026102 }, GUILD_BOSSES), null);
+  assert.strictEqual(activeGuildBoss({ mode: 'guildbattle_special', guildBoss: 2026092 }, GUILD_BOSSES), null);
+  assert.strictEqual(activeGuildBoss({ mode: 'guildbattle', guildBoss: 1 }, GUILD_BOSSES), null);
+});
+
+test('七罪王 boss: ルークスリア 火 ×15、BK ×3×0.07;「-」回到硬编码表 (火 vs 無 ×0.01、无 ×0.07)', () => {
+  const c = mockChara();
+  const slots = [{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null];
+  const atk = (enemy) => {
+    const ctx = buildCtx(slots, {
+      allGuildBosses: GUILD_BOSSES,
+      enemy: { element: 6, mode: 'guildbattle_special', difficulty: 'Normal', bkResistance: 'normal', ...enemy },
+    });
+    return computeStats(c, ctx.team[0].tr, 0, ctx).stats;
+  };
+  assert.strictEqual(atk({ bk: false, guildBoss: 2026102 })['攻撃力'], 13000 * 15);
+  assert.ok(Math.abs(atk({ bk: true, guildBoss: 2026102 })['攻撃力'] - 13000 * 15 * 3 * 0.07) <= 1);
+  const plain = atk({ bk: true, guildBoss: null })['攻撃力'];
+  assert.ok(Math.abs(plain - 13000 * 0.01 * 3) <= 1, `「-」 ${plain}`);
+  // ブレイク力 (base 1000):ルークスリア 下火属性也算弱点 (×1.5)、「-」时非弱点 (×0.1)
+  assert.ok(Math.abs(atk({ bk: false, guildBoss: 2026102 })['ブレイク力'] - 1500) <= 1);
+  assert.ok(Math.abs(atk({ bk: false, guildBoss: null })['ブレイク力'] - 100) <= 1);
+});
+
+test('七罪王 boss: グーラ (光) 闇 ×15、火 ×0.01、BK 不乘 0.07', () => {
+  const run = (elem, bk) => {
+    const c = mockChara({ element_id: elem });
+    const slots = [{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null];
+    const ctx = buildCtx(slots, {
+      allGuildBosses: GUILD_BOSSES,
+      enemy: { element: 4, bk, mode: 'guildbattle_special', difficulty: 'Normal', bkResistance: 'normal', guildBoss: 2026041 },
+    });
+    return computeStats(c, ctx.team[0].tr, 0, ctx).stats['攻撃力'];
+  };
+  assert.strictEqual(run(5, false), 13000 * 15);
+  assert.ok(Math.abs(run(1, false) - 130) <= 1);
+  assert.strictEqual(run(5, true), 13000 * 15 * 3);
 });
 
 test('enemy advantageWeapons (chara weapon ∈ set) + guildbattle → Attack × 2.0', () => {

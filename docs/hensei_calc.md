@@ -63,7 +63,7 @@ omoide memory slot 加成走 stage 1、不参与 base 计算。
 | **s7_ebd** | EBD 4 格 | (×Total) | 只ブレイク力:属性 × 敵BK 的 ×1.8 / ×1.2 / ×1.5 / ×0.1 (见下文ブレイク力) |
 | **s7** | inline ×3 | (×Total) | step 51、只 Attack、enemy.bk gate |
 | **s7b** | 出口 ceil | — | 唯一 round 点 |
-| **s8** | enemy mods | (×Attack) | 属性相性/難度/有利武器/BD cap、stage 后 ceil (只攻撃力) |
+| **s8** | enemy mods | (×Attack) | 属性相性/難度/有利武器/ギルバト boss/BD cap、stage 后 ceil (只攻撃力) |
 | 独立 | 任何 source | `Repel_Percent` | status 回避率、独立通道、不进 stat pipeline |
 | skip | 任何 source | `None` / `Set` / `NoEffect` parameter | 跳过、不渲染、不参与 calc |
 
@@ -104,7 +104,8 @@ v = ceil(v)                                           出口 ceil (唯一 round 
 - step 52 `RandomRate`(`{1.00 … 0.95}` 6 档均匀)— stat 显示取 1.00,ギルバト スコア 取 6 档均值
 - step 53 `DefenseDamageSkill`(敌方被动:连乘 / 清零 / 每 hit 伤害上限屏障)— 依赖具体敌人,不算
 - step 10b `AllTargetRate` 只算技能 / BD buff 里的 `AllTarget`,DamageImpacts 以外的写入者没有
-- 敵方属性相性 (step 9) 在游戏里是 server 下发的敌人 `enemy_abilities`、不是固定表 —— s8 的 `_computeEnemyMods` 是 wiki 沿用的硬编码表(普通副本的 ×2 / ×0.5 与 实测一致,ギルバト 的 15 / 10 / 0.1 未有实测依据)
+- 敵方属性相性 (step 9) 在游戏里是 server 下发的敌人 `enemy_abilities`、不是固定表 —— s8 的 `_computeEnemyMods` 是 wiki 沿用的硬编码表(普通副本的 ×2 / ×0.5 与 实测一致,ギルバト 的 弱点 15 / 無 10 / 其余 1 与 2026-09 マテンビョウ 训练场实测一致,相性不利 0.1 未实测)
+- ギルバト boss 预设 (`data/guildbosses.json`、2022 年起每期 前半 / 後半 各一条):编成页「副本」只有 普通 / ギルバト / 他,七罪王 (`guildbattle_special`) 由 ギルバト 时出现的「七罪王」按钮切换;「ボス」下拉只列当前副本 (普通ギルバト / 七罪王) 的 boss、按年分组新→旧、名字 `年月-前半|後半-boss名`,默认「-」= 不套预设。选中时属性相性改用该 boss 的 `negative_value` —— 15 → ×15、其余 ×negative_value×`element_cut` (七罪王「大幅減」= 0.01、其余 1),ブレイク力的弱点判定用同一倍率;BK 中再乘 `bk_damage_scale` (色欲のルークスリア 0.07)。选中同时覆盖 副本 / 敵属性 / BK耐性 / 有利武器,手动改这几项、换副本或切七罪王回「-」;敵BK状態 / 難易度 等不是 boss 配置、不影响。`negative_value` 按 boss 技能原文的 `element_rule` 从上面的硬编码表推出 —— `guild` (弱点属性と無属性以外…軽減) = 普通ギルバト表、`seven` (弱点属性以外…大幅減) = 七罪王表、`flat` (全属性の相性有利・不利の影響を受けない:アヴァターラ、色欲のルークスリア) = 全属性 15,所以只有 `flat` 的 boss 选不选属性倍率有区别
 
 **LP tier × Total** (step 4):
 - `computeStats` (普通攻击、UI 显示): HpCheck `[1.0, 1.1, 1.5, 2.0]` → tier 0/1/2/3
@@ -506,7 +507,7 @@ UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的
 | `enemy_break` | **s6 (Mul → Add)** | Mul / Add | parameter 前缀 `Enemy_Break_*`、gate `enemy.bk` (step 48/49) |
 | **inline ×3** | **s7 (× Attack)** | Multiply | `opts.enemyBkX3` step 51、enemy.bk gate  |
 | **EBD 4 格** | **s7_ebd (× BK)** | Multiply | 只ブレイク力:弱点 × 敵BK 的 ×1.8 / ×1.2 / ×1.5 / ×0.1 |
-| enemy mods | **s8 (× Attack)** | Multiply | 属性相性 (全局)、難度/BK耐性/有利武器 (guild gate)、BD cap — `_computeEnemyMods` 硬编码倍率、stage 后乘 + ceil |
+| enemy mods | **s8 (× Attack)** | Multiply | 属性相性 (全局)、難度/BK耐性/有利武器 (guild gate)、ギルバト boss (negative_value / BK 中倍率)、BD cap — `_computeEnemyMods` 硬编码倍率、stage 后乘 + ceil |
 
 ### 验证调试
 
@@ -589,7 +590,7 @@ trace = {
 | s4c_bd_mul | BD buff Mul |
 | s5a_other_add / s5b_soul_add / s5c_bd_add | Add: 同上分类、计算顺序 = stage 顺序 |
 | s6_enemy_break / s6b_mp / s7_ebd / s7_inline3 / s7b_ceil | step48/49 / step50 MP 不足 / EBD 4 格 (只ブレイク力) / step51 / 出口 ceil |
-| s8_enemy_mods | 属性相性/難度/有利武器/BD cap (逐因子、链尾=ceil 后显示值) |
+| s8_enemy_mods | 属性相性/難度/有利武器/boss BK 中倍率/BD cap (逐因子、链尾=ceil 后显示值) |
 | s9_hits | Hit1-3 逐 effect 序贯 (每步 floor、after=floor 后值) + max(1) 终步 |
 | s10_damage_limit | DamageLimitBreak fold (先 Mul 池、后 Add 池) + floor 终步 |
 | s11_speed | 転速: base.Speed → +omoide Add链 → ×魔装 Mul → floor (server-fold) → ×Mul链 → ×HP 曲線池 → ×partner → +其他Add链 |
@@ -617,7 +618,7 @@ hensei 编成页 guild 模式 (`enemy.mode = guildbattle / guildbattle_special`)
 `simulateGuildScore(input)` — 纯函数、stat 输入全部来自 メイン slot 的 `computeStats` 返回:
 `aMax` = `stats['攻撃力']`、`dl` = `damageLimit`、`hits` = `hits[3]`、
 `durF` = `motionSpeed.durationsFrames[3]`、`cdF/setF` = `speed.cooldownFrames/setFrames`、
-外加 UI 的 `startSeconds`。
+外加 UI 的 `startSeconds`,以及选了带 `combo_cap` 的 boss 时的 `comboCap` (七罪王 暴食のグーラ / 強欲のアヴァリティア 2026-06 = 44)。
 
 ### 模型 (高频重叠 loop)
 
@@ -629,9 +630,11 @@ perHit      = mean_{r∈{1.00..0.95}} min(dl, aMax×r)   # 波动率 6 档均匀
 
 win = clamp(startSeconds, 0, 40)                      # 開始秒 = 剩余输出时间 = 窗口长度 (缺省=满窗口)
 for k while k×loopSeconds < win:                      # loop 每 P 重开、hit 列后台并行堆叠 (不等打完)
+  n = 0
   for i in 0..2 (N_i > 0):
     start = k×loopSeconds + offset[i]                 # 段 i 的 hit 在 start + h×0.15 (h=0..N_i-1)
-    total += count(h: start + h×0.15 < win)           # timestamp < 窗口末尾严格 (恰好落界不计)
+    n += count(h: start + h×0.15 < win)               # timestamp < 窗口末尾严格 (恰好落界不计)
+  total += comboCap ? min(n, comboCap) : n           # 44コンボ以上無効:每 loop 3 段合计超出的不计 (计入 cappedHits)
 
 totalDamage = floor(perHit × total)                   # 推定ダメージ
 ```

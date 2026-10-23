@@ -188,3 +188,38 @@ test('computeGuildScore: float 噪声 (13×2.6=33.8 精确)、未知難易度→
   assert.strictEqual(computeGuildScore(9999999, 'Lunatic').scoreBase, 0); // 1e7 未満
   assert.strictEqual(GUILD_BARRIER_BONUS, 2.6);
 });
+
+// ============================================================
+// comboCap (七罪王「44コンボ以上のダメージを無効化」): 每个 loop 3 段 hit 合计超过 cap 的不计
+// ============================================================
+test('comboCap=44: 每 loop 3 段合计最多计 44 hit、逐 hit 枚举对拍', () => {
+  const input = { aMax: 100000, dl: 2e9, hits: [20, 20, 20], durF: [10, 10, 10], cdF: 10, setF: 10 };
+  const capped = simulateGuildScore({ ...input, comboCap: 44 });
+  const full = simulateGuildScore(input);
+  // 独立复算: 每 loop 先数落地 hit、再 min(·, 44)
+  const nHits = [20, 20, 20];
+  const loopSeconds = (10 + 10 + 10 + 10 + 10 + 2) / 60;
+  const offset = [0, 10 / 60, 20 / 60];
+  let expect = 0;
+  for (let k = 0; k * loopSeconds < GUILD_BATTLE_SECONDS; k++) {
+    let n = 0;
+    for (let i = 0; i < 3; i++) {
+      for (let h = 0; h < nHits[i]; h++) {
+        if (k * loopSeconds + offset[i] + h * GUILD_HIT_INTERVAL < GUILD_BATTLE_SECONDS - 1e-9) n++;
+      }
+    }
+    expect += Math.min(n, 44);
+  }
+  assert.strictEqual(capped.totalHits, expect);
+  assert.strictEqual(capped.totalHits + capped.cappedHits, full.totalHits);
+  assert.ok(capped.cappedHits > 0);
+  assert.strictEqual(capped.totalDamage, Math.floor(capped.perHit * capped.totalHits));
+  assert.strictEqual(full.cappedHits, 0);
+});
+
+test('comboCap: 每 loop 不足 cap 时不影响;0 / 缺省 = 不封顶', () => {
+  const input = { aMax: 100000, dl: 2e9, hits: [12, 11, 18], durF: [4, 4, 10], cdF: 2, setF: 1 };
+  const base = simulateGuildScore(input);
+  assert.deepStrictEqual(simulateGuildScore({ ...input, comboCap: 44 }), base);
+  assert.deepStrictEqual(simulateGuildScore({ ...input, comboCap: 0 }), base);
+});
