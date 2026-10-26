@@ -20,7 +20,7 @@ import {
 import { readFileSync } from 'node:fs';
 import {
   soulMultiplier, soulLvCap, computeBlazeGaugePoints,
-  elementMatchupMult, guildBossElementMult, activeGuildBoss,
+  elementMatchupMult, guildBossElementMult, activeGuildBoss, BK_DAMAGE_CUT_MULT,
 } from '../../shared/hensei-helpers.js';
 
 // ============================================================
@@ -1174,8 +1174,21 @@ test('enemy bk + bkResistance high + guildbattle → 额外 ×2 (合计 ×6)', (
   assert.strictEqual(rH.stats['攻撃力'], rN.stats['攻撃力'] * 2);
 });
 
+test('elementMatchupMult normal: 火>風>水>火 三角 ×2 / ×0.5、光闇互克 ×2、無 全 ×1', () => {
+  const want = [
+    [1, 0.5, 2, 1, 1, 1],
+    [2, 1, 0.5, 1, 1, 1],
+    [0.5, 2, 1, 1, 1, 1],
+    [1, 1, 1, 1, 2, 1],
+    [1, 1, 1, 2, 1, 1],
+    [1, 1, 1, 1, 1, 1],
+  ];
+  for (let s = 1; s <= 6; s++)
+    for (let t = 1; t <= 6; t++) assert.strictEqual(elementMatchupMult(s, t, 'normal'), want[s - 1][t - 1], `${s}→${t}`);
+});
+
 // ギルバト boss 预设 (data/guildbosses.json)
-const GUILD_BOSSES = JSON.parse(readFileSync(new URL('../../data/guildbosses.json', import.meta.url), 'utf8'));
+const GUILD_BOSSES =JSON.parse(readFileSync(new URL('../../data/guildbosses.json', import.meta.url), 'utf8'));
 const gb = (id) => GUILD_BOSSES.find((b) => b.id === id);
 
 test('guildbosses.json: id = 年月×10+前半1/後半2、name = 年月-前半|後半-boss、七罪王 → guildbattle_special', () => {
@@ -1200,10 +1213,13 @@ test('guildbosses.json: negative_value × element_cut 跟 element_rule 对应的
     }
   }
   assert.strictEqual(gb(2026102).element_rule, 'flat');
-  assert.strictEqual(gb(2026102).bk_damage_scale, 0.07);
+  assert.strictEqual(gb(2026102).bk_damage_scale, BK_DAMAGE_CUT_MULT);
+  assert.ok(GUILD_BOSSES.every((b) => [1, BK_DAMAGE_CUT_MULT].includes(b.bk_damage_scale)));
   assert.strictEqual(gb(2026041).combo_cap, 44);
   assert.strictEqual(gb(2026091).bk_resistance, 'high');
   assert.deepStrictEqual(gb(2026092).advantage_weapons, [1, 8, 11]);
+  // 2022 早期有利武器写在行動パターン「種別【長剣・杖棒・戦斧・大鎌】…被ダメージが上昇」
+  assert.deepStrictEqual(gb(2022051).advantage_weapons, [1, 4, 7, 12]);
 });
 
 test('activeGuildBoss: 选了 boss 且 boss.mode 与当前副本一致才生效', () => {
@@ -1215,7 +1231,7 @@ test('activeGuildBoss: 选了 boss 且 boss.mode 与当前副本一致才生效'
   assert.strictEqual(activeGuildBoss({ mode: 'guildbattle', guildBoss: 1 }, GUILD_BOSSES), null);
 });
 
-test('七罪王 boss: ルークスリア 火 ×15、BK ×3×0.07;「-」回到硬编码表 (火 vs 無 ×0.01、无 ×0.07)', () => {
+test('七罪王 boss: ルークスリア 火 ×15、BK時被ダメ減 BK ×3×0.07;「-」回到硬编码表 (火 vs 無 ×0.01、无 ×0.07)', () => {
   const c = mockChara();
   const slots = [{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null];
   const atk = (enemy) => {
@@ -1226,7 +1242,7 @@ test('七罪王 boss: ルークスリア 火 ×15、BK ×3×0.07;「-」回到�
     return computeStats(c, ctx.team[0].tr, 0, ctx).stats;
   };
   assert.strictEqual(atk({ bk: false, guildBoss: 2026102 })['攻撃力'], 13000 * 15);
-  assert.ok(Math.abs(atk({ bk: true, guildBoss: 2026102 })['攻撃力'] - 13000 * 15 * 3 * 0.07) <= 1);
+  assert.ok(Math.abs(atk({ bk: true, guildBoss: 2026102, bkDamageCut: true })['攻撃力'] - 13000 * 15 * 3 * 0.07) <= 1);
   const plain = atk({ bk: true, guildBoss: null })['攻撃力'];
   assert.ok(Math.abs(plain - 13000 * 0.01 * 3) <= 1, `「-」 ${plain}`);
   // ブレイク力 (base 1000):ルークスリア 下火属性也算弱点 (×1.5)、「-」时非弱点 (×0.1)
@@ -1247,6 +1263,22 @@ test('七罪王 boss: グーラ (光) 闇 ×15、火 ×0.01、BK 不乘 0.07', (
   assert.strictEqual(run(5, false), 13000 * 15);
   assert.ok(Math.abs(run(1, false) - 130) <= 1);
   assert.strictEqual(run(5, true), 13000 * 15 * 3);
+});
+
+test('enemy bkDamageCut: bk + guild 才 ×0.07 (不依赖 boss);普通副本 / 非 BK 不乘', () => {
+  const c = mockChara();
+  const slots = [{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null];
+  const atk = (enemy) => {
+    const ctx = buildCtx(slots, { enemy: { element: 6, difficulty: 'Normal', bkResistance: 'normal', ...enemy } });
+    return computeStats(c, ctx.team[0].tr, 0, ctx).stats['攻撃力'];
+  };
+  for (const mode of ['guildbattle', 'guildbattle_special', 'normal']) {
+    const off = atk({ mode, bk: true, bkDamageCut: false });
+    const on = atk({ mode, bk: true, bkDamageCut: true });
+    if (mode === 'normal') assert.strictEqual(on, off, mode);
+    else assert.ok(Math.abs(on - off * BK_DAMAGE_CUT_MULT) <= 1, `${mode} ${on} ${off}`);
+    assert.strictEqual(atk({ mode, bk: false, bkDamageCut: true }), atk({ mode, bk: false, bkDamageCut: false }), mode);
+  }
 });
 
 test('enemy advantageWeapons (chara weapon ∈ set) + guildbattle → Attack × 2.0', () => {

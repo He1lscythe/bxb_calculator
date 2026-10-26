@@ -243,7 +243,7 @@ export function soulMultiplier(rarity, lv) {
 const ELEMENT_K_NORMAL = {
   1: { 1: 0, 2: -1, 3: 1, 4: 0, 5: 0, 6: 0 }, // 火
   2: { 1: 1, 2: 0, 3: -1, 4: 0, 5: 0, 6: 0 }, // 水
-  3: { 1: 1, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0 }, // 風
+  3: { 1: -1, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0 }, // 風
   4: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0 }, // 光
   5: { 1: 0, 2: 0, 3: 0, 4: 1, 5: 0, 6: 0 }, // 闇
   6: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 }, // 無
@@ -301,6 +301,8 @@ export function guildBossElementMult(boss, srcElem) {
 // hensei enemy bar 硬编码倍率
 export const DIFFICULTY_MULT = { Normal: 1.0, Hard: 0.1, Lunatic: 0.005 };
 export const BK_RES_MULT = { normal: 3.0, high: 6.0 };
+// BK時被ダメ減 (七罪王 色欲のルークスリア「ブレイク時の被ダメージを大幅減」、训练场实测 DefenseDamage EnemyGuardBreak ×0.07)
+export const BK_DAMAGE_CUT_MULT = 0.07;
 export const ADVANTAGE_WEAPON_MULT = 2.0;
 // bdCapMult(n) = 1 + floor(n/2) × 0.25 (跟 wiki main 一致、整数 step 倍率)
 // slider UI step=0.01 允许细滑、但公式 floor 让半 step 倍率不变 (即 n=4.5 跟 n=4 同倍率)

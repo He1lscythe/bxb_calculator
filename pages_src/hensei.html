@@ -213,6 +213,7 @@
         emblemLvMax,
         elementMatchupMult,
         activeGuildBoss,
+        BK_DAMAGE_CUT_MULT,
         soulAwkMax,
         soulLvCap,
         soulMultiplier,
@@ -292,6 +293,7 @@
         bk: false, // BK状態 false=なし true=あり
         mode: 'normal', // 'normal' | 'guildbattle' | 'guildbattle_special' | 'other'
         bkResistance: 'normal', // 'normal' | 'high'（仅 ギルバト/特別版 时有效）
+        bkDamageCut: false, // BK時被ダメ減 ×0.07（仅 ギルバト/特別版 时有效）
         advantageWeapons: new Set(), // 1-12 武器 ID 集合（仅 ギルバト/特別版 有效）
         difficulty: 'Normal', // 'Normal' | 'Hard' | 'Lunatic'（仅 ギルバト/特別版 有效）
         guildTitle: null, // guildtitles.json 中的 id
@@ -654,7 +656,7 @@
 
       // ===== 編成 export / import (.json 文件 + 分享码 + URL #hash、deflate-raw 压缩) =====
       // 紧凑对象: 省略 tr/enemy 默认值 + 空 slot/crystals (import 时 merge 默认补回)。
-      const _ENEMY_DEF = { element: 6, bk: false, mode: 'normal', bkResistance: 'normal', difficulty: 'Normal', guildTitle: null, guildBoss: null, bd_cap: 0 };
+      const _ENEMY_DEF = { element: 6, bk: false, mode: 'normal', bkResistance: 'normal', bkDamageCut: false, difficulty: 'Normal', guildTitle: null, guildBoss: null, bd_cap: 0 };
       const _DEF_EMBLEMS = [{ id: 1, level: 25 }, { id: 4, level: 40 }, { id: 16, level: 55 }, { id: 17, level: 55 }];
       const _DEF_EMBLEMS_STR = JSON.stringify(_DEF_EMBLEMS);
       const _henseiCompact = () => {
@@ -732,6 +734,7 @@
           // guildTitle 校验 (失效置 null)
           if (enemy.guildTitle != null && !allGuildTitles.some((g) => g.id === enemy.guildTitle)) enemy.guildTitle = null;
           if (enemy.guildBoss != null && !allGuildBosses.some((g) => g.id === enemy.guildBoss)) enemy.guildBoss = null;
+          enemy.bkDamageCut = enemy.bkDamageCut === true;
         }
         renderEnemyBar();
         renderAll();
@@ -1531,8 +1534,8 @@
 
       // ===== STATS CALCULATOR (用 shared/stats-calc.js 的 s1〜s8 stage 链) =====
 
-      // ギルバト boss 的属性 / BK / コンボ / 出撃条件 摘要 (有利武器看按钮)
-      const _guildBossHint = (b) => {
+      // ギルバト boss 的属性 / BK / コンボ / 出撃条件 摘要 (有利武器看按钮)、ボス 旁「!」点开逐行显示
+      const _guildBossInfo = (b) => {
         const nv = b.negative_value || {};
         const els = [1, 2, 3, 4, 5, 6];
         let elem;
@@ -1546,10 +1549,15 @@
             .join('・');
         const parts = [elem];
         if (b.bk_resistance === 'high') parts.push('BK耐性 高');
-        if ((b.bk_damage_scale ?? 1) !== 1) parts.push(`BK中×${b.bk_damage_scale}`);
+        if ((b.bk_damage_scale ?? 1) !== 1) parts.push(`BK時被ダメ減 ×${b.bk_damage_scale}`);
         if (b.combo_cap) parts.push(`${b.combo_cap}コンボ以上無効`);
         if (b.condition && b.condition !== 'なし') parts.push(`出撃条件 ${b.condition}`);
-        return parts.join(' / ');
+        return parts;
+      };
+      export const toggleGuildBossInfo = (btn) => {
+        const boss = activeGuildBoss(enemy, allGuildBosses);
+        if (!boss) return closeHelpPopover();
+        toggleHelpPopover(btn, _guildBossInfo(boss).map(escHtml).join('<br>'), 'guild-boss-info');
       };
 
       // ===== ENEMY BAR (敵方/副本/工会信息) =====
@@ -1580,29 +1588,17 @@
         const sevenSinBtn = isGuild
           ? `<button class="eb-btn${isSevenSin ? ' on' : ''}" onclick="setEnemySevenSin(${!isSevenSin})">七罪王</button>`
           : '';
-        // 3b. boss 预设 (guild only、按当前副本 / 七罪王 过滤、按年分组新→旧)、「-」= 不套预设
+        // 3b. boss 预设 (guild only、普通 / 七罪王 同一列表 新→旧、选了自动切副本)、「-」= 不套预设
         let bossHtml = '';
         if (isGuild) {
-          const byYear = new Map();
-          for (const b of allGuildBosses) {
-            if (b.mode !== enemy.mode) continue;
-            const y = String(b.name || '').slice(0, 4);
-            if (!byYear.has(y)) byYear.set(y, []);
-            byYear.get(y).push(b);
-          }
-          const groups = [...byYear.entries()]
-            .sort((a, b) => b[0].localeCompare(a[0]))
-            .map(
-              ([y, bs]) =>
-                `<optgroup label="${y}">${bs
-                  .sort((a, b) => b.id - a.id)
-                  .map((b) => `<option value="${b.id}"${enemy.guildBoss === b.id ? ' selected' : ''}>${escHtml(b.name)}</option>`)
-                  .join('')}</optgroup>`,
-            )
+          const opts = [...allGuildBosses]
+            .sort((a, b) => b.id - a.id)
+            .map((b) => `<option value="${b.id}"${enemy.guildBoss === b.id ? ' selected' : ''}>${escHtml(b.name)}</option>`)
             .join('');
-          const boss = activeGuildBoss(enemy, allGuildBosses);
-          const hint = boss ? _guildBossHint(boss) : '';
-          bossHtml = `<div class="eb-group"><span class="eb-label">ボス</span><select onchange="setEnemyGuildBoss(this.value)"><option value="">-</option>${groups}</select>${hint ? `<span class="eb-hint">${escHtml(hint)}</span>` : ''}</div>`;
+          const infoBtn = activeGuildBoss(enemy, allGuildBosses)
+            ? `<button type="button" class="stats-help-btn eb-boss-info" onclick="toggleGuildBossInfo(this)" aria-expanded="false" title="ボス情報"><span class="qm">!</span></button>`
+            : '';
+          bossHtml = `<div class="eb-group"><span class="eb-label">ボス</span><select onchange="setEnemyGuildBoss(this.value)"><option value="">-</option>${opts}</select>${infoBtn}</div>`;
         }
         // 4. BK耐性 (guild only) — 单按钮 toggle：普通/高
         let bkResHtml = '';
@@ -1611,6 +1607,12 @@
           bkResHtml = `<div class="eb-group">
       <span class="eb-label">BK耐性</span>
       <button class="eb-btn${isHigh ? ' on' : ''}" onclick="setEnemyBkRes('${isHigh ? 'normal' : 'high'}')">${isHigh ? '高' : '普通'}</button>
+    </div>`;
+          // 4b. BK時被ダメ減 — 单按钮 toggle：なし/×0.07
+          const cut = !!enemy.bkDamageCut;
+          bkResHtml += `<div class="eb-group">
+      <span class="eb-label">BK時被ダメ減</span>
+      <button class="eb-btn${cut ? ' on' : ''}" onclick="setEnemyBkDamageCut(${!cut})">${cut ? `×${BK_DAMAGE_CUT_MULT}` : 'なし'}</button>
     </div>`;
         }
         // 7. 有利武器 (guild only) — 桌面行内 / 移动 6x2 grid
@@ -1811,6 +1813,7 @@
           enemy.mode = boss.mode;
           enemy.element = boss.element;
           enemy.bkResistance = boss.bk_resistance || 'normal';
+          enemy.bkDamageCut = (boss.bk_damage_scale ?? 1) !== 1;
           enemy.advantageWeapons = new Set(boss.advantage_weapons || []);
         }
         renderEnemyBar();
@@ -1841,6 +1844,12 @@
       };
       export const setEnemyBkRes = (r) => {
         enemy.bkResistance = r;
+        enemy.guildBoss = null;
+        renderEnemyBar();
+        refreshAllStats();
+      };
+      export const setEnemyBkDamageCut = (on) => {
+        enemy.bkDamageCut = !!on;
         enemy.guildBoss = null;
         renderEnemyBar();
         refreshAllStats();
@@ -3936,6 +3945,8 @@
         setEnemyGuildTitle,
         setEnemyGuildBoss,
         setEnemySevenSin,
+        setEnemyBkDamageCut,
+        toggleGuildBossInfo,
         setEnemyBdCap,
         openBdCapMaxPopup,
         toggleAdvWeapon,

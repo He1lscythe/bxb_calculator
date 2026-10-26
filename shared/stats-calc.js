@@ -36,6 +36,7 @@ import {
   guildBossElementMult,
   DIFFICULTY_MULT,
   BK_RES_MULT,
+  BK_DAMAGE_CUT_MULT,
   ADVANTAGE_WEAPON_MULT,
   bdCapMult,
   emblemEffectiveBairitu,
@@ -1347,7 +1348,7 @@ function _computeMotionSpeed(chara, tr, effects, trace = null, traceStage = null
 
 // ============================================================
 // enemy bar 硬编码倍率 (element matchup / difficulty / bkRes / advWeapons / bd_cap)
-// element / bd_cap 全局生效；difficulty / bkRes-high / advWeapons 仅 isGuildMode 生效
+// element / bd_cap 全局生效；difficulty / bkRes-high / bkDamageCut / advWeapons 仅 isGuildMode 生效
 // 返 { attackMul, parts } — 在 _computeImpl 内乘到 Attack (stage 后、UI 显示前)。
 // ブレイク力不在这里:EBD 的属性修正是 applyStaged 里的 4 格倍率 (s7_ebd)、只用这张表判「弱点」
 // guildTitle/emblems 不在此处、走 collectEffects 注入 enemy_buff source
@@ -1362,7 +1363,6 @@ function _computeEnemyMods(chara, tr, ctx) {
   const enemy = ctx?.enemy || {};
   const mode = enemy.mode || 'normal';
   const isGuildMode = mode === 'guildbattle' || mode === 'guildbattle_special';
-  const boss = activeGuildBoss(enemy, ctx?.allGuildBosses);
   const cMaster = chara?._master;
   const charaElem = cMaster?.element_id;
   const charaWeap = cMaster?.weapon_type_id;
@@ -1384,11 +1384,10 @@ function _computeEnemyMods(chara, tr, ctx) {
     parts.push({ label: 'BK耐性 high (×6/×3)', attackMul: f });
   }
 
-  // #6 boss 的 BK 中被ダメ倍率 (七罪王 色欲のルークスリア ×0.07)
-  const bkScale = boss ? +(boss.bk_damage_scale ?? 1) : 1;
-  if (enemy.bk && bkScale !== 1) {
-    attackMul *= bkScale;
-    parts.push({ label: 'BK中被ダメ (boss)', attackMul: bkScale });
+  // #6 BK時被ダメ減 (bk + isGuildMode gate、七罪王 色欲のルークスリア ×0.07)
+  if (enemy.bk && isGuildMode && enemy.bkDamageCut) {
+    attackMul *= BK_DAMAGE_CUT_MULT;
+    parts.push({ label: 'BK時被ダメ減', attackMul: BK_DAMAGE_CUT_MULT });
   }
 
   // #3 difficulty (isGuildMode-gated)
