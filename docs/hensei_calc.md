@@ -105,7 +105,8 @@ v = ceil(v)                                           出口 ceil (唯一 round 
 - step 53 `DefenseDamageSkill`(敌方被动:连乘 / 清零 / 每 hit 伤害上限屏障)— 依赖具体敌人,不算
 - step 10b `AllTargetRate` 只算技能 / BD buff 里的 `AllTarget`,DamageImpacts 以外的写入者没有
 - 敵方属性相性 (step 9) 在游戏里是 server 下发的敌人 `enemy_abilities`、不是固定表 —— s8 的 `_computeEnemyMods` 是 wiki 沿用的硬编码表(普通副本的 ×2 / ×0.5 与 实测一致,ギルバト 的 弱点 15 / 無 10 / 其余 1 与 2026-09 マテンビョウ 训练场实测一致,相性不利 0.1 未实测)
-- ギルバト boss 预设 (`data/guildbosses.json`、2022 年起每期 前半 / 後半 各一条):编成页「副本」只有 普通 / ギルバト / 他,七罪王 (`guildbattle_special`) 由 ギルバト 时出现的「七罪王」按钮切换;「ボス」下拉只列当前副本 (普通ギルバト / 七罪王) 的 boss、按年分组新→旧、名字 `年月-前半|後半-boss名`,默认「-」= 不套预设。选中时属性相性改用该 boss 的 `negative_value` —— 15 → ×15、其余 ×negative_value×`element_cut` (七罪王「大幅減」= 0.01、其余 1),ブレイク力的弱点判定用同一倍率;BK 中再乘 `bk_damage_scale` (色欲のルークスリア 0.07)。选中同时覆盖 副本 / 敵属性 / BK耐性 / 有利武器,手动改这几项、换副本或切七罪王回「-」;敵BK状態 / 難易度 等不是 boss 配置、不影响。`negative_value` 按 boss 技能原文的 `element_rule` 从上面的硬编码表推出 —— `guild` (弱点属性と無属性以外…軽減) = 普通ギルバト表、`seven` (弱点属性以外…大幅減) = 七罪王表、`flat` (全属性の相性有利・不利の影響を受けない:アヴァターラ、色欲のルークスリア) = 全属性 15,所以只有 `flat` 的 boss 选不选属性倍率有区别
+- ギルバト boss 预设 (`data/guildbosses.json`、2022 年起每期 前半 / 後半 各一条):编成页「副本」只有 普通 / ギルバト / 他,七罪王 (`guildbattle_special`) 由 ギルバト 时出现的「七罪王」按钮切换;「ボス」下拉不分 普通 / 七罪王、全部按 id 新→旧排成一列 (名字 `年月-前半|後半-boss名`,七罪王 名字里带「"七罪王"」),选七罪王的 boss 自动切到七罪王 (按钮亮)、选普通的切回 ギルバト,默认「-」= 不套预设;选了 boss 后下拉右侧出「!」,点开逐行显示 属性倍率 / BK耐性 / BK時被ダメ減 / コンボ上限 / 出撃条件。选中时属性相性改用该 boss 的 `negative_value` —— 15 → ×15、其余 ×negative_value×`element_cut` (七罪王「大幅減」= 0.01、其余 1),ブレイク力的弱点判定用同一倍率。选中同时覆盖 副本 / 敵属性 / BK耐性 / BK時被ダメ減 (`bk_damage_scale` ≠ 1 → 开) / 有利武器,手动改这几项、换副本或切七罪王回「-」;敵BK状態 / 難易度 等不是 boss 配置、不影响。`negative_value` 按 boss 技能原文的 `element_rule` 从上面的硬编码表推出 —— `guild` (弱点属性と無属性以外…軽減) = 普通ギルバト表、`seven` (弱点属性以外…大幅減) = 七罪王表、`flat` (全属性の相性有利・不利の影響を受けない:アヴァターラ、色欲のルークスリア) = 全属性 15,所以只有 `flat` 的 boss 选不选属性倍率有区别
+- BK時被ダメ減 (`enemy.bkDamageCut`、enemy bar 单按钮 なし / ×0.07、guild only):敵BK状態 = あり 时攻撃力再 ×0.07 (`BK_DAMAGE_CUT_MULT`,色欲のルークスリア「ブレイク時の被ダメージを大幅減」、训练场实测 `DefenseDamage` `EnemyGuardBreak` ×0.07),跟 BK ×3 / BK耐性 高 ×6 叠乘;选 boss 时按 `bk_damage_scale` 自动开关、手动切回「-」
 
 **LP tier × Total** (step 4):
 - `computeStats` (普通攻击、UI 显示): HpCheck `[1.0, 1.1, 1.5, 2.0]` → tier 0/1/2/3
@@ -507,7 +508,7 @@ UI 侧:魔装 section 是唯一「存在性动态」的一块 —— 216/657 的
 | `enemy_break` | **s6 (Mul → Add)** | Mul / Add | parameter 前缀 `Enemy_Break_*`、gate `enemy.bk` (step 48/49) |
 | **inline ×3** | **s7 (× Attack)** | Multiply | `opts.enemyBkX3` step 51、enemy.bk gate  |
 | **EBD 4 格** | **s7_ebd (× BK)** | Multiply | 只ブレイク力:弱点 × 敵BK 的 ×1.8 / ×1.2 / ×1.5 / ×0.1 |
-| enemy mods | **s8 (× Attack)** | Multiply | 属性相性 (全局)、難度/BK耐性/有利武器 (guild gate)、ギルバト boss (negative_value / BK 中倍率)、BD cap — `_computeEnemyMods` 硬编码倍率、stage 后乘 + ceil |
+| enemy mods | **s8 (× Attack)** | Multiply | 属性相性 (全局)、難度/BK耐性/BK時被ダメ減/有利武器 (guild gate)、ギルバト boss (negative_value)、BD cap — `_computeEnemyMods` 硬编码倍率、stage 后乘 + ceil |
 
 ### 验证调试
 
@@ -590,7 +591,7 @@ trace = {
 | s4c_bd_mul | BD buff Mul |
 | s5a_other_add / s5b_soul_add / s5c_bd_add | Add: 同上分类、计算顺序 = stage 顺序 |
 | s6_enemy_break / s6b_mp / s7_ebd / s7_inline3 / s7b_ceil | step48/49 / step50 MP 不足 / EBD 4 格 (只ブレイク力) / step51 / 出口 ceil |
-| s8_enemy_mods | 属性相性/難度/有利武器/boss BK 中倍率/BD cap (逐因子、链尾=ceil 后显示值) |
+| s8_enemy_mods | 属性相性/難度/BK耐性/BK時被ダメ減/有利武器/BD cap (逐因子、链尾=ceil 后显示值) |
 | s9_hits | Hit1-3 逐 effect 序贯 (每步 floor、after=floor 后值) + max(1) 终步 |
 | s10_damage_limit | DamageLimitBreak fold (先 Mul 池、后 Add 池) + floor 终步 |
 | s11_speed | 転速: base.Speed → +omoide Add链 → ×魔装 Mul → floor (server-fold) → ×Mul链 → ×HP 曲線池 → ×partner → +其他Add链 |

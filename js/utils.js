@@ -200,14 +200,22 @@ export const toggleHelpPopover = (btn, html, id, extraCls) => {
   btn.setAttribute('aria-expanded', 'true');
 
   const r = btn.getBoundingClientRect();
-  const popW = pop.offsetWidth;
+  // 锁宽:设了 left 之后可用宽度变窄会重新折行、高度变了就盖住按钮 (移动端贴右边)
+  const popW = Math.ceil(pop.getBoundingClientRect().width);
+  pop.style.width = popW + 'px';
   const popH = pop.offsetHeight;
   const margin = 8;
-  // 横向: 对齐 ? 按钮中心,并夹住不让它溢出视口
+  // 横向: 对齐 ? 按钮中心,并夹住不让它溢出视口 (clientWidth 不含滚动条)
   let left = r.left + r.width / 2 - popW / 2 + window.scrollX;
-  left = Math.max(margin, Math.min(left, window.innerWidth - margin - popW));
+  left = Math.max(margin, Math.min(left, document.documentElement.clientWidth - margin - popW));
   pop.style.left = left + 'px';
-  pop.style.top = r.top - popH - 10 + window.scrollY + 'px';
+  // 上方放不下 (hensei enemy bar 这类贴顶的触发点) → 翻到下方、箭头朝上
+  let top = r.top - popH - 10;
+  if (top < margin) {
+    top = r.bottom + 10;
+    pop.classList.add('below');
+  }
+  pop.style.top = top + window.scrollY + 'px';
   // 夹过之后箭头仍然指向 ? 按钮(而不是气泡中心)
   const arrowX = r.left + r.width / 2 - left + window.scrollX;
   pop.style.setProperty('--arrow-x', Math.max(12, Math.min(popW - 12, arrowX)) + 'px');
