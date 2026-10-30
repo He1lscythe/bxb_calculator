@@ -1174,6 +1174,17 @@ test('enemy bk + bkResistance high + guildbattle → 额外 ×2 (合计 ×6)', (
   assert.strictEqual(rH.stats['攻撃力'], rN.stats['攻撃力'] * 2);
 });
 
+test('bkResistance very_high (極高) 只是标记: 计算同 normal、不带 BK時被ダメ減', () => {
+  const c = mockChara();
+  const slots = [{ chara: c, tr: { ...mkTr(), level: 250, jukudo: 60 } }, null, null];
+  const atk = (enemy) => {
+    const ctx = buildCtx(slots, { enemy: { element: 6, bk: true, mode: 'guildbattle', difficulty: 'Normal', ...enemy } });
+    return computeStats(c, ctx.team[0].tr, 0, ctx).stats['攻撃力'];
+  };
+  assert.strictEqual(atk({ bkResistance: 'very_high' }), atk({ bkResistance: 'normal' }));
+  assert.strictEqual(atk({ bkResistance: 'very_high', bkDamageCut: true }), atk({ bkResistance: 'normal', bkDamageCut: true }));
+});
+
 test('elementMatchupMult normal: 火>風>水>火 三角 ×2 / ×0.5、光闇互克 ×2、無 全 ×1', () => {
   const want = [
     [1, 0.5, 2, 1, 1, 1],
@@ -1217,6 +1228,9 @@ test('guildbosses.json: negative_value × element_cut 跟 element_rule 对应的
   assert.ok(GUILD_BOSSES.every((b) => [1, BK_DAMAGE_CUT_MULT].includes(b.bk_damage_scale)));
   assert.strictEqual(gb(2026041).combo_cap, 44);
   assert.strictEqual(gb(2026091).bk_resistance, 'high');
+  // 極高 = 技能里有「ブレイク時の被ダメージを大幅減」,只有 2026-10 後半 ルークスリア
+  assert.deepStrictEqual(GUILD_BOSSES.filter((b) => b.bk_resistance === 'very_high').map((b) => b.id), [2026102]);
+  assert.ok(GUILD_BOSSES.every((b) => ['normal', 'high', 'very_high'].includes(b.bk_resistance)));
   assert.deepStrictEqual(gb(2026092).advantage_weapons, [1, 8, 11]);
   // 2022 早期有利武器写在行動パターン「種別【長剣・杖棒・戦斧・大鎌】…被ダメージが上昇」
   assert.deepStrictEqual(gb(2022051).advantage_weapons, [1, 4, 7, 12]);

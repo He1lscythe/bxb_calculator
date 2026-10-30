@@ -1247,10 +1247,10 @@ test('ボス 预设: 选中覆盖 属性/BK耐性/BK時被ダメ減/有利武器
   expect((await enemy()).mode).toBe('guildbattle');
   await expect(sevenSinBtn(page)).not.toHaveClass(/\bon\b/);
   await bossSel(page).selectOption('2026102');
-  expect(await enemy()).toEqual({ boss: 2026102, mode: 'guildbattle_special', element: 6, bkRes: 'normal', cut: true, adv: [] });
+  expect(await enemy()).toEqual({ boss: 2026102, mode: 'guildbattle_special', element: 6, bkRes: 'very_high', cut: true, adv: [] });
   await expect(cutBtn).toHaveClass(/\bon\b/);
   await expect(cutBtn).toHaveText('×0.07');
-  expect(await info()).toBe('全属性×15\nBK時被ダメ減 ×0.07');
+  expect(await info()).toBe('全属性×15\nBK耐性 極高\nBK時被ダメ減 ×0.07');
   // 敵BK状態 / 難易度 不是 boss 配置 → 不回「-」
   await page.evaluate(() => { window.setEnemyBk(true); window.setEnemyDiff('Hard'); });
   expect((await enemy()).boss).toBe(2026102);
@@ -1310,4 +1310,137 @@ test('ボス 预设: ルークスリア 攻撃力 = 全属性 ×15、BK 中再 �
   await page.locator('#score-btn').click();
   await page.locator('#score-body .score-run-btn').click();
   expect(await page.locator('#score-carry').textContent()).toMatch(/44コンボ以上無効: [\d,]+ hit 除外/);
+});
+
+test('BK耐性: 普通 → 高 → 極高 循环、固定 2 字宽;跟 BK時被ダメ減 互不联动', async ({ page }) => {
+  await waitHenseiReady(page);
+  await page.evaluate(() => window.setEnemyMode('guildbattle'));
+  const resBtn = page.locator('#enemy-bar .eb-bkres');
+  const cutBtn = page.locator('#enemy-bar button[onclick^="setEnemyBkDamageCut"]');
+  const state = () => page.evaluate(() => [window.state.enemy.bkResistance, window.state.enemy.bkDamageCut]);
+  const widths = [];
+  for (const [label, val] of [['普通', 'normal'], ['高', 'high'], ['極高', 'very_high']]) {
+    await expect(resBtn).toHaveText(label);
+    expect(await state()).toEqual([val, false]); // 切 BK耐性 不动 BK時被ダメ減
+    widths.push((await resBtn.boundingBox()).width);
+    await resBtn.click();
+  }
+  await expect(resBtn).toHaveText('普通');
+  expect(new Set(widths).size).toBe(1);
+  const { w, fs } = await resBtn.evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { w: parseFloat(s.width), fs: parseFloat(s.fontSize) };
+  });
+  expect(w).toBe(fs * 2); // 内容宽 = 2 个汉字
+  await cutBtn.click();
+  expect(await state()).toEqual(['normal', true]); // 开 BK時被ダメ減 不动 BK耐性
+});
+
+// ============================================================
+// 編成 import 的校验 / 夹紧 / 结晶槽位
+// ============================================================
+// read code 也吃裸 JSON (_decodeHensei 容错) → 直接灌任意配置
+const importRaw = (page, cfg) =>
+  page.evaluate(async (c) => {
+    document.getElementById('io-import-str').value = typeof c === 'string' ? c : JSON.stringify(c);
+    await window.ioImportString();
+    return document.getElementById('io-msg').textContent;
+  }, cfg);
+const exportCode = (page) =>
+  page.evaluate(async () => {
+    await window.openIoModal();
+    return document.getElementById('io-export-str').value;
+  });
+const decodeCode = (page, code) =>
+  page.evaluate(async (c) => {
+    const bin = atob(c.slice(5).replace(/-/g, '+').replace(/_/g, '/'));
+    const s = new Blob([Uint8Array.from(bin, (ch) => ch.charCodeAt(0))]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+    return JSON.parse(await new Response(s).text());
+  }, code);
+const enemyOf = (page) =>
+  page.evaluate(() => {
+    const e = window.state.enemy;
+    return { boss: e.guildBoss, mode: e.mode, element: e.element, bkRes: e.bkResistance, cut: e.bkDamageCut, adv: [...e.advantageWeapons].sort((a, b) => a - b) };
+  });
+
+test('import: 带 boss 的码按当前 guildbosses.json 重新套预设;boss 失效时用码里的字段', async ({ page }) => {
+  await waitHenseiReady(page);
+  // 模拟 boss 数据修正前导出的码: 属性 / BK耐性 / 有利武器 / BK時被ダメ減 都是旧值
+  const stale = { mode: 'guildbattle_special', guildBoss: 2026102, element: 1, bkResistance: 'high', bkDamageCut: false, advantageWeapons: [1, 2] };
+  expect(await importRaw(page, { v: 1, team: [], enemy: stale })).toContain('loaded');
+  expect(await enemyOf(page)).toEqual({ boss: 2026102, mode: 'guildbattle_special', element: 6, bkRes: 'very_high', cut: true, adv: [] });
+  await expect(bossSel(page)).toHaveValue('2026102');
+  await expect(page.locator('#enemy-bar .eb-boss-info')).toHaveCount(1);
+  expect(await importRaw(page, { v: 1, team: [], enemy: { ...stale, mode: 'guildbattle', guildBoss: 1999011 } })).toContain('loaded');
+  expect(await enemyOf(page)).toEqual({ boss: null, mode: 'guildbattle', element: 1, bkRes: 'high', cut: false, adv: [1, 2] });
+});
+
+test('import: enemy 只收已知键、非法值回默认', async ({ page }) => {
+  await waitHenseiReady(page);
+  const bad = { mode: 'guild', element: 9, bkResistance: 'max', difficulty: 'Extreme', bk: 'yes', bkDamageCut: 1,
+    guildTitle: 999999, bd_cap: -3, advantageWeapons: [0, 3, 13, 'x', 3.5, 12], foo: 1 };
+  expect(await importRaw(page, { v: 1, team: [], enemy: bad })).toContain('loaded');
+  const e = await page.evaluate(() => {
+    const x = window.state.enemy;
+    return { mode: x.mode, element: x.element, bkRes: x.bkResistance, diff: x.difficulty, bk: x.bk, cut: x.bkDamageCut,
+      title: x.guildTitle, bd: x.bd_cap, adv: [...x.advantageWeapons].sort((a, b) => a - b), foo: 'foo' in x };
+  });
+  expect(e).toEqual({ mode: 'normal', element: 6, bkRes: 'normal', diff: 'Normal', bk: false, cut: false, title: null, bd: 0, adv: [3, 12], foo: false });
+  await expect(modeSel(page)).toHaveValue('normal');
+});
+
+// BD上限 max 按 slot < teamSize 取各槽 bdCapMax 的最大值;1 号位空、加成在 2 号位时人数晚设就会截
+test('import: 当前 1 人、导入 3 人 → bd_cap 按导入后的人数算上限、不被截', async ({ page }) => {
+  await waitHenseiReady(page);
+  await setupSlotWithChara(page, 1, 165801); // BlazeGaugeMaxLevel +13 → 上限 22
+  await page.evaluate(() => window.setEnemyBdCap(15));
+  const code = await exportCode(page);
+  await page.evaluate(() => window.setTeamSize(1));
+  expect(await page.evaluate(() => window.state.enemy.bd_cap)).toBeLessThanOrEqual(9);
+  expect(await importRaw(page, code)).toContain('loaded');
+  expect(await page.evaluate(() => window.state.enemy.bd_cap)).toBe(15);
+  expect(await page.evaluate(() => +document.querySelector('.bd-cap-slider').max)).toBe(22);
+});
+
+test('import: 结晶超出槽数裁掉、state / 覚醒 / 魂 Lv 夹紧', async ({ page }) => {
+  await waitHenseiReady(page);
+  await setupSlot0WithChara(page, 100101);
+  const base = await page.evaluate(() => {
+    const t = window.state.team[0];
+    return { tr: { ...t.tr }, soul: t.soul, cr: window.state.allCrystals[0].id };
+  });
+  const crystals = Array.from({ length: 10 }, () => ({ id: base.cr, lv: 1, weight: 100, purity: 100 }));
+  const tr = { ...base.tr, state: '超改造', awakening: 99, soul_lv: 9999 };
+  expect(await importRaw(page, { v: 1, teamSize: 1, team: [{ chara: 100101, soul: base.soul, crystals, tr }] })).toContain('loaded');
+  const r = await page.evaluate(() => {
+    const t = window.state.team[0];
+    const c = window.state.allCharas.find((x) => x.id === t.chara);
+    return {
+      n: t.crystals.length, slots: window.crystalSlotCount(c, 0),
+      state: t.tr.state, want: ['通常', '改造', '極弐'].find((s) => c.states?.[s]),
+      aw: t.tr.awakening, awMax: +document.getElementById('tr-awslider-0').max,
+      soulLv: t.tr.soul_lv, soulCap: +document.getElementById('soul-lv-slider-0').max,
+    };
+  });
+  expect(r.slots).toBeLessThan(10);
+  expect(r.n).toBe(r.slots);
+  expect(r.state).toBe(r.want);
+  expect(r.aw).toBe(r.awMax);
+  expect(r.soulLv).toBe(r.soulCap);
+  expect(r.soulCap).toBeLessThan(9999);
+});
+
+test('bxb1 往返: 结晶保留空槽位置', async ({ page }) => {
+  await waitHenseiReady(page);
+  await setupSlot0WithChara(page, 100101);
+  const [a, b] = await page.evaluate(() => window.state.allCrystals.slice(0, 2).map((c) => c.id));
+  expect(await page.evaluate(() => window.state.team[0].crystals.length)).toBeGreaterThanOrEqual(4);
+  await page.evaluate(([x, y]) => { window.setCrystal(0, 1, x); window.setCrystal(0, 3, y); }, [a, b]);
+  const code = await exportCode(page);
+  expect((await decodeCode(page, code)).team[0].crystals.map((c) => c && c.id)).toEqual([null, a, null, b]);
+  await page.evaluate(() => { window.setCrystal(0, 1, null); window.setCrystal(0, 3, null); });
+  expect(await importRaw(page, code)).toContain('loaded');
+  const ids = await page.evaluate(() => window.state.team[0].crystals.map((c) => c && c.id));
+  expect(ids.slice(0, 4)).toEqual([null, a, null, b]);
+  expect(ids.slice(4).every((x) => x === null)).toBe(true);
 });
