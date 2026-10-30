@@ -242,6 +242,8 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 | `npm test` | 319/319 单测 (tests/unit/、14 file) |
 | `npx playwright test` | 93/93 UI e2e (tests/ui/、6 file): hensei 装备联动 57 / edit flow 14 / 効果 tag 8 / 結晶 UI 8 / 結晶 virtual list 3 / 短链 3 |
 
+CI `ui.yml` (ui-smoke) 的 runner 固定 `ubuntu-24.04`:`ubuntu-latest` 自 2026-10 起是 26.04,Playwright 1.60 不支持 (`playwright install --with-deps` 直接报错退出);升到支持 26.04 的 Playwright 后可改回。
+
 **保存流程**:
 1. viewer edit mode → `computeDiff(orig, edit, prev)` → 入 `state.reviseData[id]` + `sessionReviseIds.add`
 2. 顶部 revise bar 显示 "未保存 N 条修正"、点 "保存" → `submitRevise(body)` POST /save
