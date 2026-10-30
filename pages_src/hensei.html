@@ -292,7 +292,7 @@
         element: 6, // 1-6（攻击方=魔剣 element，被攻击方=enemy.element）
         bk: false, // BK状態 false=なし true=あり
         mode: 'normal', // 'normal' | 'guildbattle' | 'guildbattle_special' | 'other'
-        bkResistance: 'normal', // 'normal' | 'high'（仅 ギルバト/特別版 时有效）
+        bkResistance: 'normal', // 'normal' | 'high' | 'very_high'（仅 ギルバト/特別版 时有效;very_high 计算同 normal）
         bkDamageCut: false, // BK時被ダメ減 ×0.07（仅 ギルバト/特別版 时有效）
         advantageWeapons: new Set(), // 1-12 武器 ID 集合（仅 ギルバト/特別版 有效）
         difficulty: 'Normal', // 'Normal' | 'Hard' | 'Lunatic'（仅 ギルバト/特別版 有效）
@@ -661,7 +661,7 @@
       const _ENEMY_ENUM = {
         element: [1, 2, 3, 4, 5, 6],
         mode: ['normal', 'guildbattle', 'guildbattle_special', 'other'],
-        bkResistance: ['normal', 'high'],
+        bkResistance: ['normal', 'high', 'very_high'],
         difficulty: ['Normal', 'Hard', 'Lunatic'],
       };
       const _DEF_EMBLEMS = [{ id: 1, level: 25 }, { id: 4, level: 40 }, { id: 16, level: 55 }, { id: 17, level: 55 }];
@@ -1569,6 +1569,8 @@
       // ===== STATS CALCULATOR (用 shared/stats-calc.js 的 s1〜s8 stage 链) =====
 
       // ギルバト boss 的属性 / BK / コンボ / 出撃条件 摘要 (有利武器看按钮)、ボス 旁「!」点开逐行显示
+      // 極高 只是标记 (BK 中倍率同普通),不联动 BK時被ダメ減
+      const BK_RES_LABEL = { normal: '普通', high: '高', very_high: '極高' };
       const _guildBossInfo = (b) => {
         const nv = b.negative_value || {};
         const els = [1, 2, 3, 4, 5, 6];
@@ -1582,7 +1584,7 @@
             .map((e) => `${ELEMENT[e]}×${nv[e]}`)
             .join('・');
         const parts = [elem];
-        if (b.bk_resistance === 'high') parts.push('BK耐性 高');
+        if (BK_RES_LABEL[b.bk_resistance] && b.bk_resistance !== 'normal') parts.push(`BK耐性 ${BK_RES_LABEL[b.bk_resistance]}`);
         if ((b.bk_damage_scale ?? 1) !== 1) parts.push(`BK時被ダメ減 ×${b.bk_damage_scale}`);
         if (b.combo_cap) parts.push(`${b.combo_cap}コンボ以上無効`);
         if (b.condition && b.condition !== 'なし') parts.push(`出撃条件 ${b.condition}`);
@@ -1634,13 +1636,14 @@
             : '';
           bossHtml = `<div class="eb-group"><span class="eb-label">ボス</span><select onchange="setEnemyGuildBoss(this.value)"><option value="">-</option>${opts}</select>${infoBtn}</div>`;
         }
-        // 4. BK耐性 (guild only) — 单按钮 toggle：普通/高
+        // 4. BK耐性 (guild only) — 单按钮循环：普通 → 高 → 極高
         let bkResHtml = '';
         if (isGuild) {
-          const isHigh = enemy.bkResistance === 'high';
+          const steps = Object.keys(BK_RES_LABEL);
+          const ri = Math.max(0, steps.indexOf(enemy.bkResistance));
           bkResHtml = `<div class="eb-group">
       <span class="eb-label">BK耐性</span>
-      <button class="eb-btn${isHigh ? ' on' : ''}" onclick="setEnemyBkRes('${isHigh ? 'normal' : 'high'}')">${isHigh ? '高' : '普通'}</button>
+      <button class="eb-btn eb-bkres${ri ? ' on' : ''}" onclick="setEnemyBkRes('${steps[(ri + 1) % steps.length]}')">${BK_RES_LABEL[steps[ri]]}</button>
     </div>`;
           // 4b. BK時被ダメ減 — 单按钮 toggle：なし/×0.07
           const cut = !!enemy.bkDamageCut;

@@ -1247,10 +1247,10 @@ test('ボス 预设: 选中覆盖 属性/BK耐性/BK時被ダメ減/有利武器
   expect((await enemy()).mode).toBe('guildbattle');
   await expect(sevenSinBtn(page)).not.toHaveClass(/\bon\b/);
   await bossSel(page).selectOption('2026102');
-  expect(await enemy()).toEqual({ boss: 2026102, mode: 'guildbattle_special', element: 6, bkRes: 'normal', cut: true, adv: [] });
+  expect(await enemy()).toEqual({ boss: 2026102, mode: 'guildbattle_special', element: 6, bkRes: 'very_high', cut: true, adv: [] });
   await expect(cutBtn).toHaveClass(/\bon\b/);
   await expect(cutBtn).toHaveText('×0.07');
-  expect(await info()).toBe('全属性×15\nBK時被ダメ減 ×0.07');
+  expect(await info()).toBe('全属性×15\nBK耐性 極高\nBK時被ダメ減 ×0.07');
   // 敵BK状態 / 難易度 不是 boss 配置 → 不回「-」
   await page.evaluate(() => { window.setEnemyBk(true); window.setEnemyDiff('Hard'); });
   expect((await enemy()).boss).toBe(2026102);
@@ -1312,6 +1312,30 @@ test('ボス 预设: ルークスリア 攻撃力 = 全属性 ×15、BK 中再 �
   expect(await page.locator('#score-carry').textContent()).toMatch(/44コンボ以上無効: [\d,]+ hit 除外/);
 });
 
+test('BK耐性: 普通 → 高 → 極高 循环、固定 2 字宽;跟 BK時被ダメ減 互不联动', async ({ page }) => {
+  await waitHenseiReady(page);
+  await page.evaluate(() => window.setEnemyMode('guildbattle'));
+  const resBtn = page.locator('#enemy-bar .eb-bkres');
+  const cutBtn = page.locator('#enemy-bar button[onclick^="setEnemyBkDamageCut"]');
+  const state = () => page.evaluate(() => [window.state.enemy.bkResistance, window.state.enemy.bkDamageCut]);
+  const widths = [];
+  for (const [label, val] of [['普通', 'normal'], ['高', 'high'], ['極高', 'very_high']]) {
+    await expect(resBtn).toHaveText(label);
+    expect(await state()).toEqual([val, false]); // 切 BK耐性 不动 BK時被ダメ減
+    widths.push((await resBtn.boundingBox()).width);
+    await resBtn.click();
+  }
+  await expect(resBtn).toHaveText('普通');
+  expect(new Set(widths).size).toBe(1);
+  const { w, fs } = await resBtn.evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { w: parseFloat(s.width), fs: parseFloat(s.fontSize) };
+  });
+  expect(w).toBe(fs * 2); // 内容宽 = 2 个汉字
+  await cutBtn.click();
+  expect(await state()).toEqual(['normal', true]); // 开 BK時被ダメ減 不动 BK耐性
+});
+
 // ============================================================
 // 編成 import 的校验 / 夹紧 / 结晶槽位
 // ============================================================
@@ -1344,7 +1368,7 @@ test('import: 带 boss 的码按当前 guildbosses.json 重新套预设;boss 失
   // 模拟 boss 数据修正前导出的码: 属性 / BK耐性 / 有利武器 / BK時被ダメ減 都是旧值
   const stale = { mode: 'guildbattle_special', guildBoss: 2026102, element: 1, bkResistance: 'high', bkDamageCut: false, advantageWeapons: [1, 2] };
   expect(await importRaw(page, { v: 1, team: [], enemy: stale })).toContain('loaded');
-  expect(await enemyOf(page)).toEqual({ boss: 2026102, mode: 'guildbattle_special', element: 6, bkRes: 'normal', cut: true, adv: [] });
+  expect(await enemyOf(page)).toEqual({ boss: 2026102, mode: 'guildbattle_special', element: 6, bkRes: 'very_high', cut: true, adv: [] });
   await expect(bossSel(page)).toHaveValue('2026102');
   await expect(page.locator('#enemy-bar .eb-boss-info')).toHaveCount(1);
   expect(await importRaw(page, { v: 1, team: [], enemy: { ...stale, mode: 'guildbattle', guildBoss: 1999011 } })).toContain('loaded');

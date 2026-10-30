@@ -1378,6 +1378,7 @@ function _computeEnemyMods(chara, tr, ctx) {
   // #4 bkResistance × bk (bk gate)
   // 注: 普通 BK ×3 已在 stage 7 inline ×3 完成 ( step 51)、不重复
   // 这里只处理 ギルバト high resistance 额外 ×2 (升级 normal ×3 → ×6、跟 wiki main L971 一致)
+  // very_high (極高) 只是标记、同 normal;减伤走 #6 bkDamageCut
   if (enemy.bk && isGuildMode && enemy.bkResistance === 'high') {
     const f = BK_RES_MULT.high / BK_RES_MULT.normal;  // 6/3 = 2 (额外倍率)
     attackMul *= f;
