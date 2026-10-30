@@ -657,8 +657,17 @@
       // ===== 編成 export / import (.json 文件 + 分享码 + URL #hash、deflate-raw 压缩) =====
       // 紧凑对象: 省略 tr/enemy 默认值 + 空 slot/crystals (import 时 merge 默认补回)。
       const _ENEMY_DEF = { element: 6, bk: false, mode: 'normal', bkResistance: 'normal', bkDamageCut: false, difficulty: 'Normal', guildTitle: null, guildBoss: null, bd_cap: 0 };
+      // import 校验: 枚举字段只收合法值、否则回默认
+      const _ENEMY_ENUM = {
+        element: [1, 2, 3, 4, 5, 6],
+        mode: ['normal', 'guildbattle', 'guildbattle_special', 'other'],
+        bkResistance: ['normal', 'high'],
+        difficulty: ['Normal', 'Hard', 'Lunatic'],
+      };
       const _DEF_EMBLEMS = [{ id: 1, level: 25 }, { id: 4, level: 40 }, { id: 16, level: 55 }, { id: 17, level: 55 }];
       const _DEF_EMBLEMS_STR = JSON.stringify(_DEF_EMBLEMS);
+      // 结晶按槽位导出 (空槽 = null、保留位置)、每个魔剣最多 10 槽
+      const _IO_CRYSTAL_MAX = 10;
       const _henseiCompact = () => {
         const def = mkTr();
         const ctr = (tr) => {
@@ -674,8 +683,9 @@
           const o = {};
           for (const k of ['chara', 'soul', 'bg', 'masou']) if (s[k] != null) o[k] = s[k];
           const cr = (s.crystals || [])
-            .filter((c) => c && c.id != null) // 过滤未填的结晶槽 (null)
-            .map((c) => ({ id: c.id, lv: c.lv, weight: c.weight, purity: c.purity }));
+            .slice(0, _IO_CRYSTAL_MAX)
+            .map((c) => (c && c.id != null ? { id: c.id, lv: c.lv, weight: c.weight, purity: c.purity } : null));
+          while (cr.length && cr[cr.length - 1] === null) cr.pop(); // 尾部空槽省略
           if (cr.length) o.crystals = cr;
           const t = ctr(s.tr || {});
           if (Object.keys(t).length) o.tr = t;
@@ -698,6 +708,18 @@
         return { v: 1, teamSize, ...(mainSlot ? { mainSlot } : {}), team: team.map(cslot), enemy: ce() };
       };
 
+      // import 后补上 UI 平时会做的夹紧: state / 覚醒 / 魂 Lv / 结晶槽数
+      const _clampImportedSlot = (i) => {
+        const c = allCharas.find((x) => x.id === team[i].chara);
+        const tr = team[i].tr;
+        if (c) {
+          if (!c.states?.[tr.state]) tr.state = ['通常', '改造', '極弐'].find((s) => c.states?.[s]) || '通常';
+          tr.awakening = Math.min(Math.max(0, +tr.awakening || 0), AWAKENING_MAX_TBL[c.rarity] ?? 0);
+        }
+        _clampSoulTr(i);
+        syncCrystals(i);
+      };
+
       // 把配置(紧凑或全量)灌回 team/enemy 并重渲染。缺失/失效 id 跳过、tr/enemy 缺省补默认值。
       const _applyHenseiConfig = (data) => {
         if (!data || !Array.isArray(data.team)) throw new Error('invalid format (no team)');
@@ -708,37 +730,49 @@
           team[i].soul = validId(allSouls, s.soul);
           team[i].bg = validId(allBGs, s.bg);
           team[i].masou = validId(allMasou, s.masou);
+          // 保留槽位: 空槽 / 失效 id → null
           team[i].crystals = Array.isArray(s.crystals)
             ? s.crystals
-                .filter((c) => c && c.id != null && allCrystals.some((x) => x.id === c.id))
-                .map((c) => ({ id: c.id, lv: c.lv ?? 1, weight: c.weight ?? 0, purity: c.purity ?? 0 }))
+                .slice(0, _IO_CRYSTAL_MAX)
+                .map((c) =>
+                  c && c.id != null && allCrystals.some((x) => x.id === c.id)
+                    ? { id: c.id, lv: c.lv ?? 1, weight: c.weight ?? 0, purity: c.purity ?? 0 }
+                    : null,
+                )
             : [];
           team[i].tr = { ...mkTr(), ...(s.tr || {}) };
           if (s.tr?.have_mp === false) team[i].tr.mp = 0; // 旧 #hash 兼容: have_mp=false → MP 空
+          _clampImportedSlot(i);
         }
         mainSlot = [0, 1, 2].includes(data.mainSlot) ? data.mainSlot : 0;
-        // enemy 先重置默认 (紧凑对象省略默认字段、不重置会残留上一份的非默认值)
+        // 先定人数: renderEnemyBar 按 teamSize 算 BD上限 max、晚设会把导入的 bd_cap 截到旧人数的上限
+        const size = [1, 2, 3].includes(data.teamSize) ? data.teamSize : 3;
+        teamSize = size;
+        // enemy 先重置默认 (紧凑对象省略默认字段、不重置会残留上一份的非默认值);只收 _ENEMY_DEF 里的键
         Object.assign(enemy, _ENEMY_DEF, { emblems: _DEF_EMBLEMS.map((e) => ({ ...e })), advantageWeapons: new Set() });
-        if (data.enemy && typeof data.enemy === 'object') {
-          const { advantageWeapons, emblems, ...rest } = data.enemy;
-          Object.assign(enemy, rest);
-          enemy.advantageWeapons = new Set(Array.isArray(advantageWeapons) ? advantageWeapons : []);
-          // emblems: 仅当带了才覆盖 (省略=默认、保留上面 reset 的默认);归一 4 槽 + 校验 id (失效置 null)
-          if (Array.isArray(emblems)) {
-            enemy.emblems = [0, 1, 2, 3].map((i) => {
-              const e = emblems[i] || {};
-              const id = e.id != null && allGuildEmblems.some((g) => g.id === e.id) ? e.id : null;
-              return { id, level: Math.max(1, Math.floor(+e.level) || 1) };
-            });
-          }
-          // guildTitle 校验 (失效置 null)
-          if (enemy.guildTitle != null && !allGuildTitles.some((g) => g.id === enemy.guildTitle)) enemy.guildTitle = null;
-          if (enemy.guildBoss != null && !allGuildBosses.some((g) => g.id === enemy.guildBoss)) enemy.guildBoss = null;
-          enemy.bkDamageCut = enemy.bkDamageCut === true;
+        const e = data.enemy && typeof data.enemy === 'object' ? data.enemy : {};
+        for (const k in _ENEMY_ENUM) if (_ENEMY_ENUM[k].includes(e[k])) enemy[k] = e[k];
+        enemy.bk = e.bk === true;
+        enemy.bkDamageCut = e.bkDamageCut === true;
+        enemy.guildTitle = validId(allGuildTitles, e.guildTitle);
+        const bd = +e.bd_cap;
+        if (Number.isFinite(bd) && bd > 0) enemy.bd_cap = Math.round(bd * 100) / 100; // 上限由 renderEnemyBar 按 max 钳
+        if (Array.isArray(e.advantageWeapons))
+          enemy.advantageWeapons = new Set(e.advantageWeapons.filter((w) => Number.isInteger(w) && w >= 1 && w <= 12));
+        // emblems: 仅当带了才覆盖 (省略=默认、保留上面 reset 的默认);归一 4 槽 + 校验 id (失效置 null)
+        if (Array.isArray(e.emblems)) {
+          enemy.emblems = [0, 1, 2, 3].map((i) => {
+            const m = e.emblems[i] || {};
+            const id = m.id != null && allGuildEmblems.some((g) => g.id === m.id) ? m.id : null;
+            return { id, level: Math.max(1, Math.floor(+m.level) || 1) };
+          });
         }
+        // boss 预设按当前 guildbosses.json 重新套 (码里的 属性 / BK耐性 / 有利武器 可能是 boss 数据修正前的旧值)
+        const boss = allGuildBosses.find((b) => b.id === e.guildBoss);
+        if (boss) _applyGuildBossPreset(boss);
         renderEnemyBar();
         renderAll();
-        setTeamSize([1, 2, 3].includes(data.teamSize) ? data.teamSize : 3); // 含 refreshAllStats
+        setTeamSize(size); // 含 refreshAllStats
         updateMobVisible();
         // import 后触发 omoide 懒加载 (autoEquip=false: 保留导入的 omoide_picks);fetch 完成后 re-render 显示好感
         for (let i = 0; i < 3; i++) if (team[i].chara != null) _ensureOmoideLoaded(team[i].chara, false);
@@ -1806,16 +1840,19 @@
       };
 
       // ギルバト boss:选中 → 覆盖 敵属性 / BK耐性 / 有利武器;手动改这三项、换副本或切七罪王 → 回到「-」
+      // 选 boss 和 import 共用
+      const _applyGuildBossPreset = (boss) => {
+        enemy.guildBoss = boss.id;
+        enemy.mode = boss.mode;
+        enemy.element = boss.element;
+        enemy.bkResistance = boss.bk_resistance || 'normal';
+        enemy.bkDamageCut = (boss.bk_damage_scale ?? 1) !== 1;
+        enemy.advantageWeapons = new Set(boss.advantage_weapons || []);
+      };
       export const setEnemyGuildBoss = (v) => {
         const boss = v ? allGuildBosses.find((b) => b.id === +v) : null;
-        enemy.guildBoss = boss ? boss.id : null;
-        if (boss) {
-          enemy.mode = boss.mode;
-          enemy.element = boss.element;
-          enemy.bkResistance = boss.bk_resistance || 'normal';
-          enemy.bkDamageCut = (boss.bk_damage_scale ?? 1) !== 1;
-          enemy.advantageWeapons = new Set(boss.advantage_weapons || []);
-        }
+        if (boss) _applyGuildBossPreset(boss);
+        else enemy.guildBoss = null;
         renderEnemyBar();
         refreshAllStats();
       };
