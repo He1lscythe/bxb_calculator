@@ -1,16 +1,5 @@
-→ bxb_wiki/data/omoide/{base_id}.json
-
-来源是 实测采集 + Python 整理结果、不是 master_tables 直给。
-~629 chara 覆盖 (用户未拥有的 ~25 chara 没数据、UI fallback empty)。
-
-原样拷贝、保留全部字段 (memory_slot_items / affection_sharing_user_weapon_ids 等
-也保留、未来 UI 可能用到)。
-
-用法: python scripts/master_to_business/build_omoide.py
-"""
-import os
-import shutil
-import stat
+import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -18,32 +7,51 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from paths import PROJECT_ROOT, ASSETS_DIR  # noqa: E402
 
-# 由 paths.ASSETS_DIR 统一解析 (env BXB_ASSETS 可覆盖)。
-# 不再各自硬编码开发机绝对路径 —— 换机器 / 换盘符就失效。
+sys.stdout.reconfigure(encoding="utf-8")
+
 SRC_DIR = ASSETS_DIR / "outputs" / "memory_slot" / "summary"
 DEST_DIR = PROJECT_ROOT / "data" / "omoide"
 
 
-def main():
+def _lf(p):
+    return p.read_bytes().replace(b"\r\n", b"\n")
+
+
+def sync(base_ids=None):
     if not SRC_DIR.is_dir():
-        print(f"ERROR: source {SRC_DIR} 不存在")
-        sys.exit(1)
-
-    if DEST_DIR.exists():
-        def _rm_readonly(func, path, _):
-            os.chmod(path, stat.S_IWRITE)
-            func(path)
-        shutil.rmtree(DEST_DIR, onerror=_rm_readonly)
-    DEST_DIR.mkdir(parents=True)
-
-    files = sorted(SRC_DIR.glob("*.json"))
-    written = 0
+        sys.exit(f"ERROR: source {SRC_DIR} 不存在")
+    if base_ids:
+        files = [SRC_DIR / f"{b}.json" for b in base_ids]
+        lost = [f.stem for f in files if not f.is_file()]
+        if lost:
+            sys.exit(f"ERROR: summary 里没有 {lost}")
+    else:
+        files = sorted(SRC_DIR.glob("*.json"))
+    DEST_DIR.mkdir(parents=True, exist_ok=True)
+    added, updated = [], []
     for f in files:
-        shutil.copy2(f, DEST_DIR / f.name)
-        written += 1
+        data = _lf(f)
+        json.loads(data)
+        dest = DEST_DIR / f.name
+        if dest.is_file():
+            if _lf(dest) == data:
+                continue
+            updated.append(f.stem)
+        else:
+            added.append(f.stem)
+        dest.write_bytes(data)
+    print(f"omoide: 新增 {len(added)} {added[:20]} / 更新 {len(updated)} {updated[:20]} / 检查 {len(files)}")
+    if not base_ids:
+        extra = sorted({p.stem for p in DEST_DIR.glob("*.json")} - {f.stem for f in files})
+        if extra:
+            print(f"  仅 wiki 有(保留): {extra}")
+    return added, updated
 
-    print(f"copied {written} omoide files → {DEST_DIR}")
-    print(f"  total size: {sum((DEST_DIR/x.name).stat().st_size for x in files)//1024} KB")
+
+def main():
+    ap = argparse.ArgumentParser(description="unpacking memory_slot summary → data/omoide/{base_id}.json(只增/覆盖、不删)")
+    ap.add_argument("base_ids", nargs="*", type=int, help="只同步这些;不传 = 全部")
+    sync(ap.parse_args().base_ids)
 
 
 if __name__ == "__main__":

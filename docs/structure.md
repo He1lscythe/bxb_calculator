@@ -115,7 +115,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [build_characters.py](../scripts/master_to_business/build_characters.py) | `weapons.json` + `weapon_innate_skills.json` + `_wiki_aux.json` | `data/characters.json` |
 | [build_masou.py](../scripts/master_to_business/build_masou.py) | `weapon_costumes.json` + `_wiki_aux.json` | `data/masou.json` |
 | [build_masou_aux.py](../scripts/master_to_business/build_masou_aux.py) | `data/masou.json` | `data/masou_revise.json` (注入 `effects[].range`) |
-| [build_omoide.py](../scripts/master_to_business/build_omoide.py) | omoide 实测数据 | `data/omoide/{base_id}.json` |
+| [build_omoide.py](../scripts/master_to_business/build_omoide.py) | omoide 实测数据 | `data/omoide/{base_id}.json`(可传 base_id 只同步指定的;只新增/覆盖、不删 wiki 独有文件，统一 LF) |
 | [build_all.py](../scripts/master_to_business/build_all.py) | 上面全部 | 跑全套 + 错误报告 |
 
 **Utility 模块** (反复使用、被 build script import):
