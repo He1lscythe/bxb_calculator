@@ -103,7 +103,7 @@
     <script type="module">
       import { Nav, updateReviseBar } from '../js/nav.js';
       import { state } from '../js/soul-state.js';
-      import { escHtml, fmtBairitu, parseBairituVal, hideLoading } from '../js/utils.js';
+      import { escHtml, fmtBairitu, parseBairituVal, hideLoading, bindArrowNav } from '../js/utils.js';
       import {
         initFilterToggles,
         toggleFilter,
@@ -159,6 +159,7 @@
       window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
       window.addEventListener('wheel', collapseFiltersOnScroll, { passive: true });
       window.addEventListener('resize', setupStickyHeights, { passive: true });
+      bindArrowNav(navSoul);
 
       // Expose globals for inline HTML onclick handlers
       window.state = state;
