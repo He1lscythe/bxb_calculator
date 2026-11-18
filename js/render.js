@@ -1,7 +1,7 @@
 // js/render.js
 import { state } from './state.js';
 import { RARITY, ELEMENT, WEAPON, ELEM_COLOR, CHARA_TAG } from '../shared/constants.js';
-import { fmt, fmtBairitu, renderRightTags, escHtml, min } from './utils.js';
+import { fmt, fmtBairitu, renderRightTags, escHtml, min, renderAcqSection } from './utils.js';
 import { CHARA_SPEC } from '../shared/chara-spec.js';
 import { charaIconStack } from '../shared/image-paths.js';
 
@@ -313,6 +313,9 @@ const renderStateContent = (sectionState, stateLabel, chara) => {
       `<div class="section"><div class="section-title">スキル構成 (${allSkills.length})</div><div class="skills-list">${cards}</div></div>`,
     );
   }
+
+  const acqHtml = renderAcqSection(chara && chara.acquisition, '入手方法');
+  if (acqHtml) parts.push(acqHtml);
 
   // --- Stats ---
   if (sectionState.stats) {

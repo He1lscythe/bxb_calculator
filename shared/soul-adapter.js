@@ -92,6 +92,8 @@ function _soulSkillToWiki(sk) {
   };
 }
 
+const _acq = (a) => (a && typeof a === 'object' && !Array.isArray(a) ? a : {});
+
 function soulToWiki(s) {
   // 屏蔽 6 位 id soul (placeholder 无技能、~42 个、其中 1 个有 skills 接受丢失)
   if (s.id != null && s.id >= 100000) return null;
@@ -111,7 +113,7 @@ function soulToWiki(s) {
     image: null,                                  // soul-render 走 ../icons/soul/{id}.png
     url: null,
     tags: Array.isArray(s.tags) ? s.tags : [],    // tags 走 soul_revise.json (deepApply 注入)
-    acquisition: {},                              // master 没"入手場所"字段
+    acquisition: _acq(s.acquisition),             // soul_revise (altema 入手場所)
     element: elemAff.ids,                         // SOUL_SPEC.filters.element 用、得意属性 id 数组 (level>=1)
     weapon: wpnAff.ids,                           // SOUL_SPEC.filters.weapon 用、得意武器 id 数组
     element_affinity: elemAff.affinity,

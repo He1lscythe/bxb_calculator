@@ -156,6 +156,16 @@ export const escHtml = (s) => {
     .replace(/"/g, '&quot;');
 };
 
+// 入手 section (chara「入手方法」/ soul「入手場所」、跟 altema 一致;acquisition = {分类: 内容})
+export const renderAcqSection = (acq, title) => {
+  const entries = Object.entries(acq || {});
+  if (!entries.length) return '';
+  const rows = entries
+    .map(([k, v]) => `<div class="acq-key">${escHtml(k)}</div><div class="acq-val">${escHtml(v)}</div>`)
+    .join('');
+  return `<div class="section"><div class="section-title">${title}</div><div class="acq-table">${rows}</div></div>`;
+};
+
 // 数据加载完后调用：让 loading overlay fade 掉再从 DOM 移除
 export const hideLoading = () => {
   const el = document.getElementById('loading-screen');
