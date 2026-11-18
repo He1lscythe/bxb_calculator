@@ -130,13 +130,11 @@ export const closeDetailMob = () => {
 };
 
 export const navChara = (dir) => {
-  if (state.filteredChars.length === 0) return;
+  const n = state.filteredChars.length;
+  if (!n) return;
   const idx = state.filteredChars.findIndex((c) => c.id === state.selectedId);
-  const base = idx < 0 ? 0 : idx;
-  // Wrap-around (mod): last+next → first, first+prev → last
-  const newIdx =
-    (((base + dir) % state.filteredChars.length) + state.filteredChars.length) %
-    state.filteredChars.length;
+  // 未选中 → 首 / 尾;其余循环
+  const newIdx = idx < 0 ? (dir > 0 ? 0 : n - 1) : (((idx + dir) % n) + n) % n;
   selectChar(state.filteredChars[newIdx].id);
 };
 

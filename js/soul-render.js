@@ -99,12 +99,11 @@ export const closeDetailMob = () => {
 };
 
 export const navSoul = (dir) => {
-  if (state.filteredSouls.length === 0) return;
+  const n = state.filteredSouls.length;
+  if (!n) return;
   const idx = state.filteredSouls.findIndex((s) => s.id === state.selectedId);
-  const base = idx < 0 ? 0 : idx;
-  const newIdx =
-    (((base + dir) % state.filteredSouls.length) + state.filteredSouls.length) %
-    state.filteredSouls.length;
+  // 未选中 → 首 / 尾;其余循环
+  const newIdx = idx < 0 ? (dir > 0 ? 0 : n - 1) : (((idx + dir) % n) + n) % n;
   selectSoul(state.filteredSouls[newIdx].id);
 };
 

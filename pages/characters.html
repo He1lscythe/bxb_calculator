@@ -311,7 +311,7 @@
       import { Nav, updateReviseBar } from '../js/nav.js';
       import { state } from '../js/state.js';
       // omoide_templates 已删除 ( omoide 走 实测采集 chara._omoide_slots、不用 templates)
-      import { fmtNum, ctPfx, parseBairituVal, hideLoading } from '../js/utils.js';
+      import { fmtNum, ctPfx, parseBairituVal, hideLoading, bindArrowNav } from '../js/utils.js';
       // 删旧 edit module (js/edit.js / save-edit-base.js)、Session 2/3 改用新 edit
       import {
         applyFilters,
@@ -398,6 +398,7 @@
       window.addEventListener('touchmove', collapseFiltersOnScroll, { passive: true });
       window.addEventListener('wheel', collapseFiltersOnScroll, { passive: true });
       window.addEventListener('resize', _scheduleMeasure, { passive: true });
+      bindArrowNav(navChara);
 
       // 切 sort key 时按类型重置 sortDesc 默认方向：
       //   字符串 sort（CV）→ 默认 asc（unicode 从小到大、用户要求）

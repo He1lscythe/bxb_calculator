@@ -192,7 +192,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | 模块 | 用途 |
 |---|---|
 | `js/nav.js` | 顶部 navbar + revise bar (未保存 N 条修正) |
-| `js/utils.js` | DOM / 字符串 / 数字格式 utility + `?説明` popover (`toggleHelpPopover`、hensei stats / ボス情報 与結晶倍率式共用;上方放不下时翻到下方) |
+| `js/utils.js` | DOM / 字符串 / 数字格式 utility + `?説明` popover (`toggleHelpPopover`、hensei stats / ボス情報 与結晶倍率式共用;上方放不下时翻到下方) + `bindArrowNav` (魔剣 / ソウル页 ←/→ 切上下一个详情、复用 `navChara` / `navSoul`;输入框聚焦或有 `*-modal` 打开时不响应) |
 | `js/state.js` | 全局 state (allCharas / allSouls / 各 reviseData / sessionReviseIds 等) |
 | `js/render.js` | chara list/render (主 viewer) |
 | `js/chara-edit.js` | chara edit modal (tags + skills value_scaling + 嵌入 masou_overrides) |

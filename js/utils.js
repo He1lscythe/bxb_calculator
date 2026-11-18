@@ -249,3 +249,16 @@ export const min = (strs, ...vals) => {
   }
   return out;
 };
+
+// ←/→ 切上下一个详情;输入中 / 有弹窗时不响应
+export const bindArrowNav = (nav) => {
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || e.isComposing) return;
+    if (e.target.closest?.('input, textarea, select, [contenteditable]')) return;
+    const modalOpen = [...document.querySelectorAll('[id$="-modal"]')].some((m) => getComputedStyle(m).display !== 'none');
+    if (modalOpen) return;
+    e.preventDefault();
+    nav(e.key === 'ArrowLeft' ? -1 : 1);
+  });
+};
