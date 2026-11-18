@@ -14,7 +14,7 @@ import {
   SOUL_TAG,
   SOUL_TAG_COLOR,
 } from '../shared/constants.js';
-import { escHtml, fmtBairitu, fmtAff, min } from './utils.js';
+import { escHtml, fmtBairitu, fmtAff, min, renderAcqSection } from './utils.js';
 import { setupLazyImg } from '../shared/lazy-img.js';
 
 const AFF_LABEL = { '-2': '超苦手', '-1': '苦手', 0: '普通', 1: '得意', 2: '超得意' };
@@ -147,19 +147,9 @@ export const renderDetail = (s) => {
           : ''
       }
     </div>
+    ${renderAcqSection(s.acquisition, '入手場所')}
     ${renderAffinityView(s)}
-    ${renderSkillsView(s.skills || [], s)}
-    ${
-      acqEntries.length
-        ? min`
-      <div class="section">
-        <div class="section-title">入手場所</div>
-        <div class="acq-table">
-          ${acqEntries.map(([k, v]) => `<div class="acq-key">${escHtml(k)}</div><div class="acq-val">${escHtml(v)}</div>`).join('')}
-        </div>
-      </div>`
-        : ''
-    }`;
+    ${renderSkillsView(s.skills || [], s)}`;
 };
 
 const renderAffinityView = (s) => {

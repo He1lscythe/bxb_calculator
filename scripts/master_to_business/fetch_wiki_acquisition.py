@@ -20,6 +20,13 @@ altema 的結晶页本来就在这个脚本里下载了 (抓 入手方法 用),�
 
 按 name 反查 wiki entry、wiki 没匹配 → 不写该字段、不覆盖。
 重跑 idempotent。
+
+chara / soul (2026-11-18): 'acquisition' = {分类: 内容} (单页「入手方法 / 入手場所」表)。
+列表页没有入手方法、只能逐页抓 → 默认只抓 revise 里还没有 acquisition 的 (增量),
+每轮上限 --max-pages;--refresh-pages 全量重抓。
+
+altema 前面是 Akamai:按 TLS 指纹拦非浏览器客户端 (requests 时好时坏、2026-11 起 CI 多数 403),
+所以用 curl_cffi 模拟 Chrome。
 """
 import argparse
 import html as htmlmod
@@ -29,8 +36,9 @@ import sys
 import time
 import unicodedata
 from pathlib import Path
+from urllib.parse import urljoin
 
-import requests
+from curl_cffi import requests
 from bs4 import BeautifulSoup
 
 # 终端 GBK 等非 UTF-8 编码会卡在含 emoji / 罕见 unicode 的 sample 打印、强制 utf-8
@@ -60,16 +68,17 @@ _DECORATION_RE = re.compile(r'[♥♡☆★◇◆♪♫]')
 # 处理 U+00C0-U+00FF (Latin-1 Supplement、含常见 accent letters)
 _LATIN_ACCENT_RE = re.compile(r'[À-ÿ]')
 
+# rule 5: wiki 丢撇号 (master キンガシンネン'17 → wiki キンガシンネン17)
+_APOS_RE = re.compile(r"['’]")
+
 
 def _alt_keys(base):
     """生成 normalized name 的 fallback 备用 key、按优先级排列。"""
     keys = []
-    k = _DECORATION_RE.sub('', base)
-    if k != base:
-        keys.append(k)
-    k = _LATIN_ACCENT_RE.sub('', base)
-    if k != base:
-        keys.append(k)
+    for rx in (_DECORATION_RE, _LATIN_ACCENT_RE, _APOS_RE):
+        k = rx.sub('', base)
+        if k != base:
+            keys.append(k)
     return keys
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -77,13 +86,19 @@ DATA_DIR = PROJECT_ROOT / "data"
 
 CRYSTAL_URL = "https://altema.jp/bxb/kiokukessyou"
 BG_URL = "https://altema.jp/bxb/bladegraph"
+CHARA_LIST_URL = "https://altema.jp/bxb/charalist"
+SOUL_LIST_URL = "https://altema.jp/bxb/soullist"
+PAGE_INTERVAL = 2.0
 
+# UA 交给 impersonate (跟 TLS 指纹的 Chrome 版本一致)
 HEADERS = {
-    "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                   "AppleWebKit/537.36 (KHTML, like Gecko) "
-                   "Chrome/124.0.0.0 Safari/537.36"),
-    "Accept-Language": "ja,en-US;q=0.7,en;q=0.3",
+    "Accept-Language": "ja,en-US;q=0.9,en;q=0.8",
     "Referer": "https://altema.jp/bxb/",
+}
+
+# altema 名字跟 master 不同 (wiki 别字): master name → altema name
+PAGE_NAME_ALIAS = {
+    'ストレリチア': 'ストリレチア',
 }
 
 # 已知 section label、bg 用 <hr> + 行首【label】格式
@@ -121,16 +136,15 @@ def _resolve_bg_hard(name):
     return BG_HARD_EXACT.get(name) if name else None
 
 
-# altema 偶发 403 (按 IP 限流、不是封禁) —— 隔一会儿重试就过。CI 一直能抓到,
-# 但本地连着跑几次就会撞上,所以统一加退避重试。
-def fetch_soup(url, retries=4, backoff=15):
-    print(f"fetching {url} ...")
+def fetch_soup(url, retries=4, backoff=15, quiet=False):
+    if not quiet:
+        print(f"fetching {url} ...")
     resp = None
     for i in range(retries):
-        resp = requests.get(url, headers=HEADERS, timeout=30)
+        resp = requests.get(url, headers=HEADERS, impersonate='chrome', timeout=30)
         if resp.status_code == 200:
             return BeautifulSoup(resp.text, 'html.parser')
-        print(f"  -> {resp.status_code}, retry {i + 1}/{retries}")
+        print(f"  -> {url} {resp.status_code}, retry {i + 1}/{retries}")
         if i + 1 < retries:
             time.sleep(backoff)
     resp.raise_for_status()
@@ -309,6 +323,89 @@ def bg_acquisitions(soup):
     return out
 
 
+def list_pages(soup, kind):
+    """charalist / soullist → {normalized name: 单页 URL}。chara 每个进化状态一行、入手方法相同 → 取第一行"""
+    out = {}
+    for row in soup.find_all('tr', class_='row'):
+        a = row.find('a', href=re.compile(rf'/bxb/{kind}/\d+'))
+        td = row.find('td')
+        if not a or not td:
+            continue
+        lines = td.get_text('\n', strip=True).split('\n')
+        if lines and lines[0]:
+            out.setdefault(_normalize_name(lines[0]), urljoin('https://altema.jp', a['href']))
+    return out
+
+
+def page_acquisition(soup):
+    """单页「…の入手方法 / 入手場所」h2 后的表 → {分类: 内容};同分类多行换行拼接、重复行去掉"""
+    h = next((x for x in soup.find_all('h2') if re.search(r'の入手(?:方法|場所)$', x.get_text(strip=True))), None)
+    if h is None:
+        return None
+    t = h.find_next('table')
+    if t is None or t.find_previous('h2') is not h:
+        return None
+    out = {}
+    for tr in t.find_all('tr'):
+        th, td = tr.find('th'), tr.find('td')
+        if not th or not td:
+            continue
+        k = th.get_text(' ', strip=True)
+        if not k:
+            continue
+        lines = out.setdefault(k, [])
+        for line in td.get_text('\n', strip=True).split('\n'):
+            if line and line not in lines:
+                lines.append(line)
+    out = {k: '\n'.join(v) for k, v in out.items() if v}
+    return out or None
+
+
+def page_values(kind, list_url, master_path, revise_path, refresh, max_pages, keep=None):
+    """master 里还没 acquisition 的 (refresh 时全部) → 抓单页 → {normalized master name: {'acquisition': {...}}}"""
+    pages = list_pages(fetch_soup(list_url), kind)
+    master = json.loads(master_path.read_text(encoding='utf-8'))
+    revise = json.loads(revise_path.read_text(encoding='utf-8')) if revise_path.is_file() else []
+    have = {r['id'] for r in revise if isinstance(r, dict) and r.get('acquisition')}
+    todo, seen, no_page = [], set(), []
+    for m in master:
+        mid, name = m.get('id'), m.get('name')
+        if mid is None or not name or (keep and not keep(m)):
+            continue
+        if mid in have and not refresh:
+            continue
+        look = _normalize_name(PAGE_NAME_ALIAS.get(name, name))
+        url = pages.get(look) or next((pages[k] for k in _alt_keys(look) if k in pages), None)
+        if not url:
+            no_page.append(name)
+            continue
+        if url not in seen:
+            seen.add(url)
+            todo.append((_normalize_name(name), url))
+    print(f"  {kind}: 列表 {len(pages)} 页 / 待抓 {len(todo)} / 已有 {len(have)} / altema 无此名 {len(no_page)}"
+          f" {no_page[:8]}{' …' if len(no_page) > 8 else ''}")
+    if max_pages and len(todo) > max_pages:
+        print(f"  本轮只抓前 {max_pages} 页 (--max-pages)")
+        todo = todo[:max_pages]
+    out, empty = {}, []
+    for i, (key, url) in enumerate(todo, 1):
+        if i > 1:
+            time.sleep(PAGE_INTERVAL)
+        try:
+            acq = page_acquisition(fetch_soup(url, quiet=True))
+        except Exception as e:
+            print(f"  ⚠ {url} 抓取失败、停止本轮:{e}")
+            break
+        if acq:
+            out[key] = {'acquisition': acq}
+        else:
+            empty.append(url)
+        if i % 50 == 0:
+            print(f"  {kind}: {i}/{len(todo)}", flush=True)
+    print(f"  {kind}: 抓到 {len(out)} 条 / 页面无入手表 {len(empty)} {empty[:5]}")
+    return out
+
+
 _FACTOR_KEYS = ('M_L_max', 'M_W_max', 'M_P_max')
 
 
@@ -379,54 +476,91 @@ def patch_revise(master_path, revise_path, value_map, hard_field=None, hard_reso
             per_field[field] = per_field.get(field, 0) + 1
 
     final = sorted(revise_by_id.values(), key=lambda r: r['id'])
-    revise_path.write_text(
-        json.dumps(final, ensure_ascii=False, indent=2),
-        encoding='utf-8',
-    )
+    # 固定 LF + 末尾换行 (跟 api/save.js 一致;write_text 在 Windows 会写成 CRLF)
+    revise_path.write_bytes((json.dumps(final, ensure_ascii=False, indent=2) + '\n').encode('utf-8'))
     return hard_count + wiki_count, hard_count, wiki_count, len(master), unmatched_sample, per_field
+
+
+def run_crystal():
+    cr_soup = fetch_soup(CRYSTAL_URL)
+    # master 的 initial_value 用来判 altema 那边的单位 (见 crystal_values)
+    _cry = json.loads((DATA_DIR / 'crystals.json').read_text(encoding='utf-8'))
+    _init = {}
+    for c in (_cry if isinstance(_cry, list) else _cry.values()):
+        if c.get('name') and c.get('initial_value') is not None:
+            _init.setdefault(_normalize_name(c['name']), c['initial_value'])
+    cr_map = crystal_values(cr_soup, _init.get)
+    n_mx = sum(1 for v in cr_map.values() if 'max_value' in v)
+    print(f"  wiki crystal: {len(cr_map)} entries (入手方法 あり "
+          f"{sum(1 for v in cr_map.values() if '入手方法' in v)} / 効果量→max_value あり {n_mx})")
+    m, hard, wiki, t, sample, per = patch_revise(
+        DATA_DIR / "crystals.json", DATA_DIR / "crystal_revise.json",
+        cr_map, '入手方法', _resolve_crystal_hard,
+    )
+    pct = 100 * m / t if t else 0
+    print(f"crystal: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  "
+          f"written={per}  → data/crystal_revise.json")
+    if m < t:
+        print(f"  unmatched sample (前 5): {sample}")
+
+
+def run_bg():
+    bg_soup = fetch_soup(BG_URL)
+    bg_map = bg_acquisitions(bg_soup)
+    print(f"  wiki bg 入手方法: {len(bg_map)} entries")
+    m, hard, wiki, t, sample, per = patch_revise(
+        DATA_DIR / "bladegraphs.json", DATA_DIR / "bg_revise.json",
+        bg_map, 'acquisition', _resolve_bg_hard,
+    )
+    pct = 100 * m / t if t else 0
+    print(f"bg: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  "
+          f"written={per}  → data/bg_revise.json")
+    if m < t:
+        print(f"  unmatched sample (前 5): {sample}")
+
+
+def run_pages(kind, list_url, master_name, revise_name, args, keep=None):
+    master_path, revise_path = DATA_DIR / master_name, DATA_DIR / revise_name
+    vals = page_values(kind, list_url, master_path, revise_path,
+                       args.refresh_pages, args.max_pages, keep)
+    if not vals:
+        return
+    _, _, n, _, _, per = patch_revise(master_path, revise_path, vals)
+    print(f"{kind}: written={per} ({n} master entries)  → data/{revise_name}")
 
 
 def main():
     parser = argparse.ArgumentParser(description="Patch 入手方法 from altema wiki")
     parser.add_argument('--skip-crystal', action='store_true')
     parser.add_argument('--skip-bg', action='store_true')
+    parser.add_argument('--skip-chara', action='store_true')
+    parser.add_argument('--skip-soul', action='store_true')
+    parser.add_argument('--refresh-pages', action='store_true', help='chara/soul 全量重抓 (默认只抓没有 acquisition 的)')
+    parser.add_argument('--max-pages', type=int, default=60, help='chara/soul 每类每轮最多抓几页 (0 = 不限)')
     args = parser.parse_args()
 
-    if not args.skip_crystal:
-        cr_soup = fetch_soup(CRYSTAL_URL)
-        # master 的 initial_value 用来判 altema 那边的单位 (见 crystal_values)
-        _cry = json.loads((DATA_DIR / 'crystals.json').read_text(encoding='utf-8'))
-        _init = {}
-        for c in (_cry if isinstance(_cry, list) else _cry.values()):
-            if c.get('name') and c.get('initial_value') is not None:
-                _init.setdefault(_normalize_name(c['name']), c['initial_value'])
-        cr_map = crystal_values(cr_soup, _init.get)
-        n_mx = sum(1 for v in cr_map.values() if 'max_value' in v)
-        print(f"  wiki crystal: {len(cr_map)} entries (入手方法 あり "
-              f"{sum(1 for v in cr_map.values() if '入手方法' in v)} / 効果量→max_value あり {n_mx})")
-        m, hard, wiki, t, sample, per = patch_revise(
-            DATA_DIR / "crystals.json", DATA_DIR / "crystal_revise.json",
-            cr_map, '入手方法', _resolve_crystal_hard,
-        )
-        pct = 100 * m / t if t else 0
-        print(f"crystal: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  "
-              f"written={per}  → data/crystal_revise.json")
-        if m < t:
-            print(f"  unmatched sample (前 5): {sample}")
-
-    if not args.skip_bg:
-        bg_soup = fetch_soup(BG_URL)
-        bg_map = bg_acquisitions(bg_soup)
-        print(f"  wiki bg 入手方法: {len(bg_map)} entries")
-        m, hard, wiki, t, sample, per = patch_revise(
-            DATA_DIR / "bladegraphs.json", DATA_DIR / "bg_revise.json",
-            bg_map, 'acquisition', _resolve_bg_hard,
-        )
-        pct = 100 * m / t if t else 0
-        print(f"bg: matched {m}/{t} ({pct:.1f}%)  [hard={hard} / wiki={wiki}]  "
-              f"written={per}  → data/bg_revise.json")
-        if m < t:
-            print(f"  unmatched sample (前 5): {sample}")
+    # 各模块独立:一个 403 不连累后面的
+    jobs = [
+        ('crystal', args.skip_crystal, run_crystal),
+        ('bg', args.skip_bg, run_bg),
+        ('chara', args.skip_chara,
+         lambda: run_pages('chara', CHARA_LIST_URL, 'characters.json', 'chara_revise.json', args)),
+        ('soul', args.skip_soul,
+         lambda: run_pages('soul', SOUL_LIST_URL, 'souls.json', 'soul_revise.json', args,
+                           keep=lambda m: m['id'] < 100000)),
+    ]
+    failed = []
+    for name, skip, fn in jobs:
+        if skip:
+            continue
+        try:
+            fn()
+        except Exception as e:
+            print(f"⚠ {name} 失败:{e}")
+            failed.append(name)
+    if failed:
+        print(f"失败模块: {failed}")
+        sys.exit(1)
 
 
 if __name__ == '__main__':

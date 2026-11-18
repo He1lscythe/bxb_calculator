@@ -31,7 +31,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 
 **关键模块**:
 - master 数据来源: [scripts/master_to_business/paths.py](../scripts/master_to_business/paths.py) 自动 detect `BxB/master_tables/master_data/` 下最新日期文件夹 (上游快照存档的 git worktree)
-- 4 bucket revise: `chara_revise.json` (tags + skill value_scaling) / `soul_revise.json` (tags) / `crystal_revise.json` (max_value / M_L/W/P_max / min_max weight/purity) / `masou_revise.json` (skill value_scaling)
+- 4 bucket revise: `chara_revise.json` (tags + skill value_scaling + `acquisition`) / `soul_revise.json` (tags + `acquisition`) / `crystal_revise.json` (max_value / M_L/W/P_max / min_max weight/purity) / `masou_revise.json` (skill value_scaling)
   - `M_L_max` / `M_W_max` / `M_P_max` **不填 1** — 缺省即 1 (`parseFactor(null)=1`)，显式写 1 反而让 `crystalDimAvailability` 判成「该维度可调」、⚙ 里多出一条拖不动的滑条。cr-edit 里 `def: 1` 只是 placeholder、不会落盘
 - sparse diff core: [shared/revise-core.js](../shared/revise-core.js) (`computeDiff` / `deepApply` / 撤回 / tombstone null)
 - wiki 提取产物: `data/_wiki_aux.json` —— **2026-06-09 的一次性快照**、不再重跑。3 个 key 现状各不相同 (原有的 `chara_tags` 300 条已于 2026-09-11 删除 —— 没有任何消费方,`characters.json` 的 `tags` 一直是 `[]`,真正生效的 tag 在 `chara_revise.json`):
@@ -127,7 +127,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [image_paths.py](../scripts/master_to_business/image_paths.py) | master id → `icons/` 本地 image path 反查 |
 | [copy_images.py](../scripts/master_to_business/copy_images.py) | 数据更新时拷 `<assets>` → `icons/` (含 soul 7 张 fallback 段) |
 | [gen_motion_table.py](../scripts/master_to_business/gen_motion_table.py) | `characters.json` → `docs/motion_table.md` (master 改 motion_id 后重跑) |
-| [fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) | 抓 altema wiki → patch `crystal_revise.json` (`入手方法` + **`max_value`**) + `bg_revise.json` (`acquisition`)、按 name 匹配 (NFKC + 装飾符/accent fallback)。`max_value` 取 【効果量】 区间上限、和数字 (億/万/千 複合) 解析;**单位换算**: 「効果量下限 ÷ master `initial_value` ≥ 50」→ altema 用的是百分数而 master 用分数 (只有 `Wave_Heal` 那 9 条)、÷100 —— **不能拿「带不带 %」判**,`BlazeAbsorb`/`Mez` 等 19 条也带 % 但 master 本就存百分数;整数值写成 int (不然 `2`→`2.0` 刷出 150 行无意义 diff);**有三因子且原本没有 max_value 的不写** (那些 series 故意只给因子)、原本就有的照常刷新。403 会退避重试 4 次。CI 每轮由 `run_ingest` 模块 B 调 |
+| [fetch_wiki_acquisition.py](../scripts/master_to_business/fetch_wiki_acquisition.py) | 抓 altema wiki → patch `crystal_revise.json` (`入手方法` + **`max_value`**) + `bg_revise.json` (`acquisition`)、按 name 匹配 (NFKC + 装飾符/accent fallback)。`max_value` 取 【効果量】 区间上限、和数字 (億/万/千 複合) 解析;**单位换算**: 「効果量下限 ÷ master `initial_value` ≥ 50」→ altema 用的是百分数而 master 用分数 (只有 `Wave_Heal` 那 9 条)、÷100 —— **不能拿「带不带 %」判**,`BlazeAbsorb`/`Mez` 等 19 条也带 % 但 master 本就存百分数;整数值写成 int (不然 `2`→`2.0` 刷出 150 行无意义 diff);**有三因子且原本没有 max_value 的不写** (那些 series 故意只给因子)、原本就有的照常刷新。**chara / soul `acquisition`** (2026-11-18):`{分类: 内容}`,来自单页「…の入手方法 / 入手場所」表 (列表页 charalist / soullist 只给名字 → 单页 URL;chara 每个进化状态一页、入手方法相同只抓一页);默认**增量**——只抓 revise 里还没有 `acquisition` 的、每类每轮 ≤ `--max-pages` (默认 60)、页间隔 2 s,`--refresh-pages` 全量重抓;altema 无此名的 (パン 系列等) 跳过,`PAGE_NAME_ALIAS` 处理 wiki 别字。**HTTP 用 `curl_cffi` (`impersonate='chrome'`)**:altema 前面是 Akamai,按 TLS 指纹拦 requests (2026-11 起 CI 大半 403、因 optional 只打 WARN);403 仍退避重试 4 次,四个模块 (crystal / bg / chara / soul) 互相独立、一个失败不挡后面的 (有失败则退出码 1)。CI 每轮由 `run_ingest` 模块 B 调 |
 | [build_memory_slot_skills.py](../scripts/master_to_business/build_memory_slot_skills.py) | 从 omoide 数据 (`bxb_wiki/data/omoide/`) → `data/_memory_slot_skills.json` (senzai 反查表、秒级) |
 
 ### scripts/ci/ — 云端数据落地 (GitHub Actions)
@@ -151,7 +151,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [run_ingest.py](../scripts/ci/run_ingest.py) | 编排: npc-motion 合并 (build 前、新动作当轮进 build_characters) → A (build_memory_slot_skills + build_all → 6 表) → B (fetch_wiki + aux → revise + 安全检查) → icons (`BXB_ASSETS_DIR` 有图才跑 copy_images)。revise 不安全 → 退出码 3 |
 | [revise_safety.py](../scripts/ci/revise_safety.py) | revise 字段级安全检查 (防用户手填字段被冲、丢条目/字段则中止提交) |
 
-提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise/masou_revise → **data-staging** (安全检查通过且有变更)。两处提交成功后才发布 icons 清单 / npc_motions、删掉已消费的图标源 (提交失败则下轮重来)。
+提交去向: data/*.json + `_npc_motions.json` + `icons/` → **main** (→sync 流 data-staging + Pages);crystal_revise/bg_revise/masou_revise/chara_revise/soul_revise → **data-staging** (安全检查通过且有变更;这 5 个 revise 都要先从 data-staging 检出当基准,漏检出会拿空文件起步、把用户的 tags 冲掉)。两处提交成功后才发布 icons 清单 / npc_motions、删掉已消费的图标源 (提交失败则下轮重来)。
 `paths.py`/`copy_images.py` 都有 env 覆盖 (`BXB_MASTER_TABLES`/`BXB_ASSETS_DIR`) 让 CI 指向临时目录、本地默认不变。
 
 > 快照存档 (快照 split + 派生表、`changelog.md`、asset_version manifest、scenario `unity3d` + 每本 `{book}.tsv`) 由上游生成并保存,本仓库只消费 R2 上的最新快照。全量 npc-motion 重生 / 重绘图强刷仍走本地 (罕见)。
@@ -269,8 +269,9 @@ CI `ui.yml` (ui-smoke) 的 runner 固定 `ubuntu-24.04`:`ubuntu-latest` 自 2026
 # 2. master → business JSON (data/*.json)
 python scripts/master_to_business/build_all.py
 
-# 3. wiki 抓「入手方法」、patch 进 data/crystals.json + data/bladegraphs.json
+# 3. wiki 抓「入手方法」、patch 进 data/{crystal,bg,chara,soul}_revise.json (需 curl_cffi)
 python scripts/master_to_business/fetch_wiki_acquisition.py
+#    chara/soul 首次全量 / 重抓: --skip-crystal --skip-bg --max-pages 0 [--refresh-pages]
 
 # 4. (按需) 拷 <assets> 图标 → icons/ (含 soul 7 张 fallback)
 python scripts/master_to_business/copy_images.py

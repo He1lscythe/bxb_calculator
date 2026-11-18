@@ -37,7 +37,8 @@ jobs:
         run: |
           git fetch origin data-staging
           git checkout origin/data-staging -- \
-            data/crystal_revise.json data/bg_revise.json data/masou_revise.json || \
+            data/crystal_revise.json data/bg_revise.json data/masou_revise.json \
+            data/chara_revise.json data/soul_revise.json || \
             echo "WARN: data-staging revise 取失败、用空基准"
 
       - uses: actions/setup-python@v7
@@ -92,7 +93,8 @@ jobs:
           git add data/characters.json data/souls.json data/crystals.json \
                   data/bladegraphs.json data/masou.json data/senzai_table.json \
                   data/_npc_motions.json icons/ 2>/dev/null || true
-          git reset -q HEAD data/crystal_revise.json data/bg_revise.json data/masou_revise.json 2>/dev/null || true
+          git reset -q HEAD data/crystal_revise.json data/bg_revise.json data/masou_revise.json \
+                    data/chara_revise.json data/soul_revise.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "data/icons 无变更"; exit 0
           fi
@@ -104,8 +106,10 @@ jobs:
         if: steps.sum.outputs.revise_safe == 'true' && steps.sum.outputs.revise_changed != '0'
         working-directory: _ds
         run: |
-          cp ../data/crystal_revise.json ../data/bg_revise.json ../data/masou_revise.json data/
-          git add data/crystal_revise.json data/bg_revise.json data/masou_revise.json
+          cp ../data/crystal_revise.json ../data/bg_revise.json ../data/masou_revise.json \
+             ../data/chara_revise.json ../data/soul_revise.json data/
+          git add data/crystal_revise.json data/bg_revise.json data/masou_revise.json \
+                  data/chara_revise.json data/soul_revise.json
           if git diff --cached --quiet; then echo "revise 无变更"; exit 0; fi
           git commit -m "data(revise): 入手方法/max_value/range refresh $(date -u +%FT%TZ)"
           git pull --rebase origin data-staging || true

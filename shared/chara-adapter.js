@@ -330,6 +330,7 @@ function charaToWiki(c) {
     url: null,
     omoide_rarity: null,
     tags: Array.isArray(c.tags) ? c.tags : [],
+    acquisition: c.acquisition && typeof c.acquisition === 'object' && !Array.isArray(c.acquisition) ? c.acquisition : {},  // chara_revise (altema 入手方法)
     states: wikiStates,
     bd_skill: _bdSkillToWiki(c.bd_skill, c.bd_skill?.cost),
     omoide: [],

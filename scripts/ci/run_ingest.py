@@ -8,7 +8,7 @@ workflow 先做好:
 模块:
   npc-motion: R2 版里 wiki 缺的 key 补进 data/_npc_motions.json (build 前、新动作当轮进 build_characters)
   A. master → 业务表        : build_memory_slot_skills + build_all → data/*.json
-  B. revise                  : fetch_wiki (入手方法/max_value) + aux → crystal/bg/masou_revise + 字段级安全检查
+  B. revise                  : fetch_wiki (入手方法/max_value/chara·soul acquisition) + aux → *_revise + 字段级安全检查
   icons                      : BXB_ASSETS_DIR 有图 → copy_images → icons/
 
 输出: $RUNNER_TEMP/ci_update_summary.json { npc_motions_added, revise_safe, revise_changed, icons_copied }
@@ -31,7 +31,8 @@ import revise_safety  # noqa: E402
 M2B = PROJECT_ROOT / "scripts" / "master_to_business"
 DATA = PROJECT_ROOT / "data"
 NPC_MOTIONS = DATA / "_npc_motions.json"
-REVISE_FILES = ("crystal_revise.json", "bg_revise.json", "masou_revise.json")  # build/aux 会改的
+REVISE_FILES = ("crystal_revise.json", "bg_revise.json", "masou_revise.json",
+                "chara_revise.json", "soul_revise.json")  # build/aux/fetch 会改的
 
 
 def _run(script: str, *args, optional=False):
@@ -70,7 +71,7 @@ def module_a():
 
 
 def module_b(revise_base: dict) -> dict:
-    print("== 模块 B: revise (入手方法 + max_value + range/weapon_base_id) ==")
+    print("== 模块 B: revise (入手方法 + max_value + range/weapon_base_id + chara/soul acquisition) ==")
     _run("fetch_wiki_acquisition.py", optional=True)  # altema HTTP、失败不致命
     _run("build_crystal_aux.py", optional=True)
     _run("build_bg_aux.py", optional=True)
