@@ -188,6 +188,7 @@ wiki 5 值 `condition` enum 在 master 拆成多字段：
   "evade_rate_rank": 0,
   "weapon_arts_id": 691,
   "omoide": [],                     // 留空 = view-only 不展示 (实际数据在 data/omoide/{base_id}.json)
+  "omoide_rarity": 4,               // 思い出レア度 1-5 (5=限定SS)、build_characters 从 data/omoide 的 ダメージ上限UP ★ 数推 (skill 10000138..10000134 = ★1..★5);没 omoide 文件 → fallback 魔剣 rarity (1-4、SS 一律当非限定 SS)。魔剣页 / hensei「思い出レア度」filter 用
   "profile": {                      // 角色 profile (age/cv/height/...)、跨 state 不变
     "age": "27歳", "cv": "...", "height": "...", "weight": "...",
     "three_size": "72/51/75", "three_size_b": 72, "three_size_w": 51, "three_size_h": 75,

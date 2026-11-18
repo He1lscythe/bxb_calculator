@@ -328,7 +328,7 @@ function charaToWiki(c) {
     element_buff: [c.element_id],
     weapon: c.weapon_type_id,
     url: null,
-    omoide_rarity: null,
+    omoide_rarity: c.omoide_rarity ?? null,   // 思い出レア度 (build_characters 从 data/omoide 推)
     tags: Array.isArray(c.tags) ? c.tags : [],
     acquisition: c.acquisition && typeof c.acquisition === 'object' && !Array.isArray(c.acquisition) ? c.acquisition : {},  // chara_revise (altema 入手方法)
     states: wikiStates,
