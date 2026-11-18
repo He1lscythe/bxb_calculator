@@ -19,6 +19,7 @@ AWAKEN_DB = Path(os.environ.get("BXB_AWAKEN_DB") or (BXB_ROOT / "bxb_cli" / "dat
 SHOTS = ASSETS_DIR / "data" / "awaken_screenshots" / "shots.jsonl"
 # 能当伝承元 = 抽卡出的
 GACHA_KEYS = {"ガチャ", "期間限定製造", "期間限定ガチャ"}
+SAME = "同型因子"
 
 
 def load_shots(p):
@@ -61,6 +62,35 @@ def main():
     for (f, t), n in list(pairs.items()):
         if (t, f) not in pairs and (t, f) not in tested and can_source(t):
             pairs[(t, f)] = n
+    sym = len(pairs) - direct
+
+    # 系列 bonus 有传递性 → 同系列成员两两补齐;同型因子按血统、融合魔剣会断链，不推
+    groups = defaultdict(set)
+    same = defaultdict(set)
+    for (f, t), n in pairs.items():
+        if n == SAME:
+            same[f].add(t)
+            same[t].add(f)
+        else:
+            groups[n].update((f, t))
+    member_of = defaultdict(set)
+    for n, ms in groups.items():
+        for b in ms:
+            member_of[b].add(n)
+    skipped = 0
+    for n, ms in groups.items():
+        for f in ms:
+            if not can_source(f):
+                continue
+            for t in ms:
+                if f == t or (f, t) in pairs or (t, f) in pairs or (f, t) in tested or (t, f) in tested:
+                    continue
+                # 同时属多个系列 / 可能同型 → 显示哪个不确定、跳过
+                if len(member_of[f] & member_of[t]) > 1 or (same[f] & same[t]):
+                    skipped += 1
+                    continue
+                pairs[(f, t)] = n
+    closure = len(pairs) - direct - sym
 
     by = defaultdict(lambda: defaultdict(list))
     for (f, t), n in pairs.items():
@@ -69,8 +99,8 @@ def main():
     rank = lambda b: (-(chara[b].get("rarity") or 0), b)  # noqa: E731
     out = {str(t): {n: sorted(fs, key=rank) for n, fs in sorted(g.items())} for t, g in sorted(by.items())}
     OUT.write_bytes((json.dumps(out, ensure_ascii=False, indent=1) + "\n").encode("utf-8"))
-    print(f"实测 {len(measured)} / 截图 {len(shots)} → 直接 {direct} 对 + 反推 {len(pairs) - direct} 对;"
-          f"伝承先 {len(out)} 把 / bonus {len({n for _, _, n in measured + shots})} 种 → {OUT}")
+    print(f"实测 {len(measured)} / 截图 {len(shots)} → 直接 {direct} 对 + 反推 {sym} 对 + 系列补齐 {closure} 对"
+          f" (跳过 {skipped});伝承先 {len(out)} 把 / bonus {len({n for _, _, n in measured + shots})} 种 → {OUT}")
 
 
 if __name__ == "__main__":

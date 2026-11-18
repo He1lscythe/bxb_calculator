@@ -116,7 +116,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [build_masou.py](../scripts/master_to_business/build_masou.py) | `weapon_costumes.json` + `_wiki_aux.json` | `data/masou.json` |
 | [build_masou_aux.py](../scripts/master_to_business/build_masou_aux.py) | `data/masou.json` | `data/masou_revise.json` (注入 `effects[].range`) |
 | [build_omoide.py](../scripts/master_to_business/build_omoide.py) | omoide 实测数据 | `data/omoide/{base_id}.json`(可传 base_id 只同步指定的;只新增/覆盖、不删 wiki 独有文件，统一 LF) |
-| [build_transmit_bonus.py](../scripts/master_to_business/build_transmit_bonus.py) | 伝承预览实测库 (`BXB_AWAKEN_DB`) + 截图读数 (`<assets>/data/awaken_screenshots/shots.jsonl`) | `data/transmit_bonus.json`(本地跑、不进 CI)。实测 + 截图的 bonus 组合;再按「bonus 双向一致」反推 (反方向实测过无 bonus 的不推、只推能当伝承元的 = 实测当过 / chara_revise `acquisition` 是 ガチャ / 期間限定製造 / 期間限定ガチャ)。不标来源 |
+| [build_transmit_bonus.py](../scripts/master_to_business/build_transmit_bonus.py) | 伝承预览实测库 (`BXB_AWAKEN_DB`) + 截图读数 (`<assets>/data/awaken_screenshots/shots.jsonl`) | `data/transmit_bonus.json`(本地跑、不进 CI)。实测 + 截图的 bonus 组合;再按「bonus 双向一致」反推 (反方向实测过无 bonus 的不推、只推能当伝承元的 = 实测当过 / chara_revise `acquisition` 是 ガチャ / 期間限定製造 / 期間限定ガチャ);再按「系列 bonus 有传递性」同系列成员两两补齐 (同型因子按血统、融合魔剣断链，不推;两把同属多个系列或可能同型的跳过)。只写 transmit_bonus.json、不回写实测库;不标来源 |
 | [build_all.py](../scripts/master_to_business/build_all.py) | 上面全部 | 跑全套 + 错误报告 |
 
 **Utility 模块** (反复使用、被 build script import):
