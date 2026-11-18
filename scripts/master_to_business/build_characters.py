@@ -11,6 +11,8 @@ state 名按 evolve_count: 0=通常 / 1=改造 / 2=極弐 (内部 evolve_name �
 bd_skill 提到顶层 (跨 state 共享、来自 weapons[0].weapon_arts 内嵌)。
 
 omoide / tags 留空 (plan 决策、待未来实测)。
+omoide_rarity (思い出レア度 1-5、5=限定SS) 从实测 data/omoide/{base_id}.json 推;
+没文件的 fallback 魔剣稀有度 (1-4、SS 一律当非限定 SS)。
 
 用法: python scripts/master_to_business/build_characters.py
 """
@@ -30,6 +32,10 @@ OUT = DATA_DIR / "characters.json"
 WIKI_AUX = DATA_DIR / "_wiki_aux.json"
 
 EVOLVE_NAME = {0: "通常", 1: "改造", 2: "極弐"}
+
+# 思い出レア度 = 思い出 slot 里 ダメージ上限UP 的 ★ 数 (每把只出现一种)
+OMOIDE_DIR = DATA_DIR / "omoide"
+DLB_SKILL_STAR = {10000138: 1, 10000137: 2, 10000136: 3, 10000135: 4, 10000134: 5}
 
 
 def load_wiki_aux():
@@ -216,10 +222,24 @@ def load_npc_motion_durations():
     return out
 
 
+def load_omoide_rarity():
+    out = {}
+    for p in OMOIDE_DIR.glob("*.json"):
+        d = json.loads(p.read_text(encoding="utf-8"))
+        stars = {DLB_SKILL_STAR[w["id"]]
+                 for s in d.get("slots") or []
+                 for w in (s.get("memory_slot") or {}).get("weapon_skills") or []
+                 if w.get("id") in DLB_SKILL_STAR}
+        if len(stars) == 1:
+            out[d["weapon_base_id"]] = stars.pop()
+    return out
+
+
 def build():
     src = master_file("weapons.json")
     raw = json.loads(src.read_text(encoding="utf-8"))
     wiki_scaling = load_wiki_aux()
+    omoide_rarity = load_omoide_rarity()
     motion_id_to_name = load_attack_motions()
     motion_id_to_durations = load_npc_motion_durations()
 
@@ -292,6 +312,7 @@ def build():
             "evade_rate_rank": v0.get("evade_rate_rank"),
             "weapon_arts_id": v0.get("weapon_arts_id"),
             "omoide": [],        # 待 Phase 8 实测
+            "omoide_rarity": omoide_rarity.get(bid) or v0.get("rarity"),
             "profile": build_profile(v0),    # Phase 6.2 profile 面板
             "states": states,
             "bd_skill": bd_skill,

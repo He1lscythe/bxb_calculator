@@ -211,6 +211,31 @@ a {
 .section { margin-bottom: 20px; }
 .section-title { font-size: 12px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
 .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+/* 魔剣行 (hensei picker / 魔剣页 伝承ボーナス 共用) */
+.em-item{padding:8px 12px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .1s;min-width:0;}
+.em-item:hover{background:var(--bg3);}
+.em-thumb{width:36px;height:36px;border-radius:5px;}
+.em-item-bg{align-items:flex-start;}
+.em-bg-body{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;}
+.em-bg-header{display:flex;align-items:center;gap:6px;min-width:0;}
+.em-bg-name{font-size:12px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;}
+.em-detail-btn{flex-shrink:0;padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:10px;font-family:inherit;cursor:pointer;transition:all .1s;white-space:nowrap;}
+.em-detail-btn:hover{border-color:var(--accent);color:var(--accent);}
+/* item header badge 中央寄せ + 高さ統一;rarity 固定 28px */
+.em-bg-header .badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.em-bg-header .badge.A,
+.em-bg-header .badge.AA,
+.em-bg-header .badge.S,
+.em-bg-header .badge.SS {
+  width: 28px;
+  padding-left: 0;
+  padding-right: 0;
+}
 /* 入手方法 (chara / soul) */
 .acq-table { display: grid; grid-template-columns: max-content 1fr; gap: 1px; background: var(--border); border-radius: 8px; overflow: hidden; }
 .acq-key { background: var(--bg3); padding: 7px 12px; color: var(--text2); font-size: 12px; }

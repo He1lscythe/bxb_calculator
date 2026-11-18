@@ -174,6 +174,14 @@
 .latent-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); touch-action: none; }
 .latent-panel   { position: relative; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; width: min(520px, 92vw); max-height: 80vh; display: flex; flex-direction: column; z-index: 1; }
 @media (min-width: 769px) { #masou-modal .latent-panel { width: 672px; } }
+/* 伝承ボーナス (行 = shared.css .em-item;bonus 名 / −n 两列放中间) */
+#transmit-modal .latent-panel { width: min(640px, 94vw); }
+#transmit-body { padding: 0; }
+#transmit-body .em-item { cursor: default; }
+#transmit-body .em-item:hover { background: transparent; }
+#transmit-body .tb-bonus { width: 160px; flex-shrink: 0; align-self: center; text-align: center; font-size: 12px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#transmit-body .tb-cut { width: 32px; flex-shrink: 0; align-self: center; text-align: center; font-size: 12px; color: var(--text); }
+@media (max-width: 480px) { #transmit-body .tb-bonus { width: 104px; font-size: 11px; } }
 .masou-card { display: flex; gap: 12px; align-items: stretch; }
 .masou-img  { width: 80px; height: auto; align-self: center; border-radius: 6px; object-fit: cover; flex-shrink: 0; background: var(--bg2); }
 .masou-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }

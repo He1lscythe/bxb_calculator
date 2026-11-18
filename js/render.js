@@ -237,6 +237,9 @@ export const renderDetail = (c) => {
       : '';
   const actionsHtml =
     omoideBtn || masouBtn ? `<div class="chara-actions">${masouBtn}${omoideBtn}</div>` : '';
+  const transmitBtn = state.transmitBonus?.[baseId]
+    ? `<button class="btn-latent btn-transmit" onclick="openTransmitModal(${baseId})">伝承</button>`
+    : '';
   const tagsHtml = (c.tags || [])
     .map((s) => `<span class="bd-sp-tag bd-sp-${s}">${CHARA_TAG[s] || s}</span>`)
     .join('');
@@ -262,7 +265,7 @@ export const renderDetail = (c) => {
           <span class="meta-chip">${wName}</span>
           ${c.url ? `<a class="meta-chip" href="${c.url}" target="_blank" style="color:var(--accent);text-decoration:none">Altema ↗</a>` : ''}
         </div>
-        <button class="btn-edit" onclick="enterEditMode(${c.id})">修正</button>
+        <div class="chara-actions">${transmitBtn}<button class="btn-edit" onclick="enterEditMode(${c.id})">修正</button></div>
       </div>
       ${tagsHtml ? `<div class="ch-row"><div class="chara-tags">${tagsHtml}</div></div>` : ''}
     </div>
