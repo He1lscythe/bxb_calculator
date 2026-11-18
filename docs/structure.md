@@ -116,6 +116,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | [build_masou.py](../scripts/master_to_business/build_masou.py) | `weapon_costumes.json` + `_wiki_aux.json` | `data/masou.json` |
 | [build_masou_aux.py](../scripts/master_to_business/build_masou_aux.py) | `data/masou.json` | `data/masou_revise.json` (注入 `effects[].range`) |
 | [build_omoide.py](../scripts/master_to_business/build_omoide.py) | omoide 实测数据 | `data/omoide/{base_id}.json`(可传 base_id 只同步指定的;只新增/覆盖、不删 wiki 独有文件，统一 LF) |
+| [build_transmit_bonus.py](../scripts/master_to_business/build_transmit_bonus.py) | 伝承预览实测库 (`BXB_AWAKEN_DB`) + 截图读数 (`<assets>/data/awaken_screenshots/shots.jsonl`) | `data/transmit_bonus.json`(本地跑、不进 CI)。实测 + 截图的 bonus 组合;再按「bonus 双向一致」反推 (反方向实测过无 bonus 的不推、只推能当伝承元的 = 实测当过 / chara_revise `acquisition` 是 ガチャ / 期間限定製造 / 期間限定ガチャ)。不标来源 |
 | [build_all.py](../scripts/master_to_business/build_all.py) | 上面全部 | 跑全套 + 错误报告 |
 
 **Utility 模块** (反复使用、被 build script import):
@@ -201,6 +202,7 @@ js/*-list.js / *-render.js / hensei.html         (viewer 渲染 + hensei 计算)
 | `js/cr-sim.js` | 結晶倍率シミュレータ modal (⚙ から Lv/重量/純度/残HP を動かす、計算は crystalEffectiveValue + conditionFactor をそのまま呼ぶ) |
 | `js/bg-list.js` / `bg-state.js` | bladegraph viewer (**view-only**) + 独立 state |
 | `js/omoide-view.js` | omoide picker modal (hensei + chara 详情页用) |
+| `js/transmit.js` | 伝承ボーナス modal (chara 详情页 header 第二行「伝承」按钮、修正 左边;这把作伝承先时有加成的伝承元。行样式复用 `shared.css` 的 `.em-item` (与 hensei 魔剣 picker 共用),只有 詳細 跳转) |
 
 > ⚠ **`js/bg-edit.js` 已删、bg edit 不复活** —— 见 [bladegraphs.html:97](../pages_src/bladegraphs.html#L97):
 > 「master 数据 100% 准确、无 server-fold 字段需补」。页面里 `enterEditMode / cancelEdit / saveEdit /
@@ -222,6 +224,7 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
 - `guildtitles.json` / `guildemblems.json` (手工维护、无 build script)
 - `guildbosses.json` = ギルバト boss 预设 (2022 年起官方 topics 的开催情报整理 + 训练场实测):每期 前半 / 後半 各一条、id 降序;`id` (年月×10 + 前半1 / 後半2) / `name` (`年月-前半|後半-boss名`) / `boss` / `mode` (`guildbattle` | 七罪王 `guildbattle_special`) / `element` / `element_rule` (`guild` | `seven` | `flat`) / `negative_value` (攻击方属性 → 倍率) / `element_cut` / `bk_resistance` (`normal` | `high` | `very_high` = 極高、技能有「ブレイク時の被ダメージを大幅減」) / `bk_damage_scale` / `advantage_weapons` / `combo_cap` / `dates` / `condition` (出撃条件)
 - `omoide/{base_id}.json` (649 file、实测、2026-06-09 起入 git tracked);`build_characters` 据此推 `characters.json` 的 `omoide_rarity` (思い出レア度)
+- `transmit_bonus.json` = `{伝承先 base_id: {bonus 名: [伝承元 base_id (稀有度降序)]}}`,`build_transmit_bonus.py` 本地生成;消耗减量前端按名字给 (同型因子 −2、其余 −1)
 
 **Revise** (用户编辑产物、4 bucket):
 - `chara_revise.json` / `soul_revise.json` / `crystal_revise.json` / `masou_revise.json`
