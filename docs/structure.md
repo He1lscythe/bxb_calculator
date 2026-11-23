@@ -222,7 +222,7 @@ hensei calc 主入口在 [pages_src/hensei.html](../pages_src/hensei.html) 内�
     段时长 `states[].motion_durations` 来自 `data/_npc_motions.json`、モーション名来自 master 的
     `attack_motions.json`。消费方 [stats-calc.js `_computeMotionSpeed`](../shared/stats-calc.js)。
 - `guildtitles.json` / `guildemblems.json` (手工维护、无 build script)
-- `guildbosses.json` = ギルバト boss 预设 (2022 年起官方 topics 的开催情报整理 + 训练场实测):每期 前半 / 後半 各一条、id 降序;`id` (年月×10 + 前半1 / 後半2) / `name` (`年月-前半|後半-boss名`) / `boss` / `mode` (`guildbattle` | 七罪王 `guildbattle_special`) / `element` / `element_rule` (`guild` | `seven` | `flat`) / `negative_value` (攻击方属性 → 倍率) / `element_cut` / `bk_resistance` (`normal` | `high` | `very_high` = 極高、技能有「ブレイク時の被ダメージを大幅減」) / `bk_damage_scale` / `advantage_weapons` / `combo_cap` / `dates` / `condition` (出撃条件)
+- `guildbosses.json` = ギルバト boss 预设 (2022 年起官方 topics 的开催情报整理 + 训练场实测):每期 前半 / 後半 各一条、id 降序;`id` (年月×10 + 前半1 / 後半2) / `name` (`年月-前半|後半-boss名`) / `boss` / `mode` (`guildbattle` | 七罪王 `guildbattle_special`) / `element` / `element_rule` (`guild` | `seven` | `flat`) / `negative_value` (攻击方属性 → 倍率) / `element_cut` / `bk_resistance` (`normal` | `high` = 行動パターン有「ブレイク時は…被ダメージが大幅に上昇」、BK ×3→×6 | `very_high` = 極高、技能有「ブレイク時の被ダメージを大幅減」) / `bk_damage_scale` / `advantage_weapons` / `combo_cap` / `dates` / `condition` (出撃条件)
 - `omoide/{base_id}.json` (649 file、实测、2026-06-09 起入 git tracked);`build_characters` 据此推 `characters.json` 的 `omoide_rarity` (思い出レア度)
 - `transmit_bonus.json` = `{伝承先 base_id: {bonus 名: [伝承元 base_id (稀有度降序)]}}`,`build_transmit_bonus.py` 本地生成;消耗减量前端按名字给 (同型因子 −2、其余 −1)
 
