@@ -24,14 +24,19 @@ SAME = "同型因子"
 
 def load_shots(p):
     if not p.is_file():
-        return []
-    out = []
+        return [], set()
+    out, none = [], set()
     for line in p.read_text(encoding="utf-8").splitlines():
         if line.strip():
             s = json.loads(line)
-            if s.get("bonus_name") and s.get("from_base_id") and s.get("to_base_id"):
-                out.append((s["from_base_id"], s["to_base_id"], s["bonus_name"]))
-    return out
+            f, t = s.get("from_base_id"), s.get("to_base_id")
+            if not (f and t):
+                continue
+            if s.get("bonus_name"):
+                out.append((f, t, s["bonus_name"]))
+            else:
+                none.add((f, t))
+    return out, none
 
 
 def main():
@@ -41,9 +46,10 @@ def main():
     args = ap.parse_args()
 
     db = json.loads(args.awaken_db.read_text(encoding="utf-8"))
-    tested = {(int(f), t) for f, ts in db["tested"].items() for t in ts}
+    shots, shot_none = load_shots(args.shots)
+    # 无 bonus 截图同实测:挡反推 / 补齐、伝承元算能当
+    tested = {(int(f), t) for f, ts in db["tested"].items() for t in ts} | shot_none
     measured = [(b["from_base_id"], b["to_base_id"], b["bonus_name"]) for b in db["bonus_pairs"]]
-    shots = load_shots(args.shots)
 
     chara = {c["id"]: c for c in json.loads((DATA / "characters.json").read_text(encoding="utf-8"))}
     rev_p = DATA / "chara_revise.json"
@@ -90,7 +96,7 @@ def main():
     rank = lambda b: (-(chara[b].get("rarity") or 0), b)  # noqa: E731
     out = {str(t): {n: sorted(fs, key=rank) for n, fs in sorted(g.items())} for t, g in sorted(by.items())}
     OUT.write_bytes((json.dumps(out, ensure_ascii=False, indent=1) + "\n").encode("utf-8"))
-    print(f"实测 {len(measured)} / 截图 {len(shots)} → 直接 {direct} 对 + 反推 {sym} 对 + 系列补齐 {closure} 对;"
+    print(f"实测 {len(measured)} / 截图 {len(shots)} (无 bonus {len(shot_none)}) → 直接 {direct} 对 + 反推 {sym} 对 + 系列补齐 {closure} 对;"
           f"伝承先 {len(out)} 把 / bonus {len({n for _, _, n in measured + shots})} 种 → {OUT}")
 
 
