@@ -108,7 +108,7 @@ const maxBdhit = (c) => {
 };
 
 export const CHARA_SPEC = {
-  searchFields: ['name', (c) => _profile(c, 'CV')], // CV 嵌套在 best state.profile.CV，用 extractor 取
+  searchFields: ['name', (c) => _profile(c, 'CV'), 'sort_id'], // CV 嵌套在 best state.profile.CV，用 extractor 取;sort_id = base_id
   filters: {
     rarity: { extract: (c) => c.rarity },
     element: { extract: (c) => c.element },
