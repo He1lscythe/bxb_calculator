@@ -235,7 +235,7 @@ export const renderDetail = (c) => {
       : '';
   const actionsHtml =
     omoideBtn || masouBtn ? `<div class="chara-actions">${masouBtn}${omoideBtn}</div>` : '';
-  const transmitBtn = state.transmitBonus?.[baseId]
+  const transmitBtn = state.transmit
     ? `<button class="btn-latent btn-transmit" onclick="openTransmitModal(${baseId})">伝承</button>`
     : '';
   const tagsHtml = (c.tags || [])

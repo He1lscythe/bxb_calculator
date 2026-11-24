@@ -201,8 +201,6 @@ body{height:auto;overflow-y:auto;}
 #detail-modal{display:none;position:fixed;inset:0;z-index:3000;align-items:center;justify-content:center;}
 #detail-modal.open{display:flex;}
 
-.modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.65);}
-.modal-panel{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;z-index:1;overflow:hidden;}
 #entity-modal .modal-panel{width:min(840px,96vw);height:min(960px,94vh);}
 #detail-modal .modal-panel{width:min(840px,96vw);height:min(960px,92vh);}
 /* crystal / masou 内容少 (effect_text + 因子)、1/3 高度足够 */
@@ -210,36 +208,10 @@ body{height:auto;overflow-y:auto;}
 #detail-modal.dm-masou .modal-panel{height:min(320px,40vh);}
 /* bg 内容中等 (多 effect line + acquisition + illustrator)、1/2 高度 */
 #detail-modal.dm-bg .modal-panel{height:min(480px,55vh);}
-.modal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px;}
-.modal-header-title{font-size:14px;font-weight:700;flex:1;}
-.modal-close{background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;line-height:1;padding:2px 6px;border-radius:4px;flex-shrink:0;}
-.modal-close:hover{color:var(--text);background:var(--bg3);}
-.modal-body{flex:1;display:flex;overflow:hidden;min-height:0;}
 
-/* sidebar */
-.modal-sidebar{width:300px;min-width:240px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;padding:10px;gap:8px;flex-shrink:0;}
-.modal-sidebar::-webkit-scrollbar{width:4px;}
-.modal-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-.modal-search{width:100%;padding:7px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:12px;outline:none;}
-.modal-search:focus{border-color:var(--accent);}
-.f-section{display:flex;flex-direction:column;gap:4px;}
-.f-label{font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;}
-.f-toggles{display:flex;flex-wrap:wrap;gap:3px;}
 
 /* .ftog.elem-X.on rules now in shared.css */
-.f-sort-row{display:flex;gap:5px;align-items:center;}
-.f-sort-row select{flex:1;min-width:0;padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:11px;outline:none;cursor:pointer;}
-.f-sort-dir{padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;cursor:pointer;flex-shrink:0;}
-.f-sort-dir:hover{border-color:var(--accent);color:var(--accent);}
-.f-reset-btn{padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);font-size:11px;cursor:pointer;}
-.f-reset-btn:hover{border-color:var(--accent);color:var(--text);}
-.modal-count{font-size:11px;color:var(--text2);text-align:right;}
 
-/* entity list */
-.em-list{flex:1;overflow-y:auto;overflow-x:hidden;background:var(--bg);}
-.em-list::-webkit-scrollbar{width:4px;}
-.em-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-.em-item.active{background:#1e2d5a;border-left:3px solid var(--accent);padding-left:9px;}
 .sort-val{font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0;padding:1px 6px;border-radius:4px;background:rgba(91,127,255,.12);border:1px solid rgba(91,127,255,.3);}
 .stats-panel{margin-top:6px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:3px 2px;}
 /* ? 説明徽章 + popover 的样式移到 css/shared.css (結晶列表共用) */
@@ -274,7 +246,6 @@ body{height:auto;overflow-y:auto;}
 .aff-input::-webkit-outer-spin-button,
 .aff-input::-webkit-inner-spin-button,.aff-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .aff-input{-moz-appearance:textfield;}
-.em-no-results{text-align:center;color:var(--text2);padding:40px;font-size:12px;}
 
 /* badges */
 
@@ -376,7 +347,6 @@ body{height:auto;overflow-y:auto;}
 @media(max-width: 900px){#slots-grid{grid-template-columns:1fr;}}
 @media(max-width: 900px){
   #entity-modal .modal-panel,#detail-modal .modal-panel,#emblem-modal .modal-panel{height:min(860px,84svh);}
-  .modal-sidebar{width:120px;min-width:100px;padding:8px 6px;}
 
   .em-soul-elem{display:none;}
   .ftog-desk{display:none;}

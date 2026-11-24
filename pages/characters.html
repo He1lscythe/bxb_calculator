@@ -106,24 +106,17 @@
         </div>
       </div>
 
-      <div
-        id="transmit-modal"
-        style="
-          display: none;
-          position: fixed;
-          inset: 0;
-          z-index: 1000;
-          align-items: center;
-          justify-content: center;
-        "
-      >
-        <div class="latent-overlay" onclick="closeTransmitModal()"></div>
-        <div class="latent-panel">
-          <div class="latent-panel-header">
-            <span>伝承ボーナス (伝承先)</span>
-            <button class="latent-close" onclick="closeTransmitModal()">×</button>
+      <div id="transmit-modal">
+        <div class="modal-overlay" onclick="closeTransmitModal()"></div>
+        <div class="modal-panel">
+          <div class="modal-header">
+            <span class="modal-header-title" id="tm-title">伝承ボーナス</span>
+            <button class="modal-close" onclick="closeTransmitModal()">✕</button>
           </div>
-          <div class="latent-body" id="transmit-body"></div>
+          <div class="modal-body">
+            <div class="modal-sidebar" id="tm-sidebar"></div>
+            <div class="em-list" id="tm-list"></div>
+          </div>
         </div>
       </div>
 
@@ -332,6 +325,7 @@
       // chara-edit (tags + skills value_scaling + masou_overrides) + omoide-view (view-only) + masou modal (active)
       import { openMasouModal, closeMasouModal } from '../js/masou.js';
       import { openTransmitModal, closeTransmitModal, pickTransmitSource } from '../js/transmit.js';
+      import { decodeTransmit } from '../shared/transmit-matrix.js';
       import { adaptCharaList } from '../shared/chara-adapter.js';
       import { adaptMasouList } from '../shared/masou-adapter.js';
       import {
@@ -370,11 +364,11 @@
           fetch('../data/chara_revise.json').then((r) => (r.ok ? r.json() : [])).catch(() => []),
           fetch('../data/masou.json').then((r) => (r.ok ? r.json() : [])).catch(() => []),
           fetch('../data/masou_revise.json').then((r) => (r.ok ? r.json() : [])).catch(() => []),
-          fetch('../data/transmit_bonus.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
+          fetch('../data/transmit_bonus.json').then((r) => (r.ok ? r.json() : null)).catch(() => null),
         ])
           .then(([arr, chRev, masouArr, masouRev, transmit]) => {
             state.allChars = adaptCharaList(arr, chRev);
-            state.transmitBonus = transmit;
+            state.transmit = decodeTransmit(transmit);
             // originalData (撤回/diff 基线) 改懒克隆: 进入编辑某 chara 时才在 chara-edit.enterEditMode 拷贝、
             // 不再加载时全量克隆 655 角色 (省启动 CPU、key 仍是 base_id 4位)。
             // masou 数据 deepApply revise + 按 weapon_base_id 分组 (chara edit modal 内嵌 masou_overrides 用)
