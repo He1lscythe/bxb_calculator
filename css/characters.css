@@ -174,14 +174,17 @@
 .latent-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); touch-action: none; }
 .latent-panel   { position: relative; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; width: min(520px, 92vw); max-height: 80vh; display: flex; flex-direction: column; z-index: 1; }
 @media (min-width: 769px) { #masou-modal .latent-panel { width: 672px; } }
-/* 伝承ボーナス (行 = shared.css .em-item;bonus 名 / −n 两列放中间) */
-#transmit-modal .latent-panel { width: min(640px, 94vw); }
-#transmit-body { padding: 0; }
-#transmit-body .em-item { cursor: default; }
-#transmit-body .em-item:hover { background: transparent; }
-#transmit-body .tb-bonus { width: 160px; flex-shrink: 0; align-self: center; text-align: center; font-size: 12px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-#transmit-body .tb-cut { width: 32px; flex-shrink: 0; align-self: center; text-align: center; font-size: 12px; color: var(--text); }
-@media (max-width: 480px) { #transmit-body .tb-bonus { width: 104px; font-size: 11px; } }
+/* 伝承ボーナス弹窗 (外框 / 筛选栏 / 列表 = shared.css 选择器弹窗;行内 bonus 标记、推定 = 虚线框) */
+#transmit-modal { display: none; position: fixed; inset: 0; z-index: 1000; align-items: center; justify-content: center; }
+#transmit-modal.open { display: flex; }
+#transmit-modal .modal-panel { width: min(840px, 96vw); height: min(960px, 94vh); }
+#transmit-modal .em-item { cursor: default; }
+#transmit-modal .tb-tabs .ftog { flex: 1; }
+#transmit-modal .tb-none { font-size: 11px; color: var(--text2); text-align: right; }
+#transmit-modal .tb-tag { font-size: 11px; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; padding: 1px 6px; border-radius: 4px; color: #ffcc66; background: rgba(255,204,0,.1); border: 1px solid rgba(255,204,0,.35); }
+#transmit-modal .tb-tag.tb-inf { border-style: dashed; color: #d8b870; }
+#transmit-modal .tb-inf-mark { margin-left: 4px; font-size: 10px; color: var(--text2); }
+@media (max-width: 900px) { #transmit-modal .modal-panel { height: min(860px, 84svh); } }
 .masou-card { display: flex; gap: 12px; align-items: stretch; }
 .masou-img  { width: 80px; height: auto; align-self: center; border-radius: 6px; object-fit: cover; flex-shrink: 0; background: var(--bg2); }
 .masou-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }

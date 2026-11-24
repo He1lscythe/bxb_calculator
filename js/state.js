@@ -17,7 +17,7 @@ export const state = {
   allMasou: [], // 平の masou 配列（masou.json + extra + revise 適用後）
   masouOriginalData: {}, // masou_id → snapshot of (base + extra)、computeDiff baseline
   masouByChara: {}, // {chara_id: [masou objects]}
-  transmitBonus: {}, // {伝承先 base_id: {bonus 名: [伝承元 base_id]}} (data/transmit_bonus.json)
+  transmit: null, // decodeTransmit(data/transmit_bonus.json)
   masouReviseData: {}, // masou_id → patch object
   masouSessionReviseIds: new Set(), // 当前会话で触れた masou_id（revise 提出時の session_ids）
   filterSets: {
